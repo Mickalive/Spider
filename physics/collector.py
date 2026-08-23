@@ -8,7 +8,10 @@ import gzip, hashlib, json, os, random, sys, time
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from shared.browser import Session
 
-OUT = "/tmp/opencode/spider_data/wp003_transitions.jsonl"
+import sys as _sys
+OUT = ("/tmp/opencode/spider_data/wp003_" +
+       (_sys.argv[_sys.argv.index("--site")+1] if "--site" in _sys.argv
+        else "all") + ".jsonl")
 RAW_DIR = "/tmp/opencode/spider_data/raw"
 os.makedirs(RAW_DIR, exist_ok=True)
 
@@ -21,6 +24,7 @@ WALKS = [
         "/wiki/Talk", "/wiki/Help:", "/wiki/Portal:", "/wiki/Wikipedia:",
         "/wiki/Category:", "/wiki/Template", "/wiki/Main_Page")},
     {"site": "hackernews",  "start": "https://news.ycombinator.com/",          "n": 90},
+    {"site": "gutenberg",   "start": "https://www.gutenberg.org/ebooks/bookshelf/1", "n": 90},
     {"site": "openlibrary", "start": "https://openlibrary.org/subjects/science","n": 90,
      "allow_host": True},
 ]
@@ -99,12 +103,14 @@ def choose_action(snap, rng, cfg):
     selects = [e for e in els if e["tag"] == "select" and e["enabled"]]
     boxes = [e for e in els if e["tag"] == "input" and e["type"] == "checkbox"]
 
-    pool = [("click_link", links)] + \
+    pool = ([("click_link", links)] if links else []) + \
            ([("click_button", buttons)] if buttons else []) + \
            ([("fill_text", texts)] if texts else []) + \
            ([("fill_password", passes)] if passes else []) + \
            ([("select_option", selects)] if selects else []) + \
            ([("check_box", boxes)] if boxes else [])
+    if not pool:
+        return ("none", [])
     kind, group = rng.choice(pool)
     el = rng.choice(group)
     val = ""
@@ -132,61 +138,76 @@ def store_raw(snap):
 
 
 def main():
-    rng = random.Random(20260823)  # frozen seed
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--site", default=None)
+    ap.add_argument("--seed", type=int, default=20260823)
+    args = ap.parse_args()
+    rng = random.Random(args.seed + (hash(args.site) % 1009 if args.site else 0))
+    cfgs = [c for c in WALKS if args.site in (None, c["site"])]
+    mode_w = "w" if args.site is None else "a"
     n_written = 0
-    with open(OUT, "w") as out, Session(headless=True) as s:
-        for cfg in WALKS:
-            site = cfg["site"]
-            done = 0
-            tries = 0
-            try:
-                cur = s.goto(cfg["start"], site)
-            except Exception as e:
-                print(f"[{site}] START FAIL {e}"); continue
-            while done < cfg["n"] and tries < cfg["n"] * 4:
-                tries += 1
-                pre_feat = features(cur)
-                choice = choose_action(cur, rng, cfg)
-                chain = choice[1]
-                acts = []
-                ok_all = True
-                t0 = time.time()
-                post = cur
-                for (kind, idx, val) in chain:
-                    el = dict(post["elements"][idx]) if idx < len(post["elements"]) else None
-                    if el is None:
-                        ok_all = False; break
-                    a = {"kind": PRIM[kind], "target": idx, "value": val}
-                    post = s.act(post, a)
-                    acts.append({"label": kind,
-                                 "ok": bool(post["last_action"]["ok"]),
-                                 "error": post["last_action"].get("error", "")[:80]})
-                    if not acts[-1]["ok"]:
-                        ok_all = False
-                        break
-                load_ms = int((time.time() - t0) * 1000)
-                post_feat = features(post)
-                rec = {
-                    "site": site, "pre": pre_feat, "post": post_feat,
-                    "page_class_pre": tuple(sorted(pre_feat.items())),
-                    "next_page_class": next_page_class(post_feat),
-                    "prev_action_label": acts[-1]["label"] if acts else "",
-                    "action_labels": [a["label"] for a in acts],
-                    "any_ok": ok_all,
-                    "primary_action": acts[0]["label"] if acts else "",
-                    "url_changed": post["url"] != cur["url"],
-                    "load_ms": load_ms,
-                    "ts": int(time.time()),
-                    "pre_raw": store_raw(cur), "post_raw": store_raw(post),
-                }
-                # primary target = first intended action of the chain
-                rec["target_action"] = acts[0]["label"] if acts else "abandon"
-                out.write(json.dumps(rec) + "\n")
-                out.flush()
-                done += 1; n_written += 1
-                cur = post
-                time.sleep(rng.uniform(0.25, 0.7))
-            print(f"[{site}] transitions={done}")
+    with open(OUT, mode_w) as out, Session(headless=True) as s:
+      for cfg in cfgs:
+        site = cfg["site"]
+        print(f"[{site}] begin", flush=True)
+        done = 0
+        tries = 0
+        try:
+            cur = s.goto(cfg["start"], site)
+        except Exception as e:
+            print(f"[{site}] START FAIL {e}"); continue
+        while done < cfg["n"] and tries < cfg["n"] * 6:
+            tries += 1
+            pre_feat = features(cur)
+            choice = choose_action(cur, rng, cfg)
+            chain = choice[1]
+            if not chain or any(idx >= len(cur["elements"]) for _, idx, _ in chain):
+                # dead state / stale indices: hop back to site start, no record
+                try:
+                    cur = s.goto(cfg["start"], site)
+                except Exception:
+                    pass
+                continue
+            acts = []
+            ok_all = True
+            t0 = time.time()
+            post = cur
+            for (kind, idx, val) in chain:
+                el = dict(post["elements"][idx]) if idx < len(post["elements"]) else None
+                if el is None:
+                    ok_all = False; break
+                a = {"kind": PRIM[kind], "target": idx, "value": val}
+                post = s.act(post, a)
+                acts.append({"label": kind,
+                             "ok": bool(post["last_action"]["ok"]),
+                             "error": post["last_action"].get("error", "")[:80]})
+                if not acts[-1]["ok"]:
+                    ok_all = False
+                    break
+            load_ms = int((time.time() - t0) * 1000)
+            post_feat = features(post)
+            rec = {
+                "site": site, "pre": pre_feat, "post": post_feat,
+                "page_class_pre": tuple(sorted(pre_feat.items())),
+                "next_page_class": next_page_class(post_feat),
+                "prev_action_label": acts[-1]["label"] if acts else "",
+                "action_labels": [a["label"] for a in acts],
+                "any_ok": ok_all,
+                "primary_action": acts[0]["label"] if acts else "",
+                "url_changed": post["url"] != cur["url"],
+                "load_ms": load_ms,
+                "ts": int(time.time()),
+                "pre_raw": store_raw(cur), "post_raw": store_raw(post),
+            }
+            # primary target = first intended action of the chain
+            rec["target_action"] = acts[0]["label"] if acts else "abandon"
+            out.write(json.dumps(rec) + "\n")
+            out.flush()
+            done += 1; n_written += 1
+            cur = post
+            time.sleep(rng.uniform(0.25, 0.7))
+        print(f"[{site}] transitions={done}", flush=True)
     print("TOTAL", n_written)
 
 

@@ -92,6 +92,9 @@ class Session:
         self.page = self.browser.new_page(
             user_agent="SpiderResearchBot/0.1 (+autonomous-lab)",
             viewport={"width": 1280, "height": 800})
+        self.page.set_default_timeout(15000)
+        self.page.set_default_navigation_timeout(25000)
+        self.page.on("dialog", lambda d: d.dismiss())
         self.net_log = []
 
     def close(self):
