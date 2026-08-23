@@ -1,0 +1,20 @@
+{
+  "experiment": "WP-003",
+  "historical_result_file": "results/physics/wp003_results.json",
+  "historical_reported_verdict": "FALSIFIED",
+  "audit_verdict": "MEASUREMENT_INVALID",
+  "usable_as_scientific_evidence": false,
+  "reasons": [
+    "target leakage: prev_action_label came from the current transition and often equaled target_action by construction",
+    "invalid uncertainty estimator: Gaussian jitter of fold point estimates was labelled bootstrap",
+    "non-reproducible nominal seed: Python hash(site) is process-salted"
+  ],
+  "required_before_retest": [
+    "new clean dataset with trajectory_id and step_id",
+    "prev_action_label from transition t-1",
+    "stable deterministic seed",
+    "hard anti-leak assertions",
+    "trajectory-grouped uncertainty",
+    "prefer action-conditioned next-state dynamics P(s_next | s, a)"
+  ]
+}

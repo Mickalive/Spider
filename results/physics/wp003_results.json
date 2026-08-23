@@ -1,0 +1,135 @@
+{
+ "n_transitions_total": 557,
+ "sites": {
+  "books": 90,
+  "gutenberg": 90,
+  "hackernews": 90,
+  "internet": 48,
+  "openlibrary": 59,
+  "quotes": 90,
+  "wikipedia": 90
+ },
+ "action_classes": [
+  "check_box",
+  "click_button",
+  "click_link",
+  "fill_password",
+  "fill_text"
+ ],
+ "feature_names": [
+  "link_bucket=0",
+  "link_bucket=1",
+  "link_bucket=2",
+  "button_bucket=0",
+  "button_bucket=1",
+  "button_bucket=2",
+  "text_input_bucket=0",
+  "text_input_bucket=1",
+  "text_input_bucket=2",
+  "has_password",
+  "has_select",
+  "has_checkbox",
+  "has_file",
+  "has_textarea",
+  "form_bucket=0",
+  "form_bucket=1",
+  "form_bucket=2",
+  "depth_bucket=0",
+  "depth_bucket=1",
+  "depth_bucket=2",
+  "query_bucket=0",
+  "query_bucket=1",
+  "query_bucket=2",
+  "login_capable",
+  "internal_ratio_bucket=0",
+  "internal_ratio_bucket=1",
+  "internal_ratio_bucket=2"
+ ],
+ "folds": {
+  "books": {
+   "n_test": 90,
+   "M1": 0.5,
+   "N0": 0.5,
+   "N2": 1.0,
+   "N4": 0.4747,
+   "shuffle_mean": 0.5,
+   "shuffle_p95": 0.5,
+   "best_null": 1.0,
+   "diff_M1_bestnull": -0.5
+  },
+  "gutenberg": {
+   "n_test": 90,
+   "M1": 0.3842,
+   "N0": 0.3333,
+   "N2": 0.8333,
+   "N4": 0.3462,
+   "shuffle_mean": 0.3346,
+   "shuffle_p95": 0.381,
+   "best_null": 0.8333333333333334,
+   "diff_M1_bestnull": -0.4491
+  },
+  "hackernews": {
+   "n_test": 90,
+   "M1": 0.3452,
+   "N0": 0.3333,
+   "N2": 0.9667,
+   "N4": 0.3132,
+   "shuffle_mean": 0.3332,
+   "shuffle_p95": 0.4023,
+   "best_null": 0.9666666666666667,
+   "diff_M1_bestnull": -0.6215
+  },
+  "internet": {
+   "n_test": 48,
+   "M1": 1.0,
+   "N0": 1.0,
+   "N2": 1.0,
+   "N4": 1.0,
+   "shuffle_mean": 1.0,
+   "shuffle_p95": 1.0,
+   "best_null": 1.0,
+   "diff_M1_bestnull": 0.0
+  },
+  "openlibrary": {
+   "n_test": 59,
+   "M1": 0.4738,
+   "N0": 0.5,
+   "N2": 1.0,
+   "N4": 0.4406,
+   "shuffle_mean": 0.5002,
+   "shuffle_p95": 0.5425,
+   "best_null": 1.0,
+   "diff_M1_bestnull": -0.5262
+  },
+  "quotes": {
+   "n_test": 90,
+   "M1": 0.4938,
+   "N0": 0.25,
+   "N2": 0.5,
+   "N4": 0.2156,
+   "shuffle_mean": 0.2495,
+   "shuffle_p95": 0.3438,
+   "best_null": 0.5,
+   "diff_M1_bestnull": -0.0062
+  },
+  "wikipedia": {
+   "n_test": 90,
+   "M1": 0.3333,
+   "N0": 0.3333,
+   "N2": 0.6667,
+   "N4": 0.6519,
+   "shuffle_mean": 0.3333,
+   "shuffle_p95": 0.3333,
+   "best_null": 0.6666666666666666,
+   "diff_M1_bestnull": -0.3333
+  }
+ },
+ "mean_diff_M1_vs_bestnull": -0.348,
+ "fold_wins": "0/7",
+ "bootstrap_ci95_approx": [
+  -0.3626,
+  -0.333
+ ],
+ "verdict": "FALSIFIED",
+ "verdict_rule": "CI>0 AND wins>=4/6 AND n>=45/site; ci=(-0.363,-0.333) wins=0"
+}
