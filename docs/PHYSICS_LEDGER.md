@@ -1,30 +1,58 @@
 # PHYSICS LEDGER
 
-## WP-003 (2026-08-23) — Website-holdout universality of transition structure
-- **Hypothesis**: mechanics-only state features Z transfer across websites for
-  predicting next-action-class beyond strong nulls.
-- **Operational definition**: LOO-website balanced accuracy, softmax vs
-  frequency/Markov/NN/shuffle nulls; frozen prereg before collection.
-- **Dataset**: 557 usable transitions, 7 live sites, uniform random policy,
-  event-driven snapshots. Manifest committed.
-- **Falsifier**: CI of mean diff ≤0 or wins <4/7 → FALSIFIED.
-- **Result**: mean Δ(M1 − best null) = −0.348, CI [−0.363,−0.333], 0/7 wins.
-- **Verdict: FALSIFIED** (representation family Z, action-class target,
-  unbiased-policy regime).
-- **Alternative explanations kept alive**: (a) N2 dominance may be a sampler
-  artifact — goal-directed policy is the control; (b) state-level phenomena
-  (attractors/barriers/timing) untested by this design.
-- **Next discriminating test**: WP-004 committor/barrier on login regimes;
-  WP-003b target-B (next-page structure); policy-sensitivity rerun.
+## WP-003 (2026-08-23) — Website-holdout transition structure
 
-## Prior carried from earlier program (not reproduced this run)
-- Mind2Web reconstruction: operation inventory ≠ causal mechanics (§33).
-- WP-001: +0.05 dim-acc over shuffle, unverified post-state.
-- WP-002B: true S,A,S' data; rule ≈ NN > shuffle in-distribution; no site
-  holdout. WP-003 now supplies the missing website-holdout test and the
-  signal does not survive it against trivial nulls.
+- **Original hypothesis**: mechanics-only state features Z transfer across
+  websites for predicting next-action-class beyond strong nulls.
+- **Historical dataset**: 557 transitions, 7 live sites.
+- **Original reported verdict**: `FALSIFIED`.
+- **POST-RUN AUDIT VERDICT: `MEASUREMENT_INVALID`.**
 
-## Measurement infrastructure status
-- Collector hardened after two invalid/degraded episodes (documented in
-  wp003_report.md). Raw snapshots retained in /tmp only (policy §40);
-  manifests + compact features committed.
+### Fatal defects found
+
+1. `prev_action_label` was assigned from the current transition's final action,
+   while `target_action` was the current transition's first action. For the
+   dominant one-action transitions the Markov baseline therefore received the
+   target itself.
+2. The reported confidence interval was not a nonparametric paired bootstrap;
+   the code added Gaussian noise to fold-level point estimates.
+3. The supposedly frozen random seed used Python `hash(site)`, which is salted
+   across fresh processes and therefore not reproducible.
+
+### Consequence
+
+The historical Δ=-0.348, 0/7 fold result and "universal last-action→next-action"
+claim are retained only as invalidated provenance. They provide **no evidence
+for or against Web Physics**.
+
+### Corrected infrastructure now present
+
+- deterministic site seed offsets;
+- independent `trajectory_id` and `step_id`;
+- true `prev_action_label = action(t-1)`;
+- hard pre-analysis anti-leak assertions;
+- trajectory-grouped bootstrap;
+- corrected WP-003B family conditioned on `(s_t, a_t)` to predict coarse
+  `s_{t+1}` structure.
+
+These corrections require a **new dataset and new result files**. Historical
+JSON files are never silently overwritten.
+
+## WP-004 gate
+
+Committor/barrier work is **BLOCKED pending identifiability**. Before estimating
+`q(s)=P(reach B before A | s)`, Team Physics must show enough independent
+restarts/revisits/branching from comparable states and a null separating a
+dynamical barrier from a graph bottleneck. Failure of this gate yields
+`DATA_INSUFFICIENT`, not a physics result.
+
+## Prior carried from earlier program
+
+- Mind2Web reconstruction: operation inventory != causal mechanics.
+- WP-001: ~+0.05 dimension-accuracy over shuffle, but post-state proxy was not
+  a verified next state.
+- WP-002B: true `(S,A,S')`; rule ~ NN > shuffle in-distribution; no website
+  holdout claim.
+
+WP-003 does not supersede WP-002B because WP-003's historical measurement is
+invalid.
