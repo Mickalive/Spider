@@ -1,28 +1,49 @@
 # GRAPH LEDGER
 
-## G-H1 (Run 1, 2026-08-23) — Cumulative inheritance reduces exploration cost
+## G-H1 (Run 1, 2026-08-23) — Cumulative inheritance proof of concept
+
 - **Operational hypothesis**: storing validated state-action fragments with
   provenance/confidence lets later agents pay only novelty cost.
-- **Implementation**: SQLite store + fragment replay + entry-state reset
-  (`graph/`), live-site corpus, 4 sites.
-- **Measured**: replay 0.00 novel actions/task (cold: 12.33); 8.5× wall
-  speedup; cross-task composition 70% reuse under a different consuming
-  policy; success rates maintained (0.9→1.0).
-- **Reusable structures found**: subgoal-keyed fragments; generic skill
-  classes (form.login, paginate.next); entry-state reset glue; internal/
-  external boundary flag; structural fingerprints w/ text tokens.
-- **Failures recorded**: naive replay breaks on entry-context mismatch;
-  heuristic agents fail on >400-element unstructured pages regardless of
-  memory.
-- **Staleness**: not yet measured (no site drift observed in-run).
-- **Next engineering question**: confidence decay vs induced DOM drift (G8/G9),
-  ≥3-fragment composition chains, LLM-in-loop cost validation.
+- **Implementation**: SQLite store + fragment replay + entry-state reset,
+  live-site corpus across 4 sites, two scripted heuristic policies.
+
+### Audited results
+
+- Exact replay on the three tasks actually matched between cold and replay:
+  **0 novel actions** on replay.
+- Matched wall time: ~2.822 s cold vs ~2.816 s replay = **~1.002×**, therefore
+  the original **8.5× wall-speedup claim is withdrawn**.
+- Three selected composite tasks used 16 reused / 23 total actions = **69.6%
+  reuse**. This is a composition proof of concept, not a general autonomous
+  decomposition result.
+- Run-1 confidence values are not valid evidence: audit found a positional
+  INSERT bug placing a timestamp in `success_count` and `1` in `created`.
+  Code is now corrected with invariants.
+
+### What survives
+
+- fragment replay can eliminate new decisions for known routes;
+- fragment composition is operationally possible in the scripted setup;
+- entry-state reset is a useful recovery mechanism;
+- operational memory does not solve semantic search on huge unstructured pages.
+
+### What remains unproved
+
+- automatic decomposition of unseen natural-language tasks;
+- model-to-model transfer;
+- cross-site universal skills;
+- calibrated confidence/half-life;
+- a material wall-clock or monetary cost reduction with a real LLM in loop;
+- superiority over strong trajectory-memory / nearest-route / graph baselines.
 
 ## Open questions carried forward
-- G4 composition at depth ≥3 and across sites — PARTIALLY answered (depth 2 ✓)
-- G7 known-API replacement of browser routes — untouched
-- G8 staleness detection — untouched (design exists: last_validated +
-  recency-weighted confidence)
-- G10 model transfer — proxy answered via policy transfer; LLM test pending
-- G12 exploration-cost-vs-knowledge curve — data collected for n=6 growth
-  steps; needs longer sequences
+
+- G4 blind composition at depth >=3 and without hand-selected fragments;
+- G5/G6 semantic identification of known vs novel task portions;
+- G7 known-API replacement of browser routes;
+- G8/G9 staleness and confidence calibration;
+- G10 true cross-model consumption;
+- G12 exploration-cost-vs-knowledge curve over >=20 sequential agents/tasks.
+
+Active instructions are controlled by `directives/GRAPH.md` and may be updated
+by the LAB DIRECTOR after each audited cycle.
