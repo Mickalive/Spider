@@ -68,21 +68,6 @@ def next_page_class(post_feat):
             post_feat["link_bucket"], post_feat["text_input_bucket"])
 
 
-def classify_action(kind, el):
-    if kind == "fill":
-        return "fill_password" if el.get("type") == "password" else \
-               ("select_option" if False else "fill_text")
-    if kind == "select":
-        return "select_option"
-    if kind == "check":
-        return "check_box"
-    if kind == "submit_enter":
-        return "submit"
-    # click:
-    return "click_button" if (el["tag"] == "button" or el["type"] == "submit") \
-        else "click_link"
-
-
 def internal_ok(snap, el, cfg):
     if not el["enabled"]:
         return False
@@ -134,6 +119,11 @@ def choose_action(snap, rng, cfg):
     return (kind, [(kind, el["i"], val)])
 
 
+PRIM = {"click_link": "click", "click_button": "click",
+        "fill_text": "fill", "fill_password": "fill",
+        "select_option": "select", "check_box": "check"}
+
+
 def store_raw(snap):
     h = hashlib.sha256(json.dumps(snap, sort_keys=True).encode()).hexdigest()[:20]
     with gzip.open(os.path.join(RAW_DIR, f"{h}.json.gz"), "wt") as f:
@@ -166,10 +156,10 @@ def main():
                     el = dict(post["elements"][idx]) if idx < len(post["elements"]) else None
                     if el is None:
                         ok_all = False; break
-                    a = {"kind": kind, "target": idx, "value": val}
-                    label = classify_action(a["kind"], el)
+                    a = {"kind": PRIM[kind], "target": idx, "value": val}
                     post = s.act(post, a)
-                    acts.append({"label": label, "ok": bool(post["last_action"]["ok"]),
+                    acts.append({"label": kind,
+                                 "ok": bool(post["last_action"]["ok"]),
                                  "error": post["last_action"].get("error", "")[:80]})
                     if not acts[-1]["ok"]:
                         ok_all = False
