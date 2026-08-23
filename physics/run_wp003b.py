@@ -1,61 +1,124 @@
-"""WP-003b (secondary, exploratory): is the next-page STRUCTURAL CLASS
-predictable cross-site even though next-action-class is not?
-Same corpus, same LOO-website protocol. Cannot rescue primary verdict.
+"""WP-003B corrected: cross-site next-state structural prediction.
+
+Target: coarse structural class of s_{t+1}.
+Inputs: mechanics-only state s_t PLUS imposed/current action a_t.
+This is closer to environment dynamics P(s' | s, a) than the historical
+next-action target. Uses true website holdout and trajectory-grouped bootstrap.
 """
-import json, os, sys
+import json, os
 import numpy as np
 from collections import Counter
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-from physics.run_wp003 import load, onehot, softmax_reg
+from physics.run_wp003 import load, onehot, softmax_reg, balanced_acc
 
-IN = "/tmp/opencode/spider_data/wp003_transitions.jsonl"
+OUT = os.path.join(os.path.dirname(__file__), "..", "results", "physics",
+                   "wp003b_corrected_targetB.json")
+
+
+def action_onehot(rows, action_classes):
+    A = {a: i for i, a in enumerate(action_classes)}
+    z = np.zeros((len(rows), len(A)))
+    for i, r in enumerate(rows):
+        z[i, A[r["primary_action"]]] = 1.0
+    return z
+
+
+def target_label(r):
+    p = r["post"]
+    return f"d{p['depth_bucket']}.pw{p['has_password']}.lb{p['link_bucket']}.ib{p['text_input_bucket']}"
+
+
+def grouped_bootstrap(raw, classes, n_boot=1000, seed=17):
+    rng = np.random.default_rng(seed)
+    vals = []
+    for _ in range(n_boot):
+        ds = []
+        for y, pm, p0, pnn, tids in raw.values():
+            uniq = sorted(set(tids.tolist()))
+            chosen = rng.choice(uniq, size=len(uniq), replace=True)
+            idx = np.concatenate([np.flatnonzero(tids == t) for t in chosen])
+            yb = y[idx]
+            m = balanced_acc(yb, pm[idx], classes)
+            n0 = balanced_acc(yb, p0[idx], classes)
+            nn = balanced_acc(yb, pnn[idx], classes)
+            ds.append(m - max(n0, nn))
+        vals.append(float(np.mean(ds)))
+    return np.percentile(vals, [2.5, 97.5]).tolist()
 
 
 def run():
-    rows = [r for r in load() if r["target_action"] not in ("", "abandon")]
-    # target B: structural class of the NEXT page
-    for r in rows:
-        p = r["post"]
-        r["yb"] = f"d{p['depth_bucket']}.pw{p['has_password']}.lb{p['link_bucket']}.ib{p['text_input_bucket']}"
-    classes = sorted({r["yb"] for r in rows})
-    keep = {c for c, n in Counter(r["yb"] for r in rows).items() if n >= 8}
-    rows = [r for r in rows if r["yb"] in keep]
-    A = {c: i for i, c in enumerate(sorted(keep))}
-    Xall, _ = onehot([r["x"] for r in rows])
+    rows = load()
+    counts = Counter(target_label(r) for r in rows)
+    keep = {c for c, n in counts.items() if n >= 12}
+    rows = [r for r in rows if target_label(r) in keep]
+    assert rows and len(keep) >= 2, "insufficient target-B class support"
+
+    classes_lbl = sorted(keep)
+    Y = {c: i for i, c in enumerate(classes_lbl)}
+    yall = np.array([Y[target_label(r)] for r in rows])
+    Xstate, names = onehot([r["x"] for r in rows])
+    actions = sorted({r["primary_action"] for r in rows})
+    X = np.concatenate([Xstate, action_onehot(rows, actions)], axis=1)
+    feature_names = names + [f"action={a}" for a in actions]
     sites = sorted({r["site"] for r in rows})
-    out = {"classes_kept": len(keep), "folds": {}}
-    diffs, wins = [], 0
+    classes = np.arange(len(Y))
+
+    folds, raw = {}, {}
     for hold in sites:
-        tr = [i for i, r in enumerate(rows) if r["site"] != hold]
-        te = [i for i, r in enumerate(rows) if r["site"] == hold]
+        tr = np.array([i for i, r in enumerate(rows) if r["site"] != hold])
+        te = np.array([i for i, r in enumerate(rows) if r["site"] == hold])
         if len(te) < 20:
             continue
-        ytr = np.array([A[rows[i]["yb"]] for i in tr])
-        yte = np.array([A[rows[i]["yb"]] for i in te])
-        W = softmax_reg(Xall[tr], ytr, len(A))
-        acc_m1 = float(((Xall[te] @ W).argmax(1) == yte).mean())
+        ytr, yte = yall[tr], yall[te]
+        W = softmax_reg(X[tr], ytr, len(Y))
+        pm = (X[te] @ W).argmax(1)
         maj = Counter(ytr.tolist()).most_common(1)[0][0]
-        acc_n0 = float((yte == maj).mean())
-        mu, sd = Xall[tr].mean(0), Xall[tr].std(0) + 1e-9
-        Xt, Xs = (Xall[tr] - mu) / sd, (Xall[te] - mu) / sd
-        pred_nn = np.array([ytr[int((((Xt - x) ** 2).sum(1)).argmin())] for x in Xs])
-        acc_n4 = float((pred_nn == yte).mean())
-        rng = np.random.default_rng(5)
-        shuf = [float((rng.permutation(yte) == yte).mean()) for _ in range(300)]
-        best_null = max(acc_n0, acc_n4, float(np.percentile(shuf, 95)))
-        d = acc_m1 - best_null
-        diffs.append(d)
-        wins += d > 0
-        out["folds"][hold] = {"n": len(te), "M1": round(acc_m1, 3),
-                              "N0": round(acc_n0, 3), "N4": round(acc_n4, 3),
-                              "shuffle_p95": round(float(np.percentile(shuf, 95)), 3),
-                              "diff": round(d, 3)}
-    out["mean_diff"] = round(float(np.mean(diffs)), 4)
-    out["wins"] = f"{wins}/{len(diffs)}"
-    print(json.dumps(out, indent=1))
-    with open(os.path.join(os.path.dirname(__file__), "..", "results",
-                           "physics", "wp003b_targetB.json"), "w") as f:
-        json.dump(out, f, indent=1)
+        p0 = np.full_like(yte, maj)
+        mu, sd = X[tr].mean(0), X[tr].std(0) + 1e-9
+        Xt, Xs = (X[tr] - mu) / sd, (X[te] - mu) / sd
+        pnn = np.array([ytr[int((((Xt - x) ** 2).sum(1)).argmin())] for x in Xs])
+        tids = np.array([rows[i]["trajectory_id"] for i in te], dtype=object)
+        raw[hold] = (yte, pm, p0, pnn, tids)
+
+        m = balanced_acc(yte, pm, classes)
+        n0 = balanced_acc(yte, p0, classes)
+        nn = balanced_acc(yte, pnn, classes)
+        best = max(n0, nn)
+        folds[hold] = {
+            "n": len(te),
+            "n_trajectories": len(set(tids.tolist())),
+            "M_state_plus_action": round(m, 4),
+            "N0_majority": round(n0, 4),
+            "N4_nearest_neighbor": round(nn, 4),
+            "diff": round(m - best, 4),
+        }
+
+    diffs = [v["diff"] for v in folds.values()]
+    wins = sum(d > 0 for d in diffs)
+    ci = grouped_bootstrap(raw, classes)
+    enough = bool(folds) and all(v["n"] >= 20 and v["n_trajectories"] >= 4 for v in folds.values())
+    if not enough:
+        verdict = "DATA_INSUFFICIENT"
+    elif ci[0] > 0 and wins >= max(1, (len(folds) + 1) // 2):
+        verdict = "SURVIVES_CURRENT_TEST"
+    else:
+        verdict = "FALSIFIED"
+
+    out = {
+        "analysis_status": "CORRECTED_ACTION_CONDITIONED_TARGET_B",
+        "target": "coarse next-state structural class",
+        "conditioning": "mechanics-only s_t + current action a_t",
+        "classes_kept": classes_lbl,
+        "feature_names": feature_names,
+        "folds": folds,
+        "mean_diff": round(float(np.mean(diffs)), 4) if diffs else None,
+        "wins": f"{wins}/{len(diffs)}",
+        "trajectory_grouped_bootstrap_ci95": [round(float(x), 4) for x in ci],
+        "verdict": verdict,
+    }
+    os.makedirs(os.path.dirname(OUT), exist_ok=True)
+    with open(OUT, "w") as f:
+        json.dump(out, f, indent=2)
+    print(json.dumps(out, indent=2))
 
 
 if __name__ == "__main__":
