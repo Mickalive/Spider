@@ -1,0 +1,39 @@
+{
+ "dataset": "wp003b_v2_randomwalk_transitions",
+ "cycle": 32670239235,
+ "collected": "2026-08-23",
+ "preregistration": "reports/physics/wp003b_v2_preregistration.md (frozen at commit 81c46a6 BEFORE any collection)",
+ "collector_seed_batches": {"A": 20260823, "B": 20260901},
+ "per_trajectory_seed_rule": "seed_base + sha256(site)[:8] + j*10007 (process-stable; unit-tested)",
+ "merged_corpus_sha256": "0646d3326778032da8b49562c8f19dbef03841ec8fb5fe0992aef911e8d7270f",
+ "rows_raw": 548,
+ "rows_usable_after_D2_exclusion": 504,
+ "excluded_single_action_failures": {"internet": 28, "wikipedia": 15, "gutenberg": 1},
+ "per_site": {
+  "books":      {"raw": 90,  "usable": 90,  "trajectories": 6,  "batches": ["A"]},
+  "quotes":     {"raw": 90,  "usable": 90,  "trajectories": 6,  "batches": ["A"]},
+  "internet":   {"raw": 110, "usable": 82,  "trajectories": 18, "batches": ["A(6 traj)", "B(12 traj)"]},
+  "wikipedia":  {"raw": 90,  "usable": 75,  "trajectories": 6,  "batches": ["A"], "note": "/wiki/ article space only"},
+  "hackernews": {"raw": 63,  "usable": 63,  "trajectories": 30, "batches": ["A pass3 (D1: many-short-trajectory policy after domain-exit strandings)"]},
+  "gutenberg":  {"raw": 105, "usable": 104, "trajectories": 14, "batches": ["A(23 rows)", "B(82 rows)"]},
+  "openlibrary":{"raw": 0,   "usable": 0,   "trajectories": 0,  "batches": [], "note": "D4: repeated connection resets; abandoned per data policy"}
+ },
+ "deviations": {
+  "D1": "hackernews collected with more/shorter independent trajectories because its link graph exits the domain by design",
+  "D2": "frozen first-action-failure exclusion operationalized as single-action-chain failure (per-action ok flags were not persisted); multi-chain any_ok=False rows retained and flagged",
+  "D3": "internet/gutenberg second seed batch merged as independent trajectories to reach fold adequacy",
+  "D4": "openlibrary abandoned after active connection refusals"
+ },
+ "integrity_verification": {
+  "raw_snapshot_recompute": "PASS (0 mismatches over 548 rows: features, counts, digests)",
+  "trajectory_chaining": "PASS (contiguous steps, prev_action == primary_action(t-1), <START> at step 0)",
+  "record": "results/physics/wp003b_v2_corpus_verification.json"
+ },
+ "action_classes_observed": {"click_link": 249, "click_button": 129, "fill_text": 78, "check_box": 45, "fill_password": 1, "select_option": 2},
+ "features": "13 mechanics-only buckets + action one-hot + chain flag (see physics/run_wp003.py FEATURES)",
+ "raw_observables": "DOM snapshots retained in /tmp only (ephemeral per SPIDER data policy). During this cycle every committed derived row was recomputed from raw snapshots with zero mismatches; afterwards only the compact corpus + its digest remain reproducible.",
+ "invalid_predecessors": [
+  "results/physics/wp003_results.json (MEASUREMENT_INVALID, provenance only)",
+  "results/physics/wp003b_targetB.json (exploratory, audit-flagged)"
+ ]
+}

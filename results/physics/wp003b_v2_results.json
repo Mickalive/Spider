@@ -1,0 +1,312 @@
+{
+  "analysis": "wp003b_v2_results",
+  "input_file": "/tmp/opencode/spider_data/wp003b_v2_transitions.jsonl",
+  "input_sha256": "0646d3326778032da8b49562c8f19dbef03841ec8fb5fe0992aef911e8d7270f",
+  "git_commit_at_analysis": "81c46a6318623509f53ca2679bfa5790eb14e9db",
+  "dataset_stats": {
+    "total_lines": 548,
+    "excluded_first_action_failed": 44,
+    "usable": 504,
+    "n_trajectories": 80
+  },
+  "target_classes": [
+    "lb0.f0",
+    "lb0.f1",
+    "lb1.f0",
+    "lb1.f1",
+    "lb2.f0",
+    "lb2.f1"
+  ],
+  "folds": {
+    "books": {
+      "n_test": 90,
+      "n_train": 414,
+      "n_trajectories": 6,
+      "M_model": 0.2923,
+      "N0_majority": 0.25,
+      "N3_action_cond": 0.35,
+      "N5_cellfreq": 0.3548,
+      "N4_nearest_neighbor": 0.1971,
+      "best_null_name": "N5_cellfreq",
+      "best_null": 0.3548,
+      "d_effect": -0.0625,
+      "test_class_counts": {
+        "lb0.f0": 1,
+        "lb0.f1": 2,
+        "lb1.f1": 35,
+        "lb2.f1": 52
+      },
+      "per_class": {
+        "lb0.f0": {
+          "support": 1,
+          "recall_M": 0.0,
+          "N0_majority": 0.0,
+          "N3_action_cond": 1.0,
+          "N5_cellfreq": 1.0,
+          "N4_nearest_neighbor": 0.0
+        },
+        "lb0.f1": {
+          "support": 2,
+          "recall_M": 0.0,
+          "N0_majority": 0.0,
+          "N3_action_cond": 0.0,
+          "N5_cellfreq": 0.0,
+          "N4_nearest_neighbor": 0.0
+        },
+        "lb1.f1": {
+          "support": 35,
+          "recall_M": 0.4,
+          "N0_majority": 1.0,
+          "N3_action_cond": 0.4,
+          "N5_cellfreq": 0.4,
+          "N4_nearest_neighbor": 0.0
+        },
+        "lb2.f1": {
+          "support": 52,
+          "recall_M": 0.7692,
+          "N0_majority": 0.0,
+          "N3_action_cond": 0.0,
+          "N5_cellfreq": 0.0192,
+          "N4_nearest_neighbor": 0.7885
+        }
+      }
+    },
+    "gutenberg": {
+      "n_test": 104,
+      "n_train": 400,
+      "n_trajectories": 14,
+      "M_model": 0.1695,
+      "N0_majority": 0.3333,
+      "N3_action_cond": 0.2476,
+      "N5_cellfreq": 0.2401,
+      "N4_nearest_neighbor": 0.5095,
+      "best_null_name": "N4_nearest_neighbor",
+      "best_null": 0.5095,
+      "d_effect": -0.3401,
+      "test_class_counts": {
+        "lb0.f0": 5,
+        "lb1.f1": 85,
+        "lb2.f1": 14
+      },
+      "per_class": {
+        "lb0.f0": {
+          "support": 5,
+          "recall_M": 0.2,
+          "N0_majority": 0.0,
+          "N3_action_cond": 0.6,
+          "N5_cellfreq": 0.0,
+          "N4_nearest_neighbor": 0.6
+        },
+        "lb1.f1": {
+          "support": 85,
+          "recall_M": 0.0941,
+          "N0_majority": 0.0,
+          "N3_action_cond": 0.0,
+          "N5_cellfreq": 0.5059,
+          "N4_nearest_neighbor": 0.0
+        },
+        "lb2.f1": {
+          "support": 14,
+          "recall_M": 0.2143,
+          "N0_majority": 1.0,
+          "N3_action_cond": 0.1429,
+          "N5_cellfreq": 0.2143,
+          "N4_nearest_neighbor": 0.9286
+        }
+      }
+    },
+    "hackernews": {
+      "n_test": 63,
+      "n_train": 441,
+      "n_trajectories": 30,
+      "M_model": 0.4463,
+      "N0_majority": 0.0,
+      "N3_action_cond": 0.0921,
+      "N5_cellfreq": 0.0,
+      "N4_nearest_neighbor": 0.4211,
+      "best_null_name": "N4_nearest_neighbor",
+      "best_null": 0.4211,
+      "d_effect": 0.0253,
+      "test_class_counts": {
+        "lb0.f0": 25,
+        "lb2.f1": 38
+      },
+      "per_class": {
+        "lb0.f0": {
+          "support": 25,
+          "recall_M": 0.84,
+          "N0_majority": 0.0,
+          "N3_action_cond": 0.0,
+          "N5_cellfreq": 0.0,
+          "N4_nearest_neighbor": 0.0
+        },
+        "lb2.f1": {
+          "support": 38,
+          "recall_M": 0.0526,
+          "N0_majority": 0.0,
+          "N3_action_cond": 0.1842,
+          "N5_cellfreq": 0.0,
+          "N4_nearest_neighbor": 0.8421
+        }
+      }
+    },
+    "internet": {
+      "n_test": 82,
+      "n_train": 422,
+      "n_trajectories": 18,
+      "M_model": 0.3333,
+      "N0_majority": 0.0,
+      "N3_action_cond": 0.0,
+      "N5_cellfreq": 0.0,
+      "N4_nearest_neighbor": 0.3333,
+      "best_null_name": "N4_nearest_neighbor",
+      "best_null": 0.3333,
+      "d_effect": 0.0,
+      "test_class_counts": {
+        "lb0.f0": 49,
+        "lb0.f1": 18,
+        "lb1.f0": 15
+      },
+      "per_class": {
+        "lb0.f0": {
+          "support": 49,
+          "recall_M": 0.0,
+          "N0_majority": 0.0,
+          "N3_action_cond": 0.0,
+          "N5_cellfreq": 0.0,
+          "N4_nearest_neighbor": 0.0
+        },
+        "lb0.f1": {
+          "support": 18,
+          "recall_M": 0.0,
+          "N0_majority": 0.0,
+          "N3_action_cond": 0.0,
+          "N5_cellfreq": 0.0,
+          "N4_nearest_neighbor": 0.0
+        },
+        "lb1.f0": {
+          "support": 15,
+          "recall_M": 1.0,
+          "N0_majority": 0.0,
+          "N3_action_cond": 0.0,
+          "N5_cellfreq": 0.0,
+          "N4_nearest_neighbor": 1.0
+        }
+      }
+    },
+    "quotes": {
+      "n_test": 90,
+      "n_train": 414,
+      "n_trajectories": 6,
+      "M_model": 0.1058,
+      "N0_majority": 0.0,
+      "N3_action_cond": 0.0,
+      "N5_cellfreq": 0.0385,
+      "N4_nearest_neighbor": 0.1538,
+      "best_null_name": "N4_nearest_neighbor",
+      "best_null": 0.1538,
+      "d_effect": -0.0481,
+      "test_class_counts": {
+        "lb0.f0": 13,
+        "lb0.f1": 7,
+        "lb1.f0": 26,
+        "lb2.f0": 44
+      },
+      "per_class": {
+        "lb0.f0": {
+          "support": 13,
+          "recall_M": 0.1538,
+          "N0_majority": 0.0,
+          "N3_action_cond": 0.0,
+          "N5_cellfreq": 0.1538,
+          "N4_nearest_neighbor": 0.6154
+        },
+        "lb0.f1": {
+          "support": 7,
+          "recall_M": 0.0,
+          "N0_majority": 0.0,
+          "N3_action_cond": 0.0,
+          "N5_cellfreq": 0.0,
+          "N4_nearest_neighbor": 0.0
+        },
+        "lb1.f0": {
+          "support": 26,
+          "recall_M": 0.2692,
+          "N0_majority": 0.0,
+          "N3_action_cond": 0.0,
+          "N5_cellfreq": 0.0,
+          "N4_nearest_neighbor": 0.0
+        },
+        "lb2.f0": {
+          "support": 44,
+          "recall_M": 0.0,
+          "N0_majority": 0.0,
+          "N3_action_cond": 0.0,
+          "N5_cellfreq": 0.0,
+          "N4_nearest_neighbor": 0.0
+        }
+      }
+    },
+    "wikipedia": {
+      "n_test": 75,
+      "n_train": 429,
+      "n_trajectories": 6,
+      "M_model": 0.7045,
+      "N0_majority": 0.5,
+      "N3_action_cond": 0.2879,
+      "N5_cellfreq": 0.3236,
+      "N4_nearest_neighbor": 0.2327,
+      "best_null_name": "N0_majority",
+      "best_null": 0.5,
+      "d_effect": 0.2045,
+      "test_class_counts": {
+        "lb1.f1": 33,
+        "lb2.f1": 42
+      },
+      "per_class": {
+        "lb1.f1": {
+          "support": 33,
+          "recall_M": 0.9091,
+          "N0_majority": 1.0,
+          "N3_action_cond": 0.5758,
+          "N5_cellfreq": 0.5758,
+          "N4_nearest_neighbor": 0.0606
+        },
+        "lb2.f1": {
+          "support": 42,
+          "recall_M": 0.5,
+          "N0_majority": 0.0,
+          "N3_action_cond": 0.0,
+          "N5_cellfreq": 0.0714,
+          "N4_nearest_neighbor": 0.4048
+        }
+      }
+    }
+  },
+  "bootstrap": {
+    "method": "trajectory-grouped within site, paired diff vs max null",
+    "n_boot": 2000,
+    "seed": 20260824,
+    "ci95_mean_effect": [
+      -0.085,
+      0.0345
+    ]
+  },
+  "decision": {
+    "adequate_folds": [
+      "books",
+      "gutenberg",
+      "hackernews",
+      "internet",
+      "quotes",
+      "wikipedia"
+    ],
+    "S": 6,
+    "usable_in_adequate": 504,
+    "wins": "2/6",
+    "mean_d_adequate": -0.0368,
+    "verdict": "INCONCLUSIVE"
+  },
+  "verdict_rule": "DATA_INSUFFICIENT if <5 adequate folds or <400 usable; SURVIVES_CURRENT_TEST iff CI.lower>0 and wins>=ceil(S/2); FALSIFIED iff CI.upper<0; else INCONCLUSIVE",
+  "preregistration": "reports/physics/wp003b_v2_preregistration.md"
+}

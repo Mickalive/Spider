@@ -28,10 +28,14 @@ BOOT_SEED = 20260824
 
 
 # ---------------------------------------------------------------- loading
-def load_rows(path):
+def load_rows(path, skip_chaining=False):
+    """skip_chaining=True is ONLY for counterfactual control corpora (e.g.
+    permuted-action E-1) where trajectory chaining is intentionally broken.
+    Real collected data must always use the default full validation."""
     total = 0
     excluded = 0
-    rows = []
+    kept = []
+    raw = []
     with open(path) as f:
         for line in f:
             line = line.strip()
@@ -39,21 +43,40 @@ def load_rows(path):
                 continue
             r = json.loads(line)
             total += 1
+            # Deviation D2 (documented pre-analysis): the collector persists
+            # `any_ok` and chain length but not per-action ok flags, so the
+            # frozen rule "exclude if FIRST action failed" is operationalized
+            # as "exclude single-action chains whose only action failed"
+            # (unambiguous first-action failure). Multi-chain rows with
+            # any_ok=False are retained and flagged as a limitation.
             labs = r.get("action_labels") or []
-            if labs and not labs[0].get("ok", False):
-                excluded += 1  # preregistered exclusion: first action failed
-                continue
-            missing_pre = [k for k in FEATURES if k not in r.get("pre", {})]
-            assert not missing_pre, f"pre-state feature fields absent: {missing_pre}"
+            drop = len(labs) == 1 and not r.get("any_ok", True)
+            for k in FEATURES:
+                assert k in r.get("pre", {}), f"pre-state field absent: {k}"
             assert "post" in r and r["post"], "row without post-state"
             r["x"] = [r["pre"][k] for k in FEATURES]
-            rows.append(r)
-    validate_rows(rows)
+            raw.append(r)
+            if drop:
+                excluded += 1
+            else:
+                kept.append(r)
 
-    # v2 anti-leak guard: no predictor may be derived from the post-state.
-    # Structural check: predictors come from r["pre"] only by construction;
-    # assert the action descriptor is decidable pre-outcome.
-    for r in rows:
+    # Integrity assertions run on the FULL collected corpus (exclusions must
+    # never mask collection defects), then filtering applies for analysis.
+    if skip_chaining:
+        from physics.run_wp003 import FEATURES as _F
+        assert raw
+        for r in raw:
+            missing = {"site", "trajectory_id", "step_id", "target_action",
+                       "prev_action_label", "primary_action", "pre", "post"} - set(r)
+            assert not missing, f"missing fields {missing}"
+            assert r["target_action"] == r["primary_action"]
+    else:
+        validate_rows(raw)
+
+    # v2 anti-leak guard: predictors derive from pre-state + intended action
+    # only; both are fixed strictly before the outcome exists.
+    for r in kept:
         assert r["primary_action"] in ("click_link", "click_button", "fill_text",
                                        "fill_password", "select_option",
                                        "check_box"), r["primary_action"]
@@ -61,9 +84,9 @@ def load_rows(path):
         assert chain_len >= 1
     stats = {"total_lines": total,
              "excluded_first_action_failed": excluded,
-             "usable": len(rows),
-             "n_trajectories": len({r["trajectory_id"] for r in rows})}
-    return rows, stats
+             "usable": len(kept),
+             "n_trajectories": len({r["trajectory_id"] for r in kept})}
+    return kept, stats
 
 
 # ---------------------------------------------------------------- targets
@@ -194,11 +217,12 @@ def add_interactions(X, n_state_cols):
 
 
 def run_folds(rows, target_fn, feats_fn=None, onehot_fn=onehot,
-              interactions=False):
+              interactions=False, row_level_target=False):
     """Website-holdout evaluation. Returns folds detail + bootstrap raw."""
-    labels = sorted({target_fn(r["post"]) for r in rows})
+    lab_of = (target_fn if row_level_target else (lambda r: target_fn(r["post"])))
+    labels = sorted({lab_of(r) for r in rows})
     Y = {c: i for i, c in enumerate(labels)}
-    yall = np.array([Y[target_fn(r["post"])] for r in rows])
+    yall = np.array([Y[lab_of(r)] for r in rows])
     if feats_fn is None:
         X, feat_names, n_state_cols = build_X(rows)
     else:
@@ -332,10 +356,12 @@ def file_sha256(path):
 
 
 def analyze(path, out_name, target_fn, feats_fn=None, onehot_fn=onehot,
-            boot=True, interactions=False):
-    rows, stats = load_rows(path)
+            boot=True, interactions=False, row_level_target=False,
+            skip_chaining=False):
+    rows, stats = load_rows(path, skip_chaining=skip_chaining)
     folds, fold_raw, labels = run_folds(rows, target_fn, feats_fn, onehot_fn,
-                                        interactions=interactions)
+                                        interactions=interactions,
+                                        row_level_target=row_level_target)
     ci = grouped_bootstrap(fold_raw) if boot else [None, None]
     info = verdict_from(folds, tuple(ci) if boot else (None, None))
     out = {
@@ -467,8 +493,10 @@ def main():
     if args.what in ("components", "all"):
         comps(args.inp)
     if args.what in ("ablation", "all"):
-        analyze(args.inp, "wp003b_v2_ablation_altrepr", alt_signature,
-                feats_fn=lambda i, r: alt_state_feats(r), onehot_fn=alt_onehot)
+        analyze(args.inp, "wp003b_v2_ablation_altrepr",
+                lambda r: alt_signature(r["counts_post"]),
+                feats_fn=lambda i, r: alt_state_feats(r), onehot_fn=alt_onehot,
+                row_level_target=True)
     if args.what in ("interact", "all"):
         # preregistered EXPLORATORY arm (cannot alter the primary verdict)
         analyze(args.inp, "wp003b_v2_interactions_exploratory", t1_signature,

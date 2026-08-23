@@ -188,3 +188,26 @@ A clean FALSIFIED or INCONCLUSIVE result is a publishable-in-ledger outcome that
 localizes Web "physics" to memory + site-specific regularity at this
 granularity. Expected information gain is high either way because every prior
 attempt at this target was measurement-invalid or exploratory.
+
+---
+
+## APPENDIX A — collection deviations (all decided on COLLECTION counts only,
+## before any analysis of outcomes; none touch target/predictor/verdict defs)
+
+- D1 (hackernews): HN's link graph exits the domain by design (external
+  article links), stranding walks after ~2 steps. Collected additional
+  independent trajectories (18 then 30 short ones, same seed base, same
+  uniform-over-actionables policy). Final HN sub-corpus: the LAST pass file.
+- D2 (exclusion operationalization): collector persisted `any_ok` + chain
+  length but not per-action ok flags. The frozen exclusion "first action
+  failed" is operationalized as "single-action chain whose only action failed"
+  (unambiguous case). Multi-chain rows with any_ok=False are retained and
+  flagged. Applied uniformly before any analysis.
+- D3 (internet, gutenberg): first seed batch left these sites below fold
+  adequacy after exclusions. Collected a second batch with seed base 20260901;
+  batches are merged per site as independent trajectories (trajectory ids
+  embed the seed, so batches are traceable).
+- D4 (openlibrary): repeated connection resets (active refusal). Collection
+  abandoned rather than hammering the site (§31 data policy). OpenLibrary is
+  therefore absent from this corpus; planned 7-fold design degrades to 6
+  collected sites with 5 adequate folds required for inference.

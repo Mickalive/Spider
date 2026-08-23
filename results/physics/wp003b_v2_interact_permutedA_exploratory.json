@@ -1,0 +1,317 @@
+{
+  "analysis": "wp003b_v2_interact_permutedA_exploratory",
+  "input_file": "/tmp/opencode/spider_data/wp003b_v2_permA.jsonl",
+  "input_sha256": "5466951f24ede400b9ff2bb9a82e34f3a1c031e171672205c3d3b3c4e585dce4",
+  "git_commit_at_analysis": "81c46a6318623509f53ca2679bfa5790eb14e9db",
+  "dataset_stats": {
+    "total_lines": 504,
+    "excluded_first_action_failed": 0,
+    "usable": 504,
+    "n_trajectories": 80
+  },
+  "target_classes": [
+    "lb0.f0",
+    "lb0.f1",
+    "lb1.f0",
+    "lb1.f1",
+    "lb2.f0",
+    "lb2.f1"
+  ],
+  "folds": {
+    "books": {
+      "n_test": 90,
+      "n_train": 414,
+      "n_trajectories": 6,
+      "M_model": 0.2876,
+      "N0_majority": 0.25,
+      "N3_action_cond": 0.1357,
+      "N5_cellfreq": 0.5266,
+      "N4_nearest_neighbor": 0.149,
+      "best_null_name": "N5_cellfreq",
+      "best_null": 0.5266,
+      "d_effect": -0.239,
+      "test_class_counts": {
+        "lb0.f0": 1,
+        "lb0.f1": 2,
+        "lb1.f1": 35,
+        "lb2.f1": 52
+      },
+      "per_class": {
+        "lb0.f0": {
+          "support": 1,
+          "recall_M": 0.0,
+          "N0_majority": 0.0,
+          "N3_action_cond": 0.0,
+          "N5_cellfreq": 1.0,
+          "N4_nearest_neighbor": 0.0
+        },
+        "lb0.f1": {
+          "support": 2,
+          "recall_M": 0.0,
+          "N0_majority": 0.0,
+          "N3_action_cond": 0.0,
+          "N5_cellfreq": 0.0,
+          "N4_nearest_neighbor": 0.0
+        },
+        "lb1.f1": {
+          "support": 35,
+          "recall_M": 0.3429,
+          "N0_majority": 1.0,
+          "N3_action_cond": 0.5429,
+          "N5_cellfreq": 0.9143,
+          "N4_nearest_neighbor": 0.0
+        },
+        "lb2.f1": {
+          "support": 52,
+          "recall_M": 0.8077,
+          "N0_majority": 0.0,
+          "N3_action_cond": 0.0,
+          "N5_cellfreq": 0.1923,
+          "N4_nearest_neighbor": 0.5962
+        }
+      }
+    },
+    "gutenberg": {
+      "n_test": 104,
+      "n_train": 400,
+      "n_trajectories": 14,
+      "M_model": 0.291,
+      "N0_majority": 0.3333,
+      "N3_action_cond": 0.3333,
+      "N5_cellfreq": 0.3193,
+      "N4_nearest_neighbor": 0.3476,
+      "best_null_name": "N4_nearest_neighbor",
+      "best_null": 0.3476,
+      "d_effect": -0.0566,
+      "test_class_counts": {
+        "lb0.f0": 5,
+        "lb1.f1": 85,
+        "lb2.f1": 14
+      },
+      "per_class": {
+        "lb0.f0": {
+          "support": 5,
+          "recall_M": 0.4,
+          "N0_majority": 0.0,
+          "N3_action_cond": 0.0,
+          "N5_cellfreq": 0.0,
+          "N4_nearest_neighbor": 0.4
+        },
+        "lb1.f1": {
+          "support": 85,
+          "recall_M": 0.2588,
+          "N0_majority": 0.0,
+          "N3_action_cond": 0.0,
+          "N5_cellfreq": 0.5294,
+          "N4_nearest_neighbor": 0.0
+        },
+        "lb2.f1": {
+          "support": 14,
+          "recall_M": 0.2143,
+          "N0_majority": 1.0,
+          "N3_action_cond": 1.0,
+          "N5_cellfreq": 0.4286,
+          "N4_nearest_neighbor": 0.6429
+        }
+      }
+    },
+    "hackernews": {
+      "n_test": 63,
+      "n_train": 441,
+      "n_trajectories": 30,
+      "M_model": 0.0132,
+      "N0_majority": 0.0,
+      "N3_action_cond": 0.2632,
+      "N5_cellfreq": 0.2632,
+      "N4_nearest_neighbor": 0.0263,
+      "best_null_name": "N3_action_cond",
+      "best_null": 0.2632,
+      "d_effect": -0.25,
+      "test_class_counts": {
+        "lb0.f0": 25,
+        "lb2.f1": 38
+      },
+      "per_class": {
+        "lb0.f0": {
+          "support": 25,
+          "recall_M": 0.0,
+          "N0_majority": 0.0,
+          "N3_action_cond": 0.0,
+          "N5_cellfreq": 0.0,
+          "N4_nearest_neighbor": 0.0
+        },
+        "lb2.f1": {
+          "support": 38,
+          "recall_M": 0.0263,
+          "N0_majority": 0.0,
+          "N3_action_cond": 0.5263,
+          "N5_cellfreq": 0.5263,
+          "N4_nearest_neighbor": 0.0526
+        }
+      }
+    },
+    "internet": {
+      "n_test": 82,
+      "n_train": 422,
+      "n_trajectories": 18,
+      "M_model": 0.2222,
+      "N0_majority": 0.0,
+      "N3_action_cond": 0.0,
+      "N5_cellfreq": 0.0,
+      "N4_nearest_neighbor": 0.2,
+      "best_null_name": "N4_nearest_neighbor",
+      "best_null": 0.2,
+      "d_effect": 0.0222,
+      "test_class_counts": {
+        "lb0.f0": 49,
+        "lb0.f1": 18,
+        "lb1.f0": 15
+      },
+      "per_class": {
+        "lb0.f0": {
+          "support": 49,
+          "recall_M": 0.0,
+          "N0_majority": 0.0,
+          "N3_action_cond": 0.0,
+          "N5_cellfreq": 0.0,
+          "N4_nearest_neighbor": 0.0
+        },
+        "lb0.f1": {
+          "support": 18,
+          "recall_M": 0.0,
+          "N0_majority": 0.0,
+          "N3_action_cond": 0.0,
+          "N5_cellfreq": 0.0,
+          "N4_nearest_neighbor": 0.0
+        },
+        "lb1.f0": {
+          "support": 15,
+          "recall_M": 0.6667,
+          "N0_majority": 0.0,
+          "N3_action_cond": 0.0,
+          "N5_cellfreq": 0.0,
+          "N4_nearest_neighbor": 0.6
+        }
+      }
+    },
+    "quotes": {
+      "n_test": 90,
+      "n_train": 414,
+      "n_trajectories": 6,
+      "M_model": 0.1058,
+      "N0_majority": 0.0,
+      "N3_action_cond": 0.0,
+      "N5_cellfreq": 0.0,
+      "N4_nearest_neighbor": 0.0192,
+      "best_null_name": "N4_nearest_neighbor",
+      "best_null": 0.0192,
+      "d_effect": 0.0865,
+      "test_class_counts": {
+        "lb0.f0": 13,
+        "lb0.f1": 7,
+        "lb1.f0": 26,
+        "lb2.f0": 44
+      },
+      "per_class": {
+        "lb0.f0": {
+          "support": 13,
+          "recall_M": 0.2308,
+          "N0_majority": 0.0,
+          "N3_action_cond": 0.0,
+          "N5_cellfreq": 0.0,
+          "N4_nearest_neighbor": 0.0769
+        },
+        "lb0.f1": {
+          "support": 7,
+          "recall_M": 0.0,
+          "N0_majority": 0.0,
+          "N3_action_cond": 0.0,
+          "N5_cellfreq": 0.0,
+          "N4_nearest_neighbor": 0.0
+        },
+        "lb1.f0": {
+          "support": 26,
+          "recall_M": 0.1923,
+          "N0_majority": 0.0,
+          "N3_action_cond": 0.0,
+          "N5_cellfreq": 0.0,
+          "N4_nearest_neighbor": 0.0
+        },
+        "lb2.f0": {
+          "support": 44,
+          "recall_M": 0.0,
+          "N0_majority": 0.0,
+          "N3_action_cond": 0.0,
+          "N5_cellfreq": 0.0,
+          "N4_nearest_neighbor": 0.0
+        }
+      }
+    },
+    "wikipedia": {
+      "n_test": 75,
+      "n_train": 429,
+      "n_trajectories": 6,
+      "M_model": 0.6613,
+      "N0_majority": 0.5,
+      "N3_action_cond": 0.3193,
+      "N5_cellfreq": 0.4275,
+      "N4_nearest_neighbor": 0.3723,
+      "best_null_name": "N0_majority",
+      "best_null": 0.5,
+      "d_effect": 0.1613,
+      "test_class_counts": {
+        "lb1.f1": 33,
+        "lb2.f1": 42
+      },
+      "per_class": {
+        "lb1.f1": {
+          "support": 33,
+          "recall_M": 0.7273,
+          "N0_majority": 1.0,
+          "N3_action_cond": 0.4242,
+          "N5_cellfreq": 0.5455,
+          "N4_nearest_neighbor": 0.0303
+        },
+        "lb2.f1": {
+          "support": 42,
+          "recall_M": 0.5952,
+          "N0_majority": 0.0,
+          "N3_action_cond": 0.2143,
+          "N5_cellfreq": 0.3095,
+          "N4_nearest_neighbor": 0.7143
+        }
+      }
+    }
+  },
+  "bootstrap": {
+    "method": "trajectory-grouped within site, paired diff vs max null",
+    "n_boot": 2000,
+    "seed": 20260824,
+    "ci95_mean_effect": [
+      -0.0952,
+      0.0121
+    ]
+  },
+  "decision": {
+    "adequate_folds": [
+      "books",
+      "gutenberg",
+      "hackernews",
+      "internet",
+      "quotes",
+      "wikipedia"
+    ],
+    "S": 6,
+    "usable_in_adequate": 504,
+    "wins": "3/6",
+    "mean_d_adequate": -0.0459,
+    "verdict": "INCONCLUSIVE"
+  },
+  "verdict_rule": "DATA_INSUFFICIENT if <5 adequate folds or <400 usable; SURVIVES_CURRENT_TEST iff CI.lower>0 and wins>=ceil(S/2); FALSIFIED iff CI.upper<0; else INCONCLUSIVE",
+  "preregistration": "reports/physics/wp003b_v2_preregistration.md",
+  "control": {
+    "what": "within-site permutation of (primary_action, chain flag)",
+    "seed": 20260826,
+    "reading": "effect collapse => exploratory survival depends on real action-conditioning; persistence => state-only structure"
+  }
+}

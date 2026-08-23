@@ -1,0 +1,242 @@
+{
+  "analysis": "wp003b_v2_component_form_present",
+  "input_file": "/tmp/opencode/spider_data/wp003b_v2_transitions.jsonl",
+  "input_sha256": "0646d3326778032da8b49562c8f19dbef03841ec8fb5fe0992aef911e8d7270f",
+  "git_commit_at_analysis": "81c46a6318623509f53ca2679bfa5790eb14e9db",
+  "dataset_stats": {
+    "total_lines": 548,
+    "excluded_first_action_failed": 44,
+    "usable": 504,
+    "n_trajectories": 80
+  },
+  "target_classes": [
+    "0",
+    "1"
+  ],
+  "folds": {
+    "books": {
+      "n_test": 90,
+      "n_train": 414,
+      "n_trajectories": 6,
+      "M_model": 0.2865,
+      "N0_majority": 0.5,
+      "N3_action_cond": 0.7303,
+      "N5_cellfreq": 0.7584,
+      "N4_nearest_neighbor": 0.4607,
+      "best_null_name": "N5_cellfreq",
+      "best_null": 0.7584,
+      "d_effect": -0.4719,
+      "test_class_counts": {
+        "0": 1,
+        "1": 89
+      },
+      "per_class": {
+        "0": {
+          "support": 1,
+          "recall_M": 0.0,
+          "N0_majority": 0.0,
+          "N3_action_cond": 1.0,
+          "N5_cellfreq": 1.0,
+          "N4_nearest_neighbor": 0.0
+        },
+        "1": {
+          "support": 89,
+          "recall_M": 0.573,
+          "N0_majority": 1.0,
+          "N3_action_cond": 0.4607,
+          "N5_cellfreq": 0.5169,
+          "N4_nearest_neighbor": 0.9213
+        }
+      }
+    },
+    "gutenberg": {
+      "n_test": 104,
+      "n_train": 400,
+      "n_trajectories": 14,
+      "M_model": 0.4949,
+      "N0_majority": 0.5,
+      "N3_action_cond": 0.6687,
+      "N5_cellfreq": 0.4949,
+      "N4_nearest_neighbor": 0.5879,
+      "best_null_name": "N3_action_cond",
+      "best_null": 0.6687,
+      "d_effect": -0.1737,
+      "test_class_counts": {
+        "0": 5,
+        "1": 99
+      },
+      "per_class": {
+        "0": {
+          "support": 5,
+          "recall_M": 0.0,
+          "N0_majority": 0.0,
+          "N3_action_cond": 0.6,
+          "N5_cellfreq": 0.0,
+          "N4_nearest_neighbor": 0.6
+        },
+        "1": {
+          "support": 99,
+          "recall_M": 0.9899,
+          "N0_majority": 1.0,
+          "N3_action_cond": 0.7374,
+          "N5_cellfreq": 0.9899,
+          "N4_nearest_neighbor": 0.5758
+        }
+      }
+    },
+    "hackernews": {
+      "n_test": 63,
+      "n_train": 441,
+      "n_trajectories": 30,
+      "M_model": 0.8411,
+      "N0_majority": 0.5,
+      "N3_action_cond": 0.8279,
+      "N5_cellfreq": 0.8279,
+      "N4_nearest_neighbor": 0.5,
+      "best_null_name": "N3_action_cond",
+      "best_null": 0.8279,
+      "d_effect": 0.0132,
+      "test_class_counts": {
+        "0": 25,
+        "1": 38
+      },
+      "per_class": {
+        "0": {
+          "support": 25,
+          "recall_M": 0.84,
+          "N0_majority": 0.0,
+          "N3_action_cond": 0.84,
+          "N5_cellfreq": 0.84,
+          "N4_nearest_neighbor": 0.0
+        },
+        "1": {
+          "support": 38,
+          "recall_M": 0.8421,
+          "N0_majority": 1.0,
+          "N3_action_cond": 0.8158,
+          "N5_cellfreq": 0.8158,
+          "N4_nearest_neighbor": 1.0
+        }
+      }
+    },
+    "internet": {
+      "n_test": 82,
+      "n_train": 422,
+      "n_trajectories": 18,
+      "M_model": 0.8655,
+      "N0_majority": 0.5,
+      "N3_action_cond": 0.7092,
+      "N5_cellfreq": 0.6858,
+      "N4_nearest_neighbor": 0.6076,
+      "best_null_name": "N3_action_cond",
+      "best_null": 0.7092,
+      "d_effect": 0.1562,
+      "test_class_counts": {
+        "0": 64,
+        "1": 18
+      },
+      "per_class": {
+        "0": {
+          "support": 64,
+          "recall_M": 0.9531,
+          "N0_majority": 0.0,
+          "N3_action_cond": 0.6406,
+          "N5_cellfreq": 0.5938,
+          "N4_nearest_neighbor": 0.4375
+        },
+        "1": {
+          "support": 18,
+          "recall_M": 0.7778,
+          "N0_majority": 1.0,
+          "N3_action_cond": 0.7778,
+          "N5_cellfreq": 0.7778,
+          "N4_nearest_neighbor": 0.7778
+        }
+      }
+    },
+    "quotes": {
+      "n_test": 90,
+      "n_train": 414,
+      "n_trajectories": 6,
+      "M_model": 0.4208,
+      "N0_majority": 0.5,
+      "N3_action_cond": 0.5,
+      "N5_cellfreq": 0.5491,
+      "N4_nearest_neighbor": 0.4561,
+      "best_null_name": "N5_cellfreq",
+      "best_null": 0.5491,
+      "d_effect": -0.1282,
+      "test_class_counts": {
+        "0": 83,
+        "1": 7
+      },
+      "per_class": {
+        "0": {
+          "support": 83,
+          "recall_M": 0.6988,
+          "N0_majority": 0.0,
+          "N3_action_cond": 0.0,
+          "N5_cellfreq": 0.241,
+          "N4_nearest_neighbor": 0.6265
+        },
+        "1": {
+          "support": 7,
+          "recall_M": 0.1429,
+          "N0_majority": 1.0,
+          "N3_action_cond": 1.0,
+          "N5_cellfreq": 0.8571,
+          "N4_nearest_neighbor": 0.2857
+        }
+      }
+    },
+    "wikipedia": {
+      "n_test": 75,
+      "n_train": 429,
+      "n_trajectories": 6,
+      "M_model": 1.0,
+      "N0_majority": 1.0,
+      "N3_action_cond": 0.8133,
+      "N5_cellfreq": 0.8133,
+      "N4_nearest_neighbor": 1.0,
+      "best_null_name": "N0_majority",
+      "best_null": 1.0,
+      "d_effect": 0.0,
+      "test_class_counts": {
+        "1": 75
+      },
+      "per_class": {
+        "1": {
+          "support": 75,
+          "recall_M": 1.0,
+          "N0_majority": 1.0,
+          "N3_action_cond": 0.8133,
+          "N5_cellfreq": 0.8133,
+          "N4_nearest_neighbor": 1.0
+        }
+      }
+    }
+  },
+  "bootstrap": {
+    "method": "trajectory-grouped within site, paired diff vs max null",
+    "n_boot": 0,
+    "seed": 20260824,
+    "ci95_mean_effect": null
+  },
+  "decision": {
+    "adequate_folds": [
+      "books",
+      "gutenberg",
+      "hackernews",
+      "internet",
+      "quotes",
+      "wikipedia"
+    ],
+    "S": 6,
+    "usable_in_adequate": 504,
+    "wins": "2/6",
+    "mean_d_adequate": -0.1007,
+    "verdict": "NOT_EVALUATED_NO_BOOTSTRAP"
+  },
+  "verdict_rule": "DATA_INSUFFICIENT if <5 adequate folds or <400 usable; SURVIVES_CURRENT_TEST iff CI.lower>0 and wins>=ceil(S/2); FALSIFIED iff CI.upper<0; else INCONCLUSIVE",
+  "preregistration": "reports/physics/wp003b_v2_preregistration.md"
+}
