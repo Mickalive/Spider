@@ -22,10 +22,10 @@ class GraphStoreIntegrityTests(unittest.TestCase):
 
 
 class PhysicsLeakageGuardTests(unittest.TestCase):
-    def _row(self, step, target, prev, primary=None):
+    def _row(self, step, target, prev, primary=None, tid=None):
         return {
             "site": "x",
-            "trajectory_id": "x-r0",
+            "trajectory_id": tid or f"x-r{step}",
             "step_id": step,
             "target_action": target,
             "prev_action_label": prev,
@@ -35,10 +35,20 @@ class PhysicsLeakageGuardTests(unittest.TestCase):
         }
 
     def test_true_previous_action_sequence_passes(self):
+        # three independent single-step trajectories
         rows = [
-            self._row(0, "click_link", "<START>"),
-            self._row(1, "fill_text", "click_link"),
-            self._row(2, "click_button", "fill_text"),
+            self._row(0, "click_link", "<START>", tid="x-r0"),
+            self._row(0, "fill_text", "<START>", tid="x-r1"),
+            self._row(0, "click_button", "<START>", tid="x-r2"),
+        ]
+        validate_rows(rows)
+
+    def test_multi_step_trajectory_alignment_passes(self):
+        rows = [
+            self._row(0, "click_link", "<START>", tid="t0"),
+            self._row(1, "fill_text", "click_link", tid="t0"),
+            self._row(2, "click_button", "fill_text", tid="t0"),
+            self._row(0, "click_link", "<START>", tid="t1"),
         ]
         validate_rows(rows)
 

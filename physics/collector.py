@@ -11,6 +11,7 @@ from shared.browser import Session
 
 OUTDIR = "/tmp/opencode/spider_data"
 RAW_DIR = os.path.join(OUTDIR, "raw")
+STEM = os.environ.get("OUTNAME", "wp003_transitions.jsonl").replace(".jsonl", "")
 os.makedirs(RAW_DIR, exist_ok=True)
 
 WALKS = [
@@ -38,6 +39,17 @@ def stable_site_offset(site: str) -> int:
 
 
 def bucket_link(n): return 0 if n < 10 else (1 if n < 50 else 2)
+def counts_of(snap):
+    """Raw element counts kept alongside buckets to allow legitimate
+    alternative representations downstream (WP-003B-v2 prereg §9 S-B)."""
+    els = snap["elements"]
+    return {
+        "links": sum(1 for e in els if e["tag"] == "a" and not e.get("ext")),
+        "buttons": sum(1 for e in els if e["tag"] == "button" or e["type"] == "submit"),
+        "text_inputs": sum(1 for e in els if e["tag"] == "input"
+                           and e["type"] in ("", "text", "email")),
+        "forms": len(snap["forms"]),
+    }
 def bucket3(n): return 0 if n == 0 else (1 if n <= 3 else 2)
 def bucket_depth(path): return 0 if path.count("/") <= 1 else (1 if path.count("/") <= 3 else 2)
 def bucket_q(n): return 0 if n == 0 else (1 if n == 1 else 2)
@@ -175,6 +187,8 @@ def collect_trajectory(session, cfg, rng, out, trajectory_id, target_steps):
             "step_id": written,
             "pre": pre_feat,
             "post": post_feat,
+            "counts_pre": counts_of(cur),
+            "counts_post": counts_of(post),
             "next_page_class": next_page_class(post_feat),
             "prev_action_label": prev_primary,
             "action_labels": [a["label"] for a in acts],
@@ -208,7 +222,7 @@ def main():
     with Session(headless=True) as session:
         for cfg in cfgs:
             site = cfg["site"]
-            out_path = os.path.join(OUTDIR, f"wp003_{site}.jsonl")
+            out_path = os.path.join(OUTDIR, f"{STEM}_{site}.jsonl")
             site_total = 0
             with open(out_path, "w") as out:
                 ntraj = max(2, args.trajectories)
