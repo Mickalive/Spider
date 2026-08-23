@@ -1,130 +1,87 @@
-# SPIDER — Graph Ecosystem Map (Team Graph, §11 deliverable)
+# SPIDER — Graph Ecosystem Map
 
-Date: 2026-08-23. Sources inspected: Stagehand/Browserbase engineering blog +
-`ActCache.ts`/`AgentCache.ts` source & DeepWiki, AWM paper (arXiv:2409.07429,
-ICML'25) + repo, Healenium repos/docs (proxy architecture, scoring config),
-Skyvern docs/blog/PRs. Items marked [unverified] rely on general knowledge
-without primary-source inspection this run.
+Date: 2026-08-23. Run-1 survey, subsequently audit-qualified.
 
-## 1. What exists, technically
+Sources inspected during the run included Stagehand/Browserbase engineering
+material and source, AWM paper/repository, Healenium material, and Skyvern
+material. Items not inspected from primary sources remain explicitly
+unverified.
 
-### 1.1 Selector/action caching with self-healing locators
-**Stagehand (Browserbase)** — the most explicit production design:
-- *Stored*: resolved Playwright/XPath selectors + metadata per atomic
-  `act()` instruction; cache key = SHA256(normalized URL + trimmed
-  instruction + variable keys); entries versioned (`version: 1`);
-  server-side entries TTL 48h, project-scoped.
-- *Reuse*: on matching key, passive page-fingerprint comparison must clear
-  a safety threshold before executing cached selector with **zero LLM
-  calls**; reported up to ~80% speedup run1→run2.
-- *Healing*: if cached selector fails during replay, fresh LLM inference
-  re-resolves the action and the cache entry is rewritten ("self-heal");
-  a 2025 fix (PR #1472) specifically addressed healed selectors not being
-  persisted — evidence that healing-persistence is a live engineering issue.
-- *Granularity*: single action or whole agent step sequence
-  (AgentCache: goto/scroll/wait/fillForm/keys steps).
-- *Known failure modes* (their own words): pages that don't repeat cleanly,
-  randomized URLs defeating normalization, semantic change without obvious
-  DOM change — "the harder class of problems for any passive equivalence check".
+## 1. What the inspected systems appear to cover
 
-**Healenium** (test automation): stores *etalon* selectors + DOM subtrees in
-PostgreSQL; on locator failure parses current page into tree, scores
-candidates vs etalon (key attributes + tree diff), score-cap ≈0.5–0.6,
-persists successful healings for cross-session reuse via central service.
-Granularity: element locator only. No task/goal semantics.
+### Selector/action caching
 
-### 1.2 Procedural memory / induced workflows
-**AWM** (Wang et al., ICML 2025): LLM-induced reusable sub-routines from
-successful trajectories (offline from annotated data, online from judged
-successes); workflows = abstracted text/code snippets injected into prompt
-memory. Results: WebArena +12.0 abs / +51.1% rel success; Mind2Web +24.6%
-rel step SR; cross-website/domain gaps widen advantage (+8.9–14.0 abs).
-Snowball composition: induced workflows serve as subgoals for further
-induced workflows. *Not persisted as executable artifacts; no confidence/
-freshness metadata; retrieval = all-in-context.*
+**Stagehand / Browserbase**: caches resolved interaction mechanics and can reuse
+known actions without repeating the same model inference. This establishes that
+selector/action caching itself is not a SPIDER novelty.
 
-**Synapse** [unverified details]: trajectory-as-exemplars retrieval — full
-successful trajectories selected by similarity as few-shot exemplars.
-AWM's own ablation argues abstract sub-routines transfer better than whole
-trajectories (element accuracy +5.0–9.0 over Synapse-style baselines).
+**Healenium**: stores locator/DOM information and attempts self-healing after
+locator drift. This is relevant to SPIDER's staleness/revalidation problem.
 
-**ExpeL / AutoGuide** [unverified]: insight/rule extraction from experience
-pools; natural-language guidelines rather than executable skills.
+### Procedural memory / workflows
 
-### 1.3 Workflow mining / RPA-style replay
-**Skyvern**: visual-first agent; workflow builder chains parametrized blocks
-(login/nav/download/validation/loops); every run produces full trace used as
-diagnostic instrument ("3 consecutive auth failures on same portal = portal
-changed, not noise"); credentials vaulted, never sent to LLM. Explicitly
-anti-selector: reads live state each run — i.e., deliberately does NOT cache
-interaction mechanics; caches *workflow definitions* only.
-**Selenium IDE / classic RPA**: literal command replay; zero adaptation;
-brittleness is the motivating cautionary tale across all newer systems.
+**AWM**: induces reusable abstract workflows from successful trajectories and
+reports transfer benefits. This is directly relevant prior art for reusable
+procedural abstraction and means SPIDER must beat strong workflow-memory
+baselines rather than compare only with raw replay.
 
-### 1.4 Session continuity
-Playwright `storageState`, Skyvern `browser_profile_id` (authenticated state
-carried forward between runs), user-data dirs. Session persistence is
-orthogonal operational knowledge that all systems treat as infrastructure,
-not as addressable knowledge.
+**Skyvern / RPA-style workflows**: preserve workflow definitions and execution
+traces; useful comparison for replay, state re-reading and recovery behavior.
 
-### 1.5 Semantic retrieval over operational memory
-MemGPT/Letta, Zep/**Graphiti** temporal knowledge graphs [unverified]:
-episodic+semantic stores with time-aware edges; used for conversation
-memory more than web-action memory. Embedding retrieval over past tasks is
-standard practice but no inspected system couples embeddings to
-*executable interaction fragments with empirical confidence*.
+### Session continuity / semantic memory
 
-### 1.6 Browser→API distillation
-No mature public system found that automatically distills discovered network
-endpoints into preferred API routes replacing UI replay [unverified —
-closest: Stagehand network-level security hooks, Skyvern structured output;
-opportunity gap].
+Browser storage/session persistence and semantic retrieval over prior
+experience are established neighboring mechanisms. They must be treated as
+baselines/components rather than rediscovered under new names.
 
-## 2. Cross-cutting synthesis
+## 2. Audit-qualified gap statement
 
-| Question | Field consensus |
-|---|---|
-| What is cached | selectors (Stagehand), etalon locators (Healenium), workflow text (AWM), workflow definitions (Skyvern) |
-| Granularity | element → action → workflow; nothing below action, rarely above site |
-| Retrieval | exact key match (Stagehand), all-in-context (AWM), none (Skyvern re-reads) |
-| Confidence | binary hit/miss; Healenium score-cap closest to graded |
-| Freshness | fixed TTL (48h) or none; no measured half-life anywhere |
-| Risk classes | handled ad hoc (credential vaulting) not represented per-fragment |
-| Transfer | AWM shows cross-task/site transfer of ABSTRACT workflows (+8.9–14 abs); selector caches are strictly site-local by construction |
+The original report said, in effect, that nobody else had the exact SPIDER
+combination. That was too strong for the survey actually performed.
 
-## 3. The gap (what still gets rediscovered)
+The defensible statement is:
 
-1. Every system rediscovers *how to interact* (selectors) OR re-reads the
-   page entirely; none accumulate **validated transition fragments with
-   empirical success statistics**.
-2. No system represents **fragments below the task level keyed by
-   subgoal**, retrievable when a NEW task passes through the same subgoal
-   (our Run-1 composite result shows this yields ~70% action reuse).
-3. No system carries **confidence/freshness/risk/provenance metadata** on
-   mechanical knowledge; staleness is either TTL-guessed (48h) or
-   discovered by failure.
-4. No shared, model-agnostic, externally queryable layer: memories are
-   product-internal (Browserbase project scope, prompt context, vendor DB).
-5. Failure/recovery knowledge: traces are archived (Skyvern) but recovery
-   procedures are not first-class reusable objects.
+> **Among the systems inspected in Run 1, the team did not identify the exact
+> combination of subgoal-addressable executable fragments, empirical
+> validation statistics, freshness/provenance metadata, and consumption by an
+> external model-agnostic layer.**
 
-## 4. What SPIDER adds (differentiators consistent with §7-10,13)
+This is a research hypothesis about differentiation, **not** a novelty claim.
+A broader paper/repository/product search is required before using language such
+as "nobody else" or claiming technical novelty.
 
-- Subgoal-keyed fragment graph with entry-state anchors + reset-retry glue
-  (validated in Run 1: entry-state mismatch was the dominant naive-replay
-  failure; glue conversion recovered it at 3 novel actions).
-- Empirical confidence = Laplace rate × recency weight (parameterized to be
-  MEASURED, G8/G9, not asserted).
-- Risk/destructive-class flags per fragment (design present, untested).
-- Model/policy-independent consumption demonstrated: store built by one
-  policy, consumed successfully by another.
-- API-route nodes as peers of browser fragments (G7; unbuilt).
+## 3. What still appears worth testing
 
-## 5. Honest positioning
+1. Whether fragments below the whole-task level can be retrieved for genuinely
+   unseen tasks without hand-selecting them.
+2. Whether empirical success/failure and freshness signals improve reuse over
+   simple TTL or retry-on-failure strategies.
+3. Whether operational knowledge can be consumed across different foundation
+   models, not merely across two scripted policies.
+4. Whether recovery procedures should be first-class reusable objects.
+5. Whether discovered stable APIs can become alternative execution edges to UI
+   routes.
+6. Whether the external cumulative layer provides value beyond AWM-like
+   workflow memory, nearest-route retrieval and existing browser caches.
 
-SPIDER Run-1 speedups (8.5× wall on exact replay) are consistent in KIND
-with Stagehand's reported ~80% two-run speedups; our contribution beyond
-the field is the fragment/composition/metadata layer, not the caching idea.
-The strongest published evidence that procedural abstraction pays remains
-AWM; SPIDER's differentiator is making that abstraction mechanical,
-addressable, and statistically maintained OUTSIDE any single model.
+## 4. Run-1 SPIDER evidence, after audit
+
+- Exact known-route replay eliminated novel decisions on the matched tasks.
+- The originally reported **8.5× wall-clock speedup is withdrawn**. Matched
+  cold/replay wall time was ~1.002× because this scripted experiment had no
+  costly LLM decision loop.
+- Three selected composite tasks used 16 reused actions out of 23 total
+  actions (**69.6% reuse**). This is a proof that the implemented fragment
+  mechanism can compose in the prepared setup; it does not yet demonstrate
+  automatic decomposition of arbitrary unseen tasks.
+- `agentG` knowledge was consumed by `agentB`, which is a useful policy-format
+  proxy but **not yet cross-model transfer**.
+- The initial confidence implementation had a counter/timestamp initialization
+  bug and therefore provides no calibrated run-1 confidence evidence.
+
+## 5. Positioning rule going forward
+
+Treat the ecosystem map as a living falsifiable document. For every claimed
+SPIDER differentiator, record the strongest known competing mechanism and test
+against it. Do not infer novelty from failure to find a competitor in a small
+survey.
