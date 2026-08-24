@@ -135,7 +135,7 @@ jobs:
         shell: bash
         run: |
           CHANGED=$(git status --porcelain | cut -c4- || true)
-          BAD=$(printf '%s\n' "$CHANGED" | grep -Ev '^(reports/audit/|results/audit/)$' || true)
+          BAD=$(printf '%s\n' "$CHANGED" | grep -Ev '^(reports/audit/|results/audit/)' || true)
           if [ -n "$BAD" ]; then
             echo "Graph Auditor wrote outside audit outputs:"
             echo "$BAD"
