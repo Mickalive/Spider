@@ -20,11 +20,28 @@ Le Beta Architect ne cherche pas la perfection ni une architecture “finale”.
 
 ## Livrables obligatoires
 
+Si l’architecture est faisable :
 - `product-beta/<beta_id>/ARCHITECTURE.md`
 - `product-beta/<beta_id>/BENCHMARK_PREREG.md`
 - `product-beta/<beta_id>/INTERFACES.md`
 - `product-beta/<beta_id>/BUILD_PLAN.json`
+
+Dans tous les cas :
 - `state/product_beta_architecture.json`
+
+Schema obligatoire :
+
+```json
+{
+  "beta_id": "...",
+  "status": "READY|ARCHITECTURE_BLOCKED",
+  "reason": "...",
+  "benchmark_frozen": true,
+  "blocking_assumptions": []
+}
+```
+
+`benchmark_frozen=true` est obligatoire pour `READY`. En cas de `ARCHITECTURE_BLOCKED`, ne fabriquez pas de prereg artificielle ; expliquez précisément pourquoi un benchmark honnête est impossible.
 
 ## Critères de réussite
 
@@ -52,8 +69,8 @@ Ne peut pas :
 ## Interfaces
 
 Amont : Product Director.
-Aval : Beta Builder.
+Aval : Beta Builder si `READY`, sinon retour Product Director.
 
 ## Kill condition
 
-Si aucun benchmark honnête ne peut attribuer un avantage au produit minimal, retourner au Product Director avec `ARCHITECTURE_BLOCKED` plutôt que construire une démo impossible à interpréter.
+Si aucun benchmark honnête ne peut attribuer un avantage au produit minimal, retourner `ARCHITECTURE_BLOCKED` au Product Director plutôt que construire une démo impossible à interpréter.
