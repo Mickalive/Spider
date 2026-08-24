@@ -1,0 +1,64 @@
+name: SPIDER Cleanup Audit-Repair Installer Runs
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.spider/maintenance/cleanup-audit-repair-runs.json'
+
+permissions:
+  actions: write
+  contents: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Delete only obsolete audit-repair installer red runs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          RUNS=$(gh run list --repo "$GITHUB_REPOSITORY" --limit 100 \
+            --json databaseId,workflowName,status,conclusion,createdAt)
+          mkdir -p .spider/maintenance
+          : > .spider/maintenance/audit-repair-run-cleanup.jsonl
+          deleted=0
+          while IFS=$'\t' read -r id wf status conclusion created; do
+            [[ "$wf" == "SPIDER Install Audit Repair Loop" ]] || continue
+            [[ "$status" == "completed" ]] || continue
+            case "$conclusion" in
+              failure|cancelled|timed_out|startup_failure|stale|action_required) ;;
+              *) continue ;;
+            esac
+            echo "Deleting obsolete maintenance run $id ($conclusion)"
+            gh run delete "$id" --repo "$GITHUB_REPOSITORY"
+            jq -cn --argjson id "$id" --arg conclusion "$conclusion" --arg created "$created" \
+              '{run_id:$id,workflow:"SPIDER Install Audit Repair Loop",conclusion:$conclusion,created_at:$created}' \
+              >> .spider/maintenance/audit-repair-run-cleanup.jsonl
+            deleted=$((deleted+1))
+          done < <(jq -r '.[] | [.databaseId,.workflowName,.status,(.conclusion // ""),.createdAt] | @tsv' <<<"$RUNS")
+          jq -s --argjson deleted "$deleted" '{deleted_count:$deleted,deleted_runs:.}' \
+            .spider/maintenance/audit-repair-run-cleanup.jsonl \
+            > .spider/maintenance/audit-repair-run-cleanup-receipt.json
+          rm .spider/maintenance/audit-repair-run-cleanup.jsonl
+          cat .spider/maintenance/audit-repair-run-cleanup-receipt.json
+
+      - name: Commit receipt and remove one-shot cleanup files
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "spider-maintenance"
+          git config user.email "spider-maintenance@autonomous.local"
+          rm -f .github/workflows/_cleanup-audit-repair-runs.yml
+          rm -f .spider/maintenance/cleanup-audit-repair-runs.json
+          git add -A
+          git commit -m "maintenance: remove obsolete audit-repair installer runs"
+          git push origin HEAD:main
