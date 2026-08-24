@@ -1,6 +1,0 @@
-{
-  "graph": "E1/E2 first, then E3 if still informative",
-  "physics": "WP-005 fine-grained response transfer with atomic action attribution and action-only baseline",
-  "requested_at": "2026-08-24T06:11:00+02:00",
-  "trigger_revision": 2
-}
