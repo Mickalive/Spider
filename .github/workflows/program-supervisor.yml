@@ -6,136 +6,114 @@ on:
       - SPIDER Graph Lane
       - SPIDER Physics Lane
     types: [completed]
+  schedule:
+    - cron: "*/5 * * * *"
   workflow_dispatch:
 
 permissions:
   actions: write
-  contents: read
+  contents: write
 
 concurrency:
   group: spider-research-program-supervisor
   cancel-in-progress: false
 
 jobs:
-  launch_director_recommended_program:
-    name: Launch Director-recommended next program
+  supervise_program_succession:
+    name: Supervise Director-recommended programs
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - name: Resolve source lane
-        id: lane
-        shell: bash
+      - name: Checkout main for idempotency receipts
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Launch any unconsumed Director recommendation
         env:
+          GH_TOKEN: ${{ github.token }}
+          EVENT_NAME: ${{ github.event_name }}
           SOURCE_WORKFLOW: ${{ github.event.workflow_run.name || '' }}
           SOURCE_RUN_ID: ${{ github.event.workflow_run.id || '' }}
-        run: |
-          set -euo pipefail
-
-          case "$SOURCE_WORKFLOW" in
-            "SPIDER Graph Lane")
-              echo "lane=graph" >> "$GITHUB_OUTPUT"
-              echo "branch=lab/graph" >> "$GITHUB_OUTPUT"
-              echo "state=state/graph_loop.json" >> "$GITHUB_OUTPUT"
-              echo "workflow=graph-loop.yml" >> "$GITHUB_OUTPUT"
-              ;;
-            "SPIDER Physics Lane")
-              echo "lane=physics" >> "$GITHUB_OUTPUT"
-              echo "branch=lab/physics" >> "$GITHUB_OUTPUT"
-              echo "state=state/physics_loop.json" >> "$GITHUB_OUTPUT"
-              echo "workflow=physics-loop.yml" >> "$GITHUB_OUTPUT"
-              ;;
-            *)
-              echo "No workflow_run lane source (manual supervisor run or unrelated source); nothing to launch."
-              echo "lane=" >> "$GITHUB_OUTPUT"
-              ;;
-          esac
-          echo "source_run_id=$SOURCE_RUN_ID" >> "$GITHUB_OUTPUT"
-
-      - name: Read accepted Director state
-        if: steps.lane.outputs.lane != ''
-        id: state
-        env:
-          GH_TOKEN: ${{ github.token }}
-          BRANCH: ${{ steps.lane.outputs.branch }}
-          STATE_PATH: ${{ steps.lane.outputs.state }}
-          SOURCE_RUN_ID: ${{ steps.lane.outputs.source_run_id }}
         shell: bash
         run: |
           set -euo pipefail
+          mkdir -p .spider/program-receipts
 
-          API_PATH="repos/${GITHUB_REPOSITORY}/contents/${STATE_PATH}?ref=${BRANCH}"
-          RAW=$(gh api "$API_PATH" --jq '.content' | tr -d '\n' | base64 -d)
-          printf '%s\n' "$RAW" > /tmp/lane_state.json
+          handle_lane() {
+            local lane="$1" branch="$2" state_path="$3" workflow="$4" expected_name="$5"
+            local raw status cont completed_by launch program_id title question active receipt note
 
-          STATUS=$(jq -r '.program_status // empty' /tmp/lane_state.json)
-          CONTINUE=$(jq -r '.continue // false' /tmp/lane_state.json)
-          COMPLETED_BY=$(jq -r '.program_completed_by_run_id // empty | tostring' /tmp/lane_state.json)
-          LAUNCH=$(jq -r '.next_program.launch // false' /tmp/lane_state.json)
+            if [[ "$EVENT_NAME" == "workflow_run" && "$SOURCE_WORKFLOW" != "$expected_name" ]]; then
+              return 0
+            fi
 
-          echo "program_status=$STATUS"
-          echo "continue=$CONTINUE"
-          echo "completed_by=$COMPLETED_BY"
-          echo "next_program.launch=$LAUNCH"
+            set +e
+            raw=$(gh api "repos/${GITHUB_REPOSITORY}/contents/${state_path}?ref=${branch}" --jq '.content' 2>/dev/null | tr -d '\n' | base64 -d 2>/dev/null)
+            rc=$?
+            set -e
+            if [[ "$rc" -ne 0 || -z "$raw" ]]; then
+              echo "$lane: accepted state unavailable; nothing to do."
+              return 0
+            fi
 
-          SHOULD=false
-          if [[ "$STATUS" == "COMPLETE" && "$CONTINUE" == "false" && "$LAUNCH" == "true" && "$COMPLETED_BY" == "$SOURCE_RUN_ID" ]]; then
-            SHOULD=true
+            status=$(jq -r '.program_status // empty' <<<"$raw")
+            cont=$(jq -r '.continue // false' <<<"$raw")
+            completed_by=$(jq -r '.program_completed_by_run_id // empty | tostring' <<<"$raw")
+            launch=$(jq -r '.next_program.launch // false' <<<"$raw")
+            program_id=$(jq -r '.next_program.id // empty' <<<"$raw")
+            title=$(jq -r '.next_program.title // empty' <<<"$raw")
+            question=$(jq -r '.next_program.question // empty' <<<"$raw")
+
+            if [[ "$status" != "COMPLETE" || "$cont" != "false" || "$launch" != "true" || -z "$completed_by" || -z "$program_id" || -z "$title" || -z "$question" ]]; then
+              echo "$lane: no complete unambiguous next-program recommendation."
+              return 0
+            fi
+
+            if [[ "$EVENT_NAME" == "workflow_run" && "$SOURCE_RUN_ID" != "$completed_by" ]]; then
+              echo "$lane: completion belongs to run $completed_by, not event run $SOURCE_RUN_ID; refusing mismatched consumption."
+              return 0
+            fi
+
+            receipt=".spider/program-receipts/${lane}-${completed_by}.json"
+            if [[ -f "$receipt" ]]; then
+              echo "$lane: recommendation from run $completed_by already consumed."
+              return 0
+            fi
+
+            active=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow "$workflow" --limit 30 \
+              --json status \
+              --jq '[.[] | select(.status == "queued" or .status == "in_progress" or .status == "requested" or .status == "waiting" or .status == "pending")] | length')
+            if [[ "$active" -gt 0 ]]; then
+              echo "$lane: lane already active/queued; schedule will retry after it becomes idle."
+              return 0
+            fi
+
+            note="AUTO PROGRAM SUCCESSION from Director run ${completed_by}. Program ${program_id}: ${title}. Question: ${question}. The accepted lane directive is authoritative; do not reinterpret this note as a demand for a positive result."
+            gh workflow run "$workflow" --repo "$GITHUB_REPOSITORY" --ref main \
+              -f human_note="$note" \
+              -f cycle_index=1 \
+              -f max_cycles=0
+
+            jq -n \
+              --arg lane "$lane" \
+              --arg completed_by "$completed_by" \
+              --arg program_id "$program_id" \
+              --arg title "$title" \
+              --arg dispatched_at "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+              '{lane:$lane,completed_program_run_id:$completed_by,next_program_id:$program_id,next_program_title:$title,dispatched_at:$dispatched_at}' > "$receipt"
+            echo "$lane: launched $program_id from completed run $completed_by."
+          }
+
+          handle_lane graph lab/graph state/graph_loop.json graph-loop.yml "SPIDER Graph Lane"
+          handle_lane physics lab/physics state/physics_loop.json physics-loop.yml "SPIDER Physics Lane"
+
+          if ! git diff --quiet -- .spider/program-receipts || [[ -n "$(git ls-files --others --exclude-standard .spider/program-receipts)" ]]; then
+            git config user.name "spider-program-supervisor"
+            git config user.email "spider-program-supervisor@autonomous.local"
+            git pull --rebase origin main
+            git add .spider/program-receipts
+            git commit -m "state: record consumed research-program recommendation"
+            git push origin HEAD:main
           fi
-
-          if [[ "$SHOULD" == "true" ]]; then
-            for field in id title question rationale stop_condition; do
-              VALUE=$(jq -r ".next_program.${field} // empty" /tmp/lane_state.json)
-              if [[ -z "$VALUE" || "$VALUE" == "null" ]]; then
-                echo "::error::Director requested automatic succession but next_program.${field} is missing."
-                exit 1
-              fi
-            done
-          fi
-
-          echo "should_launch=$SHOULD" >> "$GITHUB_OUTPUT"
-          echo "title=$(jq -r '.next_program.title // ""' /tmp/lane_state.json)" >> "$GITHUB_OUTPUT"
-          echo "question=$(jq -r '.next_program.question // ""' /tmp/lane_state.json)" >> "$GITHUB_OUTPUT"
-          echo "program_id=$(jq -r '.next_program.id // ""' /tmp/lane_state.json)" >> "$GITHUB_OUTPUT"
-
-      - name: Guard against duplicate active lane run
-        if: steps.state.outputs.should_launch == 'true'
-        id: guard
-        env:
-          GH_TOKEN: ${{ github.token }}
-          WORKFLOW_FILE: ${{ steps.lane.outputs.workflow }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          ACTIVE=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow "$WORKFLOW_FILE" --limit 30 \
-            --json status \
-            --jq '[.[] | select(.status == "queued" or .status == "in_progress" or .status == "requested" or .status == "waiting" or .status == "pending")] | length')
-          echo "active=$ACTIVE" >> "$GITHUB_OUTPUT"
-          if [[ "$ACTIVE" -gt 0 ]]; then
-            echo "Lane already active or queued; refusing duplicate automatic program launch."
-          fi
-
-      - name: Launch first cycle of next research program
-        if: steps.state.outputs.should_launch == 'true' && steps.guard.outputs.active == '0'
-        env:
-          GH_TOKEN: ${{ github.token }}
-          WORKFLOW_FILE: ${{ steps.lane.outputs.workflow }}
-          PROGRAM_ID: ${{ steps.state.outputs.program_id }}
-          PROGRAM_TITLE: ${{ steps.state.outputs.title }}
-          PROGRAM_QUESTION: ${{ steps.state.outputs.question }}
-          SOURCE_RUN_ID: ${{ steps.lane.outputs.source_run_id }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          NOTE="AUTO PROGRAM SUCCESSION from Director run ${SOURCE_RUN_ID}. Program ${PROGRAM_ID}: ${PROGRAM_TITLE}. Question: ${PROGRAM_QUESTION}. The accepted lane directive is authoritative; do not reinterpret this note as a demand for a positive result."
-          gh workflow run "$WORKFLOW_FILE" --repo "$GITHUB_REPOSITORY" --ref main \
-            -f human_note="$NOTE" \
-            -f cycle_index=1 \
-            -f max_cycles=0
-          echo "Launched next program: ${PROGRAM_ID} — ${PROGRAM_TITLE}"
-
-      - name: Explain no-launch decisions
-        if: steps.lane.outputs.lane != '' && steps.state.outputs.should_launch != 'true'
-        shell: bash
-        run: |
-          echo "No automatic program succession for this completed run."
-          echo "A launch requires COMPLETE + continue=false + next_program.launch=true + program_completed_by_run_id equal to this exact workflow run ID."
