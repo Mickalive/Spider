@@ -1,0 +1,3273 @@
+{
+ "cycle": "32670239235",
+ "variant": "run2b",
+ "changes_vs_run2": [
+  "C1-keyword-prior-scale",
+  "C2-product-accept-guard"
+ ],
+ "ts": "2026-08-24T00:50:39Z",
+ "commit": "c55aa9c1b93a",
+ "seed": 20260823,
+ "preregistered": {
+  "tau": 0.25,
+  "content_w": 1.0,
+  "prov_w": 0.4,
+  "min_content_hits": 1,
+  "traj_min_hits": 1,
+  "bfs_max_depth": 3,
+  "bfs_frontier_cap": 60,
+  "conf_min": 0.35,
+  "primary_endpoints": [
+   "mean novel actions per composite target per method",
+   "composite success rate per method",
+   "addressing unknown rate (fragment method)",
+   "retrieval overhead ms per lookup"
+  ],
+  "exploratory": [
+   "prospective confidence reliability"
+  ]
+ },
+ "preflight": {
+  "books": true,
+  "quotes": true,
+  "internet": true
+ },
+ "config": {
+  "methods": [
+   "cold",
+   "trajectory",
+   "graph",
+   "fragment"
+  ],
+  "cal_rounds": 2,
+  "cal_max_fragments": 20
+ },
+ "ledger": [
+  {
+   "i": 1,
+   "phase": "production",
+   "gen": 1,
+   "agent": "agentG",
+   "task": "B_travel_first_book",
+   "condition": "cold",
+   "status": "success",
+   "actions": 2,
+   "novel": 2,
+   "reused": 0,
+   "failed": 0,
+   "recoveries": 0,
+   "loads": 3,
+   "decision_points": 201,
+   "wall_ms": 1957,
+   "subgoals_ok": 2,
+   "subgoals_total": 2,
+   "store": {
+    "states": 3,
+    "transitions": 2,
+    "actions": 2,
+    "fragments": 2
+   }
+  },
+  {
+   "i": 2,
+   "phase": "production",
+   "gen": 1,
+   "agent": "agentG",
+   "task": "B_fiction_paged",
+   "condition": "cold",
+   "status": "success",
+   "actions": 3,
+   "novel": 3,
+   "reused": 0,
+   "failed": 0,
+   "recoveries": 0,
+   "loads": 4,
+   "decision_points": 250,
+   "wall_ms": 2627,
+   "subgoals_ok": 2,
+   "subgoals_total": 2,
+   "store": {
+    "states": 6,
+    "transitions": 5,
+    "actions": 4,
+    "fragments": 5
+   }
+  },
+  {
+   "i": 3,
+   "phase": "production",
+   "gen": 1,
+   "agent": "agentG",
+   "task": "B_romance_first_book",
+   "condition": "cold",
+   "status": "success",
+   "actions": 2,
+   "novel": 2,
+   "reused": 0,
+   "failed": 0,
+   "recoveries": 0,
+   "loads": 3,
+   "decision_points": 229,
+   "wall_ms": 1919,
+   "subgoals_ok": 2,
+   "subgoals_total": 2,
+   "store": {
+    "states": 8,
+    "transitions": 7,
+    "actions": 5,
+    "fragments": 7
+   }
+  },
+  {
+   "i": 4,
+   "phase": "production",
+   "gen": 1,
+   "agent": "agentG",
+   "task": "Q_login",
+   "condition": "cold",
+   "status": "success",
+   "actions": 4,
+   "novel": 4,
+   "reused": 0,
+   "failed": 0,
+   "recoveries": 0,
+   "loads": 3,
+   "decision_points": 53,
+   "wall_ms": 2045,
+   "subgoals_ok": 1,
+   "subgoals_total": 1,
+   "store": {
+    "states": 11,
+    "transitions": 11,
+    "actions": 9,
+    "fragments": 9
+   }
+  },
+  {
+   "i": 5,
+   "phase": "production",
+   "gen": 1,
+   "agent": "agentG",
+   "task": "I_login",
+   "condition": "cold",
+   "status": "success",
+   "actions": 4,
+   "novel": 4,
+   "reused": 0,
+   "failed": 0,
+   "recoveries": 0,
+   "loads": 3,
+   "decision_points": 44,
+   "wall_ms": 2583,
+   "subgoals_ok": 1,
+   "subgoals_total": 1,
+   "store": {
+    "states": 14,
+    "transitions": 15,
+    "actions": 13,
+    "fragments": 11
+   }
+  },
+  {
+   "i": 6,
+   "phase": "production",
+   "gen": 1,
+   "agent": "agentG",
+   "task": "I_checkboxes_check_first",
+   "condition": "cold",
+   "status": "success",
+   "actions": 2,
+   "novel": 2,
+   "reused": 0,
+   "failed": 0,
+   "recoveries": 0,
+   "loads": 2,
+   "decision_points": 45,
+   "wall_ms": 1972,
+   "subgoals_ok": 2,
+   "subgoals_total": 2,
+   "store": {
+    "states": 15,
+    "transitions": 17,
+    "actions": 15,
+    "fragments": 13
+   }
+  },
+  {
+   "i": 7,
+   "phase": "production",
+   "gen": 1,
+   "agent": "agentG",
+   "task": "I_dynamic_loading_ex1",
+   "condition": "cold",
+   "status": "success",
+   "actions": 3,
+   "novel": 3,
+   "reused": 0,
+   "failed": 0,
+   "recoveries": 0,
+   "loads": 3,
+   "decision_points": 47,
+   "wall_ms": 12531,
+   "subgoals_ok": 3,
+   "subgoals_total": 3,
+   "store": {
+    "states": 18,
+    "transitions": 20,
+    "actions": 18,
+    "fragments": 16
+   }
+  },
+  {
+   "i": 8,
+   "phase": "production",
+   "gen": 1,
+   "agent": "agentG",
+   "task": "I_key_presses_a",
+   "condition": "cold",
+   "status": "success",
+   "actions": 2,
+   "novel": 2,
+   "reused": 0,
+   "failed": 0,
+   "recoveries": 0,
+   "loads": 2,
+   "decision_points": 45,
+   "wall_ms": 2817,
+   "subgoals_ok": 2,
+   "subgoals_total": 2,
+   "store": {
+    "states": 19,
+    "transitions": 22,
+    "actions": 20,
+    "fragments": 18
+   }
+  },
+  {
+   "i": 9,
+   "phase": "production",
+   "gen": 1,
+   "agent": "agentG",
+   "task": "I_status_200",
+   "condition": "cold",
+   "status": "success",
+   "actions": 2,
+   "novel": 2,
+   "reused": 0,
+   "failed": 0,
+   "recoveries": 0,
+   "loads": 3,
+   "decision_points": 48,
+   "wall_ms": 2068,
+   "subgoals_ok": 2,
+   "subgoals_total": 2,
+   "store": {
+    "states": 21,
+    "transitions": 24,
+    "actions": 22,
+    "fragments": 20
+   }
+  },
+  {
+   "i": 10,
+   "phase": "production",
+   "gen": 1,
+   "agent": "agentG",
+   "task": "Q_tag_love_nav",
+   "condition": "cold",
+   "status": "success",
+   "actions": 1,
+   "novel": 1,
+   "reused": 0,
+   "failed": 0,
+   "recoveries": 0,
+   "loads": 2,
+   "decision_points": 53,
+   "wall_ms": 1089,
+   "subgoals_ok": 1,
+   "subgoals_total": 1,
+   "store": {
+    "states": 22,
+    "transitions": 25,
+    "actions": 23,
+    "fragments": 21
+   }
+  },
+  {
+   "i": 11,
+   "phase": "target",
+   "gen": 2,
+   "agent": "agentB",
+   "task": "C_books_fantasy_paged_product",
+   "condition": "blind",
+   "status": "partial",
+   "actions": 95,
+   "novel": 91,
+   "reused": 4,
+   "failed": 0,
+   "recoveries": 0,
+   "loads": 93,
+   "decision_points": 6346,
+   "wall_ms": 50521,
+   "subgoals_ok": 2,
+   "subgoals_total": 3,
+   "store": {
+    "states": 43,
+    "transitions": 119,
+    "actions": 45,
+    "fragments": 23
+   }
+  },
+  {
+   "i": 12,
+   "phase": "target",
+   "gen": 2,
+   "agent": "agentB",
+   "task": "C_books_fantasy_paged_product",
+   "condition": "blind",
+   "status": "partial",
+   "actions": 97,
+   "novel": 97,
+   "reused": 0,
+   "failed": 0,
+   "recoveries": 0,
+   "loads": 94,
+   "decision_points": 7146,
+   "wall_ms": 48128,
+   "subgoals_ok": 2,
+   "subgoals_total": 3,
+   "store": {
+    "states": 27,
+    "transitions": 97,
+    "actions": 25,
+    "fragments": 3
+   }
+  },
+  {
+   "i": 13,
+   "phase": "target",
+   "gen": 2,
+   "agent": "agentB",
+   "task": "C_books_fantasy_paged_product",
+   "condition": "blind",
+   "status": "partial",
+   "actions": 98,
+   "novel": 92,
+   "reused": 6,
+   "failed": 0,
+   "recoveries": 1,
+   "loads": 97,
+   "decision_points": 6368,
+   "wall_ms": 50283,
+   "subgoals_ok": 2,
+   "subgoals_total": 3,
+   "store": {
+    "states": 45,
+    "transitions": 122,
+    "actions": 45,
+    "fragments": 23
+   }
+  },
+  {
+   "i": 14,
+   "phase": "target",
+   "gen": 2,
+   "agent": "agentB",
+   "task": "C_books_fantasy_paged_product",
+   "condition": "blind",
+   "status": "partial",
+   "actions": 100,
+   "novel": 94,
+   "reused": 6,
+   "failed": 0,
+   "recoveries": 2,
+   "loads": 99,
+   "decision_points": 6452,
+   "wall_ms": 51895,
+   "subgoals_ok": 2,
+   "subgoals_total": 3,
+   "store": {
+    "states": 43,
+    "transitions": 123,
+    "actions": 45,
+    "fragments": 23
+   }
+  },
+  {
+   "i": 15,
+   "phase": "target",
+   "gen": 2,
+   "agent": "agentB",
+   "task": "C_internet_login_checkboxes",
+   "condition": "blind",
+   "status": "partial",
+   "actions": 180,
+   "novel": 178,
+   "reused": 2,
+   "failed": 32,
+   "recoveries": 1,
+   "loads": 6,
+   "decision_points": 303,
+   "wall_ms": 593928,
+   "subgoals_ok": 1,
+   "subgoals_total": 3,
+   "store": {
+    "states": 46,
+    "transitions": 302,
+    "actions": 47,
+    "fragments": 24
+   }
+  },
+  {
+   "i": 16,
+   "phase": "target",
+   "gen": 2,
+   "agent": "agentB",
+   "task": "C_internet_login_checkboxes",
+   "condition": "blind",
+   "status": "success",
+   "actions": 7,
+   "novel": 2,
+   "reused": 5,
+   "failed": 0,
+   "recoveries": 0,
+   "loads": 5,
+   "decision_points": 1,
+   "wall_ms": 3914,
+   "subgoals_ok": 3,
+   "subgoals_total": 3,
+   "store": {
+    "states": 43,
+    "transitions": 125,
+    "actions": 45,
+    "fragments": 26
+   }
+  },
+  {
+   "i": 17,
+   "phase": "target",
+   "gen": 2,
+   "agent": "agentB",
+   "task": "C_internet_login_checkboxes",
+   "condition": "blind",
+   "status": "partial",
+   "actions": 91,
+   "novel": 81,
+   "reused": 10,
+   "failed": 15,
+   "recoveries": 1,
+   "loads": 9,
+   "decision_points": 138,
+   "wall_ms": 284798,
+   "subgoals_ok": 2,
+   "subgoals_total": 3,
+   "store": {
+    "states": 46,
+    "transitions": 211,
+    "actions": 47,
+    "fragments": 25
+   }
+  },
+  {
+   "i": 18,
+   "phase": "target",
+   "gen": 2,
+   "agent": "agentB",
+   "task": "C_internet_login_checkboxes",
+   "condition": "blind",
+   "status": "partial",
+   "actions": 275,
+   "novel": 275,
+   "reused": 0,
+   "failed": 0,
+   "recoveries": 0,
+   "loads": 18,
+   "decision_points": 6336,
+   "wall_ms": 168423,
+   "subgoals_ok": 0,
+   "subgoals_total": 3,
+   "store": {
+    "states": 95,
+    "transitions": 367,
+    "actions": 43,
+    "fragments": 3
+   }
+  },
+  {
+   "i": 19,
+   "phase": "target",
+   "gen": 2,
+   "agent": "agentB",
+   "task": "C_quotes_login_love_p2",
+   "condition": "blind",
+   "status": "success",
+   "actions": 63,
+   "novel": 58,
+   "reused": 5,
+   "failed": 0,
+   "recoveries": 1,
+   "loads": 55,
+   "decision_points": 2345,
+   "wall_ms": 36399,
+   "subgoals_ok": 3,
+   "subgoals_total": 3,
+   "store": {
+    "states": 67,
+    "transitions": 273,
+    "actions": 52,
+    "fragments": 29
+   }
+  },
+  {
+   "i": 20,
+   "phase": "target",
+   "gen": 2,
+   "agent": "agentB",
+   "task": "C_quotes_login_love_p2",
+   "condition": "blind",
+   "status": "success",
+   "actions": 9,
+   "novel": 2,
+   "reused": 7,
+   "failed": 0,
+   "recoveries": 1,
+   "loads": 7,
+   "decision_points": 55,
+   "wall_ms": 5575,
+   "subgoals_ok": 3,
+   "subgoals_total": 3,
+   "store": {
+    "states": 45,
+    "transitions": 133,
+    "actions": 45,
+    "fragments": 30
+   }
+  },
+  {
+   "i": 21,
+   "phase": "target",
+   "gen": 2,
+   "agent": "agentB",
+   "task": "C_quotes_login_love_p2",
+   "condition": "blind",
+   "status": "success",
+   "actions": 28,
+   "novel": 28,
+   "reused": 0,
+   "failed": 0,
+   "recoveries": 0,
+   "loads": 19,
+   "decision_points": 859,
+   "wall_ms": 15430,
+   "subgoals_ok": 3,
+   "subgoals_total": 3,
+   "store": {
+    "states": 102,
+    "transitions": 395,
+    "actions": 53,
+    "fragments": 8
+   }
+  },
+  {
+   "i": 22,
+   "phase": "target",
+   "gen": 2,
+   "agent": "agentB",
+   "task": "C_quotes_login_love_p2",
+   "condition": "blind",
+   "status": "success",
+   "actions": 29,
+   "novel": 27,
+   "reused": 2,
+   "failed": 0,
+   "recoveries": 1,
+   "loads": 21,
+   "decision_points": 753,
+   "wall_ms": 16547,
+   "subgoals_ok": 3,
+   "subgoals_total": 3,
+   "store": {
+    "states": 49,
+    "transitions": 330,
+    "actions": 52,
+    "fragments": 28
+   }
+  },
+  {
+   "i": 23,
+   "phase": "target",
+   "gen": 2,
+   "agent": "agentB",
+   "task": "C_internet_login_dyn_ex2",
+   "condition": "blind",
+   "status": "partial",
+   "actions": 182,
+   "novel": 180,
+   "reused": 2,
+   "failed": 32,
+   "recoveries": 1,
+   "loads": 6,
+   "decision_points": 305,
+   "wall_ms": 905609,
+   "subgoals_ok": 1,
+   "subgoals_total": 4,
+   "store": {
+    "states": 49,
+    "transitions": 511,
+    "actions": 52,
+    "fragments": 29
+   }
+  },
+  {
+   "i": 24,
+   "phase": "target",
+   "gen": 2,
+   "agent": "agentB",
+   "task": "C_internet_login_dyn_ex2",
+   "condition": "blind",
+   "status": "partial",
+   "actions": 285,
+   "novel": 285,
+   "reused": 0,
+   "failed": 0,
+   "recoveries": 0,
+   "loads": 15,
+   "decision_points": 6566,
+   "wall_ms": 492470,
+   "subgoals_ok": 0,
+   "subgoals_total": 4,
+   "store": {
+    "states": 103,
+    "transitions": 675,
+    "actions": 53,
+    "fragments": 8
+   }
+  },
+  {
+   "i": 25,
+   "phase": "target",
+   "gen": 2,
+   "agent": "agentB",
+   "task": "C_internet_login_dyn_ex2",
+   "condition": "blind",
+   "status": "partial",
+   "actions": 119,
+   "novel": 113,
+   "reused": 6,
+   "failed": 0,
+   "recoveries": 2,
+   "loads": 30,
+   "decision_points": 2552,
+   "wall_ms": 384280,
+   "subgoals_ok": 2,
+   "subgoals_total": 4,
+   "store": {
+    "states": 98,
+    "transitions": 239,
+    "actions": 57,
+    "fragments": 32
+   }
+  },
+  {
+   "i": 26,
+   "phase": "target",
+   "gen": 2,
+   "agent": "agentB",
+   "task": "C_internet_login_dyn_ex2",
+   "condition": "blind",
+   "status": "partial",
+   "actions": 108,
+   "novel": 94,
+   "reused": 14,
+   "failed": 15,
+   "recoveries": 3,
+   "loads": 21,
+   "decision_points": 151,
+   "wall_ms": 339996,
+   "subgoals_ok": 3,
+   "subgoals_total": 4,
+   "store": {
+    "states": 70,
+    "transitions": 374,
+    "actions": 53,
+    "fragments": 32
+   }
+  },
+  {
+   "i": 27,
+   "phase": "target",
+   "gen": 2,
+   "agent": "agentB",
+   "task": "C_internet_login_status_500",
+   "condition": "blind",
+   "status": "success",
+   "actions": 17,
+   "novel": 11,
+   "reused": 6,
+   "failed": 0,
+   "recoveries": 1,
+   "loads": 16,
+   "decision_points": 24,
+   "wall_ms": 9462,
+   "subgoals_ok": 3,
+   "subgoals_total": 3,
+   "store": {
+    "states": 98,
+    "transitions": 254,
+    "actions": 61,
+    "fragments": 35
+   }
+  },
+  {
+   "i": 28,
+   "phase": "target",
+   "gen": 2,
+   "agent": "agentB",
+   "task": "C_internet_login_status_500",
+   "condition": "blind",
+   "status": "partial",
+   "actions": 275,
+   "novel": 275,
+   "reused": 0,
+   "failed": 0,
+   "recoveries": 0,
+   "loads": 12,
+   "decision_points": 6336,
+   "wall_ms": 169148,
+   "subgoals_ok": 0,
+   "subgoals_total": 3,
+   "store": {
+    "states": 103,
+    "transitions": 945,
+    "actions": 53,
+    "fragments": 8
+   }
+  },
+  {
+   "i": 29,
+   "phase": "target",
+   "gen": 2,
+   "agent": "agentB",
+   "task": "C_internet_login_status_500",
+   "condition": "blind",
+   "status": "success",
+   "actions": 19,
+   "novel": 12,
+   "reused": 7,
+   "failed": 0,
+   "recoveries": 1,
+   "loads": 18,
+   "decision_points": 25,
+   "wall_ms": 12319,
+   "subgoals_ok": 3,
+   "subgoals_total": 3,
+   "store": {
+    "states": 70,
+    "transitions": 391,
+    "actions": 57,
+    "fragments": 35
+   }
+  },
+  {
+   "i": 30,
+   "phase": "target",
+   "gen": 2,
+   "agent": "agentB",
+   "task": "C_internet_login_status_500",
+   "condition": "blind",
+   "status": "partial",
+   "actions": 151,
+   "novel": 149,
+   "reused": 2,
+   "failed": 32,
+   "recoveries": 1,
+   "loads": 6,
+   "decision_points": 255,
+   "wall_ms": 577379,
+   "subgoals_ok": 1,
+   "subgoals_total": 3,
+   "store": {
+    "states": 49,
+    "transitions": 661,
+    "actions": 52,
+    "fragments": 30
+   }
+  },
+  {
+   "i": 31,
+   "phase": "replay_validation",
+   "gen": 3,
+   "agent": "agentB",
+   "task": "Q_login",
+   "condition": "replay",
+   "status": "success",
+   "actions": 4,
+   "novel": 0,
+   "reused": 4,
+   "failed": 0,
+   "recoveries": 0,
+   "loads": 3,
+   "decision_points": 0,
+   "wall_ms": 2170,
+   "subgoals_ok": 1,
+   "subgoals_total": 1,
+   "store": {
+    "states": 98,
+    "transitions": 258,
+    "actions": 61,
+    "fragments": 35
+   }
+  },
+  {
+   "i": 32,
+   "phase": "replay_validation",
+   "gen": 3,
+   "agent": "agentB",
+   "task": "I_login",
+   "condition": "replay",
+   "status": "success",
+   "actions": 4,
+   "novel": 0,
+   "reused": 4,
+   "failed": 0,
+   "recoveries": 0,
+   "loads": 3,
+   "decision_points": 0,
+   "wall_ms": 2608,
+   "subgoals_ok": 1,
+   "subgoals_total": 1,
+   "store": {
+    "states": 98,
+    "transitions": 262,
+    "actions": 61,
+    "fragments": 35
+   }
+  },
+  {
+   "i": 33,
+   "phase": "replay_validation",
+   "gen": 3,
+   "agent": "agentB",
+   "task": "B_travel_first_book",
+   "condition": "replay",
+   "status": "success",
+   "actions": 2,
+   "novel": 0,
+   "reused": 2,
+   "failed": 0,
+   "recoveries": 0,
+   "loads": 3,
+   "decision_points": 0,
+   "wall_ms": 2125,
+   "subgoals_ok": 2,
+   "subgoals_total": 2,
+   "store": {
+    "states": 98,
+    "transitions": 264,
+    "actions": 61,
+    "fragments": 35
+   }
+  },
+  {
+   "i": 34,
+   "phase": "replay_validation",
+   "gen": 3,
+   "agent": "agentB",
+   "task": "I_checkboxes_check_first",
+   "condition": "replay",
+   "status": "success",
+   "actions": 2,
+   "novel": 0,
+   "reused": 2,
+   "failed": 0,
+   "recoveries": 0,
+   "loads": 2,
+   "decision_points": 0,
+   "wall_ms": 1811,
+   "subgoals_ok": 2,
+   "subgoals_total": 2,
+   "store": {
+    "states": 98,
+    "transitions": 266,
+    "actions": 61,
+    "fragments": 35
+   }
+  },
+  {
+   "i": 35,
+   "phase": "replay_validation",
+   "gen": 3,
+   "agent": "agentB",
+   "task": "I_status_200",
+   "condition": "replay",
+   "status": "success",
+   "actions": 2,
+   "novel": 0,
+   "reused": 2,
+   "failed": 0,
+   "recoveries": 0,
+   "loads": 3,
+   "decision_points": 0,
+   "wall_ms": 2261,
+   "subgoals_ok": 2,
+   "subgoals_total": 2,
+   "store": {
+    "states": 98,
+    "transitions": 268,
+    "actions": 61,
+    "fragments": 35
+   }
+  }
+ ],
+ "production_runs": [
+  {
+   "task": "B_travel_first_book",
+   "method": "none",
+   "condition": "cold",
+   "agent": "agentG",
+   "status": "success",
+   "metrics": {
+    "loads": 3,
+    "actions": 2,
+    "reused": 0,
+    "novel": 2,
+    "failed": 0,
+    "recoveries": 0,
+    "decision_points": 201,
+    "llm_calls": 0,
+    "subgoals_ok": 2,
+    "subgoals_total": 2,
+    "wall_ms": 1957
+   },
+   "store_after": {
+    "states": 3,
+    "transitions": 2,
+    "actions": 2,
+    "fragments": 2
+   },
+   "run_wall_ms": 1848
+  },
+  {
+   "task": "B_fiction_paged",
+   "method": "none",
+   "condition": "cold",
+   "agent": "agentG",
+   "status": "success",
+   "metrics": {
+    "loads": 4,
+    "actions": 3,
+    "reused": 0,
+    "novel": 3,
+    "failed": 0,
+    "recoveries": 0,
+    "decision_points": 250,
+    "llm_calls": 0,
+    "subgoals_ok": 2,
+    "subgoals_total": 2,
+    "wall_ms": 2627
+   },
+   "store_after": {
+    "states": 6,
+    "transitions": 5,
+    "actions": 4,
+    "fragments": 5
+   },
+   "run_wall_ms": 2124
+  },
+  {
+   "task": "B_romance_first_book",
+   "method": "none",
+   "condition": "cold",
+   "agent": "agentG",
+   "status": "success",
+   "metrics": {
+    "loads": 3,
+    "actions": 2,
+    "reused": 0,
+    "novel": 2,
+    "failed": 0,
+    "recoveries": 0,
+    "decision_points": 229,
+    "llm_calls": 0,
+    "subgoals_ok": 2,
+    "subgoals_total": 2,
+    "wall_ms": 1919
+   },
+   "store_after": {
+    "states": 8,
+    "transitions": 7,
+    "actions": 5,
+    "fragments": 7
+   },
+   "run_wall_ms": 1787
+  },
+  {
+   "task": "Q_login",
+   "method": "none",
+   "condition": "cold",
+   "agent": "agentG",
+   "status": "success",
+   "metrics": {
+    "loads": 3,
+    "actions": 4,
+    "reused": 0,
+    "novel": 4,
+    "failed": 0,
+    "recoveries": 0,
+    "decision_points": 53,
+    "llm_calls": 0,
+    "subgoals_ok": 1,
+    "subgoals_total": 1,
+    "wall_ms": 2045
+   },
+   "store_after": {
+    "states": 11,
+    "transitions": 11,
+    "actions": 9,
+    "fragments": 9
+   },
+   "run_wall_ms": 1687
+  },
+  {
+   "task": "I_login",
+   "method": "none",
+   "condition": "cold",
+   "agent": "agentG",
+   "status": "success",
+   "metrics": {
+    "loads": 3,
+    "actions": 4,
+    "reused": 0,
+    "novel": 4,
+    "failed": 0,
+    "recoveries": 0,
+    "decision_points": 44,
+    "llm_calls": 0,
+    "subgoals_ok": 1,
+    "subgoals_total": 1,
+    "wall_ms": 2583
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 15,
+    "actions": 13,
+    "fragments": 11
+   },
+   "run_wall_ms": 2535
+  },
+  {
+   "task": "I_checkboxes_check_first",
+   "method": "none",
+   "condition": "cold",
+   "agent": "agentG",
+   "status": "success",
+   "metrics": {
+    "loads": 2,
+    "actions": 2,
+    "reused": 0,
+    "novel": 2,
+    "failed": 0,
+    "recoveries": 0,
+    "decision_points": 45,
+    "llm_calls": 0,
+    "subgoals_ok": 2,
+    "subgoals_total": 2,
+    "wall_ms": 1972
+   },
+   "store_after": {
+    "states": 15,
+    "transitions": 17,
+    "actions": 15,
+    "fragments": 13
+   },
+   "run_wall_ms": 1911
+  },
+  {
+   "task": "I_dynamic_loading_ex1",
+   "method": "none",
+   "condition": "cold",
+   "agent": "agentG",
+   "status": "success",
+   "metrics": {
+    "loads": 3,
+    "actions": 3,
+    "reused": 0,
+    "novel": 3,
+    "failed": 0,
+    "recoveries": 0,
+    "decision_points": 47,
+    "llm_calls": 0,
+    "subgoals_ok": 3,
+    "subgoals_total": 3,
+    "wall_ms": 12531
+   },
+   "store_after": {
+    "states": 18,
+    "transitions": 20,
+    "actions": 18,
+    "fragments": 16
+   },
+   "run_wall_ms": 7501
+  },
+  {
+   "task": "I_key_presses_a",
+   "method": "none",
+   "condition": "cold",
+   "agent": "agentG",
+   "status": "success",
+   "metrics": {
+    "loads": 2,
+    "actions": 2,
+    "reused": 0,
+    "novel": 2,
+    "failed": 0,
+    "recoveries": 0,
+    "decision_points": 45,
+    "llm_calls": 0,
+    "subgoals_ok": 2,
+    "subgoals_total": 2,
+    "wall_ms": 2817
+   },
+   "store_after": {
+    "states": 19,
+    "transitions": 22,
+    "actions": 20,
+    "fragments": 18
+   },
+   "run_wall_ms": 2334
+  },
+  {
+   "task": "I_status_200",
+   "method": "none",
+   "condition": "cold",
+   "agent": "agentG",
+   "status": "success",
+   "metrics": {
+    "loads": 3,
+    "actions": 2,
+    "reused": 0,
+    "novel": 2,
+    "failed": 0,
+    "recoveries": 0,
+    "decision_points": 48,
+    "llm_calls": 0,
+    "subgoals_ok": 2,
+    "subgoals_total": 2,
+    "wall_ms": 2068
+   },
+   "store_after": {
+    "states": 21,
+    "transitions": 24,
+    "actions": 22,
+    "fragments": 20
+   },
+   "run_wall_ms": 2037
+  },
+  {
+   "task": "Q_tag_love_nav",
+   "method": "none",
+   "condition": "cold",
+   "agent": "agentG",
+   "status": "success",
+   "metrics": {
+    "loads": 2,
+    "actions": 1,
+    "reused": 0,
+    "novel": 1,
+    "failed": 0,
+    "recoveries": 0,
+    "decision_points": 53,
+    "llm_calls": 0,
+    "subgoals_ok": 1,
+    "subgoals_total": 1,
+    "wall_ms": 1089
+   },
+   "store_after": {
+    "states": 22,
+    "transitions": 25,
+    "actions": 23,
+    "fragments": 21
+   },
+   "run_wall_ms": 1243
+  }
+ ],
+ "target_runs": [
+  {
+   "task": "C_books_fantasy_paged_product",
+   "method": "fragment",
+   "condition": "blind",
+   "agent": "agentB",
+   "status": "partial",
+   "metrics": {
+    "loads": 93,
+    "actions": 95,
+    "reused": 4,
+    "novel": 91,
+    "failed": 0,
+    "recoveries": 0,
+    "decision_points": 6346,
+    "llm_calls": 0,
+    "subgoals_ok": 2,
+    "subgoals_total": 3,
+    "wall_ms": 50521
+   },
+   "store_after": {
+    "states": 43,
+    "transitions": 119,
+    "actions": 45,
+    "fragments": 23
+   },
+   "run_wall_ms": 26187,
+   "retrieval_diag": {
+    "n_lookups": 3,
+    "retrieval_ms": 1.0,
+    "unknown": 1,
+    "lookups": [
+     {
+      "subgoal_prov": "tgt.books.cat.fantasy",
+      "kws": [
+       "fantasy"
+      ],
+      "route_found": false,
+      "ms": 0.33,
+      "unknown": true,
+      "n_scored": 7,
+      "top_candidates": []
+     },
+     {
+      "subgoal_prov": "tgt.books.paginate.fantasy",
+      "kws": [
+       "next",
+       "page"
+      ],
+      "route_found": true,
+      "ms": 0.36,
+      "unknown": false,
+      "n_scored": 7,
+      "top_candidates": [
+       {
+        "goal_sig": "books.paginate.next",
+        "score": 1.0,
+        "content_hits": 2,
+        "provenance_hits": 2
+       },
+       {
+        "goal_sig": "generic.paginate.next",
+        "score": 1.0,
+        "content_hits": 2,
+        "provenance_hits": 2
+       }
+      ],
+      "confidence": 0.6666,
+      "n_steps": 2,
+      "route_source": "addr:books.paginate.next"
+     },
+     {
+      "subgoal_prov": "tgt.books.open.product.p2",
+      "kws": [
+       "catalogue",
+       "product"
+      ],
+      "route_found": true,
+      "ms": 0.31,
+      "unknown": false,
+      "n_scored": 8,
+      "top_candidates": [
+       {
+        "goal_sig": "books.open.product",
+        "score": 0.7286,
+        "content_hits": 1,
+        "provenance_hits": 2
+       },
+       {
+        "goal_sig": "books.open.product.romance",
+        "score": 0.7286,
+        "content_hits": 1,
+        "provenance_hits": 2
+       },
+       {
+        "goal_sig": "books.cat.travel",
+        "score": 0.3286,
+        "content_hits": 1,
+        "provenance_hits": 0
+       }
+      ],
+      "confidence": 0.6666,
+      "n_steps": 1,
+      "route_source": "addr:books.open.product"
+     }
+    ]
+   },
+   "method_order": [
+    "fragment",
+    "cold",
+    "trajectory",
+    "graph"
+   ]
+  },
+  {
+   "task": "C_books_fantasy_paged_product",
+   "method": "cold",
+   "condition": "blind",
+   "agent": "agentB",
+   "status": "partial",
+   "metrics": {
+    "loads": 94,
+    "actions": 97,
+    "reused": 0,
+    "novel": 97,
+    "failed": 0,
+    "recoveries": 0,
+    "decision_points": 7146,
+    "llm_calls": 0,
+    "subgoals_ok": 2,
+    "subgoals_total": 3,
+    "wall_ms": 48128
+   },
+   "store_after": {
+    "states": 27,
+    "transitions": 97,
+    "actions": 25,
+    "fragments": 3
+   },
+   "run_wall_ms": 24924,
+   "method_order": [
+    "fragment",
+    "cold",
+    "trajectory",
+    "graph"
+   ]
+  },
+  {
+   "task": "C_books_fantasy_paged_product",
+   "method": "trajectory",
+   "condition": "blind",
+   "agent": "agentB",
+   "status": "partial",
+   "metrics": {
+    "loads": 97,
+    "actions": 98,
+    "reused": 6,
+    "novel": 92,
+    "failed": 0,
+    "recoveries": 1,
+    "decision_points": 6368,
+    "llm_calls": 0,
+    "subgoals_ok": 2,
+    "subgoals_total": 3,
+    "wall_ms": 50283
+   },
+   "store_after": {
+    "states": 45,
+    "transitions": 122,
+    "actions": 45,
+    "fragments": 23
+   },
+   "run_wall_ms": 26025,
+   "retrieval_diag": {
+    "n_lookups": 3,
+    "retrieval_ms": 0.4,
+    "unknown": 1,
+    "lookups": [
+     {
+      "subgoal_prov": "tgt.books.cat.fantasy",
+      "kws": [
+       "fantasy"
+      ],
+      "route_found": true,
+      "ms": 0.16,
+      "trajectories_considered": 3,
+      "best_hits": 1,
+      "source_task": "B_travel_first_book",
+      "n_steps": 2,
+      "route_source": "traj:B_travel_first_book"
+     },
+     {
+      "subgoal_prov": "tgt.books.paginate.fantasy",
+      "kws": [
+       "next",
+       "page"
+      ],
+      "route_found": false,
+      "ms": 0.14,
+      "trajectories_considered": 3,
+      "best_hits": 0,
+      "reason": "no_trajectory_above_threshold"
+     },
+     {
+      "subgoal_prov": "tgt.books.open.product.p2",
+      "kws": [
+       "catalogue",
+       "product"
+      ],
+      "route_found": true,
+      "ms": 0.1,
+      "trajectories_considered": 3,
+      "best_hits": 1,
+      "source_task": "B_travel_first_book",
+      "n_steps": 2,
+      "route_source": "traj:B_travel_first_book"
+     }
+    ]
+   },
+   "method_order": [
+    "fragment",
+    "cold",
+    "trajectory",
+    "graph"
+   ]
+  },
+  {
+   "task": "C_books_fantasy_paged_product",
+   "method": "graph",
+   "condition": "blind",
+   "agent": "agentB",
+   "status": "partial",
+   "metrics": {
+    "loads": 99,
+    "actions": 100,
+    "reused": 6,
+    "novel": 94,
+    "failed": 0,
+    "recoveries": 2,
+    "decision_points": 6452,
+    "llm_calls": 0,
+    "subgoals_ok": 2,
+    "subgoals_total": 3,
+    "wall_ms": 51895
+   },
+   "store_after": {
+    "states": 43,
+    "transitions": 123,
+    "actions": 45,
+    "fragments": 23
+   },
+   "run_wall_ms": 26804,
+   "retrieval_diag": {
+    "n_lookups": 3,
+    "retrieval_ms": 11.9,
+    "unknown": 0,
+    "lookups": [
+     {
+      "subgoal_prov": "tgt.books.cat.fantasy",
+      "kws": [
+       "fantasy"
+      ],
+      "route_found": true,
+      "ms": 2.37,
+      "expanded": 7,
+      "visited_states": 8,
+      "n_steps": 1,
+      "route_source": "graph:bfs"
+     },
+     {
+      "subgoal_prov": "tgt.books.paginate.fantasy",
+      "kws": [
+       "next",
+       "page"
+      ],
+      "route_found": true,
+      "ms": 4.81,
+      "expanded": 22,
+      "visited_states": 23,
+      "n_steps": 1,
+      "route_source": "graph:bfs"
+     },
+     {
+      "subgoal_prov": "tgt.books.open.product.p2",
+      "kws": [
+       "catalogue",
+       "product"
+      ],
+      "route_found": true,
+      "ms": 4.73,
+      "expanded": 22,
+      "visited_states": 23,
+      "n_steps": 2,
+      "route_source": "graph:bfs"
+     }
+    ]
+   },
+   "method_order": [
+    "fragment",
+    "cold",
+    "trajectory",
+    "graph"
+   ]
+  },
+  {
+   "task": "C_internet_login_checkboxes",
+   "method": "graph",
+   "condition": "blind",
+   "agent": "agentB",
+   "status": "partial",
+   "metrics": {
+    "loads": 6,
+    "actions": 180,
+    "reused": 2,
+    "novel": 178,
+    "failed": 32,
+    "recoveries": 1,
+    "decision_points": 303,
+    "llm_calls": 0,
+    "subgoals_ok": 1,
+    "subgoals_total": 3,
+    "wall_ms": 593928
+   },
+   "store_after": {
+    "states": 46,
+    "transitions": 302,
+    "actions": 47,
+    "fragments": 24
+   },
+   "run_wall_ms": 297897,
+   "retrieval_diag": {
+    "n_lookups": 3,
+    "retrieval_ms": 1.2,
+    "unknown": 2,
+    "lookups": [
+     {
+      "subgoal_prov": "tgt.int.login",
+      "kws": [
+       "login"
+      ],
+      "route_found": true,
+      "ms": 0.79,
+      "expanded": 9,
+      "visited_states": 10,
+      "n_steps": 1,
+      "route_source": "graph:bfs"
+     },
+     {
+      "subgoal_prov": "tgt.int.checkbox.nav",
+      "kws": [
+       "checkboxes"
+      ],
+      "route_found": false,
+      "ms": 0.05,
+      "expanded": 0,
+      "visited_states": 1,
+      "reason": "no_keyword_matching_state_within_depth"
+     },
+     {
+      "subgoal_prov": "tgt.int.checkbox.first",
+      "kws": [
+       "checkbox",
+       "toggle"
+      ],
+      "route_found": false,
+      "ms": 0.35,
+      "expanded": 2,
+      "visited_states": 3,
+      "reason": "no_keyword_matching_state_within_depth"
+     }
+    ]
+   },
+   "method_order": [
+    "graph",
+    "fragment",
+    "trajectory",
+    "cold"
+   ]
+  },
+  {
+   "task": "C_internet_login_checkboxes",
+   "method": "fragment",
+   "condition": "blind",
+   "agent": "agentB",
+   "status": "success",
+   "metrics": {
+    "loads": 5,
+    "actions": 7,
+    "reused": 5,
+    "novel": 2,
+    "failed": 0,
+    "recoveries": 0,
+    "decision_points": 1,
+    "llm_calls": 0,
+    "subgoals_ok": 3,
+    "subgoals_total": 3,
+    "wall_ms": 3914
+   },
+   "store_after": {
+    "states": 43,
+    "transitions": 125,
+    "actions": 45,
+    "fragments": 26
+   },
+   "run_wall_ms": 2891,
+   "retrieval_diag": {
+    "n_lookups": 3,
+    "retrieval_ms": 1.2,
+    "unknown": 1,
+    "lookups": [
+     {
+      "subgoal_prov": "tgt.int.login",
+      "kws": [
+       "login"
+      ],
+      "route_found": true,
+      "ms": 0.44,
+      "unknown": false,
+      "n_scored": 11,
+      "top_candidates": [
+       {
+        "goal_sig": "int.login",
+        "score": 1.0,
+        "content_hits": 1,
+        "provenance_hits": 1
+       },
+       {
+        "goal_sig": "generic.form.login",
+        "score": 1.0,
+        "content_hits": 1,
+        "provenance_hits": 1
+       }
+      ],
+      "confidence": 0.6664,
+      "n_steps": 4,
+      "route_source": "addr:int.login"
+     },
+     {
+      "subgoal_prov": "tgt.int.checkbox.nav",
+      "kws": [
+       "checkboxes"
+      ],
+      "route_found": true,
+      "ms": 0.39,
+      "unknown": false,
+      "n_scored": 12,
+      "top_candidates": [
+       {
+        "goal_sig": "int.checkbox.nav",
+        "score": 1.0,
+        "content_hits": 1,
+        "provenance_hits": 1
+       }
+      ],
+      "confidence": 0.6664,
+      "n_steps": 1,
+      "route_source": "addr:int.checkbox.nav"
+     },
+     {
+      "subgoal_prov": "tgt.int.checkbox.first",
+      "kws": [
+       "checkbox",
+       "toggle"
+      ],
+      "route_found": false,
+      "ms": 0.39,
+      "unknown": true,
+      "n_scored": 13,
+      "top_candidates": []
+     }
+    ]
+   },
+   "method_order": [
+    "graph",
+    "fragment",
+    "trajectory",
+    "cold"
+   ]
+  },
+  {
+   "task": "C_internet_login_checkboxes",
+   "method": "trajectory",
+   "condition": "blind",
+   "agent": "agentB",
+   "status": "partial",
+   "metrics": {
+    "loads": 9,
+    "actions": 91,
+    "reused": 10,
+    "novel": 81,
+    "failed": 15,
+    "recoveries": 1,
+    "decision_points": 138,
+    "llm_calls": 0,
+    "subgoals_ok": 2,
+    "subgoals_total": 3,
+    "wall_ms": 284798
+   },
+   "store_after": {
+    "states": 46,
+    "transitions": 211,
+    "actions": 47,
+    "fragments": 25
+   },
+   "run_wall_ms": 143517,
+   "retrieval_diag": {
+    "n_lookups": 3,
+    "retrieval_ms": 0.5,
+    "unknown": 0,
+    "lookups": [
+     {
+      "subgoal_prov": "tgt.int.login",
+      "kws": [
+       "login"
+      ],
+      "route_found": true,
+      "ms": 0.22,
+      "trajectories_considered": 5,
+      "best_hits": 1,
+      "source_task": "I_login",
+      "n_steps": 4,
+      "route_source": "traj:I_login"
+     },
+     {
+      "subgoal_prov": "tgt.int.checkbox.nav",
+      "kws": [
+       "checkboxes"
+      ],
+      "route_found": true,
+      "ms": 0.13,
+      "trajectories_considered": 5,
+      "best_hits": 1,
+      "source_task": "I_login",
+      "n_steps": 4,
+      "route_source": "traj:I_login"
+     },
+     {
+      "subgoal_prov": "tgt.int.checkbox.first",
+      "kws": [
+       "checkbox",
+       "toggle"
+      ],
+      "route_found": true,
+      "ms": 0.14,
+      "trajectories_considered": 5,
+      "best_hits": 1,
+      "source_task": "I_checkboxes_check_first",
+      "n_steps": 2,
+      "route_source": "traj:I_checkboxes_check_first"
+     }
+    ]
+   },
+   "method_order": [
+    "graph",
+    "fragment",
+    "trajectory",
+    "cold"
+   ]
+  },
+  {
+   "task": "C_internet_login_checkboxes",
+   "method": "cold",
+   "condition": "blind",
+   "agent": "agentB",
+   "status": "partial",
+   "metrics": {
+    "loads": 18,
+    "actions": 275,
+    "reused": 0,
+    "novel": 275,
+    "failed": 0,
+    "recoveries": 0,
+    "decision_points": 6336,
+    "llm_calls": 0,
+    "subgoals_ok": 0,
+    "subgoals_total": 3,
+    "wall_ms": 168423
+   },
+   "store_after": {
+    "states": 95,
+    "transitions": 367,
+    "actions": 43,
+    "fragments": 3
+   },
+   "run_wall_ms": 85304,
+   "method_order": [
+    "graph",
+    "fragment",
+    "trajectory",
+    "cold"
+   ]
+  },
+  {
+   "task": "C_quotes_login_love_p2",
+   "method": "trajectory",
+   "condition": "blind",
+   "agent": "agentB",
+   "status": "success",
+   "metrics": {
+    "loads": 55,
+    "actions": 63,
+    "reused": 5,
+    "novel": 58,
+    "failed": 0,
+    "recoveries": 1,
+    "decision_points": 2345,
+    "llm_calls": 0,
+    "subgoals_ok": 3,
+    "subgoals_total": 3,
+    "wall_ms": 36399
+   },
+   "store_after": {
+    "states": 67,
+    "transitions": 273,
+    "actions": 52,
+    "fragments": 29
+   },
+   "run_wall_ms": 19002,
+   "retrieval_diag": {
+    "n_lookups": 3,
+    "retrieval_ms": 0.3,
+    "unknown": 0,
+    "lookups": [
+     {
+      "subgoal_prov": "tgt.quotes.login",
+      "kws": [
+       "login"
+      ],
+      "route_found": true,
+      "ms": 0.12,
+      "trajectories_considered": 2,
+      "best_hits": 1,
+      "source_task": "Q_login",
+      "n_steps": 4,
+      "route_source": "traj:Q_login"
+     },
+     {
+      "subgoal_prov": "tgt.quotes.tag.love",
+      "kws": [
+       "love",
+       "tag"
+      ],
+      "route_found": true,
+      "ms": 0.09,
+      "trajectories_considered": 2,
+      "best_hits": 2,
+      "source_task": "Q_tag_love_nav",
+      "n_steps": 1,
+      "route_source": "traj:Q_tag_love_nav"
+     },
+     {
+      "subgoal_prov": "tgt.quotes.tag.love.p2",
+      "kws": [
+       "next",
+       "page"
+      ],
+      "route_found": true,
+      "ms": 0.07,
+      "trajectories_considered": 2,
+      "best_hits": 2,
+      "source_task": "Q_login",
+      "n_steps": 4,
+      "route_source": "traj:Q_login"
+     }
+    ]
+   },
+   "method_order": [
+    "trajectory",
+    "fragment",
+    "cold",
+    "graph"
+   ]
+  },
+  {
+   "task": "C_quotes_login_love_p2",
+   "method": "fragment",
+   "condition": "blind",
+   "agent": "agentB",
+   "status": "success",
+   "metrics": {
+    "loads": 7,
+    "actions": 9,
+    "reused": 7,
+    "novel": 2,
+    "failed": 0,
+    "recoveries": 1,
+    "decision_points": 55,
+    "llm_calls": 0,
+    "subgoals_ok": 3,
+    "subgoals_total": 3,
+    "wall_ms": 5575
+   },
+   "store_after": {
+    "states": 45,
+    "transitions": 133,
+    "actions": 45,
+    "fragments": 30
+   },
+   "run_wall_ms": 3470,
+   "retrieval_diag": {
+    "n_lookups": 3,
+    "retrieval_ms": 0.7,
+    "unknown": 0,
+    "lookups": [
+     {
+      "subgoal_prov": "tgt.quotes.login",
+      "kws": [
+       "login"
+      ],
+      "route_found": true,
+      "ms": 0.28,
+      "unknown": false,
+      "n_scored": 3,
+      "top_candidates": [
+       {
+        "goal_sig": "quotes.login",
+        "score": 1.0,
+        "content_hits": 1,
+        "provenance_hits": 1
+       },
+       {
+        "goal_sig": "generic.form.login",
+        "score": 1.0,
+        "content_hits": 1,
+        "provenance_hits": 1
+       }
+      ],
+      "confidence": 0.6663,
+      "n_steps": 4,
+      "route_source": "addr:quotes.login"
+     },
+     {
+      "subgoal_prov": "tgt.quotes.tag.love",
+      "kws": [
+       "love",
+       "tag"
+      ],
+      "route_found": true,
+      "ms": 0.21,
+      "unknown": false,
+      "n_scored": 4,
+      "top_candidates": [
+       {
+        "goal_sig": "quotes.tag.love",
+        "score": 1.0,
+        "content_hits": 2,
+        "provenance_hits": 2
+       }
+      ],
+      "confidence": 0.6663,
+      "n_steps": 1,
+      "route_source": "addr:quotes.tag.love"
+     },
+     {
+      "subgoal_prov": "tgt.quotes.tag.love.p2",
+      "kws": [
+       "next",
+       "page"
+      ],
+      "route_found": true,
+      "ms": 0.25,
+      "unknown": false,
+      "n_scored": 5,
+      "top_candidates": [
+       {
+        "goal_sig": "tgt.quotes.tag.love",
+        "score": 0.4115,
+        "content_hits": 1,
+        "provenance_hits": 0
+       }
+      ],
+      "confidence": 0.6667,
+      "n_steps": 1,
+      "route_source": "addr:tgt.quotes.tag.love"
+     }
+    ]
+   },
+   "method_order": [
+    "trajectory",
+    "fragment",
+    "cold",
+    "graph"
+   ]
+  },
+  {
+   "task": "C_quotes_login_love_p2",
+   "method": "cold",
+   "condition": "blind",
+   "agent": "agentB",
+   "status": "success",
+   "metrics": {
+    "loads": 19,
+    "actions": 28,
+    "reused": 0,
+    "novel": 28,
+    "failed": 0,
+    "recoveries": 0,
+    "decision_points": 859,
+    "llm_calls": 0,
+    "subgoals_ok": 3,
+    "subgoals_total": 3,
+    "wall_ms": 15430
+   },
+   "store_after": {
+    "states": 102,
+    "transitions": 395,
+    "actions": 53,
+    "fragments": 8
+   },
+   "run_wall_ms": 8617,
+   "method_order": [
+    "trajectory",
+    "fragment",
+    "cold",
+    "graph"
+   ]
+  },
+  {
+   "task": "C_quotes_login_love_p2",
+   "method": "graph",
+   "condition": "blind",
+   "agent": "agentB",
+   "status": "success",
+   "metrics": {
+    "loads": 21,
+    "actions": 29,
+    "reused": 2,
+    "novel": 27,
+    "failed": 0,
+    "recoveries": 1,
+    "decision_points": 753,
+    "llm_calls": 0,
+    "subgoals_ok": 3,
+    "subgoals_total": 3,
+    "wall_ms": 16547
+   },
+   "store_after": {
+    "states": 49,
+    "transitions": 330,
+    "actions": 52,
+    "fragments": 28
+   },
+   "run_wall_ms": 9147,
+   "retrieval_diag": {
+    "n_lookups": 3,
+    "retrieval_ms": 1.2,
+    "unknown": 2,
+    "lookups": [
+     {
+      "subgoal_prov": "tgt.quotes.login",
+      "kws": [
+       "login"
+      ],
+      "route_found": true,
+      "ms": 0.93,
+      "expanded": 3,
+      "visited_states": 4,
+      "n_steps": 1,
+      "route_source": "graph:bfs"
+     },
+     {
+      "subgoal_prov": "tgt.quotes.tag.love",
+      "kws": [
+       "love",
+       "tag"
+      ],
+      "route_found": false,
+      "ms": 0.12,
+      "expanded": 0,
+      "visited_states": 1,
+      "reason": "no_keyword_matching_state_within_depth"
+     },
+     {
+      "subgoal_prov": "tgt.quotes.tag.love.p2",
+      "kws": [
+       "next",
+       "page"
+      ],
+      "route_found": false,
+      "ms": 0.11,
+      "expanded": 0,
+      "visited_states": 1,
+      "reason": "no_keyword_matching_state_within_depth"
+     }
+    ]
+   },
+   "method_order": [
+    "trajectory",
+    "fragment",
+    "cold",
+    "graph"
+   ]
+  },
+  {
+   "task": "C_internet_login_dyn_ex2",
+   "method": "graph",
+   "condition": "blind",
+   "agent": "agentB",
+   "status": "partial",
+   "metrics": {
+    "loads": 6,
+    "actions": 182,
+    "reused": 2,
+    "novel": 180,
+    "failed": 32,
+    "recoveries": 1,
+    "decision_points": 305,
+    "llm_calls": 0,
+    "subgoals_ok": 1,
+    "subgoals_total": 4,
+    "wall_ms": 905609
+   },
+   "store_after": {
+    "states": 49,
+    "transitions": 511,
+    "actions": 52,
+    "fragments": 29
+   },
+   "run_wall_ms": 453796,
+   "retrieval_diag": {
+    "n_lookups": 4,
+    "retrieval_ms": 2.1,
+    "unknown": 3,
+    "lookups": [
+     {
+      "subgoal_prov": "tgt.int.login.dyn",
+      "kws": [
+       "login"
+      ],
+      "route_found": true,
+      "ms": 0.96,
+      "expanded": 10,
+      "visited_states": 11,
+      "n_steps": 1,
+      "route_source": "graph:bfs"
+     },
+     {
+      "subgoal_prov": "tgt.int.dyn.nav",
+      "kws": [
+       "dynamic",
+       "loading"
+      ],
+      "route_found": false,
+      "ms": 0.38,
+      "expanded": 2,
+      "visited_states": 3,
+      "reason": "no_keyword_matching_state_within_depth"
+     },
+     {
+      "subgoal_prov": "tgt.int.dyn.ex2",
+      "kws": [
+       "example"
+      ],
+      "route_found": false,
+      "ms": 0.38,
+      "expanded": 2,
+      "visited_states": 3,
+      "reason": "no_keyword_matching_state_within_depth"
+     },
+     {
+      "subgoal_prov": "tgt.int.dyn.start.ex2",
+      "kws": [
+       "start"
+      ],
+      "route_found": false,
+      "ms": 0.43,
+      "expanded": 2,
+      "visited_states": 3,
+      "reason": "no_keyword_matching_state_within_depth"
+     }
+    ]
+   },
+   "method_order": [
+    "graph",
+    "cold",
+    "fragment",
+    "trajectory"
+   ]
+  },
+  {
+   "task": "C_internet_login_dyn_ex2",
+   "method": "cold",
+   "condition": "blind",
+   "agent": "agentB",
+   "status": "partial",
+   "metrics": {
+    "loads": 15,
+    "actions": 285,
+    "reused": 0,
+    "novel": 285,
+    "failed": 0,
+    "recoveries": 0,
+    "decision_points": 6566,
+    "llm_calls": 0,
+    "subgoals_ok": 0,
+    "subgoals_total": 4,
+    "wall_ms": 492470
+   },
+   "store_after": {
+    "states": 103,
+    "transitions": 675,
+    "actions": 53,
+    "fragments": 8
+   },
+   "run_wall_ms": 247176,
+   "method_order": [
+    "graph",
+    "cold",
+    "fragment",
+    "trajectory"
+   ]
+  },
+  {
+   "task": "C_internet_login_dyn_ex2",
+   "method": "fragment",
+   "condition": "blind",
+   "agent": "agentB",
+   "status": "partial",
+   "metrics": {
+    "loads": 30,
+    "actions": 119,
+    "reused": 6,
+    "novel": 113,
+    "failed": 0,
+    "recoveries": 2,
+    "decision_points": 2552,
+    "llm_calls": 0,
+    "subgoals_ok": 2,
+    "subgoals_total": 4,
+    "wall_ms": 384280
+   },
+   "store_after": {
+    "states": 98,
+    "transitions": 239,
+    "actions": 57,
+    "fragments": 32
+   },
+   "run_wall_ms": 193227,
+   "retrieval_diag": {
+    "n_lookups": 4,
+    "retrieval_ms": 1.9,
+    "unknown": 0,
+    "lookups": [
+     {
+      "subgoal_prov": "tgt.int.login.dyn",
+      "kws": [
+       "login"
+      ],
+      "route_found": true,
+      "ms": 0.56,
+      "unknown": false,
+      "n_scored": 14,
+      "top_candidates": [
+       {
+        "goal_sig": "int.login",
+        "score": 1.0,
+        "content_hits": 1,
+        "provenance_hits": 1
+       },
+       {
+        "goal_sig": "generic.form.login",
+        "score": 1.0,
+        "content_hits": 1,
+        "provenance_hits": 1
+       },
+       {
+        "goal_sig": "tgt.int.login",
+        "score": 1.0,
+        "content_hits": 1,
+        "provenance_hits": 1
+       }
+      ],
+      "confidence": 0.6659,
+      "n_steps": 4,
+      "route_source": "addr:int.login"
+     },
+     {
+      "subgoal_prov": "tgt.int.dyn.nav",
+      "kws": [
+       "dynamic",
+       "loading"
+      ],
+      "route_found": true,
+      "ms": 0.43,
+      "unknown": false,
+      "n_scored": 15,
+      "top_candidates": [
+       {
+        "goal_sig": "int.dyn.nav",
+        "score": 1.0,
+        "content_hits": 2,
+        "provenance_hits": 2
+       },
+       {
+        "goal_sig": "int.dyn.ex1",
+        "score": 1.0,
+        "content_hits": 2,
+        "provenance_hits": 0
+       }
+      ],
+      "confidence": 0.6659,
+      "n_steps": 1,
+      "route_source": "addr:int.dyn.nav"
+     },
+     {
+      "subgoal_prov": "tgt.int.dyn.ex2",
+      "kws": [
+       "example"
+      ],
+      "route_found": true,
+      "ms": 0.45,
+      "unknown": false,
+      "n_scored": 16,
+      "top_candidates": [
+       {
+        "goal_sig": "int.dyn.ex1",
+        "score": 1.0,
+        "content_hits": 1,
+        "provenance_hits": 1
+       }
+      ],
+      "confidence": 0.6659,
+      "n_steps": 1,
+      "route_source": "addr:int.dyn.ex1"
+     },
+     {
+      "subgoal_prov": "tgt.int.dyn.start.ex2",
+      "kws": [
+       "start"
+      ],
+      "route_found": true,
+      "ms": 0.47,
+      "unknown": false,
+      "n_scored": 16,
+      "top_candidates": [
+       {
+        "goal_sig": "int.dyn.start.ex1",
+        "score": 1.0,
+        "content_hits": 1,
+        "provenance_hits": 1
+       }
+      ],
+      "confidence": 0.6659,
+      "n_steps": 1,
+      "route_source": "addr:int.dyn.start.ex1"
+     }
+    ]
+   },
+   "method_order": [
+    "graph",
+    "cold",
+    "fragment",
+    "trajectory"
+   ]
+  },
+  {
+   "task": "C_internet_login_dyn_ex2",
+   "method": "trajectory",
+   "condition": "blind",
+   "agent": "agentB",
+   "status": "partial",
+   "metrics": {
+    "loads": 21,
+    "actions": 108,
+    "reused": 14,
+    "novel": 94,
+    "failed": 15,
+    "recoveries": 3,
+    "decision_points": 151,
+    "llm_calls": 0,
+    "subgoals_ok": 3,
+    "subgoals_total": 4,
+    "wall_ms": 339996
+   },
+   "store_after": {
+    "states": 70,
+    "transitions": 374,
+    "actions": 53,
+    "fragments": 32
+   },
+   "run_wall_ms": 170932,
+   "retrieval_diag": {
+    "n_lookups": 4,
+    "retrieval_ms": 0.9,
+    "unknown": 0,
+    "lookups": [
+     {
+      "subgoal_prov": "tgt.int.login.dyn",
+      "kws": [
+       "login"
+      ],
+      "route_found": true,
+      "ms": 0.24,
+      "trajectories_considered": 6,
+      "best_hits": 1,
+      "source_task": "I_login",
+      "n_steps": 4,
+      "route_source": "traj:I_login"
+     },
+     {
+      "subgoal_prov": "tgt.int.dyn.nav",
+      "kws": [
+       "dynamic",
+       "loading"
+      ],
+      "route_found": true,
+      "ms": 0.2,
+      "trajectories_considered": 6,
+      "best_hits": 2,
+      "source_task": "I_login",
+      "n_steps": 4,
+      "route_source": "traj:I_login"
+     },
+     {
+      "subgoal_prov": "tgt.int.dyn.ex2",
+      "kws": [
+       "example"
+      ],
+      "route_found": true,
+      "ms": 0.24,
+      "trajectories_considered": 6,
+      "best_hits": 1,
+      "source_task": "I_dynamic_loading_ex1",
+      "n_steps": 3,
+      "route_source": "traj:I_dynamic_loading_ex1"
+     },
+     {
+      "subgoal_prov": "tgt.int.dyn.start.ex2",
+      "kws": [
+       "start"
+      ],
+      "route_found": true,
+      "ms": 0.21,
+      "trajectories_considered": 6,
+      "best_hits": 1,
+      "source_task": "I_dynamic_loading_ex1",
+      "n_steps": 3,
+      "route_source": "traj:I_dynamic_loading_ex1"
+     }
+    ]
+   },
+   "method_order": [
+    "graph",
+    "cold",
+    "fragment",
+    "trajectory"
+   ]
+  },
+  {
+   "task": "C_internet_login_status_500",
+   "method": "fragment",
+   "condition": "blind",
+   "agent": "agentB",
+   "status": "success",
+   "metrics": {
+    "loads": 16,
+    "actions": 17,
+    "reused": 6,
+    "novel": 11,
+    "failed": 0,
+    "recoveries": 1,
+    "decision_points": 24,
+    "llm_calls": 0,
+    "subgoals_ok": 3,
+    "subgoals_total": 3,
+    "wall_ms": 9462
+   },
+   "store_after": {
+    "states": 98,
+    "transitions": 254,
+    "actions": 61,
+    "fragments": 35
+   },
+   "run_wall_ms": 5675,
+   "retrieval_diag": {
+    "n_lookups": 3,
+    "retrieval_ms": 1.7,
+    "unknown": 0,
+    "lookups": [
+     {
+      "subgoal_prov": "tgt.int.login.st",
+      "kws": [
+       "login"
+      ],
+      "route_found": true,
+      "ms": 0.56,
+      "unknown": false,
+      "n_scored": 16,
+      "top_candidates": [
+       {
+        "goal_sig": "int.login",
+        "score": 1.0,
+        "content_hits": 1,
+        "provenance_hits": 1
+       },
+       {
+        "goal_sig": "generic.form.login",
+        "score": 1.0,
+        "content_hits": 1,
+        "provenance_hits": 1
+       },
+       {
+        "goal_sig": "tgt.int.login",
+        "score": 1.0,
+        "content_hits": 1,
+        "provenance_hits": 1
+       }
+      ],
+      "confidence": 0.6657,
+      "n_steps": 4,
+      "route_source": "addr:int.login"
+     },
+     {
+      "subgoal_prov": "tgt.int.status.nav",
+      "kws": [
+       "status",
+       "codes"
+      ],
+      "route_found": true,
+      "ms": 0.51,
+      "unknown": false,
+      "n_scored": 17,
+      "top_candidates": [
+       {
+        "goal_sig": "int.status.nav",
+        "score": 1.0,
+        "content_hits": 2,
+        "provenance_hits": 2
+       },
+       {
+        "goal_sig": "int.status.200",
+        "score": 1.0,
+        "content_hits": 2,
+        "provenance_hits": 1
+       }
+      ],
+      "confidence": 0.6657,
+      "n_steps": 1,
+      "route_source": "addr:int.status.nav"
+     },
+     {
+      "subgoal_prov": "tgt.int.status.500",
+      "kws": [
+       "status",
+       "500"
+      ],
+      "route_found": true,
+      "ms": 0.59,
+      "unknown": false,
+      "n_scored": 18,
+      "top_candidates": [
+       {
+        "goal_sig": "int.status.nav",
+        "score": 0.5133,
+        "content_hits": 1,
+        "provenance_hits": 1
+       },
+       {
+        "goal_sig": "int.status.200",
+        "score": 0.5133,
+        "content_hits": 1,
+        "provenance_hits": 1
+       },
+       {
+        "goal_sig": "tgt.int.status.nav",
+        "score": 0.5133,
+        "content_hits": 1,
+        "provenance_hits": 1
+       }
+      ],
+      "confidence": 0.6657,
+      "n_steps": 1,
+      "route_source": "addr:int.status.nav"
+     }
+    ]
+   },
+   "method_order": [
+    "fragment",
+    "cold",
+    "trajectory",
+    "graph"
+   ]
+  },
+  {
+   "task": "C_internet_login_status_500",
+   "method": "cold",
+   "condition": "blind",
+   "agent": "agentB",
+   "status": "partial",
+   "metrics": {
+    "loads": 12,
+    "actions": 275,
+    "reused": 0,
+    "novel": 275,
+    "failed": 0,
+    "recoveries": 0,
+    "decision_points": 6336,
+    "llm_calls": 0,
+    "subgoals_ok": 0,
+    "subgoals_total": 3,
+    "wall_ms": 169148
+   },
+   "store_after": {
+    "states": 103,
+    "transitions": 945,
+    "actions": 53,
+    "fragments": 8
+   },
+   "run_wall_ms": 85659,
+   "method_order": [
+    "fragment",
+    "cold",
+    "trajectory",
+    "graph"
+   ]
+  },
+  {
+   "task": "C_internet_login_status_500",
+   "method": "trajectory",
+   "condition": "blind",
+   "agent": "agentB",
+   "status": "success",
+   "metrics": {
+    "loads": 18,
+    "actions": 19,
+    "reused": 7,
+    "novel": 12,
+    "failed": 0,
+    "recoveries": 1,
+    "decision_points": 25,
+    "llm_calls": 0,
+    "subgoals_ok": 3,
+    "subgoals_total": 3,
+    "wall_ms": 12319
+   },
+   "store_after": {
+    "states": 70,
+    "transitions": 391,
+    "actions": 57,
+    "fragments": 35
+   },
+   "run_wall_ms": 7074,
+   "retrieval_diag": {
+    "n_lookups": 3,
+    "retrieval_ms": 0.8,
+    "unknown": 0,
+    "lookups": [
+     {
+      "subgoal_prov": "tgt.int.login.st",
+      "kws": [
+       "login"
+      ],
+      "route_found": true,
+      "ms": 0.29,
+      "trajectories_considered": 7,
+      "best_hits": 1,
+      "source_task": "I_login",
+      "n_steps": 4,
+      "route_source": "traj:I_login"
+     },
+     {
+      "subgoal_prov": "tgt.int.status.nav",
+      "kws": [
+       "status",
+       "codes"
+      ],
+      "route_found": true,
+      "ms": 0.29,
+      "trajectories_considered": 7,
+      "best_hits": 2,
+      "source_task": "I_status_200",
+      "n_steps": 2,
+      "route_source": "traj:I_status_200"
+     },
+     {
+      "subgoal_prov": "tgt.int.status.500",
+      "kws": [
+       "status",
+       "500"
+      ],
+      "route_found": true,
+      "ms": 0.25,
+      "trajectories_considered": 7,
+      "best_hits": 2,
+      "source_task": "I_status_200",
+      "n_steps": 2,
+      "route_source": "traj:I_status_200"
+     }
+    ]
+   },
+   "method_order": [
+    "fragment",
+    "cold",
+    "trajectory",
+    "graph"
+   ]
+  },
+  {
+   "task": "C_internet_login_status_500",
+   "method": "graph",
+   "condition": "blind",
+   "agent": "agentB",
+   "status": "partial",
+   "metrics": {
+    "loads": 6,
+    "actions": 151,
+    "reused": 2,
+    "novel": 149,
+    "failed": 32,
+    "recoveries": 1,
+    "decision_points": 255,
+    "llm_calls": 0,
+    "subgoals_ok": 1,
+    "subgoals_total": 3,
+    "wall_ms": 577379
+   },
+   "store_after": {
+    "states": 49,
+    "transitions": 661,
+    "actions": 52,
+    "fragments": 30
+   },
+   "run_wall_ms": 289631,
+   "retrieval_diag": {
+    "n_lookups": 3,
+    "retrieval_ms": 2.0,
+    "unknown": 2,
+    "lookups": [
+     {
+      "subgoal_prov": "tgt.int.login.st",
+      "kws": [
+       "login"
+      ],
+      "route_found": true,
+      "ms": 1.15,
+      "expanded": 10,
+      "visited_states": 11,
+      "n_steps": 1,
+      "route_source": "graph:bfs"
+     },
+     {
+      "subgoal_prov": "tgt.int.status.nav",
+      "kws": [
+       "status",
+       "codes"
+      ],
+      "route_found": false,
+      "ms": 0.4,
+      "expanded": 2,
+      "visited_states": 3,
+      "reason": "no_keyword_matching_state_within_depth"
+     },
+     {
+      "subgoal_prov": "tgt.int.status.500",
+      "kws": [
+       "status",
+       "500"
+      ],
+      "route_found": false,
+      "ms": 0.45,
+      "expanded": 2,
+      "visited_states": 3,
+      "reason": "no_keyword_matching_state_within_depth"
+     }
+    ]
+   },
+   "method_order": [
+    "fragment",
+    "cold",
+    "trajectory",
+    "graph"
+   ]
+  }
+ ],
+ "replay_runs": [
+  {
+   "task": "Q_login",
+   "method": "none",
+   "condition": "replay",
+   "agent": "agentB",
+   "status": "success",
+   "metrics": {
+    "loads": 3,
+    "actions": 4,
+    "reused": 4,
+    "novel": 0,
+    "failed": 0,
+    "recoveries": 0,
+    "decision_points": 0,
+    "llm_calls": 0,
+    "subgoals_ok": 1,
+    "subgoals_total": 1,
+    "wall_ms": 2170
+   },
+   "store_after": {
+    "states": 98,
+    "transitions": 258,
+    "actions": 61,
+    "fragments": 35
+   },
+   "run_wall_ms": 1797
+  },
+  {
+   "task": "I_login",
+   "method": "none",
+   "condition": "replay",
+   "agent": "agentB",
+   "status": "success",
+   "metrics": {
+    "loads": 3,
+    "actions": 4,
+    "reused": 4,
+    "novel": 0,
+    "failed": 0,
+    "recoveries": 0,
+    "decision_points": 0,
+    "llm_calls": 0,
+    "subgoals_ok": 1,
+    "subgoals_total": 1,
+    "wall_ms": 2608
+   },
+   "store_after": {
+    "states": 98,
+    "transitions": 262,
+    "actions": 61,
+    "fragments": 35
+   },
+   "run_wall_ms": 2273
+  },
+  {
+   "task": "B_travel_first_book",
+   "method": "none",
+   "condition": "replay",
+   "agent": "agentB",
+   "status": "success",
+   "metrics": {
+    "loads": 3,
+    "actions": 2,
+    "reused": 2,
+    "novel": 0,
+    "failed": 0,
+    "recoveries": 0,
+    "decision_points": 0,
+    "llm_calls": 0,
+    "subgoals_ok": 2,
+    "subgoals_total": 2,
+    "wall_ms": 2125
+   },
+   "store_after": {
+    "states": 98,
+    "transitions": 264,
+    "actions": 61,
+    "fragments": 35
+   },
+   "run_wall_ms": 1965
+  },
+  {
+   "task": "I_checkboxes_check_first",
+   "method": "none",
+   "condition": "replay",
+   "agent": "agentB",
+   "status": "success",
+   "metrics": {
+    "loads": 2,
+    "actions": 2,
+    "reused": 2,
+    "novel": 0,
+    "failed": 0,
+    "recoveries": 0,
+    "decision_points": 0,
+    "llm_calls": 0,
+    "subgoals_ok": 2,
+    "subgoals_total": 2,
+    "wall_ms": 1811
+   },
+   "store_after": {
+    "states": 98,
+    "transitions": 266,
+    "actions": 61,
+    "fragments": 35
+   },
+   "run_wall_ms": 1947
+  },
+  {
+   "task": "I_status_200",
+   "method": "none",
+   "condition": "replay",
+   "agent": "agentB",
+   "status": "success",
+   "metrics": {
+    "loads": 3,
+    "actions": 2,
+    "reused": 2,
+    "novel": 0,
+    "failed": 0,
+    "recoveries": 0,
+    "decision_points": 0,
+    "llm_calls": 0,
+    "subgoals_ok": 2,
+    "subgoals_total": 2,
+    "wall_ms": 2261
+   },
+   "store_after": {
+    "states": 98,
+    "transitions": 268,
+    "actions": 61,
+    "fragments": 35
+   },
+   "run_wall_ms": 2205
+  }
+ ],
+ "calibration_rows": [
+  {
+   "goal_sig_prov": "books.cat.fiction",
+   "site": "books",
+   "round": 0,
+   "conf_before": 0.6655,
+   "outcome": "success",
+   "n_steps": 1,
+   "entry_url": "https://books.toscrape.com/"
+  },
+  {
+   "goal_sig_prov": "books.cat.fiction",
+   "site": "books",
+   "round": 1,
+   "conf_before": 0.6655,
+   "outcome": "success",
+   "n_steps": 1,
+   "entry_url": "https://books.toscrape.com/"
+  },
+  {
+   "goal_sig_prov": "books.cat.romance",
+   "site": "books",
+   "round": 0,
+   "conf_before": 0.6655,
+   "outcome": "success",
+   "n_steps": 1,
+   "entry_url": "https://books.toscrape.com/"
+  },
+  {
+   "goal_sig_prov": "books.cat.romance",
+   "site": "books",
+   "round": 1,
+   "conf_before": 0.6655,
+   "outcome": "success",
+   "n_steps": 1,
+   "entry_url": "https://books.toscrape.com/"
+  },
+  {
+   "goal_sig_prov": "books.cat.travel",
+   "site": "books",
+   "round": 0,
+   "conf_before": 0.6655,
+   "outcome": "success",
+   "n_steps": 1,
+   "entry_url": "https://books.toscrape.com/"
+  },
+  {
+   "goal_sig_prov": "books.cat.travel",
+   "site": "books",
+   "round": 1,
+   "conf_before": 0.6655,
+   "outcome": "success",
+   "n_steps": 1,
+   "entry_url": "https://books.toscrape.com/"
+  },
+  {
+   "goal_sig_prov": "books.open.product",
+   "site": "books",
+   "round": 0,
+   "conf_before": 0.6655,
+   "outcome": "success",
+   "n_steps": 1,
+   "entry_url": "https://books.toscrape.com/catalogue/category/books/travel_2/index.html"
+  },
+  {
+   "goal_sig_prov": "books.open.product",
+   "site": "books",
+   "round": 1,
+   "conf_before": 0.6655,
+   "outcome": "success",
+   "n_steps": 1,
+   "entry_url": "https://books.toscrape.com/catalogue/category/books/travel_2/index.html"
+  },
+  {
+   "goal_sig_prov": "books.open.product.romance",
+   "site": "books",
+   "round": 0,
+   "conf_before": 0.6655,
+   "outcome": "success",
+   "n_steps": 1,
+   "entry_url": "https://books.toscrape.com/catalogue/category/books/romance_8/index.html"
+  },
+  {
+   "goal_sig_prov": "books.open.product.romance",
+   "site": "books",
+   "round": 1,
+   "conf_before": 0.6655,
+   "outcome": "success",
+   "n_steps": 1,
+   "entry_url": "https://books.toscrape.com/catalogue/category/books/romance_8/index.html"
+  },
+  {
+   "goal_sig_prov": "books.paginate.next",
+   "site": "books",
+   "round": 0,
+   "conf_before": 0.6655,
+   "outcome": "success",
+   "n_steps": 2,
+   "entry_url": "https://books.toscrape.com/catalogue/mesaerion-the-best-science-fiction-stories-1800-1849_983/index.html"
+  },
+  {
+   "goal_sig_prov": "books.paginate.next",
+   "site": "books",
+   "round": 1,
+   "conf_before": 0.6655,
+   "outcome": "success",
+   "n_steps": 2,
+   "entry_url": "https://books.toscrape.com/catalogue/mesaerion-the-best-science-fiction-stories-1800-1849_983/index.html"
+  },
+  {
+   "goal_sig_prov": "generic.form.login",
+   "site": "internet",
+   "round": 0,
+   "conf_before": 0.6655,
+   "outcome": "success",
+   "n_steps": 4,
+   "entry_url": "https://the-internet.herokuapp.com/"
+  },
+  {
+   "goal_sig_prov": "generic.form.login",
+   "site": "internet",
+   "round": 1,
+   "conf_before": 0.6655,
+   "outcome": "success",
+   "n_steps": 4,
+   "entry_url": "https://the-internet.herokuapp.com/"
+  },
+  {
+   "goal_sig_prov": "generic.form.login",
+   "site": "quotes",
+   "round": 0,
+   "conf_before": 0.6655,
+   "outcome": "success",
+   "n_steps": 4,
+   "entry_url": "https://quotes.toscrape.com/"
+  },
+  {
+   "goal_sig_prov": "generic.form.login",
+   "site": "quotes",
+   "round": 1,
+   "conf_before": 0.6655,
+   "outcome": "success",
+   "n_steps": 4,
+   "entry_url": "https://quotes.toscrape.com/"
+  },
+  {
+   "goal_sig_prov": "generic.paginate.next",
+   "site": "books",
+   "round": 0,
+   "conf_before": 0.6655,
+   "outcome": "fail",
+   "n_steps": 1,
+   "entry_url": "https://books.toscrape.com/catalogue/mesaerion-the-best-science-fiction-stories-1800-1849_983/index.html"
+  },
+  {
+   "goal_sig_prov": "generic.paginate.next",
+   "site": "books",
+   "round": 1,
+   "conf_before": 0.6655,
+   "outcome": "fail",
+   "n_steps": 1,
+   "entry_url": "https://books.toscrape.com/catalogue/mesaerion-the-best-science-fiction-stories-1800-1849_983/index.html"
+  },
+  {
+   "goal_sig_prov": "int.checkbox.first",
+   "site": "internet",
+   "round": 0,
+   "conf_before": 0.6655,
+   "outcome": "success",
+   "n_steps": 1,
+   "entry_url": "https://the-internet.herokuapp.com/checkboxes"
+  },
+  {
+   "goal_sig_prov": "int.checkbox.first",
+   "site": "internet",
+   "round": 1,
+   "conf_before": 0.6655,
+   "outcome": "success",
+   "n_steps": 1,
+   "entry_url": "https://the-internet.herokuapp.com/checkboxes"
+  },
+  {
+   "goal_sig_prov": "int.checkbox.nav",
+   "site": "internet",
+   "round": 0,
+   "conf_before": 0.6655,
+   "outcome": "success",
+   "n_steps": 1,
+   "entry_url": "https://the-internet.herokuapp.com/"
+  },
+  {
+   "goal_sig_prov": "int.checkbox.nav",
+   "site": "internet",
+   "round": 1,
+   "conf_before": 0.6655,
+   "outcome": "success",
+   "n_steps": 1,
+   "entry_url": "https://the-internet.herokuapp.com/"
+  },
+  {
+   "goal_sig_prov": "int.dyn.ex1",
+   "site": "internet",
+   "round": 0,
+   "conf_before": 0.6655,
+   "outcome": "success",
+   "n_steps": 1,
+   "entry_url": "https://the-internet.herokuapp.com/dynamic_loading"
+  },
+  {
+   "goal_sig_prov": "int.dyn.ex1",
+   "site": "internet",
+   "round": 1,
+   "conf_before": 0.6655,
+   "outcome": "success",
+   "n_steps": 1,
+   "entry_url": "https://the-internet.herokuapp.com/dynamic_loading"
+  },
+  {
+   "goal_sig_prov": "int.dyn.nav",
+   "site": "internet",
+   "round": 0,
+   "conf_before": 0.6655,
+   "outcome": "success",
+   "n_steps": 1,
+   "entry_url": "https://the-internet.herokuapp.com/"
+  },
+  {
+   "goal_sig_prov": "int.dyn.nav",
+   "site": "internet",
+   "round": 1,
+   "conf_before": 0.6655,
+   "outcome": "success",
+   "n_steps": 1,
+   "entry_url": "https://the-internet.herokuapp.com/"
+  },
+  {
+   "goal_sig_prov": "int.dyn.start.ex1",
+   "site": "internet",
+   "round": 0,
+   "conf_before": 0.6655,
+   "outcome": "success",
+   "n_steps": 1,
+   "entry_url": "https://the-internet.herokuapp.com/dynamic_loading/1"
+  },
+  {
+   "goal_sig_prov": "int.dyn.start.ex1",
+   "site": "internet",
+   "round": 1,
+   "conf_before": 0.6655,
+   "outcome": "success",
+   "n_steps": 1,
+   "entry_url": "https://the-internet.herokuapp.com/dynamic_loading/1"
+  },
+  {
+   "goal_sig_prov": "int.keypress.a",
+   "site": "internet",
+   "round": 0,
+   "conf_before": 0.6655,
+   "outcome": "success",
+   "n_steps": 1,
+   "entry_url": "https://the-internet.herokuapp.com/key_presses"
+  },
+  {
+   "goal_sig_prov": "int.keypress.a",
+   "site": "internet",
+   "round": 1,
+   "conf_before": 0.6655,
+   "outcome": "success",
+   "n_steps": 1,
+   "entry_url": "https://the-internet.herokuapp.com/key_presses"
+  },
+  {
+   "goal_sig_prov": "int.keypress.nav",
+   "site": "internet",
+   "round": 0,
+   "conf_before": 0.6655,
+   "outcome": "success",
+   "n_steps": 1,
+   "entry_url": "https://the-internet.herokuapp.com/"
+  },
+  {
+   "goal_sig_prov": "int.keypress.nav",
+   "site": "internet",
+   "round": 1,
+   "conf_before": 0.6655,
+   "outcome": "success",
+   "n_steps": 1,
+   "entry_url": "https://the-internet.herokuapp.com/"
+  },
+  {
+   "goal_sig_prov": "int.login",
+   "site": "internet",
+   "round": 0,
+   "conf_before": 0.6655,
+   "outcome": "success",
+   "n_steps": 4,
+   "entry_url": "https://the-internet.herokuapp.com/"
+  },
+  {
+   "goal_sig_prov": "int.login",
+   "site": "internet",
+   "round": 1,
+   "conf_before": 0.6655,
+   "outcome": "success",
+   "n_steps": 4,
+   "entry_url": "https://the-internet.herokuapp.com/"
+  },
+  {
+   "goal_sig_prov": "int.status.200",
+   "site": "internet",
+   "round": 0,
+   "conf_before": 0.6655,
+   "outcome": "success",
+   "n_steps": 1,
+   "entry_url": "https://the-internet.herokuapp.com/status_codes"
+  },
+  {
+   "goal_sig_prov": "int.status.200",
+   "site": "internet",
+   "round": 1,
+   "conf_before": 0.6655,
+   "outcome": "success",
+   "n_steps": 1,
+   "entry_url": "https://the-internet.herokuapp.com/status_codes"
+  },
+  {
+   "goal_sig_prov": "int.status.nav",
+   "site": "internet",
+   "round": 0,
+   "conf_before": 0.6655,
+   "outcome": "success",
+   "n_steps": 1,
+   "entry_url": "https://the-internet.herokuapp.com/"
+  },
+  {
+   "goal_sig_prov": "int.status.nav",
+   "site": "internet",
+   "round": 1,
+   "conf_before": 0.6655,
+   "outcome": "success",
+   "n_steps": 1,
+   "entry_url": "https://the-internet.herokuapp.com/"
+  },
+  {
+   "goal_sig_prov": "quotes.login",
+   "site": "quotes",
+   "round": 0,
+   "conf_before": 0.6655,
+   "outcome": "success",
+   "n_steps": 4,
+   "entry_url": "https://quotes.toscrape.com/"
+  },
+  {
+   "goal_sig_prov": "quotes.login",
+   "site": "quotes",
+   "round": 1,
+   "conf_before": 0.6655,
+   "outcome": "success",
+   "n_steps": 4,
+   "entry_url": "https://quotes.toscrape.com/"
+  }
+ ],
+ "store_final": {
+  "states": 98,
+  "transitions": 268,
+  "actions": 61,
+  "fragments": 35
+ }
+}

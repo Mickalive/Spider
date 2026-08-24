@@ -1,0 +1,1129 @@
+{
+ "source": "run2b_cycle32670239235_20260824_005039.json",
+ "variant": "run2b",
+ "cycle": "32670239235",
+ "commit": "c55aa9c1b93a",
+ "per_target_table": {
+  "C_books_fantasy_paged_product": {
+   "fragment": {
+    "status": "partial",
+    "success": 0,
+    "actions": 95,
+    "novel": 91,
+    "reused": 4,
+    "failed": 0,
+    "recoveries": 0,
+    "loads": 93,
+    "subgoals_ok": 2,
+    "subgoals_total": 3,
+    "decision_points": 6346,
+    "wall_ms": 50521,
+    "retrieval_ms": 1.0,
+    "unknown_lookups": 1
+   },
+   "cold": {
+    "status": "partial",
+    "success": 0,
+    "actions": 97,
+    "novel": 97,
+    "reused": 0,
+    "failed": 0,
+    "recoveries": 0,
+    "loads": 94,
+    "subgoals_ok": 2,
+    "subgoals_total": 3,
+    "decision_points": 7146,
+    "wall_ms": 48128,
+    "retrieval_ms": null,
+    "unknown_lookups": null
+   },
+   "trajectory": {
+    "status": "partial",
+    "success": 0,
+    "actions": 98,
+    "novel": 92,
+    "reused": 6,
+    "failed": 0,
+    "recoveries": 1,
+    "loads": 97,
+    "subgoals_ok": 2,
+    "subgoals_total": 3,
+    "decision_points": 6368,
+    "wall_ms": 50283,
+    "retrieval_ms": 0.4,
+    "unknown_lookups": 1
+   },
+   "graph": {
+    "status": "partial",
+    "success": 0,
+    "actions": 100,
+    "novel": 94,
+    "reused": 6,
+    "failed": 0,
+    "recoveries": 2,
+    "loads": 99,
+    "subgoals_ok": 2,
+    "subgoals_total": 3,
+    "decision_points": 6452,
+    "wall_ms": 51895,
+    "retrieval_ms": 11.9,
+    "unknown_lookups": 0
+   }
+  },
+  "C_internet_login_checkboxes": {
+   "graph": {
+    "status": "partial",
+    "success": 0,
+    "actions": 180,
+    "novel": 178,
+    "reused": 2,
+    "failed": 32,
+    "recoveries": 1,
+    "loads": 6,
+    "subgoals_ok": 1,
+    "subgoals_total": 3,
+    "decision_points": 303,
+    "wall_ms": 593928,
+    "retrieval_ms": 1.2,
+    "unknown_lookups": 2
+   },
+   "fragment": {
+    "status": "success",
+    "success": 1,
+    "actions": 7,
+    "novel": 2,
+    "reused": 5,
+    "failed": 0,
+    "recoveries": 0,
+    "loads": 5,
+    "subgoals_ok": 3,
+    "subgoals_total": 3,
+    "decision_points": 1,
+    "wall_ms": 3914,
+    "retrieval_ms": 1.2,
+    "unknown_lookups": 1
+   },
+   "trajectory": {
+    "status": "partial",
+    "success": 0,
+    "actions": 91,
+    "novel": 81,
+    "reused": 10,
+    "failed": 15,
+    "recoveries": 1,
+    "loads": 9,
+    "subgoals_ok": 2,
+    "subgoals_total": 3,
+    "decision_points": 138,
+    "wall_ms": 284798,
+    "retrieval_ms": 0.5,
+    "unknown_lookups": 0
+   },
+   "cold": {
+    "status": "partial",
+    "success": 0,
+    "actions": 275,
+    "novel": 275,
+    "reused": 0,
+    "failed": 0,
+    "recoveries": 0,
+    "loads": 18,
+    "subgoals_ok": 0,
+    "subgoals_total": 3,
+    "decision_points": 6336,
+    "wall_ms": 168423,
+    "retrieval_ms": null,
+    "unknown_lookups": null
+   }
+  },
+  "C_internet_login_dyn_ex2": {
+   "graph": {
+    "status": "partial",
+    "success": 0,
+    "actions": 182,
+    "novel": 180,
+    "reused": 2,
+    "failed": 32,
+    "recoveries": 1,
+    "loads": 6,
+    "subgoals_ok": 1,
+    "subgoals_total": 4,
+    "decision_points": 305,
+    "wall_ms": 905609,
+    "retrieval_ms": 2.1,
+    "unknown_lookups": 3
+   },
+   "cold": {
+    "status": "partial",
+    "success": 0,
+    "actions": 285,
+    "novel": 285,
+    "reused": 0,
+    "failed": 0,
+    "recoveries": 0,
+    "loads": 15,
+    "subgoals_ok": 0,
+    "subgoals_total": 4,
+    "decision_points": 6566,
+    "wall_ms": 492470,
+    "retrieval_ms": null,
+    "unknown_lookups": null
+   },
+   "fragment": {
+    "status": "partial",
+    "success": 0,
+    "actions": 119,
+    "novel": 113,
+    "reused": 6,
+    "failed": 0,
+    "recoveries": 2,
+    "loads": 30,
+    "subgoals_ok": 2,
+    "subgoals_total": 4,
+    "decision_points": 2552,
+    "wall_ms": 384280,
+    "retrieval_ms": 1.9,
+    "unknown_lookups": 0
+   },
+   "trajectory": {
+    "status": "partial",
+    "success": 0,
+    "actions": 108,
+    "novel": 94,
+    "reused": 14,
+    "failed": 15,
+    "recoveries": 3,
+    "loads": 21,
+    "subgoals_ok": 3,
+    "subgoals_total": 4,
+    "decision_points": 151,
+    "wall_ms": 339996,
+    "retrieval_ms": 0.9,
+    "unknown_lookups": 0
+   }
+  },
+  "C_internet_login_status_500": {
+   "fragment": {
+    "status": "success",
+    "success": 1,
+    "actions": 17,
+    "novel": 11,
+    "reused": 6,
+    "failed": 0,
+    "recoveries": 1,
+    "loads": 16,
+    "subgoals_ok": 3,
+    "subgoals_total": 3,
+    "decision_points": 24,
+    "wall_ms": 9462,
+    "retrieval_ms": 1.7,
+    "unknown_lookups": 0
+   },
+   "cold": {
+    "status": "partial",
+    "success": 0,
+    "actions": 275,
+    "novel": 275,
+    "reused": 0,
+    "failed": 0,
+    "recoveries": 0,
+    "loads": 12,
+    "subgoals_ok": 0,
+    "subgoals_total": 3,
+    "decision_points": 6336,
+    "wall_ms": 169148,
+    "retrieval_ms": null,
+    "unknown_lookups": null
+   },
+   "trajectory": {
+    "status": "success",
+    "success": 1,
+    "actions": 19,
+    "novel": 12,
+    "reused": 7,
+    "failed": 0,
+    "recoveries": 1,
+    "loads": 18,
+    "subgoals_ok": 3,
+    "subgoals_total": 3,
+    "decision_points": 25,
+    "wall_ms": 12319,
+    "retrieval_ms": 0.8,
+    "unknown_lookups": 0
+   },
+   "graph": {
+    "status": "partial",
+    "success": 0,
+    "actions": 151,
+    "novel": 149,
+    "reused": 2,
+    "failed": 32,
+    "recoveries": 1,
+    "loads": 6,
+    "subgoals_ok": 1,
+    "subgoals_total": 3,
+    "decision_points": 255,
+    "wall_ms": 577379,
+    "retrieval_ms": 2.0,
+    "unknown_lookups": 2
+   }
+  },
+  "C_quotes_login_love_p2": {
+   "trajectory": {
+    "status": "success",
+    "success": 1,
+    "actions": 63,
+    "novel": 58,
+    "reused": 5,
+    "failed": 0,
+    "recoveries": 1,
+    "loads": 55,
+    "subgoals_ok": 3,
+    "subgoals_total": 3,
+    "decision_points": 2345,
+    "wall_ms": 36399,
+    "retrieval_ms": 0.3,
+    "unknown_lookups": 0
+   },
+   "fragment": {
+    "status": "success",
+    "success": 1,
+    "actions": 9,
+    "novel": 2,
+    "reused": 7,
+    "failed": 0,
+    "recoveries": 1,
+    "loads": 7,
+    "subgoals_ok": 3,
+    "subgoals_total": 3,
+    "decision_points": 55,
+    "wall_ms": 5575,
+    "retrieval_ms": 0.7,
+    "unknown_lookups": 0
+   },
+   "cold": {
+    "status": "success",
+    "success": 1,
+    "actions": 28,
+    "novel": 28,
+    "reused": 0,
+    "failed": 0,
+    "recoveries": 0,
+    "loads": 19,
+    "subgoals_ok": 3,
+    "subgoals_total": 3,
+    "decision_points": 859,
+    "wall_ms": 15430,
+    "retrieval_ms": null,
+    "unknown_lookups": null
+   },
+   "graph": {
+    "status": "success",
+    "success": 1,
+    "actions": 29,
+    "novel": 27,
+    "reused": 2,
+    "failed": 0,
+    "recoveries": 1,
+    "loads": 21,
+    "subgoals_ok": 3,
+    "subgoals_total": 3,
+    "decision_points": 753,
+    "wall_ms": 16547,
+    "retrieval_ms": 1.2,
+    "unknown_lookups": 2
+   }
+  }
+ },
+ "aggregate": {
+  "cold": {
+   "novel_actions_mean": 192.0,
+   "actions_mean": 192.0,
+   "reused_mean": 0.0,
+   "success_rate": 0.2,
+   "recoveries_total": 0,
+   "wall_s_mean": 178.7
+  },
+  "trajectory": {
+   "novel_actions_mean": 67.4,
+   "actions_mean": 75.8,
+   "reused_mean": 8.4,
+   "success_rate": 0.4,
+   "recoveries_total": 7,
+   "wall_s_mean": 144.8
+  },
+  "graph": {
+   "novel_actions_mean": 125.6,
+   "actions_mean": 128.4,
+   "reused_mean": 2.8,
+   "success_rate": 0.2,
+   "recoveries_total": 6,
+   "wall_s_mean": 429.1
+  },
+  "fragment": {
+   "novel_actions_mean": 43.8,
+   "actions_mean": 49.4,
+   "reused_mean": 5.6,
+   "success_rate": 0.6,
+   "recoveries_total": 4,
+   "wall_s_mean": 90.8
+  }
+ },
+ "paired_deltas": {
+  "fragment_minus_cold__novel_actions": {
+   "mean_diff": -148.2,
+   "ci95": [
+    -249.2,
+    -47.2
+   ],
+   "n_targets": 5,
+   "per_task_diffs": [
+    -6,
+    -273,
+    -172,
+    -264,
+    -26
+   ]
+  },
+  "fragment_minus_cold__success": {
+   "mean_diff": 0.4,
+   "ci95": [
+    0.0,
+    0.8
+   ],
+   "n_targets": 5,
+   "per_task_diffs": [
+    0,
+    1,
+    0,
+    1,
+    0
+   ]
+  },
+  "fragment_minus_trajectory__novel_actions": {
+   "mean_diff": -23.6,
+   "ci95": [
+    -58.8,
+    7.0
+   ],
+   "n_targets": 5,
+   "per_task_diffs": [
+    -1,
+    -79,
+    19,
+    -1,
+    -56
+   ]
+  },
+  "fragment_minus_trajectory__success": {
+   "mean_diff": 0.2,
+   "ci95": [
+    0.0,
+    0.6
+   ],
+   "n_targets": 5,
+   "per_task_diffs": [
+    0,
+    1,
+    0,
+    0,
+    0
+   ]
+  },
+  "fragment_minus_graph__novel_actions": {
+   "mean_diff": -81.8,
+   "ci95": [
+    -139.0,
+    -24.6
+   ],
+   "n_targets": 5,
+   "per_task_diffs": [
+    -3,
+    -176,
+    -67,
+    -138,
+    -25
+   ]
+  },
+  "fragment_minus_graph__success": {
+   "mean_diff": 0.4,
+   "ci95": [
+    0.0,
+    0.8
+   ],
+   "n_targets": 5,
+   "per_task_diffs": [
+    0,
+    1,
+    0,
+    1,
+    0
+   ]
+  }
+ },
+ "ledger_stream_len": 35,
+ "generations": {
+  "1": {
+   "n_tasks": 10,
+   "mean_novel": 2.5,
+   "mean_reused": 0.0
+  },
+  "2": {
+   "n_tasks": 20,
+   "mean_novel": 107.2,
+   "mean_reused": 4.2
+  },
+  "3": {
+   "n_tasks": 5,
+   "mean_novel": 0.0,
+   "mean_reused": 2.8
+  }
+ },
+ "stream": [
+  {
+   "i": 1,
+   "phase": "production",
+   "gen": 1,
+   "agent": "agentG",
+   "task": "B_travel_first_book",
+   "condition": "cold",
+   "status": "success",
+   "actions": 2,
+   "novel": 2,
+   "reused": 0,
+   "store": {
+    "states": 3,
+    "transitions": 2,
+    "actions": 2,
+    "fragments": 2
+   }
+  },
+  {
+   "i": 2,
+   "phase": "production",
+   "gen": 1,
+   "agent": "agentG",
+   "task": "B_fiction_paged",
+   "condition": "cold",
+   "status": "success",
+   "actions": 3,
+   "novel": 3,
+   "reused": 0,
+   "store": {
+    "states": 6,
+    "transitions": 5,
+    "actions": 4,
+    "fragments": 5
+   }
+  },
+  {
+   "i": 3,
+   "phase": "production",
+   "gen": 1,
+   "agent": "agentG",
+   "task": "B_romance_first_book",
+   "condition": "cold",
+   "status": "success",
+   "actions": 2,
+   "novel": 2,
+   "reused": 0,
+   "store": {
+    "states": 8,
+    "transitions": 7,
+    "actions": 5,
+    "fragments": 7
+   }
+  },
+  {
+   "i": 4,
+   "phase": "production",
+   "gen": 1,
+   "agent": "agentG",
+   "task": "Q_login",
+   "condition": "cold",
+   "status": "success",
+   "actions": 4,
+   "novel": 4,
+   "reused": 0,
+   "store": {
+    "states": 11,
+    "transitions": 11,
+    "actions": 9,
+    "fragments": 9
+   }
+  },
+  {
+   "i": 5,
+   "phase": "production",
+   "gen": 1,
+   "agent": "agentG",
+   "task": "I_login",
+   "condition": "cold",
+   "status": "success",
+   "actions": 4,
+   "novel": 4,
+   "reused": 0,
+   "store": {
+    "states": 14,
+    "transitions": 15,
+    "actions": 13,
+    "fragments": 11
+   }
+  },
+  {
+   "i": 6,
+   "phase": "production",
+   "gen": 1,
+   "agent": "agentG",
+   "task": "I_checkboxes_check_first",
+   "condition": "cold",
+   "status": "success",
+   "actions": 2,
+   "novel": 2,
+   "reused": 0,
+   "store": {
+    "states": 15,
+    "transitions": 17,
+    "actions": 15,
+    "fragments": 13
+   }
+  },
+  {
+   "i": 7,
+   "phase": "production",
+   "gen": 1,
+   "agent": "agentG",
+   "task": "I_dynamic_loading_ex1",
+   "condition": "cold",
+   "status": "success",
+   "actions": 3,
+   "novel": 3,
+   "reused": 0,
+   "store": {
+    "states": 18,
+    "transitions": 20,
+    "actions": 18,
+    "fragments": 16
+   }
+  },
+  {
+   "i": 8,
+   "phase": "production",
+   "gen": 1,
+   "agent": "agentG",
+   "task": "I_key_presses_a",
+   "condition": "cold",
+   "status": "success",
+   "actions": 2,
+   "novel": 2,
+   "reused": 0,
+   "store": {
+    "states": 19,
+    "transitions": 22,
+    "actions": 20,
+    "fragments": 18
+   }
+  },
+  {
+   "i": 9,
+   "phase": "production",
+   "gen": 1,
+   "agent": "agentG",
+   "task": "I_status_200",
+   "condition": "cold",
+   "status": "success",
+   "actions": 2,
+   "novel": 2,
+   "reused": 0,
+   "store": {
+    "states": 21,
+    "transitions": 24,
+    "actions": 22,
+    "fragments": 20
+   }
+  },
+  {
+   "i": 10,
+   "phase": "production",
+   "gen": 1,
+   "agent": "agentG",
+   "task": "Q_tag_love_nav",
+   "condition": "cold",
+   "status": "success",
+   "actions": 1,
+   "novel": 1,
+   "reused": 0,
+   "store": {
+    "states": 22,
+    "transitions": 25,
+    "actions": 23,
+    "fragments": 21
+   }
+  },
+  {
+   "i": 11,
+   "phase": "target",
+   "gen": 2,
+   "agent": "agentB",
+   "task": "C_books_fantasy_paged_product",
+   "condition": "blind",
+   "status": "partial",
+   "actions": 95,
+   "novel": 91,
+   "reused": 4,
+   "store": {
+    "states": 43,
+    "transitions": 119,
+    "actions": 45,
+    "fragments": 23
+   }
+  },
+  {
+   "i": 12,
+   "phase": "target",
+   "gen": 2,
+   "agent": "agentB",
+   "task": "C_books_fantasy_paged_product",
+   "condition": "blind",
+   "status": "partial",
+   "actions": 97,
+   "novel": 97,
+   "reused": 0,
+   "store": {
+    "states": 27,
+    "transitions": 97,
+    "actions": 25,
+    "fragments": 3
+   }
+  },
+  {
+   "i": 13,
+   "phase": "target",
+   "gen": 2,
+   "agent": "agentB",
+   "task": "C_books_fantasy_paged_product",
+   "condition": "blind",
+   "status": "partial",
+   "actions": 98,
+   "novel": 92,
+   "reused": 6,
+   "store": {
+    "states": 45,
+    "transitions": 122,
+    "actions": 45,
+    "fragments": 23
+   }
+  },
+  {
+   "i": 14,
+   "phase": "target",
+   "gen": 2,
+   "agent": "agentB",
+   "task": "C_books_fantasy_paged_product",
+   "condition": "blind",
+   "status": "partial",
+   "actions": 100,
+   "novel": 94,
+   "reused": 6,
+   "store": {
+    "states": 43,
+    "transitions": 123,
+    "actions": 45,
+    "fragments": 23
+   }
+  },
+  {
+   "i": 15,
+   "phase": "target",
+   "gen": 2,
+   "agent": "agentB",
+   "task": "C_internet_login_checkboxes",
+   "condition": "blind",
+   "status": "partial",
+   "actions": 180,
+   "novel": 178,
+   "reused": 2,
+   "store": {
+    "states": 46,
+    "transitions": 302,
+    "actions": 47,
+    "fragments": 24
+   }
+  },
+  {
+   "i": 16,
+   "phase": "target",
+   "gen": 2,
+   "agent": "agentB",
+   "task": "C_internet_login_checkboxes",
+   "condition": "blind",
+   "status": "success",
+   "actions": 7,
+   "novel": 2,
+   "reused": 5,
+   "store": {
+    "states": 43,
+    "transitions": 125,
+    "actions": 45,
+    "fragments": 26
+   }
+  },
+  {
+   "i": 17,
+   "phase": "target",
+   "gen": 2,
+   "agent": "agentB",
+   "task": "C_internet_login_checkboxes",
+   "condition": "blind",
+   "status": "partial",
+   "actions": 91,
+   "novel": 81,
+   "reused": 10,
+   "store": {
+    "states": 46,
+    "transitions": 211,
+    "actions": 47,
+    "fragments": 25
+   }
+  },
+  {
+   "i": 18,
+   "phase": "target",
+   "gen": 2,
+   "agent": "agentB",
+   "task": "C_internet_login_checkboxes",
+   "condition": "blind",
+   "status": "partial",
+   "actions": 275,
+   "novel": 275,
+   "reused": 0,
+   "store": {
+    "states": 95,
+    "transitions": 367,
+    "actions": 43,
+    "fragments": 3
+   }
+  },
+  {
+   "i": 19,
+   "phase": "target",
+   "gen": 2,
+   "agent": "agentB",
+   "task": "C_quotes_login_love_p2",
+   "condition": "blind",
+   "status": "success",
+   "actions": 63,
+   "novel": 58,
+   "reused": 5,
+   "store": {
+    "states": 67,
+    "transitions": 273,
+    "actions": 52,
+    "fragments": 29
+   }
+  },
+  {
+   "i": 20,
+   "phase": "target",
+   "gen": 2,
+   "agent": "agentB",
+   "task": "C_quotes_login_love_p2",
+   "condition": "blind",
+   "status": "success",
+   "actions": 9,
+   "novel": 2,
+   "reused": 7,
+   "store": {
+    "states": 45,
+    "transitions": 133,
+    "actions": 45,
+    "fragments": 30
+   }
+  },
+  {
+   "i": 21,
+   "phase": "target",
+   "gen": 2,
+   "agent": "agentB",
+   "task": "C_quotes_login_love_p2",
+   "condition": "blind",
+   "status": "success",
+   "actions": 28,
+   "novel": 28,
+   "reused": 0,
+   "store": {
+    "states": 102,
+    "transitions": 395,
+    "actions": 53,
+    "fragments": 8
+   }
+  },
+  {
+   "i": 22,
+   "phase": "target",
+   "gen": 2,
+   "agent": "agentB",
+   "task": "C_quotes_login_love_p2",
+   "condition": "blind",
+   "status": "success",
+   "actions": 29,
+   "novel": 27,
+   "reused": 2,
+   "store": {
+    "states": 49,
+    "transitions": 330,
+    "actions": 52,
+    "fragments": 28
+   }
+  },
+  {
+   "i": 23,
+   "phase": "target",
+   "gen": 2,
+   "agent": "agentB",
+   "task": "C_internet_login_dyn_ex2",
+   "condition": "blind",
+   "status": "partial",
+   "actions": 182,
+   "novel": 180,
+   "reused": 2,
+   "store": {
+    "states": 49,
+    "transitions": 511,
+    "actions": 52,
+    "fragments": 29
+   }
+  },
+  {
+   "i": 24,
+   "phase": "target",
+   "gen": 2,
+   "agent": "agentB",
+   "task": "C_internet_login_dyn_ex2",
+   "condition": "blind",
+   "status": "partial",
+   "actions": 285,
+   "novel": 285,
+   "reused": 0,
+   "store": {
+    "states": 103,
+    "transitions": 675,
+    "actions": 53,
+    "fragments": 8
+   }
+  },
+  {
+   "i": 25,
+   "phase": "target",
+   "gen": 2,
+   "agent": "agentB",
+   "task": "C_internet_login_dyn_ex2",
+   "condition": "blind",
+   "status": "partial",
+   "actions": 119,
+   "novel": 113,
+   "reused": 6,
+   "store": {
+    "states": 98,
+    "transitions": 239,
+    "actions": 57,
+    "fragments": 32
+   }
+  },
+  {
+   "i": 26,
+   "phase": "target",
+   "gen": 2,
+   "agent": "agentB",
+   "task": "C_internet_login_dyn_ex2",
+   "condition": "blind",
+   "status": "partial",
+   "actions": 108,
+   "novel": 94,
+   "reused": 14,
+   "store": {
+    "states": 70,
+    "transitions": 374,
+    "actions": 53,
+    "fragments": 32
+   }
+  },
+  {
+   "i": 27,
+   "phase": "target",
+   "gen": 2,
+   "agent": "agentB",
+   "task": "C_internet_login_status_500",
+   "condition": "blind",
+   "status": "success",
+   "actions": 17,
+   "novel": 11,
+   "reused": 6,
+   "store": {
+    "states": 98,
+    "transitions": 254,
+    "actions": 61,
+    "fragments": 35
+   }
+  },
+  {
+   "i": 28,
+   "phase": "target",
+   "gen": 2,
+   "agent": "agentB",
+   "task": "C_internet_login_status_500",
+   "condition": "blind",
+   "status": "partial",
+   "actions": 275,
+   "novel": 275,
+   "reused": 0,
+   "store": {
+    "states": 103,
+    "transitions": 945,
+    "actions": 53,
+    "fragments": 8
+   }
+  },
+  {
+   "i": 29,
+   "phase": "target",
+   "gen": 2,
+   "agent": "agentB",
+   "task": "C_internet_login_status_500",
+   "condition": "blind",
+   "status": "success",
+   "actions": 19,
+   "novel": 12,
+   "reused": 7,
+   "store": {
+    "states": 70,
+    "transitions": 391,
+    "actions": 57,
+    "fragments": 35
+   }
+  },
+  {
+   "i": 30,
+   "phase": "target",
+   "gen": 2,
+   "agent": "agentB",
+   "task": "C_internet_login_status_500",
+   "condition": "blind",
+   "status": "partial",
+   "actions": 151,
+   "novel": 149,
+   "reused": 2,
+   "store": {
+    "states": 49,
+    "transitions": 661,
+    "actions": 52,
+    "fragments": 30
+   }
+  },
+  {
+   "i": 31,
+   "phase": "replay_validation",
+   "gen": 3,
+   "agent": "agentB",
+   "task": "Q_login",
+   "condition": "replay",
+   "status": "success",
+   "actions": 4,
+   "novel": 0,
+   "reused": 4,
+   "store": {
+    "states": 98,
+    "transitions": 258,
+    "actions": 61,
+    "fragments": 35
+   }
+  },
+  {
+   "i": 32,
+   "phase": "replay_validation",
+   "gen": 3,
+   "agent": "agentB",
+   "task": "I_login",
+   "condition": "replay",
+   "status": "success",
+   "actions": 4,
+   "novel": 0,
+   "reused": 4,
+   "store": {
+    "states": 98,
+    "transitions": 262,
+    "actions": 61,
+    "fragments": 35
+   }
+  },
+  {
+   "i": 33,
+   "phase": "replay_validation",
+   "gen": 3,
+   "agent": "agentB",
+   "task": "B_travel_first_book",
+   "condition": "replay",
+   "status": "success",
+   "actions": 2,
+   "novel": 0,
+   "reused": 2,
+   "store": {
+    "states": 98,
+    "transitions": 264,
+    "actions": 61,
+    "fragments": 35
+   }
+  },
+  {
+   "i": 34,
+   "phase": "replay_validation",
+   "gen": 3,
+   "agent": "agentB",
+   "task": "I_checkboxes_check_first",
+   "condition": "replay",
+   "status": "success",
+   "actions": 2,
+   "novel": 0,
+   "reused": 2,
+   "store": {
+    "states": 98,
+    "transitions": 266,
+    "actions": 61,
+    "fragments": 35
+   }
+  },
+  {
+   "i": 35,
+   "phase": "replay_validation",
+   "gen": 3,
+   "agent": "agentB",
+   "task": "I_status_200",
+   "condition": "replay",
+   "status": "success",
+   "actions": 2,
+   "novel": 0,
+   "reused": 2,
+   "store": {
+    "states": 98,
+    "transitions": 268,
+    "actions": 61,
+    "fragments": 35
+   }
+  }
+ ],
+ "addressing_quality": {
+  "n_lookups": 16,
+  "route_found_rate": 0.875,
+  "unknown_rate": 0.125,
+  "mean_retrieval_ms_per_lookup": 0.408
+ },
+ "calibration": {
+  "n_rounds_total": 40,
+  "empirical_success_by_confidence_bucket": {
+   "0.5-0.75": {
+    "n": 40,
+    "rate": 0.95
+   }
+  }
+ }
+}
