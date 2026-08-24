@@ -27,22 +27,32 @@ jobs:
           set -euo pipefail
           gh api "repos/$GITHUB_REPOSITORY/actions/runs?per_page=100" > /tmp/runs.json
 
-          jq -r '.workflow_runs[] | select(.status == "completed") | select(.name == "SPIDER Multi-Runner Lab" or .name == "SPIDER Lab" or .name == "SPIDER Autonomous Lab — Launch" or .name == "SPIDER Launch Bridge") | [.id,.name,.conclusion,.created_at] | @tsv' /tmp/runs.json > /tmp/delete.tsv
+          jq -r '.workflow_runs[]
+            | select(.status == "completed")
+            | select(
+                .name == "SPIDER Multi-Runner Lab" or
+                .name == "SPIDER Lab" or
+                .name == "SPIDER Autonomous Lab — Launch" or
+                .name == "SPIDER Launch Bridge"
+              )
+            | [.id,.name,.conclusion,.created_at]
+            | @tsv' /tmp/runs.json > /tmp/delete.tsv
 
           COUNT=0
-          : > /tmp/deleted.tsv
           while IFS=$'\t' read -r ID NAME CONCLUSION CREATED; do
             [ -z "${ID:-}" ] && continue
             echo "Deleting obsolete completed run $ID [$NAME] $CONCLUSION $CREATED"
             gh api -X DELETE "repos/$GITHUB_REPOSITORY/actions/runs/$ID"
-            printf '%s\t%s\t%s\t%s\n' "$ID" "$NAME" "$CONCLUSION" "$CREATED" >> /tmp/deleted.tsv
             COUNT=$((COUNT + 1))
           done < /tmp/delete.tsv
 
           mkdir -p state
-          jq -Rn --argjson count "$COUNT" --arg run_id "$GITHUB_RUN_ID" --arg at "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
-            --slurpfile raw <(awk -F '\t' '{printf "{\"id\":%s,\"name\":%s,\"conclusion\":%s,\"created_at\":%s}\n", $1, \"\"\"\" $2 \"\"\"\", \"\"\"\" $3 \"\"\"\", \"\"\"\" $4 \"\"\"\"}' /tmp/deleted.tsv 2>/dev/null || true) \
-            '{cleanup_run_id:$run_id, cleaned_at:$at, deleted_count:$count}' > state/maintenance_last_cleanup.json
+          jq -n \
+            --arg run_id "$GITHUB_RUN_ID" \
+            --arg at "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+            --argjson count "$COUNT" \
+            '{cleanup_run_id:$run_id, cleaned_at:$at, deleted_count:$count}' \
+            > state/maintenance_last_cleanup.json
 
       - name: Persist cleanup receipt
         shell: bash
