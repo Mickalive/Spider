@@ -1,0 +1,100 @@
+name: SPIDER One-shot Run History Cleanup
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/run-history-cleanup.yml'
+
+permissions:
+  actions: write
+  contents: write
+
+concurrency:
+  group: spider-one-shot-run-history-cleanup
+  cancel-in-progress: false
+
+jobs:
+  cleanup:
+    name: Prune obsolete completed workflow runs
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Delete obsolete completed runs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          CURRENT_NAMES='[
+            "SPIDER Graph Lane",
+            "SPIDER Physics Lane",
+            "SPIDER Intel Research Lane",
+            "SPIDER Intel Supervisor",
+            "SPIDER Research Program Supervisor",
+            "SPIDER Ox Watchdog",
+            "SPIDER Product and Beta Lane",
+            "SPIDER Product Beta Repair",
+            "SPIDER Launcher — Graph + Physics",
+            "SPIDER Meta Sync",
+            "SPIDER One-shot Run History Cleanup"
+          ]'
+
+          deleted_total=0
+          pass=0
+          while true; do
+            pass=$((pass + 1))
+            RUNS=$(gh run list --repo "$GITHUB_REPOSITORY" --all --limit 1000 \
+              --json databaseId,workflowName,status,conclusion,createdAt)
+
+            KEEP=$(jq -c --argjson names "$CURRENT_NAMES" '
+              [ $names[] as $name |
+                ([.[] | select(.workflowName == $name and .status == "completed")]
+                 | sort_by(.createdAt)
+                 | last
+                 | .databaseId? )
+              ] | map(select(. != null))
+            ' <<<"$RUNS")
+
+            DELETE=$(jq -c --argjson names "$CURRENT_NAMES" --argjson keep "$KEEP" '
+              [ .[] |
+                select(.status == "completed") |
+                select((.workflowName as $n | ($names | index($n))) == null
+                       or (.databaseId as $id | ($keep | index($id))) == null) |
+                {id:.databaseId,name:.workflowName,conclusion:.conclusion,createdAt:.createdAt}
+              ]
+            ' <<<"$RUNS")
+
+            count=$(jq 'length' <<<"$DELETE")
+            echo "Cleanup pass $pass: $count obsolete completed runs found; keeping latest completed run of every current workflow plus every non-completed run."
+            if [[ "$count" -eq 0 ]]; then
+              break
+            fi
+
+            while IFS=$'\t' read -r id name conclusion created; do
+              [[ -n "$id" ]] || continue
+              echo "Deleting run $id | $name | $conclusion | $created"
+              gh api --method DELETE "repos/${GITHUB_REPOSITORY}/actions/runs/${id}"
+              deleted_total=$((deleted_total + 1))
+            done < <(jq -r '.[] | [.id,.name,.conclusion,.createdAt] | @tsv' <<<"$DELETE")
+          done
+
+          echo "Deleted $deleted_total obsolete completed workflow runs."
+
+      - name: Remove this one-shot workflow from main
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "spider-maintenance"
+          git config user.email "spider-maintenance@autonomous.local"
+          git rm .github/workflows/run-history-cleanup.yml
+          git commit -m "maintenance: remove one-shot run cleaner [skip ci]"
+          git pull --rebase origin main
+          git push origin HEAD:main
