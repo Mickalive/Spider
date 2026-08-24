@@ -3,5 +3,6 @@
   "graph_repair_round": 1,
   "physics_successor_from_run": 32689298051,
   "requested_at": "2026-08-24T20:31:00Z",
-  "trigger_revision": 2
+  "trigger_revision": 3,
+  "repo_visibility": "public"
 }
