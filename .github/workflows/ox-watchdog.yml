@@ -4,6 +4,12 @@ on:
   schedule:
     - cron: "*/5 * * * *"
   workflow_dispatch:
+  workflow_run:
+    workflows:
+      - "SPIDER Graph Lane"
+      - "SPIDER Physics Lane"
+      - "SPIDER Meta Sync"
+    types: [completed]
 
 permissions:
   actions: write
@@ -19,7 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - name: Re-run failed jobs only when Ox exhausted transient retries
+      - name: Re-run transient Ox failures without resurrecting real failures
         env:
           GH_TOKEN: ${{ github.token }}
         shell: bash
@@ -34,7 +40,7 @@ jobs:
               --json databaseId,status,createdAt \
               --jq '[.[] | select(.status != "completed")] | sort_by(.createdAt) | last // empty')
             if [[ -n "$active" ]]; then
-              echo "$workflow: active run exists; watchdog leaves it alone."
+              echo "$workflow: active run exists; watchdog does not interrupt potentially valid work."
               return 0
             fi
 
@@ -62,12 +68,23 @@ jobs:
               return 0
             fi
 
+            # New runs emit an explicit marker after their six local retries.
             if grep -Fq 'SPIDER_TRANSIENT_OX_EXHAUSTED' <<<"$logs"; then
-              echo "::warning::$workflow: transient Ox outage exhausted local retries in run $run_id; re-running failed jobs."
+              echo "::warning::$workflow: explicit transient Ox exhaustion in run $run_id; re-running failed jobs."
               gh run rerun "$run_id" --repo "$GITHUB_REPOSITORY" --failed
-            else
-              echo "$workflow: run $run_id failed without transient-Ox exhaustion marker; watchdog will not resurrect a real failure."
+              return 0
             fi
+
+            # Backward compatibility for runs launched before the marker existed.
+            # Require BOTH clear OpenCode/Ox context and a narrow network/provider signature.
+            if grep -Eiq '(opencode run|OpenCode|x-preview-f-free|Ox)' <<<"$logs" \
+               && grep -Eiq '(network_error|NetworkError|network error|fetch failed|APIConnectionError|ECONNRESET|ECONNREFUSED|EAI_AGAIN|ENETUNREACH|ENOTFOUND|ETIMEDOUT|timed out|connection reset|connection closed|temporar(y|ily) unavailable|HTTP[^0-9]*(429|500|502|503|504)|status[^0-9]*(429|500|502|503|504)|too many requests|rate.?limit|service unavailable|bad gateway|gateway timeout|upstream.*(reset|closed|unavailable|error))' <<<"$logs"; then
+              echo "::warning::$workflow: legacy run $run_id has OpenCode/Ox + explicit transient network signature; re-running failed jobs."
+              gh run rerun "$run_id" --repo "$GITHUB_REPOSITORY" --failed
+              return 0
+            fi
+
+            echo "$workflow: run $run_id failed without defensible transient-Ox evidence; watchdog will not resurrect it."
           }
 
           recover_workflow graph-loop.yml
