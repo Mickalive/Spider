@@ -1,0 +1,78 @@
+name: SPIDER Launch Recommended Research
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.spider/maintenance/launch-recommended-research.json'
+
+permissions:
+  actions: write
+  contents: write
+
+jobs:
+  launch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Launch Graph and Physics only if lane is idle
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .spider/maintenance
+          echo '{"source_run_id":"'"$GITHUB_RUN_ID"'","lanes":{}}' > /tmp/receipt.json
+
+          launch_lane() {
+            local lane="$1"
+            local workflow="$2"
+            local cycle="$3"
+            local note="$4"
+            local active action
+
+            active=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow "$workflow" --limit 30 \
+              --json status \
+              --jq '[.[] | select(.status == "queued" or .status == "in_progress" or .status == "requested" or .status == "waiting" or .status == "pending")] | length')
+
+            if [[ "$active" -gt 0 ]]; then
+              action="skipped_already_active"
+              echo "$lane already active/queued; no duplicate dispatch."
+            else
+              gh workflow run "$workflow" --repo "$GITHUB_REPOSITORY" --ref main \
+                -f human_note="$note" \
+                -f cycle_index="$cycle" \
+                -f max_cycles=0
+              action="dispatched"
+              echo "$lane dispatched."
+            fi
+
+            jq --arg lane "$lane" --arg action "$action" --argjson active "$active" \
+              '.lanes[$lane] = {action:$action, active_before:$active}' /tmp/receipt.json > /tmp/receipt.next
+            mv /tmp/receipt.next /tmp/receipt.json
+          }
+
+          GRAPH_NOTE='Highest-information continuation. PRIORITY ORDER: E1 desc-only vs desc+keywords ablation and E2 equalized loop-permitting graph baseline FIRST. Do not add sites/features/LLM consumers before those decisions. If E1/E2 leave semantic addressing genuinely open, run independently authored paraphrase holdout E3. Preserve preregistration discipline and report negative/null outcomes equally.'
+          PHYSICS_NOTE='Run WP-005 as the decisive next cross-site response-transfer test. Freeze a fine-grained response/delta target before fresh data; use atomic single-action transitions or per-primitive compact rows; mandatory ACTION-ONLY, persistence, state-only and memory baselines; resolve/bound P3 bootstrap anomaly before CI-width reliance; train-fold-only preprocessing. If WP-005 falsifies this family too, honor the predeclared stop rule unless a genuinely different instrument is proposed.'
+
+          launch_lane graph graph-loop.yml 2 "$GRAPH_NOTE"
+          launch_lane physics physics-loop.yml 2 "$PHYSICS_NOTE"
+
+          cp /tmp/receipt.json .spider/maintenance/recommended-research-launch-receipt.json
+
+      - name: Self-clean one-shot launcher
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f .github/workflows/_launch-recommended-research.yml
+          rm -f .spider/maintenance/launch-recommended-research.json
+          git config user.name "spider-maintenance"
+          git config user.email "spider-maintenance@autonomous.local"
+          git add -A
+          git commit -m "maintenance: record recommended research launch and remove one-shot launcher"
+          git push origin HEAD:main
