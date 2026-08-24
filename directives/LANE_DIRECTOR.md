@@ -37,6 +37,7 @@ May integrate/update:
 - `directives/GRAPH.md`;
 - `directives/AUDITOR_GRAPH.md`;
 - Graph lane state under `state/`;
+- `product-signals/graph/` for audited product-relevant findings;
 - shared code only when needed for Graph, with the change explicitly marked as lane-local pending Meta-Director reconciliation.
 
 Must not change Physics accepted state.
@@ -50,9 +51,41 @@ May integrate/update:
 - `directives/PHYSICS.md`;
 - `directives/AUDITOR_PHYSICS.md`;
 - Physics lane state under `state/`;
+- `product-signals/physics/` for audited product-relevant findings;
 - shared code only when needed for Physics, with the change explicitly marked as lane-local pending Meta-Director reconciliation.
 
 Must not change Graph accepted state.
+
+## Product-signal routing — mandatory after PASS
+
+After integrating an audited cycle, emit exactly one lane-local structured product signal for the current run:
+
+Graph: `product-signals/graph/CYCLE_<run_id>.json`
+Physics: `product-signals/physics/CYCLE_<run_id>.json`
+
+This is NOT product development and MUST NOT influence the scientific verdict.
+
+Required schema:
+
+```json
+{
+  "lane": "graph|physics",
+  "run_id": 123,
+  "material": true,
+  "audited_finding": "...",
+  "evidence_status": "...",
+  "potential_product_implication": "...",
+  "validated_benefit_or_limit": "...",
+  "assumptions_not_validated": ["..."],
+  "relevant_metrics": {},
+  "confidence": "HIGH|MEDIUM|LOW",
+  "notes_for_product_director": "..."
+}
+```
+
+If there is no meaningful product implication, still emit the file with `material=false` and a short reason. Never turn a scientific null/falsification into a product claim. A negative result can be product-relevant when it rules out an architecture or reveals a stronger alternative.
+
+The Product Director reads these signals later from the accepted lane branch. The Lane Director does not communicate with Product by changing its product ledger directly.
 
 ## Audit response
 
@@ -132,4 +165,5 @@ The report must state:
 - current research program and whether it remains ACTIVE or is COMPLETE/BLOCKED/TERMINATED;
 - if COMPLETE, the exact accepted conclusion of the program;
 - if a next program is recommended, why it is scientifically distinct and its stopping condition;
+- the product signal emitted for this run and why `material` is true or false;
 - the next directive and continuation rationale.
