@@ -9,10 +9,6 @@ on:
   schedule:
     - cron: "*/5 * * * *"
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - '.spider/program-supervisor-trigger.json'
 
 permissions:
   actions: write
@@ -45,13 +41,13 @@ jobs:
           set -euo pipefail
           mkdir -p .spider/program-receipts
 
-          commit_state_if_needed() {
-            if ! git diff --quiet -- .spider/program-receipts .spider/program-supervisor-trigger.json \
-               || [[ -n "$(git ls-files --others --exclude-standard .spider/program-receipts .spider/program-supervisor-trigger.json)" ]]; then
+          commit_receipts_if_needed() {
+            if ! git diff --quiet -- .spider/program-receipts \
+               || [[ -n "$(git ls-files --others --exclude-standard .spider/program-receipts)" ]]; then
               git config user.name "spider-program-supervisor"
               git config user.email "spider-program-supervisor@autonomous.local"
               git pull --rebase origin main
-              git add -A .spider/program-receipts .spider/program-supervisor-trigger.json
+              git add .spider/program-receipts
               git commit -m "state: reconcile research-program succession" || true
               git push origin HEAD:main
             fi
@@ -127,6 +123,7 @@ jobs:
 
             receipt=".spider/program-receipts/${lane}-${completed_by}.json"
 
+            # A recommendation is considered consumed only when tied to a real successor run.
             if [[ -f "$receipt" ]]; then
               receipt_status=$(jq -r '.receipt_status // "PENDING"' "$receipt")
               successor_id=$(jq -r '.successor_run_id // empty' "$receipt")
@@ -160,6 +157,8 @@ jobs:
               fi
             fi
 
+            # A rerun of the already-completed source program must never become a
+            # permanent concurrency lock. Only cancel it when GitHub reports zero jobs.
             clear_empty_rerun_of_completed_source "$completed_by"
 
             active=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow "$workflow" --limit 30 \
@@ -213,8 +212,4 @@ jobs:
 
           handle_lane graph lab/graph state/graph_loop.json graph-loop.yml "SPIDER Graph Lane"
           handle_lane physics lab/physics state/physics_loop.json physics-loop.yml "SPIDER Physics Lane"
-
-          if [[ "$EVENT_NAME" == push ]]; then
-            rm -f .spider/program-supervisor-trigger.json
-          fi
-          commit_state_if_needed
+          commit_receipts_if_needed
