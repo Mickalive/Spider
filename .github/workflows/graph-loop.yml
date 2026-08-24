@@ -18,6 +18,16 @@ on:
         required: false
         type: number
         default: 0
+      repair_from_run_id:
+        description: "Prior rejected Graph run to repair; empty = fresh scientific cycle"
+        required: false
+        type: string
+        default: ""
+      repair_round:
+        description: "Same-cycle audit repair round; provenance only, no arbitrary cap"
+        required: false
+        type: number
+        default: 0
 
 permissions:
   contents: write
@@ -42,7 +52,17 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Stage current control plane
+        shell: bash
+        run: |
+          mkdir -p /tmp/spider_control/directives
+          cp SPIDER_MASTER_PROMPT.md /tmp/spider_control/SPIDER_MASTER_PROMPT.md
+          cp directives/AUDITOR.md /tmp/spider_control/directives/AUDITOR.md
+          cp directives/LANE_DIRECTOR.md /tmp/spider_control/directives/LANE_DIRECTOR.md
+          cp .github/scripts/run-opencode-with-retry.sh /tmp/spider_control/run-opencode-with-retry.sh
+
       - name: Checkout or initialize accepted Graph lane
+        if: ${{ inputs.repair_from_run_id == '' }}
         shell: bash
         run: |
           if git ls-remote --exit-code --heads origin "refs/heads/$LANE_BRANCH" >/dev/null 2>&1; then
@@ -53,58 +73,42 @@ jobs:
             git push origin "HEAD:refs/heads/$LANE_BRANCH"
           fi
 
+      - name: Checkout rejected Graph snapshot and prior audit for repair
+        if: ${{ inputs.repair_from_run_id != '' }}
+        shell: bash
+        run: |
+          SOURCE_TEAM="cycle/graph/${{ inputs.repair_from_run_id }}/team"
+          SOURCE_AUDIT="cycle/graph/${{ inputs.repair_from_run_id }}/audit"
+          git fetch origin "$SOURCE_TEAM:refs/remotes/origin/$SOURCE_TEAM"
+          git fetch origin "$SOURCE_AUDIT:refs/remotes/origin/$SOURCE_AUDIT"
+          git switch -C graph-repair-base "origin/$SOURCE_TEAM"
+          git worktree add --detach /tmp/spider_graph_repair_audit "origin/$SOURCE_AUDIT"
+
       - name: Install OpenCode
         shell: bash
         run: curl --retry 3 --retry-all-errors --retry-delay 15 -fsSL https://opencode.ai/install | bash
 
-      - name: Add OpenCode to PATH with bounded local retry
-        shell: bash
-        run: |
-          echo "$HOME/.opencode/bin" >> "$GITHUB_PATH"
-          cat >> "$BASH_ENV" <<'SPIDER_OPENCODE_RETRY'
-          opencode() {
-            local real="$HOME/.opencode/bin/opencode"
-            local log rc attempt
-            local max_attempts=6
-            local retry_delay=300
-            log="$(mktemp)"
-            for ((attempt = 1; attempt <= max_attempts; attempt++)); do
-              : > "$log"
-              echo "OpenCode/Ox attempt ${attempt}/${max_attempts}."
-              set +e
-              "$real" "$@" 2>&1 | tee "$log"
-              rc=${PIPESTATUS[0]}
-              set -e
-              if [ "$rc" -eq 0 ]; then
-                rm -f "$log"
-                return 0
-              fi
-              if ! grep -Eiq '(network_error|NetworkError|network error|fetch failed|APIConnectionError|ECONNRESET|ECONNREFUSED|EAI_AGAIN|ENETUNREACH|ENOTFOUND|ETIMEDOUT|timed out|timeout|socket hang up|connection (reset|refused|closed|error)|upstream.*(reset|closed|unavailable|error)|HTTP[^0-9]*(429|500|502|503|504)|status[^0-9]*(429|500|502|503|504)|too many requests|rate.?limit|service unavailable|bad gateway|gateway timeout|temporar(y|ily) unavailable|TLS|SSL.*error)' "$log"; then
-                echo "::error::SPIDER_OX_NONTRANSIENT exit=$rc; watchdog will not retry this failure." >&2
-                rm -f "$log"
-                return "$rc"
-              fi
-              if [ "$attempt" -eq "$max_attempts" ]; then
-                echo "::error::SPIDER_TRANSIENT_OX_EXHAUSTED attempts=$max_attempts exit=$rc" >&2
-                rm -f "$log"
-                return "$rc"
-              fi
-              echo "::warning::Transient OpenCode/Ox outage; retrying in ${retry_delay}s." >&2
-              sleep "$retry_delay"
-            done
-            return 1
-          }
-          SPIDER_OPENCODE_RETRY
-
-      - name: Run TEAM GRAPH
+      - name: Run TEAM GRAPH — fresh scientific cycle
+        if: ${{ inputs.repair_from_run_id == '' }}
         env:
           HUMAN_NOTE: ${{ inputs.human_note }}
         shell: bash
         run: |
-          opencode run \
+          bash /tmp/spider_control/run-opencode-with-retry.sh run \
             --model "$SPIDER_MODEL" \
             --agent graph_runner \
-            "Run Graph lane cycle ${{ inputs.cycle_index }} (GitHub run ${GITHUB_RUN_ID}). Read SPIDER_MASTER_PROMPT.md, directives/GRAPH.md, directives/AUDITOR_GRAPH.md, docs/NEXT_GRAPH.md, docs/GRAPH_LEDGER.md and relevant accepted Graph evidence. Do real empirical work. Do not work on Physics. Do not edit SPIDER_MASTER_PROMPT.md or workflows. Never ask for interactive approval. Human steering note, subordinate to the constitution: ${HUMAN_NOTE}"
+            "Run Graph lane cycle ${{ inputs.cycle_index }} (GitHub run ${GITHUB_RUN_ID}). Read /tmp/spider_control/SPIDER_MASTER_PROMPT.md, directives/GRAPH.md, directives/AUDITOR_GRAPH.md, docs/NEXT_GRAPH.md, docs/GRAPH_LEDGER.md and relevant accepted Graph evidence. Do real empirical work. Do not work on Physics. Do not edit SPIDER_MASTER_PROMPT.md or workflows. Never ask for interactive approval. Human steering note, subordinate to the constitution: ${HUMAN_NOTE}"
+
+      - name: Run TEAM GRAPH — repair audited defects
+        if: ${{ inputs.repair_from_run_id != '' }}
+        env:
+          HUMAN_NOTE: ${{ inputs.human_note }}
+        shell: bash
+        run: |
+          bash /tmp/spider_control/run-opencode-with-retry.sh run \
+            --model "$SPIDER_MODEL" \
+            --agent graph_runner \
+            "REPAIR Graph lane cycle ${{ inputs.cycle_index }}, repair round ${{ inputs.repair_round }} (GitHub run ${GITHUB_RUN_ID}). The current checkout is the exact rejected team snapshot from run ${{ inputs.repair_from_run_id }}. The independent audit workspace is /tmp/spider_graph_repair_audit. Read /tmp/spider_control/SPIDER_MASTER_PROMPT.md, /tmp/spider_control/directives/AUDITOR.md, directives/GRAPH.md, directives/AUDITOR_GRAPH.md, the prior audit report and its *_GRAPH_GATE.json. Fix EVERY item in required_fixes concretely and rerun every affected test or experiment. Preserve the rejected attempt as provenance. Do not evade the audit by weakening tests, changing targets post hoc without labeling them exploratory, deleting contrary evidence, or merely rewriting claims when the defect is in code or measurement. Do not work on Physics or workflows. Human note: ${HUMAN_NOTE}"
 
       - name: Enforce Graph scope
         shell: bash
@@ -127,7 +131,7 @@ jobs:
           git config user.email "spider-graph@autonomous.local"
           git switch -C "$BRANCH"
           git add -A
-          git commit -m "Graph cycle ${{ inputs.cycle_index }} attempt ${GITHUB_RUN_ATTEMPT}: team output" || true
+          git commit -m "Graph cycle ${{ inputs.cycle_index }} repair ${{ inputs.repair_round }} attempt ${GITHUB_RUN_ATTEMPT}: team output" || true
           git push --force origin "HEAD:refs/heads/$ATTEMPT_BRANCH"
           git push --force origin "HEAD:refs/heads/$BRANCH"
 
@@ -137,11 +141,22 @@ jobs:
     if: needs.team_graph.result == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 240
+    outputs:
+      gate: ${{ steps.audit_gate.outputs.gate }}
+      safe_to_integrate: ${{ steps.audit_gate.outputs.safe_to_integrate }}
     steps:
       - name: Checkout workflow base
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
+
+      - name: Stage current control plane
+        shell: bash
+        run: |
+          mkdir -p /tmp/spider_control/directives
+          cp SPIDER_MASTER_PROMPT.md /tmp/spider_control/SPIDER_MASTER_PROMPT.md
+          cp directives/AUDITOR.md /tmp/spider_control/directives/AUDITOR.md
+          cp .github/scripts/run-opencode-with-retry.sh /tmp/spider_control/run-opencode-with-retry.sh
 
       - name: Checkout accepted Graph base and mount team output
         shell: bash
@@ -156,52 +171,13 @@ jobs:
         shell: bash
         run: curl --retry 3 --retry-all-errors --retry-delay 15 -fsSL https://opencode.ai/install | bash
 
-      - name: Add OpenCode to PATH with bounded local retry
-        shell: bash
-        run: |
-          echo "$HOME/.opencode/bin" >> "$GITHUB_PATH"
-          cat >> "$BASH_ENV" <<'SPIDER_OPENCODE_RETRY'
-          opencode() {
-            local real="$HOME/.opencode/bin/opencode"
-            local log rc attempt
-            local max_attempts=6
-            local retry_delay=300
-            log="$(mktemp)"
-            for ((attempt = 1; attempt <= max_attempts; attempt++)); do
-              : > "$log"
-              echo "OpenCode/Ox attempt ${attempt}/${max_attempts}."
-              set +e
-              "$real" "$@" 2>&1 | tee "$log"
-              rc=${PIPESTATUS[0]}
-              set -e
-              if [ "$rc" -eq 0 ]; then
-                rm -f "$log"
-                return 0
-              fi
-              if ! grep -Eiq '(network_error|NetworkError|network error|fetch failed|APIConnectionError|ECONNRESET|ECONNREFUSED|EAI_AGAIN|ENETUNREACH|ENOTFOUND|ETIMEDOUT|timed out|timeout|socket hang up|connection (reset|refused|closed|error)|upstream.*(reset|closed|unavailable|error)|HTTP[^0-9]*(429|500|502|503|504)|status[^0-9]*(429|500|502|503|504)|too many requests|rate.?limit|service unavailable|bad gateway|gateway timeout|temporar(y|ily) unavailable|TLS|SSL.*error)' "$log"; then
-                echo "::error::SPIDER_OX_NONTRANSIENT exit=$rc; watchdog will not retry this failure." >&2
-                rm -f "$log"
-                return "$rc"
-              fi
-              if [ "$attempt" -eq "$max_attempts" ]; then
-                echo "::error::SPIDER_TRANSIENT_OX_EXHAUSTED attempts=$max_attempts exit=$rc" >&2
-                rm -f "$log"
-                return "$rc"
-              fi
-              echo "::warning::Transient OpenCode/Ox outage; retrying in ${retry_delay}s." >&2
-              sleep "$retry_delay"
-            done
-            return 1
-          }
-          SPIDER_OPENCODE_RETRY
-
       - name: Audit Graph immediately
         shell: bash
         run: |
-          opencode run \
+          bash /tmp/spider_control/run-opencode-with-retry.sh run \
             --model "$SPIDER_MODEL" \
             --agent independent_auditor \
-            "Audit Graph lane cycle ${{ inputs.cycle_index }} (GitHub run ${GITHUB_RUN_ID}). Completed team workspace: /tmp/spider_graph_team. Current checkout is the untouched accepted Graph base and is where you may write ONLY audit outputs. Read SPIDER_MASTER_PROMPT.md, directives/AUDITOR.md and directives/AUDITOR_GRAPH.md. Recompute claims and attack leakage, hand-coded decomposition, mismatched timing, weak baselines, denominator tricks, retrieval cost and transfer claims. Write reports/audit/CYCLE_${GITHUB_RUN_ID}_GRAPH.md plus compact findings if useful. Do not edit team files, workflows or constitution."
+            "Audit Graph lane cycle ${{ inputs.cycle_index }} (GitHub run ${GITHUB_RUN_ID}), repair round ${{ inputs.repair_round }}. Completed team workspace: /tmp/spider_graph_team. Current checkout is the untouched accepted Graph base and is where you may write ONLY audit outputs. Read /tmp/spider_control/SPIDER_MASTER_PROMPT.md, /tmp/spider_control/directives/AUDITOR.md and directives/AUDITOR_GRAPH.md. Recompute claims and attack leakage, hand-coded decomposition, mismatched timing, weak baselines, denominator tricks, retrieval cost and transfer claims. Write reports/audit/CYCLE_${GITHUB_RUN_ID}_GRAPH.md AND mandatory results/audit/CYCLE_${GITHUB_RUN_ID}_GRAPH_GATE.json with gate PASS, REVISE, or BLOCKED and exact required_fixes. A valid negative, null, falsified, inconclusive or downgraded result may PASS if represented honestly. Use REVISE only for concrete same-cycle repairable defects. Use BLOCKED when another repair would be dishonest, repetitive, data-blocked or require a genuine external decision. Do not edit team files, workflows or constitution."
 
       - name: Enforce audit-only writes
         shell: bash
@@ -214,6 +190,35 @@ jobs:
             exit 1
           fi
 
+      - name: Validate Graph audit integration gate
+        id: audit_gate
+        shell: bash
+        run: |
+          FILE="results/audit/CYCLE_${GITHUB_RUN_ID}_GRAPH_GATE.json"
+          test -f "$FILE" || { echo "::error::Auditor omitted mandatory Graph gate file"; exit 1; }
+          GATE=$(jq -r '.gate // empty' "$FILE")
+          SAFE=$(jq -r '.safe_to_integrate // false' "$FILE")
+          case "$GATE" in
+            PASS)
+              [ "$SAFE" = "true" ] || { echo "::error::PASS requires safe_to_integrate=true"; exit 1; }
+              ;;
+            REVISE)
+              [ "$SAFE" = "false" ] || { echo "::error::REVISE requires safe_to_integrate=false"; exit 1; }
+              FIXES=$(jq '.required_fixes | if type == "array" then length else 0 end' "$FILE")
+              [ "$FIXES" -gt 0 ] || { echo "::error::REVISE requires actionable required_fixes"; exit 1; }
+              ;;
+            BLOCKED)
+              [ "$SAFE" = "false" ] || { echo "::error::BLOCKED requires safe_to_integrate=false"; exit 1; }
+              ;;
+            *)
+              echo "::error::Invalid Graph audit gate: $GATE"
+              exit 1
+              ;;
+          esac
+          echo "gate=$GATE" >> "$GITHUB_OUTPUT"
+          echo "safe_to_integrate=$SAFE" >> "$GITHUB_OUTPUT"
+          echo "Graph audit gate=$GATE safe=$SAFE"
+
       - name: Persist Graph audit branch
         if: always()
         shell: bash
@@ -224,23 +229,68 @@ jobs:
           git config user.email "spider-auditor-graph@autonomous.local"
           git switch -C "$BRANCH"
           git add -A
-          git commit -m "Graph cycle ${{ inputs.cycle_index }} attempt ${GITHUB_RUN_ATTEMPT}: independent audit" || true
+          git commit -m "Graph cycle ${{ inputs.cycle_index }} repair ${{ inputs.repair_round }} attempt ${GITHUB_RUN_ATTEMPT}: independent audit" || true
           git push --force origin "HEAD:refs/heads/$ATTEMPT_BRANCH"
           git push --force origin "HEAD:refs/heads/$BRANCH"
+
+  graph_repair_router:
+    name: GRAPH AUDIT → RETURN TO CODER
+    needs: [audit_graph]
+    if: needs.audit_graph.result == 'success' && needs.audit_graph.outputs.gate == 'REVISE'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Dispatch same-cycle Graph repair with exact audit
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HUMAN_NOTE: ${{ inputs.human_note }}
+          CYCLE_INDEX: ${{ inputs.cycle_index }}
+          MAX_CYCLES: ${{ inputs.max_cycles }}
+          REPAIR_ROUND: ${{ inputs.repair_round }}
+        shell: bash
+        run: |
+          NEXT_REPAIR=$((REPAIR_ROUND + 1))
+          echo "Audit requested REVISE; returning run ${GITHUB_RUN_ID} to graph_runner as repair round ${NEXT_REPAIR}."
+          gh workflow run graph-loop.yml --ref main \
+            -f human_note="$HUMAN_NOTE" \
+            -f cycle_index="$CYCLE_INDEX" \
+            -f max_cycles="$MAX_CYCLES" \
+            -f repair_from_run_id="$GITHUB_RUN_ID" \
+            -f repair_round="$NEXT_REPAIR"
+
+  graph_audit_blocked:
+    name: GRAPH AUDIT — BLOCKED
+    needs: [audit_graph]
+    if: needs.audit_graph.result == 'success' && needs.audit_graph.outputs.gate == 'BLOCKED'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Stop without integrating rejected snapshot
+        shell: bash
+        run: |
+          echo "::warning::Graph audit is BLOCKED. No integration and no blind repair loop. Rejected snapshot remains provenance."
 
   graph_director:
     name: GRAPH LANE DIRECTOR
     needs: [team_graph, audit_graph]
-    if: needs.audit_graph.result == 'success'
+    if: needs.audit_graph.result == 'success' && needs.audit_graph.outputs.gate == 'PASS'
     runs-on: ubuntu-latest
     timeout-minutes: 240
     steps:
-      - name: Checkout accepted Graph lane
+      - name: Checkout workflow base
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
-      - name: Mount team and audit snapshots
+      - name: Stage current control plane
+        shell: bash
+        run: |
+          mkdir -p /tmp/spider_control/directives
+          cp SPIDER_MASTER_PROMPT.md /tmp/spider_control/SPIDER_MASTER_PROMPT.md
+          cp directives/LANE_DIRECTOR.md /tmp/spider_control/directives/LANE_DIRECTOR.md
+          cp .github/scripts/run-opencode-with-retry.sh /tmp/spider_control/run-opencode-with-retry.sh
+
+      - name: Checkout accepted Graph lane and mount audited snapshots
         shell: bash
         run: |
           git fetch origin "$LANE_BRANCH"
@@ -256,54 +306,15 @@ jobs:
         shell: bash
         run: curl --retry 3 --retry-all-errors --retry-delay 15 -fsSL https://opencode.ai/install | bash
 
-      - name: Add OpenCode to PATH with bounded local retry
-        shell: bash
-        run: |
-          echo "$HOME/.opencode/bin" >> "$GITHUB_PATH"
-          cat >> "$BASH_ENV" <<'SPIDER_OPENCODE_RETRY'
-          opencode() {
-            local real="$HOME/.opencode/bin/opencode"
-            local log rc attempt
-            local max_attempts=6
-            local retry_delay=300
-            log="$(mktemp)"
-            for ((attempt = 1; attempt <= max_attempts; attempt++)); do
-              : > "$log"
-              echo "OpenCode/Ox attempt ${attempt}/${max_attempts}."
-              set +e
-              "$real" "$@" 2>&1 | tee "$log"
-              rc=${PIPESTATUS[0]}
-              set -e
-              if [ "$rc" -eq 0 ]; then
-                rm -f "$log"
-                return 0
-              fi
-              if ! grep -Eiq '(network_error|NetworkError|network error|fetch failed|APIConnectionError|ECONNRESET|ECONNREFUSED|EAI_AGAIN|ENETUNREACH|ENOTFOUND|ETIMEDOUT|timed out|timeout|socket hang up|connection (reset|refused|closed|error)|upstream.*(reset|closed|unavailable|error)|HTTP[^0-9]*(429|500|502|503|504)|status[^0-9]*(429|500|502|503|504)|too many requests|rate.?limit|service unavailable|bad gateway|gateway timeout|temporar(y|ily) unavailable|TLS|SSL.*error)' "$log"; then
-                echo "::error::SPIDER_OX_NONTRANSIENT exit=$rc; watchdog will not retry this failure." >&2
-                rm -f "$log"
-                return "$rc"
-              fi
-              if [ "$attempt" -eq "$max_attempts" ]; then
-                echo "::error::SPIDER_TRANSIENT_OX_EXHAUSTED attempts=$max_attempts exit=$rc" >&2
-                rm -f "$log"
-                return "$rc"
-              fi
-              echo "::warning::Transient OpenCode/Ox outage; retrying in ${retry_delay}s." >&2
-              sleep "$retry_delay"
-            done
-            return 1
-          }
-          SPIDER_OPENCODE_RETRY
-
       - name: Run Graph Lane Director
         env:
           HUMAN_NOTE: ${{ inputs.human_note }}
         shell: bash
         run: |
-          opencode run \
+          bash /tmp/spider_control/run-opencode-with-retry.sh run \
             --model "$SPIDER_MODEL" \
             --agent lane_director \
-            "You are GRAPH LANE DIRECTOR for cycle ${{ inputs.cycle_index }} (GitHub run ${GITHUB_RUN_ID}). TEAM=/tmp/spider_graph_team. AUDIT=/tmp/spider_graph_audit. Current checkout is persistent accepted Graph lane lab/graph. Read SPIDER_MASTER_PROMPT.md and directives/LANE_DIRECTOR.md. Integrate only Graph work that survives audit. Answer every material audit objection. Rewrite directives/GRAPH.md, directives/AUDITOR_GRAPH.md and docs/NEXT_GRAPH.md as needed; update docs/GRAPH_LEDGER.md. Write reports/director/CYCLE_${GITHUB_RUN_ID}_GRAPH.md and state/graph_loop.json with continue/reason/next_question. Do not modify Physics accepted state, workflows or constitution. Human note: ${HUMAN_NOTE}"
+            "You are GRAPH LANE DIRECTOR for cycle ${{ inputs.cycle_index }} (GitHub run ${GITHUB_RUN_ID}) after audit gate PASS. TEAM=/tmp/spider_graph_team. AUDIT=/tmp/spider_graph_audit. Current checkout is persistent accepted Graph lane lab/graph. Read /tmp/spider_control/SPIDER_MASTER_PROMPT.md and /tmp/spider_control/directives/LANE_DIRECTOR.md. Integrate only Graph work that survived the independent audit. Answer every surviving material audit limitation. Rewrite directives/GRAPH.md, directives/AUDITOR_GRAPH.md and docs/NEXT_GRAPH.md as needed; update docs/GRAPH_LEDGER.md. Write reports/director/CYCLE_${GITHUB_RUN_ID}_GRAPH.md and state/graph_loop.json with continue/reason/next_question. Do not modify Physics accepted state, workflows or constitution. Human note: ${HUMAN_NOTE}"
 
       - name: Enforce Graph Director scope
         shell: bash
