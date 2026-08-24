@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - name: Check accepted Intel state and active runs
+      - name: Recover missing dispatches without bypassing real failures
         env:
           GH_TOKEN: ${{ github.token }}
         shell: bash
@@ -31,30 +31,71 @@ jobs:
           set -euo pipefail
 
           ACTIVE=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow intel-loop.yml --limit 30 \
-            --json status --jq '[.[] | select(.status != "completed")] | length')
+            --json status --jq '[.[] | select(.status != "completed")] | length' 2>/dev/null || echo 0)
           if [[ "$ACTIVE" -gt 0 ]]; then
             echo "Intel lane already active; nothing to do."
             exit 0
           fi
 
-          if gh api "repos/${GITHUB_REPOSITORY}/branches/lab/intel" >/dev/null 2>&1; then
-            STATE=$(gh api -H 'Accept: application/vnd.github.raw+json' "repos/${GITHUB_REPOSITORY}/contents/state/intel_loop.json?ref=lab/intel" 2>/dev/null || true)
-          else
-            STATE=$(gh api -H 'Accept: application/vnd.github.raw+json' "repos/${GITHUB_REPOSITORY}/contents/state/intel_loop.json?ref=main" 2>/dev/null || true)
+          LATEST=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow intel-loop.yml --limit 1 \
+            --json databaseId,status,conclusion 2>/dev/null || echo '[]')
+          LATEST_ID=$(jq -r '.[0].databaseId // empty' <<<"$LATEST")
+          LATEST_CONCLUSION=$(jq -r '.[0].conclusion // empty' <<<"$LATEST")
+
+          # Bootstrap only when Intel has never run.
+          if [[ -z "$LATEST_ID" ]]; then
+            STATE=$(gh api -H 'Accept: application/vnd.github.raw+json' \
+              "repos/${GITHUB_REPOSITORY}/contents/state/intel_loop.json?ref=main" 2>/dev/null || true)
+            CONTINUE=$(jq -r '.continue // false' <<<"$STATE" 2>/dev/null || echo false)
+            if [[ "$CONTINUE" == true ]]; then
+              echo "No Intel run exists; bootstrapping cycle 1."
+              gh workflow run intel-loop.yml --repo "$GITHUB_REPOSITORY" --ref main -f cycle_index=1
+            fi
+            exit 0
           fi
 
+          # A real failed workflow must not be bypassed by launching fresh work.
+          # The Ox watchdog handles defensible transient network failures.
+          if [[ "$LATEST_CONCLUSION" == failure || "$LATEST_CONCLUSION" == cancelled || "$LATEST_CONCLUSION" == timed_out ]]; then
+            echo "Latest Intel run $LATEST_ID concluded $LATEST_CONCLUSION; supervisor will not bypass it with a fresh cycle."
+            exit 0
+          fi
+
+          # Inspect the latest audit gate if one exists. REVISE should resume the same
+          # mechanism; BLOCKED must not silently start unrelated fresh work.
+          AUDIT_BRANCH="cycle/intel/${LATEST_ID}/audit"
+          if gh api "repos/${GITHUB_REPOSITORY}/branches/${AUDIT_BRANCH//\//%2F}" >/dev/null 2>&1; then
+            GATE_RAW=$(gh api -H 'Accept: application/vnd.github.raw+json' \
+              "repos/${GITHUB_REPOSITORY}/contents/results/intel/audit/CYCLE_${LATEST_ID}_INTEL_GATE.json?ref=${AUDIT_BRANCH}" 2>/dev/null || true)
+            GATE=$(jq -r '.gate // empty' <<<"$GATE_RAW" 2>/dev/null || true)
+            if [[ "$GATE" == REVISE ]]; then
+              echo "Latest Intel audit requires REVISE; recovering same-cycle repair for run $LATEST_ID."
+              gh workflow run intel-loop.yml --repo "$GITHUB_REPOSITORY" --ref main \
+                -f cycle_index=1 -f repair_from_run_id="$LATEST_ID" -f repair_round=1
+              exit 0
+            fi
+            if [[ "$GATE" == BLOCKED ]]; then
+              echo "Latest Intel audit is BLOCKED; no automatic fresh cycle."
+              exit 0
+            fi
+          fi
+
+          # For a successful PASS/director run, accepted Intel state is authoritative.
+          if gh api "repos/${GITHUB_REPOSITORY}/branches/lab%2Fintel" >/dev/null 2>&1; then
+            STATE=$(gh api -H 'Accept: application/vnd.github.raw+json' \
+              "repos/${GITHUB_REPOSITORY}/contents/state/intel_loop.json?ref=lab/intel" 2>/dev/null || true)
+          else
+            STATE=$(gh api -H 'Accept: application/vnd.github.raw+json' \
+              "repos/${GITHUB_REPOSITORY}/contents/state/intel_loop.json?ref=main" 2>/dev/null || true)
+          fi
           CONTINUE=$(jq -r '.continue // false' <<<"$STATE" 2>/dev/null || echo false)
           if [[ "$CONTINUE" != true ]]; then
             echo "Intel Research Director has not authorized continuation."
             exit 0
           fi
 
-          # If no accepted Intel integration exists yet this is cycle 1.
-          # Otherwise use successful completed fresh/director passes + 1 as a monotonic label;
-          # cycle_index is organizational metadata, not a scientific degree of freedom.
           ACCEPTED=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow intel-loop.yml --limit 100 \
-            --json conclusion,status --jq '[.[] | select(.status=="completed" and .conclusion=="success")] | length')
+            --json conclusion,status --jq '[.[] | select(.status=="completed" and .conclusion=="success")] | length' 2>/dev/null || echo 0)
           NEXT=$((ACCEPTED + 1))
-
-          echo "No active Intel run and continuation=true; dispatching Intel cycle label $NEXT."
+          echo "Accepted Intel state says continue=true and no run is active; dispatching cycle label $NEXT."
           gh workflow run intel-loop.yml --repo "$GITHUB_REPOSITORY" --ref main -f cycle_index="$NEXT"
