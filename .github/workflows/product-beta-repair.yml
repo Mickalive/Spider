@@ -1,0 +1,218 @@
+name: SPIDER Product Beta Repair
+
+on:
+  workflow_dispatch:
+    inputs:
+      beta_id:
+        description: "Beta identifier"
+        required: true
+        type: string
+      root_run_id:
+        description: "Original Product/Beta run containing frozen architecture"
+        required: true
+        type: string
+      prior_run_id:
+        description: "Most recent run containing rejected builder/audit snapshot"
+        required: true
+        type: string
+      repair_round:
+        description: "Same-beta repair round"
+        required: true
+        type: number
+
+permissions:
+  contents: write
+  actions: write
+
+env:
+  SPIDER_MODEL: opencode/x-preview-f-free
+  PRODUCT_BRANCH: lab/product
+
+concurrency:
+  group: spider-product-beta-repair-${{ inputs.beta_id }}
+  cancel-in-progress: false
+
+jobs:
+  repair_builder:
+    name: BETA BUILDER — REPAIR
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Restore rejected beta and mount frozen architecture/audit
+        shell: bash
+        run: |
+          ROOT="${{ inputs.root_run_id }}"
+          PRIOR="${{ inputs.prior_run_id }}"
+          ARCH="cycle/product/${ROOT}/architect"
+          if [[ "$PRIOR" == "$ROOT" ]]; then
+            BUILDER="cycle/product/${PRIOR}/builder"
+            AUDIT="cycle/product/${PRIOR}/audit"
+          else
+            BUILDER="cycle/product-repair/${PRIOR}/builder"
+            AUDIT="cycle/product-repair/${PRIOR}/audit"
+          fi
+          git fetch origin "$ARCH:refs/remotes/origin/$ARCH"
+          git fetch origin "$BUILDER:refs/remotes/origin/$BUILDER"
+          git fetch origin "$AUDIT:refs/remotes/origin/$AUDIT"
+          git switch -C beta-repair-base "origin/$BUILDER"
+          git worktree add --detach /tmp/spider_beta_architect "origin/$ARCH"
+          git worktree add --detach /tmp/spider_beta_prior_audit "origin/$AUDIT"
+
+      - name: Install OpenCode
+        shell: bash
+        run: curl --retry 3 --retry-all-errors --retry-delay 15 -fsSL https://opencode.ai/install | bash
+
+      - name: Repair every audited defect
+        shell: bash
+        run: |
+          bash .github/scripts/run-opencode-with-retry.sh run \
+            --model "$SPIDER_MODEL" \
+            --agent beta_builder \
+            "Repair Product Beta ${{ inputs.beta_id }}, round ${{ inputs.repair_round }}. Frozen architecture=/tmp/spider_beta_architect. Prior audit=/tmp/spider_beta_prior_audit. Your formal job description is binding. Fix every required_fixes item without changing the preregistered tasks, baseline, metrics or win rule unless the audit explicitly proves the measurement itself invalid; preserve prior attempts as provenance."
+
+      - name: Persist repaired builder snapshot
+        if: always()
+        shell: bash
+        run: |
+          BRANCH="cycle/product-repair/${GITHUB_RUN_ID}/builder"
+          git config user.name "spider-beta-builder"
+          git config user.email "spider-beta-builder@autonomous.local"
+          git switch -C "$BRANCH"
+          git add -A
+          git commit -m "Beta ${{ inputs.beta_id }} repair ${{ inputs.repair_round }}: builder" || true
+          git push --force origin "HEAD:refs/heads/$BRANCH"
+
+  re_audit:
+    name: BETA TESTER / AUDITOR — RE-AUDIT
+    needs: [repair_builder]
+    if: needs.repair_builder.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    outputs:
+      gate: ${{ steps.audit_gate.outputs.gate }}
+      verdict: ${{ steps.audit_gate.outputs.verdict }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Mount frozen architecture and repaired beta
+        shell: bash
+        run: |
+          ROOT="${{ inputs.root_run_id }}"
+          ARCH="cycle/product/${ROOT}/architect"
+          BUILDER="cycle/product-repair/${GITHUB_RUN_ID}/builder"
+          git fetch origin "$PRODUCT_BRANCH"
+          git switch -C beta-repair-audit-base "origin/$PRODUCT_BRANCH"
+          git fetch origin "$ARCH:refs/remotes/origin/$ARCH"
+          git fetch origin "$BUILDER:refs/remotes/origin/$BUILDER"
+          git worktree add --detach /tmp/spider_beta_architect "origin/$ARCH"
+          git worktree add --detach /tmp/spider_beta_builder "origin/$BUILDER"
+
+      - name: Install OpenCode
+        shell: bash
+        run: curl --retry 3 --retry-all-errors --retry-delay 15 -fsSL https://opencode.ai/install | bash
+
+      - name: Re-audit independently
+        shell: bash
+        run: |
+          bash .github/scripts/run-opencode-with-retry.sh run \
+            --model "$SPIDER_MODEL" \
+            --agent beta_tester_auditor \
+            "Re-audit Product Beta ${{ inputs.beta_id }} after repair round ${{ inputs.repair_round }}. Architect=/tmp/spider_beta_architect. Builder=/tmp/spider_beta_builder. Your formal job description is binding. Recompute the preregistered comparison independently and judge only the repaired snapshot."
+
+      - name: Validate audit gate
+        id: audit_gate
+        shell: bash
+        run: |
+          test -f state/product_beta_audit.json || { echo "::error::Missing product beta audit state"; exit 1; }
+          GATE=$(jq -r '.gate // empty' state/product_beta_audit.json)
+          VERDICT=$(jq -r '.beta_verdict // empty' state/product_beta_audit.json)
+          case "$GATE" in PASS|REVISE|BLOCKED) ;; *) exit 1 ;; esac
+          if [[ "$GATE" == REVISE ]]; then
+            test "$(jq '.required_fixes|length' state/product_beta_audit.json)" -gt 0 || exit 1
+          fi
+          echo "gate=$GATE" >> "$GITHUB_OUTPUT"
+          echo "verdict=$VERDICT" >> "$GITHUB_OUTPUT"
+
+      - name: Persist repaired audit snapshot
+        if: always()
+        shell: bash
+        run: |
+          BRANCH="cycle/product-repair/${GITHUB_RUN_ID}/audit"
+          git config user.name "spider-beta-auditor"
+          git config user.email "spider-beta-auditor@autonomous.local"
+          git switch -C "$BRANCH"
+          git add -A
+          git commit -m "Beta ${{ inputs.beta_id }} repair ${{ inputs.repair_round }}: audit" || true
+          git push --force origin "HEAD:refs/heads/$BRANCH"
+
+  repair_router:
+    name: BETA REVISE → BUILDER AGAIN
+    needs: [re_audit]
+    if: needs.re_audit.outputs.gate == 'REVISE'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dispatch next repair round
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          NEXT=$(( ${{ inputs.repair_round }} + 1 ))
+          gh workflow run product-beta-repair.yml --repo "$GITHUB_REPOSITORY" --ref main \
+            -f beta_id="${{ inputs.beta_id }}" \
+            -f root_run_id="${{ inputs.root_run_id }}" \
+            -f prior_run_id="$GITHUB_RUN_ID" \
+            -f repair_round="$NEXT"
+
+  product_review:
+    name: PRODUCT DIRECTOR — REPAIRED BETA REVIEW
+    needs: [re_audit]
+    if: needs.re_audit.outputs.gate == 'PASS' || needs.re_audit.outputs.gate == 'BLOCKED'
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Mount Product state and final repaired evidence
+        shell: bash
+        run: |
+          ROOT="${{ inputs.root_run_id }}"
+          ARCH="cycle/product/${ROOT}/architect"
+          BUILDER="cycle/product-repair/${GITHUB_RUN_ID}/builder"
+          AUDIT="cycle/product-repair/${GITHUB_RUN_ID}/audit"
+          git fetch origin "$PRODUCT_BRANCH"
+          git switch -C "$PRODUCT_BRANCH" "origin/$PRODUCT_BRANCH"
+          for spec in "architect:$ARCH" "builder:$BUILDER" "audit:$AUDIT"; do
+            kind="${spec%%:*}"
+            branch="${spec#*:}"
+            git fetch origin "$branch:refs/remotes/origin/$branch"
+            git worktree add --detach "/tmp/spider_beta_$kind" "origin/$branch"
+          done
+
+      - name: Install OpenCode
+        shell: bash
+        run: curl --retry 3 --retry-all-errors --retry-delay 15 -fsSL https://opencode.ai/install | bash
+
+      - name: Review final repaired beta
+        shell: bash
+        run: |
+          bash .github/scripts/run-opencode-with-retry.sh run \
+            --model "$SPIDER_MODEL" \
+            --agent product_director \
+            "Review Product Beta ${{ inputs.beta_id }} after repair round ${{ inputs.repair_round }}. Architect=/tmp/spider_beta_architect, Builder=/tmp/spider_beta_builder, Audit=/tmp/spider_beta_audit. Gate=${{ needs.re_audit.outputs.gate }} verdict=${{ needs.re_audit.outputs.verdict }}. Your formal job description is binding. Integrate the audited result and decide the next product hypothesis/beta, without public deployment."
+
+      - name: Advance Product branch
+        shell: bash
+        run: |
+          git config user.name "spider-product-director"
+          git config user.email "spider-product-director@autonomous.local"
+          git add -A
+          git commit -m "Product Beta ${{ inputs.beta_id }} repaired review ${GITHUB_RUN_ID}" || true
+          git push origin "HEAD:refs/heads/$PRODUCT_BRANCH"
