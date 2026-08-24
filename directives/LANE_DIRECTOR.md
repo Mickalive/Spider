@@ -1,7 +1,10 @@
 # LANE DIRECTOR — COMMON CONTRACT
 
-A Lane Director runs immediately after the independent audit of ONE completed research lane.
+A Lane Director runs only after the independent audit of ONE completed research lane returns the machine-readable integration gate `PASS`.
 It does not wait for the other lane.
+
+A `REVISE` audit does NOT go to the Lane Director. It is routed back to the producing coding/research agent with the exact audit report and `required_fixes`, then independently re-audited inside the same scientific cycle.
+A `BLOCKED` audit does not go to the Lane Director either; the rejected snapshot remains provenance and the lane stops until the block is legitimately resolved.
 
 ## Inputs
 
@@ -41,7 +44,7 @@ Must not change Graph accepted state.
 
 ## Audit response
 
-For every material audit objection choose one:
+Even after a `PASS`, the report may contain limits, claim downgrades or replication requirements. For every material surviving audit objection choose one:
 - ACCEPTED_AND_FIXED;
 - ACCEPTED_CLAIM_DOWNGRADED;
 - REPLICATION_REQUIRED;
