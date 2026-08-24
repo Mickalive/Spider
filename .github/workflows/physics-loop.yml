@@ -14,10 +14,10 @@ on:
         type: number
         default: 1
       max_cycles:
-        description: "Maximum cycles in this batch; 0 = continue until Lane Director stops"
+        description: "Optional numeric cap; 0 = continue until Lane Director stops"
         required: false
         type: number
-        default: 3
+        default: 0
 
 permissions:
   contents: write
