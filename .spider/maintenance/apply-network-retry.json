@@ -2,5 +2,6 @@
   "retry_delay_seconds": 300,
   "retry_attempts": 1,
   "scope": ["graph", "physics", "audit", "lane_director", "meta_director"],
-  "only_transient_network_errors": true
+  "only_transient_network_errors": true,
+  "nonce": 2
 }
