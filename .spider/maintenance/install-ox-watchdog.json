@@ -3,5 +3,5 @@
   "local_attempts": 6,
   "retry_delay_seconds": 300,
   "global_watchdog": "indefinite transient-only recovery",
-  "trigger_revision": 2
+  "trigger_revision": 3
 }
