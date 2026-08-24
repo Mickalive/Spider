@@ -57,35 +57,42 @@ jobs:
         shell: bash
         run: curl --retry 3 --retry-all-errors --retry-delay 15 -fsSL https://opencode.ai/install | bash
 
-      - name: Add OpenCode to PATH with transient network retry
+      - name: Add OpenCode to PATH with bounded local retry
         shell: bash
         run: |
           echo "$HOME/.opencode/bin" >> "$GITHUB_PATH"
           cat >> "$BASH_ENV" <<'SPIDER_OPENCODE_RETRY'
           opencode() {
             local real="$HOME/.opencode/bin/opencode"
-            local log rc
+            local log rc attempt
+            local max_attempts=6
+            local retry_delay=300
             log="$(mktemp)"
-            set +e
-            "$real" "$@" 2>&1 | tee "$log"
-            rc=${PIPESTATUS[0]}
-            set -e
-            if [ "$rc" -eq 0 ]; then
-              rm -f "$log"
-              return 0
-            fi
-            if grep -Eiq '(NetworkError|network error|fetch failed|APIConnectionError|ECONNRESET|ECONNREFUSED|EAI_AGAIN|ENETUNREACH|ENOTFOUND|ETIMEDOUT|socket hang up|connection (reset|refused|closed|error)|upstream.*(reset|closed|unavailable|error)|HTTP[^0-9]*(429|502|503|504)|status[^0-9]*(429|502|503|504)|too many requests|rate.?limit|service unavailable|bad gateway|gateway timeout|temporar(y|ily) unavailable|TLS|SSL.*error)' "$log"; then
-              echo "::warning::Transient OpenCode/Ox network error detected (exit $rc). Retrying once in 300 seconds."
-              sleep 300
-              rm -f "$log"
+            for ((attempt = 1; attempt <= max_attempts; attempt++)); do
+              : > "$log"
+              echo "OpenCode/Ox attempt ${attempt}/${max_attempts}."
               set +e
-              "$real" "$@"
-              rc=$?
+              "$real" "$@" 2>&1 | tee "$log"
+              rc=${PIPESTATUS[0]}
               set -e
-              return "$rc"
-            fi
-            rm -f "$log"
-            return "$rc"
+              if [ "$rc" -eq 0 ]; then
+                rm -f "$log"
+                return 0
+              fi
+              if ! grep -Eiq '(network_error|NetworkError|network error|fetch failed|APIConnectionError|ECONNRESET|ECONNREFUSED|EAI_AGAIN|ENETUNREACH|ENOTFOUND|ETIMEDOUT|timed out|timeout|socket hang up|connection (reset|refused|closed|error)|upstream.*(reset|closed|unavailable|error)|HTTP[^0-9]*(429|500|502|503|504)|status[^0-9]*(429|500|502|503|504)|too many requests|rate.?limit|service unavailable|bad gateway|gateway timeout|temporar(y|ily) unavailable|TLS|SSL.*error)' "$log"; then
+                echo "::error::SPIDER_OX_NONTRANSIENT exit=$rc; watchdog will not retry this failure." >&2
+                rm -f "$log"
+                return "$rc"
+              fi
+              if [ "$attempt" -eq "$max_attempts" ]; then
+                echo "::error::SPIDER_TRANSIENT_OX_EXHAUSTED attempts=$max_attempts exit=$rc" >&2
+                rm -f "$log"
+                return "$rc"
+              fi
+              echo "::warning::Transient OpenCode/Ox outage; retrying in ${retry_delay}s." >&2
+              sleep "$retry_delay"
+            done
+            return 1
           }
           SPIDER_OPENCODE_RETRY
 
@@ -115,17 +122,19 @@ jobs:
         shell: bash
         run: |
           BRANCH="cycle/physics/${GITHUB_RUN_ID}/team"
+          ATTEMPT_BRANCH="${BRANCH}-attempt-${GITHUB_RUN_ATTEMPT}"
           git config user.name "spider-physics"
           git config user.email "spider-physics@autonomous.local"
           git switch -C "$BRANCH"
           git add -A
-          git commit -m "Physics cycle ${{ inputs.cycle_index }}: team output" || true
+          git commit -m "Physics cycle ${{ inputs.cycle_index }} attempt ${GITHUB_RUN_ATTEMPT}: team output" || true
+          git push --force origin "HEAD:refs/heads/$ATTEMPT_BRANCH"
           git push --force origin "HEAD:refs/heads/$BRANCH"
 
   audit_physics:
     name: INDEPENDENT AUDITOR — PHYSICS
     needs: [team_physics]
-    if: always() && needs.team_physics.result != 'cancelled'
+    if: needs.team_physics.result == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 240
     steps:
@@ -147,35 +156,42 @@ jobs:
         shell: bash
         run: curl --retry 3 --retry-all-errors --retry-delay 15 -fsSL https://opencode.ai/install | bash
 
-      - name: Add OpenCode to PATH with transient network retry
+      - name: Add OpenCode to PATH with bounded local retry
         shell: bash
         run: |
           echo "$HOME/.opencode/bin" >> "$GITHUB_PATH"
           cat >> "$BASH_ENV" <<'SPIDER_OPENCODE_RETRY'
           opencode() {
             local real="$HOME/.opencode/bin/opencode"
-            local log rc
+            local log rc attempt
+            local max_attempts=6
+            local retry_delay=300
             log="$(mktemp)"
-            set +e
-            "$real" "$@" 2>&1 | tee "$log"
-            rc=${PIPESTATUS[0]}
-            set -e
-            if [ "$rc" -eq 0 ]; then
-              rm -f "$log"
-              return 0
-            fi
-            if grep -Eiq '(NetworkError|network error|fetch failed|APIConnectionError|ECONNRESET|ECONNREFUSED|EAI_AGAIN|ENETUNREACH|ENOTFOUND|ETIMEDOUT|socket hang up|connection (reset|refused|closed|error)|upstream.*(reset|closed|unavailable|error)|HTTP[^0-9]*(429|502|503|504)|status[^0-9]*(429|502|503|504)|too many requests|rate.?limit|service unavailable|bad gateway|gateway timeout|temporar(y|ily) unavailable|TLS|SSL.*error)' "$log"; then
-              echo "::warning::Transient OpenCode/Ox network error detected (exit $rc). Retrying once in 300 seconds."
-              sleep 300
-              rm -f "$log"
+            for ((attempt = 1; attempt <= max_attempts; attempt++)); do
+              : > "$log"
+              echo "OpenCode/Ox attempt ${attempt}/${max_attempts}."
               set +e
-              "$real" "$@"
-              rc=$?
+              "$real" "$@" 2>&1 | tee "$log"
+              rc=${PIPESTATUS[0]}
               set -e
-              return "$rc"
-            fi
-            rm -f "$log"
-            return "$rc"
+              if [ "$rc" -eq 0 ]; then
+                rm -f "$log"
+                return 0
+              fi
+              if ! grep -Eiq '(network_error|NetworkError|network error|fetch failed|APIConnectionError|ECONNRESET|ECONNREFUSED|EAI_AGAIN|ENETUNREACH|ENOTFOUND|ETIMEDOUT|timed out|timeout|socket hang up|connection (reset|refused|closed|error)|upstream.*(reset|closed|unavailable|error)|HTTP[^0-9]*(429|500|502|503|504)|status[^0-9]*(429|500|502|503|504)|too many requests|rate.?limit|service unavailable|bad gateway|gateway timeout|temporar(y|ily) unavailable|TLS|SSL.*error)' "$log"; then
+                echo "::error::SPIDER_OX_NONTRANSIENT exit=$rc; watchdog will not retry this failure." >&2
+                rm -f "$log"
+                return "$rc"
+              fi
+              if [ "$attempt" -eq "$max_attempts" ]; then
+                echo "::error::SPIDER_TRANSIENT_OX_EXHAUSTED attempts=$max_attempts exit=$rc" >&2
+                rm -f "$log"
+                return "$rc"
+              fi
+              echo "::warning::Transient OpenCode/Ox outage; retrying in ${retry_delay}s." >&2
+              sleep "$retry_delay"
+            done
+            return 1
           }
           SPIDER_OPENCODE_RETRY
 
@@ -203,17 +219,19 @@ jobs:
         shell: bash
         run: |
           BRANCH="cycle/physics/${GITHUB_RUN_ID}/audit"
+          ATTEMPT_BRANCH="${BRANCH}-attempt-${GITHUB_RUN_ATTEMPT}"
           git config user.name "spider-auditor-physics"
           git config user.email "spider-auditor-physics@autonomous.local"
           git switch -C "$BRANCH"
           git add -A
-          git commit -m "Physics cycle ${{ inputs.cycle_index }}: independent audit" || true
+          git commit -m "Physics cycle ${{ inputs.cycle_index }} attempt ${GITHUB_RUN_ATTEMPT}: independent audit" || true
+          git push --force origin "HEAD:refs/heads/$ATTEMPT_BRANCH"
           git push --force origin "HEAD:refs/heads/$BRANCH"
 
   physics_director:
     name: PHYSICS LANE DIRECTOR
     needs: [team_physics, audit_physics]
-    if: always() && needs.audit_physics.result != 'cancelled'
+    if: needs.audit_physics.result == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 240
     steps:
@@ -238,35 +256,42 @@ jobs:
         shell: bash
         run: curl --retry 3 --retry-all-errors --retry-delay 15 -fsSL https://opencode.ai/install | bash
 
-      - name: Add OpenCode to PATH with transient network retry
+      - name: Add OpenCode to PATH with bounded local retry
         shell: bash
         run: |
           echo "$HOME/.opencode/bin" >> "$GITHUB_PATH"
           cat >> "$BASH_ENV" <<'SPIDER_OPENCODE_RETRY'
           opencode() {
             local real="$HOME/.opencode/bin/opencode"
-            local log rc
+            local log rc attempt
+            local max_attempts=6
+            local retry_delay=300
             log="$(mktemp)"
-            set +e
-            "$real" "$@" 2>&1 | tee "$log"
-            rc=${PIPESTATUS[0]}
-            set -e
-            if [ "$rc" -eq 0 ]; then
-              rm -f "$log"
-              return 0
-            fi
-            if grep -Eiq '(NetworkError|network error|fetch failed|APIConnectionError|ECONNRESET|ECONNREFUSED|EAI_AGAIN|ENETUNREACH|ENOTFOUND|ETIMEDOUT|socket hang up|connection (reset|refused|closed|error)|upstream.*(reset|closed|unavailable|error)|HTTP[^0-9]*(429|502|503|504)|status[^0-9]*(429|502|503|504)|too many requests|rate.?limit|service unavailable|bad gateway|gateway timeout|temporar(y|ily) unavailable|TLS|SSL.*error)' "$log"; then
-              echo "::warning::Transient OpenCode/Ox network error detected (exit $rc). Retrying once in 300 seconds."
-              sleep 300
-              rm -f "$log"
+            for ((attempt = 1; attempt <= max_attempts; attempt++)); do
+              : > "$log"
+              echo "OpenCode/Ox attempt ${attempt}/${max_attempts}."
               set +e
-              "$real" "$@"
-              rc=$?
+              "$real" "$@" 2>&1 | tee "$log"
+              rc=${PIPESTATUS[0]}
               set -e
-              return "$rc"
-            fi
-            rm -f "$log"
-            return "$rc"
+              if [ "$rc" -eq 0 ]; then
+                rm -f "$log"
+                return 0
+              fi
+              if ! grep -Eiq '(network_error|NetworkError|network error|fetch failed|APIConnectionError|ECONNRESET|ECONNREFUSED|EAI_AGAIN|ENETUNREACH|ENOTFOUND|ETIMEDOUT|timed out|timeout|socket hang up|connection (reset|refused|closed|error)|upstream.*(reset|closed|unavailable|error)|HTTP[^0-9]*(429|500|502|503|504)|status[^0-9]*(429|500|502|503|504)|too many requests|rate.?limit|service unavailable|bad gateway|gateway timeout|temporar(y|ily) unavailable|TLS|SSL.*error)' "$log"; then
+                echo "::error::SPIDER_OX_NONTRANSIENT exit=$rc; watchdog will not retry this failure." >&2
+                rm -f "$log"
+                return "$rc"
+              fi
+              if [ "$attempt" -eq "$max_attempts" ]; then
+                echo "::error::SPIDER_TRANSIENT_OX_EXHAUSTED attempts=$max_attempts exit=$rc" >&2
+                rm -f "$log"
+                return "$rc"
+              fi
+              echo "::warning::Transient OpenCode/Ox outage; retrying in ${retry_delay}s." >&2
+              sleep "$retry_delay"
+            done
+            return 1
           }
           SPIDER_OPENCODE_RETRY
 
