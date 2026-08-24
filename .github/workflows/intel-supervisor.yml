@@ -1,0 +1,60 @@
+name: SPIDER Intel Supervisor
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+  workflow_run:
+    workflows:
+      - "SPIDER Intel Research Lane"
+    types: [completed]
+
+permissions:
+  contents: read
+  actions: write
+
+concurrency:
+  group: spider-intel-supervisor
+  cancel-in-progress: true
+
+jobs:
+  ensure_intel_running:
+    name: Ensure Intel research continuity
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check accepted Intel state and active runs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          ACTIVE=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow intel-loop.yml --limit 30 \
+            --json status --jq '[.[] | select(.status != "completed")] | length')
+          if [[ "$ACTIVE" -gt 0 ]]; then
+            echo "Intel lane already active; nothing to do."
+            exit 0
+          fi
+
+          if gh api "repos/${GITHUB_REPOSITORY}/branches/lab/intel" >/dev/null 2>&1; then
+            STATE=$(gh api -H 'Accept: application/vnd.github.raw+json' "repos/${GITHUB_REPOSITORY}/contents/state/intel_loop.json?ref=lab/intel" 2>/dev/null || true)
+          else
+            STATE=$(gh api -H 'Accept: application/vnd.github.raw+json' "repos/${GITHUB_REPOSITORY}/contents/state/intel_loop.json?ref=main" 2>/dev/null || true)
+          fi
+
+          CONTINUE=$(jq -r '.continue // false' <<<"$STATE" 2>/dev/null || echo false)
+          if [[ "$CONTINUE" != true ]]; then
+            echo "Intel Research Director has not authorized continuation."
+            exit 0
+          fi
+
+          # If no accepted Intel integration exists yet this is cycle 1.
+          # Otherwise use successful completed fresh/director passes + 1 as a monotonic label;
+          # cycle_index is organizational metadata, not a scientific degree of freedom.
+          ACCEPTED=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow intel-loop.yml --limit 100 \
+            --json conclusion,status --jq '[.[] | select(.status=="completed" and .conclusion=="success")] | length')
+          NEXT=$((ACCEPTED + 1))
+
+          echo "No active Intel run and continuation=true; dispatching Intel cycle label $NEXT."
+          gh workflow run intel-loop.yml --repo "$GITHUB_REPOSITORY" --ref main -f cycle_index="$NEXT"
