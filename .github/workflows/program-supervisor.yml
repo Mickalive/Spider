@@ -47,7 +47,7 @@ jobs:
               git config user.email "spider-program-supervisor@autonomous.local"
               git pull --rebase origin main
               git add .spider/program-receipts
-              git commit -m "state: reconcile research-program successor receipt"
+              git commit -m "state: reconcile research-program successor receipt" || true
               git push origin HEAD:main
             fi
           }
@@ -55,13 +55,20 @@ jobs:
           find_successor_after() {
             local workflow="$1" dispatched_at="$2"
             gh run list --repo "$GITHUB_REPOSITORY" --workflow "$workflow" --limit 100 \
-              --json databaseId,createdAt,status,conclusion \
-              --jq --arg t "$dispatched_at" '[.[] | select(.createdAt >= $t)] | sort_by(.createdAt) | first // empty' 2>/dev/null || true
+              --json databaseId,createdAt,status,conclusion 2>/dev/null \
+              | jq --arg t "$dispatched_at" '[.[] | select(.createdAt >= $t)] | sort_by(.createdAt) | first // empty' || true
+          }
+
+          find_new_successor() {
+            local workflow="$1" before_ids="$2"
+            gh run list --repo "$GITHUB_REPOSITORY" --workflow "$workflow" --limit 30 \
+              --json databaseId,createdAt,status,conclusion 2>/dev/null \
+              | jq --argjson before "$before_ids" '[.[] | select(.databaseId as $id | ($before | index($id) | not))] | sort_by(.createdAt) | first // empty' || true
           }
 
           handle_lane() {
             local lane="$1" branch="$2" state_path="$3" workflow="$4" expected_name="$5"
-            local raw status cont completed_by launch program_id title question active receipt note
+            local raw status cont completed_by launch program_id title question active receipt note rc
             local receipt_status successor_id dispatched_at candidate before_ids
 
             if [[ "$EVENT_NAME" == "workflow_run" && "$SOURCE_WORKFLOW" != "$expected_name" ]]; then
@@ -97,8 +104,7 @@ jobs:
 
             receipt=".spider/program-receipts/${lane}-${completed_by}.json"
 
-            # Existing receipts are valid only when a successor run can be
-            # reconciled. A mere dispatch command is never enough evidence.
+            # A receipt is valid only when it can be tied to an actual successor run.
             if [[ -f "$receipt" ]]; then
               receipt_status=$(jq -r '.receipt_status // "PENDING"' "$receipt")
               successor_id=$(jq -r '.successor_run_id // empty' "$receipt")
@@ -107,7 +113,7 @@ jobs:
               if [[ -n "$successor_id" ]]; then
                 if gh run view "$successor_id" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1 \
                    || gh api "repos/${GITHUB_REPOSITORY}/branches/cycle%2F${lane}%2F${successor_id}%2Fteam" >/dev/null 2>&1; then
-                  if [[ "$receipt_status" != CONFIRMED ]]; then
+                  if [[ "$receipt_status" != "CONFIRMED" ]]; then
                     jq '.receipt_status="CONFIRMED"' "$receipt" > /tmp/receipt.json && mv /tmp/receipt.json "$receipt"
                   fi
                   echo "$lane: successor run $successor_id confirmed for program $program_id."
@@ -149,13 +155,10 @@ jobs:
               -f cycle_index=1 \
               -f max_cycles=0
 
-            # Poll briefly for GitHub to materialize the new workflow run.
             successor_id=""
             for _ in $(seq 1 15); do
               sleep 2
-              candidate=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow "$workflow" --limit 30 \
-                --json databaseId,createdAt,status,conclusion \
-                --jq --argjson before "$before_ids" '[.[] | select((.databaseId as $id | ($before | index($id) | not)))] | sort_by(.createdAt) | first // empty' 2>/dev/null || true)
+              candidate=$(find_new_successor "$workflow" "$before_ids")
               if [[ -n "$candidate" ]]; then
                 successor_id=$(jq -r '.databaseId' <<<"$candidate")
                 break
