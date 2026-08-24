@@ -55,11 +55,39 @@ jobs:
 
       - name: Install OpenCode
         shell: bash
-        run: curl -fsSL https://opencode.ai/install | bash
+        run: curl --retry 3 --retry-all-errors --retry-delay 15 -fsSL https://opencode.ai/install | bash
 
-      - name: Add OpenCode to PATH
+      - name: Add OpenCode to PATH with transient network retry
         shell: bash
-        run: echo "$HOME/.opencode/bin" >> "$GITHUB_PATH"
+        run: |
+          echo "$HOME/.opencode/bin" >> "$GITHUB_PATH"
+          cat >> "$BASH_ENV" <<'SPIDER_OPENCODE_RETRY'
+          opencode() {
+            local real="$HOME/.opencode/bin/opencode"
+            local log rc
+            log="$(mktemp)"
+            set +e
+            "$real" "$@" 2>&1 | tee "$log"
+            rc=${PIPESTATUS[0]}
+            set -e
+            if [ "$rc" -eq 0 ]; then
+              rm -f "$log"
+              return 0
+            fi
+            if grep -Eiq '(NetworkError|network error|fetch failed|APIConnectionError|ECONNRESET|ECONNREFUSED|EAI_AGAIN|ENETUNREACH|ENOTFOUND|ETIMEDOUT|socket hang up|connection (reset|refused|closed|error)|upstream.*(reset|closed|unavailable|error)|HTTP[^0-9]*(429|502|503|504)|status[^0-9]*(429|502|503|504)|too many requests|rate.?limit|service unavailable|bad gateway|gateway timeout|temporar(y|ily) unavailable|TLS|SSL.*error)' "$log"; then
+              echo "::warning::Transient OpenCode/Ox network error detected (exit $rc). Retrying once in 300 seconds."
+              sleep 300
+              rm -f "$log"
+              set +e
+              "$real" "$@"
+              rc=$?
+              set -e
+              return "$rc"
+            fi
+            rm -f "$log"
+            return "$rc"
+          }
+          SPIDER_OPENCODE_RETRY
 
       - name: Run TEAM GRAPH
         env:
@@ -117,11 +145,39 @@ jobs:
 
       - name: Install OpenCode
         shell: bash
-        run: curl -fsSL https://opencode.ai/install | bash
+        run: curl --retry 3 --retry-all-errors --retry-delay 15 -fsSL https://opencode.ai/install | bash
 
-      - name: Add OpenCode to PATH
+      - name: Add OpenCode to PATH with transient network retry
         shell: bash
-        run: echo "$HOME/.opencode/bin" >> "$GITHUB_PATH"
+        run: |
+          echo "$HOME/.opencode/bin" >> "$GITHUB_PATH"
+          cat >> "$BASH_ENV" <<'SPIDER_OPENCODE_RETRY'
+          opencode() {
+            local real="$HOME/.opencode/bin/opencode"
+            local log rc
+            log="$(mktemp)"
+            set +e
+            "$real" "$@" 2>&1 | tee "$log"
+            rc=${PIPESTATUS[0]}
+            set -e
+            if [ "$rc" -eq 0 ]; then
+              rm -f "$log"
+              return 0
+            fi
+            if grep -Eiq '(NetworkError|network error|fetch failed|APIConnectionError|ECONNRESET|ECONNREFUSED|EAI_AGAIN|ENETUNREACH|ENOTFOUND|ETIMEDOUT|socket hang up|connection (reset|refused|closed|error)|upstream.*(reset|closed|unavailable|error)|HTTP[^0-9]*(429|502|503|504)|status[^0-9]*(429|502|503|504)|too many requests|rate.?limit|service unavailable|bad gateway|gateway timeout|temporar(y|ily) unavailable|TLS|SSL.*error)' "$log"; then
+              echo "::warning::Transient OpenCode/Ox network error detected (exit $rc). Retrying once in 300 seconds."
+              sleep 300
+              rm -f "$log"
+              set +e
+              "$real" "$@"
+              rc=$?
+              set -e
+              return "$rc"
+            fi
+            rm -f "$log"
+            return "$rc"
+          }
+          SPIDER_OPENCODE_RETRY
 
       - name: Audit Graph immediately
         shell: bash
@@ -180,11 +236,39 @@ jobs:
 
       - name: Install OpenCode
         shell: bash
-        run: curl -fsSL https://opencode.ai/install | bash
+        run: curl --retry 3 --retry-all-errors --retry-delay 15 -fsSL https://opencode.ai/install | bash
 
-      - name: Add OpenCode to PATH
+      - name: Add OpenCode to PATH with transient network retry
         shell: bash
-        run: echo "$HOME/.opencode/bin" >> "$GITHUB_PATH"
+        run: |
+          echo "$HOME/.opencode/bin" >> "$GITHUB_PATH"
+          cat >> "$BASH_ENV" <<'SPIDER_OPENCODE_RETRY'
+          opencode() {
+            local real="$HOME/.opencode/bin/opencode"
+            local log rc
+            log="$(mktemp)"
+            set +e
+            "$real" "$@" 2>&1 | tee "$log"
+            rc=${PIPESTATUS[0]}
+            set -e
+            if [ "$rc" -eq 0 ]; then
+              rm -f "$log"
+              return 0
+            fi
+            if grep -Eiq '(NetworkError|network error|fetch failed|APIConnectionError|ECONNRESET|ECONNREFUSED|EAI_AGAIN|ENETUNREACH|ENOTFOUND|ETIMEDOUT|socket hang up|connection (reset|refused|closed|error)|upstream.*(reset|closed|unavailable|error)|HTTP[^0-9]*(429|502|503|504)|status[^0-9]*(429|502|503|504)|too many requests|rate.?limit|service unavailable|bad gateway|gateway timeout|temporar(y|ily) unavailable|TLS|SSL.*error)' "$log"; then
+              echo "::warning::Transient OpenCode/Ox network error detected (exit $rc). Retrying once in 300 seconds."
+              sleep 300
+              rm -f "$log"
+              set +e
+              "$real" "$@"
+              rc=$?
+              set -e
+              return "$rc"
+            fi
+            rm -f "$log"
+            return "$rc"
+          }
+          SPIDER_OPENCODE_RETRY
 
       - name: Run Graph Lane Director
         env:
