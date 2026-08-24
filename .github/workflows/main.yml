@@ -1,4 +1,4 @@
-name: SPIDER Autonomous Lab — Launch
+name: SPIDER Launcher — Graph + Physics
 
 on:
   workflow_dispatch:
@@ -28,13 +28,18 @@ jobs:
     name: Launch Graph lane
     runs-on: ubuntu-latest
     steps:
-      - name: Dispatch independent Graph loop
+      - name: Dispatch Graph only if idle
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           HUMAN_NOTE: ${{ inputs.human_note }}
           MAX_CYCLES: ${{ inputs.graph_cycles }}
         shell: bash
         run: |
+          ACTIVE=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow graph-loop.yml --limit 30 --json status --jq '[.[] | select(.status == "queued" or .status == "in_progress" or .status == "requested" or .status == "waiting" or .status == "pending")] | length')
+          if [ "$ACTIVE" -gt 0 ]; then
+            echo "Graph lane already active or queued; skipping duplicate launch."
+            exit 0
+          fi
           gh workflow run graph-loop.yml \
             --repo "$GITHUB_REPOSITORY" \
             --ref main \
@@ -46,13 +51,18 @@ jobs:
     name: Launch Physics lane
     runs-on: ubuntu-latest
     steps:
-      - name: Dispatch independent Physics loop
+      - name: Dispatch Physics only if idle
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           HUMAN_NOTE: ${{ inputs.human_note }}
           MAX_CYCLES: ${{ inputs.physics_cycles }}
         shell: bash
         run: |
+          ACTIVE=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow physics-loop.yml --limit 30 --json status --jq '[.[] | select(.status == "queued" or .status == "in_progress" or .status == "requested" or .status == "waiting" or .status == "pending")] | length')
+          if [ "$ACTIVE" -gt 0 ]; then
+            echo "Physics lane already active or queued; skipping duplicate launch."
+            exit 0
+          fi
           gh workflow run physics-loop.yml \
             --repo "$GITHUB_REPOSITORY" \
             --ref main \
