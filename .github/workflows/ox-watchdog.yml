@@ -57,34 +57,39 @@ jobs:
 
             run_id=$(jq -r '.databaseId' <<<"$latest")
             conclusion=$(jq -r '.conclusion // ""' <<<"$latest")
-            if [[ "$conclusion" != failure ]]; then
-              echo "$workflow: latest completed run $run_id concluded $conclusion; no recovery."
-              return 0
-            fi
+            case "$conclusion" in
+              failure|timed_out) ;;
+              *)
+                echo "$workflow: latest completed run $run_id concluded $conclusion; no recovery."
+                return 0
+                ;;
+            esac
 
             set +e
             logs=$(gh run view "$run_id" --repo "$GITHUB_REPOSITORY" --log-failed 2>&1)
             log_rc=$?
             set -e
             if [[ "$log_rc" -ne 0 ]]; then
-              echo "::warning::$workflow: unable to read failed logs for run $run_id; refusing blind retry."
+              echo "::warning::$workflow: unable to read failed/timed-out logs for run $run_id; refusing blind retry."
               return 0
             fi
 
             if grep -Fq 'SPIDER_TRANSIENT_OX_EXHAUSTED' <<<"$logs"; then
               echo "::warning::$workflow: explicit transient Ox exhaustion in run $run_id; re-running failed jobs."
-              gh run rerun "$run_id" --repo "$GITHUB_REPOSITORY" --failed
+              gh run rerun "$run_id" --repo "$GITHUB_REPOSITORY" --failed || \
+                echo "::warning::$workflow: GitHub refused failed-job rerun for run $run_id; no blind full-run replay performed."
               return 0
             fi
 
             if grep -Eiq '(opencode run|OpenCode|x-preview-f-free|Ox)' <<<"$logs" \
                && grep -Eiq '(network_error|NetworkError|network error|fetch failed|APIConnectionError|ECONNRESET|ECONNREFUSED|EAI_AGAIN|ENETUNREACH|ENOTFOUND|ETIMEDOUT|timed out|connection reset|connection closed|temporar(y|ily) unavailable|HTTP[^0-9]*(429|500|502|503|504)|status[^0-9]*(429|500|502|503|504)|too many requests|rate.?limit|service unavailable|bad gateway|gateway timeout|upstream.*(reset|closed|unavailable|error))' <<<"$logs"; then
-              echo "::warning::$workflow: legacy run $run_id has OpenCode/Ox + explicit transient network signature; re-running failed jobs."
-              gh run rerun "$run_id" --repo "$GITHUB_REPOSITORY" --failed
+              echo "::warning::$workflow: run $run_id ($conclusion) has OpenCode/Ox + explicit transient network signature; re-running failed jobs."
+              gh run rerun "$run_id" --repo "$GITHUB_REPOSITORY" --failed || \
+                echo "::warning::$workflow: GitHub refused failed-job rerun for run $run_id; no blind full-run replay performed."
               return 0
             fi
 
-            echo "$workflow: run $run_id failed without defensible transient-Ox evidence; watchdog will not resurrect it."
+            echo "$workflow: run $run_id concluded $conclusion without defensible transient-Ox evidence; watchdog will not resurrect it."
           }
 
           recover_workflow graph-loop.yml
