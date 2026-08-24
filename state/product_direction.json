@@ -1,6 +1,7 @@
 {
   "updated": null,
-  "build_authorized": false,
+  "beta_launch": false,
+  "public_deployment_authorized": false,
   "top_hypotheses": [],
-  "reason": "Awaiting convergence of audited Graph, Physics and Intel mechanisms."
+  "reason": "Awaiting enough audited Graph, Physics and Intel evidence to justify the first benchmarkable Product Beta."
 }
