@@ -1,0 +1,70 @@
+name: SPIDER Product Supervisor
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+  workflow_run:
+    workflows:
+      - "SPIDER Product and Beta Lane"
+      - "SPIDER Product Beta Repair"
+    types: [completed]
+
+permissions:
+  contents: read
+  actions: write
+
+concurrency:
+  group: spider-product-supervisor
+  cancel-in-progress: true
+
+jobs:
+  continue_authorized_product_work:
+    name: Continue explicitly authorized Product Beta work
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check Product state and active work
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          ACTIVE_PRODUCT=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow product-loop.yml --limit 30 \
+            --json status --jq '[.[] | select(.status != "completed")] | length' 2>/dev/null || echo 0)
+          ACTIVE_REPAIR=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow product-beta-repair.yml --limit 30 \
+            --json status --jq '[.[] | select(.status != "completed")] | length' 2>/dev/null || echo 0)
+          if [[ "$ACTIVE_PRODUCT" -gt 0 || "$ACTIVE_REPAIR" -gt 0 ]]; then
+            echo "Product/Beta work already active; nothing to do."
+            exit 0
+          fi
+
+          # Never bypass a real failed Product/Beta workflow. Ox watchdog handles
+          # defensible transient network failures; other failures require the normal repair/review path.
+          for wf in product-loop.yml product-beta-repair.yml; do
+            LATEST=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow "$wf" --limit 1 \
+              --json conclusion,status,databaseId 2>/dev/null || echo '[]')
+            CONCLUSION=$(jq -r '.[0].conclusion // empty' <<<"$LATEST")
+            ID=$(jq -r '.[0].databaseId // empty' <<<"$LATEST")
+            if [[ "$CONCLUSION" == failure || "$CONCLUSION" == cancelled || "$CONCLUSION" == timed_out ]]; then
+              echo "$wf latest run $ID concluded $CONCLUSION; supervisor will not bypass it."
+              exit 0
+            fi
+          done
+
+          if ! gh api "repos/${GITHUB_REPOSITORY}/branches/lab%2Fproduct" >/dev/null 2>&1; then
+            echo "No accepted Product branch yet; source-lane workflow_run triggers will create it when needed."
+            exit 0
+          fi
+
+          STATE=$(gh api -H 'Accept: application/vnd.github.raw+json' \
+            "repos/${GITHUB_REPOSITORY}/contents/state/product_direction.json?ref=lab/product" 2>/dev/null || true)
+          LAUNCH=$(jq -r '.beta_launch // false' <<<"$STATE" 2>/dev/null || echo false)
+          if [[ "$LAUNCH" != true ]]; then
+            echo "Product Director has not authorized another beta."
+            exit 0
+          fi
+
+          echo "Product Director has beta_launch=true and no Product/Beta run is active; dispatching a fresh Product decision/execution pass."
+          gh workflow run product-loop.yml --repo "$GITHUB_REPOSITORY" --ref main
