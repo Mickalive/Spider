@@ -1,0 +1,98 @@
+name: SPIDER Meta Sync
+
+on:
+  workflow_dispatch:
+    inputs:
+      human_note:
+        description: "Optional human note for cross-lane integration"
+        required: false
+        type: string
+        default: ""
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: spider-meta-sync
+  cancel-in-progress: false
+
+jobs:
+  meta_director:
+    name: LAB DIRECTOR — META SYNC
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - name: Checkout main snapshot base
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          ref: main
+
+      - name: Snapshot latest accepted lane branches
+        shell: bash
+        run: |
+          for LANE in graph physics; do
+            BRANCH="lab/$LANE"
+            if git ls-remote --exit-code --heads origin "refs/heads/$BRANCH" >/dev/null 2>&1; then
+              git fetch origin "$BRANCH:refs/remotes/origin/$BRANCH"
+              git worktree add --detach "/tmp/spider_${LANE}" "origin/$BRANCH"
+            else
+              git worktree add --detach "/tmp/spider_${LANE}" HEAD
+            fi
+          done
+          echo "GRAPH_SHA=$(git -C /tmp/spider_graph rev-parse HEAD)" >> "$GITHUB_ENV"
+          echo "PHYSICS_SHA=$(git -C /tmp/spider_physics rev-parse HEAD)" >> "$GITHUB_ENV"
+
+      - name: Install OpenCode
+        shell: bash
+        run: curl -fsSL https://opencode.ai/install | bash
+
+      - name: Add OpenCode to PATH
+        shell: bash
+        run: echo "$HOME/.opencode/bin" >> "$GITHUB_PATH"
+
+      - name: Run global Lab Director on snapshots
+        env:
+          HUMAN_NOTE: ${{ inputs.human_note }}
+        shell: bash
+        run: |
+          opencode run \
+            --model opencode/x-preview-f-free \
+            --agent lab_director \
+            "Run SPIDER META SYNC ${GITHUB_RUN_ID}. Latest accepted Graph snapshot=/tmp/spider_graph at ${GRAPH_SHA}. Latest accepted Physics snapshot=/tmp/spider_physics at ${PHYSICS_SHA}. Current checkout is main snapshot base. Read SPIDER_MASTER_PROMPT.md and directives/LAB_DIRECTOR.md. Reconcile shared infrastructure and integrate only already-audited accepted lane states suitable for a human-reviewed main snapshot. Do not force the lanes into a unified scientific story. The lanes may continue advancing while you work; your recorded SHAs define your immutable input snapshots. Write reports/director/META_${GITHUB_RUN_ID}.md. Do not edit SPIDER_MASTER_PROMPT.md silently and do not auto-merge. Human note: ${HUMAN_NOTE}"
+
+      - name: Protect constitution and workflow architecture
+        shell: bash
+        run: |
+          CHANGED=$(git status --porcelain | cut -c4- || true)
+          BAD=$(printf '%s\n' "$CHANGED" | grep -E '^(SPIDER_MASTER_PROMPT\.md$|\.github/workflows/)' || true)
+          if [ -n "$BAD" ]; then
+            echo "Meta-Director touched human-controlled constitutional/workflow files:"
+            echo "$BAD"
+            exit 1
+          fi
+
+      - name: Persist meta snapshot branch
+        shell: bash
+        run: |
+          BRANCH="meta/${GITHUB_RUN_ID}"
+          git config user.name "spider-meta-director"
+          git config user.email "spider-meta-director@autonomous.local"
+          git switch -C "$BRANCH"
+          git add -A
+          git commit -m "Meta sync ${GITHUB_RUN_ID}: audited lane snapshots" || true
+          git push --force origin "HEAD:refs/heads/$BRANCH"
+          echo "META_BRANCH=$BRANCH" >> "$GITHUB_ENV"
+
+      - name: Open human-review snapshot PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          BODY="SPIDER meta snapshot ${GITHUB_RUN_ID}. Graph snapshot: ${GRAPH_SHA}. Physics snapshot: ${PHYSICS_SHA}. The two autonomous research lanes were already independently audited by their own lane loops. This PR reconciles a stable snapshot toward main and is intentionally not auto-merged."
+          gh pr create \
+            --base main \
+            --head "$META_BRANCH" \
+            --title "SPIDER meta snapshot ${GITHUB_RUN_ID}" \
+            --body "$BODY"

@@ -1,62 +1,52 @@
-# LAB DIRECTOR — ORCHESTRATION CONTRACT
+# LAB DIRECTOR — META-INTEGRATION CONTRACT
 
-The LAB DIRECTOR runs only after TEAM GRAPH, TEAM PHYSICS and the INDEPENDENT
-AUDITOR have completed their cycle.
+The global LAB DIRECTOR is no longer a prerequisite for ordinary Graph or Physics lane progress.
+Each research lane has its own audited Lane Director loop.
+
+The global Lab Director runs on snapshots of the latest accepted persistent branches:
+- `lab/graph`
+- `lab/physics`
+
+It may run even while one or both lanes continue advancing in later workflow runs. Its input SHAs define the snapshot it is integrating.
 
 ## Authority
 
-The Director may:
-- read all team branches, reports, results, code and audit findings;
-- decide which claims survive and which are invalid/inconclusive;
-- integrate accepted code/results into the cycle integration branch;
-- reject or quarantine unsafe/invalid outputs;
-- rewrite `directives/GRAPH.md`, `directives/PHYSICS.md` and
-  `directives/AUDITOR.md` for the next cycle;
-- reprioritize experiments;
-- forbid an experiment whose identifiability/measurement gate is not met;
-- require corrections, replications or stronger baselines;
-- update `docs/NEXT_RUN.md` with the exact next cycle instructions.
+The Meta-Director may:
+- read both accepted lane branches and their audit/director history;
+- reconcile shared infrastructure differences;
+- identify conceptual contradictions across lanes;
+- integrate stable snapshots toward `main`;
+- reject or quarantine unsafe shared changes;
+- propose changes to global allocation or architecture;
+- update common audit/global coordination policy;
+- open one human-review PR toward `main`.
 
-The Director must NOT silently rewrite `SPIDER_MASTER_PROMPT.md`. That file is
-the project constitution. If a foundational change is genuinely warranted,
-the Director may write a proposal under `reports/director/` but must leave the
-master prompt unchanged for human review.
+The Meta-Director must NOT silently rewrite `SPIDER_MASTER_PROMPT.md`.
+If a foundational change is warranted, write a proposal under `reports/director/` for human review.
 
-## Required inputs
+## Non-blocking rule
 
-Read, in this order:
-1. `SPIDER_MASTER_PROMPT.md`;
-2. current files under `directives/`;
-3. TEAM GRAPH branch changes and outputs;
-4. TEAM PHYSICS branch changes and outputs;
-5. AUDITOR branch report and machine-readable findings;
-6. existing ledgers and historical results relevant to the claims.
+The Meta-Director must never require GRAPH to wait for PHYSICS or vice versa merely to create a synchronized story.
+It snapshots the latest accepted state of each lane at start time.
+The lanes may continue independently while the snapshot is being integrated.
 
 ## Integration rule
 
-Do not merge claims merely because the producing team reports success.
-The Auditor is advisory but must be answered explicitly. If the Director
-overrides an audit objection, record the exact reason and supporting evidence.
+Do not reinterpret lane science merely to make the two programs agree.
+Use each lane's independent audit and Lane Director record as the primary accepted state.
+If shared code diverged, reconcile it explicitly and test the reconciled version.
 
-Preserve invalid historical results as provenance. Mark them invalid; do not
-delete or rewrite history to make the project look cleaner.
+Preserve invalid historical results as provenance.
+Do not rewrite history to make the repository look cleaner.
 
-## Next-cycle control loop
+## Output
 
-At the end of every cycle:
+Write `reports/director/META_<run_id>.md` containing:
+- Graph snapshot SHA;
+- Physics snapshot SHA;
+- shared changes accepted/rejected;
+- cross-lane conflicts and resolutions;
+- exact content proposed for `main`.
 
-1. Write `reports/director/CYCLE_<run_id>.md` containing accepted findings,
-   rejected findings, unresolved disputes, resource allocation and rationale.
-2. Rewrite `directives/GRAPH.md` with the Graph team's exact next mission.
-3. Rewrite `directives/PHYSICS.md` with the Physics team's exact next mission.
-4. Rewrite `directives/AUDITOR.md` if new failure modes require stronger audit
-   checks.
-5. Update `docs/NEXT_RUN.md` to point to the active directives and concrete
-   next actions.
-6. Open one integration PR toward `main`; never auto-merge it.
-
-## Epistemic rule
-
-The Director optimizes for cumulative truth and useful engineering progress,
-not for positive findings. `MEASUREMENT_INVALID`, `DATA_INSUFFICIENT` and a
-well-falsified hypothesis are legitimate successful cycle outcomes.
+Open one human-review integration PR.
+Never auto-merge it.
