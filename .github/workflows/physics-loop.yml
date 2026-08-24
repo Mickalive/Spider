@@ -1,0 +1,242 @@
+name: SPIDER Physics Lane
+
+on:
+  workflow_dispatch:
+    inputs:
+      human_note:
+        description: "Optional human steering note"
+        required: false
+        type: string
+        default: ""
+      cycle_index:
+        description: "Current lane cycle number"
+        required: false
+        type: number
+        default: 1
+      max_cycles:
+        description: "Maximum cycles in this batch; 0 = continue until Lane Director stops"
+        required: false
+        type: number
+        default: 3
+
+permissions:
+  contents: write
+  actions: write
+
+env:
+  SPIDER_MODEL: opencode/x-preview-f-free
+  LANE_BRANCH: lab/physics
+
+concurrency:
+  group: spider-physics-lane
+  cancel-in-progress: false
+
+jobs:
+  team_physics:
+    name: TEAM PHYSICS
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    steps:
+      - name: Checkout workflow base
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Checkout or initialize accepted Physics lane
+        shell: bash
+        run: |
+          if git ls-remote --exit-code --heads origin "refs/heads/$LANE_BRANCH" >/dev/null 2>&1; then
+            git fetch origin "$LANE_BRANCH"
+            git switch -C "$LANE_BRANCH" "origin/$LANE_BRANCH"
+          else
+            git switch -C "$LANE_BRANCH"
+            git push origin "HEAD:refs/heads/$LANE_BRANCH"
+          fi
+
+      - name: Install OpenCode
+        shell: bash
+        run: curl -fsSL https://opencode.ai/install | bash
+
+      - name: Add OpenCode to PATH
+        shell: bash
+        run: echo "$HOME/.opencode/bin" >> "$GITHUB_PATH"
+
+      - name: Run TEAM PHYSICS
+        env:
+          HUMAN_NOTE: ${{ inputs.human_note }}
+        shell: bash
+        run: |
+          opencode run \
+            --model "$SPIDER_MODEL" \
+            --agent physics_runner \
+            "Run Physics lane cycle ${{ inputs.cycle_index }} (GitHub run ${GITHUB_RUN_ID}). Read SPIDER_MASTER_PROMPT.md, directives/PHYSICS.md, directives/AUDITOR_PHYSICS.md, docs/NEXT_PHYSICS.md, docs/PHYSICS_LEDGER.md and relevant accepted Physics evidence. Do real falsifiable work with real data. Historical WP-003 is MEASUREMENT_INVALID. Prefer environment response P(S_next | S,A). Do not work on Graph. Do not edit SPIDER_MASTER_PROMPT.md or workflows. Never ask for interactive approval. Human steering note, subordinate to the constitution: ${HUMAN_NOTE}"
+
+      - name: Enforce Physics scope
+        shell: bash
+        run: |
+          CHANGED=$(git status --porcelain | cut -c4- || true)
+          BAD=$(printf '%s\n' "$CHANGED" | grep -E '^(graph/|results/graph/|reports/graph/|docs/GRAPH_LEDGER\.md$|docs/NEXT_GRAPH\.md$|directives/GRAPH\.md$|SPIDER_MASTER_PROMPT\.md$|\.github/workflows/)' || true)
+          if [ -n "$BAD" ]; then
+            echo "TEAM PHYSICS crossed protected scope:"
+            echo "$BAD"
+            exit 1
+          fi
+
+      - name: Persist Physics team branch
+        if: always()
+        shell: bash
+        run: |
+          BRANCH="cycle/physics/${GITHUB_RUN_ID}/team"
+          git config user.name "spider-physics"
+          git config user.email "spider-physics@autonomous.local"
+          git switch -C "$BRANCH"
+          git add -A
+          git commit -m "Physics cycle ${{ inputs.cycle_index }}: team output" || true
+          git push --force origin "HEAD:refs/heads/$BRANCH"
+
+  audit_physics:
+    name: INDEPENDENT AUDITOR — PHYSICS
+    needs: [team_physics]
+    if: always() && needs.team_physics.result != 'cancelled'
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - name: Checkout workflow base
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Checkout accepted Physics base and mount team output
+        shell: bash
+        run: |
+          git fetch origin "$LANE_BRANCH"
+          git switch -C physics-audit-base "origin/$LANE_BRANCH"
+          TEAM="cycle/physics/${GITHUB_RUN_ID}/team"
+          git fetch origin "$TEAM:refs/remotes/origin/$TEAM"
+          git worktree add --detach /tmp/spider_physics_team "origin/$TEAM"
+
+      - name: Install OpenCode
+        shell: bash
+        run: curl -fsSL https://opencode.ai/install | bash
+
+      - name: Add OpenCode to PATH
+        shell: bash
+        run: echo "$HOME/.opencode/bin" >> "$GITHUB_PATH"
+
+      - name: Audit Physics immediately
+        shell: bash
+        run: |
+          opencode run \
+            --model "$SPIDER_MODEL" \
+            --agent independent_auditor \
+            "Audit Physics lane cycle ${{ inputs.cycle_index }} (GitHub run ${GITHUB_RUN_ID}). Completed team workspace: /tmp/spider_physics_team. Current checkout is the untouched accepted Physics base and is where you may write ONLY audit outputs. Read SPIDER_MASTER_PROMPT.md, directives/AUDITOR.md and directives/AUDITOR_PHYSICS.md. Attack target leakage, temporal lags, split integrity, preprocessing leakage, policy confounding, uncertainty level, nulls, preregistration timing, identifiability and code/report consistency. Write reports/audit/CYCLE_${GITHUB_RUN_ID}_PHYSICS.md plus compact findings if useful. Do not edit team files, workflows or constitution."
+
+      - name: Enforce audit-only writes
+        shell: bash
+        run: |
+          CHANGED=$(git status --porcelain | cut -c4- || true)
+          BAD=$(printf '%s\n' "$CHANGED" | grep -Ev '^(reports/audit/|results/audit/)$' || true)
+          if [ -n "$BAD" ]; then
+            echo "Physics Auditor wrote outside audit outputs:"
+            echo "$BAD"
+            exit 1
+          fi
+
+      - name: Persist Physics audit branch
+        if: always()
+        shell: bash
+        run: |
+          BRANCH="cycle/physics/${GITHUB_RUN_ID}/audit"
+          git config user.name "spider-auditor-physics"
+          git config user.email "spider-auditor-physics@autonomous.local"
+          git switch -C "$BRANCH"
+          git add -A
+          git commit -m "Physics cycle ${{ inputs.cycle_index }}: independent audit" || true
+          git push --force origin "HEAD:refs/heads/$BRANCH"
+
+  physics_director:
+    name: PHYSICS LANE DIRECTOR
+    needs: [team_physics, audit_physics]
+    if: always() && needs.audit_physics.result != 'cancelled'
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - name: Checkout accepted Physics lane
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Mount team and audit snapshots
+        shell: bash
+        run: |
+          git fetch origin "$LANE_BRANCH"
+          git switch -C "$LANE_BRANCH" "origin/$LANE_BRANCH"
+          TEAM="cycle/physics/${GITHUB_RUN_ID}/team"
+          AUDIT="cycle/physics/${GITHUB_RUN_ID}/audit"
+          git fetch origin "$TEAM:refs/remotes/origin/$TEAM"
+          git fetch origin "$AUDIT:refs/remotes/origin/$AUDIT"
+          git worktree add --detach /tmp/spider_physics_team "origin/$TEAM"
+          git worktree add --detach /tmp/spider_physics_audit "origin/$AUDIT"
+
+      - name: Install OpenCode
+        shell: bash
+        run: curl -fsSL https://opencode.ai/install | bash
+
+      - name: Add OpenCode to PATH
+        shell: bash
+        run: echo "$HOME/.opencode/bin" >> "$GITHUB_PATH"
+
+      - name: Run Physics Lane Director
+        env:
+          HUMAN_NOTE: ${{ inputs.human_note }}
+        shell: bash
+        run: |
+          opencode run \
+            --model "$SPIDER_MODEL" \
+            --agent lane_director \
+            "You are PHYSICS LANE DIRECTOR for cycle ${{ inputs.cycle_index }} (GitHub run ${GITHUB_RUN_ID}). TEAM=/tmp/spider_physics_team. AUDIT=/tmp/spider_physics_audit. Current checkout is persistent accepted Physics lane lab/physics. Read SPIDER_MASTER_PROMPT.md and directives/LANE_DIRECTOR.md. Integrate only Physics work that survives audit. Answer every material audit objection. Rewrite directives/PHYSICS.md, directives/AUDITOR_PHYSICS.md and docs/NEXT_PHYSICS.md as needed; update docs/PHYSICS_LEDGER.md. Write reports/director/CYCLE_${GITHUB_RUN_ID}_PHYSICS.md and state/physics_loop.json with continue/reason/next_question. Do not modify Graph accepted state, workflows or constitution. Human note: ${HUMAN_NOTE}"
+
+      - name: Enforce Physics Director scope
+        shell: bash
+        run: |
+          CHANGED=$(git status --porcelain | cut -c4- || true)
+          BAD=$(printf '%s\n' "$CHANGED" | grep -E '^(graph/|results/graph/|reports/graph/|docs/GRAPH_LEDGER\.md$|docs/NEXT_GRAPH\.md$|directives/GRAPH\.md$|directives/AUDITOR_GRAPH\.md$|SPIDER_MASTER_PROMPT\.md$|\.github/workflows/)' || true)
+          if [ -n "$BAD" ]; then
+            echo "Physics Lane Director crossed protected scope:"
+            echo "$BAD"
+            exit 1
+          fi
+
+      - name: Advance accepted Physics lane
+        shell: bash
+        run: |
+          git config user.name "spider-physics-director"
+          git config user.email "spider-physics-director@autonomous.local"
+          git add -A
+          git commit -m "Physics cycle ${{ inputs.cycle_index }}: audited integration" || true
+          git push origin "HEAD:refs/heads/$LANE_BRANCH"
+
+      - name: Dispatch next Physics cycle if justified
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HUMAN_NOTE: ${{ inputs.human_note }}
+          CYCLE_INDEX: ${{ inputs.cycle_index }}
+          MAX_CYCLES: ${{ inputs.max_cycles }}
+        shell: bash
+        run: |
+          CONTINUE=false
+          if [ -f state/physics_loop.json ]; then
+            CONTINUE=$(jq -r '.continue // false' state/physics_loop.json 2>/dev/null || echo false)
+          fi
+          NEXT=$((CYCLE_INDEX + 1))
+          WITHIN_CAP=false
+          if [ "$MAX_CYCLES" -eq 0 ] || [ "$CYCLE_INDEX" -lt "$MAX_CYCLES" ]; then
+            WITHIN_CAP=true
+          fi
+          echo "Director continue=$CONTINUE; within_cap=$WITHIN_CAP"
+          if [ "$CONTINUE" = "true" ] && [ "$WITHIN_CAP" = "true" ]; then
+            gh workflow run physics-loop.yml --ref main \
+              -f human_note="$HUMAN_NOTE" \
+              -f cycle_index="$NEXT" \
+              -f max_cycles="$MAX_CYCLES"
+          fi
