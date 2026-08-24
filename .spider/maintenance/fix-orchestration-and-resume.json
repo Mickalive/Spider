@@ -2,5 +2,6 @@
   "graph_repair_from_run": 32689296167,
   "graph_repair_round": 1,
   "physics_successor_from_run": 32689298051,
-  "requested_at": "2026-08-24T20:31:00Z"
+  "requested_at": "2026-08-24T20:31:00Z",
+  "trigger_revision": 2
 }
