@@ -1,0 +1,276 @@
+name: SPIDER Intel Research Lane
+
+on:
+  workflow_dispatch:
+    inputs:
+      cycle_index:
+        description: "Intel research cycle"
+        required: false
+        type: number
+        default: 1
+      repair_from_run_id:
+        description: "Prior Intel run to repair; empty = fresh Scout cycle"
+        required: false
+        type: string
+        default: ""
+      repair_round:
+        description: "Same-cycle reproduction repair round"
+        required: false
+        type: number
+        default: 0
+
+permissions:
+  contents: write
+  actions: write
+
+env:
+  SPIDER_MODEL: opencode/x-preview-f-free
+  LANE_BRANCH: lab/intel
+
+concurrency:
+  group: spider-intel-lane
+  cancel-in-progress: false
+
+jobs:
+  scout:
+    name: INTEL SCOUT
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Checkout accepted Intel lane
+        shell: bash
+        run: |
+          if git ls-remote --exit-code --heads origin "refs/heads/$LANE_BRANCH" >/dev/null 2>&1; then
+            git fetch origin "$LANE_BRANCH"
+            git switch -C "$LANE_BRANCH" "origin/$LANE_BRANCH"
+          else
+            git switch -C "$LANE_BRANCH"
+            git push origin "HEAD:refs/heads/$LANE_BRANCH"
+          fi
+
+      - name: Install OpenCode
+        if: ${{ inputs.repair_from_run_id == '' }}
+        shell: bash
+        run: curl --retry 3 --retry-all-errors --retry-delay 15 -fsSL https://opencode.ai/install | bash
+
+      - name: Run Scout
+        if: ${{ inputs.repair_from_run_id == '' }}
+        shell: bash
+        run: |
+          bash .github/scripts/run-opencode-with-retry.sh run \
+            --model "$SPIDER_MODEL" \
+            --agent intel_runner \
+            "Execute Intel Scout cycle ${{ inputs.cycle_index }}. Your formal job description is binding. Find the highest-information SPIDER-adjacent mechanism, including Steam-like/shared capability systems and all competitors discoverable from papers/code. Select exactly one mechanism for reproduction."
+
+      - name: Reuse prior Scout snapshot during repair
+        if: ${{ inputs.repair_from_run_id != '' }}
+        shell: bash
+        run: |
+          SRC="cycle/intel/${{ inputs.repair_from_run_id }}/scout"
+          git fetch origin "$SRC:refs/remotes/origin/$SRC"
+          git reset --hard "origin/$SRC"
+
+      - name: Persist Scout snapshot
+        shell: bash
+        run: |
+          BRANCH="cycle/intel/${GITHUB_RUN_ID}/scout"
+          git config user.name "spider-intel-scout"
+          git config user.email "spider-intel-scout@autonomous.local"
+          git switch -C "$BRANCH"
+          git add -A
+          git commit -m "Intel cycle ${{ inputs.cycle_index }} repair ${{ inputs.repair_round }}: Scout snapshot" || true
+          git push --force origin "HEAD:refs/heads/$BRANCH"
+
+  reproduce:
+    name: INTEL REPRODUCER
+    needs: [scout]
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Mount Scout and accepted Intel state
+        shell: bash
+        run: |
+          git fetch origin "$LANE_BRANCH"
+          git switch -C intel-repro-base "origin/$LANE_BRANCH"
+          SCOUT="cycle/intel/${GITHUB_RUN_ID}/scout"
+          git fetch origin "$SCOUT:refs/remotes/origin/$SCOUT"
+          git worktree add --detach /tmp/spider_intel_scout "origin/$SCOUT"
+          if [[ -n "${{ inputs.repair_from_run_id }}" ]]; then
+            OLD_REPRO="cycle/intel/${{ inputs.repair_from_run_id }}/repro"
+            OLD_AUDIT="cycle/intel/${{ inputs.repair_from_run_id }}/audit"
+            git fetch origin "$OLD_REPRO:refs/remotes/origin/$OLD_REPRO"
+            git fetch origin "$OLD_AUDIT:refs/remotes/origin/$OLD_AUDIT"
+            git worktree add --detach /tmp/spider_intel_old_repro "origin/$OLD_REPRO"
+            git worktree add --detach /tmp/spider_intel_old_audit "origin/$OLD_AUDIT"
+          fi
+
+      - name: Install OpenCode
+        shell: bash
+        run: curl --retry 3 --retry-all-errors --retry-delay 15 -fsSL https://opencode.ai/install | bash
+
+      - name: Run Reproducer
+        shell: bash
+        run: |
+          if [[ -z "${{ inputs.repair_from_run_id }}" ]]; then
+            EXTRA="Fresh reproduction. Scout workspace=/tmp/spider_intel_scout. Read its state/intel_candidate.json."
+          else
+            EXTRA="REPAIR reproduction round ${{ inputs.repair_round }}. Scout=/tmp/spider_intel_scout, rejected reproduction=/tmp/spider_intel_old_repro, audit=/tmp/spider_intel_old_audit. Fix every required_fixes item without weakening the preregistered test."
+          fi
+          bash .github/scripts/run-opencode-with-retry.sh run \
+            --model "$SPIDER_MODEL" \
+            --agent intel_reproducer \
+            "Intel cycle ${{ inputs.cycle_index }}. $EXTRA Your formal job description is binding."
+
+      - name: Persist reproduction snapshot
+        if: always()
+        shell: bash
+        run: |
+          BRANCH="cycle/intel/${GITHUB_RUN_ID}/repro"
+          git config user.name "spider-intel-reproducer"
+          git config user.email "spider-intel-reproducer@autonomous.local"
+          git switch -C "$BRANCH"
+          git add -A
+          git commit -m "Intel cycle ${{ inputs.cycle_index }} repair ${{ inputs.repair_round }}: reproduction" || true
+          git push --force origin "HEAD:refs/heads/$BRANCH"
+
+  audit:
+    name: INTEL INDEPENDENT AUDITOR
+    needs: [reproduce]
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    outputs:
+      gate: ${{ steps.gate.outputs.gate }}
+      mechanism_status: ${{ steps.gate.outputs.mechanism_status }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Mount Scout and reproduction
+        shell: bash
+        run: |
+          git fetch origin "$LANE_BRANCH"
+          git switch -C intel-audit-base "origin/$LANE_BRANCH"
+          for kind in scout repro; do
+            B="cycle/intel/${GITHUB_RUN_ID}/$kind"
+            git fetch origin "$B:refs/remotes/origin/$B"
+            git worktree add --detach "/tmp/spider_intel_$kind" "origin/$B"
+          done
+
+      - name: Install OpenCode
+        shell: bash
+        run: curl --retry 3 --retry-all-errors --retry-delay 15 -fsSL https://opencode.ai/install | bash
+
+      - name: Run independent Intel audit
+        shell: bash
+        run: |
+          bash .github/scripts/run-opencode-with-retry.sh run \
+            --model "$SPIDER_MODEL" \
+            --agent intel_auditor \
+            "Audit Intel cycle ${{ inputs.cycle_index }}, GitHub run ${GITHUB_RUN_ID}, repair round ${{ inputs.repair_round }}. Scout=/tmp/spider_intel_scout. Reproduction=/tmp/spider_intel_repro. Your formal job description and mandatory gate are binding."
+
+      - name: Validate audit gate
+        id: gate
+        shell: bash
+        run: |
+          FILE="results/intel/audit/CYCLE_${GITHUB_RUN_ID}_INTEL_GATE.json"
+          test -f "$FILE" || { echo "::error::Missing Intel audit gate"; exit 1; }
+          GATE=$(jq -r '.gate // empty' "$FILE")
+          STATUS=$(jq -r '.mechanism_status // empty' "$FILE")
+          case "$GATE" in PASS|REVISE|BLOCKED) ;; *) exit 1 ;; esac
+          if [[ "$GATE" == REVISE ]]; then
+            test "$(jq '.required_fixes|length' "$FILE")" -gt 0 || exit 1
+          fi
+          echo "gate=$GATE" >> "$GITHUB_OUTPUT"
+          echo "mechanism_status=$STATUS" >> "$GITHUB_OUTPUT"
+
+      - name: Persist audit snapshot
+        if: always()
+        shell: bash
+        run: |
+          BRANCH="cycle/intel/${GITHUB_RUN_ID}/audit"
+          git config user.name "spider-intel-auditor"
+          git config user.email "spider-intel-auditor@autonomous.local"
+          git switch -C "$BRANCH"
+          git add -A
+          git commit -m "Intel cycle ${{ inputs.cycle_index }} repair ${{ inputs.repair_round }}: audit" || true
+          git push --force origin "HEAD:refs/heads/$BRANCH"
+
+  repair_router:
+    name: INTEL AUDIT → REPRODUCER
+    needs: [audit]
+    if: needs.audit.outputs.gate == 'REVISE'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dispatch same-cycle repair
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          NEXT=$(( ${{ inputs.repair_round }} + 1 ))
+          gh workflow run intel-loop.yml --repo "$GITHUB_REPOSITORY" --ref main \
+            -f cycle_index="${{ inputs.cycle_index }}" \
+            -f repair_from_run_id="$GITHUB_RUN_ID" \
+            -f repair_round="$NEXT"
+
+  director:
+    name: INTEL RESEARCH DIRECTOR
+    needs: [audit]
+    if: needs.audit.outputs.gate == 'PASS'
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Mount accepted lane and audited snapshots
+        shell: bash
+        run: |
+          git fetch origin "$LANE_BRANCH"
+          git switch -C "$LANE_BRANCH" "origin/$LANE_BRANCH"
+          for kind in scout repro audit; do
+            B="cycle/intel/${GITHUB_RUN_ID}/$kind"
+            git fetch origin "$B:refs/remotes/origin/$B"
+            git worktree add --detach "/tmp/spider_intel_$kind" "origin/$B"
+          done
+
+      - name: Install OpenCode
+        shell: bash
+        run: curl --retry 3 --retry-all-errors --retry-delay 15 -fsSL https://opencode.ai/install | bash
+
+      - name: Run Intel Research Director
+        shell: bash
+        run: |
+          bash .github/scripts/run-opencode-with-retry.sh run \
+            --model "$SPIDER_MODEL" \
+            --agent intel_research_director \
+            "Integrate Intel cycle ${{ inputs.cycle_index }} after audit PASS. Scout=/tmp/spider_intel_scout, Repro=/tmp/spider_intel_repro, Audit=/tmp/spider_intel_audit. Your formal job description is binding. Route only audited findings and set the next Intel mission."
+
+      - name: Advance accepted Intel lane
+        shell: bash
+        run: |
+          git config user.name "spider-intel-director"
+          git config user.email "spider-intel-director@autonomous.local"
+          git add -A
+          git commit -m "Intel cycle ${{ inputs.cycle_index }}: audited integration" || true
+          git push origin "HEAD:refs/heads/$LANE_BRANCH"
+
+      - name: Dispatch next Intel cycle if justified
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          CONTINUE=$(jq -r '.continue // false' state/intel_loop.json)
+          if [[ "$CONTINUE" == true ]]; then
+            NEXT=$(( ${{ inputs.cycle_index }} + 1 ))
+            gh workflow run intel-loop.yml --repo "$GITHUB_REPOSITORY" --ref main -f cycle_index="$NEXT"
+          fi
