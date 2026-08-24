@@ -1,4 +1,0 @@
-{
-  "policy": "delete obsolete workflow reds and current-workflow reds only when superseded by newer success",
-  "requested_at": "2026-08-24T05:46:00+02:00"
-}
