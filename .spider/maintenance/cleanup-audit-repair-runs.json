@@ -1,0 +1,4 @@
+{
+  "delete_only_workflow": "SPIDER Install Audit Repair Loop",
+  "preserve": ["SPIDER Graph Lane", "SPIDER Physics Lane", "SPIDER Meta Sync"]
+}
