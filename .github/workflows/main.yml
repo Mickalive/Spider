@@ -9,15 +9,15 @@ on:
         type: string
         default: ""
       graph_cycles:
-        description: "Graph batch cap; 0 = Graph Director decides when to stop"
+        description: "Graph cycle cap; 0 = continue until Graph Lane Director stops"
         required: false
         type: number
-        default: 3
+        default: 0
       physics_cycles:
-        description: "Physics batch cap; 0 = Physics Director decides when to stop"
+        description: "Physics cycle cap; 0 = continue until Physics Lane Director stops"
         required: false
         type: number
-        default: 3
+        default: 0
 
 permissions:
   contents: read
