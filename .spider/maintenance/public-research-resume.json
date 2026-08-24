@@ -2,5 +2,7 @@
   "reason": "repo is public; resume stalled audited Graph repair and Physics successor",
   "graph_source_run": 32689296167,
   "physics_completed_program_run": 32689298051,
-  "triggered_at": "2026-08-24T20:47:00Z"
+  "triggered_at": "2026-08-24T20:47:00Z",
+  "trigger_revision": 2,
+  "router_hardening_commits": ["6f8399d759488f2620c485e03a95d12132226e3a", "8ecabb961bd729ff707fd25360ea40fa78ce2fe3"]
 }
