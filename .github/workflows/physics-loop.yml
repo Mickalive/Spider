@@ -251,7 +251,7 @@ jobs:
         run: |
           NEXT_REPAIR=$((REPAIR_ROUND + 1))
           echo "Audit requested REVISE; returning run ${GITHUB_RUN_ID} to physics_runner as repair round ${NEXT_REPAIR}."
-          gh workflow run physics-loop.yml --ref main \
+          gh workflow run physics-loop.yml --repo "$GITHUB_REPOSITORY" --ref main \
             -f human_note="$HUMAN_NOTE" \
             -f cycle_index="$CYCLE_INDEX" \
             -f max_cycles="$MAX_CYCLES" \
@@ -355,7 +355,7 @@ jobs:
           fi
           echo "Director continue=$CONTINUE; within_cap=$WITHIN_CAP"
           if [ "$CONTINUE" = "true" ] && [ "$WITHIN_CAP" = "true" ]; then
-            gh workflow run physics-loop.yml --ref main \
+            gh workflow run physics-loop.yml --repo "$GITHUB_REPOSITORY" --ref main \
               -f human_note="$HUMAN_NOTE" \
               -f cycle_index="$NEXT" \
               -f max_cycles="$MAX_CYCLES"
