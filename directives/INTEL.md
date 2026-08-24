@@ -80,6 +80,36 @@ Do not stop at "X has memory" or "Y is faster". For every material actor/paper e
 - licensing/IP constraints if code is public;
 - what SPIDER currently does differently.
 
+## Scout handoff — exactly one mechanism per fresh cycle
+
+The Scout may research broadly, but before ending a fresh cycle it must select exactly ONE highest-information mechanism for reproduction and write `state/intel_candidate.json`.
+
+Required schema:
+
+```json
+{
+  "mechanism_id": "stable-id",
+  "actor_or_paper": "...",
+  "mechanism_name": "...",
+  "source_urls": ["..."],
+  "evidence_labels": ["CODE_VERIFIED|PAPER_EVIDENCE|OFFICIAL_CLAIM|INDEPENDENT_REPORT|INFERENCE_HIGH|INFERENCE_LOW|UNKNOWN"],
+  "exact_claim": "...",
+  "mechanism_summary": "...",
+  "retained_object": "...",
+  "retrieval_or_trigger": "...",
+  "execution_or_use": "...",
+  "verification_or_success_oracle": "...",
+  "current_spider_weakness_addressed": "...",
+  "minimal_reproduction": "...",
+  "strongest_baseline": "...",
+  "success_rule": "...",
+  "license_or_ip_notes": "...",
+  "priority_reason": "..."
+}
+```
+
+If no mechanism is specified enough to reproduce honestly, the Scout must say so and write `state/intel_candidate.json` with `mechanism_id=null` and the missing evidence. The Reproducer must not invent the missing mechanism.
+
 ## SPIDER transfer analysis — mandatory
 
 For every promising mechanism create a recommendation record with:
@@ -95,9 +125,9 @@ For every promising mechanism create a recommendation record with:
 - measurement required;
 - integration cost and dependencies;
 - contamination/IP/licensing risk;
-- verdict: `ADOPT`, `EXPERIMENT`, `WATCH`, `REJECT`.
+- provisional verdict: `EXPERIMENT`, `WATCH`, `REJECT`.
 
-`ADOPT` is reserved for non-claim-bearing engineering mechanisms whose value is directly verifiable and low-risk. Scientific/algorithmic mechanisms should normally be `EXPERIMENT` until SPIDER tests them.
+No mechanism is `ADOPT` at Scout stage. Positive integration status requires reproduction + independent audit.
 
 ## Anti-copy / anti-hype rule
 
@@ -110,17 +140,26 @@ The goal is to learn from effective mechanisms, not clone competitors.
 - Negative evidence about a mechanism is as valuable as positive evidence.
 - If a mechanism works only because of benchmark leakage, hand-authored structure, privileged APIs, site-specific assumptions or a stronger model, record that explicitly.
 
-## Required durable outputs
+## Scout-cycle outputs
 
-Maintain on the accepted Intel lane:
+Write Scout findings only to Intel-scoped cycle outputs, including:
+- `reports/intel/scout/`
+- `results/intel/scout/`
+- `state/intel_candidate.json`
 
-- `docs/INTEL_LEDGER.md` — cumulative evidence-backed landscape and history;
-- `docs/INTEL_TO_GRAPH.md` — only current actionable Graph experiments/integrations;
-- `docs/INTEL_TO_PHYSICS.md` — only current actionable Physics experiments/integrations;
-- `docs/INTEL_PRODUCT_INFRA.md` — route/skill marketplace, browser/runtime and shared-infrastructure lessons;
-- `results/intel/COMPETITOR_INDEX.json` — machine-readable actor/paper index;
-- `results/intel/MECHANISM_CANDIDATES.json` — machine-readable recommendations;
-- run report under `reports/intel/`.
+The accepted cumulative ledgers and `VALIDATED_MECHANISMS` are updated only later by the Intel Research Director after audit PASS.
+
+## Accepted durable outputs
+
+Maintain on the accepted Intel lane through the Intel Research Director:
+- `docs/INTEL_LEDGER.md`;
+- `docs/INTEL_TO_GRAPH.md`;
+- `docs/INTEL_TO_PHYSICS.md`;
+- `docs/INTEL_PRODUCT_INFRA.md`;
+- `results/intel/COMPETITOR_INDEX.json`;
+- `results/intel/MECHANISM_CANDIDATES.json`;
+- `results/intel/VALIDATED_MECHANISMS.json`;
+- `state/intel_loop.json`.
 
 Do not edit Graph/Physics accepted results, code or directives directly.
 
@@ -135,7 +174,6 @@ Do not edit Graph/Physics accepted results, code or directives directly.
 Highest priority is not fame; it is mechanism relevance to a currently observed SPIDER weakness.
 
 Current particularly valuable questions include:
-
 - How do strong systems retrieve reusable procedures under paraphrase or state change?
 - How do they represent multi-action procedures without losing composability?
 - How do they equalize iteration/retry/fallback against graph baselines?
