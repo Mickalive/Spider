@@ -46,10 +46,12 @@ jobs:
                || [[ -n "$(git ls-files --others --exclude-standard .spider/program-receipts)" ]]; then
               git config user.name "spider-program-supervisor"
               git config user.email "spider-program-supervisor@autonomous.local"
-              git pull --rebase origin main
               git add .spider/program-receipts
-              git commit -m "state: reconcile research-program succession" || true
-              git push origin HEAD:main
+              if ! git diff --cached --quiet -- .spider/program-receipts; then
+                git commit -m "state: reconcile research-program succession"
+                git pull --rebase origin main
+                git push origin HEAD:main
+              fi
             fi
           }
 
