@@ -37,11 +37,20 @@ CREATE TABLE IF NOT EXISTS fragments(
   goal_sig TEXT,
   site TEXT,
   steps TEXT,
+  meta_json TEXT DEFAULT '',
   success_count INT DEFAULT 0,
   failure_count INT DEFAULT 0,
   created REAL, last_validated REAL
 );
 CREATE INDEX IF NOT EXISTS ix_frag_goal ON fragments(goal_sig);
+CREATE TABLE IF NOT EXISTS trajectories(
+  id INTEGER PRIMARY KEY,
+  task_id TEXT,
+  site TEXT,
+  profile_json TEXT,
+  steps TEXT,
+  created REAL
+);
 CREATE TABLE IF NOT EXISTS runs(
   id INTEGER PRIMARY KEY, agent_id TEXT, task_id TEXT, condition TEXT,
   metrics TEXT, ts REAL
@@ -64,9 +73,13 @@ def target_sig(el: dict) -> str:
 
 
 class Store:
-    def __init__(self, path):
+    def __init__(self, path, allow_reads=True):
         self.db = sqlite3.connect(path)
         self.db.executescript(SCHEMA)
+        # Read gate: `cold` conditions still WRITE observed knowledge but must
+        # not READ anything back (first-agent semantics). This makes the
+        # read/write asymmetry explicit instead of scattering conditionals.
+        self.allow_reads = allow_reads
 
     def upsert_state(self, snap: dict) -> int:
         fp = self.fingerprint(snap)
@@ -110,31 +123,38 @@ class Store:
         self.db.commit()
         return aid
 
-    def save_fragment(self, goal_sig, steps, site):
+    def save_fragment(self, goal_sig, steps, site, meta=None):
         """Save a fragment validated end-to-end at observation time.
 
         Run-1 had a positional INSERT bug that put a timestamp into
         success_count and 1 into created. Keep this explicit mapping and
         assert the row after every write so that the failure cannot silently
         recur.
+
+        `meta` carries AUTO-DERIVED addressing metadata (entry/final URL
+        shape, clicked-element text tokens, step kinds). It is derived from
+        the execution context only; it never contains consumer-side query
+        information. goal_sig itself is retained as provenance/debug label.
         """
         cur = self.db.execute(
-            "SELECT id, success_count FROM fragments WHERE goal_sig=? AND site=?",
+            "SELECT id FROM fragments WHERE goal_sig=? AND site=?",
             (goal_sig, site)).fetchone()
         t = now()
+        meta_json = json.dumps(meta or {})
         if cur:
             self.db.execute(
-                "UPDATE fragments SET steps=?, success_count=success_count+1,"
-                " last_validated=? WHERE id=?", (json.dumps(steps), t, cur[0]))
+                "UPDATE fragments SET steps=?, meta_json=?, success_count=success_count+1,"
+                " last_validated=? WHERE id=?", (json.dumps(steps), meta_json, t, cur[0]))
             fid = cur[0]
         else:
             row = self.db.execute(
-                "INSERT INTO fragments(goal_sig,site,steps,success_count,failure_count,"
-                "created,last_validated) VALUES(?,?,?,?,?,?,?) RETURNING id",
-                (goal_sig, site, json.dumps(steps), 1, 0, t, t)).fetchone()
+                "INSERT INTO fragments(goal_sig,site,steps,meta_json,success_count,failure_count,"
+                "created,last_validated) VALUES(?,?,?,?,1,0,?,?) RETURNING id",
+                (goal_sig, site, json.dumps(steps), meta_json, t, t)).fetchone()
             fid = row[0]
         self.db.commit()
         self._assert_fragment_invariants(fid)
+        return fid
 
     def _assert_fragment_invariants(self, fid):
         sc, fc, created, validated = self.db.execute(
@@ -146,7 +166,9 @@ class Store:
         assert validated and validated >= created, ("bad validation timestamp", created, validated)
 
     def best_fragment(self, goal_sig, site=None):
-        q = ("SELECT id, site, steps, success_count, failure_count, last_validated"
+        if not self.allow_reads:
+            return None
+        q = ("SELECT id, site, steps, meta_json, success_count, failure_count, last_validated"
              " FROM fragments WHERE goal_sig=?")
         args = [goal_sig]
         if site:
@@ -156,11 +178,56 @@ class Store:
                                     " last_validated DESC", args).fetchall()
         if not rows:
             return None
-        fid, s_site, steps, sc, fc, lv = rows[0]
+        fid, s_site, steps, meta_json, sc, fc, lv = rows[0]
         assert isinstance(sc, int) and isinstance(fc, int), (sc, fc)
         return {"id": fid, "site": s_site, "steps": json.loads(steps),
+                "meta": json.loads(meta_json or "{}"),
+                "goal_sig": goal_sig,
                 "success_count": sc, "failure_count": fc,
                 "confidence": self.confidence(sc, fc, lv)}
+
+    def iter_fragments(self, site=None):
+        """All fragments with metadata; used by the addressing layer."""
+        if not self.allow_reads:
+            return []
+        q = ("SELECT id, goal_sig, site, steps, meta_json, success_count,"
+             " failure_count, created, last_validated FROM fragments")
+        args = []
+        if site:
+            q += " WHERE site=?"
+            args.append(site)
+        out = []
+        for r in self.db.execute(q + " ORDER BY id", args):
+            fid, gsig, s_site, steps, meta_json, sc, fc, cr, lv = r
+            assert isinstance(sc, int) and isinstance(fc, int), (sc, fc)
+            out.append({"id": fid, "goal_sig": gsig, "site": s_site,
+                        "steps": json.loads(steps),
+                        "meta": json.loads(meta_json or "{}"),
+                        "success_count": sc, "failure_count": fc,
+                        "created": cr, "last_validated": lv,
+                        "confidence": self.confidence(sc, fc, lv)})
+        return out
+
+    # ---- trajectories (nearest-trajectory baseline memory) ----
+    def save_trajectory(self, task_id, site, profile_tokens, steps):
+        self.db.execute(
+            "INSERT INTO trajectories(task_id,site,profile_json,steps,created)"
+            " VALUES(?,?,?,?,?)",
+            (task_id, site, json.dumps(sorted(set(profile_tokens))),
+             json.dumps(steps), now()))
+        self.db.commit()
+
+    def iter_trajectories(self, site=None):
+        if not self.allow_reads:
+            return []
+        q = "SELECT task_id, site, profile_json, steps FROM trajectories"
+        args = []
+        if site:
+            q += " WHERE site=?"
+            args.append(site)
+        return [{"task_id": t, "site": s,
+                 "profile": json.loads(p), "steps": json.loads(st)}
+                for t, s, p, st in self.db.execute(q, args)]
 
     @staticmethod
     def confidence(successes, failures, last_validated, halflife_s=7 * 86400):
@@ -189,3 +256,41 @@ class Store:
                 "transitions": s("SELECT COUNT(*) FROM transitions"),
                 "actions": s("SELECT COUNT(*) FROM actions"),
                 "fragments": s("SELECT COUNT(*) FROM fragments")}
+
+    # ---- concrete-graph accessors (graph-BFS baseline) ----
+    def state_id_by_fingerprint(self, fp):
+        if not self.allow_reads:
+            return None
+        r = self.db.execute("SELECT id FROM states WHERE fingerprint=?", (fp,)).fetchone()
+        return r[0] if r else None
+
+    def state_raw(self, sid):
+        """Decompress stored raw snapshot JSON for a state id."""
+        r = self.db.execute("SELECT raw_json, url_shape, url FROM states WHERE id=?",
+                            (sid,)).fetchone()
+        if not r:
+            return None
+        blob, shape, url = r
+        try:
+            raw = json.loads(gzip.decompress(blob).decode())
+        except Exception:
+            raw = {}
+        return {"id": sid, "url_shape": shape, "url": url,
+                "page_text": raw.get("page_text", ""),
+                "title": raw.get("title", "")}
+
+    def out_edges(self, sid):
+        """Outgoing transitions of a state: [(action_kind, target_sig, to_sid)]."""
+        if not self.allow_reads:
+            return []
+        return [(k, ts_, to) for k, ts_, to in self.db.execute(
+            "SELECT a.kind, a.target_sig, t.to_state FROM transitions t"
+            " JOIN actions a ON a.id=t.action_id WHERE t.from_state=?", (sid,))
+            if to is not None]
+
+
+def copy_store(src_path, dst_path):
+    """Physical copy so independent methods start from identical knowledge."""
+    import shutil
+    shutil.copyfile(src_path, dst_path)
+    return Store(dst_path)

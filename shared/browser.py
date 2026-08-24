@@ -68,7 +68,18 @@ SNAPSHOT_JS = r"""
     forms.push({fields, method: (f.method||'get').toLowerCase(),
                 action: (f.getAttribute('action')||'').slice(0,120)});
   });
-  return {elements: els, forms,
+  // Dynamic state variables: current input values and check states.
+  // Deliberately kept OUT of the structural fingerprint (see graph/store.py);
+  // they remain available here as raw observables because they can be
+  // causally relevant to transitions.
+  const inputs = [...document.querySelectorAll('input,textarea,select')].map(x => ({
+    n: (x.name || x.id || '').slice(0,40),
+    t: (x.getAttribute('type') || x.tagName.toLowerCase()).toLowerCase(),
+    v: (x.getAttribute('type') || '').toLowerCase() === 'password' ? '' :
+       ((x.value || '') + '').slice(0,80),
+    c: !!x.checked
+  }));
+  return {elements: els, forms, inputs,
           n_links: document.querySelectorAll('a[href]').length,
           page_text: (document.body ? document.body.innerText : '')
                      .replace(/\s+/g,' ').slice(0,4000)};
@@ -105,7 +116,7 @@ class Session:
     def __exit__(self, *a): self.close()
 
     # ---------- observation ----------
-    def snapshot(self, site: str, settle_ms=350) -> dict:
+    def snapshot(self, site: str, settle_ms=120) -> dict:
         time.sleep(settle_ms / 1000)
         p = self.page
         p.wait_for_load_state("domcontentloaded", timeout=20000)
@@ -121,6 +132,7 @@ class Session:
             "url_shape": _url_shape(p.url),
             "elements": js["elements"],
             "forms": js["forms"],
+            "inputs": js.get("inputs", []),
             "n_links": js["n_links"],
             "page_text": js.get("page_text", ""),
             "dom_sha256": h,
@@ -131,6 +143,19 @@ class Session:
     def goto(self, url: str, site: str) -> dict:
         t0 = time.time()
         self.page.goto(url, timeout=30000, wait_until="domcontentloaded")
+        s = self.snapshot(site)
+        s["load_ms"] = int((time.time() - t0) * 1000)
+        return s
+
+    def back(self, site: str) -> dict:
+        """Browser-history recovery primitive (charged as a load by callers)."""
+        t0 = time.time()
+        try:
+            self.page.go_back(timeout=20000, wait_until="domcontentloaded")
+        except Exception:
+            pass
+        if "about:blank" in (self.page.url or ""):
+            pass
         s = self.snapshot(site)
         s["load_ms"] = int((time.time() - t0) * 1000)
         return s
@@ -159,6 +184,9 @@ class Session:
                 elif kind == "check":
                     loc.check(timeout=8000)
                 elif kind == "press":
+                    # Keyboard events need a focused element to be
+                    # attributed to a specific input.
+                    loc.focus(timeout=8000)
                     p.keyboard.press(action["value"])
                 elif kind == "submit_enter":
                     loc.press("Enter", timeout=8000)
