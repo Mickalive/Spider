@@ -1,0 +1,49 @@
+name: SPIDER Launch First Intel Cycle
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.spider/maintenance/launch-intel-first-cycle.json'
+
+permissions:
+  actions: write
+  contents: write
+
+jobs:
+  launch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Dispatch Intel cycle 1 if inactive
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          ACTIVE=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow intel-loop.yml --limit 20 --json status --jq '[.[] | select(.status=="queued" or .status=="in_progress" or .status=="requested" or .status=="waiting" or .status=="pending")] | length')
+          if [[ "$ACTIVE" -eq 0 ]]; then
+            gh workflow run intel-loop.yml --repo "$GITHUB_REPOSITORY" --ref main -f cycle_index=1
+            ACTION=dispatched
+          else
+            ACTION=skipped_already_active
+          fi
+          mkdir -p .spider/maintenance
+          jq -n --arg action "$ACTION" --argjson active "$ACTIVE" '{action:$action,active_before:$active}' > .spider/maintenance/launch-intel-first-cycle-receipt.json
+
+      - name: Record receipt and self-clean
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f .github/workflows/_launch-intel-first-cycle.yml
+          rm -f .spider/maintenance/launch-intel-first-cycle.json
+          git pull --rebase origin main
+          git config user.name "spider-maintenance"
+          git config user.email "spider-maintenance@autonomous.local"
+          git add -A
+          git commit -m "maintenance: record first Intel cycle launch"
+          git push origin HEAD:main
