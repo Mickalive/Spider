@@ -1,0 +1,281 @@
+name: SPIDER Product and Beta Lane
+
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows:
+      - "SPIDER Graph Lane"
+      - "SPIDER Physics Lane"
+      - "SPIDER Intel Research Lane"
+    types: [completed]
+  schedule:
+    - cron: "17 */6 * * *"
+
+permissions:
+  contents: write
+  actions: write
+
+env:
+  SPIDER_MODEL: opencode/x-preview-f-free
+  PRODUCT_BRANCH: lab/product
+
+concurrency:
+  group: spider-product-lane
+  cancel-in-progress: false
+
+jobs:
+  product_director:
+    name: PRODUCT DIRECTOR
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    outputs:
+      beta_launch: ${{ steps.direction.outputs.beta_launch }}
+      beta_id: ${{ steps.direction.outputs.beta_id }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Checkout or initialize Product branch and mount accepted research lanes
+        shell: bash
+        run: |
+          if git ls-remote --exit-code --heads origin "refs/heads/$PRODUCT_BRANCH" >/dev/null 2>&1; then
+            git fetch origin "$PRODUCT_BRANCH"
+            git switch -C "$PRODUCT_BRANCH" "origin/$PRODUCT_BRANCH"
+          else
+            git switch -C "$PRODUCT_BRANCH"
+            git push origin "HEAD:refs/heads/$PRODUCT_BRANCH"
+          fi
+          for lane in graph physics intel; do
+            B="lab/$lane"
+            if git ls-remote --exit-code --heads origin "refs/heads/$B" >/dev/null 2>&1; then
+              git fetch origin "$B:refs/remotes/origin/$B"
+              git worktree add --detach "/tmp/spider_$lane" "origin/$B"
+            else
+              mkdir -p "/tmp/spider_$lane"
+            fi
+          done
+
+      - name: Install OpenCode
+        shell: bash
+        run: curl --retry 3 --retry-all-errors --retry-delay 15 -fsSL https://opencode.ai/install | bash
+
+      - name: Run Product Director
+        shell: bash
+        run: |
+          bash .github/scripts/run-opencode-with-retry.sh run \
+            --model "$SPIDER_MODEL" \
+            --agent product_director \
+            "Review accepted Graph=/tmp/spider_graph, Physics=/tmp/spider_physics, Intel=/tmp/spider_intel plus persistent Product state. Your formal job description is binding. Update product hypotheses. If a minimal product can now fairly test whether SPIDER beats a credible current agent on a useful task class, authorize exactly one Product Beta and write state/product_beta_request.json; otherwise keep beta_launch=false."
+
+      - name: Validate Product direction
+        id: direction
+        shell: bash
+        run: |
+          test -f state/product_direction.json || { echo "::error::Missing product direction"; exit 1; }
+          LAUNCH=$(jq -r '.beta_launch // false' state/product_direction.json)
+          if [[ "$LAUNCH" == true ]]; then
+            test -f state/product_beta_request.json || { echo "::error::beta_launch requires product_beta_request"; exit 1; }
+            BETA=$(jq -r '.beta_id // empty' state/product_beta_request.json)
+            test -n "$BETA" || exit 1
+          else
+            BETA=""
+          fi
+          echo "beta_launch=$LAUNCH" >> "$GITHUB_OUTPUT"
+          echo "beta_id=$BETA" >> "$GITHUB_OUTPUT"
+
+      - name: Persist Product Director state
+        shell: bash
+        run: |
+          git config user.name "spider-product-director"
+          git config user.email "spider-product-director@autonomous.local"
+          git add -A
+          git commit -m "Product Director synthesis ${GITHUB_RUN_ID}" || true
+          git push origin "HEAD:refs/heads/$PRODUCT_BRANCH"
+
+  beta_architect:
+    name: BETA ARCHITECT
+    needs: [product_director]
+    if: needs.product_director.outputs.beta_launch == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Checkout Product state and mount accepted evidence
+        shell: bash
+        run: |
+          git fetch origin "$PRODUCT_BRANCH"
+          git switch -C beta-architect-base "origin/$PRODUCT_BRANCH"
+          for lane in graph physics intel; do
+            B="lab/$lane"
+            if git ls-remote --exit-code --heads origin "refs/heads/$B" >/dev/null 2>&1; then
+              git fetch origin "$B:refs/remotes/origin/$B"
+              git worktree add --detach "/tmp/spider_$lane" "origin/$B"
+            fi
+          done
+
+      - name: Install OpenCode
+        shell: bash
+        run: curl --retry 3 --retry-all-errors --retry-delay 15 -fsSL https://opencode.ai/install | bash
+
+      - name: Run Beta Architect
+        shell: bash
+        run: |
+          bash .github/scripts/run-opencode-with-retry.sh run \
+            --model "$SPIDER_MODEL" \
+            --agent beta_architect \
+            "Architect Product Beta ${{ needs.product_director.outputs.beta_id }}. Your formal job description is binding. Freeze a fair benchmark against a credible current-agent baseline before Builder execution."
+
+      - name: Persist architecture snapshot
+        shell: bash
+        run: |
+          BRANCH="cycle/product/${GITHUB_RUN_ID}/architect"
+          git config user.name "spider-beta-architect"
+          git config user.email "spider-beta-architect@autonomous.local"
+          git switch -C "$BRANCH"
+          git add -A
+          git commit -m "Beta ${{ needs.product_director.outputs.beta_id }}: architecture" || true
+          git push --force origin "HEAD:refs/heads/$BRANCH"
+
+  beta_builder:
+    name: BETA BUILDER
+    needs: [product_director, beta_architect]
+    if: needs.beta_architect.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Checkout Product base and mount architecture
+        shell: bash
+        run: |
+          git fetch origin "$PRODUCT_BRANCH"
+          git switch -C beta-builder-base "origin/$PRODUCT_BRANCH"
+          ARCH="cycle/product/${GITHUB_RUN_ID}/architect"
+          git fetch origin "$ARCH:refs/remotes/origin/$ARCH"
+          git worktree add --detach /tmp/spider_beta_architect "origin/$ARCH"
+          cp -a /tmp/spider_beta_architect/product-beta . 2>/dev/null || true
+
+      - name: Install OpenCode
+        shell: bash
+        run: curl --retry 3 --retry-all-errors --retry-delay 15 -fsSL https://opencode.ai/install | bash
+
+      - name: Run Beta Builder
+        shell: bash
+        run: |
+          bash .github/scripts/run-opencode-with-retry.sh run \
+            --model "$SPIDER_MODEL" \
+            --agent beta_builder \
+            "Build Product Beta ${{ needs.product_director.outputs.beta_id }} exactly against the preregistered architecture/benchmark. Your formal job description is binding. Produce a runnable, instrumented beta and baseline; do not alter the win rule."
+
+      - name: Persist builder snapshot
+        if: always()
+        shell: bash
+        run: |
+          BRANCH="cycle/product/${GITHUB_RUN_ID}/builder"
+          git config user.name "spider-beta-builder"
+          git config user.email "spider-beta-builder@autonomous.local"
+          git switch -C "$BRANCH"
+          git add -A
+          git commit -m "Beta ${{ needs.product_director.outputs.beta_id }}: build" || true
+          git push --force origin "HEAD:refs/heads/$BRANCH"
+
+  beta_auditor:
+    name: BETA TESTER / AUDITOR
+    needs: [product_director, beta_architect, beta_builder]
+    if: needs.beta_builder.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Mount Product state, architecture and builder snapshot
+        shell: bash
+        run: |
+          git fetch origin "$PRODUCT_BRANCH"
+          git switch -C beta-audit-base "origin/$PRODUCT_BRANCH"
+          for kind in architect builder; do
+            B="cycle/product/${GITHUB_RUN_ID}/$kind"
+            git fetch origin "$B:refs/remotes/origin/$B"
+            git worktree add --detach "/tmp/spider_beta_$kind" "origin/$B"
+          done
+
+      - name: Install OpenCode
+        shell: bash
+        run: curl --retry 3 --retry-all-errors --retry-delay 15 -fsSL https://opencode.ai/install | bash
+
+      - name: Run independent Beta Tester/Auditor
+        shell: bash
+        run: |
+          bash .github/scripts/run-opencode-with-retry.sh run \
+            --model "$SPIDER_MODEL" \
+            --agent beta_tester_auditor \
+            "Test/audit Product Beta ${{ needs.product_director.outputs.beta_id }}. Architect=/tmp/spider_beta_architect. Builder=/tmp/spider_beta_builder. Your formal job description is binding. Determine honestly whether it beats the preregistered current-agent baseline."
+
+      - name: Validate Beta audit
+        shell: bash
+        run: |
+          test -f state/product_beta_audit.json || { echo "::error::Missing beta audit state"; exit 1; }
+          GATE=$(jq -r '.gate // empty' state/product_beta_audit.json)
+          case "$GATE" in PASS|REVISE|BLOCKED) ;; *) exit 1 ;; esac
+
+      - name: Persist audit snapshot
+        shell: bash
+        run: |
+          BRANCH="cycle/product/${GITHUB_RUN_ID}/audit"
+          git config user.name "spider-beta-auditor"
+          git config user.email "spider-beta-auditor@autonomous.local"
+          git switch -C "$BRANCH"
+          git add -A
+          git commit -m "Beta ${{ needs.product_director.outputs.beta_id }}: independent test" || true
+          git push --force origin "HEAD:refs/heads/$BRANCH"
+
+  product_review:
+    name: PRODUCT DIRECTOR — BETA REVIEW
+    needs: [product_director, beta_architect, beta_builder, beta_auditor]
+    if: always() && needs.beta_auditor.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Mount Beta evidence
+        shell: bash
+        run: |
+          git fetch origin "$PRODUCT_BRANCH"
+          git switch -C "$PRODUCT_BRANCH" "origin/$PRODUCT_BRANCH"
+          for kind in architect builder audit; do
+            B="cycle/product/${GITHUB_RUN_ID}/$kind"
+            git fetch origin "$B:refs/remotes/origin/$B"
+            git worktree add --detach "/tmp/spider_beta_$kind" "origin/$B"
+          done
+
+      - name: Install OpenCode
+        shell: bash
+        run: curl --retry 3 --retry-all-errors --retry-delay 15 -fsSL https://opencode.ai/install | bash
+
+      - name: Review audited beta
+        shell: bash
+        run: |
+          bash .github/scripts/run-opencode-with-retry.sh run \
+            --model "$SPIDER_MODEL" \
+            --agent product_director \
+            "Review audited Product Beta ${{ needs.product_director.outputs.beta_id }}. Architect=/tmp/spider_beta_architect, Builder=/tmp/spider_beta_builder, Audit=/tmp/spider_beta_audit. Your formal job description is binding. Integrate the result into Product hypotheses and decide whether a later beta is justified. Do not deploy publicly."
+
+      - name: Advance Product branch
+        shell: bash
+        run: |
+          git config user.name "spider-product-director"
+          git config user.email "spider-product-director@autonomous.local"
+          git add -A
+          git commit -m "Product Beta review ${GITHUB_RUN_ID}" || true
+          git push origin "HEAD:refs/heads/$PRODUCT_BRANCH"
