@@ -1,0 +1,75 @@
+name: SPIDER Ox Watchdog
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+permissions:
+  actions: write
+  contents: read
+
+concurrency:
+  group: spider-ox-watchdog
+  cancel-in-progress: true
+
+jobs:
+  recover_transient_ox_failures:
+    name: Recover transient Ox failures
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Re-run failed jobs only when Ox exhausted transient retries
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          recover_workflow() {
+            local workflow="$1"
+            local active latest run_id conclusion logs
+
+            active=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow "$workflow" --limit 30 \
+              --json databaseId,status,createdAt \
+              --jq '[.[] | select(.status != "completed")] | sort_by(.createdAt) | last // empty')
+            if [[ -n "$active" ]]; then
+              echo "$workflow: active run exists; watchdog leaves it alone."
+              return 0
+            fi
+
+            latest=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow "$workflow" --limit 30 \
+              --json databaseId,status,conclusion,createdAt \
+              --jq '[.[] | select(.status == "completed")] | sort_by(.createdAt) | last // empty')
+            if [[ -z "$latest" ]]; then
+              echo "$workflow: no completed run to inspect."
+              return 0
+            fi
+
+            run_id=$(jq -r '.databaseId' <<<"$latest")
+            conclusion=$(jq -r '.conclusion // ""' <<<"$latest")
+            if [[ "$conclusion" != failure ]]; then
+              echo "$workflow: latest completed run $run_id concluded $conclusion; no recovery."
+              return 0
+            fi
+
+            set +e
+            logs=$(gh run view "$run_id" --repo "$GITHUB_REPOSITORY" --log-failed 2>&1)
+            log_rc=$?
+            set -e
+            if [[ "$log_rc" -ne 0 ]]; then
+              echo "::warning::$workflow: unable to read failed logs for run $run_id; refusing blind retry."
+              return 0
+            fi
+
+            if grep -Fq 'SPIDER_TRANSIENT_OX_EXHAUSTED' <<<"$logs"; then
+              echo "::warning::$workflow: transient Ox outage exhausted local retries in run $run_id; re-running failed jobs."
+              gh run rerun "$run_id" --repo "$GITHUB_REPOSITORY" --failed
+            else
+              echo "$workflow: run $run_id failed without transient-Ox exhaustion marker; watchdog will not resurrect a real failure."
+            fi
+          }
+
+          recover_workflow graph-loop.yml
+          recover_workflow physics-loop.yml
+          recover_workflow meta-sync.yml
