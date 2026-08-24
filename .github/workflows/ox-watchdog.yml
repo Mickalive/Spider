@@ -10,10 +10,6 @@ on:
       - "SPIDER Physics Lane"
       - "SPIDER Meta Sync"
     types: [completed]
-  push:
-    branches: [main]
-    paths:
-      - '.spider/cleanup/legacy-runs-20260824.json'
 
 permissions:
   actions: write
@@ -24,41 +20,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  cleanup_legacy_runs:
-    if: github.event_name == 'push'
-    name: Remove obsolete legacy runs
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - name: Cancel and delete only the two approved legacy runs
-        env:
-          GH_TOKEN: ${{ github.token }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          for run_id in 32684818422 32682634851; do
-            status=$(gh run view "$run_id" --repo "$GITHUB_REPOSITORY" --json status --jq '.status' 2>/dev/null || echo missing)
-            if [[ "$status" == "missing" ]]; then
-              echo "$run_id already absent."
-              continue
-            fi
-            if [[ "$status" != "completed" ]]; then
-              echo "Cancelling obsolete legacy run $run_id..."
-              gh run cancel "$run_id" --repo "$GITHUB_REPOSITORY" || true
-              for _ in $(seq 1 90); do
-                status=$(gh run view "$run_id" --repo "$GITHUB_REPOSITORY" --json status --jq '.status' 2>/dev/null || echo missing)
-                [[ "$status" == "completed" || "$status" == "missing" ]] && break
-                sleep 2
-              done
-            fi
-            if gh run view "$run_id" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
-              echo "Deleting obsolete legacy run $run_id..."
-              gh run delete "$run_id" --repo "$GITHUB_REPOSITORY"
-            fi
-          done
-
   recover_transient_ox_failures:
-    if: github.event_name != 'push'
     name: Recover transient Ox failures
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -106,12 +68,15 @@ jobs:
               return 0
             fi
 
+            # New runs emit an explicit marker after their six local retries.
             if grep -Fq 'SPIDER_TRANSIENT_OX_EXHAUSTED' <<<"$logs"; then
               echo "::warning::$workflow: explicit transient Ox exhaustion in run $run_id; re-running failed jobs."
               gh run rerun "$run_id" --repo "$GITHUB_REPOSITORY" --failed
               return 0
             fi
 
+            # Backward compatibility for runs launched before the marker existed.
+            # Require BOTH clear OpenCode/Ox context and a narrow network/provider signature.
             if grep -Eiq '(opencode run|OpenCode|x-preview-f-free|Ox)' <<<"$logs" \
                && grep -Eiq '(network_error|NetworkError|network error|fetch failed|APIConnectionError|ECONNRESET|ECONNREFUSED|EAI_AGAIN|ENETUNREACH|ENOTFOUND|ETIMEDOUT|timed out|connection reset|connection closed|temporar(y|ily) unavailable|HTTP[^0-9]*(429|500|502|503|504)|status[^0-9]*(429|500|502|503|504)|too many requests|rate.?limit|service unavailable|bad gateway|gateway timeout|upstream.*(reset|closed|unavailable|error))' <<<"$logs"; then
               echo "::warning::$workflow: legacy run $run_id has OpenCode/Ox + explicit transient network signature; re-running failed jobs."
