@@ -1,0 +1,29 @@
+{
+  "deleted_count": 4,
+  "deleted_runs": [
+    {
+      "run_id": 32688267177,
+      "workflow": "SPIDER Install Audit Repair Loop",
+      "conclusion": "failure",
+      "created_at": "2026-08-24T03:57:53Z"
+    },
+    {
+      "run_id": 32688218823,
+      "workflow": "SPIDER Install Audit Repair Loop",
+      "conclusion": "failure",
+      "created_at": "2026-08-24T03:57:01Z"
+    },
+    {
+      "run_id": 32688035454,
+      "workflow": "SPIDER Install Audit Repair Loop",
+      "conclusion": "failure",
+      "created_at": "2026-08-24T03:53:50Z"
+    },
+    {
+      "run_id": 32688008083,
+      "workflow": "SPIDER Install Audit Repair Loop",
+      "conclusion": "failure",
+      "created_at": "2026-08-24T03:53:23Z"
+    }
+  ]
+}
