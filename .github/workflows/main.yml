@@ -100,10 +100,10 @@ jobs:
           git commit -m "cycle ${GITHUB_RUN_ID}: TEAM PHYSICS output" || true
           git push --force origin "HEAD:refs/heads/$BRANCH"
 
-  auditor:
-    name: INDEPENDENT AUDITOR
-    needs: [graph, physics]
-    if: always() && needs.graph.result != 'cancelled' && needs.physics.result != 'cancelled'
+  audit_graph:
+    name: AUDITOR — GRAPH
+    needs: [graph]
+    if: always() && needs.graph.result != 'cancelled'
     runs-on: ubuntu-latest
     timeout-minutes: 240
     steps:
@@ -113,14 +113,59 @@ jobs:
           fetch-depth: 0
           ref: ${{ github.sha }}
 
-      - name: Fetch team branches and mount read-only worktrees
+      - name: Fetch completed Graph branch
         shell: bash
         run: |
           GRAPH="cycle/${GITHUB_RUN_ID}/graph"
-          PHYSICS="cycle/${GITHUB_RUN_ID}/physics"
           git fetch origin "$GRAPH:refs/remotes/origin/$GRAPH"
-          git fetch origin "$PHYSICS:refs/remotes/origin/$PHYSICS"
           git worktree add --detach /tmp/spider_graph "origin/$GRAPH"
+
+      - name: Install OpenCode
+        shell: bash
+        run: curl -fsSL https://opencode.ai/install | bash
+
+      - name: Add OpenCode to PATH
+        shell: bash
+        run: echo "$HOME/.opencode/bin" >> "$GITHUB_PATH"
+
+      - name: Run adversarial Graph audit
+        shell: bash
+        run: |
+          opencode run \
+            --model "$SPIDER_MODEL" \
+            --agent independent_auditor \
+            "Audit the TEAM GRAPH output for SPIDER cycle ${GITHUB_RUN_ID}. Completed Graph workspace: /tmp/spider_graph. Your current checkout is the untouched cycle base and is where you must write ONLY audit outputs. Read SPIDER_MASTER_PROMPT.md and directives/AUDITOR.md. Try to break Graph claims from code and evidence: recompute headline arithmetic, inspect matched comparisons, baselines, hand-authored decomposition, task leakage, denominator choices, reuse definitions, staleness/confidence claims and code/report consistency. Write reports/audit/CYCLE_${GITHUB_RUN_ID}_GRAPH.md and compact findings if useful. Never ask for human input. Do not switch branches or open PRs."
+
+      - name: Persist Graph audit branch only
+        if: always()
+        shell: bash
+        run: |
+          BRANCH="cycle/${GITHUB_RUN_ID}/audit-graph"
+          git config user.name "spider-auditor-graph"
+          git config user.email "spider-auditor-graph@autonomous.local"
+          git switch -C "$BRANCH"
+          git add -A
+          git commit -m "cycle ${GITHUB_RUN_ID}: independent Graph audit" || true
+          git push --force origin "HEAD:refs/heads/$BRANCH"
+
+  audit_physics:
+    name: AUDITOR — PHYSICS
+    needs: [physics]
+    if: always() && needs.physics.result != 'cancelled'
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - name: Checkout untouched cycle base
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          ref: ${{ github.sha }}
+
+      - name: Fetch completed Physics branch
+        shell: bash
+        run: |
+          PHYSICS="cycle/${GITHUB_RUN_ID}/physics"
+          git fetch origin "$PHYSICS:refs/remotes/origin/$PHYSICS"
           git worktree add --detach /tmp/spider_physics "origin/$PHYSICS"
 
       - name: Install OpenCode
@@ -131,30 +176,30 @@ jobs:
         shell: bash
         run: echo "$HOME/.opencode/bin" >> "$GITHUB_PATH"
 
-      - name: Run adversarial audit
+      - name: Run adversarial Physics audit
         shell: bash
         run: |
           opencode run \
             --model "$SPIDER_MODEL" \
             --agent independent_auditor \
-            "Audit SPIDER cycle ${GITHUB_RUN_ID}. TEAM GRAPH completed workspace is /tmp/spider_graph. TEAM PHYSICS completed workspace is /tmp/spider_physics. Your current repository checkout is the untouched cycle base and is where you must write ONLY audit outputs. Read directives/AUDITOR.md and try to break both teams' claims from code and evidence. Recompute headline arithmetic and inspect leakage/uncertainty/baselines. Never ask for human input. Do not switch branches or open PRs."
+            "Audit the TEAM PHYSICS output for SPIDER cycle ${GITHUB_RUN_ID}. Completed Physics workspace: /tmp/spider_physics. Your current checkout is the untouched cycle base and is where you must write ONLY audit outputs. Read SPIDER_MASTER_PROMPT.md and directives/AUDITOR.md. Try to break Physics claims from code and evidence: inspect target leakage, temporal lags, split integrity, preprocessing leakage, policy confounding, uncertainty/resampling level, nulls, preregistration timing, identifiability and code/report consistency. Write reports/audit/CYCLE_${GITHUB_RUN_ID}_PHYSICS.md and compact findings if useful. Never ask for human input. Do not switch branches or open PRs."
 
-      - name: Persist Auditor branch only
+      - name: Persist Physics audit branch only
         if: always()
         shell: bash
         run: |
-          BRANCH="cycle/${GITHUB_RUN_ID}/audit"
-          git config user.name "spider-auditor"
-          git config user.email "spider-auditor@autonomous.local"
+          BRANCH="cycle/${GITHUB_RUN_ID}/audit-physics"
+          git config user.name "spider-auditor-physics"
+          git config user.email "spider-auditor-physics@autonomous.local"
           git switch -C "$BRANCH"
           git add -A
-          git commit -m "cycle ${GITHUB_RUN_ID}: independent audit" || true
+          git commit -m "cycle ${GITHUB_RUN_ID}: independent Physics audit" || true
           git push --force origin "HEAD:refs/heads/$BRANCH"
 
   director:
     name: LAB DIRECTOR
-    needs: [graph, physics, auditor]
-    if: always() && needs.auditor.result != 'cancelled'
+    needs: [graph, physics, audit_graph, audit_physics]
+    if: always() && needs.audit_graph.result != 'cancelled' && needs.audit_physics.result != 'cancelled'
     runs-on: ubuntu-latest
     timeout-minutes: 240
     steps:
@@ -164,13 +209,14 @@ jobs:
           fetch-depth: 0
           ref: ${{ github.sha }}
 
-      - name: Fetch all completed branches and mount worktrees
+      - name: Fetch completed team and audit branches
         shell: bash
         run: |
-          for ROLE in graph physics audit; do
+          for ROLE in graph physics audit-graph audit-physics; do
             BRANCH="cycle/${GITHUB_RUN_ID}/${ROLE}"
+            SAFE="${ROLE//-/_}"
             git fetch origin "$BRANCH:refs/remotes/origin/$BRANCH"
-            git worktree add --detach "/tmp/spider_${ROLE}" "origin/$BRANCH"
+            git worktree add --detach "/tmp/spider_${SAFE}" "origin/$BRANCH"
           done
 
       - name: Install OpenCode
@@ -189,7 +235,7 @@ jobs:
           opencode run \
             --model "$SPIDER_MODEL" \
             --agent lab_director \
-            "Direct SPIDER cycle ${GITHUB_RUN_ID}. Read directives/LAB_DIRECTOR.md. Completed independent workspaces: TEAM GRAPH=/tmp/spider_graph, TEAM PHYSICS=/tmp/spider_physics, AUDITOR=/tmp/spider_audit. Your current checkout is the untouched cycle base. Inspect diffs, code, results and audit findings; integrate ONLY accepted work into the current checkout. Explicitly address audit objections. Rewrite directives/GRAPH.md, directives/PHYSICS.md and directives/AUDITOR.md for the NEXT cycle based on evidence. Update docs/NEXT_RUN.md and write reports/director/CYCLE_${GITHUB_RUN_ID}.md. Never edit SPIDER_MASTER_PROMPT.md silently. Never auto-merge. Do not switch branches or open a PR yourself. Human steering note: ${HUMAN_NOTE}"
+            "Direct SPIDER cycle ${GITHUB_RUN_ID}. Read SPIDER_MASTER_PROMPT.md and directives/LAB_DIRECTOR.md. Completed independent workspaces: TEAM GRAPH=/tmp/spider_graph, GRAPH AUDIT=/tmp/spider_audit_graph, TEAM PHYSICS=/tmp/spider_physics, PHYSICS AUDIT=/tmp/spider_audit_physics. Your current checkout is the untouched cycle base. Inspect diffs, code, results and BOTH independent audit findings; integrate ONLY accepted work into the current checkout. Explicitly address every material audit objection. Rewrite directives/GRAPH.md, directives/PHYSICS.md and directives/AUDITOR.md for the NEXT cycle based on evidence. Update docs/NEXT_RUN.md and write reports/director/CYCLE_${GITHUB_RUN_ID}.md. Never edit SPIDER_MASTER_PROMPT.md silently. Never auto-merge. Do not switch branches or open a PR yourself. Human steering note: ${HUMAN_NOTE}"
 
       - name: Persist Director integration branch
         shell: bash
@@ -208,7 +254,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         shell: bash
         run: |
-          BODY="SPIDER autonomous cycle ${GITHUB_RUN_ID}. Graph and Physics ran in independent primary contexts; an independent Auditor reviewed both; the Lab Director integrated only accepted work and updated next-cycle directives. This PR is intentionally NOT auto-merged."
+          BODY="SPIDER autonomous cycle ${GITHUB_RUN_ID}. Graph and Physics ran independently; each was audited immediately after its own completion in a separate adversarial audit context; the Lab Director then integrated only accepted work and updated next-cycle directives. This PR is intentionally NOT auto-merged."
           EXISTING=$(gh pr list --head "$DIRECTOR_BRANCH" --base main --json number --jq '.[0].number // empty')
           if [ -z "$EXISTING" ]; then
             gh pr create --base main --head "$DIRECTOR_BRANCH" --title "SPIDER cycle ${GITHUB_RUN_ID} — audited integration" --body "$BODY"
