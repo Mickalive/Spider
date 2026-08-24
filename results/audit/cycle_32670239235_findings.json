@@ -1,0 +1,62 @@
+{
+  "cycle": "32670239235",
+  "auditor": "independent-audit-runner3",
+  "date": "2026-08-24",
+  "inputs": {
+    "graph_branch_tip": "22f0864",
+    "physics_branch_tip": "941aa42",
+    "physics_freeze_commit": "81c46a6",
+    "base_commit": "c55aa9c"
+  },
+  "team_graph": {
+    "branch_safe_to_integrate": true,
+    "conditions": [
+      "correct composite-outcomes table + ledger 'cold 275' to run2c values (F-G1)",
+      "annotate quotes composite with within-run fragment-provenance caveat (F-G2)",
+      "take physics-side tests/test_integrity.py fix (N-G1)",
+      "disclose settle_ms 350->120 instrumentation change (F-G3)"
+    ],
+    "claims": [
+      {"id": "G1", "claim": "run2c aggregate novel/task, success, wall per method", "status": "VALIDATED", "evidence": ["results/graph/run2c_cycle32670239235_20260824_020509.json"], "recompute": "exact match"},
+      {"id": "G2", "claim": "paired deltas fragment-vs-{cold,graph,trajectory} with task-grouped bootstrap CIs", "status": "VALIDATED", "recompute": "exact match; success-rate CIs include 0 and are reported as such"},
+      {"id": "G3", "claim": "blind addressing: keywords only, sig never used, UNKNOWN honest", "status": "VALIDATED_FOR_CURRENT_TEST", "recompute": "code-verified; 16 lookups / 14 found / 2 UNKNOWN / 0.405ms exact; 16/16 top-choice agreement run2b vs run2c exact"},
+      {"id": "G4", "claim": "replay validation 5/5 zero-novel x3 variants", "status": "VALIDATED", "recompute": "15/15 runs novel=0 success"},
+      {"id": "G5", "claim": "ledger >=20 sequential executions; store 21->32 fragments", "status": "VALIDATED", "recompute": "35 entries (10/20/5 by generation); post-production 21 -> final 32"},
+      {"id": "G6", "claim": "calibration DATA_INSUFFICIENT (single bucket 0.67, rate 0.95)", "status": "VALIDATED", "recompute": "40 rows conf={0.67}, 38/40 success, all three variants"},
+      {"id": "G7", "claim": "frozen constants/endpoints unchanged across variants", "status": "VALIDATED", "recompute": "preregistered blocks identical in run2/run2b/run2c"},
+      {"id": "G8", "claim": "composite outcomes table (report)", "status": "OVERCLAIMED", "defect": "F-G1: row login->checkboxes shows run2b numbers (275/91/180 partial) as run2c; run2c artifact records cold 191 partial, trajectory 78 SUCCESS, graph 89 SUCCESS; quotes row trajectory 63 vs run2c 57; ledger repeats stale 275"},
+      {"id": "G9", "claim": "blind composition POC replicated on 2 composites", "status": "SURVIVES_AUDIT_WITH_LIMITS", "defect": "F-G2: tgt.quotes.tag.love.p2 retrieved fragment created earlier in the same composite run (master §11 independence violated for that subgoal); checkboxes composite fully independent"},
+      {"id": "G10", "claim": "matched baselines/store isolation/randomized order", "status": "VALIDATED", "notes": "read-gate cold tested; C6 recovery shared by all conditions; zero errored runs"}
+    ]
+  },
+  "team_physics": {
+    "branch_safe_to_integrate": true,
+    "conditions": [
+      "record F-P1: raw corpus ephemeral and gone -> no promotion past SURVIVES_CURRENT_TEST/POC without committed compact sufficient statistics + independent rerun",
+      "note F-P3 gate url_shape caching fix before any future gate run"
+    ],
+    "claims": [
+      {"id": "P1", "claim": "primary additive model website-holdout INCONCLUSIVE (-0.0368, wins 2/6, CI [-0.0850,+0.0345])", "status": "VALIDATED_FOR_CURRENT_TEST", "recompute": "all folds macro-recalls/d_effects/best-nulls recomputed from stored per-class blocks; frozen rule applied"},
+      {"id": "P2", "claim": "S-E interaction arm +0.1683 [0.1117,0.2272] exploratory only", "status": "VALIDATED_AS_EXPLORATORY_POC", "notes": "prereg §9 bars rescue of primary; multiplicity disclosed"},
+      {"id": "P3", "claim": "S-B ablation FALSIFIED for additive family (-0.1242 [-0.1645,-0.0341])", "status": "VALIDATED_FOR_CURRENT_TEST", "notes": "scoping correct"},
+      {"id": "P4", "claim": "component targets <= 0", "status": "VALIDATED_DESCRIPTIVE", "notes": "has_password target degenerate all-zero"},
+      {"id": "P5", "claim": "E-1 permuted-action control collapses S-E to -0.0459", "status": "VALIDATED_AS_EXPLORATORY", "notes": "post-hoc labeled"},
+      {"id": "P6", "claim": "WP-004 identifiability gate FAILED G1=29<50 G2=11<20 -> DATA_INSUFFICIENT", "status": "VALIDATED_FOR_CURRENT_TEST", "notes": "F-P3 caching deviation inflates visits-per-key only; failure margin wide"},
+      {"id": "P7", "claim": "integrity bundle (real grouped bootstrap, sha256 seeds, anti-leak assertions, protocol sensitivity)", "status": "SURVIVES_AUDIT_WITH_LIMITS"}
+    ],
+    "findings": [
+      {"id": "F-P1", "severity": "moderate", "text": "raw corpus + DOM snapshots ephemeral in /tmp and now absent; digest chain self-consistent but independently unverifiable; corpus verification is self-reported"},
+      {"id": "F-P2", "severity": "low-moderate", "text": "frozen exclusion rule was un-runnable as written (per-action ok flags never persisted); post-freeze D2 operationalization mechanical+uniform+disclosed; residual risk cannot be excluded retroactively"},
+      {"id": "F-P3", "severity": "minor", "text": "gate() caches url_shape per trajectory_id not per row; can only inflate G1/G2; conclusion robust (29 vs 50)"},
+      {"id": "F-P4", "severity": "minor", "text": "'independent reproduction M=0.8411' has no committed artifact; UNVERIFIED, non-load-bearing"},
+      {"id": "F-P5", "severity": "latent", "text": "bootstrap averages over all folds while verdict counts adequate folds only; harmless here (all 6 adequate)"},
+      {"id": "F-P6", "severity": "hygiene", "text": "seed-determinism test imports playwright transitively; mechanism verified stable manually under PYTHONHASHSEED 0/1/random"}
+    ]
+  },
+  "cross_cutting": [
+    "no team converted software/measurement failure into scientific falsification",
+    "prereg freeze ordering verified via commit timestamps and diffs (physics); constant/endpoints freezing verified across variants (graph)",
+    "base-repo defect: tests/test_integrity.py leakage-guard fixture fails at c55aa9c itself (single trajectory_id in fixture); physics branch fixes it, graph ships it red",
+    "audit environment lacked playwright/numpy; numpy installed, browser stubbed; all browser-independent tests executed"
+  ]
+}

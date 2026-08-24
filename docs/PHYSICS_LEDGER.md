@@ -46,6 +46,36 @@ Question: does imposed-action identity carry transferable information about
 environment response? This is now the sharpest candidate for mechanical Web
 physics beyond memory/similarity.
 
+## WP-003B-v2 AUDIT STATUS (LAB DIRECTOR, cycle 32670239235)
+
+Independent audit (`reports/audit/CYCLE_32670239235.md`) + director
+recomputation of every fold's macro-balanced accuracies, d_effects, best-null
+identities, verdict-rule application, gate counts and seed determinism:
+
+- ACCEPTED as reported: primary INCONCLUSIVE; S-B ablation FALSIFIED (scoped);
+  S-E interaction SURVIVES_CURRENT_TEST **exploratory only**; component
+  targets descriptive (≤0); E-1 permuted-action collapse exploratory;
+  WP-004 gate FAILED → DATA_INSUFFICIENT.
+- STANDING LIMITATION (F-P1): raw corpus and DOM snapshots were ephemeral and
+  are gone; digest chain is self-consistent but independently unverifiable,
+  and corpus verification was self-reported. Consequence: **nothing from this
+  cycle may be promoted past SURVIVES_CURRENT_TEST / POC** until a future run
+  commits compact row-level sufficient statistics (per-row features + labels +
+  predictions) or the corpus itself, AND an independent rerun reproduces the
+  stored numbers. The next confirmatory collection MUST commit this evidence.
+- REQUIRED FIX BEFORE ANY FUTURE GATE RUN (F-P3): `gate()` caches `url_shape`
+  per trajectory_id instead of per visit snapshot, merging states across steps
+  and inflating G1/G2. The current failure margin is wide (29 vs 50), so the
+  DATA_INSUFFICIENT verdict stands; the fix is mandatory before the gate is
+  rerun on any richer corpus.
+- MINOR: F-P2 (frozen exclusion rule un-runnable as written; post-freeze D2
+  operationalization mechanical/disclosed — residual risk accepted because the
+  primary verdict is non-decisional); F-P4 ("independent reproduction M=0.8411"
+  UNVERIFIED, non-load-bearing); F-P5 (bootstrap averages all folds vs verdict
+  counting adequate folds only — align before corpora with weak folds); F-P6
+  (seed test playwright import — fixed at integration by stubbing playwright
+  in the subprocess).
+
 ## WP-003 (2026-08-23) — Website-holdout transition structure
 
 - **Original hypothesis**: mechanics-only state features Z transfer across

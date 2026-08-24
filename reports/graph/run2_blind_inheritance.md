@@ -4,15 +4,29 @@ Date: 2026-08-24 (live-site runs 2026-08-23T23:5x – 2026-08-24T02:05 UTC)
 Branch: `spider/graph-cycle-32670239235` · infra commit `5817fa8` (+ results commit)
 Policies: scripted heuristics only, no LLM in the loop.
 
-## AUDIT STATUS (self-assessment; independent audit pending)
+## AUDIT STATUS (independent audit + LAB DIRECTOR integration)
+
+Independent audit verdicts (`reports/audit/CYCLE_32670239235.md`): engineering
+claims VALIDATED; scientific claim **SURVIVES_AUDIT_WITH_LIMITS**.
 
 | Claim | Status |
 |---|---|
-| Blind fragment composition succeeds on held-out composites whose full routes were never trained, with the consumer receiving **no hand-selected fragment IDs** | **REPLICATED (2/2 fair variants)** on `C_internet_login_checkboxes` and `C_quotes_login_love_p2`; PROOF OF CONCEPT overall |
+| Blind fragment composition succeeds on held-out composites whose full routes were never trained, with the consumer receiving **no hand-selected fragment IDs** | **PROOF OF CONCEPT** — cleanest evidence is `C_internet_login_checkboxes` (fully independent production-acquired provenance). On `C_quotes_login_love_p2` the third subgoal retrieved a fragment created earlier **within the same composite run** (audit F-G2), so that composite only partially satisfies the master §11 independence requirement. Previously worded "REPLICATED (2/2)" is qualified accordingly. |
 | Content-derived addressing retrieves producer fragments from consumer-side task keywords without goal_sig lookup | SURVIVES_CURRENT_TEST (87.5% route-found, UNKNOWN honest, deterministic 16/16 across variants) |
 | Fragment memory beats matched cold / nearest-trajectory / graph-BFS baselines on novel actions | SURVIVES_CURRENT_TEST for cold & graph (paired CIs excl. 0); vs trajectory: −43.6 [−74.0, −13.2] in run2c but success-rate parity — NEEDS_REPLICATION |
 | Exact replay of known routes = zero novel actions | REPLICATED ×3 variants (5/5 tasks each) |
 | Confidence scores are calibrated | **DATA_INSUFFICIENT** (all 40 prospective rounds in one score bucket) |
+
+Director corrections applied at integration:
+- (F-G1) The composite-outcomes table below originally presented stale
+  run2b cells for the checkbox composite and a stale trajectory action count
+  for the quotes composite. It was regenerated programmatically from
+  `results/graph/run2c_cycle32670239235_20260824_020509.json`; the stale
+  ledger figure ("cold 275") was likewise corrected to 191.
+- (F-G3) Instrumentation disclosure added: snapshot `settle_ms` changed
+  350→120 vs the cycle base (shared/browser.py). All within-cycle method
+  comparisons share the instrument; wall_s is NOT comparable to run-1 numbers.
+- (F-G2) Quotes-composite caveat annotated in the table and claim table.
 
 ## Design
 
@@ -56,13 +70,16 @@ prior variant's own artifact:
 
 ## Results (run2c primary; replication column = same task under prior variants)
 
-### Composite outcomes by method (novel actions | status)
+### Composite outcomes by method (total actions = novel+reused | status)
+
+Regenerated programmatically from the run2c primary artifact (director
+correction for audit finding F-G1; original table contained stale run2b cells).
 
 | Composite | cold | trajectory | graph | fragment(SPIDER) | replicated? |
 |---|---|---|---|---|---|
-| login→checkboxes | 275 partial | 91 partial | 180 partial | **7 SUCCESS** (reuse 5) | ✓ success in run2b too (7 act) |
-| login→tag-love→p2 | 28 SUCCESS | 63 SUCCESS | 29 SUCCESS | **9 SUCCESS** (reuse 7) | ✓ 9 act in run2 AND run2b |
-| login→status-500 | 310 partial | 113 partial | 198 partial | 103 partial (reuse 6) | success in run2/run2b (17–19 act) — sensitive to recovery mechanism (C6), see limits |
+| login→checkboxes | 191 partial (2/3) | 78 SUCCESS (3/3) | 89 SUCCESS (3/3) | **7 SUCCESS** (3/3, reuse 5) | ✓ fragment success in run2b too; **note: in run2c trajectory & graph also succeed on this composite — fragment is cheapest by far but not uniquely successful** |
+| login→tag-love→p2 | 28 SUCCESS (3/3) | 57 SUCCESS (3/3) | 29 SUCCESS (3/3) | **9 SUCCESS** (3/3, reuse 7) | ⚠ F-G2: third subgoal reused a fragment born earlier in the same composite run → partial self-inheritance; independence holds only for the first two subgoals |
+| login→status-500 | 310 partial (0/3) | 113 partial (2/3) | 198 partial (1/3) | 103 partial (2/3, reuse 6) | success in run2/run2b (17–19 act) — sensitive to recovery mechanism (C6), see limits |
 | login→dyn-ex2 | 310 partial (0/4) | 227 partial (1/4) | 221 partial (2/4) | 125 partial (2/4, reuse 6) | no variant fully solves ex2 (numeric blindness, below) |
 | fantasy→p2→product | 271 partial (0/3) | 281 partial (0/3) | 277 partial (0/3) | 278 partial (0/3) | unsolved by EVERY method under policy B in all variants (run2/run2b 2/3 rows were predicate artifacts) |
 

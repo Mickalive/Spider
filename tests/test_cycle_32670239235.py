@@ -89,12 +89,20 @@ def fold_effects(rows, target_fn):
 
 class SeedDeterminismTests(unittest.TestCase):
     def test_site_offset_and_rng_stable_across_hash_seeds(self):
+        # Stub playwright in the subprocess so the REAL shipped
+        # physics.collector.stable_site_offset can be imported and tested in
+        # browser-free CI environments (audit finding F-P6: the mechanism, not
+        # a reimplementation, must be what is verified).
         code = (
-            "import sys, random; sys.path.insert(0, %r);"
-            "from physics.collector import stable_site_offset;"
-            "o = stable_site_offset('wikipedia');"
-            "rng = random.Random(20260823 + o + 10007);"
-            "print(o, [round(rng.random(), 6) for _ in range(5)])" % (REPO,)
+            "import sys, types, random\n"
+            "sys.path.insert(0, %r)\n"
+            "for _m in ('playwright', 'playwright.sync_api'):\n"
+            "    sys.modules[_m] = types.ModuleType(_m)\n"
+            "sys.modules['playwright.sync_api'].sync_playwright = lambda: None\n"
+            "from physics.collector import stable_site_offset\n"
+            "o = stable_site_offset('wikipedia')\n"
+            "rng = random.Random(20260823 + o + 10007)\n"
+            "print(o, [round(rng.random(), 6) for _ in range(5)])\n" % (REPO,)
         )
         outs = []
         for hs in ("0", "1", "random"):

@@ -52,10 +52,16 @@
 
 ### Replicated results (primary artifact `results/graph/run2c_*.json`; replication across three recorded variants)
 
-1. **Blind composition POC ×2 composites**: login→checkboxes and
-   login→tag-love→page2 succeed at 7–9 actions (5–7 reused) vs cold
-   275/28 novel actions. Same outcomes in run2b/run2 for love_p2; checkboxes
-   success in run2b+run2c.
+1. **Blind composition POC**: login→checkboxes succeeds at 7 actions
+   (5 reused) with fully independent production-acquired fragment provenance;
+   login→tag-love→page2 succeeds at 9 actions (7 reused) but its third subgoal
+   reused a fragment created earlier **within the same composite run**
+   (audit F-G2 → partial self-inheritance; independence holds for the first two
+   subgoals). In run2c trajectory (78) and graph-BFS (89) also succeed on the
+   checkbox composite — fragment is cheapest by far but not uniquely
+   successful. Cold baseline on that composite: 191 total actions, partial
+   (run2c value; earlier text citing 275 was a run2b figure — corrected at
+   integration per audit F-G1).
 2. **Novel-action reduction vs all baselines** (run2c, n=5 composites):
    fragment 98.8 novel/task vs cold 222.0, graph 160.2, trajectory 142.4;
    paired CIs exclude 0 vs cold and graph; vs trajectory CI [−74.0, −13.2]
@@ -91,6 +97,25 @@
   cross-model/cross-policy transfer (consumer policy fixed);
   superiority over trajectory memory on success-rate (parity observed);
   calibrated confidence/staleness; cross-site skill transfer.
+
+## G-R2 AUDIT STATUS (LAB DIRECTOR, cycle 32670239235)
+
+Independent audit (`reports/audit/CYCLE_32670239235.md`) + director
+recomputation from raw artifacts:
+
+- ACCEPTED: aggregates (novel/task, success, wall), paired task-grouped
+  bootstrap deltas, addressing-quality diagnostics, replay validation ×3
+  variants, ≥20-execution ledger, calibration honesty (DATA_INSUFFICIENT),
+  baseline matching/store isolation. All recomputed exactly.
+- CORRECTED AT INTEGRATION: composite-outcomes narrative table (stale run2b
+  cells, F-G1); ledger cold figure 275→191; quotes-composite independence
+  caveat added (F-G2); settle_ms instrumentation change disclosed (F-G3).
+- SCOPE: blind fragment composition is a PROOF OF CONCEPT whose cleanest,
+  fully-independent evidence is the checkbox composite plus the cross-task
+  retrievals (dyn_ex2/status_500/fantasy pager) with verified production
+  provenance. Fragment-vs-trajectory superiority remains NEEDS_REPLICATION.
+- Instrumentation note: snapshot settle_ms 350→120 vs run 1 — wall_s is not
+  comparable across cycles; within-cycle comparisons unaffected.
 
 ## Open questions carried forward
 
