@@ -9,6 +9,10 @@ on:
   schedule:
     - cron: "*/5 * * * *"
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.spider/program-supervisor-trigger.json'
 
 permissions:
   actions: write
@@ -41,13 +45,14 @@ jobs:
           set -euo pipefail
           mkdir -p .spider/program-receipts
 
-          commit_receipts_if_needed() {
-            if ! git diff --quiet -- .spider/program-receipts || [[ -n "$(git ls-files --others --exclude-standard .spider/program-receipts)" ]]; then
+          commit_state_if_needed() {
+            if ! git diff --quiet -- .spider/program-receipts .spider/program-supervisor-trigger.json \
+               || [[ -n "$(git ls-files --others --exclude-standard .spider/program-receipts .spider/program-supervisor-trigger.json)" ]]; then
               git config user.name "spider-program-supervisor"
               git config user.email "spider-program-supervisor@autonomous.local"
               git pull --rebase origin main
-              git add .spider/program-receipts
-              git commit -m "state: reconcile research-program successor receipt" || true
+              git add -A .spider/program-receipts .spider/program-supervisor-trigger.json
+              git commit -m "state: reconcile research-program succession" || true
               git push origin HEAD:main
             fi
           }
@@ -66,12 +71,30 @@ jobs:
               | jq --argjson before "$before_ids" '[.[] | select(.databaseId as $id | ($before | index($id) | not))] | sort_by(.createdAt) | first // empty' || true
           }
 
+          clear_empty_rerun_of_completed_source() {
+            local completed_by="$1" status jobs
+            status=$(gh run view "$completed_by" --repo "$GITHUB_REPOSITORY" --json status --jq '.status' 2>/dev/null || echo unknown)
+            if [[ "$status" == completed || "$status" == unknown ]]; then
+              return 0
+            fi
+            jobs=$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${completed_by}/jobs" --jq '.total_count' 2>/dev/null || echo -1)
+            if [[ "$jobs" == 0 ]]; then
+              echo "::warning::Completed-program source run $completed_by was re-opened as $status with zero jobs; cancelling this empty rerun so it cannot deadlock program succession."
+              gh run cancel "$completed_by" --repo "$GITHUB_REPOSITORY" || true
+              for _ in $(seq 1 15); do
+                sleep 2
+                status=$(gh run view "$completed_by" --repo "$GITHUB_REPOSITORY" --json status --jq '.status' 2>/dev/null || echo unknown)
+                [[ "$status" == completed ]] && break
+              done
+            fi
+          }
+
           handle_lane() {
             local lane="$1" branch="$2" state_path="$3" workflow="$4" expected_name="$5"
             local raw status cont completed_by launch program_id title question active receipt note rc
             local receipt_status successor_id dispatched_at candidate before_ids
 
-            if [[ "$EVENT_NAME" == "workflow_run" && "$SOURCE_WORKFLOW" != "$expected_name" ]]; then
+            if [[ "$EVENT_NAME" == workflow_run && "$SOURCE_WORKFLOW" != "$expected_name" ]]; then
               return 0
             fi
 
@@ -92,19 +115,18 @@ jobs:
             title=$(jq -r '.next_program.title // empty' <<<"$raw")
             question=$(jq -r '.next_program.question // empty' <<<"$raw")
 
-            if [[ "$status" != "COMPLETE" || "$cont" != "false" || "$launch" != "true" || -z "$completed_by" || -z "$program_id" || -z "$title" || -z "$question" ]]; then
+            if [[ "$status" != COMPLETE || "$cont" != false || "$launch" != true || -z "$completed_by" || -z "$program_id" || -z "$title" || -z "$question" ]]; then
               echo "$lane: no complete unambiguous next-program recommendation."
               return 0
             fi
 
-            if [[ "$EVENT_NAME" == "workflow_run" && "$SOURCE_RUN_ID" != "$completed_by" ]]; then
+            if [[ "$EVENT_NAME" == workflow_run && "$SOURCE_RUN_ID" != "$completed_by" ]]; then
               echo "$lane: completion belongs to run $completed_by, not event run $SOURCE_RUN_ID; refusing mismatched consumption."
               return 0
             fi
 
             receipt=".spider/program-receipts/${lane}-${completed_by}.json"
 
-            # A receipt is valid only when it can be tied to an actual successor run.
             if [[ -f "$receipt" ]]; then
               receipt_status=$(jq -r '.receipt_status // "PENDING"' "$receipt")
               successor_id=$(jq -r '.successor_run_id // empty' "$receipt")
@@ -113,7 +135,7 @@ jobs:
               if [[ -n "$successor_id" ]]; then
                 if gh run view "$successor_id" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1 \
                    || gh api "repos/${GITHUB_REPOSITORY}/branches/cycle%2F${lane}%2F${successor_id}%2Fteam" >/dev/null 2>&1; then
-                  if [[ "$receipt_status" != "CONFIRMED" ]]; then
+                  if [[ "$receipt_status" != CONFIRMED ]]; then
                     jq '.receipt_status="CONFIRMED"' "$receipt" > /tmp/receipt.json && mv /tmp/receipt.json "$receipt"
                   fi
                   echo "$lane: successor run $successor_id confirmed for program $program_id."
@@ -138,11 +160,13 @@ jobs:
               fi
             fi
 
+            clear_empty_rerun_of_completed_source "$completed_by"
+
             active=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow "$workflow" --limit 30 \
-              --json status \
-              --jq '[.[] | select(.status == "queued" or .status == "in_progress" or .status == "requested" or .status == "waiting" or .status == "pending")] | length')
+              --json databaseId,status \
+              | jq --argjson completed "$completed_by" '[.[] | select(.databaseId != $completed) | select(.status == "queued" or .status == "in_progress" or .status == "requested" or .status == "waiting" or .status == "pending")] | length')
             if [[ "$active" -gt 0 ]]; then
-              echo "$lane: lane already active/queued; schedule will retry after it becomes idle."
+              echo "$lane: a genuine lane run is already active/queued; schedule will retry after it becomes idle."
               return 0
             fi
 
@@ -189,4 +213,8 @@ jobs:
 
           handle_lane graph lab/graph state/graph_loop.json graph-loop.yml "SPIDER Graph Lane"
           handle_lane physics lab/physics state/physics_loop.json physics-loop.yml "SPIDER Physics Lane"
-          commit_receipts_if_needed
+
+          if [[ "$EVENT_NAME" == push ]]; then
+            rm -f .spider/program-supervisor-trigger.json
+          fi
+          commit_state_if_needed
