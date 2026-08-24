@@ -1,0 +1,105 @@
+name: SPIDER Public Research Resume
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.spider/maintenance/public-research-resume.json'
+
+permissions:
+  actions: write
+  contents: write
+
+jobs:
+  resume:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Make all lane dispatches repository-explicit
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          for filename, workflow in [
+              ('.github/workflows/graph-loop.yml', 'graph-loop.yml'),
+              ('.github/workflows/physics-loop.yml', 'physics-loop.yml'),
+          ]:
+              p = Path(filename)
+              text = p.read_text()
+              old = f'gh workflow run {workflow} --ref main'
+              new = f'gh workflow run {workflow} --repo "$GITHUB_REPOSITORY" --ref main'
+              if old in text:
+                  text = text.replace(old, new)
+                  p.write_text(text)
+                  print(f'patched {filename}')
+              elif new in text:
+                  print(f'already patched {filename}')
+              else:
+                  raise SystemExit(f'cannot locate dispatch call in {filename}')
+          PY
+          git config user.name "spider-maintenance"
+          git config user.email "spider-maintenance@autonomous.local"
+          git add .github/workflows/graph-loop.yml .github/workflows/physics-loop.yml
+          if ! git diff --cached --quiet; then
+            git commit -m "workflow: make lane dispatches repository-explicit"
+            git push origin HEAD:main
+          fi
+
+      - name: Resume Graph repair and Physics successor
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          jq -n '{graph:null,physics:null}' > /tmp/resume.json
+
+          graph_active=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow graph-loop.yml --limit 30 --json status --jq '[.[] | select(.status == "queued" or .status == "in_progress" or .status == "requested" or .status == "waiting" or .status == "pending")] | length')
+          if [[ "$graph_active" -eq 0 ]]; then
+            gh workflow run graph-loop.yml --repo "$GITHUB_REPOSITORY" --ref main \
+              -f human_note='AUTO RECOVERY after public-repo switch. Prior independent audit run 32689296167 returned REVISE with textual-only RF-1..RF-3. Apply exactly those denominator/wording corrections; do not alter scientific outcomes or rerun data unless the audit requires it.' \
+              -f cycle_index=2 \
+              -f max_cycles=0 \
+              -f repair_from_run_id=32689296167 \
+              -f repair_round=1
+            jq '.graph={action:"dispatched_repair",source_run:32689296167,repair_round:1}' /tmp/resume.json > /tmp/r && mv /tmp/r /tmp/resume.json
+          else
+            jq --argjson n "$graph_active" '.graph={action:"skipped_active",active:$n}' /tmp/resume.json > /tmp/r && mv /tmp/r /tmp/resume.json
+          fi
+
+          physics_active=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow physics-loop.yml --limit 30 --json status --jq '[.[] | select(.status == "queued" or .status == "in_progress" or .status == "requested" or .status == "waiting" or .status == "pending")] | length')
+          if git cat-file -e "origin/main:.spider/program-receipts/physics-32689298051.json" 2>/dev/null; then
+            jq '.physics={action:"already_consumed",completed_program_run:32689298051}' /tmp/resume.json > /tmp/r && mv /tmp/r /tmp/resume.json
+          elif [[ "$physics_active" -eq 0 ]]; then
+            gh workflow run physics-loop.yml --repo "$GITHUB_REPOSITORY" --ref main \
+              -f human_note='AUTO PROGRAM SUCCESSION from Director run 32689298051. Start within-site-dynamics-interventional. Follow accepted directives/PHYSICS.md. First cycle is WP-006 and tests ONLY the H-ID identifiability gate with deliberate restart/matched-state intervention; no committor/barrier claim before that gate passes.' \
+              -f cycle_index=1 \
+              -f max_cycles=0
+            jq '.physics={action:"dispatched_successor",completed_program_run:32689298051,next_program:"within-site-dynamics-interventional"}' /tmp/resume.json > /tmp/r && mv /tmp/r /tmp/resume.json
+          else
+            jq --argjson n "$physics_active" '.physics={action:"skipped_active",active:$n}' /tmp/resume.json > /tmp/r && mv /tmp/r /tmp/resume.json
+          fi
+
+      - name: Record recovery and self-clean
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          git rebase origin/main
+          mkdir -p .spider/maintenance .spider/program-receipts
+          cp /tmp/resume.json .spider/maintenance/public-research-resume-receipt.json
+          if jq -e '.physics.action == "dispatched_successor"' /tmp/resume.json >/dev/null; then
+            jq -n '{lane:"physics",completed_program_run_id:32689298051,next_program_id:"within-site-dynamics-interventional",dispatched_by:"public-research-resume"}' > .spider/program-receipts/physics-32689298051.json
+          fi
+          rm -f .github/workflows/_public-research-resume.yml
+          rm -f .spider/maintenance/public-research-resume.json
+          git config user.name "spider-maintenance"
+          git config user.email "spider-maintenance@autonomous.local"
+          git add -A
+          git commit -m "maintenance: record public research resume and remove one-shot"
+          git push origin HEAD:main
