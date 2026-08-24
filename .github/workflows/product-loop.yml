@@ -56,6 +56,15 @@ jobs:
             fi
           done
 
+      - name: Clear ephemeral launch state before fresh Product decision
+        shell: bash
+        run: |
+          rm -f state/product_beta_request.json
+          if [[ -f state/product_direction.json ]]; then
+            jq '.beta_launch=false' state/product_direction.json > /tmp/product_direction.json
+            mv /tmp/product_direction.json state/product_direction.json
+          fi
+
       - name: Install OpenCode
         shell: bash
         run: curl --retry 3 --retry-all-errors --retry-delay 15 -fsSL https://opencode.ai/install | bash
@@ -75,7 +84,7 @@ jobs:
           test -f state/product_direction.json || { echo "::error::Missing product direction"; exit 1; }
           LAUNCH=$(jq -r '.beta_launch // false' state/product_direction.json)
           if [[ "$LAUNCH" == true ]]; then
-            test -f state/product_beta_request.json || { echo "::error::beta_launch requires product_beta_request"; exit 1; }
+            test -f state/product_beta_request.json || { echo "::error::beta_launch requires a fresh product_beta_request"; exit 1; }
             BETA=$(jq -r '.beta_id // empty' state/product_beta_request.json)
             test -n "$BETA" || exit 1
           else
@@ -99,6 +108,8 @@ jobs:
     if: needs.product_director.outputs.beta_launch == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 240
+    outputs:
+      status: ${{ steps.arch_state.outputs.status }}
     steps:
       - uses: actions/checkout@v6
         with:
@@ -117,6 +128,10 @@ jobs:
             fi
           done
 
+      - name: Remove stale architecture state
+        shell: bash
+        run: rm -f state/product_beta_architecture.json
+
       - name: Install OpenCode
         shell: bash
         run: curl --retry 3 --retry-all-errors --retry-delay 15 -fsSL https://opencode.ai/install | bash
@@ -129,7 +144,24 @@ jobs:
             --agent beta_architect \
             "Architect Product Beta ${{ needs.product_director.outputs.beta_id }}. Your formal job description is binding. Freeze a fair benchmark against a credible current-agent baseline before Builder execution."
 
+      - name: Validate architecture state
+        id: arch_state
+        shell: bash
+        run: |
+          test -f state/product_beta_architecture.json || { echo "::error::Missing product_beta_architecture state"; exit 1; }
+          STATUS=$(jq -r '.status // empty' state/product_beta_architecture.json)
+          case "$STATUS" in READY|ARCHITECTURE_BLOCKED) ;; *) echo "::error::Invalid architecture status $STATUS"; exit 1 ;; esac
+          if [[ "$STATUS" == READY ]]; then
+            test "$(jq -r '.benchmark_frozen // false' state/product_beta_architecture.json)" == true || { echo "::error::READY architecture must freeze benchmark"; exit 1; }
+            BETA="${{ needs.product_director.outputs.beta_id }}"
+            for f in ARCHITECTURE.md BENCHMARK_PREREG.md INTERFACES.md BUILD_PLAN.json; do
+              test -f "product-beta/$BETA/$f" || { echo "::error::Missing product-beta/$BETA/$f"; exit 1; }
+            done
+          fi
+          echo "status=$STATUS" >> "$GITHUB_OUTPUT"
+
       - name: Persist architecture snapshot
+        if: always()
         shell: bash
         run: |
           BRANCH="cycle/product/${GITHUB_RUN_ID}/architect"
@@ -140,12 +172,49 @@ jobs:
           git commit -m "Beta ${{ needs.product_director.outputs.beta_id }}: architecture" || true
           git push --force origin "HEAD:refs/heads/$BRANCH"
 
+  architecture_block_review:
+    name: PRODUCT DIRECTOR — ARCHITECTURE BLOCK
+    needs: [product_director, beta_architect]
+    if: needs.beta_architect.outputs.status == 'ARCHITECTURE_BLOCKED'
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Mount Product state and blocked architecture
+        shell: bash
+        run: |
+          git fetch origin "$PRODUCT_BRANCH"
+          git switch -C "$PRODUCT_BRANCH" "origin/$PRODUCT_BRANCH"
+          ARCH="cycle/product/${GITHUB_RUN_ID}/architect"
+          git fetch origin "$ARCH:refs/remotes/origin/$ARCH"
+          git worktree add --detach /tmp/spider_beta_architect "origin/$ARCH"
+      - name: Install OpenCode
+        shell: bash
+        run: curl --retry 3 --retry-all-errors --retry-delay 15 -fsSL https://opencode.ai/install | bash
+      - name: Review architecture block
+        shell: bash
+        run: |
+          bash .github/scripts/run-opencode-with-retry.sh run --model "$SPIDER_MODEL" --agent product_director \
+            "Review blocked Product Beta ${{ needs.product_director.outputs.beta_id }} architecture at /tmp/spider_beta_architect. Your formal job description is binding. Decide whether to narrow/re-architect later or reject/watch the hypothesis. Do not build or deploy."
+      - name: Advance Product branch
+        shell: bash
+        run: |
+          git config user.name "spider-product-director"
+          git config user.email "spider-product-director@autonomous.local"
+          git add -A
+          git commit -m "Product architecture block review ${GITHUB_RUN_ID}" || true
+          git push origin "HEAD:refs/heads/$PRODUCT_BRANCH"
+
   beta_builder:
     name: BETA BUILDER
     needs: [product_director, beta_architect]
-    if: needs.beta_architect.result == 'success'
+    if: needs.beta_architect.outputs.status == 'READY'
     runs-on: ubuntu-latest
     timeout-minutes: 330
+    outputs:
+      status: ${{ steps.build_state.outputs.status }}
     steps:
       - uses: actions/checkout@v6
         with:
@@ -161,6 +230,7 @@ jobs:
           git worktree add --detach /tmp/spider_beta_architect "origin/$ARCH"
           cp -a /tmp/spider_beta_architect/product-beta . 2>/dev/null || true
           cp /tmp/spider_beta_architect/state/product_beta_architecture.json state/product_beta_architecture.json 2>/dev/null || true
+          rm -f state/product_beta_build.json
 
       - name: Install OpenCode
         shell: bash
@@ -174,6 +244,15 @@ jobs:
             --agent beta_builder \
             "Build Product Beta ${{ needs.product_director.outputs.beta_id }} exactly against the preregistered architecture/benchmark. Architect snapshot=/tmp/spider_beta_architect. Your formal job description is binding. Produce a runnable, instrumented beta and baseline; do not alter the win rule."
 
+      - name: Validate build state
+        id: build_state
+        shell: bash
+        run: |
+          test -f state/product_beta_build.json || { echo "::error::Missing product_beta_build state"; exit 1; }
+          STATUS=$(jq -r '.status // empty' state/product_beta_build.json)
+          case "$STATUS" in READY_FOR_TEST|BLOCKED|FAILED_BUILD) ;; *) echo "::error::Invalid build status $STATUS"; exit 1 ;; esac
+          echo "status=$STATUS" >> "$GITHUB_OUTPUT"
+
       - name: Persist builder snapshot
         if: always()
         shell: bash
@@ -186,10 +265,47 @@ jobs:
           git commit -m "Beta ${{ needs.product_director.outputs.beta_id }}: build" || true
           git push --force origin "HEAD:refs/heads/$BRANCH"
 
+  build_block_review:
+    name: PRODUCT DIRECTOR — BUILD BLOCK
+    needs: [product_director, beta_architect, beta_builder]
+    if: needs.beta_builder.outputs.status == 'BLOCKED' || needs.beta_builder.outputs.status == 'FAILED_BUILD'
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Mount architecture and failed/blocked build
+        shell: bash
+        run: |
+          git fetch origin "$PRODUCT_BRANCH"
+          git switch -C "$PRODUCT_BRANCH" "origin/$PRODUCT_BRANCH"
+          for kind in architect builder; do
+            B="cycle/product/${GITHUB_RUN_ID}/$kind"
+            git fetch origin "$B:refs/remotes/origin/$B"
+            git worktree add --detach "/tmp/spider_beta_$kind" "origin/$B"
+          done
+      - name: Install OpenCode
+        shell: bash
+        run: curl --retry 3 --retry-all-errors --retry-delay 15 -fsSL https://opencode.ai/install | bash
+      - name: Review build block
+        shell: bash
+        run: |
+          bash .github/scripts/run-opencode-with-retry.sh run --model "$SPIDER_MODEL" --agent product_director \
+            "Review Product Beta ${{ needs.product_director.outputs.beta_id }} build status=${{ needs.beta_builder.outputs.status }}. Architect=/tmp/spider_beta_architect, Builder=/tmp/spider_beta_builder. Your formal job description is binding. Decide rearchitecture/watch/reject without pretending the beta was benchmarked."
+      - name: Advance Product branch
+        shell: bash
+        run: |
+          git config user.name "spider-product-director"
+          git config user.email "spider-product-director@autonomous.local"
+          git add -A
+          git commit -m "Product build block review ${GITHUB_RUN_ID}" || true
+          git push origin "HEAD:refs/heads/$PRODUCT_BRANCH"
+
   beta_auditor:
     name: BETA TESTER / AUDITOR
     needs: [product_director, beta_architect, beta_builder]
-    if: needs.beta_builder.result == 'success'
+    if: needs.beta_builder.outputs.status == 'READY_FOR_TEST'
     runs-on: ubuntu-latest
     timeout-minutes: 300
     outputs:
@@ -205,6 +321,7 @@ jobs:
         run: |
           git fetch origin "$PRODUCT_BRANCH"
           git switch -C beta-audit-base "origin/$PRODUCT_BRANCH"
+          rm -f state/product_beta_audit.json
           for kind in architect builder; do
             B="cycle/product/${GITHUB_RUN_ID}/$kind"
             git fetch origin "$B:refs/remotes/origin/$B"
