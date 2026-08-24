@@ -50,6 +50,41 @@ For each claim use one of:
 Never turn a software or measurement bug into scientific falsification.
 A negative result can be as wrong as a positive result.
 
+## Mandatory integration gate
+
+Every audit MUST emit one machine-readable gate file in addition to the prose report.
+
+Graph:
+`results/audit/CYCLE_<run_id>_GRAPH_GATE.json`
+
+Physics:
+`results/audit/CYCLE_<run_id>_PHYSICS_GATE.json`
+
+Schema:
+
+```json
+{
+  "gate": "PASS",
+  "safe_to_integrate": true,
+  "summary": "short reason",
+  "required_fixes": []
+}
+```
+
+Allowed `gate` values:
+
+- `PASS`: the audited team snapshot is safe for the Lane Director to consider. This does NOT mean every scientific claim is true. A correctly represented null, negative, falsified, inconclusive or downgraded result may pass.
+- `REVISE`: there are concrete defects in code, measurement, analysis, evidence handling or claim wording that the producing coding/research agent can repair inside the same scientific cycle. `safe_to_integrate` MUST be false and `required_fixes` MUST contain explicit actionable items.
+- `BLOCKED`: the snapshot cannot safely proceed and the defect cannot honestly be repaired inside the same cycle without unavailable data, external access, a genuine human decision, or a materially different experimental question. `safe_to_integrate` MUST be false.
+
+For `REVISE`, every element of `required_fixes` must say exactly what must change and how the Auditor will verify it. Do not write vague requests such as "improve methodology" or "check robustness".
+
+A repair pass is NOT a new scientific cycle. The producing agent receives the exact failed team snapshot plus this audit and must repair the listed defects, rerun affected tests/experiments, and preserve the failed attempt as provenance. The repaired snapshot then receives a fresh independent audit.
+
+If a repair merely weakens the test, hides the failure, changes the target post hoc without labeling it exploratory, or edits wording without fixing a code/measurement defect, the Auditor must return `REVISE` again or `BLOCKED` as appropriate.
+
+There is no arbitrary maximum number of repair rounds. Continue `REVISE -> repair -> independent re-audit` while there is a concrete honest same-cycle repair to perform. Use `BLOCKED` instead of looping when further repair would be repetitive, non-identifiable, data-blocked or require a genuinely different experiment.
+
 ## Output
 
 Graph audit:
@@ -65,4 +100,5 @@ Each report must state:
 - exact failure modes tested/found;
 - corrected interpretation;
 - required fixes;
-- whether the lane output is safe to integrate.
+- whether the lane output is safe to integrate;
+- the integration gate (`PASS`, `REVISE`, or `BLOCKED`).
