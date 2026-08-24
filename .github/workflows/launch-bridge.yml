@@ -1,0 +1,64 @@
+name: SPIDER Launch Bridge
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.spider/launch/*.json'
+
+permissions:
+  contents: read
+  actions: write
+
+jobs:
+  dispatch:
+    name: Dispatch requested SPIDER lanes
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 2
+
+      - name: Resolve launch request
+        id: request
+        shell: bash
+        run: |
+          FILE=$(git diff-tree --no-commit-id --name-only -r "$GITHUB_SHA" | grep -E '^\.spider/launch/.*\.json$' | tail -1)
+          if [ -z "$FILE" ] || [ ! -f "$FILE" ]; then
+            echo "No launch request found"
+            exit 1
+          fi
+          echo "file=$FILE" >> "$GITHUB_OUTPUT"
+          echo "graph=$(jq -r '.graph // true' "$FILE")" >> "$GITHUB_OUTPUT"
+          echo "physics=$(jq -r '.physics // true' "$FILE")" >> "$GITHUB_OUTPUT"
+          echo "graph_cycles=$(jq -r '.graph_cycles // 3' "$FILE")" >> "$GITHUB_OUTPUT"
+          echo "physics_cycles=$(jq -r '.physics_cycles // 3' "$FILE")" >> "$GITHUB_OUTPUT"
+          NOTE=$(jq -r '.human_note // ""' "$FILE")
+          {
+            echo 'note<<SPIDER_NOTE'
+            echo "$NOTE"
+            echo 'SPIDER_NOTE'
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Launch Graph lane
+        if: steps.request.outputs.graph == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NOTE: ${{ steps.request.outputs.note }}
+          CYCLES: ${{ steps.request.outputs.graph_cycles }}
+        shell: bash
+        run: |
+          gh workflow run graph-loop.yml --repo "$GITHUB_REPOSITORY" --ref main \
+            -f human_note="$NOTE" -f cycle_index=1 -f max_cycles="$CYCLES"
+
+      - name: Launch Physics lane
+        if: steps.request.outputs.physics == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NOTE: ${{ steps.request.outputs.note }}
+          CYCLES: ${{ steps.request.outputs.physics_cycles }}
+        shell: bash
+        run: |
+          gh workflow run physics-loop.yml --repo "$GITHUB_REPOSITORY" --ref main \
+            -f human_note="$NOTE" -f cycle_index=1 -f max_cycles="$CYCLES"
