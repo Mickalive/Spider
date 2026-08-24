@@ -9,6 +9,10 @@ on:
   schedule:
     - cron: "*/5 * * * *"
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/program-supervisor.yml'
 
 permissions:
   actions: write
@@ -125,7 +129,6 @@ jobs:
 
             receipt=".spider/program-receipts/${lane}-${completed_by}.json"
 
-            # A recommendation is considered consumed only when tied to a real successor run.
             if [[ -f "$receipt" ]]; then
               receipt_status=$(jq -r '.receipt_status // "PENDING"' "$receipt")
               successor_id=$(jq -r '.successor_run_id // empty' "$receipt")
@@ -159,8 +162,6 @@ jobs:
               fi
             fi
 
-            # A rerun of the already-completed source program must never become a
-            # permanent concurrency lock. Only cancel it when GitHub reports zero jobs.
             clear_empty_rerun_of_completed_source "$completed_by"
 
             active=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow "$workflow" --limit 30 \
