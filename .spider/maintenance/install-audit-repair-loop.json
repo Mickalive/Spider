@@ -1,5 +1,6 @@
 {
   "install": "audit-repair-loop",
   "semantics": "REVISE returns exact required_fixes to producing agent, then independent re-audit; PASS only reaches director; BLOCKED stops honestly",
-  "requested_at": "2026-08-24T05:46:00+02:00"
+  "requested_at": "2026-08-24T05:46:00+02:00",
+  "trigger_revision": 2
 }
