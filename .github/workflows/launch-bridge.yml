@@ -32,8 +32,8 @@ jobs:
           echo "file=$FILE" >> "$GITHUB_OUTPUT"
           echo "graph=$(jq -r '.graph // true' "$FILE")" >> "$GITHUB_OUTPUT"
           echo "physics=$(jq -r '.physics // true' "$FILE")" >> "$GITHUB_OUTPUT"
-          echo "graph_cycles=$(jq -r '.graph_cycles // 3' "$FILE")" >> "$GITHUB_OUTPUT"
-          echo "physics_cycles=$(jq -r '.physics_cycles // 3' "$FILE")" >> "$GITHUB_OUTPUT"
+          echo "graph_cycles=$(jq -r '.graph_cycles // 0' "$FILE")" >> "$GITHUB_OUTPUT"
+          echo "physics_cycles=$(jq -r '.physics_cycles // 0' "$FILE")" >> "$GITHUB_OUTPUT"
           NOTE=$(jq -r '.human_note // ""' "$FILE")
           {
             echo 'note<<SPIDER_NOTE'
@@ -41,7 +41,7 @@ jobs:
             echo 'SPIDER_NOTE'
           } >> "$GITHUB_OUTPUT"
 
-      - name: Launch Graph lane
+      - name: Launch Graph lane only if idle
         if: steps.request.outputs.graph == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -49,10 +49,15 @@ jobs:
           CYCLES: ${{ steps.request.outputs.graph_cycles }}
         shell: bash
         run: |
+          ACTIVE=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow graph-loop.yml --limit 30 --json status --jq '[.[] | select(.status == "queued" or .status == "in_progress" or .status == "requested" or .status == "waiting" or .status == "pending")] | length')
+          if [ "$ACTIVE" -gt 0 ]; then
+            echo "Graph lane already active or queued; skipping duplicate bridge launch."
+            exit 0
+          fi
           gh workflow run graph-loop.yml --repo "$GITHUB_REPOSITORY" --ref main \
             -f human_note="$NOTE" -f cycle_index=1 -f max_cycles="$CYCLES"
 
-      - name: Launch Physics lane
+      - name: Launch Physics lane only if idle
         if: steps.request.outputs.physics == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -60,5 +65,10 @@ jobs:
           CYCLES: ${{ steps.request.outputs.physics_cycles }}
         shell: bash
         run: |
+          ACTIVE=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow physics-loop.yml --limit 30 --json status --jq '[.[] | select(.status == "queued" or .status == "in_progress" or .status == "requested" or .status == "waiting" or .status == "pending")] | length')
+          if [ "$ACTIVE" -gt 0 ]; then
+            echo "Physics lane already active or queued; skipping duplicate bridge launch."
+            exit 0
+          fi
           gh workflow run physics-loop.yml --repo "$GITHUB_REPOSITORY" --ref main \
             -f human_note="$NOTE" -f cycle_index=1 -f max_cycles="$CYCLES"
