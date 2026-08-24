@@ -30,7 +30,7 @@ jobs:
           ref: main
           fetch-depth: 0
 
-      - name: Launch any unconsumed Director recommendation
+      - name: Launch or reconcile Director-recommended programs
         env:
           GH_TOKEN: ${{ github.token }}
           EVENT_NAME: ${{ github.event_name }}
@@ -41,9 +41,28 @@ jobs:
           set -euo pipefail
           mkdir -p .spider/program-receipts
 
+          commit_receipts_if_needed() {
+            if ! git diff --quiet -- .spider/program-receipts || [[ -n "$(git ls-files --others --exclude-standard .spider/program-receipts)" ]]; then
+              git config user.name "spider-program-supervisor"
+              git config user.email "spider-program-supervisor@autonomous.local"
+              git pull --rebase origin main
+              git add .spider/program-receipts
+              git commit -m "state: reconcile research-program successor receipt"
+              git push origin HEAD:main
+            fi
+          }
+
+          find_successor_after() {
+            local workflow="$1" dispatched_at="$2"
+            gh run list --repo "$GITHUB_REPOSITORY" --workflow "$workflow" --limit 100 \
+              --json databaseId,createdAt,status,conclusion \
+              --jq --arg t "$dispatched_at" '[.[] | select(.createdAt >= $t)] | sort_by(.createdAt) | first // empty' 2>/dev/null || true
+          }
+
           handle_lane() {
             local lane="$1" branch="$2" state_path="$3" workflow="$4" expected_name="$5"
             local raw status cont completed_by launch program_id title question active receipt note
+            local receipt_status successor_id dispatched_at candidate before_ids
 
             if [[ "$EVENT_NAME" == "workflow_run" && "$SOURCE_WORKFLOW" != "$expected_name" ]]; then
               return 0
@@ -77,9 +96,40 @@ jobs:
             fi
 
             receipt=".spider/program-receipts/${lane}-${completed_by}.json"
+
+            # Existing receipts are valid only when a successor run can be
+            # reconciled. A mere dispatch command is never enough evidence.
             if [[ -f "$receipt" ]]; then
-              echo "$lane: recommendation from run $completed_by already consumed."
-              return 0
+              receipt_status=$(jq -r '.receipt_status // "PENDING"' "$receipt")
+              successor_id=$(jq -r '.successor_run_id // empty' "$receipt")
+              dispatched_at=$(jq -r '.dispatched_at // empty' "$receipt")
+
+              if [[ -n "$successor_id" ]]; then
+                if gh run view "$successor_id" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1 \
+                   || gh api "repos/${GITHUB_REPOSITORY}/branches/cycle%2F${lane}%2F${successor_id}%2Fteam" >/dev/null 2>&1; then
+                  if [[ "$receipt_status" != CONFIRMED ]]; then
+                    jq '.receipt_status="CONFIRMED"' "$receipt" > /tmp/receipt.json && mv /tmp/receipt.json "$receipt"
+                  fi
+                  echo "$lane: successor run $successor_id confirmed for program $program_id."
+                  return 0
+                fi
+                echo "::warning::$lane: recorded successor $successor_id no longer exists and left no team branch; clearing stale receipt."
+                rm -f "$receipt"
+              elif [[ -n "$dispatched_at" ]]; then
+                candidate=$(find_successor_after "$workflow" "$dispatched_at")
+                if [[ -n "$candidate" ]]; then
+                  successor_id=$(jq -r '.databaseId' <<<"$candidate")
+                  jq --argjson successor "$successor_id" '.receipt_status="CONFIRMED" | .successor_run_id=$successor' "$receipt" > /tmp/receipt.json
+                  mv /tmp/receipt.json "$receipt"
+                  echo "$lane: reconciled pending receipt to successor run $successor_id."
+                  return 0
+                fi
+                echo "::warning::$lane: pending dispatch produced no successor run; clearing receipt so dispatch can be retried."
+                rm -f "$receipt"
+              else
+                echo "::warning::$lane: legacy unconfirmed receipt cannot prove a successor; clearing it."
+                rm -f "$receipt"
+              fi
             fi
 
             active=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow "$workflow" --limit 30 \
@@ -91,29 +141,49 @@ jobs:
             fi
 
             note="AUTO PROGRAM SUCCESSION from Director run ${completed_by}. Program ${program_id}: ${title}. Question: ${question}. The accepted lane directive is authoritative; do not reinterpret this note as a demand for a positive result."
+            dispatched_at=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+            before_ids=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow "$workflow" --limit 30 --json databaseId --jq '[.[].databaseId]')
+
             gh workflow run "$workflow" --repo "$GITHUB_REPOSITORY" --ref main \
               -f human_note="$note" \
               -f cycle_index=1 \
               -f max_cycles=0
 
-            jq -n \
-              --arg lane "$lane" \
-              --arg completed_by "$completed_by" \
-              --arg program_id "$program_id" \
-              --arg title "$title" \
-              --arg dispatched_at "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
-              '{lane:$lane,completed_program_run_id:$completed_by,next_program_id:$program_id,next_program_title:$title,dispatched_at:$dispatched_at}' > "$receipt"
-            echo "$lane: launched $program_id from completed run $completed_by."
+            # Poll briefly for GitHub to materialize the new workflow run.
+            successor_id=""
+            for _ in $(seq 1 15); do
+              sleep 2
+              candidate=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow "$workflow" --limit 30 \
+                --json databaseId,createdAt,status,conclusion \
+                --jq --argjson before "$before_ids" '[.[] | select((.databaseId as $id | ($before | index($id) | not)))] | sort_by(.createdAt) | first // empty' 2>/dev/null || true)
+              if [[ -n "$candidate" ]]; then
+                successor_id=$(jq -r '.databaseId' <<<"$candidate")
+                break
+              fi
+            done
+
+            if [[ -n "$successor_id" ]]; then
+              jq -n \
+                --arg lane "$lane" \
+                --arg completed_by "$completed_by" \
+                --arg program_id "$program_id" \
+                --arg title "$title" \
+                --arg dispatched_at "$dispatched_at" \
+                --argjson successor_run_id "$successor_id" \
+                '{lane:$lane,completed_program_run_id:$completed_by,next_program_id:$program_id,next_program_title:$title,dispatched_at:$dispatched_at,receipt_status:"CONFIRMED",successor_run_id:$successor_run_id}' > "$receipt"
+              echo "$lane: launched $program_id and confirmed successor run $successor_id."
+            else
+              jq -n \
+                --arg lane "$lane" \
+                --arg completed_by "$completed_by" \
+                --arg program_id "$program_id" \
+                --arg title "$title" \
+                --arg dispatched_at "$dispatched_at" \
+                '{lane:$lane,completed_program_run_id:$completed_by,next_program_id:$program_id,next_program_title:$title,dispatched_at:$dispatched_at,receipt_status:"PENDING",successor_run_id:null}' > "$receipt"
+              echo "::warning::$lane: dispatch command returned but no successor run was visible yet; stored PENDING receipt for reconciliation, not consumption."
+            fi
           }
 
           handle_lane graph lab/graph state/graph_loop.json graph-loop.yml "SPIDER Graph Lane"
           handle_lane physics lab/physics state/physics_loop.json physics-loop.yml "SPIDER Physics Lane"
-
-          if ! git diff --quiet -- .spider/program-receipts || [[ -n "$(git ls-files --others --exclude-standard .spider/program-receipts)" ]]; then
-            git config user.name "spider-program-supervisor"
-            git config user.email "spider-program-supervisor@autonomous.local"
-            git pull --rebase origin main
-            git add .spider/program-receipts
-            git commit -m "state: record consumed research-program recommendation"
-            git push origin HEAD:main
-          fi
+          commit_receipts_if_needed
