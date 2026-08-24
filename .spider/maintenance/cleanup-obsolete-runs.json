@@ -1,0 +1,5 @@
+{
+  "reason": "remove obsolete workflow runs while preserving active work and current scientific provenance",
+  "protect": [32689296167,32689298051],
+  "policy": "keep active + latest two Graph/Physics + latest Meta; delete older completed maintenance/legacy/current-workflow history"
+}
