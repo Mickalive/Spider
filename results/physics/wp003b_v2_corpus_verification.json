@@ -1,0 +1,25 @@
+{
+  "corpus_file": "/tmp/opencode/spider_data/wp003b_v2_transitions.jsonl",
+  "corpus_sha256": "0646d3326778032da8b49562c8f19dbef03841ec8fb5fe0992aef911e8d7270f",
+  "rows": 548,
+  "trajectories": 80,
+  "per_site": {
+    "books": 90,
+    "quotes": 90,
+    "internet": 110,
+    "wikipedia": 90,
+    "hackernews": 63,
+    "gutenberg": 105
+  },
+  "missing_raw_snapshots": 0,
+  "digest_mismatch_pre": 0,
+  "digest_mismatch_post": 0,
+  "derived_feature_mismatch_pre": 0,
+  "derived_feature_mismatch_post": 0,
+  "counts_mismatch_pre": 0,
+  "counts_mismatch_post": 0,
+  "chain_violation_trajectories": 0,
+  "chain_violation_examples": [],
+  "examples": [],
+  "verdict": "PASS"
+}

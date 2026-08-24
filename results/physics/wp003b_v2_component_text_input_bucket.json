@@ -1,0 +1,252 @@
+{
+  "analysis": "wp003b_v2_component_text_input_bucket",
+  "input_file": "/tmp/opencode/spider_data/wp003b_v2_transitions.jsonl",
+  "input_sha256": "0646d3326778032da8b49562c8f19dbef03841ec8fb5fe0992aef911e8d7270f",
+  "git_commit_at_analysis": "81c46a6318623509f53ca2679bfa5790eb14e9db",
+  "dataset_stats": {
+    "total_lines": 548,
+    "excluded_first_action_failed": 44,
+    "usable": 504,
+    "n_trajectories": 80
+  },
+  "target_classes": [
+    "ib0",
+    "ib1",
+    "ib2"
+  ],
+  "folds": {
+    "books": {
+      "n_test": 90,
+      "n_train": 414,
+      "n_trajectories": 6,
+      "M_model": 0.8444,
+      "N0_majority": 1.0,
+      "N3_action_cond": 1.0,
+      "N5_cellfreq": 0.6667,
+      "N4_nearest_neighbor": 0.5556,
+      "best_null_name": "N0_majority",
+      "best_null": 1.0,
+      "d_effect": -0.1556,
+      "test_class_counts": {
+        "ib0": 90
+      },
+      "per_class": {
+        "ib0": {
+          "support": 90,
+          "recall_M": 0.8444,
+          "N0_majority": 1.0,
+          "N3_action_cond": 1.0,
+          "N5_cellfreq": 0.6667,
+          "N4_nearest_neighbor": 0.5556
+        }
+      }
+    },
+    "gutenberg": {
+      "n_test": 104,
+      "n_train": 400,
+      "n_trajectories": 14,
+      "M_model": 0.3835,
+      "N0_majority": 0.3333,
+      "N3_action_cond": 0.3921,
+      "N5_cellfreq": 0.3921,
+      "N4_nearest_neighbor": 0.3814,
+      "best_null_name": "N3_action_cond",
+      "best_null": 0.3921,
+      "d_effect": -0.0086,
+      "test_class_counts": {
+        "ib0": 5,
+        "ib1": 93,
+        "ib2": 6
+      },
+      "per_class": {
+        "ib0": {
+          "support": 5,
+          "recall_M": 1.0,
+          "N0_majority": 1.0,
+          "N3_action_cond": 0.8,
+          "N5_cellfreq": 0.8,
+          "N4_nearest_neighbor": 0.8
+        },
+        "ib1": {
+          "support": 93,
+          "recall_M": 0.1505,
+          "N0_majority": 0.0,
+          "N3_action_cond": 0.3763,
+          "N5_cellfreq": 0.3763,
+          "N4_nearest_neighbor": 0.3441
+        },
+        "ib2": {
+          "support": 6,
+          "recall_M": 0.0,
+          "N0_majority": 0.0,
+          "N3_action_cond": 0.0,
+          "N5_cellfreq": 0.0,
+          "N4_nearest_neighbor": 0.0
+        }
+      }
+    },
+    "hackernews": {
+      "n_test": 63,
+      "n_train": 441,
+      "n_trajectories": 30,
+      "M_model": 0.5,
+      "N0_majority": 0.5,
+      "N3_action_cond": 0.8479,
+      "N5_cellfreq": 0.8479,
+      "N4_nearest_neighbor": 0.5537,
+      "best_null_name": "N3_action_cond",
+      "best_null": 0.8479,
+      "d_effect": -0.3479,
+      "test_class_counts": {
+        "ib0": 25,
+        "ib1": 38
+      },
+      "per_class": {
+        "ib0": {
+          "support": 25,
+          "recall_M": 0.0,
+          "N0_majority": 1.0,
+          "N3_action_cond": 0.88,
+          "N5_cellfreq": 0.88,
+          "N4_nearest_neighbor": 0.16
+        },
+        "ib1": {
+          "support": 38,
+          "recall_M": 1.0,
+          "N0_majority": 0.0,
+          "N3_action_cond": 0.8158,
+          "N5_cellfreq": 0.8158,
+          "N4_nearest_neighbor": 0.9474
+        }
+      }
+    },
+    "internet": {
+      "n_test": 82,
+      "n_train": 422,
+      "n_trajectories": 18,
+      "M_model": 0.4875,
+      "N0_majority": 0.5,
+      "N3_action_cond": 0.5,
+      "N5_cellfreq": 0.3563,
+      "N4_nearest_neighbor": 0.4625,
+      "best_null_name": "N0_majority",
+      "best_null": 0.5,
+      "d_effect": -0.0125,
+      "test_class_counts": {
+        "ib0": 80,
+        "ib1": 2
+      },
+      "per_class": {
+        "ib0": {
+          "support": 80,
+          "recall_M": 0.975,
+          "N0_majority": 1.0,
+          "N3_action_cond": 1.0,
+          "N5_cellfreq": 0.7125,
+          "N4_nearest_neighbor": 0.925
+        },
+        "ib1": {
+          "support": 2,
+          "recall_M": 0.0,
+          "N0_majority": 0.0,
+          "N3_action_cond": 0.0,
+          "N5_cellfreq": 0.0,
+          "N4_nearest_neighbor": 0.0
+        }
+      }
+    },
+    "quotes": {
+      "n_test": 90,
+      "n_train": 414,
+      "n_trajectories": 6,
+      "M_model": 0.5714,
+      "N0_majority": 0.5,
+      "N3_action_cond": 0.5534,
+      "N5_cellfreq": 0.5232,
+      "N4_nearest_neighbor": 0.5,
+      "best_null_name": "N3_action_cond",
+      "best_null": 0.5534,
+      "d_effect": 0.0181,
+      "test_class_counts": {
+        "ib0": 83,
+        "ib1": 7
+      },
+      "per_class": {
+        "ib0": {
+          "support": 83,
+          "recall_M": 1.0,
+          "N0_majority": 1.0,
+          "N3_action_cond": 0.9639,
+          "N5_cellfreq": 0.9036,
+          "N4_nearest_neighbor": 1.0
+        },
+        "ib1": {
+          "support": 7,
+          "recall_M": 0.1429,
+          "N0_majority": 0.0,
+          "N3_action_cond": 0.1429,
+          "N5_cellfreq": 0.1429,
+          "N4_nearest_neighbor": 0.0
+        }
+      }
+    },
+    "wikipedia": {
+      "n_test": 75,
+      "n_train": 429,
+      "n_trajectories": 6,
+      "M_model": 0.5599,
+      "N0_majority": 0.5,
+      "N3_action_cond": 0.875,
+      "N5_cellfreq": 0.8169,
+      "N4_nearest_neighbor": 0.868,
+      "best_null_name": "N3_action_cond",
+      "best_null": 0.875,
+      "d_effect": -0.3151,
+      "test_class_counts": {
+        "ib0": 71,
+        "ib1": 4
+      },
+      "per_class": {
+        "ib0": {
+          "support": 71,
+          "recall_M": 0.6197,
+          "N0_majority": 1.0,
+          "N3_action_cond": 1.0,
+          "N5_cellfreq": 0.6338,
+          "N4_nearest_neighbor": 0.9859
+        },
+        "ib1": {
+          "support": 4,
+          "recall_M": 0.5,
+          "N0_majority": 0.0,
+          "N3_action_cond": 0.75,
+          "N5_cellfreq": 1.0,
+          "N4_nearest_neighbor": 0.75
+        }
+      }
+    }
+  },
+  "bootstrap": {
+    "method": "trajectory-grouped within site, paired diff vs max null",
+    "n_boot": 0,
+    "seed": 20260824,
+    "ci95_mean_effect": null
+  },
+  "decision": {
+    "adequate_folds": [
+      "books",
+      "gutenberg",
+      "hackernews",
+      "internet",
+      "quotes",
+      "wikipedia"
+    ],
+    "S": 6,
+    "usable_in_adequate": 504,
+    "wins": "1/6",
+    "mean_d_adequate": -0.1369,
+    "verdict": "NOT_EVALUATED_NO_BOOTSTRAP"
+  },
+  "verdict_rule": "DATA_INSUFFICIENT if <5 adequate folds or <400 usable; SURVIVES_CURRENT_TEST iff CI.lower>0 and wins>=ceil(S/2); FALSIFIED iff CI.upper<0; else INCONCLUSIVE",
+  "preregistration": "reports/physics/wp003b_v2_preregistration.md"
+}

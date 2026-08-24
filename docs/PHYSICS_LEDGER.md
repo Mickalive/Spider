@@ -1,5 +1,51 @@
 # PHYSICS LEDGER
 
+## WP-003B-v2 (cycle 32670239235, 2026-08-23) — Action-conditioned next-state
+### structure under true website holdout
+
+- **Preregistration**: `reports/physics/wp003b_v2_preregistration.md`, frozen at
+  commit `81c46a6` BEFORE collection/analysis; analysis code + measurement
+  validity tests committed in the same freeze.
+- **Corpus**: `wp003b_v2_transitions.jsonl` (548 raw → 504 usable rows, 80
+  trajectories, 6 live sites; sha256 `0646d3…270f`). Manifest with seed
+  batches and deviations D1–D4: `data/manifests/wp003b_v2_dataset_manifest.json`.
+- **Integrity**: raw-snapshot recompute of every row PASS; trajectory chaining
+  exact; seeds process-stable under randomized PYTHONHASHSEED; protocol
+  sensitivity verified on synthetic corpora pre-freeze; byte-identical reruns;
+  independent out-of-pipeline reproduction of the strongest fold.
+- **Target**: a-priori next-state signature `(link_bucket′, form_present′)`;
+  predictors: 13 mechanics-only state buckets + imposed-action descriptor;
+  holdout = leave-one-site-out; uncertainty = trajectory-grouped bootstrap.
+
+### Verdicts (narrow, per §20)
+
+| Claim | Status |
+|---|---|
+| Additive mechanics model beats strong nulls cross-site | **INCONCLUSIVE** (Δ=−0.037, CI95 [−0.085,+0.035], wins 2/6) — no additive transfer established |
+| Same claim under alternate representation thresholds | FALSIFIED for that arm (Δ=−0.124, CI upper <0) |
+| Conjunctive action×state model (exploratory S-E) | SURVIVES_CURRENT_TEST **as exploratory only** (Δ=+0.168, CI95 [+0.112,+0.227]) |
+| E-1 permuted-action control on the S-E arm | effect collapses to Δ=−0.046 → survival depends on real action-conditioning |
+| WP-004 committor identifiability gate | FAILED (G1=29<50, G2=11<20) → **WP-004 remains BLOCKED**; DATA_INSUFFICIENT |
+
+### Interpretation limits
+
+- The conjunctive result is ONE preregistered exploratory arm; it cannot and
+  does not overturn the INCONCLUSIVE primary. It is POC-level evidence until
+  replicated under a NEW preregistration (interactions as primary) on fresh
+  multi-site data with a permuted-action control included by design.
+- Site heterogeneity (wikipedia/hackernews drive positive folds;
+  books/quotes negative) means any "transfer" is partial, not universal.
+- No universality claim of any kind is licensed by this cycle (§23).
+
+### Next discriminating test
+
+New preregistration + new collection (≥8 sites): interaction-augmented linear
+softmax as PRIMARY model, same target family, within-site permuted-action
+control built into the design, site holdout, trajectory-grouped bootstrap.
+Question: does imposed-action identity carry transferable information about
+environment response? This is now the sharpest candidate for mechanical Web
+physics beyond memory/similarity.
+
 ## WP-003 (2026-08-23) — Website-holdout transition structure
 
 - **Original hypothesis**: mechanics-only state features Z transfer across

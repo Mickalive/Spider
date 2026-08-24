@@ -5,7 +5,8 @@ import os
 SITES = os.environ.get("SITES", "books,quotes,internet,wikipedia,hackernews,openlibrary").split(",")
 RESUME = os.environ.get("RESUME") == "1"
 OUTDIR = "/tmp/opencode/spider_data"
-OUT = os.path.join(OUTDIR, "wp003_transitions.jsonl")
+OUTNAME = os.environ.get("OUTNAME", "wp003_transitions.jsonl")
+OUT = os.path.join(OUTDIR, OUTNAME)
 LOG = "/tmp/opencode/spider_data/collector_sites.log"
 PER_SITE_CAP_S = 420
 SEED = 20260823
@@ -32,10 +33,11 @@ for site in SITES:
     print(site, status[site], flush=True)
 
 from collections import Counter
+STEM = OUTNAME.replace(".jsonl", "")
 c = Counter()
 with open(OUT, "w") as merged:
     for s_ in SITES:
-        p_ = os.path.join(OUTDIR, f"wp003_{s_}.jsonl")
+        p_ = os.path.join(OUTDIR, f"{STEM}_{s_}.jsonl")
         try:
             for line in open(p_):
                 line = line.strip()

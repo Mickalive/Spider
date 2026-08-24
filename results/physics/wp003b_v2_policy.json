@@ -1,0 +1,51 @@
+{
+  "analysis": "wp003b_v2_policy_marginals",
+  "note": "documented input distribution of the crawler policy (\u00a716 separation)",
+  "per_site_first_action_counts": {
+    "books": {
+      "click_button": 41,
+      "click_link": 49
+    },
+    "gutenberg": {
+      "fill_text": 37,
+      "click_button": 36,
+      "click_link": 29,
+      "select_option": 2
+    },
+    "hackernews": {
+      "click_link": 28,
+      "click_button": 1,
+      "fill_text": 34
+    },
+    "internet": {
+      "click_link": 45,
+      "check_box": 14,
+      "click_button": 23
+    },
+    "quotes": {
+      "click_link": 84,
+      "fill_text": 4,
+      "fill_password": 1,
+      "click_button": 1
+    },
+    "wikipedia": {
+      "check_box": 31,
+      "click_button": 27,
+      "fill_text": 3,
+      "click_link": 14
+    }
+  },
+  "overall": {
+    "click_button": 129,
+    "click_link": 249,
+    "fill_text": 78,
+    "fill_password": 1,
+    "check_box": 45,
+    "select_option": 2
+  },
+  "chain_length_distribution": {
+    "1": 473,
+    "2": 31
+  },
+  "git_commit_at_analysis": "81c46a6318623509f53ca2679bfa5790eb14e9db"
+}

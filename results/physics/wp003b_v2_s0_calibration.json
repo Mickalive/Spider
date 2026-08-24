@@ -1,0 +1,58 @@
+{
+  "analysis": "wp003b_v2_s0_permutation_calibration",
+  "note": "descriptive calibration; NOT part of the decision rule",
+  "n_perm": 500,
+  "seed": 20260825,
+  "input_sha256": "0646d3326778032da8b49562c8f19dbef03841ec8fb5fe0992aef911e8d7270f",
+  "git_commit_at_analysis": "81c46a6318623509f53ca2679bfa5790eb14e9db",
+  "folds": {
+    "books": {
+      "M_mean_chance": 0.2502,
+      "M_p95_chance": 0.4731,
+      "bestnull_mean_chance": 0.339,
+      "bestnull_p95_chance": 0.4783,
+      "observed_M": 0.2923,
+      "observed_best_null": 0.3548
+    },
+    "gutenberg": {
+      "M_mean_chance": 0.3368,
+      "M_p95_chance": 0.4695,
+      "bestnull_mean_chance": 0.4019,
+      "bestnull_p95_chance": 0.5048,
+      "observed_M": 0.1695,
+      "observed_best_null": 0.5095
+    },
+    "hackernews": {
+      "M_mean_chance": 0.2632,
+      "M_p95_chance": 0.3389,
+      "bestnull_mean_chance": 0.2887,
+      "bestnull_p95_chance": 0.3289,
+      "observed_M": 0.4463,
+      "observed_best_null": 0.4211
+    },
+    "internet": {
+      "M_mean_chance": 0.1354,
+      "M_p95_chance": 0.2,
+      "bestnull_mean_chance": 0.1622,
+      "bestnull_p95_chance": 0.2298,
+      "observed_M": 0.3333,
+      "observed_best_null": 0.3333
+    },
+    "quotes": {
+      "M_mean_chance": 0.1723,
+      "M_p95_chance": 0.2404,
+      "bestnull_mean_chance": 0.1586,
+      "bestnull_p95_chance": 0.2115,
+      "observed_M": 0.1058,
+      "observed_best_null": 0.1538
+    },
+    "wikipedia": {
+      "M_mean_chance": 0.4861,
+      "M_p95_chance": 0.5725,
+      "bestnull_mean_chance": 0.5,
+      "bestnull_p95_chance": 0.5,
+      "observed_M": 0.7045,
+      "observed_best_null": 0.5
+    }
+  }
+}

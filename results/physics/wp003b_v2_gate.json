@@ -1,0 +1,190 @@
+{
+  "analysis": "wp003b_v2_wp004_identifiability_gate",
+  "gate_definition": "state key=(site,url_shape,tuple(Z)); independent visit=distinct trajectory or same trajectory >=2 steps apart",
+  "pass_rule": "G1(#keys with >=3 indep visits) >= 50 AND G2(#those with >=2 actions and >=2 outcomes) >= 20",
+  "G1_state_groups_with_ge3_independent_visits": 29,
+  "G2_of_those_with_ge2_actions_and_ge2_outcomes": 11,
+  "state_keys_total": 37,
+  "gate_passed": false,
+  "consequence": "WP-004 remains BLOCKED; verdict DATA_INSUFFICIENT for committor feasibility on this corpus",
+  "examples": [
+    {
+      "key": [
+        "books",
+        "books.toscrape.com/#/#"
+      ],
+      "visits": 20,
+      "actions": [
+        "click_button",
+        "click_link"
+      ],
+      "outcomes": [
+        "lb0.f0",
+        "lb1.f1",
+        "lb2.f1"
+      ]
+    },
+    {
+      "key": [
+        "books",
+        "books.toscrape.com/#/#"
+      ],
+      "visits": 26,
+      "actions": [
+        "click_button",
+        "click_link"
+      ],
+      "outcomes": [
+        "lb1.f1",
+        "lb2.f1"
+      ]
+    },
+    {
+      "key": [
+        "books",
+        "books.toscrape.com/#/#"
+      ],
+      "visits": 30,
+      "actions": [
+        "click_button",
+        "click_link"
+      ],
+      "outcomes": [
+        "lb0.f1",
+        "lb1.f1",
+        "lb2.f1"
+      ]
+    },
+    {
+      "key": [
+        "quotes",
+        "quotes.toscrape.com/#/#"
+      ],
+      "visits": 6,
+      "actions": [
+        "click_button",
+        "fill_password",
+        "fill_text"
+      ],
+      "outcomes": [
+        "lb0.f1",
+        "lb2.f0"
+      ]
+    },
+    {
+      "key": [
+        "wikipedia",
+        "en.wikipedia.org/#/*/*"
+      ],
+      "visits": 30,
+      "actions": [
+        "check_box",
+        "click_button",
+        "click_link"
+      ],
+      "outcomes": [
+        "lb1.f1",
+        "lb2.f1"
+      ]
+    },
+    {
+      "key": [
+        "wikipedia",
+        "en.wikipedia.org/#/*/*"
+      ],
+      "visits": 10,
+      "actions": [
+        "check_box",
+        "click_button",
+        "click_link"
+      ],
+      "outcomes": [
+        "lb1.f1",
+        "lb2.f1"
+      ]
+    },
+    {
+      "key": [
+        "hackernews",
+        "news.ycombinator.com/#/#"
+      ],
+      "visits": 57,
+      "actions": [
+        "click_link",
+        "fill_text"
+      ],
+      "outcomes": [
+        "lb0.f0",
+        "lb2.f1"
+      ]
+    },
+    {
+      "key": [
+        "hackernews",
+        "news.ycombinator.com/#/#"
+      ],
+      "visits": 6,
+      "actions": [
+        "click_button",
+        "click_link",
+        "fill_text"
+      ],
+      "outcomes": [
+        "lb0.f0",
+        "lb2.f1"
+      ]
+    },
+    {
+      "key": [
+        "gutenberg",
+        "www.gutenberg.org/#/*/*/#"
+      ],
+      "visits": 26,
+      "actions": [
+        "click_button",
+        "click_link",
+        "fill_text"
+      ],
+      "outcomes": [
+        "lb0.f0",
+        "lb1.f1",
+        "lb2.f1"
+      ]
+    },
+    {
+      "key": [
+        "gutenberg",
+        "www.gutenberg.org/#/*/*/#"
+      ],
+      "visits": 57,
+      "actions": [
+        "click_button",
+        "click_link",
+        "fill_text"
+      ],
+      "outcomes": [
+        "lb0.f0",
+        "lb1.f1",
+        "lb2.f1"
+      ]
+    },
+    {
+      "key": [
+        "gutenberg",
+        "www.gutenberg.org/#/*/*/#"
+      ],
+      "visits": 10,
+      "actions": [
+        "click_button",
+        "click_link",
+        "fill_text"
+      ],
+      "outcomes": [
+        "lb0.f0",
+        "lb1.f1",
+        "lb2.f1"
+      ]
+    }
+  ],
+  "git_commit_at_analysis": "81c46a6318623509f53ca2679bfa5790eb14e9db"
+}
