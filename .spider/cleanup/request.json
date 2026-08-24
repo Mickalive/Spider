@@ -1,0 +1,5 @@
+{
+  "mode": "delete-completed-obsolete-runs",
+  "preserve_active_legacy": true,
+  "preserve_workflows": ["SPIDER Graph Lane", "SPIDER Physics Lane", "SPIDER Meta Sync", "SPIDER Launcher — Graph + Physics"]
+}
