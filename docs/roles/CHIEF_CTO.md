@@ -87,6 +87,22 @@ Chaque charter doit contenir au minimum :
 - `handoff_targets` ;
 - `priority` (`CRITICAL|HIGH|MEDIUM|LOW`).
 
+### Contrat machine obligatoire
+
+Les charters sont consommés directement par `cto-council.yml`. Leur type JSON est donc contractuel, pas stylistique :
+
+- `team_id`, `domain`, `mission`, `question`, `why_now`, `why_not_existing_lane` et `expected_work_compression_leverage` sont des **strings non vides** ;
+- `team_id` doit matcher `^[a-z0-9][a-z0-9-]{1,62}$` ;
+- `charter_version` est un **entier JSON >= 1**, jamais la string `"1"` ;
+- `status` est exactement l'une des cinq strings `CREATE`, `CONTINUE`, `PAUSE`, `TERMINATE`, `MERGE` ;
+- `evidence_inputs`, `validity_threats`, `required_artifacts` et `handoff_targets` sont toujours des **arrays JSON**, même lorsqu'ils ne contiennent qu'un élément ;
+- `strongest_null_or_baseline` et `stop_condition` doivent être présents et non `null` ;
+- `priority` est exactement `CRITICAL`, `HIGH`, `MEDIUM` ou `LOW` ;
+- pour un charter Physics actif (`CREATE|CONTINUE`), `domain` doit contenir explicitement le mot `Physics` afin que la couverture constitutionnelle soit vérifiable mécaniquement ;
+- deux objets ne peuvent jamais partager le même couple `(team_id, charter_version)`.
+
+Avant de terminer une revue CTO, le Chief CTO DOIT relire `state/cto_direction.json` avec un validateur local et corriger son propre output tant que **chaque charter** ne respecte pas ce contrat. Une simple vérification de présence des clés ne suffit pas : les types JSON doivent être contrôlés. Le CTO ne doit jamais déclarer sa revue terminée si ses charters ne passent pas ce contrat machine.
+
 Les charters doivent être réellement distincts. Plusieurs équipes ne doivent pas simplement tester la même hypothèse sur le même instrument avec des formulations différentes.
 
 Quand un charter est motivé par Run Evidence Memory, `evidence_inputs` doit contenir le run id ET le statut épistémique du finding, avec une phrase explicite indiquant qu'il s'agit d'une piste à valider.
