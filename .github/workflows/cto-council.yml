@@ -18,6 +18,7 @@ on:
     paths:
       - '.github/workflows/cto-council.yml'
       - '.github/workflows/frontier-research.yml'
+      - '.github/scripts/validate-cto-frontier-charters.py'
       - 'SPIDER_ARCHITECTURE_V2.md'
       - 'SPIDER_ARCHITECTURE_V3.md'
       - 'directives/CAPABILITY_CAPSULE.md'
@@ -104,7 +105,7 @@ jobs:
           bash .github/scripts/run-opencode-with-retry.sh run \
             --model "$SPIDER_MODEL" \
             --agent chief_cto \
-            "Run a GLOBAL SPIDER CTO portfolio review. Accepted core snapshots only: Graph=/tmp/spider_graph, Physics=/tmp/spider_physics, Intel=/tmp/spider_intel, Product=/tmp/spider_product, Runtime=/tmp/spider_runtime. Accepted Frontier teams=/tmp/spider_frontier with INDEX.tsv. ALSO inspect evidence/run-memory/CTO_FEED.json and INDEX.md when present: this is distilled Actions-log memory and is a research/operations RADAR only. Preserve every finding's evidence_status; LOG_ONLY_UNAUDITED/DURABLE_UNAUDITED/OPERATIONAL_DIAGNOSTIC may justify a validation experiment, repair, Intel request or Frontier charter, never an accepted scientific claim. Use cto_* subagents in fresh contexts. Preserve all scientific verdicts. Identify uncovered high-upside domains, forgotten run-level clues, recurring cross-team failure signatures and duplicated work. Physics WP-006 may remain falsified while genuinely orthogonal Physics questions continue. You have authority under Architecture V3 to charter multiple independent Frontier teams. Write complete CREATE/CONTINUE/PAUSE/TERMINATE/MERGE charters with monotonic charter_version when justified. For a Physics-domain Frontier team, make the `domain` field explicitly contain the word Physics so mechanical portfolio coverage can be checked. No artificial token-cost cap; optimize independent search coverage, information gain and work-compression leverage. Write all required CTO state and handoffs."
+            "Run a GLOBAL SPIDER CTO portfolio review. Accepted core snapshots only: Graph=/tmp/spider_graph, Physics=/tmp/spider_physics, Intel=/tmp/spider_intel, Product=/tmp/spider_product, Runtime=/tmp/spider_runtime. Accepted Frontier teams=/tmp/spider_frontier with INDEX.tsv. ALSO inspect evidence/run-memory/CTO_FEED.json and INDEX.md when present: this is distilled Actions-log memory and is a research/operations RADAR only. Preserve every finding's evidence_status; LOG_ONLY_UNAUDITED/DURABLE_UNAUDITED/OPERATIONAL_DIAGNOSTIC may justify a validation experiment, repair, Intel request or Frontier charter, never an accepted scientific claim. Use cto_* subagents in fresh contexts. Preserve all scientific verdicts. Identify uncovered high-upside domains, forgotten run-level clues, recurring cross-team failure signatures and duplicated work. Physics WP-006 may remain falsified while genuinely orthogonal Physics questions continue. You have authority under Architecture V3 to charter multiple independent Frontier teams. Write complete CREATE/CONTINUE/PAUSE/TERMINATE/MERGE charters with monotonic charter_version when justified. For a Physics-domain Frontier team, make the `domain` field explicitly contain the word Physics so mechanical portfolio coverage can be checked. Obey the exact JSON machine contract in docs/roles/CHIEF_CTO.md and validate field TYPES as well as key presence before finishing. No artificial token-cost cap; optimize independent search coverage, information gain and work-compression leverage. Write all required CTO state and handoffs."
 
       - name: Enforce CTO-only writes
         shell: bash
@@ -121,49 +122,9 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test -f state/cto_direction.json || { echo "::error::Missing state/cto_direction.json"; exit 1; }
-          for key in top_system_bottleneck highest_upside_program kill_or_deprioritize cross_lane_incompatibilities runtime_missing_primitives baseline_gaps recommended_allocations evidence_refs research_portfolio; do
-            jq -e --arg k "$key" 'has($k)' state/cto_direction.json >/dev/null || { echo "::error::CTO state missing $key"; exit 1; }
-          done
-          for key in portfolio_thesis uncovered_bottlenecks frontier_team_charters merge_or_kill_actions cross_team_dependencies; do
-            jq -e --arg k "$key" '.research_portfolio | has($k)' state/cto_direction.json >/dev/null || { echo "::error::research_portfolio missing $key"; exit 1; }
-          done
-          jq -e '
-            .research_portfolio.frontier_team_charters | type=="array" and
-            all(.[];
-              (.team_id|type=="string" and test("^[a-z0-9][a-z0-9-]{1,62}$")) and
-              (.charter_version|type=="number" and .>=1 and floor==.) and
-              (.status|IN("CREATE","CONTINUE","PAUSE","TERMINATE","MERGE")) and
-              (.domain|type=="string" and length>0) and
-              (.mission|type=="string" and length>0) and
-              (.question|type=="string" and length>0) and
-              (.why_now|type=="string" and length>0) and
-              (.why_not_existing_lane|type=="string" and length>0) and
-              (.expected_work_compression_leverage|type=="string" and length>0) and
-              (.evidence_inputs|type=="array") and
-              (.strongest_null_or_baseline != null) and
-              (.validity_threats|type=="array") and
-              (.required_artifacts|type=="array") and
-              (.stop_condition != null) and
-              (.handoff_targets|type=="array") and
-              (.priority|IN("CRITICAL","HIGH","MEDIUM","LOW"))
-            )' state/cto_direction.json >/dev/null || { echo "::error::Invalid Frontier charter schema"; exit 1; }
-
-          # Exact duplicate tuple detection. The previous expression compared
-          # the length of a unique list to itself and therefore could never fire.
-          DUP=$(jq '[.research_portfolio.frontier_team_charters | group_by([.team_id,.charter_version])[] | select(length>1)] | length' state/cto_direction.json)
-          [[ "$DUP" == 0 ]] || { echo "::error::Duplicate team_id+charter_version tuple"; exit 1; }
-
-          # Architecture V3 + accepted Physics handoff require at least one
-          # executable Physics-domain research charter while the core Physics
-          # lane is DORMANT. This validates portfolio coverage only. Orthogonality
-          # is governed by the charter/role constraints; mentioning WP-006 as a
-          # CLOSED negative result is valid and must not itself fail validation.
-          if [[ -f /tmp/spider_physics/state/physics_loop.json ]] && \
-             [[ "$(jq -r '.frontier_handoff.required // false' /tmp/spider_physics/state/physics_loop.json)" == true ]]; then
-            PHYSICS_ACTIVE=$(jq '[.research_portfolio.frontier_team_charters[] | select((.status=="CREATE" or .status=="CONTINUE") and (.domain|ascii_downcase|contains("physics")))] | length' state/cto_direction.json)
-            [[ "$PHYSICS_ACTIVE" -ge 1 ]] || { echo "::error::Physics frontier handoff requires at least one active charter whose domain explicitly identifies Physics"; exit 1; }
-          fi
+          python3 .github/scripts/validate-cto-frontier-charters.py \
+            state/cto_direction.json \
+            /tmp/spider_physics/state/physics_loop.json
 
           test -f docs/CTO_LEDGER.md || { echo "::error::Missing CTO ledger"; exit 1; }
           for lane in GRAPH PHYSICS INTEL PRODUCT RUNTIME FRONTIER; do
