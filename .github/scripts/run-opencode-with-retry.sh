@@ -17,7 +17,9 @@ NETWORK_RE='(network_error|NetworkError|network error|fetch failed|APIConnection
 # persistent lab/* branches never execute stale role definitions. Lane-owned
 # scientific directives stay on their own branches.
 CONTROL_PATHS=(
+  "AGENTS.md"
   ".opencode/agents"
+  "docs/agents"
   "docs/roles"
   "SPIDER_MASTER_PROMPT.md"
   "SPIDER_ARCHITECTURE_V2.md"
@@ -104,7 +106,7 @@ stage_control_plane() {
   # from the repository root. This is read-only governance, never lane output.
   rm -rf /tmp/spider_control
   mkdir -p /tmp/spider_control
-  for path in .opencode/agents docs/roles SPIDER_MASTER_PROMPT.md SPIDER_ARCHITECTURE_V2.md SPIDER_ARCHITECTURE_V3.md directives/CAPABILITY_CAPSULE.md directives/AUDITOR.md directives/LANE_DIRECTOR.md directives/LAB_DIRECTOR.md directives/INTEL_REPRO.md directives/INTEL_AUDITOR.md directives/INTEL_DIRECTOR.md directives/PRODUCT_DIRECTOR.md directives/PRODUCT_OPTIMIZATION.md; do
+  for path in AGENTS.md .opencode/agents docs/agents docs/roles SPIDER_MASTER_PROMPT.md SPIDER_ARCHITECTURE_V2.md SPIDER_ARCHITECTURE_V3.md directives/CAPABILITY_CAPSULE.md directives/AUDITOR.md directives/LANE_DIRECTOR.md directives/LAB_DIRECTOR.md directives/INTEL_REPRO.md directives/INTEL_AUDITOR.md directives/INTEL_DIRECTOR.md directives/PRODUCT_DIRECTOR.md directives/PRODUCT_OPTIMIZATION.md; do
     if [[ -e "$path" ]]; then
       mkdir -p "/tmp/spider_control/$(dirname "$path")"
       cp -a "$path" "/tmp/spider_control/$path"
@@ -112,7 +114,53 @@ stage_control_plane() {
   done
 }
 
+validate_agent_card() {
+  local requested=""
+  local prev=""
+  local arg
+
+  for arg in "$@"; do
+    if [[ "$prev" == "--agent" ]]; then
+      requested="$arg"
+      break
+    fi
+    case "$arg" in
+      --agent=*) requested="${arg#--agent=}"; break ;;
+    esac
+    prev="$arg"
+  done
+
+  # Some OpenCode invocations may intentionally use a built-in/default agent.
+  # Only named custom-agent launches are governed by this registry check.
+  [[ -n "$requested" ]] || return 0
+
+  local registry="docs/agents/AGENT_CARDS.md"
+  if [[ ! -f "$registry" ]]; then
+    echo "::error::Missing canonical SPIDER agent registry: $registry" >&2
+    return 64
+  fi
+
+  local marker
+  marker=$(grep -F "<!-- AGENT_CARD: ${requested} " "$registry" | head -n1 || true)
+  if [[ -z "$marker" ]]; then
+    echo "::error::Agent '${requested}' has no canonical operating card. Refusing role improvisation." >&2
+    return 64
+  fi
+
+  if [[ "$marker" == *"status=LEGACY_DISABLED"* && "${SPIDER_ALLOW_LEGACY_AGENT:-0}" != "1" ]]; then
+    echo "::error::Agent '${requested}' is LEGACY_DISABLED in the canonical registry. Explicit reactivation is required." >&2
+    return 65
+  fi
+
+  echo "SPIDER_AGENT_CARD_OK agent=${requested}"
+}
+
 stage_control_plane
+if ! validate_agent_card "$@"; then
+  rc=$?
+  restore_control_plane || true
+  exit "$rc"
+fi
 
 run_once() {
   : > "$LOG"
