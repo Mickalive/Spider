@@ -27,6 +27,7 @@ CONTROL_PATHS=(
   "directives/INTEL_AUDITOR.md"
   "directives/INTEL_DIRECTOR.md"
   "directives/PRODUCT_DIRECTOR.md"
+  "directives/PRODUCT_OPTIMIZATION.md"
   "intel/competitor_seed.json"
 )
 
@@ -107,6 +108,27 @@ prepare_control_plane() {
   echo "SPIDER control plane: using current origin/main agent definitions and formal job descriptions for this invocation."
 }
 
+# Agents sometimes resolve repository-relative reads against the runner parent
+# directory. Stage a stable read-only-by-convention control bundle in /tmp so
+# formal roles and directives remain addressable regardless of that cwd quirk.
+# Do not remove /tmp/spider_control here: some workflows execute this script
+# from that directory.
+stage_control_bundle() {
+  local root="/tmp/spider_control"
+  mkdir -p "$root/roles" "$root/directives"
+
+  [[ -f SPIDER_MASTER_PROMPT.md ]] && cp SPIDER_MASTER_PROMPT.md "$root/SPIDER_MASTER_PROMPT.md"
+
+  if [[ -d docs/roles ]]; then
+    cp docs/roles/*.md "$root/roles/" 2>/dev/null || true
+  fi
+  if [[ -d directives ]]; then
+    cp directives/*.md "$root/directives/" 2>/dev/null || true
+  fi
+
+  echo "SPIDER control bundle staged at $root."
+}
+
 monitor_network_stall() {
   local pid="$1"
   local last_size=0
@@ -133,8 +155,6 @@ monitor_network_stall() {
       last_change="$now"
       echo "::warning::OpenCode/Ox network signature detected; watching for a ${NETWORK_STALL_SECONDS}s stall before aborting the call." >&2
     elif [[ "$network_pending" == true && "$size" -gt "$network_size" && $((now - network_seen_at)) -ge 30 ]]; then
-      # Sustained output after the network error strongly suggests the process
-      # recovered. Clear the pending stall condition rather than killing valid work.
       network_pending=false
     fi
 
@@ -154,14 +174,13 @@ monitor_network_stall() {
 }
 
 prepare_control_plane
+stage_control_bundle
 
 for ((attempt = 1; attempt <= MAX_ATTEMPTS; attempt++)); do
   : > "$LOG"
   : > "$STALL_FLAG"
   echo "OpenCode/Ox attempt ${attempt}/${MAX_ATTEMPTS}."
 
-  # Process substitution keeps live logs visible while giving us the real
-  # OpenCode PID, so the monitor can terminate a genuinely stalled call only.
   "$REAL" "$@" > >(tee "$LOG") 2>&1 &
   CHILD_PID=$!
   monitor_network_stall "$CHILD_PID" &
