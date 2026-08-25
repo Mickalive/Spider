@@ -150,6 +150,19 @@ jobs:
             )' state/cto_direction.json >/dev/null || { echo "::error::Invalid Frontier charter schema"; exit 1; }
           DUP=$(jq -r '.research_portfolio.frontier_team_charters | group_by(.team_id) | map(select(length>1 and ([.[].charter_version]|unique|length != length))) | length' state/cto_direction.json)
           [[ "$DUP" == 0 ]] || { echo "::error::Duplicate team_id+charter_version"; exit 1; }
+
+          # Architecture V3 + accepted Physics handoff require at least one
+          # executable, genuinely orthogonal Physics-domain research charter
+          # while the core Physics lane is DORMANT. This is organizational
+          # coverage only and MUST NOT rescue/rethreshold/reword WP-006.
+          if [[ -f /tmp/spider_physics/state/physics_loop.json ]] && \
+             [[ "$(jq -r '.frontier_handoff.required // false' /tmp/spider_physics/state/physics_loop.json)" == true ]]; then
+            PHYSICS_ACTIVE=$(jq '[.research_portfolio.frontier_team_charters[] | select((.status=="CREATE" or .status=="CONTINUE") and ((.domain|ascii_downcase|contains("physics")) or (.mission|ascii_downcase|contains("physics")) or (.question|ascii_downcase|contains("physics"))))] | length' state/cto_direction.json)
+            [[ "$PHYSICS_ACTIVE" -ge 1 ]] || { echo "::error::Physics frontier handoff requires at least one active orthogonal Physics-domain charter"; exit 1; }
+            jq -e '[.research_portfolio.frontier_team_charters[] | select((.status=="CREATE" or .status=="CONTINUE") and ((.domain|ascii_downcase|contains("physics")) or (.mission|ascii_downcase|contains("physics")) or (.question|ascii_downcase|contains("physics"))))] | all(.[]; ((.mission + " " + .question + " " + .why_now)|ascii_downcase|contains("wp-006")|not))' state/cto_direction.json >/dev/null \
+              || { echo "::error::Active Physics charter appears to target WP-006 rather than an orthogonal question"; exit 1; }
+          fi
+
           test -f docs/CTO_LEDGER.md || { echo "::error::Missing CTO ledger"; exit 1; }
           for lane in GRAPH PHYSICS INTEL PRODUCT RUNTIME FRONTIER; do
             test -f "docs/CTO_TO_${lane}.md" || { echo "::error::Missing CTO_TO_${lane}.md"; exit 1; }
@@ -159,12 +172,40 @@ jobs:
         id: persist
         shell: bash
         run: |
+          set -euo pipefail
           git config user.name "spider-chief-cto"
           git config user.email "spider-chief-cto@autonomous.local"
-          git switch -C cto-output
+
+          PREV_CTO=""
+          if git show-ref --verify --quiet "refs/remotes/origin/$CTO_BRANCH"; then
+            PREV_CTO=$(git rev-parse "refs/remotes/origin/$CTO_BRANCH")
+          fi
+
+          # Stamp durable provenance into file content; commit messages alone
+          # are insufficient because Actions logs may later be pruned.
+          jq --argjson run_id "$GITHUB_RUN_ID" --arg prev "$PREV_CTO" \
+            '.provenance = ((.provenance // {}) + {source_run_id:$run_id, previous_cto_commit:(if $prev=="" then null else $prev end), generated_at_utc:(now|todateiso8601)})' \
+            state/cto_direction.json > /tmp/cto_direction.stamped.json
+          mv /tmp/cto_direction.stamped.json state/cto_direction.json
+
+          rm -rf /tmp/cto_generated
+          mkdir -p /tmp/cto_generated/docs /tmp/cto_generated/state
+          cp docs/CTO_LEDGER.md docs/CTO_TO_*.md /tmp/cto_generated/docs/
+          cp state/cto_direction.json /tmp/cto_generated/state/
+
+          # Preserve CTO history append-only. The reasoning session used the
+          # current main control plane, but durable advisory outputs are laid
+          # onto the previous accepted CTO tip and pushed fast-forward only.
+          if [[ -n "$PREV_CTO" ]]; then
+            git switch -C cto-output "$PREV_CTO"
+          else
+            git switch -C cto-output main
+          fi
+          cp /tmp/cto_generated/docs/* docs/
+          cp /tmp/cto_generated/state/cto_direction.json state/cto_direction.json
           git add docs/CTO_LEDGER.md docs/CTO_TO_*.md state/cto_direction.json
           git commit -m "CTO global portfolio review ${GITHUB_RUN_ID}" || true
-          git push --force origin "HEAD:refs/heads/$CTO_BRANCH"
+          git push origin "HEAD:refs/heads/$CTO_BRANCH"
           echo "cto_commit=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
 
       - name: Dispatch new or revised Frontier charters
