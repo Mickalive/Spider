@@ -1,0 +1,196 @@
+name: SPIDER Run Evidence Curator
+
+on:
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: "Optional specific completed run id; empty = backfill batch"
+        required: false
+        type: string
+        default: ""
+  workflow_run:
+    workflows:
+      - "SPIDER Graph Lane"
+      - "SPIDER Physics Lane"
+      - "SPIDER Intel Research Lane"
+      - "SPIDER Product and Beta Lane"
+      - "SPIDER Product Beta Repair"
+      - "SPIDER Runtime Lane"
+      - "SPIDER Critical CTO Council"
+      - "SPIDER Frontier Research Team"
+      - "SPIDER Ox Watchdog"
+      - "SPIDER Research Program Supervisor"
+      - "SPIDER Intel Supervisor"
+      - "SPIDER Product Supervisor"
+      - "SPIDER Lane Repair Supervisor"
+      - "SPIDER Runtime Supervisor"
+      - "SPIDER Repo Hygiene"
+    types: [completed]
+  schedule:
+    - cron: "7,27,47 * * * *"
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/evidence-curator.yml'
+      - 'docs/roles/EVIDENCE_CURATOR.md'
+      - '.opencode/agents/evidence_curator.md'
+
+permissions:
+  actions: read
+  contents: write
+
+concurrency:
+  group: spider-run-evidence-curator
+  cancel-in-progress: false
+
+env:
+  SPIDER_MODEL: opencode/x-preview-f-free
+  BACKFILL_BATCH: 5
+
+jobs:
+  distill:
+    name: Distill completed run knowledge into durable CTO memory
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Select target runs
+        id: targets
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EVENT_NAME: ${{ github.event_name }}
+          SOURCE_RUN_ID: ${{ github.event.workflow_run.id || '' }}
+          INPUT_RUN_ID: ${{ inputs.run_id || '' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/spider_run_evidence evidence/run-memory/runs
+          : > /tmp/spider_run_evidence/targets.txt
+
+          add_if_needed() {
+            local id="$1"
+            [[ -n "$id" ]] || return 0
+            [[ "$id" == "$GITHUB_RUN_ID" ]] && return 0
+            [[ -f "evidence/run-memory/runs/${id}.json" ]] && return 0
+            local status
+            status=$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${id}" --jq '.status' 2>/dev/null || echo missing)
+            [[ "$status" == completed ]] || return 0
+            echo "$id" >> /tmp/spider_run_evidence/targets.txt
+          }
+
+          if [[ -n "$INPUT_RUN_ID" ]]; then
+            add_if_needed "$INPUT_RUN_ID"
+          elif [[ "$EVENT_NAME" == workflow_run && -n "$SOURCE_RUN_ID" ]]; then
+            add_if_needed "$SOURCE_RUN_ID"
+          else
+            while read -r id; do
+              [[ "$(wc -l < /tmp/spider_run_evidence/targets.txt)" -ge "$BACKFILL_BATCH" ]] && break
+              add_if_needed "$id"
+            done < <(
+              gh api --paginate "repos/${GITHUB_REPOSITORY}/actions/runs?status=completed&per_page=100" \
+                --jq '.workflow_runs[] | [.created_at,.id] | @tsv' \
+                | sort \
+                | cut -f2
+            )
+          fi
+
+          sort -u -o /tmp/spider_run_evidence/targets.txt /tmp/spider_run_evidence/targets.txt
+          COUNT=$(wc -l < /tmp/spider_run_evidence/targets.txt | tr -d ' ')
+          echo "count=$COUNT" >> "$GITHUB_OUTPUT"
+          echo "Selected $COUNT run(s): $(tr '\n' ' ' < /tmp/spider_run_evidence/targets.txt)"
+
+      - name: Build lossless run bundles
+        if: steps.targets.outputs.count != '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          while read -r id; do
+            [[ -n "$id" ]] || continue
+            d="/tmp/spider_run_evidence/$id"
+            mkdir -p "$d"
+
+            gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${id}" > "$d/run.json"
+            gh api --paginate "repos/${GITHUB_REPOSITORY}/actions/runs/${id}/jobs?per_page=100" > "$d/jobs.json" || echo '{"jobs":[]}' > "$d/jobs.json"
+            gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${id}/artifacts?per_page=100" > "$d/artifacts.json" || echo '{"artifacts":[]}' > "$d/artifacts.json"
+
+            if gh run view "$id" --repo "$GITHUB_REPOSITORY" --log > "$d/logs.txt" 2> "$d/log_error.txt"; then
+              printf 'available\n' > "$d/log_status.txt"
+            else
+              printf 'unavailable\n' > "$d/log_status.txt"
+            fi
+
+            git ls-remote --heads origin | awk -v id="$id" '$2 ~ id {print}' > "$d/refs.txt" || true
+            while read -r sha ref; do
+              [[ -n "${ref:-}" ]] || continue
+              branch="${ref#refs/heads/}"
+              safe="${branch//\//__}"
+              git fetch -q origin "$branch:refs/remotes/origin/$branch" || true
+              printf '%s\t%s\n' "$branch" "$sha" >> "$d/fetched_refs.tsv"
+            done < "$d/refs.txt"
+          done < /tmp/spider_run_evidence/targets.txt
+
+      - name: Install OpenCode
+        if: steps.targets.outputs.count != '0'
+        shell: bash
+        run: curl --retry 3 --retry-all-errors --retry-delay 15 -fsSL https://opencode.ai/install | bash
+
+      - name: Curate run evidence
+        if: steps.targets.outputs.count != '0'
+        shell: bash
+        run: |
+          IDS=$(tr '\n' ',' < /tmp/spider_run_evidence/targets.txt | sed 's/,$//')
+          bash .github/scripts/run-opencode-with-retry.sh run \
+            --model "$SPIDER_MODEL" \
+            --agent evidence_curator \
+            "Distill these completed GitHub Actions runs into durable SPIDER run memory: ${IDS}. Bundles are under /tmp/spider_run_evidence/<run_id>/. Follow EVIDENCE_CURATOR.md exactly. Inspect logs deeply enough to preserve unique discoveries, failures, costs and research opportunities. Cross-check fetched cycle refs when useful. Do NOT promote log-only observations into scientific truth. Update one JSON record per run plus INDEX.md and CTO_FEED.json. Be conservative with safe_to_prune."
+
+      - name: Validate curator outputs
+        if: steps.targets.outputs.count != '0'
+        shell: bash
+        run: |
+          set -euo pipefail
+          while read -r id; do
+            file="evidence/run-memory/runs/${id}.json"
+            test -f "$file" || { echo "::error::Missing curator record $file"; exit 1; }
+            jq -e --argjson id "$id" '.run_id == $id and .distillation_complete == true and (.safe_to_prune|type)=="boolean" and (.findings|type)=="array"' "$file" >/dev/null \
+              || { echo "::error::Invalid curator record $file"; exit 1; }
+          done < /tmp/spider_run_evidence/targets.txt
+          test -f evidence/run-memory/INDEX.md || exit 1
+          test -f evidence/run-memory/CTO_FEED.json || exit 1
+          jq -e 'type=="object" or type=="array"' evidence/run-memory/CTO_FEED.json >/dev/null
+
+      - name: Enforce evidence-memory-only writes
+        if: steps.targets.outputs.count != '0'
+        shell: bash
+        run: |
+          CHANGED=$(git status --porcelain | cut -c4- || true)
+          BAD=$(printf '%s\n' "$CHANGED" | grep -Ev '^evidence/run-memory/' || true)
+          if [[ -n "$BAD" ]]; then
+            echo "Evidence Curator wrote outside its durable memory scope:"
+            echo "$BAD"
+            exit 1
+          fi
+
+      - name: Persist distilled memory
+        if: steps.targets.outputs.count != '0'
+        shell: bash
+        run: |
+          git config user.name "spider-evidence-curator"
+          git config user.email "spider-evidence-curator@autonomous.local"
+          git add evidence/run-memory
+          git commit -m "evidence: distill Actions runs $(tr '\n' ',' < /tmp/spider_run_evidence/targets.txt | sed 's/,$//')" || exit 0
+          for attempt in 1 2 3 4 5; do
+            if git pull --rebase origin main && git push origin HEAD:main; then
+              exit 0
+            fi
+            git rebase --abort 2>/dev/null || true
+            sleep $((attempt * 5))
+          done
+          echo "::error::Could not persist run evidence after retries"
+          exit 1
