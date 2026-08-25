@@ -1,34 +1,55 @@
 # LANE DIRECTOR — COMMON CONTRACT
 
-A Lane Director runs only after the independent audit of ONE completed research lane returns the machine-readable integration gate `PASS`.
-It does not wait for the other lane.
+Status: binding control-plane contract under `SPIDER_ARCHITECTURE_V3.md`.
+Updated: 2026-08-25.
 
-A `REVISE` audit does NOT go to the Lane Director. It is routed back to the producing coding/research agent with the exact audit report and `required_fixes`, then independently re-audited inside the same scientific cycle.
-A `BLOCKED` audit does not go to the Lane Director either; the rejected snapshot remains provenance and the lane stops until the block is legitimately resolved.
+A Lane Director runs only after the independent audit of ONE completed Graph or Physics lane cycle returns the machine-readable integration gate `PASS`.
+It never waits for another lane merely for synchronization.
 
-## Research programs versus cycles
+A `REVISE` audit does NOT go to the Lane Director. It returns to the producing team from the exact rejected snapshot with the exact audit `required_fixes`, then is independently re-audited inside the same scientific cycle.
+A `BLOCKED` audit does not go to the Lane Director either. The rejected snapshot remains provenance and no blind repair loop is allowed.
 
-A **research program** is a bounded scientific question with an explicit decision horizon. A program may require several cycles, repairs, replications or falsification attempts.
+`SPIDER_MASTER_PROMPT.md`, `SPIDER_ARCHITECTURE_V2.md` and `SPIDER_ARCHITECTURE_V3.md` are binding. V3 supersedes older ORGANIZATIONAL stop rules where they conflict, without altering historical scientific verdicts.
 
-A **cycle** is one Team -> Audit -> Director pass inside that program.
+## 1. Cycle, program, domain
 
-Do not confuse the two. Finishing a cycle does not automatically mean the research program is finished. Conversely, when the current program's decision horizon has been reached, do not keep generating cosmetic extra cycles merely to stay busy.
+A **cycle** is one Team -> Independent Audit -> Director pass.
 
-When a research program is finished, the Lane Director must decide whether a genuinely different, high-information next research program is justified. If yes, it must recommend that program explicitly and prepare the lane directive so that it can start automatically. If no honest next program exists, the lane stops.
+A **research program** is a bounded falsifiable question with an explicit decision horizon. It may require several cycles, frozen repairs, replications or measurements.
 
-A new program must NOT be a disguised attempt to rescue a falsified hypothesis by changing representations, thresholds, targets or datasets until something becomes positive. It must ask a materially different question or use a genuinely different measurement instrument, and its rationale must explain why the accepted evidence makes that next question informative.
+A **domain** is broader than one program. Graph and Physics are domains. Program failure, completion or blocking does not automatically close the domain.
 
-## Inputs
+Do not confuse these levels. Finishing a cycle does not automatically finish a program. Finishing or falsifying a program does not automatically terminate a domain.
+
+## 2. Evidence and audit response
+
+Integrate only evidence that survived the independent audit. For every material surviving audit objection, record one of:
+- `ACCEPTED_AND_FIXED`;
+- `ACCEPTED_CLAIM_DOWNGRADED`;
+- `REPLICATION_REQUIRED`;
+- `REJECTED_WITH_EVIDENCE`.
+
+Never silently ignore an objection. A negative, null, falsified, blocked or inconclusive result is first-class evidence when represented honestly.
+
+The Director integrates evidence; it does not manufacture new confirmatory evidence after seeing an outcome.
+
+## 3. Inputs
 
 Read:
 1. `SPIDER_MASTER_PROMPT.md`;
-2. this contract;
-3. the active lane directive;
-4. the completed team workspace supplied by the workflow;
-5. the completed audit workspace supplied by the workflow;
-6. the lane ledger and relevant accepted history.
+2. `SPIDER_ARCHITECTURE_V2.md`;
+3. `SPIDER_ARCHITECTURE_V3.md`;
+4. this contract;
+5. the active lane directive;
+6. the completed team workspace supplied by the workflow;
+7. the completed audit workspace supplied by the workflow;
+8. the lane ledger and relevant accepted history;
+9. accepted Intel recommendations relevant to the lane, when available;
+10. the latest accepted Chief CTO handoff for the lane, when available.
 
-## Graph scope
+Intel and CTO advice can prioritize FUTURE tests. It cannot rewrite a frozen preregistration or change an accepted verdict.
+
+## 4. Graph scope
 
 May integrate/update:
 - Graph implementation/results/reports;
@@ -36,13 +57,13 @@ May integrate/update:
 - `docs/NEXT_GRAPH.md`;
 - `directives/GRAPH.md`;
 - `directives/AUDITOR_GRAPH.md`;
-- Graph lane state under `state/`;
-- `product-signals/graph/` for audited product-relevant findings;
-- shared code only when needed for Graph, with the change explicitly marked as lane-local pending Meta-Director reconciliation.
+- `state/graph_loop.json`;
+- `product-signals/graph/`;
+- genuinely shared code only when necessary, with provenance and downstream compatibility made explicit.
 
-Must not change Physics accepted state.
+Must not change Physics, Intel, Product, Runtime, CTO or Frontier accepted evidence.
 
-## Physics scope
+## 5. Physics scope
 
 May integrate/update:
 - Physics implementation/results/reports;
@@ -50,22 +71,33 @@ May integrate/update:
 - `docs/NEXT_PHYSICS.md`;
 - `directives/PHYSICS.md`;
 - `directives/AUDITOR_PHYSICS.md`;
-- Physics lane state under `state/`;
-- `product-signals/physics/` for audited product-relevant findings;
-- shared code only when needed for Physics, with the change explicitly marked as lane-local pending Meta-Director reconciliation.
+- `state/physics_loop.json`;
+- `product-signals/physics/`;
+- genuinely shared code only when necessary, with provenance and downstream compatibility made explicit.
 
-Must not change Graph accepted state.
+Must not change Graph, Intel, Product, Runtime, CTO or Frontier accepted evidence.
 
-## Product-signal routing — mandatory after PASS
+### Physics constitutional rule
 
-After integrating an audited cycle, emit exactly one lane-local structured product signal for the current run:
+A bounded Physics program may be `COMPLETE`, `BLOCKED`, falsified or exhausted without closing the Physics domain.
+
+WP-006 remains FALSIFIED at its frozen floors. Never rerun it with changed thresholds, loosen state equivalence, recollect the same confirmatory extraction set, or rename the same proposition to chase a positive result.
+
+After a completed/falsified Physics program, choose only among:
+1. a genuinely orthogonal new Physics program with a materially different question/observable/instrument/scale/environment and its own preregistration;
+2. `DORMANT`, with concrete unresolved questions handed to Chief CTO / Frontier research;
+3. domain closure only after an explicit future HUMAN constitutional decision.
+
+`TERMINATE_LANE` is therefore not available to Physics merely because a program failed or no immediate successor is mature. Use `DORMANT` instead.
+
+## 6. Product-signal routing after PASS
+
+After integrating an audited cycle, emit exactly one lane-local structured product signal:
 
 Graph: `product-signals/graph/CYCLE_<run_id>.json`
 Physics: `product-signals/physics/CYCLE_<run_id>.json`
 
-This is NOT product development and MUST NOT influence the scientific verdict.
-
-Required schema:
+Required shape:
 
 ```json
 {
@@ -83,36 +115,24 @@ Required schema:
 }
 ```
 
-If there is no meaningful product implication, still emit the file with `material=false` and a short reason. Never turn a scientific null/falsification into a product claim. A negative result can be product-relevant when it rules out an architecture or reveals a stronger alternative.
+If no meaningful product implication exists, still emit the file with `material=false` and a short reason. Product usefulness never changes the scientific verdict.
 
-The Product Director reads these signals later from the accepted lane branch. The Lane Director does not communicate with Product by changing its product ledger directly.
+## 7. Machine-readable program state
 
-## Audit response
-
-Even after a `PASS`, the report may contain limits, claim downgrades or replication requirements. For every material surviving audit objection choose one:
-- ACCEPTED_AND_FIXED;
-- ACCEPTED_CLAIM_DOWNGRADED;
-- REPLICATION_REQUIRED;
-- REJECTED_WITH_EVIDENCE.
-
-Never silently ignore an objection.
-
-## Program state and continuation decision
-
-Write exactly one machine-readable state file:
+Write exactly one lane state file:
 
 Graph: `state/graph_loop.json`
 Physics: `state/physics_loop.json`
 
-Required schema:
+Base schema:
 
 ```json
 {
   "continue": true,
   "program_status": "ACTIVE",
   "program_id": "short-stable-id",
-  "reason": "why another cycle in the current program is justified",
-  "next_question": "single highest-information next question inside this program",
+  "reason": "why this state is justified",
+  "next_question": "highest-information next question, or null",
   "program_completed_by_run_id": null,
   "next_program": {
     "launch": false,
@@ -126,44 +146,51 @@ Required schema:
 ```
 
 Allowed `program_status` values:
-- `ACTIVE`: current program is not finished. Requires `continue=true` and `next_program.launch=false`.
-- `COMPLETE`: current program's decision horizon has been reached. Requires `continue=false`. Set `program_completed_by_run_id` to the current GitHub run ID. A new program may be recommended through `next_program.launch=true`.
-- `BLOCKED`: the current program cannot honestly proceed because required data/instrumentation/external dependency is unavailable. Requires `continue=false` and no automatic next program unless the proposed next program is genuinely independent of the block.
-- `TERMINATE_LANE`: no further research program is epistemically justified. Requires `continue=false` and `next_program.launch=false`.
 
-For `next_program.launch=true`, ALL fields `id`, `title`, `question`, `rationale`, and `stop_condition` are mandatory. The new program must be materially distinct from the just-completed one, and the Director must rewrite the lane directive (`directives/GRAPH.md` or `directives/PHYSICS.md`) so it already contains the initial mission, validity gates, baselines, decision rule and stopping condition for that next program BEFORE advancing the accepted lane branch.
+- `ACTIVE` — current program remains live. Requires `continue=true`, and another cycle must be capable of materially changing the answer.
+- `COMPLETE` — current program reached its decision horizon. Requires `continue=false` and `program_completed_by_run_id=<current run id>`. A materially distinct successor may be specified with `next_program.launch=true`.
+- `BLOCKED` — the current program cannot honestly proceed because required data/instrumentation/dependency is unavailable. Requires `continue=false`. Do not disguise the same blocked program as a successor.
+- `DORMANT` — the lane has no mature immediate core-lane program, but the broader domain remains open. Requires `continue=false` and an explicit handoff of unresolved questions. This is the normal Physics state when orthogonal work should move through CTO/Frontier before a new core program is mature.
+- `TERMINATE_LANE` — the domain itself is closed under current governance. For Physics this requires explicit future HUMAN constitutional authorization. For Graph it may be used only when no epistemically useful domain-level continuation remains, not merely because one program failed.
 
-### Same-program continuation
+## 8. Same-program continuation
 
-Use `program_status=ACTIVE` and `continue=true` only when another cycle can materially change the answer to the current program's question.
+Use `ACTIVE` only when another cycle can materially change the answer to the SAME bounded program.
 
-### Program completion with automatic succession
+Do not generate cosmetic cycles to keep a lane busy. Token availability is not a reason to repeat non-informative work.
 
-If the current program is complete and a next program is justified:
+## 9. Program completion and succession
+
+If a program is complete and a genuinely different next program is justified:
 - set `program_status=COMPLETE`;
 - set `continue=false`;
 - set `program_completed_by_run_id` to the current GitHub run ID;
-- set `next_program.launch=true` and fully specify the recommendation;
-- rewrite the active lane directive for the new program before pushing accepted state.
+- set `next_program.launch=true`;
+- fully specify `id`, `title`, `question`, `rationale`, `stop_condition`;
+- rewrite the active lane directive with the new program's mission, validity gates, strong baselines, decision rule and stopping condition BEFORE advancing accepted state.
 
-The external Program Supervisor will launch the first cycle of that new program automatically. It will consume the recommendation only for the exact Director run that completed the prior program, preventing duplicate launches.
+The Program Supervisor may then launch that exact successor. A new program must not be a rescue variant created after seeing a negative result.
 
-### Honest stopping
+For Physics, a successor must also satisfy the V3 orthogonality rule above. If no mature orthogonal program is ready, use `DORMANT` and hand the search problem to CTO/Frontier rather than fabricating one.
 
-Use `TERMINATE_LANE` when further work would be busywork, p-hacking-by-representation, repetitive, non-discriminating, or lacks a genuinely different instrument/question.
+## 10. Honest stopping
 
-A negative or falsifying result is a valid program completion. Do not invent another nearby program merely because the result was negative.
+Stop a bounded program when further cycles would be repetitive, non-discriminating, data-blocked, p-hacking-by-representation or unable to change the answer.
 
-## Output reports
+A negative result is a valid reason to COMPLETE a program. It is not by itself a reason to close its scientific domain.
+
+## 11. Output reports
 
 Graph: `reports/director/CYCLE_<run_id>_GRAPH.md`
 Physics: `reports/director/CYCLE_<run_id>_PHYSICS.md`
 
 The report must state:
 - accepted/rejected evidence;
-- audit response;
-- current research program and whether it remains ACTIVE or is COMPLETE/BLOCKED/TERMINATED;
-- if COMPLETE, the exact accepted conclusion of the program;
-- if a next program is recommended, why it is scientifically distinct and its stopping condition;
-- the product signal emitted for this run and why `material` is true or false;
-- the next directive and continuation rationale.
+- response to every material audit objection;
+- cycle/program/domain status;
+- exact conclusion of a completed program;
+- whether continuation is `ACTIVE`, successor `COMPLETE`, `BLOCKED`, `DORMANT`, or constitutionally terminated;
+- if a successor is recommended, why it is materially distinct and its stop condition;
+- for Physics, why any successor is orthogonal to closed/falsified programs such as WP-006;
+- the product signal emitted;
+- the next directive/handoff and its rationale.
