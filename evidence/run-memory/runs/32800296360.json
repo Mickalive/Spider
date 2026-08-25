@@ -1,0 +1,72 @@
+{
+  "run_id": 32800296360,
+  "workflow_name": "SPIDER Intel Research Lane",
+  "workflow_path": ".github/workflows/intel-loop.yml",
+  "status": "completed",
+  "conclusion": "success",
+  "head_sha": "fd47aca1cb35166c354e04b75219078edac55206",
+  "created_at": "2026-08-25T02:09:02Z",
+  "updated_at": "2026-08-25T04:28:38Z",
+  "run_number": 4,
+  "event": "workflow_dispatch",
+  "run_attempt": 2,
+  "evidence_class": "INTEL",
+  "summary": "SGDR repair round 3 and program close: byte-exact restoration of the twice-verified round-1 tree plus four documentary fixes, independent audit gate PASS (mechanism VALIDATED_USEFUL, ceiling PROOF OF CONCEPT), and Director integration advancing lab/intel 0a55649 -> fca0acb with the next mission set to Unbrowse browser->first-party-API escalation. This is the run that converted the SGDR candidate into the Intel lane's first accepted external mechanism.",
+  "durable_refs": [
+    "git:origin/lab/intel@fca0acb (Director integration 'accept audited SGDR state-grounded retrieval (VALIDATED_USEFUL, PoC ceiling)'; parents ecce2a7 audit-gate integration, ef9de0e repro integration, 2b2089b scout integration, da78065 control-plane sync provenance commit)",
+    "git:origin/cycle/intel/32800296360/audit@cac8b1338aa864660c7c27d0c130d652a0b203a2 (results/intel/audit/CYCLE_32800296360_INTEL_GATE.json gate=PASS safe_to_integrate=true; results/intel/audit/CYCLE_32800296360_ablation_rederive.py — auditor's own ablation rederivation)",
+    "git:origin/cycle/intel/32800296360/repro@fec67797241490cb6812d4f6bc6b77635741063e == git:origin/cycle/intel/repair3/repro (restored+fixed snapshot; diff vs round-1 1e51a5c empty over frozen set)",
+    "git:origin/cycle/intel/32800296360/scout@d1c6f229ceff578d3ecc95b0e3f35d0b9cd0cafe (pure carryforward of cycle/intel/32796176172/scout)",
+    "git:origin/cycle/intel/32781482957/repro@1e51a5c710e8a3c270c45ffa836330293ec81b20 (round-1 restoration source)"
+  ],
+  "findings": [
+    {
+      "kind": "RESULT",
+      "summary": "SGDR mechanism FINAL STATUS (unchanged from twice-recomputed round-1 evidence, now independently re-gated): REPRODUCED_USEFUL / VALIDATED_USEFUL at PROOF OF CONCEPT ceiling. Binding maximum-defensible wording (from the delivered state file): SGDR-style stepwise retrieval scored by alpha*cos(task_goal, desc) + (1-alpha)*cos(current_state_summary, desc), pool top-M=max(3k,20), greedy MMR lambda=0.7 retrieved executable-correct fragments strictly more often than task-text-only retrieval with identical reranking under paraphrased goals + shifted entry contexts (36/74 vs 25/74 correct@1; 11 paired wins / 0 reversals); logged hard@1 aggregates reprinted identically at delivery: A 0/74, B 25/74, C 36/74, D 19/74. Gain requires the CORRECT current-state summary (wrong-context summary or summary-only score falls back to baseline level, both 24/74). Converted into fewer novel exploration actions than task-only retrieval at equal-or-higher subgoal success (.90/.90 vs .90/.80; 39 vs 42 literal, 36 vs 42 paraphrase novel actions). Advantage concentrated in one site's dynamic-content menu-disambiguation cluster; NO advantage for login/pager addressing; exact hand-authored goal_sig remains more action-efficient where it exists (21 vs 39 novel on literal slice). Validated configuration ONLY: lexical-hash embedder, deterministic contract-faithful summarizer. Not established: WebArena-scale effects, neural embedders, LLM summarizers, larger libraries, cross-site transfer.",
+      "evidence_status": "AUDITED_DURABLE",
+      "importance": "HIGH",
+      "route_to": ["INTEL", "PRODUCT", "GRAPH", "CTO"]
+    },
+    {
+      "kind": "RESULT",
+      "summary": "Repair-round-3 delivery mechanics (RF-A..RF-E all closed): RF-A restored all round-1 paths byte-exact from commit 1e51a5c with sha256sum -c verified 18/18 BEFORE any edit and re-verified in-tree; RF-B replaced the constant-dummy-text clause with the stable-controls sentence ('constant-text fusion controls are not stable under the lexical-hash embedder (19-36/74 depending on string) and are not cited as evidence') in report section-2 erratum + state honest_caveats[2]; RF-C restated cost footnote to 'approx. 12-13 would-be LLM calls total; exact split unreconciled at artifact level (11 collection-cache misses across 49 contexts; conversion counters record 2 but only 1 novel conversion-cache key committed); no metric impact'; RF-D updated repair_round=3 provenance with full changed-file enumeration, prereg frozen section byte-identical; RF-E delivery verification: tip != lab/intel base (fec6779 vs 0a55649), 24 paths committed, evaluator regenerates retrieval_eval.json byte-identically (342ec130...), selftest 7/7 PASS.",
+      "evidence_status": "AUDITED_DURABLE",
+      "importance": "HIGH",
+      "route_to": ["INTEL", "RUNTIME"]
+    },
+    {
+      "kind": "RESULT",
+      "summary": "Independent auditor did NOT just rubber-stamp: wrote its own ablation-rederivation script (CYCLE_32800296360_ablation_rederive.py, committed to the audit branch), re-derived the control structure from artifacts, then issued PASS with three explicit integration conditions (stale repo URL fix, wording constraints preserved, delivery banner). Director complied on all conditions during integration and fixed state/intel_candidate.json accordingly.",
+      "evidence_status": "AUDITED_DURABLE",
+      "importance": "MEDIUM",
+      "route_to": ["INTEL", "CTO"]
+    },
+    {
+      "kind": "RESULT",
+      "summary": "Next Intel mission set by Director (state/intel_loop.json continue=true): independent matched-cost test of Unbrowse-style browser-to-first-party-API route capture/replay escalation; vendor headline (3.6x/5.4x) explicitly UNVERIFIED/OFFICIAL_CLAIM; no variant re-testing of SGDR inside Intel. Executed by run 32809100696's scout (same batch).",
+      "evidence_status": "AUDITED_DURABLE",
+      "importance": "MEDIUM",
+      "route_to": ["INTEL", "CTO", "PRODUCT"]
+    },
+    {
+      "kind": "COST",
+      "summary": "Repair rounds skip the scout agent entirely: the INTEL SCOUT job was a ~6s workflow-only branch carryforward (git reset --hard to cycle/intel/32796176172/scout@d1c6f22, re-push under this run's id, 'nothing to commit'). Reproducer lost ~12 min to two consecutive provider outages (02:10:44, 02:17:09Z; 300s backoffs) before work began. Attempt count 2 for the overall run.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "LOW",
+      "route_to": ["INFRA", "CTO"]
+    }
+  ],
+  "failure_signatures": [
+    "'Transient OpenCode/Ox outage; retrying in 300s.' x2 at reproducer session start (recovered)"
+  ],
+  "research_opportunities": [
+    "SGDR is closed inside Intel by design; its reuse question now lives in Product: PB-001 rev 2 folded this validated configuration into the beta's SPIDER arm scoring layer (see runs/32820217763.json). Any further SGDR tuning belongs there or in Graph store-integration, not a new Intel reproduction."
+  ],
+  "already_captured_elsewhere": [
+    "runs/32781482957.json already references this run's final acceptance ('Final accepted status VALIDATED_USEFUL @ PoC ceiling (run 32800296360, integration fca0acb)'); this record adds per-phase repair/audit/director detail and the failure-signature/cost residue.",
+    "Accepted mechanism text is durable verbatim in lab/intel@fca0acb docs/INTEL_LEDGER.md + results/intel/VALIDATED_MECHANISMS.json."
+  ],
+  "distillation_complete": true,
+  "safe_to_prune": false,
+  "pruning_rationale": "Conservative default: although fully distilled and durably integrated (lab/intel fca0acb + audit/repro branches), this run owns claim-bearing cycle/* branches (scout/repro/audit) that remain useful for future audit/reproduction of the accepted SGDR mechanism; raw log also carries the only phase-level timing/outage accounting."
+}

@@ -219,6 +219,98 @@
         "If C1's negative survives audit, treat the NEXT_RUNTIME.md cycle-2 mission (near-repeat cell T3 + exploration-cost task family, predeclared VALID-NEGATIVE close rule) as the highest-information cheap dispatch for the lane."
       ],
       "route_to": ["CTO", "RUNTIME"]
+    },
+    {
+      "id": "CF-2026-08-25-13",
+      "importance": "HIGH",
+      "kind": "RUNTIME_FAILURE_MODE",
+      "summary": "Permission auto-rejection killed its SECOND confirmed lane session, this time aborting Product Beta PB-001's first build attempt (run 32799261473): at 05:54:29Z the beta_builder agent ran an environment-probing command touching ~/.config and /home/runner/.local/share/opencode/*, opencode emitted 'permission requested: external_directory (...); auto-rejecting' → 'Error: The user rejected permission to use this specific tool call.' → whole session dead after ~3m40s of real work (architect snapshot verified; discovered working-tree graph/+shared/ are stripped-down variants vs pinned d41fe9b and vendored pinned sources to /tmp; playwright 1.62.0 + chromium-headless-shell installed; both target sites healthy). Workflow validator then failed 'Missing product_beta_build state'. Mechanism identical in class to Graph #5 (CF-2026-08-25-05) but a different permission object and different lane — this is now a systemic runtime defect, not a one-off. The builder branch b05d8f8 pushed anyway contains only re-committed architect content.",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "source_run_id": 32799261473,
+      "durable_refs": [
+        "evidence/run-memory/runs/32799261473.json",
+        "git:origin/cycle/product/32799261473/architect@2c3bd28cb55c25f03d859ea6dd9b99cad683df14 (frozen PB-001 v1 architecture that survived)",
+        "git:origin/cycle/product/32799261473/builder@b05d8f8fdd6b7640c1ddd6f59a4a91b4fc063717 (empty-of-novel-work provenance)"
+      ],
+      "actionable_next": [
+        "Apply CF-05's fix set product-wide AND verify by replay: pre-authorize known-safe parent paths (~/.config, ~/.local/share/opencode) read-only in lane opencode.json permission blocks, or make external_directory denials skip the single tool call instead of terminating the session.",
+        "Add the zero-diff guard: if a builder/architect session dies with no novel commits, do not push a misleadingly-named branch (b05d8f8 says 'build' but contains only architect content).",
+        "PB-001 can resume from the intact architect freeze 2c3bd28 + the logged vendoring plan; no architecture re-run is needed."
+      ],
+      "route_to": ["RUNTIME", "INFRA", "CTO", "PRODUCT"]
+    },
+    {
+      "id": "CF-2026-08-25-14",
+      "importance": "MEDIUM",
+      "kind": "INFRA_FAILURE_MODE",
+      "summary": "Un-retried opencode installer step is a whole-cycle kill switch: Product run 32820217763's BETA ARCHITECT job died ~4s after start when `curl --retry 3 --retry-all-errors -fsSL https://opencode.ai/install | bash` exited 1 with 'Failed to fetch version information' — the curl flags retry transport failures but the installer script's own version-metadata fetch has no retry wrapper at the step level (agent invocations get 6 attempts via run-opencode-with-retry.sh; install steps get none). Result: no v2 architecture, all downstream jobs skipped, empty cycle/product/32820217763/architect branch force-pushed. Every loop workflow shares this unguarded install pattern, so any installer hiccup can waste a scheduled dispatch per lane per occurrence.",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "source_run_id": 32820217763,
+      "durable_refs": [
+        "evidence/run-memory/runs/32820217763.json",
+        "git:origin/lab/product@1ecb1b8947b1111dd44ee6b2a85e4ff75b45b92b (the rev-2 authorization this run did deliver)"
+      ],
+      "actionable_next": [
+        "Wrap install steps with step-level retry (e.g. `for i in 1..5: curl ... && break` or reuse run-opencode-with-retry.sh semantics) in ALL loop workflows; verify opencode is already present as a fast-path skip (`command -v opencode`).",
+        "Treat 'installer failed' as retryable job failure rather than pushing an empty snapshot branch."
+      ],
+      "route_to": ["INFRA", "CTO"]
+    },
+    {
+      "id": "CF-2026-08-25-15",
+      "importance": "MEDIUM",
+      "kind": "ORCHESTRATION_ANOMALY",
+      "summary": "External cancellation cluster at 2026-08-25T05:01Z hit two lanes within ~14 seconds while both agents were healthy and mid-session: Intel run 32809100696 reproducer cancelled 05:01:31–35Z (cycle-2 Unbrowse prereg not yet frozen, zero commits — clean to redo from scout branch) and Physics run 32799587656 attempt-2 auditor cancelled 05:01:40–45Z mid final-checks (harmless to science because attempt 1 had already pushed gate=PASS at 03:12Z, but it cost ~15 min of redundant re-verification and left the run conclusion=failure despite a delivered PASS audit). Trigger not identifiable from either bundle (supervisor action, manual cancel, platform reclaim, or concurrency sweep). Combined wasted agent time ≈34 min.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "source_run_id": 32809100696,
+      "additional_source_run_ids": [32799587656],
+      "durable_refs": [
+        "evidence/run-memory/runs/32809100696.json",
+        "evidence/run-memory/runs/32799587656.json",
+        "git:origin/cycle/physics/32799587656/audit@9acccb12b7f60d4e0605d7991a8b22204f841252 (the PASS gate that predates the cancelled attempt-2 rerun)"
+      ],
+      "actionable_next": [
+        "Identify what cancels runs around 05:01Z (cross-check supervisor/watchdog schedules and audit logs); if intentional, make cancellations checkpoint-aware instead of mid-session kills.",
+        "For Physics specifically: consume the existing PASS gate at 9acccb12 rather than re-running audits of the same carryforward — the WP-006 chain was later integrated via 32866107906 anyway, so no further stewardship of this snapshot is needed.",
+        "Consider persisting partial agent state (todo/prereg drafts) incrementally so externally-cancelled sessions leave resumable artifacts."
+      ],
+      "route_to": ["INFRA", "CTO", "PHYSICS", "INTEL"]
+    },
+    {
+      "id": "CF-2026-08-25-16",
+      "importance": "MEDIUM",
+      "kind": "RESEARCH_RADAR",
+      "summary": "Unbrowse vendor-benchmark adversarial dossier exists and awaits reproduction (Intel cycle 2): scout recomputed the vendor's published CSV (ratio-of-means 3.58x, median 5.35x, 94/94 wins — headline partially survives its own data) while documenting CODE_VERIFIED harness defects (flat +2000 ms sleep in every Playwright baseline load; treatment-arm-only preference for server-reported timing over wall clock; inner_text('body') vs paper's stated CSS-selector methodology; single pass vs three; all rows marketplace-served/warmed), vendor honest negatives (~50% live retrieval coverage, Cloudflare/DataDome failures, claim-tier violations incl. 'peer-reviewed' preprint and '30x faster' marketing from the best domain), independent premise anchor (Song et al. ACL 2025 Findings: hybrid API+browsing >24% absolute over browsing-only WHEN APIs are pre-documented), new mechanism-family actors (Web Verbs arXiv:2602.17245, agent-browser derive-client, Kuri CDP broker, unbrowse-hermes), and a preregistration-ready A/B/C spec whose curl-level null isolates what the route abstraction adds beyond plain HTTP. All DURABLE on the scout branch but UNAUDITED; the first reproducer attempt was cancelled pre-prereg so nothing is contaminated.",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "source_run_id": 32809100696,
+      "durable_refs": [
+        "git:origin/cycle/intel/32809100696/scout@a16a2724d7a0f75d72ebdd20280a37d3fa9ab846 (cycle2_findings.json, candidate spec, reports/intel/scout/)",
+        "evidence/run-memory/runs/32809100696.json"
+      ],
+      "actionable_next": [
+        "Re-dispatch the Intel cycle-2 reproducer straight from the scout snapshot: freeze intel/prereg/cycle2_unbrowse_prereg.md first (conditions A/B/C, curl-level null, bias exclusions, per-site reporting that never pools no-API sites), then measure.",
+        "Reuse the scout's forensic checklist (raw-CSV recomputation, prose-vs-data diff, harness grep for sleeps/timing asymmetries/warmed rows, vendor-negative ledger) as the standing Intel template for any future vendor performance headline."
+      ],
+      "route_to": ["INTEL", "PRODUCT", "CTO"]
+    },
+    {
+      "id": "CF-2026-08-25-17",
+      "importance": "MEDIUM",
+      "kind": "PROCESS_PATTERN",
+      "summary": "Audited-but-unintegrated snapshots cause duplicated stewardship spend: WP-006's evidence was carried forward bit-exact TWICE — first by run 32799587656 (carryforward + full independent audit PASS at 9acccb12 that no Director ever consumed because its attempt-2 rerun was cancelled), then again by run 32866107906 whose chain actually reached integration. Root cause: audited-but-unintegrated work leaves no machine-visible 'pending integration' trace for whoever dispatches the next physics run, so each new dispatch redoes legitimate-looking stewardship. Same class risk exists anywhere a Director job is skipped after a green audit (see CF-08's Graph retry storm). Positive note: verdict discipline held both times — neither stewardship run manufactured new confirmatory collection under the frozen stop rule.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "source_run_id": 32799587656,
+      "additional_source_run_ids": [32866107906, 32793165981],
+      "durable_refs": [
+        "evidence/run-memory/runs/32799587656.json",
+        "git:origin/lab/physics@0be8d8a (actual WP-006 acceptance chain via 32866107906)",
+        "git:origin/cycle/physics/32799587656/audit@9acccb12 (orphaned PASS gate)"
+      ],
+      "actionable_next": [
+        "Have lane workflows record a machine-readable pending-integration pointer (branch + gate path) into lane state whenever an audit reaches PASS but the Director does not run, and have dispatchers check it before authorizing fresh team/stewardship sessions.",
+        "Before any future WP-006-area dispatch: none is needed — TERMINATE_LANE stands, domain reopened under V3 via c15321c; treat further WP-006 stewardship as duplicate spend."
+      ],
+      "route_to": ["CTO", "INFRA", "PHYSICS"]
     }
   ]
 }
