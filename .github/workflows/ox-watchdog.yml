@@ -12,6 +12,8 @@ on:
       - "SPIDER Intel Research Lane"
       - "SPIDER Product and Beta Lane"
       - "SPIDER Product Beta Repair"
+      - "SPIDER Runtime Lane"
+      - "SPIDER Critical CTO Council"
     types: [completed]
 
 permissions:
@@ -74,8 +76,6 @@ jobs:
               return 0
             fi
 
-            # A cancelled run is recoverable only with explicit infrastructure
-            # evidence. This deliberately does NOT resurrect a human/manual cancel.
             if [[ "$conclusion" == cancelled ]] \
                && grep -Eiq '(runner has received a shutdown signal|runner service is stopped|hosted runner.*shutdown|lost communication with the runner|operation was canceled.*runner)' <<<"$logs"; then
               echo "::warning::$workflow: run $run_id was cancelled by runner infrastructure; re-running affected jobs."
@@ -109,3 +109,5 @@ jobs:
           recover_workflow intel-loop.yml
           recover_workflow product-loop.yml
           recover_workflow product-beta-repair.yml
+          recover_workflow runtime-loop.yml
+          recover_workflow cto-council.yml
