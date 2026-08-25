@@ -8,6 +8,10 @@ on:
     workflows:
       - "SPIDER Intel Research Lane"
     types: [completed]
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/intel-supervisor.yml'
 
 permissions:
   contents: read
@@ -69,15 +73,11 @@ jobs:
               -f human_note="AUTOMATIC INFRASTRUCTURE RECOVERY. Prior run ${LATEST_ID:-none} did not produce accepted evidence because infrastructure interrupted it. Resume the accepted Intel next_mission; do not treat the interrupted attempt as scientific evidence and do not change the question merely to get a positive result."
           }
 
-          # Bootstrap only when Intel has never run.
           if [[ -z "$LATEST_ID" ]]; then
             dispatch_from_accepted_state "no prior Intel run exists"
             exit 0
           fi
 
-          # Recover infrastructure failures with a FRESH dispatch on current main.
-          # This deliberately avoids replaying an obsolete workflow SHA. Manual
-          # cancellations and ordinary code/method failures remain stopped.
           if [[ "$LATEST_CONCLUSION" == failure || "$LATEST_CONCLUSION" == cancelled || "$LATEST_CONCLUSION" == timed_out ]]; then
             set +e
             LOGS=$(gh run view "$LATEST_ID" --repo "$GITHUB_REPOSITORY" --log 2>&1)
@@ -91,8 +91,6 @@ jobs:
             exit 0
           fi
 
-          # Inspect the latest audit gate if one exists. REVISE resumes the same
-          # mechanism; BLOCKED must not silently start unrelated fresh work.
           AUDIT_BRANCH="cycle/intel/${LATEST_ID}/audit"
           if gh api "repos/${GITHUB_REPOSITORY}/branches/${AUDIT_BRANCH//\//%2F}" >/dev/null 2>&1; then
             GATE_RAW=$(gh api -H 'Accept: application/vnd.github.raw+json' \
