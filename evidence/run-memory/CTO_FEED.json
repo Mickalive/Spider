@@ -1,0 +1,72 @@
+{
+  "schema": "SPIDER CTO feed v1",
+  "updated": "2026-08-25",
+  "maintained_by": "RUN EVIDENCE CURATOR",
+  "purpose": "Radar of HIGH/MEDIUM findings still actionable. Epistemic statuses preserved; nothing here certifies scientific truth. The Chief CTO must route any new claim to a lane/team for validation before use.",
+  "findings": [
+    {
+      "id": "CF-2026-08-25-01",
+      "importance": "HIGH",
+      "kind": "PROVENANCE_INCIDENT",
+      "summary": "First repo-hygiene execution permanently deleted the raw Actions logs of 102 runs. For 4 of the 5 deleted Critical CTO Council runs no run-id-attributable durable artifact exists anywhere in Git; whether those reviews contained unique advisory prescriptions is unknowable post-deletion (loss_assessment=UNKNOWN). The other 98 deletions are assessed NONE_MATERIAL (orchestration-only, or fully recovered).",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "source_run_id": 32880942022,
+      "durable_refs": [
+        "evidence/run-memory/DELETED_RUNS_RECOVERY.json",
+        "evidence/run-memory/deleted/*.json (102 tombstones)",
+        "evidence/run-memory/runs/32880942022.json"
+      ],
+      "actionable_next": [
+        "Decide whether any pre-CTO-4 council pass needs reconstruction from any surviving side channel (none currently known); if not, close the UNKNOWNs as accepted residual risk.",
+        "Do not treat reconstructed summaries of the four UNKNOWN council runs as evidence; none exists."
+      ],
+      "route_to": ["CTO", "INFRA"]
+    },
+    {
+      "id": "CF-2026-08-25-02",
+      "importance": "HIGH",
+      "kind": "STRUCTURAL_FIX",
+      "summary": "Recoverability gap is structural, not accidental: exactly one deleted run (council run 32876814203) had persisted its output before pruning (origin/lab/cto@6b1f030); all other deleted runs left nothing attributable. Council/supervisor/workdog workflows emit no durable receipt tying their run id to their effects.",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "source_run_id": 32880942022,
+      "durable_refs": [
+        "git:origin/lab/cto@6b1f030a176d4d5aa6dc59215d29736f33b280c5",
+        "evidence/run-memory/DELETED_RUNS_RECOVERY.json"
+      ],
+      "actionable_next": [
+        "Require every autonomous workflow (cto-council, *-supervisor, watchdogs, hygiene) to commit a run-id-attributed receipt before completion, so future pruning cannot orphan outputs.",
+        "Gate future hygiene passes on evidence/run-memory safe_to_prune flags instead of recency heuristics only."
+      ],
+      "route_to": ["INFRA", "RUNTIME", "CTO"]
+    },
+    {
+      "id": "CF-2026-08-25-03",
+      "importance": "MEDIUM",
+      "kind": "GUARD_VERSION_GAP",
+      "summary": "The hygiene script version that executed the 102 deletions (commit 3e5ea6d) had no distillation requirement; maintainers hardened it after the fact (1afb229 'require durable run distillation before pruning', a09d036 'restore durable-reference protection'). Until the hardened version has executed successfully, assume un-distilled claim-bearing logs could still be pruned by a stale workflow version.",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "source_run_id": 32880942022,
+      "durable_refs": [
+        "git:3e5ea6d04ba3c0d6ac097ea63478e90e10a4e7fd:.github/workflows/repo-hygiene.yml",
+        "git:1afb229 / git:a09d036"
+      ],
+      "actionable_next": [
+        "Verify the next hygiene dispatch runs the hardened script and that run 32880942022 itself stays protected (its log is the sole deletion manifest; safe_to_prune=false)."
+      ],
+      "route_to": ["INFRA"]
+    },
+    {
+      "id": "CF-2026-08-25-04",
+      "importance": "MEDIUM",
+      "kind": "COST",
+      "summary": "Orchestration noise dominates Actions economics: 102 supervisor/watchdog/council runs were created in ~18.2h (~5.6/h; Ox Watchdog alone = 39) versus 54 retained substantive runs. Each hygiene pass costs ~43s of sequential DELETE API calls per 100 deletions.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "source_run_id": 32880942022,
+      "durable_refs": ["evidence/run-memory/runs/32880942022.json"],
+      "actionable_next": [
+        "Evaluate consolidating watchdog/supervisor cadence or event-triggering them instead of fixed heartbeats; measure runner minutes saved against recovery-latency risk before changing anything."
+      ],
+      "route_to": ["INFRA", "RUNTIME", "CTO"]
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+{
+  "schema": "SPIDER deleted-runs recovery v1",
+  "updated": "2026-08-25",
+  "curated_by_role": "RUN EVIDENCE CURATOR",
+  "recovery_trigger_run_id": 32880942022,
+  "recovery_trigger_workflow": "SPIDER Repo Hygiene (.github/workflows/repo-hygiene.yml)",
+  "deletion_event": {
+    "deleted_by_run_id": 32880942022,
+    "deleted_by_script_commit": "3e5ea6d04ba3c0d6ac097ea63478e90e10a4e7fd (first version of evidence-safe pruning; later hardened by 1afb229, a09d036)",
+    "hygiene_log_summary_line": "Repo hygiene complete: deleted=102 kept=54 failed=0 protected_ids=228",
+    "deletion_window_created_at": ["2026-08-24T23:32:44Z", "2026-08-25T17:42:27Z"],
+    "raw_actions_logs_recoverable": false
+  },
+
+  "deleted_run_count": 102,
+  "total_deleted_runs": 102,
+
+  "loss_assessment_counts": {
+    "NONE_MATERIAL": 98,
+    "LOW": 0,
+    "UNKNOWN": 4,
+    "MATERIAL_RISK": 0
+  },
+  "runs_with_unknown_or_material_loss": [
+    32864023130,
+    32864726559,
+    32875585131,
+    32879434960
+  ],
+  "fully_recovered_run_ids": [32876814203],
+
+  "deleted_runs_by_workflow": {
+    "SPIDER Ox Watchdog": 39,
+    "SPIDER Research Program Supervisor": 26,
+    "SPIDER Intel Supervisor": 23,
+    "SPIDER Critical CTO Council": 5,
+    "SPIDER Lane Repair Supervisor": 5,
+    "SPIDER Product Supervisor": 2,
+    "SPIDER Runtime Supervisor": 2
+  },
+
+  "deleted_run_ids": [
+    32789815178, 32789907921, 32790225177, 32791059505, 32791243605, 32791696057,
+    32791929748, 32793570288, 32798260367, 32798833844, 32799577436, 32802454891,
+    32802493114, 32802725649, 32803413741, 32805425452, 32805800991, 32806641990,
+    32807842156, 32808738972, 32808857537, 32810244743, 32810468017, 32811233520,
+    32811441326, 32812338754, 32813667293, 32814110241, 32814415974, 32814710302,
+    32815268921, 32816411198, 32816509468, 32819605727, 32820395385, 32821356416,
+    32821414874, 32823606317, 32824051252, 32825019061, 32826462024, 32827009397,
+    32829563267, 32830118936, 32830364827, 32833799511, 32833846193, 32833923755,
+    32836241692, 32836277773, 32836468052, 32839181519, 32839298531, 32839684222,
+    32841085566, 32841232993, 32843074234, 32843566266, 32843912597, 32845259148,
+    32845343840, 32845625714, 32849865996, 32851323067, 32851460049, 32852630247,
+    32854420083, 32856710237, 32857124534, 32859276271, 32860578597, 32861099918,
+    32861169687, 32861336037, 32861539918, 32862048453, 32863119537, 32864023130,
+    32864133015, 32864726559, 32864733813, 32864819294, 32865993518, 32866001875,
+    32866092656, 32866530332, 32868539164, 32868774678, 32868948835, 32869742980,
+    32870079427, 32870208994, 32872044760, 32874460878, 32875585062, 32875585131,
+    32875675640, 32876814203, 32877770940, 32879076031, 32879434960, 32879464333
+  ],
+  "recovered_deleted_run_ids": [
+    32789815178, 32789907921, 32790225177, 32791059505, 32791243605, 32791696057,
+    32791929748, 32793570288, 32798260367, 32798833844, 32799577436, 32802454891,
+    32802493114, 32802725649, 32803413741, 32805425452, 32805800991, 32806641990,
+    32807842156, 32808738972, 32808857537, 32810244743, 32810468017, 32811233520,
+    32811441326, 32812338754, 32813667293, 32814110241, 32814415974, 32814710302,
+    32815268921, 32816411198, 32816509468, 32819605727, 32820395385, 32821356416,
+    32821414874, 32823606317, 32824051252, 32825019061, 32826462024, 32827009397,
+    32829563267, 32830118936, 32830364827, 32833799511, 32833846193, 32833923755,
+    32836241692, 32836277773, 32836468052, 32839181519, 32839298531, 32839684222,
+    32841085566, 32841232993, 32843074234, 32843566266, 32843912597, 32845259148,
+    32845343840, 32845625714, 32849865996, 32851323067, 32851460049, 32852630247,
+    32854420083, 32856710237, 32857124534, 32859276271, 32860578597, 32861099918,
+    32861169687, 32861336037, 32861539918, 32862048453, 32863119537, 32864023130,
+    32864133015, 32864726559, 32864733813, 32864819294, 32865993518, 32866001875,
+    32866092656, 32866530332, 32868539164, 32868774678, 32868948835, 32869742980,
+    32870079427, 32870208994, 32872044760, 32874460878, 32875585062, 32875585131,
+    32875675640, 32876814203, 32877770940, 32879076031, 32879434960, 32879464333
+  ],
+
+  "tombstone_directory": "evidence/run-memory/deleted/",
+  "tombstone_count": 102,
+
+  "recovery_method": {
+    "sources_used": [
+      "Hygiene log deletion lines of run 32880942022 (sole surviving manifest of what was deleted: 'Deleting run <id> | <name> | <created> | <path>')",
+      "Exhaustive git grep of every deleted id across all fetched refs/remotes branch tips",
+      "git log --all commit-message search for every deleted id",
+      "Branch-name search for every deleted id",
+      "Current working-tree content search",
+      "origin/lab/cto history and content (docs/CTO_LEDGER.md, docs/CTO_TO_*.md, state/cto_direction.json, .spider/ receipts)"
+    ],
+    "invented_content": "NONE. No lost log content is reconstructed; tombstones record only Git-verifiable provenance and explicit unknowns."
+  },
+
+  "key_findings": [
+    {
+      "id": "RECOV-1",
+      "finding": "Exactly one deleted run had its output durably transmitted before deletion: CTO Council run 32876814203 committed its full synthesis to origin/lab/cto@6b1f030 ('CTO critical review 32876814203') containing docs/CTO_LEDGER.md (entries CTO-1..CTO-4), five docs/CTO_TO_*.md lane advisories and state/cto_direction.json (council_pass=CTO-4). Loss assessment NONE_MATERIAL.",
+      "evidence_status": "DURABLE_UNAUDITED"
+    },
+    {
+      "id": "RECOV-2",
+      "finding": "Four other deleted Critical CTO Council runs (32864023130, 32864726559, 32875585131, 32879434960) left no run-id-attributable durable artifact in any fetched ref. Cumulative CTO memory plausibly covers same-day passes (later passes supersede earlier ones), but per-run confirmation is impossible post-deletion. Loss assessment UNKNOWN.",
+      "evidence_status": "LOG_ONLY_UNAUDITED"
+    },
+    {
+      "id": "RECOV-3",
+      "finding": "The remaining 97 deleted runs were exclusively supervisors/watchdogs/orchestration (Ox Watchdog, Program/Intel/Lane-Repair/Product/Runtime Supervisors) with NO attached cycle/* branch and NO scientific claim; none is referenced anywhere in durable repo content. Explicit signal per EVIDENCE_CURATOR.md: these deletions carry no scientific-provenance loss.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC"
+    },
+    {
+      "id": "RECOV-4",
+      "finding": "state/cto_direction.json cites 'supersedes CTO-3 (origin/lab/cto@4b77e70)' but sha 4b77e70 was not fetchable from the remote at recovery time (2026-08-25); the pre-CTO-4 council-pass commits are not directly reachable from current refs. Residual uncertainty about earlier pass provenance is recorded rather than resolved.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC"
+    }
+  ],
+
+  "notes": "Counts invariant: deleted_run_count == total_deleted_runs == len(deleted_run_ids) == len(recovered_deleted_run_ids) == sum(loss_assessment_counts) == tombstone_count == 102. This file is a provenance incident record, not a certification of any scientific or advisory claim."
+}

@@ -1,0 +1,26 @@
+{
+  "run_id": 32876814203,
+  "workflow_name": "SPIDER Critical CTO Council",
+  "workflow_path": ".github/workflows/cto-council.yml",
+  "created_at": "2026-08-25T17:15:26Z",
+  "raw_actions_log_available": false,
+  "deletion_source_run_id": 32880942022,
+  "deletion_source_workflow": "SPIDER Repo Hygiene (.github/workflows/repo-hygiene.yml @ 3e5ea6d04ba3c0d6ac097ea63478e90e10a4e7fd)",
+  "durable_refs_recovered": [
+    "git:origin/lab/cto@6b1f030a176d4d5aa6dc59215d29736f33b280c5 (commit message 'CTO critical review 32876814203', authored 2026-08-25T17:51:53Z by spider-chief-cto)",
+    "git:origin/lab/cto:docs/CTO_LEDGER.md (entries CTO-1..CTO-4)",
+    "git:origin/lab/cto:state/cto_direction.json (council_pass CTO-4)",
+    "git:origin/lab/cto:docs/CTO_TO_GRAPH.md",
+    "git:origin/lab/cto:docs/CTO_TO_PHYSICS.md",
+    "git:origin/lab/cto:docs/CTO_TO_INTEL.md",
+    "git:origin/lab/cto:docs/CTO_TO_PRODUCT.md",
+    "git:origin/lab/cto:docs/CTO_TO_RUNTIME.md"
+  ],
+  "recovered_summary": "FULL OUTPUT RECOVERED FROM GIT. This deleted Critical CTO Council run persisted its complete synthesis as commit 6b1f030 on origin/lab/cto ('CTO critical review 32876814203'): docs/CTO_LEDGER.md (four entries CTO-1..CTO-4 dated 2026-08-25, incl. CTO-4 'execution-audit' pass with top bottleneck ONE-SHOT-DECODE-DEBT and program DECODABLE-FIRST-PASSES), five per-lane advisory files docs/CTO_TO_*.md, and state/cto_direction.json (council_pass=CTO-4, kill/deprioritize list, cross-lane incompatibilities X15/X16...). Raw Actions log itself remains lost and was never read; no lost-log content is invented here.",
+  "loss_assessment": "NONE_MATERIAL",
+  "cto_relevance": "HIGH",
+  "route_to": [
+    "CTO"
+  ],
+  "notes": "Provenance verified during distillation of run 32880942022 by git cat-file/show on origin/lab/cto. Durability of the COMMIT is Git-verified; the advisory CONTENT inside it remains unaudited CTO synthesis (no scientific verdict status conferred)."
+}
