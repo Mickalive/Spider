@@ -1,20 +1,19 @@
 {
   "updated": "2026-08-25",
+  "session": "product-director-second-session",
   "build_authorized": false,
   "internal_product_beta_authorized": true,
   "beta_id": "PB-001",
+  "beta_request_revision": 2,
   "evidence_basis": {
-    "graph_accepted_through": "G-H4 (Run 32783797303, audit PASS, safe_to_integrate=true)",
+    "graph_accepted_through": "G-H4 (Run 32783797303, audit PASS, safe_to_integrate=true); addressing program COMPLETE; successor graph-inheritance-scaling launched, NOT decided (depth<=3 stays product frontier)",
     "physics_accepted_through": "WP-005 (Run 32689298051, audit PASS; WP-003B-R2 and WP-005 both FALSIFIED)",
-    "intel_accepted_mechanisms": 0,
+    "intel_accepted_mechanisms": 1,
+    "intel_accepted_mechanism_ids": ["sgdr-state-grounded-dynamic-retrieval"],
+    "intel_acceptance_basis": "audit gate PASS run 32800296360, VALIDATED_USEFUL, claim tier ceiling PROOF_OF_CONCEPT, REPRODUCED_USEFUL under frozen rule; binding wording constraints travel verbatim from results/intel/audit/CYCLE_32800296360_INTEL_GATE.json",
     "product_beta_audits_so_far": 0,
     "excluded_unaudited_branches": [
-      "cycle/graph/32793580374/*",
-      "cycle/intel/32781482957/*",
-      "cycle/intel/32792931901/*",
-      "cycle/intel/32796176172/*",
-      "cycle/physics/32776372437/*",
-      "cycle/physics/32793165981/*"
+      "all cycle/* attempt branches not integrated into lab/graph, lab/physics or lab/intel, including Intel cycle-2 Scout (Unbrowse selection), Physics WP-006 carry-forward work and Graph scaling cycle outputs"
     ]
   },
   "hypotheses": [
@@ -28,11 +27,12 @@
         "blind content-addressed fragment retrieval with expected-UNKNOWN discipline (Graph G-H2)",
         "oracle-equalized iterative replay policy carrying composed depth (Graph G-H2/G-H3 E2)",
         "multi-step login procedure packaging as first-class reusable unit (Graph G-H3 E2, G-H4 R3)",
-        "V31 closed-class descriptor/query equipment (Graph G-H4) — adopted as equipment only"
+        "V31 closed-class descriptor/query equipment (Graph G-H4) — adopted as equipment only, no quantitative transfer claims (fresh instrument spent)",
+        "SGDR-style fused task-goal + current-state-summary candidate scoring for free-form goals in the NL-consumer regime (Intel cycle-1 clean-room reproduction, PoC ceiling): hard@1 36/74 vs task-only 25/74 (11 wins/0 reversals); wrong-context fusion falls back to baseline (24/74); fewer novel actions at equal-or-higher success vs task-only retrieval (39 vs 42 literal; 36 vs 42 paraphrase). Lexical-hash embedder + deterministic summarizer configuration only; binding forbidden wordings apply (no GENERALIZATION language; no unqualified 'beats incumbent'; regime caveat on combined novel-action totals; no login/pager-improvement claims)"
       ],
       "unvalidated_assumptions": [
         "inheritance survives a real LLM consumer (all accepted evidence is scripted deterministic consumers)",
-        "free-form natural-language goals work end-to-end without hand-authored goal signatures at product level",
+        "fused addressing serves free-form natural-language goals END-TO-END inside the product loop (audited only at PoC scale in an isolated harness; neural embedder, LLM summarizer and 10x-library adaptations untested)",
         "savings are material in tokens/model-calls/wall-clock with an LLM in the loop",
         "known failure modes (category goals, >3 distinct fragments, cross-site transfer) stay contained in declared scope"
       ],
@@ -43,9 +43,9 @@
         "selector/action caches (Stagehand-class)",
         "RPA workflow replay (Skyvern-class)"
       ],
-      "differentiation": "Subgoal-addressable executable fragments with empirical validation statistics, provenance and freshness metadata consumed by an external model-agnostic layer — bounded hypothesis from audit-qualified Run-1 survey, not a novelty claim.",
-      "conceptual_architecture": "Producer runs grow validated store -> V31-canonicalized content-addressed retrieval selects fragments/procedures for subgoals -> consumer LLM executes memory-led with exploration fallback and explicit UNKNOWN reporting -> anchored completion predicate equalized across arms -> outcomes written back with provenance (calibration deferred).",
-      "biggest_uncertainty": "Whether the scripted-setup advantage survives a real LLM consumer without memory-induced wrong actions or stale-fragment traps.",
+      "differentiation": "Subgoal-addressable executable fragments with empirical validation statistics, provenance and freshness metadata consumed by an external model-agnostic layer; the free-form-goal front door is now an independently validated external mechanism rather than home-grown addressing — bounded hypothesis from audit-qualified survey, not a novelty claim.",
+      "conceptual_architecture": "Producer runs grow validated store -> fused task+state-summary candidate scoring over auto-derived descriptions (V31 canonicalization as preprocessing) selects fragments/procedures for subgoals -> consumer LLM executes memory-led with exploration fallback and explicit UNKNOWN reporting -> anchored completion predicate equalized across arms -> outcomes written back with provenance (calibration deferred).",
+      "biggest_uncertainty": "Whether the scripted-setup advantage survives a real LLM consumer end-to-end without memory-induced wrong actions, stale-fragment traps or addressing misses under genuine goal rewording.",
       "evidence_needed": "Beta PB-001 outcome vs cold-agent and trajectory-RAG baselines under the preregistered win rule."
     },
     {
@@ -58,14 +58,14 @@
         "freshness/decay", "versioning", "incentives", "cross-model compatibility",
         "permissions/auth", "route invalidation"
       ],
-      "why_watch": "Intel ledger empty (zero reproduced+audited mechanisms); internal confidence/staleness uncalibrated (G8/G9 open); cross-model consumption untested (G10 open). Excluded from PB-001.",
-      "path_to_promising": "First audited Intel mechanism reproducing in a SPIDER-relevant test; G8/G9 calibration evidence; any cross-model consumption result."
+      "why_watch": "The one validated Intel mechanism (addressing layer, PoC tier) is allocated to PH-1's front door. Execution-substrate/registry layer unvalidated: Unbrowse browser-to-first-party-API route capture/replay carries vendor-run OFFICIAL_CLAIM headlines only and is Intel cycle-2's selected reproduction mission. Evidenced registry constraints: weak ecosystem versioning (content-addressing load-bearing), contributed procedures must default to untrusted (documented injection threat model). Internal confidence/staleness UNCALIBRATED (G8/G9 open); cross-model consumption untested (G10 open). Excluded from PB-001.",
+      "path_to_promising": "Intel cycle-2 independent reproduction verdict on Unbrowse-style route capture/replay (either direction informative); G8/G9 calibration evidence; any cross-model consumption result."
     },
     {
       "id": "PH-3",
       "title": "Predictive Web-dynamics routing (physics-powered navigation)",
       "status": "REJECTED",
-      "reason": "Physics WP-003B-R2 FALSIFIED (mean D -0.5016, 0/5 folds, site holdout) and WP-005 FALSIFIED (T1 wins 1/9 p=0.898; T2 wins 4/9 p=0.270), both independently audited; predictability decomposes into persistence + site-local NN memory + action-type semantics. WP-004 committor work blocked pending identifiability. A genuinely new instrument producing an audited positive would be required to reopen narrowly."
+      "reason": "Physics WP-003B-R2 FALSIFIED (mean D -0.5016, 0/5 folds, site holdout) and WP-005 FALSIFIED at fine granularity (T1 wins 1/9 p=0.898; T2 wins 4/9 p=0.270), both independently audited; predictability decomposes into persistence + site-local NN memory + action-type semantics. WP-004 committor work blocked pending identifiability. A genuinely new instrument producing an audited positive would be required to reopen narrowly."
     },
     {
       "id": "PH-4",

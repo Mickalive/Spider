@@ -1,5 +1,7 @@
 {
   "beta_id": "PB-001",
+  "request_revision": 2,
+  "revision_note": "Rev 2 (2026-08-25, second Product session). Re-authorization after working-tree state reset and refreshed accepted snapshots. Substantive deltas vs rev 1: (1) Intel cycle-1 integration adds the first audited external building block (sgdr-state-grounded-dynamic-retrieval, PoC ceiling, gate PASS run 32800296360); (2) A2 is restated around that audited fused-addressing block; (3) a BOUNDED PRE-OUTCOME ARCHITECTURE REVISION is directed to the Beta Architect because the v1 freeze consumed a stale premise ('Intel ledger empty'). All Director-floor clauses (baselines, primary_metrics, win_rule, maximum_scope, kill_condition) are UNCHANGED from rev 1; the frozen architect prereg continues to meet-or-exceed this floor.",
   "hypothesis_id": "PH-1",
   "authorized_by": "PRODUCT_DIRECTOR",
   "authorization_date": "2026-08-25",
@@ -21,7 +23,8 @@
       "cross-site skill transfer claims",
       "category-type goals as primary endpoints (known unsolved failure mode; tracked descriptively)",
       "chains requiring >3 distinct stored fragments (Graph lane's graph-inheritance-scaling program territory; tracked descriptively)",
-      "any predictive-dynamics feature (Physics WP-003B-R2/WP-005 FALSIFIED)"
+      "any predictive-dynamics feature (Physics WP-003B-R2/WP-005 FALSIFIED)",
+      "any route/API-capture-replay or registry feature (Unbrowse-class claims are OFFICIAL_CLAIM vendor-run only; Intel cycle-2 reproduction pending)"
     ]
   },
   "validated_building_blocks": [
@@ -29,15 +32,24 @@
     "Blind content-addressed fragment retrieval with expected-UNKNOWN discipline; cold / verbatim-nearest-replay / single-shot-BFS baselines solved 0/3 composites (Graph G-H2)",
     "Oracle-equalized iterative replay policy carries composed depth at tested depth; login procedure packaging residual value frag 16/16 rows vs graphiter 0/8 (Graph G-H3 E2, audit PASS after repair)",
     "Multi-step login packaging = validated procedural ordering: frag 4/4 login-memory rows vs graphiter 0/4 (exploration-only) vs static edge-unit replay 0/4 with bounce pathology (Graph G-H4 R3)",
-    "V31 closed-class descriptor/query equipment adopted as standard equipment for deeper-chain work (Graph G-H4 program decision); used AS EQUIPMENT ONLY — no quantitative retrieval-transfer claim is licensed (fresh instrument spent)"
+    "V31 closed-class descriptor/query equipment adopted as standard equipment for deeper-chain work (Graph G-H4 program decision); used AS EQUIPMENT ONLY — no quantitative retrieval-transfer claim is licensed (fresh instrument spent)",
+    "SGDR-style fused task-goal + current-state-summary candidate scoring for free-form goals (Intel cycle-1 clean-room reproduction; audit gate PASS run 32800296360; VALIDATED_USEFUL; claim tier ceiling PROOF_OF_CONCEPT): hard-slice correct@1 36/74 vs task-text-only 25/74 (11 paired wins / 0 reversals) under paraphrased goals + shifted entry contexts; wrong-context-summary fusion falls back to baseline level (24/74); converted into fewer novel exploration actions than task-only retrieval at equal-or-higher subgoal success in the NL-consumer regime (39 vs 42 literal; 36 vs 42 paraphrase). Validated configuration ONLY: lexical-hash embedder, deterministic contract-faithful summarizer, pool top-M=max(3k,20), greedy MMR lambda=0.7. BINDING LIMITS THAT TRAVEL: PoC tier; advantage exists vs task-only retrieval exactly and only in the natural-language-consumer regime (hand-authored exact signatures remain more action-efficient where they exist: 21 vs 39 novel on the literal slice); no login/pager addressing improvement claimed; tiny library/sites; GENERALIZATION language forbidden; WebArena headline numbers NOT reproduced and forbidden in any narrative. Clean-room lineage only (intel/experiments/sgdr_repro/); never copy CC BY-SA reference source."
   ],
   "assumptions_under_test": [
     "A1: inheritance benefit survives a real LLM consumer (all accepted evidence used scripted deterministic consumers)",
-    "A2: free-form natural-language goals are served end-to-end by V31-equipped content addressing without hand-authored goal signatures, measured strictly as end-to-end task outcomes",
+    "A2: free-form natural-language goals are served END-TO-END by audited fused task+state-summary candidate scoring (with V31 canonicalization as preprocessing) inside the product loop, without hand-authored goal signatures, measured strictly as end-to-end task outcomes. The PoC-tier isolated-harness result does not settle this: embedder/summarizer/scale adaptations and store-integrated behavior are untested",
     "A3: packaged procedures (login-style fragments) deliver measurable savings over edge iteration AND over prompt-level trajectory memory with an LLM consumer",
     "A4: savings are material in tokens/model-calls/wall-clock seconds (perf_counter instrumentation; first-ever cost/latency measurement of this stack)",
     "A5: known failure modes (category goals, deep chains, cross-site) remain contained inside the declared scope with honest UNKNOWN reporting and zero fabricated successes"
   ],
+  "directed_pre_outcome_revision_v2": {
+    "addressee": "BETA_ARCHITECT",
+    "status_basis": "No Phase-A/B outcome exists anywhere in the repository; builder WP-0 vendoring has not begun; a v2 preregistration issued before any outcome is constitutionally clean (SPIDER_MASTER_PROMPT §19).",
+    "single_change": "In the SPIDER arm's memory-led execution model, replace the whole-goal candidate SCORING layer: rank auto-described fragment candidates by alpha*cos(task_goal_embedding, description) + (1-alpha)*cos(current_state_summary_embedding, description), alpha=0.4, pool top-M=max(3k,20), greedy MMR lambda=0.7, degrade to primitives/explore on weak match per unchanged UNKNOWN thresholds. Current-state summaries use the deterministic contract-faithful summarizer from the validated configuration (harness-side, cost-counted). V31 canonicalization is RETAINED as query preprocessing/equipment. Embedder = lexical-hash as validated; NO neural embedder and NO LLM summarizer may be introduced mid-beta.",
+    "unchanged_elements": "Panel tasks, anchored predicates and their equal disclosure to all arms, arms B0/B1/B2 and their prompts, budgets, metrics, win rule (floor + architect tightenings), scope caps, health gates, write-suppression discipline, freeze checkpoints F1/F2 semantics.",
+    "forbidden": "Changing any baseline capability, weakening any win clause, quoting quantitative V31 retrieval-transfer rates, citing WebArena numbers, adding unvalidated adaptations to any arm.",
+    "deliverable": "product-beta/PB-001/BENCHMARK_PREREG.md v2 + amended state/product_beta_architecture.json, committed before any outcome; delta section disclosing this directive as the sole semantic change vs v1."
+  },
   "baselines": {
     "B0_cold_current_agent": "A mainstream ReAct-style LLM browser-use agent (frozen open framework chosen and committed by the Beta Architect BEFORE any outcome), same backbone model and version as the SPIDER consumer, identical observation/action space, identical step/token budgets, no memory. This is the primary 'credible current agent' comparison.",
     "B1_trajectory_memory": "Same agent + top-k retrieved prior successful trajectories injected into the prompt (AWM-class procedural-memory baseline). Mandatory because memory-beating-no-memory is not sufficient evidence per constitution §13.",
@@ -48,7 +60,8 @@
       "knowledge base byte-restored before every evaluation row; evaluation runs write nothing to the store",
       "anchored (path-anchored, non-substring) success predicates only",
       "site-health gate per row; seeded determinism where the harness permits",
-      "paraphrase/goal authorship recorded; independent-of-consumer-family authorship preferred"
+      "paraphrase/goal authorship recorded; independent-of-consumer-family authorship preferred",
+      "all SPIDER-arm retrieval/planning/summarization overhead counted inside SPIDER totals (no hidden subsidy)"
     ]
   },
   "primary_metrics": [
@@ -61,7 +74,7 @@
     "UNKNOWN/false-match discipline events (descriptive; false accepts are violations)"
   ],
   "win_rule": {
-    "preregistration_note": "The Beta Architect freezes exact thresholds, panel composition and n in the beta preregistration BEFORE any Phase-B outcome; the values below are the Director-mandated floor that the freeze must meet or exceed in strictness.",
+    "preregistration_note": "The Beta Architect freezes exact thresholds, panel composition and n in the beta preregistration BEFORE any Phase-B outcome; the values below are the Director-mandated floor that the freeze must meet or exceed in strictness. (Architect v1 froze this floor verbatim plus tightenings 5-7; v2 must preserve both.)",
     "WIN_if_all": [
       "success_SPIDER >= success_best_baseline - 0.10 absolute on the full panel including R3 control rows",
       "on R1+R2 rows: median browser actions reduced >= 50% AND median total tokens reduced >= 40% AND median wall-clock reduced >= 30% versus the strongest baseline achieving comparable success (B1 if it beats B0)",
@@ -95,6 +108,9 @@
     "remaining_assumptions_beta_testable": true,
     "credible_baseline_defined": true,
     "fair_instrumentation_specified": true,
-    "falsifiable_win_rule_before_outcome": true
+    "falsifiable_win_rule_before_outcome": true,
+    "exactly_one_beta_authorized": true,
+    "no_lane_verdicts_altered": true,
+    "public_deployment_or_commercialization": false
   }
 }

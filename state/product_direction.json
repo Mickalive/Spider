@@ -1,7 +1,9 @@
 {
   "updated": "2026-08-25",
+  "session": "product-director-second-session",
   "beta_launch": true,
   "beta_id": "PB-001",
+  "beta_request_revision": 2,
   "beta_request": "state/product_beta_request.json",
   "public_deployment_authorized": false,
   "commercialization_authorized": false,
@@ -30,10 +32,11 @@
     }
   ],
   "evidence_basis": {
-    "graph": "G-H1..G-H4 accepted through Run 32783797303 audit PASS (safe_to_integrate=true, required_fixes=[])",
+    "graph": "G-H1..G-H4 accepted through Run 32783797303 audit PASS (safe_to_integrate=true, required_fixes=[]); addressing program COMPLETE; graph-inheritance-scaling launched, not decided",
     "physics": "WP-003B-R2 + WP-005 FALSIFIED, audits VALIDATED_FOR_CURRENT_TEST / PASS; WP-004 blocked",
-    "intel": "ledger empty; zero validated mechanisms",
+    "intel": "cycle 1 integrated: sgdr-state-grounded-dynamic-retrieval VALIDATED_USEFUL at PROOF_OF_CONCEPT ceiling (gate PASS run 32800296360); binding wording constraints travel verbatim",
     "product_beta_audits": 0
   },
-  "reason": "All five beta criteria from directives/PRODUCT_DIRECTOR.md are met: multiple audited building blocks exist (store+replay+reset, blind retrieval, procedure packaging, V31 equipment); the remaining critical assumptions (LLM consumer, free-form goal addressing, material cost/latency deltas, failure-mode containment) are exactly what an internal benchmarkable MVP can test; credible baselines are cleanly definable (cold same-backbone browser agent + AWM-class trajectory-memory baseline + exact-replay sanity); fair instrumentation is specified (perf_counter, token accounting, byte-restored KB, write-suppressed evaluation, equalized acceptance predicates, health gates); and a falsifiable win rule has been written before any benchmark outcome."
+  "next_role": "BETA_ARCHITECT: issue BENCHMARK_PREREG v2 per state/product_beta_request.json.directed_pre_outcome_revision_v2 BEFORE any outcome; then BETA_BUILDER executes BUILD_PLAN work packages under freeze checkpoints F1/F2",
+  "reason": "All five beta criteria from directives/PRODUCT_DIRECTOR.md are met, now more strongly than at first authorization: audited building blocks exist and grew by one (the first externally sourced, independently validated mechanism — SGDR fused task+state retrieval — directly de-risking the free-form-goal front door at PoC tier); remaining critical assumptions (LLM consumer end-to-end, material cost/latency deltas, failure-mode containment) are precisely what an internal benchmarkable MVP tests; credible baselines are cleanly definable (cold same-backbone browser agent + AWM-class trajectory-memory baseline + exact-replay sanity); fair instrumentation is specified (perf_counter, token/call accounting, byte-restored KB, write-suppressed evaluation, equalized acceptance predicates, health gates); and a falsifiable win rule was written before any benchmark outcome. Exactly ONE beta remains authorized (PB-001). The directed pre-outcome revision v2 exists because the v1 architect freeze consumed a stale premise ('Intel ledger empty'); no outcome exists anywhere, so re-freezing with the audited addressing block is clean and makes the test fairer to the product hypothesis without weakening any baseline or clause."
 }
