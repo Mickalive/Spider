@@ -38,9 +38,6 @@ CONTROL_PATHS=(
 
 restore_path_from_head() {
   local path="$1"
-  # Reset the index one path at a time. A single multi-path reset used to fail
-  # wholesale when origin/main introduced a file absent from an older lab/*
-  # branch, leaving the whole control overlay staged and tripping lane guards.
   git reset -q HEAD -- "$path" 2>/dev/null || true
 
   if git cat-file -e "HEAD:$path" 2>/dev/null; then
@@ -49,8 +46,6 @@ restore_path_from_head() {
     rm -rf -- "$path"
   fi
 
-  # Any file that exists on main but not on the current accepted branch became
-  # untracked after the index reset; remove only inside the protected path.
   git clean -fdq -- "$path" 2>/dev/null || true
 }
 
@@ -63,7 +58,6 @@ restore_control_plane() {
   done
   CONTROL_ACTIVE=false
 
-  # Guard against silent governance residue before the lane's own scope guard.
   local residue=""
   for path in "${CONTROL_PATHS[@]}"; do
     if [[ -n "$(git status --porcelain -- "$path" 2>/dev/null || true)" ]]; then
@@ -102,8 +96,6 @@ stage_control_plane() {
   done
   CONTROL_ACTIVE=true
 
-  # Stable absolute control bundle for agents whose task worktree/cwd differs
-  # from the repository root. This is read-only governance, never lane output.
   rm -rf /tmp/spider_control
   mkdir -p /tmp/spider_control
   for path in AGENTS.md .opencode/agents docs/agents docs/roles SPIDER_MASTER_PROMPT.md SPIDER_ARCHITECTURE_V2.md SPIDER_ARCHITECTURE_V3.md directives/CAPABILITY_CAPSULE.md directives/AUDITOR.md directives/LANE_DIRECTOR.md directives/LAB_DIRECTOR.md directives/INTEL_REPRO.md directives/INTEL_AUDITOR.md directives/INTEL_DIRECTOR.md directives/PRODUCT_DIRECTOR.md directives/PRODUCT_OPTIMIZATION.md; do
@@ -118,6 +110,36 @@ validate_agent_card() {
   local requested=""
   local prev=""
   local arg
+  local registry="docs/agents/AGENT_CARDS.md"
+
+  if [[ ! -f "$registry" ]]; then
+    echo "::error::Missing canonical SPIDER agent registry: $registry" >&2
+    return 64
+  fi
+
+  # Every configured custom agent must have exactly one operating card.
+  local bad=0
+  local file id count
+  while IFS= read -r file; do
+    id="${file#.opencode/agents/}"
+    id="${id%.md}"
+    count=$(grep -Fc "<!-- AGENT_CARD: ${id} " "$registry" || true)
+    if [[ "$count" -ne 1 ]]; then
+      echo "::error::Agent '${id}' has ${count} canonical cards; expected exactly 1." >&2
+      bad=1
+    fi
+  done < <(find .opencode/agents -type f -name '*.md' | sort)
+
+  # Every card must correspond to an actual custom-agent definition.
+  while IFS= read -r id; do
+    [[ -n "$id" ]] || continue
+    if [[ ! -f ".opencode/agents/${id}.md" ]]; then
+      echo "::error::Canonical card '${id}' has no matching .opencode agent definition." >&2
+      bad=1
+    fi
+  done < <(grep '^<!-- AGENT_CARD:' "$registry" | awk '{print $3}')
+
+  [[ "$bad" -eq 0 ]] || return 66
 
   for arg in "$@"; do
     if [[ "$prev" == "--agent" ]]; then
@@ -130,15 +152,8 @@ validate_agent_card() {
     prev="$arg"
   done
 
-  # Some OpenCode invocations may intentionally use a built-in/default agent.
-  # Only named custom-agent launches are governed by this registry check.
+  # Some OpenCode invocations intentionally use a built-in/default agent.
   [[ -n "$requested" ]] || return 0
-
-  local registry="docs/agents/AGENT_CARDS.md"
-  if [[ ! -f "$registry" ]]; then
-    echo "::error::Missing canonical SPIDER agent registry: $registry" >&2
-    return 64
-  fi
 
   local marker
   marker=$(grep -F "<!-- AGENT_CARD: ${requested} " "$registry" | head -n1 || true)
@@ -152,7 +167,7 @@ validate_agent_card() {
     return 65
   fi
 
-  echo "SPIDER_AGENT_CARD_OK agent=${requested}"
+  echo "SPIDER_AGENT_CARD_OK agent=${requested} registry=complete"
 }
 
 stage_control_plane
@@ -189,7 +204,6 @@ run_once() {
           kill -9 "$CHILD_PID" 2>/dev/null || true
           exit 0
         fi
-        # No explicit network evidence: never kill legitimate long reasoning.
         last_change="$now"
       fi
     done
@@ -216,8 +230,6 @@ while (( attempt <= MAX_ATTEMPTS )); do
   rc=$?
 
   if [[ "$rc" -eq 0 ]]; then
-    # Restore BEFORE returning success so subsequent workflow scope guards see
-    # only the lane/auditor's real writes, not temporary main governance.
     if ! restore_control_plane; then
       exit 1
     fi
