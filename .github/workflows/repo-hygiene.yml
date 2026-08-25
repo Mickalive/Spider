@@ -55,13 +55,16 @@ jobs:
           gh api --paginate "repos/${GITHUB_REPOSITORY}/actions/runs?per_page=100" \
             --jq '.workflow_runs[] | [.id,.workflow_id,.status,.created_at,.name,.path] | @tsv' > "$tmp"
 
-          # Active runs and the latest few runs of every workflow are always
-          # retained for immediate debugging even when an archive exists.
+          # Active runs are always protected.
           while IFS=$'\t' read -r id wid status created name path; do
             [[ "$status" != completed ]] && PROTECT["$id"]=1
           done < "$tmp"
 
+          # Keep a small immediate-debug window ONLY for workflows still
+          # present on main. Deleted/superseded workflow histories have no
+          # permanent cosmetic retention once they are safely distilled.
           while IFS=$'\t' read -r id wid status created name path; do
+            [[ -f "$path" ]] || continue
             n=${COUNT[$wid]:-0}
             if (( n < KEEP_LATEST_PER_WORKFLOW )); then
               PROTECT["$id"]=1
