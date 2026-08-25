@@ -35,7 +35,7 @@ permissions:
 
 concurrency:
   group: spider-critical-cto-council
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 env:
   SPIDER_MODEL: opencode/x-preview-f-free
