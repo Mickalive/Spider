@@ -31,14 +31,42 @@ CONTROL_PATHS=(
   "intel/competitor_seed.json"
 )
 
+restore_path_from_head() {
+  local path="$1"
+  # Reset the index one path at a time. A single multi-path reset used to fail
+  # wholesale when origin/main introduced a file absent from an older lab/*
+  # branch, leaving the whole control overlay staged and tripping lane guards.
+  git reset -q HEAD -- "$path" 2>/dev/null || true
+
+  if git cat-file -e "HEAD:$path" 2>/dev/null; then
+    git checkout -q -- "$path" 2>/dev/null || true
+  else
+    rm -rf -- "$path"
+  fi
+
+  # Any file that exists on main but not on the current accepted branch became
+  # untracked after the index reset; remove only inside the protected path.
+  git clean -fdq -- "$path" 2>/dev/null || true
+}
+
 restore_control_plane() {
   if [[ "$CONTROL_ACTIVE" != true ]]; then
     return 0
   fi
-  git reset -q HEAD -- "${CONTROL_PATHS[@]}" 2>/dev/null || true
-  git checkout -q -- "${CONTROL_PATHS[@]}" 2>/dev/null || true
-  git clean -fdq -- "${CONTROL_PATHS[@]}" 2>/dev/null || true
+
+  local path
+  for path in "${CONTROL_PATHS[@]}"; do
+    restore_path_from_head "$path"
+  done
   CONTROL_ACTIVE=false
+
+  local residue
+  residue="$(git status --porcelain -- "${CONTROL_PATHS[@]}" 2>/dev/null || true)"
+  if [[ -n "$residue" ]]; then
+    echo "::error::SPIDER control-plane overlay restoration left residue:" >&2
+    printf '%s\n' "$residue" >&2
+    return 1
+  fi
 }
 
 stop_children() {
@@ -58,7 +86,7 @@ stop_children() {
 
 cleanup() {
   stop_children
-  restore_control_plane
+  restore_control_plane || true
   rm -f "$LOG" "$STALL_FLAG"
 }
 
@@ -98,9 +126,8 @@ prepare_control_plane() {
 
   if ! git checkout -q origin/main -- "${CONTROL_PATHS[@]}"; then
     echo "::warning::Could not overlay full origin/main control plane; restoring branch-local files." >&2
-    git reset -q HEAD -- "${CONTROL_PATHS[@]}" 2>/dev/null || true
-    git checkout -q -- "${CONTROL_PATHS[@]}" 2>/dev/null || true
-    git clean -fdq -- "${CONTROL_PATHS[@]}" 2>/dev/null || true
+    CONTROL_ACTIVE=true
+    restore_control_plane || true
     return 0
   fi
 
@@ -109,10 +136,8 @@ prepare_control_plane() {
 }
 
 # Agents sometimes resolve repository-relative reads against the runner parent
-# directory. Stage a stable read-only-by-convention control bundle in /tmp so
-# formal roles and directives remain addressable regardless of that cwd quirk.
-# Do not remove /tmp/spider_control here: some workflows execute this script
-# from that directory.
+# directory. Stage a stable control bundle in /tmp so formal roles and
+# directives remain addressable regardless of that cwd quirk.
 stage_control_bundle() {
   local root="/tmp/spider_control"
   mkdir -p "$root/roles" "$root/directives"
@@ -202,15 +227,20 @@ for ((attempt = 1; attempt <= MAX_ATTEMPTS; attempt++)); do
   fi
 
   if [[ "$rc" -eq 0 ]]; then
+    # Restore before returning control to workflow scope guards, not only in
+    # the EXIT trap. This makes the invariant explicit and testable.
+    restore_control_plane || exit 76
     exit 0
   fi
 
   if ! grep -Eiq "$NETWORK_RE" "$LOG" 2>/dev/null && ! grep -Fq 'SPIDER_NETWORK_STALL_ABORT' "$STALL_FLAG" 2>/dev/null; then
+    restore_control_plane || true
     echo "::error::SPIDER_OX_NONTRANSIENT exit=$rc; watchdog will not retry this failure." >&2
     exit "$rc"
   fi
 
   if [[ "$attempt" -eq "$MAX_ATTEMPTS" ]]; then
+    restore_control_plane || true
     echo "::error::SPIDER_TRANSIENT_OX_EXHAUSTED attempts=$MAX_ATTEMPTS exit=$rc" >&2
     exit "$rc"
   fi
@@ -219,4 +249,5 @@ for ((attempt = 1; attempt <= MAX_ATTEMPTS; attempt++)); do
   sleep "$RETRY_DELAY"
 done
 
+restore_control_plane || true
 exit 1
