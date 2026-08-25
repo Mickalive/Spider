@@ -443,7 +443,7 @@
       "id": "CF-2026-08-25-20",
       "importance": "HIGH",
       "kind": "INFRA_FAILURE_MODE",
-      "summary": "product-loop.yml's destructive wipe deletes COMMITTED-AT-HEAD authorization/build state on every dispatch and survived its own hotfix: `rm -f state/product_beta_request.json` (:63), `state/product_beta_architecture.json` (:136), `state/product_beta_build.json` (:236), `state/product_beta_audit.json` (:327) are still live at main HEAD, and both director sessions in run 32886859788 confirmed 'still live even at the hotfix commit 8f3980c'. Observed damage in this single run: seventh-session Director had to detect the wiped working-tree request, verify rev 6 intact at HEAD via git show, and restore before writing rev 7; Builder found F1/F2 freeze artifacts (results/product-beta/PB-001/* incl. the hash-pinned KB) destroyed and restored them byte-exact from ddce3a3 with independent hash recomputation; eighth session found stale direction state on both mounts. Each dispatch burns agent time on detect-and-restore rituals and manufactures exactly the kind of mount-vs-durable divergence that produced CF-19.",
+      "summary": "product-loop.yml's destructive wipe deletes COMMITTED-AT-HEAD authorization/build state on every dispatch and survived its own hotfix: `rm -f state/product_beta_request.json` (:63), `state/product_beta_architecture.json` (:136), `state/product_beta_build.json` (:236), `state/product_beta_audit.json` (:327) are still live at main HEAD, and both director sessions in run 32886859788 confirmed 'still live even at the hotfix commit 8f3980c'. Observed damage in this single run: seventh-session Director had to detect the wiped working-tree request, verify rev 6 intact at HEAD via git show, and restore before writing rev 7; Builder found F1/F2 freeze artifacts (results/product-beta/PB-001/* incl. the hash-pinned KB) destroyed and restored them byte-exact from ddce3a3 with independent hash recomputation; eighth session found stale direction state on both mounts. Each dispatch burns agent time on detect-and-restore rituals and manufactures exactly the kind of mount-vs-durable divergence that produced CF-19. RECURRENCE: re-confirmed LIVE again in product-loop #10 (run 32908007576, ninth Director session) — working-tree request file wiped pre-session once more and restored byte-identical from HEAD (sha256 d8b007a7…d7582); escalation renewed with exact workflow lines L62–68 named as the mechanical remedy.",
       "evidence_status": "DURABLE_UNAUDITED",
       "source_run_id": 32886859788,
       "durable_refs": [
@@ -723,6 +723,62 @@
         "INFRA",
         "CTO",
         "RUNTIME"
+      ]
+    },
+    {
+      "id": "CF-2026-08-25-31",
+      "importance": "HIGH",
+      "kind": "PROVENANCE_RESOLUTION",
+      "summary": "Session-8 PB-001 provenance gap VERIFIED RESOLVED at the source, but the closing merge is STILL undone (narrows CF-19): run 32908007576's ninth Director session proved by Git inspection that the combined v4+v5 amendment (cycle/product/32886859788/architect@ddce3a3) and Builder WP-8 tree (…/builder@7657565) are durably pushed, re-verified ALL FIVE recovery hashes byte-exact, and adjudicated the one apparent mismatch as a DISCLOSED supersession recorded in MANIFEST.v4_builder_wp8.verification.dress_rehearsal_rerun (02dddfaa… supersedes pinned 823dedea…, rerun green vs WP-8-amended code 20:55:11Z, dead_pairs empty) — zero unexplained hash drift in the frozen set. Remaining risk is purely mechanical: product-beta/PB-001/BENCHMARK_PREREG_V4_ADDENDUM.md is still ABSENT from lab/product tip dc716c5 (curator-verified); a single UNCHANGED merge closes it.",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "source_run_id": 32908007576,
+      "durable_refs": [
+        "git:origin/lab/product@dc716c55e0bbf885191b2ba1fc2350e2c817ac77 (ninth-session ledger + state)",
+        "git:origin/cycle/product/32886859788/architect@ddce3a399fcf7b627eb5dec0809c316471e4f442",
+        "git:origin/cycle/product/32886859788/builder@76575657195d7bd810e7670e5d565d23dda33004"
+      ],
+      "actionable_next": "Execute the directed bounded BETA_ARCHITECT session item (1): merge both durable lines into a lab branch UNCHANGED, re-verify hashes incl. the supersession pair; post-merge assertion `git show <tip>:product-beta/PB-001/BENCHMARK_PREREG_V4_ADDENDUM.md` must succeed.",
+      "route_to": [
+        "PRODUCT",
+        "CTO",
+        "INFRA"
+      ]
+    },
+    {
+      "id": "CF-2026-08-25-32",
+      "importance": "MEDIUM",
+      "kind": "RESEARCH_RADAR",
+      "summary": "PB-001 remains THE single authorized beta in WATCH armed-park after its ninth review; park governance hardened rather than weakened: fresh-context adversarial CTO pass adopted (slot-contention rule replacing any hard sunset while no alternative claimant exists; immediate bounded durability activation because the live wipe defect makes deferral risky; pre-recorded NON-BINDING post-loss decode taxonomy using G-H6 attribution classes so post-outcome attribution cannot be invented ad hoc; escalations with mechanical remedies) and rejected (terminating PB-001 = evidence-free abandonment of a fully built armed instrument; Director-authored harness edits = role boundary; informal PH-2 'partial unlock' = gate-discipline erosion). Credentials PB_LLM_API_KEY/PB_LLM_MODEL re-verified UNSET live; zero outcome rows anywhere; NOT_BENCHMARKED unchanged; kill slots 1 of 2.",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "source_run_id": 32908007576,
+      "durable_refs": [
+        "git:origin/lab/product@dc716c55e0bbf885191b2ba1fc2350e2c817ac77 (docs/PRODUCT_LEDGER.md ninth-session entry; results/product/PRODUCT_HYPOTHESES.json post_loss_decode_plan_non_binding)"
+      ],
+      "actionable_next": "Sole go-live blocker is unchanged: configure backbone credentials; resume is mechanical through the frozen gate chain (provider telemetry row -> dress-rehearsal replay incl. seam lint -> B0 pilot smoke -> Phase B under floors carried verbatim since rev 1).",
+      "route_to": [
+        "PRODUCT",
+        "CTO"
+      ]
+    },
+    {
+      "id": "CF-2026-08-25-33",
+      "importance": "MEDIUM",
+      "kind": "RESEARCH_RADAR",
+      "summary": "First cross-lane intake into Product reasoning at audit ceilings sets two binding boundaries for all future reuse claims: (a) Runtime R0-1 accepted (audit PASS run 32887030457, lab/runtime@9dc50ba) ONLY at its ceilings — exact-repeat PARITY 4v4 / novel decisions 0v4 with producer-WITHDRAWN compression wording is recorded verbatim as NOT economic evidence (n=1/cell scripted, zero provider calls), and its 88 cost-event twins vs pb001.cost_event/v0 with 0 identity errors TRIGGERED the contracted interim-telemetry 1:1 field-migration duty, making the dual-id mapping delta (spider.cost_event/v0 alongside pb001.cost_event/v0, no treatment-byte change) a concrete pre-outcome infra task binding on PB-001; (b) Graph G-H6 SITE-BOUND (audit PASS run 32900187567): depth>=4 memory-led advantage is INVENTORY-CONDITIONAL (zero qualifying books rows either pass; quotes family bit-identical on 36 cells) — reuse claims must be scoped to inventories whose stored descriptions demonstrably address consumer subgoals. Intel cycle-6 excluded as unaudited; PH-2 unlock(2) has accepted PRELIMINARY evidence only, formally deferred to Runtime acceptance of a route-tier HTTP executor (still absent).",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "source_run_id": 32908007576,
+      "durable_refs": [
+        "git:origin/lab/product@dc716c55e0bbf885191b2ba1fc2350e2c817ac77 (results/product/PRODUCT_HYPOTHESES.json runtime_accepted_through + graph_g_h6_site_bound)",
+        "git:origin/lab/runtime@9dc50ba2bceaccafa58de0c04d3eaab1daa178f3",
+        "git:lab/graph c363bcc/eb53a7f + audit CYCLE_32900187567"
+      ],
+      "actionable_next": "Runtime: land route-tier HTTP executor consideration + dual-id cost-event schema convergence with Product (pre-outcome, disclosed). Intel: cycle-6 multi-host/real-staleness mission gates PH-2 unlock(1). All lanes: scope reuse wording per G-H6 inventory-conditionality.",
+      "route_to": [
+        "RUNTIME",
+        "INTEL",
+        "GRAPH",
+        "PRODUCT",
+        "CTO"
       ]
     }
   ]
