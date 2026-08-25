@@ -27,7 +27,6 @@ on:
       - '.opencode/agents/cto_*.md'
       - '.opencode/agents/frontier_research_*.md'
       - 'evidence/run-memory/CTO_FEED.json'
-      - 'evidence/run-memory/INDEX.md'
 
 permissions:
   contents: write
