@@ -79,14 +79,11 @@ jobs:
             add_if_needed "$INPUT_RUN_ID"
           elif [[ "$EVENT_NAME" == workflow_run && -n "$SOURCE_RUN_ID" ]]; then
             add_if_needed "$SOURCE_RUN_ID"
+          elif [[ ! -f evidence/run-memory/DELETED_RUNS_RECOVERY.json ]]; then
+            # Dedicated recovery pass. Do not dilute the cleanup/deletion
+            # manifest with unrelated logs in the same model context.
+            add_if_needed "$CLEANUP_INCIDENT_RUN"
           else
-            # First recover the one cleanup run that deleted pre-curator
-            # Actions history. Its own log is the deletion manifest used to
-            # reconstruct tombstones for those now-missing runs.
-            if [[ ! -f evidence/run-memory/DELETED_RUNS_RECOVERY.json ]]; then
-              add_if_needed "$CLEANUP_INCIDENT_RUN"
-            fi
-
             while read -r id; do
               [[ "$(wc -l < /tmp/spider_run_evidence/targets.txt)" -ge "$BACKFILL_BATCH" ]] && break
               add_if_needed "$id"
