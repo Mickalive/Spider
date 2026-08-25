@@ -8,6 +8,7 @@ on:
     workflows:
       - "SPIDER Graph Lane"
       - "SPIDER Physics Lane"
+      - "SPIDER Runtime Lane"
     types: [completed]
   push:
     branches: [main]
@@ -88,3 +89,4 @@ jobs:
 
           handle_lane graph graph-loop.yml GRAPH
           handle_lane physics physics-loop.yml PHYSICS
+          handle_lane runtime runtime-loop.yml RUNTIME
