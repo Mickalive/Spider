@@ -1,0 +1,132 @@
+name: SPIDER Repo Hygiene
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 3 * * *"
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/repo-hygiene.yml'
+
+permissions:
+  actions: write
+  contents: read
+
+concurrency:
+  group: spider-repo-hygiene
+  cancel-in-progress: true
+
+jobs:
+  prune_actions_history:
+    name: Prune obsolete Actions runs without deleting scientific provenance
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Delete obsolete run noise, preserve evidence-bearing cycles
+        env:
+          GH_TOKEN: ${{ github.token }}
+          KEEP_LATEST_PER_WORKFLOW: 3
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          declare -A PROTECT=()
+          declare -A COUNT=()
+
+          # Never touch this run.
+          PROTECT["$GITHUB_RUN_ID"]=1
+
+          # Scientific/product/frontier snapshots are durable provenance. Any
+          # run id embedded in a cycle/* branch name is therefore protected.
+          while read -r id; do
+            [[ -n "$id" ]] && PROTECT["$id"]=1
+          done < <(
+            git ls-remote --heads origin \
+              | awk '$2 ~ /^refs\/heads\/cycle\//' \
+              | grep -oE '[0-9]{8,}' \
+              | sort -u
+          )
+
+          # Accepted-state and ledger files sometimes retain run ids even when
+          # a cycle branch is later reorganized. Protect every run-like id
+          # reachable from accepted lab/* heads as a second provenance layer.
+          for lane in graph physics intel product runtime cto; do
+            ref="lab/$lane"
+            if git ls-remote --exit-code --heads origin "refs/heads/$ref" >/dev/null 2>&1; then
+              git fetch -q origin "$ref:refs/remotes/origin/$ref"
+              while read -r id; do
+                [[ -n "$id" ]] && PROTECT["$id"]=1
+              done < <(
+                git grep -IhoE '[0-9]{8,}' "refs/remotes/origin/$ref" -- \
+                  'state/**' 'docs/**' 'results/**' 'reports/**' 2>/dev/null \
+                  | sort -u || true
+              )
+            fi
+          done
+
+          # Frontier accepted branches are dynamic; protect ids referenced by
+          # every accepted frontier head too.
+          while read -r ref; do
+            [[ -z "$ref" ]] && continue
+            git fetch -q origin "$ref:$ref" 2>/dev/null || true
+            while read -r id; do
+              [[ -n "$id" ]] && PROTECT["$id"]=1
+            done < <(
+              git grep -IhoE '[0-9]{8,}' "$ref" -- 'frontier/**' 'state/**' 'docs/**' 'results/**' 'reports/**' 2>/dev/null \
+                | sort -u || true
+            )
+          done < <(git ls-remote --heads origin 'refs/heads/lab/frontier/*' | awk '{print $2}' | sed 's#^refs/heads/##')
+
+          tmp=$(mktemp)
+          gh api --paginate "repos/${GITHUB_REPOSITORY}/actions/runs?per_page=100" \
+            --jq '.workflow_runs[] | [.id,.workflow_id,.status,.created_at,.name,.path] | @tsv' > "$tmp"
+
+          # Protect active runs and the N most recent runs of every workflow.
+          while IFS=$'\t' read -r id wid status created name path; do
+            if [[ "$status" != completed ]]; then
+              PROTECT["$id"]=1
+            fi
+          done < "$tmp"
+
+          while IFS=$'\t' read -r id wid status created name path; do
+            n=${COUNT[$wid]:-0}
+            if (( n < KEEP_LATEST_PER_WORKFLOW )); then
+              PROTECT["$id"]=1
+              COUNT["$wid"]=$((n + 1))
+            fi
+          done < <(sort -t $'\t' -k4,4r "$tmp")
+
+          deleted=0
+          kept=0
+          failed=0
+          while IFS=$'\t' read -r id wid status created name path; do
+            [[ "$status" == completed ]] || { kept=$((kept + 1)); continue; }
+
+            # Deleted legacy workflows are pure orchestration noise. Their
+            # completed runs can disappear unless referenced as provenance.
+            legacy=false
+            case "$name" in
+              "SPIDER Launcher — Graph + Physics"|"SPIDER Meta Sync") legacy=true ;;
+            esac
+
+            if [[ -n "${PROTECT[$id]:-}" ]]; then
+              kept=$((kept + 1))
+              continue
+            fi
+
+            echo "Deleting run $id | $name | $created | $path"
+            if gh api -X DELETE "repos/${GITHUB_REPOSITORY}/actions/runs/${id}" >/dev/null 2>&1; then
+              deleted=$((deleted + 1))
+            else
+              echo "::warning::Could not delete run $id"
+              failed=$((failed + 1))
+            fi
+          done < "$tmp"
+
+          rm -f "$tmp"
+          echo "Repo hygiene complete: deleted=$deleted kept=$kept failed=$failed protected_ids=${#PROTECT[@]}"
