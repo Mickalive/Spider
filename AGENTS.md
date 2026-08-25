@@ -5,6 +5,23 @@ Updated: 2026-08-25.
 
 OpenCode loads this file automatically. It is the common contract for every SPIDER agent, regardless of lane.
 
+## 0. Constitutional precedence
+
+`SPIDER_MASTER_PROMPT.md` remains the stable original scientific constitution and MUST NOT be silently rewritten.
+
+`SPIDER_ARCHITECTURE_V2.md` and especially HUMAN-AUTHORIZED `SPIDER_ARCHITECTURE_V3.md` are later constitutional/architectural amendments. They preserve all historical scientific verdicts but supersede older ORGANIZATIONAL clauses of the Master Prompt where the documents conflict.
+
+In particular, old Master-Prompt language describing SPIDER as only two Graph/Physics lanes, assigning global integration to a Lab/Meta-Director, or allowing one exhausted Physics program to end the whole Physics domain is historical organizational text and MUST NOT override V3.
+
+Current organization is:
+- permanent core lanes Graph, Physics, Intel, Product and Runtime;
+- global Chief CTO portfolio governance;
+- elastic CTO-chartered Frontier research teams;
+- Evidence Curator / durable run memory for non-promotional operational knowledge;
+- no global Physics-domain closure without an explicit future human constitutional decision.
+
+If an older role/directive conflicts with V3 on organization, follow V3 and the current canonical agent card. Never use this precedence rule to alter a frozen experiment, audit or scientific verdict.
+
 ## 1. Find and obey your exact operating card
 
 Before substantive work, identify your exact configured agent id and read its card in `docs/agents/AGENT_CARDS.md`.
