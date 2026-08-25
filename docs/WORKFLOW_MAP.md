@@ -4,6 +4,12 @@ Status: operational inventory after Architecture V3 cleanup, 2026-08-25.
 
 This file is descriptive, not scientific evidence. A workflow that is no longer needed by this architecture should be removed rather than kept as historical clutter. Scientific/history provenance belongs in accepted branches, cycle branches, ledgers and Run Evidence Memory — not in obsolete workflow YAML.
 
+## Agent control plane
+
+Every OpenCode session receives root `AGENTS.md`. Every configured custom agent in `.opencode/agents/` must have exactly one operating card in `docs/agents/AGENT_CARDS.md` defining status, mission, inputs, outputs, boundaries and handoff/stop rules.
+
+`run-opencode-with-retry.sh` overlays this current control plane onto persistent lab branches and refuses to launch when the custom-agent registry is incomplete, duplicated or when a requested agent is `LEGACY_DISABLED` without explicit reactivation. This applies even when a lab branch contains an older role definition.
+
 ## Core work lanes
 
 | Workflow | Purpose | Persistent truth |
@@ -53,3 +59,5 @@ This file is descriptive, not scientific evidence. A workflow that is no longer 
 4. A log-only finding can orient research but cannot become accepted evidence without validation.
 5. Deleted workflow YAML is not an archive mechanism; durable knowledge must live elsewhere.
 6. New workflows should be created only when an existing generic lane/supervisor cannot express the function cleanly.
+7. A custom agent without exactly one canonical operating card is a control-plane error, not an invitation to improvise.
+8. `LEGACY_DISABLED` agents remain historical definitions only until explicit human/CTO reactivation under the current architecture.
