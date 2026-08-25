@@ -11,6 +11,8 @@ Before substantive work, identify your exact configured agent id and read its ca
 
 Use the marker `AGENT_CARD: <agent_id>` to locate only your card. Do not invent a role from the filename or from old prompts.
 
+If no exact card exists for your configured agent id, stop substantive work and report a control-plane error. Missing role documentation is never permission to improvise a new mandate.
+
 If your card says `LEGACY_DISABLED`, stop substantive work and report that the role is retired unless the current workflow/CTO charter explicitly authorizes reactivation. A legacy role must never silently resume old architecture assumptions.
 
 The exact-role card is authoritative for mission, inputs, outputs, boundaries, handoffs and stop/escalation rules. The workflow's frozen experiment/preregistration remains authoritative for same-cycle experimental details.
