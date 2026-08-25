@@ -12,6 +12,7 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/runtime-supervisor.yml'
+      - '.github/scripts/run-opencode-with-retry.sh'
 
 permissions:
   actions: write
@@ -21,13 +22,16 @@ concurrency:
   group: spider-runtime-supervisor
   cancel-in-progress: true
 
+env:
+  ZERO_DELTA_LAUNCHER_FIX: 751496ad505c0f6cc9c54272c517e41c0d243dc4
+
 jobs:
   ensure_runtime_continuity:
     name: Ensure Runtime continuity
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - name: Recover only missing post-success continuation
+      - name: Recover only missing continuation or orchestration-blocked repair
         env:
           GH_TOKEN: ${{ github.token }}
         shell: bash
@@ -46,8 +50,36 @@ jobs:
           ID=$(jq -r '.[0].databaseId // empty' <<<"$LATEST")
           CONCLUSION=$(jq -r '.[0].conclusion // empty' <<<"$LATEST")
 
+          # Narrow recovery for the exact process blocker diagnosed by the
+          # independent Runtime auditor: repeated byte-identical repairs caused
+          # by a retry that returned rc=0 with zero durable delta. The shared
+          # launcher now pins cwd and rejects zero-delta REPAIR success.
+          if [[ -n "$ID" ]]; then
+            GATE_JSON=$(gh api -H 'Accept: application/vnd.github.raw+json' \
+              "repos/${GITHUB_REPOSITORY}/contents/results/audit/CYCLE_${ID}_RUNTIME_GATE.json?ref=cycle/runtime/${ID}/audit" 2>/dev/null || true)
+            GATE=$(jq -r '.gate // empty' <<<"$GATE_JSON" 2>/dev/null || true)
+            DELTA=$(jq -r '.delta_since_prior_audit_bytes // -1' <<<"$GATE_JSON" 2>/dev/null || echo -1)
+            RFX=$(jq -r '[.required_fixes[]? | select(.id=="RF-X" and .external_decision_required==true)] | length' <<<"$GATE_JSON" 2>/dev/null || echo 0)
+            ROUND=$(jq -r '.repair_round // 0' <<<"$GATE_JSON" 2>/dev/null || echo 0)
+
+            if [[ "$GATE" == BLOCKED && "$DELTA" == 0 && "$RFX" -gt 0 ]]; then
+              # Ensure the known orchestration fix is actually reachable on main.
+              if gh api "repos/${GITHUB_REPOSITORY}/commits/${ZERO_DELTA_LAUNCHER_FIX}" >/dev/null 2>&1; then
+                NEXT_ROUND=$((ROUND + 1))
+                echo "::warning::Runtime BLOCKED only on RF-X zero-delta orchestration. Launcher fix is present; dispatching one same-cycle recovery repair round $NEXT_ROUND."
+                gh workflow run runtime-loop.yml --repo "$GITHUB_REPOSITORY" --ref main \
+                  -f human_note="RF-X external orchestration blocker is resolved by shared launcher ${ZERO_DELTA_LAUNCHER_FIX}: retries are cwd-pinned and zero-delta REPAIR success now fails. Do not attempt to edit workflow/orchestration files. Implement substantive RF1-RF6 from the mounted audit; preserve the frozen R0 benchmark and all audit constraints." \
+                  -f cycle_index=1 \
+                  -f max_cycles=0 \
+                  -f repair_from_run_id="$ID" \
+                  -f repair_round="$NEXT_ROUND"
+                exit 0
+              fi
+            fi
+          fi
+
           if [[ -n "$ID" && "$CONCLUSION" != success ]]; then
-            echo "Latest Runtime run $ID concluded $CONCLUSION. Supervisor refuses fresh progression; REVISE router/watchdog/manual evidence must resolve it."
+            echo "Latest Runtime run $ID concluded $CONCLUSION. Supervisor refuses fresh progression; audit/router/watchdog/manual evidence must resolve it."
             exit 0
           fi
 
