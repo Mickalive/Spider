@@ -1,0 +1,72 @@
+name: SPIDER Runtime Supervisor
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+  workflow_run:
+    workflows:
+      - "SPIDER Runtime Lane"
+    types: [completed]
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/runtime-supervisor.yml'
+
+permissions:
+  actions: write
+  contents: read
+
+concurrency:
+  group: spider-runtime-supervisor
+  cancel-in-progress: true
+
+jobs:
+  ensure_runtime_continuity:
+    name: Ensure Runtime continuity
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Recover only missing post-success continuation
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          ACTIVE=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow runtime-loop.yml --limit 30 \
+            --json status --jq '[.[] | select(.status != "completed")] | length' 2>/dev/null || echo 0)
+          if [[ "$ACTIVE" -gt 0 ]]; then
+            echo "Runtime already active; no duplicate dispatch."
+            exit 0
+          fi
+
+          LATEST=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow runtime-loop.yml --limit 1 \
+            --json databaseId,status,conclusion 2>/dev/null || echo '[]')
+          ID=$(jq -r '.[0].databaseId // empty' <<<"$LATEST")
+          CONCLUSION=$(jq -r '.[0].conclusion // empty' <<<"$LATEST")
+
+          if [[ -n "$ID" && "$CONCLUSION" != success ]]; then
+            echo "Latest Runtime run $ID concluded $CONCLUSION. Supervisor refuses fresh progression; REVISE router/watchdog/manual evidence must resolve it."
+            exit 0
+          fi
+
+          if ! gh api "repos/${GITHUB_REPOSITORY}/branches/lab%2Fruntime" >/dev/null 2>&1; then
+            echo "Runtime accepted branch does not exist yet; bootstrap workflow owns initialization."
+            exit 0
+          fi
+
+          STATE=$(gh api -H 'Accept: application/vnd.github.raw+json' \
+            "repos/${GITHUB_REPOSITORY}/contents/state/runtime_loop.json?ref=lab/runtime" 2>/dev/null || true)
+          CONTINUE=$(jq -r '.continue // false' <<<"$STATE" 2>/dev/null || echo false)
+          if [[ "$CONTINUE" != true ]]; then
+            echo "Accepted Runtime state says continue=false; no dispatch."
+            exit 0
+          fi
+
+          SUCCESSFUL=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow runtime-loop.yml --limit 100 \
+            --json status,conclusion --jq '[.[] | select(.status=="completed" and .conclusion=="success")] | length' 2>/dev/null || echo 0)
+          NEXT=$((SUCCESSFUL + 1))
+          echo "::warning::Runtime is idle after successful accepted continuation; dispatching missing cycle $NEXT."
+          gh workflow run runtime-loop.yml --repo "$GITHUB_REPOSITORY" --ref main \
+            -f cycle_index="$NEXT" -f max_cycles=0
