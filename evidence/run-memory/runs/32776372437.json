@@ -1,0 +1,93 @@
+{
+  "run_id": 32776372437,
+  "workflow_name": "SPIDER Physics Lane",
+  "workflow_path": ".github/workflows/physics-loop.yml",
+  "status": "completed",
+  "conclusion": "success",
+  "head_sha": "a05aaa8721fa6c6ee043f7feb040d61158972f30",
+  "created_at": "2026-08-24T20:52:42Z",
+  "updated_at": "2026-08-25T00:19:44Z",
+  "run_number": 4,
+  "run_attempt": 1,
+  "event": "workflow_dispatch",
+  "head_branch": "main",
+  "display_title": "SPIDER Physics Lane — WP-006 H-ID identifiability-by-restart gate (cycle 3)",
+  "actor": "github-actions[bot]",
+  "job_summary": {
+    "jobs": [
+      { "name": "TEAM PHYSICS", "conclusion": "success", "window": "2026-08-24T20:52:47Z..2026-08-25T00:04:11Z (~3h11m)" },
+      { "name": "INDEPENDENT AUDITOR — PHYSICS", "conclusion": "success", "window": "00:04:16Z..00:19:35Z (~15m)" },
+      { "name": "PHYSICS AUDIT → RETURN TO CODER", "conclusion": "success", "note": "dispatched repair run 32793165981 (repair round 1)" },
+      { "name": "PHYSICS LANE DIRECTOR / AUDIT BLOCKED", "conclusion": "skipped" }
+    ],
+    "artifacts": 0
+  },
+
+  "evidence_class": "SCIENTIFIC",
+
+  "durable_refs": [
+    "git:origin/cycle/physics/32776372437/team@8d841967f8cd9402fe661f194241e7c46600c0c8 (WP-006 result: dataset wp006_v1 + manifest + report + ledger pending-audit)",
+    "git:origin/cycle/physics/32776372437/audit@eb90589ea52f10da4a2907a3a0221348be5a211a (audit report + gate JSON, gate=REVISE, required_fixes=5)",
+    "Freeze chain inside team branch: 744cdd3 pre-freeze disclosure → aba6858 FREEZE 2026-08-24T21:30:49Z (prereg + collector v4 + frozen analysis + verifier; zero WP-006 data at freeze) → a5c5112/d8303d2 pre-outcome instrument repairs (pre-fix collector sha256 49d2218b… preserved) → 8d84196 result",
+    "data/physics/wp006_trials.jsonl.gz sha256 fafd1cef46bb6b2542a4ba5a91aca9ea61e94f3b70edd32986fbd53731149397 (1075 rows) + data/manifests/wp006_dataset_manifest.json (on team branch and later accepted lineage)",
+    "git:origin/lab/physics — accepted WP-006 ledger entry; repair lineage commits a00dc6a (repair r1 fixes RF1–RF5, run 32793165981), 2f2b84e (carryforward via run 32799587656, FN control recomputed 67/74), 3610c09/76a1d72 (run 32860596387 bit-exact carry + recheck), 38e697b/0be8d8a (fresh-env verification run 32866107906, fifth audit PASS, TERMINATE_LANE succession); later e271ba9/97a4c7e/45b2562 reopen the domain under V3 without reopening WP-006",
+    "/tmp/spider_run_evidence/32776372437/logs.txt (bundle copy)"
+  ],
+
+  "findings": [
+    {
+      "kind": "RESULT",
+      "summary": "WP-006 primary verdict: FALSIFIED by the frozen verdict mapping. Producers 2/4 (books 12, quotes 12 verified BPs), total verified matched branch points 38 < 60 director floors; no hard validity-gate failure (G2/G4/G5/G7 green), execution adequate ⇒ not DATA_INSUFFICIENT; independent in-team verifier PASS with own reference path and 0 rows predating the freeze. This exact outcome was later accepted through five independent audit gates on lab/physics (final gate CYCLE_32866107906 PASS, safe_to_integrate=true) and engaged the pre-declared TERMINATE_LANE stop condition — subsequently superseded organizationally by V3 domain reopening, with WP-006 itself never reopened.",
+      "evidence_status": "AUDITED_DURABLE",
+      "importance": "HIGH",
+      "route_to": ["PHYSICS", "CTO"]
+    },
+    {
+      "kind": "RESULT",
+      "summary": "Mandatory decomposition (team report §2): wherever execution succeeded, matched-state restarts reproduced ~100% (calibration double-reset control passed on all calibrated BPs as reported by the team) and T2 responses were near-deterministic — 101/102 cells with ≥1 valid trial had all-identical outcome distributions. The floor miss was localized to instrument-side causes: frozen ordinal-0 anchor slot selecting non-actionable skip-links on wikipedia/gutenberg (171 action_failed exclusions zeroing 24 otherwise-reproducible BPs), openlibrary page-weight timeouts (+13 state_match failures, 4/42 valid), and stateful BP plans (≤8) below the ≥10 producer bar despite saucedemo verifying 7/7. Dataset wp006_v1: 8 sites attempted (5 static + 3 stateful), 164 calibration + 910 trial rows = 704 valid / 206 invalid.",
+      "evidence_status": "AUDITED_DURABLE",
+      "importance": "HIGH",
+      "route_to": ["PHYSICS"]
+    },
+    {
+      "kind": "BUG",
+      "summary": "Independent auditor recomputed everything from scratch (agreement on all headline numbers) but found the report's decomposition misstated its own control: openlibrary has 12 recorded calibration pairs of which only 5 pass and 7 genuinely fail the frozen tolerance (button_bucket drift |Δn|=42>3) ⇒ true FN-control figure 62/74, not '62/62'. Root cause chain: openlibrary hard timeout killed collection before the per-site BP-manifest dump → merged manifest silently lacked openlibrary → both manifest-fed verifier C2 coverage check (actual coverage 868/910, undisclosed) and D5 skipped it. Also: report cited verifier C2 as '806 comparable rows' vs JSON's actual 868, and the prereg-promised G5 chosen-descriptor↔pre-menu check does not exist in verify_wp006.py (structural re-check passed, so no substantive leakage). Auditor held REVISE precisely because this decomposition feeds the lane-termination decision. NOTE: the final accepted figure after the repair chain is 67/74 (commit 2f2b84e) — use that number for any downstream citation.",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "importance": "HIGH",
+      "route_to": ["PHYSICS", "CTO"]
+    },
+    {
+      "kind": "LIMIT",
+      "summary": "Instrument-side lesson for any future interventional Web-physics collection: a single frozen slot-selection rule (ordinal-0 anchor) silently selected accessibility skip-links on two site skins and zeroed 24 BPs; silent BP-manifest truncation under timeout degraded BOTH verification coverage and calibration accounting without failing any hard gate. Validity gates caught none of this; only adversarial recomputation did.",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "importance": "MEDIUM",
+      "route_to": ["PHYSICS", "RUNTIME"]
+    },
+    {
+      "kind": "COST",
+      "summary": "~3h27m wall clock for a complete falsification cycle (team 3h11m live Playwright collection over 8 sites + 15m audit + dispatch overhead). Model opencode/x-preview-f-free; ubuntu-24.04 runner; opencode installed ad hoc per job via curl|bash. Two mid-run instrument repairs were absorbed pre-outcome with hash preservation instead of restarting the cycle.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "LOW",
+      "route_to": ["INFRA", "RUNTIME"]
+    }
+  ],
+
+  "failure_signatures": [
+    "SILENT_MANIFEST_TRUNCATION: per-site BP-manifest dump skipped when a site hard-times-out mid-collection; merged manifest then quietly omits that site and every manifest-fed check reports 'pass' with reduced coverage unless coverage denominators are themselves audited.",
+    "FROZEN_SLOT_RULE_BLINDNESS: prereg-frozen deterministic slot selection (ordinal-0 anchor) can be systematically non-actionable on specific DOM skins (skip-links), converting into large valid-trial losses counted only as action_failed exclusions.",
+    "PERSISTENCE_PATH_BUG_PATTERN (pre-outcome): trial rows were persisted only on the exception path, not normal completion (fixed d8303d2); nested sync-playwright crash in static BP resolution (fixed a5c5112). Both caught before any outcome observation."
+  ],
+
+  "research_opportunities": [
+    "Closed by later decisions: WP-006 program terminated per frozen stop rule (accepted, 5th-gate PASS) and Physics succession handled under V3 (orthogonal successor search handed to CTO portfolio, commit c15321c). No rescue variants are permitted. Residual transferable idea, already noted in accepted decomposition: state reproducibility + near-deterministic matched-state response succeeded everywhere execution existed — relevant only if a materially orthogonal Physics program needs an identifiability-preserving instrument design (avoid ordinal-anchor slots; enforce per-site manifest emission with completion assertions)."
+  ],
+
+  "already_captured_elsewhere": [
+    "Accepted WP-006 entry, corrected FN-control arithmetic, five-gate audit history and TERMINATE_LANE succession: origin/lab/physics docs/PHYSICS_LEDGER.md + reports/audit/* + commits a00dc6a→0be8d8a (authoritative; AUDITED_DURABLE)",
+    "V3 domain reopening without reopening WP-006: lab/physics commits 97a4c7e/e271ba9/45b2562/c15321c"
+  ],
+
+  "distillation_complete": true,
+  "safe_to_prune": false,
+  "pruning_rationale": "Claim-bearing cycle branches (team+audit) remain useful for provenance of one of the lane's central negative results; the raw log additionally documents how the REVISE-required corrections were derived (62/74 discovery trail) before the accepted 67/74 figure. Scientific substance is durable in Git, so risk is low, but conservative rule applied while the cycle branch chain stays audit-relevant."
+}

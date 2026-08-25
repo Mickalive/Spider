@@ -1,0 +1,99 @@
+{
+  "run_id": 32781482957,
+  "workflow_name": "SPIDER Intel Research Lane",
+  "workflow_path": ".github/workflows/intel-loop.yml",
+  "status": "completed",
+  "conclusion": "success",
+  "head_sha": "6a221f41333e4e86cf6365122de4ce773c5f61e8",
+  "created_at": "2026-08-24T21:48:50Z",
+  "updated_at": "2026-08-25T00:16:15Z",
+  "run_number": 1,
+  "run_attempt": 1,
+  "event": "workflow_dispatch",
+  "head_branch": "main",
+  "display_title": "SPIDER Intel Research Lane — first Intel cycle (SGDR scout + clean-room reproduction)",
+  "actor": "github-actions[bot]",
+  "job_summary": {
+    "jobs": [
+      { "name": "INTEL SCOUT", "conclusion": "success", "window": "2026-08-24T21:48:55Z..21:59:57Z (~11m)", "agent": "intel_runner" },
+      { "name": "INTEL REPRODUCER", "conclusion": "success", "window": "22:00:00Z..23:47:19Z (~1h47m)", "agent": "intel_reproducer" },
+      { "name": "INTEL INDEPENDENT AUDITOR", "conclusion": "success", "window": "23:47:23Z..00:16:00Z (~29m)", "agent": "intel_auditor" },
+      { "name": "INTEL AUDIT → REPRODUCER", "conclusion": "success", "note": "dispatched repair run 32792931901 (repair round 1)" },
+      { "name": "INTEL RESEARCH DIRECTOR", "conclusion": "skipped" }
+    ],
+    "artifacts": 0
+  },
+
+  "evidence_class": "INTEL",
+
+  "durable_refs": [
+    "git:origin/cycle/intel/32781482957/scout@d1c6f229ceff578d3ecc95b0e3f35d0b9cd0cafe (scout report cycle1_scout_report.md, findings JSON, state/intel_candidate.json)",
+    "git:origin/cycle/intel/32781482957/repro@3082443bac643090aad8162ec426c757f8bcfd58 (clean-room sgdr_repro package, intel/prereg/cycle1_sgdr_prereg.md, results/intel/reproductions/cycle1/* incl. raw evidence for recomputation)",
+    "git:origin/cycle/intel/32781482957/audit@102d4cbe0b5c20f93057b0f4e19de60d804ded63 (audit report + CYCLE_32781482957_INTEL_GATE.json gate=REVISE + preserved recompute/ablate scripts)",
+    "git:origin/lab/intel — docs/INTEL_LEDGER.md 'CYCLE 1 — sgdr-state-grounded-dynamic-retrieval' and commit fca0acb 'Intel cycle 1 director integration: accept audited SGDR state-grounded retrieval (VALIDATED_USEFUL, PoC ceiling)'",
+    "/tmp/spider_run_evidence/32781482957/logs.txt (bundle copy)"
+  ],
+
+  "findings": [
+    {
+      "kind": "RESULT",
+      "summary": "First Intel cycle produced an audited-positive mechanism transfer. Scout surveyed SGDR, SkillMigrator/'Beyond Domains', Unbrowse, WebNavigator, AWM, SkillWeaver, PolySkill, NeoCognition plus Steam-like skill infrastructure (skills.sh telemetry-ranked packs; Unbrowse route marketplace with three-tier execution ladder) and discovered 15+ additional actors via citation graphs; selected exactly one candidate: sgdr-state-grounded-dynamic-retrieval (arXiv:2606.04391), targeting Graph's measured weakness (hand-authored goal_sig only; entry-context mismatch). This survey content is durable on the scout branch and in the accepted INTEL_LEDGER mission record.",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "importance": "MEDIUM",
+      "route_to": ["INTEL", "GRAPH", "CTO"]
+    },
+    {
+      "kind": "RESULT",
+      "summary": "Clean-room reproduction result (prereg frozen before live collection; reference CC BY-SA repo never fetched/viewed): fused task+current-state-summary retrieval with MMR beat task-only retrieval at hard-slice correct@1 36/74 (.486) vs 25/74 (.338) vs incumbent exact goal_sig 0/74 vs random 19/74; 11–0 paired wins, zero reversals. Downstream conversion with identical execution policy: combined novel actions C=75 vs B=84 vs A=421 at success .90/.86/.78. α=0.4 ≡ α=0.5 everywhere (paper/code discrepancy immaterial here); @3 recall driven by MMR; the @1 gain attributable to the state term. Final accepted status after repair chain (audits rounds 0–2 REVISE, round 3 restoration, PASS run 32800296360, director integration fca0acb): VALIDATED_USEFUL at PROOF OF CONCEPT ceiling.",
+      "evidence_status": "AUDITED_DURABLE",
+      "importance": "HIGH",
+      "route_to": ["GRAPH", "PRODUCT", "CTO"]
+    },
+    {
+      "kind": "BUG",
+      "summary": "Auditor's REVISE defects (all later fixed in repair chain per INTEL_LEDGER history): R1 broken frozen-hash chain — 4/10 implementation hashes mismatched (collect.py, convert.py, retriever.py, stimuli.py) with no disclosed bugfix for two of them and single-commit history making pre/post-outcome ordering unverifiable; R2 factual error in report §2 — claimed C-only wins on 'login/pager fragments from shifted pages' are false (all 11 wins are the-internet dynamic-loading menu clusters); R3 stale canonical source URL (plusnli/online-skill-learning, not skill-dynamic-retrieval). Auditor independently reimplemented the evaluation from prereg text alone: 522/522 per-query rows identical.",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "importance": "HIGH",
+      "route_to": ["INTEL"]
+    },
+    {
+      "kind": "PRIOR_ART",
+      "summary": "External-source verification notes worth keeping: arXiv:2606.04391 exists with matching title/authors/headline numbers; reference skill_store.py confirms exact formula α·cos(task,desc)+(1−α)·cos(state_summary,desc), pool max(3k,20), greedy MMR λ=0.7, and code default α=0.4 while the paper says α=0.5. SkillMigrator deferred to WATCH: no public code found, smaller claimed effect (−8–10% actions), higher fidelity risk. Vendor headlines kept OFFICIAL_CLAIM tier (Unbrowse 3.6×, WebNavigator 72.9%).",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "importance": "MEDIUM",
+      "route_to": ["INTEL", "GRAPH"]
+    },
+    {
+      "kind": "LIMIT",
+      "summary": "Auditor's maximum defensible wording (binding limits carried into acceptance): advantage concentrates in ONE site's dynamic-menu cluster; wins over incumbent only when hand-authored signatures are absent (21 vs 39 novel when they exist); nothing beyond PROOF OF CONCEPT (no neural embedder, no LLM summarizer, no cross-site transfer tested by SPIDER or SGDR authors). Auditor's own ablations strengthen attribution: wrong-state summary / summary-only / constant-text fusion all fall back to 24/74. Relevance: GRAPH HIGH / PRODUCT MEDIUM / PHYSICS LOW.",
+      "evidence_status": "AUDITED_DURABLE",
+      "importance": "HIGH",
+      "route_to": ["GRAPH", "PRODUCT"]
+    },
+    {
+      "kind": "COST",
+      "summary": "~2h27m wall clock total: scout 11m, reproducer 1h47m (dominated by live collection of 12 fragments × 87 query contexts executability ground truth on 3 sandbox sites), audit 29m including full independent reimplementation. Environment friction logged: no LLM API keys present (summarizer ran deterministic contract-faithful stub), Playwright chromium had to be pip-installed mid-job.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "LOW",
+      "route_to": ["INFRA"]
+    }
+  ],
+
+  "failure_signatures": [
+    "FROZEN_HASH_CHAIN_BREAK: implementation files edited after prereg attestation without a disclosed pre-outcome bugfix commit; detectable only by sha256 comparison against the prereg's hash table.",
+    "REPORT_CLAIM_NOT_MATCHING_RAW_ROWS: prose wins attributed to the wrong site cluster (login/pager vs dynamic-loading) while aggregates were numerically correct — aggregate-level verification alone would not have caught it."
+  ],
+
+  "research_opportunities": [
+    "Accepted ledger already queues follow-ups (description-quality binding constraint on books clusters; cross-site transfer untested; neural embedder/LLM summarizer untested at PoC ceiling). Additional log-only observation for future design: constant-text fusion controls were later found unstable under lexical-hash embedders (sha1 bucket collisions) per accepted ledger item 6 — any future fusion null-control needs a collision-safe embedder or larger dimension."
+  ],
+
+  "already_captured_elsewhere": [
+    "Accepted mechanism record with binding wording, routing and product signal: origin/lab/intel docs/INTEL_LEDGER.md CYCLE 1 + VALIDATED_MECHANISMS.json + docs/INTEL_TO_GRAPH.md (AUDITED_DURABLE)",
+    "Repair-chain provenance (rounds 0–3, PASS run 32800296360, empty round-2 snapshot incident): INTEL_LEDGER audit-outcome paragraph"
+  ],
+
+  "distillation_complete": true,
+  "safe_to_prune": false,
+  "pruning_rationale": "Claim-bearing scout/repro/audit branches underpin the lane's first accepted positive and its audit trail; the raw log is also the only place the round-0 auditor's full ablation narrative exists outside the audit branch. Conservative rule applied; nothing here requires deletion pressure."
+}

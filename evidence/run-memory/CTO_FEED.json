@@ -67,6 +67,60 @@
         "Evaluate consolidating watchdog/supervisor cadence or event-triggering them instead of fixed heartbeats; measure runner minutes saved against recovery-latency risk before changing anything."
       ],
       "route_to": ["INFRA", "RUNTIME", "CTO"]
+    },
+    {
+      "id": "CF-2026-08-25-05",
+      "importance": "HIGH",
+      "kind": "RUNTIME_FAILURE_MODE",
+      "summary": "Permission auto-rejection is a single point of failure for lane agent sessions: in Graph run 32782331702 one out-of-workspace access ('cd /home/runner/work/Spider' -> external_directory auto-reject) aborted the ENTIRE team session after ~7m of context loading, producing a zero-commit production snapshot that the workflow then pushed and audited anyway (~9m audit spent detecting it). The same empty-snapshot class recurred in Intel's repair round 2 (per accepted INTEL_LEDGER history), so it is cross-lane and recurring, not a one-off.",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "source_run_id": 32782331702,
+      "durable_refs": [
+        "evidence/run-memory/runs/32782331702.json",
+        "git:origin/cycle/graph/32782331702/team (empty snapshot preserved as provenance)",
+        "git:origin/lab/intel docs/INTEL_LEDGER.md ('an empty round-2 snapshot')"
+      ],
+      "actionable_next": [
+        "Harden the agent runtime so a single permission denial degrades gracefully (skip tool call) instead of terminating the session; pre-authorize known-safe parent paths in the lane workflows.",
+        "Add a zero-diff guard after each team phase: if the team branch equals its base, return to coder immediately instead of consuming an independent-audit job.",
+        "Confirm root cause by reproducing the abort signature before treating the fix as verified; the log-only evidence lives only in /tmp/spider_run_evidence/32782331702/logs.txt and this run's Actions log."
+      ],
+      "route_to": ["RUNTIME", "INFRA", "CTO"]
+    },
+    {
+      "id": "CF-2026-08-25-06",
+      "importance": "MEDIUM",
+      "kind": "INSTRUMENT_DESIGN",
+      "summary": "WP-006 instrument post-mortem (falsified result already accepted; this is forward-looking only): a site hard-timeout silently skipped the per-site BP-manifest dump, so the merged manifest omitted openlibrary; every manifest-fed check (verifier C2 coverage 868/910 undisclosed, D5 calibration) then 'passed' with reduced coverage, and the team report misstated its own FN control (62/62 vs raw-row truth 62/74; finalized 67/74 after repairs). Additionally one frozen ordinal-0 anchor slot rule systematically selected non-actionable skip-links on two site skins (171 action_failed exclusions; 24 BPs zeroed). No hard validity gate caught any of this — only adversarial per-row recomputation did.",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "source_run_id": 32776372437,
+      "durable_refs": [
+        "evidence/run-memory/runs/32776372437.json",
+        "git:origin/cycle/physics/32776372437/audit (REVISE findings)",
+        "git:origin/lab/physics commits a00dc6a..0be8d8a (repair chain, corrected arithmetic, 5-gate acceptance)"
+      ],
+      "actionable_next": [
+        "If any future interventional Web collection is chartered: require per-site artifact-completion assertions at collection end, audited coverage denominators, and slot-selection rules robust to accessibility scaffolding (no frozen ordinal anchors); do NOT reopen WP-006 itself (frozen stop rule stands)."
+      ],
+      "route_to": ["PHYSICS", "RUNTIME", "CTO"]
+    },
+    {
+      "id": "CF-2026-08-25-07",
+      "importance": "MEDIUM",
+      "kind": "PROCESS_PATTERN",
+      "summary": "Report-vs-data drift recurred in all three lanes within one day while aggregates stayed numerically correct: Physics WP-006 FN-control misstatement (62/62 claimed), Intel SGDR wins attributed to the wrong site cluster in prose (login/pager claimed; actually all the-internet dynamic-loading clusters), Graph cycle-3 E2 residual used non-reproducible denominators. Independent auditors caught all three via from-scratch recomputation against committed raw rows; none was measurement fraud, but self-reported decompositions are unreliable inputs for Director decisions (the WP-006 misstatement fed a lane-termination decision).",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "source_run_id": 32783797303,
+      "additional_source_run_ids": [32776372437, 32781482957],
+      "durable_refs": [
+        "evidence/run-memory/runs/32776372437.json",
+        "evidence/run-memory/runs/32781482957.json",
+        "evidence/run-memory/runs/32783797303.json"
+      ],
+      "actionable_next": [
+        "Consider requiring reports to generate decomposition claims mechanically from the committed raw rows (script-generated tables with row-linked provenance) so prose cannot diverge from data; strengthen auditor checklists to always recompute per-cell decompositions, not just headline aggregates."
+      ],
+      "route_to": ["CTO", "GRAPH", "PHYSICS", "INTEL"]
     }
   ]
 }

@@ -1,0 +1,80 @@
+{
+  "run_id": 32689298051,
+  "workflow_name": "SPIDER Physics Lane",
+  "workflow_path": ".github/workflows/physics-loop.yml",
+  "status": "completed",
+  "conclusion": "cancelled",
+  "head_sha": "81561cf8e46b80aa5d7788b23965b418760c1eeb",
+  "created_at": "2026-08-24T04:15:06Z",
+  "updated_at": "2026-08-25T22:56:21Z",
+  "run_started_at": "2026-08-24T22:51:08Z",
+  "run_number": 3,
+  "run_attempt": 2,
+  "event": "workflow_dispatch",
+  "head_branch": "main",
+  "display_title": "SPIDER Physics Lane (attempt 2 of the WP-005 cycle-2 run)",
+  "actor": "github-actions[bot]",
+  "job_summary": {
+    "jobs_recorded": 0,
+    "raw_log_available": false,
+    "note": "Actions API returned total_count=0 jobs and an empty log bundle for this run at distillation time. Attempt 2 started 2026-08-24T22:51:08Z and was cancelled 2026-08-24T22:56:21Z (~5 min runtime) while Physics run #4 (32776372437, started 20:52:47Z) was mid-flight; consistent with same-lane concurrency protection, but the cancel reason is NOT recoverable from any surviving artifact and is not asserted as fact. The run sat queued ~18.6h between created_at and run_started_at."
+  },
+
+  "evidence_class": "SCIENTIFIC",
+
+  "durable_refs": [
+    "git:origin/cycle/physics/32689298051/team@69635458a4b00623826a54696c2d6609b7ce7e76 ('Physics cycle 2: WP-005 report + ledger entry (team result, pending independent audit; two-level negative engages pre-declared stop rule)')",
+    "git:origin/cycle/physics/32689298051/audit@5373fa28e5759b28d59fc95c351463914e8cc25c (independent audit snapshot)",
+    "git:origin/lab/physics — WP-005 ledger entry 'FALSIFIED — INDEPENDENTLY AUDITED (VALID_FOR_CURRENT_TEST), integrated into accepted lane state by the Physics Lane Director (cycle 2)' with commits a129724 (audit PASS record), b39b1cb (integration), 3b17465 (director integration + erratum), d3afd9b (succession: launch WP-006)",
+    "reports/audit/CYCLE_32689298051_PHYSICS.md + results/audit/CYCLE_32689298051_PHYSICS_GATE.json (persisted on lab/physics accepted tree)",
+    "/tmp/spider_run_evidence/32689298051/run.json (bundle metadata copy)"
+  ],
+
+  "findings": [
+    {
+      "kind": "RESULT",
+      "summary": "This run id is the canonical Actions-side anchor for Physics cycle 2 = WP-005 'Fine-grained response transfer, website holdout'. Per docs/PHYSICS_LEDGER.md on origin/lab/physics (verified during distillation): WP-005 was FALSIFIED on both fine-grained targets, independently audited VALID_FOR_CURRENT_TEST, and integrated by the Lane Director. The scientific substance lives entirely in Git; nothing unique remains only in Actions logs (the raw log is empty/unavailable anyway).",
+      "evidence_status": "AUDITED_DURABLE",
+      "importance": "HIGH",
+      "route_to": ["PHYSICS", "CTO"]
+    },
+    {
+      "kind": "OTHER",
+      "summary": "Director role evidence: the HUMAN_NOTE embedded in successor run 32776372437 reads 'AUTO PROGRAM SUCCESSION from Director run 32689298051. Start within-site-dynamics-interventional... First cycle is WP-006 and tests ONLY the H-ID identifiability gate' — i.e., this run also executed the cycle-2 LANE DIRECTOR step that closed the cross-site universality program and launched WP-006. That succession decision is durable in commit d3afd9b and the directive text carried forward.",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "importance": "MEDIUM",
+      "route_to": ["PHYSICS", "CTO"]
+    },
+    {
+      "kind": "ANOMALY",
+      "summary": "Raw-log loss: zero jobs retained and empty log for a run whose attempt-1 phase produced audited scientific output. Unlike the 102-run hygiene deletion, this loss predates that incident and its cause is unknown (no surviving manifest line explains it). All content recovered here came from Git only; per role card, no log content was reconstructed from imagination.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "MEDIUM",
+      "route_to": ["INFRA"]
+    },
+    {
+      "kind": "COST",
+      "summary": "Queue/orchestration economics datapoint: created_at 04:15:06Z vs run_started_at 22:51:08Z (~18.6h queued), then cancelled after ~5 min. Concurrent lane dispatches (this attempt overlapping live run #4) waste runner minutes and risk branch races; the cancellation itself likely prevented one.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "LOW",
+      "route_to": ["INFRA", "RUNTIME"]
+    }
+  ],
+
+  "failure_signatures": [
+    "EMPTY_RUN_LOG_WITH_COMPLETED_CYCLE: conclusion=cancelled + jobs.total_count=0 + empty logs.txt on a run id that owns claim-bearing cycle/* branches. Recovery path that worked: fetched refs.txt -> origin cycle branches -> accepted lab/physics ledger entries referencing the run id."
+  ],
+
+  "research_opportunities": [
+    "None new from this run's content (WP-005 negative is already integrated and superseded by later WP-006/V3 decisions). Infra-only: investigate why some completed-cycle runs retain no job/log records, so Actions-side provenance does not depend solely on Git archaeology."
+  ],
+
+  "already_captured_elsewhere": [
+    "WP-005 FALSIFIED result, audit PASS record, director integration and report erratum: origin/lab/physics docs/PHYSICS_LEDGER.md + reports/audit/CYCLE_32689298051_PHYSICS.md (AUDITED_DURABLE — linked, not reinterpreted here)",
+    "WP-006 succession decision: origin/lab/physics commit d3afd9b and directives carried into run 32776372437"
+  ],
+
+  "distillation_complete": true,
+  "safe_to_prune": false,
+  "pruning_rationale": "Conservative default. The Actions record is already gutted (no logs/jobs), but this run id remains the ledger-referenced anchor for the audited WP-005 cycle and carries claim-bearing cycle/* branches (team+audit) kept for audit/reproduction provenance. Nothing would be gained by deleting it, and the run-memory record plus tombstone-style metadata linkage would lose its Actions-side anchor."
+}

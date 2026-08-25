@@ -1,0 +1,83 @@
+{
+  "run_id": 32782331702,
+  "workflow_name": "SPIDER Graph Lane",
+  "workflow_path": ".github/workflows/graph-loop.yml",
+  "status": "completed",
+  "conclusion": "success",
+  "head_sha": "6519f87b1670cc8e6a800554d821f4db658f3036",
+  "created_at": "2026-08-24T21:58:43Z",
+  "updated_at": "2026-08-24T22:15:46Z",
+  "run_number": 5,
+  "run_attempt": 1,
+  "event": "workflow_dispatch",
+  "head_branch": "main",
+  "display_title": "SPIDER Graph Lane — graph-addressing-robustness round 0 (EMPTY production snapshot)",
+  "actor": "github-actions[bot]",
+  "job_summary": {
+    "jobs": [
+      { "name": "TEAM GRAPH", "conclusion": "success", "window": "2026-08-24T21:58:46Z..22:06:06Z (~7m)", "agent": "graph_runner", "outcome": "ZERO commits — empty snapshot" },
+      { "name": "INDEPENDENT AUDITOR — GRAPH", "conclusion": "success", "window": "22:06:09Z..22:15:37Z (~9m)" },
+      { "name": "GRAPH AUDIT → RETURN TO CODER", "conclusion": "success", "note": "repair round 1 became run 32783797303" },
+      { "name": "GRAPH AUDIT — BLOCKED / GRAPH LANE DIRECTOR", "conclusion": "skipped" }
+    ],
+    "artifacts": 0
+  },
+
+  "evidence_class": "PRODUCT",
+
+  "durable_refs": [
+    "git:origin/cycle/graph/32782331702/team@f42c14dbf5f1e5a64f8a9fdf9af8c723689009d9 (empty snapshot = lab/graph base f42c14d, preserved untouched as provenance per director integration)",
+    "git:origin/cycle/graph/32782331702/audit@ac46c6467c7c08a7ce4e468aa258fd3a03a2f883 (audit CYCLE_32782331702_GRAPH.md + gate JSON gate=REVISE, safe_to_integrate=false, required_fixes RF-1..RF-4)",
+    "git:origin/lab/graph@d41fe9b — both round-0 and round-1 audit reports/gates preserved into accepted history by the Lane Director ('provenance forever for empty round-0 and EXPLORATORY pilot batch')",
+    "/tmp/spider_run_evidence/32782331702/logs.txt (bundle copy; sole record of the abort root cause)"
+  ],
+
+  "findings": [
+    {
+      "kind": "BUG",
+      "summary": "ROOT CAUSE of the empty production snapshot (log-only): at 22:06:02Z the graph_runner agent session issued a command starting 'cd /home/runner/work/Spider && …' — OUTSIDE the workspace root (/home/runner/work/Spider/Spider). OpenCode printed \"permission requested: external_directory (/home/runner/work/Spider/*); auto-rejecting\" then 'Error: The user rejected permission to use this specific tool call.' and the entire agent session terminated. The workflow's commit step then found 'nothing to commit, working tree clean' and force-pushed an EMPTY team branch anyway. One out-of-scope path access aborted a ~7-minute team phase that had already absorbed extensive context reading (cycle-3 results, prereg, paraphrase dry-run tables).",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "importance": "HIGH",
+      "route_to": ["RUNTIME", "INFRA", "CTO"]
+    },
+    {
+      "kind": "ANOMALY",
+      "summary": "Workflow-shape defect: the lane workflow cannot distinguish an aborted agent session from completed work — it pushed the empty snapshot, spent a full auditor job on it, and only the auditor's judgment caught that 'the team phase produced an empty snapshot — zero commits across two production attempts; the predeclared graph-addressing-robustness program step was never executed'. A zero-commit guard before dispatching the auditor would have saved the audit job and returned to coder immediately.",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "importance": "MEDIUM",
+      "route_to": ["INFRA", "RUNTIME"]
+    },
+    {
+      "kind": "RESULT",
+      "summary": "Audit containment worked exactly as designed: gate=REVISE (safe_to_integrate=false) with four binding fixes and a PREDECLARED ESCALATION RULE — 'a second empty snapshot without RF-3-grade blocker evidence must be gated BLOCKED as repetitive'. The repair (run 32783797303) executed the full program and the round-0 empty attempt was preserved untouched as permanent provenance on lab/graph.",
+      "evidence_status": "AUDITED_DURABLE",
+      "importance": "MEDIUM",
+      "route_to": ["CTO", "INFRA"]
+    },
+    {
+      "kind": "COST",
+      "summary": "~17 min wall clock consumed (~7m team context-loading + ~9m audit + overhead) with zero scientific output for the round-0 spend; recovery cost was a full repair cycle (~1h44m in run 32783797303). Same failure class recurred later in the Intel repair chain ('an empty round-2 snapshot' per INTEL_LEDGER), so this is a recurring cross-lane failure mode, not a one-off.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "HIGH",
+      "route_to": ["RUNTIME", "INFRA", "CTO"]
+    }
+  ],
+
+  "failure_signatures": [
+    "PERMISSION_AUTO_REJECT_SESSION_ABORT: log signature '! permission requested: external_directory (<path>); auto-rejecting' followed by 'Error: The user rejected permission to use this specific tool call.' terminates the whole opencode run; downstream signature is a cycle/* team branch whose tree equals the lane base with zero new commits.",
+    "EMPTY_SNAPSHOT_PUSHED_SILENTLY: git commit step emits 'nothing to commit, working tree clean' but the workflow proceeds to push and audit anyway."
+  ],
+
+  "research_opportunities": [
+    "Runtime hardening (no science implied): (1) pre-authorize or gracefully degrade external-directory access inside run-opencode-with-retry.sh so a single path denial cannot kill a session; (2) add a zero-diff guard after the team phase that short-circuits to coder-return instead of consuming an audit job; (3) consider retrying the agent once on permission-abort before publishing the branch."
+  ],
+
+  "already_captured_elsewhere": [
+    "Round-0 REVISE audit content and its escalation rule: origin/cycle/graph/32782331702/audit and reports/audit/CYCLE_32782331702_GRAPH.md preserved into lab/graph@d41fe9b (DURABLE_UNAUDITED as artifact, embedded in accepted history)",
+    "The actual robustness program results belong to repair run 32783797303 (see its record)"
+  ],
+
+  "distillation_complete": true,
+  "safe_to_prune": false,
+  "pruning_rationale": "The raw log is the SOLE surviving record of the exact root cause (external_directory auto-rejection aborting the agent session); everything else about this run is either empty provenance or duplicated in Git. Deleting the log would erase the only evidence of a recurring HIGH-importance runtime failure mode. Conservative rule applied."
+}
