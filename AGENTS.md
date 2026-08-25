@@ -93,3 +93,11 @@ Before ending, leave enough durable information for the next agent to continue w
 - any negative knowledge that should prevent repeated dead ends.
 
 The project should accumulate knowledge even when a run fails.
+
+## 9. Control-plane maintenance
+
+Agent documentation is part of the executable control plane, not optional prose.
+
+Any change that creates, removes, renames or materially changes an agent's mission, authority, inputs, outputs, workflow position or handoff must update the matching card in `docs/agents/AGENT_CARDS.md` in the same control-plane change.
+
+Do not leave a new `.opencode/agents/*.md` definition without a card, and do not leave an orphaned card after deleting an agent. Retired agents should normally remain explicitly marked `LEGACY_DISABLED` while historical workflows/branches may still reference their names.
