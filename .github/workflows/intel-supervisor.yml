@@ -2,7 +2,7 @@ name: SPIDER Intel Supervisor
 
 on:
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "13,43 * * * *"
   workflow_dispatch:
   workflow_run:
     workflows:
@@ -68,8 +68,6 @@ jobs:
               --json conclusion,status --jq '[.[] | select(.status=="completed" and .conclusion=="success")] | length' 2>/dev/null || echo 0)
             next=$((accepted + 1))
             echo "::warning::Intel continuity recovery: $why. Dispatching fresh current-main cycle label $next from accepted state."
-            # intel-loop has no human_note input. Accepted lab/intel state is the
-            # authoritative recovery instruction, so pass declared inputs only.
             gh workflow run intel-loop.yml --repo "$GITHUB_REPOSITORY" --ref main \
               -f cycle_index="$next"
           }
