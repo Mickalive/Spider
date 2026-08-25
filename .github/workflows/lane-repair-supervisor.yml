@@ -2,7 +2,7 @@ name: SPIDER Lane Repair Supervisor
 
 on:
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "17,47 * * * *"
   workflow_dispatch:
   workflow_run:
     workflows:
