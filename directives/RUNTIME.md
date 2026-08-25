@@ -8,6 +8,8 @@ Build the smallest honest SPIDER Runtime that proves or falsifies the core agent
 
 Do not optimize a large platform before this loop is measurable.
 
+**Bootstrap authorization:** R0 begins from the currently accepted Graph/Intel/Product/Physics evidence. It must preserve every original evidence tier and must not rerun old research merely to populate the Runtime schema.
+
 ## Program R0 — Capability Runtime Skeleton
 
 ### Required primitives
