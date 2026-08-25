@@ -7,6 +7,7 @@ on:
       - "SPIDER Graph Lane"
       - "SPIDER Physics Lane"
       - "SPIDER Intel Research Lane"
+      - "SPIDER Runtime Lane"
     types: [completed]
   schedule:
     - cron: "17 */6 * * *"
@@ -36,7 +37,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Checkout or initialize Product branch and mount accepted research lanes
+      - name: Checkout or initialize Product branch and mount accepted research/runtime/CTO lanes
         shell: bash
         run: |
           if git ls-remote --exit-code --heads origin "refs/heads/$PRODUCT_BRANCH" >/dev/null 2>&1; then
@@ -46,7 +47,7 @@ jobs:
             git switch -C "$PRODUCT_BRANCH"
             git push origin "HEAD:refs/heads/$PRODUCT_BRANCH"
           fi
-          for lane in graph physics intel; do
+          for lane in graph physics intel runtime cto; do
             B="lab/$lane"
             if git ls-remote --exit-code --heads origin "refs/heads/$B" >/dev/null 2>&1; then
               git fetch origin "$B:refs/remotes/origin/$B"
@@ -75,7 +76,7 @@ jobs:
           bash .github/scripts/run-opencode-with-retry.sh run \
             --model "$SPIDER_MODEL" \
             --agent product_director \
-            "Review accepted Graph=/tmp/spider_graph, Physics=/tmp/spider_physics, Intel=/tmp/spider_intel plus persistent Product state. Your formal job description is binding. Update product hypotheses. If a minimal product can now fairly test whether SPIDER beats a credible current agent on a useful task class, authorize exactly one Product Beta and write state/product_beta_request.json; otherwise keep beta_launch=false."
+            "Review accepted Graph=/tmp/spider_graph, Physics=/tmp/spider_physics, Intel=/tmp/spider_intel, Runtime=/tmp/spider_runtime and critical CTO=/tmp/spider_cto plus persistent Product state. Your formal job description is binding. Optimize toward verified future work avoided, not feature count. If a minimal product can now fairly test whether SPIDER beats a credible current agent on a useful task class after full overhead, authorize exactly one Product Beta and write state/product_beta_request.json; otherwise keep beta_launch=false."
 
       - name: Validate Product direction
         id: direction
@@ -120,11 +121,13 @@ jobs:
         run: |
           git fetch origin "$PRODUCT_BRANCH"
           git switch -C beta-architect-base "origin/$PRODUCT_BRANCH"
-          for lane in graph physics intel; do
+          for lane in graph physics intel runtime cto; do
             B="lab/$lane"
             if git ls-remote --exit-code --heads origin "refs/heads/$B" >/dev/null 2>&1; then
               git fetch origin "$B:refs/remotes/origin/$B"
               git worktree add --detach "/tmp/spider_$lane" "origin/$B"
+            else
+              mkdir -p "/tmp/spider_$lane"
             fi
           done
 
@@ -142,7 +145,7 @@ jobs:
           bash .github/scripts/run-opencode-with-retry.sh run \
             --model "$SPIDER_MODEL" \
             --agent beta_architect \
-            "Architect Product Beta ${{ needs.product_director.outputs.beta_id }}. Your formal job description is binding. Freeze a fair benchmark against a credible current-agent baseline before Builder execution."
+            "Architect Product Beta ${{ needs.product_director.outputs.beta_id }}. Accepted Runtime=/tmp/spider_runtime and CTO=/tmp/spider_cto are advisory inputs where relevant. Your formal job description is binding. Freeze a fair benchmark against a credible current-agent baseline before Builder execution."
 
       - name: Validate architecture state
         id: arch_state
