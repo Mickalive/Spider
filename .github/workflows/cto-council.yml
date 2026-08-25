@@ -26,6 +26,8 @@ on:
       - '.opencode/agents/chief_cto.md'
       - '.opencode/agents/cto_*.md'
       - '.opencode/agents/frontier_research_*.md'
+      - 'evidence/run-memory/CTO_FEED.json'
+      - 'evidence/run-memory/INDEX.md'
 
 permissions:
   contents: write
@@ -103,7 +105,7 @@ jobs:
           bash .github/scripts/run-opencode-with-retry.sh run \
             --model "$SPIDER_MODEL" \
             --agent chief_cto \
-            "Run a GLOBAL SPIDER CTO portfolio review. Accepted core snapshots only: Graph=/tmp/spider_graph, Physics=/tmp/spider_physics, Intel=/tmp/spider_intel, Product=/tmp/spider_product, Runtime=/tmp/spider_runtime. Accepted Frontier teams=/tmp/spider_frontier with INDEX.tsv. Use cto_* subagents in fresh contexts. Preserve all scientific verdicts. Identify uncovered high-upside domains as well as duplicated work. Physics WP-006 may remain falsified while genuinely orthogonal Physics questions continue. You have authority under Architecture V3 to charter multiple independent Frontier teams. Write complete CREATE/CONTINUE/PAUSE/TERMINATE/MERGE charters with monotonic charter_version when justified. No artificial token-cost cap; optimize independent search coverage, information gain and work-compression leverage. Write all required CTO state and handoffs."
+            "Run a GLOBAL SPIDER CTO portfolio review. Accepted core snapshots only: Graph=/tmp/spider_graph, Physics=/tmp/spider_physics, Intel=/tmp/spider_intel, Product=/tmp/spider_product, Runtime=/tmp/spider_runtime. Accepted Frontier teams=/tmp/spider_frontier with INDEX.tsv. ALSO inspect evidence/run-memory/CTO_FEED.json and INDEX.md when present: this is distilled Actions-log memory and is a research/operations RADAR only. Preserve every finding's evidence_status; LOG_ONLY_UNAUDITED/DURABLE_UNAUDITED/OPERATIONAL_DIAGNOSTIC may justify a validation experiment, repair, Intel request or Frontier charter, never an accepted scientific claim. Use cto_* subagents in fresh contexts. Preserve all scientific verdicts. Identify uncovered high-upside domains, forgotten run-level clues, recurring cross-team failure signatures and duplicated work. Physics WP-006 may remain falsified while genuinely orthogonal Physics questions continue. You have authority under Architecture V3 to charter multiple independent Frontier teams. Write complete CREATE/CONTINUE/PAUSE/TERMINATE/MERGE charters with monotonic charter_version when justified. No artificial token-cost cap; optimize independent search coverage, information gain and work-compression leverage. Write all required CTO state and handoffs."
 
       - name: Enforce CTO-only writes
         shell: bash
@@ -178,7 +180,6 @@ jobs:
             version=$(jq -r '.charter_version' <<<"$charter")
             title="Frontier ${id} v${version}"
 
-            # Accepted branch already at this or a newer charter -> consumed.
             accepted=0
             if gh api "repos/${GITHUB_REPOSITORY}/contents/state/frontier/${id}.json?ref=lab/frontier/${id}" >/tmp/frontier_state.json 2>/dev/null; then
               accepted=$(jq -r '.content' /tmp/frontier_state.json | tr -d '\n' | base64 -d | jq -r '.accepted_charter_version // 0' 2>/dev/null || echo 0)
