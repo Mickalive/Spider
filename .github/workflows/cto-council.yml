@@ -104,7 +104,7 @@ jobs:
           bash .github/scripts/run-opencode-with-retry.sh run \
             --model "$SPIDER_MODEL" \
             --agent chief_cto \
-            "Run a GLOBAL SPIDER CTO portfolio review. Accepted core snapshots only: Graph=/tmp/spider_graph, Physics=/tmp/spider_physics, Intel=/tmp/spider_intel, Product=/tmp/spider_product, Runtime=/tmp/spider_runtime. Accepted Frontier teams=/tmp/spider_frontier with INDEX.tsv. ALSO inspect evidence/run-memory/CTO_FEED.json and INDEX.md when present: this is distilled Actions-log memory and is a research/operations RADAR only. Preserve every finding's evidence_status; LOG_ONLY_UNAUDITED/DURABLE_UNAUDITED/OPERATIONAL_DIAGNOSTIC may justify a validation experiment, repair, Intel request or Frontier charter, never an accepted scientific claim. Use cto_* subagents in fresh contexts. Preserve all scientific verdicts. Identify uncovered high-upside domains, forgotten run-level clues, recurring cross-team failure signatures and duplicated work. Physics WP-006 may remain falsified while genuinely orthogonal Physics questions continue. You have authority under Architecture V3 to charter multiple independent Frontier teams. Write complete CREATE/CONTINUE/PAUSE/TERMINATE/MERGE charters with monotonic charter_version when justified. No artificial token-cost cap; optimize independent search coverage, information gain and work-compression leverage. Write all required CTO state and handoffs."
+            "Run a GLOBAL SPIDER CTO portfolio review. Accepted core snapshots only: Graph=/tmp/spider_graph, Physics=/tmp/spider_physics, Intel=/tmp/spider_intel, Product=/tmp/spider_product, Runtime=/tmp/spider_runtime. Accepted Frontier teams=/tmp/spider_frontier with INDEX.tsv. ALSO inspect evidence/run-memory/CTO_FEED.json and INDEX.md when present: this is distilled Actions-log memory and is a research/operations RADAR only. Preserve every finding's evidence_status; LOG_ONLY_UNAUDITED/DURABLE_UNAUDITED/OPERATIONAL_DIAGNOSTIC may justify a validation experiment, repair, Intel request or Frontier charter, never an accepted scientific claim. Use cto_* subagents in fresh contexts. Preserve all scientific verdicts. Identify uncovered high-upside domains, forgotten run-level clues, recurring cross-team failure signatures and duplicated work. Physics WP-006 may remain falsified while genuinely orthogonal Physics questions continue. You have authority under Architecture V3 to charter multiple independent Frontier teams. Write complete CREATE/CONTINUE/PAUSE/TERMINATE/MERGE charters with monotonic charter_version when justified. For a Physics-domain Frontier team, make the `domain` field explicitly contain the word Physics so mechanical portfolio coverage can be checked. No artificial token-cost cap; optimize independent search coverage, information gain and work-compression leverage. Write all required CTO state and handoffs."
 
       - name: Enforce CTO-only writes
         shell: bash
@@ -148,8 +148,11 @@ jobs:
               (.handoff_targets|type=="array") and
               (.priority|IN("CRITICAL","HIGH","MEDIUM","LOW"))
             )' state/cto_direction.json >/dev/null || { echo "::error::Invalid Frontier charter schema"; exit 1; }
-          DUP=$(jq -r '.research_portfolio.frontier_team_charters | group_by(.team_id) | map(select(length>1 and ([.[].charter_version]|unique|length != length))) | length' state/cto_direction.json)
-          [[ "$DUP" == 0 ]] || { echo "::error::Duplicate team_id+charter_version"; exit 1; }
+
+          # Exact duplicate tuple detection. The previous expression compared
+          # the length of a unique list to itself and therefore could never fire.
+          DUP=$(jq '[.research_portfolio.frontier_team_charters | group_by([.team_id,.charter_version])[] | select(length>1)] | length' state/cto_direction.json)
+          [[ "$DUP" == 0 ]] || { echo "::error::Duplicate team_id+charter_version tuple"; exit 1; }
 
           # Architecture V3 + accepted Physics handoff require at least one
           # executable Physics-domain research charter while the core Physics
@@ -158,8 +161,8 @@ jobs:
           # CLOSED negative result is valid and must not itself fail validation.
           if [[ -f /tmp/spider_physics/state/physics_loop.json ]] && \
              [[ "$(jq -r '.frontier_handoff.required // false' /tmp/spider_physics/state/physics_loop.json)" == true ]]; then
-            PHYSICS_ACTIVE=$(jq '[.research_portfolio.frontier_team_charters[] | select((.status=="CREATE" or .status=="CONTINUE") and ((.domain|ascii_downcase|contains("physics")) or (.mission|ascii_downcase|contains("physics")) or (.question|ascii_downcase|contains("physics"))))] | length' state/cto_direction.json)
-            [[ "$PHYSICS_ACTIVE" -ge 1 ]] || { echo "::error::Physics frontier handoff requires at least one active orthogonal Physics-domain charter"; exit 1; }
+            PHYSICS_ACTIVE=$(jq '[.research_portfolio.frontier_team_charters[] | select((.status=="CREATE" or .status=="CONTINUE") and (.domain|ascii_downcase|contains("physics")))] | length' state/cto_direction.json)
+            [[ "$PHYSICS_ACTIVE" -ge 1 ]] || { echo "::error::Physics frontier handoff requires at least one active charter whose domain explicitly identifies Physics"; exit 1; }
           fi
 
           test -f docs/CTO_LEDGER.md || { echo "::error::Missing CTO ledger"; exit 1; }
