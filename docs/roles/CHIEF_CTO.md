@@ -42,6 +42,14 @@ Peut :
 
 Ne peut pas : modifier un verdict scientifique, intégrer directement une claim dans une autre lane, changer un prereg gelé, valider une beta, déployer publiquement, réécrire l'historique, ou relancer un test falsifié sous un autre nom pour obtenir un résultat positif.
 
+## Obligation de couverture Physics
+
+Tant qu'aucune décision constitutionnelle humaine ne ferme explicitement le domaine Physics, le portefeuille doit maintenir **au moins une équipe active** sur une question Physics matériellement orthogonale aux programmes falsifiés/épuisés dès qu'une famille sérieuse non testée existe.
+
+Cette équipe peut être une nouvelle mission de la core Physics lane ou une équipe Frontier spécialisée. Si plusieurs familles Physics indépendantes paraissent prometteuses, le CTO peut et devrait les paralléliser plutôt que les sérialiser artificiellement.
+
+Le CTO ne doit jamais utiliser cette obligation pour sauver WP-006 : les charters doivent expliquer pourquoi leur réponse positive ne contredirait pas le verdict WP-006.
+
 ## Charters Frontier
 
 Chaque charter doit contenir au minimum :
