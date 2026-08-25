@@ -8,6 +8,7 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/repo-hygiene.yml'
+      - 'evidence/run-memory/runs/**'
 
 permissions:
   actions: write
@@ -19,7 +20,7 @@ concurrency:
 
 jobs:
   prune_actions_history:
-    name: Prune obsolete Actions runs without deleting scientific provenance
+    name: Prune only runs already distilled into durable evidence memory
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -27,7 +28,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Delete obsolete run noise, preserve evidence-bearing cycles
+      - name: Delete only archived and explicitly prune-safe run noise
         env:
           GH_TOKEN: ${{ github.token }}
           KEEP_LATEST_PER_WORKFLOW: 3
@@ -37,12 +38,11 @@ jobs:
 
           declare -A PROTECT=()
           declare -A COUNT=()
-
-          # Never touch this run.
           PROTECT["$GITHUB_RUN_ID"]=1
 
-          # Scientific/product/frontier snapshots are durable provenance. Any
-          # run id embedded in a cycle/* branch name is therefore protected.
+          # Any run with durable cycle provenance remains protected even after
+          # distillation. Raw Actions logs can contain reproducibility/debug
+          # evidence that is worth keeping for claim-bearing work.
           while read -r id; do
             [[ -n "$id" ]] && PROTECT["$id"]=1
           done < <(
@@ -52,45 +52,14 @@ jobs:
               | sort -u
           )
 
-          # Accepted-state and ledger files sometimes retain run ids even when
-          # a cycle branch is later reorganized. Protect every run-like id
-          # reachable from accepted lab/* heads as a second provenance layer.
-          for lane in graph physics intel product runtime cto; do
-            ref="lab/$lane"
-            if git ls-remote --exit-code --heads origin "refs/heads/$ref" >/dev/null 2>&1; then
-              git fetch -q origin "$ref:refs/remotes/origin/$ref"
-              while read -r id; do
-                [[ -n "$id" ]] && PROTECT["$id"]=1
-              done < <(
-                git grep -IhoE '[0-9]{8,}' "refs/remotes/origin/$ref" -- \
-                  'state/**' 'docs/**' 'results/**' 'reports/**' 2>/dev/null \
-                  | sort -u || true
-              )
-            fi
-          done
-
-          # Frontier accepted branches are dynamic; protect ids referenced by
-          # every accepted frontier head too.
-          while read -r ref; do
-            [[ -z "$ref" ]] && continue
-            git fetch -q origin "$ref:$ref" 2>/dev/null || true
-            while read -r id; do
-              [[ -n "$id" ]] && PROTECT["$id"]=1
-            done < <(
-              git grep -IhoE '[0-9]{8,}' "$ref" -- 'frontier/**' 'state/**' 'docs/**' 'results/**' 'reports/**' 2>/dev/null \
-                | sort -u || true
-            )
-          done < <(git ls-remote --heads origin 'refs/heads/lab/frontier/*' | awk '{print $2}' | sed 's#^refs/heads/##')
-
           tmp=$(mktemp)
           gh api --paginate "repos/${GITHUB_REPOSITORY}/actions/runs?per_page=100" \
             --jq '.workflow_runs[] | [.id,.workflow_id,.status,.created_at,.name,.path] | @tsv' > "$tmp"
 
-          # Protect active runs and the N most recent runs of every workflow.
+          # Active runs and the latest few runs of every workflow are always
+          # retained for immediate debugging even when an archive exists.
           while IFS=$'\t' read -r id wid status created name path; do
-            if [[ "$status" != completed ]]; then
-              PROTECT["$id"]=1
-            fi
+            [[ "$status" != completed ]] && PROTECT["$id"]=1
           done < "$tmp"
 
           while IFS=$'\t' read -r id wid status created name path; do
@@ -103,23 +72,32 @@ jobs:
 
           deleted=0
           kept=0
+          unarchived=0
           failed=0
+
           while IFS=$'\t' read -r id wid status created name path; do
             [[ "$status" == completed ]] || { kept=$((kept + 1)); continue; }
-
-            # Deleted legacy workflows are pure orchestration noise. Their
-            # completed runs can disappear unless referenced as provenance.
-            legacy=false
-            case "$name" in
-              "SPIDER Launcher — Graph + Physics"|"SPIDER Meta Sync") legacy=true ;;
-            esac
-
             if [[ -n "${PROTECT[$id]:-}" ]]; then
               kept=$((kept + 1))
               continue
             fi
 
-            echo "Deleting run $id | $name | $created | $path"
+            record="evidence/run-memory/runs/${id}.json"
+            if [[ ! -f "$record" ]]; then
+              echo "Keeping unarchived run $id | $name"
+              unarchived=$((unarchived + 1))
+              continue
+            fi
+
+            safe=$(jq -r '.safe_to_prune // false' "$record" 2>/dev/null || echo false)
+            distilled=$(jq -r '.distillation_complete // false' "$record" 2>/dev/null || echo false)
+            if [[ "$safe" != true || "$distilled" != true ]]; then
+              echo "Keeping archived-but-protected run $id | safe=$safe distilled=$distilled"
+              kept=$((kept + 1))
+              continue
+            fi
+
+            echo "Deleting distilled run $id | $name | $created"
             if gh api -X DELETE "repos/${GITHUB_REPOSITORY}/actions/runs/${id}" >/dev/null 2>&1; then
               deleted=$((deleted + 1))
             else
@@ -129,4 +107,4 @@ jobs:
           done < "$tmp"
 
           rm -f "$tmp"
-          echo "Repo hygiene complete: deleted=$deleted kept=$kept failed=$failed protected_ids=${#PROTECT[@]}"
+          echo "Repo hygiene: deleted=$deleted kept=$kept unarchived=$unarchived failed=$failed"
