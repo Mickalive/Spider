@@ -1,0 +1,415 @@
+name: SPIDER Frontier Research Team
+run-name: Frontier ${{ inputs.team_id }} v${{ inputs.charter_version }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      team_id:
+        description: "CTO Frontier team id"
+        required: true
+        type: string
+      charter_version:
+        description: "CTO charter version"
+        required: true
+        type: number
+      cto_commit:
+        description: "Exact accepted CTO commit containing the charter"
+        required: true
+        type: string
+      repair_from_run_id:
+        description: "Rejected same-team run to repair"
+        required: false
+        type: string
+        default: ""
+      repair_round:
+        description: "Same-cycle repair round"
+        required: false
+        type: number
+        default: 0
+
+permissions:
+  contents: write
+  actions: write
+
+env:
+  SPIDER_MODEL: opencode/x-preview-f-free
+
+concurrency:
+  group: spider-frontier-${{ inputs.team_id }}
+  cancel-in-progress: false
+
+jobs:
+  frontier_team:
+    name: FRONTIER TEAM — ${{ inputs.team_id }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - name: Checkout current control plane
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Validate identity and stage launcher
+        shell: bash
+        env:
+          TEAM_ID: ${{ inputs.team_id }}
+        run: |
+          set -euo pipefail
+          [[ "$TEAM_ID" =~ ^[a-z0-9][a-z0-9-]{1,62}$ ]] || { echo "::error::Invalid Frontier team_id"; exit 1; }
+          mkdir -p /tmp/spider_control
+          cp .github/scripts/run-opencode-with-retry.sh /tmp/spider_control/run-opencode-with-retry.sh
+
+      - name: Mount exact CTO charter
+        shell: bash
+        env:
+          TEAM_ID: ${{ inputs.team_id }}
+          CHARTER_VERSION: ${{ inputs.charter_version }}
+          CTO_COMMIT: ${{ inputs.cto_commit }}
+        run: |
+          set -euo pipefail
+          git fetch origin lab/cto
+          git cat-file -e "${CTO_COMMIT}^{commit}" || { echo "::error::CTO commit not fetchable"; exit 1; }
+          git worktree add --detach /tmp/spider_cto_charter "$CTO_COMMIT"
+          jq --arg id "$TEAM_ID" --argjson v "$CHARTER_VERSION" \
+            '.research_portfolio.frontier_team_charters[] | select(.team_id==$id and .charter_version==$v)' \
+            /tmp/spider_cto_charter/state/cto_direction.json > /tmp/frontier_charter.json
+          test -s /tmp/frontier_charter.json || { echo "::error::Exact Frontier charter missing"; exit 1; }
+          STATUS=$(jq -r '.status' /tmp/frontier_charter.json)
+          case "$STATUS" in CREATE|CONTINUE) ;; *) echo "::error::Charter status $STATUS is not executable"; exit 1 ;; esac
+
+      - name: Checkout or initialize accepted Frontier team
+        if: ${{ inputs.repair_from_run_id == '' }}
+        shell: bash
+        env:
+          TEAM_ID: ${{ inputs.team_id }}
+          CHARTER_VERSION: ${{ inputs.charter_version }}
+        run: |
+          set -euo pipefail
+          BRANCH="lab/frontier/$TEAM_ID"
+          if git ls-remote --exit-code --heads origin "refs/heads/$BRANCH" >/dev/null 2>&1; then
+            git fetch origin "$BRANCH"
+            git switch -C "$BRANCH" "origin/$BRANCH"
+          else
+            git switch -C "$BRANCH"
+            mkdir -p "frontier/$TEAM_ID/charters" "tests/frontier/$TEAM_ID" "results/frontier/$TEAM_ID" "reports/frontier/$TEAM_ID" "data/manifests/frontier/$TEAM_ID" "state/frontier" "docs/frontier" "directives/frontier"
+            cp /tmp/frontier_charter.json "frontier/$TEAM_ID/charters/cto_v${CHARTER_VERSION}.json"
+            printf '# Frontier %s ledger\n\n' "$TEAM_ID" > "docs/frontier/${TEAM_ID}_LEDGER.md"
+            printf '# Frontier %s local directive\n\nExecute the exact CTO charter.\n' "$TEAM_ID" > "directives/frontier/${TEAM_ID}.md"
+            jq -n --arg id "$TEAM_ID" --argjson v "$CHARTER_VERSION" '{team_id:$id,accepted_charter_version:0,pending_charter_version:$v,cycle_status:"INITIALIZED",claim_status:"UNTESTED",continue_recommended:true,next_question:null,evidence_refs:[]}' > "state/frontier/${TEAM_ID}.json"
+            git config user.name "spider-frontier-bootstrap"
+            git config user.email "spider-frontier-bootstrap@autonomous.local"
+            git add "frontier/$TEAM_ID" "tests/frontier/$TEAM_ID" "results/frontier/$TEAM_ID" "reports/frontier/$TEAM_ID" "data/manifests/frontier/$TEAM_ID" "state/frontier/$TEAM_ID.json" "docs/frontier/${TEAM_ID}_LEDGER.md" "directives/frontier/${TEAM_ID}.md"
+            git commit -m "Frontier $TEAM_ID: initialize charter v$CHARTER_VERSION"
+            git push origin "HEAD:refs/heads/$BRANCH"
+          fi
+          cp /tmp/frontier_charter.json "frontier/$TEAM_ID/charters/cto_v${CHARTER_VERSION}.json"
+
+      - name: Checkout rejected snapshot for same-cycle repair
+        if: ${{ inputs.repair_from_run_id != '' }}
+        shell: bash
+        env:
+          TEAM_ID: ${{ inputs.team_id }}
+          SOURCE_RUN: ${{ inputs.repair_from_run_id }}
+        run: |
+          set -euo pipefail
+          TEAM_BRANCH="cycle/frontier/${TEAM_ID}/${SOURCE_RUN}/team"
+          AUDIT_BRANCH="cycle/frontier/${TEAM_ID}/${SOURCE_RUN}/audit"
+          git fetch origin "$TEAM_BRANCH:refs/remotes/origin/$TEAM_BRANCH"
+          git fetch origin "$AUDIT_BRANCH:refs/remotes/origin/$AUDIT_BRANCH"
+          git switch -C frontier-repair-base "origin/$TEAM_BRANCH"
+          git worktree add --detach /tmp/spider_frontier_repair_audit "origin/$AUDIT_BRANCH"
+
+      - name: Mount accepted SPIDER evidence and Frontier peers
+        shell: bash
+        env:
+          TEAM_ID: ${{ inputs.team_id }}
+        run: |
+          set -euo pipefail
+          for lane in graph physics intel product runtime cto; do
+            B="lab/$lane"
+            if git ls-remote --exit-code --heads origin "refs/heads/$B" >/dev/null 2>&1; then
+              git fetch origin "$B:refs/remotes/origin/$B"
+              git worktree add --detach "/tmp/spider_$lane" "origin/$B"
+            else
+              mkdir -p "/tmp/spider_$lane"
+            fi
+          done
+          mkdir -p /tmp/spider_frontier_peers
+          git ls-remote --heads origin 'refs/heads/lab/frontier/*' | while read -r sha ref; do
+            peer="${ref#refs/heads/lab/frontier/}"
+            [[ "$peer" == "$TEAM_ID" ]] && continue
+            [[ "$peer" =~ ^[a-z0-9][a-z0-9-]{1,62}$ ]] || continue
+            git fetch origin "$ref:refs/remotes/origin/lab/frontier/$peer"
+            git worktree add --detach "/tmp/spider_frontier_peers/$peer" "origin/lab/frontier/$peer" || true
+          done
+
+      - name: Install OpenCode
+        shell: bash
+        run: curl --retry 3 --retry-all-errors --retry-delay 15 -fsSL https://opencode.ai/install | bash
+
+      - name: Run Frontier research cycle
+        if: ${{ inputs.repair_from_run_id == '' }}
+        shell: bash
+        env:
+          TEAM_ID: ${{ inputs.team_id }}
+          CHARTER_VERSION: ${{ inputs.charter_version }}
+        run: |
+          bash /tmp/spider_control/run-opencode-with-retry.sh run \
+            --model "$SPIDER_MODEL" \
+            --agent frontier_research_lead \
+            "Run CTO-chartered Frontier team ${TEAM_ID}, charter v${CHARTER_VERSION}, GitHub run ${GITHUB_RUN_ID}. Exact charter=/tmp/frontier_charter.json. Accepted core evidence mounts=/tmp/spider_{graph,physics,intel,product,runtime}; accepted peer teams=/tmp/spider_frontier_peers. Execute the smallest rigorous cycle that can discriminate the charter question. Preserve negative results and freeze claim-bearing tests pre-outcome."
+
+      - name: Repair Frontier research cycle
+        if: ${{ inputs.repair_from_run_id != '' }}
+        shell: bash
+        env:
+          TEAM_ID: ${{ inputs.team_id }}
+          CHARTER_VERSION: ${{ inputs.charter_version }}
+          REPAIR_ROUND: ${{ inputs.repair_round }}
+          SOURCE_RUN: ${{ inputs.repair_from_run_id }}
+        run: |
+          bash /tmp/spider_control/run-opencode-with-retry.sh run \
+            --model "$SPIDER_MODEL" \
+            --agent frontier_research_lead \
+            "REPAIR CTO-chartered Frontier team ${TEAM_ID}, charter v${CHARTER_VERSION}, repair round ${REPAIR_ROUND}, run ${GITHUB_RUN_ID}. Current checkout is exact rejected team snapshot from ${SOURCE_RUN}; audit=/tmp/spider_frontier_repair_audit; charter=/tmp/frontier_charter.json. Fix every required_fixes item without weakening frozen hypotheses, baselines, data, success oracle or verdict rules."
+
+      - name: Enforce Frontier team scope
+        shell: bash
+        env:
+          TEAM_ID: ${{ inputs.team_id }}
+        run: |
+          set -euo pipefail
+          BAD=""
+          while IFS= read -r line; do
+            p="${line:3}"
+            case "$p" in
+              frontier/$TEAM_ID/*|tests/frontier/$TEAM_ID/*|results/frontier/$TEAM_ID/*|reports/frontier/$TEAM_ID/*|data/manifests/frontier/$TEAM_ID/*|state/frontier/$TEAM_ID.json|docs/frontier/${TEAM_ID}_LEDGER.md|docs/frontier/${TEAM_ID}_TO_CTO.md|directives/frontier/$TEAM_ID.md) ;;
+              "") ;;
+              *) BAD+="$p\n" ;;
+            esac
+          done < <(git status --porcelain)
+          if [[ -n "$BAD" ]]; then
+            echo -e "Frontier team crossed protected scope:\n$BAD"
+            exit 1
+          fi
+
+      - name: Persist Frontier team snapshot
+        if: always()
+        shell: bash
+        env:
+          TEAM_ID: ${{ inputs.team_id }}
+        run: |
+          BRANCH="cycle/frontier/${TEAM_ID}/${GITHUB_RUN_ID}/team"
+          ATTEMPT="${BRANCH}-attempt-${GITHUB_RUN_ATTEMPT}"
+          git config user.name "spider-frontier-$TEAM_ID"
+          git config user.email "spider-frontier@autonomous.local"
+          git switch -C "$BRANCH"
+          git add -A
+          git commit -m "Frontier $TEAM_ID v${{ inputs.charter_version }} repair ${{ inputs.repair_round }}: team output" || true
+          git push --force origin "HEAD:refs/heads/$ATTEMPT"
+          git push --force origin "HEAD:refs/heads/$BRANCH"
+
+  frontier_audit:
+    name: FRONTIER AUDITOR — ${{ inputs.team_id }}
+    needs: [frontier_team]
+    if: needs.frontier_team.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 270
+    outputs:
+      gate: ${{ steps.gate.outputs.gate }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Stage launcher and exact charter
+        shell: bash
+        env:
+          TEAM_ID: ${{ inputs.team_id }}
+          CHARTER_VERSION: ${{ inputs.charter_version }}
+          CTO_COMMIT: ${{ inputs.cto_commit }}
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/spider_control
+          cp .github/scripts/run-opencode-with-retry.sh /tmp/spider_control/run-opencode-with-retry.sh
+          git fetch origin lab/cto
+          git worktree add --detach /tmp/spider_cto_charter "$CTO_COMMIT"
+          jq --arg id "$TEAM_ID" --argjson v "$CHARTER_VERSION" '.research_portfolio.frontier_team_charters[] | select(.team_id==$id and .charter_version==$v)' /tmp/spider_cto_charter/state/cto_direction.json > /tmp/frontier_charter.json
+          test -s /tmp/frontier_charter.json
+
+      - name: Checkout accepted team base and mount candidate
+        shell: bash
+        env:
+          TEAM_ID: ${{ inputs.team_id }}
+        run: |
+          BRANCH="lab/frontier/$TEAM_ID"
+          git fetch origin "$BRANCH"
+          git switch -C frontier-audit-base "origin/$BRANCH"
+          TEAM_BRANCH="cycle/frontier/${TEAM_ID}/${GITHUB_RUN_ID}/team"
+          git fetch origin "$TEAM_BRANCH:refs/remotes/origin/$TEAM_BRANCH"
+          git worktree add --detach /tmp/spider_frontier_team "origin/$TEAM_BRANCH"
+
+      - name: Install OpenCode
+        shell: bash
+        run: curl --retry 3 --retry-all-errors --retry-delay 15 -fsSL https://opencode.ai/install | bash
+
+      - name: Run independent Frontier audit
+        shell: bash
+        env:
+          TEAM_ID: ${{ inputs.team_id }}
+        run: |
+          bash /tmp/spider_control/run-opencode-with-retry.sh run \
+            --model "$SPIDER_MODEL" \
+            --agent frontier_research_auditor \
+            "Audit Frontier team ${TEAM_ID}, charter v${{ inputs.charter_version }}, run ${GITHUB_RUN_ID}, repair ${{ inputs.repair_round }}. Charter=/tmp/frontier_charter.json; TEAM=/tmp/spider_frontier_team. Current checkout is untouched accepted team base. Recompute claims and write only audit outputs."
+
+      - name: Enforce audit-only writes
+        shell: bash
+        run: |
+          CHANGED=$(git status --porcelain | cut -c4- || true)
+          BAD=$(printf '%s\n' "$CHANGED" | grep -Ev '^(reports/audit/|results/audit/)' || true)
+          if [[ -n "$BAD" ]]; then echo "$BAD"; exit 1; fi
+
+      - name: Validate Frontier gate
+        id: gate
+        shell: bash
+        env:
+          TEAM_ID: ${{ inputs.team_id }}
+        run: |
+          FILE="results/audit/CYCLE_${GITHUB_RUN_ID}_FRONTIER_${TEAM_ID}_GATE.json"
+          test -f "$FILE" || { echo "::error::Missing Frontier gate"; exit 1; }
+          GATE=$(jq -r '.gate // empty' "$FILE")
+          SAFE=$(jq -r '.safe_to_integrate // false' "$FILE")
+          case "$GATE" in
+            PASS) [[ "$SAFE" == true ]] || exit 1 ;;
+            REVISE) [[ "$SAFE" == false ]] || exit 1; test "$(jq '.required_fixes|length' "$FILE")" -gt 0 || exit 1 ;;
+            BLOCKED) [[ "$SAFE" == false ]] || exit 1 ;;
+            *) echo "::error::Invalid gate $GATE"; exit 1 ;;
+          esac
+          echo "gate=$GATE" >> "$GITHUB_OUTPUT"
+
+      - name: Persist Frontier audit snapshot
+        if: always()
+        shell: bash
+        env:
+          TEAM_ID: ${{ inputs.team_id }}
+        run: |
+          BRANCH="cycle/frontier/${TEAM_ID}/${GITHUB_RUN_ID}/audit"
+          ATTEMPT="${BRANCH}-attempt-${GITHUB_RUN_ATTEMPT}"
+          git config user.name "spider-frontier-auditor"
+          git config user.email "spider-frontier-auditor@autonomous.local"
+          git switch -C "$BRANCH"
+          git add -A
+          git commit -m "Frontier $TEAM_ID: independent audit" || true
+          git push --force origin "HEAD:refs/heads/$ATTEMPT"
+          git push --force origin "HEAD:refs/heads/$BRANCH"
+
+  frontier_repair_router:
+    name: FRONTIER AUDIT → RETURN TO TEAM
+    needs: [frontier_audit]
+    if: needs.frontier_audit.result == 'success' && needs.frontier_audit.outputs.gate == 'REVISE'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dispatch same-cycle repair
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          NEXT=$(( ${{ inputs.repair_round }} + 1 ))
+          gh workflow run frontier-research.yml --repo "$GITHUB_REPOSITORY" --ref main \
+            -f team_id="${{ inputs.team_id }}" \
+            -f charter_version="${{ inputs.charter_version }}" \
+            -f cto_commit="${{ inputs.cto_commit }}" \
+            -f repair_from_run_id="$GITHUB_RUN_ID" \
+            -f repair_round="$NEXT"
+
+  frontier_blocked:
+    name: FRONTIER AUDIT — BLOCKED
+    needs: [frontier_audit]
+    if: needs.frontier_audit.result == 'success' && needs.frontier_audit.outputs.gate == 'BLOCKED'
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "::warning::Frontier team ${{ inputs.team_id }} is BLOCKED; CTO will review on workflow completion."
+
+  frontier_director:
+    name: FRONTIER DIRECTOR — ${{ inputs.team_id }}
+    needs: [frontier_team, frontier_audit]
+    if: needs.frontier_audit.result == 'success' && needs.frontier_audit.outputs.gate == 'PASS'
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Stage launcher and exact charter
+        shell: bash
+        env:
+          TEAM_ID: ${{ inputs.team_id }}
+          CHARTER_VERSION: ${{ inputs.charter_version }}
+          CTO_COMMIT: ${{ inputs.cto_commit }}
+        run: |
+          mkdir -p /tmp/spider_control
+          cp .github/scripts/run-opencode-with-retry.sh /tmp/spider_control/run-opencode-with-retry.sh
+          git fetch origin lab/cto
+          git worktree add --detach /tmp/spider_cto_charter "$CTO_COMMIT"
+          jq --arg id "$TEAM_ID" --argjson v "$CHARTER_VERSION" '.research_portfolio.frontier_team_charters[] | select(.team_id==$id and .charter_version==$v)' /tmp/spider_cto_charter/state/cto_direction.json > /tmp/frontier_charter.json
+          test -s /tmp/frontier_charter.json
+
+      - name: Checkout accepted team and mount audited snapshots
+        shell: bash
+        env:
+          TEAM_ID: ${{ inputs.team_id }}
+        run: |
+          BRANCH="lab/frontier/$TEAM_ID"
+          git fetch origin "$BRANCH"
+          git switch -C "$BRANCH" "origin/$BRANCH"
+          for kind in team audit; do
+            B="cycle/frontier/${TEAM_ID}/${GITHUB_RUN_ID}/$kind"
+            git fetch origin "$B:refs/remotes/origin/$B"
+            git worktree add --detach "/tmp/spider_frontier_$kind" "origin/$B"
+          done
+
+      - name: Install OpenCode
+        shell: bash
+        run: curl --retry 3 --retry-all-errors --retry-delay 15 -fsSL https://opencode.ai/install | bash
+
+      - name: Integrate audited Frontier result
+        shell: bash
+        env:
+          TEAM_ID: ${{ inputs.team_id }}
+        run: |
+          bash /tmp/spider_control/run-opencode-with-retry.sh run \
+            --model "$SPIDER_MODEL" \
+            --agent frontier_research_director \
+            "Integrate audited Frontier team ${TEAM_ID}, charter v${{ inputs.charter_version }}, run ${GITHUB_RUN_ID}. Charter=/tmp/frontier_charter.json; TEAM=/tmp/spider_frontier_team; AUDIT=/tmp/spider_frontier_audit. Preserve limits and update only this team's accepted namespace plus CTO handoff."
+
+      - name: Enforce Frontier Director scope
+        shell: bash
+        env:
+          TEAM_ID: ${{ inputs.team_id }}
+        run: |
+          BAD=""
+          while IFS= read -r line; do
+            p="${line:3}"
+            case "$p" in
+              frontier/$TEAM_ID/*|tests/frontier/$TEAM_ID/*|results/frontier/$TEAM_ID/*|reports/frontier/$TEAM_ID/*|data/manifests/frontier/$TEAM_ID/*|state/frontier/$TEAM_ID.json|docs/frontier/${TEAM_ID}_LEDGER.md|docs/frontier/${TEAM_ID}_TO_CTO.md|directives/frontier/$TEAM_ID.md) ;;
+              "") ;;
+              *) BAD+="$p\n" ;;
+            esac
+          done < <(git status --porcelain)
+          if [[ -n "$BAD" ]]; then echo -e "$BAD"; exit 1; fi
+
+      - name: Advance accepted Frontier branch
+        shell: bash
+        env:
+          TEAM_ID: ${{ inputs.team_id }}
+        run: |
+          git config user.name "spider-frontier-director"
+          git config user.email "spider-frontier-director@autonomous.local"
+          git add -A
+          git commit -m "Frontier $TEAM_ID v${{ inputs.charter_version }}: audited integration" || true
+          git push origin "HEAD:refs/heads/lab/frontier/$TEAM_ID"
