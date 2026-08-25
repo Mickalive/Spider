@@ -8,6 +8,7 @@ on:
       - "SPIDER Intel Research Lane"
       - "SPIDER Product and Beta Lane"
       - "SPIDER Runtime Lane"
+      - "SPIDER Frontier Research Team"
     types: [completed]
   schedule:
     - cron: "43 */4 * * *"
@@ -16,15 +17,19 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/cto-council.yml'
+      - '.github/workflows/frontier-research.yml'
       - 'SPIDER_ARCHITECTURE_V2.md'
+      - 'SPIDER_ARCHITECTURE_V3.md'
       - 'directives/CAPABILITY_CAPSULE.md'
       - 'docs/roles/CHIEF_CTO.md'
+      - 'docs/roles/FRONTIER_RESEARCH_*.md'
       - '.opencode/agents/chief_cto.md'
       - '.opencode/agents/cto_*.md'
+      - '.opencode/agents/frontier_research_*.md'
 
 permissions:
   contents: write
-  actions: read
+  actions: write
 
 concurrency:
   group: spider-critical-cto-council
@@ -36,9 +41,11 @@ env:
 
 jobs:
   critical_review:
-    name: CHIEF CTO — CRITICAL CROSS-LANE REVIEW
+    name: CHIEF CTO — GLOBAL RESEARCH PORTFOLIO REVIEW
     runs-on: ubuntu-latest
-    timeout-minutes: 240
+    timeout-minutes: 300
+    outputs:
+      cto_commit: ${{ steps.persist.outputs.cto_commit }}
     steps:
       - name: Checkout current control plane
         uses: actions/checkout@v6
@@ -53,13 +60,13 @@ jobs:
             git fetch origin "$CTO_BRANCH:refs/remotes/origin/$CTO_BRANCH"
             git worktree add --detach /tmp/spider_cto_prev "origin/$CTO_BRANCH"
             cp /tmp/spider_cto_prev/docs/CTO_LEDGER.md docs/CTO_LEDGER.md 2>/dev/null || true
-            for lane in GRAPH PHYSICS INTEL PRODUCT RUNTIME; do
+            for lane in GRAPH PHYSICS INTEL PRODUCT RUNTIME FRONTIER; do
               cp "/tmp/spider_cto_prev/docs/CTO_TO_${lane}.md" "docs/CTO_TO_${lane}.md" 2>/dev/null || true
             done
             cp /tmp/spider_cto_prev/state/cto_direction.json state/cto_direction.json 2>/dev/null || true
           fi
 
-      - name: Mount latest accepted lane snapshots
+      - name: Mount latest accepted core-lane snapshots
         shell: bash
         run: |
           for lane in graph physics intel product runtime; do
@@ -72,6 +79,20 @@ jobs:
             fi
           done
 
+      - name: Mount all accepted Frontier teams
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/spider_frontier
+          : > /tmp/spider_frontier/INDEX.tsv
+          git ls-remote --heads origin 'refs/heads/lab/frontier/*' | while read -r sha ref; do
+            team="${ref#refs/heads/lab/frontier/}"
+            [[ "$team" =~ ^[a-z0-9][a-z0-9-]{1,62}$ ]] || continue
+            git fetch origin "$ref:refs/remotes/origin/lab/frontier/$team"
+            git worktree add --detach "/tmp/spider_frontier/$team" "origin/lab/frontier/$team"
+            printf '%s\t%s\n' "$team" "$sha" >> /tmp/spider_frontier/INDEX.tsv
+          done
+
       - name: Install OpenCode
         shell: bash
         run: curl --retry 3 --retry-all-errors --retry-delay 15 -fsSL https://opencode.ai/install | bash
@@ -82,37 +103,102 @@ jobs:
           bash .github/scripts/run-opencode-with-retry.sh run \
             --model "$SPIDER_MODEL" \
             --agent chief_cto \
-            "Run a critical SPIDER CTO review. Accepted snapshots only: Graph=/tmp/spider_graph, Physics=/tmp/spider_physics, Intel=/tmp/spider_intel, Product=/tmp/spider_product, Runtime=/tmp/spider_runtime. Use your cto_* subagents in fresh contexts. Identify the top duplicated-work bottleneck, highest-upside work-compression program, strongest ignored baseline/prior art, cross-lane interface incompatibilities, one thing to kill/deprioritize, and exact recommendations for each lane. Do not change scientific verdicts or frozen tests. Write the required CTO state and handoffs."
+            "Run a GLOBAL SPIDER CTO portfolio review. Accepted core snapshots only: Graph=/tmp/spider_graph, Physics=/tmp/spider_physics, Intel=/tmp/spider_intel, Product=/tmp/spider_product, Runtime=/tmp/spider_runtime. Accepted Frontier teams=/tmp/spider_frontier with INDEX.tsv. Use cto_* subagents in fresh contexts. Preserve all scientific verdicts. Identify uncovered high-upside domains as well as duplicated work. Physics WP-006 may remain falsified while genuinely orthogonal Physics questions continue. You have authority under Architecture V3 to charter multiple independent Frontier teams. Write complete CREATE/CONTINUE/PAUSE/TERMINATE/MERGE charters with monotonic charter_version when justified. No artificial token-cost cap; optimize independent search coverage, information gain and work-compression leverage. Write all required CTO state and handoffs."
 
       - name: Enforce CTO-only writes
         shell: bash
         run: |
           CHANGED=$(git status --porcelain | cut -c4- || true)
-          BAD=$(printf '%s\n' "$CHANGED" | grep -Ev '^(docs/CTO_LEDGER\.md$|docs/CTO_TO_(GRAPH|PHYSICS|INTEL|PRODUCT|RUNTIME)\.md$|state/cto_direction\.json$)' || true)
+          BAD=$(printf '%s\n' "$CHANGED" | grep -Ev '^(docs/CTO_LEDGER\.md$|docs/CTO_TO_(GRAPH|PHYSICS|INTEL|PRODUCT|RUNTIME|FRONTIER)\.md$|state/cto_direction\.json$)' || true)
           if [[ -n "$BAD" ]]; then
             echo "Chief CTO wrote outside CTO scope:"
             echo "$BAD"
             exit 1
           fi
 
-      - name: Validate CTO state
+      - name: Validate CTO state and Frontier charters
         shell: bash
         run: |
+          set -euo pipefail
           test -f state/cto_direction.json || { echo "::error::Missing state/cto_direction.json"; exit 1; }
-          for key in top_system_bottleneck highest_upside_program kill_or_deprioritize cross_lane_incompatibilities runtime_missing_primitives baseline_gaps recommended_allocations evidence_refs; do
+          for key in top_system_bottleneck highest_upside_program kill_or_deprioritize cross_lane_incompatibilities runtime_missing_primitives baseline_gaps recommended_allocations evidence_refs research_portfolio; do
             jq -e --arg k "$key" 'has($k)' state/cto_direction.json >/dev/null || { echo "::error::CTO state missing $key"; exit 1; }
           done
+          for key in portfolio_thesis uncovered_bottlenecks frontier_team_charters merge_or_kill_actions cross_team_dependencies; do
+            jq -e --arg k "$key" '.research_portfolio | has($k)' state/cto_direction.json >/dev/null || { echo "::error::research_portfolio missing $key"; exit 1; }
+          done
+          jq -e '
+            .research_portfolio.frontier_team_charters | type=="array" and
+            all(.[];
+              (.team_id|type=="string" and test("^[a-z0-9][a-z0-9-]{1,62}$")) and
+              (.charter_version|type=="number" and .>=1 and floor==.) and
+              (.status|IN("CREATE","CONTINUE","PAUSE","TERMINATE","MERGE")) and
+              (.domain|type=="string" and length>0) and
+              (.mission|type=="string" and length>0) and
+              (.question|type=="string" and length>0) and
+              (.why_now|type=="string" and length>0) and
+              (.why_not_existing_lane|type=="string" and length>0) and
+              (.expected_work_compression_leverage|type=="string" and length>0) and
+              (.evidence_inputs|type=="array") and
+              (.strongest_null_or_baseline != null) and
+              (.validity_threats|type=="array") and
+              (.required_artifacts|type=="array") and
+              (.stop_condition != null) and
+              (.handoff_targets|type=="array") and
+              (.priority|IN("CRITICAL","HIGH","MEDIUM","LOW"))
+            )' state/cto_direction.json >/dev/null || { echo "::error::Invalid Frontier charter schema"; exit 1; }
+          DUP=$(jq -r '.research_portfolio.frontier_team_charters | group_by(.team_id) | map(select(length>1 and ([.[].charter_version]|unique|length != length))) | length' state/cto_direction.json)
+          [[ "$DUP" == 0 ]] || { echo "::error::Duplicate team_id+charter_version"; exit 1; }
           test -f docs/CTO_LEDGER.md || { echo "::error::Missing CTO ledger"; exit 1; }
-          for lane in GRAPH PHYSICS INTEL PRODUCT RUNTIME; do
+          for lane in GRAPH PHYSICS INTEL PRODUCT RUNTIME FRONTIER; do
             test -f "docs/CTO_TO_${lane}.md" || { echo "::error::Missing CTO_TO_${lane}.md"; exit 1; }
           done
 
       - name: Advance accepted CTO advisory branch
+        id: persist
         shell: bash
         run: |
           git config user.name "spider-chief-cto"
           git config user.email "spider-chief-cto@autonomous.local"
           git switch -C cto-output
           git add docs/CTO_LEDGER.md docs/CTO_TO_*.md state/cto_direction.json
-          git commit -m "CTO critical review ${GITHUB_RUN_ID}" || true
+          git commit -m "CTO global portfolio review ${GITHUB_RUN_ID}" || true
           git push --force origin "HEAD:refs/heads/$CTO_BRANCH"
+          echo "cto_commit=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+      - name: Dispatch new or revised Frontier charters
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CTO_COMMIT: ${{ steps.persist.outputs.cto_commit }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          jq -c '.research_portfolio.frontier_team_charters[] | select(.status=="CREATE" or .status=="CONTINUE")' state/cto_direction.json | while read -r charter; do
+            id=$(jq -r '.team_id' <<<"$charter")
+            version=$(jq -r '.charter_version' <<<"$charter")
+            title="Frontier ${id} v${version}"
+
+            # Accepted branch already at this or a newer charter -> consumed.
+            accepted=0
+            if gh api "repos/${GITHUB_REPOSITORY}/contents/state/frontier/${id}.json?ref=lab/frontier/${id}" >/tmp/frontier_state.json 2>/dev/null; then
+              accepted=$(jq -r '.content' /tmp/frontier_state.json | tr -d '\n' | base64 -d | jq -r '.accepted_charter_version // 0' 2>/dev/null || echo 0)
+            fi
+            if [[ "$accepted" -ge "$version" ]]; then
+              echo "$id v$version already accepted; no dispatch."
+              continue
+            fi
+
+            existing=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow frontier-research.yml --limit 100 \
+              --json displayTitle,status,conclusion \
+              | jq --arg t "$title" '[.[] | select(.displayTitle==$t)] | length')
+            if [[ "$existing" -gt 0 ]]; then
+              echo "$id v$version already has a workflow run; no duplicate dispatch."
+              continue
+            fi
+
+            echo "Dispatching CTO Frontier charter $id v$version from $CTO_COMMIT"
+            gh workflow run frontier-research.yml --repo "$GITHUB_REPOSITORY" --ref main \
+              -f team_id="$id" \
+              -f charter_version="$version" \
+              -f cto_commit="$CTO_COMMIT"
+          done
