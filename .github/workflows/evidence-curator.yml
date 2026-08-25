@@ -170,7 +170,15 @@ jobs:
         if: steps.targets.outputs.count != '0'
         shell: bash
         run: |
-          CHANGED=$(git status --porcelain | cut -c4- || true)
+          set -euo pipefail
+          # `git status --porcelain` collapses a wholly new directory to e.g.
+          # `?? evidence/`, which previously made valid nested run-memory writes
+          # look out-of-scope. Expand tracked and untracked paths explicitly.
+          CHANGED=$({
+            git diff --name-only
+            git diff --cached --name-only
+            git ls-files --others --exclude-standard
+          } | sort -u)
           BAD=$(printf '%s\n' "$CHANGED" | grep -Ev '^evidence/run-memory/' || true)
           if [[ -n "$BAD" ]]; then
             echo "Evidence Curator wrote outside its durable memory scope:"
