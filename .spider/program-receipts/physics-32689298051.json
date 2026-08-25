@@ -1,0 +1,9 @@
+{
+  "lane": "physics",
+  "completed_program_run_id": "32689298051",
+  "next_program_id": "within-site-dynamics-interventional",
+  "next_program_title": "Within-site dynamical structure by deliberate restart/matched-state intervention",
+  "dispatched_at": "2026-08-25T01:58:19Z",
+  "receipt_status": "CONFIRMED",
+  "successor_run_id": 32799587656
+}
