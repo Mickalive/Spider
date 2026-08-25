@@ -94,7 +94,7 @@ jobs:
           handle_lane() {
             local lane="$1" branch="$2" state_path="$3" workflow="$4" expected_name="$5"
             local raw status cont completed_by launch program_id title question active receipt note rc
-            local receipt_status successor_id dispatched_at candidate before_ids
+            local receipt_status successor_id dispatched_at candidate before_ids successor_meta successor_status successor_conclusion
 
             if [[ "$EVENT_NAME" == workflow_run && "$SOURCE_WORKFLOW" != "$expected_name" ]]; then
               return 0
@@ -135,29 +135,49 @@ jobs:
               dispatched_at=$(jq -r '.dispatched_at // empty' "$receipt")
 
               if [[ -n "$successor_id" ]]; then
-                if gh run view "$successor_id" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1 \
-                   || gh api "repos/${GITHUB_REPOSITORY}/branches/cycle%2F${lane}%2F${successor_id}%2Fteam" >/dev/null 2>&1; then
-                  if [[ "$receipt_status" != CONFIRMED ]]; then
-                    jq '.receipt_status="CONFIRMED"' "$receipt" > /tmp/receipt.json && mv /tmp/receipt.json "$receipt"
+                successor_meta=$(gh run view "$successor_id" --repo "$GITHUB_REPOSITORY" --json status,conclusion 2>/dev/null || true)
+                if [[ -n "$successor_meta" ]]; then
+                  successor_status=$(jq -r '.status // "unknown"' <<<"$successor_meta")
+                  successor_conclusion=$(jq -r '.conclusion // ""' <<<"$successor_meta")
+
+                  if [[ "$successor_status" != completed ]]; then
+                    jq '.receipt_status="IN_FLIGHT"' "$receipt" > /tmp/receipt.json && mv /tmp/receipt.json "$receipt"
+                    echo "$lane: successor run $successor_id is still $successor_status for program $program_id."
+                    return 0
                   fi
-                  echo "$lane: successor run $successor_id confirmed for program $program_id."
-                  return 0
+
+                  if [[ "$successor_conclusion" == success ]]; then
+                    jq '.receipt_status="CONFIRMED"' "$receipt" > /tmp/receipt.json && mv /tmp/receipt.json "$receipt"
+                    echo "$lane: successor run $successor_id completed successfully for program $program_id."
+                    return 0
+                  fi
+
+                  echo "::warning::$lane: successor run $successor_id completed with $successor_conclusion. A failed/cancelled/timed-out successor does NOT consume the program recommendation; clearing receipt for recovery."
+                  rm -f "$receipt"
+                else
+                  echo "::warning::$lane: recorded successor $successor_id no longer exists; clearing stale receipt."
+                  rm -f "$receipt"
                 fi
-                echo "::warning::$lane: recorded successor $successor_id no longer exists and left no team branch; clearing stale receipt."
-                rm -f "$receipt"
               elif [[ -n "$dispatched_at" ]]; then
                 candidate=$(find_successor_after "$workflow" "$dispatched_at")
                 if [[ -n "$candidate" ]]; then
                   successor_id=$(jq -r '.databaseId' <<<"$candidate")
-                  jq --argjson successor "$successor_id" '.receipt_status="CONFIRMED" | .successor_run_id=$successor' "$receipt" > /tmp/receipt.json
-                  mv /tmp/receipt.json "$receipt"
-                  echo "$lane: reconciled pending receipt to successor run $successor_id."
-                  return 0
+                  successor_status=$(jq -r '.status // "unknown"' <<<"$candidate")
+                  successor_conclusion=$(jq -r '.conclusion // ""' <<<"$candidate")
+                  if [[ "$successor_status" != completed || "$successor_conclusion" == success ]]; then
+                    jq --argjson successor "$successor_id" '.receipt_status="IN_FLIGHT" | .successor_run_id=$successor' "$receipt" > /tmp/receipt.json
+                    mv /tmp/receipt.json "$receipt"
+                    echo "$lane: reconciled pending receipt to viable successor run $successor_id."
+                    return 0
+                  fi
+                  echo "::warning::$lane: reconciled candidate $successor_id already ended $successor_conclusion; clearing receipt for a fresh recovery dispatch."
+                  rm -f "$receipt"
+                else
+                  echo "::warning::$lane: pending dispatch produced no successor run; clearing receipt so dispatch can be retried."
+                  rm -f "$receipt"
                 fi
-                echo "::warning::$lane: pending dispatch produced no successor run; clearing receipt so dispatch can be retried."
-                rm -f "$receipt"
               else
-                echo "::warning::$lane: legacy unconfirmed receipt cannot prove a successor; clearing it."
+                echo "::warning::$lane: legacy unconfirmed receipt cannot prove a viable successor; clearing it."
                 rm -f "$receipt"
               fi
             fi
@@ -172,7 +192,7 @@ jobs:
               return 0
             fi
 
-            note="AUTO PROGRAM SUCCESSION from Director run ${completed_by}. Program ${program_id}: ${title}. Question: ${question}. The accepted lane directive is authoritative; do not reinterpret this note as a demand for a positive result."
+            note="AUTO PROGRAM SUCCESSION/RECOVERY from Director run ${completed_by}. Program ${program_id}: ${title}. Question: ${question}. A prior successor may have failed operationally; accepted lane state remains authoritative. Do not reinterpret this note as a demand for a positive result."
             dispatched_at=$(date -u +%Y-%m-%dT%H:%M:%SZ)
             before_ids=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow "$workflow" --limit 30 --json databaseId --jq '[.[].databaseId]')
 
@@ -199,8 +219,8 @@ jobs:
                 --arg title "$title" \
                 --arg dispatched_at "$dispatched_at" \
                 --argjson successor_run_id "$successor_id" \
-                '{lane:$lane,completed_program_run_id:$completed_by,next_program_id:$program_id,next_program_title:$title,dispatched_at:$dispatched_at,receipt_status:"CONFIRMED",successor_run_id:$successor_run_id}' > "$receipt"
-              echo "$lane: launched $program_id and confirmed successor run $successor_id."
+                '{lane:$lane,completed_program_run_id:$completed_by,next_program_id:$program_id,next_program_title:$title,dispatched_at:$dispatched_at,receipt_status:"IN_FLIGHT",successor_run_id:$successor_run_id}' > "$receipt"
+              echo "$lane: launched $program_id and recorded successor run $successor_id as IN_FLIGHT."
             else
               jq -n \
                 --arg lane "$lane" \
