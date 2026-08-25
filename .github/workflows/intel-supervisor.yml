@@ -68,9 +68,10 @@ jobs:
               --json conclusion,status --jq '[.[] | select(.status=="completed" and .conclusion=="success")] | length' 2>/dev/null || echo 0)
             next=$((accepted + 1))
             echo "::warning::Intel continuity recovery: $why. Dispatching fresh current-main cycle label $next from accepted state."
+            # intel-loop has no human_note input. Accepted lab/intel state is the
+            # authoritative recovery instruction, so pass declared inputs only.
             gh workflow run intel-loop.yml --repo "$GITHUB_REPOSITORY" --ref main \
-              -f cycle_index="$next" \
-              -f human_note="AUTOMATIC INFRASTRUCTURE RECOVERY. Prior run ${LATEST_ID:-none} did not produce accepted evidence because infrastructure interrupted it. Resume the accepted Intel next_mission; do not treat the interrupted attempt as scientific evidence and do not change the question merely to get a positive result."
+              -f cycle_index="$next"
           }
 
           if [[ -z "$LATEST_ID" ]]; then
