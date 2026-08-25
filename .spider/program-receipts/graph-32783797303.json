@@ -1,9 +1,0 @@
-{
-  "lane": "graph",
-  "completed_program_run_id": "32783797303",
-  "next_program_id": "graph-inheritance-scaling",
-  "next_program_title": "Scaling of inherited-knowledge advantage with required chain depth",
-  "dispatched_at": "2026-08-25T00:25:32Z",
-  "receipt_status": "IN_FLIGHT",
-  "successor_run_id": 32793580374
-}
