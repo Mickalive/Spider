@@ -10,6 +10,8 @@ STALL_FLAG="$(mktemp)"
 CONTROL_ACTIVE=false
 CHILD_PID=""
 MONITOR_PID=""
+START_HEAD=""
+REPAIR_INTENT=false
 
 NETWORK_RE='(network_error|NetworkError|network error|fetch failed|APIConnectionError|ECONNRESET|ECONNREFUSED|EAI_AGAIN|ENETUNREACH|ENOTFOUND|ETIMEDOUT|timed out|timeout|socket hang up|connection (reset|refused|closed|error)|upstream.*(reset|closed|unavailable|error)|HTTP[^0-9]*(429|500|502|503|504)|status[^0-9]*(429|500|502|503|504)|too many requests|rate.?limit|service unavailable|bad gateway|gateway timeout|temporar(y|ily) unavailable|TLS|SSL.*error)'
 
@@ -170,7 +172,20 @@ validate_agent_card() {
   echo "SPIDER_AGENT_CARD_OK agent=${requested} registry=complete"
 }
 
+# Same-cycle repairs are not allowed to silently succeed with no durable work.
+# OpenCode has been observed to return rc=0 after an auto-rejected permission
+# request on a retry. Detect repair intent from the explicit workflow prompt;
+# callers may also force the invariant with SPIDER_REQUIRE_DELTA=1.
+for arg in "$@"; do
+  if [[ "$arg" == REPAIR\ * || "$arg" == *" REPAIR "* ]]; then
+    REPAIR_INTENT=true
+    break
+  fi
+done
+[[ "${SPIDER_REQUIRE_DELTA:-0}" == "1" ]] && REPAIR_INTENT=true
+
 stage_control_plane
+START_HEAD=$(git rev-parse HEAD 2>/dev/null || echo "")
 validate_agent_card "$@"
 rc=$?
 if [[ "$rc" -ne 0 ]]; then
@@ -182,7 +197,13 @@ run_once() {
   : > "$LOG"
   rm -f "$STALL_FLAG"
 
-  "$REAL" "$@" > >(tee -a "$LOG") 2> >(tee -a "$LOG" >&2) &
+  # Re-pin every retry to the real Actions workspace. A previous Runtime retry
+  # drifted to the parent directory and triggered an external_directory denial.
+  local workdir="${GITHUB_WORKSPACE:-$PWD}"
+  (
+    cd "$workdir" || exit 70
+    "$REAL" "$@"
+  ) > >(tee -a "$LOG") 2> >(tee -a "$LOG" >&2) &
   CHILD_PID=$!
 
   (
@@ -232,6 +253,16 @@ while (( attempt <= MAX_ATTEMPTS )); do
   if [[ "$rc" -eq 0 ]]; then
     if ! restore_control_plane; then
       exit 1
+    fi
+
+    if [[ "$REPAIR_INTENT" == true ]]; then
+      CURRENT_HEAD=$(git rev-parse HEAD 2>/dev/null || echo "")
+      WORKTREE_DELTA=$(git status --porcelain 2>/dev/null || true)
+      if [[ "$CURRENT_HEAD" == "$START_HEAD" && -z "$WORKTREE_DELTA" ]]; then
+        echo "::error::SPIDER_ZERO_DELTA_REPAIR: OpenCode reported success but produced no durable repair delta." >&2
+        echo "A same-cycle repair must change scoped artifacts or persist an explicit blocker record; zero-delta success is invalid." >&2
+        exit 67
+      fi
     fi
     exit 0
   fi
