@@ -1,7 +1,39 @@
 {
-  "updated": null,
-  "beta_launch": false,
+  "updated": "2026-08-25",
+  "beta_launch": true,
+  "beta_id": "PB-001",
+  "beta_request": "state/product_beta_request.json",
   "public_deployment_authorized": false,
-  "top_hypotheses": [],
-  "reason": "Awaiting enough audited Graph, Physics and Intel evidence to justify the first benchmarkable Product Beta."
+  "commercialization_authorized": false,
+  "top_hypotheses": [
+    {
+      "id": "PH-1",
+      "title": "Inherited operational memory layer for repeat/near-repeat web tasks",
+      "status": "PRODUCT_CANDIDATE"
+    },
+    {
+      "id": "PH-2",
+      "title": "Shared capability infrastructure line (Steam-like registry)",
+      "status": "WATCH"
+    },
+    {
+      "id": "PH-4",
+      "title": "Selector self-healing / staleness product",
+      "status": "WATCH"
+    }
+  ],
+  "rejected_hypotheses": [
+    {
+      "id": "PH-3",
+      "title": "Predictive Web-dynamics routing",
+      "reason": "Physics WP-003B-R2 and WP-005 both FALSIFIED under audited site-holdout tests; no transferable action-conditioned environment regularity detected above strong nulls."
+    }
+  ],
+  "evidence_basis": {
+    "graph": "G-H1..G-H4 accepted through Run 32783797303 audit PASS (safe_to_integrate=true, required_fixes=[])",
+    "physics": "WP-003B-R2 + WP-005 FALSIFIED, audits VALIDATED_FOR_CURRENT_TEST / PASS; WP-004 blocked",
+    "intel": "ledger empty; zero validated mechanisms",
+    "product_beta_audits": 0
+  },
+  "reason": "All five beta criteria from directives/PRODUCT_DIRECTOR.md are met: multiple audited building blocks exist (store+replay+reset, blind retrieval, procedure packaging, V31 equipment); the remaining critical assumptions (LLM consumer, free-form goal addressing, material cost/latency deltas, failure-mode containment) are exactly what an internal benchmarkable MVP can test; credible baselines are cleanly definable (cold same-backbone browser agent + AWM-class trajectory-memory baseline + exact-replay sanity); fair instrumentation is specified (perf_counter, token accounting, byte-restored KB, write-suppressed evaluation, equalized acceptance predicates, health gates); and a falsifiable win rule has been written before any benchmark outcome."
 }

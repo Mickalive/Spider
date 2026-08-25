@@ -1,0 +1,100 @@
+{
+  "beta_id": "PB-001",
+  "hypothesis_id": "PH-1",
+  "authorized_by": "PRODUCT_DIRECTOR",
+  "authorization_date": "2026-08-25",
+  "program_name": "spider-inheritance-beta-1",
+  "user_problem": "Browser agents re-pay the full exploration cost (browser actions, model calls, tokens, latency, flaky retries) on every run, even when a task is a repeat or near-repeat of a goal class some prior run already solved (login/form flows, pagination drills, navigation paths) with only rewording or parameter/entry-state shifts.",
+  "target_task_class": {
+    "description": "Goal-directed multi-step web tasks on small structured public practice/demo sites: authentication flows, iterated pagination to a target listing position, category/listing navigation and form submission with anchored completion predicates. Three preregistered regimes on matched knowledge bases:",
+    "regimes": {
+      "R1_repeat_reworded": "same underlying goal, goal text paraphrased (paraphrases authored independently of the consumer model's family whenever feasible)",
+      "R2_near_repeat_shifted": "same fragment classes, shifted entry state or shifted target parameter (e.g., different page depth, different account, different item)",
+      "R3_novel_control": "genuinely new goals outside inherited coverage; SPIDER arm must degrade gracefully to exploration without losing to baseline"
+    },
+    "sites": [
+      "books.toscrape.com",
+      "quotes.toscrape.com",
+      "optional additions from the already-used demo set (saucedemo.com, parabank) only if the affordance inventory proves two sites insufficient — disclosed in the beta prereg before outcomes"
+    ],
+    "explicitly_out_of_scope": [
+      "cross-site skill transfer claims",
+      "category-type goals as primary endpoints (known unsolved failure mode; tracked descriptively)",
+      "chains requiring >3 distinct stored fragments (Graph lane's graph-inheritance-scaling program territory; tracked descriptively)",
+      "any predictive-dynamics feature (Physics WP-003B-R2/WP-005 FALSIFIED)"
+    ]
+  },
+  "validated_building_blocks": [
+    "Cumulative store: states/transitions/fragments with provenance + confidence fields; exact replay reached 0 novel actions on matched routes (Graph G-H1)",
+    "Blind content-addressed fragment retrieval with expected-UNKNOWN discipline; cold / verbatim-nearest-replay / single-shot-BFS baselines solved 0/3 composites (Graph G-H2)",
+    "Oracle-equalized iterative replay policy carries composed depth at tested depth; login procedure packaging residual value frag 16/16 rows vs graphiter 0/8 (Graph G-H3 E2, audit PASS after repair)",
+    "Multi-step login packaging = validated procedural ordering: frag 4/4 login-memory rows vs graphiter 0/4 (exploration-only) vs static edge-unit replay 0/4 with bounce pathology (Graph G-H4 R3)",
+    "V31 closed-class descriptor/query equipment adopted as standard equipment for deeper-chain work (Graph G-H4 program decision); used AS EQUIPMENT ONLY — no quantitative retrieval-transfer claim is licensed (fresh instrument spent)"
+  ],
+  "assumptions_under_test": [
+    "A1: inheritance benefit survives a real LLM consumer (all accepted evidence used scripted deterministic consumers)",
+    "A2: free-form natural-language goals are served end-to-end by V31-equipped content addressing without hand-authored goal signatures, measured strictly as end-to-end task outcomes",
+    "A3: packaged procedures (login-style fragments) deliver measurable savings over edge iteration AND over prompt-level trajectory memory with an LLM consumer",
+    "A4: savings are material in tokens/model-calls/wall-clock seconds (perf_counter instrumentation; first-ever cost/latency measurement of this stack)",
+    "A5: known failure modes (category goals, deep chains, cross-site) remain contained inside the declared scope with honest UNKNOWN reporting and zero fabricated successes"
+  ],
+  "baselines": {
+    "B0_cold_current_agent": "A mainstream ReAct-style LLM browser-use agent (frozen open framework chosen and committed by the Beta Architect BEFORE any outcome), same backbone model and version as the SPIDER consumer, identical observation/action space, identical step/token budgets, no memory. This is the primary 'credible current agent' comparison.",
+    "B1_trajectory_memory": "Same agent + top-k retrieved prior successful trajectories injected into the prompt (AWM-class procedural-memory baseline). Mandatory because memory-beating-no-memory is not sufficient evidence per constitution §13.",
+    "B2_exact_replay_sanity": "Exact replay on known routes; diagnostic upper bound only, not part of the win rule.",
+    "fairness_constraints": [
+      "identical backbone model, decoding policy, budgets, observation format across B0/B1/SPIDER arm",
+      "the machine-checkable acceptance/completion predicate is disclosed to ALL arms identically as part of the task definition (removes the oracle asymmetry flagged in G-H2/G-H4 audits)",
+      "knowledge base byte-restored before every evaluation row; evaluation runs write nothing to the store",
+      "anchored (path-anchored, non-substring) success predicates only",
+      "site-health gate per row; seeded determinism where the harness permits",
+      "paraphrase/goal authorship recorded; independent-of-consumer-family authorship preferred"
+    ]
+  },
+  "primary_metrics": [
+    "task success rate per regime and overall (anchored predicates; fabricated success = automatic failure event)",
+    "browser actions per task (novel vs reused split)",
+    "LLM model calls and total tokens (input+output) per task",
+    "wall-clock latency per task at perf_counter granularity",
+    "reused-action share of the action mix",
+    "recovery behavior after entry-state perturbation (descriptive)",
+    "UNKNOWN/false-match discipline events (descriptive; false accepts are violations)"
+  ],
+  "win_rule": {
+    "preregistration_note": "The Beta Architect freezes exact thresholds, panel composition and n in the beta preregistration BEFORE any Phase-B outcome; the values below are the Director-mandated floor that the freeze must meet or exceed in strictness.",
+    "WIN_if_all": [
+      "success_SPIDER >= success_best_baseline - 0.10 absolute on the full panel including R3 control rows",
+      "on R1+R2 rows: median browser actions reduced >= 50% AND median total tokens reduced >= 40% AND median wall-clock reduced >= 30% versus the strongest baseline achieving comparable success (B1 if it beats B0)",
+      "zero fabricated-success events in the SPIDER arm",
+      "results replicate across two deterministic passes where the environment is static"
+    ],
+    "LOSE_if_any": [
+      "SPIDER arm fails > 25% of tasks solved by the best baseline",
+      "median reductions < 20% on R1+R2 versus the same comparator",
+      "any memory-induced fabricated success"
+    ],
+    "reporting_duties": "Report all regimes and all baselines including losses; negative outcome is a valid product result and feeds the PH-1 disposition decision."
+  },
+  "maximum_scope": "Internal benchmark harness only. <=4 small public practice/demo sites; ~30-60 evaluation rows total across regimes; one backbone model family per beta version; read-only interactions except the demo sites' own intended forms; compute budget capped and logged; NO production deployment, NO public users, NO commercialization, NO external data sharing. Human authorization required for anything beyond this scope.",
+  "kill_condition": [
+    "Beta stops and PH-1 returns to PROMISING-or-lower if: SPIDER arm loses cleanly under the LOSE rule after one preregistered repair round, OR",
+    "two consecutive MEASUREMENT_INVALID batches occur (infrastructure not ready), OR",
+    "a live-site health/integrity incident occurs (pause immediately, disclose, resume only with repaired gating)",
+    "A losing beta is useful evidence: its artifacts feed the PH-1 continue/repair/re-architecture/reject decision per the Product feedback rules."
+  ],
+  "instrumentation_requirements": [
+    "perf_counter latency capture (G-H4 hygiene: integer-ms floors forbid prior cost claims)",
+    "per-row token and model-call accounting from the provider API",
+    "store hash before/after each evaluation row (byte-restoration proof)",
+    "evaluation write-suppression assertion",
+    "site-health gate per row",
+    "all raw rows + manifest + analysis code committed with seeds and freeze timestamps before outcomes"
+  ],
+  "coherence_check": {
+    "audited_block_present": true,
+    "remaining_assumptions_beta_testable": true,
+    "credible_baseline_defined": true,
+    "fair_instrumentation_specified": true,
+    "falsifiable_win_rule_before_outcome": true
+  }
+}

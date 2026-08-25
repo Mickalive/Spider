@@ -1,5 +1,79 @@
 {
-  "updated": null,
+  "updated": "2026-08-25",
   "build_authorized": false,
-  "hypotheses": []
+  "internal_product_beta_authorized": true,
+  "beta_id": "PB-001",
+  "evidence_basis": {
+    "graph_accepted_through": "G-H4 (Run 32783797303, audit PASS, safe_to_integrate=true)",
+    "physics_accepted_through": "WP-005 (Run 32689298051, audit PASS; WP-003B-R2 and WP-005 both FALSIFIED)",
+    "intel_accepted_mechanisms": 0,
+    "product_beta_audits_so_far": 0,
+    "excluded_unaudited_branches": [
+      "cycle/graph/32793580374/*",
+      "cycle/intel/32781482957/*",
+      "cycle/intel/32792931901/*",
+      "cycle/intel/32796176172/*",
+      "cycle/physics/32776372437/*",
+      "cycle/physics/32793165981/*"
+    ]
+  },
+  "hypotheses": [
+    {
+      "id": "PH-1",
+      "title": "Inherited operational memory layer for repeat/near-repeat web tasks",
+      "status": "PRODUCT_CANDIDATE",
+      "user_problem": "Browser agents re-pay full exploration cost (actions, model calls, tokens, latency) on repeat or near-repeat tasks already solved before.",
+      "validated_building_blocks": [
+        "cumulative store + provenance/confidence fields + exact replay + entry-state reset (Graph G-H1)",
+        "blind content-addressed fragment retrieval with expected-UNKNOWN discipline (Graph G-H2)",
+        "oracle-equalized iterative replay policy carrying composed depth (Graph G-H2/G-H3 E2)",
+        "multi-step login procedure packaging as first-class reusable unit (Graph G-H3 E2, G-H4 R3)",
+        "V31 closed-class descriptor/query equipment (Graph G-H4) — adopted as equipment only"
+      ],
+      "unvalidated_assumptions": [
+        "inheritance survives a real LLM consumer (all accepted evidence is scripted deterministic consumers)",
+        "free-form natural-language goals work end-to-end without hand-authored goal signatures at product level",
+        "savings are material in tokens/model-calls/wall-clock with an LLM in the loop",
+        "known failure modes (category goals, >3 distinct fragments, cross-site transfer) stay contained in declared scope"
+      ],
+      "expected_operational_benefit": "On repeat/near-repeat tasks: large reductions in browser actions, model calls/tokens and latency at non-inferior success; reused-action share dominates the action mix.",
+      "nearest_competitors": [
+        "cold current browser agents (no memory)",
+        "trajectory/workflow-memory retrieval augmentation (AWM-class)",
+        "selector/action caches (Stagehand-class)",
+        "RPA workflow replay (Skyvern-class)"
+      ],
+      "differentiation": "Subgoal-addressable executable fragments with empirical validation statistics, provenance and freshness metadata consumed by an external model-agnostic layer — bounded hypothesis from audit-qualified Run-1 survey, not a novelty claim.",
+      "conceptual_architecture": "Producer runs grow validated store -> V31-canonicalized content-addressed retrieval selects fragments/procedures for subgoals -> consumer LLM executes memory-led with exploration fallback and explicit UNKNOWN reporting -> anchored completion predicate equalized across arms -> outcomes written back with provenance (calibration deferred).",
+      "biggest_uncertainty": "Whether the scripted-setup advantage survives a real LLM consumer without memory-induced wrong actions or stale-fragment traps.",
+      "evidence_needed": "Beta PB-001 outcome vs cold-agent and trajectory-RAG baselines under the preregistered win rule."
+    },
+    {
+      "id": "PH-2",
+      "title": "Shared capability infrastructure line (Steam-like registry)",
+      "status": "WATCH",
+      "user_problem": "Many agents/teams independently re-explore the same sites; shared reusable capability infrastructure could amortize exploration.",
+      "mechanisms_to_evaluate_as_product_mechanisms": [
+        "discovery", "semantic addressing", "provenance", "trust", "scoring",
+        "freshness/decay", "versioning", "incentives", "cross-model compatibility",
+        "permissions/auth", "route invalidation"
+      ],
+      "why_watch": "Intel ledger empty (zero reproduced+audited mechanisms); internal confidence/staleness uncalibrated (G8/G9 open); cross-model consumption untested (G10 open). Excluded from PB-001.",
+      "path_to_promising": "First audited Intel mechanism reproducing in a SPIDER-relevant test; G8/G9 calibration evidence; any cross-model consumption result."
+    },
+    {
+      "id": "PH-3",
+      "title": "Predictive Web-dynamics routing (physics-powered navigation)",
+      "status": "REJECTED",
+      "reason": "Physics WP-003B-R2 FALSIFIED (mean D -0.5016, 0/5 folds, site holdout) and WP-005 FALSIFIED (T1 wins 1/9 p=0.898; T2 wins 4/9 p=0.270), both independently audited; predictability decomposes into persistence + site-local NN memory + action-type semantics. WP-004 committor work blocked pending identifiability. A genuinely new instrument producing an audited positive would be required to reopen narrowly."
+    },
+    {
+      "id": "PH-4",
+      "title": "Selector self-healing / staleness product",
+      "status": "WATCH",
+      "user_problem": "Agents break on site drift; selectors need repair/revalidation.",
+      "spider_angle": "Store-level failure events + provenance + freshness could drive revalidation and localized re-exploration instead of silent failure (entry-reset audited as recovery POC only).",
+      "why_watch": "Staleness/confidence uncalibrated; no audited repair-value result over retry/TTL heuristics; Healenium-adjacent competitor space is established."
+    }
+  ]
 }
