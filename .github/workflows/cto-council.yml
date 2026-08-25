@@ -1,0 +1,118 @@
+name: SPIDER Critical CTO Council
+
+on:
+  workflow_run:
+    workflows:
+      - "SPIDER Graph Lane"
+      - "SPIDER Physics Lane"
+      - "SPIDER Intel Research Lane"
+      - "SPIDER Product and Beta Lane"
+      - "SPIDER Runtime Lane"
+    types: [completed]
+  schedule:
+    - cron: "43 */4 * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/cto-council.yml'
+      - 'SPIDER_ARCHITECTURE_V2.md'
+      - 'directives/CAPABILITY_CAPSULE.md'
+      - 'docs/roles/CHIEF_CTO.md'
+      - '.opencode/agents/chief_cto.md'
+      - '.opencode/agents/cto_*.md'
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: spider-critical-cto-council
+  cancel-in-progress: false
+
+env:
+  SPIDER_MODEL: opencode/x-preview-f-free
+  CTO_BRANCH: lab/cto
+
+jobs:
+  critical_review:
+    name: CHIEF CTO — CRITICAL CROSS-LANE REVIEW
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - name: Checkout current control plane
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Restore prior CTO memory without importing old control plane
+        shell: bash
+        run: |
+          if git ls-remote --exit-code --heads origin "refs/heads/$CTO_BRANCH" >/dev/null 2>&1; then
+            git fetch origin "$CTO_BRANCH:refs/remotes/origin/$CTO_BRANCH"
+            git worktree add --detach /tmp/spider_cto_prev "origin/$CTO_BRANCH"
+            cp /tmp/spider_cto_prev/docs/CTO_LEDGER.md docs/CTO_LEDGER.md 2>/dev/null || true
+            for lane in GRAPH PHYSICS INTEL PRODUCT RUNTIME; do
+              cp "/tmp/spider_cto_prev/docs/CTO_TO_${lane}.md" "docs/CTO_TO_${lane}.md" 2>/dev/null || true
+            done
+            cp /tmp/spider_cto_prev/state/cto_direction.json state/cto_direction.json 2>/dev/null || true
+          fi
+
+      - name: Mount latest accepted lane snapshots
+        shell: bash
+        run: |
+          for lane in graph physics intel product runtime; do
+            B="lab/$lane"
+            if git ls-remote --exit-code --heads origin "refs/heads/$B" >/dev/null 2>&1; then
+              git fetch origin "$B:refs/remotes/origin/$B"
+              git worktree add --detach "/tmp/spider_$lane" "origin/$B"
+            else
+              mkdir -p "/tmp/spider_$lane"
+            fi
+          done
+
+      - name: Install OpenCode
+        shell: bash
+        run: curl --retry 3 --retry-all-errors --retry-delay 15 -fsSL https://opencode.ai/install | bash
+
+      - name: Run critical CTO council
+        shell: bash
+        run: |
+          bash .github/scripts/run-opencode-with-retry.sh run \
+            --model "$SPIDER_MODEL" \
+            --agent chief_cto \
+            "Run a critical SPIDER CTO review. Accepted snapshots only: Graph=/tmp/spider_graph, Physics=/tmp/spider_physics, Intel=/tmp/spider_intel, Product=/tmp/spider_product, Runtime=/tmp/spider_runtime. Use your cto_* subagents in fresh contexts. Identify the top duplicated-work bottleneck, highest-upside work-compression program, strongest ignored baseline/prior art, cross-lane interface incompatibilities, one thing to kill/deprioritize, and exact recommendations for each lane. Do not change scientific verdicts or frozen tests. Write the required CTO state and handoffs."
+
+      - name: Enforce CTO-only writes
+        shell: bash
+        run: |
+          CHANGED=$(git status --porcelain | cut -c4- || true)
+          BAD=$(printf '%s\n' "$CHANGED" | grep -Ev '^(docs/CTO_LEDGER\.md$|docs/CTO_TO_(GRAPH|PHYSICS|INTEL|PRODUCT|RUNTIME)\.md$|state/cto_direction\.json$)' || true)
+          if [[ -n "$BAD" ]]; then
+            echo "Chief CTO wrote outside CTO scope:"
+            echo "$BAD"
+            exit 1
+          fi
+
+      - name: Validate CTO state
+        shell: bash
+        run: |
+          test -f state/cto_direction.json || { echo "::error::Missing state/cto_direction.json"; exit 1; }
+          for key in top_system_bottleneck highest_upside_program kill_or_deprioritize cross_lane_incompatibilities runtime_missing_primitives baseline_gaps recommended_allocations evidence_refs; do
+            jq -e --arg k "$key" 'has($k)' state/cto_direction.json >/dev/null || { echo "::error::CTO state missing $key"; exit 1; }
+          done
+          test -f docs/CTO_LEDGER.md || { echo "::error::Missing CTO ledger"; exit 1; }
+          for lane in GRAPH PHYSICS INTEL PRODUCT RUNTIME; do
+            test -f "docs/CTO_TO_${lane}.md" || { echo "::error::Missing CTO_TO_${lane}.md"; exit 1; }
+          done
+
+      - name: Advance accepted CTO advisory branch
+        shell: bash
+        run: |
+          git config user.name "spider-chief-cto"
+          git config user.email "spider-chief-cto@autonomous.local"
+          git switch -C cto-output
+          git add docs/CTO_LEDGER.md docs/CTO_TO_*.md state/cto_direction.json
+          git commit -m "CTO critical review ${GITHUB_RUN_ID}" || true
+          git push --force origin "HEAD:refs/heads/$CTO_BRANCH"
