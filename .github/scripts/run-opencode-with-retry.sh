@@ -21,6 +21,7 @@ CONTROL_PATHS=(
   "docs/roles"
   "SPIDER_MASTER_PROMPT.md"
   "SPIDER_ARCHITECTURE_V2.md"
+  "SPIDER_ARCHITECTURE_V3.md"
   "directives/CAPABILITY_CAPSULE.md"
   "directives/AUDITOR.md"
   "directives/LANE_DIRECTOR.md"
@@ -55,202 +56,141 @@ restore_control_plane() {
   if [[ "$CONTROL_ACTIVE" != true ]]; then
     return 0
   fi
-
-  local path
   for path in "${CONTROL_PATHS[@]}"; do
     restore_path_from_head "$path"
   done
   CONTROL_ACTIVE=false
 
-  local residue
-  residue="$(git status --porcelain -- "${CONTROL_PATHS[@]}" 2>/dev/null || true)"
+  # Guard against silent governance residue before the lane's own scope guard.
+  local residue=""
+  for path in "${CONTROL_PATHS[@]}"; do
+    if [[ -n "$(git status --porcelain -- "$path" 2>/dev/null || true)" ]]; then
+      residue+="$path "
+    fi
+  done
   if [[ -n "$residue" ]]; then
-    echo "::error::SPIDER control-plane overlay restoration left residue:" >&2
-    printf '%s\n' "$residue" >&2
+    echo "::error::Control-plane restoration left residue in: $residue" >&2
     return 1
   fi
 }
 
-stop_children() {
-  if [[ -n "$MONITOR_PID" ]] && kill -0 "$MONITOR_PID" 2>/dev/null; then
-    kill "$MONITOR_PID" 2>/dev/null || true
-    wait "$MONITOR_PID" 2>/dev/null || true
-  fi
-  MONITOR_PID=""
-  if [[ -n "$CHILD_PID" ]] && kill -0 "$CHILD_PID" 2>/dev/null; then
-    kill -TERM "$CHILD_PID" 2>/dev/null || true
-    sleep 2
-    kill -KILL "$CHILD_PID" 2>/dev/null || true
-    wait "$CHILD_PID" 2>/dev/null || true
-  fi
-  CHILD_PID=""
-}
-
 cleanup() {
-  stop_children
+  if [[ -n "$MONITOR_PID" ]]; then
+    kill "$MONITOR_PID" 2>/dev/null || true
+  fi
+  if [[ -n "$CHILD_PID" ]]; then
+    kill "$CHILD_PID" 2>/dev/null || true
+  fi
   restore_control_plane || true
   rm -f "$LOG" "$STALL_FLAG"
 }
+trap cleanup EXIT INT TERM
 
-on_int() {
-  trap - INT TERM EXIT
-  cleanup
-  exit 130
-}
-
-on_term() {
-  trap - INT TERM EXIT
-  cleanup
-  exit 143
-}
-
-trap cleanup EXIT
-trap on_int INT
-trap on_term TERM
-
-prepare_control_plane() {
-  if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
-    return 0
-  fi
-
-  local dirty
-  dirty="$(git status --porcelain -- "${CONTROL_PATHS[@]}" 2>/dev/null || true)"
-  if [[ -n "$dirty" ]]; then
-    echo "::warning::SPIDER control-plane paths are locally dirty; refusing temporary main overlay." >&2
-    printf '%s\n' "$dirty" >&2
-    return 0
-  fi
-
+stage_control_plane() {
+  local source_ref="origin/main"
   if ! git fetch -q origin main; then
-    echo "::warning::Could not fetch origin/main control plane; using branch-local role definitions for this call." >&2
-    return 0
+    echo "::warning::Unable to refresh origin/main control plane; using workflow checkout definitions."
+    source_ref="${GITHUB_SHA:-HEAD}"
   fi
 
-  if ! git checkout -q origin/main -- "${CONTROL_PATHS[@]}"; then
-    echo "::warning::Could not overlay full origin/main control plane; restoring branch-local files." >&2
-    CONTROL_ACTIVE=true
-    restore_control_plane || true
-    return 0
-  fi
-
+  for path in "${CONTROL_PATHS[@]}"; do
+    if git cat-file -e "$source_ref:$path" 2>/dev/null; then
+      git checkout -q "$source_ref" -- "$path"
+    fi
+  done
   CONTROL_ACTIVE=true
-  echo "SPIDER control plane: using current origin/main agent definitions and formal job descriptions for this invocation."
-}
 
-# Agents sometimes resolve repository-relative reads against the runner parent
-# directory. Stage a stable control bundle in /tmp so formal roles and
-# directives remain addressable regardless of that cwd quirk.
-stage_control_bundle() {
-  local root="/tmp/spider_control"
-  mkdir -p "$root/roles" "$root/directives"
-
-  [[ -f SPIDER_MASTER_PROMPT.md ]] && cp SPIDER_MASTER_PROMPT.md "$root/SPIDER_MASTER_PROMPT.md"
-  [[ -f SPIDER_ARCHITECTURE_V2.md ]] && cp SPIDER_ARCHITECTURE_V2.md "$root/SPIDER_ARCHITECTURE_V2.md"
-
-  if [[ -d docs/roles ]]; then
-    cp docs/roles/*.md "$root/roles/" 2>/dev/null || true
-  fi
-  if [[ -d directives ]]; then
-    cp directives/*.md "$root/directives/" 2>/dev/null || true
-  fi
-
-  echo "SPIDER control bundle staged at $root."
-}
-
-monitor_network_stall() {
-  local pid="$1"
-  local last_size=0
-  local last_change
-  local now size
-  local network_pending=false
-  local network_seen_at=0
-  local network_size=0
-  last_change=$(date +%s)
-
-  while kill -0 "$pid" 2>/dev/null; do
-    now=$(date +%s)
-    size=$(stat -c%s "$LOG" 2>/dev/null || echo 0)
-
-    if [[ "$size" -ne "$last_size" ]]; then
-      last_size="$size"
-      last_change="$now"
+  # Stable absolute control bundle for agents whose task worktree/cwd differs
+  # from the repository root. This is read-only governance, never lane output.
+  rm -rf /tmp/spider_control
+  mkdir -p /tmp/spider_control
+  for path in .opencode/agents docs/roles SPIDER_MASTER_PROMPT.md SPIDER_ARCHITECTURE_V2.md SPIDER_ARCHITECTURE_V3.md directives/CAPABILITY_CAPSULE.md directives/AUDITOR.md directives/LANE_DIRECTOR.md directives/LAB_DIRECTOR.md directives/INTEL_REPRO.md directives/INTEL_AUDITOR.md directives/INTEL_DIRECTOR.md directives/PRODUCT_DIRECTOR.md directives/PRODUCT_OPTIMIZATION.md; do
+    if [[ -e "$path" ]]; then
+      mkdir -p "/tmp/spider_control/$(dirname "$path")"
+      cp -a "$path" "/tmp/spider_control/$path"
     fi
-
-    if [[ "$network_pending" == false ]] && grep -Eiq "$NETWORK_RE" "$LOG" 2>/dev/null; then
-      network_pending=true
-      network_seen_at="$now"
-      network_size="$size"
-      last_change="$now"
-      echo "::warning::OpenCode/Ox network signature detected; watching for a ${NETWORK_STALL_SECONDS}s stall before aborting the call." >&2
-    elif [[ "$network_pending" == true && "$size" -gt "$network_size" && $((now - network_seen_at)) -ge 30 ]]; then
-      network_pending=false
-    fi
-
-    if [[ "$network_pending" == true && $((now - last_change)) -ge "$NETWORK_STALL_SECONDS" ]]; then
-      echo "SPIDER_NETWORK_STALL_ABORT" > "$STALL_FLAG"
-      echo "::warning::OpenCode/Ox produced a network error and then no output for ${NETWORK_STALL_SECONDS}s; terminating only this stalled call so the bounded retry loop can proceed." >&2
-      kill -TERM "$pid" 2>/dev/null || true
-      sleep 10
-      if kill -0 "$pid" 2>/dev/null; then
-        kill -KILL "$pid" 2>/dev/null || true
-      fi
-      return 0
-    fi
-
-    sleep 5
   done
 }
 
-prepare_control_plane
-stage_control_bundle
+stage_control_plane
 
-for ((attempt = 1; attempt <= MAX_ATTEMPTS; attempt++)); do
+run_once() {
   : > "$LOG"
-  : > "$STALL_FLAG"
-  echo "OpenCode/Ox attempt ${attempt}/${MAX_ATTEMPTS}."
+  rm -f "$STALL_FLAG"
 
-  "$REAL" "$@" > >(tee "$LOG") 2>&1 &
+  "$REAL" "$@" > >(tee -a "$LOG") 2> >(tee -a "$LOG" >&2) &
   CHILD_PID=$!
-  monitor_network_stall "$CHILD_PID" &
+
+  (
+    local last_size=0 last_change now size
+    last_change=$(date +%s)
+    while kill -0 "$CHILD_PID" 2>/dev/null; do
+      sleep 15
+      size=$(wc -c < "$LOG" 2>/dev/null || echo 0)
+      now=$(date +%s)
+      if [[ "$size" -ne "$last_size" ]]; then
+        last_size="$size"
+        last_change="$now"
+      elif (( now - last_change >= NETWORK_STALL_SECONDS )); then
+        if grep -Eiq "$NETWORK_RE" "$LOG"; then
+          echo "SPIDER_NETWORK_STALL_DETECTED after ${NETWORK_STALL_SECONDS}s" | tee -a "$LOG" >&2
+          touch "$STALL_FLAG"
+          kill "$CHILD_PID" 2>/dev/null || true
+          sleep 5
+          kill -9 "$CHILD_PID" 2>/dev/null || true
+          exit 0
+        fi
+        # No explicit network evidence: never kill legitimate long reasoning.
+        last_change="$now"
+      fi
+    done
+  ) &
   MONITOR_PID=$!
 
-  wait "$CHILD_PID" 2>/dev/null
-  rc=$?
-  CHILD_PID=""
-
-  if [[ -n "$MONITOR_PID" ]] && kill -0 "$MONITOR_PID" 2>/dev/null; then
-    kill "$MONITOR_PID" 2>/dev/null || true
-  fi
+  wait "$CHILD_PID"
+  local rc=$?
+  kill "$MONITOR_PID" 2>/dev/null || true
   wait "$MONITOR_PID" 2>/dev/null || true
+  CHILD_PID=""
   MONITOR_PID=""
-  sleep 1
 
-  if grep -Fq 'SPIDER_NETWORK_STALL_ABORT' "$STALL_FLAG" 2>/dev/null; then
-    rc=75
+  if [[ -f "$STALL_FLAG" ]]; then
+    return 75
   fi
+  return "$rc"
+}
+
+attempt=1
+while (( attempt <= MAX_ATTEMPTS )); do
+  echo "SPIDER_OPENCODE_ATTEMPT=$attempt/$MAX_ATTEMPTS"
+  run_once "$@"
+  rc=$?
 
   if [[ "$rc" -eq 0 ]]; then
-    # Restore before returning control to workflow scope guards, not only in
-    # the EXIT trap. This makes the invariant explicit and testable.
-    restore_control_plane || exit 76
+    # Restore BEFORE returning success so subsequent workflow scope guards see
+    # only the lane/auditor's real writes, not temporary main governance.
+    if ! restore_control_plane; then
+      exit 1
+    fi
     exit 0
   fi
 
-  if ! grep -Eiq "$NETWORK_RE" "$LOG" 2>/dev/null && ! grep -Fq 'SPIDER_NETWORK_STALL_ABORT' "$STALL_FLAG" 2>/dev/null; then
+  if [[ "$rc" -eq 75 ]] || grep -Eiq "$NETWORK_RE" "$LOG"; then
+    if (( attempt < MAX_ATTEMPTS )); then
+      echo "::warning::Transient OpenCode/network failure on attempt $attempt; retrying after ${RETRY_DELAY}s."
+      sleep "$RETRY_DELAY"
+      attempt=$((attempt + 1))
+      continue
+    fi
+    echo "SPIDER_TRANSIENT_OX_EXHAUSTED attempts=$MAX_ATTEMPTS" >&2
     restore_control_plane || true
-    echo "::error::SPIDER_OX_NONTRANSIENT exit=$rc; watchdog will not retry this failure." >&2
-    exit "$rc"
+    exit 75
   fi
 
-  if [[ "$attempt" -eq "$MAX_ATTEMPTS" ]]; then
-    restore_control_plane || true
-    echo "::error::SPIDER_TRANSIENT_OX_EXHAUSTED attempts=$MAX_ATTEMPTS exit=$rc" >&2
-    exit "$rc"
-  fi
-
-  echo "::warning::Transient OpenCode/Ox outage; retrying in ${RETRY_DELAY}s." >&2
-  sleep "$RETRY_DELAY"
+  echo "OpenCode failed without a defensible transient-network signature; preserving failure (rc=$rc)." >&2
+  restore_control_plane || true
+  exit "$rc"
 done
 
 restore_control_plane || true
-exit 1
+exit 75
