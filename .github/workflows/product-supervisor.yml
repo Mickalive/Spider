@@ -1,0 +1,107 @@
+name: SPIDER Product Supervisor
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+  workflow_run:
+    workflows:
+      - "SPIDER Product and Beta Lane"
+      - "SPIDER Product Beta Repair"
+    types: [completed]
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/product-supervisor.yml'
+
+permissions:
+  contents: read
+  actions: write
+
+concurrency:
+  group: spider-product-supervisor
+  cancel-in-progress: true
+
+jobs:
+  ensure_product_continuity:
+    name: Ensure Product optimization continuity
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Recover Product work without hiding real product failures
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          active_for() {
+            gh run list --repo "$GITHUB_REPOSITORY" --workflow "$1" --limit 30 \
+              --json status --jq '[.[] | select(.status != "completed")] | length' 2>/dev/null || echo 0
+          }
+
+          ACTIVE_MAIN=$(active_for product-loop.yml)
+          ACTIVE_REPAIR=$(active_for product-beta-repair.yml)
+          if [[ "$ACTIVE_MAIN" -gt 0 || "$ACTIVE_REPAIR" -gt 0 ]]; then
+            echo "Product work already active; supervisor will not duplicate it."
+            exit 0
+          fi
+
+          if gh api "repos/${GITHUB_REPOSITORY}/branches/lab%2Fproduct" >/dev/null 2>&1; then
+            STATE=$(gh api -H 'Accept: application/vnd.github.raw+json' \
+              "repos/${GITHUB_REPOSITORY}/contents/state/product_direction.json?ref=lab/product" 2>/dev/null || true)
+          else
+            STATE='{}'
+          fi
+
+          CONTINUE=$(jq -r 'if has("continue") then .continue else (.beta_launch // false) end' <<<"$STATE" 2>/dev/null || echo false)
+          NEXT_ACTION=$(jq -r '.next_action // empty' <<<"$STATE" 2>/dev/null || true)
+          BETA_LAUNCH=$(jq -r '.beta_launch // false' <<<"$STATE" 2>/dev/null || echo false)
+          BETA_ID=$(jq -r '.beta_id // empty' <<<"$STATE" 2>/dev/null || true)
+
+          LATEST=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow product-loop.yml --limit 1 \
+            --json databaseId,status,conclusion,createdAt 2>/dev/null || echo '[]')
+          LATEST_ID=$(jq -r '.[0].databaseId // empty' <<<"$LATEST")
+          LATEST_CONCLUSION=$(jq -r '.[0].conclusion // empty' <<<"$LATEST")
+
+          dispatch_fresh_product() {
+            local why="$1"
+            echo "::warning::Product continuity recovery: $why. Dispatching Product Director/optimization pipeline on current main."
+            gh workflow run product-loop.yml --repo "$GITHUB_REPOSITORY" --ref main
+          }
+
+          if [[ -z "$LATEST_ID" ]]; then
+            if [[ "$CONTINUE" == true || "$BETA_LAUNCH" == true ]]; then
+              dispatch_fresh_product "authorized Product work exists but no Product run exists"
+            fi
+            exit 0
+          fi
+
+          if [[ "$LATEST_CONCLUSION" == failure || "$LATEST_CONCLUSION" == cancelled || "$LATEST_CONCLUSION" == timed_out ]]; then
+            set +e
+            LOGS=$(gh run view "$LATEST_ID" --repo "$GITHUB_REPOSITORY" --log 2>&1)
+            LOG_RC=$?
+            set -e
+
+            # Recover only operational/control-plane failures. A clean beta loss,
+            # audit BLOCKED, or ordinary build/test failure must reach Product
+            # Director through normal evidence paths rather than be hidden.
+            if [[ "$LOG_RC" -eq 0 ]] && grep -Eiq '(external_directory|permission requested: external_directory|Missing product_beta_architecture state|runner has received a shutdown signal|runner service is stopped|lost communication with the runner|SPIDER_TRANSIENT_OX_EXHAUSTED|OpenCode/Ox.*network|network_error|NetworkError|fetch failed|ECONNRESET|EAI_AGAIN|ENETUNREACH|ENOTFOUND|ETIMEDOUT|service unavailable|bad gateway|gateway timeout|SPIDER control-plane overlay restoration left residue)' <<<"$LOGS"; then
+              if [[ "$CONTINUE" == true || "$BETA_LAUNCH" == true ]]; then
+                dispatch_fresh_product "run $LATEST_ID ended $LATEST_CONCLUSION with an explicit infrastructure/control-plane signature"
+              else
+                echo "Product state no longer authorizes continuation; operational failure is recorded but no new work is launched."
+              fi
+            else
+              echo "Latest Product run $LATEST_ID ended $LATEST_CONCLUSION without an infrastructure signature. Supervisor refuses to hide a real product/build failure."
+            fi
+            exit 0
+          fi
+
+          if [[ "$LATEST_CONCLUSION" == success ]]; then
+            if [[ "$CONTINUE" == true && "$NEXT_ACTION" != WAIT_FOR_EVIDENCE ]]; then
+              dispatch_fresh_product "accepted Product state says continue=true next_action=${NEXT_ACTION:-unspecified}"
+            else
+              echo "Product state says no concrete autonomous continuation is required."
+            fi
+          fi
