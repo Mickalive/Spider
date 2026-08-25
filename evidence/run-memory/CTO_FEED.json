@@ -121,6 +121,64 @@
         "Consider requiring reports to generate decomposition claims mechanically from the committed raw rows (script-generated tables with row-linked provenance) so prose cannot diverge from data; strengthen auditor checklists to always recompute per-cell decompositions, not just headline aggregates."
       ],
       "route_to": ["CTO", "GRAPH", "PHYSICS", "INTEL"]
+    },
+    {
+      "id": "CF-2026-08-25-08",
+      "importance": "HIGH",
+      "kind": "RUNTIME_FAILURE_MODE",
+      "summary": "The lane workflows' 'Enforce audit-only writes' gate false-positives on workflow-pre-staged control-plane files and kills COMPLETED audits: it tests `git status --porcelain` against allowed output dirs, but an earlier workflow step pre-stages role/directive sync files into the index, which get attributed to the auditor. Physics run 32793165981: auditor had already written gate=PASS/safe_to_integrate=true when the gate exited 1 → run conclusion=failure, Lane Director skipped. Graph run 32793580374: REVISE delivered, then the deterministic failure repeated across EIGHT re-run attempts (~18m audit each, ~13h wall-clock span), eight audit-attempt branches pushed, Director never ran. The gate also masks real violations by mixing plumbing noise into the same signal.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "source_run_id": 32793165981,
+      "additional_source_run_ids": [32793580374],
+      "durable_refs": [
+        "evidence/run-memory/runs/32793165981.json",
+        "evidence/run-memory/runs/32793580374.json",
+        "git:origin/cycle/physics/32793165981/audit@dd1e688 (PASS gate that was blocked)",
+        "git:origin/cycle/graph/32793580374/audit@3520df27 (+ attempts 1–8)"
+      ],
+      "actionable_next": [
+        "Fix both loop workflows: scope the write check to changes made during the audit session (e.g. diff working tree vs the commit HEAD at session start) or unstage control-plane sync before the audit agent runs.",
+        "Add retry-loop damping: if an audit attempt fails with the identical violation set twice, fail loudly instead of re-running the full audit.",
+        "After fixing, verify by replaying one physics and one graph cycle end-to-end (Director job must execute)."
+      ],
+      "route_to": ["INFRA", "RUNTIME", "CTO"]
+    },
+    {
+      "id": "CF-2026-08-25-09",
+      "importance": "HIGH",
+      "kind": "PROVENANCE_INCIDENT",
+      "summary": "A second, EARLIER pruning event predates the tombstone process: one-shot cleanup run 32790538553 deleted 21 completed runs at 2026-08-24T23:42Z, including TWO claim-bearing SPIDER Graph Lane runs (32776369696 success, 32689296167 failure) whose raw logs are gone. Claim-level loss is NONE_MATERIAL (cycle/* team+audit branches survive; director-integrated into lab/graph via f42c14d/c1dd8e3), but log-only operational diagnostics are irrecoverable and the deletion manifest itself survives ONLY in that run's raw log. Root cause is a keep-rule flaw: 'keep latest completed run per current workflow name' deletes older runs of ACTIVE workflows too. This event is disjoint from the 102-run hygiene incident (CF-01); together they are the complete known pruning history.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "source_run_id": 32790538553,
+      "durable_refs": [
+        "evidence/run-memory/runs/32790538553.json (verbatim 21-run deletion manifest + loss assessment)",
+        "git:origin/lab/graph@f42c14d / c1dd8e3 (durable integrations of the two deleted Graph Lane runs)"
+      ],
+      "actionable_next": [
+        "Protect runs non-recursively by distillation state, not recency: never prune a completed run that owns cycle/* branches or lacks a safe_to_prune=true record, regardless of workflow-name recency.",
+        "Optionally authorize a small recovery pass promoting ids 32776369696/32689296167 from runs/32790538553.json to deleted/<id>.json tombstones; the other 19 deletions are orchestration-only.",
+        "Keep run 32790538553's raw log protected until its manifest is duplicated into durable memory (its record currently carries it)."
+      ],
+      "route_to": ["CTO", "INFRA"]
+    },
+    {
+      "id": "CF-2026-08-25-10",
+      "importance": "MEDIUM",
+      "kind": "STRUCTURAL_FIX",
+      "summary": "Silent repair-delivery loss mechanism identified (Intel SGDR repair round 2): the reproducer committed its complete documentary fix set on DETACHED HEAD inside a private lineage workspace (/tmp/spider_intel_repro_r2, commit 0a1b3ef), while the workflow's persist step force-pushed a DIFFERENT mounted workspace still sitting at the base commit — publishing a branch byte-identical to lab/intel base with every step exiting success. ~40m of work vanished; only the independent auditor's empty-snapshot identity check (run_tip == base == 0a55649, tree 00ce8e32) plus hidden-output/displaced-work elimination prevented a wrong verdict, and its RF-E ('verify delivery') defines the fix. This is mechanism-distinct from the permission-abort empty snapshot of Graph #5 (CF-05).",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "source_run_id": 32796176172,
+      "durable_refs": [
+        "evidence/run-memory/runs/32796176172.json",
+        "git:origin/cycle/intel/32796176172/audit@b52b6d58 (snapshot_integrity_check.py asserting run_tip != base)",
+        "git:origin/lab/intel docs/INTEL_LEDGER.md ('an empty round-2 snapshot')"
+      ],
+      "actionable_next": [
+        "Add post-persist assertions to all lane loops: pushed tip != base commit AND required deliverable paths exist in the pushed tree; treat violation as immediate job failure before any downstream job runs.",
+        "Mount ONE canonical workspace per agent phase (or persist from the workspace the agent was last seen committing in) so lineage commits cannot diverge from the published ref.",
+        "Adopt the auditor's escalation rule: two consecutive empty/unverifiable deliveries ⇒ BLOCKED on infrastructure grounds."
+      ],
+      "route_to": ["INFRA", "RUNTIME", "INTEL"]
     }
   ]
 }

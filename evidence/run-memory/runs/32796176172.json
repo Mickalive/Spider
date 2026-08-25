@@ -1,0 +1,86 @@
+{
+  "run_id": 32796176172,
+  "workflow_name": "SPIDER Intel Research Lane",
+  "workflow_path": ".github/workflows/intel-loop.yml",
+  "status": "completed",
+  "conclusion": "success",
+  "head_sha": "8c5b69083cda7debf9ab8f4430d03207eae8b4a0",
+  "created_at": "2026-08-25T01:05:04Z",
+  "updated_at": "2026-08-25T02:09:04Z",
+  "run_number": 3,
+  "run_attempt": 1,
+  "event": "workflow_dispatch",
+  "head_branch": "main",
+  "display_title": "Intel cycle 1 repair round 2 (RF1/RF2 documentary fixes — delivery lost, empty snapshot)",
+  "actor": "github-actions[bot]",
+  "model": "opencode/x-preview-f-free",
+  "job_summary": {
+    "jobs": [
+      { "name": "INTEL SCOUT", "conclusion": "success", "window": "2026-08-25T01:05:09Z..01:05:16Z (~7s)", "note": "scout step skipped; prior snapshot reused (branch d1c6f229 again)" },
+      { "name": "INTEL REPRODUCER", "conclusion": "success", "window": "01:05:18Z..01:45:38Z (~40m20s)", "agent": "intel_reproducer", "note": "produced and locally committed the RF1/RF2 fixes as 0a1b3ef on detached HEAD in /tmp/spider_intel_repro_r2 — but that commit was never pushed" },
+      { "name": "INTEL INDEPENDENT AUDITOR", "conclusion": "success", "window": "01:45:40Z..02:08:57Z (~23m17s)", "agent": "intel_auditor" },
+      { "name": "INTEL AUDIT → REPRODUCER", "conclusion": "success", "note": "gate=REVISE → auto-dispatched repair round 3" },
+      { "name": "INTEL RESEARCH DIRECTOR", "conclusion": "skipped" }
+    ],
+    "artifacts": 0
+  },
+
+  "evidence_class": "INTEL",
+
+  "durable_refs": [
+    "git:origin/cycle/intel/32796176172/repro@0a55649eb5b351fccca600b63323ea235d1482ac ('infra: sync stalled-network watchdog wrapper into Intel lane' — byte-identical to lab/intel base; tree 00ce8e32…; EMPTY of reproduction content)",
+    "git:origin/cycle/intel/32796176172/audit@b52b6d5807dd41a58c34716137d1b0e8bdef666c (reports/intel/audit/cycle1_run32796176172_INTEL_AUDIT.md + results/intel/audit/CYCLE_32796176172_INTEL_GATE.json gate=REVISE with RF-A..RF-E + preserved CYCLE_32796176172_snapshot_integrity_check.py which asserts run_tip != base)",
+    "/tmp/spider_run_evidence/32796176172/logs.txt (bundle copy — sole record of lost commit 0a1b3ef's content summary)"
+  ],
+
+  "findings": [
+    {
+      "kind": "BUG",
+      "summary": "ROOT CAUSE OF THE EMPTY ROUND-2 SNAPSHOT now identified (previously only 'an empty round-2 snapshot' was known from INTEL_LEDGER): the Reproducer worked in its own lineage workspace /tmp/spider_intel_repro_r2 (continuing round-1 commit 1e51a5c) and committed the complete RF1/RF2 documentary fix set there as commit 0a1b3ef on DETACHED HEAD (~23 files per its own final report). The workflow's persist step then force-pushed from the MOUNTED workspace (/tmp/spider_intel_repro), which still sat at base 0a55649, so branch cycle/intel/32796176172/repro == lab/intel base with an identical tree. Net effect: ~40 minutes of completed repair delivery silently vanished; a first commit attempt also failed earlier with 'fatal: empty ident name' before git identity was configured.",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "importance": "HIGH",
+      "route_to": ["INFRA", "RUNTIME", "INTEL"]
+    },
+    {
+      "kind": "RESULT",
+      "summary": "The independent auditor caught the loss instead of certifying it — the key control that worked. It proved empty-snapshot identity (run_tip == origin tip == base 0a55649, same tree hash), ruled out hidden output (full filesystem walk, stash, reflog), ruled out displaced work (repo-wide git log --all over all Intel paths + ls-remote: newest Intel content anywhere remained round-1 1e51a5c / audit 099c677), explained why the `if: always()` + `commit || true` + force-push persist pattern publishes an unchanged tree when the agent's work lands elsewhere, extracted 1e51a5c from history and re-verified its manifest 18/18 OK (twice-recomputed PROOF OF CONCEPT evidence fully recoverable). Verdict REVISE (not PASS — nothing to integrate; not BLOCKED — repair needs no new evidence) with RF-A restore 1e51a5c byte-exact, RF-B/RF-C apply the two documentary fixes, RF-D add round provenance, RF-E verify delivery so an empty push cannot recur silently; round status INCONCLUSIVE with mechanism status VALIDATED_USEFUL explicitly preserved. Escalation rule stated: a second consecutive empty/unverifiable snapshot becomes BLOCKED on infrastructure grounds.",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "importance": "HIGH",
+      "route_to": ["INTEL", "INFRA"]
+    },
+    {
+      "kind": "OTHER",
+      "summary": "Content of the LOST commit 0a1b3ef survives only as log narrative here (LOG_ONLY): RF1 constant-dummy clause withdrawn as evidence with auditor-approved stable-controls wording adopted verbatim (wrong-context-summary fusion = 24/74 and summary-only = 24/74 re-reproduced this round via own-embedder reranking); RF2 cost footnote restated artifact-exactly as ≈12–13 would-be LLM calls (11 unique collection-side states via summarizer_cache keys with eval pass 49 hits/0 misses, plus exactly 2 conversion run-counter misses against a conversion cache holding 10 keys / 1 novel; exact attribution declared unreconcilable at artifact level; no ranking/success/novelty impact); prereg erratum appendices below frozen text; cycle1_repair2_SHA256SUMS.txt; selftest rerun 7/7 PASS. All of it is documentary-only and was successfully re-delivered in repair round 3 per accepted ledger history (PASS run 32800296360, integration fca0acb).",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "importance": "MEDIUM",
+      "route_to": ["INTEL"]
+    },
+    {
+      "kind": "COST",
+      "summary": "~64m total wall clock: scout 7s, reproducer 40m20s (largely WASTED — delivery lost; 5 provider-outage retries across 7 OpenCode attempts early in the job), auditor 23m17s spent almost entirely on loss forensics rather than science. The incident cost one full extra repair round (run 32800296360) before PASS.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "MEDIUM",
+      "route_to": ["INFRA", "RUNTIME"]
+    }
+  ],
+
+  "failure_signatures": [
+    "DETONATED_HEAD_DELIVERY_MISMATCH: agent commits on detached HEAD in a private lineage workspace while the workflow persists from a different mounted workspace → force-push publishes an unchanged base tree with exit-code success on every step; undetectable without an explicit run_tip != base assertion.",
+    "PERSIST_PUSHES_EMPTY_TREE_ON_NO_OUTPUT: `if: always()` + `commit || true` + force-push patterns convert silent production failure into a valid-looking but empty published snapshot.",
+    "EMPTY_IDENT_NAME_ON_FIRST_COMMIT (recurrence #2)."
+  ],
+
+  "research_opportunities": [
+    "Adopt the auditor's RF-E pattern as standard lane plumbing: after each persist, assert pushed tip != base and (for repairs) that required paths exist in the pushed tree; treat violation as immediate job failure. This is the cheapest structural prevention of repeat empty-snapshot incidents across all lanes.",
+    "Second-consecutive-empty-snapshot ⇒ BLOCKED escalation (stated by this audit) is a reusable termination rule for repair loops anywhere."
+  ],
+
+  "already_captured_elsewhere": [
+    "'Empty round-2 snapshot' existence and final cycle acceptance: origin/lab/intel docs/INTEL_LEDGER.md + fca0acb; evidence/run-memory/runs/32781482957.json.",
+    "Cross-lane empty-snapshot class (Graph #5 permission abort): CF-2026-08-25-05 / runs/32782331702.json — this run adds the distinct detached-HEAD/workspace-mismatch mechanism."
+  ],
+
+  "distillation_complete": true,
+  "safe_to_prune": false,
+  "pruning_rationale": "Log is the sole record of the lost commit 0a1b3ef's content and of the exact workspace/persist mismatch mechanism behind the empty-snapshot incident; audit branch alone does not carry these. Conservative rule applied."
+}
