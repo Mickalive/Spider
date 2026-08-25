@@ -1,11 +1,11 @@
 {
   "updated": "2026-08-25",
-  "session": "product-director-third-session",
+  "session": "product-director-fourth-session",
   "build_authorized": false,
   "internal_product_beta_authorized": true,
   "beta_id": "PB-001",
-  "beta_request_revision": 3,
-  "reauthorization_note": "Third-session re-authorization after a second uncommitted working-tree reset (request file deleted, beta_launch flipped false; HEAD held the rev-2 authorization). Zero beta outcomes exist anywhere; evidence basis re-verified against mounted accepted snapshots; request rev 3 carries zero substantive clause deltas vs rev 2.",
+  "beta_request_revision": 4,
+  "reauthorization_note": "Fourth-session re-authorization after a THIRD uncommitted working-tree reset (request file deleted, beta_launch flipped false; HEAD held the rev-3 authorization). Zero beta outcomes exist anywhere; evidence basis AND both audit gates re-read directly against mounted accepted snapshots (Graph gate PASS run 32783797303; Intel gate PASS/VALIDATED_USEFUL/PoC ceiling run 32800296360); request rev 4 is a provenance-only bump with zero substantive clause deltas vs rev 3.",
   "evidence_basis": {
     "graph_accepted_through": "G-H4 (Run 32783797303, audit PASS, safe_to_integrate=true); addressing program COMPLETE; successor graph-inheritance-scaling launched, NOT decided (depth<=3 stays product frontier)",
     "physics_accepted_through": "WP-005 (Run 32689298051, audit PASS; WP-003B-R2 and WP-005 both FALSIFIED)",

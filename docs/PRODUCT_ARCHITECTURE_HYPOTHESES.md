@@ -6,15 +6,16 @@ Statuses: WATCH / PROMISING / PRODUCT_CANDIDATE / REJECTED.
 PRODUCT_CANDIDATE authorizes at most an internal benchmarkable beta; it
 never authorizes public deployment or commercialization.
 
-Last updated: 2026-08-25 (third session on mounted accepted snapshots:
-evidence basis unchanged — Graph through Run 32783797303 audit PASS;
+Last updated: 2026-08-25 (fourth session on mounted accepted snapshots:
+evidence basis unchanged — Graph through Run 32783797303 audit PASS
+(gate re-read directly: PASS, safe_to_integrate=true, required_fixes=[]);
 Physics through WP-005 audit PASS; Intel through cycle-1 integration —
 SGDR state-grounded retrieval VALIDATED_USEFUL, PoC ceiling, audit run
-32800296360; no beta outcomes exist anywhere).
+32800296360 (gate re-read directly: PASS); no beta outcomes exist anywhere).
 
 ---
 
-## PH-1 — Inherited operational memory layer for repeat/near-repeat web tasks — **PRODUCT_CANDIDATE (Beta PB-001 re-authorized, request rev 3)**
+## PH-1 — Inherited operational memory layer for repeat/near-repeat web tasks — **PRODUCT_CANDIDATE (Beta PB-001 re-authorized, request rev 4)**
 
 - **User problem**: Browser agents re-pay full exploration cost (actions,
   model calls, tokens, latency, flaky retries) every run, even when the
@@ -64,15 +65,15 @@ SGDR state-grounded retrieval VALIDATED_USEFUL, PoC ceiling, audit run
   (memory-induced wrong actions, stale-fragment traps).
 - **Evidence needed**: Beta PB-001 outcome vs B0 cold-agent and B1
   trajectory-RAG baselines under preregistered win rule.
-- **Status**: PRODUCT_CANDIDATE. Beta request rev 3:
+- **Status**: PRODUCT_CANDIDATE. Beta request rev 4:
   `state/product_beta_request.json` (PB-001, single authorized beta).
-  Rev-3 note: provenance-only bump after a second uncommitted working-tree
+  Rev-4 note: provenance-only bump after a THIRD uncommitted working-tree
   reset (request deleted, beta_launch flipped false) — zero substantive
-  clause deltas vs rev 2, evidence basis independently re-verified against
-  the mounted snapshots, no beta outcome exists anywhere. The v2 architect
-  freeze obligation stands: BENCHMARK_PREREG v2 must swap SPIDER-arm
-  candidate scoring to the audited fused mechanism (everything else frozen
-  unchanged) BEFORE any outcome.
+  clause deltas vs rev 3, evidence basis AND both audit gates independently
+  re-read against the mounted snapshots, no beta outcome exists anywhere.
+  The v2 architect freeze obligation stands: BENCHMARK_PREREG v2 must swap
+  SPIDER-arm candidate scoring to the audited fused mechanism (everything
+  else frozen unchanged) BEFORE any outcome.
 
 ## PH-2 — Shared capability infrastructure line (Steam-like) — **WATCH**
 

@@ -248,3 +248,57 @@ and Director integration.
   change under the frozen everything-else rule; then BETA_BUILDER proceeds
   under freeze checkpoints F1/F2. Public deployment and commercialization
   remain unauthorized without explicit human decision.
+
+---
+
+## Intake 2026-08-25 (fourth Product session on mounted accepted snapshots)
+
+Session-start state anomaly, recorded for provenance (third occurrence of
+the same class): the working tree carried an UNCOMMITTED deletion of
+`state/product_beta_request.json` and an uncommitted flip of
+`state/product_direction.json.beta_launch` to `false`, while HEAD (`4dc8820`)
+still contained the committed PB-001 rev-3 authorization. No Beta
+Tester/Auditor result, no BENCHMARK_PREREG v2, no builder WP-0 output and no
+Phase-A/B evaluation row exist anywhere in the repository or mounts.
+Nothing justifies a rollback; this session re-derived the decision from
+scratch rather than assuming either prior state.
+
+Deepened verification this session: instead of relying on persistent
+claims, both audit gates were re-read directly from the mounts —
+`results/audit/CYCLE_32783797303_GRAPH_GATE.json` (Graph: PASS,
+safe_to_integrate=true, required_fixes=[], byte-exact recomputation of all
+headline numbers incl. R2LIVE 6/6 and R3 login frag 4/4 vs graphiter 0/4 vs
+edgeseq 0/4 bounce) and
+`results/intel/audit/CYCLE_32800296360_INTEL_GATE.json` (Intel: PASS,
+VALIDATED_USEFUL, claim-tier ceiling PROOF_OF_CONCEPT). Physics loop state
+confirms the audited double falsification and program completion; Graph loop
+state confirms addressing COMPLETE and `graph-inheritance-scaling` launched/
+undecided; Intel loop confirms cycle-2 (Unbrowse reproduction) selected but
+not decided. No new product signals exist beyond CYCLE_32783797303
+(Graph) and CYCLE_32800296360 (Intel).
+
+| Lane | Mounted accepted state | Match | Product reading |
+|---|---|---|---|
+| Graph | G-H1..G-H4 audits PASS through Run 32783797303; scaling successor undecided | YES | Unchanged; depth ≤3 beta frontier stands either way |
+| Physics | WP-003B-R2 + WP-005 FALSIFIED audited; within-site interventional program launched | YES | PH-3 stays REJECTED |
+| Intel | cycle-1 SGDR integrated at PoC ceiling; cycle-2 Unbrowse pending | YES | SGDR remains PH-1's audited front door; Unbrowse stays OFFICIAL_CLAIM only |
+| Product pipeline | zero outcomes anywhere | YES | Pre-outcome freeze remains constitutionally clean (§19) |
+
+### Decision 2026-08-25 (fourth session)
+
+- **PH-1 stays PRODUCT_CANDIDATE; Product Beta PB-001 RE-AUTHORIZED as the
+  single authorized beta — request revision 4** (provenance-only bump;
+  every Director-floor clause, assumption A1–A5 and directed pre-outcome
+  revision v2 carried forward UNCHANGED). All five contract criteria
+  re-checked and hold on independently re-read gates.
+- **`directives/PRODUCT_OPTIMIZATION.md` authored** (was referenced by both
+  role file and Director directive but did not exist anywhere): codifies the
+  optimization charter — bottleneck/baseline/metrics/win-rule/scope/kill
+  admission record per process, freeze discipline (§19-aligned), versioning
+  after losses, fairness floors, wording-constraint inheritance, honest
+  reporting, internal-only scope ceiling.
+- **PH-2 WATCH / PH-3 REJECTED / PH-4 WATCH**: unchanged (no new audited
+  evidence this session).
+- Standing next step unchanged: **BETA_ARCHITECT commits BENCHMARK_PREREG
+  v2 before any outcome; then BETA_BUILDER under F1/F2**. Public deployment
+  and commercialization remain unauthorized without explicit human decision.
