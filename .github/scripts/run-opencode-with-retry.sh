@@ -156,8 +156,9 @@ validate_agent_card() {
 }
 
 stage_control_plane
-if ! validate_agent_card "$@"; then
-  rc=$?
+validate_agent_card "$@"
+rc=$?
+if [[ "$rc" -ne 0 ]]; then
   restore_control_plane || true
   exit "$rc"
 fi
