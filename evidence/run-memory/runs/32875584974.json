@@ -1,0 +1,65 @@
+{
+  "run_id": 32875584974,
+  "workflow_name": "SPIDER Product and Beta Lane",
+  "workflow_path": ".github/workflows/product-beta-repair.yml (inferred from name/event; bundle carries no jobs to confirm)",
+  "status": "completed",
+  "conclusion": "cancelled",
+  "head_sha": "373c1b0f2f3b7efd62b1cbfb63dc12c643ed0f2b",
+  "created_at": "2026-08-25T17:03:02Z",
+  "updated_at": "2026-08-25T18:44:06Z",
+  "event": "workflow_run",
+  "head_branch": "main",
+
+  "evidence_class": "OPERATIONAL",
+
+  "job_summary": {
+    "jobs": [],
+    "artifacts": 0,
+    "attempt_note": "ZERO jobs ever started, logs.txt is 0 bytes, refs.txt empty — the run existed only as metadata: created 17:03:02Z via workflow_run trigger, cancelled ~1h41m later at 18:44:06Z without ever leaving the queue (or dying pre-job)."
+  },
+
+  "durable_refs": [
+    "/tmp/spider_run_evidence/32875584974/run.json + jobs.json (total_count=0) + log_status 'available' with empty body — the bundle itself contains nothing beyond metadata",
+    "sibling context: runs/32875584983.json (Lane Repair Supervisor, same workflow_run creation second 17:03:02Z)"
+  ],
+
+  "findings": [
+    {
+      "kind": "ANOMALY",
+      "summary": "Third-plus instance of the cancelled-with-zero-jobs signature (family: product-loop #9 = 32894986672 attributed post-hoc to the Product Supervisor's queued-run dedupe; runtime bootstrap 32864608446 attributed to a one-shot dedupe canceller). This instance is UNATTRIBUTABLE from any surviving local evidence: empty log means no canceller warning lines, and no sibling branch/state change brackets the cancellation window. Timeline facts: queued from 17:03:02Z while the PB-001 product lane was NOT visibly running a product-loop (Product Supervisor had answered 'already active' at 16:56:28Z citing product-loop/product-beta-repair runs), then cancelled at 18:44:06Z — a window that overlaps the active Runtime repair chain (32875577618 finished 17:24Z; round-2 run 32877702179 dispatched then). Whether the canceller was the supervisor dedupe, a concurrency group eviction, or an external actor cannot be determined here. Per INDEX digest policy: adjudicate such runs against the live API before pruning; treat as operational noise, NOT lane failure — no Product state, branch or claim was touched (zero jobs).",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "MEDIUM",
+      "route_to": ["INFRA", "CTO"]
+    },
+    {
+      "kind": "COST",
+      "summary": "~1h41m of queue-slot occupancy (17:03:02→18:44:06Z) with zero compute consumed (no job ever started) and zero model calls. Cost is latency/visibility only, but it means the product-beta-repair entry point was effectively blocked/unavailable for that window without any durable trace of why.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "LOW",
+      "route_to": ["INFRA"]
+    },
+    {
+      "kind": "OTHER",
+      "summary": "Trigger provenance fragment: event=workflow_run with creation second identical to the Lane Repair Supervisor firing (17:03:02Z) suggests both were listeners triggered by one completing parent workflow; the parent's identity is not recoverable from these bundles (its completion happened off-bundle). Recorded so future attribution attempts know where to look (Actions API trigger list for this run id).",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "importance": "LOW",
+      "route_to": ["INFRA"]
+    }
+  ],
+
+  "failure_signatures": [
+    "CANCELLED_ZERO_JOBS_UNATTRIBUTED: completed=cancelled with total_count=0 jobs, empty log, ~1h41m lifetime; distinguishable from fetch-harness failure by jobs.json being present-and-empty rather than missing; canceller identity requires live-API lookup (gh api /runs/<id> + triggering workflow listing)."
+  ],
+
+  "research_opportunities": [
+    "Close the attribution gap structurally (extends CF-18): have supervisors/dedupe workflows emit their ::warning:: cancel lines as committed receipts (program-supervisor pattern, CF-30) so future cancelled-zero-jobs shells are attributable after their own logs are pruned."
+  ],
+
+  "already_captured_elsewhere": [
+    "Signature family + adjudication policy: CF-2026-08-25-18 (run 32894986672) and INDEX digest bullet 'Cancelled-with-zero-jobs is a distinct, mostly-benign run signature'."
+  ],
+
+  "distillation_complete": true,
+  "safe_to_prune": false,
+  "pruning_rationale": "Nothing substantive exists to lose (no jobs, no log body, no artifacts), but conservative default applies per precedent (32894986672): the run metadata row is the last chance to adjudicate WHO cancelled it and WHY it queued for 101 minutes (live-API check may still recover the canceller), and unattributed cancellations inside the active PB-001/Runtime window have recurring infra significance. Re-evaluate after live-API adjudication attributes the cancellation."
+}

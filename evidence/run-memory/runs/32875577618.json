@@ -1,0 +1,99 @@
+{
+  "run_id": 32875577618,
+  "workflow_name": "SPIDER Runtime Lane",
+  "workflow_path": ".github/workflows/runtime-loop.yml",
+  "status": "completed",
+  "conclusion": "success",
+  "head_sha": "373c1b0f2f3b7efd62b1cbfb63dc12c643ed0f2b",
+  "created_at": "2026-08-25T17:02:58Z",
+  "updated_at": "2026-08-25T17:24:33Z",
+  "event": "workflow_dispatch",
+  "head_branch": "main",
+  "display_title": "SPIDER Runtime Lane — Runtime cycle 1 same-cycle repair round 1 (repair_from_run_id=32864270667)",
+  "model": "opencode/x-preview-f-free",
+
+  "evidence_class": "RUNTIME",
+
+  "job_summary": {
+    "jobs": [
+      { "name": "TEAM RUNTIME", "conclusion": "success", "window": "17:03:03..17:06:10Z (~3m07s)", "note": "same-cycle repair mode: checked out rejected snapshot cycle/runtime/32864270667/team@af164b9 as runtime-repair-base + prior audit at /tmp/spider_runtime_repair_audit; OpenCode attempt 1/6 started 17:03:16Z, read role/directive/gate/code files for ~2m47s, then session ABORTED on a permission rejection at 17:06:03Z with zero edits made. Persist step then force-pushed unchanged HEAD as cycle/runtime/32875577618/team(+attempt-1) = af164b9 ('nothing to commit, working tree clean')" },
+      { "name": "INDEPENDENT AUDITOR — RUNTIME", "conclusion": "success", "window": "17:06:14..17:24:24Z (~18m10s)", "note": "independent recomputation; wrote reports/audit/CYCLE_32875577618_RUNTIME.md + results/audit/CYCLE_32875577618_RUNTIME_GATE.json; gate=REVISE with pre-committed escalation rule" },
+      { "name": "RUNTIME AUDIT → RETURN TO BUILDER", "conclusion": "success", "window": "17:24:28..17:24:33Z", "note": "dispatched repair round 2 (repair_from_run_id=32875577618, repair_round=2) → run 32877702179 (URL printed in log)" },
+      { "name": "RUNTIME AUDIT — BLOCKED / RUNTIME DIRECTOR", "conclusion": "skipped" }
+    ],
+    "artifacts": 0
+  },
+
+  "durable_refs": [
+    "git:origin/cycle/runtime/32875577618/team@af164b9c26cfb6df2a4a855f9238b02156edeaf3 (= team-attempt-1; BYTE-IDENTICAL to rejected snapshot origin/cycle/runtime/32864270667/team and later to cycle/runtime/32877702179/team — curator-verified via ls-remote; accepted base lab/runtime=7669dcd untouched)",
+    "git:origin/cycle/runtime/32875577618/audit@ea75ed9e4dc1db80c96988b834c458d06d36ed40 (= audit-attempt-1): reports/audit/CYCLE_32875577618_RUNTIME.md + results/audit/CYCLE_32875577618_RUNTIME_GATE.json (gate=REVISE, safe_to_integrate=false, recomputation_performed=true, escalation rule armed)",
+    "git:origin/cycle/runtime/32864270667/audit@820f38ec:results/audit/CYCLE_32864270667_RUNTIME_GATE.json (the frozen RF1–RF6 required-fixes list this repair was ordered to fix)",
+    "git:origin/cycle/runtime/32877702179/audit@4a12b79830716f777616c5ea2139674d0590864a:results/audit/CYCLE_32877702179_RUNTIME_GATE.json (gate=BLOCKED; delta_since_prior_audit_bytes=0; cites THIS run's escalation rule as fired; headline 'all three cycles' team branches are the same commit object')",
+    "dispatch receipt: repair round 2 = https://github.com/Mickalive/Spider/actions/runs/32877702179 (RETURN-TO-BUILDER step output, also proven by branch existence above)",
+    "git:373c1b0f2f3b7efd62b1cbfb63dc12c643ed0f2b (.github/workflows/{runtime-loop,lane-repair-supervisor}.yml as dispatched)",
+    "/tmp/spider_run_evidence/32875577618/logs.txt (bundle copy; SOLE witness of the root cause below — the durable audit branches show WHAT (zero delta) but not WHY)"
+  ],
+
+  "findings": [
+    {
+      "kind": "RESULT",
+      "summary": "Repair round 1 delivered ZERO DELTA and was re-issued REVISE by an independent audit that recomputed everything fresh: team branch tip af164b9 is the SAME git object already rejected under run 32864270667; no commit exists between accepted base 7669dcd and the team branch, so RF1–RF6 are unaddressed by construction. Auditor's independent recomputation this session: work-compression claims NOT MEASURED (still no R0_TRACES.jsonl/R0_RESULTS.json/journals/overlay; ledger+handoff still 0 bytes); test suite 10 failed / 17 passed (identical failure set); resolver RF1 crash reproduced live on all five multi-candidate cells E1/E2/E4/E7/E8; gold-keyed decoys still retrieve above τ=0.30 on E8 at coverage 1.333/1.000 ranked above every genuine capsule, RESOLVER_FP_GOLDKEYED still absent from analyze_r0.py, coverage normalization can exceed 1.0 (raw 1.5 recomputed); ALREADY_SATISFIED still unreachable by construction (P2-anchor before P3-not-authed + missing already_satisfied key in resolve() early-gap return, both probed directly); overhead accounting still fabricated (verify_ms += 0.05 hardcoded; reuse_yield dead code; maintenance overhead computed nowhere; baseline fallback arms get full default budgets while RT subtracts reused actions). What survives unchanged: D4 derivation layer honest and validated-for-current-test (12/12 capsules byte-identical, all CANDIDATE, credential lint holds); non-hermetic suite confirmed (running pytest regenerates committed registry/_derivation_report.json in place, which pins host-absolute /home/runner paths unreproducible from committed layout).",
+      "evidence_status": "AUDITED_DURABLE",
+      "importance": "HIGH",
+      "route_to": ["RUNTIME", "CTO"]
+    },
+    {
+      "kind": "BUG",
+      "summary": "ROOT CAUSE of the second zero-delta resubmission (LOG-ONLY, this bundle is the sole witness): the OpenCode repair session never edited anything because it ABORTED at 17:06:03Z when the agent requested `external_directory` read access to `/home/runner/work/Spider/Sparkle/runtime/accounting.py` — a hallucinated path naming a NONEXISTENT project ('Sparkle' instead of 'Spider'); permission auto-rejection terminated the whole session (~2m47s in, after only reads: roles, directives, audit gate, resolver.py, loop.py, derivation.py, addressing.py, registry.py, tests). The agent had just stated it understood RF1/RF2 ('resolver.py:180 ch[\"capsule\"] subscript on Segment'). Retry wrapper printed 'attempt 1/6' and NEVER retried (no attempt 2/6 anywhere in log). The workflow then ran its scope gate on a clean tree (passed trivially), found 'nothing to commit' at persist, and force-pushed the unchanged af164b9 as the round-1 team output with conclusion=success. This is instance #5 of the permission-auto-rejection session-killer family (CF-05/CF-13/CF-22 lineage: Graph #5, Product #1 builder, Product #3 architect wrong-path, Product #4 builder) and a NEW VARIANT: cross-project name contamination inside an absolute path rather than a config self-probe or canonicalization bug.",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "importance": "HIGH",
+      "route_to": ["INFRA", "CTO", "RUNTIME"]
+    },
+    {
+      "kind": "ANOMALY",
+      "summary": "Workspace-copy ambiguity around delivery (unresolved mechanism question for the zero-delta failure family): during the TEAM agent session its own git status showed staged docs/roles/{GRAPH_RUNNER,PHYSICS_RUNNER}.md overlay edits pre-existing on runtime-repair-base (agent explicitly left them untouched as unrelated infra overlays); yet the workflow's persist step ~2m later saw 'nothing to commit, working tree clean', and the scope-enforce step passed with empty BAD. Mirror image in the AUDITOR job: its agent session's shell showed staged docs/roles edits at 17:23:45Z while its own enforce step (allowing only reports/audit/ + results/audit/) passed at 17:24:17Z. Consistent hypothesis (UNCONFIRMED): OpenCode sessions operate on a control-plane-staged working copy (launcher stages /tmp/spider_control; audit mounted separately at /tmp/spider_runtime_repair_audit; auditor sandbox /tmp/opencode/rt_audit_r1) synced back to $GITHUB_WORKSPACE on success — so a mid-session death delivers nothing and produces a silent byte-identical push. If true, delivery semantics are copy-based and every persist step needs an explicit sync/delta assertion. Mechanism not provable from this bundle alone.",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "importance": "MEDIUM",
+      "route_to": ["INFRA"]
+    },
+    {
+      "kind": "RESULT",
+      "summary": "The auditor pre-committed an escalation rule in THIS run's gate: if the next repair round again submits an unchanged tree, the honest gate becomes BLOCKED (external/orchestration decision), not a third fix-list copy. Cross-run verification (curator, from Git): round 2 (run 32877702179) resubmitted the byte-identical af164b9/tree 44cda5fd and the round-2 audit gate is indeed BLOCKED with delta_since_prior_audit_bytes=0, citing exactly this escalation rule. Net effect of repair rounds 1–2 combined: two full lane dispatches consumed, zero code changes, lane still at REVISE-state scaffolding until the later fresh-work cycle.",
+      "evidence_status": "AUDITED_DURABLE",
+      "importance": "HIGH",
+      "route_to": ["CTO", "RUNTIME", "INFRA"]
+    },
+    {
+      "kind": "COST",
+      "summary": "~21.5 min wall for the whole run (17:02:58→17:24:33Z): TEAM ~3m07s (agent session ~2m47s, entirely wasted on reads before the abort), AUDITOR ~18m10s including 25 'OpenCode/Ox network signature detected; watching for a 300s stall before aborting the call' warnings (all in the auditor job; slow model responses taxed wall clock, zero aborts/backoffs materialized), RETURN-TO-BUILDER ~5s. Combined with round 2, two consecutive repair dispatches produced zero deltas; a cheap zero-diff/delivery assertion before pushing team branches would have converted both into fast explicit failures.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "LOW",
+      "route_to": ["INFRA", "RUNTIME"]
+    }
+  ],
+
+  "failure_signatures": [
+    "PERMISSION_KILL_WRONG_PROJECT_PATH: external_directory auto-reject on /home/runner/work/Spider/Sparkle/* (nonexistent sibling project name inside an agent-constructed absolute path) kills the entire OpenCode session; retry wrapper counts the attempt but does not retry this failure class (instance #5 of the family; new variant).",
+    "ZERO_DELTA_REPAIR_DELIVERY: persist step force-pushes HEAD even when `git commit` reports 'nothing to commit' — no delta/delivery assertion between agent phase and push, so a dead or edit-free session publishes a byte-identical 'team output' branch under conclusion=success (second consecutive occurrence in the Runtime repair chain after 32864270667→this run; cf. Intel r2 detached-HEAD variant CF-10).",
+    "UNFILLED_COMMIT_TEMPLATE_FIELDS (recurrence): pushed commit message would have been 'Runtime cycle  repair  attempt 1: team output' (double-space empty slots; visible as af164b9's subject) — the exact metadata signature prior audits flagged; cosmetic here (nothing changed anyway) but confounds provenance automation keyed on it.",
+    "WORKSPACE_COPY_AMBIGUITY: workflow steps and agent sessions observe different git index states (staged docs/roles overlays visible to agents, absent at enforce/persist time); unresolved whether delivery is copy-based/sync-back — see ANOMALY finding.",
+    "ESCALATION_ZERO_DELTA_TO_BLOCKED: pre-declared second-offense rule (REVISE→REVISE→BLOCKED) now armed and subsequently fired durably on cycle/runtime/32877702179/audit."
+  ],
+
+  "research_opportunities": [
+    "Structural fix bundle for the whole silent-delivery family (joins CF-10 proposal): (a) fail persist unless tip != base AND working-tree diff vs mounted base is non-empty; (b) degrade external_directory denials to single-tool-call skips instead of session death; (c) make the retry wrapper actually retry after permission aborts; (d) canonicalize/validate any absolute path an agent is about to touch against the real workspace root; (e) settle the workspace-copy question (finding 3) because delivery assertions depend on which tree persist reads.",
+    "Runtime-lane substance (unchanged, owned by the lane): RF1–RF6 remain fully open; per the BLOCKED round-2 gate, an external/orchestration decision was required on whether the repair runner executes repairs at all — overtaken by events: the lane later delivered fresh work via run 32887030457 (see its record), making 'restart as fresh cycle after BLOCKED' the demonstrated recovery path worth codifying.",
+    "Cheap watchdog idea surfaced by the auditor's clean-room behavior: assert `git diff --quiet` against the audited base at audit START and record the tree hash in the gate header, so zero-delta rounds are detected in seconds instead of after full recomputation."
+  ],
+
+  "already_captured_elsewhere": [
+    "RF1–RF6 content, R0-not-executed negative, resolver crash, decoy leakage, ALREADY_SATISFIED defect, verify_ms hardcoding: first distilled under runs/32864270667.json and durable on origin/cycle/runtime/32864270667/audit@820f38ec — this record adds only the round-1 re-audit confirmation and root cause.",
+    "'Three zero-delta resubmissions of af164b9 audited REVISE→REVISE→BLOCKED' aggregate fact: already in INDEX.md thematic digest and runs/32887030457.json context refs; THIS record pins the why for resubmission #2 (log-only).",
+    "Round-2 BLOCKED verdict: durable on origin/cycle/runtime/32877702179/audit@4a12b798 (verified by curator); linked, not restated.",
+    "25-warning slow-response/stall-watch signature without aborts: same sibling pattern already tracked via run 32886859788 (107 warnings) in INDEX digest; count recorded here for runner economics."
+  ],
+
+  "distillation_complete": true,
+  "safe_to_prune": false,
+  "pruning_rationale": "The raw log is the SOLE witness of why repair round 1 was empty (permission kill on the hallucinated 'Sparkle' path, abort timestamp, missing retry, staged-overlay observations backing the workspace-copy anomaly). The durable audit branches prove zero delta but cannot distinguish 'agent did nothing' from 'agent worked elsewhere'; deleting this log permanently downgrades a HIGH infrastructure diagnosis to speculation. Re-evaluate only after the permission-kill fix ships and an infra owner confirms the delivery mechanism."
+}

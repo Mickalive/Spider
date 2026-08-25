@@ -780,6 +780,33 @@
         "PRODUCT",
         "CTO"
       ]
+    },
+    {
+      "id": "CF-2026-08-25-34",
+      "importance": "HIGH",
+      "kind": "RUNTIME_FAILURE_MODE",
+      "summary": "Permission auto-rejection killed its FIFTH confirmed lane session and produced the Runtime repair chain's second silent zero-delta resubmission (run 32875577618, repair r1 of cycle 1): the runtime_runner agent requested external_directory read of /home/runner/work/Spider/Sparkle/runtime/accounting.py — an agent-constructed path naming a NONEXISTENT project ('Sparkle' != 'Spider') — the auto-rejection terminated the whole OpenCode session ~2m47s in after only reads (zero edits), the retry wrapper printed 'attempt 1/6' and never retried, and the persist step then force-pushed the unchanged rejected snapshot af164b9 as team output under conclusion=success. Independent audit recomputed everything fresh, re-issued REVISE (RF1-RF6 unaddressed by construction) and pre-committed an escalation rule that round 2 (32877702179) then triggered by resubmitting the byte-identical tree -> gate BLOCKED pending an external/orchestration decision. New variant of CF-05/CF-13/CF-22: cross-project name contamination inside an absolute path (2x config self-probes, 2x wrong absolute paths, 1x workspace probe across five instances). Additional structural lead from the same run: enforce/persist steps and OpenCode sessions observe DIFFERENT git index states (staged docs/roles overlays visible to agents, absent at persist/enforce), consistent with copy-based/sync-back delivery where a mid-session death delivers nothing silently — UNCONFIRMED hypothesis. Fix set (extends prior instances): tip!=base AND non-empty-diff assertion in every persist step; degrade external_directory denials to single-tool-call skips; retry permission aborts in the wrapper; canonicalize agent-constructed absolute paths against the real workspace root; settle the delivery-copy question before relying on any post-hoc delta check.",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "source_run_id": 32875577618,
+      "durable_refs": [
+        "/tmp/spider_run_evidence/32875577618/logs.txt (SOLE witness of root cause: abort line 17:06:03Z, missing retry, staged-overlay observations)",
+        "git:origin/cycle/runtime/32875577618/team@af164b9c26cfb6df2a4a855f9238b02156edeaf3 (= 32864270667/team = 32877702179/team; curator-verified identical via ls-remote)",
+        "git:origin/cycle/runtime/32875577618/audit@ea75ed9e4dc1db80c96988b834c458d06d36ed40 (REVISE gate + escalation rule)",
+        "git:origin/cycle/runtime/32877702179/audit@4a12b79830716f777616c5ea2139674d0590864a (BLOCKED gate, delta_since_prior_audit_bytes=0)",
+        "evidence/run-memory/runs/32875577618.json"
+      ],
+      "route_to": [
+        "INFRA",
+        "CTO",
+        "RUNTIME"
+      ],
+      "related": [
+        "CF-2026-08-25-05",
+        "CF-2026-08-25-10",
+        "CF-2026-08-25-13",
+        "CF-2026-08-25-22",
+        "CF-2026-08-25-28"
+      ]
     }
   ]
 }

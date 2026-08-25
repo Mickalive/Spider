@@ -1,0 +1,68 @@
+{
+  "run_id": 32874922349,
+  "workflow_name": "SPIDER Product Supervisor",
+  "workflow_path": ".github/workflows/product-supervisor.yml",
+  "status": "completed",
+  "conclusion": "success",
+  "head_sha": "373c1b0f2f3b7efd62b1cbfb63dc12c643ed0f2b",
+  "created_at": "2026-08-25T16:56:21Z",
+  "updated_at": "2026-08-25T16:56:31Z",
+  "event": "schedule",
+  "head_branch": "main",
+  "evidence_class": "OPERATIONAL",
+  "job_summary": {
+    "jobs": [
+      {
+        "name": "Ensure Product optimization continuity",
+        "conclusion": "success",
+        "window": "16:56:26..16:56:30Z (~4s)",
+        "note": "single guard step; output: 'Product work already active; supervisor will not duplicate it.'"
+      }
+    ],
+    "artifacts": 0
+  },
+  "durable_refs": [
+    "git:373c1b0f:.github/workflows/product-supervisor.yml (exact guard logic incl. line-107 infrastructure-signature regex; curator-verified present at this head_sha)",
+    "/tmp/spider_run_evidence/32874922349/logs.txt (bundle copy; outcome line only)"
+  ],
+  "findings": [
+    {
+      "kind": "OTHER",
+      "summary": "Clean designed no-op: at 16:56:28Z both product-loop.yml and product-beta-repair.yml had non-completed runs (active_for() > 0), so the supervisor exited without dispatching. Contextually correct: the queued 'SPIDER Product and Beta Lane' run 32875584974 existed in this very window (created 17:03:02Z, later cancelled with zero jobs).",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "LOW",
+      "route_to": [
+        "INFRA"
+      ]
+    },
+    {
+      "kind": "OTHER",
+      "summary": "Recovery policy branches were loaded but not fired: infrastructure-signature-gated re-dispatch after failure/cancel (regex includes external_directory, Missing product_beta_architecture state, runner shutdown/lost-communication, SPIDER_TRANSIENT_OX_EXHAUSTED, network errors, 'SPIDER control-plane overlay restoration left residue'), explicit refusal to hide real product/build failures, and continue=true-and-not-WAIT_FOR_EVIDENCE gating on success. All durable at product-supervisor.yml:107 @ pinned head_sha; the signature list itself is useful prior art for CF-05-class diagnosis automation.",
+      "evidence_status": "DUPLICATE",
+      "importance": "LOW",
+      "route_to": [
+        "INFRA"
+      ]
+    },
+    {
+      "kind": "COST",
+      "summary": "~10s wall, zero model calls, zero writes.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "LOW",
+      "route_to": [
+        "INFRA"
+      ]
+    }
+  ],
+  "failure_signatures": [],
+  "research_opportunities": [
+    "This firing's negative answer ('already active') is the kind of attribution data that becomes unverifiable once supervisor logs are pruned; extending the committed-receipt pattern (CF-30 prior art) to supervisor dedupe decisions would close that gap."
+  ],
+  "already_captured_elsewhere": [
+    "Guard + regex policy: durable in .github/workflows/product-supervisor.yml@373c1b0f (DUPLICATE).",
+    "Positive-attribution variant of this supervisor (dispatch receipts): runs/32870339029.json / CF-2026-08-25-30."
+  ],
+  "distillation_complete": true,
+  "safe_to_prune": true,
+  "pruning_rationale": "Completed, fully distilled no-op watchdog firing. Decision logic is durable workflow source at the exact dispatched head_sha (curator-verified byte-level match of the executed regex against repo HEAD); no cycle/* branch, no artifacts, and the only unique datum (negative outcome at 16:56:28Z) is recorded above. Nothing in the raw log would be lost."
+}
