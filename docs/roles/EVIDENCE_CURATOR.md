@@ -76,6 +76,36 @@ Schéma minimum :
 }
 ```
 
+## Runs déjà supprimés / récupération post-cleanup
+
+Si un run de cleanup/hygiene contient la liste de runs Actions déjà supprimés, le Curator doit traiter cette liste comme un incident de provenance et créer une récupération durable sous :
+
+`evidence/run-memory/deleted/<run_id>.json`
+
+Pour chaque run supprimé, récupérer ce qui est encore possible depuis Git : branches portant le run id, commits, receipts, state, ledgers, rapports et références croisées. Ne jamais inventer le contenu du log perdu.
+
+Schéma minimum du tombstone :
+
+```json
+{
+  "run_id": 123,
+  "workflow_name": "...",
+  "created_at": "...",
+  "raw_actions_log_available": false,
+  "deletion_source_run_id": 456,
+  "durable_refs_recovered": [],
+  "recovered_summary": "...",
+  "loss_assessment": "NONE_MATERIAL|LOW|UNKNOWN|MATERIAL_RISK",
+  "cto_relevance": "HIGH|MEDIUM|LOW|NONE",
+  "route_to": [],
+  "notes": "..."
+}
+```
+
+Maintenir aussi `evidence/run-memory/DELETED_RUNS_RECOVERY.json` avec le nombre de runs supprimés, leur classification, ce qui a été récupéré et ceux qui gardent un `loss_assessment=UNKNOWN|MATERIAL_RISK`.
+
+Si les runs supprimés étaient uniquement supervisors/watchdogs/orchestration et qu'aucune branche/claim scientifique ne leur était attachée, le signaler explicitement. Les anciennes revues CTO supprimées doivent être recherchées dans `lab/cto`, `docs/CTO_LEDGER.md`, les handoffs et l'historique Git disponible afin de déterminer si leur contenu avait déjà été transmis à la mémoire CTO cumulative.
+
 ## `safe_to_prune`
 
 Mettre `true` uniquement si :
@@ -93,6 +123,7 @@ Les runs purement orchestration/supervisor/watchdog peuvent souvent devenir prun
 
 Maintenir aussi :
 - `evidence/run-memory/INDEX.md` : synthèse compacte par thème et run ;
-- `evidence/run-memory/CTO_FEED.json` : uniquement les findings HIGH/MEDIUM encore actionnables, avec statut épistémique explicite.
+- `evidence/run-memory/CTO_FEED.json` : uniquement les findings HIGH/MEDIUM encore actionnables, avec statut épistémique explicite ;
+- `evidence/run-memory/DELETED_RUNS_RECOVERY.json` lorsqu'une suppression antérieure doit être reconstruite.
 
 Le feed CTO est un radar. Le Chief CTO doit renvoyer toute claim nouvelle à une lane/équipe pour validation avant de l'utiliser comme vérité.
