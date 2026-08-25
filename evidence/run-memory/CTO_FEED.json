@@ -390,6 +390,105 @@
         "After CF-19's merge lands, audit ddce3a3+WP-8 as one unit instead of re-running architect/builder sessions."
       ],
       "route_to": ["CTO", "PRODUCT", "INTEL"]
+    },
+    {
+      "id": "CF-2026-08-25-22",
+      "importance": "HIGH",
+      "kind": "RUNTIME_FAILURE_MODE",
+      "summary": "Permission auto-rejection killed its THIRD and FOURTH confirmed lane sessions, both in Product runs of this batch (extends CF-05/CF-13 into a 3-variant taxonomy): (a) run 32851946087 BETA ARCHITECT died ~6s in after constructing WRONG ABSOLUTE PATHS for its own control files (/home/runner/work/Spider/docs/roles/BETA_ARCHITECT.md + /home/runner/work/Spider/SPIDER_MASTER_PROMPT.md — one directory ABOVE the repo root) -> two external_directory auto-rejects -> whole opencode session terminated; the retry wrapper printed 'attempt 1/6' and never retried; validation then failed 'Missing product_beta_architecture state' and an empty architect branch was pushed. (b) run 32861115761 BETA BUILDER died ~3m40s in probing ~/.config/opencode/* (second opencode-config variant after 32799261473's ~/.local/share/opencode/* probe); builder branch pushed with zero novel content (tree identical to architect branch). Same session earlier self-healed a benign missing path (/tmp/spider_control/roles/BETA_BUILDER.md). Four kills = three mechanisms: out-of-workspace cd/probe, opencode-config self-probe (x2), path-canonicalization bug.",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "source_run_id": 32851946087,
+      "additional_source_run_ids": [32861115761],
+      "durable_refs": [
+        "evidence/run-memory/runs/32851946087.json",
+        "evidence/run-memory/runs/32861115761.json",
+        "git:origin/lab/product@4dc8820 (the rev-3 re-auth this run did deliver)",
+        "git:origin/cycle/product/32861115761/architect@1457fd3 (v2 freeze that survived)"
+      ],
+      "actionable_next": [
+        "Canonicalize all control-file paths against the real workspace root inside agent prompts/harnesses (the architect variant is deterministic and reproducible); pre-flight the role-file path once per job.",
+        "Pre-authorize read-only access to opencode's own config/state dirs (~/.config/opencode, ~/.local/share/opencode) in lane permission blocks — two of four kills are exactly this probe — or make external_directory denials skip the single tool call instead of terminating the session.",
+        "Fix the retry wrapper gap observed in 32851946087: a permission-killed session exited without attempts 2-6 firing; decide explicitly whether that signature is retryable or fail-fast-loud."
+      ],
+      "route_to": ["RUNTIME", "INFRA", "CTO", "PRODUCT"]
+    },
+    {
+      "id": "CF-2026-08-25-23",
+      "importance": "HIGH",
+      "kind": "INFRA_FAILURE_MODE",
+      "summary": "The 'Enforce audit-only writes' porcelain false positive struck a THIRD time (Physics #7, run 32860596387), stranding another delivered PASS audit: the auditor had written both mandatory outputs and self-validated gate=PASS/safe_to_integrate=true/required_fixes=[] when the gate flagged exactly NINE workflow-pre-staged control-plane files (.opencode/agents/{dynamics_physicist,geometry_physicist,graph_runner,independent_auditor,lab_director,lane_director,physics_runner}.md + directives/AUDITOR.md + directives/LANE_DIRECTOR.md) -> exit 1 -> Lane Director skipped. The PASS gate is curator-verified on origin/cycle/physics/32860596387/audit@beaf59c9. CF-2026-08-25-08's fix (scope check to session-era diff vs HEAD, or unstage plumbing pre-audit) is STILL unapplied after three strikes across two lanes; this instance supplies the exact regression-test file list.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "source_run_id": 32860596387,
+      "additional_source_run_ids": [32793165981, 32793580374],
+      "durable_refs": [
+        "evidence/run-memory/runs/32860596387.json",
+        "git:origin/cycle/physics/32860596387/audit@beaf59c978c8c007baa5501077a9ac304a0314cb (orphaned PASS gate)",
+        "git:.github/workflows/physics-loop.yml@main (gate code unchanged)"
+      ],
+      "actionable_next": [
+        "Apply the CF-08 fix to physics-loop.yml AND graph-loop.yml in one change; add the nine-path list above as a regression fixture.",
+        "Add retry damping: identical violation set twice -> fail loudly instead of re-running audits.",
+        "Before any future Physics dispatch, note WP-006 acceptance already happened via 0be8d8a — do NOT re-audit or re-consume beaf59c9 for WP-006 stewardship."
+      ],
+      "route_to": ["INFRA", "RUNTIME", "CTO", "PHYSICS"]
+    },
+    {
+      "id": "CF-2026-08-25-24",
+      "importance": "MEDIUM",
+      "kind": "PROCESS_PATTERN",
+      "summary": "Concurrent duplicate stewardship confirmed with timeline proof (strengthens CF-17): TWO independent bit-exact WP-006 carryforward chains ran in parallel on 2026-08-25 — Physics #7 (run 32860596387: carryforward + unique floor post-mortem/recheck artifacts, independent audit PASS at 15:27Z, never consumed by any Director) and run 32866107906 (fresh-env verification chain, director-integrated as the 5-gate acceptance at lab/physics@0be8d8a 17:40Z). Physics #7's team branch base provably excludes the acceptance commit, so the duplication is real concurrency, not replay. Cost: ~51 runner-minutes plus an audit spent on evidence that was simultaneously being accepted elsewhere. Unique salvageable content from the orphaned chain: results/physics/wp006_floor_postmortem_run32860596387.json and wp006_team_recheck_run32860596387.json on cycle branch 76a1d72b.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "source_run_id": 32860596387,
+      "additional_source_run_ids": [32866107906],
+      "durable_refs": [
+        "evidence/run-memory/runs/32860596387.json",
+        "git:origin/cycle/physics/32860596387/team@76a1d72bddd2664c3c900b5b237f0a26665b2f13",
+        "git:origin/lab/physics@0be8d8a (the chain that was actually consumed)"
+      ],
+      "actionable_next": [
+        "Implement CF-17's pending-integration pointer AND an in-flight dispatch registry keyed by snapshot hash so two chains cannot steward the same evidence concurrently.",
+        "If the floor post-mortem's descriptive content is ever needed, read it from cycle branch 76a1d72b — do not rerun stewardship."
+      ],
+      "route_to": ["CTO", "INFRA", "PHYSICS"]
+    },
+    {
+      "id": "CF-2026-08-25-25",
+      "importance": "MEDIUM",
+      "kind": "RESEARCH_RADAR",
+      "summary": "Intel cycle-5 route-ladder origin measurement exists with a boundary condition that should discipline every future browser->API escalation claim: clean-room preregistered A/B/C ladder (A full browser traversal / B cached-route replay / C bare HTTP curl-null) on restful-booker UI+REST, httpbin control, books+quotes.toscrape returned REPRODUCED_USEFUL per frozen rule — replay beat traversal 5/5 paired wins on BOTH panels (speedup_med 37.05x / 8.66x) — but C/B median ratios were 0.92 and 0.73: bare HTTP nearly MATCHES cached-route replay on these sandbox sites, so the measured advantage is over browser traversal, not over plain HTTP. Independent audit recomputed everything zero-mismatch and its adversarial attacks all failed (store provably capture-derived, no doc-hints, no LLM, pacing sleep outside timers) yet gated REVISE/VALIDATED_USEFUL/safe_to_integrate=false on documentary-only RF-1..RF-4 (missing cycle5_report.md though decision_rule cites it; stale SGDR-era state files; hardcoded taxonomy counts); predeclared flip condition: exact delivery => next audit PASSes on spot-check. Mechanism subsequently ACCEPTED at lab/intel@8bfcf85 (audit PASS run 3287308xxx); this run's exact values remain DURABLE_UNAUDITED at cycle/intel/32861355080/repro.",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "source_run_id": 32861355080,
+      "durable_refs": [
+        "git:origin/cycle/intel/32861355080/repro@ac870742b200848033988c11da4cb1b6078215b6 (prereg + raw rows + decision_rule.json)",
+        "git:origin/cycle/intel/32861355080/audit@516d99cd (REVISE gate + recompute script)",
+        "git:origin/lab/intel@8bfcf85 (later director integration of the mechanism)",
+        "evidence/run-memory/runs/32861355080.json"
+      ],
+      "actionable_next": [
+        "Carry the C/B~1 boundary into Product/Graph claims that reuse route-replay economics: always measure against a curl-level null before crediting the route abstraction.",
+        "When auditing the later accepted cycle, verify the PoC wording preserves the sandbox-vs-production scope limit and does not import vendor headline ratios.",
+        "Treat quotes.toscrape transient SCHEMA_MISMATCH as environmental unless it recurs; it is documented as an honest failure-mode datum in the frozen-rules handling."
+      ],
+      "route_to": ["INTEL", "PRODUCT", "CTO"]
+    },
+    {
+      "id": "CF-2026-08-25-26",
+      "importance": "MEDIUM",
+      "kind": "RESEARCH_RADAR",
+      "summary": "Graph program graph-inheritance-scaling is COMPLETE as ledger G-H5 'SCALING-HOLDS at narrow basis' (audited PASS SURVIVES_AUDIT_WITH_LIMITS, director-integrated lab/graph d41fe9b..3e36b4c via run 32861557668): depth-4 AND depth-5 composites memory-led on both passes under frag_v31/frag_legacy/giter_legacy paying 1-4 novel actions vs cold 57/76 and traj 49/65 with all 24 reference contrasts holding — but binding caveats travel with the wording: positive basis is QUOTES-SIDE ONLY (books chains unsolved by every arm incl. references due to b.book EXECUTION-FAIL => books scaling UNMEASURED-not-falsified), giter_v31 transfer failure (qualify_count=0), achieved pure-memory depth <=4 classes, D2Q control memory-led only under frag_v31, traj baseline degraded by missing raw snapshots. Director set continue=false within_cap with recommended successor program graph-inheritance-generalization (books-inventory replication after producer-disciplined repair of the b.book defect; GENERALIZES/SITE-BOUND/BOOKS-INSTRUMENT-UNREPAIRABLE branches; no-succession-on-negative) — the successor dispatch decision is now pending with the CTO/lane. Operational residue: first live launch EPIPE-killed at row 12 by runner shell timeout, preserved honestly as INFRA_INTERRUPTED provenance before the canonical clean rerun.",
+      "evidence_status": "AUDITED_DURABLE",
+      "source_run_id": 32861557668,
+      "durable_refs": [
+        "git:origin/lab/graph@3e36b4c (G-H5 ledger wording + successor directive + reports/director/CYCLE_32861557668_GRAPH.md)",
+        "git:origin/cycle/graph/32861557668/team@db73549 / audit@e79bd74d (PASS gate)",
+        "evidence/run-memory/runs/32861557668.json"
+      ],
+      "actionable_next": [
+        "Decide whether to dispatch graph-inheritance-generalization (requires fixing the b.book next-link defect first) or redirect — books-side scaling remains the open half of the question.",
+        "Carry V31 boundary conditions (giter_v31 qualify=0; D2Q frag_v31-only) into any Product/Runtime reuse of V31 equipment.",
+        "Optionally investigate the row-12 EPIPE runner-timeout signature if it recurs in long live batches."
+      ],
+      "route_to": ["CTO", "GRAPH", "PRODUCT"]
     }
   ]
 }

@@ -1,0 +1,67 @@
+{
+  "run_id": 32860596387,
+  "run_number": 7,
+  "workflow_name": "SPIDER Physics Lane",
+  "workflow_path": ".github/workflows/physics-loop.yml",
+  "status": "completed",
+  "conclusion": "failure",
+  "head_sha": "6488f706457708089ea9b1c634efc284ec41c099",
+  "created_at": "2026-08-25T14:36:50Z",
+  "updated_at": "2026-08-25T15:27:53Z",
+  "event": "workflow_dispatch",
+  "evidence_class": "SCIENTIFIC",
+  "job_outcomes": {
+    "TEAM PHYSICS": "success (14:36:55-15:05:23Z, ~28.5m)",
+    "INDEPENDENT AUDITOR — PHYSICS": "failure (Enforce audit-only writes false positive; full audit WAS written and pushed)",
+    "PHYSICS LANE DIRECTOR": "skipped"
+  },
+  "durable_refs": [
+    "git:origin/cycle/physics/32860596387/team@76a1d72b (bit-exact WP-006 evidence carry from certified snapshot 45fa5db lineage + NEW artifacts: physics/team_recheck_wp006_run32860596387.py, results/physics/wp006_team_recheck_run32860596387.json, results/physics/wp006_floor_postmortem_run32860596387.json, reports/physics/wp006_stewardship_run32860596387.md, TEAM-PROPOSED ledger addendum)",
+    "git:origin/cycle/physics/32860596387/audit@beaf59c9 (full independent audit report + CYCLE_32860596387_PHYSICS_GATE.json: gate=PASS, safe_to_integrate=true, required_fixes=[] - curator re-verified on remote)"
+  ],
+  "findings": [
+    {
+      "kind": "RESULT",
+      "summary": "Team produced the third WP-006 negative-result stewardship carryforward with genuinely NEW descriptive content beyond prior chains: an independent team recheck (headline floor recomputation marked VALIDATED_FOR_CURRENT_TEST; F2 producers 2<4, F4 verified BPs 38<60 re-derived from own counts) and a per-site floor-failure post-mortem computed descriptively-only from committed rows/status - explicitly no new environment interaction, respecting the frozen stop rule. Stop-rule input certified 'twice over'; lane-termination decision correctly left to the Director.",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "importance": "MEDIUM",
+      "route_to": ["PHYSICS", "CTO"]
+    },
+    {
+      "kind": "BUG",
+      "summary": "THIRD instance of the CF-2026-08-25-08 scope-gate porcelain false positive, now with the exact offending signature: after the auditor wrote both mandatory outputs and self-validated gate=PASS/safe_to_integrate=true/fixes=0, 'Enforce audit-only writes' flagged NINE workflow-pre-staged control-plane files (.opencode/agents/{dynamics_physicist,geometry_physicist,graph_runner,independent_auditor,lab_director,lane_director,physics_runner}.md + directives/AUDITOR.md + directives/LANE_DIRECTOR.md) as auditor writes -> exit 1 -> Lane Director skipped despite a delivered PASS gate.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "HIGH",
+      "route_to": ["INFRA", "RUNTIME", "CTO"]
+    },
+    {
+      "kind": "ANOMALY",
+      "summary": "CONCURRENT duplicate stewardship confirmed by timeline: this run's orphaned PASS audit (15:27Z) predates the chain that actually integrated WP-006 (run 32866107906 commit 38e697b at 17:06Z, director integration 0be8d8a at 17:40:33Z). Two independent bit-exact WP-006 carryforwards were produced and independently audited PASS within ~2h of each other on the same day; only one was consumed by a Director. Strengthens CF-2026-08-25-17's pending-integration-pointer fix with a concurrency data point.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "MEDIUM",
+      "route_to": ["CTO", "PHYSICS", "INFRA"]
+    },
+    {
+      "kind": "LIMIT",
+      "summary": "Disclosed limitations carried forward unchanged (raw DOM snapshots ephemeral; openlibrary evidence cap-truncated with missing BP manifest, raw-row-derived only; counterfactual arithmetic is sensitivity analysis, not measurement). Team branch base did NOT include the eventual acceptance commit 0be8d8a (not an ancestor), confirming the two chains ran in parallel from the same pre-acceptance state.",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "importance": "LOW",
+      "route_to": ["PHYSICS"]
+    }
+  ],
+  "failure_signatures": [
+    "'Physics Auditor wrote outside audit outputs:' listing .opencode/agents/*.md + directives/{AUDITOR,LANE_DIRECTOR}.md (workflow-pre-staged control-plane sync attributed to the auditor)",
+    "audit branch push succeeds AFTER the gate fails (PASS gate stranded without Director consumption)"
+  ],
+  "research_opportunities": [
+    "Apply CF-08's fix (scope write check to session-era diff vs HEAD, or unstage plumbing pre-audit); this instance adds the concrete 9-path signature to regression-test against.",
+    "Dispatcher-side dedupe: check for in-flight or recently-PASSed stewardship of the same snapshot before authorizing another carryforward run."
+  ],
+  "already_captured_elsewhere": [
+    "WP-006 FALSIFIED verdict + acceptance chain durable via git:origin/lab/physics@0be8d8a (run 32866107906 chain) and recorded under runs/32799587656.json / runs/32776372437.json",
+    "Scope-gate class already on CTO radar as CF-2026-08-25-08"
+  ],
+  "distillation_complete": true,
+  "safe_to_prune": false,
+  "pruning_rationale": "The orphaned PASS gate provenance, the exact porcelain-false-positive file list, and the concurrency relationship to the accepted chain are log-only here; the unique floor-postmortem/recheck artifacts live only on this run's cycle branches, which must stay reachable for audit."
+}

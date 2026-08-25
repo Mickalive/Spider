@@ -1,0 +1,67 @@
+{
+  "run_id": 32851946087,
+  "run_number": 3,
+  "workflow_name": "SPIDER Product and Beta Lane",
+  "workflow_path": ".github/workflows/product-loop.yml",
+  "status": "completed",
+  "conclusion": "failure",
+  "head_sha": "fd47aca1cb35166c354e04b75219078edac55206",
+  "created_at": "2026-08-25T13:12:25Z",
+  "updated_at": "2026-08-25T13:19:20Z",
+  "event": "schedule",
+  "evidence_class": "PRODUCT",
+  "job_outcomes": {
+    "PRODUCT DIRECTOR": "success (13:12:28-13:18:51Z, ~6.4m)",
+    "BETA ARCHITECT": "failure (Validate architecture state; session dead ~6s into agent time)",
+    "downstream": "all skipped"
+  },
+  "durable_refs": [
+    "git:origin/lab/product@4dc8820 ('Product Director synthesis 32851946087', 5 files +87/-18: beta request rev 3, direction beta_launch=true, hypotheses/ledgers)",
+    "git:origin/cycle/product/32851946087/architect@4dc8820 (empty-of-novel-work snapshot pushed anyway; 'nothing to commit, working tree clean')"
+  ],
+  "findings": [
+    {
+      "kind": "RESULT",
+      "summary": "Director session 3 re-authorized Product Beta PB-001 as request rev 3: a PROVENANCE-ONLY bump (zero substantive clause deltas vs rev 2) after detecting an uncommitted working-tree reset (state/product_beta_request.json deleted; beta_launch flipped false) while HEAD 1ecb1b8 held the committed rev-2 authorization. Director independently re-verified the evidence basis against mounted accepted snapshots (Graph robustness PASS, Physics WP-003B-R2/WP-005 FALSIFIED, Intel SGDR VALIDATED_USEFUL/PoC) and confirmed zero beta outcomes exist anywhere, so refreezing was constitutionally clean.",
+      "evidence_status": "AUDITED_DURABLE",
+      "importance": "MEDIUM",
+      "route_to": ["CTO", "PRODUCT"]
+    },
+    {
+      "kind": "BUG",
+      "summary": "THIRD confirmed permission-auto-rejection session kill, NEW VARIANT: the BETA ARCHITECT agent constructed WRONG ABSOLUTE PATHS for its own control files - Read /home/runner/work/Spider/docs/roles/BETA_ARCHITECT.md and /home/runner/work/Spider/SPIDER_MASTER_PROMPT.md (repo root is /home/runner/work/Spider/Spider) - each denied as 'external_directory ... auto-rejecting' -> 'Error: The user rejected permission to use this specific tool call.' -> entire opencode session terminated ~6s into agent time. Notable: run-opencode-with-retry.sh printed 'attempt 1/6' but NO retry followed the death; the pipeline proceeded silently until the state-validation step failed.",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "importance": "HIGH",
+      "route_to": ["RUNTIME", "INFRA", "CTO"]
+    },
+    {
+      "kind": "ANOMALY",
+      "summary": "Recurring destructive-wipe anomaly observed again (2nd documented occurrence, per the director's own revision note 'after a SECOND uncommitted working-tree reset'): committed-at-HEAD beta state found deleted/flipped in the working tree at session start, forcing detect-and-restore before writing rev 3. Consistent with CF-2026-08-25-20 product-loop.yml rm -f lines (escalation later renewed at e84b11c/d944594).",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "importance": "MEDIUM",
+      "route_to": ["INFRA", "PRODUCT"]
+    },
+    {
+      "kind": "LIMIT",
+      "summary": "Workflow pushed a misleadingly-named 'architect' cycle branch containing zero novel work (empty snapshot over the director's commit) after the agent session died - the push-on-failure pattern repeats even when nothing was produced.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "LOW",
+      "route_to": ["INFRA"]
+    }
+  ],
+  "failure_signatures": [
+    "permission requested: external_directory (/home/runner/work/Spider/docs/roles/*); auto-rejecting -> session-fatal (wrong absolute path variant)",
+    "'Missing product_beta_architecture state' validator exit 1 after silent agent-session death",
+    "retry wrapper prints 'attempt N/6' but does not retry a permission-killed session"
+  ],
+  "research_opportunities": [
+    "Path-canonicalization guard: resolve role/prompt file paths against the actual workspace root before Read; pre-authorize the repo-root parent read-only so a wrong path degrades to a recoverable miss instead of a session kill (extends CF-05/CF-13 fix set)."
+  ],
+  "already_captured_elsewhere": [
+    "Rev-3 authorization text durable at git:origin/lab/product@4dc8820 (superseded by rev 4..7 in later runs)",
+    "Wipe-defect class already escalated as CF-2026-08-25-20"
+  ],
+  "distillation_complete": true,
+  "safe_to_prune": false,
+  "pruning_rationale": "The session-kill root cause (wrong absolute paths + non-retrying wrapper) and the wipe-anomaly narrative exist ONLY in this raw log; the pushed architect branch is empty of novel work. Claim-bearing Product lineage continues in later runs; keep protected."
+}

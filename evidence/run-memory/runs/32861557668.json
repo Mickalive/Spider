@@ -1,0 +1,74 @@
+{
+  "run_id": 32861557668,
+  "run_number": 8,
+  "workflow_name": "SPIDER Graph Lane",
+  "workflow_path": ".github/workflows/graph-loop.yml",
+  "status": "completed",
+  "conclusion": "success",
+  "head_sha": "8f3f0e1c169cdade1a838f3eb9cd165a0e17e98b",
+  "created_at": "2026-08-25T14:45:57Z",
+  "updated_at": "2026-08-25T17:29:23Z",
+  "event": "workflow_dispatch",
+  "evidence_class": "PRODUCT",
+  "job_outcomes": {
+    "TEAM GRAPH": "success (14:46:02-16:40:12Z, ~1h54m)",
+    "INDEPENDENT AUDITOR — GRAPH": "success (16:40:15-17:07:40Z, ~27m; gate PASS)",
+    "GRAPH LANE DIRECTOR": "success (17:07:42-17:29:22Z, ~22m; integration pushed)",
+    "blocked/skipped jobs": "none"
+  },
+  "durable_refs": [
+    "git:origin/cycle/graph/32861557668/team@db7354920b21ee2a748786b76a370d14257bcf80 (scaling c1 repair r1: RF fixes + frozen P2 grid execution d98f040 + report/manifest db73549)",
+    "git:origin/cycle/graph/32861557668/audit@e79bd74d1acb923a5f400e68d551a7c73c20a7c9 (re-audit PASS, safe_to_integrate=true, required_fixes=[])",
+    "git:origin/lab/graph@3e36b4c (director integration d41fe9b..3e36b4c: ledger G-H5 accepted with binding caveats; program graph-inheritance-scaling COMPLETE; successor directive rewritten pre-push; product signal CYCLE_32861557668 material=true)"
+  ],
+  "findings": [
+    {
+      "kind": "RESULT",
+      "summary": "PROGRAM graph-inheritance-scaling COMPLETE as SCALING-HOLDS at a narrow basis (ledger G-H5, audited PASS + director-integrated): same-cycle recovery of run 32793580374's REVISE. Team fixed RF defects (rebuild_scaling.py SQL bindings bug + round-trip test {16,27,15,15}; subgoal_hook wired so binding gate G1 recomputed non-vacuously from deterministic end-vector reconstruction), then executed the frozen P2 grid EXACTLY: 5 composites x 6 arms x 2 passes = 60/60 rows, zero unhealthy/error rows, no retries, byte-restored grown KB before every run. Discipline proofs: store_before distinctness==1 across 60 runs, evaluation wrote nothing (store_after==store_before all rows), pass1==pass2 all 30 cells.",
+      "evidence_status": "AUDITED_DURABLE",
+      "importance": "HIGH",
+      "route_to": ["CTO", "GRAPH", "PRODUCT"]
+    },
+    {
+      "kind": "RESULT",
+      "summary": "Scaling substance (with equal-prominence negatives shipped beside the headline): frag_v31, frag_legacy AND giter_legacy each memory-led on BOTH passes of depth-4 D4Q and depth-5 D5Q, paying 1-4 novel actions vs cold 57/76 and traj 49/65; all 24 reference contrasts hold. NEGATIVES/CAVEATS now binding in G-H5 wording: quotes-side-only positive basis - books chains unsolved by EVERY arm including references (b.book EXECUTION-FAIL: pager candidate present, next-link unresolved on product pages) so books scaling is UNMEASURED-not-falsified; giter_v31 qualify_count=0 (V31 equipment transfer failure on the graphiter arm); achieved pure-memory depth <=4 classes (frag arms missed q.home/q.logout to exploration, dry-predicted ADDRESSING-MISSes); D2Q control memory-led ONLY under frag_v31; traj baseline degraded by missing raw snapshots (14/16 states) disclosed beside its numbers. Attribution counts: 26 ADDRESSING-MISS / 8 EXECUTION-FAIL.",
+      "evidence_status": "AUDITED_DURABLE",
+      "importance": "HIGH",
+      "route_to": ["CTO", "GRAPH", "PRODUCT"]
+    },
+    {
+      "kind": "RESULT",
+      "summary": "Independent audit verdict: gate PASS / safe_to_integrate=true / required_fixes=[], claim strength recorded as SURVIVES_AUDIT_WITH_LIMITS. Auditor recomputed headline numbers from raw rows (grid completeness, decision-rule output qualify frag_v31=2/frag_legacy=2/giter_legacy=2/giter_v31=0, contrasts 24/24, depth ladder, novel-cost table, discipline proofs); verified freeze-timing chain (mechanism code precedes both live launches; dry diagnostics precede first live row; only analysis/report post-outcome); rejected round-0 snapshot preserved. Residual C8: full-suite counts remain CI-verifiable only (no playwright/numpy in audit sandbox) -> REPLICATION_REQUIRED flagged via push CI.",
+      "evidence_status": "AUDITED_DURABLE",
+      "importance": "MEDIUM",
+      "route_to": ["GRAPH", "CTO"]
+    },
+    {
+      "kind": "ANOMALY",
+      "summary": "First P2 launch was killed at row 12 by a runner shell timeout (infra EPIPE, pre-D3B); the 12-row partial was preserved under results/graph/provenance/scaling_live_runs_INFRA_INTERRUPTED_20260825_infra_interrupted.json and a full clean rerun with unchanged mechanism code is canonical - a worked example of honest infra-interrupt handling under a frozen protocol.",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "importance": "LOW",
+      "route_to": ["INFRA", "GRAPH"]
+    },
+    {
+      "kind": "IDEA",
+      "summary": "Director succession: program complete with continue=false within_cap (no immediate self-dispatch); recommended successor program graph-inheritance-generalization = books-inventory replication of depth->=4 memory-led composition after a producer-disciplined repair of the documented b.book defect, with GENERALIZES / SITE-BOUND / BOOKS-INSTRUMENT-UNREPAIRABLE branches and no-succession-on-negative stop condition. Audited Intel R-1 consulted from lab/intel but explicitly QUEUED for its own preregistered addressing program, not merged as evidence. Product signal emitted (material=true, MEDIUM confidence).",
+      "evidence_status": "AUDITED_DURABLE",
+      "importance": "MEDIUM",
+      "route_to": ["CTO", "GRAPH"]
+    }
+  ],
+  "failure_signatures": [
+    "runner shell timeout / EPIPE killed first live batch at row 12 (infra interrupt preserved as provenance, clean rerun canonical)"
+  ],
+  "research_opportunities": [
+    "Successor dispatch decision for graph-inheritance-generalization (books side unmeasured; requires fixing the b.book next-link resolution defect first).",
+    "V31 transfer failure on giter arm (qualify_count=0) plus D2Q frag_v31-only control are boundary conditions any Product reuse of V31 equipment must carry."
+  ],
+  "already_captured_elsewhere": [
+    "Accepted state durable at git:origin/lab/graph@3e36b4c incl. reports/director/CYCLE_32861557668_GRAPH.md and results/graph/scaling_MANIFEST.json; audit provenance integrated at 91784b9"
+  ],
+  "distillation_complete": true,
+  "safe_to_prune": false,
+  "pruning_rationale": "Claim-bearing audited cycle whose cycle/* branches are part of the accepted G-H5 lineage and whose INFRA_INTERRUPTED partial-run provenance detail is only partially mirrored off-branch. Scientific runs stay protected per role-card rule."
+}
