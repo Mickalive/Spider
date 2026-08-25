@@ -571,18 +571,25 @@
       "id": "CF-2026-08-25-25",
       "importance": "MEDIUM",
       "kind": "RESEARCH_RADAR",
-      "summary": "Intel cycle-5 route-ladder origin measurement exists with a boundary condition that should discipline every future browser->API escalation claim: clean-room preregistered A/B/C ladder (A full browser traversal / B cached-route replay / C bare HTTP curl-null) on restful-booker UI+REST, httpbin control, books+quotes.toscrape returned REPRODUCED_USEFUL per frozen rule — replay beat traversal 5/5 paired wins on BOTH panels (speedup_med 37.05x / 8.66x) — but C/B median ratios were 0.92 and 0.73: bare HTTP nearly MATCHES cached-route replay on these sandbox sites, so the measured advantage is over browser traversal, not over plain HTTP. Independent audit recomputed everything zero-mismatch and its adversarial attacks all failed (store provably capture-derived, no doc-hints, no LLM, pacing sleep outside timers) yet gated REVISE/VALIDATED_USEFUL/safe_to_integrate=false on documentary-only RF-1..RF-4 (missing cycle5_report.md though decision_rule cites it; stale SGDR-era state files; hardcoded taxonomy counts); predeclared flip condition: exact delivery => next audit PASSes on spot-check. Mechanism subsequently ACCEPTED at lab/intel@8bfcf85 (audit PASS run 3287308xxx); this run's exact values remain DURABLE_UNAUDITED at cycle/intel/32861355080/repro.",
-      "evidence_status": "DURABLE_UNAUDITED",
+      "summary": "Intel cycle-5 route-ladder origin measurement exists with a boundary condition that should discipline every future browser->API escalation claim: clean-room preregistered A/B/C ladder (A full browser traversal / B cached-route replay / C bare HTTP curl-null) on restful-booker UI+REST, httpbin control, books+quotes.toscrape returned REPRODUCED_USEFUL per frozen rule — replay beat traversal 5/5 paired wins on BOTH panels (speedup_med 37.05x / 8.66x) — but C/B median ratios were 0.92 and 0.73: bare HTTP nearly MATCHES cached-route replay on these sandbox sites, so the measured advantage is over browser traversal, not over plain HTTP. Independent audit recomputed everything zero-mismatch and its adversarial attacks all failed (store provably capture-derived, no doc-hints, no LLM, pacing sleep outside timers) yet gated REVISE/VALIDATED_USEFUL/safe_to_integrate=false on documentary-only RF-1..RF-4. UPDATE (curator batch 2026-08-25 evening): the repair round and acceptance event are now PINNED — run 32873081963 delivered RF-1..RF-4 documentary-only, the auditor honored round-0's predeclared flip condition (still re-running full measurement verification with fresh recomputation code), gate flipped PASS/safe_to_integrate=true at cycle/intel/32873081963/audit@d1b9bb1, and the Director integrated the mechanism into lab/intel@8bfcf85 with binding wording byte-exact; audited routing emitted R-2 advisory to Graph and P-6/P-7 HIGH product signal incl. measured registry trust (~12% malicious skills; 9/11 registries publish unaudited servers). Lane has since advanced to 9f9a757 (cycle-6 MEASUREMENT_INVALID invalid-run documentation via run 32897120087).",
+      "evidence_status": "AUDITED_DURABLE",
       "source_run_id": 32861355080,
+      "additional_source_run_ids": [
+        32873081963
+      ],
       "durable_refs": [
         "git:origin/cycle/intel/32861355080/repro@ac870742b200848033988c11da4cb1b6078215b6 (prereg + raw rows + decision_rule.json)",
         "git:origin/cycle/intel/32861355080/audit@516d99cd (REVISE gate + recompute script)",
-        "git:origin/lab/intel@8bfcf85 (later director integration of the mechanism)",
-        "evidence/run-memory/runs/32861355080.json"
+        "git:origin/cycle/intel/32873081963/audit@d1b9bb1ac7b758d5d601a8d541309706a6a24a00 (PASS gate + cycle5_run32873081963_INTEL_AUDIT.md)",
+        "git:origin/cycle/intel/32873081963/repro@5eaa700b2d0589c8d48ea63a5c72c239516fcc27 (repair-round-1 tree, zero-edit proofs)",
+        "git:origin/lab/intel@8bfcf85 (director integration of the mechanism; curator Git-verified in lab/intel history 2026-08-25T17:29:07Z)",
+        "evidence/run-memory/runs/32861355080.json",
+        "evidence/run-memory/runs/32873081963.json"
       ],
       "actionable_next": [
         "Carry the C/B~1 boundary into Product/Graph claims that reuse route-replay economics: always measure against a curl-level null before crediting the route abstraction.",
-        "When auditing the later accepted cycle, verify the PoC wording preserves the sandbox-vs-production scope limit and does not import vendor headline ratios.",
+        "Spot-check that the accepted VALIDATED_MECHANISMS.json wording preserves the PoC/sandbox scope limit and imports no vendor headline ratios (wording was injected byte-exact from the gate; verify once during a routine lane review).",
+        "Weigh P-7's measured registry-trust numbers (~12% malicious skills; 9/11 registries unaudited servers) in any Runtime Capability-Capsule ingestion/trust-gating design.",
         "Treat quotes.toscrape transient SCHEMA_MISMATCH as environmental unless it recurs; it is documented as an honest failure-mode datum in the frozen-rules handling."
       ],
       "route_to": [
@@ -618,15 +625,22 @@
       "id": "CF-2026-08-25-27",
       "importance": "HIGH",
       "kind": "PROVENANCE_INCIDENT",
-      "summary": "MAROONED PRODUCT DIRECTOR DECISION (run 32866023398, product-loop #5): the fifth Director session fully synthesized and locally committed its PB-001 rev-5 re-authorization + four-critic pre-outcome hardening pack V3-A..V3-G + binding narrative ceiling (commits 440a465 -> clean c875c47, plus persist commit d834791), but the workflow's final push to lab/product was REJECTED non-fast-forward; exit 1 skipped all downstream jobs. Curator Git-check (2026-08-25): c875c47/d834791/440a465 are reachable from NO fetched ref — the decision content survives ONLY in the raw run log. The lane later re-derived independently (rev 6 build-block review, rev 7 re-auth at lab/product e84b11c/d944594), so lane state is healthy, but whether every V3-A..G item persisted verbatim into the durable lineage is unverifiable from Git. This is a NEW work-loss mechanism distinct from permission kills and empty snapshots: real synthesized decision content stranded on ephemeral disk by a missing delivery assertion.",
+      "summary": "MAROONED PRODUCT DIRECTOR DECISION (run 32866023398, product-loop #5): the fifth Director session fully synthesized and locally committed its PB-001 rev-5 re-authorization + four-critic pre-outcome hardening pack V3-A..V3-G + binding narrative ceiling (commits 440a465 -> clean c875c47, plus persist commit d834791), but the workflow's final push to lab/product was REJECTED non-fast-forward; exit 1 skipped all downstream jobs. Curator Git-check (2026-08-25): c875c47/d834791/440a465 are reachable from NO fetched ref — the decision content survives ONLY in the raw run log. This is a NEW work-loss mechanism distinct from permission kills and empty snapshots: real synthesized decision content stranded on ephemeral disk by a missing delivery assertion. UPDATE (curator batch, later the same day): the immediate successor dispatch (Product Supervisor 32870339029 -> run 32870361258) re-derived the decision and LANDED a functionally equivalent pack durably — rev-5 persist ad25538, F0 rescue of the marooned prereg tree UNCHANGED (86b0102/tag pb001-F0), v3 delta pack D1-D8 implemented pre-outcome (c287f00: B3 instruction-card ceiling arm, SGDR+V31 attribution diagnostic with frozen fallback ordering, silent-execution semantics, conjunctive replication + frozen comparator selection + paired deltas, contamination controls, amortization/break-even accounting, content-hashed fixtures + knob manifest, cost_event telemetry) and BUILD-BLOCK disposition 86a59ec (rev 6). Lane state is healthy; the residual unknown narrows to a CLAUSE-LEVEL mapping question: whether every V3-A..G item is represented in the durable D1-D8/v4 wording, verifiable only by diffing against the log-only pack.",
       "evidence_status": "OPERATIONAL_DIAGNOSTIC",
       "source_run_id": 32866023398,
+      "additional_source_run_ids": [
+        32870339029,
+        32870361258
+      ],
       "durable_refs": [
         "evidence/run-memory/runs/32866023398.json (sole durable summary of the marooned pack)",
-        "git:origin/lab/product history ad25538 -> 86b0102 -> 86a59ec -> e84b11c (independent rev-6/rev-7 recovery lineage)"
+        "git:origin/lab/product@ad25538 ('Product Director synthesis 32870361258', rev-5 persist)",
+        "git:origin/lab/product@86b0102 + tag pb001-F0 (F0 rescue of marooned prereg tree)",
+        "git:origin/cycle/product/32870361258/architect@c287f00 (v3 addendum implementing Director delta pack D1-D8, pre-outcome)",
+        "git:origin/lab/product@86a59ec -> e84b11c -> d944594 (BUILD-BLOCK disposition rev 6 and continuation)"
       ],
       "actionable_next": [
-        "PRODUCT diff-audit: verify each directed_pre_outcome_revision_v3 item (V3-A..V3-G + narrative ceiling) is represented in the durable rev>=7 lineage; re-adopt or formally drop any that vanished.",
+        "PRODUCT clause-mapping audit: verify each directed_pre_outcome_revision_v3 item (V3-A..V3-G + narrative ceiling; source: runs/32866023398.json summary of the log-only pack) has a counterpart in the durable D1-D8 addendum + v4 directive; re-adopt or formally drop any that vanished; close this finding once done.",
         "INFRA: add post-push delivery assertion + git pull --rebase retry on non-fast-forward to every lane persist step (joins zero-diff guard proposal)."
       ],
       "route_to": [
@@ -656,6 +670,59 @@
       "route_to": [
         "RUNTIME",
         "CTO"
+      ]
+    },
+    {
+      "id": "CF-2026-08-25-29",
+      "importance": "HIGH",
+      "kind": "RESEARCH_RADAR",
+      "summary": "PB-001's SGDR-fused front-door negative ORIGINATED in run 32870361258 (#6, builder session ~18:34-18:50Z) — provenance refinement ahead of run 32886859788's re-derivation: retrieval@1 over the REAL built KB on the 8 trained-coverage panel tasks = stacked SGDR(alpha=0.4 state-summary)⊕V31 front door 3/8 < primitive lexical scorer 7/8 < V31-canonicalized desc-only ranking 8/8; ground truth = producer-provenance fragment ids (training-side); the single sanctioned assembly/plumbing repair round found NO defect (seams S1-S6 pass; vendored-scorer fixtures reproduce Intel's accepted numbers exactly: 25/74, 25/74, 36/74, 11 wins/0 reversals; V31 fixture 6/8 with 0 false accepts) so failures localize to the fused mechanism itself (alpha term selects context-matching-but-goal-wrong fragments under shifted entries). Frozen addendum rule D2.5 => MEASUREMENT_INVALID_BEFORE_OUTCOME; sixth-session Director disposed one-shot front-door REVERSION to V31-canonicalized desc-only ranking with PB-001 explicitly NOT benchmarked (zero outcome rows anywhere, curator-corroborated) plus BF-1 degeneracy disclosure (task 10's anchor satisfied at entry) and a NEW transcription defect found by that session (stale KB hash tail ...c0a0695b... in product_beta_build.json manifest_hashes matching no committed artifact; authoritative ...f89abd8f...). All disposition content durable in docs/PRODUCT_LEDGER.md at lab/product@86a59ec. Residual durability gap: run #6's builder freeze chain (fc24c86 -> 61c42d4) is NOT an ancestor of lab/product HEAD; it reached run #8's lineage only as copy-commit 55c56d6 ('sibling builder tree 61c42d4 landed UNCHANGED'), so CF-2026-08-25-19's pending merge also closes this gap.",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "source_run_id": 32870361258,
+      "durable_refs": [
+        "git:origin/lab/product@86a59ec (BUILD-BLOCKED review ledger: D2 values, BF-1/BF-2 disclosures, stale-hash defect, v4 directive)",
+        "git:origin/cycle/product/32870361258/builder@fc24c86 / @61c42d4 (WP-0..WP-7 implementation + F1 freeze + Phase-A live evidence)",
+        "git:origin/cycle/product/32870361258/architect@c287f00 (D1-D8 pre-outcome addendum)",
+        "evidence/run-memory/runs/32870361258.json"
+      ],
+      "actionable_next": [
+        "Route to INTEL as the second mechanism-localizing data point on SGDR transfer limits: fused alpha=0.4 state-summary ranking underperformed both primitive lexical and V31-canonicalized desc-only on this store/panel (joins CF-21's D2 routing; PoC verdict untouched).",
+        "PRODUCT/INFRA: after CF-19's merge lands, assert compute_verdict.py exists at lab/product HEAD (cheap post-merge check) and confirm the stale-hash correction-with-disclosure was executed by the next builder commit.",
+        "Keep treating PB-001 as UNBENCHMARKED until provider rows exist; the D2 event is pre-outcome instrument validation, not a beta result."
+      ],
+      "route_to": [
+        "PRODUCT",
+        "INTEL",
+        "CTO",
+        "INFRA"
+      ]
+    },
+    {
+      "id": "CF-2026-08-25-30",
+      "importance": "MEDIUM",
+      "kind": "STRUCTURAL_FIX",
+      "summary": "Attribution infrastructure already partially exists — extend it rather than build new (strengthens CF-02/CF-17/CF-18): (1) Product Supervisor run 32870339029 POSITIVELY ATTRIBUTED its recovery dispatch in-log ('Product continuity recovery: run 32866023398 ended failure with an explicit infrastructure/control-plane signature' + successor URL for run 32870361258) — proof that supervisor dispatches CAN be self-documenting when workflows print trigger+target; gap: it does not log WHICH regex matched (audit requires grepping the triggering run's own log). (2) The Research Program Supervisor (program-supervisor.yml) maintains machine-readable succession receipts COMMITTED TO MAIN (.spider/program-receipts/<lane>-<completed_by>.json; PENDING/IN_FLIGHT/CONFIRMED lifecycle; failed/cancelled/vanished successor clears the receipt instead of consuming the recommendation; SOURCE_RUN_ID mismatch refusal; zero-job-rerun cancellation; anti-gaming dispatch note 'Do not reinterpret this note as a demand for a positive result'). Run 32874583480 shows Physics #8's WP-006 acceptance chain (run 32866107906) was dispatched through exactly this mechanism for program 'within-site-dynamics-interventional'.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "source_run_id": 32874583480,
+      "additional_source_run_ids": [
+        32870339029,
+        32873774871
+      ],
+      "durable_refs": [
+        "git:.github/workflows/program-supervisor.yml@main (receipt machinery source)",
+        "git:.github/workflows/product-supervisor.yml@main / intel-supervisor.yml@main (recovery policies incl. REVISE auto-repair and BLOCKED stop)",
+        "evidence/run-memory/runs/32870339029.json",
+        "evidence/run-memory/runs/32874583480.json (incl. transcribed 16:52:57Z remote-branch inventory)"
+      ],
+      "actionable_next": [
+        "Extend program-receipt-style committed receipts to: audit-PASS-pending-Director-integration transitions (CF-17), supervisor cancellations/dedupes (CF-18), and hygiene deletions — one receipt pattern closes all three attribution gaps.",
+        "Make signature-matching supervisors log the matched pattern name alongside the warning (one-line change; removes post-hoc log archaeology).",
+        "Give loop workflows a default git identity to eliminate the recurring self-healed 'fatal: empty ident name' friction observed in runs 32866023398/32870361258/32873081963."
+      ],
+      "route_to": [
+        "INFRA",
+        "CTO",
+        "RUNTIME"
       ]
     }
   ]

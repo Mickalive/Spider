@@ -1,0 +1,103 @@
+{
+  "run_id": 32873081963,
+  "workflow_name": "SPIDER Intel Research Lane",
+  "workflow_path": ".github/workflows/intel-loop.yml",
+  "status": "completed",
+  "conclusion": "success",
+  "head_sha": "373c1b0f2f3b7efd62b1cbfb63dc12c643ed0f2b",
+  "created_at": "2026-08-25T16:37:36Z",
+  "completed_at": "2026-08-25T17:29:50Z",
+  "run_number": 7,
+  "event": "workflow_dispatch",
+  "head_branch": "main",
+  "display_title": "SPIDER Intel Research Lane",
+  "actor": "github-actions[bot]",
+  "cycle_refs": {
+    "scout": "56310b67cacbe6c02fa4c42032ec732d60f8b33f (carryforward of run 32861355080 scout; no new scouting in this repair round)",
+    "repro": "5eaa700b2d0589c8d48ea63a5c72c239516fcc27",
+    "audit": "d1b9bb1ac7b758d5d601a8d541309706a6a24a00"
+  },
+  "job_summary": {
+    "cycle": "Intel cycle-5 SAME-CYCLE REPAIR round 1 (of run 32861355080's REVISE gate RF-1..RF-4)",
+    "sessions": [
+      { "name": "INTEL SCOUT", "window_utc": "16:37:42-16:38:0x", "approx_minutes": 1, "outcome": "branch carryforward only" },
+      { "name": "INTEL REPRODUCER", "window_utc": "16:38-16:54", "approx_minutes": 16, "outcome": "RF-1..RF-4 documentary-only fixes delivered + zero-code-edit proof" },
+      { "name": "INTEL INDEPENDENT AUDITOR", "window_utc": "16:54-17:13", "approx_minutes": 19, "outcome": "gate flipped REVISE->PASS per round-0 predeclared flip condition" },
+      { "name": "INTEL RESEARCH DIRECTOR", "window_utc": "17:14-17:29", "approx_minutes": 15, "outcome": "integrated lab/intel cc49ba3..8bfcf85; set cycle-6 mission" }
+    ],
+    "wall_clock_total_approx_minutes": 52,
+    "artifacts": 0
+  },
+
+  "evidence_class": "INTEL",
+
+  "durable_refs": [
+    "git:origin/cycle/intel/32873081963/audit@d1b9bb1 (reports/intel/audit/cycle5_run32873081963_INTEL_AUDIT.md + results/intel/audit/CYCLE_32873081963_INTEL_GATE.json, gate=PASS/safe_to_integrate=true/mechanism_status=VALIDATED_USEFUL/ceiling=PROOF_OF_CONCEPT; curator Git-verified on remote)",
+    "git:origin/cycle/intel/32873081963/repro@5eaa700b (repair-round-1 tree incl. cycle5_report.md and zero-edit proofs; curator Git-verified)",
+    "git:origin/lab/intel@8bfcf85 ('Intel cycle 5 director integration: accept audited Unbrowse route-capture/replay ladder ... audit PASS run 32873081963'; parent cc49ba3; curator Git-verified in origin/lab/intel history at 2026-08-25T17:29:07Z)",
+    "git:origin/lab/intel docs/VALIDATED_MECHANISMS.json (second entry injected byte-exact from the binding gate wording)"
+  ],
+
+  "findings": [
+    {
+      "kind": "RESULT",
+      "summary": "ACCEPTANCE EVENT for the Unbrowse mechanism now pinned to THIS run: independent auditor verified the four documentary fixes (RF-1 missing cycle5_report.md created; stale SGDR-era state files refreshed; candidate hygiene; zero-frozen-path-change proof via git tree comparison) AND still re-ran full measurement verification with fresh recomputation code - then flipped the round-0 REVISE to gate=PASS / mechanism_status=VALIDATED_USEFUL / safe_to_integrate=true, ceiling PROOF OF CONCEPT, honoring round-0's own predeclared flip condition ('documentary-only delivery with zero changes to frozen code/data/results flips to PASS'). Director integrated into lab/intel@8bfcf85 with the auditor's binding maximum_defensible_wording adopted byte-exactly.",
+      "evidence_status": "AUDITED_DURABLE",
+      "importance": "HIGH",
+      "route_to": ["CTO", "INTEL", "PRODUCT"]
+    },
+    {
+      "kind": "RESULT",
+      "summary": "Accepted mechanism 'unbrowse-route-capture-replay-ladder' (passive capture -> first-party JSON filtering -> parameterized pointer-only route records -> direct HTTP replay), established at PoC ceiling: discovery 2/2, zero-browser-action replay at 100% output equivalence, median 37.05x/8.66x wall-clock vs browser traversal; no-silent-substitution core held under AUTH_FAIL/STALE_TTL/HTTP_ERROR stress. Preserved negatives travel with the wording (incl. the bare-HTTP C/B~1 boundary from round 0 - route abstraction adds little over plain HTTP on these sandbox sites). This resolves CF-2026-08-25-25's open pointer 'audit PASS run 3287308xxx' -> 32873081963.",
+      "evidence_status": "AUDITED_DURABLE",
+      "importance": "HIGH",
+      "route_to": ["INTEL", "PRODUCT", "GRAPH"]
+    },
+    {
+      "kind": "RESULT",
+      "summary": "Audited cross-lane routing emitted by the Director: GRAPH MEDIUM advisory R-2 in INTEL_TO_GRAPH.md (route records as the §10 APIs/direct-routes layer behind a store flag; pointer-only semantics as a pass/fail gate; addressing arm targeting the prefix-artifact failure mode; no Graph files touched); PRODUCT HIGH signal CYCLE_32873081963.json with P-6 (validated execution semantics) and P-7 registry-trust measurement (~12% malicious skills; 9/11 registries publish unaudited servers) in INTEL_PRODUCT_INFRA.md; PHYSICS LOW untouched by design.",
+      "evidence_status": "AUDITED_DURABLE",
+      "importance": "MEDIUM",
+      "route_to": ["GRAPH", "PRODUCT", "CTO"]
+    },
+    {
+      "kind": "RESULT",
+      "summary": "Cycle-6 mission set in state/intel_loop.json with continue=true: multi-host stress test of the ladder (>=4 heterogeneous sandbox APIs) under fresh preregistration, verdict recorded either way, stop-condition fallback if <4 qualifying hosts exist. Rationale: the binding wording itself defines what is unknown next (one host only, untested natural TTL elapse, untested induced schema mutation). NOTE: lane has since advanced past this record's slice - origin/lab/intel@9f9a757 (cycle-6 director integration, 22:48:38Z) accepted an audited MEASUREMENT_INVALID invalid-run documentation (audit PASS run 32897120087, outside this batch); cycle-6 outcome belongs to that lineage, not here.",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "importance": "MEDIUM",
+      "route_to": ["CTO", "INTEL"]
+    },
+    {
+      "kind": "OTHER",
+      "summary": "Reusable repair-hygiene patterns executed and log-visible: sha256sum -c pre-edit integrity check immediately after checkout and BEFORE any edit (18/18 OK); evaluator regeneration proven byte-identical (retrieval_eval.json sha256 342ec130d0a05…); verbatim_copy_check 10/10 code + 8/8 raw-evidence files identical to round-0 tree; binding auditor wording copied with explicit provenance note rather than re-authored.",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "importance": "LOW",
+      "route_to": ["INTEL", "RUNTIME"]
+    },
+    {
+      "kind": "COST",
+      "summary": "~52min total; repair rounds reuse scout carryforward (~1m) so full-cycle overhead concentrates in reproducer/auditor/director (~50m). One self-healed 'fatal: empty ident name' friction in the reproducer (16:52:26Z), same benign signature as product-loop #6.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "LOW",
+      "route_to": ["INFRA"]
+    }
+  ],
+
+  "failure_signatures": [
+    "None material (success end-to-end). Watch item: same self-healing 'fatal: empty ident name' git friction as other lanes; a workflow-default identity would remove it."
+  ],
+
+  "research_opportunities": [
+    "P-7's measured registry-trust numbers (~12% malicious skills; 9/11 registries publishing unaudited servers) are an audited external fact directly relevant to Runtime capsule-ingestion trust gating and to any future Capability Capsule registry design.",
+    "R-2 gives Graph a concrete, audited candidate for its APIs/direct-routes knowledge layer - but Graph adoption still requires its own preregistered addressing program (as the G-H5 director already queued)."
+  ],
+
+  "already_captured_elsewhere": [
+    "Round-0 origin measurement + boundary condition: evidence/run-memory/runs/32861355080.json and CF-2026-08-25-25",
+    "Accepted-state wording lives on lab/intel@8bfcf85 (linked, not reinterpreted here)"
+  ],
+
+  "distillation_complete": true,
+  "safe_to_prune": false,
+  "pruning_rationale": "Claim-bearing accepted-integration run: the flip-to-PASS decision, the auditor's recomputation narrative, and the director's routing rationale are part of the acceptance provenance for lab/intel@8bfcf85. Gate/report content is durable on cycle branches, but the log uniquely documents that frozen-path integrity was verified by tree comparison BEFORE measurement re-verification, and carries the session-level reasoning an auditor or historian would need. Conservative rule applied."
+}

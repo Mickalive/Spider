@@ -1,0 +1,80 @@
+{
+  "run_id": 32870339029,
+  "workflow_name": "SPIDER Product Supervisor",
+  "workflow_path": ".github/workflows/product-supervisor.yml",
+  "status": "completed",
+  "conclusion": "success",
+  "head_sha": "373c1b0f2f3b7efd62b1cbfb63dc12c643ed0f2b",
+  "created_at": "2026-08-25T16:10:23Z",
+  "completed_at": "2026-08-25T16:10:38Z",
+  "run_number": 3,
+  "event": "schedule",
+  "head_branch": "main",
+  "display_title": "SPIDER Product Supervisor",
+  "actor": "Mickalive",
+  "job_summary": {
+    "job_name": "Ensure Product optimization continuity",
+    "conclusion": "success",
+    "runner": "ubuntu-latest",
+    "duration_seconds_approx": 15,
+    "key_step": "Recover Product work without hiding real product failures (16:10:28Z -> 16:10:35Z)",
+    "token_permissions": { "Actions": "write", "Contents": "read", "Metadata": "read" },
+    "artifacts": 0
+  },
+
+  "evidence_class": "OPERATIONAL",
+
+  "durable_refs": [
+    "git:.github/workflows/product-supervisor.yml@main (the exact recovery policy executed; embedded script is durable workflow source)",
+    "evidence/run-memory/runs/32870361258.json (the dispatched successor, fully distilled)",
+    "evidence/run-memory/runs/32866023398.json (the failure that triggered recovery; its raw Actions log still exists and remains the place to audit WHICH regex matched)"
+  ],
+
+  "findings": [
+    {
+      "kind": "RESULT",
+      "summary": "POSITIVE DISPATCH ATTRIBUTION (rare for supervisor-class runs): this supervisor's ::warning:: line names both trigger and target - 'Product continuity recovery: run 32866023398 ended failure with an explicit infrastructure/control-plane signature. Dispatching Product Director/optimization pipeline on current main.' followed by the dispatched run URL https://github.com/Mickalive/Spider/actions/runs/32870361258. The origin of product-loop #6 is therefore provably this scheduled supervisor firing, closing the 'dispatcher unattributable' gap noted for cancelled-run classes elsewhere.",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "importance": "MEDIUM",
+      "route_to": ["INFRA", "CTO"]
+    },
+    {
+      "kind": "RESULT",
+      "summary": "Recovery-policy behavior observed once: after detecting latest product-loop conclusion=failure (the marooned non-fast-forward run 32866023398), the supervisor greps that run's log against an explicit infrastructure/control-plane regex set (external_directory / Missing product_beta_architecture state / runner shutdown|lost communication / SPIDER_TRANSIENT_OX_EXHAUSTED / OpenCode-Ox network signatures / ECONNRESET..ETIMEDOUT / 'SPIDER control-plane overlay restoration left residue'), matched, and re-dispatched product-loop on main because authorized continuation state existed. Design intent enforced in code: a clean beta loss, audit BLOCKED or ordinary build/test failure must NOT be auto-recovered ('Supervisor refuses to hide a real product/build failure'). Which single regex matched is NOT determinable from this side of the log.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "MEDIUM",
+      "route_to": ["INFRA", "RUNTIME"]
+    },
+    {
+      "kind": "LIMIT",
+      "summary": "Classification opacity: the supervisor logs THAT a signature class matched but not WHICH pattern matched. Auditing why the marooned push-rejection failure (32866023398) qualified as 'infrastructure' requires grepping 32866023398's own raw log (still retained; that run is safe_to_prune=false). If that log is ever pruned, the classification rationale becomes unknowable. Suggest logging the matched pattern explicitly (joins the run-id-attributed receipt proposal CF-02).",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "LOW",
+      "route_to": ["INFRA"]
+    },
+    {
+      "kind": "COST",
+      "summary": "~15s wall clock total, zero writes (Contents: read token), one gh run list sweep + one log fetch + one workflow dispatch. Negligible orchestration cost; consistent with supervisor heartbeats being cheap relative to the ~5.6 runs/hour orchestration volume concern (CF-04).",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "LOW",
+      "route_to": ["INFRA"]
+    }
+  ],
+
+  "failure_signatures": [
+    "None in this run (success). Watched-for failure mode documented in-script: '::warning::Could not delete run'-style API rejections do not apply here; relevant future signature is a supervisor dispatch whose successor run never appears (no reconciliation loop exists in product-supervisor.yml unlike program-supervisor.yml receipts)."
+  ],
+
+  "research_opportunities": [
+    "Product Supervisor fires every schedule tick and re-derives lane state from scratch; the program-supervisor's committed-receipt pattern (.spider/program-receipts on main, see run 32874583480) would let supervisors persist dispatch/recovery decisions instead of leaving them only in prunable logs."
+  ],
+
+  "already_captured_elsewhere": [
+    "The dispatched successor's full substance: evidence/run-memory/runs/32870361258.json",
+    "The triggering failure's full substance: evidence/run-memory/runs/32866023398.json"
+  ],
+
+  "distillation_complete": true,
+  "safe_to_prune": true,
+  "pruning_rationale": "Pure orchestration heartbeat, fully distilled: the one unique fact (it dispatched product-loop #6 after classifying 32866023398's failure as infra-signature) is recorded here and cross-referenced in the successor's record; the executed policy text is durable workflow source at main; the unmatched-pattern detail remains auditable via run 32866023398's own retained log. No cycle/* branch, no claim-bearing artifact."
+}

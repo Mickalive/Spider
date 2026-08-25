@@ -1,0 +1,77 @@
+{
+  "run_id": 32874583480,
+  "workflow_name": "SPIDER Research Program Supervisor",
+  "workflow_path": ".github/workflows/program-supervisor.yml",
+  "status": "completed",
+  "conclusion": "success",
+  "head_sha": "373c1b0f2f3b7efd62b1cbfb63dc12c643ed0f2b",
+  "created_at": "2026-08-25T16:52:52Z",
+  "completed_at": "2026-08-25T16:53:04Z",
+  "run_number": 36,
+  "event": "schedule",
+  "head_branch": "main",
+  "display_title": "SPIDER Research Program Supervisor",
+  "actor": "Mickalive",
+  "job_summary": {
+    "job_name": "Supervise Director-recommended programs",
+    "conclusion": "success",
+    "runner": "ubuntu-latest",
+    "duration_seconds_approx": 12,
+    "key_step": "Checkout main (fetch-depth 0) -> reconcile Graph+Physics program succession receipts (16:52:57-16:53:01Z); no writes",
+    "token_permissions": { "Actions": "write", "Contents": "write", "Metadata": "read" },
+    "artifacts": 0
+  },
+
+  "evidence_class": "OPERATIONAL",
+
+  "durable_refs": [
+    "git:.github/workflows/program-supervisor.yml@main (receipt machinery durable in workflow source: .spider/program-receipts committed to main with 'state: reconcile research-program succession' + pull --rebase; receipt lifecycle PENDING/IN_FLIGHT/CONFIRMED; failed/cancelled/vanished successor clears the receipt so the recommendation is NOT consumed)",
+    "git:origin/lab/physics state/physics_loop.json (program_status=COMPLETE + next_program recommendation consumed here; successor receipt naming 32866107906)",
+    "evidence/run-memory/runs/32866107906.json (the successor run referenced by the physics receipt)"
+  ],
+
+  "findings": [
+    {
+      "kind": "RESULT",
+      "summary": "PROVENANCE LINKAGE: at 16:53:01Z the supervisor's physics receipt reconciliation logged 'successor run 32866107906 is still in_progress for program within-site-dynamics-interventional'. This establishes that Physics Lane #8 (run 32866107906 - the WP-006 five-gate acceptance chain) was dispatched through THIS supervisor's Director-recommended program-succession mechanism for the program id 'within-site-dynamics-interventional', i.e. the terminal WP-006 stewardship session originated as a recorded program succession, not an unattributed dispatch.",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "importance": "MEDIUM",
+      "route_to": ["CTO", "PHYSICS"]
+    },
+    {
+      "kind": "RESULT",
+      "summary": "Graph lane: 'a genuine lane run is already active/queued; schedule will retry after it becomes idle.' A graph-loop run was live or queued at 16:52:57Z (identity not resolvable from this log alone; the later 18:51Z product-run fetch inventory shows cycle/graph/32880179571/* branches, consistent with a graph-inheritance-generalization cycle being in flight around then). No duplicate dispatch fired - correct dedupe.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "LOW",
+      "route_to": ["INFRA"]
+    },
+    {
+      "kind": "OTHER",
+      "summary": "PRIOR ART for CF-2026-08-25-17's pending-integration pointer proposal ALREADY EXISTS at program level: this supervisor maintains machine-readable, Git-committed succession receipts (.spider/program-receipts/<lane>-<completed_by>.json on main) with an IN_FLIGHT/CONFIRMED lifecycle, refuses mismatched consumption (SOURCE_RUN_ID != completed_by), clears receipts when a successor failed/cancelled/vanished ('a failed/cancelled/timed-out successor does NOT consume the program recommendation'), cancels zero-job re-opened reruns of completed sources, and dispatches with an explicit anti-gaming note ('Do not reinterpret this note as a demand for a positive result'). Extending this pattern to audit-PASS-pending-Director-integration transitions would be incremental, not greenfield.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "MEDIUM",
+      "route_to": ["CTO", "INFRA"]
+    },
+    {
+      "kind": "OTHER",
+      "summary": "Full remote-branch inventory captured at 2026-08-25T16:52:57Z (second surviving point-in-time snapshot after run 32864697417's 15:15:58Z inventory). Verbatim ref list: cycle/32670239235/{audit,director,graph,physics}; cycle/graph/32676576613/{audit,team}; cycle/graph/32684818422/team; cycle/graph/32689296167/{audit,audit-attempt-1,team,team-attempt-1}; cycle/graph/32776369696/{audit,audit-attempt-1,team,team-attempt-1}; cycle/graph/32782331702/{audit,audit-attempt-1,team,team-attempt-1}; cycle/graph/32783797303/{audit,audit-attempt-1,team,team-attempt-1}; cycle/graph/32793580374/{audit,audit-attempt-1..8,team,team-attempt-1}; cycle/graph/32861557668/{team,team-attempt-1} [NOTE: no 32861557668 audit refs in this snapshot]; cycle/intel/32781482957/{audit,repro,scout}; cycle/intel/32792931901/{audit,repro,scout}; cycle/intel/32796176172/{audit,repro,scout}; cycle/intel/32800296360/{audit,repro,scout}; cycle/intel/32809100696/scout; cycle/intel/32861355080/{audit,repro,scout}; cycle/intel/32873081963/scout; cycle/intel/repair3/repro; cycle/physics/32676578274/{audit,team}; cycle/physics/32682634851/team; cycle/physics/32689298051/{audit,audit-attempt-1,team,team-attempt-1}; cycle/physics/32776372437/{audit,audit-attempt-1,team,team-attempt-1}; cycle/physics/32793165981/{audit,audit-attempt-1,team,team-attempt-1}; cycle/physics/32799587656/{audit,audit-attempt-1,team,team-attempt-1}; cycle/physics/32860596387/{audit,audit-attempt-1,team,team-attempt-1}; cycle/product/32799261473/{architect,builder}; cycle/product/32820217763/architect; cycle/product/32851946087/architect; cycle/product/32861115761/{architect,builder}; cycle/product/pb001-architect-v3; cycle/runtime/32864270667/{team,team-attempt-1}; infra/parallel-audit-lanes; lab/{cto,graph,intel,physics,product,runtime}; main; opencode/dispatch-{49582a-20260823071610,d55dbe-20260823085742,ff5c0f-20260823071951}; spider/lab-v2-audited; spider/physics-cycle-32670239235; tmp-orchestration-fix; tmp-orchestration-fix-staged. Tags: pb001-F0 (pushed by run 32870361258's architect ~50s earlier). Notably ABSENT at this instant: cycle/product/32870361258/* (its persist pushed seconds later), cycle/intel/32873081963/{repro,audit}, cycle/graph/32880179571/*, cycle/intel/32878215017/*, and any lab/frontier/* branch.",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "importance": "MEDIUM",
+      "route_to": ["CTO", "INFRA"]
+    }
+  ],
+
+  "failure_signatures": [],
+
+  "research_opportunities": [
+    "Receipts currently cover only program-succession transitions; extending them to audit-gate/PASS-pending-integration and supervisor cancellations would close the remaining attribution gaps enumerated in CF-02/CF-17/CF-18 without new infrastructure concepts."
+  ],
+
+  "already_captured_elsewhere": [
+    "Physics successor substance: evidence/run-memory/runs/32866107906.json"
+  ],
+
+  "distillation_complete": true,
+  "safe_to_prune": true,
+  "pruning_rationale": "Pure orchestration reconciliation with both lane decisions logged and distilled above; the executed policy is durable workflow source at main; the unique residue (physics-succession linkage + full 16:52:57Z branch inventory) has been transcribed into this record following the precedent of run 32864697417. No cycle/* branch, nothing claim-bearing."
+}
