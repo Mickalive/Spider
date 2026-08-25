@@ -20,6 +20,8 @@ CONTROL_PATHS=(
   ".opencode/agents"
   "docs/roles"
   "SPIDER_MASTER_PROMPT.md"
+  "SPIDER_ARCHITECTURE_V2.md"
+  "directives/CAPABILITY_CAPSULE.md"
   "directives/AUDITOR.md"
   "directives/LANE_DIRECTOR.md"
   "directives/LAB_DIRECTOR.md"
@@ -27,17 +29,37 @@ CONTROL_PATHS=(
   "directives/INTEL_AUDITOR.md"
   "directives/INTEL_DIRECTOR.md"
   "directives/PRODUCT_DIRECTOR.md"
+  "directives/PRODUCT_OPTIMIZATION.md"
   "intel/competitor_seed.json"
 )
+
+restore_path_from_head() {
+  local path="$1"
+  git reset -q HEAD -- "$path" 2>/dev/null || true
+  if git cat-file -e "HEAD:$path" 2>/dev/null; then
+    git checkout -q -- "$path" 2>/dev/null || true
+  else
+    rm -rf -- "$path"
+  fi
+  git clean -fdq -- "$path" 2>/dev/null || true
+}
 
 restore_control_plane() {
   if [[ "$CONTROL_ACTIVE" != true ]]; then
     return 0
   fi
-  git reset -q HEAD -- "${CONTROL_PATHS[@]}" 2>/dev/null || true
-  git checkout -q -- "${CONTROL_PATHS[@]}" 2>/dev/null || true
-  git clean -fdq -- "${CONTROL_PATHS[@]}" 2>/dev/null || true
+  local path
+  for path in "${CONTROL_PATHS[@]}"; do
+    restore_path_from_head "$path"
+  done
   CONTROL_ACTIVE=false
+  local residue
+  residue="$(git status --porcelain -- "${CONTROL_PATHS[@]}" 2>/dev/null || true)"
+  if [[ -n "$residue" ]]; then
+    echo "::error::SPIDER control-plane overlay restoration left residue:" >&2
+    printf '%s\n' "$residue" >&2
+    return 1
+  fi
 }
 
 stop_children() {
@@ -57,7 +79,7 @@ stop_children() {
 
 cleanup() {
   stop_children
-  restore_control_plane
+  restore_control_plane || true
   rm -f "$LOG" "$STALL_FLAG"
 }
 
@@ -81,7 +103,6 @@ prepare_control_plane() {
   if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
     return 0
   fi
-
   local dirty
   dirty="$(git status --porcelain -- "${CONTROL_PATHS[@]}" 2>/dev/null || true)"
   if [[ -n "$dirty" ]]; then
@@ -89,43 +110,49 @@ prepare_control_plane() {
     printf '%s\n' "$dirty" >&2
     return 0
   fi
-
   if ! git fetch -q origin main; then
     echo "::warning::Could not fetch origin/main control plane; using branch-local role definitions for this call." >&2
     return 0
   fi
-
   if ! git checkout -q origin/main -- "${CONTROL_PATHS[@]}"; then
     echo "::warning::Could not overlay full origin/main control plane; restoring branch-local files." >&2
-    git reset -q HEAD -- "${CONTROL_PATHS[@]}" 2>/dev/null || true
-    git checkout -q -- "${CONTROL_PATHS[@]}" 2>/dev/null || true
-    git clean -fdq -- "${CONTROL_PATHS[@]}" 2>/dev/null || true
+    CONTROL_ACTIVE=true
+    restore_control_plane || true
     return 0
   fi
-
   CONTROL_ACTIVE=true
   echo "SPIDER control plane: using current origin/main agent definitions and formal job descriptions for this invocation."
+}
+
+stage_control_bundle() {
+  local root="/tmp/spider_control"
+  mkdir -p "$root/roles" "$root/directives"
+  [[ -f SPIDER_MASTER_PROMPT.md ]] && cp SPIDER_MASTER_PROMPT.md "$root/SPIDER_MASTER_PROMPT.md"
+  [[ -f SPIDER_ARCHITECTURE_V2.md ]] && cp SPIDER_ARCHITECTURE_V2.md "$root/SPIDER_ARCHITECTURE_V2.md"
+  if [[ -d docs/roles ]]; then
+    cp docs/roles/*.md "$root/roles/" 2>/dev/null || true
+  fi
+  if [[ -d directives ]]; then
+    cp directives/*.md "$root/directives/" 2>/dev/null || true
+  fi
+  echo "SPIDER control bundle staged at $root."
 }
 
 monitor_network_stall() {
   local pid="$1"
   local last_size=0
-  local last_change
-  local now size
+  local last_change now size
   local network_pending=false
   local network_seen_at=0
   local network_size=0
   last_change=$(date +%s)
-
   while kill -0 "$pid" 2>/dev/null; do
     now=$(date +%s)
     size=$(stat -c%s "$LOG" 2>/dev/null || echo 0)
-
     if [[ "$size" -ne "$last_size" ]]; then
       last_size="$size"
       last_change="$now"
     fi
-
     if [[ "$network_pending" == false ]] && grep -Eiq "$NETWORK_RE" "$LOG" 2>/dev/null; then
       network_pending=true
       network_seen_at="$now"
@@ -133,11 +160,8 @@ monitor_network_stall() {
       last_change="$now"
       echo "::warning::OpenCode/Ox network signature detected; watching for a ${NETWORK_STALL_SECONDS}s stall before aborting the call." >&2
     elif [[ "$network_pending" == true && "$size" -gt "$network_size" && $((now - network_seen_at)) -ge 30 ]]; then
-      # Sustained output after the network error strongly suggests the process
-      # recovered. Clear the pending stall condition rather than killing valid work.
       network_pending=false
     fi
-
     if [[ "$network_pending" == true && $((now - last_change)) -ge "$NETWORK_STALL_SECONDS" ]]; then
       echo "SPIDER_NETWORK_STALL_ABORT" > "$STALL_FLAG"
       echo "::warning::OpenCode/Ox produced a network error and then no output for ${NETWORK_STALL_SECONDS}s; terminating only this stalled call so the bounded retry loop can proceed." >&2
@@ -148,56 +172,50 @@ monitor_network_stall() {
       fi
       return 0
     fi
-
     sleep 5
   done
 }
 
 prepare_control_plane
+stage_control_bundle
 
 for ((attempt = 1; attempt <= MAX_ATTEMPTS; attempt++)); do
   : > "$LOG"
   : > "$STALL_FLAG"
   echo "OpenCode/Ox attempt ${attempt}/${MAX_ATTEMPTS}."
-
-  # Process substitution keeps live logs visible while giving us the real
-  # OpenCode PID, so the monitor can terminate a genuinely stalled call only.
   "$REAL" "$@" > >(tee "$LOG") 2>&1 &
   CHILD_PID=$!
   monitor_network_stall "$CHILD_PID" &
   MONITOR_PID=$!
-
   wait "$CHILD_PID" 2>/dev/null
   rc=$?
   CHILD_PID=""
-
   if [[ -n "$MONITOR_PID" ]] && kill -0 "$MONITOR_PID" 2>/dev/null; then
     kill "$MONITOR_PID" 2>/dev/null || true
   fi
   wait "$MONITOR_PID" 2>/dev/null || true
   MONITOR_PID=""
   sleep 1
-
   if grep -Fq 'SPIDER_NETWORK_STALL_ABORT' "$STALL_FLAG" 2>/dev/null; then
     rc=75
   fi
-
   if [[ "$rc" -eq 0 ]]; then
+    restore_control_plane || exit 76
     exit 0
   fi
-
   if ! grep -Eiq "$NETWORK_RE" "$LOG" 2>/dev/null && ! grep -Fq 'SPIDER_NETWORK_STALL_ABORT' "$STALL_FLAG" 2>/dev/null; then
+    restore_control_plane || true
     echo "::error::SPIDER_OX_NONTRANSIENT exit=$rc; watchdog will not retry this failure." >&2
     exit "$rc"
   fi
-
   if [[ "$attempt" -eq "$MAX_ATTEMPTS" ]]; then
+    restore_control_plane || true
     echo "::error::SPIDER_TRANSIENT_OX_EXHAUSTED attempts=$MAX_ATTEMPTS exit=$rc" >&2
     exit "$rc"
   fi
-
   echo "::warning::Transient OpenCode/Ox outage; retrying in ${RETRY_DELAY}s." >&2
   sleep "$RETRY_DELAY"
 done
 
+restore_control_plane || true
 exit 1
