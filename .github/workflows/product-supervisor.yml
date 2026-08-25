@@ -35,13 +35,32 @@ jobs:
         run: |
           set -euo pipefail
 
-          active_for() {
-            gh run list --repo "$GITHUB_REPOSITORY" --workflow "$1" --limit 30 \
-              --json status --jq '[.[] | select(.status != "completed")] | length' 2>/dev/null || echo 0
+          runs_for() {
+            gh run list --repo "$GITHUB_REPOSITORY" --workflow "$1" --limit 50 \
+              --json databaseId,status,conclusion,createdAt 2>/dev/null || echo '[]'
           }
 
-          ACTIVE_MAIN=$(active_for product-loop.yml)
-          ACTIVE_REPAIR=$(active_for product-beta-repair.yml)
+          MAIN_RUNS=$(runs_for product-loop.yml)
+          REPAIR_RUNS=$(runs_for product-beta-repair.yml)
+          ACTIVE_MAIN=$(jq '[.[] | select(.status != "completed")] | length' <<<"$MAIN_RUNS")
+          ACTIVE_REPAIR=$(jq '[.[] | select(.status != "completed")] | length' <<<"$REPAIR_RUNS")
+
+          # Direct workflow_run triggers can enqueue a stale Product decision
+          # while a long beta is already executing. If a real Product run is
+          # in_progress, queued Product-main runs are redundant: after the
+          # running beta completes this supervisor will re-read accepted state
+          # and dispatch a fresh decision only if still justified.
+          MAIN_IN_PROGRESS=$(jq '[.[] | select(.status=="in_progress")] | length' <<<"$MAIN_RUNS")
+          if [[ "$MAIN_IN_PROGRESS" -gt 0 ]]; then
+            while read -r queued_id; do
+              [[ -n "$queued_id" ]] || continue
+              echo "::warning::Cancelling stale queued Product run $queued_id while another Product run is in progress; continuation will be re-derived from accepted state."
+              gh run cancel "$queued_id" --repo "$GITHUB_REPOSITORY" || true
+            done < <(jq -r '.[] | select(.status=="queued" or .status=="pending") | .databaseId' <<<"$MAIN_RUNS")
+            echo "Product work already in progress; supervisor will not duplicate it."
+            exit 0
+          fi
+
           if [[ "$ACTIVE_MAIN" -gt 0 || "$ACTIVE_REPAIR" -gt 0 ]]; then
             echo "Product work already active; supervisor will not duplicate it."
             exit 0
@@ -57,7 +76,6 @@ jobs:
           CONTINUE=$(jq -r 'if has("continue") then .continue else (.beta_launch // false) end' <<<"$STATE" 2>/dev/null || echo false)
           NEXT_ACTION=$(jq -r '.next_action // empty' <<<"$STATE" 2>/dev/null || true)
           BETA_LAUNCH=$(jq -r '.beta_launch // false' <<<"$STATE" 2>/dev/null || echo false)
-          BETA_ID=$(jq -r '.beta_id // empty' <<<"$STATE" 2>/dev/null || true)
 
           LATEST=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow product-loop.yml --limit 1 \
             --json databaseId,status,conclusion,createdAt 2>/dev/null || echo '[]')
