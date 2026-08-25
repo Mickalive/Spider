@@ -311,6 +311,26 @@
         "Before any future WP-006-area dispatch: none is needed — TERMINATE_LANE stands, domain reopened under V3 via c15321c; treat further WP-006 stewardship as duplicate spend."
       ],
       "route_to": ["CTO", "INFRA", "PHYSICS"]
+    },
+    {
+      "id": "CF-2026-08-25-18",
+      "importance": "MEDIUM",
+      "kind": "ORCHESTRATION_ANOMALY",
+      "summary": "First distilled firing of the Product Supervisor's queued-run dedupe (run 32894986672, product-loop #9): a workflow_run trigger enqueued a redundant Product decision at 20:22:45Z while the PB-001 v4 lineage run 32886859788 was executing; #9 sat queued its entire 24m37s life (Jobs API total_count=0, zero artifacts, 0-byte raw log) on the single-slot spider-product-lane concurrency group and was cancelled at 20:47:22Z — exactly the situation product-supervisor.yml:53-62 cancels BY DESIGN ('Cancelling stale queued Product run ... while another Product run is in progress'). Precondition proven via sibling commits ddce3a3@20:31:13Z and 7657565@20:58:59Z bracketing the window. Positive: near-zero-cost dedupe prevented a duplicate director session racing lab/product. Negative: the specific cancelling supervisor instance is unattributable (its ::warning:: evidence lives only in supervisor logs, which hygiene prunes), and a local fetch failure can mimic the same fingerprint.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "source_run_id": 32894986672,
+      "durable_refs": [
+        "evidence/run-memory/runs/32894986672.json",
+        "git:.github/workflows/product-supervisor.yml@main:53-62 (designed dedupe rule)",
+        "git:.github/workflows/product-loop.yml@main:23-25 (single-slot concurrency group)",
+        "git:origin/cycle/product/32886859788/architect@ddce3a3 / builder@7657565 (in-progress-window proof)"
+      ],
+      "actionable_next": [
+        "Treat 'conclusion=cancelled + 0 jobs + empty log' as a distinct benign signature in future distillation and pruning decisions — do not count it as a lane failure or retry it blindly.",
+        "Before pruning any such run, adjudicate against the live API (gh run view <id> --json jobs,conclusion) to rule out a fetch-harness artifact; this applies to 32894986672 itself (safe_to_prune=false until then).",
+        "Emit run-id-attributed receipts for supervisor cancellations (extend CF-02's receipt requirement to queue-state transitions) so dedupe events become self-documenting instead of forensic archaeology."
+      ],
+      "route_to": ["INFRA", "CTO", "PRODUCT"]
     }
   ]
 }
