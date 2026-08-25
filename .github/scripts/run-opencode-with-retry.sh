@@ -20,6 +20,8 @@ CONTROL_PATHS=(
   ".opencode/agents"
   "docs/roles"
   "SPIDER_MASTER_PROMPT.md"
+  "SPIDER_ARCHITECTURE_V2.md"
+  "directives/CAPABILITY_CAPSULE.md"
   "directives/AUDITOR.md"
   "directives/LANE_DIRECTOR.md"
   "directives/LAB_DIRECTOR.md"
@@ -143,6 +145,7 @@ stage_control_bundle() {
   mkdir -p "$root/roles" "$root/directives"
 
   [[ -f SPIDER_MASTER_PROMPT.md ]] && cp SPIDER_MASTER_PROMPT.md "$root/SPIDER_MASTER_PROMPT.md"
+  [[ -f SPIDER_ARCHITECTURE_V2.md ]] && cp SPIDER_ARCHITECTURE_V2.md "$root/SPIDER_ARCHITECTURE_V2.md"
 
   if [[ -d docs/roles ]]; then
     cp docs/roles/*.md "$root/roles/" 2>/dev/null || true
