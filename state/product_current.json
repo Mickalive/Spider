@@ -1,0 +1,30 @@
+{
+  "purpose": "Durable role-transition pointer (Chief CTO council protocol, CTO-2). Future sessions MUST boot from this file plus HEAD state, not from a possibly-wiped working tree.",
+  "updated": "2026-08-25",
+  "session": "product-director-fifth-session",
+  "beta_id": "PB-001",
+  "phase": "F0_PENDING_PREREG_INTEGRATION",
+  "outcomes_exist": false,
+  "next_role": "BETA_ARCHITECT",
+  "next_action_steps": [
+    "F0: integrate marooned prereg v2 tree 1457fd3cf8212f2bbea929b078aa5f1f7df8fdb6 into product-beta/PB-001/ unchanged; tag pb001-F0",
+    "Issue BENCHMARK_PREREG v3 addendum implementing state/product_beta_request.json.directed_pre_outcome_revision_v3 delta pack D1-D8 before any outcome; disclose every delta",
+    "Hand to BETA_BUILDER for WP-0 vendoring under F1/F2 (clean-room from Graph + Intel lineages only)",
+    "Update this pointer file at every role transition"
+  ],
+  "artifact_pins": {
+    "authorization_source_of_truth": "HEAD:state/product_beta_request.json (rev 5)",
+    "authorization_rev": 5,
+    "benchmark_prereg_v2_commit": "1457fd3cf8212f2bbea929b078aa5f1f7df8fdb6",
+    "benchmark_prereg_v2_branch": "origin/cycle/product/32861115761/architect",
+    "builder_v2_commit": "aceaea6859dc9bd758664e613153010216209f5e",
+    "builder_v2_tree_identical_to_architect_v2": true,
+    "prior_freeze_chain": ["cycle/product/32799261473/architect", "cycle/product/32799261473/builder"],
+    "cto_council_input": "lab/cto 2d4505f45637bb4d9b5a0563bf3d380f3df5dc7b docs/CTO_TO_PRODUCT.md",
+    "audit_gates_relied_on": [
+      "/tmp/spider_graph results/audit/CYCLE_32783797303_GRAPH_GATE.json (PASS)",
+      "/tmp/spider_intel results/intel/audit/CYCLE_32800296360_INTEL_GATE.json (PASS, VALIDATED_USEFUL, PROOF_OF_CONCEPT ceiling)"
+    ]
+  },
+  "known_infra_defect": ".github/workflows/product-loop.yml L62-65 wipes authorization state each Director session; fix owned by human/Meta-Director (outside Product write scope). Until fixed, read authorization via git show HEAD:state/product_beta_request.json."
+}

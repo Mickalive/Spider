@@ -1,30 +1,31 @@
 {
   "beta_id": "PB-001",
-  "request_revision": 4,
-  "revision_note": "Rev 4 (2026-08-25, fourth Product session). Re-authorization after a THIRD uncommitted working-tree reset (deletion of this file + beta_launch flipped to false) while HEAD (4dc8820) held the committed rev-3 authorization. No Beta Tester/Auditor result exists anywhere; no BENCHMARK_PREREG v2, no builder WP-0 output, no product_beta_architecture/build state and no Phase-A/B row exists anywhere. This session independently re-verified the evidence basis against the mounted accepted snapshots AND re-read both audit gates directly: Graph gate CYCLE_32783797303_GRAPH_GATE.json = PASS / safe_to_integrate=true / required_fixes=[] (byte-exact recomputation of all headline numbers); Intel gate CYCLE_32800296360_INTEL_GATE.json = PASS / VALIDATED_USEFUL / claim-tier ceiling PROOF_OF_CONCEPT; Physics loop state confirms WP-003B-R2 + WP-005 FALSIFIED under audited site-holdout tests with the cross-site universality program COMPLETE; graph-inheritance-scaling launched but NOT decided (depth<=3 remains the product frontier either way, so it neither blocks nor alters PB-001). ZERO substantive deltas vs rev 3/rev 2: every Director-floor clause (baselines, primary_metrics, win_rule, maximum_scope, kill_condition), assumption set A1-A5 and the directed pre-outcome revision v2 to the Beta Architect are carried forward UNCHANGED.",
+  "request_revision": 5,
+  "revision_note": "Rev 5 (2026-08-25, fifth Product session). Re-authorization after a FOURTH uncommitted working-tree reset (this file deleted, beta_launch flipped false) while HEAD held the committed rev-4 authorization. Root cause now VERIFIED, not hypothesized: .github/workflows/product-loop.yml lines 62-65 mechanically delete this file and flip beta_launch before every Director session (infra fix owned by human/Meta-Director; outside Product write scope). This session additionally discovered state the prior sessions' persistent claims missed: BENCHMARK_PREREG v2 WAS issued and frozen pre-outcome (commit 1457fd3cf8212f2bbea929b078aa5f1f7df8fdb6, origin/cycle/product/32861115761/architect, implements rev-4 .directed_pre_outcome_revision_v2 as sole semantic change) but was never integrated into lab/product; the sibling 'build' commit aceaea6 has a byte-identical tree to 1457fd3, i.e. ZERO vendor code and ZERO Phase-A/B outcome rows exist anywhere across all branches (verified by git log --all search). Intake of the Chief CTO cross-lane review CTO-2 (lab/cto 2d4505f, postdates fourth session) plus four fresh-context Product critics (cto_product, product_system_architect, product_optimization_researcher, product_baseline_performance_critic). ZERO substantive change to any Director-floor clause: baselines B0/B1/B2 identity, primary_metrics, WIN_if_all/LOSE_if_any floors, maximum_scope, kill conditions and assumption set A1-A5 are carried forward VERBATIM. Rev 5 adds a DISCLOSED, PRE-OUTCOME-ONLY additive delta pack (.directed_pre_outcome_revision_v3): B3 ceiling arm, Phase-A attribution diagnostic of the directed SGDR+V31 stack, preregistered silent-execution semantics, small-n/replication/comparator-selection protections, contamination controls, amortization accounting, implementation-hygiene requirements and an ordered critical path starting with F0 integration of 1457fd3. All deltas are strictness/diagnostic additions or fairness fixes made before any outcome exists (SPIDER_MASTER_PROMPT sec 19 clean).",
   "hypothesis_id": "PH-1",
   "authorized_by": "PRODUCT_DIRECTOR",
   "authorization_date": "2026-08-25",
   "program_name": "spider-inheritance-beta-1",
   "user_problem": "Browser agents re-pay the full exploration cost (browser actions, model calls, tokens, latency, flaky retries) on every run, even when a task is a repeat or near-repeat of a goal class some prior run already solved (login/form flows, pagination drills, navigation paths) with only rewording or parameter/entry-state shifts.",
   "target_task_class": {
-    "description": "Goal-directed multi-step web tasks on small structured public practice/demo sites: authentication flows, iterated pagination to a target listing position, category/listing navigation and form submission with anchored completion predicates. Three preregistered regimes on matched knowledge bases:",
+    "description": "Goal-directed multi-step web tasks on small structured public practice/demo sites: authentication flows, iterated pagination to a target listing position, category/listing navigation and form submission with anchored completion predicates. Three preregistered regimes on matched knowledge bases. Navigation/pagination/form families run in Phase A; login-family rows enter at Phase B.",
     "regimes": {
-      "R1_repeat_reworded": "same underlying goal, goal text paraphrased (paraphrases authored independently of the consumer model's family whenever feasible)",
+      "R1_repeat_reworded": "same underlying goal, goal text paraphrased (paraphrases authored independently of the consumer model's family AND outside V31's closed synonym classes whenever feasible)",
       "R2_near_repeat_shifted": "same fragment classes, shifted entry state or shifted target parameter (e.g., different page depth, different account, different item)",
       "R3_novel_control": "genuinely new goals outside inherited coverage; SPIDER arm must degrade gracefully to exploration without losing to baseline"
     },
     "sites": [
       "books.toscrape.com",
       "quotes.toscrape.com",
-      "optional additions from the already-used demo set (saucedemo.com, parabank) only if the affordance inventory proves two sites insufficient — disclosed in the beta prereg before outcomes"
+      "optional additions from the already-used demo set (saucedemo.com, parabank) only if the affordance inventory proves two sites insufficient - disclosed in the beta prereg before outcomes"
     ],
     "explicitly_out_of_scope": [
       "cross-site skill transfer claims",
       "category-type goals as primary endpoints (known unsolved failure mode; tracked descriptively)",
       "chains requiring >3 distinct stored fragments (Graph lane's graph-inheritance-scaling program territory; tracked descriptively)",
       "any predictive-dynamics feature (Physics WP-003B-R2/WP-005 FALSIFIED)",
-      "any route/API-capture-replay or registry feature (Unbrowse-class claims are OFFICIAL_CLAIM vendor-run only; Intel cycle-2 reproduction pending)"
+      "any route/API-capture-replay or registry feature (Unbrowse-class claims are OFFICIAL_CLAIM vendor-run only; Intel cycle-2 reproduction pending)",
+      "capsule/resolver plumbing owned by Runtime until Runtime ships an accepted schema (consume it when it lands; do not fork it)"
     ]
   },
   "validated_building_blocks": [
@@ -32,36 +33,48 @@
     "Blind content-addressed fragment retrieval with expected-UNKNOWN discipline; cold / verbatim-nearest-replay / single-shot-BFS baselines solved 0/3 composites (Graph G-H2)",
     "Oracle-equalized iterative replay policy carries composed depth at tested depth; login procedure packaging residual value frag 16/16 rows vs graphiter 0/8 (Graph G-H3 E2, audit PASS after repair)",
     "Multi-step login packaging = validated procedural ordering: frag 4/4 login-memory rows vs graphiter 0/4 (exploration-only) vs static edge-unit replay 0/4 with bounce pathology (Graph G-H4 R3)",
-    "V31 closed-class descriptor/query equipment adopted as standard equipment for deeper-chain work (Graph G-H4 program decision); used AS EQUIPMENT ONLY — no quantitative retrieval-transfer claim is licensed (fresh instrument spent)",
-    "SGDR-style fused task-goal + current-state-summary candidate scoring for free-form goals (Intel cycle-1 clean-room reproduction; audit gate PASS run 32800296360; VALIDATED_USEFUL; claim tier ceiling PROOF_OF_CONCEPT): hard-slice correct@1 36/74 vs task-text-only 25/74 (11 paired wins / 0 reversals) under paraphrased goals + shifted entry contexts; wrong-context-summary fusion falls back to baseline level (24/74); converted into fewer novel exploration actions than task-only retrieval at equal-or-higher subgoal success in the NL-consumer regime (39 vs 42 literal; 36 vs 42 paraphrase). Validated configuration ONLY: lexical-hash embedder, deterministic contract-faithful summarizer, pool top-M=max(3k,20), greedy MMR lambda=0.7. BINDING LIMITS THAT TRAVEL: PoC tier; advantage exists vs task-only retrieval exactly and only in the natural-language-consumer regime (hand-authored exact signatures remain more action-efficient where they exist: 21 vs 39 novel on the literal slice); no login/pager addressing improvement claimed; tiny library/sites; GENERALIZATION language forbidden; WebArena headline numbers NOT reproduced and forbidden in any narrative. Clean-room lineage only (intel/experiments/sgdr_repro/); never copy CC BY-SA reference source."
+    "V31 closed-class descriptor/query equipment adopted as standard equipment (Graph G-H4 program decision); used AS EQUIPMENT ONLY, applied identically in every SPIDER-arm condition including ablation variants, so it is never a differing variable between compared conditions - no quantitative retrieval-transfer claim is licensed (fresh instrument spent)",
+    "SGDR-style fused task-goal + current-state-summary candidate scoring for free-form goals (Intel cycle-1 clean-room reproduction; audit gate PASS run 32800296360; VALIDATED_USEFUL; claim tier ceiling PROOF_OF_CONCEPT): hard-slice correct@1 36/74 vs task-text-only 25/74 (11 paired wins / 0 reversals) under paraphrased goals + shifted entry contexts; wrong-context-summary fusion falls back to baseline level (24/74); converted into fewer novel exploration actions than task-only retrieval at equal-or-higher subgoal success in the NL-consumer regime (39 vs 42 literal; 36 vs 42 paraphrase). Validated configuration ONLY: lexical-hash embedder, deterministic contract-faithful summarizer, pool top-M=max(3k,20), greedy MMR lambda=0.7, alpha=0.4. BINDING LIMITS THAT TRAVEL: PoC tier; advantage exists vs task-only retrieval exactly and only in the natural-language-consumer regime (hand-authored exact signatures remain more action-efficient where they exist: 21 vs 39 novel on the literal slice); no login/pager addressing improvement claimed; tiny library/sites; GENERALIZATION language forbidden; WebArena headline numbers NOT reproduced and forbidden in any narrative. Clean-room lineage only (intel/experiments/sgdr_repro/); never copy CC BY-SA reference source."
   ],
   "assumptions_under_test": [
-    "A1: inheritance benefit survives a real LLM consumer (all accepted evidence used scripted deterministic consumers)",
-    "A2: free-form natural-language goals are served END-TO-END by audited fused task+state-summary candidate scoring (with V31 canonicalization as preprocessing) inside the product loop, without hand-authored goal signatures, measured strictly as end-to-end task outcomes. The PoC-tier isolated-harness result does not settle this: embedder/summarizer/scale adaptations and store-integrated behavior are untested",
-    "A3: packaged procedures (login-style fragments) deliver measurable savings over edge iteration AND over prompt-level trajectory memory with an LLM consumer",
-    "A4: savings are material in tokens/model-calls/wall-clock seconds (perf_counter instrumentation; first-ever cost/latency measurement of this stack)",
+    "A1: inheritance benefit survives a real LLM consumer (all accepted evidence used scripted deterministic consumers). FIRST-ORDER unknown; gated explicitly by Phase-A smoke diagnostics before the confirmatory panel burns",
+    "A2: free-form natural-language goals are served END-TO-END by audited fused task+state-summary candidate scoring inside the product loop, without hand-authored goal signatures, measured strictly as end-to-end task outcomes. Made ATTRIBUTABLE by the new Phase-A retrieval diagnostic (stacked SGDR+V31 vs V31-only vs primitive scorer with a frozen named fallback ordering): an A2 LOSE must be attributable to mechanism vs assembly error",
+    "A3: packaged procedures (login-style fragments) deliver measurable savings over edge iteration AND over prompt-level trajectory memory with an LLM consumer (Phase B)",
+    "A4: savings are material in tokens/model-calls/wall-clock seconds (perf_counter instrumentation + provider usage accounting; first-ever cost/latency measurement of this stack; quoted both marginally and net of amortized store-build overhead)",
     "A5: known failure modes (category goals, deep chains, cross-site) remain contained inside the declared scope with honest UNKNOWN reporting and zero fabricated successes"
   ],
-  "directed_pre_outcome_revision_v2": {
+  "directed_pre_outcome_revision_v3": {
     "addressee": "BETA_ARCHITECT",
-    "status_basis": "No Phase-A/B outcome exists anywhere in the repository; builder WP-0 vendoring has not begun; a v2 preregistration issued before any outcome is constitutionally clean (SPIDER_MASTER_PROMPT §19).",
-    "single_change": "In the SPIDER arm's memory-led execution model, replace the whole-goal candidate SCORING layer: rank auto-described fragment candidates by alpha*cos(task_goal_embedding, description) + (1-alpha)*cos(current_state_summary_embedding, description), alpha=0.4, pool top-M=max(3k,20), greedy MMR lambda=0.7, degrade to primitives/explore on weak match per unchanged UNKNOWN thresholds. Current-state summaries use the deterministic contract-faithful summarizer from the validated configuration (harness-side, cost-counted). V31 canonicalization is RETAINED as query preprocessing/equipment. Embedder = lexical-hash as validated; NO neural embedder and NO LLM summarizer may be introduced mid-beta.",
-    "unchanged_elements": "Panel tasks, anchored predicates and their equal disclosure to all arms, arms B0/B1/B2 and their prompts, budgets, metrics, win rule (floor + architect tightenings), scope caps, health gates, write-suppression discipline, freeze checkpoints F1/F2 semantics.",
-    "forbidden": "Changing any baseline capability, weakening any win clause, quoting quantitative V31 retrieval-transfer rates, citing WebArena numbers, adding unvalidated adaptations to any arm.",
-    "deliverable": "product-beta/PB-001/BENCHMARK_PREREG.md v2 + amended state/product_beta_architecture.json, committed before any outcome; delta section disclosing this directive as the sole semantic change vs v1."
+    "status_basis": "Prereg v2 (1457fd3) is frozen and preserved but UNINTEGRATED; zero outcomes exist anywhere; a v3 delta pack issued before any outcome is constitutionally clean (sec 19) and every delta is disclosed below.",
+    "step_0_F0_integration": "Integrate the marooned frozen prereg v2 tree (commit 1457fd3cf8212f2bbea929b078aa5f1f7df8fdb6, origin/cycle/product/32861115761/architect) into lab/product product-beta/PB-001/ UNCHANGED, tag pb001-F0. v2 remains preserved provenance; nothing downstream starts before F0 lands on the lane branch.",
+    "delta_pack": {
+      "D1_B3_ceiling_arm": "ADD baseline arm B3: site-specific instruction-card / plain-HTTP ceiling arm (constitution sec 13-mandated site-specific-instructions comparator, never yet run anywhere in SPIDER). Static instruction card authored and committed BEFORE outcomes; if ~card-cost tokens match SPIDER on R1/R2 the product thesis is dead and this must be learned for the cost of one arm.",
+      "D2_phase_A_attribution_diagnostic": "ADD Phase-A retrieval diagnostic of the directed front door BEFORE any confirmatory row: stacked SGDR-fused+V31 vs V31-only vs primitive text scorer on panel subgoals (retrieval@1 + UNKNOWN rate), with an explicitly NAMED fallback ordering frozen before outcomes. Canonicalization mutates embedder input; two separately validated mechanisms have never been composed anywhere; an A2 result must be attributable to mechanism vs assembly error.",
+      "D3_silent_execution_semantics": "PREREGISTER silent-execution semantics: inherited segments materialize deterministically under verifier guards; the LLM engages only at UNKNOWN/novelty boundaries; ALL verifier/guard/summarizer/retrieval costs count inside SPIDER totals. Thesis clarification, not tuning: if inherited steps still bill per-step model calls, the -40% token / -30% wall-clock floors measure plumbing instead of inheritance.",
+      "D4_small_n_and_replication_protections": "Medians reported WITH paired per-row deltas and n/coverage; replication clause is CONJUNCTIVE (each deterministic pass individually meets all floors, not averages); comparator for the efficiency clauses is selected by a procedure frozen NOW (per regime: highest success rate; tie broken by lowest median tokens) - never chosen after outcomes; R3 non-degradation bound reported alongside WIN: SPIDER median token/action overhead on R3 <= +25% vs B0; a LOSE triggered ONLY by the wall-clock clause routes to the single sanctioned repair round rather than auto-kill (wall-clock has never once been measured validly on this stack; integer-ms flooring is a documented defect).",
+      "D5_contamination_controls": "Producer/eval separation: evaluation tasks operationally disjoint from store-construction episodes (no shared goals, routes or anchors); paraphrase seeds held out from build runs and NOT drawn from V31's closed synonym classes; paraphrase authorship lineage recorded; trajectory pool for B1 built from an exploration corpus symmetric to SPIDER's store construction (same budget/provenance); retry policy identical and fully counted for every arm.",
+      "D6_amortization_accounting": "Phase A additionally measures store-population cost, verification cost and one update/recovery cycle; report amortized per-task overhead and break-even N* (cumulative savings >= build+maintenance) alongside the marginal medians; every efficiency claim in any narrative states both views.",
+      "D7_implementation_hygiene": "Byte-restoration ground truth = committed content-hashed LOCAL snapshot fixtures; live site appears only through the health gate; sanctioned form writes separated from leaks by a MECHANICAL allowlist specified at F2 (never rewritten after failures); every knob value hashed into the F1 manifest (alpha=0.4, lambda=0.7, M=max(3k,20) with k defined numerically, seeds, thresholds, summarizer pinned lockfile).",
+      "D8_telemetry_first": "Shared cost_event envelope + perf_counter latency + provider token/call accounting emitting real rows BEFORE Phase A (Runtime owns the envelope spec; consume, do not fork)."
+    },
+    "unchanged_elements": "Panel tasks, anchored predicates and their equal disclosure to all arms, arms B0/B1/B2 identities and prompts (B2 may be demoted to a <=5-row instrument-validation fixture check excluded from headline statistics, consistent with its existing diagnostic-only status), budgets, metrics, WIN_if_all/LOSE_if_any floors verbatim, scope caps, health gates, write-suppression discipline, freeze checkpoint semantics, SGDR wording-constraint inheritance, no neural embedders / no LLM summarizers mid-beta.",
+    "forbidden": "Changing any frozen baseline capability, weakening any win clause, quoting quantitative V31 retrieval-transfer rates, citing WebArena numbers, adding unvalidated adaptations to any arm, registry/staleness/predictive features (standing do-not-build list), building a self-rendered weak B1 (source B1 from the Intel AWM-min lineage; see docs/CTO_TO_INTEL.md).",
+    "deliverable": "F0 tag + BENCHMARK_PREREG v3 addendum (delta-disclosed) + amended state/product_beta_architecture.json + state/product_current.json pointer update, committed BEFORE any outcome."
   },
   "baselines": {
-    "B0_cold_current_agent": "A mainstream ReAct-style LLM browser-use agent (frozen open framework chosen and committed by the Beta Architect BEFORE any outcome), same backbone model and version as the SPIDER consumer, identical observation/action space, identical step/token budgets, no memory. This is the primary 'credible current agent' comparison.",
-    "B1_trajectory_memory": "Same agent + top-k retrieved prior successful trajectories injected into the prompt (AWM-class procedural-memory baseline). Mandatory because memory-beating-no-memory is not sufficient evidence per constitution §13.",
-    "B2_exact_replay_sanity": "Exact replay on known routes; diagnostic upper bound only, not part of the win rule.",
+    "B0_cold_current_agent": "UNCHANGED: mainstream ReAct-style LLM browser-use agent (frozen open framework chosen and committed by the Beta Architect BEFORE any outcome), same backbone model and version as the SPIDER consumer, identical observation/action space, identical step/token budgets, no memory. Primary 'credible current agent'.",
+    "B1_trajectory_memory": "MANDATORY (memory-beating-no-memory is insufficient per constitution sec 13). STRENGTHENED this revision: sourced from the Intel AWM-min lineage (docs/CTO_TO_INTEL.md) rather than self-rendered; trajectory pool from an exploration corpus symmetric to SPIDER store construction (equal budget/provenance); equal candidate budget and prompt structure; an online self-written-notes variant (agent distills post-success workflow notes and retrieves them on later tasks) SHOULD be included if implementable without new dependencies, otherwise the skip is documented in the prereg.",
+    "B2_exact_replay_sanity": "DEMOTED to instrument-validation fixture check (<=5 rows proving byte-restoration, write suppression and health gating); excluded from headline statistics; never part of the win rule (unchanged status).",
+    "B3_instruction_card_ceiling": "NEW (pre-outcome D1): site-specific instruction-card / plain-HTTP ceiling arm; cheap falsifier of the entire product thesis; not part of the LOSE rule, but a B3-parity result on R1/R2 must be reported prominently regardless of WIN.",
     "fairness_constraints": [
-      "identical backbone model, decoding policy, budgets, observation format across B0/B1/SPIDER arm",
-      "the machine-checkable acceptance/completion predicate is disclosed to ALL arms identically as part of the task definition (removes the oracle asymmetry flagged in G-H2/G-H4 audits)",
-      "knowledge base byte-restored before every evaluation row; evaluation runs write nothing to the store",
+      "identical backbone model, decoding policy, budgets, observation format across agent arms",
+      "the machine-checkable acceptance/completion predicate is disclosed to ALL arms identically as part of the task definition",
+      "knowledge base byte-restored before every evaluation row against committed content-hashed fixtures; evaluation runs write nothing to the store",
       "anchored (path-anchored, non-substring) success predicates only",
-      "site-health gate per row; seeded determinism where the harness permits",
-      "paraphrase/goal authorship recorded; independent-of-consumer-family authorship preferred",
-      "all SPIDER-arm retrieval/planning/summarization overhead counted inside SPIDER totals (no hidden subsidy)"
+      "site-health gate per row; abort-and-rerun applies identically to both compared arms",
+      "paraphrase/goal authorship recorded; independent-of-consumer-family authorship preferred; paraphrases disjoint from V31 synonym classes",
+      "all SPIDER-arm retrieval/planning/summarization/verifier overhead counted inside SPIDER totals (no hidden subsidy)",
+      "comparator selection for efficiency clauses frozen pre-outcome (per regime: highest success; tie -> lowest median tokens)"
     ]
   },
   "primary_metrics": [
@@ -70,47 +83,72 @@
     "LLM model calls and total tokens (input+output) per task",
     "wall-clock latency per task at perf_counter granularity",
     "reused-action share of the action mix",
+    "retrieval diagnostic metrics in Phase A (retrieval@1 + UNKNOWN rate per scoring variant)",
+    "amortization view: store-population + verification + maintenance costs and break-even N* (reporting duty)",
     "recovery behavior after entry-state perturbation (descriptive)",
     "UNKNOWN/false-match discipline events (descriptive; false accepts are violations)"
   ],
   "win_rule": {
-    "preregistration_note": "The Beta Architect freezes exact thresholds, panel composition and n in the beta preregistration BEFORE any Phase-B outcome; the values below are the Director-mandated floor that the freeze must meet or exceed in strictness. (Architect v1 froze this floor verbatim plus tightenings 5-7; v2 must preserve both.)",
+    "preregistration_note": "Director-mandated floor, carried VERBATIM through revisions 1-5; the Architect freeze must meet or exceed it in strictness. Tightenings added pre-outcome in rev 5 (conjunctive replication, frozen comparator selection, R3 overhead reporting bound, wall-clock repair routing) appear in .directed_pre_outcome_revision_v3.delta_pack.D4 and never weaken anything below.",
     "WIN_if_all": [
       "success_SPIDER >= success_best_baseline - 0.10 absolute on the full panel including R3 control rows",
-      "on R1+R2 rows: median browser actions reduced >= 50% AND median total tokens reduced >= 40% AND median wall-clock reduced >= 30% versus the strongest baseline achieving comparable success (B1 if it beats B0)",
+      "on R1+R2 rows: median browser actions reduced >= 50% AND median total tokens reduced >= 40% AND median wall-clock reduced >= 30% versus the strongest baseline achieving comparable success (B1 if it beats B0; comparator chosen by the frozen pre-outcome selection procedure)",
       "zero fabricated-success events in the SPIDER arm",
-      "results replicate across two deterministic passes where the environment is static"
+      "results replicate across two deterministic passes where the environment is static (CONJUNCTIVE: each pass individually meets all floors)"
     ],
     "LOSE_if_any": [
       "SPIDER arm fails > 25% of tasks solved by the best baseline",
       "median reductions < 20% on R1+R2 versus the same comparator",
       "any memory-induced fabricated success"
     ],
-    "reporting_duties": "Report all regimes and all baselines including losses; negative outcome is a valid product result and feeds the PH-1 disposition decision."
+    "special_routing": "If the ONLY failing WIN clause is the wall-clock reduction clause, the outcome routes to the single sanctioned preregistered repair round instead of auto-kill; a second consecutive wall-clock failure stands as LOSE.",
+    "reporting_duties": "Report all regimes and all baselines including losses AND the B3 parity check AND amortized break-even analysis; negative outcome is a valid product result and feeds the PH-1 disposition decision. An attributed LOSE (naming which of A1-A5 failed) is equally valuable evidence."
   },
-  "maximum_scope": "Internal benchmark harness only. <=4 small public practice/demo sites; ~30-60 evaluation rows total across regimes; one backbone model family per beta version; read-only interactions except the demo sites' own intended forms; compute budget capped and logged; NO production deployment, NO public users, NO commercialization, NO external data sharing. Human authorization required for anything beyond this scope.",
+  "maximum_scope": "Internal benchmark harness only. <=4 small public practice/demo sites; ~30-60 evaluation rows total across regimes plus Phase-A diagnostics and fixture checks; one backbone model family per beta version; read-only interactions except the demo sites' own intended forms; compute budget capped and logged; NO production deployment, NO public users, NO commercialization, NO external data sharing. Human authorization required for anything beyond this scope.",
   "kill_condition": [
-    "Beta stops and PH-1 returns to PROMISING-or-lower if: SPIDER arm loses cleanly under the LOSE rule after one preregistered repair round, OR",
+    "Beta stops and PH-1 returns to PROMISING-or-lower if: SPIDER arm loses cleanly under the LOSE rule after the single sanctioned repair round, OR",
     "two consecutive MEASUREMENT_INVALID batches occur (infrastructure not ready), OR",
     "a live-site health/integrity incident occurs (pause immediately, disclose, resume only with repaired gating)",
     "A losing beta is useful evidence: its artifacts feed the PH-1 continue/repair/re-architecture/reject decision per the Product feedback rules."
   ],
-  "instrumentation_requirements": [
-    "perf_counter latency capture (G-H4 hygiene: integer-ms floors forbid prior cost claims)",
-    "per-row token and model-call accounting from the provider API",
-    "store hash before/after each evaluation row (byte-restoration proof)",
-    "evaluation write-suppression assertion",
-    "site-health gate per row",
-    "all raw rows + manifest + analysis code committed with seeds and freeze timestamps before outcomes"
+  "execution_critical_path": [
+    "F0: integrate marooned prereg v2 (1457fd3) into lab/product, tag pb001-F0",
+    "WP-0: builder vendoring from Graph + Intel reference lineages under freeze checkpoints F1/F2 (clean-room only)",
+    "LLM consumer wiring (no shared-backbone agent exists in any accepted artifact yet)",
+    "Arms: B0, B1 (Intel AWM-min sourced), B2 fixture check, B3 instruction-card ceiling",
+    "Telemetry: cost_event envelope + perf_counter + provider accounting live BEFORE Phase A",
+    "Phase A: attribution diagnostic (D2) + amortization measurement (D6) + smoke rows gating on A1 sanity",
+    "Phase B: confirmatory panel under the frozen win rule"
   ],
+  "instrumentation_requirements": [
+    "shared cost_event envelope emitted before Phase A (Runtime-owned spec)",
+    "perf_counter latency capture (integer-ms floors forbid prior cost claims)",
+    "per-row token and model-call accounting from the provider API",
+    "store hash before/after each evaluation row against committed content-hashed fixtures",
+    "evaluation write-suppression assertion + mechanical form-write allowlist",
+    "site-health gate per row",
+    "all raw rows + manifest + hashed knob values + analysis code committed with seeds and freeze timestamps before outcomes"
+  ],
+  "artifact_pins": {
+    "benchmark_prereg_v2_commit": "1457fd3cf8212f2bbea929b078aa5f1f7df8fdb6",
+    "benchmark_prereg_v2_branch": "origin/cycle/product/32861115761/architect",
+    "builder_v2_commit": "aceaea6859dc9bd758664e613153010216209f5e",
+    "builder_v2_tree_identical_to_architect_v2": true,
+    "cto_council_review": "lab/cto 2d4505f45637bb4d9b5a0563bf3d380f3df5dc7b (docs/CTO_TO_PRODUCT.md)",
+    "prior_freeze_chain_preserved": ["cycle/product/32799261473/architect (2c3bd28)", "cycle/product/32799261473/builder (b05d8f8)"]
+  },
   "coherence_check": {
     "audited_block_present": true,
     "remaining_assumptions_beta_testable": true,
     "credible_baseline_defined": true,
+    "baseline_set_strengthened_this_revision": true,
+    "attribution_confounds_closed_pre_outcome": true,
     "fair_instrumentation_specified": true,
     "falsifiable_win_rule_before_outcome": true,
+    "win_rule_carried_verbatim_since_rev1": true,
     "exactly_one_beta_authorized": true,
     "no_lane_verdicts_altered": true,
+    "zero_outcome_rows_exist_anywhere": true,
     "public_deployment_or_commercialization": false
   }
 }

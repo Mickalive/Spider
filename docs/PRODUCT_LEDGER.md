@@ -302,3 +302,80 @@ not decided. No new product signals exist beyond CYCLE_32783797303
 - Standing next step unchanged: **BETA_ARCHITECT commits BENCHMARK_PREREG
   v2 before any outcome; then BETA_BUILDER under F1/F2**. Public deployment
   and commercialization remain unauthorized without explicit human decision.
+
+---
+
+## Intake 2026-08-25 (fifth Product session on mounted accepted snapshots)
+
+Session-start state anomaly, recorded for provenance (fourth occurrence):
+the working tree again carried an UNCOMMITTED deletion of
+`state/product_beta_request.json` plus a flipped `beta_launch=false`, while
+HEAD held the committed rev-4 authorization. This session VERIFIED the root
+cause instead of re-recording an anomaly:
+`.github/workflows/product-loop.yml` lines 62-65 mechanically delete the
+authorization file and flip `beta_launch` before every Director session.
+Four director sessions have re-derived an identical decision because of this
+one workflow step. **Escalation (outside Product write scope): infra owner /
+human must make the product loop non-destructive** — until then,
+authorization is read via `git show HEAD:state/product_beta_request.json`
+and re-derivation on a hash-verified match is forbidden.
+
+### Material discoveries this session
+
+1. **The rev-4 directive was already executed — but marooned.**
+   `BENCHMARK_PREREG.md` v2 + ARCHITECTURE/BUILD_PLAN/INTERFACES +
+   `state/product_beta_architecture.json` were committed pre-outcome at
+   `1457fd3cf8212f2bbea929b078aa5f1f7df8fdb6`
+   (`origin/cycle/product/32861115761/architect`, 15:08Z), implementing
+   `.directed_pre_outcome_revision_v2` as sole semantic change. It was never
+   integrated into `lab/product`.
+2. **The "build" commit is empty.** `aceaea6`
+   (`origin/cycle/product/32861115761/builder`) has a byte-identical tree to
+   1457fd3: zero vendor code, zero Phase-A/B rows. A full `git log --all`
+   search confirms NO beta outcome rows exist on any branch. The persistent
+   claims "no prereg v2, no builder output anywhere" in revs 3-4 were wrong
+   about the prereg; they were right about outcomes.
+3. **Chief CTO council CTO-2 review exists** (`lab/cto` 2d4505f, postdates
+   the fourth session): independently verified the marooned freeze and issued
+   `docs/CTO_TO_PRODUCT.md` — pointer-file durability protocol, critical path
+   (F0 integration → WP-0 vendoring → LLM consumer wiring → arms with B1 from
+   Intel AWM-min → cost_event telemetry BEFORE Phase A) and a pre-outcome
+   prereg v3 delta pack.
+
+### Fresh-context critic review (run before this decision, per charter)
+
+Four critics returned convergent findings; all are folded into rev 5:
+
+| Critic | Verdict | Adopted as |
+|---|---|---|
+| cto_product | DO_NOT_LAUNCH_BECAUSE_CONTROL_PLANE_SELF_WIPE | durability protocol + F0-first critical path |
+| product_system_architect | CUT_LIST (login-packaging/V31 confound/MMR/alpha/B2 weight) | V31 fixed identically across all arm conditions (never a differing variable); knobs hashed into F1 manifest; alpha=0.4/lambda=0.7 frozen as audited config; B2 demoted to fixture check; local content-hashed fixtures; mechanical form-write allowlist |
+| product_optimization_researcher | RETARGET_A1_CONSUMER_INHERITANCE_GATE | staged execution: Phase-A smoke/diagnostic gates A1 before confirmatory panel; fused-vs-incumbent attribution handled inside Phase A rather than blind stacking |
+| product_baseline_performance_critic | BASELINE_FIX_REQUIRED | B1 strengthened/sourced from Intel AWM-min lineage with symmetric corpus; paired per-row deltas; CONJUNCTIVE two-pass replication; frozen comparator-selection procedure; R3 overhead reporting bound (+25%); producer≠eval disjointness; paraphrases outside V31 synonym classes; amortization + break-even N* accounting |
+
+Note on disagreements: the architect recommended cutting login packaging and
+V31 entirely; overruled with rationale — login packaging is one of the two
+strongest audited blocks (G-H3/G-H4) and part of the declared task class
+(enters at Phase B), and V31 is Graph-program adopted equipment; both stay,
+but V31 is pinned identical across every compared condition so it cannot
+confound attribution. The researcher's suggestion to soften the directed
+SGDR swap was resolved by CTO alignment: keep the swap, add the Phase-A
+stacked-vs-V31-only-vs-primitive diagnostic with frozen fallback ordering so
+any A2 result is attributable to mechanism vs assembly error.
+
+### Decision 2026-08-25 (fifth session)
+
+- **PH-1 stays PRODUCT_CANDIDATE; PB-001 RE-AUTHORIZED as the single beta —
+  request revision 5** (`state/product_beta_request.json`),
+  `beta_launch=true`, durable pointer `state/product_current.json` written
+  (phase F0_PENDING_PREREG_INTEGRATION). Win-rule floor carried VERBATIM
+  through revisions 1→5; delta pack D1-D8 is additive strictness/diagnostics
+  only, disclosed, and legal because zero outcomes exist anywhere (§19).
+- **Execution order is binding**: nothing downstream starts before F0 lands
+  (`1457fd3` integrated to `product-beta/PB-001/`, tag `pb001-F0`).
+- PH-2 WATCH (CTO standing rule: zero hours until reproduced mechanism AND
+  resolver exist). PH-3 REJECTED. PH-4 WATCH/deprioritized.
+- Re-derivation ceremony is killed by the pointer protocol; future dirty-tree
+  sessions log receipts instead of rewriting history.
+- Public deployment and commercialization remain unauthorized without
+  explicit human decision.

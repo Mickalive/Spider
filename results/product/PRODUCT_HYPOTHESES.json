@@ -1,11 +1,11 @@
 {
   "updated": "2026-08-25",
-  "session": "product-director-fourth-session",
-  "build_authorized": false,
+  "session": "product-director-fifth-session",
+  "build_authorized": true,
   "internal_product_beta_authorized": true,
   "beta_id": "PB-001",
-  "beta_request_revision": 4,
-  "reauthorization_note": "Fourth-session re-authorization after a THIRD uncommitted working-tree reset (request file deleted, beta_launch flipped false; HEAD held the rev-3 authorization). Zero beta outcomes exist anywhere; evidence basis AND both audit gates re-read directly against mounted accepted snapshots (Graph gate PASS run 32783797303; Intel gate PASS/VALIDATED_USEFUL/PoC ceiling run 32800296360); request rev 4 is a provenance-only bump with zero substantive clause deltas vs rev 3.",
+  "beta_request_revision": 5,
+  "reauthorization_note": "Fifth-session re-authorization after a FOURTH working-tree reset, root cause now VERIFIED as mechanized (product-loop.yml L62-65 wipes authorization state each Director session; infra fix escalated outside Product scope). Material discovery this session: BENCHMARK_PREREG v2 was frozen pre-outcome at 1457fd3 (origin/cycle/product/32861115761/architect) implementing directed revision v2 but left unintegrated ('marooned'); sibling builder commit aceaea6 has a byte-identical tree = zero vendor code and zero Phase-A/B outcome rows anywhere (git log --all verified). Rev 5 integrates that freeze as step F0 and adds a disclosed pre-outcome-only delta pack (B3 instruction-card ceiling arm per constitution sec 13; Phase-A SGDR+V31 attribution diagnostic with frozen fallback ordering; preregistered silent-execution semantics; conjunctive replication + frozen comparator selection + paired deltas; contamination controls; amortization/break-even accounting; content-hashed local fixtures + hashed knob manifest; cost_event telemetry before Phase A). Director-floor win rule carried VERBATIM since rev 1; no clause weakened. Inputs: Chief CTO council CTO-2 (lab/cto 2d4505f) + four fresh-context Product critics (cto_product / product_system_architect / product_optimization_researcher / product_baseline_performance_critic).",
   "evidence_basis": {
     "graph_accepted_through": "G-H4 (Run 32783797303, audit PASS, safe_to_integrate=true); addressing program COMPLETE; successor graph-inheritance-scaling launched, NOT decided (depth<=3 stays product frontier)",
     "physics_accepted_through": "WP-005 (Run 32689298051, audit PASS; WP-003B-R2 and WP-005 both FALSIFIED)",
@@ -47,7 +47,8 @@
       "differentiation": "Subgoal-addressable executable fragments with empirical validation statistics, provenance and freshness metadata consumed by an external model-agnostic layer; the free-form-goal front door is now an independently validated external mechanism rather than home-grown addressing — bounded hypothesis from audit-qualified survey, not a novelty claim.",
       "conceptual_architecture": "Producer runs grow validated store -> fused task+state-summary candidate scoring over auto-derived descriptions (V31 canonicalization as preprocessing) selects fragments/procedures for subgoals -> consumer LLM executes memory-led with exploration fallback and explicit UNKNOWN reporting -> anchored completion predicate equalized across arms -> outcomes written back with provenance (calibration deferred).",
       "biggest_uncertainty": "Whether the scripted-setup advantage survives a real LLM consumer end-to-end without memory-induced wrong actions, stale-fragment traps or addressing misses under genuine goal rewording.",
-      "evidence_needed": "Beta PB-001 outcome vs cold-agent and trajectory-RAG baselines under the preregistered win rule."
+      "evidence_needed": "Beta PB-001 outcome vs cold-agent, trajectory-RAG and instruction-card/plain-HTTP-ceiling baselines under the preregistered win rule; staged execution F0(prereg integration)->WP-0(vendoring)->consumer wiring->arms->telemetry->Phase A(attribution diagnostic + amortization + A1 smoke gate)->Phase B(confirmatory panel).",
+      "single_authorized_beta": "PB-001 rev 5; see state/product_beta_request.json .directed_pre_outcome_revision_v3 and state/product_current.json pointer"
     },
     {
       "id": "PH-2",

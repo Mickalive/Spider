@@ -1,9 +1,9 @@
 {
   "updated": "2026-08-25",
-  "session": "product-director-fourth-session",
+  "session": "product-director-fifth-session",
   "beta_launch": true,
   "beta_id": "PB-001",
-  "beta_request_revision": 4,
+  "beta_request_revision": 5,
   "beta_request": "state/product_beta_request.json",
   "public_deployment_authorized": false,
   "commercialization_authorized": false,
@@ -11,17 +11,20 @@
     {
       "id": "PH-1",
       "title": "Inherited operational memory layer for repeat/near-repeat web tasks",
-      "status": "PRODUCT_CANDIDATE"
+      "status": "PRODUCT_CANDIDATE",
+      "beta": "PB-001 authorized (single beta), staged execution F0->WP-0->consumer->arms->telemetry->Phase A->Phase B"
     },
     {
       "id": "PH-2",
       "title": "Shared capability infrastructure line (Steam-like registry)",
-      "status": "WATCH"
+      "status": "WATCH",
+      "note": "CTO council standing rule: zero hours until a reproduced mechanism AND a resolver exist; Unbrowse stays OFFICIAL_CLAIM vendor-run pending Intel cycle-2"
     },
     {
       "id": "PH-4",
       "title": "Selector self-healing / staleness product",
-      "status": "WATCH"
+      "status": "WATCH",
+      "note": "deprioritized per CTO council; staleness calibration G8/G9 still open"
     }
   ],
   "rejected_hypotheses": [
@@ -34,9 +37,21 @@
   "evidence_basis": {
     "graph": "G-H1..G-H4 accepted through Run 32783797303 audit PASS (safe_to_integrate=true, required_fixes=[]); addressing program COMPLETE; graph-inheritance-scaling launched, not decided",
     "physics": "WP-003B-R2 + WP-005 FALSIFIED, audits VALIDATED_FOR_CURRENT_TEST / PASS; WP-004 blocked",
-    "intel": "cycle 1 integrated: sgdr-state-grounded-dynamic-retrieval VALIDATED_USEFUL at PROOF_OF_CONCEPT ceiling (gate PASS run 32800296360); binding wording constraints travel verbatim",
+    "intel": "cycle 1 integrated: sgdr-state-grounded-dynamic-retrieval VALIDATED_USEFUL at PROOF_OF_CONCEPT ceiling (gate PASS run 32800296360); binding wording constraints travel verbatim; cycle-2 Unbrowse reproduction selected, not decided",
+    "cto_council": "CTO-2 cross-lane review integrated as advisory input (lab/cto 2d4505f): pointer-file durability protocol, prereg v3 delta pack, B1-from-Intel sourcing, standing do-not-build list",
+    "product_pipeline_discovery": "BENCHMARK_PREREG v2 WAS frozen pre-outcome at 1457fd3cf8212f2bbea929b078aa5f1f7df8fdb6 (origin/cycle/product/32861115761/architect) implementing directed revision v2, but marooned unintegrated; sibling builder commit aceaea6 has byte-identical tree = zero vendoring, zero outcomes anywhere (git log --all verified)",
     "product_beta_audits": 0
   },
-  "next_role": "BETA_ARCHITECT: issue BENCHMARK_PREREG v2 per state/product_beta_request.json.directed_pre_outcome_revision_v2 BEFORE any outcome; then BETA_BUILDER executes BUILD_PLAN work packages under freeze checkpoints F1/F2",
-  "reason": "Fourth-session re-authorization after a THIRD uncommitted working-tree reset (beta request deleted, beta_launch flipped false) with HEAD (4dc8820) still holding the committed rev-3 authorization and ZERO beta outcomes existing anywhere. This session re-derived the decision from scratch rather than assuming either prior state: mounted accepted snapshots and BOTH audit gates were re-read directly (Graph gate CYCLE_32783797303_GRAPH_GATE.json PASS/safe_to_integrate=true/required_fixes=[] with byte-exact recomputation of every headline number; Intel gate CYCLE_32800296360_INTEL_GATE.json PASS/VALIDATED_USEFUL/PROOF_OF_CONCEPT ceiling; Physics loop confirms the audited double falsification WP-003B-R2 + WP-005). The five contract criteria hold: audited building blocks exist (store/replay/reset G-H1; blind retrieval + UNKNOWN discipline G-H2; procedure packaging + iteration policy G-H3/G-H4; V31 equipment-only; Intel SGDR fused addressing at PoC ceiling as the free-form-goal front door); remaining critical assumptions A1-A5 are exactly what an internal benchmarkable MVP tests; credible current-agent baselines are cleanly definable (B0 cold same-backbone browser agent = the credible current agent, B1 AWM-class trajectory memory mandatory per constitution §13, B2 exact-replay sanity diagnostic); fair instrumentation is specified (perf_counter, token/call accounting, byte-restored KB, write-suppressed evaluation, equalized anchored predicates, health gates); and a falsifiable win rule was written before any benchmark outcome exists, so freezing remains constitutionally clean per §19. Graph-inheritance-scaling is UNDECIDED and stays out of beta scope either way. Exactly ONE beta remains authorized (PB-001); request rev 4 is a provenance-only bump documenting the third reset with zero substantive clause deltas vs rev 3. Missing directive directives/PRODUCT_OPTIMIZATION.md authored this session so the optimization charter is actually enforceable."
+  "durability_protocol": {
+    "problem_verified": ".github/workflows/product-loop.yml lines 62-65 mechanically delete state/product_beta_request.json and flip beta_launch=false before every Director session; caused five identical re-authorization cycles with zero builds. Infra fix is OUTSIDE Product write scope: escalated to human/Meta-Director in docs/PRODUCT_LEDGER.md fifth-session entry.",
+    "rules_effective_now": [
+      "Sessions boot from lab/product HEAD, never from a dirty tree.",
+      "When the tree is dirty, authorization is read via git show HEAD:state/product_beta_request.json and hash-verified against state/product_current.json.artifact_pins.authorization_sha256; if it verifies, re-derivation is FORBIDDEN - log a one-line receipt instead.",
+      "state/product_current.json pointer {beta_id, phase, next_role, artifact_pins} is committed at EVERY role transition.",
+      "Tag pb001-F0 when the marooned prereg v2 lands on lab/product.",
+      "No force-push on branches holding frozen artifacts."
+    ]
+  },
+  "next_role": "BETA_ARCHITECT: (step 0/F0) integrate marooned prereg v2 tree 1457fd3 into product-beta/PB-001/ UNCHANGED and tag pb001-F0; then issue BENCHMARK_PREREG v3 addendum implementing state/product_beta_request.json.directed_pre_outcome_revision_v3 (delta pack D1-D8) BEFORE any outcome; update state/product_current.json at each transition. Then BETA_BUILDER executes WP-0 vendoring under freeze checkpoints F1/F2 per execution_critical_path.",
+  "reason": "Fifth-session re-authorization after the FOURTH mechanized working-tree reset. Decision re-derived from primary evidence rather than prior claims, which surfaced material new facts: (1) the wipe loop is a verified workflow defect, not an anomaly; (2) prereg v2 already exists frozen pre-outcome but was never integrated - so the correct move is integration + disclosed additive delta pack, not another blank-slate rewrite; (3) builder branch contains zero work and zero outcome rows exist anywhere, keeping pre-outcome revision constitutionally clean (sec 19). All five contract criteria hold, now STRONGER than rev 4: audited building blocks unchanged; assumptions A1-A5 testable AND attributable (Phase-A diagnostic de-confounds the SGDR+V31 stack flagged independently by the CTO council and two fresh critics); baselines strengthened (B1 sourced from Intel AWM-min lineage, NEW B3 instruction-card/plain-HTTP ceiling arm mandated by constitution sec 13, B2 demoted to fixture check); instrumentation specified including cost_event telemetry before Phase A; falsifiable win rule carried VERBATIM since rev 1 with additive strictness only. Exactly ONE beta remains authorized (PB-001). Public deployment/commercialization remain unauthorized without explicit human decision."
 }
