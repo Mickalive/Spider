@@ -183,3 +183,68 @@ Director integration.
   would extend/cap the beta task panel for any successor version; Intel
   cycle-2 Unbrowse verdict gates any execution-ladder product feature;
   Beta Tester/Auditor result on PB-001 triggers the feedback decision.
+
+---
+
+## Intake 2026-08-25 (third Product session on mounted accepted snapshots)
+
+Session-start state anomaly, recorded for provenance (same class as the
+anomaly that preceded the second session): the working tree carried an
+UNCOMMITTED deletion of `state/product_beta_request.json` and an uncommitted
+flip of `state/product_direction.json.beta_launch` to `false`, while HEAD
+(`1ecb1b8`) still contained the committed PB-001 rev-2 authorization. No
+Beta Tester/Auditor result, no BENCHMARK_PREREG v2, no builder WP-0 output
+and no Phase-A/B evaluation row exist anywhere in the repository or mounts.
+Nothing justifies a rollback; this session re-evaluated the decision from
+scratch rather than assuming either prior state.
+
+Sources consumed and verified against the persistent claims:
+
+| Lane | Mounted accepted state | Match to persistent claims | Product reading |
+|---|---|---|---|
+| Graph | G-H1..G-H4 audits PASS through Run 32783797303 (`results/audit/CYCLE_32783797303_GRAPH_GATE.json`, safe_to_integrate=true); addressing program COMPLETE; successor `graph-inheritance-scaling` preregistered, launched, NOT decided | YES | No new product signal. Depth ≤3 remains the beta frontier; depth>3 stays out of scope whether scaling holds or collapses — the pending verdict neither blocks nor alters PB-001. |
+| Physics | WP-003B-R2 + WP-005 FALSIFIED (audits VALIDATED_FOR_CURRENT_TEST / PASS); WP-004 BLOCKED pending identifiability | YES | PH-3 stays REJECTED; no predictive feature enters any arm. |
+| Intel | cycle-1 integrated: `sgdr-state-grounded-dynamic-retrieval` VALIDATED_USEFUL, PROOF_OF_CONCEPT ceiling, gate PASS run 32800296360; cycle-2 mission selected (Unbrowse reproduction), not decided | YES | SGDR fused retrieval remains the audited front-door block for A2; binding wording constraints travel verbatim. Unbrowse stays OFFICIAL_CLAIM vendor-run until independently reproduced — nothing registry-like enters the beta. |
+| Product pipeline | no outcomes anywhere (`product_beta_audits: 0`) | YES | Re-authorization before any outcome is constitutionally clean (§19). |
+
+Deliberately EXCLUDED as evidence: all unaudited/un-integrated in-flight
+branches (Graph scaling cycle outputs, Intel cycle-2 Scout work, Physics
+WP-006 carry-forward). They may become evidence only after their own audits
+and Director integration.
+
+### Decision 2026-08-25 (third session)
+
+- **PH-1 stays PRODUCT_CANDIDATE; Product Beta PB-001 RE-AUTHORIZED as the
+  single authorized beta — request revision 3**
+  (`state/product_beta_request.json`). The five contract criteria were
+  re-checked and all hold, with zero substantive deltas vs rev 2:
+  1. Audited important building blocks: YES (unchanged set: G-H1 store/
+     replay/reset; G-H2 blind retrieval + UNKNOWN discipline; G-H3/G-H4
+     procedure packaging + iteration policy; V31 equipment-only; Intel
+     SGDR fused addressing at PoC ceiling).
+  2. Remaining critical assumptions testable by the beta: YES (A1 LLM
+     consumer end-to-end; A2 end-to-end free-form-goal serving via the
+     audited fused scorer; A3 savings over edge iteration AND trajectory
+     memory; A4 material token/call/wall-clock deltas; A5 containment).
+  3. Credible current-agent baselines cleanly definable: YES (B0 cold
+     same-backbone ReAct agent; B1 AWM-class trajectory memory mandatory
+     per constitution §13; B2 exact-replay sanity diagnostic).
+  4. Fair instrumentation specified: YES (perf_counter, provider usage
+     accounting, byte-restored KB, write-suppression, equalized anchored
+     predicates disclosed to all arms, site-health gates, seeded schedule).
+  5. Falsifiable win rule written before outcomes: YES (Director floor in
+     the request; architect prereg must freeze it verbatim plus tightenings;
+     no outcome exists yet).
+- **Request bumped to rev 3 for provenance only**: revision_note documents
+  the second working-tree reset and this session's independent re-verification;
+  every Director-floor clause, assumption A1–A5 and the directed pre-outcome
+  revision v2 are carried forward UNCHANGED.
+- **PH-2 WATCH** (Intel cycle-2 Unbrowse verdict pending; nothing registry-
+  like enters any beta). **PH-3 REJECTED** (no new physics evidence).
+  **PH-4 WATCH** (no new staleness-calibration evidence).
+- Standing next step unchanged: **BETA_ARCHITECT must commit
+  `product-beta/PB-001/BENCHMARK_PREREG.md` v2 (+ amended architecture
+  state) BEFORE any outcome**, implementing exactly the directed fused-scoring
+  change under the frozen everything-else rule; then BETA_BUILDER proceeds
+  under freeze checkpoints F1/F2. Public deployment and commercialization
+  remain unauthorized without explicit human decision.

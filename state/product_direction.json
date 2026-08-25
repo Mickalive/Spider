@@ -1,9 +1,9 @@
 {
   "updated": "2026-08-25",
-  "session": "product-director-second-session",
+  "session": "product-director-third-session",
   "beta_launch": true,
   "beta_id": "PB-001",
-  "beta_request_revision": 2,
+  "beta_request_revision": 3,
   "beta_request": "state/product_beta_request.json",
   "public_deployment_authorized": false,
   "commercialization_authorized": false,
@@ -38,5 +38,5 @@
     "product_beta_audits": 0
   },
   "next_role": "BETA_ARCHITECT: issue BENCHMARK_PREREG v2 per state/product_beta_request.json.directed_pre_outcome_revision_v2 BEFORE any outcome; then BETA_BUILDER executes BUILD_PLAN work packages under freeze checkpoints F1/F2",
-  "reason": "All five beta criteria from directives/PRODUCT_DIRECTOR.md are met, now more strongly than at first authorization: audited building blocks exist and grew by one (the first externally sourced, independently validated mechanism — SGDR fused task+state retrieval — directly de-risking the free-form-goal front door at PoC tier); remaining critical assumptions (LLM consumer end-to-end, material cost/latency deltas, failure-mode containment) are precisely what an internal benchmarkable MVP tests; credible baselines are cleanly definable (cold same-backbone browser agent + AWM-class trajectory-memory baseline + exact-replay sanity); fair instrumentation is specified (perf_counter, token/call accounting, byte-restored KB, write-suppressed evaluation, equalized acceptance predicates, health gates); and a falsifiable win rule was written before any benchmark outcome. Exactly ONE beta remains authorized (PB-001). The directed pre-outcome revision v2 exists because the v1 architect freeze consumed a stale premise ('Intel ledger empty'); no outcome exists anywhere, so re-freezing with the audited addressing block is clean and makes the test fairer to the product hypothesis without weakening any baseline or clause."
+  "reason": "Third-session re-authorization after a second uncommitted working-tree reset (beta request deleted, beta_launch flipped false) with HEAD still holding the committed rev-2 authorization and ZERO beta outcomes existing anywhere. Evidence basis independently re-verified against the mounted accepted snapshots this session: audited building blocks exist and remain sufficient (Graph G-H1..G-H4 PASS run 32783797303 — store/replay/reset, blind retrieval with UNKNOWN discipline, procedure packaging as validated procedural ordering, V31 equipment; Intel cycle-1 SGDR fused task+state retrieval VALIDATED_USEFUL at PoC ceiling, gate PASS run 32800296360); remaining critical assumptions (LLM consumer end-to-end, end-to-end free-form-goal serving, material cost/latency deltas, failure-mode containment) are precisely what an internal benchmarkable MVP tests; credible baselines are cleanly definable (cold same-backbone browser agent + AWM-class trajectory-memory baseline + exact-replay sanity); fair instrumentation is specified (perf_counter, token/call accounting, byte-restored KB, write-suppressed evaluation, equalized acceptance predicates, health gates); a falsifiable win rule was written before any benchmark outcome and no outcome exists, so re-freezing is constitutionally clean. Graph-inheritance-scaling is launched but UNDECIDED: depth>3 stays out of beta scope either way, so its pending verdict does not block or alter PB-001. Exactly ONE beta remains authorized (PB-001), request rev 3 with zero substantive deltas vs rev 2."
 }
