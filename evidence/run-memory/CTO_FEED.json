@@ -179,6 +179,46 @@
         "Adopt the auditor's escalation rule: two consecutive empty/unverifiable deliveries ⇒ BLOCKED on infrastructure grounds."
       ],
       "route_to": ["INFRA", "RUNTIME", "INTEL"]
+    },
+    {
+      "id": "CF-2026-08-25-11",
+      "importance": "HIGH",
+      "kind": "STRUCTURAL_FIX",
+      "summary": "Control-plane contradiction killed the Runtime lane's first real cycle post-completion (run 32887030457): docs/CTO_TO_RUNTIME.md FIRST COMMIT items 1–2 order the team to build directives/COST_EVENT.md + schemas/spider.{cost_event,capsule,plan}.v0.schema.json ('next lane commit must produce the COST_EVENT pack or a schema/validator/benchmark artifact'), but 'Enforce Runtime scope' in runtime-loop.yml line 140 — unchanged since workflow creation at 7669dcd — allows neither path. The team followed the charter; after ~64 minutes of green work (prereg-frozen pilot, VERDICT PASS 6/6 gates, 58/58 tests) the gate flagged exactly BAD='directives/COST_EVENT.md'+'schemas/' and failed the run, skipping Auditor and Director; lab/runtime untouched. Mechanism is DISTINCT from CF-2026-08-25-08 (porcelain false positive on pre-staged files): here the violation is real but mandated by another control-plane document. The stale allowlist is still live at main HEAD, so every future scheduled Runtime run fails identically until fixed. Evidence survived: cycle/runtime/32887030457/team@c2f0ba8e was pushed despite the gate.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "source_run_id": 32887030457,
+      "durable_refs": [
+        "evidence/run-memory/runs/32887030457.json",
+        "git:origin/cycle/runtime/32887030457/team@c2f0ba8e30effa1f5afb6e957adb3efd9c2a8558 (complete DURABLE_UNAUDITED artifact set)",
+        "git:origin/lab/cto:docs/CTO_TO_RUNTIME.md (charter items ordering the flagged paths)",
+        "git:.github/workflows/runtime-loop.yml@7669dcd:140 (stale allowlist)"
+      ],
+      "actionable_next": [
+        "One-line fix: extend the runtime-loop.yml scope allowlist with directives/COST_EVENT\\.md$ and schemas/ (or relocate shared schemas into an allowed namespace agreed by CTO + Product as D8 co-owner), then audit c2f0ba8e instead of re-running the team from scratch.",
+        "Sweep ALL lane loop workflows for the same charter-vs-gate drift class before their next scheduled dispatch (compare each gate regex against the current CTO_TO_* charters).",
+        "Decide policy: when a CTO charter orders cross-cutting artifacts outside a lane's historical write scope, the charter dispatch must update the gate in the same change."
+      ],
+      "route_to": ["INFRA", "CTO", "RUNTIME"]
+    },
+    {
+      "id": "CF-2026-08-25-12",
+      "importance": "MEDIUM",
+      "kind": "RESEARCH_RADAR",
+      "summary": "First measured Runtime economics exist and await the lane's first-ever independent audit: whole-task exact-repeat inheritance does NOT repay its cost against a strong zero-provider scripted baseline (T1 login: 4=4 actions, ~+29% wall overhead incl. 236ms detection) while stale-detection fallback observability (per-check discrimination host✓url✓elem✗ → materialized plan/v0 handoff) and localized pagination inheritance (1 inherited action vs baseline failure live and on mirror) measured positive — all descriptive, n=2 capsules, no provider tokens, explicitly NO work-compression claim licensed. Also durable-unaudited: resolver false-accept fix via vendored goalsig stopword pruning, playwright interception quirks, dom-bytes floor calibration, frozen-deferred near-repeat cell T3 with a predeclared VALID-NEGATIVE close rule. This answers de facto the BLOCKED escalation from runs 32864270667/32875577618/32877702179 (stale af164b9 thrice resubmitted): fresh-cycle execution does produce new work — but none of it is accepted truth until a Runtime auditor recomputes it (audit recipe pre-staged in the branch ledger).",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "source_run_id": 32887030457,
+      "additional_source_run_ids": [32877702179],
+      "durable_refs": [
+        "git:origin/cycle/runtime/32887030457/team@c2f0ba8e30effa1f5afb6e957adb3efd9c2a8558 (PREREG_R0_CYCLE1.json, pilot VERDICT/raw_rows/cost_events, RUNTIME_LEDGER.md findings C1–C5, NEXT_RUNTIME.md)",
+        "git:origin/cycle/runtime/32877702179/audit (BLOCKED escalation context)",
+        "evidence/run-memory/runs/32887030457.json"
+      ],
+      "actionable_next": [
+        "After CF-11's gate fix, dispatch the Runtime audit against c2f0ba8e rather than a fresh team run; the ledger's handoff section specifies offline suite rerun, VERDICT recomputation from raw_rows.jsonl, prereg hash-chain check, REFUSE-list compliance, and the T2 fixture-bound caveat challenge.",
+        "Auditor must specifically adjudicate prereg-timing exposure: dev-phase test executions touched the same tasks before the 20:14:53Z freeze (log-only evidence in /tmp/spider_run_evidence/32887030457/logs.txt — keep that bundle until adjudicated).",
+        "If C1's negative survives audit, treat the NEXT_RUNTIME.md cycle-2 mission (near-repeat cell T3 + exploration-cost task family, predeclared VALID-NEGATIVE close rule) as the highest-information cheap dispatch for the lane."
+      ],
+      "route_to": ["CTO", "RUNTIME"]
     }
   ]
 }
