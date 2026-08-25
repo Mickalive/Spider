@@ -14,6 +14,7 @@ on:
       - "SPIDER Product Beta Repair"
       - "SPIDER Runtime Lane"
       - "SPIDER Critical CTO Council"
+      - "SPIDER Frontier Research Team"
     types: [completed]
 
 permissions:
@@ -111,3 +112,4 @@ jobs:
           recover_workflow product-beta-repair.yml
           recover_workflow runtime-loop.yml
           recover_workflow cto-council.yml
+          recover_workflow frontier-research.yml
