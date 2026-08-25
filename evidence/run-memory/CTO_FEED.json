@@ -331,6 +331,65 @@
         "Emit run-id-attributed receipts for supervisor cancellations (extend CF-02's receipt requirement to queue-state transitions) so dedupe events become self-documenting instead of forensic archaeology."
       ],
       "route_to": ["INFRA", "CTO", "PRODUCT"]
+    },
+    {
+      "id": "CF-2026-08-25-19",
+      "importance": "HIGH",
+      "kind": "PROVENANCE_INCIDENT",
+      "summary": "PB-001's combined v4+v5 amendment and Builder WP-8 artifacts are NOT merged into lab/product: HEAD d944594 lacks product-beta/PB-001/BENCHMARK_PREREG_V4_ADDENDUM.md and the WP-8 tree (curator-verified against a fresh fetch), while the eighth-session Director's ledger receipt states the artifacts existed 'ONLY on session mounts' (/tmp/spider_beta_architect, /tmp/spider_beta_builder) and pinned recovery hashes in state/product_current.json.artifact_pins. Curator Git cross-check refines the exposure: durable copies DO exist on origin — cycle/product/32886859788/architect@ddce3a3 (full amendment; parent 55c56d6 preserves the UNCHANGED builder-tree integration) and cycle/product/32886859788/builder@7657565 (child of e84b11c carrying the WP-8-executed tree; arch->bld delta = 7 files, 827 insertions). Residual fragility: the architect's own named lineage cycle/product/pb001-architect-v4 was never pushed (survives only via the generic snapshot step), session mounts are ephemeral, and the destructive wipe (CF-20) keeps eroding working-tree state each dispatch. The Director explicitly directed the merge as the FIRST action at next activation; it has not happened yet.",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "source_run_id": 32886859788,
+      "durable_refs": [
+        "evidence/run-memory/runs/32886859788.json",
+        "git:origin/lab/product@d944594 (eighth-session receipt + artifact_pins recovery hashes)",
+        "git:origin/cycle/product/32886859788/architect@ddce3a399fcf7b627eb5dec0809c316471e4f442 (curator-verified on remote)",
+        "git:origin/cycle/product/32886859788/builder@76575657195d7bd810e7670e5d565d23dda33004 (curator-verified on remote; child of e84b11c)"
+      ],
+      "actionable_next": [
+        "Merge cycle/product/32886859788/builder@7657565 into lab/product BEFORE any further Product dispatch (single merge closes both the amendment and WP-8 gaps; verify kb_frozen.sqlite sha ...f89abd8f... and the four artifact_pins hashes after merge).",
+        "Until merged, treat lab/product PB-001 content as STALE relative to ddce3a3/7657565 and do not prune either cycle branch.",
+        "Adopt the structural rule: any state-referenced artifact must be reachable from a PUSHED ref before its producing session ends (extends CF-02 receipts to lane artifacts); named agent lineages should be pushed, not left local."
+      ],
+      "route_to": ["CTO", "PRODUCT", "INFRA"]
+    },
+    {
+      "id": "CF-2026-08-25-20",
+      "importance": "HIGH",
+      "kind": "INFRA_FAILURE_MODE",
+      "summary": "product-loop.yml's destructive wipe deletes COMMITTED-AT-HEAD authorization/build state on every dispatch and survived its own hotfix: `rm -f state/product_beta_request.json` (:63), `state/product_beta_architecture.json` (:136), `state/product_beta_build.json` (:236), `state/product_beta_audit.json` (:327) are still live at main HEAD, and both director sessions in run 32886859788 confirmed 'still live even at the hotfix commit 8f3980c'. Observed damage in this single run: seventh-session Director had to detect the wiped working-tree request, verify rev 6 intact at HEAD via git show, and restore before writing rev 7; Builder found F1/F2 freeze artifacts (results/product-beta/PB-001/* incl. the hash-pinned KB) destroyed and restored them byte-exact from ddce3a3 with independent hash recomputation; eighth session found stale direction state on both mounts. Each dispatch burns agent time on detect-and-restore rituals and manufactures exactly the kind of mount-vs-durable divergence that produced CF-19.",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "source_run_id": 32886859788,
+      "durable_refs": [
+        "git:.github/workflows/product-loop.yml@main:63,136,236,327 (rm -f lines)",
+        "git:8f3980c ('infra: hotfix Product runner to current non-destructive control plane' — did NOT remove the rm lines)",
+        "git:origin/lab/product@e84b11c + d944594 (escalation receipts in PRODUCT_LEDGER.md)",
+        "evidence/run-memory/runs/32886859788.json"
+      ],
+      "actionable_next": [
+        "Replace the rm -f lines with conditional clears that never delete committed-at-HEAD files (or drop them entirely — the beta_launch validation already requires fresh direction), then verify by one full scheduled dispatch that no restore ritual occurs.",
+        "Sweep sibling loop workflows for the same wipe pattern before their next dispatches.",
+        "Add a post-checkout assertion comparing wiped paths against git show HEAD:<path> so any future wipe is loud instead of silent."
+      ],
+      "route_to": ["INFRA", "CTO", "PRODUCT"]
+    },
+    {
+      "id": "CF-2026-08-25-21",
+      "importance": "MEDIUM",
+      "kind": "RESEARCH_RADAR",
+      "summary": "PB-001 is fully armed and hard-parked solely on missing backbone credentials — the portfolio's first measured Product outcome is two env vars away: beta AUTHORIZED (request rev 7) + FROZEN (v4+v5 amendment, benchmark_frozen=true, win-rule floors carried verbatim since rev 1) + ARMED (WP-8a/8b/8c executed, 91/91 offline tests in builder env, stub-side dress rehearsal GREEN incl. W8 seam lint dead_pairs=[], go-live gate chain mechanically enforced in harness/run_phase_b.py). Resume is mechanical once PB_LLM_API_KEY/PB_LLM_MODEL (+optional PB_LLM_BASE_URL) exist: provider telemetry selftest row -> model_id pin -> dress-rehearsal replay -> B0 pilot smoke -> Phase B under frozen gates. Kill accounting: D2 consumed slot 1 of 2; slot 2 auto-consumed only by post-credential invalid/blocked events. Banked scoped negative knowledge en route: SGDR-fused ranking UNDERPERFORMED primitive lexical scoring on the PB-001 panel (D2: 3/8 vs 7/8 correct@1) => permanent front-door treatment freeze — a composition boundary condition Intel should weigh for mechanism transfer claims. Epistemic discipline held: zero outcome rows anywhere (cost_events.jsonl = 8 harness rows, zero provider rows); NO superiority/comparative claim licensed; losing-beta outcomes predeclared acceptable.",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "source_run_id": 32886859788,
+      "durable_refs": [
+        "evidence/run-memory/runs/32886859788.json",
+        "git:origin/lab/product@d944594 (WATCH armed-park disposition + resume sequence)",
+        "git:origin/cycle/product/32886859788/builder@7657565 (armed tree pending CF-19 merge)"
+      ],
+      "actionable_next": [
+        "Decide whether to provision backbone credentials for PB-001 or formally re-scope PH-1; either decision ends the receipts-only park, which otherwise persists indefinitely at zero information gain per scheduled dispatch.",
+        "Route the D2 boundary condition (fused < primitive lexical ranking on this panel/store) to INTEL as a transfer-limit data point on the accepted SGDR mechanism — without touching its PoC verdict.",
+        "After CF-19's merge lands, audit ddce3a3+WP-8 as one unit instead of re-running architect/builder sessions."
+      ],
+      "route_to": ["CTO", "PRODUCT", "INTEL"]
     }
   ]
 }
