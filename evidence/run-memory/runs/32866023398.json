@@ -1,0 +1,79 @@
+{
+  "run_id": 32866023398,
+  "run_number": 5,
+  "workflow_name": "SPIDER Product and Beta Lane",
+  "workflow_path": ".github/workflows/product-loop.yml",
+  "status": "completed",
+  "conclusion": "failure",
+  "head_sha": "92192eac19bc",
+  "created_at": "2026-08-25T15:28:35Z",
+  "updated_at": "2026-08-25T15:48:54Z",
+  "event": "workflow_dispatch",
+  "evidence_class": "PRODUCT",
+  "job_outcomes": {
+    "PRODUCT DIRECTOR": "failure (15:28:41-15:48:52Z, ~20m) — decision fully synthesized, then persist push rejected non-fast-forward → exit 1",
+    "BETA ARCHITECT / PRODUCT DIRECTOR — ARCHITECTURE BLOCK / BUILD BLOCK / BETA BUILDER / BETA TESTER-AUDITOR / BETA REVIEW / AUDIT→BUILDER": "skipped"
+  },
+  "durable_refs": [
+    "git:origin/lab/product@8f3980c 'infra: hotfix Product runner to current non-destructive control plane' — the pre-staged infra set visible in this run's index eventually landed on lab/product via a later cycle (visible as ancestor in lab/product history)",
+    "git:origin/lab/product history ad25538 ('Product Director synthesis 32870361258') → 86b0102 (F0 marooned-prereg recovery) → 86a59ec (rev 6) → e84b11c (rev 7): later sessions re-derived and superseded this session's authorization; current state/product_direction.json has beta_launch=true, beta_request_revision=7 (curator-verified)",
+    "NO durable ref exists for this session's own commits — see MAROONED finding below"
+  ],
+  "findings": [
+    {
+      "kind": "ANOMALY",
+      "summary": "MAROONED DIRECTOR DECISION (provenance incident, curator Git-verified): the fifth Director session committed its PB-001 rev-5 re-authorization locally as c875c47 (5 Product-scoped files: state/product_direction.json beta_launch=true + product_beta_request.json rev 5 + results/product/PRODUCT_HYPOTHESES.json + docs/PRODUCT_LEDGER.md +92 lines + docs/PRODUCT_ARCHITECTURE_HYPOTHESES.md) plus workflow persist commit d834791 — but the final `git push origin HEAD:refs/heads/lab/product` was REJECTED non-fast-forward (remote tip had advanced), the job exited 1, and ALL downstream jobs were skipped. Verified 2026-08-25 via `git branch -r --contains`: commits 440a465, c875c47 and d834791 are reachable from NO fetched ref. The session's full decision text survives ONLY in this raw log. The lane later recovered by independent re-derivation (rev 6 → rev 7 lineage above), so lane state is healthy — but whether every item of this session's V3-A..G hardening pack persisted verbatim into the durable rev>=7 lineage is NOT verifiable from Git.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "HIGH",
+      "route_to": ["CTO", "PRODUCT", "INFRA"]
+    },
+    {
+      "kind": "OTHER",
+      "summary": "Decision content of the marooned session (recoverable from log only): PB-001 re-authorized as the single Product Beta at request revision 5 after a contract-mandated FOUR-CRITIC fresh-context challenge executed PRE-OUTCOME (verdict: no fatal flaw). Convergent hardening codified as directed_pre_outcome_revision_v3 — V3-A: B0 pinned to current-release default grounding; V3-B: B1 deduped/embedder-scored/compressed within same token cap (anti-strawman); V3-C: both-solved pairing definition, stricter full-set reading governs; V3-D: prompt-cache separation + Phase-A producer-cost amortization disclosure; V3-E: INFRA/agent failure taxonomy; V3-F: 4-row unscored calibration micro-pass; V3-G: optional B1b exploratory; PLUS a binding narrative ceiling (even a WIN cannot claim unbounded 'beats current agents'). Critic proposals REJECTED to preserve frozen prereg discipline: B2 cut, panel shrink, new scored arms, win-rule stratification, site mirrors. Evidence re-verified from scratch: Graph CYCLE_32783797303 PASS with scaling successors UNDECIDED (depth<=3 stays beta frontier); Intel CYCLE_32800296360 PASS/VALIDATED_USEFUL/PoC ceiling; Physics double falsification stands (PH-3 REJECTED unchanged); /tmp/spider_cto empty.",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "importance": "HIGH",
+      "route_to": ["PRODUCT", "CTO"]
+    },
+    {
+      "kind": "ANOMALY",
+      "summary": "FOURTH live occurrence of the Product working-tree wipe anomaly observed at session start: `state/product_beta_request.json` deleted and `beta_launch` flipped false while HEAD held the committed rev-4 authorization (2bf3c2b). Root cause identified LATER (product-loop.yml rm -f's its four beta state files every dispatch — see runs/32886859788.json and CF digest); this run is an additional pre-diagnosis data point showing the anomaly was already recurring at occurrence #4 while still unexplained.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "MEDIUM",
+      "route_to": ["INFRA", "CTO"],
+      "_note": "DUPLICATE as to root cause (already durable via runs/32886859788.json); unique here as a timestamped occurrence observation."
+    },
+    {
+      "kind": "BUG",
+      "summary": "In-session git mishap chain, fully recovered but instructive: (1) fresh runner lacked git identity → first commit failed 'fatal: empty ident name'; (2) after setting repo-local identity, commit 440a465 ACCIDENTALLY SWEPT ~41 pre-staged non-Product files (.opencode/agents/*.md, docs/roles/RUNTIME_DIRECTOR.md, docs/roles/RUNTIME_RUNNER.md etc.) that ANOTHER work stream had left in the shared index; (3) agent detected it, attempted `git reset --soft HEAD~1 && git commit ... --quiet -- <paths>` but put --quiet after the pathspec → 'error: pathspec --quiet did not match any file(s) known to git'; (4) corrected argument order produced clean c875c47 with exactly the five Product paths, preserving the staged remainder. Net effect: no contamination landed anywhere (the sweep commit never pushed), but the episode shows cross-work-stream index pollution is possible on these runners.",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "importance": "MEDIUM",
+      "route_to": ["INFRA"]
+    },
+    {
+      "kind": "NEGATIVE",
+      "summary": "Zero beta outcomes confirmed anywhere in repo or mounts at this date; the existing builder branch was byte-identical to its architect branch (docs only, no real build) — independently corroborating what runs/32799261473.json + runs/32861115761.json recorded about the permission-killed builder sessions. DUPLICATE as to content.",
+      "evidence_status": "DUPLICATE",
+      "importance": "LOW",
+      "route_to": ["PRODUCT"]
+    }
+  ],
+  "failure_signatures": [
+    "! [rejected] HEAD -> lab/product (non-fast-forward); error: failed to push some refs … Process completed with exit code 1 — Director persist step lacks pull/retry, stranding local-only commits d834791/c875c47",
+    "'fatal: empty ident name' on fresh-runner commit before identity config",
+    "'error: pathspec --quiet did not match any file(s) known to git' (misordered git commit flags)",
+    "recurring working-tree anomaly #4: product_beta_request.json deleted + beta_launch=false vs committed authorization at HEAD"
+  ],
+  "research_opportunities": [
+    "PRODUCT diff-audit: verify each directed_pre_outcome_revision_v3 item (V3-A..V3-G + narrative ceiling) is represented in the durable rev-6/rev-7 lineage; where absent, decide whether to re-adopt or formally drop it — the pack's binding measurement-side hardening should not silently vanish.",
+    "INFRA: add a delivery assertion + `git pull --rebase` retry on non-fast-forward to every lane persist step (this failure mode strands whole Director decisions); pair with the existing zero-diff guard proposal.",
+    "INFRA: consider per-role worktrees/indexes so concurrent work streams cannot pre-stage files into each other's commits."
+  ],
+  "already_captured_elsewhere": [
+    "Wipe-anomaly root cause + hotfix status: runs/32886859788.json and INDEX thematic digest.",
+    "PB-001 lineage outcomes (rev 6 build-block, rev 7 re-auth, amendment ddce3a3, WP-8): runs/32886859788.json.",
+    "Builder==architect byte-identity fact: already recorded under runs/32861115761.json."
+  ],
+  "distillation_complete": true,
+  "safe_to_prune": false,
+  "pruning_rationale": "This raw log is the SOLE surviving trace of commits 440a465/c875c47/d834791 (unreachable from any Git ref): pruning it would destroy the only record of the marooned rev-5 authorization and its V3-A..G hardening pack. The in-session git-mishap narratives and the fourth wipe-anomaly observation are also log-only."
+}

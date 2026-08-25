@@ -1,0 +1,45 @@
+{
+  "run_id": 32864697417,
+  "run_number": 1,
+  "workflow_name": "SPIDER Runtime Bootstrap Dedup Once",
+  "workflow_path": ".github/workflows/runtime-dedup-once.yml",
+  "status": "completed",
+  "conclusion": "success",
+  "head_sha": "7c5fed8654bdf364b8b7b965e6e7cce3635a0828",
+  "created_at": "2026-08-25T15:15:49Z",
+  "updated_at": "2026-08-25T15:16:07Z",
+  "event": "push",
+  "evidence_class": "OPERATIONAL",
+  "job_outcomes": {
+    "dedup": "success (15:15:53-15:16:06Z, ~13s of work)"
+  },
+  "durable_refs": [
+    "git:origin/main@59d4817 'maintenance: remove Runtime dedup one-shot [skip ci]' (deletes .github/workflows/runtime-dedup-once.yml, 33 deletions; pushed 7c5fed8..59d4817 at 15:16:03Z) — durable proof of the self-cleanup",
+    "sibling receipt: cancellation of run 32864608446 confirmed in-log ('✓ Request to cancel workflow 32864608446 submitted.')"
+  ],
+  "findings": [
+    {
+      "kind": "OTHER",
+      "summary": "Designed one-shot dedupe pattern executed cleanly: a push that authorized an R0 bootstrap produced BOTH a runtime-loop dispatch (run 32864608446) and this one-shot workflow; the one-shot cancelled only the duplicate PENDING bootstrap (`gh run cancel` scoped to a single run id — not a broad concurrency kill), removed its own workflow file from main, and exited. Total cost ~18s runner time. A reusable pattern: one-shot self-removing maintenance workflows with narrowly-scoped cancellations leave no standing infrastructure.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "LOW",
+      "route_to": ["INFRA"]
+    },
+    {
+      "kind": "OTHER",
+      "summary": "Incidental PROVENANCE SNAPSHOT preserved here losslessly (this is the only place it exists): the checkout fetch log at 2026-08-25T15:15:58Z enumerates every remote branch then live on the repo — lab/{graph,intel,physics,product,runtime}, infra/parallel-audit-lanes, spider/lab-v2-audited, spider/physics-cycle-32670239235, tmp-orchestration-fix{,-staged}, opencode/dispatch-{49582a-20260823071610,d55dbe-20260823085742,ff5c0f-20260823071951}, and cycle branches: cycle/32670239235/{audit,director,graph,physics}; cycle/graph/{32676576613,32684818422,32689296167,32776369696,32782331702,32783797303,32793580374(team+audit-attempt-1..8)}; cycle/intel/{32781482957,32792931901,32796176172,32800296360,32809100696,32861355080 (scout-only),repair3/repro}; cycle/physics/{32676578274,32682634851(team),32689298051,32776372437,32793165981,32799587656,32860596387}; cycle/product/{32799261473,32820217763,32851946087,32861115761}. Useful as a timestamped inventory for any future branch-archaeology question (e.g., proving lab/runtime existed by 15:15:58Z, or that no runtime cycle branch existed yet).",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "importance": "LOW",
+      "route_to": ["INFRA", "CTO"]
+    }
+  ],
+  "failure_signatures": [],
+  "research_opportunities": [],
+  "already_captured_elsewhere": [
+    "The cancelled duplicate's record: runs/32864608446.json.",
+    "Runtime lane substance lives under runs/32864270667.json and successors."
+  ],
+  "distillation_complete": true,
+  "safe_to_prune": true,
+  "pruning_rationale": "Pure one-shot orchestration, fully distilled: the cancellation mechanics and the self-removal commit are durable on main (59d4817), and the only unique content — the incidental remote-branch inventory — has been transcribed verbatim-in-substance into this record, so deletion destroys no surviving copy of useful information."
+}

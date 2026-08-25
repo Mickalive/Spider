@@ -1,0 +1,103 @@
+{
+  "run_id": 32864270667,
+  "run_number": 1,
+  "workflow_name": "SPIDER Runtime Lane",
+  "workflow_path": ".github/workflows/runtime-loop.yml",
+  "status": "completed",
+  "conclusion": "success",
+  "head_sha": "7669dcdc06279d0a8bed3de61a3f548bd8e0b6a7",
+  "created_at": "2026-08-25T15:11:44Z",
+  "updated_at": "2026-08-25T17:03:00Z",
+  "event": "push",
+  "evidence_class": "RUNTIME",
+  "job_outcomes": {
+    "TEAM RUNTIME": "success (15:11:48-16:40:57Z, ~89m)",
+    "INDEPENDENT AUDITOR — RUNTIME": "success (16:41:00-17:02:53Z, ~22m) — gate REVISE delivered and persisted",
+    "RUNTIME AUDIT → RETURN TO BUILDER": "success — dispatched repair round 2 as run 32875577618",
+    "RUNTIME AUDIT — BLOCKED / RUNTIME DIRECTOR": "skipped (REVISE path)"
+  },
+  "durable_refs": [
+    "git:origin/cycle/runtime/32864270667/team@af164b9c26cfb6df2a4a855f9238b02156edeaf3 (47 files, 17224 insertions: runtime/ package — resolver.py, adapters.py, registry.py, derivation.py, addressing.py, verifier.py, loop.py, accounting.py, baselines.py, browser.py, explorer.py, kb.py, schema.py, sigutil.py; runtime/bench/{prereg_r0.md,tasks_r0.py,run_bench.py,analyze_r0.py,decoys.py,mirror.py}; runtime/store/registry/ 12 derived cap.graph.* capsules + _derivation_report.json; tests/runtime/ 7 files incl. fake_session.py; copies of accepted Graph evidence CYCLE_32783797303_GRAPH_GATE.json + cycle3 store dump)",
+    "git:origin/cycle/runtime/32864270667/audit@820f38ec67683b7587822d0fa10f11c3527ca081 (reports/audit/CYCLE_32864270667_RUNTIME.md + results/audit/CYCLE_32864270667_RUNTIME_GATE.json: gate=REVISE, safe_to_integrate=false, claims=9, required_fixes=6 [RF1-RF6]; curator re-verified reachable on remote)",
+    "dispatch receipt: repair round 2 = https://github.com/Mickalive/Spider/actions/runs/32875577618 (from RETURN-TO-BUILDER step output)"
+  ],
+  "findings": [
+    {
+      "kind": "RESULT",
+      "summary": "FIRST full Runtime lane cycle executed end-to-end through an independent audit. Team built a complete agent-facing runtime package on top of accepted Graph cycle-3 evidence (12 capsules derived from the cycle3 store dump, hash chain ec5af9e146ea629f), including a PREREGISTERED R0 benchmark (runtime/bench/prereg_r0.md) with decoys and a stale-mirror instrument. Auditor verdict: gate=REVISE, safe_to_integrate=false, 9 claims, six concrete same-cycle fixes RF1-RF6 — none moving the frozen benchmark/question, so repair rather than BLOCKED.",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "importance": "MEDIUM",
+      "route_to": ["RUNTIME", "CTO"]
+    },
+    {
+      "kind": "NEGATIVE",
+      "summary": "The preregistered R0 benchmark was NEVER EXECUTED: no R0_TRACES.jsonl, no R0_RESULTS.json, no journals, no overlay dir anywhere in the snapshot; docs/RUNTIME_LEDGER.md and docs/NEXT_RUNTIME.md were committed as 0-byte blobs; all six frozen win rules unevaluated — there is NO work-compression measurement at any evidence tier. Auditor explicitly warns this must never later be narrated as a 'null result'.",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "importance": "HIGH",
+      "route_to": ["RUNTIME", "CTO"]
+    },
+    {
+      "kind": "BUG",
+      "summary": "resolver.py:180 raises TypeError whenever >=2 candidates are simultaneously applicable — reproduced by the auditor for E1/E2/E4/E7/E8 (2/2/2/3/2 applicable candidates). Seven of nine R0 cells could not have completed even one pass, independently proving no benchmark run ever occurred. (Same defect class resurfaces in the team-phase pytest failures: \"TypeError: 'Segment' object is not subscriptable\".)",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "importance": "HIGH",
+      "route_to": ["RUNTIME"]
+    },
+    {
+      "kind": "BUG",
+      "summary": "Committed test suite fails 10/27 across four defect classes, including tests calling report(success=...) against an outcome_success signature. LOG-ONLY BEHAVIORAL UPGRADE unique to this distillation: the team ITSELF ran `pytest tests/runtime` at 16:27:55Z, saw '10 failed, 17 passed', then continued without fixing — so this is not merely 'never ran its own suite' but 'ran it, observed failures, shipped anyway'.",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "importance": "HIGH",
+      "route_to": ["RUNTIME", "CTO"]
+    },
+    {
+      "kind": "ANOMALY",
+      "summary": "Decoy canary fires at RETRIEVAL level: both gold-keyed decoys rank above threshold on verbatim goal GOAL_E8 (coverage 1.333 and 1.000 — the coverage metric itself can exceed 1.0). Amendment A1's promised RESOLVER_FP_GOLDKEYED metric was never implemented, and A1 also quietly loosened D5's hard-fail condition. Direct false-positive risk for any semantic-addressing claim.",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "importance": "MEDIUM",
+      "route_to": ["RUNTIME", "GRAPH"]
+    },
+    {
+      "kind": "BUG",
+      "summary": "ALREADY_SATISFIED is unreachable by construction (precondition ordering + missing return key), killing flagship E5 cell; verify_ms is a hardcoded 0.05 constant rather than a measurement; V2 §6 maintenance/storage overhead accounting is absent entirely — i.e., the economics vector cannot be computed from this implementation yet.",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "importance": "MEDIUM",
+      "route_to": ["RUNTIME", "PRODUCT"]
+    },
+    {
+      "kind": "OTHER",
+      "summary": "What survived the audit (positive residue): byte-deterministic derivation (12/12 capsules recompiled identical), verified dump hash chain ec5af9e146ea629f, credential-free parameterized capsule artifacts, honest CANDIDATE tier with fail-closed lint, genuinely ID-free external contract (resolve/materialize), and a well-designed, honestly disclosed E6 stale-mirror instrument that simply was never fired.",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "importance": "LOW",
+      "route_to": ["RUNTIME"]
+    },
+    {
+      "kind": "LIMIT",
+      "summary": "Runner environment gap (operational): numpy is not installed in the runner venv, so `pytest tests/test_integrity.py` fails at COLLECTION (`physics/run_wp003.py` imports numpy) — distinct from the 10 genuine runtime test failures; any lane running the repo-wide suite on these runners hits this.",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "importance": "LOW",
+      "route_to": ["INFRA"]
+    }
+  ],
+  "failure_signatures": [
+    "'Segment' object is not subscriptable (resolver multi-applicable-candidate crash, resolver.py:180)",
+    "RuntimeLoop.report() got an unexpected keyword argument 'success' (test/API signature drift)",
+    "\"10 failed, 17 passed\" in tests/runtime committed to the team snapshot",
+    "gate=REVISE / safe_to_integrate=false / required_fixes=6 (RF1-RF6) — first Runtime audit verdict"
+  ],
+  "research_opportunities": [
+    "Execute RF1-RF6 then actually fire the frozen R0 benchmark — the preregistration exists but has zero outcomes; this is the cheapest remaining path to the lane's first real work-compression number.",
+    "Implement the missing RESOLVER_FP_GOLDKEYED metric and bound/normalize the coverage score (currently exceeds 1.0); re-test gold-keyed decoy false-accept behavior after fix.",
+    "Make ALREADY_SATISFIED reachable and replace hardcoded verify_ms=0.05 with measured verification latency before any economics claim.",
+    "Add a persist-phase gate: unit suite must be green (or failures explicitly dispositioned) before a team snapshot is pushed — would have caught this cycle's 10/27.",
+    "The E6 stale-mirror instrument is designed, disclosed, unfired: candidate freshness/invalidation experiment for free."
+  ],
+  "already_captured_elsewhere": [
+    "Later lineage of this exact team tip: af164b9c was resubmitted three times zero-delta and audited REVISE→REVISE→BLOCKED before run 32887030457 produced fresh work — see runs/32887030457.json and INDEX digest 'Runtime lane has left the scaffolding stage'.",
+    "Upstream Graph evidence consumed here (CYCLE_32783797303 gate PASS) is recorded under runs/32783797303.json.",
+    "OpenCode stall-watch warning signature ('network signature detected; watching for a 300s stall') already covered by thematic digest from run 32886859788 — DUPLICATE here (observed twice in team phase, no abort)."
+  ],
+  "distillation_complete": true,
+  "safe_to_prune": false,
+  "pruning_rationale": "Claim-bearing first Runtime cycle: the team/audit branches must stay reachable for the REVISE→…→BLOCKED audit lineage and R0 reproduction; additionally the behavioral fact that the team ran its failing suite and shipped anyway exists ONLY in this raw log (the durable audit states the consequence, not the observation)."
+}

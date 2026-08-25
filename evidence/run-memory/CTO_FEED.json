@@ -20,7 +20,10 @@
         "Decide whether any pre-CTO-4 council pass needs reconstruction from any surviving side channel (none currently known); if not, close the UNKNOWNs as accepted residual risk.",
         "Do not treat reconstructed summaries of the four UNKNOWN council runs as evidence; none exists."
       ],
-      "route_to": ["CTO", "INFRA"]
+      "route_to": [
+        "CTO",
+        "INFRA"
+      ]
     },
     {
       "id": "CF-2026-08-25-02",
@@ -37,7 +40,11 @@
         "Require every autonomous workflow (cto-council, *-supervisor, watchdogs, hygiene) to commit a run-id-attributed receipt before completion, so future pruning cannot orphan outputs.",
         "Gate future hygiene passes on evidence/run-memory safe_to_prune flags instead of recency heuristics only."
       ],
-      "route_to": ["INFRA", "RUNTIME", "CTO"]
+      "route_to": [
+        "INFRA",
+        "RUNTIME",
+        "CTO"
+      ]
     },
     {
       "id": "CF-2026-08-25-03",
@@ -53,7 +60,9 @@
       "actionable_next": [
         "Verify the next hygiene dispatch runs the hardened script and that run 32880942022 itself stays protected (its log is the sole deletion manifest; safe_to_prune=false)."
       ],
-      "route_to": ["INFRA"]
+      "route_to": [
+        "INFRA"
+      ]
     },
     {
       "id": "CF-2026-08-25-04",
@@ -62,11 +71,17 @@
       "summary": "Orchestration noise dominates Actions economics: 102 supervisor/watchdog/council runs were created in ~18.2h (~5.6/h; Ox Watchdog alone = 39) versus 54 retained substantive runs. Each hygiene pass costs ~43s of sequential DELETE API calls per 100 deletions.",
       "evidence_status": "OPERATIONAL_DIAGNOSTIC",
       "source_run_id": 32880942022,
-      "durable_refs": ["evidence/run-memory/runs/32880942022.json"],
+      "durable_refs": [
+        "evidence/run-memory/runs/32880942022.json"
+      ],
       "actionable_next": [
         "Evaluate consolidating watchdog/supervisor cadence or event-triggering them instead of fixed heartbeats; measure runner minutes saved against recovery-latency risk before changing anything."
       ],
-      "route_to": ["INFRA", "RUNTIME", "CTO"]
+      "route_to": [
+        "INFRA",
+        "RUNTIME",
+        "CTO"
+      ]
     },
     {
       "id": "CF-2026-08-25-05",
@@ -85,7 +100,11 @@
         "Add a zero-diff guard after each team phase: if the team branch equals its base, return to coder immediately instead of consuming an independent-audit job.",
         "Confirm root cause by reproducing the abort signature before treating the fix as verified; the log-only evidence lives only in /tmp/spider_run_evidence/32782331702/logs.txt and this run's Actions log."
       ],
-      "route_to": ["RUNTIME", "INFRA", "CTO"]
+      "route_to": [
+        "RUNTIME",
+        "INFRA",
+        "CTO"
+      ]
     },
     {
       "id": "CF-2026-08-25-06",
@@ -102,7 +121,11 @@
       "actionable_next": [
         "If any future interventional Web collection is chartered: require per-site artifact-completion assertions at collection end, audited coverage denominators, and slot-selection rules robust to accessibility scaffolding (no frozen ordinal anchors); do NOT reopen WP-006 itself (frozen stop rule stands)."
       ],
-      "route_to": ["PHYSICS", "RUNTIME", "CTO"]
+      "route_to": [
+        "PHYSICS",
+        "RUNTIME",
+        "CTO"
+      ]
     },
     {
       "id": "CF-2026-08-25-07",
@@ -111,7 +134,10 @@
       "summary": "Report-vs-data drift recurred in all three lanes within one day while aggregates stayed numerically correct: Physics WP-006 FN-control misstatement (62/62 claimed), Intel SGDR wins attributed to the wrong site cluster in prose (login/pager claimed; actually all the-internet dynamic-loading clusters), Graph cycle-3 E2 residual used non-reproducible denominators. Independent auditors caught all three via from-scratch recomputation against committed raw rows; none was measurement fraud, but self-reported decompositions are unreliable inputs for Director decisions (the WP-006 misstatement fed a lane-termination decision).",
       "evidence_status": "DURABLE_UNAUDITED",
       "source_run_id": 32783797303,
-      "additional_source_run_ids": [32776372437, 32781482957],
+      "additional_source_run_ids": [
+        32776372437,
+        32781482957
+      ],
       "durable_refs": [
         "evidence/run-memory/runs/32776372437.json",
         "evidence/run-memory/runs/32781482957.json",
@@ -120,7 +146,12 @@
       "actionable_next": [
         "Consider requiring reports to generate decomposition claims mechanically from the committed raw rows (script-generated tables with row-linked provenance) so prose cannot diverge from data; strengthen auditor checklists to always recompute per-cell decompositions, not just headline aggregates."
       ],
-      "route_to": ["CTO", "GRAPH", "PHYSICS", "INTEL"]
+      "route_to": [
+        "CTO",
+        "GRAPH",
+        "PHYSICS",
+        "INTEL"
+      ]
     },
     {
       "id": "CF-2026-08-25-08",
@@ -129,7 +160,9 @@
       "summary": "The lane workflows' 'Enforce audit-only writes' gate false-positives on workflow-pre-staged control-plane files and kills COMPLETED audits: it tests `git status --porcelain` against allowed output dirs, but an earlier workflow step pre-stages role/directive sync files into the index, which get attributed to the auditor. Physics run 32793165981: auditor had already written gate=PASS/safe_to_integrate=true when the gate exited 1 → run conclusion=failure, Lane Director skipped. Graph run 32793580374: REVISE delivered, then the deterministic failure repeated across EIGHT re-run attempts (~18m audit each, ~13h wall-clock span), eight audit-attempt branches pushed, Director never ran. The gate also masks real violations by mixing plumbing noise into the same signal.",
       "evidence_status": "OPERATIONAL_DIAGNOSTIC",
       "source_run_id": 32793165981,
-      "additional_source_run_ids": [32793580374],
+      "additional_source_run_ids": [
+        32793580374
+      ],
       "durable_refs": [
         "evidence/run-memory/runs/32793165981.json",
         "evidence/run-memory/runs/32793580374.json",
@@ -141,7 +174,11 @@
         "Add retry-loop damping: if an audit attempt fails with the identical violation set twice, fail loudly instead of re-running the full audit.",
         "After fixing, verify by replaying one physics and one graph cycle end-to-end (Director job must execute)."
       ],
-      "route_to": ["INFRA", "RUNTIME", "CTO"]
+      "route_to": [
+        "INFRA",
+        "RUNTIME",
+        "CTO"
+      ]
     },
     {
       "id": "CF-2026-08-25-09",
@@ -159,7 +196,10 @@
         "Optionally authorize a small recovery pass promoting ids 32776369696/32689296167 from runs/32790538553.json to deleted/<id>.json tombstones; the other 19 deletions are orchestration-only.",
         "Keep run 32790538553's raw log protected until its manifest is duplicated into durable memory (its record currently carries it)."
       ],
-      "route_to": ["CTO", "INFRA"]
+      "route_to": [
+        "CTO",
+        "INFRA"
+      ]
     },
     {
       "id": "CF-2026-08-25-10",
@@ -178,7 +218,11 @@
         "Mount ONE canonical workspace per agent phase (or persist from the workspace the agent was last seen committing in) so lineage commits cannot diverge from the published ref.",
         "Adopt the auditor's escalation rule: two consecutive empty/unverifiable deliveries ⇒ BLOCKED on infrastructure grounds."
       ],
-      "route_to": ["INFRA", "RUNTIME", "INTEL"]
+      "route_to": [
+        "INFRA",
+        "RUNTIME",
+        "INTEL"
+      ]
     },
     {
       "id": "CF-2026-08-25-11",
@@ -198,7 +242,11 @@
         "Sweep ALL lane loop workflows for the same charter-vs-gate drift class before their next scheduled dispatch (compare each gate regex against the current CTO_TO_* charters).",
         "Decide policy: when a CTO charter orders cross-cutting artifacts outside a lane's historical write scope, the charter dispatch must update the gate in the same change."
       ],
-      "route_to": ["INFRA", "CTO", "RUNTIME"]
+      "route_to": [
+        "INFRA",
+        "CTO",
+        "RUNTIME"
+      ]
     },
     {
       "id": "CF-2026-08-25-12",
@@ -207,7 +255,9 @@
       "summary": "First measured Runtime economics exist and await the lane's first-ever independent audit: whole-task exact-repeat inheritance does NOT repay its cost against a strong zero-provider scripted baseline (T1 login: 4=4 actions, ~+29% wall overhead incl. 236ms detection) while stale-detection fallback observability (per-check discrimination host✓url✓elem✗ → materialized plan/v0 handoff) and localized pagination inheritance (1 inherited action vs baseline failure live and on mirror) measured positive — all descriptive, n=2 capsules, no provider tokens, explicitly NO work-compression claim licensed. Also durable-unaudited: resolver false-accept fix via vendored goalsig stopword pruning, playwright interception quirks, dom-bytes floor calibration, frozen-deferred near-repeat cell T3 with a predeclared VALID-NEGATIVE close rule. This answers de facto the BLOCKED escalation from runs 32864270667/32875577618/32877702179 (stale af164b9 thrice resubmitted): fresh-cycle execution does produce new work — but none of it is accepted truth until a Runtime auditor recomputes it (audit recipe pre-staged in the branch ledger).",
       "evidence_status": "DURABLE_UNAUDITED",
       "source_run_id": 32887030457,
-      "additional_source_run_ids": [32877702179],
+      "additional_source_run_ids": [
+        32877702179
+      ],
       "durable_refs": [
         "git:origin/cycle/runtime/32887030457/team@c2f0ba8e30effa1f5afb6e957adb3efd9c2a8558 (PREREG_R0_CYCLE1.json, pilot VERDICT/raw_rows/cost_events, RUNTIME_LEDGER.md findings C1–C5, NEXT_RUNTIME.md)",
         "git:origin/cycle/runtime/32877702179/audit (BLOCKED escalation context)",
@@ -218,7 +268,10 @@
         "Auditor must specifically adjudicate prereg-timing exposure: dev-phase test executions touched the same tasks before the 20:14:53Z freeze (log-only evidence in /tmp/spider_run_evidence/32887030457/logs.txt — keep that bundle until adjudicated).",
         "If C1's negative survives audit, treat the NEXT_RUNTIME.md cycle-2 mission (near-repeat cell T3 + exploration-cost task family, predeclared VALID-NEGATIVE close rule) as the highest-information cheap dispatch for the lane."
       ],
-      "route_to": ["CTO", "RUNTIME"]
+      "route_to": [
+        "CTO",
+        "RUNTIME"
+      ]
     },
     {
       "id": "CF-2026-08-25-13",
@@ -237,7 +290,12 @@
         "Add the zero-diff guard: if a builder/architect session dies with no novel commits, do not push a misleadingly-named branch (b05d8f8 says 'build' but contains only architect content).",
         "PB-001 can resume from the intact architect freeze 2c3bd28 + the logged vendoring plan; no architecture re-run is needed."
       ],
-      "route_to": ["RUNTIME", "INFRA", "CTO", "PRODUCT"]
+      "route_to": [
+        "RUNTIME",
+        "INFRA",
+        "CTO",
+        "PRODUCT"
+      ]
     },
     {
       "id": "CF-2026-08-25-14",
@@ -254,7 +312,10 @@
         "Wrap install steps with step-level retry (e.g. `for i in 1..5: curl ... && break` or reuse run-opencode-with-retry.sh semantics) in ALL loop workflows; verify opencode is already present as a fast-path skip (`command -v opencode`).",
         "Treat 'installer failed' as retryable job failure rather than pushing an empty snapshot branch."
       ],
-      "route_to": ["INFRA", "CTO"]
+      "route_to": [
+        "INFRA",
+        "CTO"
+      ]
     },
     {
       "id": "CF-2026-08-25-15",
@@ -263,7 +324,9 @@
       "summary": "External cancellation cluster at 2026-08-25T05:01Z hit two lanes within ~14 seconds while both agents were healthy and mid-session: Intel run 32809100696 reproducer cancelled 05:01:31–35Z (cycle-2 Unbrowse prereg not yet frozen, zero commits — clean to redo from scout branch) and Physics run 32799587656 attempt-2 auditor cancelled 05:01:40–45Z mid final-checks (harmless to science because attempt 1 had already pushed gate=PASS at 03:12Z, but it cost ~15 min of redundant re-verification and left the run conclusion=failure despite a delivered PASS audit). Trigger not identifiable from either bundle (supervisor action, manual cancel, platform reclaim, or concurrency sweep). Combined wasted agent time ≈34 min.",
       "evidence_status": "OPERATIONAL_DIAGNOSTIC",
       "source_run_id": 32809100696,
-      "additional_source_run_ids": [32799587656],
+      "additional_source_run_ids": [
+        32799587656
+      ],
       "durable_refs": [
         "evidence/run-memory/runs/32809100696.json",
         "evidence/run-memory/runs/32799587656.json",
@@ -274,7 +337,12 @@
         "For Physics specifically: consume the existing PASS gate at 9acccb12 rather than re-running audits of the same carryforward — the WP-006 chain was later integrated via 32866107906 anyway, so no further stewardship of this snapshot is needed.",
         "Consider persisting partial agent state (todo/prereg drafts) incrementally so externally-cancelled sessions leave resumable artifacts."
       ],
-      "route_to": ["INFRA", "CTO", "PHYSICS", "INTEL"]
+      "route_to": [
+        "INFRA",
+        "CTO",
+        "PHYSICS",
+        "INTEL"
+      ]
     },
     {
       "id": "CF-2026-08-25-16",
@@ -291,7 +359,11 @@
         "Re-dispatch the Intel cycle-2 reproducer straight from the scout snapshot: freeze intel/prereg/cycle2_unbrowse_prereg.md first (conditions A/B/C, curl-level null, bias exclusions, per-site reporting that never pools no-API sites), then measure.",
         "Reuse the scout's forensic checklist (raw-CSV recomputation, prose-vs-data diff, harness grep for sleeps/timing asymmetries/warmed rows, vendor-negative ledger) as the standing Intel template for any future vendor performance headline."
       ],
-      "route_to": ["INTEL", "PRODUCT", "CTO"]
+      "route_to": [
+        "INTEL",
+        "PRODUCT",
+        "CTO"
+      ]
     },
     {
       "id": "CF-2026-08-25-17",
@@ -300,7 +372,10 @@
       "summary": "Audited-but-unintegrated snapshots cause duplicated stewardship spend: WP-006's evidence was carried forward bit-exact TWICE — first by run 32799587656 (carryforward + full independent audit PASS at 9acccb12 that no Director ever consumed because its attempt-2 rerun was cancelled), then again by run 32866107906 whose chain actually reached integration. Root cause: audited-but-unintegrated work leaves no machine-visible 'pending integration' trace for whoever dispatches the next physics run, so each new dispatch redoes legitimate-looking stewardship. Same class risk exists anywhere a Director job is skipped after a green audit (see CF-08's Graph retry storm). Positive note: verdict discipline held both times — neither stewardship run manufactured new confirmatory collection under the frozen stop rule.",
       "evidence_status": "OPERATIONAL_DIAGNOSTIC",
       "source_run_id": 32799587656,
-      "additional_source_run_ids": [32866107906, 32793165981],
+      "additional_source_run_ids": [
+        32866107906,
+        32793165981
+      ],
       "durable_refs": [
         "evidence/run-memory/runs/32799587656.json",
         "git:origin/lab/physics@0be8d8a (actual WP-006 acceptance chain via 32866107906)",
@@ -310,7 +385,11 @@
         "Have lane workflows record a machine-readable pending-integration pointer (branch + gate path) into lane state whenever an audit reaches PASS but the Director does not run, and have dispatchers check it before authorizing fresh team/stewardship sessions.",
         "Before any future WP-006-area dispatch: none is needed — TERMINATE_LANE stands, domain reopened under V3 via c15321c; treat further WP-006 stewardship as duplicate spend."
       ],
-      "route_to": ["CTO", "INFRA", "PHYSICS"]
+      "route_to": [
+        "CTO",
+        "INFRA",
+        "PHYSICS"
+      ]
     },
     {
       "id": "CF-2026-08-25-18",
@@ -330,7 +409,11 @@
         "Before pruning any such run, adjudicate against the live API (gh run view <id> --json jobs,conclusion) to rule out a fetch-harness artifact; this applies to 32894986672 itself (safe_to_prune=false until then).",
         "Emit run-id-attributed receipts for supervisor cancellations (extend CF-02's receipt requirement to queue-state transitions) so dedupe events become self-documenting instead of forensic archaeology."
       ],
-      "route_to": ["INFRA", "CTO", "PRODUCT"]
+      "route_to": [
+        "INFRA",
+        "CTO",
+        "PRODUCT"
+      ]
     },
     {
       "id": "CF-2026-08-25-19",
@@ -350,7 +433,11 @@
         "Until merged, treat lab/product PB-001 content as STALE relative to ddce3a3/7657565 and do not prune either cycle branch.",
         "Adopt the structural rule: any state-referenced artifact must be reachable from a PUSHED ref before its producing session ends (extends CF-02 receipts to lane artifacts); named agent lineages should be pushed, not left local."
       ],
-      "route_to": ["CTO", "PRODUCT", "INFRA"]
+      "route_to": [
+        "CTO",
+        "PRODUCT",
+        "INFRA"
+      ]
     },
     {
       "id": "CF-2026-08-25-20",
@@ -370,7 +457,11 @@
         "Sweep sibling loop workflows for the same wipe pattern before their next dispatches.",
         "Add a post-checkout assertion comparing wiped paths against git show HEAD:<path> so any future wipe is loud instead of silent."
       ],
-      "route_to": ["INFRA", "CTO", "PRODUCT"]
+      "route_to": [
+        "INFRA",
+        "CTO",
+        "PRODUCT"
+      ]
     },
     {
       "id": "CF-2026-08-25-21",
@@ -389,7 +480,11 @@
         "Route the D2 boundary condition (fused < primitive lexical ranking on this panel/store) to INTEL as a transfer-limit data point on the accepted SGDR mechanism — without touching its PoC verdict.",
         "After CF-19's merge lands, audit ddce3a3+WP-8 as one unit instead of re-running architect/builder sessions."
       ],
-      "route_to": ["CTO", "PRODUCT", "INTEL"]
+      "route_to": [
+        "CTO",
+        "PRODUCT",
+        "INTEL"
+      ]
     },
     {
       "id": "CF-2026-08-25-22",
@@ -398,7 +493,9 @@
       "summary": "Permission auto-rejection killed its THIRD and FOURTH confirmed lane sessions, both in Product runs of this batch (extends CF-05/CF-13 into a 3-variant taxonomy): (a) run 32851946087 BETA ARCHITECT died ~6s in after constructing WRONG ABSOLUTE PATHS for its own control files (/home/runner/work/Spider/docs/roles/BETA_ARCHITECT.md + /home/runner/work/Spider/SPIDER_MASTER_PROMPT.md — one directory ABOVE the repo root) -> two external_directory auto-rejects -> whole opencode session terminated; the retry wrapper printed 'attempt 1/6' and never retried; validation then failed 'Missing product_beta_architecture state' and an empty architect branch was pushed. (b) run 32861115761 BETA BUILDER died ~3m40s in probing ~/.config/opencode/* (second opencode-config variant after 32799261473's ~/.local/share/opencode/* probe); builder branch pushed with zero novel content (tree identical to architect branch). Same session earlier self-healed a benign missing path (/tmp/spider_control/roles/BETA_BUILDER.md). Four kills = three mechanisms: out-of-workspace cd/probe, opencode-config self-probe (x2), path-canonicalization bug.",
       "evidence_status": "LOG_ONLY_UNAUDITED",
       "source_run_id": 32851946087,
-      "additional_source_run_ids": [32861115761],
+      "additional_source_run_ids": [
+        32861115761
+      ],
       "durable_refs": [
         "evidence/run-memory/runs/32851946087.json",
         "evidence/run-memory/runs/32861115761.json",
@@ -410,7 +507,12 @@
         "Pre-authorize read-only access to opencode's own config/state dirs (~/.config/opencode, ~/.local/share/opencode) in lane permission blocks — two of four kills are exactly this probe — or make external_directory denials skip the single tool call instead of terminating the session.",
         "Fix the retry wrapper gap observed in 32851946087: a permission-killed session exited without attempts 2-6 firing; decide explicitly whether that signature is retryable or fail-fast-loud."
       ],
-      "route_to": ["RUNTIME", "INFRA", "CTO", "PRODUCT"]
+      "route_to": [
+        "RUNTIME",
+        "INFRA",
+        "CTO",
+        "PRODUCT"
+      ]
     },
     {
       "id": "CF-2026-08-25-23",
@@ -419,7 +521,10 @@
       "summary": "The 'Enforce audit-only writes' porcelain false positive struck a THIRD time (Physics #7, run 32860596387), stranding another delivered PASS audit: the auditor had written both mandatory outputs and self-validated gate=PASS/safe_to_integrate=true/required_fixes=[] when the gate flagged exactly NINE workflow-pre-staged control-plane files (.opencode/agents/{dynamics_physicist,geometry_physicist,graph_runner,independent_auditor,lab_director,lane_director,physics_runner}.md + directives/AUDITOR.md + directives/LANE_DIRECTOR.md) -> exit 1 -> Lane Director skipped. The PASS gate is curator-verified on origin/cycle/physics/32860596387/audit@beaf59c9. CF-2026-08-25-08's fix (scope check to session-era diff vs HEAD, or unstage plumbing pre-audit) is STILL unapplied after three strikes across two lanes; this instance supplies the exact regression-test file list.",
       "evidence_status": "OPERATIONAL_DIAGNOSTIC",
       "source_run_id": 32860596387,
-      "additional_source_run_ids": [32793165981, 32793580374],
+      "additional_source_run_ids": [
+        32793165981,
+        32793580374
+      ],
       "durable_refs": [
         "evidence/run-memory/runs/32860596387.json",
         "git:origin/cycle/physics/32860596387/audit@beaf59c978c8c007baa5501077a9ac304a0314cb (orphaned PASS gate)",
@@ -430,7 +535,12 @@
         "Add retry damping: identical violation set twice -> fail loudly instead of re-running audits.",
         "Before any future Physics dispatch, note WP-006 acceptance already happened via 0be8d8a — do NOT re-audit or re-consume beaf59c9 for WP-006 stewardship."
       ],
-      "route_to": ["INFRA", "RUNTIME", "CTO", "PHYSICS"]
+      "route_to": [
+        "INFRA",
+        "RUNTIME",
+        "CTO",
+        "PHYSICS"
+      ]
     },
     {
       "id": "CF-2026-08-25-24",
@@ -439,7 +549,9 @@
       "summary": "Concurrent duplicate stewardship confirmed with timeline proof (strengthens CF-17): TWO independent bit-exact WP-006 carryforward chains ran in parallel on 2026-08-25 — Physics #7 (run 32860596387: carryforward + unique floor post-mortem/recheck artifacts, independent audit PASS at 15:27Z, never consumed by any Director) and run 32866107906 (fresh-env verification chain, director-integrated as the 5-gate acceptance at lab/physics@0be8d8a 17:40Z). Physics #7's team branch base provably excludes the acceptance commit, so the duplication is real concurrency, not replay. Cost: ~51 runner-minutes plus an audit spent on evidence that was simultaneously being accepted elsewhere. Unique salvageable content from the orphaned chain: results/physics/wp006_floor_postmortem_run32860596387.json and wp006_team_recheck_run32860596387.json on cycle branch 76a1d72b.",
       "evidence_status": "OPERATIONAL_DIAGNOSTIC",
       "source_run_id": 32860596387,
-      "additional_source_run_ids": [32866107906],
+      "additional_source_run_ids": [
+        32866107906
+      ],
       "durable_refs": [
         "evidence/run-memory/runs/32860596387.json",
         "git:origin/cycle/physics/32860596387/team@76a1d72bddd2664c3c900b5b237f0a26665b2f13",
@@ -449,7 +561,11 @@
         "Implement CF-17's pending-integration pointer AND an in-flight dispatch registry keyed by snapshot hash so two chains cannot steward the same evidence concurrently.",
         "If the floor post-mortem's descriptive content is ever needed, read it from cycle branch 76a1d72b — do not rerun stewardship."
       ],
-      "route_to": ["CTO", "INFRA", "PHYSICS"]
+      "route_to": [
+        "CTO",
+        "INFRA",
+        "PHYSICS"
+      ]
     },
     {
       "id": "CF-2026-08-25-25",
@@ -469,7 +585,11 @@
         "When auditing the later accepted cycle, verify the PoC wording preserves the sandbox-vs-production scope limit and does not import vendor headline ratios.",
         "Treat quotes.toscrape transient SCHEMA_MISMATCH as environmental unless it recurs; it is documented as an honest failure-mode datum in the frozen-rules handling."
       ],
-      "route_to": ["INTEL", "PRODUCT", "CTO"]
+      "route_to": [
+        "INTEL",
+        "PRODUCT",
+        "CTO"
+      ]
     },
     {
       "id": "CF-2026-08-25-26",
@@ -488,7 +608,55 @@
         "Carry V31 boundary conditions (giter_v31 qualify=0; D2Q frag_v31-only) into any Product/Runtime reuse of V31 equipment.",
         "Optionally investigate the row-12 EPIPE runner-timeout signature if it recurs in long live batches."
       ],
-      "route_to": ["CTO", "GRAPH", "PRODUCT"]
+      "route_to": [
+        "CTO",
+        "GRAPH",
+        "PRODUCT"
+      ]
+    },
+    {
+      "id": "CF-2026-08-25-27",
+      "importance": "HIGH",
+      "kind": "PROVENANCE_INCIDENT",
+      "summary": "MAROONED PRODUCT DIRECTOR DECISION (run 32866023398, product-loop #5): the fifth Director session fully synthesized and locally committed its PB-001 rev-5 re-authorization + four-critic pre-outcome hardening pack V3-A..V3-G + binding narrative ceiling (commits 440a465 -> clean c875c47, plus persist commit d834791), but the workflow's final push to lab/product was REJECTED non-fast-forward; exit 1 skipped all downstream jobs. Curator Git-check (2026-08-25): c875c47/d834791/440a465 are reachable from NO fetched ref — the decision content survives ONLY in the raw run log. The lane later re-derived independently (rev 6 build-block review, rev 7 re-auth at lab/product e84b11c/d944594), so lane state is healthy, but whether every V3-A..G item persisted verbatim into the durable lineage is unverifiable from Git. This is a NEW work-loss mechanism distinct from permission kills and empty snapshots: real synthesized decision content stranded on ephemeral disk by a missing delivery assertion.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "source_run_id": 32866023398,
+      "durable_refs": [
+        "evidence/run-memory/runs/32866023398.json (sole durable summary of the marooned pack)",
+        "git:origin/lab/product history ad25538 -> 86b0102 -> 86a59ec -> e84b11c (independent rev-6/rev-7 recovery lineage)"
+      ],
+      "actionable_next": [
+        "PRODUCT diff-audit: verify each directed_pre_outcome_revision_v3 item (V3-A..V3-G + narrative ceiling) is represented in the durable rev>=7 lineage; re-adopt or formally drop any that vanished.",
+        "INFRA: add post-push delivery assertion + git pull --rebase retry on non-fast-forward to every lane persist step (joins zero-diff guard proposal)."
+      ],
+      "route_to": [
+        "PRODUCT",
+        "INFRA",
+        "CTO"
+      ]
+    },
+    {
+      "id": "CF-2026-08-25-28",
+      "importance": "MEDIUM",
+      "kind": "RESEARCH_RADAR",
+      "summary": "First full Runtime lane cycle (run 32864270667) closed as audit REVISE RF1-RF6 with ZERO measurements taken: the preregistered R0 work-compression benchmark was built but never executed (ledger/NEXT_RUNTIME committed as 0-byte blobs; auditor explicitly forbids narrating this later as a null result). Concrete defects to clear before R0 can run: resolver.py:180 TypeError when >=2 candidates apply (7/9 cells unexecutable); coverage metric exceeds 1.0 while gold-keyed decoys false-accept above threshold and the promised RESOLVER_FP_GOLDKEYED metric is unimplemented (Amendment A1 also quietly loosened D5's hard-fail); ALREADY_SATISFIED unreachable by construction kills flagship E5 cell; verify_ms hardcoded 0.05 and V2 §6 maintenance/storage overhead absent, so no economics vector is computable. Log-only behavioral datum: the team ran pytest itself (10 failed / 17 passed) and shipped anyway. Audited positive residue: byte-deterministic 12/12 capsule derivation from accepted Graph cycle-3 evidence, credential-free CANDIDATE tier, ID-free resolve/materialize contract, unfired E6 stale-mirror instrument (free freshness experiment).",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "source_run_id": 32864270667,
+      "durable_refs": [
+        "git:origin/cycle/runtime/32864270667/team@af164b9c26cfb6df2a4a855f9238b02156edeaf3",
+        "git:origin/cycle/runtime/32864270667/audit@820f38ec67683b7587822d0fa10f11c3527ca081 (gate REVISE + RF1-RF6)",
+        "evidence/run-memory/runs/32864270667.json"
+      ],
+      "actionable_next": [
+        "RUNTIME: execute RF1-RF6 then actually fire frozen R0 — cheapest path to the lane's first real work-compression number.",
+        "RUNTIME: implement RESOLVER_FP_GOLDKEYED, bound the coverage metric, make ALREADY_SATISFIED reachable, measure verify_ms.",
+        "INFRA/RUNTIME: add a suite-green persist gate for team snapshots (would have caught the 10/27).",
+        "Optionally fire the designed-but-unexecuted E6 stale-mirror instrument as a standalone freshness/invalidation experiment."
+      ],
+      "route_to": [
+        "RUNTIME",
+        "CTO"
+      ]
     }
   ]
 }
