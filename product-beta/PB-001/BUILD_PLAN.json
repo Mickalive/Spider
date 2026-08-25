@@ -1,0 +1,181 @@
+{
+  "beta_id": "PB-001",
+  "plan_version": "2.0",
+  "created": "2026-08-25",
+  "author_role": "BETA_ARCHITECT",
+  "revision_note": "v2 implements the Director's directed_pre_outcome_revision_v2 (state/product_beta_request.json rev 4): SPIDER-arm candidate scoring adopts the audited SGDR-style fused task+state-summary ranking (alpha=0.4, lexical-hash embedder, deterministic summarizer, pool top-M=max(3k,20)=20, greedy MMR lambda=0.7) over the same auto-derived descriptions, with goalsig UNKNOWN thresholds retained unchanged as the eligibility gate and V31 retained as preprocessing. No outcome exists anywhere; this plan is committed before builder WP-0 begins.",
+  "binding_documents": [
+    "product-beta/PB-001/ARCHITECTURE.md",
+    "product-beta/PB-001/BENCHMARK_PREREG.md",
+    "product-beta/PB-001/INTERFACES.md",
+    "product-beta/PB-001/OPTIMIZATION_RATIONALE.md"
+  ],
+  "provenance_pins": {
+    "graph_branch": {
+      "branch": "lab/graph",
+      "commit": "d41fe9bfdfc41176cd0dd9607db29dbff0ced9ec",
+      "note": "Accepted Graph state through G-H4 audit PASS (Run 32783797303, safe_to_integrate=true). Vendor Graph files from exactly this commit."
+    },
+    "intel_branch": {
+      "branch": "lab/intel",
+      "commit": "fca0acbc0aa56af2ad2e83538661b5dc86644c5d",
+      "note": "Accepted Intel state through cycle-1 director integration (gate CYCLE_32800296360 PASS / VALIDATED_USEFUL / PROOF_OF_CONCEPT ceiling). Vendor SGDR files from exactly intel/experiments/sgdr_repro/ at this commit. Clean-room lineage only; NEVER copy CC BY-SA reference source."
+    }
+  },
+  "vendor_manifest": [
+    {"src": "lab/graph@d41fe9b:graph/store.py", "dst": "spider_mem/store.py", "adaptation": "additive only: all_fragments(), dump(); semantics unchanged"},
+    {"src": "lab/graph@d41fe9b:graph/goalsig.py", "dst": "spider_mem/goalsig.py", "adaptation": "verbatim code; constants frozen; v2 ROLE CHANGE documented at call sites: eligibility GATE only (OK|UNKNOWN), ordering delegated to fusion_scorer"},
+    {"src": "lab/graph@d41fe9b:graph/score_variants.py", "dst": "spider_mem/equipment_v31.py", "adaptation": "extract winning-arm V31 functions (descriptor d3_pagelist + canonicalization q1) only; keep pure/inert; no thresholds touched; PREPROCESSING/EQUIPMENT ONLY"},
+    {"src": "lab/graph@d41fe9b:graph/accept.py", "dst": "spider_mem/accept.py", "adaptation": "verbatim + harness-side evaluate_predicate wrapper"},
+    {"src": "lab/graph@d41fe9b:graph/absence.py", "dst": "spider_mem/absence.py", "adaptation": "add depth-bound absence assertion for pagination targets"},
+    {"src": "lab/graph@d41fe9b:graph/rebuild_store.py", "dst": "spider_mem/kbfile.py", "adaptation": "extend with kb_sha256/snapshot/restore/assert_write_suppressed"},
+    {"src": "lab/graph@d41fe9b:shared/browser.py", "dst": "runtime/session.py", "adaptation": "verbatim surface; add fresh-incognito-context-per-row factory"},
+    {"src": "lab/graph@d41fe9b:graph/explorer.py (producer path only)", "dst": "producer/policies.py", "adaptation": "extract cold-exploration + fragment-saving producer machinery; strip evaluation/memory-consumer paths; PRODUCER-ONLY module, import-blocked during Phase B"},
+    {"src": "lab/intel@fca0acb:intel/experiments/sgdr_repro/embedder.py", "dst": "spider_mem/hash_embed.py", "adaptation": "VERBATIM (lexical-hash embedder; sha1 bucketing; DIM=512)"},
+    {"src": "lab/intel@fca0acb:intel/experiments/sgdr_repro/summarizer.py", "dst": "spider_mem/state_summarizer.py", "adaptation": "VERBATIM (deterministic contract-faithful summarizer + content-hash cache + stub fallbacks)"},
+    {"src": "lab/intel@fca0acb:intel/experiments/sgdr_repro/descriptions.py", "dst": "spider_mem/frag_describe.py", "adaptation": "VERBATIM (mechanical fragment-description derivation; shared verb vocabulary)"},
+    {"src": "lab/intel@fca0acb:intel/experiments/sgdr_repro/retriever.py", "dst": "spider_mem/fusion_scorer.py", "adaptation": "strip conditions A_native/A_free_text/B_plain/B_mmr/C_a05/D_random and stimuli imports; keep FragmentBank embed cache, rel_fused formula, mmr_rerank semantics (pool top-M=20, lambda=0.7, tie->lower id), site_key normalization; ALPHA=0.4 fixed; entry point retrieve_fused(goal_text, state_snapshot, gate_passing, ...) composed AFTER the goalsig gate; no other numeric change permitted"}
+  ],
+  "work_packages": [
+    {
+      "id": "WP-0",
+      "title": "Vendor validated blocks + integrity tests (Graph lineage AND Intel SGDR lineage)",
+      "deliverables": [
+        "spider_mem/* per vendor_manifest",
+        "tests/test_vendored_store.py",
+        "tests/test_blind_discipline.py",
+        "tests/test_anchored_predicates.py",
+        "tests/test_v31_equipment_fixture.py",
+        "tests/test_hash_embed_determinism.py",
+        "tests/test_state_summarizer_contract.py",
+        "tests/test_fused_scoring_fixture.py"
+      ],
+      "acceptance": [
+        "vendored-file sha256 table recorded for BOTH lineages",
+        "blind-discipline test proves no goal_sig lookup path exists anywhere in the consumer retrieval path (gate or scorer)",
+        "anchored predicate trap suite green ('fiction' not in historical-fiction; '/page/3' not in '/page/30')",
+        "V31 offline fixture reproduces committed G-H4 confirm pattern (6/8 positives, 0/2 false accepts) on inert cycle-3 KB dump",
+        "hash_embed outputs identical across PYTHONHASHSEED={0,1,random}; committed cosine fixtures pass",
+        "state_summarizer page-kind rules + verb vocabulary + hit/miss/fallback statuses match vendored contract on fixture snapshots",
+        "fusion fixture: offline recomputation over COMMITTED cycle-1 artifacts (results/intel/reproductions/cycle1/* + vendored stimuli bank inputs) reproduces hard@1 {B_plain 25/74, B_mmr 25/74, C_a04 36/74} and pairwise C-vs-B 11 wins / 0 reversals EXACTLY - byte-faithfulness proof BEFORE any product-store integration; these numbers are reproduction-integrity targets inside WP-0 ONLY and may never be quoted as product performance claims",
+        "gate/ranking composition test: with the gate returning zero candidates, retrieve_fused returns UNKNOWN without touching embeddings"
+      ],
+      "freeze_gate": null,
+      "depends_on": []
+    },
+    {
+      "id": "WP-1",
+      "title": "Runtime + LLM adapter + arms",
+      "deliverables": ["runtime/react.py", "runtime/llm.py", "runtime/prompts/*.txt", "arms/b0.py", "arms/b1.py", "arms/spider.py"],
+      "acceptance": [
+        "identical obs/action/budget code path shared by all three arms (single ReactAgent class)",
+        "LLM adapter captures provider usage tokens on every call; BLOCKED if no authenticated endpoint",
+        "SPIDER arm wires whole-goal retrieval as: V31 preprocess -> goalsig gate (frozen constants) -> fusion_scorer.retrieve_fused with entry-state snapshot summary; UNKNOWN path degrades to primitives/explore exactly as B0 exploration",
+        "summarizer/embedder/MMR issue ZERO provider calls; their CPU wall-clock lands in stage_ms_perf.retrieval of SPIDER rows; fused_retrieval_diagnostics populated on SPIDER rows only",
+        "prompt template hashes computed; B0/B1 prompts BYTE-IDENTICAL to v1 Appendix P semantics",
+        "unit test: budgets enforced (steps/calls/tokens/wall)"
+      ],
+      "freeze_gate": "F1 (commit build manifest BEFORE Phase A)",
+      "depends_on": ["WP-0"]
+    },
+    {
+      "id": "WP-2",
+      "title": "Harness driver + artifacts",
+      "deliverables": ["harness/driver.py", "harness/panel.json (frozen content per prereg §5)", "harness/paraphrases_authored.json", "results/product-beta/PB-001/ schema writers"],
+      "acceptance": [
+        "row lifecycle implements restore→health→execute→judge→write-suppress→log exactly",
+        "seeded schedule deterministic across processes (PYTHONHASHSEED-independence proven by test)",
+        "panel.json matches prereg §5.1 table task-for-task",
+        "paraphrase authorship disclosure file present and committed unedited",
+        "live-site preflight re-run and recorded in MANIFEST F1 (byte sizes vs v1 probes disclosed)"
+      ],
+      "freeze_gate": "F1",
+      "depends_on": ["WP-1"]
+    },
+    {
+      "id": "WP-3",
+      "title": "Phase A producer run + KB freeze + B2 sanity",
+      "deliverables": ["producer/run_phase_a.py", "KB dump artifact", "b1_corpus.json", "route_absence_records.json", "b2_sanity_rows.jsonl", "MANIFEST.json F2 section"],
+      "acceptance": [
+        "producers solve ≥6/8 training tasks live under health gates",
+        "B2 sanity replays all 4 routes from restored KB with reused-only actions",
+        "route-absence records cover every panel task incl. depth bounds (books>2, quotes>3)",
+        "F2 committed BEFORE any Phase B row exists anywhere in the repo"
+      ],
+      "freeze_gate": "F2",
+      "depends_on": ["WP-2"]
+    },
+    {
+      "id": "WP-4",
+      "title": "Pilot smoke + baseline validity gate",
+      "deliverables": ["pilot_rows.jsonl"],
+      "acceptance": [
+        "B0 solves ≥2/3 disjoint smoke tasks, else report MEASUREMENT_INVALID and halt (no Phase B)",
+        "pilot tasks disjoint from panel (asserted programmatically)"
+      ],
+      "freeze_gate": null,
+      "depends_on": ["WP-3"]
+    },
+    {
+      "id": "WP-5",
+      "title": "Phase B evaluation (60 rows)",
+      "deliverables": ["raw_rows.jsonl", "events/*.jsonl", "MANIFEST outcome-run records"],
+      "acceptance": [
+        "exactly the preregistered schedule; INFRA rerun policy respected (≤1/cell, ≤10% rate)",
+        "write-suppression assertion green on every row or batch invalidated",
+        "compute caps respected (≤25M tokens / ≤4000 calls total); live budget meter logged",
+        "fused_retrieval_diagnostics present on every SPIDER row; absent/null on B0/B1 rows"
+      ],
+      "freeze_gate": null,
+      "depends_on": ["WP-4"]
+    },
+    {
+      "id": "WP-6",
+      "title": "Diagnostic ablation slice (optional, capped)",
+      "deliverables": ["ablation_edge_iter_rows.jsonl"],
+      "acceptance": [
+        "≤6 rows, R1+R2 tasks only, memory.mode=edge_iter flag isolated",
+        "clearly labeled EXPLORATORY_DIAGNOSTIC; excluded from VERDICT.json win-rule arithmetic"
+      ],
+      "freeze_gate": null,
+      "depends_on": ["WP-5"]
+    },
+    {
+      "id": "WP-7",
+      "title": "Frozen analysis + handoff",
+      "deliverables": ["analysis/compute_verdict.py (hash pinned at F2)", "results/product-beta/PB-001/VERDICT.json"],
+      "acceptance": [
+        "win-rule clauses computed mechanically per prereg §8 including tightenings 5–7",
+        "all regimes and all baselines reported including losses",
+        "auditor can recompute every headline number from raw artifacts alone"
+      ],
+      "freeze_gate": null,
+      "depends_on": ["WP-5"]
+    }
+  ],
+  "build_state_contract": {
+    "file": "state/product_beta_build.json",
+    "status_enum": ["READY_FOR_TEST", "BLOCKED", "FAILED_BUILD"],
+    "required_fields": ["status", "reason", "wp_completed", "model_id_pinned", "manifest_hashes", "freeze_checkpoints_met", "known_limitations"]
+  },
+  "prohibited_actions": [
+    "modify panel, prompts, thresholds, baselines or win rule after first outcome (prereg §11)",
+    "introduce a neural embedder or LLM summarizer anywhere in this beta version (explicitly unvalidated adaptations; directive forbidden)",
+    "change goalsig gate constants TAU/MIN_MATCH/DF_KEEP/COV_CAP/TOPK or add retrieval call sites beyond the single whole-goal event",
+    "give any arm hints not given to all arms identically",
+    "bill synthetic would-be-summary calls into llm_calls/token totals (provider accounting exclusively)",
+    "exclude performance failures from results",
+    "quote quantitative V31 retrieval-transfer rates in any beta output (instrument spent)",
+    "quote SGDR cycle-1 numbers (36/74 etc.) as product performance claims; they are WP-0 fixture-integrity targets only; PoC-tier wording constraints travel verbatim (no GENERALIZATION language, no unqualified 'beats the incumbent', no login/pager-improvement claim, no constant-dummy 24/74 citation as evidence)",
+    "copy the CC BY-SA SGDR reference source (clean-room lineage from intel/experiments/sgdr_repro/ only)",
+    "claim cross-site, cross-model, calibration, predictive-dynamics or generalization benefits",
+    "deploy publicly, add users, or commercialize (maximum_scope)",
+    "edit Graph/Physics/Intel/Product evidence outside product-beta/PB-001/** and state/product_beta_architecture.json"
+  ],
+  "compute_budget": {"max_total_tokens": 25000000, "max_total_llm_calls": 4000, "metering": "live log; halt+disclose on projected overrun"},
+  "blocked_paths": [
+    {"condition": "no authenticated backbone endpoint at WP-1", "action": "state/product_beta_build.json status=BLOCKED reason=no_backbone_available"},
+    {"condition": "WP-0 fusion fixture cannot reproduce committed cycle-1 numbers exactly from the vendored stack + committed artifacts", "action": "state/product_beta_build.json status=BLOCKED reason=fusion_fixture_mismatch; do NOT approximate or relax the fixture"},
+    {"condition": "both demo sites structurally broken at preflight and reserve pool insufficient", "action": "return to architect as ARCHITECTURE_BLOCKED amendment; do not improvise sites beyond disclosed reserve rule"}
+  ]
+}
