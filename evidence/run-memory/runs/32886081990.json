@@ -1,0 +1,53 @@
+{
+  "run_id": 32886081990,
+  "workflow_name": "SPIDER Runtime Supervisor",
+  "workflow_path": ".github/workflows/runtime-supervisor.yml",
+  "status": "completed",
+  "conclusion": "success",
+  "head_sha": "7507fe0cacbf42aa5f6d84a531be7e9ecc278659",
+  "created_at": "2026-08-25T18:50:13Z",
+  "updated_at": "2026-08-25T18:50:22Z",
+  "event": "push",
+  "run_number": 8,
+  "head_branch": "main",
+  "display_title": "infra: make Runtime heartbeat fallback-only",
+  "evidence_class": "OPERATIONAL",
+  "job_summary": {
+    "jobs": [
+      {
+        "name": "Ensure Runtime continuity",
+        "conclusion": "success",
+        "wall": "~2s job step (18:50:17→19Z)"
+      }
+    ],
+    "artifacts": 0
+  },
+  "durable_refs": [
+    "git:7507fe0cacbf42aa5f6d84a531be7e9ecc278659 ('infra: make Runtime heartbeat fallback-only') — triggering push and supervisor policy source, durable on main",
+    "git:751496ad505c0f6cc9c54272c517e41c0d243dc4 — ZERO_DELTA_LAUNCHER_FIX pin visible in this run's env (launcher-fix presence check)"
+  ],
+  "findings": [
+    {
+      "kind": "OTHER",
+      "summary": "Clean designed no-op: 'Runtime already active; no duplicate dispatch.' (18:50:19.32Z) — ≥1 non-completed runtime-loop run existed. First execution under heartbeat-fallback-only commit 7507fe0 (last sibling of the 18:49–18:50Z infra trio). Env residue confirms the supervisor still pins and verifies the zero-delta launcher fix 751496a at dispatch time. Guard logic (bootstrap-vs-lab/runtime branch selection; continue-flag gate; refuse-after-non-success without explicit infrastructure evidence; cycle_index = successful-count+1; max_cycles=0 continuation flag) DUPLICATE of prior transcriptions (#4–#7 lineage).",
+      "evidence_status": "DUPLICATE",
+      "importance": "LOW",
+      "route_to": [
+        "INFRA"
+      ]
+    }
+  ],
+  "failure_signatures": [],
+  "research_opportunities": [],
+  "already_captured_elsewhere": [
+    "Guard transcription in runs/32875585123.json / runs/32881334442.json lineage; launcher-fix verification provenance in runs/32885195423.json."
+  ],
+  "distillation_complete": true,
+  "safe_to_prune": true,
+  "curator_reverification": {
+    "date": "2026-08-26",
+    "scope": "Second independent pass over /tmp/spider_run_evidence/32886081990",
+    "result": "No-op line 'Runtime already active; no duplicate dispatch.' @18:50:19.32Z and ZERO_DELTA_LAUNCHER_FIX=751496a env pin confirmed verbatim in full raw log; commit 7507fe0 Git-verified on main. No content changes required."
+  },
+  "pruning_rationale": "Completed one-step no-op; no-op line, env pin residue and era-scoped policy all captured above with byte-durable policy source at the pinned commit."
+}

@@ -1,0 +1,52 @@
+{
+  "run_id": 32886044163,
+  "workflow_name": "SPIDER Product Supervisor",
+  "workflow_path": ".github/workflows/product-supervisor.yml",
+  "status": "completed",
+  "conclusion": "success",
+  "head_sha": "e79133908e495e5b77ab771c688d13e0f39190a7",
+  "created_at": "2026-08-25T18:49:50Z",
+  "updated_at": "2026-08-25T18:49:59Z",
+  "event": "push",
+  "run_number": 9,
+  "head_branch": "main",
+  "display_title": "infra: make Product heartbeat fallback-only",
+  "evidence_class": "OPERATIONAL",
+  "job_summary": {
+    "jobs": [
+      {
+        "name": "Ensure Product optimization continuity",
+        "conclusion": "success",
+        "wall": "~4s job step (18:49:53→57Z)"
+      }
+    ],
+    "artifacts": 0
+  },
+  "durable_refs": [
+    "git:e79133908e495e5b77ab771c688d13e0f39190a7 ('infra: make Product heartbeat fallback-only') — triggering push and supervisor policy source, durable on main"
+  ],
+  "findings": [
+    {
+      "kind": "OTHER",
+      "summary": "Clean designed no-op: 'Product work already in progress; supervisor will not duplicate it.' (18:49:57.63Z) — product-loop or product-beta-repair had a live run; holder unprinted by design (recurring observability gap). First execution under heartbeat-fallback-only commit e791339 (middle sibling of the 18:49–18:50Z infra trio). Recovery ladder incl. the Product-specific control-plane recovery signatures ('external_directory' permission request, 'Missing product_beta_architecture state', 'SPIDER control-plane overlay restoration left residue') and the state-gated no-dispatch rule DUPLICATE of prior transcriptions.",
+      "evidence_status": "DUPLICATE",
+      "importance": "LOW",
+      "route_to": [
+        "INFRA"
+      ]
+    }
+  ],
+  "failure_signatures": [],
+  "research_opportunities": [],
+  "already_captured_elsewhere": [
+    "Ladder + signature list transcribed in runs/32874922349.json / runs/32885481049.json lineage; policy durable at pinned head_sha."
+  ],
+  "distillation_complete": true,
+  "safe_to_prune": true,
+  "curator_reverification": {
+    "date": "2026-08-26",
+    "scope": "Second independent pass over /tmp/spider_run_evidence/32886044163",
+    "result": "No-op line 'Product work already in progress; supervisor will not duplicate it.' @18:49:57.63Z confirmed verbatim; commit e791339 Git-verified on main. No content changes required."
+  },
+  "pruning_rationale": "Completed one-step no-op; all content (no-op line, era-scoped policy, sibling-commit provenance) captured above with byte-durable policy source at the pinned commit."
+}

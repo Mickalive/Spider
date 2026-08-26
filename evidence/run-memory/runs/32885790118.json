@@ -1,0 +1,62 @@
+{
+  "run_id": 32885790118,
+  "workflow_name": "SPIDER Ox Watchdog",
+  "workflow_path": ".github/workflows/ox-watchdog.yml",
+  "status": "completed",
+  "conclusion": "success",
+  "head_sha": "0f4563e6eb2e78c911cb8a693d971624a4f3e9f1",
+  "created_at": "2026-08-25T18:47:09Z",
+  "updated_at": "2026-08-25T18:47:21Z",
+  "event": "workflow_run",
+  "run_number": 86,
+  "head_branch": "main",
+  "evidence_class": "OPERATIONAL",
+  "job_summary": {
+    "jobs": [
+      {
+        "name": "Recover transient Ox and runner failures",
+        "conclusion": "success",
+        "wall": "~8s (18:47:12→18:47:20Z)"
+      }
+    ],
+    "artifacts": 0
+  },
+  "durable_refs": [
+    "git:0f4563e6eb2e78c911cb8a693d971624a4f3e9f1 — sweep executed at this main head; watchdog recovery policy durable in ox-watchdog.yml source at that commit",
+    "runs/32885784797.json — the 'cto-council.yml: active run exists' entry in this sweep is council #16 itself, alive-pending (queued 18:47:05→19:14:15Z)"
+  ],
+  "findings": [
+    {
+      "kind": "OTHER",
+      "summary": "Clean designed 8-workflow sweep 18:47:14–18.8Z, ZERO recovery actions and zero warnings. Decision lines verbatim: graph-loop/intel-loop/product-loop/runtime-loop/cto-council 'active run exists; watchdog does not interrupt potentially valid work'; physics-loop 'latest completed run 32866107906 concluded success; no recovery' (dormant-success era continues); product-beta-repair.yml and frontier-research.yml 'no completed run to inspect' — lifetime-zero witnesses #9 (product-beta-repair) and #8 (frontier-research) by the INDEX running count (+~3 min over twins #84/#85). Cross-anchor value: the cto-council active entry at 18:47:18.2Z positively brackets council #16's queued-not-yet-provisioned period (~27 min before its job start), corroborating that the queue delay was slot/scheduling, not a dead run.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "LOW",
+      "route_to": [
+        "INFRA"
+      ]
+    },
+    {
+      "kind": "OTHER",
+      "summary": "Recovery-policy content DUPLICATE of prior transcriptions (runner-shutdown cancellation regexes; SPIDER_TRANSIENT_OX_EXHAUSTED marker; OpenCode/Ox + transient-network signature conjunction; refuse-blind-retry-when-logs-unreadable; never interrupt active runs), durable at pinned head_sha. Trigger parent: workflow_run listener on prior lane completions during the same evening window.",
+      "evidence_status": "DUPLICATE",
+      "importance": "LOW",
+      "route_to": [
+        "INFRA"
+      ]
+    }
+  ],
+  "failure_signatures": [],
+  "research_opportunities": [],
+  "already_captured_elsewhere": [
+    "Policy text durable in ox-watchdog.yml at 0f4563e and transcribed in earlier watchdog records (runs/32879908049.json et al.); portfolio snapshot deltas recorded here and cross-linked from runs/32885784797.json."
+  ],
+  "distillation_complete": true,
+  "safe_to_prune": true,
+  "curator_reverification": {
+    "date": "2026-08-26",
+    "scope": "Second independent pass over /tmp/spider_run_evidence/32885790118",
+    "result": "Record re-verified line-by-line against full raw log: all 8 decision lines, timestamps, lifetime-witness increments and council-#16 queue-bracket cross-anchor confirmed verbatim; recovery-policy content confirmed byte-durable in ox-watchdog.yml at pinned head_sha. No content changes required.",
+    "recovery_trigger_note": "SPECIAL RECOVERY trigger 32880942022 NOT supplied this session; existing recovery state (102 tombstones + DELETED_RUNS_RECOVERY.json) verified consistent."
+  },
+  "pruning_rationale": "Run completed; every useful element distilled above: decision lines transcribed, lifetime-zero witness counts advanced, council-#16 queue-bracket cross-anchor written into both this record and runs/32885784797.json. Policy content is byte-durable in the workflow source at the pinned commit. No unique artifact remains solely in the log."
+}

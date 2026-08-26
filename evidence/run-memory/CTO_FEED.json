@@ -1704,6 +1704,52 @@
         "CTO",
         "PRODUCT"
       ]
+    },
+    {
+      "id": "CF-2026-08-26-37",
+      "importance": "HIGH",
+      "kind": "INFRA_HAZARD_STILL_LIVE",
+      "summary": "The council persist-step untracked-files checkout collision that destroyed a complete validated CTO-5 pass (run 32885784797, ~81 min, zero bytes) was NEVER structurally fixed: curator re-read of .github/workflows/cto-council.yml on CURRENT main shows the 'Advance accepted CTO advisory branch' step byte-unchanged through the last two post-incident workflow commits 37f237a (validation refactor only) and 1338a29 (cancel-in-progress:true). It still does cp-to-/tmp -> 'git reset --hard HEAD' (does NOT remove untracked files) -> 'git switch -C cto-output $PREV_CTO', which aborts whenever the session leaves its CTO outputs UNTRACKED and the lab/cto tip tracks those exact paths ('would be overwritten by checkout'). The three later councils that persisted successfully (runs 32914937836/32924961551/32943044073) did so despite the live defect - success depends on session-side file state, not on repair. Same fix class as CF-2026-08-26-09's jq-gate issue: delete untracked generated files after backup before switching, or artifact-upload outputs before ANY validation/persist step.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "source_run_id": 32885784797,
+      "corroborating_source_run_ids": [
+        32880285474
+      ],
+      "durable_refs": [
+        ".github/workflows/cto-council.yml persist step at current main tip (curator-verified unfixed)",
+        "evidence/run-memory/runs/32885784797.json (failure mechanism log-exact)",
+        "evidence/run-memory/runs/32880285474.json (pre-recorded failure signature)"
+      ],
+      "actionable_next": [
+        "Apply persist-before-destroy to cto-council.yml: rm docs/CTO_LEDGER.md docs/CTO_TO_*.md state/cto_direction.json after the /tmp backup, BEFORE git reset/switch; or commit outputs to a temp index / stash-based switch.",
+        "Add artifact-upload of council outputs before validation so no gate can destroy a completed pass.",
+        "Audit sibling workflows with the same backup->reset->switch pattern for the same collision class."
+      ],
+      "route_to": [
+        "CTO",
+        "INFRA"
+      ]
+    },
+    {
+      "id": "CF-2026-08-26-38",
+      "importance": "HIGH",
+      "kind": "UNEXECUTED_CHARTER_SEED",
+      "summary": "Second stranded alternative frontier portfolio (three CREATE-v1 charters, schema-VALIDATED in-run by council #16 = run 32885784797, then destroyed at the persist step) survives only in its raw log. Two charters have durable lineage elsewhere (ft-phy-volat-freshness ~= durable web-physics-volatility-freshness; ft-phy-controlled-fixtures ~= later frontier-physics-controlled-web-lab, TERMINATED by CTO-7), but ONE seed has ZERO trace anywhere durable (curator re-grep over ALL fetched refs, ledgers, state files and commit messages, 2026-08-26): ft-econ-cache-aware-inheritance MEDIUM - prompt-cache-aware token economics of inherited context, proposing a cached/uncached-split token-reporting standard, Phase-0 analysis now and Phase-1 gated on the same credential escalation as PB-001/G10. Also recoverable from the same log: positive-control sentinel design detail (four sentinels derived from committed WP-006 failure rows) beyond what the terminated durable charter recorded, plus advisory allocations Frontier .35/Runtime .20/Intel .20/Graph .15/Product .10/Physics core .00 and top-bottleneck ORPHANED-TIME-LAYER-AND-CLOSING-WINDOWS / program PARK-WINDOW-ARBITRAGE framing.",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "source_run_id": 32885784797,
+      "corroborating_source_run_ids": [],
+      "durable_refs": [
+        "/tmp/spider_run_evidence/32885784797/logs.txt (sole witness; ledger diff verbatim at 20:03:44Z)",
+        "evidence/run-memory/runs/32885784797.json"
+      ],
+      "actionable_next": [
+        "Chief CTO may charter a cache-aware-inheritance economics team as a LEAD from this seed - never as evidence; requires its own preregistration/freeze/audit discipline if claim-bearing.",
+        "If not chartered, record an explicit kill decision so the seed stops surviving only in prunable logs."
+      ],
+      "route_to": [
+        "CTO",
+        "FRONTIER"
+      ]
     }
   ]
 }
