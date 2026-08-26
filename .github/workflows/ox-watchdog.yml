@@ -2,7 +2,7 @@ name: SPIDER Ox Watchdog
 
 on:
   schedule:
-    - cron: "9,39 * * * *"
+    - cron: "*/5 * * * *"
   workflow_dispatch:
   workflow_run:
     workflows:
@@ -11,6 +11,8 @@ on:
       - "SPIDER Intel Research Lane"
       - "SPIDER Product and Beta Lane"
       - "SPIDER Product Beta Repair"
+      - "SPIDER Product Engineering Loop"
+      - "SPIDER Product Engineering Failure Review"
       - "SPIDER Runtime Lane"
       - "SPIDER Critical CTO Council"
       - "SPIDER Frontier Research Team"
@@ -37,6 +39,25 @@ jobs:
         run: |
           set -euo pipefail
 
+          product_is_final() {
+            local raw
+            raw=$(gh api -H 'Accept: application/vnd.github.raw+json' \
+              "repos/${GITHUB_REPOSITORY}/contents/state/product_final.json?ref=lab/product" 2>/dev/null || true)
+            [[ -n "$raw" ]] || return 1
+            jq -e '
+              .final_product == true and
+              .status == "READY_FOR_HUMAN_HANDOFF" and
+              .independent_audit_pass == true and
+              .baseline_win_audited == true and
+              (.evidence_refs | type == "array" and length > 0)
+            ' <<<"$raw" >/dev/null 2>&1
+          }
+
+          if product_is_final; then
+            echo "Final Product gate is satisfied. Autonomous recovery is intentionally stopped."
+            exit 0
+          fi
+
           recover_workflow() {
             local workflow="$1"
             local active latest run_id conclusion logs log_rc
@@ -62,7 +83,7 @@ jobs:
             case "$conclusion" in
               failure|timed_out|cancelled) ;;
               *)
-                echo "$workflow: latest completed run $run_id concluded $conclusion; no recovery."
+                echo "$workflow: latest completed run $run_id concluded $conclusion; no infrastructure recovery required."
                 return 0
                 ;;
             esac
@@ -72,7 +93,7 @@ jobs:
             log_rc=$?
             set -e
             if [[ "$log_rc" -ne 0 ]]; then
-              echo "::warning::$workflow: unable to read logs for run $run_id; refusing blind retry."
+              echo "::warning::$workflow: unable to read logs for run $run_id; liveness job will still ensure nonterminal progression."
               return 0
             fi
 
@@ -88,19 +109,19 @@ jobs:
             if grep -Fq 'SPIDER_TRANSIENT_OX_EXHAUSTED' <<<"$logs"; then
               echo "::warning::$workflow: explicit transient Ox exhaustion in run $run_id; re-running affected jobs."
               gh run rerun "$run_id" --repo "$GITHUB_REPOSITORY" --failed || \
-                echo "::warning::$workflow: GitHub refused failed-job rerun for run $run_id; no blind full-run replay performed."
+                echo "::warning::$workflow: GitHub refused failed-job rerun for run $run_id; liveness will still re-open work if needed."
               return 0
             fi
 
             if grep -Eiq '(opencode run|OpenCode|x-preview-f-free|Ox)' <<<"$logs" \
-               && grep -Eiq '(network_error|NetworkError|network error|fetch failed|APIConnectionError|ECONNRESET|ECONNREFUSED|EAI_AGAIN|ENETUNREACH|ENOTFOUND|ETIMEDOUT|timed out|connection reset|connection closed|temporar(y|ily) unavailable|HTTP[^0-9]*(429|500|502|503|504)|status[^0-9]*(429|500|502|503|504)|too many requests|rate.?limit|service unavailable|bad gateway|gateway timeout|upstream.*(reset|closed|unavailable|error))' <<<"$logs"; then
-              echo "::warning::$workflow: run $run_id ($conclusion) has OpenCode/Ox + explicit transient network signature; re-running affected jobs."
+               && grep -Eiq '(network_error|NetworkError|network error|fetch failed|APIConnectionError|ECONNRESET|ECONNREFUSED|EAI_AGAIN|ENETUNREACH|ENOTFOUND|ETIMEDOUT|timed out|connection reset|connection closed|temporar(y|ily) unavailable|Unexpected server error|HTTP[^0-9]*(429|500|502|503|504)|status[^0-9]*(429|500|502|503|504)|too many requests|rate.?limit|service unavailable|bad gateway|gateway timeout|upstream.*(reset|closed|unavailable|error))' <<<"$logs"; then
+              echo "::warning::$workflow: run $run_id ($conclusion) has OpenCode/Ox + explicit transient signature; re-running affected jobs."
               gh run rerun "$run_id" --repo "$GITHUB_REPOSITORY" --failed || \
-                echo "::warning::$workflow: GitHub refused failed-job rerun for run $run_id; no blind full-run replay performed."
+                echo "::warning::$workflow: GitHub refused failed-job rerun for run $run_id; liveness will still re-open work if needed."
               return 0
             fi
 
-            echo "$workflow: run $run_id concluded $conclusion without defensible infrastructure evidence; watchdog will not resurrect it."
+            echo "$workflow: run $run_id concluded $conclusion without infrastructure evidence. Evidence remains negative/failed; liveness may replan but will not rewrite this result."
           }
 
           recover_workflow graph-loop.yml
@@ -108,6 +129,244 @@ jobs:
           recover_workflow intel-loop.yml
           recover_workflow product-loop.yml
           recover_workflow product-beta-repair.yml
+          recover_workflow product-engineering-loop.yml
+          recover_workflow product-engineering-failure-review.yml
           recover_workflow runtime-loop.yml
           recover_workflow cto-council.yml
           recover_workflow frontier-research.yml
+
+  ensure_nonterminal_autonomy:
+    name: Keep every autonomous lane alive until Final Product
+    needs: [recover_transient_ox_failures]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Re-open idle lanes without erasing failed or blocked evidence
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          product_is_final() {
+            local raw
+            raw=$(gh api -H 'Accept: application/vnd.github.raw+json' \
+              "repos/${GITHUB_REPOSITORY}/contents/state/product_final.json?ref=lab/product" 2>/dev/null || true)
+            [[ -n "$raw" ]] || return 1
+            jq -e '
+              .final_product == true and
+              .status == "READY_FOR_HUMAN_HANDOFF" and
+              .independent_audit_pass == true and
+              .baseline_win_audited == true and
+              (.evidence_refs | type == "array" and length > 0)
+            ' <<<"$raw" >/dev/null 2>&1
+          }
+
+          if product_is_final; then
+            echo "Final Product gate is satisfied. All autonomous lane relaunches stop here by design."
+            exit 0
+          fi
+
+          active_count() {
+            gh run list --repo "$GITHUB_REPOSITORY" --workflow "$1" --limit 40 \
+              --json status --jq '[.[] | select(.status != "completed")] | length' 2>/dev/null || echo 0
+          }
+
+          latest_id() {
+            gh run list --repo "$GITHUB_REPOSITORY" --workflow "$1" --limit 1 \
+              --json databaseId --jq '.[0].databaseId // empty' 2>/dev/null || true
+          }
+
+          successful_count() {
+            gh run list --repo "$GITHUB_REPOSITORY" --workflow "$1" --limit 100 \
+              --json status,conclusion --jq '[.[] | select(.status=="completed" and .conclusion=="success")] | length' 2>/dev/null || echo 0
+          }
+
+          ensure_graph_or_physics() {
+            local lane="$1" workflow="$2" upper="$3"
+            local active latest audit_branch gate_path gate_raw gate round cycle next
+            active=$(active_count "$workflow")
+            if [[ "$active" -gt 0 ]]; then
+              echo "$lane: active/queued."
+              return 0
+            fi
+
+            latest=$(latest_id "$workflow")
+            if [[ -n "$latest" ]]; then
+              audit_branch="cycle/${lane}/${latest}/audit"
+              gate_path="results/audit/CYCLE_${latest}_${upper}_GATE.json"
+              gate_raw=$(gh api -H 'Accept: application/vnd.github.raw+json' \
+                "repos/${GITHUB_REPOSITORY}/contents/${gate_path}?ref=${audit_branch}" 2>/dev/null || true)
+              gate=$(jq -r '.gate // empty' <<<"$gate_raw" 2>/dev/null || true)
+              if [[ "$gate" == REVISE ]]; then
+                round=$(jq -r '(.repair_round // .repair_round_audited // 0) + 1' <<<"$gate_raw" 2>/dev/null || echo 1)
+                cycle=$(jq -r 'if (.cycle|type)=="number" then .cycle else 1 end' <<<"$gate_raw" 2>/dev/null || echo 1)
+                echo "::warning::$lane: idle on audited REVISE; relaunching exact same-cycle repair $round."
+                gh workflow run "$workflow" --repo "$GITHUB_REPOSITORY" --ref main \
+                  -f human_note="GLOBAL CONTINUITY REPAIR. Preserve the rejected evidence and frozen test. Fix only the independent audit required_fixes; never weaken the hypothesis, baseline, data or verdict rule." \
+                  -f cycle_index="$cycle" -f max_cycles=0 \
+                  -f repair_from_run_id="$latest" -f repair_round="$round"
+                return 0
+              fi
+            fi
+
+            next=$(( $(successful_count "$workflow") + 1 ))
+            echo "::warning::$lane: idle before Final Product. Re-opening lane with a fresh bounded program/replan cycle $next."
+            gh workflow run "$workflow" --repo "$GITHUB_REPOSITORY" --ref main \
+              -f human_note="GLOBAL NONTERMINAL CONTINUITY. Product is not final. Preserve all prior PASS/REVISE/BLOCKED/negative evidence. If the prior local program is complete, blocked, falsified, exhausted or continue=false, do NOT repeat it mechanically: select the next bounded, high-information program consistent with the lane charter and current accepted evidence/product bottlenecks. Negative outcomes remain valid." \
+              -f cycle_index="$next" -f max_cycles=0
+          }
+
+          ensure_intel() {
+            local active latest gate_raw gate next
+            active=$(active_count intel-loop.yml)
+            if [[ "$active" -gt 0 ]]; then
+              echo "intel: active/queued."
+              return 0
+            fi
+            latest=$(latest_id intel-loop.yml)
+            if [[ -n "$latest" ]]; then
+              gate_raw=$(gh api -H 'Accept: application/vnd.github.raw+json' \
+                "repos/${GITHUB_REPOSITORY}/contents/results/intel/audit/CYCLE_${latest}_INTEL_GATE.json?ref=cycle/intel/${latest}/audit" 2>/dev/null || true)
+              gate=$(jq -r '.gate // empty' <<<"$gate_raw" 2>/dev/null || true)
+              if [[ "$gate" == REVISE ]]; then
+                echo "::warning::intel: idle on REVISE; relaunching same-cycle repair."
+                gh workflow run intel-loop.yml --repo "$GITHUB_REPOSITORY" --ref main \
+                  -f cycle_index=1 -f repair_from_run_id="$latest" -f repair_round=1
+                return 0
+              fi
+            fi
+            next=$(( $(successful_count intel-loop.yml) + 1 ))
+            echo "::warning::intel: idle before Final Product; dispatching a fresh Scout cycle $next. Prior failures/BLOCKED evidence remain preserved, not converted into success."
+            gh workflow run intel-loop.yml --repo "$GITHUB_REPOSITORY" --ref main -f cycle_index="$next"
+          }
+
+          ensure_runtime() {
+            local active latest gate_raw gate round cycle next
+            active=$(active_count runtime-loop.yml)
+            if [[ "$active" -gt 0 ]]; then
+              echo "runtime: active/queued."
+              return 0
+            fi
+            latest=$(latest_id runtime-loop.yml)
+            if [[ -n "$latest" ]]; then
+              gate_raw=$(gh api -H 'Accept: application/vnd.github.raw+json' \
+                "repos/${GITHUB_REPOSITORY}/contents/results/audit/CYCLE_${latest}_RUNTIME_GATE.json?ref=cycle/runtime/${latest}/audit" 2>/dev/null || true)
+              gate=$(jq -r '.gate // empty' <<<"$gate_raw" 2>/dev/null || true)
+              if [[ "$gate" == REVISE ]]; then
+                round=$(jq -r '(.repair_round // .repair_round_audited // 0) + 1' <<<"$gate_raw" 2>/dev/null || echo 1)
+                cycle=$(jq -r 'if (.cycle|type)=="number" then .cycle else 1 end' <<<"$gate_raw" 2>/dev/null || echo 1)
+                echo "::warning::runtime: idle on REVISE; relaunching same-cycle repair $round."
+                gh workflow run runtime-loop.yml --repo "$GITHUB_REPOSITORY" --ref main \
+                  -f human_note="GLOBAL CONTINUITY REPAIR. Preserve rejected evidence and frozen benchmark; implement only audited fixes." \
+                  -f cycle_index="$cycle" -f max_cycles=0 \
+                  -f repair_from_run_id="$latest" -f repair_round="$round"
+                return 0
+              fi
+            fi
+            next=$(( $(successful_count runtime-loop.yml) + 1 ))
+            echo "::warning::runtime: idle before Final Product; dispatching fresh Runtime replan/build cycle $next."
+            gh workflow run runtime-loop.yml --repo "$GITHUB_REPOSITORY" --ref main \
+              -f human_note="GLOBAL NONTERMINAL CONTINUITY. Product is not final. Preserve prior failures and audit ceilings. If the previous Runtime program is BLOCKED, complete or continue=false, choose the next bounded Runtime primitive/integration problem instead of stopping." \
+              -f cycle_index="$next" -f max_cycles=0
+          }
+
+          ensure_product() {
+            local a b c d state beta
+            a=$(active_count product-loop.yml)
+            b=$(active_count product-beta-repair.yml)
+            c=$(active_count product-engineering-loop.yml)
+            d=$(active_count product-engineering-failure-review.yml)
+            if [[ $((a+b+c+d)) -gt 0 ]]; then
+              echo "product: active/queued."
+              return 0
+            fi
+            state=$(gh api -H 'Accept: application/vnd.github.raw+json' \
+              "repos/${GITHUB_REPOSITORY}/contents/state/product_direction.json?ref=lab/product" 2>/dev/null || true)
+            beta=$(jq -r '.beta_launch // false' <<<"$state" 2>/dev/null || echo false)
+            if [[ "$beta" == true ]]; then
+              echo "::warning::product: idle with authorized beta; dispatching Product/Beta lane."
+              gh workflow run product-loop.yml --repo "$GITHUB_REPOSITORY" --ref main
+            else
+              echo "::warning::product: idle before Final Product; dispatching Product Engineering decision cycle even if prior state said WAIT_FOR_EVIDENCE/continue=false."
+              gh workflow run product-engineering-loop.yml --repo "$GITHUB_REPOSITORY" --ref main
+            fi
+          }
+
+          ensure_cto() {
+            local active
+            active=$(active_count cto-council.yml)
+            if [[ "$active" -gt 0 ]]; then
+              echo "cto: active/queued."
+              return 0
+            fi
+            echo "::warning::cto: idle before Final Product; dispatching global portfolio review so blocked/exhausted lanes are replanned rather than abandoned."
+            gh workflow run cto-council.yml --repo "$GITHUB_REPOSITORY" --ref main
+          }
+
+          ensure_frontiers() {
+            local cto_commit state charter id version status accepted active latest gate_raw gate round
+            cto_commit=$(gh api "repos/${GITHUB_REPOSITORY}/branches/lab%2Fcto" --jq '.commit.sha' 2>/dev/null || true)
+            [[ -n "$cto_commit" ]] || { echo "frontier: no accepted CTO commit yet."; return 0; }
+            state=$(gh api -H 'Accept: application/vnd.github.raw+json' \
+              "repos/${GITHUB_REPOSITORY}/contents/state/cto_direction.json?ref=${cto_commit}" 2>/dev/null || true)
+            [[ -n "$state" ]] || { echo "frontier: accepted CTO state unavailable."; return 0; }
+
+            while IFS= read -r charter; do
+              id=$(jq -r '.team_id' <<<"$charter")
+              version=$(jq -r '.charter_version' <<<"$charter")
+              status=$(jq -r '.status' <<<"$charter")
+              [[ "$status" == CREATE || "$status" == CONTINUE ]] || continue
+
+              accepted=$(gh api -H 'Accept: application/vnd.github.raw+json' \
+                "repos/${GITHUB_REPOSITORY}/contents/state/frontier/${id}.json?ref=lab/frontier/${id}" 2>/dev/null \
+                | jq -r '.accepted_charter_version // 0' 2>/dev/null || echo 0)
+              if [[ "$accepted" -ge "$version" ]]; then
+                echo "frontier/$id: charter v$version already accepted; CTO must issue the next version for further work."
+                continue
+              fi
+
+              active=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow frontier-research.yml --limit 100 \
+                --json displayTitle,status \
+                | jq --arg t "Frontier ${id} v${version}" '[.[] | select(.displayTitle==$t and .status!="completed")] | length')
+              if [[ "$active" -gt 0 ]]; then
+                echo "frontier/$id v$version: active/queued."
+                continue
+              fi
+
+              latest=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow frontier-research.yml --limit 100 \
+                --json databaseId,displayTitle,status,conclusion,createdAt \
+                | jq --arg t "Frontier ${id} v${version}" '[.[] | select(.displayTitle==$t)] | sort_by(.createdAt) | last // empty')
+              if [[ -n "$latest" ]]; then
+                local_run=$(jq -r '.databaseId' <<<"$latest")
+                gate_raw=$(gh api -H 'Accept: application/vnd.github.raw+json' \
+                  "repos/${GITHUB_REPOSITORY}/contents/results/audit/CYCLE_${local_run}_FRONTIER_${id}_GATE.json?ref=cycle/frontier/${id}/${local_run}/audit" 2>/dev/null || true)
+                gate=$(jq -r '.gate // empty' <<<"$gate_raw" 2>/dev/null || true)
+                if [[ "$gate" == REVISE ]]; then
+                  round=$(jq -r '(.repair_round // .repair_round_audited // 0) + 1' <<<"$gate_raw" 2>/dev/null || echo 1)
+                  echo "::warning::frontier/$id v$version: idle on REVISE; dispatching same-charter repair $round."
+                  gh workflow run frontier-research.yml --repo "$GITHUB_REPOSITORY" --ref main \
+                    -f team_id="$id" -f charter_version="$version" -f cto_commit="$cto_commit" \
+                    -f one_shot=false -f repair_from_run_id="$local_run" -f repair_round="$round"
+                  continue
+                fi
+                if [[ "$gate" == BLOCKED ]]; then
+                  echo "::warning::frontier/$id v$version is scientifically/operationally BLOCKED. Preserving that gate and relying on the continuously active CTO to issue a revised/reassigned charter; not repeating the same blocked experiment."
+                  continue
+                fi
+              fi
+
+              echo "::warning::frontier/$id: executable CTO charter v$version is unaccepted and idle; dispatching/recovering it."
+              gh workflow run frontier-research.yml --repo "$GITHUB_REPOSITORY" --ref main \
+                -f team_id="$id" -f charter_version="$version" -f cto_commit="$cto_commit" -f one_shot=false
+            done < <(jq -c '.research_portfolio.frontier_team_charters[]? | select(.status=="CREATE" or .status=="CONTINUE")' <<<"$state")
+          }
+
+          ensure_graph_or_physics graph graph-loop.yml GRAPH
+          ensure_graph_or_physics physics physics-loop.yml PHYSICS
+          ensure_intel
+          ensure_runtime
+          ensure_product
+          ensure_cto
+          ensure_frontiers
