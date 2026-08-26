@@ -33,7 +33,7 @@
     {
       "kind": "core",
       "source_branch": "lab/product",
-      "source_sha": "b208340e6caec4ca32a9f026ebde0c4bc0eccfe5",
+      "source_sha": "f10186b94a8a194187c5f537c3ac94514dcc2e7c",
       "published_path": "results/product",
       "source_file_count": 4
     },
