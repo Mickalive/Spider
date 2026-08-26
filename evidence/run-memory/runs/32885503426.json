@@ -1,0 +1,65 @@
+{
+  "run_id": 32885503426,
+  "workflow_name": "SPIDER Ox Watchdog",
+  "workflow_path": ".github/workflows/ox-watchdog.yml",
+  "status": "completed",
+  "conclusion": "success",
+  "head_sha": "bcd16deb480c16d4e0a854961e76a7a94b68fdb5",
+  "created_at": "2026-08-25T18:44:13Z",
+  "updated_at": "2026-08-25T18:44:34Z",
+  "event": "workflow_run",
+  "run_number": 85,
+  "head_branch": "main",
+  "display_title_context": "SPIDER Ox Watchdog #85 — twin/successor created 4 s after #84 (parent: council #14's cancelled-completion), ran the identical sweep to success, and is the plausible canceller of #84 via cancel-in-progress:true",
+
+  "evidence_class": "OPERATIONAL",
+
+  "job_summary": {
+    "jobs": [
+      { "name": "Recover transient Ox and runner failures", "conclusion": "success", "window": "18:44:26..18:44:33Z (~7s; whole run ~21s)", "note": "identical eight-workflow decision set as twin #84, executed ~13 s later" }
+    ],
+    "artifacts": 0
+  },
+
+  "durable_refs": [
+    "/tmp/spider_run_evidence/32885503426/logs.txt (bundle copy)",
+    "git:bcd16deb480c16d4e0a854961e76a7a94b68fdb5:.github/workflows/ox-watchdog.yml (as dispatched; 'SPIDER Critical CTO Council' ∈ workflow_run listen list; concurrency spider-ox-watchdog cancel-in-progress:true — curator-verified at this sha)",
+    "cross-link: evidence/run-memory/runs/32885496242.json (twin #84 — raw-log diff vs THIS run is timestamps+worker-id only, curator-compared decision lines)"
+  ],
+
+  "findings": [
+    {
+      "kind": "RESULT",
+      "summary": "Clean designed sweep 18:44:28.02–31.78Z, zero recovery actions/warnings; portfolio snapshot byte-equivalent to twin #84's taken ~13 s earlier: graph/intel/product/runtime lanes ACTIVE; physics-loop latest completed = 32866107906 success; product-beta-repair.yml lifetime-zero (EIGHTH consecutive witness) and frontier-research.yml lifetime-zero (SEVENTH consecutive witness); cto-council.yml active (= pending council #15, killed 18:47:07Z per its own record).",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "LOW",
+      "route_to": ["INFRA"]
+    },
+    {
+      "kind": "OTHER",
+      "summary": "Twin mechanics pinned: created 18:44:13Z, exactly 3 s after council #14 completed-as-cancelled (updated_at 18:44:10Z per runs/32885390855.json) with 'SPIDER Critical CTO Council' in the watchdog listen list (Git-verified at bcd16deb) — a THIRD distinct parent event feeding watchdog double-fires within one burst window (#84's parent was shell 32875584974's completion at 18:44:06Z). Its creation into cancel-in-progress:true group spider-ox-watchdog plausibly stamped the still-finishing #84 cancelled ~9 s later (same benign discard-just-completed-work pattern adjudicated for #77/#78).",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "importance": "MEDIUM",
+      "route_to": ["INFRA"]
+    },
+    {
+      "kind": "OTHER",
+      "summary": "Recovery-policy ladder content DUPLICATE of prior verbatim transcriptions (runs/32879908049.json et al.); raw-log diff vs twin #84 contains no third unique fact beyond timestamps and worker id.",
+      "evidence_status": "DUPLICATE",
+      "importance": "LOW",
+      "route_to": ["INFRA"]
+    }
+  ],
+
+  "failure_signatures": [],
+  "research_opportunities": [
+    "Same single-flight/debounce proposal as twin #84 — two full sweeps inside 24 s from two distinct completion events; a skip-if-recent-clean-sweep-on-same-head_sha guard would halve this class outright."
+  ],
+  "already_captured_elsewhere": [
+    "Twin record with shared portfolio snapshot: runs/32885496242.json.",
+    "Recovery-policy transcription + prior twin precedents: runs/32879908049.json, runs/32881296755.json + runs/32881313083.json (#77/#78)."
+  ],
+  "distillation_complete": true,
+  "safe_to_prune": true,
+  "pruning_rationale": "Fully-distilled clean watchdog sweep whose only unique content (twin timing, parent-event attribution, portfolio snapshot corroborating #84) is transcribed and cross-linked; policy content byte-duplicate of durable transcriptions; no cycle/* branches exist for this run id. Precedent-consistent with distilled watchdog records (#79/#82/#83)."
+}

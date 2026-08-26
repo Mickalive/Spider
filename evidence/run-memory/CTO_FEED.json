@@ -1653,6 +1653,57 @@
         "GRAPH",
         "RUNTIME"
       ]
+    },
+    {
+      "id": "CF-2026-08-26-35",
+      "importance": "HIGH",
+      "kind": "PROCESS_INTEGRITY",
+      "summary": "PORCELAIN SCOPE-GATE STRIKE #6 AND SERIES CLOSURE (curator run 32885496153, distilled 2026-08-26): a complete single-target distillation (target 32875584974) passed its own validation and was destroyed by the unfixed guard — plain `git status --porcelain` collapsed the wholly-untracked evidence/ tree to one path; Git verification shows evidence/run-memory was absent from the main tree at dispatched sha bcd16deb entirely (first main commit touching it = 9e7d3ef @19:22:28Z), so any nested write of that era was collapsible. Fix commit 30fc94f is Git-stamped 18:56:50Z — 34 s AFTER this run's enforce-failure stamp (18:56:16.28Z) — making #13 the LAST possible victim of the six-strike series on this workflow (32793165981, 32793580374, 32860596387, 32881219633, 32884735910, 32885496153). Third post-success work-loss instance in the curator lane alone (scope-guard, validator-key-mismatch, scope-guard). Lost content audited substantively DUPLICATE of today's durable state.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "source_run_id": 32885496153,
+      "durable_refs": [
+        "evidence/run-memory/runs/32885496153.json",
+        "git:30fc94f (fix, applied to evidence-curator.yml only)",
+        "git:bcd16deb:.github/workflows/evidence-curator.yml (as-dispatched unfixed guard)"
+      ],
+      "actionable_next": [
+        "Extend the proven 30fc94f detection class (git diff + git diff --cached + git ls-files --others) mechanically to the five workflows still carrying the raw construct per curator grep of origin/main at distillation time: physics-loop.yml x3, graph-loop.yml x3, frontier-research.yml x3, runtime-loop.yml x2, cto-council.yml :113.",
+        "Adopt persist-before-enforce ordering for high-output agent sessions (stage outputs to an isolated ref before any scope/schema gate) so no post-success gate can destroy finished work again."
+      ],
+      "route_to": [
+        "INFRA",
+        "CTO"
+      ]
+    },
+    {
+      "id": "CF-2026-08-26-36",
+      "importance": "MEDIUM",
+      "kind": "ORCHESTRATION_ECONOMICS",
+      "summary": "ONE STALE-SHELL CANCELLATION TRIGGERED FIVE ORCHESTRATION RUNS ACROSS FOUR WORKFLOWS IN FOUR SECONDS, WITH ZERO DURABLE SUBSTANCE PRODUCED (runs 32875584974 -> 32885496131 + 32885496153 + 32885496242 + 32885496244, twin 32885503426; distilled 2026-08-26): shell 32875584974 completed-as-cancelled @18:44:06Z fired same-second workflow_run listeners in product-supervisor.yml, evidence-curator.yml, ox-watchdog.yml AND cto-council.yml ('SPIDER Product and Beta Lane' ∈ each listen list, Git-verified at bcd16deb); council #14's cancelled-completion then spawned watchdog twin #85 whose creation cancelled the just-completed #84. Net: two duplicate supervisor firings, two identical watchdog sweeps (~24 s window), a FOURTH consecutive feed-era council queued death (#15, killed by push 0f4563e 4 s after landing; council STILL has zero successful executions since the feed gate landed; it never began provisioning despite a free slot), and the batch's only real work product (curator #13's distillation) destroyed by strike #6 (CF-2026-08-26-35). Structural root: workflow_run types:[completed] fires on CANCELLED completions too — cancelling a queued duplicate re-triggers every lane listener, a self-amplifying noise loop during bursts.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "source_run_id": 32885496244,
+      "corroborating_source_run_ids": [
+        32885496131,
+        32885496153,
+        32885496242,
+        32885503426
+      ],
+      "durable_refs": [
+        "evidence/run-memory/runs/32885496244.json",
+        "evidence/run-memory/runs/32885496153.json",
+        "evidence/run-memory/runs/32885496131.json",
+        "evidence/run-memory/runs/32885496242.json",
+        "evidence/run-memory/runs/32885503426.json"
+      ],
+      "actionable_next": [
+        "Drop or gate workflow_run listeners that fire on types:[completed] regardless of conclusion for advisory/orchestration workflows (a cancelled queued shell is not a lane decision point), or add debounce/single-flight per group.",
+        "Make council wakes dispatch-only/debounced and extend committed .spider/program-receipts-style receipts to cancellations/supersessions so future attributions do not depend on prunable supervisor logs (joins CF-2026-08-26-30)."
+      ],
+      "route_to": [
+        "INFRA",
+        "CTO",
+        "PRODUCT"
+      ]
     }
   ]
 }

@@ -1,0 +1,74 @@
+{
+  "run_id": 32885496131,
+  "workflow_name": "SPIDER Product Supervisor",
+  "workflow_path": ".github/workflows/product-supervisor.yml",
+  "status": "completed",
+  "conclusion": "success",
+  "head_sha": "bcd16deb480c16d4e0a854961e76a7a94b68fdb5",
+  "created_at": "2026-08-25T18:44:09Z",
+  "updated_at": "2026-08-25T18:44:18Z",
+  "event": "workflow_run",
+  "run_number": 8,
+  "head_branch": "main",
+  "display_title_context": "SPIDER Product Supervisor #8 — workflow_run twin of #7 (same head commit bcd16deb 'product: coalesce stale queued product runs'); created in the same second as curator #13, watchdog #84 and council #15",
+
+  "evidence_class": "OPERATIONAL",
+
+  "job_summary": {
+    "jobs": [
+      { "name": "Ensure Product optimization continuity", "conclusion": "success", "window": "18:44:12..18:44:17Z (~5s)", "note": "executed the identical coalescing script text as sibling #7 (head commit bcd16deb); took the MAIN_IN_PROGRESS>0 branch with ZERO queued/pending product-loop runs to cancel — no ::warning:: lines emitted — then exited 'Product work already in progress; supervisor will not duplicate it.' @18:44:15.33Z" }
+    ],
+    "artifacts": 0
+  },
+
+  "durable_refs": [
+    "/tmp/spider_run_evidence/32885496131/logs.txt (bundle copy)",
+    "git:bcd16deb480c16d4e0a854961e76a7a94b68fdb5:.github/workflows/product-supervisor.yml (as dispatched; workflow_run listener on 'SPIDER Product and Beta Lane' [completed] — curator-verified at this sha)",
+    "cross-link: evidence/run-memory/runs/32885481049.json (supervisor #7, same commit, push-triggered 9 s earlier — full coalescing-policy transcription lives there)",
+    "cross-link: evidence/run-memory/runs/32875584974.json (the cancelled queued shell whose cancelled-completion @18:44:06Z fired THIS run's trigger)"
+  ],
+
+  "findings": [
+    {
+      "kind": "RESULT",
+      "summary": "Trigger parent ATTRIBUTED mechanically: created 18:44:09Z, exactly 3 s after queued shell 32875584974 completed-as-cancelled (updated_at 18:44:06Z) and product-supervisor.yml at bcd16deb listens on workflow_run types:[completed] of 'SPIDER Product and Beta Lane' (curator-verified in Git). A cancellation completion fires workflow_run listeners just like a real lane finish — so cancelling ONE stale shell spawned four same-second orchestration runs across three other workflows (curator #13 = 32885496153, watchdog #84 = 32885496242, council #15 = 32885496244) plus this supervisor re-firing.",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "importance": "MEDIUM",
+      "route_to": ["INFRA", "PRODUCT"]
+    },
+    {
+      "kind": "OTHER",
+      "summary": "Second firing of the SAME enabling commit bcd16deb within ~9 s (#7 push-triggered 18:44:00Z, #8 workflow_run-triggered 18:44:09Z): dual push+workflow_run triggers on one file produce back-to-back duplicate supervisor executions during bursts. Both were clean no-ops here (~3 s + ~5 s, zero tokens), but the pattern adds redundant dispatch slots exactly when run volume peaks — consistent with the documented watchdog/council double-fire family, now extended to the supervisor family.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "LOW",
+      "route_to": ["INFRA"]
+    },
+    {
+      "kind": "RESULT",
+      "summary": "Positive burst fact + behavioral-matrix completion for commit bcd16deb: product-loop provably had an IN_PROGRESS run at 18:44:14–15Z (holder unnamed by design) immediately after #7's cancellation sweep, and THIS run witnessed the cancel-stale-queued branch's EMPTY case (zero queued/pending ids found → loop body never executed → no warnings). Combined with #7's log (cancel case, warning emitted for id 32875584974) the new coalescing logic has now been observed in both of its reachable sub-cases.",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "importance": "LOW",
+      "route_to": ["PRODUCT", "INFRA"]
+    },
+    {
+      "kind": "OTHER",
+      "summary": "Supervisor decision-ladder content visible in this log is byte-equivalent to the transcription already durable in runs/32885481049.json (same script text at the same pinned commit) — DUPLICATE for policy purposes; nothing new to transcribe.",
+      "evidence_status": "DUPLICATE",
+      "importance": "LOW",
+      "route_to": ["INFRA"]
+    }
+  ],
+
+  "failure_signatures": [],
+  "research_opportunities": [
+    "Debounce or single-flight dual-triggered orchestration workflows (push ∪ workflow_run on the same file/lane): this commit produced two supervisor executions in 9 s; harmless individually but multiplies across every burst (see also the 18:44Z cascade in runs/32885496244.json)."
+  ],
+  "already_captured_elsewhere": [
+    "Full coalescing-policy ladder + first cancel-case execution: runs/32885481049.json (supervisor #7).",
+    "The cancelled stale shell and its attribution history: runs/32875584974.json + runs/32885481049.json.",
+    "Burst-cohort siblings of the same second: runs/32885496153.json (curator #13), runs/32885496242.json (watchdog #84), runs/32885496244.json (council #15)."
+  ],
+  "distillation_complete": true,
+  "safe_to_prune": true,
+  "pruning_rationale": "Pure orchestration no-op whose only unique residues (trigger attribution, empty-case behavior, second-same-commit firing) are transcribed above and cross-linked; policy content is byte-duplicate of the #7 transcription at the pinned commit; no cycle/* branches exist for this run id; pruning destroys no sole exemplar of useful information. Precedent-consistent with supervisor #5/#6/#7 records."
+}

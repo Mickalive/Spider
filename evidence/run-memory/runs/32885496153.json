@@ -1,0 +1,86 @@
+{
+  "run_id": 32885496153,
+  "workflow_name": "SPIDER Run Evidence Curator",
+  "workflow_path": ".github/workflows/evidence-curator.yml",
+  "status": "completed",
+  "conclusion": "failure",
+  "head_sha": "bcd16deb480c16d4e0a854961e76a7a94b68fdb5",
+  "created_at": "2026-08-25T18:44:09Z",
+  "updated_at": "2026-08-25T18:56:20Z",
+  "event": "workflow_run",
+  "run_number": 13,
+  "head_branch": "main",
+  "display_title_context": "SPIDER Run Evidence Curator #13 — porcelain scope-gate strike #6 and FINAL pre-fix victim: a complete single-target distillation (32875584974) passed its own validation and was then destroyed by the unfixed guard; fix 30fc94f landed 34 s after this run's failure stamp",
+
+  "evidence_class": "OPERATIONAL",
+
+  "job_summary": {
+    "jobs": [
+      { "name": "Distill completed run knowledge into durable CTO memory", "conclusion": "failure", "window": "18:48:15..18:56:20Z (~8m05s job; ~7m51s curation session)", "note": "steps 1–7 all success (selection, bundle build, OpenCode session, session-side validation); step 8 'Enforce evidence-memory-only writes' FAILED @18:56:16.28Z flagging bare 'evidence/'; step 9 'Persist distilled memory' SKIPPED — zero bytes kept from this run" }
+    ],
+    "artifacts": 0
+  },
+
+  "durable_refs": [
+    "/tmp/spider_run_evidence/32885496153/logs.txt (bundle copy; SOLE surviving witness of strike #6 and of the exact pre-fix guard behavior)",
+    "git:bcd16deb480c16d4e0a854961e76a7a94b68fdb5:.github/workflows/evidence-curator.yml (as dispatched; plain 'git status --porcelain | cut -c4-' guard, concurrency cancel-in-progress:false — curator-verified at this sha)",
+    "git:30fc94f ('evidence: fix scope guard for nested untracked memory files', committed 2026-08-25T18:56:50Z per Git — 34 s AFTER this run's enforce failure stamp 18:56:16.28Z)",
+    "cross-link: evidence/run-memory/runs/32875584974.json (this run's selected target; its durable record was written by a LATER curator pass and now supersedes the lost one)",
+    "cross-link: evidence/run-memory/runs/32885481049.json (later POSITIVELY resolved the canceller question this stranded session could only infer)"
+  ],
+
+  "findings": [
+    {
+      "kind": "BUG",
+      "summary": "PORCELAIN SCOPE-GATE STRIKE #6 — a complete curator output destroyed by the same unfixed guard, with new precision on the mechanism: the session wrote evidence/run-memory/{runs/32875584974.json (9,657 B), INDEX.md (2,356 B), CTO_FEED.json (3,811 B, 3 findings)}, PASSED its own python validation (feed invariants + record schema asserted true) — then 'Enforce evidence-memory-only writes' computed CHANGED=$(git status --porcelain | cut -c4-) which collapsed the WHOLLY-UNTRACKED directory tree into the single path 'evidence/' → BAD non-empty → '::error::Evidence Curator wrote outside its durable memory scope' exit 1 → persist SKIPPED. Root cause verified against Git: evidence/run-memory did not exist anywhere in the main tree at bcd16deb (first main commit touching it = 9e7d3ef 19:22:28Z, AFTER this window), so every file the session wrote was untracked and collapsible.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "HIGH",
+      "route_to": ["INFRA", "CTO"]
+    },
+    {
+      "kind": "RESULT",
+      "summary": "Strike-series closure timing pinned: fix commit 30fc94f (which replaces porcelain with git diff + diff --cached + ls-files --others and documents the collapse mode in an in-file comment) is Git-stamped 2026-08-25T18:56:50Z — 34 seconds after THIS run's enforce failure (18:56:16.28Z) — making curator #13 the LAST possible victim of the six-strike series on this workflow (#3 32793165981 / #4 32793580374 physics+graph audits era, #3-strike 32860596387, #4-collapsed-dir 32881219633, #5 32884735910, #6 THIS). The identical construct remains UNFIXED elsewhere on current origin/main at distillation time: physics-loop.yml ×3, graph-loop.yml ×3, frontier-research.yml ×3, runtime-loop.yml ×2, cto-council.yml :113 (curator grep of fetched main).",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "importance": "HIGH",
+      "route_to": ["INFRA", "CTO"]
+    },
+    {
+      "kind": "OTHER",
+      "summary": "Selection behavior witnessed: backfill selected EXACTLY ONE target (32875584974 — cancelled 18:44:06Z, after the previous curator pass) despite BACKFILL_BATCH=5, because every other completed run already had a durable runs/<id>.json on the checked-out ref; CLEANUP_INCIDENT_RUN 32880942022 was absent from targets so the SPECIAL RECOVERY branch was correctly NOT attempted and the session explicitly recorded that no tombstones were invented and DELETED_RUNS_RECOVERY.json intentionally not created.",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "importance": "LOW",
+      "route_to": ["INFRA"]
+    },
+    {
+      "kind": "OTHER",
+      "summary": "Lost-session residue inventory (all substantively DUPLICATE of today's durable state): (a) its inference 'cancel landed 8 s after bcd16de hit main' is SUPERSEDED by positive attribution in runs/32885481049.json; (b) its lab/product snapshot (~18:51Z: PB-001 rev-5 authorization, preregs frozen twice incl. tag pb001-F0 + v3 D1-D8 addendum, phase V3_PREREG_FROZEN_AWAITING_BUILDER, next_role BETA_BUILDER, beta_launch=true, zero outcome rows) is durable on lab/product itself; (c) its HIGH wipe-defect re-escalation duplicates CF-2026-08-25-20; (d) its MEDIUM lead about 'uncoalesced fan-out in cto-council.yml' is empirically substantiated by council #15's queued death in this same batch (runs/32885496244.json). No scientific or advisory content was uniquely lost with the runner.",
+      "evidence_status": "DUPLICATE",
+      "importance": "LOW",
+      "route_to": ["INFRA", "PRODUCT", "CTO"]
+    },
+    {
+      "kind": "COST",
+      "summary": "~12m11s wall from creation to terminal update (queued ~4m06s behind the burst, job ~8m05s, session ~7m51s) for zero persisted bytes; third instance in the curator lane alone of the post-success work-loss class (scope-guard #1 = 32881219633, validator-key-mismatch = 32882090239, THIS = final scope-guard strike). Aggregate case for persist-before-enforce ordering (write to isolated ref/staging, gate afterwards).",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "MEDIUM",
+      "route_to": ["INFRA", "CTO"]
+    }
+  ],
+
+  "failure_signatures": [
+    "'Evidence Curator wrote outside its durable memory scope:' followed by exactly one line 'evidence/' → '##[error]Process completed with exit code 1' (step 8, 18:56:16.28Z); expected-empty-log discriminator N/A (job ran; log 259 KB)",
+    "Guard fingerprint: CHANGED=$(git status --porcelain | cut -c4-) + grep -Ev '^evidence/run-memory/' — collapses wholly-untracked directory trees to their root path"
+  ],
+  "research_opportunities": [
+    "Extend the proven 30fc94f detection class (diff + diff --cached + ls-files --others) mechanically to the five remaining workflows still carrying the raw porcelain construct (physics-loop ×3, graph-loop ×3, frontier-research ×3, runtime-loop ×2, cto-council :113) — every lane/frontier/council session that creates a brand-new top-level directory can reproduce strike #6 mid-cycle.",
+    "Persist-before-enforce ordering for all high-output agent sessions (curator/council/lane persist steps): stage outputs to an isolated ref before any scope/schema gate so post-success gates can no longer destroy finished work."
+  ],
+  "already_captured_elsewhere": [
+    "Target run's durable record: runs/32875584974.json (written by a later pass; content supersedes the stranded version).",
+    "Positive canceller attribution the stranded session lacked: runs/32885481049.json.",
+    "Strike history + remaining-exposure census: CF-2026-08-26-12, CF-2026-08-26-26, and the thematic digest bullets for runs 32881219633 / 32884735910."
+  ],
+  "distillation_complete": true,
+  "safe_to_prune": false,
+  "pruning_rationale": "Log is the SOLE witness of strike #6: the exact enforce-step failure lines, the bare-'evidence/' collapse signature on this specific workflow version, the selection-of-one behavior, and the 34-second fix-timing correlation exist nowhere else. Consistent with all five prior scope-gate strikes (safe_to_prune=false until the family is fully remediated across workflows)."
+}
