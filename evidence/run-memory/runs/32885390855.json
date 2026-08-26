@@ -1,0 +1,56 @@
+{
+  "run_id": 32885390855,
+  "workflow_name": "SPIDER Critical CTO Council",
+  "workflow_path": ".github/workflows/cto-council.yml",
+  "status": "completed",
+  "conclusion": "cancelled",
+  "head_sha": "c97680bc5199f4a0db59a7074ddd592712f3a202",
+  "created_at": "2026-08-25T18:43:06Z",
+  "updated_at": "2026-08-25T18:44:10Z",
+  "event": "push",
+  "run_number": 14,
+  "head_branch": "main",
+  "display_title_context": "SPIDER Critical CTO Council #14 — push-triggered on 'cto: harden physics coverage and append-only persistence'",
+
+  "evidence_class": "CTO",
+
+  "job_summary": {
+    "jobs": [],
+    "artifacts": 0,
+    "attempt_note": "ZERO jobs ever started; logs.txt is 0 bytes with log_status='available' (expected for a never-started run — fetch-harness discriminator already on file). Lived ~64 s (18:43:06→18:44:10Z), cancelled before any job began, during the active V3/Frontier push burst."
+  },
+
+  "durable_refs": [
+    "/tmp/spider_run_evidence/32885390855/run.json + jobs.json (total_count=0) + empty logs.txt — metadata-only bundle",
+    "git:c97680bc5199f4a0db59a7074ddd592712f3a202 (trigger commit, curator-verified ancestor of origin/main: 'cto: harden physics coverage and append-only persistence') — the durable content this run would have reviewed is Git-durable regardless of the cancellation"
+  ],
+
+  "findings": [
+    {
+      "kind": "ANOMALY",
+      "summary": "Cancelled-with-zero-jobs council shell, instance family continuation (cf. attributed pair 32879459085+32879902647 from the earlier 17:41–17:51Z burst and the unattributable 32894986672). This instance is attributable only by inference: created 18:43:06Z on push c97680bc, cancelled 18:44:10Z before any job; no surviving local evidence names the canceller (no jobs → no log lines), so concurrency-group queue semantics remain the plausible-but-unconfirmed mechanism (same epistemic status as prior instances). No agent tokens spent, nothing synthesized, nothing lost.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "LOW",
+      "route_to": ["INFRA", "CTO"]
+    },
+    {
+      "kind": "LIMIT",
+      "summary": "Recovery dead-end confirmed end-to-end for this signature class (three-step observation across sibling runs of this window): (1) watchdog sweeps at 18:42:56Z and 18:43:23Z logged 'cto-council.yml: active run exists' while this run was queued — the active-run guard blocks any preemptive action; (2) after cancellation, conclusion=cancelled + zero-byte logs match NEITHER the runner-shutdown regex NOR SPIDER_TRANSIENT_OX_EXHAUSTED NOR an OpenCode+network signature, and `gh run view --log` on a jobless run fails ('refusing blind retry'); (3) therefore a push-triggered council killed by queue supersession has NO automatic recovery path — its trigger commit's review simply depends on a later dispatch landing. Mitigation already partially durable elsewhere (feed-gated council wake b2d747e/b4dbd70 per INDEX); residual gap: no skip-if-superseded-then-requeue-on-quiet logic for councils themselves.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "LOW",
+      "route_to": ["INFRA"]
+    }
+  ],
+
+  "failure_signatures": [
+    "CANCELLED_ZERO_JOBS_COUNCIL_SHELL: push-triggered council cancelled ~64 s after creation without starting any job; empty log + total_count=0 jobs; canceller not nameable from local evidence (Git-timeline inference only)."
+  ],
+  "research_opportunities": [],
+  "already_captured_elsewhere": [
+    "Signature family + waste accounting + feed-gated-wake mitigation: CF-2026-08-26 concurrency-burst findings (runs 32879459085/32879902647) and INDEX thematic bullets; policy line 'never-started runs whose trigger commit is Git-durable are prune-safe after distillation' already on file.",
+    "Council content that DID land later that evening (CTO-5 lineage, lab/cto): INDEX navigation note — unaffected by this cancellation."
+  ],
+  "distillation_complete": true,
+  "safe_to_prune": true,
+  "pruning_rationale": "Metadata-only run: zero jobs, zero tokens, zero artifacts; trigger commit is durable on main; both observations above fully transcribed. Nothing exists in the raw 'log' to preserve."
+}
