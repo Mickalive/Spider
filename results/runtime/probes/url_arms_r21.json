@@ -1,0 +1,55 @@
+{
+ "arm_id": "url_construct_account_route",
+ "artifact": "runtime.url_arms/v0",
+ "blinding_fixture_sha256": "94114009b32f48d486e372cb4df84dec4d611107019dd7b8576f2787538b49e7",
+ "blinding_scan_clean": true,
+ "blinding_scan_leaks": [],
+ "constructed_path_rule": "/login",
+ "cycle": "R2-1 priority 1 (offline comparator-family extension)",
+ "entries": {
+  "page10": {
+   "browser_sim_actions": 3,
+   "browser_sim_loads": 1,
+   "constructed_url": "https://quotes.toscrape.com/login",
+   "descriptive_oracle_affordance_present": true,
+   "entry_host": "quotes.toscrape.com",
+   "entry_url": "https://quotes.toscrape.com/page/10/",
+   "floor_anatomy_steps": 3
+  },
+  "taglove": {
+   "browser_sim_actions": 3,
+   "browser_sim_loads": 1,
+   "constructed_url": "https://quotes.toscrape.com/login",
+   "descriptive_oracle_affordance_present": true,
+   "entry_host": "quotes.toscrape.com",
+   "entry_url": "https://quotes.toscrape.com/tag/love/",
+   "floor_anatomy_steps": 3
+  }
+ },
+ "floor_anatomy_steps": 3,
+ "gating": "NONE \u2014 descriptive comparator-family record only; the frozen R1 sweep artifact and winner are byte-untouched",
+ "lexicon_sha256": "9a3fe976b9059cc3058ba67e8a251874f095fc8122d5d5bd6dc482df325d4c5f",
+ "procedure_browser_simulated": [
+  {
+   "note": "constructed URL navigation",
+   "op": "goto",
+   "unit": "load"
+  },
+  {
+   "field_hint": "username",
+   "op": "fill",
+   "unit": "action"
+  },
+  {
+   "field_hint": "password",
+   "op": "fill",
+   "unit": "action"
+  },
+  {
+   "op": "click",
+   "target": "submit",
+   "unit": "action"
+  }
+ ],
+ "vocabulary_provenance": "generic account-route token class shared with policies.HREF_RE/policies.LEXICON; no target-site string"
+}

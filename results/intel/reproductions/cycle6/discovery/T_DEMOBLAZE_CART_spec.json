@@ -1,0 +1,185 @@
+{
+ "openapi": "3.0.x-cleanroom-c6",
+ "host_origin": "api.demoblaze.com",
+ "paths": {
+  "GET /entries": {
+   "method": "GET",
+   "path": "/entries",
+   "host": "https://api.demoblaze.com",
+   "parameters": [],
+   "requestBody": null,
+   "responses_schema": {
+    "Items": [
+     "dict"
+    ],
+    "LastEvaluatedKey": {
+     "id": "str"
+    }
+   },
+   "security": [],
+   "x-intent": "",
+   "n_obs": 6
+  },
+  "POST /login": {
+   "method": "POST",
+   "path": "/login",
+   "host": "https://api.demoblaze.com",
+   "parameters": [],
+   "requestBody": {
+    "content_type": "application/json",
+    "schema": {
+     "type": "object",
+     "properties": {
+      "username": {
+       "type": "string"
+      },
+      "password": {
+       "type": "string"
+      }
+     }
+    },
+    "example_commit_redacted": {
+     "username": "str",
+     "password": "str"
+    }
+   },
+   "responses_schema": null,
+   "security": [],
+   "x-intent": "login_session_demoblaze",
+   "n_obs": 2
+  },
+  "POST /check": {
+   "method": "POST",
+   "path": "/check",
+   "host": "https://api.demoblaze.com",
+   "parameters": [],
+   "requestBody": {
+    "content_type": "application/json",
+    "schema": {
+     "type": "object",
+     "properties": {
+      "token": {
+       "type": "string"
+      }
+     }
+    },
+    "example_commit_redacted": {
+     "token": "str"
+    }
+   },
+   "responses_schema": {
+    "Item": {
+     "expiration": "int",
+     "token": "str",
+     "username": "str"
+    }
+   },
+   "security": [],
+   "x-intent": "",
+   "n_obs": 8
+  },
+  "POST /bycat": {
+   "method": "POST",
+   "path": "/bycat",
+   "host": "https://api.demoblaze.com",
+   "parameters": [],
+   "requestBody": {
+    "content_type": "application/json",
+    "schema": {
+     "type": "object",
+     "properties": {
+      "cat": {
+       "type": "string"
+      }
+     }
+    },
+    "example_commit_redacted": {
+     "cat": "str"
+    }
+   },
+   "responses_schema": {
+    "Items": [
+     "dict"
+    ]
+   },
+   "security": [],
+   "x-intent": "",
+   "n_obs": 2
+  },
+  "POST /view": {
+   "method": "POST",
+   "path": "/view",
+   "host": "https://api.demoblaze.com",
+   "parameters": [],
+   "requestBody": {
+    "content_type": "application/json",
+    "schema": {
+     "type": "object",
+     "properties": {
+      "id": {
+       "type": "string"
+      }
+     }
+    },
+    "example_commit_redacted": {
+     "id": "str"
+    }
+   },
+   "responses_schema": {
+    "cat": "str",
+    "desc": "str",
+    "id": "int",
+    "img": "str",
+    "price": "float",
+    "title": "str"
+   },
+   "security": [],
+   "x-intent": "",
+   "n_obs": 5
+  },
+  "POST /viewcart": {
+   "method": "POST",
+   "path": "/viewcart",
+   "host": "https://api.demoblaze.com",
+   "parameters": [],
+   "requestBody": {
+    "content_type": "application/json",
+    "schema": {
+     "type": "object",
+     "properties": {
+      "cookie": {
+       "type": "string"
+      },
+      "flag": {
+       "type": "bool"
+      }
+     }
+    },
+    "example_commit_redacted": {
+     "cookie": "str",
+     "flag": "bool"
+    }
+   },
+   "responses_schema": {
+    "Items": [
+     "dict"
+    ]
+   },
+   "security": [],
+   "x-intent": "view_cart_items_demoblaze",
+   "n_obs": 2
+  }
+ },
+ "securitySchemes": {
+  "auth_header": {
+   "type": "apiKey",
+   "in": "header",
+   "name": "Authorization"
+  },
+  "cookie_header": {
+   "type": "apiKey",
+   "in": "header",
+   "name": "Cookie"
+  }
+ }
+}

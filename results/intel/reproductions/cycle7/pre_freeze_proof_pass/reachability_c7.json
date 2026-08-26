@@ -1,0 +1,81 @@
+{
+ "ts_start_utc": "2026-08-25T23:29:59Z",
+ "reachability": {
+  "httpbin": {
+   "codes_x3": [
+    200,
+    200,
+    200
+   ],
+   "robots_status": 200,
+   "robots_verbatim": "User-agent: *\nDisallow: /deny\n"
+  },
+  "petstore": {
+   "codes_x3": [
+    200,
+    200,
+    200
+   ],
+   "robots_status": 404,
+   "robots_verbatim": null
+  },
+  "demoblaze_ui": {
+   "codes_x3": [
+    200,
+    200,
+    200
+   ],
+   "robots_status": 404,
+   "robots_verbatim": null
+  },
+  "demoblaze_api": {
+   "codes_x3": [
+    404,
+    404,
+    404
+   ],
+   "robots_status": 404,
+   "robots_verbatim": null
+  },
+  "restful_booker": {
+   "codes_x3": [
+    200,
+    200,
+    200
+   ],
+   "robots_status": 404,
+   "robots_verbatim": null
+  },
+  "jsonplaceholder": {
+   "codes_x3": [
+    200,
+    200,
+    200
+   ],
+   "robots_status": 200,
+   "robots_verbatim": "# As a condition of accessing this website, you agree to abide by the following\n# content signals:\n\n# (a)  If a content-signal = yes, you may collect content for the corresponding\n#      use.\n# (b)  If a content-signal = no, you may not collect content for the\n#      corresponding use.\n# (c)  If the website operator does not include a content signal for a\n#      corresponding use, the website oper"
+  }
+ },
+ "endpoint_checks": {
+  "httpbin_form_page": 200,
+  "petstore_findbystatus": 200,
+  "petstore_swagger_json": 200,
+  "rb_ping": 201,
+  "rb_auth_token_ok": true,
+  "rb_create_status_cooldown_check": 418,
+  "rb_created_bookingid": false,
+  "demoblaze_login_endpoint": 200,
+  "demoblaze_login_body_head": "{\"errorMessage\":\"User does not exist.\"}\n",
+  "jp_posts_1": 200
+ },
+ "clock_skew_bookkeeping": {
+  "httpbin": {
+   "server_date": "Tue, 25 Aug 2026 23:30:06 GMT",
+   "local_minus_server_ms": 187
+  },
+  "jp": {
+   "server_date": "Tue, 25 Aug 2026 23:30:06 GMT",
+   "local_minus_server_ms": 232
+  }
+ }
+}

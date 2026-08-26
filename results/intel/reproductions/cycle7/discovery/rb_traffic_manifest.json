@@ -1,0 +1,166 @@
+{
+ "origin_host": "scripted-http",
+ "n_entries": 6,
+ "entries": [
+  {
+   "ts_ms": 1787703701527,
+   "method": "POST",
+   "url": "https://restful-booker.herokuapp.com/auth",
+   "status": 200,
+   "resource_type": "fetch",
+   "req_content_type": "application/json",
+   "resp_content_type": "application/json; charset=utf-8",
+   "req_body_bytes": 48,
+   "latency_ms": 243.0,
+   "req_headers": {},
+   "req_header_names": [
+    "Content-Type"
+   ],
+   "req_body_sample": "{\"username\": \"admin\", \"password\": \"password123\"}",
+   "resp_body_bytes": 27,
+   "resp_body_sample": "{\"token\":\"3fc94250ea5ab34\"}",
+   "resp_body_sha256": "65a9d70fe1d4e5f253535746ff7598dc72f2d7d6fe3f2a04f94d022001fffe00",
+   "resp_shape": {
+    "token": "str"
+   }
+  },
+  {
+   "ts_ms": 1787703701770,
+   "method": "GET",
+   "url": "https://restful-booker.herokuapp.com/booking",
+   "status": 200,
+   "resource_type": "fetch",
+   "req_content_type": "",
+   "resp_content_type": "application/json; charset=utf-8",
+   "req_body_bytes": 0,
+   "latency_ms": 238.8,
+   "req_headers": {},
+   "req_header_names": [],
+   "resp_body_bytes": 5724,
+   "resp_body_sample": "[{\"bookingid\":1},{\"bookingid\":2},{\"bookingid\":3},{\"bookingid\":4},{\"bookingid\":5},{\"bookingid\":6},{\"bookingid\":7},{\"bookingid\":8},{\"bookingid\":9},{\"bookingid\":10},{\"bookingid\":11},{\"bookingid\":12},{\"bookingid\":13},{\"bookingid\":15},{\"bookingid\":16},{\"bookingid\":17},{\"bookingid\":18},{\"bookingid\":19},{\"bookingid\":20},{\"bookingid\":21},{\"bookingid\":22},{\"bookingid\":24},{\"bookingid\":25},{\"bookingid\":26},{\"bookingid\":28},{\"bookingid\":29},{\"bookingid\":30},{\"bookingid\":32},{\"bookingid\":33},{\"bookingid\":34},{\"bookingi",
+   "resp_body_sha256": "7d54e25df0ce8a467473f3361feb4513adff86541482aab4571e14c6fc2fd014",
+   "resp_shape": [
+    {
+     "bookingid": "int"
+    }
+   ]
+  },
+  {
+   "ts_ms": 1787703702009,
+   "method": "GET",
+   "url": "https://restful-booker.herokuapp.com/booking/1",
+   "status": 200,
+   "resource_type": "fetch",
+   "req_content_type": "",
+   "resp_content_type": "application/json; charset=utf-8",
+   "req_body_bytes": 0,
+   "latency_ms": 237.3,
+   "req_headers": {},
+   "req_header_names": [],
+   "resp_body_bytes": 140,
+   "resp_body_sample": "{\"firstname\":\"Eric\",\"lastname\":\"Jones\",\"totalprice\":852,\"depositpaid\":false,\"bookingdates\":{\"checkin\":\"2017-02-14\",\"checkout\":\"2018-10-17\"}}",
+   "resp_body_sha256": "812cd6b6ffd75a375b409b12312ae8a65e84d8d432d8d731c12c6fca461e4df6",
+   "resp_shape": {
+    "bookingdates": {
+     "checkin": "str",
+     "checkout": "str"
+    },
+    "depositpaid": "bool",
+    "firstname": "str",
+    "lastname": "str",
+    "totalprice": "int"
+   }
+  },
+  {
+   "ts_ms": 1787703702247,
+   "method": "GET",
+   "url": "https://restful-booker.herokuapp.com/booking/2",
+   "status": 200,
+   "resource_type": "fetch",
+   "req_content_type": "",
+   "resp_content_type": "application/json; charset=utf-8",
+   "req_body_bytes": 0,
+   "latency_ms": 238.2,
+   "req_headers": {},
+   "req_header_names": [],
+   "resp_body_bytes": 171,
+   "resp_body_sample": "{\"firstname\":\"Sally\",\"lastname\":\"Jones\",\"totalprice\":181,\"depositpaid\":false,\"bookingdates\":{\"checkin\":\"2022-11-11\",\"checkout\":\"2024-01-09\"},\"additionalneeds\":\"Breakfast\"}",
+   "resp_body_sha256": "80633ad36911ab1637db2d20e50df64315225fc228de042f19981d202fb0ac03",
+   "resp_shape": {
+    "additionalneeds": "str",
+    "bookingdates": {
+     "checkin": "str",
+     "checkout": "str"
+    },
+    "depositpaid": "bool",
+    "firstname": "str",
+    "lastname": "str",
+    "totalprice": "int"
+   }
+  },
+  {
+   "ts_ms": 1787703702485,
+   "method": "POST",
+   "url": "https://restful-booker.herokuapp.com/booking",
+   "status": 200,
+   "resource_type": "fetch",
+   "req_content_type": "application/json",
+   "resp_content_type": "application/json; charset=utf-8",
+   "req_body_bytes": 183,
+   "latency_ms": 243.0,
+   "req_headers": {},
+   "req_header_names": [
+    "Content-Type"
+   ],
+   "req_body_sample": "{\"firstname\": \"Spi\", \"lastname\": \"Der\", \"totalprice\": 111, \"depositpaid\": true, \"bookingdates\": {\"checkin\": \"2026-09-01\", \"checkout\": \"2026-09-05\"}, \"additionalneeds\": \"ReproProbeC7\"}",
+   "resp_body_bytes": 197,
+   "resp_body_sample": "{\"bookingid\":455,\"booking\":{\"firstname\":\"Spi\",\"lastname\":\"Der\",\"totalprice\":111,\"depositpaid\":true,\"bookingdates\":{\"checkin\":\"2026-09-01\",\"checkout\":\"2026-09-05\"},\"additionalneeds\":\"ReproProbeC7\"}}",
+   "resp_body_sha256": "7b76b76b2c351992bba3f6c63eaaa6d8f1786697c708aa975fac5c6468a7ec3b",
+   "resp_shape": {
+    "booking": {
+     "additionalneeds": "str",
+     "bookingdates": "dict",
+     "depositpaid": "bool",
+     "firstname": "str",
+     "lastname": "str",
+     "totalprice": "int"
+    },
+    "bookingid": "int"
+   }
+  },
+  {
+   "ts_ms": 1787703702728,
+   "method": "PUT",
+   "url": "https://restful-booker.herokuapp.com/booking/455",
+   "status": 200,
+   "resource_type": "fetch",
+   "req_content_type": "application/json",
+   "resp_content_type": "application/json; charset=utf-8",
+   "req_body_bytes": 183,
+   "latency_ms": 222.0,
+   "req_headers": {
+    "Authorization": "__VALUE_LOCAL_ONLY__"
+   },
+   "req_header_names": [
+    "Accept",
+    "Authorization",
+    "Content-Type"
+   ],
+   "req_body_sample": "{\"firstname\": \"Spi\", \"lastname\": \"Der\", \"totalprice\": 111, \"depositpaid\": true, \"bookingdates\": {\"checkin\": \"2026-09-01\", \"checkout\": \"2026-09-05\"}, \"additionalneeds\": \"ReproProbeC6\"}",
+   "resp_body_bytes": 169,
+   "resp_body_sample": "{\"firstname\":\"Spi\",\"lastname\":\"Der\",\"totalprice\":111,\"depositpaid\":true,\"bookingdates\":{\"checkin\":\"2026-09-01\",\"checkout\":\"2026-09-05\"},\"additionalneeds\":\"ReproProbeC6\"}",
+   "resp_body_sha256": "c848d1169f29e78d158ace6729b5dbee0077c4526fbf70daa673e72bf4e4ec8a",
+   "resp_shape": {
+    "additionalneeds": "str",
+    "bookingdates": {
+     "checkin": "str",
+     "checkout": "str"
+    },
+    "depositpaid": "bool",
+    "firstname": "str",
+    "lastname": "str",
+    "totalprice": "int"
+   }
+  }
+ ]
+}

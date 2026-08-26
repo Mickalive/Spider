@@ -1,0 +1,48 @@
+{
+ "duplicate_key_dominance_notes": {},
+ "observation_count": 7,
+ "parent_joins": {
+  "runtime/form-login-procedure-wb@v1": {
+   "mechanism_copied_verbatim": true,
+   "observation_record_ids": [
+    "8bce89a190a9bd027066f483a574d50d5baad43ae60a237ded0aeebd6358b10d",
+    "844b16f9c4aa7f655145b6d060a256bd50ed2ca7087835ac4ff59b055f909baa",
+    "601c32597569558e278a0a11c5305dba09d2eb83f15ccfe4d845ed307aab9c3a",
+    "4e4e6f399386e6be5ef06b44713ee0b51606adafeef0772e8311807567af45da",
+    "e67953fc2b0aad802147da2f9782da788b2e0d4b3b03e98dbc5ebe9466d48610",
+    "d1c7bc11e5c0e3b02e1dd7d20ea6dea989157bfe839ac1b8c470efca3d42a937"
+   ],
+   "parent_capsule_id": "runtime/form-login-procedure@v1"
+  }
+ },
+ "parent_registry_untouched": true,
+ "successor_candidates": [
+  {
+   "capsule_id": "runtime/form-login-procedure-wb@v1",
+   "mechanism_kind": "PROCEDURE",
+   "semantic_keys": [
+    "access",
+    "account",
+    "complete",
+    "credential",
+    "demo",
+    "form",
+    "log",
+    "password",
+    "public",
+    "quot",
+    "sign",
+    "site",
+    "toscrape",
+    "username",
+    "your"
+   ],
+   "status": "CANDIDATE"
+  }
+ ],
+ "tie_break_disclosure": "all executions resolved to runtime/form-login-procedure@v1 by lexical tie-break; registry-level resolution only",
+ "tier_note": "derivation NEVER upgrades the evidence tier; unmeasured fields stay null; observations are derivation substrate only",
+ "wb_registry_shas": {
+  "runtime/form-login-procedure-wb@v1": "36d44058d466ff01d58e8b6a690a4e5b0d2dbf5277e1110056e091a8a310f328"
+ }
+}

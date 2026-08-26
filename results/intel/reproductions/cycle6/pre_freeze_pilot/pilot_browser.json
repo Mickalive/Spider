@@ -1,0 +1,28 @@
+{
+ "quiescence_calibration": {
+  "httpbin": {
+   "gap_ms": 400.0
+  },
+  "petstore": {
+   "gap_ms": 936.9
+  },
+  "demoblaze": {
+   "gap_ms": 400.0
+  }
+ },
+ "selector_smoke": {
+  "petstore": {
+   "selectors": [
+    "div.opblock.opblock-get[id*='findPetsByStatus']",
+    "#operations-pet-findPetsByStatus"
+   ],
+   "param_control": "select",
+   "response_json_visible": false
+  },
+  "demoblaze": {
+   "n_categories": 3,
+   "laptops_link": true
+  }
+ },
+ "user_agent": "SpiderResearchBot/0.1 (+autonomous-lab)"
+}

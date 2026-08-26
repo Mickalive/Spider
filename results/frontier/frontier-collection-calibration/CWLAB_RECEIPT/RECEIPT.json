@@ -1,0 +1,65 @@
+{
+  "A_historical_parser_G1": {
+    "block_codes": [
+      "PARSER_AMPUTATION_CLASS_UNRECOVERED"
+    ],
+    "blocked": true,
+    "expectation": "BLOCK PARSER_AMPUTATION_CLASS_UNRECOVERED 1/5 shapes",
+    "expectation_met": true,
+    "shapes_recovered_per_class": {
+      "page_action": 1
+    }
+  },
+  "B_tolerant_parser_G1": {
+    "block_codes": [],
+    "blocked": false,
+    "expectation": "PASS (no block)",
+    "expectation_met": true,
+    "shapes_recovered_per_class": {
+      "page_action": 5
+    }
+  },
+  "C_real_harness_demonstration": {
+    "bytes_len": 1073,
+    "bytes_sha256": "d811e145d5e5fb6091df59679dce7fb30087c0a4c374930fe6b243a26520289b",
+    "expectation": "served page contains 2 class-attributed stub anchors; verbatim historical A_RE recovers 0 of them while recovering attribute-free anchors; tolerant parser recovers both",
+    "expectation_met": true,
+    "g2_acceptance_blocked": false,
+    "historical_parse_links_stubs_recovered": [],
+    "historical_recovers_all_nonsug": [
+      "About",
+      "Home",
+      "Next chapter",
+      "Section One",
+      "Section Two"
+    ],
+    "http_status": 200,
+    "latency_s": 0.0007,
+    "n_stubs_served": 2,
+    "nav_style_anchors_on_page": 5,
+    "raw_saved_as": "raw_p03_served.html",
+    "stub_anchor_targets_in_raw_bytes": [
+      "/go/sA",
+      "/go/sB"
+    ],
+    "tolerant_parser_stubs_recovered": [
+      "/go/sA",
+      "/go/sB"
+    ],
+    "url": "http://127.0.0.1:43701/page/p03"
+  },
+  "all_expectations_met": true,
+  "generated_utc": "2026-08-26T10:09:36Z",
+  "peer_artifacts_reused": {
+    "A_RE_verbatim": "<a\\s+href='([^']+)'>([^<]*)</a>",
+    "crawler_module": "/tmp/spider_frontier_peers/frontier-physics-controlled-web-lab/frontier/frontier-physics-controlled-web-lab/lab/crawler.py",
+    "crawler_sha256": "01d4bc756545265695a6ae63d70961a55a4dd8af55de0a0e289af9246cdcd508",
+    "env_server_module": "/tmp/spider_frontier_peers/frontier-physics-controlled-web-lab/frontier/frontier-physics-controlled-web-lab/lab/env_server.py",
+    "env_server_sha256": "ab7a62a27e2e6bd8e8acb2d5caa7c915215276ec697a647949a17305b6fb47f9"
+  },
+  "receipt": "PREREG_s9_real_collection_application",
+  "unavailability_documentation": {
+    "runtime_floor_cell_probes": "completed r2 artifacts present under runtime mount; no pending collection window",
+    "volatility_stage1": "NOT FIRED - peer state frontier-physics-knowledge-volatility: cycle_status=AUDIT_PASS_INTEGRATED_ONE_SHOT_CONSUMED; no pending collection to gate"
+  }
+}

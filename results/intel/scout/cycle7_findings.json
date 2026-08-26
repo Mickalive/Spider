@@ -1,0 +1,165 @@
+{
+  "cycle": 7,
+  "date": "2026-08-25",
+  "role": "Intel Scout (docs/roles/INTEL_SCOUT.md binding)",
+  "mission_source": "state/intel_loop.json priority 1 (cycle-6 Director integration, commit 9f9a757)",
+  "mission_question": "Clean-instrument confirmation round 3 of unbrowse-route-capture-replay-ladder (CAPPED final live attempt): with the four audited cycle-6 instrument defects repaired under a fresh preregistration disclosing all cycle-6 observations as prior knowledge, does the multi-host route-ladder measurement produce an interpretable verdict on (a) multi-host discovery fidelity, (b) repeat-task economics vs matched browser traversal at output equivalence, (c) natural calendar-time staleness via the committed window-2 protocol, (d) replica-scoped induced-mutation detection quality, (e) capture-value-over-declaration vs GENERATED_SPEC_NULL - with escalation transparency throughout?",
+  "pre_selection_consultation": {
+    "contexts_consulted": [
+      "cto_intel (fresh context; challenged selection + sequencing + residual-failure ranking)",
+      "ecosystem_scout (fresh context; trigger checks, new-actor sweep, Steam-like/shared-capability infrastructure, citation refresh)",
+      "intel_benchmark_critic (fresh context; validity threats, baseline fairness, prior-art vs five open questions)"
+    ],
+    "verdicts": [
+      "cto_intel: CONFIRM_SELECTION; clock gate forces split-session not delay; anchor window-2 on clean records disclosed pre-freeze; premature evaluator invocation is a CAP hazard requiring mechanical gating; Harpist credential-lifecycle upgraded to strongest underestimated comparator",
+      "ecosystem_scout: NO outranking actor/mechanism found across papers, code, registries, vendor surfaces; strongest new evidence (2608.00997 panel release, MCP SEP-2549 native TTL, measured registry-trust incidents) strengthens rather than displaces the assigned mission",
+      "intel_benchmark_critic: proceed, but V1-V5 are each individually sufficient to produce a third invalid run or misleading verdict unless fixed pre-freeze; D-null as specified unsound if it shares pipeline/session with B"
+    ],
+    "disagreement_check": "All three independently confirmed rather than flipped the selection; critic objections were process-level (foldable into pre-freeze gates), not selection-level. No consultation identified a mechanism with both higher information value AND feasibility this cycle."
+  },
+  "new_cycle7_fact_clock_gate": {
+    "summary": "The committed natural-TTL window-2 protocol is NOT yet executable: window-1 fingerprints were captured 2026-08-25T22:05:30Z (ts_ms 1787695530749); >=24h calendar gap opens eligibility only at 2026-08-26T22:05:30Z; ~1.1h had elapsed at Scout time.",
+    "sources": [
+      "results/intel/reproductions/cycle6/ttl_window1.json (committed fc0c2da 2026-08-25T22:08Z)",
+      "results/intel/reproductions/cycle6/ttl_window2_protocol.json (required_gap_hours=24)"
+    ],
+    "evidence_label": "CODE_VERIFIED (committed artifact arithmetic, recomputed fresh)",
+    "implications": [
+      "Single-session completion of full P0-P7 INCLUDING window-2 is impossible today under either anchoring option; split-session inside the cycle or deferred start required (cycle-6 disclosed single-session runner constraint).",
+      "The VERDICT is not blocked: cycle-6 prereg section 13 froze 'Natural-TTL never enters the verdict' - the mechanical rule consumes only C1-C5; window-2 execution is a mandated stop-condition deliverable, not a verdict input.",
+      "With a fresh own-study anchor ANY start time requires an internal >=24h gap anyway, so waiting buys nothing over splitting.",
+      "Split-session process hazards must be gated BEFORE freeze: premature evaluator invocation auto-invalidates (first invalidity condition = required files missing) burning exactly-once AND tripping the CAP -> manifest-gated invocation wrapper + invocation logging; cross-session discontinuity (host death overnight, cookie expiry vs 24h gate, state handoff) -> hash-signed boundary manifests, per-window availability accounting frozen in advance, identical-across-windows untimed auth bootstrap, host-death scoped by host-x-arm eligibility matrix; NTP/UTC bookkeeping with evaluator recomputing eligibility from artifact timestamps."
+    ]
+  },
+  "new_cycle7_fact_anchor_integrity": {
+    "summary": "Cycle-6 window-1 route records are audit-proven structurally unsound for 2 of 4 host-tasks: petstore records carry unusable addressing (intent='' from defect row 3) and demoblaze cart-write was never extracted (row-2 content-type filter). Replaying known-corrupted records in a positive-differential STALE_TTL test would confound staleness with inherited corruption - a manufactured-positive hazard. httpbin FORM/COOKIE records were verified structurally sound (30/30 replays modulo row-4 payload instrumentation).",
+    "options_for_reproducer_freeze_pre_outcome": {
+      "A_carry_cycle6_artifacts": "Scope TTL claims honestly to structurally sound host-tasks (effectively httpbin family); petstore/demoblaze TTL clauses degrade to honest clause failures/no-events. Cheapest; weakest clause-(c) coverage.",
+      "B_fresh_own_anchor": "Capture clean fingerprints + route-store at session 1 immediately post-freeze; replay them at session 2 >=24h later; compare vs cycle-6 ttl_window1.json as mandatory NON-decisional environment-drift observation. Cleanest attribution; split forced regardless per clock-gate fact.",
+      "C_hybrid_per_host": "Reuse sound cycle-6 records (httpbin), re-capture unsound ones (petstore/demoblaze); per-host disclosure frozen at freeze. Preserves committed-protocol continuity where artifacts valid."
+    },
+    "scout_recommendation": "B or C, frozen verbatim in the fresh prereg before any outcome observation; positive-differential STALE_TTL attribution must never rest on records proven defective by the cycle-6 audit. Final call belongs to the Reproducer within the stop-condition no-retuning constraint.",
+    "evidence_label": "CODE_VERIFIED + audit-verified observation tier (cycle-6 audit PASS run 32897120087 defect rows 2/3/5)"
+  },
+  "stop_condition_assessment": "NOT TRIGGERED. Host qualification probed live <24h ago (cycle 6, same calendar day): httpbin forms/cookies 200, petstore UI+spec 200, demoblaze SPA->api.demoblaze.com 200/200 with login endpoint verified, restful-booker POST /auth verified; reqres.in/dummyjson remain excluded by frozen robots interpretation; jsonplaceholder auxiliary-only. Nothing this cycle removes hosts. Binding prior-knowledge disclosures for the fresh prereg: httpbin echoes transport headers into JSON bodies; demoblaze cart-write answers 200 text/html; petstore runtime diverges from published spec; restful-booker HTTP 418 write-protection under repeated scripted traffic (cooldown check mandated; RB excluded from TTL claims by reset cron).",
+  "unbrowse_actor_refresh": {
+    "repo_activity": "v11.3.4/.5/.6 published same-day cluster 2026-08-04 (npm latest 11.3.6); 748 stars / 65 forks [CODE_VERIFIED]",
+    "citations": "Semantic Scholar citationCount=0, citations list empty, fetched 2026-08-25 - third consecutive independent verification [CODE_VERIFIED-absence]",
+    "independent_bench_eval": "NONE found anywhere; closest third-party treatment remains a critique noting absent significance tests [CODE_VERIFIED-absence]",
+    "new_inconsistency_datum": "Vendor blog posts cite numbers inconsistent with the peer paper (blog: 8240->2289 ms mean on 'M2 MacBook Pro', 67 ms cached median vs paper: 3404->950 ms on M4 Max, best route 79 ms) [OFFICIAL_CLAIM inconsistency, documented]",
+    "claim_tier_rule": "SPIDER sandbox results must never be cited alongside the vendor headline or corpus bench; all vendor figures OFFICIAL_CLAIM"
+  },
+  "fresh_actor_evidence": [
+    {"actor": "Specwatch", "what": "traffic->OpenAPI 3.1 + versioned snapshots + breaking-change diff; MCP agent-session analyzer measuring wasted-call % (11% of 79 calls demo)", "tier": "CODE_VERIFIED", "url": "github.com/rajeevramani/specwatch"},
+    {"actor": "Specothesis/specint", "what": "Playwright HAR->OpenAPI+StepCI regression+drift.json vs prior run+saved auth profiles; v1.5.0 2026-07-30", "tier": "CODE_VERIFIED", "url": "github.com/Rajat-Dandoti/specothesis"},
+    {"actor": "MimicAPI", "what": "Chrome extension fetch/XHR capture->OpenAPI 3.0.3->local mock server", "tier": "CODE_VERIFIED", "url": "github.com/Quaser001/mimicapi"},
+    {"actor": "traffic2openapi", "what": "multi-source IR->OpenAPI 3.0/3.1/3.2 + spec-diff breaking changes; v0.4.0 May, push Jun 25", "tier": "CODE_VERIFIED", "url": "github.com/grokify/traffic2openapi"},
+    {"actor": "WALT (via WebXSkill related work)", "what": "reverse-engineers built-in website functionality into deterministic tools with validated input schemas - closest academic cousin to the route ladder found to date; watch for code", "tier": "PAPER_EVIDENCE", "url": "arXiv:2604.13318 (pointer)"},
+    {"actor": "Harpist (upgraded relevance)", "what": "credential ledger with capture-time/expiry/validation status feeding replay validity (401/403 invalid, 2xx valid) + automated re-auth recapture - shipping answer to AUTH_FAIL/staleness attribution problem", "tier": "CODE_VERIFIED (re-verified this cycle, v0.1.4)", "url": "github.com/kenobi-ai/harpist"}
+  ],
+  "new_papers_this_cycle": [
+    {"paper": "arXiv:2608.22339 BASM", "what": "Boundary-Aware Skill Memory: applicability conditions, risk cues, avoidance rules, recovery notes per skill; 'Skill Imitation Trap' (+47% wrong-tool margin from unbounded skills); strongest academic echo of SPIDER's escalation-vocabulary/no-silent-substitution core", "tier": "PAPER_EVIDENCE"},
+    {"paper": "arXiv:2608.16114 HyperSkill", "what": "hypergraph skill memory, co-occurrence retrieval, utility-weighted pruning/merge; CODE RELEASED github.com/rux001/HyperSkill", "tier": "PAPER_EVIDENCE + CODE_VERIFIED"},
+    {"paper": "arXiv:2608.22533 ContraMem", "what": "self-evolving procedural memory from contrasting multi-model trajectories; Function/Skill Cards; >2x success GAIA2/ARE vs no-memory", "tier": "PAPER_EVIDENCE"},
+    {"paper": "arXiv:2608.23417 SkillAlchemy", "what": "open-world skill creation from underspecified briefs via admission-controlled source grounding", "tier": "PAPER_EVIDENCE"},
+    {"paper": "arXiv:2604.13318 WebXSkill", "what": "executable skills + step-level NL guidance; URL-keyed skill graph retrieval; surfaces WALT pointer", "tier": "PAPER_EVIDENCE"},
+    {"paper": "arXiv:2608.00997 donor panel (data release)", "what": "120 obs / 88.6 days / 19,099 servers; content-binding hash-move revalidation + sized sweep beats drift-ranked re-audit; 51% born-stale; compounding overestimates 3x; production fail-closed gate refuses snapshots >24h old; Zenodo panel CC-BY-4.0 + analysis code", "tier": "PAPER_EVIDENCE + CODE_VERIFIED"}
+  ],
+  "shared_infrastructure_updates": [
+    "MCP spec SEP-2549 final 2026-07-28: native ttlMs + cacheScope on tools/list & resource reads; Mcp-Method header caching [OFFICIAL_CLAIM]",
+    "hermes-agent issue #72560 (2026-07-27): tool catalog stayed stale because refresh compared tool-name SETS only; fixes converge on byte-stable schemas + full-schema fingerprints - live proof cached-procedure stores go silently stale without content binding [INDEPENDENT_REPORT/CODE_VERIFIED]",
+    "TrueFoundry gateway pattern: cached_tool_schema + listChanged event invalidation + periodic sweeper fallback; servers declare but don't reliably emit listChanged [OFFICIAL_CLAIM]",
+    "Official MCP Registry API: updated_since incremental sync, include_deleted, deprecated/deleted PATCH [CODE_VERIFIED]"
+  ],
+  "registry_trust_updates": [
+    "Zenity Labs Paperclip campaign (Black Hat 2026-08-06): typosquatted skills.sh skill family uploaded clean 2026-07-05, weaponized 2026-07-11, 1.7M aggregate installs before takedown; marketplace TOCTOU (reputation accumulated while clean, then mutated; payload in secondary setup-installation.md) [INDEPENDENT_REPORT]",
+    "Snyk audit (Feb 2026 corpus): 3,984 skills ClawHub+skills.sh; 13.4% critical; 76 confirmed malicious payloads (labeled corpus); detectors 90-100% recall / 0% FP curated top-100 [INDEPENDENT_REPORT]",
+    "Unit42 (2026-06-23): persistent evasion on ClawHub post-integration - paste-site lures, 22MB padding, runtime affiliate injection via remotely-updated referrals.json [INDEPENDENT_REPORT]",
+    "Pluto Security (2026-02-04): downstream aggregators kept serving malicious skills after upstream takedown; cross-registry invalidation unsolved; 'removal is not a security control' [INDEPENDENT_REPORT]"
+  ],
+  "revisit_triggers_checked": [
+    {"trigger": "SkillMigrator arXiv:2606.17645 code release", "status": "NOT FIRED (cycles 5,6,7)", "evidence": "GitHub search 0 repos; paper HTML no code link; author CV lists as non-refereed preprint [CODE_VERIFIED-absence]"},
+    {"trigger": "NeoCognition public paper/code/spec", "status": "NOT FIRED (cycles 6,7)", "evidence": "Aug 2026 reporting: no product publicly available, technical approach undisclosed [INDEPENDENT_REPORT]"},
+    {"trigger": "APISensor arXiv:2603.23852 code", "status": "NOT FIRED (cycles 6,7)", "evidence": "no own-repo link in paper; GitHub search unrelated only [CODE_VERIFIED-absence]"},
+    {"trigger": "MorphNet maturity", "status": "NOT FIRED (worse)", "evidence": "0 stars/forks/issues, 1 contributor, last push 2026-05-24, zero releases [CODE_VERIFIED]"},
+    {"trigger": "QCR arXiv:2608.12847 follow-ups", "status": "NOT FIRED (12 days old)", "evidence": "S2 citationCount=0, v1 only [CODE_VERIFIED]"},
+    {"trigger": "WebNavigator third-party use", "status": "PARTIALLY FIRED (unchanged)", "evidence": "HF graphs/embeddings released Apache-2.0; 27 downloads/1 like; repo dormant since 2026-04-07 [CODE_VERIFIED]"},
+    {"trigger": "Unbrowse corpus-bench third-party eval", "status": "NOT FIRED; numeric-inconsistency datum added", "evidence": "citationCount=0 (3rd verification); no independent bench re-run; blog-vs-paper numbers documented [CODE_VERIFIED-absence + OFFICIAL_CLAIM]"},
+    {"trigger": "NEW WALT code release", "status": "WATCH (new this cycle)", "evidence": "via WebXSkill related work; no code located yet [PAPER_EVIDENCE]"}
+  ],
+  "red_team_digest": {
+    "top_validity_threats_beyond_enumerated_repairs": [
+      "V1 mutation smoke floor: 'detects >=1 class' passes an instrument blind on 5/6 classes (exact cycle-6 row-5 failure mode) -> require ALL six classes incl. type-change and pagination-shape + zero-FP seeded benign set",
+      "V2 D-null circularity: spec generated from SAME discovery HAR/pipeline as B inherits its biases -> 'D fails/slower' passes vacuously; require separate capture session/time for D-HAR on spec-less hosts; D-public distinct lane fetched at BOTH windows; report B<->D endpoint-set disagreement metric",
+      "V3 STALE_TTL<->AUTH_FAIL conflation: demo-site sessions expire <<24h; T+24h auth death re-discovered OK reads as staleness -> prereg replay-failure triage tree (auth-refresh-only retry succeeds => AUTH_REFRESH_OK auth-bound; shape still differs => SCHEMA_STALE route-bound); scope wording to 'frozen-auth artifact validity'",
+      "V4 proof-pass gaming/perturbation: smoke cells != scored cells; same-day smoke validates happy path only; proof traffic perturbs targets (RB 418 precedent) -> bind smoke matrix to committed scored-manifest IDs; cooldown + probe-volume log; disclose smoke cannot exercise >=24h path",
+      "V5 unfrozen statistics levers: escalation charging (bill at measured same-task A-cost, never censor), estimator (median/trimmed+winsorization; means fragile on shared infra), model formula, blocked randomization -> freeze all before evaluator freeze",
+      "V6 demoblaze shared-DB pollution -> unique per-arm identities/markers, shape-only oracle on shared resources, randomized arm order, canary cross-detection",
+      "V7 fingerprint volatility (config.json ETag churn) -> canonicalization spec + stability pre-check (two samples hours apart must match)",
+      "V8 quiescence-wait drift -> constants hashed into config, settle times logged, A-latency reported +/- waits",
+      "V9 asymmetric availability attrition -> per host-x-arm-x-window ledger + whole-host drop rule + explicit survivor-set recalculation for '>=half hosts CI>1' clause",
+      "V10 adjudication-cap flooding from the two new policies -> pre-count expected ambiguous categories from cycle-6 rates, per-category caps, blinded rubric; revise POLICY never cap on projected overflow",
+      "V11 Wilson power mismatch at n~25 degenerates to demanding zero FPs -> enlarge benign corpus (synthetic variations free), commit n/threshold/power jointly",
+      "V12 runtime attach regression between proof-pass and collection -> per-call-site manifest-delta assertions, INVALID_CELL on zero delta",
+      "V13/V14 ops hygiene: NTP/UTC bookkeeping with evaluator-recomputed eligibility; sealed-schedule reveal script; evaluator-invocation logging"
+    ],
+    "baseline_fairness_verdicts": [
+      "D UNSOUND as specified if sharing pipeline/session with B (fix structural, see V2)",
+      "C right ceiling null; amortize doc-acquisition cost over same horizon as B discovery cost, preregister break-even repeat count",
+      "A fair only with wait-constant disclosure (+/- waits reporting)",
+      "cheap additive arms reviewers will demand: naive HAR byte-replay (isolates recording vs parameterization value) and B-no-cache (isolates persistence value); Stagehand ActCache-style action cache minimum treatment = documented exclusion justification (DOM-drift vs schema-drift failure surface)",
+      "external motivation cite: Activity Frames measured in-loop plan injection ~14% vs out-of-loop deterministic replay ~99% per covered step - route-level replay is a different regime than skill/context agents"
+    ],
+    "prior_art_vs_five_questions": [
+      "Q1 multi-host fidelity: NOT closed anywhere (PreAct/ActionEngine UI-level benchmarks; Unbrowse retrieval-only warmed-cache)",
+      "Q2 natural-TTL decay: methodology partially borrowed from arXiv:2608.00997 (89-day description-text decay curves; compounding overestimates 3x; born-stale lag) but explicitly NOT live API-behavior surface",
+      "Q3 mutation/drift FPR science: commercial drift incumbents acknowledge FP triage operationally; no controlled benign-churn FPR methodology public",
+      "Q4 capture-value-over-declaration: encroached most (PreAct store-gate ablation; ActionEngine amortization; Unbrowse speedups) but spec-fed-null construction absent even from the source paper",
+      "Q5 multi-host intent addressing: untested anywhere; prefix-artifact datum from cycle 5 remains SPIDER-internal evidence"
+    ],
+    "ambiguity_flags_for_prereg": [
+      "'qualifying host-task' manifest identity between proof-pass gating and scoring denominators",
+      "'>=half hosts individually CI>1': enrolled vs surviving set, odd-n rounding, CI level, which statistic (median/trimmed specified)",
+      "generated-spec-null clause: which construction (D-public vs D-HAR) satisfies it, margin/test definition, aggregation unit",
+      "does ESCALATED_HTML_TIER-assisted re-discovery count as 're-discovery succeeds'; time bound",
+      "fingerprint-change adjudication quota consumption",
+      "silent-substitution enforcement: code-path audit vs output inspection; redirects/defaulted headers/placeholder-fallback classification",
+      "availability denominator: run/host/window/cell; probe-measured vs inferred",
+      "infra-code classification: 429 throttle and app-level 418 placement (misclassification inflates INFRA_INVALID or hides environment damage)",
+      "gate-pass binomial confidence level and pass-code set (REPLAY_OK only or triage codes included)",
+      "window-2 obligations: start-at-eligibility vs completion deadline; max gap; restart cap (one fingerprint-triggered restart per host then TTL_INCONCLUSIVE host label)",
+      "FPR threshold numeric value must appear numerically alongside n",
+      "adjudication percent-of-what (cells vs comparisons); filters vs adjudications classification of echo-envelope/text-html exclusions"
+    ]
+  },
+  "transfer_analysis": [
+    {"mechanism_id": "unbrowse-route-capture-replay-ladder (round-3 confirmation)", "source_actor_or_paper": "Unbrowse arXiv:2604.00694 + SPIDER-audited cycles 5/6", "evidence_strength": "SPIDER_REPRODUCED PoC (cycle 5, audit PASS 32873081963) + MEASUREMENT_INVALID round (cycle 6, audit PASS 32897120087) + CODE_VERIFIED surface", "relevant_spider_lane": "PRODUCT_INFRA (+GRAPH R-2 execution layer)", "current_spider_weakness": "only validated execution-layer mechanism rests on single-host slice; staleness probed only by rewound timestamps; drift detection untested; R-2 Graph integration gated on multi-host evidence", "minimal_reproduction": "see state/intel_candidate.json minimal_reproduction (round-3 constraint set)", "expected_upside_if_real": "confirms/bounds the execution-substrate lever toward adoption gates; settles perception-vs-packaging market segmentation via D-arm", "strongest_null_or_baseline": "GENERATED_SPEC_NULL (D), privileged bare-HTTP (C), matched traversal (A) + recommended additive naive-byte-replay and B-no-cache arms", "measurement_required": "per-host gate-pass at output equivalence; log-ratio economics vs A; mutation sensitivity/FPR on replicas; positive-differential STALE_TTL; D-separation on spec-less host", "integration_cost_and_dependencies": "harness exists and reached P7 end-to-end; repairs enumerated; split-session scheduling now required", "contamination_ip_risk": "client MIT / paper CC BY 4.0 / backend PRIVATE - clean-room only; sandbox-only scope", "provisional_verdict": "EXPERIMENT (assigned priority-1, capped final live attempt)"},
+    {"mechanism_id": "credential-lifecycle-validation-loops (harpist-style)", "source_actor_or_paper": "Harpist github.com/kenobi-ai/harpist MIT (CODE_VERIFIED v0.1.4)", "evidence_strength": "CODE_VERIFIED surface, not reproduced", "relevant_spider_lane": "PRODUCT_INFRA (+GRAPH capsule precondition/auth fields)", "current_spider_weakness": "auth associations currently terminate at association only; AUTH_FAIL vs staleness attribution unresolved; capsule lifecycle fields unpopulated", "minimal_reproduction": "compare replay validity outcomes with vs without capture-time/expiry/validation-status credential ledger + re-auth recapture on sandbox auth flows", "expected_upside_if_real": "deconfounds auth expiry from route decay; converts AUTH_FAIL dead-ends into recoverable escalations", "strongest_null_or_baseline": "static stored credentials (current ladder behavior); fresh-login-every-run baseline", "measurement_required": "replay success delta at T+epsilon across session lifetimes; misattribution rate vs triage ground truth", "integration_cost_and_dependencies": "moderate; natural successor candidate if ladder line stops (cto_intel recommendation ahead of Weblica-class volatile-parameter normalization)", "contamination_ip_risk": "MIT friendly", "provisional_verdict": "WATCH (upgraded relevance)"},
+    {"mechanism_id": "content-binding-freshness-control", "source_actor_or_paper": "arXiv:2608.00997 + TabAPI/Vespasian CI practice + hermes-agent incident + MCP SEP-2549", "evidence_strength": "PAPER_EVIDENCE + CODE_VERIFIED practice + INDEPENDENT_REPORT incident; NOT reproduced by SPIDER", "relevant_spider_lane": "PRODUCT_INFRA (+GRAPH capsule freshness fields)", "current_spider_weakness": "validated ladder has fixed 24h TTL only; no drift-triggered invalidation; capsule freshness/invalidation fields empty", "minimal_reproduction": "seed replica mutations; compare detection latency/coverage/FPR of hash-move revalidation + sized sweep vs fixed TTL vs uniform sweep at matched audit budget", "expected_upside_if_real": "staleness detection decoupled from arbitrary TTLs; donor's own production fail-closed >24h gate corroborates design", "strongest_null_or_baseline": "fixed calendar TTL; uniform periodic re-validation at equal budget", "measurement_required": "detection latency per class; benign FPR; budget curves", "integration_cost_and_dependencies": "cheap once clean multi-host measurement exists (queued next-next per directives/INTEL.md item 2a)", "contamination_ip_risk": "low - ideas + CC-BY-4.0 data", "provisional_verdict": "EXPERIMENT (queued)"},
+    {"mechanism_id": "boundary-aware-skill-memory-fields (basm)", "source_actor_or_paper": "arXiv:2608.22339 BASM", "evidence_strength": "PAPER_EVIDENCE", "relevant_spider_lane": "GRAPH (capsule negative-knowledge/applicability schema donor)", "current_spider_weakness": "capsule applicability/negative-knowledge fields exist in contract but unpopulated; 'Skill Imitation Trap' quantifies the cost of unbounded reuse", "minimal_reproduction": "LLM-agent harness work outside Intel scope; schema donor only until Graph lane picks it up", "expected_upside_if_real": "wrong-tool margin reduction via applicability/risk/avoidance/recovery annotations", "strongest_null_or_baseline": "unbounded-skill injection", "measurement_required": "matched-shift reuse success", "integration_cost_and_dependencies": "schema-only adoption cheap; empirical validation needs LLM agents", "contamination_ip_risk": "paper-level reconstruction only", "provisional_verdict": "WATCH"},
+    {"mechanism_id": "hyperskill-hypergraph-memory", "source_actor_or_paper": "arXiv:2608.16114 + github.com/rux001/HyperSkill", "evidence_strength": "PAPER_EVIDENCE + CODE_VERIFIED (code released)", "relevant_spider_lane": "GRAPH", "current_spider_weakness": "skill organization/pruning at library scale unaddressed in SPIDER", "minimal_reproduction": "deferred until Graph library-scale question activates", "expected_upside_if_real": "utility-weighted merge/prune reduces retrieval noise", "strongest_null_or_baseline": "flat fragment store", "measurement_required": "n/a now", "integration_cost_and_dependencies": "unknown until examined", "contamination_ip_risk": "license to verify before use", "provisional_verdict": "WATCH"},
+    {"mechanism_id": "walt-website-functionality-to-tools", "source_actor_or_paper": "WALT (Prabhu et al. 2026, via arXiv:2604.13318 related work)", "evidence_strength": "PAPER_EVIDENCE (existence only; no code located)", "relevant_spider_lane": "PRODUCT_INFRA/GRAPH (closest academic cousin of route ladder)", "current_spider_weakness": "same surface as route ladder; independent implementation would corroborate or compete", "minimal_reproduction": "impossible until paper/code surfaced in detail", "expected_upside_if_real": "independent corroboration class for capture->deterministic-tool mechanisms", "strongest_null_or_baseline": "n/a", "measurement_required": "n/a", "integration_cost_and_dependencies": "n/a", "contamination_ip_risk": "n/a", "provisional_verdict": "WATCH (new this cycle)"},
+    {"mechanism_id": "trust-engine-evaluation-fed-by-labeled-data", "source_actor_or_paper": "Snyk labeled corpus + Zenity TOCTOU timeline + arXiv:2608.00997 Zenodo panel + Unfragile Census", "evidence_strength": "INDEPENDENT_REPORT + PAPER_EVIDENCE (labeled data available non-live)", "relevant_spider_lane": "PRODUCT_INFRA", "current_spider_weakness": "future registry design needs evaluated trust policy against measured threat data", "minimal_reproduction": "evaluate trust-engine designs (skill-swarm-mcp class, MCPSkills 15-signal class) against labeled corpora WITHOUT live collection", "expected_upside_if_real": "audited evidence base for registry trust policy incl. TOCTOU/content-mutation detection", "strongest_null_or_baseline": "no-trust-screen baseline; static score thresholds", "measurement_required": "detection/recall on labeled payloads; FP rate on benign cohort; content-mutation (TOCTOU) detection latency", "integration_cost_and_dependencies": "non-live; feedable now", "contamination_ip_risk": "data licenses per-corpus (CC-BY-4.0 panel; corpora handling care)", "provisional_verdict": "EXPERIMENT (queued, directives/INTEL.md item 2c)"}
+  ],
+  "selection": {
+    "mechanism_id": "unbrowse-route-capture-replay-ladder",
+    "question_changed": false,
+    "round": "measurement-validity restoration round 3 (CAPPED final live attempt)",
+    "stop_condition_triggered": false,
+    "reason_summary": "Assigned priority-1 mission reconfirmed under fresh external evidence: all three independent consultations confirmed; ecosystem sweep found no outranking challenger (triggers all NOT FIRED; strongest new evidence strengthens framing); queued candidates are downstream consumers of this result; harness already reaches P7 end-to-end so sunk-instrument asymmetry dominates; two NEW facts (clock gate, anchor integrity) shape sequencing and one pre-outcome policy choice, handed to Reproducer with full constraint set."
+  },
+  "queued_candidate_updates": [
+    "content-binding-freshness-control: strengthened (donor panel data + production fail-closed >24h gate public; hermes incident negative exemplar; MCP ttlMs/cacheScope protocol-native comparator; add Paperclip TOCTOU + Snyk labeled corpus to threat-data set)",
+    "harpist-versioned-contract-profiles: upgraded relevance - credential ledger lifecycle directly answers AUTH_FAIL/staleness attribution; successor-if-stopped recommendation ahead of Weblica-class volatile-parameter normalization",
+    "trust-engine evaluation: now feedable entirely from labeled non-live data",
+    "new index candidates for Director integration: Specwatch, Specothesis/specint, MimicAPI, traffic2openapi, BASM, HyperSkill (code released), ContraMem, SkillAlchemy, WebXSkill/WALT, Merlonix drift detector, TrueFoundry gateway pattern, hermes-agent #72560 incident, Zenity/Snyk/Unit42/Pluto trust reports, MCP SEP-2549"
+  ],
+  "honest_limits": [
+    "Cycle 6 ran earlier the SAME calendar day; refresh spans hours not weeks - absence of newer events is weak evidence of absence",
+    "Semantic Scholar reachable this cycle (citationCount=0 freshly verified for 2604.00694 and 2608.12847); SkillMigrator/APISensor counts remain UNKNOWN (rate-limit class), covered by direct GitHub/arXiv absence checks",
+    "Unbrowse-bench repo contents not inspected (existence inferred from paper reference; unchanged posture)",
+    "Feasibility probing NOT repeated this cycle (<24h-old same-day probes stand; P0 re-probing is the Reproducer's job under the availability gate)",
+    "All design constraints/recommendations are Scout handoff; Reproducer owns prereg text; Director owns integration",
+    "No confirmatory collection was performed by the Scout; nothing in this cycle establishes or refutes anything about the mechanism"
+  ]
+}

@@ -1,0 +1,90 @@
+{
+ "ts_ms": 1787725729649,
+ "fingerprints": {
+  "httpbin": {
+   "url": "https://httpbin.org/get",
+   "sha256_head": "61a168f6516e3af0686966561e950e551dc15a37bf8c76705dbeb30d0fc6f69b",
+   "etag": null,
+   "last_modified": null,
+   "server": "gunicorn/19.9.0",
+   "content_length": "298",
+   "volatile_by_design": true
+  },
+  "petstore": {
+   "url": "https://petstore.swagger.io/v2/swagger.json",
+   "sha256_head": "4b13530628bc7a902f79da7c75b4401a004689208b166b91d32115f9b331b270",
+   "etag": null,
+   "last_modified": null,
+   "server": "Jetty(9.2.9.v20150224)",
+   "content_length": null,
+   "volatile_by_design": false
+  },
+  "demoblaze": {
+   "url": "https://www.demoblaze.com/config.json",
+   "sha256_head": "62f8fb442cb21c2e040a4d90c208942ad38bfa1dd573c2e6af6d9968041125e8",
+   "etag": "\"cET1bQ\"",
+   "last_modified": null,
+   "server": "Google Frontend",
+   "content_length": null,
+   "volatile_by_design": false
+  },
+  "jsonplaceholder": {
+   "url": "https://jsonplaceholder.typicode.com/posts/1",
+   "sha256_head": "965636bd900078aa86a714aea4de146af6d396205d5100636f1bdd2454f73420",
+   "etag": "W/\"124-yiKdLzqO5gfBrJFrcdJ8Yq0LGnU\"",
+   "last_modified": null,
+   "server": "cloudflare",
+   "content_length": "292",
+   "volatile_by_design": false
+  }
+ },
+ "fingerprint_canonicalization": {
+  "body_hash": "sha256(first_4096_bytes)",
+  "change_detection_targets": [
+   "demoblaze",
+   "jsonplaceholder",
+   "petstore"
+  ],
+  "volatile_by_design_excluded": [
+   "httpbin"
+  ],
+  "reason": "httpbin /get embeds per-request X-Amzn-Trace-Id",
+  "change_detection_rule": "CHANGED iff etag differs; if etag absent on either side, CHANGED iff head-hash differs (cycle-8 finding: demoblaze config.json varies bytewise under one etag)"
+ },
+ "anchor_policy": "B_fresh_own_study_anchor",
+ "route_store_sha256": {
+  "T_DEMOBLAZE_CART_routestore.json": "03514e6e12e989167b080bd412f56cd797abd5933a28f897e0572e8258aed58e",
+  "T_HTTPBIN_COOKIE_routestore.json": "3b35890f3d3ae472f6c3a71165099b46e264fa78c82abb10c4c0a5ce11ba5efc",
+  "T_HTTPBIN_FORM_routestore.json": "dcc43360bf7fa07d2e300d7124b41517f2f0a38cb1bb386233b6809a2e7fa0ea",
+  "T_PETSTORE_FIND_routestore.json": "cfaad2d79199a84f899813a841c11b944c2f7f7bf7399ee730a2db17b368f36c"
+ },
+ "window2_eligibility_ts_ms": 1787812129649,
+ "clock_bookkeeping": {
+  "httpbin": {
+   "server_date": "Wed, 26 Aug 2026 06:28:50 GMT",
+   "local_minus_server_ms": 120
+  },
+  "jsonplaceholder": {
+   "server_date": "Wed, 26 Aug 2026 06:28:50 GMT",
+   "local_minus_server_ms": 144
+  }
+ },
+ "prior_cycle_drift_observation_non_decisional": {
+  "httpbin": {
+   "changed_vs_prior_cycle": true,
+   "non_decisional": true
+  },
+  "petstore": {
+   "changed_vs_prior_cycle": false,
+   "non_decisional": true
+  },
+  "demoblaze": {
+   "changed_vs_prior_cycle": false,
+   "non_decisional": true
+  },
+  "jsonplaceholder": {
+   "changed_vs_prior_cycle": false,
+   "non_decisional": true
+  }
+ }
+}

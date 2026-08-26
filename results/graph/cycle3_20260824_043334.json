@@ -1,0 +1,9524 @@
+{
+ "ts": "2026-08-24T04:55:10Z",
+ "stage": "running-phase-X1-pass2",
+ "runs": [
+  {
+   "phase": "A-train",
+   "task": "T_B_fiction_page2",
+   "agent": "agentG",
+   "condition": "cold-producer",
+   "status": "success",
+   "store_before": {
+    "states": 0,
+    "transitions": 0,
+    "actions": 0,
+    "fragments": 0
+   },
+   "store_after": {
+    "states": 5,
+    "transitions": 8,
+    "actions": 4,
+    "fragments": 3
+   },
+   "elapsed_s": 4.9,
+   "query_mode": "desc_kw",
+   "loads": 7,
+   "actions": 8,
+   "reused": 0,
+   "novel": 8,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 889,
+   "llm_calls": 0,
+   "subgoals_ok": 2,
+   "subgoals_total": 2,
+   "wall_ms": 8923,
+   "retrieval_lookups": 0,
+   "retrieval_ms": 0,
+   "candidates_tried": 0,
+   "solved_by": [
+    "exploration",
+    "exploration"
+   ],
+   "memory_events": [],
+   "subgoal_rows": [
+    {
+     "sig": "books.cat.fiction",
+     "condition": "cold",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "exploration"
+     ],
+     "new_memory_events": []
+    },
+    {
+     "sig": "books.paginate.next",
+     "condition": "cold",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "exploration"
+     ],
+     "new_memory_events": []
+    }
+   ]
+  },
+  {
+   "phase": "A-train",
+   "task": "T_Q_login",
+   "agent": "agentB",
+   "condition": "cold-producer",
+   "status": "success",
+   "store_before": {
+    "states": 5,
+    "transitions": 8,
+    "actions": 4,
+    "fragments": 3
+   },
+   "store_after": {
+    "states": 8,
+    "transitions": 13,
+    "actions": 9,
+    "fragments": 5
+   },
+   "elapsed_s": 2.3,
+   "query_mode": "desc_kw",
+   "loads": 3,
+   "actions": 5,
+   "reused": 0,
+   "novel": 5,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 106,
+   "llm_calls": 0,
+   "subgoals_ok": 1,
+   "subgoals_total": 1,
+   "wall_ms": 3895,
+   "retrieval_lookups": 0,
+   "retrieval_ms": 0,
+   "candidates_tried": 0,
+   "solved_by": [
+    "exploration"
+   ],
+   "memory_events": [],
+   "subgoal_rows": [
+    {
+     "sig": "quotes.login",
+     "condition": "cold",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "exploration"
+     ],
+     "new_memory_events": []
+    }
+   ]
+  },
+  {
+   "phase": "A-train",
+   "task": "T_B_travel_book",
+   "agent": "agentG",
+   "condition": "cold-producer",
+   "status": "success",
+   "store_before": {
+    "states": 8,
+    "transitions": 13,
+    "actions": 9,
+    "fragments": 5
+   },
+   "store_after": {
+    "states": 10,
+    "transitions": 15,
+    "actions": 11,
+    "fragments": 7
+   },
+   "elapsed_s": 1.8,
+   "query_mode": "desc_kw",
+   "loads": 3,
+   "actions": 2,
+   "reused": 0,
+   "novel": 2,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 201,
+   "llm_calls": 0,
+   "subgoals_ok": 2,
+   "subgoals_total": 2,
+   "wall_ms": 2731,
+   "retrieval_lookups": 0,
+   "retrieval_ms": 0,
+   "candidates_tried": 0,
+   "solved_by": [
+    "exploration",
+    "exploration"
+   ],
+   "memory_events": [],
+   "subgoal_rows": [
+    {
+     "sig": "books.cat.travel",
+     "condition": "cold",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "exploration"
+     ],
+     "new_memory_events": []
+    },
+    {
+     "sig": "books.open.first.book",
+     "condition": "cold",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "exploration"
+     ],
+     "new_memory_events": []
+    }
+   ]
+  },
+  {
+   "phase": "A-train",
+   "task": "T_Q_tag_love",
+   "agent": "agentG",
+   "condition": "cold-producer",
+   "status": "success",
+   "store_before": {
+    "states": 10,
+    "transitions": 15,
+    "actions": 11,
+    "fragments": 7
+   },
+   "store_after": {
+    "states": 11,
+    "transitions": 16,
+    "actions": 12,
+    "fragments": 8
+   },
+   "elapsed_s": 1.1,
+   "query_mode": "desc_kw",
+   "loads": 2,
+   "actions": 1,
+   "reused": 0,
+   "novel": 1,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 53,
+   "llm_calls": 0,
+   "subgoals_ok": 1,
+   "subgoals_total": 1,
+   "wall_ms": 1571,
+   "retrieval_lookups": 0,
+   "retrieval_ms": 0,
+   "candidates_tried": 0,
+   "solved_by": [
+    "exploration"
+   ],
+   "memory_events": [],
+   "subgoal_rows": [
+    {
+     "sig": "quotes.tag.love",
+     "condition": "cold",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "exploration"
+     ],
+     "new_memory_events": []
+    }
+   ]
+  },
+  {
+   "phase": "A-train",
+   "task": "T_Q_page2",
+   "agent": "agentB",
+   "condition": "cold-producer",
+   "status": "success",
+   "store_before": {
+    "states": 11,
+    "transitions": 16,
+    "actions": 12,
+    "fragments": 8
+   },
+   "store_after": {
+    "states": 12,
+    "transitions": 17,
+    "actions": 12,
+    "fragments": 10
+   },
+   "elapsed_s": 1.3,
+   "query_mode": "desc_kw",
+   "loads": 2,
+   "actions": 1,
+   "reused": 0,
+   "novel": 1,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 53,
+   "llm_calls": 0,
+   "subgoals_ok": 1,
+   "subgoals_total": 1,
+   "wall_ms": 1765,
+   "retrieval_lookups": 0,
+   "retrieval_ms": 0,
+   "candidates_tried": 0,
+   "solved_by": [
+    "exploration"
+   ],
+   "memory_events": [],
+   "subgoal_rows": [
+    {
+     "sig": "quotes.page.2",
+     "condition": "cold",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "exploration"
+     ],
+     "new_memory_events": []
+    }
+   ]
+  },
+  {
+   "phase": "A-train",
+   "task": "T_B_mystery_book",
+   "agent": "agentG",
+   "condition": "cold-producer",
+   "status": "success",
+   "store_before": {
+    "states": 12,
+    "transitions": 17,
+    "actions": 12,
+    "fragments": 10
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 1.9,
+   "query_mode": "desc_kw",
+   "loads": 3,
+   "actions": 2,
+   "reused": 0,
+   "novel": 2,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 229,
+   "llm_calls": 0,
+   "subgoals_ok": 2,
+   "subgoals_total": 2,
+   "wall_ms": 2851,
+   "retrieval_lookups": 0,
+   "retrieval_ms": 0,
+   "candidates_tried": 0,
+   "solved_by": [
+    "exploration",
+    "exploration"
+   ],
+   "memory_events": [],
+   "subgoal_rows": [
+    {
+     "sig": "books.cat.mystery",
+     "condition": "cold",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "exploration"
+     ],
+     "new_memory_events": []
+    },
+    {
+     "sig": "books.open.first.book.mystery",
+     "condition": "cold",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "exploration"
+     ],
+     "new_memory_events": []
+    }
+   ]
+  },
+  {
+   "phase": "B-eval-pass1",
+   "task": "C1_books_mystery_p2_named",
+   "agent": "agentB",
+   "condition": "inherit desc_kw",
+   "status": "partial",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 35.1,
+   "loads": 52,
+   "actions": 73,
+   "reused": 1,
+   "novel": 72,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 7582,
+   "llm_calls": 0,
+   "subgoals_ok": 2,
+   "subgoals_total": 3,
+   "wall_ms": 69330,
+   "retrieval_lookups": 3,
+   "retrieval_ms": 0,
+   "candidates_tried": 1,
+   "solved_by": [
+    "exploration",
+    "memory",
+    "unsolved"
+   ],
+   "memory_events": [
+    {
+     "sub": "eval.c1.cat",
+     "query_mode": "desc_kw",
+     "query": "open the mystery category of the book shop mystery",
+     "candidates": [],
+     "replay_ok": false,
+     "abort_step": null,
+     "applications": 0
+    },
+    {
+     "sub": "eval.c1.page2",
+     "query_mode": "desc_kw",
+     "query": "go to the second page of the book listing next",
+     "candidates": [
+      "generic.paginate.next",
+      "books.paginate.next"
+     ],
+     "replay_ok": true,
+     "abort_step": null,
+     "applications": 1
+    },
+    {
+     "sub": "eval.c1.named",
+     "query_mode": "desc_kw",
+     "query": "open the product page of the book In the Woods by Tana French woods",
+     "candidates": [],
+     "replay_ok": false,
+     "abort_step": null,
+     "applications": 0
+    }
+   ],
+   "query_mode": "desc_kw",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c1.cat",
+     "condition": "inherit",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "exploration"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c1.cat",
+       "query_mode": "desc_kw",
+       "query": "open the mystery category of the book shop mystery",
+       "candidates": [],
+       "replay_ok": false,
+       "abort_step": null,
+       "applications": 0
+      }
+     ]
+    },
+    {
+     "sig": "eval.c1.page2",
+     "condition": "inherit",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c1.page2",
+       "query_mode": "desc_kw",
+       "query": "go to the second page of the book listing next",
+       "candidates": [
+        "generic.paginate.next",
+        "books.paginate.next"
+       ],
+       "replay_ok": true,
+       "abort_step": null,
+       "applications": 1
+      }
+     ]
+    },
+    {
+     "sig": "eval.c1.named",
+     "condition": "inherit",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "unsolved"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c1.named",
+       "query_mode": "desc_kw",
+       "query": "open the product page of the book In the Woods by Tana French woods",
+       "candidates": [],
+       "replay_ok": false,
+       "abort_step": null,
+       "applications": 0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "phase": "B-eval-pass1",
+   "task": "C2_quotes_login_p3",
+   "agent": "agentB",
+   "condition": "inherit desc_kw",
+   "status": "success",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 2.7,
+   "loads": 5,
+   "actions": 6,
+   "reused": 6,
+   "novel": 0,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 0,
+   "llm_calls": 0,
+   "subgoals_ok": 2,
+   "subgoals_total": 2,
+   "wall_ms": 4832,
+   "retrieval_lookups": 2,
+   "retrieval_ms": 0,
+   "candidates_tried": 2,
+   "solved_by": [
+    "memory",
+    "memory"
+   ],
+   "memory_events": [
+    {
+     "sub": "eval.c2.login",
+     "query_mode": "desc_kw",
+     "query": "log in to the quotes site with the provided username and password login",
+     "candidates": [
+      "generic.form.login",
+      "quotes.login"
+     ],
+     "replay_ok": true,
+     "abort_step": null,
+     "applications": 1
+    },
+    {
+     "sub": "eval.c2.page3",
+     "query_mode": "desc_kw",
+     "query": "go to page 3 of the quote listings next",
+     "candidates": [
+      "generic.paginate.next",
+      "quotes.page.2"
+     ],
+     "replay_ok": true,
+     "abort_step": null,
+     "applications": 2
+    }
+   ],
+   "query_mode": "desc_kw",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c2.login",
+     "condition": "inherit",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c2.login",
+       "query_mode": "desc_kw",
+       "query": "log in to the quotes site with the provided username and password login",
+       "candidates": [
+        "generic.form.login",
+        "quotes.login"
+       ],
+       "replay_ok": true,
+       "abort_step": null,
+       "applications": 1
+      }
+     ]
+    },
+    {
+     "sig": "eval.c2.page3",
+     "condition": "inherit",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c2.page3",
+       "query_mode": "desc_kw",
+       "query": "go to page 3 of the quote listings next",
+       "candidates": [
+        "generic.paginate.next",
+        "quotes.page.2"
+       ],
+       "replay_ok": true,
+       "abort_step": null,
+       "applications": 2
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "phase": "B-eval-pass1",
+   "task": "C3_quotes_login_p5",
+   "agent": "agentB",
+   "condition": "inherit desc_kw",
+   "status": "success",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 3.7,
+   "loads": 7,
+   "actions": 8,
+   "reused": 8,
+   "novel": 0,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 0,
+   "llm_calls": 0,
+   "subgoals_ok": 2,
+   "subgoals_total": 2,
+   "wall_ms": 6662,
+   "retrieval_lookups": 2,
+   "retrieval_ms": 0,
+   "candidates_tried": 2,
+   "solved_by": [
+    "memory",
+    "memory"
+   ],
+   "memory_events": [
+    {
+     "sub": "eval.c3.login",
+     "query_mode": "desc_kw",
+     "query": "log in to the quotes site with the provided username and password login",
+     "candidates": [
+      "generic.form.login",
+      "quotes.login"
+     ],
+     "replay_ok": true,
+     "abort_step": null,
+     "applications": 1
+    },
+    {
+     "sub": "eval.c3.page5",
+     "query_mode": "desc_kw",
+     "query": "go to page 5 of the quote listings next",
+     "candidates": [
+      "generic.paginate.next",
+      "quotes.page.2"
+     ],
+     "replay_ok": true,
+     "abort_step": null,
+     "applications": 4
+    }
+   ],
+   "query_mode": "desc_kw",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c3.login",
+     "condition": "inherit",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c3.login",
+       "query_mode": "desc_kw",
+       "query": "log in to the quotes site with the provided username and password login",
+       "candidates": [
+        "generic.form.login",
+        "quotes.login"
+       ],
+       "replay_ok": true,
+       "abort_step": null,
+       "applications": 1
+      }
+     ]
+    },
+    {
+     "sig": "eval.c3.page5",
+     "condition": "inherit",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c3.page5",
+       "query_mode": "desc_kw",
+       "query": "go to page 5 of the quote listings next",
+       "candidates": [
+        "generic.paginate.next",
+        "quotes.page.2"
+       ],
+       "replay_ok": true,
+       "abort_step": null,
+       "applications": 4
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "phase": "B-eval-pass1",
+   "task": "C1_books_mystery_p2_named",
+   "agent": "agentB",
+   "condition": "inherit desc_only",
+   "status": "partial",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 34.7,
+   "loads": 52,
+   "actions": 73,
+   "reused": 1,
+   "novel": 72,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 7582,
+   "llm_calls": 0,
+   "subgoals_ok": 2,
+   "subgoals_total": 3,
+   "wall_ms": 68571,
+   "retrieval_lookups": 3,
+   "retrieval_ms": 0,
+   "candidates_tried": 1,
+   "solved_by": [
+    "exploration",
+    "memory",
+    "unsolved"
+   ],
+   "memory_events": [
+    {
+     "sub": "eval.c1.cat",
+     "query_mode": "desc_only",
+     "query": "open the mystery category of the book shop",
+     "candidates": [],
+     "replay_ok": false,
+     "abort_step": null,
+     "applications": 0
+    },
+    {
+     "sub": "eval.c1.page2",
+     "query_mode": "desc_only",
+     "query": "go to the second page of the book listing",
+     "candidates": [
+      "generic.paginate.next",
+      "books.paginate.next"
+     ],
+     "replay_ok": true,
+     "abort_step": null,
+     "applications": 1
+    },
+    {
+     "sub": "eval.c1.named",
+     "query_mode": "desc_only",
+     "query": "open the product page of the book In the Woods by Tana French",
+     "candidates": [],
+     "replay_ok": false,
+     "abort_step": null,
+     "applications": 0
+    }
+   ],
+   "query_mode": "desc_only",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c1.cat",
+     "condition": "inherit",
+     "query_mode": "desc_only",
+     "solved_by": [
+      "exploration"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c1.cat",
+       "query_mode": "desc_only",
+       "query": "open the mystery category of the book shop",
+       "candidates": [],
+       "replay_ok": false,
+       "abort_step": null,
+       "applications": 0
+      }
+     ]
+    },
+    {
+     "sig": "eval.c1.page2",
+     "condition": "inherit",
+     "query_mode": "desc_only",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c1.page2",
+       "query_mode": "desc_only",
+       "query": "go to the second page of the book listing",
+       "candidates": [
+        "generic.paginate.next",
+        "books.paginate.next"
+       ],
+       "replay_ok": true,
+       "abort_step": null,
+       "applications": 1
+      }
+     ]
+    },
+    {
+     "sig": "eval.c1.named",
+     "condition": "inherit",
+     "query_mode": "desc_only",
+     "solved_by": [
+      "unsolved"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c1.named",
+       "query_mode": "desc_only",
+       "query": "open the product page of the book In the Woods by Tana French",
+       "candidates": [],
+       "replay_ok": false,
+       "abort_step": null,
+       "applications": 0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "phase": "B-eval-pass1",
+   "task": "C2_quotes_login_p3",
+   "agent": "agentB",
+   "condition": "inherit desc_only",
+   "status": "partial",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 9.0,
+   "loads": 8,
+   "actions": 20,
+   "reused": 4,
+   "novel": 16,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 367,
+   "llm_calls": 0,
+   "subgoals_ok": 1,
+   "subgoals_total": 2,
+   "wall_ms": 17162,
+   "retrieval_lookups": 2,
+   "retrieval_ms": 0,
+   "candidates_tried": 1,
+   "solved_by": [
+    "memory",
+    "unsolved"
+   ],
+   "memory_events": [
+    {
+     "sub": "eval.c2.login",
+     "query_mode": "desc_only",
+     "query": "log in to the quotes site with the provided username and password",
+     "candidates": [
+      "generic.form.login",
+      "quotes.login"
+     ],
+     "replay_ok": true,
+     "abort_step": null,
+     "applications": 1
+    },
+    {
+     "sub": "eval.c2.page3",
+     "query_mode": "desc_only",
+     "query": "go to page 3 of the quote listings",
+     "candidates": [],
+     "replay_ok": false,
+     "abort_step": null,
+     "applications": 0
+    }
+   ],
+   "query_mode": "desc_only",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c2.login",
+     "condition": "inherit",
+     "query_mode": "desc_only",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c2.login",
+       "query_mode": "desc_only",
+       "query": "log in to the quotes site with the provided username and password",
+       "candidates": [
+        "generic.form.login",
+        "quotes.login"
+       ],
+       "replay_ok": true,
+       "abort_step": null,
+       "applications": 1
+      }
+     ]
+    },
+    {
+     "sig": "eval.c2.page3",
+     "condition": "inherit",
+     "query_mode": "desc_only",
+     "solved_by": [
+      "unsolved"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c2.page3",
+       "query_mode": "desc_only",
+       "query": "go to page 3 of the quote listings",
+       "candidates": [],
+       "replay_ok": false,
+       "abort_step": null,
+       "applications": 0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "phase": "B-eval-pass1",
+   "task": "C3_quotes_login_p5",
+   "agent": "agentB",
+   "condition": "inherit desc_only",
+   "status": "partial",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 8.8,
+   "loads": 8,
+   "actions": 20,
+   "reused": 4,
+   "novel": 16,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 367,
+   "llm_calls": 0,
+   "subgoals_ok": 1,
+   "subgoals_total": 2,
+   "wall_ms": 16928,
+   "retrieval_lookups": 2,
+   "retrieval_ms": 0,
+   "candidates_tried": 1,
+   "solved_by": [
+    "memory",
+    "unsolved"
+   ],
+   "memory_events": [
+    {
+     "sub": "eval.c3.login",
+     "query_mode": "desc_only",
+     "query": "log in to the quotes site with the provided username and password",
+     "candidates": [
+      "generic.form.login",
+      "quotes.login"
+     ],
+     "replay_ok": true,
+     "abort_step": null,
+     "applications": 1
+    },
+    {
+     "sub": "eval.c3.page5",
+     "query_mode": "desc_only",
+     "query": "go to page 5 of the quote listings",
+     "candidates": [],
+     "replay_ok": false,
+     "abort_step": null,
+     "applications": 0
+    }
+   ],
+   "query_mode": "desc_only",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c3.login",
+     "condition": "inherit",
+     "query_mode": "desc_only",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c3.login",
+       "query_mode": "desc_only",
+       "query": "log in to the quotes site with the provided username and password",
+       "candidates": [
+        "generic.form.login",
+        "quotes.login"
+       ],
+       "replay_ok": true,
+       "abort_step": null,
+       "applications": 1
+      }
+     ]
+    },
+    {
+     "sig": "eval.c3.page5",
+     "condition": "inherit",
+     "query_mode": "desc_only",
+     "solved_by": [
+      "unsolved"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c3.page5",
+       "query_mode": "desc_only",
+       "query": "go to page 5 of the quote listings",
+       "candidates": [],
+       "replay_ok": false,
+       "abort_step": null,
+       "applications": 0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "phase": "B-eval-pass1",
+   "task": "C1_books_mystery_p2_named",
+   "agent": "agentB",
+   "condition": "graphiter desc_kw",
+   "status": "partial",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 32.4,
+   "loads": 48,
+   "actions": 68,
+   "reused": 8,
+   "novel": 60,
+   "failed": 0,
+   "recoveries": 1,
+   "decision_points": 6208,
+   "llm_calls": 0,
+   "subgoals_ok": 2,
+   "subgoals_total": 3,
+   "wall_ms": 64042,
+   "retrieval_lookups": 3,
+   "retrieval_ms": 0,
+   "candidates_tried": 0,
+   "solved_by": [
+    "memory",
+    "memory",
+    "unsolved"
+   ],
+   "memory_events": [
+    {
+     "sub": "eval.c1.cat",
+     "query_mode": "desc_kw",
+     "query": "open the mystery category of the book shop mystery",
+     "policy": "graphiter",
+     "edges_ranked": [
+      [
+       0.2,
+       1,
+       "click",
+       "a|||||mystery"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||womens-fiction"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||historical-fiction"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||travel"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||next"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||fiction"
+      ]
+     ],
+     "applied": [
+      [
+       "click",
+       "a|||||mystery"
+      ]
+     ],
+     "solved": true
+    },
+    {
+     "sub": "eval.c1.page2",
+     "query_mode": "desc_kw",
+     "query": "go to the second page of the book listing next",
+     "policy": "graphiter",
+     "edges_ranked": [
+      [
+       0.1667,
+       1,
+       "click",
+       "a|||||next"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||womens-fiction"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||historical-fiction"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||mystery"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||travel"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||fiction"
+      ]
+     ],
+     "applied": [
+      [
+       "click",
+       "a|||||next"
+      ]
+     ],
+     "solved": true
+    },
+    {
+     "sub": "eval.c1.named",
+     "query_mode": "desc_kw",
+     "query": "open the product page of the book In the Woods by Tana French woods",
+     "policy": "graphiter",
+     "edges_ranked": [
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||womens-fiction"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||historical-fiction"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||mystery"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||travel"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||next"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||fiction"
+      ]
+     ],
+     "applied": [
+      [
+       "click",
+       "a|||||womens-fiction"
+      ],
+      [
+       "click",
+       "a|||||womens-fiction"
+      ],
+      [
+       "click",
+       "a|||||historical-fiction"
+      ],
+      [
+       "click",
+       "a|||||historical-fiction"
+      ],
+      [
+       "click",
+       "a|||||"
+      ],
+      [
+       "click",
+       "a|||||"
+      ]
+     ],
+     "solved": false
+    }
+   ],
+   "query_mode": "desc_kw",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c1.cat",
+     "condition": "graphiter",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c1.cat",
+       "query_mode": "desc_kw",
+       "query": "open the mystery category of the book shop mystery",
+       "policy": "graphiter",
+       "edges_ranked": [
+        [
+         0.2,
+         1,
+         "click",
+         "a|||||mystery"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||womens-fiction"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||historical-fiction"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||travel"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||next"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||fiction"
+        ]
+       ],
+       "applied": [
+        [
+         "click",
+         "a|||||mystery"
+        ]
+       ],
+       "solved": true
+      }
+     ]
+    },
+    {
+     "sig": "eval.c1.page2",
+     "condition": "graphiter",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c1.page2",
+       "query_mode": "desc_kw",
+       "query": "go to the second page of the book listing next",
+       "policy": "graphiter",
+       "edges_ranked": [
+        [
+         0.1667,
+         1,
+         "click",
+         "a|||||next"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||womens-fiction"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||historical-fiction"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||mystery"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||travel"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||fiction"
+        ]
+       ],
+       "applied": [
+        [
+         "click",
+         "a|||||next"
+        ]
+       ],
+       "solved": true
+      }
+     ]
+    },
+    {
+     "sig": "eval.c1.named",
+     "condition": "graphiter",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "unsolved"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c1.named",
+       "query_mode": "desc_kw",
+       "query": "open the product page of the book In the Woods by Tana French woods",
+       "policy": "graphiter",
+       "edges_ranked": [
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||womens-fiction"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||historical-fiction"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||mystery"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||travel"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||next"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||fiction"
+        ]
+       ],
+       "applied": [
+        [
+         "click",
+         "a|||||womens-fiction"
+        ],
+        [
+         "click",
+         "a|||||womens-fiction"
+        ],
+        [
+         "click",
+         "a|||||historical-fiction"
+        ],
+        [
+         "click",
+         "a|||||historical-fiction"
+        ],
+        [
+         "click",
+         "a|||||"
+        ],
+        [
+         "click",
+         "a|||||"
+        ]
+       ],
+       "solved": false
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "phase": "B-eval-pass1",
+   "task": "C2_quotes_login_p3",
+   "agent": "agentB",
+   "condition": "graphiter desc_kw",
+   "status": "success",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 6.3,
+   "loads": 11,
+   "actions": 14,
+   "reused": 8,
+   "novel": 6,
+   "failed": 0,
+   "recoveries": 1,
+   "decision_points": 151,
+   "llm_calls": 0,
+   "subgoals_ok": 2,
+   "subgoals_total": 2,
+   "wall_ms": 12022,
+   "retrieval_lookups": 2,
+   "retrieval_ms": 0,
+   "candidates_tried": 0,
+   "solved_by": [
+    "exploration",
+    "memory"
+   ],
+   "memory_events": [
+    {
+     "sub": "eval.c2.login",
+     "query_mode": "desc_kw",
+     "query": "log in to the quotes site with the provided username and password login",
+     "policy": "graphiter",
+     "edges_ranked": [
+      [
+       0.1667,
+       1,
+       "fill",
+       "input|password||password|form-control|"
+      ],
+      [
+       0.1667,
+       1,
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       0.1667,
+       1,
+       "click",
+       "a|||||login"
+      ],
+      [
+       0.1667,
+       1,
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||next"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a||||tag|love"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "input|submit|||btn btn-primary|"
+      ]
+     ],
+     "applied": [
+      [
+       "click",
+       "a|||||login"
+      ],
+      [
+       "click",
+       "a|||||login"
+      ],
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ]
+     ],
+     "solved": false
+    },
+    {
+     "sub": "eval.c2.page3",
+     "query_mode": "desc_kw",
+     "query": "go to page 3 of the quote listings next",
+     "policy": "graphiter",
+     "edges_ranked": [
+      [
+       0.1667,
+       1,
+       "click",
+       "a|||||next"
+      ],
+      [
+       0.1667,
+       1,
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a||||tag|love"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "input|submit|||btn btn-primary|"
+      ],
+      [
+       0.0,
+       0,
+       "fill",
+       "input|password||password|form-control|"
+      ],
+      [
+       0.0,
+       0,
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||login"
+      ]
+     ],
+     "applied": [
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ]
+     ],
+     "solved": true
+    }
+   ],
+   "query_mode": "desc_kw",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c2.login",
+     "condition": "graphiter",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "exploration"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c2.login",
+       "query_mode": "desc_kw",
+       "query": "log in to the quotes site with the provided username and password login",
+       "policy": "graphiter",
+       "edges_ranked": [
+        [
+         0.1667,
+         1,
+         "fill",
+         "input|password||password|form-control|"
+        ],
+        [
+         0.1667,
+         1,
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         0.1667,
+         1,
+         "click",
+         "a|||||login"
+        ],
+        [
+         0.1667,
+         1,
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||next"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a||||tag|love"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "input|submit|||btn btn-primary|"
+        ]
+       ],
+       "applied": [
+        [
+         "click",
+         "a|||||login"
+        ],
+        [
+         "click",
+         "a|||||login"
+        ],
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ]
+       ],
+       "solved": false
+      }
+     ]
+    },
+    {
+     "sig": "eval.c2.page3",
+     "condition": "graphiter",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c2.page3",
+       "query_mode": "desc_kw",
+       "query": "go to page 3 of the quote listings next",
+       "policy": "graphiter",
+       "edges_ranked": [
+        [
+         0.1667,
+         1,
+         "click",
+         "a|||||next"
+        ],
+        [
+         0.1667,
+         1,
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a||||tag|love"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "input|submit|||btn btn-primary|"
+        ],
+        [
+         0.0,
+         0,
+         "fill",
+         "input|password||password|form-control|"
+        ],
+        [
+         0.0,
+         0,
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||login"
+        ]
+       ],
+       "applied": [
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ]
+       ],
+       "solved": true
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "phase": "B-eval-pass1",
+   "task": "C3_quotes_login_p5",
+   "agent": "agentB",
+   "condition": "graphiter desc_kw",
+   "status": "success",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 7.3,
+   "loads": 13,
+   "actions": 16,
+   "reused": 10,
+   "novel": 6,
+   "failed": 0,
+   "recoveries": 1,
+   "decision_points": 151,
+   "llm_calls": 0,
+   "subgoals_ok": 2,
+   "subgoals_total": 2,
+   "wall_ms": 13830,
+   "retrieval_lookups": 2,
+   "retrieval_ms": 0,
+   "candidates_tried": 0,
+   "solved_by": [
+    "exploration",
+    "memory"
+   ],
+   "memory_events": [
+    {
+     "sub": "eval.c3.login",
+     "query_mode": "desc_kw",
+     "query": "log in to the quotes site with the provided username and password login",
+     "policy": "graphiter",
+     "edges_ranked": [
+      [
+       0.1667,
+       1,
+       "fill",
+       "input|password||password|form-control|"
+      ],
+      [
+       0.1667,
+       1,
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       0.1667,
+       1,
+       "click",
+       "a|||||login"
+      ],
+      [
+       0.1667,
+       1,
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||next"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a||||tag|love"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "input|submit|||btn btn-primary|"
+      ]
+     ],
+     "applied": [
+      [
+       "click",
+       "a|||||login"
+      ],
+      [
+       "click",
+       "a|||||login"
+      ],
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ]
+     ],
+     "solved": false
+    },
+    {
+     "sub": "eval.c3.page5",
+     "query_mode": "desc_kw",
+     "query": "go to page 5 of the quote listings next",
+     "policy": "graphiter",
+     "edges_ranked": [
+      [
+       0.1667,
+       1,
+       "click",
+       "a|||||next"
+      ],
+      [
+       0.1667,
+       1,
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a||||tag|love"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "input|submit|||btn btn-primary|"
+      ],
+      [
+       0.0,
+       0,
+       "fill",
+       "input|password||password|form-control|"
+      ],
+      [
+       0.0,
+       0,
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||login"
+      ]
+     ],
+     "applied": [
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ]
+     ],
+     "solved": true
+    }
+   ],
+   "query_mode": "desc_kw",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c3.login",
+     "condition": "graphiter",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "exploration"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c3.login",
+       "query_mode": "desc_kw",
+       "query": "log in to the quotes site with the provided username and password login",
+       "policy": "graphiter",
+       "edges_ranked": [
+        [
+         0.1667,
+         1,
+         "fill",
+         "input|password||password|form-control|"
+        ],
+        [
+         0.1667,
+         1,
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         0.1667,
+         1,
+         "click",
+         "a|||||login"
+        ],
+        [
+         0.1667,
+         1,
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||next"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a||||tag|love"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "input|submit|||btn btn-primary|"
+        ]
+       ],
+       "applied": [
+        [
+         "click",
+         "a|||||login"
+        ],
+        [
+         "click",
+         "a|||||login"
+        ],
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ]
+       ],
+       "solved": false
+      }
+     ]
+    },
+    {
+     "sig": "eval.c3.page5",
+     "condition": "graphiter",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c3.page5",
+       "query_mode": "desc_kw",
+       "query": "go to page 5 of the quote listings next",
+       "policy": "graphiter",
+       "edges_ranked": [
+        [
+         0.1667,
+         1,
+         "click",
+         "a|||||next"
+        ],
+        [
+         0.1667,
+         1,
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a||||tag|love"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "input|submit|||btn btn-primary|"
+        ],
+        [
+         0.0,
+         0,
+         "fill",
+         "input|password||password|form-control|"
+        ],
+        [
+         0.0,
+         0,
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||login"
+        ]
+       ],
+       "applied": [
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ]
+       ],
+       "solved": true
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "phase": "B-eval-pass1",
+   "task": "C1_books_mystery_p2_named",
+   "agent": "agentB",
+   "condition": "graphiter desc_only",
+   "status": "partial",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 61.9,
+   "loads": 92,
+   "actions": 133,
+   "reused": 13,
+   "novel": 120,
+   "failed": 0,
+   "recoveries": 2,
+   "decision_points": 12416,
+   "llm_calls": 0,
+   "subgoals_ok": 1,
+   "subgoals_total": 3,
+   "wall_ms": 122881,
+   "retrieval_lookups": 3,
+   "retrieval_ms": 0,
+   "candidates_tried": 0,
+   "solved_by": [
+    "memory",
+    "unsolved",
+    "unsolved"
+   ],
+   "memory_events": [
+    {
+     "sub": "eval.c1.cat",
+     "query_mode": "desc_only",
+     "query": "open the mystery category of the book shop",
+     "policy": "graphiter",
+     "edges_ranked": [
+      [
+       0.2,
+       1,
+       "click",
+       "a|||||mystery"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||womens-fiction"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||historical-fiction"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||travel"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||next"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||fiction"
+      ]
+     ],
+     "applied": [
+      [
+       "click",
+       "a|||||mystery"
+      ]
+     ],
+     "solved": true
+    },
+    {
+     "sub": "eval.c1.page2",
+     "query_mode": "desc_only",
+     "query": "go to the second page of the book listing",
+     "policy": "graphiter",
+     "edges_ranked": [
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||womens-fiction"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||historical-fiction"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||mystery"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||travel"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||next"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||fiction"
+      ]
+     ],
+     "applied": [
+      [
+       "click",
+       "a|||||womens-fiction"
+      ],
+      [
+       "click",
+       "a|||||womens-fiction"
+      ],
+      [
+       "click",
+       "a|||||historical-fiction"
+      ],
+      [
+       "click",
+       "a|||||historical-fiction"
+      ],
+      [
+       "click",
+       "a|||||"
+      ],
+      [
+       "click",
+       "a|||||"
+      ]
+     ],
+     "solved": false
+    },
+    {
+     "sub": "eval.c1.named",
+     "query_mode": "desc_only",
+     "query": "open the product page of the book In the Woods by Tana French",
+     "policy": "graphiter",
+     "edges_ranked": [
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||womens-fiction"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||historical-fiction"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||mystery"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||travel"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||next"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||fiction"
+      ]
+     ],
+     "applied": [
+      [
+       "click",
+       "a|||||womens-fiction"
+      ],
+      [
+       "click",
+       "a|||||womens-fiction"
+      ],
+      [
+       "click",
+       "a|||||historical-fiction"
+      ],
+      [
+       "click",
+       "a|||||historical-fiction"
+      ],
+      [
+       "click",
+       "a|||||"
+      ],
+      [
+       "click",
+       "a|||||"
+      ]
+     ],
+     "solved": false
+    }
+   ],
+   "query_mode": "desc_only",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c1.cat",
+     "condition": "graphiter",
+     "query_mode": "desc_only",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c1.cat",
+       "query_mode": "desc_only",
+       "query": "open the mystery category of the book shop",
+       "policy": "graphiter",
+       "edges_ranked": [
+        [
+         0.2,
+         1,
+         "click",
+         "a|||||mystery"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||womens-fiction"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||historical-fiction"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||travel"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||next"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||fiction"
+        ]
+       ],
+       "applied": [
+        [
+         "click",
+         "a|||||mystery"
+        ]
+       ],
+       "solved": true
+      }
+     ]
+    },
+    {
+     "sig": "eval.c1.page2",
+     "condition": "graphiter",
+     "query_mode": "desc_only",
+     "solved_by": [
+      "unsolved"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c1.page2",
+       "query_mode": "desc_only",
+       "query": "go to the second page of the book listing",
+       "policy": "graphiter",
+       "edges_ranked": [
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||womens-fiction"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||historical-fiction"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||mystery"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||travel"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||next"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||fiction"
+        ]
+       ],
+       "applied": [
+        [
+         "click",
+         "a|||||womens-fiction"
+        ],
+        [
+         "click",
+         "a|||||womens-fiction"
+        ],
+        [
+         "click",
+         "a|||||historical-fiction"
+        ],
+        [
+         "click",
+         "a|||||historical-fiction"
+        ],
+        [
+         "click",
+         "a|||||"
+        ],
+        [
+         "click",
+         "a|||||"
+        ]
+       ],
+       "solved": false
+      }
+     ]
+    },
+    {
+     "sig": "eval.c1.named",
+     "condition": "graphiter",
+     "query_mode": "desc_only",
+     "solved_by": [
+      "unsolved"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c1.named",
+       "query_mode": "desc_only",
+       "query": "open the product page of the book In the Woods by Tana French",
+       "policy": "graphiter",
+       "edges_ranked": [
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||womens-fiction"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||historical-fiction"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||mystery"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||travel"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||next"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||fiction"
+        ]
+       ],
+       "applied": [
+        [
+         "click",
+         "a|||||womens-fiction"
+        ],
+        [
+         "click",
+         "a|||||womens-fiction"
+        ],
+        [
+         "click",
+         "a|||||historical-fiction"
+        ],
+        [
+         "click",
+         "a|||||historical-fiction"
+        ],
+        [
+         "click",
+         "a|||||"
+        ],
+        [
+         "click",
+         "a|||||"
+        ]
+       ],
+       "solved": false
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "phase": "B-eval-pass1",
+   "task": "C2_quotes_login_p3",
+   "agent": "agentB",
+   "condition": "graphiter desc_only",
+   "status": "success",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 7.0,
+   "loads": 11,
+   "actions": 15,
+   "reused": 9,
+   "novel": 6,
+   "failed": 0,
+   "recoveries": 1,
+   "decision_points": 150,
+   "llm_calls": 0,
+   "subgoals_ok": 2,
+   "subgoals_total": 2,
+   "wall_ms": 13255,
+   "retrieval_lookups": 2,
+   "retrieval_ms": 0,
+   "candidates_tried": 0,
+   "solved_by": [
+    "exploration",
+    "memory"
+   ],
+   "memory_events": [
+    {
+     "sub": "eval.c2.login",
+     "query_mode": "desc_only",
+     "query": "log in to the quotes site with the provided username and password",
+     "policy": "graphiter",
+     "edges_ranked": [
+      [
+       0.1667,
+       1,
+       "fill",
+       "input|password||password|form-control|"
+      ],
+      [
+       0.1667,
+       1,
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       0.1667,
+       1,
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||next"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a||||tag|love"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "input|submit|||btn btn-primary|"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||login"
+      ]
+     ],
+     "applied": [
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ]
+     ],
+     "solved": false
+    },
+    {
+     "sub": "eval.c2.page3",
+     "query_mode": "desc_only",
+     "query": "go to page 3 of the quote listings",
+     "policy": "graphiter",
+     "edges_ranked": [
+      [
+       0.2,
+       1,
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||next"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a||||tag|love"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "input|submit|||btn btn-primary|"
+      ],
+      [
+       0.0,
+       0,
+       "fill",
+       "input|password||password|form-control|"
+      ],
+      [
+       0.0,
+       0,
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||login"
+      ]
+     ],
+     "applied": [
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ]
+     ],
+     "solved": true
+    }
+   ],
+   "query_mode": "desc_only",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c2.login",
+     "condition": "graphiter",
+     "query_mode": "desc_only",
+     "solved_by": [
+      "exploration"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c2.login",
+       "query_mode": "desc_only",
+       "query": "log in to the quotes site with the provided username and password",
+       "policy": "graphiter",
+       "edges_ranked": [
+        [
+         0.1667,
+         1,
+         "fill",
+         "input|password||password|form-control|"
+        ],
+        [
+         0.1667,
+         1,
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         0.1667,
+         1,
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||next"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a||||tag|love"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "input|submit|||btn btn-primary|"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||login"
+        ]
+       ],
+       "applied": [
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ]
+       ],
+       "solved": false
+      }
+     ]
+    },
+    {
+     "sig": "eval.c2.page3",
+     "condition": "graphiter",
+     "query_mode": "desc_only",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c2.page3",
+       "query_mode": "desc_only",
+       "query": "go to page 3 of the quote listings",
+       "policy": "graphiter",
+       "edges_ranked": [
+        [
+         0.2,
+         1,
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||next"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a||||tag|love"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "input|submit|||btn btn-primary|"
+        ],
+        [
+         0.0,
+         0,
+         "fill",
+         "input|password||password|form-control|"
+        ],
+        [
+         0.0,
+         0,
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||login"
+        ]
+       ],
+       "applied": [
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ]
+       ],
+       "solved": true
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "phase": "B-eval-pass1",
+   "task": "C3_quotes_login_p5",
+   "agent": "agentB",
+   "condition": "graphiter desc_only",
+   "status": "success",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 8.0,
+   "loads": 13,
+   "actions": 17,
+   "reused": 11,
+   "novel": 6,
+   "failed": 0,
+   "recoveries": 1,
+   "decision_points": 150,
+   "llm_calls": 0,
+   "subgoals_ok": 2,
+   "subgoals_total": 2,
+   "wall_ms": 15168,
+   "retrieval_lookups": 2,
+   "retrieval_ms": 0,
+   "candidates_tried": 0,
+   "solved_by": [
+    "exploration",
+    "memory"
+   ],
+   "memory_events": [
+    {
+     "sub": "eval.c3.login",
+     "query_mode": "desc_only",
+     "query": "log in to the quotes site with the provided username and password",
+     "policy": "graphiter",
+     "edges_ranked": [
+      [
+       0.1667,
+       1,
+       "fill",
+       "input|password||password|form-control|"
+      ],
+      [
+       0.1667,
+       1,
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       0.1667,
+       1,
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||next"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a||||tag|love"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "input|submit|||btn btn-primary|"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||login"
+      ]
+     ],
+     "applied": [
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ]
+     ],
+     "solved": false
+    },
+    {
+     "sub": "eval.c3.page5",
+     "query_mode": "desc_only",
+     "query": "go to page 5 of the quote listings",
+     "policy": "graphiter",
+     "edges_ranked": [
+      [
+       0.2,
+       1,
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||next"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a||||tag|love"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "input|submit|||btn btn-primary|"
+      ],
+      [
+       0.0,
+       0,
+       "fill",
+       "input|password||password|form-control|"
+      ],
+      [
+       0.0,
+       0,
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||login"
+      ]
+     ],
+     "applied": [
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ]
+     ],
+     "solved": true
+    }
+   ],
+   "query_mode": "desc_only",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c3.login",
+     "condition": "graphiter",
+     "query_mode": "desc_only",
+     "solved_by": [
+      "exploration"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c3.login",
+       "query_mode": "desc_only",
+       "query": "log in to the quotes site with the provided username and password",
+       "policy": "graphiter",
+       "edges_ranked": [
+        [
+         0.1667,
+         1,
+         "fill",
+         "input|password||password|form-control|"
+        ],
+        [
+         0.1667,
+         1,
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         0.1667,
+         1,
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||next"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a||||tag|love"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "input|submit|||btn btn-primary|"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||login"
+        ]
+       ],
+       "applied": [
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ]
+       ],
+       "solved": false
+      }
+     ]
+    },
+    {
+     "sig": "eval.c3.page5",
+     "condition": "graphiter",
+     "query_mode": "desc_only",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c3.page5",
+       "query_mode": "desc_only",
+       "query": "go to page 5 of the quote listings",
+       "policy": "graphiter",
+       "edges_ranked": [
+        [
+         0.2,
+         1,
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||next"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a||||tag|love"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "input|submit|||btn btn-primary|"
+        ],
+        [
+         0.0,
+         0,
+         "fill",
+         "input|password||password|form-control|"
+        ],
+        [
+         0.0,
+         0,
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||login"
+        ]
+       ],
+       "applied": [
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ]
+       ],
+       "solved": true
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "phase": "B-eval-pass1",
+   "task": "C1_books_mystery_p2_named",
+   "agent": "agentB",
+   "condition": "fragntr desc_kw",
+   "status": "partial",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 34.7,
+   "loads": 52,
+   "actions": 73,
+   "reused": 1,
+   "novel": 72,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 7582,
+   "llm_calls": 0,
+   "subgoals_ok": 2,
+   "subgoals_total": 3,
+   "wall_ms": 68555,
+   "retrieval_lookups": 3,
+   "retrieval_ms": 0,
+   "candidates_tried": 1,
+   "solved_by": [
+    "exploration",
+    "memory",
+    "unsolved"
+   ],
+   "memory_events": [
+    {
+     "sub": "eval.c1.cat",
+     "query_mode": "desc_kw",
+     "query": "open the mystery category of the book shop mystery",
+     "candidates": [],
+     "replay_ok": false,
+     "abort_step": null,
+     "applications": 0
+    },
+    {
+     "sub": "eval.c1.page2",
+     "query_mode": "desc_kw",
+     "query": "go to the second page of the book listing next",
+     "candidates": [
+      "generic.paginate.next",
+      "books.paginate.next"
+     ],
+     "replay_ok": true,
+     "abort_step": null,
+     "applications": 1
+    },
+    {
+     "sub": "eval.c1.named",
+     "query_mode": "desc_kw",
+     "query": "open the product page of the book In the Woods by Tana French woods",
+     "candidates": [],
+     "replay_ok": false,
+     "abort_step": null,
+     "applications": 0
+    }
+   ],
+   "query_mode": "desc_kw",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c1.cat",
+     "condition": "fragntr",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "exploration"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c1.cat",
+       "query_mode": "desc_kw",
+       "query": "open the mystery category of the book shop mystery",
+       "candidates": [],
+       "replay_ok": false,
+       "abort_step": null,
+       "applications": 0
+      }
+     ]
+    },
+    {
+     "sig": "eval.c1.page2",
+     "condition": "fragntr",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c1.page2",
+       "query_mode": "desc_kw",
+       "query": "go to the second page of the book listing next",
+       "candidates": [
+        "generic.paginate.next",
+        "books.paginate.next"
+       ],
+       "replay_ok": true,
+       "abort_step": null,
+       "applications": 1
+      }
+     ]
+    },
+    {
+     "sig": "eval.c1.named",
+     "condition": "fragntr",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "unsolved"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c1.named",
+       "query_mode": "desc_kw",
+       "query": "open the product page of the book In the Woods by Tana French woods",
+       "candidates": [],
+       "replay_ok": false,
+       "abort_step": null,
+       "applications": 0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "phase": "B-eval-pass1",
+   "task": "C2_quotes_login_p3",
+   "agent": "agentB",
+   "condition": "fragntr desc_kw",
+   "status": "success",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 2.7,
+   "loads": 5,
+   "actions": 6,
+   "reused": 6,
+   "novel": 0,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 0,
+   "llm_calls": 0,
+   "subgoals_ok": 2,
+   "subgoals_total": 2,
+   "wall_ms": 4731,
+   "retrieval_lookups": 2,
+   "retrieval_ms": 0,
+   "candidates_tried": 3,
+   "solved_by": [
+    "memory",
+    "memory"
+   ],
+   "memory_events": [
+    {
+     "sub": "eval.c2.login",
+     "query_mode": "desc_kw",
+     "query": "log in to the quotes site with the provided username and password login",
+     "candidates": [
+      "generic.form.login",
+      "quotes.login"
+     ],
+     "replay_ok": true,
+     "abort_step": null,
+     "applications": 1
+    },
+    {
+     "sub": "eval.c2.page3",
+     "query_mode": "desc_kw",
+     "query": "go to page 3 of the quote listings next",
+     "candidates": [
+      "generic.paginate.next",
+      "quotes.page.2"
+     ],
+     "replay_ok": true,
+     "abort_step": null,
+     "applications": 2
+    }
+   ],
+   "query_mode": "desc_kw",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c2.login",
+     "condition": "fragntr",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c2.login",
+       "query_mode": "desc_kw",
+       "query": "log in to the quotes site with the provided username and password login",
+       "candidates": [
+        "generic.form.login",
+        "quotes.login"
+       ],
+       "replay_ok": true,
+       "abort_step": null,
+       "applications": 1
+      }
+     ]
+    },
+    {
+     "sig": "eval.c2.page3",
+     "condition": "fragntr",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c2.page3",
+       "query_mode": "desc_kw",
+       "query": "go to page 3 of the quote listings next",
+       "candidates": [
+        "generic.paginate.next",
+        "quotes.page.2"
+       ],
+       "replay_ok": true,
+       "abort_step": null,
+       "applications": 2
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "phase": "B-eval-pass1",
+   "task": "C3_quotes_login_p5",
+   "agent": "agentB",
+   "condition": "fragntr desc_kw",
+   "status": "partial",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 10.6,
+   "loads": 11,
+   "actions": 23,
+   "reused": 6,
+   "novel": 17,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 405,
+   "llm_calls": 0,
+   "subgoals_ok": 1,
+   "subgoals_total": 2,
+   "wall_ms": 20446,
+   "retrieval_lookups": 2,
+   "retrieval_ms": 0,
+   "candidates_tried": 3,
+   "solved_by": [
+    "memory",
+    "unsolved"
+   ],
+   "memory_events": [
+    {
+     "sub": "eval.c3.login",
+     "query_mode": "desc_kw",
+     "query": "log in to the quotes site with the provided username and password login",
+     "candidates": [
+      "generic.form.login",
+      "quotes.login"
+     ],
+     "replay_ok": true,
+     "abort_step": null,
+     "applications": 1
+    },
+    {
+     "sub": "eval.c3.page5",
+     "query_mode": "desc_kw",
+     "query": "go to page 5 of the quote listings next",
+     "candidates": [
+      "generic.paginate.next",
+      "quotes.page.2"
+     ],
+     "replay_ok": false,
+     "abort_step": null,
+     "applications": 2
+    }
+   ],
+   "query_mode": "desc_kw",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c3.login",
+     "condition": "fragntr",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c3.login",
+       "query_mode": "desc_kw",
+       "query": "log in to the quotes site with the provided username and password login",
+       "candidates": [
+        "generic.form.login",
+        "quotes.login"
+       ],
+       "replay_ok": true,
+       "abort_step": null,
+       "applications": 1
+      }
+     ]
+    },
+    {
+     "sig": "eval.c3.page5",
+     "condition": "fragntr",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "unsolved"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c3.page5",
+       "query_mode": "desc_kw",
+       "query": "go to page 5 of the quote listings next",
+       "candidates": [
+        "generic.paginate.next",
+        "quotes.page.2"
+       ],
+       "replay_ok": false,
+       "abort_step": null,
+       "applications": 2
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "phase": "B-eval-pass1",
+   "task": "C1_books_mystery_p2_named",
+   "agent": "agentB",
+   "condition": "fragntr desc_only",
+   "status": "partial",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 34.8,
+   "loads": 52,
+   "actions": 73,
+   "reused": 1,
+   "novel": 72,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 7582,
+   "llm_calls": 0,
+   "subgoals_ok": 2,
+   "subgoals_total": 3,
+   "wall_ms": 68585,
+   "retrieval_lookups": 3,
+   "retrieval_ms": 0,
+   "candidates_tried": 1,
+   "solved_by": [
+    "exploration",
+    "memory",
+    "unsolved"
+   ],
+   "memory_events": [
+    {
+     "sub": "eval.c1.cat",
+     "query_mode": "desc_only",
+     "query": "open the mystery category of the book shop",
+     "candidates": [],
+     "replay_ok": false,
+     "abort_step": null,
+     "applications": 0
+    },
+    {
+     "sub": "eval.c1.page2",
+     "query_mode": "desc_only",
+     "query": "go to the second page of the book listing",
+     "candidates": [
+      "generic.paginate.next",
+      "books.paginate.next"
+     ],
+     "replay_ok": true,
+     "abort_step": null,
+     "applications": 1
+    },
+    {
+     "sub": "eval.c1.named",
+     "query_mode": "desc_only",
+     "query": "open the product page of the book In the Woods by Tana French",
+     "candidates": [],
+     "replay_ok": false,
+     "abort_step": null,
+     "applications": 0
+    }
+   ],
+   "query_mode": "desc_only",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c1.cat",
+     "condition": "fragntr",
+     "query_mode": "desc_only",
+     "solved_by": [
+      "exploration"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c1.cat",
+       "query_mode": "desc_only",
+       "query": "open the mystery category of the book shop",
+       "candidates": [],
+       "replay_ok": false,
+       "abort_step": null,
+       "applications": 0
+      }
+     ]
+    },
+    {
+     "sig": "eval.c1.page2",
+     "condition": "fragntr",
+     "query_mode": "desc_only",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c1.page2",
+       "query_mode": "desc_only",
+       "query": "go to the second page of the book listing",
+       "candidates": [
+        "generic.paginate.next",
+        "books.paginate.next"
+       ],
+       "replay_ok": true,
+       "abort_step": null,
+       "applications": 1
+      }
+     ]
+    },
+    {
+     "sig": "eval.c1.named",
+     "condition": "fragntr",
+     "query_mode": "desc_only",
+     "solved_by": [
+      "unsolved"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c1.named",
+       "query_mode": "desc_only",
+       "query": "open the product page of the book In the Woods by Tana French",
+       "candidates": [],
+       "replay_ok": false,
+       "abort_step": null,
+       "applications": 0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "phase": "B-eval-pass1",
+   "task": "C2_quotes_login_p3",
+   "agent": "agentB",
+   "condition": "fragntr desc_only",
+   "status": "partial",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 9.0,
+   "loads": 8,
+   "actions": 20,
+   "reused": 4,
+   "novel": 16,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 367,
+   "llm_calls": 0,
+   "subgoals_ok": 1,
+   "subgoals_total": 2,
+   "wall_ms": 17264,
+   "retrieval_lookups": 2,
+   "retrieval_ms": 0,
+   "candidates_tried": 1,
+   "solved_by": [
+    "memory",
+    "unsolved"
+   ],
+   "memory_events": [
+    {
+     "sub": "eval.c2.login",
+     "query_mode": "desc_only",
+     "query": "log in to the quotes site with the provided username and password",
+     "candidates": [
+      "generic.form.login",
+      "quotes.login"
+     ],
+     "replay_ok": true,
+     "abort_step": null,
+     "applications": 1
+    },
+    {
+     "sub": "eval.c2.page3",
+     "query_mode": "desc_only",
+     "query": "go to page 3 of the quote listings",
+     "candidates": [],
+     "replay_ok": false,
+     "abort_step": null,
+     "applications": 0
+    }
+   ],
+   "query_mode": "desc_only",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c2.login",
+     "condition": "fragntr",
+     "query_mode": "desc_only",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c2.login",
+       "query_mode": "desc_only",
+       "query": "log in to the quotes site with the provided username and password",
+       "candidates": [
+        "generic.form.login",
+        "quotes.login"
+       ],
+       "replay_ok": true,
+       "abort_step": null,
+       "applications": 1
+      }
+     ]
+    },
+    {
+     "sig": "eval.c2.page3",
+     "condition": "fragntr",
+     "query_mode": "desc_only",
+     "solved_by": [
+      "unsolved"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c2.page3",
+       "query_mode": "desc_only",
+       "query": "go to page 3 of the quote listings",
+       "candidates": [],
+       "replay_ok": false,
+       "abort_step": null,
+       "applications": 0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "phase": "B-eval-pass1",
+   "task": "C3_quotes_login_p5",
+   "agent": "agentB",
+   "condition": "fragntr desc_only",
+   "status": "partial",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 9.1,
+   "loads": 8,
+   "actions": 20,
+   "reused": 4,
+   "novel": 16,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 367,
+   "llm_calls": 0,
+   "subgoals_ok": 1,
+   "subgoals_total": 2,
+   "wall_ms": 17302,
+   "retrieval_lookups": 2,
+   "retrieval_ms": 0,
+   "candidates_tried": 1,
+   "solved_by": [
+    "memory",
+    "unsolved"
+   ],
+   "memory_events": [
+    {
+     "sub": "eval.c3.login",
+     "query_mode": "desc_only",
+     "query": "log in to the quotes site with the provided username and password",
+     "candidates": [
+      "generic.form.login",
+      "quotes.login"
+     ],
+     "replay_ok": true,
+     "abort_step": null,
+     "applications": 1
+    },
+    {
+     "sub": "eval.c3.page5",
+     "query_mode": "desc_only",
+     "query": "go to page 5 of the quote listings",
+     "candidates": [],
+     "replay_ok": false,
+     "abort_step": null,
+     "applications": 0
+    }
+   ],
+   "query_mode": "desc_only",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c3.login",
+     "condition": "fragntr",
+     "query_mode": "desc_only",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c3.login",
+       "query_mode": "desc_only",
+       "query": "log in to the quotes site with the provided username and password",
+       "candidates": [
+        "generic.form.login",
+        "quotes.login"
+       ],
+       "replay_ok": true,
+       "abort_step": null,
+       "applications": 1
+      }
+     ]
+    },
+    {
+     "sig": "eval.c3.page5",
+     "condition": "fragntr",
+     "query_mode": "desc_only",
+     "solved_by": [
+      "unsolved"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c3.page5",
+       "query_mode": "desc_only",
+       "query": "go to page 5 of the quote listings",
+       "candidates": [],
+       "replay_ok": false,
+       "abort_step": null,
+       "applications": 0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "phase": "B-eval-pass1",
+   "task": "C1_books_mystery_p2_named",
+   "agent": "agentB",
+   "condition": "graphbfs",
+   "status": "partial",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 56.4,
+   "loads": 84,
+   "actions": 121,
+   "reused": 1,
+   "novel": 120,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 12638,
+   "llm_calls": 0,
+   "subgoals_ok": 1,
+   "subgoals_total": 3,
+   "wall_ms": 111808,
+   "retrieval_lookups": 3,
+   "retrieval_ms": 1,
+   "candidates_tried": 0,
+   "solved_by": [
+    "memory",
+    "unsolved",
+    "unsolved"
+   ],
+   "memory_events": [],
+   "query_mode": "desc_kw",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c1.cat",
+     "condition": "graphbfs",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": []
+    },
+    {
+     "sig": "eval.c1.page2",
+     "condition": "graphbfs",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "unsolved"
+     ],
+     "new_memory_events": []
+    },
+    {
+     "sig": "eval.c1.named",
+     "condition": "graphbfs",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "unsolved"
+     ],
+     "new_memory_events": []
+    }
+   ]
+  },
+  {
+   "phase": "B-eval-pass1",
+   "task": "C2_quotes_login_p3",
+   "agent": "agentB",
+   "condition": "graphbfs",
+   "status": "partial",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 9.4,
+   "loads": 8,
+   "actions": 21,
+   "reused": 2,
+   "novel": 19,
+   "failed": 0,
+   "recoveries": 1,
+   "decision_points": 367,
+   "llm_calls": 0,
+   "subgoals_ok": 1,
+   "subgoals_total": 2,
+   "wall_ms": 18007,
+   "retrieval_lookups": 2,
+   "retrieval_ms": 0,
+   "candidates_tried": 0,
+   "solved_by": [
+    "exploration",
+    "unsolved"
+   ],
+   "memory_events": [],
+   "query_mode": "desc_kw",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c2.login",
+     "condition": "graphbfs",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "exploration"
+     ],
+     "new_memory_events": []
+    },
+    {
+     "sig": "eval.c2.page3",
+     "condition": "graphbfs",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "unsolved"
+     ],
+     "new_memory_events": []
+    }
+   ]
+  },
+  {
+   "phase": "B-eval-pass1",
+   "task": "C3_quotes_login_p5",
+   "agent": "agentB",
+   "condition": "graphbfs",
+   "status": "partial",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 9.5,
+   "loads": 8,
+   "actions": 21,
+   "reused": 2,
+   "novel": 19,
+   "failed": 0,
+   "recoveries": 1,
+   "decision_points": 367,
+   "llm_calls": 0,
+   "subgoals_ok": 1,
+   "subgoals_total": 2,
+   "wall_ms": 18191,
+   "retrieval_lookups": 2,
+   "retrieval_ms": 0,
+   "candidates_tried": 0,
+   "solved_by": [
+    "exploration",
+    "unsolved"
+   ],
+   "memory_events": [],
+   "query_mode": "desc_kw",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c3.login",
+     "condition": "graphbfs",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "exploration"
+     ],
+     "new_memory_events": []
+    },
+    {
+     "sig": "eval.c3.page5",
+     "condition": "graphbfs",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "unsolved"
+     ],
+     "new_memory_events": []
+    }
+   ]
+  },
+  {
+   "phase": "B-eval-pass1",
+   "task": "C1_books_mystery_p2_named",
+   "agent": "agentB",
+   "condition": "traj",
+   "status": "partial",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 42.7,
+   "loads": 69,
+   "actions": 90,
+   "reused": 18,
+   "novel": 72,
+   "failed": 0,
+   "recoveries": 2,
+   "decision_points": 7609,
+   "llm_calls": 0,
+   "subgoals_ok": 2,
+   "subgoals_total": 3,
+   "wall_ms": 84476,
+   "retrieval_lookups": 3,
+   "retrieval_ms": 24,
+   "candidates_tried": 0,
+   "solved_by": [
+    "exploration",
+    "memory",
+    "unsolved"
+   ],
+   "memory_events": [],
+   "query_mode": "desc_kw",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c1.cat",
+     "condition": "traj",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "exploration"
+     ],
+     "new_memory_events": []
+    },
+    {
+     "sig": "eval.c1.page2",
+     "condition": "traj",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": []
+    },
+    {
+     "sig": "eval.c1.named",
+     "condition": "traj",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "unsolved"
+     ],
+     "new_memory_events": []
+    }
+   ]
+  },
+  {
+   "phase": "B-eval-pass1",
+   "task": "C2_quotes_login_p3",
+   "agent": "agentB",
+   "condition": "traj",
+   "status": "partial",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 10.8,
+   "loads": 10,
+   "actions": 24,
+   "reused": 2,
+   "novel": 22,
+   "failed": 0,
+   "recoveries": 2,
+   "decision_points": 535,
+   "llm_calls": 0,
+   "subgoals_ok": 1,
+   "subgoals_total": 2,
+   "wall_ms": 20895,
+   "retrieval_lookups": 2,
+   "retrieval_ms": 16,
+   "candidates_tried": 0,
+   "solved_by": [
+    "exploration",
+    "unsolved"
+   ],
+   "memory_events": [],
+   "query_mode": "desc_kw",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c2.login",
+     "condition": "traj",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "exploration"
+     ],
+     "new_memory_events": []
+    },
+    {
+     "sig": "eval.c2.page3",
+     "condition": "traj",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "unsolved"
+     ],
+     "new_memory_events": []
+    }
+   ]
+  },
+  {
+   "phase": "B-eval-pass1",
+   "task": "C3_quotes_login_p5",
+   "agent": "agentB",
+   "condition": "traj",
+   "status": "partial",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 10.7,
+   "loads": 10,
+   "actions": 24,
+   "reused": 2,
+   "novel": 22,
+   "failed": 0,
+   "recoveries": 2,
+   "decision_points": 535,
+   "llm_calls": 0,
+   "subgoals_ok": 1,
+   "subgoals_total": 2,
+   "wall_ms": 20735,
+   "retrieval_lookups": 2,
+   "retrieval_ms": 19,
+   "candidates_tried": 0,
+   "solved_by": [
+    "exploration",
+    "unsolved"
+   ],
+   "memory_events": [],
+   "query_mode": "desc_kw",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c3.login",
+     "condition": "traj",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "exploration"
+     ],
+     "new_memory_events": []
+    },
+    {
+     "sig": "eval.c3.page5",
+     "condition": "traj",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "unsolved"
+     ],
+     "new_memory_events": []
+    }
+   ]
+  },
+  {
+   "phase": "B-eval-pass1",
+   "task": "C1_books_mystery_p2_named",
+   "agent": "agentB",
+   "condition": "cold",
+   "status": "partial",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 61.6,
+   "loads": 92,
+   "actions": 132,
+   "reused": 0,
+   "novel": 132,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 13925,
+   "llm_calls": 0,
+   "subgoals_ok": 1,
+   "subgoals_total": 3,
+   "wall_ms": 122164,
+   "retrieval_lookups": 0,
+   "retrieval_ms": 0,
+   "candidates_tried": 0,
+   "solved_by": [
+    "exploration",
+    "unsolved",
+    "unsolved"
+   ],
+   "memory_events": [],
+   "query_mode": "desc_kw",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c1.cat",
+     "condition": "cold",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "exploration"
+     ],
+     "new_memory_events": []
+    },
+    {
+     "sig": "eval.c1.page2",
+     "condition": "cold",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "unsolved"
+     ],
+     "new_memory_events": []
+    },
+    {
+     "sig": "eval.c1.named",
+     "condition": "cold",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "unsolved"
+     ],
+     "new_memory_events": []
+    }
+   ]
+  },
+  {
+   "phase": "B-eval-pass1",
+   "task": "C2_quotes_login_p3",
+   "agent": "agentB",
+   "condition": "cold",
+   "status": "partial",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 9.3,
+   "loads": 8,
+   "actions": 21,
+   "reused": 0,
+   "novel": 21,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 473,
+   "llm_calls": 0,
+   "subgoals_ok": 1,
+   "subgoals_total": 2,
+   "wall_ms": 17987,
+   "retrieval_lookups": 0,
+   "retrieval_ms": 0,
+   "candidates_tried": 0,
+   "solved_by": [
+    "exploration",
+    "unsolved"
+   ],
+   "memory_events": [],
+   "query_mode": "desc_kw",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c2.login",
+     "condition": "cold",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "exploration"
+     ],
+     "new_memory_events": []
+    },
+    {
+     "sig": "eval.c2.page3",
+     "condition": "cold",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "unsolved"
+     ],
+     "new_memory_events": []
+    }
+   ]
+  },
+  {
+   "phase": "B-eval-pass1",
+   "task": "C3_quotes_login_p5",
+   "agent": "agentB",
+   "condition": "cold",
+   "status": "partial",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 9.3,
+   "loads": 8,
+   "actions": 21,
+   "reused": 0,
+   "novel": 21,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 473,
+   "llm_calls": 0,
+   "subgoals_ok": 1,
+   "subgoals_total": 2,
+   "wall_ms": 17817,
+   "retrieval_lookups": 0,
+   "retrieval_ms": 0,
+   "candidates_tried": 0,
+   "solved_by": [
+    "exploration",
+    "unsolved"
+   ],
+   "memory_events": [],
+   "query_mode": "desc_kw",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c3.login",
+     "condition": "cold",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "exploration"
+     ],
+     "new_memory_events": []
+    },
+    {
+     "sig": "eval.c3.page5",
+     "condition": "cold",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "unsolved"
+     ],
+     "new_memory_events": []
+    }
+   ]
+  },
+  {
+   "phase": "B-eval-pass2",
+   "task": "C1_books_mystery_p2_named",
+   "agent": "agentB",
+   "condition": "inherit desc_kw",
+   "status": "partial",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 34.5,
+   "loads": 52,
+   "actions": 73,
+   "reused": 1,
+   "novel": 72,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 7582,
+   "llm_calls": 0,
+   "subgoals_ok": 2,
+   "subgoals_total": 3,
+   "wall_ms": 68164,
+   "retrieval_lookups": 3,
+   "retrieval_ms": 0,
+   "candidates_tried": 1,
+   "solved_by": [
+    "exploration",
+    "memory",
+    "unsolved"
+   ],
+   "memory_events": [
+    {
+     "sub": "eval.c1.cat",
+     "query_mode": "desc_kw",
+     "query": "open the mystery category of the book shop mystery",
+     "candidates": [],
+     "replay_ok": false,
+     "abort_step": null,
+     "applications": 0
+    },
+    {
+     "sub": "eval.c1.page2",
+     "query_mode": "desc_kw",
+     "query": "go to the second page of the book listing next",
+     "candidates": [
+      "generic.paginate.next",
+      "books.paginate.next"
+     ],
+     "replay_ok": true,
+     "abort_step": null,
+     "applications": 1
+    },
+    {
+     "sub": "eval.c1.named",
+     "query_mode": "desc_kw",
+     "query": "open the product page of the book In the Woods by Tana French woods",
+     "candidates": [],
+     "replay_ok": false,
+     "abort_step": null,
+     "applications": 0
+    }
+   ],
+   "query_mode": "desc_kw",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c1.cat",
+     "condition": "inherit",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "exploration"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c1.cat",
+       "query_mode": "desc_kw",
+       "query": "open the mystery category of the book shop mystery",
+       "candidates": [],
+       "replay_ok": false,
+       "abort_step": null,
+       "applications": 0
+      }
+     ]
+    },
+    {
+     "sig": "eval.c1.page2",
+     "condition": "inherit",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c1.page2",
+       "query_mode": "desc_kw",
+       "query": "go to the second page of the book listing next",
+       "candidates": [
+        "generic.paginate.next",
+        "books.paginate.next"
+       ],
+       "replay_ok": true,
+       "abort_step": null,
+       "applications": 1
+      }
+     ]
+    },
+    {
+     "sig": "eval.c1.named",
+     "condition": "inherit",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "unsolved"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c1.named",
+       "query_mode": "desc_kw",
+       "query": "open the product page of the book In the Woods by Tana French woods",
+       "candidates": [],
+       "replay_ok": false,
+       "abort_step": null,
+       "applications": 0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "phase": "B-eval-pass2",
+   "task": "C2_quotes_login_p3",
+   "agent": "agentB",
+   "condition": "inherit desc_kw",
+   "status": "success",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 2.7,
+   "loads": 5,
+   "actions": 6,
+   "reused": 6,
+   "novel": 0,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 0,
+   "llm_calls": 0,
+   "subgoals_ok": 2,
+   "subgoals_total": 2,
+   "wall_ms": 4753,
+   "retrieval_lookups": 2,
+   "retrieval_ms": 0,
+   "candidates_tried": 2,
+   "solved_by": [
+    "memory",
+    "memory"
+   ],
+   "memory_events": [
+    {
+     "sub": "eval.c2.login",
+     "query_mode": "desc_kw",
+     "query": "log in to the quotes site with the provided username and password login",
+     "candidates": [
+      "generic.form.login",
+      "quotes.login"
+     ],
+     "replay_ok": true,
+     "abort_step": null,
+     "applications": 1
+    },
+    {
+     "sub": "eval.c2.page3",
+     "query_mode": "desc_kw",
+     "query": "go to page 3 of the quote listings next",
+     "candidates": [
+      "generic.paginate.next",
+      "quotes.page.2"
+     ],
+     "replay_ok": true,
+     "abort_step": null,
+     "applications": 2
+    }
+   ],
+   "query_mode": "desc_kw",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c2.login",
+     "condition": "inherit",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c2.login",
+       "query_mode": "desc_kw",
+       "query": "log in to the quotes site with the provided username and password login",
+       "candidates": [
+        "generic.form.login",
+        "quotes.login"
+       ],
+       "replay_ok": true,
+       "abort_step": null,
+       "applications": 1
+      }
+     ]
+    },
+    {
+     "sig": "eval.c2.page3",
+     "condition": "inherit",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c2.page3",
+       "query_mode": "desc_kw",
+       "query": "go to page 3 of the quote listings next",
+       "candidates": [
+        "generic.paginate.next",
+        "quotes.page.2"
+       ],
+       "replay_ok": true,
+       "abort_step": null,
+       "applications": 2
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "phase": "B-eval-pass2",
+   "task": "C3_quotes_login_p5",
+   "agent": "agentB",
+   "condition": "inherit desc_kw",
+   "status": "success",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 3.6,
+   "loads": 7,
+   "actions": 8,
+   "reused": 8,
+   "novel": 0,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 0,
+   "llm_calls": 0,
+   "subgoals_ok": 2,
+   "subgoals_total": 2,
+   "wall_ms": 6562,
+   "retrieval_lookups": 2,
+   "retrieval_ms": 0,
+   "candidates_tried": 2,
+   "solved_by": [
+    "memory",
+    "memory"
+   ],
+   "memory_events": [
+    {
+     "sub": "eval.c3.login",
+     "query_mode": "desc_kw",
+     "query": "log in to the quotes site with the provided username and password login",
+     "candidates": [
+      "generic.form.login",
+      "quotes.login"
+     ],
+     "replay_ok": true,
+     "abort_step": null,
+     "applications": 1
+    },
+    {
+     "sub": "eval.c3.page5",
+     "query_mode": "desc_kw",
+     "query": "go to page 5 of the quote listings next",
+     "candidates": [
+      "generic.paginate.next",
+      "quotes.page.2"
+     ],
+     "replay_ok": true,
+     "abort_step": null,
+     "applications": 4
+    }
+   ],
+   "query_mode": "desc_kw",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c3.login",
+     "condition": "inherit",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c3.login",
+       "query_mode": "desc_kw",
+       "query": "log in to the quotes site with the provided username and password login",
+       "candidates": [
+        "generic.form.login",
+        "quotes.login"
+       ],
+       "replay_ok": true,
+       "abort_step": null,
+       "applications": 1
+      }
+     ]
+    },
+    {
+     "sig": "eval.c3.page5",
+     "condition": "inherit",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c3.page5",
+       "query_mode": "desc_kw",
+       "query": "go to page 5 of the quote listings next",
+       "candidates": [
+        "generic.paginate.next",
+        "quotes.page.2"
+       ],
+       "replay_ok": true,
+       "abort_step": null,
+       "applications": 4
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "phase": "B-eval-pass2",
+   "task": "C1_books_mystery_p2_named",
+   "agent": "agentB",
+   "condition": "inherit desc_only",
+   "status": "partial",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 34.7,
+   "loads": 52,
+   "actions": 73,
+   "reused": 1,
+   "novel": 72,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 7582,
+   "llm_calls": 0,
+   "subgoals_ok": 2,
+   "subgoals_total": 3,
+   "wall_ms": 68594,
+   "retrieval_lookups": 3,
+   "retrieval_ms": 0,
+   "candidates_tried": 1,
+   "solved_by": [
+    "exploration",
+    "memory",
+    "unsolved"
+   ],
+   "memory_events": [
+    {
+     "sub": "eval.c1.cat",
+     "query_mode": "desc_only",
+     "query": "open the mystery category of the book shop",
+     "candidates": [],
+     "replay_ok": false,
+     "abort_step": null,
+     "applications": 0
+    },
+    {
+     "sub": "eval.c1.page2",
+     "query_mode": "desc_only",
+     "query": "go to the second page of the book listing",
+     "candidates": [
+      "generic.paginate.next",
+      "books.paginate.next"
+     ],
+     "replay_ok": true,
+     "abort_step": null,
+     "applications": 1
+    },
+    {
+     "sub": "eval.c1.named",
+     "query_mode": "desc_only",
+     "query": "open the product page of the book In the Woods by Tana French",
+     "candidates": [],
+     "replay_ok": false,
+     "abort_step": null,
+     "applications": 0
+    }
+   ],
+   "query_mode": "desc_only",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c1.cat",
+     "condition": "inherit",
+     "query_mode": "desc_only",
+     "solved_by": [
+      "exploration"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c1.cat",
+       "query_mode": "desc_only",
+       "query": "open the mystery category of the book shop",
+       "candidates": [],
+       "replay_ok": false,
+       "abort_step": null,
+       "applications": 0
+      }
+     ]
+    },
+    {
+     "sig": "eval.c1.page2",
+     "condition": "inherit",
+     "query_mode": "desc_only",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c1.page2",
+       "query_mode": "desc_only",
+       "query": "go to the second page of the book listing",
+       "candidates": [
+        "generic.paginate.next",
+        "books.paginate.next"
+       ],
+       "replay_ok": true,
+       "abort_step": null,
+       "applications": 1
+      }
+     ]
+    },
+    {
+     "sig": "eval.c1.named",
+     "condition": "inherit",
+     "query_mode": "desc_only",
+     "solved_by": [
+      "unsolved"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c1.named",
+       "query_mode": "desc_only",
+       "query": "open the product page of the book In the Woods by Tana French",
+       "candidates": [],
+       "replay_ok": false,
+       "abort_step": null,
+       "applications": 0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "phase": "B-eval-pass2",
+   "task": "C2_quotes_login_p3",
+   "agent": "agentB",
+   "condition": "inherit desc_only",
+   "status": "partial",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 9.1,
+   "loads": 8,
+   "actions": 20,
+   "reused": 4,
+   "novel": 16,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 367,
+   "llm_calls": 0,
+   "subgoals_ok": 1,
+   "subgoals_total": 2,
+   "wall_ms": 17262,
+   "retrieval_lookups": 2,
+   "retrieval_ms": 0,
+   "candidates_tried": 1,
+   "solved_by": [
+    "memory",
+    "unsolved"
+   ],
+   "memory_events": [
+    {
+     "sub": "eval.c2.login",
+     "query_mode": "desc_only",
+     "query": "log in to the quotes site with the provided username and password",
+     "candidates": [
+      "generic.form.login",
+      "quotes.login"
+     ],
+     "replay_ok": true,
+     "abort_step": null,
+     "applications": 1
+    },
+    {
+     "sub": "eval.c2.page3",
+     "query_mode": "desc_only",
+     "query": "go to page 3 of the quote listings",
+     "candidates": [],
+     "replay_ok": false,
+     "abort_step": null,
+     "applications": 0
+    }
+   ],
+   "query_mode": "desc_only",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c2.login",
+     "condition": "inherit",
+     "query_mode": "desc_only",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c2.login",
+       "query_mode": "desc_only",
+       "query": "log in to the quotes site with the provided username and password",
+       "candidates": [
+        "generic.form.login",
+        "quotes.login"
+       ],
+       "replay_ok": true,
+       "abort_step": null,
+       "applications": 1
+      }
+     ]
+    },
+    {
+     "sig": "eval.c2.page3",
+     "condition": "inherit",
+     "query_mode": "desc_only",
+     "solved_by": [
+      "unsolved"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c2.page3",
+       "query_mode": "desc_only",
+       "query": "go to page 3 of the quote listings",
+       "candidates": [],
+       "replay_ok": false,
+       "abort_step": null,
+       "applications": 0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "phase": "B-eval-pass2",
+   "task": "C3_quotes_login_p5",
+   "agent": "agentB",
+   "condition": "inherit desc_only",
+   "status": "partial",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 8.8,
+   "loads": 8,
+   "actions": 20,
+   "reused": 4,
+   "novel": 16,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 367,
+   "llm_calls": 0,
+   "subgoals_ok": 1,
+   "subgoals_total": 2,
+   "wall_ms": 17042,
+   "retrieval_lookups": 2,
+   "retrieval_ms": 0,
+   "candidates_tried": 1,
+   "solved_by": [
+    "memory",
+    "unsolved"
+   ],
+   "memory_events": [
+    {
+     "sub": "eval.c3.login",
+     "query_mode": "desc_only",
+     "query": "log in to the quotes site with the provided username and password",
+     "candidates": [
+      "generic.form.login",
+      "quotes.login"
+     ],
+     "replay_ok": true,
+     "abort_step": null,
+     "applications": 1
+    },
+    {
+     "sub": "eval.c3.page5",
+     "query_mode": "desc_only",
+     "query": "go to page 5 of the quote listings",
+     "candidates": [],
+     "replay_ok": false,
+     "abort_step": null,
+     "applications": 0
+    }
+   ],
+   "query_mode": "desc_only",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c3.login",
+     "condition": "inherit",
+     "query_mode": "desc_only",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c3.login",
+       "query_mode": "desc_only",
+       "query": "log in to the quotes site with the provided username and password",
+       "candidates": [
+        "generic.form.login",
+        "quotes.login"
+       ],
+       "replay_ok": true,
+       "abort_step": null,
+       "applications": 1
+      }
+     ]
+    },
+    {
+     "sig": "eval.c3.page5",
+     "condition": "inherit",
+     "query_mode": "desc_only",
+     "solved_by": [
+      "unsolved"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c3.page5",
+       "query_mode": "desc_only",
+       "query": "go to page 5 of the quote listings",
+       "candidates": [],
+       "replay_ok": false,
+       "abort_step": null,
+       "applications": 0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "phase": "B-eval-pass2",
+   "task": "C1_books_mystery_p2_named",
+   "agent": "agentB",
+   "condition": "graphiter desc_kw",
+   "status": "partial",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 33.7,
+   "loads": 48,
+   "actions": 68,
+   "reused": 8,
+   "novel": 60,
+   "failed": 0,
+   "recoveries": 1,
+   "decision_points": 6208,
+   "llm_calls": 0,
+   "subgoals_ok": 2,
+   "subgoals_total": 3,
+   "wall_ms": 65725,
+   "retrieval_lookups": 3,
+   "retrieval_ms": 0,
+   "candidates_tried": 0,
+   "solved_by": [
+    "memory",
+    "memory",
+    "unsolved"
+   ],
+   "memory_events": [
+    {
+     "sub": "eval.c1.cat",
+     "query_mode": "desc_kw",
+     "query": "open the mystery category of the book shop mystery",
+     "policy": "graphiter",
+     "edges_ranked": [
+      [
+       0.2,
+       1,
+       "click",
+       "a|||||mystery"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||womens-fiction"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||historical-fiction"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||travel"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||next"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||fiction"
+      ]
+     ],
+     "applied": [
+      [
+       "click",
+       "a|||||mystery"
+      ]
+     ],
+     "solved": true
+    },
+    {
+     "sub": "eval.c1.page2",
+     "query_mode": "desc_kw",
+     "query": "go to the second page of the book listing next",
+     "policy": "graphiter",
+     "edges_ranked": [
+      [
+       0.1667,
+       1,
+       "click",
+       "a|||||next"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||womens-fiction"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||historical-fiction"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||mystery"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||travel"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||fiction"
+      ]
+     ],
+     "applied": [
+      [
+       "click",
+       "a|||||next"
+      ]
+     ],
+     "solved": true
+    },
+    {
+     "sub": "eval.c1.named",
+     "query_mode": "desc_kw",
+     "query": "open the product page of the book In the Woods by Tana French woods",
+     "policy": "graphiter",
+     "edges_ranked": [
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||womens-fiction"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||historical-fiction"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||mystery"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||travel"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||next"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||fiction"
+      ]
+     ],
+     "applied": [
+      [
+       "click",
+       "a|||||womens-fiction"
+      ],
+      [
+       "click",
+       "a|||||womens-fiction"
+      ],
+      [
+       "click",
+       "a|||||historical-fiction"
+      ],
+      [
+       "click",
+       "a|||||historical-fiction"
+      ],
+      [
+       "click",
+       "a|||||"
+      ],
+      [
+       "click",
+       "a|||||"
+      ]
+     ],
+     "solved": false
+    }
+   ],
+   "query_mode": "desc_kw",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c1.cat",
+     "condition": "graphiter",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c1.cat",
+       "query_mode": "desc_kw",
+       "query": "open the mystery category of the book shop mystery",
+       "policy": "graphiter",
+       "edges_ranked": [
+        [
+         0.2,
+         1,
+         "click",
+         "a|||||mystery"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||womens-fiction"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||historical-fiction"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||travel"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||next"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||fiction"
+        ]
+       ],
+       "applied": [
+        [
+         "click",
+         "a|||||mystery"
+        ]
+       ],
+       "solved": true
+      }
+     ]
+    },
+    {
+     "sig": "eval.c1.page2",
+     "condition": "graphiter",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c1.page2",
+       "query_mode": "desc_kw",
+       "query": "go to the second page of the book listing next",
+       "policy": "graphiter",
+       "edges_ranked": [
+        [
+         0.1667,
+         1,
+         "click",
+         "a|||||next"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||womens-fiction"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||historical-fiction"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||mystery"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||travel"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||fiction"
+        ]
+       ],
+       "applied": [
+        [
+         "click",
+         "a|||||next"
+        ]
+       ],
+       "solved": true
+      }
+     ]
+    },
+    {
+     "sig": "eval.c1.named",
+     "condition": "graphiter",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "unsolved"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c1.named",
+       "query_mode": "desc_kw",
+       "query": "open the product page of the book In the Woods by Tana French woods",
+       "policy": "graphiter",
+       "edges_ranked": [
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||womens-fiction"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||historical-fiction"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||mystery"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||travel"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||next"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||fiction"
+        ]
+       ],
+       "applied": [
+        [
+         "click",
+         "a|||||womens-fiction"
+        ],
+        [
+         "click",
+         "a|||||womens-fiction"
+        ],
+        [
+         "click",
+         "a|||||historical-fiction"
+        ],
+        [
+         "click",
+         "a|||||historical-fiction"
+        ],
+        [
+         "click",
+         "a|||||"
+        ],
+        [
+         "click",
+         "a|||||"
+        ]
+       ],
+       "solved": false
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "phase": "B-eval-pass2",
+   "task": "C2_quotes_login_p3",
+   "agent": "agentB",
+   "condition": "graphiter desc_kw",
+   "status": "success",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 6.5,
+   "loads": 11,
+   "actions": 14,
+   "reused": 8,
+   "novel": 6,
+   "failed": 0,
+   "recoveries": 1,
+   "decision_points": 151,
+   "llm_calls": 0,
+   "subgoals_ok": 2,
+   "subgoals_total": 2,
+   "wall_ms": 12269,
+   "retrieval_lookups": 2,
+   "retrieval_ms": 0,
+   "candidates_tried": 0,
+   "solved_by": [
+    "exploration",
+    "memory"
+   ],
+   "memory_events": [
+    {
+     "sub": "eval.c2.login",
+     "query_mode": "desc_kw",
+     "query": "log in to the quotes site with the provided username and password login",
+     "policy": "graphiter",
+     "edges_ranked": [
+      [
+       0.1667,
+       1,
+       "fill",
+       "input|password||password|form-control|"
+      ],
+      [
+       0.1667,
+       1,
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       0.1667,
+       1,
+       "click",
+       "a|||||login"
+      ],
+      [
+       0.1667,
+       1,
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||next"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a||||tag|love"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "input|submit|||btn btn-primary|"
+      ]
+     ],
+     "applied": [
+      [
+       "click",
+       "a|||||login"
+      ],
+      [
+       "click",
+       "a|||||login"
+      ],
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ]
+     ],
+     "solved": false
+    },
+    {
+     "sub": "eval.c2.page3",
+     "query_mode": "desc_kw",
+     "query": "go to page 3 of the quote listings next",
+     "policy": "graphiter",
+     "edges_ranked": [
+      [
+       0.1667,
+       1,
+       "click",
+       "a|||||next"
+      ],
+      [
+       0.1667,
+       1,
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a||||tag|love"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "input|submit|||btn btn-primary|"
+      ],
+      [
+       0.0,
+       0,
+       "fill",
+       "input|password||password|form-control|"
+      ],
+      [
+       0.0,
+       0,
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||login"
+      ]
+     ],
+     "applied": [
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ]
+     ],
+     "solved": true
+    }
+   ],
+   "query_mode": "desc_kw",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c2.login",
+     "condition": "graphiter",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "exploration"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c2.login",
+       "query_mode": "desc_kw",
+       "query": "log in to the quotes site with the provided username and password login",
+       "policy": "graphiter",
+       "edges_ranked": [
+        [
+         0.1667,
+         1,
+         "fill",
+         "input|password||password|form-control|"
+        ],
+        [
+         0.1667,
+         1,
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         0.1667,
+         1,
+         "click",
+         "a|||||login"
+        ],
+        [
+         0.1667,
+         1,
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||next"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a||||tag|love"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "input|submit|||btn btn-primary|"
+        ]
+       ],
+       "applied": [
+        [
+         "click",
+         "a|||||login"
+        ],
+        [
+         "click",
+         "a|||||login"
+        ],
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ]
+       ],
+       "solved": false
+      }
+     ]
+    },
+    {
+     "sig": "eval.c2.page3",
+     "condition": "graphiter",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c2.page3",
+       "query_mode": "desc_kw",
+       "query": "go to page 3 of the quote listings next",
+       "policy": "graphiter",
+       "edges_ranked": [
+        [
+         0.1667,
+         1,
+         "click",
+         "a|||||next"
+        ],
+        [
+         0.1667,
+         1,
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a||||tag|love"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "input|submit|||btn btn-primary|"
+        ],
+        [
+         0.0,
+         0,
+         "fill",
+         "input|password||password|form-control|"
+        ],
+        [
+         0.0,
+         0,
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||login"
+        ]
+       ],
+       "applied": [
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ]
+       ],
+       "solved": true
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "phase": "B-eval-pass2",
+   "task": "C3_quotes_login_p5",
+   "agent": "agentB",
+   "condition": "graphiter desc_kw",
+   "status": "success",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 7.4,
+   "loads": 13,
+   "actions": 16,
+   "reused": 10,
+   "novel": 6,
+   "failed": 0,
+   "recoveries": 1,
+   "decision_points": 151,
+   "llm_calls": 0,
+   "subgoals_ok": 2,
+   "subgoals_total": 2,
+   "wall_ms": 14201,
+   "retrieval_lookups": 2,
+   "retrieval_ms": 0,
+   "candidates_tried": 0,
+   "solved_by": [
+    "exploration",
+    "memory"
+   ],
+   "memory_events": [
+    {
+     "sub": "eval.c3.login",
+     "query_mode": "desc_kw",
+     "query": "log in to the quotes site with the provided username and password login",
+     "policy": "graphiter",
+     "edges_ranked": [
+      [
+       0.1667,
+       1,
+       "fill",
+       "input|password||password|form-control|"
+      ],
+      [
+       0.1667,
+       1,
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       0.1667,
+       1,
+       "click",
+       "a|||||login"
+      ],
+      [
+       0.1667,
+       1,
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||next"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a||||tag|love"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "input|submit|||btn btn-primary|"
+      ]
+     ],
+     "applied": [
+      [
+       "click",
+       "a|||||login"
+      ],
+      [
+       "click",
+       "a|||||login"
+      ],
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ]
+     ],
+     "solved": false
+    },
+    {
+     "sub": "eval.c3.page5",
+     "query_mode": "desc_kw",
+     "query": "go to page 5 of the quote listings next",
+     "policy": "graphiter",
+     "edges_ranked": [
+      [
+       0.1667,
+       1,
+       "click",
+       "a|||||next"
+      ],
+      [
+       0.1667,
+       1,
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a||||tag|love"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "input|submit|||btn btn-primary|"
+      ],
+      [
+       0.0,
+       0,
+       "fill",
+       "input|password||password|form-control|"
+      ],
+      [
+       0.0,
+       0,
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||login"
+      ]
+     ],
+     "applied": [
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ]
+     ],
+     "solved": true
+    }
+   ],
+   "query_mode": "desc_kw",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c3.login",
+     "condition": "graphiter",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "exploration"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c3.login",
+       "query_mode": "desc_kw",
+       "query": "log in to the quotes site with the provided username and password login",
+       "policy": "graphiter",
+       "edges_ranked": [
+        [
+         0.1667,
+         1,
+         "fill",
+         "input|password||password|form-control|"
+        ],
+        [
+         0.1667,
+         1,
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         0.1667,
+         1,
+         "click",
+         "a|||||login"
+        ],
+        [
+         0.1667,
+         1,
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||next"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a||||tag|love"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "input|submit|||btn btn-primary|"
+        ]
+       ],
+       "applied": [
+        [
+         "click",
+         "a|||||login"
+        ],
+        [
+         "click",
+         "a|||||login"
+        ],
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ]
+       ],
+       "solved": false
+      }
+     ]
+    },
+    {
+     "sig": "eval.c3.page5",
+     "condition": "graphiter",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c3.page5",
+       "query_mode": "desc_kw",
+       "query": "go to page 5 of the quote listings next",
+       "policy": "graphiter",
+       "edges_ranked": [
+        [
+         0.1667,
+         1,
+         "click",
+         "a|||||next"
+        ],
+        [
+         0.1667,
+         1,
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a||||tag|love"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "input|submit|||btn btn-primary|"
+        ],
+        [
+         0.0,
+         0,
+         "fill",
+         "input|password||password|form-control|"
+        ],
+        [
+         0.0,
+         0,
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||login"
+        ]
+       ],
+       "applied": [
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ]
+       ],
+       "solved": true
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "phase": "B-eval-pass2",
+   "task": "C1_books_mystery_p2_named",
+   "agent": "agentB",
+   "condition": "graphiter desc_only",
+   "status": "partial",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 61.8,
+   "loads": 92,
+   "actions": 133,
+   "reused": 13,
+   "novel": 120,
+   "failed": 0,
+   "recoveries": 2,
+   "decision_points": 12416,
+   "llm_calls": 0,
+   "subgoals_ok": 1,
+   "subgoals_total": 3,
+   "wall_ms": 122730,
+   "retrieval_lookups": 3,
+   "retrieval_ms": 0,
+   "candidates_tried": 0,
+   "solved_by": [
+    "memory",
+    "unsolved",
+    "unsolved"
+   ],
+   "memory_events": [
+    {
+     "sub": "eval.c1.cat",
+     "query_mode": "desc_only",
+     "query": "open the mystery category of the book shop",
+     "policy": "graphiter",
+     "edges_ranked": [
+      [
+       0.2,
+       1,
+       "click",
+       "a|||||mystery"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||womens-fiction"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||historical-fiction"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||travel"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||next"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||fiction"
+      ]
+     ],
+     "applied": [
+      [
+       "click",
+       "a|||||mystery"
+      ]
+     ],
+     "solved": true
+    },
+    {
+     "sub": "eval.c1.page2",
+     "query_mode": "desc_only",
+     "query": "go to the second page of the book listing",
+     "policy": "graphiter",
+     "edges_ranked": [
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||womens-fiction"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||historical-fiction"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||mystery"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||travel"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||next"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||fiction"
+      ]
+     ],
+     "applied": [
+      [
+       "click",
+       "a|||||womens-fiction"
+      ],
+      [
+       "click",
+       "a|||||womens-fiction"
+      ],
+      [
+       "click",
+       "a|||||historical-fiction"
+      ],
+      [
+       "click",
+       "a|||||historical-fiction"
+      ],
+      [
+       "click",
+       "a|||||"
+      ],
+      [
+       "click",
+       "a|||||"
+      ]
+     ],
+     "solved": false
+    },
+    {
+     "sub": "eval.c1.named",
+     "query_mode": "desc_only",
+     "query": "open the product page of the book In the Woods by Tana French",
+     "policy": "graphiter",
+     "edges_ranked": [
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||womens-fiction"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||historical-fiction"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||mystery"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||travel"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||next"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||fiction"
+      ]
+     ],
+     "applied": [
+      [
+       "click",
+       "a|||||womens-fiction"
+      ],
+      [
+       "click",
+       "a|||||womens-fiction"
+      ],
+      [
+       "click",
+       "a|||||historical-fiction"
+      ],
+      [
+       "click",
+       "a|||||historical-fiction"
+      ],
+      [
+       "click",
+       "a|||||"
+      ],
+      [
+       "click",
+       "a|||||"
+      ]
+     ],
+     "solved": false
+    }
+   ],
+   "query_mode": "desc_only",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c1.cat",
+     "condition": "graphiter",
+     "query_mode": "desc_only",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c1.cat",
+       "query_mode": "desc_only",
+       "query": "open the mystery category of the book shop",
+       "policy": "graphiter",
+       "edges_ranked": [
+        [
+         0.2,
+         1,
+         "click",
+         "a|||||mystery"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||womens-fiction"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||historical-fiction"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||travel"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||next"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||fiction"
+        ]
+       ],
+       "applied": [
+        [
+         "click",
+         "a|||||mystery"
+        ]
+       ],
+       "solved": true
+      }
+     ]
+    },
+    {
+     "sig": "eval.c1.page2",
+     "condition": "graphiter",
+     "query_mode": "desc_only",
+     "solved_by": [
+      "unsolved"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c1.page2",
+       "query_mode": "desc_only",
+       "query": "go to the second page of the book listing",
+       "policy": "graphiter",
+       "edges_ranked": [
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||womens-fiction"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||historical-fiction"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||mystery"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||travel"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||next"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||fiction"
+        ]
+       ],
+       "applied": [
+        [
+         "click",
+         "a|||||womens-fiction"
+        ],
+        [
+         "click",
+         "a|||||womens-fiction"
+        ],
+        [
+         "click",
+         "a|||||historical-fiction"
+        ],
+        [
+         "click",
+         "a|||||historical-fiction"
+        ],
+        [
+         "click",
+         "a|||||"
+        ],
+        [
+         "click",
+         "a|||||"
+        ]
+       ],
+       "solved": false
+      }
+     ]
+    },
+    {
+     "sig": "eval.c1.named",
+     "condition": "graphiter",
+     "query_mode": "desc_only",
+     "solved_by": [
+      "unsolved"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c1.named",
+       "query_mode": "desc_only",
+       "query": "open the product page of the book In the Woods by Tana French",
+       "policy": "graphiter",
+       "edges_ranked": [
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||womens-fiction"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||historical-fiction"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||mystery"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||travel"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||next"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||fiction"
+        ]
+       ],
+       "applied": [
+        [
+         "click",
+         "a|||||womens-fiction"
+        ],
+        [
+         "click",
+         "a|||||womens-fiction"
+        ],
+        [
+         "click",
+         "a|||||historical-fiction"
+        ],
+        [
+         "click",
+         "a|||||historical-fiction"
+        ],
+        [
+         "click",
+         "a|||||"
+        ],
+        [
+         "click",
+         "a|||||"
+        ]
+       ],
+       "solved": false
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "phase": "B-eval-pass2",
+   "task": "C2_quotes_login_p3",
+   "agent": "agentB",
+   "condition": "graphiter desc_only",
+   "status": "success",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 6.9,
+   "loads": 11,
+   "actions": 15,
+   "reused": 9,
+   "novel": 6,
+   "failed": 0,
+   "recoveries": 1,
+   "decision_points": 150,
+   "llm_calls": 0,
+   "subgoals_ok": 2,
+   "subgoals_total": 2,
+   "wall_ms": 13202,
+   "retrieval_lookups": 2,
+   "retrieval_ms": 0,
+   "candidates_tried": 0,
+   "solved_by": [
+    "exploration",
+    "memory"
+   ],
+   "memory_events": [
+    {
+     "sub": "eval.c2.login",
+     "query_mode": "desc_only",
+     "query": "log in to the quotes site with the provided username and password",
+     "policy": "graphiter",
+     "edges_ranked": [
+      [
+       0.1667,
+       1,
+       "fill",
+       "input|password||password|form-control|"
+      ],
+      [
+       0.1667,
+       1,
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       0.1667,
+       1,
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||next"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a||||tag|love"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "input|submit|||btn btn-primary|"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||login"
+      ]
+     ],
+     "applied": [
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ]
+     ],
+     "solved": false
+    },
+    {
+     "sub": "eval.c2.page3",
+     "query_mode": "desc_only",
+     "query": "go to page 3 of the quote listings",
+     "policy": "graphiter",
+     "edges_ranked": [
+      [
+       0.2,
+       1,
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||next"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a||||tag|love"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "input|submit|||btn btn-primary|"
+      ],
+      [
+       0.0,
+       0,
+       "fill",
+       "input|password||password|form-control|"
+      ],
+      [
+       0.0,
+       0,
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||login"
+      ]
+     ],
+     "applied": [
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ]
+     ],
+     "solved": true
+    }
+   ],
+   "query_mode": "desc_only",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c2.login",
+     "condition": "graphiter",
+     "query_mode": "desc_only",
+     "solved_by": [
+      "exploration"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c2.login",
+       "query_mode": "desc_only",
+       "query": "log in to the quotes site with the provided username and password",
+       "policy": "graphiter",
+       "edges_ranked": [
+        [
+         0.1667,
+         1,
+         "fill",
+         "input|password||password|form-control|"
+        ],
+        [
+         0.1667,
+         1,
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         0.1667,
+         1,
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||next"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a||||tag|love"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "input|submit|||btn btn-primary|"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||login"
+        ]
+       ],
+       "applied": [
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ]
+       ],
+       "solved": false
+      }
+     ]
+    },
+    {
+     "sig": "eval.c2.page3",
+     "condition": "graphiter",
+     "query_mode": "desc_only",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c2.page3",
+       "query_mode": "desc_only",
+       "query": "go to page 3 of the quote listings",
+       "policy": "graphiter",
+       "edges_ranked": [
+        [
+         0.2,
+         1,
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||next"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a||||tag|love"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "input|submit|||btn btn-primary|"
+        ],
+        [
+         0.0,
+         0,
+         "fill",
+         "input|password||password|form-control|"
+        ],
+        [
+         0.0,
+         0,
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||login"
+        ]
+       ],
+       "applied": [
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ]
+       ],
+       "solved": true
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "phase": "B-eval-pass2",
+   "task": "C3_quotes_login_p5",
+   "agent": "agentB",
+   "condition": "graphiter desc_only",
+   "status": "success",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 8.0,
+   "loads": 13,
+   "actions": 17,
+   "reused": 11,
+   "novel": 6,
+   "failed": 0,
+   "recoveries": 1,
+   "decision_points": 150,
+   "llm_calls": 0,
+   "subgoals_ok": 2,
+   "subgoals_total": 2,
+   "wall_ms": 15240,
+   "retrieval_lookups": 2,
+   "retrieval_ms": 0,
+   "candidates_tried": 0,
+   "solved_by": [
+    "exploration",
+    "memory"
+   ],
+   "memory_events": [
+    {
+     "sub": "eval.c3.login",
+     "query_mode": "desc_only",
+     "query": "log in to the quotes site with the provided username and password",
+     "policy": "graphiter",
+     "edges_ranked": [
+      [
+       0.1667,
+       1,
+       "fill",
+       "input|password||password|form-control|"
+      ],
+      [
+       0.1667,
+       1,
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       0.1667,
+       1,
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||next"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a||||tag|love"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "input|submit|||btn btn-primary|"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||login"
+      ]
+     ],
+     "applied": [
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ]
+     ],
+     "solved": false
+    },
+    {
+     "sub": "eval.c3.page5",
+     "query_mode": "desc_only",
+     "query": "go to page 5 of the quote listings",
+     "policy": "graphiter",
+     "edges_ranked": [
+      [
+       0.2,
+       1,
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||next"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a||||tag|love"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "input|submit|||btn btn-primary|"
+      ],
+      [
+       0.0,
+       0,
+       "fill",
+       "input|password||password|form-control|"
+      ],
+      [
+       0.0,
+       0,
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||login"
+      ]
+     ],
+     "applied": [
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ]
+     ],
+     "solved": true
+    }
+   ],
+   "query_mode": "desc_only",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c3.login",
+     "condition": "graphiter",
+     "query_mode": "desc_only",
+     "solved_by": [
+      "exploration"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c3.login",
+       "query_mode": "desc_only",
+       "query": "log in to the quotes site with the provided username and password",
+       "policy": "graphiter",
+       "edges_ranked": [
+        [
+         0.1667,
+         1,
+         "fill",
+         "input|password||password|form-control|"
+        ],
+        [
+         0.1667,
+         1,
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         0.1667,
+         1,
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||next"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a||||tag|love"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "input|submit|||btn btn-primary|"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||login"
+        ]
+       ],
+       "applied": [
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ]
+       ],
+       "solved": false
+      }
+     ]
+    },
+    {
+     "sig": "eval.c3.page5",
+     "condition": "graphiter",
+     "query_mode": "desc_only",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c3.page5",
+       "query_mode": "desc_only",
+       "query": "go to page 5 of the quote listings",
+       "policy": "graphiter",
+       "edges_ranked": [
+        [
+         0.2,
+         1,
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||next"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a||||tag|love"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "input|submit|||btn btn-primary|"
+        ],
+        [
+         0.0,
+         0,
+         "fill",
+         "input|password||password|form-control|"
+        ],
+        [
+         0.0,
+         0,
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||login"
+        ]
+       ],
+       "applied": [
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ]
+       ],
+       "solved": true
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "phase": "B-eval-pass2",
+   "task": "C1_books_mystery_p2_named",
+   "agent": "agentB",
+   "condition": "fragntr desc_kw",
+   "status": "partial",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 34.8,
+   "loads": 52,
+   "actions": 73,
+   "reused": 1,
+   "novel": 72,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 7582,
+   "llm_calls": 0,
+   "subgoals_ok": 2,
+   "subgoals_total": 3,
+   "wall_ms": 68734,
+   "retrieval_lookups": 3,
+   "retrieval_ms": 0,
+   "candidates_tried": 1,
+   "solved_by": [
+    "exploration",
+    "memory",
+    "unsolved"
+   ],
+   "memory_events": [
+    {
+     "sub": "eval.c1.cat",
+     "query_mode": "desc_kw",
+     "query": "open the mystery category of the book shop mystery",
+     "candidates": [],
+     "replay_ok": false,
+     "abort_step": null,
+     "applications": 0
+    },
+    {
+     "sub": "eval.c1.page2",
+     "query_mode": "desc_kw",
+     "query": "go to the second page of the book listing next",
+     "candidates": [
+      "generic.paginate.next",
+      "books.paginate.next"
+     ],
+     "replay_ok": true,
+     "abort_step": null,
+     "applications": 1
+    },
+    {
+     "sub": "eval.c1.named",
+     "query_mode": "desc_kw",
+     "query": "open the product page of the book In the Woods by Tana French woods",
+     "candidates": [],
+     "replay_ok": false,
+     "abort_step": null,
+     "applications": 0
+    }
+   ],
+   "query_mode": "desc_kw",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c1.cat",
+     "condition": "fragntr",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "exploration"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c1.cat",
+       "query_mode": "desc_kw",
+       "query": "open the mystery category of the book shop mystery",
+       "candidates": [],
+       "replay_ok": false,
+       "abort_step": null,
+       "applications": 0
+      }
+     ]
+    },
+    {
+     "sig": "eval.c1.page2",
+     "condition": "fragntr",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c1.page2",
+       "query_mode": "desc_kw",
+       "query": "go to the second page of the book listing next",
+       "candidates": [
+        "generic.paginate.next",
+        "books.paginate.next"
+       ],
+       "replay_ok": true,
+       "abort_step": null,
+       "applications": 1
+      }
+     ]
+    },
+    {
+     "sig": "eval.c1.named",
+     "condition": "fragntr",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "unsolved"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c1.named",
+       "query_mode": "desc_kw",
+       "query": "open the product page of the book In the Woods by Tana French woods",
+       "candidates": [],
+       "replay_ok": false,
+       "abort_step": null,
+       "applications": 0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "phase": "B-eval-pass2",
+   "task": "C2_quotes_login_p3",
+   "agent": "agentB",
+   "condition": "fragntr desc_kw",
+   "status": "success",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 2.8,
+   "loads": 5,
+   "actions": 6,
+   "reused": 6,
+   "novel": 0,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 0,
+   "llm_calls": 0,
+   "subgoals_ok": 2,
+   "subgoals_total": 2,
+   "wall_ms": 4869,
+   "retrieval_lookups": 2,
+   "retrieval_ms": 0,
+   "candidates_tried": 3,
+   "solved_by": [
+    "memory",
+    "memory"
+   ],
+   "memory_events": [
+    {
+     "sub": "eval.c2.login",
+     "query_mode": "desc_kw",
+     "query": "log in to the quotes site with the provided username and password login",
+     "candidates": [
+      "generic.form.login",
+      "quotes.login"
+     ],
+     "replay_ok": true,
+     "abort_step": null,
+     "applications": 1
+    },
+    {
+     "sub": "eval.c2.page3",
+     "query_mode": "desc_kw",
+     "query": "go to page 3 of the quote listings next",
+     "candidates": [
+      "generic.paginate.next",
+      "quotes.page.2"
+     ],
+     "replay_ok": true,
+     "abort_step": null,
+     "applications": 2
+    }
+   ],
+   "query_mode": "desc_kw",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c2.login",
+     "condition": "fragntr",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c2.login",
+       "query_mode": "desc_kw",
+       "query": "log in to the quotes site with the provided username and password login",
+       "candidates": [
+        "generic.form.login",
+        "quotes.login"
+       ],
+       "replay_ok": true,
+       "abort_step": null,
+       "applications": 1
+      }
+     ]
+    },
+    {
+     "sig": "eval.c2.page3",
+     "condition": "fragntr",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c2.page3",
+       "query_mode": "desc_kw",
+       "query": "go to page 3 of the quote listings next",
+       "candidates": [
+        "generic.paginate.next",
+        "quotes.page.2"
+       ],
+       "replay_ok": true,
+       "abort_step": null,
+       "applications": 2
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "phase": "B-eval-pass2",
+   "task": "C3_quotes_login_p5",
+   "agent": "agentB",
+   "condition": "fragntr desc_kw",
+   "status": "partial",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 10.3,
+   "loads": 11,
+   "actions": 23,
+   "reused": 6,
+   "novel": 17,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 405,
+   "llm_calls": 0,
+   "subgoals_ok": 1,
+   "subgoals_total": 2,
+   "wall_ms": 19992,
+   "retrieval_lookups": 2,
+   "retrieval_ms": 0,
+   "candidates_tried": 3,
+   "solved_by": [
+    "memory",
+    "unsolved"
+   ],
+   "memory_events": [
+    {
+     "sub": "eval.c3.login",
+     "query_mode": "desc_kw",
+     "query": "log in to the quotes site with the provided username and password login",
+     "candidates": [
+      "generic.form.login",
+      "quotes.login"
+     ],
+     "replay_ok": true,
+     "abort_step": null,
+     "applications": 1
+    },
+    {
+     "sub": "eval.c3.page5",
+     "query_mode": "desc_kw",
+     "query": "go to page 5 of the quote listings next",
+     "candidates": [
+      "generic.paginate.next",
+      "quotes.page.2"
+     ],
+     "replay_ok": false,
+     "abort_step": null,
+     "applications": 2
+    }
+   ],
+   "query_mode": "desc_kw",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c3.login",
+     "condition": "fragntr",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c3.login",
+       "query_mode": "desc_kw",
+       "query": "log in to the quotes site with the provided username and password login",
+       "candidates": [
+        "generic.form.login",
+        "quotes.login"
+       ],
+       "replay_ok": true,
+       "abort_step": null,
+       "applications": 1
+      }
+     ]
+    },
+    {
+     "sig": "eval.c3.page5",
+     "condition": "fragntr",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "unsolved"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c3.page5",
+       "query_mode": "desc_kw",
+       "query": "go to page 5 of the quote listings next",
+       "candidates": [
+        "generic.paginate.next",
+        "quotes.page.2"
+       ],
+       "replay_ok": false,
+       "abort_step": null,
+       "applications": 2
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "phase": "B-eval-pass2",
+   "task": "C1_books_mystery_p2_named",
+   "agent": "agentB",
+   "condition": "fragntr desc_only",
+   "status": "partial",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 35.1,
+   "loads": 52,
+   "actions": 73,
+   "reused": 1,
+   "novel": 72,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 7582,
+   "llm_calls": 0,
+   "subgoals_ok": 2,
+   "subgoals_total": 3,
+   "wall_ms": 69262,
+   "retrieval_lookups": 3,
+   "retrieval_ms": 0,
+   "candidates_tried": 1,
+   "solved_by": [
+    "exploration",
+    "memory",
+    "unsolved"
+   ],
+   "memory_events": [
+    {
+     "sub": "eval.c1.cat",
+     "query_mode": "desc_only",
+     "query": "open the mystery category of the book shop",
+     "candidates": [],
+     "replay_ok": false,
+     "abort_step": null,
+     "applications": 0
+    },
+    {
+     "sub": "eval.c1.page2",
+     "query_mode": "desc_only",
+     "query": "go to the second page of the book listing",
+     "candidates": [
+      "generic.paginate.next",
+      "books.paginate.next"
+     ],
+     "replay_ok": true,
+     "abort_step": null,
+     "applications": 1
+    },
+    {
+     "sub": "eval.c1.named",
+     "query_mode": "desc_only",
+     "query": "open the product page of the book In the Woods by Tana French",
+     "candidates": [],
+     "replay_ok": false,
+     "abort_step": null,
+     "applications": 0
+    }
+   ],
+   "query_mode": "desc_only",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c1.cat",
+     "condition": "fragntr",
+     "query_mode": "desc_only",
+     "solved_by": [
+      "exploration"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c1.cat",
+       "query_mode": "desc_only",
+       "query": "open the mystery category of the book shop",
+       "candidates": [],
+       "replay_ok": false,
+       "abort_step": null,
+       "applications": 0
+      }
+     ]
+    },
+    {
+     "sig": "eval.c1.page2",
+     "condition": "fragntr",
+     "query_mode": "desc_only",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c1.page2",
+       "query_mode": "desc_only",
+       "query": "go to the second page of the book listing",
+       "candidates": [
+        "generic.paginate.next",
+        "books.paginate.next"
+       ],
+       "replay_ok": true,
+       "abort_step": null,
+       "applications": 1
+      }
+     ]
+    },
+    {
+     "sig": "eval.c1.named",
+     "condition": "fragntr",
+     "query_mode": "desc_only",
+     "solved_by": [
+      "unsolved"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c1.named",
+       "query_mode": "desc_only",
+       "query": "open the product page of the book In the Woods by Tana French",
+       "candidates": [],
+       "replay_ok": false,
+       "abort_step": null,
+       "applications": 0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "phase": "B-eval-pass2",
+   "task": "C2_quotes_login_p3",
+   "agent": "agentB",
+   "condition": "fragntr desc_only",
+   "status": "partial",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 8.9,
+   "loads": 8,
+   "actions": 20,
+   "reused": 4,
+   "novel": 16,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 367,
+   "llm_calls": 0,
+   "subgoals_ok": 1,
+   "subgoals_total": 2,
+   "wall_ms": 17104,
+   "retrieval_lookups": 2,
+   "retrieval_ms": 0,
+   "candidates_tried": 1,
+   "solved_by": [
+    "memory",
+    "unsolved"
+   ],
+   "memory_events": [
+    {
+     "sub": "eval.c2.login",
+     "query_mode": "desc_only",
+     "query": "log in to the quotes site with the provided username and password",
+     "candidates": [
+      "generic.form.login",
+      "quotes.login"
+     ],
+     "replay_ok": true,
+     "abort_step": null,
+     "applications": 1
+    },
+    {
+     "sub": "eval.c2.page3",
+     "query_mode": "desc_only",
+     "query": "go to page 3 of the quote listings",
+     "candidates": [],
+     "replay_ok": false,
+     "abort_step": null,
+     "applications": 0
+    }
+   ],
+   "query_mode": "desc_only",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c2.login",
+     "condition": "fragntr",
+     "query_mode": "desc_only",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c2.login",
+       "query_mode": "desc_only",
+       "query": "log in to the quotes site with the provided username and password",
+       "candidates": [
+        "generic.form.login",
+        "quotes.login"
+       ],
+       "replay_ok": true,
+       "abort_step": null,
+       "applications": 1
+      }
+     ]
+    },
+    {
+     "sig": "eval.c2.page3",
+     "condition": "fragntr",
+     "query_mode": "desc_only",
+     "solved_by": [
+      "unsolved"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c2.page3",
+       "query_mode": "desc_only",
+       "query": "go to page 3 of the quote listings",
+       "candidates": [],
+       "replay_ok": false,
+       "abort_step": null,
+       "applications": 0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "phase": "B-eval-pass2",
+   "task": "C3_quotes_login_p5",
+   "agent": "agentB",
+   "condition": "fragntr desc_only",
+   "status": "partial",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 8.9,
+   "loads": 8,
+   "actions": 20,
+   "reused": 4,
+   "novel": 16,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 367,
+   "llm_calls": 0,
+   "subgoals_ok": 1,
+   "subgoals_total": 2,
+   "wall_ms": 17216,
+   "retrieval_lookups": 2,
+   "retrieval_ms": 0,
+   "candidates_tried": 1,
+   "solved_by": [
+    "memory",
+    "unsolved"
+   ],
+   "memory_events": [
+    {
+     "sub": "eval.c3.login",
+     "query_mode": "desc_only",
+     "query": "log in to the quotes site with the provided username and password",
+     "candidates": [
+      "generic.form.login",
+      "quotes.login"
+     ],
+     "replay_ok": true,
+     "abort_step": null,
+     "applications": 1
+    },
+    {
+     "sub": "eval.c3.page5",
+     "query_mode": "desc_only",
+     "query": "go to page 5 of the quote listings",
+     "candidates": [],
+     "replay_ok": false,
+     "abort_step": null,
+     "applications": 0
+    }
+   ],
+   "query_mode": "desc_only",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c3.login",
+     "condition": "fragntr",
+     "query_mode": "desc_only",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c3.login",
+       "query_mode": "desc_only",
+       "query": "log in to the quotes site with the provided username and password",
+       "candidates": [
+        "generic.form.login",
+        "quotes.login"
+       ],
+       "replay_ok": true,
+       "abort_step": null,
+       "applications": 1
+      }
+     ]
+    },
+    {
+     "sig": "eval.c3.page5",
+     "condition": "fragntr",
+     "query_mode": "desc_only",
+     "solved_by": [
+      "unsolved"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c3.page5",
+       "query_mode": "desc_only",
+       "query": "go to page 5 of the quote listings",
+       "candidates": [],
+       "replay_ok": false,
+       "abort_step": null,
+       "applications": 0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "phase": "B-eval-pass2",
+   "task": "C1_books_mystery_p2_named",
+   "agent": "agentB",
+   "condition": "graphbfs",
+   "status": "partial",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 56.8,
+   "loads": 84,
+   "actions": 121,
+   "reused": 1,
+   "novel": 120,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 12638,
+   "llm_calls": 0,
+   "subgoals_ok": 1,
+   "subgoals_total": 3,
+   "wall_ms": 112690,
+   "retrieval_lookups": 3,
+   "retrieval_ms": 1,
+   "candidates_tried": 0,
+   "solved_by": [
+    "memory",
+    "unsolved",
+    "unsolved"
+   ],
+   "memory_events": [],
+   "query_mode": "desc_kw",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c1.cat",
+     "condition": "graphbfs",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": []
+    },
+    {
+     "sig": "eval.c1.page2",
+     "condition": "graphbfs",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "unsolved"
+     ],
+     "new_memory_events": []
+    },
+    {
+     "sig": "eval.c1.named",
+     "condition": "graphbfs",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "unsolved"
+     ],
+     "new_memory_events": []
+    }
+   ]
+  },
+  {
+   "phase": "B-eval-pass2",
+   "task": "C2_quotes_login_p3",
+   "agent": "agentB",
+   "condition": "graphbfs",
+   "status": "partial",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 9.5,
+   "loads": 8,
+   "actions": 21,
+   "reused": 2,
+   "novel": 19,
+   "failed": 0,
+   "recoveries": 1,
+   "decision_points": 367,
+   "llm_calls": 0,
+   "subgoals_ok": 1,
+   "subgoals_total": 2,
+   "wall_ms": 18211,
+   "retrieval_lookups": 2,
+   "retrieval_ms": 0,
+   "candidates_tried": 0,
+   "solved_by": [
+    "exploration",
+    "unsolved"
+   ],
+   "memory_events": [],
+   "query_mode": "desc_kw",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c2.login",
+     "condition": "graphbfs",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "exploration"
+     ],
+     "new_memory_events": []
+    },
+    {
+     "sig": "eval.c2.page3",
+     "condition": "graphbfs",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "unsolved"
+     ],
+     "new_memory_events": []
+    }
+   ]
+  },
+  {
+   "phase": "B-eval-pass2",
+   "task": "C3_quotes_login_p5",
+   "agent": "agentB",
+   "condition": "graphbfs",
+   "status": "partial",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 9.3,
+   "loads": 8,
+   "actions": 21,
+   "reused": 2,
+   "novel": 19,
+   "failed": 0,
+   "recoveries": 1,
+   "decision_points": 367,
+   "llm_calls": 0,
+   "subgoals_ok": 1,
+   "subgoals_total": 2,
+   "wall_ms": 18039,
+   "retrieval_lookups": 2,
+   "retrieval_ms": 0,
+   "candidates_tried": 0,
+   "solved_by": [
+    "exploration",
+    "unsolved"
+   ],
+   "memory_events": [],
+   "query_mode": "desc_kw",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c3.login",
+     "condition": "graphbfs",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "exploration"
+     ],
+     "new_memory_events": []
+    },
+    {
+     "sig": "eval.c3.page5",
+     "condition": "graphbfs",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "unsolved"
+     ],
+     "new_memory_events": []
+    }
+   ]
+  },
+  {
+   "phase": "B-eval-pass2",
+   "task": "C1_books_mystery_p2_named",
+   "agent": "agentB",
+   "condition": "traj",
+   "status": "partial",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 43.1,
+   "loads": 69,
+   "actions": 90,
+   "reused": 18,
+   "novel": 72,
+   "failed": 0,
+   "recoveries": 2,
+   "decision_points": 7609,
+   "llm_calls": 0,
+   "subgoals_ok": 2,
+   "subgoals_total": 3,
+   "wall_ms": 85106,
+   "retrieval_lookups": 3,
+   "retrieval_ms": 24,
+   "candidates_tried": 0,
+   "solved_by": [
+    "exploration",
+    "memory",
+    "unsolved"
+   ],
+   "memory_events": [],
+   "query_mode": "desc_kw",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c1.cat",
+     "condition": "traj",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "exploration"
+     ],
+     "new_memory_events": []
+    },
+    {
+     "sig": "eval.c1.page2",
+     "condition": "traj",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": []
+    },
+    {
+     "sig": "eval.c1.named",
+     "condition": "traj",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "unsolved"
+     ],
+     "new_memory_events": []
+    }
+   ]
+  },
+  {
+   "phase": "B-eval-pass2",
+   "task": "C2_quotes_login_p3",
+   "agent": "agentB",
+   "condition": "traj",
+   "status": "partial",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 10.8,
+   "loads": 10,
+   "actions": 24,
+   "reused": 2,
+   "novel": 22,
+   "failed": 0,
+   "recoveries": 2,
+   "decision_points": 535,
+   "llm_calls": 0,
+   "subgoals_ok": 1,
+   "subgoals_total": 2,
+   "wall_ms": 20926,
+   "retrieval_lookups": 2,
+   "retrieval_ms": 16,
+   "candidates_tried": 0,
+   "solved_by": [
+    "exploration",
+    "unsolved"
+   ],
+   "memory_events": [],
+   "query_mode": "desc_kw",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c2.login",
+     "condition": "traj",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "exploration"
+     ],
+     "new_memory_events": []
+    },
+    {
+     "sig": "eval.c2.page3",
+     "condition": "traj",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "unsolved"
+     ],
+     "new_memory_events": []
+    }
+   ]
+  },
+  {
+   "phase": "B-eval-pass2",
+   "task": "C3_quotes_login_p5",
+   "agent": "agentB",
+   "condition": "traj",
+   "status": "partial",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 10.8,
+   "loads": 10,
+   "actions": 24,
+   "reused": 2,
+   "novel": 22,
+   "failed": 0,
+   "recoveries": 2,
+   "decision_points": 535,
+   "llm_calls": 0,
+   "subgoals_ok": 1,
+   "subgoals_total": 2,
+   "wall_ms": 20896,
+   "retrieval_lookups": 2,
+   "retrieval_ms": 16,
+   "candidates_tried": 0,
+   "solved_by": [
+    "exploration",
+    "unsolved"
+   ],
+   "memory_events": [],
+   "query_mode": "desc_kw",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c3.login",
+     "condition": "traj",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "exploration"
+     ],
+     "new_memory_events": []
+    },
+    {
+     "sig": "eval.c3.page5",
+     "condition": "traj",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "unsolved"
+     ],
+     "new_memory_events": []
+    }
+   ]
+  },
+  {
+   "phase": "B-eval-pass2",
+   "task": "C1_books_mystery_p2_named",
+   "agent": "agentB",
+   "condition": "cold",
+   "status": "partial",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 61.5,
+   "loads": 92,
+   "actions": 132,
+   "reused": 0,
+   "novel": 132,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 13925,
+   "llm_calls": 0,
+   "subgoals_ok": 1,
+   "subgoals_total": 3,
+   "wall_ms": 122004,
+   "retrieval_lookups": 0,
+   "retrieval_ms": 0,
+   "candidates_tried": 0,
+   "solved_by": [
+    "exploration",
+    "unsolved",
+    "unsolved"
+   ],
+   "memory_events": [],
+   "query_mode": "desc_kw",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c1.cat",
+     "condition": "cold",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "exploration"
+     ],
+     "new_memory_events": []
+    },
+    {
+     "sig": "eval.c1.page2",
+     "condition": "cold",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "unsolved"
+     ],
+     "new_memory_events": []
+    },
+    {
+     "sig": "eval.c1.named",
+     "condition": "cold",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "unsolved"
+     ],
+     "new_memory_events": []
+    }
+   ]
+  },
+  {
+   "phase": "B-eval-pass2",
+   "task": "C2_quotes_login_p3",
+   "agent": "agentB",
+   "condition": "cold",
+   "status": "partial",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 9.4,
+   "loads": 8,
+   "actions": 21,
+   "reused": 0,
+   "novel": 21,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 473,
+   "llm_calls": 0,
+   "subgoals_ok": 1,
+   "subgoals_total": 2,
+   "wall_ms": 18036,
+   "retrieval_lookups": 0,
+   "retrieval_ms": 0,
+   "candidates_tried": 0,
+   "solved_by": [
+    "exploration",
+    "unsolved"
+   ],
+   "memory_events": [],
+   "query_mode": "desc_kw",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c2.login",
+     "condition": "cold",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "exploration"
+     ],
+     "new_memory_events": []
+    },
+    {
+     "sig": "eval.c2.page3",
+     "condition": "cold",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "unsolved"
+     ],
+     "new_memory_events": []
+    }
+   ]
+  },
+  {
+   "phase": "B-eval-pass2",
+   "task": "C3_quotes_login_p5",
+   "agent": "agentB",
+   "condition": "cold",
+   "status": "partial",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 9.3,
+   "loads": 8,
+   "actions": 21,
+   "reused": 0,
+   "novel": 21,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 473,
+   "llm_calls": 0,
+   "subgoals_ok": 1,
+   "subgoals_total": 2,
+   "wall_ms": 17995,
+   "retrieval_lookups": 0,
+   "retrieval_ms": 0,
+   "candidates_tried": 0,
+   "solved_by": [
+    "exploration",
+    "unsolved"
+   ],
+   "memory_events": [],
+   "query_mode": "desc_kw",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c3.login",
+     "condition": "cold",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "exploration"
+     ],
+     "new_memory_events": []
+    },
+    {
+     "sig": "eval.c3.page5",
+     "condition": "cold",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "unsolved"
+     ],
+     "new_memory_events": []
+    }
+   ]
+  },
+  {
+   "phase": "X1-pass1",
+   "task": "X1_books_fiction_p2_named",
+   "agent": "agentB",
+   "condition": "inherit desc_kw",
+   "status": "partial",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 43.8,
+   "loads": 65,
+   "actions": 93,
+   "reused": 1,
+   "novel": 92,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 9791,
+   "llm_calls": 0,
+   "subgoals_ok": 2,
+   "subgoals_total": 3,
+   "wall_ms": 86740,
+   "retrieval_lookups": 3,
+   "retrieval_ms": 0,
+   "candidates_tried": 1,
+   "solved_by": [
+    "exploration",
+    "memory",
+    "unsolved"
+   ],
+   "memory_events": [
+    {
+     "sub": "eval.x1.cat",
+     "query_mode": "desc_kw",
+     "query": "open the fiction category of the book shop fiction",
+     "candidates": [],
+     "replay_ok": false,
+     "abort_step": null,
+     "applications": 0
+    },
+    {
+     "sub": "eval.x1.page2",
+     "query_mode": "desc_kw",
+     "query": "go to the second page of the book listing next",
+     "candidates": [
+      "generic.paginate.next",
+      "books.paginate.next"
+     ],
+     "replay_ok": true,
+     "abort_step": null,
+     "applications": 1
+    },
+    {
+     "sub": "eval.x1.named",
+     "query_mode": "desc_kw",
+     "query": "open the product page of the book The Shack by William P. Young shack",
+     "candidates": [],
+     "replay_ok": false,
+     "abort_step": null,
+     "applications": 0
+    }
+   ],
+   "query_mode": "desc_kw",
+   "subgoal_rows": [
+    {
+     "sig": "eval.x1.cat",
+     "condition": "inherit",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "exploration"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.x1.cat",
+       "query_mode": "desc_kw",
+       "query": "open the fiction category of the book shop fiction",
+       "candidates": [],
+       "replay_ok": false,
+       "abort_step": null,
+       "applications": 0
+      }
+     ]
+    },
+    {
+     "sig": "eval.x1.page2",
+     "condition": "inherit",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.x1.page2",
+       "query_mode": "desc_kw",
+       "query": "go to the second page of the book listing next",
+       "candidates": [
+        "generic.paginate.next",
+        "books.paginate.next"
+       ],
+       "replay_ok": true,
+       "abort_step": null,
+       "applications": 1
+      }
+     ]
+    },
+    {
+     "sig": "eval.x1.named",
+     "condition": "inherit",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "unsolved"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.x1.named",
+       "query_mode": "desc_kw",
+       "query": "open the product page of the book The Shack by William P. Young shack",
+       "candidates": [],
+       "replay_ok": false,
+       "abort_step": null,
+       "applications": 0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "phase": "X1-pass1",
+   "task": "X1_books_fiction_p2_named",
+   "agent": "agentB",
+   "condition": "inherit desc_only",
+   "status": "partial",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 43.8,
+   "loads": 65,
+   "actions": 93,
+   "reused": 1,
+   "novel": 92,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 9791,
+   "llm_calls": 0,
+   "subgoals_ok": 2,
+   "subgoals_total": 3,
+   "wall_ms": 86744,
+   "retrieval_lookups": 3,
+   "retrieval_ms": 0,
+   "candidates_tried": 1,
+   "solved_by": [
+    "exploration",
+    "memory",
+    "unsolved"
+   ],
+   "memory_events": [
+    {
+     "sub": "eval.x1.cat",
+     "query_mode": "desc_only",
+     "query": "open the fiction category of the book shop",
+     "candidates": [],
+     "replay_ok": false,
+     "abort_step": null,
+     "applications": 0
+    },
+    {
+     "sub": "eval.x1.page2",
+     "query_mode": "desc_only",
+     "query": "go to the second page of the book listing",
+     "candidates": [
+      "generic.paginate.next",
+      "books.paginate.next"
+     ],
+     "replay_ok": true,
+     "abort_step": null,
+     "applications": 1
+    },
+    {
+     "sub": "eval.x1.named",
+     "query_mode": "desc_only",
+     "query": "open the product page of the book The Shack by William P. Young",
+     "candidates": [],
+     "replay_ok": false,
+     "abort_step": null,
+     "applications": 0
+    }
+   ],
+   "query_mode": "desc_only",
+   "subgoal_rows": [
+    {
+     "sig": "eval.x1.cat",
+     "condition": "inherit",
+     "query_mode": "desc_only",
+     "solved_by": [
+      "exploration"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.x1.cat",
+       "query_mode": "desc_only",
+       "query": "open the fiction category of the book shop",
+       "candidates": [],
+       "replay_ok": false,
+       "abort_step": null,
+       "applications": 0
+      }
+     ]
+    },
+    {
+     "sig": "eval.x1.page2",
+     "condition": "inherit",
+     "query_mode": "desc_only",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.x1.page2",
+       "query_mode": "desc_only",
+       "query": "go to the second page of the book listing",
+       "candidates": [
+        "generic.paginate.next",
+        "books.paginate.next"
+       ],
+       "replay_ok": true,
+       "abort_step": null,
+       "applications": 1
+      }
+     ]
+    },
+    {
+     "sig": "eval.x1.named",
+     "condition": "inherit",
+     "query_mode": "desc_only",
+     "solved_by": [
+      "unsolved"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.x1.named",
+       "query_mode": "desc_only",
+       "query": "open the product page of the book The Shack by William P. Young",
+       "candidates": [],
+       "replay_ok": false,
+       "abort_step": null,
+       "applications": 0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "phase": "X1-pass2",
+   "task": "X1_books_fiction_p2_named",
+   "agent": "agentB",
+   "condition": "inherit desc_kw",
+   "status": "partial",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 43.8,
+   "loads": 65,
+   "actions": 93,
+   "reused": 1,
+   "novel": 92,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 9791,
+   "llm_calls": 0,
+   "subgoals_ok": 2,
+   "subgoals_total": 3,
+   "wall_ms": 86785,
+   "retrieval_lookups": 3,
+   "retrieval_ms": 0,
+   "candidates_tried": 1,
+   "solved_by": [
+    "exploration",
+    "memory",
+    "unsolved"
+   ],
+   "memory_events": [
+    {
+     "sub": "eval.x1.cat",
+     "query_mode": "desc_kw",
+     "query": "open the fiction category of the book shop fiction",
+     "candidates": [],
+     "replay_ok": false,
+     "abort_step": null,
+     "applications": 0
+    },
+    {
+     "sub": "eval.x1.page2",
+     "query_mode": "desc_kw",
+     "query": "go to the second page of the book listing next",
+     "candidates": [
+      "generic.paginate.next",
+      "books.paginate.next"
+     ],
+     "replay_ok": true,
+     "abort_step": null,
+     "applications": 1
+    },
+    {
+     "sub": "eval.x1.named",
+     "query_mode": "desc_kw",
+     "query": "open the product page of the book The Shack by William P. Young shack",
+     "candidates": [],
+     "replay_ok": false,
+     "abort_step": null,
+     "applications": 0
+    }
+   ],
+   "query_mode": "desc_kw",
+   "subgoal_rows": [
+    {
+     "sig": "eval.x1.cat",
+     "condition": "inherit",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "exploration"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.x1.cat",
+       "query_mode": "desc_kw",
+       "query": "open the fiction category of the book shop fiction",
+       "candidates": [],
+       "replay_ok": false,
+       "abort_step": null,
+       "applications": 0
+      }
+     ]
+    },
+    {
+     "sig": "eval.x1.page2",
+     "condition": "inherit",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.x1.page2",
+       "query_mode": "desc_kw",
+       "query": "go to the second page of the book listing next",
+       "candidates": [
+        "generic.paginate.next",
+        "books.paginate.next"
+       ],
+       "replay_ok": true,
+       "abort_step": null,
+       "applications": 1
+      }
+     ]
+    },
+    {
+     "sig": "eval.x1.named",
+     "condition": "inherit",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "unsolved"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.x1.named",
+       "query_mode": "desc_kw",
+       "query": "open the product page of the book The Shack by William P. Young shack",
+       "candidates": [],
+       "replay_ok": false,
+       "abort_step": null,
+       "applications": 0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "phase": "X1-pass2",
+   "task": "X1_books_fiction_p2_named",
+   "agent": "agentB",
+   "condition": "inherit desc_only",
+   "status": "partial",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 43.7,
+   "loads": 65,
+   "actions": 93,
+   "reused": 1,
+   "novel": 92,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 9791,
+   "llm_calls": 0,
+   "subgoals_ok": 2,
+   "subgoals_total": 3,
+   "wall_ms": 86494,
+   "retrieval_lookups": 3,
+   "retrieval_ms": 0,
+   "candidates_tried": 1,
+   "solved_by": [
+    "exploration",
+    "memory",
+    "unsolved"
+   ],
+   "memory_events": [
+    {
+     "sub": "eval.x1.cat",
+     "query_mode": "desc_only",
+     "query": "open the fiction category of the book shop",
+     "candidates": [],
+     "replay_ok": false,
+     "abort_step": null,
+     "applications": 0
+    },
+    {
+     "sub": "eval.x1.page2",
+     "query_mode": "desc_only",
+     "query": "go to the second page of the book listing",
+     "candidates": [
+      "generic.paginate.next",
+      "books.paginate.next"
+     ],
+     "replay_ok": true,
+     "abort_step": null,
+     "applications": 1
+    },
+    {
+     "sub": "eval.x1.named",
+     "query_mode": "desc_only",
+     "query": "open the product page of the book The Shack by William P. Young",
+     "candidates": [],
+     "replay_ok": false,
+     "abort_step": null,
+     "applications": 0
+    }
+   ],
+   "query_mode": "desc_only",
+   "subgoal_rows": [
+    {
+     "sig": "eval.x1.cat",
+     "condition": "inherit",
+     "query_mode": "desc_only",
+     "solved_by": [
+      "exploration"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.x1.cat",
+       "query_mode": "desc_only",
+       "query": "open the fiction category of the book shop",
+       "candidates": [],
+       "replay_ok": false,
+       "abort_step": null,
+       "applications": 0
+      }
+     ]
+    },
+    {
+     "sig": "eval.x1.page2",
+     "condition": "inherit",
+     "query_mode": "desc_only",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.x1.page2",
+       "query_mode": "desc_only",
+       "query": "go to the second page of the book listing",
+       "candidates": [
+        "generic.paginate.next",
+        "books.paginate.next"
+       ],
+       "replay_ok": true,
+       "abort_step": null,
+       "applications": 1
+      }
+     ]
+    },
+    {
+     "sig": "eval.x1.named",
+     "condition": "inherit",
+     "query_mode": "desc_only",
+     "solved_by": [
+      "unsolved"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.x1.named",
+       "query_mode": "desc_only",
+       "query": "open the product page of the book The Shack by William P. Young",
+       "candidates": [],
+       "replay_ok": false,
+       "abort_step": null,
+       "applications": 0
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

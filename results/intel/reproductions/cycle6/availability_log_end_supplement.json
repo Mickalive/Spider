@@ -1,0 +1,11 @@
+{
+ "ts_ms": 1787695676684,
+ "note": "end-of-run availability supplement (run_all probes start-only)",
+ "probes": {
+  "httpbin": 200,
+  "petstore": 200,
+  "demoblaze_ui": 200,
+  "demoblaze_api": 200,
+  "rb_ping": 201
+ }
+}

@@ -1,0 +1,72 @@
+{
+ "schema": "spider.observation/v0",
+ "record_id": "601c32597569558e278a0a11c5305dba09d2eb83f15ccfe4d845ed307aab9c3a",
+ "kind": "VERIFIED_OUTCOME",
+ "task_id": "RT2-T2-quotes-login-wrongcontext",
+ "arm": "spider",
+ "decision": "RESOLVED",
+ "entry_url": "https://books.toscrape.com/",
+ "ts_utc": "2026-08-25T23:45:34.719649+00:00",
+ "executed_steps": [
+  {
+   "kind": "click",
+   "target_sig": "a|||||login",
+   "ok": true,
+   "latency_ms_perf": 471.1847819999093,
+   "value": null
+  },
+  {
+   "kind": "fill",
+   "target_sig": "input|text||username|form-control|",
+   "ok": true,
+   "latency_ms_perf": 108.72218799977418,
+   "value": null
+  },
+  {
+   "kind": "fill",
+   "target_sig": "input|password||password|form-control|",
+   "ok": true,
+   "latency_ms_perf": 92.59823599995798,
+   "value": null
+  },
+  {
+   "kind": "click",
+   "target_sig": "input|submit|||btn btn-primary|",
+   "ok": true,
+   "latency_ms_perf": 506.3936870001271,
+   "value": null
+  }
+ ],
+ "nav_chain": [
+  "https://books.toscrape.com/"
+ ],
+ "final_verdict": {
+  "passed": true,
+  "predicate_ref": "graph.tasks:T_Q_login.accept",
+  "state": "pass"
+ },
+ "abort_reason": null,
+ "derived_from": {
+  "capsule_id": "runtime/form-login-procedure@v1",
+  "capsule_version_sha256": "5229b6b52b3363c2b620cf5830863719932bf390acde7ea79deda389ca2c89eb"
+ },
+ "cost": {
+  "model_calls": 0,
+  "tokens": null,
+  "browser_actions": 5,
+  "browser_launches": 1,
+  "network_calls": null,
+  "latency_ms": 2372.7094750001925,
+  "reused_actions": 4,
+  "novel_actions": 1
+ },
+ "goal_text": "log in to quotes toscrape with the username spiderbot and password notasecret",
+ "provenance": {
+  "cycle": "R0-2",
+  "run_id": "32908002333",
+  "prereg_sha256": "9d07d391d9f177e6d8d5be7c727853c2a8223bec8fc3d5446313c8043b524e3e",
+  "row_ids": [
+   "RT2-C2-spider-p1"
+  ]
+ }
+}

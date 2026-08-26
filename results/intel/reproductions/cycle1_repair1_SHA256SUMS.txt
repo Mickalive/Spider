@@ -1,0 +1,24 @@
+# Intel cycle 1 — repair round 1 integrity manifest (2026-08-25)
+# Scope: files that MUST be byte-identical to repair round 0 (INTEL_AUDIT cycle1_run32781482957 R1: no data or code changes permitted).
+# Verified this round against /tmp/spider_intel_old_repro (repair-round-0 tree): all hashes below match it exactly.
+#
+# --- clean-room experiment code (10 files) ---
+0b714b7f362cd25fd0fbf1596a6566b4b43340925db77f857a93d8c8b3548c7e  intel/experiments/sgdr_repro/__init__.py
+fad79d017243f134618ba3c14b0923a6b55382c71227818a86307ea005498d01  intel/experiments/sgdr_repro/collect.py
+869bba48aa0d936f4bd4e7be55c05c77c0a620141184aafeb9493f8dd2ba51af  intel/experiments/sgdr_repro/convert.py
+f355993343edb7b9f5c6ba6b5986b6f4fed05376a89907730cc2f19d62ece09d  intel/experiments/sgdr_repro/descriptions.py
+fbbeacc2005415794d21c1473e0533c0ecb5d0817b4b3491b70ce61efa703cf8  intel/experiments/sgdr_repro/embedder.py
+cdd6c6b32fee94eea738895bf6075cc9bc3e3184bc165d6dd54338e8a04f13fb  intel/experiments/sgdr_repro/evaluate.py
+000be9a950421bd6311688d11dc6077f1af906826acce7fe2b3a3634fe55e43f  intel/experiments/sgdr_repro/retriever.py
+9ac004bffa9b5ba5f342b8db37c556da84b4ff2efea829ac2dfa9bce834fce65  intel/experiments/sgdr_repro/selftest.py
+147a227ab46234e0aa65999927f8b65ce6b689d58cec56725df6069dc29dd291  intel/experiments/sgdr_repro/stimuli.py
+e890ee4f32a6b6385755b250172ff1d204b5a6130f1c4c26869c530fa1699478  intel/experiments/sgdr_repro/summarizer.py
+# --- raw evidence, cycle1 (8 files) ---
+d150e55f81525bac7c1d11fc03ebb38c7b407a222ae2bb4193ceeefa25a12ef8  results/intel/reproductions/cycle1/conversion_runs.json
+89fd8d638ac3117ec1c84800041ce20eb02ec5c6f45d90fa510760b01b1cb006  results/intel/reproductions/cycle1/conversion_summary.json
+6731d7ba4e20df6ab99140dee0a3ed4b3a2ecf5a7a3a697bcb09e419626f6744  results/intel/reproductions/cycle1/executability_cache.json
+8b940fb1792cb6fd772ab2fe5b4fa65ff90da8b71897573911c49d389f3b1f6c  results/intel/reproductions/cycle1/manifest_contexts.json
+2af85767558d13fb716adab091a6cc1b82ede34fad50c3319d737f18dc6d544d  results/intel/reproductions/cycle1/manifest_library.json
+342ec130d0a052d0201ecaf9e9ce0ef6876f1d4a529e6987390a859c99db5061  results/intel/reproductions/cycle1/retrieval_eval.json
+05b8af140b7ff5fcc29dfb7de6604ee63fa2473dcf2e5624029da7948ff10cbb  results/intel/reproductions/cycle1/summarizer_cache.json
+9a1e08b25547b07d6eb4449cc0161774d821074cd3d13cc5437163db361cba09  results/intel/reproductions/cycle1/summarizer_cache_conversion.json

@@ -1,0 +1,104 @@
+{
+  "datasets": {
+    "ds-alpha": {
+      "action_counts": {
+        "/page/p00": 5630,
+        "/page/p01": 5684,
+        "/page/p02": 5607,
+        "/page/p03": 836,
+        "/page/p04": 988,
+        "/page/p05": 988,
+        "/page/p06": 868,
+        "/page/p07": 873,
+        "/page/p08": 1003,
+        "/page/p09": 1000,
+        "/page/p10": 812,
+        "/page/p11": 5711
+      },
+      "content_page_step_count": 7368,
+      "expected_stub_clicks_under_frozen_policy_2_of_8": 1842,
+      "final_url_counts": {
+        "/page/p00": 5630,
+        "/page/p01": 5684,
+        "/page/p02": 5607,
+        "/page/p03": 836,
+        "/page/p04": 988,
+        "/page/p05": 988,
+        "/page/p06": 868,
+        "/page/p07": 873,
+        "/page/p08": 1003,
+        "/page/p09": 1000,
+        "/page/p10": 812,
+        "/page/p11": 5711
+      },
+      "n_rows": 30000,
+      "prob_zero_stubs_under_frozen_policy": "(3/4)^n ~ 0",
+      "raw_rows_sha256_gz": "03ecb64580199d20d514fd1aef4d93ee7750e76dc76f65d8e5911e9afe8242f6",
+      "stub_clicks_go_sA": 0,
+      "stub_clicks_go_sB": 0
+    },
+    "ds-beta": {
+      "action_counts": {
+        "/page/p00": 5630,
+        "/page/p01": 5684,
+        "/page/p02": 5607,
+        "/page/p03": 836,
+        "/page/p04": 988,
+        "/page/p05": 988,
+        "/page/p06": 868,
+        "/page/p07": 873,
+        "/page/p08": 1003,
+        "/page/p09": 1000,
+        "/page/p10": 812,
+        "/page/p11": 5711
+      },
+      "content_page_step_count": 7368,
+      "expected_stub_clicks_under_frozen_policy_2_of_8": 1842,
+      "final_url_counts": {
+        "/page/p00": 5630,
+        "/page/p01": 5684,
+        "/page/p02": 5607,
+        "/page/p03": 836,
+        "/page/p04": 988,
+        "/page/p05": 988,
+        "/page/p06": 868,
+        "/page/p07": 873,
+        "/page/p08": 1003,
+        "/page/p09": 1000,
+        "/page/p10": 812,
+        "/page/p11": 5711
+      },
+      "n_rows": 30000,
+      "prob_zero_stubs_under_frozen_policy": "(3/4)^n ~ 0",
+      "raw_rows_sha256_gz": "03ecb64580199d20d514fd1aef4d93ee7750e76dc76f65d8e5911e9afe8242f6",
+      "stub_clicks_go_sA": 0,
+      "stub_clicks_go_sB": 0
+    }
+  },
+  "parser_proof": {
+    "anchors_in_served_html": [
+      "/go/sA",
+      "/go/sB",
+      "/page/p00",
+      "/page/p01",
+      "/page/p02",
+      "/page/p04",
+      "/page/p11"
+    ],
+    "anchors_seen_by_frozen_parser": [
+      "/page/p00",
+      "/page/p01",
+      "/page/p02",
+      "/page/p04",
+      "/page/p11"
+    ],
+    "cause": "regex requires href immediately after <a; stub anchors carry class='sg' attribute so they are never matched",
+    "fixture_page": "p03 (representative content page)",
+    "parser_regex": "<a\\s+href='([^']+)'>([^<]*)</a>",
+    "stubs_missed_by_parser": [
+      "/go/sA",
+      "/go/sB"
+    ]
+  },
+  "purpose": "SAMPLING INTEGRITY FAILURE EVIDENCE for CW-Lab v1 confirmatory pair (VOID data; recorded MEASUREMENT_INVALID)"
+}

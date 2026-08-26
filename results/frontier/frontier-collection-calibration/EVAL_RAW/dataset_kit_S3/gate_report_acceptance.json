@@ -1,0 +1,25 @@
+{
+  "block_codes": [
+    "ARM_DEGENERACY_BYTE_IDENTICAL"
+  ],
+  "blocked": true,
+  "extras": {},
+  "findings": [
+    {
+      "code": "ARM_DEGENERACY_BYTE_IDENTICAL",
+      "detail": "arms 'A' and 'B' are byte-identical across all dataset files; distinct-arm sampling policy was not implemented (CW-Lab SAMPLING INTEGRITY class)",
+      "evidence": {
+        "arm_a": "A",
+        "arm_b": "B",
+        "combined_digest": "1ab08989837530fb88af7cc2f29abfc5b79e8cfcd1b5799674ff8433d9f42417"
+      },
+      "gate": "G3",
+      "severity": "BLOCK"
+    }
+  ],
+  "timings_s": {
+    "g2_completion": 0.0,
+    "g3_nondegeneracy": 0.0,
+    "total_acceptance": 0.0
+  }
+}

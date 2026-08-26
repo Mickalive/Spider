@@ -1,0 +1,35 @@
+{
+ "schema": "spider.observation/v0",
+ "record_id": "815676563dbe5cefe4a9c5187cac96ba64a0437721549280e71f48b4dc8f5c8b",
+ "kind": "HANDOFF",
+ "task_id": "RT2-T2-quotes-login-wrongcontext",
+ "arm": "spider",
+ "decision": "ABSTAIN",
+ "entry_url": "https://books.toscrape.com/",
+ "ts_utc": "unknown",
+ "executed_steps": [],
+ "nav_chain": null,
+ "final_verdict": null,
+ "abort_reason": null,
+ "derived_from": null,
+ "cost": {
+  "model_calls": 0,
+  "tokens": null,
+  "browser_actions": 0,
+  "browser_launches": 1,
+  "network_calls": null,
+  "latency_ms": null,
+  "reused_actions": 0,
+  "novel_actions": 0
+ },
+ "goal_text": "log in to quotes toscrape with the username spiderbot and password notasecret",
+ "provenance": {
+  "cycle": "R0-2",
+  "run_id": "32908002333",
+  "prereg_sha256": "9d07d391d9f177e6d8d5be7c727853c2a8223bec8fc3d5446313c8043b524e3e",
+  "row_ids": [
+   "RT2-A1-spider-p1-handoff",
+   "RT2-A1-spider-p1-ret1"
+  ]
+ }
+}

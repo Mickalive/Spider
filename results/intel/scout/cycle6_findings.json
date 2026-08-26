@@ -1,0 +1,182 @@
+{
+  "cycle": 6,
+  "date": "2026-08-25",
+  "role": "Intel Scout (docs/roles/INTEL_SCOUT.md binding)",
+  "mission_source": "state/intel_loop.json priority 1",
+  "mission_question": "Does the validated capture->extract->parameterize->replay route ladder hold beyond a single API host (>=4 heterogeneous first-party-API sandbox hosts), survive NATURALLY elapsed TTL, and detect INDUCED response-schema mutations with transparent escalation?",
+  "pre_selection_consultation": {
+    "contexts_consulted": ["cto_intel", "ecosystem_scout", "intel_benchmark_critic"],
+    "verdicts": [
+      "cto_intel: CONFIRM_SELECTION with re-weighting toward induced-mutation detection quality + spec-less demoblaze regime; mandated spec-derived D-null arm; flagged capture-to-declaration commoditization",
+      "ecosystem_scout: 'nothing found strictly outranks it'; 10 discoveries supplied as design donors / systems-under-test / incumbent bars",
+      "intel_benchmark_critic: 10 attack findings with fixes, all incorporated into minimal_reproduction and success_rule"
+    ],
+    "disagreement_check": "All three independently confirmed rather than flipped the selection; their strongest counterarguments (narrow outcome distribution on easy hosts; QCR-format dominance; host-selection bias) are recorded and answered inside the upgraded design."
+  },
+  "feasibility_probe_2026_08_25": {
+    "method": "curl from runner egress, status/content-type verified; auth flows exercised where POST-based",
+    "hosts": [
+      {"host": "httpbin.org", "result": "200 forms/html", "auth_style": "none+cookies", "qualification": "QUALIFIED incumbent tier-1"},
+      {"host": "petstore.swagger.io", "result": "200 UI + 200 swagger.json", "auth_style": "none (nominal api_key)", "qualification": "QUALIFIED spec-ground-truth class; caveat: runtime known to diverge from published spec"},
+      {"host": "www.demoblaze.com -> api.demoblaze.com", "result": "200 / 200; login endpoint responds structured JSON", "auth_style": "session-token (signup/login)", "qualification": "QUALIFIED pivotal spec-less SPA regime; no robots.txt found (404); shared demo DB write-pollution ethics: scoped prefixed records + cleanup verification required"},
+      {"host": "restful-booker.herokuapp.com", "result": "201 ping / 200 booking / POST /auth 200 token", "auth_style": "token (POST /auth)", "qualification": "QUALIFIED API-tier only (UI removed upstream); community-documented ~10min data reset => EXCLUDED from natural-TTL claims"},
+      {"host": "restful-booker.platform.dev", "result": "unreachable (000)", "qualification": "dead alternate URL while herokuapp revived - environment-lability datum"},
+      {"host": "jsonplaceholder.typicode.com", "result": "200 JSON", "auth_style": "none", "qualification": "QUALIFIED declared-contract trivial-CRUD class"},
+      {"host": "reqres.in", "result": "200; llms.txt/openapi.json live; agent sandbox surfaces documented", "auth_style": "tiered none/token/JWT", "qualification": "CONDITIONAL: welcomes agents via llms.txt but robots Disallow:/api/ for crawlers - written interpretation + rate caps required before headline use"},
+      {"host": "dummyjson.com", "result": "200; POST /auth/login returns JWT accessToken (verified live)", "auth_style": "JWT bearer (<24h expiry)", "qualification": "TIER-2 AMBIGUOUS: Cloudflare Content-Signal search=yes,ai-train=no,use=reference AND wildcard Disallow /auth/; include only with disclosure or drop"},
+      {"host": "gorest.co.in", "result": "200 public reads", "auth_style": "bearer writes", "qualification": "TIER-3 backup only (robots Disallow /public-api/)"},
+      {"host": "fakestoreapi.com", "result": "403 Cloudflare", "qualification": "EXCLUDED availability/control"},
+      {"host": "demo.owasp-juice.shop / juice-shop.herokuapp.com", "result": "503 both", "qualification": "unavailable this cycle"},
+      {"host": "postman-echo.com", "result": "200", "auth_style": "optional basic/digest", "qualification": "echo-class control"}
+    ],
+    "stop_condition_assessment": "NOT TRIGGERED: >=4 qualifying hosts spanning >=4 auth styles (no-auth+cookie, session-token, JWT, token) even under strict access-tier discipline"
+  },
+  "fresh_actor_evidence": [
+    {
+      "actor": "Unbrowse vendor posture shift",
+      "evidence_labels": ["CODE_VERIFIED"],
+      "facts": "docs/benchmarks.md now ships evidence-only executor bench-run.ts ('benches should never be scripts', commit 2026-05-26) + unbrowse-corpus-bench with live-harvested corpus: retrieval coverage 0.50 across all difficulty tiers (12/24), execution resolve->execute 1/6 sampled, security credential-redaction pass 24/24; ANTIBOT_BLOCK deliberately in denominators; misses named by vendor class (cloudflare-js-challenge, datadome). Corroborates cycle-2 forensics adversarial-coverage figure; vendor self-run tier only.",
+      "urls": ["https://github.com/unbrowse-ai/unbrowse/blob/main/docs/benchmarks.md"]
+    },
+    {
+      "actor": "Browserbase browser-to-api skill",
+      "evidence_labels": ["CODE_VERIFIED"],
+      "facts": "Official skill consumes browser-trace CDP request/response captures, templatizes URLs, infers JSON schemas, emits OpenAPI 3.1 + coverage report + confidence.json; x-confidence/x-observed-auth extensions; GraphQL/multiplexed-endpoint decomposition.",
+      "urls": ["https://github.com/browserbase/skills/blob/main/skills/browser-to-api/SKILL.md"]
+    },
+    {
+      "actor": "TabAPI (Lay4U/tabapi)",
+      "evidence_labels": ["CODE_VERIFIED"],
+      "facts": "record -> analyze -> export OpenAPI 3.0 + TS SDK + MCP server config + replay tests; tabapi replay returns pass/fail/changed summaries for CI drift detection.",
+      "urls": ["https://github.com/Lay4U/tabapi"]
+    },
+    {
+      "actor": "Vespasian (praetorian-inc)",
+      "evidence_labels": ["CODE_VERIFIED"],
+      "facts": "Apache-2.0, 125 stars, pushed 2026-08-24. Traffic/HAR/Burp import -> REST/GraphQL/SOAP/gRPC spec recovery; SPA bundle static extraction recovers routes no click exercises (Next.js chunk-filename segments); 404-decoy filtering; byte-deterministic output.",
+      "urls": ["https://github.com/praetorian-inc/vespasian"]
+    },
+    {
+      "actor": "Harpist (kenobi-ai)",
+      "evidence_labels": ["CODE_VERIFIED"],
+      "facts": "MIT, pushed 2026-08-04. Chrome-recorded workflow traffic -> versioned per-host contract-profile.json -> derived contract.ts/openapi.json/docs; additive recordings (credential refresh + endpoint extension); credentialed replay + auth check --all; ships as an agent skill. Closest uncovered analog to the Unbrowse ladder with explicit invalidation story.",
+      "urls": ["https://github.com/kenobi-ai/harpist"]
+    },
+    {
+      "actor": "Muscle-Mem (pig-dot-dev)",
+      "evidence_labels": ["CODE_VERIFIED"],
+      "facts": "Apache-2.0, ~766 stars. Behavior cache keyed by environment Checks (capture/compare); hit -> deterministic trajectory replay zero model calls; NO TTL concept (pure environment-match validity).",
+      "urls": ["https://github.com/pig-dot-dev/muscle-mem"]
+    },
+    {
+      "actor": "Spectral (getspectral.sh)",
+      "evidence_labels": ["OFFICIAL_CLAIM"],
+      "facts": "Chrome-extension/MITM capture with GUI context -> LLM-correlated MCP tools that are HTTP request templates; auto-detected auth flows -> login script; runtime auth injection outside LLM context; tool allowlists as trust boundary. No independent eval visible.",
+      "urls": ["https://www.getspectral.sh/"]
+    }
+  ],
+  "new_papers_this_cycle": [
+    {
+      "id": "arXiv:2608.00997",
+      "title": "Registry Descriptions Go Stale Unevenly: An 89-Day Measurement of MCP Drift",
+      "tier": "PAPER_EVIDENCE",
+      "key_facts": "First longitudinal MCP registry panel (88.6d, 19,099 servers): description drift ~12%/30d concentrated in top 5%; drift-ranked re-auditing catches only ~20% of changers at top-5% budget; content-binding (hash-move revalidation) + sized periodic sweep is the fitting control. Releases panel + code.",
+      "spider_lane": "PRODUCT_INFRA freshness policy; candidate next-next mechanism for route-store TTL replacement"
+    },
+    {
+      "id": "arXiv:2608.12847",
+      "title": "Beyond Retrieval: Query-Conditioned Reuse of Long-Horizon Agent Trajectories (QCR)",
+      "tier": "PAPER_EVIDENCE",
+      "key_facts": "Post-retrieval reuse isolated from retrieval (2,391 instances, WebArena/WorkArena/AppWorld): target-bound support notes (workflow invariant + bindings-to-reobtain + applicability incl. decline + verification guardrail) beat full-trajectory injection by +10.7 pts success at -48.9% tokens; stale-binding errors 46.9%->10.9%; raw-trajectory retains 8.2% of no-shift utility under large rewrite. Strongest existing evidence raw-trace inheritance decays under binding shift.",
+      "spider_lane": "GRAPH/Product schema donor (capsule applicability/decline/verifier fields)"
+    },
+    {
+      "id": "arXiv:2608.06196",
+      "title": "Comparative Approaches to Agent Retrieval over Large Skill Libraries",
+      "tier": "PAPER_EVIDENCE",
+      "key_facts": "Typed LLM-generated graph edges add zero retrieval reach over embedding kNN (98.6% edge redundancy, 'topology bound'); author-written queries overstate hit@5 by up to 44 points. Methodology caution for Graph addressing evaluations.",
+      "spider_lane": "GRAPH methodology caution"
+    },
+    {
+      "id": "arXiv:2608.12610",
+      "title": "@skills: Attention Is All You Have (open skills protocol)",
+      "tier": "PAPER_EVIDENCE (+implementation)",
+      "key_facts": "Separates content/persistence/auto-triggering; path-addressed reading vs prompt-resident install; census July 2026: 56,804 SKILL.md dirs across 1,133 repos; install fragmentation across 54 directory conventions; /.well-known/agent-skills/index.json convention exists, rarely used.",
+      "spider_lane": "PRODUCT_INFRA distribution-layer evidence"
+    },
+    {
+      "id": "arXiv:2608.05204",
+      "title": "SkillTrace: Multi-Trace Provenance Auditing for LLM-Agent Skill Reuse",
+      "tier": "PAPER_EVIDENCE",
+      "key_facts": "Expression/Implementation/Operational traces; Skill Operational Graph; AUROC 0.938 vs repo-level baseline 0.841; 36,446-skill wild audit; trace-attributed evidence for registry governance.",
+      "spider_lane": "PRODUCT_INFRA trust/provenance"
+    },
+    {
+      "id": "arXiv:2607.24167",
+      "title": "FCPAgent: Falsifiable Commitment Planning for Self-Correcting Web Agents",
+      "tier": "PAPER_EVIDENCE",
+      "key_facts": "Plan steps as falsifiable commitment units (confirming+falsifying evidence, confidence); scope-aware repair; +13.8% rel WebArena; distills failure-repair memories.",
+      "spider_lane": "GRAPH verification/negative-knowledge radar"
+    },
+    {
+      "id": "arXiv:2606.17929",
+      "title": "PreAct: verify-gated compiled replays for CUAs",
+      "tier": "PAPER_EVIDENCE",
+      "key_facts": "Blind linear replay: 50-67% cache-miss rates on WebArena; verify-before-store gate rejected ~83% of compiles (brittle predicates); gate-only without miss->fallback loses to blind caching. First published staleness-rate quantification at action granularity.",
+      "spider_lane": "SHARED staleness-rate prior + fallback-policy interaction evidence"
+    },
+    {
+      "id": "arXiv:2605.06761",
+      "title": "Weblica: HTTP record/replay with volatile-parameter normalization rule synthesis",
+      "tier": "PAPER_EVIDENCE",
+      "key_facts": "Records HTTP during browsing; playback-revealed misses drive fuzzy-matched normalization-rule synthesis (timestamps/tokens stripped); rules validated by isolated playback; replay fidelity as admission criterion (15.6K/146K tasks retained).",
+      "spider_lane": "SHARED method donor for equivalence canonicalization and cache-key normalization"
+    },
+    {
+      "id": "arXiv:2608.05784",
+      "title": "Deterministic Screen-Activity Compilation (guarded replay plans)",
+      "tier": "PAPER_EVIDENCE",
+      "key_facts": "Guarded skill plans fail safe via expected-element/role guards; measured Routine Overhead Ratio R=60-343x and delegable recurrence h~8%, bounding fleet replay savings at ~h(1-1/R)~8%; forbids double-counting with caching gains.",
+      "spider_lane": "PRODUCT honest-accounting frame for replay-economics claims"
+    }
+  ],
+  "shared_infrastructure_updates": [
+    {"actor": "reqres.in agent-native surface", "tier": "CODE_VERIFIED", "facts": "llms.txt + llm.json + openapi.json + pricing.md; explicit Agent Sandbox (/agent/v1/*); payments sandbox with idempotency-key replay semantics, test clocks, signed webhooks. API provider openly building for agent consumers."},
+    {"actor": "x402 Bazaar", "tier": "OFFICIAL_CLAIM", "facts": "Payment-gated listings in HTTP 402 responses, JSON-Schema-validated, catalog keyed by canonical routeTemplate (/users/:userId); /discovery/search; Bazaar MCP server wraps 402->pay->retry."},
+    {"actor": "Official MCP Registry + MCPLookup + Unfragile Census", "tier": "CODE_VERIFIED mechanics / OFFICIAL_CLAIM stats", "facts": "Namespace ownership proof (GitHub OIDC/DNS TXT/HTTP challenge); MCPLookup usage-ranked Trust Index; Unfragile Census ~79,858 cross-registry listings machine-verified with Ed25519-signed passports - only ~15% verifiable alive."},
+    {"actor": "Akto Runtime Analyzer / APIContext conformance", "tier": "OFFICIAL_CLAIM", "facts": "Commercial drift-detection incumbents: traffic->inventory->change-detection feeds; live-response-vs-spec conformance diffing. Not agent-native, not browser-origin - the gap the selected reproduction occupies."}
+  ],
+  "revisit_triggers_checked": [
+    {"trigger": "SkillMigrator code release", "status": "NOT FIRED", "evidence": "S2 citationCount=0 fetched this cycle; paper's own limitations still ask for code release; GitHub searches negative"},
+    {"trigger": "NeoCognition disclosure", "status": "NOT FIRED", "evidence": "Site re-checked: manifesto + $40M seed press only; no paper/code/product spec"},
+    {"trigger": "WebNavigator external evaluation", "status": "unchanged", "evidence": "material available; no Graph replay claim pending this cycle"},
+    {"trigger": "APISensor code release", "status": "NOT FIRED", "evidence": "no release found"},
+    {"trigger": "MorphNet maturity", "status": "NOT FIRED", "evidence": "still unmeasured/unadopted"}
+  ],
+  "transfer_analysis": [
+    {"mechanism_id": "unbrowse-route-capture-replay-ladder", "lane": "PRODUCT_INFRA (+GRAPH execution)", "verdict": "EXPERIMENT (SELECTED - multi-host scope stress, natural TTL, induced mutation detection quality, generated-spec null)"},
+    {"mechanism_id": "content-binding-freshness-control (from arXiv:2608.00997 + TabAPI/Vespasian CI practice)", "lane": "PRODUCT_INFRA/GRAPH", "verdict": "EXPERIMENT_NEXT_CANDIDATE (replace calendar-TTL decay with hash-move revalidation + sized sweep)"},
+    {"mechanism_id": "harpist-versioned-contract-profiles", "lane": "PRODUCT_INFRA", "verdict": "WATCH (alternative retained-object schema; additive merge + credential-refresh invalidation)"},
+    {"mechanism_id": "qcr-target-bound-support-notes", "lane": "GRAPH (schema donor)", "verdict": "WATCH (route to Graph when capsule composition/applicability fields are designed)"},
+    {"mechanism_id": "preact-verify-before-store-gate", "lane": "SHARED (metric template)", "verdict": "INDEXED (miss/reject-rate metrics for any replay admission criterion)"},
+    {"mechanism_id": "weblica-normalization-rule-synthesis", "lane": "SHARED (method donor)", "verdict": "INDEXED (equivalence canonicalization input)"},
+    {"mechanism_id": "muscle-mem-environment-checks", "lane": "PRODUCT_INFRA", "verdict": "RADAR (system-under-test candidate; no-TTL contrast class)"},
+    {"mechanism_id": "@skills-path-addressed-delivery", "lane": "PRODUCT_INFRA", "verdict": "WATCH (distribution layer; no repeated-work reduction demonstrated)"},
+    {"mechanism_id": "skilltrace-provenance-auditing", "lane": "PRODUCT_INFRA", "verdict": "WATCH (registry governance when capsules distribute)"},
+    {"mechanism_id": "mcp-content-binding-revalidation-policy", "lane": "PRODUCT_INFRA", "verdict": "EVIDENCE_STORED (feeds capsule freshness/invalidation fields)"}
+  ],
+  "selection": {
+    "mechanism_id": "unbrowse-route-capture-replay-ladder",
+    "question_changed": true,
+    "stop_condition_triggered": false,
+    "reason_summary": "Assigned priority-1 mission; >=4 qualifying hosts probed live across >=4 auth styles; both genuinely uncertain regimes (mutation detection quality; spec-less session-token SPA) addressable with existing harness pattern; new commoditization landscape makes generated-spec null decisive; negative results first-mover either way (citation graph empty; vendor bench stops at coverage counts)."
+  },
+  "honest_limits": [
+    "Semantic Scholar rate-limited all cycle; Unbrowse citation status carried forward from cycle-5 same-day check",
+    "demoblaze qualification rests on established QA-practice status + absence of prohibitive terms; absence of robots.txt is not a grant - Reproducer must keep writes scoped/cleaned",
+    "reqres.in welcome-vs-disallow tension requires the promised written interpretation before headline use",
+    "Product claims (Spectral, x402 Bazaar, MCPLookup/Unfragile stats, Akto/APIContext) taken at OFFICIAL_CLAIM tier, not reproduced",
+    "petstore runtime-vs-spec divergence is third-party-documented, not re-verified here",
+    "Playwright networkidle deprecation nuance retroactively qualifies (not invalidates) cycle-5 load-policy wording; absolute seconds were committed then, limiting exposure"
+  ]
+}

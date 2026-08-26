@@ -1,0 +1,1003 @@
+{
+ "ts_utc": "2026-08-25T19:53:12Z",
+ "prereg": "graph/prereg_generalization.md",
+ "producer": "agentB allow_hints=True evaluation=False (legitimate producer-phase knowledge acquisition)",
+ "base_kb_source": "results/graph/scaling_growth_kb_dump.json.gz via graph/rebuild_scaling.py (G-H5 accepted grown KB)",
+ "http_probes": [
+  {
+   "name": "quotes_root",
+   "url": "https://quotes.toscrape.com/",
+   "status": 200,
+   "bytes": 11064
+  },
+  {
+   "name": "books_root",
+   "url": "https://books.toscrape.com/",
+   "status": 200,
+   "bytes": 51294
+  },
+  {
+   "name": "books_hf_p1",
+   "url": "https://books.toscrape.com/catalogue/category/books/historical-fiction_4/index.html",
+   "status": 200,
+   "bytes": 50109
+  },
+  {
+   "name": "books_mystery_p1",
+   "url": "https://books.toscrape.com/catalogue/category/books/mystery_3/index.html",
+   "status": 200,
+   "bytes": 50388
+  }
+ ],
+ "browser_preflight": {
+  "books": true,
+  "quotes": true
+ },
+ "tasks": [
+  {
+   "task": "GB2_books_hf_category",
+   "completed": true,
+   "expect_fragments": [
+    "books.cat.historicalfiction"
+   ],
+   "rationale": "documented coverage gap: no stored fragment navigates to the historical-fiction region (affordance inventory + recorded events); required for D4H/D5B expressibility",
+   "disclosure": null
+  },
+  {
+   "task": "GB3_books_hf_page2",
+   "completed": true,
+   "expect_fragments": [
+    "books.hf.paginate.next"
+   ],
+   "rationale": "documented defect context: the pager must be validated from a NON-FINAL listing page of the target region (mystery/hf final pages carry no next anchor - the G-H5 abort location)",
+   "disclosure": null
+  },
+  {
+   "task": "GB4_books_hf_p2_openbook",
+   "completed": true,
+   "expect_fragments": [
+    "books.hf.open.first.book"
+   ],
+   "rationale": "documented defect position: opening a product from a second-page listing was unsolved by every arm; a validated open-book fragment from this exact context is producer-phase acquisition",
+   "disclosure": "start is mid-chain (listing page two), mirroring the accepted GB1 pattern (start at mystery for books.home); single-subgoal unit validation"
+  }
+ ],
+ "attempts": [
+  {
+   "task": "GB2_books_hf_category",
+   "attempt": 1,
+   "status": "success",
+   "store_before": {
+    "states": 16,
+    "transitions": 27,
+    "actions": 15,
+    "fragments": 15
+   },
+   "store_after": {
+    "states": 17,
+    "transitions": 41,
+    "actions": 17,
+    "fragments": 16
+   },
+   "elapsed_s": 7.4,
+   "actions_n": 14,
+   "reused": 0,
+   "novel": 14,
+   "solved_by": [
+    "exploration"
+   ],
+   "memory_events": [
+    {
+     "sub": "books.cat.historicalfiction",
+     "query_mode": "desc_kw",
+     "candidates": [],
+     "replay_ok": false,
+     "abort_step": null,
+     "applications": 0
+    }
+   ],
+   "subgoal_rows": [
+    {
+     "sig": "books.cat.historicalfiction",
+     "solved_by": [
+      "exploration"
+     ]
+    }
+   ],
+   "markers": {
+    "actions": [
+     {
+      "how": "goto",
+      "url": "https://books.toscrape.com/",
+      "markers": {
+       "D2Q_quotes_login_p3|eval.c2.login": false,
+       "D2Q_quotes_login_p3|eval.c2.page3": false,
+       "D3B_books_mystery_p2_book|eval.b.cat": false,
+       "D3B_books_mystery_p2_book|eval.b.page2": false,
+       "D3B_books_mystery_p2_book|eval.b.book": false,
+       "D4B_books_mystery_p2_book_home|eval.b.cat": false,
+       "D4B_books_mystery_p2_book_home|eval.b.page2": false,
+       "D4B_books_mystery_p2_book_home|eval.b.book": false,
+       "D4B_books_mystery_p2_book_home|eval.b.home": true,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.login": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.tag": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.tagp2": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.home": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.login": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.tag": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.tagp2": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.home": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.rootpager": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.logout": false,
+       "D4H_books_hf_p2_book_home|eval.b.hfcat": false,
+       "D4H_books_hf_p2_book_home|eval.b.page2": false,
+       "D4H_books_hf_p2_book_home|eval.b.book": false,
+       "D4H_books_hf_p2_book_home|eval.b.home": true,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.cat": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.hfcat": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.page2": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.book": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.home": true
+      }
+     },
+     {
+      "how": "act:click",
+      "url": "https://books.toscrape.com/index.html",
+      "markers": {
+       "D2Q_quotes_login_p3|eval.c2.login": false,
+       "D2Q_quotes_login_p3|eval.c2.page3": false,
+       "D3B_books_mystery_p2_book|eval.b.cat": false,
+       "D3B_books_mystery_p2_book|eval.b.page2": false,
+       "D3B_books_mystery_p2_book|eval.b.book": false,
+       "D4B_books_mystery_p2_book_home|eval.b.cat": false,
+       "D4B_books_mystery_p2_book_home|eval.b.page2": false,
+       "D4B_books_mystery_p2_book_home|eval.b.book": false,
+       "D4B_books_mystery_p2_book_home|eval.b.home": true,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.login": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.tag": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.tagp2": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.home": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.login": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.tag": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.tagp2": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.home": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.rootpager": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.logout": false,
+       "D4H_books_hf_p2_book_home|eval.b.hfcat": false,
+       "D4H_books_hf_p2_book_home|eval.b.page2": false,
+       "D4H_books_hf_p2_book_home|eval.b.book": false,
+       "D4H_books_hf_p2_book_home|eval.b.home": true,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.cat": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.hfcat": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.page2": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.book": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.home": true
+      }
+     },
+     {
+      "how": "act:click",
+      "url": "https://books.toscrape.com/index.html",
+      "markers": {
+       "D2Q_quotes_login_p3|eval.c2.login": false,
+       "D2Q_quotes_login_p3|eval.c2.page3": false,
+       "D3B_books_mystery_p2_book|eval.b.cat": false,
+       "D3B_books_mystery_p2_book|eval.b.page2": false,
+       "D3B_books_mystery_p2_book|eval.b.book": false,
+       "D4B_books_mystery_p2_book_home|eval.b.cat": false,
+       "D4B_books_mystery_p2_book_home|eval.b.page2": false,
+       "D4B_books_mystery_p2_book_home|eval.b.book": false,
+       "D4B_books_mystery_p2_book_home|eval.b.home": true,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.login": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.tag": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.tagp2": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.home": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.login": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.tag": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.tagp2": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.home": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.rootpager": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.logout": false,
+       "D4H_books_hf_p2_book_home|eval.b.hfcat": false,
+       "D4H_books_hf_p2_book_home|eval.b.page2": false,
+       "D4H_books_hf_p2_book_home|eval.b.book": false,
+       "D4H_books_hf_p2_book_home|eval.b.home": true,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.cat": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.hfcat": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.page2": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.book": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.home": true
+      }
+     },
+     {
+      "how": "act:click",
+      "url": "https://books.toscrape.com/index.html",
+      "markers": {
+       "D2Q_quotes_login_p3|eval.c2.login": false,
+       "D2Q_quotes_login_p3|eval.c2.page3": false,
+       "D3B_books_mystery_p2_book|eval.b.cat": false,
+       "D3B_books_mystery_p2_book|eval.b.page2": false,
+       "D3B_books_mystery_p2_book|eval.b.book": false,
+       "D4B_books_mystery_p2_book_home|eval.b.cat": false,
+       "D4B_books_mystery_p2_book_home|eval.b.page2": false,
+       "D4B_books_mystery_p2_book_home|eval.b.book": false,
+       "D4B_books_mystery_p2_book_home|eval.b.home": true,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.login": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.tag": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.tagp2": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.home": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.login": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.tag": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.tagp2": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.home": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.rootpager": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.logout": false,
+       "D4H_books_hf_p2_book_home|eval.b.hfcat": false,
+       "D4H_books_hf_p2_book_home|eval.b.page2": false,
+       "D4H_books_hf_p2_book_home|eval.b.book": false,
+       "D4H_books_hf_p2_book_home|eval.b.home": true,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.cat": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.hfcat": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.page2": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.book": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.home": true
+      }
+     },
+     {
+      "how": "act:click",
+      "url": "https://books.toscrape.com/catalogue/category/books_1/index.html",
+      "markers": {
+       "D2Q_quotes_login_p3|eval.c2.login": false,
+       "D2Q_quotes_login_p3|eval.c2.page3": false,
+       "D3B_books_mystery_p2_book|eval.b.cat": false,
+       "D3B_books_mystery_p2_book|eval.b.page2": false,
+       "D3B_books_mystery_p2_book|eval.b.book": false,
+       "D4B_books_mystery_p2_book_home|eval.b.cat": false,
+       "D4B_books_mystery_p2_book_home|eval.b.page2": false,
+       "D4B_books_mystery_p2_book_home|eval.b.book": false,
+       "D4B_books_mystery_p2_book_home|eval.b.home": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.login": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.tag": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.tagp2": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.home": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.login": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.tag": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.tagp2": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.home": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.rootpager": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.logout": false,
+       "D4H_books_hf_p2_book_home|eval.b.hfcat": false,
+       "D4H_books_hf_p2_book_home|eval.b.page2": false,
+       "D4H_books_hf_p2_book_home|eval.b.book": false,
+       "D4H_books_hf_p2_book_home|eval.b.home": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.cat": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.hfcat": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.page2": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.book": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.home": false
+      }
+     },
+     {
+      "how": "act:click",
+      "url": "https://books.toscrape.com/index.html",
+      "markers": {
+       "D2Q_quotes_login_p3|eval.c2.login": false,
+       "D2Q_quotes_login_p3|eval.c2.page3": false,
+       "D3B_books_mystery_p2_book|eval.b.cat": false,
+       "D3B_books_mystery_p2_book|eval.b.page2": false,
+       "D3B_books_mystery_p2_book|eval.b.book": false,
+       "D4B_books_mystery_p2_book_home|eval.b.cat": false,
+       "D4B_books_mystery_p2_book_home|eval.b.page2": false,
+       "D4B_books_mystery_p2_book_home|eval.b.book": false,
+       "D4B_books_mystery_p2_book_home|eval.b.home": true,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.login": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.tag": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.tagp2": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.home": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.login": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.tag": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.tagp2": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.home": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.rootpager": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.logout": false,
+       "D4H_books_hf_p2_book_home|eval.b.hfcat": false,
+       "D4H_books_hf_p2_book_home|eval.b.page2": false,
+       "D4H_books_hf_p2_book_home|eval.b.book": false,
+       "D4H_books_hf_p2_book_home|eval.b.home": true,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.cat": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.hfcat": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.page2": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.book": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.home": true
+      }
+     },
+     {
+      "how": "act:click",
+      "url": "https://books.toscrape.com/catalogue/category/books_1/index.html",
+      "markers": {
+       "D2Q_quotes_login_p3|eval.c2.login": false,
+       "D2Q_quotes_login_p3|eval.c2.page3": false,
+       "D3B_books_mystery_p2_book|eval.b.cat": false,
+       "D3B_books_mystery_p2_book|eval.b.page2": false,
+       "D3B_books_mystery_p2_book|eval.b.book": false,
+       "D4B_books_mystery_p2_book_home|eval.b.cat": false,
+       "D4B_books_mystery_p2_book_home|eval.b.page2": false,
+       "D4B_books_mystery_p2_book_home|eval.b.book": false,
+       "D4B_books_mystery_p2_book_home|eval.b.home": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.login": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.tag": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.tagp2": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.home": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.login": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.tag": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.tagp2": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.home": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.rootpager": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.logout": false,
+       "D4H_books_hf_p2_book_home|eval.b.hfcat": false,
+       "D4H_books_hf_p2_book_home|eval.b.page2": false,
+       "D4H_books_hf_p2_book_home|eval.b.book": false,
+       "D4H_books_hf_p2_book_home|eval.b.home": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.cat": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.hfcat": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.page2": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.book": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.home": false
+      }
+     },
+     {
+      "how": "act:click",
+      "url": "https://books.toscrape.com/index.html",
+      "markers": {
+       "D2Q_quotes_login_p3|eval.c2.login": false,
+       "D2Q_quotes_login_p3|eval.c2.page3": false,
+       "D3B_books_mystery_p2_book|eval.b.cat": false,
+       "D3B_books_mystery_p2_book|eval.b.page2": false,
+       "D3B_books_mystery_p2_book|eval.b.book": false,
+       "D4B_books_mystery_p2_book_home|eval.b.cat": false,
+       "D4B_books_mystery_p2_book_home|eval.b.page2": false,
+       "D4B_books_mystery_p2_book_home|eval.b.book": false,
+       "D4B_books_mystery_p2_book_home|eval.b.home": true,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.login": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.tag": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.tagp2": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.home": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.login": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.tag": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.tagp2": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.home": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.rootpager": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.logout": false,
+       "D4H_books_hf_p2_book_home|eval.b.hfcat": false,
+       "D4H_books_hf_p2_book_home|eval.b.page2": false,
+       "D4H_books_hf_p2_book_home|eval.b.book": false,
+       "D4H_books_hf_p2_book_home|eval.b.home": true,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.cat": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.hfcat": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.page2": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.book": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.home": true
+      }
+     },
+     {
+      "how": "act:click",
+      "url": "https://books.toscrape.com/catalogue/category/books/travel_2/index.html",
+      "markers": {
+       "D2Q_quotes_login_p3|eval.c2.login": false,
+       "D2Q_quotes_login_p3|eval.c2.page3": false,
+       "D3B_books_mystery_p2_book|eval.b.cat": false,
+       "D3B_books_mystery_p2_book|eval.b.page2": false,
+       "D3B_books_mystery_p2_book|eval.b.book": false,
+       "D4B_books_mystery_p2_book_home|eval.b.cat": false,
+       "D4B_books_mystery_p2_book_home|eval.b.page2": false,
+       "D4B_books_mystery_p2_book_home|eval.b.book": false,
+       "D4B_books_mystery_p2_book_home|eval.b.home": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.login": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.tag": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.tagp2": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.home": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.login": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.tag": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.tagp2": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.home": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.rootpager": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.logout": false,
+       "D4H_books_hf_p2_book_home|eval.b.hfcat": false,
+       "D4H_books_hf_p2_book_home|eval.b.page2": false,
+       "D4H_books_hf_p2_book_home|eval.b.book": false,
+       "D4H_books_hf_p2_book_home|eval.b.home": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.cat": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.hfcat": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.page2": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.book": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.home": false
+      }
+     },
+     {
+      "how": "act:click",
+      "url": "https://books.toscrape.com/catalogue/category/books_1/index.html",
+      "markers": {
+       "D2Q_quotes_login_p3|eval.c2.login": false,
+       "D2Q_quotes_login_p3|eval.c2.page3": false,
+       "D3B_books_mystery_p2_book|eval.b.cat": false,
+       "D3B_books_mystery_p2_book|eval.b.page2": false,
+       "D3B_books_mystery_p2_book|eval.b.book": false,
+       "D4B_books_mystery_p2_book_home|eval.b.cat": false,
+       "D4B_books_mystery_p2_book_home|eval.b.page2": false,
+       "D4B_books_mystery_p2_book_home|eval.b.book": false,
+       "D4B_books_mystery_p2_book_home|eval.b.home": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.login": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.tag": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.tagp2": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.home": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.login": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.tag": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.tagp2": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.home": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.rootpager": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.logout": false,
+       "D4H_books_hf_p2_book_home|eval.b.hfcat": false,
+       "D4H_books_hf_p2_book_home|eval.b.page2": false,
+       "D4H_books_hf_p2_book_home|eval.b.book": false,
+       "D4H_books_hf_p2_book_home|eval.b.home": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.cat": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.hfcat": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.page2": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.book": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.home": false
+      }
+     },
+     {
+      "how": "act:click",
+      "url": "https://books.toscrape.com/catalogue/category/books/travel_2/index.html",
+      "markers": {
+       "D2Q_quotes_login_p3|eval.c2.login": false,
+       "D2Q_quotes_login_p3|eval.c2.page3": false,
+       "D3B_books_mystery_p2_book|eval.b.cat": false,
+       "D3B_books_mystery_p2_book|eval.b.page2": false,
+       "D3B_books_mystery_p2_book|eval.b.book": false,
+       "D4B_books_mystery_p2_book_home|eval.b.cat": false,
+       "D4B_books_mystery_p2_book_home|eval.b.page2": false,
+       "D4B_books_mystery_p2_book_home|eval.b.book": false,
+       "D4B_books_mystery_p2_book_home|eval.b.home": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.login": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.tag": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.tagp2": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.home": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.login": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.tag": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.tagp2": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.home": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.rootpager": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.logout": false,
+       "D4H_books_hf_p2_book_home|eval.b.hfcat": false,
+       "D4H_books_hf_p2_book_home|eval.b.page2": false,
+       "D4H_books_hf_p2_book_home|eval.b.book": false,
+       "D4H_books_hf_p2_book_home|eval.b.home": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.cat": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.hfcat": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.page2": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.book": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.home": false
+      }
+     },
+     {
+      "how": "act:click",
+      "url": "https://books.toscrape.com/catalogue/category/books/travel_2/index.html",
+      "markers": {
+       "D2Q_quotes_login_p3|eval.c2.login": false,
+       "D2Q_quotes_login_p3|eval.c2.page3": false,
+       "D3B_books_mystery_p2_book|eval.b.cat": false,
+       "D3B_books_mystery_p2_book|eval.b.page2": false,
+       "D3B_books_mystery_p2_book|eval.b.book": false,
+       "D4B_books_mystery_p2_book_home|eval.b.cat": false,
+       "D4B_books_mystery_p2_book_home|eval.b.page2": false,
+       "D4B_books_mystery_p2_book_home|eval.b.book": false,
+       "D4B_books_mystery_p2_book_home|eval.b.home": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.login": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.tag": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.tagp2": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.home": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.login": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.tag": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.tagp2": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.home": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.rootpager": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.logout": false,
+       "D4H_books_hf_p2_book_home|eval.b.hfcat": false,
+       "D4H_books_hf_p2_book_home|eval.b.page2": false,
+       "D4H_books_hf_p2_book_home|eval.b.book": false,
+       "D4H_books_hf_p2_book_home|eval.b.home": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.cat": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.hfcat": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.page2": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.book": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.home": false
+      }
+     },
+     {
+      "how": "act:click",
+      "url": "https://books.toscrape.com/catalogue/category/books/mystery_3/index.html",
+      "markers": {
+       "D2Q_quotes_login_p3|eval.c2.login": false,
+       "D2Q_quotes_login_p3|eval.c2.page3": false,
+       "D3B_books_mystery_p2_book|eval.b.cat": true,
+       "D3B_books_mystery_p2_book|eval.b.page2": false,
+       "D3B_books_mystery_p2_book|eval.b.book": false,
+       "D4B_books_mystery_p2_book_home|eval.b.cat": true,
+       "D4B_books_mystery_p2_book_home|eval.b.page2": false,
+       "D4B_books_mystery_p2_book_home|eval.b.book": false,
+       "D4B_books_mystery_p2_book_home|eval.b.home": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.login": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.tag": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.tagp2": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.home": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.login": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.tag": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.tagp2": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.home": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.rootpager": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.logout": false,
+       "D4H_books_hf_p2_book_home|eval.b.hfcat": false,
+       "D4H_books_hf_p2_book_home|eval.b.page2": false,
+       "D4H_books_hf_p2_book_home|eval.b.book": false,
+       "D4H_books_hf_p2_book_home|eval.b.home": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.cat": true,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.hfcat": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.page2": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.book": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.home": false
+      }
+     },
+     {
+      "how": "act:click",
+      "url": "https://books.toscrape.com/catalogue/category/books/mystery_3/index.html",
+      "markers": {
+       "D2Q_quotes_login_p3|eval.c2.login": false,
+       "D2Q_quotes_login_p3|eval.c2.page3": false,
+       "D3B_books_mystery_p2_book|eval.b.cat": true,
+       "D3B_books_mystery_p2_book|eval.b.page2": false,
+       "D3B_books_mystery_p2_book|eval.b.book": false,
+       "D4B_books_mystery_p2_book_home|eval.b.cat": true,
+       "D4B_books_mystery_p2_book_home|eval.b.page2": false,
+       "D4B_books_mystery_p2_book_home|eval.b.book": false,
+       "D4B_books_mystery_p2_book_home|eval.b.home": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.login": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.tag": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.tagp2": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.home": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.login": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.tag": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.tagp2": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.home": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.rootpager": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.logout": false,
+       "D4H_books_hf_p2_book_home|eval.b.hfcat": false,
+       "D4H_books_hf_p2_book_home|eval.b.page2": false,
+       "D4H_books_hf_p2_book_home|eval.b.book": false,
+       "D4H_books_hf_p2_book_home|eval.b.home": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.cat": true,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.hfcat": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.page2": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.book": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.home": false
+      }
+     },
+     {
+      "how": "act:click",
+      "url": "https://books.toscrape.com/catalogue/category/books/historical-fiction_4/index.html",
+      "markers": {
+       "D2Q_quotes_login_p3|eval.c2.login": false,
+       "D2Q_quotes_login_p3|eval.c2.page3": false,
+       "D3B_books_mystery_p2_book|eval.b.cat": false,
+       "D3B_books_mystery_p2_book|eval.b.page2": false,
+       "D3B_books_mystery_p2_book|eval.b.book": false,
+       "D4B_books_mystery_p2_book_home|eval.b.cat": false,
+       "D4B_books_mystery_p2_book_home|eval.b.page2": false,
+       "D4B_books_mystery_p2_book_home|eval.b.book": false,
+       "D4B_books_mystery_p2_book_home|eval.b.home": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.login": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.tag": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.tagp2": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.home": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.login": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.tag": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.tagp2": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.home": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.rootpager": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.logout": false,
+       "D4H_books_hf_p2_book_home|eval.b.hfcat": true,
+       "D4H_books_hf_p2_book_home|eval.b.page2": false,
+       "D4H_books_hf_p2_book_home|eval.b.book": false,
+       "D4H_books_hf_p2_book_home|eval.b.home": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.cat": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.hfcat": true,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.page2": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.book": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.home": false
+      }
+     }
+    ],
+    "subgoal_ends": [
+     {
+      "sig": "books.cat.historicalfiction",
+      "markers": {
+       "D2Q_quotes_login_p3|eval.c2.login": false,
+       "D2Q_quotes_login_p3|eval.c2.page3": false,
+       "D3B_books_mystery_p2_book|eval.b.cat": false,
+       "D3B_books_mystery_p2_book|eval.b.page2": false,
+       "D3B_books_mystery_p2_book|eval.b.book": false,
+       "D4B_books_mystery_p2_book_home|eval.b.cat": false,
+       "D4B_books_mystery_p2_book_home|eval.b.page2": false,
+       "D4B_books_mystery_p2_book_home|eval.b.book": false,
+       "D4B_books_mystery_p2_book_home|eval.b.home": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.login": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.tag": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.tagp2": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.home": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.login": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.tag": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.tagp2": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.home": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.rootpager": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.logout": false,
+       "D4H_books_hf_p2_book_home|eval.b.hfcat": true,
+       "D4H_books_hf_p2_book_home|eval.b.page2": false,
+       "D4H_books_hf_p2_book_home|eval.b.book": false,
+       "D4H_books_hf_p2_book_home|eval.b.home": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.cat": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.hfcat": true,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.page2": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.book": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.home": false
+      },
+      "url": "https://books.toscrape.com/catalogue/category/books/historical-fiction_4/index.html"
+     }
+    ]
+   }
+  },
+  {
+   "task": "GB3_books_hf_page2",
+   "attempt": 1,
+   "status": "success",
+   "store_before": {
+    "states": 17,
+    "transitions": 41,
+    "actions": 17,
+    "fragments": 16
+   },
+   "store_after": {
+    "states": 18,
+    "transitions": 42,
+    "actions": 17,
+    "fragments": 16
+   },
+   "elapsed_s": 1.2,
+   "actions_n": 1,
+   "reused": 1,
+   "novel": 0,
+   "solved_by": [
+    "memory"
+   ],
+   "memory_events": [
+    {
+     "sub": "books.hf.paginate.next",
+     "query_mode": "desc_kw",
+     "candidates": [
+      "generic.paginate.next"
+     ],
+     "replay_ok": true,
+     "abort_step": null,
+     "applications": 1,
+     "solved_candidate": "generic.paginate.next"
+    }
+   ],
+   "subgoal_rows": [
+    {
+     "sig": "books.hf.paginate.next",
+     "solved_by": [
+      "memory"
+     ]
+    }
+   ],
+   "markers": {
+    "actions": [
+     {
+      "how": "goto",
+      "url": "https://books.toscrape.com/catalogue/category/books/historical-fiction_4/index.html",
+      "markers": {
+       "D2Q_quotes_login_p3|eval.c2.login": false,
+       "D2Q_quotes_login_p3|eval.c2.page3": false,
+       "D3B_books_mystery_p2_book|eval.b.cat": false,
+       "D3B_books_mystery_p2_book|eval.b.page2": false,
+       "D3B_books_mystery_p2_book|eval.b.book": false,
+       "D4B_books_mystery_p2_book_home|eval.b.cat": false,
+       "D4B_books_mystery_p2_book_home|eval.b.page2": false,
+       "D4B_books_mystery_p2_book_home|eval.b.book": false,
+       "D4B_books_mystery_p2_book_home|eval.b.home": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.login": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.tag": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.tagp2": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.home": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.login": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.tag": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.tagp2": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.home": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.rootpager": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.logout": false,
+       "D4H_books_hf_p2_book_home|eval.b.hfcat": true,
+       "D4H_books_hf_p2_book_home|eval.b.page2": false,
+       "D4H_books_hf_p2_book_home|eval.b.book": false,
+       "D4H_books_hf_p2_book_home|eval.b.home": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.cat": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.hfcat": true,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.page2": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.book": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.home": false
+      }
+     },
+     {
+      "how": "act:click",
+      "url": "https://books.toscrape.com/catalogue/category/books/historical-fiction_4/page-2.html",
+      "markers": {
+       "D2Q_quotes_login_p3|eval.c2.login": false,
+       "D2Q_quotes_login_p3|eval.c2.page3": false,
+       "D3B_books_mystery_p2_book|eval.b.cat": false,
+       "D3B_books_mystery_p2_book|eval.b.page2": true,
+       "D3B_books_mystery_p2_book|eval.b.book": false,
+       "D4B_books_mystery_p2_book_home|eval.b.cat": false,
+       "D4B_books_mystery_p2_book_home|eval.b.page2": true,
+       "D4B_books_mystery_p2_book_home|eval.b.book": false,
+       "D4B_books_mystery_p2_book_home|eval.b.home": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.login": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.tag": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.tagp2": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.home": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.login": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.tag": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.tagp2": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.home": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.rootpager": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.logout": false,
+       "D4H_books_hf_p2_book_home|eval.b.hfcat": true,
+       "D4H_books_hf_p2_book_home|eval.b.page2": true,
+       "D4H_books_hf_p2_book_home|eval.b.book": false,
+       "D4H_books_hf_p2_book_home|eval.b.home": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.cat": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.hfcat": true,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.page2": true,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.book": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.home": false
+      }
+     }
+    ],
+    "subgoal_ends": [
+     {
+      "sig": "books.hf.paginate.next",
+      "markers": {
+       "D2Q_quotes_login_p3|eval.c2.login": false,
+       "D2Q_quotes_login_p3|eval.c2.page3": false,
+       "D3B_books_mystery_p2_book|eval.b.cat": false,
+       "D3B_books_mystery_p2_book|eval.b.page2": true,
+       "D3B_books_mystery_p2_book|eval.b.book": false,
+       "D4B_books_mystery_p2_book_home|eval.b.cat": false,
+       "D4B_books_mystery_p2_book_home|eval.b.page2": true,
+       "D4B_books_mystery_p2_book_home|eval.b.book": false,
+       "D4B_books_mystery_p2_book_home|eval.b.home": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.login": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.tag": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.tagp2": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.home": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.login": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.tag": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.tagp2": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.home": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.rootpager": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.logout": false,
+       "D4H_books_hf_p2_book_home|eval.b.hfcat": true,
+       "D4H_books_hf_p2_book_home|eval.b.page2": true,
+       "D4H_books_hf_p2_book_home|eval.b.book": false,
+       "D4H_books_hf_p2_book_home|eval.b.home": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.cat": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.hfcat": true,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.page2": true,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.book": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.home": false
+      },
+      "url": "https://books.toscrape.com/catalogue/category/books/historical-fiction_4/page-2.html"
+     }
+    ]
+   }
+  },
+  {
+   "task": "GB4_books_hf_p2_openbook",
+   "attempt": 1,
+   "status": "success",
+   "store_before": {
+    "states": 18,
+    "transitions": 42,
+    "actions": 17,
+    "fragments": 16
+   },
+   "store_after": {
+    "states": 19,
+    "transitions": 43,
+    "actions": 17,
+    "fragments": 17
+   },
+   "elapsed_s": 1.1,
+   "actions_n": 1,
+   "reused": 0,
+   "novel": 1,
+   "solved_by": [
+    "exploration"
+   ],
+   "memory_events": [
+    {
+     "sub": "books.hf.open.first.book",
+     "query_mode": "desc_kw",
+     "candidates": [],
+     "replay_ok": false,
+     "abort_step": null,
+     "applications": 0
+    }
+   ],
+   "subgoal_rows": [
+    {
+     "sig": "books.hf.open.first.book",
+     "solved_by": [
+      "exploration"
+     ]
+    }
+   ],
+   "markers": {
+    "actions": [
+     {
+      "how": "goto",
+      "url": "https://books.toscrape.com/catalogue/category/books/historical-fiction_4/page-2.html",
+      "markers": {
+       "D2Q_quotes_login_p3|eval.c2.login": false,
+       "D2Q_quotes_login_p3|eval.c2.page3": false,
+       "D3B_books_mystery_p2_book|eval.b.cat": false,
+       "D3B_books_mystery_p2_book|eval.b.page2": true,
+       "D3B_books_mystery_p2_book|eval.b.book": false,
+       "D4B_books_mystery_p2_book_home|eval.b.cat": false,
+       "D4B_books_mystery_p2_book_home|eval.b.page2": true,
+       "D4B_books_mystery_p2_book_home|eval.b.book": false,
+       "D4B_books_mystery_p2_book_home|eval.b.home": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.login": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.tag": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.tagp2": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.home": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.login": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.tag": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.tagp2": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.home": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.rootpager": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.logout": false,
+       "D4H_books_hf_p2_book_home|eval.b.hfcat": true,
+       "D4H_books_hf_p2_book_home|eval.b.page2": true,
+       "D4H_books_hf_p2_book_home|eval.b.book": false,
+       "D4H_books_hf_p2_book_home|eval.b.home": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.cat": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.hfcat": true,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.page2": true,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.book": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.home": false
+      }
+     },
+     {
+      "how": "act:click",
+      "url": "https://books.toscrape.com/catalogue/between-shades-of-gray_128/index.html",
+      "markers": {
+       "D2Q_quotes_login_p3|eval.c2.login": false,
+       "D2Q_quotes_login_p3|eval.c2.page3": false,
+       "D3B_books_mystery_p2_book|eval.b.cat": false,
+       "D3B_books_mystery_p2_book|eval.b.page2": false,
+       "D3B_books_mystery_p2_book|eval.b.book": true,
+       "D4B_books_mystery_p2_book_home|eval.b.cat": false,
+       "D4B_books_mystery_p2_book_home|eval.b.page2": false,
+       "D4B_books_mystery_p2_book_home|eval.b.book": true,
+       "D4B_books_mystery_p2_book_home|eval.b.home": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.login": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.tag": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.tagp2": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.home": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.login": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.tag": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.tagp2": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.home": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.rootpager": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.logout": false,
+       "D4H_books_hf_p2_book_home|eval.b.hfcat": false,
+       "D4H_books_hf_p2_book_home|eval.b.page2": false,
+       "D4H_books_hf_p2_book_home|eval.b.book": true,
+       "D4H_books_hf_p2_book_home|eval.b.home": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.cat": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.hfcat": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.page2": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.book": true,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.home": false
+      }
+     }
+    ],
+    "subgoal_ends": [
+     {
+      "sig": "books.hf.open.first.book",
+      "markers": {
+       "D2Q_quotes_login_p3|eval.c2.login": false,
+       "D2Q_quotes_login_p3|eval.c2.page3": false,
+       "D3B_books_mystery_p2_book|eval.b.cat": false,
+       "D3B_books_mystery_p2_book|eval.b.page2": false,
+       "D3B_books_mystery_p2_book|eval.b.book": true,
+       "D4B_books_mystery_p2_book_home|eval.b.cat": false,
+       "D4B_books_mystery_p2_book_home|eval.b.page2": false,
+       "D4B_books_mystery_p2_book_home|eval.b.book": true,
+       "D4B_books_mystery_p2_book_home|eval.b.home": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.login": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.tag": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.tagp2": false,
+       "D4Q_quotes_login_tag_tagp2_home|eval.q.home": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.login": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.tag": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.tagp2": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.home": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.rootpager": false,
+       "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.logout": false,
+       "D4H_books_hf_p2_book_home|eval.b.hfcat": false,
+       "D4H_books_hf_p2_book_home|eval.b.page2": false,
+       "D4H_books_hf_p2_book_home|eval.b.book": true,
+       "D4H_books_hf_p2_book_home|eval.b.home": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.cat": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.hfcat": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.page2": false,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.book": true,
+       "D5B_books_mystery_hf_p2_book_home|eval.b.home": false
+      },
+      "url": "https://books.toscrape.com/catalogue/between-shades-of-gray_128/index.html"
+     }
+    ]
+   }
+  }
+ ],
+ "kb_base_stats": {
+  "states": 16,
+  "transitions": 27,
+  "actions": 15,
+  "fragments": 15
+ },
+ "kb_final_stats": {
+  "states": 19,
+  "transitions": 43,
+  "actions": 17,
+  "fragments": 17
+ },
+ "kb_final_fragments": [
+  "books.cat.fiction",
+  "books.cat.historicalfiction",
+  "books.cat.mystery",
+  "books.cat.travel",
+  "books.hf.open.first.book",
+  "books.home",
+  "books.open.first.book",
+  "books.open.first.book.mystery",
+  "books.paginate.next",
+  "generic.form.login",
+  "generic.paginate.next",
+  "generic.paginate.next",
+  "quotes.home",
+  "quotes.login",
+  "quotes.logout",
+  "quotes.page.2",
+  "quotes.tag.love"
+ ],
+ "stop_rule_fired": [],
+ "dump": {
+  "path": "results/graph/generalization_growth_kb_dump.json.gz",
+  "stats": {
+   "states": 19,
+   "transitions": 43,
+   "actions": 17,
+   "fragments": 17
+  }
+ }
+}

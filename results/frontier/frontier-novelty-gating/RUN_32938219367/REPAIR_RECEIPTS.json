@@ -1,0 +1,95 @@
+{
+  "base_snapshot_commit": "6a2073c8b51fa12d960c60c5358603de4081ce03",
+  "charter_version": 2,
+  "dependency_clause_1_status": {
+    "mechanism": "instrument/ngate2/dependency_gate_r1.evaluate() PATH-A (audit-verified)",
+    "provenance_correction": "frontier/frontier-novelty-gating/provenance/RUN_32927404673_DEPENDENCY_STATUS_CORRECTION.md",
+    "status": "DISCHARGED"
+  },
+  "environmental_gap_closure": {
+    "finding": "audit C7(d): test_envelope_import errored on missing /tmp/spider_runtime mount",
+    "fix": "additive bootstrap reconstructs the pinned schema from this repo's git object store at the manifest-pinned base commit, hash-checked before any write; frozen files untouched",
+    "module": "tests/frontier/frontier-novelty-gating/test_runtime_mount_bootstrap.py"
+  },
+  "files_changed_or_added": {
+    "frontier/frontier-novelty-gating/charters/CTO_V3_REQUEST_PACKAGE.json": {
+      "sha256": "c5e00b28a0459cede2777e64256e1dd7d63242a64d42a7c2aff6ed6639ea3374"
+    },
+    "frontier/frontier-novelty-gating/instrument/ngate2/engine_r1.py": {
+      "sha256": "12f1ab3a80c94012792c2d54c9712125e139307bff79306e9486028810e39bd5"
+    },
+    "frontier/frontier-novelty-gating/instrument/ngate2/live_anchors_r1.py": {
+      "sha256": "1a1725fdcb7e180aab30cfc6cec5793ec4e76f4ead83065594dda078cc3d57df"
+    },
+    "frontier/frontier-novelty-gating/instrument/ngate2/scope_guard_r2.py": {
+      "sha256": "7b9fd7478ea08aee7fc32b7acc3c6529fe140d9b26f46818e4cd8ffba8455dbc"
+    },
+    "frontier/frontier-novelty-gating/prereg/RUN_32932470897_REPAIR_PREREG.md": {
+      "sha256": "2c59c862387706034c130ab0eab73eae07c6fffa2e5ae20565cf349da1a0513c"
+    },
+    "frontier/frontier-novelty-gating/provenance/RUN_32927404673_DEPENDENCY_STATUS_CORRECTION.md": {
+      "sha256": "19116ba1adf5664bce51f4bdb721210a4c4b7055cd5e852afae0ca86e4c13698"
+    },
+    "frontier/frontier-novelty-gating/run_repair_cycle_r1.py": {
+      "sha256": "e5a9daf45084a0d344b5bc96ce195bd51e7ebef077be9826df612fcfa3d418ec"
+    },
+    "tests/frontier/frontier-novelty-gating/test_freeze_integrity.py": {
+      "sha256": "fb9525825b2da954a3f3e808c352cf3e01dde1be04cbf55779fb142cdeda775e"
+    },
+    "tests/frontier/frontier-novelty-gating/test_repair2_r2.py": {
+      "sha256": "6f9cdd62311d0459937806f21eca6144b79e2856d6448b379995692e2f612498"
+    },
+    "tests/frontier/frontier-novelty-gating/test_run_cycle_r1.py": {
+      "sha256": "0db0b7fe0bf76e9cd82fb6a9b9bf71b37c982e32ba49c0d23514428e708d750c"
+    },
+    "tests/frontier/frontier-novelty-gating/test_runtime_mount_bootstrap.py": {
+      "sha256": "b1452f0d7e9c631686f7d6fb39f79c68a33106766929c191effd98f35af1b999"
+    }
+  },
+  "freeze_integrity_reverification": {
+    "drifted": [],
+    "manifest": "results/frontier/frontier-novelty-gating/RUN_32927404673/FREEZE_MANIFEST.json",
+    "pins_checked": 11,
+    "test_enforced_going_forward": "tests/frontier/frontier-novelty-gating/test_freeze_integrity.py"
+  },
+  "generated_at_utc": "2026-08-26T07:12:37Z",
+  "purpose": "RF-5/RF-10 receipt discipline: hash-pinned record of the repair-round-2 delivery. The NEXT FREEZE (pre-outcome, under a future CTO outcome-execution vehicle) must re-generate fresh receipts over anchors + manifests; this file pins the repair itself and demonstrates the discipline.",
+  "repair_round": 2,
+  "rf_discharge_map": {
+    "RF-10": [
+      "frontier/frontier-novelty-gating/provenance/RUN_32927404673_DEPENDENCY_STATUS_CORRECTION.md",
+      "frontier/frontier-novelty-gating/charters/CTO_V3_REQUEST_PACKAGE.json",
+      "results/frontier/frontier-novelty-gating/RUN_32938219367/REPAIR_RECEIPTS.json",
+      "state/frontier/frontier-novelty-gating.json"
+    ],
+    "RF-11": [
+      "frontier/frontier-novelty-gating/instrument/ngate2/scope_guard_r2.py",
+      "tests/frontier/frontier-novelty-gating/test_repair2_r2.py"
+    ],
+    "RF-12": [
+      "frontier/frontier-novelty-gating/run_repair_cycle_r1.py::cto_outcome_authorization",
+      "tests/frontier/frontier-novelty-gating/test_repair2_r2.py"
+    ],
+    "RF-6": [
+      "frontier/frontier-novelty-gating/instrument/ngate2/live_anchors_r1.py",
+      "tests/frontier/frontier-novelty-gating/test_repair2_r2.py"
+    ],
+    "RF-7": [
+      "frontier/frontier-novelty-gating/instrument/ngate2/live_anchors_r1.py",
+      "frontier/frontier-novelty-gating/run_repair_cycle_r1.py",
+      "tests/frontier/frontier-novelty-gating/test_repair2_r2.py"
+    ],
+    "RF-8": [
+      "frontier/frontier-novelty-gating/prereg/RUN_32932470897_REPAIR_PREREG.md"
+    ],
+    "RF-9": [
+      "frontier/frontier-novelty-gating/run_repair_cycle_r1.py",
+      "frontier/frontier-novelty-gating/prereg/RUN_32932470897_REPAIR_PREREG.md",
+      "tests/frontier/frontier-novelty-gating/test_repair2_r2.py"
+    ]
+  },
+  "run_id": 32938219367,
+  "schema": "ngate2.repair_receipts/v1",
+  "team_id": "frontier-novelty-gating",
+  "zero_outcomes_statement": "no outcome row of any kind exists for this team since the v2 freeze; this delivery is code+tests+provenance only"
+}

@@ -1,0 +1,162 @@
+{
+ "run_id": "32860596387",
+ "dataset": "data/physics/wp006_trials.jsonl.gz",
+ "freeze_time_utc": "2026-08-24T21:30:49Z",
+ "independence": {
+  "imports_from_team_modules": [],
+  "implementation_basis": "reports/physics/wp006_preregistration.md text + frozen formula specs; own code path end to end"
+ },
+ "row_accounting": {
+  "total_rows": 1075,
+  "setup": 1,
+  "calibration": 164,
+  "trial": 910,
+  "accounting_ok": true
+ },
+ "dataset_sha256": "fafd1cef46bb6b2542a4ba5a91aca9ea61e94f3b70edd32986fbd53731149397",
+ "manifest_sha256_match": true,
+ "manifest_rows_phases_agree": true,
+ "manifest_keys": [
+  "created_utc",
+  "cycle",
+  "dataset",
+  "files",
+  "freeze_commit",
+  "freeze_time_utc",
+  "instrument_repairs_pre_outcome",
+  "preregistration",
+  "raw_observables_note",
+  "seeds",
+  "site_classes",
+  "sites_attempted",
+  "verdict"
+ ],
+ "prereg_timing": {
+  "n_rows_with_ts": 1075,
+  "min_ts_iso": "2026-08-24T21:55:03Z",
+  "max_ts_iso": "2026-08-24T23:40:58Z",
+  "rows_before_freeze": 0
+ },
+ "trial_validity": {
+  "valid": 704,
+  "invalid": 206,
+  "invalid_reasons": {
+   "action_failed:TimeoutError: Locator.click: Timeout 8000ms exceeded.\nCall l": 171,
+   "exception:TimeoutError": 22,
+   "state_match:Z,n_elements": 13
+  },
+  "unclassified": 0
+ },
+ "per_site_trial_rates": {
+  "books": "168/168",
+  "gutenberg": "84/168",
+  "internet": "28/28",
+  "openlibrary": "4/42",
+  "parabank": "70/70",
+  "quotes": "168/168",
+  "saucedemo": "98/98",
+  "wikipedia": "84/168"
+ },
+ "atomicity_primary_target_equal_violations": 0,
+ "target_rederivation": {
+  "rows_checked": 875,
+  "rows_not_recomputable_counted": 35,
+  "denominator_ok": true,
+  "t1_mismatches": 0,
+  "t2_mismatches": 0
+ },
+ "session_assertions": {
+  "stateful_trials": 196,
+  "missing_session_assert_field": 0,
+  "failed_assertion_among_valid": 0
+ },
+ "fn_double_reset_control_raw_rows": {
+  "pass": 67,
+  "evaluated": 74,
+  "fn_rate": 0.0946,
+  "per_site": {
+   "books": "12/12",
+   "gutenberg": "12/12",
+   "internet": "2/2",
+   "openlibrary": "5/12",
+   "parabank": "5/5",
+   "quotes": "12/12",
+   "saucedemo": "7/7",
+   "wikipedia": "12/12"
+  },
+  "failure_reasons": {
+   "openlibrary:Z": 7
+  },
+  "denominator_rule": "both c1+c2 rows AND >=2 declarable slots (matches executed control / certified tool); menu-excluded BPs listed separately",
+  "excluded_menu_bps_pre_outcome": [
+   {
+    "bp_id": "internet-checkbox",
+    "site": "internet"
+   },
+   {
+    "bp_id": "internet-dropdown",
+    "site": "internet"
+   },
+   {
+    "bp_id": "internet-dynamic_loading_1",
+    "site": "internet"
+   },
+   {
+    "bp_id": "internet-dynamic_loading_2",
+    "site": "internet"
+   },
+   {
+    "bp_id": "internet-redirector",
+    "site": "internet"
+   },
+   {
+    "bp_id": "internet-secure",
+    "site": "internet"
+   },
+   {
+    "bp_id": "parabank-loan",
+    "site": "parabank"
+   },
+   {
+    "bp_id": "parabank-opennewaccount",
+    "site": "parabank"
+   }
+  ],
+  "missing_c1_or_c2_pairs": []
+ },
+ "floors_and_verdict": {
+  "attempted_sites": [
+   "books",
+   "gutenberg",
+   "internet",
+   "openlibrary",
+   "parabank",
+   "quotes",
+   "saucedemo",
+   "wikipedia"
+  ],
+  "n_attempted": 8,
+  "spans_both_classes": true,
+  "verified_bps_per_site": {
+   "books": 12,
+   "gutenberg": 0,
+   "internet": 2,
+   "openlibrary": 0,
+   "parabank": 5,
+   "quotes": 12,
+   "saucedemo": 7,
+   "wikipedia": 0
+  },
+  "producers_ge10": {
+   "books": 12,
+   "quotes": 12
+  },
+  "F1_attempted_ge6_both_classes": true,
+  "F2_producers_ge4": false,
+  "F3_implied_by_construction": true,
+  "F4_total_verified_ge60": false,
+  "total_verified_bps": 38,
+  "applied_verdict": "FALSIFIED"
+ },
+ "team_recheck_agreement_with_certified_result": true
+}

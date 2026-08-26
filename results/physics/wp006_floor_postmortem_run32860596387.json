@@ -1,0 +1,113 @@
+{
+ "run_id": "32860596387",
+ "status": "DESCRIPTIVE_ONLY - cannot rescue or weaken the primary FALSIFIED verdict; no new collection; arithmetic on committed rows only",
+ "invalid_by_site_reason": {
+  "gutenberg": {
+   "action_failed:TimeoutError: Locator.click: Timeout 8000ms exceeded.\nCall l": 84
+  },
+  "openlibrary": {
+   "exception:TimeoutError": 22,
+   "action_failed:TimeoutError: Locator.click: Timeout 8000ms exceeded.\nCall l": 3,
+   "state_match:Z,n_elements": 13
+  },
+  "wikipedia": {
+   "action_failed:TimeoutError: Locator.click: Timeout 8000ms exceeded.\nCall l": 84
+  }
+ },
+ "one_arm_zeroed_bps": {
+  "count": 24,
+  "by_site": {
+   "wikipedia": 12,
+   "gutenberg": 12
+  },
+  "detail_sample": [
+   {
+    "bp": "wiki-spider",
+    "dead_arm": "click_link#0"
+   },
+   {
+    "bp": "wiki-ant",
+    "dead_arm": "click_link#0"
+   },
+   {
+    "bp": "wiki-coffee",
+    "dead_arm": "click_link#0"
+   },
+   {
+    "bp": "wiki-mount_everest",
+    "dead_arm": "click_link#0"
+   },
+   {
+    "bp": "wiki-mathematics",
+    "dead_arm": "click_link#0"
+   },
+   {
+    "bp": "wiki-physics",
+    "dead_arm": "click_link#0"
+   }
+  ]
+ },
+ "counterfactual_arithmetic_only": {
+  "note": "IF the dead arms had been executable AND valid at the same rate as their siblings, floor arithmetic would read: F4 total=62 (>=60: True), F2 producer sites=4 ({'books': 12, 'gutenberg': 12, 'quotes': 12, 'wikipedia': 12}). This is arithmetic sensitivity of the frozen floors to ONE declared slot-resolution rule, NOT an outcome of this cycle and NOT evidence that H-ID survives.",
+  "cf_total_verified": 62,
+  "cf_producers": {
+   "books": 12,
+   "quotes": 12,
+   "wikipedia": 12,
+   "gutenberg": 12,
+   "openlibrary": 0,
+   "saucedemo": 7,
+   "internet": 2,
+   "parabank": 5
+  }
+ },
+ "planned_bp_counts_from_manifest": {
+  "per_site": {
+   "books": 12,
+   "quotes": 12,
+   "wikipedia": 12,
+   "gutenberg": 12,
+   "saucedemo": 7,
+   "internet": 8,
+   "parabank": 7
+  },
+  "status_breakdown": {
+   "books": {
+    "done": 12
+   },
+   "quotes": {
+    "done": 12
+   },
+   "wikipedia": {
+    "done": 12
+   },
+   "gutenberg": {
+    "done": 12
+   },
+   "saucedemo": {
+    "done": 7
+   },
+   "internet": {
+    "excluded_menu": 6,
+    "done": 2
+   },
+   "parabank": {
+    "done": 5,
+    "excluded_menu": 2
+   }
+  },
+  "note": "stateful sites were planned with <=8 BPs, structurally below the >=10 producer floor by design; openlibrary is ABSENT from this manifest (known collection defect: 2400 s hard timeout killed the collector before end-of-run dump) - its 12 calibrated BPs are established from raw rows in the FN-control section of wp006_team_recheck_32860596387.json"
+ },
+ "t2_determinism_spectrum_descriptive": {
+  "cells_with_ge1_valid_trial": 102,
+  "all_identical_stored_labels": 101,
+  "all_identical_own_rederivation": 101,
+  "non_deterministic_cells": [
+   [
+    "gutenberg-shelf4",
+    "click_button",
+    0
+   ]
+  ]
+ }
+}

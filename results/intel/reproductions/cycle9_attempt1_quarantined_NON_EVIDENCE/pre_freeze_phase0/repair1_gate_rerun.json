@@ -1,0 +1,45 @@
+{
+ "artifact": "repair1_offline_gate_rerun",
+ "non_evidence": true,
+ "round": "cycle-8 repair round 1 (RF-4)",
+ "note": "ALL offline gates re-run green AFTER repairs, BEFORE any confirmatory collection; zero condition-level observations exist anywhere in this tree.",
+ "gates": {
+  "selftest": {
+   "cmd": "python3 -m intel.experiments.unbrowse_ladder_c8.selftest",
+   "exit_code": 0,
+   "tail": "115/115 PASS",
+   "status": "PASS"
+  },
+  "phase0_fixtures_prereg_text_derived": {
+   "cmd": "python3 -m intel.experiments.unbrowse_ladder_c8.phase0_fixtures",
+   "exit_code": 0,
+   "tail": "}",
+   "status": "PASS"
+  },
+  "regression_lock_vs_committed_c7": {
+   "cmd": "python3 -m intel.experiments.unbrowse_ladder_c8.regression_lock",
+   "exit_code": 0,
+   "tail": "}",
+   "status": "PASS"
+  },
+  "wiring_audit": {
+   "cmd": "python3 -m intel.experiments.unbrowse_ladder_c8.wiring_audit",
+   "exit_code": 0,
+   "tail": "}",
+   "status": "PASS"
+  },
+  "ttl_window_rehearsal": {
+   "cmd": "python3 -m intel.experiments.unbrowse_ladder_c8.ttl_rehearsal",
+   "exit_code": 0,
+   "tail": "}",
+   "status": "PASS"
+  },
+  "full_shape_rehearsal": {
+   "cmd": "python3 -m intel.experiments.unbrowse_ladder_c8.rehearsal_fullshape",
+   "exit_code": 0,
+   "tail": "}",
+   "status": "PASS"
+  }
+ },
+ "power_tables_regeneration_matches_prereg_embedding": true
+}

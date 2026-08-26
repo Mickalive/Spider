@@ -1,0 +1,227 @@
+{
+ "analysis": {
+  "G_FLOOR0_p5_all": true,
+  "G_FLOORa_success_structure": true,
+  "G_FLOORn_negative_control_ok": false,
+  "budget_frozen": 6,
+  "cells": [
+   {
+    "guards": {
+     "http_status_200": true,
+     "no_cache_handler": true,
+     "no_login_form_on_final": true,
+     "set_cookie_seen": true
+    },
+    "health_trip": false,
+    "judge_state": "pass",
+    "judge_success": true,
+    "must_not_fire_violation": false,
+    "p5_prime_consistent": true,
+    "present": true,
+    "run_id": "FLR-T3P1",
+    "steps_wire_transactions": 3,
+    "taxonomy_from_summary": "FLOOR_PASS"
+   },
+   {
+    "guards": {
+     "http_status_200": true,
+     "no_cache_handler": true,
+     "no_login_form_on_final": true,
+     "set_cookie_seen": true
+    },
+    "health_trip": false,
+    "judge_state": "pass",
+    "judge_success": true,
+    "must_not_fire_violation": false,
+    "p5_prime_consistent": true,
+    "present": true,
+    "run_id": "FLR-T3P2",
+    "steps_wire_transactions": 3,
+    "taxonomy_from_summary": "FLOOR_PASS"
+   },
+   {
+    "guards": {
+     "http_status_200": true,
+     "no_cache_handler": true,
+     "no_login_form_on_final": true,
+     "set_cookie_seen": true
+    },
+    "health_trip": false,
+    "judge_state": "pass",
+    "judge_success": true,
+    "must_not_fire_violation": false,
+    "p5_prime_consistent": true,
+    "present": true,
+    "run_id": "FLR-CONFIRM-P2",
+    "steps_wire_transactions": 3,
+    "taxonomy_from_summary": "FLOOR_PASS"
+   }
+  ],
+  "derivation_errors": [],
+  "max_steps_observed": 3,
+  "negative_control": {
+   "guards": {
+    "http_status_200": true,
+    "no_cache_handler": true,
+    "no_login_form_on_final": true,
+    "set_cookie_seen": true
+   },
+   "health_trip": false,
+   "judge_state": "pass",
+   "judge_success": true,
+   "must_not_fire_violation": false,
+   "negative_control_ok": false,
+   "p5_prime_consistent": true,
+   "present": true,
+   "run_id": "FLR-NEGCTRL",
+   "steps_wire_transactions": 3,
+   "taxonomy_from_summary": "FLOOR_PASS"
+  },
+  "outcome": "FLOOR_VOID",
+  "reason": "wrong-password control passed verification: the direct-HTTP surface does not discriminate success from failure on this goal class; floor verdicts are VOID",
+  "sensitivity_descriptive_only": {
+   "3": true,
+   "4": true,
+   "5": true,
+   "6": true
+  },
+  "strictly_cheaper_than_4_descriptive_only": true
+ },
+ "budget_frozen": 6,
+ "cycle": "R2-1 mechanism-floor null",
+ "env": {
+  "browser_launches": 0,
+  "python": "3.12.3",
+  "user_agent": "Python-urllib/3.12.3"
+ },
+ "negative_control_row": {
+  "discovery_candidates": [
+   "https://quotes.toscrape.com/login"
+  ],
+  "discovery_effective_source": "affordance_href",
+  "discovery_source": "affordance_href",
+  "entry_final_url": "https://quotes.toscrape.com/tag/love/",
+  "entry_raw_sha256": "6c41b36fc2b5757f1d3635c830b5e3e066a24e95ceb067f3c20ec6388cf81003",
+  "entry_url": "https://quotes.toscrape.com/tag/love/",
+  "final_url": "https://quotes.toscrape.com/",
+  "guards": {
+   "http_status_200": true,
+   "no_cache_handler": true,
+   "no_login_form_on_final": true,
+   "set_cookie_seen": true
+  },
+  "judge_state": "pass",
+  "loads": 1,
+  "mode": "negative_control",
+  "must_not_fire_violation": false,
+  "redirect_hops": 1,
+  "run_id": "FLR-NEGCTRL",
+  "steps": 3,
+  "verdict": "FLOOR_PASS"
+ },
+ "parity_preflight": {
+  "entries": {
+   "page10": {
+    "entry_raw_sha256_live": "2ef9db6ffae911ee2c95d086b0598aae551103521c595b99acf4c70a50aeceba",
+    "fetch_ok": true,
+    "missing_oracle_anchors": [],
+    "n_committed_oracle_anchors": 1,
+    "n_elements_committed": 44,
+    "n_elements_floor_parsed": 44
+   },
+   "taglove": {
+    "entry_raw_sha256_live": "6c41b36fc2b5757f1d3635c830b5e3e066a24e95ceb067f3c20ec6388cf81003",
+    "fetch_ok": true,
+    "missing_oracle_anchors": [],
+    "n_committed_oracle_anchors": 1,
+    "n_elements_committed": 57,
+    "n_elements_floor_parsed": 57
+   }
+  },
+  "ok": true
+ },
+ "prereg_path": "reports/runtime/R2_CYCLE1_PREREG.md",
+ "prereg_sha256": "950a4ded2b1698ba2cabf1cf554cd3db1e1f45a414ed7e1183393e856279a199",
+ "rows": [
+  {
+   "discovery_candidates": [
+    "https://quotes.toscrape.com/login"
+   ],
+   "discovery_effective_source": "affordance_href",
+   "discovery_source": "affordance_href",
+   "entry_final_url": "https://quotes.toscrape.com/tag/love/",
+   "entry_raw_sha256": "6c41b36fc2b5757f1d3635c830b5e3e066a24e95ceb067f3c20ec6388cf81003",
+   "entry_url": "https://quotes.toscrape.com/tag/love/",
+   "final_url": "https://quotes.toscrape.com/",
+   "guards": {
+    "http_status_200": true,
+    "no_cache_handler": true,
+    "no_login_form_on_final": true,
+    "set_cookie_seen": true
+   },
+   "judge_state": "pass",
+   "loads": 1,
+   "mode": "budgeted_cell",
+   "must_not_fire_violation": false,
+   "redirect_hops": 1,
+   "run_id": "FLR-T3P1",
+   "steps": 3,
+   "verdict": "FLOOR_PASS"
+  },
+  {
+   "discovery_candidates": [
+    "https://quotes.toscrape.com/login"
+   ],
+   "discovery_effective_source": "affordance_href",
+   "discovery_source": "affordance_href",
+   "entry_final_url": "https://quotes.toscrape.com/page/10/",
+   "entry_raw_sha256": "2ef9db6ffae911ee2c95d086b0598aae551103521c595b99acf4c70a50aeceba",
+   "entry_url": "https://quotes.toscrape.com/page/10/",
+   "final_url": "https://quotes.toscrape.com/",
+   "guards": {
+    "http_status_200": true,
+    "no_cache_handler": true,
+    "no_login_form_on_final": true,
+    "set_cookie_seen": true
+   },
+   "judge_state": "pass",
+   "loads": 1,
+   "mode": "budgeted_cell",
+   "must_not_fire_violation": false,
+   "redirect_hops": 1,
+   "run_id": "FLR-T3P2",
+   "steps": 3,
+   "verdict": "FLOOR_PASS"
+  },
+  {
+   "discovery_candidates": [
+    "https://quotes.toscrape.com/login"
+   ],
+   "discovery_effective_source": "affordance_href",
+   "discovery_source": "affordance_href",
+   "entry_final_url": "https://quotes.toscrape.com/tag/love/",
+   "entry_raw_sha256": "6c41b36fc2b5757f1d3635c830b5e3e066a24e95ceb067f3c20ec6388cf81003",
+   "entry_url": "https://quotes.toscrape.com/tag/love/",
+   "final_url": "https://quotes.toscrape.com/",
+   "guards": {
+    "http_status_200": true,
+    "no_cache_handler": true,
+    "no_login_form_on_final": true,
+    "set_cookie_seen": true
+   },
+   "judge_state": "pass",
+   "loads": 1,
+   "mode": "budgeted_cell",
+   "must_not_fire_violation": false,
+   "redirect_hops": 1,
+   "run_id": "FLR-CONFIRM-P2",
+   "steps": 3,
+   "verdict": "FLOOR_PASS"
+  }
+ ],
+ "run_note": "GitHub run 32928419260",
+ "step_unit_definition": "one outbound wire transaction after the entry GET (login GET / convention probe / POST / redirect hop; failed probes included; transport retries excluded under the frozen paired-retry rule)",
+ "twin_identity_errors": [],
+ "url_arms_artifact": "results/runtime/probes/url_arms_r21.json",
+ "url_arms_blinding_clean": true
+}

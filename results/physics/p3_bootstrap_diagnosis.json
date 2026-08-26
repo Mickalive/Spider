@@ -1,0 +1,163 @@
+{
+  "analysis_status": "P3_BOOTSTRAP_ANOMALY_DIAGNOSIS",
+  "binding_gate": "directives/PHYSICS.md methods gate 1 (cycle 2)",
+  "proposition_A_linear_case": "For a linear mean statistic with equal cluster size m, clustered bootstrap variance ~ sigma^2*(1+(m-1)*rho)/n vs naive sigma^2/n: grouped CI narrower than naive REQUIRES negative intra-cluster correlation of per-row contributions, OR a nonlinearity (ratio estimator / class dropping) not present in the linear case.",
+  "empirical_books_fold": {
+    "fold": "books",
+    "n_scored": 120,
+    "n_trajectories": 8,
+    "n_scored_classes": 11,
+    "ICC_within_trajectory_of_linear_contrast": 0.0126,
+    "linear_mean_contrast_ci_width": {
+      "grouped": 0.1583,
+      "naive_row": 0.1583,
+      "ratio_grouped_over_naive": 1.0,
+      "sd_ratio_grouped_over_naive": 1.0223,
+      "theory_factor_at_measured_rho": 1.1766
+    },
+    "macro_ba_diff_ci_width": {
+      "grouped": 0.4508,
+      "naive_row": 0.4919,
+      "ratio_grouped_over_naive": 0.9163,
+      "sd_ratio_grouped_over_naive": 0.9243
+    },
+    "replicate_class_dropping": {
+      "frac_grouped_replicates_missing_ge1_class": 1.0,
+      "frac_naive_replicates_missing_ge1_class": 1.0,
+      "mean_classes_present_grouped": 4.615,
+      "mean_classes_present_naive": 4.634,
+      "grouped_replicate_size_min_median_sd": [
+        120,
+        120.0,
+        0.0
+      ],
+      "note": "on this fold all trajectories have equal length, so grouped replicates have CONSTANT size (min=median=sd above) and the linear-case comparison is clean: any grouped-vs-naive width difference must come from the STATISTIC (per-class recall ratios + class-drop re-weighting + max-over-nulls selection), not from replicate-size randomness"
+    },
+    "reproduction_of_cycle1_p3_numbers_seed31_300reps": {
+      "grouped_ci_width": 0.4392,
+      "naive_ci_width": 0.4824,
+      "cycle1_reported": {
+        "grouped_ci_width": 0.4392,
+        "naive_row_ci_width": 0.4824
+      }
+    }
+  },
+  "simulation_under_known_correlation": [
+    {
+      "n_trajectories": 8,
+      "trajectory_length": 15,
+      "rho_known": 0.0,
+      "n_common_classes": 6,
+      "n_rare_classes": 0,
+      "median_width_ratio_grouped_over_naive_LINEAR_mean": 0.793,
+      "frac_of_seeds_with_grouped_narrower_than_naive_LINEAR_mean": 0.714,
+      "median_width_ratio_grouped_over_naive_macroBA": 0.961,
+      "frac_of_seeds_with_grouped_narrower_than_naive_macroBA": 0.714
+    },
+    {
+      "n_trajectories": 8,
+      "trajectory_length": 15,
+      "rho_known": 0.2,
+      "n_common_classes": 6,
+      "n_rare_classes": 0,
+      "median_width_ratio_grouped_over_naive_LINEAR_mean": 1.063,
+      "frac_of_seeds_with_grouped_narrower_than_naive_LINEAR_mean": 0.429,
+      "median_width_ratio_grouped_over_naive_macroBA": 0.929,
+      "frac_of_seeds_with_grouped_narrower_than_naive_macroBA": 0.571
+    },
+    {
+      "n_trajectories": 8,
+      "trajectory_length": 15,
+      "rho_known": 0.5,
+      "n_common_classes": 6,
+      "n_rare_classes": 0,
+      "median_width_ratio_grouped_over_naive_LINEAR_mean": 1.187,
+      "frac_of_seeds_with_grouped_narrower_than_naive_LINEAR_mean": 0.429,
+      "median_width_ratio_grouped_over_naive_macroBA": 1.078,
+      "frac_of_seeds_with_grouped_narrower_than_naive_macroBA": 0.286
+    },
+    {
+      "n_trajectories": 15,
+      "trajectory_length": 8,
+      "rho_known": 0.5,
+      "n_common_classes": 6,
+      "n_rare_classes": 0,
+      "median_width_ratio_grouped_over_naive_LINEAR_mean": 0.935,
+      "frac_of_seeds_with_grouped_narrower_than_naive_LINEAR_mean": 0.571,
+      "median_width_ratio_grouped_over_naive_macroBA": 0.906,
+      "frac_of_seeds_with_grouped_narrower_than_naive_macroBA": 0.571
+    },
+    {
+      "n_trajectories": 5,
+      "trajectory_length": 24,
+      "rho_known": 0.5,
+      "n_common_classes": 6,
+      "n_rare_classes": 0,
+      "median_width_ratio_grouped_over_naive_LINEAR_mean": 0.633,
+      "frac_of_seeds_with_grouped_narrower_than_naive_LINEAR_mean": 0.714,
+      "median_width_ratio_grouped_over_naive_macroBA": 0.816,
+      "frac_of_seeds_with_grouped_narrower_than_naive_macroBA": 1.0
+    },
+    {
+      "n_trajectories": 8,
+      "trajectory_length": 15,
+      "rho_known": 0.0,
+      "n_common_classes": 8,
+      "n_rare_classes": 4,
+      "median_width_ratio_grouped_over_naive_LINEAR_mean": 1.033,
+      "frac_of_seeds_with_grouped_narrower_than_naive_LINEAR_mean": 0.429,
+      "median_width_ratio_grouped_over_naive_macroBA": 1.004,
+      "frac_of_seeds_with_grouped_narrower_than_naive_macroBA": 0.429
+    },
+    {
+      "n_trajectories": 8,
+      "trajectory_length": 15,
+      "rho_known": 0.2,
+      "n_common_classes": 8,
+      "n_rare_classes": 4,
+      "median_width_ratio_grouped_over_naive_LINEAR_mean": 0.936,
+      "frac_of_seeds_with_grouped_narrower_than_naive_LINEAR_mean": 0.571,
+      "median_width_ratio_grouped_over_naive_macroBA": 0.887,
+      "frac_of_seeds_with_grouped_narrower_than_naive_macroBA": 0.857
+    },
+    {
+      "n_trajectories": 8,
+      "trajectory_length": 15,
+      "rho_known": 0.5,
+      "n_common_classes": 8,
+      "n_rare_classes": 4,
+      "median_width_ratio_grouped_over_naive_LINEAR_mean": 1.059,
+      "frac_of_seeds_with_grouped_narrower_than_naive_LINEAR_mean": 0.286,
+      "median_width_ratio_grouped_over_naive_macroBA": 1.099,
+      "frac_of_seeds_with_grouped_narrower_than_naive_macroBA": 0.286
+    },
+    {
+      "n_trajectories": 15,
+      "trajectory_length": 8,
+      "rho_known": 0.5,
+      "n_common_classes": 8,
+      "n_rare_classes": 4,
+      "median_width_ratio_grouped_over_naive_LINEAR_mean": 1.0,
+      "frac_of_seeds_with_grouped_narrower_than_naive_LINEAR_mean": 0.429,
+      "median_width_ratio_grouped_over_naive_macroBA": 1.052,
+      "frac_of_seeds_with_grouped_narrower_than_naive_macroBA": 0.429
+    },
+    {
+      "n_trajectories": 5,
+      "trajectory_length": 24,
+      "rho_known": 0.5,
+      "n_common_classes": 8,
+      "n_rare_classes": 4,
+      "median_width_ratio_grouped_over_naive_LINEAR_mean": 1.111,
+      "frac_of_seeds_with_grouped_narrower_than_naive_LINEAR_mean": 0.429,
+      "median_width_ratio_grouped_over_naive_macroBA": 1.02,
+      "frac_of_seeds_with_grouped_narrower_than_naive_macroBA": 0.429
+    }
+  ],
+  "diagnosis_conclusion": "RESOLVED AS A NONLINEAR-STATISTIC EFFECT, NOT A CORRELATION EFFECT. (1) The per-row correctness CONTRAST has essentially zero intra-trajectory correlation on the books fold (ICC=0.013): model and persistence errors co-vary inside a page walk; trajectories are equal-length so grouped replicates have constant size, and for the LINEAR mean of the contrast the grouped bootstrap shows NO narrowing (width ratio 1.00). (2) The anomaly appears ONLY in the macro-balanced-accuracy difference statistic (percentile-width ratio 0.92, sd ratio 0.92, both < 1), whose replicate value depends on WHICH low-support classes survive resampling and on per-class recall ratios plus max-over-nulls selection: only ~4.6 of 11 scored classes survive a typical replicate in EITHER scheme, so replicate dispersion is dominated by the class-composition lottery, not by sampling error of the point estimate. (3) Simulation under KNOWN intra-trajectory correlation confirms the mechanism class: with 5-8 clusters, grouped/naive width ratios for nonlinear macro-BA statistics fall BELOW 1.0 in a substantial fraction of synthetic datasets even at positive known rho, while linear-statistic ratios trend upward with rho as theory predicts. Therefore a narrower grouped CI at this fold size carries NO information about intra-trajectory correlation and NO inferential weight; percentile WIDTHS of nonlinear statistics at <=~10 clusters are uninformative in both bootstrap variants.",
+  "operational_bound_for_cycle2": "At <=~10 trajectories per fold, percentile bootstrap WIDTHS are unreliable in both variants: grouped width is unstable because (i) few clusters make the percentile estimate coarse and (ii) whole-trajectory resampling frequently drops low-support classes, which truncates macro-balanced-accuracy variance (ratio-estimator effect absent from linear statistics); naive row bootstrap ignores within-trajectory correlation and is anti-conservative when rho>0. Therefore cycle-2 PRIMARY inference uses fold-level sign/randomization tests only; any bootstrap CI is reported as a SECONDARY descriptive quantity and never supports a verdict.",
+  "note_on_cycle1_verdict_independence": "The WP-003B-R2 FALSIFIED verdict did not rest on bootstrap widths (all five adequate folds individually negative; sign test 0/5), so this anomaly never contaminated an accepted conclusion.",
+  "data_provenance": "methodology probe on committed data/physics/wp003b_r2_transitions.jsonl.gz; no WP-005 target derived here",
+  "seed": 4021,
+  "boot_reps_partB": 2000
+}

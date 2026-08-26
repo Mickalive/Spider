@@ -1,0 +1,23 @@
+{
+  "charter_sha256": "9e4d09a8cfb382220876c58ed09240615267ff6add631bab99bde6ec19bc186e",
+  "charter_version": 2,
+  "external_input_pins": {
+    "/tmp/frontier_charter.json": "9e4d09a8cfb382220876c58ed09240615267ff6add631bab99bde6ec19bc186e",
+    "/tmp/spider_runtime/runtime/schemas/spider.cost_event.v0.schema.json": "9c4260ee9f63851646b50c6a4aee614253c59c1818a6cde5a832081e70fdf9e0"
+  },
+  "frozen_files": {
+    "frontier/frontier-novelty-gating/instrument/ngate2/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "frontier/frontier-novelty-gating/instrument/ngate2/dependency_gate.py": "084af20ae2f114847a5eed7e2c5faaae90fec4924bf9d55a52801124c138ac23",
+    "frontier/frontier-novelty-gating/instrument/ngate2/envelope.py": "ab8351878d01d28acc6b0fcbc4f4c06901f9126aba90256d92923335fdf226ac",
+    "frontier/frontier-novelty-gating/instrument/ngate2/power.py": "8ff9d27324c1f78df810268a5e96cd8d7fa140fe2c1910c42e5cda583f5edb81",
+    "frontier/frontier-novelty-gating/instrument/ngate2/scope_guard.py": "8c0019cf89300c101454d025fc9dabf5c183a4fade2d4288d56f4967d2858628",
+    "frontier/frontier-novelty-gating/instrument/ngate2/split.py": "5bb6cb4b04b78fe3b2c449839095a654fc02b7cbf9f5546e641e0ec29d2a5185",
+    "frontier/frontier-novelty-gating/prereg/RUN_32927404673_PREREG.md": "e80f44668e6fe18c9c6b50ba61b4ed9c79bbcfbc592d072545e304c028536cee",
+    "tests/frontier/frontier-novelty-gating/test_dependency_gate.py": "2a4b60d140486659310fb11ec46315f1eb316c089a8ddabf52ef66300a3c670b",
+    "tests/frontier/frontier-novelty-gating/test_envelope_import.py": "ceb460dac7c6a3354b9c038781b4b61c63e21a686498744a2f88b45236ba1432",
+    "tests/frontier/frontier-novelty-gating/test_power_gate.py": "e54b8316133e2f52afad51111e39334f77aa837e006aa5eb8ebe34075e6fe324",
+    "tests/frontier/frontier-novelty-gating/test_split_scope.py": "4cf79a0093da68a091613e1ddf1fdd36457510066be5e28237546ade1a531d8b"
+  },
+  "run_id": 32927404673,
+  "schema": "ngate2.freeze_manifest/v1"
+}

@@ -1,0 +1,18 @@
+{
+ "T_HTTPBIN_FORM": {
+  "code": "REPLAY_OK",
+  "equivalent": true
+ },
+ "T_HTTPBIN_COOKIE": {
+  "code": "REPLAY_OK",
+  "equivalent": true
+ },
+ "T_PETSTORE_FIND": {
+  "code": "REPLAY_OK",
+  "equivalent": true
+ },
+ "T_DEMOBLAZE_CART": {
+  "code": "REPLAY_OK",
+  "equivalent": true
+ }
+}

@@ -1,0 +1,35 @@
+{
+ "openapi": "3.0.x-cleanroom-c8-strict",
+ "host_origin": "httpbin.org",
+ "paths": {
+  "GET /cookies": {
+   "method": "GET",
+   "path": "/cookies",
+   "host": "https://httpbin.org",
+   "parameters": [],
+   "requestBody": null,
+   "responses_schema": {
+    "cookies": {
+     "spider_pref": "str"
+    }
+   },
+   "security": [
+    "cookie_header"
+   ],
+   "x-intent": "read_display_preference_cookies_httpbin",
+   "n_obs": 1
+  }
+ },
+ "securitySchemes": {
+  "auth_header": {
+   "type": "apiKey",
+   "in": "header",
+   "name": "Authorization"
+  },
+  "cookie_header": {
+   "type": "apiKey",
+   "in": "header",
+   "name": "Cookie"
+  }
+ }
+}

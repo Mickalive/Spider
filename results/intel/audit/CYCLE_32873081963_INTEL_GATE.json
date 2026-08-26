@@ -1,0 +1,130 @@
+{
+  "cycle": 5,
+  "audit_run_id": 32873081963,
+  "repair_round": 1,
+  "date": "2026-08-25",
+  "auditor_role": "INTEL_AUDITOR (docs/roles/INTEL_AUDITOR.md binding; directives/INTEL_AUDITOR.md mandatory gate)",
+  "mechanism_id": "unbrowse-route-capture-replay-ladder",
+  "object_under_audit": "Repair round 1 reproduction snapshot /tmp/spider_intel_repro (commit 5eaa700 on refreshed base cc49ba3): claimed documentary-only delivery of round-0 required fixes RF-1..RF-4 with frozen code/data/results byte-identical to audited round-0 snapshot ac87074",
+  "prior_gate": {
+    "audit_run_id": 32861355080,
+    "gate": "REVISE",
+    "mechanism_status": "VALIDATED_USEFUL",
+    "flip_condition": "documentary-only repair delivering RF-1..RF-4 exactly with zero changes to code/data/results flips next audit to PASS without re-litigating the measurement"
+  },
+  "gate": "PASS",
+  "safe_to_integrate": true,
+  "mechanism_status": "VALIDATED_USEFUL",
+  "claim_tier_ceiling": "PROOF_OF_CONCEPT",
+  "required_fixes": [],
+  "maximum_defensible_wording": "In a preregistered clean-room reproduction on public sandbox targets (scripted policies, no LLM agents), a three-tier capture->extract->parameterize->replay route ladder learned replayable first-party-JSON routes passively during genuine scripted browser task completion on both API-tier tasks (httpbin.org form submission and cookie-state read; discovery 2/2 with output equivalence at discovery time) and completed repeat tasks by direct HTTP replay with zero browser actions at 100% output equivalence, at median wall-clock speedups of 37.05x and 8.66x vs full scripted browser traversal under a realistic network-idle load policy (10/10 interleaved paired wins, 5 measured passes per arm per task, warmups excluded, 0 exclusions). Bare HTTP with perfect public-doc knowledge ran at parity or slightly faster than replay (median C/B ratios 0.92 and 0.73), so NO latency advantage over raw HTTP may be claimed; the demonstrated value of the route abstraction is reaching parity without privileged endpoint knowledge plus parameter-template generalization to unseen records (P1: induced {id} template replayed two newly created bookings field-equal to direct-API ground truth). The no-silent-substitution core held under forced stress: corrupted-auth replay returned structured AUTH_FAIL with no output presented (positive control round-tripped), past-TTL replay refused with STALE_TTL, deleted-record replay surfaced HTTP_ERROR with escalated provenance confirming absence, and the store is structurally pointer-only (no cached response bodies). On server-rendered no-API targets the ladder correctly found zero qualifying routes and escalated to a hand-authored HTML-extraction tier (books.toscrape payload correct; on quotes.toscrape the fallback itself failed in-run with SCHEMA_MISMATCH surfaced honestly - a reliability datum, no substitution occurred). Evidence tier: PROOF OF CONCEPT. Not established: the vendor's 94-domain 950ms-vs-3404ms headline (untested here; remains OFFICIAL_CLAIM with prior forensic qualifications and zero independently confirmable citations as of audit time), any multi-host API-tier result (single-host httpbin slice after a live-verified environment change removed the planned second host's UI), shared-route-graph ranking, schema-drift detection, LLM-agent operation, token costs, or production/anti-bot-walled behavior.",
+  "maximum_defensible_wording_provenance": "Carried forward VERBATIM from CYCLE_32861355080_INTEL_GATE.json (round-0 binding maximum); every factual assertion in it independently re-verified this session via full recomputation from passes_raw.json, probe event-stream checks, structural store checks, and live arXiv:2604.00694 + restful-booker fetches; byte-equality of this wording with the Reproducer report section 10 and state/intel_reproduction.json verified programmatically.",
+  "forbidden_wordings": [
+    "GENERALIZATION language of any kind",
+    "citing sandbox speedups (37x/8.7x) alongside or as support for the vendor's 94-domain 3.6x/5.4x or 100x marketing claims",
+    "any claim that route replay beats raw HTTP calls on latency (C is faster or equal here)",
+    "any claim that the quotes.toscrape fallback succeeded",
+    "'first independent evaluation' stated as fact rather than as unconfirmable-at-audit-time citation-graph status"
+  ],
+  "repair_verification_this_session": {
+    "rf_flip_condition_met": true,
+    "frozen_paths_vs_audited_round0_commit": "git diff ac87074 5eaa700 over intel/experiments/unbrowse_ladder_repro/, intel/prereg/cycle5_unbrowse_ladder_prereg.md, results/intel/reproductions/cycle5* = EMPTY (byte-identical; ground truth = committed round-0 branch, since the referenced /tmp/spider_intel_old_repro mount no longer exists)",
+    "RF-1_report": "VERIFIED - reports/intel/reproductions/cycle5_report.md contains all mandated elements (mechanism identity + Scout run 32861355080; disposition table; per-clause evaluation; quotes.toscrape fallback failure as reliability datum in section 5; Role-3 intent-inheritance artifact; vestigial C_RECIPES entry; honest caveats); section-10 wording byte-equal to round-0 gate maximum (programmatic check)",
+    "RF-2_state_file": "VERIFIED - cycle-5 record complete; historical_cycle1_record key-level identical to pre-repair state file at ac87074 (accepted history untouched)",
+    "RF-3_candidate": "VERIFIED - state/intel_candidate.json byte-identical to Scout workspace mount; workflow_run_id 32861355080 present; both runs' scout branches point at the same snapshot commit 56310b6",
+    "RF-4_no_frozen_edits": "VERIFIED - see frozen_paths check; role-doc deltas visible in cross-base diff originate from pre-existing infra commit cc49ba3 (timestamped before all cycle-5 commits), not from this repair",
+    "scope_discipline": "No protected files touched by the repair commit; VALIDATED_MECHANISMS.json still contains only cycle-1 SGDR - nothing integrated prematurely"
+  },
+  "measurement_verification_this_session": {
+    "note": "Round-0 flip condition required spot-check only; full fresh recomputation performed anyway with newly written independent code (not a rerun of the round-0 auditor script)",
+    "manifest_sha256_from_inside_cycle5_dir": "11/11 OK",
+    "prereg_frozen_hash_table_vs_committed_code": "11/11 exact match (recomputed this session)",
+    "selftest_rerun_offline": "25/25 PASS",
+    "recomputation_from_passes_raw": {
+      "structure": "34 rows = 30 measured + 4 warmups per frozen protocol (prereg defines warmups for A/B only; C is the post-block); summary wall lists trace exactly to raw measured rows in all six arm/task cells; row order confirms fixed interleaving A,B x5 then C x5 per task; env failures/errors = 0",
+      "T_BIN_FORM": {
+        "median_A_ms": 1218.8,
+        "median_B_ms": 32.9,
+        "speedup_median": 37.05,
+        "speedup_mean": 17.17,
+        "wins_B_strict": "5/5",
+        "A_actions": [
+          6,
+          6,
+          6,
+          6,
+          6
+        ],
+        "B_actions": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "B_equivalence": "5/5",
+        "B_codes": "REPLAY_OK x5",
+        "C_median_ms": 30.3,
+        "C_over_B": 0.92
+      },
+      "T_BIN_COOKIE": {
+        "median_A_ms": 559.7,
+        "median_B_ms": 64.6,
+        "speedup_median": 8.66,
+        "wins_B_strict": "5/5",
+        "A_actions": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "B_actions": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "B_equivalence": "5/5",
+        "B_codes": "REPLAY_OK x5",
+        "C_median_ms": 47.0,
+        "C_over_B": 0.73
+      },
+      "mismatch_vs_committed_summaries_and_decision_rule": "NONE on every headline number"
+    },
+    "probes": {
+      "P1_parameterization": "PASS (new ids 3081/3084 field-equal to direct-API ground truth)",
+      "P2_auth_negative": "PASS (AUTH_FAIL, HTTP 403, nothing presented)",
+      "P2_positive_control": "PASS",
+      "P3_ttl_expiry": "PASS (STALE_TTL, age 172800.5s > 24h TTL)",
+      "P4_mutation_consistency": "PASS (delete 201 -> HTTP_ERROR -> escalated absence confirmed 404, provenance escalated_html_tier:HTTP_ERROR)",
+      "pointer_only_store": "PASS (mechanical recheck on BOTH stores: no body/content/text/html values >64 chars)"
+    },
+    "timeline_coherence": "ladder events span 83.5s (16:15:19Z -> 16:16:43Z) after ~12s discovery ~= 95s total, consistent with >=2s pacing across ~40 gaps plus task times; report's ~93s claim accurate in magnitude",
+    "timing_hygiene": "single perf_counter clock all arms; only sleep in package is pacing between passes outside timed regions; no wait_for_timeout anywhere; context creation outside A timer favors A (conservative)",
+    "v4_capture_origin": "route store body template carries custtel='' and delivery='' (live-form-only fields absent from C's doc recipe); cookie route carries headers_required.cookie <- auth_material; run_B_pass never reads C_RECIPES",
+    "hashing": "hashlib sha256 only; no process-randomized hash() anywhere"
+  },
+  "external_source_check": "RE-VERIFIED LIVE this session: arXiv:2604.00694 exists ('Internal APIs Are All You Need: Shadow APIs, Shared Discovery, and the Case Against Browser-First Agent Architectures', Tham/Garcia/Hahn, submitted 2026-04-01) and its abstract states the vendor headline verbatim (950ms vs 3404ms warmed cached vs Playwright, 3.6x mean / 5.4x median, 94 domains, sub-100ms well-cached routes, three-path execution model, x402 tiers). The sandbox reproduction does not cite itself as support for that headline. restful-booker root page re-fetched today: static welcome page, no booking UI, self-reset every 10 minutes - re-confirming the disclosed environment change and Revision-2 auth context. Clean-room/licensing statement consistent with stdlib-only code; nothing copied.",
+  "residual_notes_non_blocking": [
+    "PRECISION NIT: committed speedup_mean for T_BIN_COOKIE is 9.66 (division of pre-rounded means 583.2/60.4=9.656); raw-unrounded ratio is 583.24/60.42=9.653 -> 9.65. Double-rounding artifact on a secondary metric; headline median speedups (37.05x / 8.66x) are exact from raw values. V6 forbids post-outcome edits; travels as disclosed precision note.",
+    "MANIFEST INVOCATION NIT: results/intel/reproductions/cycle5_SHA256SUMS.txt uses directory-relative entries; verification must run from inside results/intel/reproductions/cycle5/. Report section 11's literal command needs that cwd. Content integrity unaffected.",
+    "Checker taxonomy_violations counters remain hardcoded-to-zero bookkeeping (disclosed since round 0); functional coverage via probe-flipping checks holds for three classes and structurally for the fourth via pointer-only store + P4 provenance.",
+    "Freeze ordering remains attestation-based (structural limit of single-commit snapshots); mitigations re-verified this session."
+  ],
+  "confounder_attack_summary": "CLEAN (re-derived this session): no leakage (capture origin provable from store contents), baselines matched and strong (A realistic traversal under networkidle-capped policy; C privileged-knowledge null honestly reported as parity/faster), budgets symmetric (K=5 interleaved, uniform pacing outside timers, same stacks), no model confound (no LLM anywhere; tokens n/a), tasks frozen pre-collection with constants verbatim in prereg, environment change disclosed and twice live-verified (round 0 + this session), hand-authoring limited to disclosed addressing keys and the mechanism's own declared HTML tier, scope discipline intact.",
+  "integration_conditions_for_director": [
+    "Enter mechanism into VALIDATED_MECHANISMS only at PROOF OF CONCEPT ceiling under maximum_defensible_wording and forbidden_wordings carried in this gate verbatim.",
+    "Carry residual limits with any integration: single-host API tier (httpbin.org, two flows), scripted policies, n=5/task, attestation-based freeze timing, shared-graph ranking and drift detection untested, checker taxonomy counters cosmetic, quotes html-tier fallback fragility demonstrated once in-run.",
+    "Route Product Infra evidence (ladder semantics, TTL/lifecycle, pointer-only design, fallback codes) into docs/INTEL_PRODUCT_INFRA.md per directives priority 2; GRAPH relevance MEDIUM (section-10 APIs/direct-routes mapping; store integration undemonstrated).",
+    "Director may propagate residual precision notes (speedup_mean rounding; manifest cwd) into any downstream summary that cites them."
+  ],
+  "product_relevance": "HIGH",
+  "graph_relevance": "MEDIUM",
+  "physics_relevance": "LOW",
+  "audit_artifacts": [
+    "reports/intel/audit/cycle5_run32873081963_INTEL_AUDIT.md"
+  ],
+  "boundary": "Offline audit over committed refs plus two mounted workspaces (/tmp/spider_intel_scout, /tmp/spider_intel_repro) and two live fetches (arXiv abstract page; restful-booker root page). Frozen evidence accepted after manifest verification (11/11), hash-table verification (11/11), full independent recomputation of every headline number from passes_raw.json with newly written code, probe event-stream verification, structural pointer-only checks on both stores, implementation inspection of timing/resolver/filter/store paths, offline selftest rerun (25/25), and git-tree comparison against the audited round-0 commit."
+}

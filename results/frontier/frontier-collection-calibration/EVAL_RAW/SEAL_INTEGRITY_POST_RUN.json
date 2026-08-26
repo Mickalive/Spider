@@ -1,0 +1,29 @@
+{
+  "verified_utc": "2026-08-26T10:10:47Z",
+  "unchanged_vs_freeze": [
+    "calibkit/__init__.py",
+    "calibkit/fixture.py",
+    "calibkit/gates.py",
+    "calibkit/plan.py",
+    "calibkit/reasons.py",
+    "charters/cto_v1.json",
+    "eval/PREREG.md",
+    "eval/collectors.py",
+    "eval/instruments.py",
+    "eval/miniweb.py",
+    "eval/null_baseline.py",
+    "tests/test_calibkit.py"
+  ],
+  "changed_vs_freeze": {
+    "eval/run_eval.py": "DEV-1 one-line serialization None-guard (holdout_descriptive assembly only)",
+    "eval/PREREG.md": null
+  },
+  "changed_detail": {
+    "eval/run_eval.py": "see DEVIATION_LEDGER.json"
+  },
+  "added_post_freeze": {
+    "eval/reassemble_eval_results.py": "DEV-1 reassembly from preserved rows (score() unchanged)",
+    "eval/cwlab_receipt.py": "DEV-2 s9 lane-harness receipt deliverable"
+  },
+  "missing": []
+}

@@ -1,0 +1,85 @@
+{
+ "summary": {
+  "Q1_all_match": false,
+  "Q1_detail": [
+   {
+    "bid": null,
+    "ok": false,
+    "reason": "booking_creation_refused"
+   },
+   {
+    "bid": null,
+    "ok": false,
+    "reason": "booking_creation_refused"
+   }
+  ],
+  "Q2": {
+   "negative_ok": true,
+   "positive_ok": null
+  },
+  "Q3_ttl_compliant": true,
+  "Q4": {
+   "deleted": false,
+   "code": "HTTP_ERROR",
+   "surfaced_absence": true
+  },
+  "Q5": {
+   "d_code": "REPLAY_OK",
+   "b_code": "REPLAY_OK",
+   "d_status": 200
+  },
+  "pointer_only_store": false
+ },
+ "events": [
+  {
+   "probe": "Q1",
+   "bid": null,
+   "ok": false,
+   "reason": "creation_refused",
+   "ts_ms": 1787695527550
+  },
+  {
+   "probe": "Q1",
+   "bid": null,
+   "ok": false,
+   "reason": "creation_refused",
+   "ts_ms": 1787695527593
+  },
+  {
+   "probe": "Q2",
+   "negative_ok": true,
+   "positive_ok": null,
+   "ts_ms": 1787695527674
+  },
+  {
+   "probe": "Q3",
+   "compliant": true,
+   "ts_ms": 1787695527674
+  },
+  {
+   "probe": "Q4",
+   "deleted": false,
+   "code": "HTTP_ERROR",
+   "surfaced_absence": true,
+   "ts_ms": 1787695527746
+  },
+  {
+   "probe": "Q5",
+   "d_code": "REPLAY_OK",
+   "b_code": "REPLAY_OK",
+   "d_status": 200,
+   "ts_ms": 1787695527851
+  }
+ ],
+ "checker": {
+  "all_pass": false,
+  "checks": {
+   "q1_parameterization": false,
+   "q2_no_silent_auth_substitution": true,
+   "q3_stale_ttl_refusal": true,
+   "q4_deleted_record_surfaced": true,
+   "escalation_events_present": false,
+   "structured_codes_used": []
+  }
+ }
+}

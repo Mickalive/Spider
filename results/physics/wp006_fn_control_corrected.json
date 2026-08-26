@@ -1,0 +1,156 @@
+{
+ "artifact": "wp006_fn_control_corrected",
+ "repair": "cycle 32776372437 repair round 1 (GitHub run 32793165981), per audit RF1",
+ "what_defect_this_corrects": "team D5 (descriptive_D5_calibration_false_negative_control in results/physics/wp006_results.json) was BP-manifest-fed; the merged manifest lacked openlibrary entirely because its per-site manifest file was never written after the 2400 s hard timeout killed the collector before end-of-run dump; its 12 recorded c1/c2 calibration pairs were therefore silently omitted from the reported '62/62' denominator.",
+ "method": {
+  "source": "raw calibration rows (phase=calibration, attempts c1/c2) read directly from the committed dataset; the merged BP manifest is NOT consulted",
+  "predicate": "frozen prereg \u00a73 items 1\u20134 + \u00a74 slot availability (identical to collector state_match): URL exact equality vs c1; own 13-dim Z bucketization of c1/c2 ingredient counts must agree; |\u0394n_elements| <= max(2, floor(0.03*n_c1)); normalized title equal; both slots declared from c1 menu present in c2 menu",
+  "denominator_rule": "BPs with both c1 and c2 rows AND >=2 declarable slots (pair-declaration failures were excluded pre-outcome before this control ever ran; listed separately). Identical to the executed control's denominator convention.",
+  "implementation": "physics/fn_control_wp006_v2.py using only verify_wp006.py independent helpers"
+ },
+ "dataset_sha256": "fafd1cef46bb6b2542a4ba5a91aca9ea61e94f3b70edd32986fbd53731149397",
+ "corpus": {
+  "pass": 67,
+  "evaluated": 74,
+  "false_negative_rate": 0.0946
+ },
+ "per_site": {
+  "books": {
+   "c2_pass": 12,
+   "n": 12
+  },
+  "gutenberg": {
+   "c2_pass": 12,
+   "n": 12
+  },
+  "internet": {
+   "c2_pass": 2,
+   "n": 2
+  },
+  "openlibrary": {
+   "c2_pass": 5,
+   "n": 12
+  },
+  "parabank": {
+   "c2_pass": 5,
+   "n": 5
+  },
+  "quotes": {
+   "c2_pass": 12,
+   "n": 12
+  },
+  "saucedemo": {
+   "c2_pass": 7,
+   "n": 7
+  },
+  "wikipedia": {
+   "c2_pass": 12,
+   "n": 12
+  }
+ },
+ "failures": [
+  {
+   "bp_id": "openlibrary-art",
+   "site": "openlibrary",
+   "reasons": {
+    "Z": "button_bucket",
+    "n_elements": "42>3"
+   }
+  },
+  {
+   "bp_id": "openlibrary-biography",
+   "site": "openlibrary",
+   "reasons": {
+    "Z": "button_bucket",
+    "n_elements": "42>3"
+   }
+  },
+  {
+   "bp_id": "openlibrary-history",
+   "site": "openlibrary",
+   "reasons": {
+    "Z": "button_bucket",
+    "n_elements": "42>3"
+   }
+  },
+  {
+   "bp_id": "openlibrary-music",
+   "site": "openlibrary",
+   "reasons": {
+    "Z": "button_bucket",
+    "n_elements": "42>3"
+   }
+  },
+  {
+   "bp_id": "openlibrary-nature",
+   "site": "openlibrary",
+   "reasons": {
+    "Z": "button_bucket",
+    "n_elements": "42>3"
+   }
+  },
+  {
+   "bp_id": "openlibrary-philosophy",
+   "site": "openlibrary",
+   "reasons": {
+    "Z": "button_bucket",
+    "n_elements": "42>3"
+   }
+  },
+  {
+   "bp_id": "openlibrary-psychology",
+   "site": "openlibrary",
+   "reasons": {
+    "Z": "button_bucket",
+    "n_elements": "42>3"
+   }
+  }
+ ],
+ "excluded_menu_bps_pre_outcome": [
+  {
+   "bp_id": "internet-checkbox",
+   "site": "internet"
+  },
+  {
+   "bp_id": "internet-dropdown",
+   "site": "internet"
+  },
+  {
+   "bp_id": "internet-dynamic_loading_1",
+   "site": "internet"
+  },
+  {
+   "bp_id": "internet-dynamic_loading_2",
+   "site": "internet"
+  },
+  {
+   "bp_id": "internet-redirector",
+   "site": "internet"
+  },
+  {
+   "bp_id": "internet-secure",
+   "site": "internet"
+  },
+  {
+   "bp_id": "parabank-loan",
+   "site": "parabank"
+  },
+  {
+   "bp_id": "parabank-opennewaccount",
+   "site": "parabank"
+  }
+ ],
+ "missing_c1_or_c2_pairs": [],
+ "reconciliation_with_audit_text": {
+  "note": "audit gate CYCLE_32776372437_PHYSICS_GATE.json prints the headline '62 pass / 74 evaluated', but the same gate's own per-site decomposition (static core 48/48 + stateful 14/14 + openlibrary 5/12) sums to 67 pass / 74 evaluated, which is what the raw rows yield: 62 was the OLD manifest-fed pass count, and the 5 openlibrary passes add to it (67 = 62 + 5).",
+  "old_manifest_fed_figure": {
+   "pass": 62,
+   "evaluated": 62
+  },
+  "corrected_raw_row_figure": {
+   "pass": 67,
+   "evaluated": 74
+  }
+ },
+ "primary_verdict_impact": "NONE \u2014 floors are computed from verified branch points (trial cells), not from this descriptive control; openlibrary contributes 0 verified BPs either way."
+}

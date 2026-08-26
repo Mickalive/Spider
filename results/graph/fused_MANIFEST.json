@@ -1,0 +1,36 @@
+{
+ "program": "graph-addressing-fused-retrieval",
+ "run_id": 32905175867,
+ "phase": "complete-canonical",
+ "prereg": "graph/prereg_fused_retrieval.md",
+ "freeze_commit": "05c049d",
+ "kb_dump": "results/graph/generalization_growth_kb_dump.json.gz",
+ "kb_dump_sha256": "a423f43939a685f438725592ee50dd72f0da0eb7b63f0f8d36ec86edbae27769",
+ "artifacts": {
+  "graph/prereg_fused_retrieval.md": "bf72f3d01909c706e26b9cad1068b8bc8ec01b2be5a2c928a3e6f053acab3c51",
+  "graph/paraphrases_fused_dev.json": "63b205a4cf7355da3eeb15bed1268ad43d1db285bcd00f794b3721834487676b",
+  "graph/paraphrases_fused_confirm.json": "4846f1d545da2f2b50450762fd6bb7b0615d2f8b630aba6e92f0c65e1eefb3d4",
+  "graph/paraphrase_prompt_fused_dev.md": "f708832f2d57a24d61dc18b89b7dfa5c502914c152123fd393064b980227c7fb",
+  "graph/paraphrase_prompt_fused_confirm.md": "9d055b9ee1945c6d32cdc44c8adaabfc0396f3d34f0ca387224f0a483e108102",
+  "graph/fused_retrieval.py": "6fb05d62a6ab9b356e95e7231310f2eeb6ce5cb5774cadef8e00da93b3c7c530",
+  "graph/fused_eval.py": "b9b4cb18b3c1c6cd53daf3a47d6eb72f79db1e6c497c2720823bad3138c3fb5c",
+  "graph/tasks_fused.py": "aebeb13f558b5b11c2db81ad02185258921243b4078176c63273e4280eabe65e",
+  "graph/run_fused_calibration.py": "856e34856495387982dd1f7b2d368aa76d6a295da33f632ae1a86b61082a10bd",
+  "graph/screen_fused_dev.py": "12464b396b55157812db09e276bb3edcdd7dba60b38e4841910fd1bf902c23b2",
+  "graph/run_fused_retrieval_confirm.py": "ffdc96035d84d34e5e98a51fffb3c0b161d8728faaca6d0ff1f8ee2e761901cc",
+  "graph/run_fused_live.py": "f19cab1131d17ccd1412a1a89660ffb7bb57408ce29cbd7c918f63eeb570cb9f",
+  "graph/analyze_fused.py": "ff4f32503c23c877d496a65a845ce117d90ac1c8aed8080eb7b0f7772cf8a741",
+  "tests/test_graph_fused.py": "779127b003ee74f88d6b157c26f13446caf1024b906a31e42e91b76730c43131",
+  "results/graph/fused_truth_sets.json": "489631af1c8ff3aa48e3bf84893477133bc3d417071b3e93caea4ebc922b90f2",
+  "results/graph/fused_dev_selection.json": "440c1b9e6e173c1248ec4e37d871c61d27fa5cfadb7e338a6065004221810d1e",
+  "results/graph/fused_retrieval_confirm.json": "30c0490d885beb5a8517cc7b7b81a81b2f5d8f20d56a1549faae2c8bd465df36",
+  "results/graph/fused_live_runs.json": "1654b665c62ee0ebf3b5d1fe30008ab7afa881fd86469f84e9ffd4f6b8c3fd3a",
+  "results/graph/fused_analysis.json": "0922b06de6d30c5157b58309723ee4808878e5dcd6519104ac4f9994f401dc41",
+  "results/graph/provenance/fused_live_runs_exporter_defect_pass1.json": "9a83fa2ec289f041b23532779f9d685bc9f0e4c217c675d929e0f09538e34414"
+ },
+ "notes": [
+  "calibration partial file retained as provenance of chunked protocol",
+  "exporter-defect first grid preserved under provenance/, never cited",
+  "REPAIR-R1 ERRATA (audit CYCLE_32905175867_GRAPH RF-4; no outcome artifact touched): run_fused_retrieval_confirm.py and screen_fused_dev.py read self_sha256_input from the calibration gzip (results/graph/fused_calibration.json.gz, which lacks that field) instead of from results/graph/fused_truth_sets.json, leaving calibration_self_sha256=null in both fused_dev_selection.json and fused_retrieval_confirm.json. The true cross-phase calibration/truth-set self-pin is 235834e82810c36f0f97a63504d8cb60c3da4ef72f092df3406aa721c0c81e77, recorded in results/graph/fused_truth_sets.json field self_sha256_input (sha256 over the canonical sort-keys JSON of the calibration metadata); fused_truth_sets.json file sha256 is pinned above as 489631af1c8ff3aa48e3bf84893477133bc3d417071b3e93caea4ebc922b90f2. Cross-phase binding rests on this note plus the manifest pins until any successor regenerates artifacts."
+ ]
+}

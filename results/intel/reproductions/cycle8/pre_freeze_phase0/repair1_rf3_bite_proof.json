@@ -1,0 +1,36 @@
+{
+ "artifact": "repair1_rf3_bite_proof",
+ "non_evidence": true,
+ "purpose": "RF-3: prove the prereg-text-derived fixtures BITE against the round-0 evaluator BEFORE evaluate_rule.py was repaired (auditor run 32919276642 defects D1/D2 demonstrated mechanically). Captured 2026-08-26 pre-fix; conditions #1/#2/#4 were already implemented round-0 (their cases pass pre-fix, demonstrating conformance); condition #3 and both RF-2 scenarios FAILED pre-fix exactly as audited.",
+ "pre_fix_results": {
+  "all_pass_useful": "REPRODUCED_USEFUL",
+  "b_slow_d_unattributable_no_advantage": "REPRODUCED_NO_ADVANTAGE",
+  "discovery_fail_failed_to_reproduce": "FAILED_TO_REPRODUCE",
+  "missing_file_invalid": "MEASUREMENT_INVALID",
+  "c2_pass_c3_midband_inconclusive": "INCONCLUSIVE",
+  "cond1_unparseable_file_invalid": "MEASUREMENT_INVALID",
+  "cond2_p0_fewer_than_3_up_invalid": "MEASUREMENT_INVALID",
+  "cond3_two_tasks_below_3_scored_pairs_invalid": "INCONCLUSIVE",
+  "cond4_ttl_anchor_missing_sha_invalid": "MEASUREMENT_INVALID",
+  "rf2a_substitution_preserves_family_m4_useful": "FAILED_TO_REPRODUCE",
+  "rf2b_survivor_shrink_m3_useful": "FAILED_TO_REPRODUCE"
+ },
+ "expected": {
+  "all_pass_useful": "REPRODUCED_USEFUL",
+  "b_slow_d_unattributable_no_advantage": "REPRODUCED_NO_ADVANTAGE",
+  "discovery_fail_failed_to_reproduce": "FAILED_TO_REPRODUCE",
+  "missing_file_invalid": "MEASUREMENT_INVALID",
+  "c2_pass_c3_midband_inconclusive": "INCONCLUSIVE",
+  "cond1_unparseable_file_invalid": "MEASUREMENT_INVALID",
+  "cond2_p0_fewer_than_3_up_invalid": "MEASUREMENT_INVALID",
+  "cond3_two_tasks_below_3_scored_pairs_invalid": "MEASUREMENT_INVALID",
+  "cond4_ttl_anchor_missing_sha_invalid": "MEASUREMENT_INVALID",
+  "rf2a_substitution_preserves_family_m4_useful": "REPRODUCED_USEFUL",
+  "rf2b_survivor_shrink_m3_useful": "REPRODUCED_USEFUL"
+ },
+ "bites": [
+  "cond3_two_tasks_below_3_scored_pairs_invalid",
+  "rf2a_substitution_preserves_family_m4_useful",
+  "rf2b_survivor_shrink_m3_useful"
+ ]
+}

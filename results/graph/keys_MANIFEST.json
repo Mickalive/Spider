@@ -1,0 +1,100 @@
+{
+ "program": "graph-addressing-key-induction",
+ "run_id": 32925866227,
+ "branch": "cycle/graph/32925866227/team",
+ "repair_round": 1,
+ "rejected_snapshot_provenance": "round-0 team snapshot preserved verbatim at origin/cycle/graph/32925866227/team @ 4fb87c0; rejected round-0 DERIVED artifacts (invalid p-values, parity-blind recount, stale claim tables) preserved under results/graph/provenance/*REJECTED_ROUND0* and pinned below",
+ "prereg": "graph/prereg_key_induction.md",
+ "freeze_commit_note": "prereg+instruments+code committed before any calibration/screening/confirm/live row",
+ "rules_hash": "b76e3726ea2d547652645c9878ea7595",
+ "derived_keys_sha256_by_variant": {
+  "K_aff": "470d274f4b4b1e437c6b8c7f1c4cdeff462f5c5aeb3888ace0f77b803e1ce6c0",
+  "K_reg": "194403cfaa109d83f7ab0675c9dae4351c65ed9aa64e28b247e8fbe0b7005f2d",
+  "K_full": "914b01ccc0e6469711c03747c880b570f0670bf5658f3d9fc53841f5d26cf01a"
+ },
+ "join_multiplicity_gt1_fragments": {
+  "1": {
+   "entry_states": 3,
+   "effect_states": 1
+  },
+  "2": {
+   "entry_states": 2,
+   "effect_states": 2
+  },
+  "3": {
+   "entry_states": 2,
+   "effect_states": 2
+  },
+  "7": {
+   "entry_states": 3,
+   "effect_states": 3
+  },
+  "12": {
+   "entry_states": 3,
+   "effect_states": 3
+  },
+  "14": {
+   "entry_states": 3,
+   "effect_states": 2
+  },
+  "16": {
+   "entry_states": 3,
+   "effect_states": 3
+  }
+ },
+ "join_multiplicity_note": "site-scoped transitions joins; multiplicity recorded, never used by selection",
+ "kb_dump_sha256": "a423f43939a685f438725592ee50dd72f0da0eb7b63f0f8d36ec86edbae27769",
+ "kb_stats": {
+  "states": 19,
+  "transitions": 29,
+  "actions": 15,
+  "fragments": 16
+ },
+ "python_version": "3.12.3",
+ "artifact_sha256": {
+  "graph/prereg_key_induction.md": "30af38e5cfc6186dc4016646ba4f31a93cde0f6856afd0fbf5de42c4a4f48461",
+  "graph/paraphrases_keys_dev.json": "01c6436f1a876e27888f6b11e5ff29c5cf756456d692d871993a395ae3a3164c",
+  "graph/paraphrases_keys_confirm.json": "e8ce9a265fdc92424cd437e0e43c616fc8aee76bfcdad6ebde12b471c127a200",
+  "graph/paraphrase_prompt_keys_dev.md": "9ce49c2d3691d0bdd40a40818eb8dfd3c1cae770a962be36bbb50658bd147b60",
+  "graph/paraphrase_prompt_keys_confirm.md": "e3683076f894bf437ef1919db1ad05bfe1105ae503ec1e3d7616a77eadafb764",
+  "graph/induced_keys.py": "8183aab85d9b272e71ca683d6a8925d0e2198ab0c74594969a6f120cf0bd312b",
+  "graph/tasks_keys.py": "2faab76923031a51de02d8fed611598e0fab7bd82b76ab2a72dc7aeb621abe4f",
+  "graph/keys_eval.py": "a03acd8f427d383405af49e0b0323a96e8a2f19bac55ceac69120683bd414032",
+  "graph/run_keys_calibration.py": "016838fa41d699e57a611b8b66ff9af0ef2a1c9fe2cfd7b394e269042dcb24cb",
+  "graph/screen_keys_dev.py": "a34dbdd58d3509f87a42d5abb2cf81573d8d404983b3a4fe473c32c02b2bd0aa",
+  "graph/run_keys_retrieval_confirm.py": "bf45527ea2f67d28f56e5cb66e937c8c4b69523367e9915e3d98ef95fac6f6e3",
+  "graph/run_keys_live.py": "3467dd2c8b07df45a3d27cf17a6bc61fc596f77f1d5b474a1c2db3fab1251c37",
+  "graph/keys_tiesensitivity.py": "e2f257596d261964a57776f919aa3013a8cc59a444c76dfd121abf6c164ab340",
+  "graph/analyze_keys.py": "9e79611d44f642eb8e7fedb76c1a38c42a5603cfce3e013078a7e8e7f8cdf9cd",
+  "graph/make_claim_tables.py": "40d7da6c18a05f048f9e0518ffd4c29293b3719620b48931099994a37788cb3d",
+  "graph/recount_keys.py": "ec9bcf7ad843c60c2d3f204bff5f4cf24782aa17bbcfc9087ca4e06cc707e974",
+  "tests/test_graph_keys.py": "0595d36bbbcd76a69bc427853d5613eabecd22ed449ce3ea4e72be364bf47fd8",
+  "results/graph/keys_calibration.json.gz": "9044c0bad11d824ab44376fb1777a6028830d1499202158f0b90987a018890e9",
+  "results/graph/keys_truth_sets.json": "36d4dc6f5d2b6efc64a1ba808192f82bce6a4fe497c4c8802ca2e8de67127e17",
+  "results/graph/keys_dev_selection.json": "42022995661aab24066c63184a74bb0aff8618ac0547a7737cd07809d50e4402",
+  "results/graph/keys_retrieval_confirm.json": "67786eb52c375670ca484c252c792d6c77f38275d2c413303db7512f20b6d084",
+  "results/graph/keys_live_runs.json": "69e28dcf8327c1dc77a432557b769f0db56d79fcdc5fbe4c7ab014a347dab1ec",
+  "results/graph/keys_tiesensitivity.json": "dc85203c1b7584586440a7b11d586adecd1549eadc23e33b15f632dbcfb57b18",
+  "results/graph/keys_analysis.json": "0ecab5114843bf8d1ac52e0a0313d77b23c2f1ff850f3e37845322046442798f",
+  "results/graph/keys_RECOUNT.json": "c93760104cb0272d35fab72624edd4245f5560df86faa1480211134797727839",
+  "results/graph/keys_claim_tables.md": "615eaad54f6b7967f676e1cf628712a7693d34321875663f219c44983d3ea840",
+  "results/graph/provenance/keys_analysis_REJECTED_ROUND0_invalid_p_values.json": "8354acf67202865933749861af4f68efd7550a561ca4d16b7aa8519e17e374e0",
+  "results/graph/provenance/keys_RECOUNT_REJECTED_ROUND0_parity_blind_to_p.json": "aed68a4dcddeca9c7c6f6c0b554d8f41e64b84b3a548204d60788a06d0e1c46f",
+  "results/graph/provenance/keys_claim_tables_REJECTED_ROUND0.md": "437a0717b403aa213a2d0e22a6ed0225cddc391a054c38bdfeafdeeb02cd3d30"
+ },
+ "truth_set_stability_vs_gh7": {
+  "delta_qids": {},
+  "n_compared": 25,
+  "identical": true
+ },
+ "notes": [
+  "no summarizer exists in this program: would-be LLM calls are 0 BY CONSTRUCTION; retrieval_us fields are perf_counter hygiene only (integer flooring upstream supports no latency claim)",
+  "analyzer item-29 parity correction disclosed in results/graph/keys_analysis.json gates block: verdict computed exactly per prereg s8/s9 ('below 15 decisive pairs the statistic is INDETERMINATE, never falsified'); correction is conservative and happened before report/ledger wording was written",
+  "RF-1 SIGN-TEST REPAIR: graph/keys_eval.py paired_sign/sign_test_p now compute the prereg s8 statistic as written - direction-labeled exact one-sided binomial tails, one_sided_p = P(X >= wins | decisive pairs, .5) on the DECLARED better arm (B_keys); the removed implementation passed min(wins, reversals) (smaller-side tail), so every round-0 committed p-value was invalid and `separates` was unreachable for any B-favorable outcome (latent false-FALSIFIED hazard). Corrected values from UNCHANGED raw rows: primary gated informative-hard 10W/0R d=10 -> p=0.000977; secondary ungated 10W/9R d=19 -> p=0.500000; four-way literal gated_all 12W/0R d=12 -> p=0.000244; ungated_all 13W/10R d=23 -> p=0.33882; PAGER cluster ungated 8W/0R -> p=0.003906. Verdict remains INDETERMINATE_BELOW_FLOOR across all branches/readings (floor binding). Raw-evidence sha256 pins identical to round 0.",
+  "RF-2 FOUR-WAY RELABELING: four_way_contrast_recount now holds LITERAL populations ({hard n=64} x {all n=75}); the previous block had computed informative-conditioned populations (61/72) under hard/all labels. The informative-conditioned variants are kept in a separate honestly-labeled block (four_way_informative_conditioned_recount, n=61/72) with the identical convention note in both blocks; units inside every cell; keys_claim_tables.md aligned.",
+  "RF-3 POST-FREEZE DRIVER CHANGE DISCLOSURE: graph/run_keys_retrieval_confirm.py received a metadata-only pool_ids source fix at commit b80394d (before any analysis or report existed): D_random's per-row pool_ids list is read from banks['A_keys'] (the bank FR.random_rank actually samples) instead of banks['D_random'], which does not exist as a bank and would have raised KeyError at freeze-time code. Statistics-neutral by construction (D_random's pool is the same-site fragment-id list under either source); disclosed here per freeze-chain discipline; raw rows unchanged.",
+  "RF-4 REFERENCE-ARM SCOPE DIVERGENCE DISCLOSURE: this cycle's A_sig/A_ft reference arms ranked over ALL 16 store fragments while the frozen G-H7 incumbent site-scopes via bank.site_frags(site). Quantified offline deterministically in keys_analysis.json reference_arm_scope_recount (faithfulness gate green): A_sig hard@1 unscoped 51/64 vs site-scoped-equivalent 53/64; flipped rows q.rootpager@Q_ROOT_AUTH p1/p2 (unscoped fid 3 books -> scoped fid 10 quotes within truth [9,10]); A_ft 0/64 under both conventions. REFERENCE ONLY - no verdict gate consumes these arms; primary/secondary/validity artifacts untouched; unscoped columns are NOT comparable to G-H7 numbers without this label.",
+  "RF-5 RECOUNT COVERAGE: keys_RECOUNT.json parity_checks extended to every derived-statistic class (23 classes: slices, primary/secondary counts AND both direction-labeled tails, both four-way grids cell-by-cell incl. p-values and population labels, per-cluster cells, arm hard@1 grid, gated false accepts, recall@pool, projections, execution conversion/regression/all-pair cells, memory-led counts, pass identity, economics medians, tau integrity, validity precondition, duplicate-collapse, id10, verdict). Round-0 parity diffed wins/reversals only and could be true while a whole class (p-values) was silently wrong.",
+  "REPAIR SCOPE GUARANTEE: repair round 1 changed analyzer/eval statistic code, recount coverage, claim tables, report prose and manifest notes ONLY; scientific question, task set, instruments, taus, KB, execution grid and verdict rule are UNCHANGED; no raw artifact modified after its committing commit."
+ ]
+}

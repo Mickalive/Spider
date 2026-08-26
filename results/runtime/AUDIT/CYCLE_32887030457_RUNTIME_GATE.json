@@ -1,0 +1,103 @@
+{
+  "lane": "runtime",
+  "cycle_run_id": 32887030457,
+  "repair_round": 3,
+  "audited_snapshot_commit": "f2178e45c68027310014d703b4bf84c13cf3b74f",
+  "audited_snapshot_tree": "824325ab11f8e8c701364b5d19e91c5e99bb362a",
+  "accepted_base": "7669dcdc06279d0a8bed3de61a3f548bd8e0b6a7",
+  "prior_audit": {
+    "cycle_run_id": 32877702179,
+    "gate": "BLOCKED",
+    "resolution": "external/orchestration decision evidently occurred: runs 32885208777 and 32887030457 submitted new trees; this cycle is a legitimate restart with a fresh frozen prereg, not a fourth resubmission of af164b9"
+  },
+  "gate": "PASS",
+  "safe_to_integrate": true,
+  "recomputation_performed": true,
+  "headline": "Restart cycle after the BLOCKED zero-delta escalation: a fresh minimal resolve/applicability/execute/verify/report loop with two CANDIDATE capsules derived byte-reproducibly from accepted Graph evidence, executed as a preregistered two-cell live pilot. Every material number was independently recomputed from the committed raw event stream and matches: exact-repeat cell shows action/load PARITY (4v4, ratio 1.0) with 0 vs 4 novel decisions and the team withdrew its own prereg's work-compression phrasing against producer interest; stale-context cell shows clause-attributed ABSTAIN before any browser action, valid spider.plan/v0 handoff, single-novel-action caller repair and verified success while the baseline truthfully exhausted its 60-action budget. All six frozen gates are true under auditor recomputation. Residual findings are measurement-mechanics/process warnings (hardcoded gate booleans verified manually, undemonstrated hint causality with a hardcoded caller fallback, unmeasured verification compute plus mislabeled verify-row latency, self-attested freeze ordering), none of which changes a reported number or claim.",
+  "claims": [
+    {
+      "id": "C1",
+      "claim": "Exact-repeat cell: action/load parity (4v4), novel decisions 0v4, compression wording withdrawn",
+      "status": "SURVIVES_AUDIT",
+      "max_defensible_wording": "On a lexically transparent exact-repeat task at single-pass pilot scale, inheritance achieved action/load parity with zero novel decisions in the inherited arm (retrieval 0.54 ms included); no work compression is demonstrated and none may be claimed."
+    },
+    {
+      "id": "C2",
+      "claim": "Stale/wrong-context cell: observable per-clause abstain -> plan/v0 handoff -> caller repair -> inherited replay -> verified success vs truthfully-reported budget-failed baseline",
+      "status": "SURVIVES_AUDIT_WITH_LIMITS",
+      "max_defensible_wording": "Deterministic applicability FAIL with host_allowlist/elem_text_any attribution, zero browser actions before handoff, schema-valid plan handoff, and predicate-verified success after one caller-side novel navigation; illustrative failure avoidance only - never a speedup ratio and never a claim that the structured hint caused the caller's success."
+    },
+    {
+      "id": "C3",
+      "claim": "All six frozen gates pass",
+      "status": "TRUE_UNDER_AUDITOR_RECOMPUTATION",
+      "max_defensible_wording": "G-C1a/b and G-C2a/b/c independently recomputed true from rows/events; G-C1c is true under the defensible reading of the durable trail but was hardcoded True in the driver rather than mechanically derived, and G-C2c degenerates to an isinstance check."
+    },
+    {
+      "id": "C4",
+      "claim": "Total-overhead accounting including retrieval, applicability, recovery; additive null-not-zero telemetry",
+      "status": "SURVIVES_WITH_LIMITS",
+      "max_defensible_wording": "Retrieval+applicability latency measured natively and charged to SPIDER (warm-process exclusion disclosed); caller recovery charged as 1 novel action inside the SPIDER wall; 176/176 event rows schema-valid with null-not-zero and float latencies; verification compute remains unmeasured (count=1/row, addendum-recomputed) and verify-stage latency_ms fields are mislabeled, so no verification-cost or absolute-latency claim may be made."
+    },
+    {
+      "id": "C5",
+      "claim": "Agent-facing contract without internal-ID dependence, goal_sig leakage or credential leakage",
+      "status": "VALIDATED_FOR_CURRENT_TEST_WITH_NOTES",
+      "max_defensible_wording": "Consumers need no internal IDs (caller acted on expected_host alone); goal_sig values, store paths and credential literals absent from plans/events (grepped); plans do carry capsule_id + content sha256 as provenance, and semantic_keys derive upstream from step-vocabulary descriptions, so leak-freedom claims must stay scoped to query-time scoring (tested) and need-sense ID independence."
+    },
+    {
+      "id": "C6",
+      "claim": "Evidence-tier discipline: CANDIDATE capsules, unmeasured fields null, model independence declared unfalsifiable",
+      "status": "VALIDATED_FOR_CURRENT_TEST",
+      "max_defensible_wording": "Derivation reproduced byte-identically (canonical shas match index/filenames/results pins); validator-enforced VALIDATED_POC ceiling with negative fixture; zero provider calls anywhere; cross-model inheritance unfalsifiable this cycle by design and stated as such."
+    },
+    {
+      "id": "C7",
+      "claim": "Executable test coverage green and hermetic",
+      "status": "SURVIVES_AUDIT",
+      "max_defensible_wording": "23/23 tests pass in auditor sandbox (pytest 9.1.1 / Python 3.12.3) incl. executor refusal of NOVELTY_GAP execution, UNKNOWN-not-forced-hit, foreign-executor materialization parity and retrieval invariance; running tests mutates nothing committed (old-cycle non-hermeticity eliminated)."
+    },
+    {
+      "id": "C8",
+      "claim": "Provenance discipline: attempts preserved, post-hoc recomputation labeled, ledger/handoff filled",
+      "status": "SURVIVES_AUDIT_WITH_WARNING",
+      "max_defensible_wording": "Attempt-1 (baseline defect producing rcr=0.0046) discarded against producer interest and preserved; attempt-2 preserved for missing telemetry; final data internally consistent; freeze ordering however rests on the run-start self-recorded prereg hash because all artifacts sit in a single commit (W4)."
+    }
+  ],
+  "required_fixes": [],
+  "warnings": [
+    "W1 (binding next cycle): G-C1c is hardcoded True at pilot.py:472 and G-C2c reduces to isinstance(success,bool). Auditor recomputed both true from the event trail (single applicability-pass retrieval event precedes all four C2 actions; zero acts before handoff), but future gates must be derived mechanically from the stream; there are no per-action applicability events, so 'every action preceded by an applicability-pass event' is only satisfiable at segment granularity.",
+    "W2 (binding next cycle): hidden answer leakage into the C2 success path - the pilot's caller defaults to URL_Q_HOME when the plan hint is absent (pilot.py:374-378), so hint causality is undemonstrated (sufficiency only). Cycle 2 must blind the caller (no default target) and add a hint-ablation arm before any hint-value or fallback-compression wording.",
+    "W3: verification compute is unmeasured (count=1/row via addendum recomputation) and verify-stage cost events mislabel latency_ms (SPIDER verify rows carry retrieval ms; BASE verify row carries whole-arm wall ms). Fix labels and time the verifier before quoting any verification or wall-based overhead number.",
+    "W4: freeze ordering is self-attested (prereg+instruments+capsules+outcomes in single commit f2178e4); the prior audit's separate-commit warning was not followed. Next cycle must commit prereg before outcomes exist so git can order them.",
+    "W5: intent.semantic_keys derive from Graph fragment descriptions that encode mechanism-step vocabulary ('btn','form-control','submit',...). Runtime-side steps/values-stripped scoring is real and tested, and fill values are absent from keys, but 'route leakage structurally impossible' holds query-time only; also ranking power is untested at n=2 with byte-identical key sets and identical step sequences across both capsules.",
+    "W6: plans expose capsule_id and capsule_version_sha256 (content-addressed provenance) and the handoff note exposes capsule_id; keep 'no internal IDs' phrasing scoped to consumer need-sense, not artifact absence.",
+    "W7: the previously frozen six-W R0 instrument from BLOCKED cycles 32864270667-32877702179 was abandoned without an explicit supersession record in the new ledger (provenance intact on origin branches; no outcomes ever existed under it). Add a supersession note; the cited CTO-4 charter (/tmp/spider_cto/docs/CTO_TO_RUNTIME.md) is not committed and could not be independently verified here.",
+    "W8: n=1 per cell, single pass, live external DOM; wall-clock values advisory; BASE entry_digest not serialized so the within-pair digest guard ran on SPIDER rows plus preflight digests only (team-disclosed; preflight digests equal SPIDER entry digests, bounding drift).",
+    "W9: prereg expectations are enforced with asserts that crash the batch on violation instead of recording an honest failed row; all held this run, but HEALTH_TRIP-style recording should replace crash-on-expectation before cells where ABSTAIN is not deterministic."
+  ],
+  "maximum_defensible_wording": "Runtime R0-1 (run 32887030457) delivers the first measured end-to-end agent-facing loop: a content-addressed CANDIDATE capsule registry derived byte-reproducibly from accepted Graph evidence, three-valued precondition applicability with per-clause attribution, a single executor that refuses silent execution of non-inherited segments, harness-only verification, dual-name D8-identical cost events (88 twin pairs, identity errors 0, 176/176 schema-valid), and materialized spider.plan/v0 handoff-to-caller as the only fallback. Measured on one matched pair per cell against a memory-free scripted explorer with zero provider calls: exact-repeat shows action/load parity with 0 vs 4 novel decisions (compression explicitly withdrawn by the producer); wrong-host entry shows observable abstain before any browser action and verified success after a one-action context repair while the baseline exhausts its budget (failure avoidance, not a ratio). Cross-model inheritance is unfalsifiable this cycle and declared so. No compression, speedup, verification-cost, hint-causality or ranking-quality claim is licensed beyond these ceilings; all six gates hold under independent recomputation.",
+  "auditor_recomputed_facts": {
+    "snapshot_identity": "/tmp/spider_runtime_team == origin/cycle/runtime/32887030457/{team,team-attempt-2} == f2178e45 (tree 824325ab); attempt-1 c2f0ba8 preserved separately",
+    "prereg_sha256_match": true,
+    "input_dump_sha256_match": "ec5af9e146ea629fac642ec4a7b14c49b685e5c193cff345a92191b7e05e7073",
+    "capsule_derivation_byte_identical": "2/2 canonical shas reproduce committed artifacts and index",
+    "cost_event_rows": {"total": 176, "spider": 88, "pb001_twins": 88, "distinct_row_ids": 88, "twin_identity_errors": 0, "schema_invalid": 0},
+    "rows_recomputed": {"C1_base": "succ/4act/3load", "C1_spider": "succ/4act(4 reused,0 novel)/3load", "C2_base": "fail/60act/51load", "C2_spider": "succ/5act(4 reused,1 novel)/4load ABSTAIN->RESOLVED"},
+    "event_order_C2_spider": ["ret1", "handoff", "caller-goto", "ret2", "act1..act4", "verify", "rep"],
+    "repeat_cost_ratio_actions": 1.0,
+    "wall_ratio_C2_raw_but_unquotable": 13.47,
+    "preflight_digest_equals_entry_digest": {"quotes_home": "395f96f5...", "books_home": "569f5535..."},
+    "credential_literals_in_events": false,
+    "goal_sig_or_store_path_tokens_in_events": 0,
+    "tests": "23 passed / 0 failed (sandbox copy; pytest 9.1.1)",
+    "test_run_mutates_committed_files": false,
+    "g_c1c_hardcoded_line": "pilot.py:472 g_c1c = True  # trail audited from events file post-hoc",
+    "caller_hardcoded_default_target": "pilot.py:377-378 URL_Q_HOME fallback when hint absent",
+    "verify_latency_mislabel_sites": ["pilot.py:295 latency_ms=retrieval_ms", "pilot.py:218 latency_ms=c['wall_ms_perf']"],
+    "attempt1_discarded_result": "BASE C1 862 actions -> rcr=0.0046, reuse_yield=858 (producer-unfavorable discard)",
+    "live_pilot_rerun_by_auditor": "not possible in audit sandbox (playwright browsers unavailable); audit rests on committed raw event stream, hermetic tests, code inspection and byte-level reproduction of derivation"
+  },
+  "audit_report": "reports/audit/CYCLE_32887030457_RUNTIME.md",
+  "evidence_sandbox": "/tmp/opencode/rt_audit_r3/snap (copy; mounted team tree untouched)"
+}

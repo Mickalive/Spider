@@ -1,0 +1,145 @@
+{
+ "recomputed": true,
+ "method": "deterministic subgoal-end reconstruction from the committed action-marker matrix (audit CYCLE_32793580374 RF-2): end_i = first snapshot at/after previous end satisfying the subgoal's own frozen region detector; final subgoal = final snapshot. Growth was NOT re-executed.",
+ "detectors": {
+  "GB1_books_home/books.home": "ROOT_B",
+  "GQ1_quotes_home/quotes.home": "ROOT_Q",
+  "GQ2_quotes_logout/quotes.login": "LOGGEDIN==D2Q_quotes_login_p3|eval.c2.login",
+  "GQ2_quotes_logout/quotes.logout": "ROOT_Q^LOGGEDOUT==D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.logout"
+ },
+ "inputs": {
+  "manifest_sha256": "166d2404438eee3b7007cb1aed7988c6da9201060be01d1721beaabc3c7c94b7",
+  "manifest_path": "results/graph/scaling_growth_manifest.json"
+ },
+ "attempts": [
+  {
+   "task": "GB1_books_home",
+   "attempt": 1,
+   "n_action_records": 2,
+   "ends": [
+    {
+     "sig": "books.home",
+     "index": 1,
+     "url": "https://books.toscrape.com/index.html",
+     "detector": "ROOT_B",
+     "markers": {
+      "D2Q_quotes_login_p3|eval.c2.login": false,
+      "D2Q_quotes_login_p3|eval.c2.page3": false,
+      "D3B_books_mystery_p2_book|eval.b.cat": false,
+      "D3B_books_mystery_p2_book|eval.b.page2": false,
+      "D3B_books_mystery_p2_book|eval.b.book": false,
+      "D4B_books_mystery_p2_book_home|eval.b.cat": false,
+      "D4B_books_mystery_p2_book_home|eval.b.page2": false,
+      "D4B_books_mystery_p2_book_home|eval.b.book": false,
+      "D4B_books_mystery_p2_book_home|eval.b.home": true,
+      "D4Q_quotes_login_tag_tagp2_home|eval.q.login": false,
+      "D4Q_quotes_login_tag_tagp2_home|eval.q.tag": false,
+      "D4Q_quotes_login_tag_tagp2_home|eval.q.tagp2": false,
+      "D4Q_quotes_login_tag_tagp2_home|eval.q.home": false,
+      "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.login": false,
+      "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.tag": false,
+      "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.tagp2": false,
+      "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.home": false,
+      "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.rootpager": false,
+      "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.logout": false
+     }
+    }
+   ]
+  },
+  {
+   "task": "GQ1_quotes_home",
+   "attempt": 1,
+   "n_action_records": 2,
+   "ends": [
+    {
+     "sig": "quotes.home",
+     "index": 1,
+     "url": "https://quotes.toscrape.com/",
+     "detector": "ROOT_Q",
+     "markers": {
+      "D2Q_quotes_login_p3|eval.c2.login": false,
+      "D2Q_quotes_login_p3|eval.c2.page3": false,
+      "D3B_books_mystery_p2_book|eval.b.cat": false,
+      "D3B_books_mystery_p2_book|eval.b.page2": false,
+      "D3B_books_mystery_p2_book|eval.b.book": false,
+      "D4B_books_mystery_p2_book_home|eval.b.cat": false,
+      "D4B_books_mystery_p2_book_home|eval.b.page2": false,
+      "D4B_books_mystery_p2_book_home|eval.b.book": false,
+      "D4B_books_mystery_p2_book_home|eval.b.home": false,
+      "D4Q_quotes_login_tag_tagp2_home|eval.q.login": false,
+      "D4Q_quotes_login_tag_tagp2_home|eval.q.tag": false,
+      "D4Q_quotes_login_tag_tagp2_home|eval.q.tagp2": false,
+      "D4Q_quotes_login_tag_tagp2_home|eval.q.home": false,
+      "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.login": false,
+      "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.tag": false,
+      "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.tagp2": false,
+      "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.home": false,
+      "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.rootpager": false,
+      "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.logout": true
+     }
+    }
+   ]
+  },
+  {
+   "task": "GQ2_quotes_logout",
+   "attempt": 1,
+   "n_action_records": 7,
+   "ends": [
+    {
+     "sig": "quotes.login",
+     "index": 4,
+     "url": "https://quotes.toscrape.com/",
+     "detector": "LOGGEDIN==D2Q_quotes_login_p3|eval.c2.login",
+     "markers": {
+      "D2Q_quotes_login_p3|eval.c2.login": true,
+      "D2Q_quotes_login_p3|eval.c2.page3": false,
+      "D3B_books_mystery_p2_book|eval.b.cat": false,
+      "D3B_books_mystery_p2_book|eval.b.page2": false,
+      "D3B_books_mystery_p2_book|eval.b.book": false,
+      "D4B_books_mystery_p2_book_home|eval.b.cat": false,
+      "D4B_books_mystery_p2_book_home|eval.b.page2": false,
+      "D4B_books_mystery_p2_book_home|eval.b.book": false,
+      "D4B_books_mystery_p2_book_home|eval.b.home": false,
+      "D4Q_quotes_login_tag_tagp2_home|eval.q.login": true,
+      "D4Q_quotes_login_tag_tagp2_home|eval.q.tag": false,
+      "D4Q_quotes_login_tag_tagp2_home|eval.q.tagp2": false,
+      "D4Q_quotes_login_tag_tagp2_home|eval.q.home": true,
+      "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.login": true,
+      "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.tag": false,
+      "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.tagp2": false,
+      "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.home": true,
+      "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.rootpager": false,
+      "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.logout": false
+     }
+    },
+    {
+     "sig": "quotes.logout",
+     "index": 6,
+     "url": "https://quotes.toscrape.com/",
+     "detector": "ROOT_Q^LOGGEDOUT==D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.logout",
+     "markers": {
+      "D2Q_quotes_login_p3|eval.c2.login": false,
+      "D2Q_quotes_login_p3|eval.c2.page3": false,
+      "D3B_books_mystery_p2_book|eval.b.cat": false,
+      "D3B_books_mystery_p2_book|eval.b.page2": false,
+      "D3B_books_mystery_p2_book|eval.b.book": false,
+      "D4B_books_mystery_p2_book_home|eval.b.cat": false,
+      "D4B_books_mystery_p2_book_home|eval.b.page2": false,
+      "D4B_books_mystery_p2_book_home|eval.b.book": false,
+      "D4B_books_mystery_p2_book_home|eval.b.home": false,
+      "D4Q_quotes_login_tag_tagp2_home|eval.q.login": false,
+      "D4Q_quotes_login_tag_tagp2_home|eval.q.tag": false,
+      "D4Q_quotes_login_tag_tagp2_home|eval.q.tagp2": false,
+      "D4Q_quotes_login_tag_tagp2_home|eval.q.home": false,
+      "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.login": false,
+      "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.tag": false,
+      "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.tagp2": false,
+      "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.home": false,
+      "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.rootpager": false,
+      "D5Q_login_tag_tagp2_home_rootpager_logout|eval.q.logout": true
+     }
+    }
+   ]
+  }
+ ]
+}

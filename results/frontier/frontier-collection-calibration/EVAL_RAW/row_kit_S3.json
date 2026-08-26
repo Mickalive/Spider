@@ -1,0 +1,35 @@
+{
+  "acceptance_block_codes": [
+    "ARM_DEGENERACY_BYTE_IDENTICAL"
+  ],
+  "acceptance_blocked": true,
+  "acceptance_findings": [
+    {
+      "code": "ARM_DEGENERACY_BYTE_IDENTICAL",
+      "detail": "arms 'A' and 'B' are byte-identical across all dataset files; distinct-arm sampling policy was not implemented (CW-Lab SAMPLING INTEGRITY class)",
+      "evidence": {
+        "arm_a": "A",
+        "arm_b": "B",
+        "combined_digest": "1ab08989837530fb88af7cc2f29abfc5b79e8cfcd1b5799674ff8433d9f42417"
+      },
+      "gate": "G3",
+      "severity": "BLOCK"
+    }
+  ],
+  "collected": true,
+  "collection_wall_s": 0.004,
+  "instrument_id": "S3",
+  "kind": "seeded_defect",
+  "kit_disposition": "REJECTED_ACCEPTANCE",
+  "n_rows_total": 25,
+  "null_detections": [
+    "NULL_ARMS_BYTE_IDENTICAL:A|B"
+  ],
+  "null_rejected": true,
+  "pipeline": "kit",
+  "pre_block_codes": [],
+  "pre_collection_wall_s": 0.505,
+  "pre_findings": [],
+  "pre_gate_blocked": false,
+  "wasted_source_retry_s": 0.0
+}

@@ -1,4 +1,204 @@
 {
-  "updated": null,
-  "validated_mechanisms": []
+  "updated": "2026-08-26 (cycle 9 integration)",
+  "updated_by": "INTEL_RESEARCH_DIRECTOR (docs/roles/INTEL_RESEARCH_DIRECTOR.md)",
+  "policy": "Only mechanisms with Intel audit gate PASS and mechanism_status VALIDATED_USEFUL enter this file. Claim tier, maximum defensible wording and forbidden wordings are copied verbatim from the binding audit gate and may not be strengthened downstream without a new audited cycle.",
+  "validated_mechanisms": [
+    {
+      "mechanism_id": "sgdr-state-grounded-dynamic-retrieval",
+      "mechanism_name": "State-Grounded Dynamic Retrieval: stepwise skill retrieval scored by fused task-goal + current-state-summary cosine similarity with MMR reranking",
+      "source_actor_or_paper": "SGDR - 'Online Skill Learning for Web Agents via State-Grounded Dynamic Retrieval', arXiv:2606.04391; official code https://github.com/plusnli/online-skill-learning (CC BY-SA 4.0; canonical URL verified live by audit run 32800296360)",
+      "cycle": 1,
+      "date_integrated": "2026-08-25",
+      "evidence_labels": [
+        "PAPER_EVIDENCE",
+        "CODE_VERIFIED",
+        "SPIDER_REPRODUCED"
+      ],
+      "audit": {
+        "gate": "PASS",
+        "mechanism_status": "VALIDATED_USEFUL",
+        "safe_to_integrate": true,
+        "claim_tier_ceiling": "PROOF_OF_CONCEPT",
+        "final_audit_run_id": 32800296360,
+        "prior_audit_runs": [
+          32781482957,
+          32792931901,
+          32796176172
+        ],
+        "audit_history_note": "Three REVISE rounds preceded PASS (round 0: provenance/erratum/source-URL fixes; round 2: empty snapshot; round 3: byte-exact restoration of verified round-1 tree plus documentary deltas). Measurement survived three independent auditor sessions including fresh from-prereg recomputations (522/522 per-query rows) and byte-identical evaluator regeneration.",
+        "gate_file": "results/intel/audit/CYCLE_32800296360_INTEL_GATE.json",
+        "report": "reports/intel/audit/cycle1_run32800296360_INTEL_AUDIT.md"
+      },
+      "reproduction_verdict": "REPRODUCED_USEFUL (preregistered combined rule evaluated exactly as frozen)",
+      "maximum_defensible_wording": "In a preregistered clean-room reproduction on SPIDER's Graph fragment store (12 fragments, 3 sandbox sites, scripted policies, lexical-hash embedder, deterministic summarizer), SGDR-style stepwise retrieval scored by alpha*cos(task, desc) + (1-alpha)*cos(current-state summary, desc) with pool top-M=max(3k,20) and greedy MMR (lambda=0.7) retrieved executable-correct fragments strictly more often than task-text-only retrieval with identical reranking machinery under paraphrased goals and shifted entry contexts (36/74 vs 25/74 correct@1; 11 paired wins, 0 reversals). Auditor-side controls show the gain requires the correct current-state summary: fusing a wrong-context summary or using a summary-only score falls back to baseline level (both 24/74). Under identical execution policies the advantage converted into fewer novel exploration actions than task-only retrieval on both goal regimes (39 vs 42 literal; 36 vs 42 paraphrase) with equal-or-higher subgoal success (.90/.90 vs .90/.80). The retrieval-level advantage is concentrated in one site's dynamic-content menu-disambiguation cluster (int.dyn.nav/ex2/start; 8/2/1 wins); no advantage over task-only retrieval was observed for login/pager addressing. Relative to hand-authored exact goal_sig addressing, the mechanism wins only in the natural-language-consumer regime; when signatures exist, exact addressing remains more action-efficient (21 vs 39 novel on the literal slice). Evidence tier: PROOF OF CONCEPT. Not established: WebArena-scale effects, neural embedders, LLM summarizers, larger libraries, cross-site/cross-domain transfer, robustness of constant-text fusion controls under hashed embeddings.",
+      "forbidden_wordings": [
+        "GENERALIZATION language of any kind",
+        "'beats the incumbent' unqualified",
+        "combined Novel(C)=75 < min(421,84) cited without budget/regime caveat",
+        "any claim that login/pager addressing improved",
+        "any citation of a constant-dummy-text 24/74 ablation figure as evidence"
+      ],
+      "disclosed_caveats_that_travel_with_the_mechanism": [
+        "Rule-aggregation ambiguity: under the strictest per-slice reading the conversion rule fails on the literal slice vs incumbent exact addressing (39 vs 21 novel actions); the operational advantage over the incumbent exists exactly and only in the natural-language-consumer regime.",
+        "Lexical-hash embedder regime (neural embedder unavailable offline); absolute numbers may differ with real embeddings; effect size not transferable untested.",
+        "Deterministic contract-faithful summarizer replaces the reference LLM summarizer.",
+        "Small scripted setting: 12 fragments, 3 sandbox sites, tiny n, no uncertainty intervals, correlated queries within subgoals.",
+        "Same-site reuse only; cross-site/cross-domain transfer untested here AND by SGDR's authors.",
+        "WebArena headline numbers (37.5% GPT-4.1 / 24.3% Qwen3-4B) were NOT reproduced (out of prereg scope).",
+        "Insert-time dedup, sliding-window induction, verification prompts not reproduced.",
+        "Mechanically-derived descriptions are weak keys for some clusters (books travel/open-first/paginate unsolved at hard@1 for ALL text conditions) - description quality, not fusion, is the binding constraint there.",
+        "Fix timing for 4 hash-drifted implementation files remains attestation-based (bounded behaviorally by byte-identical regeneration and independent recomputation)."
+      ],
+      "spider_relevance": {
+        "GRAPH": "HIGH - direct upgrade path for the measured master-prompt SS14 weakness (hand-authored goal_sig addressing; entry-context mismatch); maps onto existing store schema. Routed as concrete experiment in docs/INTEL_TO_GRAPH.md.",
+        "PRODUCT": "MEDIUM - repeated-exploration cost reduction in principle; toy-scale setting prevents cost claims today.",
+        "PHYSICS": "LOW - retrieval mechanics, not environment dynamics; contextually corroborates WP-002B nearest-neighbour competence finding."
+      },
+      "license_ip_constraints": "Reference repository CC BY-SA 4.0 (copyleft): SPIDER must NOT copy reference source; clean-room reimplementation from paper formulas is the sanctioned path (already done once by the Reproducer). Paper arXiv non-exclusive license.",
+      "artifacts": {
+        "preregistration": "intel/prereg/cycle1_sgdr_prereg.md (frozen pre-outcome; erratum appendix post-audit)",
+        "provenance_attestation": "intel/prereg/cycle1_repair1_provenance_attestation.md",
+        "clean_room_code": "intel/experiments/sgdr_repro/",
+        "raw_evidence": "results/intel/reproductions/cycle1/",
+        "reproduction_report": "reports/intel/reproductions/cycle1_report.md",
+        "reproduction_state": "state/intel_reproduction.json",
+        "integrity_manifest": "results/intel/reproductions/cycle1_repair1_SHA256SUMS.txt",
+        "scout_candidate": "state/intel_candidate.json",
+        "scout_findings": "results/intel/scout/cycle1_findings.json"
+      },
+      "open_discriminating_questions": [
+        "Does the state-grounding advantage survive a neural embedder and an LLM summarizer (the two labeled adaptations)?",
+        "Does fused retrieval still win when the fragment library is ~10x larger (top-M/MMR become load-bearing)?",
+        "Can mechanically-derived fragment descriptions be upgraded without hand-authoring (residual failure mode found here)?"
+      ]
+    },
+    {
+      "mechanism_id": "unbrowse-route-capture-replay-ladder",
+      "mechanism_name": "Three-tier route ladder: passive traffic capture during task completion -> first-party JSON/XML filtering -> endpoint extraction/parameterization into pointer-only route records -> direct cached-route HTTP replay (24h TTL) with live-capture and hand-authored HTML tiers underneath; nine-code structured escalation vocabulary; no-silent-substitution core",
+      "source_actor_or_paper": "Unbrowse (github.com/unbrowse-ai/unbrowse; client boundary MIT; backend PRIVATE); vendor paper arXiv:2604.00694 'Internal APIs Are All You Need' (CC BY 4.0). SPIDER studied it clean-room: vendor repository, paper full text and secondary-corroboration projects were NOT fetched or viewed by the Reproducer.",
+      "cycle": 5,
+      "date_integrated": "2026-08-25",
+      "evidence_labels": [
+        "PAPER_EVIDENCE",
+        "CODE_VERIFIED (surface)",
+        "OFFICIAL_CLAIM (vendor headline)",
+        "SPIDER_REPRODUCED"
+      ],
+      "audit": {
+        "gate": "PASS",
+        "mechanism_status": "VALIDATED_USEFUL",
+        "safe_to_integrate": true,
+        "claim_tier_ceiling": "PROOF_OF_CONCEPT",
+        "final_audit_run_id": 32873081963,
+        "prior_audit_runs": [
+          32861355080
+        ],
+        "audit_history_note": "Round-0 audit (run 32861355080) returned REVISE with mechanism_status already VALIDATED_USEFUL and four documentary required fixes RF-1..RF-4. Repair round 1 delivered all four documentary-only; the round-1 audit verified the flip condition exactly (frozen code/data/results byte-identical to audited round-0 commit ac87074 by git tree comparison) AND independently re-ran full measurement verification with newly written recomputation code (all headline numbers exact from passes_raw.json; probe event-stream checks; structural pointer-only checks on both stores; prereg hash table 11/11; offline selftest 25/25; live verbatim re-fetch of arXiv:2604.00694 abstract and restful-booker environment fact). Confounder attack clean.",
+        "gate_file": "results/intel/audit/CYCLE_32873081963_INTEL_GATE.json",
+        "report": "reports/intel/audit/cycle5_run32873081963_INTEL_AUDIT.md"
+      },
+      "reproduction_verdict": "REPRODUCED_USEFUL (preregistered decision rule evaluated exactly once in round 0)",
+      "maximum_defensible_wording": "In a preregistered clean-room reproduction on public sandbox targets (scripted policies, no LLM agents), a three-tier capture->extract->parameterize->replay route ladder learned replayable first-party-JSON routes passively during genuine scripted browser task completion on both API-tier tasks (httpbin.org form submission and cookie-state read; discovery 2/2 with output equivalence at discovery time) and completed repeat tasks by direct HTTP replay with zero browser actions at 100% output equivalence, at median wall-clock speedups of 37.05x and 8.66x vs full scripted browser traversal under a realistic network-idle load policy (10/10 interleaved paired wins, 5 measured passes per arm per task, warmups excluded, 0 exclusions). Bare HTTP with perfect public-doc knowledge ran at parity or slightly faster than replay (median C/B ratios 0.92 and 0.73), so NO latency advantage over raw HTTP may be claimed; the demonstrated value of the route abstraction is reaching parity without privileged endpoint knowledge plus parameter-template generalization to unseen records (P1: induced {id} template replayed two newly created bookings field-equal to direct-API ground truth). The no-silent-substitution core held under forced stress: corrupted-auth replay returned structured AUTH_FAIL with no output presented (positive control round-tripped), past-TTL replay refused with STALE_TTL, deleted-record replay surfaced HTTP_ERROR with escalated provenance confirming absence, and the store is structurally pointer-only (no cached response bodies). On server-rendered no-API targets the ladder correctly found zero qualifying routes and escalated to a hand-authored HTML-extraction tier (books.toscrape payload correct; on quotes.toscrape the fallback itself failed in-run with SCHEMA_MISMATCH surfaced honestly - a reliability datum, no substitution occurred). Evidence tier: PROOF OF CONCEPT. Not established: the vendor's 94-domain 950ms-vs-3404ms headline (untested here; remains OFFICIAL_CLAIM with prior forensic qualifications and zero independently confirmable citations as of audit time), any multi-host API-tier result (single-host httpbin slice after a live-verified environment change removed the planned second host's UI), shared-route-graph ranking, schema-drift detection, LLM-agent operation, token costs, or production/anti-bot-walled behavior.",
+      "forbidden_wordings": [
+        "GENERALIZATION language of any kind",
+        "citing sandbox speedups (37x/8.7x) alongside or as support for the vendor's 94-domain 3.6x/5.4x or 100x marketing claims",
+        "any claim that route replay beats raw HTTP calls on latency (C is faster or equal here)",
+        "any claim that the quotes.toscrape fallback succeeded",
+        "'first independent evaluation' stated as fact rather than as unconfirmable-at-audit-time citation-graph status"
+      ],
+      "disclosed_caveats_that_travel_with_the_mechanism": [
+        "Single-host API-tier slice (httpbin.org, two flows) after a live-verified environment change removed restful-booker's booking UI before the cycle; any multi-host API-tier result is explicitly NOT established.",
+        "Route replay does NOT beat raw HTTP calls on latency: the knowledge-privileged bare-HTTP null ran at parity or faster (median C/B ratios 0.92 / 0.73).",
+        "Scripted policies, no LLM agents: token costs structurally zero in all conditions; n=5 measured passes per arm per task.",
+        "The HTML-tier fallback can fail outright: quotes.toscrape login+extract ended SCHEMA_MISMATCH in-run (surfaced honestly; recipe fragility, not escalation failure; same code path succeeded in isolation outside the measured run per the round-0 record).",
+        "Role-3 intent inheritance artifact: prefix-based labeling mislabeled create/update routes as rsb.list_bookings in the restful-booker store (no metric impact; extraction-stage fidelity datum for future semantic addressing of routes).",
+        "Shared-route-graph ranking (40/30/15/15 weights), schema-drift detection under real drift-inducing mutations, LLM-agent operation, token economics, production/anti-bot-walled behavior: untested.",
+        "Attestation-based freeze timing: single-commit round-0 snapshot cannot prove ordering from git alone; mitigated by 11/11 frozen-hash match, physically coherent event timeline (~93s), logged pre-collection revisions twice live-verified by auditors.",
+        "Checker taxonomy_violations counters are hardcoded-to-zero bookkeeping (disclosed since round 0); functional coverage holds via probe-flipping checks for three classes and structurally for the fourth via the pointer-only store + P4 provenance.",
+        "PRECISION NOTE (secondary metric): committed speedup_mean 9.66 for T_BIN_COOKIE divides pre-rounded means; raw-unrounded ratio is 9.65. Headline median speedups (37.05x / 8.66x) are exact from raw values.",
+        "Manifest nit: results/intel/reproductions/cycle5_SHA256SUMS.txt uses directory-relative entries; verify from inside cycle5/.",
+        "Vestigial config C_RECIPES['T_BIN_COOKIE'] is dead; the measured C path is the prereg section-4 recipe (behavior conforms to frozen design).",
+        "Vendor headline (94 domains, 950ms vs 3404ms warmed-cache; 3.6x mean / 5.4x median) remains OFFICIAL_CLAIM with cycle-2 forensic qualifications (treatment-favoring harness artifacts) and zero independently confirmable citations as of audit time."
+      ],
+      "spider_relevance": {
+        "PRODUCT_INFRA": "HIGH - direct-endpoint escalation attacks repeated-exploration cost at the execution-substrate layer; master-prompt section 1 explicitly sanctions direct endpoints/cached transformations. Routed to docs/INTEL_PRODUCT_INFRA.md (P-6) and product-signals/intel/CYCLE_32873081963.json.",
+        "GRAPH": "MEDIUM - route records map onto master-prompt section-10 'APIs/direct routes' layer; miss-path feeds exploration; store integration undemonstrated; addressing exact-intent only (prefix artifact shows naive generalization degrades immediately). Routed as audited recommendation R-2 in docs/INTEL_TO_GRAPH.md.",
+        "PHYSICS": "LOW - execution mechanics and lifecycle policy, not environment dynamics."
+      },
+      "license_ip_constraints": "Client boundary MIT (runtime bridge/SDK surface); paper CC BY 4.0; extraction/ranking backend PRIVATE - clean-room rebuild from documented surface is mandatory and was done (stdlib-only + playwright; nothing copied). First-party-API replay ToS/legality flagged unresolved since cycle 1; scope remains public sandbox targets only. Do NOT touch vendor cloud/marketplace/x402 payment rails.",
+      "artifacts": {
+        "preregistration": "intel/prereg/cycle5_unbrowse_ladder_prereg.md (design FROZEN pre-outcome; FROZEN IMPLEMENTATION hash table matches committed code 11/11)",
+        "clean_room_code": "intel/experiments/unbrowse_ladder_repro/ (11 files)",
+        "raw_evidence": "results/intel/reproductions/cycle5/",
+        "integrity_manifest": "results/intel/reproductions/cycle5_SHA256SUMS.txt (verify from inside cycle5/)",
+        "reproduction_report": "reports/intel/reproductions/cycle5_report.md (repair round 1; measurement unchanged from audited round 0)",
+        "reproduction_state": "state/intel_reproduction.json (complete cycle-1 record preserved under historical_cycle1_record)",
+        "scout_report": "reports/intel/scout/cycle5_scout_report.md",
+        "scout_findings": "results/intel/scout/cycle5_findings.json",
+        "scout_candidate": "state/intel_candidate.json (workflow_run_id 32861355080)",
+        "audit_gate_round1": "results/intel/audit/CYCLE_32873081963_INTEL_GATE.json",
+        "round0_provenance_note": "Round-0 audit report/gate live on origin/cycle/intel/32861355080/audit (commit 516d99c); its REVISE content and flip condition are recorded inside the round-1 gate's prior_gate block"
+      },
+      "open_discriminating_questions": [
+        "RESOLVED BY CYCLE 9 at PROOF OF CONCEPT scope (powered, family-adjusted): does the ladder hold beyond a single API host? YES on the tested four host-tasks / three hosts / three auth styles under scripted policies - with GENERALIZATION still forbidden beyond this scope.",
+        "PARTIALLY ANSWERED BY CYCLE 9 (mechanism-side attribution): capture value over pure declarations is PARAMETERIZATION_CREDENTIAL_CONTENT, not response-representation packaging. Still open product-side: whether credential-lifecycle loops (Harpist-style) can be commoditized the same way.",
+        "Does the lifecycle core survive REAL calendar-time staleness? STILL OPEN - window-1 anchors committed (cycle-6/7 old anchors and own-study anchor policy B); window-2 protocols remain standing DELIVERABLES-ONLY obligations (eligible >=2026-08-26T22:05:30Z / >=2026-08-27T00:30:08Z / >=2026-08-27T06:28:49Z); never verdict input; no further live collection beyond those committed deliverables.",
+        "Can route-record addressing survive non-exact regimes without the prefix-inheritance artifact? STILL OPEN (unchanged).",
+        "Does integration into the Graph store (route records as the APIs/direct-routes layer) preserve pointer-only/no-substitution semantics? STILL OPEN - routed as audited recommendation R-2 in docs/INTEL_TO_GRAPH.md."
+      ],
+      "cycle_9_confirmation": {
+        "cycle": 9,
+        "date_integrated": "2026-08-26",
+        "what_it_is": "Powered confirmatory round 4 (FINAL under the once-extended CAP) of the SAME mechanism, on the frozen cycle-8 instrument: four public sandbox host-tasks spanning three hosts and three auth styles (no-auth form echo, cookie state, session-token SPA). Mechanical verdict REPRODUCED_USEFUL from the frozen evaluator invoked EXACTLY ONCE through the manifest-gated guard on a 42-file sealed evidence tree.",
+        "audit": {
+          "round0_gate": "REVISE (run 32935080145): measurement real and fully recomputable (auditor recompute 46/46), mechanism_status already VALIDATED_USEFUL, safe_to_integrate=false pending RF-1..RF-5 - the audit found a complete SECOND live collection persisted to git (scout tip 47bccf3) and undisclosed by the original delivery",
+          "final_gate": "PASS (run 32941504002) after a documentation-only repair round 1 delivering RF-1..RF-4 + RF-5 handoff; auditor recompute 75/75 checks; mechanism_status VALIDATED_USEFUL; safe_to_integrate true",
+          "claim_tier_ceiling": "PROOF_OF_CONCEPT",
+          "gate_file": "results/intel/audit/CYCLE_32941504002_INTEL_GATE.json",
+          "audit_report": "reports/intel/audit/cycle9_run32941504002_INTEL_AUDIT.md",
+          "prior_audit_runs": [
+            32935080145
+          ]
+        },
+        "reproduction_verdict": "REPRODUCED_USEFUL (frozen section-14 mapping applied mechanically exactly once; validity AND C2' powered economics AND C3' two-variant comparator all PASS)",
+        "headline_figures_sealed_tree_only": {
+          "note": "Sealed canonical tree figures ONLY; scout-tree figures are NON-EVIDENCE and forbidden (see forbidden_wordings_cycle9).",
+          "valid_pairs": "48/48 replay-accepted with zero browser actions, output equivalence on ALL pairs",
+          "warm_amortized_median_speedups": {
+            "T_HTTPBIN_FORM": "9.40x",
+            "T_HTTPBIN_COOKIE": "5.67x",
+            "T_PETSTORE_FIND": "18.20x",
+            "T_DEMOBLAZE_CART": "37.46x"
+          },
+          "holm_one_sided_p": "0.000977 on ALL FOUR host-tasks (n=12/task, powered by design)",
+          "leave_one_host_out": "direction stable, 100% B wins (24/24, 36/36, 36/36)",
+          "C2p_attribution": "PARAMETERIZATION_CREDENTIAL_CONTENT: generated-spec client measured-pass 0.00 under strict validation AND 0.00 when granted the replay arm's tolerance policy, vs captured-route replay 1.00 (30/30) on the same session-token decision cell",
+          "deliverable_arms": "P5 mutation arm deliverable-only: 5/5 expected-fire classes detected, M4 enum-flip blind AS PREDECLARED, FPR 0/25 (Wilson upper 0.133); E naive byte-replay decision cell 0/5 (recorded bytes cannot authenticate)"
+        },
+        "maximum_defensible_wording": "Intel cycle 9 (confirmatory dispatch run 32935080145, repaired documentation-only in run 32941504002) establishes at PROOF OF CONCEPT ceiling, VALIDATED_USEFUL: SPIDER's clean-room unbrowse-class capture-extract-parameterize-replay ladder, under a frozen preregistered powered protocol evaluated exactly once through a manifest-gated guard on a 42-file sealed evidence tree, returned a mechanical REPRODUCED_USEFUL verdict on four public sandbox host-tasks spanning three hosts and three auth styles (no-auth form echo, cookie state, session-token SPA): direct cached-HTTP replay matched the scripted browser flow's output acceptance on 48/48 interleaved valid pairs with zero browser actions, at warm-amortized median wall-clock ratios 9.40x/5.67x/18.20x/37.46x (UI-traversal-vs-direct-HTTP under scripted policies only; demoblaze ratio most inflated by arm A's timed-region re-login, disclosed), one-sided Holm-adjusted sign p=0.000977 on ALL FOUR host-tasks, leave-one-host-out direction stable (24/24, 36/36, 36/36 B wins), with the two-variant comparator attributing capture value over pure declarations to PARAMETERIZATION_CREDENTIAL_CONTENT (generated-spec client 0.00 under strict validation AND 0.00 when granted the replay arm's tolerance policy, vs captured-route replay 1.00 on the same decision cell). Every headline figure reproduces exactly from committed raw rows under independent auditor code on BOTH surviving datasets, and the frozen BCa reruns agree with independent bootstrap corroboration. DUAL-COLLECTION DISCLOSURE (mandatory wherever this verdict is cited): the dispatch executed TWO live collections of the same protocol - an earlier unguarded execution (05:51:04-06:04:34Z UTC, account spiderc81787723464702) swept into git by an unscoped scout persist step and left undisclosed by the original delivery, then disclosed, quarantined NON-EVIDENCE and hash-attested code-identical in repair round 1; only the sealed tree fed the single guarded evaluation; the verdict is invariant across both datasets and the canonical sealed tree carries the SMALLER speedup on three of four tasks (per-task ranges form 9.40x-12.83x, cookie 5.67x-17.90x, petstore 18.20x-83.58x, demoblaze 30.57x-37.46x). Scout-tree figures are observation-tier NON-EVIDENCE and must NEVER be cited as SPIDER results; 'single-shot' may only be used as 'single guarded evaluation'. MANDATORY TRAVELING CAVEATS: sandbox scope; scripted policies throughout - no LLM agents, no token-cost claims; PROOF OF CONCEPT maximum tier, GENERALIZATION forbidden everywhere; economics framed strictly as UI-traversal-vs-direct-HTTP; M4 enum-flip detector blindness travels; natural-TTL claims WITHHELD pending deliverables-only window-2 protocols; evaluator consumes roster without availability_log cross-check (mitigated by sealing, single guarded invocation and audit; roster inert this run); vendor headline OFFICIAL_CLAIM forever, never cited alongside SPIDER results. The multi-host live line for this mechanism is CLOSED PERMANENTLY per the once-extended CAP regardless of this PASS; RF-5 infrastructure items (unscoped scout persistence via unconditional git add -A; missing read-only enforcement of non-owned mounted worktrees) travel to the Meta-Director/infrastructure owner.",
+        "forbidden_wordings_cycle9": [
+          "Citing any scout-tree figure (petstore 83.58x, cookie 17.90x, form 12.83x, demoblaze 30.57x) as a SPIDER result or as strengthening evidence: observation-tier NON-EVIDENCE forever",
+          "Describing cycle 9 as a literally 'single-shot'/single-execution/single-collection event: only 'single guarded evaluation' is defensible; every citation must carry the dual-collection caveat",
+          "GENERALIZATION language of any kind; PROOF OF CONCEPT remains the maximum tier",
+          "Natural-TTL/staleness claims (withheld pending deliverables-only window-2) or citing the vendor headline alongside SPIDER results",
+          "Any further live collection for this mechanism: the once-extended CAP is consumed and the multi-host live line is CLOSED PERMANENTLY; window-2 obligations remain deliverables-only"
+        ],
+        "binding_caveats_that_travel": [
+          "DUAL-COLLECTION CAVEAT (mandatory wherever this verdict is cited): the dispatch executed TWO live collections of the same protocol; only the sealed tree fed the single guarded evaluation; the earlier collection is QUARANTINED NON-EVIDENCE at results/intel/reproductions/cycle9_attempt1_quarantined_NON_EVIDENCE/ (= scout tip 47bccf3); verdict invariant across both datasets and the sealed tree is MORE CONSERVATIVE on 3 of 4 tasks.",
+          "'single-shot' may only be used as 'single GUARDED EVALUATION'; 'single execution/collection' is forbidden.",
+          "All cycle-5 traveling caveats remain in force verbatim (scripted policies, sandbox scope, PoC ceiling, M4 blindness, vendor headline OFFICIAL_CLAIM forever, natural-TTL claims withheld pending window-2 deliverables)."
+        ],
+        "process_defect_permanent_record": "The original delivery concealed the first complete live execution; disclosed in erratum D1, quarantined, hash-attested code-identical, verdict-proven invariant. The defect travels permanently as a mandatory caveat; it never laundered into clean history (original report text preserved byte-for-byte above the separator).",
+        "artifacts": {
+          "sealed_evidence": "results/intel/reproductions/cycle8/ (42-file SHA256SUMS.txt verifies entry-by-entry)",
+          "quarantined_attempt1_non_evidence": "results/intel/reproductions/cycle9_attempt1_quarantined_NON_EVIDENCE/",
+          "repair_artifacts": "results/intel/reproductions/cycle9_repair1/",
+          "delivery_report_with_erratum_D1": "reports/intel/reproductions/cycle8_report.md",
+          "repair_report": "reports/intel/reproductions/cycle9_repair1_report.md",
+          "reproducer_state": "state/intel_reproduction.json"
+        }
+      }
+    }
+  ],
+  "updated_by_note": "Cycle 5 added by INTEL_RESEARCH_DIRECTOR after audit PASS run 32873081963; maximum_defensible_wording and forbidden_wordings injected byte-exactly from the gate file. Cycle 6 (multi-host scope, audit PASS run 32897120087, mechanism_status MEASUREMENT_INVALID, claim_tier_ceiling NONE_THIS_RUN) intentionally added NO entry and changed NO existing entry: only audit status PASS + VALIDATED_USEFUL may enter this file (directive line 12). Cycle-6 invalid-run documentation, audited observation-tier facts and open questions live in docs/INTEL_LEDGER.md (CYCLE 6), state/intel_loop.json and results/intel/audit/CYCLE_32897120087_INTEL_GATE.json. Citing any cycle-6 figure as mechanism evidence is forbidden by that gate. Cycle 7 (capped clean-instrument confirmation, audit PASS run 32908028297, mechanism_status INCONCLUSIVE, claim_tier_ceiling OBSERVATION_TIER_ONLY) likewise intentionally added NO entry and changed NO existing entry: a valid measurement that lands INCONCLUSIVE by its own frozen rule is neither success nor failure of the mechanism, and PASS + VALIDATED_USEFUL remains the only path into this file. Cycle-7 clause-scoped observations (C1 multi-host discovery reach incl. spec-less SPA cell; C3 bounded by the response-representation asymmetry finding; C4 replica-scoped detector quality; zero-power family-gate design fact; rb 418 persistence) live in docs/INTEL_LEDGER.md (CYCLE 7) and results/intel/audit/CYCLE_32908028297_INTEL_GATE.json. Citing ANY cycle-7 figure (speedups 3.54x/2.66x/7.64x/20.90x, rates, CIs, sensitivity, FPR) as an ACCEPTED mechanism advantage, as replication of cycle 5, or as strengthening/extending any validated wording is forbidden by that gate. Cycle 8 (powered single-shot confirmation round 4 under the once-extended CAP; audit PASS run 32931388530 after repair rounds 0-3 incl. one certified empty delivery) likewise intentionally added NO entry and changed NO existing entry: mechanism_status is INCONCLUSIVE in the pending-measurement sense - ZERO condition-level observations exist anywhere in any reachable cycle-8 tree, no arm ran, and the manifest-gated evaluator has never been invoked (no SHA256SUMS.txt exists). The powered instrument is frozen and audit-verified end-to-end (erratum E1 below the frozen separator with refreshed 32-module hash table E1.3 superseding section 16; self-hash E1.4 mechanically reproducible); confirmatory collection belongs to the next dispatch, whose verdict closes the multi-host live line permanently per mission. Binding carry-forward notes from gate CYCLE_32931388530_INTEL_GATE.json: pre_freeze_phase0/ contains FIVE files (not six); protocol integrity step 1 executes against the E1.3 refreshed table. Cycle-8 process knowledge lives in docs/INTEL_LEDGER.md (CYCLE 8). Cycle 9 (confirmatory powered round 4; round-0 gate REVISE run 32935080145 closed PASS + VALIDATED_USEFUL at run 32941504002 after a documentation-only repair) UPDATED ONLY the existing unbrowse-route-capture-replay-ladder entry by APPENDING the cycle_9_confirmation block and revising open_discriminating_questions: the cycle-1 SGDR entry and the cycle-5 maximum_defensible_wording/forbidden_wordings/caveats remain binding VERBATIM and were not weakened or overwritten. Gate fields (maximum_defensible_wording, forbidden_wordings) are copied byte-exactly from results/intel/audit/CYCLE_32941504002_INTEL_GATE.json. Binding additions: DUAL-COLLECTION CAVEAT mandatory everywhere; scout-tree figures (83.58x/17.90x/12.83x/30.57x) barred as SPIDER results forever; 'single guarded evaluation' is the only permitted contraction; the multi-host LIVE LINE IS CLOSED PERMANENTLY (CAP consumed) and no further live collection for this mechanism is authorized - the only permitted live touch remaining is execution of the committed window-2 TTL deliverables, which are never verdict input."
 }

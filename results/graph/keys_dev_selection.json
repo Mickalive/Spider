@@ -1,0 +1,397 @@
+{
+ "program": "graph-addressing-key-induction",
+ "phase": "dev-selection",
+ "run_id": 32925866227,
+ "prereg": "graph/prereg_key_induction.md",
+ "instrument_role": "dev",
+ "instrument_id": "keys-dev-5a",
+ "instrument_sha256": "01c6436f1a876e27888f6b11e5ff29c5cf756456d692d871993a395ae3a3164c",
+ "calibration_self_sha256": null,
+ "rules_hash": "b76e3726ea2d547652645c9878ea7595",
+ "kb_stats": {
+  "states": 19,
+  "transitions": 29,
+  "actions": 15,
+  "fragments": 16
+ },
+ "n_rows": 75,
+ "substrate_gate": {
+  "informative_hard_total_structure_only": 61,
+  "informative_hard_per_cluster": {
+   "AUTH": 10,
+   "CATEGORY": 16,
+   "HOME": 13,
+   "OPENBOOK": 5,
+   "PAGER": 12,
+   "TAG": 5
+  },
+  "BLOCKED_INSTRUMENT": false,
+  "note": "claim clusters must each hold >=4; total >=15 (prereg s7/s9)"
+ },
+ "variant_selection": {
+  "procedure": "argmax DEV informative-hard UNGATED correct@1; tie-break simpler-first (K_aff>K_reg>K_full); selected ON DEV ONLY (auditor item 26)",
+  "selected_variant": "K_full",
+  "attempt_ledger": [
+   {
+    "variant": "K_aff",
+    "rules_subset": "R1+R1b",
+    "dev_ungated_informative_hard": {
+     "hit": 26,
+     "n": 61,
+     "rate": 0.4262
+    }
+   },
+   {
+    "variant": "K_reg",
+    "rules_subset": "R1+R1b+R2",
+    "dev_ungated_informative_hard": {
+     "hit": 28,
+     "n": 61,
+     "rate": 0.459
+    }
+   },
+   {
+    "variant": "K_full",
+    "rules_subset": "R1+R1b+R2+R3",
+    "dev_ungated_informative_hard": {
+     "hit": 31,
+     "n": 61,
+     "rate": 0.5082
+    }
+   }
+  ]
+ },
+ "tau_selection": {
+  "A_keys": {
+   "cond": "A_keys",
+   "curve": [
+    {
+     "tau": 0.05,
+     "false_accepts": 3,
+     "coverage": 0.9583,
+     "max_known_score_seen": 0.329761
+    },
+    {
+     "tau": 0.1,
+     "false_accepts": 3,
+     "coverage": 0.7083,
+     "max_known_score_seen": 0.329761
+    },
+    {
+     "tau": 0.15,
+     "false_accepts": 2,
+     "coverage": 0.3611,
+     "max_known_score_seen": 0.329761
+    },
+    {
+     "tau": 0.2,
+     "false_accepts": 1,
+     "coverage": 0.2361,
+     "max_known_score_seen": 0.329761
+    },
+    {
+     "tau": 0.25,
+     "false_accepts": 0,
+     "coverage": 0.0694,
+     "max_known_score_seen": 0.329761
+    },
+    {
+     "tau": 0.3,
+     "false_accepts": 0,
+     "coverage": 0.0278,
+     "max_known_score_seen": 0.329761
+    },
+    {
+     "tau": 0.35,
+     "false_accepts": 0,
+     "coverage": 0.0,
+     "max_known_score_seen": 0.0
+    },
+    {
+     "tau": 0.4,
+     "false_accepts": 0,
+     "coverage": 0.0,
+     "max_known_score_seen": 0.0
+    },
+    {
+     "tau": 0.45,
+     "false_accepts": 0,
+     "coverage": 0.0,
+     "max_known_score_seen": 0.0
+    },
+    {
+     "tau": 0.5,
+     "false_accepts": 0,
+     "coverage": 0.0,
+     "max_known_score_seen": 0.0
+    },
+    {
+     "tau": 0.55,
+     "false_accepts": 0,
+     "coverage": 0.0,
+     "max_known_score_seen": 0.0
+    },
+    {
+     "tau": 0.6,
+     "false_accepts": 0,
+     "coverage": 0.0,
+     "max_known_score_seen": 0.0
+    }
+   ],
+   "status": "OK",
+   "chosen_tau": 0.25,
+   "chosen": {
+    "tau": 0.25,
+    "false_accepts": 0,
+    "coverage": 0.0694,
+    "max_known_score_seen": 0.329761
+   }
+  },
+  "B_keys": {
+   "cond": "B_keys",
+   "curve": [
+    {
+     "tau": 0.05,
+     "false_accepts": 3,
+     "coverage": 1.0,
+     "max_known_score_seen": 0.34641
+    },
+    {
+     "tau": 0.1,
+     "false_accepts": 3,
+     "coverage": 0.7361,
+     "max_known_score_seen": 0.34641
+    },
+    {
+     "tau": 0.15,
+     "false_accepts": 3,
+     "coverage": 0.5139,
+     "max_known_score_seen": 0.34641
+    },
+    {
+     "tau": 0.2,
+     "false_accepts": 2,
+     "coverage": 0.3611,
+     "max_known_score_seen": 0.34641
+    },
+    {
+     "tau": 0.25,
+     "false_accepts": 0,
+     "coverage": 0.1528,
+     "max_known_score_seen": 0.34641
+    },
+    {
+     "tau": 0.3,
+     "false_accepts": 0,
+     "coverage": 0.1111,
+     "max_known_score_seen": 0.34641
+    },
+    {
+     "tau": 0.35,
+     "false_accepts": 0,
+     "coverage": 0.0,
+     "max_known_score_seen": 0.0
+    },
+    {
+     "tau": 0.4,
+     "false_accepts": 0,
+     "coverage": 0.0,
+     "max_known_score_seen": 0.0
+    },
+    {
+     "tau": 0.45,
+     "false_accepts": 0,
+     "coverage": 0.0,
+     "max_known_score_seen": 0.0
+    },
+    {
+     "tau": 0.5,
+     "false_accepts": 0,
+     "coverage": 0.0,
+     "max_known_score_seen": 0.0
+    },
+    {
+     "tau": 0.55,
+     "false_accepts": 0,
+     "coverage": 0.0,
+     "max_known_score_seen": 0.0
+    },
+    {
+     "tau": 0.6,
+     "false_accepts": 0,
+     "coverage": 0.0,
+     "max_known_score_seen": 0.0
+    }
+   ],
+   "status": "OK",
+   "chosen_tau": 0.25,
+   "chosen": {
+    "tau": 0.25,
+    "false_accepts": 0,
+    "coverage": 0.1528,
+    "max_known_score_seen": 0.34641
+   }
+  }
+ },
+ "oracle_diagnostic": {
+  "role": "attribution-only; DEV rows; never confirm; never a mechanism claim",
+  "metric": {
+   "hit": 41,
+   "n": 61,
+   "rate": 0.6721
+  }
+ },
+ "dev_metrics_report_all": {
+  "A_keys": {
+   "ungated_informative_hard": {
+    "hit": 35,
+    "n": 61,
+    "rate": 0.5738
+   },
+   "ungated_hard": {
+    "hit": 35,
+    "n": 64,
+    "rate": 0.5469
+   },
+   "recall_pool_hard_info": {
+    "hit": 61,
+    "n": 61,
+    "rate": 1.0,
+    "label": "recall@pool==recall@library (N=16<=M=20); ordering losses live in rank@1, never here"
+   },
+   "compression": {
+    "pairwise_cos_gt_0.9": [
+     2,
+     57
+    ],
+    "median_top1_top2_margin": 0.005531,
+    "mean_key_tokens": 11.88
+   },
+   "top3_churn_vs_A_keys": [
+    0,
+    61
+   ]
+  },
+  "K_aff": {
+   "ungated_informative_hard": {
+    "hit": 26,
+    "n": 61,
+    "rate": 0.4262
+   },
+   "ungated_hard": {
+    "hit": 26,
+    "n": 64,
+    "rate": 0.4062
+   },
+   "recall_pool_hard_info": {
+    "hit": 61,
+    "n": 61,
+    "rate": 1.0,
+    "label": "recall@pool==recall@library (N=16<=M=20); ordering losses live in rank@1, never here"
+   },
+   "compression": {
+    "pairwise_cos_gt_0.9": [
+     6,
+     57
+    ],
+    "median_top1_top2_margin": 0.035268,
+    "mean_key_tokens": 5.62
+   },
+   "top3_churn_vs_A_keys": [
+    61,
+    61
+   ]
+  },
+  "K_reg": {
+   "ungated_informative_hard": {
+    "hit": 28,
+    "n": 61,
+    "rate": 0.459
+   },
+   "ungated_hard": {
+    "hit": 28,
+    "n": 64,
+    "rate": 0.4375
+   },
+   "recall_pool_hard_info": {
+    "hit": 61,
+    "n": 61,
+    "rate": 1.0,
+    "label": "recall@pool==recall@library (N=16<=M=20); ordering losses live in rank@1, never here"
+   },
+   "compression": {
+    "pairwise_cos_gt_0.9": [
+     6,
+     57
+    ],
+    "median_top1_top2_margin": 0.0,
+    "mean_key_tokens": 7.75
+   },
+   "top3_churn_vs_A_keys": [
+    61,
+    61
+   ]
+  },
+  "K_full": {
+   "ungated_informative_hard": {
+    "hit": 31,
+    "n": 61,
+    "rate": 0.5082
+   },
+   "ungated_hard": {
+    "hit": 31,
+    "n": 64,
+    "rate": 0.4844
+   },
+   "recall_pool_hard_info": {
+    "hit": 61,
+    "n": 61,
+    "rate": 1.0,
+    "label": "recall@pool==recall@library (N=16<=M=20); ordering losses live in rank@1, never here"
+   },
+   "compression": {
+    "pairwise_cos_gt_0.9": [
+     6,
+     57
+    ],
+    "median_top1_top2_margin": 0.0,
+    "mean_key_tokens": 10.69
+   },
+   "top3_churn_vs_A_keys": [
+    58,
+    61
+   ]
+  },
+  "ORACLE_DIAGNOSTIC": {
+   "ungated_informative_hard": {
+    "hit": 41,
+    "n": 61,
+    "rate": 0.6721
+   },
+   "ungated_hard": {
+    "hit": 41,
+    "n": 64,
+    "rate": 0.6406
+   },
+   "recall_pool_hard_info": {
+    "hit": 61,
+    "n": 61,
+    "rate": 1.0,
+    "label": "recall@pool==recall@library (N=16<=M=20); ordering losses live in rank@1, never here"
+   },
+   "compression": {
+    "pairwise_cos_gt_0.9": [
+     6,
+     57
+    ],
+    "median_top1_top2_margin": 0.012838,
+    "mean_key_tokens": 25.5
+   },
+   "top3_churn_vs_A_keys": [
+    61,
+    61
+   ]
+  }
+ },
+ "selection_order_note": "variant chosen first, then per-arm tau on the chosen variant's scores (joint selection disclosed, prereg s5)"
+}

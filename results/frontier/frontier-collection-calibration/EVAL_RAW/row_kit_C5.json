@@ -1,0 +1,19 @@
+{
+  "acceptance_block_codes": [],
+  "acceptance_blocked": false,
+  "acceptance_findings": [],
+  "collected": true,
+  "collection_wall_s": 0.006,
+  "instrument_id": "C5",
+  "kind": "clean_panel",
+  "kit_disposition": "PASSED",
+  "n_rows_total": 20,
+  "null_detections": [],
+  "null_rejected": false,
+  "pipeline": "kit",
+  "pre_block_codes": [],
+  "pre_collection_wall_s": 0.506,
+  "pre_findings": [],
+  "pre_gate_blocked": false,
+  "wasted_source_retry_s": 0.0
+}

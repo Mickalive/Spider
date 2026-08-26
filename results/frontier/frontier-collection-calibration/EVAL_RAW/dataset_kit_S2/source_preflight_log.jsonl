@@ -1,0 +1,2 @@
+{"attempt": 1, "http_status": 200, "latency_s": 0.0007, "ok": true, "source_id": "listing", "ts_utc": "2026-08-26T10:03:57.262352+00:00", "url": "http://127.0.0.1:45511/healthz"}
+{"attempt": 2, "http_status": 200, "latency_s": 0.0005, "ok": true, "source_id": "listing", "ts_utc": "2026-08-26T10:03:57.263140+00:00", "url": "http://127.0.0.1:45511/healthz"}

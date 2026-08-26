@@ -1,0 +1,90 @@
+{
+ "ts_ms": 1787704208665,
+ "fingerprints": {
+  "httpbin": {
+   "url": "https://httpbin.org/get",
+   "sha256_head": "9d4301ac32e71dc9242e50ef4bb6c577fbaa8a0e6e4227888f42f33b1ac622b0",
+   "etag": null,
+   "last_modified": null,
+   "server": "gunicorn/19.9.0",
+   "content_length": "296",
+   "volatile_by_design": true
+  },
+  "petstore": {
+   "url": "https://petstore.swagger.io/v2/swagger.json",
+   "sha256_head": "4b13530628bc7a902f79da7c75b4401a004689208b166b91d32115f9b331b270",
+   "etag": null,
+   "last_modified": null,
+   "server": "Jetty(9.2.9.v20150224)",
+   "content_length": null,
+   "volatile_by_design": false
+  },
+  "demoblaze": {
+   "url": "https://www.demoblaze.com/config.json",
+   "sha256_head": "62f8fb442cb21c2e040a4d90c208942ad38bfa1dd573c2e6af6d9968041125e8",
+   "etag": "\"cET1bQ\"",
+   "last_modified": null,
+   "server": "Google Frontend",
+   "content_length": null,
+   "volatile_by_design": false
+  },
+  "jsonplaceholder": {
+   "url": "https://jsonplaceholder.typicode.com/posts/1",
+   "sha256_head": "965636bd900078aa86a714aea4de146af6d396205d5100636f1bdd2454f73420",
+   "etag": "W/\"124-yiKdLzqO5gfBrJFrcdJ8Yq0LGnU\"",
+   "last_modified": null,
+   "server": "cloudflare",
+   "content_length": "292",
+   "volatile_by_design": false
+  }
+ },
+ "fingerprint_canonicalization": {
+  "body_hash": "sha256(first_4096_bytes)",
+  "change_detection_targets": [
+   "demoblaze",
+   "jsonplaceholder",
+   "petstore"
+  ],
+  "volatile_by_design_excluded": [
+   "httpbin"
+  ],
+  "reason": "httpbin /get embeds per-request X-Amzn-Trace-Id"
+ },
+ "anchor_policy": "B_fresh_own_study_anchor",
+ "route_store_sha256": {
+  "T_DEMOBLAZE_CART_routestore.json": "26ef1f0c3d610581346adcb176bc3d665d2c5509de9eb9b9d405e427197e06da",
+  "T_HTTPBIN_COOKIE_routestore.json": "1d6fe2f9d6e8e7767c8d67f22b5b4cca71033a8a6be072144506ae4a853af548",
+  "T_HTTPBIN_FORM_routestore.json": "27f631de58045ad8e093f2bd133a2fa2cdf5846729aee9e034cbb864cf5b5712",
+  "T_PETSTORE_FIND_routestore.json": "b29aa3afbe65ca5a587346acdc2e38808d2a448b647d6464c648c29fdae42f1c",
+  "rb_routestore.json": "46a0f5e2c825639add74c953d42ddac01fdeccb0d83da08c1049e514d8c2aaa1"
+ },
+ "window2_eligibility_ts_ms": 1787790608665,
+ "clock_bookkeeping": {
+  "httpbin": {
+   "server_date": "Wed, 26 Aug 2026 00:30:09 GMT",
+   "local_minus_server_ms": 693
+  },
+  "jsonplaceholder": {
+   "server_date": "Wed, 26 Aug 2026 00:30:09 GMT",
+   "local_minus_server_ms": 757
+  }
+ },
+ "cycle6_drift_observation_non_decisional": {
+  "httpbin": {
+   "changed_vs_cycle6": true,
+   "non_decisional": true
+  },
+  "petstore": {
+   "changed_vs_cycle6": false,
+   "non_decisional": true
+  },
+  "demoblaze": {
+   "changed_vs_cycle6": false,
+   "non_decisional": true
+  },
+  "jsonplaceholder": {
+   "changed_vs_cycle6": false,
+   "non_decisional": true
+  }
+ }
+}

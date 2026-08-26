@@ -1,0 +1,225 @@
+{
+ "capsule_inventory": {
+  "parent": [
+   "runtime/quotes-login-route@v1",
+   "runtime/form-login-procedure@v1"
+  ],
+  "union": [
+   "runtime/quotes-login-route@v1",
+   "runtime/form-login-procedure@v1",
+   "runtime/form-login-procedure-wb@v1",
+   "runtime/form-login-procedure-wb@v2"
+  ],
+  "wb": [
+   "runtime/form-login-procedure-wb@v1",
+   "runtime/form-login-procedure-wb@v2"
+  ]
+ },
+ "constants": {
+  "min_match": 2,
+  "tau": 0.3
+ },
+ "must_abstain": [
+  {
+   "leakage_hits": 0,
+   "registry": "parent",
+   "rows": [
+    {
+     "goal": "convert celsius to fahrenheit quickly",
+     "hits": []
+    },
+    {
+     "goal": "book a flight to lisbon next spring",
+     "hits": []
+    },
+    {
+     "goal": "translate this document to german",
+     "hits": []
+    },
+    {
+     "goal": "fix the broken bicycle chain",
+     "hits": []
+    },
+    {
+     "goal": "play jazz music in the evening",
+     "hits": []
+    },
+    {
+     "goal": "water the office plants on monday",
+     "hits": []
+    },
+    {
+     "goal": "summarize this quarterly sales report",
+     "hits": []
+    }
+   ]
+  },
+  {
+   "leakage_hits": 0,
+   "registry": "wb",
+   "rows": [
+    {
+     "goal": "convert celsius to fahrenheit quickly",
+     "hits": []
+    },
+    {
+     "goal": "book a flight to lisbon next spring",
+     "hits": []
+    },
+    {
+     "goal": "translate this document to german",
+     "hits": []
+    },
+    {
+     "goal": "fix the broken bicycle chain",
+     "hits": []
+    },
+    {
+     "goal": "play jazz music in the evening",
+     "hits": []
+    },
+    {
+     "goal": "water the office plants on monday",
+     "hits": []
+    },
+    {
+     "goal": "summarize this quarterly sales report",
+     "hits": []
+    }
+   ]
+  },
+  {
+   "leakage_hits": 0,
+   "registry": "union",
+   "rows": [
+    {
+     "goal": "convert celsius to fahrenheit quickly",
+     "hits": []
+    },
+    {
+     "goal": "book a flight to lisbon next spring",
+     "hits": []
+    },
+    {
+     "goal": "translate this document to german",
+     "hits": []
+    },
+    {
+     "goal": "fix the broken bicycle chain",
+     "hits": []
+    },
+    {
+     "goal": "play jazz music in the evening",
+     "hits": []
+    },
+    {
+     "goal": "water the office plants on monday",
+     "hits": []
+    },
+    {
+     "goal": "summarize this quarterly sales report",
+     "hits": []
+    }
+   ]
+  }
+ ],
+ "near_miss": [
+  {
+   "cross_matches": 0,
+   "registry": "parent",
+   "rows": [
+    {
+     "cross_match": false,
+     "goal": "search for books about dragons on the catalogue site",
+     "hits": [],
+     "must_not_match_family": "login"
+    },
+    {
+     "cross_match": false,
+     "goal": "find cheap horror novels in the store",
+     "hits": [],
+     "must_not_match_family": "login"
+    },
+    {
+     "cross_match": false,
+     "goal": "filter the product list by price range",
+     "hits": [],
+     "must_not_match_family": "login"
+    },
+    {
+     "cross_match": false,
+     "goal": "open the shopping basket checkout page",
+     "hits": [],
+     "must_not_match_family": "login"
+    }
+   ]
+  },
+  {
+   "cross_matches": 0,
+   "registry": "wb",
+   "rows": [
+    {
+     "cross_match": false,
+     "goal": "search for books about dragons on the catalogue site",
+     "hits": [],
+     "must_not_match_family": "login"
+    },
+    {
+     "cross_match": false,
+     "goal": "find cheap horror novels in the store",
+     "hits": [],
+     "must_not_match_family": "login"
+    },
+    {
+     "cross_match": false,
+     "goal": "filter the product list by price range",
+     "hits": [],
+     "must_not_match_family": "login"
+    },
+    {
+     "cross_match": false,
+     "goal": "open the shopping basket checkout page",
+     "hits": [],
+     "must_not_match_family": "login"
+    }
+   ]
+  },
+  {
+   "cross_matches": 0,
+   "registry": "union",
+   "rows": [
+    {
+     "cross_match": false,
+     "goal": "search for books about dragons on the catalogue site",
+     "hits": [],
+     "must_not_match_family": "login"
+    },
+    {
+     "cross_match": false,
+     "goal": "find cheap horror novels in the store",
+     "hits": [],
+     "must_not_match_family": "login"
+    },
+    {
+     "cross_match": false,
+     "goal": "filter the product list by price range",
+     "hits": [],
+     "must_not_match_family": "login"
+    },
+    {
+     "cross_match": false,
+     "goal": "open the shopping basket checkout page",
+     "hits": [],
+     "must_not_match_family": "login"
+    }
+   ]
+  }
+ ],
+ "purpose": "R1 priority-6 retrieval negative controls (registry-aware, offline)",
+ "summary": {
+  "disclosure": "near-miss cross-matches are disclosed FP risk of the vendored prefix channels; they never retune constants by themselves",
+  "invalid_hit_rate_dimension": "must-ABSTAIN leakage count / goal count, per registry",
+  "total_must_abstain_leakage": 0,
+  "total_near_miss_cross_matches": 0
+ }
+}

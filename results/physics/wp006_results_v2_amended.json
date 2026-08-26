@@ -1,0 +1,2931 @@
+{
+ "wp": "WP-006",
+ "hypothesis": "H-ID identifiability-by-restart gate",
+ "n_rows_raw": 1075,
+ "accounting": {
+  "setup_rows": 1,
+  "calibration_rows": 164,
+  "trial_rows": 910,
+  "valid_trials": 704,
+  "invalid_trials": 206
+ },
+ "exclusion_ledger": {
+  "action_failed": 171,
+  "exception": 22,
+  "state_match": 13
+ },
+ "validity_checks": {
+  "G2_calibration_before_trials_violations": 0,
+  "G4_atomicity_violations_valid_rows": 0,
+  "G5_slot_in_premenu_violations": 0,
+  "session_assertions_missing_stateful_rows": 0,
+  "G7_hash_scan_hits": [],
+  "G6_note": "nothing fitted this cycle; no train/test machinery exists"
+ },
+ "floors": {
+  "F1_attempted_sites": 8,
+  "F1_attempted_list": [
+   "books",
+   "gutenberg",
+   "internet",
+   "openlibrary",
+   "parabank",
+   "quotes",
+   "saucedemo",
+   "wikipedia"
+  ],
+  "F1_classes_attempted": [
+   "stateful",
+   "static"
+  ],
+  "F2_producer_sites": 2,
+  "F2_producer_list": [
+   "books",
+   "quotes"
+  ],
+  "F3_note": "enforced by construction of VERIFIED (>=2 distinct slots x >=6 valid reps each)",
+  "F4_total_verified_bps": 38,
+  "per_site": {
+   "books": {
+    "site_class": "static",
+    "attempted": true,
+    "verified_bps": 12,
+    "producer": true,
+    "bp_status_counts_from_manifest": {
+     "done": 12
+    },
+    "site_failed": null
+   },
+   "gutenberg": {
+    "site_class": "static",
+    "attempted": true,
+    "verified_bps": 0,
+    "producer": false,
+    "bp_status_counts_from_manifest": {
+     "done": 12
+    },
+    "site_failed": null
+   },
+   "internet": {
+    "site_class": "stateful",
+    "attempted": true,
+    "verified_bps": 2,
+    "producer": false,
+    "bp_status_counts_from_manifest": {
+     "excluded_menu": 6,
+     "done": 2
+    },
+    "site_failed": null
+   },
+   "openlibrary": {
+    "site_class": "static",
+    "attempted": true,
+    "verified_bps": 0,
+    "producer": false,
+    "bp_status_counts_from_manifest": {},
+    "site_failed": null
+   },
+   "parabank": {
+    "site_class": "stateful",
+    "attempted": true,
+    "verified_bps": 5,
+    "producer": false,
+    "bp_status_counts_from_manifest": {
+     "done": 5,
+     "excluded_menu": 2
+    },
+    "site_failed": null
+   },
+   "quotes": {
+    "site_class": "static",
+    "attempted": true,
+    "verified_bps": 12,
+    "producer": true,
+    "bp_status_counts_from_manifest": {
+     "done": 12
+    },
+    "site_failed": null
+   },
+   "saucedemo": {
+    "site_class": "stateful",
+    "attempted": true,
+    "verified_bps": 7,
+    "producer": false,
+    "bp_status_counts_from_manifest": {
+     "done": 7
+    },
+    "site_failed": null
+   },
+   "wikipedia": {
+    "site_class": "static",
+    "attempted": true,
+    "verified_bps": 0,
+    "producer": false,
+    "bp_status_counts_from_manifest": {
+     "done": 12
+    },
+    "site_failed": null
+   }
+  },
+  "bp_records": {
+   "books-cat0": {
+    "site": "books",
+    "verified": true,
+    "cell_valid_counts": {
+     "click_button#0": 7,
+     "click_link#0": 7
+    }
+   },
+   "books-cat1": {
+    "site": "books",
+    "verified": true,
+    "cell_valid_counts": {
+     "click_button#0": 7,
+     "click_link#0": 7
+    }
+   },
+   "books-cat2": {
+    "site": "books",
+    "verified": true,
+    "cell_valid_counts": {
+     "click_button#0": 7,
+     "click_link#0": 7
+    }
+   },
+   "books-cat3": {
+    "site": "books",
+    "verified": true,
+    "cell_valid_counts": {
+     "click_button#0": 7,
+     "click_link#0": 7
+    }
+   },
+   "books-cat4": {
+    "site": "books",
+    "verified": true,
+    "cell_valid_counts": {
+     "click_link#0": 7,
+     "click_button#0": 7
+    }
+   },
+   "books-item0": {
+    "site": "books",
+    "verified": true,
+    "cell_valid_counts": {
+     "click_link#0": 7,
+     "click_button#0": 7
+    }
+   },
+   "books-item1": {
+    "site": "books",
+    "verified": true,
+    "cell_valid_counts": {
+     "click_link#0": 7,
+     "click_button#0": 7
+    }
+   },
+   "books-item2": {
+    "site": "books",
+    "verified": true,
+    "cell_valid_counts": {
+     "click_button#0": 7,
+     "click_link#0": 7
+    }
+   },
+   "books-item3": {
+    "site": "books",
+    "verified": true,
+    "cell_valid_counts": {
+     "click_button#0": 7,
+     "click_link#0": 7
+    }
+   },
+   "books-item4": {
+    "site": "books",
+    "verified": true,
+    "cell_valid_counts": {
+     "click_button#0": 7,
+     "click_link#0": 7
+    }
+   },
+   "books-item5": {
+    "site": "books",
+    "verified": true,
+    "cell_valid_counts": {
+     "click_button#0": 7,
+     "click_link#0": 7
+    }
+   },
+   "books-item6": {
+    "site": "books",
+    "verified": true,
+    "cell_valid_counts": {
+     "click_link#0": 7,
+     "click_button#0": 7
+    }
+   },
+   "quotes-page2": {
+    "site": "quotes",
+    "verified": true,
+    "cell_valid_counts": {
+     "click_link#0": 7,
+     "click_link#1": 7
+    }
+   },
+   "quotes-page3": {
+    "site": "quotes",
+    "verified": true,
+    "cell_valid_counts": {
+     "click_link#0": 7,
+     "click_link#1": 7
+    }
+   },
+   "quotes-page4": {
+    "site": "quotes",
+    "verified": true,
+    "cell_valid_counts": {
+     "click_link#1": 7,
+     "click_link#0": 7
+    }
+   },
+   "quotes-page5": {
+    "site": "quotes",
+    "verified": true,
+    "cell_valid_counts": {
+     "click_link#1": 7,
+     "click_link#0": 7
+    }
+   },
+   "quotes-page6": {
+    "site": "quotes",
+    "verified": true,
+    "cell_valid_counts": {
+     "click_link#0": 7,
+     "click_link#1": 7
+    }
+   },
+   "quotes-page7": {
+    "site": "quotes",
+    "verified": true,
+    "cell_valid_counts": {
+     "click_link#0": 7,
+     "click_link#1": 7
+    }
+   },
+   "quotes-tag0": {
+    "site": "quotes",
+    "verified": true,
+    "cell_valid_counts": {
+     "click_link#0": 7,
+     "click_link#1": 7
+    }
+   },
+   "quotes-tag1": {
+    "site": "quotes",
+    "verified": true,
+    "cell_valid_counts": {
+     "click_link#1": 7,
+     "click_link#0": 7
+    }
+   },
+   "quotes-tag2": {
+    "site": "quotes",
+    "verified": true,
+    "cell_valid_counts": {
+     "click_link#1": 7,
+     "click_link#0": 7
+    }
+   },
+   "quotes-tag3": {
+    "site": "quotes",
+    "verified": true,
+    "cell_valid_counts": {
+     "click_link#0": 7,
+     "click_link#1": 7
+    }
+   },
+   "quotes-tag4": {
+    "site": "quotes",
+    "verified": true,
+    "cell_valid_counts": {
+     "click_link#1": 7,
+     "click_link#0": 7
+    }
+   },
+   "quotes-tag5": {
+    "site": "quotes",
+    "verified": true,
+    "cell_valid_counts": {
+     "click_link#1": 7,
+     "click_link#0": 7
+    }
+   },
+   "wiki-spider": {
+    "site": "wikipedia",
+    "verified": false,
+    "cell_valid_counts": {
+     "click_button#0": 7
+    }
+   },
+   "wiki-ant": {
+    "site": "wikipedia",
+    "verified": false,
+    "cell_valid_counts": {
+     "click_button#0": 7
+    }
+   },
+   "wiki-coffee": {
+    "site": "wikipedia",
+    "verified": false,
+    "cell_valid_counts": {
+     "click_button#0": 7
+    }
+   },
+   "wiki-mount_everest": {
+    "site": "wikipedia",
+    "verified": false,
+    "cell_valid_counts": {
+     "click_button#0": 7
+    }
+   },
+   "wiki-mathematics": {
+    "site": "wikipedia",
+    "verified": false,
+    "cell_valid_counts": {
+     "click_button#0": 7
+    }
+   },
+   "wiki-physics": {
+    "site": "wikipedia",
+    "verified": false,
+    "cell_valid_counts": {
+     "click_button#0": 7
+    }
+   },
+   "wiki-chemistry": {
+    "site": "wikipedia",
+    "verified": false,
+    "cell_valid_counts": {
+     "click_button#0": 7
+    }
+   },
+   "wiki-biology": {
+    "site": "wikipedia",
+    "verified": false,
+    "cell_valid_counts": {
+     "click_button#0": 7
+    }
+   },
+   "wiki-astronomy": {
+    "site": "wikipedia",
+    "verified": false,
+    "cell_valid_counts": {
+     "click_button#0": 7
+    }
+   },
+   "wiki-geology": {
+    "site": "wikipedia",
+    "verified": false,
+    "cell_valid_counts": {
+     "click_button#0": 7
+    }
+   },
+   "wiki-computer": {
+    "site": "wikipedia",
+    "verified": false,
+    "cell_valid_counts": {
+     "click_button#0": 7
+    }
+   },
+   "wiki-ocean": {
+    "site": "wikipedia",
+    "verified": false,
+    "cell_valid_counts": {
+     "click_button#0": 7
+    }
+   },
+   "gutenberg-shelf1": {
+    "site": "gutenberg",
+    "verified": false,
+    "cell_valid_counts": {
+     "click_button#0": 7
+    }
+   },
+   "gutenberg-shelf2": {
+    "site": "gutenberg",
+    "verified": false,
+    "cell_valid_counts": {
+     "click_button#0": 7
+    }
+   },
+   "gutenberg-shelf3": {
+    "site": "gutenberg",
+    "verified": false,
+    "cell_valid_counts": {
+     "click_button#0": 7
+    }
+   },
+   "gutenberg-shelf4": {
+    "site": "gutenberg",
+    "verified": false,
+    "cell_valid_counts": {
+     "click_button#0": 7
+    }
+   },
+   "gutenberg-shelf5": {
+    "site": "gutenberg",
+    "verified": false,
+    "cell_valid_counts": {
+     "click_button#0": 7
+    }
+   },
+   "gutenberg-shelf6": {
+    "site": "gutenberg",
+    "verified": false,
+    "cell_valid_counts": {
+     "click_button#0": 7
+    }
+   },
+   "gutenberg-shelf7": {
+    "site": "gutenberg",
+    "verified": false,
+    "cell_valid_counts": {
+     "click_button#0": 7
+    }
+   },
+   "gutenberg-shelf8": {
+    "site": "gutenberg",
+    "verified": false,
+    "cell_valid_counts": {
+     "click_button#0": 7
+    }
+   },
+   "gutenberg-shelf9": {
+    "site": "gutenberg",
+    "verified": false,
+    "cell_valid_counts": {
+     "click_button#0": 7
+    }
+   },
+   "gutenberg-shelf10": {
+    "site": "gutenberg",
+    "verified": false,
+    "cell_valid_counts": {
+     "click_button#0": 7
+    }
+   },
+   "gutenberg-shelf11": {
+    "site": "gutenberg",
+    "verified": false,
+    "cell_valid_counts": {
+     "click_button#0": 7
+    }
+   },
+   "gutenberg-shelf12": {
+    "site": "gutenberg",
+    "verified": false,
+    "cell_valid_counts": {
+     "click_button#0": 7
+    }
+   },
+   "openlibrary-science": {
+    "site": "openlibrary",
+    "verified": false,
+    "cell_valid_counts": {
+     "click_button#0": 3
+    }
+   },
+   "openlibrary-fantasy": {
+    "site": "openlibrary",
+    "verified": false,
+    "cell_valid_counts": {}
+   },
+   "openlibrary-mathematics": {
+    "site": "openlibrary",
+    "verified": false,
+    "cell_valid_counts": {
+     "click_button#0": 1
+    }
+   },
+   "saucedemo-inventory": {
+    "site": "saucedemo",
+    "verified": true,
+    "cell_valid_counts": {
+     "click_link#0": 7,
+     "click_button#0": 7
+    }
+   },
+   "saucedemo-item0": {
+    "site": "saucedemo",
+    "verified": true,
+    "cell_valid_counts": {
+     "click_button#0": 7,
+     "click_button#1": 7
+    }
+   },
+   "saucedemo-item1": {
+    "site": "saucedemo",
+    "verified": true,
+    "cell_valid_counts": {
+     "click_button#0": 7,
+     "click_button#1": 7
+    }
+   },
+   "saucedemo-item2": {
+    "site": "saucedemo",
+    "verified": true,
+    "cell_valid_counts": {
+     "click_button#0": 7,
+     "click_button#1": 7
+    }
+   },
+   "saucedemo-item3": {
+    "site": "saucedemo",
+    "verified": true,
+    "cell_valid_counts": {
+     "click_button#0": 7,
+     "click_button#1": 7
+    }
+   },
+   "saucedemo-item4": {
+    "site": "saucedemo",
+    "verified": true,
+    "cell_valid_counts": {
+     "click_button#1": 7,
+     "click_button#0": 7
+    }
+   },
+   "saucedemo-item5": {
+    "site": "saucedemo",
+    "verified": true,
+    "cell_valid_counts": {
+     "click_button#1": 7,
+     "click_button#0": 7
+    }
+   },
+   "internet-status_codes": {
+    "site": "internet",
+    "verified": true,
+    "cell_valid_counts": {
+     "click_link#0": 7,
+     "click_link#1": 7
+    }
+   },
+   "internet-login": {
+    "site": "internet",
+    "verified": true,
+    "cell_valid_counts": {
+     "click_button#0": 7,
+     "fill_text#0": 7
+    }
+   },
+   "parabank-overview": {
+    "site": "parabank",
+    "verified": true,
+    "cell_valid_counts": {
+     "click_link#1": 7,
+     "click_link#0": 7
+    }
+   },
+   "parabank-transfer": {
+    "site": "parabank",
+    "verified": true,
+    "cell_valid_counts": {
+     "click_button#0": 7,
+     "click_link#0": 7
+    }
+   },
+   "parabank-billpay": {
+    "site": "parabank",
+    "verified": true,
+    "cell_valid_counts": {
+     "fill_text#0": 7,
+     "click_link#0": 7
+    }
+   },
+   "parabank-findtrans": {
+    "site": "parabank",
+    "verified": true,
+    "cell_valid_counts": {
+     "click_link#0": 7,
+     "click_button#0": 7
+    }
+   },
+   "parabank-updateprofile": {
+    "site": "parabank",
+    "verified": true,
+    "cell_valid_counts": {
+     "click_link#0": 7,
+     "fill_text#0": 7
+    }
+   }
+  }
+ },
+ "verdict_trace": [
+  "collection executed adequately but branching below the director bar -> FALSIFIED (states not reproducible enough at this tolerance)"
+ ],
+ "verdict": "FALSIFIED",
+ "descriptive_D1_D4": {
+  "cells": [
+   {
+    "bp_id": "books-cat0",
+    "site": "books",
+    "site_class": "static",
+    "cell": "click_button#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "books-cat0",
+    "site": "books",
+    "site_class": "static",
+    "cell": "click_link#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "books-cat1",
+    "site": "books",
+    "site_class": "static",
+    "cell": "click_button#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "books-cat1",
+    "site": "books",
+    "site_class": "static",
+    "cell": "click_link#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "books-cat2",
+    "site": "books",
+    "site_class": "static",
+    "cell": "click_button#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "books-cat2",
+    "site": "books",
+    "site_class": "static",
+    "cell": "click_link#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "books-cat3",
+    "site": "books",
+    "site_class": "static",
+    "cell": "click_button#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "books-cat3",
+    "site": "books",
+    "site_class": "static",
+    "cell": "click_link#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "books-cat4",
+    "site": "books",
+    "site_class": "static",
+    "cell": "click_link#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "books-cat4",
+    "site": "books",
+    "site_class": "static",
+    "cell": "click_button#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "books-item0",
+    "site": "books",
+    "site_class": "static",
+    "cell": "click_link#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "books-item0",
+    "site": "books",
+    "site_class": "static",
+    "cell": "click_button#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "books-item1",
+    "site": "books",
+    "site_class": "static",
+    "cell": "click_link#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "books-item1",
+    "site": "books",
+    "site_class": "static",
+    "cell": "click_button#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "books-item2",
+    "site": "books",
+    "site_class": "static",
+    "cell": "click_button#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "books-item2",
+    "site": "books",
+    "site_class": "static",
+    "cell": "click_link#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "books-item3",
+    "site": "books",
+    "site_class": "static",
+    "cell": "click_button#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "books-item3",
+    "site": "books",
+    "site_class": "static",
+    "cell": "click_link#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "books-item4",
+    "site": "books",
+    "site_class": "static",
+    "cell": "click_button#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "books-item4",
+    "site": "books",
+    "site_class": "static",
+    "cell": "click_link#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "books-item5",
+    "site": "books",
+    "site_class": "static",
+    "cell": "click_button#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "books-item5",
+    "site": "books",
+    "site_class": "static",
+    "cell": "click_link#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "books-item6",
+    "site": "books",
+    "site_class": "static",
+    "cell": "click_link#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "books-item6",
+    "site": "books",
+    "site_class": "static",
+    "cell": "click_button#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "quotes-page2",
+    "site": "quotes",
+    "site_class": "static",
+    "cell": "click_link#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "quotes-page2",
+    "site": "quotes",
+    "site_class": "static",
+    "cell": "click_link#1",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "quotes-page3",
+    "site": "quotes",
+    "site_class": "static",
+    "cell": "click_link#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "quotes-page3",
+    "site": "quotes",
+    "site_class": "static",
+    "cell": "click_link#1",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "quotes-page4",
+    "site": "quotes",
+    "site_class": "static",
+    "cell": "click_link#1",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "quotes-page4",
+    "site": "quotes",
+    "site_class": "static",
+    "cell": "click_link#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "quotes-page5",
+    "site": "quotes",
+    "site_class": "static",
+    "cell": "click_link#1",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "quotes-page5",
+    "site": "quotes",
+    "site_class": "static",
+    "cell": "click_link#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "quotes-page6",
+    "site": "quotes",
+    "site_class": "static",
+    "cell": "click_link#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "quotes-page6",
+    "site": "quotes",
+    "site_class": "static",
+    "cell": "click_link#1",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "quotes-page7",
+    "site": "quotes",
+    "site_class": "static",
+    "cell": "click_link#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "quotes-page7",
+    "site": "quotes",
+    "site_class": "static",
+    "cell": "click_link#1",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "quotes-tag0",
+    "site": "quotes",
+    "site_class": "static",
+    "cell": "click_link#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "quotes-tag0",
+    "site": "quotes",
+    "site_class": "static",
+    "cell": "click_link#1",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "quotes-tag1",
+    "site": "quotes",
+    "site_class": "static",
+    "cell": "click_link#1",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "quotes-tag1",
+    "site": "quotes",
+    "site_class": "static",
+    "cell": "click_link#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "quotes-tag2",
+    "site": "quotes",
+    "site_class": "static",
+    "cell": "click_link#1",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "quotes-tag2",
+    "site": "quotes",
+    "site_class": "static",
+    "cell": "click_link#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "quotes-tag3",
+    "site": "quotes",
+    "site_class": "static",
+    "cell": "click_link#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "quotes-tag3",
+    "site": "quotes",
+    "site_class": "static",
+    "cell": "click_link#1",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "quotes-tag4",
+    "site": "quotes",
+    "site_class": "static",
+    "cell": "click_link#1",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "quotes-tag4",
+    "site": "quotes",
+    "site_class": "static",
+    "cell": "click_link#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "quotes-tag5",
+    "site": "quotes",
+    "site_class": "static",
+    "cell": "click_link#1",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "quotes-tag5",
+    "site": "quotes",
+    "site_class": "static",
+    "cell": "click_link#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "wiki-spider",
+    "site": "wikipedia",
+    "site_class": "static",
+    "cell": "click_button#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "wiki-ant",
+    "site": "wikipedia",
+    "site_class": "static",
+    "cell": "click_button#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "wiki-coffee",
+    "site": "wikipedia",
+    "site_class": "static",
+    "cell": "click_button#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "wiki-mount_everest",
+    "site": "wikipedia",
+    "site_class": "static",
+    "cell": "click_button#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "wiki-mathematics",
+    "site": "wikipedia",
+    "site_class": "static",
+    "cell": "click_button#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "wiki-physics",
+    "site": "wikipedia",
+    "site_class": "static",
+    "cell": "click_button#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "wiki-chemistry",
+    "site": "wikipedia",
+    "site_class": "static",
+    "cell": "click_button#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "wiki-biology",
+    "site": "wikipedia",
+    "site_class": "static",
+    "cell": "click_button#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "wiki-astronomy",
+    "site": "wikipedia",
+    "site_class": "static",
+    "cell": "click_button#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "wiki-geology",
+    "site": "wikipedia",
+    "site_class": "static",
+    "cell": "click_button#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "wiki-computer",
+    "site": "wikipedia",
+    "site_class": "static",
+    "cell": "click_button#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "wiki-ocean",
+    "site": "wikipedia",
+    "site_class": "static",
+    "cell": "click_button#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "gutenberg-shelf1",
+    "site": "gutenberg",
+    "site_class": "static",
+    "cell": "click_button#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "gutenberg-shelf2",
+    "site": "gutenberg",
+    "site_class": "static",
+    "cell": "click_button#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "gutenberg-shelf3",
+    "site": "gutenberg",
+    "site_class": "static",
+    "cell": "click_button#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "gutenberg-shelf4",
+    "site": "gutenberg",
+    "site_class": "static",
+    "cell": "click_button#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Eneg",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos"
+    ],
+    "t2_modal_share": 0.8571,
+    "t2_entropy_bits": 0.5917,
+    "t2_shuffle_p95_modal": 0.8571,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": false
+   },
+   {
+    "bp_id": "gutenberg-shelf5",
+    "site": "gutenberg",
+    "site_class": "static",
+    "cell": "click_button#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Ezero",
+     "DOM0|Ezero",
+     "DOM0|Ezero",
+     "DOM0|Ezero",
+     "DOM0|Ezero",
+     "DOM0|Ezero",
+     "DOM0|Ezero"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "gutenberg-shelf6",
+    "site": "gutenberg",
+    "site_class": "static",
+    "cell": "click_button#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Ezero",
+     "DOM0|Ezero",
+     "DOM0|Ezero",
+     "DOM0|Ezero",
+     "DOM0|Ezero",
+     "DOM0|Ezero",
+     "DOM0|Ezero"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "gutenberg-shelf7",
+    "site": "gutenberg",
+    "site_class": "static",
+    "cell": "click_button#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "gutenberg-shelf8",
+    "site": "gutenberg",
+    "site_class": "static",
+    "cell": "click_button#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Ezero",
+     "DOM0|Ezero",
+     "DOM0|Ezero",
+     "DOM0|Ezero",
+     "DOM0|Ezero",
+     "DOM0|Ezero",
+     "DOM0|Ezero"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "gutenberg-shelf9",
+    "site": "gutenberg",
+    "site_class": "static",
+    "cell": "click_button#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "gutenberg-shelf10",
+    "site": "gutenberg",
+    "site_class": "static",
+    "cell": "click_button#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Ezero",
+     "DOM0|Ezero",
+     "DOM0|Ezero",
+     "DOM0|Ezero",
+     "DOM0|Ezero",
+     "DOM0|Ezero",
+     "DOM0|Ezero"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "gutenberg-shelf11",
+    "site": "gutenberg",
+    "site_class": "static",
+    "cell": "click_button#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Ezero",
+     "DOM0|Ezero",
+     "DOM0|Ezero",
+     "DOM0|Ezero",
+     "DOM0|Ezero",
+     "DOM0|Ezero",
+     "DOM0|Ezero"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "gutenberg-shelf12",
+    "site": "gutenberg",
+    "site_class": "static",
+    "cell": "click_button#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "openlibrary-science",
+    "site": "openlibrary",
+    "site_class": "static",
+    "cell": "click_button#0",
+    "n": 3,
+    "t2_labels": [
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "openlibrary-mathematics",
+    "site": "openlibrary",
+    "site_class": "static",
+    "cell": "click_button#0",
+    "n": 1,
+    "t2_labels": [
+     "DOM0|Epos"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "saucedemo-inventory",
+    "site": "saucedemo",
+    "site_class": "stateful",
+    "cell": "click_link#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "saucedemo-inventory",
+    "site": "saucedemo",
+    "site_class": "stateful",
+    "cell": "click_button#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "saucedemo-item0",
+    "site": "saucedemo",
+    "site_class": "stateful",
+    "cell": "click_button#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "saucedemo-item0",
+    "site": "saucedemo",
+    "site_class": "stateful",
+    "cell": "click_button#1",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "saucedemo-item1",
+    "site": "saucedemo",
+    "site_class": "stateful",
+    "cell": "click_button#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "saucedemo-item1",
+    "site": "saucedemo",
+    "site_class": "stateful",
+    "cell": "click_button#1",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "saucedemo-item2",
+    "site": "saucedemo",
+    "site_class": "stateful",
+    "cell": "click_button#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "saucedemo-item2",
+    "site": "saucedemo",
+    "site_class": "stateful",
+    "cell": "click_button#1",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "saucedemo-item3",
+    "site": "saucedemo",
+    "site_class": "stateful",
+    "cell": "click_button#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "saucedemo-item3",
+    "site": "saucedemo",
+    "site_class": "stateful",
+    "cell": "click_button#1",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "saucedemo-item4",
+    "site": "saucedemo",
+    "site_class": "stateful",
+    "cell": "click_button#1",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "saucedemo-item4",
+    "site": "saucedemo",
+    "site_class": "stateful",
+    "cell": "click_button#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "saucedemo-item5",
+    "site": "saucedemo",
+    "site_class": "stateful",
+    "cell": "click_button#1",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "saucedemo-item5",
+    "site": "saucedemo",
+    "site_class": "stateful",
+    "cell": "click_button#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "internet-status_codes",
+    "site": "internet",
+    "site_class": "stateful",
+    "cell": "click_link#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "internet-status_codes",
+    "site": "internet",
+    "site_class": "stateful",
+    "cell": "click_link#1",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "internet-login",
+    "site": "internet",
+    "site_class": "stateful",
+    "cell": "click_button#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos",
+     "DOM0|Epos"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "internet-login",
+    "site": "internet",
+    "site_class": "stateful",
+    "cell": "fill_text#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "parabank-overview",
+    "site": "parabank",
+    "site_class": "stateful",
+    "cell": "click_link#1",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "parabank-overview",
+    "site": "parabank",
+    "site_class": "stateful",
+    "cell": "click_link#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "parabank-transfer",
+    "site": "parabank",
+    "site_class": "stateful",
+    "cell": "click_button#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "parabank-transfer",
+    "site": "parabank",
+    "site_class": "stateful",
+    "cell": "click_link#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "parabank-billpay",
+    "site": "parabank",
+    "site_class": "stateful",
+    "cell": "fill_text#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "parabank-billpay",
+    "site": "parabank",
+    "site_class": "stateful",
+    "cell": "click_link#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "parabank-findtrans",
+    "site": "parabank",
+    "site_class": "stateful",
+    "cell": "click_link#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "parabank-findtrans",
+    "site": "parabank",
+    "site_class": "stateful",
+    "cell": "click_button#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Ezero",
+     "DOM0|Ezero",
+     "DOM0|Ezero",
+     "DOM0|Ezero",
+     "DOM0|Ezero",
+     "DOM0|Ezero",
+     "DOM0|Ezero"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "parabank-updateprofile",
+    "site": "parabank",
+    "site_class": "stateful",
+    "cell": "click_link#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg",
+     "DOM0|Eneg"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   },
+   {
+    "bp_id": "parabank-updateprofile",
+    "site": "parabank",
+    "site_class": "stateful",
+    "cell": "fill_text#0",
+    "n": 7,
+    "t2_labels": [
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero",
+     "DOM1|Ezero"
+    ],
+    "t2_modal_share": 1.0,
+    "t2_entropy_bits": -0.0,
+    "t2_shuffle_p95_modal": 1.0,
+    "t1_modal_share": 1.0,
+    "deterministic_t2": true
+   }
+  ],
+  "deterministic_cell_fraction_by_class": {
+   "static": {
+    "det": 73,
+    "n": 74,
+    "frac": 0.9865
+   },
+   "stateful": {
+    "det": 28,
+    "n": 28,
+    "frac": 1.0
+   }
+  },
+  "deterministic_fraction_by_class_and_kind": {
+   "static": {
+    "click_button": {
+     "det": 37,
+     "n": 38
+    },
+    "click_link": {
+     "det": 36,
+     "n": 36
+    }
+   },
+   "stateful": {
+    "click_link": {
+     "det": 9,
+     "n": 9
+    },
+    "click_button": {
+     "det": 16,
+     "n": 16
+    },
+    "fill_text": {
+     "det": 3,
+     "n": 3
+    }
+   }
+  },
+  "note": "DESCRIPTIVE ONLY \u2014 cannot rescue or weaken the primary verdict (prereg \u00a77/G10). Shuffle references are calibration of spread, not inference."
+ },
+ "descriptive_D5_calibration_false_negative_control": {
+  "books": {
+   "c2_pass": 12,
+   "n": 12
+  },
+  "gutenberg": {
+   "c2_pass": 12,
+   "n": 12
+  },
+  "internet": {
+   "c2_pass": 2,
+   "n": 2
+  },
+  "parabank": {
+   "c2_pass": 5,
+   "n": 5
+  },
+  "quotes": {
+   "c2_pass": 12,
+   "n": 12
+  },
+  "saucedemo": {
+   "c2_pass": 7,
+   "n": 7
+  },
+  "wikipedia": {
+   "c2_pass": 12,
+   "n": 12
+  }
+ },
+ "descriptive_D5_reset_attempts": {
+  "mean_reset_attempts_valid_trials": 1.0
+ },
+ "ERRATUM_v2_repair_round_1": {
+  "status": "ADDITIVE ERRATUM \u2014 all original fields above are preserved verbatim; nothing was edited or removed",
+  "repair": "cycle 32776372437 repair round 1 (GitHub run 32793165981); audit CYCLE_32776372437_PHYSICS_GATE.json RF1",
+  "original_file_sha256": "4d34b1cb43bf5ce44e495c7258e57e0e8c52e34616b7dc1676a66f0a9d98b2dd",
+  "corrects_descriptive_D5_calibration_false_negative_control": {
+   "original_value_manifest_fed": {
+    "books": {
+     "c2_pass": 12,
+     "n": 12
+    },
+    "gutenberg": {
+     "c2_pass": 12,
+     "n": 12
+    },
+    "internet": {
+     "c2_pass": 2,
+     "n": 2
+    },
+    "parabank": {
+     "c2_pass": 5,
+     "n": 5
+    },
+    "quotes": {
+     "c2_pass": 12,
+     "n": 12
+    },
+    "saucedemo": {
+     "c2_pass": 7,
+     "n": 7
+    },
+    "wikipedia": {
+     "c2_pass": 12,
+     "n": 12
+    }
+   },
+   "defect": "BP-manifest-fed denominator silently omitted openlibrary (per-site manifest lost to the 2400 s hard-timeout kill before end-of-run dump)",
+   "corrected_source": "raw calibration rows of data/physics/wp006_trials.jsonl.gz",
+   "corrected_per_site": {
+    "books": {
+     "c2_pass": 12,
+     "n": 12
+    },
+    "gutenberg": {
+     "c2_pass": 12,
+     "n": 12
+    },
+    "internet": {
+     "c2_pass": 2,
+     "n": 2
+    },
+    "openlibrary": {
+     "c2_pass": 5,
+     "n": 12
+    },
+    "parabank": {
+     "c2_pass": 5,
+     "n": 5
+    },
+    "quotes": {
+     "c2_pass": 12,
+     "n": 12
+    },
+    "saucedemo": {
+     "c2_pass": 7,
+     "n": 7
+    },
+    "wikipedia": {
+     "c2_pass": 12,
+     "n": 12
+    }
+   },
+   "corpus_corrected": {
+    "pass": 67,
+    "evaluated": 74
+   },
+   "false_negative_rate_corpus": 0.0946,
+   "openlibrary": {
+    "c2_pass": 5,
+    "n": 12
+   }
+  },
+  "corrects_report_G9_verifier_coverage_claim": {
+   "report_sentence": "C2 state-match recomputation 0 mismatches on 806 comparable rows",
+   "v1_artifact_recorded": 868,
+   "v2_full_coverage": {
+    "evaluated": 888,
+    "denominator": 910,
+    "not_recomputable_no_pre_snapshot": 22,
+    "from_manifest_refs": 868,
+    "from_raw_calibration_refs": 20
+   },
+   "see": "results/physics/wp006_verification_v2.json checks.C2_*"
+  },
+  "primary_verdict_unchanged": "FALSIFIED"
+ }
+}

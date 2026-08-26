@@ -1,0 +1,53 @@
+{
+  "document_type": "POST_HOC_RECOMPUTATION_ADDENDUM",
+  "status_disclosure": "Recomputed from the raw cost_events.jsonl of attempt-3 AFTER outcomes were seen. Nothing here reruns the pilot or alters pilot_results.json; every value is mechanically derivable from the committed raw event stream. Produced in response to the Runtime performance-critic review of cycle R0-1.",
+  "source_files": [
+    "results/runtime/pilot/cost_events.jsonl",
+    "results/runtime/pilot/pilot_results.json"
+  ],
+  "corrections_to_earlier_prose": {
+    "twin_pairs": {
+      "earlier_claimed_in_review_request": 80,
+      "recomputed": {"distinct_row_ids": 88, "complete_twin_pairs": 88,
+                      "orphan_or_incomplete": 0},
+      "note": "88 spider.cost_event/v0 rows + 88 byte-identical-field pb001.cost_event/v0 twins sharing row_id; identity check errors = []."
+    }
+  },
+  "frozen_metrics_not_serialized_per_row_deviation": {
+    "browser_launches": {
+      "prereg_section": "6",
+      "deviation": "not serialized per row in attempt-3 rows",
+      "value_by_construction": 1,
+      "basis": "exactly one Session (one chromium context) opened and closed per row in runtime/pilot.py for both arms; no code path opens a second browser per row"
+    },
+    "verification_count": {
+      "prereg_section": "6",
+      "deviation": "not serialized per row in attempt-3 rows",
+      "recomputed_from_events": {
+        "RT0-C1-b0-p1": 1, "RT0-C1-spider-p1": 1,
+        "RT0-C2-b0-p1": 1, "RT0-C2-spider-p1": 1
+      },
+      "basis": "each main row_id has exactly one stage=verify/event_class=health harness-judge event in the stream"
+    },
+    "base_entry_digest": {
+      "prereg_section": "5 (within-cell pair digest guard)",
+      "deviation": "BASE rows record entry_digest=null; the pair-digest HEALTH_TRIP guard was therefore evaluated only on SPIDER rows and via phase=smoke preflight digests, not on BASE entry snapshots",
+      "consequence": "within-pair DOM-symmetry across arms is asserted by back-to-back scheduling, not machine-proven for BASE rows"
+    }
+  },
+  "metric_naming_annotations": {
+    "reuse_yield": "with overhead_actions=0 the frozen formula degenerates to (base_actions - spider_actions); read it as NET COMPRESSION PER OVERHEAD-ACTION, not a yield ratio. Final-run value 0.0 with 4/4 actions reused is parity, consistent with repeat_cost_ratio_actions=1.0.",
+    "C2_ratios": "action/wall deltas in cell C2 compare success against a budget-capped FAILED arm and are labelled illustrative failure-avoidance, NOT cost ratios."
+  },
+  "attempt_history_decision_timestamps_utc_approx": {
+    "attempt1_defective_baseline_provenance": "2026-08-25T22:02:43Z (artifact mtime); defect: baseline-only fill-retirement key mismatch (element-index key checked vs url-key added) causing infinite refill loop; classified harness/policy defect, NOT a prereg HEALTH_TRIP class -> batch discarded against producer interest (defect made SPIDER look spectacular)",
+    "attempt2_valid_incomplete_telemetry": "2026-08-25T22:04:53Z (artifact mtime); valid outcomes, missing spider wall_ms_perf and per-action event rows -> superseded for telemetry completeness, preserved",
+    "attempt3_final": "2026-08-25T22:05:32Z (artifact mtime); complete accounting, source of all quoted numbers"
+  },
+  "exclusions_enumerated_outside_all_wall_numbers": [
+    "offline capsule derivation from the Graph dump (one-time, offline)",
+    "harness/unit-test/twin-identity-check compute",
+    "preserved attempts 1 and 2 compute",
+    "registry load is warm-process; retrieval_ms_perf excludes cold registry reads"
+  ]
+}

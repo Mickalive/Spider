@@ -1,0 +1,113 @@
+{
+  "session_label": "bounded-architect-durability-tenth",
+  "date": "2026-08-25",
+  "lane": "SPIDER Product / BETA ARCHITECT cell",
+  "branch": "lab/product",
+  "base_head": "dc716c55e0bbf885191b2ba1fc2350e2c817ac77",
+  "final_head": "2988fa1",
+  "merge_commits": [
+    {
+      "hash": "cf25299",
+      "line": "origin/cycle/product/32886859788/architect @ ddce3a3 (PB-001 v4+v5 combined amendment line)",
+      "summary": "Beta content under product-beta/PB-001/, results/product-beta/, state/product_beta_{architecture,build}.json taken byte-identical from ddce3a3; Director-owned ninth-session files (state/product_direction.json, state/product_current.json, state/product_beta_request.json, docs/**, results/product/PRODUCT_HYPOTHESES.json) kept from HEAD dc716c5."
+    },
+    {
+      "hash": "7c2ca71",
+      "line": "origin/cycle/product/32886859788/builder @ 7657565 (Builder WP-8 build line)",
+      "summary": "All add/add conflicts inside the TAKE set resolved byte-identical from 7657565 (incl. arms/spider.py, harness/driver.py, harness/run_phase_b.py, runtime/llm.py, runtime/react.py, tests/test_integration_local.py, results MANIFEST.json, dress_rehearsal_synthetic.json, state/product_beta_build.json); KEEP-FROM-HEAD files re-pinned to HEAD bytes."
+    }
+  ],
+  "pin_verification_post_merge_pre_delta": {
+    "note": "sha256 verified against working tree after both merges, before any duty-2 edit.",
+    "pins": [
+      {"path": "results/product-beta/PB-001/kb_frozen.sqlite", "expected": "893486e348210d65f89abd8fd089e2b774d8ac3e4727ed8e3a38e87a297678de", "actual": "893486e348210d65f89abd8fd089e2b774d8ac3e4727ed8e3a38e87a297678de", "status": "MATCH"},
+      {"path": "product-beta/PB-001/analysis/compute_verdict.py", "expected": "992dc91961ff7b4812f54f15a25a456f156fdf8f5ad19b140b0f0a36c65f9533", "actual": "992dc91961ff7b4812f54f15a25a456f156fdf8f5ad19b140b0f0a36c65f9533", "status": "MATCH"},
+      {"path": "product-beta/PB-001/harness/panel.json", "expected": "be006d7b50f1a14044cacf571b22aadb980bf5e26b699b6c27ce5fafd11e0a0b", "actual": "be006d7b50f1a14044cacf571b22aadb980bf5e26b699b6c27ce5fafd11e0a0b", "status": "MATCH"},
+      {"path": "product-beta/PB-001/harness/b3_leakage_map.json", "expected": "389de646886aaffca899bad4871b7a0e8d1969decefafb4b5c9ae7f0df625e43", "actual": "389de646886aaffca899bad4871b7a0e8d1969decefafb4b5c9ae7f0df625e43", "status": "MATCH"},
+      {"path": "results/product-beta/PB-001/dress_rehearsal_synthetic.json", "expected": "02dddfaa32aa6feb98e4c7062b8206a7e1872ba18d37b220a986c36fa2372f50", "actual": "02dddfaa32aa6feb98e4c7062b8206a7e1872ba18d37b220a986c36fa2372f50", "status": "MATCH"},
+      {"path": "state/product_beta_request.json", "expected": "d8b007a7d72f3337ce4d8004bc6b026f4aa746dfdb4af1bce4f6a517b01d7582", "actual": "d8b007a7d72f3337ce4d8004bc6b026f4aa746dfdb4af1bce4f6a517b01d7582", "status": "MATCH"}
+    ],
+    "result": "6/6 MATCH"
+  },
+  "pin_verification_final_committed_tree": {
+    "note": "Same six pins re-verified on the final committed tree (after duty 2). The single DRIFT is the CONTRACTED duty-2 edit to compute_verdict.py, whose new hash is repinned in results/product-beta/PB-001/MANIFEST.json analysis_code_hash; no other pinned artifact moved.",
+    "pins": [
+      {"path": "results/product-beta/PB-001/kb_frozen.sqlite", "expected": "893486e348210d65f89abd8fd089e2b774d8ac3e4727ed8e3a38e87a297678de", "actual": "893486e348210d65f89abd8fd089e2b774d8ac3e4727ed8e3a38e87a297678de", "status": "MATCH"},
+      {"path": "product-beta/PB-001/analysis/compute_verdict.py", "expected": "992dc91961ff7b4812f54f15a25a456f156fdf8f5ad19b140b0f0a36c65f9533", "actual": "0cb76809c6c34eb5a17a9c82ca32031350d54a319505a6afb971b83f62430b88", "status": "DRIFT", "disposition": "CONTRACTED by duty 2 (CTO-4 §5 dual-id acceptance seam); MANIFEST analysis_code_hash repinned to actual; all other pins intact; replay byte-identical proves behavior neutrality"},
+      {"path": "product-beta/PB-001/harness/panel.json", "expected": "be006d7b50f1a14044cacf571b22aadb980bf5e26b699b6c27ce5fafd11e0a0b", "actual": "be006d7b50f1a14044cacf571b22aadb980bf5e26b699b6c27ce5fafd11e0a0b", "status": "MATCH"},
+      {"path": "product-beta/PB-001/harness/b3_leakage_map.json", "expected": "389de646886aaffca899bad4871b7a0e8d1969decefafb4b5c9ae7f0df625e43", "actual": "389de646886aaffca899bad4871b7a0e8d1969decefafb4b5c9ae7f0df625e43", "status": "MATCH"},
+      {"path": "results/product-beta/PB-001/dress_rehearsal_synthetic.json", "expected": "02dddfaa32aa6feb98e4c7062b8206a7e1872ba18d37b220a986c36fa2372f50", "actual": "02dddfaa32aa6feb98e4c7062b8206a7e1872ba18d37b220a986c36fa2372f50", "status": "MATCH"},
+      {"path": "state/product_beta_request.json", "expected": "d8b007a7d72f3337ce4d8004bc6b026f4aa746dfdb4af1bce4f6a517b01d7582", "actual": "d8b007a7d72f3337ce4d8004bc6b026f4aa746dfdb4af1bce4f6a517b01d7582", "status": "MATCH"}
+    ]
+  },
+  "duty2_measurement_infra_delta": {
+    "commit": "2988fa1",
+    "message_prefix": "PB-001 measurement-infra delta (pre-outcome, disclosed): CTO-4 §5 dual-id cost-event acceptance ('accept both ids')",
+    "scope": "Accepts Runtime schema id spider.cost_event/v0 alongside legacy pb001.cost_event/v0 with strict 1:1 IDENTITY field mapping (mapping table documented in code); emission unchanged (legacy id still written); no verdict/floor/comparator/budget/win-rule logic touched; zero outcome rows created.",
+    "files_changed": [
+      {
+        "path": "product-beta/PB-001/runtime/telemetry.py",
+        "change": "additive SCHEMA_RUNTIME='spider.cost_event/v0', SCHEMAS_ACCEPTED pair, normalize_cost_event() pure normalizer with identity mapping table + docstring disclosure; make_event/emitter untouched",
+        "old_sha256": "a96e18c990d2f5b53623765580b3979e10a01cc20f8f7623ae0a64fc9c731325",
+        "new_sha256": "5f9f04a31117ef3d68f50412f8edbf7a8f9767afac6179d38ffc5b88d6f90d6e"
+      },
+      {
+        "path": "product-beta/PB-001/analysis/compute_verdict.py",
+        "change": "additive load_cost_events(results_dir=None) ingestion seam normalizing both ids via runtime.telemetry; no existing function or constant altered",
+        "old_sha256": "992dc91961ff7b4812f54f15a25a456f156fdf8f5ad19b140b0f0a36c65f9533",
+        "new_sha256": "0cb76809c6c34eb5a17a9c82ca32031350d54a319505a6afb971b83f62430b88"
+      },
+      {
+        "path": "product-beta/PB-001/tests/test_integration_local.py",
+        "change": "schema-id assertion widened from legacy-equality to SCHEMAS_ACCEPTED membership (validation-point conformance); nothing else",
+        "old_sha256": "d8757516c587806713cce556bd698a1332f3239d6f28eca4aee70e7dd6afa1ba",
+        "new_sha256": "78f4a3fee0d49a65b43007de77611f3bf4edcf8b263c54a119efb63576bf50fe"
+      },
+      {
+        "path": "product-beta/PB-001/tests/test_cost_event_dual_id.py",
+        "change": "NEW focused unit test: spider.cost_event/v0 twin parses identically to pb001.cost_event/v0 twin; purity of normalization; unknown/missing id hard-error; emission still legacy id; mixed-id stream through load_cost_events; missing-file => []",
+        "old_sha256": null,
+        "new_sha256": "41ff0630cccadb6da52da9dc56a9d3fbfa75fe28218304121f9b0908d68a0b25"
+      },
+      {
+        "path": "results/product-beta/PB-001/MANIFEST.json",
+        "change": "repinned analysis_code_hash['analysis/compute_verdict.py'] only; historical v4_builder_wp8 disclosure block untouched",
+        "old_sha256": "8b909f6062aa71f64f40313fa282ad092683a0e46a15b0630d7f6330fe3e1494",
+        "new_sha256": "774651fcecf10a7ef419c3542d2a543490dd36b17de618dd53b2bef021ecd079",
+        "repin_detail": {"key": "analysis_code_hash.analysis/compute_verdict.py", "old": "608c2ecb6bd683537e19ff8b2784369e3354ae367d8568d50456fc43a1130084", "new": "0cb76809c6c34eb5a17a9c82ca32031350d54a319505a6afb971b83f62430b88"}
+      }
+    ]
+  },
+  "tests": [
+    {
+      "command": "python3 -m pytest product-beta/PB-001/tests/test_verdict_mechanics.py product-beta/PB-001/tests/test_panel_spec.py -x -q",
+      "when": "pre-delta baseline",
+      "result": "28 passed"
+    },
+    {
+      "command": "python3 -m pytest product-beta/PB-001/tests/test_verdict_mechanics.py product-beta/PB-001/tests/test_panel_spec.py product-beta/PB-001/tests/test_cost_event_dual_id.py -x -q",
+      "when": "post-delta gate",
+      "result": "35 passed"
+    },
+    {
+      "command": "python3 -m pytest ... test_cost_event_dual_id.py -x -q (new file alone)",
+      "when": "post-delta",
+      "result": "7 passed"
+    }
+  ],
+  "dress_rehearsal_replay": {
+    "method": "Full end-to-end run_rehearsal() executed against the AMENDED code in a disposable git worktree copy under /tmp/opencode/replay_tree; committed artifact never overwritten. Determinism achieved via session tooling OUTSIDE the repo: wall clock pinned to the artifact's recorded created_utc instant (2026-08-25T20:55:11Z) and local fixture server port pinned to its recorded ephemeral value (37645). First raw attempt differed ONLY in that ephemeral port string (env volatility, not code drift); with both volatility sources pinned the replay reproduced the artifact exactly.",
+    "go_live_gate": {"all_rows_success": true, "dead_pairs_empty": true, "violation_detectors_fired": true, "dress_rehearsal_green": true},
+    "byte_identical": true,
+    "pinned_expected_sha256": "02dddfaa32aa6feb98e4c7062b8206a7e1872ba18d37b220a986c36fa2372f50",
+    "actual_replay_sha256": "02dddfaa32aa6feb98e4c7062b8206a7e1872ba18d37b220a986c36fa2372f50",
+    "committed_artifact_untouched": true
+  },
+  "environment_notes": [
+    "pytest 9.1.1 and playwright 1.62.0 (matching MANIFEST env_record pin) provisioned into user site-packages for the verification gates; no repo dependency files altered.",
+    "Pre-existing staged non-beta work (52 files: .opencode/agents/*, directives/*, docs/roles/*, SPIDER_ARCHITECTURE_V2.md, CAPABILITY_CAPSULE.md) found on arrival; snapshotted to /tmp/opencode/session/pre_existing_staged.patch, stashed during the session, restored to the index afterwards; not included in any session commit."
+  ],
+  "deviations_or_stops": [],
+  "statement": "no arm/prompt/threshold/budget/win-rule bytes changed; zero outcome rows created",
+  "beta_launch_authorization": "none sought or granted; no benchmark phase launched; credentials absent throughout"
+}

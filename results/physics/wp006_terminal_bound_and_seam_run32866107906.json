@@ -1,0 +1,256 @@
+{
+ "run_id": "32866107906",
+ "artifact_class": "DESCRIPTIVE ONLY - attribution-of-shortfall bound + instrument-seam signature checks; cannot rescue or weaken the primary verdict; confirmatory extraction set of prereg aba6858 is EXHAUSTED",
+ "inherited_verdict_verbatim": "FALSIFIED at declared floors (prereg aba6858, applied exactly once): F2 producer sites 2 (<4 required: books 12, quotes 12); F4 total verified matched branch points 38 (<60 required); F1 satisfied (8 sites attempted spanning static+stateful); F3 true by construction. Measurement validity VALID_FOR_CURRENT_TEST (audits CYCLE_32776372437 REVISE->repaired, CYCLE_32793165981 PASS, CYCLE_32799587656 PASS, CYCLE_32860596387 PASS; last three required_fixes=[]).",
+ "dataset_sha256": "fafd1cef46bb6b2542a4ba5a91aca9ea61e94f3b70edd32986fbd53731149397",
+ "rng_consumption": "zero (no random module imported, no seeds drawn)",
+ "inputs": "committed rows only; no live interaction this run",
+ "data_insufficient_negation": {
+  "predicate_frozen": "DATA_INSUFFICIENT iff (<6 sites ATTEMPTED) OR (attempted set lacks static-structured XOR stateful class) OR (ZERO branch points reached verification because of execution/infrastructure failure)",
+  "sites_attempted_count": 8,
+  "sites_attempted_with_first_row_utc": {
+   "books": "2026-08-24T21:55:03.357000+00:00",
+   "gutenberg": "2026-08-24T22:30:55.812000+00:00",
+   "internet": "2026-08-24T23:34:21.877000+00:00",
+   "openlibrary": "2026-08-24T22:49:57.678000+00:00",
+   "parabank": "2026-08-24T23:36:51.293000+00:00",
+   "quotes": "2026-08-24T22:03:19.272000+00:00",
+   "saucedemo": "2026-08-24T23:29:56.330000+00:00",
+   "wikipedia": "2026-08-24T22:09:54.534000+00:00"
+  },
+  "ge6_sites_attempted": true,
+  "classes_attempted": [
+   "stateful",
+   "static"
+  ],
+  "spans_both_classes": true,
+  "verified_bps_total_measured": 38,
+  "verified_bps_gt_zero": true,
+  "negation": "ALL THREE triggers false: 8 >= 6 sites attempted (first-row timestamps above); both classes present; 38 > 0 verified BPs. DATA_INSUFFICIENT is not available; the FALSIFIED assignment is the unique frozen-mapping outcome.",
+  "truncation_robustness": "openlibrary cap-truncation biases counts downward (toward FALSIFIED); even maximal admissible recovery (<= +12 BPs, see tier1) leaves total <= 50 < 60 and producers <= 3 < 4 - truncation changes magnitudes, never the verdict."
+ },
+ "shortfall_tiers": {
+  "estimand_note": "The prereg estimand is REALIZED verified branch points; no recovery credit enters it. Tiers below are descriptive bounds, not estimates.",
+  "tier0_measured_no_credit": {
+   "total_verified_bps": 38,
+   "producer_sites": [
+    "books",
+    "quotes"
+   ],
+   "n_producers": 2,
+   "floor_check": "F4 38<60 FAIL; F2 2<4 FAIL"
+  },
+  "tier1_admissible_imputation_bound": {
+   "admissibility_rule": "credit ONLY recovery mechanisms with >=1 committed success in the row set; crediting a 0-success arm would borrow a rate from different arms/cells - that is a different experiment, not an imputation",
+   "components": [
+    {
+     "component": "openlibrary full recovery to planned 12 BPs",
+     "committed_success_evidence": "4 valid trial rows; 5/12 double-reset calibration passes (certified FN control)",
+     "credit_bps": 12
+    }
+   ],
+   "total_verified_bps_bound": 50,
+   "producer_sites_bound": [
+    "books",
+    "openlibrary",
+    "quotes"
+   ],
+   "n_producers_bound": 3,
+   "floor_check_under_bound": "F4 50<60 STILL FAILS; F2 3<4 STILL FAILS",
+   "conclusion": "U_prod = 3 < 4 and U_tot = 50 < 60: BOTH floors fail in EVERY admissible world. The verdict is invariant under all admissible repairs."
+  },
+  "tier2_descriptive_upper_bounds_inadmissible_component_included": {
+   "stamp": "INADMISSIBLE COMPONENT INCLUDED - DESCRIPTIVE UPPER BOUND ONLY; mutually idealized, additively stacked, jointly unrealized; NOT a scenario estimate; carries NO probability/confidence/modal force; NEVER evidence that H-ID would have survived; NEVER grounds for re-collection or floor recalibration",
+   "inadmissible_component": "wikipedia/gutenberg click_link#0 arms credited with sibling-cell valid rates although they are 0-for-168 in their OWN committed attempts",
+   "dead_arms_only_counterfactual": {
+    "total_bound": 62,
+    "n_producers_bound": 4
+   },
+   "combined_ceiling": {
+    "total_bound": 82,
+    "n_producers_bound": 5,
+    "extra_components": [
+     "openlibrary <=+12",
+     "stateful planned headroom +8 (saucedemo 7, parabank 7, internet 8 - structurally below the >=10 producer bar by DESIGN, so stateful producer performance is untested, not refuted)"
+    ]
+   }
+  }
+ },
+ "instrument_seam": {
+  "definition": "SEAM HYPOTHESIS: the frozen action-menu classifier asserted executability for visually-hidden anchor elements (menu-present/enabled precondition PASSED) while the click executor's actionability wait (visible/stable/enabled) can never complete for that element class - classifier x executor composition unsoundness, not environment instability",
+  "check_C1_signature_homogeneity": {
+   "action_failed_rows_total": 171,
+   "distinct_first_line_exception_classes": 1,
+   "class_counts": {
+    "TimeoutError: Locator.click: Timeout 8000ms exceeded.": 171
+   },
+   "distinct_full_error_strings": 3,
+   "stored_error_truncation_note": "committed action.error strings are truncated at 160 chars; the 'locator resolved to' line survives only in the 84 wikipedia strings, which literally read 'waiting for locator(\"html>body>a:nth-of-type(1)\") - locator resolved to <a href=\"#...' i.e. a fragment-href in-page anchor (skip link)",
+   "rows_whose_stored_error_shows_locator_resolved": 84,
+   "reading": "100% one exception class (click actionability timeout 8000 ms); the only untruncated call-log evidence (84 wikipedia rows) shows the locator RESOLVING to a fragment-href anchor and then timing out - deterministic element-class behavior consistent with the seam; gutenberg/openlibrary strings are cut before that line (truncation-limited, same exception class)",
+   "rows_by_site_cell": {
+    "gutenberg|click_link#0": 84,
+    "openlibrary|click_link#0": 3,
+    "wikipedia|click_link#0": 84
+   }
+  },
+  "check_C2_zero_success_test": {
+   "per_site_click_link0_valid_of_attempts": {
+    "books": {
+     "valid": 84,
+     "attempts": 84
+    },
+    "gutenberg": {
+     "valid": 0,
+     "attempts": 84
+    },
+    "internet": {
+     "valid": 7,
+     "attempts": 7
+    },
+    "openlibrary": {
+     "valid": 0,
+     "attempts": 21
+    },
+    "parabank": {
+     "valid": 35,
+     "attempts": 35
+    },
+    "quotes": {
+     "valid": 84,
+     "attempts": 84
+    },
+    "saucedemo": {
+     "valid": 7,
+     "attempts": 7
+    },
+    "wikipedia": {
+     "valid": 0,
+     "attempts": 84
+    }
+   },
+   "reading": "click_link#0 succeeds 100% on books/quotes/internet/parabank/saucedemo (217 successes corpus-wide) but is 0/84 wikipedia, 0/84 gutenberg, 0/21 openlibrary: the failure is a property of hidden-anchor elements on heavy static skins, NOT of the slot kind generally"
+  },
+  "check_C3_sibling_contrast_same_bps": {
+   "bps_with_trials_wiki_gutenberg": 24,
+   "dead_arms_0_valid_each": true,
+   "sibling_click_button0_valid_counts": [
+    7
+   ],
+   "state_match_failures_on_these_bps": 0,
+   "reading": "ALL 24 BPs: slot A executes 7/7 valid while slot B fails 0/7, with ~zero state-match exclusions - restart/state reproducibility was PERFECT on these sites; only the declared dead arm failed. Scope consequence: wikipedia/gutenberg restart reproducibility is UNKNOWN (blocked by an instrument vocabulary defect), NOT refuted"
+  },
+  "scope_consequence": "Corpus verdict treatment: NO flip (failed clicks are honest observations of 'declared slot not executable'; nothing measured is wrong). Stratum-level scope collapse instead: the floor miss decomposes into [24 BPs lost to a deterministic classifier x executor incompatibility on hidden-anchor slots] + [<=12 openlibrary truncation at wall-clock cap] + [stateful sites designed below the producer bar]. Program-level rider: FALSIFIED falsicates the PREREGISTERED AFFIRMATION PROGRAM, not the proposition that any web state admits restart-matched verification at untested BPs."
+ },
+ "cell_census_integrity_note": {
+  "note": "verdict-inert (survive-condition references only F2/F4; F3 holds by construction) - recorded once as an integrity residue of the frozen text",
+  "cells_with_trials": 130,
+  "cells_ge6_valid": 100,
+  "cells_below6_valid": 30,
+  "cells_below6_by_site": {
+   "gutenberg": 12,
+   "openlibrary": 6,
+   "wikipedia": 12
+  },
+  "non_dead_arm_cells_below6": [
+   {
+    "site": "openlibrary",
+    "bp_id": "openlibrary-fantasy",
+    "slot": "click_button#0",
+    "valid": 0,
+    "attempts": 7
+   },
+   {
+    "site": "openlibrary",
+    "bp_id": "openlibrary-mathematics",
+    "slot": "click_button#0",
+    "valid": 1,
+    "attempts": 7
+   },
+   {
+    "site": "openlibrary",
+    "bp_id": "openlibrary-science",
+    "slot": "click_button#0",
+    "valid": 3,
+    "attempts": 7
+   }
+  ],
+  "reading": "every cell OUTSIDE the dead arms and outside cap-truncated openlibrary reached the >=6-valid floor; the verified-BP shortfall is exactly the 24 dead arms plus openlibrary truncation"
+ },
+ "ordering_transient_probe": {
+  "dead_arm_failure_rate_by_replicate_index": {
+   "wikipedia": {
+    "rep_0": {
+     "dead_arm_failures": 12,
+     "trials": 24
+    },
+    "rep_1": {
+     "dead_arm_failures": 12,
+     "trials": 24
+    },
+    "rep_2": {
+     "dead_arm_failures": 12,
+     "trials": 24
+    },
+    "rep_3": {
+     "dead_arm_failures": 12,
+     "trials": 24
+    },
+    "rep_4": {
+     "dead_arm_failures": 12,
+     "trials": 24
+    },
+    "rep_5": {
+     "dead_arm_failures": 12,
+     "trials": 24
+    },
+    "rep_6": {
+     "dead_arm_failures": 12,
+     "trials": 24
+    }
+   },
+   "gutenberg": {
+    "rep_0": {
+     "dead_arm_failures": 12,
+     "trials": 24
+    },
+    "rep_1": {
+     "dead_arm_failures": 12,
+     "trials": 24
+    },
+    "rep_2": {
+     "dead_arm_failures": 12,
+     "trials": 24
+    },
+    "rep_3": {
+     "dead_arm_failures": 12,
+     "trials": 24
+    },
+    "rep_4": {
+     "dead_arm_failures": 12,
+     "trials": 24
+    },
+    "rep_5": {
+     "dead_arm_failures": 12,
+     "trials": 24
+    },
+    "rep_6": {
+     "dead_arm_failures": 12,
+     "trials": 24
+    }
+   }
+  },
+  "trial_window_utc": [
+   "2026-08-24T21:55:47.156000+00:00",
+   "2026-08-24T23:40:58.821000+00:00"
+  ],
+  "reading": "dead-arm failure is uniform across replicate positions (12/24 per rep index on both sites = every dead-arm trial fails regardless of order/timestamp): NO ordering or temporal transient; consistent with deterministic seam, not with block-position degradation (e.g., late CAPTCHA/throttling)"
+ },
+ "riders": {
+  "atomicity_scope": "V4 atomicity is executor-relative: no retry counter is part of the committed row schema (action keys: error, ok, ordinal, primitive, primary, target, target_kind, value), so wire-level single-attempt semantics cannot be re-verified from committed rows; verified BPs certify executor-mediated declared-action consistency",
+  "freshness_boundary": "fresh CONTEXT guarantees client-side cookie/storage emptiness only; server-side session/bucket/rate-limit state persists across 'fresh' trials from one runner IP - the measurand is client-fresh reproducibility",
+  "reference_provenance": "Z_ref/n_ref/title_ref frozen from FIRST calibration reset per BP before any trial existed (G2 machine-checked: calibration timestamps precede trial timestamps per BP, 0 violations)",
+  "fn_control_citation": "double-reset FN control cited from certified corrected artifact results/physics/wp006_fn_control_corrected.json: 67/74 corpus, openlibrary 5/12 - not recomputed here (single canonical convention; no denominator shopping)"
+ },
+ "downstream_use_forbidden": "No number in this artifact may be used to recalibrate floors (floors tighten, never loosen), justify re-collection under the engaged stop condition, or alter the inherited verdict. The stop condition binds irrespective of dispatch count."
+}

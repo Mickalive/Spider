@@ -1,0 +1,70 @@
+{
+ "schema": "spider.observation/v0",
+ "record_id": "d1c7bc11e5c0e3b02e1dd7d20ea6dea989157bfe839ac1b8c470efca3d42a937",
+ "kind": "VERIFIED_OUTCOME",
+ "task_id": "RT2-T3-nearrepeat-page10",
+ "arm": "spider",
+ "decision": "RESOLVED",
+ "entry_url": "https://quotes.toscrape.com/",
+ "ts_utc": "2026-08-25T23:46:23.073276+00:00",
+ "executed_steps": [
+  {
+   "kind": "click",
+   "target_sig": "a|||||login",
+   "ok": true,
+   "latency_ms_perf": 466.1817810001594,
+   "value": null
+  },
+  {
+   "kind": "fill",
+   "target_sig": "input|text||username|form-control|",
+   "ok": true,
+   "latency_ms_perf": 108.8943360000485,
+   "value": null
+  },
+  {
+   "kind": "fill",
+   "target_sig": "input|password||password|form-control|",
+   "ok": true,
+   "latency_ms_perf": 93.64829100013594,
+   "value": null
+  },
+  {
+   "kind": "click",
+   "target_sig": "input|submit|||btn btn-primary|",
+   "ok": true,
+   "latency_ms_perf": 510.9223619997465,
+   "value": null
+  }
+ ],
+ "nav_chain": null,
+ "final_verdict": {
+  "passed": true,
+  "predicate_ref": "graph.tasks:T_Q_login.accept",
+  "state": "pass"
+ },
+ "abort_reason": null,
+ "derived_from": {
+  "capsule_id": "runtime/form-login-procedure@v1",
+  "capsule_version_sha256": "5229b6b52b3363c2b620cf5830863719932bf390acde7ea79deda389ca2c89eb"
+ },
+ "cost": {
+  "model_calls": 0,
+  "tokens": null,
+  "browser_actions": 4,
+  "browser_launches": 1,
+  "network_calls": null,
+  "latency_ms": 1725.933766000253,
+  "reused_actions": 4,
+  "novel_actions": 0
+ },
+ "goal_text": "access your quotes toscrape account: use the public demo credentials to complete the site sign-in form",
+ "provenance": {
+  "cycle": "R0-2",
+  "run_id": "32908002333",
+  "prereg_sha256": "9d07d391d9f177e6d8d5be7c727853c2a8223bec8fc3d5446313c8043b524e3e",
+  "row_ids": [
+   "RT2-T3-spider-p2"
+  ]
+ }
+}

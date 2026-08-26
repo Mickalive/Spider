@@ -1,0 +1,105 @@
+{
+ "_endpoint_set_disagreement": {
+  "T_HTTPBIN_FORM": {
+   "B_store_intents": [
+    "submit_sample_order_form_httpbin"
+   ],
+   "D_strict_spec_intents": [
+    "submit_sample_order_form_httpbin"
+   ],
+   "D_acceptance_spec_intents": []
+  },
+  "T_HTTPBIN_COOKIE": {
+   "B_store_intents": [
+    "read_display_preference_cookies_httpbin"
+   ],
+   "D_strict_spec_intents": [
+    "read_display_preference_cookies_httpbin"
+   ],
+   "D_acceptance_spec_intents": []
+  },
+  "T_PETSTORE_FIND": {
+   "B_store_intents": [
+    "find_pets_by_status_petstore"
+   ],
+   "D_strict_spec_intents": [
+    "find_pets_by_status_petstore"
+   ],
+   "D_acceptance_spec_intents": [
+    "find_pets_by_status_petstore"
+   ]
+  },
+  "T_DEMOBLAZE_CART": {
+   "B_store_intents": [
+    "add_item_to_cart_demoblaze",
+    "login_session_demoblaze",
+    "view_cart_items_demoblaze"
+   ],
+   "D_strict_spec_intents": [
+    "add_item_to_cart_demoblaze",
+    "login_session_demoblaze",
+    "view_cart_items_demoblaze"
+   ],
+   "D_acceptance_spec_intents": [
+    "add_item_to_cart_demoblaze",
+    "login_session_demoblaze",
+    "view_cart_items_demoblaze"
+   ]
+  }
+ },
+ "T_HTTPBIN_FORM": {
+  "routes_learned": [
+   "POST:https://httpbin.org/post"
+  ],
+  "volatile_keys": {},
+  "both_genuine_completions_accepted": [
+   true,
+   true
+  ],
+  "dspec_capture_error_strict": null,
+  "dspec_capture_error_acceptance": "not_spec_less"
+ },
+ "T_HTTPBIN_COOKIE": {
+  "routes_learned": [
+   "GET:https://httpbin.org/cookies"
+  ],
+  "volatile_keys": {},
+  "both_genuine_completions_accepted": [
+   true,
+   true
+  ],
+  "dspec_capture_error_strict": null,
+  "dspec_capture_error_acceptance": "not_spec_less"
+ },
+ "T_PETSTORE_FIND": {
+  "routes_learned": [
+   "GET:https://petstore.swagger.io/v2/swagger.json",
+   "GET:https://petstore.swagger.io/v2/pet/findByStatus"
+  ],
+  "volatile_keys": {},
+  "both_genuine_completions_accepted": [
+   true,
+   true
+  ],
+  "dspec_capture_error_strict": "not_spec_less",
+  "dspec_capture_error_acceptance": "not_spec_less"
+ },
+ "T_DEMOBLAZE_CART": {
+  "routes_learned": [
+   "GET:https://api.demoblaze.com/entries",
+   "POST:https://api.demoblaze.com/login",
+   "POST:https://api.demoblaze.com/check",
+   "POST:https://api.demoblaze.com/bycat",
+   "POST:https://api.demoblaze.com/view",
+   "POST:https://api.demoblaze.com/addtocart",
+   "POST:https://api.demoblaze.com/viewcart"
+  ],
+  "volatile_keys": {},
+  "both_genuine_completions_accepted": [
+   true,
+   true
+  ],
+  "dspec_capture_error_strict": null,
+  "dspec_capture_error_acceptance": null
+ }
+}

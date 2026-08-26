@@ -1,0 +1,74 @@
+{
+  "block_codes": [],
+  "blocked": false,
+  "extras": {
+    "g1": {
+      "false_positives": [],
+      "n_probe_pages": 7,
+      "per_page": {
+        "/probe/p00_canonical.html": {
+          "recovered_by_declared_class": {
+            "page_action": 1
+          },
+          "truth_n": 1
+        },
+        "/probe/p01_attr_before.html": {
+          "recovered_by_declared_class": {
+            "page_action": 1
+          },
+          "truth_n": 1
+        },
+        "/probe/p02_attr_after.html": {
+          "recovered_by_declared_class": {
+            "page_action": 1
+          },
+          "truth_n": 1
+        },
+        "/probe/p03_upper_tag.html": {
+          "recovered_by_declared_class": {
+            "page_action": 1
+          },
+          "truth_n": 1
+        },
+        "/probe/p04_multiline_attrs.html": {
+          "recovered_by_declared_class": {
+            "page_action": 1
+          },
+          "truth_n": 1
+        },
+        "/probe/p05_form_canonical.html": {
+          "recovered_by_declared_class": {
+            "form_button": 1
+          },
+          "truth_n": 1
+        },
+        "/probe/p06_form_attr.html": {
+          "recovered_by_declared_class": {
+            "form_button": 1
+          },
+          "truth_n": 1
+        }
+      },
+      "shapes": [
+        "canonical",
+        "attr_before",
+        "attr_after",
+        "upper_tag",
+        "multiline_attrs",
+        "form_canonical",
+        "form_attr"
+      ],
+      "shapes_recovered_per_class": {
+        "form_button": 2,
+        "page_action": 5
+      }
+    },
+    "g4_log_path": "/home/runner/work/Spider/Spider/results/frontier/frontier-collection-calibration/EVAL_RAW/dataset_kit_C5/source_preflight_log.jsonl"
+  },
+  "findings": [],
+  "timings_s": {
+    "g1_parse_roundtrip": 0.504,
+    "g4_source_preflight": 0.001,
+    "total_precollection": 0.505
+  }
+}

@@ -1,0 +1,1054 @@
+{
+ "href_prior_regex": "(?:^|/)(?:login|signin|sign-in|log-in|signon|auth)(?:/|$)",
+ "lexicon": [
+  [
+   "auth",
+   "authenticate",
+   "authentication",
+   "log",
+   "log-in",
+   "login",
+   "sign",
+   "sign-in",
+   "signin",
+   "signon"
+  ],
+  [
+   "account",
+   "acct",
+   "member",
+   "profile"
+  ],
+  [
+   "join",
+   "register",
+   "registration",
+   "sign-up",
+   "signup"
+  ],
+  [
+   "passphrase",
+   "passwd",
+   "password",
+   "pwd"
+  ],
+  [
+   "email",
+   "login-name",
+   "loginname",
+   "user",
+   "username"
+  ]
+ ],
+ "lexicon_sha256": "7c76bdb76634b87174ff8b841ed5ad2440573089cac798324202a8a338b3243d",
+ "live_arm_decision": "RUN with policy_id=goal_href|root0",
+ "no_post_outcome_variant_edits": "any new/reweighted variant requires a new preregistration",
+ "permutation_seed": 20260826,
+ "permutations_k": 100,
+ "purpose": "R1-1 priority-1 OFFLINE POLICY-SWEEP GATE (preregistered; zero browser launches)",
+ "rows": [
+  {
+   "entries": {
+    "page10": {
+     "oracle_rank": 3,
+     "permutation_stable_top1": false,
+     "permutation_top1_fraction": 0.0,
+     "picks_to_reach_within_4_descriptive": 3,
+     "ranked_head": [
+      {
+       "href": "/",
+       "index": 0,
+       "is_oracle": false,
+       "rank": 1,
+       "score": 3,
+       "text": "Quotes to Scrape"
+      },
+      {
+       "href": "/quotes",
+       "index": 42,
+       "is_oracle": false,
+       "rank": 2,
+       "score": 3,
+       "text": "GoodReads.com"
+      },
+      {
+       "href": "/login",
+       "index": 1,
+       "is_oracle": true,
+       "rank": 3,
+       "score": 0,
+       "text": "Login"
+      },
+      {
+       "href": "/author/J-K-Rowling",
+       "index": 2,
+       "is_oracle": false,
+       "rank": 4,
+       "score": 0,
+       "text": "(about)"
+      },
+      {
+       "href": "/tag/truth/page/1/",
+       "index": 3,
+       "is_oracle": false,
+       "rank": 5,
+       "score": 0,
+       "text": "truth"
+      },
+      {
+       "href": "/author/Jimi-Hendrix",
+       "index": 4,
+       "is_oracle": false,
+       "rank": 6,
+       "score": 0,
+       "text": "(about)"
+      }
+     ],
+     "tie_luck_dependent": false
+    },
+    "taglove": {
+     "oracle_rank": 3,
+     "permutation_stable_top1": false,
+     "permutation_top1_fraction": 0.0,
+     "picks_to_reach_within_4_descriptive": 3,
+     "ranked_head": [
+      {
+       "href": "/",
+       "index": 0,
+       "is_oracle": false,
+       "rank": 1,
+       "score": 3,
+       "text": "Quotes to Scrape"
+      },
+      {
+       "href": "/quotes",
+       "index": 55,
+       "is_oracle": false,
+       "rank": 2,
+       "score": 3,
+       "text": "GoodReads.com"
+      },
+      {
+       "href": "/login",
+       "index": 1,
+       "is_oracle": true,
+       "rank": 3,
+       "score": 0,
+       "text": "Login"
+      },
+      {
+       "href": "/tag/love/page/1/",
+       "index": 2,
+       "is_oracle": false,
+       "rank": 4,
+       "score": 0,
+       "text": "love"
+      },
+      {
+       "href": "/author/Andre-Gide",
+       "index": 3,
+       "is_oracle": false,
+       "rank": 5,
+       "score": 0,
+       "text": "(about)"
+      },
+      {
+       "href": "/tag/life/page/1/",
+       "index": 4,
+       "is_oracle": false,
+       "rank": 6,
+       "score": 0,
+       "text": "life"
+      }
+     ],
+     "tie_luck_dependent": false
+    }
+   },
+   "survives": false,
+   "variant": "goal_only|root0"
+  },
+  {
+   "entries": {
+    "page10": {
+     "oracle_rank": 4,
+     "permutation_stable_top1": false,
+     "permutation_top1_fraction": 0.0,
+     "picks_to_reach_within_4_descriptive": 4,
+     "ranked_head": [
+      {
+       "href": "/",
+       "index": 0,
+       "is_oracle": false,
+       "rank": 1,
+       "score": 5,
+       "text": "Quotes to Scrape"
+      },
+      {
+       "href": "/quotes",
+       "index": 42,
+       "is_oracle": false,
+       "rank": 2,
+       "score": 3,
+       "text": "GoodReads.com"
+      },
+      {
+       "href": "/",
+       "index": 43,
+       "is_oracle": false,
+       "rank": 3,
+       "score": 2,
+       "text": "Zyte"
+      },
+      {
+       "href": "/login",
+       "index": 1,
+       "is_oracle": true,
+       "rank": 4,
+       "score": 0,
+       "text": "Login"
+      },
+      {
+       "href": "/author/J-K-Rowling",
+       "index": 2,
+       "is_oracle": false,
+       "rank": 5,
+       "score": 0,
+       "text": "(about)"
+      },
+      {
+       "href": "/tag/truth/page/1/",
+       "index": 3,
+       "is_oracle": false,
+       "rank": 6,
+       "score": 0,
+       "text": "truth"
+      }
+     ],
+     "tie_luck_dependent": false
+    },
+    "taglove": {
+     "oracle_rank": 4,
+     "permutation_stable_top1": false,
+     "permutation_top1_fraction": 0.0,
+     "picks_to_reach_within_4_descriptive": 4,
+     "ranked_head": [
+      {
+       "href": "/",
+       "index": 0,
+       "is_oracle": false,
+       "rank": 1,
+       "score": 5,
+       "text": "Quotes to Scrape"
+      },
+      {
+       "href": "/quotes",
+       "index": 55,
+       "is_oracle": false,
+       "rank": 2,
+       "score": 3,
+       "text": "GoodReads.com"
+      },
+      {
+       "href": "/",
+       "index": 56,
+       "is_oracle": false,
+       "rank": 3,
+       "score": 2,
+       "text": "Zyte"
+      },
+      {
+       "href": "/login",
+       "index": 1,
+       "is_oracle": true,
+       "rank": 4,
+       "score": 0,
+       "text": "Login"
+      },
+      {
+       "href": "/tag/love/page/1/",
+       "index": 2,
+       "is_oracle": false,
+       "rank": 5,
+       "score": 0,
+       "text": "love"
+      },
+      {
+       "href": "/author/Andre-Gide",
+       "index": 3,
+       "is_oracle": false,
+       "rank": 6,
+       "score": 0,
+       "text": "(about)"
+      }
+     ],
+     "tie_luck_dependent": false
+    }
+   },
+   "survives": false,
+   "variant": "goal_only|root2"
+  },
+  {
+   "entries": {
+    "page10": {
+     "oracle_rank": 1,
+     "permutation_stable_top1": true,
+     "permutation_top1_fraction": 1.0,
+     "picks_to_reach_within_4_descriptive": 1,
+     "ranked_head": [
+      {
+       "href": "/login",
+       "index": 1,
+       "is_oracle": true,
+       "rank": 1,
+       "score": 6,
+       "text": "Login"
+      },
+      {
+       "href": "/",
+       "index": 0,
+       "is_oracle": false,
+       "rank": 2,
+       "score": 3,
+       "text": "Quotes to Scrape"
+      },
+      {
+       "href": "/quotes",
+       "index": 42,
+       "is_oracle": false,
+       "rank": 3,
+       "score": 3,
+       "text": "GoodReads.com"
+      },
+      {
+       "href": "/author/J-K-Rowling",
+       "index": 2,
+       "is_oracle": false,
+       "rank": 4,
+       "score": 0,
+       "text": "(about)"
+      },
+      {
+       "href": "/tag/truth/page/1/",
+       "index": 3,
+       "is_oracle": false,
+       "rank": 5,
+       "score": 0,
+       "text": "truth"
+      },
+      {
+       "href": "/author/Jimi-Hendrix",
+       "index": 4,
+       "is_oracle": false,
+       "rank": 6,
+       "score": 0,
+       "text": "(about)"
+      }
+     ],
+     "tie_luck_dependent": false
+    },
+    "taglove": {
+     "oracle_rank": 1,
+     "permutation_stable_top1": true,
+     "permutation_top1_fraction": 1.0,
+     "picks_to_reach_within_4_descriptive": 1,
+     "ranked_head": [
+      {
+       "href": "/login",
+       "index": 1,
+       "is_oracle": true,
+       "rank": 1,
+       "score": 6,
+       "text": "Login"
+      },
+      {
+       "href": "/",
+       "index": 0,
+       "is_oracle": false,
+       "rank": 2,
+       "score": 3,
+       "text": "Quotes to Scrape"
+      },
+      {
+       "href": "/quotes",
+       "index": 55,
+       "is_oracle": false,
+       "rank": 3,
+       "score": 3,
+       "text": "GoodReads.com"
+      },
+      {
+       "href": "/tag/love/page/1/",
+       "index": 2,
+       "is_oracle": false,
+       "rank": 4,
+       "score": 0,
+       "text": "love"
+      },
+      {
+       "href": "/author/Andre-Gide",
+       "index": 3,
+       "is_oracle": false,
+       "rank": 5,
+       "score": 0,
+       "text": "(about)"
+      },
+      {
+       "href": "/tag/life/page/1/",
+       "index": 4,
+       "is_oracle": false,
+       "rank": 6,
+       "score": 0,
+       "text": "life"
+      }
+     ],
+     "tie_luck_dependent": false
+    }
+   },
+   "survives": true,
+   "variant": "goal_lexicon|root0"
+  },
+  {
+   "entries": {
+    "page10": {
+     "oracle_rank": 1,
+     "permutation_stable_top1": true,
+     "permutation_top1_fraction": 1.0,
+     "picks_to_reach_within_4_descriptive": 1,
+     "ranked_head": [
+      {
+       "href": "/login",
+       "index": 1,
+       "is_oracle": true,
+       "rank": 1,
+       "score": 6,
+       "text": "Login"
+      },
+      {
+       "href": "/",
+       "index": 0,
+       "is_oracle": false,
+       "rank": 2,
+       "score": 5,
+       "text": "Quotes to Scrape"
+      },
+      {
+       "href": "/quotes",
+       "index": 42,
+       "is_oracle": false,
+       "rank": 3,
+       "score": 3,
+       "text": "GoodReads.com"
+      },
+      {
+       "href": "/",
+       "index": 43,
+       "is_oracle": false,
+       "rank": 4,
+       "score": 2,
+       "text": "Zyte"
+      },
+      {
+       "href": "/author/J-K-Rowling",
+       "index": 2,
+       "is_oracle": false,
+       "rank": 5,
+       "score": 0,
+       "text": "(about)"
+      },
+      {
+       "href": "/tag/truth/page/1/",
+       "index": 3,
+       "is_oracle": false,
+       "rank": 6,
+       "score": 0,
+       "text": "truth"
+      }
+     ],
+     "tie_luck_dependent": false
+    },
+    "taglove": {
+     "oracle_rank": 1,
+     "permutation_stable_top1": true,
+     "permutation_top1_fraction": 1.0,
+     "picks_to_reach_within_4_descriptive": 1,
+     "ranked_head": [
+      {
+       "href": "/login",
+       "index": 1,
+       "is_oracle": true,
+       "rank": 1,
+       "score": 6,
+       "text": "Login"
+      },
+      {
+       "href": "/",
+       "index": 0,
+       "is_oracle": false,
+       "rank": 2,
+       "score": 5,
+       "text": "Quotes to Scrape"
+      },
+      {
+       "href": "/quotes",
+       "index": 55,
+       "is_oracle": false,
+       "rank": 3,
+       "score": 3,
+       "text": "GoodReads.com"
+      },
+      {
+       "href": "/",
+       "index": 56,
+       "is_oracle": false,
+       "rank": 4,
+       "score": 2,
+       "text": "Zyte"
+      },
+      {
+       "href": "/tag/love/page/1/",
+       "index": 2,
+       "is_oracle": false,
+       "rank": 5,
+       "score": 0,
+       "text": "love"
+      },
+      {
+       "href": "/author/Andre-Gide",
+       "index": 3,
+       "is_oracle": false,
+       "rank": 6,
+       "score": 0,
+       "text": "(about)"
+      }
+     ],
+     "tie_luck_dependent": false
+    }
+   },
+   "survives": true,
+   "variant": "goal_lexicon|root2"
+  },
+  {
+   "entries": {
+    "page10": {
+     "oracle_rank": 1,
+     "permutation_stable_top1": true,
+     "permutation_top1_fraction": 1.0,
+     "picks_to_reach_within_4_descriptive": 1,
+     "ranked_head": [
+      {
+       "href": "/login",
+       "index": 1,
+       "is_oracle": true,
+       "rank": 1,
+       "score": 6,
+       "text": "Login"
+      },
+      {
+       "href": "/",
+       "index": 0,
+       "is_oracle": false,
+       "rank": 2,
+       "score": 3,
+       "text": "Quotes to Scrape"
+      },
+      {
+       "href": "/quotes",
+       "index": 42,
+       "is_oracle": false,
+       "rank": 3,
+       "score": 3,
+       "text": "GoodReads.com"
+      },
+      {
+       "href": "/author/J-K-Rowling",
+       "index": 2,
+       "is_oracle": false,
+       "rank": 4,
+       "score": 0,
+       "text": "(about)"
+      },
+      {
+       "href": "/tag/truth/page/1/",
+       "index": 3,
+       "is_oracle": false,
+       "rank": 5,
+       "score": 0,
+       "text": "truth"
+      },
+      {
+       "href": "/author/Jimi-Hendrix",
+       "index": 4,
+       "is_oracle": false,
+       "rank": 6,
+       "score": 0,
+       "text": "(about)"
+      }
+     ],
+     "tie_luck_dependent": false
+    },
+    "taglove": {
+     "oracle_rank": 1,
+     "permutation_stable_top1": true,
+     "permutation_top1_fraction": 1.0,
+     "picks_to_reach_within_4_descriptive": 1,
+     "ranked_head": [
+      {
+       "href": "/login",
+       "index": 1,
+       "is_oracle": true,
+       "rank": 1,
+       "score": 6,
+       "text": "Login"
+      },
+      {
+       "href": "/",
+       "index": 0,
+       "is_oracle": false,
+       "rank": 2,
+       "score": 3,
+       "text": "Quotes to Scrape"
+      },
+      {
+       "href": "/quotes",
+       "index": 55,
+       "is_oracle": false,
+       "rank": 3,
+       "score": 3,
+       "text": "GoodReads.com"
+      },
+      {
+       "href": "/tag/love/page/1/",
+       "index": 2,
+       "is_oracle": false,
+       "rank": 4,
+       "score": 0,
+       "text": "love"
+      },
+      {
+       "href": "/author/Andre-Gide",
+       "index": 3,
+       "is_oracle": false,
+       "rank": 5,
+       "score": 0,
+       "text": "(about)"
+      },
+      {
+       "href": "/tag/life/page/1/",
+       "index": 4,
+       "is_oracle": false,
+       "rank": 6,
+       "score": 0,
+       "text": "life"
+      }
+     ],
+     "tie_luck_dependent": false
+    }
+   },
+   "survives": true,
+   "variant": "goal_href|root0"
+  },
+  {
+   "entries": {
+    "page10": {
+     "oracle_rank": 1,
+     "permutation_stable_top1": true,
+     "permutation_top1_fraction": 1.0,
+     "picks_to_reach_within_4_descriptive": 1,
+     "ranked_head": [
+      {
+       "href": "/login",
+       "index": 1,
+       "is_oracle": true,
+       "rank": 1,
+       "score": 6,
+       "text": "Login"
+      },
+      {
+       "href": "/",
+       "index": 0,
+       "is_oracle": false,
+       "rank": 2,
+       "score": 5,
+       "text": "Quotes to Scrape"
+      },
+      {
+       "href": "/quotes",
+       "index": 42,
+       "is_oracle": false,
+       "rank": 3,
+       "score": 3,
+       "text": "GoodReads.com"
+      },
+      {
+       "href": "/",
+       "index": 43,
+       "is_oracle": false,
+       "rank": 4,
+       "score": 2,
+       "text": "Zyte"
+      },
+      {
+       "href": "/author/J-K-Rowling",
+       "index": 2,
+       "is_oracle": false,
+       "rank": 5,
+       "score": 0,
+       "text": "(about)"
+      },
+      {
+       "href": "/tag/truth/page/1/",
+       "index": 3,
+       "is_oracle": false,
+       "rank": 6,
+       "score": 0,
+       "text": "truth"
+      }
+     ],
+     "tie_luck_dependent": false
+    },
+    "taglove": {
+     "oracle_rank": 1,
+     "permutation_stable_top1": true,
+     "permutation_top1_fraction": 1.0,
+     "picks_to_reach_within_4_descriptive": 1,
+     "ranked_head": [
+      {
+       "href": "/login",
+       "index": 1,
+       "is_oracle": true,
+       "rank": 1,
+       "score": 6,
+       "text": "Login"
+      },
+      {
+       "href": "/",
+       "index": 0,
+       "is_oracle": false,
+       "rank": 2,
+       "score": 5,
+       "text": "Quotes to Scrape"
+      },
+      {
+       "href": "/quotes",
+       "index": 55,
+       "is_oracle": false,
+       "rank": 3,
+       "score": 3,
+       "text": "GoodReads.com"
+      },
+      {
+       "href": "/",
+       "index": 56,
+       "is_oracle": false,
+       "rank": 4,
+       "score": 2,
+       "text": "Zyte"
+      },
+      {
+       "href": "/tag/love/page/1/",
+       "index": 2,
+       "is_oracle": false,
+       "rank": 5,
+       "score": 0,
+       "text": "love"
+      },
+      {
+       "href": "/author/Andre-Gide",
+       "index": 3,
+       "is_oracle": false,
+       "rank": 6,
+       "score": 0,
+       "text": "(about)"
+      }
+     ],
+     "tie_luck_dependent": false
+    }
+   },
+   "survives": true,
+   "variant": "goal_href|root2"
+  },
+  {
+   "entries": {
+    "page10": {
+     "oracle_rank": 1,
+     "permutation_stable_top1": true,
+     "permutation_top1_fraction": 1.0,
+     "picks_to_reach_within_4_descriptive": 1,
+     "ranked_head": [
+      {
+       "href": "/login",
+       "index": 1,
+       "is_oracle": true,
+       "rank": 1,
+       "score": 12,
+       "text": "Login"
+      },
+      {
+       "href": "/",
+       "index": 0,
+       "is_oracle": false,
+       "rank": 2,
+       "score": 3,
+       "text": "Quotes to Scrape"
+      },
+      {
+       "href": "/quotes",
+       "index": 42,
+       "is_oracle": false,
+       "rank": 3,
+       "score": 3,
+       "text": "GoodReads.com"
+      },
+      {
+       "href": "/author/J-K-Rowling",
+       "index": 2,
+       "is_oracle": false,
+       "rank": 4,
+       "score": 0,
+       "text": "(about)"
+      },
+      {
+       "href": "/tag/truth/page/1/",
+       "index": 3,
+       "is_oracle": false,
+       "rank": 5,
+       "score": 0,
+       "text": "truth"
+      },
+      {
+       "href": "/author/Jimi-Hendrix",
+       "index": 4,
+       "is_oracle": false,
+       "rank": 6,
+       "score": 0,
+       "text": "(about)"
+      }
+     ],
+     "tie_luck_dependent": false
+    },
+    "taglove": {
+     "oracle_rank": 1,
+     "permutation_stable_top1": true,
+     "permutation_top1_fraction": 1.0,
+     "picks_to_reach_within_4_descriptive": 1,
+     "ranked_head": [
+      {
+       "href": "/login",
+       "index": 1,
+       "is_oracle": true,
+       "rank": 1,
+       "score": 12,
+       "text": "Login"
+      },
+      {
+       "href": "/",
+       "index": 0,
+       "is_oracle": false,
+       "rank": 2,
+       "score": 3,
+       "text": "Quotes to Scrape"
+      },
+      {
+       "href": "/quotes",
+       "index": 55,
+       "is_oracle": false,
+       "rank": 3,
+       "score": 3,
+       "text": "GoodReads.com"
+      },
+      {
+       "href": "/tag/love/page/1/",
+       "index": 2,
+       "is_oracle": false,
+       "rank": 4,
+       "score": 0,
+       "text": "love"
+      },
+      {
+       "href": "/author/Andre-Gide",
+       "index": 3,
+       "is_oracle": false,
+       "rank": 5,
+       "score": 0,
+       "text": "(about)"
+      },
+      {
+       "href": "/tag/life/page/1/",
+       "index": 4,
+       "is_oracle": false,
+       "rank": 6,
+       "score": 0,
+       "text": "life"
+      }
+     ],
+     "tie_luck_dependent": false
+    }
+   },
+   "survives": true,
+   "variant": "goal_lexicon_href|root0"
+  },
+  {
+   "entries": {
+    "page10": {
+     "oracle_rank": 1,
+     "permutation_stable_top1": true,
+     "permutation_top1_fraction": 1.0,
+     "picks_to_reach_within_4_descriptive": 1,
+     "ranked_head": [
+      {
+       "href": "/login",
+       "index": 1,
+       "is_oracle": true,
+       "rank": 1,
+       "score": 12,
+       "text": "Login"
+      },
+      {
+       "href": "/",
+       "index": 0,
+       "is_oracle": false,
+       "rank": 2,
+       "score": 5,
+       "text": "Quotes to Scrape"
+      },
+      {
+       "href": "/quotes",
+       "index": 42,
+       "is_oracle": false,
+       "rank": 3,
+       "score": 3,
+       "text": "GoodReads.com"
+      },
+      {
+       "href": "/",
+       "index": 43,
+       "is_oracle": false,
+       "rank": 4,
+       "score": 2,
+       "text": "Zyte"
+      },
+      {
+       "href": "/author/J-K-Rowling",
+       "index": 2,
+       "is_oracle": false,
+       "rank": 5,
+       "score": 0,
+       "text": "(about)"
+      },
+      {
+       "href": "/tag/truth/page/1/",
+       "index": 3,
+       "is_oracle": false,
+       "rank": 6,
+       "score": 0,
+       "text": "truth"
+      }
+     ],
+     "tie_luck_dependent": false
+    },
+    "taglove": {
+     "oracle_rank": 1,
+     "permutation_stable_top1": true,
+     "permutation_top1_fraction": 1.0,
+     "picks_to_reach_within_4_descriptive": 1,
+     "ranked_head": [
+      {
+       "href": "/login",
+       "index": 1,
+       "is_oracle": true,
+       "rank": 1,
+       "score": 12,
+       "text": "Login"
+      },
+      {
+       "href": "/",
+       "index": 0,
+       "is_oracle": false,
+       "rank": 2,
+       "score": 5,
+       "text": "Quotes to Scrape"
+      },
+      {
+       "href": "/quotes",
+       "index": 55,
+       "is_oracle": false,
+       "rank": 3,
+       "score": 3,
+       "text": "GoodReads.com"
+      },
+      {
+       "href": "/",
+       "index": 56,
+       "is_oracle": false,
+       "rank": 4,
+       "score": 2,
+       "text": "Zyte"
+      },
+      {
+       "href": "/tag/love/page/1/",
+       "index": 2,
+       "is_oracle": false,
+       "rank": 5,
+       "score": 0,
+       "text": "love"
+      },
+      {
+       "href": "/author/Andre-Gide",
+       "index": 3,
+       "is_oracle": false,
+       "rank": 6,
+       "score": 0,
+       "text": "(about)"
+      }
+     ],
+     "tie_luck_dependent": false
+    }
+   },
+   "survives": true,
+   "variant": "goal_lexicon_href|root2"
+  }
+ ],
+ "snapshot_tier": "AUDITED_DURABLE_LINEAGE (recorded live R0-2; committed probe substrate)",
+ "snapshots": {
+  "page10": {
+   "dom_bytes": 9836,
+   "n_elements": 44,
+   "path": "results/runtime/probes/entry_snapshot_page10.json",
+   "sha256": "7abf039fbe942bdaa9036c978f6d1140bc79878b0b84a24ec087c6ef24e1b9b0",
+   "url": "https://quotes.toscrape.com/page/10/"
+  },
+  "taglove": {
+   "dom_bytes": 13068,
+   "n_elements": 57,
+   "path": "results/runtime/probes/entry_snapshot_taglove.json",
+   "sha256": "f5a306041c32509728ba90cd15bd2b93ccc1e791af4409bba46ae822f4621241",
+   "url": "https://quotes.toscrape.com/tag/love/"
+  }
+ },
+ "survival_bar": "strict permutation-stable top-1 oracle rank on BOTH committed entries",
+ "survivors": [
+  "goal_lexicon|root0",
+  "goal_lexicon|root2",
+  "goal_href|root0",
+  "goal_href|root2",
+  "goal_lexicon_href|root0",
+  "goal_lexicon_href|root2"
+ ],
+ "variants": [
+  "goal_only|root0",
+  "goal_only|root2",
+  "goal_lexicon|root0",
+  "goal_lexicon|root2",
+  "goal_href|root0",
+  "goal_href|root2",
+  "goal_lexicon_href|root0",
+  "goal_lexicon_href|root2"
+ ],
+ "weights_frozen": {
+  "button": 1,
+  "href_pattern": 6,
+  "keyword": 3,
+  "lexicon_class": 6
+ },
+ "winner_policy_id": "goal_href|root0"
+}

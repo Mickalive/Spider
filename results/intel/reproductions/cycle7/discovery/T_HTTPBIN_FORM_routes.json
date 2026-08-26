@@ -1,0 +1,91 @@
+[
+ {
+  "route_id": "POST:https://httpbin.org/post",
+  "intent": "submit_sample_order_form_httpbin",
+  "site": "httpbin.org",
+  "method": "POST",
+  "url_template": "https://httpbin.org/post",
+  "path_slots": [],
+  "query_slots": [],
+  "body_template": {
+   "kind": "form",
+   "fields": [
+    [
+     "custname",
+     "Spider Repro"
+    ],
+    [
+     "custtel",
+     ""
+    ],
+    [
+     "custemail",
+     "spider@example.com"
+    ],
+    [
+     "size",
+     "medium"
+    ],
+    [
+     "delivery",
+     ""
+    ],
+    [
+     "comments",
+     "cycle7 repro"
+    ]
+   ]
+  },
+  "body_slots": [],
+  "headers_required": {},
+  "response_shape": {
+   "args": {},
+   "data": "str",
+   "files": {},
+   "form": {
+    "comments": "str",
+    "custemail": "str",
+    "custname": "str",
+    "custtel": "str",
+    "delivery": "str",
+    "size": "str"
+   },
+   "headers": {},
+   "json": "NoneType",
+   "origin": "str",
+   "url": "str"
+  },
+  "volatile_keys": [
+   "Accept",
+   "Accept-Encoding",
+   "Cache-Control",
+   "Content-Length",
+   "Content-Type",
+   "Host",
+   "Origin",
+   "Priority",
+   "Referer",
+   "Sec-Ch-Ua",
+   "Sec-Ch-Ua-Mobile",
+   "Sec-Ch-Ua-Platform",
+   "Sec-Fetch-Dest",
+   "Sec-Fetch-Mode",
+   "Sec-Fetch-Site",
+   "Sec-Fetch-User",
+   "Upgrade-Insecure-Requests",
+   "User-Agent",
+   "X-Amzn-Trace-Id"
+  ],
+  "freshness_ts_ms": 1787703645339,
+  "reliability": {
+   "ok": 1,
+   "fail": 0
+  },
+  "lifecycle": "active",
+  "evidence_urls": [
+   "https://httpbin.org/post"
+  ],
+  "echo_envelope_policy": "P-ECHO",
+  "n_observations": 1
+ }
+]

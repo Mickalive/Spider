@@ -1,0 +1,15 @@
+{
+  "acceptance_block_codes": [],
+  "acceptance_blocked": false,
+  "acceptance_findings": [],
+  "collected": true,
+  "collection_wall_s": 0.006,
+  "instrument_id": "S1",
+  "kind": "seeded_defect",
+  "kit_disposition": "NULL_ONLY_NO_GATES",
+  "n_rows_total": 50,
+  "null_detections": [],
+  "null_rejected": false,
+  "pipeline": "null_only",
+  "wasted_source_retry_s": 0.0
+}

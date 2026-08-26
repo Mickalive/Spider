@@ -1,0 +1,163 @@
+{
+  "block_codes": [
+    "PARSER_AMPUTATION_CLASS_UNRECOVERED"
+  ],
+  "blocked": true,
+  "extras": {
+    "g1": {
+      "false_positives": [
+        [
+          "/probe/p00_canonical.html",
+          "page_action",
+          "/site/a1"
+        ],
+        [
+          "/probe/p00_canonical.html",
+          "form_button",
+          "/act/echo"
+        ],
+        [
+          "/probe/p01_attr_before.html",
+          "page_action",
+          "/site/a1"
+        ],
+        [
+          "/probe/p01_attr_before.html",
+          "form_button",
+          "/act/echo"
+        ],
+        [
+          "/probe/p02_attr_after.html",
+          "page_action",
+          "/site/a1"
+        ],
+        [
+          "/probe/p02_attr_after.html",
+          "form_button",
+          "/act/echo"
+        ],
+        [
+          "/probe/p03_upper_tag.html",
+          "page_action",
+          "/site/a1"
+        ],
+        [
+          "/probe/p03_upper_tag.html",
+          "form_button",
+          "/act/echo"
+        ],
+        [
+          "/probe/p04_multiline_attrs.html",
+          "page_action",
+          "/site/a1"
+        ],
+        [
+          "/probe/p04_multiline_attrs.html",
+          "form_button",
+          "/act/echo"
+        ],
+        [
+          "/probe/p05_form_canonical.html",
+          "page_action",
+          "/site/a1"
+        ],
+        [
+          "/probe/p05_form_canonical.html",
+          "form_button",
+          "/act/echo"
+        ],
+        [
+          "/probe/p06_form_attr.html",
+          "page_action",
+          "/site/a1"
+        ],
+        [
+          "/probe/p06_form_attr.html",
+          "form_button",
+          "/act/echo"
+        ]
+      ],
+      "n_probe_pages": 7,
+      "per_page": {
+        "/probe/p00_canonical.html": {
+          "recovered_by_declared_class": {},
+          "truth_n": 1
+        },
+        "/probe/p01_attr_before.html": {
+          "recovered_by_declared_class": {},
+          "truth_n": 1
+        },
+        "/probe/p02_attr_after.html": {
+          "recovered_by_declared_class": {},
+          "truth_n": 1
+        },
+        "/probe/p03_upper_tag.html": {
+          "recovered_by_declared_class": {},
+          "truth_n": 1
+        },
+        "/probe/p04_multiline_attrs.html": {
+          "recovered_by_declared_class": {},
+          "truth_n": 1
+        },
+        "/probe/p05_form_canonical.html": {
+          "recovered_by_declared_class": {},
+          "truth_n": 1
+        },
+        "/probe/p06_form_attr.html": {
+          "recovered_by_declared_class": {},
+          "truth_n": 1
+        }
+      },
+      "shapes": [
+        "canonical",
+        "attr_before",
+        "attr_after",
+        "upper_tag",
+        "multiline_attrs",
+        "form_canonical",
+        "form_attr"
+      ],
+      "shapes_recovered_per_class": {
+        "form_button": 0,
+        "page_action": 0
+      }
+    },
+    "g4_log_path": "/home/runner/work/Spider/Spider/results/frontier/frontier-collection-calibration/EVAL_RAW/dataset_kit_HOLDOUT_H2/source_preflight_log.jsonl"
+  },
+  "findings": [
+    {
+      "code": "PARSER_AMPUTATION_CLASS_UNRECOVERED",
+      "detail": "declared action class 'page_action' recovered on 0 probe shape(s), required >=5; instrument parse loop is amputating this class under markup variants",
+      "evidence": {
+        "class_id": "page_action",
+        "required_min_shapes": 5,
+        "shapes_recovered": 0
+      },
+      "gate": "G1",
+      "severity": "BLOCK"
+    },
+    {
+      "code": "PARSER_AMPUTATION_CLASS_UNRECOVERED",
+      "detail": "declared action class 'form_button' recovered on 0 probe shape(s), required >=2; instrument parse loop is amputating this class under markup variants",
+      "evidence": {
+        "class_id": "form_button",
+        "required_min_shapes": 2,
+        "shapes_recovered": 0
+      },
+      "gate": "G1",
+      "severity": "BLOCK"
+    },
+    {
+      "code": "PARSER_ROUNDTRIP_FALSE_POSITIVES",
+      "detail": "14 recovered targets not present in probe ground truth",
+      "evidence": {},
+      "gate": "G1",
+      "severity": "WARN"
+    }
+  ],
+  "timings_s": {
+    "g1_parse_roundtrip": 0.504,
+    "g4_source_preflight": 0.0,
+    "total_precollection": 0.504
+  }
+}

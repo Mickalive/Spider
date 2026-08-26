@@ -1,0 +1,17 @@
+{
+  "acceptance_block_codes": [],
+  "acceptance_blocked": false,
+  "acceptance_findings": [],
+  "collected": true,
+  "collection_wall_s": 2.003,
+  "instrument_id": "S4",
+  "kind": "seeded_defect",
+  "kit_disposition": "NULL_ONLY_NO_GATES",
+  "n_rows_total": 0,
+  "null_detections": [
+    "NULL_EMPTY_DATASET_NO_ROW_FILES"
+  ],
+  "null_rejected": true,
+  "pipeline": "null_only",
+  "wasted_source_retry_s": 2.003
+}

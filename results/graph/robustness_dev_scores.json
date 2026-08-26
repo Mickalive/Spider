@@ -1,0 +1,7686 @@
+{
+ "internal_validity_gate": {
+  "pass": true,
+  "v00_byte_reproduction": true,
+  "v00_dev_para_do_2of8": true,
+  "v00_dev_para_kw_2of8": true,
+  "v00_zero_false_accepts": true
+ },
+ "kb_dump": "../results/graph/cycle3_20260824_043334_store_dump.json.gz",
+ "rows": [
+  {
+   "intent": "category-mystery",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "open the mystery category of the book shop mystery",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "open the mystery category of the book shop",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.cat",
+   "site": "books",
+   "source": "C1_books_mystery_p2_named",
+   "variant": "V00"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "go to the second page of the book listing next",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "go to the second page of the book listing",
+     "ranked": [
+      {
+       "cov": 0.4,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.4,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.page2",
+   "site": "books",
+   "source": "C1_books_mystery_p2_named",
+   "variant": "V00"
+  },
+  {
+   "intent": "named-book-unknown",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "open the product page of the book In the Woods by Tana French woods",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "open the product page of the book In the Woods by Tana French",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.named",
+   "site": "books",
+   "source": "C1_books_mystery_p2_named",
+   "variant": "V00"
+  },
+  {
+   "intent": "login",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "log in to the quotes site with the provided username and password login",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "log in to the quotes site with the provided username and password",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c2.login",
+   "site": "quotes",
+   "source": "C2_quotes_login_p3",
+   "variant": "V00"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "go to page 3 of the quote listings next",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.page.2"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "go to page 3 of the quote listings",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c2.page3",
+   "site": "quotes",
+   "source": "C2_quotes_login_p3",
+   "variant": "V00"
+  },
+  {
+   "intent": "login",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "log in to the quotes site with the provided username and password login",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "log in to the quotes site with the provided username and password",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c3.login",
+   "site": "quotes",
+   "source": "C3_quotes_login_p5",
+   "variant": "V00"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "go to page 5 of the quote listings next",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.page.2"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "go to page 5 of the quote listings",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c3.page5",
+   "site": "quotes",
+   "source": "C3_quotes_login_p5",
+   "variant": "V00"
+  },
+  {
+   "intent": "category-fiction",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "open the fiction category of the book shop fiction",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "open the fiction category of the book shop",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.cat",
+   "site": "books",
+   "source": "X1_books_fiction_p2_named",
+   "variant": "V00"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "go to the second page of the book listing next",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "go to the second page of the book listing",
+     "ranked": [
+      {
+       "cov": 0.4,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.4,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.page2",
+   "site": "books",
+   "source": "X1_books_fiction_p2_named",
+   "variant": "V00"
+  },
+  {
+   "intent": "named-book-unknown",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "open the product page of the book The Shack by William P. Young shack",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "open the product page of the book The Shack by William P. Young",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.named",
+   "site": "books",
+   "source": "X1_books_fiction_p2_named",
+   "variant": "V00"
+  },
+  {
+   "intent": "login",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Log into the quotations site with the username 'spiderbot' and password 'notasecret', making sure the session shows you as signed in.",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Log into the quotations site with the username 'spiderbot' and password 'notasecret', making sure the session shows you as signed in.",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c2.login",
+   "site": "quotes",
+   "source": "PARA:C2_quotes_login_p3",
+   "variant": "V00"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Starting from the main list of quotations, navigate to its third page.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Starting from the main list of quotations, navigate to its third page.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c2.page3",
+   "site": "quotes",
+   "source": "PARA:C2_quotes_login_p3",
+   "variant": "V00"
+  },
+  {
+   "intent": "login",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Sign in to the quotations website as 'spiderbot' with 'notasecret' as the password.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Sign in to the quotations website as 'spiderbot' with 'notasecret' as the password.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c3.login",
+   "site": "quotes",
+   "source": "PARA:C3_quotes_login_p5",
+   "variant": "V00"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Jump to page 5 of the quotation list on that site.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Jump to page 5 of the quotation list on that site.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c3.page5",
+   "site": "quotes",
+   "source": "PARA:C3_quotes_login_p5",
+   "variant": "V00"
+  },
+  {
+   "intent": "category-mystery",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Browse to the mystery section of the online bookstore's catalog.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Browse to the mystery section of the online bookstore's catalog.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.cat",
+   "site": "books",
+   "source": "PARA:C1_books_mystery_p2_named",
+   "variant": "V00"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Show me page two of the mystery category's product listing.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Show me page two of the mystery category's product listing.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.page2",
+   "site": "books",
+   "source": "PARA:C1_books_mystery_p2_named",
+   "variant": "V00"
+  },
+  {
+   "intent": "named-book-unknown",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Open the product detail page for Tana French's novel 'In the Woods'.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Open the product detail page for Tana French's novel 'In the Woods'.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.named",
+   "site": "books",
+   "source": "PARA:C1_books_mystery_p2_named",
+   "variant": "V00"
+  },
+  {
+   "intent": "category-fiction",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Go to the fiction section in the bookstore catalog.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Go to the fiction section in the bookstore catalog.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.cat",
+   "site": "books",
+   "source": "PARA:X1_books_fiction_p2_named",
+   "variant": "V00"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Bring up the second page of the fiction listing.",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Bring up the second page of the fiction listing.",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.page2",
+   "site": "books",
+   "source": "PARA:X1_books_fiction_p2_named",
+   "variant": "V00"
+  },
+  {
+   "intent": "named-book-unknown",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Open the book's product page for 'The Shack' by William P. Young.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Open the book's product page for 'The Shack' by William P. Young.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.named",
+   "site": "books",
+   "source": "PARA:X1_books_fiction_p2_named",
+   "variant": "V00"
+  },
+  {
+   "intent": "category-mystery",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "open the mystery category of the book shop mystery",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "open the mystery category of the book shop",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.cat",
+   "site": "books",
+   "source": "C1_books_mystery_p2_named",
+   "variant": "V01"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "go to the second page of the book listing next",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "go to the second page of the book listing",
+     "ranked": [
+      {
+       "cov": 0.4,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.4,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.page2",
+   "site": "books",
+   "source": "C1_books_mystery_p2_named",
+   "variant": "V01"
+  },
+  {
+   "intent": "named-book-unknown",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "open the product page of the book In the Woods by Tana French woods",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "open the product page of the book In the Woods by Tana French",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.named",
+   "site": "books",
+   "source": "C1_books_mystery_p2_named",
+   "variant": "V01"
+  },
+  {
+   "intent": "login",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "log in to the quotes site with the provided username and password login",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "log in to the quotes site with the provided username and password",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c2.login",
+   "site": "quotes",
+   "source": "C2_quotes_login_p3",
+   "variant": "V01"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "go to page 3 of the quote listings next",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.page.2"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "go to page 3 of the quote listings",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c2.page3",
+   "site": "quotes",
+   "source": "C2_quotes_login_p3",
+   "variant": "V01"
+  },
+  {
+   "intent": "login",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "log in to the quotes site with the provided username and password login",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "log in to the quotes site with the provided username and password",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c3.login",
+   "site": "quotes",
+   "source": "C3_quotes_login_p5",
+   "variant": "V01"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "go to page 5 of the quote listings next",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.page.2"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "go to page 5 of the quote listings",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c3.page5",
+   "site": "quotes",
+   "source": "C3_quotes_login_p5",
+   "variant": "V01"
+  },
+  {
+   "intent": "category-fiction",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "open the fiction category of the book shop fiction",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "open the fiction category of the book shop",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.cat",
+   "site": "books",
+   "source": "X1_books_fiction_p2_named",
+   "variant": "V01"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "go to the second page of the book listing next",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "go to the second page of the book listing",
+     "ranked": [
+      {
+       "cov": 0.4,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.4,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.page2",
+   "site": "books",
+   "source": "X1_books_fiction_p2_named",
+   "variant": "V01"
+  },
+  {
+   "intent": "named-book-unknown",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "open the product page of the book The Shack by William P. Young shack",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "open the product page of the book The Shack by William P. Young",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.named",
+   "site": "books",
+   "source": "X1_books_fiction_p2_named",
+   "variant": "V01"
+  },
+  {
+   "intent": "login",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Log into the quotations site with the username 'spiderbot' and password 'notasecret', making sure the session shows you as signed in.",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Log into the quotations site with the username 'spiderbot' and password 'notasecret', making sure the session shows you as signed in.",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c2.login",
+   "site": "quotes",
+   "source": "PARA:C2_quotes_login_p3",
+   "variant": "V01"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Starting from the main list of quotations, navigate to its third page.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Starting from the main list of quotations, navigate to its third page.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c2.page3",
+   "site": "quotes",
+   "source": "PARA:C2_quotes_login_p3",
+   "variant": "V01"
+  },
+  {
+   "intent": "login",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Sign in to the quotations website as 'spiderbot' with 'notasecret' as the password.",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Sign in to the quotations website as 'spiderbot' with 'notasecret' as the password.",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c3.login",
+   "site": "quotes",
+   "source": "PARA:C3_quotes_login_p5",
+   "variant": "V01"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Jump to page 5 of the quotation list on that site.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Jump to page 5 of the quotation list on that site.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c3.page5",
+   "site": "quotes",
+   "source": "PARA:C3_quotes_login_p5",
+   "variant": "V01"
+  },
+  {
+   "intent": "category-mystery",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Browse to the mystery section of the online bookstore's catalog.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Browse to the mystery section of the online bookstore's catalog.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.cat",
+   "site": "books",
+   "source": "PARA:C1_books_mystery_p2_named",
+   "variant": "V01"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Show me page two of the mystery category's product listing.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Show me page two of the mystery category's product listing.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.page2",
+   "site": "books",
+   "source": "PARA:C1_books_mystery_p2_named",
+   "variant": "V01"
+  },
+  {
+   "intent": "named-book-unknown",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Open the product detail page for Tana French's novel 'In the Woods'.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Open the product detail page for Tana French's novel 'In the Woods'.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.named",
+   "site": "books",
+   "source": "PARA:C1_books_mystery_p2_named",
+   "variant": "V01"
+  },
+  {
+   "intent": "category-fiction",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Go to the fiction section in the bookstore catalog.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Go to the fiction section in the bookstore catalog.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.cat",
+   "site": "books",
+   "source": "PARA:X1_books_fiction_p2_named",
+   "variant": "V01"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Bring up the second page of the fiction listing.",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Bring up the second page of the fiction listing.",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.page2",
+   "site": "books",
+   "source": "PARA:X1_books_fiction_p2_named",
+   "variant": "V01"
+  },
+  {
+   "intent": "named-book-unknown",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Open the book's product page for 'The Shack' by William P. Young.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Open the book's product page for 'The Shack' by William P. Young.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.named",
+   "site": "books",
+   "source": "PARA:X1_books_fiction_p2_named",
+   "variant": "V01"
+  },
+  {
+   "intent": "category-mystery",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "open the mystery category of the book shop mystery",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "open the mystery category of the book shop",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.cat",
+   "site": "books",
+   "source": "C1_books_mystery_p2_named",
+   "variant": "V02"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "go to the second page of the book listing next",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "go to the second page of the book listing",
+     "ranked": [
+      {
+       "cov": 0.4,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.4,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.page2",
+   "site": "books",
+   "source": "C1_books_mystery_p2_named",
+   "variant": "V02"
+  },
+  {
+   "intent": "named-book-unknown",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "open the product page of the book In the Woods by Tana French woods",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "open the product page of the book In the Woods by Tana French",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.named",
+   "site": "books",
+   "source": "C1_books_mystery_p2_named",
+   "variant": "V02"
+  },
+  {
+   "intent": "login",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "log in to the quotes site with the provided username and password login",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "log in to the quotes site with the provided username and password",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c2.login",
+   "site": "quotes",
+   "source": "C2_quotes_login_p3",
+   "variant": "V02"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "go to page 3 of the quote listings next",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.page.2"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "go to page 3 of the quote listings",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c2.page3",
+   "site": "quotes",
+   "source": "C2_quotes_login_p3",
+   "variant": "V02"
+  },
+  {
+   "intent": "login",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "log in to the quotes site with the provided username and password login",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "log in to the quotes site with the provided username and password",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c3.login",
+   "site": "quotes",
+   "source": "C3_quotes_login_p5",
+   "variant": "V02"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "go to page 5 of the quote listings next",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.page.2"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "go to page 5 of the quote listings",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c3.page5",
+   "site": "quotes",
+   "source": "C3_quotes_login_p5",
+   "variant": "V02"
+  },
+  {
+   "intent": "category-fiction",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "open the fiction category of the book shop fiction",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "open the fiction category of the book shop",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.cat",
+   "site": "books",
+   "source": "X1_books_fiction_p2_named",
+   "variant": "V02"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "go to the second page of the book listing next",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "go to the second page of the book listing",
+     "ranked": [
+      {
+       "cov": 0.4,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.4,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.page2",
+   "site": "books",
+   "source": "X1_books_fiction_p2_named",
+   "variant": "V02"
+  },
+  {
+   "intent": "named-book-unknown",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "open the product page of the book The Shack by William P. Young shack",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "open the product page of the book The Shack by William P. Young",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.named",
+   "site": "books",
+   "source": "X1_books_fiction_p2_named",
+   "variant": "V02"
+  },
+  {
+   "intent": "login",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Log into the quotations site with the username 'spiderbot' and password 'notasecret', making sure the session shows you as signed in.",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Log into the quotations site with the username 'spiderbot' and password 'notasecret', making sure the session shows you as signed in.",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c2.login",
+   "site": "quotes",
+   "source": "PARA:C2_quotes_login_p3",
+   "variant": "V02"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Starting from the main list of quotations, navigate to its third page.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Starting from the main list of quotations, navigate to its third page.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c2.page3",
+   "site": "quotes",
+   "source": "PARA:C2_quotes_login_p3",
+   "variant": "V02"
+  },
+  {
+   "intent": "login",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Sign in to the quotations website as 'spiderbot' with 'notasecret' as the password.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Sign in to the quotations website as 'spiderbot' with 'notasecret' as the password.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c3.login",
+   "site": "quotes",
+   "source": "PARA:C3_quotes_login_p5",
+   "variant": "V02"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Jump to page 5 of the quotation list on that site.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Jump to page 5 of the quotation list on that site.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c3.page5",
+   "site": "quotes",
+   "source": "PARA:C3_quotes_login_p5",
+   "variant": "V02"
+  },
+  {
+   "intent": "category-mystery",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Browse to the mystery section of the online bookstore's catalog.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Browse to the mystery section of the online bookstore's catalog.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.cat",
+   "site": "books",
+   "source": "PARA:C1_books_mystery_p2_named",
+   "variant": "V02"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Show me page two of the mystery category's product listing.",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Show me page two of the mystery category's product listing.",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.page2",
+   "site": "books",
+   "source": "PARA:C1_books_mystery_p2_named",
+   "variant": "V02"
+  },
+  {
+   "intent": "named-book-unknown",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Open the product detail page for Tana French's novel 'In the Woods'.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Open the product detail page for Tana French's novel 'In the Woods'.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.named",
+   "site": "books",
+   "source": "PARA:C1_books_mystery_p2_named",
+   "variant": "V02"
+  },
+  {
+   "intent": "category-fiction",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Go to the fiction section in the bookstore catalog.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Go to the fiction section in the bookstore catalog.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.cat",
+   "site": "books",
+   "source": "PARA:X1_books_fiction_p2_named",
+   "variant": "V02"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Bring up the second page of the fiction listing.",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Bring up the second page of the fiction listing.",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.page2",
+   "site": "books",
+   "source": "PARA:X1_books_fiction_p2_named",
+   "variant": "V02"
+  },
+  {
+   "intent": "named-book-unknown",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Open the book's product page for 'The Shack' by William P. Young.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Open the book's product page for 'The Shack' by William P. Young.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.named",
+   "site": "books",
+   "source": "PARA:X1_books_fiction_p2_named",
+   "variant": "V02"
+  },
+  {
+   "intent": "category-mystery",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "open the mystery category of the book shop mystery",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "open the mystery category of the book shop",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.cat",
+   "site": "books",
+   "source": "C1_books_mystery_p2_named",
+   "variant": "V03"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "go to the second page of the book listing next",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "go to the second page of the book listing",
+     "ranked": [
+      {
+       "cov": 0.4,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.4,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.page2",
+   "site": "books",
+   "source": "C1_books_mystery_p2_named",
+   "variant": "V03"
+  },
+  {
+   "intent": "named-book-unknown",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "open the product page of the book In the Woods by Tana French woods",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "open the product page of the book In the Woods by Tana French",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.named",
+   "site": "books",
+   "source": "C1_books_mystery_p2_named",
+   "variant": "V03"
+  },
+  {
+   "intent": "login",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "log in to the quotes site with the provided username and password login",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "log in to the quotes site with the provided username and password",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c2.login",
+   "site": "quotes",
+   "source": "C2_quotes_login_p3",
+   "variant": "V03"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "go to page 3 of the quote listings next",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.page.2"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "go to page 3 of the quote listings",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c2.page3",
+   "site": "quotes",
+   "source": "C2_quotes_login_p3",
+   "variant": "V03"
+  },
+  {
+   "intent": "login",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "log in to the quotes site with the provided username and password login",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "log in to the quotes site with the provided username and password",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c3.login",
+   "site": "quotes",
+   "source": "C3_quotes_login_p5",
+   "variant": "V03"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "go to page 5 of the quote listings next",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.page.2"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "go to page 5 of the quote listings",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c3.page5",
+   "site": "quotes",
+   "source": "C3_quotes_login_p5",
+   "variant": "V03"
+  },
+  {
+   "intent": "category-fiction",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "open the fiction category of the book shop fiction",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "open the fiction category of the book shop",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.cat",
+   "site": "books",
+   "source": "X1_books_fiction_p2_named",
+   "variant": "V03"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "go to the second page of the book listing next",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "go to the second page of the book listing",
+     "ranked": [
+      {
+       "cov": 0.4,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.4,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.page2",
+   "site": "books",
+   "source": "X1_books_fiction_p2_named",
+   "variant": "V03"
+  },
+  {
+   "intent": "named-book-unknown",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "open the product page of the book The Shack by William P. Young shack",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "open the product page of the book The Shack by William P. Young",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.named",
+   "site": "books",
+   "source": "X1_books_fiction_p2_named",
+   "variant": "V03"
+  },
+  {
+   "intent": "login",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Log into the quotations site with the username 'spiderbot' and password 'notasecret', making sure the session shows you as signed in.",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Log into the quotations site with the username 'spiderbot' and password 'notasecret', making sure the session shows you as signed in.",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c2.login",
+   "site": "quotes",
+   "source": "PARA:C2_quotes_login_p3",
+   "variant": "V03"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Starting from the main list of quotations, navigate to its third page.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Starting from the main list of quotations, navigate to its third page.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c2.page3",
+   "site": "quotes",
+   "source": "PARA:C2_quotes_login_p3",
+   "variant": "V03"
+  },
+  {
+   "intent": "login",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Sign in to the quotations website as 'spiderbot' with 'notasecret' as the password.",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Sign in to the quotations website as 'spiderbot' with 'notasecret' as the password.",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c3.login",
+   "site": "quotes",
+   "source": "PARA:C3_quotes_login_p5",
+   "variant": "V03"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Jump to page 5 of the quotation list on that site.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Jump to page 5 of the quotation list on that site.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c3.page5",
+   "site": "quotes",
+   "source": "PARA:C3_quotes_login_p5",
+   "variant": "V03"
+  },
+  {
+   "intent": "category-mystery",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Browse to the mystery section of the online bookstore's catalog.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Browse to the mystery section of the online bookstore's catalog.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.cat",
+   "site": "books",
+   "source": "PARA:C1_books_mystery_p2_named",
+   "variant": "V03"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Show me page two of the mystery category's product listing.",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Show me page two of the mystery category's product listing.",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.page2",
+   "site": "books",
+   "source": "PARA:C1_books_mystery_p2_named",
+   "variant": "V03"
+  },
+  {
+   "intent": "named-book-unknown",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Open the product detail page for Tana French's novel 'In the Woods'.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Open the product detail page for Tana French's novel 'In the Woods'.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.named",
+   "site": "books",
+   "source": "PARA:C1_books_mystery_p2_named",
+   "variant": "V03"
+  },
+  {
+   "intent": "category-fiction",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Go to the fiction section in the bookstore catalog.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Go to the fiction section in the bookstore catalog.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.cat",
+   "site": "books",
+   "source": "PARA:X1_books_fiction_p2_named",
+   "variant": "V03"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Bring up the second page of the fiction listing.",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Bring up the second page of the fiction listing.",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.page2",
+   "site": "books",
+   "source": "PARA:X1_books_fiction_p2_named",
+   "variant": "V03"
+  },
+  {
+   "intent": "named-book-unknown",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Open the book's product page for 'The Shack' by William P. Young.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Open the book's product page for 'The Shack' by William P. Young.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.named",
+   "site": "books",
+   "source": "PARA:X1_books_fiction_p2_named",
+   "variant": "V03"
+  },
+  {
+   "intent": "category-mystery",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "open the mystery category of the book shop mystery",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "open the mystery category of the book shop",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.cat",
+   "site": "books",
+   "source": "C1_books_mystery_p2_named",
+   "variant": "V10"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "go to the second page of the book listing next",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "go to the second page of the book listing",
+     "ranked": [
+      {
+       "cov": 0.4,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.4,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.page2",
+   "site": "books",
+   "source": "C1_books_mystery_p2_named",
+   "variant": "V10"
+  },
+  {
+   "intent": "named-book-unknown",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "open the product page of the book In the Woods by Tana French woods",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "open the product page of the book In the Woods by Tana French",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.named",
+   "site": "books",
+   "source": "C1_books_mystery_p2_named",
+   "variant": "V10"
+  },
+  {
+   "intent": "login",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "log in to the quotes site with the provided username and password login",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "log in to the quotes site with the provided username and password",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c2.login",
+   "site": "quotes",
+   "source": "C2_quotes_login_p3",
+   "variant": "V10"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "go to page 3 of the quote listings next",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.page.2"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "go to page 3 of the quote listings",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c2.page3",
+   "site": "quotes",
+   "source": "C2_quotes_login_p3",
+   "variant": "V10"
+  },
+  {
+   "intent": "login",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "log in to the quotes site with the provided username and password login",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "log in to the quotes site with the provided username and password",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c3.login",
+   "site": "quotes",
+   "source": "C3_quotes_login_p5",
+   "variant": "V10"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "go to page 5 of the quote listings next",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.page.2"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "go to page 5 of the quote listings",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c3.page5",
+   "site": "quotes",
+   "source": "C3_quotes_login_p5",
+   "variant": "V10"
+  },
+  {
+   "intent": "category-fiction",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "open the fiction category of the book shop fiction",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "open the fiction category of the book shop",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.cat",
+   "site": "books",
+   "source": "X1_books_fiction_p2_named",
+   "variant": "V10"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "go to the second page of the book listing next",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "go to the second page of the book listing",
+     "ranked": [
+      {
+       "cov": 0.4,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.4,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.page2",
+   "site": "books",
+   "source": "X1_books_fiction_p2_named",
+   "variant": "V10"
+  },
+  {
+   "intent": "named-book-unknown",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "open the product page of the book The Shack by William P. Young shack",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "open the product page of the book The Shack by William P. Young",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.named",
+   "site": "books",
+   "source": "X1_books_fiction_p2_named",
+   "variant": "V10"
+  },
+  {
+   "intent": "login",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Log into the quotations site with the username 'spiderbot' and password 'notasecret', making sure the session shows you as signed in.",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Log into the quotations site with the username 'spiderbot' and password 'notasecret', making sure the session shows you as signed in.",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c2.login",
+   "site": "quotes",
+   "source": "PARA:C2_quotes_login_p3",
+   "variant": "V10"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Starting from the main list of quotations, navigate to its third page.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Starting from the main list of quotations, navigate to its third page.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c2.page3",
+   "site": "quotes",
+   "source": "PARA:C2_quotes_login_p3",
+   "variant": "V10"
+  },
+  {
+   "intent": "login",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Sign in to the quotations website as 'spiderbot' with 'notasecret' as the password.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Sign in to the quotations website as 'spiderbot' with 'notasecret' as the password.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c3.login",
+   "site": "quotes",
+   "source": "PARA:C3_quotes_login_p5",
+   "variant": "V10"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Jump to page 5 of the quotation list on that site.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Jump to page 5 of the quotation list on that site.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c3.page5",
+   "site": "quotes",
+   "source": "PARA:C3_quotes_login_p5",
+   "variant": "V10"
+  },
+  {
+   "intent": "category-mystery",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Browse to the mystery section of the online bookstore's catalog.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Browse to the mystery section of the online bookstore's catalog.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.cat",
+   "site": "books",
+   "source": "PARA:C1_books_mystery_p2_named",
+   "variant": "V10"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Show me page two of the mystery category's product listing.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Show me page two of the mystery category's product listing.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.page2",
+   "site": "books",
+   "source": "PARA:C1_books_mystery_p2_named",
+   "variant": "V10"
+  },
+  {
+   "intent": "named-book-unknown",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Open the product detail page for Tana French's novel 'In the Woods'.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Open the product detail page for Tana French's novel 'In the Woods'.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.named",
+   "site": "books",
+   "source": "PARA:C1_books_mystery_p2_named",
+   "variant": "V10"
+  },
+  {
+   "intent": "category-fiction",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Go to the fiction section in the bookstore catalog.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Go to the fiction section in the bookstore catalog.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.cat",
+   "site": "books",
+   "source": "PARA:X1_books_fiction_p2_named",
+   "variant": "V10"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Bring up the second page of the fiction listing.",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Bring up the second page of the fiction listing.",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.page2",
+   "site": "books",
+   "source": "PARA:X1_books_fiction_p2_named",
+   "variant": "V10"
+  },
+  {
+   "intent": "named-book-unknown",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Open the book's product page for 'The Shack' by William P. Young.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Open the book's product page for 'The Shack' by William P. Young.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.named",
+   "site": "books",
+   "source": "PARA:X1_books_fiction_p2_named",
+   "variant": "V10"
+  },
+  {
+   "intent": "category-mystery",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "open the mystery category of the book shop mystery",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "open the mystery category of the book shop",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.cat",
+   "site": "books",
+   "source": "C1_books_mystery_p2_named",
+   "variant": "V11"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "go to the second page of the book listing next",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "go to the second page of the book listing",
+     "ranked": [
+      {
+       "cov": 0.4,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.4,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.page2",
+   "site": "books",
+   "source": "C1_books_mystery_p2_named",
+   "variant": "V11"
+  },
+  {
+   "intent": "named-book-unknown",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "open the product page of the book In the Woods by Tana French woods",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "open the product page of the book In the Woods by Tana French",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.named",
+   "site": "books",
+   "source": "C1_books_mystery_p2_named",
+   "variant": "V11"
+  },
+  {
+   "intent": "login",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "log in to the quotes site with the provided username and password login",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "log in to the quotes site with the provided username and password",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c2.login",
+   "site": "quotes",
+   "source": "C2_quotes_login_p3",
+   "variant": "V11"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "go to page 3 of the quote listings next",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.page.2"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "go to page 3 of the quote listings",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c2.page3",
+   "site": "quotes",
+   "source": "C2_quotes_login_p3",
+   "variant": "V11"
+  },
+  {
+   "intent": "login",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "log in to the quotes site with the provided username and password login",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "log in to the quotes site with the provided username and password",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c3.login",
+   "site": "quotes",
+   "source": "C3_quotes_login_p5",
+   "variant": "V11"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "go to page 5 of the quote listings next",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.page.2"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "go to page 5 of the quote listings",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c3.page5",
+   "site": "quotes",
+   "source": "C3_quotes_login_p5",
+   "variant": "V11"
+  },
+  {
+   "intent": "category-fiction",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "open the fiction category of the book shop fiction",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "open the fiction category of the book shop",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.cat",
+   "site": "books",
+   "source": "X1_books_fiction_p2_named",
+   "variant": "V11"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "go to the second page of the book listing next",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "go to the second page of the book listing",
+     "ranked": [
+      {
+       "cov": 0.4,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.4,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.page2",
+   "site": "books",
+   "source": "X1_books_fiction_p2_named",
+   "variant": "V11"
+  },
+  {
+   "intent": "named-book-unknown",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "open the product page of the book The Shack by William P. Young shack",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "open the product page of the book The Shack by William P. Young",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.named",
+   "site": "books",
+   "source": "X1_books_fiction_p2_named",
+   "variant": "V11"
+  },
+  {
+   "intent": "login",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Log into the quotations site with the username 'spiderbot' and password 'notasecret', making sure the session shows you as signed in.",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Log into the quotations site with the username 'spiderbot' and password 'notasecret', making sure the session shows you as signed in.",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c2.login",
+   "site": "quotes",
+   "source": "PARA:C2_quotes_login_p3",
+   "variant": "V11"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Starting from the main list of quotations, navigate to its third page.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Starting from the main list of quotations, navigate to its third page.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c2.page3",
+   "site": "quotes",
+   "source": "PARA:C2_quotes_login_p3",
+   "variant": "V11"
+  },
+  {
+   "intent": "login",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Sign in to the quotations website as 'spiderbot' with 'notasecret' as the password.",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Sign in to the quotations website as 'spiderbot' with 'notasecret' as the password.",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c3.login",
+   "site": "quotes",
+   "source": "PARA:C3_quotes_login_p5",
+   "variant": "V11"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Jump to page 5 of the quotation list on that site.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Jump to page 5 of the quotation list on that site.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c3.page5",
+   "site": "quotes",
+   "source": "PARA:C3_quotes_login_p5",
+   "variant": "V11"
+  },
+  {
+   "intent": "category-mystery",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Browse to the mystery section of the online bookstore's catalog.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Browse to the mystery section of the online bookstore's catalog.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.cat",
+   "site": "books",
+   "source": "PARA:C1_books_mystery_p2_named",
+   "variant": "V11"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Show me page two of the mystery category's product listing.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Show me page two of the mystery category's product listing.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.page2",
+   "site": "books",
+   "source": "PARA:C1_books_mystery_p2_named",
+   "variant": "V11"
+  },
+  {
+   "intent": "named-book-unknown",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Open the product detail page for Tana French's novel 'In the Woods'.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Open the product detail page for Tana French's novel 'In the Woods'.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.named",
+   "site": "books",
+   "source": "PARA:C1_books_mystery_p2_named",
+   "variant": "V11"
+  },
+  {
+   "intent": "category-fiction",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Go to the fiction section in the bookstore catalog.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Go to the fiction section in the bookstore catalog.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.cat",
+   "site": "books",
+   "source": "PARA:X1_books_fiction_p2_named",
+   "variant": "V11"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Bring up the second page of the fiction listing.",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Bring up the second page of the fiction listing.",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.page2",
+   "site": "books",
+   "source": "PARA:X1_books_fiction_p2_named",
+   "variant": "V11"
+  },
+  {
+   "intent": "named-book-unknown",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Open the book's product page for 'The Shack' by William P. Young.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Open the book's product page for 'The Shack' by William P. Young.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.named",
+   "site": "books",
+   "source": "PARA:X1_books_fiction_p2_named",
+   "variant": "V11"
+  },
+  {
+   "intent": "category-mystery",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "open the mystery category of the book shop mystery",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "open the mystery category of the book shop",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.cat",
+   "site": "books",
+   "source": "C1_books_mystery_p2_named",
+   "variant": "V20"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "go to the second page of the book listing next",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "go to the second page of the book listing",
+     "ranked": [
+      {
+       "cov": 0.4,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.4,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.page2",
+   "site": "books",
+   "source": "C1_books_mystery_p2_named",
+   "variant": "V20"
+  },
+  {
+   "intent": "named-book-unknown",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "open the product page of the book In the Woods by Tana French woods",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "open the product page of the book In the Woods by Tana French",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.named",
+   "site": "books",
+   "source": "C1_books_mystery_p2_named",
+   "variant": "V20"
+  },
+  {
+   "intent": "login",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "log in to the quotes site with the provided username and password login",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "log in to the quotes site with the provided username and password",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c2.login",
+   "site": "quotes",
+   "source": "C2_quotes_login_p3",
+   "variant": "V20"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "go to page 3 of the quote listings next",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.page.2"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "go to page 3 of the quote listings",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c2.page3",
+   "site": "quotes",
+   "source": "C2_quotes_login_p3",
+   "variant": "V20"
+  },
+  {
+   "intent": "login",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "log in to the quotes site with the provided username and password login",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "log in to the quotes site with the provided username and password",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c3.login",
+   "site": "quotes",
+   "source": "C3_quotes_login_p5",
+   "variant": "V20"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "go to page 5 of the quote listings next",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.page.2"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "go to page 5 of the quote listings",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c3.page5",
+   "site": "quotes",
+   "source": "C3_quotes_login_p5",
+   "variant": "V20"
+  },
+  {
+   "intent": "category-fiction",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "open the fiction category of the book shop fiction",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "open the fiction category of the book shop",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.cat",
+   "site": "books",
+   "source": "X1_books_fiction_p2_named",
+   "variant": "V20"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "go to the second page of the book listing next",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "go to the second page of the book listing",
+     "ranked": [
+      {
+       "cov": 0.4,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.4,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.page2",
+   "site": "books",
+   "source": "X1_books_fiction_p2_named",
+   "variant": "V20"
+  },
+  {
+   "intent": "named-book-unknown",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "open the product page of the book The Shack by William P. Young shack",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "open the product page of the book The Shack by William P. Young",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.named",
+   "site": "books",
+   "source": "X1_books_fiction_p2_named",
+   "variant": "V20"
+  },
+  {
+   "intent": "login",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Log into the quotations site with the username 'spiderbot' and password 'notasecret', making sure the session shows you as signed in.",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Log into the quotations site with the username 'spiderbot' and password 'notasecret', making sure the session shows you as signed in.",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c2.login",
+   "site": "quotes",
+   "source": "PARA:C2_quotes_login_p3",
+   "variant": "V20"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Starting from the main list of quotations, navigate to its third page.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Starting from the main list of quotations, navigate to its third page.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c2.page3",
+   "site": "quotes",
+   "source": "PARA:C2_quotes_login_p3",
+   "variant": "V20"
+  },
+  {
+   "intent": "login",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Sign in to the quotations website as 'spiderbot' with 'notasecret' as the password.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Sign in to the quotations website as 'spiderbot' with 'notasecret' as the password.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c3.login",
+   "site": "quotes",
+   "source": "PARA:C3_quotes_login_p5",
+   "variant": "V20"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Jump to page 5 of the quotation list on that site.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Jump to page 5 of the quotation list on that site.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c3.page5",
+   "site": "quotes",
+   "source": "PARA:C3_quotes_login_p5",
+   "variant": "V20"
+  },
+  {
+   "intent": "category-mystery",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Browse to the mystery section of the online bookstore's catalog.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Browse to the mystery section of the online bookstore's catalog.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.cat",
+   "site": "books",
+   "source": "PARA:C1_books_mystery_p2_named",
+   "variant": "V20"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Show me page two of the mystery category's product listing.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Show me page two of the mystery category's product listing.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.page2",
+   "site": "books",
+   "source": "PARA:C1_books_mystery_p2_named",
+   "variant": "V20"
+  },
+  {
+   "intent": "named-book-unknown",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Open the product detail page for Tana French's novel 'In the Woods'.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Open the product detail page for Tana French's novel 'In the Woods'.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.named",
+   "site": "books",
+   "source": "PARA:C1_books_mystery_p2_named",
+   "variant": "V20"
+  },
+  {
+   "intent": "category-fiction",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Go to the fiction section in the bookstore catalog.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Go to the fiction section in the bookstore catalog.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.cat",
+   "site": "books",
+   "source": "PARA:X1_books_fiction_p2_named",
+   "variant": "V20"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Bring up the second page of the fiction listing.",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "books.paginate.next"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "books.cat.fiction"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Bring up the second page of the fiction listing.",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "books.paginate.next"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "books.cat.fiction"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.page2",
+   "site": "books",
+   "source": "PARA:X1_books_fiction_p2_named",
+   "variant": "V20"
+  },
+  {
+   "intent": "named-book-unknown",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Open the book's product page for 'The Shack' by William P. Young.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Open the book's product page for 'The Shack' by William P. Young.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.named",
+   "site": "books",
+   "source": "PARA:X1_books_fiction_p2_named",
+   "variant": "V20"
+  },
+  {
+   "intent": "category-mystery",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "open the mystery category of the book shop mystery",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "open the mystery category of the book shop",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.cat",
+   "site": "books",
+   "source": "C1_books_mystery_p2_named",
+   "variant": "V21"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "go to the second page of the book listing next",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "go to the second page of the book listing",
+     "ranked": [
+      {
+       "cov": 0.4,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.4,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.page2",
+   "site": "books",
+   "source": "C1_books_mystery_p2_named",
+   "variant": "V21"
+  },
+  {
+   "intent": "named-book-unknown",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "open the product page of the book In the Woods by Tana French woods",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "open the product page of the book In the Woods by Tana French",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.named",
+   "site": "books",
+   "source": "C1_books_mystery_p2_named",
+   "variant": "V21"
+  },
+  {
+   "intent": "login",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "log in to the quotes site with the provided username and password login",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "log in to the quotes site with the provided username and password",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c2.login",
+   "site": "quotes",
+   "source": "C2_quotes_login_p3",
+   "variant": "V21"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "go to page 3 of the quote listings next",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.page.2"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "go to page 3 of the quote listings",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c2.page3",
+   "site": "quotes",
+   "source": "C2_quotes_login_p3",
+   "variant": "V21"
+  },
+  {
+   "intent": "login",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "log in to the quotes site with the provided username and password login",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "log in to the quotes site with the provided username and password",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c3.login",
+   "site": "quotes",
+   "source": "C3_quotes_login_p5",
+   "variant": "V21"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "go to page 5 of the quote listings next",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.page.2"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "go to page 5 of the quote listings",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c3.page5",
+   "site": "quotes",
+   "source": "C3_quotes_login_p5",
+   "variant": "V21"
+  },
+  {
+   "intent": "category-fiction",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "open the fiction category of the book shop fiction",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "open the fiction category of the book shop",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.cat",
+   "site": "books",
+   "source": "X1_books_fiction_p2_named",
+   "variant": "V21"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "go to the second page of the book listing next",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "go to the second page of the book listing",
+     "ranked": [
+      {
+       "cov": 0.4,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.4,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.page2",
+   "site": "books",
+   "source": "X1_books_fiction_p2_named",
+   "variant": "V21"
+  },
+  {
+   "intent": "named-book-unknown",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "open the product page of the book The Shack by William P. Young shack",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "open the product page of the book The Shack by William P. Young",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.named",
+   "site": "books",
+   "source": "X1_books_fiction_p2_named",
+   "variant": "V21"
+  },
+  {
+   "intent": "login",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Log into the quotations site with the username 'spiderbot' and password 'notasecret', making sure the session shows you as signed in.",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Log into the quotations site with the username 'spiderbot' and password 'notasecret', making sure the session shows you as signed in.",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c2.login",
+   "site": "quotes",
+   "source": "PARA:C2_quotes_login_p3",
+   "variant": "V21"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Starting from the main list of quotations, navigate to its third page.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Starting from the main list of quotations, navigate to its third page.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c2.page3",
+   "site": "quotes",
+   "source": "PARA:C2_quotes_login_p3",
+   "variant": "V21"
+  },
+  {
+   "intent": "login",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Sign in to the quotations website as 'spiderbot' with 'notasecret' as the password.",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Sign in to the quotations website as 'spiderbot' with 'notasecret' as the password.",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c3.login",
+   "site": "quotes",
+   "source": "PARA:C3_quotes_login_p5",
+   "variant": "V21"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Jump to page 5 of the quotation list on that site.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Jump to page 5 of the quotation list on that site.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c3.page5",
+   "site": "quotes",
+   "source": "PARA:C3_quotes_login_p5",
+   "variant": "V21"
+  },
+  {
+   "intent": "category-mystery",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Browse to the mystery section of the online bookstore's catalog.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Browse to the mystery section of the online bookstore's catalog.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.cat",
+   "site": "books",
+   "source": "PARA:C1_books_mystery_p2_named",
+   "variant": "V21"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Show me page two of the mystery category's product listing.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Show me page two of the mystery category's product listing.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.page2",
+   "site": "books",
+   "source": "PARA:C1_books_mystery_p2_named",
+   "variant": "V21"
+  },
+  {
+   "intent": "named-book-unknown",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Open the product detail page for Tana French's novel 'In the Woods'.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Open the product detail page for Tana French's novel 'In the Woods'.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.named",
+   "site": "books",
+   "source": "PARA:C1_books_mystery_p2_named",
+   "variant": "V21"
+  },
+  {
+   "intent": "category-fiction",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Go to the fiction section in the bookstore catalog.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Go to the fiction section in the bookstore catalog.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.cat",
+   "site": "books",
+   "source": "PARA:X1_books_fiction_p2_named",
+   "variant": "V21"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Bring up the second page of the fiction listing.",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "books.paginate.next"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "books.cat.fiction"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Bring up the second page of the fiction listing.",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "books.paginate.next"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "books.cat.fiction"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.page2",
+   "site": "books",
+   "source": "PARA:X1_books_fiction_p2_named",
+   "variant": "V21"
+  },
+  {
+   "intent": "named-book-unknown",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Open the book's product page for 'The Shack' by William P. Young.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Open the book's product page for 'The Shack' by William P. Young.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.named",
+   "site": "books",
+   "source": "PARA:X1_books_fiction_p2_named",
+   "variant": "V21"
+  },
+  {
+   "intent": "category-mystery",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "open the mystery category of the book shop mystery",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "open the mystery category of the book shop",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.cat",
+   "site": "books",
+   "source": "C1_books_mystery_p2_named",
+   "variant": "V30"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "go to the second page of the book listing next",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "go to the second page of the book listing",
+     "ranked": [
+      {
+       "cov": 0.4,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.4,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.page2",
+   "site": "books",
+   "source": "C1_books_mystery_p2_named",
+   "variant": "V30"
+  },
+  {
+   "intent": "named-book-unknown",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "open the product page of the book In the Woods by Tana French woods",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "open the product page of the book In the Woods by Tana French",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.named",
+   "site": "books",
+   "source": "C1_books_mystery_p2_named",
+   "variant": "V30"
+  },
+  {
+   "intent": "login",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "log in to the quotes site with the provided username and password login",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "log in to the quotes site with the provided username and password",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c2.login",
+   "site": "quotes",
+   "source": "C2_quotes_login_p3",
+   "variant": "V30"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "go to page 3 of the quote listings next",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.page.2"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "go to page 3 of the quote listings",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c2.page3",
+   "site": "quotes",
+   "source": "C2_quotes_login_p3",
+   "variant": "V30"
+  },
+  {
+   "intent": "login",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "log in to the quotes site with the provided username and password login",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "log in to the quotes site with the provided username and password",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c3.login",
+   "site": "quotes",
+   "source": "C3_quotes_login_p5",
+   "variant": "V30"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "go to page 5 of the quote listings next",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.page.2"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "go to page 5 of the quote listings",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c3.page5",
+   "site": "quotes",
+   "source": "C3_quotes_login_p5",
+   "variant": "V30"
+  },
+  {
+   "intent": "category-fiction",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "open the fiction category of the book shop fiction",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "open the fiction category of the book shop",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.cat",
+   "site": "books",
+   "source": "X1_books_fiction_p2_named",
+   "variant": "V30"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "go to the second page of the book listing next",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "go to the second page of the book listing",
+     "ranked": [
+      {
+       "cov": 0.4,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.4,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.page2",
+   "site": "books",
+   "source": "X1_books_fiction_p2_named",
+   "variant": "V30"
+  },
+  {
+   "intent": "named-book-unknown",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "open the product page of the book The Shack by William P. Young shack",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "open the product page of the book The Shack by William P. Young",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.named",
+   "site": "books",
+   "source": "X1_books_fiction_p2_named",
+   "variant": "V30"
+  },
+  {
+   "intent": "login",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Log into the quotations site with the username 'spiderbot' and password 'notasecret', making sure the session shows you as signed in.",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Log into the quotations site with the username 'spiderbot' and password 'notasecret', making sure the session shows you as signed in.",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c2.login",
+   "site": "quotes",
+   "source": "PARA:C2_quotes_login_p3",
+   "variant": "V30"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Starting from the main list of quotations, navigate to its third page.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Starting from the main list of quotations, navigate to its third page.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c2.page3",
+   "site": "quotes",
+   "source": "PARA:C2_quotes_login_p3",
+   "variant": "V30"
+  },
+  {
+   "intent": "login",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Sign in to the quotations website as 'spiderbot' with 'notasecret' as the password.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Sign in to the quotations website as 'spiderbot' with 'notasecret' as the password.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c3.login",
+   "site": "quotes",
+   "source": "PARA:C3_quotes_login_p5",
+   "variant": "V30"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Jump to page 5 of the quotation list on that site.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Jump to page 5 of the quotation list on that site.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c3.page5",
+   "site": "quotes",
+   "source": "PARA:C3_quotes_login_p5",
+   "variant": "V30"
+  },
+  {
+   "intent": "category-mystery",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Browse to the mystery section of the online bookstore's catalog.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Browse to the mystery section of the online bookstore's catalog.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.cat",
+   "site": "books",
+   "source": "PARA:C1_books_mystery_p2_named",
+   "variant": "V30"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Show me page two of the mystery category's product listing.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Show me page two of the mystery category's product listing.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.page2",
+   "site": "books",
+   "source": "PARA:C1_books_mystery_p2_named",
+   "variant": "V30"
+  },
+  {
+   "intent": "named-book-unknown",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Open the product detail page for Tana French's novel 'In the Woods'.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Open the product detail page for Tana French's novel 'In the Woods'.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.named",
+   "site": "books",
+   "source": "PARA:C1_books_mystery_p2_named",
+   "variant": "V30"
+  },
+  {
+   "intent": "category-fiction",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Go to the fiction section in the bookstore catalog.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Go to the fiction section in the bookstore catalog.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.cat",
+   "site": "books",
+   "source": "PARA:X1_books_fiction_p2_named",
+   "variant": "V30"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Bring up the second page of the fiction listing.",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Bring up the second page of the fiction listing.",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.page2",
+   "site": "books",
+   "source": "PARA:X1_books_fiction_p2_named",
+   "variant": "V30"
+  },
+  {
+   "intent": "named-book-unknown",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Open the book's product page for 'The Shack' by William P. Young.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Open the book's product page for 'The Shack' by William P. Young.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.named",
+   "site": "books",
+   "source": "PARA:X1_books_fiction_p2_named",
+   "variant": "V30"
+  },
+  {
+   "intent": "category-mystery",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "open the mystery category of the book shop mystery",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "open the mystery category of the book shop",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.cat",
+   "site": "books",
+   "source": "C1_books_mystery_p2_named",
+   "variant": "V31"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "go to the second page of the book listing next",
+     "ranked": [
+      {
+       "cov": 0.6667,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.6667,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "go to the second page of the book listing",
+     "ranked": [
+      {
+       "cov": 0.6,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.6,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.page2",
+   "site": "books",
+   "source": "C1_books_mystery_p2_named",
+   "variant": "V31"
+  },
+  {
+   "intent": "named-book-unknown",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "open the product page of the book In the Woods by Tana French woods",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "open the product page of the book In the Woods by Tana French",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.named",
+   "site": "books",
+   "source": "C1_books_mystery_p2_named",
+   "variant": "V31"
+  },
+  {
+   "intent": "login",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "log in to the quotes site with the provided username and password login",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "log in to the quotes site with the provided username and password",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c2.login",
+   "site": "quotes",
+   "source": "C2_quotes_login_p3",
+   "variant": "V31"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "go to page 3 of the quote listings next",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "quotes.page.2"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.tag.love"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "go to page 3 of the quote listings",
+     "ranked": [
+      {
+       "cov": 0.4,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.4,
+       "goal_sig": "quotes.page.2"
+      },
+      {
+       "cov": 0.4,
+       "goal_sig": "quotes.tag.love"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c2.page3",
+   "site": "quotes",
+   "source": "C2_quotes_login_p3",
+   "variant": "V31"
+  },
+  {
+   "intent": "login",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "log in to the quotes site with the provided username and password login",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "log in to the quotes site with the provided username and password",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c3.login",
+   "site": "quotes",
+   "source": "C3_quotes_login_p5",
+   "variant": "V31"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "go to page 5 of the quote listings next",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "quotes.page.2"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.tag.love"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "go to page 5 of the quote listings",
+     "ranked": [
+      {
+       "cov": 0.4,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.4,
+       "goal_sig": "quotes.page.2"
+      },
+      {
+       "cov": 0.4,
+       "goal_sig": "quotes.tag.love"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c3.page5",
+   "site": "quotes",
+   "source": "C3_quotes_login_p5",
+   "variant": "V31"
+  },
+  {
+   "intent": "category-fiction",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "open the fiction category of the book shop fiction",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "open the fiction category of the book shop",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.cat",
+   "site": "books",
+   "source": "X1_books_fiction_p2_named",
+   "variant": "V31"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "go to the second page of the book listing next",
+     "ranked": [
+      {
+       "cov": 0.6667,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.6667,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "go to the second page of the book listing",
+     "ranked": [
+      {
+       "cov": 0.6,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.6,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.page2",
+   "site": "books",
+   "source": "X1_books_fiction_p2_named",
+   "variant": "V31"
+  },
+  {
+   "intent": "named-book-unknown",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "open the product page of the book The Shack by William P. Young shack",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "open the product page of the book The Shack by William P. Young",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.named",
+   "site": "books",
+   "source": "X1_books_fiction_p2_named",
+   "variant": "V31"
+  },
+  {
+   "intent": "login",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Log into the quotations site with the username 'spiderbot' and password 'notasecret', making sure the session shows you as signed in.",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Log into the quotations site with the username 'spiderbot' and password 'notasecret', making sure the session shows you as signed in.",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c2.login",
+   "site": "quotes",
+   "source": "PARA:C2_quotes_login_p3",
+   "variant": "V31"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Starting from the main list of quotations, navigate to its third page.",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.page.2"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.tag.love"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Starting from the main list of quotations, navigate to its third page.",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.page.2"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.tag.love"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c2.page3",
+   "site": "quotes",
+   "source": "PARA:C2_quotes_login_p3",
+   "variant": "V31"
+  },
+  {
+   "intent": "login",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Sign in to the quotations website as 'spiderbot' with 'notasecret' as the password.",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Sign in to the quotations website as 'spiderbot' with 'notasecret' as the password.",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c3.login",
+   "site": "quotes",
+   "source": "PARA:C3_quotes_login_p5",
+   "variant": "V31"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Jump to page 5 of the quotation list on that site.",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.page.2"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.tag.love"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Jump to page 5 of the quotation list on that site.",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.page.2"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.tag.love"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c3.page5",
+   "site": "quotes",
+   "source": "PARA:C3_quotes_login_p5",
+   "variant": "V31"
+  },
+  {
+   "intent": "category-mystery",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Browse to the mystery section of the online bookstore's catalog.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Browse to the mystery section of the online bookstore's catalog.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.cat",
+   "site": "books",
+   "source": "PARA:C1_books_mystery_p2_named",
+   "variant": "V31"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Show me page two of the mystery category's product listing.",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Show me page two of the mystery category's product listing.",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.page2",
+   "site": "books",
+   "source": "PARA:C1_books_mystery_p2_named",
+   "variant": "V31"
+  },
+  {
+   "intent": "named-book-unknown",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Open the product detail page for Tana French's novel 'In the Woods'.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Open the product detail page for Tana French's novel 'In the Woods'.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.named",
+   "site": "books",
+   "source": "PARA:C1_books_mystery_p2_named",
+   "variant": "V31"
+  },
+  {
+   "intent": "category-fiction",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Go to the fiction section in the bookstore catalog.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Go to the fiction section in the bookstore catalog.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.cat",
+   "site": "books",
+   "source": "PARA:X1_books_fiction_p2_named",
+   "variant": "V31"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Bring up the second page of the fiction listing.",
+     "ranked": [
+      {
+       "cov": 0.6667,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.6667,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Bring up the second page of the fiction listing.",
+     "ranked": [
+      {
+       "cov": 0.6667,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.6667,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.page2",
+   "site": "books",
+   "source": "PARA:X1_books_fiction_p2_named",
+   "variant": "V31"
+  },
+  {
+   "intent": "named-book-unknown",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Open the book's product page for 'The Shack' by William P. Young.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Open the book's product page for 'The Shack' by William P. Young.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.named",
+   "site": "books",
+   "source": "PARA:X1_books_fiction_p2_named",
+   "variant": "V31"
+  },
+  {
+   "intent": "category-mystery",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "open the mystery category of the book shop mystery",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "open the mystery category of the book shop",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.cat",
+   "site": "books",
+   "source": "C1_books_mystery_p2_named",
+   "variant": "V33"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "go to the second page of the book listing next",
+     "ranked": [
+      {
+       "cov": 0.6667,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.6667,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "go to the second page of the book listing",
+     "ranked": [
+      {
+       "cov": 0.6,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.6,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.page2",
+   "site": "books",
+   "source": "C1_books_mystery_p2_named",
+   "variant": "V33"
+  },
+  {
+   "intent": "named-book-unknown",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "open the product page of the book In the Woods by Tana French woods",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "open the product page of the book In the Woods by Tana French",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.named",
+   "site": "books",
+   "source": "C1_books_mystery_p2_named",
+   "variant": "V33"
+  },
+  {
+   "intent": "login",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "log in to the quotes site with the provided username and password login",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "log in to the quotes site with the provided username and password",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c2.login",
+   "site": "quotes",
+   "source": "C2_quotes_login_p3",
+   "variant": "V33"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "go to page 3 of the quote listings next",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "quotes.page.2"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.tag.love"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "go to page 3 of the quote listings",
+     "ranked": [
+      {
+       "cov": 0.4,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.4,
+       "goal_sig": "quotes.page.2"
+      },
+      {
+       "cov": 0.4,
+       "goal_sig": "quotes.tag.love"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c2.page3",
+   "site": "quotes",
+   "source": "C2_quotes_login_p3",
+   "variant": "V33"
+  },
+  {
+   "intent": "login",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "log in to the quotes site with the provided username and password login",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "log in to the quotes site with the provided username and password",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c3.login",
+   "site": "quotes",
+   "source": "C3_quotes_login_p5",
+   "variant": "V33"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "go to page 5 of the quote listings next",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "quotes.page.2"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.tag.love"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "go to page 5 of the quote listings",
+     "ranked": [
+      {
+       "cov": 0.4,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.4,
+       "goal_sig": "quotes.page.2"
+      },
+      {
+       "cov": 0.4,
+       "goal_sig": "quotes.tag.love"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c3.page5",
+   "site": "quotes",
+   "source": "C3_quotes_login_p5",
+   "variant": "V33"
+  },
+  {
+   "intent": "category-fiction",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "open the fiction category of the book shop fiction",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "open the fiction category of the book shop",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.cat",
+   "site": "books",
+   "source": "X1_books_fiction_p2_named",
+   "variant": "V33"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "go to the second page of the book listing next",
+     "ranked": [
+      {
+       "cov": 0.6667,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.6667,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "go to the second page of the book listing",
+     "ranked": [
+      {
+       "cov": 0.6,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.6,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.page2",
+   "site": "books",
+   "source": "X1_books_fiction_p2_named",
+   "variant": "V33"
+  },
+  {
+   "intent": "named-book-unknown",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "open the product page of the book The Shack by William P. Young shack",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "open the product page of the book The Shack by William P. Young",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.named",
+   "site": "books",
+   "source": "X1_books_fiction_p2_named",
+   "variant": "V33"
+  },
+  {
+   "intent": "login",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Log into the quotations site with the username 'spiderbot' and password 'notasecret', making sure the session shows you as signed in.",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Log into the quotations site with the username 'spiderbot' and password 'notasecret', making sure the session shows you as signed in.",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c2.login",
+   "site": "quotes",
+   "source": "PARA:C2_quotes_login_p3",
+   "variant": "V33"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Starting from the main list of quotations, navigate to its third page.",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.page.2"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.tag.love"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Starting from the main list of quotations, navigate to its third page.",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.page.2"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.tag.love"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c2.page3",
+   "site": "quotes",
+   "source": "PARA:C2_quotes_login_p3",
+   "variant": "V33"
+  },
+  {
+   "intent": "login",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Sign in to the quotations website as 'spiderbot' with 'notasecret' as the password.",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Sign in to the quotations website as 'spiderbot' with 'notasecret' as the password.",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c3.login",
+   "site": "quotes",
+   "source": "PARA:C3_quotes_login_p5",
+   "variant": "V33"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Jump to page 5 of the quotation list on that site.",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.page.2"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.tag.love"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Jump to page 5 of the quotation list on that site.",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.page.2"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.tag.love"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c3.page5",
+   "site": "quotes",
+   "source": "PARA:C3_quotes_login_p5",
+   "variant": "V33"
+  },
+  {
+   "intent": "category-mystery",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Browse to the mystery section of the online bookstore's catalog.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Browse to the mystery section of the online bookstore's catalog.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.cat",
+   "site": "books",
+   "source": "PARA:C1_books_mystery_p2_named",
+   "variant": "V33"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Show me page two of the mystery category's product listing.",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Show me page two of the mystery category's product listing.",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.page2",
+   "site": "books",
+   "source": "PARA:C1_books_mystery_p2_named",
+   "variant": "V33"
+  },
+  {
+   "intent": "named-book-unknown",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Open the product detail page for Tana French's novel 'In the Woods'.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Open the product detail page for Tana French's novel 'In the Woods'.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.named",
+   "site": "books",
+   "source": "PARA:C1_books_mystery_p2_named",
+   "variant": "V33"
+  },
+  {
+   "intent": "category-fiction",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Go to the fiction section in the bookstore catalog.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Go to the fiction section in the bookstore catalog.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.cat",
+   "site": "books",
+   "source": "PARA:X1_books_fiction_p2_named",
+   "variant": "V33"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Bring up the second page of the fiction listing.",
+     "ranked": [
+      {
+       "cov": 0.6667,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.6667,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Bring up the second page of the fiction listing.",
+     "ranked": [
+      {
+       "cov": 0.6667,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.6667,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.page2",
+   "site": "books",
+   "source": "PARA:X1_books_fiction_p2_named",
+   "variant": "V33"
+  },
+  {
+   "intent": "named-book-unknown",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Open the book's product page for 'The Shack' by William P. Young.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Open the book's product page for 'The Shack' by William P. Young.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.named",
+   "site": "books",
+   "source": "PARA:X1_books_fiction_p2_named",
+   "variant": "V33"
+  },
+  {
+   "intent": "category-mystery",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "open the mystery category of the book shop mystery",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "open the mystery category of the book shop",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.cat",
+   "site": "books",
+   "source": "C1_books_mystery_p2_named",
+   "variant": "V40"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "go to the second page of the book listing next",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "go to the second page of the book listing",
+     "ranked": [
+      {
+       "cov": 0.4,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.4,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.page2",
+   "site": "books",
+   "source": "C1_books_mystery_p2_named",
+   "variant": "V40"
+  },
+  {
+   "intent": "named-book-unknown",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "open the product page of the book In the Woods by Tana French woods",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "open the product page of the book In the Woods by Tana French",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.named",
+   "site": "books",
+   "source": "C1_books_mystery_p2_named",
+   "variant": "V40"
+  },
+  {
+   "intent": "login",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "log in to the quotes site with the provided username and password login",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "log in to the quotes site with the provided username and password",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c2.login",
+   "site": "quotes",
+   "source": "C2_quotes_login_p3",
+   "variant": "V40"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "go to page 3 of the quote listings next",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.page.2"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "go to page 3 of the quote listings",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c2.page3",
+   "site": "quotes",
+   "source": "C2_quotes_login_p3",
+   "variant": "V40"
+  },
+  {
+   "intent": "login",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "log in to the quotes site with the provided username and password login",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "log in to the quotes site with the provided username and password",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c3.login",
+   "site": "quotes",
+   "source": "C3_quotes_login_p5",
+   "variant": "V40"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "go to page 5 of the quote listings next",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.page.2"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "go to page 5 of the quote listings",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c3.page5",
+   "site": "quotes",
+   "source": "C3_quotes_login_p5",
+   "variant": "V40"
+  },
+  {
+   "intent": "category-fiction",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "open the fiction category of the book shop fiction",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "open the fiction category of the book shop",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.cat",
+   "site": "books",
+   "source": "X1_books_fiction_p2_named",
+   "variant": "V40"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "go to the second page of the book listing next",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "go to the second page of the book listing",
+     "ranked": [
+      {
+       "cov": 0.4,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.4,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.page2",
+   "site": "books",
+   "source": "X1_books_fiction_p2_named",
+   "variant": "V40"
+  },
+  {
+   "intent": "named-book-unknown",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "open the product page of the book The Shack by William P. Young shack",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "open the product page of the book The Shack by William P. Young",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.named",
+   "site": "books",
+   "source": "X1_books_fiction_p2_named",
+   "variant": "V40"
+  },
+  {
+   "intent": "login",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Log into the quotations site with the username 'spiderbot' and password 'notasecret', making sure the session shows you as signed in.",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Log into the quotations site with the username 'spiderbot' and password 'notasecret', making sure the session shows you as signed in.",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c2.login",
+   "site": "quotes",
+   "source": "PARA:C2_quotes_login_p3",
+   "variant": "V40"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Starting from the main list of quotations, navigate to its third page.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Starting from the main list of quotations, navigate to its third page.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c2.page3",
+   "site": "quotes",
+   "source": "PARA:C2_quotes_login_p3",
+   "variant": "V40"
+  },
+  {
+   "intent": "login",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Sign in to the quotations website as 'spiderbot' with 'notasecret' as the password.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Sign in to the quotations website as 'spiderbot' with 'notasecret' as the password.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c3.login",
+   "site": "quotes",
+   "source": "PARA:C3_quotes_login_p5",
+   "variant": "V40"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Jump to page 5 of the quotation list on that site.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Jump to page 5 of the quotation list on that site.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c3.page5",
+   "site": "quotes",
+   "source": "PARA:C3_quotes_login_p5",
+   "variant": "V40"
+  },
+  {
+   "intent": "category-mystery",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Browse to the mystery section of the online bookstore's catalog.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Browse to the mystery section of the online bookstore's catalog.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.cat",
+   "site": "books",
+   "source": "PARA:C1_books_mystery_p2_named",
+   "variant": "V40"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Show me page two of the mystery category's product listing.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Show me page two of the mystery category's product listing.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.page2",
+   "site": "books",
+   "source": "PARA:C1_books_mystery_p2_named",
+   "variant": "V40"
+  },
+  {
+   "intent": "named-book-unknown",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Open the product detail page for Tana French's novel 'In the Woods'.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Open the product detail page for Tana French's novel 'In the Woods'.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.named",
+   "site": "books",
+   "source": "PARA:C1_books_mystery_p2_named",
+   "variant": "V40"
+  },
+  {
+   "intent": "category-fiction",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Go to the fiction section in the bookstore catalog.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Go to the fiction section in the bookstore catalog.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.cat",
+   "site": "books",
+   "source": "PARA:X1_books_fiction_p2_named",
+   "variant": "V40"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Bring up the second page of the fiction listing.",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Bring up the second page of the fiction listing.",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.page2",
+   "site": "books",
+   "source": "PARA:X1_books_fiction_p2_named",
+   "variant": "V40"
+  },
+  {
+   "intent": "named-book-unknown",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Open the book's product page for 'The Shack' by William P. Young.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Open the book's product page for 'The Shack' by William P. Young.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.named",
+   "site": "books",
+   "source": "PARA:X1_books_fiction_p2_named",
+   "variant": "V40"
+  },
+  {
+   "intent": "category-mystery",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "open the mystery category of the book shop mystery",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "open the mystery category of the book shop",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.cat",
+   "site": "books",
+   "source": "C1_books_mystery_p2_named",
+   "variant": "V41"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "go to the second page of the book listing next",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "go to the second page of the book listing",
+     "ranked": [
+      {
+       "cov": 0.4,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.4,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.page2",
+   "site": "books",
+   "source": "C1_books_mystery_p2_named",
+   "variant": "V41"
+  },
+  {
+   "intent": "named-book-unknown",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "open the product page of the book In the Woods by Tana French woods",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "open the product page of the book In the Woods by Tana French",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.named",
+   "site": "books",
+   "source": "C1_books_mystery_p2_named",
+   "variant": "V41"
+  },
+  {
+   "intent": "login",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "log in to the quotes site with the provided username and password login",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "log in to the quotes site with the provided username and password",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c2.login",
+   "site": "quotes",
+   "source": "C2_quotes_login_p3",
+   "variant": "V41"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "go to page 3 of the quote listings next",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.page.2"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "go to page 3 of the quote listings",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c2.page3",
+   "site": "quotes",
+   "source": "C2_quotes_login_p3",
+   "variant": "V41"
+  },
+  {
+   "intent": "login",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "log in to the quotes site with the provided username and password login",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "log in to the quotes site with the provided username and password",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c3.login",
+   "site": "quotes",
+   "source": "C3_quotes_login_p5",
+   "variant": "V41"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "go to page 5 of the quote listings next",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.page.2"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "go to page 5 of the quote listings",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c3.page5",
+   "site": "quotes",
+   "source": "C3_quotes_login_p5",
+   "variant": "V41"
+  },
+  {
+   "intent": "category-fiction",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "open the fiction category of the book shop fiction",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "open the fiction category of the book shop",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.cat",
+   "site": "books",
+   "source": "X1_books_fiction_p2_named",
+   "variant": "V41"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "go to the second page of the book listing next",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "go to the second page of the book listing",
+     "ranked": [
+      {
+       "cov": 0.4,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.4,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.page2",
+   "site": "books",
+   "source": "X1_books_fiction_p2_named",
+   "variant": "V41"
+  },
+  {
+   "intent": "named-book-unknown",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "open the product page of the book The Shack by William P. Young shack",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "open the product page of the book The Shack by William P. Young",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.named",
+   "site": "books",
+   "source": "X1_books_fiction_p2_named",
+   "variant": "V41"
+  },
+  {
+   "intent": "login",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Log into the quotations site with the username 'spiderbot' and password 'notasecret', making sure the session shows you as signed in.",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Log into the quotations site with the username 'spiderbot' and password 'notasecret', making sure the session shows you as signed in.",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c2.login",
+   "site": "quotes",
+   "source": "PARA:C2_quotes_login_p3",
+   "variant": "V41"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Starting from the main list of quotations, navigate to its third page.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Starting from the main list of quotations, navigate to its third page.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c2.page3",
+   "site": "quotes",
+   "source": "PARA:C2_quotes_login_p3",
+   "variant": "V41"
+  },
+  {
+   "intent": "login",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Sign in to the quotations website as 'spiderbot' with 'notasecret' as the password.",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Sign in to the quotations website as 'spiderbot' with 'notasecret' as the password.",
+     "ranked": [
+      {
+       "cov": 0.3333,
+       "goal_sig": "generic.form.login"
+      },
+      {
+       "cov": 0.3333,
+       "goal_sig": "quotes.login"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c3.login",
+   "site": "quotes",
+   "source": "PARA:C3_quotes_login_p5",
+   "variant": "V41"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Jump to page 5 of the quotation list on that site.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Jump to page 5 of the quotation list on that site.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c3.page5",
+   "site": "quotes",
+   "source": "PARA:C3_quotes_login_p5",
+   "variant": "V41"
+  },
+  {
+   "intent": "category-mystery",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Browse to the mystery section of the online bookstore's catalog.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Browse to the mystery section of the online bookstore's catalog.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.cat",
+   "site": "books",
+   "source": "PARA:C1_books_mystery_p2_named",
+   "variant": "V41"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Show me page two of the mystery category's product listing.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Show me page two of the mystery category's product listing.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.page2",
+   "site": "books",
+   "source": "PARA:C1_books_mystery_p2_named",
+   "variant": "V41"
+  },
+  {
+   "intent": "named-book-unknown",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Open the product detail page for Tana French's novel 'In the Woods'.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Open the product detail page for Tana French's novel 'In the Woods'.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.c1.named",
+   "site": "books",
+   "source": "PARA:C1_books_mystery_p2_named",
+   "variant": "V41"
+  },
+  {
+   "intent": "category-fiction",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": false,
+     "query_text": "Go to the fiction section in the bookstore catalog.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": false,
+     "query_text": "Go to the fiction section in the bookstore catalog.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.cat",
+   "site": "books",
+   "source": "PARA:X1_books_fiction_p2_named",
+   "variant": "V41"
+  },
+  {
+   "intent": "pager",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Bring up the second page of the fiction listing.",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Bring up the second page of the fiction listing.",
+     "ranked": [
+      {
+       "cov": 0.5,
+       "goal_sig": "generic.paginate.next"
+      },
+      {
+       "cov": 0.5,
+       "goal_sig": "books.paginate.next"
+      }
+     ]
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.page2",
+   "site": "books",
+   "source": "PARA:X1_books_fiction_p2_named",
+   "variant": "V41"
+  },
+  {
+   "intent": "named-book-unknown",
+   "mode_rankings": {
+    "desc_kw": {
+     "correct": true,
+     "query_text": "Open the book's product page for 'The Shack' by William P. Young.",
+     "ranked": []
+    },
+    "desc_only": {
+     "correct": true,
+     "query_text": "Open the book's product page for 'The Shack' by William P. Young.",
+     "ranked": []
+    }
+   },
+   "set": "dev",
+   "sig": "eval.x1.named",
+   "site": "books",
+   "source": "PARA:X1_books_fiction_p2_named",
+   "variant": "V41"
+  }
+ ],
+ "summary_items_convention": {
+  "V00": {
+   "neardup_only": {
+    "desc_kw": {
+     "false_accepts": 0,
+     "nonempty": 6,
+     "pos_correct": 6,
+     "pos_total": 8,
+     "unknown_total": 2
+    },
+    "desc_only": {
+     "false_accepts": 0,
+     "nonempty": 4,
+     "pos_correct": 4,
+     "pos_total": 8,
+     "unknown_total": 2
+    }
+   },
+   "paraphrase_only": {
+    "desc_kw": {
+     "false_accepts": 0,
+     "nonempty": 2,
+     "pos_correct": 2,
+     "pos_total": 8,
+     "unknown_total": 2
+    },
+    "desc_only": {
+     "false_accepts": 0,
+     "nonempty": 2,
+     "pos_correct": 2,
+     "pos_total": 8,
+     "unknown_total": 2
+    }
+   }
+  },
+  "V01": {
+   "neardup_only": {
+    "desc_kw": {
+     "false_accepts": 0,
+     "nonempty": 6,
+     "pos_correct": 6,
+     "pos_total": 8,
+     "unknown_total": 2
+    },
+    "desc_only": {
+     "false_accepts": 0,
+     "nonempty": 4,
+     "pos_correct": 4,
+     "pos_total": 8,
+     "unknown_total": 2
+    }
+   },
+   "paraphrase_only": {
+    "desc_kw": {
+     "false_accepts": 0,
+     "nonempty": 3,
+     "pos_correct": 3,
+     "pos_total": 8,
+     "unknown_total": 2
+    },
+    "desc_only": {
+     "false_accepts": 0,
+     "nonempty": 3,
+     "pos_correct": 3,
+     "pos_total": 8,
+     "unknown_total": 2
+    }
+   }
+  },
+  "V02": {
+   "neardup_only": {
+    "desc_kw": {
+     "false_accepts": 0,
+     "nonempty": 6,
+     "pos_correct": 6,
+     "pos_total": 8,
+     "unknown_total": 2
+    },
+    "desc_only": {
+     "false_accepts": 0,
+     "nonempty": 4,
+     "pos_correct": 4,
+     "pos_total": 8,
+     "unknown_total": 2
+    }
+   },
+   "paraphrase_only": {
+    "desc_kw": {
+     "false_accepts": 0,
+     "nonempty": 3,
+     "pos_correct": 3,
+     "pos_total": 8,
+     "unknown_total": 2
+    },
+    "desc_only": {
+     "false_accepts": 0,
+     "nonempty": 3,
+     "pos_correct": 3,
+     "pos_total": 8,
+     "unknown_total": 2
+    }
+   }
+  },
+  "V03": {
+   "neardup_only": {
+    "desc_kw": {
+     "false_accepts": 0,
+     "nonempty": 6,
+     "pos_correct": 6,
+     "pos_total": 8,
+     "unknown_total": 2
+    },
+    "desc_only": {
+     "false_accepts": 0,
+     "nonempty": 4,
+     "pos_correct": 4,
+     "pos_total": 8,
+     "unknown_total": 2
+    }
+   },
+   "paraphrase_only": {
+    "desc_kw": {
+     "false_accepts": 0,
+     "nonempty": 4,
+     "pos_correct": 4,
+     "pos_total": 8,
+     "unknown_total": 2
+    },
+    "desc_only": {
+     "false_accepts": 0,
+     "nonempty": 4,
+     "pos_correct": 4,
+     "pos_total": 8,
+     "unknown_total": 2
+    }
+   }
+  },
+  "V10": {
+   "neardup_only": {
+    "desc_kw": {
+     "false_accepts": 0,
+     "nonempty": 6,
+     "pos_correct": 6,
+     "pos_total": 8,
+     "unknown_total": 2
+    },
+    "desc_only": {
+     "false_accepts": 0,
+     "nonempty": 4,
+     "pos_correct": 4,
+     "pos_total": 8,
+     "unknown_total": 2
+    }
+   },
+   "paraphrase_only": {
+    "desc_kw": {
+     "false_accepts": 0,
+     "nonempty": 2,
+     "pos_correct": 2,
+     "pos_total": 8,
+     "unknown_total": 2
+    },
+    "desc_only": {
+     "false_accepts": 0,
+     "nonempty": 2,
+     "pos_correct": 2,
+     "pos_total": 8,
+     "unknown_total": 2
+    }
+   }
+  },
+  "V11": {
+   "neardup_only": {
+    "desc_kw": {
+     "false_accepts": 0,
+     "nonempty": 6,
+     "pos_correct": 6,
+     "pos_total": 8,
+     "unknown_total": 2
+    },
+    "desc_only": {
+     "false_accepts": 0,
+     "nonempty": 4,
+     "pos_correct": 4,
+     "pos_total": 8,
+     "unknown_total": 2
+    }
+   },
+   "paraphrase_only": {
+    "desc_kw": {
+     "false_accepts": 0,
+     "nonempty": 3,
+     "pos_correct": 3,
+     "pos_total": 8,
+     "unknown_total": 2
+    },
+    "desc_only": {
+     "false_accepts": 0,
+     "nonempty": 3,
+     "pos_correct": 3,
+     "pos_total": 8,
+     "unknown_total": 2
+    }
+   }
+  },
+  "V20": {
+   "neardup_only": {
+    "desc_kw": {
+     "false_accepts": 0,
+     "nonempty": 6,
+     "pos_correct": 6,
+     "pos_total": 8,
+     "unknown_total": 2
+    },
+    "desc_only": {
+     "false_accepts": 0,
+     "nonempty": 4,
+     "pos_correct": 4,
+     "pos_total": 8,
+     "unknown_total": 2
+    }
+   },
+   "paraphrase_only": {
+    "desc_kw": {
+     "false_accepts": 0,
+     "nonempty": 2,
+     "pos_correct": 2,
+     "pos_total": 8,
+     "unknown_total": 2
+    },
+    "desc_only": {
+     "false_accepts": 0,
+     "nonempty": 2,
+     "pos_correct": 2,
+     "pos_total": 8,
+     "unknown_total": 2
+    }
+   }
+  },
+  "V21": {
+   "neardup_only": {
+    "desc_kw": {
+     "false_accepts": 0,
+     "nonempty": 6,
+     "pos_correct": 6,
+     "pos_total": 8,
+     "unknown_total": 2
+    },
+    "desc_only": {
+     "false_accepts": 0,
+     "nonempty": 4,
+     "pos_correct": 4,
+     "pos_total": 8,
+     "unknown_total": 2
+    }
+   },
+   "paraphrase_only": {
+    "desc_kw": {
+     "false_accepts": 0,
+     "nonempty": 3,
+     "pos_correct": 3,
+     "pos_total": 8,
+     "unknown_total": 2
+    },
+    "desc_only": {
+     "false_accepts": 0,
+     "nonempty": 3,
+     "pos_correct": 3,
+     "pos_total": 8,
+     "unknown_total": 2
+    }
+   }
+  },
+  "V30": {
+   "neardup_only": {
+    "desc_kw": {
+     "false_accepts": 0,
+     "nonempty": 6,
+     "pos_correct": 6,
+     "pos_total": 8,
+     "unknown_total": 2
+    },
+    "desc_only": {
+     "false_accepts": 0,
+     "nonempty": 4,
+     "pos_correct": 4,
+     "pos_total": 8,
+     "unknown_total": 2
+    }
+   },
+   "paraphrase_only": {
+    "desc_kw": {
+     "false_accepts": 0,
+     "nonempty": 2,
+     "pos_correct": 2,
+     "pos_total": 8,
+     "unknown_total": 2
+    },
+    "desc_only": {
+     "false_accepts": 0,
+     "nonempty": 2,
+     "pos_correct": 2,
+     "pos_total": 8,
+     "unknown_total": 2
+    }
+   }
+  },
+  "V31": {
+   "neardup_only": {
+    "desc_kw": {
+     "false_accepts": 0,
+     "nonempty": 6,
+     "pos_correct": 6,
+     "pos_total": 8,
+     "unknown_total": 2
+    },
+    "desc_only": {
+     "false_accepts": 0,
+     "nonempty": 6,
+     "pos_correct": 6,
+     "pos_total": 8,
+     "unknown_total": 2
+    }
+   },
+   "paraphrase_only": {
+    "desc_kw": {
+     "false_accepts": 0,
+     "nonempty": 6,
+     "pos_correct": 6,
+     "pos_total": 8,
+     "unknown_total": 2
+    },
+    "desc_only": {
+     "false_accepts": 0,
+     "nonempty": 6,
+     "pos_correct": 6,
+     "pos_total": 8,
+     "unknown_total": 2
+    }
+   }
+  },
+  "V33": {
+   "neardup_only": {
+    "desc_kw": {
+     "false_accepts": 0,
+     "nonempty": 6,
+     "pos_correct": 6,
+     "pos_total": 8,
+     "unknown_total": 2
+    },
+    "desc_only": {
+     "false_accepts": 0,
+     "nonempty": 6,
+     "pos_correct": 6,
+     "pos_total": 8,
+     "unknown_total": 2
+    }
+   },
+   "paraphrase_only": {
+    "desc_kw": {
+     "false_accepts": 0,
+     "nonempty": 6,
+     "pos_correct": 6,
+     "pos_total": 8,
+     "unknown_total": 2
+    },
+    "desc_only": {
+     "false_accepts": 0,
+     "nonempty": 6,
+     "pos_correct": 6,
+     "pos_total": 8,
+     "unknown_total": 2
+    }
+   }
+  },
+  "V40": {
+   "neardup_only": {
+    "desc_kw": {
+     "false_accepts": 0,
+     "nonempty": 6,
+     "pos_correct": 6,
+     "pos_total": 8,
+     "unknown_total": 2
+    },
+    "desc_only": {
+     "false_accepts": 0,
+     "nonempty": 4,
+     "pos_correct": 4,
+     "pos_total": 8,
+     "unknown_total": 2
+    }
+   },
+   "paraphrase_only": {
+    "desc_kw": {
+     "false_accepts": 0,
+     "nonempty": 2,
+     "pos_correct": 2,
+     "pos_total": 8,
+     "unknown_total": 2
+    },
+    "desc_only": {
+     "false_accepts": 0,
+     "nonempty": 2,
+     "pos_correct": 2,
+     "pos_total": 8,
+     "unknown_total": 2
+    }
+   }
+  },
+  "V41": {
+   "neardup_only": {
+    "desc_kw": {
+     "false_accepts": 0,
+     "nonempty": 6,
+     "pos_correct": 6,
+     "pos_total": 8,
+     "unknown_total": 2
+    },
+    "desc_only": {
+     "false_accepts": 0,
+     "nonempty": 4,
+     "pos_correct": 4,
+     "pos_total": 8,
+     "unknown_total": 2
+    }
+   },
+   "paraphrase_only": {
+    "desc_kw": {
+     "false_accepts": 0,
+     "nonempty": 3,
+     "pos_correct": 3,
+     "pos_total": 8,
+     "unknown_total": 2
+    },
+    "desc_only": {
+     "false_accepts": 0,
+     "nonempty": 3,
+     "pos_correct": 3,
+     "pos_total": 8,
+     "unknown_total": 2
+    }
+   }
+  }
+ },
+ "ts_anchor": "post-prereg-commit-63768c9+amendment-A1",
+ "v00_reproduction_check": {
+  "diffs": [],
+  "match": true,
+  "n_compared": 20
+ }
+}

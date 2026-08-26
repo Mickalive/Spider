@@ -1,0 +1,65 @@
+{
+ "capsule_id": "runtime/form-login-procedure-wb@v2",
+ "effect_host_evidence_join": {
+  "effect_witnessed_hosts": [
+   "quotes.toscrape.com"
+  ],
+  "join_table": {
+   "4e4e6f399386e6be5ef06b44713ee0b51606adafeef0772e8311807567af45da": {
+    "effect_hosts": [
+     "quotes.toscrape.com"
+    ],
+    "task_id": "RT2-T2-quotes-login-wrongcontext"
+   },
+   "601c32597569558e278a0a11c5305dba09d2eb83f15ccfe4d845ed307aab9c3a": {
+    "effect_hosts": [
+     "quotes.toscrape.com"
+    ],
+    "task_id": "RT2-T2-quotes-login-wrongcontext"
+   },
+   "844b16f9c4aa7f655145b6d060a256bd50ed2ca7087835ac4ff59b055f909baa": {
+    "effect_hosts": [
+     "quotes.toscrape.com"
+    ],
+    "task_id": "RT2-T1-quotes-login"
+   },
+   "8bce89a190a9bd027066f483a574d50d5baad43ae60a237ded0aeebd6358b10d": {
+    "effect_hosts": [
+     "quotes.toscrape.com"
+    ],
+    "task_id": "RT2-T1-quotes-login"
+   },
+   "d1c7bc11e5c0e3b02e1dd7d20ea6dea989157bfe839ac1b8c470efca3d42a937": {
+    "effect_hosts": [
+     "quotes.toscrape.com"
+    ],
+    "task_id": "RT2-T3-nearrepeat-page10"
+   },
+   "e67953fc2b0aad802147da2f9782da788b2e0d4b3b03e98dbc5ebe9466d48610": {
+    "effect_hosts": [
+     "quotes.toscrape.com"
+    ],
+    "task_id": "RT2-T3-nearrepeat-taglove"
+   }
+  },
+  "observed_entry_hosts": [
+   "books.toscrape.com",
+   "quotes.toscrape.com"
+  ],
+  "rule": "rows where arm=='spider' AND success AND cell_task==observation.task_id -> host(final_url)",
+  "source": "results/runtime/pilot2/pilot_results.json"
+ },
+ "known_open_failure_mode": "already-authenticated caller finds no login anchor -> applicability fail -> ABSTAIN instead of satisfied-goal short-circuit (unresolved; scoped out this cycle)",
+ "parent_capsule_id": "runtime/form-login-procedure@v1",
+ "parent_content_sha256": "5229b6b52b3363c2b620cf5830863719932bf390acde7ea79deda389ca2c89eb",
+ "persisted_content_sha256": "f14ab94a15bb02ce87c0bfa63bee40414ef5ff6c15b5d679ce67ed918f675ac6",
+ "replaces": "runtime/form-login-procedure-wb@v1",
+ "replaces_content_sha256": "36d44058d466ff01d58e8b6a690a4e5b0d2dbf5277e1110056e091a8a310f328",
+ "tier_note": "derivation NEVER upgrades the evidence tier; status stays CANDIDATE; unmeasured fields null",
+ "v1_schema_candidates": [
+  "populated free-object arrays (negative_knowledge) rejected by additive checker (R0-2)",
+  "wb precondition semantics: entry-host vs effect-witnessed host (W-C2-2)",
+  "spider.observation/v0 cannot express the EFFECT-witnessed host (this cycle): final_verdict carries no URL; hosts were recoverable only via the external evidence join above"
+ ],
+ "wc22_semantics_pin": "preconditions carry effect-witnessed hosts (+execution-witnessed step-1 affordance); entry-host context belongs in context_signature; re-derived artifact, v1 untouched"
+}

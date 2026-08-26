@@ -1,0 +1,42 @@
+{
+  "gate": "PASS",
+  "safe_to_integrate": true,
+  "team_id": "frontier-physics-knowledge-volatility",
+  "charter_version": 1,
+  "run_id": 32922379332,
+  "repair_round": 0,
+  "one_shot": true,
+  "audited_snapshot": {
+    "checkout": "/tmp/spider_frontier_team",
+    "head": "5e6b79fe3f5d5be5aa7c243a9d2570b241934d57",
+    "matches_remote_team_attempt": true
+  },
+  "claim_status": "DATA_INSUFFICIENT_NO_SUBSTANTIVE_CLAIM",
+  "verdict_audited": "DATA_INSUFFICIENT",
+  "h1v_status": "UNTESTED",
+  "max_defensible_wording": "One human-authorized one-shot attempt (run 32922379332) of the frontier-physics-knowledge-volatility charter v1 question ended with the frozen-rule verdict DATA_INSUFFICIENT: 0/8 required sites included, 0 closed-window rows collected, and a 51.85% ultimate endpoint-failure rate against the <=15% floor, caused by sustained unavailability of the frozen Wayback CDX source during the attempt window. H1V remains UNTESTED; this cycle supports no claim about Web-knowledge volatility, freshness-model value or characteristic times in either direction.",
+  "required_fixes": [],
+  "verification_performed": [
+    "Charter snapshot byte-compared to /tmp/frontier_charter.json in team namespace and accepted base: identical; run/authority fields match dispatch manifest and workflow.",
+    "Recomputed request-failure rate from data/raw/collection_log.json: 104 attempts, 27 distinct endpoints, 13 ultimately OK / 14 failed = 51.85%; error classes connection-refused/read-timeout; per-endpoint outcomes match report (bbc p1 OK/p2 FAIL; cnn all fail; reuters 4x5000-key listing pages OK -> full 20000-key frame).",
+    "Verified dataset emptiness: dataset_rows.jsonl.gz decompresses to exactly 0 bytes; build_manifest counters zero; included_sites=[]; frozen floors sites>=8 / rows>=1200 / pct-changed>=30% / fold-mins / failure<=15% all fail mechanically -> DATA_INSUFFICIENT is the exact frozen rule-7 verdict; vocabulary matches constitution section 20; single primary verdict.",
+    "Recomputed reuters.com partial data from raw per-URL files: 25 sampled URLs, 20 history requests issued, 8 fetched OK each returning exactly 1 kept capture, 12 request_failed, 5 never fetched -> eligible_urls=0 correct under >=8-capture/730-day eligibility; mechanical exclusion outcome-independent.",
+    "Preregistration integrity via git archaeology: freeze commit 6be63c2 (02:53Z) precedes first collection launch (~03:05Z); freeze->HEAD prereg diff appends only operational amendments 11-19 (sections 1-10 untouched); code diffs correspond exactly to declared amendments; amendment commits 03:05-06:07Z predate final analysis commit 06:56Z; budget arithmetic (~05:27Z relaunch + 85 min ~= 06:52Z) consistent with final commit time.",
+    "Independently reproduced build+analysis twice in a clean copy with same library versions (numpy 2.5.2/scipy 1.18.1/sklearn 1.9.0): analysis_results.json byte-identical across runs and to both committed copies (team namespace and results/frontier canonical); build_manifest.json identical; dataset_rows.jsonl.gz differs only by gzip header mtime bytes with identical empty content.",
+    "Inspected structural short-circuit (amendment 18) control flow: triggers only when closed==[]; cannot mask a non-empty dataset.",
+    "Anti-overlap verified against actual site lists: 22-candidate list has zero intersection with core-lane WP-003B_R2 sites (books.toscrape.com, quotes.toscrape.com, the-internet.herokuapp.com, en.wikipedia.org, news.ycombinator.com, gutenberg.org, openlibrary.org); accepted peer branch lab/frontier/web-physics-volatility-freshness confirmed INITIALIZED with empty evidence_refs at cycle time; nothing pooled.",
+    "One-shot discipline verified in batch directive and workflow (auto_repair=false, auto_continue=false; REVISE in one-shot records fixes and stops); team state one_shot=true, h1v UNTESTED, ledger intentionally empty; no substantive claim anywhere.",
+    "Seed determinism: grep confirms no Python process-randomized hash() seeding; seeds are literal constants matching prereg (20260826/20260827/20260829)."
+  ],
+  "limitations": [
+    "Report prose erratum: '19 history fetches completed' should read 20 history requests issued, 8 completed successfully, 12 request-failed (authoritative summary/log artifacts are correct; eligible=0 either way).",
+    "collection_log.json entries carry no timestamps although PROVENANCE_MAP claims per-request times; outage-duration narrative rests on git commit bracketing plus ephemeral watcher/quarantine logs outside the repo (not inspectable now).",
+    "PROVENANCE_MAP operational_amendments_pre_outcome lists [11..15], stale vs prereg section 0b (11-19).",
+    "frame_tables.json n_selected=20 counts only fetched URLs while collection_summary lists 25 selected (5 unfetched remain plain strings): table label ambiguous.",
+    "Freeze-time prereg text/instrument divergence disclosed in amendment 12: prereg section 2.2 parenthetical says matchType=host&limit=1500 while the operative instrument used matchType=domain (later limit=5000); frame population differs from frozen text; must be aligned before any reuse/re-charter. No effect on this cycle's empty-dataset verdict.",
+    "Synthetic-plumbing validations of guards (amendments 15-18) were performed in /tmp and are not committed; status team-asserted for operational guards.",
+    "CDX responded 200 OK from the audit environment hours after the attempt window; consistent with an episodic outage but the outage itself cannot be independently confirmed beyond the committed failure pattern. The verdict depends only on the proven-empty dataset.",
+    "floors.request_failure_le_15 serialized as null in the structural short-circuit path rather than false (cosmetic)."
+  ],
+  "recommended_cto_action": "Accept integration into lab/frontier/frontier-physics-knowledge-volatility as AUDITED_DURABLE negative/operational knowledge only (DATA_INSUFFICIENT, H1V untested); no promotion to core lanes; treat charter leverage statement as undetermined. If re-chartered: fund a viability pilot first (connectivity hardening or pre-fetched CDX snapshots plus eligibility-yield measurement on 3 sites), require timestamped per-request logging, align prereg text with the operative instrument at freeze. Route the eligibility-yield observation forward as HYPOTHESIS-tier only. WP-006 remains FALSIFIED exactly as audited."
+}

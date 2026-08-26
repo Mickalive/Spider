@@ -1,0 +1,1780 @@
+{
+ "flags": [
+  {
+   "check": "C-REUSE",
+   "level": "OK",
+   "instrument_id": "G-H5",
+   "record_id": "IUL-graph-005",
+   "evidence_ref": "/tmp/spider_graph/state/graph_loop.json",
+   "verbatim_quote": "lanes=['graph']; undisclosed_uses=0"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "G-H5",
+   "record_id": "IUL-graph-005",
+   "evidence_ref": "/tmp/spider_graph/state/graph_loop.json",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "G-H5",
+   "record_id": "IUL-graph-005",
+   "evidence_ref": "/tmp/spider_graph/docs/GRAPH_LEDGER.md",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "G-H5",
+   "record_id": "IUL-graph-005",
+   "evidence_ref": "/tmp/spider_graph/docs/GRAPH_LEDGER.md",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "G-H5",
+   "record_id": "IUL-graph-005",
+   "evidence_ref": "/tmp/spider_graph/results/audit/CYCLE_32900187567_GRAPH_GATE.json",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-SPENTNESS",
+   "level": "HAZARD_SPENT_REUSE",
+   "instrument_id": "G-H5",
+   "record_id": "IUL-graph-005",
+   "evidence_ref": "/tmp/spider_graph/state/graph_loop.json",
+   "verbatim_quote": "ontrol is memory-led ONLY under `frag_v31`. No quantitative V31 or\n  addressing claim licensed anywhere (G-H4 spent-instrument discipline;\n  dry diagnostics are prediction evidence only, non-gating).\n- **Baseline limits*"
+  },
+  {
+   "check": "C-GATELINEAGE",
+   "level": "HAZARD_INVALID_OR_POWERLESS_INSTRUMENT_LINEAGE",
+   "instrument_id": "G-H6",
+   "record_id": "IUL-graph-006",
+   "evidence_ref": "/tmp/spider_product/docs/PRODUCT_LEDGER.md",
+   "verbatim_quote": "MEASUREMENT_INVALID"
+  },
+  {
+   "check": "C-REUSE",
+   "level": "OK",
+   "instrument_id": "G-H6",
+   "record_id": "IUL-graph-006",
+   "evidence_ref": "/tmp/spider_graph/state/graph_loop.json",
+   "verbatim_quote": "lanes=['graph', 'product']; undisclosed_uses=0"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "G-H6",
+   "record_id": "IUL-graph-006",
+   "evidence_ref": "/tmp/spider_graph/docs/GRAPH_LEDGER.md",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "HAZARD_POST_ADAPTATION_DISCLOSED",
+   "instrument_id": "G-H6",
+   "record_id": "IUL-graph-006",
+   "evidence_ref": "/tmp/spider_product/docs/PRODUCT_LEDGER.md",
+   "verbatim_quote": " feared mount-only copies were not lost \u2014\n  `/tmp/spider_beta_architect` and `/tmp/spider_beta_builder` are gone, but the v4+v5\n  amendment line (`ddce3a3`) and Builder WP-8 line (`7657565`) are durably pushed on\n  `origin/cycle/product/32886859788/{architect,"
+  },
+  {
+   "check": "C-SPENTNESS",
+   "level": "HAZARD_SPENT_REUSE",
+   "instrument_id": "G-H6",
+   "record_id": "IUL-graph-006",
+   "evidence_ref": "/tmp/spider_graph/state/graph_loop.json",
+   "verbatim_quote": "inventories**:\n  `giter_v31` qualify_count=0 again. No quantitative V31/addressing claim\n  licensed anywhere (spent-instrument discipline; dry diagnostics are\n  prediction evidence only).\n- **P1 amendment history is part"
+  },
+  {
+   "check": "C-GATELINEAGE",
+   "level": "HAZARD_INVALID_OR_POWERLESS_INSTRUMENT_LINEAGE",
+   "instrument_id": "G-H3",
+   "record_id": "IUL-graph-003",
+   "evidence_ref": "/tmp/spider_product/docs/PRODUCT_LEDGER.md",
+   "verbatim_quote": "by construction"
+  },
+  {
+   "check": "C-REUSE",
+   "level": "OK",
+   "instrument_id": "G-H3",
+   "record_id": "IUL-graph-003",
+   "evidence_ref": "/tmp/spider_graph/state/graph_loop.json",
+   "verbatim_quote": "lanes=['graph', 'product']; undisclosed_uses=0"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "G-H3",
+   "record_id": "IUL-graph-003",
+   "evidence_ref": "/tmp/spider_graph/docs/GRAPH_LEDGER.md",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "G-H3",
+   "record_id": "IUL-graph-003",
+   "evidence_ref": "/tmp/spider_graph/results/audit/CYCLE_32776369696_GRAPH_GATE.json",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-COMPARABILITY",
+   "level": "HAZARD_COMPARABILITY_RISK",
+   "instrument_id": "G-H3",
+   "record_id": "IUL-graph-003",
+   "evidence_ref": "/tmp/spider_graph/state/graph_loop.json",
+   "verbatim_quote": "quantitative claims across lanes/uses; scope fields UNKNOWN"
+  },
+  {
+   "check": "C-SPENTNESS",
+   "level": "HAZARD_SPENT_REUSE",
+   "instrument_id": "G-H3",
+   "record_id": "IUL-graph-003",
+   "evidence_ref": "/tmp/spider_graph/state/graph_loop.json",
+   "verbatim_quote": "phiter 0/4 exploration vs static edge replay 0/4, bounce pathology ~69 actions/row). BINDING LIMITS: 6/8 is a selection-on-instrument decision outcome (fresh set SPENT; third instrument required for any quantitative V31 "
+  },
+  {
+   "check": "C-REUSE",
+   "level": "OK",
+   "instrument_id": "graph-inheritance-generalization",
+   "record_id": "IUL-graph-025",
+   "evidence_ref": "/tmp/spider_graph/state/graph_loop.json",
+   "verbatim_quote": "lanes=['graph']; undisclosed_uses=0"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "graph-inheritance-generalization",
+   "record_id": "IUL-graph-025",
+   "evidence_ref": "/tmp/spider_graph/results/audit/CYCLE_32900187567_GRAPH_GATE.json",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-SPENTNESS",
+   "level": "HAZARD_SPENT_REUSE",
+   "instrument_id": "graph-inheritance-generalization",
+   "record_id": "IUL-graph-025",
+   "evidence_ref": "/tmp/spider_graph/state/graph_loop.json",
+   "verbatim_quote": "inventories**:\n  `giter_v31` qualify_count=0 again. No quantitative V31/addressing claim\n  licensed anywhere (spent-instrument discipline; dry diagnostics are\n  prediction evidence only).\n- **P1 amendment history is part"
+  },
+  {
+   "check": "C-GATELINEAGE",
+   "level": "HAZARD_INVALID_OR_POWERLESS_INSTRUMENT_LINEAGE",
+   "instrument_id": "graph-addressing-fused-retrieval",
+   "record_id": "IUL-graph-018",
+   "evidence_ref": "/tmp/spider_product/docs/PRODUCT_LEDGER.md",
+   "verbatim_quote": "MEASUREMENT_INVALID"
+  },
+  {
+   "check": "C-REUSE",
+   "level": "OK",
+   "instrument_id": "graph-addressing-fused-retrieval",
+   "record_id": "IUL-graph-018",
+   "evidence_ref": "/tmp/spider_graph/state/graph_loop.json",
+   "verbatim_quote": "lanes=['graph', 'product']; undisclosed_uses=0"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "HAZARD_POST_ADAPTATION_DISCLOSED",
+   "instrument_id": "graph-addressing-fused-retrieval",
+   "record_id": "IUL-graph-018",
+   "evidence_ref": "/tmp/spider_graph/state/graph_loop.json",
+   "verbatim_quote": "s a SITE-BOUND result completes the program WITHOUT automatic succession. Audit gate PASS with required_fixes=[] after same-cycle repair of round-1 documentation-only REVISE RF-D1..RF-D5 (rejected snapshot a8fc785 preserved); Director verification on the merge"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "graph-addressing-fused-retrieval",
+   "record_id": "IUL-graph-018",
+   "evidence_ref": "/tmp/spider_graph/docs/GRAPH_LEDGER.md",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-SPENTNESS",
+   "level": "HAZARD_SPENT_REUSE",
+   "instrument_id": "graph-addressing-fused-retrieval",
+   "record_id": "IUL-graph-018",
+   "evidence_ref": "/tmp/spider_graph/state/graph_loop.json",
+   "verbatim_quote": "EASUREMENT_INVALID on multi-host/staleness program; instrument\n  defects, nothing established either way; ONE capped instrumentation-restoration attempt\n  remains. Dispositions unchanged on the merits; PH-2 unlock (1) ep"
+  },
+  {
+   "check": "C-GATELINEAGE",
+   "level": "HAZARD_INVALID_OR_POWERLESS_INSTRUMENT_LINEAGE",
+   "instrument_id": "graph-arm-V31",
+   "record_id": "IUL-graph-021",
+   "evidence_ref": "/tmp/spider_product/docs/PRODUCT_LEDGER.md",
+   "verbatim_quote": "by construction"
+  },
+  {
+   "check": "C-GATELINEAGE",
+   "level": "HAZARD_INVALID_OR_POWERLESS_INSTRUMENT_LINEAGE",
+   "instrument_id": "graph-arm-V31",
+   "record_id": "IUL-graph-021",
+   "evidence_ref": "/tmp/spider_product/docs/PRODUCT_LEDGER.md",
+   "verbatim_quote": "MEASUREMENT_INVALID"
+  },
+  {
+   "check": "C-REUSE",
+   "level": "OK",
+   "instrument_id": "graph-arm-V31",
+   "record_id": "IUL-graph-021",
+   "evidence_ref": "/tmp/spider_graph/state/graph_loop.json",
+   "verbatim_quote": "lanes=['graph', 'product']; undisclosed_uses=0"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "graph-arm-V31",
+   "record_id": "IUL-graph-021",
+   "evidence_ref": "/tmp/spider_graph/docs/GRAPH_LEDGER.md",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "graph-arm-V31",
+   "record_id": "IUL-graph-021",
+   "evidence_ref": "/tmp/spider_graph/docs/GRAPH_LEDGER.md",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "HAZARD_POST_ADAPTATION_DISCLOSED",
+   "instrument_id": "graph-arm-V31",
+   "record_id": "IUL-graph-021",
+   "evidence_ref": "/tmp/spider_graph/docs/GRAPH_LEDGER.md",
+   "verbatim_quote": "ve V31/addressing claim\n  licensed anywhere (spent-instrument discipline; dry diagnostics are\n  prediction evidence only).\n- **P1 amendment history is part of the record**: attempt-1 aborted\n  (producer task-design slip, stop rule declined as false with ration"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "graph-arm-V31",
+   "record_id": "IUL-graph-021",
+   "evidence_ref": "/tmp/spider_graph/docs/GRAPH_LEDGER.md",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "HAZARD_POST_ADAPTATION_DISCLOSED",
+   "instrument_id": "graph-arm-V31",
+   "record_id": "IUL-graph-021",
+   "evidence_ref": "/tmp/spider_graph/results/audit/CYCLE_32783797303_GRAPH_GATE.json",
+   "verbatim_quote": "omes); post-first-live-row diffs are driver-configuration-only as disclosed. Amendment A1 premise verified from the dump (all fragments success_count==1, monotonic ids) and empirically validated by the V00 byte gate. Pilot driver-defect batch verified non-blin"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "graph-arm-V31",
+   "record_id": "IUL-graph-021",
+   "evidence_ref": "/tmp/spider_graph/results/audit/CYCLE_32783797303_GRAPH_GATE.json",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "graph-arm-V31",
+   "record_id": "IUL-graph-021",
+   "evidence_ref": "/tmp/spider_graph/results/audit/CYCLE_32783797303_GRAPH_GATE.json",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "graph-arm-V31",
+   "record_id": "IUL-graph-021",
+   "evidence_ref": "/tmp/spider_graph/results/audit/CYCLE_32861557668_GRAPH_GATE.json",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "HAZARD_POST_ADAPTATION_DISCLOSED",
+   "instrument_id": "graph-arm-V31",
+   "record_id": "IUL-graph-021",
+   "evidence_ref": "/tmp/spider_graph/results/audit/CYCLE_32861557668_GRAPH_GATE.json",
+   "verbatim_quote": "or reconstruction that matches the auditor's own derivation, G3 boundary clause rerun 15/15). Repair diff is additive on frozen artifacts; freeze-timing chain holds (mechanism code precedes both live launches; dry diagnostics precede first live row; only analy"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "HAZARD_POST_ADAPTATION_DISCLOSED",
+   "instrument_id": "graph-arm-V31",
+   "record_id": "IUL-graph-021",
+   "evidence_ref": "/tmp/spider_product/docs/PRODUCT_LEDGER.md",
+   "verbatim_quote": "esent, internally consistent (producers 8/8; B2 4/4 replay-clean) |\n\nTwo defects found by the Builder, both disclosed rather than repaired\nunilaterally:\n\n1. **BF-2 (environment)**: no authenticated LLM backbone endpoint is\n   configured (`PB_LLM_API_KEY`/`PB_L"
+  },
+  {
+   "check": "C-COMPARABILITY",
+   "level": "HAZARD_COMPARABILITY_RISK",
+   "instrument_id": "graph-arm-V31",
+   "record_id": "IUL-graph-021",
+   "evidence_ref": "/tmp/spider_graph/state/graph_loop.json",
+   "verbatim_quote": "quantitative claims across lanes/uses; scope fields UNKNOWN"
+  },
+  {
+   "check": "C-SPENTNESS",
+   "level": "HAZARD_SPENT_REUSE",
+   "instrument_id": "graph-arm-V31",
+   "record_id": "IUL-graph-021",
+   "evidence_ref": "/tmp/spider_graph/state/graph_loop.json",
+   "verbatim_quote": "ontrol is memory-led ONLY under `frag_v31`. No quantitative V31 or\n  addressing claim licensed anywhere (G-H4 spent-instrument discipline;\n  dry diagnostics are prediction evidence only, non-gating).\n- **Baseline limits*"
+  },
+  {
+   "check": "C-REUSE",
+   "level": "OK",
+   "instrument_id": "graph-arm-frag_legacy",
+   "record_id": "IUL-graph-022",
+   "evidence_ref": "/tmp/spider_graph/state/graph_loop.json",
+   "verbatim_quote": "lanes=['graph']; undisclosed_uses=0"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "graph-arm-frag_legacy",
+   "record_id": "IUL-graph-022",
+   "evidence_ref": "/tmp/spider_graph/results/audit/CYCLE_32861557668_GRAPH_GATE.json",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-SPENTNESS",
+   "level": "HAZARD_SPENT_REUSE",
+   "instrument_id": "graph-arm-frag_legacy",
+   "record_id": "IUL-graph-022",
+   "evidence_ref": "/tmp/spider_graph/state/graph_loop.json",
+   "verbatim_quote": "ontrol is memory-led ONLY under `frag_v31`. No quantitative V31 or\n  addressing claim licensed anywhere (G-H4 spent-instrument discipline;\n  dry diagnostics are prediction evidence only, non-gating).\n- **Baseline limits*"
+  },
+  {
+   "check": "C-GATELINEAGE",
+   "level": "HAZARD_INVALID_OR_POWERLESS_INSTRUMENT_LINEAGE",
+   "instrument_id": "graph-arm-giter_v31",
+   "record_id": "IUL-graph-024",
+   "evidence_ref": "/tmp/spider_product/docs/PRODUCT_LEDGER.md",
+   "verbatim_quote": "MEASUREMENT_INVALID"
+  },
+  {
+   "check": "C-REUSE",
+   "level": "OK",
+   "instrument_id": "graph-arm-giter_v31",
+   "record_id": "IUL-graph-024",
+   "evidence_ref": "/tmp/spider_graph/state/graph_loop.json",
+   "verbatim_quote": "lanes=['graph', 'product']; undisclosed_uses=0"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "HAZARD_POST_ADAPTATION_DISCLOSED",
+   "instrument_id": "graph-arm-giter_v31",
+   "record_id": "IUL-graph-024",
+   "evidence_ref": "/tmp/spider_graph/docs/GRAPH_LEDGER.md",
+   "verbatim_quote": "ve V31/addressing claim\n  licensed anywhere (spent-instrument discipline; dry diagnostics are\n  prediction evidence only).\n- **P1 amendment history is part of the record**: attempt-1 aborted\n  (producer task-design slip, stop rule declined as false with ration"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "graph-arm-giter_v31",
+   "record_id": "IUL-graph-024",
+   "evidence_ref": "/tmp/spider_graph/results/audit/CYCLE_32861557668_GRAPH_GATE.json",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "HAZARD_POST_ADAPTATION_DISCLOSED",
+   "instrument_id": "graph-arm-giter_v31",
+   "record_id": "IUL-graph-024",
+   "evidence_ref": "/tmp/spider_graph/results/audit/CYCLE_32861557668_GRAPH_GATE.json",
+   "verbatim_quote": "acuously from deterministic end-vector reconstruction that matches the auditor's own derivation, G3 boundary clause rerun 15/15). Repair diff is additive on frozen artifacts; freeze-timing chain holds (mechanism code precedes both live launches; dry diagnostic"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "graph-arm-giter_v31",
+   "record_id": "IUL-graph-024",
+   "evidence_ref": "/tmp/spider_product/docs/PRODUCT_LEDGER.md",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-COMPARABILITY",
+   "level": "HAZARD_COMPARABILITY_RISK",
+   "instrument_id": "graph-arm-giter_v31",
+   "record_id": "IUL-graph-024",
+   "evidence_ref": "/tmp/spider_graph/state/graph_loop.json",
+   "verbatim_quote": "quantitative claims across lanes/uses; scope fields UNKNOWN"
+  },
+  {
+   "check": "C-SPENTNESS",
+   "level": "HAZARD_SPENT_REUSE",
+   "instrument_id": "graph-arm-giter_v31",
+   "record_id": "IUL-graph-024",
+   "evidence_ref": "/tmp/spider_graph/state/graph_loop.json",
+   "verbatim_quote": "ontrol is memory-led ONLY under `frag_v31`. No quantitative V31 or\n  addressing claim licensed anywhere (G-H4 spent-instrument discipline;\n  dry diagnostics are prediction evidence only, non-gating).\n- **Baseline limits*"
+  },
+  {
+   "check": "C-REUSE",
+   "level": "OK",
+   "instrument_id": "graph-arm-giter_legacy",
+   "record_id": "IUL-graph-023",
+   "evidence_ref": "/tmp/spider_graph/state/graph_loop.json",
+   "verbatim_quote": "lanes=['graph']; undisclosed_uses=0"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "graph-arm-giter_legacy",
+   "record_id": "IUL-graph-023",
+   "evidence_ref": "/tmp/spider_graph/results/audit/CYCLE_32861557668_GRAPH_GATE.json",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-SPENTNESS",
+   "level": "HAZARD_SPENT_REUSE",
+   "instrument_id": "graph-arm-giter_legacy",
+   "record_id": "IUL-graph-023",
+   "evidence_ref": "/tmp/spider_graph/state/graph_loop.json",
+   "verbatim_quote": "ontrol is memory-led ONLY under `frag_v31`. No quantitative V31 or\n  addressing claim licensed anywhere (G-H4 spent-instrument discipline;\n  dry diagnostics are prediction evidence only, non-gating).\n- **Baseline limits*"
+  },
+  {
+   "check": "C-GATELINEAGE",
+   "level": "HAZARD_INVALID_OR_POWERLESS_INSTRUMENT_LINEAGE",
+   "instrument_id": "fixture-books-composite",
+   "record_id": "IUL-graph-016",
+   "evidence_ref": "/tmp/spider_product/docs/PRODUCT_LEDGER.md",
+   "verbatim_quote": "by construction"
+  },
+  {
+   "check": "C-GATELINEAGE",
+   "level": "HAZARD_INVALID_OR_POWERLESS_INSTRUMENT_LINEAGE",
+   "instrument_id": "fixture-books-composite",
+   "record_id": "IUL-graph-016",
+   "evidence_ref": "/tmp/spider_product/docs/PRODUCT_LEDGER.md",
+   "verbatim_quote": "MEASUREMENT_INVALID"
+  },
+  {
+   "check": "C-REUSE",
+   "level": "OK",
+   "instrument_id": "fixture-books-composite",
+   "record_id": "IUL-graph-016",
+   "evidence_ref": "/tmp/spider_graph/state/graph_loop.json",
+   "verbatim_quote": "lanes=['graph', 'physics', 'intel', 'product', 'runtime']; undisclosed_uses=0"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "fixture-books-composite",
+   "record_id": "IUL-graph-016",
+   "evidence_ref": "/tmp/spider_graph/docs/GRAPH_LEDGER.md",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "fixture-books-composite",
+   "record_id": "IUL-graph-016",
+   "evidence_ref": "/tmp/spider_graph/results/audit/CYCLE_32776369696_GRAPH_GATE.json",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "HAZARD_POST_ADAPTATION_DISCLOSED",
+   "instrument_id": "fixture-books-composite",
+   "record_id": "IUL-graph-016",
+   "evidence_ref": "/tmp/spider_graph/results/audit/CYCLE_32783797303_GRAPH_GATE.json",
+   "verbatim_quote": "ores 2adbd52 -> live code dfb15ab -> live outcomes); post-first-live-row diffs are driver-configuration-only as disclosed. Amendment A1 premise verified from the dump (all fragments success_count==1, monotonic ids) and empirically validated by the V00 byte gat"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "fixture-books-composite",
+   "record_id": "IUL-graph-016",
+   "evidence_ref": "/tmp/spider_graph/results/audit/CYCLE_32793580374_GRAPH_GATE.json",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "HAZARD_POST_ADAPTATION_DISCLOSED",
+   "instrument_id": "fixture-books-composite",
+   "record_id": "IUL-graph-016",
+   "evidence_ref": "/tmp/spider_graph/results/audit/CYCLE_32861557668_GRAPH_GATE.json",
+   "verbatim_quote": "acuously from deterministic end-vector reconstruction that matches the auditor's own derivation, G3 boundary clause rerun 15/15). Repair diff is additive on frozen artifacts; freeze-timing chain holds (mechanism code precedes both live launches; dry diagnostic"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "fixture-books-composite",
+   "record_id": "IUL-graph-016",
+   "evidence_ref": "/tmp/spider_graph/results/audit/CYCLE_32900187567_GRAPH_GATE.json",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "fixture-books-composite",
+   "record_id": "IUL-graph-016",
+   "evidence_ref": "/tmp/spider_intel/docs/INTEL_LEDGER.md",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "fixture-books-composite",
+   "record_id": "IUL-graph-016",
+   "evidence_ref": "/tmp/spider_intel/docs/INTEL_LEDGER.md",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "fixture-books-composite",
+   "record_id": "IUL-graph-016",
+   "evidence_ref": "/tmp/spider_product/docs/PRODUCT_LEDGER.md",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "HAZARD_POST_ADAPTATION_DISCLOSED",
+   "instrument_id": "fixture-books-composite",
+   "record_id": "IUL-graph-016",
+   "evidence_ref": "/tmp/spider_product/docs/PRODUCT_LEDGER.md",
+   "verbatim_quote": "/32886859788/{architect,builder}`. All five recovery hashes\n  re-verified byte-exact, including the **disclosed** dress-rehearsal supersession:\n  MANIFEST `v4_builder_wp8.verification.dress_rehearsal_rerun` records record\n  `02dddfaa\u2026` superseding `823dedea\u2026` "
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "HAZARD_POST_ADAPTATION_DISCLOSED",
+   "instrument_id": "fixture-books-composite",
+   "record_id": "IUL-graph-016",
+   "evidence_ref": "/tmp/spider_runtime/results/audit/CYCLE_32908002333_RUNTIME_GATE.json",
+   "verbatim_quote": "st semantics before any wb capsule is trusted.\"},\n    {\"id\": \"W-C2-3\", \"severity\": \"medium\", \"binding\": \"next_cycle\", \"finding\": \"Repaired gate code (ref-set _harness_verdict) exists only IN the outcomes commit; the all-TRUE headline rests on post-outcome reco"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "HAZARD_POST_ADAPTATION_DISCLOSED",
+   "instrument_id": "fixture-books-composite",
+   "record_id": "IUL-graph-016",
+   "evidence_ref": "/tmp/spider_runtime/results/audit/CYCLE_32908002333_RUNTIME_GATE.json",
+   "verbatim_quote": "st semantics before any wb capsule is trusted.\"},\n    {\"id\": \"W-C2-3\", \"severity\": \"medium\", \"binding\": \"next_cycle\", \"finding\": \"Repaired gate code (ref-set _harness_verdict) exists only IN the outcomes commit; the all-TRUE headline rests on post-outcome reco"
+  },
+  {
+   "check": "C-COMPARABILITY",
+   "level": "HAZARD_COMPARABILITY_RISK",
+   "instrument_id": "fixture-books-composite",
+   "record_id": "IUL-graph-016",
+   "evidence_ref": "/tmp/spider_graph/state/graph_loop.json",
+   "verbatim_quote": "quantitative claims across lanes/uses; scope fields UNKNOWN"
+  },
+  {
+   "check": "C-SPENTNESS",
+   "level": "HAZARD_SPENT_REUSE",
+   "instrument_id": "fixture-books-composite",
+   "record_id": "IUL-graph-016",
+   "evidence_ref": "/tmp/spider_graph/state/graph_loop.json",
+   "verbatim_quote": "ontrol is memory-led ONLY under `frag_v31`. No quantitative V31 or\n  addressing claim licensed anywhere (G-H4 spent-instrument discipline;\n  dry diagnostics are prediction evidence only, non-gating).\n- **Baseline limits*"
+  },
+  {
+   "check": "C-GATELINEAGE",
+   "level": "HAZARD_INVALID_OR_POWERLESS_INSTRUMENT_LINEAGE",
+   "instrument_id": "fixture-quotes-composite",
+   "record_id": "IUL-graph-017",
+   "evidence_ref": "/tmp/spider_graph/docs/GRAPH_LEDGER.md",
+   "verbatim_quote": "MEASUREMENT_INVALID"
+  },
+  {
+   "check": "C-GATELINEAGE",
+   "level": "HAZARD_INVALID_OR_POWERLESS_INSTRUMENT_LINEAGE",
+   "instrument_id": "fixture-quotes-composite",
+   "record_id": "IUL-graph-017",
+   "evidence_ref": "/tmp/spider_product/docs/PRODUCT_LEDGER.md",
+   "verbatim_quote": "MEASUREMENT_INVALID"
+  },
+  {
+   "check": "C-REUSE",
+   "level": "OK",
+   "instrument_id": "fixture-quotes-composite",
+   "record_id": "IUL-graph-017",
+   "evidence_ref": "/tmp/spider_graph/state/graph_loop.json",
+   "verbatim_quote": "lanes=['graph', 'physics', 'intel', 'product', 'runtime']; undisclosed_uses=0"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "fixture-quotes-composite",
+   "record_id": "IUL-graph-017",
+   "evidence_ref": "/tmp/spider_graph/state/graph_loop.json",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "fixture-quotes-composite",
+   "record_id": "IUL-graph-017",
+   "evidence_ref": "/tmp/spider_graph/state/graph_loop.json",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "fixture-quotes-composite",
+   "record_id": "IUL-graph-017",
+   "evidence_ref": "/tmp/spider_graph/docs/GRAPH_LEDGER.md",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "fixture-quotes-composite",
+   "record_id": "IUL-graph-017",
+   "evidence_ref": "/tmp/spider_graph/results/audit/CYCLE_32793580374_GRAPH_GATE.json",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "fixture-quotes-composite",
+   "record_id": "IUL-graph-017",
+   "evidence_ref": "/tmp/spider_graph/results/audit/CYCLE_32793580374_GRAPH_GATE.json",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "fixture-quotes-composite",
+   "record_id": "IUL-graph-017",
+   "evidence_ref": "/tmp/spider_graph/results/audit/CYCLE_32793580374_GRAPH_GATE.json",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "HAZARD_POST_ADAPTATION_DISCLOSED",
+   "instrument_id": "fixture-quotes-composite",
+   "record_id": "IUL-graph-017",
+   "evidence_ref": "/tmp/spider_graph/results/audit/CYCLE_32861557668_GRAPH_GATE.json",
+   "verbatim_quote": "acuously from deterministic end-vector reconstruction that matches the auditor's own derivation, G3 boundary clause rerun 15/15). Repair diff is additive on frozen artifacts; freeze-timing chain holds (mechanism code precedes both live launches; dry diagnostic"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "fixture-quotes-composite",
+   "record_id": "IUL-graph-017",
+   "evidence_ref": "/tmp/spider_graph/results/audit/CYCLE_32900187567_GRAPH_GATE.json",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "fixture-quotes-composite",
+   "record_id": "IUL-graph-017",
+   "evidence_ref": "/tmp/spider_graph/results/audit/CYCLE_32900187567_GRAPH_GATE.json",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "fixture-quotes-composite",
+   "record_id": "IUL-graph-017",
+   "evidence_ref": "/tmp/spider_intel/docs/INTEL_LEDGER.md",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "fixture-quotes-composite",
+   "record_id": "IUL-graph-017",
+   "evidence_ref": "/tmp/spider_intel/docs/INTEL_LEDGER.md",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "fixture-quotes-composite",
+   "record_id": "IUL-graph-017",
+   "evidence_ref": "/tmp/spider_product/docs/PRODUCT_LEDGER.md",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "HAZARD_POST_ADAPTATION_DISCLOSED",
+   "instrument_id": "fixture-quotes-composite",
+   "record_id": "IUL-graph-017",
+   "evidence_ref": "/tmp/spider_product/docs/PRODUCT_LEDGER.md",
+   "verbatim_quote": "es\n  re-verified byte-exact, including the **disclosed** dress-rehearsal supersession:\n  MANIFEST `v4_builder_wp8.verification.dress_rehearsal_rerun` records record\n  `02dddfaa\u2026` superseding `823dedea\u2026` (rerun against WP-8-amended code, green,\n  dead_pairs emp"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "fixture-quotes-composite",
+   "record_id": "IUL-graph-017",
+   "evidence_ref": "/tmp/spider_runtime/results/audit/CYCLE_32908002333_RUNTIME_GATE.json",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "HAZARD_POST_ADAPTATION_DISCLOSED",
+   "instrument_id": "fixture-quotes-composite",
+   "record_id": "IUL-graph-017",
+   "evidence_ref": "/tmp/spider_runtime/results/audit/CYCLE_32908002333_RUNTIME_GATE.json",
+   "verbatim_quote": "st semantics before any wb capsule is trusted.\"},\n    {\"id\": \"W-C2-3\", \"severity\": \"medium\", \"binding\": \"next_cycle\", \"finding\": \"Repaired gate code (ref-set _harness_verdict) exists only IN the outcomes commit; the all-TRUE headline rests on post-outcome reco"
+  },
+  {
+   "check": "C-COMPARABILITY",
+   "level": "HAZARD_COMPARABILITY_RISK",
+   "instrument_id": "fixture-quotes-composite",
+   "record_id": "IUL-graph-017",
+   "evidence_ref": "/tmp/spider_graph/state/graph_loop.json",
+   "verbatim_quote": "quantitative claims across lanes/uses; scope fields UNKNOWN"
+  },
+  {
+   "check": "C-SPENTNESS",
+   "level": "HAZARD_SPENT_REUSE",
+   "instrument_id": "fixture-quotes-composite",
+   "record_id": "IUL-graph-017",
+   "evidence_ref": "/tmp/spider_graph/state/graph_loop.json",
+   "verbatim_quote": "and unsolved.\n- Implemented baselines (single-shot graph-BFS without state revisits or\n  self-loops and depth-capped at 6; verbatim nearest-trajectory replay;\n  cold) solved 0/3 on identical KBs. Replication: statuses/so"
+  },
+  {
+   "check": "C-GATELINEAGE",
+   "level": "HAZARD_INVALID_OR_POWERLESS_INSTRUMENT_LINEAGE",
+   "instrument_id": "SGDR-fused-retrieval",
+   "record_id": "IUL-graph-008",
+   "evidence_ref": "/tmp/spider_product/docs/PRODUCT_LEDGER.md",
+   "verbatim_quote": "MEASUREMENT_INVALID"
+  },
+  {
+   "check": "C-REUSE",
+   "level": "OK",
+   "instrument_id": "SGDR-fused-retrieval",
+   "record_id": "IUL-graph-008",
+   "evidence_ref": "/tmp/spider_graph/state/graph_loop.json",
+   "verbatim_quote": "lanes=['graph', 'intel', 'product']; undisclosed_uses=0"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "HAZARD_POST_ADAPTATION_DISCLOSED",
+   "instrument_id": "SGDR-fused-retrieval",
+   "record_id": "IUL-graph-008",
+   "evidence_ref": "/tmp/spider_graph/state/graph_loop.json",
+   "verbatim_quote": "te PASS with required_fixes=[] after same-cycle repair of round-1 documentation-only REVISE RF-D1..RF-D5 (rejected snapshot a8fc785 preserved); Director verification on the merged tree: raw-row recount matches every load-bearing number, analyzer replay byte-id"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "HAZARD_POST_ADAPTATION_DISCLOSED",
+   "instrument_id": "SGDR-fused-retrieval",
+   "record_id": "IUL-graph-008",
+   "evidence_ref": "/tmp/spider_product/docs/PRODUCT_LEDGER.md",
+   "verbatim_quote": "esent, internally consistent (producers 8/8; B2 4/4 replay-clean) |\n\nTwo defects found by the Builder, both disclosed rather than repaired\nunilaterally:\n\n1. **BF-2 (environment)**: no authenticated LLM backbone endpoint is\n   configured (`PB_LLM_API_KEY`/`PB_L"
+  },
+  {
+   "check": "C-COMPARABILITY",
+   "level": "HAZARD_COMPARABILITY_RISK",
+   "instrument_id": "SGDR-fused-retrieval",
+   "record_id": "IUL-graph-008",
+   "evidence_ref": "/tmp/spider_graph/state/graph_loop.json",
+   "verbatim_quote": "quantitative claims across lanes/uses; scope fields UNKNOWN"
+  },
+  {
+   "check": "C-SPENTNESS",
+   "level": "HAZARD_SPENT_REUSE",
+   "instrument_id": "SGDR-fused-retrieval",
+   "record_id": "IUL-graph-008",
+   "evidence_ref": "/tmp/spider_graph/state/graph_loop.json",
+   "verbatim_quote": "constraints\n\n1. Physics double-negative stands \u21d2 PH-3 stays REJECTED; no predictive feature anywhere.\n2. G-H4 spent-instrument rule stands \u21d2 the beta measures END-TO-END outcomes;\n   no V31 quantitative retrieval-transfe"
+  },
+  {
+   "check": "D3-UNKNOWN-SAFETY",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "SGDR-fused-retrieval",
+   "record_id": "IUL-graph-008",
+   "evidence_ref": "-",
+   "verbatim_quote": "UNKNOWN present; forced review flag"
+  },
+  {
+   "check": "C-GATELINEAGE",
+   "level": "HAZARD_INVALID_OR_POWERLESS_INSTRUMENT_LINEAGE",
+   "instrument_id": "G-H1",
+   "record_id": "IUL-graph-001",
+   "evidence_ref": "/tmp/spider_product/docs/PRODUCT_LEDGER.md",
+   "verbatim_quote": "by construction"
+  },
+  {
+   "check": "C-REUSE",
+   "level": "HAZARD_REUSE_WITHOUT_DISCLOSURE",
+   "instrument_id": "G-H1",
+   "record_id": "IUL-graph-001",
+   "evidence_ref": "/tmp/spider_graph/docs/GRAPH_LEDGER.md",
+   "verbatim_quote": "lanes=['graph', 'physics', 'intel', 'product', 'runtime']; undisclosed_uses=11"
+  },
+  {
+   "check": "C-SPENTNESS",
+   "level": "HAZARD_SPENT_REUSE",
+   "instrument_id": "G-H1",
+   "record_id": "IUL-graph-001",
+   "evidence_ref": "/tmp/spider_graph/docs/GRAPH_LEDGER.md",
+   "verbatim_quote": "phiter 0/4 exploration vs static edge replay 0/4, bounce pathology ~69 actions/row). BINDING LIMITS: 6/8 is a selection-on-instrument decision outcome (fresh set SPENT; third instrument required for any quantitative V31 "
+  },
+  {
+   "check": "D3-UNKNOWN-SAFETY",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "G-H1",
+   "record_id": "IUL-graph-001",
+   "evidence_ref": "-",
+   "verbatim_quote": "UNKNOWN present; forced review flag"
+  },
+  {
+   "check": "C-GATELINEAGE",
+   "level": "HAZARD_INVALID_OR_POWERLESS_INSTRUMENT_LINEAGE",
+   "instrument_id": "G-H2",
+   "record_id": "IUL-graph-002",
+   "evidence_ref": "/tmp/spider_graph/docs/GRAPH_LEDGER.md",
+   "verbatim_quote": "MEASUREMENT_INVALID"
+  },
+  {
+   "check": "C-GATELINEAGE",
+   "level": "HAZARD_INVALID_OR_POWERLESS_INSTRUMENT_LINEAGE",
+   "instrument_id": "G-H2",
+   "record_id": "IUL-graph-002",
+   "evidence_ref": "/tmp/spider_product/docs/PRODUCT_LEDGER.md",
+   "verbatim_quote": "by construction"
+  },
+  {
+   "check": "C-REUSE",
+   "level": "HAZARD_REUSE_WITHOUT_DISCLOSURE",
+   "instrument_id": "G-H2",
+   "record_id": "IUL-graph-002",
+   "evidence_ref": "/tmp/spider_graph/docs/GRAPH_LEDGER.md",
+   "verbatim_quote": "lanes=['graph', 'product']; undisclosed_uses=6"
+  },
+  {
+   "check": "C-SPENTNESS",
+   "level": "HAZARD_SPENT_REUSE",
+   "instrument_id": "G-H2",
+   "record_id": "IUL-graph-002",
+   "evidence_ref": "/tmp/spider_graph/docs/GRAPH_LEDGER.md",
+   "verbatim_quote": "and unsolved.\n- Implemented baselines (single-shot graph-BFS without state revisits or\n  self-loops and depth-capped at 6; verbatim nearest-trajectory replay;\n  cold) solved 0/3 on identical KBs. Replication: statuses/so"
+  },
+  {
+   "check": "D3-UNKNOWN-SAFETY",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "G-H2",
+   "record_id": "IUL-graph-002",
+   "evidence_ref": "-",
+   "verbatim_quote": "UNKNOWN present; forced review flag"
+  },
+  {
+   "check": "C-GATELINEAGE",
+   "level": "HAZARD_INVALID_OR_POWERLESS_INSTRUMENT_LINEAGE",
+   "instrument_id": "G-H4",
+   "record_id": "IUL-graph-004",
+   "evidence_ref": "/tmp/spider_product/docs/PRODUCT_LEDGER.md",
+   "verbatim_quote": "by construction"
+  },
+  {
+   "check": "C-REUSE",
+   "level": "OK",
+   "instrument_id": "G-H4",
+   "record_id": "IUL-graph-004",
+   "evidence_ref": "/tmp/spider_graph/docs/GRAPH_LEDGER.md",
+   "verbatim_quote": "lanes=['graph', 'product']; undisclosed_uses=0"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "G-H4",
+   "record_id": "IUL-graph-004",
+   "evidence_ref": "/tmp/spider_graph/docs/GRAPH_LEDGER.md",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "G-H4",
+   "record_id": "IUL-graph-004",
+   "evidence_ref": "/tmp/spider_graph/docs/GRAPH_LEDGER.md",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-SPENTNESS",
+   "level": "HAZARD_SPENT_REUSE",
+   "instrument_id": "G-H4",
+   "record_id": "IUL-graph-004",
+   "evidence_ref": "/tmp/spider_graph/docs/GRAPH_LEDGER.md",
+   "verbatim_quote": "ontrol is memory-led ONLY under `frag_v31`. No quantitative V31 or\n  addressing claim licensed anywhere (G-H4 spent-instrument discipline;\n  dry diagnostics are prediction evidence only, non-gating).\n- **Baseline limits*"
+  },
+  {
+   "check": "C-REUSE",
+   "level": "OK",
+   "instrument_id": "graph-addressing-robustness",
+   "record_id": "IUL-graph-019",
+   "evidence_ref": "/tmp/spider_graph/docs/GRAPH_LEDGER.md",
+   "verbatim_quote": "lanes=['graph']; undisclosed_uses=0"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "graph-addressing-robustness",
+   "record_id": "IUL-graph-019",
+   "evidence_ref": "/tmp/spider_graph/docs/GRAPH_LEDGER.md",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "graph-addressing-robustness",
+   "record_id": "IUL-graph-019",
+   "evidence_ref": "/tmp/spider_graph/results/audit/CYCLE_32782331702_GRAPH_GATE.json",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-SPENTNESS",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "graph-addressing-robustness",
+   "record_id": "IUL-graph-019",
+   "evidence_ref": "/tmp/spider_graph/docs/GRAPH_LEDGER.md",
+   "verbatim_quote": "spentness not derivable"
+  },
+  {
+   "check": "C-GATELINEAGE",
+   "level": "HAZARD_INVALID_OR_POWERLESS_INSTRUMENT_LINEAGE",
+   "instrument_id": "graph-inheritance-scaling",
+   "record_id": "IUL-graph-026",
+   "evidence_ref": "/tmp/spider_product/docs/PRODUCT_LEDGER.md",
+   "verbatim_quote": "MEASUREMENT_INVALID"
+  },
+  {
+   "check": "C-REUSE",
+   "level": "OK",
+   "instrument_id": "graph-inheritance-scaling",
+   "record_id": "IUL-graph-026",
+   "evidence_ref": "/tmp/spider_graph/docs/GRAPH_LEDGER.md",
+   "verbatim_quote": "lanes=['graph', 'product']; undisclosed_uses=0"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "HAZARD_POST_ADAPTATION_DISCLOSED",
+   "instrument_id": "graph-inheritance-scaling",
+   "record_id": "IUL-graph-026",
+   "evidence_ref": "/tmp/spider_graph/docs/GRAPH_LEDGER.md",
+   "verbatim_quote": "nter` granularity before any\n  latency claim (none is made anywhere in G-H4 evidence).\n\nEvidence: `graph/prereg_robustness.md` (+ Amendment A1),\n`graph/{score_variants.py,select_probes.py,analyze_robustness.py,\nrebuild_store.py,run_robustness_live.py}`, `graph"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "graph-inheritance-scaling",
+   "record_id": "IUL-graph-026",
+   "evidence_ref": "/tmp/spider_graph/docs/GRAPH_LEDGER.md",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "graph-inheritance-scaling",
+   "record_id": "IUL-graph-026",
+   "evidence_ref": "/tmp/spider_graph/results/audit/CYCLE_32861557668_GRAPH_GATE.json",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "graph-inheritance-scaling",
+   "record_id": "IUL-graph-026",
+   "evidence_ref": "/tmp/spider_product/docs/PRODUCT_LEDGER.md",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-SPENTNESS",
+   "level": "HAZARD_SPENT_REUSE",
+   "instrument_id": "graph-inheritance-scaling",
+   "record_id": "IUL-graph-026",
+   "evidence_ref": "/tmp/spider_graph/docs/GRAPH_LEDGER.md",
+   "verbatim_quote": "ontrol is memory-led ONLY under `frag_v31`. No quantitative V31 or\n  addressing claim licensed anywhere (G-H4 spent-instrument discipline;\n  dry diagnostics are prediction evidence only, non-gating).\n- **Baseline limits*"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "HAZARD_POST_ADAPTATION_DISCLOSED",
+   "instrument_id": "paraphrases_confirm_cycle4",
+   "record_id": "IUL-graph-027",
+   "evidence_ref": "/tmp/spider_graph/docs/GRAPH_LEDGER.md",
+   "verbatim_quote": "nter` granularity before any\n  latency claim (none is made anywhere in G-H4 evidence).\n\nEvidence: `graph/prereg_robustness.md` (+ Amendment A1),\n`graph/{score_variants.py,select_probes.py,analyze_robustness.py,\nrebuild_store.py,run_robustness_live.py}`, `graph"
+  },
+  {
+   "check": "C-SPENTNESS",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "paraphrases_confirm_cycle4",
+   "record_id": "IUL-graph-027",
+   "evidence_ref": "/tmp/spider_graph/docs/GRAPH_LEDGER.md",
+   "verbatim_quote": "spentness not derivable"
+  },
+  {
+   "check": "C-GATELINEAGE",
+   "level": "HAZARD_INVALID_OR_POWERLESS_INSTRUMENT_LINEAGE",
+   "instrument_id": "WP-003",
+   "record_id": "IUL-graph-011",
+   "evidence_ref": "/tmp/spider_graph/docs/PHYSICS_LEDGER.md",
+   "verbatim_quote": "MEASUREMENT_INVALID"
+  },
+  {
+   "check": "C-GATELINEAGE",
+   "level": "HAZARD_INVALID_OR_POWERLESS_INSTRUMENT_LINEAGE",
+   "instrument_id": "WP-003",
+   "record_id": "IUL-graph-011",
+   "evidence_ref": "/tmp/spider_physics/docs/PHYSICS_LEDGER.md",
+   "verbatim_quote": "MEASUREMENT_INVALID"
+  },
+  {
+   "check": "C-GATELINEAGE",
+   "level": "HAZARD_INVALID_OR_POWERLESS_INSTRUMENT_LINEAGE",
+   "instrument_id": "WP-003",
+   "record_id": "IUL-graph-011",
+   "evidence_ref": "/tmp/spider_intel/docs/PHYSICS_LEDGER.md",
+   "verbatim_quote": "MEASUREMENT_INVALID"
+  },
+  {
+   "check": "C-GATELINEAGE",
+   "level": "HAZARD_INVALID_OR_POWERLESS_INSTRUMENT_LINEAGE",
+   "instrument_id": "WP-003",
+   "record_id": "IUL-graph-011",
+   "evidence_ref": "/tmp/spider_product/docs/PHYSICS_LEDGER.md",
+   "verbatim_quote": "MEASUREMENT_INVALID"
+  },
+  {
+   "check": "C-GATELINEAGE",
+   "level": "HAZARD_INVALID_OR_POWERLESS_INSTRUMENT_LINEAGE",
+   "instrument_id": "WP-003",
+   "record_id": "IUL-graph-011",
+   "evidence_ref": "/tmp/spider_product/docs/PRODUCT_LEDGER.md",
+   "verbatim_quote": "by construction"
+  },
+  {
+   "check": "C-GATELINEAGE",
+   "level": "HAZARD_INVALID_OR_POWERLESS_INSTRUMENT_LINEAGE",
+   "instrument_id": "WP-003",
+   "record_id": "IUL-graph-011",
+   "evidence_ref": "/tmp/spider_runtime/docs/PHYSICS_LEDGER.md",
+   "verbatim_quote": "MEASUREMENT_INVALID"
+  },
+  {
+   "check": "C-REUSE",
+   "level": "HAZARD_REUSE_WITHOUT_DISCLOSURE",
+   "instrument_id": "WP-003",
+   "record_id": "IUL-graph-011",
+   "evidence_ref": "/tmp/spider_graph/docs/PHYSICS_LEDGER.md",
+   "verbatim_quote": "lanes=['graph', 'physics', 'intel', 'product', 'runtime']; undisclosed_uses=17"
+  },
+  {
+   "check": "C-SPENTNESS",
+   "level": "HAZARD_SPENT_REUSE",
+   "instrument_id": "WP-003",
+   "record_id": "IUL-graph-011",
+   "evidence_ref": "/tmp/spider_graph/docs/PHYSICS_LEDGER.md",
+   "verbatim_quote": " Descriptive: gutenberg's next-state classes are unique to it in-corpus\n  (coverage-0 fold); hackernews walks terminate early on logged-out vote\n  pages (real environment response).\n- Self-audit disclosures: metric-class"
+  },
+  {
+   "check": "D3-UNKNOWN-SAFETY",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "WP-003",
+   "record_id": "IUL-graph-011",
+   "evidence_ref": "-",
+   "verbatim_quote": "UNKNOWN present; forced review flag"
+  },
+  {
+   "check": "C-GATELINEAGE",
+   "level": "HAZARD_INVALID_OR_POWERLESS_INSTRUMENT_LINEAGE",
+   "instrument_id": "WP-004",
+   "record_id": "IUL-graph-012",
+   "evidence_ref": "/tmp/spider_product/docs/PRODUCT_LEDGER.md",
+   "verbatim_quote": "by construction"
+  },
+  {
+   "check": "C-REUSE",
+   "level": "OK",
+   "instrument_id": "WP-004",
+   "record_id": "IUL-graph-012",
+   "evidence_ref": "/tmp/spider_graph/docs/PHYSICS_LEDGER.md",
+   "verbatim_quote": "lanes=['graph', 'physics', 'intel', 'product', 'runtime']; undisclosed_uses=0"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "WP-004",
+   "record_id": "IUL-graph-012",
+   "evidence_ref": "/tmp/spider_physics/results/audit/CYCLE_32676578274_PHYSICS_findings.json",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-SPENTNESS",
+   "level": "HAZARD_SPENT_REUSE",
+   "instrument_id": "WP-004",
+   "record_id": "IUL-graph-012",
+   "evidence_ref": "/tmp/spider_graph/docs/PHYSICS_LEDGER.md",
+   "verbatim_quote": "TOR DECISION: the pre-declared program stop condition is ENGAGED \u2014\n  WP-006 H-ID FALSIFIED \u21d2 the Physics lane TERMINATES;\n  `state/physics_loop.json` set to `program_status=TERMINATE_LANE`,\n  continue=false, no successor"
+  },
+  {
+   "check": "C-REUSE",
+   "level": "HAZARD_REUSE_WITHOUT_DISCLOSURE",
+   "instrument_id": "WP-001",
+   "record_id": "IUL-graph-009",
+   "evidence_ref": "/tmp/spider_graph/docs/PHYSICS_LEDGER.md",
+   "verbatim_quote": "lanes=['graph', 'physics', 'intel', 'product', 'runtime']; undisclosed_uses=5"
+  },
+  {
+   "check": "C-SPENTNESS",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "WP-001",
+   "record_id": "IUL-graph-009",
+   "evidence_ref": "/tmp/spider_graph/docs/PHYSICS_LEDGER.md",
+   "verbatim_quote": "spentness not derivable"
+  },
+  {
+   "check": "C-REUSE",
+   "level": "HAZARD_REUSE_WITHOUT_DISCLOSURE",
+   "instrument_id": "WP-002B",
+   "record_id": "IUL-graph-010",
+   "evidence_ref": "/tmp/spider_graph/docs/PHYSICS_LEDGER.md",
+   "verbatim_quote": "lanes=['graph', 'physics', 'intel', 'product', 'runtime']; undisclosed_uses=9"
+  },
+  {
+   "check": "C-COMPARABILITY",
+   "level": "HAZARD_COMPARABILITY_RISK",
+   "instrument_id": "WP-002B",
+   "record_id": "IUL-graph-010",
+   "evidence_ref": "/tmp/spider_graph/docs/PHYSICS_LEDGER.md",
+   "verbatim_quote": "quantitative claims across lanes/uses; scope fields UNKNOWN"
+  },
+  {
+   "check": "C-SPENTNESS",
+   "level": "HAZARD_SPENT_REUSE",
+   "instrument_id": "WP-002B",
+   "record_id": "IUL-graph-010",
+   "evidence_ref": "/tmp/spider_graph/docs/PHYSICS_LEDGER.md",
+   "verbatim_quote": " Descriptive: gutenberg's next-state classes are unique to it in-corpus\n  (coverage-0 fold); hackernews walks terminate early on logged-out vote\n  pages (real environment response).\n- Self-audit disclosures: metric-class"
+  },
+  {
+   "check": "D3-UNKNOWN-SAFETY",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "WP-002B",
+   "record_id": "IUL-graph-010",
+   "evidence_ref": "-",
+   "verbatim_quote": "UNKNOWN present; forced review flag"
+  },
+  {
+   "check": "C-REUSE",
+   "level": "OK",
+   "instrument_id": "graph-arm-V00",
+   "record_id": "IUL-graph-020",
+   "evidence_ref": "/tmp/spider_graph/results/audit/CYCLE_32783797303_GRAPH_GATE.json",
+   "verbatim_quote": "lanes=['graph']; undisclosed_uses=0"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "graph-arm-V00",
+   "record_id": "IUL-graph-020",
+   "evidence_ref": "/tmp/spider_graph/results/audit/CYCLE_32783797303_GRAPH_GATE.json",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "HAZARD_POST_ADAPTATION_DISCLOSED",
+   "instrument_id": "graph-arm-V00",
+   "record_id": "IUL-graph-020",
+   "evidence_ref": "/tmp/spider_graph/results/audit/CYCLE_32783797303_GRAPH_GATE.json",
+   "verbatim_quote": "9 -> scores 2adbd52 -> live code dfb15ab -> live outcomes); post-first-live-row diffs are driver-configuration-only as disclosed. Amendment A1 premise verified from the dump (all fragments success_count==1, monotonic ids) and empirically validated by the V00 b"
+  },
+  {
+   "check": "C-SPENTNESS",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "graph-arm-V00",
+   "record_id": "IUL-graph-020",
+   "evidence_ref": "/tmp/spider_graph/results/audit/CYCLE_32783797303_GRAPH_GATE.json",
+   "verbatim_quote": "spentness not derivable"
+  },
+  {
+   "check": "C-GATELINEAGE",
+   "level": "HAZARD_INVALID_OR_POWERLESS_INSTRUMENT_LINEAGE",
+   "instrument_id": "WP-006",
+   "record_id": "IUL-physics-014",
+   "evidence_ref": "/tmp/spider_product/docs/PRODUCT_LEDGER.md",
+   "verbatim_quote": "MEASUREMENT_INVALID"
+  },
+  {
+   "check": "C-REUSE",
+   "level": "OK",
+   "instrument_id": "WP-006",
+   "record_id": "IUL-physics-014",
+   "evidence_ref": "/tmp/spider_physics/state/physics_loop.json",
+   "verbatim_quote": "lanes=['physics', 'product']; undisclosed_uses=0"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "WP-006",
+   "record_id": "IUL-physics-014",
+   "evidence_ref": "/tmp/spider_physics/results/audit/CYCLE_32866107906_PHYSICS_GATE.json",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "WP-006",
+   "record_id": "IUL-physics-014",
+   "evidence_ref": "/tmp/spider_physics/results/audit/CYCLE_32866107906_PHYSICS_GATE.json",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "WP-006",
+   "record_id": "IUL-physics-014",
+   "evidence_ref": "/tmp/spider_product/docs/PRODUCT_LEDGER.md",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-SPENTNESS",
+   "level": "HAZARD_SPENT_REUSE",
+   "instrument_id": "WP-006",
+   "record_id": "IUL-physics-014",
+   "evidence_ref": "/tmp/spider_physics/state/physics_loop.json",
+   "verbatim_quote": "TOR DECISION: the pre-declared program stop condition is ENGAGED \u2014\n  WP-006 H-ID FALSIFIED \u21d2 the Physics lane TERMINATES;\n  `state/physics_loop.json` set to `program_status=TERMINATE_LANE`,\n  continue=false, no successor"
+  },
+  {
+   "check": "C-SPENTNESS",
+   "level": "HAZARD_SPENT_REUSE",
+   "instrument_id": "wp006_v1",
+   "record_id": "IUL-physics-033",
+   "evidence_ref": "/tmp/spider_physics/docs/PHYSICS_LEDGER.md",
+   "verbatim_quote": "TOR DECISION: the pre-declared program stop condition is ENGAGED \u2014\n  WP-006 H-ID FALSIFIED \u21d2 the Physics lane TERMINATES;\n  `state/physics_loop.json` set to `program_status=TERMINATE_LANE`,\n  continue=false, no successor"
+  },
+  {
+   "check": "C-SPENTNESS",
+   "level": "HAZARD_SPENT_REUSE",
+   "instrument_id": "collector_wp006",
+   "record_id": "IUL-physics-015",
+   "evidence_ref": "/tmp/spider_physics/docs/PHYSICS_LEDGER.md",
+   "verbatim_quote": "TOR DECISION: the pre-declared program stop condition is ENGAGED \u2014\n  WP-006 H-ID FALSIFIED \u21d2 the Physics lane TERMINATES;\n  `state/physics_loop.json` set to `program_status=TERMINATE_LANE`,\n  continue=false, no successor"
+  },
+  {
+   "check": "C-GATELINEAGE",
+   "level": "HAZARD_INVALID_OR_POWERLESS_INSTRUMENT_LINEAGE",
+   "instrument_id": "WP-005",
+   "record_id": "IUL-physics-013",
+   "evidence_ref": "/tmp/spider_product/docs/PRODUCT_LEDGER.md",
+   "verbatim_quote": "by construction"
+  },
+  {
+   "check": "C-REUSE",
+   "level": "HAZARD_REUSE_WITHOUT_DISCLOSURE",
+   "instrument_id": "WP-005",
+   "record_id": "IUL-physics-013",
+   "evidence_ref": "/tmp/spider_physics/docs/PHYSICS_LEDGER.md",
+   "verbatim_quote": "lanes=['physics', 'product']; undisclosed_uses=6"
+  },
+  {
+   "check": "C-SPENTNESS",
+   "level": "HAZARD_SPENT_REUSE",
+   "instrument_id": "WP-005",
+   "record_id": "IUL-physics-013",
+   "evidence_ref": "/tmp/spider_physics/docs/PHYSICS_LEDGER.md",
+   "verbatim_quote": "phiter 0/4 exploration vs static edge replay 0/4, bounce pathology ~69 actions/row). BINDING LIMITS: 6/8 is a selection-on-instrument decision outcome (fresh set SPENT; third instrument required for any quantitative V31 "
+  },
+  {
+   "check": "D3-UNKNOWN-SAFETY",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "WP-005",
+   "record_id": "IUL-physics-013",
+   "evidence_ref": "-",
+   "verbatim_quote": "UNKNOWN present; forced review flag"
+  },
+  {
+   "check": "C-GATELINEAGE",
+   "level": "HAZARD_INVALID_OR_POWERLESS_INSTRUMENT_LINEAGE",
+   "instrument_id": "unbrowse-route-capture-replay-ladder",
+   "record_id": "IUL-intel-032",
+   "evidence_ref": "/tmp/spider_intel/docs/INTEL_LEDGER.md",
+   "verbatim_quote": "instrument defects"
+  },
+  {
+   "check": "C-GATELINEAGE",
+   "level": "HAZARD_INVALID_OR_POWERLESS_INSTRUMENT_LINEAGE",
+   "instrument_id": "unbrowse-route-capture-replay-ladder",
+   "record_id": "IUL-intel-032",
+   "evidence_ref": "/tmp/spider_intel/docs/INTEL_LEDGER.md",
+   "verbatim_quote": "MEASUREMENT_INVALID"
+  },
+  {
+   "check": "C-GATELINEAGE",
+   "level": "HAZARD_INVALID_OR_POWERLESS_INSTRUMENT_LINEAGE",
+   "instrument_id": "unbrowse-route-capture-replay-ladder",
+   "record_id": "IUL-intel-032",
+   "evidence_ref": "/tmp/spider_intel/docs/INTEL_LEDGER.md",
+   "verbatim_quote": "instrument defects"
+  },
+  {
+   "check": "C-GATELINEAGE",
+   "level": "HAZARD_INVALID_OR_POWERLESS_INSTRUMENT_LINEAGE",
+   "instrument_id": "unbrowse-route-capture-replay-ladder",
+   "record_id": "IUL-intel-032",
+   "evidence_ref": "/tmp/spider_product/docs/PRODUCT_LEDGER.md",
+   "verbatim_quote": "MEASUREMENT_INVALID"
+  },
+  {
+   "check": "C-REUSE",
+   "level": "OK",
+   "instrument_id": "unbrowse-route-capture-replay-ladder",
+   "record_id": "IUL-intel-032",
+   "evidence_ref": "/tmp/spider_intel/state/intel_loop.json",
+   "verbatim_quote": "lanes=['intel', 'product']; undisclosed_uses=0"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "unbrowse-route-capture-replay-ladder",
+   "record_id": "IUL-intel-032",
+   "evidence_ref": "/tmp/spider_intel/state/intel_loop.json",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "unbrowse-route-capture-replay-ladder",
+   "record_id": "IUL-intel-032",
+   "evidence_ref": "/tmp/spider_product/docs/PRODUCT_LEDGER.md",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-COMPARABILITY",
+   "level": "HAZARD_COMPARABILITY_RISK",
+   "instrument_id": "unbrowse-route-capture-replay-ladder",
+   "record_id": "IUL-intel-032",
+   "evidence_ref": "/tmp/spider_intel/state/intel_loop.json",
+   "verbatim_quote": "quantitative claims across lanes/uses; scope fields UNKNOWN"
+  },
+  {
+   "check": "C-SPENTNESS",
+   "level": "HAZARD_SPENT_REUSE",
+   "instrument_id": "unbrowse-route-capture-replay-ladder",
+   "record_id": "IUL-intel-032",
+   "evidence_ref": "/tmp/spider_intel/state/intel_loop.json",
+   "verbatim_quote": "CYCLE 7 \u2014 unbrowse-route-capture-replay-ladder, capped clean-instrument confirmation (integrated 2026-08-26)\n\n**Mission** (from cycle-6 integration, CAPPED final live attempt). With all four audited cycle-6 instrument de"
+  },
+  {
+   "check": "C-GATELINEAGE",
+   "level": "HAZARD_INVALID_OR_POWERLESS_INSTRUMENT_LINEAGE",
+   "instrument_id": "PB-001-beta-benchmark",
+   "record_id": "IUL-product-007",
+   "evidence_ref": "/tmp/spider_product/docs/PRODUCT_LEDGER.md",
+   "verbatim_quote": "MEASUREMENT_INVALID"
+  },
+  {
+   "check": "C-GATELINEAGE",
+   "level": "HAZARD_INVALID_OR_POWERLESS_INSTRUMENT_LINEAGE",
+   "instrument_id": "PB-001-beta-benchmark",
+   "record_id": "IUL-product-007",
+   "evidence_ref": "/tmp/spider_product/docs/PRODUCT_LEDGER.md",
+   "verbatim_quote": "MEASUREMENT_INVALID"
+  },
+  {
+   "check": "C-GATELINEAGE",
+   "level": "HAZARD_INVALID_OR_POWERLESS_INSTRUMENT_LINEAGE",
+   "instrument_id": "PB-001-beta-benchmark",
+   "record_id": "IUL-product-007",
+   "evidence_ref": "/tmp/spider_product/docs/PRODUCT_LEDGER.md",
+   "verbatim_quote": "MEASUREMENT_INVALID"
+  },
+  {
+   "check": "C-REUSE",
+   "level": "OK",
+   "instrument_id": "PB-001-beta-benchmark",
+   "record_id": "IUL-product-007",
+   "evidence_ref": "/tmp/spider_product/state/product_current.json",
+   "verbatim_quote": "lanes=['product']; undisclosed_uses=0"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "PB-001-beta-benchmark",
+   "record_id": "IUL-product-007",
+   "evidence_ref": "/tmp/spider_product/state/product_current.json",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "PB-001-beta-benchmark",
+   "record_id": "IUL-product-007",
+   "evidence_ref": "/tmp/spider_product/docs/PRODUCT_LEDGER.md",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "HAZARD_POST_ADAPTATION_DISCLOSED",
+   "instrument_id": "PB-001-beta-benchmark",
+   "record_id": "IUL-product-007",
+   "evidence_ref": "/tmp/spider_product/docs/PRODUCT_LEDGER.md",
+   "verbatim_quote": "e attribution cannot be invented ad hoc.\n- **Intel cycle-6 EXCLUDED**: multi-host/staleness program exists only as unintegrated\n  repair-round branches; unaudited branch work moves nothing.\n- **Dispositions unchanged on the merits**: PH-1 PRODUCT_CANDIDATE par"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "PB-001-beta-benchmark",
+   "record_id": "IUL-product-007",
+   "evidence_ref": "/tmp/spider_product/docs/PRODUCT_LEDGER.md",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-SPENTNESS",
+   "level": "HAZARD_SPENT_REUSE",
+   "instrument_id": "PB-001-beta-benchmark",
+   "record_id": "IUL-product-007",
+   "evidence_ref": "/tmp/spider_product/state/product_current.json",
+   "verbatim_quote": "constraints\n\n1. Physics double-negative stands \u21d2 PH-3 stays REJECTED; no predictive feature anywhere.\n2. G-H4 spent-instrument rule stands \u21d2 the beta measures END-TO-END outcomes;\n   no V31 quantitative retrieval-transfe"
+  },
+  {
+   "check": "C-GATELINEAGE",
+   "level": "HAZARD_INVALID_OR_POWERLESS_INSTRUMENT_LINEAGE",
+   "instrument_id": "pb001-verdict-script",
+   "record_id": "IUL-product-029",
+   "evidence_ref": "/tmp/spider_product/state/product_current.json",
+   "verbatim_quote": "MEASUREMENT_INVALID"
+  },
+  {
+   "check": "C-GATELINEAGE",
+   "level": "HAZARD_INVALID_OR_POWERLESS_INSTRUMENT_LINEAGE",
+   "instrument_id": "pb001-verdict-script",
+   "record_id": "IUL-product-029",
+   "evidence_ref": "/tmp/spider_product/docs/PRODUCT_LEDGER.md",
+   "verbatim_quote": "MEASUREMENT_INVALID"
+  },
+  {
+   "check": "C-REUSE",
+   "level": "OK",
+   "instrument_id": "pb001-verdict-script",
+   "record_id": "IUL-product-029",
+   "evidence_ref": "/tmp/spider_product/state/product_current.json",
+   "verbatim_quote": "lanes=['product']; undisclosed_uses=0"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "pb001-verdict-script",
+   "record_id": "IUL-product-029",
+   "evidence_ref": "/tmp/spider_product/state/product_current.json",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "pb001-verdict-script",
+   "record_id": "IUL-product-029",
+   "evidence_ref": "/tmp/spider_product/state/product_current.json",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "HAZARD_POST_ADAPTATION_DISCLOSED",
+   "instrument_id": "pb001-verdict-script",
+   "record_id": "IUL-product-029",
+   "evidence_ref": "/tmp/spider_product/state/product_current.json",
+   "verbatim_quote": "t\": \"1457fd3cf8212f2bbea929b078aa5f1f7df8fdb6\",\n    \"f0_tag\": \"pb001-F0 (=86b0102)\",\n    \"v3_addendum_commit\": \"c287f00\",\n    \"v4_amendment_line_HEAD\": \"ddce3a3 (origin/cycle/product/32886859788/architect; NOW ALSO MERGED into lab/product @ cf25299)\",\n    \"wp8"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "pb001-verdict-script",
+   "record_id": "IUL-product-029",
+   "evidence_ref": "/tmp/spider_product/state/product_current.json",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "pb001-verdict-script",
+   "record_id": "IUL-product-029",
+   "evidence_ref": "/tmp/spider_product/docs/PRODUCT_LEDGER.md",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "pb001-verdict-script",
+   "record_id": "IUL-product-029",
+   "evidence_ref": "/tmp/spider_product/docs/PRODUCT_LEDGER.md",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-SPENTNESS",
+   "level": "HAZARD_SPENT_REUSE",
+   "instrument_id": "pb001-verdict-script",
+   "record_id": "IUL-product-029",
+   "evidence_ref": "/tmp/spider_product/state/product_current.json",
+   "verbatim_quote": "EASUREMENT_INVALID on multi-host/staleness program; instrument\n  defects, nothing established either way; ONE capped instrumentation-restoration attempt\n  remains. Dispositions unchanged on the merits; PH-2 unlock (1) ep"
+  },
+  {
+   "check": "C-GATELINEAGE",
+   "level": "HAZARD_INVALID_OR_POWERLESS_INSTRUMENT_LINEAGE",
+   "instrument_id": "pb001-dress-rehearsal-replay",
+   "record_id": "IUL-product-028",
+   "evidence_ref": "/tmp/spider_product/docs/PRODUCT_LEDGER.md",
+   "verbatim_quote": "MEASUREMENT_INVALID"
+  },
+  {
+   "check": "C-GATELINEAGE",
+   "level": "HAZARD_INVALID_OR_POWERLESS_INSTRUMENT_LINEAGE",
+   "instrument_id": "pb001-dress-rehearsal-replay",
+   "record_id": "IUL-product-028",
+   "evidence_ref": "/tmp/spider_product/docs/PRODUCT_LEDGER.md",
+   "verbatim_quote": "MEASUREMENT_INVALID"
+  },
+  {
+   "check": "C-GATELINEAGE",
+   "level": "HAZARD_INVALID_OR_POWERLESS_INSTRUMENT_LINEAGE",
+   "instrument_id": "pb001-dress-rehearsal-replay",
+   "record_id": "IUL-product-028",
+   "evidence_ref": "/tmp/spider_product/docs/PRODUCT_LEDGER.md",
+   "verbatim_quote": "MEASUREMENT_INVALID"
+  },
+  {
+   "check": "C-REUSE",
+   "level": "OK",
+   "instrument_id": "pb001-dress-rehearsal-replay",
+   "record_id": "IUL-product-028",
+   "evidence_ref": "/tmp/spider_product/state/product_current.json",
+   "verbatim_quote": "lanes=['product']; undisclosed_uses=0"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "pb001-dress-rehearsal-replay",
+   "record_id": "IUL-product-028",
+   "evidence_ref": "/tmp/spider_product/state/product_current.json",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "pb001-dress-rehearsal-replay",
+   "record_id": "IUL-product-028",
+   "evidence_ref": "/tmp/spider_product/state/product_current.json",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "HAZARD_POST_ADAPTATION_DISCLOSED",
+   "instrument_id": "pb001-dress-rehearsal-replay",
+   "record_id": "IUL-product-028",
+   "evidence_ref": "/tmp/spider_product/state/product_current.json",
+   "verbatim_quote": "t\": \"1457fd3cf8212f2bbea929b078aa5f1f7df8fdb6\",\n    \"f0_tag\": \"pb001-F0 (=86b0102)\",\n    \"v3_addendum_commit\": \"c287f00\",\n    \"v4_amendment_line_HEAD\": \"ddce3a3 (origin/cycle/product/32886859788/architect; NOW ALSO MERGED into lab/product @ cf25299)\",\n    \"wp8"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "HAZARD_POST_ADAPTATION_DISCLOSED",
+   "instrument_id": "pb001-dress-rehearsal-replay",
+   "record_id": "IUL-product-028",
+   "evidence_ref": "/tmp/spider_product/state/product_current.json",
+   "verbatim_quote": "\n    \"panel_json_v4\": \"be006d7b50f1a14044cacf571b22aadb980bf5e26b699b6c27ce5fafd11e0a0b\",\n    \"b3_leakage_map\": \"389de646886aaffca899bad4871b7a0e8d1969decefafb4b5c9ae7f0df625e43\",\n    \"dress_rehearsal_current\": \"02dddfaa32aa6feb98e4c7062b8206a7e1872ba18d37b220a986c36fa2372f50 (replay vs amended code"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "pb001-dress-rehearsal-replay",
+   "record_id": "IUL-product-028",
+   "evidence_ref": "/tmp/spider_product/docs/PRODUCT_LEDGER.md",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "pb001-dress-rehearsal-replay",
+   "record_id": "IUL-product-028",
+   "evidence_ref": "/tmp/spider_product/docs/PRODUCT_LEDGER.md",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "pb001-dress-rehearsal-replay",
+   "record_id": "IUL-product-028",
+   "evidence_ref": "/tmp/spider_product/docs/PRODUCT_LEDGER.md",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "HAZARD_POST_ADAPTATION_DISCLOSED",
+   "instrument_id": "pb001-dress-rehearsal-replay",
+   "record_id": "IUL-product-028",
+   "evidence_ref": "/tmp/spider_product/docs/PRODUCT_LEDGER.md",
+   "verbatim_quote": " feared mount-only copies were not lost \u2014\n  `/tmp/spider_beta_architect` and `/tmp/spider_beta_builder` are gone, but the v4+v5\n  amendment line (`ddce3a3`) and Builder WP-8 line (`7657565`) are durably pushed on\n  `origin/cycle/product/32886859788/{architect,"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "pb001-dress-rehearsal-replay",
+   "record_id": "IUL-product-028",
+   "evidence_ref": "/tmp/spider_product/docs/PRODUCT_LEDGER.md",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-SPENTNESS",
+   "level": "HAZARD_SPENT_REUSE",
+   "instrument_id": "pb001-dress-rehearsal-replay",
+   "record_id": "IUL-product-028",
+   "evidence_ref": "/tmp/spider_product/state/product_current.json",
+   "verbatim_quote": "justification restricted to pre-D2 builder-preflight\nevidence; D2@1 numbers barred from predictive quotation (spent-instrument\ndiscipline); descriptive-only shifted-entry probe, explicitly non-binding.\nRejected/overruled"
+  },
+  {
+   "check": "C-REUSE",
+   "level": "OK",
+   "instrument_id": "shared-fixture-PhysicsLeakageGuardTests",
+   "record_id": "IUL-runtime-031",
+   "evidence_ref": "/tmp/spider_runtime/state/runtime_loop.json",
+   "verbatim_quote": "lanes=['runtime']; undisclosed_uses=0"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "shared-fixture-PhysicsLeakageGuardTests",
+   "record_id": "IUL-runtime-031",
+   "evidence_ref": "/tmp/spider_runtime/state/runtime_loop.json",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "shared-fixture-PhysicsLeakageGuardTests",
+   "record_id": "IUL-runtime-031",
+   "evidence_ref": "/tmp/spider_runtime/state/runtime_loop.json",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "shared-fixture-PhysicsLeakageGuardTests",
+   "record_id": "IUL-runtime-031",
+   "evidence_ref": "/tmp/spider_runtime/state/runtime_loop.json",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "shared-fixture-PhysicsLeakageGuardTests",
+   "record_id": "IUL-runtime-031",
+   "evidence_ref": "/tmp/spider_runtime/state/runtime_loop.json",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-SPENTNESS",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "shared-fixture-PhysicsLeakageGuardTests",
+   "record_id": "IUL-runtime-031",
+   "evidence_ref": "/tmp/spider_runtime/state/runtime_loop.json",
+   "verbatim_quote": "spentness not derivable"
+  },
+  {
+   "check": "C-REUSE",
+   "level": "OK",
+   "instrument_id": "runtime-gate-witness-code",
+   "record_id": "IUL-runtime-030",
+   "evidence_ref": "/tmp/spider_runtime/state/runtime_loop.json",
+   "verbatim_quote": "lanes=['runtime']; undisclosed_uses=0"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "HAZARD_POST_ADAPTATION_DISCLOSED",
+   "instrument_id": "runtime-gate-witness-code",
+   "record_id": "IUL-runtime-030",
+   "evidence_ref": "/tmp/spider_runtime/state/runtime_loop.json",
+   "verbatim_quote": "2_stale_context\": \"clause-attributed ABSTAIN -> zero pre-handoff actions -> valid spider.plan/v0 handoff -> 1-novel-action caller repair via hint.params.expected_host -> RESOLVED -> verified success vs truthfully recorded BASE budget exhaustion, replicated x2;"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "HAZARD_POST_ADAPTATION_DISCLOSED",
+   "instrument_id": "runtime-gate-witness-code",
+   "record_id": "IUL-runtime-030",
+   "evidence_ref": "/tmp/spider_runtime/state/runtime_loop.json",
+   "verbatim_quote": "2_stale_context\": \"clause-attributed ABSTAIN -> zero pre-handoff actions -> valid spider.plan/v0 handoff -> 1-novel-action caller repair via hint.params.expected_host -> RESOLVED -> verified success vs truthfully recorded BASE budget exhaustion, replicated x2;"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "HAZARD_POST_ADAPTATION_DISCLOSED",
+   "instrument_id": "runtime-gate-witness-code",
+   "record_id": "IUL-runtime-030",
+   "evidence_ref": "/tmp/spider_runtime/state/runtime_loop.json",
+   "verbatim_quote": "-T3a\": true, \"G-T3b\": true, \"G-T3c\": true, \"G-A1_causal\": true},\n    \"gate_repair_status\": \"SURVIVES_WITH_DISCLOSURE \u2014 auditor reproduced both wirings from same committed stream; defect direction against producer interest; original analysis preserved; gate-cod"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "HAZARD_POST_ADAPTATION_DISCLOSED",
+   "instrument_id": "runtime-gate-witness-code",
+   "record_id": "IUL-runtime-030",
+   "evidence_ref": "/tmp/spider_runtime/state/runtime_loop.json",
+   "verbatim_quote": "b\": true, \"G-T3c\": true, \"G-A1_causal\": true},\n    \"gate_repair_status\": \"SURVIVES_WITH_DISCLOSURE \u2014 auditor reproduced both wirings from same committed stream; defect direction against producer interest; original analysis preserved; gate-code-v2-exists-only-f"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "runtime-gate-witness-code",
+   "record_id": "IUL-runtime-030",
+   "evidence_ref": "/tmp/spider_runtime/state/runtime_loop.json",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "HAZARD_POST_ADAPTATION_DISCLOSED",
+   "instrument_id": "runtime-gate-witness-code",
+   "record_id": "IUL-runtime-030",
+   "evidence_ref": "/tmp/spider_runtime/state/runtime_loop.json",
+   "verbatim_quote": "1-novel-action caller repair via hint.params.expected_host -> RESOLVED -> verified success vs truthfully recorded BASE budget exhaustion, replicated x2; failure-avoidance illustration only\",\n    \"ABL_A1_hint_causality\": \"stripped five-channel hint -> blinded caller UNACTIONABLE with ZERO actions -> "
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "HAZARD_POST_ADAPTATION_DISCLOSED",
+   "instrument_id": "runtime-gate-witness-code",
+   "record_id": "IUL-runtime-030",
+   "evidence_ref": "/tmp/spider_runtime/state/runtime_loop.json",
+   "verbatim_quote": "ration only\",\n    \"ABL_A1_hint_causality\": \"stripped five-channel hint -> blinded caller UNACTIONABLE with ZERO actions -> hint CAUSAL within THIS caller implementation (PROOF_OF_CONCEPT, scoped)\",\n    \"gates_after_labeled_repair\": {\"G-C1a\": true, \"G-C1b\": true, \"G-C1c\": true, \"G-C2a\": true, \"G-C2b\""
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "runtime-gate-witness-code",
+   "record_id": "IUL-runtime-030",
+   "evidence_ref": "/tmp/spider_runtime/results/audit/CYCLE_32908002333_RUNTIME_GATE.json",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "runtime-gate-witness-code",
+   "record_id": "IUL-runtime-030",
+   "evidence_ref": "/tmp/spider_runtime/results/audit/CYCLE_32908002333_RUNTIME_GATE.json",
+   "verbatim_quote": "timing undatable"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "HAZARD_POST_ADAPTATION_DISCLOSED",
+   "instrument_id": "runtime-gate-witness-code",
+   "record_id": "IUL-runtime-030",
+   "evidence_ref": "/tmp/spider_runtime/results/audit/CYCLE_32908002333_RUNTIME_GATE.json",
+   "verbatim_quote": "st semantics before any wb capsule is trusted.\"},\n    {\"id\": \"W-C2-3\", \"severity\": \"medium\", \"binding\": \"next_cycle\", \"finding\": \"Repaired gate code (ref-set _harness_verdict) exists only IN the outcomes commit; the all-TRUE headline rests on post-outcome reco"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "HAZARD_POST_ADAPTATION_DISCLOSED",
+   "instrument_id": "runtime-gate-witness-code",
+   "record_id": "IUL-runtime-030",
+   "evidence_ref": "/tmp/spider_runtime/results/audit/CYCLE_32908002333_RUNTIME_GATE.json",
+   "verbatim_quote": "st semantics before any wb capsule is trusted.\"},\n    {\"id\": \"W-C2-3\", \"severity\": \"medium\", \"binding\": \"next_cycle\", \"finding\": \"Repaired gate code (ref-set _harness_verdict) exists only IN the outcomes commit; the all-TRUE headline rests on post-outcome reco"
+  },
+  {
+   "check": "C-POSTADAPT",
+   "level": "HAZARD_POST_ADAPTATION_DISCLOSED",
+   "instrument_id": "runtime-gate-witness-code",
+   "record_id": "IUL-runtime-030",
+   "evidence_ref": "/tmp/spider_runtime/results/audit/CYCLE_32908002333_RUNTIME_GATE.json",
+   "verbatim_quote": "st semantics before any wb capsule is trusted.\"},\n    {\"id\": \"W-C2-3\", \"severity\": \"medium\", \"binding\": \"next_cycle\", \"finding\": \"Repaired gate code (ref-set _harness_verdict) exists only IN the outcomes commit; the all-TRUE headline rests on post-outcome reco"
+  },
+  {
+   "check": "C-SPENTNESS",
+   "level": "REVIEW_UNKNOWN",
+   "instrument_id": "runtime-gate-witness-code",
+   "record_id": "IUL-runtime-030",
+   "evidence_ref": "/tmp/spider_runtime/state/runtime_loop.json",
+   "verbatim_quote": "spentness not derivable"
+  }
+ ]
+}

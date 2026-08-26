@@ -1,0 +1,56 @@
+{
+  "team_id": "frontier-collection-calibration",
+  "github_run": 32950696764,
+  "freeze_commit": "e172c6084bfd70f60f36009c518da5602483bd4c",
+  "freeze_utc": "2026-08-26T10:03:35Z",
+  "deviations": [
+    {
+      "id": "DEV-1",
+      "phase": "formal evaluation",
+      "clause": "PREREG s7.4 crash clause",
+      "event": (
+        "The single formal run executed the COMPLETE primary panel "
+        "(C1-C8 kit, S1-S4 kit, S1-S4 null-only) and both held-out "
+        "instruments; all 18 per-instrument rows were persisted as "
+        "row_*.json BEFORE the crash. The process then crashed in "
+        "main()'s final JSON assembly: TypeError (None + list) in "
+        "holdout_descriptive for a pre-rejected holdout row."),
+      "classification": (
+        "Runner bookkeeping crash AFTER gate findings were emitted; "
+        "not a gate finding; gate logic/thresholds/instruments/budgets "
+        "untouched."),
+      "action": (
+        "Per s7.4 NO instrument was re-run and no gate re-executed. "
+        "run_eval.py received a one-line serialization None-guard in "
+        "holdout_descriptive assembly only. New eval/"
+        "reassemble_eval_results.py rebuilt EVAL_RESULTS.json from the "
+        "preserved row files by applying the UNCHANGED frozen score() "
+        "verbatim."),
+      "measurement_impact": "none (analysis of preserved raw data)",
+    },
+    {
+      "id": "DEV-2",
+      "phase": "PREREG s9 lane-harness receipt (post-formal-run deliverable)",
+      "clause": "s9 receipt is a separate required deliverable; it does "
+                "not alter M1-M3 and was authored after the formal run",
+      "event": (
+        "Three plumbing repairs to eval/cwlab_receipt.py during its own "
+        "bring-up, disclosed in full: (a) wrapper tuple-unpack inversion "
+        "on crawler.parse_links' [(href,label)] return; (b) receipt "
+        "'tolerant' reference regex accepted single quotes only, missing "
+        "the fixture's double-quoted attr_after shape - widened to both "
+        "quote styles (matching the FROZEN eval collectors.RE_TOLERANT); "
+        "(c) receipt plan initially violated calibkit's own fail-closed "
+        "schema (empty artifacts dict) and used a nonexistent server "
+        "helper - corrected to declare the real harness artifact and "
+        "call CWLabServer.port directly."),
+      "classification": (
+        "Receipt-harness bring-up only. No gate implementation changed; "
+        "no frozen-eval file affected; the receipt ran to completion "
+        "with all expectations met on the final pass."),
+      "measurement_impact": "none on M1-M3 (receipt is descriptive)",
+    }
+  ],
+  "no_other_deviations": true,
+  "frozen_rule_changes": 0
+}

@@ -1,0 +1,37 @@
+{
+ "anchor_semantics": {
+  "PG-K3F": {
+   "anchor_matches_target": true,
+   "constructed": "https://quotes.toscrape.com/page/3/"
+  },
+  "PG-K9B": {
+   "anchor_matches_target": true,
+   "constructed": "https://quotes.toscrape.com/page/9/"
+  },
+  "PG-KCONF": {
+   "anchor_matches_target": true,
+   "constructed": "https://quotes.toscrape.com/page/3/"
+  }
+ },
+ "committed_file_sha256": {
+  "page10": "7abf039fbe942bdaa9036c978f6d1140bc79878b0b84a24ec087c6ef24e1b9b0",
+  "taglove": "f5a306041c32509728ba90cd15bd2b93ccc1e791af4409bba46ae822f4621241"
+ },
+ "kind": "pagination_witness_derivation/v0",
+ "marker_note": "content-marker presence is a server-behavior property; it is validated LIVE per cell during the run and recorded in verify rows (offline discriminability classification refused, ruling R2-2-B)",
+ "mnf_entry_checks": {
+  "PG-K3F:page10": "fail",
+  "PG-K3F:taglove": "fail",
+  "PG-K9B:page10": "fail",
+  "PG-K9B:taglove": "fail",
+  "PG-KCONF:page10": "fail",
+  "PG-KCONF:taglove": "fail"
+ },
+ "ok": true,
+ "pager_tokens_extracted": [
+  "Next \u2192",
+  "\u2190 Previous"
+ ],
+ "pager_tokens_frozen_match": true,
+ "written_utc": "2026-08-26T07:56:29Z"
+}

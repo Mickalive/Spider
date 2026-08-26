@@ -1,0 +1,159 @@
+{
+ "analysis": {
+  "C1": {
+   "base_loads": 3,
+   "base_novel_fraction": 1.0,
+   "base_total_actions": 4,
+   "overhead_loads_ratio": 1.0,
+   "repeat_cost_ratio_actions": 1.0,
+   "retrieval_ms_perf_spider": 0.5373579997467459,
+   "reuse_yield": 0.0,
+   "spider_loads": 3,
+   "spider_reused_actions": 4,
+   "spider_total_actions": 4
+  },
+  "C2": {
+   "base_success": false,
+   "base_total_actions": 60,
+   "novelty_fraction_spider": 0.2,
+   "overhead_actions": 0,
+   "spider_novel_actions": 1,
+   "spider_reused_actions": 4,
+   "spider_total_actions": 5
+  },
+  "gates": {
+   "G-C1a": true,
+   "G-C1b": true,
+   "G-C1c": true,
+   "G-C2a": true,
+   "G-C2b": true,
+   "G-C2c": true
+  }
+ },
+ "capsule_sha256": {
+  "runtime/form-login-procedure@v1": "5229b6b52b3363c2b620cf5830863719932bf390acde7ea79deda389ca2c89eb",
+  "runtime/quotes-login-route@v1": "c5091a333c35eef414eabdbacf8cd3b03fa377a6b6054f9572bb3f411fd1af07"
+ },
+ "cycle": "R0-1",
+ "env": {
+  "playwright_browser": "chromium-headless",
+  "python": "3.12.3"
+ },
+ "input_dump_sha256": "ec5af9e146ea629fac642ec4a7b14c49b685e5c193cff345a92191b7e05e7073",
+ "preflight": [
+  {
+   "digest": "395f96f5d719245e24ed90623e63e383f9ccea37b4282c14333bb4bb5b60fd2a",
+   "dom_bytes": 10968,
+   "login_anchor_present": true,
+   "n_elements": 55,
+   "probe": "quotes_home",
+   "url": "https://quotes.toscrape.com/"
+  },
+  {
+   "digest": "308f37d6d658326af7e414844c944be5f7743686703d95eb7154a819c866c9ac",
+   "dom_bytes": 1855,
+   "inputs_present": true,
+   "n_elements": 7,
+   "probe": "quotes_login_page",
+   "url": "https://quotes.toscrape.com/login"
+  },
+  {
+   "digest": "569f5535da173563ade6cb45bd3f92018d2a691421f889e8e7f669b604235309",
+   "dom_bytes": 51004,
+   "n_elements": 114,
+   "probe": "books_home",
+   "url": "https://books.toscrape.com/"
+  }
+ ],
+ "prereg_path": "reports/runtime/R0_CYCLE1_PREREG.md",
+ "prereg_sha256": "6b8b10bae93c709ccfd63bd6c0a784137a25ae291bcf5fb6b4490a08ef76bd6f",
+ "retrieval_version": "runtime-resolver/v0:goalsig-desc_only-tau0.30-mm2-topk3",
+ "rows": [
+  {
+   "arm": "b0",
+   "cell_task": "RT0-T1-quotes-login",
+   "counters": {
+    "actions": 4,
+    "decision_points": 53,
+    "failed_actions": 0,
+    "llm_calls": 0,
+    "loads": 3,
+    "novel_actions": 4,
+    "retrieval_ms_perf": 0.0,
+    "reused_actions": 0,
+    "wall_ms_perf": 1607.4163500006762
+   },
+   "entry_digest": null,
+   "final_url": "https://quotes.toscrape.com/",
+   "row_id": "RT0-C1-b0-p1",
+   "success": true,
+   "verdict_state": "pass"
+  },
+  {
+   "abort_reason": null,
+   "aborted": false,
+   "arm": "spider",
+   "cell_task": "RT0-T1-quotes-login",
+   "counters": {
+    "actions": 4,
+    "llm_calls": 0,
+    "loads": 3,
+    "novel_actions": 0,
+    "retrieval_ms_perf": 0.5373579997467459,
+    "reused_actions": 4,
+    "wall_ms_perf": 1610.8450310002809
+   },
+   "decision": "RESOLVED",
+   "entry_digest": "395f96f5d719245e24ed90623e63e383f9ccea37b4282c14333bb4bb5b60fd2a",
+   "final_url": "https://quotes.toscrape.com/",
+   "row_id": "RT0-C1-spider-p1",
+   "success": true,
+   "verdict_state": "pass"
+  },
+  {
+   "arm": "b0",
+   "cell_task": "RT0-T2-quotes-login-wrongcontext",
+   "counters": {
+    "actions": 60,
+    "decision_points": 3948,
+    "failed_actions": 0,
+    "llm_calls": 0,
+    "loads": 51,
+    "novel_actions": 60,
+    "retrieval_ms_perf": 0.0,
+    "reused_actions": 0,
+    "wall_ms_perf": 29279.107987000316
+   },
+   "entry_digest": null,
+   "final_url": "https://books.toscrape.com/catalogue/category/books/travel_2/index.html",
+   "row_id": "RT0-C2-b0-p1",
+   "success": false,
+   "verdict_state": "fail"
+  },
+  {
+   "abort_reason": null,
+   "aborted": false,
+   "arm": "spider",
+   "cell_task": "RT0-T2-quotes-login-wrongcontext",
+   "counters": {
+    "actions": 5,
+    "llm_calls": 0,
+    "loads": 4,
+    "novel_actions": 1,
+    "retrieval_ms_perf": 0.8934899997257162,
+    "reused_actions": 4,
+    "wall_ms_perf": 2174.2898820002665
+   },
+   "entry_digest": "569f5535da173563ade6cb45bd3f92018d2a691421f889e8e7f669b604235309",
+   "final_url": "https://quotes.toscrape.com/",
+   "first_decision": "ABSTAIN",
+   "row_id": "RT0-C2-spider-p1",
+   "second_decision": "RESOLVED",
+   "success": true,
+   "verdict_state": "pass"
+  }
+ ],
+ "run_note": "GitHub run 32887030457",
+ "seed": 20260825,
+ "twin_identity_errors": []
+}

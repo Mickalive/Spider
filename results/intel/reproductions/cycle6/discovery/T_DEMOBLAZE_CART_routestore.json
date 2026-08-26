@@ -1,0 +1,255 @@
+{
+ "routes": [
+  {
+   "route_id": "GET:https://api.demoblaze.com/entries",
+   "intent": "",
+   "site": "api.demoblaze.com",
+   "method": "GET",
+   "url_template": "https://api.demoblaze.com/entries",
+   "path_slots": [],
+   "query_slots": [],
+   "body_template": null,
+   "body_slots": [],
+   "headers_required": {},
+   "response_shape": {
+    "Items": [
+     "dict"
+    ],
+    "LastEvaluatedKey": {
+     "id": "str"
+    }
+   },
+   "volatile_keys": [],
+   "freshness_ts_ms": 1787695077984,
+   "reliability": {
+    "ok": 0,
+    "fail": 0
+   },
+   "lifecycle": "active",
+   "evidence_urls": [
+    "https://api.demoblaze.com/entries",
+    "https://api.demoblaze.com/entries",
+    "https://api.demoblaze.com/entries"
+   ],
+   "n_observations": 3
+  },
+  {
+   "route_id": "POST:https://api.demoblaze.com/login",
+   "intent": "login_session_demoblaze",
+   "site": "api.demoblaze.com",
+   "method": "POST",
+   "url_template": "https://api.demoblaze.com/login",
+   "path_slots": [],
+   "query_slots": [],
+   "body_template": {
+    "kind": "json",
+    "fields": [
+     [
+      "password",
+      "__slot__:auth:password"
+     ],
+     [
+      "username",
+      "__slot__:cred:username"
+     ]
+    ],
+    "shape": {
+     "password": "str",
+     "username": "str"
+    }
+   },
+   "body_slots": [
+    "__slot__:auth:password",
+    "__slot__:cred:username"
+   ],
+   "headers_required": {},
+   "response_shape": null,
+   "volatile_keys": [],
+   "freshness_ts_ms": 1787695077984,
+   "reliability": {
+    "ok": 1,
+    "fail": 0
+   },
+   "lifecycle": "active",
+   "evidence_urls": [
+    "https://api.demoblaze.com/login"
+   ],
+   "n_observations": 1
+  },
+  {
+   "route_id": "POST:https://api.demoblaze.com/check",
+   "intent": "",
+   "site": "api.demoblaze.com",
+   "method": "POST",
+   "url_template": "https://api.demoblaze.com/check",
+   "path_slots": [],
+   "query_slots": [],
+   "body_template": {
+    "kind": "json",
+    "fields": [
+     [
+      "token",
+      "__slot__:auth:token"
+     ]
+    ],
+    "shape": {
+     "token": "str"
+    }
+   },
+   "body_slots": [
+    "__slot__:auth:token"
+   ],
+   "headers_required": {},
+   "response_shape": {
+    "Item": {
+     "expiration": "int",
+     "token": "str",
+     "username": "str"
+    }
+   },
+   "volatile_keys": [],
+   "freshness_ts_ms": 1787695077984,
+   "reliability": {
+    "ok": 4,
+    "fail": 0
+   },
+   "lifecycle": "active",
+   "evidence_urls": [
+    "https://api.demoblaze.com/check",
+    "https://api.demoblaze.com/check",
+    "https://api.demoblaze.com/check",
+    "https://api.demoblaze.com/check"
+   ],
+   "n_observations": 4
+  },
+  {
+   "route_id": "POST:https://api.demoblaze.com/bycat",
+   "intent": "",
+   "site": "api.demoblaze.com",
+   "method": "POST",
+   "url_template": "https://api.demoblaze.com/bycat",
+   "path_slots": [],
+   "query_slots": [],
+   "body_template": {
+    "kind": "json",
+    "fields": [
+     [
+      "cat",
+      "__const__:notebook"
+     ]
+    ],
+    "shape": {
+     "cat": "str"
+    }
+   },
+   "body_slots": [],
+   "headers_required": {},
+   "response_shape": {
+    "Items": [
+     "dict"
+    ]
+   },
+   "volatile_keys": [],
+   "freshness_ts_ms": 1787695077984,
+   "reliability": {
+    "ok": 1,
+    "fail": 0
+   },
+   "lifecycle": "active",
+   "evidence_urls": [
+    "https://api.demoblaze.com/bycat"
+   ],
+   "n_observations": 1
+  },
+  {
+   "route_id": "POST:https://api.demoblaze.com/view",
+   "intent": "",
+   "site": "api.demoblaze.com",
+   "method": "POST",
+   "url_template": "https://api.demoblaze.com/view",
+   "path_slots": [],
+   "query_slots": [],
+   "body_template": {
+    "kind": "json",
+    "fields": [
+     [
+      "id",
+      "__const__:9"
+     ]
+    ],
+    "shape": {
+     "id": "str"
+    }
+   },
+   "body_slots": [],
+   "headers_required": {},
+   "response_shape": {
+    "cat": "str",
+    "desc": "str",
+    "id": "int",
+    "img": "str",
+    "price": "float",
+    "title": "str"
+   },
+   "volatile_keys": [],
+   "freshness_ts_ms": 1787695077984,
+   "reliability": {
+    "ok": 3,
+    "fail": 0
+   },
+   "lifecycle": "active",
+   "evidence_urls": [
+    "https://api.demoblaze.com/view",
+    "https://api.demoblaze.com/view",
+    "https://api.demoblaze.com/view"
+   ],
+   "n_observations": 3
+  },
+  {
+   "route_id": "POST:https://api.demoblaze.com/viewcart",
+   "intent": "view_cart_items_demoblaze",
+   "site": "api.demoblaze.com",
+   "method": "POST",
+   "url_template": "https://api.demoblaze.com/viewcart",
+   "path_slots": [],
+   "query_slots": [],
+   "body_template": {
+    "kind": "json",
+    "fields": [
+     [
+      "cookie",
+      "__slot__:auth:cookie"
+     ],
+     [
+      "flag",
+      "__const__:true"
+     ]
+    ],
+    "shape": {
+     "cookie": "str",
+     "flag": "str"
+    }
+   },
+   "body_slots": [
+    "__slot__:auth:cookie"
+   ],
+   "headers_required": {},
+   "response_shape": {
+    "Items": [
+     "dict"
+    ]
+   },
+   "volatile_keys": [],
+   "freshness_ts_ms": 1787695077984,
+   "reliability": {
+    "ok": 1,
+    "fail": 0
+   },
+   "lifecycle": "active",
+   "evidence_urls": [
+    "https://api.demoblaze.com/viewcart"
+   ],
+   "n_observations": 1
+  }
+ ]
+}

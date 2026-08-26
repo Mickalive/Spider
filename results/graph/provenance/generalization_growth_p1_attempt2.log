@@ -1,0 +1,6 @@
+[preflight] {'books': True, 'quotes': True}
+[growth] GB2_books_hf_category attempt1 success                        act=14 novel=14 solved_by=exploration
+[growth] GB3_books_hf_page2 attempt1 success                        act=1 novel=0 solved_by=memory
+[growth] GB4_books_hf_p2_openbook attempt1 success                        act=1 novel=1 solved_by=exploration
+[growth] final KB: {'states': 19, 'transitions': 43, 'actions': 17, 'fragments': 17}
+[growth] fragments: ['books.cat.fiction', 'books.cat.historicalfiction', 'books.cat.mystery', 'books.cat.travel', 'books.hf.open.first.book', 'books.home', 'books.open.first.book', 'books.open.first.book.mystery', 'books.paginate.next', 'generic.form.login', 'generic.paginate.next', 'generic.paginate.next', 'quotes.home', 'quotes.login', 'quotes.logout', 'quotes.page.2', 'quotes.tag.love']

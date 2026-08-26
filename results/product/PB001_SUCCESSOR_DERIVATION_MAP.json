@@ -1,0 +1,98 @@
+{
+  "artifact_type": "PB001_SUCCESSOR_DERIVATION_MAP",
+  "status": "DORMANT — consumed only by a future flip-input revival review; existence of this map does NOT reopen anything and authorizes nothing",
+  "created": "2026-08-26",
+  "mandated_by": "CTO-6 docs/CTO_TO_PRODUCT.md section 1",
+  "purpose": "Let a future PH-1 successor authorization be derived from the preserved PB-001 pack in ONE session, without re-convening critics or re-deriving floors.",
+  "pack_to_floors_map": {
+    "floors_inherited_verbatim_by_any_successor": [
+      "WIN-1: success_SPIDER >= success_best_baseline - 0.10 absolute on the full panel including R3 control rows (per-regime best-of-{B0,B1,B3} comparator; tie cascade per W1)",
+      "WIN-2 (R1+R2 rows): median navigation-equivalent action units -50% AND median total billed tokens -40% AND median wall-clock -30% versus strongest comparable-success baseline",
+      "WIN-3: zero fabricated-success events in the SPIDER arm",
+      "WIN-4: conjunctive replication across two deterministic passes with occupancy floor >=6 valid paired rows per floor cell (else MEASUREMENT_INVALID)",
+      "LOSE-1: SPIDER fails >25% of tasks solved by per-regime best baseline",
+      "LOSE-2: median reductions <20% on R1+R2 vs same comparator (nav-units; total billed tokens)",
+      "LOSE-3: any memory-induced fabricated success",
+      "B3 instruction-card ceiling arm is MANDATORY in every comparator set (burial path closed: WIN requires beating best-of INCLUDING B3)"
+    ],
+    "floor_sources": {
+      "canonical_text": "state/product_beta_request.json @ HEAD rev8 sha256 725cbfe4c757ff8ffdc3b3a40163be44dc8b961b5a37050e951633086112e14b (win_rule.WIN_if_all / win_rule.LOSE_if_any / win_rule.comparator_definitions_rev7)",
+      "pinned_implementation": "product-beta/PB-001/analysis/compute_verdict.py sha256 0cb76809c6c34eb5a17a9c82ca32031350d54a319505a6afb971b83f62430b88",
+      "consistency_receipt": "results/product/PB001_closure_hygiene_audit.json (2026-08-26, PASS, floors verbatim since rev 1)"
+    }
+  },
+  "pack_to_gates_map": {
+    "successor_go_live_sequence_must_re_pose_equivalents_of": [
+      "G1 endpoint-stability validation BEFORE credential declaration (X28 principle inherited; local open-weight backbones disclosed in verdict scoping)",
+      "G2 numeric POWER PROOF inside the prereg BEFORE freezing any multi-arm family gate (X29, binding portfolio-wide since CTO-6)",
+      "G3 provider telemetry selftest emits a REAL provider_call row AND a real synthesized violation row before any panel row",
+      "G4 stub-backbone dress rehearsal green including seam lint (dead_pairs=[]) over the CURRENT panel, replayed post-credentials",
+      "G5 B0 cold-agent pilot smoke health gate (>=2/3 class) before Phase B",
+      "G6 B2 exact-replay sanity fixture check (byte-restoration + write suppression + t=0 exclusion)",
+      "G7 seeded schedule with mandatory edge_iter slice as sole A3-attribution instrument",
+      "G8 VERDICT via hash-pinned compute_verdict only; no post-outcome amendment of enums/floors"
+    ],
+    "binding_narrative_constraints_on_any_successor": [
+      "http_floor null verbatim: all 10 PB-001 panel targets were reachable via bare HTTP at zero LLM tokens, 203-517 ms — any BEATS claim must confine itself to settings where plain HTTP fails (auth lifecycles, spec-less SPAs, drift); X31 two-killer wording ceiling applies portfolio-wide",
+      "D2 retrieval@1 instrument SPENT: numbers never predictive of any future phase",
+      "SGDR+V31 stacked fusion = scoped negative knowledge (D2 record); desc_only/primitive front-door family remains the only ratified configuration",
+      "vendor Unbrowse headline numbers remain OFFICIAL_CLAIM forever, never beside SPIDER results"
+    ],
+    "maintenance_inclusive_economics_duty": "W-C2-1-class discharge (write-back maintenance cost measured) required in any successor claiming compression economics; CTO-6 evidence bar additionally: >=2-task margin >=M vs STRONGEST baseline, >=3-sample statistics, power proof in prereg."
+  },
+  "revival_triggers_and_routing": {
+    "(a)_compliant_endpoint_available": "ops/human grant OR environment gains serving capability -> revival review -> fresh Director authorization deriving from THIS map + hygiene-audited pack; floors inherited verbatim; slot-contention rule governs if a Runtime claimant exists",
+    "(b)_intel_round4_USEFUL": "PH-2 unlock(1) progress review (PH-2 route, not PH-1 successor)",
+    "(c)_runtime_R_line_positive_surviving_strongest_baseline_plus_curl_null_with_provider_replication_design": "claimant becomes candidate-eligible -> slot-contention review before exclusive credential access",
+    "(d)_new_audited_lane_signal_materially_bearing_on_PH_premises": "disposition review first; beta only via fresh authorization"
+  },
+  "non_authorization_clause": "This map is a navigation artifact. It creates no beta, no optimization authorization, and no execution permission. PB-001 remains permanently closed-unrun; absence of an endpoint does not by itself reopen anything.",
+  "appendix_fourteenth_session": {
+    "added": "2026-08-26",
+    "mandated_by": "Product Director fourteenth session after flip input (b) fired and was discharged; four fresh-context critics unanimous NO-BETA with pre-commitment requirement so any gate pass converts to review in ONE session",
+    "status": "DORMANT — additive pre-commitments only; nothing here authorizes execution",
+    "new_flip_inputs_routed": {
+      "(e)_r2_3_d1_probe_pass": "Runtime R2-3 (D1 stdlib auth-lifecycle substrate probe) returns an audited PASS verdict establishing a WRITABLE DISCRIMINATING substrate (wrong inputs verifiably fail server-side; parameterization-to-new-ids demonstrable) => route-tier executor condition 2 met on accepted evidence => REFUSE lifts => review section conditional_successor_designs below; floors/bar inherited verbatim from pack_to_floors_map + ten_item bar; fresh kill accounting required",
+      "(f)_window_2_landing": "window-2 natural-TTL deliverables land (>=2026-08-27T00:30:08Z anchors) as STALENESS DELIVERABLES ONLY per the Product governance ruling recorded in state/product_direction.json (never benchmark outcome rows absent explicit new authorization meeting the full evidence bar + CTO/Meta concurrence)"
+    },
+    "conditional_successor_designs": {
+      "design_1_lifetime_economics_panel": {
+        "origin": "cto_product critic section B, adopted verbatim as sketch",
+        "tests": "maintenance+recovery-inclusive LIFECYCLE economics of TTL-guarded route replay with nine-code escalation and hard ABSTAIN-to-scripted-policy fallback - recovery-after-staleness vs re-derivation-from-scratch across >=2 TTL cycles; the one cell class no lane has audited (W-C2-1 class)",
+        "arms": "SPIDER = capture->store->TTL-guarded replay->escalation->ABSTAIN->handoff->repair; baselines strongest-first all scripted: N1 bare-HTTP-with-perfect-docs null (mandatory), N2 B3-class static instruction card under deterministic policy (~400-token documented-knowledge ceiling; burial path closed), S1 fresh scripted traversal goto-normalized",
+        "win_rule_sketch": "margin >=M on >=2 tasks vs best-of-{N1,N2,S1} at equal acceptance; conjunctive two-pass replication; occupancy >=6 paired cells else MEASUREMENT_INVALID; numeric power proof in prereg; http_floor narrative verbatim; full overhead billed to SPIDER incl. capture amortization",
+        "gates_required_before_authorizable": ["(e) R2-3/D1 PASS", "window-2 measurement semantics ruling resolved per (f)", "host-task set disjoint from audited cycle-9 cells (non-duplication attestation)"],
+        "known_adverse_prior": "external frames bound fleet savings ~8% and blind-miss 50-67%; panel must survive its own warm-amortized accounting critique"
+      },
+      "design_2_writepath_class_capsule": {
+        "origin": "product_system_architect critic, adopted verbatim as sketch",
+        "tests": "the ONLY unmeasured claim in the residual stack: parameterized route artifacts instantiate to NEW resource IDs producing correct-state WRITES with verifiable rejection of wrong inputs (converting drift into safe abstain->handoff rather than silent failure) at overhead-inclusive cost <= a docs-first thin-client baseline with maintenance fully priced",
+        "interfaces": "resolve (exact-signature, inventory-scoped to positive-depth-composition site family) / applicability (host pin + TTL freshness + param-schema predicate; false-admit = harmful write, false-abstain = budget burn) / execute (GATED on route-tier refusal lifting) / verify (pinned witnesses - read-side only proven today; write-path untested) / report (overhead-inclusive ledger: retrieval, applicability, failed instantiations, witness setup+evaluation, recovery events as costs AND avoided-harm credits, maintenance amortized per deliverable)",
+        "mandatory_ablation": "docs-first thin client co-run: hand-written deterministic HTTP from public docs + same exact-signature addressing + scripted predicates + pinned-witness verify + same abstain fallback; if it matches effect at <= capsule ledger cost the capture stack ships nothing",
+        "gates_required_before_authorizable": ["(e) R2-3/D1 PASS incl. credential-discriminating substrate (login FLOOR_VOID lesson: substrate must discriminate or neither arm can observe the failure constituting the advantage)", "Runtime route-tier acceptance (unlock(2))"],
+        "unsupported_components_disclosed": ["new-ID write instantiation success (zero direct evidence)", "credential-material association on discriminating host", "write-path verification witnesses", "overhead-inclusive advantage at PoC ceilings"]
+      }
+    },
+    "h_audit_frozen_spec": {
+      "status": "ARMED_BEHIND_DATA - artifact sufficiency VERIFIED INSUFFICIENT 2026-08-26 (kb_frozen.sqlite runs table EMPTY; cost_events.jsonl 8 telemetry-class rows; no recurrence-bearing stream anywhere in committed evidence); commissioning REFUSED rather than run on fabricated inputs",
+      "origin": "product_optimization_researcher critic, frozen verbatim before any future outcomes",
+      "claim_under_test": "There exists a preregisterable selection rule over already-captured inventories such that held-out net verified-actions-avoided per selected task is strictly positive after allocating capture+verification+maintenance+retrieval at measured overhead band, against a baseline granted the SAME selection AND its own repeat memoization",
+      "protocol_frozen": "fit selection rule train-half only; evaluate untouched held-out rows; charge replay arm FULL overhead at three pins 60x/~150x/343x; metrics: net verified navigation-equivalent actions avoided per selected task (raw counts descriptive), false-accepts must remain 0, substitution events 0, break-even K* per route; win rule net>0 at MID pin held-out with zero substitution; kill if <=0 even at 60x pin; exactly-one mandatory ablation: caching-grant symmetry (baseline additionally granted content-hash verdict inheritance; exact-repeat PARITY x2 predicts sign flips to <=0, which would reduce residual thesis to first-contact value on D1/D2 surfaces)",
+      "executable_only_when": "a lawfully collected recurrence-bearing artifact set exists (requires D1/substrate chain or a future producer phase under fresh authorization; route mechanism CAP consumed)"
+    },
+    "ten_item_minimum_benchmark_evidence_bar_for_any_beats_claim": [
+      "1. prereg with numeric power arithmetic (X29); occupancy floor >=6 valid paired cells else MEASUREMENT_INVALID",
+      "2. strongest-comparator selection = mechanical max over {cold agent, trajectory-memory, instruction-card ceiling, bare-HTTP/curl null, scripted traversal, generated-spec client} per regime, chosen by frozen procedure BEFORE scoring; baseline artifacts persist with cache state pinned/disabled identically; warm-up symmetric",
+      "3. discriminating oracle: harness-judged, disclosed identically to all arms; negative control demonstrably able to fail (FLOOR_VOID environments void their cells); fabricated success => row FAILED",
+      "4. symmetric budgets/retries/exclusions; recovery billed to recovering arm; escalations count as retries; failed comparisons cost-as-incurred",
+      "5. matched-set paired metrics: navigation-equivalent action units + total billed tokens + perf_counter wall-clock as paired per-task deltas; latency only as expected-time-to-correct-outcome INCLUDING misses/recovery (50-67% miss prior makes median-on-hit inadmissible)",
+      "6. full-overhead treatment accounting: retrieval + applicability + verification + recovery + amortized storage/update/maintenance priced at measured cost over >=2-cycle horizon with break-even N* stated; setup/collection/CAP cost landed explicitly",
+      "7. conjunctive two-pass replication; >=2 hosts; edge holds at realistic staleness fractions (50-67%), not 0%",
+      "8. margin bar >=2-task margin >=M vs STRONGEST baseline with >=3-sample statistics",
+      "9. narrative constraints verbatim: http_floor null attached; no spent-instrument figures; no vendor OFFICIAL_CLAIM numbers; internal-scope ceiling",
+      "10. non-duplication attestation: evaluation cells disjoint from audited lane results; independent recomputation of headline numbers"
+    ],
+    "items_unsatisfiable_in_environment_today": ["3 (no discriminating substrate until D1-class probe passes)", "5-partial and 6 (consumer economics need endpoint; maintenance pricing needs lawful collection path)", "10-partial (route cells overlap audited cycle-9 set; new cells barred by CAP closure)"],
+    "warm_amortized_accounting_warning": "Any future citation of 9.40x-37.46x medians as PRODUCT economics without denominator-side capture/extraction/parameterization/maintenance costs and recurrence assumptions is an accounting artifact against external frames (blind miss 50-67%, fleet savings ~8% bound, overhead ratios 60-343x, implied K*~2-110 per selected route). Product adopts this warning as binding self-discipline."
+  }
+}

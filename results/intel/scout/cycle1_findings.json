@@ -1,0 +1,158 @@
+{
+  "cycle": 1,
+  "date": "2026-08-24",
+  "scout_role": "INTEL_SCOUT (docs/roles/INTEL_SCOUT.md)",
+  "mission_source": "state/intel_loop.json",
+  "mission_question": "Which publicly evidenced SPIDER-adjacent mechanism most directly addresses the current Graph weakness in robust procedure addressing or the product-level need to reduce repeated exploration?",
+  "evidence_tiers_used": ["CODE_VERIFIED", "PAPER_EVIDENCE", "OFFICIAL_CLAIM", "INFERENCE_HIGH", "UNKNOWN"],
+  "actors": [
+    {
+      "name": "SGDR (State-Grounded Dynamic Retrieval)",
+      "kind": "paper+code",
+      "paper": "Online Skill Learning for Web Agents via State-Grounded Dynamic Retrieval, arXiv:2606.04391, submitted 2026-06-03, authors Jiaxi Li, Ke Deng, Yun Wang, Jingyuan Huang, Yucheng Shi, Qiaoyu Tan, Jin Lu, Ninghao Liu",
+      "code": "https://github.com/plusnli/skill-dynamic-retrieval (official; CC BY-SA 4.0)",
+      "problem_attacked": "Task-level one-shot skill retrieval (retrieve at task start from instruction text only) mismatches evolving webpage states; skills go unused or misused mid-task.",
+      "retained_object": "Skill = dual text-code pair: natural-language description (retrieval key) + executable parameterized code (Playwright-level primitives); metadata: website, src_task_id, window {l,t}, usage_count, near_dup_of lineage. JSONL store.",
+      "induction": "Sliding-window extraction over evaluator-judged successful trajectories, window lengths L in {2,3,4,5}; LLM synthesis to description+code; verification/rewrite prompts per window; only successful trajectories induce.",
+      "retrieval": "At EVERY execution step: score_t(s_k) = alpha*cos(emb(task_goal), emb(desc_k)) + (1-alpha)*cos(emb(state_summary_t), emb(desc_k)); top-M pool max(3k,20); greedy MMR rerank mmr_lambda=0.7. Paper alpha=0.5; code default alpha=0.4 (recorded discrepancy).",
+      "state_grounding": "LLM StateSummarizer: accessibility tree + URL + title -> 1-2 sentence operational summary naming page kind and ENABLED action verbs in skill-description vocabulary; SHA256-content-hash cache; URL/title stub fallback on LLM failure. Verified in sgdr/retrieval/state_summarizer.py.",
+      "execution": "Retrieved skills injected as signature+docstring; agent may call a skill as ONE action or fall back to primitive actions; no forced execution of weak matches.",
+      "verification_or_success_oracle": "LLM-as-a-judge trajectory evaluation gates induction (only judged-successful trajectories produce skills).",
+      "invalidation_or_freshness": "usage_count tracked; near-dup lineage recorded; library archived at start of new run for same model+website. No live-site staleness/decay mechanism.",
+      "fallback_on_miss": "Agent proceeds with primitive actions when no retrieved skill fits; retrieval failure degrades to baseline agent rather than breaking execution.",
+      "transfer_claim": "WebArena five domains, two backbones (GPT-4.1 avg success 37.5%, Qwen3-4B 24.3%), reported consistent improvement over AWM / ASI / CER baselines (relative gains ~10%+). Same-site reuse setting; not a cross-domain transfer paper.",
+      "evaluation_design": "Online setting on WebArena (wiki removed); retained baseline runners for AWM, ASI (Agent Skill Induction), CER (Contextual Experience Replay) ship inside the repo.",
+      "known_limits": "Authors state WebArena covers limited domains/action sets; state summarizer costs 1 extra LLM call per novel state (cached); embedding model quality is an unstated dependency.",
+      "license_ip": "Code CC BY-SA 4.0 (copyleft, share-alike): clean-room reimplementation required; do not copy source into SPIDER. Paper arXiv under arXiv non-exclusive license.",
+      "spider_lane": "GRAPH",
+      "provisional_verdict": "EXPERIMENT"
+    },
+    {
+      "name": "SkillMigrator / Beyond Domains",
+      "kind": "paper",
+      "paper": "Beyond Domains: Reusing Web Skills via Transferable Interaction Patterns, arXiv:2606.17645, submitted 2026-06-16, UMich + Alibaba + Purdue + McMaster + UPenn",
+      "code": "not found as of cycle 1",
+      "retained_object": "TIP (Transferable Interaction Pattern) = induced skill + structural sketch (tree skeleton tau) of the accessibility snapshot at induction time + intent + operation template + slot schema Phi.",
+      "retrieval": "Single global library; retrieve by LAYOUT similarity between current snapshot sketch and stored sketches, combined with text signals; then ground abstract slot constraints to live element references before replay.",
+      "fallback_on_miss": "Explicit fallback to primitive LLM control when no reliable layout match.",
+      "measured_effect": "8-10% reduction in average LLM-action count on successful trajectories across WebArena and Mind2Web AT MATCHED SUCCESS RATE vs SOTA programmatic-skill agents (ASI, SkillWeaver, PolySkill compared).",
+      "key_insight": "Instruction-similarity retrieval fails cross-domain because paraphrases can need different DOM control flow; layout structure is the more robust addressing key beyond same-site and same-domain settings.",
+      "license_ip": "arXiv paper only; no code found; reproduce only from paper description if attempted.",
+      "spider_lane": "GRAPH",
+      "provisional_verdict": "WATCH"
+    },
+    {
+      "name": "Unbrowse",
+      "kind": "product+code",
+      "code": "https://github.com/unbrowse-ai/unbrowse (public mirror; MIT license per marketplace listings)",
+      "paper_claim": "Internal APIs Are All You Need, arXiv:2604.00694 (vendor-authored benchmark paper)",
+      "mechanism": "Capture HAR/network traffic during browser sessions; reverse-engineer first-party API endpoints behind the UI; index them as reusable route skills with params/pagination/auth patterns; replay routes directly (<200ms cached server-fetch claims) instead of re-driving a browser; honest fallback to real browser on miss/stale routes.",
+      "shared_infra_mechanisms": "Shared skill registry/marketplace: publish sanitized route metadata so other agents skip rediscovery; scoring/versioning; contributor wallet payouts for contributed routes; route-graph edge publication endpoint (/v1/graph/edges).",
+      "headline_numbers": "3.6x mean / 5.4x median warmed-cache speedup over Playwright across 94 live domains; <200ms cached hit; ~20-80s first discovery. TIER: OFFICIAL_CLAIM (vendor-run benchmark; not independently reproduced here).",
+      "relevance_to_spider": "This is the closest public implementation of SPIDER's browser-to-direct-API escalation + shared route registry product hypothesis, including invalidation-by-fallback design.",
+      "license_ip": "MIT (marketplace listing). Clean-room use straightforward; respect ToS questions around first-party API replay (flagged, unresolved here).",
+      "spider_lane": "PRODUCT_INFRA",
+      "provisional_verdict": "EXPERIMENT (later cycle)"
+    },
+    {
+      "name": "WebNavigator",
+      "kind": "paper+code",
+      "paper": "WebNavigator: Global Web Navigation via Interaction Graph Retrieval, arXiv:2603.20366 (March 2026), Nanjing group; supported by Fellou AI Browser",
+      "code": "https://github.com/fate-ubw/webNavigator (MIT); interaction graphs + precomputed embeddings for 5 WebArena domains released on HuggingFace (Jimzhang324/webNavigator)",
+      "mechanism": "Offline zero-token-cost heuristic exploration builds Interaction Graphs; online Retrieve-Reason-Teleport workflow does deterministic retrieval/pathfinding instead of probabilistic stepwise exploration.",
+      "headline_numbers": "Claims 72.9% success on WebArena multi-site tasks (OFFICIAL_CLAIM/PAPER_EVIDENCE; not independently reproduced here).",
+      "relevance_to_spider": "Directly adjacent to TEAM GRAPH's accumulated-topology idea and to PHYSICS's graph-vs-dynamics separation: it treats navigation as graph pathfinding once topology is known.",
+      "spider_lane": "GRAPH (and relevant context for PHYSICS nulls)",
+      "provisional_verdict": "WATCH"
+    },
+    {
+      "name": "Agent Workflow Memory (AWM)",
+      "kind": "paper+code",
+      "paper": "Agent Workflow Memory, arXiv:2409.07429, ICML 2025, CMU+MIT (Wang, Mao, Fried, Neubig)",
+      "code": "https://github.com/zorazrw/agent-workflow-memory (Apache-2.0)",
+      "mechanism": "Induce reusable textual workflows (description + abstracted steps) from successful trajectories, online or offline; merge recurring subroutines; inject selected workflows into prompt. +24.6% relative Mind2Web, +51.1% relative WebArena (PAPER_EVIDENCE); ICML reviews note methodology criticisms (unclear induction methodology, missing benchmarks) — treat headline deltas cautiously.",
+      "limit_for_spider": "Retrieval is task-level/textual; SGDR shows this static strategy is weaker than state-grounded stepwise retrieval.",
+      "spider_lane": "GRAPH",
+      "provisional_verdict": "WATCH (superseded by SGDR for addressing)"
+    },
+    {
+      "name": "SkillWeaver",
+      "kind": "paper+code",
+      "paper": "SkillWeaver: Web Agents can Self-Improve by Discovering and Honing Skills, arXiv:2504.07079, OSU NLP",
+      "code": "https://github.com/OSU-NLP-Group/SkillWeaver",
+      "mechanism": "Autonomous skill proposal by exploration; practice executions; reward-model-guided honing; distillation into robust Python APIs; APIs become plug-and-play tools. +31.8% relative WebArena, +39.8% relative real-world sites; strong-to-weak agent skill transfer up to +54.3% relative (PAPER_EVIDENCE). Compared against human-crafted APIs extracted from official docs — synthesized APIs approached human-API performance.",
+      "spider_lane": "GRAPH",
+      "provisional_verdict": "WATCH (induction side; its retrieval remains semantic/task-level)"
+    },
+    {
+      "name": "PolySkill",
+      "kind": "paper+code",
+      "paper": "PolySkill: Learning Generalizable Skills Through Polymorphic Abstraction, arXiv:2510.15863",
+      "code": "https://github.com/simonucl/PolySkill",
+      "mechanism": "Decouple skill abstract GOAL from concrete IMPLEMENTATION (polymorphism); self-exploration proposes own curriculum goals. Claims 1.7x skill reuse on seen sites, +9.4% Mind2Web, +13.9% unseen sites, >20% step reduction (PAPER_EVIDENCE).",
+      "spider_lane": "GRAPH (goal/implementation separation maps to fragment schema design)",
+      "provisional_verdict": "WATCH"
+    },
+    {
+      "name": "NeoCognition",
+      "kind": "company",
+      "facts": "OSU NLP spinout (Yu Su, Xiang Deng, Yu Gu; Mind2Web/SeeAct lineage), $40M seed April 2026, continual-learning 'world model for micro-worlds' positioning.",
+      "evidence_tier": "OFFICIAL_CLAIM only — no public mechanism details as of cycle 1.",
+      "spider_lane": "RADAR",
+      "provisional_verdict": "WATCH"
+    }
+  ],
+  "steam_like_infrastructure_findings": [
+    {
+      "actor": "skills.sh (Vercel)",
+      "tier": "OFFICIAL_CLAIM",
+      "source_urls": ["https://www.skills.sh/docs"],
+      "mechanisms": [
+        "Discovery/ranking driven by anonymous install telemetry from the open-source `skills` CLI (usage-based popularity signal, not editorial).",
+        "Packs: bundle public+private skills behind one install command (distribution primitive).",
+        "Trust: routine security audits surfaced at /audits plus explicit non-guarantee disclaimer; official curation tier."
+      ]
+    },
+    {
+      "actor": "LobeHub Skills Marketplace / agentskills mirrors",
+      "tier": "CODE_VERIFIED (metadata surface inspected)",
+      "source_urls": ["https://market.lobehub.com/s/skills/lekt9-unbrowse-openclaw", "https://agentskills.codes/skills/unbrowse"],
+      "mechanisms": [
+        "Skills distributed as SKILL.md instruction packages via CLI install; installs + ratings metadata; multi-host targeting (Claude Code/Codex/Cursor/Windsurf memory-file injection patterns).",
+        "Same skill artifact mirrored across multiple registries with divergent version fields — versioning discipline in the ecosystem is weak."
+      ]
+    },
+    {
+      "actor": "Unbrowse registry",
+      "tier": "CODE_VERIFIED (API surface) + OFFICIAL_CLAIM (economics)",
+      "mechanisms": [
+        "Publish/score/version sanitized route metadata; global + per-domain search endpoints; feedback channel tied to diagnostics; contributor wallet payouts (paid-route spending identity).",
+        "Three-tier execution ladder: skill cache (<200ms) -> shared route graph (sub-second) -> full browser traversal (source of truth). Explicit rule: do NOT silently substitute API replay for browser steps during live traversal."
+      ],
+      "note": "Closest existing implementation of the Steam-like shared-capability question for WEB ROUTES specifically; incentive layer (payouts) is OFFICIAL_CLAIM."
+    },
+    {
+      "actor": "Agent-skills research ecosystem (governance signals)",
+      "tier": "PAPER_EVIDENCE (existence/claims)",
+      "sources": ["arXiv:2602.08004 (data-driven analysis of Claude skills)", "arXiv:2602.10498 (hidden-comment injection)", "arXiv:2510.26328 (skill prompt-injection surface)"],
+      "note": "Marketplace security/threat-model literature now exists; any SPIDER shared-registry design must account for documented injection-via-skill attacks."
+    }
+  ],
+  "new_actors_discovered_beyond_seed": [
+    "Graph of Skills (arXiv:2604.05333) — dependency-aware structural retrieval over massive skill libraries",
+    "ContractSkill (arXiv:2603.20340) — contract-based verifiable/repairable skill artifacts, cross-model artifact portability test",
+    "Hierarchical Memory Tree (arXiv:2603.07024) — web experience organized with explicit pre/post conditions; criticizes flat trajectory memories for intent/site-detail entanglement ('context pollution')",
+    "EchoTrail — critic-guided exploration filtering for trajectory memory (cited in 2603.07024)",
+    "SAGE (arXiv:2512.17102) — RL (GRPO) training of skill-library usage; AppWorld only",
+    "WMA — Web agents with world models (Chae et al., ICLR 2025) — environment dynamics learned for navigation (PHYSICS-relevant)",
+    "Contextual Experience Replay (Liu et al. 2025) — experience-buffer baseline used by SGDR",
+    "WALT — website-tools-over-primitives argument (cited by SkillMigrator)",
+    "SkillNet / SkillFlow / WebXSkill / SkillClaw / MIND-Skill / MMG2Skill / SkillTracer / SkillLearnBench / CASCADE / ASI — 2026 wave of skill-infrastructure papers indexed by Semantic Scholar citations of SkillWeaver",
+    "Survey: 'A Survey of Agent Skills: Toward Procedural Infrastructure for LLM Agents' (Preprints 202605.1276) with six-layer taxonomy incl. governance/marketplace layer",
+    "NeoCognition (company radar entry)"
+  ],
+  "selection_decision": {
+    "selected_mechanism_id": "sgdr-state-grounded-dynamic-retrieval",
+    "reason": "Mission asks for the mechanism most directly addressing Graph's measured weakness in ROBUST PROCEDURE ADDRESSING (weak paraphrase addressing; hand-authored goal_sig only; entry-context mismatch failure mode) while also reducing repeated exploration. SGDR is (a) PAPER_EVIDENCE with exact formulas and CODE_VERIFIED core components (scoring, MMR, dedup, state summarizer verified in public source this cycle); (b) precisely the addressing upgrade SPIDER fragments need (task+state fused retrieval at every step, with explicit primitive fallback); (c) maps 1:1 onto the existing Graph store schema (fragments.goal_sig/steps, states.raw_json snapshots), making a minimal matched-baseline experiment feasible without new infrastructure; (d) ships its own strongest baselines (AWM, ASI, CER) for comparison design. Runner-up SkillMigrator (layout-conditioned TIP retrieval) targets the harder cross-domain case but has no public code, smaller measured effect (8-10% action reduction), and higher reproduction risk; it is recorded as WATCH for a later cycle once SGDR-style addressing exists as scaffolding."
+  }
+}

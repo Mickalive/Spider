@@ -1,0 +1,45 @@
+{
+ "generated_ts_ms": 1787724909696,
+ "primary_roster": [
+  "T_HTTPBIN_FORM",
+  "T_HTTPBIN_COOKIE",
+  "T_PETSTORE_FIND",
+  "T_DEMOBLAZE_CART"
+ ],
+ "probe_status_by_name": {
+  "httpbin": [
+   200
+  ],
+  "petstore": [
+   200
+  ],
+  "demoblaze_ui": [
+   200
+  ],
+  "demoblaze_api": [
+   200
+  ]
+ },
+ "dead_hosts": [],
+ "spare_probe_status": {
+  "T_JSONPLACE_POSTS": 200,
+  "T_PETSTORE_ADDPET": 200
+ },
+ "substitutions": [],
+ "tasks_left_scope": [],
+ "active_tasks": [
+  "T_HTTPBIN_FORM",
+  "T_HTTPBIN_COOKIE",
+  "T_PETSTORE_FIND",
+  "T_DEMOBLAZE_CART"
+ ],
+ "task_host": {
+  "T_HTTPBIN_FORM": "httpbin.org",
+  "T_HTTPBIN_COOKIE": "httpbin.org",
+  "T_PETSTORE_FIND": "petstore.swagger.io",
+  "T_DEMOBLAZE_CART": "www.demoblaze.com"
+ },
+ "m_active": 4,
+ "decision_cell_fixed": "T_DEMOBLAZE_CART",
+ "policy": "prereg section 3 activation rule; repair-1 erratum (RF-2 option a): mechanical end-to-end implementation"
+}

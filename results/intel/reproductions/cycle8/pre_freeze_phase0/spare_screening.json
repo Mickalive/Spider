@@ -1,0 +1,39 @@
+{
+ "screened_at_utc": "2026-08-26T02:49:57Z",
+ "spares": [
+  {
+   "task": "T_JSONPLACE_POSTS",
+   "screened_at_utc": "2026-08-26T02:49:57Z",
+   "both_genuine_completions_accepted": [
+    true,
+    true
+   ],
+   "routes_learned": [
+    "POST:https://jsonplaceholder.typicode.com/posts"
+   ],
+   "smoke_replay_code": "REPLAY_OK",
+   "smoke_replay_accepted": true,
+   "pointer_only_store": true,
+   "volatile_templates": {},
+   "eligible": true
+  },
+  {
+   "task": "T_PETSTORE_ADDPET",
+   "screened_at_utc": "2026-08-26T02:49:58Z",
+   "both_genuine_completions_accepted": [
+    true,
+    true
+   ],
+   "routes_learned": [
+    "POST:https://petstore.swagger.io/v2/pet",
+    "GET:https://petstore.swagger.io/v2/pet/{id}"
+   ],
+   "smoke_replay_code": "REPLAY_OK",
+   "smoke_replay_accepted": true,
+   "pointer_only_store": true,
+   "volatile_templates": {},
+   "eligible": true
+  }
+ ],
+ "n_eligible_spares": 2
+}

@@ -1,0 +1,31 @@
+{
+  "schema": "ngate2.split_manifest/v1",
+  "seed": 20260826000,
+  "rule": "deterministic sha256-keyed shuffle of eligible families; first two -> DEV, rest -> EVAL",
+  "dev_families_tuning_and_calibration_only": [
+    "D3B_books_mystery_p2_book",
+    "D4B_books_mystery_p2_book_home"
+  ],
+  "eval_families_confirmatory_only": [
+    "D4H_books_hf_p2_book_home",
+    "D5B_books_mystery_hf_p2_book_home"
+  ],
+  "eligible_universe": [
+    "D3B_books_mystery_p2_book",
+    "D4B_books_mystery_p2_book_home",
+    "D4H_books_hf_p2_book_home",
+    "D5B_books_mystery_hf_p2_book_home"
+  ],
+  "exclusions": {
+    "D2Q_quotes_login_p3": "clause 2 - quotes.toscrape near-repeat cell",
+    "D4Q_quotes_login_tag_tagp2_home": "clause 2 - quotes.toscrape near-repeat cell",
+    "D5Q_login_tag_tagp2_home_rootpager_logout": "clause 2 - quotes.toscrape near-repeat cell + login-family adjacency",
+    "books_login_anchor_cell": "Runtime R1 ownership (strongest-baseline resolution surface)"
+  },
+  "seed_ranges": {
+    "calibration_collectors": "20260826000..20260801199 (dev families only)",
+    "stage0_probe": "20270826000..20270826023 (paired CRN across arms)",
+    "evaluation": "20280826000..20280826199 (disjoint from all above)"
+  },
+  "integrity_note": "auditor recomputes by rerunning build_split(); any post-freeze change to ELIGIBLE_FAMILIES/SEED voids split integrity"
+}

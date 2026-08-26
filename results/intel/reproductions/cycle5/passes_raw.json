@@ -1,0 +1,629 @@
+[
+ {
+  "arm": "A",
+  "wall_ms": 1182.5,
+  "actions": 6,
+  "action_list": [
+   "goto",
+   "fill:custname",
+   "fill:custemail",
+   "check:size=medium",
+   "fill:comments",
+   "click:submit"
+  ],
+  "payload": {
+   "custname": "Spider Repro",
+   "custemail": "spider@example.com",
+   "size": "medium",
+   "comments": "cycle5 repro"
+  },
+  "payload_ok": true,
+  "error": null,
+  "env_fail": false,
+  "task": "T_BIN_FORM",
+  "kind": "warmup"
+ },
+ {
+  "arm": "B",
+  "wall_ms": 52.3,
+  "actions": 0,
+  "http_txs": 1,
+  "code": "REPLAY_OK",
+  "provenance": "replay:local_cache",
+  "payload": {
+   "comments": "cycle5 repro",
+   "custemail": "spider@example.com",
+   "custname": "Spider Repro",
+   "custtel": "",
+   "delivery": "",
+   "size": "medium"
+  },
+  "payload_ok": true,
+  "error": null,
+  "env_fail": false,
+  "task": "T_BIN_FORM",
+  "kind": "warmup"
+ },
+ {
+  "arm": "A",
+  "wall_ms": 1193.2,
+  "actions": 6,
+  "action_list": [
+   "goto",
+   "fill:custname",
+   "fill:custemail",
+   "check:size=medium",
+   "fill:comments",
+   "click:submit"
+  ],
+  "payload": {
+   "custname": "Spider Repro",
+   "custemail": "spider@example.com",
+   "size": "medium",
+   "comments": "cycle5 repro"
+  },
+  "payload_ok": true,
+  "error": null,
+  "env_fail": false,
+  "task": "T_BIN_FORM",
+  "rep": 1
+ },
+ {
+  "arm": "B",
+  "wall_ms": 181.9,
+  "actions": 0,
+  "http_txs": 1,
+  "code": "REPLAY_OK",
+  "provenance": "replay:local_cache",
+  "payload": {
+   "comments": "cycle5 repro",
+   "custemail": "spider@example.com",
+   "custname": "Spider Repro",
+   "custtel": "",
+   "delivery": "",
+   "size": "medium"
+  },
+  "payload_ok": true,
+  "error": null,
+  "env_fail": false,
+  "task": "T_BIN_FORM",
+  "rep": 1
+ },
+ {
+  "arm": "A",
+  "wall_ms": 1218.8,
+  "actions": 6,
+  "action_list": [
+   "goto",
+   "fill:custname",
+   "fill:custemail",
+   "check:size=medium",
+   "fill:comments",
+   "click:submit"
+  ],
+  "payload": {
+   "custname": "Spider Repro",
+   "custemail": "spider@example.com",
+   "size": "medium",
+   "comments": "cycle5 repro"
+  },
+  "payload_ok": true,
+  "error": null,
+  "env_fail": false,
+  "task": "T_BIN_FORM",
+  "rep": 2
+ },
+ {
+  "arm": "B",
+  "wall_ms": 31.5,
+  "actions": 0,
+  "http_txs": 1,
+  "code": "REPLAY_OK",
+  "provenance": "replay:local_cache",
+  "payload": {
+   "comments": "cycle5 repro",
+   "custemail": "spider@example.com",
+   "custname": "Spider Repro",
+   "custtel": "",
+   "delivery": "",
+   "size": "medium"
+  },
+  "payload_ok": true,
+  "error": null,
+  "env_fail": false,
+  "task": "T_BIN_FORM",
+  "rep": 2
+ },
+ {
+  "arm": "A",
+  "wall_ms": 1261.3,
+  "actions": 6,
+  "action_list": [
+   "goto",
+   "fill:custname",
+   "fill:custemail",
+   "check:size=medium",
+   "fill:comments",
+   "click:submit"
+  ],
+  "payload": {
+   "custname": "Spider Repro",
+   "custemail": "spider@example.com",
+   "size": "medium",
+   "comments": "cycle5 repro"
+  },
+  "payload_ok": true,
+  "error": null,
+  "env_fail": false,
+  "task": "T_BIN_FORM",
+  "rep": 3
+ },
+ {
+  "arm": "B",
+  "wall_ms": 32.9,
+  "actions": 0,
+  "http_txs": 1,
+  "code": "REPLAY_OK",
+  "provenance": "replay:local_cache",
+  "payload": {
+   "comments": "cycle5 repro",
+   "custemail": "spider@example.com",
+   "custname": "Spider Repro",
+   "custtel": "",
+   "delivery": "",
+   "size": "medium"
+  },
+  "payload_ok": true,
+  "error": null,
+  "env_fail": false,
+  "task": "T_BIN_FORM",
+  "rep": 3
+ },
+ {
+  "arm": "A",
+  "wall_ms": 1192.4,
+  "actions": 6,
+  "action_list": [
+   "goto",
+   "fill:custname",
+   "fill:custemail",
+   "check:size=medium",
+   "fill:comments",
+   "click:submit"
+  ],
+  "payload": {
+   "custname": "Spider Repro",
+   "custemail": "spider@example.com",
+   "size": "medium",
+   "comments": "cycle5 repro"
+  },
+  "payload_ok": true,
+  "error": null,
+  "env_fail": false,
+  "task": "T_BIN_FORM",
+  "rep": 4
+ },
+ {
+  "arm": "B",
+  "wall_ms": 77.5,
+  "actions": 0,
+  "http_txs": 1,
+  "code": "REPLAY_OK",
+  "provenance": "replay:local_cache",
+  "payload": {
+   "comments": "cycle5 repro",
+   "custemail": "spider@example.com",
+   "custname": "Spider Repro",
+   "custtel": "",
+   "delivery": "",
+   "size": "medium"
+  },
+  "payload_ok": true,
+  "error": null,
+  "env_fail": false,
+  "task": "T_BIN_FORM",
+  "rep": 4
+ },
+ {
+  "arm": "A",
+  "wall_ms": 1221.5,
+  "actions": 6,
+  "action_list": [
+   "goto",
+   "fill:custname",
+   "fill:custemail",
+   "check:size=medium",
+   "fill:comments",
+   "click:submit"
+  ],
+  "payload": {
+   "custname": "Spider Repro",
+   "custemail": "spider@example.com",
+   "size": "medium",
+   "comments": "cycle5 repro"
+  },
+  "payload_ok": true,
+  "error": null,
+  "env_fail": false,
+  "task": "T_BIN_FORM",
+  "rep": 5
+ },
+ {
+  "arm": "B",
+  "wall_ms": 30.7,
+  "actions": 0,
+  "http_txs": 1,
+  "code": "REPLAY_OK",
+  "provenance": "replay:local_cache",
+  "payload": {
+   "comments": "cycle5 repro",
+   "custemail": "spider@example.com",
+   "custname": "Spider Repro",
+   "custtel": "",
+   "delivery": "",
+   "size": "medium"
+  },
+  "payload_ok": true,
+  "error": null,
+  "env_fail": false,
+  "task": "T_BIN_FORM",
+  "rep": 5
+ },
+ {
+  "arm": "C",
+  "wall_ms": 30.5,
+  "actions": 0,
+  "http_txs": 1,
+  "code": "REPLAY_OK",
+  "payload": {
+   "custname": "Spider Repro",
+   "custemail": "spider@example.com",
+   "size": "medium",
+   "comments": "cycle5 repro"
+  },
+  "payload_ok": true,
+  "error": null,
+  "env_fail": false,
+  "task": "T_BIN_FORM",
+  "rep": 1
+ },
+ {
+  "arm": "C",
+  "wall_ms": 31.8,
+  "actions": 0,
+  "http_txs": 1,
+  "code": "REPLAY_OK",
+  "payload": {
+   "custname": "Spider Repro",
+   "custemail": "spider@example.com",
+   "size": "medium",
+   "comments": "cycle5 repro"
+  },
+  "payload_ok": true,
+  "error": null,
+  "env_fail": false,
+  "task": "T_BIN_FORM",
+  "rep": 2
+ },
+ {
+  "arm": "C",
+  "wall_ms": 30.3,
+  "actions": 0,
+  "http_txs": 1,
+  "code": "REPLAY_OK",
+  "payload": {
+   "custname": "Spider Repro",
+   "custemail": "spider@example.com",
+   "size": "medium",
+   "comments": "cycle5 repro"
+  },
+  "payload_ok": true,
+  "error": null,
+  "env_fail": false,
+  "task": "T_BIN_FORM",
+  "rep": 3
+ },
+ {
+  "arm": "C",
+  "wall_ms": 29.0,
+  "actions": 0,
+  "http_txs": 1,
+  "code": "REPLAY_OK",
+  "payload": {
+   "custname": "Spider Repro",
+   "custemail": "spider@example.com",
+   "size": "medium",
+   "comments": "cycle5 repro"
+  },
+  "payload_ok": true,
+  "error": null,
+  "env_fail": false,
+  "task": "T_BIN_FORM",
+  "rep": 4
+ },
+ {
+  "arm": "C",
+  "wall_ms": 29.9,
+  "actions": 0,
+  "http_txs": 1,
+  "code": "REPLAY_OK",
+  "payload": {
+   "custname": "Spider Repro",
+   "custemail": "spider@example.com",
+   "size": "medium",
+   "comments": "cycle5 repro"
+  },
+  "payload_ok": true,
+  "error": null,
+  "env_fail": false,
+  "task": "T_BIN_FORM",
+  "rep": 5
+ },
+ {
+  "arm": "A",
+  "wall_ms": 720.2,
+  "actions": 1,
+  "action_list": [
+   "goto"
+  ],
+  "payload": {
+   "spider_pref": "dark"
+  },
+  "payload_ok": true,
+  "error": null,
+  "env_fail": false,
+  "task": "T_BIN_COOKIE",
+  "kind": "warmup"
+ },
+ {
+  "arm": "B",
+  "wall_ms": 29.7,
+  "actions": 0,
+  "http_txs": 1,
+  "code": "REPLAY_OK",
+  "provenance": "replay:local_cache",
+  "payload": {
+   "spider_pref": "dark"
+  },
+  "payload_ok": true,
+  "error": null,
+  "env_fail": false,
+  "task": "T_BIN_COOKIE",
+  "kind": "warmup"
+ },
+ {
+  "arm": "A",
+  "wall_ms": 568.7,
+  "actions": 1,
+  "action_list": [
+   "goto"
+  ],
+  "payload": {
+   "spider_pref": "dark"
+  },
+  "payload_ok": true,
+  "error": null,
+  "env_fail": false,
+  "task": "T_BIN_COOKIE",
+  "rep": 1
+ },
+ {
+  "arm": "B",
+  "wall_ms": 74.7,
+  "actions": 0,
+  "http_txs": 1,
+  "code": "REPLAY_OK",
+  "provenance": "replay:local_cache",
+  "payload": {
+   "spider_pref": "dark"
+  },
+  "payload_ok": true,
+  "error": null,
+  "env_fail": false,
+  "task": "T_BIN_COOKIE",
+  "rep": 1
+ },
+ {
+  "arm": "A",
+  "wall_ms": 557.4,
+  "actions": 1,
+  "action_list": [
+   "goto"
+  ],
+  "payload": {
+   "spider_pref": "dark"
+  },
+  "payload_ok": true,
+  "error": null,
+  "env_fail": false,
+  "task": "T_BIN_COOKIE",
+  "rep": 2
+ },
+ {
+  "arm": "B",
+  "wall_ms": 64.6,
+  "actions": 0,
+  "http_txs": 1,
+  "code": "REPLAY_OK",
+  "provenance": "replay:local_cache",
+  "payload": {
+   "spider_pref": "dark"
+  },
+  "payload_ok": true,
+  "error": null,
+  "env_fail": false,
+  "task": "T_BIN_COOKIE",
+  "rep": 2
+ },
+ {
+  "arm": "A",
+  "wall_ms": 672.3,
+  "actions": 1,
+  "action_list": [
+   "goto"
+  ],
+  "payload": {
+   "spider_pref": "dark"
+  },
+  "payload_ok": true,
+  "error": null,
+  "env_fail": false,
+  "task": "T_BIN_COOKIE",
+  "rep": 3
+ },
+ {
+  "arm": "B",
+  "wall_ms": 31.9,
+  "actions": 0,
+  "http_txs": 1,
+  "code": "REPLAY_OK",
+  "provenance": "replay:local_cache",
+  "payload": {
+   "spider_pref": "dark"
+  },
+  "payload_ok": true,
+  "error": null,
+  "env_fail": false,
+  "task": "T_BIN_COOKIE",
+  "rep": 3
+ },
+ {
+  "arm": "A",
+  "wall_ms": 559.7,
+  "actions": 1,
+  "action_list": [
+   "goto"
+  ],
+  "payload": {
+   "spider_pref": "dark"
+  },
+  "payload_ok": true,
+  "error": null,
+  "env_fail": false,
+  "task": "T_BIN_COOKIE",
+  "rep": 4
+ },
+ {
+  "arm": "B",
+  "wall_ms": 31.8,
+  "actions": 0,
+  "http_txs": 1,
+  "code": "REPLAY_OK",
+  "provenance": "replay:local_cache",
+  "payload": {
+   "spider_pref": "dark"
+  },
+  "payload_ok": true,
+  "error": null,
+  "env_fail": false,
+  "task": "T_BIN_COOKIE",
+  "rep": 4
+ },
+ {
+  "arm": "A",
+  "wall_ms": 558.1,
+  "actions": 1,
+  "action_list": [
+   "goto"
+  ],
+  "payload": {
+   "spider_pref": "dark"
+  },
+  "payload_ok": true,
+  "error": null,
+  "env_fail": false,
+  "task": "T_BIN_COOKIE",
+  "rep": 5
+ },
+ {
+  "arm": "B",
+  "wall_ms": 99.1,
+  "actions": 0,
+  "http_txs": 1,
+  "code": "REPLAY_OK",
+  "provenance": "replay:local_cache",
+  "payload": {
+   "spider_pref": "dark"
+  },
+  "payload_ok": true,
+  "error": null,
+  "env_fail": false,
+  "task": "T_BIN_COOKIE",
+  "rep": 5
+ },
+ {
+  "arm": "C",
+  "wall_ms": 47.0,
+  "actions": 0,
+  "http_txs": 1,
+  "code": "REPLAY_OK",
+  "payload": {
+   "spider_pref": "dark"
+  },
+  "payload_ok": true,
+  "error": null,
+  "env_fail": false,
+  "task": "T_BIN_COOKIE",
+  "rep": 1
+ },
+ {
+  "arm": "C",
+  "wall_ms": 29.7,
+  "actions": 0,
+  "http_txs": 1,
+  "code": "REPLAY_OK",
+  "payload": {
+   "spider_pref": "dark"
+  },
+  "payload_ok": true,
+  "error": null,
+  "env_fail": false,
+  "task": "T_BIN_COOKIE",
+  "rep": 2
+ },
+ {
+  "arm": "C",
+  "wall_ms": 31.2,
+  "actions": 0,
+  "http_txs": 1,
+  "code": "REPLAY_OK",
+  "payload": {
+   "spider_pref": "dark"
+  },
+  "payload_ok": true,
+  "error": null,
+  "env_fail": false,
+  "task": "T_BIN_COOKIE",
+  "rep": 3
+ },
+ {
+  "arm": "C",
+  "wall_ms": 703.2,
+  "actions": 0,
+  "http_txs": 1,
+  "code": "REPLAY_OK",
+  "payload": {
+   "spider_pref": "dark"
+  },
+  "payload_ok": true,
+  "error": null,
+  "env_fail": false,
+  "task": "T_BIN_COOKIE",
+  "rep": 4
+ },
+ {
+  "arm": "C",
+  "wall_ms": 184.4,
+  "actions": 0,
+  "http_txs": 1,
+  "code": "REPLAY_OK",
+  "payload": {
+   "spider_pref": "dark"
+  },
+  "payload_ok": true,
+  "error": null,
+  "env_fail": false,
+  "task": "T_BIN_COOKIE",
+  "rep": 5
+ }
+]

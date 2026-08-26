@@ -1,0 +1,121 @@
+{
+ "routes": [
+  {
+   "route_id": "GET:https://petstore.swagger.io/v2/swagger.json",
+   "intent": "",
+   "site": "petstore.swagger.io",
+   "method": "GET",
+   "url_template": "https://petstore.swagger.io/v2/swagger.json",
+   "path_slots": [],
+   "query_slots": [],
+   "body_template": null,
+   "body_slots": [],
+   "headers_required": {
+    "cookie": {
+     "source": "auth_material"
+    }
+   },
+   "response_shape": {
+    "basePath": "str",
+    "definitions": {
+     "ApiResponse": "dict",
+     "Category": "dict",
+     "Order": "dict",
+     "Pet": "dict",
+     "Tag": "dict",
+     "User": "dict"
+    },
+    "externalDocs": {
+     "description": "str",
+     "url": "str"
+    },
+    "host": "str",
+    "info": {
+     "contact": "dict",
+     "description": "str",
+     "license": "dict",
+     "termsOfService": "str",
+     "title": "str",
+     "version": "str"
+    },
+    "paths": {
+     "/pet": "dict",
+     "/pet/findByStatus": "dict",
+     "/pet/findByTags": "dict",
+     "/pet/{petId}": "dict",
+     "/pet/{petId}/uploadImage": "dict",
+     "/store/inventory": "dict",
+     "/store/order": "dict",
+     "/store/order/{orderId}": "dict",
+     "/user": "dict",
+     "/user/createWithArray": "dict",
+     "/user/createWithList": "dict",
+     "/user/login": "dict",
+     "/user/logout": "dict",
+     "/user/{username}": "dict"
+    },
+    "schemes": [
+     "str"
+    ],
+    "securityDefinitions": {
+     "api_key": "dict",
+     "petstore_auth": "dict"
+    },
+    "swagger": "str",
+    "tags": [
+     "dict"
+    ]
+   },
+   "volatile_keys": [],
+   "freshness_ts_ms": 1787703670021,
+   "reliability": {
+    "ok": 0,
+    "fail": 0
+   },
+   "lifecycle": "active",
+   "evidence_urls": [
+    "https://petstore.swagger.io/v2/swagger.json"
+   ],
+   "n_observations": 1
+  },
+  {
+   "route_id": "GET:https://petstore.swagger.io/v2/pet/findByStatus",
+   "intent": "find_pets_by_status_petstore",
+   "site": "petstore.swagger.io",
+   "method": "GET",
+   "url_template": "https://petstore.swagger.io/v2/pet/findByStatus",
+   "path_slots": [],
+   "query_slots": [
+    "status"
+   ],
+   "body_template": null,
+   "body_slots": [],
+   "headers_required": {
+    "cookie": {
+     "source": "auth_material"
+    }
+   },
+   "response_shape": [
+    {
+     "category": "dict",
+     "id": "int",
+     "name": "str",
+     "photoUrls": "list",
+     "status": "str",
+     "tags": "list"
+    }
+   ],
+   "volatile_keys": [],
+   "freshness_ts_ms": 1787703670021,
+   "reliability": {
+    "ok": 0,
+    "fail": 0
+   },
+   "lifecycle": "active",
+   "evidence_urls": [
+    "https://petstore.swagger.io/v2/pet/findByStatus?status=available"
+   ],
+   "n_observations": 1
+  }
+ ]
+}

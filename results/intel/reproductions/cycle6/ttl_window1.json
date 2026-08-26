@@ -1,0 +1,37 @@
+{
+ "ts_ms": 1787695530749,
+ "fingerprints": {
+  "httpbin": {
+   "url": "https://httpbin.org/get",
+   "sha256_head": "23077741302d6ec096c2031d8aceddd5ffbbe3c70174fc9faf53156bd2974cce",
+   "etag": null,
+   "last_modified": null,
+   "server": "gunicorn/19.9.0",
+   "content_length": "296"
+  },
+  "petstore": {
+   "url": "https://petstore.swagger.io/v2/swagger.json",
+   "sha256_head": "4b13530628bc7a902f79da7c75b4401a004689208b166b91d32115f9b331b270",
+   "etag": null,
+   "last_modified": null,
+   "server": "Jetty(9.2.9.v20150224)",
+   "content_length": null
+  },
+  "demoblaze": {
+   "url": "https://www.demoblaze.com/config.json",
+   "sha256_head": "62f8fb442cb21c2e040a4d90c208942ad38bfa1dd573c2e6af6d9968041125e8",
+   "etag": "\"cET1bQ\"",
+   "last_modified": null,
+   "server": "Google Frontend",
+   "content_length": null
+  },
+  "jsonplaceholder": {
+   "url": "https://jsonplaceholder.typicode.com/posts/1",
+   "sha256_head": "965636bd900078aa86a714aea4de146af6d396205d5100636f1bdd2454f73420",
+   "etag": "W/\"124-yiKdLzqO5gfBrJFrcdJ8Yq0LGnU\"",
+   "last_modified": null,
+   "server": "cloudflare",
+   "content_length": "292"
+  }
+ }
+}

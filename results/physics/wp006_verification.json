@@ -1,0 +1,46 @@
+{
+ "verifier": "verify_wp006 own-reference-path",
+ "n_rows": 1075,
+ "checks": {
+  "C1_target_rederivation_mismatches": 0,
+  "C2_statematch_recomputed_rows": 868,
+  "C2_statematch_mismatches": 0,
+  "C2_session_assertion_rows_skipped_live_only": 0,
+  "C3_calibration_order_violations": 0,
+  "C3_rows_before_freeze_commit": 0,
+  "C4_atomicity_violations_valid_rows": 0,
+  "C4_session_assertions_missing_stateful": 0
+ },
+ "own_counts": {
+  "attempted_sites": [
+   "books",
+   "gutenberg",
+   "internet",
+   "openlibrary",
+   "parabank",
+   "quotes",
+   "saucedemo",
+   "wikipedia"
+  ],
+  "classes_attempted": [
+   "stateful",
+   "static"
+  ],
+  "verified_bps_by_site": {
+   "books": 12,
+   "internet": 2,
+   "parabank": 5,
+   "quotes": 12,
+   "saucedemo": 7
+  },
+  "producer_sites": [
+   "books",
+   "quotes"
+  ],
+  "total_verified_bps": 38
+ },
+ "team_verdict": "FALSIFIED",
+ "own_verdict": "FALSIFIED",
+ "verdict_agreement": true,
+ "PASS": true
+}

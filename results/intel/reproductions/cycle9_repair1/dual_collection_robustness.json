@@ -1,0 +1,318 @@
+{
+  "artifact": "RF-3 dual-collection robustness recomputation",
+  "author_role": "INTEL_REPRODUCER (repair round 1, cycle 9)",
+  "method_note": "Independently written classifier and sign/Holm arithmetic implemented from frozen prereg sections 10/14 text; frozen stats.bca_or_percentile re-run READ-ONLY on this script's own deltas; independent 200k-resample percentile bootstrap with RNG seed 975310 as corroboration. No experiment code was modified; both input trees are read-only.",
+  "datasets": [
+    {
+      "dataset_label": "ATTEMPT-1 (scout snapshot 47bccf3) \u2014 QUARANTINED NON-EVIDENCE, observation tier only",
+      "evidence_root": "/tmp/spider_intel_scout/results/intel/reproductions/cycle8",
+      "rows_total": 272,
+      "verdict_independent_recompute": "REPRODUCED_USEFUL",
+      "validity_precondition": {
+        "pass": true,
+        "tasks": {
+          "T_HTTPBIN_FORM": {
+            "both_completions_accepted": true,
+            "routes_learned_n": 1,
+            "discovery_time_replay_code": "REPLAY_OK",
+            "discovery_time_equivalent": true,
+            "pass": true
+          },
+          "T_HTTPBIN_COOKIE": {
+            "both_completions_accepted": true,
+            "routes_learned_n": 1,
+            "discovery_time_replay_code": "REPLAY_OK",
+            "discovery_time_equivalent": true,
+            "pass": true
+          },
+          "T_PETSTORE_FIND": {
+            "both_completions_accepted": true,
+            "routes_learned_n": 2,
+            "discovery_time_replay_code": "REPLAY_OK",
+            "discovery_time_equivalent": true,
+            "pass": true
+          },
+          "T_DEMOBLAZE_CART": {
+            "both_completions_accepted": true,
+            "routes_learned_n": 7,
+            "discovery_time_replay_code": "REPLAY_OK",
+            "discovery_time_equivalent": true,
+            "pass": true
+          }
+        }
+      },
+      "C2_prime_per_task": {
+        "T_HTTPBIN_FORM": {
+          "n_valid_pairs": 12,
+          "n_scored": 12,
+          "wins": 12,
+          "losses_completed": 0,
+          "excluded_harness": 0,
+          "excluded_env": 0,
+          "median_A_ms": 627.5,
+          "median_B_ms": 48.9,
+          "speedup_median_ratio": 12.83,
+          "bca_method_frozen_rerun": "bca",
+          "bca_logratio_ci_low_frozen_rerun": 1.7713,
+          "own_bootstrap_logratio_ci_low_seed975310": 1.8174,
+          "B_actions_all_zero": true,
+          "component_pass": true,
+          "sign_p_raw_one_sided": 0.000244140625,
+          "sign_p_holm": 0.000977
+        },
+        "T_HTTPBIN_COOKIE": {
+          "n_valid_pairs": 12,
+          "n_scored": 12,
+          "wins": 12,
+          "losses_completed": 0,
+          "excluded_harness": 0,
+          "excluded_env": 0,
+          "median_A_ms": 468.1,
+          "median_B_ms": 26.1,
+          "speedup_median_ratio": 17.9,
+          "bca_method_frozen_rerun": "bca",
+          "bca_logratio_ci_low_frozen_rerun": 2.171,
+          "own_bootstrap_logratio_ci_low_seed975310": 2.2156,
+          "B_actions_all_zero": true,
+          "component_pass": true,
+          "sign_p_raw_one_sided": 0.000244140625,
+          "sign_p_holm": 0.000977
+        },
+        "T_PETSTORE_FIND": {
+          "n_valid_pairs": 12,
+          "n_scored": 12,
+          "wins": 12,
+          "losses_completed": 0,
+          "excluded_harness": 0,
+          "excluded_env": 0,
+          "median_A_ms": 2649.5,
+          "median_B_ms": 31.7,
+          "speedup_median_ratio": 83.58,
+          "bca_method_frozen_rerun": "bca",
+          "bca_logratio_ci_low_frozen_rerun": 4.1806,
+          "own_bootstrap_logratio_ci_low_seed975310": 4.1952,
+          "B_actions_all_zero": true,
+          "component_pass": true,
+          "sign_p_raw_one_sided": 0.000244140625,
+          "sign_p_holm": 0.000977
+        },
+        "T_DEMOBLAZE_CART": {
+          "n_valid_pairs": 12,
+          "n_scored": 12,
+          "wins": 12,
+          "losses_completed": 0,
+          "excluded_harness": 0,
+          "excluded_env": 0,
+          "median_A_ms": 6644.2,
+          "median_B_ms": 217.3,
+          "speedup_median_ratio": 30.57,
+          "bca_method_frozen_rerun": "bca",
+          "bca_logratio_ci_low_frozen_rerun": 3.2796,
+          "own_bootstrap_logratio_ci_low_seed975310": 3.3012,
+          "B_actions_all_zero": true,
+          "component_pass": true,
+          "sign_p_raw_one_sided": 0.000244140625,
+          "sign_p_holm": 0.000977
+        }
+      },
+      "C2_family_gate": {
+        "holm_all_below_0.05": true,
+        "leave_one_host_out_stable": true,
+        "detail": {
+          "without_httpbin.org": {
+            "n_pairs": 24,
+            "B_wins": 24,
+            "median_A_ms": 4730.6,
+            "median_B_ms": 122.5,
+            "stable": true
+          },
+          "without_petstore.swagger.io": {
+            "n_pairs": 36,
+            "B_wins": 36,
+            "median_A_ms": 693.0,
+            "median_B_ms": 87.0,
+            "stable": true
+          },
+          "without_www.demoblaze.com": {
+            "n_pairs": 36,
+            "B_wins": 36,
+            "median_A_ms": 693.0,
+            "median_B_ms": 31.7,
+            "stable": true
+          }
+        }
+      },
+      "C3_two_variant_comparator": {
+        "decision_cell": "T_DEMOBLAZE_CART",
+        "B_n": 30,
+        "B_ok": 30,
+        "B_rate": 1.0,
+        "D_strict_n": 5,
+        "D_strict_ok": 0,
+        "D_strict_rate": 0.0,
+        "D_acceptance_n": 10,
+        "D_acceptance_ok": 0,
+        "D_acceptance_rate": 0.0,
+        "E_descriptive_n": 5,
+        "E_descriptive_ok": 0,
+        "pass": true
+      }
+    },
+    {
+      "dataset_label": "SEALED canonical evidence (repro tip 523c3c1)",
+      "evidence_root": "/tmp/spider_intel_old_repro/results/intel/reproductions/cycle8",
+      "rows_total": 272,
+      "verdict_independent_recompute": "REPRODUCED_USEFUL",
+      "validity_precondition": {
+        "pass": true,
+        "tasks": {
+          "T_HTTPBIN_FORM": {
+            "both_completions_accepted": true,
+            "routes_learned_n": 1,
+            "discovery_time_replay_code": "REPLAY_OK",
+            "discovery_time_equivalent": true,
+            "pass": true
+          },
+          "T_HTTPBIN_COOKIE": {
+            "both_completions_accepted": true,
+            "routes_learned_n": 1,
+            "discovery_time_replay_code": "REPLAY_OK",
+            "discovery_time_equivalent": true,
+            "pass": true
+          },
+          "T_PETSTORE_FIND": {
+            "both_completions_accepted": true,
+            "routes_learned_n": 2,
+            "discovery_time_replay_code": "REPLAY_OK",
+            "discovery_time_equivalent": true,
+            "pass": true
+          },
+          "T_DEMOBLAZE_CART": {
+            "both_completions_accepted": true,
+            "routes_learned_n": 7,
+            "discovery_time_replay_code": "REPLAY_OK",
+            "discovery_time_equivalent": true,
+            "pass": true
+          }
+        }
+      },
+      "C2_prime_per_task": {
+        "T_HTTPBIN_FORM": {
+          "n_valid_pairs": 12,
+          "n_scored": 12,
+          "wins": 12,
+          "losses_completed": 0,
+          "excluded_harness": 0,
+          "excluded_env": 0,
+          "median_A_ms": 769.7,
+          "median_B_ms": 81.9,
+          "speedup_median_ratio": 9.4,
+          "bca_method_frozen_rerun": "bca",
+          "bca_logratio_ci_low_frozen_rerun": 1.9014,
+          "own_bootstrap_logratio_ci_low_seed975310": 1.8964,
+          "B_actions_all_zero": true,
+          "component_pass": true,
+          "sign_p_raw_one_sided": 0.000244140625,
+          "sign_p_holm": 0.000977
+        },
+        "T_HTTPBIN_COOKIE": {
+          "n_valid_pairs": 12,
+          "n_scored": 12,
+          "wins": 12,
+          "losses_completed": 0,
+          "excluded_harness": 0,
+          "excluded_env": 0,
+          "median_A_ms": 522.0,
+          "median_B_ms": 92.0,
+          "speedup_median_ratio": 5.67,
+          "bca_method_frozen_rerun": "bca",
+          "bca_logratio_ci_low_frozen_rerun": 1.3404,
+          "own_bootstrap_logratio_ci_low_seed975310": 1.3743,
+          "B_actions_all_zero": true,
+          "component_pass": true,
+          "sign_p_raw_one_sided": 0.000244140625,
+          "sign_p_holm": 0.000977
+        },
+        "T_PETSTORE_FIND": {
+          "n_valid_pairs": 12,
+          "n_scored": 12,
+          "wins": 12,
+          "losses_completed": 0,
+          "excluded_harness": 0,
+          "excluded_env": 0,
+          "median_A_ms": 2548.7,
+          "median_B_ms": 140.0,
+          "speedup_median_ratio": 18.2,
+          "bca_method_frozen_rerun": "bca",
+          "bca_logratio_ci_low_frozen_rerun": 2.8386,
+          "own_bootstrap_logratio_ci_low_seed975310": 2.839,
+          "B_actions_all_zero": true,
+          "component_pass": true,
+          "sign_p_raw_one_sided": 0.000244140625,
+          "sign_p_holm": 0.000977
+        },
+        "T_DEMOBLAZE_CART": {
+          "n_valid_pairs": 12,
+          "n_scored": 12,
+          "wins": 12,
+          "losses_completed": 0,
+          "excluded_harness": 0,
+          "excluded_env": 0,
+          "median_A_ms": 6599.3,
+          "median_B_ms": 176.2,
+          "speedup_median_ratio": 37.46,
+          "bca_method_frozen_rerun": "bca",
+          "bca_logratio_ci_low_frozen_rerun": 3.3561,
+          "own_bootstrap_logratio_ci_low_seed975310": 3.3821,
+          "B_actions_all_zero": true,
+          "component_pass": true,
+          "sign_p_raw_one_sided": 0.000244140625,
+          "sign_p_holm": 0.000977
+        }
+      },
+      "C2_family_gate": {
+        "holm_all_below_0.05": true,
+        "leave_one_host_out_stable": true,
+        "detail": {
+          "without_httpbin.org": {
+            "n_pairs": 24,
+            "B_wins": 24,
+            "median_A_ms": 4547.6,
+            "median_B_ms": 164.3,
+            "stable": true
+          },
+          "without_petstore.swagger.io": {
+            "n_pairs": 36,
+            "B_wins": 36,
+            "median_A_ms": 798.9,
+            "median_B_ms": 110.3,
+            "stable": true
+          },
+          "without_www.demoblaze.com": {
+            "n_pairs": 36,
+            "B_wins": 36,
+            "median_A_ms": 798.9,
+            "median_B_ms": 110.3,
+            "stable": true
+          }
+        }
+      },
+      "C3_two_variant_comparator": {
+        "decision_cell": "T_DEMOBLAZE_CART",
+        "B_n": 30,
+        "B_ok": 30,
+        "B_rate": 1.0,
+        "D_strict_n": 5,
+        "D_strict_ok": 0,
+        "D_strict_rate": 0.0,
+        "D_acceptance_n": 10,
+        "D_acceptance_ok": 0,
+        "D_acceptance_rate": 0.0,
+        "E_descriptive_n": 5,
+        "E_descriptive_ok": 0,
+        "pass": true
+      }
+    }
+  ],
+  "invariance_statement": "IDENTICAL clause outcomes and verdict across both collections: ['REPRODUCED_USEFUL']"
+}

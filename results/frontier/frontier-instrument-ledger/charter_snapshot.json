@@ -1,0 +1,40 @@
+{
+  "team_id": "frontier-instrument-ledger",
+  "charter_version": 1,
+  "status": "CREATE",
+  "priority": "HIGH",
+  "domain": "Cross-lane measurement methodology - evaluation-fixture comparability, instrument provenance and spentness",
+  "mission": "Build and exercise once a minimal machine-readable instrument ledger on existing accepted Graph/Physics/Intel/Runtime evidence to determine whether evaluation fixtures, adaptation history and instrument spentness can be tracked well enough to prevent cross-lane instrument reuse and hidden selection-on-instrument.",
+  "question": "Can a minimal provenance/spentness ledger mechanically flag known instrument-reuse, post-adaptation and comparability hazards in accepted SPIDER evidence without inventing scientific verdicts?",
+  "why_now": "Historical CTO #25 created this HIGH-priority cross-lane team after repeated instrument-spending and report/data-drift incidents. It is cheap because it can operate on existing provenance.",
+  "why_not_existing_lane": "Each lane tracks its own experiments but no lane owns cross-lane evaluation-fixture identity, authorship/adaptation history and spentness semantics.",
+  "expected_work_compression_leverage": "A useful ledger prevents expensive invalid confirmatory cycles and duplicated forensic archaeology; if it cannot reliably classify existing cases, it should not become orchestration infrastructure.",
+  "evidence_inputs": [
+    "Historical CTO #25 run 32909350978: exact team id, CREATE v1, HIGH, cross-lane measurement-methodology domain.",
+    "Historical CTO #25 ledger: instrument-ledger partially owns the instrument-spending cascade.",
+    "Run Evidence Memory may be used as radar with evidence_status preserved; it may not upgrade scientific claims."
+  ],
+  "strongest_null_or_baseline": "Current per-lane provenance fields/manual ledger review. The new ledger must catch a preregistered set of already-known provenance/spentness hazards with no false scientific reclassification and with lower lookup ambiguity than manual status quo.",
+  "validity_threats": [
+    "Encoding the known answers manually rather than deriving them from durable provenance.",
+    "Treating missing provenance as clean provenance instead of UNKNOWN.",
+    "Changing or summarizing away original evidence status/verdicts.",
+    "Creating more orchestration burden than the forensic work it removes."
+  ],
+  "required_artifacts": [
+    "Minimal ledger schema with UNKNOWN-safe semantics.",
+    "One-time backfill of a preregistered sample across at least three lanes.",
+    "Mechanical hazard checks and comparison against manual baseline.",
+    "One-shot verdict on whether the ledger is worth retaining; no automatic deployment."
+  ],
+  "stop_condition": "Stop after one backfill/check/audit cycle. The batch does not authorize making the ledger mandatory infrastructure or auto-continuing the team.",
+  "handoff_targets": [
+    "CTO",
+    "Graph",
+    "Physics",
+    "Intel",
+    "Runtime",
+    "Product"
+  ],
+  "authority_origin": "HUMAN_FORCED_HISTORICAL_CTO25_ONE_SHOT"
+}

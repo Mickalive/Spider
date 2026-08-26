@@ -1,0 +1,487 @@
+{
+  "holdout_descriptive": [
+    {
+      "block_codes": [],
+      "id": "HOLDOUT_H1",
+      "kit_disposition": "PASSED"
+    },
+    {
+      "block_codes": [
+        "PARSER_AMPUTATION_CLASS_UNRECOVERED"
+      ],
+      "id": "HOLDOUT_H2",
+      "kit_disposition": "REJECTED_PRE"
+    }
+  ],
+  "provenance": {
+    "crash": "TypeError in main() holdout_descriptive assembly (None + list); serialization only",
+    "freeze_commit": "e172c6084bfd70f60f36009c518da5602483bd4c",
+    "note": "All gate findings were produced once by the original formal run and were persisted as row_*.json before the s7.4 bookkeeping crash. No instrument re-run; score() applied verbatim to preserved rows."
+  },
+  "rows": [
+    {
+      "acceptance_block_codes": [],
+      "acceptance_blocked": false,
+      "acceptance_findings": [],
+      "collected": true,
+      "collection_wall_s": 0.006,
+      "instrument_id": "C1",
+      "kind": "clean_panel",
+      "kit_disposition": "PASSED",
+      "n_rows_total": 50,
+      "null_detections": [],
+      "null_rejected": false,
+      "pipeline": "kit",
+      "pre_block_codes": [],
+      "pre_collection_wall_s": 0.525,
+      "pre_findings": [],
+      "pre_gate_blocked": false,
+      "wasted_source_retry_s": 0.0
+    },
+    {
+      "acceptance_block_codes": [],
+      "acceptance_blocked": false,
+      "acceptance_findings": [],
+      "collected": true,
+      "collection_wall_s": 0.006,
+      "instrument_id": "C2",
+      "kind": "clean_panel",
+      "kit_disposition": "PASSED",
+      "n_rows_total": 50,
+      "null_detections": [],
+      "null_rejected": false,
+      "pipeline": "kit",
+      "pre_block_codes": [],
+      "pre_collection_wall_s": 0.505,
+      "pre_findings": [],
+      "pre_gate_blocked": false,
+      "wasted_source_retry_s": 0.0
+    },
+    {
+      "acceptance_block_codes": [],
+      "acceptance_blocked": false,
+      "acceptance_findings": [],
+      "collected": true,
+      "collection_wall_s": 0.006,
+      "instrument_id": "C3",
+      "kind": "clean_panel",
+      "kit_disposition": "PASSED",
+      "n_rows_total": 50,
+      "null_detections": [],
+      "null_rejected": false,
+      "pipeline": "kit",
+      "pre_block_codes": [],
+      "pre_collection_wall_s": 0.505,
+      "pre_findings": [],
+      "pre_gate_blocked": false,
+      "wasted_source_retry_s": 0.0
+    },
+    {
+      "acceptance_block_codes": [],
+      "acceptance_blocked": false,
+      "acceptance_findings": [],
+      "collected": true,
+      "collection_wall_s": 0.007,
+      "instrument_id": "C4",
+      "kind": "clean_panel",
+      "kit_disposition": "PASSED",
+      "n_rows_total": 50,
+      "null_detections": [],
+      "null_rejected": false,
+      "pipeline": "kit",
+      "pre_block_codes": [],
+      "pre_collection_wall_s": 0.505,
+      "pre_findings": [],
+      "pre_gate_blocked": false,
+      "wasted_source_retry_s": 0.0
+    },
+    {
+      "acceptance_block_codes": [],
+      "acceptance_blocked": false,
+      "acceptance_findings": [],
+      "collected": true,
+      "collection_wall_s": 0.006,
+      "instrument_id": "C5",
+      "kind": "clean_panel",
+      "kit_disposition": "PASSED",
+      "n_rows_total": 20,
+      "null_detections": [],
+      "null_rejected": false,
+      "pipeline": "kit",
+      "pre_block_codes": [],
+      "pre_collection_wall_s": 0.506,
+      "pre_findings": [],
+      "pre_gate_blocked": false,
+      "wasted_source_retry_s": 0.0
+    },
+    {
+      "acceptance_block_codes": [],
+      "acceptance_blocked": false,
+      "acceptance_findings": [],
+      "collected": true,
+      "collection_wall_s": 0.006,
+      "instrument_id": "C6",
+      "kind": "clean_panel",
+      "kit_disposition": "PASSED",
+      "n_rows_total": 50,
+      "null_detections": [],
+      "null_rejected": false,
+      "pipeline": "kit",
+      "pre_block_codes": [],
+      "pre_collection_wall_s": 0.504,
+      "pre_findings": [],
+      "pre_gate_blocked": false,
+      "wasted_source_retry_s": 0.0
+    },
+    {
+      "acceptance_block_codes": [],
+      "acceptance_blocked": false,
+      "acceptance_findings": [
+        {
+          "code": "G3_SKIPPED_SINGLE_ARM_BY_DECLARATION",
+          "detail": "plan declares no arms; non-degeneracy gate not applicable",
+          "evidence": {},
+          "gate": "G3",
+          "severity": "INFO"
+        }
+      ],
+      "collected": true,
+      "collection_wall_s": 0.003,
+      "instrument_id": "C7",
+      "kind": "clean_panel",
+      "kit_disposition": "PASSED",
+      "n_rows_total": 60,
+      "null_detections": [],
+      "null_rejected": false,
+      "pipeline": "kit",
+      "pre_block_codes": [],
+      "pre_collection_wall_s": 0.504,
+      "pre_findings": [],
+      "pre_gate_blocked": false,
+      "wasted_source_retry_s": 0.0
+    },
+    {
+      "acceptance_block_codes": [],
+      "acceptance_blocked": false,
+      "acceptance_findings": [],
+      "collected": true,
+      "collection_wall_s": 0.006,
+      "instrument_id": "C8",
+      "kind": "clean_panel",
+      "kit_disposition": "PASSED",
+      "n_rows_total": 50,
+      "null_detections": [],
+      "null_rejected": false,
+      "pipeline": "kit",
+      "pre_block_codes": [],
+      "pre_collection_wall_s": 3.507,
+      "pre_findings": [
+        {
+          "code": "WARN_PROBE_LATENCY_HIGH",
+          "detail": "source 'slow_listing' alive but slow (max probe latency 1.501s of 2.0s timeout)",
+          "evidence": {
+            "max_latency_s": 1.501,
+            "source_id": "slow_listing"
+          },
+          "gate": "G4",
+          "severity": "WARN"
+        }
+      ],
+      "pre_gate_blocked": false,
+      "wasted_source_retry_s": 0.0
+    },
+    {
+      "collected": false,
+      "collection_wall_s": 0.0,
+      "instrument_id": "S1",
+      "kind": "seeded_defect",
+      "kit_disposition": "REJECTED_PRE",
+      "null_detections": [
+        "NULL_EMPTY_DATASET_NO_ROW_FILES"
+      ],
+      "null_rejected": true,
+      "pipeline": "kit",
+      "pre_block_codes": [
+        "PARSER_AMPUTATION_CLASS_UNRECOVERED"
+      ],
+      "pre_collection_wall_s": 0.505,
+      "pre_findings": [
+        {
+          "code": "PARSER_AMPUTATION_CLASS_UNRECOVERED",
+          "detail": "declared action class 'page_action' recovered on 1 probe shape(s), required >=5; instrument parse loop is amputating this class under markup variants",
+          "evidence": {
+            "class_id": "page_action",
+            "required_min_shapes": 5,
+            "shapes_recovered": 1
+          },
+          "gate": "G1",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "PARSER_AMPUTATION_CLASS_UNRECOVERED",
+          "detail": "declared action class 'form_button' recovered on 0 probe shape(s), required >=2; instrument parse loop is amputating this class under markup variants",
+          "evidence": {
+            "class_id": "form_button",
+            "required_min_shapes": 2,
+            "shapes_recovered": 0
+          },
+          "gate": "G1",
+          "severity": "BLOCK"
+        }
+      ],
+      "pre_gate_blocked": true,
+      "wasted_source_retry_s": 0.0
+    },
+    {
+      "acceptance_block_codes": [
+        "ARTIFACT_MISSING_VS_COMMITTED_DENOMINATOR"
+      ],
+      "acceptance_blocked": true,
+      "acceptance_findings": [
+        {
+          "code": "ARTIFACT_MISSING_VS_COMMITTED_DENOMINATOR",
+          "detail": "stratum 'gamma': committed artifact 'A/rows_gamma.jsonl' (min_count=1) absent at acceptance time; denominator comes from the frozen plan, NOT from the collector's manifest",
+          "evidence": {
+            "artifact": "A/rows_gamma.jsonl",
+            "required": 1,
+            "stratum": "gamma"
+          },
+          "gate": "G2",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "ARTIFACT_MISSING_VS_COMMITTED_DENOMINATOR",
+          "detail": "stratum 'gamma': committed artifact 'A/manifest_gamma.json' (min_count=1) absent at acceptance time; denominator comes from the frozen plan, NOT from the collector's manifest",
+          "evidence": {
+            "artifact": "A/manifest_gamma.json",
+            "required": 1,
+            "stratum": "gamma"
+          },
+          "gate": "G2",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "ARTIFACT_MISSING_VS_COMMITTED_DENOMINATOR",
+          "detail": "stratum 'gamma': committed artifact 'B/rows_gamma.jsonl' (min_count=1) absent at acceptance time; denominator comes from the frozen plan, NOT from the collector's manifest",
+          "evidence": {
+            "artifact": "B/rows_gamma.jsonl",
+            "required": 1,
+            "stratum": "gamma"
+          },
+          "gate": "G2",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "ARTIFACT_MISSING_VS_COMMITTED_DENOMINATOR",
+          "detail": "stratum 'gamma': committed artifact 'B/manifest_gamma.json' (min_count=1) absent at acceptance time; denominator comes from the frozen plan, NOT from the collector's manifest",
+          "evidence": {
+            "artifact": "B/manifest_gamma.json",
+            "required": 1,
+            "stratum": "gamma"
+          },
+          "gate": "G2",
+          "severity": "BLOCK"
+        }
+      ],
+      "collected": true,
+      "collection_wall_s": 0.005,
+      "instrument_id": "S2",
+      "kind": "seeded_defect",
+      "kit_disposition": "REJECTED_ACCEPTANCE",
+      "n_rows_total": 40,
+      "null_detections": [],
+      "null_rejected": false,
+      "pipeline": "kit",
+      "pre_block_codes": [],
+      "pre_collection_wall_s": 0.506,
+      "pre_findings": [],
+      "pre_gate_blocked": false,
+      "wasted_source_retry_s": 0.0
+    },
+    {
+      "acceptance_block_codes": [
+        "ARM_DEGENERACY_BYTE_IDENTICAL"
+      ],
+      "acceptance_blocked": true,
+      "acceptance_findings": [
+        {
+          "code": "ARM_DEGENERACY_BYTE_IDENTICAL",
+          "detail": "arms 'A' and 'B' are byte-identical across all dataset files; distinct-arm sampling policy was not implemented (CW-Lab SAMPLING INTEGRITY class)",
+          "evidence": {
+            "arm_a": "A",
+            "arm_b": "B",
+            "combined_digest": "1ab08989837530fb88af7cc2f29abfc5b79e8cfcd1b5799674ff8433d9f42417"
+          },
+          "gate": "G3",
+          "severity": "BLOCK"
+        }
+      ],
+      "collected": true,
+      "collection_wall_s": 0.004,
+      "instrument_id": "S3",
+      "kind": "seeded_defect",
+      "kit_disposition": "REJECTED_ACCEPTANCE",
+      "n_rows_total": 25,
+      "null_detections": [
+        "NULL_ARMS_BYTE_IDENTICAL:A|B"
+      ],
+      "null_rejected": true,
+      "pipeline": "kit",
+      "pre_block_codes": [],
+      "pre_collection_wall_s": 0.505,
+      "pre_findings": [],
+      "pre_gate_blocked": false,
+      "wasted_source_retry_s": 0.0
+    },
+    {
+      "collected": false,
+      "collection_wall_s": 0.0,
+      "instrument_id": "S4",
+      "kind": "seeded_defect",
+      "kit_disposition": "REJECTED_PRE",
+      "null_detections": [
+        "NULL_EMPTY_DATASET_NO_ROW_FILES"
+      ],
+      "null_rejected": true,
+      "pipeline": "kit",
+      "pre_block_codes": [
+        "SOURCE_UNAVAILABLE_PROBE_FAILED"
+      ],
+      "pre_collection_wall_s": 0.505,
+      "pre_findings": [
+        {
+          "code": "SOURCE_UNAVAILABLE_PROBE_FAILED",
+          "detail": "source 'listing': 0/2 probes OK, required 2; refusing to start collection against a non-viable source",
+          "evidence": {
+            "log": "/home/runner/work/Spider/Spider/results/frontier/frontier-collection-calibration/EVAL_RAW/dataset_kit_S4/source_preflight_log.jsonl",
+            "oks": 0,
+            "probes": 2,
+            "source_id": "listing"
+          },
+          "gate": "G4",
+          "severity": "BLOCK"
+        }
+      ],
+      "pre_gate_blocked": true,
+      "wasted_source_retry_s": 0.0
+    },
+    {
+      "acceptance_block_codes": [],
+      "acceptance_blocked": false,
+      "acceptance_findings": [],
+      "collected": true,
+      "collection_wall_s": 0.006,
+      "instrument_id": "S1",
+      "kind": "seeded_defect",
+      "kit_disposition": "NULL_ONLY_NO_GATES",
+      "n_rows_total": 50,
+      "null_detections": [],
+      "null_rejected": false,
+      "pipeline": "null_only",
+      "wasted_source_retry_s": 0.0
+    },
+    {
+      "acceptance_block_codes": [],
+      "acceptance_blocked": false,
+      "acceptance_findings": [],
+      "collected": true,
+      "collection_wall_s": 0.004,
+      "instrument_id": "S2",
+      "kind": "seeded_defect",
+      "kit_disposition": "NULL_ONLY_NO_GATES",
+      "n_rows_total": 40,
+      "null_detections": [],
+      "null_rejected": false,
+      "pipeline": "null_only",
+      "wasted_source_retry_s": 0.0
+    },
+    {
+      "acceptance_block_codes": [],
+      "acceptance_blocked": false,
+      "acceptance_findings": [],
+      "collected": true,
+      "collection_wall_s": 0.003,
+      "instrument_id": "S3",
+      "kind": "seeded_defect",
+      "kit_disposition": "NULL_ONLY_NO_GATES",
+      "n_rows_total": 25,
+      "null_detections": [
+        "NULL_ARMS_BYTE_IDENTICAL:A|B"
+      ],
+      "null_rejected": true,
+      "pipeline": "null_only",
+      "wasted_source_retry_s": 0.0
+    },
+    {
+      "acceptance_block_codes": [],
+      "acceptance_blocked": false,
+      "acceptance_findings": [],
+      "collected": true,
+      "collection_wall_s": 2.003,
+      "instrument_id": "S4",
+      "kind": "seeded_defect",
+      "kit_disposition": "NULL_ONLY_NO_GATES",
+      "n_rows_total": 0,
+      "null_detections": [
+        "NULL_EMPTY_DATASET_NO_ROW_FILES"
+      ],
+      "null_rejected": true,
+      "pipeline": "null_only",
+      "wasted_source_retry_s": 2.003
+    }
+  ],
+  "run_tag": "formal_reassembled_post_crash_bookkeeping_repair",
+  "scoring": {
+    "clean_false_blocks": [],
+    "decision": "KIT_PASS",
+    "null_contrast": {
+      "burned_source_retry_window_s_null_vs_kit": {
+        "S1": [
+          0.0,
+          0.0
+        ],
+        "S2": [
+          0.0,
+          0.0
+        ],
+        "S3": [
+          0.0,
+          0.0
+        ],
+        "S4": [
+          2.003,
+          0.0
+        ]
+      },
+      "null_has_pre_collection_phase": false,
+      "null_pipeline_detections_at_acceptance": [
+        "S3",
+        "S4"
+      ],
+      "null_structurally_invisible_to_posthoc": [
+        "S1",
+        "S2"
+      ]
+    },
+    "overhead": {
+      "budget_s": 120.0,
+      "max_pre_collection_wall_s_across_panel": 3.507,
+      "within_budget": true
+    },
+    "rule_applied": {
+      "clean_false_blocks": 0,
+      "overhead_within_budget": true,
+      "seeds_detected_any_stage": 4
+    },
+    "seeded_defects_detected_kit_any_stage": [
+      "S1",
+      "S2",
+      "S3",
+      "S4"
+    ],
+    "seeded_defects_rejected_pre_collection_kit": [
+      "S1",
+      "S4"
+    ]
+  }
+}

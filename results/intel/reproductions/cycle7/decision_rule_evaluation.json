@@ -1,0 +1,243 @@
+{
+ "required_files_missing": [],
+ "p0_hosts_ok": 5,
+ "tasks_with_lt3_valid_pairs": [],
+ "verdict": "INCONCLUSIVE",
+ "clause_1_discovery": {
+  "pass": true,
+  "tasks": {
+   "T_HTTPBIN_FORM": {
+    "both_discovery_runs_accepted": true,
+    "routes_learned_n": 1,
+    "discovery_time_replay_code": "REPLAY_OK",
+    "discovery_time_equivalent": true,
+    "pass": true
+   },
+   "T_HTTPBIN_COOKIE": {
+    "both_discovery_runs_accepted": true,
+    "routes_learned_n": 1,
+    "discovery_time_replay_code": "REPLAY_OK",
+    "discovery_time_equivalent": true,
+    "pass": true
+   },
+   "T_PETSTORE_FIND": {
+    "both_discovery_runs_accepted": true,
+    "routes_learned_n": 2,
+    "discovery_time_replay_code": "REPLAY_OK",
+    "discovery_time_equivalent": true,
+    "pass": true
+   },
+   "T_DEMOBLAZE_CART": {
+    "both_discovery_runs_accepted": true,
+    "routes_learned_n": 7,
+    "discovery_time_replay_code": "REPLAY_OK",
+    "discovery_time_equivalent": true,
+    "pass": true
+   }
+  }
+ },
+ "clause_2_economics": {
+  "pass": false,
+  "tasks": {
+   "T_HTTPBIN_FORM": {
+    "n_valid_pairs": 5,
+    "n_interleaved_reps": 5,
+    "median_A_ms": 795.4,
+    "median_B_ms": 224.7,
+    "speedup_median": 3.54,
+    "bca_logratio_ci_low": 0.6388,
+    "bca_logratio_ci_high": 1.3151,
+    "B_actions_all_zero": true,
+    "B_equivalent_all_valid_pairs": true,
+    "pass": true
+   },
+   "T_HTTPBIN_COOKIE": {
+    "n_valid_pairs": 5,
+    "n_interleaved_reps": 5,
+    "median_A_ms": 616.6,
+    "median_B_ms": 231.5,
+    "speedup_median": 2.66,
+    "bca_logratio_ci_low": 0.9574,
+    "bca_logratio_ci_high": 1.0612,
+    "B_actions_all_zero": true,
+    "B_equivalent_all_valid_pairs": true,
+    "pass": true
+   },
+   "T_PETSTORE_FIND": {
+    "n_valid_pairs": 5,
+    "n_interleaved_reps": 5,
+    "median_A_ms": 2531.5,
+    "median_B_ms": 331.3,
+    "speedup_median": 7.64,
+    "bca_logratio_ci_low": 2.008,
+    "bca_logratio_ci_high": 2.0495,
+    "B_actions_all_zero": true,
+    "B_equivalent_all_valid_pairs": true,
+    "pass": true
+   },
+   "T_DEMOBLAZE_CART": {
+    "n_valid_pairs": 5,
+    "n_interleaved_reps": 5,
+    "median_A_ms": 7133.0,
+    "median_B_ms": 341.3,
+    "speedup_median": 20.9,
+    "bca_logratio_ci_low": 2.8888,
+    "bca_logratio_ci_high": 3.0804,
+    "B_actions_all_zero": true,
+    "B_equivalent_all_valid_pairs": true,
+    "pass": true
+   }
+  },
+  "holm_sign_family": {
+   "T_HTTPBIN_FORM": {
+    "wins": 5,
+    "n": 5,
+    "sign_p_raw": 0.03125,
+    "sign_p_holm": 0.125
+   },
+   "T_HTTPBIN_COOKIE": {
+    "wins": 5,
+    "n": 5,
+    "sign_p_raw": 0.03125,
+    "sign_p_holm": 0.125
+   },
+   "T_PETSTORE_FIND": {
+    "wins": 5,
+    "n": 5,
+    "sign_p_raw": 0.03125,
+    "sign_p_holm": 0.125
+   },
+   "T_DEMOBLAZE_CART": {
+    "wins": 5,
+    "n": 5,
+    "sign_p_raw": 0.03125,
+    "sign_p_holm": 0.125
+   }
+  },
+  "holm_family_all_significant": false,
+  "leave_one_host_out": {
+   "per_exclusion": {
+    "without_httpbin.org": {
+     "n_pairs": 10,
+     "median_A_ms": 4822.1,
+     "median_B_ms": 333.6,
+     "B_wins": 10,
+     "direction_B_faster_and_majority_wins": true
+    },
+    "without_petstore.swagger.io": {
+     "n_pairs": 15,
+     "median_A_ms": 795.4,
+     "median_B_ms": 238.8,
+     "B_wins": 15,
+     "direction_B_faster_and_majority_wins": true
+    },
+    "without_www.demoblaze.com": {
+     "n_pairs": 15,
+     "median_A_ms": 795.4,
+     "median_B_ms": 238.8,
+     "B_wins": 15,
+     "direction_B_faster_and_majority_wins": true
+    }
+   },
+   "direction_stable_all_exclusions": true
+  }
+ },
+ "clause_3_spec_null": {
+  "pass": true,
+  "demoblaze_B_n": 30,
+  "demoblaze_B_ok": 30,
+  "demoblaze_B_rate": 1.0,
+  "demoblaze_D_n": 5,
+  "demoblaze_D_ok": 0,
+  "demoblaze_D_rate": 0.0,
+  "petstore_D_descriptive": {
+   "n": 5,
+   "ok": 5
+  },
+  "rb_Q5_descriptive": {
+   "d_code": "REPLAY_OK",
+   "b_code": "REPLAY_OK",
+   "d_status": 200
+  }
+ },
+ "clause_4_mutation_detection": {
+  "pass": true,
+  "schedule_hash_verified": true,
+  "sensitivity": {
+   "M1_field_removal": {
+    "expected_fire": true,
+    "detected": true,
+    "observed_codes": [
+     "SCHEMA_MISMATCH",
+     "SCHEMA_MISMATCH"
+    ]
+   },
+   "M2_type_change": {
+    "expected_fire": true,
+    "detected": true,
+    "observed_codes": [
+     "SCHEMA_MISMATCH",
+     "SCHEMA_MISMATCH"
+    ]
+   },
+   "M3_nesting_change": {
+    "expected_fire": true,
+    "detected": true,
+    "observed_codes": [
+     "SCHEMA_MISMATCH",
+     "SCHEMA_MISMATCH"
+    ]
+   },
+   "M5_pagination_shape_change": {
+    "expected_fire": true,
+    "detected": true,
+    "observed_codes": [
+     "SCHEMA_MISMATCH",
+     "SCHEMA_MISMATCH"
+    ]
+   },
+   "M6_error_format_change": {
+    "expected_fire": true,
+    "detected": true,
+    "observed_codes": [
+     "SCHEMA_MISMATCH",
+     "SCHEMA_MISMATCH"
+    ]
+   }
+  },
+  "M4_enum_meaning_flip": {
+   "status": "PREDECLARED_BLIND_CLASS",
+   "observed_codes": [
+    "REPLAY_OK",
+    "REPLAY_OK"
+   ]
+  },
+  "benign_trials_n": 25,
+  "false_positives": 0,
+  "fpr_wilson_upper_95": 0.1332,
+  "fpr_wilson_upper_recomputed": 0.1332,
+  "pristine_rechecks_all_ok": true
+ },
+ "clause_5_lifecycle_core": {
+  "pass": false,
+  "checker_all_pass": false,
+  "Q1_all_match": false,
+  "Q2": {
+   "negative_ok": true,
+   "positive_ok": null
+  },
+  "Q3_ttl_compliant_rewind_probe_only": true,
+  "Q4": {
+   "deleted": true,
+   "code": "HTTP_ERROR",
+   "surfaced_absence": true
+  },
+  "pointer_only_store": true
+ },
+ "natural_ttl": {
+  "window1_committed": true,
+  "window2_status": "NOT_EXECUTED_THIS_RUN",
+  "claims": "WITHHELD pending window 2 (>=24h calendar gap)"
+ },
+ "invalidity_conditions": []
+}

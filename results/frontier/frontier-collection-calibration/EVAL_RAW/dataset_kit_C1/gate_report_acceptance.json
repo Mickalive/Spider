@@ -1,0 +1,11 @@
+{
+  "block_codes": [],
+  "blocked": false,
+  "extras": {},
+  "findings": [],
+  "timings_s": {
+    "g2_completion": 0.0,
+    "g3_nondegeneracy": 0.0,
+    "total_acceptance": 0.001
+  }
+}

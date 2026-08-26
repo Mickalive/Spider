@@ -1,0 +1,1394 @@
+{
+ "ts": "2026-08-24T02:24:31Z",
+ "design_freeze": {
+  "tau": 0.3,
+  "min_match": 2,
+  "cov_cap": 6,
+  "topk": 3,
+  "conf_min": 0.35,
+  "seed": 20260824,
+  "max_resets": 2,
+  "max_applications": 6,
+  "consumer_policy": "agentB",
+  "eval_conditions_order": [
+   "inherit-blind",
+   "graphbfs",
+   "traj",
+   "cold"
+  ]
+ },
+ "preflight": {
+  "books": true,
+  "quotes": true
+ },
+ "route_absence": {
+  "fragments": {
+   "max_fragment_steps": 4,
+   "n_fragments": 12
+  },
+  "composites": [
+   {
+    "composite": "C1_books_mystery_p2_named",
+    "absent_from_transitions_as_task": true,
+    "adjacent_pairs_checked": [
+     {
+      "pair": [
+       "eval.c1.cat",
+       "eval.c1.page2"
+      ],
+      "violating_tasks": []
+     },
+     {
+      "pair": [
+       "eval.c1.page2",
+       "eval.c1.named"
+      ],
+      "violating_tasks": []
+     }
+    ],
+    "strict_route_absent": true
+   },
+   {
+    "composite": "C2_quotes_login_p3",
+    "absent_from_transitions_as_task": true,
+    "adjacent_pairs_checked": [
+     {
+      "pair": [
+       "eval.c2.login",
+       "eval.c2.page3"
+      ],
+      "violating_tasks": []
+     }
+    ],
+    "strict_route_absent": true
+   },
+   {
+    "composite": "C3_quotes_login_p5",
+    "absent_from_transitions_as_task": true,
+    "adjacent_pairs_checked": [
+     {
+      "pair": [
+       "eval.c3.login",
+       "eval.c3.page5"
+      ],
+      "violating_tasks": []
+     }
+    ],
+    "strict_route_absent": true
+   }
+  ]
+ },
+ "kb_at_eval_start": {
+  "stats": {
+   "states": 12,
+   "transitions": 13,
+   "actions": 11,
+   "fragments": 12
+  },
+  "fragments": [
+   {
+    "goal_sig": "books.cat.fiction",
+    "site": "books",
+    "n_steps": 1,
+    "success": 1,
+    "failure": 0,
+    "description": [
+     "4",
+     "book",
+     "catalogue",
+     "category",
+     "click",
+     "com",
+     "fiction",
+     "historical",
+     "html",
+     "index",
+     "sandbox",
+     "scrape",
+     "toscrape"
+    ]
+   },
+   {
+    "goal_sig": "books.paginate.next",
+    "site": "books",
+    "n_steps": 1,
+    "success": 1,
+    "failure": 0,
+    "description": [
+     "2",
+     "4",
+     "book",
+     "catalogue",
+     "category",
+     "click",
+     "com",
+     "fiction",
+     "historical",
+     "html",
+     "next",
+     "page",
+     "sandbox",
+     "scrape",
+     "toscrape"
+    ]
+   },
+   {
+    "goal_sig": "generic.paginate.next",
+    "site": "books",
+    "n_steps": 1,
+    "success": 1,
+    "failure": 0,
+    "description": [
+     "2",
+     "4",
+     "book",
+     "catalogue",
+     "category",
+     "click",
+     "com",
+     "fiction",
+     "historical",
+     "html",
+     "next",
+     "page",
+     "sandbox",
+     "scrape",
+     "toscrape"
+    ]
+   },
+   {
+    "goal_sig": "quotes.login",
+    "site": "quotes",
+    "n_steps": 4,
+    "success": 1,
+    "failure": 0,
+    "description": [
+     "btn",
+     "click",
+     "com",
+     "control",
+     "fill",
+     "form",
+     "input",
+     "login",
+     "password",
+     "primary",
+     "quot",
+     "scrape",
+     "submit",
+     "text",
+     "toscrape",
+     "username"
+    ]
+   },
+   {
+    "goal_sig": "generic.form.login",
+    "site": "quotes",
+    "n_steps": 4,
+    "success": 1,
+    "failure": 0,
+    "description": [
+     "btn",
+     "click",
+     "com",
+     "control",
+     "fill",
+     "form",
+     "input",
+     "login",
+     "password",
+     "primary",
+     "quot",
+     "scrape",
+     "submit",
+     "text",
+     "toscrape",
+     "username"
+    ]
+   },
+   {
+    "goal_sig": "books.cat.travel",
+    "site": "books",
+    "n_steps": 1,
+    "success": 1,
+    "failure": 0,
+    "description": [
+     "2",
+     "book",
+     "catalogue",
+     "category",
+     "click",
+     "com",
+     "html",
+     "index",
+     "sandbox",
+     "scrape",
+     "toscrape",
+     "travel"
+    ]
+   },
+   {
+    "goal_sig": "books.open.first.book",
+    "site": "books",
+    "n_steps": 1,
+    "success": 1,
+    "failure": 0,
+    "description": [
+     "981",
+     "book",
+     "catalogue",
+     "click",
+     "com",
+     "himalaya",
+     "html",
+     "index",
+     "only",
+     "s",
+     "sandbox",
+     "scrape",
+     "toscrape"
+    ]
+   },
+   {
+    "goal_sig": "quotes.tag.love",
+    "site": "quotes",
+    "n_steps": 1,
+    "success": 1,
+    "failure": 0,
+    "description": [
+     "1",
+     "click",
+     "com",
+     "love",
+     "page",
+     "quot",
+     "scrape",
+     "tag",
+     "toscrape"
+    ]
+   },
+   {
+    "goal_sig": "quotes.page.2",
+    "site": "quotes",
+    "n_steps": 1,
+    "success": 1,
+    "failure": 0,
+    "description": [
+     "2",
+     "click",
+     "com",
+     "next",
+     "page",
+     "quot",
+     "scrape",
+     "toscrape"
+    ]
+   },
+   {
+    "goal_sig": "generic.paginate.next",
+    "site": "quotes",
+    "n_steps": 1,
+    "success": 1,
+    "failure": 0,
+    "description": [
+     "2",
+     "click",
+     "com",
+     "next",
+     "page",
+     "quot",
+     "scrape",
+     "toscrape"
+    ]
+   },
+   {
+    "goal_sig": "books.cat.mystery",
+    "site": "books",
+    "n_steps": 1,
+    "success": 1,
+    "failure": 0,
+    "description": [
+     "3",
+     "book",
+     "catalogue",
+     "category",
+     "click",
+     "com",
+     "html",
+     "index",
+     "mystery",
+     "sandbox",
+     "scrape",
+     "toscrape"
+    ]
+   },
+   {
+    "goal_sig": "books.open.first.book.mystery",
+    "site": "books",
+    "n_steps": 1,
+    "success": 1,
+    "failure": 0,
+    "description": [
+     "997",
+     "book",
+     "catalogue",
+     "click",
+     "com",
+     "html",
+     "index",
+     "object",
+     "sandbox",
+     "scrape",
+     "sharp",
+     "toscrape"
+    ]
+   }
+  ]
+ },
+ "runs": [
+  {
+   "phase": "A-train",
+   "task": "T_B_fiction_page2",
+   "agent": "agentG",
+   "condition": "cold",
+   "status": "success",
+   "store_before": {
+    "states": 0,
+    "transitions": 0,
+    "actions": 0,
+    "fragments": 0
+   },
+   "store_after": {
+    "states": 3,
+    "transitions": 2,
+    "actions": 2,
+    "fragments": 3
+   },
+   "elapsed_s": 1.9,
+   "loads": 3,
+   "actions": 2,
+   "reused": 0,
+   "novel": 2,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 229,
+   "llm_calls": 0,
+   "subgoals_ok": 2,
+   "subgoals_total": 2,
+   "wall_ms": 2956,
+   "retrieval_lookups": 0,
+   "retrieval_ms": 0,
+   "candidates_tried": 0,
+   "solved_by": [
+    "exploration",
+    "exploration"
+   ],
+   "memory_events": []
+  },
+  {
+   "phase": "A-train",
+   "task": "T_Q_login",
+   "agent": "agentB",
+   "condition": "cold",
+   "status": "success",
+   "store_before": {
+    "states": 3,
+    "transitions": 2,
+    "actions": 2,
+    "fragments": 3
+   },
+   "store_after": {
+    "states": 6,
+    "transitions": 7,
+    "actions": 7,
+    "fragments": 5
+   },
+   "elapsed_s": 2.3,
+   "loads": 3,
+   "actions": 5,
+   "reused": 0,
+   "novel": 5,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 106,
+   "llm_calls": 0,
+   "subgoals_ok": 1,
+   "subgoals_total": 1,
+   "wall_ms": 3984,
+   "retrieval_lookups": 0,
+   "retrieval_ms": 0,
+   "candidates_tried": 0,
+   "solved_by": [
+    "exploration"
+   ],
+   "memory_events": []
+  },
+  {
+   "phase": "A-train",
+   "task": "T_B_travel_book",
+   "agent": "agentG",
+   "condition": "cold",
+   "status": "success",
+   "store_before": {
+    "states": 6,
+    "transitions": 7,
+    "actions": 7,
+    "fragments": 5
+   },
+   "store_after": {
+    "states": 8,
+    "transitions": 9,
+    "actions": 9,
+    "fragments": 7
+   },
+   "elapsed_s": 1.9,
+   "loads": 3,
+   "actions": 2,
+   "reused": 0,
+   "novel": 2,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 201,
+   "llm_calls": 0,
+   "subgoals_ok": 2,
+   "subgoals_total": 2,
+   "wall_ms": 2905,
+   "retrieval_lookups": 0,
+   "retrieval_ms": 0,
+   "candidates_tried": 0,
+   "solved_by": [
+    "exploration",
+    "exploration"
+   ],
+   "memory_events": []
+  },
+  {
+   "phase": "A-train",
+   "task": "T_Q_tag_love",
+   "agent": "agentG",
+   "condition": "cold",
+   "status": "success",
+   "store_before": {
+    "states": 8,
+    "transitions": 9,
+    "actions": 9,
+    "fragments": 7
+   },
+   "store_after": {
+    "states": 9,
+    "transitions": 10,
+    "actions": 10,
+    "fragments": 8
+   },
+   "elapsed_s": 1.1,
+   "loads": 2,
+   "actions": 1,
+   "reused": 0,
+   "novel": 1,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 53,
+   "llm_calls": 0,
+   "subgoals_ok": 1,
+   "subgoals_total": 1,
+   "wall_ms": 1581,
+   "retrieval_lookups": 0,
+   "retrieval_ms": 0,
+   "candidates_tried": 0,
+   "solved_by": [
+    "exploration"
+   ],
+   "memory_events": []
+  },
+  {
+   "phase": "A-train",
+   "task": "T_Q_page2",
+   "agent": "agentB",
+   "condition": "cold",
+   "status": "success",
+   "store_before": {
+    "states": 9,
+    "transitions": 10,
+    "actions": 10,
+    "fragments": 8
+   },
+   "store_after": {
+    "states": 10,
+    "transitions": 11,
+    "actions": 10,
+    "fragments": 10
+   },
+   "elapsed_s": 1.2,
+   "loads": 2,
+   "actions": 1,
+   "reused": 0,
+   "novel": 1,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 53,
+   "llm_calls": 0,
+   "subgoals_ok": 1,
+   "subgoals_total": 1,
+   "wall_ms": 1599,
+   "retrieval_lookups": 0,
+   "retrieval_ms": 0,
+   "candidates_tried": 0,
+   "solved_by": [
+    "exploration"
+   ],
+   "memory_events": []
+  },
+  {
+   "phase": "A-train",
+   "task": "T_B_mystery_book",
+   "agent": "agentG",
+   "condition": "cold",
+   "status": "success",
+   "store_before": {
+    "states": 10,
+    "transitions": 11,
+    "actions": 10,
+    "fragments": 10
+   },
+   "store_after": {
+    "states": 12,
+    "transitions": 13,
+    "actions": 11,
+    "fragments": 12
+   },
+   "elapsed_s": 2.0,
+   "loads": 3,
+   "actions": 2,
+   "reused": 0,
+   "novel": 2,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 229,
+   "llm_calls": 0,
+   "subgoals_ok": 2,
+   "subgoals_total": 2,
+   "wall_ms": 2954,
+   "retrieval_lookups": 0,
+   "retrieval_ms": 0,
+   "candidates_tried": 0,
+   "solved_by": [
+    "exploration",
+    "exploration"
+   ],
+   "memory_events": []
+  },
+  {
+   "phase": "B-eval",
+   "task": "C1_books_mystery_p2_named",
+   "agent": "agentB",
+   "condition": "inherit-blind",
+   "status": "partial",
+   "store_before": {
+    "states": 12,
+    "transitions": 13,
+    "actions": 11,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 30,
+    "transitions": 86,
+    "actions": 29,
+    "fragments": 12
+   },
+   "elapsed_s": 38.0,
+   "loads": 52,
+   "actions": 73,
+   "reused": 1,
+   "novel": 72,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 7582,
+   "llm_calls": 0,
+   "subgoals_ok": 2,
+   "subgoals_total": 3,
+   "wall_ms": 74965,
+   "retrieval_lookups": 3,
+   "retrieval_ms": 0,
+   "candidates_tried": 1,
+   "solved_by": [
+    "exploration",
+    "memory",
+    "unsolved"
+   ],
+   "memory_events": [
+    {
+     "sub": "eval.c1.cat",
+     "query": "open the mystery category of the book shop mystery",
+     "candidates": [],
+     "replay_ok": false,
+     "abort_step": null,
+     "applications": 0
+    },
+    {
+     "sub": "eval.c1.page2",
+     "query": "go to the second page of the book listing next",
+     "candidates": [
+      "generic.paginate.next",
+      "books.paginate.next"
+     ],
+     "replay_ok": true,
+     "abort_step": null,
+     "applications": 1
+    },
+    {
+     "sub": "eval.c1.named",
+     "query": "open the product page of the book In the Woods by Tana French woods",
+     "candidates": [],
+     "replay_ok": false,
+     "abort_step": null,
+     "applications": 0
+    }
+   ]
+  },
+  {
+   "phase": "B-eval",
+   "task": "C2_quotes_login_p3",
+   "agent": "agentB",
+   "condition": "inherit-blind",
+   "status": "success",
+   "store_before": {
+    "states": 12,
+    "transitions": 13,
+    "actions": 11,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 11,
+    "fragments": 12
+   },
+   "elapsed_s": 2.9,
+   "loads": 5,
+   "actions": 6,
+   "reused": 6,
+   "novel": 0,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 0,
+   "llm_calls": 0,
+   "subgoals_ok": 2,
+   "subgoals_total": 2,
+   "wall_ms": 5003,
+   "retrieval_lookups": 2,
+   "retrieval_ms": 0,
+   "candidates_tried": 2,
+   "solved_by": [
+    "memory",
+    "memory"
+   ],
+   "memory_events": [
+    {
+     "sub": "eval.c2.login",
+     "query": "log in to the quotes site with the provided username and password login",
+     "candidates": [
+      "generic.form.login",
+      "quotes.login"
+     ],
+     "replay_ok": true,
+     "abort_step": null,
+     "applications": 1
+    },
+    {
+     "sub": "eval.c2.page3",
+     "query": "go to page 3 of the quote listings next",
+     "candidates": [
+      "generic.paginate.next",
+      "quotes.page.2"
+     ],
+     "replay_ok": true,
+     "abort_step": null,
+     "applications": 2
+    }
+   ]
+  },
+  {
+   "phase": "B-eval",
+   "task": "C3_quotes_login_p5",
+   "agent": "agentB",
+   "condition": "inherit-blind",
+   "status": "success",
+   "store_before": {
+    "states": 12,
+    "transitions": 13,
+    "actions": 11,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 16,
+    "transitions": 21,
+    "actions": 11,
+    "fragments": 12
+   },
+   "elapsed_s": 3.9,
+   "loads": 7,
+   "actions": 8,
+   "reused": 8,
+   "novel": 0,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 0,
+   "llm_calls": 0,
+   "subgoals_ok": 2,
+   "subgoals_total": 2,
+   "wall_ms": 7006,
+   "retrieval_lookups": 2,
+   "retrieval_ms": 0,
+   "candidates_tried": 2,
+   "solved_by": [
+    "memory",
+    "memory"
+   ],
+   "memory_events": [
+    {
+     "sub": "eval.c3.login",
+     "query": "log in to the quotes site with the provided username and password login",
+     "candidates": [
+      "generic.form.login",
+      "quotes.login"
+     ],
+     "replay_ok": true,
+     "abort_step": null,
+     "applications": 1
+    },
+    {
+     "sub": "eval.c3.page5",
+     "query": "go to page 5 of the quote listings next",
+     "candidates": [
+      "generic.paginate.next",
+      "quotes.page.2"
+     ],
+     "replay_ok": true,
+     "abort_step": null,
+     "applications": 4
+    }
+   ]
+  },
+  {
+   "phase": "B-eval",
+   "task": "C1_books_mystery_p2_named",
+   "agent": "agentB",
+   "condition": "graphbfs",
+   "status": "partial",
+   "store_before": {
+    "states": 12,
+    "transitions": 13,
+    "actions": 11,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 29,
+    "transitions": 134,
+    "actions": 29,
+    "fragments": 12
+   },
+   "elapsed_s": 61.6,
+   "loads": 84,
+   "actions": 121,
+   "reused": 1,
+   "novel": 120,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 12638,
+   "llm_calls": 0,
+   "subgoals_ok": 1,
+   "subgoals_total": 3,
+   "wall_ms": 122106,
+   "retrieval_lookups": 3,
+   "retrieval_ms": 1,
+   "candidates_tried": 0,
+   "solved_by": [
+    "memory",
+    "unsolved",
+    "unsolved"
+   ],
+   "memory_events": []
+  },
+  {
+   "phase": "B-eval",
+   "task": "C2_quotes_login_p3",
+   "agent": "agentB",
+   "condition": "graphbfs",
+   "status": "partial",
+   "store_before": {
+    "states": 12,
+    "transitions": 13,
+    "actions": 11,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 13,
+    "transitions": 32,
+    "actions": 15,
+    "fragments": 12
+   },
+   "elapsed_s": 9.7,
+   "loads": 8,
+   "actions": 21,
+   "reused": 2,
+   "novel": 19,
+   "failed": 0,
+   "recoveries": 1,
+   "decision_points": 367,
+   "llm_calls": 0,
+   "subgoals_ok": 1,
+   "subgoals_total": 2,
+   "wall_ms": 18656,
+   "retrieval_lookups": 2,
+   "retrieval_ms": 1,
+   "candidates_tried": 0,
+   "solved_by": [
+    "exploration",
+    "unsolved"
+   ],
+   "memory_events": []
+  },
+  {
+   "phase": "B-eval",
+   "task": "C3_quotes_login_p5",
+   "agent": "agentB",
+   "condition": "graphbfs",
+   "status": "partial",
+   "store_before": {
+    "states": 12,
+    "transitions": 13,
+    "actions": 11,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 13,
+    "transitions": 32,
+    "actions": 15,
+    "fragments": 12
+   },
+   "elapsed_s": 9.7,
+   "loads": 8,
+   "actions": 21,
+   "reused": 2,
+   "novel": 19,
+   "failed": 0,
+   "recoveries": 1,
+   "decision_points": 367,
+   "llm_calls": 0,
+   "subgoals_ok": 1,
+   "subgoals_total": 2,
+   "wall_ms": 18659,
+   "retrieval_lookups": 2,
+   "retrieval_ms": 1,
+   "candidates_tried": 0,
+   "solved_by": [
+    "exploration",
+    "unsolved"
+   ],
+   "memory_events": []
+  },
+  {
+   "phase": "B-eval",
+   "task": "C1_books_mystery_p2_named",
+   "agent": "agentB",
+   "condition": "traj",
+   "status": "partial",
+   "store_before": {
+    "states": 12,
+    "transitions": 13,
+    "actions": 11,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 29,
+    "transitions": 93,
+    "actions": 29,
+    "fragments": 12
+   },
+   "elapsed_s": 41.7,
+   "loads": 57,
+   "actions": 80,
+   "reused": 8,
+   "novel": 72,
+   "failed": 0,
+   "recoveries": 2,
+   "decision_points": 7565,
+   "llm_calls": 0,
+   "subgoals_ok": 2,
+   "subgoals_total": 3,
+   "wall_ms": 82370,
+   "retrieval_lookups": 3,
+   "retrieval_ms": 46,
+   "candidates_tried": 0,
+   "solved_by": [
+    "exploration",
+    "memory",
+    "unsolved"
+   ],
+   "memory_events": []
+  },
+  {
+   "phase": "B-eval",
+   "task": "C2_quotes_login_p3",
+   "agent": "agentB",
+   "condition": "traj",
+   "status": "partial",
+   "store_before": {
+    "states": 12,
+    "transitions": 13,
+    "actions": 11,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 35,
+    "actions": 15,
+    "fragments": 12
+   },
+   "elapsed_s": 11.2,
+   "loads": 10,
+   "actions": 24,
+   "reused": 2,
+   "novel": 22,
+   "failed": 0,
+   "recoveries": 2,
+   "decision_points": 535,
+   "llm_calls": 0,
+   "subgoals_ok": 1,
+   "subgoals_total": 2,
+   "wall_ms": 21693,
+   "retrieval_lookups": 2,
+   "retrieval_ms": 17,
+   "candidates_tried": 0,
+   "solved_by": [
+    "exploration",
+    "unsolved"
+   ],
+   "memory_events": []
+  },
+  {
+   "phase": "B-eval",
+   "task": "C3_quotes_login_p5",
+   "agent": "agentB",
+   "condition": "traj",
+   "status": "partial",
+   "store_before": {
+    "states": 12,
+    "transitions": 13,
+    "actions": 11,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 35,
+    "actions": 15,
+    "fragments": 12
+   },
+   "elapsed_s": 11.3,
+   "loads": 10,
+   "actions": 24,
+   "reused": 2,
+   "novel": 22,
+   "failed": 0,
+   "recoveries": 2,
+   "decision_points": 535,
+   "llm_calls": 0,
+   "subgoals_ok": 1,
+   "subgoals_total": 2,
+   "wall_ms": 21903,
+   "retrieval_lookups": 2,
+   "retrieval_ms": 17,
+   "candidates_tried": 0,
+   "solved_by": [
+    "exploration",
+    "unsolved"
+   ],
+   "memory_events": []
+  },
+  {
+   "phase": "B-eval",
+   "task": "C1_books_mystery_p2_named",
+   "agent": "agentB",
+   "condition": "cold",
+   "status": "partial",
+   "store_before": {
+    "states": 12,
+    "transitions": 13,
+    "actions": 11,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 29,
+    "transitions": 145,
+    "actions": 29,
+    "fragments": 12
+   },
+   "elapsed_s": 67.0,
+   "loads": 92,
+   "actions": 132,
+   "reused": 0,
+   "novel": 132,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 13925,
+   "llm_calls": 0,
+   "subgoals_ok": 1,
+   "subgoals_total": 3,
+   "wall_ms": 132975,
+   "retrieval_lookups": 0,
+   "retrieval_ms": 0,
+   "candidates_tried": 0,
+   "solved_by": [
+    "exploration",
+    "unsolved",
+    "unsolved"
+   ],
+   "memory_events": []
+  },
+  {
+   "phase": "B-eval",
+   "task": "C2_quotes_login_p3",
+   "agent": "agentB",
+   "condition": "cold",
+   "status": "partial",
+   "store_before": {
+    "states": 12,
+    "transitions": 13,
+    "actions": 11,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 13,
+    "transitions": 32,
+    "actions": 15,
+    "fragments": 12
+   },
+   "elapsed_s": 9.9,
+   "loads": 8,
+   "actions": 21,
+   "reused": 0,
+   "novel": 21,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 473,
+   "llm_calls": 0,
+   "subgoals_ok": 1,
+   "subgoals_total": 2,
+   "wall_ms": 18950,
+   "retrieval_lookups": 0,
+   "retrieval_ms": 0,
+   "candidates_tried": 0,
+   "solved_by": [
+    "exploration",
+    "unsolved"
+   ],
+   "memory_events": []
+  },
+  {
+   "phase": "B-eval",
+   "task": "C3_quotes_login_p5",
+   "agent": "agentB",
+   "condition": "cold",
+   "status": "partial",
+   "store_before": {
+    "states": 12,
+    "transitions": 13,
+    "actions": 11,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 13,
+    "transitions": 32,
+    "actions": 15,
+    "fragments": 12
+   },
+   "elapsed_s": 9.7,
+   "loads": 8,
+   "actions": 21,
+   "reused": 0,
+   "novel": 21,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 473,
+   "llm_calls": 0,
+   "subgoals_ok": 1,
+   "subgoals_total": 2,
+   "wall_ms": 18628,
+   "retrieval_lookups": 0,
+   "retrieval_ms": 0,
+   "candidates_tried": 0,
+   "solved_by": [
+    "exploration",
+    "unsolved"
+   ],
+   "memory_events": []
+  },
+  {
+   "phase": "C-natural",
+   "task": "X1_books_fiction_p2_named",
+   "agent": "agentB",
+   "condition": "inherit",
+   "status": "partial",
+   "store_before": {
+    "states": 12,
+    "transitions": 13,
+    "actions": 11,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 29,
+    "transitions": 88,
+    "actions": 29,
+    "fragments": 13
+   },
+   "elapsed_s": 39.0,
+   "loads": 53,
+   "actions": 75,
+   "reused": 1,
+   "novel": 74,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 7794,
+   "llm_calls": 0,
+   "subgoals_ok": 2,
+   "subgoals_total": 3,
+   "wall_ms": 76751,
+   "retrieval_lookups": 3,
+   "retrieval_ms": 0,
+   "candidates_tried": 1,
+   "solved_by": [
+    "exploration",
+    "memory",
+    "unsolved"
+   ],
+   "memory_events": [
+    {
+     "sub": "eval.x1.cat",
+     "query": "open the fiction category of the book shop fiction",
+     "candidates": [],
+     "replay_ok": false,
+     "abort_step": null,
+     "applications": 0
+    },
+    {
+     "sub": "eval.x1.page2",
+     "query": "go to the second page of the book listing next",
+     "candidates": [
+      "generic.paginate.next",
+      "books.paginate.next"
+     ],
+     "replay_ok": true,
+     "abort_step": null,
+     "applications": 1
+    },
+    {
+     "sub": "eval.x1.named",
+     "query": "open the product page of the book The Shack by William P. Young shack",
+     "candidates": [],
+     "replay_ok": false,
+     "abort_step": null,
+     "applications": 0
+    }
+   ]
+  },
+  {
+   "phase": "C-natural",
+   "task": "X1_books_fiction_p2_named",
+   "agent": "agentG",
+   "condition": "replay",
+   "status": "partial",
+   "store_before": {
+    "states": 29,
+    "transitions": 88,
+    "actions": 29,
+    "fragments": 13
+   },
+   "store_after": {
+    "states": 29,
+    "transitions": 154,
+    "actions": 30,
+    "fragments": 14
+   },
+   "elapsed_s": 34.3,
+   "loads": 49,
+   "actions": 66,
+   "reused": 5,
+   "novel": 61,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 6363,
+   "llm_calls": 0,
+   "subgoals_ok": 2,
+   "subgoals_total": 3,
+   "wall_ms": 67510,
+   "retrieval_lookups": 3,
+   "retrieval_ms": 0,
+   "candidates_tried": 1,
+   "solved_by": [
+    "memory",
+    "exploration",
+    "unsolved"
+   ],
+   "memory_events": [
+    {
+     "sub": "eval.x1.cat",
+     "query": "open the fiction category of the book shop fiction",
+     "candidates": [
+      "eval.x1.cat"
+     ],
+     "replay_ok": true,
+     "abort_step": null,
+     "applications": 1
+    },
+    {
+     "sub": "eval.x1.page2",
+     "query": "go to the second page of the book listing next",
+     "candidates": [],
+     "replay_ok": false,
+     "abort_step": null,
+     "applications": 0
+    },
+    {
+     "sub": "eval.x1.named",
+     "query": "open the product page of the book The Shack by William P. Young shack",
+     "candidates": [],
+     "replay_ok": false,
+     "abort_step": null,
+     "applications": 0
+    }
+   ]
+  },
+  {
+   "phase": "C-natural",
+   "task": "T_Q_login",
+   "agent": "agentG",
+   "condition": "replay",
+   "status": "success",
+   "store_before": {
+    "states": 29,
+    "transitions": 154,
+    "actions": 30,
+    "fragments": 14
+   },
+   "store_after": {
+    "states": 29,
+    "transitions": 158,
+    "actions": 30,
+    "fragments": 14
+   },
+   "elapsed_s": 1.9,
+   "loads": 3,
+   "actions": 4,
+   "reused": 4,
+   "novel": 0,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 0,
+   "llm_calls": 0,
+   "subgoals_ok": 1,
+   "subgoals_total": 1,
+   "wall_ms": 3122,
+   "retrieval_lookups": 1,
+   "retrieval_ms": 0,
+   "candidates_tried": 1,
+   "solved_by": [
+    "memory"
+   ],
+   "memory_events": [
+    {
+     "sub": "quotes.login",
+     "query": "log in to the quotes site with the provided username and password login",
+     "candidates": [
+      "quotes.login"
+     ],
+     "replay_ok": true,
+     "abort_step": null,
+     "applications": 1
+    }
+   ]
+  },
+  {
+   "phase": "C-natural",
+   "task": "N1_books_histfic_book",
+   "agent": "agentB",
+   "condition": "cold",
+   "status": "success",
+   "store_before": {
+    "states": 29,
+    "transitions": 158,
+    "actions": 30,
+    "fragments": 14
+   },
+   "store_after": {
+    "states": 30,
+    "transitions": 173,
+    "actions": 30,
+    "fragments": 16
+   },
+   "elapsed_s": 8.6,
+   "loads": 12,
+   "actions": 15,
+   "reused": 0,
+   "novel": 15,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 1632,
+   "llm_calls": 0,
+   "subgoals_ok": 2,
+   "subgoals_total": 2,
+   "wall_ms": 16146,
+   "retrieval_lookups": 0,
+   "retrieval_ms": 0,
+   "candidates_tried": 0,
+   "solved_by": [
+    "exploration",
+    "exploration"
+   ],
+   "memory_events": []
+  },
+  {
+   "phase": "C-natural",
+   "task": "N2_quotes_tag_inspirational",
+   "agent": "agentG",
+   "condition": "cold",
+   "status": "success",
+   "store_before": {
+    "states": 30,
+    "transitions": 173,
+    "actions": 30,
+    "fragments": 16
+   },
+   "store_after": {
+    "states": 31,
+    "transitions": 174,
+    "actions": 31,
+    "fragments": 17
+   },
+   "elapsed_s": 1.2,
+   "loads": 2,
+   "actions": 1,
+   "reused": 0,
+   "novel": 1,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 53,
+   "llm_calls": 0,
+   "subgoals_ok": 1,
+   "subgoals_total": 1,
+   "wall_ms": 1623,
+   "retrieval_lookups": 0,
+   "retrieval_ms": 0,
+   "candidates_tried": 0,
+   "solved_by": [
+    "exploration"
+   ],
+   "memory_events": []
+  }
+ ],
+ "store_final": {
+  "states": 31,
+  "transitions": 174,
+  "actions": 31,
+  "fragments": 17
+ }
+}

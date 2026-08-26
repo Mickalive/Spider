@@ -1,0 +1,34 @@
+[
+ {
+  "route_id": "GET:https://httpbin.org/cookies",
+  "intent": "read_display_preference_cookies_httpbin",
+  "site": "httpbin.org",
+  "method": "GET",
+  "url_template": "https://httpbin.org/cookies",
+  "path_slots": [],
+  "query_slots": [],
+  "body_template": null,
+  "body_slots": [],
+  "headers_required": {
+   "cookie": {
+    "source": "auth_material"
+   }
+  },
+  "response_shape": {
+   "cookies": {
+    "spider_pref": "str"
+   }
+  },
+  "volatile_keys": [],
+  "freshness_ts_ms": 1787723482829,
+  "reliability": {
+   "ok": 0,
+   "fail": 0
+  },
+  "lifecycle": "active",
+  "evidence_urls": [
+   "https://httpbin.org/cookies"
+  ],
+  "n_observations": 1
+ }
+]

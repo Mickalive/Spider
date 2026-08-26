@@ -1,0 +1,134 @@
+{
+ "schema": "spider.capsule/v0",
+ "capsule_id": "runtime/form-login-procedure@v1",
+ "status": "CANDIDATE",
+ "intent": {
+  "description": "Authenticate by submitting the login form on quotes.toscrape.com: open the login page via its link, fill username and password, submit.",
+  "semantic_keys": [
+   "btn",
+   "click",
+   "com",
+   "control",
+   "fill",
+   "form",
+   "input",
+   "login",
+   "password",
+   "primary",
+   "quot",
+   "scrape",
+   "submit",
+   "text",
+   "toscrape",
+   "username"
+  ]
+ },
+ "preconditions": [
+  {
+   "predicate": {
+    "host_allowlist": [
+     "quotes.toscrape.com"
+    ],
+    "url_anchor": null,
+    "elem_text_any": [
+     "login"
+    ],
+    "neg_url": null
+   },
+   "derived_from": "store states.site=quotes netlocs; fragment.steps[0].target_sig slug 'login'",
+   "derivation": "PROGRAMMATIC_FROM_EVIDENCE"
+  }
+ ],
+ "context_signature": null,
+ "mechanism": {
+  "kind": "PROCEDURE",
+  "entrypoint": {
+   "steps": [
+    {
+     "kind": "click",
+     "target_sig": "a|||||login",
+     "value": null
+    },
+    {
+     "kind": "fill",
+     "target_sig": "input|text||username|form-control|",
+     "value": "spiderbot"
+    },
+    {
+     "kind": "fill",
+     "target_sig": "input|password||password|form-control|",
+     "value": "notasecret"
+    },
+    {
+     "kind": "click",
+     "target_sig": "input|submit|||btn btn-primary|",
+     "value": null
+    }
+   ]
+  }
+ },
+ "expected_effects": [
+  {
+   "effect": "authenticated session on quotes.toscrape.com",
+   "witness_predicate": {
+    "predicate_ref": "graph.tasks:T_Q_login.accept",
+    "predicate": {
+     "host_allowlist": [
+      "quotes.toscrape.com"
+     ],
+     "url_anchor": null,
+     "elem_text_any": [
+      "logout"
+     ],
+     "neg_url": null
+    },
+    "evidence": "accepted Graph task family accepts the login effect on el_text='logout' (graph/tasks.py T_Q_login, tasks3.py)"
+   }
+  }
+ ],
+ "verifier": {
+  "kind": "PREDICATE_SNAPSHOT",
+  "entrypoint": "runtime.predicates.evaluate_predicate",
+  "cost_class": "ZERO_PROVIDER_SNAPSHOT"
+ },
+ "fallbacks": [
+  "HANDOFF_TO_CALLER_VIA_SPIDER_PLAN_V0"
+ ],
+ "negative_knowledge": [],
+ "freshness": {
+  "last_verified_at": null,
+  "invalidation_signals": null,
+  "ttl_policy": null
+ },
+ "confidence": {
+  "value": null,
+  "basis": null
+ },
+ "cost_estimate": {
+  "model_calls": null,
+  "tokens": null,
+  "browser_actions": null,
+  "browser_launches": null,
+  "network_calls": null,
+  "latency_ms": null
+ },
+ "provenance": {
+  "source_lane": "GRAPH",
+  "source_run_ids": [
+   "graph:cycle3_20260824_043334"
+  ],
+  "evidence_paths": [
+   "results/runtime/evidence/graph_cycle3_20260824_043334_store_dump.json.gz"
+  ],
+  "source_agent_or_model": "scripted zero-provider explorers (agents G/B), graph/explorer.py lineage"
+ },
+ "risk": {
+  "class": "PUBLIC_SANDBOX_DEMO_CREDENTIALS",
+  "permissions_required": []
+ },
+ "composition": {
+  "input_effects": null,
+  "output_effects": null,
+  "known_incompatibilities": null
+ }
+}

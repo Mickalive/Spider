@@ -1,0 +1,4716 @@
+{
+ "ts": "2026-08-24T23:07:10Z",
+ "design_freeze": {
+  "prereg": "graph/prereg_robustness.md (+amendment A1)",
+  "constants": {
+   "tau": 0.3,
+   "min_match": 2,
+   "cov_cap": 6,
+   "topk": 3,
+   "df_keep": 0.6
+  },
+  "conf_min": 0.35,
+  "seed": 20260824,
+  "max_applications": 6,
+  "max_resets": 2,
+  "consumer_policy": "agentB",
+  "eval_writes": "none",
+  "kb_source": "committed cycle3 dump (rebuild_store.py, A1 ts)",
+  "best_variant": "V31",
+  "passes": 2,
+  "probe_selection_artifact": "results/graph/robustness_probe_selection.json"
+ },
+ "probes": [
+  {
+   "name": "quotes_root",
+   "url": "https://quotes.toscrape.com/",
+   "status": 200,
+   "bytes": 11064,
+   "s": 0.38
+  },
+  {
+   "name": "quotes_login",
+   "url": "https://quotes.toscrape.com/login",
+   "status": 200,
+   "bytes": 1880,
+   "s": 0.15
+  },
+  {
+   "name": "quotes_page3",
+   "url": "https://quotes.toscrape.com/page/3/",
+   "status": 200,
+   "bytes": 10029,
+   "s": 0.23
+  },
+  {
+   "name": "quotes_page5",
+   "url": "https://quotes.toscrape.com/page/5/",
+   "status": 200,
+   "bytes": 10012,
+   "s": 0.12
+  },
+  {
+   "name": "books_root",
+   "url": "https://books.toscrape.com/",
+   "status": 200,
+   "bytes": 51294,
+   "s": 0.27
+  }
+ ],
+ "preflight": {
+  "books": true,
+  "quotes": true
+ },
+ "kb_at_eval_start": {
+  "stats": {
+   "states": 14,
+   "transitions": 19,
+   "actions": 13,
+   "fragments": 12
+  },
+  "fragments": [
+   "books.cat.fiction",
+   "books.cat.mystery",
+   "books.cat.travel",
+   "books.open.first.book",
+   "books.open.first.book.mystery",
+   "books.paginate.next",
+   "generic.form.login",
+   "generic.paginate.next",
+   "generic.paginate.next",
+   "quotes.login",
+   "quotes.page.2",
+   "quotes.tag.love"
+  ]
+ },
+ "runs": [
+  {
+   "phase": "R2LIVE-pass1",
+   "task": "R2P_eval_c2_login",
+   "agent": "agentB",
+   "condition": "V31 desc_only",
+   "status": "success",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 1.7,
+   "loads": 3,
+   "actions": 4,
+   "reused": 4,
+   "novel": 0,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 0,
+   "llm_calls": 0,
+   "subgoals_ok": 1,
+   "subgoals_total": 1,
+   "wall_ms": 2833,
+   "retrieval_lookups": 1,
+   "retrieval_ms": 0,
+   "candidates_tried": 1,
+   "solved_by": [
+    "memory"
+   ],
+   "memory_events": [
+    {
+     "sub": "e3p.eval.c2.login",
+     "query_mode": "desc_only",
+     "query": "Sign into the quotations website using the account 'spiderbot' with the password 'notasecret' so the session is properly signed in.",
+     "candidates": [
+      "generic.form.login",
+      "quotes.login"
+     ],
+     "replay_ok": true,
+     "abort_step": null,
+     "applications": 1
+    }
+   ],
+   "query_mode": "desc_only",
+   "subgoal_rows": [
+    {
+     "sig": "e3p.eval.c2.login",
+     "condition": "inherit",
+     "query_mode": "desc_only",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "e3p.eval.c2.login",
+       "query_mode": "desc_only",
+       "query": "Sign into the quotations website using the account 'spiderbot' with the password 'notasecret' so the session is properly signed in.",
+       "candidates": [
+        "generic.form.login",
+        "quotes.login"
+       ],
+       "replay_ok": true,
+       "abort_step": null,
+       "applications": 1
+      }
+     ]
+    }
+   ],
+   "from_case": {
+    "source": "PARA:C2_quotes_login_p3",
+    "intent": "login",
+    "text": "Sign into the quotations website using the account 'spiderbot' with the password 'notasecret' so the session is properly signed in.",
+    "best_top": "generic.form.login",
+    "v00_top": null
+   }
+  },
+  {
+   "phase": "R2LIVE-pass2",
+   "task": "R2P_eval_c2_login",
+   "agent": "agentB",
+   "condition": "V31 desc_only",
+   "status": "success",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 1.7,
+   "loads": 3,
+   "actions": 4,
+   "reused": 4,
+   "novel": 0,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 0,
+   "llm_calls": 0,
+   "subgoals_ok": 1,
+   "subgoals_total": 1,
+   "wall_ms": 2844,
+   "retrieval_lookups": 1,
+   "retrieval_ms": 0,
+   "candidates_tried": 1,
+   "solved_by": [
+    "memory"
+   ],
+   "memory_events": [
+    {
+     "sub": "e3p.eval.c2.login",
+     "query_mode": "desc_only",
+     "query": "Sign into the quotations website using the account 'spiderbot' with the password 'notasecret' so the session is properly signed in.",
+     "candidates": [
+      "generic.form.login",
+      "quotes.login"
+     ],
+     "replay_ok": true,
+     "abort_step": null,
+     "applications": 1
+    }
+   ],
+   "query_mode": "desc_only",
+   "subgoal_rows": [
+    {
+     "sig": "e3p.eval.c2.login",
+     "condition": "inherit",
+     "query_mode": "desc_only",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "e3p.eval.c2.login",
+       "query_mode": "desc_only",
+       "query": "Sign into the quotations website using the account 'spiderbot' with the password 'notasecret' so the session is properly signed in.",
+       "candidates": [
+        "generic.form.login",
+        "quotes.login"
+       ],
+       "replay_ok": true,
+       "abort_step": null,
+       "applications": 1
+      }
+     ]
+    }
+   ],
+   "from_case": {
+    "source": "PARA:C2_quotes_login_p3",
+    "intent": "login",
+    "text": "Sign into the quotations website using the account 'spiderbot' with the password 'notasecret' so the session is properly signed in.",
+    "best_top": "generic.form.login",
+    "v00_top": null
+   }
+  },
+  {
+   "phase": "R2LIVE-pass1",
+   "task": "R2P_eval_c2_page3",
+   "agent": "agentB",
+   "condition": "V31 desc_only",
+   "status": "success",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 1.5,
+   "loads": 3,
+   "actions": 2,
+   "reused": 2,
+   "novel": 0,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 0,
+   "llm_calls": 0,
+   "subgoals_ok": 1,
+   "subgoals_total": 1,
+   "wall_ms": 2384,
+   "retrieval_lookups": 1,
+   "retrieval_ms": 0,
+   "candidates_tried": 1,
+   "solved_by": [
+    "memory"
+   ],
+   "memory_events": [
+    {
+     "sub": "e3p.eval.c2.page3",
+     "query_mode": "desc_only",
+     "query": "Make your way through the quotation listings until you land on their third page.",
+     "candidates": [
+      "generic.paginate.next",
+      "quotes.page.2",
+      "quotes.tag.love"
+     ],
+     "replay_ok": true,
+     "abort_step": null,
+     "applications": 2
+    }
+   ],
+   "query_mode": "desc_only",
+   "subgoal_rows": [
+    {
+     "sig": "e3p.eval.c2.page3",
+     "condition": "inherit",
+     "query_mode": "desc_only",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "e3p.eval.c2.page3",
+       "query_mode": "desc_only",
+       "query": "Make your way through the quotation listings until you land on their third page.",
+       "candidates": [
+        "generic.paginate.next",
+        "quotes.page.2",
+        "quotes.tag.love"
+       ],
+       "replay_ok": true,
+       "abort_step": null,
+       "applications": 2
+      }
+     ]
+    }
+   ],
+   "from_case": {
+    "source": "PARA:C2_quotes_login_p3",
+    "intent": "pager",
+    "text": "Make your way through the quotation listings until you land on their third page.",
+    "best_top": "generic.paginate.next",
+    "v00_top": null
+   }
+  },
+  {
+   "phase": "R2LIVE-pass2",
+   "task": "R2P_eval_c2_page3",
+   "agent": "agentB",
+   "condition": "V31 desc_only",
+   "status": "success",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 1.5,
+   "loads": 3,
+   "actions": 2,
+   "reused": 2,
+   "novel": 0,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 0,
+   "llm_calls": 0,
+   "subgoals_ok": 1,
+   "subgoals_total": 1,
+   "wall_ms": 2378,
+   "retrieval_lookups": 1,
+   "retrieval_ms": 0,
+   "candidates_tried": 1,
+   "solved_by": [
+    "memory"
+   ],
+   "memory_events": [
+    {
+     "sub": "e3p.eval.c2.page3",
+     "query_mode": "desc_only",
+     "query": "Make your way through the quotation listings until you land on their third page.",
+     "candidates": [
+      "generic.paginate.next",
+      "quotes.page.2",
+      "quotes.tag.love"
+     ],
+     "replay_ok": true,
+     "abort_step": null,
+     "applications": 2
+    }
+   ],
+   "query_mode": "desc_only",
+   "subgoal_rows": [
+    {
+     "sig": "e3p.eval.c2.page3",
+     "condition": "inherit",
+     "query_mode": "desc_only",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "e3p.eval.c2.page3",
+       "query_mode": "desc_only",
+       "query": "Make your way through the quotation listings until you land on their third page.",
+       "candidates": [
+        "generic.paginate.next",
+        "quotes.page.2",
+        "quotes.tag.love"
+       ],
+       "replay_ok": true,
+       "abort_step": null,
+       "applications": 2
+      }
+     ]
+    }
+   ],
+   "from_case": {
+    "source": "PARA:C2_quotes_login_p3",
+    "intent": "pager",
+    "text": "Make your way through the quotation listings until you land on their third page.",
+    "best_top": "generic.paginate.next",
+    "v00_top": null
+   }
+  },
+  {
+   "phase": "R2LIVE-pass1",
+   "task": "R2P_eval_c3_page5",
+   "agent": "agentB",
+   "condition": "V31 desc_only",
+   "status": "success",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 2.4,
+   "loads": 5,
+   "actions": 4,
+   "reused": 4,
+   "novel": 0,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 0,
+   "llm_calls": 0,
+   "subgoals_ok": 1,
+   "subgoals_total": 1,
+   "wall_ms": 4283,
+   "retrieval_lookups": 1,
+   "retrieval_ms": 0,
+   "candidates_tried": 1,
+   "solved_by": [
+    "memory"
+   ],
+   "memory_events": [
+    {
+     "sub": "e3p.eval.c3.page5",
+     "query_mode": "desc_only",
+     "query": "Flip ahead to page five of the list of quotations.",
+     "candidates": [
+      "generic.paginate.next",
+      "quotes.page.2",
+      "quotes.tag.love"
+     ],
+     "replay_ok": true,
+     "abort_step": null,
+     "applications": 4
+    }
+   ],
+   "query_mode": "desc_only",
+   "subgoal_rows": [
+    {
+     "sig": "e3p.eval.c3.page5",
+     "condition": "inherit",
+     "query_mode": "desc_only",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "e3p.eval.c3.page5",
+       "query_mode": "desc_only",
+       "query": "Flip ahead to page five of the list of quotations.",
+       "candidates": [
+        "generic.paginate.next",
+        "quotes.page.2",
+        "quotes.tag.love"
+       ],
+       "replay_ok": true,
+       "abort_step": null,
+       "applications": 4
+      }
+     ]
+    }
+   ],
+   "from_case": {
+    "source": "PARA:C3_quotes_login_p5",
+    "intent": "pager",
+    "text": "Flip ahead to page five of the list of quotations.",
+    "best_top": "generic.paginate.next",
+    "v00_top": null
+   }
+  },
+  {
+   "phase": "R2LIVE-pass2",
+   "task": "R2P_eval_c3_page5",
+   "agent": "agentB",
+   "condition": "V31 desc_only",
+   "status": "success",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 2.4,
+   "loads": 5,
+   "actions": 4,
+   "reused": 4,
+   "novel": 0,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 0,
+   "llm_calls": 0,
+   "subgoals_ok": 1,
+   "subgoals_total": 1,
+   "wall_ms": 4180,
+   "retrieval_lookups": 1,
+   "retrieval_ms": 0,
+   "candidates_tried": 1,
+   "solved_by": [
+    "memory"
+   ],
+   "memory_events": [
+    {
+     "sub": "e3p.eval.c3.page5",
+     "query_mode": "desc_only",
+     "query": "Flip ahead to page five of the list of quotations.",
+     "candidates": [
+      "generic.paginate.next",
+      "quotes.page.2",
+      "quotes.tag.love"
+     ],
+     "replay_ok": true,
+     "abort_step": null,
+     "applications": 4
+    }
+   ],
+   "query_mode": "desc_only",
+   "subgoal_rows": [
+    {
+     "sig": "e3p.eval.c3.page5",
+     "condition": "inherit",
+     "query_mode": "desc_only",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "e3p.eval.c3.page5",
+       "query_mode": "desc_only",
+       "query": "Flip ahead to page five of the list of quotations.",
+       "candidates": [
+        "generic.paginate.next",
+        "quotes.page.2",
+        "quotes.tag.love"
+       ],
+       "replay_ok": true,
+       "abort_step": null,
+       "applications": 4
+      }
+     ]
+    }
+   ],
+   "from_case": {
+    "source": "PARA:C3_quotes_login_p5",
+    "intent": "pager",
+    "text": "Flip ahead to page five of the list of quotations.",
+    "best_top": "generic.paginate.next",
+    "v00_top": null
+   }
+  },
+  {
+   "phase": "R3-pass1",
+   "task": "C2_quotes_login_p3",
+   "agent": "agentB",
+   "condition": "r3_frag",
+   "status": "partial",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 9.2,
+   "loads": 8,
+   "actions": 21,
+   "reused": 0,
+   "novel": 21,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 473,
+   "llm_calls": 0,
+   "subgoals_ok": 1,
+   "subgoals_total": 2,
+   "wall_ms": 17784,
+   "retrieval_lookups": 2,
+   "retrieval_ms": 0,
+   "candidates_tried": 0,
+   "solved_by": [
+    "exploration",
+    "unsolved"
+   ],
+   "memory_events": [
+    {
+     "sub": "eval.c2.login",
+     "query_mode": "desc_kw",
+     "query": "log in to the quotes site with the provided username and password login",
+     "candidates": [],
+     "replay_ok": false,
+     "abort_step": null,
+     "applications": 0
+    },
+    {
+     "sub": "eval.c2.page3",
+     "query_mode": "desc_kw",
+     "query": "go to page 3 of the quote listings next",
+     "candidates": [],
+     "replay_ok": false,
+     "abort_step": null,
+     "applications": 0
+    }
+   ],
+   "query_mode": "desc_kw",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c2.login",
+     "condition": "inherit",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "exploration"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c2.login",
+       "query_mode": "desc_kw",
+       "query": "log in to the quotes site with the provided username and password login",
+       "candidates": [],
+       "replay_ok": false,
+       "abort_step": null,
+       "applications": 0
+      }
+     ]
+    },
+    {
+     "sig": "eval.c2.page3",
+     "condition": "inherit",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "unsolved"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c2.page3",
+       "query_mode": "desc_kw",
+       "query": "go to page 3 of the quote listings next",
+       "candidates": [],
+       "replay_ok": false,
+       "abort_step": null,
+       "applications": 0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "phase": "R3-pass2",
+   "task": "C2_quotes_login_p3",
+   "agent": "agentB",
+   "condition": "r3_frag",
+   "status": "partial",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 9.2,
+   "loads": 8,
+   "actions": 21,
+   "reused": 0,
+   "novel": 21,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 473,
+   "llm_calls": 0,
+   "subgoals_ok": 1,
+   "subgoals_total": 2,
+   "wall_ms": 17837,
+   "retrieval_lookups": 2,
+   "retrieval_ms": 0,
+   "candidates_tried": 0,
+   "solved_by": [
+    "exploration",
+    "unsolved"
+   ],
+   "memory_events": [
+    {
+     "sub": "eval.c2.login",
+     "query_mode": "desc_kw",
+     "query": "log in to the quotes site with the provided username and password login",
+     "candidates": [],
+     "replay_ok": false,
+     "abort_step": null,
+     "applications": 0
+    },
+    {
+     "sub": "eval.c2.page3",
+     "query_mode": "desc_kw",
+     "query": "go to page 3 of the quote listings next",
+     "candidates": [],
+     "replay_ok": false,
+     "abort_step": null,
+     "applications": 0
+    }
+   ],
+   "query_mode": "desc_kw",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c2.login",
+     "condition": "inherit",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "exploration"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c2.login",
+       "query_mode": "desc_kw",
+       "query": "log in to the quotes site with the provided username and password login",
+       "candidates": [],
+       "replay_ok": false,
+       "abort_step": null,
+       "applications": 0
+      }
+     ]
+    },
+    {
+     "sig": "eval.c2.page3",
+     "condition": "inherit",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "unsolved"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c2.page3",
+       "query_mode": "desc_kw",
+       "query": "go to page 3 of the quote listings next",
+       "candidates": [],
+       "replay_ok": false,
+       "abort_step": null,
+       "applications": 0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "phase": "R3-pass1",
+   "task": "C3_quotes_login_p5",
+   "agent": "agentB",
+   "condition": "r3_frag",
+   "status": "partial",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 9.2,
+   "loads": 8,
+   "actions": 21,
+   "reused": 0,
+   "novel": 21,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 473,
+   "llm_calls": 0,
+   "subgoals_ok": 1,
+   "subgoals_total": 2,
+   "wall_ms": 17778,
+   "retrieval_lookups": 2,
+   "retrieval_ms": 0,
+   "candidates_tried": 0,
+   "solved_by": [
+    "exploration",
+    "unsolved"
+   ],
+   "memory_events": [
+    {
+     "sub": "eval.c3.login",
+     "query_mode": "desc_kw",
+     "query": "log in to the quotes site with the provided username and password login",
+     "candidates": [],
+     "replay_ok": false,
+     "abort_step": null,
+     "applications": 0
+    },
+    {
+     "sub": "eval.c3.page5",
+     "query_mode": "desc_kw",
+     "query": "go to page 5 of the quote listings next",
+     "candidates": [],
+     "replay_ok": false,
+     "abort_step": null,
+     "applications": 0
+    }
+   ],
+   "query_mode": "desc_kw",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c3.login",
+     "condition": "inherit",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "exploration"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c3.login",
+       "query_mode": "desc_kw",
+       "query": "log in to the quotes site with the provided username and password login",
+       "candidates": [],
+       "replay_ok": false,
+       "abort_step": null,
+       "applications": 0
+      }
+     ]
+    },
+    {
+     "sig": "eval.c3.page5",
+     "condition": "inherit",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "unsolved"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c3.page5",
+       "query_mode": "desc_kw",
+       "query": "go to page 5 of the quote listings next",
+       "candidates": [],
+       "replay_ok": false,
+       "abort_step": null,
+       "applications": 0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "phase": "R3-pass2",
+   "task": "C3_quotes_login_p5",
+   "agent": "agentB",
+   "condition": "r3_frag",
+   "status": "partial",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 9.2,
+   "loads": 8,
+   "actions": 21,
+   "reused": 0,
+   "novel": 21,
+   "failed": 0,
+   "recoveries": 0,
+   "decision_points": 473,
+   "llm_calls": 0,
+   "subgoals_ok": 1,
+   "subgoals_total": 2,
+   "wall_ms": 17803,
+   "retrieval_lookups": 2,
+   "retrieval_ms": 0,
+   "candidates_tried": 0,
+   "solved_by": [
+    "exploration",
+    "unsolved"
+   ],
+   "memory_events": [
+    {
+     "sub": "eval.c3.login",
+     "query_mode": "desc_kw",
+     "query": "log in to the quotes site with the provided username and password login",
+     "candidates": [],
+     "replay_ok": false,
+     "abort_step": null,
+     "applications": 0
+    },
+    {
+     "sub": "eval.c3.page5",
+     "query_mode": "desc_kw",
+     "query": "go to page 5 of the quote listings next",
+     "candidates": [],
+     "replay_ok": false,
+     "abort_step": null,
+     "applications": 0
+    }
+   ],
+   "query_mode": "desc_kw",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c3.login",
+     "condition": "inherit",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "exploration"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c3.login",
+       "query_mode": "desc_kw",
+       "query": "log in to the quotes site with the provided username and password login",
+       "candidates": [],
+       "replay_ok": false,
+       "abort_step": null,
+       "applications": 0
+      }
+     ]
+    },
+    {
+     "sig": "eval.c3.page5",
+     "condition": "inherit",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "unsolved"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c3.page5",
+       "query_mode": "desc_kw",
+       "query": "go to page 5 of the quote listings next",
+       "candidates": [],
+       "replay_ok": false,
+       "abort_step": null,
+       "applications": 0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "phase": "R3-pass1",
+   "task": "C2_quotes_login_p3",
+   "agent": "agentB",
+   "condition": "r3_graphiter",
+   "status": "success",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 4.6,
+   "loads": 5,
+   "actions": 11,
+   "reused": 8,
+   "novel": 3,
+   "failed": 0,
+   "recoveries": 1,
+   "decision_points": 0,
+   "llm_calls": 0,
+   "subgoals_ok": 2,
+   "subgoals_total": 2,
+   "wall_ms": 8549,
+   "retrieval_lookups": 2,
+   "retrieval_ms": 0,
+   "candidates_tried": 0,
+   "solved_by": [
+    "exploration",
+    "memory"
+   ],
+   "memory_events": [
+    {
+     "sub": "eval.c2.login",
+     "query_mode": "desc_kw",
+     "query": "log in to the quotes site with the provided username and password login",
+     "policy": "graphiter",
+     "edges_ranked": [
+      [
+       0.1667,
+       1,
+       "fill",
+       "input|password||password|form-control|"
+      ],
+      [
+       0.1667,
+       1,
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       0.1667,
+       1,
+       "click",
+       "a|||||login"
+      ],
+      [
+       0.1667,
+       1,
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||next"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a||||tag|love"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "input|submit|||btn btn-primary|"
+      ]
+     ],
+     "applied": [
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||login"
+      ],
+      [
+       "click",
+       "a|||||login"
+      ],
+      [
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       "click",
+       "input|submit|||btn btn-primary|"
+      ]
+     ],
+     "solved": false
+    },
+    {
+     "sub": "eval.c2.page3",
+     "query_mode": "desc_kw",
+     "query": "go to page 3 of the quote listings next",
+     "policy": "graphiter",
+     "edges_ranked": [
+      [
+       0.1667,
+       1,
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       0.1667,
+       1,
+       "click",
+       "a|||||next"
+      ],
+      [
+       0.0,
+       0,
+       "fill",
+       "input|password||password|form-control|"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||login"
+      ],
+      [
+       0.0,
+       0,
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a||||tag|love"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "input|submit|||btn btn-primary|"
+      ]
+     ],
+     "applied": [
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ]
+     ],
+     "solved": true
+    }
+   ],
+   "query_mode": "desc_kw",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c2.login",
+     "condition": "graphiter",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "exploration"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c2.login",
+       "query_mode": "desc_kw",
+       "query": "log in to the quotes site with the provided username and password login",
+       "policy": "graphiter",
+       "edges_ranked": [
+        [
+         0.1667,
+         1,
+         "fill",
+         "input|password||password|form-control|"
+        ],
+        [
+         0.1667,
+         1,
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         0.1667,
+         1,
+         "click",
+         "a|||||login"
+        ],
+        [
+         0.1667,
+         1,
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||next"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a||||tag|love"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "input|submit|||btn btn-primary|"
+        ]
+       ],
+       "applied": [
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||login"
+        ],
+        [
+         "click",
+         "a|||||login"
+        ],
+        [
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         "click",
+         "input|submit|||btn btn-primary|"
+        ]
+       ],
+       "solved": false
+      }
+     ]
+    },
+    {
+     "sig": "eval.c2.page3",
+     "condition": "graphiter",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c2.page3",
+       "query_mode": "desc_kw",
+       "query": "go to page 3 of the quote listings next",
+       "policy": "graphiter",
+       "edges_ranked": [
+        [
+         0.1667,
+         1,
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         0.1667,
+         1,
+         "click",
+         "a|||||next"
+        ],
+        [
+         0.0,
+         0,
+         "fill",
+         "input|password||password|form-control|"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||login"
+        ],
+        [
+         0.0,
+         0,
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a||||tag|love"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "input|submit|||btn btn-primary|"
+        ]
+       ],
+       "applied": [
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ]
+       ],
+       "solved": true
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "phase": "R3-pass2",
+   "task": "C2_quotes_login_p3",
+   "agent": "agentB",
+   "condition": "r3_graphiter",
+   "status": "success",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 4.6,
+   "loads": 5,
+   "actions": 11,
+   "reused": 8,
+   "novel": 3,
+   "failed": 0,
+   "recoveries": 1,
+   "decision_points": 0,
+   "llm_calls": 0,
+   "subgoals_ok": 2,
+   "subgoals_total": 2,
+   "wall_ms": 8550,
+   "retrieval_lookups": 2,
+   "retrieval_ms": 0,
+   "candidates_tried": 0,
+   "solved_by": [
+    "exploration",
+    "memory"
+   ],
+   "memory_events": [
+    {
+     "sub": "eval.c2.login",
+     "query_mode": "desc_kw",
+     "query": "log in to the quotes site with the provided username and password login",
+     "policy": "graphiter",
+     "edges_ranked": [
+      [
+       0.1667,
+       1,
+       "fill",
+       "input|password||password|form-control|"
+      ],
+      [
+       0.1667,
+       1,
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       0.1667,
+       1,
+       "click",
+       "a|||||login"
+      ],
+      [
+       0.1667,
+       1,
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||next"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a||||tag|love"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "input|submit|||btn btn-primary|"
+      ]
+     ],
+     "applied": [
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||login"
+      ],
+      [
+       "click",
+       "a|||||login"
+      ],
+      [
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       "click",
+       "input|submit|||btn btn-primary|"
+      ]
+     ],
+     "solved": false
+    },
+    {
+     "sub": "eval.c2.page3",
+     "query_mode": "desc_kw",
+     "query": "go to page 3 of the quote listings next",
+     "policy": "graphiter",
+     "edges_ranked": [
+      [
+       0.1667,
+       1,
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       0.1667,
+       1,
+       "click",
+       "a|||||next"
+      ],
+      [
+       0.0,
+       0,
+       "fill",
+       "input|password||password|form-control|"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||login"
+      ],
+      [
+       0.0,
+       0,
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a||||tag|love"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "input|submit|||btn btn-primary|"
+      ]
+     ],
+     "applied": [
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ]
+     ],
+     "solved": true
+    }
+   ],
+   "query_mode": "desc_kw",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c2.login",
+     "condition": "graphiter",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "exploration"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c2.login",
+       "query_mode": "desc_kw",
+       "query": "log in to the quotes site with the provided username and password login",
+       "policy": "graphiter",
+       "edges_ranked": [
+        [
+         0.1667,
+         1,
+         "fill",
+         "input|password||password|form-control|"
+        ],
+        [
+         0.1667,
+         1,
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         0.1667,
+         1,
+         "click",
+         "a|||||login"
+        ],
+        [
+         0.1667,
+         1,
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||next"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a||||tag|love"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "input|submit|||btn btn-primary|"
+        ]
+       ],
+       "applied": [
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||login"
+        ],
+        [
+         "click",
+         "a|||||login"
+        ],
+        [
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         "click",
+         "input|submit|||btn btn-primary|"
+        ]
+       ],
+       "solved": false
+      }
+     ]
+    },
+    {
+     "sig": "eval.c2.page3",
+     "condition": "graphiter",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c2.page3",
+       "query_mode": "desc_kw",
+       "query": "go to page 3 of the quote listings next",
+       "policy": "graphiter",
+       "edges_ranked": [
+        [
+         0.1667,
+         1,
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         0.1667,
+         1,
+         "click",
+         "a|||||next"
+        ],
+        [
+         0.0,
+         0,
+         "fill",
+         "input|password||password|form-control|"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||login"
+        ],
+        [
+         0.0,
+         0,
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a||||tag|love"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "input|submit|||btn btn-primary|"
+        ]
+       ],
+       "applied": [
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ]
+       ],
+       "solved": true
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "phase": "R3-pass1",
+   "task": "C3_quotes_login_p5",
+   "agent": "agentB",
+   "condition": "r3_graphiter",
+   "status": "success",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 5.6,
+   "loads": 7,
+   "actions": 13,
+   "reused": 10,
+   "novel": 3,
+   "failed": 0,
+   "recoveries": 1,
+   "decision_points": 0,
+   "llm_calls": 0,
+   "subgoals_ok": 2,
+   "subgoals_total": 2,
+   "wall_ms": 10498,
+   "retrieval_lookups": 2,
+   "retrieval_ms": 0,
+   "candidates_tried": 0,
+   "solved_by": [
+    "exploration",
+    "memory"
+   ],
+   "memory_events": [
+    {
+     "sub": "eval.c3.login",
+     "query_mode": "desc_kw",
+     "query": "log in to the quotes site with the provided username and password login",
+     "policy": "graphiter",
+     "edges_ranked": [
+      [
+       0.1667,
+       1,
+       "fill",
+       "input|password||password|form-control|"
+      ],
+      [
+       0.1667,
+       1,
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       0.1667,
+       1,
+       "click",
+       "a|||||login"
+      ],
+      [
+       0.1667,
+       1,
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||next"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a||||tag|love"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "input|submit|||btn btn-primary|"
+      ]
+     ],
+     "applied": [
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||login"
+      ],
+      [
+       "click",
+       "a|||||login"
+      ],
+      [
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       "click",
+       "input|submit|||btn btn-primary|"
+      ]
+     ],
+     "solved": false
+    },
+    {
+     "sub": "eval.c3.page5",
+     "query_mode": "desc_kw",
+     "query": "go to page 5 of the quote listings next",
+     "policy": "graphiter",
+     "edges_ranked": [
+      [
+       0.1667,
+       1,
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       0.1667,
+       1,
+       "click",
+       "a|||||next"
+      ],
+      [
+       0.0,
+       0,
+       "fill",
+       "input|password||password|form-control|"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||login"
+      ],
+      [
+       0.0,
+       0,
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a||||tag|love"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "input|submit|||btn btn-primary|"
+      ]
+     ],
+     "applied": [
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ]
+     ],
+     "solved": true
+    }
+   ],
+   "query_mode": "desc_kw",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c3.login",
+     "condition": "graphiter",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "exploration"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c3.login",
+       "query_mode": "desc_kw",
+       "query": "log in to the quotes site with the provided username and password login",
+       "policy": "graphiter",
+       "edges_ranked": [
+        [
+         0.1667,
+         1,
+         "fill",
+         "input|password||password|form-control|"
+        ],
+        [
+         0.1667,
+         1,
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         0.1667,
+         1,
+         "click",
+         "a|||||login"
+        ],
+        [
+         0.1667,
+         1,
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||next"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a||||tag|love"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "input|submit|||btn btn-primary|"
+        ]
+       ],
+       "applied": [
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||login"
+        ],
+        [
+         "click",
+         "a|||||login"
+        ],
+        [
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         "click",
+         "input|submit|||btn btn-primary|"
+        ]
+       ],
+       "solved": false
+      }
+     ]
+    },
+    {
+     "sig": "eval.c3.page5",
+     "condition": "graphiter",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c3.page5",
+       "query_mode": "desc_kw",
+       "query": "go to page 5 of the quote listings next",
+       "policy": "graphiter",
+       "edges_ranked": [
+        [
+         0.1667,
+         1,
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         0.1667,
+         1,
+         "click",
+         "a|||||next"
+        ],
+        [
+         0.0,
+         0,
+         "fill",
+         "input|password||password|form-control|"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||login"
+        ],
+        [
+         0.0,
+         0,
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a||||tag|love"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "input|submit|||btn btn-primary|"
+        ]
+       ],
+       "applied": [
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ]
+       ],
+       "solved": true
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "phase": "R3-pass2",
+   "task": "C3_quotes_login_p5",
+   "agent": "agentB",
+   "condition": "r3_graphiter",
+   "status": "success",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 5.5,
+   "loads": 7,
+   "actions": 13,
+   "reused": 10,
+   "novel": 3,
+   "failed": 0,
+   "recoveries": 1,
+   "decision_points": 0,
+   "llm_calls": 0,
+   "subgoals_ok": 2,
+   "subgoals_total": 2,
+   "wall_ms": 10442,
+   "retrieval_lookups": 2,
+   "retrieval_ms": 0,
+   "candidates_tried": 0,
+   "solved_by": [
+    "exploration",
+    "memory"
+   ],
+   "memory_events": [
+    {
+     "sub": "eval.c3.login",
+     "query_mode": "desc_kw",
+     "query": "log in to the quotes site with the provided username and password login",
+     "policy": "graphiter",
+     "edges_ranked": [
+      [
+       0.1667,
+       1,
+       "fill",
+       "input|password||password|form-control|"
+      ],
+      [
+       0.1667,
+       1,
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       0.1667,
+       1,
+       "click",
+       "a|||||login"
+      ],
+      [
+       0.1667,
+       1,
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||next"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a||||tag|love"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "input|submit|||btn btn-primary|"
+      ]
+     ],
+     "applied": [
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||login"
+      ],
+      [
+       "click",
+       "a|||||login"
+      ],
+      [
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       "click",
+       "input|submit|||btn btn-primary|"
+      ]
+     ],
+     "solved": false
+    },
+    {
+     "sub": "eval.c3.page5",
+     "query_mode": "desc_kw",
+     "query": "go to page 5 of the quote listings next",
+     "policy": "graphiter",
+     "edges_ranked": [
+      [
+       0.1667,
+       1,
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       0.1667,
+       1,
+       "click",
+       "a|||||next"
+      ],
+      [
+       0.0,
+       0,
+       "fill",
+       "input|password||password|form-control|"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a|||||login"
+      ],
+      [
+       0.0,
+       0,
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "a||||tag|love"
+      ],
+      [
+       0.0,
+       0,
+       "click",
+       "input|submit|||btn btn-primary|"
+      ]
+     ],
+     "applied": [
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ]
+     ],
+     "solved": true
+    }
+   ],
+   "query_mode": "desc_kw",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c3.login",
+     "condition": "graphiter",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "exploration"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c3.login",
+       "query_mode": "desc_kw",
+       "query": "log in to the quotes site with the provided username and password login",
+       "policy": "graphiter",
+       "edges_ranked": [
+        [
+         0.1667,
+         1,
+         "fill",
+         "input|password||password|form-control|"
+        ],
+        [
+         0.1667,
+         1,
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         0.1667,
+         1,
+         "click",
+         "a|||||login"
+        ],
+        [
+         0.1667,
+         1,
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||next"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a||||tag|love"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "input|submit|||btn btn-primary|"
+        ]
+       ],
+       "applied": [
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||login"
+        ],
+        [
+         "click",
+         "a|||||login"
+        ],
+        [
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         "click",
+         "input|submit|||btn btn-primary|"
+        ]
+       ],
+       "solved": false
+      }
+     ]
+    },
+    {
+     "sig": "eval.c3.page5",
+     "condition": "graphiter",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "memory"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c3.page5",
+       "query_mode": "desc_kw",
+       "query": "go to page 5 of the quote listings next",
+       "policy": "graphiter",
+       "edges_ranked": [
+        [
+         0.1667,
+         1,
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         0.1667,
+         1,
+         "click",
+         "a|||||next"
+        ],
+        [
+         0.0,
+         0,
+         "fill",
+         "input|password||password|form-control|"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a|||||login"
+        ],
+        [
+         0.0,
+         0,
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "a||||tag|love"
+        ],
+        [
+         0.0,
+         0,
+         "click",
+         "input|submit|||btn btn-primary|"
+        ]
+       ],
+       "applied": [
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ]
+       ],
+       "solved": true
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "phase": "R3-pass1",
+   "task": "C2_quotes_login_p3",
+   "agent": "agentB",
+   "condition": "r3_edgeseq",
+   "status": "partial",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 27.8,
+   "loads": 36,
+   "actions": 69,
+   "reused": 45,
+   "novel": 24,
+   "failed": 0,
+   "recoveries": 2,
+   "decision_points": 422,
+   "llm_calls": 0,
+   "subgoals_ok": 1,
+   "subgoals_total": 2,
+   "wall_ms": 55059,
+   "retrieval_lookups": 2,
+   "retrieval_ms": 0,
+   "candidates_tried": 0,
+   "solved_by": [
+    "exploration",
+    "unsolved"
+   ],
+   "memory_events": [
+    {
+     "sub": "eval.c2.login",
+     "query_mode": "desc_kw",
+     "query": "log in to the quotes site with the provided username and password login",
+     "policy": "edgeseq",
+     "order": [
+      [
+       "fill",
+       "input|password||password|form-control|"
+      ],
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||login"
+      ],
+      [
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a||||tag|love"
+      ],
+      [
+       "click",
+       "input|submit|||btn btn-primary|"
+      ]
+     ],
+     "applied": [
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||login"
+      ],
+      [
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       "click",
+       "input|submit|||btn btn-primary|"
+      ],
+      [
+       "fill",
+       "input|password||password|form-control|"
+      ],
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||login"
+      ],
+      [
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       "click",
+       "input|submit|||btn btn-primary|"
+      ],
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||login"
+      ],
+      [
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       "click",
+       "input|submit|||btn btn-primary|"
+      ],
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||login"
+      ],
+      [
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       "click",
+       "input|submit|||btn btn-primary|"
+      ],
+      [
+       "fill",
+       "input|password||password|form-control|"
+      ],
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||login"
+      ],
+      [
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       "click",
+       "input|submit|||btn btn-primary|"
+      ],
+      [
+       "fill",
+       "input|password||password|form-control|"
+      ],
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||login"
+      ],
+      [
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       "click",
+       "input|submit|||btn btn-primary|"
+      ]
+     ],
+     "applications": 6,
+     "solved": false
+    },
+    {
+     "sub": "eval.c2.page3",
+     "query_mode": "desc_kw",
+     "query": "go to page 3 of the quote listings next",
+     "policy": "edgeseq",
+     "order": [
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "fill",
+       "input|password||password|form-control|"
+      ],
+      [
+       "click",
+       "a|||||login"
+      ],
+      [
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       "click",
+       "a||||tag|love"
+      ],
+      [
+       "click",
+       "input|submit|||btn btn-primary|"
+      ]
+     ],
+     "applied": [
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a||||tag|love"
+      ],
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a||||tag|love"
+      ],
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a||||tag|love"
+      ],
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a||||tag|love"
+      ],
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a||||tag|love"
+      ],
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a||||tag|love"
+      ]
+     ],
+     "applications": 6,
+     "solved": false
+    }
+   ],
+   "query_mode": "desc_kw",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c2.login",
+     "condition": "edgeseq",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "exploration"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c2.login",
+       "query_mode": "desc_kw",
+       "query": "log in to the quotes site with the provided username and password login",
+       "policy": "edgeseq",
+       "order": [
+        [
+         "fill",
+         "input|password||password|form-control|"
+        ],
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||login"
+        ],
+        [
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a||||tag|love"
+        ],
+        [
+         "click",
+         "input|submit|||btn btn-primary|"
+        ]
+       ],
+       "applied": [
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||login"
+        ],
+        [
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         "click",
+         "input|submit|||btn btn-primary|"
+        ],
+        [
+         "fill",
+         "input|password||password|form-control|"
+        ],
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||login"
+        ],
+        [
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         "click",
+         "input|submit|||btn btn-primary|"
+        ],
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||login"
+        ],
+        [
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         "click",
+         "input|submit|||btn btn-primary|"
+        ],
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||login"
+        ],
+        [
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         "click",
+         "input|submit|||btn btn-primary|"
+        ],
+        [
+         "fill",
+         "input|password||password|form-control|"
+        ],
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||login"
+        ],
+        [
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         "click",
+         "input|submit|||btn btn-primary|"
+        ],
+        [
+         "fill",
+         "input|password||password|form-control|"
+        ],
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||login"
+        ],
+        [
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         "click",
+         "input|submit|||btn btn-primary|"
+        ]
+       ],
+       "applications": 6,
+       "solved": false
+      }
+     ]
+    },
+    {
+     "sig": "eval.c2.page3",
+     "condition": "edgeseq",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "unsolved"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c2.page3",
+       "query_mode": "desc_kw",
+       "query": "go to page 3 of the quote listings next",
+       "policy": "edgeseq",
+       "order": [
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "fill",
+         "input|password||password|form-control|"
+        ],
+        [
+         "click",
+         "a|||||login"
+        ],
+        [
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         "click",
+         "a||||tag|love"
+        ],
+        [
+         "click",
+         "input|submit|||btn btn-primary|"
+        ]
+       ],
+       "applied": [
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a||||tag|love"
+        ],
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a||||tag|love"
+        ],
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a||||tag|love"
+        ],
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a||||tag|love"
+        ],
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a||||tag|love"
+        ],
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a||||tag|love"
+        ]
+       ],
+       "applications": 6,
+       "solved": false
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "phase": "R3-pass2",
+   "task": "C2_quotes_login_p3",
+   "agent": "agentB",
+   "condition": "r3_edgeseq",
+   "status": "partial",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 28.0,
+   "loads": 36,
+   "actions": 69,
+   "reused": 45,
+   "novel": 24,
+   "failed": 0,
+   "recoveries": 2,
+   "decision_points": 422,
+   "llm_calls": 0,
+   "subgoals_ok": 1,
+   "subgoals_total": 2,
+   "wall_ms": 55319,
+   "retrieval_lookups": 2,
+   "retrieval_ms": 0,
+   "candidates_tried": 0,
+   "solved_by": [
+    "exploration",
+    "unsolved"
+   ],
+   "memory_events": [
+    {
+     "sub": "eval.c2.login",
+     "query_mode": "desc_kw",
+     "query": "log in to the quotes site with the provided username and password login",
+     "policy": "edgeseq",
+     "order": [
+      [
+       "fill",
+       "input|password||password|form-control|"
+      ],
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||login"
+      ],
+      [
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a||||tag|love"
+      ],
+      [
+       "click",
+       "input|submit|||btn btn-primary|"
+      ]
+     ],
+     "applied": [
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||login"
+      ],
+      [
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       "click",
+       "input|submit|||btn btn-primary|"
+      ],
+      [
+       "fill",
+       "input|password||password|form-control|"
+      ],
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||login"
+      ],
+      [
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       "click",
+       "input|submit|||btn btn-primary|"
+      ],
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||login"
+      ],
+      [
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       "click",
+       "input|submit|||btn btn-primary|"
+      ],
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||login"
+      ],
+      [
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       "click",
+       "input|submit|||btn btn-primary|"
+      ],
+      [
+       "fill",
+       "input|password||password|form-control|"
+      ],
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||login"
+      ],
+      [
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       "click",
+       "input|submit|||btn btn-primary|"
+      ],
+      [
+       "fill",
+       "input|password||password|form-control|"
+      ],
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||login"
+      ],
+      [
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       "click",
+       "input|submit|||btn btn-primary|"
+      ]
+     ],
+     "applications": 6,
+     "solved": false
+    },
+    {
+     "sub": "eval.c2.page3",
+     "query_mode": "desc_kw",
+     "query": "go to page 3 of the quote listings next",
+     "policy": "edgeseq",
+     "order": [
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "fill",
+       "input|password||password|form-control|"
+      ],
+      [
+       "click",
+       "a|||||login"
+      ],
+      [
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       "click",
+       "a||||tag|love"
+      ],
+      [
+       "click",
+       "input|submit|||btn btn-primary|"
+      ]
+     ],
+     "applied": [
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a||||tag|love"
+      ],
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a||||tag|love"
+      ],
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a||||tag|love"
+      ],
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a||||tag|love"
+      ],
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a||||tag|love"
+      ],
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a||||tag|love"
+      ]
+     ],
+     "applications": 6,
+     "solved": false
+    }
+   ],
+   "query_mode": "desc_kw",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c2.login",
+     "condition": "edgeseq",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "exploration"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c2.login",
+       "query_mode": "desc_kw",
+       "query": "log in to the quotes site with the provided username and password login",
+       "policy": "edgeseq",
+       "order": [
+        [
+         "fill",
+         "input|password||password|form-control|"
+        ],
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||login"
+        ],
+        [
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a||||tag|love"
+        ],
+        [
+         "click",
+         "input|submit|||btn btn-primary|"
+        ]
+       ],
+       "applied": [
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||login"
+        ],
+        [
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         "click",
+         "input|submit|||btn btn-primary|"
+        ],
+        [
+         "fill",
+         "input|password||password|form-control|"
+        ],
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||login"
+        ],
+        [
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         "click",
+         "input|submit|||btn btn-primary|"
+        ],
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||login"
+        ],
+        [
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         "click",
+         "input|submit|||btn btn-primary|"
+        ],
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||login"
+        ],
+        [
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         "click",
+         "input|submit|||btn btn-primary|"
+        ],
+        [
+         "fill",
+         "input|password||password|form-control|"
+        ],
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||login"
+        ],
+        [
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         "click",
+         "input|submit|||btn btn-primary|"
+        ],
+        [
+         "fill",
+         "input|password||password|form-control|"
+        ],
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||login"
+        ],
+        [
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         "click",
+         "input|submit|||btn btn-primary|"
+        ]
+       ],
+       "applications": 6,
+       "solved": false
+      }
+     ]
+    },
+    {
+     "sig": "eval.c2.page3",
+     "condition": "edgeseq",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "unsolved"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c2.page3",
+       "query_mode": "desc_kw",
+       "query": "go to page 3 of the quote listings next",
+       "policy": "edgeseq",
+       "order": [
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "fill",
+         "input|password||password|form-control|"
+        ],
+        [
+         "click",
+         "a|||||login"
+        ],
+        [
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         "click",
+         "a||||tag|love"
+        ],
+        [
+         "click",
+         "input|submit|||btn btn-primary|"
+        ]
+       ],
+       "applied": [
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a||||tag|love"
+        ],
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a||||tag|love"
+        ],
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a||||tag|love"
+        ],
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a||||tag|love"
+        ],
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a||||tag|love"
+        ],
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a||||tag|love"
+        ]
+       ],
+       "applications": 6,
+       "solved": false
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "phase": "R3-pass1",
+   "task": "C3_quotes_login_p5",
+   "agent": "agentB",
+   "condition": "r3_edgeseq",
+   "status": "partial",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 27.8,
+   "loads": 36,
+   "actions": 69,
+   "reused": 45,
+   "novel": 24,
+   "failed": 0,
+   "recoveries": 2,
+   "decision_points": 422,
+   "llm_calls": 0,
+   "subgoals_ok": 1,
+   "subgoals_total": 2,
+   "wall_ms": 55071,
+   "retrieval_lookups": 2,
+   "retrieval_ms": 0,
+   "candidates_tried": 0,
+   "solved_by": [
+    "exploration",
+    "unsolved"
+   ],
+   "memory_events": [
+    {
+     "sub": "eval.c3.login",
+     "query_mode": "desc_kw",
+     "query": "log in to the quotes site with the provided username and password login",
+     "policy": "edgeseq",
+     "order": [
+      [
+       "fill",
+       "input|password||password|form-control|"
+      ],
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||login"
+      ],
+      [
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a||||tag|love"
+      ],
+      [
+       "click",
+       "input|submit|||btn btn-primary|"
+      ]
+     ],
+     "applied": [
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||login"
+      ],
+      [
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       "click",
+       "input|submit|||btn btn-primary|"
+      ],
+      [
+       "fill",
+       "input|password||password|form-control|"
+      ],
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||login"
+      ],
+      [
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       "click",
+       "input|submit|||btn btn-primary|"
+      ],
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||login"
+      ],
+      [
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       "click",
+       "input|submit|||btn btn-primary|"
+      ],
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||login"
+      ],
+      [
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       "click",
+       "input|submit|||btn btn-primary|"
+      ],
+      [
+       "fill",
+       "input|password||password|form-control|"
+      ],
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||login"
+      ],
+      [
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       "click",
+       "input|submit|||btn btn-primary|"
+      ],
+      [
+       "fill",
+       "input|password||password|form-control|"
+      ],
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||login"
+      ],
+      [
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       "click",
+       "input|submit|||btn btn-primary|"
+      ]
+     ],
+     "applications": 6,
+     "solved": false
+    },
+    {
+     "sub": "eval.c3.page5",
+     "query_mode": "desc_kw",
+     "query": "go to page 5 of the quote listings next",
+     "policy": "edgeseq",
+     "order": [
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "fill",
+       "input|password||password|form-control|"
+      ],
+      [
+       "click",
+       "a|||||login"
+      ],
+      [
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       "click",
+       "a||||tag|love"
+      ],
+      [
+       "click",
+       "input|submit|||btn btn-primary|"
+      ]
+     ],
+     "applied": [
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a||||tag|love"
+      ],
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a||||tag|love"
+      ],
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a||||tag|love"
+      ],
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a||||tag|love"
+      ],
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a||||tag|love"
+      ],
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a||||tag|love"
+      ]
+     ],
+     "applications": 6,
+     "solved": false
+    }
+   ],
+   "query_mode": "desc_kw",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c3.login",
+     "condition": "edgeseq",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "exploration"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c3.login",
+       "query_mode": "desc_kw",
+       "query": "log in to the quotes site with the provided username and password login",
+       "policy": "edgeseq",
+       "order": [
+        [
+         "fill",
+         "input|password||password|form-control|"
+        ],
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||login"
+        ],
+        [
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a||||tag|love"
+        ],
+        [
+         "click",
+         "input|submit|||btn btn-primary|"
+        ]
+       ],
+       "applied": [
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||login"
+        ],
+        [
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         "click",
+         "input|submit|||btn btn-primary|"
+        ],
+        [
+         "fill",
+         "input|password||password|form-control|"
+        ],
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||login"
+        ],
+        [
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         "click",
+         "input|submit|||btn btn-primary|"
+        ],
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||login"
+        ],
+        [
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         "click",
+         "input|submit|||btn btn-primary|"
+        ],
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||login"
+        ],
+        [
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         "click",
+         "input|submit|||btn btn-primary|"
+        ],
+        [
+         "fill",
+         "input|password||password|form-control|"
+        ],
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||login"
+        ],
+        [
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         "click",
+         "input|submit|||btn btn-primary|"
+        ],
+        [
+         "fill",
+         "input|password||password|form-control|"
+        ],
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||login"
+        ],
+        [
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         "click",
+         "input|submit|||btn btn-primary|"
+        ]
+       ],
+       "applications": 6,
+       "solved": false
+      }
+     ]
+    },
+    {
+     "sig": "eval.c3.page5",
+     "condition": "edgeseq",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "unsolved"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c3.page5",
+       "query_mode": "desc_kw",
+       "query": "go to page 5 of the quote listings next",
+       "policy": "edgeseq",
+       "order": [
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "fill",
+         "input|password||password|form-control|"
+        ],
+        [
+         "click",
+         "a|||||login"
+        ],
+        [
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         "click",
+         "a||||tag|love"
+        ],
+        [
+         "click",
+         "input|submit|||btn btn-primary|"
+        ]
+       ],
+       "applied": [
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a||||tag|love"
+        ],
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a||||tag|love"
+        ],
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a||||tag|love"
+        ],
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a||||tag|love"
+        ],
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a||||tag|love"
+        ],
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a||||tag|love"
+        ]
+       ],
+       "applications": 6,
+       "solved": false
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "phase": "R3-pass2",
+   "task": "C3_quotes_login_p5",
+   "agent": "agentB",
+   "condition": "r3_edgeseq",
+   "status": "partial",
+   "store_before": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "store_after": {
+    "states": 14,
+    "transitions": 19,
+    "actions": 13,
+    "fragments": 12
+   },
+   "elapsed_s": 28.0,
+   "loads": 36,
+   "actions": 69,
+   "reused": 45,
+   "novel": 24,
+   "failed": 0,
+   "recoveries": 2,
+   "decision_points": 422,
+   "llm_calls": 0,
+   "subgoals_ok": 1,
+   "subgoals_total": 2,
+   "wall_ms": 55327,
+   "retrieval_lookups": 2,
+   "retrieval_ms": 0,
+   "candidates_tried": 0,
+   "solved_by": [
+    "exploration",
+    "unsolved"
+   ],
+   "memory_events": [
+    {
+     "sub": "eval.c3.login",
+     "query_mode": "desc_kw",
+     "query": "log in to the quotes site with the provided username and password login",
+     "policy": "edgeseq",
+     "order": [
+      [
+       "fill",
+       "input|password||password|form-control|"
+      ],
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||login"
+      ],
+      [
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a||||tag|love"
+      ],
+      [
+       "click",
+       "input|submit|||btn btn-primary|"
+      ]
+     ],
+     "applied": [
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||login"
+      ],
+      [
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       "click",
+       "input|submit|||btn btn-primary|"
+      ],
+      [
+       "fill",
+       "input|password||password|form-control|"
+      ],
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||login"
+      ],
+      [
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       "click",
+       "input|submit|||btn btn-primary|"
+      ],
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||login"
+      ],
+      [
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       "click",
+       "input|submit|||btn btn-primary|"
+      ],
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||login"
+      ],
+      [
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       "click",
+       "input|submit|||btn btn-primary|"
+      ],
+      [
+       "fill",
+       "input|password||password|form-control|"
+      ],
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||login"
+      ],
+      [
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       "click",
+       "input|submit|||btn btn-primary|"
+      ],
+      [
+       "fill",
+       "input|password||password|form-control|"
+      ],
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||login"
+      ],
+      [
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       "click",
+       "input|submit|||btn btn-primary|"
+      ]
+     ],
+     "applications": 6,
+     "solved": false
+    },
+    {
+     "sub": "eval.c3.page5",
+     "query_mode": "desc_kw",
+     "query": "go to page 5 of the quote listings next",
+     "policy": "edgeseq",
+     "order": [
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "fill",
+       "input|password||password|form-control|"
+      ],
+      [
+       "click",
+       "a|||||login"
+      ],
+      [
+       "fill",
+       "input|text||username|form-control|"
+      ],
+      [
+       "click",
+       "a||||tag|love"
+      ],
+      [
+       "click",
+       "input|submit|||btn btn-primary|"
+      ]
+     ],
+     "applied": [
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a||||tag|love"
+      ],
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a||||tag|love"
+      ],
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a||||tag|love"
+      ],
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a||||tag|love"
+      ],
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a||||tag|love"
+      ],
+      [
+       "click",
+       "a|||||quotes-to-scrape"
+      ],
+      [
+       "click",
+       "a|||||next"
+      ],
+      [
+       "click",
+       "a||||tag|love"
+      ]
+     ],
+     "applications": 6,
+     "solved": false
+    }
+   ],
+   "query_mode": "desc_kw",
+   "subgoal_rows": [
+    {
+     "sig": "eval.c3.login",
+     "condition": "edgeseq",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "exploration"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c3.login",
+       "query_mode": "desc_kw",
+       "query": "log in to the quotes site with the provided username and password login",
+       "policy": "edgeseq",
+       "order": [
+        [
+         "fill",
+         "input|password||password|form-control|"
+        ],
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||login"
+        ],
+        [
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a||||tag|love"
+        ],
+        [
+         "click",
+         "input|submit|||btn btn-primary|"
+        ]
+       ],
+       "applied": [
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||login"
+        ],
+        [
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         "click",
+         "input|submit|||btn btn-primary|"
+        ],
+        [
+         "fill",
+         "input|password||password|form-control|"
+        ],
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||login"
+        ],
+        [
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         "click",
+         "input|submit|||btn btn-primary|"
+        ],
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||login"
+        ],
+        [
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         "click",
+         "input|submit|||btn btn-primary|"
+        ],
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||login"
+        ],
+        [
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         "click",
+         "input|submit|||btn btn-primary|"
+        ],
+        [
+         "fill",
+         "input|password||password|form-control|"
+        ],
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||login"
+        ],
+        [
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         "click",
+         "input|submit|||btn btn-primary|"
+        ],
+        [
+         "fill",
+         "input|password||password|form-control|"
+        ],
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||login"
+        ],
+        [
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         "click",
+         "input|submit|||btn btn-primary|"
+        ]
+       ],
+       "applications": 6,
+       "solved": false
+      }
+     ]
+    },
+    {
+     "sig": "eval.c3.page5",
+     "condition": "edgeseq",
+     "query_mode": "desc_kw",
+     "solved_by": [
+      "unsolved"
+     ],
+     "new_memory_events": [
+      {
+       "sub": "eval.c3.page5",
+       "query_mode": "desc_kw",
+       "query": "go to page 5 of the quote listings next",
+       "policy": "edgeseq",
+       "order": [
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "fill",
+         "input|password||password|form-control|"
+        ],
+        [
+         "click",
+         "a|||||login"
+        ],
+        [
+         "fill",
+         "input|text||username|form-control|"
+        ],
+        [
+         "click",
+         "a||||tag|love"
+        ],
+        [
+         "click",
+         "input|submit|||btn btn-primary|"
+        ]
+       ],
+       "applied": [
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a||||tag|love"
+        ],
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a||||tag|love"
+        ],
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a||||tag|love"
+        ],
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a||||tag|love"
+        ],
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a||||tag|love"
+        ],
+        [
+         "click",
+         "a|||||quotes-to-scrape"
+        ],
+        [
+         "click",
+         "a|||||next"
+        ],
+        [
+         "click",
+         "a||||tag|love"
+        ]
+       ],
+       "applications": 6,
+       "solved": false
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "store_final": {
+  "states": 14,
+  "transitions": 19,
+  "actions": 13,
+  "fragments": 12
+ }
+}

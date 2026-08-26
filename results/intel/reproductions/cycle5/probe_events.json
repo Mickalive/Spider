@@ -1,0 +1,114 @@
+{
+ "result_summary": {
+  "P1_parameterization": "PASS",
+  "P2_auth_negative": "PASS",
+  "P2_positive_control": "PASS",
+  "P3_ttl_expiry": "PASS",
+  "P4_mutation_consistency": "PASS",
+  "pointer_only_store": "PASS"
+ },
+ "events": [
+  {
+   "probe": "P1",
+   "step": "route_selection",
+   "route_id": "GET:https://restful-booker.herokuapp.com/booking/{id}",
+   "path_slots": [
+    "id"
+   ],
+   "ts_ms": 1787674605371
+  },
+  {
+   "probe": "P1",
+   "new_id": 3081,
+   "replay_code": "REPLAY_OK",
+   "fields_equal": true,
+   "verdict": "PASS",
+   "ts_ms": 1787674605477
+  },
+  {
+   "probe": "P1",
+   "new_id": 3084,
+   "replay_code": "REPLAY_OK",
+   "fields_equal": true,
+   "verdict": "PASS",
+   "ts_ms": 1787674605619
+  },
+  {
+   "probe": "P2",
+   "step": "negative_replay_corrupt_credentials",
+   "route_id": "PUT:https://restful-booker.herokuapp.com/booking/{id}",
+   "ts_ms": 1787674605659
+  },
+  {
+   "probe": "P2",
+   "phase": "negative",
+   "code": "AUTH_FAIL",
+   "status": 403,
+   "verdict": "PASS",
+   "ts_ms": 1787674605691
+  },
+  {
+   "probe": "P2",
+   "phase": "positive_control",
+   "set_code": "REPLAY_OK",
+   "sentinel_confirmed": true,
+   "restore_code": "REPLAY_OK",
+   "restore_confirmed": true,
+   "verdict": "PASS",
+   "ts_ms": 1787674605830
+  },
+  {
+   "probe": "P3",
+   "step": "rewind_freshness",
+   "hours": 48,
+   "route_id": "GET:https://restful-booker.herokuapp.com/booking/{id}",
+   "ts_ms": 1787674605830
+  },
+  {
+   "probe": "P3",
+   "code": "STALE_TTL",
+   "age_s": 172800.5,
+   "verdict": "PASS",
+   "ts_ms": 1787674605830
+  },
+  {
+   "probe": "P4",
+   "step": "delete_scratch",
+   "scratch_id": 3080,
+   "ts_ms": 1787674605830
+  },
+  {
+   "probe": "P4",
+   "delete_status": 201,
+   "replay_code": "HTTP_ERROR",
+   "escalation_status": 404,
+   "absence_confirmed": true,
+   "provenance": "escalated_html_tier:HTTP_ERROR",
+   "verdict": "PASS",
+   "ts_ms": 1787674605946
+  },
+  {
+   "probe": "structural_pointer_only",
+   "verdict": "PASS",
+   "ts_ms": 1787674605946
+  }
+ ],
+ "independent_checker": {
+  "checks": {
+   "P1_two_ids_replayed_equivalent": true,
+   "P2_negative_AUTH_FAIL_no_success": true,
+   "P2_positive_roundtrip": true,
+   "P3_STALE_TTL_age_over_TTL": true,
+   "P4_error_code_escalated_absence": true,
+   "store_pointer_only": true
+  },
+  "taxonomy_violations": {
+   "stale_silent": 0,
+   "wrong_data_presented_live": 0,
+   "missing_code": 0,
+   "unreported_substitution": 0
+  },
+  "all_pass": true,
+  "violations": []
+ }
+}

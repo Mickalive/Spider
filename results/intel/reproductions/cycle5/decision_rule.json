@@ -1,0 +1,63 @@
+{
+  "rule_source": "intel/prereg/cycle5_unbrowse_ladder_prereg.md section 5 (FROZEN before collection)",
+  "evaluated_once_on": ["results/intel/reproductions/cycle5/latency_summary.json", "results/intel/reproductions/cycle5/passes_raw.json", "results/intel/reproductions/cycle5/probe_events.json"],
+  "clause_1_discovery_success": {
+    "required": "2/2 Role-1 tasks",
+    "T_BIN_FORM": true,
+    "T_BIN_COOKIE": true,
+    "pass": true
+  },
+  "clause_2_materiality_both_tasks": {
+    "T_BIN_FORM": {
+      "median_A_ms": 1218.8,
+      "median_B_ms": 32.9,
+      "speedup_median": 37.05,
+      "speedup_mean": 17.17,
+      "paired_wins_B_of_5": 5,
+      "A_actions_per_pass": [6, 6, 6, 6, 6],
+      "B_browser_actions_per_pass": [0, 0, 0, 0, 0],
+      "B_payload_ok": "5/5",
+      "env_excluded": {"A": 0, "B": 0, "C": 0},
+      "pass": true
+    },
+    "T_BIN_COOKIE": {
+      "median_A_ms": 559.7,
+      "median_B_ms": 64.6,
+      "speedup_median": 8.66,
+      "speedup_mean": 9.66,
+      "paired_wins_B_of_5": 5,
+      "A_actions_per_pass": [1, 1, 1, 1, 1],
+      "B_browser_actions_per_pass": [0, 0, 0, 0, 0],
+      "B_payload_ok": "5/5",
+      "env_excluded": {"A": 0, "B": 0, "C": 0},
+      "pass": true
+    },
+    "pass": true
+  },
+  "clause_3_no_silent_substitution": {
+    "P1_parameterization": "PASS",
+    "P2_auth_negative": "PASS",
+    "P2_positive_control": "PASS",
+    "P3_ttl_expiry": "PASS",
+    "P4_mutation_consistency": "PASS",
+    "pointer_only_store": "PASS",
+    "independent_checker_all_pass": true,
+    "taxonomy_violations": [],
+    "pass": true
+  },
+  "clause_4_failure_taxonomy_completed": {
+    "role2_books_category": "NO_ROUTE -> escalated_html_tier -> REPLAY_OK, payload correct",
+    "role2_quotes_login": "NO_ROUTE -> escalated_html_tier -> SCHEMA_MISMATCH (fallback itself failed in-run; no silent substitution; same code path succeeds in isolation - documented as reliability datum in report section 5)",
+    "env_exclusions_total": 0,
+    "pass": true
+  },
+  "b_minus_c_gap_report_only": {
+    "note": "C is knowledge-privileged by construction (public-doc recipes); ratio median(C)/median(B)",
+    "T_BIN_FORM": 0.92,
+    "T_BIN_COOKIE": 0.73,
+    "interpretation_allowed_by_prereg": "qualitative only: B reached parity without privileged endpoint knowledge; parameterization generalization shown by P1"
+  },
+  "verdict_proposed": "REPRODUCED_USEFUL",
+  "claim_tier_ceiling": "PROOF_OF_CONCEPT",
+  "verdict_basis": "All four preregistered clauses evaluated exactly once on committed evidence: discovery 2/2 with output equivalence at discovery time; on both API-tier tasks median speedup 8.66x-37.05x with 10/10 paired wins and zero browser actions at 100% payload equivalence; all six lifecycle probe checks pass via independent checker with empty violation taxonomy; zero environment exclusions (0% loss vs 20% INCONCLUSIVE threshold)."
+}

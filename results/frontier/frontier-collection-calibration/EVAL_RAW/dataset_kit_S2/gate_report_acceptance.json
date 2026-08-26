@@ -1,0 +1,58 @@
+{
+  "block_codes": [
+    "ARTIFACT_MISSING_VS_COMMITTED_DENOMINATOR"
+  ],
+  "blocked": true,
+  "extras": {},
+  "findings": [
+    {
+      "code": "ARTIFACT_MISSING_VS_COMMITTED_DENOMINATOR",
+      "detail": "stratum 'gamma': committed artifact 'A/rows_gamma.jsonl' (min_count=1) absent at acceptance time; denominator comes from the frozen plan, NOT from the collector's manifest",
+      "evidence": {
+        "artifact": "A/rows_gamma.jsonl",
+        "required": 1,
+        "stratum": "gamma"
+      },
+      "gate": "G2",
+      "severity": "BLOCK"
+    },
+    {
+      "code": "ARTIFACT_MISSING_VS_COMMITTED_DENOMINATOR",
+      "detail": "stratum 'gamma': committed artifact 'A/manifest_gamma.json' (min_count=1) absent at acceptance time; denominator comes from the frozen plan, NOT from the collector's manifest",
+      "evidence": {
+        "artifact": "A/manifest_gamma.json",
+        "required": 1,
+        "stratum": "gamma"
+      },
+      "gate": "G2",
+      "severity": "BLOCK"
+    },
+    {
+      "code": "ARTIFACT_MISSING_VS_COMMITTED_DENOMINATOR",
+      "detail": "stratum 'gamma': committed artifact 'B/rows_gamma.jsonl' (min_count=1) absent at acceptance time; denominator comes from the frozen plan, NOT from the collector's manifest",
+      "evidence": {
+        "artifact": "B/rows_gamma.jsonl",
+        "required": 1,
+        "stratum": "gamma"
+      },
+      "gate": "G2",
+      "severity": "BLOCK"
+    },
+    {
+      "code": "ARTIFACT_MISSING_VS_COMMITTED_DENOMINATOR",
+      "detail": "stratum 'gamma': committed artifact 'B/manifest_gamma.json' (min_count=1) absent at acceptance time; denominator comes from the frozen plan, NOT from the collector's manifest",
+      "evidence": {
+        "artifact": "B/manifest_gamma.json",
+        "required": 1,
+        "stratum": "gamma"
+      },
+      "gate": "G2",
+      "severity": "BLOCK"
+    }
+  ],
+  "timings_s": {
+    "g2_completion": 0.0,
+    "g3_nondegeneracy": 0.0,
+    "total_acceptance": 0.0
+  }
+}

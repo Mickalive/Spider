@@ -1,0 +1,67 @@
+{
+ "summary": {
+  "n_queries": 8,
+  "exact_top1": 5,
+  "prefix_top1": 0,
+  "lexical_top1": 5,
+  "artifact_confirmed": true
+ },
+ "rows": [
+  {
+   "intent": "submit_sample_order_form_httpbin",
+   "ground_truth": "POST:https://httpbin.org/post",
+   "exact": "POST:https://httpbin.org/post",
+   "prefix": null,
+   "lexical": "POST:https://httpbin.org/post"
+  },
+  {
+   "intent": "read_display_preference_cookies_httpbin",
+   "ground_truth": "GET:https://httpbin.org/cookies",
+   "exact": "GET:https://httpbin.org/cookies",
+   "prefix": null,
+   "lexical": "GET:https://httpbin.org/cookies"
+  },
+  {
+   "intent": "find_pets_by_status_petstore",
+   "ground_truth": "GET:https://petstore.swagger.io/v2/pet/findByStatus",
+   "exact": "GET:https://petstore.swagger.io/v2/pet/findByStatus",
+   "prefix": null,
+   "lexical": "GET:https://petstore.swagger.io/v2/pet/findByStatus"
+  },
+  {
+   "intent": "login_session_demoblaze",
+   "ground_truth": null,
+   "exact": "POST:https://api.demoblaze.com/login",
+   "prefix": null,
+   "lexical": "POST:https://api.demoblaze.com/login"
+  },
+  {
+   "intent": "add_item_to_cart_demoblaze",
+   "ground_truth": null,
+   "exact": "POST:https://api.demoblaze.com/addtocart",
+   "prefix": null,
+   "lexical": "POST:https://api.demoblaze.com/addtocart"
+  },
+  {
+   "intent": "view_cart_items_demoblaze",
+   "ground_truth": null,
+   "exact": "POST:https://api.demoblaze.com/viewcart",
+   "prefix": null,
+   "lexical": "POST:https://api.demoblaze.com/viewcart"
+  },
+  {
+   "intent": "rb_create_booking",
+   "ground_truth": "POST:https://restful-booker.herokuapp.com/booking",
+   "exact": "POST:https://restful-booker.herokuapp.com/booking",
+   "prefix": null,
+   "lexical": "POST:https://restful-booker.herokuapp.com/booking"
+  },
+  {
+   "intent": "rb_update_booking",
+   "ground_truth": "PUT:https://restful-booker.herokuapp.com/booking/{id}",
+   "exact": "PUT:https://restful-booker.herokuapp.com/booking/{id}",
+   "prefix": null,
+   "lexical": "PUT:https://restful-booker.herokuapp.com/booking/{id}"
+  }
+ ]
+}
