@@ -1,0 +1,73 @@
+{
+  "run_id": 32881285051,
+  "workflow_name": "SPIDER Critical CTO Council",
+  "workflow_path": ".github/workflows/cto-council.yml",
+  "status": "completed",
+  "conclusion": "cancelled",
+  "conclusion_interpretation": "queued-shell cancellation (zero jobs ever started); NOT an agent or council failure",
+  "head_sha": "d7f67fea610e613c0124677bb2cf8c2cc0c6624c",
+  "created_at": "2026-08-25T18:00:59Z",
+  "updated_at": "2026-08-25T18:01:13Z",
+  "completed_at": null,
+  "run_number": 9,
+  "event": "push",
+  "head_branch": "main",
+  "display_title": "cto: consume distilled run evidence without promoting it",
+  "actor": "Mickalive",
+  "jobs_total_count": 0,
+  "artifacts_total_count": 0,
+
+  "evidence_class": "CTO",
+
+  "durable_refs": [
+    "git:d7f67fea610e613c0124677bb2cf8c2cc0c6624c (triggering main-branch commit 'cto: consume distilled run evidence without promoting it', docs/roles/CHIEF_CTO.md +23/-4 — the substantive intent this run would have executed; matches cto-council.yml push path filter)",
+    "git:d7f67fea610e613c0124677bb2cf8c2cc0c6624c:.github/workflows/cto-council.yml (concurrency group spider-critical-cto-council, cancel-in-progress=false, pinned version in effect)",
+    "git:origin/lab/cto@a7c3860 / @0c34b0b (LATER durable council outputs 'CTO global portfolio review' runs 32924961551 / 32914937836 — the council mission eventually executed durably via other runs)",
+    "runs/32879459085.json + runs/32879902647.json (prior adjudicated instances of the same queued-supersession mechanism)",
+    "/tmp/spider_run_evidence/32881285051/ (bundle: run.json metadata only; logs.txt and refs.txt 0 bytes)"
+  ],
+
+  "findings": [
+    {
+      "kind": "RESULT",
+      "summary": "Pure queued-shell run: jobs.json shows total_count=0 — the run sat queued from 18:00:59Z and was cancelled at 18:01:13Z without any job starting, so ZERO agent tokens/compute were spent and no council work existed to lose. The substantive artifact of this moment is the triggering commit itself (d7f67fe, durable on main), not any run output.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "LOW",
+      "route_to": ["INFRA"]
+    },
+    {
+      "kind": "OTHER",
+      "summary": "Cancellation cause is PLAUSIBLY attributed but not provable locally: sibling council run #10 (32881307714) was created 18:01:12Z, one second before this run's cancellation timestamp — matching the empirically adjudicated newest-queued-run-wins semantics inside group spider-critical-cto-council documented for council #6/#7 (runs 32879459085/32879902647) even under cancel-in-progress=false. Logs are 0 bytes because no job ever started, so no shutdown/cancel signature can ever be recovered from them; definitive confirmation would require the live API's cancellation actor fields.",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "importance": "LOW",
+      "route_to": ["INFRA", "CTO"]
+    },
+    {
+      "kind": "ANOMALY",
+      "summary": "Fetch-harness fingerprint lesson: bundle reports log_status='available' with a 0-byte logs.txt while jobs.json proves total_count=0. For zero-job queued-cancelled runs an EMPTY log is the expected legitimate outcome, so log_status alone cannot distinguish 'no job ever ran' from 'fetch failed'; the jobs array is the discriminating field. Mirrors (inverted) the caveat first recorded for run 32894986672.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "MEDIUM",
+      "route_to": ["INFRA", "RUNTIME"]
+    }
+  ],
+
+  "failure_signatures": [
+    "None in-run (no job started). Batch-level signature: created→cancelled ≈14s with jobs=[] during the 18:00:56–18:06:32Z control-plane iteration burst (six commits d7f67fe→b4dbd70, each re-triggering council/curator/hygiene workflows)."
+  ],
+
+  "research_opportunities": [
+    "Trigger debouncing/single-flight for council-class workflows during control-plane iteration bursts: five orchestration runs were spawned within ~70s in this window alone. Partial mitigation landed durably the same evening (b2d747e/b4dbd70 feed-gated council wake); a skip-if-identical-head_sha guard would remove the remainder."
+  ],
+
+  "already_captured_elsewhere": [
+    "Triggering-commit substance: git d7f67fea on main (docs/roles/CHIEF_CTO.md amendments) — durable independent of this run",
+    "Council mission outcomes: origin/lab/cto@a7c3860 and @0c34b0b (later durable portfolio reviews)",
+    "Mechanism precedent: runs/32879459085.json and runs/32879902647.json"
+  ],
+
+  "special_recovery_check": "SPECIAL RECOVERY trigger run 32880942022 was NOT among the supplied bundles; existing DELETED_RUNS_RECOVERY.json (102/102 tombstones, dual-key invariant) left untouched and verified intact.",
+
+  "distillation_complete": true,
+  "safe_to_prune": false,
+  "pruning_rationale": "Conservative default despite near-zero information content: the raw Actions entry is the only place a live-API cancellation-actor adjudication could later confirm/refute the inferred queued-supersession attribution, and the post-hygiene-incident policy (CF-2026-08-25-01) favors retention when attribution is inference rather than proof. Log is empty, so nothing textual is at stake; this is a deliberate low-cost hold, not an evidence-preservation need. Flip to true after live-API adjudication or explicit CTO sign-off."
+}

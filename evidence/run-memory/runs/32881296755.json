@@ -1,0 +1,79 @@
+{
+  "run_id": 32881296755,
+  "workflow_name": "SPIDER Ox Watchdog",
+  "workflow_path": ".github/workflows/ox-watchdog.yml",
+  "status": "completed",
+  "conclusion": "cancelled",
+  "conclusion_interpretation": "work fully completed, then stamped cancelled by its own successor's creation ~2s later (concurrency spider-ox-watchdog, cancel-in-progress=true); NOT a malfunction of the sweep itself",
+  "head_sha": "d7f67fea610e613c0124677bb2cf8c2cc0c6624c",
+  "created_at": "2026-08-25T18:01:06Z",
+  "updated_at": "2026-08-25T18:01:17Z",
+  "run_number": 77,
+  "event": "schedule",
+  "head_branch": "main",
+  "display_title": "SPIDER Ox Watchdog",
+  "actor": "github-actions[bot] (schedule)",
+  "jobs_total_count": 1,
+  "job_summary": {
+    "job_name": "Recover transient Ox and runner failures",
+    "conclusion": "cancelled",
+    "runner": "GitHub Actions 1000000696 (eastus2, ubuntu-24.04, image 20260823.283.1)",
+    "steps_all_success": ["Set up job", "Re-run transient failures without resurrecting real or manual failures", "Complete job"],
+    "sweep_window": "2026-08-25T18:01:11Z -> 18:01:15.4Z (~4.4s for 8 workflow evaluations)",
+    "recovery_actions_taken": 0
+  },
+  "artifacts_total_count": 0,
+
+  "evidence_class": "OPERATIONAL",
+
+  "durable_refs": [
+    "git:d7f67fea610e613c0124677bb2cf8c2cc0c6624c:.github/workflows/ox-watchdog.yml (exact executed script: recover_workflow() over graph-loop/physics-loop/intel-loop/product-loop/product-beta-repair/runtime-loop/cto-council/frontier-research; conservative recovery policy durable at pinned head_sha)",
+    "runs/32880292058.json + runs/32879908049.json (prior verbatim transcriptions of the identical recovery policy → policy content here is DUPLICATE)",
+    "runs/32866107906.json (memory record corroborating the observed physics-loop latest-completed=success state)",
+    "runs/32881313083.json (successor twin run #78, raw-log diff vs this run is timestamps + runner worker-id only — curator-verified line-by-line)"
+  ],
+
+  "findings": [
+    {
+      "kind": "RESULT",
+      "summary": "Clean designed evaluation sweep, ZERO recovery actions triggered: at 18:01:11–15Z — graph-loop/intel-loop/product-loop/runtime-loop/cto-council all had ACTIVE runs ('watchdog does not interrupt potentially valid work'); physics-loop latest completed = 32866107906 success (matches accepted memory); product-beta-repair.yml and frontier-research.yml reported 'no completed run to inspect' (frontier-research.yml had existed only since commit 6afbfa0, 17:45:54Z, with zero completed lifetime runs at this timestamp — extends watchdog #75's 17:51Z observation by 10 minutes; first frontier teams ran later). All three recovery branches (runner-shutdown regex / SPIDER_TRANSIENT_OX_EXHAUSTED / OpenCode+transient-network regex) correctly never fired.",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "importance": "LOW",
+      "route_to": ["INFRA"]
+    },
+    {
+      "kind": "ANOMALY",
+      "summary": "WATCHDOG SELF-SUPERSESSION OF A JUST-COMPLETED SWEEP: every step succeeded and the sweep finished at 18:01:15.4Z, but successor run #78 (32881313083), created 18:01:16Z via workflow_run trigger into the same cancel-in-progress:true group spider-ox-watchdog, caused this run to be stamped cancelled at ~18:01:17Z AFTER its work was done. The design therefore discarded a just-finished evaluation and re-executed an identical sweep ~10s later on a different runner — guaranteed duplicate work whenever a lane completion lands within seconds of a cron tick. Distinct from prior findings about queue-occupancy cancellations: here REAL completed work was thrown away post-hoc.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "MEDIUM",
+      "route_to": ["INFRA", "RUNTIME", "CTO"]
+    },
+    {
+      "kind": "COST",
+      "summary": "~11s wall clock, one hosted runner, zero agent tokens; entire log diff vs twin run #78 is timestamps + Azure worker-id (curator-verified) ⇒ content DUPLICATE of #78's sweep except for being the sole witness that the 18:01 scheduled tick fired and completed before cancellation.",
+      "evidence_status": "DUPLICATE",
+      "importance": "LOW",
+      "route_to": ["INFRA"]
+    }
+  ],
+
+  "failure_signatures": [
+    "None (no failure or warning lines in log)."
+  ],
+
+  "research_opportunities": [
+    "Watchdog single-flight/debounce: skip a scheduled evaluation if an identical clean sweep completed within N minutes on the same head_sha (or downgrade cancel-in-progress to false so a finished sweep keeps its conclusion); would have avoided this exact discard-and-redo pair."
+  ],
+
+  "already_captured_elsewhere": [
+    "Recovery-policy text (verbatim): runs/32880292058.json and earlier watchdog records; policy source durable at pinned head_sha d7f67fea",
+    "Physics-lane state: runs/32866107906.json (accepted memory)",
+    "Twin sweep results: runs/32881313083.json"
+  ],
+
+  "special_recovery_check": "SPECIAL RECOVERY trigger run 32880942022 was NOT among the supplied bundles; existing recovery artifacts verified intact and untouched.",
+
+  "distillation_complete": true,
+  "safe_to_prune": false,
+  "pruning_rationale": "Conservative twin-witness policy: although every fact is now distilled and the raw log is near-duplicate of #78's, this run is the ONLY witness that the 18:01Z scheduled tick executed to completion, and its cancelled-after-success label is the sole primary evidence of the self-supersession anomaly routed to CTO. Retention cost is trivial; prune-safe status can be granted together with twin #78 after the concurrency finding is adjudicated."
+}

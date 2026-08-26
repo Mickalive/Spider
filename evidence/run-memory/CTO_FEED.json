@@ -1188,6 +1188,38 @@
         "GRAPH",
         "CTO"
       ]
+    },
+    {
+      "id": "CF-2026-08-26-17",
+      "importance": "MEDIUM",
+      "kind": "OPERATIONAL_WASTE_MECHANISM",
+      "summary": "Watchdog concurrency discards just-completed evaluation sweeps, and control-plane iteration bursts multiply redundant orchestration fan-out (extends CF-2026-08-25-04/18 and CF-2026-08-26-06 with a NEW post-completion supersession variant). During the 2026-08-25T18:00:56-18:06:32Z main-push burst (six control-plane commits d7f67fe..b4dbd70), five orchestration runs were created in ~70s: three died queued-zero-job within seconds (council shells #9/#10, curator #2), and the watchdog pair proves the new mechanism - scheduled sweep 32881296755 (#77) completed ALL steps successfully at 18:01:15.4Z, then was stamped cancelled at ~18:01:17Z by workflow_run twin 32881313083 (#78) created into the same cancel-in-progress:true group spider-ox-watchdog, which re-executed the identical sweep (curator-verified raw-log diff = timestamps + runner worker-id only). Feed-gated council wake (b2d747e/b4dbd70) and curator/hygiene loop repairs (63a66da/d8343e7/6ab0866) landed in-session; the watchdog discard-and-redo path remains open.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "source_run_id": 32881296755,
+      "corroborating_source_run_ids": [
+        32881313083
+      ],
+      "related_shell_run_ids": [
+        32881285051,
+        32881307714,
+        32881313020
+      ],
+      "durable_refs": [
+        "evidence/run-memory/runs/32881296755.json (twin #77, cancelled-after-completion witness)",
+        "evidence/run-memory/runs/32881313083.json (twin #78, attributed canceller + duplicate sweep)",
+        "evidence/run-memory/runs/32881285051.json, runs/32881307714.json, runs/32881313020.json (burst cohort shells)",
+        "git:d7f67fea:.github/workflows/ox-watchdog.yml (cancel-in-progress:true mechanism, pinned version)"
+      ],
+      "actionable_next": [
+        "INFRA: add watchdog single-flight - skip a scheduled sweep when an identical clean sweep completed on the same head_sha within N minutes, or switch spider-ox-watchdog to cancel-in-progress:false so finished sweeps keep their conclusions.",
+        "INFRA/CTO: consider one shared single-flight gate across listener workflows (watchdog/council/curator all fan out from the same lane-completion events); extend the feed-gate pattern already landed for the council.",
+        "Adjudication hygiene: keep both twin runs unpruned until this finding is resolved; their logs are the primary witnesses of the discard-and-redo event."
+      ],
+      "route_to": [
+        "INFRA",
+        "RUNTIME",
+        "CTO"
+      ]
     }
   ]
 }
