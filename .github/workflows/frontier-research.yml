@@ -5,17 +5,28 @@ on:
   workflow_dispatch:
     inputs:
       team_id:
-        description: "CTO Frontier team id"
+        description: "Frontier team id"
         required: true
         type: string
       charter_version:
-        description: "CTO charter version"
+        description: "Frontier charter version"
         required: true
         type: number
       cto_commit:
-        description: "Exact accepted CTO commit containing the charter"
-        required: true
+        description: "Exact accepted CTO commit containing the charter (normal mode)"
+        required: false
         type: string
+        default: ""
+      one_shot:
+        description: "Human-authorized one-cycle mode: no automatic REVISE repair/continuation"
+        required: false
+        type: boolean
+        default: false
+      human_manifest_path:
+        description: "Main-branch JSON manifest for human-authorized one-shot charters"
+        required: false
+        type: string
+        default: ""
       repair_from_run_id:
         description: "Rejected same-team run to repair"
         required: false
@@ -54,29 +65,49 @@ jobs:
         shell: bash
         env:
           TEAM_ID: ${{ inputs.team_id }}
+          ONE_SHOT: ${{ inputs.one_shot }}
+          HUMAN_MANIFEST: ${{ inputs.human_manifest_path }}
+          CTO_COMMIT: ${{ inputs.cto_commit }}
         run: |
           set -euo pipefail
           [[ "$TEAM_ID" =~ ^[a-z0-9][a-z0-9-]{1,62}$ ]] || { echo "::error::Invalid Frontier team_id"; exit 1; }
+          if [[ "$ONE_SHOT" == "true" ]]; then
+            [[ -n "$HUMAN_MANIFEST" ]] || { echo "::error::one_shot requires human_manifest_path"; exit 1; }
+            [[ -f "$HUMAN_MANIFEST" ]] || { echo "::error::human one-shot manifest missing on main"; exit 1; }
+          else
+            [[ -n "$CTO_COMMIT" ]] || { echo "::error::normal Frontier execution requires cto_commit"; exit 1; }
+          fi
           mkdir -p /tmp/spider_control
           cp .github/scripts/run-opencode-with-retry.sh /tmp/spider_control/run-opencode-with-retry.sh
 
-      - name: Mount exact CTO charter
+      - name: Mount exact charter
         shell: bash
         env:
           TEAM_ID: ${{ inputs.team_id }}
           CHARTER_VERSION: ${{ inputs.charter_version }}
           CTO_COMMIT: ${{ inputs.cto_commit }}
+          ONE_SHOT: ${{ inputs.one_shot }}
+          HUMAN_MANIFEST: ${{ inputs.human_manifest_path }}
         run: |
           set -euo pipefail
-          git fetch origin lab/cto
-          git cat-file -e "${CTO_COMMIT}^{commit}" || { echo "::error::CTO commit not fetchable"; exit 1; }
-          git worktree add --detach /tmp/spider_cto_charter "$CTO_COMMIT"
-          jq --arg id "$TEAM_ID" --argjson v "$CHARTER_VERSION" \
-            '.research_portfolio.frontier_team_charters[] | select(.team_id==$id and .charter_version==$v)' \
-            /tmp/spider_cto_charter/state/cto_direction.json > /tmp/frontier_charter.json
-          test -s /tmp/frontier_charter.json || { echo "::error::Exact Frontier charter missing"; exit 1; }
-          STATUS=$(jq -r '.status' /tmp/frontier_charter.json)
-          case "$STATUS" in CREATE|CONTINUE) ;; *) echo "::error::Charter status $STATUS is not executable"; exit 1 ;; esac
+          if [[ "$ONE_SHOT" == "true" ]]; then
+            jq -e '.human_authorized==true and .one_shot==true' "$HUMAN_MANIFEST" >/dev/null || { echo "::error::manifest is not a human-authorized one-shot batch"; exit 1; }
+            jq --arg id "$TEAM_ID" --argjson v "$CHARTER_VERSION" \
+              '.charters[] | select(.team_id==$id and .charter_version==$v)' \
+              "$HUMAN_MANIFEST" > /tmp/frontier_charter.json
+            test -s /tmp/frontier_charter.json || { echo "::error::Exact human one-shot charter missing"; exit 1; }
+            jq -e '.status=="CREATE" or .status=="CONTINUE"' /tmp/frontier_charter.json >/dev/null
+          else
+            git fetch origin lab/cto
+            git cat-file -e "${CTO_COMMIT}^{commit}" || { echo "::error::CTO commit not fetchable"; exit 1; }
+            git worktree add --detach /tmp/spider_cto_charter "$CTO_COMMIT"
+            jq --arg id "$TEAM_ID" --argjson v "$CHARTER_VERSION" \
+              '.research_portfolio.frontier_team_charters[] | select(.team_id==$id and .charter_version==$v)' \
+              /tmp/spider_cto_charter/state/cto_direction.json > /tmp/frontier_charter.json
+            test -s /tmp/frontier_charter.json || { echo "::error::Exact Frontier charter missing"; exit 1; }
+            STATUS=$(jq -r '.status' /tmp/frontier_charter.json)
+            case "$STATUS" in CREATE|CONTINUE) ;; *) echo "::error::Charter status $STATUS is not executable"; exit 1 ;; esac
+          fi
 
       - name: Checkout or initialize accepted Frontier team
         if: ${{ inputs.repair_from_run_id == '' }}
@@ -84,6 +115,7 @@ jobs:
         env:
           TEAM_ID: ${{ inputs.team_id }}
           CHARTER_VERSION: ${{ inputs.charter_version }}
+          ONE_SHOT: ${{ inputs.one_shot }}
         run: |
           set -euo pipefail
           BRANCH="lab/frontier/$TEAM_ID"
@@ -95,8 +127,12 @@ jobs:
             mkdir -p "frontier/$TEAM_ID/charters" "tests/frontier/$TEAM_ID" "results/frontier/$TEAM_ID" "reports/frontier/$TEAM_ID" "data/manifests/frontier/$TEAM_ID" "state/frontier" "docs/frontier" "directives/frontier"
             cp /tmp/frontier_charter.json "frontier/$TEAM_ID/charters/cto_v${CHARTER_VERSION}.json"
             printf '# Frontier %s ledger\n\n' "$TEAM_ID" > "docs/frontier/${TEAM_ID}_LEDGER.md"
-            printf '# Frontier %s local directive\n\nExecute the exact CTO charter.\n' "$TEAM_ID" > "directives/frontier/${TEAM_ID}.md"
-            jq -n --arg id "$TEAM_ID" --argjson v "$CHARTER_VERSION" '{team_id:$id,accepted_charter_version:0,pending_charter_version:$v,cycle_status:"INITIALIZED",claim_status:"UNTESTED",continue_recommended:true,next_question:null,evidence_refs:[]}' > "state/frontier/${TEAM_ID}.json"
+            if [[ "$ONE_SHOT" == "true" ]]; then
+              printf '# Frontier %s local directive\n\nHUMAN-FORCED ONE-SHOT. Execute this charter for exactly one TEAM→AUDIT cycle. No automatic repair or continuation. Preserve negative results and provenance.\n' "$TEAM_ID" > "directives/frontier/${TEAM_ID}.md"
+            else
+              printf '# Frontier %s local directive\n\nExecute the exact CTO charter.\n' "$TEAM_ID" > "directives/frontier/${TEAM_ID}.md"
+            fi
+            jq -n --arg id "$TEAM_ID" --argjson v "$CHARTER_VERSION" --argjson one "$ONE_SHOT" '{team_id:$id,accepted_charter_version:0,pending_charter_version:$v,cycle_status:"INITIALIZED",claim_status:"UNTESTED",one_shot:$one,human_forced_one_shot:$one,auto_continue_allowed:(if $one then false else true end),continue_recommended:(if $one then false else true end),next_question:null,evidence_refs:[]}' > "state/frontier/${TEAM_ID}.json"
             git config user.name "spider-frontier-bootstrap"
             git config user.email "spider-frontier-bootstrap@autonomous.local"
             git add "frontier/$TEAM_ID" "tests/frontier/$TEAM_ID" "results/frontier/$TEAM_ID" "reports/frontier/$TEAM_ID" "data/manifests/frontier/$TEAM_ID" "state/frontier/$TEAM_ID.json" "docs/frontier/${TEAM_ID}_LEDGER.md" "directives/frontier/${TEAM_ID}.md"
@@ -154,11 +190,14 @@ jobs:
         env:
           TEAM_ID: ${{ inputs.team_id }}
           CHARTER_VERSION: ${{ inputs.charter_version }}
+          ONE_SHOT: ${{ inputs.one_shot }}
         run: |
+          MODE=""
+          if [[ "$ONE_SHOT" == "true" ]]; then MODE=" HUMAN-FORCED ONE-SHOT: exactly one research attempt; do not spend effort on lifecycle continuation. Preserve all limits and make no claim beyond this cycle."; fi
           bash /tmp/spider_control/run-opencode-with-retry.sh run \
             --model "$SPIDER_MODEL" \
             --agent frontier_research_lead \
-            "Run CTO-chartered Frontier team ${TEAM_ID}, charter v${CHARTER_VERSION}, GitHub run ${GITHUB_RUN_ID}. Exact charter=/tmp/frontier_charter.json. Accepted core evidence mounts=/tmp/spider_{graph,physics,intel,product,runtime}; accepted peer teams=/tmp/spider_frontier_peers. Execute the smallest rigorous cycle that can discriminate the charter question. Preserve negative results and freeze claim-bearing tests pre-outcome."
+            "Run Frontier team ${TEAM_ID}, charter v${CHARTER_VERSION}, GitHub run ${GITHUB_RUN_ID}. Exact charter=/tmp/frontier_charter.json. Accepted core evidence mounts=/tmp/spider_{graph,physics,intel,product,runtime}; accepted peer teams=/tmp/spider_frontier_peers. Execute the smallest rigorous cycle that can discriminate the charter question. Preserve negative results and freeze claim-bearing tests pre-outcome.${MODE}"
 
       - name: Repair Frontier research cycle
         if: ${{ inputs.repair_from_run_id != '' }}
@@ -230,13 +269,20 @@ jobs:
           TEAM_ID: ${{ inputs.team_id }}
           CHARTER_VERSION: ${{ inputs.charter_version }}
           CTO_COMMIT: ${{ inputs.cto_commit }}
+          ONE_SHOT: ${{ inputs.one_shot }}
+          HUMAN_MANIFEST: ${{ inputs.human_manifest_path }}
         run: |
           set -euo pipefail
           mkdir -p /tmp/spider_control
           cp .github/scripts/run-opencode-with-retry.sh /tmp/spider_control/run-opencode-with-retry.sh
-          git fetch origin lab/cto
-          git worktree add --detach /tmp/spider_cto_charter "$CTO_COMMIT"
-          jq --arg id "$TEAM_ID" --argjson v "$CHARTER_VERSION" '.research_portfolio.frontier_team_charters[] | select(.team_id==$id and .charter_version==$v)' /tmp/spider_cto_charter/state/cto_direction.json > /tmp/frontier_charter.json
+          if [[ "$ONE_SHOT" == "true" ]]; then
+            jq -e '.human_authorized==true and .one_shot==true' "$HUMAN_MANIFEST" >/dev/null
+            jq --arg id "$TEAM_ID" --argjson v "$CHARTER_VERSION" '.charters[] | select(.team_id==$id and .charter_version==$v)' "$HUMAN_MANIFEST" > /tmp/frontier_charter.json
+          else
+            git fetch origin lab/cto
+            git worktree add --detach /tmp/spider_cto_charter "$CTO_COMMIT"
+            jq --arg id "$TEAM_ID" --argjson v "$CHARTER_VERSION" '.research_portfolio.frontier_team_charters[] | select(.team_id==$id and .charter_version==$v)' /tmp/spider_cto_charter/state/cto_direction.json > /tmp/frontier_charter.json
+          fi
           test -s /tmp/frontier_charter.json
 
       - name: Checkout accepted team base and mount candidate
@@ -259,11 +305,14 @@ jobs:
         shell: bash
         env:
           TEAM_ID: ${{ inputs.team_id }}
+          ONE_SHOT: ${{ inputs.one_shot }}
         run: |
+          MODE=""
+          if [[ "$ONE_SHOT" == "true" ]]; then MODE=" This is a human-authorized ONE-SHOT. Audit the delivered attempt exactly as-is; REVISE records required fixes but MUST NOT imply an automatic repair will run."; fi
           bash /tmp/spider_control/run-opencode-with-retry.sh run \
             --model "$SPIDER_MODEL" \
             --agent frontier_research_auditor \
-            "Audit Frontier team ${TEAM_ID}, charter v${{ inputs.charter_version }}, run ${GITHUB_RUN_ID}, repair ${{ inputs.repair_round }}. Charter=/tmp/frontier_charter.json; TEAM=/tmp/spider_frontier_team. Current checkout is untouched accepted team base. Recompute claims and write only audit outputs."
+            "Audit Frontier team ${TEAM_ID}, charter v${{ inputs.charter_version }}, run ${GITHUB_RUN_ID}, repair ${{ inputs.repair_round }}. Charter=/tmp/frontier_charter.json; TEAM=/tmp/spider_frontier_team. Current checkout is untouched accepted team base. Recompute claims and write only audit outputs.${MODE}"
 
       - name: Enforce audit-only writes
         shell: bash
@@ -309,7 +358,7 @@ jobs:
   frontier_repair_router:
     name: FRONTIER AUDIT → RETURN TO TEAM
     needs: [frontier_audit]
-    if: needs.frontier_audit.result == 'success' && needs.frontier_audit.outputs.gate == 'REVISE'
+    if: needs.frontier_audit.result == 'success' && needs.frontier_audit.outputs.gate == 'REVISE' && inputs.one_shot != true
     runs-on: ubuntu-latest
     steps:
       - name: Dispatch same-cycle repair
@@ -322,8 +371,17 @@ jobs:
             -f team_id="${{ inputs.team_id }}" \
             -f charter_version="${{ inputs.charter_version }}" \
             -f cto_commit="${{ inputs.cto_commit }}" \
+            -f one_shot=false \
             -f repair_from_run_id="$GITHUB_RUN_ID" \
             -f repair_round="$NEXT"
+
+  frontier_one_shot_revise:
+    name: FRONTIER ONE-SHOT — REVISE RECORDED, STOP
+    needs: [frontier_audit]
+    if: needs.frontier_audit.result == 'success' && needs.frontier_audit.outputs.gate == 'REVISE' && inputs.one_shot == true
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Human one-shot ${{ inputs.team_id }} ended at audit REVISE. Required fixes are preserved; no repair or continuation dispatched."
 
   frontier_blocked:
     name: FRONTIER AUDIT — BLOCKED
@@ -331,7 +389,7 @@ jobs:
     if: needs.frontier_audit.result == 'success' && needs.frontier_audit.outputs.gate == 'BLOCKED'
     runs-on: ubuntu-latest
     steps:
-      - run: echo "::warning::Frontier team ${{ inputs.team_id }} is BLOCKED; CTO will review on workflow completion."
+      - run: echo "::warning::Frontier team ${{ inputs.team_id }} is BLOCKED. No automatic repair is dispatched."
 
   frontier_director:
     name: FRONTIER DIRECTOR — ${{ inputs.team_id }}
@@ -351,12 +409,20 @@ jobs:
           TEAM_ID: ${{ inputs.team_id }}
           CHARTER_VERSION: ${{ inputs.charter_version }}
           CTO_COMMIT: ${{ inputs.cto_commit }}
+          ONE_SHOT: ${{ inputs.one_shot }}
+          HUMAN_MANIFEST: ${{ inputs.human_manifest_path }}
         run: |
+          set -euo pipefail
           mkdir -p /tmp/spider_control
           cp .github/scripts/run-opencode-with-retry.sh /tmp/spider_control/run-opencode-with-retry.sh
-          git fetch origin lab/cto
-          git worktree add --detach /tmp/spider_cto_charter "$CTO_COMMIT"
-          jq --arg id "$TEAM_ID" --argjson v "$CHARTER_VERSION" '.research_portfolio.frontier_team_charters[] | select(.team_id==$id and .charter_version==$v)' /tmp/spider_cto_charter/state/cto_direction.json > /tmp/frontier_charter.json
+          if [[ "$ONE_SHOT" == "true" ]]; then
+            jq -e '.human_authorized==true and .one_shot==true' "$HUMAN_MANIFEST" >/dev/null
+            jq --arg id "$TEAM_ID" --argjson v "$CHARTER_VERSION" '.charters[] | select(.team_id==$id and .charter_version==$v)' "$HUMAN_MANIFEST" > /tmp/frontier_charter.json
+          else
+            git fetch origin lab/cto
+            git worktree add --detach /tmp/spider_cto_charter "$CTO_COMMIT"
+            jq --arg id "$TEAM_ID" --argjson v "$CHARTER_VERSION" '.research_portfolio.frontier_team_charters[] | select(.team_id==$id and .charter_version==$v)' /tmp/spider_cto_charter/state/cto_direction.json > /tmp/frontier_charter.json
+          fi
           test -s /tmp/frontier_charter.json
 
       - name: Checkout accepted team and mount audited snapshots
@@ -381,11 +447,26 @@ jobs:
         shell: bash
         env:
           TEAM_ID: ${{ inputs.team_id }}
+          ONE_SHOT: ${{ inputs.one_shot }}
         run: |
+          MODE=""
+          if [[ "$ONE_SHOT" == "true" ]]; then MODE=" HUMAN-FORCED ONE-SHOT: integrate the audited result once, preserve all claim ceilings, and do not request automatic continuation."; fi
           bash /tmp/spider_control/run-opencode-with-retry.sh run \
             --model "$SPIDER_MODEL" \
             --agent frontier_research_director \
-            "Integrate audited Frontier team ${TEAM_ID}, charter v${{ inputs.charter_version }}, run ${GITHUB_RUN_ID}. Charter=/tmp/frontier_charter.json; TEAM=/tmp/spider_frontier_team; AUDIT=/tmp/spider_frontier_audit. Preserve limits and update only this team's accepted namespace plus CTO handoff."
+            "Integrate audited Frontier team ${TEAM_ID}, charter v${{ inputs.charter_version }}, run ${GITHUB_RUN_ID}. Charter=/tmp/frontier_charter.json; TEAM=/tmp/spider_frontier_team; AUDIT=/tmp/spider_frontier_audit. Preserve limits and update only this team's accepted namespace plus CTO handoff.${MODE}"
+
+      - name: Enforce one-shot lifecycle lock
+        if: ${{ inputs.one_shot == true }}
+        shell: bash
+        env:
+          TEAM_ID: ${{ inputs.team_id }}
+        run: |
+          set -euo pipefail
+          F="state/frontier/${TEAM_ID}.json"
+          test -f "$F" || { echo "::error::Missing Frontier state after Director"; exit 1; }
+          jq '. + {one_shot:true,human_forced_one_shot:true,auto_continue_allowed:false,continue_recommended:false}' "$F" > /tmp/frontier_state.locked.json
+          mv /tmp/frontier_state.locked.json "$F"
 
       - name: Enforce Frontier Director scope
         shell: bash
