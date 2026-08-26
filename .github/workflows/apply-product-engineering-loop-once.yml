@@ -1,0 +1,42 @@
+name: SPIDER Apply Product Engineering Loop Once
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/apply-product-engineering-loop-once.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: spider-product-loop-upgrade-once
+  cancel-in-progress: false
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Upgrade Product lane to active pre-beta engineering loop
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 .github/scripts/upgrade-product-engineering-loop.py
+          git diff --check
+          grep -q '^  product_engineer:$' .github/workflows/product-loop.yml
+          grep -q '^  product_work_auditor:$' .github/workflows/product-loop.yml
+          grep -q '^  product_work_integration:$' .github/workflows/product-loop.yml
+          git config user.name spider-product-orchestration
+          git config user.email spider-product-orchestration@autonomous.local
+          git add .github/workflows/product-loop.yml .github/scripts/upgrade-product-engineering-loop.py
+          if git diff --cached --quiet; then
+            echo 'Product engineering loop already applied.'
+            exit 0
+          fi
+          git commit -m 'product: run engineering before beta readiness'
+          git pull --rebase origin main
+          git push origin HEAD:main
