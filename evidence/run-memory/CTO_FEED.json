@@ -1258,6 +1258,66 @@
         "CTO",
         "INFRA"
       ]
+    },
+    {
+      "id": "CF-2026-08-26-19",
+      "importance": "MEDIUM",
+      "kind": "OPERATIONAL_RADAR",
+      "summary": "Burst-cohort enumeration request of CF-2026-08-26-18 is now CLOSED LOCALLY: both unseen push-spawned curator shells exist as distilled records — shell #9 = run 32881495754 (created 18:03:08Z, spawned by push 63a66da touching docs/roles/EVIDENCE_CURATOR.md ∈ curator self-path triggers) and shell #10 = run 32881730542 (created 18:05:32Z, spawned by its own fixing commit d8343e74). The observed zero-job cascade extends to NINE consecutive shells #2..#10 (correlations ~1s through #9) and TERMINATES at #10 cancelled 18:09:20Z whose canceller has NO local candidate: no main commit in [18:05:29Z, 18:09:20Z] touches any curator push path (6ab0866d=repo-hygiene.yml only, b4dbd709=cto-council.yml only), leaving manual operator cancel or an unseen non-push trigger as candidates. Total burst cost now fully countable: nine zero-token shells ≈36 min aggregate queue occupancy. The gate that held burst-cohort records at safe_to_prune=false ('enumerate the two unseen shells') is satisfied by local API-metadata bundles; promoting the older cohort flags (shells #2..#8 + supervisor witnesses) to safe_to_prune=true together is an open mechanical follow-up.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "source_run_id": 32881730542,
+      "additional_source_run_ids": [32881495754],
+      "corroborating_source_run_ids": [32881379858, 32881400245],
+      "durable_refs": [
+        "evidence/run-memory/runs/32881495754.json",
+        "evidence/run-memory/runs/32881730542.json",
+        "git:63a66da + git:d8343e74 (spawner commits, durable on main)",
+        ".github/workflows/evidence-curator.yml @HEAD (post-fix listen list)"
+      ],
+      "actionable_next": [
+        "Promote burst-cohort records (32881313020/32881318809/32881338291/32881351922/32881359193/32881379858/32881334442/32881343557 and already-enumerated #9/#10 companions) to safe_to_prune=true in one pass under the never-started+Git-durable-trigger policy.",
+        "One live-API lookup on run 32881730542's cancellation event would settle whether pending-replacement or external cancel ended the cascade terminus."
+      ],
+      "route_to": ["CTO", "INFRA"]
+    },
+    {
+      "id": "CF-2026-08-26-20",
+      "importance": "MEDIUM",
+      "kind": "OPERATIONAL_RADAR",
+      "summary": "Council feed-gate STILL has zero successful executions after a second queued death, and the failure mode escalated: council #12 (run 32881828740), spawned 18:06:34Z by the gate commit b4dbd709 itself (touched cto-council.yml ∈ own push paths), queued ZERO-JOBS for ~31m21s — the largest queue-occupancy waste recorded for a never-started shell — then cancelled 18:37:55Z with canceller UNATTRIBUTED locally (no main commit in [18:06:32Z,18:38Z] touches any council push path; b985dafe touched only AGENTS.md). Queue arithmetic INFERRES a hidden same-group occupant holding spider-critical-cto-council from ≈18:06:36Z (candidate: unseen mid-flight councils #8/#9/#10, which can run 30+ min); watchdog #80 corroborates a non-completed council run at 18:06:47Z. Pattern across both mitigation commits: each fix's own dispatch was wasted (b2d747e→#11 died queued ~4m41s attributed to b4dbd709's arrival; b4dbd709→#12 died queued 31m unattributed). No CTO review session has actually executed since feed-gating landed, so the 'wake only on actionable feed' behavior remains unvalidated in production.",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "source_run_id": 32881828740,
+      "corroborating_source_run_ids": [32881834669, 32881374818],
+      "durable_refs": [
+        "evidence/run-memory/runs/32881828740.json",
+        "runs/32881374818.json (first feed-gated firing death)",
+        "git:b4dbd709 (gate commit) + .github/workflows/cto-council.yml @git:b4dbd709 (push-path list, single-slot concurrency cancel-in-progress:false)"
+      ],
+      "actionable_next": [
+        "Live-API enumeration of councils #8/#9/#10 (created ≈17:50–18:01Z Aug 25) identifies the hidden occupant and closes both open attributions (#12 canceller + occupant outcome) in one lookup.",
+        "Decide a control-plane self-edit wake policy: workflows listing themselves in push paths guarantee one wasted dispatch per fix commit during iteration bursts; prefer workflow_dispatch-only self-wake or debounced triggers.",
+        "After a first successful gated execution, verify the CTO_FEED.json-only wake actually fires on actionable findings and does NOT fire on INDEX.md-only changes."
+      ],
+      "route_to": ["CTO", "INFRA"]
+    },
+    {
+      "id": "CF-2026-08-26-21",
+      "importance": "MEDIUM",
+      "kind": "PROVENANCE_INCIDENT",
+      "summary": "Repo-hygiene ran once inside a ≈52-minute GUARD-GAP WINDOW with its durable-reference protection layer silently absent, causing no loss but exposing a regression class: hygiene #3 (run 32881764857, executing script @6ab0866d) contained ONLY self-protection + cycle-branch protection + keep-latest-3 + unarchived-keep rules — the durable-state scan (state/docs/results/reports/product-signals/.spider) had been lost during cleanup refactoring and was restored by a09d036 at ≈18:57:33Z, after this 18:06Z execution. Outcome was harmless (deleted=0 kept=61 unarchived=13 failed=0) because nothing intersected distilled+unsafe+unprotected at that moment. Lesson generalizes beyond hygiene: protection rules removed during refactor-and-restore cycles are only caught by review today; the incident chain (#1 deletions → hardening → accidental removal → restoration) spanned four commits and one production execution.",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "source_run_id": 32881764857,
+      "durable_refs": [
+        "evidence/run-memory/runs/32881764857.json (sole-log witness incl. 13-run unarchived snapshot)",
+        "git:a09d036 'cleanup: restore durable-reference protection before pruning' (restoration, durable on main)",
+        ".github/workflows/repo-hygiene.yml @HEAD (guard fully restored; comments document the accidental removal)",
+        "DELETED_RUNS_RECOVERY.json + runs/32880942022.json (incident baseline)"
+      ],
+      "actionable_next": [
+        "Add a CI test asserting every PROTECT rule family is present in repo-hygiene.yml so guard regressions fail CI instead of relying on post-hoc review.",
+        "When refactoring destructive-pruning workflows, diff the PROTECT surface explicitly in the PR/commit body."
+      ],
+      "route_to": ["INFRA"]
     }
   ]
 }
