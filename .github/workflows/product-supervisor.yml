@@ -7,6 +7,7 @@ on:
   workflow_run:
     workflows:
       - "SPIDER Product and Beta Lane"
+      - "SPIDER Product Engineering Loop"
       - "SPIDER Product Beta Repair"
     types: [completed]
   push:
@@ -41,28 +42,31 @@ jobs:
           }
 
           MAIN_RUNS=$(runs_for product-loop.yml)
+          ENGINEERING_RUNS=$(runs_for product-engineering-loop.yml)
           REPAIR_RUNS=$(runs_for product-beta-repair.yml)
-          ACTIVE_MAIN=$(jq '[.[] | select(.status != "completed")] | length' <<<"$MAIN_RUNS")
-          ACTIVE_REPAIR=$(jq '[.[] | select(.status != "completed")] | length' <<<"$REPAIR_RUNS")
 
-          # Direct workflow_run triggers can enqueue a stale Product decision
-          # while a long beta is already executing. If a real Product run is
-          # in_progress, queued Product-main runs are redundant: after the
-          # running beta completes this supervisor will re-read accepted state
-          # and dispatch a fresh decision only if still justified.
-          MAIN_IN_PROGRESS=$(jq '[.[] | select(.status=="in_progress")] | length' <<<"$MAIN_RUNS")
-          if [[ "$MAIN_IN_PROGRESS" -gt 0 ]]; then
+          ACTIVE_MAIN=$(jq '[.[] | select(.status != "completed")] | length' <<<"$MAIN_RUNS")
+          ACTIVE_ENGINEERING=$(jq '[.[] | select(.status != "completed")] | length' <<<"$ENGINEERING_RUNS")
+          ACTIVE_REPAIR=$(jq '[.[] | select(.status != "completed")] | length' <<<"$REPAIR_RUNS")
+          ENGINEERING_IN_PROGRESS=$(jq '[.[] | select(.status == "in_progress")] | length' <<<"$ENGINEERING_RUNS")
+
+          # Product Engineering and the historical Product/Beta lane share the
+          # spider-product-lane concurrency group. While engineering is really
+          # executing, old event-triggered Product-main decisions are stale work,
+          # not useful parallelism. Cancel only queued historical Product-main
+          # runs; never cancel a queued engineering continuation.
+          if [[ "$ENGINEERING_IN_PROGRESS" -gt 0 ]]; then
             while read -r queued_id; do
               [[ -n "$queued_id" ]] || continue
-              echo "::warning::Cancelling stale queued Product run $queued_id while another Product run is in progress; continuation will be re-derived from accepted state."
+              echo "::warning::Cancelling stale queued historical Product run $queued_id while Product Engineering is in progress."
               gh run cancel "$queued_id" --repo "$GITHUB_REPOSITORY" || true
             done < <(jq -r '.[] | select(.status=="queued" or .status=="pending") | .databaseId' <<<"$MAIN_RUNS")
-            echo "Product work already in progress; supervisor will not duplicate it."
+            echo "Product Engineering is already in progress; supervisor will not duplicate it."
             exit 0
           fi
 
-          if [[ "$ACTIVE_MAIN" -gt 0 || "$ACTIVE_REPAIR" -gt 0 ]]; then
-            echo "Product work already active; supervisor will not duplicate it."
+          if [[ "$ACTIVE_MAIN" -gt 0 || "$ACTIVE_ENGINEERING" -gt 0 || "$ACTIVE_REPAIR" -gt 0 ]]; then
+            echo "Product work already active/queued; supervisor will not duplicate it."
             exit 0
           fi
 
@@ -76,21 +80,35 @@ jobs:
           CONTINUE=$(jq -r 'if has("continue") then .continue else (.beta_launch // false) end' <<<"$STATE" 2>/dev/null || echo false)
           NEXT_ACTION=$(jq -r '.next_action // empty' <<<"$STATE" 2>/dev/null || true)
           BETA_LAUNCH=$(jq -r '.beta_launch // false' <<<"$STATE" 2>/dev/null || echo false)
+          WORK_LAUNCH=$(jq -r '.work_launch // false' <<<"$STATE" 2>/dev/null || echo false)
 
-          LATEST=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow product-loop.yml --limit 1 \
-            --json databaseId,status,conclusion,createdAt 2>/dev/null || echo '[]')
-          LATEST_ID=$(jq -r '.[0].databaseId // empty' <<<"$LATEST")
-          LATEST_CONCLUSION=$(jq -r '.[0].conclusion // empty' <<<"$LATEST")
+          if [[ "$BETA_LAUNCH" == true && "$WORK_LAUNCH" == true ]]; then
+            echo "::error::Invalid Product state: beta_launch and work_launch cannot both be true."
+            exit 1
+          fi
 
-          dispatch_fresh_product() {
+          # Consider both Product generations when deciding what most recently
+          # happened. The supervisor must not declare Product idle just because
+          # the latest work happened in the engineering lane.
+          LATEST=$(jq -n --argjson main "$MAIN_RUNS" --argjson eng "$ENGINEERING_RUNS" \
+            '$main + $eng | sort_by(.createdAt) | reverse | .[0] // {}')
+          LATEST_ID=$(jq -r '.databaseId // empty' <<<"$LATEST")
+          LATEST_CONCLUSION=$(jq -r '.conclusion // empty' <<<"$LATEST")
+
+          dispatch_current_product_route() {
             local why="$1"
-            echo "::warning::Product continuity recovery: $why. Dispatching Product Director/optimization pipeline on current main."
-            gh workflow run product-loop.yml --repo "$GITHUB_REPOSITORY" --ref main
+            if [[ "$BETA_LAUNCH" == true ]]; then
+              echo "::warning::Product continuity recovery: $why. Dispatching Product/Beta lane from accepted state."
+              gh workflow run product-loop.yml --repo "$GITHUB_REPOSITORY" --ref main
+            else
+              echo "::warning::Product continuity recovery: $why. Dispatching Product Engineering from accepted state."
+              gh workflow run product-engineering-loop.yml --repo "$GITHUB_REPOSITORY" --ref main
+            fi
           }
 
           if [[ -z "$LATEST_ID" ]]; then
-            if [[ "$CONTINUE" == true || "$BETA_LAUNCH" == true ]]; then
-              dispatch_fresh_product "authorized Product work exists but no Product run exists"
+            if [[ "$CONTINUE" == true || "$BETA_LAUNCH" == true || "$WORK_LAUNCH" == true ]]; then
+              dispatch_current_product_route "authorized Product work exists but no Product run exists"
             fi
             exit 0
           fi
@@ -104,11 +122,11 @@ jobs:
             # Recover only operational/control-plane failures. A clean beta loss,
             # audit BLOCKED, or ordinary build/test failure must reach Product
             # Director through normal evidence paths rather than be hidden.
-            if [[ "$LOG_RC" -eq 0 ]] && grep -Eiq '(external_directory|permission requested: external_directory|Missing product_beta_architecture state|runner has received a shutdown signal|runner service is stopped|lost communication with the runner|SPIDER_TRANSIENT_OX_EXHAUSTED|OpenCode/Ox.*network|network_error|NetworkError|fetch failed|ECONNRESET|EAI_AGAIN|ENETUNREACH|ENOTFOUND|ETIMEDOUT|service unavailable|bad gateway|gateway timeout|SPIDER control-plane overlay restoration left residue)' <<<"$LOGS"; then
-              if [[ "$CONTINUE" == true || "$BETA_LAUNCH" == true ]]; then
-                dispatch_fresh_product "run $LATEST_ID ended $LATEST_CONCLUSION with an explicit infrastructure/control-plane signature"
+            if [[ "$LOG_RC" -eq 0 ]] && grep -Eiq '(external_directory|permission requested: external_directory|Missing product_beta_architecture state|runner has received a shutdown signal|runner service is stopped|lost communication with the runner|SPIDER_TRANSIENT_OX_EXHAUSTED|OpenCode/Ox.*network|network_error|NetworkError|fetch failed|ECONNRESET|EAI_AGAIN|ENETUNREACH|ENOTFOUND|ETIMEDOUT|service unavailable|bad gateway|gateway timeout|Unexpected server error|SPIDER control-plane overlay restoration left residue)' <<<"$LOGS"; then
+              if [[ "$CONTINUE" == true || "$BETA_LAUNCH" == true || "$WORK_LAUNCH" == true ]]; then
+                dispatch_current_product_route "run $LATEST_ID ended $LATEST_CONCLUSION with an explicit infrastructure/control-plane signature"
               else
-                echo "Product state no longer authorizes continuation; operational failure is recorded but no new work is launched."
+                echo "Product state no longer authorizes immediate continuation; operational failure is recorded. Scheduled engineering review remains available."
               fi
             else
               echo "Latest Product run $LATEST_ID ended $LATEST_CONCLUSION without an infrastructure signature. Supervisor refuses to hide a real product/build failure."
@@ -117,9 +135,13 @@ jobs:
           fi
 
           if [[ "$LATEST_CONCLUSION" == success ]]; then
-            if [[ "$CONTINUE" == true && "$NEXT_ACTION" != WAIT_FOR_EVIDENCE ]]; then
-              dispatch_fresh_product "accepted Product state says continue=true next_action=${NEXT_ACTION:-unspecified}"
+            if [[ "$WORK_LAUNCH" == true ]]; then
+              dispatch_current_product_route "accepted Product state contains an unconsumed engineering work request"
+            elif [[ "$BETA_LAUNCH" == true ]]; then
+              dispatch_current_product_route "accepted Product state contains an authorized beta"
+            elif [[ "$CONTINUE" == true && "$NEXT_ACTION" != WAIT_FOR_EVIDENCE ]]; then
+              dispatch_current_product_route "accepted Product state says continue=true next_action=${NEXT_ACTION:-unspecified}"
             else
-              echo "Product state says no concrete autonomous continuation is required."
+              echo "Product state has no immediate autonomous work. The scheduled Product Engineering review remains the non-destructive wake-up path."
             fi
           fi
