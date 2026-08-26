@@ -1,0 +1,24 @@
+name: SPIDER Orchestration Kick Once
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/SPIDER_ORCHESTRATION_KICK'
+
+permissions:
+  contents: read
+  actions: write
+
+jobs:
+  kick:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dispatch accepted-results publisher and Product Engineering
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh workflow run publish-accepted-results.yml --repo "$GITHUB_REPOSITORY" --ref main
+          gh workflow run product-engineering-loop.yml --repo "$GITHUB_REPOSITORY" --ref main
