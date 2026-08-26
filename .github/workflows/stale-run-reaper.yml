@@ -1,0 +1,88 @@
+name: SPIDER Stale Run Reaper
+
+on:
+  schedule:
+    - cron: "4,19,34,49 * * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/stale-run-reaper.yml'
+      - 'docs/roles/PRODUCT_FINAL_GATE.md'
+
+permissions:
+  actions: write
+  contents: read
+
+concurrency:
+  group: spider-stale-run-reaper
+  cancel-in-progress: false
+
+jobs:
+  reap_stale_runs:
+    name: Reap stale autonomous runs
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Cancel only clearly stale runs so continuity can recover them
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          product_is_final() {
+            local raw
+            raw=$(gh api -H 'Accept: application/vnd.github.raw+json' \
+              "repos/${GITHUB_REPOSITORY}/contents/state/product_final.json?ref=lab/product" 2>/dev/null || true)
+            [[ -n "$raw" ]] || return 1
+            jq -e '.final_product==true and .status=="READY_FOR_HUMAN_HANDOFF" and .independent_audit_pass==true and .baseline_win_audited==true and (.evidence_refs|type=="array" and length>0)' <<<"$raw" >/dev/null 2>&1
+          }
+
+          if product_is_final; then
+            echo "Final Product gate satisfied; no autonomous runs need recovery."
+            exit 0
+          fi
+
+          now=$(date -u +%s)
+          QUEUE_STALE_SECONDS=$((90 * 60))
+          RUN_STALE_SECONDS=$((24 * 60 * 60))
+
+          inspect_workflow() {
+            local workflow="$1" rows row id status created epoch age
+            rows=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow "$workflow" --limit 50 \
+              --json databaseId,status,createdAt 2>/dev/null || echo '[]')
+            while IFS= read -r row; do
+              id=$(jq -r '.databaseId' <<<"$row")
+              status=$(jq -r '.status' <<<"$row")
+              created=$(jq -r '.createdAt' <<<"$row")
+              epoch=$(date -u -d "$created" +%s 2>/dev/null || echo "$now")
+              age=$((now - epoch))
+
+              case "$status" in
+                queued|pending|requested|waiting)
+                  if [[ "$age" -gt "$QUEUE_STALE_SECONDS" ]]; then
+                    echo "::warning::$workflow run $id has been $status for $((age/60)) minutes; cancelling stale queue entry. Continuity supervisors will relaunch from durable state."
+                    gh run cancel "$id" --repo "$GITHUB_REPOSITORY" || true
+                  fi
+                  ;;
+                in_progress)
+                  if [[ "$age" -gt "$RUN_STALE_SECONDS" ]]; then
+                    echo "::warning::$workflow run $id has been in_progress for more than 24h, beyond all intended SPIDER job chains; cancelling stale run. Durable snapshots/evidence remain preserved."
+                    gh run cancel "$id" --repo "$GITHUB_REPOSITORY" || true
+                  fi
+                  ;;
+              esac
+            done < <(jq -c '.[] | select(.status != "completed")' <<<"$rows")
+          }
+
+          inspect_workflow graph-loop.yml
+          inspect_workflow physics-loop.yml
+          inspect_workflow intel-loop.yml
+          inspect_workflow runtime-loop.yml
+          inspect_workflow product-loop.yml
+          inspect_workflow product-beta-repair.yml
+          inspect_workflow product-engineering-loop.yml
+          inspect_workflow product-engineering-failure-review.yml
+          inspect_workflow cto-council.yml
+          inspect_workflow frontier-research.yml
