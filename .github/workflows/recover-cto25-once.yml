@@ -1,0 +1,46 @@
+name: Recover CTO 25 Once
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/recover-cto25-once.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: spider-recover-cto25-once
+  cancel-in-progress: false
+
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Resolve CTO council run number 25
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence/frontier-one-shot
+          gh run list --repo "$GITHUB_REPOSITORY" --workflow cto-council.yml --limit 100 \
+            --json databaseId,number,headSha,status,conclusion,createdAt,event,url \
+            | jq '[.[] | select(.number==25)] | if length==1 then .[0] else error("expected exactly one CTO run #25") end' \
+            > evidence/frontier-one-shot/cto25-run.json
+          jq -e '.headSha=="1338a296115c2c4cdec592706c9eb30a5c7cae3b"' evidence/frontier-one-shot/cto25-run.json >/dev/null
+      - name: Persist recovered provenance
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "spider-recovery"
+          git config user.email "spider-recovery@autonomous.local"
+          git add evidence/frontier-one-shot/cto25-run.json
+          git commit -m "evidence: recover CTO #25 run identity"
+          git push origin HEAD:main
