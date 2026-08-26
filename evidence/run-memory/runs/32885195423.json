@@ -1,0 +1,81 @@
+{
+  "run_id": 32885195423,
+  "workflow_name": "SPIDER Runtime Supervisor",
+  "workflow_path": ".github/workflows/runtime-supervisor.yml",
+  "status": "completed",
+  "conclusion": "success",
+  "head_sha": "5e639274be8ffc0f7a4d416b94e3f3b26aa462fd",
+  "created_at": "2026-08-25T18:41:09Z",
+  "completed_at": "2026-08-25T18:41:19Z",
+  "run_number": 7,
+  "event": "push",
+  "head_branch": "main",
+  "display_title": "runtime: recover only orchestration-blocked zero-delta repairs",
+  "actor_login": "Mickalive",
+  "actions_url": "https://github.com/Mickalive/Spider/actions/runs/32885195423",
+  "bundle_provenance": {
+    "jobs_api_snapshot_total": 1,
+    "artifacts_api_snapshot": "{\"total_count\":0,\"artifacts\":[]}",
+    "raw_log_bytes_approx": 12921,
+    "fetched_cycle_refs": {},
+    "token_permissions": "Actions: write, Contents: read"
+  },
+  "job_summary": {
+    "job_name": "Ensure Runtime continuity",
+    "conclusion": "success",
+    "wall_seconds_approx": 10,
+    "step_exec_seconds_approx": 2.9,
+    "dispatched_successor_run_id": 32885208777
+  },
+
+  "evidence_class": "RUNTIME",
+
+  "summary": "FIRST FIRING OF THE NEW NARROW RF-X RECOVERY — the external orchestration decision demanded by the Runtime audit chain was converted into a same-cycle repair dispatch. Self-referential wake: the trigger commit 5e63927 (+34/-2 on runtime-supervisor.yml) ADDED exactly the recovery block this firing then executed. Executed logic (curator-read from the log, byte-durable at the pinned commit): read CYCLE_<latest>_RUNTIME_GATE.json from cycle/runtime/<id>/audit; gate conditions GATE==BLOCKED && delta_since_prior_audit_bytes==0 && RF-X external_decision_required>0; verify launcher fix ZERO_DELTA_LAUNCHER_FIX=751496ad505c0f6cc9c54272c517e41c0d243dc4 ('infra: fail zero-delta repairs and pin retry cwd', 18:40:18Z) reachable on main; then emit '::warning::Runtime BLOCKED only on RF-X zero-delta orchestration. Launcher fix is present; dispatching one same-cycle recovery repair round 3.' and dispatch runtime-loop with repair_from_run_id + repair_round=3 (curator-inferred target: the r2 gate of run 32877702179, whose audit fired BLOCKED/RF-X and which watchdog #81 had just seen as runtime-loop's latest completed run). The dispatched human_note freezes orchestration files ('Do not attempt to edit workflow/orchestration files'), demands substantive RF1-RF6 'from the mounted audit', and requires preserving 'the frozen R0 benchmark and all audit constraints' (cycle_index=1, max_cycles=0). Context embedded in-script: repeated byte-identical repairs were caused by a retry returning rc=0 with zero durable delta; the shared launcher now pins cwd and rejects zero-delta REPAIR success.",
+
+  "durable_refs": [
+    "git:5e639274be8ffc0f7a4d416b94e3f3b26aa462fd (triggering commit = exact script version executed, incl. full human_note text)",
+    "git:751496ad505c0f6cc9c54272c517e41c0d243dc4 (launcher fix verified present on main by the supervisor before dispatching)",
+    "runs/32877702179.json (the BLOCKED/zero-delta/RF-X gate this recovery addresses)",
+    "https://github.com/Mickalive/Spider/actions/runs/32885208777 (dispatched repair round 3 — successor run, printed in-log, not yet distilled)"
+  ],
+
+  "findings": [
+    {
+      "kind": "RESULT",
+      "summary": "RF-X closure mechanism worked as designed end-to-end: an EXTERNAL/ORCHESTRATION decision (the only kind RF-X accepted) was delivered as the 751496a+5e63927 commit pair, machine-verified by the supervisor (fix commit reachable), and converted into exactly ONE bounded same-cycle repair round 3 with anti-gaming constraints in the human_note. This is the productive continuation path the Runtime record chain anticipated after BLOCKED.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "MEDIUM",
+      "route_to": ["RUNTIME", "CTO", "INFRA"]
+    },
+    {
+      "kind": "LIMIT",
+      "summary": "Whether round 3 finally produces nonzero delta is OPEN — successor run 32885208777 exists server-side but has no local bundle or record yet. If it repeats zero-delta, the current ladder has no terminal rule beyond rounds; the escalation design should be revisited before another round is spent.",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "importance": "MEDIUM",
+      "route_to": ["RUNTIME"]
+    },
+    {
+      "kind": "OTHER",
+      "summary": "Self-referential trigger pattern observed again (cf. council feed-gate deaths): the commit adding a recovery capability also triggers its first real firing. Here it was PRODUCTIVE (recovery executed immediately) — contrast cto-council.yml where self-trigger pushes only produced queued deaths; the difference is supervisor workflows are cheap/fast while the council occupies a long single-slot group.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "LOW",
+      "route_to": ["INFRA"]
+    }
+  ],
+
+  "failure_signatures": [],
+
+  "research_opportunities": [
+    "Distill successor run 32885208777 to close whether the cwd-pinned + zero-delta-rejecting launcher broke the byte-identical-resubmission cycle that consumed repair rounds 1-2.",
+    "If zero-delta recurs at round 3+, add a terminal rule (e.g., auto-BLOCKED lane state requiring fresh-cycle authorization instead of further same-cycle repairs)."
+  ],
+
+  "already_captured_elsewhere": [
+    "Runtime repair-chain history and RF-X origin: runs/32875577618.json (r1), runs/32877702179.json (r2/BLOCKED), CF-2026-08-25-34/-35",
+    "Executed script + human_note text: byte-durable in .github/workflows/runtime-supervisor.yml at git:5e63927 (linked, not re-transcribed beyond what this record needs)"
+  ],
+
+  "distillation_complete": true,
+  "safe_to_prune": true,
+  "pruning_rationale": "Safe to prune per supervisor-dispatch precedent (runs/32880157100.json): completed successfully, the executed script and human_note are byte-durable at pinned commit 5e63927 (this firing ran ON that commit), the dispatch fact + successor URL are recorded here and verifiable via the successor run itself, and no claim-bearing artifact depends on the raw log."
+}

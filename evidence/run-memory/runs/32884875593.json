@@ -1,0 +1,84 @@
+{
+  "run_id": 32884875593,
+  "workflow_name": "SPIDER Critical CTO Council",
+  "workflow_path": ".github/workflows/cto-council.yml",
+  "status": "completed",
+  "conclusion": "cancelled",
+  "head_sha": "37f9575f2fa3f4e43684a835585256de612389a2",
+  "created_at": "2026-08-25T18:37:53Z",
+  "completed_at": "2026-08-25T18:43:07Z",
+  "run_number": 13,
+  "event": "push",
+  "head_branch": "main",
+  "display_title": "cto: preserve append-only advisory provenance",
+  "actor_login": "Mickalive",
+  "model": null,
+  "actions_url": "https://github.com/Mickalive/Spider/actions/runs/32884875593",
+  "bundle_provenance": {
+    "jobs_api_snapshot_total": 0,
+    "artifacts_api_snapshot": "{\"total_count\":0,\"artifacts\":[]}",
+    "raw_log_bytes_approx": 0,
+    "fetched_cycle_refs": {},
+    "note": "log_status='available' with a 0-byte log is the EXPECTED fingerprint for a jobs=0 queued shell; jobs.json total_count=0 is the discriminator (fetch-harness lesson from runs/32881285051.json)"
+  },
+  "job_summary": {
+    "jobs_executed": 0,
+    "queued_minutes_approx": 5.23,
+    "never_started": true
+  },
+
+  "evidence_class": "CTO",
+
+  "summary": "THIRD consecutive feed-era council death WITHOUT executing any job (~5m14s queued zero-jobs, empty log) — and the run that RESOLVES the previously unattributed canceller of council #12. Created 18:37:53Z by push 37f9575 ('cto: preserve append-only advisory provenance', +44/-3 on .github/workflows/cto-council.yml, i.e. the workflow's own file inside its own push-path triggers); that same creation is the newest-queued-wins canceller of council #12 / run 32881828740, whose cancel stamp is 18:37:55Z — a 2-second correlation closing the open attribution question in CF-2026-08-26-20 (which had inferred a hidden single-slot occupant and left the canceller unknown). This run was itself cancelled 18:43:07Z by push c97680b ('cto: harden physics coverage and append-only persistence', +11/-6 on cto-council.yml, 3s before the cancel stamp), which plausibly spawned an unseen successor (#14, not visible in local bundles). Both bookend commits were council SELF-hardening edits five minutes apart — each guaranteed one wasted dispatch under the single-slot spider-critical-cto-council group during control-plane iteration. Watchdog #81 (32884882057) independently cross-anchors this run alive-pending at 18:38:07Z ('cto-council.yml: active run exists'). The feed-gated council trigger still had ZERO successful executions through this window.",
+
+  "durable_refs": [
+    "git:37f9575f2fa3f4e43684a835585256de612389a2 (triggering commit = the substantive intent: append-only advisory-provenance hardening of cto-council.yml, durable on main)",
+    "git:c97680bc5199f4a0db59a7074ddd592712f3a202 (attributed canceller commit: 'cto: harden physics coverage and append-only persistence', +11/-6 cto-council.yml)",
+    "runs/32881828740.json (council #12 — its open canceller attribution is CLOSED by this run's creation timestamp)",
+    "/tmp/spider_run_evidence/32884882057/logs.txt (watchdog #81 sweep line cross-anchoring this run pending at 18:38:07Z)"
+  ],
+
+  "findings": [
+    {
+      "kind": "RESULT",
+      "summary": "OPEN ATTRIBUTION RESOLVED for CF-2026-08-26-20: council #12 (run 32881828740) was NOT cancelled by any hidden actor or manual intervention — it was superseded by THIS run's creation. Push 37f9575 touched cto-council.yml at 18:37:51Z, GitHub created #13 at 18:37:53Z into the single-slot group, and #12's cancel stamp followed at 18:37:55Z (2s). The 'hidden occupant' hypothesis for #12's slot is thereby weakened: the slot was freed exactly when #13 arrived, matching newest-pending-wins semantics already adjudicated for councils #6/#7/#10/#11.",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "importance": "MEDIUM",
+      "route_to": ["INFRA", "CTO"]
+    },
+    {
+      "kind": "ANOMALY",
+      "summary": "Self-trigger waste mechanism struck again with double intensity: within 5m13s TWO council-self edits (37f9575 at 18:37:51Z, c97680b at 18:43:04Z) each produced one wasted council dispatch — 37f9575's own firing died queued here, and its arrival killed the previous mitigation-commit firing (#12). Chain now fully attributed across three consecutive deaths: b2d747e -> #11 died queued; b4dbd709 -> #12 died queued (killed by #13's creation); 37f9575 -> #13 died queued (killed by c97680b successor). Any workflow listing itself in push paths burns one dispatch per fix commit during iteration bursts.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "MEDIUM",
+      "route_to": ["INFRA", "CTO"]
+    },
+    {
+      "kind": "LIMIT",
+      "summary": "The feed-gated council wake ('wake only on actionable run-evidence feed', b4dbd709) has still NEVER executed successfully as of this run's death (18:43:07Z Aug 25) — every firing since gating landed died queued. Whether the gate fires correctly on actionable findings and stays silent on INDEX-only changes remains unvalidated in production.",
+      "evidence_status": "DUPLICATE",
+      "importance": "MEDIUM",
+      "route_to": ["CTO"]
+    }
+  ],
+
+  "failure_signatures": [
+    "cancelled + jobs.json total_count=0 + 0-byte log + log_status='available' = designed queued-shell fingerprint (not a fetch failure)",
+    "~1-3s correlation between a push touching the workflow's own path and the previous queued run's cancel stamp — the reusable Git-attribution heuristic for newest-queued-wins cancellations"
+  ],
+
+  "research_opportunities": [
+    "Live-API enumeration of the plausible successor spawned by c97680b (candidate council #14, created ~18:43:04Z) to close whether ANY post-gating council ever executed that evening.",
+    "Adopt debounced or workflow_dispatch-only self-wake for workflows whose push paths include their own definition file; alternatively [skip]-marker conventions for config-only iterations."
+  ],
+
+  "already_captured_elsewhere": [
+    "Council queue-death pattern and feed-gate context: runs/32881374818.json (#11), runs/32881828740.json (#12), CF-2026-08-26-20",
+    "Queued-replacement semantics precedent: runs/32879459085.json + runs/32879902647.json (#6/#7 pair), curator shell cascade records",
+    "Substantive intent of the window (append-only advisory provenance; physics coverage hardening): durable as triggering commits on main; no advisory content was produced by this run"
+  ],
+
+  "distillation_complete": true,
+  "safe_to_prune": true,
+  "pruning_rationale": "Safe to prune under the never-started+Git-durable-trigger policy (precedent: council #11 record): zero jobs ran, the raw log is EMPTY (nothing unique exists to lose), the substantive intent survives as the Git-durable triggering commits, both cancellation attributions are recorded here from Git timeline evidence, and the resolution value for CF-2026-08-26-20 is captured in this record and the CTO feed. Pruning destroys no information."
+}
