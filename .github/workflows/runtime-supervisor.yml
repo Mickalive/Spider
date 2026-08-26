@@ -13,6 +13,7 @@ on:
     paths:
       - '.github/workflows/runtime-supervisor.yml'
       - '.github/scripts/run-opencode-with-retry.sh'
+      - 'docs/roles/PRODUCT_FINAL_GATE.md'
 
 permissions:
   actions: write
@@ -31,12 +32,25 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - name: Recover only missing continuation or orchestration-blocked repair
+      - name: Recover, repair or replan Runtime until Final Product
         env:
           GH_TOKEN: ${{ github.token }}
         shell: bash
         run: |
           set -euo pipefail
+
+          product_is_final() {
+            local raw
+            raw=$(gh api -H 'Accept: application/vnd.github.raw+json' \
+              "repos/${GITHUB_REPOSITORY}/contents/state/product_final.json?ref=lab/product" 2>/dev/null || true)
+            [[ -n "$raw" ]] || return 1
+            jq -e '.final_product==true and .status=="READY_FOR_HUMAN_HANDOFF" and .independent_audit_pass==true and .baseline_win_audited==true and (.evidence_refs|type=="array" and length>0)' <<<"$raw" >/dev/null 2>&1
+          }
+
+          if product_is_final; then
+            echo "Final Product gate satisfied; Runtime autonomy may stop."
+            exit 0
+          fi
 
           ACTIVE=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow runtime-loop.yml --limit 30 \
             --json status --jq '[.[] | select(.status != "completed")] | length' 2>/dev/null || echo 0)
@@ -50,41 +64,75 @@ jobs:
           ID=$(jq -r '.[0].databaseId // empty' <<<"$LATEST")
           CONCLUSION=$(jq -r '.[0].conclusion // empty' <<<"$LATEST")
 
-          # Narrow recovery for the exact process blocker diagnosed by the
-          # independent Runtime auditor: repeated byte-identical repairs caused
-          # by a retry that returned rc=0 with zero durable delta. The shared
-          # launcher now pins cwd and rejects zero-delta REPAIR success.
+          next_cycle() {
+            local successful
+            successful=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow runtime-loop.yml --limit 100 \
+              --json status,conclusion --jq '[.[] | select(.status=="completed" and .conclusion=="success")] | length' 2>/dev/null || echo 0)
+            echo $((successful + 1))
+          }
+
+          dispatch_fresh() {
+            local why="$1" next
+            next=$(next_cycle)
+            echo "::warning::Runtime nonterminal continuity: $why. Dispatching fresh Runtime cycle $next while preserving all prior audit/failure evidence."
+            gh workflow run runtime-loop.yml --repo "$GITHUB_REPOSITORY" --ref main \
+              -f human_note="NONTERMINAL RUNTIME CONTINUITY. Product is not final. Preserve all prior PASS/REVISE/BLOCKED/failure evidence and frozen benchmarks. If the previous local program is complete, blocked, exhausted or continue=false, choose the next bounded Runtime primitive/integration problem instead of stopping or repeating a dead end." \
+              -f cycle_index="$next" -f max_cycles=0
+          }
+
           if [[ -n "$ID" ]]; then
             GATE_JSON=$(gh api -H 'Accept: application/vnd.github.raw+json' \
               "repos/${GITHUB_REPOSITORY}/contents/results/audit/CYCLE_${ID}_RUNTIME_GATE.json?ref=cycle/runtime/${ID}/audit" 2>/dev/null || true)
             GATE=$(jq -r '.gate // empty' <<<"$GATE_JSON" 2>/dev/null || true)
             DELTA=$(jq -r '.delta_since_prior_audit_bytes // -1' <<<"$GATE_JSON" 2>/dev/null || echo -1)
             RFX=$(jq -r '[.required_fixes[]? | select(.id=="RF-X" and .external_decision_required==true)] | length' <<<"$GATE_JSON" 2>/dev/null || echo 0)
-            ROUND=$(jq -r '.repair_round // 0' <<<"$GATE_JSON" 2>/dev/null || echo 0)
+            ROUND=$(jq -r '.repair_round // .repair_round_audited // 0' <<<"$GATE_JSON" 2>/dev/null || echo 0)
+
+            if [[ "$GATE" == REVISE ]]; then
+              NEXT_ROUND=$((ROUND + 1))
+              echo "::warning::Runtime audit is REVISE; dispatching same-cycle repair $NEXT_ROUND."
+              gh workflow run runtime-loop.yml --repo "$GITHUB_REPOSITORY" --ref main \
+                -f human_note="AUTOMATIC SAME-CYCLE RUNTIME REPAIR. Implement the independent audit required_fixes only; preserve frozen benchmark, negative outcomes and provenance." \
+                -f cycle_index=1 -f max_cycles=0 \
+                -f repair_from_run_id="$ID" -f repair_round="$NEXT_ROUND"
+              exit 0
+            fi
 
             if [[ "$GATE" == BLOCKED && "$DELTA" == 0 && "$RFX" -gt 0 ]]; then
-              # Ensure the known orchestration fix is actually reachable on main.
               if gh api "repos/${GITHUB_REPOSITORY}/commits/${ZERO_DELTA_LAUNCHER_FIX}" >/dev/null 2>&1; then
                 NEXT_ROUND=$((ROUND + 1))
-                echo "::warning::Runtime BLOCKED only on RF-X zero-delta orchestration. Launcher fix is present; dispatching one same-cycle recovery repair round $NEXT_ROUND."
+                echo "::warning::Runtime BLOCKED on known RF-X orchestration issue; launcher fix exists, dispatching same-cycle recovery repair $NEXT_ROUND."
                 gh workflow run runtime-loop.yml --repo "$GITHUB_REPOSITORY" --ref main \
-                  -f human_note="RF-X external orchestration blocker is resolved by shared launcher ${ZERO_DELTA_LAUNCHER_FIX}: retries are cwd-pinned and zero-delta REPAIR success now fails. Do not attempt to edit workflow/orchestration files. Implement substantive RF1-RF6 from the mounted audit; preserve the frozen R0 benchmark and all audit constraints." \
-                  -f cycle_index=1 \
-                  -f max_cycles=0 \
-                  -f repair_from_run_id="$ID" \
-                  -f repair_round="$NEXT_ROUND"
+                  -f human_note="RF-X external orchestration blocker is resolved by shared launcher ${ZERO_DELTA_LAUNCHER_FIX}. Implement substantive audit fixes; preserve the frozen benchmark and all claim ceilings." \
+                  -f cycle_index=1 -f max_cycles=0 \
+                  -f repair_from_run_id="$ID" -f repair_round="$NEXT_ROUND"
                 exit 0
               fi
+            fi
+
+            if [[ "$GATE" == BLOCKED ]]; then
+              dispatch_fresh "latest audited Runtime program $ID is BLOCKED; BLOCKED is preserved but cannot terminate the Runtime lane"
+              exit 0
             fi
           fi
 
           if [[ -n "$ID" && "$CONCLUSION" != success ]]; then
-            echo "Latest Runtime run $ID concluded $CONCLUSION. Supervisor refuses fresh progression; audit/router/watchdog/manual evidence must resolve it."
+            set +e
+            LOGS=$(gh run view "$ID" --repo "$GITHUB_REPOSITORY" --log 2>&1)
+            LOG_RC=$?
+            set -e
+            if [[ "$LOG_RC" -eq 0 ]] && grep -Eiq '(runner has received a shutdown signal|runner service is stopped|lost communication with the runner|SPIDER_TRANSIENT_OX_EXHAUSTED|OpenCode/Ox.*network|network_error|NetworkError|fetch failed|ECONNRESET|EAI_AGAIN|ENETUNREACH|ENOTFOUND|ETIMEDOUT|service unavailable|bad gateway|gateway timeout|Unexpected server error)' <<<"$LOGS"; then
+              gh run rerun "$ID" --repo "$GITHUB_REPOSITORY" --failed || true
+              sleep 2
+              ACTIVE=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow runtime-loop.yml --limit 30 --json status --jq '[.[] | select(.status != "completed")] | length' 2>/dev/null || echo 0)
+              if [[ "$ACTIVE" -gt 0 ]]; then exit 0; fi
+            fi
+            dispatch_fresh "latest Runtime run $ID concluded ${CONCLUSION:-unknown}; the failure remains recorded but cannot stop the lane"
             exit 0
           fi
 
           if ! gh api "repos/${GITHUB_REPOSITORY}/branches/lab%2Fruntime" >/dev/null 2>&1; then
-            echo "Runtime accepted branch does not exist yet; bootstrap workflow owns initialization."
+            dispatch_fresh "accepted Runtime branch is missing and needs bootstrap/reconstruction"
             exit 0
           fi
 
@@ -92,13 +140,8 @@ jobs:
             "repos/${GITHUB_REPOSITORY}/contents/state/runtime_loop.json?ref=lab/runtime" 2>/dev/null || true)
           CONTINUE=$(jq -r '.continue // false' <<<"$STATE" 2>/dev/null || echo false)
           if [[ "$CONTINUE" != true ]]; then
-            echo "Accepted Runtime state says continue=false; no dispatch."
+            dispatch_fresh "accepted Runtime state says continue=false, which is only a local-program terminal state before Final Product"
             exit 0
           fi
 
-          SUCCESSFUL=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow runtime-loop.yml --limit 100 \
-            --json status,conclusion --jq '[.[] | select(.status=="completed" and .conclusion=="success")] | length' 2>/dev/null || echo 0)
-          NEXT=$((SUCCESSFUL + 1))
-          echo "::warning::Runtime is idle after successful accepted continuation; dispatching missing cycle $NEXT."
-          gh workflow run runtime-loop.yml --repo "$GITHUB_REPOSITORY" --ref main \
-            -f cycle_index="$NEXT" -f max_cycles=0
+          dispatch_fresh "accepted Runtime state says continue=true and the lane is idle"
