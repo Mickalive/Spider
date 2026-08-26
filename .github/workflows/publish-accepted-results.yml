@@ -15,6 +15,8 @@ on:
       - 'SPIDER Runtime Lane'
       - 'SPIDER Frontier Research Team'
       - 'SPIDER Product and Beta Lane'
+      - 'SPIDER Product Engineering Loop'
+      - 'SPIDER CTO Global Portfolio'
     types: [completed]
   schedule:
     - cron: '41 * * * *'
@@ -55,7 +57,7 @@ jobs:
           git commit -m "results: publish accepted lab catalog ${GITHUB_RUN_ID}"
 
           # Worktree publication can leave harmless working-tree residue after the
-          # generated results have already been captured in the commit.  Clear only
+          # generated results have already been captured in the commit. Clear only
           # that uncommitted residue before rebasing; the committed catalog remains
           # intact and the publisher's no-deletion invariant is enforced upstream.
           git reset --hard HEAD
