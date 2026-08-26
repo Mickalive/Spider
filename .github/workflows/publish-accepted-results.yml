@@ -39,8 +39,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          chmod +x .github/scripts/publish-accepted-results.sh
-          .github/scripts/publish-accepted-results.sh
+          bash .github/scripts/publish-accepted-results.sh
           git diff --check
       - name: Commit central catalog when changed
         shell: bash
