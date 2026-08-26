@@ -955,6 +955,42 @@
         "PRODUCT",
         "CTO"
       ]
+    },
+    {
+      "id": "CF-2026-08-26-06",
+      "importance": "MEDIUM",
+      "kind": "ORCHESTRATION_PATTERN",
+      "summary": "Scheduled cron lane triggers have no co-existence rule with the same lane's self-dispatch chains: under single-slot concurrency (cancel-in-progress:false), GitHub's newest-pending-run-wins semantics make ANY REVISE->repair-router dispatch deterministically cancel an older pending cron run. Observed concretely on Runtime Lane scheduled run 32921115159 (queued ~51 min behind the R1-1 REVISE chain; cancelled 02:51:44Z, 13 s after sibling r1 audit branch push 02:51:31Z triggered the repair-r2 dispatch). Git forensics excluded every repo-resident canceller (runtime-supervisor/ox-watchdog/lane-repair-supervisor only rerun or dispatch behind active>0 guards; program-supervisor covers graph/physics only). Zero-token loss this instance, but the pattern silently defeats 'periodic safety-net fresh cycle' whenever repairs are mid-flight, and cancelled-while-queued runs leave no receipt naming the mechanism (extends CF-2026-08-25-02 receipt gap). Related ops fact: the cron slot (00:23Z) materialized at 02:00:44Z — >90 min schedule-delivery delay under load.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "source_run_id": 32921115159,
+      "durable_refs": [
+        "evidence/run-memory/runs/32921115159.json",
+        "git:.github/workflows/runtime-loop.yml@main (concurrency group spider-runtime-lane; runtime_repair_router job)",
+        "git:origin/cycle/runtime/32916020607/audit@b2bf8ef",
+        "git:origin/cycle/runtime/32921019845/audit@f87d1b6"
+      ],
+      "actionable_next": [
+        "CTO/infra decision: either accept-and-document the cron-vs-chain supersession loss, or add an active-chain guard to cron-triggered lane workflows / have routers supersede-or-adopt pending slots explicitly.",
+        "Add run-id-attributed durable receipts for queue transitions/supersessions so future instances are self-documenting instead of requiring full Git archaeology."
+      ]
+    },
+    {
+      "id": "CF-2026-08-26-07",
+      "importance": "MEDIUM",
+      "kind": "OPERATIONAL_RADAR",
+      "summary": "Runtime Program R1 lineage needs live-API adjudication after the queue-supersession event of 02:51:44Z: cycle R1-1 round 0 (run 32916020607) returned audit REVISE RF-1..RF-3 and repair r1 (run 32921019845) returned REVISE RF-4 (write-side aggregate double-count) + RF-5 (stale state field), with auditor wording that the scientific core is intact at prereg ceilings and 'upon repair, treat as PASS-equivalent' — but the router-dispatched repair r2 (~02:51:31-44Z) has NO persisted cycle/runtime branch as of curator fetch, so its existence/fate is unverified (still running, silently dead pre-persist, or dispatch failure all fit local evidence). If r2 died, recovery paths may mis-route: runtime-supervisor's idle+continue=true path dispatches a FRESH cycle_index=successful_count+1 rather than the auditor-scoped surgical repair, while lane-repair-supervisor's latest-run gate routing depends on which run is 'latest' after multiple cancellations.",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "source_run_id": 32921115159,
+      "durable_refs": [
+        "git:origin/cycle/runtime/32916020607/{team,audit} (@9e1875d3/@b2bf8ef)",
+        "git:origin/cycle/runtime/32921019845/{team,audit} (@66468f46/@f87d1b6)",
+        "git:origin/lab/runtime@162468f (state/runtime_loop.json continue=true, next_program R1)",
+        "evidence/run-memory/runs/32921115159.json"
+      ],
+      "actionable_next": [
+        "With an authenticated gh token: enumerate runtime-loop runs created >=02:51Z to confirm repair-r2 identity/conclusion; verify lane continuity (no silent stall between the 06:23Z cron and supervisor ticks).",
+        "Supply bundles for runs 32916020607 and 32921019845 to a future curator batch — both have persisted team+audit branches and no run-memory records yet."
+      ]
     }
   ]
 }
