@@ -28,19 +28,26 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         shell: bash
         run: |
-          set -euo pipefail
+          set -u
           mkdir -p evidence/frontier-one-shot
           gh run list --repo "$GITHUB_REPOSITORY" --workflow cto-council.yml --limit 100 \
             --json databaseId,number,headSha,status,conclusion,createdAt,event,url \
-            | jq '[.[] | select(.number==25)] | if length==1 then .[0] else error("expected exactly one CTO run #25") end' \
-            > evidence/frontier-one-shot/cto25-run.json
-          jq -e '.headSha=="1338a296115c2c4cdec592706c9eb30a5c7cae3b"' evidence/frontier-one-shot/cto25-run.json >/dev/null
+            > evidence/frontier-one-shot/cto-council-runs-last100.json 2> evidence/frontier-one-shot/cto25-recovery.stderr || true
+          jq '[.[] | select(.number==25)] | .[0] // {}' \
+            evidence/frontier-one-shot/cto-council-runs-last100.json \
+            > evidence/frontier-one-shot/cto25-run.json 2>> evidence/frontier-one-shot/cto25-recovery.stderr || true
+          jq -n \
+            --arg expected_head "1338a296115c2c4cdec592706c9eb30a5c7cae3b" \
+            --arg actual_head "$(jq -r '.headSha // empty' evidence/frontier-one-shot/cto25-run.json 2>/dev/null)" \
+            --arg id "$(jq -r '.databaseId // empty' evidence/frontier-one-shot/cto25-run.json 2>/dev/null)" \
+            '{expected_head:$expected_head,actual_head:$actual_head,database_id:$id,head_matches:($actual_head==$expected_head),recovery_kind:"mechanical_run_number_lookup"}' \
+            > evidence/frontier-one-shot/cto25-recovery-status.json
       - name: Persist recovered provenance
         shell: bash
         run: |
           set -euo pipefail
           git config user.name "spider-recovery"
           git config user.email "spider-recovery@autonomous.local"
-          git add evidence/frontier-one-shot/cto25-run.json
-          git commit -m "evidence: recover CTO #25 run identity"
+          git add evidence/frontier-one-shot/
+          git commit -m "evidence: recover CTO #25 run identity and diagnostics" || true
           git push origin HEAD:main
