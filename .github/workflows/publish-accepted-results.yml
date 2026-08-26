@@ -53,13 +53,20 @@ jobs:
           git config user.email spider-results-publisher@autonomous.local
           git add results
           git commit -m "results: publish accepted lab catalog ${GITHUB_RUN_ID}"
+
+          # Worktree publication can leave harmless working-tree residue after the
+          # generated results have already been captured in the commit.  Clear only
+          # that uncommitted residue before rebasing; the committed catalog remains
+          # intact and the publisher's no-deletion invariant is enforced upstream.
+          git reset --hard HEAD
+
           for attempt in 1 2 3; do
-            if git pull --rebase origin main && git push origin HEAD:main; then
+            git fetch origin main
+            if git rebase origin/main && git push origin HEAD:main; then
               exit 0
             fi
             git rebase --abort 2>/dev/null || true
-            git fetch origin main
-            git rebase origin/main
+            git reset --hard HEAD
             sleep $((attempt * 2))
           done
           echo '::error::Unable to publish accepted results after three synchronized attempts.'
