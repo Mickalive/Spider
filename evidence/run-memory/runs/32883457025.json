@@ -1,0 +1,65 @@
+{
+  "run_id": 32883457025,
+  "workflow_name": "SPIDER Graph Lane (#10, program graph-inheritance-generalization, repair round 1)",
+  "workflow_path": ".github/workflows/graph-loop.yml",
+  "status": "completed",
+  "conclusion": "success",
+  "head_sha": "8b8feeae3b3dc900f310950624e737767e08732c",
+  "created_at": "2026-08-25T18:23:21Z",
+  "updated_at": "2026-08-25T21:17:18Z",
+  "event": "workflow_dispatch",
+  "evidence_class": "PRODUCT",
+  "durable_refs": [
+    "git:origin/cycle/graph/32883457025/team@a8fc78502e29066d4e6df1f2242ad175331ff4b3 (curator-refetched byte-exact; freeze chain e6c0798→1a83311(prereg)→9cb851c(A1)→96ec691(A2)→f878ef3(P1 canonical)→a8fc785(P2 grid))",
+    "git:origin/cycle/graph/32883457025/audit@94b1698f8f29d3a2158c560288f1fcd23f5f50be (curator-refetched byte-exact; results/audit/CYCLE_32883457025_GRAPH_GATE.json gate=REVISE safe_to_integrate=false required_fixes=RF-D1..RF-D5, cycle={run_id,program graph-inheritance-generalization,repair_round 1,audited_snapshot_head a8fc785,accepted_base 3e36b4c})",
+    "git:origin/cycle/graph/32880179571/audit@6581389d (round-0 REVISE RF-1..RF-5 this repair answered)",
+    "results/graph/generalization_analysis.json @team sha256 21fe87dedd7ef44bcbac7cc60921d7789d61f085f1339d9b60fdd0e3b41d9a12 (analyzer replay byte-identical, auditor-verified)",
+    "run 32900187567 = repair r2 dispatched by this run's RETURN-TO-CODER job at 21:17:16Z (URL printed in log; per INDEX row for 32880179571 the program completed there with gate PASS — outcome durable on lab/graph via that chain)"
+  ],
+  "findings": [
+    {
+      "kind": "RESULT",
+      "summary": "REPAIR R1 DELIVERED THE FULL PREDECLARED PIPELINE AND THE REAL MEASUREMENT — prior memory characterization 'returned empty-ish' is WRONG. Team executed P0→P1→P2 completely: prereg graph/prereg_generalization.md committed BEFORE any outcome (1a83311; 7 frozen composites incl. NEW books depth-4 D4H and depth-5 D5B with exact distinct-class counts; directive decision rule embedded VERBATIM machine-diffed vs directives/GRAPH.md; closed G-H5-equalized 6-arm ×2-pass grid = 84 rows); producer repair under legitimacy boundary; frozen confirmation grid executed exactly (84/84 rows, zero unhealthy/error, no retries, byte-restored grown KB before every run — distinct store_before=1, store_after==store_before everywhere, final store {19,29,15,16}==eval-start, pass1==pass2 in all 42 cells). Realized decision-rule branch: SITE-BOUND — zero memory-led rows by ANY inheritance arm on ANY books depth≥4 composite (D4B/D4H/D5B), all solvable-evidenced via reset/entry attribution, while the quotes stability family replicated G-H5 EXACTLY (frag_v31/frag_legacy/giter_legacy qualify 2/2 on D4Q/D5Q, giter_v31=0 replicates, arm novel 1–4 vs cold 57–76 / traj 49–65, D2Q frag_v31-only) — SITE-BOUND is therefore not harness drift. Equal-prominence negatives: achieved pure-memory depth ≤4 classes quotes / ≤3 books vs nominal; giter_v31 transfer failure now replicates across BOTH inventories; wall attributed to description-vocabulary addressing misses + wrong-class pager binding + budget-bounded exploration; entry-state recovery constraint eliminated the root-drift failure mode (reset_target=entry_state ×20) WITHOUT changing outcomes.",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "importance": "HIGH",
+      "route_to": ["GRAPH", "PRODUCT", "CTO"]
+    },
+    {
+      "kind": "RESULT",
+      "summary": "Independent audit verdict (curator cross-checked gate JSON byte-exact on origin): REVISE / safe_to_integrate=false with EXACTLY FIVE documentation-class fixes RF-D1..RF-D5 — (D1) wrong numeric range '(reused 10–16 vs novel 60–136 on books rows)' with no row exceeding 120 → recompute under explicit population/unit; (D2) non-recountable '89+23 tests' total → per-suite pytest-collection counts (trap 23 / scaling 27 / cycle2 15 / cycle3 15 / robustness…); (D3) manifest prereg.freeze_commit=null → set to freeze commit 1a83311 + repair_round_note; (D4) ambiguous revalidation disclosure — the +1 success_count landed on the QUOTES-scoped generic.paginate.next, contradicting prereg §2's letter while empirically inert; (D5) errata: redundant first disjunct in analyze_generalization.py's attribution-event classifier. Auditor's explicit framing: 'The measurement survives intact'; rerun and any outcome-bearing change PROHIBITED; binding interpretive limits for G-H6 (weak solvability clause, budget-scoped negative, traj/oracle caveats) must travel into ledger wording. Not BLOCKED because honestly same-cycle-repairable; escalation rule armed for a repeat without attempted edits.",
+      "evidence_status": "AUDITED_DURABLE",
+      "importance": "HIGH",
+      "route_to": ["GRAPH", "CTO"]
+    },
+    {
+      "kind": "NEGATIVE",
+      "summary": "Producer-phase design lessons from the three disclosed P1 attempts (all pre-evaluation, provenance-preserved): Attempt 1 aborted — frozen task list OMITTED the standard producer priors hint=pager/hint=first_product_link used by the committed training corpus on identical shapes → GB3 failed 2× with 60 novel actions each; runner shell-timeout killed the driver mid-GB4-a2; team DECLINED the frozen stop-rule verdict BOOKS-INSTRUMENT-UNREPAIRABLE as FALSE with rationale (task-design slip ≠ instrument unrepairability; GB2 validated hint-less same run), disclosed as Amendment A1 with a predeclared one-shot rerun rule. Attempt 2 failed its OWN binding gates — adjacent-position rehearsal contamination (acquiring a skill BY WALKING an evaluated chain position contaminates every composite containing it) + G3 fragment-grain violation → Amendment A2 moved acquisition to non-evaluated instance region romance_8 with a structural zero-taint argument. Canonical attempt passed ALL contamination gates pre-evaluation. Both lessons are reusable design constraints for any future skill-acquisition-vs-evaluation protocol.",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "importance": "MEDIUM",
+      "route_to": ["GRAPH", "CTO"]
+    },
+    {
+      "kind": "COST",
+      "summary": "Run economics: TEAM GRAPH job 18:23:29→20:54:33Z ≈2h31m (incl. TWO SPIDER_NETWORK_STALL_DETECTED-after-300s kills discarding attempts 1→2 @18:39→18:44 and 2→3 @18:57→19:02; attempt 3 completed end-to-end; numpy installed in-session; suite 93 passed + 1 known pre-existing Physics fixture failure untouched since f42c14d); INDEPENDENT AUDITOR 20:54:43→21:17:10Z ≈22m27s; RETURN-TO-CODER dispatch ~3s; Director+BLOCKED jobs correctly skipped for a REVISE gate. Whole run ≈2h53m57s wall. Mid-run git mishap self-caught ('baggage commit accidentally swept in the P0 files' via git add -A → redone cleanly; control-plane launch-bridge baggage committed SEPARATELY as e6c0798, 17 paths, per RF-5 precedent). Audit fsck noted one unreachable commit 7037432 in the audit workspace.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "MEDIUM",
+      "route_to": ["INFRA", "RUNTIME"]
+    }
+  ],
+  "failure_signatures": [
+    "SPIDER_NETWORK_STALL_DETECTED after 300s (×2, attempts 1 and 2 of TEAM GRAPH; retry wrapper recovered both times on attempt increment)",
+    "runner shell timeout killed growth driver mid-GB4-a2 during Amendment A1 attempt (preserved verbatim in provenance/, commit message 9cb851c)"
+  ],
+  "research_opportunities": [
+    "SITE-BOUND boundary condition is now measured, not assumed: quotes-side memory-led composition does NOT transfer to the books inventory at depth≥4 even after legitimate instrument repair; addressing-vocabulary coverage (empty/wrong-class description bindings) plus exploration budget are the attributed wall — direct input for any successor semantic-addressing program (Intel R-line / Graph directive) rather than further depth-scaling probes",
+    "Rehearsal-contamination rule (never acquire a skill by walking an evaluated chain position) deserves promotion into standing prereg template language for all future producer-repair protocols"
+  ],
+  "already_captured_elsewhere": [
+    "Program-level outcome and completion: INDEX.md rows for 32880179571 and 32861557668 (program completed at repair r2 PASS run 32900187567, outcome SITE-BOUND durable on lab/graph via that chain)",
+    "Permission-kill family instance #7 (round-0 cause): CF-2026-08-26-10 and runs/32880179571.json",
+    "G-H5 accepted baseline being replicated: runs/32861557668.json (SCALING-HOLDS narrow basis)"
+  ],
+  "distillation_complete": true,
+  "safe_to_prune": false,
+  "pruning_rationale": "Claim-bearing scientific/product cycle with live cycle/* team+audit branches needed for audit/reproduction of the SITE-BOUND measurement; raw log additionally remains the sole witness of the stall-kill timing, the A1/A2 amendment history details, the self-caught git mishap, and the basis for correcting the earlier 'empty-ish r1' mischaracterization in INDEX/CF-10."
+}

@@ -50,7 +50,7 @@
       "id": "CF-2026-08-25-03",
       "importance": "MEDIUM",
       "kind": "GUARD_VERSION_GAP",
-      "summary": "The hygiene script version that executed the 102 deletions (commit 3e5ea6d) had no distillation requirement; maintainers hardened it after the fact (1afb229 'require durable run distillation before pruning', a09d036 'restore durable-reference protection'). Until the hardened version has executed successfully, assume un-distilled claim-bearing logs could still be pruned by a stale workflow version.",
+      "summary": "The hygiene script version that executed the 102 deletions (commit 3e5ea6d) had no distillation requirement; maintainers hardened it after the fact (1afb229 'require durable run distillation before pruning', a09d036 'restore durable-reference protection'). Until the hardened version has executed successfully, assume un-distilled claim-bearing logs could still be pruned by a stale workflow version. UPDATE 2026-08-26 (run 32881940580 curation): hygiene #4 also executed inside the pre-a09d036 window (18:07:44Z @99c231b2) and was harmless — deleted=0 kept=59 unarchived=18 failed=0 — making at least two in-window dispatches with zero loss; its log additionally shows per-run keep-reason lines already present in that script version.",
       "evidence_status": "DURABLE_UNAUDITED",
       "source_run_id": 32880942022,
       "durable_refs": [
@@ -62,6 +62,9 @@
       ],
       "route_to": [
         "INFRA"
+      ],
+      "recurrence_run_ids": [
+        32881940580
       ]
     },
     {
@@ -1050,7 +1053,7 @@
       "id": "CF-2026-08-26-10",
       "importance": "HIGH",
       "kind": "RELIABILITY_DEFECT",
-      "summary": "Permission-kill family instance #7 has a NEW variant — tool-artifact/cache staging paths: TEAM GRAPH (run 32880179571, program graph-inheritance-generalization round 0) died after ~20.5 min on external_directory auto-reject while copying Playwright browsers /home/runner/.cache/ms-playwright/* → /tmp/opencode/ms-playwright for a books.toscrape probe; zero commits, empty tree pushed under conclusion=success, audit REVISE RF-1..RF-5 (durable gate). Cost compounded downstream: repair r1 (32883457025) also returned empty-ish (RF-D1..RF-D5); integration only at repair r2 (PASS run 32900187567). Auditor's structural observation: SECOND round-0 empty delivery at a program start in five audited Graph rounds, both when a whole multi-phase program was assigned to ONE team phase.",
+      "summary": "Permission-kill family instance #7 has a NEW variant — tool-artifact/cache staging paths: TEAM GRAPH (run 32880179571, program graph-inheritance-generalization round 0) died after ~20.5 min on external_directory auto-reject while copying Playwright browsers /home/runner/.cache/ms-playwright/* → /tmp/opencode/ms-playwright for a books.toscrape probe; zero commits, empty tree pushed under conclusion=success, audit REVISE RF-1..RF-5 (durable gate). Cost compounded downstream: repair r1 (32883457025) also returned empty-ish (RF-D1..RF-D5); integration only at repair r2 (PASS run 32900187567). Auditor's structural observation: SECOND round-0 empty delivery at a program start in five audited Graph rounds, both when a whole multi-phase program was assigned to ONE team phase. CORRECTION 2026-08-26 (run 32883457025 distillation, curator-refetched gate): repair r1 did NOT return empty-ish — it delivered the full pipeline plus the real SITE-BOUND measurement and was audited REVISE on documentation-class fixes only (RF-D1..RF-D5); the cost picture changes from 'two wasted rounds' to 'one wasted round-0 plus one productive round blocked by doc fixes'. See runs/32883457025.json and CF-2026-08-26-25.",
       "evidence_status": "LOG_ONLY_UNAUDITED",
       "source_run_id": 32880179571,
       "durable_refs": [
@@ -1134,7 +1137,7 @@
       "id": "CF-2026-08-26-14",
       "importance": "MEDIUM",
       "kind": "OPERATIONAL_RADAR",
-      "summary": "Hardened repo-hygiene gate executed clean: first distillation-gated pruning run (32881060780) deleted ZERO of 55 evaluated runs vs v1's 102 deletions an hour earlier; protection layers (cycle-provenance PROTECT map, latest KEEP_LATEST_PER_WORKFLOW=3 per workflow, active runs) all engaged. Observability gap: zero per-run keep-reason lines emitted, so retention decisions are not auditable from the log alone.",
+      "summary": "Hardened repo-hygiene gate executed clean: first distillation-gated pruning run (32881060780) deleted ZERO of 55 evaluated runs vs v1's 102 deletions an hour earlier; protection layers (cycle-provenance PROTECT map, latest KEEP_LATEST_PER_WORKFLOW=3 per workflow, active runs) all engaged. Observability gap: zero per-run keep-reason lines emitted, so retention decisions are not auditable from the log alone. UPDATE 2026-08-26 (run 32881940580 curation): hygiene #4's script version emits per-run 'Keeping unarchived run …' decision lines plus counters (deleted=0 kept=59 unarchived=18) — the keep-reason observability item is satisfied in later script versions; the spot-audit of the FIRST safe_to_prune=true-driven deletion batch remains open.",
       "evidence_status": "OPERATIONAL_DIAGNOSTIC",
       "source_run_id": 32881060780,
       "durable_refs": [
@@ -1381,6 +1384,53 @@
       "route_to": [
         "CTO",
         "INFRA"
+      ]
+    },
+    {
+      "id": "CF-2026-08-26-24",
+      "importance": "MEDIUM",
+      "kind": "WORK_LOSS_INCIDENT",
+      "summary": "Curator workflow validator destroyed a COMPLETE deleted-runs recovery on a schema-key mismatch (run 32882090239, first firing of the CLEANUP_INCIDENT_RUN recovery-first selection): the session selected exactly 32880942022, wrote all 105 artifacts (runs record + 102 tombstones + recovery index + INDEX + feed), and passed its own validation asserting total_deleted_runs==102 — but the workflow gate reads jq '.deleted_run_count // 0', got 0, emitted '::error::Recovery index contains no deleted runs' and exited 1, skipping enforce+persist. Zero bytes survived from that run; equivalent content landed ~49 min later via commit 9e7d3ef ('evidence: distill Actions runs 32880942022'). This incident is the provenance of the dual-count-key invariant (deleted_run_count == total_deleted_runs) now mandated for DELETED_RUNS_RECOVERY.json. Same post-success-gate work-loss class as CF-2026-08-25-09's council #8 and curator #1, but caused purely by a key-name divergence between session convention and validator expectation.",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "source_run_id": 32882090239,
+      "durable_refs": [
+        "evidence/run-memory/runs/32882090239.json",
+        "git:9e7d3ef196b3879d8d17d9b2ecb4c619e1c2879e (durable re-creation of the stranded output)",
+        "evidence/run-memory/DELETED_RUNS_RECOVERY.json (dual keys equal at 102)"
+      ],
+      "actionable_next": [
+        "Harden the curator validator like CF-09's fix class: accept either count key (or both), and print the offending key/value path on failure instead of a bare message.",
+        "Keep sessions writing BOTH count keys until the validator is hardened; treat 'session-valid but workflow-invalid' divergence as a defect to file immediately.",
+        "Note the selection rule itself worked correctly — do not regress it while fixing validation."
+      ],
+      "route_to": [
+        "INFRA",
+        "CTO"
+      ]
+    },
+    {
+      "id": "CF-2026-08-26-25",
+      "importance": "MEDIUM",
+      "kind": "RESEARCH_RADAR",
+      "summary": "Graph generalization repair r1 delivered the program's real measurement and corrects prior memory: run 32883457025 executed the full predeclared P0->P1->P2 pipeline (prereg before outcomes, 84-row frozen grid, byte-restored KB, pass1==pass2 42/42) realizing decision-rule branch SITE-BOUND — zero memory-led rows by any inheritance arm on any books depth>=4 composite (all solvable-evidenced), quotes family replicating G-H5 exactly (2/2/0/2 => not harness drift), giter_v31 transfer failure replicating across both inventories, wall attributed to description-vocabulary addressing misses + wrong-class pager binding + exploration budget; entry-state constraint eliminated drift without changing outcomes. The independent audit gated REVISE on FIVE documentation-class fixes only (RF-D1..RF-D5: wrong numeric range, non-recountable test total, prereg.freeze_commit=null, ambiguous revalidation disclosure, classifier errata) explicitly stating 'the measurement survives intact' and prohibiting reruns. Corrections issued to records that had called r1 'empty-ish'. Outcome acceptance remains downstream (repair r2 PASS run 32900187567 per durable lane chain).",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "source_run_id": 32883457025,
+      "durable_refs": [
+        "git:origin/cycle/graph/32883457025/team@a8fc78502e29066d4e6df1f2242ad175331ff4b3 (prereg 1a83311, amendments A1/A2, canonical P1 f878ef3, P2 grid a8fc785)",
+        "git:origin/cycle/graph/32883457025/audit@94b1698f8f29d3a2158c560288f1fcd23f5f50be (gate REVISE RF-D1..RF-D5, curator-refetched)",
+        "evidence/run-memory/runs/32883457025.json",
+        "evidence/run-memory/INDEX.md row for 32880179571 (r2 completion pointer)"
+      ],
+      "actionable_next": [
+        "Treat books-inventory depth>=4 non-transfer as measured negative knowledge for any successor addressing/composition program: attack description-vocabulary coverage and wrong-class binding rather than more depth-scaling probes.",
+        "Promote the rehearsal-contamination rule (never acquire a skill by walking an evaluated chain position) into standing prereg-template language for producer-repair protocols.",
+        "When G-H6 wording lands from the r2/r3 chain, carry the auditor's binding interpretive limits (weak solvability clause, budget-scoped negative, traj/oracle caveats) verbatim."
+      ],
+      "route_to": [
+        "GRAPH",
+        "PRODUCT",
+        "INTEL",
+        "CTO"
       ]
     }
   ]
