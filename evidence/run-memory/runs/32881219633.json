@@ -1,0 +1,90 @@
+{
+  "run_id": 32881219633,
+  "workflow_name": "SPIDER Run Evidence Curator",
+  "workflow_path": ".github/workflows/evidence-curator.yml",
+  "status": "completed",
+  "conclusion": "failure",
+  "head_sha": "7514921b17ea18f0c0ceb3e67d028fa7141d1757",
+  "created_at": "2026-08-25T18:00:21Z",
+  "completed_at": "2026-08-25T18:21:24Z",
+  "run_number": 1,
+  "event": "push",
+  "head_branch": "main",
+  "display_title": "evidence: continuously distill Actions logs before pruning",
+  "actor": "Mickalive",
+  "job_summary": {
+    "job_name": "Distill completed run knowledge into durable CTO memory",
+    "conclusion": "failure",
+    "runner": "ubuntu-latest (GitHub Actions 1000000691, westus2)",
+    "duration_seconds_approx": 1260,
+    "step_chain": {
+      "select_target_runs": "success - Selected 5 run(s): 32689298051 32776372437 32781482957 32782331702 32783797303 (BACKFILL_BATCH=5)",
+      "build_lossless_run_bundles": "success (~36s; refs.txt empty for all five targets - no branches named with any target run id)",
+      "install_opencode": "success (OpenCode 1.18.23)",
+      "curate_run_evidence": "success as a step (~20min agent session, SPIDER_MODEL=opencode/x-preview-f-free); wrote all 7 deliverables: 5 run records + INDEX.md + CTO_FEED.json (10 findings CTO-2026-08-25-01..10)",
+      "validate_curator_outputs": "success (schema checks on all records, INDEX.md, CTO_FEED.json passed)",
+      "enforce_evidence_memory_only_writes": "FAILURE - 'Evidence Curator wrote outside its durable memory scope:' followed by exactly one path: 'evidence/'",
+      "persist_distilled_memory": "skipped"
+    }
+  },
+  "evidence_class": "OPERATIONAL",
+
+  "durable_refs": [
+    "git:7514921b17ea18f0c0ceb3e67d028fa7141d1757 (.github/workflows/evidence-curator.yml v1 with the defective porcelain scope guard)",
+    "git:30fc94f870813bd6354b1bffbca688f23eee9095 ('evidence: fix scope guard for nested untracked memory files' - the fix for this exact failure; replaces git status --porcelain with git diff --name-only + git diff --cached --name-only + git ls-files --others --exclude-standard)",
+    "git:c191c64 'evidence: distill Actions runs 32689298051,32776372437,32781482957,32782331702,32783797303' (2026-08-25T19:55:40Z - the SAME five targets re-distilled ~1h34m later by a subsequent curator execution, recovering the lost work)",
+    "evidence/run-memory/runs/32689298051.json, runs/32776372437.json, runs/32781482957.json, runs/32782331702.json, runs/32783797303.json (current durable records covering the lost pass's targets)"
+  ],
+
+  "findings": [
+    {
+      "kind": "BUG",
+      "summary": "ROOT CAUSE (log+fix-commit pinned): the v1 write-scope guard ran CHANGED=$(git status --porcelain | cut -c4-) and rejected anything not matching ^evidence/run-memory/. Because the ENTIRE evidence/ tree was untracked at commit 7514921 (the directory did not yet exist on main), git status --porcelain collapsed all nested writes to the single entry '?? evidence/', so BAD='evidence/' and the job exited 1 even though every write was inside evidence/run-memory/. This is a FALSE POSITIVE of the scope-guard family: the gate blocked exactly the writes it was built to allow. Confirmed as a recognized mechanism by the later fix commit 30fc94f whose comment states it verbatim.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "HIGH",
+      "route_to": ["INFRA", "RUNTIME", "CTO"]
+    },
+    {
+      "kind": "BUG",
+      "summary": "SCOPE-GATE PATTERN IS STILL LATENT IN FIVE OTHER CONTROL-PLANE WORKFLOWS (curator Git cross-check during this distillation): the identical unfixed construct `git status --porcelain | cut -c4-` remains in physics-loop.yml (3 sites), graph-loop.yml (3 sites), cto-council.yml (1), runtime-loop.yml (2) at current main; frontier-research.yml also consumes git status --porcelain. The fix 30fc94f touched ONLY evidence-curator.yml. Any lane/frontier session that creates a WHOLLY-NEW directory anywhere in the tree can reproduce this false-positive class there (known siblings from prior incidents: pre-staged control-plane files killed Physics #7 audit in run 32860596387; allowlist omissions killed Runtime #6 in run 32887030457).",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "importance": "HIGH",
+      "route_to": ["INFRA", "CTO"]
+    },
+    {
+      "kind": "COST",
+      "summary": "Work-loss economics: a complete ~20-minute curation session (model opencode/x-preview-f-free; OpenCode 1.18.23; 7 deliverables written and schema-validated) was discarded at the persist gate, then the identical batch had to be re-curated from scratch by a later run (commit c191c64, ~1h34m after this run started). Net cost of the defect ~= one full duplicated curator session plus ~21 min runner time; zero bytes persisted by THIS run.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "MEDIUM",
+      "route_to": ["INFRA", "CTO"]
+    },
+    {
+      "kind": "OTHER",
+      "summary": "LOST-PASS CONTENT DISPOSITION: the stranded pass's final summary table and its 10 feed findings (CTO-2026-08-25-01..10) are visible verbatim in this log. Cross-check against current durable memory shows the MAIN results were re-created durably by c191c64 (all five target records exist with distilled=true; e.g. WP-006 FALSIFIED decomposition defects incl. openlibrary calibration 5/12 with 7 genuine state-drift failures and true corpus figure 62/74; Graph #5 empty-snapshot external_directory root cause; Graph #6 repair success with byte-identical scorer reproduction; Intel #1 SGDR REPRODUCED_USEFUL PoC hard@1 36/74 vs 25/74). Three leads from the lost pass have NO durable home outside this log and are preserved below as research_opportunities.",
+      "evidence_status": "DUPLICATE",
+      "importance": "MEDIUM",
+      "route_to": []
+    }
+  ],
+
+  "failure_signatures": [
+    "'Evidence Curator wrote outside its durable memory scope:' immediately followed by a bare collapsed directory path (here 'evidence/') instead of individual file paths -> scope guard exit 1, persist step skipped. Diagnostic discriminator vs genuine out-of-scope writes: the flagged path is an ANCESTOR DIRECTORY of the allowed scope, never a sibling file."
+  ],
+
+  "research_opportunities": [
+    "VOLATILITY-OBSERVABLE LEAD (LOG_ONLY_UNAUDITED, sole surviving copy): the lost pass proposed treating openlibrary's genuine state-drift failures (7/12 calibration pairs failing state-match for real site-change reasons, per WP-006 audit) as a seed observable for the volatility/freshness family of Physics questions chartered under V3. Not present in any current run record or feed item.",
+    "PRIOR-ART LEAD (LOG_ONLY_UNAUDITED, sole surviving copy among curator materials): 'TIP (Transferable Interaction Pattern)' = induced skill + structural tree-skeleton sketch of the accessibility snapshot at induction time, surfaced while distilling Intel #1 (run 32781482957); the lost pass flagged TIP/layout-style addressing as next prior-art radar items. TIP appears in NO current run record (grep count 0 in runs/32781482957.json); raw source remains only in that run's own Actions log.",
+    "MEASUREMENT-HYGIENE LEAD (LOG_ONLY_UNAUDITED, sole surviving copy): audit note observed retrieval_ms floors record integer milliseconds (mostly 0) making latency claims impossible in those runs - 'switch to perf_counter granularity before any future cost claim'; also cosmetic report typo 'edgesev'. Relevant to any future Graph/Product economics claim.",
+    "Cross-workflow scope-guard audit: extend fix 30fc94f's expanded-detection pattern to physics-loop.yml, graph-loop.yml, cto-council.yml, runtime-loop.yml and frontier-research.yml before a wholly-new-directory write trips one mid-cycle."
+  ],
+
+  "already_captured_elsewhere": [
+    "Re-distilled content of its 5 target runs: evidence/run-memory/runs/{32689298051,32776372437,32781482957,32782331702,32783797303}.json via commit c191c64",
+    "Scope-guard fix: .github/workflows/evidence-curator.yml @ 30fc94f",
+    "WebArena headline-numbers-not-reproduced note seen mid-session is durable in runs/32800296360.json / runs/32820217763.json (SGDR context); Physics-lane fixture-failure flag durable in runs/32783797303.json"
+  ],
+
+  "distillation_complete": true,
+  "safe_to_prune": false,
+  "pruning_rationale": "NOT safe to prune: this run's log is the SOLE surviving witness of (a) the exact stranded first-pass feed inventory CTO-2026-08-25-01..10 with statuses, (b) three research/hygiene leads with no durable copy elsewhere (volatility-observable framing, TIP prior-art pointer, retrieval_ms granularity caveat), and (c) the verbatim gate-trip output pairing 'wrote outside its durable memory scope' with the collapsed ancestor path 'evidence/'. Deleting it would destroy unique information; conservative rule applied."
+}
