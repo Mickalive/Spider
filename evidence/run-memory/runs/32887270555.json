@@ -1,0 +1,82 @@
+{
+  "run_id": 32887270555,
+  "workflow_name": "SPIDER Research Program Supervisor",
+  "workflow_path": ".github/workflows/program-supervisor.yml",
+  "status": "completed",
+  "conclusion": "success",
+  "head_sha": "a09d03603d1b8bf3a14f9d848f9b719c05d77df9",
+  "created_at": "2026-08-25T19:02:14Z",
+  "completed_at": "2026-08-25T19:02:29Z",
+  "run_number": 40,
+  "run_attempt": 1,
+  "event": "schedule",
+  "head_branch": "main",
+  "display_title": "SPIDER Research Program Supervisor",
+  "actor": "Mickalive",
+  "job_summary": {
+    "job_name": "Supervise Director-recommended programs",
+    "conclusion": "success",
+    "runner": "GitHub Actions 1000000784",
+    "duration_seconds_approx": 15,
+    "key_step": "Launch or reconcile Director-recommended programs (19:02:23Z -> 19:02:27Z)",
+    "receipt_commit": "1b25f63",
+    "artifacts": 0
+  },
+
+  "evidence_class": "OPERATIONAL",
+
+  "durable_refs": [
+    "git:1b25f63 ('state: reconcile research-program succession', pushed a09d036..1b25f63 at 19:02:27Z) - receipt reconciliation commit produced by THIS run; later referenced as the base commit council #16 (32885784797) ran on",
+    ".spider/program-receipts/graph-32861557668.json @ main (receipt_status=CONFIRMED, successor_run_id=32880179571, program graph-inheritance-generalization) - Git-durable outcome of this tick, curator-verified on origin/main",
+    "git:a09d036 (executed script version, durable on main; policy content previously transcribed in runs/32880157100.json / runs/32882918759.json)"
+  ],
+
+  "findings": [
+    {
+      "kind": "RESULT",
+      "summary": "Receipt reconciliation tick (~11s job): 'graph: successor run 32880179571 completed successfully for program graph-inheritance-generalization.' -> flipped .spider/program-receipts/graph-32861557668.json to CONFIRMED and committed 1b25f63; 'physics: no complete unambiguous next-program recommendation.' @19:02:24Z.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "LOW",
+      "route_to": ["INFRA"]
+    },
+    {
+      "kind": "ANOMALY",
+      "summary": "PROGRAM RECEIPT CONFIRMATION IS CONCLUSION-BASED, NOT GATE-AWARE: the CONFIRMED stamp keyed on the successor run's GitHub conclusion=success - but that successor (32880179571) is the round-0 EMPTY-DELIVERY run whose independent audit verdict was REVISE/safe_to_integrate=false, and the graph-inheritance-generalization program only actually completed ~2h15m later at repair r2 (PASS run 32900187567). Bookkeeping therefore recorded the program as confirmed-successful at 19:02Z while its latest persisted audit gate said REVISE. Harmless in this instance (the receipt tracks operational dispatch, and the lane later self-corrected), but receipts can misreport scientific status to any consumer trusting them; same conclusion-vs-gate contrast already noted between watchdog #81 and the Runtime Supervisor. Observation only - no evidence was altered.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "MEDIUM",
+      "route_to": ["INFRA", "CTO"]
+    },
+    {
+      "kind": "OTHER",
+      "summary": "THIRD consecutive witnessed physics-succession gap ('no complete unambiguous next-program recommendation') after 17:49:50Z (#38, runs/32880157100.json) and 18:17:55Z (#39, runs/32882918759.json) - gap spanned at least 73 minutes of supervisor ticks until frontier charters began landing later that night. Confirms the Physics lane sat without a machine-readable next-program recommendation through the whole post-WP-006 window.",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "importance": "LOW",
+      "route_to": ["CTO", "PHYSICS"]
+    },
+    {
+      "kind": "OTHER",
+      "summary": "Sixth timestamped remote ref inventory @19:02:23Z (127 '[new branch]' fetch lines + tag pb001-F0): contains ZERO cycle/frontier/* branches - positive provenance that the CTO Frontier portfolio had produced no team branches by 19:02:23Z Aug 25 (first frontier cycle branches carry later run ids such as 32916707414/329223*). Receipt-policy ladder (PENDING reconciliation via find_successor_after/find_new_successor, stale-receipt clearing, empty-rerun cancellation guard) DUPLICATE of prior verbatim transcriptions, durable at pinned head_sha.",
+      "evidence_status": "DUPLICATE",
+      "importance": "LOW",
+      "route_to": ["INFRA"]
+    }
+  ],
+
+  "failure_signatures": [
+    "None observed (clean tick)."
+  ],
+
+  "research_opportunities": [
+    "Gate-aware receipts: extend .spider/program-receipts/ with an optional audit_gate field sampled from the successor's persisted CYCLE_*_GATE.json so consumers can distinguish operationally-completed from scientifically-PASSed program successors without new infrastructure."
+  ],
+
+  "already_captured_elsewhere": [
+    "Receipt end-state: Git-durable at .spider/program-receipts/graph-32861557668.json @main/1b25f63.",
+    "Program outcome itself: runs/32880179571.json + repair chain records (32883457025 r1, 32900187567 r2 PASS).",
+    "Supervisor decision ladder: durable at pinned sha + prior transcriptions runs/32880157100.json, runs/32882918759.json."
+  ],
+
+  "distillation_complete": true,
+  "safe_to_prune": true,
+  "pruning_rationale": "Fully distilled clean scheduled tick in the style of #38/#39 records: receipt outcome is Git-durable (1b25f63), the conclusion-vs-gate nuance and third physics-gap witness are captured above, ref-inventory facts are summarized, and policy content is DUPLICATE of prior transcriptions. No unique residue remains only in the raw log."
+}

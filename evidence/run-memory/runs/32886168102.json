@@ -1,0 +1,84 @@
+{
+  "run_id": 32886168102,
+  "workflow_name": "SPIDER Run Evidence Curator",
+  "workflow_path": ".github/workflows/evidence-curator.yml",
+  "status": "completed",
+  "conclusion": "failure",
+  "head_sha": "868a056faddf1cc20bbe3eebf2d5efe565ba8742",
+  "created_at": "2026-08-25T18:51:05Z",
+  "completed_at": "2026-08-25T19:10:24Z",
+  "run_number": 14,
+  "run_attempt": 1,
+  "event": "schedule",
+  "head_branch": "main",
+  "display_title": "SPIDER Run Evidence Curator",
+  "actor": "Mickalive",
+  "job_summary": {
+    "job_name": "Distill completed run knowledge into durable CTO memory",
+    "conclusion": "failure",
+    "runner": "GitHub Actions 1000000780",
+    "duration_seconds_approx": 839,
+    "key_step": "Curate run evidence succeeded 18:56:34Z -> 19:10:20Z (~13m46s); Validate curator outputs PASSED; Enforce evidence-memory-only writes FAILED 19:10:20Z; Persist distilled memory SKIPPED - zero bytes kept from this run",
+    "selected_targets": [32880942022],
+    "artifacts": 0
+  },
+
+  "evidence_class": "OPERATIONAL",
+
+  "durable_refs": [
+    "git:30fc94f870813bd6354b1bffbca688f23eee9095 (scope-guard fix 'evidence: fix scope guard for nested untracked memory files', +9/-1 evidence-curator.yml, stamped 18:56:50Z - AFTER this run's checkout, BEFORE its failure)",
+    "git:9e7d3ef ('evidence: distill Actions runs 32880942022', pushed 19:22:28Z by successor run 32886741353) - durable re-creation of most of this session's substance",
+    "evidence/run-memory/DELETED_RUNS_RECOVERY.json + evidence/run-memory/deleted/*.json + runs/32880942022.json (current durable recovery corpus, authored by the successor pass)",
+    "/tmp/spider_run_evidence/32886168102/logs.txt (SOLE surviving witness of strike #7 root cause and of the unique analytical residues listed below)"
+  ],
+
+  "findings": [
+    {
+      "kind": "ANOMALY",
+      "summary": "PORCELAIN SCOPE-GATE STRIKE #7 - a THIRD complete recovery distillation of cleanup incident 32880942022 destroyed by the same unfixed guard, and the FIRST to be destroyed AFTER its fix had already landed on main. Selected exactly target 32880942022 via the CLEANUP_INCIDENT_RUN branch (DELETED_RUNS_RECOVERY.json still absent from main at head 868a056f); queued ~5m19s behind doomed curator #13 (32885496153) on single-slot spider-run-evidence-curator; session parsed all 102 deletion lines, swept 127 Git refs, wrote 102 tombstones + dual-key DELETED_RUNS_RECOVERY.json + runs/32880942022.json (8 findings) + INDEX.md initial population + CTO_FEED.json (3 MEDIUM draft items), passed ALL workflow validation - then step 8 flagged exactly one path, bare 'evidence/' (plain 'git status --porcelain' collapsing the wholly-untracked tree) -> exit 1 -> persist SKIPPED, zero bytes kept.",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "importance": "HIGH",
+      "route_to": ["INFRA", "CTO"]
+    },
+    {
+      "kind": "BUG",
+      "summary": "STALE-CHECKOUT WINDOW CORRECTS THE STRIKE-SERIES CLOSURE CLAIM (CF-2026-08-26-35): checkout of pre-fix main @868a056f completed 18:56:25-28.9Z, i.e. ~22s BEFORE fix commit 30fc94f was stamped (18:56:50Z), although this run FAILED at 19:10:20Z, ~3.5 minutes after the fix landed. A queued control-plane run therefore executed dead guard code even after the fix was on main - 'curator #13 was the final pre-fix victim' is FALSE as stated; #14 is the actual final pre-fix-code victim. Residual risk class: any long-queued run pair (fix lands while predecessor mid-flight) re-executes stale enforcement logic regardless of fix landing time.",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "importance": "HIGH",
+      "route_to": ["INFRA"]
+    },
+    {
+      "kind": "IDEA",
+      "summary": "UNIQUE-TO-THIS-LOG PROVENANCE ANALYSES (survive nowhere else; successor pass did not reproduce them): (a) MAIN-SIDE REFERENCE BLIND SPOT under the executed v1 policy - protection scanned cycle/* branch names plus lab-head state/docs/results/reports greps but never main-side state files; concrete near-miss: main's state/maintenance_last_cleanup.json cites hygiene run 32681096591 (NOT among the 102 deleted), which survived only because copies of that file exist on cycle/intel/* heads; session confirmed ZERO actual victims among the 102, and noted the current distillation-gated policy structurally closes this class; (b) EXECUTED-VS-CURRENT POLICY DIFF detail (v1 transitional newest-3/workflow delete-rest vs distillation-gated current at that hour); (c) COUNCIL CONCURRENCY OVERLAP observation - recovered council run 32876814203 started 17:15:26Z and its lab/cto commit landed 17:51:53Z, evidencing overlapping council sessions and supporting the serialize-councils mitigation; (d) its draft feed carried 3 MEDIUM items: per-council receipt commits / serialize councils; ~134 supervisory runs/day orchestration-cost signal; blind spot now guarded.",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "importance": "MEDIUM",
+      "route_to": ["CTO", "INFRA"]
+    },
+    {
+      "kind": "COST",
+      "summary": "Fourth complete curator session destroyed by the porcelain guard class (strikes: #1 = 32881219633 ~20min backfill; #5 = 32884735910 ~11.4min recovery; #6 = 32885496153 ~7m51s backfill; #7 = THIS ~13m46s recovery): roughly 53 minutes of agent distillation work discarded in total, two of the four strikes spent re-distilling the SAME incident 32880942022 within ~80 minutes of each other. This run's whole-run window was ~19m19s including queue.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "MEDIUM",
+      "route_to": ["INFRA", "CTO"]
+    }
+  ],
+
+  "failure_signatures": [
+    "'Evidence Curator wrote outside its durable memory scope:' + lone line 'evidence/' + '##[error]Process completed with exit code 1' at 19:10:20Z - identical collapse signature to strikes #1/#5/#6; steps fingerprint: 1-7 ALL success (incl. Validate curator outputs), 8 failure, 9 persist skipped.",
+    "Jobs-fingerprint note: log_status available + substantive log + conclusion=failure is expected for enforce-step failures; NOT a fetch-harness artifact."
+  ],
+
+  "research_opportunities": [
+    "Guard freshness: enforcement steps should re-read their guard script state after queue waits (or run guards from a pinned path immune to mid-flight fixes), so a landed fix cannot coexist with a stale-copy execution minutes later.",
+    "Structural recoverability for curators themselves: curator sessions should upload their distilled outputs as workflow artifacts BEFORE the enforce gate, so a scope-guard strike costs storage cleanup rather than recomputation."
+  ],
+
+  "already_captured_elsewhere": [
+    "Recovery substance (102 tombstones, dual-key index, runs/32880942022.json, INDEX population, 4-item feed): durably re-created by successor run 32886741353 via commit 9e7d3ef - DUPLICATE for that content.",
+    "Scope-guard fix itself: commit 30fc94f, DURABLE_UNAUDITED."
+  ],
+
+  "distillation_complete": true,
+  "safe_to_prune": false,
+  "pruning_rationale": "NOT safe to prune: this log is the SOLE witness of (1) strike #7 and the stale-checkout window that falsifies CF-2026-08-26-35's series-closure claim, and (2) three provenance analyses (main-side reference blind spot with near-miss id 32681096591; executed-vs-current policy diff; council concurrency overlap 17:15:26Z->17:51:53Z) that the successful successor pass did NOT reproduce into durable memory. Deleting it would destroy the only exemplar of these findings."
+}

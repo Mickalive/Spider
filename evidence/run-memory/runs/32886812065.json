@@ -1,0 +1,123 @@
+{
+  "run_id": 32886812065,
+  "workflow_name": "SPIDER Repo Hygiene",
+  "workflow_path": ".github/workflows/repo-hygiene.yml",
+  "status": "completed",
+  "conclusion": "success",
+  "head_sha": "a09d03603d1b8bf3a14f9d848f9b719c05d77df9",
+  "created_at": "2026-08-25T18:57:35Z",
+  "completed_at": "2026-08-25T18:58:07Z",
+  "run_number": 5,
+  "run_attempt": 1,
+  "event": "push",
+  "head_branch": "main",
+  "display_title": "cleanup: restore durable-reference protection before pruning",
+  "actor": "Mickalive",
+  "job_summary": {
+    "job_name": "Prune only distilled runs with no remaining raw-log provenance dependency",
+    "conclusion": "success",
+    "runner": "GitHub Actions 1000000781",
+    "duration_seconds_approx": 32,
+    "key_step": "Delete only archived and explicitly prune-safe run noise (18:57:42Z -> 18:58:05Z, ~23s)",
+    "counters": { "deleted": 0, "kept": 59, "unarchived": 46, "failed": 0, "protected_ids": 214 },
+    "artifacts": 0
+  },
+
+  "evidence_class": "OPERATIONAL",
+
+  "durable_refs": [
+    "git:a09d03603d1b8bf3a14f9d848f9b719c05d77df9 ('cleanup: restore durable-reference protection before pruning', +58/-9 repo-hygiene.yml, stamped 18:57:33Z) - this run's own enabling commit; exact hardened script version that executed",
+    "evidence/run-memory/runs/32880942022.json + runs/32881764857.json + runs/32881940580.json (guard-version lineage: v1 executor -> weakened 6ab0866d witness -> pre-restoration 99c231b2 witness -> THIS first fully-hardened execution)",
+    "/tmp/spider_run_evidence/32886812065/logs.txt (raw census manifest; the 46-run unarchived list is also transcribed below)"
+  ],
+
+  "findings": [
+    {
+      "kind": "RESULT",
+      "summary": "FIRST EXECUTION OF THE FULLY-HARDENED PRUNING SCRIPT and FOURTH consecutive zero-deletion pass (after #2/#3/#4): 'Repo hygiene: deleted=0 kept=59 unarchived=46 failed=0 protected_ids=214'. The restored durable-reference protection layer is visible in-log: protect_ids_from_ref over DURABLE_PATHS across lab/{graph,physics,runtime,intel,product,cto} heads AND HEAD, plus NEW frontier coverage via git ls-remote 'refs/heads/lab/frontier/*', cycle/* branch-name protection, active-run protection, and an evidence/run-memory record gate requiring distillation_complete=true AND safe_to_prune=true AND non-protection for any archived deletion ('Keeping archived-but-protected run' / 'Deleting distilled, unreferenced run' branches both present in source; NEITHER executed - zero deletions attempted).",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "MEDIUM",
+      "route_to": ["INFRA", "CTO"]
+    },
+    {
+      "kind": "OTHER",
+      "summary": "Fifth timestamped unarchived-run census @18:57:42-58:05Z (46 ids with workflow names, transcribed in this record): includes hygiene-v1 incident run 32880942022 correctly kept unarchived (its record says safe_to_prune=false), all then-recent burst runs, and three older stragglers still unarchived at this date (32864697417 Runtime Bootstrap Dedup Once, 32864608446 Runtime Lane, 32790538553 One-shot Run History Cleanup). protected_ids=214 under the expanded scan vs 228 in the v1-era scan of run 32880942022 - different scan composition (frontier refs added, tree state changed); NOT directly comparable, recorded as observation without interpretation.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "LOW",
+      "route_to": ["INFRA"]
+    },
+    {
+      "kind": "OTHER",
+      "summary": "Trigger provenance: created 18:57:35Z, 2 seconds after its own enabling commit a09d036 was stamped (18:57:33Z) - second witnessed same-commit first-execution pairing in this batch window alongside Lane Repair Supervisor #10/868a056f. The step rename itself ('Delete only archived and explicitly prune-safe run noise') documents the policy shift from recency-based to evidence-aware retention.",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "importance": "LOW",
+      "route_to": ["INFRA"]
+    }
+  ],
+
+  "failure_signatures": [
+    "None observed (failed=0; no '::warning::Could not delete run')."
+  ],
+
+  "research_opportunities": [
+    "Unarchived stragglers: 46 runs remain unarchived and therefore structurally undeletable by the archived-only deletion path; if Actions log retention ever threatens them, hygiene would need an explicit archive-then-prune extension gated on the same evidence/run-memory flags."
+  ],
+
+  "unarchived_census_2026_08_25T18_57Z": [
+    {"id": 32885396828, "name": "SPIDER Ox Watchdog"},
+    {"id": 32885367378, "name": "SPIDER Ox Watchdog"},
+    {"id": 32884882057, "name": "SPIDER Ox Watchdog"},
+    {"id": 32884875593, "name": "SPIDER Critical CTO Council"},
+    {"id": 32884735910, "name": "SPIDER Run Evidence Curator"},
+    {"id": 32882090239, "name": "SPIDER Run Evidence Curator"},
+    {"id": 32881834669, "name": "SPIDER Ox Watchdog"},
+    {"id": 32881828740, "name": "SPIDER Critical CTO Council"},
+    {"id": 32881730542, "name": "SPIDER Run Evidence Curator"},
+    {"id": 32881495754, "name": "SPIDER Run Evidence Curator"},
+    {"id": 32881400245, "name": "SPIDER Run Evidence Curator"},
+    {"id": 32881379858, "name": "SPIDER Run Evidence Curator"},
+    {"id": 32881379746, "name": "SPIDER Ox Watchdog"},
+    {"id": 32881374818, "name": "SPIDER Critical CTO Council"},
+    {"id": 32881359193, "name": "SPIDER Run Evidence Curator"},
+    {"id": 32881351922, "name": "SPIDER Run Evidence Curator"},
+    {"id": 32881343557, "name": "SPIDER Product Supervisor"},
+    {"id": 32881338291, "name": "SPIDER Run Evidence Curator"},
+    {"id": 32881318809, "name": "SPIDER Run Evidence Curator"},
+    {"id": 32881313083, "name": "SPIDER Ox Watchdog"},
+    {"id": 32881313020, "name": "SPIDER Run Evidence Curator"},
+    {"id": 32881307714, "name": "SPIDER Critical CTO Council"},
+    {"id": 32881296755, "name": "SPIDER Ox Watchdog"},
+    {"id": 32881285051, "name": "SPIDER Critical CTO Council"},
+    {"id": 32881219633, "name": "SPIDER Run Evidence Curator"},
+    {"id": 32881060780, "name": "SPIDER Repo Hygiene"},
+    {"id": 32880942022, "name": "SPIDER Repo Hygiene"},
+    {"id": 32880400040, "name": "SPIDER Ox Watchdog"},
+    {"id": 32880292058, "name": "SPIDER Ox Watchdog"},
+    {"id": 32879908049, "name": "SPIDER Ox Watchdog"},
+    {"id": 32879902647, "name": "SPIDER Critical CTO Council"},
+    {"id": 32879459085, "name": "SPIDER Critical CTO Council"},
+    {"id": 32878755022, "name": "SPIDER Product Supervisor"},
+    {"id": 32878445738, "name": "SPIDER Runtime Supervisor"},
+    {"id": 32877209626, "name": "SPIDER Lane Repair Supervisor"},
+    {"id": 32877140305, "name": "SPIDER Intel Supervisor"},
+    {"id": 32875585123, "name": "SPIDER Runtime Supervisor"},
+    {"id": 32875584983, "name": "SPIDER Lane Repair Supervisor"},
+    {"id": 32874922349, "name": "SPIDER Product Supervisor"},
+    {"id": 32874584221, "name": "SPIDER Runtime Supervisor"},
+    {"id": 32874583480, "name": "SPIDER Research Program Supervisor"},
+    {"id": 32873774871, "name": "SPIDER Intel Supervisor"},
+    {"id": 32870339029, "name": "SPIDER Product Supervisor"},
+    {"id": 32864697417, "name": "SPIDER Runtime Bootstrap Dedup Once"},
+    {"id": 32864608446, "name": "SPIDER Runtime Lane"},
+    {"id": 32790538553, "name": "SPIDER One-shot Run History Cleanup"}
+  ],
+
+  "already_captured_elsewhere": [
+    "Script version + policy: Git-durable at pinned commit a09d036.",
+    "Guard-version gap history: runs/32880942022.json findings."
+  ],
+
+  "distillation_complete": true,
+  "safe_to_prune": false,
+  "pruning_rationale": "Conservative false following the established sibling-hygiene retention precedent (#3/#4): although the full 46-run census is now transcribed into this record and the script is Git-durable, prior curators kept raw hygiene logs as independent timestamped manifests of Actions state, and this run additionally is the sole production witness of the first fully-hardened script version executing. Cheap retention; doubt resolved toward protection per role card."
+}

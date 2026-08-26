@@ -1,0 +1,75 @@
+{
+  "run_id": 32886741353,
+  "workflow_name": "SPIDER Run Evidence Curator",
+  "workflow_path": ".github/workflows/evidence-curator.yml",
+  "status": "completed",
+  "conclusion": "success",
+  "head_sha": "30fc94f870813bd6354b1bffbca688f23eee9095",
+  "created_at": "2026-08-25T18:56:52Z",
+  "completed_at": "2026-08-25T19:22:34Z",
+  "run_number": 15,
+  "run_attempt": 1,
+  "event": "push",
+  "head_branch": "main",
+  "display_title": "evidence: fix scope guard for nested untracked memory files",
+  "actor": "Mickalive",
+  "job_summary": {
+    "job_name": "Distill completed run knowledge into durable CTO memory",
+    "conclusion": "success",
+    "runner": "GitHub Actions 1000000792",
+    "duration_seconds_approx": 727,
+    "key_step": "Curate run evidence 19:10:35Z -> 19:22:28Z (~11m53s); all gates PASSED including the FIXED scope guard; Persist distilled memory succeeded -> commit 9e7d3ef pushed to main",
+    "selected_targets": [32880942022],
+    "artifacts": 0
+  },
+
+  "evidence_class": "OPERATIONAL",
+
+  "durable_refs": [
+    "git:9e7d3ef ('evidence: distill Actions runs 32880942022', +2377 lines, pushed to main 19:22:28Z) - THIS run's persist commit; the durable baseline of the entire recovery corpus",
+    "evidence/run-memory/DELETED_RUNS_RECOVERY.json (dual-key invariant deleted_run_count == total_deleted_runs == 102, loss counts NONE_MATERIAL=98 / UNKNOWN=4)",
+    "evidence/run-memory/deleted/*.json (102 tombstones authored by this pass)",
+    "evidence/run-memory/runs/32880942022.json (run record with safe_to_prune=false decision)",
+    "git:30fc94f (this run's own trigger commit = the scope-guard fix it successfully exercised)"
+  ],
+
+  "findings": [
+    {
+      "kind": "RESULT",
+      "summary": "THE PERSISTING THIRD PASS - first successful curator persist after three scope-guard-struck sessions (#1/#5/#6 strikes plus doomed #14 minutes earlier): selected the same cleanup-incident target 32880942022, re-executed the full special recovery under the FIXED guard (fix commit 30fc94f is this run's own trigger), passed validation and enforcement, and persisted commit 9e7d3ef (+2377 lines) which remains the durable baseline that every later batch extended. The fixed guard's expanded detection (diff+cached+ls-files --others with explicit collapse comment) demonstrably worked end-to-end on a wholly-untracked evidence/ tree.",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "importance": "MEDIUM",
+      "route_to": ["INFRA", "CTO"]
+    },
+    {
+      "kind": "OTHER",
+      "summary": "Queue dynamics datapoint for single-slot control-plane lanes: created 18:56:52Z (2s after the fix landed) but queued ~13m34s behind doomed sibling #14, starting only at 19:10:26Z - a 2-second-later dispatch became a 25.7-minute-total run purely from serialization behind a run that was going to fail. The fix therefore protected #15 but could not rescue #14 (stale checkout), see runs/32886168102.json.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "LOW",
+      "route_to": ["INFRA"]
+    },
+    {
+      "kind": "OTHER",
+      "summary": "Recovery CONTENT distilled by this pass is DUPLICATE of what is already durable: sole-manifest status of hygiene-v1 log, exhaustive Git archaeology outcome (exactly one recoverable council run 32876814203 at lab/cto@6b1f030; four UNKNOWN-loss council runs 32864023130/32864726559/32875585131/32879434960; unfetchable CTO-3 sha 4b77e70 recorded as residual uncertainty), 102-tombstone set, loss-assessment counts and the 4 actionable feed items are all represented in DELETED_RUNS_RECOVERY.json / deleted/*.json / runs/32880942022.json / CTO_FEED.json. No scientific claim was promoted; recovered ledger content stays DURABLE_UNAUDITED advisory memory.",
+      "evidence_status": "DUPLICATE",
+      "importance": "LOW",
+      "route_to": ["CTO"]
+    }
+  ],
+
+  "failure_signatures": [
+    "None in this run. For contrast, the failure signature of its predecessor (strike #7) is documented in runs/32886168102.json."
+  ],
+
+  "research_opportunities": [
+    "Backfill-selection ordering: when a recovery target has already been fully distilled by an earlier destroyed session whose outputs never persisted, selection cannot know this - no action possible locally, but a committed 'distillation attempt receipt' (even failed-persist) would let successors skip straight to re-distillation with prior leads in hand instead of rediscovering them."
+  ],
+
+  "already_captured_elsewhere": [
+    "All recovery substance: evidence/run-memory/DELETED_RUNS_RECOVERY.json, deleted/*.json, runs/32880942022.json, INDEX.md section 2a, CTO_FEED.json CF-2026-08-25-01/-02 lineage (authored by this very run's persist)."
+  ],
+
+  "distillation_complete": true,
+  "safe_to_prune": false,
+  "pruning_rationale": "Conservative false despite near-complete duplication: this log is the only continuous witness of the successful third pass (fixed-guard behavior in vivo, validation/enforcement sequence, persist mechanics of commit 9e7d3ef) and forms the attribution pair with strike-#7 log 32886168102 for the same window. Retention is cheap; doubt resolved per role card toward protection."
+}
