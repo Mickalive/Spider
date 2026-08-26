@@ -1,0 +1,72 @@
+{
+  "run_id": 32890783538,
+  "workflow_name": "SPIDER Run Evidence Curator",
+  "workflow_path": ".github/workflows/evidence-curator.yml",
+  "status": "completed",
+  "conclusion": "success",
+  "head_sha": "9e7d3ef196b3879d8d17d9b2ecb4c619e1c2879e",
+  "created_at": "2026-08-25T19:39:15Z",
+  "completed_at": "2026-08-25T19:55:45Z",
+  "run_number": 16,
+  "run_attempt": 1,
+  "event": "schedule",
+  "head_branch": "main",
+  "display_title": "SPIDER Run Evidence Curator",
+  "actor": "Mickalive",
+  "job_summary": {
+    "job_name": "Distill completed run knowledge into durable CTO memory",
+    "conclusion": "success",
+    "runner": "GitHub Actions (westcentralus)",
+    "duration_seconds_approx": 985,
+    "key_step": "OpenCode distillation session 19:40-19:55Z; persist commit c191c64 @19:55:40Z",
+    "receipt_commit": "c191c64",
+    "artifacts": 0
+  },
+
+  "evidence_class": "OPERATIONAL",
+
+  "durable_refs": [
+    "git:c191c64 ('evidence: distill Actions runs 32689298051,32776372437,32781482957,32782331702,32783797303', 2026-08-25T19:55:40Z, +508 lines across 7 files: five run records + INDEX.md + CTO_FEED.json) - THIS run's persisted output, curator-verified in git history",
+    "git:9e7d3ef (base commit this session ran on = the recovery-baseline persist of curator #15 / run 32886741353 landed 19:22:28Z; two consecutive successful curator persists chained)",
+    "evidence/run-memory/runs/{32689298051,32776372437,32781482957,32782331702,32783797303}.json + INDEX.md rows + CF-2026-08-25-04..07-era feed items (all Git-durable via c191c64)"
+  ],
+
+  "findings": [
+    {
+      "kind": "RESULT",
+      "summary": "Successful five-target backfill batch executed end-to-end on main@9e7d3ef: selected the era-straddling set (Physics #3-attempt-2 cancelled shell, Physics #4 WP-006 FALSIFIED, Intel #1 SGDR, Graph #5 empty-snapshot, Graph #6 repair PASS), wrote all five records + INDEX table rows/digest bullets + feed entries, passed its own validation INCLUDING the cleanup-incident gates (DELETED_RUNS_RECOVERY.json present with deleted_run_count>0), and persisted as c191c64. First fully-successful multi-run curator batch after the four guard-struck sessions documented in runs/32885496153.json and runs/32886168102.json.",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "importance": "MEDIUM",
+      "route_to": ["INFRA", "CTO"]
+    },
+    {
+      "kind": "OTHER",
+      "summary": "SPECIAL-RECOVERY SELECTION LOGIC WITNESSED WORKING AS REDESIGNED: env carried CLEANUP_INCIDENT_RUN=32880942022 but the dedicated recovery branch was correctly SKIPPED because DELETED_RUNS_RECOVERY.json already existed on main (persisted by #15 sixteen minutes earlier); final agent message explicitly records 'run 32880942022 was not among the supplied bundles, so no new tombstones or DELETED_RUNS_RECOVERY.json changes were needed - its incident record already exists' and that all five records carry safe_to_prune=false. Positive provenance that the d8343e74 feedback-loop fix + dual-count-key invariant behave correctly on a real dispatch.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "LOW",
+      "route_to": ["INFRA"]
+    },
+    {
+      "kind": "OTHER",
+      "summary": "Session wart (harmless, log-only): one failed Read of CTO_FEED.json at offset 80 ('Offset 80 is out of range for this file (72 lines)') during feed editing - self-corrected by re-reading via tail. Also notable: this bundle's log embeds fetched excerpts of the five target logs (e.g. TEAM PHYSICS persist-step lines attributed to 32776372437's attempt-1 empty team push @2026-08-25T00:04Z); those fragments belong to the target runs' own records and add nothing beyond them.",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "importance": "LOW",
+      "route_to": ["INFRA"]
+    }
+  ],
+
+  "failure_signatures": [
+    "None material (validation green end-to-end; only the harmless out-of-range Read above)."
+  ],
+
+  "research_opportunities": [],
+
+  "already_captured_elsewhere": [
+    "Substance of all five distilled targets: their own run records + INDEX rows + feed items, Git-durable at c191c64 and refined by later batches.",
+    "Cleanup incident 32880942022 state: DELETED_RUNS_RECOVERY.json + deleted/*.json (102 tombstones), verified intact and untouched by this pass."
+  ],
+
+  "distillation_complete": true,
+  "safe_to_prune": false,
+  "pruning_rationale": "Conservative per role card despite fully durable output: this is the persisting witness of the first post-fix five-run backfill chain (#15 -> #16 back-to-back successes on 9e7d3ef -> c191c64), of the CLEANUP_INCIDENT_RUN skip-branch behaving correctly on a live dispatch, and it embeds fetched excerpts of earlier runs' raw logs; strike-series pair-witnessing convention for curator logs plus doubt-resolves-false keeps it protected."
+}

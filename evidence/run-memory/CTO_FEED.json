@@ -1820,6 +1820,54 @@
         "INFRA",
         "CTO"
       ]
+    },
+    {
+      "id": "CF-2026-08-26-42",
+      "importance": "HIGH",
+      "kind": "RUNTIME_FAILURE_MODE",
+      "summary": "Empty-repair-round family instance with a NEW mechanism component - work delivered OUTSIDE the persist path (Intel cycle-6 repair r1, run 32890075186): the reproducer executed a complete repair session (repairs A-J, 49/49 selftests x3, evaluator dry-run correct on all three verdict branches, live confirmatory collection through P2) inside a git WORKTREE at /tmp/opencode/c6_repro; an Ox/OpenCode network error + 300s stall killed the call at ~20:24:30Z and the fresh retry session (attempt 2/6) was blocked from its own prior worktree by an external_directory permission auto-rejection at 20:32:08Z (permission-kill family instance #8, new /tmp-worktree variant extending CF-05/13/22/34/CF-2026-08-26-10); the persist step's `git add -A` in $GITHUB_WORKSPACE then found 'nothing to commit' and force-pushed a repro branch BYTE-IDENTICAL to lane base 8bfcf85 (curator-verified via ls-remote + audit parentage), destroying everything at teardown. Independent audit proved 0-of-7 round-0 fixes delivered across every ref (exhaustive git log --all --diff-filter=A), applied the master-prompt section-25 downgrade ('nothing established'), gated REVISE/INCONCLUSIVE/safe_to_integrate=false with RF-A..RF-H, and armed an explicit escalation trigger: ONE more empty Intel round => BLOCKED. Root cause is log-only (sole witness: this bundle); the gate and empty branch are durable.",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "source_run_id": 32890075186,
+      "corroborating_source_run_ids": [
+        32878215017
+      ],
+      "durable_refs": [
+        "git:origin/cycle/intel/32890075186/audit@9b0a25d (gate REVISE/INCONCLUSIVE + report, curator-refetched byte-exact)",
+        "git:origin/cycle/intel/32890075186/repro@8bfcf85 (byte-empty delivery itself)",
+        "evidence/run-memory/runs/32890075186.json (root-cause chain + failure signatures)"
+      ],
+      "actionable_next": [
+        "Persist stages in intel/graph/physics/runtime loop workflows should either forbid agent-created worktrees outside $GITHUB_WORKSPACE during claim-bearing rounds or enumerate/collect known /tmp/opencode/* worktree paths before accepting an empty delta as 'no work done'.",
+        "Honor the audited escalation trigger: if the next Intel repair round delivers another empty snapshot, route to BLOCKED/human review instead of auto-dispatching further rounds.",
+        "Give fresh retry sessions a machine-readable checkpoint (e.g. under the mounted scout path) naming any in-flight worktree/partial collection so a post-stall restart resumes instead of re-deriving."
+      ],
+      "route_to": [
+        "INFRA",
+        "RUNTIME",
+        "CTO"
+      ]
+    },
+    {
+      "id": "CF-2026-08-26-43",
+      "importance": "MEDIUM",
+      "kind": "RESEARCH_RADAR",
+      "summary": "Latent-defect catalog for the restored round-0 Unbrowse ladder instrumentation survives ONLY in a log (run 32890075186, lost session): pre-freeze analysis found five round-0 defects beyond RF-2 - (a) SHOWSTOPPER: origins passed as full URLs compared against netloc, so first-party filtering fails for EVERY host under round-0 code (route discovery yields zero routes everywhere); (b) api.demoblaze.com XHR traffic fails the first-party origin check against www.demoblaze.com origin, silently zeroing the pivotal demoblaze arm; (c) accept_demoblaze_replay implemented but never wired, so B/D passes on demoblaze were scored against A-side predicates; (d) sealed-schedule targets each needing own parameter values while round-0 passed {\"id\": 1}; (e) alias/boundary normalization (bare hosts vs full origin URLs). The auditor-sanctioned recovery path restores tree c1543f8 byte-exact with RF-2 as the ONLY sanctioned code change, so these defects ride along in any faithful restore unless independently re-found. Catalog status is lead-not-fact until re-verified against the restored tree.",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "source_run_id": 32890075186,
+      "corroborating_source_run_ids": [],
+      "durable_refs": [
+        "git:origin/cycle/intel/32878215017/repro@c1543f8 (the affected instrumentation tree, byte-exact restoration source)",
+        "evidence/run-memory/runs/32890075186.json (full defect descriptions + dry-run evaluator behavior)"
+      ],
+      "actionable_next": [
+        "Any future cycle touching the unbrowse ladder must re-verify items (a)-(e) against the restored tree BEFORE trusting its first-party discovery or demoblaze scoring paths; fixes are cheap but were never persisted."
+      ],
+      "route_to": [
+        "INTEL",
+        "GRAPH",
+        "PRODUCT",
+        "CTO"
+      ]
     }
   ]
 }

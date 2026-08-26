@@ -1,0 +1,71 @@
+{
+  "run_id": 32888414549,
+  "workflow_name": "SPIDER Ox Watchdog",
+  "workflow_path": ".github/workflows/ox-watchdog.yml",
+  "status": "completed",
+  "conclusion": "success",
+  "head_sha": "1b25f6357f1b640f304391cbb9bdd643be1240b6",
+  "created_at": "2026-08-25T19:14:14Z",
+  "completed_at": "2026-08-25T19:14:25Z",
+  "run_number": 87,
+  "run_attempt": 1,
+  "event": "workflow_run",
+  "head_branch": "main",
+  "display_title": "SPIDER Ox Watchdog",
+  "actor": "Mickalive",
+  "job_summary": {
+    "job_name": "Recover transient Ox and runner failures",
+    "conclusion": "success",
+    "runner": "GitHub Actions 1000000794 (eastus)",
+    "duration_seconds_approx": 10,
+    "key_step": "Re-run transient failures without resurrecting real or manual failures (19:14:19Z -> 19:14:23Z)",
+    "receipt_commit": null,
+    "artifacts": 0
+  },
+
+  "evidence_class": "OPERATIONAL",
+
+  "durable_refs": [
+    "git:1b25f63 (executed script version, durable on main; watchdog policy content previously transcribed in earlier watchdog records, e.g. runs/32885790118.json)",
+    "git:32866107906-referencing state: physics-loop latest completed run observed as success (the long-standing physics dormant-success anchor; see runs/32866107906.json)"
+  ],
+
+  "findings": [
+    {
+      "kind": "RESULT",
+      "summary": "Clean designed 8-workflow sweep 19:14:19-23.2Z (~10s job), ZERO recovery actions and zero ::warning emissions: graph-loop/intel-loop/product-loop/runtime-loop/cto-council all 'active run exists; watchdog does not interrupt potentially valid work'; physics-loop latest completed run 32866107906 'concluded success; no recovery' (dormant-success continuation); product-beta-repair.yml and frontier-research.yml both 'no completed run to inspect' (lifetime-zero series continues).",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "LOW",
+      "route_to": ["INFRA"]
+    },
+    {
+      "kind": "OTHER",
+      "summary": "Cross-anchor nuance: 'intel-loop.yml: active run exists' @19:14:21Z PRE-DATES the creation of Intel cycle-6 repair r1 run 32890075186 (created_at 19:31:42Z), so the active intel-loop holder at sweep time has no locally recorded identity (no distilled intel run covers 18:47-19:31Z). Observation only - holder identity unresolved locally, not evidence of any defect.",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "importance": "LOW",
+      "route_to": ["INFRA", "CTO"]
+    },
+    {
+      "kind": "OTHER",
+      "summary": "Lifetime-zero witnesses continue for the two never-completed workflows: product-beta-repair.yml ~10th witnessed sweep (series documented through #9 at 18:47:18Z in runs/32885790118.json) and frontier-research.yml ~9th (through #8 same record); counts approximate because intervening sweeps (#86-era) are not yet distilled.",
+      "evidence_status": "DUPLICATE",
+      "importance": "LOW",
+      "route_to": ["INFRA"]
+    }
+  ],
+
+  "failure_signatures": [
+    "None observed (clean tick; no rerun triggers, no log-read refusals)."
+  ],
+
+  "research_opportunities": [],
+
+  "already_captured_elsewhere": [
+    "Watchdog decision ladder + rerun-signature policy: DUPLICATE of prior verbatim transcriptions, durable at pinned head_sha 1b25f63 (e.g. runs/32885790118.json, runs/32884882057.json).",
+    "Physics dormant-success anchor: runs/32866107906.json."
+  ],
+
+  "distillation_complete": true,
+  "safe_to_prune": true,
+  "pruning_rationale": "Fully distilled clean scheduled-style sweep in the exact pattern of #74-#86 records: zero recovery actions, portfolio snapshot captured above, policy content DUPLICATE durable at pinned commit, lifetime-zero witness counts carried forward with explicit approximation caveat. No unique residue remains only in the raw log."
+}
