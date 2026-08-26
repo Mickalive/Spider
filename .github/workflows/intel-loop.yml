@@ -44,6 +44,10 @@ jobs:
       - name: Checkout accepted Intel lane
         shell: bash
         run: |
+          set -euo pipefail
+          git fetch origin main
+          git show origin/main:.github/scripts/run-opencode-with-retry.sh > /tmp/spider-run-opencode-with-retry.sh
+          chmod +x /tmp/spider-run-opencode-with-retry.sh
           if git ls-remote --exit-code --heads origin "refs/heads/$LANE_BRANCH" >/dev/null 2>&1; then
             git fetch origin "$LANE_BRANCH"
             git switch -C "$LANE_BRANCH" "origin/$LANE_BRANCH"
@@ -61,7 +65,7 @@ jobs:
         if: ${{ inputs.repair_from_run_id == '' }}
         shell: bash
         run: |
-          bash .github/scripts/run-opencode-with-retry.sh run \
+          bash /tmp/spider-run-opencode-with-retry.sh run \
             --model "$SPIDER_MODEL" \
             --agent intel_runner \
             "Execute Intel Scout cycle ${{ inputs.cycle_index }}. Your formal job description is binding. Find the highest-information SPIDER-adjacent mechanism, including Steam-like/shared capability systems and all competitors discoverable from papers/code. Select exactly one mechanism for reproduction."
@@ -98,6 +102,10 @@ jobs:
       - name: Mount Scout and accepted Intel state
         shell: bash
         run: |
+          set -euo pipefail
+          git fetch origin main
+          git show origin/main:.github/scripts/run-opencode-with-retry.sh > /tmp/spider-run-opencode-with-retry.sh
+          chmod +x /tmp/spider-run-opencode-with-retry.sh
           git fetch origin "$LANE_BRANCH"
           git switch -C intel-repro-base "origin/$LANE_BRANCH"
           SCOUT="cycle/intel/${GITHUB_RUN_ID}/scout"
@@ -124,7 +132,7 @@ jobs:
           else
             EXTRA="REPAIR reproduction round ${{ inputs.repair_round }}. Scout=/tmp/spider_intel_scout, rejected reproduction=/tmp/spider_intel_old_repro, audit=/tmp/spider_intel_old_audit. Fix every required_fixes item without weakening the preregistered test."
           fi
-          bash .github/scripts/run-opencode-with-retry.sh run \
+          bash /tmp/spider-run-opencode-with-retry.sh run \
             --model "$SPIDER_MODEL" \
             --agent intel_reproducer \
             "Intel cycle ${{ inputs.cycle_index }}. $EXTRA Your formal job description is binding."
@@ -157,6 +165,10 @@ jobs:
       - name: Mount Scout and reproduction
         shell: bash
         run: |
+          set -euo pipefail
+          git fetch origin main
+          git show origin/main:.github/scripts/run-opencode-with-retry.sh > /tmp/spider-run-opencode-with-retry.sh
+          chmod +x /tmp/spider-run-opencode-with-retry.sh
           git fetch origin "$LANE_BRANCH"
           git switch -C intel-audit-base "origin/$LANE_BRANCH"
           for kind in scout repro; do
@@ -172,7 +184,7 @@ jobs:
       - name: Run independent Intel audit
         shell: bash
         run: |
-          bash .github/scripts/run-opencode-with-retry.sh run \
+          bash /tmp/spider-run-opencode-with-retry.sh run \
             --model "$SPIDER_MODEL" \
             --agent intel_auditor \
             "Audit Intel cycle ${{ inputs.cycle_index }}, GitHub run ${GITHUB_RUN_ID}, repair round ${{ inputs.repair_round }}. Scout=/tmp/spider_intel_scout. Reproduction=/tmp/spider_intel_repro. Your formal job description and mandatory gate are binding."
@@ -235,6 +247,10 @@ jobs:
       - name: Mount accepted lane and audited snapshots
         shell: bash
         run: |
+          set -euo pipefail
+          git fetch origin main
+          git show origin/main:.github/scripts/run-opencode-with-retry.sh > /tmp/spider-run-opencode-with-retry.sh
+          chmod +x /tmp/spider-run-opencode-with-retry.sh
           git fetch origin "$LANE_BRANCH"
           git switch -C "$LANE_BRANCH" "origin/$LANE_BRANCH"
           for kind in scout repro audit; do
@@ -250,7 +266,7 @@ jobs:
       - name: Run Intel Research Director
         shell: bash
         run: |
-          bash .github/scripts/run-opencode-with-retry.sh run \
+          bash /tmp/spider-run-opencode-with-retry.sh run \
             --model "$SPIDER_MODEL" \
             --agent intel_research_director \
             "Integrate Intel cycle ${{ inputs.cycle_index }} after audit PASS. Scout=/tmp/spider_intel_scout, Repro=/tmp/spider_intel_repro, Audit=/tmp/spider_intel_audit. Your formal job description is binding. Route only audited findings and set the next Intel mission."
