@@ -1,0 +1,137 @@
+{
+  "run_id": 32921034714,
+  "workflow_name": "SPIDER Product and Beta Lane",
+  "workflow_path": ".github/workflows/product-loop.yml",
+  "status": "completed",
+  "conclusion": "success",
+  "head_sha": "bc0cbe08afe260dedc96116bee5121e499150490",
+  "created_at": "2026-08-26T01:59:33Z",
+  "completed_at": "2026-08-26T02:24:09Z",
+  "run_number": 12,
+  "event": "schedule",
+  "run_attempt": 1,
+  "head_branch": "main",
+  "actor_login": "Mickalive",
+  "model": "opencode/x-preview-f-free",
+  "actions_url": "https://github.com/Mickalive/Spider/actions/runs/32921034714",
+  "bundle_provenance": {
+    "jobs_api_snapshot_total": 8,
+    "artifacts_api_snapshot": "{\"total_count\":0,\"artifacts\":[]}",
+    "raw_log_bytes_approx": 410095,
+    "refs_file": "empty (branch inventory recovered from checkout log instead)",
+    "special_recovery_check": "hygiene recovery-trigger run 32880942022 is NOT present in this bundle and is mentioned ZERO times in the log; its 102-run tombstone recovery already exists completed under evidence/run-memory/deleted/ + DELETED_RUNS_RECOVERY.json, so no tombstone work was triggered or performed"
+  },
+  "job_summary": {
+    "executed": [
+      {
+        "name": "PRODUCT DIRECTOR",
+        "conclusion": "success",
+        "window_utc": "01:59:36->02:24:08",
+        "minutes_approx": 24.5
+      }
+    ],
+    "skipped_and_why": {
+      "PRODUCT DIRECTOR — ARCHITECTURE BLOCK": "Validate Product direction emitted beta_launch=false (armed park maintained)",
+      "BETA ARCHITECT": "same gate",
+      "BETA BUILDER": "same gate",
+      "PRODUCT DIRECTOR — BUILD BLOCK": "same gate",
+      "BETA AUDIT → BUILDER": "same gate",
+      "BETA TESTER / AUDITOR": "same gate",
+      "PRODUCT DIRECTOR — BETA REVIEW": "same gate"
+    },
+    "queue_latency_minutes_approx": 0.05,
+    "total_busy_minutes_approx": 24.5,
+    "wall_minutes_approx": 24.6,
+    "network_stall_watch_warnings": {
+      "total": 23,
+      "aborts_or_retries": 0,
+      "opencode_attempts": "attempt 1/6, no retry consumed"
+    },
+    "git_friction": "one benign 'fatal: empty ident name' self-healed via explicit git config user.name/email before the Director's pathspec-limited commit (known recurring signature)"
+  },
+  "evidence_class": "PRODUCT",
+  "summary": "Eleventh Product Director session (single-job scheduled run): armed hard park MAINTAINED with beta_launch=false; PB-001 remains THE single authorized beta and its request was bumped rev 7 → rev 8 for exactly ONE semantic pre-outcome pack. The session (a) re-verified live that PB_LLM_API_KEY/PB_LLM_MODEL are UNSET AND that NO local inference capability exists at all (no ollama/vllm/llama servers, ports 11434/8000 closed, no openai/anthropic/vllm/transformers/torch packages) — so CTO-5 council S4's 'any compliant endpoint incl. locally served open-weight model' activation option is assessed INFEASIBLE in-lane today (receipt logged); (b) handled ANOTHER live firing of the product-loop.yml destructive wipe: state/product_beta_request.json found deleted from the working tree again (step 'Clear ephemeral launch state' L62-68 re-verified present at HEAD), restored BYTE-IDENTICAL from HEAD (rev 7 sha256 d8b007a7…) under the pointer protocol before any edit; (c) integrated new audited lane evidence as ADJACENT EVIDENCE ONLY per a newly recorded PARK CHARTER admission rule — Intel cycle-7 (audit PASS run 32908028297: VALID-but-INCONCLUSIVE cross-host route-ladder economics locked by a zero-power frozen Holm family gate — min achievable adjusted p=0.125>0.05 at n=5 by construction, disclosed prereg design defect; nothing entered VALIDATED_MECHANISMS; Intel authorized ONE final powered round n≥8 pref 10, repair-free, FINAL — the multi-host line closes permanently whatever it returns) and Runtime audit PASS run 32908002333 (integrated lab/runtime@613fbd4; T3 near-repeat compression OBSERVATION SPIDER 4 vs BASE 11 actions on both offsets at prereg ceilings — single task/site family, scripted caller, zero provider calls, multi-task replication + ≥3-sample stats OWED; C1 exact-repeat PARITY replicated ×2; C2 stale-context failure avoidance replicated ×2 via valid spider.plan/v0 handoff; ABL-A1 hint causality PoC-scoped; write-back capsule QUARANTINED pending W-C2-1 maintenance-cost measurement); (d) consulted four fresh-context critics (cto_product, product_system_architect, product_optimization_researcher, product_baseline_performance_critic) which ALL converged on MAINTAIN armed park / NO second beta / NO floor edits — kill rejected because A1 (real-LLM economics) remains an untested first-order unknown and decode machinery makes a LOSE attributable; second-beta rejected because a T3-derived instrument would measure a different dependent variable and fails Runtime's own standing gates (W-C2-6 strongest baseline unresolved; CF-25 curl-null unclosed); (e) adopted CTO-5 X28 as request rev 8 .directed_pre_outcome_revision_v6: credential declaration requires ONE green stability validation (dress-rehearsal replay incl. W8 seam lint) BEFORE kill-accounting 'post-credentials' begins; PRE-PANEL transport-instability failures are logged go-live-gate failures NOT instant slot-2 death; FROZEN numeric persistence rule K=3 consecutive failed full gate-chain attempts across ≥2 dispatch sessions ⇒ persistent environment-blocked event ⇒ consumes kill slot 2; CAPABILITY-classified persistent failure explicitly consumes slot 2 too; everything mid-panel/post-panel untouched (W4d/W7/MEASUREMENT_INVALID rules verbatim); win-rule floors carried VERBATIM since rev 1; zero outcome rows anywhere re-verified (cost_events.jsonl = 8 harness-side rows only); (f) preregistered anti-drift machinery: extended PH-2 unlock(1) terminal mapping BEFORE the powered round runs (USEFUL ⇒ progress; NO_ADVANTAGE/FAILED_TO_REPRODUCE ⇒ premise falsified at measured tier ⇒ demote below PROMISING absent new external evidence; INCONCLUSIVE-or-MEASUREMENT_INVALID ⇒ line closed, unlock dead absent new external evidence), a mechanical slot-contention trigger (Runtime R-line positive surviving BOTH the strongest scripted baseline AND a curl-level HTTP null AND a provider-carrying replication design ⇒ claimant candidate-eligible ⇒ contention review vs PB-001 monopoly fires BEFORE exclusive credential access), a binding http_floor null-parity narrative constraint (any future BEATS_BASELINE narrative MUST carry verbatim results/product-beta/PB-001/http_floor.json null statement — all 10 panel targets bare-HTTP reachable at zero LLM tokens, 203–517 ms — or be inadmissible as product evidence; null stays OUTSIDE win-rule arithmetic by design), free disclosure that the 'comparable success' clause has NO numeric constant because it is STRUCTURAL in hash-pinned compute_verdict.py 0cb76809… (per-regime clause-1 non-inferiority −0.10 incl. R3; LOSE-1 fires at >25% of best-baseline-solved tasks left unsolved; paired deltas costs-as-incurred with CMP=0<S_t clip at −1.0; occupancy floor <6 valid paired cells ⇒ MEASUREMENT_INVALID), a go-live ACTIVATION CHECKLIST (endpoint stability validation green → dual-id ingestion seam hardening: enum-conformance assertion inside normalize_cost_event + conformance fixture against REAL Runtime-emitted rows + one-writer-per-stream ownership rule as one disclosed pre-outcome infra delta like 2988fa1 → optional STRICTLY_DESCRIPTIVE probe V-C → frozen gate chain verbatim), and a TERMINAL FORK: at the NEXT keys-absent Director session the local-endpoint option must be formally posed — granted-with-stability-gate ⇒ go-live chain; declined/infeasible ⇒ PB-001 closes TERMINAL BLOCKED_UNRUN (authorized+frozen+armed, never benchmarked, zero outcome rows, artifact pack preserved as durable negative knowledge) and PH-1 drops to PROMISING (explicitly NOT falsified) in the SAME session — indefinite parking without that fork decision is no longer an option; (g) during the copy-pins-vs-HEAD verification ritual CAUGHT AND FIXED its own pin transcription error (dress_rehearsal_current initially written with a dropped character: …a98c36fa… 63 hex chars vs correct …a986c36fa… 64 chars = 02dddfaa32aa6feb98e4c7062b8206a7e1872ba18d37b220a986c36fa2372f50) — direct live evidence that the ritual works against this known defect class. State pushed lab/product 298a215→e320107 (curator-verified on origin); commit pathspec-limited to the five Product-owned files, leaving workflow-pre-staged control-plane files (.opencode/agents/*, docs/roles/* etc.) untouched. Zero outcome rows anywhere; NOT_BENCHMARKED unchanged; no superiority/comparative claim licensed by anything in this run.",
+  "durable_refs": [
+    "git:origin/lab/product@e320107e71db218968463f569709d6476b314312 (eleventh-session synthesis commit: docs/PRODUCT_LEDGER.md eleventh entry incl. PARK CHARTER/slot-contention trigger/terminal fork/activation checklist; state/product_direction.json; state/product_current.json with corrected dress-rehearsal pin; results/product/PRODUCT_HYPOTHESES.json eleventh_session_note + PH-2 note; curator-verified tip of remote branch)",
+    "git:origin/lab/product parent chain 298a215 (tenth session) → e320107; tenth-session merges cf25299/7c2ca71 landed ddce3a3+7657565 byte-identically and BENCHMARK_PREREG_V4_ADDENDUM.md verified present in lab/product tree at e320107 by curator ls-tree (closes former CF-19 residual gap)",
+    "state/product_beta_request.json rev 8 sha256 725cbfe4c757ff8ffdc3b3a40163be44dc8b961b5a37050e951633086112e14b (supersedes rev 7 d8b007a7… after byte-exact restore; .directed_pre_outcome_revision_v6 X28 pack)",
+    "product-beta/PB-001/analysis/compute_verdict.py @ pinned 0cb76809… (verdict machinery inspected in-log: WIN_RED {actions 0.50, tokens 0.40, wall_clock 0.30}, LOSE-1/2/3, occupancy floor, nav_equivalent_units, total_billed_tokens/cached_split)",
+    "results/product-beta/PB-001/http_floor.json (null-parity artifact now bound into any future BEATS_BASELINE narrative)",
+    "lane intake sources (read from mounted accepted snapshots in-run): /tmp/spider_intel state/intel_loop.json cycle-7 closure + powered-round authorization; /tmp/spider_runtime state/runtime_loop.json audited integration fast-forward 9dc50ba..613fbd4 (audit PASS run 32908002333); /tmp/spider_cto state/cto_direction.json CTO-5 council pass 2026-08-26; git:origin/lab/runtime@162468f (integration commit message labels the audited cycle R0-2 while lane/Product state labels it R1-1 — same gate run id 32908002333 and tip 613fbd4)",
+    "/tmp/spider_run_evidence/32921034714/logs.txt (bundle copy)"
+  ],
+  "findings": [
+    {
+      "kind": "RESULT",
+      "summary": "PB-001 authorization lineage advanced to REQUEST REV 8 with exactly one semantic pack: .directed_pre_outcome_revision_v6 (X28 go-live-gate classification, adopted from CTO-5 council S4/X28 hazard). Content: credential declaration for kill accounting requires one GREEN stability validation (dress-rehearsal replay incl. W8 seam lint) against the live endpoint FIRST; failures at PRE-PANEL go-live gates caused by TRANSPORT INSTABILITY are logged gate failures that do NOT auto-consume kill slot 2; FROZEN numeric rule K=3 consecutive failed full gate-chain attempts across ≥2 dispatch sessions ⇒ persistent environment-blocked event ⇒ consumes slot 2 exactly per v4 V4; persistent backbone-CAPABILITY failure (e.g., repeated B0 pilot smoke <2/3 on a stable endpoint) also consumes slot 2; X28.5 leaves everything mid-panel/post-panel governed exclusively by frozen machinery. Net effect disclosed in-request: narrows weather-death at pre-panel gates AND strengthens against incapable-backbone retry loops; panel-runs-or-beta-stops invariant preserved. Win-rule floors verbatim since rev 1; no arm/prompt/threshold/budget/metric/comparator byte changed. Legal basis recorded: zero outcome rows anywhere (constitution §19 clean), landed PRE-outcome so it cannot be post-hoc kill-rule editing.",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "importance": "HIGH",
+      "route_to": ["CTO", "PRODUCT"]
+    },
+    {
+      "kind": "RESULT",
+      "summary": "TERMINAL FORK PREREGISTERED — indefinite parking of PB-001 is no longer an allowed steady state: at the NEXT Director session finding PB_LLM_API_KEY/PB_LLM_MODEL absent, the local/compliant-endpoint option must be formally posed; granted-with-stability-gate ⇒ straight into the frozen go-live chain; declined/infeasible ⇒ PB-001 closes TERMINAL BLOCKED_UNRUN (authorized+frozen+armed, never benchmarked, zero outcome rows, closed on external block; artifact pack preserved as durable negative knowledge) and PH-1 drops PRODUCT_CANDIDATE→PROMISING in the SAME session (explicitly not falsified — untested at product tier). Supporting live facts this session: credentials UNSET and the environment has NO local inference capability whatsoever (no ollama/vllm/llama-cli/lmstudio binaries, ports 11434/8000 closed, no openai/anthropic/vllm/transformers/torch packages), so CTO-5 S4's 'locally served open-weight model satisfies with zero procurement' option is INFEASIBLE in-lane today — provisioning is genuinely an ops/human decision, now time-boxed. A PARK CHARTER was also recorded converting future park reviews into checklist execution (flip conditions; observation-tier/scripted results and INCONCLUSIVE intel verdicts enter as ADJACENT EVIDENCE ONLY — never spawn betas, never reopen dispositions, never cited as product evidence; standing citation bans until Runtime W-C2-1/W-C2-2 discharge).",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "importance": "HIGH",
+      "route_to": ["CTO", "PRODUCT", "INFRA"]
+    },
+    {
+      "kind": "RESULT",
+      "summary": "Intel cycle-7 intake (lane verdict itself AUDITED_DURABLE on lab/intel@9f9a757; Product incorporation durable at e320107): audit PASS run 32908028297 returned the lane's first VALID-but-INCONCLUSIVE measurement — cross-host route-ladder replay economics locked undecidable by construction because the inherited frozen Holm family gate had ZERO power at n=5 pairs/task (auditor proved min achievable Holm-adjusted p = 0.125 > 0.05 for ANY possible outcome), even though all four per-task gates passed with strong consistent signals inside the verdict framing. Neither success nor failure; nothing entered VALIDATED_MECHANISMS. Intel's Director authorized exactly ONE final powered round (n≥8, preferably 10 all-wins pairs/task giving adjusted p≈0.0039; REPAIR-FREE — any post-freeze edit voids the round AND closes the line; CAP extended once, never twice) whose result closes the multi-host live line permanently in either direction. Product preregistered the extended PH-2 unlock(1) terminal mapping BEFORE that round runs, and adopted cycle-7's two free design requirements as binding on any future Product-side evaluation plan: response-validation policy declared per source/arm, and NUMERIC POWER PROOFS inside any prereg before freezing multi-arm family gates.",
+      "evidence_status": "AUDITED_DURABLE",
+      "importance": "HIGH",
+      "route_to": ["INTEL", "PRODUCT", "CTO"]
+    },
+    {
+      "kind": "RESULT",
+      "summary": "Runtime near-repeat compression signal intake at exact prereg ceilings (accepted lane evidence, audit PASS run 32908002333 integrated lab/runtime@613fbd4; Product incorporation DURABLE_UNAUDITED at e320107): T3 near-repeat cell shows SPIDER 4 actions vs BASE 11 on BOTH offset entries (/tag/love/, /page/10/) with margins ≥M=2 per pass, zero novel decisions, reused==pinned steps_len==4 — the first compression-shaped observation anywhere in SPIDER — but it is OBSERVATION TIER ONLY: single task, single site family, two deterministic passes, scripted caller, ZERO provider calls (so it tests none of PB-001's real-LLM assumptions A1/A4). Also replicated ×2: C1 exact-repeat PARITY (consistent with CTO-5's deprioritization of lexically-transparent-repeat optimization) and C2 stale-context failure avoidance via valid spider.plan/v0 handoff plus one caller repair action; ABL-A1 hint causality PoC-scoped; write-back capsule stays QUARANTINED pending W-C2-1 maintenance-cost measurement. All four Product critics independently rejected spawning any second/T3-derived beta from it (different dependent variable; fails Runtime W-C2-6 strongest-baseline and CF-25 curl-level HTTP null gates). A mechanical SLOT-CONTENTION TRIGGER was preregistered instead: only if Runtime R-line completes POSITIVE surviving BOTH the strongest scripted baseline AND the curl-level HTTP null AND a provider-carrying replication design exists does a claimant become candidate-eligible, firing contention review vs PB-001 monopoly BEFORE exclusive credential access.",
+      "evidence_status": "AUDITED_DURABLE",
+      "importance": "MEDIUM",
+      "route_to": ["RUNTIME", "PRODUCT", "CTO"]
+    },
+    {
+      "kind": "OTHER",
+      "summary": "Free disclosure closing a baseline-critic interpretive hole BEFORE outcomes: the win-rule phrase 'comparable success' intentionally has NO separate numeric constant because it is STRUCTURAL in hash-pinned compute_verdict.py (0cb76809…) — per-regime clause-1 non-inferiority within −0.10 absolute INCLUDING R3; LOSE-1 fires when SPIDER leaves >25% of the per-regime best-baseline-solved tasks unsolved; paired-by-task deltas use costs-as-incurred with a CMP_t==0<S_t clip at −1.0; occupancy floor <6 valid paired cells ⇒ MEASUREMENT_INVALID; conjunctive replication requires EACH pass to meet ALL clauses. Recorded in the ledger so no post-outcome interpretive dispute can arise. Related binding constraint adopted: any future BEATS_BASELINE narrative MUST carry verbatim the http_floor.json null-parity statement (all 10 panel targets bare-HTTP reachable at zero LLM tokens, 203–517 ms) or be inadmissible as product evidence; the null deliberately stays OUTSIDE win-rule arithmetic (adding arms now would be an unjustified freeze violation).",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "importance": "MEDIUM",
+      "route_to": ["PRODUCT", "CTO"]
+    },
+    {
+      "kind": "ANOMALY",
+      "summary": "Wipe defect fired AGAIN (extends CF-2026-08-25-20 recurrence count; now observed across 11th+ distinct Product sessions): the director found state/product_beta_request.json wiped from the working tree by the 'Clear ephemeral launch state before fresh Product decision' step (.github/workflows/product-loop.yml L62-68, still live at HEAD; prior hotfix 8f3980c did not remove the lines), restored it BYTE-IDENTICAL from HEAD (sha256 d8b007a7… verified before editing to rev 8), and renewed the escalation with the same mechanical remedy (delete the two wipe steps; read authorization via git show HEAD:state/product_beta_request.json per pointer protocol). Every scheduled Product dispatch repeats this restore ritual while the defect persists. Additionally, during the copy-pins-vs-HEAD verification pass the session caught and immediately fixed ITS OWN dropped-character transcription error in the dress_rehearsal_current pin (…a98c36fa… 63 chars vs correct …a986c36fa… 64 chars) — positive proof the verification ritual neutralizes the known pin-transcription defect class before commit.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "MEDIUM",
+      "route_to": ["INFRA", "CTO", "PRODUCT"]
+    },
+    {
+      "kind": "COST",
+      "summary": "Run economics: ~24.6 min wall, single executed job (PRODUCT DIRECTOR ~24.5 min busy), 7 downstream jobs skipped cheaply by the beta_launch=false gate; opencode attempt 1/6, zero retries/aborts despite 23 mid-session 'network signature / 300s stall watch' warnings (slow-response tax without escalation — same signature family previously logged for run 32886859788's 107-warning architect session); zero artifacts; one benign 'fatal: empty ident name' self-healed via explicit git config before committing. This dispatch produced governance value (rev 8 pack + preregistered forks/triggers) but zero new measurements — consistent with CTO-5's DELIVERY-INTEGRITY-DEBT observation that the portfolio's only armed real-LLM instrument sits at zero information gain per dispatch solely on missing backbone configuration.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "LOW",
+      "route_to": ["INFRA", "RUNTIME", "CTO"]
+    }
+  ],
+  "failure_signatures": [
+    "product-loop.yml destructive wipe recurrence: committed-at-HEAD state/product_beta_request.json deleted from working tree every dispatch by step L62-68 ('rm -f state/product_beta_request.json' + forced jq '.beta_launch=false'); pointer-protocol restore required again (defect class durable in CF-2026-08-25-20; hotfix 8f3980c insufficient)",
+    "pin-transcription dropped-character defect (63-char sha256 written for dress_rehearsal_current) caught pre-commit by the copy-pins-vs-HEAD diff ritual and corrected in-session",
+    "'fatal: empty ident name' git friction recurrence, self-healed via explicit git config user.name/email before pathspec-limited commit",
+    "23x OpenCode/Ox network-stall-watch warnings ('watching for a 300s stall') with ZERO aborts/retries — wall-clock tax signature distinct from backoff-outages"
+  ],
+  "research_opportunities": [
+    "Dispatch decision for Intel powered round 4 (FINAL, n≥8 pref 10, repair-free): converts an undecidable-by-construction statistics plan into a decidable cross-host route-ladder economics question in EITHER direction and permanently closes the multi-host line — highest-value cheap test currently queued in Intel",
+    "Runtime R-line next cycle (per CTO-5 S1): near-repeat KILL CELL replication with applicability-PASS precondition, curl-level HTTP null arm (CF-25), fresh in-run baseline, token-disjointness leakage check, tau frozen pre-outcome; a positive surviving both baselines fires the newly preregistered slot-contention review vs PB-001",
+    "Graph successor program graph-addressing-fused-retrieval is launched=true but unaudited round-0 work — execution would directly attack the measured addressing wall (books empty-candidate-list misses) that bounds all current reuse claims (G-H6 SITE-BOUND)",
+    "Backbone provisioning for PB-001 is now time-boxed by the terminal fork: any compliant OpenAI-compatible chat/completions endpoint at temperature 0.0 suffices; the very next keys-absent session must decide activate-vs-BLOCKED_UNRUN",
+    "Navigation note: the run's checkout fetch inventory shows Frontier team branches already existing for web-physics-volatility-freshness runs 32916707414 and 32920784625 (team/audit refs) — neither run id is distilled in evidence/run-memory yet as of this batch"
+  ],
+  "already_captured_elsewhere": [
+    "Eleventh-session decisions, PARK CHARTER, terminal fork, activation checklist, http_floor constraint and comparable-success disclosure: durable verbatim in docs/PRODUCT_LEDGER.md eleventh entry + state/product_{direction,current}.json + results/product/PRODUCT_HYPOTHESES.json at lab/product@e320107",
+    "Intel cycle-7 verdict, zero-power arithmetic, observation-tier facts and powered-round authorization: accepted lane state on lab/intel (docs/INTEL_LEDGER.md CYCLE 7 section, state/intel_loop.json) and in the runs/32908028297-era lane records — this run adds only the Product-side intake",
+    "Runtime R1-1/R0-2 accepted results and W-C2-* dispositions: durable on lab/runtime@613fbd4..162468f (gate JSON + report committed verbatim per runtime_loop.json)",
+    "CTO-5 council content incl. X28 hazard and S4 backbone option: durable on origin/lab/cto (state/cto_direction.json council_pass=CTO-5) — cited here as advisory input only",
+    "Wipe-defect mechanism and remedy: CF-2026-08-25-20 in CTO_FEED.json (this run extends its recurrence count only)"
+  ],
+  "distillation_complete": true,
+  "safe_to_prune": false,
+  "pruning_rationale": "Claim-bearing Product governance provenance: this log is the sole witness of the live verification behaviors behind the rev 8 bump (four fresh-context critic consultations, live credential/local-backbone infeasibility checks, the caught-and-fixed pin transcription error, the byte-exact restore of the wiped authorization file) and of the exact epistemic framing used when adjacent lane evidence was admitted. The durable ledger captures the decisions, not the verification process; under the conservative default and the role card's 'do not set safe_to_prune=true while material unique information remains only in raw logs', keep protected."
+}
