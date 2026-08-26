@@ -1220,6 +1220,31 @@
         "RUNTIME",
         "CTO"
       ]
+    },
+    {
+      "id": "CF-2026-08-26-18",
+      "importance": "MEDIUM",
+      "kind": "OPERATIONAL_RADAR",
+      "summary": "The Evidence Curator pipeline itself starves under event bursts: curator shells #2..#5 (runs 32881313020, 32881318809, 32881338291, 32881351922) were all cancelled zero-job during the 18:01Z burst on single-slot concurrency group spider-run-evidence-curator (cancel-in-progress:false, verified at pinned sha 0549cdf), with THREE consecutive ~1s correlations between each shell cancel stamp and the next shell creation (#2->#3 18:01:19/20Z; #3->#4 18:01:31/32Z; #4->#5 18:01:39/40Z) plus a ~10-12s trigger cadence. This matches GitHub newest-queued-wins replacement semantics already adjudicated for cto-council #6/#7 (CF-2026-08-25 family) and extends the concurrency-starvation family of CF-2026-08-26-06/-17 from lanes/watchdogs to the memory-preservation pipeline itself: curation capacity is discarded exactly when run volume peaks, creating backlog risk for run-memory completeness. Parent trigger events remain locally unattributable (lanes provably mid-flight at several creation times per watchdog #78 and the batch supervisor no-ops); cascade terminus #5 has no local successor. Nothing was ever lost (shells never started; later curator runs drained the backlog), so this is an efficiency/durability-of-process issue, not a data-loss incident.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "source_run_id": 32881318809,
+      "durable_refs": [
+        "evidence/run-memory/runs/32881313020.json",
+        "evidence/run-memory/runs/32881318809.json",
+        "evidence/run-memory/runs/32881338291.json",
+        "evidence/run-memory/runs/32881351922.json",
+        ".github/workflows/evidence-curator.yml concurrency block @ git:0549cdf",
+        "evidence/run-memory/runs/32879459085.json + runs/32879902647.json (adjudicated newest-queued-wins precedent)"
+      ],
+      "actionable_next": [
+        "Decide a trigger policy for evidence-curator.yml during bursts: debounce/coalesce workflow_run triggers, restrict bursts to scheduled batch backfill, or formally accept queued-replacement as designed free dedupe and document expected shell cadence.",
+        "One live-API adjudication pass over the 18:01Z cohort: pull parent workflow_run relationships for shells #2..#5 and check whether an unseen shell #6 existed ~18:01:44Z (settles the terminus canceller).",
+        "After adjudication closes, promote the burst-cohort records (incl. this batch supervisor witnesses 32881334442/32881343557) to safe_to_prune=true together."
+      ],
+      "route_to": [
+        "CTO",
+        "INFRA"
+      ]
     }
   ]
 }

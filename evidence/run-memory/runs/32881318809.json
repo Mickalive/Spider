@@ -1,0 +1,73 @@
+{
+  "run_id": 32881318809,
+  "workflow_name": "SPIDER Run Evidence Curator",
+  "workflow_path": ".github/workflows/evidence-curator.yml",
+  "status": "completed",
+  "conclusion": "cancelled",
+  "conclusion_interpretation": "zero-job cancellation ~13s after creation, before any distillation work began; NOT a curator failure — member of the four-shell queued-replacement cascade #2→#5 during the 18:00:56–18:06:32Z control-plane burst",
+  "head_sha": "0549cdf4b78a20099c9ffb60139b1f439c388aa6",
+  "created_at": "2026-08-25T18:01:19Z",
+  "updated_at": "2026-08-25T18:01:32Z",
+  "run_number": 3,
+  "event": "workflow_run",
+  "head_branch": "main",
+  "display_title": "SPIDER Run Evidence Curator",
+  "actor": "Mickalive (triggering_actor; workflow_run fan-out era)",
+  "jobs_total_count": 0,
+  "artifacts_total_count": 0,
+  "log_bytes": 0,
+
+  "evidence_class": "OPERATIONAL",
+
+  "durable_refs": [
+    "git:0549cdf (pinned head_sha of ALL five runs in this batch: 'cto: read run evidence memory as a research radar')",
+    "evidence-curator.yml concurrency config verified AT pinned sha: group spider-run-evidence-curator, cancel-in-progress:false, single slot",
+    "runs/32881313020.json (sibling shell #2 — first distilled member of this cascade)",
+    "runs/32879459085.json + runs/32879902647.json (adjudicated cto-council precedent establishing 'GitHub keeps only the newest queued run per group' semantics)"
+  ],
+
+  "findings": [
+      {
+        "kind": "RESULT",
+        "summary": "Zero-job cancelled shell of the curator pipeline itself: created 18:01:19Z, cancelled 18:01:32Z (~13s), jobs=[] — zero bytes distilled, zero tokens, nothing existed to lose. The backfill duty it would have started demonstrably survived: dozens of post-18:01 run records exist in evidence/run-memory/runs/ from later curator invocations.",
+        "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+        "importance": "LOW",
+        "route_to": ["INFRA"]
+      },
+      {
+        "kind": "OTHER",
+        "summary": "Cascade link #3 of a now FOUR-shell sequence: this run's cancel stamp (18:01:32Z) lands ~1s after successor shell #4's creation (18:01:31Z); the same ~1s correlation holds for #2→#3 (cancel 18:01:20 vs create 18:01:19) and #4→#5 (cancel 18:01:40 vs create 18:01:39). Under the single-slot cancel-in-progress:false group (verified at pinned sha), this repeating pattern matches GitHub's newest-queued-wins replacement semantics previously adjudicated for cto-council #6/#7 — new curator trigger events were arriving every ~10–12s during the burst, each discarding its queued predecessor. Refines sibling record 32881313020's 'canceller UNATTRIBUTABLE' stance into a systematically consistent mechanism for shells #2..#4.",
+        "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+        "importance": "MEDIUM",
+        "route_to": ["INFRA", "CTO"]
+      },
+      {
+        "kind": "OTHER",
+        "summary": "Parent trigger events remain UNIDENTIFIABLE locally: refs.txt empty, no job logs exist, and push-trigger is excluded (all shells pinned to 0549cdf; the next curator-path push d8343e7 came at 18:05:29Z per sibling record). Additional constraint from watchdog #78's sweep (18:01:23–27Z): graph/intel/product/runtime/cto-council were all still ACTIVE mid-burst, so simple 'a lane completed' attribution is not self-sufficient for the :19/:31/:39 creation times. Which parent events fanned out these three shells is unknowable without live-API data; recorded rather than guessed.",
+        "evidence_status": "LOG_ONLY_UNAUDITED",
+        "importance": "LOW",
+        "route_to": ["INFRA"]
+      }
+  ],
+
+  "failure_signatures": [
+    "None in-run (no job started). Signature class: workflow_run-triggered listener cancelled with jobs=[] during the 18:00:56–18:06:32Z control-plane iteration burst; cascade member with ~1s successor-creation correlation."
+  ],
+
+  "research_opportunities": [
+    "Curator-trigger coalescing: when multiple lane-completion events arrive within seconds, one backfill pass would cover them all — debounce or batch-coalesce workflow_run triggers for evidence-curator.yml (or accept queued-replacement BY DESIGN and treat cancelled shells as free dedupe) instead of paying N dispatch slots per burst.",
+    "Live-API adjudication task for the whole 18:01Z cohort: pull parent workflow_run relationships for curator shells #2..#6 to settle which lane completions fanned out the cascade."
+  ],
+
+  "already_captured_elsewhere": [
+    "Shell #2 anatomy + lineage: runs/32881313020.json",
+    "Newest-queued-wins mechanism adjudication: runs/32879459085.json + runs/32879902647.json (cto-council #6/#7)",
+    "Concurrency-starvation family findings: CTO_FEED CF-2026-08-26-06 (lane cron vs self-dispatch chains) and CF-2026-08-26-17 (watchdog double-fire waste)"
+  ],
+
+  "special_recovery_check": "SPECIAL RECOVERY trigger run 32880942022 was NOT among the supplied bundles; existing DELETED_RUNS_RECOVERY.json re-verified intact (102 tombstones, dual count keys equal) and untouched.",
+
+  "distillation_complete": true,
+  "safe_to_prune": false,
+  "pruning_rationale": "Conservative default: kept for symmetry with the open burst cohort while the curator-starvation finding is un-adjudicated against live API data; retention cost trivial (empty log). Candidate for safe=true together with shells #2/#4/#5 once the cascade finding closes."
+}

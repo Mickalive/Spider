@@ -1,0 +1,73 @@
+{
+  "run_id": 32881338291,
+  "workflow_name": "SPIDER Run Evidence Curator",
+  "workflow_path": ".github/workflows/evidence-curator.yml",
+  "status": "completed",
+  "conclusion": "cancelled",
+  "conclusion_interpretation": "zero-job cancellation ~9s after creation, before any distillation work began; NOT a curator failure — cascade member #4 of the queued-replacement sequence #2→#5 during the 18:00:56–18:06:32Z control-plane burst",
+  "head_sha": "0549cdf4b78a20099c9ffb60139b1f439c388aa6",
+  "created_at": "2026-08-25T18:01:31Z",
+  "updated_at": "2026-08-25T18:01:40Z",
+  "run_number": 4,
+  "event": "workflow_run",
+  "head_branch": "main",
+  "display_title": "SPIDER Run Evidence Curator",
+  "actor": "Mickalive (triggering_actor; workflow_run fan-out era)",
+  "jobs_total_count": 0,
+  "artifacts_total_count": 0,
+  "log_bytes": 0,
+
+  "evidence_class": "OPERATIONAL",
+
+  "durable_refs": [
+    "git:0549cdf (pinned head_sha of ALL five runs in this batch)",
+    "evidence-curator.yml concurrency config verified AT pinned sha: group spider-run-evidence-curator, cancel-in-progress:false, single slot",
+    "runs/32881313020.json (sibling shell #2) and runs/32881318809.json (shell #3, same batch)",
+    "runs/32879459085.json + runs/32879902647.json (adjudicated newest-queued-wins precedent)"
+  ],
+
+  "findings": [
+      {
+        "kind": "RESULT",
+        "summary": "Zero-job cancelled shell of the curator pipeline itself: created 18:01:31Z, cancelled 18:01:40Z (~9s), jobs=[] — zero bytes distilled, zero tokens, nothing existed to lose. Later curator invocations demonstrably fulfilled the backfill duty (post-18:01 records abound in evidence/run-memory/runs/).",
+        "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+        "importance": "LOW",
+        "route_to": ["INFRA"]
+      },
+      {
+        "kind": "OTHER",
+        "summary": "Middle link of the four-shell cascade with BOTH correlations intact: its own creation (18:01:31Z) precedes shell #3's cancel stamp by ~1s (18:01:32Z), and its cancel stamp (18:01:40Z) trails successor shell #5's creation by ~1s (18:01:39Z). Together with #2→#3 this makes THREE consecutive ~1s replacement correlations under the single-slot cancel-in-progress:false group — the strongest local evidence yet that new curator trigger events arrived every ~10–12s during the burst and each discarded its queued predecessor (newest-queued-wins).",
+        "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+        "importance": "MEDIUM",
+        "route_to": ["INFRA", "CTO"]
+      },
+      {
+        "kind": "OTHER",
+        "summary": "Parent trigger events UNIDENTIFIABLE locally (empty refs/logs; push-trigger excluded via pinned 0549cdf); creation at 18:01:31Z falls INSIDE watchdog #78's observed ACTIVE window for graph/intel/product/runtime/cto-council (18:01:23–27Z sweep), so simple lane-completion attribution does not close. Recorded rather than guessed.",
+        "evidence_status": "LOG_ONLY_UNAUDITED",
+        "importance": "LOW",
+        "route_to": ["INFRA"]
+      }
+  ],
+
+  "failure_signatures": [
+    "None in-run (no job started). Signature class: workflow_run-triggered listener cancelled with jobs=[] during the 18:01Z burst; cascade member with ~1s predecessor-cancel AND successor-create correlations."
+  ],
+
+  "research_opportunities": [
+    "Curator-trigger debounce/coalescing during multi-event bursts (one backfill pass covers all parent events); or formally accept queued-replacement as free dedupe and document the expected shell cadence.",
+    "Live-API adjudication of the full cascade including whether an unseen shell #6+ replaced #5 at ~18:01:44Z."
+  ],
+
+  "already_captured_elsewhere": [
+    "Shell #2 anatomy + lineage: runs/32881313020.json",
+    "Mechanism adjudication: runs/32879459085.json + runs/32879902647.json",
+    "Concurrency-starvation family: CTO_FEED CF-2026-08-26-06 / CF-2026-08-26-17"
+  ],
+
+  "special_recovery_check": "SPECIAL RECOVERY trigger run 32880942022 was NOT among the supplied bundles; existing DELETED_RUNS_RECOVERY.json re-verified intact (102 tombstones, dual count keys equal) and untouched.",
+
+  "distillation_complete": true,
+  "safe_to_prune": false,
+  "pruning_rationale": "Conservative default: kept for symmetry with the open burst cohort pending live-API adjudication; retention cost trivial (empty log). Candidate for safe=true together with shells #2/#3/#5 once the cascade finding closes."
+}
