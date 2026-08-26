@@ -1,0 +1,53 @@
+{
+  "run_id": 32880157100,
+  "workflow_name": "SPIDER Research Program Supervisor",
+  "workflow_path": ".github/workflows/program-supervisor.yml",
+  "status": "completed",
+  "conclusion": "success",
+  "head_sha": "78f1cd6d26a87e6b1938610e2b1d5ed9059e970c",
+  "created_at": "2026-08-25T17:49:33Z",
+  "updated_at": "2026-08-25T17:49:55Z",
+  "event": "schedule",
+  "run_number": 38,
+  "head_branch": "main",
+  "evidence_class": "OPERATIONAL",
+  "job_summary": {
+    "jobs": [{"name": "Supervise Director-recommended programs", "conclusion": "success", "wall": "~16s (17:49:38Z→17:49:54Z)"}],
+    "artifacts": 0
+  },
+  "durable_refs": [
+    "git:6af0d501ee09f410e1e319010b988e6384030ef6 ('state: reconcile research-program succession') on main — creates .spider/program-receipts/graph-32861557668.json (IN_FLIGHT receipt naming successor run 32880179571); push 78f1cd6..6af0d50 at 17:49:52Z",
+    "successor run dispatched: https://github.com/Mickalive/Spider/actions/runs/32880179571 (Graph Lane #9, program graph-inheritance-generalization)"
+  ],
+  "findings": [
+    {
+      "kind": "RESULT",
+      "summary": "Program succession executed for Graph: 'graph: launched graph-inheritance-generalization and recorded successor run 32880179571 as IN_FLIGHT' (URL printed in log), closing the receipt for completed-by run 32861557668. This is the supervisor-level provenance link that started the Graph Lane #9 cycle distilled in runs/32880179571.json.",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "importance": "MEDIUM",
+      "route_to": ["GRAPH", "INFRA"]
+    },
+    {
+      "kind": "NEGATIVE",
+      "summary": "'physics: no complete unambiguous next-program recommendation' at 17:49:50Z — the program-succession machinery found NO next Physics program in the lane state even though the WP-006 chain had closed with a mandatory frontier handoff obligation. Independent log corroboration that the Physics succession obligation was structurally unmet at lane level that evening; the gap was only filled later by CTO frontier charters (durable lab/cto lineage). Do not read this as a scientific claim about Physics content.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "MEDIUM",
+      "route_to": ["CTO", "PHYSICS"]
+    },
+    {
+      "kind": "OTHER",
+      "summary": "Receipt-machinery edge policy (authoritative source = workflow file at pinned head_sha): when a dispatch command returns but no successor run is visible yet, the supervisor stores a PENDING receipt 'for reconciliation, not consumption' instead of consuming it — prevents phantom-succession bookkeeping. Receipt committed to main before push (commit-before-exit pattern that several other orchestrators lack).",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "importance": "LOW",
+      "route_to": ["INFRA"]
+    }
+  ],
+  "failure_signatures": [],
+  "research_opportunities": [],
+  "already_captured_elsewhere": [
+    "The successor cycle itself (empty round-0, REVISE RF-1..RF-5) is distilled in runs/32880179571.json; the eventual program outcome (G-H6 SITE-BOUND) is durable in lab/graph + lab/cto lineage."
+  ],
+  "distillation_complete": true,
+  "safe_to_prune": true,
+  "pruning_rationale": "Completed orchestration-only supervisor (~22s). The substantive output — succession receipt commit 6af0d50 and the dispatch of run 32880179571 — is durable on main / in Actions history-independent Git refs; both unique log-only residues (the physics no-recommendation line and PENDING-receipt policy note) are transcribed above. Nothing unique remains only in the raw log."
+}

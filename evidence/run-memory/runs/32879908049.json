@@ -1,0 +1,46 @@
+{
+  "run_id": 32879908049,
+  "workflow_name": "SPIDER Ox Watchdog",
+  "workflow_path": ".github/workflows/ox-watchdog.yml",
+  "status": "completed",
+  "conclusion": "success",
+  "head_sha": "1f4f573fd2eeb589a9b99e54199dd78c18ab9dc0",
+  "created_at": "2026-08-25T17:46:58Z",
+  "updated_at": "2026-08-25T17:47:13Z",
+  "event": "workflow_run",
+  "run_number": 74,
+  "head_branch": "main",
+  "evidence_class": "OPERATIONAL",
+  "job_summary": {
+    "jobs": [{"name": "Recover transient Ox and runner failures", "conclusion": "success", "wall": "~10s (17:47:02Z→17:47:12Z)"}],
+    "artifacts": 0
+  },
+  "durable_refs": [
+    "git:1f4f573fd2eeb589a9b99e54199dd78c18ab9dc0 ('cto: autonomously charter and dispatch frontier teams') — ox-watchdog.yml version that executed, durable on main at dispatched head_sha",
+    "runs referenced by the sweep: graph-loop latest completed 32861557668 (success), physics-loop latest completed 32866107906 (success) — both durable lane history"
+  ],
+  "findings": [
+    {
+      "kind": "RESULT",
+      "summary": "Clean designed evaluation sweep over 8 workflows, zero recovery actions fired: graph-loop.yml latest completed run 32861557668 'concluded success; no recovery'; physics-loop.yml 32866107906 same; intel-loop/product-loop/runtime-loop/cto-council all had an active run ('watchdog does not interrupt potentially valid work' — those active runs include this batch's 32880179571/32880285474); meta-sync.yml AND product-beta-repair.yml each reported 'no completed run to inspect' at 17:47Z, i.e. both workflows had ZERO completed runs at that timestamp (never-run or already-pruned lineage). Timestamped lane-state snapshot, useful only as provenance.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "LOW",
+      "route_to": ["INFRA"]
+    },
+    {
+      "kind": "OTHER",
+      "summary": "Recovery policy transcribed for convenience (authoritative source = workflow file at pinned head_sha): rerun --failed ONLY when logs prove (a) cancelled-by-runner-shutdown regex signatures, (b) explicit SPIDER_TRANSIENT_OX_EXHAUSTED marker, or (c) OpenCode/Ox usage PLUS transient-network regex (network_error/ECONNRESET/EAI_AGAIN/ETIMEDOUT/429/5xx/rate-limit/service-unavailable family); refuses blind retry when logs unreadable ('refusing blind retry'); never resurrects non-infrastructure failures; never interrupts workflows with an active run.",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "importance": "LOW",
+      "route_to": ["INFRA", "RUNTIME"]
+    }
+  ],
+  "failure_signatures": [],
+  "research_opportunities": [],
+  "already_captured_elsewhere": [
+    "Watchdog policy class previously distilled in earlier supervisor/watchdog records; lane states of the referenced runs are durable in their own cycle branches/lab branches."
+  ],
+  "distillation_complete": true,
+  "safe_to_prune": true,
+  "pruning_rationale": "Completed orchestration-only watchdog sweep (~14s, zero actions taken). Every diagnostic (per-workflow verdicts incl. the two 'no completed run' observations) is transcribed above; the executed policy is durable in .github/workflows/ox-watchdog.yml at pinned commit 1f4f573 on main. No unique material remains only in the raw log."
+}
