@@ -39,6 +39,9 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          git fetch origin main
+          git show origin/main:.github/scripts/run-opencode-with-retry.sh > /tmp/spider-run-opencode-with-retry.sh
+          chmod +x /tmp/spider-run-opencode-with-retry.sh
           git fetch origin "$PRODUCT_BRANCH"
           git switch -C "$PRODUCT_BRANCH" "origin/$PRODUCT_BRANCH"
           for lane in graph physics intel runtime cto; do
@@ -100,7 +103,7 @@ jobs:
             jq '.work_launch=false' state/product_direction.json > /tmp/product_direction.json
             mv /tmp/product_direction.json state/product_direction.json
           fi
-          bash .github/scripts/run-opencode-with-retry.sh run \
+          bash /tmp/spider-run-opencode-with-retry.sh run \
             --model "$SPIDER_MODEL" \
             --agent product_director \
             "PRE-BETA ENGINEERING ROUTE. Read accepted Graph=/tmp/spider_graph, Physics=/tmp/spider_physics, Intel=/tmp/spider_intel, Runtime=/tmp/spider_runtime, CTO=/tmp/spider_cto, accepted Frontier=/tmp/spider_frontier and persistent Product state. No honest Product Beta is currently being routed by this workflow. Your binding mandate is to optimize actively, not merely analyze. If one bounded engineering package can make accepted primitives materially more agent-consumable, executable, measurable, composable or cheaper to integrate, authorize exactly one by writing a FRESH state/product_work_request.json with work_launch=true, unique work_id, concrete objective, accepted evidence refs, allowed paths, executable acceptance_tests, maximum scope, explicit dependencies and kill_condition; set state/product_direction.json.work_launch=true and next_action=ENGINEER. Prefer local SDK/CLI/API/adapters, deterministic harnesses, real cost/verification instrumentation, removal of manual steps or narrow composition of compatible accepted mechanisms. No decorative UI, no pseudo-product, no superiority claim. Use WAIT_FOR_EVIDENCE only if no bounded package has positive integration or information value."
@@ -160,6 +163,9 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          git fetch origin main
+          git show origin/main:.github/scripts/run-opencode-with-retry.sh > /tmp/spider-run-opencode-with-retry.sh
+          chmod +x /tmp/spider-run-opencode-with-retry.sh
           git fetch origin "$PRODUCT_BRANCH"
           git switch -C product-engineer-base "origin/$PRODUCT_BRANCH"
           for lane in graph physics intel runtime cto; do
@@ -188,7 +194,7 @@ jobs:
       - name: Build bounded Product work package
         shell: bash
         run: |
-          bash .github/scripts/run-opencode-with-retry.sh run \
+          bash /tmp/spider-run-opencode-with-retry.sh run \
             --model "$SPIDER_MODEL" \
             --agent product_engineer \
             "Build Product work package ${{ needs.product_engineering_director.outputs.work_id }} exactly from state/product_work_request.json. Accepted Graph=/tmp/spider_graph Physics=/tmp/spider_physics Intel=/tmp/spider_intel Runtime=/tmp/spider_runtime CTO=/tmp/spider_cto Frontier=/tmp/spider_frontier. Produce executable integration work and real acceptance tests. No decorative UI, no scientific-claim promotion, no beta superiority claim."
@@ -246,6 +252,9 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          git fetch origin main
+          git show origin/main:.github/scripts/run-opencode-with-retry.sh > /tmp/spider-run-opencode-with-retry.sh
+          chmod +x /tmp/spider-run-opencode-with-retry.sh
           git fetch origin "$PRODUCT_BRANCH"
           git switch -C product-work-audit-base "origin/$PRODUCT_BRANCH"
           rm -f state/product_work_audit.json
@@ -260,7 +269,7 @@ jobs:
       - name: Run independent Product work audit
         shell: bash
         run: |
-          bash .github/scripts/run-opencode-with-retry.sh run \
+          bash /tmp/spider-run-opencode-with-retry.sh run \
             --model "$SPIDER_MODEL" \
             --agent product_work_auditor \
             "Independently audit Product work ${{ needs.product_engineering_director.outputs.work_id }}. Exact request is on this accepted Product checkout; immutable Engineer candidate=/tmp/spider_product_work. Re-run acceptance tests and attack hidden manual steps, fake fixtures, dependency gaps, duplicated lane mechanisms, claim leakage and omitted overhead. Do not redesign it to pass."
@@ -325,6 +334,9 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          git fetch origin main
+          git show origin/main:.github/scripts/run-opencode-with-retry.sh > /tmp/spider-run-opencode-with-retry.sh
+          chmod +x /tmp/spider-run-opencode-with-retry.sh
           git fetch origin "$PRODUCT_BRANCH"
           git switch -C "$PRODUCT_BRANCH" "origin/$PRODUCT_BRANCH"
           for kind in work work-audit; do
@@ -354,7 +366,7 @@ jobs:
       - name: Integrate audited Product work into Product program
         shell: bash
         run: |
-          bash .github/scripts/run-opencode-with-retry.sh run \
+          bash /tmp/spider-run-opencode-with-retry.sh run \
             --model "$SPIDER_MODEL" \
             --agent product_director \
             "Integrate independently PASSed Product work ${{ needs.product_engineering_director.outputs.work_id }} now mounted in the accepted Product checkout. Engineer=/tmp/spider_product_work; Audit=/tmp/spider_product_work-audit. Preserve the audit claim ceiling, mark this work request consumed, clear work_launch, update Product ledger/hypotheses/state, and identify the next concrete engineering or beta question. PASS means safe to integrate, not evidence that SPIDER beats an external agent."
@@ -387,6 +399,9 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          git fetch origin main
+          git show origin/main:.github/scripts/run-opencode-with-retry.sh > /tmp/spider-run-opencode-with-retry.sh
+          chmod +x /tmp/spider-run-opencode-with-retry.sh
           git fetch origin "$PRODUCT_BRANCH"
           git switch -C "$PRODUCT_BRANCH" "origin/$PRODUCT_BRANCH"
           B="cycle/product/${GITHUB_RUN_ID}/work"
@@ -407,7 +422,7 @@ jobs:
       - name: Review blocked, failed or rejected Product work
         shell: bash
         run: |
-          bash .github/scripts/run-opencode-with-retry.sh run \
+          bash /tmp/spider-run-opencode-with-retry.sh run \
             --model "$SPIDER_MODEL" \
             --agent product_director \
             "Review Product work ${{ needs.product_engineering_director.outputs.work_id }} after Engineer status=${{ needs.product_engineer.outputs.status }} and audit gate=${{ needs.product_work_auditor.outputs.gate }}. Candidate=/tmp/spider_product_work; Audit=/tmp/spider_product_work_audit. Do not integrate rejected implementation. Preserve exact blocker/required fixes and negative evidence, mark the current request consumed or superseded, clear stale work_launch, and choose the next bounded repair/rearchitecture/evidence action. Do not claim a Product win."
