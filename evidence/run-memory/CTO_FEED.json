@@ -1558,6 +1558,52 @@
         "CTO",
         "PRODUCT"
       ]
+    },
+    {
+      "id": "CF-2026-08-26-31",
+      "importance": "MEDIUM",
+      "kind": "OPERATIONAL_PATTERN",
+      "summary": "Queue-supersession of pending scheduled slots reaches its SUCCESS-path variant (third family instance): Runtime cron slot #15 (run 32941533969, created ~48 min late for its 06:23Z slot — second delivery-drift datapoint) queued ~2h54m on single-slot spider-runtime-lane and was cancelled 63 s after lab/runtime's post-PASS continue=true relaunch commit 7f80520 (10:04:05Z), which dispatched the R2-3 successor. Prior variants: REVISE-router dispatch (slot #10, run 32921115159) and supervisor dedupe (product-loop #9). Implication: the 'periodic safety-net fresh cycle' is silently defeated by EVERY healthy Director self-relaunch — exactly when a lane is busiest/healthiest; zero-token loss so far. .spider/program-receipts/ covers graph/physics only, so runtime relaunches AND queue supersessions remain receipt-less; each attribution requires full Git archaeology. Canceller attribution is Git-timeline inference (high confidence); manual/API cancel not fully excluded without Actions API.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "source_run_id": 32941533969,
+      "durable_refs": [
+        "evidence/run-memory/runs/32941533969.json",
+        "git:origin/lab/runtime@7f80520 (continue=true relaunch amendment R2-3-C, 10:04:05Z)",
+        "git:origin/cycle/runtime/32940627441/audit (PASS round 0 gate pushed 09:10:26Z)",
+        "git:.github/workflows/runtime-loop.yml@main (cron no-dedupe + concurrency cancel-in-progress:false)",
+        "evidence/run-memory/runs/32921115159.json (family instance #2)"
+      ],
+      "actionable_next": [
+        "Decide: accept-and-document the cron-vs-relaunch supersession loss (currently benign, zero tokens) OR add a skip-if-chain-active/pending guard to cron-triggered lane slots.",
+        "Extend run-id-attributed receipts (.spider/program-receipts pattern) to Runtime Director relaunches and to queue supersessions across lanes.",
+        "Live-API adjudication (no gh token in curator environment): identity/fate of the R2-3 runtime-loop run dispatched ~10:04-10:05Z Aug 26.",
+        "Watch schedule-delivery drift: two consecutive delayed runtime cron slots (+1h37m, +48min) both died queued."
+      ],
+      "route_to": [
+        "RUNTIME",
+        "INFRA",
+        "CTO"
+      ]
+    },
+    {
+      "id": "CF-2026-08-26-32",
+      "importance": "MEDIUM",
+      "kind": "PROVENANCE_GAP",
+      "summary": "Runtime distillation backlog: SIX claim-bearing runtime-loop runs have persisted team+audit branches but NO run-memory records while their audited outcomes already drive downstream portfolio decisions (Product intake cites R2-1 FLOOR_VOID; CTO-7 GO-matrix adoption and the terminal R2-3 charter ride on R2-2's round-0 PASS): 32916020607 (R1-1 r0 REVISE RF-1..3), 32921019845 (R1-1 r1 REVISE RF-4/5), 32924286888 (R1-1 r2 PASS), 32928419260 (R2-1 r0 REVISE RF-1..3), 32933579869 (R2-1 r1 PASS), 32940627441 (R2-2 PASS round 0, first clean pass). Durable refs exist (lab/runtime@7f80520 + cycle branches), so this is a memory-layer lag, not evidence loss — but per-run costs, failure signatures and audit narratives remain un-distilled and vulnerable to Actions log pruning.",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "source_run_id": 32941533969,
+      "durable_refs": [
+        "git:origin/lab/runtime@7f80520 (state/runtime_loop.json audit_integration chain names all six runs)",
+        "git:origin/cycle/runtime/<id>/{team,audit} for each of the six ids"
+      ],
+      "actionable_next": [
+        "Supply bundles for runs 32916020607, 32921019845, 32924286888, 32928419260, 32933579869, 32940627441 at the next Evidence Curator dispatch; do not prune their raw logs before distillation.",
+        "Until distilled, treat INDEX/navigation paraphrases of these cycles as pointers only, never as claims."
+      ],
+      "route_to": [
+        "CTO",
+        "RUNTIME"
+      ]
     }
   ]
 }
