@@ -1,0 +1,23 @@
+name: SPIDER Product Engineering Kick Once
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/SPIDER_PRODUCT_ENGINEERING_KICK'
+
+permissions:
+  contents: read
+  actions: write
+
+jobs:
+  kick:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dispatch Product Engineering
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh workflow run product-engineering-loop.yml --repo "$GITHUB_REPOSITORY" --ref main
