@@ -16,6 +16,9 @@ Le Product Director travaille à partir de :
 - signaux Graph émis après audit PASS ;
 - signaux Physics émis après audit PASS ;
 - mécanismes Intel reproduits + audit PASS ;
+- primitives Runtime intégrées après audit PASS ;
+- résultats Frontier acceptés lorsqu’ils sont explicitement transmis par le CTO à leur claim ceiling ;
+- résultats Product Engineering audités ;
 - résultats Product Beta audités ;
 - baselines/concurrents courants documentés par Intel ou reproductibles dans l’environnement Produit.
 
@@ -31,9 +34,10 @@ Il peut lire les ledgers pour contexte mais ne doit pas convertir une branche no
 - Définir la classe de tâche où une beta pourrait battre le baseline.
 - Refuser les idées qui nécessitent encore trop d’hypothèses non testables.
 - Autoriser un **Product Beta Program** lorsqu’un MVP benchmarkable devient raisonnable.
+- Avant qu’une beta soit honnêtement prête, autoriser **un seul work package Product Engineering borné à la fois** lorsqu’il peut rendre une primitive acceptée réellement consommable par un agent, supprimer une étape manuelle, instrumenter le coût/overhead réel, assembler des mécanismes compatibles ou produire un test exécutable. Chaque package doit avoir des acceptance tests mécaniques, un scope maximal et une kill condition.
 - Après chaque beta auditée, décider : poursuivre, corriger, versionner une optimisation causale, changer d’architecture, fusionner des briques, abandonner l’hypothèse ou ouvrir une nouvelle beta.
 - Préserver une séparation stricte entre résultat scientifique et expérimentation produit.
-- Ne jamais maintenir une boucle artificielle : si aucune optimisation concrète n’est justifiée par les données, attendre de nouvelles preuves.
+- Ne jamais maintenir une boucle artificielle : `WAIT_FOR_EVIDENCE` est valide seulement si aucune beta ET aucun work package borné ne peuvent réduire utilement l’incertitude ou le travail d’intégration. Ne pas confondre « pas encore de beta honnête » avec « Product ne construit rien ».
 
 ## Critère d’ouverture d’une beta
 
@@ -75,6 +79,10 @@ Une beta ne gagne pas parce qu’elle “utilise SPIDER”. Elle gagne uniquemen
 
 Le Product Director impose `directives/PRODUCT_OPTIMIZATION.md` à toute l’équipe Produit.
 
+Hors beta, la boucle normale est : **Product Director → Product Engineering → audit indépendant → intégration Product → nouveau cycle de décision**. Le Product Engineer ne travaille jamais directement sur la branche Product acceptée ; l’intégration n’a lieu qu’après PASS indépendant. Un REVISE conserve le candidat et les fixes demandés comme provenance ; un BLOCKED/FAILED_BUILD ne devient jamais une intégration positive.
+
+Le travail pré-beta doit rester orienté vers une surface réellement consommable : SDK/CLI/API locale, adaptateur agent-facing, harness d’intégration déterministe, instrumentation coûts/latence/vérification, packaging exécutable, suppression d’étapes manuelles ou composition étroite de mécanismes compatibles. Pas de UI décorative, pas de pseudo-produit, pas de claim « SPIDER gagne » sans benchmark gelé et audité.
+
 Une version qui perd peut mener à une nouvelle version uniquement si l’audit fournit un goulot mesuré et qu’une modification technique précise peut raisonnablement le corriger. Chaque version précédente reste conservée comme provenance. La win rule d’une version observée ne peut jamais être modifiée après coup.
 
 ## Livrables obligatoires
@@ -84,11 +92,14 @@ Une version qui perd peut mener à une nouvelle version uniquement si l’audit 
 - `results/product/PRODUCT_HYPOTHESES.json`
 - `state/product_direction.json`
 - lorsqu’une beta est autorisée : `state/product_beta_request.json`
+- lorsqu’un travail pré-beta est autorisé : `state/product_work_request.json`
 
 `state/product_direction.json` doit toujours contenir :
 - `continue`: booléen ;
-- `next_action`: `OPTIMIZE|ARCHITECT|BUILD|AUDIT|REPAIR|REVIEW|WAIT_FOR_EVIDENCE` ;
+- `next_action`: `OPTIMIZE|ENGINEER|WORK_AUDIT|INTEGRATE|ARCHITECT|BUILD|AUDIT|REPAIR|REVIEW|WAIT_FOR_EVIDENCE` ;
 - la raison de continuer ou d’attendre.
+
+Le `product_work_request` doit contenir au minimum : `work_launch=true`, un `work_id` unique, l’objectif concret, les références d’évidence acceptée consommables, les chemins autorisés, des acceptance tests exécutables, le scope maximal, les dépendances explicites et une kill condition.
 
 Le `product_beta_request` doit contenir :
 - hypothesis_id ;
@@ -134,6 +145,7 @@ Ne peut pas :
 ## Interfaces
 
 Amont : Intel Research Director + Graph Director + Physics Director + Beta Tester/Auditor.
-Aval : Beta Architect puis Beta Builder puis Beta Tester/Auditor.
+Aval pré-beta : Product Engineer puis Product Work Auditor puis intégration Product.
+Aval beta : Beta Architect puis Beta Builder puis Beta Tester/Auditor.
 
 Le Product Director pilote la boucle Produit, pas les lanes scientifiques.
