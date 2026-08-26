@@ -1,0 +1,56 @@
+{
+  "run_id": 32877209626,
+  "workflow_name": "SPIDER Lane Repair Supervisor",
+  "workflow_path": ".github/workflows/lane-repair-supervisor.yml",
+  "status": "completed",
+  "conclusion": "success",
+  "head_sha": "373c1b0f2f3b7efd62b1cbfb63dc12c643ed0f2b",
+  "created_at": "2026-08-25T17:19:29Z",
+  "updated_at": "2026-08-25T17:19:39Z",
+  "event": "schedule",
+  "run_number": 7,
+  "head_branch": "main",
+
+  "evidence_class": "OPERATIONAL",
+
+  "job_summary": {
+    "jobs": [
+      { "name": "Recover audited REVISE cycles", "conclusion": "success", "window": "17:19:33..17:19:38Z (~5s)", "note": "checked graph/physics/runtime in sequence; all three answered 'lane already active; no duplicate repair' (17:19:35–17:19:36Z)" }
+    ],
+    "artifacts": 0
+  },
+
+  "durable_refs": [
+    "git:373c1b0f2f3b7efd62b1cbfb63dc12c643ed0f2b:.github/workflows/lane-repair-supervisor.yml (gate-driven auto-repair policy durable at the dispatched commit; curator-verified present)",
+    "/tmp/spider_run_evidence/32877209626/logs.txt (bundle copy; only remaining witness of THIS firing and its cross-lane snapshot)"
+  ],
+
+  "findings": [
+    {
+      "kind": "RESULT",
+      "summary": "Clean designed no-op across all three science lanes at 17:19:35–36Z. Useful as a timestamped cross-lane activity snapshot: graph, physics and runtime ALL had active/queued runs simultaneously (runtime repair r2 would be created five minutes later at 17:24:30Z; physics successor 32866107906 still in_progress per sibling run 32877257099 one minute later). The supervisor correctly deferred despite pending REVISE gates — auto-repair yields to live lanes by design.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "LOW",
+      "route_to": ["INFRA"]
+    },
+    {
+      "kind": "OTHER",
+      "summary": "Policy transcription for provenance: same-cycle repair dispatches carry an explicit human_note ('AUTOMATIC SAME-CYCLE RECOVERY from persisted independent audit run <id>. Repair only the exact required_fixes; preserve frozen hypotheses, preregistration, negative outcomes and provenance. This is not permission to weaken the test.') plus cycle_index/max_cycles=0/repair_from_run_id/repair_round inputs; PASS gates are left untouched ('supervisor does not modify audited evidence'); BLOCKED gates stop automatic repair; missing/invalid gate files log 'no valid machine-readable audit gate'. Durable in workflow source; transcribed here so the guarantee is greppable without fetching the file.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "LOW",
+      "route_to": ["INFRA", "RUNTIME"]
+    }
+  ],
+
+  "failure_signatures": [],
+
+  "research_opportunities": [],
+
+  "already_captured_elsewhere": [
+    "Gate-driven auto-repair protocol already described in runs/32875584983.json (same workflow) and INDEX digest; this instance adds only the three-lanes-simultaneously-active observation."
+  ],
+
+  "distillation_complete": true,
+  "safe_to_prune": true,
+  "pruning_rationale": "Completed scheduled guard; entire content = designed three-lane deferral plus policy text durable at pinned head_sha 373c1b0f and transcribed in-record. No claim-bearing branch/artifact attaches. Precedent: identical Lane Repair Supervisor no-op 32875584983 distilled prune-safe."
+}
