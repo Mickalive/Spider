@@ -1,0 +1,125 @@
+name: SPIDER Historical CTO25 Frontier One-Shot Batch
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/frontier-historical-cto25-one-shot.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: spider-historical-cto25-frontier-one-shot
+  cancel-in-progress: false
+
+env:
+  MANIFEST: directives/frontier/HISTORICAL_CTO25_ONE_SHOT_2026-08-26.json
+  TARGET_WORKFLOW: frontier-research.yml
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Validate human one-shot manifest
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f "$MANIFEST"
+          jq -e '.human_authorized==true and .one_shot==true and .auto_repair==false and .auto_continue==false' "$MANIFEST" >/dev/null
+          test "$(jq '.charters|length' "$MANIFEST")" -eq 6
+          test "$(jq '[.charters[].team_id]|unique|length' "$MANIFEST")" -eq 6
+          jq -e 'all(.charters[]; .charter_version==1 and .status=="CREATE" and (.authority_origin=="HUMAN_FORCED_HISTORICAL_CTO25_ONE_SHOT"))' "$MANIFEST" >/dev/null
+          EXPECTED='["frontier-instrument-ledger","frontier-novelty-gating","frontier-physics-controlled-web-lab","frontier-physics-exploration-budgets","frontier-physics-knowledge-volatility","frontier-scoped-delta-repair"]'
+          ACTUAL=$(jq -c '[.charters[].team_id]|sort' "$MANIFEST")
+          [[ "$ACTUAL" == "$EXPECTED" ]] || { echo "::error::Historical six-team identity mismatch: $ACTUAL"; exit 1; }
+
+      - name: Dispatch exactly one attempt per historical team
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence/frontier-one-shot
+          printf '{"batch_id":"historical-cto25-one-shot-2026-08-26","launcher_run_id":%s,"manifest":"%s","dispatches":[' "$GITHUB_RUN_ID" "$MANIFEST" > /tmp/receipt.json
+          first=1
+          while IFS= read -r charter; do
+            id=$(jq -r '.team_id' <<<"$charter")
+            version=$(jq -r '.charter_version' <<<"$charter")
+            title="Frontier ${id} v${version}"
+            branch="lab/frontier/${id}"
+            action="DISPATCHED"
+            reason="human_authorized_one_shot"
+
+            if git ls-remote --exit-code --heads origin "refs/heads/$branch" >/dev/null 2>&1; then
+              action="SKIPPED_EXISTING_BRANCH"
+              reason="one-shot branch already exists; never duplicate"
+            else
+              existing=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow "$TARGET_WORKFLOW" --limit 100 --json displayTitle,status,conclusion \
+                | jq --arg t "$title" '[.[] | select(.displayTitle==$t)] | length')
+              if [[ "$existing" -gt 0 ]]; then
+                action="SKIPPED_EXISTING_RUN"
+                reason="one-shot run already exists; never duplicate"
+              else
+                gh workflow run "$TARGET_WORKFLOW" --repo "$GITHUB_REPOSITORY" --ref main \
+                  -f team_id="$id" \
+                  -f charter_version="$version" \
+                  -f one_shot=true \
+                  -f human_manifest_path="$MANIFEST"
+              fi
+            fi
+
+            [[ $first -eq 1 ]] || printf ',' >> /tmp/receipt.json
+            first=0
+            jq -cn --arg id "$id" --argjson v "$version" --arg action "$action" --arg reason "$reason" \
+              '{team_id:$id,charter_version:$v,action:$action,reason:$reason}' >> /tmp/receipt.json
+          done < <(jq -c '.charters[]' "$MANIFEST")
+          printf '],"one_shot":true,"auto_repair":false,"auto_continue":false}\n' >> /tmp/receipt.json
+          jq . /tmp/receipt.json > evidence/frontier-one-shot/cto25-dispatch-receipt.json
+
+      - name: Verify six runs or branches materialize
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          sleep 12
+          jq -n '{checked_at:(now|todateiso8601),teams:[]}' > /tmp/verify.json
+          while IFS= read -r id; do
+            branch="lab/frontier/${id}"
+            branch_exists=false
+            if git ls-remote --exit-code --heads origin "refs/heads/$branch" >/dev/null 2>&1; then branch_exists=true; fi
+            title="Frontier ${id} v1"
+            run=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow "$TARGET_WORKFLOW" --limit 100 --json databaseId,displayTitle,status,conclusion,url,createdAt \
+              | jq -c --arg t "$title" '[.[] | select(.displayTitle==$t)] | sort_by(.createdAt) | last // {}')
+            run_id=$(jq -r '.databaseId // ""' <<<"$run")
+            run_status=$(jq -r '.status // ""' <<<"$run")
+            run_conclusion=$(jq -r '.conclusion // ""' <<<"$run")
+            run_url=$(jq -r '.url // ""' <<<"$run")
+            jq --arg id "$id" --argjson b "$branch_exists" --arg rid "$run_id" --arg status "$run_status" --arg conclusion "$run_conclusion" --arg url "$run_url" \
+              '.teams += [{team_id:$id,branch_exists:$b,run_id:$rid,status:$status,conclusion:$conclusion,url:$url}]' /tmp/verify.json > /tmp/verify.next
+            mv /tmp/verify.next /tmp/verify.json
+          done < <(jq -r '.charters[].team_id' "$MANIFEST")
+          jq . /tmp/verify.json > evidence/frontier-one-shot/cto25-launch-verification.json
+          missing=$(jq '[.teams[] | select((.run_id|length)==0 and .branch_exists==false)] | length' evidence/frontier-one-shot/cto25-launch-verification.json)
+          [[ "$missing" -eq 0 ]] || { echo "::error::$missing historical teams have neither a run nor a branch"; exit 1; }
+
+      - name: Persist one-shot dispatch receipts
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "spider-frontier-one-shot-launcher"
+          git config user.email "spider-frontier-one-shot-launcher@autonomous.local"
+          git add evidence/frontier-one-shot/cto25-dispatch-receipt.json evidence/frontier-one-shot/cto25-launch-verification.json 2>/dev/null || true
+          git diff --cached --quiet && exit 0
+          git commit -m "evidence: record CTO #25 one-shot Frontier dispatch"
+          git pull --rebase origin main
+          git push origin HEAD:main
