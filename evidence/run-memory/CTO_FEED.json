@@ -447,7 +447,7 @@
       "id": "CF-2026-08-25-20",
       "importance": "HIGH",
       "kind": "INFRA_FAILURE_MODE",
-      "summary": "product-loop.yml's destructive wipe deletes COMMITTED-AT-HEAD authorization/build state on every dispatch and survived its own hotfix: `rm -f state/product_beta_request.json` (:63), `state/product_beta_architecture.json` (:136), `state/product_beta_build.json` (:236), `state/product_beta_audit.json` (:327) are still live at main HEAD, and both director sessions in run 32886859788 confirmed 'still live even at the hotfix commit 8f3980c'. Observed damage in this single run: seventh-session Director had to detect the wiped working-tree request, verify rev 6 intact at HEAD via git show, and restore before writing rev 7; Builder found F1/F2 freeze artifacts (results/product-beta/PB-001/* incl. the hash-pinned KB) destroyed and restored them byte-exact from ddce3a3 with independent hash recomputation; eighth session found stale direction state on both mounts. Each dispatch burns agent time on detect-and-restore rituals and manufactures exactly the kind of mount-vs-durable divergence that produced CF-19. RECURRENCE: re-confirmed LIVE again in product-loop #10 (run 32908007576, ninth Director session) — working-tree request file wiped pre-session once more and restored byte-identical from HEAD (sha256 d8b007a7…d7582); escalation renewed with exact workflow lines L62–68 named as the mechanical remedy. UPDATE 2026-08-26 (run 32921034714, Product #12 eleventh session): defect struck AGAIN — request file found wiped, restored byte-identical from HEAD (d8b007a7…) under pointer protocol before the rev 8 edit; L62-68 re-verified live at HEAD once more; mechanical remedy (delete the two wipe steps) still unapplied. Every scheduled Product dispatch repeats the restore ritual. RECURRENCE #12 (run 32924291108, Product #13 twelfth session): struck AGAIN immediately before the PB-001 terminal-fork closure — request file found wiped in working tree, restored byte-identical from HEAD rev 8 (sha256 725cbfe4… match vs pin) BEFORE any decision action; L62-68 re-verified LIVE at HEAD once more; remedy still unapplied after twelve consecutive dispatch-performing restore rituals. RECURRENCE #13 (run 32941431673, Product #14 thirteenth session): struck AGAIN pre-decision and this bundle is the FIRST to capture the mechanism end-to-end — the raw log contains the destructive step's own execution output ('rm -f state/product_beta_request.json', 07:10:03Z), the agent's detection ('WIPED_OR_ABSENT', 07:11:52Z), and the byte-identical HEAD rev-8 restore (sha256 725cbfe4… match) BEFORE any decision action; thirteen consecutive dispatch-performing restore rituals, remedy still unapplied.",
+      "summary": "product-loop.yml's destructive wipe deletes COMMITTED-AT-HEAD authorization/build state on every dispatch and survived its own hotfix: `rm -f state/product_beta_request.json` (:63), `state/product_beta_architecture.json` (:136), `state/product_beta_build.json` (:236), `state/product_beta_audit.json` (:327) are still live at main HEAD, and both director sessions in run 32886859788 confirmed 'still live even at the hotfix commit 8f3980c'. Observed damage in this single run: seventh-session Director had to detect the wiped working-tree request, verify rev 6 intact at HEAD via git show, and restore before writing rev 7; Builder found F1/F2 freeze artifacts (results/product-beta/PB-001/* incl. the hash-pinned KB) destroyed and restored them byte-exact from ddce3a3 with independent hash recomputation; eighth session found stale direction state on both mounts. Each dispatch burns agent time on detect-and-restore rituals and manufactures exactly the kind of mount-vs-durable divergence that produced CF-19. RECURRENCE: re-confirmed LIVE again in product-loop #10 (run 32908007576, ninth Director session) — working-tree request file wiped pre-session once more and restored byte-identical from HEAD (sha256 d8b007a7…d7582); escalation renewed with exact workflow lines L62–68 named as the mechanical remedy. UPDATE 2026-08-26 (run 32921034714, Product #12 eleventh session): defect struck AGAIN — request file found wiped, restored byte-identical from HEAD (d8b007a7…) under pointer protocol before the rev 8 edit; L62-68 re-verified live at HEAD once more; mechanical remedy (delete the two wipe steps) still unapplied. Every scheduled Product dispatch repeats the restore ritual. RECURRENCE #12 (run 32924291108, Product #13 twelfth session): struck AGAIN immediately before the PB-001 terminal-fork closure — request file found wiped in working tree, restored byte-identical from HEAD rev 8 (sha256 725cbfe4… match vs pin) BEFORE any decision action; L62-68 re-verified LIVE at HEAD once more; remedy still unapplied after twelve consecutive dispatch-performing restore rituals. RECURRENCE #13 (run 32941431673, Product #14 thirteenth session): struck AGAIN pre-decision and this bundle is the FIRST to capture the mechanism end-to-end — the raw log contains the destructive step's own execution output ('rm -f state/product_beta_request.json', 07:10:03Z), the agent's detection ('WIPED_OR_ABSENT', 07:11:52Z), and the byte-identical HEAD rev-8 restore (sha256 725cbfe4… match) BEFORE any decision action; thirteen consecutive dispatch-performing restore rituals, remedy still unapplied. RECURRENCE #14 (run 32956423301, Product #15 fourteenth session): struck AGAIN immediately before the first changed-evidence flip firing since PB-001 closure - request file found wiped (destructive rm step echoed 10:05:23Z, agent probe absent 10:10:48Z), restored byte-identical from HEAD rev 8 (sha256 725cbfe4... match vs pin) BEFORE any decision action; wipe construct re-verified live at HEAD once more; escalation renewed. Fourteenth consecutive Product dispatch performing detect-and-restore (#12/#13/#14 across sessions 12/13/14).",
       "evidence_status": "DURABLE_UNAUDITED",
       "source_run_id": 32886859788,
       "durable_refs": [
@@ -455,7 +455,8 @@
         "git:8f3980c ('infra: hotfix Product runner to current non-destructive control plane' — did NOT remove the rm lines)",
         "git:origin/lab/product@e84b11c + d944594 (escalation receipts in PRODUCT_LEDGER.md)",
         "evidence/run-memory/runs/32886859788.json",
-        "evidence/run-memory/runs/32941431673.json"
+        "evidence/run-memory/runs/32941431673.json",
+        "git:origin/lab/product@b208340e6caec4ca32a9f026ebde0c4bc0eccfe5 (fourteenth-session receipts + ledger entry recording recurrence #14 handling)"
       ],
       "actionable_next": [
         "Replace the rm -f lines with conditional clears that never delete committed-at-HEAD files (or drop them entirely — the beta_launch validation already requires fresh direction), then verify by one full scheduled dispatch that no restore ritual occurs.",
@@ -469,7 +470,8 @@
       ],
       "recurrence_run_ids": [
         32924291108,
-        32941431673
+        32941431673,
+        32956423301
       ]
     },
     {
@@ -922,7 +924,7 @@
       "id": "CF-2026-08-26-04",
       "importance": "HIGH",
       "kind": "RESEARCH_RADAR",
-      "summary": "Intel cycle-7 closed as SPIDER's first VALID-but-INCONCLUSIVE measurement (audit PASS run 32908028297, accepted lane state lab/intel@9f9a757): cross-host route-ladder replay economics locked undecidable BY CONSTRUCTION because the inherited frozen Holm family gate had zero power at n=5 pairs/task — auditor proved min achievable Holm-adjusted p=0.125>0.05 for ANY possible outcome — while all four per-task gates passed with strong consistent signals inside explicit observation-inside-INCONCLUSIVE framing. Neither mechanism success nor failure; nothing entered VALIDATED_MECHANISMS. Intel's Director authorized exactly ONE final powered round (n≥8, preferably n=10 all-wins pairs/task giving adjusted p≈0.0039; REPAIR-FREE: any post-freeze code edit VOIDS the round AND closes the line; CAP extended exactly once) whose result permanently closes the multi-host live line in either direction (REPRODUCED_USEFUL / REPRODUCED_NO_ADVANTAGE / FAILED_TO_REPRODUCE / valid-INCONCLUSIVE / MEASUREMENT_INVALID all map to closure). Product has preregistered its PH-2 unlock(1) terminal mapping for every outcome, and adopted two binding design requirements for ANY future evaluation plan: response-validation policy declared per source/arm, and NUMERIC POWER PROOFS inside the prereg before freezing multi-arm family gates. Generalizable lesson for all lanes: an unreachable significance gate converts strong consistent data into permanent ignorance — power arithmetic belongs IN the prereg text.",
+      "summary": "Intel cycle-7 closed as SPIDER's first VALID-but-INCONCLUSIVE measurement (audit PASS run 32908028297, accepted lane state lab/intel@9f9a757): cross-host route-ladder replay economics locked undecidable BY CONSTRUCTION because the inherited frozen Holm family gate had zero power at n=5 pairs/task — auditor proved min achievable Holm-adjusted p=0.125>0.05 for ANY possible outcome — while all four per-task gates passed with strong consistent signals inside explicit observation-inside-INCONCLUSIVE framing. Neither mechanism success nor failure; nothing entered VALIDATED_MECHANISMS. Intel's Director authorized exactly ONE final powered round (n≥8, preferably n=10 all-wins pairs/task giving adjusted p≈0.0039; REPAIR-FREE: any post-freeze code edit VOIDS the round AND closes the line; CAP extended exactly once) whose result permanently closes the multi-host live line in either direction (REPRODUCED_USEFUL / REPRODUCED_NO_ADVANTAGE / FAILED_TO_REPRODUCE / valid-INCONCLUSIVE / MEASUREMENT_INVALID all map to closure). Product has preregistered its PH-2 unlock(1) terminal mapping for every outcome, and adopted two binding design requirements for ANY future evaluation plan: response-validation policy declared per source/arm, and NUMERIC POWER PROOFS inside the prereg before freezing multi-arm family gates. Generalizable lesson for all lanes: an unreachable significance gate converts strong consistent data into permanent ignorance — power arithmetic belongs IN the prereg text. UPDATE 2026-08-26 (run 32956423301 curation): RESOLVED - the FINAL powered round executed as Intel cycle-9 and returned REPRODUCED_USEFUL (gate CYCLE_32941504002 audit PASS run 32941504002, mechanism_status=VALIDATED_USEFUL at PoC ceiling with mandatory dual-collection caveat); the multi-host live line closed PERMANENTLY either way as designed, and Product's preregistered PH-2 unlock(1) decoder fired = PARTIAL (multi-host component satisfied / active-staleness component open behind clock-gated window-2) - see CF-2026-08-26-33.",
       "evidence_status": "AUDITED_DURABLE",
       "source_run_id": 32908028297,
       "durable_refs": [
@@ -931,7 +933,7 @@
         "evidence/run-memory/runs/32921034714.json (Product-side intake + extended PH-2 mapping)"
       ],
       "actionable_next": [
-        "INTEL/CTO: make the dispatch decision for powered round 4 (FINAL) — cheapest currently-queued test that converts an undecidable question into a decidable one in EITHER direction.",
+        "RESOLVED by cycle-9 (REPRODUCED_USEFUL, gate PASS run 32941504002): no further dispatch decision exists - the multi-host live line is CLOSED PERMANENTLY (once-extended CAP consumed); remaining Intel obligations are deliverables-only natural-TTL window-2 executions per committed protocols.",
         "ALL LANES: adopt the numeric-power-proof-in-prereg requirement for any multi-arm family gate before freeze (already binding for Product-side plans).",
         "PRODUCT/RUNTIME: respect standing citation bans — no cycle-7 figure may be cited outside observation-inside-INCONCLUSIVE framing until the powered round reports."
       ],
@@ -1602,6 +1604,53 @@
       ],
       "route_to": [
         "CTO",
+        "RUNTIME"
+      ]
+    },
+    {
+      "id": "CF-2026-08-26-33",
+      "importance": "HIGH",
+      "kind": "PRODUCT_GOVERNANCE",
+      "summary": "FOURTEENTH PRODUCT SESSION CONVERTED THE NO-BETA PARK FROM JUDGMENT INTO VERIFIED CONSTRUCTIVE EMPTINESS AND PROVED THE FLIP MACHINERY WORKS (Product Director fourteenth session, run 32956423301, pushed lab/product b887809->b208340, curator-verified exact 5-file diff +225/-46). Trigger: accepted Intel cycle-9 (VALIDATED_USEFUL, gate PASS run 32941504002, AUDITED_DURABLE in Intel lane) FIRED preregistered flip input (b); decoder executed mechanically => PH-2 unlock(1)=PARTIAL (component A multi-host economics SATISFIED at PoC ceiling: 48/48 interleaved valid pairs zero browser actions at output equivalence, warm-amortized medians 9.40x/5.67x/18.20x/37.46x vs scripted traversal across 3 hosts incl spec-less session-token SPA, Holm-adjusted one-sided sign p=0.000977 x4, BCa ci_low>0 x4; capture value over auto-generated declarative specs attributed to PARAMETERIZATION_CREDENTIAL_CONTENT - spec client 0.00 strict AND 0.00 under replay tolerance policy vs replay 1.00 same cell; component B active staleness OPEN behind clock-gated deliverables-only window-2 >=2026-08-27T00:30:08Z; multi-host live line CLOSED PERMANENTLY). Dual unlock requires BOTH unlock(1) full AND unlock(2) => PH-2 stays PROMISING, frozen promotion rules untouched. Under the changed-evidence rule all FOUR fresh-context critics (cto_product, product_system_architect, product_optimization_researcher, product_baseline_performance_critic) returned independent NO-BETA proofs: candidate-cell partition emptiness (every runnable comparison today = forbidden duplication of audited lane results / void-dominated oracle [login FLOOR_VOID] / floor-covered cell where BEATS impossible in principle / unavailable D1 substrate / endpoint-blocked consumer economics); break-even arithmetic K*~2-110 recurrences/route at 60-343x overhead ratios vs ~8% fleet recurrence and 50-67% blind-miss drag; ten-item minimum benchmark evidence bar for ANY future BEATS claim with items 3/6-partial/10-partial unsatisfiable today. Convergent dominant bottleneck adopted: SUBSTRATE DISCRIMINATIVENESS, not algorithms. Route-tier executor REFUSE STANDS at 2-of-3 conditions (condition 2 = Runtime R2-3 D1 writable-discriminating-substrate probe; restful-booker HTTP 418 persists). Pre-commitments filed dormant in PB001_SUCCESSOR_DERIVATION_MAP.json appendix_fourteenth_session (lifetime-economics panel sketch; WritePath-class capsule sketch - the ONLY unmeasured claim left in the residual stack - with mandatory docs-first thin-client ablation; frozen H-AUDIT spec; new flip inputs (e) R2-3/D1 PASS and (f) window-2 landing). Window-2 governance ruling issued (Product-owned): deliverables-only TTL executions are NEVER benchmark outcome rows absent explicit new authorization meeting the full evidence bar + CTO/Meta concurrence. Dispositions: PH-1 PROMISING (endpoint absent FOURTH consecutive live probe), PH-2 PROMISING (unlock(1) partial), PH-3 REJECTED permanent, PH-4 WATCH->DORMANT; beta_launch=false, continue=false WAIT_FOR_EVIDENCE, exactly-one-beta slot unspent.",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "source_run_id": 32956423301,
+      "durable_refs": [
+        "git:origin/lab/product@b208340e6caec4ca32a9f026ebde0c4bc0eccfe5 (ledger fourteenth-session entry + derivation-map appendix_fourteenth_session + state receipts)",
+        "git:origin/lab/intel results/intel/audit/CYCLE_32941504002* (accepted cycle-9 gate that fired flip input (b) - AUDITED_DURABLE in Intel lane)",
+        "evidence/run-memory/runs/32956423301.json"
+      ],
+      "actionable_next": [
+        "RUNTIME: execute the R2-3 D1 writable-discriminating-substrate probe (restful-booker credential-discriminating surface first candidate) - it simultaneously satisfies route-tier refusal condition 2, PH-2 unlock(2), and the WritePath-capsule gate; the critics identified substrate discriminativeness as THE dominant bottleneck.",
+        "CTO: note that every remaining path to a fair SPIDER-vs-agent comparison now runs through exactly two gates - a compliant LLM endpoint or a discriminating substrate host passing D1 - both outside Product's authority; either converges to ONE revival session via the derivation map.",
+        "INTEL: deliver window-2 obligations strictly as documentation-only under the new governance ruling; any attempt to convert them into benchmark rows requires explicit new authorization + CTO/Meta concurrence."
+      ],
+      "route_to": [
+        "CTO",
+        "PRODUCT",
+        "RUNTIME",
+        "INTEL"
+      ]
+    },
+    {
+      "id": "CF-2026-08-26-34",
+      "importance": "MEDIUM",
+      "kind": "PROCESS_INTEGRITY",
+      "summary": "RETROSPECTIVE BREAK-EVEN AUDIT REFUSED ON VERIFIED ARTIFACT INSUFFICIENCY BEFORE COMMISSIONING (run 32956423301): the critic-proposed zero-cost H-AUDIT (preregisterable selection rule over already-captured inventories -> held-out net verified-actions-avoided > 0 after full overhead vs equally-equipped baseline) was artifact-checked FIRST and found UNRUNNABLE - the committed PB-001 pack contains ZERO recurrence-bearing rows anywhere (kb_frozen.sqlite runs table EMPTY; cost_events.jsonl only 8 telemetry-class harness rows; toy KB 11 fragments/21 transitions). Commissioning was REFUSED rather than run on fabricated inputs; status ARMED_BEHIND_DATA with the protocol nonetheless frozen verbatim pre-outcome (fit train-half only, untouched held-out evaluation, replay arm charged FULL overhead at three pins 60x/~150x/343x, false-accepts must remain 0, substitution events 0, break-even K* reported; executable_only_when a lawfully collected recurrence-bearing artifact set exists). Companion self-discipline adopted verbatim from the optimization-researcher critic: WARM-AMORTIZED ACCOUNTING WARNING - citing the audited cycle-9 9.40x-37.46x medians as PRODUCT economics without denominator-side capture/extraction/parameterization/maintenance costs and recurrence assumptions is an accounting artifact against external frames (blind miss 50-67%, fleet savings ~8% bound, overhead ratios 60-343x). Model pattern for all lanes: verify artifact sufficiency BEFORE commissioning retrospective analyses; freeze the protocol even when execution must wait.",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "source_run_id": 32956423301,
+      "durable_refs": [
+        "git:origin/lab/product@b208340:results/product/PB001_SUCCESSOR_DERIVATION_MAP.json (h_audit_frozen_spec ARMED_BEHIND_DATA + warm_amortized_accounting_warning)",
+        "git:origin/lab/product@b208340:docs/PRODUCT_LEDGER.md (H-AUDIT honest refusal paragraph)",
+        "evidence/run-memory/runs/32956423301.json"
+      ],
+      "actionable_next": [
+        "Adopt artifact-sufficiency prechecks as standing practice before any retrospective/zero-cost analysis commissioning in any lane.",
+        "If a future producer phase lawfully collects recurrence-bearing artifacts, the frozen H-AUDIT spec executes without re-convention."
+      ],
+      "route_to": [
+        "CTO",
+        "PRODUCT",
+        "GRAPH",
         "RUNTIME"
       ]
     }
