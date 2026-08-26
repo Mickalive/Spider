@@ -1,0 +1,85 @@
+{
+  "run_id": 32881379746,
+  "workflow_name": "SPIDER Ox Watchdog",
+  "workflow_path": ".github/workflows/ox-watchdog.yml",
+  "status": "completed",
+  "conclusion": "success",
+  "conclusion_interpretation": "clean designed evaluation sweep over 8 workflows, zero recovery actions taken (~10s total; sweep executed 18:02:01–18:02:06Z)",
+  "head_sha": "b2d747eba2467e52baefef7f30b5a569e1090994",
+  "created_at": "2026-08-25T18:01:57Z",
+  "updated_at": "2026-08-25T18:02:07Z",
+  "run_number": 79,
+  "event": "workflow_run",
+  "head_branch": "main",
+  "display_title": "SPIDER Ox Watchdog",
+  "actor": "github-actions[bot] (workflow_run fan-out)",
+  "jobs_total_count": 1,
+  "artifacts_total_count": 0,
+  "job_summary": {
+    "name": "Recover transient Ox and runner failures",
+    "conclusion": "success",
+    "steps_all_success": ["Set up job", "Re-run transient failures without resurrecting real or manual failures", "Complete job"],
+    "started_at": "2026-08-25T18:02:00Z",
+    "completed_at": "2026-08-25T18:02:07Z"
+  },
+  "log_note": "FULL raw log present in bundle (119 lines): runner boilerplate (ubuntu-24.04 image 20260823.283.1, runner 2.336.0, Azure centralus), embedded recover_workflow script source, and the eight per-workflow sweep lines transcribed below. GITHUB_TOKEN permissions: Actions write / Contents read / Metadata read (rerun-capable only).",
+  "evidence_class": "OPERATIONAL",
+  "durable_refs": [
+    "git:.github/workflows/ox-watchdog.yml @ b2d747e (sweep list + full recovery policy source; curator Git-read 2026-08-26)",
+    "git:c270033587706387fd3dc6bf87db53a1f121ae4d ('cleanup: remove obsolete meta sync from watchdog', 2026-08-25T17:56:31Z — removed recover_workflow meta-sync.yml, explaining this run's 8-workflow list vs the 9-workflow sweeps #75/#76)",
+    "git:85fc194 + git:13a6ae8 (17:56:06–10Z, retired the two-lane meta-sync subsystem that made meta-sync.yml obsolete)",
+    "runs/32879908049.json + runs/32880292058.json (verbatim policy transcriptions this run duplicates)",
+    "runs/32866107906.json (the physics-loop latest-completed-success referenced by the sweep line)"
+  ],
+  "findings": [
+    {
+      "kind": "RESULT",
+      "summary": "Portfolio snapshot at 18:02Z, zero recovery actions, zero ::warning:: lines. Verbatim sweep outcomes: graph-loop.yml ACTIVE; physics-loop.yml latest completed = 32866107906 concluded success → no recovery; intel-loop.yml ACTIVE; product-loop.yml ACTIVE; product-beta-repair.yml NO completed lifetime run; runtime-loop.yml ACTIVE; cto-council.yml ACTIVE (= queued council #11, proving queue-visibility mid-burst); frontier-research.yml NO completed lifetime run.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "MEDIUM",
+      "route_to": ["INFRA", "CTO"]
+    },
+    {
+      "kind": "RESULT",
+      "summary": "Continued streak witnesses with portfolio weight: product-beta-repair.yml still had ZERO completed lifetime runs as of 18:02:04Z (4th consecutive watchdog witness after #74/#75+#76/#78) and frontier-research.yml still ZERO completed lifetime runs as of 18:02:06Z (3rd witness after #75/#78) — i.e., by this timestamp no Frontier Research Team workflow dispatch had ever completed, despite the Frontier charter architecture being authorized earlier that day. Charter-to-first-execution latency remains unpinned locally (charter landing time not in this bundle); recorded as a lead, not a claim.",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "importance": "MEDIUM",
+      "route_to": ["CTO", "INFRA"]
+    },
+    {
+      "kind": "OTHER",
+      "summary": "Sweep-list evolution now GIT-DURABLE (upgrades prior log-only era-scoping): this run swept EIGHT workflows; twin-era sweeps #75/#76 (@0843acb) swept NINE including meta-sync.yml. Direct git -S search pins the removal to commit c270033 'cleanup: remove obsolete meta sync from watchdog' at 17:56:31Z, part of the same-minute retirement of the two-lane meta-sync subsystem (85fc194, 13a6ae8). The change predates b2d747e and required no log inference.",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "importance": "LOW",
+      "route_to": ["INFRA"]
+    },
+    {
+      "kind": "OTHER",
+      "summary": "Correct non-interrupt behavior under burst load: the watchdog refused to touch every lane with an active or queued run ('active run exists; watchdog does not interrupt potentially valid work' — including queued council #11) and correctly declined recovery for physics-loop because its latest completed run was a SUCCESS. No blind retries, no reruns. Recovery ladder content (runner-shutdown regex for cancelled runs, SPIDER_TRANSIENT_OX_EXHAUSTED marker, OpenCode+transient-network signature regexes, refuse-blind-retry-on-unreadable-logs) is byte-present in the embedded script, durable at pinned head_sha b2d747e, and DUPLICATE of prior verbatim transcriptions.",
+      "evidence_status": "DUPLICATE",
+      "importance": "LOW",
+      "route_to": ["INFRA"]
+    },
+    {
+      "kind": "OTHER",
+      "summary": "Fan-out linkage: completion at 18:02:07Z precedes curator shell #8 creation at 18:02:09Z by ~2s, and SPIDER Ox Watchdog IS in evidence-curator.yml's workflow_run listen list (Git-verified @b2d747e) — strong parent candidate for shell #8 (recorded as hypothesis there). Also created the same second (18:01:57Z) as curator shell #7, consistent with another shared-parent fan-out pair like the adjudicated #78+curator#2 same-second pairing.",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "importance": "LOW",
+      "route_to": ["INFRA"]
+    }
+  ],
+  "failure_signatures": [
+    "None. Clean success. (Runner-image boilerplate and worker id archived in the bundle log only.)"
+  ],
+  "research_opportunities": [
+    "Watchdog economics continue to support the single-flight/debounce option on file (CF-2026-08-26-17): this is already the fourth clean sweep of the evening series re-observing an unchanged portfolio state within ~15 minutes."
+  ],
+  "already_captured_elsewhere": [
+    "Full recovery-policy text: runs/32879908049.json (verbatim transcription) and workflow source @b2d747e",
+    "Physics dormancy context: runs/32866107906.json + INDEX digest (WP-006 accepted, domain reopened under V3)"
+  ],
+  "special_recovery_check": "SPECIAL RECOVERY trigger run 32880942022 was NOT among the supplied bundles; DELETED_RUNS_RECOVERY.json re-verified intact instead of writing (102 tombstones, dual-key invariant OK, loss counts 98/0/4/0 unchanged). This bundle contains no deletion-manifest/hygiene lines.",
+  "distillation_complete": true,
+  "safe_to_prune": true,
+  "pruning_rationale": "Single-trigger clean sweep (not part of the CF-2026-08-26-17 twin-pair hold on #77/#78): all unique content is either transcribed above (portfolio snapshot, streak continuations, sweep-line detail) or Git-durable (recovery policy @b2d747e; meta-sync removal pinned to c270033 by direct git -S verification). The remaining raw-log delta is runner boilerplate and timestamps. Follows the #74 precedent for fully-distilled single-trigger watchdog sweeps."
+}

@@ -1,0 +1,71 @@
+{
+  "run_id": 32881374818,
+  "workflow_name": "SPIDER Critical CTO Council",
+  "workflow_path": ".github/workflows/cto-council.yml",
+  "status": "completed",
+  "conclusion": "cancelled",
+  "conclusion_interpretation": "zero-job queued-shell cancellation after ~4m41s; never started any work — NOT a council-content failure",
+  "head_sha": "b2d747eba2467e52baefef7f30b5a569e1090994",
+  "created_at": "2026-08-25T18:01:54Z",
+  "updated_at": "2026-08-25T18:06:35Z",
+  "run_number": 11,
+  "event": "push",
+  "head_branch": "main",
+  "display_title": "cto: trigger on distilled run evidence feed",
+  "actor": "Mickalive",
+  "jobs_total_count": 0,
+  "artifacts_total_count": 0,
+  "log_note": "bundle log_status='available' but logs.txt 0 bytes — EXPECTED fingerprint for a never-started run per the fetch-harness discriminator (jobs.json total_count=0 is authoritative)",
+  "evidence_class": "CTO",
+  "durable_refs": [
+    "git:b2d747eba2467e52baefef7f30b5a569e1090994 ('cto: trigger on distilled run evidence feed', 2026-08-25T18:01:51Z, touched .github/workflows/cto-council.yml only per git show --name-only — durable triggering commit = this run's substantive content)",
+    "git:.github/workflows/cto-council.yml @ b2d747e (curator Git-read 2026-08-26: push paths include evidence/run-memory/CTO_FEED.json + evidence/run-memory/INDEX.md + cto-council.yml + frontier-research.yml + chief-CTO role/agent files; concurrency group spider-critical-cto-council, cancel-in-progress:false)",
+    "git:b4dbd7098ee922f6ea435f90ffeb28d87c22f7a9 ('cto: wake only on actionable run-evidence feed', 2026-08-25T18:06:32Z, touched .github/workflows/cto-council.yml — attributed canceller push)",
+    "runs/32879459085.json + runs/32879902647.json (adjudicated #6/#7 precedent establishing newest-pending-wins attribution semantics and prune-safe policy for never-started Git-durable-trigger runs)",
+    "runs/32881379746.json (watchdog #79 independently logged 'cto-council.yml: active run exists' at 18:02:05Z — queue-visible witness)"
+  ],
+  "findings": [
+    {
+      "kind": "RESULT",
+      "summary": "Queued-shell cancellation before any job: created 18:01:54Z by push b2d747e (event=push, display title = commit subject), sat queued ~4m41s with jobs=[], cancelled 18:06:35Z. Zero tokens, zero bytes distilled, no council synthesis existed to lose.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "LOW",
+      "route_to": ["INFRA", "CTO"]
+    },
+    {
+      "kind": "OTHER",
+      "summary": "FIRST FIRING OF THE FEED-GATED COUNCIL TRIGGER died queued: the substantive intent of this run is fully durable in its triggering commit b2d747e, which wired evidence/run-memory/CTO_FEED.json (+INDEX.md and control-plane files) into cto-council.yml's push-path triggers (curator Git-verified @b2d747e). This is also the first distilled instance AFTER the anti-thrash mitigation landed — i.e., the mitigation commit's own dispatch was itself consumed by a queue supersession.",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "importance": "MEDIUM",
+      "route_to": ["CTO", "INFRA"]
+    },
+    {
+      "kind": "OTHER",
+      "summary": "Canceller ATTRIBUTED via Git timeline (strongest council attribution since shells #9/#10): push b4dbd70 ('cto: wake only on actionable run-evidence feed') landed 18:06:32:00Z touching exactly .github/workflows/cto-council.yml — which is in the council's own push-path trigger list — enqueuing a newer council run under single-slot group spider-critical-cto-council (cancel-in-progress:false, Git-verified); GitHub newest-pending-wins then stamped THIS run cancelled at 18:06:35Z, a 3-second correlation. Cleanliness check: the three intermediate burst pushes (63a66da 18:03:05Z → docs/roles/EVIDENCE_CURATOR.md; d8343e7 18:05:29Z → evidence-curator.yml; 6ab0866 18:05:52Z → repo-hygiene.yml) touch NO cto-path trigger files (file lists verified via git show --name-only), so there was exactly ONE intervening council wake. Attribution class: Git-timeline inference under Git-verified concurrency config, not a supervisor-log witness.",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "importance": "MEDIUM",
+      "route_to": ["INFRA", "CTO"]
+    },
+    {
+      "kind": "ANOMALY",
+      "summary": "Mitigation irony recorded WITHOUT overclaim: two consecutive anti-thrash wiring commits each produced a cancelled queued council shell in their own image — b2d747e spawned this run (#11, cancelled queued), and b4dbd70 spawned its own successor council run whose fate lies outside this bundle. The pattern-consistent expectation is that the b4dbd70-spawned shell either ran later or was itself superseded by 99c231b-era activity (99c231b touches repo-hygiene.yml, NOT a council trigger — so no further wake from it). Feed-gating reduces WAKE FREQUENCY but single-slot newest-pending-wins still consumes one dispatch slot per wake during bursts; single-flight/coalesce options remain on file (CF-2026-08-26-17/-18).",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "importance": "LOW",
+      "route_to": ["INFRA", "CTO"]
+    }
+  ],
+  "failure_signatures": [
+    "None in-run (no job started). Signature class: push-triggered governance listener cancelled with jobs=[] ~3s after a newer same-path push during the 17:56–18:07Z control-plane iteration burst."
+  ],
+  "research_opportunities": [
+    "Live-API enumeration would confirm whether the b4dbd70-spawned council successor executed (its outcome decides whether the feed-wired council pipeline has EVER completed post-mitigation)."
+  ],
+  "already_captured_elsewhere": [
+    "Council queue-supersession mechanism + policy: CF-2026-08-26-17/-18 context and INDEX.md digest bullets",
+    "Trigger-noise mitigation lineage: git b2d747e / b4dbd70 on main"
+  ],
+  "special_recovery_check": "SPECIAL RECOVERY trigger run 32880942022 was NOT among the supplied bundles; DELETED_RUNS_RECOVERY.json re-verified intact instead of writing (102 tombstones, dual-key invariant OK, loss counts unchanged). No deletion-manifest/hygiene lines in this bundle.",
+  "distillation_complete": true,
+  "safe_to_prune": true,
+  "pruning_rationale": "Prune-safe under the established policy from the adjudicated #6/#7 distillation (INDEX digest: 'for never-started runs whose trigger commit is Git-durable, prune-safe after distillation even without a supervisor-log witness'): the run never started, its full substance (the triggering commit) is durable on main, the canceller attribution relies on Git-verifiable facts now transcribed here, and the raw log is legitimately empty. Retention would preserve only API metadata already copied into this record."
+}
