@@ -1,0 +1,53 @@
+{
+  "checked_at": "2026-08-26T02:21:10Z",
+  "teams": [
+    {
+      "team_id": "frontier-physics-controlled-web-lab",
+      "branch_exists": true,
+      "run_id": "32922377062",
+      "status": "in_progress",
+      "conclusion": "",
+      "url": "https://github.com/Mickalive/Spider/actions/runs/32922377062"
+    },
+    {
+      "team_id": "frontier-physics-knowledge-volatility",
+      "branch_exists": true,
+      "run_id": "32922379332",
+      "status": "in_progress",
+      "conclusion": "",
+      "url": "https://github.com/Mickalive/Spider/actions/runs/32922379332"
+    },
+    {
+      "team_id": "frontier-physics-exploration-budgets",
+      "branch_exists": true,
+      "run_id": "32922381429",
+      "status": "in_progress",
+      "conclusion": "",
+      "url": "https://github.com/Mickalive/Spider/actions/runs/32922381429"
+    },
+    {
+      "team_id": "frontier-novelty-gating",
+      "branch_exists": true,
+      "run_id": "32922383485",
+      "status": "in_progress",
+      "conclusion": "",
+      "url": "https://github.com/Mickalive/Spider/actions/runs/32922383485"
+    },
+    {
+      "team_id": "frontier-scoped-delta-repair",
+      "branch_exists": true,
+      "run_id": "32922385720",
+      "status": "in_progress",
+      "conclusion": "",
+      "url": "https://github.com/Mickalive/Spider/actions/runs/32922385720"
+    },
+    {
+      "team_id": "frontier-instrument-ledger",
+      "branch_exists": true,
+      "run_id": "32922388029",
+      "status": "in_progress",
+      "conclusion": "",
+      "url": "https://github.com/Mickalive/Spider/actions/runs/32922388029"
+    }
+  ]
+}

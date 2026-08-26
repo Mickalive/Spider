@@ -1,0 +1,46 @@
+{
+  "batch_id": "historical-cto25-one-shot-2026-08-26",
+  "launcher_run_id": 32922367730,
+  "manifest": "directives/frontier/HISTORICAL_CTO25_ONE_SHOT_2026-08-26.json",
+  "dispatches": [
+    {
+      "team_id": "frontier-physics-controlled-web-lab",
+      "charter_version": 1,
+      "action": "DISPATCHED",
+      "reason": "human_authorized_one_shot"
+    },
+    {
+      "team_id": "frontier-physics-knowledge-volatility",
+      "charter_version": 1,
+      "action": "DISPATCHED",
+      "reason": "human_authorized_one_shot"
+    },
+    {
+      "team_id": "frontier-physics-exploration-budgets",
+      "charter_version": 1,
+      "action": "DISPATCHED",
+      "reason": "human_authorized_one_shot"
+    },
+    {
+      "team_id": "frontier-novelty-gating",
+      "charter_version": 1,
+      "action": "DISPATCHED",
+      "reason": "human_authorized_one_shot"
+    },
+    {
+      "team_id": "frontier-scoped-delta-repair",
+      "charter_version": 1,
+      "action": "DISPATCHED",
+      "reason": "human_authorized_one_shot"
+    },
+    {
+      "team_id": "frontier-instrument-ledger",
+      "charter_version": 1,
+      "action": "DISPATCHED",
+      "reason": "human_authorized_one_shot"
+    }
+  ],
+  "one_shot": true,
+  "auto_repair": false,
+  "auto_continue": false
+}
