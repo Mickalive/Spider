@@ -1,0 +1,87 @@
+name: SPIDER Register Product Engineering Agents Once
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/register-product-agents-once.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  register:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Register cards and product work contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          cards = Path('docs/agents/AGENT_CARDS.md')
+          t = cards.read_text()
+          additions = r'''
+
+<!-- AGENT_CARD: product_engineer status=ACTIVE_PRIMARY lane=PRODUCT -->
+## `product_engineer`
+**Status:** ACTIVE_PRIMARY · **Lane:** Product.
+**Mission:** Build one bounded pre-beta Product work package that turns accepted SPIDER primitives into something agent-facing, measurable, portable or cheaper to integrate.
+**Must read:** exact Product work request, accepted evidence inputs named by it, Product Director role, Architecture V3 and Capability Capsule contract.
+**Do:** implement only the authorized package; write code/tests/product-work results; make acceptance tests executable; expose hidden manual steps and dependencies.
+**Do not:** alter scientific verdicts or frozen betas; claim superiority; build decorative UI or speculative infrastructure without an acceptance test; edit another lane.
+**Outputs/handoff:** Product-scoped implementation plus `state/product_work_result.json` for independent audit.
+**Stop/escalate:** if the requested package cannot be built faithfully from accepted inputs, return BLOCKED/FAILED_BUILD with the exact missing dependency.
+
+<!-- AGENT_CARD: product_work_auditor status=ACTIVE_AUDITOR lane=PRODUCT -->
+## `product_work_auditor`
+**Status:** ACTIVE_AUDITOR · **Lane:** Product.
+**Mission:** Independently determine whether a bounded pre-beta Product work package is real, faithful, useful and safe to integrate.
+**Must read:** exact Product work request and candidate Product Engineer snapshot.
+**Do:** re-run tests; attack hidden manual work, fake fixtures, dependency gaps, duplicated lane mechanisms, claim leakage and unpriced overhead; issue PASS/REVISE/BLOCKED.
+**Do not:** redesign the implementation for the Engineer or reinterpret scientific evidence.
+**Outputs/handoff:** `state/product_work_audit.json` plus Product audit report/results with claim ceiling and required fixes.
+**Stop/escalate:** uncertain fidelity or usefulness is REVISE/BLOCKED, never PASS by optimism.
+'''
+          for marker in ('<!-- AGENT_CARD: product_engineer ', '<!-- AGENT_CARD: product_work_auditor '):
+              if marker in t:
+                  raise SystemExit(f'already registered: {marker}')
+          cards.write_text(t.rstrip() + additions + '\n')
+
+          role = Path('docs/roles/PRODUCT_DIRECTOR.md')
+          t = role.read_text()
+          anchor = '- Autoriser un **Product Beta Program** lorsqu’un MVP benchmarkable devient raisonnable.\n'
+          insert = anchor + '- Autoriser aussi, AVANT une beta, **un seul work package Produit borné à la fois** lorsqu’un travail d’ingénierie concret peut rendre une brique auditée consommable, instrumentable, portable ou intégrable sans contaminer un futur benchmark. Ce travail doit avoir des acceptance tests mécaniques et une kill condition ; il passe PRODUCT ENGINEER → PRODUCT WORK AUDITOR → PRODUCT DIRECTOR avant intégration.\n'
+          if anchor not in t: raise SystemExit('role anchor missing')
+          t = t.replace(anchor, insert, 1)
+          anchor = '- Ne jamais maintenir une boucle artificielle : si aucune optimisation concrète n’est justifiée par les données, attendre de nouvelles preuves.\n'
+          insert = '- Ne jamais maintenir une boucle artificielle : `WAIT_FOR_EVIDENCE` est valide seulement si aucune beta ET aucun work package borné ne peuvent réduire utilement l’incertitude ou le travail d’intégration. Ne pas confondre « pas encore de beta honnête » avec « Product ne construit rien ».\n'
+          if anchor not in t: raise SystemExit('wait anchor missing')
+          t = t.replace(anchor, insert, 1)
+          anchor = '- lorsqu’une beta est autorisée : `state/product_beta_request.json`\n'
+          insert = anchor + '- lorsqu’un travail pré-beta est autorisé : `state/product_work_request.json`\n'
+          if anchor not in t: raise SystemExit('deliverable anchor missing')
+          t = t.replace(anchor, insert, 1)
+          role.write_text(t)
+
+          agent = Path('.opencode/agents/product_director.md')
+          t = agent.read_text()
+          anchor = 'You may authorize an internal Product Beta by writing a coherent `state/product_beta_request.json` and setting `state/product_direction.json.beta_launch=true` when the evidence threshold in your contract is met. Always maintain `state/product_direction.json.continue` and `next_action` according to the Product Optimization Charter.\n'
+          insert = anchor + '\nWhen no honest beta is ready, you may still authorize exactly one bounded pre-beta Product engineering package by writing `state/product_work_request.json` with `work_launch=true`, a unique `work_id`, objective, accepted evidence refs, allowed paths, executable acceptance tests, maximum scope and kill condition. Prefer making accepted primitives agent-facing/measurable/integrable over packaging theatre. `WAIT_FOR_EVIDENCE` is allowed only when no such bounded package has positive information or integration value.\n'
+          if anchor not in t: raise SystemExit('agent anchor missing')
+          agent.write_text(t.replace(anchor, insert, 1))
+          PY
+          git diff --check
+          grep -q '<!-- AGENT_CARD: product_engineer ' docs/agents/AGENT_CARDS.md
+          grep -q '<!-- AGENT_CARD: product_work_auditor ' docs/agents/AGENT_CARDS.md
+          git config user.name spider-product-governance
+          git config user.email spider-product-governance@autonomous.local
+          git add docs/agents/AGENT_CARDS.md docs/roles/PRODUCT_DIRECTOR.md .opencode/agents/product_director.md
+          git commit -m 'product: authorize bounded pre-beta engineering loop'
+          git pull --rebase origin main
+          git push origin HEAD:main
