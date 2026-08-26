@@ -3,7 +3,7 @@
   "completed_program_run_id": "32936040591",
   "next_program_id": "graph-procedure-compilation",
   "next_program_title": "Ordered-procedure compilation from committed transition dumps as an alternative inheritance form (CTO-6 authorized; Intel R-2 reconciled)",
-  "dispatched_at": "2026-08-26T11:19:02Z",
+  "dispatched_at": "2026-08-26T13:27:49Z",
   "receipt_status": "IN_FLIGHT",
-  "successor_run_id": 32962709082
+  "successor_run_id": 32974347082
 }
