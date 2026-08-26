@@ -1,0 +1,23 @@
+name: SPIDER Program Supervisor Kick Once
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/SPIDER_PROGRAM_SUPERVISOR_KICK'
+
+permissions:
+  contents: read
+  actions: write
+
+jobs:
+  kick:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dispatch program supervisor
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh workflow run program-supervisor.yml --repo "$GITHUB_REPOSITORY" --ref main
