@@ -1,0 +1,41 @@
+{
+ "run_id": 32878445738,
+ "workflow_name": "SPIDER Runtime Supervisor",
+ "workflow_path": ".github/workflows/runtime-supervisor.yml (curator-verified present at pinned head_sha)",
+ "status": "completed",
+ "conclusion": "success",
+ "head_sha": "373c1b0f2f3b7efd62b1cbfb63dc12c643ed0f2b",
+ "created_at": "2026-08-25T17:32:07Z",
+ "updated_at": "2026-08-25T17:32:13Z",
+ "event": "schedule",
+ "run_number": 5,
+ "head_branch": "main",
+ "evidence_class": "OPERATIONAL",
+ "job_summary": {
+  "jobs": [
+   {"name": "Ensure Runtime continuity", "conclusion": "success", "window": "17:32:10..17:32:12Z (~2s; whole run 6s)"}
+  ],
+  "artifacts": 0
+ },
+ "durable_refs": [
+  "git:373c1b0f2f3b7efd62b1cbfb63dc12c643ed0f2b:.github/workflows/runtime-supervisor.yml (guard policy durable at the dispatched commit; curator-verified)",
+  "/tmp/spider_run_evidence/32878445738/logs.txt (bundle copy)"
+ ],
+ "findings": [
+  {
+   "kind": "RESULT",
+   "summary": "Clean designed no-op: 'Runtime already active; no duplicate dispatch.' at 17:32:11Z — a runtime-loop run was in flight, so the scheduled supervisor exited before any state/continue-flag checks. Fifth firing of this guard; identical behavior distilled in runs/32875585123.json (#4) and runs/32874584221.json.",
+   "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+   "importance": "LOW",
+   "route_to": ["INFRA"]
+  }
+ ],
+ "failure_signatures": [],
+ "research_opportunities": [],
+ "already_captured_elsewhere": [
+  "Full five-branch guard policy (active-run dedupe; refuse-after-non-success; lab/runtime existence check; continue-flag gate; cycle_index=successful-count+1) already transcribed in runs/32875585123.json and runs/32874583480.json records + INDEX digest — DUPLICATE for policy content; this record adds only the timestamped fifth firing."
+ ],
+ "distillation_complete": true,
+ "safe_to_prune": true,
+ "pruning_rationale": "Completed scheduled guard; entire log content = script text durable at pinned head_sha plus one output line transcribed here. No branch/artifact attaches; nothing unique would be lost. Precedent: identical Runtime Supervisor no-ops distilled prune-safe."
+}

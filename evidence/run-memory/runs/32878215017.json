@@ -1,0 +1,108 @@
+{
+ "run_id": 32878215017,
+ "workflow_name": "SPIDER Intel Research Lane",
+ "workflow_path": ".github/workflows/intel-loop.yml (curator-verified present at pinned head_sha)",
+ "status": "completed",
+ "conclusion": "success",
+ "head_sha": "373c1b0f2f3b7efd62b1cbfb63dc12c643ed0f2b",
+ "created_at": "2026-08-25T17:29:47Z",
+ "updated_at": "2026-08-25T19:31:45Z",
+ "event": "workflow_dispatch",
+ "run_number": 8,
+ "head_branch": "main",
+ "evidence_class": "INTEL",
+ "job_summary": {
+  "jobs": [
+   {"name": "INTEL SCOUT", "conclusion": "success", "window": "17:29:54..17:58:39Z (~28m45s)"},
+   {"name": "INTEL REPRODUCER", "conclusion": "success", "window": "17:58:43..19:19:45Z (~81m)"},
+   {"name": "INTEL INDEPENDENT AUDITOR", "conclusion": "success", "window": "19:19:48..19:31:35Z (~11m47s)"},
+   {"name": "INTEL AUDIT → REPRODUCER (repair router)", "conclusion": "success", "window": "~5s; dispatched repair r1 = run 32890075186 (cycle_index=6, repair_from_run_id=32878215017, repair_round=1)"},
+   {"name": "INTEL RESEARCH DIRECTOR", "conclusion": "skipped", "note": "by design on non-PASS gate"}
+  ],
+  "artifacts": 0,
+  "wall_clock": "~2h02m total"
+ },
+ "durable_refs": [
+  "git:origin/cycle/intel/32878215017/scout@a74fdb027a3698a7d5e681c8d255e0a49af62350 (scout snapshot: reports/intel/scout/cycle6_scout_report.md, results/intel/scout/cycle6_findings.json, state/intel_candidate.json; curator-verified ref exists on origin)",
+  "git:origin/cycle/intel/32878215017/repro@c1543f80993bbe87e45f504f69694832df3f7587 (round-0 instrumentation: 18 files/+4166 lines under intel/experiments/unbrowse_ladder_multihost/; curator-verified ref exists on origin; later restored byte-exact into repair lineage per state/intel_reproduction.json RF-A_restore, 18/18 blob-hash verified)",
+  "git:origin/cycle/intel/32878215017/audit@9f344ce4ca7f4dfb6ffdc3c3ac157a6bfc624a85 (reports/intel/audit/cycle6_run32878215017_INTEL_AUDIT.md + results/intel/audit/CYCLE_32878215017_INTEL_GATE.json, gate REVISE/INCONCLUSIVE/safe_to_integrate=false/RF-1..RF-7; curator-verified ref exists on origin)",
+  "git:origin/lab/intel@9f9a757 (cycle-6 director integration accepting audited invalid-run documentation — audit PASS run 32897120087, mechanism_status MEASUREMENT_INVALID, ceiling NONE_THIS_RUN, zero mechanism additions) — the eventual audited resolution of the cycle this run opened",
+  "/tmp/spider_run_evidence/32878215017/logs.txt (bundle copy; sole witness of in-run selftest failure sequence and several scout sweep details)"
+ ],
+ "findings": [
+  {
+   "kind": "RESULT",
+   "summary": "Intel cycle 6 round 0 (mission set by cycle-5 acceptance: multi-host scope stress of the accepted unbrowse-route-capture-replay-ladder with >=4 hosts, natural-TTL window, induced schema-mutation detection quality + new GENERATED_SPEC_NULL comparator). SCOUT selected the mission after a binding three-context pre-selection consultation (cto_intel CONFIRM_SELECTION with re-weighting toward mutation-quality + spec-less regime; ecosystem_scout 10 discoveries; benchmark critic 10 attack findings all incorporated: two-phase prereg w/ frozen roster, host×arm eligibility matrix, access-tier taxonomy, canonicalized equivalence gates, positive-differential STALE_TTL attribution, de-circularized mutation fixtures w/ FPR measurement, BCa bootstrap + mixed-effects stats, mechanical verdict rules). Live probes confirmed >=4 qualifying hosts across 4 auth styles: httpbin.org, petstore.swagger.io (public OpenAPI ground truth), demoblaze SPA → api.demoblaze.com (pivotal spec-less session-token regime), restful-booker.herokuapp.com (token auth; excluded from TTL claims — data resets ~10 min). REPRODUCER delivered INSTRUMENTATION ONLY (18 code files, +4166 lines); AUDITOR gate: REVISE / mechanism_status INCONCLUSIVE / safe_to_integrate=false / 7 required fixes. Director skipped by design.",
+   "evidence_status": "DURABLE_UNAUDITED",
+   "importance": "HIGH",
+   "route_to": ["CTO", "INTEL"]
+  },
+  {
+   "kind": "NEGATIVE",
+   "summary": "DELIVERY-DEFECT CLASS (new named instance): instrumentation shipped WITHOUT its preregistration — repro code references intel/prereg/cycle6_unbrowse_ladder_multihost_prereg.md at least 8 times ('Implements the preregistered protocol exactly', 'committed into the prereg BEFORE collection') while the auditor verified that file is absent from EVERY ref in the repository; also zero files under results/intel/reproductions/cycle6*, no report, state/intel_reproduction.json still describing cycle 5, and the repro's candidate file stale vs the Scout's cycle-6 handoff. Auditor applied master-prompt §25 downgrade: zero headline numbers existed to recompute because evidence was not preserved. The sealed-schedule protocol was defined relative to a nonexistent file.",
+   "evidence_status": "DURABLE_UNAUDITED",
+   "importance": "HIGH",
+   "route_to": ["CTO", "INFRA", "INTEL"]
+  },
+  {
+   "kind": "BUG",
+   "summary": "Three design defects required out BEFORE freeze (auditor F1–F3): F1 time.sleep(1.2) inside the TIMED baseline-only arm-A demoblaze flow — the exact cycle-2 forensics artifact class (baseline latency inflation); F2 QUIESCE_GAP_MS['petstore']=924.6 proves undisclosed live pilot calibration happened pre-freeze with no committed artifacts (must be disclosed in a pre-freeze activity ledger); F3 the natural-TTL clause is structurally incompletable within one session ('NOT_EXECUTED_THIS_RUN' encoded in code) — must be bounded honestly at freeze time.",
+   "evidence_status": "DURABLE_UNAUDITED",
+   "importance": "MEDIUM",
+   "route_to": ["INTEL", "PHYSICS", "PRODUCT"]
+  },
+  {
+   "kind": "RESULT",
+   "summary": "Auditor positive checks (what survived): offline selftest independently re-executed 49/49 PASS; sealed mutation-schedule hash verified deterministic (276132df…, 37 steps); mutation detector v2 confirmed a genuine strictness upgrade; pointer-only store, credential redaction and clean seeds intact; external chain re-verified LIVE (arXiv:2604.00694 matches Scout records verbatim). Auditor precedent check: cycle-1's empty round-2 snapshot handling (REVISE/INCONCLUSIVE) applied consistently.",
+   "evidence_status": "DURABLE_UNAUDITED",
+   "importance": "MEDIUM",
+   "route_to": ["INTEL"]
+  },
+  {
+   "kind": "PRIOR_ART",
+   "summary": "SCOUT ecosystem-shift discovery (persisted on scout branch): capture→OpenAPI declaration is now COMMODITIZED across >=5 independent implementations (Browserbase browser-to-api skill, TabAPI with CI drift-replay, Vespasian, Harpist, mitmproxy2swagger). Consequence drawn by the lane: the decision-relevant quantity for replay mechanisms shifts from replay-vs-browser to CAPTURE-VALUE-OVER-DECLARATION (B−D per host) — a market-segmentation map directly relevant to Runtime capsule-ingestion trust gating and Product positioning. Corroborating vendor datum: Unbrowse itself now ships an honest-negative corpus bench (retrieval coverage 0.50, execution 1/6, security 24/24), consistent with SPIDER's earlier adversarial forensics; protected targets remain the true boundary.",
+   "evidence_status": "DURABLE_UNAUDITED",
+   "importance": "HIGH",
+   "route_to": ["CTO", "RUNTIME", "PRODUCT", "INTEL"]
+  },
+  {
+   "kind": "PRIOR_ART",
+   "summary": "SCOUT indexed 9 post-cycle-5 papers with quantitative leads (all DURABLE_UNAUDITED until reproduced): MCP registry drift panel (~12%/30d drift; content-binding beats re-audit ranking); QCR (post-retrieval reuse; raw-trace inheritance decays to 8.2% under binding shift); PreAct (50–67% blind-replay miss rates); Weblica; @skills census (56,804 SKILL.md dirs); SkillTrace; FCPAgent. All revisit triggers checked: NONE fired (SkillMigrator citations=0/no code; NeoCognition still manifesto-only). Host-churn datum: restful-booker.platform.dev died while herokuapp revived — live-target mortality is itself an argument for TTL/freshness instrumentation.",
+   "evidence_status": "DURABLE_UNAUDITED",
+   "importance": "MEDIUM",
+   "route_to": ["INTEL", "GRAPH", "RUNTIME", "CTO"]
+  },
+  {
+   "kind": "COST",
+   "summary": "Cycle cost ≈2h02m runner wall (SCOUT ~29m, REPRODUCER ~81m, AUDITOR ~12m, router ~5s, Director skipped). Round-0 produced zero measurements — pure instrument build + audit catch; the expensive part (working instrumentation, 49/49 selftest) survived into repair, so most of the spend was recovered rather than wasted.",
+   "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+   "importance": "LOW",
+   "route_to": ["INFRA", "CTO"]
+  },
+  {
+   "kind": "ANOMALY",
+   "summary": "Log-only residue (sole witness = bundle log): (1) multi-host selftest first ran 48/49 FAIL on slotify_high_entropy, fixed in-run to 49/49 PASS (~18:56→18:57Z); (2) demoblaze session cleanup printed cleanup_error:AttributeError (minor instrumentation wart, task flow itself succeeded: login ok, cart payload target_found=True price=790, accept True); (3) petstore schema-validity predicate adjusted pre-outcome as declared calibration ('category' optional in 57/60 real records — logged intent to record in prereg revision ledger); (4) OpenCode/Ox 'network signature / 300s stall watch' warnings appeared (REPRODUCER 19:11:32Z, AUDITOR 19:31:17Z) with ZERO aborts — consistent with the previously distilled slow-response tax signature.",
+   "evidence_status": "LOG_ONLY_UNAUDITED",
+   "importance": "LOW",
+   "route_to": ["INTEL", "INFRA"]
+  }
+ ],
+ "failure_signatures": [
+  "prereg-referencing-code-without-prereg-file: experiment code cites a preregistration path >=8 times while that path is absent from every git ref — auditor-verifiable via 'git log --all -- <path>' plus content grep",
+  "stale-lane-state-after-new-cycle: state/intel_reproduction.json still described cycle 5 at round-0 delivery",
+  "timed-baseline-artifact-recurrence: time.sleep() inside a timed baseline arm (cycle-2 artifact class recurring in cycle-6 code)"
+ ],
+ "research_opportunities": [
+  "GENERATED_SPEC_NULL arm makes capture-value-over-declaration the decision-relevant quantity per host — if completed, yields a market-segmentation map telling Runtime when HAR-capture inheritance beats auto-generated/public specs (directly feeds Runtime ingestion-trust gating).",
+  "Induced-mutation detection-quality arm (sealed schedule, FPR measured on benign variation via Wilson CI, taxonomy seeded from real API breaking-change classes) would give the first calibrated staleness/invalidation detector numbers — candidate primitive for Capability Capsule freshness fields.",
+  "Natural-TTL positive-differential attribution (STALE_TTL counts only if fresh discovery succeeds while artifact replay fails at T+24h) remains the honest design for TTL claims; needs multi-session or bounded-honest framing per auditor F3."
+ ],
+ "already_captured_elsewhere": [
+  "Lane trajectory beyond this run is durable on lab/intel: cycle-6 ultimately closed as audited MEASUREMENT_INVALID/NONE_THIS_RUN documentation accepted at 9f9a757 (audit PASS run 32897120087), then cycle-7 clean-instrument confirmation accepted INCONCLUSIVE/OBSERVATION_TIER_ONLY at 7a8182d — both outside this batch; those runs carry their own records when distilled.",
+  "Cycle-5 mechanism acceptance + boundary conditions already in INDEX digest / CF-2026-08-25-25; SGDR history in runs/32781482957.json etc.",
+  "Supervisor stall-watch/no-abort economics signature already digested (INDEX thematic bullet 'Provider outages tax session starts')."
+ ],
+ "distillation_complete": true,
+ "safe_to_prune": false,
+ "pruning_rationale": "Claim-bearing Intel cycle origin: three cycle/* branches attach (scout/repro/audit); the round-0 repro branch c1543f8 is the byte-exact restoration source cited by the repair lineage (RF-A_restore), the audit gate/report are the provenance of the eventual MEASUREMENT_INVALID acceptance, and several scout sweep details plus the in-run selftest failure sequence exist only in this log. Role rule: scientific claim-bearing runs stay protected."
+}

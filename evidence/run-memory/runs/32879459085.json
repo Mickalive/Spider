@@ -1,0 +1,51 @@
+{
+ "run_id": 32879459085,
+ "workflow_name": "SPIDER Critical CTO Council",
+ "workflow_path": ".github/workflows/cto-council.yml (curator-verified present at pinned head_sha)",
+ "status": "completed",
+ "conclusion": "cancelled",
+ "head_sha": "9ea00eb6416f2984d08a7f4dfdba1d8297e5518a",
+ "created_at": "2026-08-25T17:42:23Z",
+ "updated_at": "2026-08-25T17:46:56Z",
+ "event": "push",
+ "run_number": 6,
+ "head_branch": "main",
+ "evidence_class": "CTO",
+ "job_summary": {
+  "jobs": [],
+  "artifacts": 0,
+  "note": "ZERO jobs ever started; raw log empty. Cancelled while queued/pending."
+ },
+ "durable_refs": [
+  "git:9ea00eb6416f2984d08a7f4dfdba1d8297e5518a ('cto: enable global frontier team chartering' — .opencode/agents/chief_cto.md +12/−6; the triggering push itself, durable on main)",
+  "git:1f4f573fd2eeb589a9b99e54199dd78c18ab9dc0:.github/workflows/cto-council.yml (concurrency group 'spider-critical-cto-council', cancel-in-progress=false at this era; curator-verified)",
+  "/tmp/spider_run_evidence/32879459085/ (bundle copy; empty log + zero jobs is itself the datum)"
+ ],
+ "findings": [
+  {
+   "kind": "ANOMALY",
+   "summary": "Cancelled-with-zero-jobs instance WITH Git-timeline attribution (extends the signature family first distilled via runs/32894986672.json [unattributed] and runs/32864608446.json [attributed]): created 17:42:23Z by push 9ea00eb; sat queued ~4m33s with zero jobs; cancelled at 17:46:56Z — 3s AFTER run 7 (32879902647) was created at 17:46:55Z by the next cto push (1f4f573, 17:46:53Z). Mechanism consistent with GitHub single-slot concurrency-group behavior (only the newest queued run in a group survives; older pending runs are cancelled), which matches cancel-in-progress=false queue semantics verified in the workflow source. This happened during the rapid V3/Frontier-portfolio control-plane burst (>=10 cto/frontier pushes between 17:41 and 17:51Z).",
+   "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+   "importance": "LOW",
+   "route_to": ["INFRA", "CTO"]
+  },
+  {
+   "kind": "RESULT",
+   "summary": "Nothing ran and nothing was lost: zero jobs, zero artifacts, no agent session started, no council output produced or destroyed. The durable content of this moment is the triggering commit itself (chief_cto.md chartering authority), which lives on main independent of this run. Contrast with the four deleted council runs of the hygiene incident (UNKNOWN loss): THOSE had executed sessions; this one did not.",
+   "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+   "importance": "LOW",
+   "route_to": ["CTO"]
+  }
+ ],
+ "failure_signatures": [
+  "concurrency-burst-supersession: push-triggered council runs created faster than the runner queue drains them get cancelled as older queued runs; fingerprint = zero jobs + lifetime bounded by the next same-group trigger"
+ ],
+ "research_opportunities": [],
+ "already_captured_elsewhere": [
+  "Cancelled-zero-jobs signature policy already digested in INDEX thematic bullet 'Designed zero-job cancellations...' / CF-2026-08-25-18; this record adds a positively-attributable instance pair with the two sibling runs of this batch.",
+  "Subsequent mitigation is durable on main: commits b2d747e/b4dbd70 re-scoped council triggers to an actionable run-evidence feed ('wake only on actionable run-evidence feed'), addressing exactly this burst-noise mode."
+ ],
+ "distillation_complete": true,
+ "safe_to_prune": true,
+ "pruning_rationale": "Completed, never started (zero jobs/artifacts), canceller attributable via Git timeline + workflow concurrency semantics, and the bundle log is EMPTY — there is no unique content to lose beyond what this record transcribes. No branch or claim attaches. Residual caveat recorded: attribution rests on timeline inference, not a supervisor-log witness; even if some other actor cancelled it, nothing ran, so pruning loses nothing material either way."
+}

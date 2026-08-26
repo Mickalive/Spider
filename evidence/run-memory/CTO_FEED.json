@@ -837,6 +837,52 @@
     "CF-2026-08-25-13",
     "CF-2026-08-25-22"
    ]
+  },
+  {
+   "id": "CF-2026-08-26-01",
+   "importance": "HIGH",
+   "kind": "PROCESS_PATTERN",
+   "summary": "NEW delivery-defect class caught by an independent audit (Intel cycle-6 round 0, run 32878215017): experiment code shipped that REFERENCES its preregistration file >=8 times ('Implements the preregistered protocol exactly') while that prereg file is absent from EVERY git ref, with zero raw-evidence files, no report, and a lane-state file still describing the previous cycle. The auditor applied master-prompt §25 (recomputation impossible -> downgrade) and issued REVISE/INCONCLUSIVE with 7 fixes; three design defects were also required out pre-freeze, incl. a time.sleep(1.2) inside a TIMED baseline arm — recurrence of the known timed-baseline artifact class. Most instrumentation spend was recovered (byte-exact restoration into repair lineage), but the pattern generalizes across lanes.",
+   "evidence_status": "DURABLE_UNAUDITED",
+   "source_run_id": 32878215017,
+   "durable_refs": [
+    "git:origin/cycle/intel/32878215017/audit@9f344ce (gate + audit report)",
+    "git:origin/lab/intel@9f9a757 (eventual audited cycle-6 resolution: MEASUREMENT_INVALID/NONE_THIS_RUN)",
+    "evidence/run-memory/runs/32878215017.json"
+   ],
+   "actionable_next": [
+    "Add persist-phase assertions to lane workflows: if session output references a prereg path, assert the file exists in the pushed tree; assert non-empty results/report artifacts when an experiment claims execution; assert lane state file cycle field == current cycle before dispatching the auditor.",
+    "Extend the zero-diff guard family with a 'referenced-prereg-must-exist' lint — cheap, mechanical, would have converted round 0 from a wasted audit into a fast team-side rejection."
+   ],
+   "route_to": [
+    "CTO",
+    "INFRA",
+    "INTEL"
+   ]
+  },
+  {
+   "id": "CF-2026-08-26-02",
+   "importance": "MEDIUM",
+   "kind": "RESEARCH_RADAR",
+   "summary": "Intel scout discovered an ecosystem shift decision-critical for Runtime/Product: capture->OpenAPI declaration is now commoditized across >=5 independent implementations (Browserbase browser-to-api skill, TabAPI with CI drift-replay, Vespasian, Harpist, mitmproxy2swagger). The lane therefore reframed its replay mechanism question from replay-vs-browser to CAPTURE-VALUE-OVER-DECLARATION per host (GENERATED_SPEC_NULL arm): where auto-generated/public specs match own-HAR capture, capsule ingestion should prefer declarations; where they diverge (spec-less SPAs like demoblaze), captured routes carry unique value. Supporting vendor datum: Unbrowse itself now ships an honest-negative corpus bench (retrieval coverage 0.50, execution 1/6, security 24/24), corroborating SPIDER's earlier forensics. Paper leads awaiting reproduction: MCP registry drift ~12%/30d; raw-trace inheritance decays to 8.2% under binding shift (QCR); blind-replay miss rates 50-67% (PreAct); 56,804 SKILL.md dirs census.",
+   "evidence_status": "DURABLE_UNAUDITED",
+   "source_run_id": 32878215017,
+   "durable_refs": [
+    "git:origin/cycle/intel/32878215017/scout@a74fdb0 (cycle6_scout_report.md + cycle6_findings.json)",
+    "evidence/run-memory/runs/32878215017.json"
+   ],
+   "actionable_next": [
+    "Runtime: use capture-value-over-declaration as an ingestion-trust tier signal when weighing HAR-derived capsules vs spec-generated ones; treat spec-less SPA hosts as the high-value capture domain.",
+    "Intel/Product: whoever completes the multi-host ladder should report B−D per host so the segmentation map becomes usable; until then treat all numbers here as leads, never as claims.",
+    "Graph: the inheritance-decay paper leads (8.2% under binding shift) are directly relevant to staleness/freshness calibration priorities — reproduce or discard explicitly."
+   ],
+   "route_to": [
+    "CTO",
+    "RUNTIME",
+    "PRODUCT",
+    "GRAPH",
+    "INTEL"
+   ]
   }
  ]
 }
