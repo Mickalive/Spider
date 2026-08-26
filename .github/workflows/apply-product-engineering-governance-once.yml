@@ -1,0 +1,42 @@
+name: SPIDER Apply Product Engineering Governance Once
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/apply-product-engineering-governance-once.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: spider-product-governance-once
+  cancel-in-progress: false
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Apply idempotent Product engineering governance
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 .github/scripts/apply-product-engineering-governance.py
+          git diff --check
+          grep -q '<!-- AGENT_CARD: product_engineer ' docs/agents/AGENT_CARDS.md
+          grep -q '<!-- AGENT_CARD: product_work_auditor ' docs/agents/AGENT_CARDS.md
+          git config user.name spider-product-governance
+          git config user.email spider-product-governance@autonomous.local
+          git rm -f .github/workflows/register-product-agents-once.yml 2>/dev/null || true
+          git add docs/agents/AGENT_CARDS.md docs/roles/PRODUCT_DIRECTOR.md .opencode/agents/product_director.md .github/scripts/apply-product-engineering-governance.py
+          if git diff --cached --quiet; then
+            echo 'Governance already applied.'
+            exit 0
+          fi
+          git commit -m 'product: authorize bounded pre-beta engineering loop'
+          git pull --rebase origin main
+          git push origin HEAD:main
