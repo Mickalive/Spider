@@ -57,10 +57,14 @@ jobs:
             fi
           done
 
-      - name: Clear ephemeral launch state before fresh Product decision
+      - name: Snapshot prior Product request and clear only the ephemeral launch decision
         shell: bash
         run: |
-          rm -f state/product_beta_request.json
+          PRE_SHA=""
+          if [[ -f state/product_beta_request.json ]]; then
+            PRE_SHA=$(sha256sum state/product_beta_request.json | awk '{print $1}')
+          fi
+          echo "PRODUCT_REQUEST_PRE_SHA=$PRE_SHA" >> "$GITHUB_ENV"
           if [[ -f state/product_direction.json ]]; then
             jq '.beta_launch=false' state/product_direction.json > /tmp/product_direction.json
             mv /tmp/product_direction.json state/product_direction.json
@@ -85,7 +89,12 @@ jobs:
           test -f state/product_direction.json || { echo "::error::Missing product direction"; exit 1; }
           LAUNCH=$(jq -r '.beta_launch // false' state/product_direction.json)
           if [[ "$LAUNCH" == true ]]; then
-            test -f state/product_beta_request.json || { echo "::error::beta_launch requires a fresh product_beta_request"; exit 1; }
+            test -f state/product_beta_request.json || { echo "::error::beta_launch requires a product_beta_request"; exit 1; }
+            CURRENT_SHA=$(sha256sum state/product_beta_request.json | awk '{print $1}')
+            if [[ -n "${PRODUCT_REQUEST_PRE_SHA:-}" && "$CURRENT_SHA" == "$PRODUCT_REQUEST_PRE_SHA" ]]; then
+              echo "::error::beta_launch requires a freshly changed request; refusing stale durable authorization"
+              exit 1
+            fi
             BETA=$(jq -r '.beta_id // empty' state/product_beta_request.json)
             test -n "$BETA" || exit 1
           else

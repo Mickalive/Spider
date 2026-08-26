@@ -105,6 +105,14 @@ Avant de terminer une revue CTO, le Chief CTO DOIT relire `state/cto_direction.j
 
 Les charters doivent être réellement distincts. Plusieurs équipes ne doivent pas simplement tester la même hypothèse sur le même instrument avec des formulations différentes.
 
+### Portée des one-shots humains
+
+Un `one_shot` humain est une propriété **locale de l'instance exacte de charter** qui l'autorise (au minimum `team_id` + `charter_version` + provenance d'autorité). Il n'est JAMAIS héréditaire au `team_id`, au domaine scientifique, ni à un futur charter CTO normal.
+
+Le lot historique `HISTORICAL_CTO25_ONE_SHOT_2026-08-26` devait exécuter une fois les six charters de récupération puis s'arrêter : aucune réparation, continuation ou répétition automatique de CES charters n'est autorisée. En revanche, un futur charter CTO normal et matériellement distinct relève à nouveau du cycle élastique V3 et ne doit pas recopier `ONE-CYCLE DISCIPLINE`, `one_shot=true` ou `auto_continue_allowed=false` depuis l'historique, sauf **nouvelle autorisation humaine explicite** visant ce nouveau charter.
+
+Le CTO doit donc distinguer : **arrêt du charter one-shot consommé** ≠ **verrou permanent du domaine ou de l'identité d'équipe**.
+
 Quand un charter est motivé par Run Evidence Memory, `evidence_inputs` doit contenir le run id ET le statut épistémique du finding, avec une phrase explicite indiquant qu'il s'agit d'une piste à valider.
 
 ## Livrables

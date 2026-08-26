@@ -141,6 +141,23 @@ jobs:
           fi
           cp /tmp/frontier_charter.json "frontier/$TEAM_ID/charters/cto_v${CHARTER_VERSION}.json"
 
+          # A human one-shot lock belongs ONLY to the exact charter being executed.
+          # Never let an old historical one-shot silently contaminate a later normal CTO charter.
+          mkdir -p "directives/frontier" "state/frontier"
+          if [[ "$ONE_SHOT" == "true" ]]; then
+            printf '# Frontier %s local directive\n\nHUMAN-FORCED ONE-SHOT FOR CURRENT CHARTER v%s ONLY. Execute exactly one TEAM→AUDIT cycle. No automatic repair or continuation for this charter. Preserve negative results and provenance. This lock MUST NOT be inherited by any later normal CTO charter.\n' "$TEAM_ID" "$CHARTER_VERSION" > "directives/frontier/${TEAM_ID}.md"
+            if [[ -f "state/frontier/${TEAM_ID}.json" ]]; then
+              jq '.one_shot=true | .human_forced_one_shot=true | .current_charter_one_shot=true | .auto_continue_allowed=false | .continue_recommended=false' "state/frontier/${TEAM_ID}.json" > /tmp/frontier_lifecycle.json
+              mv /tmp/frontier_lifecycle.json "state/frontier/${TEAM_ID}.json"
+            fi
+          else
+            printf '# Frontier %s local directive\n\nNORMAL CTO-CHARTERED FRONTIER CYCLE v%s. Execute the exact current CTO charter under the elastic V3 lifecycle. Historical human one-shot locks from older charter versions do not apply. Preserve all prior evidence and claim ceilings.\n' "$TEAM_ID" "$CHARTER_VERSION" > "directives/frontier/${TEAM_ID}.md"
+            if [[ -f "state/frontier/${TEAM_ID}.json" ]]; then
+              jq '.one_shot=false | .human_forced_one_shot=false | .current_charter_one_shot=false | .auto_continue_allowed=true' "state/frontier/${TEAM_ID}.json" > /tmp/frontier_lifecycle.json
+              mv /tmp/frontier_lifecycle.json "state/frontier/${TEAM_ID}.json"
+            fi
+          fi
+
       - name: Checkout rejected snapshot for same-cycle repair
         if: ${{ inputs.repair_from_run_id != '' }}
         shell: bash
@@ -227,7 +244,7 @@ jobs:
               "") ;;
               *) BAD+="$p\n" ;;
             esac
-          done < <(git status --porcelain)
+          done < <(git status --porcelain -uall)
           if [[ -n "$BAD" ]]; then
             echo -e "Frontier team crossed protected scope:\n$BAD"
             exit 1
@@ -314,10 +331,28 @@ jobs:
             --agent frontier_research_auditor \
             "Audit Frontier team ${TEAM_ID}, charter v${{ inputs.charter_version }}, run ${GITHUB_RUN_ID}, repair ${{ inputs.repair_round }}. Charter=/tmp/frontier_charter.json; TEAM=/tmp/spider_frontier_team. Current checkout is untouched accepted team base. Recompute claims and write only audit outputs.${MODE}"
 
+      - name: Recover an incomplete Frontier audit invocation
+        shell: bash
+        env:
+          TEAM_ID: ${{ inputs.team_id }}
+        run: |
+          set -euo pipefail
+          GATE="results/audit/CYCLE_${GITHUB_RUN_ID}_FRONTIER_${TEAM_ID}_GATE.json"
+          REPORT="reports/audit/CYCLE_${GITHUB_RUN_ID}_FRONTIER_${TEAM_ID}.md"
+          if [[ ! -s "$GATE" || ! -s "$REPORT" ]]; then
+            echo "::warning::Auditor invocation returned without mandatory deliverables; resuming the SAME audit on the SAME frozen team snapshot. No team experiment is rerun."
+            bash /tmp/spider_control/run-opencode-with-retry.sh run \
+              --model "$SPIDER_MODEL" \
+              --agent frontier_research_auditor \
+              "RESUME THE SAME INDEPENDENT AUDIT for Frontier team ${TEAM_ID}, charter v${{ inputs.charter_version }}, GitHub run ${GITHUB_RUN_ID}, repair ${{ inputs.repair_round }}. The prior auditor invocation returned without both mandatory deliverables. Do NOT rerun or modify the TEAM experiment. Do NOT create secondary scratch worktrees. Read TEAM directly at /tmp/spider_frontier_team and charter at /tmp/frontier_charter.json. Current checkout is the accepted audit base and you may write ONLY reports/audit/ and results/audit/. Finish the audit and MUST write exactly ${REPORT} plus ${GATE} with gate PASS, REVISE, or BLOCKED, safe_to_integrate, required_fixes, evidence/limitations and honest claim ceiling."
+          fi
+          test -s "$REPORT" || { echo "::error::Frontier auditor still omitted mandatory report after same-audit recovery"; exit 1; }
+          test -s "$GATE" || { echo "::error::Frontier auditor still omitted mandatory gate after same-audit recovery"; exit 1; }
+
       - name: Enforce audit-only writes
         shell: bash
         run: |
-          CHANGED=$(git status --porcelain | cut -c4- || true)
+          CHANGED=$(git status --porcelain -uall | cut -c4- || true)
           BAD=$(printf '%s\n' "$CHANGED" | grep -Ev '^(reports/audit/|results/audit/)' || true)
           if [[ -n "$BAD" ]]; then echo "$BAD"; exit 1; fi
 
@@ -468,6 +503,18 @@ jobs:
           jq '. + {one_shot:true,human_forced_one_shot:true,auto_continue_allowed:false,continue_recommended:false}' "$F" > /tmp/frontier_state.locked.json
           mv /tmp/frontier_state.locked.json "$F"
 
+      - name: Clear historical one-shot lock after normal CTO integration
+        if: ${{ inputs.one_shot != true }}
+        shell: bash
+        env:
+          TEAM_ID: ${{ inputs.team_id }}
+        run: |
+          set -euo pipefail
+          F="state/frontier/${TEAM_ID}.json"
+          test -f "$F" || { echo "::error::Missing Frontier state after normal Director integration"; exit 1; }
+          jq '.one_shot=false | .human_forced_one_shot=false | .current_charter_one_shot=false | .auto_continue_allowed=true' "$F" > /tmp/frontier_state.normal.json
+          mv /tmp/frontier_state.normal.json "$F"
+
       - name: Enforce Frontier Director scope
         shell: bash
         env:
@@ -481,7 +528,7 @@ jobs:
               "") ;;
               *) BAD+="$p\n" ;;
             esac
-          done < <(git status --porcelain)
+          done < <(git status --porcelain -uall)
           if [[ -n "$BAD" ]]; then echo -e "$BAD"; exit 1; fi
 
       - name: Advance accepted Frontier branch
