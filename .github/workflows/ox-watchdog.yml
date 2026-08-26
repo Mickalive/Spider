@@ -17,6 +17,13 @@ on:
       - "SPIDER Critical CTO Council"
       - "SPIDER Frontier Research Team"
     types: [completed]
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/ox-watchdog.yml'
+      - 'docs/roles/PRODUCT_FINAL_GATE.md'
+      - '.opencode/agents/chief_cto.md'
+      - '.opencode/agents/product_director.md'
 
 permissions:
   actions: write
@@ -24,7 +31,7 @@ permissions:
 
 concurrency:
   group: spider-ox-watchdog
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   recover_transient_ox_failures:
@@ -306,7 +313,7 @@ jobs:
           }
 
           ensure_frontiers() {
-            local cto_commit state charter id version status accepted active latest gate_raw gate round
+            local cto_commit state charter id version status accepted active latest gate_raw gate round local_run
             cto_commit=$(gh api "repos/${GITHUB_REPOSITORY}/branches/lab%2Fcto" --jq '.commit.sha' 2>/dev/null || true)
             [[ -n "$cto_commit" ]] || { echo "frontier: no accepted CTO commit yet."; return 0; }
             state=$(gh api -H 'Accept: application/vnd.github.raw+json' \
@@ -328,16 +335,16 @@ jobs:
               fi
 
               active=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow frontier-research.yml --limit 100 \
-                --json displayTitle,status \
-                | jq --arg t "Frontier ${id} v${version}" '[.[] | select(.displayTitle==$t and .status!="completed")] | length')
+                --json displayTitle,status 2>/dev/null \
+                | jq --arg t "Frontier ${id} v${version}" '[.[] | select(.displayTitle==$t and .status!="completed")] | length' 2>/dev/null || echo 0)
               if [[ "$active" -gt 0 ]]; then
                 echo "frontier/$id v$version: active/queued."
                 continue
               fi
 
               latest=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow frontier-research.yml --limit 100 \
-                --json databaseId,displayTitle,status,conclusion,createdAt \
-                | jq --arg t "Frontier ${id} v${version}" '[.[] | select(.displayTitle==$t)] | sort_by(.createdAt) | last // empty')
+                --json databaseId,displayTitle,status,conclusion,createdAt 2>/dev/null \
+                | jq --arg t "Frontier ${id} v${version}" '[.[] | select(.displayTitle==$t)] | sort_by(.createdAt) | last // empty' 2>/dev/null || true)
               if [[ -n "$latest" ]]; then
                 local_run=$(jq -r '.databaseId' <<<"$latest")
                 gate_raw=$(gh api -H 'Accept: application/vnd.github.raw+json' \
@@ -352,7 +359,7 @@ jobs:
                   continue
                 fi
                 if [[ "$gate" == BLOCKED ]]; then
-                  echo "::warning::frontier/$id v$version is scientifically/operationally BLOCKED. Preserving that gate and relying on the continuously active CTO to issue a revised/reassigned charter; not repeating the same blocked experiment."
+                  echo "::warning::frontier/$id v$version is BLOCKED. Preserving that gate and requiring continuously active CTO re-chartering/reallocation instead of repeating the same blocked experiment."
                   continue
                 fi
               fi
