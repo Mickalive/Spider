@@ -1,0 +1,19 @@
+name: SPIDER One-shot Recovery Bootstrap
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/one-shot-recovery-bootstrap.yml'
+
+permissions:
+  actions: write
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dispatch canonical recovery
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run evidence-curator.yml --repo "$GITHUB_REPOSITORY" -f run_id=""
