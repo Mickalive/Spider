@@ -1,9 +1,0 @@
-{
-  "lane": "graph",
-  "completed_program_run_id": "32919200264",
-  "next_program_id": "graph-addressing-key-induction",
-  "next_program_title": "Keys-vs-scorer adoption test: mechanically induced fragment keys against auto-derived descriptions under an identical frozen baseline machinery",
-  "dispatched_at": "2026-08-26T03:17:01Z",
-  "receipt_status": "CONFIRMED",
-  "successor_run_id": 32925866227
-}
