@@ -23,14 +23,6 @@ on:
     types: [completed]
   schedule:
     - cron: "*/10 * * * *"
-  push:
-    branches: [main]
-    paths:
-      - '.github/workflows/evidence-curator.yml'
-      - 'docs/roles/EVIDENCE_CURATOR.md'
-      - '.opencode/agents/evidence_curator.md'
-      - 'evidence/run-archive/manifests/**'
-      - 'evidence/ledger-integration/**'
 
 permissions:
   actions: write
@@ -46,96 +38,8 @@ env:
   ARCHIVE_RELEASE_TAG: spider-actions-data-archive-v1
 
 jobs:
-  sync_accepted_lane_memory:
-    name: Pull accepted lab ledgers/results onto main
-    runs-on: ubuntu-24.04
-    timeout-minutes: 30
-    steps:
-      - uses: actions/checkout@v6
-        with:
-          ref: main
-          fetch-depth: 0
-
-      - name: Import canonical accepted evidence surfaces from lab branches
-        shell: bash
-        run: |
-          set -euo pipefail
-          git fetch -q origin '+refs/heads/*:refs/remotes/origin/*'
-
-          copy_path() {
-            local ref="$1" path="$2"
-            if git cat-file -e "$ref:$path" 2>/dev/null; then
-              mkdir -p "$(dirname "$path")"
-              git show "$ref:$path" > "$path"
-            fi
-          }
-
-          copy_tree() {
-            local ref="$1" prefix="$2"
-            git ls-tree -r --name-only "$ref" -- "$prefix" 2>/dev/null | while read -r path; do
-              [[ -n "$path" ]] || continue
-              mkdir -p "$(dirname "$path")"
-              git show "$ref:$path" > "$path"
-            done
-          }
-
-          copy_audits_for_lane() {
-            local ref="$1" lane_re="$2"
-            for prefix in reports/audit results/audit; do
-              git ls-tree -r --name-only "$ref" -- "$prefix" 2>/dev/null \
-                | grep -Ei "$lane_re" \
-                | while read -r path; do
-                    [[ -n "$path" ]] || continue
-                    mkdir -p "$(dirname "$path")"
-                    git show "$ref:$path" > "$path"
-                  done || true
-            done
-          }
-
-          declare -a lanes=(graph physics intel product runtime)
-          for lane in "${lanes[@]}"; do
-            ref="refs/remotes/origin/lab/${lane}"
-            git rev-parse --verify "$ref" >/dev/null 2>&1 || continue
-            upper=$(printf '%s' "$lane" | tr '[:lower:]' '[:upper:]')
-            copy_path "$ref" "docs/${upper}_LEDGER.md"
-            copy_tree "$ref" "reports/${lane}"
-            copy_tree "$ref" "results/${lane}"
-            copy_audits_for_lane "$ref" "$upper"
-          done
-
-          cto_ref="refs/remotes/origin/lab/cto"
-          if git rev-parse --verify "$cto_ref" >/dev/null 2>&1; then
-            copy_path "$cto_ref" docs/CTO_LEDGER.md
-            git ls-tree -r --name-only "$cto_ref" -- docs 2>/dev/null \
-              | grep -E '^docs/CTO_TO_.*\.md$' \
-              | while read -r path; do copy_path "$cto_ref" "$path"; done || true
-            copy_tree "$cto_ref" reports/cto
-            copy_tree "$cto_ref" results/cto
-            copy_path "$cto_ref" state/cto_direction.json
-          fi
-
-          # Frontier had several independent lab/frontier/* programs rather
-          # than one cumulative accepted branch. Recovery entries are merged
-          # by the curator into docs/FRONTIER_LEDGER.md and the owning lane.
-
-      - name: Persist accepted-memory synchronization
-        shell: bash
-        run: |
-          set -euo pipefail
-          git config user.name spider-evidence-sync
-          git config user.email spider-evidence-sync@autonomous.local
-          git add docs reports results state
-          git commit -m "evidence: sync accepted lab ledgers and results to main" || exit 0
-          for attempt in 1 2 3 4 5; do
-            if git pull --rebase origin main && git push origin HEAD:main; then exit 0; fi
-            git rebase --abort 2>/dev/null || true
-            sleep $((attempt*4))
-          done
-          exit 1
-
   recover:
     name: Recover historical Actions data into canonical ledgers
-    needs: sync_accepted_lane_memory
     runs-on: ubuntu-24.04
     timeout-minutes: 300
     steps:
@@ -143,6 +47,15 @@ jobs:
         with:
           ref: main
           fetch-depth: 0
+
+      - name: Assert one-time accepted-lab sync is frozen
+        shell: bash
+        run: |
+          set -euo pipefail
+          marker=evidence/ledger-integration/ACCEPTED_LAB_SYNC_DONE.json
+          test -f "$marker" || { echo "::error::Accepted lab sync marker missing"; exit 1; }
+          jq -e '.sync_complete == true and .sync_commit == "d927b6a146d32ca451ed2294792be213caa4d4e2"' "$marker" >/dev/null
+          echo "Accepted lab memory was imported once at d927b6a. It will NOT be copied from lab/* again; main is now the cumulative authority."
 
       - name: Fetch all durable refs
         shell: bash
@@ -163,7 +76,7 @@ jobs:
 
           already_done() {
             local id="$1" r="evidence/ledger-integration/runs/${id}.json"
-            [[ -f "$r" ]] && jq -e '.integration_complete == true' "$r" >/dev/null 2>&1
+            [[ -f "$r" ]] && jq -e '.integration_complete == true and .all_substantive_data_copied_to_repo == true' "$r" >/dev/null 2>&1
           }
 
           add_target() {
@@ -176,9 +89,7 @@ jobs:
 
           has_recoverable_source() {
             local id="$1"
-            if gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${id}" --jq '.status' 2>/dev/null | grep -qx completed; then
-              return 0
-            fi
+            if gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${id}" --jq '.status' 2>/dev/null | grep -qx completed; then return 0; fi
             [[ -f "evidence/run-archive/manifests/${id}.json" ]]
           }
 
@@ -187,10 +98,9 @@ jobs:
           elif [[ "$EVENT_NAME" == workflow_run && -n "$SOURCE_RUN_ID" ]]; then
             has_recoverable_source "$SOURCE_RUN_ID" && add_target "$SOURCE_RUN_ID"
           else
-            # First drain the temporary archive created before the user clarified
-            # that final storage belongs in canonical ledgers/reports. Some of
-            # these Actions runs were already deleted, so this staging is now a
-            # recovery source only and will be removed when all are integrated.
+            # Temporary Release staging is rescue input only. Drain it first,
+            # especially because some of those Actions runs were already
+            # deleted during the short archive/hygiene race.
             while read -r manifest; do
               [[ "$(wc -l < /tmp/spider_run_evidence/targets.txt)" -ge "$BACKFILL_BATCH" ]] && break
               [[ -f "$manifest" ]] || continue
@@ -198,9 +108,7 @@ jobs:
               [[ -n "$id" ]] && add_target "$id"
             done < <(find evidence/run-archive/manifests -maxdepth 1 -type f -name '*.json' 2>/dev/null | sort -V)
 
-            # Then recover still-live scientific/product/cross-lane runs. Pure
-            # watchdog/supervisor/cleanup/control-plane runs are not research
-            # data and remain outside this migration unless explicitly targeted.
+            # Then drain still-live runs that can contain research/product data.
             while IFS=$'\t' read -r created id name; do
               [[ "$(wc -l < /tmp/spider_run_evidence/targets.txt)" -ge "$BACKFILL_BATCH" ]] && break
               case "$name" in
@@ -226,7 +134,7 @@ jobs:
           echo "count=$count" >> "$GITHUB_OUTPUT"
           echo "Selected $count run(s): $(tr '\n' ' ' < /tmp/spider_run_evidence/targets.txt)"
 
-      - name: Reconstruct source bundles and copy recoverable raw data into lane report trees
+      - name: Reconstruct complete source bundles into canonical lane trees
         if: steps.targets.outputs.count != '0'
         env:
           GH_TOKEN: ${{ github.token }}
@@ -247,10 +155,23 @@ jobs:
             esac
           }
 
+          copy_repo_safe() {
+            local src="$1" dest="$2" blockers="$3"
+            [[ -f "$src" ]] || return 0
+            local size
+            size=$(stat -c '%s' "$src")
+            if (( size > 5242880 )); then
+              echo "$(basename "$src") | $size bytes | exceeds 5 MiB per-file Git gate" >> "$blockers"
+              return 0
+            fi
+            mkdir -p "$(dirname "$dest")"
+            cp "$src" "$dest"
+          }
+
           while read -r id; do
             [[ -n "$id" ]] || continue
             d="/tmp/spider_run_evidence/$id"
-            mkdir -p "$d/artifacts_extracted"
+            mkdir -p "$d/artifacts_extracted" "$d/actions_logs_extracted"
             : > "$d/raw_copy_blockers.txt"
             : > "$d/source_blockers.txt"
 
@@ -258,19 +179,27 @@ jobs:
               echo live > "$d/source_kind.txt"
               gh api --paginate "repos/${GITHUB_REPOSITORY}/actions/runs/${id}/jobs?per_page=100" > "$d/jobs.json" || echo '{"jobs":[]}' > "$d/jobs.json"
               gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${id}/artifacts?per_page=100" > "$d/artifacts.json" || echo '{"artifacts":[]}' > "$d/artifacts.json"
-              if ! gh run view "$id" --repo "$GITHUB_REPOSITORY" --log > "$d/logs.txt" 2> "$d/log_error.txt"; then
-                echo "full readable Actions log unavailable" >> "$d/source_blockers.txt"
+              gh run view "$id" --repo "$GITHUB_REPOSITORY" --log > "$d/logs-readable.txt" 2> "$d/log_error.txt" || echo "readable combined log unavailable" >> "$d/source_blockers.txt"
+
+              if curl --fail --location --retry 3 --retry-all-errors \
+                -H "Authorization: Bearer ${GH_TOKEN}" \
+                -H "Accept: application/vnd.github+json" \
+                -H "X-GitHub-Api-Version: 2022-11-28" \
+                "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/runs/${id}/logs" \
+                -o "$d/actions-logs.zip"; then
+                unzip -q "$d/actions-logs.zip" -d "$d/actions_logs_extracted" || echo "raw Actions log ZIP extraction failed" >> "$d/source_blockers.txt"
+              else
+                echo "raw Actions log ZIP unavailable" >> "$d/source_blockers.txt"
               fi
+
               total=$(jq -r '.total_count // 0' "$d/artifacts.json")
               if (( total > 0 )); then
-                if ! gh run download "$id" --repo "$GITHUB_REPOSITORY" --dir "$d/artifacts_extracted"; then
-                  echo "one or more listed Actions artifacts could not be downloaded" >> "$d/source_blockers.txt"
-                fi
+                gh run download "$id" --repo "$GITHUB_REPOSITORY" --dir "$d/artifacts_extracted" || echo "one or more listed Actions artifacts unavailable" >> "$d/source_blockers.txt"
               fi
             else
               echo temporary_archive > "$d/source_kind.txt"
               manifest="evidence/run-archive/manifests/${id}.json"
-              test -f "$manifest" || { echo "missing live run and archive manifest" >> "$d/source_blockers.txt"; continue; }
+              test -f "$manifest" || { echo "missing live run and temporary archive manifest" >> "$d/source_blockers.txt"; continue; }
               asset=$(jq -r '.release_asset.name' "$manifest")
               mkdir -p "$d/archive_download"
               if ! gh release download "$ARCHIVE_RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --pattern "$asset" --dir "$d/archive_download"; then
@@ -279,14 +208,16 @@ jobs:
               fi
               tar -xzf "$d/archive_download/$asset" -C "$d/archive_download"
               src="$d/archive_download/$id"
-              test -f "$src/run.json" || { echo "archive missing run.json" >> "$d/source_blockers.txt"; continue; }
+              test -f "$src/run.json" || { echo "temporary archive missing run.json" >> "$d/source_blockers.txt"; continue; }
               cp "$src/run.json" "$d/run.json"
               cp "$src/jobs-pages.json" "$d/jobs.json" 2>/dev/null || echo '{"jobs":[]}' > "$d/jobs.json"
               cp "$src/artifacts.json" "$d/artifacts.json" 2>/dev/null || echo '{"artifacts":[]}' > "$d/artifacts.json"
-              cp "$src/logs-readable.txt" "$d/logs.txt" 2>/dev/null || true
+              cp "$src/logs-readable.txt" "$d/logs-readable.txt" 2>/dev/null || true
               if [[ -f "$src/actions-logs.zip" ]]; then
-                mkdir -p "$d/actions_logs_extracted"
+                cp "$src/actions-logs.zip" "$d/actions-logs.zip"
                 unzip -q "$src/actions-logs.zip" -d "$d/actions_logs_extracted" || echo "raw Actions log ZIP extraction failed" >> "$d/source_blockers.txt"
+              else
+                echo "temporary archive lacks raw Actions log ZIP" >> "$d/source_blockers.txt"
               fi
               find "$src/artifacts" -maxdepth 1 -type f -name '*.zip' 2>/dev/null | while read -r z; do
                 out="$d/artifacts_extracted/$(basename "$z" .zip)"
@@ -300,9 +231,28 @@ jobs:
             name=$(jq -r '.name // "UNKNOWN"' "$d/run.json")
             lane=$(lane_for_name "$name")
             printf '%s\n' "$lane" > "$d/lane.txt"
+            dest="reports/${lane}/recovered/run_${id}/raw"
+            mkdir -p "$dest"
 
-            # Fetch every still-live cycle branch containing the run id so the
-            # curator can compare logs against durable snapshots/results.
+            # Metadata and raw logs are copied beside normal lane reports, not
+            # left solely in Actions/Release. A too-large file becomes a hard
+            # deletion blocker instead of being silently omitted.
+            copy_repo_safe "$d/run.json" "$dest/run.json" "$d/raw_copy_blockers.txt"
+            copy_repo_safe "$d/jobs.json" "$dest/jobs.json" "$d/raw_copy_blockers.txt"
+            copy_repo_safe "$d/artifacts.json" "$dest/artifacts.json" "$d/raw_copy_blockers.txt"
+            copy_repo_safe "$d/logs-readable.txt" "$dest/logs-readable.txt" "$d/raw_copy_blockers.txt"
+
+            while IFS= read -r -d '' f; do
+              rel="${f#$d/actions_logs_extracted/}"
+              copy_repo_safe "$f" "$dest/actions-logs/$rel" "$d/raw_copy_blockers.txt"
+            done < <(find "$d/actions_logs_extracted" -type f -print0)
+
+            while IFS= read -r -d '' f; do
+              rel="${f#$d/artifacts_extracted/}"
+              copy_repo_safe "$f" "$dest/artifacts/$rel" "$d/raw_copy_blockers.txt"
+            done < <(find "$d/artifacts_extracted" -type f -print0)
+
+            # Fetch every still-live cycle branch containing this run id.
             git ls-remote --heads origin | awk -v id="$id" 'index($2,id)>0 {print $1"\t"$2}' > "$d/refs.txt" || true
             while IFS=$'\t' read -r sha ref; do
               [[ -n "${ref:-}" ]] || continue
@@ -310,26 +260,6 @@ jobs:
               git fetch -q origin "$ref:refs/remotes/origin/$branch" || true
               printf '%s\t%s\n' "$branch" "$sha" >> "$d/fetched_refs.tsv"
             done < "$d/refs.txt"
-
-            # Copy the actual recoverable artifact payload into the SAME lane
-            # reports tree as normal experimental evidence. Oversize files are
-            # blockers: the Actions run cannot be declared deletable until a
-            # durable solution exists for them.
-            dest="reports/${lane}/recovered/run_${id}/raw"
-            mkdir -p "$dest"
-            if [[ -d "$d/artifacts_extracted" ]]; then
-              while IFS= read -r -d '' f; do
-                rel="${f#$d/artifacts_extracted/}"
-                size=$(stat -c '%s' "$f")
-                if (( size > 5242880 )); then
-                  echo "$rel | $size bytes | exceeds 5 MiB repo-copy gate" >> "$d/raw_copy_blockers.txt"
-                  continue
-                fi
-                target="$dest/$rel"
-                mkdir -p "$(dirname "$target")"
-                cp "$f" "$target"
-              done < <(find "$d/artifacts_extracted" -type f -print0)
-            fi
 
             jq -n \
               --argjson run_id "$id" \
@@ -355,7 +285,7 @@ jobs:
           bash .github/scripts/run-opencode-with-retry.sh run \
             --model "$SPIDER_MODEL" \
             --agent evidence_curator \
-            "Recover Actions runs ${IDS} into SPIDER's canonical knowledge system. Bundles are under /tmp/spider_run_evidence/<run_id>/. This is NOT a run-memory-only task. For EACH run: deeply inspect all available logs (including actions_logs_extracted for temporary-archive sources), jobs, artifacts, raw files copied under reports/<lane>/recovered/run_<id>/raw, and every fetched cycle/lab ref containing the run id. Capture ALL substantive measurements, counters, verdicts, invalidations, failure signatures, costs, negative findings, audit findings and claim ceilings; do not omit numbers merely because they are inconvenient or duplicate. Create the detailed reports/<lane>/recovered/run_<id>.md and exact structured reports/<lane>/recovered/run_<id>_data.json; integrate missing substance/provenance into the appropriate docs/*_LEDGER.md canonical ledger(s), always naming the exact run id. If the accepted lab ledger/report already contains the result, verify and reference it instead of duplicating prose, but still ensure every run-only datum is represented somewhere durable. Maintain evidence/run-memory and create evidence/ledger-integration/runs/<run_id>.json LAST. The receipt may set integration_complete/all_substantive_data_copied_to_repo/safe_to_delete_actions_run true ONLY when no useful information remains solely in Actions or temporary release staging and both blocker files are empty or demonstrably non-substantive. Also inspect evidence/run-memory/DELETED_RUNS_RECOVERY.json: ensure the recoverable CTO Council history is present in docs/CTO_LEDGER.md and explicitly record the four irrecoverable historical CTO provenance gaps without inventing their lost logs. Preserve epistemic status exactly."
+            "Recover Actions runs ${IDS} into SPIDER's canonical knowledge system. Bundles are under /tmp/spider_run_evidence/<run_id>/. Main is now the cumulative authority: NEVER overwrite a ledger from lab/*. For EACH run, deeply inspect run/job metadata, all readable/raw logs, copied raw files under reports/<lane>/recovered/run_<id>/raw, artifacts and fetched cycle refs. Capture ALL substantive measurements, counters, verdicts, invalidations, failure signatures, costs, negative findings, audit findings and claim ceilings. Create reports/<lane>/recovered/run_<id>.md and exact reports/<lane>/recovered/run_<id>_data.json; integrate missing substance/provenance into the appropriate existing docs/*_LEDGER.md ledger(s), always naming the exact run id. If accepted canonical material already contains the result, reference it and add only missing provenance/data rather than duplicating prose. Maintain evidence/run-memory and create evidence/ledger-integration/runs/<run_id>.json LAST. Set integration_complete/all_substantive_data_copied_to_repo true only when every substantive datum is represented in canonical repo files. Set safe_to_delete_actions_run true only when source_blockers.txt and raw_copy_blockers.txt are empty and nothing useful remains solely in Actions or temporary Release staging. Preserve epistemic status exactly. Ensure docs/CTO_LEDGER.md records the four irrecoverable CTO provenance gaps from DELETED_RUNS_RECOVERY.json without inventing their lost logs."
 
       - name: Validate ledger-first recovery invariants
         if: steps.targets.outputs.count != '0'
@@ -396,7 +326,6 @@ jobs:
               }
             fi
           done < /tmp/spider_run_evidence/targets.txt
-
           test -f evidence/run-memory/INDEX.md
           test -f evidence/run-memory/CTO_FEED.json
           test -f evidence/run-memory/PRODUCT_FEED.json
@@ -430,7 +359,7 @@ jobs:
           done
           exit 1
 
-      - name: Continue draining backlog without waiting for schedule
+      - name: Continue draining temporary staging backlog
         if: steps.targets.outputs.count != '0'
         env:
           GH_TOKEN: ${{ github.token }}
@@ -439,29 +368,20 @@ jobs:
           set -euo pipefail
           git fetch -q origin main
           git reset --hard origin/main
-
           remaining=0
           while read -r manifest; do
             [[ -f "$manifest" ]] || continue
             id=$(jq -r '.run_id // empty' "$manifest")
             [[ -n "$id" ]] || continue
             receipt="evidence/ledger-integration/runs/${id}.json"
-            if [[ ! -f "$receipt" ]] || ! jq -e '.integration_complete == true' "$receipt" >/dev/null 2>&1; then
+            if [[ ! -f "$receipt" ]] || ! jq -e '.integration_complete == true and .all_substantive_data_copied_to_repo == true' "$receipt" >/dev/null 2>&1; then
               remaining=$((remaining+1))
             fi
           done < <(find evidence/run-archive/manifests -maxdepth 1 -type f -name '*.json' 2>/dev/null | sort -V)
 
           if (( remaining > 0 )); then
-            echo "Temporary archive backlog remaining: $remaining; dispatching next recovery batch."
+            echo "Temporary staging entries still requiring canonical integration: $remaining"
             gh workflow run evidence-curator.yml --repo "$GITHUB_REPOSITORY" -f run_id=""
           else
-            echo "Temporary archive backlog drained. Live historical runs will continue through workflow_run/schedule until integrated."
+            echo "Temporary staging backlog fully integrated into canonical repo surfaces."
           fi
-
-  no_work:
-    name: No recoverable historical data backlog in this pass
-    needs: [sync_accepted_lane_memory, recover]
-    if: ${{ always() && needs.recover.result == 'success' }}
-    runs-on: ubuntu-24.04
-    steps:
-      - run: echo "Recovery pass finished under the ledger-first deletion gate."
