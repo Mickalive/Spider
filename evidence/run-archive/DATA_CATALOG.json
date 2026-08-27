@@ -1,0 +1,1168 @@
+{
+  "schema": "SPIDER Actions archived-run data catalog v1",
+  "updated": "2026-08-27T20:37:08Z",
+  "archive_release_tag": "spider-actions-data-archive-v1",
+  "archived_run_count": 40,
+  "runs": [
+    {
+      "run_id": 32689298051,
+      "workflow_name": "SPIDER Physics Lane",
+      "workflow_path": ".github/workflows/physics-loop.yml",
+      "created_at": "2026-08-24T04:15:06Z",
+      "conclusion": "cancelled",
+      "archive_complete": true,
+      "actions_payload_complete": true,
+      "raw_logs": {
+        "status": "ARCHIVED",
+        "source": "GitHub run logs ZIP"
+      },
+      "artifacts": {
+        "status": "NONE",
+        "count": 0,
+        "source": "raw GitHub artifact ZIPs"
+      },
+      "refs": {
+        "status": "ARCHIVED",
+        "count": 4,
+        "source": "git bundle of refs containing run id"
+      },
+      "release_asset": {
+        "release_tag": "spider-actions-data-archive-v1",
+        "name": "run-32689298051.tar.gz",
+        "sha256": "228d0440d9432f9ae4d7438f4be6292c3d5c68a8e37ad8624c45f91bc8d4b3e5",
+        "verified_round_trip": true
+      }
+    },
+    {
+      "run_id": 32776372437,
+      "workflow_name": "SPIDER Physics Lane",
+      "workflow_path": ".github/workflows/physics-loop.yml",
+      "created_at": "2026-08-24T20:52:42Z",
+      "conclusion": "success",
+      "archive_complete": true,
+      "actions_payload_complete": true,
+      "raw_logs": {
+        "status": "ARCHIVED",
+        "source": "GitHub run logs ZIP"
+      },
+      "artifacts": {
+        "status": "NONE",
+        "count": 0,
+        "source": "raw GitHub artifact ZIPs"
+      },
+      "refs": {
+        "status": "ARCHIVED",
+        "count": 4,
+        "source": "git bundle of refs containing run id"
+      },
+      "release_asset": {
+        "release_tag": "spider-actions-data-archive-v1",
+        "name": "run-32776372437.tar.gz",
+        "sha256": "603588bbd3f4bccceec69908cb35a143356f8e676657146a67c70a68533a49d9",
+        "verified_round_trip": true
+      }
+    },
+    {
+      "run_id": 32781482957,
+      "workflow_name": "SPIDER Intel Research Lane",
+      "workflow_path": ".github/workflows/intel-loop.yml",
+      "created_at": "2026-08-24T21:48:50Z",
+      "conclusion": "success",
+      "archive_complete": true,
+      "actions_payload_complete": true,
+      "raw_logs": {
+        "status": "ARCHIVED",
+        "source": "GitHub run logs ZIP"
+      },
+      "artifacts": {
+        "status": "NONE",
+        "count": 0,
+        "source": "raw GitHub artifact ZIPs"
+      },
+      "refs": {
+        "status": "ARCHIVED",
+        "count": 3,
+        "source": "git bundle of refs containing run id"
+      },
+      "release_asset": {
+        "release_tag": "spider-actions-data-archive-v1",
+        "name": "run-32781482957.tar.gz",
+        "sha256": "ae4182ff34c6f3d868206c5bdd83ec847627364c3b95be7c58cf4f10875653bc",
+        "verified_round_trip": true
+      }
+    },
+    {
+      "run_id": 32782331702,
+      "workflow_name": "SPIDER Graph Lane",
+      "workflow_path": ".github/workflows/graph-loop.yml",
+      "created_at": "2026-08-24T21:58:43Z",
+      "conclusion": "success",
+      "archive_complete": true,
+      "actions_payload_complete": true,
+      "raw_logs": {
+        "status": "ARCHIVED",
+        "source": "GitHub run logs ZIP"
+      },
+      "artifacts": {
+        "status": "NONE",
+        "count": 0,
+        "source": "raw GitHub artifact ZIPs"
+      },
+      "refs": {
+        "status": "ARCHIVED",
+        "count": 4,
+        "source": "git bundle of refs containing run id"
+      },
+      "release_asset": {
+        "release_tag": "spider-actions-data-archive-v1",
+        "name": "run-32782331702.tar.gz",
+        "sha256": "8e1e6ca8a322d4bdcf0913d1833ef2b7f817869817340af51ce015b38c2978d9",
+        "verified_round_trip": true
+      }
+    },
+    {
+      "run_id": 32783797303,
+      "workflow_name": "SPIDER Graph Lane",
+      "workflow_path": ".github/workflows/graph-loop.yml",
+      "created_at": "2026-08-24T22:15:43Z",
+      "conclusion": "success",
+      "archive_complete": true,
+      "actions_payload_complete": true,
+      "raw_logs": {
+        "status": "ARCHIVED",
+        "source": "GitHub run logs ZIP"
+      },
+      "artifacts": {
+        "status": "NONE",
+        "count": 0,
+        "source": "raw GitHub artifact ZIPs"
+      },
+      "refs": {
+        "status": "ARCHIVED",
+        "count": 4,
+        "source": "git bundle of refs containing run id"
+      },
+      "release_asset": {
+        "release_tag": "spider-actions-data-archive-v1",
+        "name": "run-32783797303.tar.gz",
+        "sha256": "0882cdf7b6f636131034de921ca843280512dda4fc056f38bab0a94964bb8196",
+        "verified_round_trip": true
+      }
+    },
+    {
+      "run_id": 32792931901,
+      "workflow_name": "SPIDER Intel Research Lane",
+      "workflow_path": ".github/workflows/intel-loop.yml",
+      "created_at": "2026-08-25T00:16:13Z",
+      "conclusion": "success",
+      "archive_complete": true,
+      "actions_payload_complete": true,
+      "raw_logs": {
+        "status": "ARCHIVED",
+        "source": "GitHub run logs ZIP"
+      },
+      "artifacts": {
+        "status": "NONE",
+        "count": 0,
+        "source": "raw GitHub artifact ZIPs"
+      },
+      "refs": {
+        "status": "ARCHIVED",
+        "count": 3,
+        "source": "git bundle of refs containing run id"
+      },
+      "release_asset": {
+        "release_tag": "spider-actions-data-archive-v1",
+        "name": "run-32792931901.tar.gz",
+        "sha256": "a890e3370fee81425cf7a2ecddaee0c457cacd0fc33f893a0cd5cd85fda9d42a",
+        "verified_round_trip": true
+      }
+    },
+    {
+      "run_id": 32793165981,
+      "workflow_name": "SPIDER Physics Lane",
+      "workflow_path": ".github/workflows/physics-loop.yml",
+      "created_at": "2026-08-25T00:19:41Z",
+      "conclusion": "failure",
+      "archive_complete": true,
+      "actions_payload_complete": true,
+      "raw_logs": {
+        "status": "ARCHIVED",
+        "source": "GitHub run logs ZIP"
+      },
+      "artifacts": {
+        "status": "NONE",
+        "count": 0,
+        "source": "raw GitHub artifact ZIPs"
+      },
+      "refs": {
+        "status": "ARCHIVED",
+        "count": 4,
+        "source": "git bundle of refs containing run id"
+      },
+      "release_asset": {
+        "release_tag": "spider-actions-data-archive-v1",
+        "name": "run-32793165981.tar.gz",
+        "sha256": "f5015cf831f27b02392a653f8258f0aabf9dd2b49fbe24a25c05bbc2b6a2e151",
+        "verified_round_trip": true
+      }
+    },
+    {
+      "run_id": 32793580374,
+      "workflow_name": "SPIDER Graph Lane",
+      "workflow_path": ".github/workflows/graph-loop.yml",
+      "created_at": "2026-08-25T00:25:34Z",
+      "conclusion": "failure",
+      "archive_complete": true,
+      "actions_payload_complete": true,
+      "raw_logs": {
+        "status": "ARCHIVED",
+        "source": "GitHub run logs ZIP"
+      },
+      "artifacts": {
+        "status": "NONE",
+        "count": 0,
+        "source": "raw GitHub artifact ZIPs"
+      },
+      "refs": {
+        "status": "ARCHIVED",
+        "count": 11,
+        "source": "git bundle of refs containing run id"
+      },
+      "release_asset": {
+        "release_tag": "spider-actions-data-archive-v1",
+        "name": "run-32793580374.tar.gz",
+        "sha256": "a9fdbf32882f7fd7cf51070ca2618ac264a24f5db015049b08d4f1297cbecc08",
+        "verified_round_trip": true
+      }
+    },
+    {
+      "run_id": 32796176172,
+      "workflow_name": "SPIDER Intel Research Lane",
+      "workflow_path": ".github/workflows/intel-loop.yml",
+      "created_at": "2026-08-25T01:05:04Z",
+      "conclusion": "success",
+      "archive_complete": true,
+      "actions_payload_complete": true,
+      "raw_logs": {
+        "status": "ARCHIVED",
+        "source": "GitHub run logs ZIP"
+      },
+      "artifacts": {
+        "status": "NONE",
+        "count": 0,
+        "source": "raw GitHub artifact ZIPs"
+      },
+      "refs": {
+        "status": "ARCHIVED",
+        "count": 3,
+        "source": "git bundle of refs containing run id"
+      },
+      "release_asset": {
+        "release_tag": "spider-actions-data-archive-v1",
+        "name": "run-32796176172.tar.gz",
+        "sha256": "46624848914da231a4e65275ccb188507ac56dced62dbce6f050ef1b87d60fb8",
+        "verified_round_trip": true
+      }
+    },
+    {
+      "run_id": 32799261473,
+      "workflow_name": "SPIDER Product and Beta Lane",
+      "workflow_path": ".github/workflows/product-loop.yml",
+      "created_at": "2026-08-25T01:53:18Z",
+      "conclusion": "failure",
+      "archive_complete": true,
+      "actions_payload_complete": true,
+      "raw_logs": {
+        "status": "ARCHIVED",
+        "source": "GitHub run logs ZIP"
+      },
+      "artifacts": {
+        "status": "NONE",
+        "count": 0,
+        "source": "raw GitHub artifact ZIPs"
+      },
+      "refs": {
+        "status": "ARCHIVED",
+        "count": 2,
+        "source": "git bundle of refs containing run id"
+      },
+      "release_asset": {
+        "release_tag": "spider-actions-data-archive-v1",
+        "name": "run-32799261473.tar.gz",
+        "sha256": "e3d7b0763875a888594c121a3456eb0dca1200dedfd7a0f154d272c87c3f7e22",
+        "verified_round_trip": true
+      }
+    },
+    {
+      "run_id": 32799587656,
+      "workflow_name": "SPIDER Physics Lane",
+      "workflow_path": ".github/workflows/physics-loop.yml",
+      "created_at": "2026-08-25T01:58:21Z",
+      "conclusion": "failure",
+      "archive_complete": true,
+      "actions_payload_complete": true,
+      "raw_logs": {
+        "status": "ARCHIVED",
+        "source": "GitHub run logs ZIP"
+      },
+      "artifacts": {
+        "status": "NONE",
+        "count": 0,
+        "source": "raw GitHub artifact ZIPs"
+      },
+      "refs": {
+        "status": "ARCHIVED",
+        "count": 4,
+        "source": "git bundle of refs containing run id"
+      },
+      "release_asset": {
+        "release_tag": "spider-actions-data-archive-v1",
+        "name": "run-32799587656.tar.gz",
+        "sha256": "1335ce9ee69a28828b8e1baaab839a67eb548063ecc6c4056a588a640d1d0379",
+        "verified_round_trip": true
+      }
+    },
+    {
+      "run_id": 32800296360,
+      "workflow_name": "SPIDER Intel Research Lane",
+      "workflow_path": ".github/workflows/intel-loop.yml",
+      "created_at": "2026-08-25T02:09:02Z",
+      "conclusion": "success",
+      "archive_complete": true,
+      "actions_payload_complete": true,
+      "raw_logs": {
+        "status": "ARCHIVED",
+        "source": "GitHub run logs ZIP"
+      },
+      "artifacts": {
+        "status": "NONE",
+        "count": 0,
+        "source": "raw GitHub artifact ZIPs"
+      },
+      "refs": {
+        "status": "ARCHIVED",
+        "count": 3,
+        "source": "git bundle of refs containing run id"
+      },
+      "release_asset": {
+        "release_tag": "spider-actions-data-archive-v1",
+        "name": "run-32800296360.tar.gz",
+        "sha256": "473bd0292290a915c22714d0db493cd105a13bf3ace9455fb6966fad82670187",
+        "verified_round_trip": true
+      }
+    },
+    {
+      "run_id": 32809100696,
+      "workflow_name": "SPIDER Intel Research Lane",
+      "workflow_path": ".github/workflows/intel-loop.yml",
+      "created_at": "2026-08-25T04:28:35Z",
+      "conclusion": "failure",
+      "archive_complete": true,
+      "actions_payload_complete": true,
+      "raw_logs": {
+        "status": "ARCHIVED",
+        "source": "GitHub run logs ZIP"
+      },
+      "artifacts": {
+        "status": "NONE",
+        "count": 0,
+        "source": "raw GitHub artifact ZIPs"
+      },
+      "refs": {
+        "status": "ARCHIVED",
+        "count": 1,
+        "source": "git bundle of refs containing run id"
+      },
+      "release_asset": {
+        "release_tag": "spider-actions-data-archive-v1",
+        "name": "run-32809100696.tar.gz",
+        "sha256": "dba19b5cc8372dd59301784bf372da37879387eff8bf372d66f0a9918342bdc5",
+        "verified_round_trip": true
+      }
+    },
+    {
+      "run_id": 32820217763,
+      "workflow_name": "SPIDER Product and Beta Lane",
+      "workflow_path": ".github/workflows/product-loop.yml",
+      "created_at": "2026-08-25T07:09:20Z",
+      "conclusion": "failure",
+      "archive_complete": true,
+      "actions_payload_complete": true,
+      "raw_logs": {
+        "status": "ARCHIVED",
+        "source": "GitHub run logs ZIP"
+      },
+      "artifacts": {
+        "status": "NONE",
+        "count": 0,
+        "source": "raw GitHub artifact ZIPs"
+      },
+      "refs": {
+        "status": "ARCHIVED",
+        "count": 1,
+        "source": "git bundle of refs containing run id"
+      },
+      "release_asset": {
+        "release_tag": "spider-actions-data-archive-v1",
+        "name": "run-32820217763.tar.gz",
+        "sha256": "1a8c5e4183c3c1688dc2e484a13cac20bfb8cd32907a9c9334f291476dea5ba5",
+        "verified_round_trip": true
+      }
+    },
+    {
+      "run_id": 32851946087,
+      "workflow_name": "SPIDER Product and Beta Lane",
+      "workflow_path": ".github/workflows/product-loop.yml",
+      "created_at": "2026-08-25T13:12:25Z",
+      "conclusion": "failure",
+      "archive_complete": true,
+      "actions_payload_complete": true,
+      "raw_logs": {
+        "status": "ARCHIVED",
+        "source": "GitHub run logs ZIP"
+      },
+      "artifacts": {
+        "status": "NONE",
+        "count": 0,
+        "source": "raw GitHub artifact ZIPs"
+      },
+      "refs": {
+        "status": "ARCHIVED",
+        "count": 1,
+        "source": "git bundle of refs containing run id"
+      },
+      "release_asset": {
+        "release_tag": "spider-actions-data-archive-v1",
+        "name": "run-32851946087.tar.gz",
+        "sha256": "0b061407fd31bc6b8930c8ebb066403b1650bd9bee59d4d867d6c80bda78e51a",
+        "verified_round_trip": true
+      }
+    },
+    {
+      "run_id": 32860596387,
+      "workflow_name": "SPIDER Physics Lane",
+      "workflow_path": ".github/workflows/physics-loop.yml",
+      "created_at": "2026-08-25T14:36:50Z",
+      "conclusion": "failure",
+      "archive_complete": true,
+      "actions_payload_complete": true,
+      "raw_logs": {
+        "status": "ARCHIVED",
+        "source": "GitHub run logs ZIP"
+      },
+      "artifacts": {
+        "status": "NONE",
+        "count": 0,
+        "source": "raw GitHub artifact ZIPs"
+      },
+      "refs": {
+        "status": "ARCHIVED",
+        "count": 4,
+        "source": "git bundle of refs containing run id"
+      },
+      "release_asset": {
+        "release_tag": "spider-actions-data-archive-v1",
+        "name": "run-32860596387.tar.gz",
+        "sha256": "5350f00a31cefa6c79c813c5b77ea7325e902f2bc586c8e2ed3155d496dc5b25",
+        "verified_round_trip": true
+      }
+    },
+    {
+      "run_id": 32861115761,
+      "workflow_name": "SPIDER Product and Beta Lane",
+      "workflow_path": ".github/workflows/product-loop.yml",
+      "created_at": "2026-08-25T14:41:48Z",
+      "conclusion": "failure",
+      "archive_complete": true,
+      "actions_payload_complete": true,
+      "raw_logs": {
+        "status": "ARCHIVED",
+        "source": "GitHub run logs ZIP"
+      },
+      "artifacts": {
+        "status": "NONE",
+        "count": 0,
+        "source": "raw GitHub artifact ZIPs"
+      },
+      "refs": {
+        "status": "ARCHIVED",
+        "count": 2,
+        "source": "git bundle of refs containing run id"
+      },
+      "release_asset": {
+        "release_tag": "spider-actions-data-archive-v1",
+        "name": "run-32861115761.tar.gz",
+        "sha256": "3def02361f537e88646a3d63fda2c14e4ed54b7ead0a258eba88a023bd994c73",
+        "verified_round_trip": true
+      }
+    },
+    {
+      "run_id": 32861355080,
+      "workflow_name": "SPIDER Intel Research Lane",
+      "workflow_path": ".github/workflows/intel-loop.yml",
+      "created_at": "2026-08-25T14:44:05Z",
+      "conclusion": "success",
+      "archive_complete": true,
+      "actions_payload_complete": true,
+      "raw_logs": {
+        "status": "ARCHIVED",
+        "source": "GitHub run logs ZIP"
+      },
+      "artifacts": {
+        "status": "NONE",
+        "count": 0,
+        "source": "raw GitHub artifact ZIPs"
+      },
+      "refs": {
+        "status": "ARCHIVED",
+        "count": 3,
+        "source": "git bundle of refs containing run id"
+      },
+      "release_asset": {
+        "release_tag": "spider-actions-data-archive-v1",
+        "name": "run-32861355080.tar.gz",
+        "sha256": "24d8dc7bd902a613a6488ae11c11962dfc0f184f0f2a8a98713db036fafddf1a",
+        "verified_round_trip": true
+      }
+    },
+    {
+      "run_id": 32861557668,
+      "workflow_name": "SPIDER Graph Lane",
+      "workflow_path": ".github/workflows/graph-loop.yml",
+      "created_at": "2026-08-25T14:45:57Z",
+      "conclusion": "success",
+      "archive_complete": true,
+      "actions_payload_complete": true,
+      "raw_logs": {
+        "status": "ARCHIVED",
+        "source": "GitHub run logs ZIP"
+      },
+      "artifacts": {
+        "status": "NONE",
+        "count": 0,
+        "source": "raw GitHub artifact ZIPs"
+      },
+      "refs": {
+        "status": "ARCHIVED",
+        "count": 4,
+        "source": "git bundle of refs containing run id"
+      },
+      "release_asset": {
+        "release_tag": "spider-actions-data-archive-v1",
+        "name": "run-32861557668.tar.gz",
+        "sha256": "f8a7a6cfc62ddd8b4fb9c5bbae49c0f89654213d4f5e665c9cfbb7fc046d61c7",
+        "verified_round_trip": true
+      }
+    },
+    {
+      "run_id": 32864270667,
+      "workflow_name": "SPIDER Runtime Lane",
+      "workflow_path": ".github/workflows/runtime-loop.yml",
+      "created_at": "2026-08-25T15:11:44Z",
+      "conclusion": "success",
+      "archive_complete": true,
+      "actions_payload_complete": true,
+      "raw_logs": {
+        "status": "ARCHIVED",
+        "source": "GitHub run logs ZIP"
+      },
+      "artifacts": {
+        "status": "NONE",
+        "count": 0,
+        "source": "raw GitHub artifact ZIPs"
+      },
+      "refs": {
+        "status": "ARCHIVED",
+        "count": 4,
+        "source": "git bundle of refs containing run id"
+      },
+      "release_asset": {
+        "release_tag": "spider-actions-data-archive-v1",
+        "name": "run-32864270667.tar.gz",
+        "sha256": "f9b11adc93c3a95ea098dad54f504bdcb8cd39133d45a4d6d9533c6505e2e499",
+        "verified_round_trip": true
+      }
+    },
+    {
+      "run_id": 32866023398,
+      "workflow_name": "SPIDER Product and Beta Lane",
+      "workflow_path": ".github/workflows/product-loop.yml",
+      "created_at": "2026-08-25T15:28:35Z",
+      "conclusion": "failure",
+      "archive_complete": true,
+      "actions_payload_complete": true,
+      "raw_logs": {
+        "status": "ARCHIVED",
+        "source": "GitHub run logs ZIP"
+      },
+      "artifacts": {
+        "status": "NONE",
+        "count": 0,
+        "source": "raw GitHub artifact ZIPs"
+      },
+      "refs": {
+        "status": "NONE",
+        "count": 0,
+        "source": "git bundle of refs containing run id"
+      },
+      "release_asset": {
+        "release_tag": "spider-actions-data-archive-v1",
+        "name": "run-32866023398.tar.gz",
+        "sha256": "8fb26c26bcf53d1785e26d96072e35e39d84db50e9700ae7cb39cf1c601a6637",
+        "verified_round_trip": true
+      }
+    },
+    {
+      "run_id": 32866107906,
+      "workflow_name": "SPIDER Physics Lane",
+      "workflow_path": ".github/workflows/physics-loop.yml",
+      "created_at": "2026-08-25T15:29:25Z",
+      "conclusion": "success",
+      "archive_complete": true,
+      "actions_payload_complete": true,
+      "raw_logs": {
+        "status": "ARCHIVED",
+        "source": "GitHub run logs ZIP"
+      },
+      "artifacts": {
+        "status": "NONE",
+        "count": 0,
+        "source": "raw GitHub artifact ZIPs"
+      },
+      "refs": {
+        "status": "ARCHIVED",
+        "count": 4,
+        "source": "git bundle of refs containing run id"
+      },
+      "release_asset": {
+        "release_tag": "spider-actions-data-archive-v1",
+        "name": "run-32866107906.tar.gz",
+        "sha256": "ab8fed9eedda4da7e6961e88c586dfac175246a9dcb813101d8e38a7a10705cd",
+        "verified_round_trip": true
+      }
+    },
+    {
+      "run_id": 32870361258,
+      "workflow_name": "SPIDER Product and Beta Lane",
+      "workflow_path": ".github/workflows/product-loop.yml",
+      "created_at": "2026-08-25T16:10:35Z",
+      "conclusion": "success",
+      "archive_complete": true,
+      "actions_payload_complete": true,
+      "raw_logs": {
+        "status": "ARCHIVED",
+        "source": "GitHub run logs ZIP"
+      },
+      "artifacts": {
+        "status": "NONE",
+        "count": 0,
+        "source": "raw GitHub artifact ZIPs"
+      },
+      "refs": {
+        "status": "ARCHIVED",
+        "count": 2,
+        "source": "git bundle of refs containing run id"
+      },
+      "release_asset": {
+        "release_tag": "spider-actions-data-archive-v1",
+        "name": "run-32870361258.tar.gz",
+        "sha256": "7ad274dcbb6c9a895f249d7477bff71d459b394f05d74e5a6680cd8991b46bfd",
+        "verified_round_trip": true
+      }
+    },
+    {
+      "run_id": 32873081963,
+      "workflow_name": "SPIDER Intel Research Lane",
+      "workflow_path": ".github/workflows/intel-loop.yml",
+      "created_at": "2026-08-25T16:37:36Z",
+      "conclusion": "success",
+      "archive_complete": true,
+      "actions_payload_complete": true,
+      "raw_logs": {
+        "status": "ARCHIVED",
+        "source": "GitHub run logs ZIP"
+      },
+      "artifacts": {
+        "status": "NONE",
+        "count": 0,
+        "source": "raw GitHub artifact ZIPs"
+      },
+      "refs": {
+        "status": "ARCHIVED",
+        "count": 3,
+        "source": "git bundle of refs containing run id"
+      },
+      "release_asset": {
+        "release_tag": "spider-actions-data-archive-v1",
+        "name": "run-32873081963.tar.gz",
+        "sha256": "e744e4e9daaa3822d58b01d8802783e2f8ba9af9726ef3fb4c16b5cbd95cdcac",
+        "verified_round_trip": true
+      }
+    },
+    {
+      "run_id": 32875577618,
+      "workflow_name": "SPIDER Runtime Lane",
+      "workflow_path": ".github/workflows/runtime-loop.yml",
+      "created_at": "2026-08-25T17:02:58Z",
+      "conclusion": "success",
+      "archive_complete": true,
+      "actions_payload_complete": true,
+      "raw_logs": {
+        "status": "ARCHIVED",
+        "source": "GitHub run logs ZIP"
+      },
+      "artifacts": {
+        "status": "NONE",
+        "count": 0,
+        "source": "raw GitHub artifact ZIPs"
+      },
+      "refs": {
+        "status": "ARCHIVED",
+        "count": 4,
+        "source": "git bundle of refs containing run id"
+      },
+      "release_asset": {
+        "release_tag": "spider-actions-data-archive-v1",
+        "name": "run-32875577618.tar.gz",
+        "sha256": "aad1015d578db812c66c8d9aea737b81925b3e165619953d66ec12c2106522ad",
+        "verified_round_trip": true
+      }
+    },
+    {
+      "run_id": 32875584974,
+      "workflow_name": "SPIDER Product and Beta Lane",
+      "workflow_path": ".github/workflows/product-loop.yml",
+      "created_at": "2026-08-25T17:03:02Z",
+      "conclusion": "cancelled",
+      "archive_complete": true,
+      "actions_payload_complete": true,
+      "raw_logs": {
+        "status": "ARCHIVED",
+        "source": "GitHub run logs ZIP"
+      },
+      "artifacts": {
+        "status": "NONE",
+        "count": 0,
+        "source": "raw GitHub artifact ZIPs"
+      },
+      "refs": {
+        "status": "NONE",
+        "count": 0,
+        "source": "git bundle of refs containing run id"
+      },
+      "release_asset": {
+        "release_tag": "spider-actions-data-archive-v1",
+        "name": "run-32875584974.tar.gz",
+        "sha256": "deb8b69b0227290c591c495999e2595ee6c30408953707b40373d5fb30e8c37e",
+        "verified_round_trip": true
+      }
+    },
+    {
+      "run_id": 32877702179,
+      "workflow_name": "SPIDER Runtime Lane",
+      "workflow_path": ".github/workflows/runtime-loop.yml",
+      "created_at": "2026-08-25T17:24:30Z",
+      "conclusion": "success",
+      "archive_complete": true,
+      "actions_payload_complete": true,
+      "raw_logs": {
+        "status": "ARCHIVED",
+        "source": "GitHub run logs ZIP"
+      },
+      "artifacts": {
+        "status": "NONE",
+        "count": 0,
+        "source": "raw GitHub artifact ZIPs"
+      },
+      "refs": {
+        "status": "ARCHIVED",
+        "count": 4,
+        "source": "git bundle of refs containing run id"
+      },
+      "release_asset": {
+        "release_tag": "spider-actions-data-archive-v1",
+        "name": "run-32877702179.tar.gz",
+        "sha256": "cc420bfd038a4caaf0a6f7be8ba7cf0ed0b9958c2162981f205ed555f624b476",
+        "verified_round_trip": true
+      }
+    },
+    {
+      "run_id": 32878215017,
+      "workflow_name": "SPIDER Intel Research Lane",
+      "workflow_path": ".github/workflows/intel-loop.yml",
+      "created_at": "2026-08-25T17:29:47Z",
+      "conclusion": "success",
+      "archive_complete": true,
+      "actions_payload_complete": true,
+      "raw_logs": {
+        "status": "ARCHIVED",
+        "source": "GitHub run logs ZIP"
+      },
+      "artifacts": {
+        "status": "NONE",
+        "count": 0,
+        "source": "raw GitHub artifact ZIPs"
+      },
+      "refs": {
+        "status": "ARCHIVED",
+        "count": 3,
+        "source": "git bundle of refs containing run id"
+      },
+      "release_asset": {
+        "release_tag": "spider-actions-data-archive-v1",
+        "name": "run-32878215017.tar.gz",
+        "sha256": "9de934a7f09bcdfc0f80762699ecce7f9622331202e258c45210cb84d2d92145",
+        "verified_round_trip": true
+      }
+    },
+    {
+      "run_id": 32880179571,
+      "workflow_name": "SPIDER Graph Lane",
+      "workflow_path": ".github/workflows/graph-loop.yml",
+      "created_at": "2026-08-25T17:49:47Z",
+      "conclusion": "success",
+      "archive_complete": true,
+      "actions_payload_complete": true,
+      "raw_logs": {
+        "status": "ARCHIVED",
+        "source": "GitHub run logs ZIP"
+      },
+      "artifacts": {
+        "status": "NONE",
+        "count": 0,
+        "source": "raw GitHub artifact ZIPs"
+      },
+      "refs": {
+        "status": "ARCHIVED",
+        "count": 4,
+        "source": "git bundle of refs containing run id"
+      },
+      "release_asset": {
+        "release_tag": "spider-actions-data-archive-v1",
+        "name": "run-32880179571.tar.gz",
+        "sha256": "4992c3ba7ce24757a48a0907ab0ffd7c78886f33af4c560f308e393eae1c8413",
+        "verified_round_trip": true
+      }
+    },
+    {
+      "run_id": 32880285474,
+      "workflow_name": "SPIDER Critical CTO Council",
+      "workflow_path": ".github/workflows/cto-council.yml",
+      "created_at": "2026-08-25T17:50:51Z",
+      "conclusion": "failure",
+      "archive_complete": true,
+      "actions_payload_complete": true,
+      "raw_logs": {
+        "status": "ARCHIVED",
+        "source": "GitHub run logs ZIP"
+      },
+      "artifacts": {
+        "status": "NONE",
+        "count": 0,
+        "source": "raw GitHub artifact ZIPs"
+      },
+      "refs": {
+        "status": "NONE",
+        "count": 0,
+        "source": "git bundle of refs containing run id"
+      },
+      "release_asset": {
+        "release_tag": "spider-actions-data-archive-v1",
+        "name": "run-32880285474.tar.gz",
+        "sha256": "618572c4af3798a5bb2ae3af6482ce928a86820eaa3879fcd8ca3df1c65ba9ce",
+        "verified_round_trip": true
+      }
+    },
+    {
+      "run_id": 32881285051,
+      "workflow_name": "SPIDER Critical CTO Council",
+      "workflow_path": ".github/workflows/cto-council.yml",
+      "created_at": "2026-08-25T18:00:59Z",
+      "conclusion": "cancelled",
+      "archive_complete": true,
+      "actions_payload_complete": true,
+      "raw_logs": {
+        "status": "ARCHIVED",
+        "source": "GitHub run logs ZIP"
+      },
+      "artifacts": {
+        "status": "NONE",
+        "count": 0,
+        "source": "raw GitHub artifact ZIPs"
+      },
+      "refs": {
+        "status": "NONE",
+        "count": 0,
+        "source": "git bundle of refs containing run id"
+      },
+      "release_asset": {
+        "release_tag": "spider-actions-data-archive-v1",
+        "name": "run-32881285051.tar.gz",
+        "sha256": "da261680aa08a5fe57c0fb2bfaf9630740461d7e01f801da430e2212d657a7ab",
+        "verified_round_trip": true
+      }
+    },
+    {
+      "run_id": 32881307714,
+      "workflow_name": "SPIDER Critical CTO Council",
+      "workflow_path": ".github/workflows/cto-council.yml",
+      "created_at": "2026-08-25T18:01:12Z",
+      "conclusion": "cancelled",
+      "archive_complete": true,
+      "actions_payload_complete": true,
+      "raw_logs": {
+        "status": "ARCHIVED",
+        "source": "GitHub run logs ZIP"
+      },
+      "artifacts": {
+        "status": "NONE",
+        "count": 0,
+        "source": "raw GitHub artifact ZIPs"
+      },
+      "refs": {
+        "status": "NONE",
+        "count": 0,
+        "source": "git bundle of refs containing run id"
+      },
+      "release_asset": {
+        "release_tag": "spider-actions-data-archive-v1",
+        "name": "run-32881307714.tar.gz",
+        "sha256": "bc534587472b622e21b83f9f6121c0bf11261b1523945d5848bee2800bbddda1",
+        "verified_round_trip": true
+      }
+    },
+    {
+      "run_id": 32881828740,
+      "workflow_name": "SPIDER Critical CTO Council",
+      "workflow_path": ".github/workflows/cto-council.yml",
+      "created_at": "2026-08-25T18:06:34Z",
+      "conclusion": "cancelled",
+      "archive_complete": true,
+      "actions_payload_complete": true,
+      "raw_logs": {
+        "status": "ARCHIVED",
+        "source": "GitHub run logs ZIP"
+      },
+      "artifacts": {
+        "status": "NONE",
+        "count": 0,
+        "source": "raw GitHub artifact ZIPs"
+      },
+      "refs": {
+        "status": "NONE",
+        "count": 0,
+        "source": "git bundle of refs containing run id"
+      },
+      "release_asset": {
+        "release_tag": "spider-actions-data-archive-v1",
+        "name": "run-32881828740.tar.gz",
+        "sha256": "31949d6d1310a053c752ecdcddab632d1a84999be2f3afdfad1e7f267f685c3f",
+        "verified_round_trip": true
+      }
+    },
+    {
+      "run_id": 32883457025,
+      "workflow_name": "SPIDER Graph Lane",
+      "workflow_path": ".github/workflows/graph-loop.yml",
+      "created_at": "2026-08-25T18:23:21Z",
+      "conclusion": "success",
+      "archive_complete": true,
+      "actions_payload_complete": true,
+      "raw_logs": {
+        "status": "ARCHIVED",
+        "source": "GitHub run logs ZIP"
+      },
+      "artifacts": {
+        "status": "NONE",
+        "count": 0,
+        "source": "raw GitHub artifact ZIPs"
+      },
+      "refs": {
+        "status": "ARCHIVED",
+        "count": 4,
+        "source": "git bundle of refs containing run id"
+      },
+      "release_asset": {
+        "release_tag": "spider-actions-data-archive-v1",
+        "name": "run-32883457025.tar.gz",
+        "sha256": "39495477531430316df3a3878669ee07510f1f388d82794077cfa9464139e637",
+        "verified_round_trip": true
+      }
+    },
+    {
+      "run_id": 32885208777,
+      "workflow_name": "SPIDER Runtime Lane",
+      "workflow_path": ".github/workflows/runtime-loop.yml",
+      "created_at": "2026-08-25T18:41:17Z",
+      "conclusion": "failure",
+      "archive_complete": true,
+      "actions_payload_complete": true,
+      "raw_logs": {
+        "status": "ARCHIVED",
+        "source": "GitHub run logs ZIP"
+      },
+      "artifacts": {
+        "status": "NONE",
+        "count": 0,
+        "source": "raw GitHub artifact ZIPs"
+      },
+      "refs": {
+        "status": "ARCHIVED",
+        "count": 2,
+        "source": "git bundle of refs containing run id"
+      },
+      "release_asset": {
+        "release_tag": "spider-actions-data-archive-v1",
+        "name": "run-32885208777.tar.gz",
+        "sha256": "be9b67e2c6e22ed387273dff416e657042819fbcfcaf17d0093a2a0f67b9a6d1",
+        "verified_round_trip": true
+      }
+    },
+    {
+      "run_id": 32885784797,
+      "workflow_name": "SPIDER Critical CTO Council",
+      "workflow_path": ".github/workflows/cto-council.yml",
+      "created_at": "2026-08-25T18:47:05Z",
+      "conclusion": "failure",
+      "archive_complete": true,
+      "actions_payload_complete": true,
+      "raw_logs": {
+        "status": "ARCHIVED",
+        "source": "GitHub run logs ZIP"
+      },
+      "artifacts": {
+        "status": "NONE",
+        "count": 0,
+        "source": "raw GitHub artifact ZIPs"
+      },
+      "refs": {
+        "status": "NONE",
+        "count": 0,
+        "source": "git bundle of refs containing run id"
+      },
+      "release_asset": {
+        "release_tag": "spider-actions-data-archive-v1",
+        "name": "run-32885784797.tar.gz",
+        "sha256": "59a2f9176b8c74e14aba5d6a9b770a11532c2ba00e67d497e39d8da6b2e77e6f",
+        "verified_round_trip": true
+      }
+    },
+    {
+      "run_id": 32886859788,
+      "workflow_name": "SPIDER Product and Beta Lane",
+      "workflow_path": ".github/workflows/product-loop.yml",
+      "created_at": "2026-08-25T18:58:05Z",
+      "conclusion": "success",
+      "archive_complete": true,
+      "actions_payload_complete": true,
+      "raw_logs": {
+        "status": "ARCHIVED",
+        "source": "GitHub run logs ZIP"
+      },
+      "artifacts": {
+        "status": "NONE",
+        "count": 0,
+        "source": "raw GitHub artifact ZIPs"
+      },
+      "refs": {
+        "status": "ARCHIVED",
+        "count": 2,
+        "source": "git bundle of refs containing run id"
+      },
+      "release_asset": {
+        "release_tag": "spider-actions-data-archive-v1",
+        "name": "run-32886859788.tar.gz",
+        "sha256": "12bd16e60b096489f1c6f6c559921fa7b131a5b673d0016166887020ec7d44a8",
+        "verified_round_trip": true
+      }
+    },
+    {
+      "run_id": 32887030457,
+      "workflow_name": "SPIDER Runtime Lane",
+      "workflow_path": ".github/workflows/runtime-loop.yml",
+      "created_at": "2026-08-25T18:59:53Z",
+      "conclusion": "success",
+      "archive_complete": true,
+      "actions_payload_complete": true,
+      "raw_logs": {
+        "status": "ARCHIVED",
+        "source": "GitHub run logs ZIP"
+      },
+      "artifacts": {
+        "status": "NONE",
+        "count": 0,
+        "source": "raw GitHub artifact ZIPs"
+      },
+      "refs": {
+        "status": "ARCHIVED",
+        "count": 5,
+        "source": "git bundle of refs containing run id"
+      },
+      "release_asset": {
+        "release_tag": "spider-actions-data-archive-v1",
+        "name": "run-32887030457.tar.gz",
+        "sha256": "840044c11e0a016a7ccf134b7865cadc2fe2cda8e30209e17c76526f2b81187c",
+        "verified_round_trip": true
+      }
+    },
+    {
+      "run_id": 32890075186,
+      "workflow_name": "SPIDER Intel Research Lane",
+      "workflow_path": ".github/workflows/intel-loop.yml",
+      "created_at": "2026-08-25T19:31:42Z",
+      "conclusion": "success",
+      "archive_complete": true,
+      "actions_payload_complete": true,
+      "raw_logs": {
+        "status": "ARCHIVED",
+        "source": "GitHub run logs ZIP"
+      },
+      "artifacts": {
+        "status": "NONE",
+        "count": 0,
+        "source": "raw GitHub artifact ZIPs"
+      },
+      "refs": {
+        "status": "ARCHIVED",
+        "count": 3,
+        "source": "git bundle of refs containing run id"
+      },
+      "release_asset": {
+        "release_tag": "spider-actions-data-archive-v1",
+        "name": "run-32890075186.tar.gz",
+        "sha256": "ce029f3dd59392fe3911491af16995f2247bdd724e1a92a8e5e4516ae19d678b",
+        "verified_round_trip": true
+      }
+    },
+    {
+      "run_id": 32894986604,
+      "workflow_name": "SPIDER Critical CTO Council",
+      "workflow_path": ".github/workflows/cto-council.yml",
+      "created_at": "2026-08-25T20:22:45Z",
+      "conclusion": "failure",
+      "archive_complete": true,
+      "actions_payload_complete": true,
+      "raw_logs": {
+        "status": "ARCHIVED",
+        "source": "GitHub run logs ZIP"
+      },
+      "artifacts": {
+        "status": "NONE",
+        "count": 0,
+        "source": "raw GitHub artifact ZIPs"
+      },
+      "refs": {
+        "status": "NONE",
+        "count": 0,
+        "source": "git bundle of refs containing run id"
+      },
+      "release_asset": {
+        "release_tag": "spider-actions-data-archive-v1",
+        "name": "run-32894986604.tar.gz",
+        "sha256": "6ffb9b8d4418631452e9a443ee4d03697471145b8f8e6d6a6ec28c3e5b231253",
+        "verified_round_trip": true
+      }
+    }
+  ]
+}

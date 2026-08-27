@@ -1,0 +1,35 @@
+{
+  "schema": "SPIDER Actions lossless archive manifest v1",
+  "run_id": 32870361258,
+  "workflow_name": "SPIDER Product and Beta Lane",
+  "workflow_path": ".github/workflows/product-loop.yml",
+  "created_at": "2026-08-25T16:10:35Z",
+  "conclusion": "success",
+  "archive_complete": true,
+  "actions_payload_complete": true,
+  "raw_logs": {
+    "status": "ARCHIVED",
+    "source": "GitHub run logs ZIP"
+  },
+  "artifacts": {
+    "status": "NONE",
+    "count": 0,
+    "source": "raw GitHub artifact ZIPs"
+  },
+  "refs": {
+    "status": "ARCHIVED",
+    "count": 2,
+    "source": "git bundle of refs containing run id"
+  },
+  "release_asset": {
+    "release_tag": "spider-actions-data-archive-v1",
+    "name": "run-32870361258.tar.gz",
+    "sha256": "7ad274dcbb6c9a895f249d7477bff71d459b394f05d74e5a6680cd8991b46bfd",
+    "verified_round_trip": true
+  },
+  "semantic_record_at_archive": {
+    "present": true,
+    "sha256": "58e4636c3442d04ad0035e0458487929d11f6e2c7caec341c35b372366b54d49"
+  },
+  "deletion_rule": "Actions run may be deleted only if this archive remains complete AND current main has a completed evidence/run-memory semantic record for the same run."
+}

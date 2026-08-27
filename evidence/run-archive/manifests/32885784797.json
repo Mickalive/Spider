@@ -1,0 +1,35 @@
+{
+  "schema": "SPIDER Actions lossless archive manifest v1",
+  "run_id": 32885784797,
+  "workflow_name": "SPIDER Critical CTO Council",
+  "workflow_path": ".github/workflows/cto-council.yml",
+  "created_at": "2026-08-25T18:47:05Z",
+  "conclusion": "failure",
+  "archive_complete": true,
+  "actions_payload_complete": true,
+  "raw_logs": {
+    "status": "ARCHIVED",
+    "source": "GitHub run logs ZIP"
+  },
+  "artifacts": {
+    "status": "NONE",
+    "count": 0,
+    "source": "raw GitHub artifact ZIPs"
+  },
+  "refs": {
+    "status": "NONE",
+    "count": 0,
+    "source": "git bundle of refs containing run id"
+  },
+  "release_asset": {
+    "release_tag": "spider-actions-data-archive-v1",
+    "name": "run-32885784797.tar.gz",
+    "sha256": "59a2f9176b8c74e14aba5d6a9b770a11532c2ba00e67d497e39d8da6b2e77e6f",
+    "verified_round_trip": true
+  },
+  "semantic_record_at_archive": {
+    "present": true,
+    "sha256": "b5a1fa685d7fed9ae34183302ba06b287c2842da586d7fcf7defef06eb1ffd13"
+  },
+  "deletion_rule": "Actions run may be deleted only if this archive remains complete AND current main has a completed evidence/run-memory semantic record for the same run."
+}

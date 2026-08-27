@@ -1,0 +1,35 @@
+{
+  "schema": "SPIDER Actions lossless archive manifest v1",
+  "run_id": 32890075186,
+  "workflow_name": "SPIDER Intel Research Lane",
+  "workflow_path": ".github/workflows/intel-loop.yml",
+  "created_at": "2026-08-25T19:31:42Z",
+  "conclusion": "success",
+  "archive_complete": true,
+  "actions_payload_complete": true,
+  "raw_logs": {
+    "status": "ARCHIVED",
+    "source": "GitHub run logs ZIP"
+  },
+  "artifacts": {
+    "status": "NONE",
+    "count": 0,
+    "source": "raw GitHub artifact ZIPs"
+  },
+  "refs": {
+    "status": "ARCHIVED",
+    "count": 3,
+    "source": "git bundle of refs containing run id"
+  },
+  "release_asset": {
+    "release_tag": "spider-actions-data-archive-v1",
+    "name": "run-32890075186.tar.gz",
+    "sha256": "ce029f3dd59392fe3911491af16995f2247bdd724e1a92a8e5e4516ae19d678b",
+    "verified_round_trip": true
+  },
+  "semantic_record_at_archive": {
+    "present": true,
+    "sha256": "681786ae1ddcf5548e175a20b1ba98efe65016ddfd5fd0d866758ef4417cb85e"
+  },
+  "deletion_rule": "Actions run may be deleted only if this archive remains complete AND current main has a completed evidence/run-memory semantic record for the same run."
+}
