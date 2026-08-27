@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-27T19:00:00Z",
+  "sourceRunId": "bootstrap-from-chorescore-empirical-pool",
+  "healthProof": "real headless bash tool-call nonce round-trip observed in the sibling ChoreScore factory; SPIDER control plane must re-probe before dispatch",
+  "healthyCount": 3,
+  "responsiveCount": 3,
+  "responsiveThresholdSeconds": 30,
+  "independenceDegraded": false,
+  "selectionBasis": {
+    "health": "bootstrap only; replaced by SPIDER current-cycle empirical probe",
+    "roleRanking": "SPIDER role prior; not a model-quality scientific claim",
+    "auditDiversity": "different producer/auditor model whenever >=2 healthy models permit"
+  },
+  "selected": {
+    "science": "mimo-v2.5-free",
+    "science_audit": "hy3-free",
+    "coding": "mimo-v2.5-free",
+    "coding_audit": "hy3-free",
+    "scout": "muse-spark-1.2-contributor-free",
+    "director": "mimo-v2.5-free",
+    "architect": "mimo-v2.5-free",
+    "curator": "muse-spark-1.2-contributor-free",
+    "general": "mimo-v2.5-free"
+  },
+  "fallbacks": {
+    "science": ["mimo-v2.5-free", "muse-spark-1.2-contributor-free", "hy3-free"],
+    "science_audit": ["hy3-free", "muse-spark-1.2-contributor-free", "mimo-v2.5-free"],
+    "coding": ["mimo-v2.5-free", "hy3-free", "muse-spark-1.2-contributor-free"],
+    "coding_audit": ["hy3-free", "muse-spark-1.2-contributor-free", "mimo-v2.5-free"],
+    "scout": ["muse-spark-1.2-contributor-free", "mimo-v2.5-free", "hy3-free"],
+    "director": ["mimo-v2.5-free", "muse-spark-1.2-contributor-free", "hy3-free"],
+    "architect": ["mimo-v2.5-free", "hy3-free", "muse-spark-1.2-contributor-free"],
+    "curator": ["muse-spark-1.2-contributor-free", "hy3-free", "mimo-v2.5-free"],
+    "general": ["mimo-v2.5-free", "hy3-free", "muse-spark-1.2-contributor-free"]
+  },
+  "probes": []
+}
