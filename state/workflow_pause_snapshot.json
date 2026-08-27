@@ -1,0 +1,87 @@
+{
+  "schema": "SPIDER workflow pause snapshot v1",
+  "paused_by_run_id": "33120586805",
+  "source_main_sha": "c36daca864e63a08d61de24198a9ecb8bd23fb20",
+  "workflows": [
+    {
+      "id": 340843817,
+      "name": "SPIDER Graph Lane",
+      "path": ".github/workflows/graph-loop.yml"
+    },
+    {
+      "id": 340843819,
+      "name": "SPIDER Physics Lane",
+      "path": ".github/workflows/physics-loop.yml"
+    },
+    {
+      "id": 341599559,
+      "name": "SPIDER Intel Research Lane",
+      "path": ".github/workflows/intel-loop.yml"
+    },
+    {
+      "id": 341599903,
+      "name": "SPIDER Product and Beta Lane",
+      "path": ".github/workflows/product-loop.yml"
+    },
+    {
+      "id": 341613176,
+      "name": "SPIDER Product Beta Repair",
+      "path": ".github/workflows/product-beta-repair.yml"
+    },
+    {
+      "id": 342194281,
+      "name": "SPIDER Critical CTO Council",
+      "path": ".github/workflows/cto-council.yml"
+    },
+    {
+      "id": 342196196,
+      "name": "SPIDER Runtime Lane",
+      "path": ".github/workflows/runtime-loop.yml"
+    },
+    {
+      "id": 342307850,
+      "name": "SPIDER Frontier Research Team",
+      "path": ".github/workflows/frontier-research.yml"
+    },
+    {
+      "id": 342316142,
+      "name": "SPIDER Repo Hygiene",
+      "path": ".github/workflows/repo-hygiene.yml"
+    },
+    {
+      "id": 342317945,
+      "name": "SPIDER Historical Run Ledger Recovery",
+      "path": ".github/workflows/evidence-curator.yml"
+    },
+    {
+      "id": 342948078,
+      "name": "SPIDER Accepted Results Publisher",
+      "path": ".github/workflows/publish-accepted-results.yml"
+    },
+    {
+      "id": 342952376,
+      "name": "SPIDER Product Engineering Loop",
+      "path": ".github/workflows/product-engineering-loop.yml"
+    },
+    {
+      "id": 343121108,
+      "name": "SPIDER Product Engineering Kick Once",
+      "path": ".github/workflows/kick-product-engineering-once.yml"
+    },
+    {
+      "id": 343139544,
+      "name": "SPIDER Product Engineering Failure Review",
+      "path": ".github/workflows/product-engineering-failure-review.yml"
+    },
+    {
+      "id": 344066632,
+      "name": "SPIDER Autonomous Control Plane",
+      "path": ".github/workflows/spider-control-plane.yml"
+    },
+    {
+      "id": 344095233,
+      "name": "SPIDER Product Evidence Handoff",
+      "path": ".github/workflows/product-evidence-handoff.yml"
+    }
+  ]
+}
