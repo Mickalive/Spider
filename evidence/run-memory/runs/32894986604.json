@@ -1,0 +1,93 @@
+{
+  "run_id": 32894986604,
+  "workflow_name": "SPIDER Critical CTO Council",
+  "workflow_path": ".github/workflows/cto-council.yml",
+  "status": "completed",
+  "conclusion": "failure",
+  "head_sha": "b9c51073bd19e369cf8837ee3064d82ec1304f2c",
+  "created_at": "2026-08-25T20:22:45Z",
+  "updated_at": "2026-08-25T20:47:07Z",
+  "event": "workflow_run",
+  "head_branch": "main",
+  "run_number": 17,
+  "run_attempt": 1,
+  "triggering_actor_login": "Mickalive",
+  "actions_url": "https://github.com/Mickalive/Spider/actions/runs/32894986604",
+  "bundle_provenance": {
+    "jobs_api_snapshot_total": 1,
+    "artifacts_api_snapshot": "{\"total_count\":0,\"artifacts\":[]}",
+    "raw_log_bytes_approx": 160000,
+    "fetched_cycle_refs": {},
+    "token_permissions": "Actions: write, Contents: write",
+    "cto_branch": "lab/cto"
+  },
+  "job_summary": {
+    "job_name": "CHIEF CTO — GLOBAL RESEARCH PORTFOLIO REVIEW",
+    "conclusion": "failure",
+    "duration_seconds_approx": 1455,
+    "wall_minutes_approx": 24.3,
+    "opencode_session": "20:23:01-20:46:59Z (~24m) Chief CTO fresh-context synthesis with 5 cto_* critics",
+    "key_steps": [
+      "Mount accepted snapshots: lab/graph@3e36b4c, lab/physics@a00dc6a?, lab/intel@8bfcf85, lab/product@e84b11c, lab/runtime@7669dcd, frontier INDEX empty",
+      "Critics cto_graph/cto_physics/cto_intel/cto_product/cto_runtime completed (log 20:24-20:46Z) and drafted CTO-5 Entry + 6 handoffs",
+      "Write state/cto_direction.json + docs/CTO_LEDGER.md + CTO_TO_* drafts to UNTRACKED working tree",
+      "Persist step git switch -C cto-output failed: 'error: The following untracked working tree files would be overwritten by checkout: ... docs/CTO_LEDGER.md etc' exit 1"
+    ],
+    "artifacts": 0,
+    "recovery_manifest": "No commit landed; cto-output branch not updated; lab/cto tip unchanged (still 6b1f030 lineage)"
+  },
+  "evidence_class": "CTO",
+  "durable_refs": [
+    "git:origin/lab/cto history (still at pre-run tip; this run produced zero commits)",
+    "git:.github/workflows/cto-council.yml@b9c5107 (concurrency group, checkout ref main fetch-depth 0)",
+    "/tmp/spider_run_evidence/32894986604/logs.txt (sole witness of full CTO-5 synthesis that was destroyed at persist; 1594 lines)",
+    "git:origin/lab/graph@3e36b4c + lab/intel@8bfcf85 + lab/product@e84b11c + lab/runtime@7669dcd (accepted snapshots mounted)",
+    "git:docs/CTO_LEDGER.md (current accepted ledger - this run's draft never merged)"
+  ],
+  "findings": [
+    {
+      "kind": "BUG",
+      "summary": "CHARTERED WORK DESTROYED AT PERSIST: the council session completed its full portfolio review (gate-verified synthesis across 5 lanes + hygiene/curator evidence memory) and wrote CTO-scoped state + ledger + handoffs as UNTRACKED files on main@b9c5107, then the workflow's persist step attempted 'git switch -C cto-output $PREV_CTO' which aborted with 'untracked working tree files would be overwritten by checkout' (7 files). Exit 1 killed the job despite steps 1-9 all green. Exact same hazard previously recorded in runs/32880285474.json and later recurred in 32885784797. No charter was dispatched; lab/cto unchanged.",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "importance": "HIGH",
+      "route_to": ["CTO", "INFRA", "RUNTIME"]
+    },
+    {
+      "kind": "RESULT",
+      "summary": "STRANDED CTO-5 SYNTHESIS (LOG-ONLY, NOT AUDITED): five critics drafted a coherent portfolio review: Graph scaling G-H5 accepted at 3e36b4c with successor graph-inheritance-generalization authorized, Physics WP-006 remains FALSIFIED/DORMANT per V3, Intel validated Unbrowse PoC (1 host) with multi-host mission open, Product PB-001 v4 lineage active, Runtime first artifact stranded; frontier charters proposed included ft-phy-volatility-freshness and ft-econ-cache-aware-inheritance seeds. Content survived only in the Actions log - no commit, no dispatch, so it must NOT be cited as durable CTO evidence.",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "importance": "MEDIUM",
+      "route_to": ["CTO"]
+    },
+    {
+      "kind": "COST",
+      "summary": "~24m runner (provision + full fetch of ~130 remote branches + 5 critic subagents + CTO synthesis) with zero durable output; model opencode/x-preview-f-free; token cost unprinted; every lane snapshot fetch wasted due to one git checkout flag.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "LOW",
+      "route_to": ["INFRA", "CTO"]
+    },
+    {
+      "kind": "ANOMALY",
+      "summary": "Process-structure recurrence: 'write UNTRACKED then git stash/checkout without --force' kills completed lane-agnostic council work. Fix is either persist via git add --force on CTO paths + isolated worktree, or back up to /tmp before reset/switch (as attempted in run 32885784797). Persist logic has been patched in later main (post-b9c5107) but this window's log remains sole witness of the first feed-era council to attempt execution at all.",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "importance": "MEDIUM",
+      "route_to": ["INFRA", "RUNTIME"]
+    }
+  ],
+  "failure_signatures": [
+    "error: The following untracked working tree files would be overwritten by checkout: -> exit 1 at 'git switch -C cto-output' kills the job after synthesis completed",
+    "CHIEF CTO — GLOBAL RESEARCH PORTFOLIO REVIEW: failure with steps 1-9 success and persist step failure - orphaned synthesis pattern",
+    "No artifacts + no cycle/* branch + conclusion=failure despite full agent session success"
+  ],
+  "research_opportunities": [
+    "Harden CTO persist step to use git-backed staging ref or worktree isolation so synthesis is never destroyed by untracked-file collision; replicate fix from later council successes (post-32885784797)",
+    "Require CTO workflows to emit run-id-attributed receipt even on failure so the synthesis attempt remains attributable after hygiene pruning"
+  ],
+  "already_captured_elsewhere": [
+    "Accepted portfolio facts for this window already durable via labs: lab/graph@3e36b4c, lab/physics chain a00dc6a..., lab/intel@8bfcf85 - no new accepted claim originated here",
+    "CTO-5 eventual durable lineage landed later (run 32914937836 family) - this stranded draft diverges in X-numbering and must be resolved by date/content, not reused verbatim"
+  ],
+  "distillation_complete": true,
+  "safe_to_prune": false,
+  "pruning_rationale": "This bundle's raw log (1594 lines) is the SOLE witness of the first feed-era CTO council's complete synthesis and the exact persist-step collision that destroyed it; deleting it would erase the only first-hand record of early CTO-5 charter proposals (including the first pump-cache-aware economics charter ft-econ-cache-aware-inheritance) and the root-cause signature. Durable labs contain none of this council's work. Keep until hardened persist logic is proven and the stranded synthesis is explicitly superseded."
+}

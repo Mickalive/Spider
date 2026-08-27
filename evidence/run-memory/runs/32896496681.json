@@ -1,0 +1,80 @@
+{
+  "run_id": 32896496681,
+  "workflow_name": "SPIDER Run Evidence Curator",
+  "workflow_path": ".github/workflows/evidence-curator.yml",
+  "status": "completed",
+  "conclusion": "success",
+  "head_sha": "9843ea7402df23b2145cc300421de52490e9a57f",
+  "created_at": "2026-08-25T20:38:36Z",
+  "updated_at": "2026-08-25T20:59:38Z",
+  "event": "schedule",
+  "head_branch": "main",
+  "run_number": 19,
+  "run_attempt": 1,
+  "actor_login": "Mickalive",
+  "actions_url": "https://github.com/Mickalive/Spider/actions/runs/32896496681",
+  "bundle_provenance": {
+    "jobs_api_snapshot_total": 1,
+    "artifacts_api_snapshot": "{\"total_count\":0,\"artifacts\":[]}",
+    "raw_log_bytes_approx": 405800,
+    "fetched_cycle_refs": {},
+    "token_permissions": "Actions: read, Contents: write"
+  },
+  "job_summary": {
+    "job_name": "Distill completed run knowledge into durable CTO memory",
+    "conclusion": "success",
+    "duration_seconds_approx": 1252,
+    "wall_minutes_approx": 20.9,
+    "key_step": "OpenCode session 20:39:09-20:59:29Z; persist commit 22212b9 @20:59:34Z",
+    "receipt_commit": "22212b9056a563abe560b9d2b5b62fda0cdad8dd",
+    "artifacts": 0,
+    "selected_targets": [32799261473, 32799587656, 32800296360, 32809100696, 32820217763],
+    "selection_rule": "BACKFILL_BATCH=5 earliest without runs/*.json; DELETED_RUNS_RECOVERY.json already present so hygiene branch skipped"
+  },
+  "evidence_class": "OPERATIONAL",
+  "durable_refs": [
+    "git:22212b9056a563abe560b9d2b5b62fda0cdad8dd ('evidence: distill Actions runs 32799261473,32799587656,32800296360,32809100696,32820217763', 2026-08-25T20:59:34Z, 7 files: 5 records + INDEX.md + CTO_FEED.json diff 92 lines)",
+    "evidence/run-memory/runs/32799261473.json (Product PB-001 attempt3 builder abort - external_directory permission family)",
+    "evidence/run-memory/runs/32799587656.json (Physics WP-006 carryforward stewardship - FALSIFIED held, attempt-2 cancelled but audit PASS elsewhere)",
+    "evidence/run-memory/runs/32800296360.json (Intel cycle 4 SGDR promotion cycle - VALIDATED_USEFUL still, now with context)",
+    "evidence/run-memory/runs/32809100696.json (Intel scout-only micro-cycle for multi-host feasibility)",
+    "evidence/run-memory/runs/32820217763.json (Product PB-001 rev2 architect installer failure - opencode.ai/install fetch fail)",
+    "git:origin/lab/intel + lab/product + lab/physics snapshots mounted at digest time"
+  ],
+  "findings": [
+    {
+      "kind": "RESULT",
+      "summary": "Five-target distillation spanning Product, Physics, Intel: Product PB-001 attempt3 builder permission abort (32799261473), Physics WP-006 carryforward with bit-exact frozen snapshot and cancelled attempt-2 audit overlay (32799587656), Intel cycle-4 validated SGDR context refresh (32800296360), Intel scout feasibility probe (32809100696), Product PB-001 rev2 4s installer fetch failure (32820217763). All five produced DURABLE_UNAUDITED research OPERATIONAL_DIAGNOSTIC findings, passed validation, persisted as 22212b9 (+456 lines).",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "importance": "MEDIUM",
+      "route_to": ["CTO", "INFRA"]
+    },
+    {
+      "kind": "BUG",
+      "summary": "CROSS-LANE PERMISSION ABORT FAMILY re-witnessed twice in this batch (32799261473 product builder external_directory abort after ~3m40s; 32820217763 architect opencode.ai/install fetch fail after ~4s) - complements the earlier 32782331702 Graph empty-snapshot abort, forming the empirical basis for CF-2026-08-25-05/13. Infrastructure finding only here, not a product claim.",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "importance": "MEDIUM",
+      "route_to": ["INFRA", "RUNTIME", "CTO"]
+    },
+    {
+      "kind": "COST",
+      "summary": "~20.9m wall with deep inspection of 5 bundles (Physics+Intel+Product), 7-file commit; no cycle refs carried (refs.txt empty for all 5); schedule trigger.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "LOW",
+      "route_to": ["INFRA"]
+    }
+  ],
+  "failure_signatures": [],
+  "research_opportunities": [
+    "Harden lane agent runtimes to degrade gracefully on permission/tool-install failures (skip tool, retry with backoff) instead of terminating session; pre-authorize parent tmp paths",
+    "Add zero-diff guard after each team phase (skip audit when team branch equals base) to avoid auditing empty production snapshots"
+  ],
+  "already_captured_elsewhere": [
+    "Each distilled target's full scientific/operational substance lives in its own runs/*.json record (linked)",
+    "WP-006 accepted FALSIFIED verdict and lab/physics chain already durable (a00dc6a..0be8d8a) - this batch only carries carryforward provenance",
+    "102-run hygiene state verified intact 102/102, dual-key invariant untouched"
+  ],
+  "distillation_complete": true,
+  "safe_to_prune": false,
+  "pruning_rationale": "Conservative: batch witnesses the schedule-backfill chain and provides the log excerpts that ground permission-abort findings. Durable output lives in 22212b9, but the composite witness advances INDEX/CTO_FEED chain completeness."
+}

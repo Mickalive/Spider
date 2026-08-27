@@ -1,6 +1,6 @@
 {
   "schema": "SPIDER CTO feed v1",
-  "updated": "2026-08-26",
+  "updated": "2026-08-27",
   "maintained_by": "RUN EVIDENCE CURATOR",
   "purpose": "Radar of HIGH/MEDIUM findings still actionable. Epistemic statuses preserved; nothing here certifies scientific truth. The Chief CTO must route any new claim to a lane/team for validation before use.",
   "findings": [
@@ -1868,6 +1868,230 @@
         "PRODUCT",
         "CTO"
       ]
+    },
+    {
+      "id": "CF-2026-08-27-32892849551-RESULT-MEDIUM",
+      "importance": "MEDIUM",
+      "kind": "RESULT",
+      "summary": "First multi-target backfill batch after the recovery baseline landed: distilled era-straddling set covering one provenance incident (32790538553 one-shot deleter of 21 runs incl. 2 Graph claim-bearing runs, durable via lab/graph f42c14d/c1dd8e3), two REVISE-bounded repair rounds (Intel SGDR 32792931901, Physics 32793165981), one retry-storm failure (Graph 32793580374 x8 attempts, Director never ran), and one delivery-mismatch empty snapshot (Intel 32796176172). All five wrote runs/*.json + INDEX",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "source_run_id": 32892849551,
+      "workflow_name": "SPIDER Run Evidence Curator",
+      "durable_refs": [
+        "git:b9c51073bd19e369cf8837ee3064d82ec1304f2c ('evidence: distill Actions runs 32790538553,32792931901,32793165981,32793580374,32796176172', 2026-08-25T20:20:50Z, 7 files: 5 run records + updated INDEX.md + CTO_FEED.json)",
+        "evidence/run-memory/runs/32790538553.json (21-run one-shot deletion manifest, NONE_MATERIAL claim loss, full verbatim kept)"
+      ],
+      "route_to": [
+        "CTO",
+        "INFRA"
+      ],
+      "actionable_next": [
+        "Route to lane director for validation; do not cite as truth before audit"
+      ]
+    },
+    {
+      "id": "CF-2026-08-27-32894986604-BUG-HIGH",
+      "importance": "HIGH",
+      "kind": "BUG",
+      "summary": "CHARTERED WORK DESTROYED AT PERSIST: the council session completed its full portfolio review (gate-verified synthesis across 5 lanes + hygiene/curator evidence memory) and wrote CTO-scoped state + ledger + handoffs as UNTRACKED files on main@b9c5107, then the workflow's persist step attempted 'git switch -C cto-output $PREV_CTO' which aborted with 'untracked working tree files would be overwritten by checkout' (7 files). Exit 1 killed the job despite steps 1-9 all green. Exact same hazard previo",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "source_run_id": 32894986604,
+      "workflow_name": "SPIDER Critical CTO Council",
+      "durable_refs": [
+        "git:origin/lab/cto history (still at pre-run tip; this run produced zero commits)",
+        "git:.github/workflows/cto-council.yml@b9c5107 (concurrency group, checkout ref main fetch-depth 0)"
+      ],
+      "route_to": [
+        "CTO",
+        "INFRA",
+        "RUNTIME"
+      ],
+      "actionable_next": [
+        "Verify root cause via log reproduction before treating fix as verified",
+        "Harden runtime/workflow to degrade gracefully"
+      ]
+    },
+    {
+      "id": "CF-2026-08-27-32894986604-RESULT-MEDIUM",
+      "importance": "MEDIUM",
+      "kind": "RESULT",
+      "summary": "STRANDED CTO-5 SYNTHESIS (LOG-ONLY, NOT AUDITED): five critics drafted a coherent portfolio review: Graph scaling G-H5 accepted at 3e36b4c with successor graph-inheritance-generalization authorized, Physics WP-006 remains FALSIFIED/DORMANT per V3, Intel validated Unbrowse PoC (1 host) with multi-host mission open, Product PB-001 v4 lineage active, Runtime first artifact stranded; frontier charters proposed included ft-phy-volatility-freshness and ft-econ-cache-aware-inheritance seeds. Content su",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "source_run_id": 32894986604,
+      "workflow_name": "SPIDER Critical CTO Council",
+      "durable_refs": [
+        "git:origin/lab/cto history (still at pre-run tip; this run produced zero commits)",
+        "git:.github/workflows/cto-council.yml@b9c5107 (concurrency group, checkout ref main fetch-depth 0)"
+      ],
+      "route_to": [
+        "CTO"
+      ],
+      "actionable_next": [
+        "Route to lane director for validation; do not cite as truth before audit"
+      ]
+    },
+    {
+      "id": "CF-2026-08-27-32894986604-ANOMALY-MEDIUM",
+      "importance": "MEDIUM",
+      "kind": "ANOMALY",
+      "summary": "Process-structure recurrence: 'write UNTRACKED then git stash/checkout without --force' kills completed lane-agnostic council work. Fix is either persist via git add --force on CTO paths + isolated worktree, or back up to /tmp before reset/switch (as attempted in run 32885784797). Persist logic has been patched in later main (post-b9c5107) but this window's log remains sole witness of the first feed-era council to attempt execution at all.",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "source_run_id": 32894986604,
+      "workflow_name": "SPIDER Critical CTO Council",
+      "durable_refs": [
+        "git:origin/lab/cto history (still at pre-run tip; this run produced zero commits)",
+        "git:.github/workflows/cto-council.yml@b9c5107 (concurrency group, checkout ref main fetch-depth 0)"
+      ],
+      "route_to": [
+        "INFRA",
+        "RUNTIME"
+      ],
+      "actionable_next": []
+    },
+    {
+      "id": "CF-2026-08-27-32894986949-RESULT-MEDIUM",
+      "importance": "MEDIUM",
+      "kind": "RESULT",
+      "summary": "Single-target distillation of Runtime Lane #6 (run 32887030457) executed end-to-end via workflow_run trigger: wrote runs/32887030457.json with full operational + research findings (first real Runtime artifact set: COST_EVENT dual-name pack, capsule/plan v0 schemas, stdlib resolve/verify/handoff loop, 2 CANDIDATE capsules from Graph dump, frozen prereg pilot PASS 6/6 but whole-task economics negative), updated INDEX.md and CTO_FEED.json, passed validation (including deleted_run_count guard with p",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "source_run_id": 32894986949,
+      "workflow_name": "SPIDER Run Evidence Curator",
+      "durable_refs": [
+        "git:9843ea7402df23b2145cc300421de52490e9a57f ('evidence: distill Actions runs 32887030457', 2026-08-25T20:37:15Z, 3 files: runs/32887030457.json + INDEX.md delta + CTO_FEED.json delta)",
+        "evidence/run-memory/runs/32887030457.json (Runtime R0 first artifact set stranded by scope gate - full RTD; this run's persisted output)"
+      ],
+      "route_to": [
+        "RUNTIME",
+        "CTO",
+        "INFRA"
+      ],
+      "actionable_next": [
+        "Route to lane director for validation; do not cite as truth before audit"
+      ]
+    },
+    {
+      "id": "CF-2026-08-27-32896496681-RESULT-MEDIUM",
+      "importance": "MEDIUM",
+      "kind": "RESULT",
+      "summary": "Five-target distillation spanning Product, Physics, Intel: Product PB-001 attempt3 builder permission abort (32799261473), Physics WP-006 carryforward with bit-exact frozen snapshot and cancelled attempt-2 audit overlay (32799587656), Intel cycle-4 validated SGDR context refresh (32800296360), Intel scout feasibility probe (32809100696), Product PB-001 rev2 4s installer fetch failure (32820217763). All five produced DURABLE_UNAUDITED research OPERATIONAL_DIAGNOSTIC findings, passed validation, p",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "source_run_id": 32896496681,
+      "workflow_name": "SPIDER Run Evidence Curator",
+      "durable_refs": [
+        "git:22212b9056a563abe560b9d2b5b62fda0cdad8dd ('evidence: distill Actions runs 32799261473,32799587656,32800296360,32809100696,32820217763', 2026-08-25T20:59:34Z, 7 files: 5 records + INDEX.md + CTO_FEED.json diff 92 lines)",
+        "evidence/run-memory/runs/32799261473.json (Product PB-001 attempt3 builder abort - external_directory permission family)"
+      ],
+      "route_to": [
+        "CTO",
+        "INFRA"
+      ],
+      "actionable_next": [
+        "Route to lane director for validation; do not cite as truth before audit"
+      ]
+    },
+    {
+      "id": "CF-2026-08-27-32896496681-BUG-MEDIUM",
+      "importance": "MEDIUM",
+      "kind": "BUG",
+      "summary": "CROSS-LANE PERMISSION ABORT FAMILY re-witnessed twice in this batch (32799261473 product builder external_directory abort after ~3m40s; 32820217763 architect opencode.ai/install fetch fail after ~4s) - complements the earlier 32782331702 Graph empty-snapshot abort, forming the empirical basis for CF-2026-08-25-05/13. Infrastructure finding only here, not a product claim.",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "source_run_id": 32896496681,
+      "workflow_name": "SPIDER Run Evidence Curator",
+      "durable_refs": [
+        "git:22212b9056a563abe560b9d2b5b62fda0cdad8dd ('evidence: distill Actions runs 32799261473,32799587656,32800296360,32809100696,32820217763', 2026-08-25T20:59:34Z, 7 files: 5 records + INDEX.md + CTO_FEED.json diff 92 lines)",
+        "evidence/run-memory/runs/32799261473.json (Product PB-001 attempt3 builder abort - external_directory permission family)"
+      ],
+      "route_to": [
+        "INFRA",
+        "RUNTIME",
+        "CTO"
+      ],
+      "actionable_next": [
+        "Verify root cause via log reproduction before treating fix as verified",
+        "Harden runtime/workflow to degrade gracefully"
+      ]
+    },
+    {
+      "id": "CF-2026-08-27-32897120087-RESULT-HIGH",
+      "importance": "HIGH",
+      "kind": "RESULT",
+      "summary": "ACCEPTANCE AS HONEST INVALID RUN (AUDITED): independent auditor gate PASS with safe_to_integrate=true but mechanism_status=MEASUREMENT_INVALID, ceiling NONE_THIS_RUN. Frozen evaluator ran EXACTLY ONCE on committed evidence and fired its own invalidity gate (>1 host-task with <3 valid A/B pairs): verdict MEASUREMENT_INVALID honestly measured. Auditor byte-recomputed every headline number (20/20 second-path checks), SHA256SUMS 33/33 clean, selftest 49/49, sealed schedule hash verified deterministi",
+      "evidence_status": "AUDITED_DURABLE",
+      "source_run_id": 32897120087,
+      "workflow_name": "SPIDER Intel Research Lane",
+      "durable_refs": [
+        "git:origin/cycle/intel/32897120087/scout@a74fdb0 (Scout carryforward, 18 files unbrowse_ladder_multihost)",
+        "git:origin/cycle/intel/32897120087/repro@7a80b33 (repro tree: frozen prereg cycle6_unbrowse_ladder_multihost_prereg.md with errata E1-E5, raw evidence P0-P7, 77-file disclosure package, SHA256SUMS 33/33, decision_rule_evaluation.json VERDICT=MEASUREMENT_INVALID)"
+      ],
+      "route_to": [
+        "CTO",
+        "INTEL",
+        "PRODUCT"
+      ],
+      "actionable_next": [
+        "Route to lane director for validation; do not cite as truth before audit"
+      ]
+    },
+    {
+      "id": "CF-2026-08-27-32897120087-NEGATIVE-MEDIUM",
+      "importance": "MEDIUM",
+      "kind": "NEGATIVE",
+      "summary": "FIVE mission questions remain OPEN in every direction (multi-host discovery/economics, natural-TTL window2, induced-mutation detection quality, capture-value-over-declared-spec, multi-host intent addressing) - neither confirmed nor refuted. Prereg frozen pre-collection with 7 fully disclosed attempts (crash/timeout/detached-recorder/render-gap/invalid-API-wait/RB418/carryover) and errata E1-E5 appended below separator only (frozen \u00a714 rule never edited, zero removed lines verified). Counterfactu",
+      "evidence_status": "AUDITED_DURABLE",
+      "source_run_id": 32897120087,
+      "workflow_name": "SPIDER Intel Research Lane",
+      "durable_refs": [
+        "git:origin/cycle/intel/32897120087/scout@a74fdb0 (Scout carryforward, 18 files unbrowse_ladder_multihost)",
+        "git:origin/cycle/intel/32897120087/repro@7a80b33 (repro tree: frozen prereg cycle6_unbrowse_ladder_multihost_prereg.md with errata E1-E5, raw evidence P0-P7, 77-file disclosure package, SHA256SUMS 33/33, decision_rule_evaluation.json VERDICT=MEASUREMENT_INVALID)"
+      ],
+      "route_to": [
+        "CTO",
+        "INTEL",
+        "PRODUCT"
+      ],
+      "actionable_next": []
+    },
+    {
+      "id": "CF-2026-08-27-32897120087-BUG-MEDIUM",
+      "importance": "MEDIUM",
+      "kind": "BUG",
+      "summary": "FOUR INSTRUMENT DEFECTS precisely characterized with repair paths (AUDITED OBSERVATION TIER): (1) never-attached TrafficRecorder producing silent zero-route discoveries vs honest negatives (survives code review + green selftest); (2) bare-host first-party call sites (demoblaze XHR origin mismatch) plus full-origin-vs-host filter bugs; (3) accept_demoblaze_replay unwired; (4) SCHEMA_MISMATCH over-reporting due to httpbin echoing transport headers into JSON (requires volatility-class equivalence p",
+      "evidence_status": "AUDITED_DURABLE",
+      "source_run_id": 32897120087,
+      "workflow_name": "SPIDER Intel Research Lane",
+      "durable_refs": [
+        "git:origin/cycle/intel/32897120087/scout@a74fdb0 (Scout carryforward, 18 files unbrowse_ladder_multihost)",
+        "git:origin/cycle/intel/32897120087/repro@7a80b33 (repro tree: frozen prereg cycle6_unbrowse_ladder_multihost_prereg.md with errata E1-E5, raw evidence P0-P7, 77-file disclosure package, SHA256SUMS 33/33, decision_rule_evaluation.json VERDICT=MEASUREMENT_INVALID)"
+      ],
+      "route_to": [
+        "INTEL",
+        "GRAPH",
+        "PRODUCT",
+        "RUNTIME"
+      ],
+      "actionable_next": [
+        "Verify root cause via log reproduction before treating fix as verified",
+        "Harden runtime/workflow to degrade gracefully"
+      ]
+    },
+    {
+      "id": "CF-2026-08-27-32897120087-OTHER-MEDIUM",
+      "importance": "MEDIUM",
+      "kind": "OTHER",
+      "summary": "CAPPED next mission set in state/intel_loop.json (continue=true, priority 1): clean-instrument confirmation round with fresh prereg disclosing all cycle-6 observations as prior knowledge, mandatory mechanical proof-pass before freeze (non-empty manifests, >=1 route/host-task, REPLAY_OK smoke, mutation smoke), full P0-P7 incl. natural-TTL window2 (now >=24h executable). Verdict cap: any verdict closes mission normally; second consecutive instrument-invalid round stops live collection permanently.",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "source_run_id": 32897120087,
+      "workflow_name": "SPIDER Intel Research Lane",
+      "durable_refs": [
+        "git:origin/cycle/intel/32897120087/scout@a74fdb0 (Scout carryforward, 18 files unbrowse_ladder_multihost)",
+        "git:origin/cycle/intel/32897120087/repro@7a80b33 (repro tree: frozen prereg cycle6_unbrowse_ladder_multihost_prereg.md with errata E1-E5, raw evidence P0-P7, 77-file disclosure package, SHA256SUMS 33/33, decision_rule_evaluation.json VERDICT=MEASUREMENT_INVALID)"
+      ],
+      "route_to": [
+        "CTO",
+        "INTEL",
+        "PRODUCT"
+      ],
+      "actionable_next": []
     }
   ]
 }

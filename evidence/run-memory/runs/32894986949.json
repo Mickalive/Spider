@@ -1,0 +1,75 @@
+{
+  "run_id": 32894986949,
+  "workflow_name": "SPIDER Run Evidence Curator",
+  "workflow_path": ".github/workflows/evidence-curator.yml",
+  "status": "completed",
+  "conclusion": "success",
+  "head_sha": "b9c51073bd19e369cf8837ee3064d82ec1304f2c",
+  "created_at": "2026-08-25T20:22:45Z",
+  "updated_at": "2026-08-25T20:37:18Z",
+  "event": "workflow_run",
+  "head_branch": "main",
+  "run_number": 18,
+  "run_attempt": 1,
+  "triggering_source_run_id": 32887030457,
+  "actor_login": "Mickalive",
+  "actions_url": "https://github.com/Mickalive/Spider/actions/runs/32894986949",
+  "bundle_provenance": {
+    "jobs_api_snapshot_total": 1,
+    "artifacts_api_snapshot": "{\"total_count\":0,\"artifacts\":[]}",
+    "raw_log_bytes_approx": 230000,
+    "fetched_cycle_refs": {},
+    "token_permissions": "Actions: read, Contents: write",
+    "selection_env": "CLEANUP_INCIDENT_RUN=32880942022, EVENT_NAME=workflow_run, SOURCE_RUN_ID=32887030457"
+  },
+  "job_summary": {
+    "job_name": "Distill completed run knowledge into durable CTO memory",
+    "conclusion": "success",
+    "duration_seconds_approx": 872,
+    "wall_minutes_approx": 14.5,
+    "key_step": "OpenCode session 20:22:59-20:37:15Z; persist commit 9843ea7 @20:37:15Z",
+    "receipt_commit": "9843ea7402df23b2145cc300421de52490e9a57f",
+    "artifacts": 0,
+    "selected_targets": [32887030457],
+    "selection_rule": "workflow_run triggered with SOURCE_RUN_ID=32887030457 (Runtime Lane #6 freshly completed); CLEANUP_INCIDENT_RUN present but DELETED_RUNS_RECOVERY.json already existed so hygiene branch skipped; single-target distillation"
+  },
+  "evidence_class": "OPERATIONAL",
+  "durable_refs": [
+    "git:9843ea7402df23b2145cc300421de52490e9a57f ('evidence: distill Actions runs 32887030457', 2026-08-25T20:37:15Z, 3 files: runs/32887030457.json + INDEX.md delta + CTO_FEED.json delta)",
+    "evidence/run-memory/runs/32887030457.json (Runtime R0 first artifact set stranded by scope gate - full RTD; this run's persisted output)",
+    "/tmp/spider_run_evidence/32894986949/logs.txt (2298 lines incl. 3884-line TEAM RUNTIME session excerpt)",
+    "git:origin/cycle/runtime/32887030457/team@c2f0ba8e (team-attempt-1, 64 files, DURABLE_UNAUDITED)"
+  ],
+  "findings": [
+    {
+      "kind": "RESULT",
+      "summary": "Single-target distillation of Runtime Lane #6 (run 32887030457) executed end-to-end via workflow_run trigger: wrote runs/32887030457.json with full operational + research findings (first real Runtime artifact set: COST_EVENT dual-name pack, capsule/plan v0 schemas, stdlib resolve/verify/handoff loop, 2 CANDIDATE capsules from Graph dump, frozen prereg pilot PASS 6/6 but whole-task economics negative), updated INDEX.md and CTO_FEED.json, passed validation (including deleted_run_count guard with present recovery index), persisted as 9843ea7.",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "importance": "MEDIUM",
+      "route_to": ["RUNTIME", "CTO", "INFRA"]
+    },
+    {
+      "kind": "COST",
+      "summary": "~14.5m wall; single deep bundle inspection (~3884-line TEAM RUNTIME log slice) + Git empty-refs sweep + validation; no cycle refs fetched (refs.txt empty).",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "LOW",
+      "route_to": ["INFRA"]
+    },
+    {
+      "kind": "OTHER",
+      "summary": "Workflow_run selection path witnessed: unlike schedule BACKFILL_BATCH=5, this curator path auto-selected exactly SOURCE_RUN_ID=32887030457 without scanning history - proven by log 'Selected 1 run(s): 32887030457' and by downstream 'Run 32880942022 is NOT present in this bundle so no tombstone work triggered - verified existing recovery state 102/102 untouched'. Positive provenance that the SPECIAL RECOVERY branch does not fire when only the live trigger id is supplied.",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "importance": "LOW",
+      "route_to": ["INFRA"]
+    }
+  ],
+  "failure_signatures": [],
+  "research_opportunities": [],
+  "already_captured_elsewhere": [
+    "Full Runtime R0 substance durably on cycle/runtime/32887030457/team@c2f0ba8e and runs/32887030457.json (linked)",
+    "102-run hygiene recovery state (102/102) verified intact during this pass - untouched"
+  ],
+  "distillation_complete": true,
+  "safe_to_prune": false,
+  "pruning_rationale": "Conservative: workflow_run-triggered curator runs auto-chain lane completion; this log uniquely witnesses the SOURCE_RUN_ID selection branch and the verification that hygiene recovery was correctly skipped. Full output is Git-durable at 9843ea7, but the selection mechanics witness adds chain completeness."
+}
