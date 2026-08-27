@@ -15,8 +15,11 @@ on:
       - "SPIDER Intel Research Lane"
       - "SPIDER Product and Beta Lane"
       - "SPIDER Product Beta Repair"
+      - "SPIDER Product Engineering Loop"
+      - "SPIDER Product Engineering Failure Review"
       - "SPIDER Runtime Lane"
       - "SPIDER Frontier Research Team"
+      - "SPIDER Critical CTO Council"
     types: [completed]
   schedule:
     - cron: "7,27,47 * * * *"
@@ -42,7 +45,7 @@ env:
 
 jobs:
   distill:
-    name: Distill completed run knowledge into durable CTO memory
+    name: Distill completed run knowledge into durable CTO/Product memory
     runs-on: ubuntu-latest
     timeout-minutes: 240
     steps:
@@ -144,7 +147,7 @@ jobs:
           bash .github/scripts/run-opencode-with-retry.sh run \
             --model "$SPIDER_MODEL" \
             --agent evidence_curator \
-            "Distill these completed GitHub Actions runs into durable SPIDER run memory: ${IDS}. Bundles are under /tmp/spider_run_evidence/<run_id>/. Follow EVIDENCE_CURATOR.md exactly. Inspect logs deeply enough to preserve unique discoveries, failures, costs and research opportunities. Cross-check fetched cycle refs when useful. SPECIAL RECOVERY: if run 32880942022 is present, parse its hygiene log deletion lines, create evidence/run-memory/deleted/<deleted_run_id>.json tombstones for every deleted run, recover durable refs from Git without inventing lost logs, and create/update DELETED_RUNS_RECOVERY.json. Do NOT promote log-only observations into scientific truth. Update one JSON record per supplied live run plus INDEX.md and CTO_FEED.json. Be conservative with safe_to_prune."
+            "Distill these completed GitHub Actions runs into durable SPIDER run memory: ${IDS}. Bundles are under /tmp/spider_run_evidence/<run_id>/. Follow EVIDENCE_CURATOR.md exactly. Inspect logs deeply enough to preserve unique discoveries, failures, costs and research opportunities. Cross-check fetched cycle refs when useful. SPECIAL RECOVERY: if run 32880942022 is present, parse its hygiene log deletion lines, create evidence/run-memory/deleted/<deleted_run_id>.json tombstones for every deleted run, recover durable refs from Git without inventing lost logs, and create/update DELETED_RUNS_RECOVERY.json. Do NOT promote log-only observations into scientific truth. Update one JSON record per supplied live run plus INDEX.md. Rebuild CTO_FEED.json AND PRODUCT_FEED.json from ALL durable evidence/run-memory/runs/*.json records, not only this batch, so older useful results remain inherited. Product feed must preserve claim ceilings/status and distinguish validated AUDITED_DURABLE building blocks from warnings/leads. Be conservative with safe_to_prune."
 
       - name: Validate curator outputs
         if: steps.targets.outputs.count != '0'
@@ -159,7 +162,10 @@ jobs:
           done < /tmp/spider_run_evidence/targets.txt
           test -f evidence/run-memory/INDEX.md || exit 1
           test -f evidence/run-memory/CTO_FEED.json || exit 1
+          test -f evidence/run-memory/PRODUCT_FEED.json || { echo "::error::Missing Product evidence feed"; exit 1; }
           jq -e 'type=="object" or type=="array"' evidence/run-memory/CTO_FEED.json >/dev/null
+          jq -e 'type=="object" and (.findings|type)=="array"' evidence/run-memory/PRODUCT_FEED.json >/dev/null \
+            || { echo "::error::Invalid Product evidence feed"; exit 1; }
           if grep -qx "$CLEANUP_INCIDENT_RUN" /tmp/spider_run_evidence/targets.txt; then
             test -f evidence/run-memory/DELETED_RUNS_RECOVERY.json || { echo "::error::Cleanup incident was curated without recovery index"; exit 1; }
             COUNT=$(jq -r '.deleted_run_count // 0' evidence/run-memory/DELETED_RUNS_RECOVERY.json)
