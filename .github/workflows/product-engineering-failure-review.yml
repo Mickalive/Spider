@@ -39,18 +39,16 @@ jobs:
           JOBS=$(gh api --paginate "repos/${GITHUB_REPOSITORY}/actions/runs/${FAILED_RUN_ID}/jobs?per_page=100")
           JOB_ID=$(jq -r '[.jobs[] | select(.name == "PRODUCT ENGINEERING" and .conclusion == "failure")][0].id // empty' <<<"$JOBS")
           if [[ -z "$JOB_ID" ]]; then
-            echo "Failure did not occur in the Product Engineer job; leave it to the owning workflow/supervisor."
+            echo "Failure did not occur in the Product Engineer job; leave it to the owning workflow/control plane."
             echo "review=false" >> "$GITHUB_OUTPUT"
             echo "engineer_job_id=" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-
           set +e
           LOGS=$(gh run view "$FAILED_RUN_ID" --repo "$GITHUB_REPOSITORY" --job "$JOB_ID" --log 2>&1)
           LOG_RC=$?
           set -e
-
-          INFRA_RE='(SPIDER_TRANSIENT_OX_EXHAUSTED|Unexpected server error|network_error|NetworkError|fetch failed|ECONNRESET|ECONNREFUSED|EAI_AGAIN|ENETUNREACH|ENOTFOUND|ETIMEDOUT|service unavailable|bad gateway|gateway timeout|runner has received a shutdown signal|lost communication with the runner|external_directory|SPIDER control-plane overlay restoration left residue)'
+          INFRA_RE='(SPIDER_TRANSIENT_MODEL_POOL_EXHAUSTED|SPIDER_TRANSIENT_OX_EXHAUSTED|Unexpected server error|network_error|NetworkError|fetch failed|ECONNRESET|ECONNREFUSED|EAI_AGAIN|ENETUNREACH|ENOTFOUND|ETIMEDOUT|service unavailable|bad gateway|gateway timeout|runner has received a shutdown signal|lost communication with the runner|external_directory|SPIDER control-plane overlay restoration left residue)'
           if [[ "$LOG_RC" -ne 0 ]]; then
             echo "::warning::Engineer logs unavailable; refusing to reinterpret an unknown execution failure as Product evidence."
             echo "review=false" >> "$GITHUB_OUTPUT"
@@ -58,12 +56,11 @@ jobs:
             exit 0
           fi
           if grep -Eiq "$INFRA_RE" <<<"$LOGS"; then
-            echo "Engineer failure has an infrastructure/control-plane signature; Product Supervisor owns retry."
+            echo "Engineer failure has an infrastructure/control-plane/model-pool signature; autonomous control plane owns recovery."
             echo "review=false" >> "$GITHUB_OUTPUT"
             echo "engineer_job_id=$JOB_ID" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-
           echo "Substantive Engineer/build/validation failure detected; route to Product Director review."
           echo "review=true" >> "$GITHUB_OUTPUT"
           echo "engineer_job_id=$JOB_ID" >> "$GITHUB_OUTPUT"
@@ -78,7 +75,6 @@ jobs:
       - uses: actions/checkout@v6
         with:
           fetch-depth: 0
-
       - name: Mount accepted Product state and failed Engineer snapshot when available
         shell: bash
         env:
@@ -90,7 +86,6 @@ jobs:
           chmod +x /tmp/spider-run-opencode-with-retry.sh
           git fetch origin "$PRODUCT_BRANCH"
           git switch -C "$PRODUCT_BRANCH" "origin/$PRODUCT_BRANCH"
-
           B="cycle/product/${FAILED_RUN_ID}/work"
           if git ls-remote --exit-code --heads origin "refs/heads/$B" >/dev/null 2>&1; then
             git fetch origin "$B:refs/remotes/origin/$B"
@@ -98,11 +93,8 @@ jobs:
           else
             mkdir -p /tmp/spider_product_failed_work
           fi
-
       - name: Install OpenCode
-        shell: bash
         run: curl --retry 3 --retry-all-errors --retry-delay 15 -fsSL https://opencode.ai/install | bash
-
       - name: Review substantive engineering failure
         shell: bash
         env:
@@ -111,8 +103,7 @@ jobs:
           bash /tmp/spider-run-opencode-with-retry.sh run \
             --model "$SPIDER_MODEL" \
             --agent product_director \
-            "Review the substantive Product Engineer job failure from Product Engineering run ${FAILED_RUN_ID}. Accepted Product state is this checkout; failed Engineer snapshot, if one was durably persisted, is /tmp/spider_product_failed_work. This path was entered only after excluding known infrastructure/network/control-plane signatures. Distinguish BUILD_OR_VALIDATION_FAILURE from scientific/product evidence. If state/product_work_result.json is absent, malformed, or never reached a valid Product status, do NOT claim the mechanism failed and do NOT invent negative benchmark evidence. Preserve any real scope violation, test failure, dependency defect or implementation blocker as engineering evidence. Decide whether the current work request should be retried unchanged, superseded by one bounded repair/rearchitecture request, or closed behind an explicit kill condition. Keep beta claims forbidden unless independently benchmarked. Update Product state/ledger so no stale work_launch can loop silently."
-
+            "Review the substantive Product Engineer job failure from Product Engineering run ${FAILED_RUN_ID}. Accepted Product state is this checkout; failed Engineer snapshot, if one was durably persisted, is /tmp/spider_product_failed_work. This path was entered only after excluding known infrastructure/network/control-plane/model-pool signatures. Distinguish BUILD_OR_VALIDATION_FAILURE from scientific/product evidence. If state/product_work_result.json is absent, malformed, or never reached a valid Product status, do NOT claim the mechanism failed and do NOT invent negative benchmark evidence. Preserve any real scope violation, test failure, dependency defect or implementation blocker as engineering evidence. Decide whether the current work request should be retried unchanged, superseded by one bounded repair/rearchitecture request, or closed behind an explicit kill condition. Keep beta claims forbidden unless independently benchmarked. Update Product state/ledger so no stale work_launch can loop silently."
       - name: Persist failure review and continue from accepted state
         shell: bash
         env:
