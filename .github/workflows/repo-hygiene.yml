@@ -4,8 +4,7 @@ on:
   workflow_dispatch:
   workflow_run:
     workflows:
-      - "SPIDER Run Evidence Curator"
-      - "SPIDER Actions Data Migration"
+      - "SPIDER Historical Run Ledger Recovery"
     types: [completed]
   schedule:
     - cron: "17 3 * * *"
@@ -13,8 +12,9 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/repo-hygiene.yml'
-      - 'evidence/run-archive/manifests/**'
-      - 'evidence/run-memory/runs/**'
+      - 'evidence/ledger-integration/runs/**'
+      - 'docs/*_LEDGER.md'
+      - 'reports/**'
 
 permissions:
   actions: write
@@ -26,7 +26,7 @@ concurrency:
 
 jobs:
   prune_actions_history:
-    name: Delete Actions runs only after lossless archive + semantic distillation
+    name: Delete old Actions runs only after ledger/report integration
     if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 30
@@ -36,7 +36,7 @@ jobs:
           ref: main
           fetch-depth: 0
 
-      - name: Enforce no-delete-before-archive invariant
+      - name: Enforce ledger-first deletion invariant
         env:
           GH_TOKEN: ${{ github.token }}
           KEEP_LATEST_PER_WORKFLOW: 2
@@ -67,9 +67,8 @@ jobs:
 
           deleted=0
           kept=0
-          missing_semantic=0
-          missing_archive=0
-          invalid_archive=0
+          missing_integration=0
+          invalid_integration=0
           failed=0
 
           while IFS=$'\t' read -r id wid status created name path; do
@@ -79,40 +78,58 @@ jobs:
               continue
             fi
 
-            record="evidence/run-memory/runs/${id}.json"
-            manifest="evidence/run-archive/manifests/${id}.json"
-
-            if [[ ! -f "$record" ]] || ! jq -e '.distillation_complete == true and (.findings|type)=="array"' "$record" >/dev/null 2>&1; then
-              echo "KEEP $id | semantic distillation missing/incomplete | $name"
-              missing_semantic=$((missing_semantic + 1))
+            receipt="evidence/ledger-integration/runs/${id}.json"
+            if [[ ! -f "$receipt" ]]; then
+              echo "KEEP $id | no ledger-integration receipt | $name"
+              missing_integration=$((missing_integration + 1))
               continue
             fi
 
-            if [[ ! -f "$manifest" ]]; then
-              echo "KEEP $id | lossless archive manifest missing | $name"
-              missing_archive=$((missing_archive + 1))
+            if ! jq -e --argjson id "$id" '
+              .run_id == $id and
+              .integration_complete == true and
+              .all_substantive_data_copied_to_repo == true and
+              .safe_to_delete_actions_run == true and
+              (.report_path|type)=="string" and
+              (.data_path|type)=="string" and
+              (.ledger_paths|type)=="array" and
+              (.ledger_paths|length)>0
+            ' "$receipt" >/dev/null 2>&1; then
+              echo "KEEP $id | integration receipt incomplete | $name"
+              invalid_integration=$((invalid_integration + 1))
               continue
             fi
 
-            if ! jq -e '
-              .archive_complete == true and
-              .actions_payload_complete == true and
-              .raw_logs.status == "ARCHIVED" and
-              (.artifacts.status == "ARCHIVED" or .artifacts.status == "NONE") and
-              (.refs.status == "ARCHIVED" or .refs.status == "NONE") and
-              (.release_asset.name|type)=="string" and
-              (.release_asset.sha256|type)=="string" and
-              (.release_asset.sha256|length)==64 and
-              .release_asset.verified_round_trip == true
-            ' "$manifest" >/dev/null 2>&1; then
-              echo "KEEP $id | archive manifest does not satisfy deletion gate | $name"
-              invalid_archive=$((invalid_archive + 1))
+            report=$(jq -r '.report_path' "$receipt")
+            data=$(jq -r '.data_path' "$receipt")
+            [[ -f "$report" && -f "$data" ]] || {
+              echo "KEEP $id | report/data file missing | $name"
+              invalid_integration=$((invalid_integration + 1))
               continue
-            fi
+            }
+            grep -Fq "$id" "$report" || {
+              echo "KEEP $id | run id absent from report | $name"
+              invalid_integration=$((invalid_integration + 1))
+              continue
+            }
+            jq -e --argjson id "$id" '.run_id == $id' "$data" >/dev/null 2>&1 || {
+              echo "KEEP $id | recovered data not bound to run id | $name"
+              invalid_integration=$((invalid_integration + 1))
+              continue
+            }
 
-            [[ "$(jq -r '.run_id' "$manifest")" == "$id" ]] || { echo "KEEP $id | manifest run-id mismatch"; invalid_archive=$((invalid_archive + 1)); continue; }
+            ledger_ok=true
+            while IFS= read -r ledger; do
+              [[ -f "$ledger" ]] || { ledger_ok=false; break; }
+              grep -Fq "$id" "$ledger" || { ledger_ok=false; break; }
+            done < <(jq -r '.ledger_paths[]' "$receipt")
+            [[ "$ledger_ok" == true ]] || {
+              echo "KEEP $id | ledger evidence missing | $name"
+              invalid_integration=$((invalid_integration + 1))
+              continue
+            }
 
-            echo "DELETE $id | lossless archive + semantic record verified | $name | $created"
+            echo "DELETE $id | detailed report + structured data + ledger integration verified | $name | $created"
             if gh api -X DELETE "repos/${GITHUB_REPOSITORY}/actions/runs/${id}" >/dev/null 2>&1; then
               deleted=$((deleted + 1))
             else
@@ -122,4 +139,4 @@ jobs:
           done < "$tmp"
 
           rm -f "$tmp"
-          echo "Repo hygiene: deleted=$deleted kept=$kept missing_semantic=$missing_semantic missing_archive=$missing_archive invalid_archive=$invalid_archive failed=$failed"
+          echo "Repo hygiene: deleted=$deleted kept=$kept missing_integration=$missing_integration invalid_integration=$invalid_integration failed=$failed"
