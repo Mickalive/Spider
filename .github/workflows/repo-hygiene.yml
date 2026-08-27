@@ -13,8 +13,9 @@ on:
     paths:
       - '.github/workflows/repo-hygiene.yml'
       - 'evidence/ledger-integration/runs/**'
-      - 'docs/*_LEDGER.md'
+      - 'results/**'
       - 'reports/**'
+      - 'docs/*_LEDGER.md'
 
 permissions:
   actions: write
@@ -26,7 +27,7 @@ concurrency:
 
 jobs:
   prune_actions_history:
-    name: Delete old Actions runs only after ledger/report integration
+    name: Delete old Actions runs only after canonical result integration
     if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 30
@@ -36,7 +37,7 @@ jobs:
           ref: main
           fetch-depth: 0
 
-      - name: Enforce ledger-first deletion invariant
+      - name: Enforce result-first deletion invariant
         env:
           GH_TOKEN: ${{ github.token }}
           KEEP_LATEST_PER_WORKFLOW: 2
@@ -80,7 +81,7 @@ jobs:
 
             receipt="evidence/ledger-integration/runs/${id}.json"
             if [[ ! -f "$receipt" ]]; then
-              echo "KEEP $id | no ledger-integration receipt | $name"
+              echo "KEEP $id | no canonical recovery receipt | $name"
               missing_integration=$((missing_integration + 1))
               continue
             fi
@@ -90,20 +91,29 @@ jobs:
               .integration_complete == true and
               .all_substantive_data_copied_to_repo == true and
               .safe_to_delete_actions_run == true and
-              (.report_path|type)=="string" and
-              (.data_path|type)=="string" and
-              (.ledger_paths|type)=="array" and
-              (.ledger_paths|length)>0
+              (.result_paths|type)=="array" and (.result_paths|length)>0 and
+              (.report_path|type)=="string" and (.report_path|length)>0 and
+              (.ledger_paths|type)=="array" and (.ledger_paths|length)>0 and
+              (.raw_evidence_path|type)=="string" and (.raw_evidence_path|length)>0
             ' "$receipt" >/dev/null 2>&1; then
-              echo "KEEP $id | integration receipt incomplete | $name"
+              echo "KEEP $id | recovery receipt incomplete/non-deletable | $name"
               invalid_integration=$((invalid_integration + 1))
               continue
             fi
 
+            result_ok=true
+            while IFS= read -r result; do
+              [[ "$result" == results/* && -f "$result" ]] || { result_ok=false; break; }
+            done < <(jq -r '.result_paths[]' "$receipt")
+            [[ "$result_ok" == true ]] || {
+              echo "KEEP $id | canonical result missing outside results/ | $name"
+              invalid_integration=$((invalid_integration + 1))
+              continue
+            }
+
             report=$(jq -r '.report_path' "$receipt")
-            data=$(jq -r '.data_path' "$receipt")
-            [[ -f "$report" && -f "$data" ]] || {
-              echo "KEEP $id | report/data file missing | $name"
+            [[ "$report" == reports/* && -f "$report" ]] || {
+              echo "KEEP $id | recovery report missing | $name"
               invalid_integration=$((invalid_integration + 1))
               continue
             }
@@ -112,24 +122,26 @@ jobs:
               invalid_integration=$((invalid_integration + 1))
               continue
             }
-            jq -e --argjson id "$id" '.run_id == $id' "$data" >/dev/null 2>&1 || {
-              echo "KEEP $id | recovered data not bound to run id | $name"
-              invalid_integration=$((invalid_integration + 1))
-              continue
-            }
 
             ledger_ok=true
             while IFS= read -r ledger; do
-              [[ -f "$ledger" ]] || { ledger_ok=false; break; }
+              [[ "$ledger" == docs/*_LEDGER.md && -f "$ledger" ]] || { ledger_ok=false; break; }
               grep -Fq "$id" "$ledger" || { ledger_ok=false; break; }
             done < <(jq -r '.ledger_paths[]' "$receipt")
             [[ "$ledger_ok" == true ]] || {
-              echo "KEEP $id | ledger evidence missing | $name"
+              echo "KEEP $id | ledger provenance missing | $name"
               invalid_integration=$((invalid_integration + 1))
               continue
             }
 
-            echo "DELETE $id | detailed report + structured data + ledger integration verified | $name | $created"
+            raw=$(jq -r '.raw_evidence_path' "$receipt")
+            [[ "$raw" == evidence/actions-runs/* && -d "$raw" && -f "$raw/run.json" ]] || {
+              echo "KEEP $id | raw Actions provenance missing | $name"
+              invalid_integration=$((invalid_integration + 1))
+              continue
+            }
+
+            echo "DELETE $id | results + report + ledger + raw provenance verified | $name | $created"
             if gh api -X DELETE "repos/${GITHUB_REPOSITORY}/actions/runs/${id}" >/dev/null 2>&1; then
               deleted=$((deleted + 1))
             else
