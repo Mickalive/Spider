@@ -1,9 +1,0 @@
-{
-  "lane": "graph",
-  "completed_program_run_id": "32900187567",
-  "next_program_id": "graph-addressing-fused-retrieval",
-  "next_program_title": "Store-integrated adoption test of fused task+state-summary addressing (audited Intel R-1)",
-  "dispatched_at": "2026-08-25T22:14:25Z",
-  "receipt_status": "CONFIRMED",
-  "successor_run_id": 32905175867
-}
