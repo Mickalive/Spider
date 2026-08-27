@@ -4,7 +4,7 @@
 
 Empêcher la perte de connaissance contenue uniquement dans les GitHub Actions logs tout en évitant que des logs non audités deviennent de fausses preuves scientifiques.
 
-Le Curator transforme les runs terminés en mémoire durable et compacte pour le Chief CTO, les équipes de recherche et l'infrastructure.
+Le Curator transforme les runs terminés en mémoire durable et compacte pour le Chief CTO, les équipes de recherche, l'infrastructure **et l'équipe Product**.
 
 ## Sources
 
@@ -123,7 +123,22 @@ Les runs purement orchestration/supervisor/watchdog peuvent souvent devenir prun
 
 Maintenir aussi :
 - `evidence/run-memory/INDEX.md` : synthèse compacte par thème et run ;
-- `evidence/run-memory/CTO_FEED.json` : uniquement les findings HIGH/MEDIUM encore actionnables, avec statut épistémique explicite ;
+- `evidence/run-memory/CTO_FEED.json` : findings HIGH/MEDIUM encore actionnables pour le CTO, avec statut épistémique explicite ;
+- `evidence/run-memory/PRODUCT_FEED.json` : mémoire compacte destinée à l'équipe Product ;
 - `evidence/run-memory/DELETED_RUNS_RECOVERY.json` lorsqu'une suppression antérieure doit être reconstruite.
 
-Le feed CTO est un radar. Le Chief CTO doit renvoyer toute claim nouvelle à une lane/équipe pour validation avant de l'utiliser comme vérité.
+Les feeds doivent être **reconstruits à partir de l'ensemble des records durables déjà présents sous `evidence/run-memory/runs/`**, pas seulement à partir du petit batch courant. Une nouvelle curation ne doit donc jamais faire oublier un résultat utile plus ancien.
+
+### `PRODUCT_FEED.json`
+
+Le Product feed doit transporter ce qui peut influencer une décision, une architecture, un benchmark ou un coût d'intégration Product :
+- résultats `AUDITED_DURABLE` Graph/Physics/Intel/Runtime/Frontier/Product pertinents, même si leur `route_to` historique n'avait pas explicitement nommé Product ;
+- findings HIGH/MEDIUM explicitement routés vers `PRODUCT` ;
+- baselines, limitations, résultats négatifs et failure modes qui contraignent honnêtement un produit ;
+- diagnostics opérationnels uniquement s'ils changent le coût, la robustesse, la récupérabilité ou la faisabilité Product.
+
+Chaque entrée doit conserver au minimum : `source_run_id`, `workflow_name`, `evidence_status`, `importance`, `kind`, `summary`, `durable_refs`, `route_to`, `claim_ceiling` et une courte `product_use` expliquant pourquoi Product doit la voir.
+
+Règle absolue : le feed est un **handoff**, pas une promotion épistémique. Seul `AUDITED_DURABLE` peut être utilisé comme brique validée. `DURABLE_UNAUDITED`, `LOG_ONLY_UNAUDITED` et `OPERATIONAL_DIAGNOSTIC` restent des contraintes, avertissements, pistes ou besoins de validation.
+
+Le feed CTO reste un radar : le Chief CTO doit renvoyer toute claim nouvelle à une lane/équipe pour validation avant de l'utiliser comme vérité. Le Product feed suit la même règle et doit permettre à Product d'hériter des résultats utiles sans relire des centaines de runs.
