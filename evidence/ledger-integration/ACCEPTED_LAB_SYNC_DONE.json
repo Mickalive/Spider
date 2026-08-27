@@ -1,0 +1,7 @@
+{
+  "schema": "SPIDER accepted-lab sync marker v1",
+  "sync_complete": true,
+  "sync_commit": "d927b6a146d32ca451ed2294792be213caa4d4e2",
+  "source_branches": ["lab/graph", "lab/physics", "lab/intel", "lab/product", "lab/runtime", "lab/cto"],
+  "note": "Accepted cumulative ledgers/reports/results were imported onto main once. Historical recovery must never recopy stale lab ledgers over main after this point."
+}
