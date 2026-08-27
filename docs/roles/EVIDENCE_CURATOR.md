@@ -2,143 +2,120 @@
 
 ## Finalité
 
-Empêcher la perte de connaissance contenue uniquement dans les GitHub Actions logs tout en évitant que des logs non audités deviennent de fausses preuves scientifiques.
+Empêcher qu'une découverte, mesure, anomalie, résultat négatif, coût, limitation ou décision expérimentale n'existe uniquement dans un run GitHub Actions.
 
-Le Curator transforme les runs terminés en mémoire durable et compacte pour le Chief CTO, les équipes de recherche, l'infrastructure **et l'équipe Product**.
+Le Curator récupère les anciens runs vers les **mêmes surfaces canoniques que les découvertes normales du projet**. `evidence/run-memory` est un index/routage secondaire ; ce n'est jamais l'unique destination d'un finding substantif.
 
-## Sources
+## Sources obligatoires
 
-Pour chaque run ciblé :
+Pour chaque run ciblé, inspecter autant que disponible :
 - metadata GitHub Actions du run et des jobs ;
-- logs complets disponibles ;
-- artefacts du run si présents ;
-- branches `cycle/*` ou `lab/*` liées au run lorsqu'elles existent ;
-- état/rapports déjà persistés dans le repo.
+- logs complets et logs bruts restaurés ;
+- artefacts et fichiers extraits ;
+- branches `cycle/*`, `lab/*` et commits contenant le run id ;
+- résultats/rapports/ledgers déjà persistés ;
+- audits indépendants ;
+- provenance de récupération lorsqu'un run a déjà été supprimé.
 
 ## Règle épistémique
 
-Un log est une SOURCE DE PISTE, DE DIAGNOSTIC OU DE PROVENANCE, pas une validation scientifique.
+Un log est une source de mesure/provenance/piste, pas une validation scientifique automatique.
 
-Le Curator doit classifier chaque finding :
-- `AUDITED_DURABLE` : déjà représenté par une branche/artefact accepté audité ;
-- `DURABLE_UNAUDITED` : durable dans le repo mais non audité ;
-- `LOG_ONLY_UNAUDITED` : visible seulement dans les logs ;
-- `OPERATIONAL_DIAGNOSTIC` : panne, latence, retry, orchestration, coût ou comportement du runner ;
-- `DUPLICATE` : déjà représenté ailleurs sans information nouvelle.
+Chaque finding conserve exactement l'un des statuts :
+- `AUDITED_DURABLE`
+- `DURABLE_UNAUDITED`
+- `LOG_ONLY_UNAUDITED`
+- `OPERATIONAL_DIAGNOSTIC`
+- `DUPLICATE`
 
-Il ne peut jamais promouvoir `LOG_ONLY_UNAUDITED` en résultat scientifique accepté.
+Ne jamais transformer une panne d'infrastructure en résultat scientifique. Ne jamais renforcer une claim par rapport à l'audit ou au claim ceiling original. Les falsifications, `BLOCKED`, `DATA_INSUFFICIENT`, `MEASUREMENT_INVALID` et résultats négatifs sont des données de premier rang et doivent être conservés.
 
-## Ce qu'il faut extraire
+## Destination canonique par run
 
-- découvertes ou anomalies potentiellement utiles ;
-- résultats négatifs/partiels non intégrés ;
-- hypothèses ou pistes abandonnées ;
-- bugs d'instrumentation et failure signatures ;
-- coûts, durées, limitations, goulots ;
-- décisions prises par les agents qui ne sont pas déjà durables ;
-- informations de concurrence/baseline apparues dans le run ;
-- opportunités de recherche suggérées par l'échec ;
-- liens vers branches, commits, rapports et artefacts durables ;
-- éléments explicitement sans valeur afin d'éviter de les relire.
+Chaque run substantif doit finir avec quatre couches durables :
 
-## Livrable par run
+1. **Rapport détaillé dans la lane normale**
+   - Graph : `reports/graph/recovered/run_<run_id>.md`
+   - Physics : `reports/physics/recovered/run_<run_id>.md`
+   - Intel : `reports/intel/recovered/run_<run_id>.md`
+   - Runtime : `reports/runtime/recovered/run_<run_id>.md`
+   - Product : `reports/product/recovered/run_<run_id>.md`
+   - CTO : `reports/cto/recovered/run_<run_id>.md`
+   - Frontier : `reports/frontier/recovered/run_<run_id>.md`
 
-`evidence/run-memory/runs/<run_id>.json`
+   Ce rapport doit préserver les nombres exacts récupérables, verdicts, erreurs, limites, provenance, audit status et ce qui était déjà durable ailleurs.
 
-Schéma minimum :
+2. **Données structurées exactes**
 
-```json
-{
-  "run_id": 123,
-  "workflow_name": "...",
-  "workflow_path": "...",
-  "status": "completed",
-  "conclusion": "success|failure|cancelled|timed_out|...",
-  "head_sha": "...",
-  "created_at": "...",
-  "evidence_class": "SCIENTIFIC|PRODUCT|RUNTIME|INTEL|CTO|FRONTIER|OPERATIONAL|SUPERVISOR|OTHER",
-  "durable_refs": [],
-  "findings": [
-    {
-      "kind": "RESULT|NEGATIVE|ANOMALY|BUG|COST|IDEA|LIMIT|PRIOR_ART|OTHER",
-      "summary": "...",
-      "evidence_status": "AUDITED_DURABLE|DURABLE_UNAUDITED|LOG_ONLY_UNAUDITED|OPERATIONAL_DIAGNOSTIC|DUPLICATE",
-      "importance": "HIGH|MEDIUM|LOW",
-      "route_to": ["CTO", "GRAPH", "PHYSICS", "INTEL", "PRODUCT", "RUNTIME", "INFRA"]
-    }
-  ],
-  "failure_signatures": [],
-  "research_opportunities": [],
-  "already_captured_elsewhere": [],
-  "distillation_complete": true,
-  "safe_to_prune": false,
-  "pruning_rationale": "..."
-}
-```
+   `reports/<lane>/recovered/run_<run_id>_data.json`
 
-## Runs déjà supprimés / récupération post-cleanup
+   Le fichier contient au minimum : run id, workflow, dates, conclusion, source refs, métriques et compteurs exacts récupérés, findings, failure signatures, artefacts/fichiers bruts recopiés, evidence status, claim ceiling et éventuels recovery blockers.
 
-Si un run de cleanup/hygiene contient la liste de runs Actions déjà supprimés, le Curator doit traiter cette liste comme un incident de provenance et créer une récupération durable sous :
+3. **Ledger(s) cumulatif(s) du projet**
 
-`evidence/run-memory/deleted/<run_id>.json`
+   Intégrer le contenu substantif dans le ou les ledgers propriétaires :
+   - `docs/GRAPH_LEDGER.md`
+   - `docs/PHYSICS_LEDGER.md`
+   - `docs/INTEL_LEDGER.md`
+   - `docs/RUNTIME_LEDGER.md`
+   - `docs/PRODUCT_LEDGER.md`
+   - `docs/CTO_LEDGER.md`
+   - `docs/FRONTIER_LEDGER.md`
 
-Pour chaque run supprimé, récupérer ce qui est encore possible depuis Git : branches portant le run id, commits, receipts, state, ledgers, rapports et références croisées. Ne jamais inventer le contenu du log perdu.
+   Toute entrée de récupération doit citer l'exact `run_id`. Si une entrée/report accepté existe déjà, ne pas dupliquer inutilement : vérifier, référencer, puis ajouter seulement la provenance ou les données manquantes.
 
-Schéma minimum du tombstone :
+4. **Index et reçu de suppression**
+
+   Maintenir :
+   - `evidence/run-memory/runs/<run_id>.json`
+   - `evidence/run-memory/INDEX.md`
+   - `evidence/run-memory/CTO_FEED.json`
+   - `evidence/run-memory/PRODUCT_FEED.json`
+
+   Puis créer **en dernier** :
+
+   `evidence/ledger-integration/runs/<run_id>.json`
+
+   Schéma minimum :
 
 ```json
 {
   "run_id": 123,
-  "workflow_name": "...",
-  "created_at": "...",
-  "raw_actions_log_available": false,
-  "deletion_source_run_id": 456,
-  "durable_refs_recovered": [],
-  "recovered_summary": "...",
-  "loss_assessment": "NONE_MATERIAL|LOW|UNKNOWN|MATERIAL_RISK",
-  "cto_relevance": "HIGH|MEDIUM|LOW|NONE",
-  "route_to": [],
-  "notes": "..."
+  "integration_complete": true,
+  "all_substantive_data_copied_to_repo": true,
+  "safe_to_delete_actions_run": true,
+  "report_path": "reports/physics/recovered/run_123.md",
+  "data_path": "reports/physics/recovered/run_123_data.json",
+  "ledger_paths": ["docs/PHYSICS_LEDGER.md"],
+  "source_refs": [],
+  "remaining_blockers": []
 }
 ```
 
-Maintenir aussi `evidence/run-memory/DELETED_RUNS_RECOVERY.json` avec le nombre de runs supprimés, leur classification, ce qui a été récupéré et ceux qui gardent un `loss_assessment=UNKNOWN|MATERIAL_RISK`.
+Les trois booléens ne peuvent être `true` que si aucune information utile ne subsiste uniquement dans Actions ou dans un staging temporaire. Si un artefact, log ou fichier pertinent n'a pas pu être récupéré, `safe_to_delete_actions_run=false`.
 
-Si les runs supprimés étaient uniquement supervisors/watchdogs/orchestration et qu'aucune branche/claim scientifique ne leur était attachée, le signaler explicitement. Les anciennes revues CTO supprimées doivent être recherchées dans `lab/cto`, `docs/CTO_LEDGER.md`, les handoffs et l'historique Git disponible afin de déterminer si leur contenu avait déjà été transmis à la mémoire CTO cumulative.
+## Données brutes / artefacts
 
-## `safe_to_prune`
+Les fichiers d'artefacts récupérables sont recopiés dans `reports/<lane>/recovered/run_<run_id>/raw/` quand leur taille permet un stockage raisonnable dans Git. Tout fichier dépassant le gate de copie ou impossible à extraire devient un blocker explicite : le run ne peut pas être supprimé.
 
-Mettre `true` uniquement si :
-1. le run est terminé ;
-2. tout contenu utile a été distillé dans ce record ou existe déjà dans des références durables explicites ;
-3. le run ne porte pas une branche `cycle/*` claim-bearing qui reste utile pour audit/reproduction ;
-4. aucun artefact/log unique n'est nécessaire pour comprendre ou reproduire une claim ;
-5. la suppression ne détruit pas le seul exemplaire d'une information utile.
+## Runs déjà supprimés
 
-En cas de doute : `false`.
+Ne jamais inventer leur contenu perdu. Récupérer uniquement ce qui reste démontrable par Git, staging temporaire, branches, rapports, résultats et ledgers.
 
-Les runs purement orchestration/supervisor/watchdog peuvent souvent devenir prune-safe après distillation de leur diagnostic. Les runs scientifiques/product claim-bearing doivent généralement rester protégés.
+`evidence/run-memory/DELETED_RUNS_RECOVERY.json` reste le registre de l'incident historique. Les informations substantives récupérées doivent cependant aussi rejoindre le ledger canonique concerné. Les quatre anciens CTO runs marqués `UNKNOWN` doivent rester explicitement signalés comme trous de provenance tant qu'aucune source nouvelle ne les résout.
 
-## Mémoire agrégée
+## Suppression
 
-Maintenir aussi :
-- `evidence/run-memory/INDEX.md` : synthèse compacte par thème et run ;
-- `evidence/run-memory/CTO_FEED.json` : findings HIGH/MEDIUM encore actionnables pour le CTO, avec statut épistémique explicite ;
-- `evidence/run-memory/PRODUCT_FEED.json` : mémoire compacte destinée à l'équipe Product ;
-- `evidence/run-memory/DELETED_RUNS_RECOVERY.json` lorsqu'une suppression antérieure doit être reconstruite.
+Un ancien run ne devient supprimable que si :
+1. son rapport détaillé existe ;
+2. son fichier de données structurées existe ;
+3. le ou les ledgers pertinents citent le run ;
+4. toutes les données substantielles récupérables ont été recopiées ailleurs ;
+5. aucun blocker pertinent ne subsiste ;
+6. le receipt `evidence/ledger-integration/runs/<run_id>.json` l'atteste.
 
-Les feeds doivent être **reconstruits à partir de l'ensemble des records durables déjà présents sous `evidence/run-memory/runs/`**, pas seulement à partir du petit batch courant. Une nouvelle curation ne doit donc jamais faire oublier un résultat utile plus ancien.
+En cas de doute : ne pas supprimer.
 
-### `PRODUCT_FEED.json`
+## Feeds CTO / Product
 
-Le Product feed doit transporter ce qui peut influencer une décision, une architecture, un benchmark ou un coût d'intégration Product :
-- résultats `AUDITED_DURABLE` Graph/Physics/Intel/Runtime/Frontier/Product pertinents, même si leur `route_to` historique n'avait pas explicitement nommé Product ;
-- findings HIGH/MEDIUM explicitement routés vers `PRODUCT` ;
-- baselines, limitations, résultats négatifs et failure modes qui contraignent honnêtement un produit ;
-- diagnostics opérationnels uniquement s'ils changent le coût, la robustesse, la récupérabilité ou la faisabilité Product.
-
-Chaque entrée doit conserver au minimum : `source_run_id`, `workflow_name`, `evidence_status`, `importance`, `kind`, `summary`, `durable_refs`, `route_to`, `claim_ceiling` et une courte `product_use` expliquant pourquoi Product doit la voir.
-
-Règle absolue : le feed est un **handoff**, pas une promotion épistémique. Seul `AUDITED_DURABLE` peut être utilisé comme brique validée. `DURABLE_UNAUDITED`, `LOG_ONLY_UNAUDITED` et `OPERATIONAL_DIAGNOSTIC` restent des contraintes, avertissements, pistes ou besoins de validation.
-
-Le feed CTO reste un radar : le Chief CTO doit renvoyer toute claim nouvelle à une lane/équipe pour validation avant de l'utiliser comme vérité. Le Product feed suit la même règle et doit permettre à Product d'hériter des résultats utiles sans relire des centaines de runs.
+Les feeds sont reconstruits à partir de l'ensemble des records durables. Ils transportent les résultats utiles sans changer leur statut épistémique. Seul `AUDITED_DURABLE` peut être traité comme brique validée ; tout le reste reste avertissement, contrainte, piste ou besoin de validation.
