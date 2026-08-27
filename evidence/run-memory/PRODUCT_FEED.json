@@ -2470,6 +2470,106 @@
       ],
       "claim_ceiling": "AUDITED_VERDICT",
       "product_use": "Validated building block - may be consumed as product mechanism within its stated ceiling/boundaries"
+    },
+    {
+      "source_run_id": 32900187567,
+      "workflow_name": "SPIDER Graph Lane",
+      "evidence_status": "AUDITED_DURABLE",
+      "importance": "HIGH",
+      "kind": "NEGATIVE",
+      "summary": "Graph program graph-inheritance-generalization CLOSED as SITE-BOUND (G-H6): 84 rows (7 composites x6 arms x2 passes), books depth>=4 ZERO memory-led for all 4 inheritance arms (solvable-evidenced, reset_target=entry_state x20, max novel 147 cold); quotes D4Q/D5Q replicated G-H5 bit-identically 36 cells vs cold 57-76/traj 49-65. giter_v31=0 transfer failure replicates across inventories. Wall = vocabulary addressing + wrong-class pager binding + budget (MAX_APPLICATIONS=6/MAX_RESETS=2). Ledger integrated at lab/graph@c363bcc with binding limits and audit PASS safe_to_integrate=true.",
+      "durable_refs": [
+        "git:origin/lab/graph@c363bcc",
+        "git:origin/cycle/graph/32900187567/team@9e6de6e",
+        "git:origin/cycle/graph/32900187567/audit@c210ceb",
+        "evidence/run-memory/runs/32900187567.json",
+        "results/graph/generalization_live_runs.json (analyzer sha 21fe87de)"
+      ],
+      "route_to": [
+        "GRAPH",
+        "PRODUCT",
+        "CTO"
+      ],
+      "claim_ceiling": "BUDGET_SCOPED_NEGATIVE (SITE-BOUND: holds under frozen MAX_APPLICATIONS=6/MAX_RESETS=2 and spent scaling instruments; not a universal falsification of memory-led composition; successor program graph-addressing-fused-retrieval authorized to test addressing fuse)",
+      "product_use": "Constraint - bounds any Product claim that memory-led reuse generalizes beyond quotes inventory; do not market depth>=4 book workflows as validated; reuse claims require fresh fused-retrieval instrument under new prereg, not spent V31 equipment."
+    },
+    {
+      "source_run_id": 32899318230,
+      "workflow_name": "SPIDER Run Evidence Curator",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "importance": "HIGH",
+      "kind": "BUG",
+      "summary": "Product-loop.yml destructive wipe still live at hotfix 8f3980c: workflow rm -f deletes all four state/product_beta_*.json (lines 63/136/236/327) each dispatch, deleting COMMITTED-AT-HEAD authorization/build state from the working tree. Seventh/eighth director sessions and builder had to detect-and-restore (rev6 from HEAD, freeze artifacts from ddce3a3 byte-exact, hash triple-recomputed). Every future Product dispatch repeats ritual until rm lines conditioned/removed.",
+      "durable_refs": [
+        "git:main:.github/workflows/product-loop.yml:63,136,236,327",
+        "evidence/run-memory/runs/32899318230.json",
+        "evidence/run-memory/runs/32886859788.json",
+        "git:origin/cycle/product/32886859788/architect@ddce3a3"
+      ],
+      "route_to": [
+        "PRODUCT",
+        "CTO",
+        "INFRA"
+      ],
+      "claim_ceiling": "NONE (operational bug, not a benchmark claim)",
+      "product_use": "Constraint - blocks reliable Product beta activation; increases operational fragility and provenance risk; must be fixed before any go-live claim; merge of cycle/product/32886859788/* into lab/product directed as first action at next activation."
+    },
+    {
+      "source_run_id": 32899318230,
+      "workflow_name": "SPIDER Run Evidence Curator",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "importance": "MEDIUM",
+      "kind": "LIMIT",
+      "summary": "Provenance gap: PB-001 v4+v5 amendment (V1-V6+W1-W8, B3 leakage map 0 rows) + Builder WP-8a/b/c (rank_passing_desc_only, action_trace, nav_equivalent, go-live gate chain, 91/91 tests, dress rehearsal GREEN) absent from lab/product HEAD (verified against lp fetch) and existed at review time only on session mounts plus cycle/product/32886859788/architect@ddce3a3 and builder@7657565 branches. Zero outcome rows verified (cost_events.jsonl exactly 8 harness rows, zero provider_call rows => NOT_BENCHMARKED).",
+      "durable_refs": [
+        "evidence/run-memory/runs/32899318230.json",
+        "evidence/run-memory/runs/32886859788.json",
+        "git:origin/cycle/product/32886859788/architect@ddce3a3",
+        "git:origin/cycle/product/32886859788/builder@7657565"
+      ],
+      "route_to": [
+        "PRODUCT",
+        "CTO"
+      ],
+      "claim_ceiling": "NONE_THIS_RUN (pre-outcome diagnostic, no comparative or superiority claim licensed by this run)",
+      "product_use": "Warning - Product cannot claim PB-001 validation until merge closes gap; next activation must merge before any evaluation; otherwise evaluated artifact differs from reviewed amendment."
+    },
+    {
+      "source_run_id": 32901955861,
+      "workflow_name": "SPIDER Run Evidence Curator",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "MEDIUM",
+      "kind": "BUG",
+      "summary": "Scope-gate porcelain false positive third strike (Physics #7 32860596387): auditor wrote PASS/safe_to_integrate=true/fixes=[] on beaf59c9, yet Enforce flagged 9 pre-staged control-plane files (.opencode/agents/* x7 + directives/AUDITOR.md + directives/LANE_DIRECTOR.md) and killed Director job; timeline proves concurrent duplicate spend vs parallel chain 32866107906 (accepted 17:40Z). Documents deterministic failure mode awaiting fix (diff vs session-start HEAD).",
+      "durable_refs": [
+        "evidence/run-memory/runs/32901955861.json",
+        "evidence/run-memory/runs/32860596387.json",
+        "git:origin/cycle/physics/32860596387/audit@beaf59c9"
+      ],
+      "route_to": [
+        "INFRA",
+        "CTO"
+      ],
+      "claim_ceiling": "NONE",
+      "product_use": "Constraint - audit infrastructure reliability affects Product's ability to inherit audited Graph/Physics lanes; fix prevents orphaned-PASS waste before Product depends on lane outputs."
+    },
+    {
+      "source_run_id": 32897363519,
+      "workflow_name": "SPIDER Critical CTO Council",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "importance": "MEDIUM",
+      "kind": "BUG",
+      "summary": "CTO synthesis failure: Invalid Frontier charter schema rejected complete council output (~56m wall) despite python missing=NONE on 4 charters. Zero commits, zero handoffs. Charter generator must guarantee non-empty strings and non-null strongest_null_or_baseline/stop_condition per workflow jq predicate; add pre-persist lint inside agent loop to fail fast.",
+      "durable_refs": [
+        "evidence/run-memory/runs/32897363519.json",
+        ".github/workflows/cto-council.yml validation step"
+      ],
+      "route_to": [
+        "CTO",
+        "INFRA"
+      ],
+      "claim_ceiling": "NONE (failed synthesis, no validated advisory)",
+      "product_use": "Warning - CTO frontier charters remain OPEN (orphaned time-layer, closing windows); Product should not assume orthogonal Physics successor search is chartered until a future council passes validation and persists."
     }
   ]
 }

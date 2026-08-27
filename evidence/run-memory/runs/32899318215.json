@@ -1,0 +1,68 @@
+{
+  "run_id": 32899318215,
+  "workflow_name": "SPIDER Critical CTO Council",
+  "workflow_path": ".github/workflows/cto-council.yml",
+  "status": "completed",
+  "conclusion": "cancelled",
+  "head_sha": "22212b9056a563abe560b9d2b5b62fda0cdad8dd",
+  "created_at": "2026-08-25T21:07:57Z",
+  "updated_at": "2026-08-25T21:41:58Z",
+  "run_number": 20,
+  "event": "workflow_run",
+  "head_branch": "main",
+  "actor": "Mickalive",
+  "jobs_total_count": 0,
+  "bundle_provenance": {
+    "jobs_api_snapshot_total": 0,
+    "artifacts_api_snapshot": "{\"total_count\":0,\"artifacts\":[]}",
+    "raw_log_bytes_approx": 0,
+    "raw_log_fetch_status": "available but 0-byte body, consistent with queued shell (34m wall 21:07:57→21:41:58Z, still 0 jobs)",
+    "fetched_cycle_refs": "none"
+  },
+  "evidence_class": "CTO",
+  "summary": "Workflow_run-triggered CTO Council queued duplicate (triggered by curator commit 22212b9 evidence batch at 20:59:34Z) — lived 34m01s queued on single-slot spider-cto-council behind failed council 32897363519 (20:47-21:44Z), cancelled with 0 jobs provisioned.",
+  "durable_refs": [
+    "git:main@22212b9 (triggering commit pushed by curator 32897363445 at 20:59:34Z, message 'evidence: distill ... 327992...' — this workflow_run shell's likely parent via cto-council listen list on workflow_run completed of evidence-curator)",
+    "evidence/run-memory/runs/32897363519.json (slot occupant until 21:44:08Z failure, explaining the ~34m queued wall for this shell)",
+    "git:.github/workflows/cto-council.yml@main (listen list includes evidence-curator workflow_run completed, plus concurrency cancel-in-progress:false)",
+    "evidence/run-memory/runs/32897363445.json (preceding successful curator that pushed the triggering commit, timing consistent)",
+    "/tmp/spider_run_evidence/32899318215/jobs.json 0 + logs 0 bytes"
+  ],
+  "findings": [
+    {
+      "kind": "RESULT",
+      "summary": "Long-queued duplicate fingerprint: created 21:07:57Z (8m23s after curator 32897363445's push at 20:59:34Z — delivery jitter plausible) and lived 34m01s until 21:41:58Z, matching the window where prior CTO #19 stayed in_progress until its terminal failure at 21:44:08Z. Final 0 jobs/0 artifacts/empty log proves it never provisioned a runner — cost zero, noise only. Conclusion cancelled despite never having started is the same signature as prior feed-gated CTO shells #11-#15.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "LOW",
+      "route_to": ["INFRA", "CTO"]
+    },
+    {
+      "kind": "OTHER",
+      "summary": "Parent attribution LOG_ONLY_UNAUDITED but strongest: cto-council's workflow_run triggers include evidence-curator completed, and the timing parent is the curator's push of 22212b9; nearest alternative triggers (Graph/Product) were not completing in that window. Specific canceller (newest-queued-wins by a later council push, or final cancellation of the occupant) not nameable from this bundle.",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "importance": "LOW",
+      "route_to": ["INFRA", "CTO"]
+    },
+    {
+      "kind": "LIMIT",
+      "summary": "No advisory loss — council never reached agent phase, so no log-only charter synthesis to preserve. The durable synthesis failure of the occupant (Invalid Frontier charter schema) remains the only CTO signal for this interval, and it is already distilled in runs/32897363519.json.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "LOW",
+      "route_to": ["CTO"]
+    }
+  ],
+  "failure_signatures": [
+    "workflow_run-triggered council run concluded=cancelled with total_count=0 after ~34m wall (21:07:57→21:41:58Z) — queued duplicate behind long-running council #19, superseded before start; expect empty log; distinguish from exec failure via live API"
+  ],
+  "research_opportunities": [
+    "Ghost-queue duration as metric: 34m exceeds prior 5-31m feed-era shells — instrument queue dwell across CTO shells to quantify burst-induced latency before adding debounce (feed-gating already reduces wakes, but workflow_run still fans on every curator push).",
+    "Verify via gh run view 32899318215 --json jobs,conclusion,event that trigger is workflow_run of 32897363445 vs neighbouring graph/product completions, to solidify parent inference."
+  ],
+  "already_captured_elsewhere": [
+    "Queued-shell mechanics and feed-gating waste already in CF-2026-08-25-15 lineage and prior 5 CTO shells — this shell adds the longest-dwell datapoint, not a new failure class.",
+    "Curator commit 22212b9 and its distilled backlog are durable — this council shell added nothing to lab/cto."
+  ],
+  "distillation_complete": true,
+  "safe_to_prune": false,
+  "pruning_rationale": "Longest-dwell queued CTO shell distilled so far (34m) with inferred workflow_run parent; after transcription it reveals pure noise, but retention preserves the timing evidence for queue-latency economics until live-API parent confirmation. Cost trivial — false."
+}

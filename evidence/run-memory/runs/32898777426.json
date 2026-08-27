@@ -1,0 +1,66 @@
+{
+  "run_id": 32898777426,
+  "workflow_name": "SPIDER Critical CTO Council",
+  "workflow_path": ".github/workflows/cto-council.yml",
+  "status": "completed",
+  "conclusion": "cancelled",
+  "head_sha": "22212b9056a563abe560b9d2b5b62fda0cdad8dd",
+  "created_at": "2026-08-25T21:02:16Z",
+  "updated_at": "2026-08-25T21:02:16Z",
+  "run_number": 20,
+  "event": "schedule",
+  "head_branch": "main",
+  "actor": "Mickalive",
+  "jobs_total_count": 0,
+  "bundle_provenance": {
+    "jobs_api_snapshot_total": 0,
+    "artifacts_api_snapshot": "{\"total_count\":0,\"artifacts\":[]}",
+    "raw_log_bytes_approx": 0,
+    "raw_log_fetch_status": "available but 0-byte body, consistent with never-started queued shell",
+    "fetched_cycle_refs": "none"
+  },
+  "evidence_class": "CTO",
+  "summary": "Zero-job cancelled CTO Council schedule shell (~0m lifetime, 0 jobs/0 artifacts/0-byte log) — queued duplicate superseded within single-slot spider-cto-council concurrency before provisioning.",
+  "durable_refs": [
+    "git:main@22212b9 (head_sha dispatched on: evidence: distill ... runs 327992..., stamped 20:59:34Z — this shell's dispatch context)",
+    "git:.github/workflows/cto-council.yml@main (concurrency group spider-cto-council, cancel-in-progress:false, single-slot)",
+    "evidence/run-memory/runs/32897363519.json (preceding CTO council #19, failure 20:47-21:44Z, occupying the slot during this shell's window — plausible blocker, timeline overlap)",
+    "/tmp/spider_run_evidence/32898777426/jobs.json (total_count 0) + logs.txt 0 bytes (authoritative zero-job fingerprint)"
+  ],
+  "findings": [
+    {
+      "kind": "RESULT",
+      "summary": "Cancelled-with-zero-jobs fingerprint: created_at == updated_at at 21:02:16Z with total_count 0, no artifacts, empty log — ground truth for queued-the-whole-time-then-cancelled under single-slot cancel-in-progress:false. Cost zero (no job provisioned, no token).",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "LOW",
+      "route_to": ["INFRA", "CTO"]
+    },
+    {
+      "kind": "ANOMALY",
+      "summary": "Parent/canceller not nameable from bundle alone — schedule delivery while prior CTO #19 (32897363519) was in-flight (20:47-21:44Z) suggests queue supersession, but no bundle-visible successor correlation within this 8-run input batch (nearest neighbours 32898830536 curator cancel at 21:02:50Z and 32899318215 CTO cancel at 21:07:57Z). Attribution would require live gh run view or supervisor logs that are themselves prunable.",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "importance": "LOW",
+      "route_to": ["INFRA"]
+    },
+    {
+      "kind": "OTHER",
+      "summary": "No durabl e advisory content lost — council produces material only after successful execution and validation; this shell never reached Run critical CTO council step, so no log-only charter synthesis exists to rescue.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "LOW",
+      "route_to": ["CTO"]
+    }
+  ],
+  "failure_signatures": [
+    "schedule-triggered council run concluded=cancelled with total_count=0 + 0-byte log — queued duplicate under single-slot spider-cto-council, superseded before job start; distinguish from failure by conclusion=cancelled vs failure and from fetch-harness failure via live API adjudication"
+  ],
+  "research_opportunities": [
+    "Live-API adjudication (gh run view 32898777426 --json jobs,conclusion,createdAt,updatedAt) to confirm zero-job ground truth vs harness artifact before any prune decision.",
+    "Consider schedule jitter coalescing for CTO council (cron vs workflow_run co-triggers) to avoid redundant queued slots during long council sessions."
+  ],
+  "already_captured_elsewhere": [
+    "Slot contention and queue-supersession mechanics already documented in CF-2026-08-25-15/18 and prior CTO shells (32885496244, 32885390855) — this shell adds a third datapoint, not a new mechanism."
+  ],
+  "distillation_complete": true,
+  "safe_to_prune": false,
+  "pruning_rationale": "Zero-job shell with unattributable parent/canceller locally; conservative per role doc — log empty but retention cost trivial and adjudication pending live API. Thin record, false."
+}

@@ -1,0 +1,96 @@
+{
+  "run_id": 32900187567,
+  "workflow_name": "SPIDER Graph Lane",
+  "workflow_path": ".github/workflows/graph-loop.yml",
+  "status": "completed",
+  "conclusion": "success",
+  "head_sha": "a1e08db27d98e15350509898a2ad0e9b32ff0c0e",
+  "created_at": "2026-08-25T21:17:16Z",
+  "updated_at": "2026-08-25T22:12:57Z",
+  "run_number": 11,
+  "event": "workflow_dispatch",
+  "head_branch": "main",
+  "actor": "github-actions[bot]",
+  "jobs_total_count": 5,
+  "bundle_provenance": {
+    "jobs_api_snapshot_total": 5,
+    "artifacts_api_snapshot": "{\"total_count\":0,\"artifacts\":[]}",
+    "raw_log_bytes_approx": 702000,
+    "fetched_cycle_refs": {
+      "cycle/graph/32900187567/team": "9e6de6e5e1d51abf7c0b5d71c39a6d6ded8897e2",
+      "cycle/graph/32900187567/audit": "c210ceb7943ed4cff83928c4b6f0f6337399ce14"
+    }
+  },
+  "evidence_class": "PRODUCT",
+  "summary": "Graph program graph-inheritance-generalization CLOSED as SITE-BOUND (bounded negative) via repair round 2 with audit PASS/safe_to_integrate=true: no inheritance arm memory-led on any BOOKS depth>=4 composite (D4B/D4H/D5B 0/2) while QUOTES stability family replicated G-H5 bit-identically on all 36 cells; director integrated ledger G-H6 with binding limits and launched successor graph-addressing-fused-retrieval.",
+  "durable_refs": [
+    "git:origin/cycle/graph/32900187567/team@9e6de6e (team repair r2, 1a83311..9e6de6e incl. rejected a8fc785, amendments A1/A2)",
+    "git:origin/cycle/graph/32900187567/audit@c210ceb (audit CYCLE_32900187567_GRAPH PASS gate, safe_to_integrate=true, required_fixes=[])",
+    "git:origin/lab/graph@eb53a7f (directive rewrite BEFORE integration per LANE_DIRECTOR s9, successor spec graph-addressing-fused-retrieval + AUDITOR item 28)",
+    "git:origin/lab/graph@23bf987 (merge of audited team snapshot 9e6de6e, preserves all hashes)",
+    "git:origin/lab/graph@772905f (audit artifact integration)",
+    "git:origin/lab/graph@c363bcc (completion commit, ledger G-H6, NEXT_GRAPH, state/graph_loop.json COMPLETE, product signal material=true)",
+    "results/graph/generalization_live_runs.json (84 rows, 6 arms x 7 composites x 2 passes, analyzer sha 21fe87de byte-identical)",
+    "reports/audit/CYCLE_32900187567_GRAPH.md + results/audit/CYCLE_32900187567_GRAPH_GATE.json"
+  ],
+  "findings": [
+    {
+      "kind": "RESULT",
+      "summary": "SITE-BOUND bounded negative verified and integrated (AUDITED_DURABLE G-H6): 84/84 rows (7 composites x 6 arms x 2 passes), zero unhealthy/error rows, pass1==pass2 42/42 cells, distinct store_before=1, store_after==store_before, final store {19,29,15,16}. Books depth>=4 composites (D4B/D4H/D5B) 0 memory-led for all 4 inheritance arms (solvable-evidenced via recovery attribution, reset_target=entry_state x20, max novel 147 cold). Quotes D4Q/D5Q replicated G-H5 exactly 2/2/0/2 per pass, arm novel 1-4 vs cold 57-76 / traj 49-65, D2Q frag_v31-only replicates, giter_v31 transfer failure replicates across inventories.",
+      "evidence_status": "AUDITED_DURABLE",
+      "importance": "HIGH",
+      "route_to": ["GRAPH", "PRODUCT", "CTO"]
+    },
+    {
+      "kind": "RESULT",
+      "summary": "Audit PASS gate closed documentation-only defects RF-D1..RF-D5 without phase rerun: RF-D1 corrected books novel-cost ranges to reused 10-16/novel 60-120 (n=16 giter subset) and 3-16/60-120 (n=32 all-inheritance), batch max novel=147; RF-D2 suite totals 23+27+15+15+10=90 green (integrity 3 pass + pre-existing Physics fixture failure); RF-D4 exact KB delta id10 generic.paginate.next@quotes success_count 1->2 plus description-token refresh via legacy non-blind lookup during GB3r; RF-D5 classifier first disjunct redundant. Team changelog preserved a8fc785.",
+      "evidence_status": "AUDITED_DURABLE",
+      "importance": "MEDIUM",
+      "route_to": ["GRAPH", "CTO"]
+    },
+    {
+      "kind": "RESULT",
+      "summary": "Director verification on merged tree byte-identical: analyzer replay sha256 21fe87de..., KB dump delta exactly one changed fragment row id10 + one added romance fragment, ledger wording with binding limits (weak solvability, budget-scoped negative, replicated giter_v31 failure), P1 amendment history with rehearsal-contamination lesson, provenance preserved including cycle/graph/32880179571 EMPTY branches untouched at 3e36b4c.",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "importance": "MEDIUM",
+      "route_to": ["GRAPH", "CTO"]
+    },
+    {
+      "kind": "LIMIT",
+      "summary": "Wall = description-vocabulary addressing misses + wrong-class pager binding + budget-bounded exploration; pure-memory depth <=4 classes quotes / <=3 books vs nominal; entry-state constraint eliminated root-drift but did not change outcomes. Negative is budget-scoped under MAX_APPLICATIONS=6/MAX_RESETS=2 and spent instruments (scaling confirm/dev instruments drained pre-outcome per prereg).",
+      "evidence_status": "AUDITED_DURABLE",
+      "importance": "MEDIUM",
+      "route_to": ["GRAPH", "PRODUCT", "RUNTIME", "CTO"]
+    },
+    {
+      "kind": "IDEA",
+      "summary": "Successor program graph-addressing-fused-retrieval LAUNCHED (audited Intel R-1, queued pre-outcome at Director Run 32861557668, NOT a rescue). Directive carries P0/P1/P2 phases, fourth-authorship instrument + selection-on-instrument prohibition, cross-attempt concatenation contamination gate, cluster-separation reporting, adopt/stop horizon in every branch. Intel R-2 route-records remain QUEUED; capsule export queued outside verdict. AUDITOR_GRAPH item 28 added from audit observation.",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "importance": "MEDIUM",
+      "route_to": ["GRAPH", "CTO", "INTEL"]
+    },
+    {
+      "kind": "BUG",
+      "summary": "Historical baggage commit does not taint outcome: docs/roles/CHIEF_CTO.md conflict resolved to OURS (81954f66) vs team's e6c0798 refresh — recorded as control-plane overlay, pending Meta-Director reconciliation, zero Graph science content (pattern per round-0 RF-5).",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "LOW",
+      "route_to": ["INFRA", "CTO"]
+    }
+  ],
+  "failure_signatures": [
+    "None this run — prior round-1 REVISE RF-D1..RF-D5 were documentation defects, fully corrected as report-only in this repair round; no phase rerun required."
+  ],
+  "research_opportunities": [
+    "Execute successor graph-addressing-fused-retrieval with fourth-authorship instrument under fresh prereg to test whether fused description addressing overcomes the site-bound vocabulary/binding wall before concluding generalization failure is fundamental.",
+    "Compare cold/traj vs inheritance attribution under same budget to isolate addressing vs exploration contribution; selection-on-instrument prohibits reusing spent scaling instruments for quantitative adoption claims.",
+    "Integrate queued Intel R-2 route records into Graph as explicit capability candidates and test composability vs direct replay baselines (per PRODUCT feed constraints)."
+  ],
+  "already_captured_elsewhere": [
+    "G-H5 SCALING-HOLDS prior program (lab/graph@3e36b4c) — this run replicates that family bit-identically, not a new positive claim.",
+    "Physics WP-006 FALSIFIED and domain reopened under V3 — consulted but untouched (lab/physics@c15321c).",
+    "Intel Unbrowse VALIDATED_USEFUL PoC — consulted via lab/intel@8bfcf85, recommendation R-1 consumed for successor program."
+  ],
+  "distillation_complete": true,
+  "safe_to_prune": false,
+  "pruning_rationale": "Claim-bearing audited Graph cycle with program-COMPLETE ledger integration (G-H6), audited team+audit branches and director commits (eb53a7f/c363bcc). Branch remains authoritative for reproduction/audit and successor directive. Conservative per role doc — protected."
+}

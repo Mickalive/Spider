@@ -1,0 +1,80 @@
+{
+  "run_id": 32901955861,
+  "workflow_name": "SPIDER Run Evidence Curator",
+  "workflow_path": ".github/workflows/evidence-curator.yml",
+  "status": "completed",
+  "conclusion": "success",
+  "head_sha": "aff29c3e87d513b306dd08bac8690557d3f3c504",
+  "created_at": "2026-08-25T21:37:11Z",
+  "updated_at": "2026-08-25T21:56:13Z",
+  "run_number": 23,
+  "event": "schedule",
+  "head_branch": "main",
+  "actor": "Mickalive",
+  "jobs_total_count": 1,
+  "bundle_provenance": {
+    "jobs_api_snapshot_total": 1,
+    "artifacts_api_snapshot": "{\"total_count\":0,\"artifacts\":[]}",
+    "raw_log_bytes_approx": 180000,
+    "fetched_cycle_refs": "none (curator bundle focused on evidence/memory; target refs were logical, not fetched)",
+    "targets_txt": "32851946087,32860596387,32861115761,32861355080,32861557668"
+  },
+  "evidence_class": "OPERATIONAL",
+  "summary": "Evidence Curator scheduled backfill closing 5-run gap (Product #3/#4 permission kills, Physics #7 orphaned-PASS, plus two bridging runs): curated 5 records + INDEX 5 rows + CTO_FEED CF-22..26, validated green and committed as aff29c3-series on baseline a09d036.",
+  "durable_refs": [
+    "git:main@aff29c3e87d51... (this curator's head_sha, schedule event; commit persists 5 records)",
+    "evidence/run-memory/runs/32851946087.json (Product #3 rev3 re-auth, architect permission kill wrong absolute path variant)",
+    "evidence/run-memory/runs/32860596387.json (Physics #7 orphaned-PASS carryforward + floor post-mortem, scope-gate FP third strike)",
+    "evidence/run-memory/runs/32861115761.json (Product #4 architect v2 freeze 1457fd3, builder permission kill external_directory on ~/.config/opencode)",
+    "evidence/run-memory/runs/32861355080.json (bridge run, see its record)",
+    "evidence/run-memory/runs/32861557668.json (Graph scaling integration prerequisite G-H5, see its record)",
+    "evidence/run-memory/INDEX.md 5 new rows + digest bullets (permission killer 4 instances/3 variants; scope-gate third strike list; concurrent stewardship proof; coverage gap reduction)",
+    "evidence/run-memory/CTO_FEED.json CF-2026-08-25-22..26",
+    "evidence/run-memory/DELETED_RUNS_RECOVERY.json re-verified intact (102==102)"
+  ],
+  "findings": [
+    {
+      "kind": "RESULT",
+      "summary": "Selected exactly 5 oldest uncurated completed runs via backfill-batch (BACKFILL_BATCH 5, targets sorted chronologically 32851946087..32861557668) — closing the explicit coverage-gap backlog flagged in prior INDEX bullet (cycle/product/{32851946087,32861115761} + physics orphan). All 5 records written with findings/ failure signatures / research opportunities, INDEX table extended 5 rows, thematic digest updated 4 bullets, CTO_FEED appended 5 HIGH/MEDIUM entries, own validation green (jq empty + type checks + DELETED_RUNS_RECOVERY invariants).",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "importance": "MEDIUM",
+      "route_to": ["CTO", "INFRA"]
+    },
+    {
+      "kind": "BUG",
+      "summary": "Second-order doctrine consolidated: permission auto-rejection now 4 confirmed kills across 3 variants — (1) cd /home/runner/work/Spider (Graph #5), (2) Read /home/runner/work/Spider/docs/roles/... one-dir-above-repo (Product #3 32851946087), (3) probe ~/.config/opencode/* (Product #4 32861115761) plus builder probe variant. All abort entire team session after short context load, then push empty branch that audit spends ~9m detecting.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "HIGH",
+      "route_to": ["RUNTIME", "INFRA", "CTO"]
+    },
+    {
+      "kind": "BUG",
+      "summary": "Third orphaned-PASS audit via scope-gate porcelain false positive documented (Physics #7 32860596387): audit wrote PASS/safe_to_integrate=true on beaf59c9, yet Enforce step flagged nine pre-staged control-plane files (.opencode/agents/* x7 + directives/{AUDITOR,LANE_DIRECTOR}.md) as audit dirt, killing Director — timeline proof of duplicate spend vs parallel chain 32866107906 accepted at lab/physics@0be8d8a 17:40Z (branch base excludes it). Concurrent duplicate stewardship cost ~51 min and an audit.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "MEDIUM",
+      "route_to": ["INFRA", "CTO", "RUNTIME"]
+    },
+    {
+      "kind": "LIMIT",
+      "summary": "Coverage gap reduced but NOT closed: remaining optional backlog after this batch is run 32870361258 (director session ad25538 in lab/product history) and pb001-architect-v3 lineage — neither in deletion manifests, logs likely still server-retrievable. Preserved as backlog notes in records.",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "importance": "LOW",
+      "route_to": ["CTO", "INFRA"]
+    }
+  ],
+  "failure_signatures": [
+    "None curator-side — validation green; targets carry their own failure signatures (permission kills, scope-gate FP, etc.) transcribed in their individual run records."
+  ],
+  "research_opportunities": [
+    "Harden agent runtime to degrade gracefully on permission denial (skip call vs session abort) and pre-authorize parent/config paths idempotently; add zero-diff guard after team phase (if branch == base, return to coder immediately).",
+    "Fix scope-gate to diff vs session-start HEAD rather than porcelain collapse over pre-staged control-plane files; add damping for repeated identical violation sets.",
+    "Expose in-flight pending-integration pointer before dispatching stewardship carryforwards to avoid duplicate orphaned-PASS chains."
+  ],
+  "already_captured_elsewhere": [
+    "Substance of 5 distilled targets remains in their individual runs/*.json — this run's durable effect is the curation commit, not duplication.",
+    "Cleanup incident 32880942022 re-verified intact, not rewritten (special-recovery branch skipped correctly)."
+  ],
+  "distillation_complete": true,
+  "safe_to_prune": false,
+  "pruning_rationale": "Persisting curator that closed the explicitly flagged 5-run backlog and consolidated permission-kill + scope-gate FP doctrine across three batches. Its 5 output records are now independently durable, but this batch commit remains the sole witness of the batch operation and its digest updates. Conservative — false."
+}

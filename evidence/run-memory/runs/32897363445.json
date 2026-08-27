@@ -1,0 +1,77 @@
+{
+  "run_id": 32897363445,
+  "workflow_name": "SPIDER Run Evidence Curator",
+  "workflow_path": ".github/workflows/evidence-curator.yml",
+  "status": "completed",
+  "conclusion": "success",
+  "head_sha": "9843ea7402df23b2145cc300421de52490e9a57f",
+  "created_at": "2026-08-25T20:47:24Z",
+  "updated_at": "2026-08-25T21:11:27Z",
+  "run_number": 20,
+  "event": "workflow_run",
+  "head_branch": "main",
+  "actor": "Mickalive",
+  "jobs_total_count": 1,
+  "bundle_provenance": {
+    "jobs_api_snapshot_total": 1,
+    "artifacts_api_snapshot": "{\"total_count\":0,\"artifacts\":[]}",
+    "raw_log_bytes_approx": 85000,
+    "fetched_cycle_refs": "none",
+    "targets_txt": "32894986672"
+  },
+  "evidence_class": "OPERATIONAL",
+  "summary": "Evidence Curator success persisting single-target backfill for product-loop run 32894986672 (cancelled-while-queued dedupe fingerprint): curated record+INDEX row+CTO feed CF-2026-08-25-18, validated green and committed as a1e08db @21:11:22Z on recovery baseline 9843ea7.",
+  "durable_refs": [
+    "git:main@a1e08db ('evidence: distill Actions runs 32894986672', 2026-08-25T21:11:22Z, +? lines, this run's persisted output — exemplar of backfill batch at 9843ea7 baseline)",
+    "git:main@9843ea7 (base commit this session ran on: evidence: distill Actions runs 32887030457 lineage)",
+    "evidence/run-memory/runs/32894986672.json (this run's primary deliverable: 5 findings, zero-job fingerprint, supervisor dedupe mechanism DURABLE_UNAUDITED, forensic-invisibility LIMIT)",
+    "evidence/run-memory/INDEX.md row |32894986672| + two thematic digest bullets (cancelled-zero-jobs signature; coverage gap)",
+    "evidence/run-memory/CTO_FEED.json entry CF-2026-08-25-18 (MEDIUM OPERATIONAL_DIAGNOSTIC, source 32894986672)",
+    "evidence/run-memory/DELETED_RUNS_RECOVERY.json re-verified intact (102==102, NONE_MATERIAL 98 / UNKNOWN 4)"
+  ],
+  "findings": [
+    {
+      "kind": "RESULT",
+      "summary": "Selected exactly one backfill target via backfill-batch logic (BACKFILL_BATCH 5, targets.txt 32894986672 — sole run without a durable record at selection). Agent curated full record with 5 findings+failure signature+research ops, updated INDEX table + thematic bullets and appended CTO_FEED, passed own python validation (jq empty checks, feed invariants), and persisted end-to-end as commit a1e08db — second-order adjacency logic (queue-supersession proof via sibling commits ddce3a3@20:31:13Z and 7657565@20:58:59Z bracketing 20:22:45-20:47:22Z window) proven from Git, not logs.",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "importance": "MEDIUM",
+      "route_to": ["CTO", "INFRA", "PRODUCT"]
+    },
+    {
+      "kind": "RESULT",
+      "summary": "Operational pattern catalogued as reusable doctrine: cancelled-with-zero-jobs fingerprint (created_at 20:22:45Z → cancelled 20:47:22Z, total_count 0 jobs, 0 artifacts, 0-byte log) DISTINCT from lane failure and from fetch-harness failure locally indistinguishable — documented as benign-by-design when Product Supervisor cancels stale queued product runs while another is in_progress (product-supervisor.yml:53-62). Treatment advised: adjudicate against live API before pruning; queue-state transitions/cancellations need run-id-attributed receipts (CF-2026-08-25-02 family).",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "MEDIUM",
+      "route_to": ["INFRA", "CTO", "PRODUCT"]
+    },
+    {
+      "kind": "OTHER",
+      "summary": "SPECIAL RECOVERY branch correctly skipped: env carried CLEANUP_INCIDENT_RUN=32880942022 but DELETED_RUNS_RECOVERY.json already existed on main (102 tombstones, dual-key invariant), with transcript verifying recovery state intact and untouched — positive witness that the d8343e7 recovery-first gating + dual-count-key fix behaves correctly on a real dispatch (second witness after curator #?16).",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "LOW",
+      "route_to": ["INFRA"]
+    },
+    {
+      "kind": "OTHER",
+      "summary": "Coverage-gap note reproduced DURABLE_UNAUDITED: product-loop run numbers reached #9 while only #1-2 had records; five intervening Git lineages exist (cycle/product/{32851946087,32861115761,32870361258,32886859788}/* + pb001-architect-v3) without record, none in either deletion manifest — backlog closed later by run 32901955861 (5-run batch).",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "importance": "LOW",
+      "route_to": ["CTO", "INFRA"]
+    }
+  ],
+  "failure_signatures": [
+    "None this run — validation green end-to-end (jq empty + type checks + DELETED_RUNS_RECOVERY invariants)."
+  ],
+  "research_opportunities": [
+    "Add durable cancellation receipts for supervisor-queued dedupes so future cancelled-while-queued runs are self-documenting (ties to CF-02).",
+    "Backfill backlog runs 32851946087/32861115761/32870361258/32886859788 via bundle distillation — later closed by 32901955861; preserve until live-API adjudication for 32894986672.",
+    "Evaluate debouncing workflow_run listener triggers to reduce burst fan-out that created this redundant dispatch (upstream run 32886859788's completion fired product-loop listener)."
+  ],
+  "already_captured_elsewhere": [
+    "Substance of distilled target 32894986672 is durable at runs/32894986672.json + INDEX row — this run's durable effect is exactly that commit a1e08db, not duplicated residue.",
+    "Cleanup incident 32880942022 recovery (102 tombstones, dual-key) verified intact, unchanged."
+  ],
+  "distillation_complete": true,
+  "safe_to_prune": false,
+  "pruning_rationale": "Persisting curator witness of first cancelled-zero-job fingerprint distillation and second recovery-gating witness. Commit a1e08db is this run's sole durable effect; log remains lexicographic evidence for the zero-jobs vs fetch-failure ambiguity noted in record. Conservative per role doc — false."
+}

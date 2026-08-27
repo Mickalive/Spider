@@ -2092,6 +2092,112 @@
         "PRODUCT"
       ],
       "actionable_next": []
+    },
+    {
+      "id": "CF-2026-08-27-32897363519-SCHEMA-HIGH",
+      "importance": "HIGH",
+      "kind": "BUG",
+      "summary": "CTO validation gate rejected a complete ~56m synthesis for Invalid Frontier charter schema despite python missing=NONE on 4 charters \u2014 zero bytes committed, zero charters dispatched. Shell jq enforces strict non-empty strings and non-null strongest_null_or_baseline/stop_condition; at least one charter field was empty string/null.",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "source_run_id": 32897363519,
+      "durable_refs": [
+        "evidence/run-memory/runs/32897363519.json",
+        "git:.github/workflows/cto-council.yml validation step"
+      ],
+      "actionable_next": [
+        "Lint charter generator to guarantee every required field non-empty and non-null before dispatch; add pre-persist python-mirrored jq predicate inside council agent loop to fail fast before 56m wall.",
+        "Do NOT promote log-only charter content as accepted advisory \u2014 durable CTO state remains at prior pass."
+      ],
+      "route_to": [
+        "CTO",
+        "INFRA"
+      ]
+    },
+    {
+      "id": "CF-2026-08-27-32897363445-CURATOR-MEDIUM",
+      "importance": "MEDIUM",
+      "kind": "OPERATIONAL_DIAGNOSTIC",
+      "summary": "Single-target curator backfill for product-loop 32894986672 dedupe fingerprint succeeded end-to-end as a1e08db on baseline 9843ea7: 5 findings, queue-supersession proven via Git commits ddce3a3@20:31:13Z/7657565@20:58:59Z bracketing 20:22-20:47Z window, INDEX row + CF-18 added, recovery 102==102 re-verified.",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "source_run_id": 32897363445,
+      "durable_refs": [
+        "evidence/run-memory/runs/32897363445.json",
+        "git:main@a1e08db",
+        "evidence/run-memory/runs/32894986672.json"
+      ],
+      "actionable_next": [
+        "Keep zero-job cancelled shell handling as operational-noise doctrine; add durable cancellation receipts to avoid future archaeological attribution."
+      ],
+      "route_to": [
+        "CTO",
+        "INFRA",
+        "PRODUCT"
+      ]
+    },
+    {
+      "id": "CF-2026-08-27-32899318230-PRODUCT-HIGH",
+      "importance": "HIGH",
+      "kind": "RESULT",
+      "summary": "Backfilled Product run 32886859788 (PB-001 rev7 + Builder WP-8a/b/c 91/91 tests, BLOCKED armed-park) with full 7-finding record. Re-attested product-loop.yml destructive wipe still live at hotfix 8f3980c (rm -f of four state/product_beta_*.json each dispatch) \u2014 director/builder forced to restore from HEAD/ddce3a3 each dispatch; provenance gap documented: amendment+WP-8 absent from lab/product HEAD, present only on cycle/product/32886859788/* branches.",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "source_run_id": 32899318230,
+      "durable_refs": [
+        "evidence/run-memory/runs/32899318230.json",
+        "evidence/run-memory/runs/32886859788.json",
+        "git:origin/cycle/product/32886859788/architect@ddce3a3"
+      ],
+      "actionable_next": [
+        "Condition or remove rm -f wipe steps and verify with dry dispatch; gate hygiene pruning on safe_to_prune for cycle branches before archiving."
+      ],
+      "route_to": [
+        "PRODUCT",
+        "CTO",
+        "INFRA"
+      ]
+    },
+    {
+      "id": "CF-2026-08-27-32900187567-SITE-BOUND-HIGH",
+      "importance": "HIGH",
+      "kind": "RESULT",
+      "summary": "Graph program graph-inheritance-generalization CLOSED as SITE-BOUND (AUDITED_DURABLE G-H6 via audit PASS safe_to_integrate=true): 84 rows (7 composites x6 arms x2 passes, zero unhealthy, pass1==pass2 42/42), books depth>=4 zero memory-led all arms solvable-evidenced, quotes D4Q/D5Q replicated G-H5 bit-identically 36 cells, giter_v31=0 replicates. KB delta exactly one added romance fragment + one changed row id10; suite 90 green. Successor graph-addressing-fused-retrieval launched with fourth-authorship instrument.",
+      "evidence_status": "AUDITED_DURABLE",
+      "source_run_id": 32900187567,
+      "durable_refs": [
+        "evidence/run-memory/runs/32900187567.json",
+        "git:origin/lab/graph@c363bcc",
+        "git:origin/cycle/graph/32900187567/team@9e6de6e",
+        "git:origin/cycle/graph/32900187567/audit@c210ceb"
+      ],
+      "actionable_next": [
+        "Execute successor graph-addressing-fused-retrieval with fresh prereg to test whether fused description addressing overcomes site-bound wall; selection-on-instrument prohibits reusing spent scaling instruments for adoption claims."
+      ],
+      "route_to": [
+        "GRAPH",
+        "PRODUCT",
+        "CTO"
+      ]
+    },
+    {
+      "id": "CF-2026-08-27-32901955861-PERMISSION-HIGH",
+      "importance": "HIGH",
+      "kind": "BUG",
+      "summary": "Five-target backlog closer consolidated doctrine: permission auto-rejection now 4 confirmed kills across 3 variants (cd-parent, wrong absolute path one-dir-above-repo, ~/.config/opencode probe) \u2014 each aborts whole team session after short load and pushes empty branch audited at ~9m cost. Plus third orphaned-PASS via scope-gate porcelain false positive (Physics #7: 9 pre-staged control-plane files flagged as audit dirt, Director skipped while parallel chain 32866107906 integrated WP-006). Fix sets documented in batch record.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "source_run_id": 32901955861,
+      "durable_refs": [
+        "evidence/run-memory/runs/32901955861.json",
+        "evidence/run-memory/runs/32851946087.json",
+        "evidence/run-memory/runs/32861115761.json",
+        "evidence/run-memory/runs/32860596387.json"
+      ],
+      "actionable_next": [
+        "Harden runtime to degrade on permission denials (skip probe vs abort), pre-authorize safe parent paths, add zero-diff guard; scope gate to diff vs session-start HEAD, not porcelain collapse; add pending-integration pointer to avoid duplicate stewardship."
+      ],
+      "route_to": [
+        "CTO",
+        "RUNTIME",
+        "INFRA"
+      ]
     }
   ]
 }

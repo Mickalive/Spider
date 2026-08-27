@@ -1,0 +1,77 @@
+{
+  "run_id": 32899318230,
+  "workflow_name": "SPIDER Run Evidence Curator",
+  "workflow_path": ".github/workflows/evidence-curator.yml",
+  "status": "completed",
+  "conclusion": "success",
+  "head_sha": "22212b9056a563abe560b9d2b5b62fda0cdad8dd",
+  "created_at": "2026-08-25T21:07:57Z",
+  "updated_at": "2026-08-25T21:25:28Z",
+  "run_number": 22,
+  "event": "workflow_run",
+  "head_branch": "main",
+  "actor": "Mickalive",
+  "jobs_total_count": 1,
+  "bundle_provenance": {
+    "jobs_api_snapshot_total": 1,
+    "artifacts_api_snapshot": "{\"total_count\":0,\"artifacts\":[]}",
+    "raw_log_bytes_approx": 120000,
+    "fetched_cycle_refs": "none",
+    "targets_txt": "32886859788"
+  },
+  "evidence_class": "OPERATIONAL",
+  "summary": "Evidence Curator success backfilling Product run 32886859788 (PB-001 rev7 + Builder WP-8a/b/c, BLOCKED armed-park): curated full PRODUCT record (7 findings HIGH/MEDIUM), re-verified raw log mounts, validated green and committed as aff29c3 companion-series lineage.",
+  "durable_refs": [
+    "git:main@22212b9 (head_SHA dispatched on: evidence: distill Actions runs 32799261473,... lineage, stamped 20:59:34Z)",
+    "git:main@aff29c3 companion-series commits (this curator's persist after prior a1e08db; the record for 32886859788 is durable at evidence/run-memory/runs/32886859788.json)",
+    "git:origin/lab/product@e84b11c + d944594 (seventh/eighth Product sessions, rev7 + BLOCKED review — distilled target's durable outcome)",
+    "git:origin/cycle/product/32886859788/architect@ddce3a3 + builder@7657565 (combined v4+v5 amendment + WP-8 packages — fetched_cycle_refs verified present)",
+    "evidence/run-memory/runs/32886859788.json (primary deliverable of this curator pass: 7 findings, bug wipe defect still live, provenance gap)",
+    "evidence/run-memory/DELETED_RUNS_RECOVERY.json re-verified intact (102==102)"
+  ],
+  "findings": [
+    {
+      "kind": "RESULT",
+      "summary": "Selected single target 32886859788 via backfill-batch (only 1 uncurated at selection despite BACKFILL_BATCH 5). Reconstituted the full four-phase PB-001 cycle end-to-end from bundle mounts: Product Director rev7 re-auth (COT-4 W1-W8 + V1-V6, 78/78 tests), Beta Architect combined amendment ddce3a3 (parent 55c56d6, front-door reversion, BF-1 swap, dress rehearsal GREEN, B3 leakage map 0 rows), Beta Builder WP-8a/b/c (rank_passing_desc_only, action_trace, nav_equivalent via compute_verdict, go-live gate chain, 91/91 tests), eighth-session BLOCKED/no_backbone_available review (cost_events exactly 8 harness rows, zero provider rows, sha recomputed f89abd..). Zero outcome rows re-verified.",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "importance": "HIGH",
+      "route_to": ["PRODUCT", "CTO"]
+    },
+    {
+      "kind": "BUG",
+      "summary": "Re-attested product-loop.yml destructive-wipe defect STILL LIVE even at hotfix commit 8f3980c (rm -f of four state/product_beta_*.json each dispatch). Observed again: director had to restore wiped authorization from git show HEAD before rev7, builder restored F1/F2 freeze artifacts from ddce3a3 byte-exact. Escalation persists as operational cost each dispatch until rm lines conditioned.",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "importance": "MEDIUM",
+      "route_to": ["PRODUCT", "INFRA", "CTO"]
+    },
+    {
+      "kind": "LIMIT",
+      "summary": "Provenance gap documented log-only in this target: amendment + WP-8 artifacts absent from lab/product HEAD (verified against lp fetch) and existed at review time only on session mounts plus two cycle snapshot branches (ddce3a3/7657565). Merge directed as first action at next activation — transcription preserves the loss risk for audit.",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "importance": "MEDIUM",
+      "route_to": ["PRODUCT", "CTO", "INFRA"]
+    },
+    {
+      "kind": "NEGATIVE",
+      "summary": "Scoped negative D2 retrieval-attribution diagnostic reproduced: SGDR-fused ranking 3/8 vs primitive 7/8 => BLOCK_ASSEMBLY_REPAIR disposed via rev6+V1 one-shot reversion with permanent freeze — composition boundary condition, not outcome claim, correctly scoped.",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "importance": "MEDIUM",
+      "route_to": ["INTEL", "PRODUCT"]
+    }
+  ],
+  "failure_signatures": [
+    "None this curator pass — validation green; target's BLOCKED disposition is an ops blocker (no provider_call rows), not a harness failure."
+  ],
+  "research_opportunities": [
+    "Condition or remove product-loop.yml rm -f wipe steps and verify with a dry dispatch that state files survive at HEAD without manual restore.",
+    "Gate future hygiene pruning on safe_to_prune for 32886859788 before its cycle/product/* branches are considered archived — its run record now carries the necessary gate.",
+    "Use this PB-001 armed-park disposition as negative knowledge: no outcome rows exist, so any future beta must start from rev7 frozen pack without claiming comparative superiority."
+  ],
+  "already_captured_elsewhere": [
+    "Substance of 32886859788 is durable at runs/32886859788.json and in cycle/product branches — this curator's commit is the durable evidence of its distillation, not duplication.",
+    "Cleanup incident recovery re-verified intact; no tombstone writes."
+  ],
+  "distillation_complete": true,
+  "safe_to_prune": false,
+  "pruning_rationale": "Persisting curator witness that backfilled the last Product-loop backlog item before the 5-run gap-closer (32901955861). The product lineage rev7+WP-8 correctness depends on this transcription of the wipe defect and provenance gap for the next activation's merge. Conservative — false."
+}
