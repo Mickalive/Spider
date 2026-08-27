@@ -1,0 +1,41 @@
+name: SPIDER One-shot Obsolete Orchestrator Purge
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/one-shot-obsolete-orchestrator-purge.yml'
+  workflow_dispatch:
+
+permissions:
+  actions: write
+  contents: read
+
+concurrency:
+  group: spider-one-shot-obsolete-orchestrator-purge
+  cancel-in-progress: false
+
+jobs:
+  purge:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Delete every completed run from superseded orchestrators only
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          names_re='^(SPIDER Ox Watchdog|SPIDER Research Program Supervisor|SPIDER Lane Repair Supervisor|SPIDER Intel Supervisor|SPIDER Runtime Supervisor|SPIDER Product Supervisor|SPIDER Stale Run Reaper)$'
+          tmp=$(mktemp)
+          gh api --paginate "repos/${GITHUB_REPOSITORY}/actions/runs?per_page=100" \
+            --jq '.workflow_runs[] | select(.status=="completed") | [.id,.name] | @tsv' \
+            | awk -F '\t' -v re="$names_re" '$2 ~ re {print $1}' > "$tmp"
+          count=$(wc -l < "$tmp" | tr -d ' ')
+          echo "Found $count remaining completed superseded-orchestrator runs."
+          export GITHUB_REPOSITORY GH_TOKEN
+          if (( count > 0 )); then
+            xargs -r -n1 -P4 bash -c 'for id; do for n in 1 2 3 4 5; do gh api -X DELETE "repos/${GITHUB_REPOSITORY}/actions/runs/${id}" >/dev/null 2>&1 && exit 0; sleep $((n*2)); done; echo "failed:$id" >&2; exit 1; done' _ < "$tmp"
+          fi
+          rm -f "$tmp"
+          echo "Remaining obsolete orchestrator histories purged; scientific/product evidence runs were outside the allowlist."
