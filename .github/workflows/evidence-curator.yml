@@ -29,6 +29,7 @@ on:
       - '.github/workflows/evidence-curator.yml'
       - 'docs/roles/EVIDENCE_CURATOR.md'
       - '.opencode/agents/evidence_curator.md'
+      - 'evidence/run-archive/manifests/**'
 
 permissions:
   actions: read
@@ -40,7 +41,7 @@ concurrency:
 
 env:
   SPIDER_MODEL: opencode/x-preview-f-free
-  BACKFILL_BATCH: 5
+  BACKFILL_BATCH: 8
   CLEANUP_INCIDENT_RUN: 32880942022
 
 jobs:
@@ -83,10 +84,20 @@ jobs:
           elif [[ "$EVENT_NAME" == workflow_run && -n "$SOURCE_RUN_ID" ]]; then
             add_if_needed "$SOURCE_RUN_ID"
           elif [[ ! -f evidence/run-memory/DELETED_RUNS_RECOVERY.json ]]; then
-            # Dedicated recovery pass. Do not dilute the cleanup/deletion
-            # manifest with unrelated logs in the same model context.
             add_if_needed "$CLEANUP_INCIDENT_RUN"
           else
+            # First drain the explicit lossless-archive backlog. These are runs
+            # whose raw payload is already safe in the repo Release but whose
+            # knowledge still has to be integrated before deletion is legal.
+            while read -r manifest; do
+              [[ "$(wc -l < /tmp/spider_run_evidence/targets.txt)" -ge "$BACKFILL_BATCH" ]] && break
+              [[ -f "$manifest" ]] || continue
+              id=$(jq -r '.run_id // empty' "$manifest" 2>/dev/null || true)
+              add_if_needed "$id"
+            done < <(find evidence/run-archive/manifests -maxdepth 1 -type f -name '*.json' 2>/dev/null | sort -V)
+
+            # Then fill remaining capacity with the oldest uncurated completed
+            # runs, preserving the historical recovery behavior.
             while read -r id; do
               [[ "$(wc -l < /tmp/spider_run_evidence/targets.txt)" -ge "$BACKFILL_BATCH" ]] && break
               add_if_needed "$id"
@@ -177,9 +188,6 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          # `git status --porcelain` collapses a wholly new directory to e.g.
-          # `?? evidence/`, which previously made valid nested run-memory writes
-          # look out-of-scope. Expand tracked and untracked paths explicitly.
           CHANGED=$({
             git diff --name-only
             git diff --cached --name-only
