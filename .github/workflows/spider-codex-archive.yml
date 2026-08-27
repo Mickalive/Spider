@@ -1,0 +1,57 @@
+name: SPIDER Codex Ultimate Archive
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - archive/spider-codex-ultimate
+    paths:
+      - tools/build_spider_codex.py
+      - .github/workflows/spider-codex-archive.yml
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: spider-codex-ultimate-archive
+  cancel-in-progress: false
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout archive branch with full history
+        uses: actions/checkout@v4
+        with:
+          ref: archive/spider-codex-ultimate
+          fetch-depth: 0
+
+      - name: Compile complete pre-2.0 evidence corpus
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 tools/build_spider_codex.py
+
+      - name: Validate Codex invariants
+        run: |
+          test -s SPIDER_CODEX_ULTIME.md
+          grep -q '^# SPIDER CODEX ULTIME' SPIDER_CODEX_ULTIME.md
+          grep -q 'Historical experiments preserved' SPIDER_CODEX_ULTIME.md
+          grep -q 'GitHub Actions run inventory' SPIDER_CODEX_ULTIME.md
+          grep -q 'Verbatim result/evidence corpus' SPIDER_CODEX_ULTIME.md
+          bytes=$(wc -c < SPIDER_CODEX_ULTIME.md)
+          echo "Codex bytes: $bytes"
+          test "$bytes" -lt 94371840
+
+      - name: Persist Codex only on archive branch
+        run: |
+          git config user.name 'SPIDER Codex Archivist'
+          git config user.email 'actions@users.noreply.github.com'
+          git add SPIDER_CODEX_ULTIME.md
+          if git diff --cached --quiet; then
+            echo 'Codex unchanged.'
+            exit 0
+          fi
+          git commit -m 'codex: freeze complete pre-2.0 evidence archive'
+          git push origin HEAD:archive/spider-codex-ultimate
