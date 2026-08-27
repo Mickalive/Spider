@@ -1,9 +1,0 @@
-{
-  "lane": "graph",
-  "completed_program_run_id": "32776369696",
-  "next_program_id": "graph-addressing-robustness",
-  "next_program_title": "Robust semantic addressing for inherited operational knowledge",
-  "dispatched_at": "2026-08-24T21:58:43Z",
-  "receipt_status": "CONFIRMED",
-  "successor_run_id": 32782331702
-}
