@@ -1,0 +1,98 @@
+name: SPIDER Emergency Pause Control
+
+on:
+  push:
+    paths:
+      - '.github/workflows/zz-spider-pause-control.yml'
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'Pause or resume SPIDER workflows'
+        required: true
+        default: pause
+        type: choice
+        options:
+          - pause
+          - resume
+
+permissions:
+  actions: write
+  contents: write
+
+jobs:
+  control:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      REPO: ${{ github.repository }}
+      MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.mode || 'pause' }}
+      SELF_PATH: .github/workflows/zz-spider-pause-control.yml
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Pause all SPIDER workflows and cancel live runs
+        if: env.MODE == 'pause'
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p state
+
+          gh api --paginate "repos/${REPO}/actions/workflows?per_page=100" \
+            --jq '.workflows[] | select(.state == "active") | [.id,.name,.path] | @tsv' \
+            > /tmp/active_workflows.tsv
+
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          rows=[]
+          for line in Path('/tmp/active_workflows.tsv').read_text().splitlines():
+              if not line.strip():
+                  continue
+              wid,name,path=line.split('\t',2)
+              if path == '.github/workflows/zz-spider-pause-control.yml':
+                  continue
+              rows.append({'id': int(wid), 'name': name, 'path': path})
+          payload={
+              'schema':'SPIDER workflow pause snapshot v1',
+              'paused_by_run_id':'${{ github.run_id }}',
+              'source_main_sha':'${{ github.sha }}',
+              'workflows':rows,
+          }
+          Path('state/workflow_pause_snapshot.json').write_text(json.dumps(payload,indent=2)+'\n')
+          PY
+
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add state/workflow_pause_snapshot.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'ops: snapshot workflows before pause'
+            git push origin HEAD:main
+          fi
+
+          jq -r '.workflows[].id' state/workflow_pause_snapshot.json | while read -r wid; do
+            gh api -X PUT "repos/${REPO}/actions/workflows/${wid}/disable" >/dev/null
+          done
+
+          for status in in_progress queued requested pending waiting; do
+            gh api --paginate "repos/${REPO}/actions/runs?status=${status}&per_page=100" \
+              --jq '.workflow_runs[].id' 2>/dev/null || true
+          done | sort -u | while read -r rid; do
+            [ -z "${rid}" ] && continue
+            [ "${rid}" = "${GITHUB_RUN_ID}" ] && continue
+            gh api -X POST "repos/${REPO}/actions/runs/${rid}/cancel" >/dev/null 2>&1 || true
+          done
+
+          echo 'SPIDER_PAUSED=1'
+
+      - name: Resume workflows captured by the pause snapshot
+        if: env.MODE == 'resume'
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f state/workflow_pause_snapshot.json
+          jq -r '.workflows[].id' state/workflow_pause_snapshot.json | while read -r wid; do
+            gh api -X PUT "repos/${REPO}/actions/workflows/${wid}/enable" >/dev/null
+          done
+          echo 'SPIDER_RESUMED=1'
