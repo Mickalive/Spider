@@ -1,0 +1,38 @@
+{
+ "empty_body": {
+  "error": null,
+  "has_bad_credentials_reason": true,
+  "ms": 275.61890200001926,
+  "ok": true,
+  "status": 200
+ },
+ "host_root": {
+  "body_len": 4455,
+  "body_sha256": "5c290c6b434a21f2872e00d03a3d0d55497a2e4a5dcfc4ec401e4f0c4fb286bf",
+  "ok": true,
+  "status": 200
+ },
+ "overall": true,
+ "requests_used": 5,
+ "valid_input": {
+  "error": null,
+  "has_token": true,
+  "ms": 289.2971910000597,
+  "ok": true,
+  "status": 200
+ },
+ "wrong_password": {
+  "error": null,
+  "has_bad_credentials_reason": true,
+  "ms": 269.8679359999687,
+  "ok": true,
+  "status": 200
+ },
+ "wrong_username": {
+  "error": null,
+  "has_bad_credentials_reason": true,
+  "ms": 284.84359699996276,
+  "ok": true,
+  "status": 200
+ }
+}

@@ -1,0 +1,42 @@
+{
+  "gate": "PASS",
+  "safe_to_integrate": true,
+  "summary": "Repair round 1 (run 32783797303, team head 4b4aa53) delivered all four required fixes of the round-0 REVISE with verifiable evidence and no surviving defect. Auditor independently re-ran the frozen 13-arm scorer outside the team tree: dev and confirm score files reproduce BYTE-IDENTICALLY (incl. PYTHONHASHSEED 1-vs-7 determinism), the V00 internal-validity gate passes at 20/20 rows against the committed cycle-3 dry table, and select_probes/analyze_robustness regenerate their committed artifacts exactly. Raw-row recounts match every headline number: R2LIVE 6/6 probe x pass rows memory-solved with reused==actions and zero novel; R3 r3_frag login memory 4/4 rows = 2/2 cells (e2e 4/4) vs graphiter 0/4 via exploration vs edgeseq 0/4 static-order bounce (69 actions/row); store discipline distinct store_before=1 over 18 runs, evaluation wrote nothing, pass1==pass2 across all 9 configs. Freeze chain verified by commit timestamps (prereg 63768c9 -> instrument f8da2f9 -> scores 2adbd52 -> live code dfb15ab -> live outcomes); post-first-live-row diffs are driver-configuration-only as disclosed. Amendment A1 premise verified from the dump (all fragments success_count==1, monotonic ids) and empirically validated by the V00 byte gate. Pilot driver-defect batch verified non-blind from its own raw events and correctly quarantined as EXPLORATORY while its R2LIVE phase bit-replicates the final run. Category-channel failure mechanism (df-pruning removes CAT present in 5/7 books descriptions) recomputed and confirmed; V31's fresh wins decompose to canonical/affordance token classes, NOT near-verbatim overlap. Full test suite reproduces 43/44 with the single failure verified pre-existing on pristine base f42c14d (Physics-lane fixture). Repair diff is scope-clean; rejected round-0 branches preserved at f42c14d. PROGRAM DECISION SUCCESS for preregistered family 1 is accurate per the directive bar, subject to recorded integration limits.",
+  "required_fixes": [],
+  "audit_report": "reports/audit/CYCLE_32783797303_GRAPH.md",
+  "audited_snapshot": {
+    "workspace": "/tmp/spider_graph_team",
+    "team_head": "4b4aa533fc65bfb2018ae9121266205136024891",
+    "branch": "origin/cycle/graph/32783797303/team",
+    "base": "f42c14dbf5f1e5a64f8a9fdf9af8c723689009d9",
+    "rejected_round0_snapshot": "f42c14dbf5f1e5a64f8a9fdf9af8c723689009d9 (empty production snapshot, branches origin/cycle/graph/32782331702/team[-attempt-1] preserved)"
+  },
+  "claims_status": {
+    "K1_R1_dev_iteration_and_ledger": "VALIDATED_FOR_CURRENT_TEST",
+    "K2_fresh_instrument_freeze_and_authorship": "SURVIVES_AUDIT_WITH_LIMITS",
+    "K3_V31_fresh_6of8_bar_met": "VALIDATED_FOR_CURRENT_TEST (family-level decision outcome; selection-on-instrument bias recorded)",
+    "K4_mechanical_probe_selection": "VALIDATED_FOR_CURRENT_TEST",
+    "K5_R2LIVE_6of6_memory_solved": "VALIDATED_FOR_CURRENT_TEST",
+    "K6_program_decision_success_family1": "VALIDATED_FOR_CURRENT_TEST",
+    "K7_R3_counts_and_grid_interpretation": "counts VALIDATED_FOR_CURRENT_TEST; interpretation SURVIVES_AUDIT_WITH_LIMITS",
+    "K8_category_unsolved_df_pruning": "VALIDATED_FOR_CURRENT_TEST",
+    "K9_pilot_quarantine_and_replication": "VALIDATED_FOR_CURRENT_TEST",
+    "K10_discipline_proofs": "VALIDATED_FOR_CURRENT_TEST",
+    "K11_amendment_A1": "VALIDATED_FOR_CURRENT_TEST",
+    "K12_manifest_scope_preservation": "VALIDATED_FOR_CURRENT_TEST"
+  },
+  "integration_limits": [
+    "V31's fresh-set retrieval@1 6/8 is a predeclared family-level DECISION outcome selected on the same instrument that measures it; it is not an unbiased estimate of transferable rate. The fresh set is now SPENT (AUDITOR_GRAPH item 24): any future quantitative claim about V31 or successor constructions requires a third independently authored instrument under new preregistration.",
+    "Scope walls mandatory in any integrated wording: two scripted demo sites, one frozen KB, scripted deterministic consumers, same-lab model-family paraphrase authorship (instructional isolation only), n=2 deterministic passes = replication not sampling uncertainty, category addressing unsolved, oracle-verified scripted replay semantics for 'memory-solved', no LLM-consumer/cross-model/cross-site/calibration/wall-clock claims.",
+    "R3 'validated procedural ordering' is a single-KB, single-rank-instantiation grid-line inference; do not generalize packaging-quality claims beyond this scope without more sites/ranks.",
+    "Provenance forever: run 32782331702 is an empty production snapshot (not a null result); pilot batch robustness_live_runs_PILOT_driverbug.json is EXPLORATORY and supports no claim.",
+    "G4 deeper-chain work is unlocked but NOT executed; it requires its own preregistration."
+  ],
+  "non_blocking_notes": [
+    "Commit message of 4b4aa53 states '9/11 non-reference arms marginal-or-null'; no consistent recount yields this (10/11 or 10/10). The figure appears nowhere in report body, manifest, or ledger proposal - provenance noise only; history must not be rewritten.",
+    "retrieval_ms floors at integer ms (records 0) in these runs; no latency claim is made anywhere, so nothing is overclaimed - switch to perf_counter granularity before any future cost claim.",
+    "state/graph_loop.json still describes the completed prior program; Lane Director must update program state at integration (echoes round-0 audit note).",
+    "Pre-existing Physics-lane fixture failure (test_true_previous_action_sequence_passes on pristine base f42c14d) flagged for Meta-Director reconciliation; Physics lane untouched by this repair.",
+    "Typo 'edgesev' in report section 7 cost note; cosmetic."
+  ]
+}

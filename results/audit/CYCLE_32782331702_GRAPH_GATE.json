@@ -1,0 +1,34 @@
+{
+  "gate": "REVISE",
+  "safe_to_integrate": false,
+  "summary": "Empty production snapshot: TEAM GRAPH for run 32782331702 committed nothing in both attempts (team and team-attempt-1 both push f42c14d, byte-identical to accepted base origin/lab/graph). Exhaustive checks (clean worktree incl. ignored files, fsck dangling scan, branch bypass check, workflow commit semantics) find no preregistration, no R1 dev ledger, no fresh-paraphrase instrument, no R3 rows, no report, no manifest. The predeclared graph-addressing-robustness program step was never executed; no outcome was observed, so this is NOT a negative or null result and integrates nothing. Repair is honestly same-cycle-repairable because R1 is executable offline from committed assets (frozen KB dump cycle3_20260824_043334_store_dump.json.gz, goalsig.py/store.py, demoted 10-item dev set with 8 positives + 2 expected-UNKNOWN). Escalation rule: a second empty snapshot without a blocker record meeting RF-3's evidence standard must be gated BLOCKED as repetitive.",
+  "required_fixes": [
+    "RF-1: Execute directive R1 - score the predeclared closed family of descriptor/query variants offline against the committed frozen KB dump using the demoted cycle-3 paraphrase set; commit the scoring script, a dev ledger containing EVERY variant attempted with its score including failures/rejects, and raw per-item score rows. Verification: auditor re-runs the script on results/graph/cycle3_20260824_043334_store_dump.json.gz and requires bit-identical reproduction of every ledger row, plus commit-ordering check that no variant was invented after its dev score was seen.",
+    "RF-2: Author and freeze the fresh confirmatory paraphrase holdout BEFORE any variant is scored against it: commit the new set with explicit authorship-disclosure (author/session isolation from corpus and scorer) plus the frozen mechanical probe-selection rule in a commit provably preceding any artifact containing fresh-set-derived numbers. Verification: auditor reconstructs commit order/timestamps from git history.",
+    "RF-3: Either execute R3 (login edge-sequence packaging vs fragments vs graphiter under E2 equalization rules: oracle access, iteration caps) committing raw rows under stated row/cell/pass denominator conventions, OR commit an explicit blocker record with independently inspectable diagnostic evidence (e.g., health-gate byte-floor failures, HTTP probe transcripts, tool errors) labeled BLOCKED for that step. Absence of output does not qualify as a blocker record. Verification: rows recountable by auditor, or diagnostics inspectable.",
+    "RF-4: Ship a run manifest stating for each predeclared step (R1/R2-authoring/R2-live/R3) executed/failed/blocked with cause and evidence pointer; preserve both empty round-0 attempt branches (cycle/graph/32782331702/team-attempt-1 and /team at f42c14d) untouched in history as provenance. Verification: manifest present and consistent with git history; no force-push erasure; repaired tip diff vs f42c14d non-empty and scope-clean."
+  ],
+  "audit_report": "reports/audit/CYCLE_32782331702_GRAPH.md",
+  "audited_snapshot": {
+    "workspace": "/tmp/spider_graph_team",
+    "team_head": "f42c14dbf5f1e5a64f8a9fdf9af8c723689009d9",
+    "branch": "origin/cycle/graph/32782331702/team",
+    "rejected_round0_snapshot": "f42c14dbf5f1e5a64f8a9fdf9af8c723689009d9 (empty: identical to accepted base)",
+    "attempt_branches_identical": [
+      "origin/cycle/graph/32782331702/team-attempt-1",
+      "origin/cycle/graph/32782331702/team"
+    ]
+  },
+  "claims_status_delta": {
+    "all_new_claims": "NONE EXIST - empty snapshot; UNVERIFIED production, not a scientific result of any polarity",
+    "accepted_base_state": "unchanged at f42c14d; frozen baseline anchors spot-checked intact (retrieval@1 2/8 positives-only, live reuse 0/8, perfect UNKNOWN discipline)"
+  },
+  "standing_constraints_for_repair": [
+    "anchored-predicate trap suite green (graph/accept.py)",
+    "per-eval-run byte-restored KB; evaluation writes nothing",
+    "strict adjacent-pair route absence for any new composite",
+    "UNKNOWN discipline always reported; denominators stated WITH unit convention (rows vs cells vs passes)",
+    "cycle-3 paraphrase set permanently DEMOTED to dev; can never confirm",
+    "any deviation labeled EXPLORATORY"
+  ]
+}

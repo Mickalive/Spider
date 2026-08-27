@@ -1,0 +1,45 @@
+{
+  "gate": "PASS",
+  "safe_to_integrate": true,
+  "cycle": "graph-inheritance-scaling/cycle-1",
+  "run_id": 32861557668,
+  "repair_round": 1,
+  "team_head": "db73549",
+  "base_head": "d41fe9b",
+  "prior_audit": {
+    "report": "reports/audit/CYCLE_32793580374_GRAPH.md",
+    "gate": "results/audit/CYCLE_32793580374_GRAPH_GATE.json",
+    "verdict": "REVISE",
+    "required_fixes_addressed": ["RF-1", "RF-2", "RF-3", "RF-4", "RF-5", "RF-6"]
+  },
+  "summary": "Repair-round-1 snapshot independently re-audited: every headline number (60-row grid completeness, SCALING-HOLDS decision-rule output with qualify_counts frag_v31=2/frag_legacy=2/giter_legacy=2/giter_v31=0 and 24/24 reference contrasts, depth ladder, novel-cost table, achieved memory-depth <=4 classes, attribution counts 26 ADDRESSING-MISS / 8 EXECUTION-FAIL, all discipline proofs incl. distinct store_before=1, evaluation-wrote-nothing, pass1==pass2 30/30) reproduces from raw rows under auditor recomputation. RF fixes verified by execution (rebuild round-trip clean, hook wired, G1 recomputed non-vacuously from deterministic end-vector reconstruction that matches the auditor's own derivation, G3 boundary clause rerun 15/15). Repair diff is additive on frozen artifacts; freeze-timing chain holds (mechanism code precedes both live launches; dry diagnostics precede first live row; only analysis/report post-outcome); rejected round-0 snapshot preserved. Equal-prominence negatives honestly shipped: quotes-side-only positive basis, books side unmeasured-not-falsified, giter_v31 transfer failure, D2Q control memory-led only under frag_v31, degraded traj baseline disclosed beside its numbers. Result represented at correct strength: SURVIVES_AUDIT_WITH_LIMITS for the scaling claim.",
+  "claims_status": {
+    "repair_diff_and_freeze_integrity": "VALIDATED_FOR_CURRENT_TEST",
+    "rf1_rebuild_fix": "VALIDATED_FOR_CURRENT_TEST",
+    "rf2_nonvacuous_G1": "VALIDATED_FOR_CURRENT_TEST",
+    "rf3_boundary_clause": "VALIDATED_FOR_CURRENT_TEST",
+    "p2_batch_discipline": "VALIDATED_FOR_CURRENT_TEST",
+    "scaling_holds_decision_output": "SURVIVES_AUDIT_WITH_LIMITS",
+    "novel_cost_advantage_quotes_side": "ACCEPT_AS_POC",
+    "negative_giter_v31_transfer_failure": "VALIDATED_FOR_CURRENT_TEST",
+    "dry_diagnostics_prediction": "SURVIVES_AUDIT_WITH_LIMITS",
+    "full_suite_ci_counts": "UNVERIFIED"
+  },
+  "findings_non_blocking": [
+    "F-A cosmetic: headline/manifest slash shorthand 'cold novel 57/76' sits next to true fraction '24/24'; disambiguated by report section 5 table; Director should integrate ledger wording G-H5 as proposed (ranges '1-4 vs 49-76', no slashes)",
+    "F-B bookkeeping: state/graph_loop.json still describes prior program; Director-side integration task",
+    "F-C residual: live driver committed with outputs; execution-time content identity corroborated behaviorally (cross-launch outcome identity on preserved interrupted rows) but not provable from git alone"
+  ],
+  "verification_performed": [
+    "exhaustive diff c952569..db73549 (frozen artifacts empty-diff; no docs/state/ledger edits)",
+    "independent recomputation of all 60 raw rows (grid, rule, ladder, costs, contrasts, attribution, discipline)",
+    "execution of rebuild_scaling.rebuild + blob byte-identity check in temp DB",
+    "independent re-derivation of subgoal-end vectors from committed marker matrix + adjacent-pair test (zero violations)",
+    "rerun of check_scaling_gates boundary clause (15/15 <=1 crossing) and analyze_scaling.py (byte-identical regeneration)",
+    "freeze-timing reconstruction from commit history + artifact-internal timestamps (dry 15:43:32Z < launch-1 15:54:26Z < canonical ~16:31Z)",
+    "cross-launch comparison of preserved 12 interrupted rows vs canonical rows (outcome fields identical)",
+    "predicate/query-channel/write-protection code inspection (segment-anchored anchors, desc_only, evaluation write guards)"
+  ],
+  "environment_limitation": "sandbox lacks playwright/numpy; 23/27 scaling tests run here all pass, 4 error at import; CI-claimed suite counts remain UNVERIFIED-but-plausible (same limitation as prior audits); physics/ untouched since base supports pre-existing-failure provenance",
+  "required_fixes": []
+}

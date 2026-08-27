@@ -1,0 +1,177 @@
+{
+  "schema": "runtime.audit.gate/v0",
+  "gate": "PASS",
+  "safe_to_integrate": true,
+  "cycle": "R2-2 decidable in-canon pagination floor",
+  "github_run": 32940627441,
+  "repair_round": 0,
+  "audited_snapshot": {
+    "mount": "/tmp/spider_runtime_team",
+    "tip_commit": "548709d",
+    "clean_checkout": true
+  },
+  "accepted_base": {
+    "branch": "runtime-audit-base (= origin/lab/runtime)",
+    "tip_commit": "fcbeaa2"
+  },
+  "delta_commits_linear": [
+    "fcbeaa2 accepted lane tip",
+    "ce70080 priority-1 substrate-demand spec (pre-request)",
+    "a2bbaaa harness + 34 hermetic tests (pre-outcome, additive)",
+    "e0ae931 FROZEN prereg (before any live request; sha256 6958b7ef5cabde8db86e311385a087cc152b6919d8acf53eb7fbaeab46f02c9e)",
+    "88c7418 OUTCOMES (stream/results/state/witness receipt)",
+    "548709d report at frozen ceilings"
+  ],
+  "claims": [
+    {
+      "id": "C1",
+      "claim": "FLOOR_DOMINATES at frozen gates: PG-K3F/K9B/KCONF judge_success at 1 wire transaction (<= B_PG=6) after entry GET; out-of-range control /page/1000/ judged fail via pinned branch-1 with void-detector evaluated first; discriminator FED not voided",
+      "evidence_files": [
+        "results/runtime/r2_pagination/cost_events.jsonl",
+        "results/runtime/r2_pagination/r22_floor_results.json",
+        "results/runtime/r2_pagination/r2_cycle2_state.json",
+        "results/runtime/probes/pagination_witness_derivation_r22.json",
+        "reports/runtime/R2_CYCLE2_PREREG.md"
+      ],
+      "recomputation": "fresh gate_pagination_cycle() over committed stream deep-equal to committed analysis (0 mismatches); twin identity clean; self_test 9/9 branches; stream arithmetic independently re-derived (10 wire transactions = 2 parity + 4 entries + 4 steps); verify rows field-inspected incl. judge order and guard flip semantics",
+      "failure_modes_tested": [
+        "fabricated stream",
+        "judge-order gaming / void bypass",
+        "substring-anchor shortcut vs path-equality guard",
+        "MNF bypass",
+        "budget quantifier contamination by control or confirmation pass"
+      ],
+      "status": "VERIFIED_AT_FROZEN_CEILING_OBSERVATION_TIER"
+    },
+    {
+      "id": "C2",
+      "claim": "freeze-before-outcomes: prereg committed before any live request of the cycle; harness/spec pre-outcome; module sha pins byte-match",
+      "evidence_files": [
+        "git chain fcbeaa2..548709d",
+        "reports/runtime/R2_CYCLE2_PREREG.md",
+        "PG-PREFLIGHT row ts_utc 2026-08-26T07:56:29.741372+00:00",
+        "witness receipt written_utc 2026-08-26T07:56:29Z"
+      ],
+      "recomputation": "all four prereg pins recomputed and byte-match current files (arm 18e1c0e6..., gates 8fd7e85a..., driver a346b8f8..., prereg 6958b7ef...); commit timestamps orderable before first emitted row; prereg file today hashes to pinned value (never amended); receipt write predates parity fetches per prereg section 6 order",
+      "failure_modes_tested": ["post-hoc prereg edit", "outcome-aware harness edit", "backdating"],
+      "status": "VERIFIED_WITH_W_B2_RESIDUAL_ON_ADVISORY_GETS"
+    },
+    {
+      "id": "C3",
+      "claim": "additive-only change; audited modules/streams/schemas byte-untouched; no new cost_event fields or vocabulary; zero provider calls",
+      "evidence_files": ["git diff --stat fcbeaa2..548709d", "diff -rq base team"],
+      "recomputation": "12 files added, 0 deleted/modified; schema dir untouched; stream top-level key set and (arm,phase,stage,event_class) vocabulary identical to audited R2-1 stream; all model_ids none:* in stream",
+      "failure_modes_tested": ["silent mutation of accepted state", "enum/schema drift", "hidden model calls"],
+      "status": "VERIFIED"
+    },
+    {
+      "id": "C4",
+      "claim": "overhead accounting honest: steps-after-entry-GET qualifier, latency placeholders disclosed, verification compute unmeasured carried, no economics/margin/reuse_yield quotation, wall-clock advisory",
+      "evidence_files": [
+        "reports/runtime/R2_CYCLE2_REPORT.md section 4",
+        "r22_floor_results.json"
+      ],
+      "recomputation": "report and results scanned for banned figures/vocabulary (none present); placeholders identified in stream rows and match disclosures; cost vector preserved (steps|loads|advisory|guards); free site-model endowment disclosed as bias against inheritance",
+      "failure_modes_tested": [
+        "omitted maintenance/verification overhead",
+        "metric double counting",
+        "single-vanity-metric collapse",
+        "cross-media arithmetic leakage"
+      ],
+      "status": "VERIFIED_AT_CEILINGS_SEE_W_B5"
+    },
+    {
+      "id": "C5",
+      "claim": "fallback/failure semantics correct: transport-unknown -> inconclusive never headroom; success mirror -> VOID first; pinned branches -> fail; genuine small-body 404 reaches witness not health trip; INVALID_ARM separated from DOMINATES; defect-hunt bound to FLOOR_FAILS",
+      "evidence_files": [
+        "runtime/floor_pagination.py",
+        "runtime/gates_r22.py",
+        "tests/runtime/test_floor_pagination.py",
+        "tests/runtime/test_gates_r22.py"
+      ],
+      "recomputation": "code path inspection of _negctl_judge/_success_verification/_well_formed + hermetic regressions passing (404-not-trip, soft200-with-content-voids, empty-render-fail, transport-unknown); out-of-witness-map behaviors fall to CYCLE_INCONCLUSIVE honestly",
+      "failure_modes_tested": ["missing fallback", "fallback misclassifying failure as inconclusive", "inconclusive converted to headroom"],
+      "status": "VERIFIED"
+    },
+    {
+      "id": "C6",
+      "claim": "outcomes authentic and reproducible same-day; no stale-hit dependence",
+      "evidence_files": ["cost_events.jsonl body_sha256/entry_digest values"],
+      "recomputation": "audit-side live fetches (10 GETs, audit instrumentation only, NOT lane evidence) from sandbox on 2026-08-26 reproduce all five distinct bodies byte-identically (full sha256 equality on six comparisons incl. KCONF duplicates); control still soft-200 empty-render (fed) today; parity live digests cross-tie to prime digests within stream",
+      "failure_modes_tested": ["fabrication", "stale cache/hit reuse", "site drift invalidating discriminator", "context mismatch between committed snapshots and live site"],
+      "status": "VERIFIED_SAME_DAY"
+    },
+    {
+      "id": "C7",
+      "claim": "lane suite green: 216/216 = 182 accepted lineage + 34 new hermetic tests",
+      "evidence_files": ["tests/runtime/"],
+      "recomputation": "team snapshot: 216 passed; base alone: 182 passed; new test bodies inspected for substance (tri-values, MNF, hygiene, collisions, blinding)",
+      "failure_modes_tested": ["vacuous tests", "lineage regression"],
+      "status": "VERIFIED"
+    },
+    {
+      "id": "C8",
+      "claim": "governance conformance: measurement arm only, no substrate expansion (ruling R2-2-A disclosed), branch-(b) NOT recorded by runner, POC not triggered, refuse list honored item-by-item, E1/E2 post-run edits disclosed with verbatim originals, demand-spec falsified sentence superseded without history rewrite",
+      "evidence_files": [
+        "directives/RUNTIME.md",
+        "reports/runtime/R2_SUBSTRATE_DEMAND_SPEC.md",
+        "r2_cycle2_state.json",
+        "reports/runtime/R2_CYCLE2_REPORT.md section 3"
+      ],
+      "recomputation": "refuse-list items checked one by one against artifacts; state file substrate_decision.stop_rule_branch_b=NOT_RECORDED_BY_RUNNER; X31 bookkeeping correct (killer ii discharged this cell class only; killer i undischarged); W-A2/W-4 correctly not owed this cycle",
+      "failure_modes_tested": ["scope creep", "runner self-authorizing Director action", "history rewrite", "evidence-tier inflation"],
+      "status": "VERIFIED_SEE_W_B3_W_B6"
+    }
+  ],
+  "recomputation_performed": [
+    "sha256 of prereg + three harness modules vs prereg pins (all match)",
+    "fresh gate_pagination_cycle over committed stream vs committed analysis block (deep-equal, 0 mismatches)",
+    "ce.verify_twin_identity over stream (clean)",
+    "gates_r22.self_test (9/9 fabricated branches decided correctly)",
+    "independent stream arithmetic: 25 logical rows, 50 lines, 10 wire transactions decomposition",
+    "field-level inspection of all four verify rows + PREFLIGHT payload",
+    "pytest tests/runtime: snapshot 216 passed; base 182 passed",
+    "blinding scan reproduction: arm+gates clean; driver holds task constants per disclosed precedent",
+    "same-day live reproduction of all scored bodies via audited-transport-equivalent fetches (full-hash matches)",
+    "git additivity/diff analysis and commit-content scoping",
+    "cost_event schema/vocabulary diff vs audited R2-1 stream (no drift)"
+  ],
+  "required_fixes": [],
+  "warnings": [
+    {
+      "id": "W-B1",
+      "severity": "minor",
+      "warning": "generic arm module floor_pagination.py hardcodes guard key name 'quotes_content_present' despite 'NO site strings by construction' claim; blinding-scanned property unaffected; rename/parameterize at next module touch only"
+    },
+    {
+      "id": "W-B2",
+      "severity": "minor",
+      "warning": "seven advisory pre-freeze unscored GETs are unverifiable (no receipts preserved); risk contained by exhaustive pinned witness over plausible server behaviors and void-first order; future cycles should persist receipts when advisory probes inform design"
+    },
+    {
+      "id": "W-B3",
+      "severity": "minor",
+      "warning": "demand-spec section 1.4 sentence ('discriminator unfedable in-canon') is falsified for this cell class; consume escalation package via spec section 3 gating only; do not quote 1.4 as current truth"
+    },
+    {
+      "id": "W-B4",
+      "severity": "minor",
+      "warning": "PG-KCONF bodies byte-identical to PG-K3F (deterministic static site): confirmation pass is a transport-repeat check only and must never count toward REPLICATION/GENERALIZATION tiers"
+    },
+    {
+      "id": "W-B5",
+      "severity": "minor",
+      "warning": "'1 wire transaction' headline excludes the entry GET (true marginal wire cost 2/cell plus amortized preflight); disclosed qualifier is binding on every external quotation; construction latency remains a 0.0 placeholder assertable only by anatomy"
+    },
+    {
+      "id": "W-B6",
+      "severity": "minor",
+      "warning": "state-file disclosure that E1/E2 edits were applied PRE-commit while untracked is not cryptographically provable post-hoc; load-bearing outcome artifacts hash-reproduce live; prefer committing state before patching or emitting patch receipts next time"
+    }
+  ],
+  "standing_obligations_carried_not_owed_this_cycle": [
+    "W-A2 whole-note emission due at next pilot.py/economics.py touch (neither touched)",
+    "W-4 http_floor arm registration due at next schema-touching change (none occurred)"
+  ],
+  "maximum_defensible_wording": "On BOTH frozen targets derived from committed entries plus one confirmation pass, ONE site family, ONE date, bare HTTP reached verified success in <= B_PG (observed 1) wire transactions after the entry GET AND discriminated the out-of-range control under the hard-pinned witness; independently recomputed deep-equal from the event stream and byte-reproduced live on the audit date. Never 'the pagination goal class', never 'all k', never cross-site, never agents, never the Web. Mechanism-floor killer (ii) discharged for THIS cell class only; killer (i) undischarged; X31 binds everywhere else: no compression phrasing leaves observation tier until BOTH killers discharge. No work-compression, speedup, margin, novelty or reuse_yield claim is licensed by this cycle."
+}

@@ -1,0 +1,22 @@
+{
+  "gate": "PASS",
+  "safe_to_integrate": true,
+  "summary": "Repair round 1 (run 32776369696, team head 2c585c1) correctly applied all three required fixes of audit CYCLE_32689296167. Diff vs rejected snapshot d467e02 touches only the report, the pending ledger entry and a new recount file; no code, raw outcomes or store dumps changed. Every corrected denominator recomputes exactly from committed raw subgoal_rows: login packaging fragment arms 16/16 evaluation rows = 8/8 condition x task cells memory-solved vs graphiter 0/8 rows = 0/4 cells via edges (all 8 exploration-fallback); books pager desc_only inherit 2/2 + fragntr 2/2 = 4/4 fragment-arm rows vs graphiter 0/2. Corrected wording mirrored into report E2, Finding F1', proposed G-H3 and pending ledger entry; stale-number sweep clean. Independently re-verified: anchored-predicate trap suite 8/8 against graph/accept.py, analyze_cycle3.py reproduces the committed analysis bit-identically modulo recorded input path, store discipline 66/66 eval rows write-free with single KB snapshot, pass1/pass2 identical across all compared fields, E3 paraphrase retrieval@1 2/8 both modes with live reuse 0/8 (honest negative stands). The one quantitative sentence added during repair (~150-151 decision points for graphiter login fallback) verifies at row level exactly.",
+  "required_fixes": [],
+  "audit_report": "reports/audit/CYCLE_32776369696_GRAPH.md",
+  "audited_snapshot": {
+    "workspace": "/tmp/spider_graph_team",
+    "team_head": "2c585c1c6a7ae8d79c25d3447139f141ccc0c35b",
+    "branch": "origin/cycle/graph/32776369696/team",
+    "rejected_round0_snapshot": "d467e020a7c2a3c1201118689142513152e36eb5"
+  },
+  "claims_status_delta": {
+    "K8_e2_residual_packaging": "VALIDATED_FOR_CURRENT_TEST (was UNVERIFIED AS STATED in round 0; corrected denominators recompute exactly under stated row/cell convention)",
+    "all_other_claims": "unchanged from audit CYCLE_32689296167; evidence untouched"
+  },
+  "integration_limits": [
+    "single site pair, scripted deterministic policies; n=2 deterministic passes are not sampling uncertainty",
+    "semantic addressing does not survive held-out paraphrase: retrieval@1 2/8 both modes, live reuse 0/8",
+    "composed-depth attribution holds at this depth with equalized oracle and iteration budget only"
+  ]
+}

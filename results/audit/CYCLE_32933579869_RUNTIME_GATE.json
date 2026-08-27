@@ -1,0 +1,83 @@
+{
+  "gate": "PASS",
+  "cycle": "R2-1 repair round 1 (lane cycle 3)",
+  "audited_snapshot": {
+    "team_run_id": 32928419260,
+    "rejected_tip": "8e99234",
+    "repair_run_id": 32933579869,
+    "repair_tip": "89ffeba",
+    "mount": "/tmp/spider_runtime_team",
+    "base_tip": "917bbf8",
+    "delta_vs_base": "insertion-only: 18 files, +4436/-0"
+  },
+  "prior_audit": {
+    "report": "reports/audit/CYCLE_32928419260_RUNTIME.md",
+    "gate": "REVISE (round 0)",
+    "required_fixes": ["RF-1", "RF-2", "RF-3"]
+  },
+  "safe_to_integrate": true,
+  "recomputation_performed": [
+    "snapshot identity: mount HEAD == origin/cycle/runtime/32933579869/team == team-attempt-1 == 89ffeba; working tree clean; base 917bbf8 and rejected 8e99234 both ancestors; exactly two repair commits (09536fd, 89ffeba)",
+    "byte-preservation: git blob identity + sha256 of prereg/events-stream/floor-results/substrate/url_arms identical to 8e99234 and equal to repair-report manifest pins; prereg digest == results field == state field (950a4ded...)",
+    "gate recomputation from committed stream via frozen loader: 74 raw -> 37 deduped rows, twin identity errors 0; gate_floor_cycle output deep-equal (json identity) to committed analysis block; outcome FLOOR_VOID unchanged; self_test all six branches decide correctly",
+    "stream anatomy: 12 actN rows = 4 cells x [affordance_probe GET /login, submit POST /login, redirect_hop_1 GET /]; no convention probe ever spent live",
+    "RF-1 independent hermetic mock repro against BOTH the audited snapshot module (floor_null.py @ 8e99234) and hardened module @ tip: zero-affordance entry executes ALL FIVE convention GETs in frozen order then NO_FORM_MATCHED with trip row probes=5 and verdict FLOOR_FAIL at 5 steps (round-0 dead-path premise 'cands == []' false: discover_login_url returns convention URLs AS candidates); hardened code behaviorally identical on both scenarios; divergence-pin assertion verified in suite",
+    "RF-2 verification: committed PREFLIGHT note still 900 chars, still fails json.loads (defect preserved not rewritten), sha256 39ada544...; regenerated full note 924 chars with exact-prefix byte identity over all 900 visible chars, json round-trip OK, complete 64/64 prereg sha == file digest; parity payload deep-equal to committed parity_preflight; blinding raw-scan fragment verbatim in committed prefix; repair_cycle3 --check fixed point OK; bare re-run refuses write-once (verified)",
+    "RF-3 independent deep-diff of r2_cycle1_state.json vs 8e99234: exactly three changes (void_mechanism W-2 suffix tag with original preserved verbatim in repair block; +top-level repair_round_1; updated_utc mechanically restamped 2026-08-26T05:40:53Z <= commit time 05:48:25Z); zero removed keys; every other field deep-identical",
+    "lane suite independently executed: 182 passed at tip; 160 passed on throwaway clone of rejected 8e99234 (lineage 160->182 confirmed); base lab/runtime 129 passed; repo-wide integrity single pre-existing Physics failure reproduced identically on untouched base",
+    "url_arms comparator regeneration deep-equal to committed artifact; gating NONE; R1 winner/sweep artifact never re-ranked",
+    "leakage rescan extended by auditor to all touched/new modules and new artifacts: harness modules exempt-only rt.tasks/rt.capsules; test fixtures carry sandbox site/credential strings consistent with accepted-base precedent (pilot2.py/r1_strong.py); memory-free policy modules clean",
+    "economics recomputation: no compression/speedup/yield/break-even figure anywhere new; reuse_yield UNDEFINED; X31 honored; strictly_cheaper_than_4_descriptive_only has exactly one occurrence across runtime/*.py (definition site, W-1 annotation present) - no consumer",
+    "no resolve surface touched (grep over all touched/new modules): no internal-ID dependence introduced to external agents"
+  ],
+  "claims": [
+    {
+      "claim": "All three round-0 required fixes resolved within scoped blast radius without touching frozen outcomes/question/task-set/thresholds/oracle/win-rule",
+      "evidence_files": [
+        "runtime/floor_null.py", "runtime/gates_r2.py", "runtime/r2_cycle1.py",
+        "runtime/repair_cycle3.py", "tests/runtime/test_floor_null.py",
+        "tests/runtime/test_repair_cycle3.py",
+        "results/runtime/r2_floor/preflight_correction_r21.json",
+        "results/runtime/r2_cycle1_state.json",
+        "reports/runtime/R2_CYCLE1_REPAIR_ROUND1.md"
+      ],
+      "status": "CONFIRMED",
+      "maximum_defensible_wording": "repair round 1 resolves RF-1 (recorded as false-positive audit finding with empirical refutation; hardening applied anyway, behavior identical), RF-2 (harness whole-note emission + deterministic exact-prefix-verified provenance correction preserving the defective row), RF-3 (surgical disclosed transform, mechanical timestamps going forward); outcomes byte-preserved (sha-pinned)"
+    },
+    {
+      "claim": "FLOOR_VOID headline stands at frozen ceilings; no compression or economics claim exists in this cycle",
+      "evidence_files": [
+        "results/runtime/r2_floor/r2_floor_results.json",
+        "results/runtime/r2_floor/cost_events.jsonl",
+        "reports/runtime/R2_CYCLE1_REPORT.md",
+        "results/runtime/r2_cycle1_state.json"
+      ],
+      "status": "CONFIRMED",
+      "maximum_defensible_wording": "on the quotes-login goal class (one site family, one date, three live passes + one wrong-password negative control, one scripted stdlib implementation, zero browser launches) the mechanism-floor null is FLOOR_VOID because the environment accepts any credentials; no substrate inference licensed in either direction; substrate decision NO_SUBSTRATE_DECISION_VOID; reuse_yield UNDEFINED; no economics figure quoted; model independence unfalsifiable this cycle"
+    },
+    {
+      "claim": "Round-0 audit finding RF-1 was a false positive (dead path did not exist on this snapshot)",
+      "evidence_files": [
+        "reports/runtime/R2_CYCLE1_REPAIR_ROUND1.md",
+        "runtime/floor_null.py (discover_login_url @ 8e99234 returns convs as candidates)",
+        "tests/runtime/test_floor_null.py::TestZeroAffordanceFallbackCell"
+      ],
+      "status": "CONFIRMED",
+      "maximum_defensible_wording": "the alleged dead path is empirically refuted by auditor-independent hermetic reproduction of the audited snapshot code; recorded as an audit false positive while the requested hardening is nonetheless applied and regression-pinned; round-0 report remains immutable history, corrected here"
+    }
+  ],
+  "required_fixes": [],
+  "warnings": [
+    "W-A1 audit-process lesson (OBSERVATION tier): round-0 RF-1 was a false positive caused by alleging a dead path from code reading without executing it; future audits must reproduce alleged dead paths before alleging them; literal fix prescriptions can themselves be harmful (round-0 fix text would have double-probed conventions ~10 GETs on fallback)",
+    "W-A2 maintenance overhead (disclosed): historical 900-char truncation pattern persists in accepted prior-cycle modules pilot.py/economics.py until their next harness touch; deferred-with-record acceptable once, must not be deferred twice",
+    "W-A3 budget semantics: NOTE_SANITY_MAX raises mid-run rather than emitting corrupt evidence; correct durability trade-off but an oversized payload would burn a live cell without taxonomy verdict",
+    "W-A4 inherited caveat: freeze-chain ordering provable only up to single-machine timing (unchanged from round 0)",
+    "W-A5 OPERATIONAL_DIAGNOSTIC: pytest/numpy absent from audit mount; installed by auditor into /tmp/opencode/pylibs (outside tracked scopes); suite results are auditor's own executions",
+    "W-A6 tool scoping: runtime/repair_cycle3.py embeds absolute pre-repair sha pins; --check fails BY DESIGN after any legitimate future mutation of the five pinned artifacts; cycle-scoped tamper evidence, not living infrastructure"
+  ],
+  "evidence_tier_note": "provenance-layer corrections produced by the repair are DURABLE_UNAUDITED until this acceptance; with PASS they become AUDITED_DURABLE as corrections only; no outcome-tier claim upgraded; FLOOR_VOID ceiling unchanged",
+  "integration_ceiling": "Repair round 1 resolves CYCLE_32928419260 RF-1/RF-2/RF-3 with zero changes to frozen outcomes, question, task set, thresholds, oracle or win rule. Scientific headline stands exactly at its frozen ceiling: mechanism-floor null FLOOR_VOID on the quotes-login goal class (environment accepts any credentials; direct-HTTP surface cannot discriminate credential validity); no substrate inference in either direction; NO_SUBSTRATE_DECISION_VOID repair-first; witnessed-effect addressing POC not triggered; reuse_yield UNDEFINED; no economics figure quoted; model independence unfalsifiable this cycle.",
+  "audit_report": "reports/audit/CYCLE_32933579869_RUNTIME.md",
+  "auditor": "runtime_auditor (independent session)",
+  "date_utc": "2026-08-26"
+}

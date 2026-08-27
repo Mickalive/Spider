@@ -1,0 +1,36 @@
+{
+  "gate": "PASS",
+  "safe_to_integrate": true,
+  "summary": "Graph cycle 1 of graph-addressing-fused-retrieval (run 32919200264, repair round 1): the frozen-rule verdict MEASUREMENT_INVALID (instrument-level retrieval-stack-void) and all substantive report-all secondaries are VALIDATED_FOR_CURRENT_TEST. Independent fresh-code recount from committed raw rows confirms every load-bearing number: validity precondition literal reading fails under BOTH denominators (hard-slice gated-B 0/64 vs ungated-by-construction random 16/64; all-instance 0/75 vs 17/75) and passes only under all-ungated readings (+2 hard / +4 all) - the freeze-created gating asymmetry is disclosed verbatim and was not resolved post hoc, and the verdict is invariant across all four readings. Retrieval: gated primary C-vs-B 0-0 over n=61 informative-hard rows; ungated hard@1 A_sig 53/64, A_ft 0/64, B 18/64, C_final 20/64, D_random 16/64; paired ungated 3W/1R n=61; coverage B 7/72 C 5/72 with zero false accepts on the 3 UNKNOWN-row outputs for both text arms (single-qid-family triviality pre-disclosed). Battery recomputed under BOTH conventions (gated dummy 2W/0R drives battery_specific=false; ungated dummy 5W/6L); conclusion invariant; summarizer survival UNRESOLVED. Execution: 48 rows complete, pass identity 24/24, memory-led A_strict/A_std 8/12 vs B/C 0/12, primary medians C-B 0.0 / A_std-C -2.0 / A_strict-C -2.0 over 16 common cells each, store digests identical pre/post on every row. Economics recount matches corrected RF-1 sentence (would-be LLM calls per C run 3-5, max 5; cache hits separate; no latency claim licensed). Repair integrity: exhaustive diff 4426f40..db17659 touches exactly report + manifest notes[] + new recount artifact, zero code/data/outcome changes; all five RF fixes applied exactly and mirrored everywhere mandated; rejected snapshot preserved at origin/cycle/graph/32905175867/team=4426f40. Provenance: all 20 manifest pins match; analyzer replay byte-identical sha256 0922b06d... verdict unchanged; truth-set self-pin 235834e8... independently recomputed and matches; instrument sha pins match prereg with ZERO dev/confirm text overlap; freeze timing reconstructed from git (prereg+A1+code at 05c049d before any observation; A2 appended pre-confirm with full curves); dev-only selection loader-enforced; truth sets exactly probe-derived for all 25 qids; probes write nothing. Tests locally rerun: fused suite 27/27 OK; full discovery 120 pass + documented PRE-EXISTING PhysicsLeakageGuardTests fixture failure identical to audited baseline. Three residual NON-blocking observations recorded in the audit report (analyzer computes its verdict-driving validity boolean from all-instance aggregates instead of the prereg's hard slice - proven outcome-invariant by four-way recount, report layer denominator-correct after repair, recommend Director carry one clarifying clause into G-H7 ledger wording at integration; cosmetic D_random seed-schedule wording SEED*31+i vs 'SEED+qi', decision-irrelevant, no selection channel; cosmetic integer truncation of hygiene-only microsecond medians). A valid, honestly represented instrument-level negative is accepted; refusing to convert measurement failure into mechanism falsification is correct.",
+  "required_fixes": [],
+  "claims_status_summary": {
+    "verdict_MEASUREMENT_INVALID_instrument_level": "VALIDATED_FOR_CURRENT_TEST",
+    "validity_precondition_all_four_readings": "VALIDATED_FOR_CURRENT_TEST (outcome-invariant; ambiguity disclosed, not resolved post hoc)",
+    "retrieval_level_all_numbers": "VALIDATED_FOR_CURRENT_TEST",
+    "battery_and_attribution_diagnostics": "VALIDATED_FOR_CURRENT_TEST",
+    "execution_level_all_numbers": "VALIDATED_FOR_CURRENT_TEST",
+    "economics_vector": "SURVIVES_AUDIT_WITH_LIMITS (no latency claim licensed; cosmetic truncation noted)",
+    "repair_round_1_rf1_rf5_application_and_mirror_completeness": "VALIDATED_FOR_CURRENT_TEST",
+    "freeze_timing_selection_instrument_integrity": "SURVIVES_AUDIT_WITH_LIMITS (same-lab authorship class limit travels)",
+    "manifest_and_analyzer_replay": "VALIDATED_FOR_CURRENT_TEST (20/20 pins match; replay byte-identical)",
+    "test_suite": "VERIFIED (27/27 fused; 120 pass + pre-existing Physics fixture failure)"
+  },
+  "residual_observations_non_blocking": [
+    "analyze_fused.py verdict-driving validity_B_clears_random_hard.passes consumes ALL-instance aggregates while prereg s8 role(iii) names the HARD slice; outcome-invariant under auditor's four-way recount (literal fails 0/64-vs-16/64 AND 0/75-vs-17/75); report layer unit-correct post-repair; Director should carry one clarifying clause into G-H7 ledger wording at integration; successor analyzers must compute frozen statistics exactly as written",
+    "D_random seed schedule implemented as Random(SEED*31+row_index) versus prereg wording 'SEED+qi'; deterministic, participates in no selection procedure, decision-irrelevant; future preregs quote implemented schedules verbatim",
+    "report prints integer-truncated microsecond medians (315/2949) versus analyzer-stored 314.5/2949.5 on perf_counter hygiene-only fields supporting no latency claim"
+  ],
+  "provenance": {
+    "audited_snapshot": "/tmp/spider_graph_team @ db17659 (= origin/cycle/graph/32919200264/team)",
+    "rejected_snapshot_preserved": "origin/cycle/graph/32905175867/team = 4426f40 (round-0 REVISE snapshot), verified on remote",
+    "prior_audit": "CYCLE_32905175867_GRAPH gate REVISE RF-1..RF-5 (all verified applied)",
+    "accepted_base": "c363bcc (G-H6 integration; untouched by this audit)",
+    "prereg_freeze_commit": "05c049d (pre-outcome; A2 appended pre-confirm at f454a8e with full curves)",
+    "independent_recount": "/tmp/opencode/audit_recount_32919200264.py (fresh non-team code; outputs retained in /tmp/opencode/audit_recount_output.json)",
+    "analyzer_replay": "byte-identical reproduction of results/graph/fused_analysis.json sha256 0922b06de6d30c5157b58309723ee4808878e5dcd6519104ac4f9994f401dc41 executed in /tmp/opencode/fused_replay copy only",
+    "manifest_check": "20/20 pinned artifact hashes match",
+    "truth_set_derivation": "G(qid) == {probe frag_id : result=='solved'} verified for all 25 qids from fused_calibration.json.gz (203 probe rows; 3 already-satisfied + 2 unhealthy-host exclusions listed)",
+    "test_suite_local_rerun": "tests/test_graph_fused.py 27/27 OK; full suite 120 pass + pre-existing PhysicsLeakageGuardTests::test_true_previous_action_sequence_passes failure (numpy/playwright installed for audit; run in /tmp/opencode/team_test copy)",
+    "team_files_modified_by_audit": "none"
+  }
+}

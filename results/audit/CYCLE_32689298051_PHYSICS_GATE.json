@@ -1,0 +1,50 @@
+{
+  "gate": "PASS",
+  "safe_to_integrate": true,
+  "summary": "WP-005 FALSIFIED verdict is a valid, honestly represented negative result: preregistration provably frozen before all data (freeze d81aee5 at 2026-08-24T04:47:56Z; every row timestamp postdates it), provenance sentences true this cycle, dataset hashes match manifest, frozen pipeline rerun by the auditor on committed data reproduces stored results bit-exact, and a fully independent from-scratch recomputation (different learner, own targets/metrics/seed) confirms the verdict on both co-primary targets. No target/post-state leakage, train-only fitting verified, correct dependency-level uncertainty with P3 anomaly resolved pre-freeze, ACTION_ONLY/persistence/memory nulls present, degenerate folds disclosed, wording bounded to the tested instrument family. Minor non-blocking notes recorded in the prose report (partial verifier independence L1; one coverage digit in report prose L2; small-fold power L3).",
+  "required_fixes": [],
+  "run_id": "32689298051",
+  "lane": "physics",
+  "cycle": 2,
+  "repair_round_audited": 0,
+  "team_verdict_audited": "FALSIFIED",
+  "audit_verdict_on_measurement": "VALID_FOR_CURRENT_TEST",
+  "claims_status": {
+    "dataset_integrity_875_769": "VALIDATED_FOR_CURRENT_TEST",
+    "preregistration_timing_and_provenance": "VALIDATED_FOR_CURRENT_TEST",
+    "target_construction_G9_no_leakage": "VALIDATED_FOR_CURRENT_TEST",
+    "split_integrity_train_only_fitting": "VALIDATED_FOR_CURRENT_TEST",
+    "headline_arithmetic_frozen_rules": "VALIDATED_FOR_CURRENT_TEST",
+    "uncertainty_level_P3_resolution": "VALIDATED_FOR_CURRENT_TEST",
+    "null_strength_policy_confounding": "VALIDATED_FOR_CURRENT_TEST",
+    "exploratory_S10_honesty": "VALIDATED_FOR_CURRENT_TEST",
+    "stop_rule_invocation_bounded_wording": "VALIDATED_FOR_CURRENT_TEST"
+  },
+  "key_recomputations": {
+    "committed_pipeline_rerun_vs_stored_results_json": "IDENTICAL (bit-exact)",
+    "independent_T1": {
+      "mean_D": -0.0312,
+      "fold_wins_MSA_vs_best_null": "3/9",
+      "randomization_p_own_seed": 0.9969,
+      "stored_mean_D": -0.0432,
+      "stored_wins": "1/9",
+      "stored_p": 0.897605
+    },
+    "independent_T2": {
+      "mean_D": -0.0474,
+      "fold_wins_MSA_vs_best_null": "2/9",
+      "MSA_gt_MS_folds": "8/9",
+      "randomization_p_own_seed": 0.60782,
+      "stored_mean_D": -0.0497,
+      "stored_wins": "4/9",
+      "stored_p": 0.269537
+    },
+    "conclusion_invariant_to_learner": true
+  },
+  "advisories_for_next_directive": [
+    "Future verifiers should implement their own learner+metric reference path instead of importing analysis helpers (L1).",
+    "Correct the trivial coverage parenthetical when this report is next quoted (openlibrary T1 coverage 0.97, not 1.00) (L2).",
+    "Per pre-declared horizon, passive random-walk sampling is exhausted for transferable-dynamics claims; any continuation requires a genuinely different instrument (e.g., deliberate restart/matched-state designs) with a fresh preregistration; WP-004 identifiability gate remains blocking."
+  ],
+  "report_path": "reports/audit/CYCLE_32689298051_PHYSICS.md"
+}

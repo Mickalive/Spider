@@ -1,0 +1,51 @@
+{
+  "audit_id": "CYCLE_32689296167_GRAPH",
+  "run_id": 32689296167,
+  "lane": "graph",
+  "repair_round": 0,
+  "date": "2026-08-24",
+  "audited_snapshot": "/tmp/spider_graph_team (team head d467e02; adopted frozen prereg+machinery a987e82 from dead run 32684818422)",
+  "report": "reports/audit/CYCLE_32689296167_GRAPH.md",
+  "gate": "REVISE",
+  "safe_to_integrate": false,
+  "summary": "All load-bearing headline numbers recompute exactly from committed raw rows under a reconstructable freeze timeline: E1 keyword-assisted vs desc-only table, E2 graphiter/inherit/fragntr parity and 0/3 baselines, E3 paraphrase 2/8 offline + 0/8 live (honest negative), X1 bounded transfer under anchored predicates (traps independently re-executed 8/8), store discipline (66/66 eval rows write-free), strict route absence, pass replication. One defect: the E2 residual sentence 'login memory-solved 6/6 inherit/fragntr rows vs graphiter 0/4' uses non-reproducible denominators (true values 16/16 rows / 8-of-8 cells vs 0/8 rows / 0-of-4 cells; error direction conservative) and propagates to F1' and the proposed G-H3 ledger wording. REVISE is textual-only; no rerun or new data needed.",
+  "required_fixes": [
+    {
+      "id": "RF-1",
+      "file": "reports/graph/cycle3_e1_e4.md (E2 residual-value bullet)",
+      "fix": "Replace 'fragments solved the login subgoal by memory in 6/6 inherit/fragntr rows; graphiter solved it via edges in 0/4 rows' with the recomputed values and an explicit convention: fragment arms (inherit+fragntr x desc_kw+desc_only x C2+C3) login memory-solved in 16/16 evaluation rows = 8/8 condition-task cells (passes identical); graphiter 0/8 rows = 0/4 cells. Do not condition the denominator on end-to-end success status.",
+      "verification": "Auditor recount over B-eval subgoal_rows with sig ending '.login': fragment-family rows 16/16, graphiter rows 0/8."
+    },
+    {
+      "id": "RF-2",
+      "file": "reports/graph/cycle3_e1_e4.md (E2 books-pagination bullet)",
+      "fix": "Correct 'fragments 2/2' to either 'inherit 2/2 and fragntr 2/2 (4/4 fragment-arm rows)' or explicitly restrict the claim to the inherit arm; graphiter 0/2 unchanged.",
+      "verification": "Auditor recount of eval.c1.page2 solved_by under desc_only across inherit/fragntr/graphiter rows."
+    },
+    {
+      "id": "RF-3",
+      "file": "reports/graph/cycle3_e1_e4.md (Finding F1' and team-level G-H3 ledger proposal)",
+      "fix": "Mirror RF-1/RF-2 numbers into F1' and replace 'login 6/6 vs 0/4 edges' in the proposed G-H3 text before Lane Director integration so no unreproducible arithmetic enters docs/GRAPH_LEDGER.md.",
+      "verification": "Grep integrated ledger for '6/6'/'0/4' must return no hits; corrected integers must match auditor recount."
+    }
+  ],
+  "non_blocking_notes": [
+    "Prior-run (32684818422) zero-outcome claim accepted on disclosure; that branch is not in the audited workspace. Immaterial: this run re-trained its own KB and its own pre-outcome commit chain verified.",
+    "Bit-exact dry-table reconstruction after progress-flush overwrite is corroborated (membership-level reproduction from committed store dump matches; order differences explained by RNG stream position in auditor harness) but not bit-verifiable; already disclosed by team.",
+    "Team pytest suite not executable in audit sandbox (playwright missing); compensated by direct execution of the anchored-predicate trap suite against graph/accept.py (8/8 pass) and full raw-row recomputation.",
+    "Two deterministic passes are replication against transient flakiness, not sampling uncertainty; report frames this correctly and must continue to do so.",
+    "Paraphrase authorship is same-lab model-family (disclosed); semantic-addressing claims must remain bounded to this authorship class."
+  ],
+  "claims": [
+    {"id": "K1", "claim": "Freeze-timing/provenance chain", "status": "SURVIVES_AUDIT_WITH_LIMITS"},
+    {"id": "K2", "claim": "Store discipline / self-read closed", "status": "VALIDATED_FOR_CURRENT_TEST"},
+    {"id": "K3", "claim": "Strict adjacent-pair route absence", "status": "VALIDATED_FOR_CURRENT_TEST"},
+    {"id": "K4", "claim": "Anchored predicates valid", "status": "VALIDATED_FOR_CURRENT_TEST"},
+    {"id": "K5", "claim": "X1 bounded transfer observation", "status": "SURVIVES_AUDIT_WITH_LIMITS"},
+    {"id": "K6", "claim": "E1 keyword-assisted retrieval decision + desc-only partial wins", "status": "VALIDATED_FOR_CURRENT_TEST"},
+    {"id": "K7", "claim": "E2 iteration-policy attribution via equalized graphiter", "status": "VALIDATED_FOR_CURRENT_TEST"},
+    {"id": "K8", "claim": "E2 login/books packaging residual numbers", "status": "UNVERIFIED_AS_STATED", "note": "corrected by audit recomputation; direction conservative"},
+    {"id": "K9", "claim": "E3 paraphrase holdout negative result (2/8 offline, 0/8 live)", "status": "VALIDATED_FOR_CURRENT_TEST"},
+    {"id": "K10", "claim": "Baselines replicate 0/3; loop-permitting baseline now exists", "status": "VALIDATED_FOR_CURRENT_TEST"}
+  ]
+}

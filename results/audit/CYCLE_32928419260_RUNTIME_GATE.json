@@ -1,0 +1,127 @@
+{
+  "gate": "REVISE",
+  "safe_to_integrate": false,
+  "cycle": "R2-1",
+  "run_id": 32928419260,
+  "repair_round": 0,
+  "audited_team_tip": "8e99234",
+  "audit_base_tip": "917bbf8",
+  "delta_shape": "insertion-only, 12 new files, accepted modules byte-untouched",
+  "claims": [
+    {
+      "claim": "Headline FLOOR_VOID: wrong-password negative control passed verification; environment accepts any credentials on the quotes-login goal class; per frozen gate all floor verdicts void; no substrate inference either direction; repair-first",
+      "evidence_files": [
+        "results/runtime/r2_floor/r2_floor_results.json",
+        "results/runtime/r2_floor/cost_events.jsonl",
+        "results/runtime/r2_floor/substrate_decision_r21.json",
+        "reports/runtime/R2_CYCLE1_REPORT.md"
+      ],
+      "recomputation_performed": "Independent gate recomputation from committed stream (gates_r2.gate_floor_cycle over frozen enumeration) is deep-equal to committed analysis; twin identity errors 0 (74 raw lines -> 37 dedup rows); P5' consistent per cell (exactly one verify row, one summary row, summary actions == actN count); step anatomy stream-verified as affordance_probe GET /login + POST /login + redirect GET / = 3 steps on all four cells; VOID>Dominates precedence verified in code and by live self_test() covering all six branches",
+      "failure_modes_tested": ["verdict flipping post hoc", "negative-control gaming", "double counting via twins", "budget-quantifier contamination", "tri-value flattening"],
+      "status": "CONFIRMED"
+    },
+    {
+      "claim": "Freeze-before-outcomes discipline: prereg committed before first live request; disclosed pre-outcome correction only; harness pinned at b4254a6",
+      "evidence_files": [
+        "reports/runtime/R2_CYCLE1_PREREG.md",
+        "git commits b4254a6, 5dd51ab, 95aa45a, c2f0a6d, 8e99234"
+      ],
+      "recomputation_performed": "git ls-tree at 5dd51ab shows zero R2 outcome artifacts; correction commit 95aa45a diff inspected line-by-line (prereg addendum + blinding exemption/raw-scan serialization only); floor_null.py/gates_r2.py/policies_r2.py/tests byte-identical from b4254a6 to HEAD; prereg sha256 recomputed == pin (950a4ded...279a199)",
+      "failure_modes_tested": ["post-hoc preregistration", "hidden post-freeze code changes", "sha pin mismatch"],
+      "status": "CONFIRMED",
+      "residual_limit": "single-machine timing not cryptographically provable; internal consistency and lowest-reward-outcome asymmetry support freeze honesty"
+    },
+    {
+      "claim": "Gates are mechanical and outcome-blind; three-outcome rule plus VOID precedence computed by frozen code",
+      "evidence_files": ["runtime/gates_r2.py"],
+      "recomputation_performed": "Code inspection of denominators/precedence + gates_r2.self_test() executed during audit: dominates/fails/inconclusive_health_trip/invalid_arm_budget_breach/void_surface/must_not_fire_violation all decided correctly",
+      "failure_modes_tested": ["gate softness", "boolean flattening", "INVALID_ARM misclassification", "FLOOR_FAILS leakage from health-tripped cells"],
+      "status": "CONFIRMED"
+    },
+    {
+      "claim": "Matched-task discipline: same committed T3 entries, same shared fills spec, same vendored predicate dialect; no cross-unit speedup/margin claim anywhere",
+      "evidence_files": ["runtime/pilot2.py", "runtime/predicates.py", "runtime/policy_sweep.py", "results/runtime/probes/url_arms_r21.json"],
+      "recomputation_performed": "Entry URL identity with hash-pinned snapshots verified; fills_identity assertion inspected; no new predicate clauses (imports unchanged); X31 scan found no compression phrasing and no economics figure; reuse_yield recorded UNDEFINED",
+      "failure_modes_tested": ["task-set mismatch ratios", "predicate dialect divergence", "evidence-tier inflation"],
+      "status": "CONFIRMED"
+    },
+    {
+      "claim": "No hidden IDs / no answer leakage: blinding clean under disclosed rt.tasks/rt.capsules exemption",
+      "evidence_files": ["runtime/schemas/policy_blinding_tokens.json", "runtime/floor_null.py", "runtime/policies_r2.py", "PREFLIGHT row in cost_events.jsonl"],
+      "recomputation_performed": "Auditor's own independent fixture scan: hard leaks NONE in both modules; exempt-only hits exactly [rt.tasks, rt.capsules] in floor_null, none in policies_r2; matches serialized raw scan; '/login' vocabulary sanctioned by frozen fixture design note and disclosed bias direction",
+      "failure_modes_tested": ["site-string leakage", "credential leakage", "capsule-knowledge leakage into memory-free policies", "internal-ID dependence of external callers"],
+      "status": "CONFIRMED"
+    },
+    {
+      "claim": "Stale reuse / accepted-state mutation absent; measurement arm isolated from Runtime surfaces",
+      "evidence_files": ["git diff 917bbf8..8e99234", "runtime/resolver.py", "runtime/executor.py", "runtime/registry.py", "runtime/writeback.py"],
+      "recomputation_performed": "Diff is insertion-only across the 12 declared files; audited modules and directives byte-untouched; grep proves floor_null/policies_r2 imported only by gates_r2 and the driver - never by resolver/executor/registry/writeback",
+      "failure_modes_tested": ["silent accepted-state edits", "productization of measurement arm", "R1 winner re-ranking"],
+      "status": "CONFIRMED"
+    },
+    {
+      "claim": "Refuse-list and schema conformance honored (no new cost_event fields/enums, schemas v0 untouched, no substrate expansion, WB quarantine directive-sanctioned with true grounds)",
+      "evidence_files": ["runtime/schemas/spider.cost_event.v0.schema.json", "results/runtime/r2_cycle1_state.json", "directives/RUNTIME.md"],
+      "recomputation_performed": "All emitted row keys subset of v0 schema properties; stages/classes/phases within enums (arm is open string; http_floor new value noted W-4); playwright import genuinely fails in this environment (quarantine ground verified)",
+      "failure_modes_tested": ["schema mutation", "enum violation", "unauthorized executor productization", "false infrastructure claim"],
+      "status": "CONFIRMED"
+    },
+    {
+      "claim": "Lane test suite passes",
+      "evidence_files": ["tests/runtime/test_floor_null.py"],
+      "recomputation_performed": "Auditor-installed pytest (in /tmp/opencode/pylibs) executed tests/runtime: 160 passed / 0 failed; repo-wide tests/test_integrity.py has one Physics-lane failure reproduced identically on untouched audit base (pre-existing environmental, not a Runtime regression)",
+      "failure_modes_tested": ["unexecuted benchmark acceptance", "regression masking"],
+      "status": "CONFIRMED_WITH_ENVIRONMENTAL_NOTE"
+    }
+  ],
+  "recomputation_performed": {
+    "stream_reanalysis": true,
+    "gate_deep_equal_to_committed": true,
+    "twin_identity_errors": 0,
+    "raw_lines": 74,
+    "deduped_rows": 37,
+    "steps_anatomy_verified": "all four cells: affordance_probe GET /login (1) -> POST /login (2) -> redirect_hop GET / (3)",
+    "gate_self_test_all_branches_correct": true,
+    "prereg_sha256_match": true,
+    "freeze_chain_git_orderable": true,
+    "byte_untouched_accepted_modules": true,
+    "independent_blinding_rescan_clean": true,
+    "lane_suite_result": "tests/runtime: 160 passed, 0 failed (auditor execution)",
+    "full_suite_note": "one pre-existing Physics-lane failure identical on audit base; environmental",
+    "live_http_by_auditor": false
+  },
+  "required_fixes": [
+    {
+      "id": "RF-1",
+      "title": "Zero-affordance fallback dead path in FloorMeasurementArm.run",
+      "detail": "When discover_login_url returns convention_fallback (no affordance anchor), probes==[] and no convention GET ever occurs; cell ends NO_FORM_MATCHED/FLOOR_FAIL with discovery_candidates telemetry listing five untried URLs. Violates the arm's own frozen procedure text (prereg sec 2.2 step 4). Zero effect on R2-1 outcomes (all cells affordance-hit, stream-verified); gate P5' prevents any false-headroom cycle classification, but the broken primitive would be handed to R2-2.",
+      "fix": "Unify probe list for both discovery sources (affordance candidates first, convention paths appended when affordance probing exhausts); add full-cell mock regression test with a no-anchor entry page asserting convention GETs occur",
+      "touches_frozen_outcomes": false
+    },
+    {
+      "id": "RF-2",
+      "title": "PREFLIGHT event note truncated mid-JSON at 900-char cap",
+      "detail": "Committed PREFLIGHT row note ends mid-hash ('prereg_sha256' cut at 42/64 chars), leaving malformed JSON inside a durable evidence row. Raw+filtered blinding scans and full parity block survived; full sha pin exists in r2_floor_results.json; no gate consumes the row.",
+      "fix": "Raise or split the note cap for this row; add json.loads round-trip assertion to serialization; regenerate PREFLIGHT provenance via disclosed correction artifact without rewriting outcomes commits",
+      "touches_frozen_outcomes": false
+    },
+    {
+      "id": "RF-3",
+      "title": "Impossible updated_utc in durable state record",
+      "detail": "results/runtime/r2_cycle1_state.json records updated_utc 2026-08-26T05:20:00Z but was committed in c2f0a6d at 05:00:07Z - hand-written timestamp ~20 minutes after its own commit. All other state content reconciles with artifacts.",
+      "fix": "Disclose hand-assembly via correction block recording actual assembly time; generate timestamps mechanically at write time henceforth",
+      "touches_frozen_outcomes": false
+    }
+  ],
+  "warnings": [
+    "W-1: strictly_cheaper_than_4_descriptive_only=true embeds cross-media arithmetic (wire transactions vs browser actions) banned for claims by prereg sec 2.3; frozen pre-outcome, non-gating, unquoted in prose - must never migrate into wording; rename/annotate at next harness touch",
+    "W-2: 'verified out-of-harness' void-mechanism wording implies an unsaved manual check; facts are derivable from committed rows (must-not-fire OK + NEGCTRL verify pass) - cite those rows instead",
+    "W-3: parser-parity oracle thin (1 anchor/entry), mitigated by 44/44 and 57/57 element-count equality plus guards; static-parser visibility residual already disclosed",
+    "W-4: 'http_floor' new arm string value; schema arm field is open (no enum violation); register at next schema touch",
+    "W-5: OPERATIONAL_DIAGNOSTIC - pytest/numpy absent from audit mount; auditor installed them under /tmp/opencode/pylibs to execute suites; no repo mutation"
+  ],
+  "maximum_defensible_wording": "On the quotes-login goal class (one site family, one date, three live passes + one wrong-password negative control, one scripted stdlib implementation, zero browser launches), the mechanism-floor null is FLOOR_VOID: the wrong-password control PASSED verification, therefore the direct-HTTP surface cannot discriminate credential validity on this goal class; per the frozen gate ALL floor verdicts are void and no browser-inheritance-headroom or floor-domination inference is licensed in either direction. Witnessed-effect addressing POC not triggered; reuse_yield UNDEFINED; no economics figure quoted; model independence untested and unfalsifiable in this cycle (zero provider calls); observation-tier facts (3 wire transactions/cell <= B_FLOOR=6, all guards true, G-FLOOR0/G-FLOORa true) stand void-caveated. Substrate decision: NO_SUBSTRATE_DECISION_VOID - repair-first; stop-rule (b) not invoked.",
+  "report_path": "reports/audit/CYCLE_32928419260_RUNTIME.md",
+  "auditor": "runtime_auditor",
+  "audited_utc": "2026-08-26"
+}

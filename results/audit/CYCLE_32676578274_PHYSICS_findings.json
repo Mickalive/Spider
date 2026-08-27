@@ -1,0 +1,45 @@
+{
+  "audit": "PHYSICS lane cycle 1",
+  "github_run": 32676578274,
+  "date": "2026-08-24",
+  "team_branch_head": "d22aa83",
+  "audited_output": "WP-003B-R2 (action-conditioned next-state structure, website holdout)",
+  "team_verdict": "FALSIFIED",
+  "audit_overall_status": "VALIDATED_FOR_CURRENT_TEST",
+  "safe_to_integrate": true,
+  "recomputation": {
+    "method": "independent from-scratch implementation, no team analysis code imported",
+    "dataset_sha256_gz_verified": "eff6928b6158e3b3b13cf81b4a2c23b5abc2c429d4eb438971171a48b31ea439",
+    "dataset_sha256_uncompressed_verified": "ab8b93ca91851c096cfdd41aab1fff09465283435b7b698681860380bd5e6600",
+    "rows_collected": 681,
+    "rows_confirmed": 564,
+    "per_fold_D_f_reproduced": {"books": -0.2698, "internet": -0.4177, "openlibrary": -0.913, "quotes": -0.0107, "wikipedia": -0.8968},
+    "mean_D_reproduced": -0.5016,
+    "grouped_bootstrap_ci95_reproduced": [-0.6467, -0.3153],
+    "fold_wins_reproduced": "0/5 (needed 3)",
+    "verdict_reproduced": "FALSIFIED",
+    "disclosed_buggy_variant_mean_D_reproduced": -0.4983
+  },
+  "claims": [
+    {"id": "C1", "claim": "dataset counts/per-site composition as reported", "status": "VALIDATED_FOR_CURRENT_TEST"},
+    {"id": "C2", "claim": "no target/post-state leakage into predictors", "status": "VALIDATED_FOR_CURRENT_TEST"},
+    {"id": "C3", "claim": "site-disjoint LOSO splits with train-only vocabularies", "status": "VALIDATED_FOR_CURRENT_TEST", "note": "mild transduction in pooled action-vocab encoding; immaterial for negative result, must be train-only for future positive claims"},
+    {"id": "C4", "claim": "headline arithmetic and FALSIFIED verdict per frozen rule", "status": "VALIDATED_FOR_CURRENT_TEST", "note": "bit-exact reproduction including RNG stream"},
+    {"id": "C5", "claim": "disclosed metric defect/correction", "status": "SURVIVES_AUDIT_WITH_LIMITS", "note": "fix implements frozen spec; buggy variant reproduced exactly; pre-fix artifacts overwritten instead of preserved; verdict invariant"},
+    {"id": "C6", "claim": "preregistration frozen before confirmatory data", "status": "SURVIVES_AUDIT_WITH_LIMITS", "note": "design/rules verifiably frozen pre-data (git + row timestamps); prereg section 11 sentence 'analysis code in same freeze commit' is FALSE (code first committed 30 min later with collector hardening); v1-discard decision unverifiable (ephemeral), disclosed"},
+    {"id": "C7", "claim": "trajectory-grouped bootstrap uncertainty", "status": "VALIDATED_FOR_CURRENT_TEST", "note": "reproduced bit-exact; team's own P3 probe anomaly (grouped width < naive width on books fold) unresolved but non-threatening: CI upper bound far below 0 and sign test 0/5"},
+    {"id": "C8", "claim": "persistence + memory nulls dominate; no cross-site transfer at this granularity", "status": "SURVIVES_AUDIT_WITH_LIMITS", "note": "bounded wording appropriate; N_MAJ is a degenerate null under macro recall (cosmetic)"},
+    {"id": "C9", "claim": "primary object is environment response P(s'|s,a), policy-matched across sites", "status": "VALIDATED_FOR_CURRENT_TEST"},
+    {"id": "C10", "claim": "identifiability diagnostics descriptive only; WP-004 stays blocked", "status": "VALIDATED_FOR_CURRENT_TEST"},
+    {"id": "C11", "claim": "scope discipline / history preservation", "status": "VALIDATED_FOR_CURRENT_TEST", "note": "historical files untouched; shared tests/test_integrity.py fixture repair flagged for Meta-Director reconciliation"}
+  ],
+  "failure_modes_tested": ["target leakage", "prev_action misalignment", "site identity leakage", "train/test preprocessing contamination", "outcome-based filtering", "data authenticity/internal consistency", "seed determinism", "jitter-style fake uncertainty", "wrong resampling unit", "prereg timing", "post-hoc analysis change", "degenerate baselines", "class imbalance handling", "arithmetic/report mismatch", "verdict inflation"],
+  "required_fixes_non_blocking": [
+    "annotate (not silently rewrite) the inaccurate prereg section 11 provenance claim",
+    "preserve pre-correction artifacts or their recomputed hashes when fixing confirmatory pipelines post hoc",
+    "resolve P3 grouped-vs-naive bootstrap width anomaly before next cycle relies on CI widths",
+    "future positive claims must fit encoders/action vocabularies on train folds only"
+  ],
+  "artifacts_written": ["reports/audit/CYCLE_32676578274_PHYSICS.md"],
+  "scratchwork": "/tmp/opencode/audit_r2/recompute.py"
+}
