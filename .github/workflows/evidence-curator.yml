@@ -1,10 +1,10 @@
-name: SPIDER Run Evidence Curator
+name: SPIDER Historical Run Ledger Recovery
 
 on:
   workflow_dispatch:
     inputs:
       run_id:
-        description: "Optional specific completed run id; empty = backfill batch"
+        description: "Optional specific run id; empty = drain historical backlog"
         required: false
         type: string
         default: ""
@@ -22,7 +22,7 @@ on:
       - "SPIDER Critical CTO Council"
     types: [completed]
   schedule:
-    - cron: "7,27,47 * * * *"
+    - cron: "*/10 * * * *"
   push:
     branches: [main]
     paths:
@@ -30,32 +30,125 @@ on:
       - 'docs/roles/EVIDENCE_CURATOR.md'
       - '.opencode/agents/evidence_curator.md'
       - 'evidence/run-archive/manifests/**'
+      - 'evidence/ledger-integration/**'
 
 permissions:
-  actions: read
+  actions: write
   contents: write
 
 concurrency:
-  group: spider-run-evidence-curator
+  group: spider-historical-ledger-recovery
   cancel-in-progress: false
 
 env:
   SPIDER_MODEL: opencode/x-preview-f-free
-  BACKFILL_BATCH: 8
-  CLEANUP_INCIDENT_RUN: 32880942022
+  BACKFILL_BATCH: 6
+  ARCHIVE_RELEASE_TAG: spider-actions-data-archive-v1
 
 jobs:
-  distill:
-    name: Distill completed run knowledge into durable CTO/Product memory
-    runs-on: ubuntu-latest
-    timeout-minutes: 240
+  sync_accepted_lane_memory:
+    name: Pull accepted lab ledgers/results onto main
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v6
         with:
           ref: main
           fetch-depth: 0
 
-      - name: Select target runs
+      - name: Import canonical accepted evidence surfaces from lab branches
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch -q origin '+refs/heads/*:refs/remotes/origin/*'
+
+          copy_path() {
+            local ref="$1" path="$2"
+            if git cat-file -e "$ref:$path" 2>/dev/null; then
+              mkdir -p "$(dirname "$path")"
+              git show "$ref:$path" > "$path"
+            fi
+          }
+
+          copy_tree() {
+            local ref="$1" prefix="$2"
+            git ls-tree -r --name-only "$ref" -- "$prefix" 2>/dev/null | while read -r path; do
+              [[ -n "$path" ]] || continue
+              mkdir -p "$(dirname "$path")"
+              git show "$ref:$path" > "$path"
+            done
+          }
+
+          copy_audits_for_lane() {
+            local ref="$1" lane_re="$2"
+            for prefix in reports/audit results/audit; do
+              git ls-tree -r --name-only "$ref" -- "$prefix" 2>/dev/null \
+                | grep -Ei "$lane_re" \
+                | while read -r path; do
+                    [[ -n "$path" ]] || continue
+                    mkdir -p "$(dirname "$path")"
+                    git show "$ref:$path" > "$path"
+                  done || true
+            done
+          }
+
+          declare -a lanes=(graph physics intel product runtime)
+          for lane in "${lanes[@]}"; do
+            ref="refs/remotes/origin/lab/${lane}"
+            git rev-parse --verify "$ref" >/dev/null 2>&1 || continue
+            upper=$(printf '%s' "$lane" | tr '[:lower:]' '[:upper:]')
+            copy_path "$ref" "docs/${upper}_LEDGER.md"
+            copy_tree "$ref" "reports/${lane}"
+            copy_tree "$ref" "results/${lane}"
+            copy_audits_for_lane "$ref" "$upper"
+          done
+
+          cto_ref="refs/remotes/origin/lab/cto"
+          if git rev-parse --verify "$cto_ref" >/dev/null 2>&1; then
+            copy_path "$cto_ref" docs/CTO_LEDGER.md
+            git ls-tree -r --name-only "$cto_ref" -- docs 2>/dev/null \
+              | grep -E '^docs/CTO_TO_.*\.md$' \
+              | while read -r path; do copy_path "$cto_ref" "$path"; done || true
+            copy_tree "$cto_ref" reports/cto
+            copy_tree "$cto_ref" results/cto
+            copy_path "$cto_ref" state/cto_direction.json
+          fi
+
+          # Frontier had several independent lab/frontier/* programs rather
+          # than one cumulative accepted branch. Recovery entries are merged
+          # by the curator into docs/FRONTIER_LEDGER.md and the owning lane.
+
+      - name: Persist accepted-memory synchronization
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name spider-evidence-sync
+          git config user.email spider-evidence-sync@autonomous.local
+          git add docs reports results state
+          git commit -m "evidence: sync accepted lab ledgers and results to main" || exit 0
+          for attempt in 1 2 3 4 5; do
+            if git pull --rebase origin main && git push origin HEAD:main; then exit 0; fi
+            git rebase --abort 2>/dev/null || true
+            sleep $((attempt*4))
+          done
+          exit 1
+
+  recover:
+    name: Recover historical Actions data into canonical ledgers
+    needs: sync_accepted_lane_memory
+    runs-on: ubuntu-24.04
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Fetch all durable refs
+        shell: bash
+        run: git fetch -q origin '+refs/heads/*:refs/remotes/origin/*' '+refs/tags/*:refs/tags/*'
+
+      - name: Select historical data-bearing runs not yet ledger-integrated
         id: targets
         env:
           GH_TOKEN: ${{ github.token }}
@@ -65,84 +158,188 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p /tmp/spider_run_evidence evidence/run-memory/runs
+          mkdir -p /tmp/spider_run_evidence evidence/ledger-integration/runs
           : > /tmp/spider_run_evidence/targets.txt
 
-          add_if_needed() {
+          already_done() {
+            local id="$1" r="evidence/ledger-integration/runs/${id}.json"
+            [[ -f "$r" ]] && jq -e '.integration_complete == true' "$r" >/dev/null 2>&1
+          }
+
+          add_target() {
             local id="$1"
-            [[ -n "$id" ]] || return 0
-            [[ "$id" == "$GITHUB_RUN_ID" ]] && return 0
-            [[ -f "evidence/run-memory/runs/${id}.json" ]] && return 0
-            local status
-            status=$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${id}" --jq '.status' 2>/dev/null || echo missing)
-            [[ "$status" == completed ]] || return 0
+            [[ -n "$id" && "$id" != "$GITHUB_RUN_ID" ]] || return 0
+            already_done "$id" && return 0
+            grep -qx "$id" /tmp/spider_run_evidence/targets.txt 2>/dev/null && return 0
             echo "$id" >> /tmp/spider_run_evidence/targets.txt
           }
 
+          has_recoverable_source() {
+            local id="$1"
+            if gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${id}" --jq '.status' 2>/dev/null | grep -qx completed; then
+              return 0
+            fi
+            [[ -f "evidence/run-archive/manifests/${id}.json" ]]
+          }
+
           if [[ -n "$INPUT_RUN_ID" ]]; then
-            add_if_needed "$INPUT_RUN_ID"
+            has_recoverable_source "$INPUT_RUN_ID" && add_target "$INPUT_RUN_ID"
           elif [[ "$EVENT_NAME" == workflow_run && -n "$SOURCE_RUN_ID" ]]; then
-            add_if_needed "$SOURCE_RUN_ID"
-          elif [[ ! -f evidence/run-memory/DELETED_RUNS_RECOVERY.json ]]; then
-            add_if_needed "$CLEANUP_INCIDENT_RUN"
+            has_recoverable_source "$SOURCE_RUN_ID" && add_target "$SOURCE_RUN_ID"
           else
-            # First drain the explicit lossless-archive backlog. These are runs
-            # whose raw payload is already safe in the repo Release but whose
-            # knowledge still has to be integrated before deletion is legal.
+            # First drain the temporary archive created before the user clarified
+            # that final storage belongs in canonical ledgers/reports. Some of
+            # these Actions runs were already deleted, so this staging is now a
+            # recovery source only and will be removed when all are integrated.
             while read -r manifest; do
               [[ "$(wc -l < /tmp/spider_run_evidence/targets.txt)" -ge "$BACKFILL_BATCH" ]] && break
               [[ -f "$manifest" ]] || continue
-              id=$(jq -r '.run_id // empty' "$manifest" 2>/dev/null || true)
-              add_if_needed "$id"
+              id=$(jq -r '.run_id // empty' "$manifest")
+              [[ -n "$id" ]] && add_target "$id"
             done < <(find evidence/run-archive/manifests -maxdepth 1 -type f -name '*.json' 2>/dev/null | sort -V)
 
-            # Then fill remaining capacity with the oldest uncurated completed
-            # runs, preserving the historical recovery behavior.
-            while read -r id; do
+            # Then recover still-live scientific/product/cross-lane runs. Pure
+            # watchdog/supervisor/cleanup/control-plane runs are not research
+            # data and remain outside this migration unless explicitly targeted.
+            while IFS=$'\t' read -r created id name; do
               [[ "$(wc -l < /tmp/spider_run_evidence/targets.txt)" -ge "$BACKFILL_BATCH" ]] && break
-              add_if_needed "$id"
+              case "$name" in
+                "SPIDER Graph Lane"|\
+                "SPIDER Physics Lane"|\
+                "SPIDER Intel Research Lane"|\
+                "SPIDER Runtime Lane"|\
+                "SPIDER Product and Beta Lane"|\
+                "SPIDER Product Beta Repair"|\
+                "SPIDER Product Engineering Loop"|\
+                "SPIDER Product Engineering Failure Review"|\
+                "SPIDER Frontier Research Team"|\
+                "SPIDER Critical CTO Council") add_target "$id" ;;
+              esac
             done < <(
               gh api --paginate "repos/${GITHUB_REPOSITORY}/actions/runs?status=completed&per_page=100" \
-                --jq '.workflow_runs[] | [.created_at,.id] | @tsv' \
-                | sort \
-                | cut -f2
+                --jq '.workflow_runs[] | [.created_at,.id,.name] | @tsv' | sort
             )
           fi
 
           sort -u -o /tmp/spider_run_evidence/targets.txt /tmp/spider_run_evidence/targets.txt
-          COUNT=$(wc -l < /tmp/spider_run_evidence/targets.txt | tr -d ' ')
-          echo "count=$COUNT" >> "$GITHUB_OUTPUT"
-          echo "Selected $COUNT run(s): $(tr '\n' ' ' < /tmp/spider_run_evidence/targets.txt)"
+          count=$(wc -l < /tmp/spider_run_evidence/targets.txt | tr -d ' ')
+          echo "count=$count" >> "$GITHUB_OUTPUT"
+          echo "Selected $count run(s): $(tr '\n' ' ' < /tmp/spider_run_evidence/targets.txt)"
 
-      - name: Build lossless run bundles
+      - name: Reconstruct source bundles and copy recoverable raw data into lane report trees
         if: steps.targets.outputs.count != '0'
         env:
           GH_TOKEN: ${{ github.token }}
         shell: bash
         run: |
           set -euo pipefail
+
+          lane_for_name() {
+            case "$1" in
+              *Graph*) echo graph ;;
+              *Physics*) echo physics ;;
+              *Intel*) echo intel ;;
+              *Runtime*) echo runtime ;;
+              *Product*) echo product ;;
+              *CTO*) echo cto ;;
+              *Frontier*) echo frontier ;;
+              *) echo frontier ;;
+            esac
+          }
+
           while read -r id; do
             [[ -n "$id" ]] || continue
             d="/tmp/spider_run_evidence/$id"
-            mkdir -p "$d"
+            mkdir -p "$d/artifacts_extracted"
+            : > "$d/raw_copy_blockers.txt"
+            : > "$d/source_blockers.txt"
 
-            gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${id}" > "$d/run.json"
-            gh api --paginate "repos/${GITHUB_REPOSITORY}/actions/runs/${id}/jobs?per_page=100" > "$d/jobs.json" || echo '{"jobs":[]}' > "$d/jobs.json"
-            gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${id}/artifacts?per_page=100" > "$d/artifacts.json" || echo '{"artifacts":[]}' > "$d/artifacts.json"
-
-            if gh run view "$id" --repo "$GITHUB_REPOSITORY" --log > "$d/logs.txt" 2> "$d/log_error.txt"; then
-              printf 'available\n' > "$d/log_status.txt"
+            if gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${id}" > "$d/run.json" 2>/dev/null; then
+              echo live > "$d/source_kind.txt"
+              gh api --paginate "repos/${GITHUB_REPOSITORY}/actions/runs/${id}/jobs?per_page=100" > "$d/jobs.json" || echo '{"jobs":[]}' > "$d/jobs.json"
+              gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${id}/artifacts?per_page=100" > "$d/artifacts.json" || echo '{"artifacts":[]}' > "$d/artifacts.json"
+              if ! gh run view "$id" --repo "$GITHUB_REPOSITORY" --log > "$d/logs.txt" 2> "$d/log_error.txt"; then
+                echo "full readable Actions log unavailable" >> "$d/source_blockers.txt"
+              fi
+              total=$(jq -r '.total_count // 0' "$d/artifacts.json")
+              if (( total > 0 )); then
+                if ! gh run download "$id" --repo "$GITHUB_REPOSITORY" --dir "$d/artifacts_extracted"; then
+                  echo "one or more listed Actions artifacts could not be downloaded" >> "$d/source_blockers.txt"
+                fi
+              fi
             else
-              printf 'unavailable\n' > "$d/log_status.txt"
+              echo temporary_archive > "$d/source_kind.txt"
+              manifest="evidence/run-archive/manifests/${id}.json"
+              test -f "$manifest" || { echo "missing live run and archive manifest" >> "$d/source_blockers.txt"; continue; }
+              asset=$(jq -r '.release_asset.name' "$manifest")
+              mkdir -p "$d/archive_download"
+              if ! gh release download "$ARCHIVE_RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --pattern "$asset" --dir "$d/archive_download"; then
+                echo "temporary recovery asset unavailable" >> "$d/source_blockers.txt"
+                continue
+              fi
+              tar -xzf "$d/archive_download/$asset" -C "$d/archive_download"
+              src="$d/archive_download/$id"
+              test -f "$src/run.json" || { echo "archive missing run.json" >> "$d/source_blockers.txt"; continue; }
+              cp "$src/run.json" "$d/run.json"
+              cp "$src/jobs-pages.json" "$d/jobs.json" 2>/dev/null || echo '{"jobs":[]}' > "$d/jobs.json"
+              cp "$src/artifacts.json" "$d/artifacts.json" 2>/dev/null || echo '{"artifacts":[]}' > "$d/artifacts.json"
+              cp "$src/logs-readable.txt" "$d/logs.txt" 2>/dev/null || true
+              if [[ -f "$src/actions-logs.zip" ]]; then
+                mkdir -p "$d/actions_logs_extracted"
+                unzip -q "$src/actions-logs.zip" -d "$d/actions_logs_extracted" || echo "raw Actions log ZIP extraction failed" >> "$d/source_blockers.txt"
+              fi
+              find "$src/artifacts" -maxdepth 1 -type f -name '*.zip' 2>/dev/null | while read -r z; do
+                out="$d/artifacts_extracted/$(basename "$z" .zip)"
+                mkdir -p "$out"
+                unzip -q "$z" -d "$out" || echo "artifact ZIP extraction failed: $(basename "$z")" >> "$d/source_blockers.txt"
+              done
+              cp "$src/refs.tsv" "$d/refs_archived.tsv" 2>/dev/null || true
+              cp "$src/fetched-refs.tsv" "$d/fetched_refs_archived.tsv" 2>/dev/null || true
             fi
 
-            git ls-remote --heads origin | awk -v id="$id" '$2 ~ id {print}' > "$d/refs.txt" || true
-            while read -r sha ref; do
+            name=$(jq -r '.name // "UNKNOWN"' "$d/run.json")
+            lane=$(lane_for_name "$name")
+            printf '%s\n' "$lane" > "$d/lane.txt"
+
+            # Fetch every still-live cycle branch containing the run id so the
+            # curator can compare logs against durable snapshots/results.
+            git ls-remote --heads origin | awk -v id="$id" 'index($2,id)>0 {print $1"\t"$2}' > "$d/refs.txt" || true
+            while IFS=$'\t' read -r sha ref; do
               [[ -n "${ref:-}" ]] || continue
               branch="${ref#refs/heads/}"
-              git fetch -q origin "$branch:refs/remotes/origin/$branch" || true
+              git fetch -q origin "$ref:refs/remotes/origin/$branch" || true
               printf '%s\t%s\n' "$branch" "$sha" >> "$d/fetched_refs.tsv"
             done < "$d/refs.txt"
+
+            # Copy the actual recoverable artifact payload into the SAME lane
+            # reports tree as normal experimental evidence. Oversize files are
+            # blockers: the Actions run cannot be declared deletable until a
+            # durable solution exists for them.
+            dest="reports/${lane}/recovered/run_${id}/raw"
+            mkdir -p "$dest"
+            if [[ -d "$d/artifacts_extracted" ]]; then
+              while IFS= read -r -d '' f; do
+                rel="${f#$d/artifacts_extracted/}"
+                size=$(stat -c '%s' "$f")
+                if (( size > 5242880 )); then
+                  echo "$rel | $size bytes | exceeds 5 MiB repo-copy gate" >> "$d/raw_copy_blockers.txt"
+                  continue
+                fi
+                target="$dest/$rel"
+                mkdir -p "$(dirname "$target")"
+                cp "$f" "$target"
+              done < <(find "$d/artifacts_extracted" -type f -print0)
+            fi
+
+            jq -n \
+              --argjson run_id "$id" \
+              --arg source_kind "$(cat "$d/source_kind.txt")" \
+              --arg lane "$lane" \
+              --arg workflow_name "$name" \
+              --arg source_blockers "$(cat "$d/source_blockers.txt" 2>/dev/null || true)" \
+              --arg raw_copy_blockers "$(cat "$d/raw_copy_blockers.txt" 2>/dev/null || true)" \
+              '{run_id:$run_id,source_kind:$source_kind,lane:$lane,workflow_name:$workflow_name,source_blockers:$source_blockers,raw_copy_blockers:$raw_copy_blockers}' \
+              > "$d/recovery_context.json"
           done < /tmp/spider_run_evidence/targets.txt
 
       - name: Install OpenCode
@@ -150,7 +347,7 @@ jobs:
         shell: bash
         run: curl --retry 3 --retry-all-errors --retry-delay 15 -fsSL https://opencode.ai/install | bash
 
-      - name: Curate run evidence
+      - name: Integrate recovered runs into canonical SPIDER knowledge
         if: steps.targets.outputs.count != '0'
         shell: bash
         run: |
@@ -158,62 +355,113 @@ jobs:
           bash .github/scripts/run-opencode-with-retry.sh run \
             --model "$SPIDER_MODEL" \
             --agent evidence_curator \
-            "Distill these completed GitHub Actions runs into durable SPIDER run memory: ${IDS}. Bundles are under /tmp/spider_run_evidence/<run_id>/. Follow EVIDENCE_CURATOR.md exactly. Inspect logs deeply enough to preserve unique discoveries, failures, costs and research opportunities. Cross-check fetched cycle refs when useful. SPECIAL RECOVERY: if run 32880942022 is present, parse its hygiene log deletion lines, create evidence/run-memory/deleted/<deleted_run_id>.json tombstones for every deleted run, recover durable refs from Git without inventing lost logs, and create/update DELETED_RUNS_RECOVERY.json. Do NOT promote log-only observations into scientific truth. Update one JSON record per supplied live run plus INDEX.md. Rebuild CTO_FEED.json AND PRODUCT_FEED.json from ALL durable evidence/run-memory/runs/*.json records, not only this batch, so older useful results remain inherited. Product feed must preserve claim ceilings/status and distinguish validated AUDITED_DURABLE building blocks from warnings/leads. Be conservative with safe_to_prune."
+            "Recover Actions runs ${IDS} into SPIDER's canonical knowledge system. Bundles are under /tmp/spider_run_evidence/<run_id>/. This is NOT a run-memory-only task. For EACH run: deeply inspect all available logs (including actions_logs_extracted for temporary-archive sources), jobs, artifacts, raw files copied under reports/<lane>/recovered/run_<id>/raw, and every fetched cycle/lab ref containing the run id. Capture ALL substantive measurements, counters, verdicts, invalidations, failure signatures, costs, negative findings, audit findings and claim ceilings; do not omit numbers merely because they are inconvenient or duplicate. Create the detailed reports/<lane>/recovered/run_<id>.md and exact structured reports/<lane>/recovered/run_<id>_data.json; integrate missing substance/provenance into the appropriate docs/*_LEDGER.md canonical ledger(s), always naming the exact run id. If the accepted lab ledger/report already contains the result, verify and reference it instead of duplicating prose, but still ensure every run-only datum is represented somewhere durable. Maintain evidence/run-memory and create evidence/ledger-integration/runs/<run_id>.json LAST. The receipt may set integration_complete/all_substantive_data_copied_to_repo/safe_to_delete_actions_run true ONLY when no useful information remains solely in Actions or temporary release staging and both blocker files are empty or demonstrably non-substantive. Also inspect evidence/run-memory/DELETED_RUNS_RECOVERY.json: ensure the recoverable CTO Council history is present in docs/CTO_LEDGER.md and explicitly record the four irrecoverable historical CTO provenance gaps without inventing their lost logs. Preserve epistemic status exactly."
 
-      - name: Validate curator outputs
+      - name: Validate ledger-first recovery invariants
         if: steps.targets.outputs.count != '0'
         shell: bash
         run: |
           set -euo pipefail
           while read -r id; do
-            file="evidence/run-memory/runs/${id}.json"
-            test -f "$file" || { echo "::error::Missing curator record $file"; exit 1; }
-            jq -e --argjson id "$id" '.run_id == $id and .distillation_complete == true and (.safe_to_prune|type)=="boolean" and (.findings|type)=="array"' "$file" >/dev/null \
-              || { echo "::error::Invalid curator record $file"; exit 1; }
-          done < /tmp/spider_run_evidence/targets.txt
-          test -f evidence/run-memory/INDEX.md || exit 1
-          test -f evidence/run-memory/CTO_FEED.json || exit 1
-          test -f evidence/run-memory/PRODUCT_FEED.json || { echo "::error::Missing Product evidence feed"; exit 1; }
-          jq -e 'type=="object" or type=="array"' evidence/run-memory/CTO_FEED.json >/dev/null
-          jq -e 'type=="object" and (.findings|type)=="array"' evidence/run-memory/PRODUCT_FEED.json >/dev/null \
-            || { echo "::error::Invalid Product evidence feed"; exit 1; }
-          if grep -qx "$CLEANUP_INCIDENT_RUN" /tmp/spider_run_evidence/targets.txt; then
-            test -f evidence/run-memory/DELETED_RUNS_RECOVERY.json || { echo "::error::Cleanup incident was curated without recovery index"; exit 1; }
-            COUNT=$(jq -r '.deleted_run_count // 0' evidence/run-memory/DELETED_RUNS_RECOVERY.json)
-            [[ "$COUNT" -gt 0 ]] || { echo "::error::Recovery index contains no deleted runs"; exit 1; }
-          fi
+            [[ -n "$id" ]] || continue
+            receipt="evidence/ledger-integration/runs/${id}.json"
+            test -f "$receipt" || { echo "::error::Missing ledger integration receipt $receipt"; exit 1; }
+            jq -e --argjson id "$id" '
+              .run_id == $id and
+              (.integration_complete|type)=="boolean" and
+              (.all_substantive_data_copied_to_repo|type)=="boolean" and
+              (.safe_to_delete_actions_run|type)=="boolean" and
+              (.report_path|type)=="string" and
+              (.data_path|type)=="string" and
+              (.ledger_paths|type)=="array" and (.ledger_paths|length)>0
+            ' "$receipt" >/dev/null || { echo "::error::Invalid receipt $receipt"; exit 1; }
 
-      - name: Enforce evidence-memory-only writes
+            report=$(jq -r '.report_path' "$receipt")
+            data=$(jq -r '.data_path' "$receipt")
+            test -f "$report" || { echo "::error::Missing detailed report $report"; exit 1; }
+            test -f "$data" || { echo "::error::Missing structured recovered data $data"; exit 1; }
+            grep -Fq "$id" "$report" || { echo "::error::Run $id not named in $report"; exit 1; }
+            jq -e --argjson id "$id" '.run_id == $id' "$data" >/dev/null || { echo "::error::Recovered data is not bound to run $id"; exit 1; }
+
+            while IFS= read -r ledger; do
+              test -f "$ledger" || { echo "::error::Missing ledger $ledger"; exit 1; }
+              grep -Fq "$id" "$ledger" || { echo "::error::Ledger $ledger does not reference run $id"; exit 1; }
+            done < <(jq -r '.ledger_paths[]' "$receipt")
+
+            test -f "evidence/run-memory/runs/${id}.json" || { echo "::error::Missing compact run-memory index for $id"; exit 1; }
+
+            if [[ -s "/tmp/spider_run_evidence/$id/source_blockers.txt" || -s "/tmp/spider_run_evidence/$id/raw_copy_blockers.txt" ]]; then
+              jq -e '.safe_to_delete_actions_run == false' "$receipt" >/dev/null || {
+                echo "::error::Run $id has unresolved source/raw-copy blockers but was marked deletable"; exit 1;
+              }
+            fi
+          done < /tmp/spider_run_evidence/targets.txt
+
+          test -f evidence/run-memory/INDEX.md
+          test -f evidence/run-memory/CTO_FEED.json
+          test -f evidence/run-memory/PRODUCT_FEED.json
+
+      - name: Enforce canonical-evidence write scope
         if: steps.targets.outputs.count != '0'
         shell: bash
         run: |
           set -euo pipefail
-          CHANGED=$({
-            git diff --name-only
-            git diff --cached --name-only
-            git ls-files --others --exclude-standard
-          } | sort -u)
-          BAD=$(printf '%s\n' "$CHANGED" | grep -Ev '^evidence/run-memory/' || true)
+          CHANGED=$({ git diff --name-only; git diff --cached --name-only; git ls-files --others --exclude-standard; } | sort -u)
+          BAD=$(printf '%s\n' "$CHANGED" | grep -Ev '^(docs/[A-Z_]+_LEDGER\.md|reports/|evidence/run-memory/|evidence/ledger-integration/)' || true)
           if [[ -n "$BAD" ]]; then
-            echo "Evidence Curator wrote outside its durable memory scope:"
+            echo "Historical recovery wrote outside canonical evidence scope:"
             echo "$BAD"
             exit 1
           fi
 
-      - name: Persist distilled memory
+      - name: Persist recovered evidence into main
         if: steps.targets.outputs.count != '0'
         shell: bash
         run: |
-          git config user.name "spider-evidence-curator"
-          git config user.email "spider-evidence-curator@autonomous.local"
-          git add evidence/run-memory
-          git commit -m "evidence: distill Actions runs $(tr '\n' ',' < /tmp/spider_run_evidence/targets.txt | sed 's/,$//')" || exit 0
+          set -euo pipefail
+          git config user.name spider-ledger-recovery
+          git config user.email spider-ledger-recovery@autonomous.local
+          git add docs reports evidence/run-memory evidence/ledger-integration
+          git commit -m "evidence: integrate historical Actions runs $(tr '\n' ',' < /tmp/spider_run_evidence/targets.txt | sed 's/,$//')" || exit 0
           for attempt in 1 2 3 4 5; do
-            if git pull --rebase origin main && git push origin HEAD:main; then
-              exit 0
-            fi
+            if git pull --rebase origin main && git push origin HEAD:main; then exit 0; fi
             git rebase --abort 2>/dev/null || true
-            sleep $((attempt * 5))
+            sleep $((attempt*5))
           done
-          echo "::error::Could not persist run evidence after retries"
           exit 1
+
+      - name: Continue draining backlog without waiting for schedule
+        if: steps.targets.outputs.count != '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch -q origin main
+          git reset --hard origin/main
+
+          remaining=0
+          while read -r manifest; do
+            [[ -f "$manifest" ]] || continue
+            id=$(jq -r '.run_id // empty' "$manifest")
+            [[ -n "$id" ]] || continue
+            receipt="evidence/ledger-integration/runs/${id}.json"
+            if [[ ! -f "$receipt" ]] || ! jq -e '.integration_complete == true' "$receipt" >/dev/null 2>&1; then
+              remaining=$((remaining+1))
+            fi
+          done < <(find evidence/run-archive/manifests -maxdepth 1 -type f -name '*.json' 2>/dev/null | sort -V)
+
+          if (( remaining > 0 )); then
+            echo "Temporary archive backlog remaining: $remaining; dispatching next recovery batch."
+            gh workflow run evidence-curator.yml --repo "$GITHUB_REPOSITORY" -f run_id=""
+          else
+            echo "Temporary archive backlog drained. Live historical runs will continue through workflow_run/schedule until integrated."
+          fi
+
+  no_work:
+    name: No recoverable historical data backlog in this pass
+    needs: [sync_accepted_lane_memory, recover]
+    if: ${{ always() && needs.recover.result == 'success' }}
+    runs-on: ubuntu-24.04
+    steps:
+      - run: echo "Recovery pass finished under the ledger-first deletion gate."
