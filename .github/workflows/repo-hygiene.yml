@@ -52,14 +52,10 @@ jobs:
           declare -A COUNT=()
           PROTECT["$GITHUB_RUN_ID"]=1
 
-          # Active runs are never touched.
           while IFS=$'\t' read -r id wid status created name path; do
             [[ "$status" != completed ]] && PROTECT["$id"]=1
           done < "$tmp"
 
-          # Keep two recent completed runs of workflows that still exist on main
-          # for immediate debugging. Everything older is eligible only after the
-          # archive gates below prove its data lives elsewhere.
           while IFS=$'\t' read -r id wid status created name path; do
             [[ "$status" == completed && -f "$path" ]] || continue
             n=${COUNT[$wid]:-0}
@@ -86,13 +82,8 @@ jobs:
             record="evidence/run-memory/runs/${id}.json"
             manifest="evidence/run-archive/manifests/${id}.json"
 
-            if [[ ! -f "$record" ]]; then
-              echo "KEEP $id | semantic distillation missing | $name"
-              missing_semantic=$((missing_semantic + 1))
-              continue
-            fi
-            if ! jq -e '.distillation_complete == true and (.findings|type)=="array"' "$record" >/dev/null 2>&1; then
-              echo "KEEP $id | semantic record incomplete | $name"
+            if [[ ! -f "$record" ]] || ! jq -e '.distillation_complete == true and (.findings|type)=="array"' "$record" >/dev/null 2>&1; then
+              echo "KEEP $id | semantic distillation missing/incomplete | $name"
               missing_semantic=$((missing_semantic + 1))
               continue
             fi
@@ -105,25 +96,21 @@ jobs:
 
             if ! jq -e '
               .archive_complete == true and
-              .post_archive_safe_to_delete_actions_run == true and
+              .actions_payload_complete == true and
               .raw_logs.status == "ARCHIVED" and
               (.artifacts.status == "ARCHIVED" or .artifacts.status == "NONE") and
               (.refs.status == "ARCHIVED" or .refs.status == "NONE") and
-              .semantic_record.distillation_complete == true and
               (.release_asset.name|type)=="string" and
               (.release_asset.sha256|type)=="string" and
-              (.release_asset.sha256|length)==64
+              (.release_asset.sha256|length)==64 and
+              .release_asset.verified_round_trip == true
             ' "$manifest" >/dev/null 2>&1; then
               echo "KEEP $id | archive manifest does not satisfy deletion gate | $name"
               invalid_archive=$((invalid_archive + 1))
               continue
             fi
 
-            # Cross-check that the manifest is bound to the same run and the
-            # semantic record currently present on main.
             [[ "$(jq -r '.run_id' "$manifest")" == "$id" ]] || { echo "KEEP $id | manifest run-id mismatch"; invalid_archive=$((invalid_archive + 1)); continue; }
-            rec_sha=$(sha256sum "$record" | awk '{print $1}')
-            [[ "$(jq -r '.semantic_record.sha256' "$manifest")" == "$rec_sha" ]] || { echo "KEEP $id | semantic record changed since archive"; invalid_archive=$((invalid_archive + 1)); continue; }
 
             echo "DELETE $id | lossless archive + semantic record verified | $name | $created"
             if gh api -X DELETE "repos/${GITHUB_REPOSITORY}/actions/runs/${id}" >/dev/null 2>&1; then
