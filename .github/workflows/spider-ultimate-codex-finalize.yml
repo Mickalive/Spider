@@ -1,0 +1,146 @@
+name: SPIDER Ultimate Codex Finalize
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/spider-ultimate-codex-finalize.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: spider-ultimate-codex-finalize
+  cancel-in-progress: false
+
+jobs:
+  finalize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout codex
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Add recovered pre-GitHub conversation evidence and audit gaps
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import re, json, hashlib
+
+          p = Path('SPIDER_ULTIMATE_CODEX.md')
+          text = p.read_text(encoding='utf-8')
+
+          supplement = r'''
+          ### H0.0 — Functional local SPIDER V0 prototype (pre-GitHub product/prototype evidence)
+          - A local prototype was previously reported as functional with **ingest / inspect / plan**, a **FastAPI** surface, **SQLite** persistence, tests, and a holdout path.
+          - Its recorded demo output contained a novel composition with `complete_trajectory_seen_before=false`.
+          - This establishes that an early runnable integration existed; it is **not** a controlled benchmark of generalization or product superiority.
+
+          ### H0.0a — Mind2Web V0.2.3 — real-trace pipeline failure
+          - ACTION EXTRACTION / real-trace extraction coverage reported: **0.4706**.
+          - PLAN / NOVEL / RETRIEVAL outcomes were all **0** in that run.
+          - Root cause preserved from the contemporaneous discussion: parameterized operators had been **flattened**, while their effects were intersected until the effective effects became empty.
+          - The comparison baseline was contaminated by the **same broken operators**, so the zero result could not be interpreted as a clean falsification of SPIDER's deeper hypothesis.
+          - Status: **implementation/measurement failure**, useful mainly because it motivated later falsification controls.
+          '''.strip()
+
+          v05_controls = r'''
+          ### H0.1a — Why V0.50 killed the optimistic V0.40 interpretation
+          - The earlier **84.66%** V0.40 `NOVEL` rate was explicitly retracted as evidence of causal composition after stronger controls.
+          - **Effect-only planner:** **176/176** tasks solved under the weak symbolic criterion.
+          - **Shuffled-effects control:** **174/176** tasks solved under the same criterion.
+          - **31/37 operators** lacked preconditions.
+          - Only **43/176** ground-truth routes were state-distinguishable under the representation.
+          - **212 ground-truth steps collapsed** under that state/effect abstraction.
+          - Consequence recorded at the time: `PLAN FOUND = 100%` and the **84.66%** novelty figure could no longer be treated as proof that SPIDER had learned causal reusable Web operators. The precise optimistic interpretation died; the broader hypothesis remained open for richer true before/action/after state tests.
+          '''.strip()
+
+          wp003_invalid = r'''
+          ### H0.7a — WP-003 original measurement was invalid before the repaired/falsifying successor
+          - The original **WP-003** result was later reclassified **MEASUREMENT_INVALID**.
+          - Recorded causes: **target leakage**, a **false/invalid bootstrap**, and a **nondeterministic seed**.
+          - Therefore no positive or negative scientific claim may be inherited from original WP-003.
+          - The subsequent repaired **WP-003B / WP-003B-R2** line is the one that produced the durable falsifying result preserved below.
+          '''.strip()
+
+          if '### H0.0 — Functional local SPIDER V0 prototype' not in text:
+              marker = '### H0.1 — Mind2Web v0.40 — real composition/retrieval benchmark'
+              if marker not in text:
+                  raise SystemExit('H0.1 marker missing')
+              text = text.replace(marker, supplement + '\n\n' + marker, 1)
+
+          if '### H0.1a — Why V0.50 killed the optimistic V0.40 interpretation' not in text:
+              marker = '### H0.2 — Mind2Web v0.50 — falsification gate'
+              if marker not in text:
+                  raise SystemExit('H0.2 marker missing')
+              text = text.replace(marker, v05_controls + '\n\n' + marker, 1)
+
+          # Preserve the exact RULE-NN difference that was explicitly reported in project discussion.
+          old = '- RULE − NN DIM: rule did not beat NN on the reported mean; therefore the result supports non-random predictive structure but not superiority of the hand rule over nearest-neighbour prediction.'
+          new = '- RULE − NN DIM: **−0.0057**; the rule did not beat NN on the reported mean. Therefore the result supports non-random predictive structure but not superiority of the hand rule over nearest-neighbour prediction.'
+          if old in text:
+              text = text.replace(old, new, 1)
+
+          if '### H0.7a — WP-003 original measurement was invalid' not in text:
+              marker = '### H0.8 — WP-003B — 13-dimensional cross-site candidate'
+              if marker not in text:
+                  raise SystemExit('WP-003B marker missing')
+              text = text.replace(marker, wp003_invalid + '\n\n' + marker, 1)
+
+          # Inspect gaps already recorded by the deterministic archive. We do not delete or hide them.
+          gap_match = re.search(r'### H3\.GAPS — Relevant fallback logs that could not be embedded\n\n(.*?)\n\n## H4 ', text, re.S)
+          gap_block = gap_match.group(1) if gap_match else ''
+          gap_ids = sorted(set(re.findall(r'"run_id"\s*:\s*(\d+)', gap_block)))
+          gap_reasons = {}
+          if gap_block.startswith('```json'):
+              try:
+                  raw = gap_block[len('```json'):]
+                  raw = raw.rsplit('```',1)[0].strip()
+                  arr = json.loads(raw)
+                  for item in arr:
+                      gap_reasons[item.get('reason','UNKNOWN')] = gap_reasons.get(item.get('reason','UNKNOWN'),0) + 1
+              except Exception as e:
+                  gap_reasons['PARSE_ERROR:' + str(e)] = 1
+
+          excl_match = re.search(r'## H5 — Selected artifacts not embedded byte-for-byte\n\n.*?\n\n(.*?)\n\n## H6 ', text, re.S)
+          excl_block = excl_match.group(1) if excl_match else ''
+          excluded_count = len(re.findall(r'"sha"\s*:', excl_block)) if excl_block.startswith('```json') else 0
+
+          data = text.encode('utf-8')
+          p.write_bytes(data)
+          print(f'FINAL_CODEX_BYTES={len(data)}')
+          print(f'FINAL_CODEX_SHA256={hashlib.sha256(data).hexdigest()}')
+          print(f'FALLBACK_GAP_RUNS={len(gap_ids)}')
+          if gap_ids:
+              print('FALLBACK_GAP_RUN_IDS=' + ','.join(gap_ids))
+          print('FALLBACK_GAP_REASONS=' + json.dumps(gap_reasons, sort_keys=True))
+          print(f'NON_EMBEDDED_SELECTED_ARTIFACTS={excluded_count}')
+          PY
+
+      - name: Validate recovered history
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -q 'Mind2Web V0.2.3' SPIDER_ULTIMATE_CODEX.md
+          grep -q 'Effect-only planner.*176/176' SPIDER_ULTIMATE_CODEX.md
+          grep -q 'Shuffled-effects control.*174/176' SPIDER_ULTIMATE_CODEX.md
+          grep -q '31/37 operators' SPIDER_ULTIMATE_CODEX.md
+          grep -q '43/176' SPIDER_ULTIMATE_CODEX.md
+          grep -q '212 ground-truth steps collapsed' SPIDER_ULTIMATE_CODEX.md
+          grep -q 'WP-003 original measurement was invalid' SPIDER_ULTIMATE_CODEX.md
+          grep -q 'RULE − NN DIM: \*\*−0.0057\*\*' SPIDER_ULTIMATE_CODEX.md
+          grep -q 'complete_trajectory_seen_before=false' SPIDER_ULTIMATE_CODEX.md
+
+      - name: Commit final historical supplement
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'SPIDER Ultimate Codex Archivist'
+          git config user.email 'actions@users.noreply.github.com'
+          git add -- SPIDER_ULTIMATE_CODEX.md
+          git commit -m 'archive: complete pre-GitHub SPIDER codex history'
+          git push origin HEAD:main
