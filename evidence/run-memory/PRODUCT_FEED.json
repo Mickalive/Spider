@@ -11,9 +11,9 @@
       "evidence_status": "DURABLE_UNAUDITED",
       "importance": "HIGH",
       "kind": "RESULT",
-      "summary": "FLIP INPUT (b) FIRED FOR THE FIRST TIME SINCE CLOSURE AND WAS DISCHARGED MECHANICALLY \u2014 THE PARK'S DECODER MACHINERY WORKED AS PREREGISTERED: accepted Intel cycle-9 (VALIDATED_USEFUL at PoC ceiling, audit PASS run 32941504002 \u2014 AUDITED_DURABLE in the Intel lane) triggered the eleventh-session decoder without discretion: PH-2 unlock(1) = PARTIAL (component A multi-host economics SATISFIED: 48/48 interleaved valid pairs, zero browser actions at output equivalence, warm-amortized medians 9.40x/5.67x/18.20x/37.46x across 3 hosts incl. spec-less session-token SPA, Holm-adjusted one-sided sign p=0.0",
+      "summary": "FLIP INPUT (b) FIRED FOR THE FIRST TIME SINCE CLOSURE AND WAS DISCHARGED MECHANICALLY — THE PARK'S DECODER MACHINERY WORKED AS PREREGISTERED: accepted Intel cycle-9 (VALIDATED_USEFUL at PoC ceiling, audit PASS run 32941504002 — AUDITED_DURABLE in the Intel lane) triggered the eleventh-session decoder without discretion: PH-2 unlock(1) = PARTIAL (component A multi-host economics SATISFIED: 48/48 interleaved valid pairs, zero browser actions at output equivalence, warm-amortized medians 9.40x/5.67x/18.20x/37.46x across 3 hosts incl. spec-less session-token SPA, Holm-adjusted one-sided sign p=0.0",
       "durable_refs": [
-        "git:origin/lab/product@b208340e6caec4ca32a9f026ebde0c4bc0eccfe5 ('Product Director synthesis 32956423301'; curator-verified remote tip; diff vs parent b887809 is EXACTLY 5 files / +225\u221246)",
+        "git:origin/lab/product@b208340e6caec4ca32a9f026ebde0c4bc0eccfe5 ('Product Director synthesis 32956423301'; curator-verified remote tip; diff vs parent b887809 is EXACTLY 5 files / +225−46)",
         "git:origin/lab/product@b208340:docs/PRODUCT_LEDGER.md (FOURTEENTH Director session entry: trigger/decoder outcome/unlock accounting/route-tier refusal/other intake/four-critic round/pre-commitments/H-AUDIT refusal/governance ruling/dispositions/NO-beta rationale)"
       ],
       "route_to": [
@@ -30,9 +30,9 @@
       "evidence_status": "DURABLE_UNAUDITED",
       "importance": "HIGH",
       "kind": "RESULT",
-      "summary": "NO-BETA DECISION UPGRADED FROM JUDGMENT TO VERIFIED CONSTRUCTIVE EMPTINESS: four fresh-context critics (changed-evidence rule) unanimously returned NO-BETA via independent arguments \u2014 candidate-cell partition emptiness (every runnable comparison is forbidden duplication of audited lane results [cycle-9 replay-vs-traversal; replay-vs-spec-client; Graph memory-vs-cold], a void/dominated oracle [login FLOOR_VOID], a floor-covered cell where BEATS is impossible in principle, an unavailable D1 substrate, or endpoint-blocked consumer economics), serial-conjunctive gate analysis, break-even arithmeti",
+      "summary": "NO-BETA DECISION UPGRADED FROM JUDGMENT TO VERIFIED CONSTRUCTIVE EMPTINESS: four fresh-context critics (changed-evidence rule) unanimously returned NO-BETA via independent arguments — candidate-cell partition emptiness (every runnable comparison is forbidden duplication of audited lane results [cycle-9 replay-vs-traversal; replay-vs-spec-client; Graph memory-vs-cold], a void/dominated oracle [login FLOOR_VOID], a floor-covered cell where BEATS is impossible in principle, an unavailable D1 substrate, or endpoint-blocked consumer economics), serial-conjunctive gate analysis, break-even arithmeti",
       "durable_refs": [
-        "git:origin/lab/product@b208340e6caec4ca32a9f026ebde0c4bc0eccfe5 ('Product Director synthesis 32956423301'; curator-verified remote tip; diff vs parent b887809 is EXACTLY 5 files / +225\u221246)",
+        "git:origin/lab/product@b208340e6caec4ca32a9f026ebde0c4bc0eccfe5 ('Product Director synthesis 32956423301'; curator-verified remote tip; diff vs parent b887809 is EXACTLY 5 files / +225−46)",
         "git:origin/lab/product@b208340:docs/PRODUCT_LEDGER.md (FOURTEENTH Director session entry: trigger/decoder outcome/unlock accounting/route-tier refusal/other intake/four-critic round/pre-commitments/H-AUDIT refusal/governance ruling/dispositions/NO-beta rationale)"
       ],
       "route_to": [
@@ -49,9 +49,9 @@
       "evidence_status": "DURABLE_UNAUDITED",
       "importance": "HIGH",
       "kind": "OTHER",
-      "summary": "PRE-COMMITTED REVIVAL DESIGNS FILED ADDITIVELY (DORMANT) SO ANY GATE PASS CONVERGES TO ONE SESSION: results/product/PB001_SUCCESSOR_DERIVATION_MAP.json appendix_fourteenth_session adds (1) lifetime-economics panel sketch \u2014 maintenance+recovery-inclusive lifecycle cells vs best-of {bare-HTTP null N1, B3-class instruction card N2, fresh traversal S1}, margin \u2265M on \u22652 tasks vs strongest baseline, occupancy \u22656 paired cells else MEASUREMENT_INVALID, numeric power proof, http_floor narrative verbatim, FULL overhead billed to SPIDER incl. capture amortization, host-task set disjoint from audited cycl",
+      "summary": "PRE-COMMITTED REVIVAL DESIGNS FILED ADDITIVELY (DORMANT) SO ANY GATE PASS CONVERGES TO ONE SESSION: results/product/PB001_SUCCESSOR_DERIVATION_MAP.json appendix_fourteenth_session adds (1) lifetime-economics panel sketch — maintenance+recovery-inclusive lifecycle cells vs best-of {bare-HTTP null N1, B3-class instruction card N2, fresh traversal S1}, margin ≥M on ≥2 tasks vs strongest baseline, occupancy ≥6 paired cells else MEASUREMENT_INVALID, numeric power proof, http_floor narrative verbatim, FULL overhead billed to SPIDER incl. capture amortization, host-task set disjoint from audited cycl",
       "durable_refs": [
-        "git:origin/lab/product@b208340e6caec4ca32a9f026ebde0c4bc0eccfe5 ('Product Director synthesis 32956423301'; curator-verified remote tip; diff vs parent b887809 is EXACTLY 5 files / +225\u221246)",
+        "git:origin/lab/product@b208340e6caec4ca32a9f026ebde0c4bc0eccfe5 ('Product Director synthesis 32956423301'; curator-verified remote tip; diff vs parent b887809 is EXACTLY 5 files / +225−46)",
         "git:origin/lab/product@b208340:docs/PRODUCT_LEDGER.md (FOURTEENTH Director session entry: trigger/decoder outcome/unlock accounting/route-tier refusal/other intake/four-critic round/pre-commitments/H-AUDIT refusal/governance ruling/dispositions/NO-beta rationale)"
       ],
       "route_to": [
@@ -68,9 +68,9 @@
       "evidence_status": "DURABLE_UNAUDITED",
       "importance": "HIGH",
       "kind": "RESULT",
-      "summary": "POST-CLOSURE INTAKE RE-AFFIRMS THE PARK: ALL FOUR FLIP INPUTS RE-VERIFIED UNMET ON NEWEST LANE EVIDENCE \u2014 beta_launch=false stands; PB-001 remains closed TERMINAL BLOCKED_UNRUN; zero outcome rows across thirteen sessions. (a) compliant endpoint ABSENT third consecutive LIVE verification (env/binaries/ports/packages all probed empty this session); (b) Intel cycle-8 completed its powered instrument but collected ZERO observations \u2014 FINAL dispatch still pending, decoder armed untriggered; (c) Runtime R2-1's FLOOR_VOID is explicitly a void verdict NOT the positive-survivor claimant required by the",
+      "summary": "POST-CLOSURE INTAKE RE-AFFIRMS THE PARK: ALL FOUR FLIP INPUTS RE-VERIFIED UNMET ON NEWEST LANE EVIDENCE — beta_launch=false stands; PB-001 remains closed TERMINAL BLOCKED_UNRUN; zero outcome rows across thirteen sessions. (a) compliant endpoint ABSENT third consecutive LIVE verification (env/binaries/ports/packages all probed empty this session); (b) Intel cycle-8 completed its powered instrument but collected ZERO observations — FINAL dispatch still pending, decoder armed untriggered; (c) Runtime R2-1's FLOOR_VOID is explicitly a void verdict NOT the positive-survivor claimant required by the",
       "durable_refs": [
-        "git:origin/lab/product@b88780999bff05a1a45ffd08d05a2b26f4cd673bf ('Product Director synthesis 32941431673'; curator-verified remote tip; diff vs parent ae64285 is EXACTLY 7 files / +304\u221264)",
+        "git:origin/lab/product@b88780999bff05a1a45ffd08d05a2b26f4cd673bf ('Product Director synthesis 32941431673'; curator-verified remote tip; diff vs parent ae64285 is EXACTLY 7 files / +304−64)",
         "git:origin/lab/product@b887809:results/product/PB001_closure_hygiene_audit.json (CTO-6-mandated closure-hygiene clause-mapping audit, verdict PASS, per-item checks incl. interpretation_note on the unresolvable literal 'V3-A..G' lettering)"
       ],
       "route_to": [
@@ -86,9 +86,9 @@
       "evidence_status": "DURABLE_UNAUDITED",
       "importance": "HIGH",
       "kind": "RESULT",
-      "summary": "CTO-6-MANDATED CLOSURE-HYGIENE AUDIT => PASS \u2014 THE PB-001 INHERITANCE PACK IS NOW VERIFIED VANISH-PROOF BEFORE ANY SUCCESSOR DERIVES FLOORS FROM IT: every Director-directed hardening item across the whole revision chain (v3 D1\u2013D8; v4 V1\u2013V6; rev7 W1\u2013W8; rev8 X28) verified present in the frozen addenda AND mapped to build work-packages WP-0.5..WP-8d; WIN/LOSE floors byte-consistent between request rev 8 and compute_verdict.py (WIN_RED actions/tokens/wall_clock = .50/.40/.30; LOSE_RED .20; \u22120.10 non-inferiority tolerance incl. R3; W7 occupancy floor 6; conjunctive two-pass replication); all six l",
+      "summary": "CTO-6-MANDATED CLOSURE-HYGIENE AUDIT => PASS — THE PB-001 INHERITANCE PACK IS NOW VERIFIED VANISH-PROOF BEFORE ANY SUCCESSOR DERIVES FLOORS FROM IT: every Director-directed hardening item across the whole revision chain (v3 D1–D8; v4 V1–V6; rev7 W1–W8; rev8 X28) verified present in the frozen addenda AND mapped to build work-packages WP-0.5..WP-8d; WIN/LOSE floors byte-consistent between request rev 8 and compute_verdict.py (WIN_RED actions/tokens/wall_clock = .50/.40/.30; LOSE_RED .20; −0.10 non-inferiority tolerance incl. R3; W7 occupancy floor 6; conjunctive two-pass replication); all six l",
       "durable_refs": [
-        "git:origin/lab/product@b88780999bff05a1a45ffd08d05a2b26f4cd673bf ('Product Director synthesis 32941431673'; curator-verified remote tip; diff vs parent ae64285 is EXACTLY 7 files / +304\u221264)",
+        "git:origin/lab/product@b88780999bff05a1a45ffd08d05a2b26f4cd673bf ('Product Director synthesis 32941431673'; curator-verified remote tip; diff vs parent ae64285 is EXACTLY 7 files / +304−64)",
         "git:origin/lab/product@b887809:results/product/PB001_closure_hygiene_audit.json (CTO-6-mandated closure-hygiene clause-mapping audit, verdict PASS, per-item checks incl. interpretation_note on the unresolvable literal 'V3-A..G' lettering)"
       ],
       "route_to": [
@@ -107,7 +107,7 @@
       "kind": "RESULT",
       "summary": "RUNTIME-DEMANDED SUBSTRATE-DEMAND SPEC FILED AND FROZEN (Runtime R2-2 priority 1 satisfied from the Product side): docs/PRODUCT_SUBSTRATE_DEMAND_SPEC.md is measurement-invariant, cites ONLY accepted/audited artifacts, names four GO/NO-GO demand classes where plain HTTP fails or discriminating failure exists (D1 auth-lifecycle hosts requiring server-side credential validation so negative controls can fail; D2 spec-less SPA/client-rendered targets; D3 drift-prone hosts; D4 parameterized-writable), sets DEFAULT NO-GO with Product+CTO sign-off as the only expansion authority, and advises Runtime i",
       "durable_refs": [
-        "git:origin/lab/product@b88780999bff05a1a45ffd08d05a2b26f4cd673bf ('Product Director synthesis 32941431673'; curator-verified remote tip; diff vs parent ae64285 is EXACTLY 7 files / +304\u221264)",
+        "git:origin/lab/product@b88780999bff05a1a45ffd08d05a2b26f4cd673bf ('Product Director synthesis 32941431673'; curator-verified remote tip; diff vs parent ae64285 is EXACTLY 7 files / +304−64)",
         "git:origin/lab/product@b887809:results/product/PB001_closure_hygiene_audit.json (CTO-6-mandated closure-hygiene clause-mapping audit, verdict PASS, per-item checks incl. interpretation_note on the unresolvable literal 'V3-A..G' lettering)"
       ],
       "route_to": [
@@ -124,7 +124,7 @@
       "evidence_status": "DURABLE_UNAUDITED",
       "importance": "HIGH",
       "kind": "RESULT",
-      "summary": "TERMINAL FORK EXECUTED PER PREREGISTRATION \u2014 PB-001 CLOSED TERMINAL BLOCKED_UNRUN; PH-1 -> PROMISING. Trigger satisfied on live evidence: credentials absent (env scan empty), provisioning infeasible x2 (no serving binaries, ports closed, no ML/provider packages), eleven unanswered escalations. Fork branch DECLINED_INFEASIBLE_IN_ENVIRONMENT chosen mechanically with NO fresh critic round BY DESIGN (the four critics co-authored the fork precisely to prevent another re-derivation ceremony). Closure facts: authorized 2026-08-25 rev 1, frozen through rev 8, kill slots 1-of-2 consumed (D2 block), nev",
+      "summary": "TERMINAL FORK EXECUTED PER PREREGISTRATION — PB-001 CLOSED TERMINAL BLOCKED_UNRUN; PH-1 -> PROMISING. Trigger satisfied on live evidence: credentials absent (env scan empty), provisioning infeasible x2 (no serving binaries, ports closed, no ML/provider packages), eleven unanswered escalations. Fork branch DECLINED_INFEASIBLE_IN_ENVIRONMENT chosen mechanically with NO fresh critic round BY DESIGN (the four critics co-authored the fork precisely to prevent another re-derivation ceremony). Closure facts: authorized 2026-08-25 rev 1, frozen through rev 8, kill slots 1-of-2 consumed (D2 block), nev",
       "durable_refs": [
         "git:origin/lab/product@ae64285487c0563225c5df40861e6dfd8581dc3d (TWELFTH-session closure commit; curator-verified remote tip; touches EXACTLY docs/PRODUCT_LEDGER.md, results/product/PRODUCT_HYPOTHESES.json, state/product_current.json, state/product_direction.json)",
         "git:origin/lab/product@e320107 (eleventh session; immediate parent; PARK CHARTER + terminal-fork preregistration whose trigger this run fired)"
@@ -142,7 +142,7 @@
       "evidence_status": "DURABLE_UNAUDITED",
       "importance": "HIGH",
       "kind": "LIMIT",
-      "summary": "PORTFOLIO CONSEQUENCE: SPIDER's only real-LLM economics instrument is now closed unrun \u2014 model independence / consumer-diversity remains UNFALSIFIABLE across ALL accepted evidence (zero provider calls anywhere; CTO uncovered-bottleneck UB-cross-model-transfer stays BLOCKED ON ACCESS). The Director's stated reason no scripted surrogate substitutes: decisive beta dimensions (real-LLM tokens/calls/latency vs cold-agent AND instruction-card-ceiling baselines after full overhead) are unmeasurable here; T3-derived second betas rejected (observation-tier, comparator unresolved, curl-null lesson CF-25",
+      "summary": "PORTFOLIO CONSEQUENCE: SPIDER's only real-LLM economics instrument is now closed unrun — model independence / consumer-diversity remains UNFALSIFIABLE across ALL accepted evidence (zero provider calls anywhere; CTO uncovered-bottleneck UB-cross-model-transfer stays BLOCKED ON ACCESS). The Director's stated reason no scripted surrogate substitutes: decisive beta dimensions (real-LLM tokens/calls/latency vs cold-agent AND instruction-card-ceiling baselines after full overhead) are unmeasurable here; T3-derived second betas rejected (observation-tier, comparator unresolved, curl-null lesson CF-25",
       "durable_refs": [
         "git:origin/lab/product@ae64285487c0563225c5df40861e6dfd8581dc3d (TWELFTH-session closure commit; curator-verified remote tip; touches EXACTLY docs/PRODUCT_LEDGER.md, results/product/PRODUCT_HYPOTHESES.json, state/product_current.json, state/product_direction.json)",
         "git:origin/lab/product@e320107 (eleventh session; immediate parent; PARK CHARTER + terminal-fork preregistration whose trigger this run fired)"
@@ -161,10 +161,10 @@
       "evidence_status": "DURABLE_UNAUDITED",
       "importance": "HIGH",
       "kind": "RESULT",
-      "summary": "PB-001 authorization lineage advanced to REQUEST REV 8 with exactly one semantic pack: .directed_pre_outcome_revision_v6 (X28 go-live-gate classification, adopted from CTO-5 council S4/X28 hazard). Content: credential declaration for kill accounting requires one GREEN stability validation (dress-rehearsal replay incl. W8 seam lint) against the live endpoint FIRST; failures at PRE-PANEL go-live gates caused by TRANSPORT INSTABILITY are logged gate failures that do NOT auto-consume kill slot 2; FROZEN numeric rule K=3 consecutive failed full gate-chain attempts across \u22652 dispatch sessions \u21d2 pers",
+      "summary": "PB-001 authorization lineage advanced to REQUEST REV 8 with exactly one semantic pack: .directed_pre_outcome_revision_v6 (X28 go-live-gate classification, adopted from CTO-5 council S4/X28 hazard). Content: credential declaration for kill accounting requires one GREEN stability validation (dress-rehearsal replay incl. W8 seam lint) against the live endpoint FIRST; failures at PRE-PANEL go-live gates caused by TRANSPORT INSTABILITY are logged gate failures that do NOT auto-consume kill slot 2; FROZEN numeric rule K=3 consecutive failed full gate-chain attempts across ≥2 dispatch sessions ⇒ pers",
       "durable_refs": [
         "git:origin/lab/product@e320107e71db218968463f569709d6476b314312 (eleventh-session synthesis commit: docs/PRODUCT_LEDGER.md eleventh entry incl. PARK CHARTER/slot-contention trigger/terminal fork/activation checklist; state/product_direction.json; state/product_current.json with corrected dress-rehearsal pin; results/product/PRODUCT_HYPOTHESES.json eleventh_session_note + PH-2 note; curator-verified tip of remote branch)",
-        "git:origin/lab/product parent chain 298a215 (tenth session) \u2192 e320107; tenth-session merges cf25299/7c2ca71 landed ddce3a3+7657565 byte-identically and BENCHMARK_PREREG_V4_ADDENDUM.md verified present in lab/product tree at e320107 by curator ls-tree (closes former CF-19 residual gap)"
+        "git:origin/lab/product parent chain 298a215 (tenth session) → e320107; tenth-session merges cf25299/7c2ca71 landed ddce3a3+7657565 byte-identically and BENCHMARK_PREREG_V4_ADDENDUM.md verified present in lab/product tree at e320107 by curator ls-tree (closes former CF-19 residual gap)"
       ],
       "route_to": [
         "CTO",
@@ -179,10 +179,10 @@
       "evidence_status": "DURABLE_UNAUDITED",
       "importance": "HIGH",
       "kind": "RESULT",
-      "summary": "TERMINAL FORK PREREGISTERED \u2014 indefinite parking of PB-001 is no longer an allowed steady state: at the NEXT Director session finding PB_LLM_API_KEY/PB_LLM_MODEL absent, the local/compliant-endpoint option must be formally posed; granted-with-stability-gate \u21d2 straight into the frozen go-live chain; declined/infeasible \u21d2 PB-001 closes TERMINAL BLOCKED_UNRUN (authorized+frozen+armed, never benchmarked, zero outcome rows, closed on external block; artifact pack preserved as durable negative knowledge) and PH-1 drops PRODUCT_CANDIDATE\u2192PROMISING in the SAME session (explicitly not falsified \u2014 untes",
+      "summary": "TERMINAL FORK PREREGISTERED — indefinite parking of PB-001 is no longer an allowed steady state: at the NEXT Director session finding PB_LLM_API_KEY/PB_LLM_MODEL absent, the local/compliant-endpoint option must be formally posed; granted-with-stability-gate ⇒ straight into the frozen go-live chain; declined/infeasible ⇒ PB-001 closes TERMINAL BLOCKED_UNRUN (authorized+frozen+armed, never benchmarked, zero outcome rows, closed on external block; artifact pack preserved as durable negative knowledge) and PH-1 drops PRODUCT_CANDIDATE→PROMISING in the SAME session (explicitly not falsified — untes",
       "durable_refs": [
         "git:origin/lab/product@e320107e71db218968463f569709d6476b314312 (eleventh-session synthesis commit: docs/PRODUCT_LEDGER.md eleventh entry incl. PARK CHARTER/slot-contention trigger/terminal fork/activation checklist; state/product_direction.json; state/product_current.json with corrected dress-rehearsal pin; results/product/PRODUCT_HYPOTHESES.json eleventh_session_note + PH-2 note; curator-verified tip of remote branch)",
-        "git:origin/lab/product parent chain 298a215 (tenth session) \u2192 e320107; tenth-session merges cf25299/7c2ca71 landed ddce3a3+7657565 byte-identically and BENCHMARK_PREREG_V4_ADDENDUM.md verified present in lab/product tree at e320107 by curator ls-tree (closes former CF-19 residual gap)"
+        "git:origin/lab/product parent chain 298a215 (tenth session) → e320107; tenth-session merges cf25299/7c2ca71 landed ddce3a3+7657565 byte-identically and BENCHMARK_PREREG_V4_ADDENDUM.md verified present in lab/product tree at e320107 by curator ls-tree (closes former CF-19 residual gap)"
       ],
       "route_to": [
         "CTO",
@@ -198,10 +198,10 @@
       "evidence_status": "AUDITED_DURABLE",
       "importance": "HIGH",
       "kind": "RESULT",
-      "summary": "Intel cycle-7 intake (lane verdict itself AUDITED_DURABLE on lab/intel@9f9a757; Product incorporation durable at e320107): audit PASS run 32908028297 returned the lane's first VALID-but-INCONCLUSIVE measurement \u2014 cross-host route-ladder replay economics locked undecidable by construction because the inherited frozen Holm family gate had ZERO power at n=5 pairs/task (auditor proved min achievable Holm-adjusted p = 0.125 > 0.05 for ANY possible outcome), even though all four per-task gates passed with strong consistent signals inside the verdict framing. Neither success nor failure; nothing ente",
+      "summary": "Intel cycle-7 intake (lane verdict itself AUDITED_DURABLE on lab/intel@9f9a757; Product incorporation durable at e320107): audit PASS run 32908028297 returned the lane's first VALID-but-INCONCLUSIVE measurement — cross-host route-ladder replay economics locked undecidable by construction because the inherited frozen Holm family gate had ZERO power at n=5 pairs/task (auditor proved min achievable Holm-adjusted p = 0.125 > 0.05 for ANY possible outcome), even though all four per-task gates passed with strong consistent signals inside the verdict framing. Neither success nor failure; nothing ente",
       "durable_refs": [
         "git:origin/lab/product@e320107e71db218968463f569709d6476b314312 (eleventh-session synthesis commit: docs/PRODUCT_LEDGER.md eleventh entry incl. PARK CHARTER/slot-contention trigger/terminal fork/activation checklist; state/product_direction.json; state/product_current.json with corrected dress-rehearsal pin; results/product/PRODUCT_HYPOTHESES.json eleventh_session_note + PH-2 note; curator-verified tip of remote branch)",
-        "git:origin/lab/product parent chain 298a215 (tenth session) \u2192 e320107; tenth-session merges cf25299/7c2ca71 landed ddce3a3+7657565 byte-identically and BENCHMARK_PREREG_V4_ADDENDUM.md verified present in lab/product tree at e320107 by curator ls-tree (closes former CF-19 residual gap)"
+        "git:origin/lab/product parent chain 298a215 (tenth session) → e320107; tenth-session merges cf25299/7c2ca71 landed ddce3a3+7657565 byte-identically and BENCHMARK_PREREG_V4_ADDENDUM.md verified present in lab/product tree at e320107 by curator ls-tree (closes former CF-19 residual gap)"
       ],
       "route_to": [
         "INTEL",
@@ -235,7 +235,7 @@
       "evidence_status": "DURABLE_UNAUDITED",
       "importance": "HIGH",
       "kind": "RESULT",
-      "summary": "Verdict of the session: beta_launch=false, no second beta, PB-001 remains THE single authorized beta in WATCH armed-park. Reasoning chain (all live-verified, not trusted from state): PB_LLM_API_KEY/PB_LLM_MODEL re-verified UNSET in-session \u21d2 frozen gate chain mechanically exits BLOCKED; no alternative claimant for the slot (PH-2 locked behind unmet dual unlock, PH-4 WATCH, PH-3 permanently rejected); authorizing anything else would be evidence-free AND terminating PB-001 with zero outcome rows would be evidence-free abandonment. Kill-slot accounting unchanged: 1 of 2 consumed (D2 consumed slot",
+      "summary": "Verdict of the session: beta_launch=false, no second beta, PB-001 remains THE single authorized beta in WATCH armed-park. Reasoning chain (all live-verified, not trusted from state): PB_LLM_API_KEY/PB_LLM_MODEL re-verified UNSET in-session ⇒ frozen gate chain mechanically exits BLOCKED; no alternative claimant for the slot (PH-2 locked behind unmet dual unlock, PH-4 WATCH, PH-3 permanently rejected); authorizing anything else would be evidence-free AND terminating PB-001 with zero outcome rows would be evidence-free abandonment. Kill-slot accounting unchanged: 1 of 2 consumed (D2 consumed slot",
       "durable_refs": [
         "git:origin/lab/product@dc716c55e0bbf885191b2ba1fc2350e2c817ac77 (ninth session synthesis: state/product_direction.json continue=true solely for bounded ARCHITECT session + ninth_session_note; state/product_current.json; results/product/PRODUCT_HYPOTHESES.json +runtime_accepted_through/+graph_g_h6_site_bound/intel cycle-6 exclusion; docs/PRODUCT_LEDGER.md ninth-session entry; docs/PRODUCT_ARCHITECTURE_HYPOTHESES.md PH-2 unlock status; curator-verified on remote via ls-remote)",
         "git:origin/cycle/product/32886859788/architect@ddce3a399fcf7b627eb5dec0809c316471e4f442 (combined v4+v5 amendment line whose durability was re-verified this session; curator-reconfirmed object present)"
@@ -253,7 +253,7 @@
       "evidence_status": "DURABLE_UNAUDITED",
       "importance": "HIGH",
       "kind": "RESULT",
-      "summary": "Cross-lane intake at audit ceilings WITHOUT touching frozen beta text (navigation to home-lane evidence, incorporation itself DURABLE_UNAUDITED at dc716c5): (1) Runtime R0-1 ACCEPTED \u2014 first measured end-to-end agent-facing loop (content-addressed CANDIDATE capsule registry derived byte-reproducibly from accepted Graph evidence; three-valued precondition applicability with per-clause attribution; executor refusal of non-inherited segments; spider.plan/v0 handoff-to-caller sole fallback) with ceilings quoted VERBATIM so the ledger can never be quoted as compression evidence later: exact-repeat ",
+      "summary": "Cross-lane intake at audit ceilings WITHOUT touching frozen beta text (navigation to home-lane evidence, incorporation itself DURABLE_UNAUDITED at dc716c5): (1) Runtime R0-1 ACCEPTED — first measured end-to-end agent-facing loop (content-addressed CANDIDATE capsule registry derived byte-reproducibly from accepted Graph evidence; three-valued precondition applicability with per-clause attribution; executor refusal of non-inherited segments; spider.plan/v0 handoff-to-caller sole fallback) with ceilings quoted VERBATIM so the ledger can never be quoted as compression evidence later: exact-repeat ",
       "durable_refs": [
         "git:origin/lab/product@dc716c55e0bbf885191b2ba1fc2350e2c817ac77 (ninth session synthesis: state/product_direction.json continue=true solely for bounded ARCHITECT session + ninth_session_note; state/product_current.json; results/product/PRODUCT_HYPOTHESES.json +runtime_accepted_through/+graph_g_h6_site_bound/intel cycle-6 exclusion; docs/PRODUCT_LEDGER.md ninth-session entry; docs/PRODUCT_ARCHITECTURE_HYPOTHESES.md PH-2 unlock status; curator-verified on remote via ls-remote)",
         "git:origin/cycle/product/32886859788/architect@ddce3a399fcf7b627eb5dec0809c316471e4f442 (combined v4+v5 amendment line whose durability was re-verified this session; curator-reconfirmed object present)"
@@ -273,7 +273,7 @@
       "evidence_status": "DURABLE_UNAUDITED",
       "importance": "HIGH",
       "kind": "RESULT",
-      "summary": "Exactly ONE bounded BETA_ARCHITECT session directed (next_action=ARCHITECT; continue=true solely for it, hard park resumes on completion or inability): (1) merge/push both durable lines into a lab branch UNCHANGED + re-verify hashes incl. the disclosed supersession pair \u2014 closes CF-19's residual gap; (2) ONE disclosed pre-outcome measurement-infra commit implementing dual-id cost-event acceptance/mapping (spider.cost_event/v0 alongside pb001.cost_event/v0) per the now-TRIGGERED migration duty, with explicit constraint 'no treatment byte may change', offline suite subset + dress-rehearsal repla",
+      "summary": "Exactly ONE bounded BETA_ARCHITECT session directed (next_action=ARCHITECT; continue=true solely for it, hard park resumes on completion or inability): (1) merge/push both durable lines into a lab branch UNCHANGED + re-verify hashes incl. the disclosed supersession pair — closes CF-19's residual gap; (2) ONE disclosed pre-outcome measurement-infra commit implementing dual-id cost-event acceptance/mapping (spider.cost_event/v0 alongside pb001.cost_event/v0) per the now-TRIGGERED migration duty, with explicit constraint 'no treatment byte may change', offline suite subset + dress-rehearsal repla",
       "durable_refs": [
         "git:origin/lab/product@dc716c55e0bbf885191b2ba1fc2350e2c817ac77 (ninth session synthesis: state/product_direction.json continue=true solely for bounded ARCHITECT session + ninth_session_note; state/product_current.json; results/product/PRODUCT_HYPOTHESES.json +runtime_accepted_through/+graph_g_h6_site_bound/intel cycle-6 exclusion; docs/PRODUCT_LEDGER.md ninth-session entry; docs/PRODUCT_ARCHITECTURE_HYPOTHESES.md PH-2 unlock status; curator-verified on remote via ls-remote)",
         "git:origin/cycle/product/32886859788/architect@ddce3a399fcf7b627eb5dec0809c316471e4f442 (combined v4+v5 amendment line whose durability was re-verified this session; curator-reconfirmed object present)"
@@ -348,7 +348,7 @@
       "evidence_status": "DURABLE_UNAUDITED",
       "importance": "HIGH",
       "kind": "NEGATIVE",
-      "summary": "Honest economics negative (ledger finding C1): whole-task exact-repeat inheritance does NOT beat a strong zero-provider scripted baseline on T1 login \u2014 both arms 4 actions, 100% success, SPIDER pays \u2248+29% wall overhead (cell-A medians 1475.7ms vs 1306.8ms; \u2248+380ms incl. 236ms retrieval/applicability detection D) for ZERO action savings (inherited=[4,4,4] equals baseline actions). Work-compression from replay-style inheritance is not demonstrated at this scale; per prereg claims_license, NO work-compression claim is licensed this cycle (scripted arms, n=2 capsules, zero provider tokens). Counte",
+      "summary": "Honest economics negative (ledger finding C1): whole-task exact-repeat inheritance does NOT beat a strong zero-provider scripted baseline on T1 login — both arms 4 actions, 100% success, SPIDER pays ≈+29% wall overhead (cell-A medians 1475.7ms vs 1306.8ms; ≈+380ms incl. 236ms retrieval/applicability detection D) for ZERO action savings (inherited=[4,4,4] equals baseline actions). Work-compression from replay-style inheritance is not demonstrated at this scale; per prereg claims_license, NO work-compression claim is licensed this cycle (scripted arms, n=2 capsules, zero provider tokens). Counte",
       "durable_refs": [
         "git:origin/cycle/runtime/32887030457/team@c2f0ba8e30effa1f5afb6e957adb3efd9c2a8558 (= team-attempt-1; parent = lab/runtime tip 7669dcd; 64 files / 4818 insertions)",
         "git:c2f0ba8e:results/runtime/PREREG_R0_CYCLE1.json (frozen_utc 2026-08-25T20:15:00Z, FROZEN_BEFORE_OUTCOMES; pins both capsule sha256s, resolver thresholds MIN_MATCH=2/TAU=0.3/COV_CAP=6, tasks T1/T2(+deferred T3), arms, gates P1.x/P2.x, amendment rule)"
@@ -368,7 +368,7 @@
       "evidence_status": "DURABLE_UNAUDITED",
       "importance": "HIGH",
       "kind": "RESULT",
-      "summary": "Seventh Product Director session re-authorized PB-001 as THE single beta at request revision 7 (beta_launch=true), folding the CTO-4 council decode-debt pack into ONE atomic amendment directive (.directed_pre_outcome_revision_v5 items W1-W8 stacked on pending v4 V1-V6). X15 (verdict contract not auditor-recomputable: INTERFACES \u00a710 tie->B1/no-B3/LOSES vs D4.2 per-regime {B0,B1,B3}/LOSES_BASELINE) and X16 (navigation-policy asymmetry between B3 direct-URL gotos and counted SPIDER click-chain primitives) were verified by direct inspection before adoption. Three fresh-context critics converged: c",
+      "summary": "Seventh Product Director session re-authorized PB-001 as THE single beta at request revision 7 (beta_launch=true), folding the CTO-4 council decode-debt pack into ONE atomic amendment directive (.directed_pre_outcome_revision_v5 items W1-W8 stacked on pending v4 V1-V6). X15 (verdict contract not auditor-recomputable: INTERFACES §10 tie->B1/no-B3/LOSES vs D4.2 per-regime {B0,B1,B3}/LOSES_BASELINE) and X16 (navigation-policy asymmetry between B3 direct-URL gotos and counted SPIDER click-chain primitives) were verified by direct inspection before adoption. Three fresh-context critics converged: c",
       "durable_refs": [
         "git:origin/lab/product@e84b11c (seventh session: PB-001 re-auth rev 7 + directed_pre_outcome_revision_v5 W1-W8 + ledger/hypotheses refresh)",
         "git:origin/lab/product@d944594 (eighth session: formal BLOCKED-review receipt, WATCH armed-park disposition, recovery-hash pins)"
@@ -386,7 +386,7 @@
       "evidence_status": "DURABLE_UNAUDITED",
       "importance": "HIGH",
       "kind": "RESULT",
-      "summary": "Beta Architect landed THE single combined amendment commit ddce3a3 on its lineage (parent 55c56d6 = builder tree 61c42d4 landed UNCHANGED, F0 precedent): V1 front-door one-shot reversion to V31-canonicalized desc_only ranking with PERMANENT treatment freeze; V2 disclosed BF-1 reserve swap (E_R3_top10_tags retired \u2014 entry-satisfiable anchor, zero discriminating power \u2014 replaced by R-res_quotes_authors_nav); V3/W8 stub-backbone dress rehearsal run GREEN offline on real Chromium/local fixtures (all arms incl. SPIDER silent-procedure path SUCCESS end-to-end; SYNTHETIC-labeled, excluded from eviden",
+      "summary": "Beta Architect landed THE single combined amendment commit ddce3a3 on its lineage (parent 55c56d6 = builder tree 61c42d4 landed UNCHANGED, F0 precedent): V1 front-door one-shot reversion to V31-canonicalized desc_only ranking with PERMANENT treatment freeze; V2 disclosed BF-1 reserve swap (E_R3_top10_tags retired — entry-satisfiable anchor, zero discriminating power — replaced by R-res_quotes_authors_nav); V3/W8 stub-backbone dress rehearsal run GREEN offline on real Chromium/local fixtures (all arms incl. SPIDER silent-procedure path SUCCESS end-to-end; SYNTHETIC-labeled, excluded from eviden",
       "durable_refs": [
         "git:origin/lab/product@e84b11c (seventh session: PB-001 re-auth rev 7 + directed_pre_outcome_revision_v5 W1-W8 + ledger/hypotheses refresh)",
         "git:origin/lab/product@d944594 (eighth session: formal BLOCKED-review receipt, WATCH armed-park disposition, recovery-hash pins)"
@@ -423,7 +423,7 @@
       "evidence_status": "DURABLE_UNAUDITED",
       "importance": "HIGH",
       "kind": "RESULT",
-      "summary": "Eighth Director session (BUILD BLOCK job) formally reviewed the blocked build and ruled WATCH 'armed-park': BLOCKED UPHELD as legitimate ops blocker (credentials cannot be fairly tested around), NOT rejected (zero outcome rows, no fairness defect \u2014 rejection would be evidence-free abandonment), NOT rearchitected (V1 permanent front-door freeze stands; decode-debt pack already dispositioned). Director independently re-verified rather than trusted: PB_LLM_API_KEY/PB_LLM_MODEL unset; cost_events.jsonl = exactly 8 harness-side rows (action/retrieval_event/summary_event/health/write_guard/violation",
+      "summary": "Eighth Director session (BUILD BLOCK job) formally reviewed the blocked build and ruled WATCH 'armed-park': BLOCKED UPHELD as legitimate ops blocker (credentials cannot be fairly tested around), NOT rejected (zero outcome rows, no fairness defect — rejection would be evidence-free abandonment), NOT rearchitected (V1 permanent front-door freeze stands; decode-debt pack already dispositioned). Director independently re-verified rather than trusted: PB_LLM_API_KEY/PB_LLM_MODEL unset; cost_events.jsonl = exactly 8 harness-side rows (action/retrieval_event/summary_event/health/write_guard/violation",
       "durable_refs": [
         "git:origin/lab/product@e84b11c (seventh session: PB-001 re-auth rev 7 + directed_pre_outcome_revision_v5 W1-W8 + ledger/hypotheses refresh)",
         "git:origin/lab/product@d944594 (eighth session: formal BLOCKED-review receipt, WATCH armed-park disposition, recovery-hash pins)"
@@ -441,7 +441,7 @@
       "evidence_status": "DURABLE_UNAUDITED",
       "importance": "HIGH",
       "kind": "BUG",
-      "summary": "product-loop.yml destructive-wipe defect CONFIRMED STILL LIVE at main HEAD (and even at the 'hotfix' commit 8f3980c, per both director sessions in this run): steps 'Clear ephemeral launch state' / 'Remove stale architecture state' etc. execute rm -f state/product_beta_request.json (:63), rm -f state/product_beta_architecture.json (:136), rm -f state/product_beta_build.json (:236), rm -f state/product_beta_audit.json (:327) \u2014 deleting COMMITTED-AT-HEAD authorization/build state from the working tree every dispatch. Consequences observed this run: seventh-session director had to detect the wiped",
+      "summary": "product-loop.yml destructive-wipe defect CONFIRMED STILL LIVE at main HEAD (and even at the 'hotfix' commit 8f3980c, per both director sessions in this run): steps 'Clear ephemeral launch state' / 'Remove stale architecture state' etc. execute rm -f state/product_beta_request.json (:63), rm -f state/product_beta_architecture.json (:136), rm -f state/product_beta_build.json (:236), rm -f state/product_beta_audit.json (:327) — deleting COMMITTED-AT-HEAD authorization/build state from the working tree every dispatch. Consequences observed this run: seventh-session director had to detect the wiped",
       "durable_refs": [
         "git:origin/lab/product@e84b11c (seventh session: PB-001 re-auth rev 7 + directed_pre_outcome_revision_v5 W1-W8 + ledger/hypotheses refresh)",
         "git:origin/lab/product@d944594 (eighth session: formal BLOCKED-review receipt, WATCH armed-park disposition, recovery-hash pins)"
@@ -460,7 +460,7 @@
       "evidence_status": "DURABLE_UNAUDITED",
       "importance": "HIGH",
       "kind": "ANOMALY",
-      "summary": "Provenance gap flagged by the eighth-session Director and refined by curator Git cross-check: lab/product HEAD does NOT contain the v4+v5 amendment or WP-8 artifacts (curator-verified: BENCHMARK_PREREG_V4_ADDENDUM.md absent from x/lp fetch of lab/product@d944594), while the Director's ledger entry says the combined artifacts 'exist ONLY on session mounts'. Curator refinement: durable copies DO exist on origin \u2014 cycle/product/32886859788/architect@ddce3a3 carries the full amendment (addendum file verified present; parent chain preserves 55c56d6 integration) and cycle/product/32886859788/builder",
+      "summary": "Provenance gap flagged by the eighth-session Director and refined by curator Git cross-check: lab/product HEAD does NOT contain the v4+v5 amendment or WP-8 artifacts (curator-verified: BENCHMARK_PREREG_V4_ADDENDUM.md absent from x/lp fetch of lab/product@d944594), while the Director's ledger entry says the combined artifacts 'exist ONLY on session mounts'. Curator refinement: durable copies DO exist on origin — cycle/product/32886859788/architect@ddce3a3 carries the full amendment (addendum file verified present; parent chain preserves 55c56d6 integration) and cycle/product/32886859788/builder",
       "durable_refs": [
         "git:origin/lab/product@e84b11c (seventh session: PB-001 re-auth rev 7 + directed_pre_outcome_revision_v5 W1-W8 + ledger/hypotheses refresh)",
         "git:origin/lab/product@d944594 (eighth session: formal BLOCKED-review receipt, WATCH armed-park disposition, recovery-hash pins)"
@@ -479,10 +479,10 @@
       "evidence_status": "LOG_ONLY_UNAUDITED",
       "importance": "HIGH",
       "kind": "RESULT",
-      "summary": "RECOVERED CROSS-LANE FILLS AND KILLS of the lost pass (all advisory CTO synthesis, load-bearing claims stated as re-verified against mounts in-session): NEW filings X21 pointer-currency defect (Product d2_evidence paths don't resolve; live check printed d2_evidence=None), X22 workspace-root directives/GRAPH.md STALE (37 lines vs mounted 163), X23 physics TERMINATE_LANE\u2192DORMANT transition unrecorded in ledger; X15 CONFIRMED LIVE elevated CRITICAL (three-document verdict-contract conflict: prereg v2 \u00a78 {B0,B1} tie\u2192B1 vs addendum D4.2 per-regime {B0,B1,B3} tie\u2192lowest-tokens vs INTERFACES \u00a710 scal",
+      "summary": "RECOVERED CROSS-LANE FILLS AND KILLS of the lost pass (all advisory CTO synthesis, load-bearing claims stated as re-verified against mounts in-session): NEW filings X21 pointer-currency defect (Product d2_evidence paths don't resolve; live check printed d2_evidence=None), X22 workspace-root directives/GRAPH.md STALE (37 lines vs mounted 163), X23 physics TERMINATE_LANE→DORMANT transition unrecorded in ledger; X15 CONFIRMED LIVE elevated CRITICAL (three-document verdict-contract conflict: prereg v2 §8 {B0,B1} tie→B1 vs addendum D4.2 per-regime {B0,B1,B3} tie→lowest-tokens vs INTERFACES §10 scal",
       "durable_refs": [
-        "git:0f4563e6eb2e78c911cb8a693d971624a4f3e9f1 ('cto: fix duplicate charter validation') \u2014 triggering push, durable on main; ALSO the push that cancelled queued council #15 (runs/32885496244.json)",
-        "git:1b25f6357f1b640f304391cbb9bdd643be1240b6 ('state: reconcile research-program succession', spider-program-supervisor, 19:02:24Z) \u2014 ACTUAL base the session ran on, NOT the trigger sha: checkout step used 'git checkout -B main refs/remotes/origin/main' (latest origin/main fetched at job start), and the persist-step 'git reset --hard HEAD' printed 'HEAD is now at 1b25f63'. Provenance precision: this council reviewed lane mounts against main@1b25f63."
+        "git:0f4563e6eb2e78c911cb8a693d971624a4f3e9f1 ('cto: fix duplicate charter validation') — triggering push, durable on main; ALSO the push that cancelled queued council #15 (runs/32885496244.json)",
+        "git:1b25f6357f1b640f304391cbb9bdd643be1240b6 ('state: reconcile research-program succession', spider-program-supervisor, 19:02:24Z) — ACTUAL base the session ran on, NOT the trigger sha: checkout step used 'git checkout -B main refs/remotes/origin/main' (latest origin/main fetched at job start), and the persist-step 'git reset --hard HEAD' printed 'HEAD is now at 1b25f63'. Provenance precision: this council reviewed lane mounts against main@1b25f63."
       ],
       "route_to": [
         "CTO",
@@ -500,10 +500,10 @@
       "evidence_status": "LOG_ONLY_UNAUDITED",
       "importance": "HIGH",
       "kind": "COST",
-      "summary": "CONTEXT-AMNESIAC RETRY ECONOMICS quantified (~37m21s runner wall, zero output bytes): every retry restarts OpenCode with fresh context, so each of the 3 attempts re-performed the full exploration (role card \u2192 master prompt/V2 \u2192 audit gate JSON + report \u2192 directive/prereg \u2192 resolver/loop/adapters/accounting/bench/tests) before dying. Attempt-level detail: A1 18:41:27\u201318:49:58 (read gate+code, pip-installed pytest 9.1.1 + playwright 1.62.0, downloaded chromium-headless-shell v1234 \u2248114.7 MiB, reproduced failing suite 10/17, then silent \u2265300s after the install \u2192 stall-killed); A2 18:54:58\u201319:08:4",
+      "summary": "CONTEXT-AMNESIAC RETRY ECONOMICS quantified (~37m21s runner wall, zero output bytes): every retry restarts OpenCode with fresh context, so each of the 3 attempts re-performed the full exploration (role card → master prompt/V2 → audit gate JSON + report → directive/prereg → resolver/loop/adapters/accounting/bench/tests) before dying. Attempt-level detail: A1 18:41:27–18:49:58 (read gate+code, pip-installed pytest 9.1.1 + playwright 1.62.0, downloaded chromium-headless-shell v1234 ≈114.7 MiB, reproduced failing suite 10/17, then silent ≥300s after the install → stall-killed); A2 18:54:58–19:08:4",
       "durable_refs": [
-        "git:origin/cycle/runtime/32885208777/team@af164b9c26cfb6df2a4a855f9238b02156edeaf3 (= team-attempt-1; curator-verified locally: SAME commit object as cycle/runtime/{32864270667,32875577618,32877702179}/team \u2014 fourth run id over one commit object; this time published under conclusion=failure)",
-        "git:origin/cycle/runtime/32877702179/audit@4a12b79830716f777616c5ea2139674d0590864a:results/audit/CYCLE_32877702179_RUNTIME_GATE.json \u2014 the BLOCKED gate + RF-X/RF1\u2013RF6 fix list this round was dispatched against (curator re-read it from the branch during distillation; gate=BLOCKED, delta_since_prior_audit_bytes=0, escalation rule pre-committed)"
+        "git:origin/cycle/runtime/32885208777/team@af164b9c26cfb6df2a4a855f9238b02156edeaf3 (= team-attempt-1; curator-verified locally: SAME commit object as cycle/runtime/{32864270667,32875577618,32877702179}/team — fourth run id over one commit object; this time published under conclusion=failure)",
+        "git:origin/cycle/runtime/32877702179/audit@4a12b79830716f777616c5ea2139674d0590864a:results/audit/CYCLE_32877702179_RUNTIME_GATE.json — the BLOCKED gate + RF-X/RF1–RF6 fix list this round was dispatched against (curator re-read it from the branch during distillation; gate=BLOCKED, delta_since_prior_audit_bytes=0, escalation rule pre-committed)"
       ],
       "route_to": [
         "INFRA",
@@ -519,9 +519,9 @@
       "evidence_status": "DURABLE_UNAUDITED",
       "importance": "HIGH",
       "kind": "RESULT",
-      "summary": "REPAIR R1 DELIVERED THE FULL PREDECLARED PIPELINE AND THE REAL MEASUREMENT \u2014 prior memory characterization 'returned empty-ish' is WRONG. Team executed P0\u2192P1\u2192P2 completely: prereg graph/prereg_generalization.md committed BEFORE any outcome (1a83311; 7 frozen composites incl. NEW books depth-4 D4H and depth-5 D5B with exact distinct-class counts; directive decision rule embedded VERBATIM machine-diffed vs directives/GRAPH.md; closed G-H5-equalized 6-arm \u00d72-pass grid = 84 rows); producer repair under legitimacy boundary; frozen confirmation grid executed exactly (84/84 rows, zero unhealthy/error",
+      "summary": "REPAIR R1 DELIVERED THE FULL PREDECLARED PIPELINE AND THE REAL MEASUREMENT — prior memory characterization 'returned empty-ish' is WRONG. Team executed P0→P1→P2 completely: prereg graph/prereg_generalization.md committed BEFORE any outcome (1a83311; 7 frozen composites incl. NEW books depth-4 D4H and depth-5 D5B with exact distinct-class counts; directive decision rule embedded VERBATIM machine-diffed vs directives/GRAPH.md; closed G-H5-equalized 6-arm ×2-pass grid = 84 rows); producer repair under legitimacy boundary; frozen confirmation grid executed exactly (84/84 rows, zero unhealthy/error",
       "durable_refs": [
-        "git:origin/cycle/graph/32883457025/team@a8fc78502e29066d4e6df1f2242ad175331ff4b3 (curator-refetched byte-exact; freeze chain e6c0798\u21921a83311(prereg)\u21929cb851c(A1)\u219296ec691(A2)\u2192f878ef3(P1 canonical)\u2192a8fc785(P2 grid))",
+        "git:origin/cycle/graph/32883457025/team@a8fc78502e29066d4e6df1f2242ad175331ff4b3 (curator-refetched byte-exact; freeze chain e6c0798→1a83311(prereg)→9cb851c(A1)→96ec691(A2)→f878ef3(P1 canonical)→a8fc785(P2 grid))",
         "git:origin/cycle/graph/32883457025/audit@94b1698f8f29d3a2158c560288f1fcd23f5f50be (curator-refetched byte-exact; results/audit/CYCLE_32883457025_GRAPH_GATE.json gate=REVISE safe_to_integrate=false required_fixes=RF-D1..RF-D5, cycle={run_id,program graph-inheritance-generalization,repair_round 1,audited_snapshot_head a8fc785,accepted_base 3e36b4c})"
       ],
       "route_to": [
@@ -538,9 +538,9 @@
       "evidence_status": "AUDITED_DURABLE",
       "importance": "HIGH",
       "kind": "RESULT",
-      "summary": "Independent audit verdict (curator cross-checked gate JSON byte-exact on origin): REVISE / safe_to_integrate=false with EXACTLY FIVE documentation-class fixes RF-D1..RF-D5 \u2014 (D1) wrong numeric range '(reused 10\u201316 vs novel 60\u2013136 on books rows)' with no row exceeding 120 \u2192 recompute under explicit population/unit; (D2) non-recountable '89+23 tests' total \u2192 per-suite pytest-collection counts (trap 23 / scaling 27 / cycle2 15 / cycle3 15 / robustness\u2026); (D3) manifest prereg.freeze_commit=null \u2192 set to freeze commit 1a83311 + repair_round_note; (D4) ambiguous revalidation disclosure \u2014 the +1 succ",
+      "summary": "Independent audit verdict (curator cross-checked gate JSON byte-exact on origin): REVISE / safe_to_integrate=false with EXACTLY FIVE documentation-class fixes RF-D1..RF-D5 — (D1) wrong numeric range '(reused 10–16 vs novel 60–136 on books rows)' with no row exceeding 120 → recompute under explicit population/unit; (D2) non-recountable '89+23 tests' total → per-suite pytest-collection counts (trap 23 / scaling 27 / cycle2 15 / cycle3 15 / robustness…); (D3) manifest prereg.freeze_commit=null → set to freeze commit 1a83311 + repair_round_note; (D4) ambiguous revalidation disclosure — the +1 succ",
       "durable_refs": [
-        "git:origin/cycle/graph/32883457025/team@a8fc78502e29066d4e6df1f2242ad175331ff4b3 (curator-refetched byte-exact; freeze chain e6c0798\u21921a83311(prereg)\u21929cb851c(A1)\u219296ec691(A2)\u2192f878ef3(P1 canonical)\u2192a8fc785(P2 grid))",
+        "git:origin/cycle/graph/32883457025/team@a8fc78502e29066d4e6df1f2242ad175331ff4b3 (curator-refetched byte-exact; freeze chain e6c0798→1a83311(prereg)→9cb851c(A1)→96ec691(A2)→f878ef3(P1 canonical)→a8fc785(P2 grid))",
         "git:origin/cycle/graph/32883457025/audit@94b1698f8f29d3a2158c560288f1fcd23f5f50be (curator-refetched byte-exact; results/audit/CYCLE_32883457025_GRAPH_GATE.json gate=REVISE safe_to_integrate=false required_fixes=RF-D1..RF-D5, cycle={run_id,program graph-inheritance-generalization,repair_round 1,audited_snapshot_head a8fc785,accepted_base 3e36b4c})"
       ],
       "route_to": [
@@ -558,8 +558,8 @@
       "kind": "RESULT",
       "summary": "RECOVERED SYNTHESIS ESSENTIALS of the lost pass (the full ENTRY CTO-5 ledger diff is printed verbatim in the log at 19:09:05Z): top bottleneck CONTRACT-LANDING-GAP (five shared contracts closing at nearby freeze points: PB-001 comparator arithmetic X15 with Builder legally barred from fixing; WP-0.5 telemetry self-test vs production completeness; product-loop wipe+validation deadlock X21 blocking Builder dispatch; Graph generalization-prereg decodability holes incl. SITE-BOUND detector unfrozen + missing induced-procedure competitor; Intel cycle-6 mutation/TTL arms undecodable without control-",
       "durable_refs": [
-        "git:0843acb56ed6cd85b45e49fca207db744196be6f ('cto: require continued orthogonal Physics search') \u2014 the triggering push, durable on main",
-        "git origin/lab/cto \u2014 LATER, DIFFERENT fifth-pass council output (ENTRY CTO-5 dated 2026-08-26, council_pass=CTO-5, one frontier charter web-physics-volatility-freshness v1 CRITICAL; curator Git-verified). This FAILED run's own CTO-5 artifacts are NOT on any ref."
+        "git:0843acb56ed6cd85b45e49fca207db744196be6f ('cto: require continued orthogonal Physics search') — the triggering push, durable on main",
+        "git origin/lab/cto — LATER, DIFFERENT fifth-pass council output (ENTRY CTO-5 dated 2026-08-26, council_pass=CTO-5, one frontier charter web-physics-volatility-freshness v1 CRITICAL; curator Git-verified). This FAILED run's own CTO-5 artifacts are NOT on any ref."
       ],
       "route_to": [
         "CTO",
@@ -579,8 +579,8 @@
       "kind": "ANOMALY",
       "summary": "Round-0 EMPTY production snapshot caught by independent audit: 'TEAM GRAPH produced zero new commits in both attempts... the predeclared pipeline was never started. Empty production failure, not a scientific result of any direction: NOT site-bound, NOT instrument-unrepairable, NOT a null.' Gate REVISE/safe_to_integrate=false with five concrete required fixes (RF-1 P0 prereg-before-outcome incl. spent-instrument roles; RF-2 P1 producer repair under legitimacy boundary with non-vacuous contamination gates citing run 32793580374 F1 lesson; RF-3 exact frozen P2 grid with discipline fields + perf_c",
       "durable_refs": [
-        "refs/heads/cycle/graph/32880179571/team and .../team-attempt-1 @ 3e36b4c4da23e3b2531ce0d284f308441965a25b \u2014 EMPTY round-0 snapshot preserved as provenance (tree identical to accepted base; curator-verified via fetched refs + audit gate JSON)",
-        "refs/heads/cycle/graph/32880179571/audit and .../audit-attempt-1 @ 6581389db106cc61ea2a587e5e00a01118e2b0be \u2014 independent audit report + results/audit/CYCLE_32880179571_GRAPH_GATE.json (curator re-fetched and parsed: gate=REVISE, safe_to_integrate=false, RF-1..RF-5 full text, escalation_rule, director_note)"
+        "refs/heads/cycle/graph/32880179571/team and .../team-attempt-1 @ 3e36b4c4da23e3b2531ce0d284f308441965a25b — EMPTY round-0 snapshot preserved as provenance (tree identical to accepted base; curator-verified via fetched refs + audit gate JSON)",
+        "refs/heads/cycle/graph/32880179571/audit and .../audit-attempt-1 @ 6581389db106cc61ea2a587e5e00a01118e2b0be — independent audit report + results/audit/CYCLE_32880179571_GRAPH_GATE.json (curator re-fetched and parsed: gate=REVISE, safe_to_integrate=false, RF-1..RF-5 full text, escalation_rule, director_note)"
       ],
       "route_to": [
         "GRAPH",
@@ -595,7 +595,7 @@
       "evidence_status": "DURABLE_UNAUDITED",
       "importance": "HIGH",
       "kind": "PRIOR_ART",
-      "summary": "SCOUT ecosystem-shift discovery (persisted on scout branch): capture\u2192OpenAPI declaration is now COMMODITIZED across >=5 independent implementations (Browserbase browser-to-api skill, TabAPI with CI drift-replay, Vespasian, Harpist, mitmproxy2swagger). Consequence drawn by the lane: the decision-relevant quantity for replay mechanisms shifts from replay-vs-browser to CAPTURE-VALUE-OVER-DECLARATION (B\u2212D per host) \u2014 a market-segmentation map directly relevant to Runtime capsule-ingestion trust gating and Product positioning. Corroborating vendor datum: Unbrowse itself now ships an honest-negative",
+      "summary": "SCOUT ecosystem-shift discovery (persisted on scout branch): capture→OpenAPI declaration is now COMMODITIZED across >=5 independent implementations (Browserbase browser-to-api skill, TabAPI with CI drift-replay, Vespasian, Harpist, mitmproxy2swagger). Consequence drawn by the lane: the decision-relevant quantity for replay mechanisms shifts from replay-vs-browser to CAPTURE-VALUE-OVER-DECLARATION (B−D per host) — a market-segmentation map directly relevant to Runtime capsule-ingestion trust gating and Product positioning. Corroborating vendor datum: Unbrowse itself now ships an honest-negative",
       "durable_refs": [
         "git:origin/cycle/intel/32878215017/scout@a74fdb027a3698a7d5e681c8d255e0a49af62350 (scout snapshot: reports/intel/scout/cycle6_scout_report.md, results/intel/scout/cycle6_findings.json, state/intel_candidate.json; curator-verified ref exists on origin)",
         "git:origin/cycle/intel/32878215017/repro@c1543f80993bbe87e45f504f69694832df3f7587 (round-0 instrumentation: 18 files/+4166 lines under intel/experiments/unbrowse_ladder_multihost/; curator-verified ref exists on origin; later restored byte-exact into repair lineage per state/intel_reproduction.json RF-A_restore, 18/18 blob-hash verified)"
@@ -615,7 +615,7 @@
       "evidence_status": "AUDITED_DURABLE",
       "importance": "HIGH",
       "kind": "RESULT",
-      "summary": "TERMINAL GATE OF THE REPAIR CHAIN: round 2 re-submitted the byte-identical commit af164b9/tree 44cda5fd already rejected under runs 32864270667 and 32875577618 \u2014 all three cycles' team branches are literally the same commit object with unfilled commit-message template fields ('Runtime cycle\u2423\u2423repair\u2423\u2423attempt 1'). The escalation rule pre-committed in the round-1 gate fired verbatim; independent audit verdict: gate=BLOCKED, safe_to_integrate=false, delta_since_prior_audit_bytes=0, with C10 status FAILED_ZERO_DELTA ('none of RF1\u2013RF6 shows even an attempted edit'). Auditor reconfirmed live: R0 benc",
+      "summary": "TERMINAL GATE OF THE REPAIR CHAIN: round 2 re-submitted the byte-identical commit af164b9/tree 44cda5fd already rejected under runs 32864270667 and 32875577618 — all three cycles' team branches are literally the same commit object with unfilled commit-message template fields ('Runtime cycle␣␣repair␣␣attempt 1'). The escalation rule pre-committed in the round-1 gate fired verbatim; independent audit verdict: gate=BLOCKED, safe_to_integrate=false, delta_since_prior_audit_bytes=0, with C10 status FAILED_ZERO_DELTA ('none of RF1–RF6 shows even an attempted edit'). Auditor reconfirmed live: R0 benc",
       "durable_refs": [
         "git:origin/cycle/runtime/32877702179/team@af164b9c26cfb6df2a4a855f9238b02156edeaf3 (= team-attempt-1; curator-verified locally: SAME commit object as cycle/runtime/{32864270667,32875577618}/team, tree 44cda5fdbd4bcddd88a9baf38ce54460e8dcce1c; accepted base lab/runtime=7669dcd untouched)",
         "git:origin/cycle/runtime/32877702179/audit@4a12b79830716f777616c5ea2139674d0590864a (= audit-attempt-1): reports/audit/CYCLE_32877702179_RUNTIME.md + results/audit/CYCLE_32877702179_RUNTIME_GATE.json (gate=BLOCKED, safe_to_integrate=false, delta_since_prior_audit_bytes=0, recomputation_performed=true; curator read the full gate JSON from the branch during distillation)"
@@ -634,9 +634,9 @@
       "evidence_status": "AUDITED_DURABLE",
       "importance": "HIGH",
       "kind": "RESULT",
-      "summary": "Repair round 1 delivered ZERO DELTA and was re-issued REVISE by an independent audit that recomputed everything fresh: team branch tip af164b9 is the SAME git object already rejected under run 32864270667; no commit exists between accepted base 7669dcd and the team branch, so RF1\u2013RF6 are unaddressed by construction. Auditor's independent recomputation this session: work-compression claims NOT MEASURED (still no R0_TRACES.jsonl/R0_RESULTS.json/journals/overlay; ledger+handoff still 0 bytes); test suite 10 failed / 17 passed (identical failure set); resolver RF1 crash reproduced live on all five",
+      "summary": "Repair round 1 delivered ZERO DELTA and was re-issued REVISE by an independent audit that recomputed everything fresh: team branch tip af164b9 is the SAME git object already rejected under run 32864270667; no commit exists between accepted base 7669dcd and the team branch, so RF1–RF6 are unaddressed by construction. Auditor's independent recomputation this session: work-compression claims NOT MEASURED (still no R0_TRACES.jsonl/R0_RESULTS.json/journals/overlay; ledger+handoff still 0 bytes); test suite 10 failed / 17 passed (identical failure set); resolver RF1 crash reproduced live on all five",
       "durable_refs": [
-        "git:origin/cycle/runtime/32875577618/team@af164b9c26cfb6df2a4a855f9238b02156edeaf3 (= team-attempt-1; BYTE-IDENTICAL to rejected snapshot origin/cycle/runtime/32864270667/team and later to cycle/runtime/32877702179/team \u2014 curator-verified via ls-remote; accepted base lab/runtime=7669dcd untouched)",
+        "git:origin/cycle/runtime/32875577618/team@af164b9c26cfb6df2a4a855f9238b02156edeaf3 (= team-attempt-1; BYTE-IDENTICAL to rejected snapshot origin/cycle/runtime/32864270667/team and later to cycle/runtime/32877702179/team — curator-verified via ls-remote; accepted base lab/runtime=7669dcd untouched)",
         "git:origin/cycle/runtime/32875577618/audit@ea75ed9e4dc1db80c96988b834c458d06d36ed40 (= audit-attempt-1): reports/audit/CYCLE_32875577618_RUNTIME.md + results/audit/CYCLE_32875577618_RUNTIME_GATE.json (gate=REVISE, safe_to_integrate=false, recomputation_performed=true, escalation rule armed)"
       ],
       "route_to": [
@@ -652,9 +652,9 @@
       "evidence_status": "AUDITED_DURABLE",
       "importance": "HIGH",
       "kind": "RESULT",
-      "summary": "The auditor pre-committed an escalation rule in THIS run's gate: if the next repair round again submits an unchanged tree, the honest gate becomes BLOCKED (external/orchestration decision), not a third fix-list copy. Cross-run verification (curator, from Git): round 2 (run 32877702179) resubmitted the byte-identical af164b9/tree 44cda5fd and the round-2 audit gate is indeed BLOCKED with delta_since_prior_audit_bytes=0, citing exactly this escalation rule. Net effect of repair rounds 1\u20132 combined: two full lane dispatches consumed, zero code changes, lane still at REVISE-state scaffolding until",
+      "summary": "The auditor pre-committed an escalation rule in THIS run's gate: if the next repair round again submits an unchanged tree, the honest gate becomes BLOCKED (external/orchestration decision), not a third fix-list copy. Cross-run verification (curator, from Git): round 2 (run 32877702179) resubmitted the byte-identical af164b9/tree 44cda5fd and the round-2 audit gate is indeed BLOCKED with delta_since_prior_audit_bytes=0, citing exactly this escalation rule. Net effect of repair rounds 1–2 combined: two full lane dispatches consumed, zero code changes, lane still at REVISE-state scaffolding until",
       "durable_refs": [
-        "git:origin/cycle/runtime/32875577618/team@af164b9c26cfb6df2a4a855f9238b02156edeaf3 (= team-attempt-1; BYTE-IDENTICAL to rejected snapshot origin/cycle/runtime/32864270667/team and later to cycle/runtime/32877702179/team \u2014 curator-verified via ls-remote; accepted base lab/runtime=7669dcd untouched)",
+        "git:origin/cycle/runtime/32875577618/team@af164b9c26cfb6df2a4a855f9238b02156edeaf3 (= team-attempt-1; BYTE-IDENTICAL to rejected snapshot origin/cycle/runtime/32864270667/team and later to cycle/runtime/32877702179/team — curator-verified via ls-remote; accepted base lab/runtime=7669dcd untouched)",
         "git:origin/cycle/runtime/32875577618/audit@ea75ed9e4dc1db80c96988b834c458d06d36ed40 (= audit-attempt-1): reports/audit/CYCLE_32875577618_RUNTIME.md + results/audit/CYCLE_32875577618_RUNTIME_GATE.json (gate=REVISE, safe_to_integrate=false, recomputation_performed=true, escalation rule armed)"
       ],
       "route_to": [
@@ -727,7 +727,7 @@
       "evidence_status": "DURABLE_UNAUDITED",
       "importance": "HIGH",
       "kind": "NEGATIVE",
-      "summary": "D2 ATTRIBUTION DIAGNOSTIC FIRED HERE FIRST (origin of the SGDR-fused front-door negative later re-derived by run 32886859788): retrieval@1 over the real built KB on the 8 trained-coverage panel tasks = stacked SGDR(\u03b1=0.4 state-summary)\u2295V31 front door 3/8 < primitive lexical scorer 7/8 < V31-canonicalized desc-only ranking 8/8 (ground truth = producer-provenance fragment ids, training-side). The one sanctioned assembly/plumbing repair round found NO defect (seams S1-S6 pass; vendored-scorer fixture reproduces Intel's numbers exactly: 25/74, 25/74, 36/74, 11 wins/0 reversals; V31 fixture 6/8 wit",
+      "summary": "D2 ATTRIBUTION DIAGNOSTIC FIRED HERE FIRST (origin of the SGDR-fused front-door negative later re-derived by run 32886859788): retrieval@1 over the real built KB on the 8 trained-coverage panel tasks = stacked SGDR(α=0.4 state-summary)⊕V31 front door 3/8 < primitive lexical scorer 7/8 < V31-canonicalized desc-only ranking 8/8 (ground truth = producer-provenance fragment ids, training-side). The one sanctioned assembly/plumbing repair round found NO defect (seams S1-S6 pass; vendored-scorer fixture reproduces Intel's numbers exactly: 25/74, 25/74, 36/74, 11 wins/0 reversals; V31 fixture 6/8 wit",
       "durable_refs": [
         "git:origin/lab/product@ad25538 ('Product Director synthesis 32870361258' = rev-5 re-auth persist; parent of F0)",
         "git:origin/lab/product@86b0102 + tag pb001-F0 ('F0: integrate marooned frozen prereg v2 tree (1457fd3) UNCHANGED into lab/product')"
@@ -746,10 +746,10 @@
       "evidence_status": "AUDITED_DURABLE",
       "importance": "HIGH",
       "kind": "RESULT",
-      "summary": "WP-006 CLOSED as FALSIFIED and ACCEPTED into lab/physics, ending a four-run integration gap. Team discovered that successor chain 32776372437 \u2192 32793165981 \u2192 32799587656 \u2192 32860596387 had already executed the H-ID identifiability-by-restart gate on live websites with FOUR consecutive audits certifying safe_to_integrate=true, yet no Lane Director ever integrated it (accepted base remained d3afd9b) \u2014 exactly the operational failure the steering note anticipated ('two succession dispatches died operationally at this step', log-only). This run repaired transmission (bit-exact carry, audit PASS as ",
+      "summary": "WP-006 CLOSED as FALSIFIED and ACCEPTED into lab/physics, ending a four-run integration gap. Team discovered that successor chain 32776372437 → 32793165981 → 32799587656 → 32860596387 had already executed the H-ID identifiability-by-restart gate on live websites with FOUR consecutive audits certifying safe_to_integrate=true, yet no Lane Director ever integrated it (accepted base remained d3afd9b) — exactly the operational failure the steering note anticipated ('two succession dispatches died operationally at this step', log-only). This run repaired transmission (bit-exact carry, audit PASS as ",
       "durable_refs": [
-        "git:origin/cycle/physics/32866107906/team@38e697b86988c98c2aeac6c40d07e569ddd80cf0 \u2014 WP-006 terminal stewardship & integration handoff: bit-exact carry commit 91eff06 (23 WP-006 scientific files blob-verified vs certified snapshot 45fa5db; dataset blob unchanged since original result commit 8d84196), separate control-plane sync commit f64848b (67 paths byte-identical to main 92192ea), purely additive ledger (+112/-0 vs d3afd9b), fresh-env verification + ONE new descriptive exhibit + terminal Director decision package",
-        "git:origin/cycle/physics/32866107906/audit@7000c800fde031491b8236a096dd0f107a1b6b2c \u2014 CYCLE_32866107906_PHYSICS_GATE.json gate=PASS/safe_to_integrate=true/required_fixes=[] (curator re-verified reachable on remote)"
+        "git:origin/cycle/physics/32866107906/team@38e697b86988c98c2aeac6c40d07e569ddd80cf0 — WP-006 terminal stewardship & integration handoff: bit-exact carry commit 91eff06 (23 WP-006 scientific files blob-verified vs certified snapshot 45fa5db; dataset blob unchanged since original result commit 8d84196), separate control-plane sync commit f64848b (67 paths byte-identical to main 92192ea), purely additive ledger (+112/-0 vs d3afd9b), fresh-env verification + ONE new descriptive exhibit + terminal Director decision package",
+        "git:origin/cycle/physics/32866107906/audit@7000c800fde031491b8236a096dd0f107a1b6b2c — CYCLE_32866107906_PHYSICS_GATE.json gate=PASS/safe_to_integrate=true/required_fixes=[] (curator re-verified reachable on remote)"
       ],
       "route_to": [
         "PHYSICS",
@@ -766,8 +766,8 @@
       "kind": "RESULT",
       "summary": "Accepted WP-006 measurement (auditor independently recomputed every headline from committed rows with throwaway code): dataset wp006_v1 = 1075 rows (1+164+910); 704 valid / 206 invalid (action_failed 171, exception 22, state_match 13); verified matched branch points books 12 / quotes 12 / saucedemo 7 / parabank 5 / internet 2 = 38 < frozen floor 60; producer sites {books, quotes} = 2 < floor 4; 8 sites attempted spanning static+stateful; T2 determinism 101/102 cells (descriptive-only); FN double-reset control 67/74 with openlibrary 5/12. Frozen verifier rerun unmodified returns PASS=true / own",
       "durable_refs": [
-        "git:origin/cycle/physics/32866107906/team@38e697b86988c98c2aeac6c40d07e569ddd80cf0 \u2014 WP-006 terminal stewardship & integration handoff: bit-exact carry commit 91eff06 (23 WP-006 scientific files blob-verified vs certified snapshot 45fa5db; dataset blob unchanged since original result commit 8d84196), separate control-plane sync commit f64848b (67 paths byte-identical to main 92192ea), purely additive ledger (+112/-0 vs d3afd9b), fresh-env verification + ONE new descriptive exhibit + terminal Director decision package",
-        "git:origin/cycle/physics/32866107906/audit@7000c800fde031491b8236a096dd0f107a1b6b2c \u2014 CYCLE_32866107906_PHYSICS_GATE.json gate=PASS/safe_to_integrate=true/required_fixes=[] (curator re-verified reachable on remote)"
+        "git:origin/cycle/physics/32866107906/team@38e697b86988c98c2aeac6c40d07e569ddd80cf0 — WP-006 terminal stewardship & integration handoff: bit-exact carry commit 91eff06 (23 WP-006 scientific files blob-verified vs certified snapshot 45fa5db; dataset blob unchanged since original result commit 8d84196), separate control-plane sync commit f64848b (67 paths byte-identical to main 92192ea), purely additive ledger (+112/-0 vs d3afd9b), fresh-env verification + ONE new descriptive exhibit + terminal Director decision package",
+        "git:origin/cycle/physics/32866107906/audit@7000c800fde031491b8236a096dd0f107a1b6b2c — CYCLE_32866107906_PHYSICS_GATE.json gate=PASS/safe_to_integrate=true/required_fixes=[] (curator re-verified reachable on remote)"
       ],
       "route_to": [
         "PHYSICS"
@@ -781,10 +781,10 @@
       "evidence_status": "OPERATIONAL_DIAGNOSTIC",
       "importance": "HIGH",
       "kind": "ANOMALY",
-      "summary": "MAROONED DIRECTOR DECISION (provenance incident, curator Git-verified): the fifth Director session committed its PB-001 rev-5 re-authorization locally as c875c47 (5 Product-scoped files: state/product_direction.json beta_launch=true + product_beta_request.json rev 5 + results/product/PRODUCT_HYPOTHESES.json + docs/PRODUCT_LEDGER.md +92 lines + docs/PRODUCT_ARCHITECTURE_HYPOTHESES.md) plus workflow persist commit d834791 \u2014 but the final `git push origin HEAD:refs/heads/lab/product` was REJECTED non-fast-forward (remote tip had advanced), the job exited 1, and ALL downstream jobs were skipped. V",
+      "summary": "MAROONED DIRECTOR DECISION (provenance incident, curator Git-verified): the fifth Director session committed its PB-001 rev-5 re-authorization locally as c875c47 (5 Product-scoped files: state/product_direction.json beta_launch=true + product_beta_request.json rev 5 + results/product/PRODUCT_HYPOTHESES.json + docs/PRODUCT_LEDGER.md +92 lines + docs/PRODUCT_ARCHITECTURE_HYPOTHESES.md) plus workflow persist commit d834791 — but the final `git push origin HEAD:refs/heads/lab/product` was REJECTED non-fast-forward (remote tip had advanced), the job exited 1, and ALL downstream jobs were skipped. V",
       "durable_refs": [
-        "git:origin/lab/product@8f3980c 'infra: hotfix Product runner to current non-destructive control plane' \u2014 the pre-staged infra set visible in this run's index eventually landed on lab/product via a later cycle (visible as ancestor in lab/product history)",
-        "git:origin/lab/product history ad25538 ('Product Director synthesis 32870361258') \u2192 86b0102 (F0 marooned-prereg recovery) \u2192 86a59ec (rev 6) \u2192 e84b11c (rev 7): later sessions re-derived and superseded this session's authorization; current state/product_direction.json has beta_launch=true, beta_request_revision=7 (curator-verified)"
+        "git:origin/lab/product@8f3980c 'infra: hotfix Product runner to current non-destructive control plane' — the pre-staged infra set visible in this run's index eventually landed on lab/product via a later cycle (visible as ancestor in lab/product history)",
+        "git:origin/lab/product history ad25538 ('Product Director synthesis 32870361258') → 86b0102 (F0 marooned-prereg recovery) → 86a59ec (rev 6) → e84b11c (rev 7): later sessions re-derived and superseded this session's authorization; current state/product_direction.json has beta_launch=true, beta_request_revision=7 (curator-verified)"
       ],
       "route_to": [
         "CTO",
@@ -800,10 +800,10 @@
       "evidence_status": "LOG_ONLY_UNAUDITED",
       "importance": "HIGH",
       "kind": "OTHER",
-      "summary": "Decision content of the marooned session (recoverable from log only): PB-001 re-authorized as the single Product Beta at request revision 5 after a contract-mandated FOUR-CRITIC fresh-context challenge executed PRE-OUTCOME (verdict: no fatal flaw). Convergent hardening codified as directed_pre_outcome_revision_v3 \u2014 V3-A: B0 pinned to current-release default grounding; V3-B: B1 deduped/embedder-scored/compressed within same token cap (anti-strawman); V3-C: both-solved pairing definition, stricter full-set reading governs; V3-D: prompt-cache separation + Phase-A producer-cost amortization disclo",
+      "summary": "Decision content of the marooned session (recoverable from log only): PB-001 re-authorized as the single Product Beta at request revision 5 after a contract-mandated FOUR-CRITIC fresh-context challenge executed PRE-OUTCOME (verdict: no fatal flaw). Convergent hardening codified as directed_pre_outcome_revision_v3 — V3-A: B0 pinned to current-release default grounding; V3-B: B1 deduped/embedder-scored/compressed within same token cap (anti-strawman); V3-C: both-solved pairing definition, stricter full-set reading governs; V3-D: prompt-cache separation + Phase-A producer-cost amortization disclo",
       "durable_refs": [
-        "git:origin/lab/product@8f3980c 'infra: hotfix Product runner to current non-destructive control plane' \u2014 the pre-staged infra set visible in this run's index eventually landed on lab/product via a later cycle (visible as ancestor in lab/product history)",
-        "git:origin/lab/product history ad25538 ('Product Director synthesis 32870361258') \u2192 86b0102 (F0 marooned-prereg recovery) \u2192 86a59ec (rev 6) \u2192 e84b11c (rev 7): later sessions re-derived and superseded this session's authorization; current state/product_direction.json has beta_launch=true, beta_request_revision=7 (curator-verified)"
+        "git:origin/lab/product@8f3980c 'infra: hotfix Product runner to current non-destructive control plane' — the pre-staged infra set visible in this run's index eventually landed on lab/product via a later cycle (visible as ancestor in lab/product history)",
+        "git:origin/lab/product history ad25538 ('Product Director synthesis 32870361258') → 86b0102 (F0 marooned-prereg recovery) → 86a59ec (rev 6) → e84b11c (rev 7): later sessions re-derived and superseded this session's authorization; current state/product_direction.json has beta_launch=true, beta_request_revision=7 (curator-verified)"
       ],
       "route_to": [
         "PRODUCT",
@@ -896,7 +896,7 @@
       "summary": "Cross-lane inheritance executed same-day (positive process observation): the Director folded Intel's audited SGDR result (gate PASS run 32800296360) into PB-001 as a validated building block WITH binding travel limits quoted verbatim (PoC tier; advantage only vs task-only retrieval in the natural-language-consumer regime; exact signatures remain more action-efficient where they exist 21 vs 39 novel; no login/pager claim; WebArena numbers forbidden; clean-room lineage only), restated assumption A2 around it (end-to-end fused scoring inside the product loop, V31 retained as preprocessing equipme",
       "durable_refs": [
         "git:origin/lab/product@1ecb1b8947b1111dd44ee6b2a85e4ff75b45b92b (Director synthesis 32820217763: state/product_beta_request.json rev2 with revision_note + directed_pre_outcome_revision_v2, state/product_direction.json beta_launch=true session 'product-director-second-session', docs/PRODUCT_LEDGER.md, docs/PRODUCT_ARCHITECTURE_HYPOTHESES.md, results/product/PRODUCT_HYPOTHESES.json)",
-        "git:origin/cycle/product/32820217763/architect@1ecb1b8947b1111dd44ee6b2a85e4ff75b45b92b (EMPTY snapshot: identical to lab/product tip at push time; 'nothing to commit' \u2014 provenance only)"
+        "git:origin/cycle/product/32820217763/architect@1ecb1b8947b1111dd44ee6b2a85e4ff75b45b92b (EMPTY snapshot: identical to lab/product tip at push time; 'nothing to commit' — provenance only)"
       ],
       "route_to": [
         "PRODUCT",
@@ -915,7 +915,7 @@
       "summary": "Bounded pre-outcome architecture revision directed (constitutionally clean per master prompt section 19 since NO Phase-A/B outcome exists anywhere): single semantic change = replace the SPIDER arm's whole-goal candidate SCORING layer with SGDR-style fused ranking alpha*cos(task_goal_embedding, description) + (1-alpha)*cos(current_state_summary_embedding, description), alpha=0.4, pool top-M=max(3k,20), greedy MMR lambda=0.7, degrade-to-primitives on weak match per unchanged UNKNOWN thresholds; deterministic contract-faithful summarizer harness-side and cost-counted; lexical-hash embedder mandat",
       "durable_refs": [
         "git:origin/lab/product@1ecb1b8947b1111dd44ee6b2a85e4ff75b45b92b (Director synthesis 32820217763: state/product_beta_request.json rev2 with revision_note + directed_pre_outcome_revision_v2, state/product_direction.json beta_launch=true session 'product-director-second-session', docs/PRODUCT_LEDGER.md, docs/PRODUCT_ARCHITECTURE_HYPOTHESES.md, results/product/PRODUCT_HYPOTHESES.json)",
-        "git:origin/cycle/product/32820217763/architect@1ecb1b8947b1111dd44ee6b2a85e4ff75b45b92b (EMPTY snapshot: identical to lab/product tip at push time; 'nothing to commit' \u2014 provenance only)"
+        "git:origin/cycle/product/32820217763/architect@1ecb1b8947b1111dd44ee6b2a85e4ff75b45b92b (EMPTY snapshot: identical to lab/product tip at push time; 'nothing to commit' — provenance only)"
       ],
       "route_to": [
         "PRODUCT",
@@ -952,7 +952,7 @@
       "summary": "SGDR mechanism FINAL STATUS (unchanged from twice-recomputed round-1 evidence, now independently re-gated): REPRODUCED_USEFUL / VALIDATED_USEFUL at PROOF OF CONCEPT ceiling. Binding maximum-defensible wording (from the delivered state file): SGDR-style stepwise retrieval scored by alpha*cos(task_goal, desc) + (1-alpha)*cos(current_state_summary, desc), pool top-M=max(3k,20), greedy MMR lambda=0.7 retrieved executable-correct fragments strictly more often than task-text-only retrieval with identical reranking under paraphrased goals + shifted entry contexts (36/74 vs 25/74 correct@1; 11 paired ",
       "durable_refs": [
         "git:origin/lab/intel@fca0acb (Director integration 'accept audited SGDR state-grounded retrieval (VALIDATED_USEFUL, PoC ceiling)'; parents ecce2a7 audit-gate integration, ef9de0e repro integration, 2b2089b scout integration, da78065 control-plane sync provenance commit)",
-        "git:origin/cycle/intel/32800296360/audit@cac8b1338aa864660c7c27d0c130d652a0b203a2 (results/intel/audit/CYCLE_32800296360_INTEL_GATE.json gate=PASS safe_to_integrate=true; results/intel/audit/CYCLE_32800296360_ablation_rederive.py \u2014 auditor's own ablation rederivation)"
+        "git:origin/cycle/intel/32800296360/audit@cac8b1338aa864660c7c27d0c130d652a0b203a2 (results/intel/audit/CYCLE_32800296360_INTEL_GATE.json gate=PASS safe_to_integrate=true; results/intel/audit/CYCLE_32800296360_ablation_rederive.py — auditor's own ablation rederivation)"
       ],
       "route_to": [
         "INTEL",
@@ -972,7 +972,7 @@
       "summary": "Repair-round-3 delivery mechanics (RF-A..RF-E all closed): RF-A restored all round-1 paths byte-exact from commit 1e51a5c with sha256sum -c verified 18/18 BEFORE any edit and re-verified in-tree; RF-B replaced the constant-dummy-text clause with the stable-controls sentence ('constant-text fusion controls are not stable under the lexical-hash embedder (19-36/74 depending on string) and are not cited as evidence') in report section-2 erratum + state honest_caveats[2]; RF-C restated cost footnote to 'approx. 12-13 would-be LLM calls total; exact split unreconciled at artifact level (11 collectio",
       "durable_refs": [
         "git:origin/lab/intel@fca0acb (Director integration 'accept audited SGDR state-grounded retrieval (VALIDATED_USEFUL, PoC ceiling)'; parents ecce2a7 audit-gate integration, ef9de0e repro integration, 2b2089b scout integration, da78065 control-plane sync provenance commit)",
-        "git:origin/cycle/intel/32800296360/audit@cac8b1338aa864660c7c27d0c130d652a0b203a2 (results/intel/audit/CYCLE_32800296360_INTEL_GATE.json gate=PASS safe_to_integrate=true; results/intel/audit/CYCLE_32800296360_ablation_rederive.py \u2014 auditor's own ablation rederivation)"
+        "git:origin/cycle/intel/32800296360/audit@cac8b1338aa864660c7c27d0c130d652a0b203a2 (results/intel/audit/CYCLE_32800296360_INTEL_GATE.json gate=PASS safe_to_integrate=true; results/intel/audit/CYCLE_32800296360_ablation_rederive.py — auditor's own ablation rederivation)"
       ],
       "route_to": [
         "INTEL",
@@ -990,7 +990,7 @@
       "summary": "Team verdict discipline held under temptation: with directives/PHYSICS.md pre-declaring 'H-ID FALSIFIED => lane terminates at next Director step' and lab/physics still at d3afd9b with zero WP-006 evidence (the 32793165981 PASS audit was never Director-integrated), the team explicitly declined to launch new collection ('that would manufacture exactly the rescue program the frozen stop rule forbids') and instead performed stewardship: 19 scientific files carried BIT-EXACT from cycle/physics/32793165981/team (per-file git blob hash verification); dataset sha256 fafd1cef46bb6b25...149397 matches m",
       "durable_refs": [
         "git:origin/cycle/physics/32799587656/team@45fa5db415494dcc23f065f9fb4083e191668de1 (+ team-attempt-1; scientific content commit 2f2b84e: reports/physics/wp006_carryforward_run32799587656.md, physics/make_wp006_verification_v3.py, results/physics/wp006_verification_v3.json + 20 bit-exact carried WP-006 files)",
-        "git:origin/cycle/physics/32799587656/audit@9acccb12b7f60d4e0605d7991a8b22204f841252 (+ audit-attempt-1): reports/audit/CYCLE_32799587656_PHYSICS.md (201 lines) + results/audit/CYCLE_32799587656_PHYSICS_GATE.json \u2014 gate=PASS, safe_to_integrate=true, required_fixes=[] (commit authored 2026-08-25T03:12:03Z by attempt 1)"
+        "git:origin/cycle/physics/32799587656/audit@9acccb12b7f60d4e0605d7991a8b22204f841252 (+ audit-attempt-1): reports/audit/CYCLE_32799587656_PHYSICS.md (201 lines) + results/audit/CYCLE_32799587656_PHYSICS_GATE.json — gate=PASS, safe_to_integrate=true, required_fixes=[] (commit authored 2026-08-25T03:12:03Z by attempt 1)"
       ],
       "route_to": [
         "PHYSICS",
@@ -1008,7 +1008,7 @@
       "summary": "The independent audit of this carryforward COMPLETED AND PASSED on attempt 1 (commit time 03:12:03Z, before the attempt-2 job that the log records): gate=PASS, safe_to_integrate=true, required_fixes=[], audit_verdict_on_measurement='VALID_FOR_CURRENT_TEST for all claims made by this snapshot'. The auditor independently reproduced every headline number from committed rows (throwaway code importing nothing from team modules), verified tree diff vs the audited snapshot is exactly three additive files / zero modifications, verified prereg freeze aba6858 (2026-08-24T21:30:49Z) predates all 1075 row",
       "durable_refs": [
         "git:origin/cycle/physics/32799587656/team@45fa5db415494dcc23f065f9fb4083e191668de1 (+ team-attempt-1; scientific content commit 2f2b84e: reports/physics/wp006_carryforward_run32799587656.md, physics/make_wp006_verification_v3.py, results/physics/wp006_verification_v3.json + 20 bit-exact carried WP-006 files)",
-        "git:origin/cycle/physics/32799587656/audit@9acccb12b7f60d4e0605d7991a8b22204f841252 (+ audit-attempt-1): reports/audit/CYCLE_32799587656_PHYSICS.md (201 lines) + results/audit/CYCLE_32799587656_PHYSICS_GATE.json \u2014 gate=PASS, safe_to_integrate=true, required_fixes=[] (commit authored 2026-08-25T03:12:03Z by attempt 1)"
+        "git:origin/cycle/physics/32799587656/audit@9acccb12b7f60d4e0605d7991a8b22204f841252 (+ audit-attempt-1): reports/audit/CYCLE_32799587656_PHYSICS.md (201 lines) + results/audit/CYCLE_32799587656_PHYSICS_GATE.json — gate=PASS, safe_to_integrate=true, required_fixes=[] (commit authored 2026-08-25T03:12:03Z by attempt 1)"
       ],
       "route_to": [
         "PHYSICS",
@@ -1080,10 +1080,10 @@
       "evidence_status": "AUDITED_DURABLE",
       "importance": "HIGH",
       "kind": "RESULT",
-      "summary": "Program graph-inheritance-scaling cycle 1 (succession from director d41fe9b): question \u2014 as required distinct-fragment chain depth grows past the accepted frontier (>3), does inherited knowledge keep paying (memory-led success, reused>novel actions at depth >=4 under fragment and graphiter policies with V31 standard equipment) or collapse against cold/reference baselines? Team froze the full instrument set before outcomes: composites D2Q (verbatim C2 control)/D3B/D4B/D4Q/D5Q with anchored predicates and carryover-safe region logic, frozen V31 edge-equipment mapping with identical rng consumpti",
+      "summary": "Program graph-inheritance-scaling cycle 1 (succession from director d41fe9b): question — as required distinct-fragment chain depth grows past the accepted frontier (>3), does inherited knowledge keep paying (memory-led success, reused>novel actions at depth >=4 under fragment and graphiter policies with V31 standard equipment) or collapse against cold/reference baselines? Team froze the full instrument set before outcomes: composites D2Q (verbatim C2 control)/D3B/D4B/D4Q/D5Q with anchored predicates and carryover-safe region logic, frozen V31 edge-equipment mapping with identical rng consumpti",
       "durable_refs": [
-        "git:origin/cycle/graph/32793580374/team@c952569ed588470213e955728d7d436fd72e6053 (frozen scaling instruments + growth outcomes; freeze chain prereg a1d52fc \u2192 instruments cbd0495 \u2192 pre-outcome code 6105fcc (01:16:10Z) \u2192 growth outcomes ~01:17\u201301:23:56Z \u2192 artifacts c952569)",
-        "git:origin/cycle/graph/32793580374/audit@3520df27453f38f250a41fed19246c9876c35ac3 (+ attempts 1\u20138; reports/audit/CYCLE_32793580374_GRAPH.md + results/audit/CYCLE_32793580374_GRAPH_GATE.json gate=REVISE safe_to_integrate=false required_fixes=RF-1..RF-6)"
+        "git:origin/cycle/graph/32793580374/team@c952569ed588470213e955728d7d436fd72e6053 (frozen scaling instruments + growth outcomes; freeze chain prereg a1d52fc → instruments cbd0495 → pre-outcome code 6105fcc (01:16:10Z) → growth outcomes ~01:17–01:23:56Z → artifacts c952569)",
+        "git:origin/cycle/graph/32793580374/audit@3520df27453f38f250a41fed19246c9876c35ac3 (+ attempts 1–8; reports/audit/CYCLE_32793580374_GRAPH.md + results/audit/CYCLE_32793580374_GRAPH_GATE.json gate=REVISE safe_to_integrate=false required_fixes=RF-1..RF-6)"
       ],
       "route_to": [
         "GRAPH",
@@ -1098,10 +1098,10 @@
       "evidence_status": "AUDITED_DURABLE",
       "importance": "HIGH",
       "kind": "NEGATIVE",
-      "summary": "Decisive auditor finding F5: the preregistered P2 confirmation batch (60 rows) never ran, nor did s7 dry diagnostics, s9 analysis script, s10 report or scaling_MANIFEST.json \u2014 the snapshot is an unfinished cycle with no depth-scaling claim either way. Supporting defects: F1 the binding G1 gate was computed over empty input (driver defines subgoal_ends telemetry but never wires subgoal_hook into the Explorer constructor, so 'gates_pass': true was vacuous \u2014 property itself true when recomputed from raw markers); F2 rebuild_scaling.py crashes on any use (SQL bindings mismatch; raw_json slot hardc",
+      "summary": "Decisive auditor finding F5: the preregistered P2 confirmation batch (60 rows) never ran, nor did s7 dry diagnostics, s9 analysis script, s10 report or scaling_MANIFEST.json — the snapshot is an unfinished cycle with no depth-scaling claim either way. Supporting defects: F1 the binding G1 gate was computed over empty input (driver defines subgoal_ends telemetry but never wires subgoal_hook into the Explorer constructor, so 'gates_pass': true was vacuous — property itself true when recomputed from raw markers); F2 rebuild_scaling.py crashes on any use (SQL bindings mismatch; raw_json slot hardc",
       "durable_refs": [
-        "git:origin/cycle/graph/32793580374/team@c952569ed588470213e955728d7d436fd72e6053 (frozen scaling instruments + growth outcomes; freeze chain prereg a1d52fc \u2192 instruments cbd0495 \u2192 pre-outcome code 6105fcc (01:16:10Z) \u2192 growth outcomes ~01:17\u201301:23:56Z \u2192 artifacts c952569)",
-        "git:origin/cycle/graph/32793580374/audit@3520df27453f38f250a41fed19246c9876c35ac3 (+ attempts 1\u20138; reports/audit/CYCLE_32793580374_GRAPH.md + results/audit/CYCLE_32793580374_GRAPH_GATE.json gate=REVISE safe_to_integrate=false required_fixes=RF-1..RF-6)"
+        "git:origin/cycle/graph/32793580374/team@c952569ed588470213e955728d7d436fd72e6053 (frozen scaling instruments + growth outcomes; freeze chain prereg a1d52fc → instruments cbd0495 → pre-outcome code 6105fcc (01:16:10Z) → growth outcomes ~01:17–01:23:56Z → artifacts c952569)",
+        "git:origin/cycle/graph/32793580374/audit@3520df27453f38f250a41fed19246c9876c35ac3 (+ attempts 1–8; reports/audit/CYCLE_32793580374_GRAPH.md + results/audit/CYCLE_32793580374_GRAPH_GATE.json gate=REVISE safe_to_integrate=false required_fixes=RF-1..RF-6)"
       ],
       "route_to": [
         "GRAPH",
@@ -1116,7 +1116,7 @@
       "evidence_status": "AUDITED_DURABLE",
       "importance": "HIGH",
       "kind": "RESULT",
-      "summary": "WP-006 repair round 1 closed all five required fixes with independent recomputation, leaving the primary FALSIFIED verdict untouched. RF1: FN double-reset control recomputed from raw calibration rows across ALL sites including manifest-less openlibrary \u2014 corpus 67/74 (FN rate 9.46%), openlibrary 5/12, static core 48/48, stateful 14/14. Notable adjudication: the team showed the PRIOR audit's own headline '62 pass/74' was internally inconsistent (its per-site table sums to 67/74, which raw rows confirm); correction recorded against the predecessor's text. RF2: report+ledger errata purely additiv",
+      "summary": "WP-006 repair round 1 closed all five required fixes with independent recomputation, leaving the primary FALSIFIED verdict untouched. RF1: FN double-reset control recomputed from raw calibration rows across ALL sites including manifest-less openlibrary — corpus 67/74 (FN rate 9.46%), openlibrary 5/12, static core 48/48, stateful 14/14. Notable adjudication: the team showed the PRIOR audit's own headline '62 pass/74' was internally inconsistent (its per-site table sums to 67/74, which raw rows confirm); correction recorded against the predecessor's text. RF2: report+ledger errata purely additiv",
       "durable_refs": [
         "git:origin/cycle/physics/32793165981/team@07eac1dc8005ef63815259e7a3f658eb9fd6abc9 (repair tree: additive errata in reports/physics/wp006_report.md + docs/PHYSICS_LEDGER.md; results/physics/wp006_fn_control_corrected.json, wp006_results_v2_amended.json, wp006_verification_v2.json; physics/verify_wp006.py extended per RF3; physics/fn_control_wp006_v2.py)",
         "git:origin/cycle/physics/32793165981/audit@dd1e6888f0d793d367d38195c732bb1d8aab3d34 (= attempt-1; reports/audit/CYCLE_32793165981_PHYSICS.md + results/audit/CYCLE_32793165981_PHYSICS_GATE.json gate=PASS safe_to_integrate=true required_fixes=[]; commit also carries the workflow-pre-staged control-plane sync set via git add -A)"
@@ -1133,7 +1133,7 @@
       "evidence_status": "AUDITED_DURABLE",
       "importance": "HIGH",
       "kind": "RESULT",
-      "summary": "SGDR repair round 1 verifiably closed the prior audit's R1\u2013R3 without weakening the preregistered test: git diff between round-0 and round-1 commits is empty over all experiment code and raw evidence; 18-file SHA256 manifest verifies with hash deltas matching the attestation exactly (6/10 frozen, 4 drifted, each with a disclosed pre-outcome bugfix annotation; pre-change bytes declared unrecoverable); prereg byte-identical above its declared erratum separator; R3 canonical URL corrected to https://github.com/plusnli/online-skill-learning (repository rename verified live by the auditor; supersed",
+      "summary": "SGDR repair round 1 verifiably closed the prior audit's R1–R3 without weakening the preregistered test: git diff between round-0 and round-1 commits is empty over all experiment code and raw evidence; 18-file SHA256 manifest verifies with hash deltas matching the attestation exactly (6/10 frozen, 4 drifted, each with a disclosed pre-outcome bugfix annotation; pre-change bytes declared unrecoverable); prereg byte-identical above its declared erratum separator; R3 canonical URL corrected to https://github.com/plusnli/online-skill-learning (repository rename verified live by the auditor; supersed",
       "durable_refs": [
         "git:origin/cycle/intel/32792931901/repro@1e51a5c710e8a3c270c45ffa836330293ec81b20 (repair-round-1 tree: sgdr_repro package byte-identical to round 0, prereg with R3 erratum appendix, report corrections, attested SHA256 deltas)",
         "git:origin/cycle/intel/32792931901/audit@099c6775e6c88fde8ca93794dbedb3603ca643e1 (reports/intel/audit/cycle1_run32792931901_INTEL_AUDIT.md + results/intel/audit/CYCLE_32792931901_INTEL_GATE.json gate=REVISE mechanism_status=VALIDATED_USEFUL + preserved CYCLE_32792931901_independent_recompute.py and _ablation_robustness_scan.py)"
@@ -1150,7 +1150,7 @@
       "evidence_status": "AUDITED_DURABLE",
       "importance": "HIGH",
       "kind": "RESULT",
-      "summary": "Measurement re-confirmed end-to-end from raw evidence at this round: hard-slice correct@1 = incumbent goal_sig 0/74 vs task-only 25/74 vs fused SGDR 36/74 with 11\u20130 pairwise dominance; conversion novel actions 21/42/39 (literal) and 400/42/36 (paraphrase) at success thresholds .60/.80/.90. Frozen rule outcome REPRODUCED_USEFUL with per-slice caveat correctly disclosed. Mechanism status carried as VALIDATED_USEFUL at PROOF OF CONCEPT tier; gate REVISE only for documentary defects below. Final acceptance into lab/intel is already captured elsewhere (run 32800296360 / fca0acb).",
+      "summary": "Measurement re-confirmed end-to-end from raw evidence at this round: hard-slice correct@1 = incumbent goal_sig 0/74 vs task-only 25/74 vs fused SGDR 36/74 with 11–0 pairwise dominance; conversion novel actions 21/42/39 (literal) and 400/42/36 (paraphrase) at success thresholds .60/.80/.90. Frozen rule outcome REPRODUCED_USEFUL with per-slice caveat correctly disclosed. Mechanism status carried as VALIDATED_USEFUL at PROOF OF CONCEPT tier; gate REVISE only for documentary defects below. Final acceptance into lab/intel is already captured elsewhere (run 32800296360 / fca0acb).",
       "durable_refs": [
         "git:origin/cycle/intel/32792931901/repro@1e51a5c710e8a3c270c45ffa836330293ec81b20 (repair-round-1 tree: sgdr_repro package byte-identical to round 0, prereg with R3 erratum appendix, report corrections, attested SHA256 deltas)",
         "git:origin/cycle/intel/32792931901/audit@099c6775e6c88fde8ca93794dbedb3603ca643e1 (reports/intel/audit/cycle1_run32792931901_INTEL_AUDIT.md + results/intel/audit/CYCLE_32792931901_INTEL_GATE.json gate=REVISE mechanism_status=VALIDATED_USEFUL + preserved CYCLE_32792931901_independent_recompute.py and _ablation_robustness_scan.py)"
@@ -1169,7 +1169,7 @@
       "evidence_status": "AUDITED_DURABLE",
       "importance": "HIGH",
       "kind": "RESULT",
-      "summary": "Program graph-addressing-robustness answered SUCCESS per directive bar for preregistered family 1. Offline: closed 13-arm descriptor/query family scored against the frozen cycle-3 KB dump; reference arm V00 byte-reproduced the committed cycle-3 dry table 20/20 rows incl. the frozen 2/8 paraphrase baseline; cross-process determinism verified (PYTHONHASHSEED 1 vs 7 byte-identical); best arm V31 (d3_pagelist+q1_canon) 6/8 positives-only, 0/2 false accepts \u22655/8 bar. Live (decisive): all 3 mechanically selected verdict-changing fresh-paraphrase probes memory-solved from restored frozen KB under V31",
+      "summary": "Program graph-addressing-robustness answered SUCCESS per directive bar for preregistered family 1. Offline: closed 13-arm descriptor/query family scored against the frozen cycle-3 KB dump; reference arm V00 byte-reproduced the committed cycle-3 dry table 20/20 rows incl. the frozen 2/8 paraphrase baseline; cross-process determinism verified (PYTHONHASHSEED 1 vs 7 byte-identical); best arm V31 (d3_pagelist+q1_canon) 6/8 positives-only, 0/2 false accepts ≥5/8 bar. Live (decisive): all 3 mechanically selected verdict-changing fresh-paraphrase probes memory-solved from restored frozen KB under V31",
       "durable_refs": [
         "git:origin/cycle/graph/32783797303/team@4b4aa533fc65bfb2018ae9121266205136024891 (full robustness repair snapshot: prereg, scorer, live runs, analyses, reports, tests)",
         "git:origin/cycle/graph/32783797303/audit@f81a167e66c9bd1c83b4c175d25d88d61b3685d2 (audit CYCLE_32783797303_GRAPH.md + gate JSON PASS)"
@@ -1187,7 +1187,7 @@
       "evidence_status": "AUDITED_DURABLE",
       "importance": "HIGH",
       "kind": "LIMIT",
-      "summary": "Accepted binding limits on G-H4 (do not over-cite): V31's fresh 6/8 is a selection-on-instrument DECISION OUTCOME and that instrument is SPENT \u2014 any future quantitative V31/successor claim requires a THIRD isolated-author instrument; category addressing remains unsolved (V31's category channel still broken by df-pruning of canonical anchors; CAT token in 5/7 books descriptions pruned site-wide); R3 login-packaging residual validated as procedural ordering only at single-KB/single-rank scope (frag 4/4 vs graphiter 0/4 vs edgeseq 0/4 with ~69 actions/row static-order bounce); 9/11 non-reference ",
+      "summary": "Accepted binding limits on G-H4 (do not over-cite): V31's fresh 6/8 is a selection-on-instrument DECISION OUTCOME and that instrument is SPENT — any future quantitative V31/successor claim requires a THIRD isolated-author instrument; category addressing remains unsolved (V31's category channel still broken by df-pruning of canonical anchors; CAT token in 5/7 books descriptions pruned site-wide); R3 login-packaging residual validated as procedural ordering only at single-KB/single-rank scope (frag 4/4 vs graphiter 0/4 vs edgeseq 0/4 with ~69 actions/row static-order bounce); 9/11 non-reference ",
       "durable_refs": [
         "git:origin/cycle/graph/32783797303/team@4b4aa533fc65bfb2018ae9121266205136024891 (full robustness repair snapshot: prereg, scorer, live runs, analyses, reports, tests)",
         "git:origin/cycle/graph/32783797303/audit@f81a167e66c9bd1c83b4c175d25d88d61b3685d2 (audit CYCLE_32783797303_GRAPH.md + gate JSON PASS)"
@@ -1224,7 +1224,7 @@
       "evidence_status": "AUDITED_DURABLE",
       "importance": "HIGH",
       "kind": "RESULT",
-      "summary": "Clean-room reproduction result (prereg frozen before live collection; reference CC BY-SA repo never fetched/viewed): fused task+current-state-summary retrieval with MMR beat task-only retrieval at hard-slice correct@1 36/74 (.486) vs 25/74 (.338) vs incumbent exact goal_sig 0/74 vs random 19/74; 11\u20130 paired wins, zero reversals. Downstream conversion with identical execution policy: combined novel actions C=75 vs B=84 vs A=421 at success .90/.86/.78. \u03b1=0.4 \u2261 \u03b1=0.5 everywhere (paper/code discrepancy immaterial here); @3 recall driven by MMR; the @1 gain attributable to the state term. Final acc",
+      "summary": "Clean-room reproduction result (prereg frozen before live collection; reference CC BY-SA repo never fetched/viewed): fused task+current-state-summary retrieval with MMR beat task-only retrieval at hard-slice correct@1 36/74 (.486) vs 25/74 (.338) vs incumbent exact goal_sig 0/74 vs random 19/74; 11–0 paired wins, zero reversals. Downstream conversion with identical execution policy: combined novel actions C=75 vs B=84 vs A=421 at success .90/.86/.78. α=0.4 ≡ α=0.5 everywhere (paper/code discrepancy immaterial here); @3 recall driven by MMR; the @1 gain attributable to the state term. Final acc",
       "durable_refs": [
         "git:origin/cycle/intel/32781482957/scout@d1c6f229ceff578d3ecc95b0e3f35d0b9cd0cafe (scout report cycle1_scout_report.md, findings JSON, state/intel_candidate.json)",
         "git:origin/cycle/intel/32781482957/repro@3082443bac643090aad8162ec426c757f8bcfd58 (clean-room sgdr_repro package, intel/prereg/cycle1_sgdr_prereg.md, results/intel/reproductions/cycle1/* incl. raw evidence for recomputation)"
@@ -1261,7 +1261,7 @@
       "evidence_status": "AUDITED_DURABLE",
       "importance": "HIGH",
       "kind": "RESULT",
-      "summary": "WP-006 primary verdict: FALSIFIED by the frozen verdict mapping. Producers 2/4 (books 12, quotes 12 verified BPs), total verified matched branch points 38 < 60 director floors; no hard validity-gate failure (G2/G4/G5/G7 green), execution adequate \u21d2 not DATA_INSUFFICIENT; independent in-team verifier PASS with own reference path and 0 rows predating the freeze. This exact outcome was later accepted through five independent audit gates on lab/physics (final gate CYCLE_32866107906 PASS, safe_to_integrate=true) and engaged the pre-declared TERMINATE_LANE stop condition \u2014 subsequently superseded or",
+      "summary": "WP-006 primary verdict: FALSIFIED by the frozen verdict mapping. Producers 2/4 (books 12, quotes 12 verified BPs), total verified matched branch points 38 < 60 director floors; no hard validity-gate failure (G2/G4/G5/G7 green), execution adequate ⇒ not DATA_INSUFFICIENT; independent in-team verifier PASS with own reference path and 0 rows predating the freeze. This exact outcome was later accepted through five independent audit gates on lab/physics (final gate CYCLE_32866107906 PASS, safe_to_integrate=true) and engaged the pre-declared TERMINATE_LANE stop condition — subsequently superseded or",
       "durable_refs": [
         "git:origin/cycle/physics/32776372437/team@8d841967f8cd9402fe661f194241e7c46600c0c8 (WP-006 result: dataset wp006_v1 + manifest + report + ledger pending-audit)",
         "git:origin/cycle/physics/32776372437/audit@eb90589ea52f10da4a2907a3a0221348be5a211a (audit report + gate JSON, gate=REVISE, required_fixes=5)"
@@ -1279,7 +1279,7 @@
       "evidence_status": "AUDITED_DURABLE",
       "importance": "HIGH",
       "kind": "RESULT",
-      "summary": "Mandatory decomposition (team report \u00a72): wherever execution succeeded, matched-state restarts reproduced ~100% (calibration double-reset control passed on all calibrated BPs as reported by the team) and T2 responses were near-deterministic \u2014 101/102 cells with \u22651 valid trial had all-identical outcome distributions. The floor miss was localized to instrument-side causes: frozen ordinal-0 anchor slot selecting non-actionable skip-links on wikipedia/gutenberg (171 action_failed exclusions zeroing 24 otherwise-reproducible BPs), openlibrary page-weight timeouts (+13 state_match failures, 4/42 val",
+      "summary": "Mandatory decomposition (team report §2): wherever execution succeeded, matched-state restarts reproduced ~100% (calibration double-reset control passed on all calibrated BPs as reported by the team) and T2 responses were near-deterministic — 101/102 cells with ≥1 valid trial had all-identical outcome distributions. The floor miss was localized to instrument-side causes: frozen ordinal-0 anchor slot selecting non-actionable skip-links on wikipedia/gutenberg (171 action_failed exclusions zeroing 24 otherwise-reproducible BPs), openlibrary page-weight timeouts (+13 state_match failures, 4/42 val",
       "durable_refs": [
         "git:origin/cycle/physics/32776372437/team@8d841967f8cd9402fe661f194241e7c46600c0c8 (WP-006 result: dataset wp006_v1 + manifest + report + ledger pending-audit)",
         "git:origin/cycle/physics/32776372437/audit@eb90589ea52f10da4a2907a3a0221348be5a211a (audit report + gate JSON, gate=REVISE, required_fixes=5)"
@@ -1314,9 +1314,9 @@
       "evidence_status": "DURABLE_UNAUDITED",
       "importance": "MEDIUM",
       "kind": "NEGATIVE",
-      "summary": "H-AUDIT HONEST REFUSAL \u2014 RETROSPECTIVE BREAK-EVEN AUDIT REFUSED ON VERIFIED ARTIFACT INSUFFICIENCY RATHER THAN RUN ON FABRICATED INPUTS: before commissioning the critic-proposed zero-cost retrospective selection-rule audit, the session artifact-verified that the committed PB-001 pack contains NO recurrence-bearing rows anywhere (kb_frozen.sqlite runs table EMPTY; cost_events.jsonl only 8 telemetry-class rows; toy KB 11 fragments / 21 transitions) \u21d2 status ARMED_BEHIND_DATA, executable_only_when a lawfully collected recurrence-bearing artifact set exists (requires D1/substrate chain or a future",
+      "summary": "H-AUDIT HONEST REFUSAL — RETROSPECTIVE BREAK-EVEN AUDIT REFUSED ON VERIFIED ARTIFACT INSUFFICIENCY RATHER THAN RUN ON FABRICATED INPUTS: before commissioning the critic-proposed zero-cost retrospective selection-rule audit, the session artifact-verified that the committed PB-001 pack contains NO recurrence-bearing rows anywhere (kb_frozen.sqlite runs table EMPTY; cost_events.jsonl only 8 telemetry-class rows; toy KB 11 fragments / 21 transitions) ⇒ status ARMED_BEHIND_DATA, executable_only_when a lawfully collected recurrence-bearing artifact set exists (requires D1/substrate chain or a future",
       "durable_refs": [
-        "git:origin/lab/product@b208340e6caec4ca32a9f026ebde0c4bc0eccfe5 ('Product Director synthesis 32956423301'; curator-verified remote tip; diff vs parent b887809 is EXACTLY 5 files / +225\u221246)",
+        "git:origin/lab/product@b208340e6caec4ca32a9f026ebde0c4bc0eccfe5 ('Product Director synthesis 32956423301'; curator-verified remote tip; diff vs parent b887809 is EXACTLY 5 files / +225−46)",
         "git:origin/lab/product@b208340:docs/PRODUCT_LEDGER.md (FOURTEENTH Director session entry: trigger/decoder outcome/unlock accounting/route-tier refusal/other intake/four-critic round/pre-commitments/H-AUDIT refusal/governance ruling/dispositions/NO-beta rationale)"
       ],
       "route_to": [
@@ -1335,7 +1335,7 @@
       "kind": "OTHER",
       "summary": "GOVERNANCE RULING ISSUED (PRODUCT-OWNED) CLOSING A LATENT EVIDENCE-CONTAMINATION PATH: window-2 deliverables-only TTL executions (eligibility 2026-08-26T22:05:30Z / 2026-08-27T00:30:08Z / 2026-08-27T06:28:49Z per Intel commitments) are NEVER benchmark outcome rows absent an explicit new authorization meeting the full ten-item evidence bar PLUS CTO/Meta concurrence; default NO; recorded durably in state/product_direction.json.window_2_governance_ruling_product_owned. Prevents clock-triggered Intel obligations from silently becoming Product-tier comparison data.",
       "durable_refs": [
-        "git:origin/lab/product@b208340e6caec4ca32a9f026ebde0c4bc0eccfe5 ('Product Director synthesis 32956423301'; curator-verified remote tip; diff vs parent b887809 is EXACTLY 5 files / +225\u221246)",
+        "git:origin/lab/product@b208340e6caec4ca32a9f026ebde0c4bc0eccfe5 ('Product Director synthesis 32956423301'; curator-verified remote tip; diff vs parent b887809 is EXACTLY 5 files / +225−46)",
         "git:origin/lab/product@b208340:docs/PRODUCT_LEDGER.md (FOURTEENTH Director session entry: trigger/decoder outcome/unlock accounting/route-tier refusal/other intake/four-critic round/pre-commitments/H-AUDIT refusal/governance ruling/dispositions/NO-beta rationale)"
       ],
       "route_to": [
@@ -1352,9 +1352,9 @@
       "evidence_status": "DURABLE_UNAUDITED",
       "importance": "MEDIUM",
       "kind": "RESULT",
-      "summary": "ROUTE-TIER EXECUTOR REFUSAL RE-EVALUATED MECHANICALLY ON ACCEPTED EVIDENCE \u2014 REFUSE STANDS AT 2-OF-3: condition 1 MET (Intel powered round USEFUL), condition 3 MET (capture-value attribution PARAMETERIZATION_CREDENTIAL_CONTENT on the spec-less SPA cell), condition 2 UNTESTED (= chartered Runtime R2-3 D1 writable-discriminating-substrate probe; restful-booker write-path HTTP 418 protection persists >1h cooldown, observed repeatedly across cycles). Other intake recorded: Runtime R2-2 pagination cell class FLOOR_DOMINATES (bare HTTP within budget WITH working failure-witness discriminator \u21d2 witne",
+      "summary": "ROUTE-TIER EXECUTOR REFUSAL RE-EVALUATED MECHANICALLY ON ACCEPTED EVIDENCE — REFUSE STANDS AT 2-OF-3: condition 1 MET (Intel powered round USEFUL), condition 3 MET (capture-value attribution PARAMETERIZATION_CREDENTIAL_CONTENT on the spec-less SPA cell), condition 2 UNTESTED (= chartered Runtime R2-3 D1 writable-discriminating-substrate probe; restful-booker write-path HTTP 418 protection persists >1h cooldown, observed repeatedly across cycles). Other intake recorded: Runtime R2-2 pagination cell class FLOOR_DOMINATES (bare HTTP within budget WITH working failure-witness discriminator ⇒ witne",
       "durable_refs": [
-        "git:origin/lab/product@b208340e6caec4ca32a9f026ebde0c4bc0eccfe5 ('Product Director synthesis 32956423301'; curator-verified remote tip; diff vs parent b887809 is EXACTLY 5 files / +225\u221246)",
+        "git:origin/lab/product@b208340e6caec4ca32a9f026ebde0c4bc0eccfe5 ('Product Director synthesis 32956423301'; curator-verified remote tip; diff vs parent b887809 is EXACTLY 5 files / +225−46)",
         "git:origin/lab/product@b208340:docs/PRODUCT_LEDGER.md (FOURTEENTH Director session entry: trigger/decoder outcome/unlock accounting/route-tier refusal/other intake/four-critic round/pre-commitments/H-AUDIT refusal/governance ruling/dispositions/NO-beta rationale)"
       ],
       "route_to": [
@@ -1371,9 +1371,9 @@
       "evidence_status": "DURABLE_UNAUDITED",
       "importance": "MEDIUM",
       "kind": "ANOMALY",
-      "summary": "WIPE DEFECT RECURRENCE #14 \u2014 SAME DEFECT, SAME BYTE-IDENTICAL HANDLING, SECOND CONSECUTIVE BUNDLE CAPTURING THE FULL MECHANISM: destructive workflow step echoed ('rm -f state/product_beta_request.json' inside 'Clear ephemeral launch state before fresh Product decision', 10:05:23.2046Z), agent probe found the file absent (10:10:48Z 'No such file or directory'), restored BYTE-IDENTICAL from HEAD rev 8 via git show (sha256 725cbfe4c757ff8ffdc3b3a40163be44dc8b961b5a37050e951633086112e14b match vs pin, 10:11:03Z) BEFORE any decision action; final consistency pass re-verified byte identity; defect c",
+      "summary": "WIPE DEFECT RECURRENCE #14 — SAME DEFECT, SAME BYTE-IDENTICAL HANDLING, SECOND CONSECUTIVE BUNDLE CAPTURING THE FULL MECHANISM: destructive workflow step echoed ('rm -f state/product_beta_request.json' inside 'Clear ephemeral launch state before fresh Product decision', 10:05:23.2046Z), agent probe found the file absent (10:10:48Z 'No such file or directory'), restored BYTE-IDENTICAL from HEAD rev 8 via git show (sha256 725cbfe4c757ff8ffdc3b3a40163be44dc8b961b5a37050e951633086112e14b match vs pin, 10:11:03Z) BEFORE any decision action; final consistency pass re-verified byte identity; defect c",
       "durable_refs": [
-        "git:origin/lab/product@b208340e6caec4ca32a9f026ebde0c4bc0eccfe5 ('Product Director synthesis 32956423301'; curator-verified remote tip; diff vs parent b887809 is EXACTLY 5 files / +225\u221246)",
+        "git:origin/lab/product@b208340e6caec4ca32a9f026ebde0c4bc0eccfe5 ('Product Director synthesis 32956423301'; curator-verified remote tip; diff vs parent b887809 is EXACTLY 5 files / +225−46)",
         "git:origin/lab/product@b208340:docs/PRODUCT_LEDGER.md (FOURTEENTH Director session entry: trigger/decoder outcome/unlock accounting/route-tier refusal/other intake/four-critic round/pre-commitments/H-AUDIT refusal/governance ruling/dispositions/NO-beta rationale)"
       ],
       "route_to": [
@@ -1390,9 +1390,9 @@
       "evidence_status": "OPERATIONAL_DIAGNOSTIC",
       "importance": "MEDIUM",
       "kind": "LIMIT",
-      "summary": "COMPLIANT LLM ENDPOINT ABSENT \u2014 FOURTH CONSECUTIVE LIVE VERIFICATION, MOST EXPLICIT PROBE YET: env scan for PB_LLM/OPENAI/ANTHROPIC/API_KEY/LLM classes EMPTY; serving binaries ollama/vllm/llama-server/text-generation-launcher ALL ABSENT; ports 11434/8000/8080/1234/5000/3000 ALL CLOSED; python packages openai/vllm/transformers/torch ALL ABSENT. This keeps PH-1 blocked and consumer-economics benchmark item(s) unsatisfiable; recorded in fourteenth_session_receipts.backbone_feasibility.",
+      "summary": "COMPLIANT LLM ENDPOINT ABSENT — FOURTH CONSECUTIVE LIVE VERIFICATION, MOST EXPLICIT PROBE YET: env scan for PB_LLM/OPENAI/ANTHROPIC/API_KEY/LLM classes EMPTY; serving binaries ollama/vllm/llama-server/text-generation-launcher ALL ABSENT; ports 11434/8000/8080/1234/5000/3000 ALL CLOSED; python packages openai/vllm/transformers/torch ALL ABSENT. This keeps PH-1 blocked and consumer-economics benchmark item(s) unsatisfiable; recorded in fourteenth_session_receipts.backbone_feasibility.",
       "durable_refs": [
-        "git:origin/lab/product@b208340e6caec4ca32a9f026ebde0c4bc0eccfe5 ('Product Director synthesis 32956423301'; curator-verified remote tip; diff vs parent b887809 is EXACTLY 5 files / +225\u221246)",
+        "git:origin/lab/product@b208340e6caec4ca32a9f026ebde0c4bc0eccfe5 ('Product Director synthesis 32956423301'; curator-verified remote tip; diff vs parent b887809 is EXACTLY 5 files / +225−46)",
         "git:origin/lab/product@b208340:docs/PRODUCT_LEDGER.md (FOURTEENTH Director session entry: trigger/decoder outcome/unlock accounting/route-tier refusal/other intake/four-critic round/pre-commitments/H-AUDIT refusal/governance ruling/dispositions/NO-beta rationale)"
       ],
       "route_to": [
@@ -1408,9 +1408,9 @@
       "evidence_status": "DURABLE_UNAUDITED",
       "importance": "MEDIUM",
       "kind": "OTHER",
-      "summary": "DORMANT SUCCESSOR-DERIVATION MAP FILED: results/product/PB001_SUCCESSOR_DERIVATION_MAP.json routes preserved-pack artifacts \u2192 floors \u2192 gates so any future flip-input revival (endpoint grant, Intel USEFUL return, Runtime positive survivor, new audited signal) takes ONE session mechanically without critic re-convention; carries an explicit non-authorization clause. Converts the twelfth session's preservation duty into an executable revival procedure while keeping today's park intact.",
+      "summary": "DORMANT SUCCESSOR-DERIVATION MAP FILED: results/product/PB001_SUCCESSOR_DERIVATION_MAP.json routes preserved-pack artifacts → floors → gates so any future flip-input revival (endpoint grant, Intel USEFUL return, Runtime positive survivor, new audited signal) takes ONE session mechanically without critic re-convention; carries an explicit non-authorization clause. Converts the twelfth session's preservation duty into an executable revival procedure while keeping today's park intact.",
       "durable_refs": [
-        "git:origin/lab/product@b88780999bff05a1a45ffd08d05a2b26f4cd673bf ('Product Director synthesis 32941431673'; curator-verified remote tip; diff vs parent ae64285 is EXACTLY 7 files / +304\u221264)",
+        "git:origin/lab/product@b88780999bff05a1a45ffd08d05a2b26f4cd673bf ('Product Director synthesis 32941431673'; curator-verified remote tip; diff vs parent ae64285 is EXACTLY 7 files / +304−64)",
         "git:origin/lab/product@b887809:results/product/PB001_closure_hygiene_audit.json (CTO-6-mandated closure-hygiene clause-mapping audit, verdict PASS, per-item checks incl. interpretation_note on the unresolvable literal 'V3-A..G' lettering)"
       ],
       "route_to": [
@@ -1426,9 +1426,9 @@
       "evidence_status": "DURABLE_UNAUDITED",
       "importance": "MEDIUM",
       "kind": "ANOMALY",
-      "summary": "WIPE DEFECT RECURRENCE #13 \u2014 FIRST BUNDLE TO CAPTURE THE MECHANISM ITSELF END-TO-END: this run's raw log shows the destructive workflow step EXECUTING ('rm -f state/product_beta_request.json' inside 'Clear ephemeral launch state before fresh Product decision', 07:10:03Z), then the agent finding the file absent ('WIPED_OR_ABSENT', 07:11:52Z), then restoring BYTE-IDENTICAL from HEAD rev 8 (sha256 725cbfe4\u2026 match vs pin, RESTORED_CLEAN) BEFORE any decision action. Thirteenth consecutive Product dispatch performing detect-and-restore; remedy (delete product-loop.yml wipe lines / read authorization",
+      "summary": "WIPE DEFECT RECURRENCE #13 — FIRST BUNDLE TO CAPTURE THE MECHANISM ITSELF END-TO-END: this run's raw log shows the destructive workflow step EXECUTING ('rm -f state/product_beta_request.json' inside 'Clear ephemeral launch state before fresh Product decision', 07:10:03Z), then the agent finding the file absent ('WIPED_OR_ABSENT', 07:11:52Z), then restoring BYTE-IDENTICAL from HEAD rev 8 (sha256 725cbfe4… match vs pin, RESTORED_CLEAN) BEFORE any decision action. Thirteenth consecutive Product dispatch performing detect-and-restore; remedy (delete product-loop.yml wipe lines / read authorization",
       "durable_refs": [
-        "git:origin/lab/product@b88780999bff05a1a45ffd08d05a2b26f4cd673bf ('Product Director synthesis 32941431673'; curator-verified remote tip; diff vs parent ae64285 is EXACTLY 7 files / +304\u221264)",
+        "git:origin/lab/product@b88780999bff05a1a45ffd08d05a2b26f4cd673bf ('Product Director synthesis 32941431673'; curator-verified remote tip; diff vs parent ae64285 is EXACTLY 7 files / +304−64)",
         "git:origin/lab/product@b887809:results/product/PB001_closure_hygiene_audit.json (CTO-6-mandated closure-hygiene clause-mapping audit, verdict PASS, per-item checks incl. interpretation_note on the unresolvable literal 'V3-A..G' lettering)"
       ],
       "route_to": [
@@ -1445,7 +1445,7 @@
       "evidence_status": "DURABLE_UNAUDITED",
       "importance": "MEDIUM",
       "kind": "OTHER",
-      "summary": "POST-CLOSURE GOVERNANCE MACHINERY banked for successors: artifact pack preserved as durable negative knowledge inheritable ONLY by a NEW successor authorization with floors verbatim (D2 SGDR-fused<lexical<V31-desc-only 3/8<7/8<8/8 composition-failure record; http_floor null \u2014 ALL 10 panel targets reachable by bare HTTP at ZERO LLM tokens, 203\u2013517 ms \u2014 WITH its binding narrative constraint on any future BEATS_BASELINE claim; BF-1 degenerate-anchor swap rationale; B3 instruction cards + leakage map; panel v4 + paraphrases + dress-rehearsal + hash-pinned compute_verdict.py 0cb76809\u2026). Four prereg",
+      "summary": "POST-CLOSURE GOVERNANCE MACHINERY banked for successors: artifact pack preserved as durable negative knowledge inheritable ONLY by a NEW successor authorization with floors verbatim (D2 SGDR-fused<lexical<V31-desc-only 3/8<7/8<8/8 composition-failure record; http_floor null — ALL 10 panel targets reachable by bare HTTP at ZERO LLM tokens, 203–517 ms — WITH its binding narrative constraint on any future BEATS_BASELINE claim; BF-1 degenerate-anchor swap rationale; B3 instruction cards + leakage map; panel v4 + paraphrases + dress-rehearsal + hash-pinned compute_verdict.py 0cb76809…). Four prereg",
       "durable_refs": [
         "git:origin/lab/product@ae64285487c0563225c5df40861e6dfd8581dc3d (TWELFTH-session closure commit; curator-verified remote tip; touches EXACTLY docs/PRODUCT_LEDGER.md, results/product/PRODUCT_HYPOTHESES.json, state/product_current.json, state/product_direction.json)",
         "git:origin/lab/product@e320107 (eleventh session; immediate parent; PARK CHARTER + terminal-fork preregistration whose trigger this run fired)"
@@ -1465,7 +1465,7 @@
       "evidence_status": "DURABLE_UNAUDITED",
       "importance": "MEDIUM",
       "kind": "ANOMALY",
-      "summary": "WIPE DEFECT RECURRENCE #12: product-loop.yml L62-68 ('Clear ephemeral launch state before fresh Product decision': rm -f state/product_beta_request.json + forced jq '.beta_launch=false') STILL LIVE at HEAD struck AGAIN this dispatch \u2014 working-tree request found absent (ls: No such file), restored byte-identical from HEAD via git show (sha256 725cbfe4\u2026 match vs pin) BEFORE any decision action; escalation renewed with the same mechanical remedy (delete the step; read authorization from HEAD per pointer protocol). Twelfth consecutive Product dispatch performing detect-and-restore ritual; remedy r",
+      "summary": "WIPE DEFECT RECURRENCE #12: product-loop.yml L62-68 ('Clear ephemeral launch state before fresh Product decision': rm -f state/product_beta_request.json + forced jq '.beta_launch=false') STILL LIVE at HEAD struck AGAIN this dispatch — working-tree request found absent (ls: No such file), restored byte-identical from HEAD via git show (sha256 725cbfe4… match vs pin) BEFORE any decision action; escalation renewed with the same mechanical remedy (delete the step; read authorization from HEAD per pointer protocol). Twelfth consecutive Product dispatch performing detect-and-restore ritual; remedy r",
       "durable_refs": [
         "git:origin/lab/product@ae64285487c0563225c5df40861e6dfd8581dc3d (TWELFTH-session closure commit; curator-verified remote tip; touches EXACTLY docs/PRODUCT_LEDGER.md, results/product/PRODUCT_HYPOTHESES.json, state/product_current.json, state/product_direction.json)",
         "git:origin/lab/product@e320107 (eleventh session; immediate parent; PARK CHARTER + terminal-fork preregistration whose trigger this run fired)"
@@ -1484,10 +1484,10 @@
       "evidence_status": "AUDITED_DURABLE",
       "importance": "MEDIUM",
       "kind": "RESULT",
-      "summary": "Runtime near-repeat compression signal intake at exact prereg ceilings (accepted lane evidence, audit PASS run 32908002333 integrated lab/runtime@613fbd4; Product incorporation DURABLE_UNAUDITED at e320107): T3 near-repeat cell shows SPIDER 4 actions vs BASE 11 on BOTH offset entries (/tag/love/, /page/10/) with margins \u2265M=2 per pass, zero novel decisions, reused==pinned steps_len==4 \u2014 the first compression-shaped observation anywhere in SPIDER \u2014 but it is OBSERVATION TIER ONLY: single task, single site family, two deterministic passes, scripted caller, ZERO provider calls (so it tests none of",
+      "summary": "Runtime near-repeat compression signal intake at exact prereg ceilings (accepted lane evidence, audit PASS run 32908002333 integrated lab/runtime@613fbd4; Product incorporation DURABLE_UNAUDITED at e320107): T3 near-repeat cell shows SPIDER 4 actions vs BASE 11 on BOTH offset entries (/tag/love/, /page/10/) with margins ≥M=2 per pass, zero novel decisions, reused==pinned steps_len==4 — the first compression-shaped observation anywhere in SPIDER — but it is OBSERVATION TIER ONLY: single task, single site family, two deterministic passes, scripted caller, ZERO provider calls (so it tests none of",
       "durable_refs": [
         "git:origin/lab/product@e320107e71db218968463f569709d6476b314312 (eleventh-session synthesis commit: docs/PRODUCT_LEDGER.md eleventh entry incl. PARK CHARTER/slot-contention trigger/terminal fork/activation checklist; state/product_direction.json; state/product_current.json with corrected dress-rehearsal pin; results/product/PRODUCT_HYPOTHESES.json eleventh_session_note + PH-2 note; curator-verified tip of remote branch)",
-        "git:origin/lab/product parent chain 298a215 (tenth session) \u2192 e320107; tenth-session merges cf25299/7c2ca71 landed ddce3a3+7657565 byte-identically and BENCHMARK_PREREG_V4_ADDENDUM.md verified present in lab/product tree at e320107 by curator ls-tree (closes former CF-19 residual gap)"
+        "git:origin/lab/product parent chain 298a215 (tenth session) → e320107; tenth-session merges cf25299/7c2ca71 landed ddce3a3+7657565 byte-identically and BENCHMARK_PREREG_V4_ADDENDUM.md verified present in lab/product tree at e320107 by curator ls-tree (closes former CF-19 residual gap)"
       ],
       "route_to": [
         "RUNTIME",
@@ -1503,10 +1503,10 @@
       "evidence_status": "DURABLE_UNAUDITED",
       "importance": "MEDIUM",
       "kind": "OTHER",
-      "summary": "Free disclosure closing a baseline-critic interpretive hole BEFORE outcomes: the win-rule phrase 'comparable success' intentionally has NO separate numeric constant because it is STRUCTURAL in hash-pinned compute_verdict.py (0cb76809\u2026) \u2014 per-regime clause-1 non-inferiority within \u22120.10 absolute INCLUDING R3; LOSE-1 fires when SPIDER leaves >25% of the per-regime best-baseline-solved tasks unsolved; paired-by-task deltas use costs-as-incurred with a CMP_t==0<S_t clip at \u22121.0; occupancy floor <6 valid paired cells \u21d2 MEASUREMENT_INVALID; conjunctive replication requires EACH pass to meet ALL clau",
+      "summary": "Free disclosure closing a baseline-critic interpretive hole BEFORE outcomes: the win-rule phrase 'comparable success' intentionally has NO separate numeric constant because it is STRUCTURAL in hash-pinned compute_verdict.py (0cb76809…) — per-regime clause-1 non-inferiority within −0.10 absolute INCLUDING R3; LOSE-1 fires when SPIDER leaves >25% of the per-regime best-baseline-solved tasks unsolved; paired-by-task deltas use costs-as-incurred with a CMP_t==0<S_t clip at −1.0; occupancy floor <6 valid paired cells ⇒ MEASUREMENT_INVALID; conjunctive replication requires EACH pass to meet ALL clau",
       "durable_refs": [
         "git:origin/lab/product@e320107e71db218968463f569709d6476b314312 (eleventh-session synthesis commit: docs/PRODUCT_LEDGER.md eleventh entry incl. PARK CHARTER/slot-contention trigger/terminal fork/activation checklist; state/product_direction.json; state/product_current.json with corrected dress-rehearsal pin; results/product/PRODUCT_HYPOTHESES.json eleventh_session_note + PH-2 note; curator-verified tip of remote branch)",
-        "git:origin/lab/product parent chain 298a215 (tenth session) \u2192 e320107; tenth-session merges cf25299/7c2ca71 landed ddce3a3+7657565 byte-identically and BENCHMARK_PREREG_V4_ADDENDUM.md verified present in lab/product tree at e320107 by curator ls-tree (closes former CF-19 residual gap)"
+        "git:origin/lab/product parent chain 298a215 (tenth session) → e320107; tenth-session merges cf25299/7c2ca71 landed ddce3a3+7657565 byte-identically and BENCHMARK_PREREG_V4_ADDENDUM.md verified present in lab/product tree at e320107 by curator ls-tree (closes former CF-19 residual gap)"
       ],
       "route_to": [
         "PRODUCT",
@@ -1521,10 +1521,10 @@
       "evidence_status": "OPERATIONAL_DIAGNOSTIC",
       "importance": "MEDIUM",
       "kind": "ANOMALY",
-      "summary": "Wipe defect fired AGAIN (extends CF-2026-08-25-20 recurrence count; now observed across 11th+ distinct Product sessions): the director found state/product_beta_request.json wiped from the working tree by the 'Clear ephemeral launch state before fresh Product decision' step (.github/workflows/product-loop.yml L62-68, still live at HEAD; prior hotfix 8f3980c did not remove the lines), restored it BYTE-IDENTICAL from HEAD (sha256 d8b007a7\u2026 verified before editing to rev 8), and renewed the escalation with the same mechanical remedy (delete the two wipe steps; read authorization via git show HEAD:",
+      "summary": "Wipe defect fired AGAIN (extends CF-2026-08-25-20 recurrence count; now observed across 11th+ distinct Product sessions): the director found state/product_beta_request.json wiped from the working tree by the 'Clear ephemeral launch state before fresh Product decision' step (.github/workflows/product-loop.yml L62-68, still live at HEAD; prior hotfix 8f3980c did not remove the lines), restored it BYTE-IDENTICAL from HEAD (sha256 d8b007a7… verified before editing to rev 8), and renewed the escalation with the same mechanical remedy (delete the two wipe steps; read authorization via git show HEAD:",
       "durable_refs": [
         "git:origin/lab/product@e320107e71db218968463f569709d6476b314312 (eleventh-session synthesis commit: docs/PRODUCT_LEDGER.md eleventh entry incl. PARK CHARTER/slot-contention trigger/terminal fork/activation checklist; state/product_direction.json; state/product_current.json with corrected dress-rehearsal pin; results/product/PRODUCT_HYPOTHESES.json eleventh_session_note + PH-2 note; curator-verified tip of remote branch)",
-        "git:origin/lab/product parent chain 298a215 (tenth session) \u2192 e320107; tenth-session merges cf25299/7c2ca71 landed ddce3a3+7657565 byte-identically and BENCHMARK_PREREG_V4_ADDENDUM.md verified present in lab/product tree at e320107 by curator ls-tree (closes former CF-19 residual gap)"
+        "git:origin/lab/product parent chain 298a215 (tenth session) → e320107; tenth-session merges cf25299/7c2ca71 landed ddce3a3+7657565 byte-identically and BENCHMARK_PREREG_V4_ADDENDUM.md verified present in lab/product tree at e320107 by curator ls-tree (closes former CF-19 residual gap)"
       ],
       "route_to": [
         "INFRA",
@@ -1540,7 +1540,7 @@
       "evidence_status": "DURABLE_UNAUDITED",
       "importance": "MEDIUM",
       "kind": "OTHER",
-      "summary": "Fresh-context adversarial critical CTO consultation (~22:57\u201322:59Z, cto_product subagent) with explicit adopt/reject ledger: ADOPTED slot-contention rule (mandatory documented review if any other hypothesis becomes candidate-eligible while credentials are absent \u2014 replaces a hard sunset since no alternative claimant exists today); ADOPTED immediate bounded durability activation; ADOPTED pre-recorded NON-BINDING post-loss decode plan (post_loss_decode_plan_non_binding in PRODUCT_HYPOTHESES.json: if SPIDER rows lose, classify exploratorily by the G-H6 taxonomy using existing diag tooling \u2014 descr",
+      "summary": "Fresh-context adversarial critical CTO consultation (~22:57–22:59Z, cto_product subagent) with explicit adopt/reject ledger: ADOPTED slot-contention rule (mandatory documented review if any other hypothesis becomes candidate-eligible while credentials are absent — replaces a hard sunset since no alternative claimant exists today); ADOPTED immediate bounded durability activation; ADOPTED pre-recorded NON-BINDING post-loss decode plan (post_loss_decode_plan_non_binding in PRODUCT_HYPOTHESES.json: if SPIDER rows lose, classify exploratorily by the G-H6 taxonomy using existing diag tooling — descr",
       "durable_refs": [
         "git:origin/lab/product@dc716c55e0bbf885191b2ba1fc2350e2c817ac77 (ninth session synthesis: state/product_direction.json continue=true solely for bounded ARCHITECT session + ninth_session_note; state/product_current.json; results/product/PRODUCT_HYPOTHESES.json +runtime_accepted_through/+graph_g_h6_site_bound/intel cycle-6 exclusion; docs/PRODUCT_LEDGER.md ninth-session entry; docs/PRODUCT_ARCHITECTURE_HYPOTHESES.md PH-2 unlock status; curator-verified on remote via ls-remote)",
         "git:origin/cycle/product/32886859788/architect@ddce3a399fcf7b627eb5dec0809c316471e4f442 (combined v4+v5 amendment line whose durability was re-verified this session; curator-reconfirmed object present)"
@@ -1558,7 +1558,7 @@
       "evidence_status": "DURABLE_UNAUDITED",
       "importance": "MEDIUM",
       "kind": "LIMIT",
-      "summary": "PB-001 verification ceilings inherited and restated (prevents future misquoting): WP-8 offline suite counts are environment-dependent (builder env playwright 1.62.0 \u2192 91 passing; eighth-session clean-env \u2192 84 passed / 0 assertion failures / 7 Playwright-environment failures; decomposition 78 pre-WP-8 + 13 new WP-8 tests = 91 = 84+7) and build states must keep naming the exact offline subset (defect (c) of session 8, still standing). Dress rehearsal is SYNTHETIC_EXCLUDED_FROM_ALL_STATISTICS_FOREVER with stub backbone; its W8 seam-lint negative control was validated in-manifest (removing one exe",
+      "summary": "PB-001 verification ceilings inherited and restated (prevents future misquoting): WP-8 offline suite counts are environment-dependent (builder env playwright 1.62.0 → 91 passing; eighth-session clean-env → 84 passed / 0 assertion failures / 7 Playwright-environment failures; decomposition 78 pre-WP-8 + 13 new WP-8 tests = 91 = 84+7) and build states must keep naming the exact offline subset (defect (c) of session 8, still standing). Dress rehearsal is SYNTHETIC_EXCLUDED_FROM_ALL_STATISTICS_FOREVER with stub backbone; its W8 seam-lint negative control was validated in-manifest (removing one exe",
       "durable_refs": [
         "git:origin/lab/product@dc716c55e0bbf885191b2ba1fc2350e2c817ac77 (ninth session synthesis: state/product_direction.json continue=true solely for bounded ARCHITECT session + ninth_session_note; state/product_current.json; results/product/PRODUCT_HYPOTHESES.json +runtime_accepted_through/+graph_g_h6_site_bound/intel cycle-6 exclusion; docs/PRODUCT_LEDGER.md ninth-session entry; docs/PRODUCT_ARCHITECTURE_HYPOTHESES.md PH-2 unlock status; curator-verified on remote via ls-remote)",
         "git:origin/cycle/product/32886859788/architect@ddce3a399fcf7b627eb5dec0809c316471e4f442 (combined v4+v5 amendment line whose durability was re-verified this session; curator-reconfirmed object present)"
@@ -1576,7 +1576,7 @@
       "evidence_status": "LOG_ONLY_UNAUDITED",
       "importance": "MEDIUM",
       "kind": "IDEA",
-      "summary": "[HYPOTHESIS-CLASS IDEA, never an accepted claim] Research opportunities sharpened by this session's exclusions rather than additions: (1) the triggered dual-id telemetry migration (spider.cost_event/v0 \u21c4 pb001.cost_event/v0) is the concrete seam where Product and Runtime schemas must converge \u2014 landing it pre-outcome keeps PB-001's cost accounting auditor-recomputable under the future Runtime schema; (2) G-H6 inventory-conditionality implies PB-001's post-loss decode taxonomy (description-vocabulary miss / wrong-class binding / budget-bounded exploration) is reusable as a GENERAL addressing-qu",
+      "summary": "[HYPOTHESIS-CLASS IDEA, never an accepted claim] Research opportunities sharpened by this session's exclusions rather than additions: (1) the triggered dual-id telemetry migration (spider.cost_event/v0 ⇄ pb001.cost_event/v0) is the concrete seam where Product and Runtime schemas must converge — landing it pre-outcome keeps PB-001's cost accounting auditor-recomputable under the future Runtime schema; (2) G-H6 inventory-conditionality implies PB-001's post-loss decode taxonomy (description-vocabulary miss / wrong-class binding / budget-bounded exploration) is reusable as a GENERAL addressing-qu",
       "durable_refs": [
         "git:origin/lab/product@dc716c55e0bbf885191b2ba1fc2350e2c817ac77 (ninth session synthesis: state/product_direction.json continue=true solely for bounded ARCHITECT session + ninth_session_note; state/product_current.json; results/product/PRODUCT_HYPOTHESES.json +runtime_accepted_through/+graph_g_h6_site_bound/intel cycle-6 exclusion; docs/PRODUCT_LEDGER.md ninth-session entry; docs/PRODUCT_ARCHITECTURE_HYPOTHESES.md PH-2 unlock status; curator-verified on remote via ls-remote)",
         "git:origin/cycle/product/32886859788/architect@ddce3a399fcf7b627eb5dec0809c316471e4f442 (combined v4+v5 amendment line whose durability was re-verified this session; curator-reconfirmed object present)"
@@ -1614,7 +1614,7 @@
       "evidence_status": "AUDITED_DURABLE",
       "importance": "MEDIUM",
       "kind": "NEGATIVE",
-      "summary": "FIVE mission questions remain OPEN in every direction (multi-host discovery/economics, natural-TTL window2, induced-mutation detection quality, capture-value-over-declared-spec, multi-host intent addressing) - neither confirmed nor refuted. Prereg frozen pre-collection with 7 fully disclosed attempts (crash/timeout/detached-recorder/render-gap/invalid-API-wait/RB418/carryover) and errata E1-E5 appended below separator only (frozen \u00a714 rule never edited, zero removed lines verified). Counterfactual exploration (if defects rows 3-5 alone were fixed: COOKIE 30/30 REPLAY_OK >=7x and 6/6 mutation d",
+      "summary": "FIVE mission questions remain OPEN in every direction (multi-host discovery/economics, natural-TTL window2, induced-mutation detection quality, capture-value-over-declared-spec, multi-host intent addressing) - neither confirmed nor refuted. Prereg frozen pre-collection with 7 fully disclosed attempts (crash/timeout/detached-recorder/render-gap/invalid-API-wait/RB418/carryover) and errata E1-E5 appended below separator only (frozen §14 rule never edited, zero removed lines verified). Counterfactual exploration (if defects rows 3-5 alone were fixed: COOKIE 30/30 REPLAY_OK >=7x and 6/6 mutation d",
       "durable_refs": [
         "git:origin/cycle/intel/32897120087/scout@a74fdb0 (Scout carryforward, 18 files unbrowse_ladder_multihost)",
         "git:origin/cycle/intel/32897120087/repro@7a80b33 (repro tree: frozen prereg cycle6_unbrowse_ladder_multihost_prereg.md with errata E1-E5, raw evidence P0-P7, 77-file disclosure package, SHA256SUMS 33/33, decision_rule_evaluation.json VERDICT=MEASUREMENT_INVALID)"
@@ -1691,7 +1691,7 @@
       "evidence_status": "DURABLE_UNAUDITED",
       "importance": "MEDIUM",
       "kind": "RESULT",
-      "summary": "Root-cause mechanism identified in DURABLE Git config (not in any log): the Product Supervisor cancels exactly this situation by design. product-supervisor.yml:53-62 reads: 'Direct workflow_run triggers can enqueue a stale Product decision while a long beta is already executing. If a real Product run is in_progress, queued Product-main runs are redundant' \u2014 then executes `gh run cancel \"$queued_id\"` for every queued/pending product-loop run. The precondition (another product-loop main run in_progress throughout 20:22:45Z-20:47:22Z) is proven by sibling run 32886859788's architect commit at 20:",
+      "summary": "Root-cause mechanism identified in DURABLE Git config (not in any log): the Product Supervisor cancels exactly this situation by design. product-supervisor.yml:53-62 reads: 'Direct workflow_run triggers can enqueue a stale Product decision while a long beta is already executing. If a real Product run is in_progress, queued Product-main runs are redundant' — then executes `gh run cancel \"$queued_id\"` for every queued/pending product-loop run. The precondition (another product-loop main run in_progress throughout 20:22:45Z-20:47:22Z) is proven by sibling run 32886859788's architect commit at 20:",
       "durable_refs": [
         "git:main@b9c51073bd19e369cf8837ee3064d82ec1304f2c (head_sha the run was dispatched on; 'evidence: distill Actions runs 32790538553,...' pushed 20:20:50Z, ~2 min before run creation)",
         "git:.github/workflows/product-loop.yml@main (concurrency group spider-product-lane, cancel-in-progress:false; jobs product_director -> beta_architect/beta_builder/beta_auditor chain)"
@@ -1746,7 +1746,7 @@
       "evidence_status": "DURABLE_UNAUDITED",
       "importance": "MEDIUM",
       "kind": "LIMIT",
-      "summary": "Declared ceilings, preserved verbatim-in-spirit: model independence EXPLICITLY unfalsifiable this cycle (foreign-executor parity proves plan consumability only); capsules stay tier=CANDIDATE (derivation never promotes); confidence/TTL machinery refused until \u22652 cycles of write-back observations exist; predictor producers remain prohibited (Physics evidence still absent); literal sandbox credentials in prereg/tasks (quotes.toscrape.com spiderbot/notasecret) acknowledged and slated for PB-001 value_env indirection in cycle 2. Baseline limitation disclosed rather than hidden: baseline policy's /p",
+      "summary": "Declared ceilings, preserved verbatim-in-spirit: model independence EXPLICITLY unfalsifiable this cycle (foreign-executor parity proves plan consumability only); capsules stay tier=CANDIDATE (derivation never promotes); confidence/TTL machinery refused until ≥2 cycles of write-back observations exist; predictor producers remain prohibited (Physics evidence still absent); literal sandbox credentials in prereg/tasks (quotes.toscrape.com spiderbot/notasecret) acknowledged and slated for PB-001 value_env indirection in cycle 2. Baseline limitation disclosed rather than hidden: baseline policy's /p",
       "durable_refs": [
         "git:origin/cycle/runtime/32887030457/team@c2f0ba8e30effa1f5afb6e957adb3efd9c2a8558 (= team-attempt-1; parent = lab/runtime tip 7669dcd; 64 files / 4818 insertions)",
         "git:c2f0ba8e:results/runtime/PREREG_R0_CYCLE1.json (frozen_utc 2026-08-25T20:15:00Z, FROZEN_BEFORE_OUTCOMES; pins both capsule sha256s, resolver thresholds MIN_MATCH=2/TAU=0.3/COV_CAP=6, tasks T1/T2(+deferred T3), arms, gates P1.x/P2.x, amendment rule)"
@@ -1764,7 +1764,7 @@
       "evidence_status": "DURABLE_UNAUDITED",
       "importance": "MEDIUM",
       "kind": "NEGATIVE",
-      "summary": "Scoped negative knowledge (pre-outcome diagnostic, not an outcome-row result): the D2 retrieval-attribution diagnostic fired its frozen proceed_block rule \u2014 SGDR-fused ranking scored V-stacked@1 = 3/8 vs V-primitive@1 = 7/8 on panel tasks 1-8 (reproduced identically) => BLOCK_ASSEMBLY_REPAIR; disposed by request rev 6 + v4 item V1 via versioned ONE-SHOT front-door reversion with PERMANENT treatment freeze. Recorded as a composition boundary condition on Intel's accepted SGDR mechanism: fused scoring UNDERPERFORMED a primitive lexical scorer on this panel/store while eligibility was intact; the",
+      "summary": "Scoped negative knowledge (pre-outcome diagnostic, not an outcome-row result): the D2 retrieval-attribution diagnostic fired its frozen proceed_block rule — SGDR-fused ranking scored V-stacked@1 = 3/8 vs V-primitive@1 = 7/8 on panel tasks 1-8 (reproduced identically) => BLOCK_ASSEMBLY_REPAIR; disposed by request rev 6 + v4 item V1 via versioned ONE-SHOT front-door reversion with PERMANENT treatment freeze. Recorded as a composition boundary condition on Intel's accepted SGDR mechanism: fused scoring UNDERPERFORMED a primitive lexical scorer on this panel/store while eligibility was intact; the",
       "durable_refs": [
         "git:origin/lab/product@e84b11c (seventh session: PB-001 re-auth rev 7 + directed_pre_outcome_revision_v5 W1-W8 + ledger/hypotheses refresh)",
         "git:origin/lab/product@d944594 (eighth session: formal BLOCKED-review receipt, WATCH armed-park disposition, recovery-hash pins)"
@@ -1800,7 +1800,7 @@
       "evidence_status": "OPERATIONAL_DIAGNOSTIC",
       "importance": "MEDIUM",
       "kind": "COST",
-      "summary": "Run economics: wall clock 18:58:05Z->21:07:55Z (~129.8 min) of which ~10.8 min queue latency before the first job started (run_started_at 18:58:05Z vs PRODUCT DIRECTOR start 19:08:53Z); four executed jobs totaling ~118.8 busy minutes (Director 23.4 + Architect 60.1 + Builder 26.6 + Build-Block 8.7); four skipped jobs cost nothing. Provider-latency tax: 107 'OpenCode/Ox network signature detected; watching for a 300s stall' warnings (Architect 71, Builder 27, Directors 9+9) with ZERO aborts and zero retries (all sessions attempt 1/6) \u2014 mid-session slow responses dominated the Architect hour wit",
+      "summary": "Run economics: wall clock 18:58:05Z->21:07:55Z (~129.8 min) of which ~10.8 min queue latency before the first job started (run_started_at 18:58:05Z vs PRODUCT DIRECTOR start 19:08:53Z); four executed jobs totaling ~118.8 busy minutes (Director 23.4 + Architect 60.1 + Builder 26.6 + Build-Block 8.7); four skipped jobs cost nothing. Provider-latency tax: 107 'OpenCode/Ox network signature detected; watching for a 300s stall' warnings (Architect 71, Builder 27, Directors 9+9) with ZERO aborts and zero retries (all sessions attempt 1/6) — mid-session slow responses dominated the Architect hour wit",
       "durable_refs": [
         "git:origin/lab/product@e84b11c (seventh session: PB-001 re-auth rev 7 + directed_pre_outcome_revision_v5 W1-W8 + ledger/hypotheses refresh)",
         "git:origin/lab/product@d944594 (eighth session: formal BLOCKED-review receipt, WATCH armed-park disposition, recovery-hash pins)"
@@ -1819,7 +1819,7 @@
       "evidence_status": "DUPLICATE",
       "importance": "MEDIUM",
       "kind": "OTHER",
-      "summary": "Lane signals integrated as inputs (all already durable in their home lanes \u2014 recorded here as navigation, not new evidence): Graph graph-inheritance-scaling cycle 1 SCALING-HOLDS at narrow basis (quotes-only, depth 4-5, memory-led 1-4 novel actions vs 49-76 cold; audit PASS after same-cycle repair); Physics WP-006 identifiability gate FALSIFIED with TERMINATE_LANE engaged (third audited closure feeding PH-3 REJECTED permanent; salvage = descriptive exports + seam-lint lesson adopted as interface requirement); Intel cycle-5 Unbrowse clean-room reproduction VALIDATED_USEFUL at PROOF_OF_CONCEPT c",
+      "summary": "Lane signals integrated as inputs (all already durable in their home lanes — recorded here as navigation, not new evidence): Graph graph-inheritance-scaling cycle 1 SCALING-HOLDS at narrow basis (quotes-only, depth 4-5, memory-led 1-4 novel actions vs 49-76 cold; audit PASS after same-cycle repair); Physics WP-006 identifiability gate FALSIFIED with TERMINATE_LANE engaged (third audited closure feeding PH-3 REJECTED permanent; salvage = descriptive exports + seam-lint lesson adopted as interface requirement); Intel cycle-5 Unbrowse clean-room reproduction VALIDATED_USEFUL at PROOF_OF_CONCEPT c",
       "durable_refs": [
         "git:origin/lab/product@e84b11c (seventh session: PB-001 re-auth rev 7 + directed_pre_outcome_revision_v5 W1-W8 + ledger/hypotheses refresh)",
         "git:origin/lab/product@d944594 (eighth session: formal BLOCKED-review receipt, WATCH armed-park disposition, recovery-hash pins)"
@@ -1855,10 +1855,10 @@
       "evidence_status": "OPERATIONAL_DIAGNOSTIC",
       "importance": "MEDIUM",
       "kind": "COST",
-      "summary": "\u224881 min wall for zero durable bytes: ~27m10s queued (created 18:47:05Z \u2192 job start 19:14:15Z) + ~53m48s job. Agent time split across TWO attempts: attempt 1/6 ran 19:14:29\u219219:25:28 (~11 min of context loading + mount reading DISCARDED when SPIDER_NETWORK_STALL_DETECTED fired after a 300s silent stall; 300s backoff); attempt 2/6 ran 19:30:29\u219220:07:54 (~37.5 min, fully productive: all five critic subagents completed, synthesis written, deliverables verified). Attempt 1 additionally wasted a cto_physics subagent dispatch at 19:20:25 on a tool-call JSON failure ('Invalid input for tool task: JSON ",
+      "summary": "≈81 min wall for zero durable bytes: ~27m10s queued (created 18:47:05Z → job start 19:14:15Z) + ~53m48s job. Agent time split across TWO attempts: attempt 1/6 ran 19:14:29→19:25:28 (~11 min of context loading + mount reading DISCARDED when SPIDER_NETWORK_STALL_DETECTED fired after a 300s silent stall; 300s backoff); attempt 2/6 ran 19:30:29→20:07:54 (~37.5 min, fully productive: all five critic subagents completed, synthesis written, deliverables verified). Attempt 1 additionally wasted a cto_physics subagent dispatch at 19:20:25 on a tool-call JSON failure ('Invalid input for tool task: JSON ",
       "durable_refs": [
-        "git:0f4563e6eb2e78c911cb8a693d971624a4f3e9f1 ('cto: fix duplicate charter validation') \u2014 triggering push, durable on main; ALSO the push that cancelled queued council #15 (runs/32885496244.json)",
-        "git:1b25f6357f1b640f304391cbb9bdd643be1240b6 ('state: reconcile research-program succession', spider-program-supervisor, 19:02:24Z) \u2014 ACTUAL base the session ran on, NOT the trigger sha: checkout step used 'git checkout -B main refs/remotes/origin/main' (latest origin/main fetched at job start), and the persist-step 'git reset --hard HEAD' printed 'HEAD is now at 1b25f63'. Provenance precision: this council reviewed lane mounts against main@1b25f63."
+        "git:0f4563e6eb2e78c911cb8a693d971624a4f3e9f1 ('cto: fix duplicate charter validation') — triggering push, durable on main; ALSO the push that cancelled queued council #15 (runs/32885496244.json)",
+        "git:1b25f6357f1b640f304391cbb9bdd643be1240b6 ('state: reconcile research-program succession', spider-program-supervisor, 19:02:24Z) — ACTUAL base the session ran on, NOT the trigger sha: checkout step used 'git checkout -B main refs/remotes/origin/main' (latest origin/main fetched at job start), and the persist-step 'git reset --hard HEAD' printed 'HEAD is now at 1b25f63'. Provenance precision: this council reviewed lane mounts against main@1b25f63."
       ],
       "route_to": [
         "INFRA",
@@ -1873,10 +1873,10 @@
       "evidence_status": "LOG_ONLY_UNAUDITED",
       "importance": "MEDIUM",
       "kind": "RESULT",
-      "summary": "Trigger parent ATTRIBUTED mechanically: created 18:44:09Z, exactly 3 s after queued shell 32875584974 completed-as-cancelled (updated_at 18:44:06Z) and product-supervisor.yml at bcd16deb listens on workflow_run types:[completed] of 'SPIDER Product and Beta Lane' (curator-verified in Git). A cancellation completion fires workflow_run listeners just like a real lane finish \u2014 so cancelling ONE stale shell spawned four same-second orchestration runs across three other workflows (curator #13 = 32885496153, watchdog #84 = 32885496242, council #15 = 32885496244) plus this supervisor re-firing.",
+      "summary": "Trigger parent ATTRIBUTED mechanically: created 18:44:09Z, exactly 3 s after queued shell 32875584974 completed-as-cancelled (updated_at 18:44:06Z) and product-supervisor.yml at bcd16deb listens on workflow_run types:[completed] of 'SPIDER Product and Beta Lane' (curator-verified in Git). A cancellation completion fires workflow_run listeners just like a real lane finish — so cancelling ONE stale shell spawned four same-second orchestration runs across three other workflows (curator #13 = 32885496153, watchdog #84 = 32885496242, council #15 = 32885496244) plus this supervisor re-firing.",
       "durable_refs": [
         "/tmp/spider_run_evidence/32885496131/logs.txt (bundle copy)",
-        "git:bcd16deb480c16d4e0a854961e76a7a94b68fdb5:.github/workflows/product-supervisor.yml (as dispatched; workflow_run listener on 'SPIDER Product and Beta Lane' [completed] \u2014 curator-verified at this sha)"
+        "git:bcd16deb480c16d4e0a854961e76a7a94b68fdb5:.github/workflows/product-supervisor.yml (as dispatched; workflow_run listener on 'SPIDER Product and Beta Lane' [completed] — curator-verified at this sha)"
       ],
       "route_to": [
         "INFRA",
@@ -1891,7 +1891,7 @@
       "evidence_status": "LOG_ONLY_UNAUDITED",
       "importance": "MEDIUM",
       "kind": "RESULT",
-      "summary": "ATTRIBUTION CLOSURE for a previously-unattributable cancellation: at 18:44:05.36\u201318:44:05.96Z this supervisor emitted '::warning::Cancelling stale queued Product run 32875584974 while another Product run is in progress; continuation will be re-derived from accepted state.' followed by '\u2713 Request to cancel workflow 32875584974 submitted.' \u2014 timestamps exactly matching 32875584974's updated_at=18:44:06Z. Record runs/32875584974.json had concluded 'This instance is UNATTRIBUTABLE from any surviving local evidence: empty log means no canceller warning lines'; that open question is now RESOLVED: ca",
+      "summary": "ATTRIBUTION CLOSURE for a previously-unattributable cancellation: at 18:44:05.36–18:44:05.96Z this supervisor emitted '::warning::Cancelling stale queued Product run 32875584974 while another Product run is in progress; continuation will be re-derived from accepted state.' followed by '✓ Request to cancel workflow 32875584974 submitted.' — timestamps exactly matching 32875584974's updated_at=18:44:06Z. Record runs/32875584974.json had concluded 'This instance is UNATTRIBUTABLE from any surviving local evidence: empty log means no canceller warning lines'; that open question is now RESOLVED: ca",
       "durable_refs": [
         "/tmp/spider_run_evidence/32885481049/logs.txt (bundle copy; SOLE surviving witness naming the canceller of run 32875584974)",
         "git:bcd16deb480c16d4e0a854961e76a7a94b68fdb5:.github/workflows/product-supervisor.yml (as dispatched; curator-verified ancestor of origin/main)"
@@ -1910,9 +1910,9 @@
       "evidence_status": "OPERATIONAL_DIAGNOSTIC",
       "importance": "MEDIUM",
       "kind": "COST",
-      "summary": "Run economics: TEAM GRAPH job 18:23:29\u219220:54:33Z \u22482h31m (incl. TWO SPIDER_NETWORK_STALL_DETECTED-after-300s kills discarding attempts 1\u21922 @18:39\u219218:44 and 2\u21923 @18:57\u219219:02; attempt 3 completed end-to-end; numpy installed in-session; suite 93 passed + 1 known pre-existing Physics fixture failure untouched since f42c14d); INDEPENDENT AUDITOR 20:54:43\u219221:17:10Z \u224822m27s; RETURN-TO-CODER dispatch ~3s; Director+BLOCKED jobs correctly skipped for a REVISE gate. Whole run \u22482h53m57s wall. Mid-run git mishap self-caught ('baggage commit accidentally swept in the P0 files' via git add -A \u2192 redone cleanly",
+      "summary": "Run economics: TEAM GRAPH job 18:23:29→20:54:33Z ≈2h31m (incl. TWO SPIDER_NETWORK_STALL_DETECTED-after-300s kills discarding attempts 1→2 @18:39→18:44 and 2→3 @18:57→19:02; attempt 3 completed end-to-end; numpy installed in-session; suite 93 passed + 1 known pre-existing Physics fixture failure untouched since f42c14d); INDEPENDENT AUDITOR 20:54:43→21:17:10Z ≈22m27s; RETURN-TO-CODER dispatch ~3s; Director+BLOCKED jobs correctly skipped for a REVISE gate. Whole run ≈2h53m57s wall. Mid-run git mishap self-caught ('baggage commit accidentally swept in the P0 files' via git add -A → redone cleanly",
       "durable_refs": [
-        "git:origin/cycle/graph/32883457025/team@a8fc78502e29066d4e6df1f2242ad175331ff4b3 (curator-refetched byte-exact; freeze chain e6c0798\u21921a83311(prereg)\u21929cb851c(A1)\u219296ec691(A2)\u2192f878ef3(P1 canonical)\u2192a8fc785(P2 grid))",
+        "git:origin/cycle/graph/32883457025/team@a8fc78502e29066d4e6df1f2242ad175331ff4b3 (curator-refetched byte-exact; freeze chain e6c0798→1a83311(prereg)→9cb851c(A1)→96ec691(A2)→f878ef3(P1 canonical)→a8fc785(P2 grid))",
         "git:origin/cycle/graph/32883457025/audit@94b1698f8f29d3a2158c560288f1fcd23f5f50be (curator-refetched byte-exact; results/audit/CYCLE_32883457025_GRAPH_GATE.json gate=REVISE safe_to_integrate=false required_fixes=RF-D1..RF-D5, cycle={run_id,program graph-inheritance-generalization,repair_round 1,audited_snapshot_head a8fc785,accepted_base 3e36b4c})"
       ],
       "route_to": [
@@ -1947,10 +1947,10 @@
       "evidence_status": "OPERATIONAL_DIAGNOSTIC",
       "importance": "MEDIUM",
       "kind": "COST",
-      "summary": "\u224883 min job wall for zero durable bytes: 3 OpenCode attempts (attempt 1 completed its full five-critic wave 17:59\u201318:07 then hit SPIDER_NETWORK_STALL_DETECTED after 300s stall \u2192 discarded; attempt 2 stalled again 18:40 \u2192 discarded mid-flight; attempt 3 delivered 18:45\u219219:14). Pure backoff \u224810 min (2\u00d7300s); one full critic wave (~15 min of specialist work \u00d75 critics) thrown away by the restart-attempt design. The session-side schema pre-check passed while the workflow validator failed \u2014 the last line of defense ran in the wrong order of strictness.",
+      "summary": "≈83 min job wall for zero durable bytes: 3 OpenCode attempts (attempt 1 completed its full five-critic wave 17:59–18:07 then hit SPIDER_NETWORK_STALL_DETECTED after 300s stall → discarded; attempt 2 stalled again 18:40 → discarded mid-flight; attempt 3 delivered 18:45→19:14). Pure backoff ≈10 min (2×300s); one full critic wave (~15 min of specialist work ×5 critics) thrown away by the restart-attempt design. The session-side schema pre-check passed while the workflow validator failed — the last line of defense ran in the wrong order of strictness.",
       "durable_refs": [
-        "git:0843acb56ed6cd85b45e49fca207db744196be6f ('cto: require continued orthogonal Physics search') \u2014 the triggering push, durable on main",
-        "git origin/lab/cto \u2014 LATER, DIFFERENT fifth-pass council output (ENTRY CTO-5 dated 2026-08-26, council_pass=CTO-5, one frontier charter web-physics-volatility-freshness v1 CRITICAL; curator Git-verified). This FAILED run's own CTO-5 artifacts are NOT on any ref."
+        "git:0843acb56ed6cd85b45e49fca207db744196be6f ('cto: require continued orthogonal Physics search') — the triggering push, durable on main",
+        "git origin/lab/cto — LATER, DIFFERENT fifth-pass council output (ENTRY CTO-5 dated 2026-08-26, council_pass=CTO-5, one frontier charter web-physics-volatility-freshness v1 CRITICAL; curator Git-verified). This FAILED run's own CTO-5 artifacts are NOT on any ref."
       ],
       "route_to": [
         "INFRA",
@@ -1965,7 +1965,7 @@
       "evidence_status": "DURABLE_UNAUDITED",
       "importance": "MEDIUM",
       "kind": "BUG",
-      "summary": "Three design defects required out BEFORE freeze (auditor F1\u2013F3): F1 time.sleep(1.2) inside the TIMED baseline-only arm-A demoblaze flow \u2014 the exact cycle-2 forensics artifact class (baseline latency inflation); F2 QUIESCE_GAP_MS['petstore']=924.6 proves undisclosed live pilot calibration happened pre-freeze with no committed artifacts (must be disclosed in a pre-freeze activity ledger); F3 the natural-TTL clause is structurally incompletable within one session ('NOT_EXECUTED_THIS_RUN' encoded in code) \u2014 must be bounded honestly at freeze time.",
+      "summary": "Three design defects required out BEFORE freeze (auditor F1–F3): F1 time.sleep(1.2) inside the TIMED baseline-only arm-A demoblaze flow — the exact cycle-2 forensics artifact class (baseline latency inflation); F2 QUIESCE_GAP_MS['petstore']=924.6 proves undisclosed live pilot calibration happened pre-freeze with no committed artifacts (must be disclosed in a pre-freeze activity ledger); F3 the natural-TTL clause is structurally incompletable within one session ('NOT_EXECUTED_THIS_RUN' encoded in code) — must be bounded honestly at freeze time.",
       "durable_refs": [
         "git:origin/cycle/intel/32878215017/scout@a74fdb027a3698a7d5e681c8d255e0a49af62350 (scout snapshot: reports/intel/scout/cycle6_scout_report.md, results/intel/scout/cycle6_findings.json, state/intel_candidate.json; curator-verified ref exists on origin)",
         "git:origin/cycle/intel/32878215017/repro@c1543f80993bbe87e45f504f69694832df3f7587 (round-0 instrumentation: 18 files/+4166 lines under intel/experiments/unbrowse_ladder_multihost/; curator-verified ref exists on origin; later restored byte-exact into repair lineage per state/intel_reproduction.json RF-A_restore, 18/18 blob-hash verified)"
@@ -1984,7 +1984,7 @@
       "evidence_status": "AUDITED_DURABLE",
       "importance": "MEDIUM",
       "kind": "RESULT",
-      "summary": "Audited cross-lane routing emitted by the Director: GRAPH MEDIUM advisory R-2 in INTEL_TO_GRAPH.md (route records as the \u00a710 APIs/direct-routes layer behind a store flag; pointer-only semantics as a pass/fail gate; addressing arm targeting the prefix-artifact failure mode; no Graph files touched); PRODUCT HIGH signal CYCLE_32873081963.json with P-6 (validated execution semantics) and P-7 registry-trust measurement (~12% malicious skills; 9/11 registries publish unaudited servers) in INTEL_PRODUCT_INFRA.md; PHYSICS LOW untouched by design.",
+      "summary": "Audited cross-lane routing emitted by the Director: GRAPH MEDIUM advisory R-2 in INTEL_TO_GRAPH.md (route records as the §10 APIs/direct-routes layer behind a store flag; pointer-only semantics as a pass/fail gate; addressing arm targeting the prefix-artifact failure mode; no Graph files touched); PRODUCT HIGH signal CYCLE_32873081963.json with P-6 (validated execution semantics) and P-7 registry-trust measurement (~12% malicious skills; 9/11 registries publish unaudited servers) in INTEL_PRODUCT_INFRA.md; PHYSICS LOW untouched by design.",
       "durable_refs": [
         "git:origin/cycle/intel/32873081963/audit@d1b9bb1 (reports/intel/audit/cycle5_run32873081963_INTEL_AUDIT.md + results/intel/audit/CYCLE_32873081963_INTEL_GATE.json, gate=PASS/safe_to_integrate=true/mechanism_status=VALIDATED_USEFUL/ceiling=PROOF_OF_CONCEPT; curator Git-verified on remote)",
         "git:origin/cycle/intel/32873081963/repro@5eaa700b (repair-round-1 tree incl. cycle5_report.md and zero-edit proofs; curator Git-verified)"
@@ -2038,7 +2038,7 @@
       "evidence_status": "DURABLE_UNAUDITED",
       "importance": "MEDIUM",
       "kind": "BUG",
-      "summary": "NEW HYGIENE DEFECT found by the sixth session (not by the builder): state/product_beta_build.json.manifest_hashes.kb_frozen_sha256 recorded tail '\u2026c0a0695b\u2026' matching NO committed version of kb_frozen.sqlite (git-history re-hash of every blob yields only '\u2026f89abd8f\u2026', which MANIFEST, diag record and independent recomputation agree on). Pure transcription defect; MANIFEST authoritative; correction-with-disclosure directed at next builder commit. Transcription-defect class joins report-vs-data drift (CF-07) as a self-report reliability risk.",
+      "summary": "NEW HYGIENE DEFECT found by the sixth session (not by the builder): state/product_beta_build.json.manifest_hashes.kb_frozen_sha256 recorded tail '…c0a0695b…' matching NO committed version of kb_frozen.sqlite (git-history re-hash of every blob yields only '…f89abd8f…', which MANIFEST, diag record and independent recomputation agree on). Pure transcription defect; MANIFEST authoritative; correction-with-disclosure directed at next builder commit. Transcription-defect class joins report-vs-data drift (CF-07) as a self-report reliability risk.",
       "durable_refs": [
         "git:origin/lab/product@ad25538 ('Product Director synthesis 32870361258' = rev-5 re-auth persist; parent of F0)",
         "git:origin/lab/product@86b0102 + tag pb001-F0 ('F0: integrate marooned frozen prereg v2 tree (1457fd3) UNCHANGED into lab/product')"
@@ -2074,7 +2074,7 @@
       "evidence_status": "DURABLE_UNAUDITED",
       "importance": "MEDIUM",
       "kind": "RESULT",
-      "summary": "Builder positive residue (all verified by sixth session independently, not self-report): 65 offline tests green incl. WP-0 byte-faithfulness gates reproducing Graph/Intel fixture numbers EXACTLY; Phase A LIVE producers solved 8/8 training tasks attempt 1 with KB frozen sha256 893486e348210d65f89abd8f\u2026 (byte-match across kb_frozen/kb_live/MANIFEST/diag record, curator-recomputable); B2 sanity 4/4 routes from byte-restored KB; route-absence zero violations; HTTP floor 10/10 reachable at 0 tokens; maintenance cycle measured; zero out-of-scope files touched; win rule untouched throughout. Cross-la",
+      "summary": "Builder positive residue (all verified by sixth session independently, not self-report): 65 offline tests green incl. WP-0 byte-faithfulness gates reproducing Graph/Intel fixture numbers EXACTLY; Phase A LIVE producers solved 8/8 training tasks attempt 1 with KB frozen sha256 893486e348210d65f89abd8f… (byte-match across kb_frozen/kb_live/MANIFEST/diag record, curator-recomputable); B2 sanity 4/4 routes from byte-restored KB; route-absence zero violations; HTTP floor 10/10 reachable at 0 tokens; maintenance cycle measured; zero out-of-scope files touched; win rule untouched throughout. Cross-la",
       "durable_refs": [
         "git:origin/lab/product@ad25538 ('Product Director synthesis 32870361258' = rev-5 re-auth persist; parent of F0)",
         "git:origin/lab/product@86b0102 + tag pb001-F0 ('F0: integrate marooned frozen prereg v2 tree (1457fd3) UNCHANGED into lab/product')"
@@ -2093,7 +2093,7 @@
       "evidence_status": "DURABLE_UNAUDITED",
       "importance": "MEDIUM",
       "kind": "OTHER",
-      "summary": "Sixth-session critic adoptions now durable in ledger 86a59ec: one-shot front-door freeze (no repeated selection), kill-counter tightening closing the 'blocked\u2260invalid' loophole, dress-rehearsal gate before go-live, swap justification restricted to pre-D2 evidence, assumption-A2 ratification litmus; only A2 reworded; all win floors byte-intact through revision 6.",
+      "summary": "Sixth-session critic adoptions now durable in ledger 86a59ec: one-shot front-door freeze (no repeated selection), kill-counter tightening closing the 'blocked≠invalid' loophole, dress-rehearsal gate before go-live, swap justification restricted to pre-D2 evidence, assumption-A2 ratification litmus; only A2 reworded; all win floors byte-intact through revision 6.",
       "durable_refs": [
         "git:origin/lab/product@ad25538 ('Product Director synthesis 32870361258' = rev-5 re-auth persist; parent of F0)",
         "git:origin/lab/product@86b0102 + tag pb001-F0 ('F0: integrate marooned frozen prereg v2 tree (1457fd3) UNCHANGED into lab/product')"
@@ -2111,10 +2111,10 @@
       "evidence_status": "AUDITED_DURABLE",
       "importance": "LOW",
       "kind": "OTHER",
-      "summary": "Audit-closed advisory items (additive, nothing rewritten): verification v3 closes advisory A1/C10 (= v2 checks unchanged + restored C3_rows_before_freeze_commit=0 + provenance block) generated by a subprocess wrapper touching no frozen code; v1/v2 artifacts preserved byte-identical with matching hashes. Two cosmetic non-blocking observations recorded: '19/19 OK' undercounts the 20 verified files, and the quoted live-collection window is looser than the committed-row span (21:55:03Z\u201323:40:58Z + manifest write at 00:01Z).",
+      "summary": "Audit-closed advisory items (additive, nothing rewritten): verification v3 closes advisory A1/C10 (= v2 checks unchanged + restored C3_rows_before_freeze_commit=0 + provenance block) generated by a subprocess wrapper touching no frozen code; v1/v2 artifacts preserved byte-identical with matching hashes. Two cosmetic non-blocking observations recorded: '19/19 OK' undercounts the 20 verified files, and the quoted live-collection window is looser than the committed-row span (21:55:03Z–23:40:58Z + manifest write at 00:01Z).",
       "durable_refs": [
-        "git:origin/cycle/physics/32866107906/team@38e697b86988c98c2aeac6c40d07e569ddd80cf0 \u2014 WP-006 terminal stewardship & integration handoff: bit-exact carry commit 91eff06 (23 WP-006 scientific files blob-verified vs certified snapshot 45fa5db; dataset blob unchanged since original result commit 8d84196), separate control-plane sync commit f64848b (67 paths byte-identical to main 92192ea), purely additive ledger (+112/-0 vs d3afd9b), fresh-env verification + ONE new descriptive exhibit + terminal Director decision package",
-        "git:origin/cycle/physics/32866107906/audit@7000c800fde031491b8236a096dd0f107a1b6b2c \u2014 CYCLE_32866107906_PHYSICS_GATE.json gate=PASS/safe_to_integrate=true/required_fixes=[] (curator re-verified reachable on remote)"
+        "git:origin/cycle/physics/32866107906/team@38e697b86988c98c2aeac6c40d07e569ddd80cf0 — WP-006 terminal stewardship & integration handoff: bit-exact carry commit 91eff06 (23 WP-006 scientific files blob-verified vs certified snapshot 45fa5db; dataset blob unchanged since original result commit 8d84196), separate control-plane sync commit f64848b (67 paths byte-identical to main 92192ea), purely additive ledger (+112/-0 vs d3afd9b), fresh-env verification + ONE new descriptive exhibit + terminal Director decision package",
+        "git:origin/cycle/physics/32866107906/audit@7000c800fde031491b8236a096dd0f107a1b6b2c — CYCLE_32866107906_PHYSICS_GATE.json gate=PASS/safe_to_integrate=true/required_fixes=[] (curator re-verified reachable on remote)"
       ],
       "route_to": [
         "PHYSICS"
@@ -2128,10 +2128,10 @@
       "evidence_status": "AUDITED_DURABLE",
       "importance": "LOW",
       "kind": "OTHER",
-      "summary": "Process pattern now validated once end-to-end: control-plane sync SEPARATED from scientific commits (f64848b carries only role/directive/architecture docs byte-identical to main; scientific carry isolated in 91eff06) \u2014 adopted per prior audit advisory and explicitly verified by this run's auditor; a clean template for lanes that must sync docs without polluting evidence provenance.",
+      "summary": "Process pattern now validated once end-to-end: control-plane sync SEPARATED from scientific commits (f64848b carries only role/directive/architecture docs byte-identical to main; scientific carry isolated in 91eff06) — adopted per prior audit advisory and explicitly verified by this run's auditor; a clean template for lanes that must sync docs without polluting evidence provenance.",
       "durable_refs": [
-        "git:origin/cycle/physics/32866107906/team@38e697b86988c98c2aeac6c40d07e569ddd80cf0 \u2014 WP-006 terminal stewardship & integration handoff: bit-exact carry commit 91eff06 (23 WP-006 scientific files blob-verified vs certified snapshot 45fa5db; dataset blob unchanged since original result commit 8d84196), separate control-plane sync commit f64848b (67 paths byte-identical to main 92192ea), purely additive ledger (+112/-0 vs d3afd9b), fresh-env verification + ONE new descriptive exhibit + terminal Director decision package",
-        "git:origin/cycle/physics/32866107906/audit@7000c800fde031491b8236a096dd0f107a1b6b2c \u2014 CYCLE_32866107906_PHYSICS_GATE.json gate=PASS/safe_to_integrate=true/required_fixes=[] (curator re-verified reachable on remote)"
+        "git:origin/cycle/physics/32866107906/team@38e697b86988c98c2aeac6c40d07e569ddd80cf0 — WP-006 terminal stewardship & integration handoff: bit-exact carry commit 91eff06 (23 WP-006 scientific files blob-verified vs certified snapshot 45fa5db; dataset blob unchanged since original result commit 8d84196), separate control-plane sync commit f64848b (67 paths byte-identical to main 92192ea), purely additive ledger (+112/-0 vs d3afd9b), fresh-env verification + ONE new descriptive exhibit + terminal Director decision package",
+        "git:origin/cycle/physics/32866107906/audit@7000c800fde031491b8236a096dd0f107a1b6b2c — CYCLE_32866107906_PHYSICS_GATE.json gate=PASS/safe_to_integrate=true/required_fixes=[] (curator re-verified reachable on remote)"
       ],
       "route_to": [
         "GRAPH",
@@ -2148,9 +2148,9 @@
       "evidence_status": "DURABLE_UNAUDITED",
       "importance": "MEDIUM",
       "kind": "BUG",
-      "summary": "ALREADY_SATISFIED is unreachable by construction (precondition ordering + missing return key), killing flagship E5 cell; verify_ms is a hardcoded 0.05 constant rather than a measurement; V2 \u00a76 maintenance/storage overhead accounting is absent entirely \u2014 i.e., the economics vector cannot be computed from this implementation yet.",
+      "summary": "ALREADY_SATISFIED is unreachable by construction (precondition ordering + missing return key), killing flagship E5 cell; verify_ms is a hardcoded 0.05 constant rather than a measurement; V2 §6 maintenance/storage overhead accounting is absent entirely — i.e., the economics vector cannot be computed from this implementation yet.",
       "durable_refs": [
-        "git:origin/cycle/runtime/32864270667/team@af164b9c26cfb6df2a4a855f9238b02156edeaf3 (47 files, 17224 insertions: runtime/ package \u2014 resolver.py, adapters.py, registry.py, derivation.py, addressing.py, verifier.py, loop.py, accounting.py, baselines.py, browser.py, explorer.py, kb.py, schema.py, sigutil.py; runtime/bench/{prereg_r0.md,tasks_r0.py,run_bench.py,analyze_r0.py,decoys.py,mirror.py}; runtime/store/registry/ 12 derived cap.graph.* capsules + _derivation_report.json; tests/runtime/ 7 files incl. fake_session.py; copies of accepted Graph evidence CYCLE_32783797303_GRAPH_GATE.json + cycle3 store dump)",
+        "git:origin/cycle/runtime/32864270667/team@af164b9c26cfb6df2a4a855f9238b02156edeaf3 (47 files, 17224 insertions: runtime/ package — resolver.py, adapters.py, registry.py, derivation.py, addressing.py, verifier.py, loop.py, accounting.py, baselines.py, browser.py, explorer.py, kb.py, schema.py, sigutil.py; runtime/bench/{prereg_r0.md,tasks_r0.py,run_bench.py,analyze_r0.py,decoys.py,mirror.py}; runtime/store/registry/ 12 derived cap.graph.* capsules + _derivation_report.json; tests/runtime/ 7 files incl. fake_session.py; copies of accepted Graph evidence CYCLE_32783797303_GRAPH_GATE.json + cycle3 store dump)",
         "git:origin/cycle/runtime/32864270667/audit@820f38ec67683b7587822d0fa10f11c3527ca081 (reports/audit/CYCLE_32864270667_RUNTIME.md + results/audit/CYCLE_32864270667_RUNTIME_GATE.json: gate=REVISE, safe_to_integrate=false, claims=9, required_fixes=6 [RF1-RF6]; curator re-verified reachable on remote)"
       ],
       "route_to": [
@@ -2277,7 +2277,7 @@
       "summary": "ROOT CAUSE LOG-ONLY: BETA ARCHITECT job failed ~4s after start: the workflow step 'curl --retry 3 --retry-all-errors --retry-delay 15 -fsSL https://opencode.ai/install | bash' exited 1 with 'Failed to fetch version information'. The curl flags retry transport errors but the installer script itself fetched version metadata and failed without a retry wrapper at the step level (unlike agent invocations, which get 6 attempts via run-opencode-with-retry.sh). One transient installer failure therefore killed the entire cycle: architect produced nothing, builder/tester/auditor/director jobs skipped, a",
       "durable_refs": [
         "git:origin/lab/product@1ecb1b8947b1111dd44ee6b2a85e4ff75b45b92b (Director synthesis 32820217763: state/product_beta_request.json rev2 with revision_note + directed_pre_outcome_revision_v2, state/product_direction.json beta_launch=true session 'product-director-second-session', docs/PRODUCT_LEDGER.md, docs/PRODUCT_ARCHITECTURE_HYPOTHESES.md, results/product/PRODUCT_HYPOTHESES.json)",
-        "git:origin/cycle/product/32820217763/architect@1ecb1b8947b1111dd44ee6b2a85e4ff75b45b92b (EMPTY snapshot: identical to lab/product tip at push time; 'nothing to commit' \u2014 provenance only)"
+        "git:origin/cycle/product/32820217763/architect@1ecb1b8947b1111dd44ee6b2a85e4ff75b45b92b (EMPTY snapshot: identical to lab/product tip at push time; 'nothing to commit' — provenance only)"
       ],
       "route_to": [
         "INFRA",
@@ -2297,7 +2297,7 @@
       "summary": "Independent auditor did NOT just rubber-stamp: wrote its own ablation-rederivation script (CYCLE_32800296360_ablation_rederive.py, committed to the audit branch), re-derived the control structure from artifacts, then issued PASS with three explicit integration conditions (stale repo URL fix, wording constraints preserved, delivery banner). Director complied on all conditions during integration and fixed state/intel_candidate.json accordingly.",
       "durable_refs": [
         "git:origin/lab/intel@fca0acb (Director integration 'accept audited SGDR state-grounded retrieval (VALIDATED_USEFUL, PoC ceiling)'; parents ecce2a7 audit-gate integration, ef9de0e repro integration, 2b2089b scout integration, da78065 control-plane sync provenance commit)",
-        "git:origin/cycle/intel/32800296360/audit@cac8b1338aa864660c7c27d0c130d652a0b203a2 (results/intel/audit/CYCLE_32800296360_INTEL_GATE.json gate=PASS safe_to_integrate=true; results/intel/audit/CYCLE_32800296360_ablation_rederive.py \u2014 auditor's own ablation rederivation)"
+        "git:origin/cycle/intel/32800296360/audit@cac8b1338aa864660c7c27d0c130d652a0b203a2 (results/intel/audit/CYCLE_32800296360_INTEL_GATE.json gate=PASS safe_to_integrate=true; results/intel/audit/CYCLE_32800296360_ablation_rederive.py — auditor's own ablation rederivation)"
       ],
       "route_to": [
         "INTEL",
@@ -2315,7 +2315,7 @@
       "summary": "Next Intel mission set by Director (state/intel_loop.json continue=true): independent matched-cost test of Unbrowse-style browser-to-first-party-API route capture/replay escalation; vendor headline (3.6x/5.4x) explicitly UNVERIFIED/OFFICIAL_CLAIM; no variant re-testing of SGDR inside Intel. Executed by run 32809100696's scout (same batch).",
       "durable_refs": [
         "git:origin/lab/intel@fca0acb (Director integration 'accept audited SGDR state-grounded retrieval (VALIDATED_USEFUL, PoC ceiling)'; parents ecce2a7 audit-gate integration, ef9de0e repro integration, 2b2089b scout integration, da78065 control-plane sync provenance commit)",
-        "git:origin/cycle/intel/32800296360/audit@cac8b1338aa864660c7c27d0c130d652a0b203a2 (results/intel/audit/CYCLE_32800296360_INTEL_GATE.json gate=PASS safe_to_integrate=true; results/intel/audit/CYCLE_32800296360_ablation_rederive.py \u2014 auditor's own ablation rederivation)"
+        "git:origin/cycle/intel/32800296360/audit@cac8b1338aa864660c7c27d0c130d652a0b203a2 (results/intel/audit/CYCLE_32800296360_INTEL_GATE.json gate=PASS safe_to_integrate=true; results/intel/audit/CYCLE_32800296360_ablation_rederive.py — auditor's own ablation rederivation)"
       ],
       "route_to": [
         "INTEL",
@@ -2368,9 +2368,9 @@
       "evidence_status": "OPERATIONAL_DIAGNOSTIC",
       "importance": "MEDIUM",
       "kind": "COST",
-      "summary": "~64m total wall clock: scout 7s, reproducer 40m20s (largely WASTED \u2014 delivery lost; 5 provider-outage retries across 7 OpenCode attempts early in the job), auditor 23m17s spent almost entirely on loss forensics rather than science. The incident cost one full extra repair round (run 32800296360) before PASS.",
+      "summary": "~64m total wall clock: scout 7s, reproducer 40m20s (largely WASTED — delivery lost; 5 provider-outage retries across 7 OpenCode attempts early in the job), auditor 23m17s spent almost entirely on loss forensics rather than science. The incident cost one full extra repair round (run 32800296360) before PASS.",
       "durable_refs": [
-        "git:origin/cycle/intel/32796176172/repro@0a55649eb5b351fccca600b63323ea235d1482ac ('infra: sync stalled-network watchdog wrapper into Intel lane' \u2014 byte-identical to lab/intel base; tree 00ce8e32\u2026; EMPTY of reproduction content)",
+        "git:origin/cycle/intel/32796176172/repro@0a55649eb5b351fccca600b63323ea235d1482ac ('infra: sync stalled-network watchdog wrapper into Intel lane' — byte-identical to lab/intel base; tree 00ce8e32…; EMPTY of reproduction content)",
         "git:origin/cycle/intel/32796176172/audit@b52b6d5807dd41a58c34716137d1b0e8bdef666c (reports/intel/audit/cycle1_run32796176172_INTEL_AUDIT.md + results/intel/audit/CYCLE_32796176172_INTEL_GATE.json gate=REVISE with RF-A..RF-E + preserved CYCLE_32796176172_snapshot_integrity_check.py which asserts run_tip != base)"
       ],
       "route_to": [
@@ -2386,10 +2386,10 @@
       "evidence_status": "OPERATIONAL_DIAGNOSTIC",
       "importance": "MEDIUM",
       "kind": "COST",
-      "summary": "Team phase 59m30s; single audit ~18m; \u00d78 attempts \u22482h24m of audit compute plus queue/retry overhead spread over ~13h55m (created 00:25:34Z \u2192 updated 14:42:37Z). Net lane cost of the enforcement bug for this program: roughly a half-day delay plus one wasted full audit per retry. 66 stall-watch warnings in this bundle; one provider-outage retry before the attempt-8 audit started.",
+      "summary": "Team phase 59m30s; single audit ~18m; ×8 attempts ≈2h24m of audit compute plus queue/retry overhead spread over ~13h55m (created 00:25:34Z → updated 14:42:37Z). Net lane cost of the enforcement bug for this program: roughly a half-day delay plus one wasted full audit per retry. 66 stall-watch warnings in this bundle; one provider-outage retry before the attempt-8 audit started.",
       "durable_refs": [
-        "git:origin/cycle/graph/32793580374/team@c952569ed588470213e955728d7d436fd72e6053 (frozen scaling instruments + growth outcomes; freeze chain prereg a1d52fc \u2192 instruments cbd0495 \u2192 pre-outcome code 6105fcc (01:16:10Z) \u2192 growth outcomes ~01:17\u201301:23:56Z \u2192 artifacts c952569)",
-        "git:origin/cycle/graph/32793580374/audit@3520df27453f38f250a41fed19246c9876c35ac3 (+ attempts 1\u20138; reports/audit/CYCLE_32793580374_GRAPH.md + results/audit/CYCLE_32793580374_GRAPH_GATE.json gate=REVISE safe_to_integrate=false required_fixes=RF-1..RF-6)"
+        "git:origin/cycle/graph/32793580374/team@c952569ed588470213e955728d7d436fd72e6053 (frozen scaling instruments + growth outcomes; freeze chain prereg a1d52fc → instruments cbd0495 → pre-outcome code 6105fcc (01:16:10Z) → growth outcomes ~01:17–01:23:56Z → artifacts c952569)",
+        "git:origin/cycle/graph/32793580374/audit@3520df27453f38f250a41fed19246c9876c35ac3 (+ attempts 1–8; reports/audit/CYCLE_32793580374_GRAPH.md + results/audit/CYCLE_32793580374_GRAPH_GATE.json gate=REVISE safe_to_integrate=false required_fixes=RF-1..RF-6)"
       ],
       "route_to": [
         "INFRA",
@@ -2440,7 +2440,7 @@
       "evidence_status": "AUDITED_DURABLE",
       "importance": "MEDIUM",
       "kind": "OTHER",
-      "summary": "Methodological pattern worth reusing (all audit-verified): prereg-amendment discipline executed pre-outcome (Amendment A1: KB dump lacks fragment timestamps \u2192 faithful reconstruction last_validated=CONST+id restores the frozen tie-break; constant-timestamp draft broke metric-bearing ties and was never used for design choices); pilot batch with a driver defect (r3_frag ran non-blind via legacy sig-lookup) quarantined as EXPLORATORY provenance under results/graph/provenance/ with guard assertion added, corrected rerun canonical; dev ledger ships every arm including negatives; store discipline pr",
+      "summary": "Methodological pattern worth reusing (all audit-verified): prereg-amendment discipline executed pre-outcome (Amendment A1: KB dump lacks fragment timestamps → faithful reconstruction last_validated=CONST+id restores the frozen tie-break; constant-timestamp draft broke metric-bearing ties and was never used for design choices); pilot batch with a driver defect (r3_frag ran non-blind via legacy sig-lookup) quarantined as EXPLORATORY provenance under results/graph/provenance/ with guard assertion added, corrected rerun canonical; dev ledger ships every arm including negatives; store discipline pr",
       "durable_refs": [
         "git:origin/cycle/graph/32783797303/team@4b4aa533fc65bfb2018ae9121266205136024891 (full robustness repair snapshot: prereg, scorer, live runs, analyses, reports, tests)",
         "git:origin/cycle/graph/32783797303/audit@f81a167e66c9bd1c83b4c175d25d88d61b3685d2 (audit CYCLE_32783797303_GRAPH.md + gate JSON PASS)"
@@ -2459,7 +2459,7 @@
       "evidence_status": "AUDITED_DURABLE",
       "importance": "MEDIUM",
       "kind": "RESULT",
-      "summary": "Audit containment worked exactly as designed: gate=REVISE (safe_to_integrate=false) with four binding fixes and a PREDECLARED ESCALATION RULE \u2014 'a second empty snapshot without RF-3-grade blocker evidence must be gated BLOCKED as repetitive'. The repair (run 32783797303) executed the full program and the round-0 empty attempt was preserved untouched as permanent provenance on lab/graph.",
+      "summary": "Audit containment worked exactly as designed: gate=REVISE (safe_to_integrate=false) with four binding fixes and a PREDECLARED ESCALATION RULE — 'a second empty snapshot without RF-3-grade blocker evidence must be gated BLOCKED as repetitive'. The repair (run 32783797303) executed the full program and the round-0 empty attempt was preserved untouched as permanent provenance on lab/graph.",
       "durable_refs": [
         "git:origin/cycle/graph/32782331702/team@f42c14dbf5f1e5a64f8a9fdf9af8c723689009d9 (empty snapshot = lab/graph base f42c14d, preserved untouched as provenance per director integration)",
         "git:origin/cycle/graph/32782331702/audit@ac46c6467c7c08a7ce4e468aa258fd3a03a2f883 (audit CYCLE_32782331702_GRAPH.md + gate JSON gate=REVISE, safe_to_integrate=false, required_fixes RF-1..RF-4)"
@@ -2570,6 +2570,124 @@
       ],
       "claim_ceiling": "NONE (failed synthesis, no validated advisory)",
       "product_use": "Warning - CTO frontier charters remain OPEN (orphaned time-layer, closing windows); Product should not assume orthogonal Physics successor search is chartered until a future council passes validation and persists."
+    },
+    {
+      "source_run_id": 32905175867,
+      "workflow_name": "SPIDER Graph Lane",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "importance": "HIGH",
+      "kind": "NEGATIVE",
+      "summary": "Graph fused-retrieval c1 MEASUREMENT_INVALID — retrieval-stack-void (gated B-vs-random 0/75 vs 17/75) voids the primary; fused addressing NOT adopted. Secondaries: ungated hard@1 C 20/64 vs B 18/64 vs random 16/64 (3W/1R); gated tie 0-0; battery dummy 5W/6L → UNRESOLVED; execution conversion ZERO at ~2×/~9× overhead; exact goal_sig incumbent dominant 8/12 at 0-14 novel vs 0/12 text arms. No audited compression claim licensed.",
+      "durable_refs": [
+        "evidence/run-memory/runs/32905175867.json",
+        "git:origin/cycle/graph/32905175867/team@4426f40",
+        "git:origin/cycle/graph/32905175867/audit@47ed2cd (REVISE RF-1..RF-5)"
+      ],
+      "route_to": [
+        "GRAPH",
+        "PRODUCT",
+        "CTO"
+      ],
+      "claim_ceiling": "NONE_THIS_RUN",
+      "product_use": "Constraint - fused state-summary ranking is negative knowledge; Product must not adopt this mechanism as a validated building block; retains exact goal_sig addressing as the efficient path where signatures exist."
+    },
+    {
+      "source_run_id": 32905175867,
+      "workflow_name": "SPIDER Graph Lane",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "importance": "MEDIUM",
+      "kind": "LIMIT",
+      "summary": "Fused-retrieval execution economics: zero conversion to fewer novel actions (median C-B 0.0 over 16 common cells) at ~1.98× embedding and ~9.4× legacy-sig retrieval latency overhead. Candidate retrieval is cheaper to retrieve but not cheaper to execute on this panel.",
+      "durable_refs": [
+        "evidence/run-memory/runs/32905175867.json"
+      ],
+      "route_to": [
+        "PRODUCT",
+        "GRAPH",
+        "RUNTIME"
+      ],
+      "claim_ceiling": "NONE",
+      "product_use": "Cost constraint - any Product adoption of fused retrieval must include retrieval+verification overhead in the repeat_cost_ratio; here overhead exceeds any retrieval gain."
+    },
+    {
+      "source_run_id": 32908002333,
+      "workflow_name": "SPIDER Runtime Lane",
+      "evidence_status": "AUDITED_DURABLE",
+      "importance": "HIGH",
+      "kind": "RESULT",
+      "summary": "Runtime R0-2 T3 near-repeat kill cell: first gate-passing work-compression observation — SPIDER 4 actions vs BASE 11 on both offset entries (/tag/love/, /page/10/) margins 7≥M=2 zero novel, pilot scale (1 task, 1 site family, 2 passes). All ten gates TRUE after post-hoc repair addendum. 58/58 tests pass; lab/runtime advanced R0 COMPLETE positive.",
+      "durable_refs": [
+        "evidence/run-memory/runs/32908002333.json",
+        "git:origin/cycle/runtime/32908002333/team@613fbd4",
+        "git:origin/lab/runtime@162468f"
+      ],
+      "route_to": [
+        "RUNTIME",
+        "PRODUCT",
+        "CTO"
+      ],
+      "claim_ceiling": "PILOT",
+      "product_use": "Validated building block (pilot) - may be consumed as a work-compression primitive within its stated pilot ceiling (single task/site family, two passes); requires multi-task ≥3-sample replication before broad Product adoption."
+    },
+    {
+      "source_run_id": 32908002333,
+      "workflow_name": "SPIDER Runtime Lane",
+      "evidence_status": "AUDITED_DURABLE",
+      "importance": "MEDIUM",
+      "kind": "RESULT",
+      "summary": "Write-back primitive live: 7 content-hashed observation records (6 VERIFIED_OUTCOME +1 HANDOFF) + 1 CANDIDATE successor runtime/form-login-procedure-wb@v1 in quarantined -wb registry; parent registry byte-untouched; dominance correctly not fired. Derive observation schema + DERIVATION_MANIFEST present. Candidate is derivation substrate only — no ranking/confidence/boundary claim.",
+      "durable_refs": [
+        "evidence/run-memory/runs/32908002333.json",
+        "results/runtime/observations/index.json",
+        "results/runtime/capsules-wb/index.json"
+      ],
+      "route_to": [
+        "RUNTIME",
+        "PRODUCT"
+      ],
+      "claim_ceiling": "PILOT",
+      "product_use": "Validated primitive substrate for Product provenance/trust/calibration work; candidate successor must not be consumed as production skill without applicability-boundary and confidence calibration."
+    },
+    {
+      "source_run_id": 32902935507,
+      "workflow_name": "SPIDER Critical CTO Council",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "importance": "HIGH",
+      "kind": "IDEA",
+      "summary": "Frontier charters stranded log-only (CTO-5 council 32902935507): frontier-runner-reliability CRITICAL (validate 5-mechanism guard bundle >=50% waste cut <2% overhead), frontier-physics-temporal-volatility HIGH (Physics-domain passive-revisit change-time vs Poisson mixture), frontier-inheritance-economics HIGH (frozen PB-001 W-pack accounting). All are radar leads awaiting durable lab/cto/lab/frontier dispatch; no validated building block.",
+      "durable_refs": [
+        "evidence/run-memory/runs/32902935507.json",
+        "log:state/cto_direction.json (3 charters)"
+      ],
+      "route_to": [
+        "CTO",
+        "PRODUCT",
+        "RUNTIME",
+        "GRAPH",
+        "PHYSICS",
+        "INTEL"
+      ],
+      "claim_ceiling": "NONE",
+      "product_use": "Leads - Product may track frontier charters as future capability levers but must not treat them as validated; charter-vs-gate drift (X21) remains a product-integrations risk until the CTO persist fix lands."
+    },
+    {
+      "source_run_id": 32908002333,
+      "workflow_name": "SPIDER Runtime Lane",
+      "evidence_status": "AUDITED_DURABLE",
+      "importance": "MEDIUM",
+      "kind": "LIMIT",
+      "summary": "Runtime pilot limitations bound in RUNTIME_LEDGER: W-C2-2 host→context_signature, W-C2-3 gate-freeze binding, W-C2-1 yield-not-quoted-while-zero, capsule.v0 negative_knowledge defect as /v1 candidate, commit-scope disclosure for V3 overlay. Single-task observation grade (observation-tier) — not a general compression claim.",
+      "durable_refs": [
+        "evidence/run-memory/runs/32908002333.json",
+        "docs/RUNTIME_LEDGER.md"
+      ],
+      "route_to": [
+        "RUNTIME",
+        "PRODUCT",
+        "CTO"
+      ],
+      "claim_ceiling": "PILOT",
+      "product_use": "Constraint - bounds Product claims on write-back and T3 until multi-task replication and Program R1 offline policy-sweep (strongest-baseline) answer."
     }
   ]
 }

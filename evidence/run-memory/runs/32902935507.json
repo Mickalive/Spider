@@ -1,0 +1,99 @@
+{
+  "run_id": 32902935507,
+  "run_number": 23,
+  "workflow_name": "SPIDER Critical CTO Council",
+  "workflow_path": ".github/workflows/cto-council.yml",
+  "status": "completed",
+  "conclusion": "failure",
+  "head_sha": "1338a296115c2c4cdec592706c9eb30a5c7cae3b",
+  "head_branch": "main",
+  "event": "push",
+  "created_at": "2026-08-25T21:48:18Z",
+  "updated_at": "2026-08-25T22:10:34Z",
+  "actor": "Mickalive",
+  "evidence_class": "CTO",
+  "job_outcomes": {
+    "CHIEF CTO — GLOBAL RESEARCH PORTFOLIO REVIEW": "failure (21:48:37-22:10:33Z, ~21m56s) — steps 1-9 succeeded (checkout, mount all lanes/frontiers, install OpenCode 1.18.23, run critical CTO council ~21:48:48-22:10:29Z, Enforce CTO-only writes PASS, Validate CTO state PASS), step 10 'Advance accepted CTO advisory branch' FAILED at 22:10:29Z with git switch abort, Dispatch Frontier charters skipped"
+  },
+  "durable_refs": [
+    "git:main@1338a296115c2c4cdec592706c9eb30a5c7cae3b (trigger commit 'cto: let newest portfolio review supersede stale runs' durable on main)",
+    "log:state/cto_direction.json (written locally as /tmp/cto_generated/state/cto_direction.json then stamped with provenance source_run_id=32902935507; validation PASS: 3 charters present, council_pass=CTO-5, allocations sum 1.0, active Physics-domain coverage True)",
+    "log:docs/CTO_LEDGER.md ENTRY CTO-5 (appended at 22:06:20Z, 430 lines, FALSIFIED WP-006, DORMANT Physics, G-H1..G-H5, etc.)",
+    "log:docs/CTO_TO_GRAPH.md (4502 bytes), docs/CTO_TO_PHYSICS.md (4111 bytes), docs/CTO_TO_INTEL.md (3991 bytes), docs/CTO_TO_PRODUCT.md (4164 bytes), docs/CTO_TO_RUNTIME.md (4828 bytes), docs/CTO_TO_FRONTIER.md (6794 bytes) — all written under /tmp/cto_generated but never pushed",
+    "git:origin/lab/cto@previous tip (PREV_CTO variable) — durable lineage that the failed push was attempting to fast-forward onto",
+    "Existing durable CTO lineage on origin/lab/cto (entries CTO-1..CTO-4 at 6b1f030 etc.) — this run attempted to extend it but the payload survives only as log"
+  ],
+  "findings": [
+    {
+      "kind": "RESULT",
+      "summary": "FULL CTO-5 portfolio review SYNTHESIZED AND VALIDATED LOCALLY but STRANDED by a git worktree collision: all five cto_* fresh-context critics converged on CONTROL-PLANE SELF-DESTRUCTION as the #1 measured bottleneck (permission-abort deaths, silent delivery loss, porcelain gate false positives with 8-attempt ~13h retry storm on 32793165981/32793580374, charter-vs-gate contradiction stranding Runtime's first artifact set, un-retried installers, mid-session cancellations, still-live destructive wipe, pruning that made four council outputs unknowable).",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "importance": "HIGH",
+      "route_to": [
+        "CTO",
+        "INFRA",
+        "RUNTIME"
+      ]
+    },
+    {
+      "kind": "RESULT",
+      "summary": "THREE FRONTIER CHARTERS VALIDATED LOCALLY as CREATE v1 and logged verbatim: frontier-runner-reliability (CRITICAL, 10 evidence_inputs, 6 threats, 7 artifacts, handoffs Runtime/CTO — validate five-mechanism guard bundle >=50% waste reduction <2% overhead), frontier-physics-temporal-volatility (HIGH, domain contains Physics, 5 inputs, 9 threats, 8 artifacts, handoffs Runtime/Graph/Product/CTO — passive-revisit change-time vs stationary-Poisson mixture + conditional-GET baselines, orthogonal to WP-006), frontier-inheritance-economics (HIGH, 5 inputs, 7 threats, 6 artifacts — ONE frozen PB-001 W-pack accounting model applied once per audited corpus). Contract validator printed PASS (3 charters, types/enums/arrays/pair uniqueness + active Physics coverage).",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "importance": "HIGH",
+      "route_to": [
+        "CTO",
+        "GRAPH",
+        "PHYSICS",
+        "PRODUCT",
+        "RUNTIME",
+        "INTEL"
+      ]
+    },
+    {
+      "kind": "RESULT",
+      "summary": "ALLOCATION AND HANDOFF SET was fixed and logged: Runtime 0.20, Intel 0.15, Graph 0.15, INFRA fixes 0.10, frontier-runner-reliability 0.15, frontier-physics-temporal-volatility 0.10, frontier-inheritance-economics 0.05, Product 0.05, Physics core 0.05 (sum 1.0); handoffs docs/CTO_TO_*.md (Graph/Physics/Intel/Product/Runtime/Frontier) all present and size-verified; Ledger 430 lines, cto_direction.json 61475 bytes. Standing policy X21 recorded: a CTO prescription ordering out-of-scope artifacts must update the receiving workflow gate in the same change.",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "importance": "MEDIUM",
+      "route_to": [
+        "CTO"
+      ]
+    },
+    {
+      "kind": "BUG",
+      "summary": "PERSIST-STEP GIT ABORT — the sole failure mode: after backing up outputs to /tmp/cto_generated, the script ran git reset --hard HEAD (which does NOT remove untracked files) then git switch -C cto-output $PREV_CTO which aborted with 'error: The following untracked working tree files would be overwritten by checkout: docs/CTO_LEDGER.md, docs/CTO_TO_GRAPH.md, docs/CTO_TO_INTEL.md, docs/CTO_TO_PHYSICS.md, docs/CTO_TO_PRODUCT.md, docs/CTO_TO_RUNTIME.md, state/cto_direction.json — Aborting' (exit 1). The durable lab/cto tip TRACKS those exact paths, so the overwrite guard fires deterministically. Identical hazard was pre-recorded in runs/32880285474.json.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "HIGH",
+      "route_to": [
+        "INFRA",
+        "CTO"
+      ]
+    },
+    {
+      "kind": "ANOMALY",
+      "summary": "No durable push occurred despite validation PASS: the run's validated synthesis (CTO-5, three charters) survives ONLY in this raw log. Distinguish from later events: another CTO council run later in the dataset may have re-derived CTO-5 successfully, but this specific instantiation is unrecoverable except via this log. Treat charter details as radar leads, not accepted truth, until a later lab/cto commit re-derives them.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "MEDIUM",
+      "route_to": [
+        "CTO",
+        "INFRA"
+      ]
+    }
+  ],
+  "failure_signatures": [
+    "error: The following untracked working tree files would be overwritten by checkout: docs/CTO_LEDGER.md, docs/CTO_TO_GRAPH.md, docs/CTO_TO_INTEL.md, docs/CTO_TO_PHYSICS.md, docs/CTO_TO_PRODUCT.md, docs/CTO_TO_RUNTIME.md, state/cto_direction.json — Aborting (git switch -C cto-output $PREV_CTO, exit 1)",
+    "Advance accepted CTO advisory branch: failure; Dispatch Frontier charters: skipped",
+    "Validation itself PASSED (CTO_FRONTIER_SCHEMA_OK charters=3 active_physics=1; PASS: all charter contract type checks satisfied) — failure is post-validation delivery only"
+  ],
+  "research_opportunities": [
+    "Fix the CTO persist step to handle tracked-vs-untracked collisions: checkout with --force or remove/merge untracked outputs before switching lineage branch (adds provenance stamp source_run_id correctly).",
+    "Re-dispatch the validated CTO-5 bundle from the logged synthesis (or re-run the council) so the three Frontier charters become durably chartered on lab/cto/lab/frontier/* and their dispatch is not lost as radar-only.",
+    "Sweep sibling persist steps (evidence-curator, lane directors) for same reset-hard-then-switch race."
+  ],
+  "already_captured_elsewhere": [
+    "Bottleneck taxonomy (control-plane self-destruction, porchlain false positives, charter-vs-gate contradiction) is also durable via INDEX thematic digests and CTO_FEED CF items derived from earlier runs, but the synthesis framing here is unique to CTO-5.",
+    "Individual lane mounts (Graph c363bcc, Physics c15321c etc.) are durable on their respective lab/* branches."
+  ],
+  "distillation_complete": true,
+  "safe_to_prune": false,
+  "pruning_rationale": "Failure run whose sole surviving copy of a fully-validated CTO-5 synthesis (three Frontier charters, allocations, six handoffs) is this log; durable lab/cto was not advanced by this run. Pruning would destroy the only trace of the stranded bundle until a later council re-derives it durably."
+}

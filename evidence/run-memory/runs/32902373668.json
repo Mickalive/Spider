@@ -1,0 +1,70 @@
+{
+  "run_id": 32902373668,
+  "run_number": 21,
+  "workflow_name": "SPIDER Critical CTO Council",
+  "workflow_path": ".github/workflows/cto-council.yml",
+  "status": "completed",
+  "conclusion": "cancelled",
+  "head_sha": "d58a1119a6098c2a9d980704590c2cdbb6de0f2c",
+  "head_branch": "main",
+  "event": "push",
+  "created_at": "2026-08-25T21:41:56Z",
+  "updated_at": "2026-08-25T21:48:34Z",
+  "actor": "Mickalive",
+  "evidence_class": "CTO",
+  "job_outcomes": {
+    "CHIEF CTO — GLOBAL RESEARCH PORTFOLIO REVIEW": "cancelled (21:44:11-21:48:33Z, ~4m22s) — mount/install completed, agent session started then externally cancelled; steps 8-11 skipped (Enforce CTO-only writes, Validate CTO state, Advance accepted CTO advisory branch, Dispatch Frontier charters all skipped)"
+  },
+  "durable_refs": [
+    "git:main@d58a1119a6098c2a9d980704590c2cdbb6de0f2c (trigger commit 'cto: harden Frontier charter output contract' durable on main)",
+    "git:origin/lab/graph@3e36b4c (mounted Graph snapshot at ~21:45:39Z, logged in detail but not modified by this run)",
+    "git:origin/lab/physics@c15321c (mounted Physics snapshot, logged)",
+    "git:origin/lab/intel@8bfcf85 (mounted Intel snapshot, logged)",
+    "git:origin/lab/product@d944594 (mounted Product snapshot, logged)",
+    "git:origin/lab/runtime@7669dcd (mounted Runtime scaffold, logged)"
+  ],
+  "findings": [
+    {
+      "kind": "OTHER",
+      "summary": "CANCELLED CTO council cohort #1 of 3: run 21 started the Frontier charter output contract hardening intent, completed control-plane checkout/mounts (Graph/Physics/Intel/Product/Runtime snapshots logged verbatim) and OpenCode install (1.18.23 via curl), began the cto_* fresh-context critic synthesis, then was externally cancelled before any CTO state was written or validated. No durable CTO outputs were produced; trigger commit d58a111 remains durable.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "MEDIUM",
+      "route_to": [
+        "CTO",
+        "INFRA"
+      ]
+    },
+    {
+      "kind": "ANOMALY",
+      "summary": "Cancellation is part of a 3-run burst supersession pattern on 21:41-21:48Z: run 21 (21:44:11Z) was cancelled by push 37f237a at 21:46:25Z (run 22 dispatched 21:46:27Z), which was itself immediately superseded by push 1338a29 at 21:48:16Z (run 23 dispatched 21:48:18Z). All three share identical workflow (cto-council.yml) and single-slot cancellation semantics; each trigger commit is independently durable.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "LOW",
+      "route_to": [
+        "INFRA",
+        "CTO"
+      ]
+    },
+    {
+      "kind": "IDEA",
+      "summary": "The intended charter hardening (output contract) was not executed by this run; the substantive CTO-5 portfolio review was later delivered by run 32902935507 (failure at persist) — this cancelled run contributes no charter content and is not a loss of unique advisory work.",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "importance": "LOW",
+      "route_to": [
+        "CTO"
+      ]
+    }
+  ],
+  "failure_signatures": [
+    "The operation was canceled (external supersession by newer push; job conclusion=cancelled, 4m22s wall-clock wasted after successful mount/install)"
+  ],
+  "research_opportunities": [
+    "Burst supersession of single-slot CTO council runs wastes ~4-5m of runner time per cancelled instance; consider debouncing council triggers or coalescing rapid pushes."
+  ],
+  "already_captured_elsewhere": [
+    "Graph/Physics/Intel/Product/Runtime mounted states are duplicated more fully in run 32902935507's log (which completed synthesis); no unique advisory was lost here.",
+    "Trigger commit diff d58a111 is durable on main and its intent reappears in later council commits (37f237a, 1338a29)."
+  ],
+  "distillation_complete": true,
+  "safe_to_prune": true,
+  "pruning_rationale": "Cancelled queued run with Git-durable trigger; mount/install diagnostics are duplicated by the succeeding council run 32902935507 which completed the synthesis; no cycle branches or unique durable advisory were produced; log was fully distilled into this record."
+}

@@ -1,0 +1,58 @@
+{
+  "run_id": 32906940810,
+  "run_number": 25,
+  "workflow_name": "SPIDER Run Evidence Curator",
+  "workflow_path": ".github/workflows/evidence-curator.yml",
+  "status": "completed",
+  "conclusion": "success",
+  "head_sha": "3e11f0c8d6d6b424e1940e3fd28406e283b7ee5f",
+  "head_branch": "main",
+  "event": "schedule",
+  "created_at": "2026-08-25T22:36:24Z",
+  "updated_at": "2026-08-25T23:12:48Z",
+  "actor": "Mickalive",
+  "evidence_class": "OPERATIONAL",
+  "job_outcomes": {
+    "Distill completed run knowledge into durable CTO memory": "success (22:36:27-23:12:48Z, ~36m21s) — selected batch via targets.txt, built bundles, installed OpenCode, curated evidence, validated outputs, enforced scope, persisted distilled memory"
+  },
+  "durable_refs": [
+    "git:main@3e11f0c8d6d6b424e1940e3fd28406e283b7ee5f (trigger commit 'evidence: distill Actions runs 32864270667,32864608446,32864697417,32866023398,32866107906' — same HEAD as prior batch, indicates re-distillation/backfill on existing commits)",
+    "evidence/run-memory/runs/32864270667.json (Runtime #1 REVISE cycle — re-verified in this batch)",
+    "evidence/run-memory/runs/32864608446.json (Runtime one-shot dedupe cancelled zero-job — re-verified)",
+    "evidence/run-memory/runs/32864697417.json (Runtime dedup one-shot success — re-verified)",
+    "evidence/run-memory/runs/32866023398.json (Product #5 marooned Director decision — re-verified)",
+    "evidence/run-memory/runs/32866107906.json (Physics #8 WP-006 FALSIFIED acceptance — re-verified)",
+    "evidence/run-memory/INDEX.md (row-count + digest updates in this batch)",
+    "evidence/run-memory/CTO_FEED.json (feed state at this batch; no tombstone activity in this window)"
+  ],
+  "findings": [
+    {
+      "kind": "RESULT",
+      "summary": "Curator backfill/continuity batch SUCCESS: re-selected and re-distilled the same 5-run batch already distilled by run 32903926404 (328642...,328646...,328646...,328660...,328661…), confirming durable convergence. Validation again green (run records schema, feed invariants, scope enforcement). No new tombstones (CLEANUP_INCIDENT_RUN=32880942022 env present but recovery already exists, so special-recovery path correctly skipped).",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "LOW",
+      "route_to": [
+        "CTO",
+        "INFRA"
+      ]
+    },
+    {
+      "kind": "OTHER",
+      "summary": "Continuity signal: two consecutive curator successes on the same HEAD (e631ab0→3e11f0c lineage) with overlapping target sets demonstrates the pipeline's idempotency — downstream feeds were not double-counted or overwritten destructively (existing rows preserved).",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "importance": "LOW",
+      "route_to": [
+        "INFRA"
+      ]
+    }
+  ],
+  "failure_signatures": [],
+  "research_opportunities": [],
+  "already_captured_elsewhere": [
+    "All five target-run findings are durable under their respective runs/*.json; this record documents the orchestration repeat only.",
+    "Recovery state (DELETED_RUNS_RECOVERY.json dual-key 102==102) already durable — this batch did not alter it."
+  ],
+  "distillation_complete": true,
+  "safe_to_prune": true,
+  "pruning_rationale": "Successful operational curator re-run whose outputs duplicate already-durable run records from the immediately prior batch 32903926404; no new per-run discoveries beyond the orchestration idempotency signal captured here."
+}

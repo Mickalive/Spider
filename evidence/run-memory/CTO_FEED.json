@@ -50,7 +50,7 @@
       "id": "CF-2026-08-25-03",
       "importance": "MEDIUM",
       "kind": "GUARD_VERSION_GAP",
-      "summary": "The hygiene script version that executed the 102 deletions (commit 3e5ea6d) had no distillation requirement; maintainers hardened it after the fact (1afb229 'require durable run distillation before pruning', a09d036 'restore durable-reference protection'). Until the hardened version has executed successfully, assume un-distilled claim-bearing logs could still be pruned by a stale workflow version. UPDATE 2026-08-26 (run 32881940580 curation): hygiene #4 also executed inside the pre-a09d036 window (18:07:44Z @99c231b2) and was harmless \u2014 deleted=0 kept=59 unarchived=18 failed=0 \u2014 making at least two in-window dispatches with zero loss; its log additionally shows per-run keep-reason lines already present in that script version.",
+      "summary": "The hygiene script version that executed the 102 deletions (commit 3e5ea6d) had no distillation requirement; maintainers hardened it after the fact (1afb229 'require durable run distillation before pruning', a09d036 'restore durable-reference protection'). Until the hardened version has executed successfully, assume un-distilled claim-bearing logs could still be pruned by a stale workflow version. UPDATE 2026-08-26 (run 32881940580 curation): hygiene #4 also executed inside the pre-a09d036 window (18:07:44Z @99c231b2) and was harmless — deleted=0 kept=59 unarchived=18 failed=0 — making at least two in-window dispatches with zero loss; its log additionally shows per-run keep-reason lines already present in that script version.",
       "evidence_status": "DURABLE_UNAUDITED",
       "source_run_id": 32880942022,
       "durable_refs": [
@@ -113,7 +113,7 @@
       "id": "CF-2026-08-25-06",
       "importance": "MEDIUM",
       "kind": "INSTRUMENT_DESIGN",
-      "summary": "WP-006 instrument post-mortem (falsified result already accepted; this is forward-looking only): a site hard-timeout silently skipped the per-site BP-manifest dump, so the merged manifest omitted openlibrary; every manifest-fed check (verifier C2 coverage 868/910 undisclosed, D5 calibration) then 'passed' with reduced coverage, and the team report misstated its own FN control (62/62 vs raw-row truth 62/74; finalized 67/74 after repairs). Additionally one frozen ordinal-0 anchor slot rule systematically selected non-actionable skip-links on two site skins (171 action_failed exclusions; 24 BPs zeroed). No hard validity gate caught any of this \u2014 only adversarial per-row recomputation did.",
+      "summary": "WP-006 instrument post-mortem (falsified result already accepted; this is forward-looking only): a site hard-timeout silently skipped the per-site BP-manifest dump, so the merged manifest omitted openlibrary; every manifest-fed check (verifier C2 coverage 868/910 undisclosed, D5 calibration) then 'passed' with reduced coverage, and the team report misstated its own FN control (62/62 vs raw-row truth 62/74; finalized 67/74 after repairs). Additionally one frozen ordinal-0 anchor slot rule systematically selected non-actionable skip-links on two site skins (171 action_failed exclusions; 24 BPs zeroed). No hard validity gate caught any of this — only adversarial per-row recomputation did.",
       "evidence_status": "DURABLE_UNAUDITED",
       "source_run_id": 32776372437,
       "durable_refs": [
@@ -160,7 +160,7 @@
       "id": "CF-2026-08-25-08",
       "importance": "HIGH",
       "kind": "RUNTIME_FAILURE_MODE",
-      "summary": "The lane workflows' 'Enforce audit-only writes' gate false-positives on workflow-pre-staged control-plane files and kills COMPLETED audits: it tests `git status --porcelain` against allowed output dirs, but an earlier workflow step pre-stages role/directive sync files into the index, which get attributed to the auditor. Physics run 32793165981: auditor had already written gate=PASS/safe_to_integrate=true when the gate exited 1 \u2192 run conclusion=failure, Lane Director skipped. Graph run 32793580374: REVISE delivered, then the deterministic failure repeated across EIGHT re-run attempts (~18m audit each, ~13h wall-clock span), eight audit-attempt branches pushed, Director never ran. The gate also masks real violations by mixing plumbing noise into the same signal.",
+      "summary": "The lane workflows' 'Enforce audit-only writes' gate false-positives on workflow-pre-staged control-plane files and kills COMPLETED audits: it tests `git status --porcelain` against allowed output dirs, but an earlier workflow step pre-stages role/directive sync files into the index, which get attributed to the auditor. Physics run 32793165981: auditor had already written gate=PASS/safe_to_integrate=true when the gate exited 1 → run conclusion=failure, Lane Director skipped. Graph run 32793580374: REVISE delivered, then the deterministic failure repeated across EIGHT re-run attempts (~18m audit each, ~13h wall-clock span), eight audit-attempt branches pushed, Director never ran. The gate also masks real violations by mixing plumbing noise into the same signal.",
       "evidence_status": "OPERATIONAL_DIAGNOSTIC",
       "source_run_id": 32793165981,
       "additional_source_run_ids": [
@@ -170,7 +170,7 @@
         "evidence/run-memory/runs/32793165981.json",
         "evidence/run-memory/runs/32793580374.json",
         "git:origin/cycle/physics/32793165981/audit@dd1e688 (PASS gate that was blocked)",
-        "git:origin/cycle/graph/32793580374/audit@3520df27 (+ attempts 1\u20138)"
+        "git:origin/cycle/graph/32793580374/audit@3520df27 (+ attempts 1–8)"
       ],
       "actionable_next": [
         "Fix both loop workflows: scope the write check to changes made during the audit session (e.g. diff working tree vs the commit HEAD at session start) or unstage control-plane sync before the audit agent runs.",
@@ -208,7 +208,7 @@
       "id": "CF-2026-08-25-10",
       "importance": "MEDIUM",
       "kind": "STRUCTURAL_FIX",
-      "summary": "Silent repair-delivery loss mechanism identified (Intel SGDR repair round 2): the reproducer committed its complete documentary fix set on DETACHED HEAD inside a private lineage workspace (/tmp/spider_intel_repro_r2, commit 0a1b3ef), while the workflow's persist step force-pushed a DIFFERENT mounted workspace still sitting at the base commit \u2014 publishing a branch byte-identical to lab/intel base with every step exiting success. ~40m of work vanished; only the independent auditor's empty-snapshot identity check (run_tip == base == 0a55649, tree 00ce8e32) plus hidden-output/displaced-work elimination prevented a wrong verdict, and its RF-E ('verify delivery') defines the fix. This is mechanism-distinct from the permission-abort empty snapshot of Graph #5 (CF-05).",
+      "summary": "Silent repair-delivery loss mechanism identified (Intel SGDR repair round 2): the reproducer committed its complete documentary fix set on DETACHED HEAD inside a private lineage workspace (/tmp/spider_intel_repro_r2, commit 0a1b3ef), while the workflow's persist step force-pushed a DIFFERENT mounted workspace still sitting at the base commit — publishing a branch byte-identical to lab/intel base with every step exiting success. ~40m of work vanished; only the independent auditor's empty-snapshot identity check (run_tip == base == 0a55649, tree 00ce8e32) plus hidden-output/displaced-work elimination prevented a wrong verdict, and its RF-E ('verify delivery') defines the fix. This is mechanism-distinct from the permission-abort empty snapshot of Graph #5 (CF-05).",
       "evidence_status": "LOG_ONLY_UNAUDITED",
       "source_run_id": 32796176172,
       "durable_refs": [
@@ -219,7 +219,7 @@
       "actionable_next": [
         "Add post-persist assertions to all lane loops: pushed tip != base commit AND required deliverable paths exist in the pushed tree; treat violation as immediate job failure before any downstream job runs.",
         "Mount ONE canonical workspace per agent phase (or persist from the workspace the agent was last seen committing in) so lineage commits cannot diverge from the published ref.",
-        "Adopt the auditor's escalation rule: two consecutive empty/unverifiable deliveries \u21d2 BLOCKED on infrastructure grounds."
+        "Adopt the auditor's escalation rule: two consecutive empty/unverifiable deliveries ⇒ BLOCKED on infrastructure grounds."
       ],
       "route_to": [
         "INFRA",
@@ -231,7 +231,7 @@
       "id": "CF-2026-08-25-11",
       "importance": "HIGH",
       "kind": "STRUCTURAL_FIX",
-      "summary": "Control-plane contradiction killed the Runtime lane's first real cycle post-completion (run 32887030457): docs/CTO_TO_RUNTIME.md FIRST COMMIT items 1\u20132 order the team to build directives/COST_EVENT.md + schemas/spider.{cost_event,capsule,plan}.v0.schema.json ('next lane commit must produce the COST_EVENT pack or a schema/validator/benchmark artifact'), but 'Enforce Runtime scope' in runtime-loop.yml line 140 \u2014 unchanged since workflow creation at 7669dcd \u2014 allows neither path. The team followed the charter; after ~64 minutes of green work (prereg-frozen pilot, VERDICT PASS 6/6 gates, 58/58 tests) the gate flagged exactly BAD='directives/COST_EVENT.md'+'schemas/' and failed the run, skipping Auditor and Director; lab/runtime untouched. Mechanism is DISTINCT from CF-2026-08-25-08 (porcelain false positive on pre-staged files): here the violation is real but mandated by another control-plane document. The stale allowlist is still live at main HEAD, so every future scheduled Runtime run fails identically until fixed. Evidence survived: cycle/runtime/32887030457/team@c2f0ba8e was pushed despite the gate.",
+      "summary": "Control-plane contradiction killed the Runtime lane's first real cycle post-completion (run 32887030457): docs/CTO_TO_RUNTIME.md FIRST COMMIT items 1–2 order the team to build directives/COST_EVENT.md + schemas/spider.{cost_event,capsule,plan}.v0.schema.json ('next lane commit must produce the COST_EVENT pack or a schema/validator/benchmark artifact'), but 'Enforce Runtime scope' in runtime-loop.yml line 140 — unchanged since workflow creation at 7669dcd — allows neither path. The team followed the charter; after ~64 minutes of green work (prereg-frozen pilot, VERDICT PASS 6/6 gates, 58/58 tests) the gate flagged exactly BAD='directives/COST_EVENT.md'+'schemas/' and failed the run, skipping Auditor and Director; lab/runtime untouched. Mechanism is DISTINCT from CF-2026-08-25-08 (porcelain false positive on pre-staged files): here the violation is real but mandated by another control-plane document. The stale allowlist is still live at main HEAD, so every future scheduled Runtime run fails identically until fixed. Evidence survived: cycle/runtime/32887030457/team@c2f0ba8e was pushed despite the gate.",
       "evidence_status": "OPERATIONAL_DIAGNOSTIC",
       "source_run_id": 32887030457,
       "durable_refs": [
@@ -255,20 +255,20 @@
       "id": "CF-2026-08-25-12",
       "importance": "MEDIUM",
       "kind": "RESEARCH_RADAR",
-      "summary": "First measured Runtime economics exist and await the lane's first-ever independent audit: whole-task exact-repeat inheritance does NOT repay its cost against a strong zero-provider scripted baseline (T1 login: 4=4 actions, ~+29% wall overhead incl. 236ms detection) while stale-detection fallback observability (per-check discrimination host\u2713url\u2713elem\u2717 \u2192 materialized plan/v0 handoff) and localized pagination inheritance (1 inherited action vs baseline failure live and on mirror) measured positive \u2014 all descriptive, n=2 capsules, no provider tokens, explicitly NO work-compression claim licensed. Also durable-unaudited: resolver false-accept fix via vendored goalsig stopword pruning, playwright interception quirks, dom-bytes floor calibration, frozen-deferred near-repeat cell T3 with a predeclared VALID-NEGATIVE close rule. This answers de facto the BLOCKED escalation from runs 32864270667/32875577618/32877702179 (stale af164b9 thrice resubmitted): fresh-cycle execution does produce new work \u2014 but none of it is accepted truth until a Runtime auditor recomputes it (audit recipe pre-staged in the branch ledger).",
+      "summary": "First measured Runtime economics exist and await the lane's first-ever independent audit: whole-task exact-repeat inheritance does NOT repay its cost against a strong zero-provider scripted baseline (T1 login: 4=4 actions, ~+29% wall overhead incl. 236ms detection) while stale-detection fallback observability (per-check discrimination host✓url✓elem✗ → materialized plan/v0 handoff) and localized pagination inheritance (1 inherited action vs baseline failure live and on mirror) measured positive — all descriptive, n=2 capsules, no provider tokens, explicitly NO work-compression claim licensed. Also durable-unaudited: resolver false-accept fix via vendored goalsig stopword pruning, playwright interception quirks, dom-bytes floor calibration, frozen-deferred near-repeat cell T3 with a predeclared VALID-NEGATIVE close rule. This answers de facto the BLOCKED escalation from runs 32864270667/32875577618/32877702179 (stale af164b9 thrice resubmitted): fresh-cycle execution does produce new work — but none of it is accepted truth until a Runtime auditor recomputes it (audit recipe pre-staged in the branch ledger).",
       "evidence_status": "DURABLE_UNAUDITED",
       "source_run_id": 32887030457,
       "additional_source_run_ids": [
         32877702179
       ],
       "durable_refs": [
-        "git:origin/cycle/runtime/32887030457/team@c2f0ba8e30effa1f5afb6e957adb3efd9c2a8558 (PREREG_R0_CYCLE1.json, pilot VERDICT/raw_rows/cost_events, RUNTIME_LEDGER.md findings C1\u2013C5, NEXT_RUNTIME.md)",
+        "git:origin/cycle/runtime/32887030457/team@c2f0ba8e30effa1f5afb6e957adb3efd9c2a8558 (PREREG_R0_CYCLE1.json, pilot VERDICT/raw_rows/cost_events, RUNTIME_LEDGER.md findings C1–C5, NEXT_RUNTIME.md)",
         "git:origin/cycle/runtime/32877702179/audit (BLOCKED escalation context)",
         "evidence/run-memory/runs/32887030457.json"
       ],
       "actionable_next": [
         "After CF-11's gate fix, dispatch the Runtime audit against c2f0ba8e rather than a fresh team run; the ledger's handoff section specifies offline suite rerun, VERDICT recomputation from raw_rows.jsonl, prereg hash-chain check, REFUSE-list compliance, and the T2 fixture-bound caveat challenge.",
-        "Auditor must specifically adjudicate prereg-timing exposure: dev-phase test executions touched the same tasks before the 20:14:53Z freeze (log-only evidence in /tmp/spider_run_evidence/32887030457/logs.txt \u2014 keep that bundle until adjudicated).",
+        "Auditor must specifically adjudicate prereg-timing exposure: dev-phase test executions touched the same tasks before the 20:14:53Z freeze (log-only evidence in /tmp/spider_run_evidence/32887030457/logs.txt — keep that bundle until adjudicated).",
         "If C1's negative survives audit, treat the NEXT_RUNTIME.md cycle-2 mission (near-repeat cell T3 + exploration-cost task family, predeclared VALID-NEGATIVE close rule) as the highest-information cheap dispatch for the lane."
       ],
       "route_to": [
@@ -280,7 +280,7 @@
       "id": "CF-2026-08-25-13",
       "importance": "HIGH",
       "kind": "RUNTIME_FAILURE_MODE",
-      "summary": "Permission auto-rejection killed its SECOND confirmed lane session, this time aborting Product Beta PB-001's first build attempt (run 32799261473): at 05:54:29Z the beta_builder agent ran an environment-probing command touching ~/.config and /home/runner/.local/share/opencode/*, opencode emitted 'permission requested: external_directory (...); auto-rejecting' \u2192 'Error: The user rejected permission to use this specific tool call.' \u2192 whole session dead after ~3m40s of real work (architect snapshot verified; discovered working-tree graph/+shared/ are stripped-down variants vs pinned d41fe9b and vendored pinned sources to /tmp; playwright 1.62.0 + chromium-headless-shell installed; both target sites healthy). Workflow validator then failed 'Missing product_beta_build state'. Mechanism identical in class to Graph #5 (CF-2026-08-25-05) but a different permission object and different lane \u2014 this is now a systemic runtime defect, not a one-off. The builder branch b05d8f8 pushed anyway contains only re-committed architect content.",
+      "summary": "Permission auto-rejection killed its SECOND confirmed lane session, this time aborting Product Beta PB-001's first build attempt (run 32799261473): at 05:54:29Z the beta_builder agent ran an environment-probing command touching ~/.config and /home/runner/.local/share/opencode/*, opencode emitted 'permission requested: external_directory (...); auto-rejecting' → 'Error: The user rejected permission to use this specific tool call.' → whole session dead after ~3m40s of real work (architect snapshot verified; discovered working-tree graph/+shared/ are stripped-down variants vs pinned d41fe9b and vendored pinned sources to /tmp; playwright 1.62.0 + chromium-headless-shell installed; both target sites healthy). Workflow validator then failed 'Missing product_beta_build state'. Mechanism identical in class to Graph #5 (CF-2026-08-25-05) but a different permission object and different lane — this is now a systemic runtime defect, not a one-off. The builder branch b05d8f8 pushed anyway contains only re-committed architect content.",
       "evidence_status": "LOG_ONLY_UNAUDITED",
       "source_run_id": 32799261473,
       "durable_refs": [
@@ -304,7 +304,7 @@
       "id": "CF-2026-08-25-14",
       "importance": "MEDIUM",
       "kind": "INFRA_FAILURE_MODE",
-      "summary": "Un-retried opencode installer step is a whole-cycle kill switch: Product run 32820217763's BETA ARCHITECT job died ~4s after start when `curl --retry 3 --retry-all-errors -fsSL https://opencode.ai/install | bash` exited 1 with 'Failed to fetch version information' \u2014 the curl flags retry transport failures but the installer script's own version-metadata fetch has no retry wrapper at the step level (agent invocations get 6 attempts via run-opencode-with-retry.sh; install steps get none). Result: no v2 architecture, all downstream jobs skipped, empty cycle/product/32820217763/architect branch force-pushed. Every loop workflow shares this unguarded install pattern, so any installer hiccup can waste a scheduled dispatch per lane per occurrence.",
+      "summary": "Un-retried opencode installer step is a whole-cycle kill switch: Product run 32820217763's BETA ARCHITECT job died ~4s after start when `curl --retry 3 --retry-all-errors -fsSL https://opencode.ai/install | bash` exited 1 with 'Failed to fetch version information' — the curl flags retry transport failures but the installer script's own version-metadata fetch has no retry wrapper at the step level (agent invocations get 6 attempts via run-opencode-with-retry.sh; install steps get none). Result: no v2 architecture, all downstream jobs skipped, empty cycle/product/32820217763/architect branch force-pushed. Every loop workflow shares this unguarded install pattern, so any installer hiccup can waste a scheduled dispatch per lane per occurrence.",
       "evidence_status": "LOG_ONLY_UNAUDITED",
       "source_run_id": 32820217763,
       "durable_refs": [
@@ -324,7 +324,7 @@
       "id": "CF-2026-08-25-15",
       "importance": "MEDIUM",
       "kind": "ORCHESTRATION_ANOMALY",
-      "summary": "External cancellation cluster at 2026-08-25T05:01Z hit two lanes within ~14 seconds while both agents were healthy and mid-session: Intel run 32809100696 reproducer cancelled 05:01:31\u201335Z (cycle-2 Unbrowse prereg not yet frozen, zero commits \u2014 clean to redo from scout branch) and Physics run 32799587656 attempt-2 auditor cancelled 05:01:40\u201345Z mid final-checks (harmless to science because attempt 1 had already pushed gate=PASS at 03:12Z, but it cost ~15 min of redundant re-verification and left the run conclusion=failure despite a delivered PASS audit). Trigger not identifiable from either bundle (supervisor action, manual cancel, platform reclaim, or concurrency sweep). Combined wasted agent time \u224834 min.",
+      "summary": "External cancellation cluster at 2026-08-25T05:01Z hit two lanes within ~14 seconds while both agents were healthy and mid-session: Intel run 32809100696 reproducer cancelled 05:01:31–35Z (cycle-2 Unbrowse prereg not yet frozen, zero commits — clean to redo from scout branch) and Physics run 32799587656 attempt-2 auditor cancelled 05:01:40–45Z mid final-checks (harmless to science because attempt 1 had already pushed gate=PASS at 03:12Z, but it cost ~15 min of redundant re-verification and left the run conclusion=failure despite a delivered PASS audit). Trigger not identifiable from either bundle (supervisor action, manual cancel, platform reclaim, or concurrency sweep). Combined wasted agent time ≈34 min.",
       "evidence_status": "OPERATIONAL_DIAGNOSTIC",
       "source_run_id": 32809100696,
       "additional_source_run_ids": [
@@ -337,7 +337,7 @@
       ],
       "actionable_next": [
         "Identify what cancels runs around 05:01Z (cross-check supervisor/watchdog schedules and audit logs); if intentional, make cancellations checkpoint-aware instead of mid-session kills.",
-        "For Physics specifically: consume the existing PASS gate at 9acccb12 rather than re-running audits of the same carryforward \u2014 the WP-006 chain was later integrated via 32866107906 anyway, so no further stewardship of this snapshot is needed.",
+        "For Physics specifically: consume the existing PASS gate at 9acccb12 rather than re-running audits of the same carryforward — the WP-006 chain was later integrated via 32866107906 anyway, so no further stewardship of this snapshot is needed.",
         "Consider persisting partial agent state (todo/prereg drafts) incrementally so externally-cancelled sessions leave resumable artifacts."
       ],
       "route_to": [
@@ -351,7 +351,7 @@
       "id": "CF-2026-08-25-16",
       "importance": "MEDIUM",
       "kind": "RESEARCH_RADAR",
-      "summary": "Unbrowse vendor-benchmark adversarial dossier exists and awaits reproduction (Intel cycle 2): scout recomputed the vendor's published CSV (ratio-of-means 3.58x, median 5.35x, 94/94 wins \u2014 headline partially survives its own data) while documenting CODE_VERIFIED harness defects (flat +2000 ms sleep in every Playwright baseline load; treatment-arm-only preference for server-reported timing over wall clock; inner_text('body') vs paper's stated CSS-selector methodology; single pass vs three; all rows marketplace-served/warmed), vendor honest negatives (~50% live retrieval coverage, Cloudflare/DataDome failures, claim-tier violations incl. 'peer-reviewed' preprint and '30x faster' marketing from the best domain), independent premise anchor (Song et al. ACL 2025 Findings: hybrid API+browsing >24% absolute over browsing-only WHEN APIs are pre-documented), new mechanism-family actors (Web Verbs arXiv:2602.17245, agent-browser derive-client, Kuri CDP broker, unbrowse-hermes), and a preregistration-ready A/B/C spec whose curl-level null isolates what the route abstraction adds beyond plain HTTP. All DURABLE on the scout branch but UNAUDITED; the first reproducer attempt was cancelled pre-prereg so nothing is contaminated.",
+      "summary": "Unbrowse vendor-benchmark adversarial dossier exists and awaits reproduction (Intel cycle 2): scout recomputed the vendor's published CSV (ratio-of-means 3.58x, median 5.35x, 94/94 wins — headline partially survives its own data) while documenting CODE_VERIFIED harness defects (flat +2000 ms sleep in every Playwright baseline load; treatment-arm-only preference for server-reported timing over wall clock; inner_text('body') vs paper's stated CSS-selector methodology; single pass vs three; all rows marketplace-served/warmed), vendor honest negatives (~50% live retrieval coverage, Cloudflare/DataDome failures, claim-tier violations incl. 'peer-reviewed' preprint and '30x faster' marketing from the best domain), independent premise anchor (Song et al. ACL 2025 Findings: hybrid API+browsing >24% absolute over browsing-only WHEN APIs are pre-documented), new mechanism-family actors (Web Verbs arXiv:2602.17245, agent-browser derive-client, Kuri CDP broker, unbrowse-hermes), and a preregistration-ready A/B/C spec whose curl-level null isolates what the route abstraction adds beyond plain HTTP. All DURABLE on the scout branch but UNAUDITED; the first reproducer attempt was cancelled pre-prereg so nothing is contaminated.",
       "evidence_status": "DURABLE_UNAUDITED",
       "source_run_id": 32809100696,
       "durable_refs": [
@@ -372,7 +372,7 @@
       "id": "CF-2026-08-25-17",
       "importance": "MEDIUM",
       "kind": "PROCESS_PATTERN",
-      "summary": "Audited-but-unintegrated snapshots cause duplicated stewardship spend: WP-006's evidence was carried forward bit-exact TWICE \u2014 first by run 32799587656 (carryforward + full independent audit PASS at 9acccb12 that no Director ever consumed because its attempt-2 rerun was cancelled), then again by run 32866107906 whose chain actually reached integration. Root cause: audited-but-unintegrated work leaves no machine-visible 'pending integration' trace for whoever dispatches the next physics run, so each new dispatch redoes legitimate-looking stewardship. Same class risk exists anywhere a Director job is skipped after a green audit (see CF-08's Graph retry storm). Positive note: verdict discipline held both times \u2014 neither stewardship run manufactured new confirmatory collection under the frozen stop rule.",
+      "summary": "Audited-but-unintegrated snapshots cause duplicated stewardship spend: WP-006's evidence was carried forward bit-exact TWICE — first by run 32799587656 (carryforward + full independent audit PASS at 9acccb12 that no Director ever consumed because its attempt-2 rerun was cancelled), then again by run 32866107906 whose chain actually reached integration. Root cause: audited-but-unintegrated work leaves no machine-visible 'pending integration' trace for whoever dispatches the next physics run, so each new dispatch redoes legitimate-looking stewardship. Same class risk exists anywhere a Director job is skipped after a green audit (see CF-08's Graph retry storm). Positive note: verdict discipline held both times — neither stewardship run manufactured new confirmatory collection under the frozen stop rule.",
       "evidence_status": "OPERATIONAL_DIAGNOSTIC",
       "source_run_id": 32799587656,
       "additional_source_run_ids": [
@@ -386,7 +386,7 @@
       ],
       "actionable_next": [
         "Have lane workflows record a machine-readable pending-integration pointer (branch + gate path) into lane state whenever an audit reaches PASS but the Director does not run, and have dispatchers check it before authorizing fresh team/stewardship sessions.",
-        "Before any future WP-006-area dispatch: none is needed \u2014 TERMINATE_LANE stands, domain reopened under V3 via c15321c; treat further WP-006 stewardship as duplicate spend."
+        "Before any future WP-006-area dispatch: none is needed — TERMINATE_LANE stands, domain reopened under V3 via c15321c; treat further WP-006 stewardship as duplicate spend."
       ],
       "route_to": [
         "CTO",
@@ -398,7 +398,7 @@
       "id": "CF-2026-08-25-18",
       "importance": "MEDIUM",
       "kind": "ORCHESTRATION_ANOMALY",
-      "summary": "First distilled firing of the Product Supervisor's queued-run dedupe (run 32894986672, product-loop #9): a workflow_run trigger enqueued a redundant Product decision at 20:22:45Z while the PB-001 v4 lineage run 32886859788 was executing; #9 sat queued its entire 24m37s life (Jobs API total_count=0, zero artifacts, 0-byte raw log) on the single-slot spider-product-lane concurrency group and was cancelled at 20:47:22Z \u2014 exactly the situation product-supervisor.yml:53-62 cancels BY DESIGN ('Cancelling stale queued Product run ... while another Product run is in progress'). Precondition proven via sibling commits ddce3a3@20:31:13Z and 7657565@20:58:59Z bracketing the window. Positive: near-zero-cost dedupe prevented a duplicate director session racing lab/product. Negative: the specific cancelling supervisor instance is unattributable (its ::warning:: evidence lives only in supervisor logs, which hygiene prunes), and a local fetch failure can mimic the same fingerprint.",
+      "summary": "First distilled firing of the Product Supervisor's queued-run dedupe (run 32894986672, product-loop #9): a workflow_run trigger enqueued a redundant Product decision at 20:22:45Z while the PB-001 v4 lineage run 32886859788 was executing; #9 sat queued its entire 24m37s life (Jobs API total_count=0, zero artifacts, 0-byte raw log) on the single-slot spider-product-lane concurrency group and was cancelled at 20:47:22Z — exactly the situation product-supervisor.yml:53-62 cancels BY DESIGN ('Cancelling stale queued Product run ... while another Product run is in progress'). Precondition proven via sibling commits ddce3a3@20:31:13Z and 7657565@20:58:59Z bracketing the window. Positive: near-zero-cost dedupe prevented a duplicate director session racing lab/product. Negative: the specific cancelling supervisor instance is unattributable (its ::warning:: evidence lives only in supervisor logs, which hygiene prunes), and a local fetch failure can mimic the same fingerprint.",
       "evidence_status": "OPERATIONAL_DIAGNOSTIC",
       "source_run_id": 32894986672,
       "durable_refs": [
@@ -408,7 +408,7 @@
         "git:origin/cycle/product/32886859788/architect@ddce3a3 / builder@7657565 (in-progress-window proof)"
       ],
       "actionable_next": [
-        "Treat 'conclusion=cancelled + 0 jobs + empty log' as a distinct benign signature in future distillation and pruning decisions \u2014 do not count it as a lane failure or retry it blindly.",
+        "Treat 'conclusion=cancelled + 0 jobs + empty log' as a distinct benign signature in future distillation and pruning decisions — do not count it as a lane failure or retry it blindly.",
         "Before pruning any such run, adjudicate against the live API (gh run view <id> --json jobs,conclusion) to rule out a fetch-harness artifact; this applies to 32894986672 itself (safe_to_prune=false until then).",
         "Emit run-id-attributed receipts for supervisor cancellations (extend CF-02's receipt requirement to queue-state transitions) so dedupe events become self-documenting instead of forensic archaeology."
       ],
@@ -422,7 +422,7 @@
       "id": "CF-2026-08-25-19",
       "importance": "HIGH",
       "kind": "PROVENANCE_INCIDENT",
-      "summary": "PB-001's combined v4+v5 amendment and Builder WP-8 artifacts are NOT merged into lab/product: HEAD d944594 lacks product-beta/PB-001/BENCHMARK_PREREG_V4_ADDENDUM.md and the WP-8 tree (curator-verified against a fresh fetch), while the eighth-session Director's ledger receipt states the artifacts existed 'ONLY on session mounts' (/tmp/spider_beta_architect, /tmp/spider_beta_builder) and pinned recovery hashes in state/product_current.json.artifact_pins. Curator Git cross-check refines the exposure: durable copies DO exist on origin \u2014 cycle/product/32886859788/architect@ddce3a3 (full amendment; parent 55c56d6 preserves the UNCHANGED builder-tree integration) and cycle/product/32886859788/builder@7657565 (child of e84b11c carrying the WP-8-executed tree; arch->bld delta = 7 files, 827 insertions). Residual fragility: the architect's own named lineage cycle/product/pb001-architect-v4 was never pushed (survives only via the generic snapshot step), session mounts are ephemeral, and the destructive wipe (CF-20) keeps eroding working-tree state each dispatch. The Director explicitly directed the merge as the FIRST action at next activation; it has not happened yet. UPDATE 2026-08-26 (run 32921034714 curation, curator Git-verified): RESOLVED \u2014 the tenth-session merges cf25299/7c2ca71 landed ddce3a3+7657565 byte-identically on lab/product and BENCHMARK_PREREG_V4_ADDENDUM.md is present in the lab/product tree at tip e320107e71db218968463f569709d6476b314312. No further action needed on the merge itself; keep cycle branches as provenance and see CF-2026-08-25-20 for the still-live wipe erosion vector.",
+      "summary": "PB-001's combined v4+v5 amendment and Builder WP-8 artifacts are NOT merged into lab/product: HEAD d944594 lacks product-beta/PB-001/BENCHMARK_PREREG_V4_ADDENDUM.md and the WP-8 tree (curator-verified against a fresh fetch), while the eighth-session Director's ledger receipt states the artifacts existed 'ONLY on session mounts' (/tmp/spider_beta_architect, /tmp/spider_beta_builder) and pinned recovery hashes in state/product_current.json.artifact_pins. Curator Git cross-check refines the exposure: durable copies DO exist on origin — cycle/product/32886859788/architect@ddce3a3 (full amendment; parent 55c56d6 preserves the UNCHANGED builder-tree integration) and cycle/product/32886859788/builder@7657565 (child of e84b11c carrying the WP-8-executed tree; arch->bld delta = 7 files, 827 insertions). Residual fragility: the architect's own named lineage cycle/product/pb001-architect-v4 was never pushed (survives only via the generic snapshot step), session mounts are ephemeral, and the destructive wipe (CF-20) keeps eroding working-tree state each dispatch. The Director explicitly directed the merge as the FIRST action at next activation; it has not happened yet. UPDATE 2026-08-26 (run 32921034714 curation, curator Git-verified): RESOLVED — the tenth-session merges cf25299/7c2ca71 landed ddce3a3+7657565 byte-identically on lab/product and BENCHMARK_PREREG_V4_ADDENDUM.md is present in the lab/product tree at tip e320107e71db218968463f569709d6476b314312. No further action needed on the merge itself; keep cycle branches as provenance and see CF-2026-08-25-20 for the still-live wipe erosion vector.",
       "evidence_status": "DURABLE_UNAUDITED",
       "source_run_id": 32886859788,
       "durable_refs": [
@@ -447,19 +447,19 @@
       "id": "CF-2026-08-25-20",
       "importance": "HIGH",
       "kind": "INFRA_FAILURE_MODE",
-      "summary": "product-loop.yml's destructive wipe deletes COMMITTED-AT-HEAD authorization/build state on every dispatch and survived its own hotfix: `rm -f state/product_beta_request.json` (:63), `state/product_beta_architecture.json` (:136), `state/product_beta_build.json` (:236), `state/product_beta_audit.json` (:327) are still live at main HEAD, and both director sessions in run 32886859788 confirmed 'still live even at the hotfix commit 8f3980c'. Observed damage in this single run: seventh-session Director had to detect the wiped working-tree request, verify rev 6 intact at HEAD via git show, and restore before writing rev 7; Builder found F1/F2 freeze artifacts (results/product-beta/PB-001/* incl. the hash-pinned KB) destroyed and restored them byte-exact from ddce3a3 with independent hash recomputation; eighth session found stale direction state on both mounts. Each dispatch burns agent time on detect-and-restore rituals and manufactures exactly the kind of mount-vs-durable divergence that produced CF-19. RECURRENCE: re-confirmed LIVE again in product-loop #10 (run 32908007576, ninth Director session) \u2014 working-tree request file wiped pre-session once more and restored byte-identical from HEAD (sha256 d8b007a7\u2026d7582); escalation renewed with exact workflow lines L62\u201368 named as the mechanical remedy. UPDATE 2026-08-26 (run 32921034714, Product #12 eleventh session): defect struck AGAIN \u2014 request file found wiped, restored byte-identical from HEAD (d8b007a7\u2026) under pointer protocol before the rev 8 edit; L62-68 re-verified live at HEAD once more; mechanical remedy (delete the two wipe steps) still unapplied. Every scheduled Product dispatch repeats the restore ritual. RECURRENCE #12 (run 32924291108, Product #13 twelfth session): struck AGAIN immediately before the PB-001 terminal-fork closure \u2014 request file found wiped in working tree, restored byte-identical from HEAD rev 8 (sha256 725cbfe4\u2026 match vs pin) BEFORE any decision action; L62-68 re-verified LIVE at HEAD once more; remedy still unapplied after twelve consecutive dispatch-performing restore rituals. RECURRENCE #13 (run 32941431673, Product #14 thirteenth session): struck AGAIN pre-decision and this bundle is the FIRST to capture the mechanism end-to-end \u2014 the raw log contains the destructive step's own execution output ('rm -f state/product_beta_request.json', 07:10:03Z), the agent's detection ('WIPED_OR_ABSENT', 07:11:52Z), and the byte-identical HEAD rev-8 restore (sha256 725cbfe4\u2026 match) BEFORE any decision action; thirteen consecutive dispatch-performing restore rituals, remedy still unapplied. RECURRENCE #14 (run 32956423301, Product #15 fourteenth session): struck AGAIN immediately before the first changed-evidence flip firing since PB-001 closure - request file found wiped (destructive rm step echoed 10:05:23Z, agent probe absent 10:10:48Z), restored byte-identical from HEAD rev 8 (sha256 725cbfe4... match vs pin) BEFORE any decision action; wipe construct re-verified live at HEAD once more; escalation renewed. Fourteenth consecutive Product dispatch performing detect-and-restore (#12/#13/#14 across sessions 12/13/14).",
+      "summary": "product-loop.yml's destructive wipe deletes COMMITTED-AT-HEAD authorization/build state on every dispatch and survived its own hotfix: `rm -f state/product_beta_request.json` (:63), `state/product_beta_architecture.json` (:136), `state/product_beta_build.json` (:236), `state/product_beta_audit.json` (:327) are still live at main HEAD, and both director sessions in run 32886859788 confirmed 'still live even at the hotfix commit 8f3980c'. Observed damage in this single run: seventh-session Director had to detect the wiped working-tree request, verify rev 6 intact at HEAD via git show, and restore before writing rev 7; Builder found F1/F2 freeze artifacts (results/product-beta/PB-001/* incl. the hash-pinned KB) destroyed and restored them byte-exact from ddce3a3 with independent hash recomputation; eighth session found stale direction state on both mounts. Each dispatch burns agent time on detect-and-restore rituals and manufactures exactly the kind of mount-vs-durable divergence that produced CF-19. RECURRENCE: re-confirmed LIVE again in product-loop #10 (run 32908007576, ninth Director session) — working-tree request file wiped pre-session once more and restored byte-identical from HEAD (sha256 d8b007a7…d7582); escalation renewed with exact workflow lines L62–68 named as the mechanical remedy. UPDATE 2026-08-26 (run 32921034714, Product #12 eleventh session): defect struck AGAIN — request file found wiped, restored byte-identical from HEAD (d8b007a7…) under pointer protocol before the rev 8 edit; L62-68 re-verified live at HEAD once more; mechanical remedy (delete the two wipe steps) still unapplied. Every scheduled Product dispatch repeats the restore ritual. RECURRENCE #12 (run 32924291108, Product #13 twelfth session): struck AGAIN immediately before the PB-001 terminal-fork closure — request file found wiped in working tree, restored byte-identical from HEAD rev 8 (sha256 725cbfe4… match vs pin) BEFORE any decision action; L62-68 re-verified LIVE at HEAD once more; remedy still unapplied after twelve consecutive dispatch-performing restore rituals. RECURRENCE #13 (run 32941431673, Product #14 thirteenth session): struck AGAIN pre-decision and this bundle is the FIRST to capture the mechanism end-to-end — the raw log contains the destructive step's own execution output ('rm -f state/product_beta_request.json', 07:10:03Z), the agent's detection ('WIPED_OR_ABSENT', 07:11:52Z), and the byte-identical HEAD rev-8 restore (sha256 725cbfe4… match) BEFORE any decision action; thirteen consecutive dispatch-performing restore rituals, remedy still unapplied. RECURRENCE #14 (run 32956423301, Product #15 fourteenth session): struck AGAIN immediately before the first changed-evidence flip firing since PB-001 closure - request file found wiped (destructive rm step echoed 10:05:23Z, agent probe absent 10:10:48Z), restored byte-identical from HEAD rev 8 (sha256 725cbfe4... match vs pin) BEFORE any decision action; wipe construct re-verified live at HEAD once more; escalation renewed. Fourteenth consecutive Product dispatch performing detect-and-restore (#12/#13/#14 across sessions 12/13/14).",
       "evidence_status": "DURABLE_UNAUDITED",
       "source_run_id": 32886859788,
       "durable_refs": [
         "git:.github/workflows/product-loop.yml@main:63,136,236,327 (rm -f lines)",
-        "git:8f3980c ('infra: hotfix Product runner to current non-destructive control plane' \u2014 did NOT remove the rm lines)",
+        "git:8f3980c ('infra: hotfix Product runner to current non-destructive control plane' — did NOT remove the rm lines)",
         "git:origin/lab/product@e84b11c + d944594 (escalation receipts in PRODUCT_LEDGER.md)",
         "evidence/run-memory/runs/32886859788.json",
         "evidence/run-memory/runs/32941431673.json",
         "git:origin/lab/product@b208340e6caec4ca32a9f026ebde0c4bc0eccfe5 (fourteenth-session receipts + ledger entry recording recurrence #14 handling)"
       ],
       "actionable_next": [
-        "Replace the rm -f lines with conditional clears that never delete committed-at-HEAD files (or drop them entirely \u2014 the beta_launch validation already requires fresh direction), then verify by one full scheduled dispatch that no restore ritual occurs.",
+        "Replace the rm -f lines with conditional clears that never delete committed-at-HEAD files (or drop them entirely — the beta_launch validation already requires fresh direction), then verify by one full scheduled dispatch that no restore ritual occurs.",
         "Sweep sibling loop workflows for the same wipe pattern before their next dispatches.",
         "Add a post-checkout assertion comparing wiped paths against git show HEAD:<path> so any future wipe is loud instead of silent."
       ],
@@ -478,7 +478,7 @@
       "id": "CF-2026-08-25-21",
       "importance": "MEDIUM",
       "kind": "RESEARCH_RADAR",
-      "summary": "PB-001 is fully armed and hard-parked solely on missing backbone credentials \u2014 the portfolio's first measured Product outcome is two env vars away: beta AUTHORIZED (request rev 7) + FROZEN (v4+v5 amendment, benchmark_frozen=true, win-rule floors carried verbatim since rev 1) + ARMED (WP-8a/8b/8c executed, 91/91 offline tests in builder env, stub-side dress rehearsal GREEN incl. W8 seam lint dead_pairs=[], go-live gate chain mechanically enforced in harness/run_phase_b.py). Resume is mechanical once PB_LLM_API_KEY/PB_LLM_MODEL (+optional PB_LLM_BASE_URL) exist: provider telemetry selftest row -> model_id pin -> dress-rehearsal replay -> B0 pilot smoke -> Phase B under frozen gates. Kill accounting: D2 consumed slot 1 of 2; slot 2 auto-consumed only by post-credential invalid/blocked events. Banked scoped negative knowledge en route: SGDR-fused ranking UNDERPERFORMED primitive lexical scoring on the PB-001 panel (D2: 3/8 vs 7/8 correct@1) => permanent front-door treatment freeze \u2014 a composition boundary condition Intel should weigh for mechanism transfer claims. Epistemic discipline held: zero outcome rows anywhere (cost_events.jsonl = 8 harness rows, zero provider rows); NO superiority/comparative claim licensed; losing-beta outcomes predeclared acceptable. UPDATE 2026-08-26 (run 32921034714): request now rev 8 (sha256 725cbfe4c757ff8ffdc3b3a40163be44dc8b961b5a37050e951633086112e14b, supersedes rev 7 after another byte-exact wipe restore); X28 go-live-gate classification pack added pre-outcome; PARK CHARTER, slot-contention trigger and a TERMINAL FORK preregistered \u2014 the next keys-absent session must activate via any compliant endpoint (local open-weight assessed INFEASIBLE in-lane today: no inference packages/servers exist in the runner environment) or close PB-001 TERMINAL BLOCKED_UNRUN with PH-1 dropping to PROMISING. See CF-2026-08-26-03. UPDATE 2026-08-26 (run 32924291108): SUPERSEDED BY CLOSURE \u2014 the terminal fork fired and PB-001 is CLOSED TERMINAL BLOCKED_UNRUN (never benchmarked, zero outcome rows); the armed-park state described here no longer exists; resume paths are the four flip inputs recorded in state/product_direction.json @ lab/product@ae64285. See CF-2026-08-26-08.",
+      "summary": "PB-001 is fully armed and hard-parked solely on missing backbone credentials — the portfolio's first measured Product outcome is two env vars away: beta AUTHORIZED (request rev 7) + FROZEN (v4+v5 amendment, benchmark_frozen=true, win-rule floors carried verbatim since rev 1) + ARMED (WP-8a/8b/8c executed, 91/91 offline tests in builder env, stub-side dress rehearsal GREEN incl. W8 seam lint dead_pairs=[], go-live gate chain mechanically enforced in harness/run_phase_b.py). Resume is mechanical once PB_LLM_API_KEY/PB_LLM_MODEL (+optional PB_LLM_BASE_URL) exist: provider telemetry selftest row -> model_id pin -> dress-rehearsal replay -> B0 pilot smoke -> Phase B under frozen gates. Kill accounting: D2 consumed slot 1 of 2; slot 2 auto-consumed only by post-credential invalid/blocked events. Banked scoped negative knowledge en route: SGDR-fused ranking UNDERPERFORMED primitive lexical scoring on the PB-001 panel (D2: 3/8 vs 7/8 correct@1) => permanent front-door treatment freeze — a composition boundary condition Intel should weigh for mechanism transfer claims. Epistemic discipline held: zero outcome rows anywhere (cost_events.jsonl = 8 harness rows, zero provider rows); NO superiority/comparative claim licensed; losing-beta outcomes predeclared acceptable. UPDATE 2026-08-26 (run 32921034714): request now rev 8 (sha256 725cbfe4c757ff8ffdc3b3a40163be44dc8b961b5a37050e951633086112e14b, supersedes rev 7 after another byte-exact wipe restore); X28 go-live-gate classification pack added pre-outcome; PARK CHARTER, slot-contention trigger and a TERMINAL FORK preregistered — the next keys-absent session must activate via any compliant endpoint (local open-weight assessed INFEASIBLE in-lane today: no inference packages/servers exist in the runner environment) or close PB-001 TERMINAL BLOCKED_UNRUN with PH-1 dropping to PROMISING. See CF-2026-08-26-03. UPDATE 2026-08-26 (run 32924291108): SUPERSEDED BY CLOSURE — the terminal fork fired and PB-001 is CLOSED TERMINAL BLOCKED_UNRUN (never benchmarked, zero outcome rows); the armed-park state described here no longer exists; resume paths are the four flip inputs recorded in state/product_direction.json @ lab/product@ae64285. See CF-2026-08-26-08.",
       "evidence_status": "DURABLE_UNAUDITED",
       "source_run_id": 32886859788,
       "durable_refs": [
@@ -489,7 +489,7 @@
       ],
       "actionable_next": [
         "Decide whether to provision backbone credentials for PB-001 or formally re-scope PH-1; either decision ends the receipts-only park, which otherwise persists indefinitely at zero information gain per scheduled dispatch.",
-        "Route the D2 boundary condition (fused < primitive lexical ranking on this panel/store) to INTEL as a transfer-limit data point on the accepted SGDR mechanism \u2014 without touching its PoC verdict.",
+        "Route the D2 boundary condition (fused < primitive lexical ranking on this panel/store) to INTEL as a transfer-limit data point on the accepted SGDR mechanism — without touching its PoC verdict.",
         "After CF-19's merge lands, audit ddce3a3+WP-8 as one unit instead of re-running architect/builder sessions."
       ],
       "route_to": [
@@ -502,7 +502,7 @@
       "id": "CF-2026-08-25-22",
       "importance": "HIGH",
       "kind": "RUNTIME_FAILURE_MODE",
-      "summary": "Permission auto-rejection killed its THIRD and FOURTH confirmed lane sessions, both in Product runs of this batch (extends CF-05/CF-13 into a 3-variant taxonomy): (a) run 32851946087 BETA ARCHITECT died ~6s in after constructing WRONG ABSOLUTE PATHS for its own control files (/home/runner/work/Spider/docs/roles/BETA_ARCHITECT.md + /home/runner/work/Spider/SPIDER_MASTER_PROMPT.md \u2014 one directory ABOVE the repo root) -> two external_directory auto-rejects -> whole opencode session terminated; the retry wrapper printed 'attempt 1/6' and never retried; validation then failed 'Missing product_beta_architecture state' and an empty architect branch was pushed. (b) run 32861115761 BETA BUILDER died ~3m40s in probing ~/.config/opencode/* (second opencode-config variant after 32799261473's ~/.local/share/opencode/* probe); builder branch pushed with zero novel content (tree identical to architect branch). Same session earlier self-healed a benign missing path (/tmp/spider_control/roles/BETA_BUILDER.md). Four kills = three mechanisms: out-of-workspace cd/probe, opencode-config self-probe (x2), path-canonicalization bug.",
+      "summary": "Permission auto-rejection killed its THIRD and FOURTH confirmed lane sessions, both in Product runs of this batch (extends CF-05/CF-13 into a 3-variant taxonomy): (a) run 32851946087 BETA ARCHITECT died ~6s in after constructing WRONG ABSOLUTE PATHS for its own control files (/home/runner/work/Spider/docs/roles/BETA_ARCHITECT.md + /home/runner/work/Spider/SPIDER_MASTER_PROMPT.md — one directory ABOVE the repo root) -> two external_directory auto-rejects -> whole opencode session terminated; the retry wrapper printed 'attempt 1/6' and never retried; validation then failed 'Missing product_beta_architecture state' and an empty architect branch was pushed. (b) run 32861115761 BETA BUILDER died ~3m40s in probing ~/.config/opencode/* (second opencode-config variant after 32799261473's ~/.local/share/opencode/* probe); builder branch pushed with zero novel content (tree identical to architect branch). Same session earlier self-healed a benign missing path (/tmp/spider_control/roles/BETA_BUILDER.md). Four kills = three mechanisms: out-of-workspace cd/probe, opencode-config self-probe (x2), path-canonicalization bug.",
       "evidence_status": "LOG_ONLY_UNAUDITED",
       "source_run_id": 32851946087,
       "additional_source_run_ids": [
@@ -516,7 +516,7 @@
       ],
       "actionable_next": [
         "Canonicalize all control-file paths against the real workspace root inside agent prompts/harnesses (the architect variant is deterministic and reproducible); pre-flight the role-file path once per job.",
-        "Pre-authorize read-only access to opencode's own config/state dirs (~/.config/opencode, ~/.local/share/opencode) in lane permission blocks \u2014 two of four kills are exactly this probe \u2014 or make external_directory denials skip the single tool call instead of terminating the session.",
+        "Pre-authorize read-only access to opencode's own config/state dirs (~/.config/opencode, ~/.local/share/opencode) in lane permission blocks — two of four kills are exactly this probe — or make external_directory denials skip the single tool call instead of terminating the session.",
         "Fix the retry wrapper gap observed in 32851946087: a permission-killed session exited without attempts 2-6 firing; decide explicitly whether that signature is retryable or fail-fast-loud."
       ],
       "route_to": [
@@ -545,7 +545,7 @@
       "actionable_next": [
         "Apply the CF-08 fix to physics-loop.yml AND graph-loop.yml in one change; add the nine-path list above as a regression fixture.",
         "Add retry damping: identical violation set twice -> fail loudly instead of re-running audits.",
-        "Before any future Physics dispatch, note WP-006 acceptance already happened via 0be8d8a \u2014 do NOT re-audit or re-consume beaf59c9 for WP-006 stewardship."
+        "Before any future Physics dispatch, note WP-006 acceptance already happened via 0be8d8a — do NOT re-audit or re-consume beaf59c9 for WP-006 stewardship."
       ],
       "route_to": [
         "INFRA",
@@ -558,7 +558,7 @@
       "id": "CF-2026-08-25-24",
       "importance": "MEDIUM",
       "kind": "PROCESS_PATTERN",
-      "summary": "Concurrent duplicate stewardship confirmed with timeline proof (strengthens CF-17): TWO independent bit-exact WP-006 carryforward chains ran in parallel on 2026-08-25 \u2014 Physics #7 (run 32860596387: carryforward + unique floor post-mortem/recheck artifacts, independent audit PASS at 15:27Z, never consumed by any Director) and run 32866107906 (fresh-env verification chain, director-integrated as the 5-gate acceptance at lab/physics@0be8d8a 17:40Z). Physics #7's team branch base provably excludes the acceptance commit, so the duplication is real concurrency, not replay. Cost: ~51 runner-minutes plus an audit spent on evidence that was simultaneously being accepted elsewhere. Unique salvageable content from the orphaned chain: results/physics/wp006_floor_postmortem_run32860596387.json and wp006_team_recheck_run32860596387.json on cycle branch 76a1d72b.",
+      "summary": "Concurrent duplicate stewardship confirmed with timeline proof (strengthens CF-17): TWO independent bit-exact WP-006 carryforward chains ran in parallel on 2026-08-25 — Physics #7 (run 32860596387: carryforward + unique floor post-mortem/recheck artifacts, independent audit PASS at 15:27Z, never consumed by any Director) and run 32866107906 (fresh-env verification chain, director-integrated as the 5-gate acceptance at lab/physics@0be8d8a 17:40Z). Physics #7's team branch base provably excludes the acceptance commit, so the duplication is real concurrency, not replay. Cost: ~51 runner-minutes plus an audit spent on evidence that was simultaneously being accepted elsewhere. Unique salvageable content from the orphaned chain: results/physics/wp006_floor_postmortem_run32860596387.json and wp006_team_recheck_run32860596387.json on cycle branch 76a1d72b.",
       "evidence_status": "OPERATIONAL_DIAGNOSTIC",
       "source_run_id": 32860596387,
       "additional_source_run_ids": [
@@ -571,7 +571,7 @@
       ],
       "actionable_next": [
         "Implement CF-17's pending-integration pointer AND an in-flight dispatch registry keyed by snapshot hash so two chains cannot steward the same evidence concurrently.",
-        "If the floor post-mortem's descriptive content is ever needed, read it from cycle branch 76a1d72b \u2014 do not rerun stewardship."
+        "If the floor post-mortem's descriptive content is ever needed, read it from cycle branch 76a1d72b — do not rerun stewardship."
       ],
       "route_to": [
         "CTO",
@@ -583,7 +583,7 @@
       "id": "CF-2026-08-25-25",
       "importance": "MEDIUM",
       "kind": "RESEARCH_RADAR",
-      "summary": "Intel cycle-5 route-ladder origin measurement exists with a boundary condition that should discipline every future browser->API escalation claim: clean-room preregistered A/B/C ladder (A full browser traversal / B cached-route replay / C bare HTTP curl-null) on restful-booker UI+REST, httpbin control, books+quotes.toscrape returned REPRODUCED_USEFUL per frozen rule \u2014 replay beat traversal 5/5 paired wins on BOTH panels (speedup_med 37.05x / 8.66x) \u2014 but C/B median ratios were 0.92 and 0.73: bare HTTP nearly MATCHES cached-route replay on these sandbox sites, so the measured advantage is over browser traversal, not over plain HTTP. Independent audit recomputed everything zero-mismatch and its adversarial attacks all failed (store provably capture-derived, no doc-hints, no LLM, pacing sleep outside timers) yet gated REVISE/VALIDATED_USEFUL/safe_to_integrate=false on documentary-only RF-1..RF-4. UPDATE (curator batch 2026-08-25 evening): the repair round and acceptance event are now PINNED \u2014 run 32873081963 delivered RF-1..RF-4 documentary-only, the auditor honored round-0's predeclared flip condition (still re-running full measurement verification with fresh recomputation code), gate flipped PASS/safe_to_integrate=true at cycle/intel/32873081963/audit@d1b9bb1, and the Director integrated the mechanism into lab/intel@8bfcf85 with binding wording byte-exact; audited routing emitted R-2 advisory to Graph and P-6/P-7 HIGH product signal incl. measured registry trust (~12% malicious skills; 9/11 registries publish unaudited servers). Lane has since advanced to 9f9a757 (cycle-6 MEASUREMENT_INVALID invalid-run documentation via run 32897120087).",
+      "summary": "Intel cycle-5 route-ladder origin measurement exists with a boundary condition that should discipline every future browser->API escalation claim: clean-room preregistered A/B/C ladder (A full browser traversal / B cached-route replay / C bare HTTP curl-null) on restful-booker UI+REST, httpbin control, books+quotes.toscrape returned REPRODUCED_USEFUL per frozen rule — replay beat traversal 5/5 paired wins on BOTH panels (speedup_med 37.05x / 8.66x) — but C/B median ratios were 0.92 and 0.73: bare HTTP nearly MATCHES cached-route replay on these sandbox sites, so the measured advantage is over browser traversal, not over plain HTTP. Independent audit recomputed everything zero-mismatch and its adversarial attacks all failed (store provably capture-derived, no doc-hints, no LLM, pacing sleep outside timers) yet gated REVISE/VALIDATED_USEFUL/safe_to_integrate=false on documentary-only RF-1..RF-4. UPDATE (curator batch 2026-08-25 evening): the repair round and acceptance event are now PINNED — run 32873081963 delivered RF-1..RF-4 documentary-only, the auditor honored round-0's predeclared flip condition (still re-running full measurement verification with fresh recomputation code), gate flipped PASS/safe_to_integrate=true at cycle/intel/32873081963/audit@d1b9bb1, and the Director integrated the mechanism into lab/intel@8bfcf85 with binding wording byte-exact; audited routing emitted R-2 advisory to Graph and P-6/P-7 HIGH product signal incl. measured registry trust (~12% malicious skills; 9/11 registries publish unaudited servers). Lane has since advanced to 9f9a757 (cycle-6 MEASUREMENT_INVALID invalid-run documentation via run 32897120087).",
       "evidence_status": "AUDITED_DURABLE",
       "source_run_id": 32861355080,
       "additional_source_run_ids": [
@@ -614,7 +614,7 @@
       "id": "CF-2026-08-25-26",
       "importance": "MEDIUM",
       "kind": "RESEARCH_RADAR",
-      "summary": "Graph program graph-inheritance-scaling is COMPLETE as ledger G-H5 'SCALING-HOLDS at narrow basis' (audited PASS SURVIVES_AUDIT_WITH_LIMITS, director-integrated lab/graph d41fe9b..3e36b4c via run 32861557668): depth-4 AND depth-5 composites memory-led on both passes under frag_v31/frag_legacy/giter_legacy paying 1-4 novel actions vs cold 57/76 and traj 49/65 with all 24 reference contrasts holding \u2014 but binding caveats travel with the wording: positive basis is QUOTES-SIDE ONLY (books chains unsolved by every arm incl. references due to b.book EXECUTION-FAIL => books scaling UNMEASURED-not-falsified), giter_v31 transfer failure (qualify_count=0), achieved pure-memory depth <=4 classes, D2Q control memory-led only under frag_v31, traj baseline degraded by missing raw snapshots. Director set continue=false within_cap with recommended successor program graph-inheritance-generalization (books-inventory replication after producer-disciplined repair of the b.book defect; GENERALIZES/SITE-BOUND/BOOKS-INSTRUMENT-UNREPAIRABLE branches; no-succession-on-negative) \u2014 the successor dispatch decision is now pending with the CTO/lane. Operational residue: first live launch EPIPE-killed at row 12 by runner shell timeout, preserved honestly as INFRA_INTERRUPTED provenance before the canonical clean rerun.",
+      "summary": "Graph program graph-inheritance-scaling is COMPLETE as ledger G-H5 'SCALING-HOLDS at narrow basis' (audited PASS SURVIVES_AUDIT_WITH_LIMITS, director-integrated lab/graph d41fe9b..3e36b4c via run 32861557668): depth-4 AND depth-5 composites memory-led on both passes under frag_v31/frag_legacy/giter_legacy paying 1-4 novel actions vs cold 57/76 and traj 49/65 with all 24 reference contrasts holding — but binding caveats travel with the wording: positive basis is QUOTES-SIDE ONLY (books chains unsolved by every arm incl. references due to b.book EXECUTION-FAIL => books scaling UNMEASURED-not-falsified), giter_v31 transfer failure (qualify_count=0), achieved pure-memory depth <=4 classes, D2Q control memory-led only under frag_v31, traj baseline degraded by missing raw snapshots. Director set continue=false within_cap with recommended successor program graph-inheritance-generalization (books-inventory replication after producer-disciplined repair of the b.book defect; GENERALIZES/SITE-BOUND/BOOKS-INSTRUMENT-UNREPAIRABLE branches; no-succession-on-negative) — the successor dispatch decision is now pending with the CTO/lane. Operational residue: first live launch EPIPE-killed at row 12 by runner shell timeout, preserved honestly as INFRA_INTERRUPTED provenance before the canonical clean rerun.",
       "evidence_status": "AUDITED_DURABLE",
       "source_run_id": 32861557668,
       "durable_refs": [
@@ -623,7 +623,7 @@
         "evidence/run-memory/runs/32861557668.json"
       ],
       "actionable_next": [
-        "Decide whether to dispatch graph-inheritance-generalization (requires fixing the b.book next-link defect first) or redirect \u2014 books-side scaling remains the open half of the question.",
+        "Decide whether to dispatch graph-inheritance-generalization (requires fixing the b.book next-link defect first) or redirect — books-side scaling remains the open half of the question.",
         "Carry V31 boundary conditions (giter_v31 qualify=0; D2Q frag_v31-only) into any Product/Runtime reuse of V31 equipment.",
         "Optionally investigate the row-12 EPIPE runner-timeout signature if it recurs in long live batches."
       ],
@@ -637,7 +637,7 @@
       "id": "CF-2026-08-25-27",
       "importance": "HIGH",
       "kind": "PROVENANCE_INCIDENT",
-      "summary": "MAROONED PRODUCT DIRECTOR DECISION (run 32866023398, product-loop #5): the fifth Director session fully synthesized and locally committed its PB-001 rev-5 re-authorization + four-critic pre-outcome hardening pack V3-A..V3-G + binding narrative ceiling (commits 440a465 -> clean c875c47, plus persist commit d834791), but the workflow's final push to lab/product was REJECTED non-fast-forward; exit 1 skipped all downstream jobs. Curator Git-check (2026-08-25): c875c47/d834791/440a465 are reachable from NO fetched ref \u2014 the decision content survives ONLY in the raw run log. This is a NEW work-loss mechanism distinct from permission kills and empty snapshots: real synthesized decision content stranded on ephemeral disk by a missing delivery assertion. UPDATE (curator batch, later the same day): the immediate successor dispatch (Product Supervisor 32870339029 -> run 32870361258) re-derived the decision and LANDED a functionally equivalent pack durably \u2014 rev-5 persist ad25538, F0 rescue of the marooned prereg tree UNCHANGED (86b0102/tag pb001-F0), v3 delta pack D1-D8 implemented pre-outcome (c287f00: B3 instruction-card ceiling arm, SGDR+V31 attribution diagnostic with frozen fallback ordering, silent-execution semantics, conjunctive replication + frozen comparator selection + paired deltas, contamination controls, amortization/break-even accounting, content-hashed fixtures + knob manifest, cost_event telemetry) and BUILD-BLOCK disposition 86a59ec (rev 6). Lane state is healthy; the residual unknown narrows to a CLAUSE-LEVEL mapping question: whether every V3-A..G item is represented in the durable D1-D8/v4 wording, verifiable only by diffing against the log-only pack.",
+      "summary": "MAROONED PRODUCT DIRECTOR DECISION (run 32866023398, product-loop #5): the fifth Director session fully synthesized and locally committed its PB-001 rev-5 re-authorization + four-critic pre-outcome hardening pack V3-A..V3-G + binding narrative ceiling (commits 440a465 -> clean c875c47, plus persist commit d834791), but the workflow's final push to lab/product was REJECTED non-fast-forward; exit 1 skipped all downstream jobs. Curator Git-check (2026-08-25): c875c47/d834791/440a465 are reachable from NO fetched ref — the decision content survives ONLY in the raw run log. This is a NEW work-loss mechanism distinct from permission kills and empty snapshots: real synthesized decision content stranded on ephemeral disk by a missing delivery assertion. UPDATE (curator batch, later the same day): the immediate successor dispatch (Product Supervisor 32870339029 -> run 32870361258) re-derived the decision and LANDED a functionally equivalent pack durably — rev-5 persist ad25538, F0 rescue of the marooned prereg tree UNCHANGED (86b0102/tag pb001-F0), v3 delta pack D1-D8 implemented pre-outcome (c287f00: B3 instruction-card ceiling arm, SGDR+V31 attribution diagnostic with frozen fallback ordering, silent-execution semantics, conjunctive replication + frozen comparator selection + paired deltas, contamination controls, amortization/break-even accounting, content-hashed fixtures + knob manifest, cost_event telemetry) and BUILD-BLOCK disposition 86a59ec (rev 6). Lane state is healthy; the residual unknown narrows to a CLAUSE-LEVEL mapping question: whether every V3-A..G item is represented in the durable D1-D8/v4 wording, verifiable only by diffing against the log-only pack.",
       "evidence_status": "OPERATIONAL_DIAGNOSTIC",
       "source_run_id": 32866023398,
       "additional_source_run_ids": [
@@ -665,7 +665,7 @@
       "id": "CF-2026-08-25-28",
       "importance": "MEDIUM",
       "kind": "RESEARCH_RADAR",
-      "summary": "First full Runtime lane cycle (run 32864270667) closed as audit REVISE RF1-RF6 with ZERO measurements taken: the preregistered R0 work-compression benchmark was built but never executed (ledger/NEXT_RUNTIME committed as 0-byte blobs; auditor explicitly forbids narrating this later as a null result). Concrete defects to clear before R0 can run: resolver.py:180 TypeError when >=2 candidates apply (7/9 cells unexecutable); coverage metric exceeds 1.0 while gold-keyed decoys false-accept above threshold and the promised RESOLVER_FP_GOLDKEYED metric is unimplemented (Amendment A1 also quietly loosened D5's hard-fail); ALREADY_SATISFIED unreachable by construction kills flagship E5 cell; verify_ms hardcoded 0.05 and V2 \u00a76 maintenance/storage overhead absent, so no economics vector is computable. Log-only behavioral datum: the team ran pytest itself (10 failed / 17 passed) and shipped anyway. Audited positive residue: byte-deterministic 12/12 capsule derivation from accepted Graph cycle-3 evidence, credential-free CANDIDATE tier, ID-free resolve/materialize contract, unfired E6 stale-mirror instrument (free freshness experiment).",
+      "summary": "First full Runtime lane cycle (run 32864270667) closed as audit REVISE RF1-RF6 with ZERO measurements taken: the preregistered R0 work-compression benchmark was built but never executed (ledger/NEXT_RUNTIME committed as 0-byte blobs; auditor explicitly forbids narrating this later as a null result). Concrete defects to clear before R0 can run: resolver.py:180 TypeError when >=2 candidates apply (7/9 cells unexecutable); coverage metric exceeds 1.0 while gold-keyed decoys false-accept above threshold and the promised RESOLVER_FP_GOLDKEYED metric is unimplemented (Amendment A1 also quietly loosened D5's hard-fail); ALREADY_SATISFIED unreachable by construction kills flagship E5 cell; verify_ms hardcoded 0.05 and V2 §6 maintenance/storage overhead absent, so no economics vector is computable. Log-only behavioral datum: the team ran pytest itself (10 failed / 17 passed) and shipped anyway. Audited positive residue: byte-deterministic 12/12 capsule derivation from accepted Graph cycle-3 evidence, credential-free CANDIDATE tier, ID-free resolve/materialize contract, unfired E6 stale-mirror instrument (free freshness experiment).",
       "evidence_status": "DURABLE_UNAUDITED",
       "source_run_id": 32864270667,
       "durable_refs": [
@@ -674,7 +674,7 @@
         "evidence/run-memory/runs/32864270667.json"
       ],
       "actionable_next": [
-        "RUNTIME: execute RF1-RF6 then actually fire frozen R0 \u2014 cheapest path to the lane's first real work-compression number.",
+        "RUNTIME: execute RF1-RF6 then actually fire frozen R0 — cheapest path to the lane's first real work-compression number.",
         "RUNTIME: implement RESOLVER_FP_GOLDKEYED, bound the coverage metric, make ALREADY_SATISFIED reachable, measure verify_ms.",
         "INFRA/RUNTIME: add a suite-green persist gate for team snapshots (would have caught the 10/27).",
         "Optionally fire the designed-but-unexecuted E6 stale-mirror instrument as a standalone freshness/invalidation experiment."
@@ -688,7 +688,7 @@
       "id": "CF-2026-08-25-29",
       "importance": "HIGH",
       "kind": "RESEARCH_RADAR",
-      "summary": "PB-001's SGDR-fused front-door negative ORIGINATED in run 32870361258 (#6, builder session ~18:34-18:50Z) \u2014 provenance refinement ahead of run 32886859788's re-derivation: retrieval@1 over the REAL built KB on the 8 trained-coverage panel tasks = stacked SGDR(alpha=0.4 state-summary)\u2295V31 front door 3/8 < primitive lexical scorer 7/8 < V31-canonicalized desc-only ranking 8/8; ground truth = producer-provenance fragment ids (training-side); the single sanctioned assembly/plumbing repair round found NO defect (seams S1-S6 pass; vendored-scorer fixtures reproduce Intel's accepted numbers exactly: 25/74, 25/74, 36/74, 11 wins/0 reversals; V31 fixture 6/8 with 0 false accepts) so failures localize to the fused mechanism itself (alpha term selects context-matching-but-goal-wrong fragments under shifted entries). Frozen addendum rule D2.5 => MEASUREMENT_INVALID_BEFORE_OUTCOME; sixth-session Director disposed one-shot front-door REVERSION to V31-canonicalized desc-only ranking with PB-001 explicitly NOT benchmarked (zero outcome rows anywhere, curator-corroborated) plus BF-1 degeneracy disclosure (task 10's anchor satisfied at entry) and a NEW transcription defect found by that session (stale KB hash tail ...c0a0695b... in product_beta_build.json manifest_hashes matching no committed artifact; authoritative ...f89abd8f...). All disposition content durable in docs/PRODUCT_LEDGER.md at lab/product@86a59ec. Residual durability gap: run #6's builder freeze chain (fc24c86 -> 61c42d4) is NOT an ancestor of lab/product HEAD; it reached run #8's lineage only as copy-commit 55c56d6 ('sibling builder tree 61c42d4 landed UNCHANGED'), so CF-2026-08-25-19's pending merge also closes this gap.",
+      "summary": "PB-001's SGDR-fused front-door negative ORIGINATED in run 32870361258 (#6, builder session ~18:34-18:50Z) — provenance refinement ahead of run 32886859788's re-derivation: retrieval@1 over the REAL built KB on the 8 trained-coverage panel tasks = stacked SGDR(alpha=0.4 state-summary)⊕V31 front door 3/8 < primitive lexical scorer 7/8 < V31-canonicalized desc-only ranking 8/8; ground truth = producer-provenance fragment ids (training-side); the single sanctioned assembly/plumbing repair round found NO defect (seams S1-S6 pass; vendored-scorer fixtures reproduce Intel's accepted numbers exactly: 25/74, 25/74, 36/74, 11 wins/0 reversals; V31 fixture 6/8 with 0 false accepts) so failures localize to the fused mechanism itself (alpha term selects context-matching-but-goal-wrong fragments under shifted entries). Frozen addendum rule D2.5 => MEASUREMENT_INVALID_BEFORE_OUTCOME; sixth-session Director disposed one-shot front-door REVERSION to V31-canonicalized desc-only ranking with PB-001 explicitly NOT benchmarked (zero outcome rows anywhere, curator-corroborated) plus BF-1 degeneracy disclosure (task 10's anchor satisfied at entry) and a NEW transcription defect found by that session (stale KB hash tail ...c0a0695b... in product_beta_build.json manifest_hashes matching no committed artifact; authoritative ...f89abd8f...). All disposition content durable in docs/PRODUCT_LEDGER.md at lab/product@86a59ec. Residual durability gap: run #6's builder freeze chain (fc24c86 -> 61c42d4) is NOT an ancestor of lab/product HEAD; it reached run #8's lineage only as copy-commit 55c56d6 ('sibling builder tree 61c42d4 landed UNCHANGED'), so CF-2026-08-25-19's pending merge also closes this gap.",
       "evidence_status": "DURABLE_UNAUDITED",
       "source_run_id": 32870361258,
       "durable_refs": [
@@ -713,7 +713,7 @@
       "id": "CF-2026-08-25-30",
       "importance": "MEDIUM",
       "kind": "STRUCTURAL_FIX",
-      "summary": "Attribution infrastructure already partially exists \u2014 extend it rather than build new (strengthens CF-02/CF-17/CF-18): (1) Product Supervisor run 32870339029 POSITIVELY ATTRIBUTED its recovery dispatch in-log ('Product continuity recovery: run 32866023398 ended failure with an explicit infrastructure/control-plane signature' + successor URL for run 32870361258) \u2014 proof that supervisor dispatches CAN be self-documenting when workflows print trigger+target; gap: it does not log WHICH regex matched (audit requires grepping the triggering run's own log). (2) The Research Program Supervisor (program-supervisor.yml) maintains machine-readable succession receipts COMMITTED TO MAIN (.spider/program-receipts/<lane>-<completed_by>.json; PENDING/IN_FLIGHT/CONFIRMED lifecycle; failed/cancelled/vanished successor clears the receipt instead of consuming the recommendation; SOURCE_RUN_ID mismatch refusal; zero-job-rerun cancellation; anti-gaming dispatch note 'Do not reinterpret this note as a demand for a positive result'). Run 32874583480 shows Physics #8's WP-006 acceptance chain (run 32866107906) was dispatched through exactly this mechanism for program 'within-site-dynamics-interventional'.",
+      "summary": "Attribution infrastructure already partially exists — extend it rather than build new (strengthens CF-02/CF-17/CF-18): (1) Product Supervisor run 32870339029 POSITIVELY ATTRIBUTED its recovery dispatch in-log ('Product continuity recovery: run 32866023398 ended failure with an explicit infrastructure/control-plane signature' + successor URL for run 32870361258) — proof that supervisor dispatches CAN be self-documenting when workflows print trigger+target; gap: it does not log WHICH regex matched (audit requires grepping the triggering run's own log). (2) The Research Program Supervisor (program-supervisor.yml) maintains machine-readable succession receipts COMMITTED TO MAIN (.spider/program-receipts/<lane>-<completed_by>.json; PENDING/IN_FLIGHT/CONFIRMED lifecycle; failed/cancelled/vanished successor clears the receipt instead of consuming the recommendation; SOURCE_RUN_ID mismatch refusal; zero-job-rerun cancellation; anti-gaming dispatch note 'Do not reinterpret this note as a demand for a positive result'). Run 32874583480 shows Physics #8's WP-006 acceptance chain (run 32866107906) was dispatched through exactly this mechanism for program 'within-site-dynamics-interventional'.",
       "evidence_status": "OPERATIONAL_DIAGNOSTIC",
       "source_run_id": 32874583480,
       "additional_source_run_ids": [
@@ -727,7 +727,7 @@
         "evidence/run-memory/runs/32874583480.json (incl. transcribed 16:52:57Z remote-branch inventory)"
       ],
       "actionable_next": [
-        "Extend program-receipt-style committed receipts to: audit-PASS-pending-Director-integration transitions (CF-17), supervisor cancellations/dedupes (CF-18), and hygiene deletions \u2014 one receipt pattern closes all three attribution gaps.",
+        "Extend program-receipt-style committed receipts to: audit-PASS-pending-Director-integration transitions (CF-17), supervisor cancellations/dedupes (CF-18), and hygiene deletions — one receipt pattern closes all three attribution gaps.",
         "Make signature-matching supervisors log the matched pattern name alongside the warning (one-line change; removes post-hoc log archaeology).",
         "Give loop workflows a default git identity to eliminate the recurring self-healed 'fatal: empty ident name' friction observed in runs 32866023398/32870361258/32873081963."
       ],
@@ -741,7 +741,7 @@
       "id": "CF-2026-08-25-31",
       "importance": "HIGH",
       "kind": "PROVENANCE_RESOLUTION",
-      "summary": "Session-8 PB-001 provenance gap VERIFIED RESOLVED at the source, but the closing merge is STILL undone (narrows CF-19): run 32908007576's ninth Director session proved by Git inspection that the combined v4+v5 amendment (cycle/product/32886859788/architect@ddce3a3) and Builder WP-8 tree (\u2026/builder@7657565) are durably pushed, re-verified ALL FIVE recovery hashes byte-exact, and adjudicated the one apparent mismatch as a DISCLOSED supersession recorded in MANIFEST.v4_builder_wp8.verification.dress_rehearsal_rerun (02dddfaa\u2026 supersedes pinned 823dedea\u2026, rerun green vs WP-8-amended code 20:55:11Z, dead_pairs empty) \u2014 zero unexplained hash drift in the frozen set. Remaining risk is purely mechanical: product-beta/PB-001/BENCHMARK_PREREG_V4_ADDENDUM.md is still ABSENT from lab/product tip dc716c5 (curator-verified); a single UNCHANGED merge closes it.",
+      "summary": "Session-8 PB-001 provenance gap VERIFIED RESOLVED at the source, but the closing merge is STILL undone (narrows CF-19): run 32908007576's ninth Director session proved by Git inspection that the combined v4+v5 amendment (cycle/product/32886859788/architect@ddce3a3) and Builder WP-8 tree (…/builder@7657565) are durably pushed, re-verified ALL FIVE recovery hashes byte-exact, and adjudicated the one apparent mismatch as a DISCLOSED supersession recorded in MANIFEST.v4_builder_wp8.verification.dress_rehearsal_rerun (02dddfaa… supersedes pinned 823dedea…, rerun green vs WP-8-amended code 20:55:11Z, dead_pairs empty) — zero unexplained hash drift in the frozen set. Remaining risk is purely mechanical: product-beta/PB-001/BENCHMARK_PREREG_V4_ADDENDUM.md is still ABSENT from lab/product tip dc716c5 (curator-verified); a single UNCHANGED merge closes it.",
       "evidence_status": "DURABLE_UNAUDITED",
       "source_run_id": 32908007576,
       "durable_refs": [
@@ -776,7 +776,7 @@
       "id": "CF-2026-08-25-33",
       "importance": "MEDIUM",
       "kind": "RESEARCH_RADAR",
-      "summary": "First cross-lane intake into Product reasoning at audit ceilings sets two binding boundaries for all future reuse claims: (a) Runtime R0-1 accepted (audit PASS run 32887030457, lab/runtime@9dc50ba) ONLY at its ceilings \u2014 exact-repeat PARITY 4v4 / novel decisions 0v4 with producer-WITHDRAWN compression wording is recorded verbatim as NOT economic evidence (n=1/cell scripted, zero provider calls), and its 88 cost-event twins vs pb001.cost_event/v0 with 0 identity errors TRIGGERED the contracted interim-telemetry 1:1 field-migration duty, making the dual-id mapping delta (spider.cost_event/v0 alongside pb001.cost_event/v0, no treatment-byte change) a concrete pre-outcome infra task binding on PB-001; (b) Graph G-H6 SITE-BOUND (audit PASS run 32900187567): depth>=4 memory-led advantage is INVENTORY-CONDITIONAL (zero qualifying books rows either pass; quotes family bit-identical on 36 cells) \u2014 reuse claims must be scoped to inventories whose stored descriptions demonstrably address consumer subgoals. Intel cycle-6 excluded as unaudited; PH-2 unlock(2) has accepted PRELIMINARY evidence only, formally deferred to Runtime acceptance of a route-tier HTTP executor (still absent).",
+      "summary": "First cross-lane intake into Product reasoning at audit ceilings sets two binding boundaries for all future reuse claims: (a) Runtime R0-1 accepted (audit PASS run 32887030457, lab/runtime@9dc50ba) ONLY at its ceilings — exact-repeat PARITY 4v4 / novel decisions 0v4 with producer-WITHDRAWN compression wording is recorded verbatim as NOT economic evidence (n=1/cell scripted, zero provider calls), and its 88 cost-event twins vs pb001.cost_event/v0 with 0 identity errors TRIGGERED the contracted interim-telemetry 1:1 field-migration duty, making the dual-id mapping delta (spider.cost_event/v0 alongside pb001.cost_event/v0, no treatment-byte change) a concrete pre-outcome infra task binding on PB-001; (b) Graph G-H6 SITE-BOUND (audit PASS run 32900187567): depth>=4 memory-led advantage is INVENTORY-CONDITIONAL (zero qualifying books rows either pass; quotes family bit-identical on 36 cells) — reuse claims must be scoped to inventories whose stored descriptions demonstrably address consumer subgoals. Intel cycle-6 excluded as unaudited; PH-2 unlock(2) has accepted PRELIMINARY evidence only, formally deferred to Runtime acceptance of a route-tier HTTP executor (still absent).",
       "evidence_status": "DURABLE_UNAUDITED",
       "source_run_id": 32908007576,
       "durable_refs": [
@@ -797,7 +797,7 @@
       "id": "CF-2026-08-25-34",
       "importance": "HIGH",
       "kind": "RUNTIME_FAILURE_MODE",
-      "summary": "Permission auto-rejection killed its FIFTH confirmed lane session and produced the Runtime repair chain's second silent zero-delta resubmission (run 32875577618, repair r1 of cycle 1): the runtime_runner agent requested external_directory read of /home/runner/work/Spider/Sparkle/runtime/accounting.py \u2014 an agent-constructed path naming a NONEXISTENT project ('Sparkle' != 'Spider') \u2014 the auto-rejection terminated the whole OpenCode session ~2m47s in after only reads (zero edits), the retry wrapper printed 'attempt 1/6' and never retried, and the persist step then force-pushed the unchanged rejected snapshot af164b9 as team output under conclusion=success. Independent audit recomputed everything fresh, re-issued REVISE (RF1-RF6 unaddressed by construction) and pre-committed an escalation rule that round 2 (32877702179) then triggered by resubmitting the byte-identical tree -> gate BLOCKED pending an external/orchestration decision. New variant of CF-05/CF-13/CF-22: cross-project name contamination inside an absolute path (2x config self-probes, 2x wrong absolute paths, 1x workspace probe across five instances). Additional structural lead from the same run: enforce/persist steps and OpenCode sessions observe DIFFERENT git index states (staged docs/roles overlays visible to agents, absent at persist/enforce), consistent with copy-based/sync-back delivery where a mid-session death delivers nothing silently \u2014 UNCONFIRMED hypothesis. Fix set (extends prior instances): tip!=base AND non-empty-diff assertion in every persist step; degrade external_directory denials to single-tool-call skips; retry permission aborts in the wrapper; canonicalize agent-constructed absolute paths against the real workspace root; settle the delivery-copy question before relying on any post-hoc delta check.",
+      "summary": "Permission auto-rejection killed its FIFTH confirmed lane session and produced the Runtime repair chain's second silent zero-delta resubmission (run 32875577618, repair r1 of cycle 1): the runtime_runner agent requested external_directory read of /home/runner/work/Spider/Sparkle/runtime/accounting.py — an agent-constructed path naming a NONEXISTENT project ('Sparkle' != 'Spider') — the auto-rejection terminated the whole OpenCode session ~2m47s in after only reads (zero edits), the retry wrapper printed 'attempt 1/6' and never retried, and the persist step then force-pushed the unchanged rejected snapshot af164b9 as team output under conclusion=success. Independent audit recomputed everything fresh, re-issued REVISE (RF1-RF6 unaddressed by construction) and pre-committed an escalation rule that round 2 (32877702179) then triggered by resubmitting the byte-identical tree -> gate BLOCKED pending an external/orchestration decision. New variant of CF-05/CF-13/CF-22: cross-project name contamination inside an absolute path (2x config self-probes, 2x wrong absolute paths, 1x workspace probe across five instances). Additional structural lead from the same run: enforce/persist steps and OpenCode sessions observe DIFFERENT git index states (staged docs/roles overlays visible to agents, absent at persist/enforce), consistent with copy-based/sync-back delivery where a mid-session death delivers nothing silently — UNCONFIRMED hypothesis. Fix set (extends prior instances): tip!=base AND non-empty-diff assertion in every persist step; degrade external_directory denials to single-tool-call skips; retry permission aborts in the wrapper; canonicalize agent-constructed absolute paths against the real workspace root; settle the delivery-copy question before relying on any post-hoc delta check.",
       "evidence_status": "LOG_ONLY_UNAUDITED",
       "source_run_id": 32875577618,
       "durable_refs": [
@@ -854,7 +854,7 @@
       "id": "CF-2026-08-26-01",
       "importance": "HIGH",
       "kind": "PROCESS_PATTERN",
-      "summary": "NEW delivery-defect class caught by an independent audit (Intel cycle-6 round 0, run 32878215017): experiment code shipped that REFERENCES its preregistration file >=8 times ('Implements the preregistered protocol exactly') while that prereg file is absent from EVERY git ref, with zero raw-evidence files, no report, and a lane-state file still describing the previous cycle. The auditor applied master-prompt \u00a725 (recomputation impossible -> downgrade) and issued REVISE/INCONCLUSIVE with 7 fixes; three design defects were also required out pre-freeze, incl. a time.sleep(1.2) inside a TIMED baseline arm \u2014 recurrence of the known timed-baseline artifact class. Most instrumentation spend was recovered (byte-exact restoration into repair lineage), but the pattern generalizes across lanes.",
+      "summary": "NEW delivery-defect class caught by an independent audit (Intel cycle-6 round 0, run 32878215017): experiment code shipped that REFERENCES its preregistration file >=8 times ('Implements the preregistered protocol exactly') while that prereg file is absent from EVERY git ref, with zero raw-evidence files, no report, and a lane-state file still describing the previous cycle. The auditor applied master-prompt §25 (recomputation impossible -> downgrade) and issued REVISE/INCONCLUSIVE with 7 fixes; three design defects were also required out pre-freeze, incl. a time.sleep(1.2) inside a TIMED baseline arm — recurrence of the known timed-baseline artifact class. Most instrumentation spend was recovered (byte-exact restoration into repair lineage), but the pattern generalizes across lanes.",
       "evidence_status": "DURABLE_UNAUDITED",
       "source_run_id": 32878215017,
       "durable_refs": [
@@ -864,7 +864,7 @@
       ],
       "actionable_next": [
         "Add persist-phase assertions to lane workflows: if session output references a prereg path, assert the file exists in the pushed tree; assert non-empty results/report artifacts when an experiment claims execution; assert lane state file cycle field == current cycle before dispatching the auditor.",
-        "Extend the zero-diff guard family with a 'referenced-prereg-must-exist' lint \u2014 cheap, mechanical, would have converted round 0 from a wasted audit into a fast team-side rejection."
+        "Extend the zero-diff guard family with a 'referenced-prereg-must-exist' lint — cheap, mechanical, would have converted round 0 from a wasted audit into a fast team-side rejection."
       ],
       "route_to": [
         "CTO",
@@ -885,8 +885,8 @@
       ],
       "actionable_next": [
         "Runtime: use capture-value-over-declaration as an ingestion-trust tier signal when weighing HAR-derived capsules vs spec-generated ones; treat spec-less SPA hosts as the high-value capture domain.",
-        "Intel/Product: whoever completes the multi-host ladder should report B\u2212D per host so the segmentation map becomes usable; until then treat all numbers here as leads, never as claims.",
-        "Graph: the inheritance-decay paper leads (8.2% under binding shift) are directly relevant to staleness/freshness calibration priorities \u2014 reproduce or discard explicitly."
+        "Intel/Product: whoever completes the multi-host ladder should report B−D per host so the segmentation map becomes usable; until then treat all numbers here as leads, never as claims.",
+        "Graph: the inheritance-decay paper leads (8.2% under binding shift) are directly relevant to staleness/freshness calibration priorities — reproduce or discard explicitly."
       ],
       "route_to": [
         "CTO",
@@ -900,7 +900,7 @@
       "id": "CF-2026-08-26-03",
       "importance": "HIGH",
       "kind": "DECISION_DEADLINE",
-      "summary": "PB-001's indefinite hard park is now TIME-BOXED by a preregistered terminal fork (Product #12, run 32921034714, lab/product@e320107): at the NEXT Director session finding PB_LLM_API_KEY/PB_LLM_MODEL absent, the compliant-endpoint option must be formally posed \u2014 granted-with-stability-gate \u21d2 frozen go-live gate chain executes mechanically; declined/infeasible \u21d2 PB-001 closes TERMINAL BLOCKED_UNRUN (authorized+frozen+armed, never benchmarked, zero outcome rows, artifact pack preserved as durable negative knowledge) and PH-1 drops PRODUCT_CANDIDATE\u2192PROMISING (explicitly NOT falsified) in the SAME session. Live feasibility facts from this session: credentials UNSET and NO local inference capability exists in-lane (no ollama/vllm/llama-cli/lmstudio binaries, ports 11434/8000 closed, no openai/anthropic/vllm/transformers/torch packages), so CTO-5 S4's 'locally served open-weight model' path cannot be self-served by the lane today \u2014 provisioning is genuinely an ops/human decision. Activation checklist preregistered to execute AT go-live only: endpoint stability validation green \u2192 dual-id ingestion seam hardening (enum-conformance assertion inside normalize_cost_event + fixture vs REAL Runtime-emitted rows + one-writer-per-stream rule, as one disclosed pre-outcome infra delta like 2988fa1) \u2192 optional STRICTLY_DESCRIPTIVE probe V-C \u2192 frozen gate chain verbatim. All four fresh-context Product critics converged: MAINTAIN armed park, NO second beta, NO floor edits (kill rejected: A1 real-LLM economics is an untested first-order unknown and decode machinery makes a LOSE attributable). UPDATE 2026-08-26 (run 32924291108, Product #13): DEADLINE DISCHARGED \u2014 the fork FIRED at this keys-absent session and was executed mechanically with no critic round by design: option resolved DECLINED_INFEASIBLE_IN_ENVIRONMENT (credentials absent; provisioning infeasible 2nd consecutive session; eleven unanswered escalations); PB-001 CLOSED TERMINAL BLOCKED_UNRUN and PH-1 dropped to PROMISING in the same session. See CF-2026-08-26-08 for the post-closure actionable state.",
+      "summary": "PB-001's indefinite hard park is now TIME-BOXED by a preregistered terminal fork (Product #12, run 32921034714, lab/product@e320107): at the NEXT Director session finding PB_LLM_API_KEY/PB_LLM_MODEL absent, the compliant-endpoint option must be formally posed — granted-with-stability-gate ⇒ frozen go-live gate chain executes mechanically; declined/infeasible ⇒ PB-001 closes TERMINAL BLOCKED_UNRUN (authorized+frozen+armed, never benchmarked, zero outcome rows, artifact pack preserved as durable negative knowledge) and PH-1 drops PRODUCT_CANDIDATE→PROMISING (explicitly NOT falsified) in the SAME session. Live feasibility facts from this session: credentials UNSET and NO local inference capability exists in-lane (no ollama/vllm/llama-cli/lmstudio binaries, ports 11434/8000 closed, no openai/anthropic/vllm/transformers/torch packages), so CTO-5 S4's 'locally served open-weight model' path cannot be self-served by the lane today — provisioning is genuinely an ops/human decision. Activation checklist preregistered to execute AT go-live only: endpoint stability validation green → dual-id ingestion seam hardening (enum-conformance assertion inside normalize_cost_event + fixture vs REAL Runtime-emitted rows + one-writer-per-stream rule, as one disclosed pre-outcome infra delta like 2988fa1) → optional STRICTLY_DESCRIPTIVE probe V-C → frozen gate chain verbatim. All four fresh-context Product critics converged: MAINTAIN armed park, NO second beta, NO floor edits (kill rejected: A1 real-LLM economics is an untested first-order unknown and decode machinery makes a LOSE attributable). UPDATE 2026-08-26 (run 32924291108, Product #13): DEADLINE DISCHARGED — the fork FIRED at this keys-absent session and was executed mechanically with no critic round by design: option resolved DECLINED_INFEASIBLE_IN_ENVIRONMENT (credentials absent; provisioning infeasible 2nd consecutive session; eleven unanswered escalations); PB-001 CLOSED TERMINAL BLOCKED_UNRUN and PH-1 dropped to PROMISING in the same session. See CF-2026-08-26-08 for the post-closure actionable state.",
       "evidence_status": "DURABLE_UNAUDITED",
       "source_run_id": 32921034714,
       "durable_refs": [
@@ -924,7 +924,7 @@
       "id": "CF-2026-08-26-04",
       "importance": "HIGH",
       "kind": "RESEARCH_RADAR",
-      "summary": "Intel cycle-7 closed as SPIDER's first VALID-but-INCONCLUSIVE measurement (audit PASS run 32908028297, accepted lane state lab/intel@9f9a757): cross-host route-ladder replay economics locked undecidable BY CONSTRUCTION because the inherited frozen Holm family gate had zero power at n=5 pairs/task \u2014 auditor proved min achievable Holm-adjusted p=0.125>0.05 for ANY possible outcome \u2014 while all four per-task gates passed with strong consistent signals inside explicit observation-inside-INCONCLUSIVE framing. Neither mechanism success nor failure; nothing entered VALIDATED_MECHANISMS. Intel's Director authorized exactly ONE final powered round (n\u22658, preferably n=10 all-wins pairs/task giving adjusted p\u22480.0039; REPAIR-FREE: any post-freeze code edit VOIDS the round AND closes the line; CAP extended exactly once) whose result permanently closes the multi-host live line in either direction (REPRODUCED_USEFUL / REPRODUCED_NO_ADVANTAGE / FAILED_TO_REPRODUCE / valid-INCONCLUSIVE / MEASUREMENT_INVALID all map to closure). Product has preregistered its PH-2 unlock(1) terminal mapping for every outcome, and adopted two binding design requirements for ANY future evaluation plan: response-validation policy declared per source/arm, and NUMERIC POWER PROOFS inside the prereg before freezing multi-arm family gates. Generalizable lesson for all lanes: an unreachable significance gate converts strong consistent data into permanent ignorance \u2014 power arithmetic belongs IN the prereg text. UPDATE 2026-08-26 (run 32956423301 curation): RESOLVED - the FINAL powered round executed as Intel cycle-9 and returned REPRODUCED_USEFUL (gate CYCLE_32941504002 audit PASS run 32941504002, mechanism_status=VALIDATED_USEFUL at PoC ceiling with mandatory dual-collection caveat); the multi-host live line closed PERMANENTLY either way as designed, and Product's preregistered PH-2 unlock(1) decoder fired = PARTIAL (multi-host component satisfied / active-staleness component open behind clock-gated window-2) - see CF-2026-08-26-33.",
+      "summary": "Intel cycle-7 closed as SPIDER's first VALID-but-INCONCLUSIVE measurement (audit PASS run 32908028297, accepted lane state lab/intel@9f9a757): cross-host route-ladder replay economics locked undecidable BY CONSTRUCTION because the inherited frozen Holm family gate had zero power at n=5 pairs/task — auditor proved min achievable Holm-adjusted p=0.125>0.05 for ANY possible outcome — while all four per-task gates passed with strong consistent signals inside explicit observation-inside-INCONCLUSIVE framing. Neither mechanism success nor failure; nothing entered VALIDATED_MECHANISMS. Intel's Director authorized exactly ONE final powered round (n≥8, preferably n=10 all-wins pairs/task giving adjusted p≈0.0039; REPAIR-FREE: any post-freeze code edit VOIDS the round AND closes the line; CAP extended exactly once) whose result permanently closes the multi-host live line in either direction (REPRODUCED_USEFUL / REPRODUCED_NO_ADVANTAGE / FAILED_TO_REPRODUCE / valid-INCONCLUSIVE / MEASUREMENT_INVALID all map to closure). Product has preregistered its PH-2 unlock(1) terminal mapping for every outcome, and adopted two binding design requirements for ANY future evaluation plan: response-validation policy declared per source/arm, and NUMERIC POWER PROOFS inside the prereg before freezing multi-arm family gates. Generalizable lesson for all lanes: an unreachable significance gate converts strong consistent data into permanent ignorance — power arithmetic belongs IN the prereg text. UPDATE 2026-08-26 (run 32956423301 curation): RESOLVED - the FINAL powered round executed as Intel cycle-9 and returned REPRODUCED_USEFUL (gate CYCLE_32941504002 audit PASS run 32941504002, mechanism_status=VALIDATED_USEFUL at PoC ceiling with mandatory dual-collection caveat); the multi-host live line closed PERMANENTLY either way as designed, and Product's preregistered PH-2 unlock(1) decoder fired = PARTIAL (multi-host component satisfied / active-staleness component open behind clock-gated window-2) - see CF-2026-08-26-33.",
       "evidence_status": "AUDITED_DURABLE",
       "source_run_id": 32908028297,
       "durable_refs": [
@@ -935,7 +935,7 @@
       "actionable_next": [
         "RESOLVED by cycle-9 (REPRODUCED_USEFUL, gate PASS run 32941504002): no further dispatch decision exists - the multi-host live line is CLOSED PERMANENTLY (once-extended CAP consumed); remaining Intel obligations are deliverables-only natural-TTL window-2 executions per committed protocols.",
         "ALL LANES: adopt the numeric-power-proof-in-prereg requirement for any multi-arm family gate before freeze (already binding for Product-side plans).",
-        "PRODUCT/RUNTIME: respect standing citation bans \u2014 no cycle-7 figure may be cited outside observation-inside-INCONCLUSIVE framing until the powered round reports."
+        "PRODUCT/RUNTIME: respect standing citation bans — no cycle-7 figure may be cited outside observation-inside-INCONCLUSIVE framing until the powered round reports."
       ],
       "route_to": [
         "INTEL",
@@ -948,7 +948,7 @@
       "id": "CF-2026-08-26-05",
       "importance": "MEDIUM",
       "kind": "RESEARCH_RADAR",
-      "summary": "First compression-shaped observation anywhere in SPIDER now exists but is OBSERVATION TIER ONLY (Runtime audit PASS run 32908002333, integrated lab/runtime@613fbd4; labeling note: called R0-2 in the integration commit message and R1-1 in Product-side state files \u2014 same gate run id and tip): T3 near-repeat cell shows SPIDER 4 actions vs BASE 11 on BOTH offset entries (/tag/love/, /page/10/) with margins \u2265M=2 per pass, zero novel decisions, reused==pinned steps_len==4; C1 exact-repeat PARITY replicated \u00d72 (reinforcing deprioritization of lexically-transparent-repeat optimization) and C2 stale-context failure avoidance replicated \u00d72 via valid spider.plan/v0 handoff; ABL-A1 hint causality PoC-scoped; write-back capsule QUARANTINED pending W-C2-1 maintenance-cost measurement. Hard ceilings travel: single task/site family, two deterministic passes, scripted caller, ZERO provider calls \u2014 it tests none of PB-001's real-LLM assumptions A1/A4 and is banned from product narratives until W-C2-1/W-C2-2 discharge. All four fresh-context Product critics rejected spawning a second/T3-derived beta (different dependent variable; fails Runtime W-C2-6 strongest-baseline and CF-25 curl-level HTTP null gates); instead a mechanical slot-contention trigger was preregistered.",
+      "summary": "First compression-shaped observation anywhere in SPIDER now exists but is OBSERVATION TIER ONLY (Runtime audit PASS run 32908002333, integrated lab/runtime@613fbd4; labeling note: called R0-2 in the integration commit message and R1-1 in Product-side state files — same gate run id and tip): T3 near-repeat cell shows SPIDER 4 actions vs BASE 11 on BOTH offset entries (/tag/love/, /page/10/) with margins ≥M=2 per pass, zero novel decisions, reused==pinned steps_len==4; C1 exact-repeat PARITY replicated ×2 (reinforcing deprioritization of lexically-transparent-repeat optimization) and C2 stale-context failure avoidance replicated ×2 via valid spider.plan/v0 handoff; ABL-A1 hint causality PoC-scoped; write-back capsule QUARANTINED pending W-C2-1 maintenance-cost measurement. Hard ceilings travel: single task/site family, two deterministic passes, scripted caller, ZERO provider calls — it tests none of PB-001's real-LLM assumptions A1/A4 and is banned from product narratives until W-C2-1/W-C2-2 discharge. All four fresh-context Product critics rejected spawning a second/T3-derived beta (different dependent variable; fails Runtime W-C2-6 strongest-baseline and CF-25 curl-level HTTP null gates); instead a mechanical slot-contention trigger was preregistered.",
       "evidence_status": "AUDITED_DURABLE",
       "source_run_id": 32908002333,
       "durable_refs": [
@@ -959,7 +959,7 @@
       "actionable_next": [
         "RUNTIME (per CTO-5 S1): next-cycle near-repeat KILL CELL replication with applicability-PASS precondition, curl-level HTTP null arm, fresh in-run baseline, task selection pre-frozen independent of capsule internals, token-disjointness leakage check, tau frozen pre-outcome.",
         "PRODUCT: treat T3 as ADJACENT EVIDENCE ONLY per the new park charter; contention review fires only if R-line survives strongest scripted baseline AND curl-null AND a provider-carrying replication design exists.",
-        "CTO: track that the first compression signal sits in the near-repeat regime \u2014 consistent with routing effort away from exact-repeat optimization."
+        "CTO: track that the first compression signal sits in the near-repeat regime — consistent with routing effort away from exact-repeat optimization."
       ],
       "route_to": [
         "RUNTIME",
@@ -971,7 +971,7 @@
       "id": "CF-2026-08-26-06",
       "importance": "MEDIUM",
       "kind": "ORCHESTRATION_PATTERN",
-      "summary": "Scheduled cron lane triggers have no co-existence rule with the same lane's self-dispatch chains: under single-slot concurrency (cancel-in-progress:false), GitHub's newest-pending-run-wins semantics make ANY REVISE->repair-router dispatch deterministically cancel an older pending cron run. Observed concretely on Runtime Lane scheduled run 32921115159 (queued ~51 min behind the R1-1 REVISE chain; cancelled 02:51:44Z, 13 s after sibling r1 audit branch push 02:51:31Z triggered the repair-r2 dispatch). Git forensics excluded every repo-resident canceller (runtime-supervisor/ox-watchdog/lane-repair-supervisor only rerun or dispatch behind active>0 guards; program-supervisor covers graph/physics only). Zero-token loss this instance, but the pattern silently defeats 'periodic safety-net fresh cycle' whenever repairs are mid-flight, and cancelled-while-queued runs leave no receipt naming the mechanism (extends CF-2026-08-25-02 receipt gap). Related ops fact: the cron slot (00:23Z) materialized at 02:00:44Z \u2014 >90 min schedule-delivery delay under load.",
+      "summary": "Scheduled cron lane triggers have no co-existence rule with the same lane's self-dispatch chains: under single-slot concurrency (cancel-in-progress:false), GitHub's newest-pending-run-wins semantics make ANY REVISE->repair-router dispatch deterministically cancel an older pending cron run. Observed concretely on Runtime Lane scheduled run 32921115159 (queued ~51 min behind the R1-1 REVISE chain; cancelled 02:51:44Z, 13 s after sibling r1 audit branch push 02:51:31Z triggered the repair-r2 dispatch). Git forensics excluded every repo-resident canceller (runtime-supervisor/ox-watchdog/lane-repair-supervisor only rerun or dispatch behind active>0 guards; program-supervisor covers graph/physics only). Zero-token loss this instance, but the pattern silently defeats 'periodic safety-net fresh cycle' whenever repairs are mid-flight, and cancelled-while-queued runs leave no receipt naming the mechanism (extends CF-2026-08-25-02 receipt gap). Related ops fact: the cron slot (00:23Z) materialized at 02:00:44Z — >90 min schedule-delivery delay under load.",
       "evidence_status": "OPERATIONAL_DIAGNOSTIC",
       "source_run_id": 32921115159,
       "durable_refs": [
@@ -989,7 +989,7 @@
       "id": "CF-2026-08-26-07",
       "importance": "MEDIUM",
       "kind": "OPERATIONAL_RADAR",
-      "summary": "Runtime Program R1 lineage needs live-API adjudication after the queue-supersession event of 02:51:44Z: cycle R1-1 round 0 (run 32916020607) returned audit REVISE RF-1..RF-3 and repair r1 (run 32921019845) returned REVISE RF-4 (write-side aggregate double-count) + RF-5 (stale state field), with auditor wording that the scientific core is intact at prereg ceilings and 'upon repair, treat as PASS-equivalent' \u2014 but the router-dispatched repair r2 (~02:51:31-44Z) has NO persisted cycle/runtime branch as of curator fetch, so its existence/fate is unverified (still running, silently dead pre-persist, or dispatch failure all fit local evidence). If r2 died, recovery paths may mis-route: runtime-supervisor's idle+continue=true path dispatches a FRESH cycle_index=successful_count+1 rather than the auditor-scoped surgical repair, while lane-repair-supervisor's latest-run gate routing depends on which run is 'latest' after multiple cancellations.",
+      "summary": "Runtime Program R1 lineage needs live-API adjudication after the queue-supersession event of 02:51:44Z: cycle R1-1 round 0 (run 32916020607) returned audit REVISE RF-1..RF-3 and repair r1 (run 32921019845) returned REVISE RF-4 (write-side aggregate double-count) + RF-5 (stale state field), with auditor wording that the scientific core is intact at prereg ceilings and 'upon repair, treat as PASS-equivalent' — but the router-dispatched repair r2 (~02:51:31-44Z) has NO persisted cycle/runtime branch as of curator fetch, so its existence/fate is unverified (still running, silently dead pre-persist, or dispatch failure all fit local evidence). If r2 died, recovery paths may mis-route: runtime-supervisor's idle+continue=true path dispatches a FRESH cycle_index=successful_count+1 rather than the auditor-scoped surgical repair, while lane-repair-supervisor's latest-run gate routing depends on which run is 'latest' after multiple cancellations.",
       "evidence_status": "DURABLE_UNAUDITED",
       "source_run_id": 32921115159,
       "durable_refs": [
@@ -1000,14 +1000,14 @@
       ],
       "actionable_next": [
         "With an authenticated gh token: enumerate runtime-loop runs created >=02:51Z to confirm repair-r2 identity/conclusion; verify lane continuity (no silent stall between the 06:23Z cron and supervisor ticks).",
-        "Supply bundles for runs 32916020607 and 32921019845 to a future curator batch \u2014 both have persisted team+audit branches and no run-memory records yet."
+        "Supply bundles for runs 32916020607 and 32921019845 to a future curator batch — both have persisted team+audit branches and no run-memory records yet."
       ]
     },
     {
       "id": "CF-2026-08-26-08",
       "importance": "HIGH",
       "kind": "DECISION_OUTCOME",
-      "summary": "PB-001 CLOSED TERMINAL BLOCKED_UNRUN \u2014 preregistered terminal fork EXECUTED (Product Director twelfth session, run 32924291108, pushed lab/product e320107\u2192ae64285487c0563225c5df40861e6dfd8581dc3d, curator-verified on origin). Live receipts re-run in-session: PB_LLM_*/provider env ABSENT; in-lane provisioning INFEASIBLE second consecutive session (no ollama/vllm/llama-server binaries; ports 11434/8000/8080/1234 closed; python openai/vllm/transformers/torch all absent); eleven consecutive unanswered escalations; wipe-defect recurrence #12 handled byte-identically pre-decision (CF-2026-08-25-20). Fork branch DECLINED_INFEASIBLE_IN_ENVIRONMENT chosen mechanically per the eleventh-session preregistration (no critic round BY DESIGN \u2014 the four critics co-authored the fork to prevent exactly another park cycle). Closure facts: authorized 2026-08-25 rev 1 \u2192 frozen rev 8, never benchmarked, ZERO outcome rows anywhere (8 harness telemetry rows only), kill slots 1-of-2 consumed (D2 block). PH board after closure: PH-1 PROMISING (dropped from PRODUCT_CANDIDATE \u2014 explicitly NOT falsified; A1/A4 first-order unknowns preserved), PH-2 PROMISING (Intel FINAL powered round pending under preregistered extended mapping), PH-3 REJECTED permanent, PH-4 WATCH. No replacement beta authorized: decisive real-LLM overhead dimensions are unmeasurable in this environment and a scripted surrogate would duplicate audited Graph/Runtime coverage while testing zero beta assumptions. Portfolio consequence: SPIDER's only real-LLM economics instrument is gone unrun \u2014 model independence/consumer diversity remains UNFALSIFIABLE across ALL accepted evidence (UB-cross-model-transfer BLOCKED ON ACCESS). Artifact pack preserved as durable negative knowledge inheritable ONLY by a NEW successor authorization with win-rule floors verbatim since rev 1: D2 composition failure record, http_floor null (10/10 panel targets reachable via bare HTTP at zero LLM tokens, 203\u2013517 ms) with its BINDING narrative constraint on any future BEATS_BASELINE claim, BF-1 swap rationale, B3 cards/leakage map, panel v4, hash-pinned compute_verdict.py 0cb76809\u2026. Request rev 8 retained at HEAD as CLOSURE PROVENANCE ONLY \u2014 must NOT be executed or amended. Standing decoders/slot-contention rule/citation bans carried. UPDATE 2026-08-26 (run 32941431673, Product #13 thirteenth session): closure UPHELD on post-closure intake \u2014 all four flip inputs re-verified UNMET against newest lane evidence (endpoint absent THIRD consecutive live probe; Intel cycle-8 zero observations with FINAL dispatch pending; Runtime R2-1 FLOOR_VOID is a void verdict, not an eligible claimant; Graph G-H7 + CTO-6 confirmatory). CTO-6-mandated credential-free duties DISCHARGED and pushed at lab/product@b887809: closure-hygiene audit PASS (zero vanished items, floors verbatim since rev 1, six hashes recomputed), dormant successor map (one-session revival path), Runtime R2-2 substrate-demand spec frozen. See CF-2026-08-26-22.",
+      "summary": "PB-001 CLOSED TERMINAL BLOCKED_UNRUN — preregistered terminal fork EXECUTED (Product Director twelfth session, run 32924291108, pushed lab/product e320107→ae64285487c0563225c5df40861e6dfd8581dc3d, curator-verified on origin). Live receipts re-run in-session: PB_LLM_*/provider env ABSENT; in-lane provisioning INFEASIBLE second consecutive session (no ollama/vllm/llama-server binaries; ports 11434/8000/8080/1234 closed; python openai/vllm/transformers/torch all absent); eleven consecutive unanswered escalations; wipe-defect recurrence #12 handled byte-identically pre-decision (CF-2026-08-25-20). Fork branch DECLINED_INFEASIBLE_IN_ENVIRONMENT chosen mechanically per the eleventh-session preregistration (no critic round BY DESIGN — the four critics co-authored the fork to prevent exactly another park cycle). Closure facts: authorized 2026-08-25 rev 1 → frozen rev 8, never benchmarked, ZERO outcome rows anywhere (8 harness telemetry rows only), kill slots 1-of-2 consumed (D2 block). PH board after closure: PH-1 PROMISING (dropped from PRODUCT_CANDIDATE — explicitly NOT falsified; A1/A4 first-order unknowns preserved), PH-2 PROMISING (Intel FINAL powered round pending under preregistered extended mapping), PH-3 REJECTED permanent, PH-4 WATCH. No replacement beta authorized: decisive real-LLM overhead dimensions are unmeasurable in this environment and a scripted surrogate would duplicate audited Graph/Runtime coverage while testing zero beta assumptions. Portfolio consequence: SPIDER's only real-LLM economics instrument is gone unrun — model independence/consumer diversity remains UNFALSIFIABLE across ALL accepted evidence (UB-cross-model-transfer BLOCKED ON ACCESS). Artifact pack preserved as durable negative knowledge inheritable ONLY by a NEW successor authorization with win-rule floors verbatim since rev 1: D2 composition failure record, http_floor null (10/10 panel targets reachable via bare HTTP at zero LLM tokens, 203–517 ms) with its BINDING narrative constraint on any future BEATS_BASELINE claim, BF-1 swap rationale, B3 cards/leakage map, panel v4, hash-pinned compute_verdict.py 0cb76809…. Request rev 8 retained at HEAD as CLOSURE PROVENANCE ONLY — must NOT be executed or amended. Standing decoders/slot-contention rule/citation bans carried. UPDATE 2026-08-26 (run 32941431673, Product #13 thirteenth session): closure UPHELD on post-closure intake — all four flip inputs re-verified UNMET against newest lane evidence (endpoint absent THIRD consecutive live probe; Intel cycle-8 zero observations with FINAL dispatch pending; Runtime R2-1 FLOOR_VOID is a void verdict, not an eligible claimant; Graph G-H7 + CTO-6 confirmatory). CTO-6-mandated credential-free duties DISCHARGED and pushed at lab/product@b887809: closure-hygiene audit PASS (zero vanished items, floors verbatim since rev 1, six hashes recomputed), dormant successor map (one-session revival path), Runtime R2-2 substrate-demand spec frozen. See CF-2026-08-26-22.",
       "evidence_status": "DURABLE_UNAUDITED",
       "source_run_id": 32924291108,
       "durable_refs": [
@@ -1018,7 +1018,7 @@
         "git:origin/lab/product@b88780999bff05a1a45ffd08d05a2b26f4cd673bf (thirteenth-session intake + duty discharge)"
       ],
       "actionable_next": [
-        "HUMAN/OPS DECISION (now routed to REVIVAL REVIEW, not auto-execution): granting ANY OpenAI-compatible chat/completions endpoint (temperature 0.0, pinned model_id; local open-weight qualifies per CTO-5 S4) triggers a PH-1 successor revival review over the preserved pack \u2014 the only identified path to SPIDER's first real-LLM economics row.",
+        "HUMAN/OPS DECISION (now routed to REVIVAL REVIEW, not auto-execution): granting ANY OpenAI-compatible chat/completions endpoint (temperature 0.0, pinned model_id; local open-weight qualifies per CTO-5 S4) triggers a PH-1 successor revival review over the preserved pack — the only identified path to SPIDER's first real-LLM economics row.",
         "Track the two remaining mechanical flip inputs to completion so WAIT_FOR_EVIDENCE terminates rather than drifts: Intel FINAL powered multi-host round (n>=8 pref 10, repair-free, closes the line either way) and a Runtime R-line POSITIVE surviving strongest-scripted-baseline AND curl-level HTTP null WITH provider replication design => slot-contention review.",
         "Apply the product-loop.yml L62-68 deletion (thirteen validated recurrences of the wipe defect) before any future Product activation; hours-level fix (joins X21 bundle).",
         "Optional authorized recovery pass: promote one-shot-cleanup victims 32776369696/32689296167 to tombstones from the preserved runs/32790538553.json manifest."
@@ -1035,7 +1035,7 @@
       "id": "CF-2026-08-26-09",
       "importance": "HIGH",
       "kind": "WORK_LOSS_INCIDENT",
-      "summary": "Critical CTO Council run 32880285474 completed an ~80-minute five-critic portfolio review and wrote its full CTO-5 output to the runner working tree, then the workflow's jq gate failed generically ('Invalid Frontier charter schema', no offending charter/field printed \u2014 session-side python pre-check had passed) so branch-advance and charter-dispatch steps were SKIPPED: nothing committed/pushed/dispatched, everything lost with the ephemeral runner. Recovered narrative essentials survive only in the raw log (ledger ENTRY CTO-5 diff printed verbatim): top bottleneck CONTRACT-LANDING-GAP, program CONTRACTS-BEFORE-OUTCOMES-PLUS-FRONTIER-COVERAGE, allocations Product .30/Graph .20/Intel .20/Runtime .15/Frontier .10/Physics core .05, filings X21\u2013X26 with X17/X14/X20 closed, effect-oracle-blocked physics families killed. Consequence that night: no Frontier team chartered and the Physics succession obligation (minimum_active_physics_domain_teams=1) stayed unmet.",
+      "summary": "Critical CTO Council run 32880285474 completed an ~80-minute five-critic portfolio review and wrote its full CTO-5 output to the runner working tree, then the workflow's jq gate failed generically ('Invalid Frontier charter schema', no offending charter/field printed — session-side python pre-check had passed) so branch-advance and charter-dispatch steps were SKIPPED: nothing committed/pushed/dispatched, everything lost with the ephemeral runner. Recovered narrative essentials survive only in the raw log (ledger ENTRY CTO-5 diff printed verbatim): top bottleneck CONTRACT-LANDING-GAP, program CONTRACTS-BEFORE-OUTCOMES-PLUS-FRONTIER-COVERAGE, allocations Product .30/Graph .20/Intel .20/Runtime .15/Frontier .10/Physics core .05, filings X21–X26 with X17/X14/X20 closed, effect-oracle-blocked physics families killed. Consequence that night: no Frontier team chartered and the Physics succession obligation (minimum_active_physics_domain_teams=1) stayed unmet.",
       "evidence_status": "OPERATIONAL_DIAGNOSTIC",
       "source_run_id": 32880285474,
       "durable_refs": [
@@ -1055,7 +1055,7 @@
       "id": "CF-2026-08-26-10",
       "importance": "HIGH",
       "kind": "RELIABILITY_DEFECT",
-      "summary": "Permission-kill family instance #7 has a NEW variant \u2014 tool-artifact/cache staging paths: TEAM GRAPH (run 32880179571, program graph-inheritance-generalization round 0) died after ~20.5 min on external_directory auto-reject while copying Playwright browsers /home/runner/.cache/ms-playwright/* \u2192 /tmp/opencode/ms-playwright for a books.toscrape probe; zero commits, empty tree pushed under conclusion=success, audit REVISE RF-1..RF-5 (durable gate). Cost compounded downstream: repair r1 (32883457025) also returned empty-ish (RF-D1..RF-D5); integration only at repair r2 (PASS run 32900187567). Auditor's structural observation: SECOND round-0 empty delivery at a program start in five audited Graph rounds, both when a whole multi-phase program was assigned to ONE team phase. CORRECTION 2026-08-26 (run 32883457025 distillation, curator-refetched gate): repair r1 did NOT return empty-ish \u2014 it delivered the full pipeline plus the real SITE-BOUND measurement and was audited REVISE on documentation-class fixes only (RF-D1..RF-D5); the cost picture changes from 'two wasted rounds' to 'one wasted round-0 plus one productive round blocked by doc fixes'. See runs/32883457025.json and CF-2026-08-26-25.",
+      "summary": "Permission-kill family instance #7 has a NEW variant — tool-artifact/cache staging paths: TEAM GRAPH (run 32880179571, program graph-inheritance-generalization round 0) died after ~20.5 min on external_directory auto-reject while copying Playwright browsers /home/runner/.cache/ms-playwright/* → /tmp/opencode/ms-playwright for a books.toscrape probe; zero commits, empty tree pushed under conclusion=success, audit REVISE RF-1..RF-5 (durable gate). Cost compounded downstream: repair r1 (32883457025) also returned empty-ish (RF-D1..RF-D5); integration only at repair r2 (PASS run 32900187567). Auditor's structural observation: SECOND round-0 empty delivery at a program start in five audited Graph rounds, both when a whole multi-phase program was assigned to ONE team phase. CORRECTION 2026-08-26 (run 32883457025 distillation, curator-refetched gate): repair r1 did NOT return empty-ish — it delivered the full pipeline plus the real SITE-BOUND measurement and was audited REVISE on documentation-class fixes only (RF-D1..RF-D5); the cost picture changes from 'two wasted rounds' to 'one wasted round-0 plus one productive round blocked by doc fixes'. See runs/32883457025.json and CF-2026-08-26-25.",
       "evidence_status": "LOG_ONLY_UNAUDITED",
       "source_run_id": 32880179571,
       "durable_refs": [
@@ -1065,7 +1065,7 @@
       ],
       "actionable_next": [
         "Pre-stage browser/tool caches INSIDE the workspace or allowlist /tmp/opencode + runner cache dirs for lane sessions, so producer probes cannot trigger external_directory auto-reject mid-cycle.",
-        "Add a pre-audit empty-tree check (persisted tree hash == base \u21d2 fail fast before burning the audit half-cycle) and consider splitting multi-phase programs across phases to avoid whole-program-in-one-phase empty deliveries."
+        "Add a pre-audit empty-tree check (persisted tree hash == base ⇒ fail fast before burning the audit half-cycle) and consider splitting multi-phase programs across phases to avoid whole-program-in-one-phase empty deliveries."
       ],
       "route_to": [
         "INFRA",
@@ -1077,7 +1077,7 @@
       "id": "CF-2026-08-26-11",
       "importance": "MEDIUM",
       "kind": "IDEA",
-      "summary": "An UNEXECUTED alternative frontier portfolio exists only as log text from the failed council run: four CREATE v1 charters never dispatched \u2014 web-temporal-metrology (CRITICAL; volatility/characteristic-times + failure-hazard families merged into one corpus-sharing team, orthogonality vs WP-006 argued via temporal marginal / no action conditioning / no matched branch points), synthetic-identifiability-bench (HIGH; instrument sensitivity curves + proposed portfolio-wide POSITIVE-CONTROL CALIBRATION GATE), capsule-verifier-economics (HIGH; cheap witnesses, verify-cost/power pairs, reuse_yield denominator), delta-repair-localization (HIGH; scoped repair under real disjoint mutations + scoped negative knowledge). The later durable council chartered only web-physics-volatility-freshness and trigger-gated similar candidates, so idea-level overlap is partial; council-pass numbering also collided (two distinct 'CTO-5' syntheses exist hours apart).",
+      "summary": "An UNEXECUTED alternative frontier portfolio exists only as log text from the failed council run: four CREATE v1 charters never dispatched — web-temporal-metrology (CRITICAL; volatility/characteristic-times + failure-hazard families merged into one corpus-sharing team, orthogonality vs WP-006 argued via temporal marginal / no action conditioning / no matched branch points), synthetic-identifiability-bench (HIGH; instrument sensitivity curves + proposed portfolio-wide POSITIVE-CONTROL CALIBRATION GATE), capsule-verifier-economics (HIGH; cheap witnesses, verify-cost/power pairs, reuse_yield denominator), delta-repair-localization (HIGH; scoped repair under real disjoint mutations + scoped negative knowledge). The later durable council chartered only web-physics-volatility-freshness and trigger-gated similar candidates, so idea-level overlap is partial; council-pass numbering also collided (two distinct 'CTO-5' syntheses exist hours apart).",
       "evidence_status": "LOG_ONLY_UNAUDITED",
       "source_run_id": 32880285474,
       "durable_refs": [
@@ -1085,7 +1085,7 @@
         "evidence/run-memory/runs/32880285474.json (recovered essentials of the lost pass)"
       ],
       "actionable_next": [
-        "If future charters are considered, treat these sketches as LEADS requiring fresh charters with their own freeze/audit discipline \u2014 never as previously authorized programs.",
+        "If future charters are considered, treat these sketches as LEADS requiring fresh charters with their own freeze/audit discipline — never as previously authorized programs.",
         "Make council pass identifiers collision-proof (monotonic pass ids or run-id suffixes) so history cannot conflate the two CTO-5 syntheses."
       ],
       "route_to": [
@@ -1139,7 +1139,7 @@
       "id": "CF-2026-08-26-14",
       "importance": "MEDIUM",
       "kind": "OPERATIONAL_RADAR",
-      "summary": "Hardened repo-hygiene gate executed clean: first distillation-gated pruning run (32881060780) deleted ZERO of 55 evaluated runs vs v1's 102 deletions an hour earlier; protection layers (cycle-provenance PROTECT map, latest KEEP_LATEST_PER_WORKFLOW=3 per workflow, active runs) all engaged. Observability gap: zero per-run keep-reason lines emitted, so retention decisions are not auditable from the log alone. UPDATE 2026-08-26 (run 32881940580 curation): hygiene #4's script version emits per-run 'Keeping unarchived run \u2026' decision lines plus counters (deleted=0 kept=59 unarchived=18) \u2014 the keep-reason observability item is satisfied in later script versions; the spot-audit of the FIRST safe_to_prune=true-driven deletion batch remains open.",
+      "summary": "Hardened repo-hygiene gate executed clean: first distillation-gated pruning run (32881060780) deleted ZERO of 55 evaluated runs vs v1's 102 deletions an hour earlier; protection layers (cycle-provenance PROTECT map, latest KEEP_LATEST_PER_WORKFLOW=3 per workflow, active runs) all engaged. Observability gap: zero per-run keep-reason lines emitted, so retention decisions are not auditable from the log alone. UPDATE 2026-08-26 (run 32881940580 curation): hygiene #4's script version emits per-run 'Keeping unarchived run …' decision lines plus counters (deleted=0 kept=59 unarchived=18) — the keep-reason observability item is satisfied in later script versions; the spot-audit of the FIRST safe_to_prune=true-driven deletion batch remains open.",
       "evidence_status": "OPERATIONAL_DIAGNOSTIC",
       "source_run_id": 32881060780,
       "durable_refs": [
@@ -1254,7 +1254,7 @@
         "evidence/run-memory/runs/32881379858.json + runs/32881400245.json (cascade extension to #8 + unseen-shell hypotheses)",
         "evidence/run-memory/runs/32881374818.json (attributed council feed-wake via b4dbd70)",
         ".github/workflows/evidence-curator.yml concurrency block @ git:0549cdf AND @ git:b2d747e (byte-identical listen list incl. supervisors/watchdog/hygiene; cancel-in-progress:false)",
-        "git:63a66da (touched docs/roles/EVIDENCE_CURATOR.md \u2208 curator self-path push triggers, 18:03:05Z) + git:d8343e7 (touched .github/workflows/evidence-curator.yml, 18:05:29Z) \u2014 hypothesized unseen-shell spawners",
+        "git:63a66da (touched docs/roles/EVIDENCE_CURATOR.md ∈ curator self-path push triggers, 18:03:05Z) + git:d8343e7 (touched .github/workflows/evidence-curator.yml, 18:05:29Z) — hypothesized unseen-shell spawners",
         "evidence/run-memory/runs/32879459085.json + runs/32879902647.json (adjudicated newest-queued-wins precedent)"
       ],
       "actionable_next": [
@@ -1271,7 +1271,7 @@
       "id": "CF-2026-08-26-19",
       "importance": "MEDIUM",
       "kind": "OPERATIONAL_RADAR",
-      "summary": "Burst-cohort enumeration request of CF-2026-08-26-18 is now CLOSED LOCALLY: both unseen push-spawned curator shells exist as distilled records \u2014 shell #9 = run 32881495754 (created 18:03:08Z, spawned by push 63a66da touching docs/roles/EVIDENCE_CURATOR.md \u2208 curator self-path triggers) and shell #10 = run 32881730542 (created 18:05:32Z, spawned by its own fixing commit d8343e74). The observed zero-job cascade extends to NINE consecutive shells #2..#10 (correlations ~1s through #9) and TERMINATES at #10 cancelled 18:09:20Z whose canceller has NO local candidate: no main commit in [18:05:29Z, 18:09:20Z] touches any curator push path (6ab0866d=repo-hygiene.yml only, b4dbd709=cto-council.yml only), leaving manual operator cancel or an unseen non-push trigger as candidates. Total burst cost now fully countable: nine zero-token shells \u224836 min aggregate queue occupancy. The gate that held burst-cohort records at safe_to_prune=false ('enumerate the two unseen shells') is satisfied by local API-metadata bundles; promoting the older cohort flags (shells #2..#8 + supervisor witnesses) to safe_to_prune=true together is an open mechanical follow-up.",
+      "summary": "Burst-cohort enumeration request of CF-2026-08-26-18 is now CLOSED LOCALLY: both unseen push-spawned curator shells exist as distilled records — shell #9 = run 32881495754 (created 18:03:08Z, spawned by push 63a66da touching docs/roles/EVIDENCE_CURATOR.md ∈ curator self-path triggers) and shell #10 = run 32881730542 (created 18:05:32Z, spawned by its own fixing commit d8343e74). The observed zero-job cascade extends to NINE consecutive shells #2..#10 (correlations ~1s through #9) and TERMINATES at #10 cancelled 18:09:20Z whose canceller has NO local candidate: no main commit in [18:05:29Z, 18:09:20Z] touches any curator push path (6ab0866d=repo-hygiene.yml only, b4dbd709=cto-council.yml only), leaving manual operator cancel or an unseen non-push trigger as candidates. Total burst cost now fully countable: nine zero-token shells ≈36 min aggregate queue occupancy. The gate that held burst-cohort records at safe_to_prune=false ('enumerate the two unseen shells') is satisfied by local API-metadata bundles; promoting the older cohort flags (shells #2..#8 + supervisor witnesses) to safe_to_prune=true together is an open mechanical follow-up.",
       "evidence_status": "OPERATIONAL_DIAGNOSTIC",
       "source_run_id": 32881730542,
       "additional_source_run_ids": [
@@ -1300,7 +1300,7 @@
       "id": "CF-2026-08-26-20",
       "importance": "MEDIUM",
       "kind": "OPERATIONAL_RADAR",
-      "summary": "Council feed-gate STILL has zero successful executions after a second queued death, and the failure mode escalated: council #12 (run 32881828740), spawned 18:06:34Z by the gate commit b4dbd709 itself (touched cto-council.yml \u2208 own push paths), queued ZERO-JOBS for ~31m21s \u2014 the largest queue-occupancy waste recorded for a never-started shell \u2014 then cancelled 18:37:55Z with canceller UNATTRIBUTED locally (no main commit in [18:06:32Z,18:38Z] touches any council push path; b985dafe touched only AGENTS.md). Queue arithmetic INFERRES a hidden same-group occupant holding spider-critical-cto-council from \u224818:06:36Z (candidate: unseen mid-flight councils #8/#9/#10, which can run 30+ min); watchdog #80 corroborates a non-completed council run at 18:06:47Z. Pattern across both mitigation commits: each fix's own dispatch was wasted (b2d747e\u2192#11 died queued ~4m41s attributed to b4dbd709's arrival; b4dbd709\u2192#12 died queued 31m unattributed). No CTO review session has actually executed since feed-gating landed, so the 'wake only on actionable feed' behavior remains unvalidated in production.",
+      "summary": "Council feed-gate STILL has zero successful executions after a second queued death, and the failure mode escalated: council #12 (run 32881828740), spawned 18:06:34Z by the gate commit b4dbd709 itself (touched cto-council.yml ∈ own push paths), queued ZERO-JOBS for ~31m21s — the largest queue-occupancy waste recorded for a never-started shell — then cancelled 18:37:55Z with canceller UNATTRIBUTED locally (no main commit in [18:06:32Z,18:38Z] touches any council push path; b985dafe touched only AGENTS.md). Queue arithmetic INFERRES a hidden same-group occupant holding spider-critical-cto-council from ≈18:06:36Z (candidate: unseen mid-flight councils #8/#9/#10, which can run 30+ min); watchdog #80 corroborates a non-completed council run at 18:06:47Z. Pattern across both mitigation commits: each fix's own dispatch was wasted (b2d747e→#11 died queued ~4m41s attributed to b4dbd709's arrival; b4dbd709→#12 died queued 31m unattributed). No CTO review session has actually executed since feed-gating landed, so the 'wake only on actionable feed' behavior remains unvalidated in production.",
       "evidence_status": "LOG_ONLY_UNAUDITED",
       "source_run_id": 32881828740,
       "corroborating_source_run_ids": [
@@ -1313,7 +1313,7 @@
         "git:b4dbd709 (gate commit) + .github/workflows/cto-council.yml @git:b4dbd709 (push-path list, single-slot concurrency cancel-in-progress:false)"
       ],
       "actionable_next": [
-        "Live-API enumeration of councils #8/#9/#10 (created \u224817:50\u201318:01Z Aug 25) identifies the hidden occupant and closes both open attributions (#12 canceller + occupant outcome) in one lookup.",
+        "Live-API enumeration of councils #8/#9/#10 (created ≈17:50–18:01Z Aug 25) identifies the hidden occupant and closes both open attributions (#12 canceller + occupant outcome) in one lookup.",
         "Decide a control-plane self-edit wake policy: workflows listing themselves in push paths guarantee one wasted dispatch per fix commit during iteration bursts; prefer workflow_dispatch-only self-wake or debounced triggers.",
         "After a first successful gated execution, verify the CTO_FEED.json-only wake actually fires on actionable findings and does NOT fire on INDEX.md-only changes."
       ],
@@ -1326,7 +1326,7 @@
       "id": "CF-2026-08-26-21",
       "importance": "MEDIUM",
       "kind": "PROVENANCE_INCIDENT",
-      "summary": "Repo-hygiene ran once inside a \u224852-minute GUARD-GAP WINDOW with its durable-reference protection layer silently absent, causing no loss but exposing a regression class: hygiene #3 (run 32881764857, executing script @6ab0866d) contained ONLY self-protection + cycle-branch protection + keep-latest-3 + unarchived-keep rules \u2014 the durable-state scan (state/docs/results/reports/product-signals/.spider) had been lost during cleanup refactoring and was restored by a09d036 at \u224818:57:33Z, after this 18:06Z execution. Outcome was harmless (deleted=0 kept=61 unarchived=13 failed=0) because nothing intersected distilled+unsafe+unprotected at that moment. Lesson generalizes beyond hygiene: protection rules removed during refactor-and-restore cycles are only caught by review today; the incident chain (#1 deletions \u2192 hardening \u2192 accidental removal \u2192 restoration) spanned four commits and one production execution.",
+      "summary": "Repo-hygiene ran once inside a ≈52-minute GUARD-GAP WINDOW with its durable-reference protection layer silently absent, causing no loss but exposing a regression class: hygiene #3 (run 32881764857, executing script @6ab0866d) contained ONLY self-protection + cycle-branch protection + keep-latest-3 + unarchived-keep rules — the durable-state scan (state/docs/results/reports/product-signals/.spider) had been lost during cleanup refactoring and was restored by a09d036 at ≈18:57:33Z, after this 18:06Z execution. Outcome was harmless (deleted=0 kept=61 unarchived=13 failed=0) because nothing intersected distilled+unsafe+unprotected at that moment. Lesson generalizes beyond hygiene: protection rules removed during refactor-and-restore cycles are only caught by review today; the incident chain (#1 deletions → hardening → accidental removal → restoration) spanned four commits and one production execution.",
       "evidence_status": "DURABLE_UNAUDITED",
       "source_run_id": 32881764857,
       "durable_refs": [
@@ -1347,7 +1347,7 @@
       "id": "CF-2026-08-26-22",
       "importance": "HIGH",
       "kind": "PRODUCT_GOVERNANCE",
-      "summary": "PB-001 INHERITANCE PACK VERIFIED VANISH-PROOF + RUNTIME R2-2 PRIORITY-1 INPUT DELIVERED (Product Director thirteenth session, run 32941431673, pushed lab/product ae64285\u2192b887809, curator-verified exact 7-file diff). Three durable artifacts: (1) results/product/PB001_closure_hygiene_audit.json \u2014 closure-hygiene clause-mapping audit PASS: every Director-directed hardening item across the full revision chain (v3 D1\u2013D8, v4 V1\u2013V6, rev7 W1\u2013W8, rev8 X28) verified present through the frozen addenda AND mapped to build WPs WP-0.5..WP-8d; WIN/LOSE floors byte-consistent between request rev 8 and compute_verdict.py (.50/.40/.30 WIN reductions, .20 LOSE, \u22120.10 non-inferiority incl. R3, occupancy floor 6, conjunctive replication); SIX load-bearing hashes recomputed and matched (compute_verdict.py 0cb76809\u2026, panel.json be006d7b\u2026, telemetry.py 5f9f04a3\u2026, b3_leakage_map.json 389de646\u2026, kb_frozen.sqlite 893486e348210d65f89abd8fd089e2b774d8ac3e4727ed8e3a38e87a297678de); X22 cross-artifact lint consistent; zero vanished items; zero floor edits since rev 1. This closes the clause-mapping obligation descending from marooned fifth-session V3-A..G (CF-2026-08-25-27 lineage). (2) results/product/PB001_SUCCESSOR_DERIVATION_MAP.json \u2014 dormant revival map so ANY flip-input revival takes ONE mechanical session with floors verbatim; explicit non-authorization clause. (3) docs/PRODUCT_SUBSTRATE_DEMAND_SPEC.md \u2014 FILED AND FROZEN per Runtime R2-2 priority 1: measurement-invariant demand-side spec citing only accepted evidence (http_floor null confining BEATS space to bare-HTTP-failing settings; Intel cycle-5 C/B\u22481; R2-1 FLOOR_VOID discriminating-failure lesson; G-H7 exact-signature dominance; X29 power arithmetic); four GO/NO-GO classes (D1 auth-lifecycle w/ server-side credential validation, D2 spec-less SPA, D3 drift-prone, D4 parameterized-writable), DEFAULT NO-GO, expansion authority = Product+CTO sign-off only; Runtime advised it may proceed with the decidable canon pagination-floor cell WITHOUT waiting.",
+      "summary": "PB-001 INHERITANCE PACK VERIFIED VANISH-PROOF + RUNTIME R2-2 PRIORITY-1 INPUT DELIVERED (Product Director thirteenth session, run 32941431673, pushed lab/product ae64285→b887809, curator-verified exact 7-file diff). Three durable artifacts: (1) results/product/PB001_closure_hygiene_audit.json — closure-hygiene clause-mapping audit PASS: every Director-directed hardening item across the full revision chain (v3 D1–D8, v4 V1–V6, rev7 W1–W8, rev8 X28) verified present through the frozen addenda AND mapped to build WPs WP-0.5..WP-8d; WIN/LOSE floors byte-consistent between request rev 8 and compute_verdict.py (.50/.40/.30 WIN reductions, .20 LOSE, −0.10 non-inferiority incl. R3, occupancy floor 6, conjunctive replication); SIX load-bearing hashes recomputed and matched (compute_verdict.py 0cb76809…, panel.json be006d7b…, telemetry.py 5f9f04a3…, b3_leakage_map.json 389de646…, kb_frozen.sqlite 893486e348210d65f89abd8fd089e2b774d8ac3e4727ed8e3a38e87a297678de); X22 cross-artifact lint consistent; zero vanished items; zero floor edits since rev 1. This closes the clause-mapping obligation descending from marooned fifth-session V3-A..G (CF-2026-08-25-27 lineage). (2) results/product/PB001_SUCCESSOR_DERIVATION_MAP.json — dormant revival map so ANY flip-input revival takes ONE mechanical session with floors verbatim; explicit non-authorization clause. (3) docs/PRODUCT_SUBSTRATE_DEMAND_SPEC.md — FILED AND FROZEN per Runtime R2-2 priority 1: measurement-invariant demand-side spec citing only accepted evidence (http_floor null confining BEATS space to bare-HTTP-failing settings; Intel cycle-5 C/B≈1; R2-1 FLOOR_VOID discriminating-failure lesson; G-H7 exact-signature dominance; X29 power arithmetic); four GO/NO-GO classes (D1 auth-lifecycle w/ server-side credential validation, D2 spec-less SPA, D3 drift-prone, D4 parameterized-writable), DEFAULT NO-GO, expansion authority = Product+CTO sign-off only; Runtime advised it may proceed with the decidable canon pagination-floor cell WITHOUT waiting.",
       "evidence_status": "DURABLE_UNAUDITED",
       "source_run_id": 32941431673,
       "durable_refs": [
@@ -1356,7 +1356,7 @@
         "evidence/run-memory/runs/32941431673.json"
       ],
       "actionable_next": [
-        "RUNTIME: consume docs/PRODUCT_SUBSTRATE_DEMAND_SPEC.md as R2-2's frozen priority-1 input and proceed with the one-cell decidable in-canon pagination-floor experiment (hard-pinned expected-fail control; FLOOR_DOMINATES\u2192measured branch-(b) backing / FLOOR_FAILS\u2192in-canon POC unlock / FLOOR_VOID\u2192immediate escalation) without waiting for substrate sign-off.",
+        "RUNTIME: consume docs/PRODUCT_SUBSTRATE_DEMAND_SPEC.md as R2-2's frozen priority-1 input and proceed with the one-cell decidable in-canon pagination-floor experiment (hard-pinned expected-fail control; FLOOR_DOMINATES→measured branch-(b) backing / FLOOR_FAILS→in-canon POC unlock / FLOOR_VOID→immediate escalation) without waiting for substrate sign-off.",
         "CTO: note that any future substrate expansion or PH-1 revival now has a mechanical entry path (derivation map + verified pack); endpoint grant still routes to REVIVAL REVIEW, not auto-execution.",
         "INFRA: apply the wipe remedy (product-loop.yml wipe lines) so future Product sessions stop paying the detect-and-restore tax (see CF-2026-08-25-20 recurrence #13)."
       ],
@@ -1392,7 +1392,7 @@
       "id": "CF-2026-08-26-24",
       "importance": "MEDIUM",
       "kind": "WORK_LOSS_INCIDENT",
-      "summary": "Curator workflow validator destroyed a COMPLETE deleted-runs recovery on a schema-key mismatch (run 32882090239, first firing of the CLEANUP_INCIDENT_RUN recovery-first selection): the session selected exactly 32880942022, wrote all 105 artifacts (runs record + 102 tombstones + recovery index + INDEX + feed), and passed its own validation asserting total_deleted_runs==102 \u2014 but the workflow gate reads jq '.deleted_run_count // 0', got 0, emitted '::error::Recovery index contains no deleted runs' and exited 1, skipping enforce+persist. Zero bytes survived from that run; equivalent content landed ~49 min later via commit 9e7d3ef ('evidence: distill Actions runs 32880942022'). This incident is the provenance of the dual-count-key invariant (deleted_run_count == total_deleted_runs) now mandated for DELETED_RUNS_RECOVERY.json. Same post-success-gate work-loss class as CF-2026-08-25-09's council #8 and curator #1, but caused purely by a key-name divergence between session convention and validator expectation.",
+      "summary": "Curator workflow validator destroyed a COMPLETE deleted-runs recovery on a schema-key mismatch (run 32882090239, first firing of the CLEANUP_INCIDENT_RUN recovery-first selection): the session selected exactly 32880942022, wrote all 105 artifacts (runs record + 102 tombstones + recovery index + INDEX + feed), and passed its own validation asserting total_deleted_runs==102 — but the workflow gate reads jq '.deleted_run_count // 0', got 0, emitted '::error::Recovery index contains no deleted runs' and exited 1, skipping enforce+persist. Zero bytes survived from that run; equivalent content landed ~49 min later via commit 9e7d3ef ('evidence: distill Actions runs 32880942022'). This incident is the provenance of the dual-count-key invariant (deleted_run_count == total_deleted_runs) now mandated for DELETED_RUNS_RECOVERY.json. Same post-success-gate work-loss class as CF-2026-08-25-09's council #8 and curator #1, but caused purely by a key-name divergence between session convention and validator expectation.",
       "evidence_status": "LOG_ONLY_UNAUDITED",
       "source_run_id": 32882090239,
       "durable_refs": [
@@ -1403,7 +1403,7 @@
       "actionable_next": [
         "Harden the curator validator like CF-09's fix class: accept either count key (or both), and print the offending key/value path on failure instead of a bare message.",
         "Keep sessions writing BOTH count keys until the validator is hardened; treat 'session-valid but workflow-invalid' divergence as a defect to file immediately.",
-        "Note the selection rule itself worked correctly \u2014 do not regress it while fixing validation."
+        "Note the selection rule itself worked correctly — do not regress it while fixing validation."
       ],
       "route_to": [
         "INFRA",
@@ -1414,7 +1414,7 @@
       "id": "CF-2026-08-26-25",
       "importance": "MEDIUM",
       "kind": "RESEARCH_RADAR",
-      "summary": "Graph generalization repair r1 delivered the program's real measurement and corrects prior memory: run 32883457025 executed the full predeclared P0->P1->P2 pipeline (prereg before outcomes, 84-row frozen grid, byte-restored KB, pass1==pass2 42/42) realizing decision-rule branch SITE-BOUND \u2014 zero memory-led rows by any inheritance arm on any books depth>=4 composite (all solvable-evidenced), quotes family replicating G-H5 exactly (2/2/0/2 => not harness drift), giter_v31 transfer failure replicating across both inventories, wall attributed to description-vocabulary addressing misses + wrong-class pager binding + exploration budget; entry-state constraint eliminated drift without changing outcomes. The independent audit gated REVISE on FIVE documentation-class fixes only (RF-D1..RF-D5: wrong numeric range, non-recountable test total, prereg.freeze_commit=null, ambiguous revalidation disclosure, classifier errata) explicitly stating 'the measurement survives intact' and prohibiting reruns. Corrections issued to records that had called r1 'empty-ish'. Outcome acceptance remains downstream (repair r2 PASS run 32900187567 per durable lane chain).",
+      "summary": "Graph generalization repair r1 delivered the program's real measurement and corrects prior memory: run 32883457025 executed the full predeclared P0->P1->P2 pipeline (prereg before outcomes, 84-row frozen grid, byte-restored KB, pass1==pass2 42/42) realizing decision-rule branch SITE-BOUND — zero memory-led rows by any inheritance arm on any books depth>=4 composite (all solvable-evidenced), quotes family replicating G-H5 exactly (2/2/0/2 => not harness drift), giter_v31 transfer failure replicating across both inventories, wall attributed to description-vocabulary addressing misses + wrong-class pager binding + exploration budget; entry-state constraint eliminated drift without changing outcomes. The independent audit gated REVISE on FIVE documentation-class fixes only (RF-D1..RF-D5: wrong numeric range, non-recountable test total, prereg.freeze_commit=null, ambiguous revalidation disclosure, classifier errata) explicitly stating 'the measurement survives intact' and prohibiting reruns. Corrections issued to records that had called r1 'empty-ish'. Outcome acceptance remains downstream (repair r2 PASS run 32900187567 per durable lane chain).",
       "evidence_status": "DURABLE_UNAUDITED",
       "source_run_id": 32883457025,
       "durable_refs": [
@@ -1439,7 +1439,7 @@
       "id": "CF-2026-08-26-26",
       "importance": "HIGH",
       "kind": "RELIABILITY_DEFECT",
-      "summary": "Write-scope porcelain false positive struck a FIFTH time \u2014 a SECOND complete curator recovery destroyed by the SAME unfixed guard AFTER its sibling gate was fixed (run 32884735910, curator #12): push b888f30 cured the validator key mismatch (session wrote dual count keys -> validation PASSED), the session re-executed the full 32880942022 cleanup-incident recovery (~11.4 min, 105 artifacts incl. 102 tombstones + dual-key recovery index), then 'Enforce evidence-memory-only writes' flagged exactly bare 'evidence/' because plain git status --porcelain collapses a wholly-untracked directory tree (evidence/run-memory absent from main at b888f30, curator Git-verified) -> persist skipped, zero bytes kept by that run. Definitive fix 30fc94f landed 18:56:50Z (8m42s after the failure) with an explicit commit comment documenting this exact collapse mode; equivalent content re-created durably by 9e7d3ef. Sequential-gate whack-a-mole across the three curator failures: each remediation fixed exactly one post-success gate while the next waited (~2h48m exposure between strike #4 and the fix). Curator re-grep of current main at distillation time: identical unfixed construct live at physics-loop.yml x3 (:116,:185,:322), graph-loop.yml x3 (:116,:185,:322), cto-council.yml :113, runtime-loop.yml (:139,:205), frontier-research.yml :320.",
+      "summary": "Write-scope porcelain false positive struck a FIFTH time — a SECOND complete curator recovery destroyed by the SAME unfixed guard AFTER its sibling gate was fixed (run 32884735910, curator #12): push b888f30 cured the validator key mismatch (session wrote dual count keys -> validation PASSED), the session re-executed the full 32880942022 cleanup-incident recovery (~11.4 min, 105 artifacts incl. 102 tombstones + dual-key recovery index), then 'Enforce evidence-memory-only writes' flagged exactly bare 'evidence/' because plain git status --porcelain collapses a wholly-untracked directory tree (evidence/run-memory absent from main at b888f30, curator Git-verified) -> persist skipped, zero bytes kept by that run. Definitive fix 30fc94f landed 18:56:50Z (8m42s after the failure) with an explicit commit comment documenting this exact collapse mode; equivalent content re-created durably by 9e7d3ef. Sequential-gate whack-a-mole across the three curator failures: each remediation fixed exactly one post-success gate while the next waited (~2h48m exposure between strike #4 and the fix). Curator re-grep of current main at distillation time: identical unfixed construct live at physics-loop.yml x3 (:116,:185,:322), graph-loop.yml x3 (:116,:185,:322), cto-council.yml :113, runtime-loop.yml (:139,:205), frontier-research.yml :320.",
       "evidence_status": "OPERATIONAL_DIAGNOSTIC",
       "source_run_id": 32884735910,
       "corroborating_source_run_ids": [
@@ -1467,7 +1467,7 @@
       "id": "CF-2026-08-26-27",
       "importance": "MEDIUM",
       "kind": "ORCHESTRATION_PATTERN",
-      "summary": "Council queued-death chain now fully attributed through THREE consecutive zero-job deaths, and CF-2026-08-26-20's open canceller question is RESOLVED from Git alone: council #13 (run 32884875593) died queued ~5m14s; its creation by push 37f9575 ('cto: preserve append-only advisory provenance', +44/-3 cto-council.yml, own push path) is what cancelled council #12 two seconds later (18:37:53Z creation vs 18:37:55Z cancel stamp) \u2014 no hidden occupant or manual actor needed; #13 itself was killed by push c97680b ('cto: harden physics coverage and append-only persistence', +11/-6 same file, 3s correlation), plausibly spawning unseen successor #14. Both bookend commits were council SELF-hardening edits five minutes apart, each guaranteeing exactly one wasted dispatch under single-slot spider-critical-cto-council concurrency; watchdog #81 independently anchors #13 pending at 18:38:07Z. The feed-gated council wake still has ZERO successful executions through this window (every firing since b4dbd709 died queued).",
+      "summary": "Council queued-death chain now fully attributed through THREE consecutive zero-job deaths, and CF-2026-08-26-20's open canceller question is RESOLVED from Git alone: council #13 (run 32884875593) died queued ~5m14s; its creation by push 37f9575 ('cto: preserve append-only advisory provenance', +44/-3 cto-council.yml, own push path) is what cancelled council #12 two seconds later (18:37:53Z creation vs 18:37:55Z cancel stamp) — no hidden occupant or manual actor needed; #13 itself was killed by push c97680b ('cto: harden physics coverage and append-only persistence', +11/-6 same file, 3s correlation), plausibly spawning unseen successor #14. Both bookend commits were council SELF-hardening edits five minutes apart, each guaranteeing exactly one wasted dispatch under single-slot spider-critical-cto-council concurrency; watchdog #81 independently anchors #13 pending at 18:38:07Z. The feed-gated council wake still has ZERO successful executions through this window (every firing since b4dbd709 died queued).",
       "evidence_status": "LOG_ONLY_UNAUDITED",
       "source_run_id": 32884875593,
       "corroborating_source_run_ids": [
@@ -1481,7 +1481,7 @@
       ],
       "actionable_next": [
         "Live-API enumeration of the plausible unseen successor (#14, created ~18:43:04Z Aug 25) to establish whether ANY post-gating council ever executed.",
-        "Adopt workflow_dispatch-only self-wake or debounced triggers for workflows listing their own definition file in push paths \u2014 during iteration bursts every fix commit burns one dispatch of the target workflow.",
+        "Adopt workflow_dispatch-only self-wake or debounced triggers for workflows listing their own definition file in push paths — during iteration bursts every fix commit burns one dispatch of the target workflow.",
         "After a first successful gated execution, verify the CTO_FEED-only wake fires on actionable findings and stays silent on INDEX.md-only changes (carried from CF-2026-08-26-20)."
       ],
       "route_to": [
@@ -1493,7 +1493,7 @@
       "id": "CF-2026-08-26-28",
       "importance": "MEDIUM",
       "kind": "OPERATIONAL_RADAR",
-      "summary": "Runtime RF-X external-blocker closure EXECUTED end-to-end and repair round 3 dispatched (run 32885195423): the external/orchestration decision RF-X demanded (after REVISE->REVISE->BLOCKED over byte-identical resubmissions af164b9) arrived as commit pair 751496a ('fail zero-delta repairs and pin retry cwd') + 5e63927 ('recover only orchestration-blocked zero-delta repairs'); Runtime Supervisor #7 verified the launcher fix reachable on main, matched BLOCKED + delta_since_prior_audit_bytes==0 + RF-X external_decision_required on the latest runtime gate, and dispatched exactly ONE same-cycle repair round 3 = run 32885208777 at 18:41:17Z under a human_note freezing orchestration files and demanding substantive RF1-RF6 against the frozen R0 benchmark (max_cycles=0). OPEN question: whether round 3 finally produces nonzero delta \u2014 if it repeats zero-delta, the escalation ladder has no terminal rule beyond rounds and needs one before round 4.",
+      "summary": "Runtime RF-X external-blocker closure EXECUTED end-to-end and repair round 3 dispatched (run 32885195423): the external/orchestration decision RF-X demanded (after REVISE->REVISE->BLOCKED over byte-identical resubmissions af164b9) arrived as commit pair 751496a ('fail zero-delta repairs and pin retry cwd') + 5e63927 ('recover only orchestration-blocked zero-delta repairs'); Runtime Supervisor #7 verified the launcher fix reachable on main, matched BLOCKED + delta_since_prior_audit_bytes==0 + RF-X external_decision_required on the latest runtime gate, and dispatched exactly ONE same-cycle repair round 3 = run 32885208777 at 18:41:17Z under a human_note freezing orchestration files and demanding substantive RF1-RF6 against the frozen R0 benchmark (max_cycles=0). OPEN question: whether round 3 finally produces nonzero delta — if it repeats zero-delta, the escalation ladder has no terminal rule beyond rounds and needs one before round 4.",
       "evidence_status": "OPERATIONAL_DIAGNOSTIC",
       "source_run_id": 32885195423,
       "corroborating_source_run_ids": [
@@ -1517,12 +1517,12 @@
       "id": "CF-2026-08-26-29",
       "importance": "MEDIUM",
       "kind": "OPERATIONAL_RADAR",
-      "summary": "Runtime repair round 3 (run 32885208777) CONFIRMS the RF-X closure worked but yields zero substantive delta \u2014 outcome half of CF-2026-08-26-28. The 751496a zero-delta guard fired for real ('SPIDER_ZERO_DELTA_REPAIR \u2026 no durable repair delta', exit 67, conclusion=failure, auditor/director skipped) after three context-amnesiac OpenCode attempts (~37m21s wall, two 300s stall-kills+backoffs) re-delivered ZERO edits over af164b9 (now a FOURTH run-id branch over one commit object; persist still published the unchanged base before failing). New operational evidence: (1) stall-watch kills now also fire during SUBAGENT DELEGATION (attempt 2 died silently while three red-team specialists ran) \u2014 productive silence is indistinguishable from network death to the watchdog; (2) retry is fully context-amnesiac: each attempt re-paid ~5\u201314 min of exploration, \u224820+ min duplicated total; (3) permission-kill family instance #8 with new 'Spark/../' typo-sibling+dotdot path variant; (4) runner env lacks pytest/playwright/chromium (agent self-installed 114.7 MiB stack); (5) audited failure set reproduced 3\u00d7 (10 failed/17 passed) and both benchmark hosts confirmed reachable at 19:02Z Aug 25. The lane's actual continuation remained the fresh-work cycle 32887030457, launched 18:59:53Z WHILE r3 was running (~19 min overlap of two runtime-loop runs).",
+      "summary": "Runtime repair round 3 (run 32885208777) CONFIRMS the RF-X closure worked but yields zero substantive delta — outcome half of CF-2026-08-26-28. The 751496a zero-delta guard fired for real ('SPIDER_ZERO_DELTA_REPAIR … no durable repair delta', exit 67, conclusion=failure, auditor/director skipped) after three context-amnesiac OpenCode attempts (~37m21s wall, two 300s stall-kills+backoffs) re-delivered ZERO edits over af164b9 (now a FOURTH run-id branch over one commit object; persist still published the unchanged base before failing). New operational evidence: (1) stall-watch kills now also fire during SUBAGENT DELEGATION (attempt 2 died silently while three red-team specialists ran) — productive silence is indistinguishable from network death to the watchdog; (2) retry is fully context-amnesiac: each attempt re-paid ~5–14 min of exploration, ≈20+ min duplicated total; (3) permission-kill family instance #8 with new 'Spark/../' typo-sibling+dotdot path variant; (4) runner env lacks pytest/playwright/chromium (agent self-installed 114.7 MiB stack); (5) audited failure set reproduced 3× (10 failed/17 passed) and both benchmark hosts confirmed reachable at 19:02Z Aug 25. The lane's actual continuation remained the fresh-work cycle 32887030457, launched 18:59:53Z WHILE r3 was running (~19 min overlap of two runtime-loop runs).",
       "evidence_status": "LOG_ONLY_UNAUDITED",
       "source_run_id": 32885208777,
       "durable_refs": [
         "evidence/run-memory/runs/32885208777.json",
-        "git:origin/cycle/runtime/32877702179/audit@4a12b79:results/audit/CYCLE_32877702179_RUNTIME_GATE.json (RF1\u2013RF6/RF-X ownership)",
+        "git:origin/cycle/runtime/32877702179/audit@4a12b79:results/audit/CYCLE_32877702179_RUNTIME_GATE.json (RF1–RF6/RF-X ownership)",
         "git:751496ad505c0f6cc9c54272c517e41c0d243dc4 + git:5e639274be8ffc0f7a4d416b94e3f3b26aa462fd (launcher as dispatched)",
         "evidence/run-memory/runs/32885195423.json (dispatch half), evidence/run-memory/runs/32887030457.json (parallel fresh-work continuation)"
       ],
@@ -1530,8 +1530,8 @@
         "Retry redesign: exempt/extend the 300s stall window while subagents are in flight (or require parent heartbeats); add per-attempt checkpoint state so retries resume instead of restarting; consider session resume over respawn.",
         "Complete the guard: skip the branch push itself when tip==base and diff empty, ending duplicate branch namespaces under failed rounds.",
         "Pre-install pytest/playwright/chromium in lane loop workflows before agent phases.",
-        "Adjudicate runtime-loop concurrency: two lane runs overlapped ~19 min (r3 vs fresh cycle) \u2014 confirm intended group semantics for dispatch+cron+scheduled triggers.",
-        "Verify against the fresh lineage whether any RF1\u2013RF6 item remains open debt before treating the old fix-list as current."
+        "Adjudicate runtime-loop concurrency: two lane runs overlapped ~19 min (r3 vs fresh cycle) — confirm intended group semantics for dispatch+cron+scheduled triggers.",
+        "Verify against the fresh lineage whether any RF1–RF6 item remains open debt before treating the old fix-list as current."
       ],
       "route_to": [
         "RUNTIME",
@@ -1543,7 +1543,7 @@
       "id": "CF-2026-08-26-30",
       "importance": "MEDIUM",
       "kind": "PROVENANCE_CLOSURE",
-      "summary": "Canceller of queued Product run 32875584974 RESOLVED by Product Supervisor #7's own log (run 32885481049): '::warning::Cancelling stale queued Product run 32875584974 while another Product run is in progress; continuation will be re-derived from accepted state.' + cancel request submitted @18:44:05.96Z \u2014 exact match to that run's cancel stamp; runs/32875584974.json had explicitly marked the canceller UNATTRIBUTABLE. This was the FIRST firing of the supervisor's own enabling commit bcd16de ('product: coalesce stale queued product runs'), which executed correctly first-try (~3s, zero tokens): \u22651 in_progress product-loop \u21d2 all queued/pending cancelled as stale, no duplicate dispatch. Lesson generalized: cancellation attribution exists only when the canceller's Actions log survives AND gets distilled before pruning \u2014 exactly what failed for 32894986672 and succeeded here. Structural fix available today: commit .spider/program-receipts/-style cancellation receipts (machinery already proven for successions) so attribution stops depending on prunable logs.",
+      "summary": "Canceller of queued Product run 32875584974 RESOLVED by Product Supervisor #7's own log (run 32885481049): '::warning::Cancelling stale queued Product run 32875584974 while another Product run is in progress; continuation will be re-derived from accepted state.' + cancel request submitted @18:44:05.96Z — exact match to that run's cancel stamp; runs/32875584974.json had explicitly marked the canceller UNATTRIBUTABLE. This was the FIRST firing of the supervisor's own enabling commit bcd16de ('product: coalesce stale queued product runs'), which executed correctly first-try (~3s, zero tokens): ≥1 in_progress product-loop ⇒ all queued/pending cancelled as stale, no duplicate dispatch. Lesson generalized: cancellation attribution exists only when the canceller's Actions log survives AND gets distilled before pruning — exactly what failed for 32894986672 and succeeded here. Structural fix available today: commit .spider/program-receipts/-style cancellation receipts (machinery already proven for successions) so attribution stops depending on prunable logs.",
       "evidence_status": "LOG_ONLY_UNAUDITED",
       "source_run_id": 32885481049,
       "durable_refs": [
@@ -1552,7 +1552,7 @@
         "git:bcd16deb480c16d4e0a854961e76a7a94b68fdb5:.github/workflows/product-supervisor.yml (coalescing logic, curator-verified on main)"
       ],
       "actionable_next": [
-        "Extend receipt machinery to supervisor cancellations (one committed line per gh run cancel) \u2014 closes the remaining UNATTRIBUTABLE cases class-wide.",
+        "Extend receipt machinery to supervisor cancellations (one committed line per gh run cancel) — closes the remaining UNATTRIBUTABLE cases class-wide.",
         "Keep the distill-supervisor-warnings-before-pruning rule in the hygiene gate rationale."
       ],
       "route_to": [
@@ -1565,7 +1565,7 @@
       "id": "CF-2026-08-26-31",
       "importance": "MEDIUM",
       "kind": "OPERATIONAL_PATTERN",
-      "summary": "Queue-supersession of pending scheduled slots reaches its SUCCESS-path variant (third family instance): Runtime cron slot #15 (run 32941533969, created ~48 min late for its 06:23Z slot \u2014 second delivery-drift datapoint) queued ~2h54m on single-slot spider-runtime-lane and was cancelled 63 s after lab/runtime's post-PASS continue=true relaunch commit 7f80520 (10:04:05Z), which dispatched the R2-3 successor. Prior variants: REVISE-router dispatch (slot #10, run 32921115159) and supervisor dedupe (product-loop #9). Implication: the 'periodic safety-net fresh cycle' is silently defeated by EVERY healthy Director self-relaunch \u2014 exactly when a lane is busiest/healthiest; zero-token loss so far. .spider/program-receipts/ covers graph/physics only, so runtime relaunches AND queue supersessions remain receipt-less; each attribution requires full Git archaeology. Canceller attribution is Git-timeline inference (high confidence); manual/API cancel not fully excluded without Actions API.",
+      "summary": "Queue-supersession of pending scheduled slots reaches its SUCCESS-path variant (third family instance): Runtime cron slot #15 (run 32941533969, created ~48 min late for its 06:23Z slot — second delivery-drift datapoint) queued ~2h54m on single-slot spider-runtime-lane and was cancelled 63 s after lab/runtime's post-PASS continue=true relaunch commit 7f80520 (10:04:05Z), which dispatched the R2-3 successor. Prior variants: REVISE-router dispatch (slot #10, run 32921115159) and supervisor dedupe (product-loop #9). Implication: the 'periodic safety-net fresh cycle' is silently defeated by EVERY healthy Director self-relaunch — exactly when a lane is busiest/healthiest; zero-token loss so far. .spider/program-receipts/ covers graph/physics only, so runtime relaunches AND queue supersessions remain receipt-less; each attribution requires full Git archaeology. Canceller attribution is Git-timeline inference (high confidence); manual/API cancel not fully excluded without Actions API.",
       "evidence_status": "OPERATIONAL_DIAGNOSTIC",
       "source_run_id": 32941533969,
       "durable_refs": [
@@ -1591,7 +1591,7 @@
       "id": "CF-2026-08-26-32",
       "importance": "MEDIUM",
       "kind": "PROVENANCE_GAP",
-      "summary": "Runtime distillation backlog: SIX claim-bearing runtime-loop runs have persisted team+audit branches but NO run-memory records while their audited outcomes already drive downstream portfolio decisions (Product intake cites R2-1 FLOOR_VOID; CTO-7 GO-matrix adoption and the terminal R2-3 charter ride on R2-2's round-0 PASS): 32916020607 (R1-1 r0 REVISE RF-1..3), 32921019845 (R1-1 r1 REVISE RF-4/5), 32924286888 (R1-1 r2 PASS), 32928419260 (R2-1 r0 REVISE RF-1..3), 32933579869 (R2-1 r1 PASS), 32940627441 (R2-2 PASS round 0, first clean pass). Durable refs exist (lab/runtime@7f80520 + cycle branches), so this is a memory-layer lag, not evidence loss \u2014 but per-run costs, failure signatures and audit narratives remain un-distilled and vulnerable to Actions log pruning.",
+      "summary": "Runtime distillation backlog: SIX claim-bearing runtime-loop runs have persisted team+audit branches but NO run-memory records while their audited outcomes already drive downstream portfolio decisions (Product intake cites R2-1 FLOOR_VOID; CTO-7 GO-matrix adoption and the terminal R2-3 charter ride on R2-2's round-0 PASS): 32916020607 (R1-1 r0 REVISE RF-1..3), 32921019845 (R1-1 r1 REVISE RF-4/5), 32924286888 (R1-1 r2 PASS), 32928419260 (R2-1 r0 REVISE RF-1..3), 32933579869 (R2-1 r1 PASS), 32940627441 (R2-2 PASS round 0, first clean pass). Durable refs exist (lab/runtime@7f80520 + cycle branches), so this is a memory-layer lag, not evidence loss — but per-run costs, failure signatures and audit narratives remain un-distilled and vulnerable to Actions log pruning.",
       "evidence_status": "DURABLE_UNAUDITED",
       "source_run_id": 32941533969,
       "durable_refs": [
@@ -1658,7 +1658,7 @@
       "id": "CF-2026-08-26-35",
       "importance": "HIGH",
       "kind": "PROCESS_INTEGRITY",
-      "summary": "PORCELAIN SCOPE-GATE STRIKE #6 AND SERIES CLOSURE (curator run 32885496153, distilled 2026-08-26): a complete single-target distillation (target 32875584974) passed its own validation and was destroyed by the unfixed guard \u2014 plain `git status --porcelain` collapsed the wholly-untracked evidence/ tree to one path; Git verification shows evidence/run-memory was absent from the main tree at dispatched sha bcd16deb entirely (first main commit touching it = 9e7d3ef @19:22:28Z), so any nested write of that era was collapsible. Fix commit 30fc94f is Git-stamped 18:56:50Z \u2014 34 s AFTER this run's enforce-failure stamp (18:56:16.28Z) \u2014 making #13 the LAST possible victim of the six-strike series on this workflow (32793165981, 32793580374, 32860596387, 32881219633, 32884735910, 32885496153). Third post-success work-loss instance in the curator lane alone (scope-guard, validator-key-mismatch, scope-guard). Lost content audited substantively DUPLICATE of today's durable state.",
+      "summary": "PORCELAIN SCOPE-GATE STRIKE #6 AND SERIES CLOSURE (curator run 32885496153, distilled 2026-08-26): a complete single-target distillation (target 32875584974) passed its own validation and was destroyed by the unfixed guard — plain `git status --porcelain` collapsed the wholly-untracked evidence/ tree to one path; Git verification shows evidence/run-memory was absent from the main tree at dispatched sha bcd16deb entirely (first main commit touching it = 9e7d3ef @19:22:28Z), so any nested write of that era was collapsible. Fix commit 30fc94f is Git-stamped 18:56:50Z — 34 s AFTER this run's enforce-failure stamp (18:56:16.28Z) — making #13 the LAST possible victim of the six-strike series on this workflow (32793165981, 32793580374, 32860596387, 32881219633, 32884735910, 32885496153). Third post-success work-loss instance in the curator lane alone (scope-guard, validator-key-mismatch, scope-guard). Lost content audited substantively DUPLICATE of today's durable state.",
       "evidence_status": "OPERATIONAL_DIAGNOSTIC",
       "source_run_id": 32885496153,
       "durable_refs": [
@@ -1679,7 +1679,7 @@
       "id": "CF-2026-08-26-36",
       "importance": "MEDIUM",
       "kind": "ORCHESTRATION_ECONOMICS",
-      "summary": "ONE STALE-SHELL CANCELLATION TRIGGERED FIVE ORCHESTRATION RUNS ACROSS FOUR WORKFLOWS IN FOUR SECONDS, WITH ZERO DURABLE SUBSTANCE PRODUCED (runs 32875584974 -> 32885496131 + 32885496153 + 32885496242 + 32885496244, twin 32885503426; distilled 2026-08-26): shell 32875584974 completed-as-cancelled @18:44:06Z fired same-second workflow_run listeners in product-supervisor.yml, evidence-curator.yml, ox-watchdog.yml AND cto-council.yml ('SPIDER Product and Beta Lane' \u2208 each listen list, Git-verified at bcd16deb); council #14's cancelled-completion then spawned watchdog twin #85 whose creation cancelled the just-completed #84. Net: two duplicate supervisor firings, two identical watchdog sweeps (~24 s window), a FOURTH consecutive feed-era council queued death (#15, killed by push 0f4563e 4 s after landing; council STILL has zero successful executions since the feed gate landed; it never began provisioning despite a free slot), and the batch's only real work product (curator #13's distillation) destroyed by strike #6 (CF-2026-08-26-35). Structural root: workflow_run types:[completed] fires on CANCELLED completions too \u2014 cancelling a queued duplicate re-triggers every lane listener, a self-amplifying noise loop during bursts.",
+      "summary": "ONE STALE-SHELL CANCELLATION TRIGGERED FIVE ORCHESTRATION RUNS ACROSS FOUR WORKFLOWS IN FOUR SECONDS, WITH ZERO DURABLE SUBSTANCE PRODUCED (runs 32875584974 -> 32885496131 + 32885496153 + 32885496242 + 32885496244, twin 32885503426; distilled 2026-08-26): shell 32875584974 completed-as-cancelled @18:44:06Z fired same-second workflow_run listeners in product-supervisor.yml, evidence-curator.yml, ox-watchdog.yml AND cto-council.yml ('SPIDER Product and Beta Lane' ∈ each listen list, Git-verified at bcd16deb); council #14's cancelled-completion then spawned watchdog twin #85 whose creation cancelled the just-completed #84. Net: two duplicate supervisor firings, two identical watchdog sweeps (~24 s window), a FOURTH consecutive feed-era council queued death (#15, killed by push 0f4563e 4 s after landing; council STILL has zero successful executions since the feed gate landed; it never began provisioning despite a free slot), and the batch's only real work product (curator #13's distillation) destroyed by strike #6 (CF-2026-08-26-35). Structural root: workflow_run types:[completed] fires on CANCELLED completions too — cancelling a queued duplicate re-triggers every lane listener, a self-amplifying noise loop during bursts.",
       "evidence_status": "OPERATIONAL_DIAGNOSTIC",
       "source_run_id": 32885496244,
       "corroborating_source_run_ids": [
@@ -2036,7 +2036,7 @@
       "id": "CF-2026-08-27-32897120087-NEGATIVE-MEDIUM",
       "importance": "MEDIUM",
       "kind": "NEGATIVE",
-      "summary": "FIVE mission questions remain OPEN in every direction (multi-host discovery/economics, natural-TTL window2, induced-mutation detection quality, capture-value-over-declared-spec, multi-host intent addressing) - neither confirmed nor refuted. Prereg frozen pre-collection with 7 fully disclosed attempts (crash/timeout/detached-recorder/render-gap/invalid-API-wait/RB418/carryover) and errata E1-E5 appended below separator only (frozen \u00a714 rule never edited, zero removed lines verified). Counterfactu",
+      "summary": "FIVE mission questions remain OPEN in every direction (multi-host discovery/economics, natural-TTL window2, induced-mutation detection quality, capture-value-over-declared-spec, multi-host intent addressing) - neither confirmed nor refuted. Prereg frozen pre-collection with 7 fully disclosed attempts (crash/timeout/detached-recorder/render-gap/invalid-API-wait/RB418/carryover) and errata E1-E5 appended below separator only (frozen §14 rule never edited, zero removed lines verified). Counterfactu",
       "evidence_status": "AUDITED_DURABLE",
       "source_run_id": 32897120087,
       "workflow_name": "SPIDER Intel Research Lane",
@@ -2097,7 +2097,7 @@
       "id": "CF-2026-08-27-32897363519-SCHEMA-HIGH",
       "importance": "HIGH",
       "kind": "BUG",
-      "summary": "CTO validation gate rejected a complete ~56m synthesis for Invalid Frontier charter schema despite python missing=NONE on 4 charters \u2014 zero bytes committed, zero charters dispatched. Shell jq enforces strict non-empty strings and non-null strongest_null_or_baseline/stop_condition; at least one charter field was empty string/null.",
+      "summary": "CTO validation gate rejected a complete ~56m synthesis for Invalid Frontier charter schema despite python missing=NONE on 4 charters — zero bytes committed, zero charters dispatched. Shell jq enforces strict non-empty strings and non-null strongest_null_or_baseline/stop_condition; at least one charter field was empty string/null.",
       "evidence_status": "LOG_ONLY_UNAUDITED",
       "source_run_id": 32897363519,
       "durable_refs": [
@@ -2106,7 +2106,7 @@
       ],
       "actionable_next": [
         "Lint charter generator to guarantee every required field non-empty and non-null before dispatch; add pre-persist python-mirrored jq predicate inside council agent loop to fail fast before 56m wall.",
-        "Do NOT promote log-only charter content as accepted advisory \u2014 durable CTO state remains at prior pass."
+        "Do NOT promote log-only charter content as accepted advisory — durable CTO state remains at prior pass."
       ],
       "route_to": [
         "CTO",
@@ -2138,7 +2138,7 @@
       "id": "CF-2026-08-27-32899318230-PRODUCT-HIGH",
       "importance": "HIGH",
       "kind": "RESULT",
-      "summary": "Backfilled Product run 32886859788 (PB-001 rev7 + Builder WP-8a/b/c 91/91 tests, BLOCKED armed-park) with full 7-finding record. Re-attested product-loop.yml destructive wipe still live at hotfix 8f3980c (rm -f of four state/product_beta_*.json each dispatch) \u2014 director/builder forced to restore from HEAD/ddce3a3 each dispatch; provenance gap documented: amendment+WP-8 absent from lab/product HEAD, present only on cycle/product/32886859788/* branches.",
+      "summary": "Backfilled Product run 32886859788 (PB-001 rev7 + Builder WP-8a/b/c 91/91 tests, BLOCKED armed-park) with full 7-finding record. Re-attested product-loop.yml destructive wipe still live at hotfix 8f3980c (rm -f of four state/product_beta_*.json each dispatch) — director/builder forced to restore from HEAD/ddce3a3 each dispatch; provenance gap documented: amendment+WP-8 absent from lab/product HEAD, present only on cycle/product/32886859788/* branches.",
       "evidence_status": "DURABLE_UNAUDITED",
       "source_run_id": 32899318230,
       "durable_refs": [
@@ -2181,7 +2181,7 @@
       "id": "CF-2026-08-27-32901955861-PERMISSION-HIGH",
       "importance": "HIGH",
       "kind": "BUG",
-      "summary": "Five-target backlog closer consolidated doctrine: permission auto-rejection now 4 confirmed kills across 3 variants (cd-parent, wrong absolute path one-dir-above-repo, ~/.config/opencode probe) \u2014 each aborts whole team session after short load and pushes empty branch audited at ~9m cost. Plus third orphaned-PASS via scope-gate porcelain false positive (Physics #7: 9 pre-staged control-plane files flagged as audit dirt, Director skipped while parallel chain 32866107906 integrated WP-006). Fix sets documented in batch record.",
+      "summary": "Five-target backlog closer consolidated doctrine: permission auto-rejection now 4 confirmed kills across 3 variants (cd-parent, wrong absolute path one-dir-above-repo, ~/.config/opencode probe) — each aborts whole team session after short load and pushes empty branch audited at ~9m cost. Plus third orphaned-PASS via scope-gate porcelain false positive (Physics #7: 9 pre-staged control-plane files flagged as audit dirt, Director skipped while parallel chain 32866107906 integrated WP-006). Fix sets documented in batch record.",
       "evidence_status": "OPERATIONAL_DIAGNOSTIC",
       "source_run_id": 32901955861,
       "durable_refs": [
@@ -2196,6 +2196,156 @@
       "route_to": [
         "CTO",
         "RUNTIME",
+        "INFRA"
+      ]
+    },
+    {
+      "id": "CF-2026-08-27-01",
+      "importance": "MEDIUM",
+      "kind": "ORCHESTRATION_ANOMALY",
+      "summary": "CTO council burst supersession wasted ~4m runner time: run 32902373668 (21:44:11-21:48:33Z) completed mounts/install then was externally cancelled by push 37f237a → zero-job successor 32902775900 → successor 32902935507; all three share single-slot semantics. No advisory loss; trigger commits durable.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "source_run_id": 32902373668,
+      "durable_refs": [
+        "evidence/run-memory/runs/32902373668.json",
+        "evidence/run-memory/runs/32902775900.json",
+        "git:main@d58a111 / 37f237a / 1338a29"
+      ],
+      "actionable_next": [
+        "Consider debouncing rapid CTO council pushes or coalescing burst dispatches to avoid 4-5m wasted mounts per supersession."
+      ],
+      "route_to": [
+        "CTO",
+        "INFRA"
+      ]
+    },
+    {
+      "id": "CF-2026-08-27-02",
+      "importance": "HIGH",
+      "kind": "STRUCTURAL_FIX",
+      "summary": "CTO council delivery abort with validated synthesis stranded: run 32902935507 completed full CTO-5 synthesis (5 critics converged on CONTROL-PLANE SELF-DESTRUCTION, 3 Frontier charters validated PASS with allocations sum 1.0 and six handoffs), then persist git switch -C cto-output $PREV_CTO aborted on 7 untracked tracked-path collisions (docs/CTO_LEDGER.md, CTO_TO_*, state/cto_direction.json). The validated bundle survives only in this log; lab/cto was not advanced.",
+      "evidence_status": "OPERATIONAL_DIAGNOSTIC",
+      "source_run_id": 32902935507,
+      "durable_refs": [
+        "evidence/run-memory/runs/32902935507.json",
+        "git:main@1338a296115c2c4cdec592706c9eb30a5c7cae3b",
+        "log:state/cto_direction.json provenance source_run_id=32902935507"
+      ],
+      "actionable_next": [
+        "Fix CTO persist to handle tracked-vs-untracked collision (force checkout or merge untracked before switch); re-dispatch or replay the stranded CTO-5 bundle so its three Frontier charters become durable."
+      ],
+      "route_to": [
+        "CTO",
+        "INFRA",
+        "RUNTIME"
+      ]
+    },
+    {
+      "id": "CF-2026-08-27-03",
+      "importance": "HIGH",
+      "kind": "RESEARCH_RADAR",
+      "summary": "Three Frontier charters validated locally but not yet chartered durably (run 32902935507 log-only): frontier-runner-reliability CRITICAL (validate 5-mechanism guard bundle >=50% waste cut <2% overhead), frontier-physics-temporal-volatility HIGH (Physics-domain, passive-revisit change-time vs stationary-Poisson mixture + conditional-GET baselines, orthogonal to WP-006), frontier-inheritance-economics HIGH (ONE frozen PB-001 W-pack accounting model applied once per audited corpus). All are radar leads until lab/cto durably advances.",
+      "evidence_status": "LOG_ONLY_UNAUDITED",
+      "source_run_id": 32902935507,
+      "durable_refs": [
+        "evidence/run-memory/runs/32902935507.json",
+        "log:state/cto_direction.json (3 charters, council_pass=CTO-5)"
+      ],
+      "actionable_next": [
+        "After persist fix, ensure charters are created via lab/cto → lab/frontier/* dispatch; do not treat log-only chartering as evidence."
+      ],
+      "route_to": [
+        "CTO",
+        "GRAPH",
+        "PHYSICS",
+        "INTEL",
+        "PRODUCT",
+        "RUNTIME"
+      ]
+    },
+    {
+      "id": "CF-2026-08-27-04",
+      "importance": "HIGH",
+      "kind": "NEGATIVE",
+      "summary": "Graph fused-retrieval c1 MEASUREMENT_INVALID (instrument-level retrieval-stack-void): frozen B-vs-random hard-slice precondition fails under literal gated semantics (B_mmr 0/75 vs D_random 17/75; 0/64 hard slice) and passes only +2 under all-ungated alternative; ambiguity disclosed verbatim not resolved post hoc. Therefore the primary gated contrast is void; fused addressing NOT adopted. Substantive secondaries (all ungated): hard@1 C_final 20/64 vs B_mmr 18/64 vs random 16/64 paired 3W/1R; gated primary 0-0 abstention tie zero FA both arms; battery dummy 5W/6L non-specific → summarizer survival UNRESOLVED; execution conversion ZERO (median C-B 0.0 over 16 cells) at ~2× embedding / ~9× legacy-sig retrieval overhead; exact goal_sig incumbent dominant 8/12 at 0-14 novel vs 0/12 text arms at 64-103.",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "source_run_id": 32905175867,
+      "durable_refs": [
+        "evidence/run-memory/runs/32905175867.json",
+        "git:origin/cycle/graph/32905175867/team@4426f40",
+        "git:origin/cycle/graph/32905175867/audit@47ed2cd (REVISE RF-1..RF-5)"
+      ],
+      "actionable_next": [
+        "Repair RF-1..RF-5 documentation/provenance exactly against byte-identical raw evidence (no new collection) to obtain integration decision on MEASUREMENT_INVALID negative knowledge.",
+        "Do not adopt fused state-summary retrieval without a second pre-registered adaptation resolution requiring its own cycle."
+      ],
+      "route_to": [
+        "GRAPH",
+        "PRODUCT",
+        "CTO"
+      ]
+    },
+    {
+      "id": "CF-2026-08-27-05",
+      "importance": "MEDIUM",
+      "kind": "INSTRUMENT_DESIGN",
+      "summary": "Graph calibration carry-over defect detected and fixed mid-cycle: a successful login-fragment replay leaving session authenticated caused unrelated quotes fragments to falsely solve auth-dependent accepts; fix was Session.new_context() lane-local shared-infra divergence (additive opt-in isolation plus per-candidate fresh browser contexts) plus infra login prefix to quotes root. Partial 203-row calibration preserved with provenance; integrity tests 27 green including C(α=1)≡B bit-identity.",
+      "evidence_status": "DURABLE_UNAUDITED",
+      "source_run_id": 32905175867,
+      "durable_refs": [
+        "evidence/run-memory/runs/32905175867.json",
+        "graph/run_fused_calibration.py repair commit 81d915d",
+        "shared/browser.py Session.new_context()"
+      ],
+      "actionable_next": [
+        "Reconcile Session.new_context() divergence via Meta-Director before cross-lane adoption; reuse isolated-context primitive for future interventional collections."
+      ],
+      "route_to": [
+        "GRAPH",
+        "RUNTIME",
+        "INFRA"
+      ]
+    },
+    {
+      "id": "CF-2026-08-27-06",
+      "importance": "HIGH",
+      "kind": "RESULT",
+      "summary": "Runtime R0-2 first gate-passing work-compression observation: near-repeat kill cell T3 — SPIDER 4 actions vs BASE 11 on BOTH offset entries (/tag/love/, /page/10/) margins 7≥M=2 zero novel, reused==pinned steps_len==4 distinct digests across entries/equal within arms. Single task, single site family (books.toscrape), pilot scale; magnitude not quoted as ratio per directive; replication with ≥3-sample statistics owed.",
+      "evidence_status": "AUDITED_DURABLE",
+      "source_run_id": 32908002333,
+      "durable_refs": [
+        "evidence/run-memory/runs/32908002333.json",
+        "git:origin/cycle/runtime/32908002333/team@613fbd4",
+        "git:origin/lab/runtime@162468f (R0 COMPLETE positive)"
+      ],
+      "actionable_next": [
+        "Replicate T3 across ≥2 additional tasks/sites with ≥3 samples per cell before claiming general work-compression.",
+        "Execute chartered Program R1 offline policy-sweep (at most one live arm) to answer strongest-baseline question before further live Runtime launches."
+      ],
+      "route_to": [
+        "RUNTIME",
+        "PRODUCT",
+        "CTO"
+      ]
+    },
+    {
+      "id": "CF-2026-08-27-07",
+      "importance": "HIGH",
+      "kind": "STRUCTURAL_FIX",
+      "summary": "Runtime ten-gate chain now true after labeled POST-HOC GATE-REPAIR ADDENDUM (interest-reversing wiring defect, auditor reproduced both wirings from same committed stream, original analysis preserved verbatim). Fix is binding next cycle via W-C2-3 (gate code derives witness refs from committed stream only). Dispositions for six warnings now bound in RUNTIME_LEDGER.md (W-C2-2 host→context_signature binding, W-C2-1 yield-not-quoted-while-zero, capsule.v0 formal /v1 candidate, commit-scope disclosure).",
+      "evidence_status": "AUDITED_DURABLE",
+      "source_run_id": 32908002333,
+      "durable_refs": [
+        "evidence/run-memory/runs/32908002333.json",
+        "results/runtime/pilot2/POST_HOC_GATE_REPAIR_ADDENDUM.json",
+        "docs/RUNTIME_LEDGER.md"
+      ],
+      "actionable_next": [
+        "Use repaired gate wiring as the sole measurement contract for Runtime Program R1; do not accept any further gate-code drift without a binding disclosure."
+      ],
+      "route_to": [
+        "RUNTIME",
+        "CTO",
         "INFRA"
       ]
     }
