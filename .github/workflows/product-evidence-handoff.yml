@@ -1,0 +1,81 @@
+name: SPIDER Product Evidence Handoff
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'evidence/run-memory/PRODUCT_FEED.json'
+      - 'evidence/run-memory/INDEX.md'
+      - '.github/workflows/product-evidence-handoff.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: spider-product-evidence-handoff
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    name: Sync durable run memory into lab/product
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Mount current curated memory and Product branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          SOURCE_SHA=$(git rev-parse origin/main)
+          mkdir -p /tmp/spider_product_evidence
+          git show origin/main:evidence/run-memory/PRODUCT_FEED.json > /tmp/spider_product_evidence/PRODUCT_FEED.json
+          git show origin/main:evidence/run-memory/INDEX.md > /tmp/spider_product_evidence/RUN_MEMORY_INDEX.md
+          jq -e 'type=="object" and (.findings|type)=="array"' /tmp/spider_product_evidence/PRODUCT_FEED.json >/dev/null
+
+          if git ls-remote --exit-code --heads origin refs/heads/lab/product >/dev/null 2>&1; then
+            git fetch origin 'lab/product:refs/remotes/origin/lab/product'
+            git switch -C product-evidence-sync origin/lab/product
+          else
+            git switch -C product-evidence-sync origin/main
+          fi
+
+          mkdir -p evidence/product-input state
+          cp /tmp/spider_product_evidence/PRODUCT_FEED.json evidence/product-input/PRODUCT_FEED.json
+          cp /tmp/spider_product_evidence/RUN_MEMORY_INDEX.md evidence/product-input/RUN_MEMORY_INDEX.md
+          FEED_SHA=$(sha256sum evidence/product-input/PRODUCT_FEED.json | awk '{print $1}')
+          INDEX_SHA=$(sha256sum evidence/product-input/RUN_MEMORY_INDEX.md | awk '{print $1}')
+          jq -n \
+            --arg source_main_sha "$SOURCE_SHA" \
+            --arg feed_sha256 "$FEED_SHA" \
+            --arg index_sha256 "$INDEX_SHA" \
+            --arg synced_at "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+            '{schema:"SPIDER product evidence sync v1", source_main_sha:$source_main_sha, product_feed_sha256:$feed_sha256, run_memory_index_sha256:$index_sha256, synced_at:$synced_at, source_paths:["evidence/run-memory/PRODUCT_FEED.json","evidence/run-memory/INDEX.md"], destination_paths:["evidence/product-input/PRODUCT_FEED.json","evidence/product-input/RUN_MEMORY_INDEX.md"], epistemic_rule:"Only AUDITED_DURABLE entries may be treated as validated Product building blocks; other statuses remain constraints, warnings, leads or validation needs."}' \
+            > state/product_evidence_sync.json
+
+      - name: Persist handoff on Product branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name spider-product-evidence-handoff
+          git config user.email spider-product-evidence-handoff@autonomous.local
+          git add evidence/product-input state/product_evidence_sync.json
+          if git diff --cached --quiet; then
+            echo 'Product evidence handoff already current.'
+            exit 0
+          fi
+          git commit -m "product: sync curated run evidence ${GITHUB_RUN_ID}"
+          for attempt in 1 2 3 4 5; do
+            if git pull --rebase origin lab/product && git push origin HEAD:lab/product; then
+              exit 0
+            fi
+            git rebase --abort 2>/dev/null || true
+            git fetch origin 'lab/product:refs/remotes/origin/lab/product' || true
+            sleep $((attempt * 4))
+          done
+          echo '::error::Could not persist Product evidence handoff after retries'
+          exit 1

@@ -1,0 +1,9 @@
+{
+  "schema": "SPIDER PRODUCT feed v1",
+  "updated": "2026-08-27",
+  "maintained_by": "RUN EVIDENCE CURATOR",
+  "purpose": "Durable handoff of useful distilled run knowledge to Product. This bootstrap is rebuilt by the Evidence Curator from all durable run records after merge.",
+  "epistemic_rule": "Only AUDITED_DURABLE entries may be used as validated Product building blocks; all other statuses remain constraints, warnings, leads or validation needs.",
+  "bootstrap_pending_curator_rebuild": true,
+  "findings": []
+}

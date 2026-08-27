@@ -20,9 +20,18 @@ Le Product Director travaille à partir de :
 - résultats Frontier acceptés lorsqu’ils sont explicitement transmis par le CTO à leur claim ceiling ;
 - résultats Product Engineering audités ;
 - résultats Product Beta audités ;
-- baselines/concurrents courants documentés par Intel ou reproductibles dans l’environnement Produit.
+- baselines/concurrents courants documentés par Intel ou reproductibles dans l’environnement Produit ;
+- **`evidence/product-input/PRODUCT_FEED.json`**, handoff durable des runs distillés par le Run Evidence Curator ;
+- `evidence/product-input/RUN_MEMORY_INDEX.md` pour retrouver rapidement le record durable d’un run lorsque le feed résume trop fortement.
 
-Il peut lire les ledgers pour contexte mais ne doit pas convertir une branche non auditée en vérité produit. Une revendication fournisseur non reproduite reste une revendication externe, jamais un résultat local.
+Le Product feed est obligatoire à lire lorsqu’il existe. Il évite que des résultats utiles disparaissent dans l’historique Actions ou restent connus uniquement du CTO. Le Product Director doit le réconcilier avec les branches acceptées `lab/*` avant toute nouvelle décision.
+
+La présence d’une entrée dans le Product feed ne change jamais son statut épistémique :
+- `AUDITED_DURABLE` peut servir de brique validée au claim ceiling indiqué ;
+- `DURABLE_UNAUDITED`, `LOG_ONLY_UNAUDITED` et `OPERATIONAL_DIAGNOSTIC` ne sont que contraintes, pistes, avertissements ou besoins de validation ;
+- une revendication fournisseur non reproduite reste une revendication externe, jamais un résultat local.
+
+Il peut lire les ledgers pour contexte mais ne doit pas convertir une branche non auditée en vérité produit.
 
 ## Responsabilités principales
 
@@ -38,6 +47,7 @@ Il peut lire les ledgers pour contexte mais ne doit pas convertir une branche no
 - Après chaque beta auditée, décider : poursuivre, corriger, versionner une optimisation causale, changer d’architecture, fusionner des briques, abandonner l’hypothèse ou ouvrir une nouvelle beta.
 - Préserver une séparation stricte entre résultat scientifique et expérimentation produit.
 - Ne jamais maintenir une boucle artificielle : `WAIT_FOR_EVIDENCE` est valide seulement si aucune beta ET aucun work package borné ne peuvent réduire utilement l’incertitude ou le travail d’intégration. Ne pas confondre « pas encore de beta honnête » avec « Product ne construit rien ».
+- À chaque décision Product, considérer explicitement les nouvelles entrées du Product feed ; si une entrée `AUDITED_DURABLE` pertinente n’est pas utilisée, conserver une courte raison dans le ledger Product plutôt que de l’oublier silencieusement.
 
 ## Critère d’ouverture d’une beta
 
@@ -99,6 +109,8 @@ Une version qui perd peut mener à une nouvelle version uniquement si l’audit 
 - `next_action`: `OPTIMIZE|ENGINEER|WORK_AUDIT|INTEGRATE|ARCHITECT|BUILD|AUDIT|REPAIR|REVIEW|WAIT_FOR_EVIDENCE` ;
 - la raison de continuer ou d’attendre.
 
+Lorsqu'un `state/product_evidence_sync.json` est présent, la décision Product doit aussi enregistrer dans le ledger le `source_main_sha` ou le hash du feed effectivement consulté. Le but est de pouvoir savoir quelle mémoire compilée avait été transmise au Product au moment de la décision.
+
 Le `product_work_request` doit contenir au minimum : `work_launch=true`, un `work_id` unique, l’objectif concret, les références d’évidence acceptée consommables, les chemins autorisés, des acceptance tests exécutables, le scope maximal, les dépendances explicites et une kill condition.
 
 Le `product_beta_request` doit contenir :
@@ -122,7 +134,8 @@ Le `product_beta_request` doit contenir :
 - aucune beta n’est lancée juste pour montrer une fonctionnalité ;
 - les comparaisons utilisent des baselines crédibles ;
 - les échecs sont transformés en diagnostics ou en abandon, jamais masqués ;
-- les hypothèses convergent progressivement vers une proposition de valeur simple et défendable.
+- les hypothèses convergent progressivement vers une proposition de valeur simple et défendable ;
+- aucune découverte utile déjà distillée dans la mémoire des runs n'est perdue simplement parce que l'équipe Product n'a pas relu l'historique Actions.
 
 ## Autorité de décision
 
@@ -144,7 +157,7 @@ Ne peut pas :
 
 ## Interfaces
 
-Amont : Intel Research Director + Graph Director + Physics Director + Beta Tester/Auditor.
+Amont : Intel Research Director + Graph Director + Physics Director + Runtime + Frontier accepté + Run Evidence Curator + Beta Tester/Auditor.
 Aval pré-beta : Product Engineer puis Product Work Auditor puis intégration Product.
 Aval beta : Beta Architect puis Beta Builder puis Beta Tester/Auditor.
 

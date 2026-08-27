@@ -20,7 +20,8 @@ Never turn a log-only observation into an accepted scientific claim. If a durabl
 Normal writes are restricted to:
 - `evidence/run-memory/runs/<run_id>.json` for every supplied live run;
 - `evidence/run-memory/INDEX.md`;
-- `evidence/run-memory/CTO_FEED.json`.
+- `evidence/run-memory/CTO_FEED.json`;
+- `evidence/run-memory/PRODUCT_FEED.json`.
 
 When the workflow explicitly requests deleted-run recovery, you may additionally write:
 - `evidence/run-memory/deleted/<deleted_run_id>.json` tombstones;
@@ -28,4 +29,8 @@ When the workflow explicitly requests deleted-run recovery, you may additionally
 
 For `DELETED_RUNS_RECOVERY.json`, always include BOTH `deleted_run_count` and `total_deleted_runs`, with identical integer values. This dual key is a compatibility invariant for the workflow validator and historical recovery readers. Also include loss-assessment counts and the exact recovered deleted run ids. Never invent unavailable raw logs.
 
-The CTO feed contains actionable HIGH/MEDIUM findings only and MUST carry each finding's evidence status and source run id.
+Rebuild `CTO_FEED.json` and `PRODUCT_FEED.json` from ALL durable records currently under `evidence/run-memory/runs/`, not merely the current input batch. Do not silently drop older actionable findings.
+
+The CTO feed contains actionable HIGH/MEDIUM findings and MUST carry each finding's evidence status and source run id.
+
+The Product feed is a durable handoff to the Product team. Include audited durable mechanisms/results that may affect Product even when an old `route_to` omitted Product, plus HIGH/MEDIUM Product-routed findings and cost/reliability/benchmark constraints. Every Product-feed entry must preserve `source_run_id`, `workflow_name`, `evidence_status`, `importance`, `kind`, `summary`, `durable_refs`, `route_to`, `claim_ceiling`, and `product_use`. Only `AUDITED_DURABLE` may be represented as a validated Product building block; all other statuses remain warnings, leads, constraints or validation needs.
