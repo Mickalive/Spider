@@ -1,0 +1,72 @@
+name: SPIDER Codex Normalize Once
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/codex-normalize-once.yml
+
+permissions:
+  contents: write
+
+jobs:
+  normalize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: archive/spider-codex-ultimate
+          fetch-depth: 0
+
+      - name: Normalize Codex builder and archive branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('tools/build_spider_knowledge_codex.py')
+          s=p.read_text(encoding='utf-8')
+          old='K=re.compile(r"(result|report|audit|gate|verdict|metric|benchmark|measurement|finding|experiment|hypothesis|evidence|evaluation|falsification|claim|ledger|outcome|score|test)",re.I)'
+          new='K=re.compile(r"(charter|question|mission|prereg|registration|protocol|method|design|plan|freeze|seal|baseline|power|result|report|audit|gate|verdict|metric|benchmark|measurement|finding|experiment|hypothesis|evidence|evaluation|falsification|claim|ledger|outcome|score|test|manifest|state|decision|limitation|provenance|receipt|handoff|taxonomy|registry)",re.I)'
+          if old not in s: raise SystemExit('selector signature changed')
+          s=s.replace(old,new,1)
+          a=s.index('def wanted_path(p):'); b=s.index('\ndef blob(oid):',a)
+          block='''ROLE_ORDER={"charter_question":0,"prereg_protocol":1,"result_measurement":2,"report_verdict":3,"audit_gate":4,"state_provenance":5,"context_input":6}\nLANE_ORDER={"graph":0,"physics":1,"intel":2,"runtime":3,"product":4,"frontier":5,"audit":6,"cto":7,"cross-lane":8,"unknown":9}\nRESEARCH_LANES={"graph","physics","intel","runtime","product","frontier"}\n\ndef lane_for_path(p):\n    p=p.replace("\\\\","/").lower(); parts=p.split("/")\n    if parts and parts[0] in RESEARCH_LANES:return parts[0]\n    if len(parts)>=2 and parts[0] in {"reports","results","state","directives"} and parts[1] in LANES:return parts[1]\n    if len(parts)>=3 and parts[0]=="data" and parts[1]=="manifests" and parts[2] in LANES:return parts[2]\n    for lane in ("frontier","intel","physics","graph","runtime","product","audit","cto"):\n        if re.search(rf"(^|[/_.-]){re.escape(lane)}([/_.-]|$)",p):return lane\n    return "cross-lane"\n\ndef role_for_path(p):\n    p=p.replace("\\\\","/").lower(); name=Path(p).name\n    if "/audit/" in p or re.search(r"(^|[_\\-.])(audit|gate)([_\\-.]|$)",name):return "audit_gate"\n    if p.startswith("results/"):return "result_measurement"\n    if p.startswith("reports/"):return "report_verdict"\n    if "/charters/" in p or "charter" in name or re.fullmatch(r"cto_v\\d+\\.json",name):return "charter_question"\n    if any(x in p for x in ("/prereg/","/protocol/","/method/")) or re.search(r"(prereg|registration|protocol|method|design|freeze|seal|baseline|power|plan)",name):return "prereg_protocol"\n    if re.search(r"(result|metric|measurement|benchmark|evaluation|score|outcome)",name):return "result_measurement"\n    if re.search(r"(report|verdict|finding|falsif|claim|decision|handoff)",name):return "report_verdict"\n    if p.startswith(("state/","data/manifests/","evidence/")) or re.search(r"(manifest|ledger|provenance|receipt|evidence|state)",name):return "state_provenance"\n    return "context_input"\n\ndef wanted_path(p):\n    p=p.replace("\\\\","/")\n    if Path(p).suffix.lower() not in EXT:return False\n    if p.startswith((".github/",".opencode/","tools/","archive/","evidence/run-memory/")) or p in {"SPIDER_CODEX_ULTIME.md","SPIDER_ULTIMATE_CODEX.md"}:return False\n    parts=p.split("/")\n    if parts and parts[0].lower() in RESEARCH_LANES:return True\n    if p.startswith("results/"):return p!="results/CATALOG.json"\n    if p.startswith("reports/"):return len(parts)>2 and parts[1].lower() in LANES\n    if p.startswith("state/"):return len(parts)>2 and parts[1].lower() in LANES\n    if p.startswith("data/manifests/"):return True\n    if p.startswith("evidence/frontier-one-shot/"):return True\n    if p.startswith(("docs/","directives/")):return bool(K.search(p))\n    return False\n\ndef normalized_meta(paths):\n    lanes=sorted({lane_for_path(x) for x in paths},key=lambda x:(LANE_ORDER.get(x,99),x))\n    roles=sorted({role_for_path(x) for x in paths},key=lambda x:(ROLE_ORDER.get(x,99),x))\n    return (lanes[0] if lanes else "unknown",roles[0] if roles else "context_input",lanes,roles)\n\ndef coverage_rows(bs):\n    c=Counter()\n    for paths in bs.values():\n        _,_,lanes,roles=normalized_meta(paths)\n        for lane in lanes:\n            for role in roles:c[(lane,role)]+=1\n    return c\n\ndef assert_normalized_coverage(bs):\n    paths={p for ps in bs.values() for p in ps}\n    checks={\n      "frontier_charter":any(p.startswith("frontier/") and "/charters/" in p.lower() for p in paths),\n      "frontier_prereg":any(p.startswith("frontier/") and "prereg" in p.lower() for p in paths),\n      "frontier_report":any(p.startswith("reports/frontier/") for p in paths),\n      "intel_namespace":any(p.startswith("intel/") for p in paths),\n      "intel_report":any(p.startswith("reports/intel/") for p in paths),\n      "physics_report":any(p.startswith("reports/physics/") for p in paths),\n      "graph_report":any(p.startswith("reports/graph/") for p in paths),\n      "runtime_report":any(p.startswith("reports/runtime/") for p in paths)}\n    missing=[k for k,v in checks.items() if not v]\n    if missing:raise RuntimeError("normalized Codex coverage missing: "+", ".join(missing))\n    return checks\n'''
+          s=s[:a]+block+s[b:]
+          x='    bs=substantive_blobs(); mem,excluded=run_memories(); ars=action_runs()'
+          y='    bs=substantive_blobs(); checks=assert_normalized_coverage(bs); role_counts=coverage_rows(bs); mem,excluded=run_memories(); ars=action_runs()'
+          if x not in s: raise SystemExit('main signature changed')
+          s=s.replace(x,y,1)
+          s=s.replace('"**Included:** experiments, measurements, benchmarks, audits, gates, falsifications, negative/BLOCKED/invalid results, Runtime/Product evaluations, Frontier research, materially directional CTO findings, and architecture failures that matter for the product.\\n\\n",','"**Normalization rule:** every research namespace is treated symmetrically. Textual scientific/data artifacts under `graph/`, `physics/`, `intel/`, `runtime/`, `product/`, and `frontier/` are retained regardless of filename, alongside canonical results/reports/state/manifests. Frontier charters/preregistrations and Intel namespace inputs therefore cannot disappear merely because their filenames lack `result` or `report`.\\n\\n",\n      "**Organization only:** generated lane/role labels never rewrite source evidence; every selected source artifact remains verbatim and SHA-deduplicated.\\n\\n",',1)
+          s=s.replace('"\\n## 3. Coverage manifest\\n\\n",','"\\n## 3. Coverage manifest and normalized lane/role map\\n\\n",',1)
+          m='    for n,c in sorted(wf.items(),key=lambda x:(-x[1],x[0])):parts.append(f"| {n.replace(\'|\',\'/\')} | {c} |\\n")\n'
+          if m not in s: raise SystemExit('workflow count signature changed')
+          s=s.replace(m,m+'    parts+=["\\n### 3.2 Normalized unique-blob counts by lane and role\\n\\n","| Lane | Role | Unique blobs |\\n|---|---|---:|\\n"]\n    for (lane,role),count in sorted(role_counts.items(),key=lambda x:(LANE_ORDER.get(x[0][0],99),ROLE_ORDER.get(x[0][1],99),x[0])):parts.append(f"| {lane} | {role} | {count} |\\n")\n    parts.append("\\nNormalization assertions: "+", ".join(f"{k}=PASS" for k in sorted(checks))+".\\n")\n',1)
+          ls=s.index('    for i,o in enumerate(sorted(bs,key=lambda x:(sorted(bs[x])[0],x)),1):')
+          le=s.index('    parts+=["\\n## 5. Substantive per-run memories retained verbatim\\n\\n"]',ls)
+          loop='''    items=[]\n    for o,ps in bs.items():\n        primary_lane,primary_role,lanes,roles=normalized_meta(ps)\n        items.append((primary_lane,primary_role,sorted(ps)[0],o,sorted(ps),lanes,roles))\n    items.sort(key=lambda x:(LANE_ORDER.get(x[0],99),ROLE_ORDER.get(x[1],99),x[2],x[3]))\n    for i,(primary_lane,primary_role,_,o,paths,lanes,roles) in enumerate(items,1):\n        raw,t=blob(o)\n        parts+=[f"### 4.{i} — {primary_lane} / {primary_role} — blob `{o}`\\n\\n","Lane label(s): "+", ".join(f"`{x}`" for x in lanes)+"\\n\\n","Role label(s): "+", ".join(f"`{x}`" for x in roles)+"\\n\\n","Historical path(s): "+", ".join(f"`{p}`" for p in paths)+f"\\n\\nBytes: {len(raw)}\\n\\n"]\n        if t is None:parts.append("Non-UTF8 content remains addressable by Git blob SHA.\\n\\n");continue\n        f=fence(t);parts.append(f+"\\n"+t+("" if t.endswith("\\n") else "\\n")+f+"\\n\\n")\n'''
+          s=s[:ls]+loop+s[le:]
+          s=s.replace('"\\n## 4. Verbatim result/evidence corpus from complete reachable Git history\\n\\n"','"\\n## 4. Normalized verbatim scientific/data corpus from complete reachable Git history\\n\\n"',1)
+          compile(s,str(p),'exec')
+          p.write_text(s,encoding='utf-8')
+          PY
+
+          for f in .github/workflows/*; do
+            base=$(basename "$f")
+            [[ "$base" == spider-codex-archive.yml ]] || rm -f "$f"
+          done
+          git config user.name 'SPIDER Codex Archivist'
+          git config user.email 'actions@users.noreply.github.com'
+          git add tools/build_spider_knowledge_codex.py .github/workflows
+          git commit -m 'codex: normalize lane data and remove copied workflows'
+          git push origin HEAD:archive/spider-codex-ultimate
+
+      - name: Remove temporary workflow from main
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          sha=$(gh api "repos/${GITHUB_REPOSITORY}/contents/.github/workflows/codex-normalize-once.yml?ref=main" --jq .sha)
+          gh api -X DELETE "repos/${GITHUB_REPOSITORY}/contents/.github/workflows/codex-normalize-once.yml" -f message='chore: remove one-shot Codex normalizer' -f sha="$sha" -f branch=main >/dev/null
