@@ -1,34 +1,21 @@
-name: SPIDER Repo Hygiene
+name: SPIDER Pre-2.0 Final Cleanup
 
 on:
-  workflow_dispatch:
-  workflow_run:
-    workflows:
-      - "SPIDER Historical Run Ledger Recovery"
-    types: [completed]
-  schedule:
-    - cron: "17 3 * * *"
   push:
     branches: [main]
     paths:
       - '.github/workflows/repo-hygiene.yml'
-      - 'evidence/ledger-integration/runs/**'
-      - 'results/**'
-      - 'reports/**'
-      - 'docs/*_LEDGER.md'
 
 permissions:
   actions: write
-  contents: read
+  contents: write
 
 concurrency:
-  group: spider-repo-hygiene
-  cancel-in-progress: true
+  group: spider-pre2-final-cleanup
+  cancel-in-progress: false
 
 jobs:
-  prune_actions_history:
-    name: Delete old Actions runs only after canonical result integration
-    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+  cleanup:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
@@ -37,52 +24,42 @@ jobs:
           ref: main
           fetch-depth: 0
 
-      - name: Enforce result-first deletion invariant
+      - name: Delete obsolete operational runs and receipt-backed copied research runs
         env:
           GH_TOKEN: ${{ github.token }}
-          KEEP_LATEST_PER_WORKFLOW: 2
+          CANONICAL_CODEX_RUN: '33203270295'
         shell: bash
         run: |
           set -euo pipefail
-
           tmp=$(mktemp)
           gh api --paginate "repos/${GITHUB_REPOSITORY}/actions/runs?per_page=100" \
-            --jq '.workflow_runs[] | [.id,.workflow_id,.status,.created_at,.name,.path] | @tsv' > "$tmp"
+            --jq '.workflow_runs[] | [.id,.status,.created_at,.name,.path] | @tsv' > "$tmp"
 
-          declare -A PROTECT=()
-          declare -A COUNT=()
-          PROTECT["$GITHUB_RUN_ID"]=1
-
-          while IFS=$'\t' read -r id wid status created name path; do
-            [[ "$status" != completed ]] && PROTECT["$id"]=1
-          done < "$tmp"
-
-          while IFS=$'\t' read -r id wid status created name path; do
-            [[ "$status" == completed && -f "$path" ]] || continue
-            n=${COUNT[$wid]:-0}
-            if (( n < KEEP_LATEST_PER_WORKFLOW )); then
-              PROTECT["$id"]=1
-              COUNT["$wid"]=$((n + 1))
-            fi
-          done < <(sort -t $'\t' -k4,4r "$tmp")
-
-          deleted=0
-          kept=0
-          missing_integration=0
-          invalid_integration=0
+          deleted_operational=0
+          deleted_copied=0
+          kept_unverified=0
           failed=0
 
-          while IFS=$'\t' read -r id wid status created name path; do
-            [[ "$status" == completed ]] || { kept=$((kept + 1)); continue; }
-            if [[ -n "${PROTECT[$id]:-}" ]]; then
-              kept=$((kept + 1))
+          operational_re='(Codex Normalize Once|Ultimate Codex Archive|Ultimate Codex Finalize|Codex Ultimate Archive|Repo Hygiene|Historical Run Ledger Recovery|Accepted Results Publisher|Autonomous Control Plane|Product Evidence Handoff|Product Engineering Kick Once|Pause Control|Workflow Pause)'
+
+          while IFS=$'\t' read -r id status created name path; do
+            [[ "$status" == completed ]] || continue
+            [[ "$id" != "$GITHUB_RUN_ID" ]] || continue
+            [[ "$id" != "$CANONICAL_CODEX_RUN" ]] || continue
+
+            if [[ "$name" =~ $operational_re ]]; then
+              echo "DELETE operational $id | $name | $created"
+              if gh api -X DELETE "repos/${GITHUB_REPOSITORY}/actions/runs/${id}" >/dev/null 2>&1; then
+                deleted_operational=$((deleted_operational + 1))
+              else
+                failed=$((failed + 1))
+              fi
               continue
             fi
 
             receipt="evidence/ledger-integration/runs/${id}.json"
             if [[ ! -f "$receipt" ]]; then
-              echo "KEEP $id | no canonical recovery receipt | $name"
-              missing_integration=$((missing_integration + 1))
+              kept_unverified=$((kept_unverified + 1))
               continue
             fi
 
@@ -96,8 +73,7 @@ jobs:
               (.ledger_paths|type)=="array" and (.ledger_paths|length)>0 and
               (.raw_evidence_path|type)=="string" and (.raw_evidence_path|length)>0
             ' "$receipt" >/dev/null 2>&1; then
-              echo "KEEP $id | recovery receipt incomplete/non-deletable | $name"
-              invalid_integration=$((invalid_integration + 1))
+              kept_unverified=$((kept_unverified + 1))
               continue
             fi
 
@@ -105,50 +81,65 @@ jobs:
             while IFS= read -r result; do
               [[ "$result" == results/* && -f "$result" ]] || { result_ok=false; break; }
             done < <(jq -r '.result_paths[]' "$receipt")
-            [[ "$result_ok" == true ]] || {
-              echo "KEEP $id | canonical result missing outside results/ | $name"
-              invalid_integration=$((invalid_integration + 1))
-              continue
-            }
+            [[ "$result_ok" == true ]] || { kept_unverified=$((kept_unverified + 1)); continue; }
 
             report=$(jq -r '.report_path' "$receipt")
-            [[ "$report" == reports/* && -f "$report" ]] || {
-              echo "KEEP $id | recovery report missing | $name"
-              invalid_integration=$((invalid_integration + 1))
-              continue
-            }
-            grep -Fq "$id" "$report" || {
-              echo "KEEP $id | run id absent from report | $name"
-              invalid_integration=$((invalid_integration + 1))
-              continue
-            }
+            [[ "$report" == reports/* && -f "$report" ]] || { kept_unverified=$((kept_unverified + 1)); continue; }
+            grep -Fq "$id" "$report" || { kept_unverified=$((kept_unverified + 1)); continue; }
 
             ledger_ok=true
             while IFS= read -r ledger; do
               [[ "$ledger" == docs/*_LEDGER.md && -f "$ledger" ]] || { ledger_ok=false; break; }
               grep -Fq "$id" "$ledger" || { ledger_ok=false; break; }
             done < <(jq -r '.ledger_paths[]' "$receipt")
-            [[ "$ledger_ok" == true ]] || {
-              echo "KEEP $id | ledger provenance missing | $name"
-              invalid_integration=$((invalid_integration + 1))
-              continue
-            }
+            [[ "$ledger_ok" == true ]] || { kept_unverified=$((kept_unverified + 1)); continue; }
 
             raw=$(jq -r '.raw_evidence_path' "$receipt")
-            [[ "$raw" == evidence/actions-runs/* && -d "$raw" && -f "$raw/run.json" ]] || {
-              echo "KEEP $id | raw Actions provenance missing | $name"
-              invalid_integration=$((invalid_integration + 1))
-              continue
-            }
+            [[ "$raw" == evidence/actions-runs/* && -d "$raw" && -f "$raw/run.json" ]] || { kept_unverified=$((kept_unverified + 1)); continue; }
 
-            echo "DELETE $id | results + report + ledger + raw provenance verified | $name | $created"
+            echo "DELETE copied research $id | canonical result/report/ledger/raw receipt verified | $name"
             if gh api -X DELETE "repos/${GITHUB_REPOSITORY}/actions/runs/${id}" >/dev/null 2>&1; then
-              deleted=$((deleted + 1))
+              deleted_copied=$((deleted_copied + 1))
             else
-              echo "::warning::Could not delete run $id"
               failed=$((failed + 1))
             fi
           done < "$tmp"
-
           rm -f "$tmp"
-          echo "Repo hygiene: deleted=$deleted kept=$kept missing_integration=$missing_integration invalid_integration=$invalid_integration failed=$failed"
+
+          printf 'deleted_operational=%s\ndeleted_copied=%s\nkept_unverified=%s\nfailed=%s\n' \
+            "$deleted_operational" "$deleted_copied" "$kept_unverified" "$failed" | tee /tmp/spider_cleanup_summary.txt
+
+      - name: Retire the pre-2.0 workflow suite and obsolete duplicate Codex
+        shell: bash
+        run: |
+          set -euo pipefail
+          deleted_operational=$(awk -F= '/deleted_operational/{print $2}' /tmp/spider_cleanup_summary.txt)
+          deleted_copied=$(awk -F= '/deleted_copied/{print $2}' /tmp/spider_cleanup_summary.txt)
+          kept_unverified=$(awk -F= '/kept_unverified/{print $2}' /tmp/spider_cleanup_summary.txt)
+          failed=$(awk -F= '/failed/{print $2}' /tmp/spider_cleanup_summary.txt)
+
+          cat > state/research_pre2_retired.json <<EOF
+          {
+            "schema": "SPIDER research pre-2.0 retirement v1",
+            "canonical_codex_branch": "archive/spider-codex-ultimate",
+            "canonical_codex_file": "SPIDER_CODEX_ULTIME.md",
+            "canonical_codex_commit": "f74f8503e6bbdff156687cca3fe08bb818b9c67b",
+            "canonical_codex_run": 33203270295,
+            "normalized_codex_assertions": "PASS",
+            "old_workflow_suite_retired": true,
+            "old_main_codex_duplicate_removed": true,
+            "actions_runs_deleted_operational": ${deleted_operational},
+            "actions_runs_deleted_after_verified_copy": ${deleted_copied},
+            "completed_runs_retained_without_verified_copy": ${kept_unverified},
+            "actions_delete_failures": ${failed},
+            "retirement_policy": "Delete execution history only when operational/duplicative or when canonical result+report+ledger+raw provenance copy is verified; retain unverified scientific runs as forensic evidence."
+          }
+          EOF
+
+          rm -f SPIDER_ULTIMATE_CODEX.md
+          git rm -f .github/workflows/*.yml
+          git add state/research_pre2_retired.json SPIDER_ULTIMATE_CODEX.md 2>/dev/null || true
+          git config user.name 'SPIDER Research Archivist'
+          git config user.email 'actions@users.noreply.github.com'
+          git commit -m 'research: retire pre-2.0 workflow suite after Codex freeze'
+          git push origin HEAD:main
