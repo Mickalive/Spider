@@ -8,7 +8,7 @@ ROOT=Path.cwd(); OUT=ROOT/"SPIDER_CODEX_ULTIME.md"
 REPO=os.getenv("GITHUB_REPOSITORY","Mickalive/Spider"); TOKEN=os.getenv("GITHUB_TOKEN","")
 MAX=90*1024*1024; EXT={".md",".json",".txt",".csv",".tsv",".yaml",".yml",".log"}
 LANES={"graph","physics","intel","runtime","product","frontier","audit","cto"}
-K=re.compile(r"(result|report|audit|gate|verdict|metric|benchmark|measurement|finding|experiment|hypothesis|evidence|evaluation|falsification|claim|ledger|outcome|score|test)",re.I)
+K=re.compile(r"(charter|question|mission|prereg|registration|protocol|method|design|plan|freeze|seal|baseline|power|result|report|audit|gate|verdict|metric|benchmark|measurement|finding|experiment|hypothesis|evidence|evaluation|falsification|claim|ledger|outcome|score|test|manifest|state|decision|limitation|provenance|receipt|handoff|taxonomy|registry)",re.I)
 NOISE=re.compile(r"(watchdog|supervisor|control plane|run evidence curator|repo hygiene|publisher|evidence handoff|model router|model health|reaper|purge|maintenance|archive)",re.I)
 SUBWF=re.compile(r"(graph|physics|intel|runtime|product|frontier|critical cto council|research lane|engineering loop|failure review|beta)",re.I)
 
@@ -33,18 +33,72 @@ def action_runs():
         if page>100:raise RuntimeError("refusing silent Actions truncation")
     return out
 
+ROLE_ORDER={"charter_question":0,"prereg_protocol":1,"result_measurement":2,"report_verdict":3,"audit_gate":4,"state_provenance":5,"context_input":6}
+LANE_ORDER={"graph":0,"physics":1,"intel":2,"runtime":3,"product":4,"frontier":5,"audit":6,"cto":7,"cross-lane":8,"unknown":9}
+RESEARCH_LANES={"graph","physics","intel","runtime","product","frontier"}
+
+def lane_for_path(p):
+    p=p.replace("\\","/").lower(); parts=p.split("/")
+    if parts and parts[0] in RESEARCH_LANES:return parts[0]
+    if len(parts)>=2 and parts[0] in {"reports","results","state","directives"} and parts[1] in LANES:return parts[1]
+    if len(parts)>=3 and parts[0]=="data" and parts[1]=="manifests" and parts[2] in LANES:return parts[2]
+    for lane in ("frontier","intel","physics","graph","runtime","product","audit","cto"):
+        if re.search(rf"(^|[/_.-]){re.escape(lane)}([/_.-]|$)",p):return lane
+    return "cross-lane"
+
+def role_for_path(p):
+    p=p.replace("\\","/").lower(); name=Path(p).name
+    if "/audit/" in p or re.search(r"(^|[_\-.])(audit|gate)([_\-.]|$)",name):return "audit_gate"
+    if p.startswith("results/"):return "result_measurement"
+    if p.startswith("reports/"):return "report_verdict"
+    if "/charters/" in p or "charter" in name or re.fullmatch(r"cto_v\d+\.json",name):return "charter_question"
+    if any(x in p for x in ("/prereg/","/protocol/","/method/")) or re.search(r"(prereg|registration|protocol|method|design|freeze|seal|baseline|power|plan)",name):return "prereg_protocol"
+    if re.search(r"(result|metric|measurement|benchmark|evaluation|score|outcome)",name):return "result_measurement"
+    if re.search(r"(report|verdict|finding|falsif|claim|decision|handoff)",name):return "report_verdict"
+    if p.startswith(("state/","data/manifests/","evidence/")) or re.search(r"(manifest|ledger|provenance|receipt|evidence|state)",name):return "state_provenance"
+    return "context_input"
+
 def wanted_path(p):
     p=p.replace("\\","/")
     if Path(p).suffix.lower() not in EXT:return False
-    if p.startswith((".github/",".opencode/","tools/","archive/","evidence/run-memory/")) or p=="SPIDER_CODEX_ULTIME.md":return False
+    if p.startswith((".github/",".opencode/","tools/","archive/","evidence/run-memory/")) or p in {"SPIDER_CODEX_ULTIME.md","SPIDER_ULTIMATE_CODEX.md"}:return False
+    parts=p.split("/")
+    if parts and parts[0].lower() in RESEARCH_LANES:return True
     if p.startswith("results/"):return p!="results/CATALOG.json"
-    if p.startswith("reports/"):
-        s=p.split("/"); return len(s)>2 and s[1].lower() in LANES
+    if p.startswith("reports/"):return len(parts)>2 and parts[1].lower() in LANES
+    if p.startswith("state/"):return len(parts)>2 and parts[1].lower() in LANES
+    if p.startswith("data/manifests/"):return True
     if p.startswith("evidence/frontier-one-shot/"):return True
-    if p.startswith("docs/"):return bool(K.search(Path(p).name))
-    if p.startswith("state/"):return bool(re.search(r"(gate|verdict|audit|result|measurement|evidence|finding|evaluation|falsification|benchmark)",Path(p).name,re.I))
-    if p.split("/",1)[0].lower() in {"graph","physics","intel","runtime","product","frontier"}:return bool(K.search(Path(p).name))
+    if p.startswith(("docs/","directives/")):return bool(K.search(p))
     return False
+
+def normalized_meta(paths):
+    lanes=sorted({lane_for_path(x) for x in paths},key=lambda x:(LANE_ORDER.get(x,99),x))
+    roles=sorted({role_for_path(x) for x in paths},key=lambda x:(ROLE_ORDER.get(x,99),x))
+    return (lanes[0] if lanes else "unknown",roles[0] if roles else "context_input",lanes,roles)
+
+def coverage_rows(bs):
+    c=Counter()
+    for paths in bs.values():
+        _,_,lanes,roles=normalized_meta(paths)
+        for lane in lanes:
+            for role in roles:c[(lane,role)]+=1
+    return c
+
+def assert_normalized_coverage(bs):
+    paths={p for ps in bs.values() for p in ps}
+    checks={
+      "frontier_charter":any(p.startswith("frontier/") and "/charters/" in p.lower() for p in paths),
+      "frontier_prereg":any(p.startswith("frontier/") and "prereg" in p.lower() for p in paths),
+      "frontier_report":any(p.startswith("reports/frontier/") for p in paths),
+      "intel_namespace":any(p.startswith("intel/") for p in paths),
+      "intel_report":any(p.startswith("reports/intel/") for p in paths),
+      "physics_report":any(p.startswith("reports/physics/") for p in paths),
+      "graph_report":any(p.startswith("reports/graph/") for p in paths),
+      "runtime_report":any(p.startswith("reports/runtime/") for p in paths)}
+    missing=[k for k,v in checks.items() if not v]
+    if missing:raise RuntimeError("normalized Codex coverage missing: "+", ".join(missing))
+    return checks
 
 def blob(oid):
     b=subprocess.check_output(["git","cat-file","blob",oid],cwd=ROOT)
@@ -163,16 +217,17 @@ LESSONS="""## 2. Product-architecture lessons established by pre-2.0
 def main():
     sh("git","fetch","origin","+refs/heads/*:refs/remotes/origin/*","+refs/tags/*:refs/tags/*","--force","--prune")
     refs=[l for l in sh("git","for-each-ref","--format=%(refname)","refs/remotes/origin","refs/tags").splitlines() if not l.endswith("/HEAD")]
-    bs=substantive_blobs(); mem,excluded=run_memories(); ars=action_runs()
+    bs=substantive_blobs(); checks=assert_normalized_coverage(bs); role_counts=coverage_rows(bs); mem,excluded=run_memories(); ars=action_runs()
     wf=Counter(str(r.get("name") or "") for r in ars); sub=sum(1 for r in ars if SUBWF.search(str(r.get("name") or "")))
     parts=["# SPIDER CODEX ULTIME — KNOWLEDGE BASE BEFORE ARCHITECTURE 2.0\n\n",
       f"Generated: {dt.datetime.now(dt.timezone.utc).isoformat()}\n\n",
       "This is the single canonical reading document for SPIDER knowledge accumulated from project start through the frozen pre-2.0 system. It reads the complete reachable Git history, including `main`, historical `lab/*` work branches, `cycle/*` branches, Frontier/Product/Runtime branches and tags. It writes to none of them.\n\n",
-      "**Included:** experiments, measurements, benchmarks, audits, gates, falsifications, negative/BLOCKED/invalid results, Runtime/Product evaluations, Frontier research, materially directional CTO findings, and architecture failures that matter for the product.\n\n",
+      "**Normalization rule:** every research namespace is treated symmetrically. Textual scientific/data artifacts under `graph/`, `physics/`, `intel/`, `runtime/`, `product/`, and `frontier/` are retained regardless of filename, alongside canonical results/reports/state/manifests. Frontier charters/preregistrations and Intel namespace inputs therefore cannot disappear merely because their filenames lack `result` or `report`.\n\n",
+      "**Organization only:** generated lane/role labels never rewrite source evidence; every selected source artifact remains verbatim and SHA-deduplicated.\n\n",
       "**Excluded as useless execution noise:** watchdog ticks, no-op supervisors, routine heartbeats, provider/model retries, duplicate orchestration, curator/publisher/hygiene bookkeeping. The raw 42.7 MB forensic snapshot remains recoverable at commit `ffedfd81872f9dd05641378a4c37aaa48c2a2ddc`.\n\n",
       "**No shortening:** every selected substantive Git artifact and every selected substantive run-memory record is reproduced verbatim. Identical blobs are deduplicated by SHA with all historical paths retained.\n\n",
       HIST,"\n",LESSONS,
-      "\n## 3. Coverage manifest\n\n",
+      "\n## 3. Coverage manifest and normalized lane/role map\n\n",
       f"- Reachable refs/branch heads scanned: **{len(refs)}**\n",
       f"- Unique substantive Git result/evidence blobs: **{len(bs)}**\n",
       f"- Current substantive per-run memories retained verbatim: **{len(mem)}**\n",
@@ -181,10 +236,18 @@ def main():
       "- Deleted-run recovery is reproduced verbatim in section 6; its recorded boundary is 102 deleted runs: 98 `NONE_MATERIAL`, 4 old CTO Council runs `UNKNOWN`, 0 `MATERIAL_RISK`. The four unknowns remain explicit.\n",
       "\n### 3.1 Workflow-family counts (inventory, not knowledge)\n\n| Workflow | Runs |\n|---|---:|\n"]
     for n,c in sorted(wf.items(),key=lambda x:(-x[1],x[0])):parts.append(f"| {n.replace('|','/')} | {c} |\n")
-    parts+=["\n## 4. Verbatim result/evidence corpus from complete reachable Git history\n\n"]
-    for i,o in enumerate(sorted(bs,key=lambda x:(sorted(bs[x])[0],x)),1):
-        raw,t=blob(o); paths=sorted(bs[o])
-        parts+=[f"### 4.{i} — blob `{o}`\n\n","Historical path(s): "+", ".join(f"`{p}`" for p in paths)+f"\n\nBytes: {len(raw)}\n\n"]
+    parts+=["\n### 3.2 Normalized unique-blob counts by lane and role\n\n","| Lane | Role | Unique blobs |\n|---|---|---:|\n"]
+    for (lane,role),count in sorted(role_counts.items(),key=lambda x:(LANE_ORDER.get(x[0][0],99),ROLE_ORDER.get(x[0][1],99),x[0])):parts.append(f"| {lane} | {role} | {count} |\n")
+    parts.append("\nNormalization assertions: "+", ".join(f"{k}=PASS" for k in sorted(checks))+".\n")
+    parts+=["\n## 4. Normalized verbatim scientific/data corpus from complete reachable Git history\n\n"]
+    items=[]
+    for o,ps in bs.items():
+        primary_lane,primary_role,lanes,roles=normalized_meta(ps)
+        items.append((primary_lane,primary_role,sorted(ps)[0],o,sorted(ps),lanes,roles))
+    items.sort(key=lambda x:(LANE_ORDER.get(x[0],99),ROLE_ORDER.get(x[1],99),x[2],x[3]))
+    for i,(primary_lane,primary_role,_,o,paths,lanes,roles) in enumerate(items,1):
+        raw,t=blob(o)
+        parts+=[f"### 4.{i} — {primary_lane} / {primary_role} — blob `{o}`\n\n","Lane label(s): "+", ".join(f"`{x}`" for x in lanes)+"\n\n","Role label(s): "+", ".join(f"`{x}`" for x in roles)+"\n\n","Historical path(s): "+", ".join(f"`{p}`" for p in paths)+f"\n\nBytes: {len(raw)}\n\n"]
         if t is None:parts.append("Non-UTF8 content remains addressable by Git blob SHA.\n\n");continue
         f=fence(t);parts.append(f+"\n"+t+("" if t.endswith("\n") else "\n")+f+"\n\n")
     parts+=["\n## 5. Substantive per-run memories retained verbatim\n\n"]
