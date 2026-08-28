@@ -6,7 +6,7 @@ on:
     branches:
       - archive/spider-codex-ultimate
     paths:
-      - tools/build_spider_codex.py
+      - tools/build_spider_knowledge_codex.py
       - .github/workflows/spider-codex-archive.yml
 
 permissions:
@@ -28,10 +28,10 @@ jobs:
           ref: archive/spider-codex-ultimate
           fetch-depth: 0
 
-      - name: Compile complete pre-2.0 evidence corpus
+      - name: Compile substantive pre-2.0 SPIDER knowledge
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: python3 tools/build_spider_codex.py
+        run: python3 tools/build_spider_knowledge_codex.py
 
       - name: Validate Codex invariants
         run: |
@@ -40,11 +40,12 @@ jobs:
           grep -q 'Historical experiments preserved' SPIDER_CODEX_ULTIME.md
           grep -q 'GitHub Actions run inventory' SPIDER_CODEX_ULTIME.md
           grep -q 'Verbatim result/evidence corpus' SPIDER_CODEX_ULTIME.md
+          grep -q 'Excluded as useless execution noise' SPIDER_CODEX_ULTIME.md
           bytes=$(wc -c < SPIDER_CODEX_ULTIME.md)
           echo "Codex bytes: $bytes"
           test "$bytes" -lt 94371840
 
-      - name: Persist Codex only on archive branch
+      - name: Persist canonical knowledge Codex only on archive branch
         run: |
           git config user.name 'SPIDER Codex Archivist'
           git config user.email 'actions@users.noreply.github.com'
@@ -53,5 +54,5 @@ jobs:
             echo 'Codex unchanged.'
             exit 0
           fi
-          git commit -m 'codex: freeze complete pre-2.0 evidence archive'
+          git commit -m 'codex: freeze substantive pre-2.0 SPIDER knowledge'
           git push origin HEAD:archive/spider-codex-ultimate
