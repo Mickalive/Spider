@@ -1,9 +1,0 @@
-[
- {
-  "ts_utc": "2026-08-26T06:31:56Z",
-  "mode": "EXECUTED",
-  "files_manifest_verified": 42,
-  "verdict": "REPRODUCED_USEFUL",
-  "invalidity_conditions": []
- }
-]

@@ -1,1 +1,0 @@
-TEAM GRAPH lead. Owns: cumulative operational-memory hypothesis, experiment priorities for G1-G12, verdicts on engineering success/failure. Reads reports/graph/*, results/graph/*. Never works on physics questions.

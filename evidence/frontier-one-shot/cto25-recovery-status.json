@@ -1,7 +1,0 @@
-{
-  "expected_head": "1338a296115c2c4cdec592706c9eb30a5c7cae3b",
-  "actual_head": "3e11f0c8d6d6b424e1940e3fd28406e283b7ee5f",
-  "database_id": "32909350978",
-  "head_matches": false,
-  "recovery_kind": "mechanical_run_number_lookup"
-}

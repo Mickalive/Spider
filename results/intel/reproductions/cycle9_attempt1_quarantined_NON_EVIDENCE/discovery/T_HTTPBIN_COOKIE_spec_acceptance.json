@@ -1,6 +1,0 @@
-{
- "openapi": "3.0.x-empty-dspec-missing-c8-acceptance",
- "host_origin": "httpbin.org",
- "paths": {},
- "securitySchemes": {}
-}

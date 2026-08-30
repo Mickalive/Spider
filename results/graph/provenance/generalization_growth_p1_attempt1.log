@@ -1,6 +1,0 @@
-[preflight] {'books': True, 'quotes': True}
-[growth] GB2_books_hf_category attempt1 success                        act=14 novel=14 solved_by=exploration
-[growth] GB3_books_hf_page2 attempt1 partial                        act=60 novel=60 solved_by=unsolved
-[growth] GB3_books_hf_page2 attempt2 partial                        act=60 novel=60 solved_by=unsolved
-[growth] STOP RULE: GB3_books_hf_page2 failed twice
-[growth] GB4_books_hf_p2_openbook attempt1 partial                        act=60 novel=60 solved_by=unsolved
