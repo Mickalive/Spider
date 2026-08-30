@@ -9,6 +9,7 @@ REPO=os.getenv('GITHUB_REPOSITORY','Mickalive/Spider'); TOKEN=os.getenv('GITHUB_
 START='<!-- SPIDER_LEGACY_ACTIONS_FORENSIC_START -->'; END='<!-- SPIDER_LEGACY_ACTIONS_FORENSIC_END -->'
 SIGNAL=re.compile(r'(error|exception|traceback|fail|blocked|invalid|inconclusive|falsif|verdict|metric|score|accuracy|speedup|median|mean|confidence|effect|claim|hypothesis|measurement|dataset|trajectory|transition|novel|causal|reuse|inherit|delta|freshness|witness|timeout|permission|denied|rate.?limit|network|provider)',re.I)
 NOISE=re.compile(r'(runner image|operating system|github_token permissions|prepare workflow|checkout@|fetching the repository|safe directory|post job cleanup|cleaning up orphan|new branch|new tag|syncing repository)',re.I)
+SUBWF=re.compile(r'(graph|physics|intel|runtime|product|frontier|critical cto council|research lane|engineering loop|failure review|beta)',re.I)
 
 def req(url,binary=False):
     q=urllib.request.Request(url,headers={'Accept':'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'})
@@ -30,8 +31,7 @@ def all_runs():
     return out
 
 def run_memory_ids():
-    ids=set()
-    s=subprocess.run(['git','ls-tree','-r','origin/main','evidence/run-memory/runs'],cwd=ROOT,text=True,stdout=subprocess.PIPE).stdout
+    ids=set(); s=subprocess.run(['git','ls-tree','-r','origin/main','evidence/run-memory/runs'],cwd=ROOT,text=True,stdout=subprocess.PIPE).stdout
     for line in s.splitlines():
         try:p=line.split('\t',1)[1]
         except Exception:continue
@@ -39,9 +39,12 @@ def run_memory_ids():
         if m:ids.add(int(m.group(1)))
     return ids
 
-def refs_for(rid):
-    s=subprocess.run(['git','for-each-ref','--format=%(refname)','refs/remotes/origin','refs/tags'],cwd=ROOT,text=True,stdout=subprocess.PIPE).stdout
-    return [x for x in s.splitlines() if f'/{rid}/' in x or x.endswith(f'/{rid}')]
+def all_refs():
+    return subprocess.run(['git','for-each-ref','--format=%(refname)','refs/remotes/origin','refs/tags'],cwd=ROOT,text=True,stdout=subprocess.PIPE).stdout.splitlines()
+
+def refs_for(rid,refs):
+    needle=f'/{rid}/'; end=f'/{rid}'
+    return [x for x in refs if needle in x or x.endswith(end)]
 
 def clean(s):
     s=re.sub(r'^\ufeff?\d{4}-\d\d-\d\dT[^ ]+Z\s+','',s.rstrip()); s=re.sub(r'\x1b\[[0-9;]*m','',s)
@@ -64,18 +67,20 @@ def signal_lines(raw):
             if x and SIGNAL.search(x) and not NOISE.search(x):out.append(x)
     return out
 
-def live_record(r,mem_ids):
-    rid=int(r['id']); refs=refs_for(rid); has_mem=rid in mem_ids
-    jobs=req(f'https://api.github.com/repos/{REPO}/actions/runs/{rid}/jobs?per_page=100')
-    bad=[]
+def non_success_steps(rid,conclusion):
+    if conclusion in (None,'success','skipped'):return []
+    jobs=req(f'https://api.github.com/repos/{REPO}/actions/runs/{rid}/jobs?per_page=100'); bad=[]
     for j in (jobs.get('jobs',[]) if isinstance(jobs,dict) else []):
         steps=[s.get('name') for s in j.get('steps',[]) if s.get('conclusion') not in (None,'success','skipped')]
         if j.get('conclusion') not in (None,'success','skipped') or steps:bad.append({'job':j.get('name'),'conclusion':j.get('conclusion'),'steps':steps})
-    # Minimal deletion ledger. Workflow-family counts already live in section 3; substantive run-memory is already in section 5.
-    meta={'id':rid,'conclusion':r.get('conclusion'),'head_sha':r.get('head_sha'),'snapshot_refs':refs,'run_memory':has_mem,'non_success':bad}
+    return bad
+
+def live_record(r,mem_ids,refs):
+    rid=int(r['id']); snap=refs_for(rid,refs); has_mem=rid in mem_ids; conclusion=r.get('conclusion')
+    meta={'id':rid,'conclusion':conclusion,'head_sha':r.get('head_sha'),'snapshot_refs':snap,'run_memory':has_mem,'non_success':non_success_steps(rid,conclusion)}
     signals=[]
-    # Only runs with neither a durable run-memory nor a Git snapshot can lose unique substantive information on deletion.
-    if not has_mem and not refs:
+    # Only a substantive run with neither durable run-memory nor Git snapshot can lose unique scientific information on deletion.
+    if not has_mem and not snap and SUBWF.search(str(r.get('name') or '')):
         signals=signal_lines(req(f'https://api.github.com/repos/{REPO}/actions/runs/{rid}/logs',binary=True))
     return {'meta':meta,'signals':signals}
 
@@ -88,27 +93,21 @@ def parse_previous():
         try:
             d=json.loads(m.group(1))
             for row in d.get('runs',[]):rec[int(row['id'])]={'meta':row,'signals':[]}
-            for g in d.get('unique_execution_signals',[]):
-                for rid in g.get('run_ids',[]):rec.setdefault(int(rid),{'meta':{'id':int(rid)},'signals':[]})['signals'].append(g.get('example') or g.get('signature') or '')
-        except Exception:pass
-    # Defensive import of an older verbose appendix if it ever landed.
-    p=re.compile(r'<!-- RUN_FORENSIC:(\d+):START -->.*?```json\n(.*?)\n```.*?```text\n(.*?)\n```.*?<!-- RUN_FORENSIC:\1:END -->',re.S)
-    for m in p.finditer(t):
-        rid=int(m.group(1))
-        if rid in rec:continue
-        try:meta=json.loads(m.group(2)); rec[rid]={'meta':{'id':rid,'conclusion':meta.get('conclusion'),'head_sha':meta.get('head_sha'),'snapshot_refs':meta.get('reachable_snapshot_refs',[]),'run_memory':False,'non_success':[]},'signals':[x for x in m.group(3).splitlines() if x and not x.startswith('--- log:')]}
+            for key in ('unique_uncovered_execution_signals','unique_execution_signals'):
+                for g in d.get(key,[]):
+                    for rid in g.get('run_ids',[]):rec.setdefault(int(rid),{'meta':{'id':int(rid)},'signals':[]})['signals'].append(g.get('example') or g.get('signature') or '')
         except Exception:pass
     m=re.search(r'<!-- FORENSIC_PRUNE_RECEIPT_START -->(.*?)<!-- FORENSIC_PRUNE_RECEIPT_END -->',t,re.S)
     if m:receipt='<!-- FORENSIC_PRUNE_RECEIPT_START -->'+m.group(1)+'<!-- FORENSIC_PRUNE_RECEIPT_END -->'
     return rec,receipt
 
 def main():
-    mem_ids=run_memory_ids(); rec,receipt=parse_previous(); failures=[]; new=0
+    mem_ids=run_memory_ids(); refs=all_refs(); rec,receipt=parse_previous(); failures=[]; new=0
     current=[x for x in all_runs() if int(x.get('id',0))!=CURRENT]
     for r in sorted(current,key=lambda x:int(x.get('id',0))):
         rid=int(r['id'])
         if rid in rec:continue
-        try:rec[rid]=live_record(r,mem_ids);new+=1
+        try:rec[rid]=live_record(r,mem_ids,refs);new+=1
         except Exception as e:failures.append({'run_id':rid,'error':f'{type(e).__name__}: {e}'})
     base=OUT.read_text('utf-8'); base=base.split(START,1)[0].rstrip()+'\n' if START in base else base
     canon={clean(x) for x in base.splitlines() if clean(x)}; groups=defaultdict(lambda:{'ids':set(),'example':''}); rows=[]
@@ -122,11 +121,11 @@ def main():
             groups[k]['ids'].add(rid); groups[k]['example']=groups[k]['example'] or x
     unique=[{'signature':k,'example':v['example'],'run_count':len(v['ids']),'run_ids':sorted(v['ids'])} for k,v in sorted(groups.items(),key=lambda kv:(-len(kv[1]['ids']),kv[0]))]
     uncovered=sum(1 for r in rows if not r['run_memory'] and not r['snapshot_refs'])
-    packed={'schema':'SPIDER compact deletion ledger v4','runs':rows,'unique_uncovered_execution_signals':unique,'uncovered_runs_without_memory_or_snapshot':uncovered,'archival_failures':failures,'current_run_excluded':CURRENT}
-    sec=START+'\n\n## 7. Compact legacy Actions deletion ledger\n\nPurpose: make every pre-2.0 Actions run deletable without duplicating the scientific corpus. Section 3 already preserves workflow-family inventory; section 4 preserves substantive Git artifacts by SHA; section 5 preserves substantive run-memory. This ledger therefore stores only the minimal run→evidence bridge needed after deletion: run ID, conclusion, immutable head SHA, durable snapshot refs, whether a run-memory exists, and failing job/step names. Raw log signal is retained only for runs with neither run-memory nor Git snapshot, then normalized and deduplicated across runs.\n\n'+f'- legacy_runs_covered: **{len(rows)}**\n- runs_without_memory_or_snapshot_checked_in_logs: **{uncovered}**\n- unique_nonredundant_uncovered_signatures: **{len(unique)}**\n- archival_failures: **{len(failures)}**\n\n<!-- COMPACT_FORENSIC_JSON_START -->\n'+json.dumps(packed,ensure_ascii=False,separators=(',',':'))+'\n<!-- COMPACT_FORENSIC_JSON_END -->\n\n'
+    packed={'schema':'SPIDER compact deletion ledger v5','runs':rows,'unique_uncovered_execution_signals':unique,'uncovered_runs_without_memory_or_snapshot':uncovered,'archival_failures':failures,'current_run_excluded':CURRENT}
+    sec=START+'\n\n## 7. Compact legacy Actions deletion ledger\n\nPurpose: make every pre-2.0 Actions run deletable without duplicating the scientific corpus. Section 3 preserves workflow-family inventory; section 4 preserves substantive Git artifacts by SHA; section 5 preserves substantive run-memory. This ledger stores only the minimal run→evidence bridge needed after deletion: run ID, conclusion, immutable head SHA, durable snapshot refs, whether a run-memory exists, and failing job/step names. Raw log signal is read only for substantive runs with neither run-memory nor Git snapshot, then normalized and deduplicated across runs.\n\n'+f'- legacy_runs_covered: **{len(rows)}**\n- runs_without_memory_or_snapshot: **{uncovered}**\n- unique_nonredundant_uncovered_signatures: **{len(unique)}**\n- archival_failures: **{len(failures)}**\n\n<!-- COMPACT_FORENSIC_JSON_START -->\n'+json.dumps(packed,ensure_ascii=False,separators=(',',':'))+'\n<!-- COMPACT_FORENSIC_JSON_END -->\n\n'
     if receipt:sec+=receipt+'\n\n'
     sec+=END+'\n'; out=base+sec
     if len(out.encode())>=90*1024*1024:raise RuntimeError('Codex hard limit exceeded')
     OUT.write_text(out,'utf-8'); Path('/tmp/forensic_archive_status.json').write_text(json.dumps({'archived_ids':sorted(rec),'failures':failures,'new':new},indent=2),'utf-8')
-    print(json.dumps({'legacy_runs_covered':len(rows),'uncovered_checked':uncovered,'unique_signatures':len(unique),'new':new,'failures':len(failures),'codex_bytes':len(out.encode())},indent=2))
+    print(json.dumps({'legacy_runs_covered':len(rows),'uncovered':uncovered,'unique_signatures':len(unique),'new':new,'failures':len(failures),'codex_bytes':len(out.encode())},indent=2))
 if __name__=='__main__':main()
