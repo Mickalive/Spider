@@ -33,23 +33,23 @@ jobs:
       - name: Preserve prior forensic appendix
         run: cp SPIDER_CODEX_ULTIME.md /tmp/SPIDER_CODEX_PREVIOUS.md
 
-      - name: Compile normalized substantive SPIDER knowledge
+      - name: Compile normalized final-state SPIDER knowledge
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python3 tools/build_spider_knowledge_codex.py
 
-      - name: Add compact nonredundant legacy Actions deletion ledger
+      - name: Fill only true Actions evidence gaps
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python3 tools/archive_actions_forensic.py
 
-      - name: Validate Codex invariants and deletion preconditions
+      - name: Validate canonical Codex before destructive cleanup
         run: |
           set -euo pipefail
           test -s SPIDER_CODEX_ULTIME.md
           grep -q '^# SPIDER CODEX ULTIME' SPIDER_CODEX_ULTIME.md
           grep -q 'Historical experiments preserved' SPIDER_CODEX_ULTIME.md
-          grep -q 'GitHub Actions run inventory' SPIDER_CODEX_ULTIME.md
+          grep -q 'Normalized experiment/result manifest' SPIDER_CODEX_ULTIME.md
           grep -q 'Normalized verbatim scientific/data corpus' SPIDER_CODEX_ULTIME.md
           grep -q 'frontier_charter=PASS' SPIDER_CODEX_ULTIME.md
           grep -q 'frontier_prereg=PASS' SPIDER_CODEX_ULTIME.md
@@ -63,18 +63,18 @@ jobs:
           import json
           s=json.load(open('/tmp/forensic_archive_status.json'))
           assert not s['failures'], f"forensic archival failures: {s['failures']}"
-          assert s['archived_ids'], 'no legacy runs archived; refusing destructive prune'
+          assert s['archived_ids'], 'no legacy runs archived; refusing destructive cleanup'
           PY
           bytes=$(wc -c < SPIDER_CODEX_ULTIME.md)
-          echo "Codex bytes before prune: $bytes"
+          echo "Codex bytes: $bytes"
           test "$bytes" -lt 94371840
 
-      - name: Persist canonical Codex before deletion
+      - name: Persist canonical Codex before deleting anything
         run: |
           git config user.name 'SPIDER Codex Archivist'
           git config user.email 'actions@users.noreply.github.com'
           git add SPIDER_CODEX_ULTIME.md
-          git commit -m 'codex: preserve compact legacy Actions deletion ledger'
+          git commit -m 'codex: freeze normalized pre2 knowledge before cleanup'
           git push origin HEAD:archive/spider-codex-ultimate
 
       - name: Delete every archived legacy Actions run
@@ -82,13 +82,65 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python3 tools/prune_archived_actions.py
 
-      - name: Persist deletion receipt in same Codex
-        if: always()
+      - name: Persist Actions deletion receipt
         run: |
           git add SPIDER_CODEX_ULTIME.md
-          if git diff --cached --quiet; then
-            echo 'No cleanup receipt delta.'
-            exit 0
+          if ! git diff --cached --quiet; then
+            git commit -m 'codex: record legacy Actions deletion receipt'
+            git push origin HEAD:archive/spider-codex-ultimate
           fi
-          git commit -m 'codex: record verified legacy Actions cleanup receipt'
+
+      - name: Remove all legacy research branches
+        run: |
+          set -euo pipefail
+          git ls-remote --heads origin | while read -r sha ref; do
+            branch="${ref#refs/heads/}"
+            case "$branch" in
+              main|archive/spider-codex-ultimate) ;;
+              *) echo "Deleting legacy branch $branch"; git push origin --delete "$branch" ;;
+            esac
+          done
+
+      - name: Clean legacy factory from main working tree
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/spider-main-clean
+          git worktree add /tmp/spider-main-clean origin/main
+          cd /tmp/spider-main-clean
+          git checkout -B main origin/main
+          git config user.name 'SPIDER Migration Archivist'
+          git config user.email 'actions@users.noreply.github.com'
+          find . -mindepth 1 -maxdepth 1 \
+            ! -name '.git' \
+            ! -name '.gitignore' \
+            ! -name 'README.md' \
+            ! -name 'SPIDER_MASTER_PROMPT.md' \
+            -exec rm -rf {} +
+          cat > README.md <<'EOF'
+          # SPIDER
+
+          Pre-2.0 research has been frozen into the single canonical file `SPIDER_CODEX_ULTIME.md` on branch `archive/spider-codex-ultimate`.
+
+          The legacy Graph / Physics / Intel / Runtime / Product / Frontier factory, its agents, directives, state machines and workflows are retired. `main` is intentionally clean before Research 2.0 is installed.
+          EOF
+          cat > PRE2_ARCHIVE_POINTER.md <<'EOF'
+          # Pre-2.0 archive pointer
+
+          Canonical scientific memory: `archive/spider-codex-ultimate:SPIDER_CODEX_ULTIME.md`.
+
+          The Codex contains the normalized experiment/result manifest, final scientific artifacts, necessary orphan run-memory, and the compact deletion ledger required to remove legacy GitHub Actions runs without losing research knowledge.
+
+          Old implementation remains recoverable through Git history; it is not part of the active working tree.
+          EOF
+          git add -A
+          git commit -m 'reset main after canonical pre2 research archive'
+          git push origin main
+          cd -
+          git worktree remove /tmp/spider-main-clean --force
+
+      - name: Retire the migration machinery itself
+        run: |
+          set -euo pipefail
+          git rm -rf .github tools
+          git commit -m 'archive: retire pre2 migration machinery'
           git push origin HEAD:archive/spider-codex-ultimate
