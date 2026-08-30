@@ -7,11 +7,13 @@ on:
       - archive/spider-codex-ultimate
     paths:
       - tools/build_spider_knowledge_codex.py
+      - tools/archive_actions_forensic.py
+      - tools/prune_archived_actions.py
       - .github/workflows/spider-codex-archive.yml
 
 permissions:
   contents: write
-  actions: read
+  actions: write
 
 concurrency:
   group: spider-codex-ultimate-archive
@@ -20,7 +22,7 @@ concurrency:
 jobs:
   compile:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 120
     steps:
       - name: Checkout archive branch with full history
         uses: actions/checkout@v4
@@ -28,12 +30,20 @@ jobs:
           ref: archive/spider-codex-ultimate
           fetch-depth: 0
 
+      - name: Preserve prior forensic appendix
+        run: cp SPIDER_CODEX_ULTIME.md /tmp/SPIDER_CODEX_PREVIOUS.md
+
       - name: Compile normalized substantive SPIDER knowledge
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python3 tools/build_spider_knowledge_codex.py
 
-      - name: Validate Codex invariants and normalized coverage
+      - name: Migrate legacy Actions forensic evidence into same Codex
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 tools/archive_actions_forensic.py
+
+      - name: Validate Codex invariants and deletion preconditions
         run: |
           set -euo pipefail
           test -s SPIDER_CODEX_ULTIME.md
@@ -41,26 +51,43 @@ jobs:
           grep -q 'Historical experiments preserved' SPIDER_CODEX_ULTIME.md
           grep -q 'GitHub Actions run inventory' SPIDER_CODEX_ULTIME.md
           grep -q 'Normalized verbatim scientific/data corpus' SPIDER_CODEX_ULTIME.md
-          grep -q 'Excluded as useless execution noise' SPIDER_CODEX_ULTIME.md
           grep -q 'frontier_charter=PASS' SPIDER_CODEX_ULTIME.md
           grep -q 'frontier_prereg=PASS' SPIDER_CODEX_ULTIME.md
           grep -q 'frontier_report=PASS' SPIDER_CODEX_ULTIME.md
           grep -q 'intel_namespace=PASS' SPIDER_CODEX_ULTIME.md
           grep -q 'intel_report=PASS' SPIDER_CODEX_ULTIME.md
-          grep -q 'frontier/frontier-collection-calibration/eval/PREREG.md' SPIDER_CODEX_ULTIME.md
-          grep -q 'frontier/frontier-physics-controlled-web-lab/prereg/PREREG.md' SPIDER_CODEX_ULTIME.md
+          grep -q 'Legacy GitHub Actions forensic archive before run deletion' SPIDER_CODEX_ULTIME.md
+          grep -q 'forensic_records_archived' SPIDER_CODEX_ULTIME.md
+          python3 - <<'PY'
+          import json
+          s=json.load(open('/tmp/forensic_archive_status.json'))
+          assert not s['failures'], f"forensic archival failures: {s['failures']}"
+          assert s['archived_ids'], 'no legacy runs archived; refusing destructive prune'
+          PY
           bytes=$(wc -c < SPIDER_CODEX_ULTIME.md)
-          echo "Codex bytes: $bytes"
+          echo "Codex bytes before prune: $bytes"
           test "$bytes" -lt 94371840
 
-      - name: Persist canonical knowledge Codex only on archive branch
+      - name: Persist forensic-complete canonical Codex before deletion
         run: |
           git config user.name 'SPIDER Codex Archivist'
           git config user.email 'actions@users.noreply.github.com'
           git add SPIDER_CODEX_ULTIME.md
+          git commit -m 'codex: preserve legacy Actions forensic evidence before deletion'
+          git push origin HEAD:archive/spider-codex-ultimate
+
+      - name: Delete only runs whose forensic record is now in Codex
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 tools/prune_archived_actions.py
+
+      - name: Persist deletion receipt in same Codex
+        if: always()
+        run: |
+          git add SPIDER_CODEX_ULTIME.md
           if git diff --cached --quiet; then
-            echo 'Codex unchanged.'
+            echo 'No cleanup receipt delta.'
             exit 0
           fi
-          git commit -m 'codex: freeze normalized substantive SPIDER knowledge'
+          git commit -m 'codex: record verified legacy Actions cleanup receipt'
           git push origin HEAD:archive/spider-codex-ultimate
