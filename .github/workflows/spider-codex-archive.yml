@@ -38,7 +38,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python3 tools/build_spider_knowledge_codex.py
 
-      - name: Add compact nonredundant legacy Actions forensic evidence
+      - name: Add compact nonredundant legacy Actions deletion ledger
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python3 tools/archive_actions_forensic.py
@@ -56,9 +56,9 @@ jobs:
           grep -q 'frontier_report=PASS' SPIDER_CODEX_ULTIME.md
           grep -q 'intel_namespace=PASS' SPIDER_CODEX_ULTIME.md
           grep -q 'intel_report=PASS' SPIDER_CODEX_ULTIME.md
-          grep -q 'Compact legacy Actions forensic archive before run deletion' SPIDER_CODEX_ULTIME.md
+          grep -q 'Compact legacy Actions deletion ledger' SPIDER_CODEX_ULTIME.md
           grep -q 'legacy_runs_covered' SPIDER_CODEX_ULTIME.md
-          grep -q 'unique_nonredundant_execution_signatures' SPIDER_CODEX_ULTIME.md
+          grep -q 'unique_nonredundant_uncovered_signatures' SPIDER_CODEX_ULTIME.md
           python3 - <<'PY'
           import json
           s=json.load(open('/tmp/forensic_archive_status.json'))
@@ -69,15 +69,15 @@ jobs:
           echo "Codex bytes before prune: $bytes"
           test "$bytes" -lt 94371840
 
-      - name: Persist forensic-complete canonical Codex before deletion
+      - name: Persist canonical Codex before deletion
         run: |
           git config user.name 'SPIDER Codex Archivist'
           git config user.email 'actions@users.noreply.github.com'
           git add SPIDER_CODEX_ULTIME.md
-          git commit -m 'codex: preserve compact legacy Actions evidence before deletion'
+          git commit -m 'codex: preserve compact legacy Actions deletion ledger'
           git push origin HEAD:archive/spider-codex-ultimate
 
-      - name: Delete only runs whose compact forensic record is now in Codex
+      - name: Delete every archived legacy Actions run
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python3 tools/prune_archived_actions.py
