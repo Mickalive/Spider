@@ -10,13 +10,13 @@ permissions:
   contents: write
 
 concurrency:
-  group: spider-main-writer
+  group: spider-codex-writer
   cancel-in-progress: false
 
 jobs:
   sync:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
         with:
@@ -27,19 +27,25 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Materialize canonical Research 2.0 memory
+      - name: Rebuild the single canonical Codex
         shell: bash
         run: |
           set -euo pipefail
           git config user.name "SPIDER Codex"
           git config user.email "actions@users.noreply.github.com"
           git fetch origin '+refs/heads/lab2/*:refs/remotes/origin/lab2/*' || true
-          python scripts/sync_codex.py
-          python scripts/validate_repo.py
-          git add -- SPIDER_CODEX.md codex
+          git fetch origin 'refs/heads/archive/spider-codex-ultimate:refs/remotes/origin/archive/spider-codex-ultimate'
+          rm -rf /tmp/spider_codex_worktree
+          git worktree add --detach /tmp/spider_codex_worktree origin/archive/spider-codex-ultimate
+          python scripts/sync_codex_ultimate.py --archive-dir /tmp/spider_codex_worktree
+
+          cd /tmp/spider_codex_worktree
+          git config user.name "SPIDER Codex"
+          git config user.email "actions@users.noreply.github.com"
+          git add -- SPIDER_CODEX_ULTIME.md
           if git diff --cached --quiet; then
-            echo "Codex already current."
+            echo "Single canonical Codex already current."
             exit 0
           fi
-          git commit -m "codex: sync Research 2.0 evidence"
-          git push origin HEAD:main
+          git commit -m "codex: append normalized Research 2.0 evidence"
+          git push origin HEAD:archive/spider-codex-ultimate
