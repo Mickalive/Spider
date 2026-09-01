@@ -4,26 +4,27 @@
   "claim_ids": ["C-WEB-DYNAMICS"],
   "question": "Does the predictive advantage of action-conditioned rules over action-independent memory vary across transition regimes, and does this variation reveal dynamical heterogeneity in Web-like state transitions?",
   "hypothesis": "When synthetic Web-like transitions are generated with a controlled action-dependence parameter lambda (where lambda=0 means next-state is independent of action, lambda=1 means next-state is fully determined by action), the prediction accuracy advantage of an action-conditioned rule over a pure nearest-neighbor memory baseline will scale monotonically with lambda. Specifically: at lambda=0, memory >= rules; at lambda=1, rules >> memory; the rule-memory difference is a monotonic increasing function of lambda. This demonstrates that different transition regimes have qualitatively different dynamics, and that the rule-shuffle difference measured in prior work (WP-002B: +0.0532) is a mixture of these regimes rather than a uniform effect.",
-  "falsifier": "The rule-memory difference does not scale monotonically with lambda (Spearman rho < 0.7, p>0.05 after Bonferroni correction for 3 lambda levels), OR the rule-memory difference is indistinguishable from zero at all lambda levels (paired t-test p>0.05 at each level), OR the synthetic positive control fails (rules do not achieve >90% accuracy at lambda=1).",
+  "falsifier": "The rule-memory difference does not scale monotonically with lambda (Spearman rho < 0.7, p>0.05 after Bonferroni correction across 4 lambda levels x 3 functions = 12 comparisons), OR the rule-memory difference is indistinguishable from zero at all lambda levels (paired t-test p>0.05 at each level), OR the synthetic positive control fails (rules do not achieve >90% accuracy at lambda=1), OR results are inconsistent across deterministic functions (significant function x lambda interaction in two-way ANOVA, p<0.05).",
   "baselines": [
     "Pure nearest-neighbor memory baseline (no action conditioning)",
     "Action-conditioned rule baseline (majority vote of (state, action) -> next_state)",
     "Frequency baseline (marginal next-state distribution)",
     "Shuffle baseline (action labels permuted)"
   ],
-  "positive_control": "At lambda=1 (fully action-determined transitions), rules must achieve >90% accuracy. This verifies the measurement pipeline can detect strong action-dependence when present.",
+  "positive_control": "At lambda=1 (fully action-determined transitions), rules must achieve >90% accuracy across all 3 deterministic functions. This verifies the measurement pipeline can detect strong action-dependence when present.",
   "null_control": "At lambda=0 (action-independent transitions), rules must not significantly outperform memory (paired t-test p>0.05). This verifies the pipeline does not detect structure when absent.",
   "measurement_validity": [
-    "Each lambda level has >=200 transitions for reliable accuracy estimation",
+    "Each lambda level has >=200 transitions per function for reliable accuracy estimation (4 levels x 3 functions x 200 = 2400 total transitions)",
     "Synthetic data generation uses frozen random seed (seed=42) for reproducibility",
     "State space is discrete and finite (10 states) to avoid discretization artifacts",
     "Action space has 4 action types to match Web-like action diversity",
-    "Train/test split is 80/20 with stratification by lambda level",
-    "No target leakage: rules are fit on train only, evaluated on test"
+    "Train/test split is 80/20 with stratification by lambda level and function",
+    "No target leakage: rules are fit on train only, evaluated on test",
+    "3 independent deterministic functions test generalizability of the monotonicity finding"
   ],
-  "decision_rule": "If Spearman rho(rule_memory_diff, lambda) >= 0.7 with p<0.05 after Bonferroni correction, AND positive control passes (rules >90% at lambda=1), AND null control passes (rules not > memory at lambda=0), verdict = SURVIVES_CURRENT_TEST for C-WEB-DYNAMICS. If monotonicity fails OR controls fail, verdict = FALSIFIED-IN-SETTING. If sample sizes are insufficient or pipeline errors occur, verdict = MEASUREMENT_INVALID.",
-  "product_consequence_positive": "Demonstrates that Web transitions have regime-dependent dynamics. Different parts of the Web may require different prediction strategies. This informs where SPIDER should invest in action-conditioned mechanisms vs. pure memory retrieval.",
-  "product_consequence_negative": "If the rule-memory difference does not scale with action-dependence, it suggests that either (a) the rule framework is not sensitive to dynamical variation, or (b) Web-like transitions do not have regime-dependent dynamics. Physics lane should then focus on other approaches.",
-  "estimated_cost": "Very low: pure synthetic data generation, offline computation, no browser/network/model calls",
-  "expected_information_gain": "High: This is the first controlled test of whether Web-dynamical heterogeneity is detectable by prediction accuracy decomposition. A positive result justifies stratified analysis of real Web data; a negative result constrains the dynamical hypothesis."
+  "decision_rule": "If Spearman rho(rule_memory_diff, lambda) >= 0.7 with p<0.05 after Bonferroni correction (12 comparisons), AND positive control passes (rules >90% at lambda=1 across all functions), AND null control passes (rules not > memory at lambda=0), AND no significant function x lambda interaction (two-way ANOVA p>0.05), verdict = SURVIVES_CURRENT_TEST for C-WEB-DYNAMICS. If monotonicity fails OR controls fail OR significant interaction, verdict = FALSIFIED-IN-SETTING. If sample sizes are insufficient or pipeline errors occur, verdict = MEASUREMENT_INVALID.",
+  "product_consequence_positive": "Demonstrates that Web transitions have regime-dependent dynamics. Different parts of the Web may require different prediction strategies. This informs where SPIDER should invest in action-conditioned mechanisms vs. pure memory retrieval. Specifically: high-action-dependence regimes (e.g., form submissions, button clicks) warrant rule-based prediction; low-action-dependence regimes (e.g., navigation, page loads) may be adequately served by memory retrieval.",
+  "product_consequence_negative": "If the rule-memory difference does not scale with action-dependence, it suggests that either (a) the rule framework is not sensitive to dynamical variation, or (b) Web-like transitions do not have regime-dependent dynamics detectable by this method. Physics lane should then focus on other approaches (information-theoretic, causal, or multi-scale). Does NOT falsify C-WEB-DYNAMICS entirely — only this specific detection method.",
+  "estimated_cost": "Very low: pure synthetic data generation, offline computation, no browser/network/model calls. ~2400 transitions, 12 train/test splits, 12 baseline fits.",
+  "expected_information_gain": "High: This is the first controlled test of whether Web-dynamical heterogeneity is detectable by prediction accuracy decomposition. A positive result justifies stratified analysis of real Web data; a negative result constrains the dynamical hypothesis. Testing across 3 functions addresses the key validity threat of function-specific artifacts."
 }
