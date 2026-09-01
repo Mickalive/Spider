@@ -2,19 +2,46 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 from typing import Any
 
 from .models import Mechanism, Observation, Resolution, ResolutionStatus
 from .registry import MechanismRegistry
 
 
+_PARAMETER = re.compile(r"\$\{([A-Za-z_][A-Za-z0-9_]*)\}")
+
+
 def _matches(required: dict[str, Any], actual: dict[str, Any]) -> bool:
     return all(actual.get(k) == v for k, v in required.items())
 
 
+def _template_slots(value: Any) -> set[str]:
+    if isinstance(value, str):
+        return set(_PARAMETER.findall(value))
+    if isinstance(value, dict):
+        out: set[str] = set()
+        for item in value.values():
+            out.update(_template_slots(item))
+        return out
+    if isinstance(value, list):
+        out: set[str] = set()
+        for item in value:
+            out.update(_template_slots(item))
+        return out
+    return set()
+
+
 def _bind(value: Any, params: dict[str, Any]) -> Any:
-    if isinstance(value, str) and value.startswith("${") and value.endswith("}"):
-        return params.get(value[2:-1])
+    if isinstance(value, str):
+        full = _PARAMETER.fullmatch(value)
+        if full:
+            return params[full.group(1)]
+
+        def replace(match: re.Match[str]) -> str:
+            return str(params[match.group(1)])
+
+        return _PARAMETER.sub(replace, value)
     if isinstance(value, dict):
         return {k: _bind(v, params) for k, v in value.items()}
     if isinstance(value, list):
@@ -73,7 +100,9 @@ class SpiderKernel:
                 continue
             if not _matches(m.applicability_guards, context):
                 continue
-            if any(slot not in params for slot in m.parameter_slots):
+
+            required_slots = set(m.parameter_slots) | _template_slots(m.action_template)
+            if any(slot not in params for slot in required_slots):
                 continue
             candidates.append(m)
 
@@ -85,7 +114,13 @@ class SpiderKernel:
         if best.confidence < self.min_confidence:
             return Resolution(ResolutionStatus.EXPLORE, best.mechanism_id, "candidate exists but confidence is below execution threshold", confidence=best.confidence)
 
-        return Resolution(ResolutionStatus.EXECUTABLE, best.mechanism_id, "applicability guards and confidence threshold passed", bound_action=_bind(best.action_template, params), confidence=best.confidence)
+        return Resolution(
+            ResolutionStatus.EXECUTABLE,
+            best.mechanism_id,
+            "applicability guards and confidence threshold passed",
+            bound_action=_bind(best.action_template, params),
+            confidence=best.confidence,
+        )
 
     def verify(self, mechanism_id: str, observed_state: dict[str, Any]) -> bool:
         mechanism = next((m for m in self.registry.all() if m.mechanism_id == mechanism_id), None)
