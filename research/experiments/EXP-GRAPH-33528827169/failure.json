@@ -1,9 +1,9 @@
 {
   "stage": "execute",
-  "category": "VALIDATION_FAILURE",
-  "message": "execute missing report.md",
+  "category": "EXECUTION_FAILURE",
+  "message": "stage exited with code 66",
   "retryable": false,
-  "recorded_at": "2026-09-01T19:44:45.484480+00:00",
-  "github_run_id": "33549429211",
+  "recorded_at": "2026-09-01T22:10:44.759844+00:00",
+  "github_run_id": "33564592847",
   "github_run_attempt": "1"
 }
