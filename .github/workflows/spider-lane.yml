@@ -1,0 +1,251 @@
+name: SPIDER R2 Lane
+run-name: R2 lane=${{ inputs.lane }} run=${{ github.run_id }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      lane:
+        description: "Independent Research 2.0 lane"
+        required: true
+        type: choice
+        options: [graph, physics, runtime, product, intel, frontier]
+      reason:
+        description: "Dispatch reason"
+        required: false
+        default: "manual"
+        type: string
+      chain_depth:
+        description: "Immediate continuation depth"
+        required: false
+        default: "0"
+        type: string
+      resume_experiment_id:
+        description: "Resume an unfinished experiment instead of allocating a new id"
+        required: false
+        default: ""
+        type: string
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: spider-r2-lane-${{ inputs.lane }}
+  cancel-in-progress: false
+
+env:
+  LANE: ${{ inputs.lane }}
+  CHAIN_DEPTH: ${{ inputs.chain_depth }}
+  RESUME_EXPERIMENT_ID: ${{ inputs.resume_experiment_id }}
+  GH_TOKEN: ${{ github.token }}
+
+jobs:
+  cycle:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Checkout isolated lane branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "SPIDER Research 2.0"
+          git config user.email "actions@users.noreply.github.com"
+          BRANCH="lab2/$LANE"
+          if git ls-remote --exit-code --heads origin "refs/heads/$BRANCH" >/dev/null 2>&1; then
+            git fetch origin "refs/heads/$BRANCH:refs/remotes/origin/$BRANCH"
+            git switch -C "$BRANCH" "origin/$BRANCH"
+          else
+            git switch -C "$BRANCH" origin/main
+          fi
+
+          if [[ -z "$RESUME_EXPERIMENT_ID" ]]; then
+            git fetch origin main
+            if ! git merge --no-edit origin/main; then
+              git merge --abort || true
+              echo "::error::Lane/main integration conflict. No experiment allocated; next pulse may retry after control-plane repair."
+              exit 78
+            fi
+          fi
+
+      - name: Mount frozen pre-2.0 scientific memory
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/spider_pre2
+          git fetch -q origin "refs/heads/archive/spider-codex-ultimate:refs/remotes/origin/archive/spider-codex-ultimate"
+          git show "origin/archive/spider-codex-ultimate:SPIDER_CODEX_ULTIME.md" > /tmp/spider_pre2/SPIDER_CODEX_ULTIME.md
+
+      - name: Prepare or resume immutable experiment
+        id: prep
+        shell: bash
+        env:
+          SPIDER_START_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          args=(--lane "$LANE" --run-id "$GITHUB_RUN_ID" --reason "${{ inputs.reason }}" --chain-depth "$CHAIN_DEPTH")
+          if [[ -n "$RESUME_EXPERIMENT_ID" ]]; then args+=(--experiment-id "$RESUME_EXPERIMENT_ID"); fi
+          python scripts/prepare_lane.py "${args[@]}"
+
+      - name: Persist machine request identity
+        if: ${{ steps.prep.outputs.frozen != 'true' }}
+        shell: bash
+        run: bash scripts/checkpoint.sh init "$LANE" "${{ steps.prep.outputs.experiment_id }}" "R2 $LANE: allocate ${{ steps.prep.outputs.experiment_id }}"
+
+      - name: Install OpenCode
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --retry 4 --retry-all-errors --retry-delay 15 -fsSL https://opencode.ai/install | bash
+          "$HOME/.opencode/bin/opencode" --version
+
+      - name: DESIGN — preregister next discriminating experiment
+        if: ${{ steps.prep.outputs.frozen != 'true' }}
+        shell: bash
+        run: |
+          set -uo pipefail
+          EXP="${{ steps.prep.outputs.experiment_id }}"
+          DIR="research/experiments/$EXP"
+          bash .github/scripts/run-opencode-resilient.sh research "$DIR/model_design.json" run --agent spider_lane_researcher \
+            "DESIGN ONLY for SPIDER Research 2.0 lane=$LANE experiment=$EXP. Read AGENTS.md, SPIDER_MASTER_PROMPT.md, SPIDER_ARCHITECTURE_RESEARCH2.md, research/lanes/registry.json, research/claims/registry.json, research/lanes/$LANE/state.json if present, SPIDER_CODEX.md, and search /tmp/spider_pre2/SPIDER_CODEX_ULTIME.md only for relevant prior evidence. Exact immutable request=$DIR/request.json. Do not run outcome-bearing measurements. Choose the smallest high-information experiment that can change a claim or product decision; do not merely repeat pre2. Fill only $DIR/spec.json and $DIR/prereg.md. Never git commit/push/switch/reset."
+          rc=$?
+          if [[ "$rc" -eq 0 ]]; then
+            python scripts/check_scope.py --repair --lane "$LANE" --experiment-id "$EXP" --stage design
+            scope_rc=$?
+            [[ "$scope_rc" -eq 0 ]] || rc=66
+          fi
+          if [[ "$rc" -eq 0 ]]; then python scripts/freeze_experiment.py "$EXP"; rc=$?; fi
+          if [[ "$rc" -eq 0 ]]; then
+            python scripts/finalize_lane.py "$EXP" --stage design --exit-code 0 || rc=$?
+          else
+            python scripts/finalize_lane.py "$EXP" --stage design --exit-code "$rc" --category DESIGN_FAILURE || true
+          fi
+          bash scripts/checkpoint.sh design "$LANE" "$EXP" "R2 $LANE: freeze $EXP"
+          exit 0
+
+      - name: Record durable pre-execution base
+        if: ${{ steps.prep.outputs.executed != 'true' }}
+        shell: bash
+        run: |
+          EXP="${{ steps.prep.outputs.experiment_id }}"
+          DIR="research/experiments/$EXP"
+          [[ -f "$DIR/freeze.json" ]] || { echo "No freeze yet; execution deferred."; exit 0; }
+          python scripts/record_execution_base.py "$EXP"
+          bash scripts/checkpoint.sh execution-base "$LANE" "$EXP" "R2 $LANE: execution base $EXP"
+
+      - name: EXECUTE — run frozen experiment
+        if: ${{ steps.prep.outputs.executed != 'true' }}
+        shell: bash
+        run: |
+          set -uo pipefail
+          EXP="${{ steps.prep.outputs.experiment_id }}"
+          DIR="research/experiments/$EXP"
+          [[ -f "$DIR/freeze.json" ]] || { echo "No freeze yet; execution deferred."; exit 0; }
+          ROLE=research
+          [[ "$LANE" == product ]] && ROLE=coding
+          bash .github/scripts/run-opencode-resilient.sh "$ROLE" "$DIR/model_execute.json" run --agent spider_lane_researcher \
+            "EXECUTE ONLY the frozen SPIDER Research 2.0 experiment lane=$LANE id=$EXP. Read exact $DIR/request.json, spec.json, prereg.md and freeze.json; relevant Codex evidence; and lane charter. Frozen inputs are immutable. Run the actual experiment, controls and strong baselines. Preserve raw evidence where practical. Write $DIR/result.json, $DIR/report.md and $DIR/provenance.json. Product lane may modify only its registry-authorized code roots and must test changes. Never git commit/push/switch/reset. Infrastructure failure is not a scientific negative."
+          rc=$?
+          if [[ "$rc" -eq 0 ]]; then
+            python scripts/check_scope.py --repair --lane "$LANE" --experiment-id "$EXP" --stage execute
+            scope_rc=$?
+            [[ "$scope_rc" -eq 0 ]] || rc=66
+          fi
+          if [[ "$rc" -eq 0 ]]; then
+            python scripts/finalize_lane.py "$EXP" --stage execute --exit-code 0 || rc=$?
+          else
+            python scripts/finalize_lane.py "$EXP" --stage execute --exit-code "$rc" --category EXECUTION_FAILURE || true
+          fi
+          if [[ "$rc" -ne 0 ]]; then python scripts/discard_failed_stage.py "$EXP" --stage execute; fi
+          bash scripts/checkpoint.sh execute "$LANE" "$EXP" "R2 $LANE: execute $EXP"
+          exit 0
+
+      - name: AUDIT — independently attack completed measurement
+        if: ${{ steps.prep.outputs.audited != 'true' }}
+        shell: bash
+        run: |
+          set -uo pipefail
+          EXP="${{ steps.prep.outputs.experiment_id }}"
+          DIR="research/experiments/$EXP"
+          [[ -f "$DIR/result.json" ]] || { echo "No result yet; audit deferred."; exit 0; }
+          EXCLUDE=$(jq -r '.model // empty' "$DIR/model_execute.json" 2>/dev/null || true)
+          export SPIDER_EXCLUDE_MODEL="$EXCLUDE"
+          bash .github/scripts/run-opencode-resilient.sh audit "$DIR/model_audit.json" run --agent spider_lane_auditor \
+            "INDEPENDENT AUDIT for SPIDER Research 2.0 lane=$LANE experiment=$EXP. Attack the frozen claim using $DIR/request.json, spec.json, prereg.md, freeze.json, result.json, report.md, provenance.json and relevant raw evidence. Recompute material metrics where feasible; test controls, leakage, measurement validity, baselines and claim ceiling. Do not help the producer. Write ONLY $DIR/audit.json. Never git commit/push/switch/reset."
+          rc=$?
+          if [[ "$rc" -eq 0 ]]; then
+            python scripts/check_scope.py --repair --lane "$LANE" --experiment-id "$EXP" --stage audit
+            scope_rc=$?
+            [[ "$scope_rc" -eq 0 ]] || rc=66
+          fi
+          if [[ "$rc" -eq 0 ]]; then
+            python scripts/finalize_lane.py "$EXP" --stage audit --exit-code 0 || rc=$?
+          else
+            python scripts/finalize_lane.py "$EXP" --stage audit --exit-code "$rc" --category AUDIT_FAILURE || true
+          fi
+          if [[ "$rc" -ne 0 ]]; then python scripts/discard_failed_stage.py "$EXP" --stage audit; fi
+          bash scripts/checkpoint.sh audit "$LANE" "$EXP" "R2 $LANE: audit $EXP"
+          exit 0
+
+      - name: DIRECTOR — bounded verdict and next question
+        if: ${{ steps.prep.outputs.finalized != 'true' }}
+        shell: bash
+        run: |
+          set -uo pipefail
+          EXP="${{ steps.prep.outputs.experiment_id }}"
+          DIR="research/experiments/$EXP"
+          [[ -f "$DIR/audit.json" ]] || { echo "No audit yet; director deferred."; exit 0; }
+          bash .github/scripts/run-opencode-resilient.sh director "$DIR/model_director.json" run --agent spider_lane_director \
+            "DIRECTOR VERDICT for SPIDER Research 2.0 lane=$LANE experiment=$EXP. Read the exact frozen experiment, producer outputs and independent audit. Write ONLY $DIR/verdict.json and $DIR/handoff.json. The workflow owns lane state. claim_updates MUST be a JSON list of bounded events with claim_id/status/reason. Do not manufacture evidence. Product promotion is allowed only for audited code that passed its gate. Physics/Frontier must keep searching materially orthogonal high-upside questions when a bounded program fails. Never git commit/push/switch/reset."
+          rc=$?
+          if [[ "$rc" -eq 0 ]]; then
+            python scripts/check_scope.py --repair --lane "$LANE" --experiment-id "$EXP" --stage director
+            scope_rc=$?
+            [[ "$scope_rc" -eq 0 ]] || rc=66
+          fi
+          if [[ "$rc" -eq 0 ]]; then
+            python scripts/finalize_lane.py "$EXP" --stage director --exit-code 0 || rc=$?
+          else
+            python scripts/finalize_lane.py "$EXP" --stage director --exit-code "$rc" --category DIRECTOR_FAILURE || true
+          fi
+          if [[ "$rc" -ne 0 ]]; then
+            python scripts/discard_failed_stage.py "$EXP" --stage director
+          elif [[ "$LANE" == product ]]; then
+            python scripts/revert_product_reject.py "$EXP"
+          fi
+          bash scripts/checkpoint.sh director "$LANE" "$EXP" "R2 $LANE: verdict $EXP"
+          exit 0
+
+      - name: Wake canonicalization and bounded continuation
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          EXP="${{ steps.prep.outputs.experiment_id }}"
+          DIR="research/experiments/$EXP"
+          [[ -f "$DIR/verdict.json" ]] || exit 0
+
+          CODEX_ACTIVE=$(gh run list --workflow=codex-sync.yml --limit 20 --json status | jq '[.[] | select(.status=="queued" or .status=="in_progress" or .status=="waiting" or .status=="requested")] | length')
+          [[ "$CODEX_ACTIVE" != 0 ]] || gh workflow run codex-sync.yml --ref main || true
+
+          if [[ "$LANE" == product ]] && [[ "$(jq -r '.promote_to_product // false' "$DIR/verdict.json")" == true ]]; then
+            PROMOTE_ACTIVE=$(gh run list --workflow=product-promote.yml --limit 20 --json status | jq '[.[] | select(.status=="queued" or .status=="in_progress" or .status=="waiting" or .status=="requested")] | length')
+            [[ "$PROMOTE_ACTIVE" != 0 ]] || gh workflow run product-promote.yml --ref main || true
+          fi
+
+          CONT=$(jq -r '.continue // false' "$DIR/verdict.json")
+          DEPTH=${CHAIN_DEPTH:-0}
+          if [[ "$CONT" == true && "$DEPTH" =~ ^[0-9]+$ && "$DEPTH" -lt 2 ]]; then
+            NEXT=$((DEPTH+1))
+            gh workflow run spider-lane.yml --ref main -f "lane=$LANE" -f "reason=continuation" -f "chain_depth=$NEXT"
+          else
+            echo "Immediate continuation not dispatched; scheduled pulse preserves liveness."
+          fi

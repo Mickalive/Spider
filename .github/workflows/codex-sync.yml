@@ -1,0 +1,45 @@
+name: SPIDER R2 Codex Sync
+run-name: Codex sync ${{ github.run_id }}
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "7,37 * * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: spider-main-writer
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Materialize canonical Research 2.0 memory
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "SPIDER Codex"
+          git config user.email "actions@users.noreply.github.com"
+          git fetch origin '+refs/heads/lab2/*:refs/remotes/origin/lab2/*' || true
+          python scripts/sync_codex.py
+          python scripts/validate_repo.py
+          git add -- SPIDER_CODEX.md codex
+          if git diff --cached --quiet; then
+            echo "Codex already current."
+            exit 0
+          fi
+          git commit -m "codex: sync Research 2.0 evidence"
+          git push origin HEAD:main

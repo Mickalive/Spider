@@ -1,0 +1,62 @@
+name: SPIDER R2 Factory Pulse
+run-name: Factory pulse ${{ github.run_id }}
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17,47 * * * *"
+
+permissions:
+  contents: read
+  actions: write
+
+concurrency:
+  group: spider-r2-factory-pulse
+  cancel-in-progress: false
+
+jobs:
+  pulse:
+    strategy:
+      fail-fast: false
+      max-parallel: 6
+      matrix:
+        lane: [graph, physics, runtime, product, intel, frontier]
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Dispatch healthy independent lane
+        env:
+          GH_TOKEN: ${{ github.token }}
+          LANE: ${{ matrix.lane }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          ENABLED=$(jq -r --arg lane "$LANE" '.lanes[$lane].enabled // false' research/lanes/registry.json)
+          [[ "$ENABLED" == true ]] || { echo "lane disabled: $LANE"; exit 0; }
+
+          ACTIVE_EXP=""
+          if git ls-remote --exit-code --heads origin "refs/heads/lab2/$LANE" >/dev/null 2>&1; then
+            git fetch -q origin "refs/heads/lab2/$LANE:refs/remotes/origin/lab2/$LANE"
+            STATE=$(git show "origin/lab2/$LANE:research/lanes/$LANE/state.json" 2>/dev/null || echo '{}')
+            PAUSED=$(jq -r '.human_paused // false' <<<"$STATE")
+            [[ "$PAUSED" != true ]] || { echo "human-paused: $LANE"; exit 0; }
+            ACTIVE_EXP=$(jq -r '.active_experiment_id // empty' <<<"$STATE")
+          fi
+
+          RUNNING=$(gh run list --workflow=spider-lane.yml --limit 100 --json status,displayTitle | jq --arg prefix "R2 lane=$LANE " '[.[] | select((.status=="queued" or .status=="in_progress" or .status=="waiting" or .status=="pending" or .status=="requested") and (.displayTitle|startswith($prefix)))] | length')
+          if [[ "$RUNNING" != 0 ]]; then
+            echo "lane already active: $LANE"
+            exit 0
+          fi
+
+          args=(workflow run spider-lane.yml --ref main -f "lane=$LANE" -f "reason=pulse" -f "chain_depth=0")
+          if [[ -n "$ACTIVE_EXP" ]]; then
+            args+=(-f "resume_experiment_id=$ACTIVE_EXP")
+            echo "resuming $ACTIVE_EXP"
+          fi
+          gh "${args[@]}"

@@ -1,0 +1,59 @@
+name: SPIDER R2 Product Promote
+run-name: Product promote ${{ github.run_id }}
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "22,52 * * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: spider-main-writer
+  cancel-in-progress: false
+
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Merge only an audited promotion-ready Product branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "SPIDER Product Promotion"
+          git config user.email "actions@users.noreply.github.com"
+          if ! git ls-remote --exit-code --heads origin refs/heads/lab2/product >/dev/null 2>&1; then
+            echo "No Product branch yet."
+            exit 0
+          fi
+          git fetch origin 'refs/heads/lab2/product:refs/remotes/origin/lab2/product'
+          STATE=$(git show origin/lab2/product:research/lanes/product/state.json 2>/dev/null || echo '{}')
+          [[ "$(jq -r '.promotion_ready // false' <<<"$STATE")" == true ]] || { echo "Product is not promotion-ready."; exit 0; }
+
+          if git merge-base --is-ancestor origin/lab2/product HEAD; then
+            echo "Product branch already integrated."
+            exit 0
+          fi
+
+          if ! git merge --no-commit --no-ff origin/lab2/product; then
+            git merge --abort || true
+            echo "::error::Product promotion conflict; no partial main write performed."
+            exit 1
+          fi
+
+          python -m compileall -q src scripts
+          python scripts/validate_repo.py
+          PYTHONPATH=src python -m unittest discover -s tests -v
+          git commit -m "product: promote audited Research 2.0 capability"
+          git push origin HEAD:main

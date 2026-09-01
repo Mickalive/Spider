@@ -1,0 +1,43 @@
+name: SPIDER R2 CI
+
+on:
+  push:
+    branches:
+      - main
+      - "research2/**"
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: spider-r2-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Compile Python
+        run: python -m compileall -q src scripts
+
+      - name: Validate repository contracts
+        run: python scripts/validate_repo.py
+
+      - name: Test product kernel
+        run: PYTHONPATH=src python -m unittest discover -s tests -v
+
+      - name: Shell syntax
+        run: |
+          bash -n scripts/checkpoint.sh
+          bash -n .github/scripts/run-opencode-resilient.sh
