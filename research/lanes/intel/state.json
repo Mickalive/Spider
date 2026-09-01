@@ -1,0 +1,12 @@
+{
+  "lane": "intel",
+  "human_paused": false,
+  "active_experiment_id": "EXP-INTEL-33528832113",
+  "last_experiment_id": null,
+  "last_verdict": null,
+  "continue_immediately": false,
+  "next_question": null,
+  "promotion_ready": false,
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-01T15:56:44.224262+00:00"
+}
