@@ -1,17 +1,28 @@
 {
   "experiment_id": "EXP-FRONTIER-33528827909",
   "lane": "frontier",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-WEB-DYNAMICS"],
+  "question": "Do Web state transitions exhibit information flow structure (transfer entropy, mutual information) that reveals dynamical organization beyond what prediction accuracy metrics capture?",
+  "hypothesis": "Information-theoretic measures (transfer entropy, conditional mutual information) will detect structured information flow in Web state transitions that is not visible through standard prediction accuracy metrics. Specifically, we hypothesize that: (1) transfer entropy from action to next-state will exceed zero under a Markov null, indicating directed information flow; (2) conditional mutual information between consecutive states given the action will be positive, indicating state-dependent dynamics; (3) these measures will correlate with task structure (e.g., navigation vs form submission) in ways that prediction accuracy does not.",
+  "falsifier": "All three information-theoretic measures fail to reject their respective null hypotheses at p<0.05 after multiple-comparison correction, OR the measures show no correlation with task structure, OR the measures are dominated by sample size effects rather than genuine structure.",
+  "baselines": [
+    "First-order Markov null (state transitions independent of action)",
+    "Shuffle null (action labels permuted randomly)",
+    "Frequency null (transitions proportional to marginal frequencies)",
+    "Nearest-neighbor baseline (prediction accuracy comparable to information-theoretic measures)"
+  ],
+  "positive_control": "Synthetic state machine with known information flow structure (e.g., deterministic finite automaton with hidden states) to verify measures can detect structure when present.",
+  "null_control": "Random walk on Web state graph with no action-dependence to verify measures don't detect structure when absent.",
+  "measurement_validity": [
+    "Sample size sufficient for reliable entropy estimation (>=100 transitions per condition)",
+    "Bias-corrected estimators used (KSG or Miller-Madow)",
+    "Multiple-comparison correction applied (Bonferroni or FDR)",
+    "No target leakage (measures computed on held-out data)",
+    "Stationarity check (measures stable across data splits)"
+  ],
+  "decision_rule": "If information-theoretic measures reject nulls AND show correlation with task structure AND survive validity checks, verdict = SURVIVES_CURRENT_TEST for C-WEB-DYNAMICS. If measures fail to reject nulls OR show no task correlation, verdict = FALSIFIED-IN-SETTING. If measures show structure but validity checks fail, verdict = MEASUREMENT_INVALID.",
+  "product_consequence_positive": "Information-theoretic measures could become a new lens for understanding Web dynamics, potentially revealing structure that prediction-based metrics miss. This could inform mechanism design for SPIDER's Physics lane and guide where to look for genuine dynamical laws.",
+  "product_consequence_negative": "If information-theoretic measures reveal no structure beyond what prediction accuracy captures, it suggests Web dynamics may be adequately described by standard statistical models, and Physics lane should focus on other approaches.",
+  "estimated_cost": "Low: offline computation on existing transition data, no new data collection required",
+  "expected_information_gain": "High: This is the first application of information-theoretic measures to Web state transitions in SPIDER. A positive result opens a new research direction; a negative result constrains the space of possible Web dynamics."
 }
