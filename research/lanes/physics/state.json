@@ -1,0 +1,12 @@
+{
+  "lane": "physics",
+  "human_paused": false,
+  "active_experiment_id": "EXP-PHYSICS-33528829431",
+  "last_experiment_id": null,
+  "last_verdict": null,
+  "continue_immediately": false,
+  "next_question": null,
+  "promotion_ready": false,
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-01T15:56:43.901992+00:00"
+}
