@@ -38,6 +38,7 @@ env:
   CHAIN_DEPTH: ${{ inputs.chain_depth }}
   RESUME_EXPERIMENT_ID: ${{ inputs.resume_experiment_id }}
   GH_TOKEN: ${{ github.token }}
+  SPIDER_CONTROL_HELPER: /tmp/spider-control-plane.py
 
 jobs:
   cycle:
@@ -67,6 +68,8 @@ jobs:
             git switch -C "$BRANCH" origin/main
           fi
 
+          # A new, unfrozen experiment may absorb current main normally. A resumed
+          # experiment keeps its scientific snapshot; current control code is overlaid below.
           if [[ -z "$RESUME_EXPERIMENT_ID" ]]; then
             git fetch origin main
             if ! git merge --no-edit origin/main; then
@@ -76,13 +79,22 @@ jobs:
             fi
           fi
 
-      - name: Mount frozen pre-2.0 scientific memory
+      - name: Overlay current control plane without mutating lane history
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p /tmp/spider_pre2
+          git fetch -q origin main
+          git show origin/main:scripts/control_plane.py > "$SPIDER_CONTROL_HELPER"
+          chmod +x "$SPIDER_CONTROL_HELPER"
+          python "$SPIDER_CONTROL_HELPER" stage --root "$GITHUB_WORKSPACE"
+
+      - name: Mount frozen pre-2.0 scientific memory inside workspace
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .spider-runtime/pre2
           git fetch -q origin "refs/heads/archive/spider-codex-ultimate:refs/remotes/origin/archive/spider-codex-ultimate"
-          git show "origin/archive/spider-codex-ultimate:SPIDER_CODEX_ULTIME.md" > /tmp/spider_pre2/SPIDER_CODEX_ULTIME.md
+          git show "origin/archive/spider-codex-ultimate:SPIDER_CODEX_ULTIME.md" > .spider-runtime/pre2/SPIDER_CODEX_ULTIME.md
 
       - name: Prepare or resume immutable experiment
         id: prep
@@ -101,31 +113,56 @@ jobs:
         run: >-
           bash scripts/checkpoint.sh init "$LANE" "${{ steps.prep.outputs.experiment_id }}" "R2 $LANE: allocate ${{ steps.prep.outputs.experiment_id }}"
 
-      - name: Install OpenCode
+      - name: Install OpenCode with durable failure receipt
+        id: install
         shell: bash
         run: |
-          set -euo pipefail
-          curl --retry 4 --retry-all-errors --retry-delay 15 -fsSL https://opencode.ai/install | bash
-          "$HOME/.opencode/bin/opencode" --version
+          set +e
+          set -uo pipefail
+          EXP="${{ steps.prep.outputs.experiment_id }}"
+          ready=false
+          rc=75
+          for attempt in 1 2 3 4; do
+            echo "SPIDER_OPENCODE_INSTALL_ATTEMPT=$attempt/4"
+            curl --retry 2 --retry-all-errors --retry-delay 10 -fsSL https://opencode.ai/install | bash
+            rc=$?
+            if [[ "$rc" -eq 0 ]]; then
+              "$HOME/.opencode/bin/opencode" --version
+              rc=$?
+            fi
+            if [[ "$rc" -eq 0 ]]; then ready=true; break; fi
+            sleep 15
+          done
+          echo "ready=$ready" >> "$GITHUB_OUTPUT"
+          if [[ "$ready" != true ]]; then
+            python scripts/finalize_lane.py "$EXP" --stage design --exit-code 75 --category OPENCODE_INSTALL_FAILURE || true
+            bash scripts/checkpoint.sh failure "$LANE" "$EXP" "R2 $LANE: OpenCode install failure $EXP"
+          fi
+          exit 0
 
       - name: DESIGN — preregister next discriminating experiment
-        if: ${{ steps.prep.outputs.frozen != 'true' }}
+        if: ${{ steps.install.outputs.ready == 'true' && steps.prep.outputs.frozen != 'true' }}
         shell: bash
         run: |
+          set +e
           set -uo pipefail
           EXP="${{ steps.prep.outputs.experiment_id }}"
           DIR="research/experiments/$EXP"
           bash .github/scripts/run-opencode-resilient.sh research "$DIR/model_design.json" run --agent spider_lane_researcher \
-            "DESIGN ONLY for SPIDER Research 2.0 lane=$LANE experiment=$EXP. Read AGENTS.md, SPIDER_MASTER_PROMPT.md, SPIDER_ARCHITECTURE_RESEARCH2.md, research/lanes/registry.json, research/claims/registry.json, research/lanes/$LANE/state.json if present, SPIDER_CODEX.md, and search /tmp/spider_pre2/SPIDER_CODEX_ULTIME.md only for relevant prior evidence. Exact immutable request=$DIR/request.json. Do not run outcome-bearing measurements. Choose the smallest high-information experiment that can change a claim or product decision; do not merely repeat pre2. Fill only $DIR/spec.json and $DIR/prereg.md. Never git commit/push/switch/reset."
+            "DESIGN ONLY for SPIDER Research 2.0 lane=$LANE experiment=$EXP. Read AGENTS.md, SPIDER_MASTER_PROMPT.md, SPIDER_ARCHITECTURE_RESEARCH2.md, research/lanes/registry.json, research/claims/registry.json, research/lanes/$LANE/state.json if present, SPIDER_CODEX.md, and search .spider-runtime/pre2/SPIDER_CODEX_ULTIME.md only for relevant prior evidence. Exact immutable request=$DIR/request.json. Do not run outcome-bearing measurements. Choose the smallest high-information experiment that can change a claim or product decision; do not merely repeat pre2. Fill only $DIR/spec.json and $DIR/prereg.md. Never git commit/push/switch/reset."
           rc=$?
           if [[ "$rc" -eq 0 ]]; then
             python scripts/check_scope.py --repair --lane "$LANE" --experiment-id "$EXP" --stage design
             scope_rc=$?
             [[ "$scope_rc" -eq 0 ]] || rc=66
           fi
-          if [[ "$rc" -eq 0 ]]; then python scripts/freeze_experiment.py "$EXP"; rc=$?; fi
           if [[ "$rc" -eq 0 ]]; then
-            python scripts/finalize_lane.py "$EXP" --stage design --exit-code 0 || rc=$?
+            python scripts/freeze_experiment.py "$EXP"
+            rc=$?
+          fi
+          if [[ "$rc" -eq 0 ]]; then
+            python scripts/finalize_lane.py "$EXP" --stage design --exit-code 0
+            rc=$?
           else
             python scripts/finalize_lane.py "$EXP" --stage design --exit-code "$rc" --category DESIGN_FAILURE || true
           fi
@@ -136,6 +173,7 @@ jobs:
         if: ${{ steps.prep.outputs.executed != 'true' }}
         shell: bash
         run: |
+          set -euo pipefail
           EXP="${{ steps.prep.outputs.experiment_id }}"
           DIR="research/experiments/$EXP"
           [[ -f "$DIR/freeze.json" ]] || { echo "No freeze yet; execution deferred."; exit 0; }
@@ -143,9 +181,10 @@ jobs:
           bash scripts/checkpoint.sh execution-base "$LANE" "$EXP" "R2 $LANE: execution base $EXP"
 
       - name: EXECUTE — run frozen experiment
-        if: ${{ steps.prep.outputs.executed != 'true' }}
+        if: ${{ steps.install.outputs.ready == 'true' && steps.prep.outputs.executed != 'true' }}
         shell: bash
         run: |
+          set +e
           set -uo pipefail
           EXP="${{ steps.prep.outputs.experiment_id }}"
           DIR="research/experiments/$EXP"
@@ -161,7 +200,8 @@ jobs:
             [[ "$scope_rc" -eq 0 ]] || rc=66
           fi
           if [[ "$rc" -eq 0 ]]; then
-            python scripts/finalize_lane.py "$EXP" --stage execute --exit-code 0 || rc=$?
+            python scripts/finalize_lane.py "$EXP" --stage execute --exit-code 0
+            rc=$?
           else
             python scripts/finalize_lane.py "$EXP" --stage execute --exit-code "$rc" --category EXECUTION_FAILURE || true
           fi
@@ -170,9 +210,10 @@ jobs:
           exit 0
 
       - name: AUDIT — independently attack completed measurement
-        if: ${{ steps.prep.outputs.audited != 'true' }}
+        if: ${{ steps.install.outputs.ready == 'true' && steps.prep.outputs.audited != 'true' }}
         shell: bash
         run: |
+          set +e
           set -uo pipefail
           EXP="${{ steps.prep.outputs.experiment_id }}"
           DIR="research/experiments/$EXP"
@@ -188,7 +229,8 @@ jobs:
             [[ "$scope_rc" -eq 0 ]] || rc=66
           fi
           if [[ "$rc" -eq 0 ]]; then
-            python scripts/finalize_lane.py "$EXP" --stage audit --exit-code 0 || rc=$?
+            python scripts/finalize_lane.py "$EXP" --stage audit --exit-code 0
+            rc=$?
           else
             python scripts/finalize_lane.py "$EXP" --stage audit --exit-code "$rc" --category AUDIT_FAILURE || true
           fi
@@ -197,9 +239,10 @@ jobs:
           exit 0
 
       - name: DIRECTOR — bounded verdict and next question
-        if: ${{ steps.prep.outputs.finalized != 'true' }}
+        if: ${{ steps.install.outputs.ready == 'true' && steps.prep.outputs.finalized != 'true' }}
         shell: bash
         run: |
+          set +e
           set -uo pipefail
           EXP="${{ steps.prep.outputs.experiment_id }}"
           DIR="research/experiments/$EXP"
@@ -213,7 +256,8 @@ jobs:
             [[ "$scope_rc" -eq 0 ]] || rc=66
           fi
           if [[ "$rc" -eq 0 ]]; then
-            python scripts/finalize_lane.py "$EXP" --stage director --exit-code 0 || rc=$?
+            python scripts/finalize_lane.py "$EXP" --stage director --exit-code 0
+            rc=$?
           else
             python scripts/finalize_lane.py "$EXP" --stage director --exit-code "$rc" --category DIRECTOR_FAILURE || true
           fi
