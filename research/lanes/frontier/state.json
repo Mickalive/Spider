@@ -1,0 +1,12 @@
+{
+  "lane": "frontier",
+  "human_paused": false,
+  "active_experiment_id": "EXP-FRONTIER-33528827909",
+  "last_experiment_id": null,
+  "last_verdict": null,
+  "continue_immediately": false,
+  "next_question": null,
+  "promotion_ready": false,
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-01T15:56:43.831594+00:00"
+}
