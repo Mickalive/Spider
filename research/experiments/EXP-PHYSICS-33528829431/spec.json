@@ -1,17 +1,28 @@
 {
   "experiment_id": "EXP-PHYSICS-33528829431",
   "lane": "physics",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-MEAS-VALID", "C-WEB-DYNAMICS"],
+  "question": "Can we build a measurement-valid substrate that collects action-conditioned environment transitions P(S_next | S_current, A_current) from live browser interactions, avoiding the pathologies that invalidated pre-2.0 WP-003?",
+  "hypothesis": "A properly instrumented browser harness can collect (S, A, S') triples from live Web interactions where: (1) no target information leaks into features, (2) site identity does not leak across train/test, (3) seeds are deterministic across processes, and (4) the collected data shows non-random action-conditioned transition structure above a shuffle null.",
+  "falsifier": "The harness fails to produce discriminating positive and null outcomes on a controlled test case, OR the collected data shows no action-conditioned structure above shuffle (p > 0.05 after correction), OR validity gates reveal leakage/contamination.",
+  "baselines": [
+    "Shuffle null: randomly permute next-state labels to break action-conditioning",
+    "Action-frequency null: predict the most common next-state regardless of action",
+    "First-order Markov: predict next state from current state only, ignoring action"
+  ],
+  "positive_control": "A synthetic test environment with known deterministic transitions (e.g., a simple navigation graph where action A from state S always leads to state S') to confirm the harness correctly captures action-conditioned structure when it exists.",
+  "null_control": "A random-policy run on a site where transitions are essentially random (e.g., clicking random links on a large page with no navigational structure) to establish the baseline noise level.",
+  "measurement_validity": [
+    "No predictor contains the target (S_next) directly or deterministically",
+    "Lagged variables truly come from earlier steps; post-state information never leaks into pre-state features",
+    "Site identity does not leak across train/test splits (each site is either fully train or fully test)",
+    "Seeds are deterministic: use fixed random seeds in Python, not process-randomized hash()",
+    "Preprocessing is fit on TRAIN only; no held-out outcomes inform feature engineering",
+    "Resampling unit matches dependency structure (grouped by trajectory/session, not individual transitions)"
+  ],
+  "decision_rule": "If the harness produces valid (S, A, S') data AND the positive control shows expected structure AND the shuffle null is rejected at p < 0.05 after Bonferroni correction for the number of null tests, then the substrate is measurement-valid and we have preliminary evidence for action-conditioned structure. Otherwise, the substrate needs revision or the hypothesis is weakened.",
+  "product_consequence_positive": "A validated measurement substrate enables all subsequent Physics experiments. It establishes that P(S_next | S_current, A_current) can be measured from the Web, which is the prerequisite for testing C-WEB-DYNAMICS.",
+  "product_consequence_negative": "If the harness cannot produce valid data, subsequent Physics experiments are blocked until the measurement infrastructure is redesigned. This would indicate that the pre-2.0 measurement problems are architectural, not merely implementational.",
+  "estimated_cost": "Low: synthetic positive control + 1-2 small live sites + code implementation. No large-scale data collection needed.",
+  "expected_information_gain": "High: this experiment gates all subsequent Physics work. A positive result enables the C-WEB-DYNAMICS research program. A negative result redirects effort to measurement infrastructure."
 }
