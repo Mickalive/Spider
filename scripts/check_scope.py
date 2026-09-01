@@ -8,7 +8,6 @@ CONTROL_ROOTS = [
     ".gitignore", ".github/scripts", "scripts", ".opencode/agents", "AGENTS.md",
     "SPIDER_ARCHITECTURE_RESEARCH2.md", "research/claims/registry.json",
     "research/lanes/registry.json", "research/EXPERIMENT_PACKET.md", "config/models.json",
-    "SPIDER_CODEX.md",
 ]
 
 
