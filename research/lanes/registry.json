@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "lanes": {
+    "graph": {"enabled":true,"mission":"Discover and validate cumulative operational inheritance: mechanisms, fragments, parameterization, semantic resolution, freshness and novelty boundaries.","must_continue_beyond_pre2":true,"allowed_code_roots":["research/harness","research/graph"],"priority_claims":["C-PARAM-INHERIT","C-FRESHNESS","C-DELTA-REPAIR","C-RESIDUAL-NOVELTY","C-LLM-INHERIT","C-SEMANTIC-RESOLVE"]},
+    "physics": {"enabled":true,"mission":"Search falsification-first for Web-dynamical structure beyond memory/similarity using operational definitions, strong nulls and identifiability.","must_continue_beyond_pre2":true,"allowed_code_roots":["research/harness","research/physics"],"priority_claims":["C-MEAS-VALID","C-WEB-DYNAMICS","C-CROSSSITE"]},
+    "runtime": {"enabled":true,"mission":"Build and falsify measurement/execution substrates: raw observation, writable controls, auth/session/network/side-effect validity and runtime reliability.","must_continue_beyond_pre2":true,"allowed_code_roots":["research/harness","research/runtime","substrates"],"priority_claims":["C-MEAS-VALID","C-FRESHNESS","C-DELTA-REPAIR"]},
+    "product": {"enabled":true,"mission":"Turn audited capabilities into a coherent external-agent product and continuously test product economics without freezing research architecture.","must_continue_beyond_pre2":true,"allowed_code_roots":["src","tests","sdk","pyproject.toml"],"priority_claims":["C-PARAM-INHERIT","C-FRESHNESS","C-DELTA-REPAIR","C-RESIDUAL-NOVELTY","C-LLM-INHERIT","C-SEMANTIC-RESOLVE","C-PRODUCT-ECON"]},
+    "intel": {"enabled":true,"mission":"Find, reproduce and stress-test datasets, baselines and prior art only when they can alter a live SPIDER claim or experimental design.","must_continue_beyond_pre2":true,"allowed_code_roots":["research/intel"],"priority_claims":["C-LLM-INHERIT","C-CROSSSITE","C-WEB-DYNAMICS","C-PRODUCT-ECON"]},
+    "frontier": {"enabled":true,"mission":"Search outside the current solution basin for high-upside falsifiable mechanisms that could radically reduce agent exploration or change SPIDER's architecture.","must_continue_beyond_pre2":true,"allowed_code_roots":["research/harness","research/frontier"],"priority_claims":["C-WEB-DYNAMICS","C-RESIDUAL-NOVELTY","C-SEMANTIC-RESOLVE","C-CROSSSITE"]}
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "pre2_source": "archive/spider-codex-ultimate:SPIDER_CODEX_ULTIME.md",
+  "claims": [
+    {"id":"C-MEAS-VALID","title":"Measurement substrate is intervention-valid","status":"EXPERIMENTAL","owner_lanes":["runtime","physics"],"product_capability":"trustworthy evidence","next_gate":"writable/auth/session/drift controls must produce discriminating positive and null outcomes"},
+    {"id":"C-PARAM-INHERIT","title":"Mechanisms parameterize to unseen identifiers","status":"EXPERIMENTAL","owner_lanes":["graph","product"],"product_capability":"parameterized inheritance","next_gate":"learn on resource A, succeed on never-observed B against cold/replay/retrieval baselines"},
+    {"id":"C-FRESHNESS","title":"SPIDER can detect when inherited knowledge is stale","status":"HYPOTHESIS","owner_lanes":["graph","runtime","product"],"product_capability":"freshness guards","next_gate":"session/token/DOM/endpoint/permission drift with false-accept measurement"},
+    {"id":"C-DELTA-REPAIR","title":"Local Web changes can be repaired locally","status":"HYPOTHESIS","owner_lanes":["graph","runtime","product"],"product_capability":"delta repair","next_gate":"controlled local perturbations with repair cost and contamination bounds"},
+    {"id":"C-RESIDUAL-NOVELTY","title":"Later-agent cost tracks residual novelty rather than full task length","status":"HYPOTHESIS","owner_lanes":["graph","product"],"product_capability":"work compression economics","next_gate":"matched task families with controlled novelty fraction and end-to-end cost"},
+    {"id":"C-LLM-INHERIT","title":"A real LLM agent benefits from SPIDER beyond strong memory/instruction baselines","status":"HYPOTHESIS","owner_lanes":["graph","product"],"product_capability":"external-agent inheritance","next_gate":"same model/tools/budget; cold vs instructions vs retrieval vs SPIDER"},
+    {"id":"C-CROSSSITE","title":"Reusable mechanisms transfer across website holdout","status":"HYPOTHESIS","owner_lanes":["graph","physics","frontier"],"product_capability":"cross-site inheritance","next_gate":"true website holdout without site identity leakage"},
+    {"id":"C-WEB-DYNAMICS","title":"Interactive Web transformations contain predictive dynamical structure beyond memory and ordinary similarity","status":"HYPOTHESIS","owner_lanes":["physics","frontier"],"product_capability":"mechanical priors for exploration","next_gate":"orthogonal falsifiable programs on effect factorization, barriers, timescales, geometry, multiscale dynamics or other measurable mechanisms"},
+    {"id":"C-SEMANTIC-RESOLVE","title":"Goals can be resolved to applicable mechanisms without internal ids","status":"HYPOTHESIS","owner_lanes":["graph","product","frontier"],"product_capability":"semantic resolution","next_gate":"unseen-goal resolution with applicability/abstention calibration"},
+    {"id":"C-PRODUCT-ECON","title":"SPIDER saves total cost per successful task after retrieval, verification and maintenance","status":"HYPOTHESIS","owner_lanes":["product","graph"],"product_capability":"commercial viability","next_gate":"end-to-end amortized economics on real agents"}
+  ]
+}

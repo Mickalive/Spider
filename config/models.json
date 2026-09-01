@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "note": "Candidates are fallbacks, not permanent health claims. Runtime failures rotate automatically.",
+  "roles": {
+    "research": ["opencode/mimo-v2.5-free", "opencode/muse-spark-1.2-contributor-free", "opencode/hy3-free", "opencode/nemotron-3-ultra-free", "opencode/big-pickle"],
+    "audit": ["opencode/hy3-free", "opencode/muse-spark-1.2-contributor-free", "opencode/nemotron-3-ultra-free", "opencode/big-pickle", "opencode/mimo-v2.5-free"],
+    "director": ["opencode/mimo-v2.5-free", "opencode/muse-spark-1.2-contributor-free", "opencode/hy3-free", "opencode/big-pickle"],
+    "coding": ["opencode/mimo-v2.5-free", "opencode/hy3-free", "opencode/muse-spark-1.2-contributor-free", "opencode/big-pickle"]
+  },
+  "retryable_signatures": ["429", "500", "502", "503", "504", "NetworkError", "network error", "fetch failed", "ECONNRESET", "ETIMEDOUT", "rate limit", "model unavailable", "model not found", "provider error", "service unavailable"]
+}
