@@ -1,17 +1,29 @@
 {
   "experiment_id": "EXP-INTEL-33528832113",
   "lane": "intel",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-CROSSSITE", "C-LLM-INHERIT", "C-PRODUCT-ECON"],
+  "question": "Which publicly available web-agent benchmarks contain multi-step stateful task structures that could serve as stronger testbeds for SPIDER's cross-site inheritance and LLM-inheritance claims than the current 2-site (quotes/books) corpus?",
+  "hypothesis": "A systematic structural audit of public web-agent benchmarks will reveal at least one benchmark with (a) multi-step sequential tasks spanning multiple page states, (b) public trajectory/API access, and (c) a task structure compatible with SPIDER's fragment-reuse model -- thereby expanding the candidate testbed set beyond the current 2-site corpus and potentially altering the C-CROSSSITE and C-LLM-INHERIT experiment designs.",
+  "falsifier": "NO-FALSIFIER-DESIGN-ONLY: This is a structured reconnaissance experiment. The falsification condition is: if zero public benchmarks satisfy all three structural criteria (multi-step, trajectory-accessible, fragment-reuse-compatible), then the C-CROSSSITE and C-LLM-INHERIT claims remain bounded to the existing 2-site corpus and no external benchmark can serve as a generalization testbed.",
+  "baselines": [
+    "Current SPIDER corpus: 2 small structured sites (quotes.toscrape.com, books.toscrape.com) -- the ONLY testbed used for all graph experiments G-H1 through G-H9",
+    "Mind2Web (2023): cross-task, cross-website dataset; 2000+ tasks across 137 websites -- used as prior art reference but never integrated as a testbed",
+    "WebArena (2024): 812 long-horizon tasks across 4 real-world websites with full environment replay -- never integrated",
+    "VisualWebArena (2024): visual variant of WebArena -- never integrated",
+    "WorkArena (2024): ServiceNow-based tasks -- never integrated",
+    "AgentBench (2023): multi-environment benchmark including web tasks -- never integrated"
+  ],
+  "positive_control": "A benchmark known to have multi-step stateful tasks with trajectory access: WebArena provides full trajectory replay infrastructure and has been independently audited by the community. If our structural audit cannot identify this as compatible, the audit methodology is broken.",
+  "null_control": "Random selection of 5 GitHub repositories tagged 'web-agent-benchmark' without structural analysis. If the structured audit produces the same ranked list as random selection, the audit adds no information.",
+  "measurement_validity": [
+    "All benchmark assessments must cite specific publicly accessible documentation (paper, GitHub repo, dataset URL)",
+    "Structural compatibility scoring must use predeclared criteria (see decision rule), not post-hoc selection",
+    "No benchmark may be excluded after seeing its structural properties -- all identified benchmarks must be scored",
+    "API/access claims must be verified by checking the actual repository or documentation, not assumed from paper text"
+  ],
+  "decision_rule": "Score each identified benchmark on 5 binary criteria: (S1) tasks span ≥2 page transitions, (S2) trajectory data is publicly downloadable or reproducible, (S3) task structure includes stateful interactions (form fills, login, session-dependent actions), (S4) environment is self-hostable or has API replay, (S5) task diversity covers ≥3 distinct website types. A benchmark is RECOMMENDED if S1+S2+S3+S4 ≥ 3. A benchmark is STRONGLY RECOMMENDED if S1+S2+S3+S4+S5 = 5. Primary output: a ranked table of all identified benchmarks with scores and a go/no-go recommendation for integration into C-CROSSSITE and C-LLM-INHERIT experiment designs.",
+  "product_consequence_positive": "If ≥1 strongly recommended benchmark is found, Product and Graph lanes gain a concrete external testbed for cross-site inheritance testing. This directly unblocks the C-CROSSSITE next_gate ('true website holdout without site identity leakage') and C-LLM-INHERIT next_gate ('same model/tools/budget; cold vs instructions vs retrieval vs SPIDER') by providing a larger, more diverse task corpus.",
+  "product_consequence_negative": "If zero benchmarks meet the RECOMMENDED threshold, SPIDER's cross-site and LLM-inheritance claims remain permanently bounded to the 2-site corpus. This means: (a) C-CROSSSITE cannot be tested on general web structure, (b) C-LLM-INHERIT can only be tested on toy sites, (c) product credibility with external agents is limited to trivial environments.",
+  "estimated_cost": "Low: desk research + web search + documentation review. No compute, no browser, no LLM calls. ~30 minutes of agent time.",
+  "expected_information_gain": "HIGH: This experiment directly resolves whether the current 2-site limitation is a choice or a constraint. A positive outcome (strong benchmark found) unblocks 2 priority claims and reshapes the Graph and Product lane roadmaps. A negative outcome (no suitable benchmark) forces SPIDER to either build its own diverse testbed or accept permanent scope limitation."
 }
