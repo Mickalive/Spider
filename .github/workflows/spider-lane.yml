@@ -98,7 +98,8 @@ jobs:
       - name: Persist machine request identity
         if: ${{ steps.prep.outputs.frozen != 'true' }}
         shell: bash
-        run: bash scripts/checkpoint.sh init "$LANE" "${{ steps.prep.outputs.experiment_id }}" "R2 $LANE: allocate ${{ steps.prep.outputs.experiment_id }}"
+        run: >-
+          bash scripts/checkpoint.sh init "$LANE" "${{ steps.prep.outputs.experiment_id }}" "R2 $LANE: allocate ${{ steps.prep.outputs.experiment_id }}"
 
       - name: Install OpenCode
         shell: bash
