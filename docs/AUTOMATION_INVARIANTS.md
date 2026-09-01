@@ -93,3 +93,7 @@ A finalized experiment without the full canonical packet appears in `codex/cover
 The factory prefers six healthy independent lanes over dozens of duplicated agents.
 
 Additional parallel work is justified by distinct hypotheses or independent attack surfaces, not by different names for the same prompt.
+
+## 16. Bootstrap must prove itself before activation
+
+A new or materially changed control plane is first installed on an isolated bootstrap branch and must pass repository validation, product-kernel tests and workflow syntax checks before `main` is advanced. The factory is never intentionally activated from a partially installed or unvalidated control plane.
