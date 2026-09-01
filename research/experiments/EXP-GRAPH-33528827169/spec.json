@@ -1,17 +1,27 @@
 {
   "experiment_id": "EXP-GRAPH-33528827169",
   "lane": "graph",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-PARAM-INHERIT"],
+  "question": "Does the SpiderKernel's parameterized mechanism resolution work end-to-end on a real website: can a mechanism distilled from execution on one resource be resolved, bound, and executed on a different resource with new parameter values?",
+  "hypothesis": "A parameterized mechanism (with ${id} slot) distilled from a successful GET /posts/1 will resolve EXECUTABLE and produce correct bound_action for GET /posts/2, GET/posts/3, etc., while a non-parameterized literal mechanism will return UNKNOWN for any resource other than its original. The kernel resolve→bind→execute pipeline is end-to-end functional on a live public API.",
+  "falsifier": "If the parameterized mechanism returns UNKNOWN or produces incorrect bound_action for unseen resource IDs (despite all parameter slots being provided in params), OR if verify() rejects the observed post-state despite the GET returning 200 with valid JSON matching the postcondition schema, then the kernel pipeline is broken and C-PARAM-INHERIT has no implementation substrate.",
+  "baselines": [
+    "baseline_cold: No mechanism registered. resolve('fetch', context, {id: X}) → must return UNKNOWN.",
+    "baseline_literal: Literal (non-parameterized) mechanism for GET /posts/1 only. resolve('fetch', context, {id: 2}) → must return UNKNOWN.",
+    "baseline_replay: Same literal mechanism. resolve('fetch', context, {id: 1}) → must return EXECUTABLE with bound_action path=/posts/1."
+  ],
+  "positive_control": "Register a parameterized mechanism for GET /posts/${id}. Resolve with params={id: 1}. Must return EXECUTABLE with bound_action={method: GET, url: https://jsonplaceholder.typicode.com/posts/1}. Execute the bound_action via HTTP. Verify postconditions (status 200, response contains 'userId', 'title', 'body' keys).",
+  "null_control": "Register a parameterized mechanism with applicability_guards={auth: true}. Resolve with context={auth: false} and valid params. Must return UNKNOWN (guard blocks execution despite parameter availability).",
+  "measurement_validity": [
+    "The test site (jsonplaceholder.typicode.com) is a stable public API with deterministic responses — no auth, no session drift, no dynamic DOM.",
+    "Parameter binding correctness is checked by exact string comparison of bound_action against expected URL.",
+    "End-to-end execution uses Python requests library — browser not required for this API-level test.",
+    "verify() checks postconditions against actual response state (status_code, JSON keys).",
+    "No outcome-bearing measurements during DESIGN phase — all measurements deferred to EXECUTE."
+  ],
+  "decision_rule": "PARAM-INHERIT-SUBSTRATE-VALID if: (1) parameterized mechanism resolves EXECUTABLE on all 5 unseen resource IDs, (2) bound_action URLs are correct for all 5, (3) HTTP execution succeeds (200) for all 5, (4) verify() returns True for all 5, (5) literal baseline returns UNKNOWN for unseen IDs, (6) cold baseline returns UNKNOWN. Otherwise PARAM-INHERIT-SUBSTRATE-BROKEN.",
+  "product_consequence_positive": "The kernel's parameter binding pipeline is validated as an end-to-end functional substrate. C-PARAM-INHERIT can advance to testing real web navigation mechanisms (fragment reuse, pagination, search) with parameterized slots. Product can begin registering parameterized mechanisms for external-agent consumption.",
+  "product_consequence_negative": "The kernel pipeline has never been tested on a real site. If it breaks here, no parameterized inheritance claim is testable until the implementation is repaired. The smallest next action is to fix the identified failure mode in kernel.py and re-run.",
+  "estimated_cost": "Negligible — 5 HTTP GET requests to a free public API, no browser automation, no model calls. Execution time < 30 seconds.",
+  "expected_information_gain": "HIGH for claim C-PARAM-INHERIT. This is the foundational gate: if the kernel can't do parameterized resolution end-to-end on a trivial case, all higher-order parameterized inheritance experiments (fragment reuse, pagination, cross-task transfer) are blocked. If it works, we have a validated substrate for the next experiment tier."
 }
