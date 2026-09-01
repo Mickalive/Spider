@@ -1,17 +1,27 @@
 {
   "experiment_id": "EXP-PRODUCT-33528829801",
   "lane": "product",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-PARAM-INHERIT"],
+  "question": "Does parameterized mechanism inheritance reduce later-agent cost for unseen resource identifiers compared to literal mechanism replay and cold exploration?",
+  "hypothesis": "A mechanism distilled with parameter induction from successful observations on resources A, B, C will resolve correctly for unseen resource D, with bound action correctly substituting the new identifier. The cost of parameterized resolution is O(k) where k is the number of parameters, compared to O(n) for full task replay where n is the task length.",
+  "falsifier": "The parameterized mechanism fails to resolve for unseen resource D despite matching preconditions and applicability guards, OR the bound action contains the old identifier instead of the new one, OR the parameter induction heuristic misidentifies more than 20% of true parameters as non-parameters (false negative rate > 0.2).",
+  "baselines": [
+    "B1: Cold exploration (no memory) — full task cost, always succeeds eventually",
+    "B2: Literal mechanism replay (current distill output) — succeeds only on exact identifier match, fails on new identifiers",
+    "B3: Nearest successful trajectory retrieval — find most similar prior observation by state similarity, attempt replay"
+  ],
+  "positive_control": "Mechanism with exact identifier match (same resource as training) — should always resolve successfully with O(1) cost",
+  "null_control": "Mechanism with mismatched preconditions (e.g., auth_required=True but context has auth_required=False) — should always abstain with UNKNOWN status",
+  "measurement_validity": [
+    "All mechanism contents recorded as raw artifacts before resolution testing",
+    "Resolution results stored separately from derived metrics",
+    "Deterministic seeds for any randomness in parameter induction",
+    "No outcome-bearing measurements during design phase",
+    "Parameter induction heuristic is simple enough to audit by inspection"
+  ],
+  "decision_rule": "C-PARAM-INHERIT survives this test if and only if: (1) parameterized mechanisms resolve correctly for >= 90% of unseen identifiers with correct parameter binding; (2) literal mechanisms resolve for 0% of unseen identifiers (they fail on all); (3) parameter induction false negative rate is <= 0.2. Otherwise C-PARAM-INHERIT is falsified at this level.",
+  "product_consequence_positive": "Parameterized inheritance is viable at the kernel level. Invest in richer parameter induction, parameterized distillation research, and end-to-end agent evaluation. Promotion readiness increases.",
+  "product_consequence_negative": "Parameterized inheritance fails at the simplest synthetic level. Re-evaluate product architecture: either the parameter induction approach is wrong, or the mechanism abstraction itself needs revision. Do not promote to Product Core.",
+  "estimated_cost": "Low: unit-test-level code changes in src/spider/ and tests/, no external infrastructure, no model calls, no network. Executable in <5 minutes.",
+  "expected_information_gain": "High: this is the foundational product claim. A positive result justifies continued investment in parameterized inheritance. A negative result fundamentally changes the product direction and may redirect resources to alternative mechanisms (e.g., semantic resolution, LLM-based inheritance)."
 }
