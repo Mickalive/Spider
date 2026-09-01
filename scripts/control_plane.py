@@ -17,7 +17,6 @@ CONTROL_ROOTS = [
     "research/lanes/registry.json",
     "research/EXPERIMENT_PACKET.md",
     "config/models.json",
-    "SPIDER_CODEX.md",
 ]
 
 
