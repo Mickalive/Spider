@@ -2,27 +2,28 @@
   "experiment_id": "EXP-FRONTIER-33528827909",
   "lane": "frontier",
   "claim_ids": ["C-WEB-DYNAMICS"],
-  "question": "Do Web state transitions exhibit information flow structure (transfer entropy, mutual information) that reveals dynamical organization beyond what prediction accuracy metrics capture?",
-  "hypothesis": "Information-theoretic measures (transfer entropy, conditional mutual information) will detect structured information flow in Web state transitions that is not visible through standard prediction accuracy metrics. Specifically, we hypothesize that: (1) transfer entropy from action to next-state will exceed zero under a Markov null, indicating directed information flow; (2) conditional mutual information between consecutive states given the action will be positive, indicating state-dependent dynamics; (3) these measures will correlate with task structure (e.g., navigation vs form submission) in ways that prediction accuracy does not.",
-  "falsifier": "All three information-theoretic measures fail to reject their respective null hypotheses at p<0.05 after multiple-comparison correction, OR the measures show no correlation with task structure, OR the measures are dominated by sample size effects rather than genuine structure.",
+  "question": "Does the predictive advantage of action-conditioned rules over action-independent memory vary across transition regimes, and does this variation reveal dynamical heterogeneity in Web-like state transitions?",
+  "hypothesis": "When synthetic Web-like transitions are generated with a controlled action-dependence parameter lambda (where lambda=0 means next-state is independent of action, lambda=1 means next-state is fully determined by action), the prediction accuracy advantage of an action-conditioned rule over a pure nearest-neighbor memory baseline will scale monotonically with lambda. Specifically: at lambda=0, memory >= rules; at lambda=1, rules >> memory; the rule-memory difference is a monotonic increasing function of lambda. This demonstrates that different transition regimes have qualitatively different dynamics, and that the rule-shuffle difference measured in prior work (WP-002B: +0.0532) is a mixture of these regimes rather than a uniform effect.",
+  "falsifier": "The rule-memory difference does not scale monotonically with lambda (Spearman rho < 0.7, p>0.05 after Bonferroni correction for 3 lambda levels), OR the rule-memory difference is indistinguishable from zero at all lambda levels (paired t-test p>0.05 at each level), OR the synthetic positive control fails (rules do not achieve >90% accuracy at lambda=1).",
   "baselines": [
-    "First-order Markov null (state transitions independent of action)",
-    "Shuffle null (action labels permuted randomly)",
-    "Frequency null (transitions proportional to marginal frequencies)",
-    "Nearest-neighbor baseline (prediction accuracy comparable to information-theoretic measures)"
+    "Pure nearest-neighbor memory baseline (no action conditioning)",
+    "Action-conditioned rule baseline (majority vote of (state, action) -> next_state)",
+    "Frequency baseline (marginal next-state distribution)",
+    "Shuffle baseline (action labels permuted)"
   ],
-  "positive_control": "Synthetic state machine with known information flow structure (e.g., deterministic finite automaton with hidden states) to verify measures can detect structure when present.",
-  "null_control": "Random walk on Web state graph with no action-dependence to verify measures don't detect structure when absent.",
+  "positive_control": "At lambda=1 (fully action-determined transitions), rules must achieve >90% accuracy. This verifies the measurement pipeline can detect strong action-dependence when present.",
+  "null_control": "At lambda=0 (action-independent transitions), rules must not significantly outperform memory (paired t-test p>0.05). This verifies the pipeline does not detect structure when absent.",
   "measurement_validity": [
-    "Sample size sufficient for reliable entropy estimation (>=100 transitions per condition)",
-    "Bias-corrected estimators used (KSG or Miller-Madow)",
-    "Multiple-comparison correction applied (Bonferroni or FDR)",
-    "No target leakage (measures computed on held-out data)",
-    "Stationarity check (measures stable across data splits)"
+    "Each lambda level has >=200 transitions for reliable accuracy estimation",
+    "Synthetic data generation uses frozen random seed (seed=42) for reproducibility",
+    "State space is discrete and finite (10 states) to avoid discretization artifacts",
+    "Action space has 4 action types to match Web-like action diversity",
+    "Train/test split is 80/20 with stratification by lambda level",
+    "No target leakage: rules are fit on train only, evaluated on test"
   ],
-  "decision_rule": "If information-theoretic measures reject nulls AND show correlation with task structure AND survive validity checks, verdict = SURVIVES_CURRENT_TEST for C-WEB-DYNAMICS. If measures fail to reject nulls OR show no task correlation, verdict = FALSIFIED-IN-SETTING. If measures show structure but validity checks fail, verdict = MEASUREMENT_INVALID.",
-  "product_consequence_positive": "Information-theoretic measures could become a new lens for understanding Web dynamics, potentially revealing structure that prediction-based metrics miss. This could inform mechanism design for SPIDER's Physics lane and guide where to look for genuine dynamical laws.",
-  "product_consequence_negative": "If information-theoretic measures reveal no structure beyond what prediction accuracy captures, it suggests Web dynamics may be adequately described by standard statistical models, and Physics lane should focus on other approaches.",
-  "estimated_cost": "Low: offline computation on existing transition data, no new data collection required",
-  "expected_information_gain": "High: This is the first application of information-theoretic measures to Web state transitions in SPIDER. A positive result opens a new research direction; a negative result constrains the space of possible Web dynamics."
+  "decision_rule": "If Spearman rho(rule_memory_diff, lambda) >= 0.7 with p<0.05 after Bonferroni correction, AND positive control passes (rules >90% at lambda=1), AND null control passes (rules not > memory at lambda=0), verdict = SURVIVES_CURRENT_TEST for C-WEB-DYNAMICS. If monotonicity fails OR controls fail, verdict = FALSIFIED-IN-SETTING. If sample sizes are insufficient or pipeline errors occur, verdict = MEASUREMENT_INVALID.",
+  "product_consequence_positive": "Demonstrates that Web transitions have regime-dependent dynamics. Different parts of the Web may require different prediction strategies. This informs where SPIDER should invest in action-conditioned mechanisms vs. pure memory retrieval.",
+  "product_consequence_negative": "If the rule-memory difference does not scale with action-dependence, it suggests that either (a) the rule framework is not sensitive to dynamical variation, or (b) Web-like transitions do not have regime-dependent dynamics. Physics lane should then focus on other approaches.",
+  "estimated_cost": "Very low: pure synthetic data generation, offline computation, no browser/network/model calls",
+  "expected_information_gain": "High: This is the first controlled test of whether Web-dynamical heterogeneity is detectable by prediction accuracy decomposition. A positive result justifies stratified analysis of real Web data; a negative result constrains the dynamical hypothesis."
 }
