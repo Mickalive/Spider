@@ -1,9 +1,9 @@
 {
   "stage": "execute",
   "category": "VALIDATION_FAILURE",
-  "message": "result missing controls",
+  "message": "result missing status",
   "retryable": false,
-  "recorded_at": "2026-09-02T05:12:05.516184+00:00",
-  "github_run_id": "33593474494",
+  "recorded_at": "2026-09-02T09:46:09.195585+00:00",
+  "github_run_id": "33615564161",
   "github_run_attempt": "1"
 }
