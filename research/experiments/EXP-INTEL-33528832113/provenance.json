@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-33528832113",
+  "lane": "intel",
+  "github_run_id": "33528832113",
+  "github_run_attempt": 1,
+  "recorded_at": "2026-09-02T19:30:00.000000+00:00",
+  "pre_execute_sha": "ce787b9eb128b13094b759c5db964674106fc784",
+  "base_sha": "ef1d4178d6a1c0ec2d4b001d3f2d4ba48f2a12c0",
+  "frozen_files": {
+    "request.json": "research/experiments/EXP-INTEL-33528832113/request.json",
+    "spec.json": "research/experiments/EXP-INTEL-33528832113/spec.json",
+    "prereg.md": "research/experiments/EXP-INTEL-33528832113/prereg.md",
+    "freeze.json": "research/experiments/EXP-INTEL-33528832113/freeze.json"
+  },
+  "output_files": {
+    "result.json": "research/experiments/EXP-INTEL-33528832113/result.json",
+    "report.md": "research/experiments/EXP-INTEL-33528832113/report.md",
+    "provenance.json": "research/experiments/EXP-INTEL-33528832113/provenance.json"
+  },
+  "methodology": "Structured reconnaissance via web search and documentation review. No compute, no browser, no LLM calls. All benchmark assessments cite specific publicly accessible documentation (paper, GitHub repo, dataset URL). Structural compatibility scoring used predeclared criteria S1-S5 from spec.json.",
+  "search_sources": [
+    "GitHub repositories (direct inspection)",
+    "arXiv papers (direct inspection)",
+    "Papers With Code",
+    "EmergentMind topic pages",
+    "BenchmarkingAgents.com reviews",
+    "Awesome Agents leaderboard",
+    "HuggingFace dataset cards",
+    "Web search (multiple queries)"
+  ],
+  "search_date": "2026-09-02",
+  "model_used": "opencode/mimo-v2.5-free",
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-33528832113/result.json",
+      "sha256": null,
+      "role": "derived",
+      "description": "Canonical experiment result with metrics, controls, observations, validity notes, and unresolved questions."
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-33528832113/report.md",
+      "sha256": null,
+      "role": "derived",
+      "description": "Human-readable report with ranked benchmark table, per-benchmark analysis, and product consequences."
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-33528832113/provenance.json",
+      "sha256": null,
+      "role": "derived",
+      "description": "Provenance metadata for reproducibility."
+    }
+  ],
+  "evidence_refs": [
+    {
+      "type": "paper",
+      "title": "WebArena: A Realistic Web Environment for Building Autonomous Agents",
+      "url": "https://arxiv.org/abs/2307.13854",
+      "year": 2024,
+      "venue": "NeurIPS 2024 (Oral)"
+    },
+    {
+      "type": "paper",
+      "title": "VisualWebArena: Evaluating Multimodal Agents on Realistic Visual Web Tasks",
+      "url": "https://arxiv.org/abs/2401.13649",
+      "year": 2024,
+      "venue": "ACL 2024"
+    },
+    {
+      "type": "paper",
+      "title": "Mind2Web: Towards a Generalist Agent for the Web",
+      "url": "https://arxiv.org/abs/2306.06070",
+      "year": 2023,
+      "venue": "NeurIPS 2023 (Spotlight)"
+    },
+    {
+      "type": "paper",
+      "title": "AssistantBench: Can Web Agents Solve Realistic and Time-Consuming Tasks?",
+      "url": "https://arxiv.org/abs/2407.15711",
+      "year": 2024,
+      "venue": "EMNLP 2024"
+    },
+    {
+      "type": "paper",
+      "title": "WorkArena: How Capable Are Web Agents at Solving Common Knowledge Work Tasks?",
+      "url": "https://arxiv.org/abs/2403.07718",
+      "year": 2024,
+      "venue": "ICML 2024"
+    },
+    {
+      "type": "paper",
+      "title": "WebShop: Towards Scalable Real-World Web Interaction with Grounded Language Agents",
+      "url": "https://arxiv.org/abs/2207.01206",
+      "year": 2022,
+      "venue": "NeurIPS 2022"
+    },
+    {
+      "type": "paper",
+      "title": "AgentBench: Evaluating LLMs as Agents",
+      "url": "https://arxiv.org/abs/2308.03688",
+      "year": 2023,
+      "venue": "ICLR 2024"
+    },
+    {
+      "type": "paper",
+      "title": "WebLINX: Real-World Website Navigation with Multi-Turn Dialogue",
+      "url": "https://arxiv.org/abs/2402.05930",
+      "year": 2024,
+      "venue": "ICLR 2024 Workshop"
+    },
+    {
+      "type": "paper",
+      "title": "WebMall -- A Multi-Shop Benchmark for Evaluating Web Agents",
+      "url": "https://arxiv.org/abs/2508.13024",
+      "year": 2025,
+      "venue": "arXiv"
+    },
+    {
+      "type": "paper",
+      "title": "Explorer: Scaling Exploration-driven Web Trajectory Synthesis for Multimodal Web Agents",
+      "url": "https://arxiv.org/abs/2502.11357",
+      "year": 2025,
+      "venue": "arXiv"
+    },
+    {
+      "type": "github",
+      "title": "WebArena GitHub Repository",
+      "url": "https://github.com/web-arena-x/webarena",
+      "accessed": "2026-09-02"
+    },
+    {
+      "type": "github",
+      "title": "VisualWebArena GitHub Repository",
+      "url": "https://github.com/web-arena-x/visualwebarena",
+      "accessed": "2026-09-02"
+    },
+    {
+      "type": "github",
+      "title": "Mind2Web GitHub Repository",
+      "url": "https://github.com/OSU-NLP-Group/Mind2Web",
+      "accessed": "2026-09-02"
+    },
+    {
+      "type": "github",
+      "title": "WebBench GitHub Repository",
+      "url": "https://github.com/Halluminate/WebBench",
+      "accessed": "2026-09-02"
+    },
+    {
+      "type": "github",
+      "title": "WorkArena GitHub Repository",
+      "url": "https://github.com/ServiceNow/WorkArena",
+      "accessed": "2026-09-02"
+    },
+    {
+      "type": "website",
+      "title": "WebArena Official Website",
+      "url": "https://webarena.dev/",
+      "accessed": "2026-09-02"
+    },
+    {
+      "type": "website",
+      "title": "WebBench Leaderboard",
+      "url": "https://webbench.ai/",
+      "accessed": "2026-09-02"
+    },
+    {
+      "type": "website",
+      "title": "AssistantBench Project Page",
+      "url": "https://assistantbench.github.io/",
+      "accessed": "2026-09-02"
+    }
+  ]
+}
