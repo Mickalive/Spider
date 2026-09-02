@@ -1,0 +1,10 @@
+{
+  "status": "failure",
+  "model": "opencode/hy3-free",
+  "attempt": 1,
+  "exit_code": 1,
+  "category": "substantive",
+  "github_run_id": "33683356205",
+  "github_run_attempt": "1",
+  "recorded_at": "2026-09-02T21:12:17.103189+00:00"
+}
