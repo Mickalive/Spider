@@ -1,0 +1,673 @@
+{
+  "experiment_id": "EXP-PRODUCT-33528829801",
+  "timestamp": "2026-09-02T13:56:29Z",
+  "observations": {
+    "training_A": {
+      "resource_id": "A",
+      "intent": "delete-item",
+      "state": {
+        "authenticated": true,
+        "role": "owner"
+      },
+      "action": {
+        "method": "DELETE",
+        "path": "/api/items/A"
+      },
+      "next_state": {
+        "exists": false
+      },
+      "success": true,
+      "provenance": {
+        "source": "synthetic",
+        "resource_id": "A"
+      }
+    },
+    "training_B": {
+      "resource_id": "B",
+      "intent": "delete-item",
+      "state": {
+        "authenticated": true,
+        "role": "owner"
+      },
+      "action": {
+        "method": "DELETE",
+        "path": "/api/items/B"
+      },
+      "next_state": {
+        "exists": false
+      },
+      "success": true,
+      "provenance": {
+        "source": "synthetic",
+        "resource_id": "B"
+      }
+    },
+    "training_C": {
+      "resource_id": "C",
+      "intent": "delete-item",
+      "state": {
+        "authenticated": true,
+        "role": "owner"
+      },
+      "action": {
+        "method": "DELETE",
+        "path": "/api/items/C"
+      },
+      "next_state": {
+        "exists": false
+      },
+      "success": true,
+      "provenance": {
+        "source": "synthetic",
+        "resource_id": "C"
+      }
+    },
+    "unseen_D": {
+      "resource_id": "D",
+      "intent": "delete-item",
+      "state": {
+        "authenticated": true,
+        "role": "owner"
+      },
+      "action": {
+        "method": "DELETE",
+        "path": "/api/items/D"
+      },
+      "next_state": {
+        "exists": false
+      },
+      "success": true
+    },
+    "unseen_E": {
+      "resource_id": "E",
+      "intent": "delete-item",
+      "state": {
+        "authenticated": true,
+        "role": "owner"
+      },
+      "action": {
+        "method": "DELETE",
+        "path": "/api/items/E"
+      },
+      "next_state": {
+        "exists": false
+      },
+      "success": true
+    },
+    "unseen_F": {
+      "resource_id": "F",
+      "intent": "delete-item",
+      "state": {
+        "authenticated": true,
+        "role": "owner"
+      },
+      "action": {
+        "method": "DELETE",
+        "path": "/api/items/F"
+      },
+      "next_state": {
+        "exists": false
+      },
+      "success": true
+    },
+    "unseen_G": {
+      "resource_id": "G",
+      "intent": "delete-item",
+      "state": {
+        "authenticated": true,
+        "role": "owner"
+      },
+      "action": {
+        "method": "DELETE",
+        "path": "/api/items/G"
+      },
+      "next_state": {
+        "exists": false
+      },
+      "success": true
+    },
+    "unseen_H": {
+      "resource_id": "H",
+      "intent": "delete-item",
+      "state": {
+        "authenticated": true,
+        "role": "owner"
+      },
+      "action": {
+        "method": "DELETE",
+        "path": "/api/items/H"
+      },
+      "next_state": {
+        "exists": false
+      },
+      "success": true
+    },
+    "unseen_I": {
+      "resource_id": "I",
+      "intent": "delete-item",
+      "state": {
+        "authenticated": true,
+        "role": "owner"
+      },
+      "action": {
+        "method": "DELETE",
+        "path": "/api/items/I"
+      },
+      "next_state": {
+        "exists": false
+      },
+      "success": true
+    },
+    "unseen_J": {
+      "resource_id": "J",
+      "intent": "delete-item",
+      "state": {
+        "authenticated": true,
+        "role": "owner"
+      },
+      "action": {
+        "method": "DELETE",
+        "path": "/api/items/J"
+      },
+      "next_state": {
+        "exists": false
+      },
+      "success": true
+    },
+    "unseen_K": {
+      "resource_id": "K",
+      "intent": "delete-item",
+      "state": {
+        "authenticated": true,
+        "role": "owner"
+      },
+      "action": {
+        "method": "DELETE",
+        "path": "/api/items/K"
+      },
+      "next_state": {
+        "exists": false
+      },
+      "success": true
+    },
+    "unseen_L": {
+      "resource_id": "L",
+      "intent": "delete-item",
+      "state": {
+        "authenticated": true,
+        "role": "owner"
+      },
+      "action": {
+        "method": "DELETE",
+        "path": "/api/items/L"
+      },
+      "next_state": {
+        "exists": false
+      },
+      "success": true
+    },
+    "unseen_M": {
+      "resource_id": "M",
+      "intent": "delete-item",
+      "state": {
+        "authenticated": true,
+        "role": "owner"
+      },
+      "action": {
+        "method": "DELETE",
+        "path": "/api/items/M"
+      },
+      "next_state": {
+        "exists": false
+      },
+      "success": true
+    }
+  },
+  "distillation": {
+    "success": true,
+    "mechanism_id": "param-delete-item",
+    "intent": "delete-item",
+    "preconditions": {
+      "authenticated": true,
+      "role": "owner"
+    },
+    "action_template": {
+      "method": "DELETE",
+      "path": "/api/items/${id}"
+    },
+    "postconditions": {
+      "exists": false
+    },
+    "parameter_slots": [
+      "id"
+    ],
+    "confidence": 0.9,
+    "evidence": [
+      "6cb1f17609422f59",
+      "d673847140a94778",
+      "b1dcaf976a4d5078"
+    ],
+    "elapsed_seconds": 0.00024182600000699495
+  },
+  "resolution_results": {
+    "unseen": [
+      {
+        "resource_id": "D",
+        "status": "EXECUTABLE",
+        "mechanism_id": "param-delete-item",
+        "bound_action": {
+          "method": "DELETE",
+          "path": "/api/items/D"
+        },
+        "reason": "applicability guards and confidence threshold passed",
+        "confidence": 0.9,
+        "elapsed_seconds": 0.0001126750000253196
+      },
+      {
+        "resource_id": "E",
+        "status": "EXECUTABLE",
+        "mechanism_id": "param-delete-item",
+        "bound_action": {
+          "method": "DELETE",
+          "path": "/api/items/E"
+        },
+        "reason": "applicability guards and confidence threshold passed",
+        "confidence": 0.9,
+        "elapsed_seconds": 6.371500001023378e-05
+      },
+      {
+        "resource_id": "F",
+        "status": "EXECUTABLE",
+        "mechanism_id": "param-delete-item",
+        "bound_action": {
+          "method": "DELETE",
+          "path": "/api/items/F"
+        },
+        "reason": "applicability guards and confidence threshold passed",
+        "confidence": 0.9,
+        "elapsed_seconds": 4.696100000955994e-05
+      },
+      {
+        "resource_id": "G",
+        "status": "EXECUTABLE",
+        "mechanism_id": "param-delete-item",
+        "bound_action": {
+          "method": "DELETE",
+          "path": "/api/items/G"
+        },
+        "reason": "applicability guards and confidence threshold passed",
+        "confidence": 0.9,
+        "elapsed_seconds": 3.974200001266581e-05
+      },
+      {
+        "resource_id": "H",
+        "status": "EXECUTABLE",
+        "mechanism_id": "param-delete-item",
+        "bound_action": {
+          "method": "DELETE",
+          "path": "/api/items/H"
+        },
+        "reason": "applicability guards and confidence threshold passed",
+        "confidence": 0.9,
+        "elapsed_seconds": 3.803699999593846e-05
+      },
+      {
+        "resource_id": "I",
+        "status": "EXECUTABLE",
+        "mechanism_id": "param-delete-item",
+        "bound_action": {
+          "method": "DELETE",
+          "path": "/api/items/I"
+        },
+        "reason": "applicability guards and confidence threshold passed",
+        "confidence": 0.9,
+        "elapsed_seconds": 3.5566999997627136e-05
+      },
+      {
+        "resource_id": "J",
+        "status": "EXECUTABLE",
+        "mechanism_id": "param-delete-item",
+        "bound_action": {
+          "method": "DELETE",
+          "path": "/api/items/J"
+        },
+        "reason": "applicability guards and confidence threshold passed",
+        "confidence": 0.9,
+        "elapsed_seconds": 3.3173999980817825e-05
+      },
+      {
+        "resource_id": "K",
+        "status": "EXECUTABLE",
+        "mechanism_id": "param-delete-item",
+        "bound_action": {
+          "method": "DELETE",
+          "path": "/api/items/K"
+        },
+        "reason": "applicability guards and confidence threshold passed",
+        "confidence": 0.9,
+        "elapsed_seconds": 3.684999998654348e-05
+      },
+      {
+        "resource_id": "L",
+        "status": "EXECUTABLE",
+        "mechanism_id": "param-delete-item",
+        "bound_action": {
+          "method": "DELETE",
+          "path": "/api/items/L"
+        },
+        "reason": "applicability guards and confidence threshold passed",
+        "confidence": 0.9,
+        "elapsed_seconds": 3.253399998470741e-05
+      },
+      {
+        "resource_id": "M",
+        "status": "EXECUTABLE",
+        "mechanism_id": "param-delete-item",
+        "bound_action": {
+          "method": "DELETE",
+          "path": "/api/items/M"
+        },
+        "reason": "applicability guards and confidence threshold passed",
+        "confidence": 0.9,
+        "elapsed_seconds": 3.102700000567893e-05
+      }
+    ],
+    "summary": {
+      "total_unseen": 10,
+      "executable_count": 10,
+      "success_rate": 1.0,
+      "correct_binding_count": 10,
+      "binding_accuracy": 1.0
+    }
+  },
+  "baselines": {
+    "B1_cold": {
+      "results": [
+        {
+          "baseline": "B1_cold",
+          "operations": 4,
+          "success": true,
+          "note": "Full re-exploration cost; always succeeds eventually"
+        },
+        {
+          "baseline": "B1_cold",
+          "operations": 4,
+          "success": true,
+          "note": "Full re-exploration cost; always succeeds eventually"
+        },
+        {
+          "baseline": "B1_cold",
+          "operations": 4,
+          "success": true,
+          "note": "Full re-exploration cost; always succeeds eventually"
+        },
+        {
+          "baseline": "B1_cold",
+          "operations": 4,
+          "success": true,
+          "note": "Full re-exploration cost; always succeeds eventually"
+        },
+        {
+          "baseline": "B1_cold",
+          "operations": 4,
+          "success": true,
+          "note": "Full re-exploration cost; always succeeds eventually"
+        },
+        {
+          "baseline": "B1_cold",
+          "operations": 4,
+          "success": true,
+          "note": "Full re-exploration cost; always succeeds eventually"
+        },
+        {
+          "baseline": "B1_cold",
+          "operations": 4,
+          "success": true,
+          "note": "Full re-exploration cost; always succeeds eventually"
+        },
+        {
+          "baseline": "B1_cold",
+          "operations": 4,
+          "success": true,
+          "note": "Full re-exploration cost; always succeeds eventually"
+        },
+        {
+          "baseline": "B1_cold",
+          "operations": 4,
+          "success": true,
+          "note": "Full re-exploration cost; always succeeds eventually"
+        },
+        {
+          "baseline": "B1_cold",
+          "operations": 4,
+          "success": true,
+          "note": "Full re-exploration cost; always succeeds eventually"
+        }
+      ],
+      "avg_operations": 4.0,
+      "all_succeed": true
+    },
+    "B2_literal": {
+      "results": [
+        {
+          "baseline": "B2_literal",
+          "operations": 1,
+          "success": false,
+          "resolution_status": "EXPLORE",
+          "resolution_reason": "candidate exists but confidence is below execution threshold",
+          "elapsed_seconds": 8.687499999382453e-05,
+          "note": "Literal mechanism has no parameter slots; cannot bind new identifier"
+        },
+        {
+          "baseline": "B2_literal",
+          "operations": 1,
+          "success": false,
+          "resolution_status": "EXPLORE",
+          "resolution_reason": "candidate exists but confidence is below execution threshold",
+          "elapsed_seconds": 7.122899998535104e-05,
+          "note": "Literal mechanism has no parameter slots; cannot bind new identifier"
+        },
+        {
+          "baseline": "B2_literal",
+          "operations": 1,
+          "success": false,
+          "resolution_status": "EXPLORE",
+          "resolution_reason": "candidate exists but confidence is below execution threshold",
+          "elapsed_seconds": 7.358199999885073e-05,
+          "note": "Literal mechanism has no parameter slots; cannot bind new identifier"
+        },
+        {
+          "baseline": "B2_literal",
+          "operations": 1,
+          "success": false,
+          "resolution_status": "EXPLORE",
+          "resolution_reason": "candidate exists but confidence is below execution threshold",
+          "elapsed_seconds": 9.305500000778011e-05,
+          "note": "Literal mechanism has no parameter slots; cannot bind new identifier"
+        },
+        {
+          "baseline": "B2_literal",
+          "operations": 1,
+          "success": false,
+          "resolution_status": "EXPLORE",
+          "resolution_reason": "candidate exists but confidence is below execution threshold",
+          "elapsed_seconds": 6.789100001469706e-05,
+          "note": "Literal mechanism has no parameter slots; cannot bind new identifier"
+        },
+        {
+          "baseline": "B2_literal",
+          "operations": 1,
+          "success": false,
+          "resolution_status": "EXPLORE",
+          "resolution_reason": "candidate exists but confidence is below execution threshold",
+          "elapsed_seconds": 6.561300000385017e-05,
+          "note": "Literal mechanism has no parameter slots; cannot bind new identifier"
+        },
+        {
+          "baseline": "B2_literal",
+          "operations": 1,
+          "success": false,
+          "resolution_status": "EXPLORE",
+          "resolution_reason": "candidate exists but confidence is below execution threshold",
+          "elapsed_seconds": 8.599899999239824e-05,
+          "note": "Literal mechanism has no parameter slots; cannot bind new identifier"
+        },
+        {
+          "baseline": "B2_literal",
+          "operations": 1,
+          "success": false,
+          "resolution_status": "EXPLORE",
+          "resolution_reason": "candidate exists but confidence is below execution threshold",
+          "elapsed_seconds": 9.171299998911309e-05,
+          "note": "Literal mechanism has no parameter slots; cannot bind new identifier"
+        },
+        {
+          "baseline": "B2_literal",
+          "operations": 1,
+          "success": false,
+          "resolution_status": "EXPLORE",
+          "resolution_reason": "candidate exists but confidence is below execution threshold",
+          "elapsed_seconds": 7.345099999156446e-05,
+          "note": "Literal mechanism has no parameter slots; cannot bind new identifier"
+        },
+        {
+          "baseline": "B2_literal",
+          "operations": 1,
+          "success": false,
+          "resolution_status": "EXPLORE",
+          "resolution_reason": "candidate exists but confidence is below execution threshold",
+          "elapsed_seconds": 7.088399999588546e-05,
+          "note": "Literal mechanism has no parameter slots; cannot bind new identifier"
+        }
+      ],
+      "literal_fail_count": 10,
+      "literal_fail_rate": 1.0,
+      "all_fail": true
+    },
+    "B3_retrieval": {
+      "results": [
+        {
+          "baseline": "B3_retrieval",
+          "operations": 2,
+          "success": false,
+          "matched_resource": "A",
+          "note": "Retrieval finds nearest observation but replays literal content; fails on unseen"
+        },
+        {
+          "baseline": "B3_retrieval",
+          "operations": 2,
+          "success": false,
+          "matched_resource": "A",
+          "note": "Retrieval finds nearest observation but replays literal content; fails on unseen"
+        },
+        {
+          "baseline": "B3_retrieval",
+          "operations": 2,
+          "success": false,
+          "matched_resource": "A",
+          "note": "Retrieval finds nearest observation but replays literal content; fails on unseen"
+        },
+        {
+          "baseline": "B3_retrieval",
+          "operations": 2,
+          "success": false,
+          "matched_resource": "A",
+          "note": "Retrieval finds nearest observation but replays literal content; fails on unseen"
+        },
+        {
+          "baseline": "B3_retrieval",
+          "operations": 2,
+          "success": false,
+          "matched_resource": "A",
+          "note": "Retrieval finds nearest observation but replays literal content; fails on unseen"
+        },
+        {
+          "baseline": "B3_retrieval",
+          "operations": 2,
+          "success": false,
+          "matched_resource": "A",
+          "note": "Retrieval finds nearest observation but replays literal content; fails on unseen"
+        },
+        {
+          "baseline": "B3_retrieval",
+          "operations": 2,
+          "success": false,
+          "matched_resource": "A",
+          "note": "Retrieval finds nearest observation but replays literal content; fails on unseen"
+        },
+        {
+          "baseline": "B3_retrieval",
+          "operations": 2,
+          "success": false,
+          "matched_resource": "A",
+          "note": "Retrieval finds nearest observation but replays literal content; fails on unseen"
+        },
+        {
+          "baseline": "B3_retrieval",
+          "operations": 2,
+          "success": false,
+          "matched_resource": "A",
+          "note": "Retrieval finds nearest observation but replays literal content; fails on unseen"
+        },
+        {
+          "baseline": "B3_retrieval",
+          "operations": 2,
+          "success": false,
+          "matched_resource": "A",
+          "note": "Retrieval finds nearest observation but replays literal content; fails on unseen"
+        }
+      ],
+      "all_fail": true
+    }
+  },
+  "controls": {
+    "positive": {
+      "resource_id": "A",
+      "status": "EXECUTABLE",
+      "bound_action": {
+        "method": "DELETE",
+        "path": "/api/items/A"
+      },
+      "reason": "applicability guards and confidence threshold passed",
+      "expected": "EXECUTABLE",
+      "passed": true
+    },
+    "null": {
+      "context": {
+        "authenticated": false
+      },
+      "status": "UNKNOWN",
+      "reason": "no applicable validated mechanism",
+      "expected": "UNKNOWN",
+      "passed": true
+    }
+  },
+  "parameter_induction_audit": {
+    "identified_slots": [
+      "id"
+    ],
+    "has_parameter_slots": true,
+    "correct_naming": true,
+    "true_param_count": 1,
+    "detected_param_count": 1,
+    "false_negatives": 0,
+    "false_negative_rate": 0.0,
+    "action_template_raw": {
+      "method": "DELETE",
+      "path": "/api/items/${id}"
+    }
+  },
+  "decision": {
+    "survival_checks": {
+      "unseen_resolution_rate_gte_90": true,
+      "binding_accuracy_100": true,
+      "literal_fails_all": true,
+      "fn_rate_lte_0_2": true,
+      "positive_control_passes": true,
+      "null_control_passes": true
+    },
+    "verdict": "SURVIVES",
+    "claim_id": "C-PARAM-INHERIT",
+    "falsification_details": {}
+  }
+}
