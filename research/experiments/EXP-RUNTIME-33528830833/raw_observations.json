@@ -6,7 +6,7 @@
       "status": 401,
       "headers": {
         "Server": "BaseHTTP/0.6 Python/3.12.14",
-        "Date": "Wed, 02 Sep 2026 13:57:27 GMT",
+        "Date": "Wed, 02 Sep 2026 17:57:27 GMT",
         "X-Auth-Level": "none",
         "X-Session": "none",
         "X-Error": "token_expired",
@@ -16,9 +16,9 @@
       "body_hex": "7b226572726f72223a22746f6b656e5f65787069726564222c226d657373616765223a22546f6b656e2068617320657870697265642c20706c656173652072656672657368227d",
       "body_len": 71,
       "redirect_url": null,
-      "elapsed": 0.018247095999981866,
-      "timestamp": 1788357447.6905928,
-      "fingerprint": "4266fd0f9c49cf2f59a23709aef898174b51bb0c677ca84679cdd5ec06eddcdd"
+      "elapsed": 0.023624671000050057,
+      "timestamp": 1788371847.4518228,
+      "fingerprint": "742680cb3271c467142fb5c16ebeff2f42f12615bf26de485ccc51559625566f"
     },
     {
       "state": "expired_token",
@@ -26,7 +26,7 @@
       "status": 401,
       "headers": {
         "Server": "BaseHTTP/0.6 Python/3.12.14",
-        "Date": "Wed, 02 Sep 2026 13:57:27 GMT",
+        "Date": "Wed, 02 Sep 2026 17:57:27 GMT",
         "X-Auth-Level": "none",
         "X-Session": "none",
         "X-Error": "token_expired",
@@ -36,9 +36,9 @@
       "body_hex": "7b226572726f72223a22746f6b656e5f65787069726564222c226d657373616765223a22546f6b656e2068617320657870697265642c20706c656173652072656672657368227d",
       "body_len": 71,
       "redirect_url": null,
-      "elapsed": 0.0005499320000126318,
-      "timestamp": 1788357447.6913111,
-      "fingerprint": "4266fd0f9c49cf2f59a23709aef898174b51bb0c677ca84679cdd5ec06eddcdd"
+      "elapsed": 0.0004792260000385795,
+      "timestamp": 1788371847.4524555,
+      "fingerprint": "742680cb3271c467142fb5c16ebeff2f42f12615bf26de485ccc51559625566f"
     },
     {
       "state": "expired_token",
@@ -46,7 +46,7 @@
       "status": 401,
       "headers": {
         "Server": "BaseHTTP/0.6 Python/3.12.14",
-        "Date": "Wed, 02 Sep 2026 13:57:27 GMT",
+        "Date": "Wed, 02 Sep 2026 17:57:27 GMT",
         "X-Auth-Level": "none",
         "X-Session": "none",
         "X-Error": "token_expired",
@@ -56,9 +56,9 @@
       "body_hex": "7b226572726f72223a22746f6b656e5f65787069726564222c226d657373616765223a22546f6b656e2068617320657870697265642c20706c656173652072656672657368227d",
       "body_len": 71,
       "redirect_url": null,
-      "elapsed": 0.0003912999999897693,
-      "timestamp": 1788357447.69406,
-      "fingerprint": "4266fd0f9c49cf2f59a23709aef898174b51bb0c677ca84679cdd5ec06eddcdd"
+      "elapsed": 0.00044011099998897407,
+      "timestamp": 1788371847.4551644,
+      "fingerprint": "742680cb3271c467142fb5c16ebeff2f42f12615bf26de485ccc51559625566f"
     },
     {
       "state": "expired_token",
@@ -66,7 +66,7 @@
       "status": 401,
       "headers": {
         "Server": "BaseHTTP/0.6 Python/3.12.14",
-        "Date": "Wed, 02 Sep 2026 13:57:27 GMT",
+        "Date": "Wed, 02 Sep 2026 17:57:27 GMT",
         "X-Auth-Level": "none",
         "X-Session": "none",
         "X-Error": "token_expired",
@@ -76,9 +76,9 @@
       "body_hex": "7b226572726f72223a22746f6b656e5f65787069726564222c226d657373616765223a22546f6b656e2068617320657870697265642c20706c656173652072656672657368227d",
       "body_len": 71,
       "redirect_url": null,
-      "elapsed": 0.00042543000000705433,
-      "timestamp": 1788357447.6951447,
-      "fingerprint": "4266fd0f9c49cf2f59a23709aef898174b51bb0c677ca84679cdd5ec06eddcdd"
+      "elapsed": 0.0004285510000272552,
+      "timestamp": 1788371847.4562125,
+      "fingerprint": "742680cb3271c467142fb5c16ebeff2f42f12615bf26de485ccc51559625566f"
     },
     {
       "state": "expired_token",
@@ -86,7 +86,7 @@
       "status": 401,
       "headers": {
         "Server": "BaseHTTP/0.6 Python/3.12.14",
-        "Date": "Wed, 02 Sep 2026 13:57:27 GMT",
+        "Date": "Wed, 02 Sep 2026 17:57:27 GMT",
         "X-Auth-Level": "none",
         "X-Session": "none",
         "X-Error": "token_expired",
@@ -96,9 +96,9 @@
       "body_hex": "7b226572726f72223a22746f6b656e5f65787069726564222c226d657373616765223a22546f6b656e2068617320657870697265642c20706c656173652072656672657368227d",
       "body_len": 71,
       "redirect_url": null,
-      "elapsed": 0.0004026340000109485,
-      "timestamp": 1788357447.696713,
-      "fingerprint": "4266fd0f9c49cf2f59a23709aef898174b51bb0c677ca84679cdd5ec06eddcdd"
+      "elapsed": 0.0004053119999980481,
+      "timestamp": 1788371847.4578588,
+      "fingerprint": "742680cb3271c467142fb5c16ebeff2f42f12615bf26de485ccc51559625566f"
     },
     {
       "state": "expired_token",
@@ -106,7 +106,7 @@
       "status": 401,
       "headers": {
         "Server": "BaseHTTP/0.6 Python/3.12.14",
-        "Date": "Wed, 02 Sep 2026 13:57:27 GMT",
+        "Date": "Wed, 02 Sep 2026 17:57:27 GMT",
         "X-Auth-Level": "none",
         "X-Session": "none",
         "X-Error": "token_expired",
@@ -116,9 +116,9 @@
       "body_hex": "7b226572726f72223a22746f6b656e5f65787069726564222c226d657373616765223a22546f6b656e2068617320657870697265642c20706c656173652072656672657368227d",
       "body_len": 71,
       "redirect_url": null,
-      "elapsed": 0.00036582000001317283,
-      "timestamp": 1788357447.699464,
-      "fingerprint": "4266fd0f9c49cf2f59a23709aef898174b51bb0c677ca84679cdd5ec06eddcdd"
+      "elapsed": 0.0004154060000018944,
+      "timestamp": 1788371847.4609613,
+      "fingerprint": "742680cb3271c467142fb5c16ebeff2f42f12615bf26de485ccc51559625566f"
     },
     {
       "state": "expired_token",
@@ -126,7 +126,7 @@
       "status": 401,
       "headers": {
         "Server": "BaseHTTP/0.6 Python/3.12.14",
-        "Date": "Wed, 02 Sep 2026 13:57:27 GMT",
+        "Date": "Wed, 02 Sep 2026 17:57:27 GMT",
         "X-Auth-Level": "none",
         "X-Session": "none",
         "X-Error": "token_expired",
@@ -136,9 +136,9 @@
       "body_hex": "7b226572726f72223a22746f6b656e5f65787069726564222c226d657373616765223a22546f6b656e2068617320657870697265642c20706c656173652072656672657368227d",
       "body_len": 71,
       "redirect_url": null,
-      "elapsed": 0.00041836899998770605,
-      "timestamp": 1788357447.7036548,
-      "fingerprint": "4266fd0f9c49cf2f59a23709aef898174b51bb0c677ca84679cdd5ec06eddcdd"
+      "elapsed": 0.00038137899997536806,
+      "timestamp": 1788371847.465568,
+      "fingerprint": "742680cb3271c467142fb5c16ebeff2f42f12615bf26de485ccc51559625566f"
     },
     {
       "state": "expired_token",
@@ -146,7 +146,7 @@
       "status": 401,
       "headers": {
         "Server": "BaseHTTP/0.6 Python/3.12.14",
-        "Date": "Wed, 02 Sep 2026 13:57:27 GMT",
+        "Date": "Wed, 02 Sep 2026 17:57:27 GMT",
         "X-Auth-Level": "none",
         "X-Session": "none",
         "X-Error": "token_expired",
@@ -156,9 +156,9 @@
       "body_hex": "7b226572726f72223a22746f6b656e5f65787069726564222c226d657373616765223a22546f6b656e2068617320657870697265642c20706c656173652072656672657368227d",
       "body_len": 71,
       "redirect_url": null,
-      "elapsed": 0.0004188069999599975,
-      "timestamp": 1788357447.704154,
-      "fingerprint": "4266fd0f9c49cf2f59a23709aef898174b51bb0c677ca84679cdd5ec06eddcdd"
+      "elapsed": 0.00037708899998278866,
+      "timestamp": 1788371847.4660797,
+      "fingerprint": "742680cb3271c467142fb5c16ebeff2f42f12615bf26de485ccc51559625566f"
     },
     {
       "state": "expired_token",
@@ -166,7 +166,7 @@
       "status": 401,
       "headers": {
         "Server": "BaseHTTP/0.6 Python/3.12.14",
-        "Date": "Wed, 02 Sep 2026 13:57:27 GMT",
+        "Date": "Wed, 02 Sep 2026 17:57:27 GMT",
         "X-Auth-Level": "none",
         "X-Session": "none",
         "X-Error": "token_expired",
@@ -176,9 +176,9 @@
       "body_hex": "7b226572726f72223a22746f6b656e5f65787069726564222c226d657373616765223a22546f6b656e2068617320657870697265642c20706c656173652072656672657368227d",
       "body_len": 71,
       "redirect_url": null,
-      "elapsed": 0.0003527000000076441,
-      "timestamp": 1788357447.704602,
-      "fingerprint": "4266fd0f9c49cf2f59a23709aef898174b51bb0c677ca84679cdd5ec06eddcdd"
+      "elapsed": 0.00037552800000639763,
+      "timestamp": 1788371847.4665675,
+      "fingerprint": "742680cb3271c467142fb5c16ebeff2f42f12615bf26de485ccc51559625566f"
     },
     {
       "state": "expired_token",
@@ -186,7 +186,7 @@
       "status": 401,
       "headers": {
         "Server": "BaseHTTP/0.6 Python/3.12.14",
-        "Date": "Wed, 02 Sep 2026 13:57:27 GMT",
+        "Date": "Wed, 02 Sep 2026 17:57:27 GMT",
         "X-Auth-Level": "none",
         "X-Session": "none",
         "X-Error": "token_expired",
@@ -196,9 +196,9 @@
       "body_hex": "7b226572726f72223a22746f6b656e5f65787069726564222c226d657373616765223a22546f6b656e2068617320657870697265642c20706c656173652072656672657368227d",
       "body_len": 71,
       "redirect_url": null,
-      "elapsed": 0.00045740699999896606,
-      "timestamp": 1788357447.7096527,
-      "fingerprint": "4266fd0f9c49cf2f59a23709aef898174b51bb0c677ca84679cdd5ec06eddcdd"
+      "elapsed": 0.0003734109999982138,
+      "timestamp": 1788371847.4715588,
+      "fingerprint": "742680cb3271c467142fb5c16ebeff2f42f12615bf26de485ccc51559625566f"
     }
   ],
   "valid_token": [
@@ -208,7 +208,7 @@
       "status": 200,
       "headers": {
         "Server": "BaseHTTP/0.6 Python/3.12.14",
-        "Date": "Wed, 02 Sep 2026 13:57:27 GMT",
+        "Date": "Wed, 02 Sep 2026 17:57:27 GMT",
         "X-Auth-Level": "full",
         "X-Session": "none",
         "X-User": "alice",
@@ -218,9 +218,9 @@
       "body_hex": "7b2270616765223a2270726976617465222c22636f6e74656e74223a22596f75722064617368626f6172642064617461222c22617574685f6c6576656c223a2266756c6c222c2275736572223a22616c696365227d",
       "body_len": 85,
       "redirect_url": null,
-      "elapsed": 0.0004849939999758135,
-      "timestamp": 1788357447.691975,
-      "fingerprint": "c2aadffffec0e73848beaf0b23d01a7018be529df75d430b92493d7d324caf8c"
+      "elapsed": 0.0004529269999693497,
+      "timestamp": 1788371847.453005,
+      "fingerprint": "7f674bd0093263b2efeceeed31156f39a0497f1bbf43fe1b4890b120211c639b"
     },
     {
       "state": "valid_token",
@@ -228,7 +228,7 @@
       "status": 200,
       "headers": {
         "Server": "BaseHTTP/0.6 Python/3.12.14",
-        "Date": "Wed, 02 Sep 2026 13:57:27 GMT",
+        "Date": "Wed, 02 Sep 2026 17:57:27 GMT",
         "X-Auth-Level": "full",
         "X-Session": "none",
         "X-User": "alice",
@@ -238,9 +238,9 @@
       "body_hex": "7b2270616765223a2270726976617465222c22636f6e74656e74223a22596f75722064617368626f6172642064617461222c22617574685f6c6576656c223a2266756c6c222c2275736572223a22616c696365227d",
       "body_len": 85,
       "redirect_url": null,
-      "elapsed": 0.0003874000000223532,
-      "timestamp": 1788357447.6924686,
-      "fingerprint": "c2aadffffec0e73848beaf0b23d01a7018be529df75d430b92493d7d324caf8c"
+      "elapsed": 0.00042427099998576523,
+      "timestamp": 1788371847.4535294,
+      "fingerprint": "7f674bd0093263b2efeceeed31156f39a0497f1bbf43fe1b4890b120211c639b"
     },
     {
       "state": "valid_token",
@@ -248,7 +248,7 @@
       "status": 200,
       "headers": {
         "Server": "BaseHTTP/0.6 Python/3.12.14",
-        "Date": "Wed, 02 Sep 2026 13:57:27 GMT",
+        "Date": "Wed, 02 Sep 2026 17:57:27 GMT",
         "X-Auth-Level": "full",
         "X-Session": "none",
         "X-User": "alice",
@@ -258,9 +258,9 @@
       "body_hex": "7b2270616765223a2270726976617465222c22636f6e74656e74223a22596f75722064617368626f6172642064617461222c22617574685f6c6576656c223a2266756c6c222c2275736572223a22616c696365227d",
       "body_len": 85,
       "redirect_url": null,
-      "elapsed": 0.0004188479999811534,
-      "timestamp": 1788357447.6956549,
-      "fingerprint": "c2aadffffec0e73848beaf0b23d01a7018be529df75d430b92493d7d324caf8c"
+      "elapsed": 0.00045912100000577993,
+      "timestamp": 1788371847.456751,
+      "fingerprint": "7f674bd0093263b2efeceeed31156f39a0497f1bbf43fe1b4890b120211c639b"
     },
     {
       "state": "valid_token",
@@ -268,7 +268,7 @@
       "status": 200,
       "headers": {
         "Server": "BaseHTTP/0.6 Python/3.12.14",
-        "Date": "Wed, 02 Sep 2026 13:57:27 GMT",
+        "Date": "Wed, 02 Sep 2026 17:57:27 GMT",
         "X-Auth-Level": "full",
         "X-Session": "none",
         "X-User": "alice",
@@ -278,9 +278,9 @@
       "body_hex": "7b2270616765223a2270726976617465222c22636f6e74656e74223a22596f75722064617368626f6172642064617461222c22617574685f6c6576656c223a2266756c6c222c2275736572223a22616c696365227d",
       "body_len": 85,
       "redirect_url": null,
-      "elapsed": 0.00043929000003117835,
-      "timestamp": 1788357447.69721,
-      "fingerprint": "c2aadffffec0e73848beaf0b23d01a7018be529df75d430b92493d7d324caf8c"
+      "elapsed": 0.0003709129999833749,
+      "timestamp": 1788371847.4583795,
+      "fingerprint": "7f674bd0093263b2efeceeed31156f39a0497f1bbf43fe1b4890b120211c639b"
     },
     {
       "state": "valid_token",
@@ -288,7 +288,7 @@
       "status": 200,
       "headers": {
         "Server": "BaseHTTP/0.6 Python/3.12.14",
-        "Date": "Wed, 02 Sep 2026 13:57:27 GMT",
+        "Date": "Wed, 02 Sep 2026 17:57:27 GMT",
         "X-Auth-Level": "full",
         "X-Session": "none",
         "X-User": "alice",
@@ -298,9 +298,9 @@
       "body_hex": "7b2270616765223a2270726976617465222c22636f6e74656e74223a22596f75722064617368626f6172642064617461222c22617574685f6c6576656c223a2266756c6c222c2275736572223a22616c696365227d",
       "body_len": 85,
       "redirect_url": null,
-      "elapsed": 0.0003774799999973766,
-      "timestamp": 1788357447.698999,
-      "fingerprint": "c2aadffffec0e73848beaf0b23d01a7018be529df75d430b92493d7d324caf8c"
+      "elapsed": 0.00037722999996958606,
+      "timestamp": 1788371847.4604356,
+      "fingerprint": "7f674bd0093263b2efeceeed31156f39a0497f1bbf43fe1b4890b120211c639b"
     },
     {
       "state": "valid_token",
@@ -308,7 +308,7 @@
       "status": 200,
       "headers": {
         "Server": "BaseHTTP/0.6 Python/3.12.14",
-        "Date": "Wed, 02 Sep 2026 13:57:27 GMT",
+        "Date": "Wed, 02 Sep 2026 17:57:27 GMT",
         "X-Auth-Level": "full",
         "X-Session": "none",
         "X-User": "alice",
@@ -318,9 +318,9 @@
       "body_hex": "7b2270616765223a2270726976617465222c22636f6e74656e74223a22596f75722064617368626f6172642064617461222c22617574685f6c6576656c223a2266756c6c222c2275736572223a22616c696365227d",
       "body_len": 85,
       "redirect_url": null,
-      "elapsed": 0.0003388760000007096,
-      "timestamp": 1788357447.7012475,
-      "fingerprint": "c2aadffffec0e73848beaf0b23d01a7018be529df75d430b92493d7d324caf8c"
+      "elapsed": 0.00042969999998376807,
+      "timestamp": 1788371847.4629562,
+      "fingerprint": "7f674bd0093263b2efeceeed31156f39a0497f1bbf43fe1b4890b120211c639b"
     },
     {
       "state": "valid_token",
@@ -328,7 +328,7 @@
       "status": 200,
       "headers": {
         "Server": "BaseHTTP/0.6 Python/3.12.14",
-        "Date": "Wed, 02 Sep 2026 13:57:27 GMT",
+        "Date": "Wed, 02 Sep 2026 17:57:27 GMT",
         "X-Auth-Level": "full",
         "X-Session": "none",
         "X-User": "alice",
@@ -338,9 +338,9 @@
       "body_hex": "7b2270616765223a2270726976617465222c22636f6e74656e74223a22596f75722064617368626f6172642064617461222c22617574685f6c6576656c223a2266756c6c222c2275736572223a22616c696365227d",
       "body_len": 85,
       "redirect_url": null,
-      "elapsed": 0.000334653999971124,
-      "timestamp": 1788357447.707427,
-      "fingerprint": "c2aadffffec0e73848beaf0b23d01a7018be529df75d430b92493d7d324caf8c"
+      "elapsed": 0.00035408200000119905,
+      "timestamp": 1788371847.4694972,
+      "fingerprint": "7f674bd0093263b2efeceeed31156f39a0497f1bbf43fe1b4890b120211c639b"
     },
     {
       "state": "valid_token",
@@ -348,7 +348,7 @@
       "status": 200,
       "headers": {
         "Server": "BaseHTTP/0.6 Python/3.12.14",
-        "Date": "Wed, 02 Sep 2026 13:57:27 GMT",
+        "Date": "Wed, 02 Sep 2026 17:57:27 GMT",
         "X-Auth-Level": "full",
         "X-Session": "none",
         "X-User": "alice",
@@ -358,9 +358,9 @@
       "body_hex": "7b2270616765223a2270726976617465222c22636f6e74656e74223a22596f75722064617368626f6172642064617461222c22617574685f6c6576656c223a2266756c6c222c2275736572223a22616c696365227d",
       "body_len": 85,
       "redirect_url": null,
-      "elapsed": 0.00024186699999972916,
-      "timestamp": 1788357447.7119741,
-      "fingerprint": "c2aadffffec0e73848beaf0b23d01a7018be529df75d430b92493d7d324caf8c"
+      "elapsed": 0.00036705799999481314,
+      "timestamp": 1788371847.4746149,
+      "fingerprint": "7f674bd0093263b2efeceeed31156f39a0497f1bbf43fe1b4890b120211c639b"
     },
     {
       "state": "valid_token",
@@ -368,7 +368,7 @@
       "status": 200,
       "headers": {
         "Server": "BaseHTTP/0.6 Python/3.12.14",
-        "Date": "Wed, 02 Sep 2026 13:57:27 GMT",
+        "Date": "Wed, 02 Sep 2026 17:57:27 GMT",
         "X-Auth-Level": "full",
         "X-Session": "none",
         "X-User": "alice",
@@ -378,9 +378,9 @@
       "body_hex": "7b2270616765223a2270726976617465222c22636f6e74656e74223a22596f75722064617368626f6172642064617461222c22617574685f6c6576656c223a2266756c6c222c2275736572223a22616c696365227d",
       "body_len": 85,
       "redirect_url": null,
-      "elapsed": 0.0002820789999873341,
-      "timestamp": 1788357447.712301,
-      "fingerprint": "c2aadffffec0e73848beaf0b23d01a7018be529df75d430b92493d7d324caf8c"
+      "elapsed": 0.0004007279999882485,
+      "timestamp": 1788371847.4751134,
+      "fingerprint": "7f674bd0093263b2efeceeed31156f39a0497f1bbf43fe1b4890b120211c639b"
     },
     {
       "state": "valid_token",
@@ -388,7 +388,7 @@
       "status": 200,
       "headers": {
         "Server": "BaseHTTP/0.6 Python/3.12.14",
-        "Date": "Wed, 02 Sep 2026 13:57:27 GMT",
+        "Date": "Wed, 02 Sep 2026 17:57:27 GMT",
         "X-Auth-Level": "full",
         "X-Session": "none",
         "X-User": "alice",
@@ -398,9 +398,9 @@
       "body_hex": "7b2270616765223a2270726976617465222c22636f6e74656e74223a22596f75722064617368626f6172642064617461222c22617574685f6c6576656c223a2266756c6c222c2275736572223a22616c696365227d",
       "body_len": 85,
       "redirect_url": null,
-      "elapsed": 0.0003185430000485212,
-      "timestamp": 1788357447.7126694,
-      "fingerprint": "c2aadffffec0e73848beaf0b23d01a7018be529df75d430b92493d7d324caf8c"
+      "elapsed": 0.00036898600001222803,
+      "timestamp": 1788371847.47561,
+      "fingerprint": "7f674bd0093263b2efeceeed31156f39a0497f1bbf43fe1b4890b120211c639b"
     }
   ],
   "no_auth": [
@@ -410,7 +410,7 @@
       "status": 200,
       "headers": {
         "Server": "BaseHTTP/0.6 Python/3.12.14",
-        "Date": "Wed, 02 Sep 2026 13:57:27 GMT",
+        "Date": "Wed, 02 Sep 2026 17:57:27 GMT",
         "X-Auth-Level": "public",
         "X-Session": "none",
         "Content-Type": "application/json",
@@ -419,9 +419,9 @@
       "body_hex": "7b2270616765223a227075626c6963222c22636f6e74656e74223a2257656c636f6d6520746f20746865207075626c69632070616765222c22617574685f6c6576656c223a226e6f6e65227d",
       "body_len": 76,
       "redirect_url": null,
-      "elapsed": 0.00045177399999829504,
-      "timestamp": 1788357447.6930237,
-      "fingerprint": "f72f7e92d244daa193bdc740d27c735bd280be6e78610568e7ef89761e01fc92"
+      "elapsed": 0.0004099199999814118,
+      "timestamp": 1788371847.454068,
+      "fingerprint": "b2618cf99e3e297f34758f75da42251991d142df97b7e0d139a43a9d04864056"
     },
     {
       "state": "no_auth",
@@ -429,7 +429,7 @@
       "status": 200,
       "headers": {
         "Server": "BaseHTTP/0.6 Python/3.12.14",
-        "Date": "Wed, 02 Sep 2026 13:57:27 GMT",
+        "Date": "Wed, 02 Sep 2026 17:57:27 GMT",
         "X-Auth-Level": "public",
         "X-Session": "none",
         "Content-Type": "application/json",
@@ -438,9 +438,9 @@
       "body_hex": "7b2270616765223a227075626c6963222c22636f6e74656e74223a2257656c636f6d6520746f20746865207075626c69632070616765222c22617574685f6c6576656c223a226e6f6e65227d",
       "body_len": 76,
       "redirect_url": null,
-      "elapsed": 0.00043313399999078683,
-      "timestamp": 1788357447.6945906,
-      "fingerprint": "f72f7e92d244daa193bdc740d27c735bd280be6e78610568e7ef89761e01fc92"
+      "elapsed": 0.0004011579999882997,
+      "timestamp": 1788371847.4556592,
+      "fingerprint": "b2618cf99e3e297f34758f75da42251991d142df97b7e0d139a43a9d04864056"
     },
     {
       "state": "no_auth",
@@ -448,7 +448,7 @@
       "status": 200,
       "headers": {
         "Server": "BaseHTTP/0.6 Python/3.12.14",
-        "Date": "Wed, 02 Sep 2026 13:57:27 GMT",
+        "Date": "Wed, 02 Sep 2026 17:57:27 GMT",
         "X-Auth-Level": "public",
         "X-Session": "none",
         "Content-Type": "application/json",
@@ -457,9 +457,9 @@
       "body_hex": "7b2270616765223a227075626c6963222c22636f6e74656e74223a2257656c636f6d6520746f20746865207075626c69632070616765222c22617574685f6c6576656c223a226e6f6e65227d",
       "body_len": 76,
       "redirect_url": null,
-      "elapsed": 0.0003340600000001359,
-      "timestamp": 1788357447.697618,
-      "fingerprint": "f72f7e92d244daa193bdc740d27c735bd280be6e78610568e7ef89761e01fc92"
+      "elapsed": 0.00043848400002843846,
+      "timestamp": 1788371847.4589107,
+      "fingerprint": "b2618cf99e3e297f34758f75da42251991d142df97b7e0d139a43a9d04864056"
     },
     {
       "state": "no_auth",
@@ -467,7 +467,7 @@
       "status": 200,
       "headers": {
         "Server": "BaseHTTP/0.6 Python/3.12.14",
-        "Date": "Wed, 02 Sep 2026 13:57:27 GMT",
+        "Date": "Wed, 02 Sep 2026 17:57:27 GMT",
         "X-Auth-Level": "public",
         "X-Session": "none",
         "Content-Type": "application/json",
@@ -476,9 +476,9 @@
       "body_hex": "7b2270616765223a227075626c6963222c22636f6e74656e74223a2257656c636f6d6520746f20746865207075626c69632070616765222c22617574685f6c6576656c223a226e6f6e65227d",
       "body_len": 76,
       "redirect_url": null,
-      "elapsed": 0.0003873269999985496,
-      "timestamp": 1788357447.7004268,
-      "fingerprint": "f72f7e92d244daa193bdc740d27c735bd280be6e78610568e7ef89761e01fc92"
+      "elapsed": 0.00037191100000200095,
+      "timestamp": 1788371847.4619298,
+      "fingerprint": "b2618cf99e3e297f34758f75da42251991d142df97b7e0d139a43a9d04864056"
     },
     {
       "state": "no_auth",
@@ -486,7 +486,7 @@
       "status": 200,
       "headers": {
         "Server": "BaseHTTP/0.6 Python/3.12.14",
-        "Date": "Wed, 02 Sep 2026 13:57:27 GMT",
+        "Date": "Wed, 02 Sep 2026 17:57:27 GMT",
         "X-Auth-Level": "public",
         "X-Session": "none",
         "Content-Type": "application/json",
@@ -495,9 +495,9 @@
       "body_hex": "7b2270616765223a227075626c6963222c22636f6e74656e74223a2257656c636f6d6520746f20746865207075626c69632070616765222c22617574685f6c6576656c223a226e6f6e65227d",
       "body_len": 76,
       "redirect_url": null,
-      "elapsed": 0.0007863089999773365,
-      "timestamp": 1788357447.709099,
-      "fingerprint": "f72f7e92d244daa193bdc740d27c735bd280be6e78610568e7ef89761e01fc92"
+      "elapsed": 0.0003708360000018729,
+      "timestamp": 1788371847.4709454,
+      "fingerprint": "b2618cf99e3e297f34758f75da42251991d142df97b7e0d139a43a9d04864056"
     },
     {
       "state": "no_auth",
@@ -505,7 +505,7 @@
       "status": 200,
       "headers": {
         "Server": "BaseHTTP/0.6 Python/3.12.14",
-        "Date": "Wed, 02 Sep 2026 13:57:27 GMT",
+        "Date": "Wed, 02 Sep 2026 17:57:27 GMT",
         "X-Auth-Level": "public",
         "X-Session": "none",
         "Content-Type": "application/json",
@@ -514,9 +514,9 @@
       "body_hex": "7b2270616765223a227075626c6963222c22636f6e74656e74223a2257656c636f6d6520746f20746865207075626c69632070616765222c22617574685f6c6576656c223a226e6f6e65227d",
       "body_len": 76,
       "redirect_url": null,
-      "elapsed": 0.0003397230000246054,
-      "timestamp": 1788357447.7104561,
-      "fingerprint": "f72f7e92d244daa193bdc740d27c735bd280be6e78610568e7ef89761e01fc92"
+      "elapsed": 0.0003851860000168017,
+      "timestamp": 1788371847.4726624,
+      "fingerprint": "b2618cf99e3e297f34758f75da42251991d142df97b7e0d139a43a9d04864056"
     },
     {
       "state": "no_auth",
@@ -524,7 +524,7 @@
       "status": 200,
       "headers": {
         "Server": "BaseHTTP/0.6 Python/3.12.14",
-        "Date": "Wed, 02 Sep 2026 13:57:27 GMT",
+        "Date": "Wed, 02 Sep 2026 17:57:27 GMT",
         "X-Auth-Level": "public",
         "X-Session": "none",
         "Content-Type": "application/json",
@@ -533,9 +533,9 @@
       "body_hex": "7b2270616765223a227075626c6963222c22636f6e74656e74223a2257656c636f6d6520746f20746865207075626c69632070616765222c22617574685f6c6576656c223a226e6f6e65227d",
       "body_len": 76,
       "redirect_url": null,
-      "elapsed": 0.00027882800003453667,
-      "timestamp": 1788357447.7113175,
-      "fingerprint": "f72f7e92d244daa193bdc740d27c735bd280be6e78610568e7ef89761e01fc92"
+      "elapsed": 0.0003934100000151375,
+      "timestamp": 1788371847.4736745,
+      "fingerprint": "b2618cf99e3e297f34758f75da42251991d142df97b7e0d139a43a9d04864056"
     },
     {
       "state": "no_auth",
@@ -543,7 +543,7 @@
       "status": 200,
       "headers": {
         "Server": "BaseHTTP/0.6 Python/3.12.14",
-        "Date": "Wed, 02 Sep 2026 13:57:27 GMT",
+        "Date": "Wed, 02 Sep 2026 17:57:27 GMT",
         "X-Auth-Level": "public",
         "X-Session": "none",
         "Content-Type": "application/json",
@@ -552,9 +552,9 @@
       "body_hex": "7b2270616765223a227075626c6963222c22636f6e74656e74223a2257656c636f6d6520746f20746865207075626c69632070616765222c22617574685f6c6576656c223a226e6f6e65227d",
       "body_len": 76,
       "redirect_url": null,
-      "elapsed": 0.00031578900001250076,
-      "timestamp": 1788357447.7116866,
-      "fingerprint": "f72f7e92d244daa193bdc740d27c735bd280be6e78610568e7ef89761e01fc92"
+      "elapsed": 0.0003598659999966003,
+      "timestamp": 1788371847.4741306,
+      "fingerprint": "b2618cf99e3e297f34758f75da42251991d142df97b7e0d139a43a9d04864056"
     },
     {
       "state": "no_auth",
@@ -562,7 +562,7 @@
       "status": 200,
       "headers": {
         "Server": "BaseHTTP/0.6 Python/3.12.14",
-        "Date": "Wed, 02 Sep 2026 13:57:27 GMT",
+        "Date": "Wed, 02 Sep 2026 17:57:27 GMT",
         "X-Auth-Level": "public",
         "X-Session": "none",
         "Content-Type": "application/json",
@@ -571,9 +571,9 @@
       "body_hex": "7b2270616765223a227075626c6963222c22636f6e74656e74223a2257656c636f6d6520746f20746865207075626c69632070616765222c22617574685f6c6576656c223a226e6f6e65227d",
       "body_len": 76,
       "redirect_url": null,
-      "elapsed": 0.00022762800000464267,
-      "timestamp": 1788357447.712938,
-      "fingerprint": "f72f7e92d244daa193bdc740d27c735bd280be6e78610568e7ef89761e01fc92"
+      "elapsed": 0.0003545490000078644,
+      "timestamp": 1788371847.4760604,
+      "fingerprint": "b2618cf99e3e297f34758f75da42251991d142df97b7e0d139a43a9d04864056"
     },
     {
       "state": "no_auth",
@@ -581,7 +581,7 @@
       "status": 200,
       "headers": {
         "Server": "BaseHTTP/0.6 Python/3.12.14",
-        "Date": "Wed, 02 Sep 2026 13:57:27 GMT",
+        "Date": "Wed, 02 Sep 2026 17:57:27 GMT",
         "X-Auth-Level": "public",
         "X-Session": "none",
         "Content-Type": "application/json",
@@ -590,9 +590,9 @@
       "body_hex": "7b2270616765223a227075626c6963222c22636f6e74656e74223a2257656c636f6d6520746f20746865207075626c69632070616765222c22617574685f6c6576656c223a226e6f6e65227d",
       "body_len": 76,
       "redirect_url": null,
-      "elapsed": 0.0002784600000040882,
-      "timestamp": 1788357447.7132626,
-      "fingerprint": "f72f7e92d244daa193bdc740d27c735bd280be6e78610568e7ef89761e01fc92"
+      "elapsed": 0.0003509669999743892,
+      "timestamp": 1788371847.4764984,
+      "fingerprint": "b2618cf99e3e297f34758f75da42251991d142df97b7e0d139a43a9d04864056"
     }
   ],
   "session_cookie": [
@@ -602,7 +602,7 @@
       "status": 200,
       "headers": {
         "Server": "BaseHTTP/0.6 Python/3.12.14",
-        "Date": "Wed, 02 Sep 2026 13:57:27 GMT",
+        "Date": "Wed, 02 Sep 2026 17:57:27 GMT",
         "X-Auth-Level": "session",
         "X-Session": "active",
         "X-User": "bob",
@@ -612,9 +612,9 @@
       "body_hex": "7b2270616765223a2270726976617465222c22636f6e74656e74223a2253657373696f6e2d626f756e6420757365722064617461222c22617574685f6c6576656c223a2273657373696f6e222c2275736572223a22626f62227d",
       "body_len": 90,
       "redirect_url": null,
-      "elapsed": 0.00041633600000068327,
-      "timestamp": 1788357447.6935415,
-      "fingerprint": "28a786bcb68075e2e2254dda8cd10b950c139be8b2d4acd436ea9942c3585202"
+      "elapsed": 0.0004173579999928734,
+      "timestamp": 1788371847.454593,
+      "fingerprint": "385a1ac1f9ead2742a4ec6cc7f372406d026d01fcb0256ee40bbc36adcac0a34"
     },
     {
       "state": "session_cookie",
@@ -622,7 +622,7 @@
       "status": 200,
       "headers": {
         "Server": "BaseHTTP/0.6 Python/3.12.14",
-        "Date": "Wed, 02 Sep 2026 13:57:27 GMT",
+        "Date": "Wed, 02 Sep 2026 17:57:27 GMT",
         "X-Auth-Level": "session",
         "X-Session": "active",
         "X-User": "bob",
@@ -632,9 +632,9 @@
       "body_hex": "7b2270616765223a2270726976617465222c22636f6e74656e74223a2253657373696f6e2d626f756e6420757365722064617461222c22617574685f6c6576656c223a2273657373696f6e222c2275736572223a22626f62227d",
       "body_len": 90,
       "redirect_url": null,
-      "elapsed": 0.00031888000000890315,
-      "timestamp": 1788357447.7008247,
-      "fingerprint": "28a786bcb68075e2e2254dda8cd10b950c139be8b2d4acd436ea9942c3585202"
+      "elapsed": 0.00036881300002278294,
+      "timestamp": 1788371847.4623992,
+      "fingerprint": "385a1ac1f9ead2742a4ec6cc7f372406d026d01fcb0256ee40bbc36adcac0a34"
     },
     {
       "state": "session_cookie",
@@ -642,7 +642,7 @@
       "status": 200,
       "headers": {
         "Server": "BaseHTTP/0.6 Python/3.12.14",
-        "Date": "Wed, 02 Sep 2026 13:57:27 GMT",
+        "Date": "Wed, 02 Sep 2026 17:57:27 GMT",
         "X-Auth-Level": "session",
         "X-Session": "active",
         "X-User": "bob",
@@ -652,9 +652,9 @@
       "body_hex": "7b2270616765223a2270726976617465222c22636f6e74656e74223a2253657373696f6e2d626f756e6420757365722064617461222c22617574685f6c6576656c223a2273657373696f6e222c2275736572223a22626f62227d",
       "body_len": 90,
       "redirect_url": null,
-      "elapsed": 0.00035494800005153593,
-      "timestamp": 1788357447.7021906,
-      "fingerprint": "28a786bcb68075e2e2254dda8cd10b950c139be8b2d4acd436ea9942c3585202"
+      "elapsed": 0.0004384340000456177,
+      "timestamp": 1788371847.4640381,
+      "fingerprint": "385a1ac1f9ead2742a4ec6cc7f372406d026d01fcb0256ee40bbc36adcac0a34"
     },
     {
       "state": "session_cookie",
@@ -662,7 +662,7 @@
       "status": 200,
       "headers": {
         "Server": "BaseHTTP/0.6 Python/3.12.14",
-        "Date": "Wed, 02 Sep 2026 13:57:27 GMT",
+        "Date": "Wed, 02 Sep 2026 17:57:27 GMT",
         "X-Auth-Level": "session",
         "X-Session": "active",
         "X-User": "bob",
@@ -672,9 +672,9 @@
       "body_hex": "7b2270616765223a2270726976617465222c22636f6e74656e74223a2253657373696f6e2d626f756e6420757365722064617461222c22617574685f6c6576656c223a2273657373696f6e222c2275736572223a22626f62227d",
       "body_len": 90,
       "redirect_url": null,
-      "elapsed": 0.0003715529999794853,
-      "timestamp": 1788357447.7026486,
-      "fingerprint": "28a786bcb68075e2e2254dda8cd10b950c139be8b2d4acd436ea9942c3585202"
+      "elapsed": 0.000371993999976894,
+      "timestamp": 1788371847.4645019,
+      "fingerprint": "385a1ac1f9ead2742a4ec6cc7f372406d026d01fcb0256ee40bbc36adcac0a34"
     },
     {
       "state": "session_cookie",
@@ -682,7 +682,7 @@
       "status": 200,
       "headers": {
         "Server": "BaseHTTP/0.6 Python/3.12.14",
-        "Date": "Wed, 02 Sep 2026 13:57:27 GMT",
+        "Date": "Wed, 02 Sep 2026 17:57:27 GMT",
         "X-Auth-Level": "session",
         "X-Session": "active",
         "X-User": "bob",
@@ -692,9 +692,9 @@
       "body_hex": "7b2270616765223a2270726976617465222c22636f6e74656e74223a2253657373696f6e2d626f756e6420757365722064617461222c22617574685f6c6576656c223a2273657373696f6e222c2275736572223a22626f62227d",
       "body_len": 90,
       "redirect_url": null,
-      "elapsed": 0.00040965400000914087,
-      "timestamp": 1788357447.7050788,
-      "fingerprint": "28a786bcb68075e2e2254dda8cd10b950c139be8b2d4acd436ea9942c3585202"
+      "elapsed": 0.0003819890000045234,
+      "timestamp": 1788371847.4670591,
+      "fingerprint": "385a1ac1f9ead2742a4ec6cc7f372406d026d01fcb0256ee40bbc36adcac0a34"
     },
     {
       "state": "session_cookie",
@@ -702,7 +702,7 @@
       "status": 200,
       "headers": {
         "Server": "BaseHTTP/0.6 Python/3.12.14",
-        "Date": "Wed, 02 Sep 2026 13:57:27 GMT",
+        "Date": "Wed, 02 Sep 2026 17:57:27 GMT",
         "X-Auth-Level": "session",
         "X-Session": "active",
         "X-User": "bob",
@@ -712,9 +712,9 @@
       "body_hex": "7b2270616765223a2270726976617465222c22636f6e74656e74223a2253657373696f6e2d626f756e6420757365722064617461222c22617574685f6c6576656c223a2273657373696f6e222c2275736572223a22626f62227d",
       "body_len": 90,
       "redirect_url": null,
-      "elapsed": 0.00034659799996461516,
-      "timestamp": 1788357447.7055204,
-      "fingerprint": "28a786bcb68075e2e2254dda8cd10b950c139be8b2d4acd436ea9942c3585202"
+      "elapsed": 0.00038973700003452905,
+      "timestamp": 1788371847.467549,
+      "fingerprint": "385a1ac1f9ead2742a4ec6cc7f372406d026d01fcb0256ee40bbc36adcac0a34"
     },
     {
       "state": "session_cookie",
@@ -722,7 +722,7 @@
       "status": 200,
       "headers": {
         "Server": "BaseHTTP/0.6 Python/3.12.14",
-        "Date": "Wed, 02 Sep 2026 13:57:27 GMT",
+        "Date": "Wed, 02 Sep 2026 17:57:27 GMT",
         "X-Auth-Level": "session",
         "X-Session": "active",
         "X-User": "bob",
@@ -732,9 +732,9 @@
       "body_hex": "7b2270616765223a2270726976617465222c22636f6e74656e74223a2253657373696f6e2d626f756e6420757365722064617461222c22617574685f6c6576656c223a2273657373696f6e222c2275736572223a22626f62227d",
       "body_len": 90,
       "redirect_url": null,
-      "elapsed": 0.00039227500002425586,
-      "timestamp": 1788357447.7069461,
-      "fingerprint": "28a786bcb68075e2e2254dda8cd10b950c139be8b2d4acd436ea9942c3585202"
+      "elapsed": 0.0003489960000138126,
+      "timestamp": 1788371847.4690518,
+      "fingerprint": "385a1ac1f9ead2742a4ec6cc7f372406d026d01fcb0256ee40bbc36adcac0a34"
     },
     {
       "state": "session_cookie",
@@ -742,7 +742,7 @@
       "status": 200,
       "headers": {
         "Server": "BaseHTTP/0.6 Python/3.12.14",
-        "Date": "Wed, 02 Sep 2026 13:57:27 GMT",
+        "Date": "Wed, 02 Sep 2026 17:57:27 GMT",
         "X-Auth-Level": "session",
         "X-Session": "active",
         "X-User": "bob",
@@ -752,9 +752,9 @@
       "body_hex": "7b2270616765223a2270726976617465222c22636f6e74656e74223a2253657373696f6e2d626f756e6420757365722064617461222c22617574685f6c6576656c223a2273657373696f6e222c2275736572223a22626f62227d",
       "body_len": 90,
       "redirect_url": null,
-      "elapsed": 0.00030449899998075125,
-      "timestamp": 1788357447.7078075,
-      "fingerprint": "28a786bcb68075e2e2254dda8cd10b950c139be8b2d4acd436ea9942c3585202"
+      "elapsed": 0.0004073489999996127,
+      "timestamp": 1788371847.469999,
+      "fingerprint": "385a1ac1f9ead2742a4ec6cc7f372406d026d01fcb0256ee40bbc36adcac0a34"
     },
     {
       "state": "session_cookie",
@@ -762,7 +762,7 @@
       "status": 200,
       "headers": {
         "Server": "BaseHTTP/0.6 Python/3.12.14",
-        "Date": "Wed, 02 Sep 2026 13:57:27 GMT",
+        "Date": "Wed, 02 Sep 2026 17:57:27 GMT",
         "X-Auth-Level": "session",
         "X-Session": "active",
         "X-User": "bob",
@@ -772,9 +772,9 @@
       "body_hex": "7b2270616765223a2270726976617465222c22636f6e74656e74223a2253657373696f6e2d626f756e6420757365722064617461222c22617574685f6c6576656c223a2273657373696f6e222c2275736572223a22626f62227d",
       "body_len": 90,
       "redirect_url": null,
-      "elapsed": 0.0003263609999635264,
-      "timestamp": 1788357447.7082176,
-      "fingerprint": "28a786bcb68075e2e2254dda8cd10b950c139be8b2d4acd436ea9942c3585202"
+      "elapsed": 0.00036727499997368795,
+      "timestamp": 1788371847.4704638,
+      "fingerprint": "385a1ac1f9ead2742a4ec6cc7f372406d026d01fcb0256ee40bbc36adcac0a34"
     },
     {
       "state": "session_cookie",
@@ -782,7 +782,7 @@
       "status": 200,
       "headers": {
         "Server": "BaseHTTP/0.6 Python/3.12.14",
-        "Date": "Wed, 02 Sep 2026 13:57:27 GMT",
+        "Date": "Wed, 02 Sep 2026 17:57:27 GMT",
         "X-Auth-Level": "session",
         "X-Session": "active",
         "X-User": "bob",
@@ -792,9 +792,9 @@
       "body_hex": "7b2270616765223a2270726976617465222c22636f6e74656e74223a2253657373696f6e2d626f756e6420757365722064617461222c22617574685f6c6576656c223a2273657373696f6e222c2275736572223a22626f62227d",
       "body_len": 90,
       "redirect_url": null,
-      "elapsed": 0.00028733900001043367,
-      "timestamp": 1788357447.7136054,
-      "fingerprint": "28a786bcb68075e2e2254dda8cd10b950c139be8b2d4acd436ea9942c3585202"
+      "elapsed": 0.00039044499999363325,
+      "timestamp": 1788371847.4769928,
+      "fingerprint": "385a1ac1f9ead2742a4ec6cc7f372406d026d01fcb0256ee40bbc36adcac0a34"
     }
   ],
   "invalid_token": [
@@ -804,7 +804,7 @@
       "status": 403,
       "headers": {
         "Server": "BaseHTTP/0.6 Python/3.12.14",
-        "Date": "Wed, 02 Sep 2026 13:57:27 GMT",
+        "Date": "Wed, 02 Sep 2026 17:57:27 GMT",
         "X-Auth-Level": "none",
         "X-Session": "none",
         "X-Error": "invalid_token",
@@ -814,9 +814,9 @@
       "body_hex": "7b226572726f72223a22696e76616c69645f746f6b656e222c226d657373616765223a22546f6b656e206973206e6f74207265636f676e697a6564227d",
       "body_len": 61,
       "redirect_url": null,
-      "elapsed": 0.00041977400002224385,
-      "timestamp": 1788357447.6961818,
-      "fingerprint": "d8d93f4ef20d1a1dfde037448ab1b5351787a769853c3de4a135c0b2bfb42c0b"
+      "elapsed": 0.0003702019999991535,
+      "timestamp": 1788371847.4572873,
+      "fingerprint": "1b5b7544805c4403425846ab99ea81287dd643148b974b5894687ea9bbf30193"
     },
     {
       "state": "invalid_token",
@@ -824,7 +824,7 @@
       "status": 403,
       "headers": {
         "Server": "BaseHTTP/0.6 Python/3.12.14",
-        "Date": "Wed, 02 Sep 2026 13:57:27 GMT",
+        "Date": "Wed, 02 Sep 2026 17:57:27 GMT",
         "X-Auth-Level": "none",
         "X-Session": "none",
         "X-Error": "invalid_token",
@@ -834,9 +834,9 @@
       "body_hex": "7b226572726f72223a22696e76616c69645f746f6b656e222c226d657373616765223a22546f6b656e206973206e6f74207265636f676e697a6564227d",
       "body_len": 61,
       "redirect_url": null,
-      "elapsed": 0.0003852530000472143,
-      "timestamp": 1788357447.6981003,
-      "fingerprint": "d8d93f4ef20d1a1dfde037448ab1b5351787a769853c3de4a135c0b2bfb42c0b"
+      "elapsed": 0.0003660610000224551,
+      "timestamp": 1788371847.4594514,
+      "fingerprint": "1b5b7544805c4403425846ab99ea81287dd643148b974b5894687ea9bbf30193"
     },
     {
       "state": "invalid_token",
@@ -844,7 +844,7 @@
       "status": 403,
       "headers": {
         "Server": "BaseHTTP/0.6 Python/3.12.14",
-        "Date": "Wed, 02 Sep 2026 13:57:27 GMT",
+        "Date": "Wed, 02 Sep 2026 17:57:27 GMT",
         "X-Auth-Level": "none",
         "X-Session": "none",
         "X-Error": "invalid_token",
@@ -854,9 +854,9 @@
       "body_hex": "7b226572726f72223a22696e76616c69645f746f6b656e222c226d657373616765223a22546f6b656e206973206e6f74207265636f676e697a6564227d",
       "body_len": 61,
       "redirect_url": null,
-      "elapsed": 0.00034676699999636185,
-      "timestamp": 1788357447.698544,
-      "fingerprint": "d8d93f4ef20d1a1dfde037448ab1b5351787a769853c3de4a135c0b2bfb42c0b"
+      "elapsed": 0.00039245400000709196,
+      "timestamp": 1788371847.4599557,
+      "fingerprint": "1b5b7544805c4403425846ab99ea81287dd643148b974b5894687ea9bbf30193"
     },
     {
       "state": "invalid_token",
@@ -864,7 +864,7 @@
       "status": 403,
       "headers": {
         "Server": "BaseHTTP/0.6 Python/3.12.14",
-        "Date": "Wed, 02 Sep 2026 13:57:27 GMT",
+        "Date": "Wed, 02 Sep 2026 17:57:27 GMT",
         "X-Auth-Level": "none",
         "X-Session": "none",
         "X-Error": "invalid_token",
@@ -874,9 +874,9 @@
       "body_hex": "7b226572726f72223a22696e76616c69645f746f6b656e222c226d657373616765223a22546f6b656e206973206e6f74207265636f676e697a6564227d",
       "body_len": 61,
       "redirect_url": null,
-      "elapsed": 0.00036963000002288027,
-      "timestamp": 1788357447.6999528,
-      "fingerprint": "d8d93f4ef20d1a1dfde037448ab1b5351787a769853c3de4a135c0b2bfb42c0b"
+      "elapsed": 0.0003832890000126099,
+      "timestamp": 1788371847.4614606,
+      "fingerprint": "1b5b7544805c4403425846ab99ea81287dd643148b974b5894687ea9bbf30193"
     },
     {
       "state": "invalid_token",
@@ -884,7 +884,7 @@
       "status": 403,
       "headers": {
         "Server": "BaseHTTP/0.6 Python/3.12.14",
-        "Date": "Wed, 02 Sep 2026 13:57:27 GMT",
+        "Date": "Wed, 02 Sep 2026 17:57:27 GMT",
         "X-Auth-Level": "none",
         "X-Session": "none",
         "X-Error": "invalid_token",
@@ -894,9 +894,9 @@
       "body_hex": "7b226572726f72223a22696e76616c69645f746f6b656e222c226d657373616765223a22546f6b656e206973206e6f74207265636f676e697a6564227d",
       "body_len": 61,
       "redirect_url": null,
-      "elapsed": 0.00038309699999672375,
-      "timestamp": 1788357447.701744,
-      "fingerprint": "d8d93f4ef20d1a1dfde037448ab1b5351787a769853c3de4a135c0b2bfb42c0b"
+      "elapsed": 0.0004439470000079382,
+      "timestamp": 1788371847.4635067,
+      "fingerprint": "1b5b7544805c4403425846ab99ea81287dd643148b974b5894687ea9bbf30193"
     },
     {
       "state": "invalid_token",
@@ -904,7 +904,7 @@
       "status": 403,
       "headers": {
         "Server": "BaseHTTP/0.6 Python/3.12.14",
-        "Date": "Wed, 02 Sep 2026 13:57:27 GMT",
+        "Date": "Wed, 02 Sep 2026 17:57:27 GMT",
         "X-Auth-Level": "none",
         "X-Session": "none",
         "X-Error": "invalid_token",
@@ -914,9 +914,9 @@
       "body_hex": "7b226572726f72223a22696e76616c69645f746f6b656e222c226d657373616765223a22546f6b656e206973206e6f74207265636f676e697a6564227d",
       "body_len": 61,
       "redirect_url": null,
-      "elapsed": 0.0003615879999756544,
-      "timestamp": 1788357447.7031224,
-      "fingerprint": "d8d93f4ef20d1a1dfde037448ab1b5351787a769853c3de4a135c0b2bfb42c0b"
+      "elapsed": 0.0004302469999970526,
+      "timestamp": 1788371847.4650614,
+      "fingerprint": "1b5b7544805c4403425846ab99ea81287dd643148b974b5894687ea9bbf30193"
     },
     {
       "state": "invalid_token",
@@ -924,7 +924,7 @@
       "status": 403,
       "headers": {
         "Server": "BaseHTTP/0.6 Python/3.12.14",
-        "Date": "Wed, 02 Sep 2026 13:57:27 GMT",
+        "Date": "Wed, 02 Sep 2026 17:57:27 GMT",
         "X-Auth-Level": "none",
         "X-Session": "none",
         "X-Error": "invalid_token",
@@ -934,9 +934,9 @@
       "body_hex": "7b226572726f72223a22696e76616c69645f746f6b656e222c226d657373616765223a22546f6b656e206973206e6f74207265636f676e697a6564227d",
       "body_len": 61,
       "redirect_url": null,
-      "elapsed": 0.0003407639999863932,
-      "timestamp": 1788357447.7059698,
-      "fingerprint": "d8d93f4ef20d1a1dfde037448ab1b5351787a769853c3de4a135c0b2bfb42c0b"
+      "elapsed": 0.0003929520000269804,
+      "timestamp": 1788371847.468095,
+      "fingerprint": "1b5b7544805c4403425846ab99ea81287dd643148b974b5894687ea9bbf30193"
     },
     {
       "state": "invalid_token",
@@ -944,7 +944,7 @@
       "status": 403,
       "headers": {
         "Server": "BaseHTTP/0.6 Python/3.12.14",
-        "Date": "Wed, 02 Sep 2026 13:57:27 GMT",
+        "Date": "Wed, 02 Sep 2026 17:57:27 GMT",
         "X-Auth-Level": "none",
         "X-Session": "none",
         "X-Error": "invalid_token",
@@ -954,9 +954,9 @@
       "body_hex": "7b226572726f72223a22696e76616c69645f746f6b656e222c226d657373616765223a22546f6b656e206973206e6f74207265636f676e697a6564227d",
       "body_len": 61,
       "redirect_url": null,
-      "elapsed": 0.00036488599999984217,
-      "timestamp": 1788357447.7064648,
-      "fingerprint": "d8d93f4ef20d1a1dfde037448ab1b5351787a769853c3de4a135c0b2bfb42c0b"
+      "elapsed": 0.00038619200000766796,
+      "timestamp": 1788371847.4686038,
+      "fingerprint": "1b5b7544805c4403425846ab99ea81287dd643148b974b5894687ea9bbf30193"
     },
     {
       "state": "invalid_token",
@@ -964,7 +964,7 @@
       "status": 403,
       "headers": {
         "Server": "BaseHTTP/0.6 Python/3.12.14",
-        "Date": "Wed, 02 Sep 2026 13:57:27 GMT",
+        "Date": "Wed, 02 Sep 2026 17:57:27 GMT",
         "X-Auth-Level": "none",
         "X-Session": "none",
         "X-Error": "invalid_token",
@@ -974,9 +974,9 @@
       "body_hex": "7b226572726f72223a22696e76616c69645f746f6b656e222c226d657373616765223a22546f6b656e206973206e6f74207265636f676e697a6564227d",
       "body_len": 61,
       "redirect_url": null,
-      "elapsed": 0.0003353100000254017,
-      "timestamp": 1788357447.7100616,
-      "fingerprint": "d8d93f4ef20d1a1dfde037448ab1b5351787a769853c3de4a135c0b2bfb42c0b"
+      "elapsed": 0.0004134959999646526,
+      "timestamp": 1788371847.4721255,
+      "fingerprint": "1b5b7544805c4403425846ab99ea81287dd643148b974b5894687ea9bbf30193"
     },
     {
       "state": "invalid_token",
@@ -984,7 +984,7 @@
       "status": 403,
       "headers": {
         "Server": "BaseHTTP/0.6 Python/3.12.14",
-        "Date": "Wed, 02 Sep 2026 13:57:27 GMT",
+        "Date": "Wed, 02 Sep 2026 17:57:27 GMT",
         "X-Auth-Level": "none",
         "X-Session": "none",
         "X-Error": "invalid_token",
@@ -994,9 +994,9 @@
       "body_hex": "7b226572726f72223a22696e76616c69645f746f6b656e222c226d657373616765223a22546f6b656e206973206e6f74207265636f676e697a6564227d",
       "body_len": 61,
       "redirect_url": null,
-      "elapsed": 0.0002679469999975481,
-      "timestamp": 1788357447.7109404,
-      "fingerprint": "d8d93f4ef20d1a1dfde037448ab1b5351787a769853c3de4a135c0b2bfb42c0b"
+      "elapsed": 0.00038921899999877496,
+      "timestamp": 1788371847.4731822,
+      "fingerprint": "1b5b7544805c4403425846ab99ea81287dd643148b974b5894687ea9bbf30193"
     }
   ]
 }
