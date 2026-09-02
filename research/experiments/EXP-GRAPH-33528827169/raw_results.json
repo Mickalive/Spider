@@ -3,7 +3,7 @@
   "lane": "graph",
   "claim_id": "C-PARAM-INHERIT",
   "verdict": "PARAM-INHERIT-SUBSTRATE-BROKEN",
-  "elapsed_seconds": 0.48,
+  "elapsed_seconds": 0.38,
   "conditions": [
     {
       "condition_id": "cold",

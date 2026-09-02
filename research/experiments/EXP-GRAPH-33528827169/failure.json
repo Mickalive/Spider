@@ -3,7 +3,7 @@
   "category": "VALIDATION_FAILURE",
   "message": "result missing status",
   "retryable": false,
-  "recorded_at": "2026-09-02T05:11:18.491442+00:00",
-  "github_run_id": "33593478887",
+  "recorded_at": "2026-09-02T09:46:31.283047+00:00",
+  "github_run_id": "33615566205",
   "github_run_attempt": "1"
 }
