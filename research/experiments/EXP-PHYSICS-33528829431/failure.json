@@ -3,7 +3,7 @@
   "category": "AUDIT_FAILURE",
   "message": "stage exited with code 1",
   "retryable": false,
-  "recorded_at": "2026-09-02T21:09:51.523060+00:00",
-  "github_run_id": "33683356497",
+  "recorded_at": "2026-09-02T23:22:08.598797+00:00",
+  "github_run_id": "33694735799",
   "github_run_attempt": "1"
 }
