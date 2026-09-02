@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-33528827909",
+  "lane": "frontier",
+  "execution_timestamp": "2026-09-02T18:15:00Z",
+  "analyzer_script": "research/experiments/EXP-FRONTIER-33528827909/analyze.py",
+  "script_hash": "c832e1437a8609de06731a7d3d6c793a5cdf535b26ac3501876bec19e3cc38b6",
+  "result_hash": "292f01b99fb5950baa99f250cefdf79e827c09bcb483f16e6265f7ac98dedd33",
+  "frozen_inputs": {
+    "request.json_hash": "dbadd1fc6298fab81a2ccd08632e720f5621ae6ab56fba31d3a732c2bf21a60e",
+    "spec.json_hash": "f2cd3e670cd3aaa45123d90417ff444eb3d1bb47f1be78030c9f822cf140cc4d",
+    "prereg.md_hash": "fe78533f5956508f6293aa84105297b90ec59f5b1f069a17ff18a315fc22f417",
+    "freeze.json_hash_verified": true
+  },
+  "environment": {
+    "python_version": "3.12.14",
+    "numpy_version": "2.5.2",
+    "scipy_version": "1.18.1",
+    "pandas_version": "3.0.5",
+    "statsmodels_version": "0.15.0",
+    "platform": "linux"
+  },
+  "execution_command": "python3 analyze.py",
+  "execution_exit_code": 0,
+  "github_run_id": "33664084980",
+  "base_sha": "ef1d4178d6a1c0ec2d4b001d3f2d4ba48f2a12c0",
+  "claim": "C-WEB-DYNAMICS",
+  "verdict": "FALSIFIED-IN-SETTING",
+  "frozen_parameters": {
+    "seed": 42,
+    "function_seeds": [42, 43, 44],
+    "lambda_levels": [0.0, 0.25, 0.5, 1.0],
+    "states": 10,
+    "actions": 4,
+    "n_transitions_per_level": 250,
+    "train_fraction": 0.8,
+    "test_size_per_cell": 50
+  }
+}
