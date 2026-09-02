@@ -1,9 +1,9 @@
 {
   "stage": "execute",
   "category": "VALIDATION_FAILURE",
-  "message": "result missing status",
+  "message": "result missing metrics",
   "retryable": false,
-  "recorded_at": "2026-09-02T00:22:16.351291+00:00",
-  "github_run_id": "33574816709",
+  "recorded_at": "2026-09-02T05:11:15.325083+00:00",
+  "github_run_id": "33593477458",
   "github_run_attempt": "1"
 }
