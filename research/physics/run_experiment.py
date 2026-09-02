@@ -389,6 +389,7 @@ def main():
     result = {
         "experiment_id": "EXP-PHYSICS-33528829431",
         "lane": "physics",
+        "status": "complete",
         "verdict": verdict,
         "schema_version": 1,
         "completed_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
