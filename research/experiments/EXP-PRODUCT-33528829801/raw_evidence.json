@@ -1,6 +1,6 @@
 {
   "experiment_id": "EXP-PRODUCT-33528829801",
-  "timestamp": "2026-09-02T17:58:37Z",
+  "timestamp": "2026-09-02T21:09:58Z",
   "observations": {
     "training_A": {
       "resource_id": "A",
@@ -247,7 +247,7 @@
       "d673847140a94778",
       "b1dcaf976a4d5078"
     ],
-    "elapsed_seconds": 0.00026725300000407515
+    "elapsed_seconds": 0.00022484999999505817
   },
   "resolution_results": {
     "unseen": [
@@ -261,7 +261,7 @@
         },
         "reason": "applicability guards and confidence threshold passed",
         "confidence": 0.9,
-        "elapsed_seconds": 0.00010844900000961388
+        "elapsed_seconds": 0.00011064600002441694
       },
       {
         "resource_id": "E",
@@ -273,7 +273,7 @@
         },
         "reason": "applicability guards and confidence threshold passed",
         "confidence": 0.9,
-        "elapsed_seconds": 7.057299998791677e-05
+        "elapsed_seconds": 7.809600000996397e-05
       },
       {
         "resource_id": "F",
@@ -285,7 +285,7 @@
         },
         "reason": "applicability guards and confidence threshold passed",
         "confidence": 0.9,
-        "elapsed_seconds": 5.5261999989397736e-05
+        "elapsed_seconds": 6.632399998807159e-05
       },
       {
         "resource_id": "G",
@@ -297,7 +297,7 @@
         },
         "reason": "applicability guards and confidence threshold passed",
         "confidence": 0.9,
-        "elapsed_seconds": 4.9703000001954933e-05
+        "elapsed_seconds": 6.193599998027821e-05
       },
       {
         "resource_id": "H",
@@ -309,7 +309,7 @@
         },
         "reason": "applicability guards and confidence threshold passed",
         "confidence": 0.9,
-        "elapsed_seconds": 4.789100000834878e-05
+        "elapsed_seconds": 6.204700000012053e-05
       },
       {
         "resource_id": "I",
@@ -321,7 +321,7 @@
         },
         "reason": "applicability guards and confidence threshold passed",
         "confidence": 0.9,
-        "elapsed_seconds": 4.462599997623329e-05
+        "elapsed_seconds": 6.0473000019101164e-05
       },
       {
         "resource_id": "J",
@@ -333,7 +333,7 @@
         },
         "reason": "applicability guards and confidence threshold passed",
         "confidence": 0.9,
-        "elapsed_seconds": 4.2952999990575336e-05
+        "elapsed_seconds": 0.00011108800001125019
       },
       {
         "resource_id": "K",
@@ -345,7 +345,7 @@
         },
         "reason": "applicability guards and confidence threshold passed",
         "confidence": 0.9,
-        "elapsed_seconds": 4.9141999994617436e-05
+        "elapsed_seconds": 7.187500000327418e-05
       },
       {
         "resource_id": "L",
@@ -357,7 +357,7 @@
         },
         "reason": "applicability guards and confidence threshold passed",
         "confidence": 0.9,
-        "elapsed_seconds": 4.257300000176656e-05
+        "elapsed_seconds": 6.076400001120419e-05
       },
       {
         "resource_id": "M",
@@ -369,7 +369,7 @@
         },
         "reason": "applicability guards and confidence threshold passed",
         "confidence": 0.9,
-        "elapsed_seconds": 4.122999999367494e-05
+        "elapsed_seconds": 5.7829000013498444e-05
       }
     ],
     "summary": {
@@ -455,7 +455,7 @@
           "success": false,
           "resolution_status": "EXPLORE",
           "resolution_reason": "candidate exists but confidence is below execution threshold",
-          "elapsed_seconds": 0.00011206400000673966,
+          "elapsed_seconds": 0.00013966099999151993,
           "note": "Literal mechanism has no parameter slots; cannot bind new identifier"
         },
         {
@@ -464,7 +464,7 @@
           "success": false,
           "resolution_status": "EXPLORE",
           "resolution_reason": "candidate exists but confidence is below execution threshold",
-          "elapsed_seconds": 0.00013021200001617217,
+          "elapsed_seconds": 0.0001222790000099394,
           "note": "Literal mechanism has no parameter slots; cannot bind new identifier"
         },
         {
@@ -473,7 +473,7 @@
           "success": false,
           "resolution_status": "EXPLORE",
           "resolution_reason": "candidate exists but confidence is below execution threshold",
-          "elapsed_seconds": 0.00010751799999297873,
+          "elapsed_seconds": 9.726199999704477e-05,
           "note": "Literal mechanism has no parameter slots; cannot bind new identifier"
         },
         {
@@ -482,7 +482,7 @@
           "success": false,
           "resolution_status": "EXPLORE",
           "resolution_reason": "candidate exists but confidence is below execution threshold",
-          "elapsed_seconds": 0.00010288100000366285,
+          "elapsed_seconds": 9.724200000960082e-05,
           "note": "Literal mechanism has no parameter slots; cannot bind new identifier"
         },
         {
@@ -491,7 +491,7 @@
           "success": false,
           "resolution_status": "EXPLORE",
           "resolution_reason": "candidate exists but confidence is below execution threshold",
-          "elapsed_seconds": 0.00010612600001991268,
+          "elapsed_seconds": 0.000146123000007492,
           "note": "Literal mechanism has no parameter slots; cannot bind new identifier"
         },
         {
@@ -500,7 +500,7 @@
           "success": false,
           "resolution_status": "EXPLORE",
           "resolution_reason": "candidate exists but confidence is below execution threshold",
-          "elapsed_seconds": 9.933600000522347e-05,
+          "elapsed_seconds": 0.00013297899999997753,
           "note": "Literal mechanism has no parameter slots; cannot bind new identifier"
         },
         {
@@ -509,7 +509,7 @@
           "success": false,
           "resolution_status": "EXPLORE",
           "resolution_reason": "candidate exists but confidence is below execution threshold",
-          "elapsed_seconds": 9.83639999958541e-05,
+          "elapsed_seconds": 0.00012970299999892632,
           "note": "Literal mechanism has no parameter slots; cannot bind new identifier"
         },
         {
@@ -518,7 +518,7 @@
           "success": false,
           "resolution_status": "EXPLORE",
           "resolution_reason": "candidate exists but confidence is below execution threshold",
-          "elapsed_seconds": 0.00010443300001838907,
+          "elapsed_seconds": 0.00015379699999584773,
           "note": "Literal mechanism has no parameter slots; cannot bind new identifier"
         },
         {
@@ -527,7 +527,7 @@
           "success": false,
           "resolution_status": "EXPLORE",
           "resolution_reason": "candidate exists but confidence is below execution threshold",
-          "elapsed_seconds": 9.770399998387802e-05,
+          "elapsed_seconds": 9.544799999616771e-05,
           "note": "Literal mechanism has no parameter slots; cannot bind new identifier"
         },
         {
@@ -536,7 +536,7 @@
           "success": false,
           "resolution_status": "EXPLORE",
           "resolution_reason": "candidate exists but confidence is below execution threshold",
-          "elapsed_seconds": 8.379400000535497e-05,
+          "elapsed_seconds": 9.529799999086208e-05,
           "note": "Literal mechanism has no parameter slots; cannot bind new identifier"
         }
       ],
