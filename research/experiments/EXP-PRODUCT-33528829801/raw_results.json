@@ -1,0 +1,380 @@
+{
+  "experiment_id": "EXP-PRODUCT-33528829801",
+  "started_at": 1788308462.2457807,
+  "observations": [
+    {
+      "intent": "delete-item",
+      "state": {
+        "authenticated": true,
+        "role": "owner"
+      },
+      "action": {
+        "method": "DELETE",
+        "path": "/api/items/A",
+        "headers": {
+          "Authorization": "Bearer token-A"
+        }
+      },
+      "next_state": {
+        "exists": false
+      },
+      "success": true,
+      "provenance": {
+        "source": "synthetic",
+        "resource_id": "A"
+      }
+    },
+    {
+      "intent": "delete-item",
+      "state": {
+        "authenticated": true,
+        "role": "owner"
+      },
+      "action": {
+        "method": "DELETE",
+        "path": "/api/items/B",
+        "headers": {
+          "Authorization": "Bearer token-B"
+        }
+      },
+      "next_state": {
+        "exists": false
+      },
+      "success": true,
+      "provenance": {
+        "source": "synthetic",
+        "resource_id": "B"
+      }
+    },
+    {
+      "intent": "delete-item",
+      "state": {
+        "authenticated": true,
+        "role": "owner"
+      },
+      "action": {
+        "method": "DELETE",
+        "path": "/api/items/C",
+        "headers": {
+          "Authorization": "Bearer token-C"
+        }
+      },
+      "next_state": {
+        "exists": false
+      },
+      "success": true,
+      "provenance": {
+        "source": "synthetic",
+        "resource_id": "C"
+      }
+    }
+  ],
+  "parameterization": {
+    "success": true,
+    "mechanism_id": "parameterized",
+    "intent": "delete-item",
+    "preconditions": {
+      "authenticated": true,
+      "role": "owner"
+    },
+    "action_template": {
+      "method": "DELETE",
+      "path": "/api/items/${id}",
+      "headers": {
+        "Authorization": "Bearer token-${id}"
+      }
+    },
+    "postconditions": {
+      "exists": false
+    },
+    "parameter_slots": [
+      "id"
+    ],
+    "confidence": 0.9,
+    "evidence": [
+      "bf7a791109c828ab",
+      "0ef6c5bf00a68bb2",
+      "ebadd771c5582e55"
+    ]
+  },
+  "resolution_tests": [
+    {
+      "resource_id": "D",
+      "numeric_id": 99,
+      "status": "EXECUTABLE",
+      "mechanism_id": "parameterized",
+      "bound_action": {
+        "headers": {
+          "Authorization": "Bearer token-D"
+        },
+        "method": "DELETE",
+        "path": "/api/items/D"
+      },
+      "confidence": 0.9,
+      "reason": "applicability guards and confidence threshold passed",
+      "resolution_time_ms": 0.13518333435058594,
+      "correct_binding": true
+    },
+    {
+      "resource_id": "E",
+      "numeric_id": 100,
+      "status": "EXECUTABLE",
+      "mechanism_id": "parameterized",
+      "bound_action": {
+        "headers": {
+          "Authorization": "Bearer token-E"
+        },
+        "method": "DELETE",
+        "path": "/api/items/E"
+      },
+      "confidence": 0.9,
+      "reason": "applicability guards and confidence threshold passed",
+      "resolution_time_ms": 0.10013580322265625,
+      "correct_binding": true
+    },
+    {
+      "resource_id": "F",
+      "numeric_id": 101,
+      "status": "EXECUTABLE",
+      "mechanism_id": "parameterized",
+      "bound_action": {
+        "headers": {
+          "Authorization": "Bearer token-F"
+        },
+        "method": "DELETE",
+        "path": "/api/items/F"
+      },
+      "confidence": 0.9,
+      "reason": "applicability guards and confidence threshold passed",
+      "resolution_time_ms": 0.08797645568847656,
+      "correct_binding": true
+    },
+    {
+      "resource_id": "G",
+      "numeric_id": 102,
+      "status": "EXECUTABLE",
+      "mechanism_id": "parameterized",
+      "bound_action": {
+        "headers": {
+          "Authorization": "Bearer token-G"
+        },
+        "method": "DELETE",
+        "path": "/api/items/G"
+      },
+      "confidence": 0.9,
+      "reason": "applicability guards and confidence threshold passed",
+      "resolution_time_ms": 0.11539459228515625,
+      "correct_binding": true
+    },
+    {
+      "resource_id": "H",
+      "numeric_id": 103,
+      "status": "EXECUTABLE",
+      "mechanism_id": "parameterized",
+      "bound_action": {
+        "headers": {
+          "Authorization": "Bearer token-H"
+        },
+        "method": "DELETE",
+        "path": "/api/items/H"
+      },
+      "confidence": 0.9,
+      "reason": "applicability guards and confidence threshold passed",
+      "resolution_time_ms": 0.09036064147949219,
+      "correct_binding": true
+    },
+    {
+      "resource_id": "I",
+      "numeric_id": 104,
+      "status": "EXECUTABLE",
+      "mechanism_id": "parameterized",
+      "bound_action": {
+        "headers": {
+          "Authorization": "Bearer token-I"
+        },
+        "method": "DELETE",
+        "path": "/api/items/I"
+      },
+      "confidence": 0.9,
+      "reason": "applicability guards and confidence threshold passed",
+      "resolution_time_ms": 0.08177757263183594,
+      "correct_binding": true
+    },
+    {
+      "resource_id": "J",
+      "numeric_id": 105,
+      "status": "EXECUTABLE",
+      "mechanism_id": "parameterized",
+      "bound_action": {
+        "headers": {
+          "Authorization": "Bearer token-J"
+        },
+        "method": "DELETE",
+        "path": "/api/items/J"
+      },
+      "confidence": 0.9,
+      "reason": "applicability guards and confidence threshold passed",
+      "resolution_time_ms": 0.08273124694824219,
+      "correct_binding": true
+    },
+    {
+      "resource_id": "K",
+      "numeric_id": 106,
+      "status": "EXECUTABLE",
+      "mechanism_id": "parameterized",
+      "bound_action": {
+        "headers": {
+          "Authorization": "Bearer token-K"
+        },
+        "method": "DELETE",
+        "path": "/api/items/K"
+      },
+      "confidence": 0.9,
+      "reason": "applicability guards and confidence threshold passed",
+      "resolution_time_ms": 0.07700920104980469,
+      "correct_binding": true
+    },
+    {
+      "resource_id": "L",
+      "numeric_id": 107,
+      "status": "EXECUTABLE",
+      "mechanism_id": "parameterized",
+      "bound_action": {
+        "headers": {
+          "Authorization": "Bearer token-L"
+        },
+        "method": "DELETE",
+        "path": "/api/items/L"
+      },
+      "confidence": 0.9,
+      "reason": "applicability guards and confidence threshold passed",
+      "resolution_time_ms": 0.07915496826171875,
+      "correct_binding": true
+    },
+    {
+      "resource_id": "M",
+      "numeric_id": 108,
+      "status": "EXECUTABLE",
+      "mechanism_id": "parameterized",
+      "bound_action": {
+        "headers": {
+          "Authorization": "Bearer token-M"
+        },
+        "method": "DELETE",
+        "path": "/api/items/M"
+      },
+      "confidence": 0.9,
+      "reason": "applicability guards and confidence threshold passed",
+      "resolution_time_ms": 0.080108642578125,
+      "correct_binding": true
+    }
+  ],
+  "baselines": {
+    "B1_cold": {
+      "description": "Cold exploration (no memory)",
+      "total_ops": 50,
+      "avg_ops_per_resource": 5.0,
+      "success_rate": 1.0
+    },
+    "B2_literal": {
+      "description": "Literal mechanism replay (current distill output)",
+      "successes": 0,
+      "total": 10,
+      "success_rate": 0.0,
+      "total_ops": 10
+    },
+    "B3_retrieval": {
+      "description": "Nearest successful trajectory retrieval",
+      "successes": 0,
+      "total": 10,
+      "success_rate": 0.0,
+      "total_ops": 10
+    }
+  },
+  "controls": {
+    "positive": {
+      "description": "Mechanism with exact identifier match (seen resource)",
+      "results": [
+        {
+          "resource_id": "A",
+          "status": "EXECUTABLE",
+          "success": true,
+          "correct_binding": true
+        },
+        {
+          "resource_id": "B",
+          "status": "EXECUTABLE",
+          "success": true,
+          "correct_binding": true
+        },
+        {
+          "resource_id": "C",
+          "status": "EXECUTABLE",
+          "success": true,
+          "correct_binding": true
+        }
+      ],
+      "successes": 3,
+      "total": 3,
+      "success_rate": 1.0
+    },
+    "null": {
+      "description": "Mechanism with mismatched preconditions",
+      "results": [
+        {
+          "context": {
+            "authenticated": false,
+            "role": "owner"
+          },
+          "params": {
+            "id": "N"
+          },
+          "status": "UNKNOWN",
+          "abstained": true
+        },
+        {
+          "context": {
+            "authenticated": true,
+            "role": "viewer"
+          },
+          "params": {
+            "id": "O"
+          },
+          "status": "UNKNOWN",
+          "abstained": true
+        }
+      ],
+      "abstentions": 2,
+      "total": 2,
+      "abstention_rate": 1.0
+    }
+  },
+  "decision": {
+    "criterion_1_resolution_rate": {
+      "description": "Parameterized mechanisms resolve correctly for >= 90% of unseen identifiers",
+      "passed": true,
+      "value": 10,
+      "required": 9,
+      "actual_rate": 1.0
+    },
+    "criterion_2_literal_failure": {
+      "description": "Literal mechanisms resolve for 0% of unseen identifiers",
+      "passed": true,
+      "value": 0,
+      "required": 0,
+      "actual_rate": 0.0
+    },
+    "criterion_3_false_negative_rate": {
+      "description": "Parameter induction false negative rate <= 0.2",
+      "passed": true,
+      "false_negatives": 0,
+      "total_expected": 1,
+      "rate": 0.0,
+      "threshold": 0.2
+    },
+    "verdict": "SURVIVES",
+    "survives": true
+  },
+  "completed_at": 1788308462.2537043,
+  "duration_seconds": 0.007923603057861328
+}

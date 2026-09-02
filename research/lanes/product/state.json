@@ -7,7 +7,7 @@
   "continue_immediately": false,
   "next_question": null,
   "promotion_ready": false,
-  "consecutive_failures": 3,
-  "updated_at": "2026-09-01T22:10:48.685230+00:00",
+  "consecutive_failures": 4,
+  "updated_at": "2026-09-02T00:23:45.789329+00:00",
   "last_failure_retryable": false
 }
