@@ -126,6 +126,31 @@
         "verdict.json": "5f9c31af118ec9f9e5665e90d318521930fcf1a2edec6c4a396835c26afb0825",
         "handoff.json": "4b5fb87ad14e0d18e16b8ed6134af6d6140b52df5cdafb207b5a29bf904510f2"
       }
+    },
+    "EXP-RUNTIME-33767375933": {
+      "lane": "runtime",
+      "request_id": "e65b8011c1ed9bf7769a9d88",
+      "created_at": "2026-09-03T14:31:56.939124+00:00",
+      "claim_ids": [
+        "C-MEAS-VALID"
+      ],
+      "question": "After applying deterministic fingerprint serialization, Date header exclusion, strong single-field baselines, and calibrated timing jitter, does the HTTP observation substrate maintain discrimination on the fixed toy server \u2014 and does it discriminate on a non-tautological external endpoint where response variation is not hand-programmed?",
+      "audit_status": "REVISE",
+      "decision": "NARROW_SUCCESS",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/runtime",
+      "hashes": {
+        "request.json": "655f8b7f40f69f7f55ad1411d433bd3eb47b37862604b486bd0246ab586483c5",
+        "spec.json": "a142b96c2b01e47e35faeb7536b95813c9f40449214114601fe41c76df6818c5",
+        "prereg.md": "271afcfaebf68f11db5b459cf914af07f86fdb151af8641985833da78a375fb7",
+        "freeze.json": "75eebda4cbcac15de208e8703e8ef65025a1cca0121577fc2a31f3a0ee137384",
+        "result.json": "d269800f9da84ba30236e5016617c1e5b379320d3498c209f4a21ae94ffea7ea",
+        "report.md": "e08c4d9e2b9acffb136f9c96e675ba81a639e37369374af5d55ebf34f6c8b00b",
+        "provenance.json": "fd2df85acbddc67b4f0a3b87184d117304002bcd1c20326084fd9ce1542250c1",
+        "audit.json": "e13db7649dbfd34faabfdffb56f0293c15a517d76a75e2325265b5a4b0062789",
+        "verdict.json": "cfedf34fddeb96dd3fd5ed104265de2630e8673cbe4dc52a9d2301084a26fb66",
+        "handoff.json": "fea5b244f4547485ceb42f78d18fabeb664c457927fe26b940d7a0b7e7451f04"
+      }
     }
   }
 }

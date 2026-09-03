@@ -1,0 +1,20 @@
+{
+  "base_sha": "b62a124ebfac4d31e4a105a162371579718d576c",
+  "chain_depth": 1,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-03T14:31:56.939124+00:00",
+  "experiment_id": "EXP-RUNTIME-33767375933",
+  "inherited_last_verdict": "NARROW_SUCCESS",
+  "inherited_next_question": "After applying the three mandatory fixes (deterministic fingerprint excluding Date header, strong single-field baselines, and jitter injection), does HTTP observation maintain discrimination on the toy server \u2014 and does it survive on an external non-tautological endpoint where response variation is not hand-programmed?",
+  "lane": "runtime",
+  "origin_github_run_id": "33767375933",
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-33528830833",
+    "path": "research/experiments/EXP-RUNTIME-33528830833/handoff.json",
+    "sha256": "4b5fb87ad14e0d18e16b8ed6134af6d6140b52df5cdafb207b5a29bf904510f2"
+  },
+  "reason": "continuation",
+  "request_hash": "b9b88a1fd60f4812180636ea364a8bbab77c5480774dd7afcafc2ae35a065703",
+  "request_id": "e65b8011c1ed9bf7769a9d88",
+  "schema_version": 1
+}

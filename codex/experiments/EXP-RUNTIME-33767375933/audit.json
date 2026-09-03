@@ -1,0 +1,246 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-33767375933",
+  "lane": "runtime",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Narrow claim ceiling: Phase B httpbin.org/status discrimination is URL-tautological (B-URL-HASH=1.0, B-STATUS-ONLY=1.0). Do not claim C-MEAS-VALID survives for general HTTP observation on real servers; restate as survives only for status-code discrimination on a testing endpoint where URL encodes the label. See result.json phase_b_baselines and run_experiment.py EXTERNAL_STATES.",
+    "Acknowledge substrate adds no value over single-field baselines on Phase B: substrate discrimination 1.0 equals B-URL-HASH 1.0 and B-STATUS-ONLY 1.0, while B-BODY-ONLY is 0.0. Decision rule Section 13.1 does not require Phase B superiority, but product_consequence_positive (spec.json) implying full-vector viability on real servers is unsupported. Compare result.json metrics.phase_b_baselines to report.md Claim Ceiling.",
+    "Provide durable raw evidence for Phase B recomputation: no raw_observations artifact is listed in result.json artifacts or provenance.json artifacts. Audit could not independently recompute phase_b_discrimination, phase_b_intra_match_rate, phase_b_inter_match_rate, phase_b_error_rate without network replay; Phase A recomputation verified, Phase B is producer-only. Add raw_observations.json with status, headers, body_hash, fingerprint per request.",
+    "Fix drift control measurement validity: spec.json measurement_validity and falsifier require monotonic distance increase valid_token->expired_token->invalid_token, and prereg.md Section 9.3 specifies monotonic ordering. Code run_experiment.py compute_controls_phase_a drift_control checks only all_discriminable (<0.5) not monotonic, and result.json C_DRIFT_MONOTONIC reports 'all_discriminable=True' as monotonic. Correct the metric or explicitly downgrade to discriminability-only and amend spec decision rule.",
+    "Correct C_BASELINE_SUPERIORITY reporting: result.json controls.C_BASELINE_SUPERIORITY expected 'substrate > best baseline (1.0000)' but code uses >= and prereg Section 8 explicitly allows equality for B-BODY-ONLY on toy server (1.0 ≤ 1.0). Align expected/pass logic to spec; current pass=true with equality is correct per spec but contradicts the control's own expected string.",
+    "Strengthen jitter testing to meet parent required fix: parent handoff recommended_action required calibrated server processing jitter (>100ms) while this experiment injects only client inter-request delay random.uniform(0,0.2) between requests (run_experiment.py run_phase_a/run_phase_b). Date-header exclusion was tested because total runtime ~15s spans seconds, but server timing confound remains untested. Document as do_not_assume or add server-side delay.",
+    "Fix bootstrap CI method: provenance and run_experiment.py bootstrap_ci_discrimination resamples states via set(sampled) which deduplicates and changes effective n; CI is degenerate [1.0,1.0] and methodologically weak. Use fingerprint-level bootstrap or state-pair bootstrap and document; not material to binary decision at 1.0 but inflates robustness claim."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1-EXTERNAL-TAUTOLOGY",
+      "severity": "high",
+      "finding": "Phase B ecological validity is tautological via URL. EXTERNAL_STATES urls are httpbin.org/status/{200,401,403} where status code is encoded in the request URL path (spec.json measurement_validity, prereg.md Section 7, run_experiment.py EXTERNAL_STATES). Perfect discrimination (phase_b_discrimination=1.0 in result.json) is guaranteed if httpbin obeys its own contract. B-URL-HASH=1.0 confirms trivial baseline achieves same perfect score without any observation (result.json phase_b_baselines).",
+      "evidence": "result.json metrics.phase_b_baselines B-URL-HASH 1.0, B-STATUS-ONLY 1.0, phase_b_discrimination 1.0; run_experiment.py lines 78-82, 403-413, 529-540; spec.json measurement_validity External endpoint 3 states x10",
+      "impact": "Claim of non-tautological external validation fails; httpbin is externally hosted but still hand-programmed to echo status from URL. Does not test auth/session variation."
+    },
+    {
+      "id": "V2-MISSING-RAW-EVIDENCE",
+      "severity": "high",
+      "finding": "No raw observations persisted. result.json artifacts lists only run_experiment.py; provenance.json artifacts lists result/report/provenance/code but no raw_observations.json. Phase B cannot be independently recomputed; Phase A was recomputed from code logic and matches, Phase B is unverified beyond producer metrics.",
+      "evidence": "result.json artifacts []; provenance.json artifacts has no raw observations; validity_notes acknowledges httpbin variability",
+      "impact": "Audit recomputed_metrics for Phase B cannot be verified; network-dependent result lacks provenance."
+    },
+    {
+      "id": "V3-DRIFT-MONOTONIC-MISMEASURED",
+      "severity": "medium",
+      "finding": "Drift control does not test monotonicity as preregistered. Prereg Section 9.3 and spec falsifier require monotonic increase; code computes drift_inter_sims for consecutive pairs only (valid->expired, expired->invalid) and checks all <0.5, not ordering. Result reports phase_a_drift_jaccards [0.305,0.366] and phase_a_drift_monotonic true, but these are discriminability not monotonic distances (valid->expired vs expired->invalid). Parent audit had flagged this vacuity.",
+      "evidence": "run_experiment.py 628-649 drift_control; result.json metrics.phase_a_drift_jaccards, metrics.phase_a_drift_monotonic; report.md Drift discriminability",
+      "impact": "Control C_DRIFT_MONOTONIC pass is not evidence of monotonic drift; does not support product drift detection claim."
+    },
+    {
+      "id": "V4-BOOTSTRAP-FLAWED",
+      "severity": "low",
+      "finding": "Bootstrap 95% CI [1.0,1.0] is degenerate due to state-level resampling with deduplication (set(sampled)). At perfect discrimination any method yields 1.0, but the CI width falsely implies high precision rather than method artifact. Sample size 225 intra / 1000 inter pairs is adequate, but CI does not reflect fingerprint-level variance.",
+      "evidence": "run_experiment.py 289-317 bootstrap_ci_discrimination; result.json phase_a_bootstrap_95ci, phase_b_bootstrap_95ci",
+      "impact": "Does not change binary decision (>0.5) but overstates robustness."
+    },
+    {
+      "id": "V5-JITTER-WEAK",
+      "severity": "medium",
+      "finding": "Jitter is client inter-request delay only (rng.uniform(0,0.2) in run_phase_a/b). Spec measurement_validity and prereg Section 9.2 require jitter to test fingerprint stability, which is satisfied for Date exclusion (total runtime ~15s spans Date change). However parent audit required_fixes demanded server processing jitter to test timing confound; timing not included in fingerprint so null FP 0.0 is expected but not a strong test.",
+      "evidence": "run_experiment.py 393-395, 443-445 jitter; result.json phase_a_null_fp_rate 0.0; provenance.json reproducibilityNotes",
+      "impact": "Null control C_NULL_FP_RATE pass is valid for Date exclusion, but not evidence against server-side timing variability."
+    },
+    {
+      "id": "V6-REPR-VERSION-DEPENDENCE",
+      "severity": "low",
+      "finding": "Fingerprint still uses repr(vector).encode where vector contains tuple(sorted(...)). While deterministic across processes within same Python version (fix #1), it remains Python-version-dependent as noted in provenance reproducibilityNotes and result validity_notes. Hash values will not reproduce across major Python versions.",
+      "evidence": "run_experiment.py 179-199 fingerprint; provenance.json reproducibilityNotes; result.json validity_notes[0]",
+      "impact": "Reproducibility limited to 3.12.14 (provenance python_version); not a falsifier but must be in do_not_assume."
+    },
+    {
+      "id": "V7-TOY-SERVER-TAUTOLOGY-REMAINS",
+      "severity": "medium",
+      "finding": "Phase A remains tautological by construction (SERVER_STATES hand-programs distinct body and X-Auth-Level per state). Phase A discrimination 1.0 cannot falsify mechanism; it only confirms fixes did not break it, which was its intended role as positive control per spec.",
+      "evidence": "run_experiment.py SERVER_STATES 39-75; result.json validity_notes[3]; spec.json measurement_validity",
+      "impact": "Limits claim ceiling to mechanism integrity, not general HTTP observation."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-URL-HASH",
+      "phase": "A",
+      "reported": 0.0,
+      "recomputed": 0.0,
+      "assessment": "PASS - Verified. URL constant across Phase A states, hash identical => discrimination 0.0. Straw-man as intended.",
+      "evidence": "result.json phase_a_baselines B-URL-HASH 0.0; recomputed via hashlib.sha256 BaseURL constant"
+    },
+    {
+      "id": "B-RANDOM",
+      "phase": "A/B",
+      "reported": 0.0,
+      "recomputed": 0.0,
+      "assessment": "PASS - Verified. Random per-state fingerprints collide negligibly => ~0.0",
+      "evidence": "result.json both phases 0.0"
+    },
+    {
+      "id": "B-TIMING",
+      "phase": "A/B",
+      "reported": 0.0,
+      "recomputed": 0.0,
+      "assessment": "PASS - Verified. Each timestamp unique => intra 0 inter 0 => 0.0. Straw-man confound correctly < substrate.",
+      "evidence": "result.json both phases 0.0; run_experiment.py baseline_timing_only"
+    },
+    {
+      "id": "B-STATUS-ONLY",
+      "phase": "A",
+      "reported": 0.7,
+      "recomputed": 0.7,
+      "assessment": "PASS - Verified recomputed 0.7 exactly. Strong baseline behaves as expected (200-group collision 300/1000 inter matches). Substrate 1.0 > 0.7 satisfies spec falsifier clause 4 and decision rule 4.",
+      "evidence": "result.json phase_a_baselines 0.7; recomputed intra 1.0 inter 0.3 => 0.7"
+    },
+    {
+      "id": "B-BODY-ONLY",
+      "phase": "A",
+      "reported": 1.0,
+      "recomputed": 1.0,
+      "assessment": "PASS - Verified. Bodies distinct per SERVER_STATES => perfect 1.0. Substrate equality (1.0 <= 1.0) explicitly allowed per prereg Section 8 and spec decision_rule clause 5, but means full vector adds no discrimination over body alone in this fixture (parent audit fix #3 concern remains). Report acknowledges.",
+      "evidence": "result.json phase_a_baselines 1.0; SERVER_STATES bodies distinct"
+    },
+    {
+      "id": "B-URL-HASH-PHASE-B",
+      "phase": "B",
+      "reported": 1.0,
+      "recomputed": 1.0,
+      "assessment": "FAIL as competitive baseline - trivially perfect. URLs differ per EXTERNAL_STATES path (200/401/403) => hash differs perfectly without observation. This is not straw-man in Phase B; it reveals tautology. Substrate 1.0 does not exceed it. Decision rule does not require beating URL baseline in Phase B, but it collapses ecological validity interpretation.",
+      "evidence": "result.json phase_b_baselines B-URL-HASH 1.0; run_experiment.py 88-82, 538-539"
+    },
+    {
+      "id": "B-STATUS-ONLY-PHASE-B",
+      "phase": "B",
+      "reported": 1.0,
+      "recomputed": 1.0,
+      "assessment": "PASS as measurement, FAIL as value-added. Status codes differ per httpbin contract => perfect 1.0. Substrate 1.0 equals strong baseline; full vector (headers+body) adds nothing because B-BODY-ONLY is 0.0 (bodies identical/minimal). Supports that status alone suffices on this endpoint, contradicting product consequence of full-vector viability.",
+      "evidence": "result.json phase_b_baselines B-STATUS-ONLY 1.0, B-BODY-ONLY 0.0"
+    },
+    {
+      "id": "B-BODY-ONLY-PHASE-B",
+      "phase": "B",
+      "reported": 0.0,
+      "recomputed": 0.0,
+      "assessment": "PASS - Verified expectation. httpbin/status returns minimal bodies identical across codes => body hash identical intra 1.0 inter 1.0 => discrimination 0.0. Correctly shows body unnecessary on this endpoint.",
+      "evidence": "result.json 0.0; report.md validity note httpbin minimal body"
+    },
+    {
+      "id": "OVERALL-BASELINE-SUPERIORITY",
+      "phase": "A",
+      "reported": "substrate 1.0 >= best 1.0 pass true",
+      "recomputed": "substrate 1.0 >= best 1.0 (B-BODY-ONLY) -> pass true per spec >=; but > would fail",
+      "assessment": "METHODOLOGICAL ISSUE - Control definition ambiguous. Spec falsifier says B-BODY-ONLY >= substrate falsifies; prereg Section 8 allows equality on toy. Producer's C_BASELINE_SUPERIORITY expected string says '> best baseline' but code uses >=, so pass despite equality is technically correct per relaxed spec. Must align wording.",
+      "evidence": "result.json controls.C_BASELINE_SUPERIORITY expected 'substrate > best baseline (1.0000)' observed 'substrate=1.0000' pass true; spec falsifier clauses 4-5; prereg 8 table"
+    }
+  ],
+  "recomputed_metrics": {
+    "phase_a_discrimination": {
+      "reported": 1.0,
+      "recomputed": 1.0,
+      "method": "Re-derived from SERVER_STATES definitions and code logic: 5 states x10 reps with distinct bodies/headers => all intra identical, all inter distinct => intra 1.0 inter 0.0 => 1.0. Verified via B-STATUS recomputation and local fingerprint determinism test (Date exclusion).",
+      "match": true
+    },
+    "phase_a_intra_match_rate": {
+      "reported": 1.0,
+      "recomputed": 1.0,
+      "match": true
+    },
+    "phase_a_inter_match_rate": {
+      "reported": 0.0,
+      "recomputed": 0.0,
+      "match": true
+    },
+    "phase_a_bootstrap_95ci": {
+      "reported": [1.0, 1.0],
+      "recomputed": null,
+      "notes": "Not independently recomputed (degenerate at perfect discrimination); method judged flawed per V4 but value plausible."
+    },
+    "phase_a_null_fp_rate": {
+      "reported": 0.0,
+      "recomputed": 0.0,
+      "method": "Fingerprint excludes Date/Server per code 187-199; local test shows Date variation yields identical hash; intra variance 0 => FP 0. Verified.",
+      "match": true
+    },
+    "phase_a_positive_tp_rate": {
+      "reported": 1.0,
+      "recomputed": 1.0,
+      "method": "no_auth vs valid_token fingerprints disjoint by body/header => 10/10 TP",
+      "match": true
+    },
+    "phase_a_baselines": {
+      "reported": {
+        "B-URL-HASH": 0.0,
+        "B-RANDOM": 0.0,
+        "B-TIMING": 0.0,
+        "B-STATUS-ONLY": 0.7,
+        "B-BODY-ONLY": 1.0
+      },
+      "recomputed": {
+        "B-URL-HASH": 0.0,
+        "B-RANDOM": 0.0,
+        "B-TIMING": 0.0,
+        "B-STATUS-ONLY": 0.7,
+        "B-BODY-ONLY": 1.0
+      },
+      "match": true
+    },
+    "phase_a_drift_jaccards": {
+      "reported": [0.305, 0.3664921465968586],
+      "recomputed": null,
+      "notes": "Values plausible for bitwise Jaccard of SHA-256 hex; not independently recomputed without raw fingerprints. Interpreted as discriminability (<0.5) not monotonic distance.",
+      "match": null
+    },
+    "phase_b_discrimination": {
+      "reported": 1.0,
+      "recomputed": null,
+      "notes": "Cannot independently recompute without raw observations artifact or live httpbin replay (network timeout in audit). Value is consistent with deterministic status-driven fingerprints (status + sorted headers excluding Date/Server + body_hash) if httpbin stable, but unverified. B-URL-HASH=1.0 independently confirms task triviality.",
+      "match": null
+    },
+    "phase_b_baselines": {
+      "reported": {
+        "B-URL-HASH": 1.0,
+        "B-RANDOM": 0.0,
+        "B-TIMING": 0.0,
+        "B-STATUS-ONLY": 1.0,
+        "B-BODY-ONLY": 0.0
+      },
+      "recomputed": {
+        "B-URL-HASH": 1.0,
+        "B-STATUS-ONLY": 1.0,
+        "B-BODY-ONLY": 0.0
+      },
+      "method": "Recomputed from URL/status/body logic: URL differs => B-URL-HASH 1.0; status differs => B-STATUS-ONLY 1.0; body identical => B-BODY-ONLY 0.0. Matches producer exactly. Substrate equality noted.",
+      "match": true
+    },
+    "phase_b_error_rate": {
+      "reported": 0.0,
+      "recomputed": null,
+      "notes": "No raw error log artifact; audit network replay timed out (httpbin unreachable), so 0% error not verified."
+    }
+  },
+  "claim_ceiling": "C-MEAS-VALID survives ONLY as: deterministic SHA-256 fingerprint of (status, tuple(sorted(headers excluding Date/Server)), body_sha256, redirect_chain) maintains perfect discrimination (1.0) on the fixed 5-state toy server with 0-200ms inter-request client jitter (Phase A intra 1.0 inter 0.0, null FP 0.0, TP 1.0) and equals - not exceeds - the best strong single-field baseline B-BODY-ONLY (1.0). On httpbin.org/status/{200,401,403} it achieves reported 1.0 via status code alone; full vector adds no discrimination over B-STATUS-ONLY (=1.0) or B-URL-HASH (=1.0) and task is URL-tautological, so this is NOT evidence of ecological validity for auth/session drift detection on production servers with caching/CDN/non-deterministic responses. Ceiling is toy-server mechanism integrity plus trivial status discrimination on a testing endpoint; broader product claim that HTTP observation is viable for real auth/session drift remains unsupported.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-33767375933/request.json — lane runtime, parent handoff 33528830833",
+    "research/experiments/EXP-RUNTIME-33767375933/spec.json — frozen question/hypothesis/falsifier/decision_rule requiring Phase A >0.5 and Phase B >0.5, baselines B-STATUS-ONLY/B-BODY-ONLY",
+    "research/experiments/EXP-RUNTIME-33767375933/prereg.md — Section 6 fingerprint repr(tuple(sorted...)), Section 8 baseline purpose, Section 9 controls, Section 13 decision rules",
+    "research/experiments/EXP-RUNTIME-33767375933/freeze.json — hashes 271afcfaebf68..., a142b96c2..., 655f8b7f40f...",
+    "research/experiments/EXP-RUNTIME-33767375933/result.json — metrics phase_a_discrimination 1.0, phase_b_discrimination 1.0, phase_a_baselines, phase_b_baselines B-URL-HASH 1.0 B-STATUS-ONLY 1.0 B-BODY-ONLY 0.0, controls C_NULL_FP_RATE C_POSITIVE C_DRIFT_MONOTONIC C_BASELINE_SUPERIORITY C_PHASE_B_DISCRIMINATION",
+    "research/experiments/EXP-RUNTIME-33767375933/report.md — interpretation and claim ceiling sections",
+    "research/experiments/EXP-RUNTIME-33767375933/run_experiment.py — SERVER_STATES 5 states, EXTERNAL_STATES httpbin paths, fingerprint 179-199, jaccard, discrimination_score, baseline functions, recomputed verification; sha256 e9818893facfe210b0534512eb03b2e66d20872cb29b8c7bc0e57571b08103c6",
+    "research/experiments/EXP-RUNTIME-33767375933/provenance.json — python 3.12.14, gitCommit e7674715899f, parentExperiment 33528830833",
+    "research/experiments/EXP-RUNTIME-33528830833/handoff.json — 6 required fixes, carry_forward do_not_assume tautology and frozenset instability"
+  ],
+  "unresolved": [
+    "What is true Phase B discrimination when recomputed from persisted raw observations with Date/Server excluded and independent of URL? Requires raw_observations artifact.",
+    "Does substrate maintain discrimination on a production server with real auth middleware (OAuth/JWT), caching, CDN where response headers/bodies vary non-trivially and URL does not encode status?",
+    "Does body-only or header-only suffice vs full vector on real servers where B-BODY-ONLY not guaranteed 0.0 or 1.0?",
+    "Can substrate detect continuous session drift beyond discrete 5-state classification, with threshold-based classifier rather than exact equality?",
+    "What is the cross-process and cross-Python-version reproducibility of repr(vector) hashes at scale?",
+    "What is the false-positive rate under server-side processing jitter >100ms if timing were accidentally included or if headers include volatile request IDs?"
+  ]
+}
