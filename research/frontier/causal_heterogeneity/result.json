@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-33767130362",
+  "lane": "frontier",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "spearman_rho_aggregate": 0.3333,
+    "spearman_p_one_sided": 0.209877,
+    "analytical_heterogeneity_all_zero": true,
+    "cohens_d_lambda1_vs_lambda0": 0.1046,
+    "heterogeneity_means_by_lambda": {
+      "0.0": 0.052259,
+      "0.1": 0.054624,
+      "0.2": 0.043709,
+      "0.3": 0.058599,
+      "0.4": 0.064735,
+      "0.5": 0.054376,
+      "0.7": 0.053741,
+      "1.0": 0.057025
+    },
+    "per_function_spearman": [
+      {
+        "function": 1,
+        "seed": 42,
+        "rho": -0.4762,
+        "p_value_two_sided": 0.232936,
+        "p_value_one_sided": 0.883532
+      },
+      {
+        "function": 2,
+        "seed": 43,
+        "rho": 0.7619,
+        "p_value_two_sided": 0.028005,
+        "p_value_one_sided": 0.014002
+      },
+      {
+        "function": 3,
+        "seed": 44,
+        "rho": 0.2381,
+        "p_value_two_sided": 0.570156,
+        "p_value_one_sided": 0.285078
+      }
+    ],
+    "anova_results": {
+      "design": "3 functions x 8 lambda levels x 10 reps = 240 observations",
+      "full_model": {
+        "lambda_effect": {
+          "F": 0.5643,
+          "p_value": 0.784437,
+          "df": 7
+        },
+        "function_effect": {
+          "F": 0.2626,
+          "p_value": 0.769314,
+          "df": 2
+        },
+        "interaction_effect": {
+          "F": 0.6516,
+          "p_value": 0.819281,
+          "df": 14
+        },
+        "residual_df": 216,
+        "model_r_squared": 0.0592
+      },
+      "interaction_pass": true,
+      "interaction_threshold_alpha": 0.05
+    },
+    "permutation_results": {
+      "lambda_0": {
+        "description": "Heterogeneity significantly > 0 at lambda=0 (should NOT be)",
+        "per_replication_p_values": [
+          0.932,
+          0.506,
+          0.075,
+          0.815,
+          0.062,
+          0.028,
+          0.061,
+          0.352,
+          0.7,
+          0.643,
+          0.336,
+          0.58,
+          0.573,
+          0.524,
+          0.593,
+          0.45,
+          0.975,
+          0.142,
+          0.751,
+          0.439,
+          0.692,
+          0.087,
+          0.44,
+          0.202,
+          0.796,
+          0.433,
+          0.632,
+          0.308,
+          0.147,
+          0.706
+        ],
+        "mean_p_value": 0.466,
+        "pass": true,
+        "threshold_alpha": 0.05,
+        "interpretation": "Null control passes if mean p > alpha (heterogeneity not significantly > 0)"
+      },
+      "lambda_1": {
+        "description": "Heterogeneity >= 0.5 at lambda=1 across all functions/replications",
+        "n_above_05": 0,
+        "total_measurements": 30,
+        "per_replication_p_values": [
+          0.066,
+          0.945,
+          0.009,
+          0.799,
+          0.929,
+          0.703,
+          0.554,
+          0.666,
+          0.601,
+          0.701,
+          0.098,
+          0.609,
+          0.898,
+          0.274,
+          0.928,
+          0.304,
+          0.292,
+          0.014,
+          0.131,
+          0.377,
+          0.933,
+          0.071,
+          0.178,
+          0.05,
+          0.937,
+          0.902,
+          0.522,
+          0.026,
+          0.748,
+          0.46
+        ],
+        "mean_p_value": 0.490833,
+        "pass": false,
+        "threshold_heterogeneity": 0.5,
+        "interpretation": "Positive control passes if all replications have het >= 0.5"
+      }
+    }
+  },
+  "controls": {
+    "positive_control": {
+      "description": "Heterogeneity >= 0.5 at lambda=1 across all functions",
+      "pass": false,
+      "heterogeneity_at_lambda1_mean": 0.057,
+      "heterogeneity_at_lambda1_min": 0.0061,
+      "heterogeneity_at_lambda1_max": 0.1849,
+      "n_above_05": 0,
+      "total_measurements": 30
+    },
+    "null_control": {
+      "description": "Heterogeneity not significantly > 0 at lambda=0 (permutation p > 0.05)",
+      "pass": true,
+      "heterogeneity_at_lambda0_mean": 0.0523,
+      "permutation_test_mean_p": 0.466
+    },
+    "permutation_null": {
+      "description": "Shuffled action labels yield heterogeneity near zero at all lambda levels",
+      "pass": true,
+      "note": "Verified analytically: when action labels are shuffled, E[S_{t+1}|do(A=a)] is identical for all actions, so heterogeneity=0"
+    },
+    "function_invariance": {
+      "description": "No significant function x lambda interaction (two-way ANOVA p > 0.05)",
+      "pass": true,
+      "interaction_p_value": 0.819281
+    },
+    "monotonicity_sensitivity": {
+      "description": "Heterogeneity is monotonically increasing with lambda",
+      "pass": false,
+      "heterogeneity_means_by_lambda": [
+        0.052259,
+        0.054624,
+        0.043709,
+        0.058599,
+        0.064735,
+        0.054376,
+        0.053741,
+        0.057025
+      ]
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/frontier/causal_heterogeneity/analyze.py",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "Analytical heterogeneity is 0 for ALL lambda levels because permutation functions have E_S[f(S, a)] = 4.5 for all actions (mean of any permutation of {0,...,9} is 4.5). This is a mathematical property, not a sampling artifact.",
+    "Monte Carlo heterogeneity estimates are all ~0.04-0.07 across all lambda levels, consistent with sampling noise around the true value of 0.",
+    "No monotonic trend: aggregate Spearman rho = 0.33, p_one_sided = 0.21 (not significant).",
+    "Positive control FAILS: 0/30 measurements at lambda=1 have heterogeneity >= 0.5 (threshold from prereg). Maximum observed is 0.18.",
+    "Null control PASSES: permutation test at lambda=0 yields mean p = 0.47 (not significant, as expected when true heterogeneity is 0).",
+    "Function invariance: ANOVA interaction p-value computed; functions show similar noise patterns but no systematic lambda-dependent differences.",
+    "Cohen's d (lambda=1 vs lambda=0) = 0.10 (small), confirming no detectable difference.",
+    "The prereg's theoretical prediction that het = lambda^2 * Var_a(E_S[f(S,a)]) is correct, but Var_a(E_S[f(S,a)]) = 0 for permutation functions, making het = 0 for all lambda."
+  ],
+  "validity_notes": [
+    "The experiment pipeline executed correctly with no errors. The negative result is scientific, not infrastructural.",
+    "The deterministic functions (permutations) are degenerate for the causal heterogeneity metric: permutations preserve the mean, so E_S[f(S, a)] = 4.5 for all actions, making the variance across actions always 0.",
+    "The Monte Carlo estimates (~0.05) are sampling noise around the true value of 0, not evidence of signal.",
+    "This does NOT falsify C-WEB-DYNAMICS broadly; it falsifies this specific causal heterogeneity metric applied to permutation-based deterministic functions.",
+    "A different choice of deterministic functions (non-permutation, e.g., state-dependent transitions that don't preserve the mean) would be needed to test the causal heterogeneity hypothesis properly."
+  ],
+  "unresolved": [
+    "Would non-permutation deterministic functions (e.g., state-action-dependent functions that don't preserve the mean) show the expected lambda-scaling of causal heterogeneity?",
+    "Is the causal heterogeneity metric fundamentally incompatible with permutation-based transitions, or is there a different formulation that would work?",
+    "Should the next experiment use a different class of deterministic functions (e.g., affine functions, polynomial functions) that break the permutation mean-preservation property?"
+  ]
+}

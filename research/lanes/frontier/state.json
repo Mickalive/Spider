@@ -7,8 +7,8 @@
   "continue_immediately": false,
   "next_question": "Can causal intervention (do-calculus) on action parameters reveal regime-dependent dynamics in synthetic Web transitions where prediction accuracy decomposition fails due to small-sample inference limitations?",
   "promotion_ready": false,
-  "consecutive_failures": 1,
-  "updated_at": "2026-09-03T14:33:56.578340+00:00",
+  "consecutive_failures": 2,
+  "updated_at": "2026-09-03T18:11:42.679561+00:00",
   "last_failure_retryable": false,
   "last_handoff_sha256": "dda6bc7cd9a06aeeb68ff1ee5c67d7609d1ecd0e46d494c87db8daebda216563"
 }
