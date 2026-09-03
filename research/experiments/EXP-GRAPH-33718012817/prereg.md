@@ -39,7 +39,7 @@ From `src/spider/kernel.py`, the `resolve()` method (lines 93-123):
 6. Sorts candidates by confidence (descending)
 7. Returns EXECUTABLE with `bound_action=_bind(best.action_template, params)`
 
-**Critical observation:** Step 6 sorts by confidence ONLY. There is no secondary sort by specificity (parameter_slots count). When two mechanisms have equal confidence, the one encountered first in the candidate list wins. The candidate list preserves iteration order from `self.registry.all()`, which returns mechanisms sorted by mechanism_id (from `MechanismRegistry.replace()`). Since "literal-fetch-posts-1" < "param-fetch-posts" alphabetically, the literal mechanism is iterated first and appended to candidates first.
+**Critical observation:** Step 6 sorts by confidence ONLY. There is no secondary sort by specificity (parameter_slots count). When two mechanisms have equal confidence, Python's stable sort preserves iteration order. The candidate list preserves iteration order from `self.registry.all()`, which returns mechanisms sorted by mechanism_id (from `MechanismRegistry.replace()` at registry.py L31-33). Since "literal-fetch-posts-1" < "param-fetch-posts" alphabetically, the literal mechanism is iterated first and appended to candidates first.
 
 **Prediction:** In a shared registry with equal confidence, the literal mechanism will be selected for any params (since it has zero required_slots and matches vacuously), producing a bound_action URL pointing to the literal's fixed resource (/posts/1) instead of the requested resource.
 
@@ -60,13 +60,14 @@ When `resolve("fetch", context, {"id": <unseen_id>})` is called:
 Additionally:
 - When the parameterized mechanism has strictly higher confidence (0.99 vs 0.95), it will be selected correctly
 - When the literal mechanism has strictly higher confidence (0.99 vs 0.95), it will be selected (confirming confidence-based sorting works)
-- When only one mechanism type exists, behavior matches prior findings (literal matches any, parameterized matches correctly)
+- When params are empty (missing required slot 'id'), the literal mechanism will be selected as fallback (correct behavior)
+- When only one mechanism type exists, behavior matches prior findings
 
 ## Falsification Criteria
 
 The hypothesis is **FALSIFIED** if ANY of:
 
-1. In equal-confidence shared-registry conditions, the parameterized mechanism is selected (not the literal) for unseen resource IDs — the kernel has an unknown specificity tiebreaker or iteration order differs from predicted
+1. In equal-confidence shared-registry conditions, the parameterized mechanism is selected (not the literal) for unseen resource IDs — the kernel has an unknown specificity tiebreaker or iteration order differs from alphabetical
 2. The bound_action URL for equal-confidence conditions correctly targets the requested resource (e.g., /posts/2 for id=2) — the literal mechanism's bound_action is resource-aware despite having no parameter_slots
 3. The kernel sorts by something other than confidence first (e.g., parameter_slots count, mechanism_id reverse order)
 4. The literal mechanism does NOT match in the shared registry (e.g., some interaction prevents the vacuous slot check from passing)
@@ -91,52 +92,54 @@ All mechanisms: intent="fetch", preconditions={}, applicability_guards={}, postc
 
 ### Conditions Matrix
 
-| # | Condition | Registry | Literal Confidence | Param Confidence | Params | Expected Selected | Expected URL |
+| # | Condition | Registry | Literal Conf | Param Conf | Params | Hypothesis Predicts Selected | Hypothesis Predicts URL |
 |---|---|---|---|---|---|---|---|
-| 1 | shared-equal-confidence-id2 | Both | 0.95 | 0.95 | {id: 2} | param-fetch-posts | .../posts/2 |
-| 2 | shared-equal-confidence-id3 | Both | 0.95 | 0.95 | {id: 3} | param-fetch-posts | .../posts/3 |
-| 3 | shared-equal-confidence-id4 | Both | 0.95 | 0.95 | {id: 4} | param-fetch-posts | .../posts/4 |
+| 1 | shared-equal-confidence-id2 | Both | 0.95 | 0.95 | {id: 2} | literal-fetch-posts-1 | .../posts/1 |
+| 2 | shared-equal-confidence-id3 | Both | 0.95 | 0.95 | {id: 3} | literal-fetch-posts-1 | .../posts/1 |
+| 3 | shared-equal-confidence-id4 | Both | 0.95 | 0.95 | {id: 4} | literal-fetch-posts-1 | .../posts/1 |
 | 4 | shared-param-higher-confidence | Both | 0.95 | 0.99 | {id: 2} | param-fetch-posts | .../posts/2 |
 | 5 | shared-literal-higher-confidence | Both | 0.99 | 0.95 | {id: 2} | literal-fetch-posts-1 | .../posts/1 |
-| 6 | literal-only-unseen | Literal only | 0.95 | — | {id: 4} | literal-fetch-posts-1 | .../posts/1 |
-| 7 | param-only-unseen | Param only | — | 0.95 | {id: 3} | param-fetch-posts | .../posts/3 |
-| 8 | cold | None | — | — | {id: 2} | none | — |
+| 6 | shared-empty-params | Both | 0.95 | 0.95 | {} | literal-fetch-posts-1 | .../posts/1 |
+| 7 | literal-only-unseen | Literal only | 0.95 | — | {id: 4} | literal-fetch-posts-1 | .../posts/1 |
+| 8 | param-only-unseen | Param only | — | 0.95 | {id: 3} | param-fetch-posts | .../posts/3 |
+| 9 | cold | None | — | — | {id: 2} | none | — |
 
 ### Measurements (for each condition)
 
 1. **Selected mechanism_id** — which mechanism did the kernel choose?
 2. **Resolution status** — EXECUTABLE or UNKNOWN?
 3. **bound_action URL** — does it match the expected URL?
-4. **HTTP execution** — for conditions with expected correct URLs, execute HTTP GET and verify status 200 + JSON keys
+4. **HTTP execution** — for conditions with predicted correct URLs (conditions 4, 7), execute HTTP GET and verify status 200 + JSON keys
 5. **Resolution reason** — for debugging
 
 ### Execution Order
 
-Conditions executed in order 1→8. Each condition uses a fresh kernel instance with a dedicated registry file containing exactly the specified mechanisms. Registry files are created by writing mechanism JSONL sorted by mechanism_id (deterministic iteration order).
+Conditions executed in order 1→9. Each condition uses a fresh kernel instance with a dedicated registry file containing exactly the specified mechanisms. Registry files are created by writing mechanism JSONL sorted by mechanism_id (deterministic iteration order).
 
 ## Decision Rule
 
-**SHARED-REGISTRY-UNSAFE** if ANY of conditions 1-3 (equal-confidence shared-registry) has:
-- The literal mechanism selected instead of the parameterized, OR
-- The bound_action URL targeting the wrong resource (e.g., /posts/1 for id=2)
+**SHARED-REGISTRY-UNSAFE** if the literal mechanism is selected in ANY of conditions 1-3 (equal-confidence shared-registry), producing a bound_action URL pointing to /posts/1 instead of the requested resource. This means literal universal matching creates false accepts in shared registries.
 
-**SHARED-REGISTRY-SAFE** if ALL of conditions 1-3 select the parameterized mechanism with correct URLs.
+**SHARED-REGISTRY-SAFE** if ALL of conditions 1-3 select the parameterized mechanism with correct URLs. The false-accept scenario does not occur.
 
-**CONFIDENCE-DOMINATES** if condition 4 (param higher) selects parameterized AND condition 5 (literal higher) selects literal.
+**CONFIDENCE-WORKS** if condition 4 (param higher confidence) selects param AND condition 5 (literal higher confidence) selects literal. Confidence-based sorting overrides iteration order.
 
-**BASELINE-CONSISTENT** if condition 6 (literal-only) → EXECUTABLE with /posts/1, condition 7 (param-only) → EXECUTABLE with correct URL, condition 8 (cold) → UNKNOWN.
+**FALLBACK-CORRECT** if condition 6 (empty params) selects literal as expected fallback when param's required slot is missing.
 
-The overall verdict combines these: the primary question is SHARED-REGISTRY-UNSAFE vs SHARED-REGISTRY-SAFE. CONFIDENCE-DOMINATES and BASELINE-CONSISTENT are supporting checks.
+**BASELINE-CONSISTENT** if condition 7 (literal-only) selects literal with /posts/1, condition 8 (param-only) selects param with /posts/3, and condition 9 (cold) returns UNKNOWN.
+
+The overall verdict combines these: the primary question is SHARED-REGISTRY-UNSAFE vs SHARED-REGISTRY-SAFE. CONFIDENCE-WORKS, FALLBACK-CORRECT, and BASELINE-CONSISTENT are supporting checks.
 
 ## Controls Summary
 
 | Control | Condition # | Purpose | Type |
 |---|---|---|---|
-| Cold (no mechanism) | 8 | Kernel abstains when no knowledge exists | Null |
-| Literal only (unseen) | 6 | Literal mechanism matches any params (baseline false accept) | Null |
-| Param only (unseen) | 7 | Parameterized mechanism works correctly in isolation | Positive |
+| Cold (no mechanism) | 9 | Kernel abstains when no knowledge exists | Null |
+| Literal only (unseen) | 7 | Literal mechanism matches any params (baseline false accept) | Null |
+| Param only (unseen) | 8 | Parameterized mechanism works correctly in isolation | Positive |
 | Param higher confidence | 4 | Confidence-based sorting works when parameterized has higher confidence | Positive |
 | Literal higher confidence | 5 | Confidence-based sorting works when literal has higher confidence | Null |
+| Empty params (fallback) | 6 | Literal acts as fallback when param's required slot is missing | Null |
 
 ## Validity Threats
 
@@ -146,7 +149,7 @@ The overall verdict combines these: the primary question is SHARED-REGISTRY-UNSA
 
 3. **Confidence values are artificial:** The experiment uses 0.95 and 0.99 as confidence values. In production, confidence values may differ. **Mitigation:** The experiment tests the kernel's sorting logic, not the confidence assignment policy. The key question is whether equal confidence causes problems, not what confidence values are assigned.
 
-4. **No HTTP execution for wrong-URL conditions:** Conditions where the literal mechanism is predicted to win (conditions 1-3, 5-6) will have incorrect URLs. HTTP execution of wrong URLs would succeed (posts/1 exists) but would not test the right resource. **Mitigation:** HTTP execution is performed only for conditions with correct predicted URLs (conditions 4, 7) to verify the bound_action is valid. For wrong-URL conditions, the bound_action URL string comparison is sufficient.
+4. **No HTTP execution for wrong-URL conditions:** Conditions where the literal mechanism is predicted to win (conditions 1-3, 5-6) will have incorrect URLs. HTTP execution of wrong URLs would succeed (posts/1 exists) but would not test the right resource. **Mitigation:** HTTP execution is performed only for conditions with predicted correct URLs (conditions 4, 7) to verify the bound_action is valid. For wrong-URL conditions, the bound_action URL string comparison is sufficient.
 
 5. **Single literal mechanism:** The experiment tests one literal mechanism competing with one parameterized mechanism. Real registries may have multiple literals. **Mitigation:** Sufficient for the gate question. Multiple literals would only amplify the false-accept problem (more universal matches competing).
 
@@ -168,7 +171,7 @@ The overall verdict combines these: the primary question is SHARED-REGISTRY-UNSA
 - No kernel fix needed for this specific issue
 - Next experiment: test parameterized mechanisms on real-web endpoints (pagination, search, form interaction)
 
-### If CONFIDENCE-DOMINATES fails
+### If CONFIDENCE-WORKS fails
 - The kernel's confidence-based sorting is not working as predicted
 - The sorting logic must be audited before any claim about mechanism selection
 
