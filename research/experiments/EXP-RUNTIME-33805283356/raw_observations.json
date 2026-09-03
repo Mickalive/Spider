@@ -1,0 +1,1002 @@
+{
+  "expired_token": [
+    {
+      "url": "http://127.0.0.1:18926/api/data",
+      "status": 401,
+      "headers": {
+        "Server": "BaseHTTP/0.6 Python/3.12.14",
+        "Date": "Thu, 03 Sep 2026 21:04:50 GMT",
+        "X-Auth-Level": "none",
+        "X-Session": "none",
+        "X-Error": "token_expired",
+        "Content-Type": "application/json",
+        "Content-Length": "71"
+      },
+      "body_hash": "a89b88f40725d97a94a1244f7ac723ae723226bebb8fe9a9457ba1492cb7aa5e",
+      "body_preview": "{\"error\":\"token_expired\",\"message\":\"Token has expired, please refresh\"}",
+      "fingerprint": "e5f1197c260317268cb3dfc61c9c546420d7d2e740f2f8c9a83cc7f7985ad72c",
+      "elapsed": 0.1235317660000419,
+      "timestamp": 1788469490.974231,
+      "state": "expired_token",
+      "rep": 8
+    },
+    {
+      "url": "http://127.0.0.1:18926/api/data",
+      "status": 401,
+      "headers": {
+        "Server": "BaseHTTP/0.6 Python/3.12.14",
+        "Date": "Thu, 03 Sep 2026 21:04:51 GMT",
+        "X-Auth-Level": "none",
+        "X-Session": "none",
+        "X-Error": "token_expired",
+        "Content-Type": "application/json",
+        "Content-Length": "71"
+      },
+      "body_hash": "a89b88f40725d97a94a1244f7ac723ae723226bebb8fe9a9457ba1492cb7aa5e",
+      "body_preview": "{\"error\":\"token_expired\",\"message\":\"Token has expired, please refresh\"}",
+      "fingerprint": "e5f1197c260317268cb3dfc61c9c546420d7d2e740f2f8c9a83cc7f7985ad72c",
+      "elapsed": 0.13691350100009458,
+      "timestamp": 1788469491.3754578,
+      "state": "expired_token",
+      "rep": 9
+    },
+    {
+      "url": "http://127.0.0.1:18926/api/data",
+      "status": 401,
+      "headers": {
+        "Server": "BaseHTTP/0.6 Python/3.12.14",
+        "Date": "Thu, 03 Sep 2026 21:04:53 GMT",
+        "X-Auth-Level": "none",
+        "X-Session": "none",
+        "X-Error": "token_expired",
+        "Content-Type": "application/json",
+        "Content-Length": "71"
+      },
+      "body_hash": "a89b88f40725d97a94a1244f7ac723ae723226bebb8fe9a9457ba1492cb7aa5e",
+      "body_preview": "{\"error\":\"token_expired\",\"message\":\"Token has expired, please refresh\"}",
+      "fingerprint": "e5f1197c260317268cb3dfc61c9c546420d7d2e740f2f8c9a83cc7f7985ad72c",
+      "elapsed": 0.09094893399992543,
+      "timestamp": 1788469493.1797938,
+      "state": "expired_token",
+      "rep": 7
+    },
+    {
+      "url": "http://127.0.0.1:18926/api/data",
+      "status": 401,
+      "headers": {
+        "Server": "BaseHTTP/0.6 Python/3.12.14",
+        "Date": "Thu, 03 Sep 2026 21:04:53 GMT",
+        "X-Auth-Level": "none",
+        "X-Session": "none",
+        "X-Error": "token_expired",
+        "Content-Type": "application/json",
+        "Content-Length": "71"
+      },
+      "body_hash": "a89b88f40725d97a94a1244f7ac723ae723226bebb8fe9a9457ba1492cb7aa5e",
+      "body_preview": "{\"error\":\"token_expired\",\"message\":\"Token has expired, please refresh\"}",
+      "fingerprint": "e5f1197c260317268cb3dfc61c9c546420d7d2e740f2f8c9a83cc7f7985ad72c",
+      "elapsed": 0.0754549409999754,
+      "timestamp": 1788469493.6837282,
+      "state": "expired_token",
+      "rep": 0
+    },
+    {
+      "url": "http://127.0.0.1:18926/api/data",
+      "status": 401,
+      "headers": {
+        "Server": "BaseHTTP/0.6 Python/3.12.14",
+        "Date": "Thu, 03 Sep 2026 21:04:54 GMT",
+        "X-Auth-Level": "none",
+        "X-Session": "none",
+        "X-Error": "token_expired",
+        "Content-Type": "application/json",
+        "Content-Length": "71"
+      },
+      "body_hash": "a89b88f40725d97a94a1244f7ac723ae723226bebb8fe9a9457ba1492cb7aa5e",
+      "body_preview": "{\"error\":\"token_expired\",\"message\":\"Token has expired, please refresh\"}",
+      "fingerprint": "e5f1197c260317268cb3dfc61c9c546420d7d2e740f2f8c9a83cc7f7985ad72c",
+      "elapsed": 0.053709704999960195,
+      "timestamp": 1788469494.2172852,
+      "state": "expired_token",
+      "rep": 3
+    },
+    {
+      "url": "http://127.0.0.1:18926/api/data",
+      "status": 401,
+      "headers": {
+        "Server": "BaseHTTP/0.6 Python/3.12.14",
+        "Date": "Thu, 03 Sep 2026 21:04:55 GMT",
+        "X-Auth-Level": "none",
+        "X-Session": "none",
+        "X-Error": "token_expired",
+        "Content-Type": "application/json",
+        "Content-Length": "71"
+      },
+      "body_hash": "a89b88f40725d97a94a1244f7ac723ae723226bebb8fe9a9457ba1492cb7aa5e",
+      "body_preview": "{\"error\":\"token_expired\",\"message\":\"Token has expired, please refresh\"}",
+      "fingerprint": "e5f1197c260317268cb3dfc61c9c546420d7d2e740f2f8c9a83cc7f7985ad72c",
+      "elapsed": 0.06285444599996026,
+      "timestamp": 1788469495.523199,
+      "state": "expired_token",
+      "rep": 5
+    },
+    {
+      "url": "http://127.0.0.1:18926/api/data",
+      "status": 401,
+      "headers": {
+        "Server": "BaseHTTP/0.6 Python/3.12.14",
+        "Date": "Thu, 03 Sep 2026 21:04:56 GMT",
+        "X-Auth-Level": "none",
+        "X-Session": "none",
+        "X-Error": "token_expired",
+        "Content-Type": "application/json",
+        "Content-Length": "71"
+      },
+      "body_hash": "a89b88f40725d97a94a1244f7ac723ae723226bebb8fe9a9457ba1492cb7aa5e",
+      "body_preview": "{\"error\":\"token_expired\",\"message\":\"Token has expired, please refresh\"}",
+      "fingerprint": "e5f1197c260317268cb3dfc61c9c546420d7d2e740f2f8c9a83cc7f7985ad72c",
+      "elapsed": 0.056779688999995415,
+      "timestamp": 1788469496.0096843,
+      "state": "expired_token",
+      "rep": 1
+    },
+    {
+      "url": "http://127.0.0.1:18926/api/data",
+      "status": 401,
+      "headers": {
+        "Server": "BaseHTTP/0.6 Python/3.12.14",
+        "Date": "Thu, 03 Sep 2026 21:04:56 GMT",
+        "X-Auth-Level": "none",
+        "X-Session": "none",
+        "X-Error": "token_expired",
+        "Content-Type": "application/json",
+        "Content-Length": "71"
+      },
+      "body_hash": "a89b88f40725d97a94a1244f7ac723ae723226bebb8fe9a9457ba1492cb7aa5e",
+      "body_preview": "{\"error\":\"token_expired\",\"message\":\"Token has expired, please refresh\"}",
+      "fingerprint": "e5f1197c260317268cb3dfc61c9c546420d7d2e740f2f8c9a83cc7f7985ad72c",
+      "elapsed": 0.110235618000047,
+      "timestamp": 1788469496.2710032,
+      "state": "expired_token",
+      "rep": 2
+    },
+    {
+      "url": "http://127.0.0.1:18926/api/data",
+      "status": 401,
+      "headers": {
+        "Server": "BaseHTTP/0.6 Python/3.12.14",
+        "Date": "Thu, 03 Sep 2026 21:04:59 GMT",
+        "X-Auth-Level": "none",
+        "X-Session": "none",
+        "X-Error": "token_expired",
+        "Content-Type": "application/json",
+        "Content-Length": "71"
+      },
+      "body_hash": "a89b88f40725d97a94a1244f7ac723ae723226bebb8fe9a9457ba1492cb7aa5e",
+      "body_preview": "{\"error\":\"token_expired\",\"message\":\"Token has expired, please refresh\"}",
+      "fingerprint": "e5f1197c260317268cb3dfc61c9c546420d7d2e740f2f8c9a83cc7f7985ad72c",
+      "elapsed": 0.14716458399993826,
+      "timestamp": 1788469499.441359,
+      "state": "expired_token",
+      "rep": 4
+    },
+    {
+      "url": "http://127.0.0.1:18926/api/data",
+      "status": 401,
+      "headers": {
+        "Server": "BaseHTTP/0.6 Python/3.12.14",
+        "Date": "Thu, 03 Sep 2026 21:05:00 GMT",
+        "X-Auth-Level": "none",
+        "X-Session": "none",
+        "X-Error": "token_expired",
+        "Content-Type": "application/json",
+        "Content-Length": "71"
+      },
+      "body_hash": "a89b88f40725d97a94a1244f7ac723ae723226bebb8fe9a9457ba1492cb7aa5e",
+      "body_preview": "{\"error\":\"token_expired\",\"message\":\"Token has expired, please refresh\"}",
+      "fingerprint": "e5f1197c260317268cb3dfc61c9c546420d7d2e740f2f8c9a83cc7f7985ad72c",
+      "elapsed": 0.09009693000007246,
+      "timestamp": 1788469500.528823,
+      "state": "expired_token",
+      "rep": 6
+    }
+  ],
+  "valid_token": [
+    {
+      "url": "http://127.0.0.1:18926/api/data",
+      "status": 200,
+      "headers": {
+        "Server": "BaseHTTP/0.6 Python/3.12.14",
+        "Date": "Thu, 03 Sep 2026 21:04:51 GMT",
+        "X-Auth-Level": "full",
+        "X-Session": "none",
+        "X-User": "alice",
+        "Content-Type": "application/json",
+        "Content-Length": "85"
+      },
+      "body_hash": "2be446ec2be51ad37b4525d4eec9f99b14059c6d07aa2fc6200f23b244d62780",
+      "body_preview": "{\"page\":\"private\",\"content\":\"Your dashboard data\",\"auth_level\":\"full\",\"user\":\"alice\"}",
+      "fingerprint": "a3e2641787f10a9efdd4cd7bd74e498f945a46483a6a1231a4e9c94ca6fe2ef5",
+      "elapsed": 0.06156834099999742,
+      "timestamp": 1788469491.0877786,
+      "state": "valid_token",
+      "rep": 7
+    },
+    {
+      "url": "http://127.0.0.1:18926/api/data",
+      "status": 200,
+      "headers": {
+        "Server": "BaseHTTP/0.6 Python/3.12.14",
+        "Date": "Thu, 03 Sep 2026 21:04:51 GMT",
+        "X-Auth-Level": "full",
+        "X-Session": "none",
+        "X-User": "alice",
+        "Content-Type": "application/json",
+        "Content-Length": "85"
+      },
+      "body_hash": "2be446ec2be51ad37b4525d4eec9f99b14059c6d07aa2fc6200f23b244d62780",
+      "body_preview": "{\"page\":\"private\",\"content\":\"Your dashboard data\",\"auth_level\":\"full\",\"user\":\"alice\"}",
+      "fingerprint": "a3e2641787f10a9efdd4cd7bd74e498f945a46483a6a1231a4e9c94ca6fe2ef5",
+      "elapsed": 0.11320196100007252,
+      "timestamp": 1788469491.9057398,
+      "state": "valid_token",
+      "rep": 5
+    },
+    {
+      "url": "http://127.0.0.1:18926/api/data",
+      "status": 200,
+      "headers": {
+        "Server": "BaseHTTP/0.6 Python/3.12.14",
+        "Date": "Thu, 03 Sep 2026 21:04:52 GMT",
+        "X-Auth-Level": "full",
+        "X-Session": "none",
+        "X-User": "alice",
+        "Content-Type": "application/json",
+        "Content-Length": "85"
+      },
+      "body_hash": "2be446ec2be51ad37b4525d4eec9f99b14059c6d07aa2fc6200f23b244d62780",
+      "body_preview": "{\"page\":\"private\",\"content\":\"Your dashboard data\",\"auth_level\":\"full\",\"user\":\"alice\"}",
+      "fingerprint": "a3e2641787f10a9efdd4cd7bd74e498f945a46483a6a1231a4e9c94ca6fe2ef5",
+      "elapsed": 0.13753785099993365,
+      "timestamp": 1788469492.5490844,
+      "state": "valid_token",
+      "rep": 3
+    },
+    {
+      "url": "http://127.0.0.1:18926/api/data",
+      "status": 200,
+      "headers": {
+        "Server": "BaseHTTP/0.6 Python/3.12.14",
+        "Date": "Thu, 03 Sep 2026 21:04:54 GMT",
+        "X-Auth-Level": "full",
+        "X-Session": "none",
+        "X-User": "alice",
+        "Content-Type": "application/json",
+        "Content-Length": "85"
+      },
+      "body_hash": "2be446ec2be51ad37b4525d4eec9f99b14059c6d07aa2fc6200f23b244d62780",
+      "body_preview": "{\"page\":\"private\",\"content\":\"Your dashboard data\",\"auth_level\":\"full\",\"user\":\"alice\"}",
+      "fingerprint": "a3e2641787f10a9efdd4cd7bd74e498f945a46483a6a1231a4e9c94ca6fe2ef5",
+      "elapsed": 0.13862702900007662,
+      "timestamp": 1788469494.4473338,
+      "state": "valid_token",
+      "rep": 6
+    },
+    {
+      "url": "http://127.0.0.1:18926/api/data",
+      "status": 200,
+      "headers": {
+        "Server": "BaseHTTP/0.6 Python/3.12.14",
+        "Date": "Thu, 03 Sep 2026 21:04:56 GMT",
+        "X-Auth-Level": "full",
+        "X-Session": "none",
+        "X-User": "alice",
+        "Content-Type": "application/json",
+        "Content-Length": "85"
+      },
+      "body_hash": "2be446ec2be51ad37b4525d4eec9f99b14059c6d07aa2fc6200f23b244d62780",
+      "body_preview": "{\"page\":\"private\",\"content\":\"Your dashboard data\",\"auth_level\":\"full\",\"user\":\"alice\"}",
+      "fingerprint": "a3e2641787f10a9efdd4cd7bd74e498f945a46483a6a1231a4e9c94ca6fe2ef5",
+      "elapsed": 0.14824450599996908,
+      "timestamp": 1788469496.7483957,
+      "state": "valid_token",
+      "rep": 2
+    },
+    {
+      "url": "http://127.0.0.1:18926/api/data",
+      "status": 200,
+      "headers": {
+        "Server": "BaseHTTP/0.6 Python/3.12.14",
+        "Date": "Thu, 03 Sep 2026 21:04:57 GMT",
+        "X-Auth-Level": "full",
+        "X-Session": "none",
+        "X-User": "alice",
+        "Content-Type": "application/json",
+        "Content-Length": "85"
+      },
+      "body_hash": "2be446ec2be51ad37b4525d4eec9f99b14059c6d07aa2fc6200f23b244d62780",
+      "body_preview": "{\"page\":\"private\",\"content\":\"Your dashboard data\",\"auth_level\":\"full\",\"user\":\"alice\"}",
+      "fingerprint": "a3e2641787f10a9efdd4cd7bd74e498f945a46483a6a1231a4e9c94ca6fe2ef5",
+      "elapsed": 0.06040147099997739,
+      "timestamp": 1788469497.3402236,
+      "state": "valid_token",
+      "rep": 9
+    },
+    {
+      "url": "http://127.0.0.1:18926/api/data",
+      "status": 200,
+      "headers": {
+        "Server": "BaseHTTP/0.6 Python/3.12.14",
+        "Date": "Thu, 03 Sep 2026 21:04:57 GMT",
+        "X-Auth-Level": "full",
+        "X-Session": "none",
+        "X-User": "alice",
+        "Content-Type": "application/json",
+        "Content-Length": "85"
+      },
+      "body_hash": "2be446ec2be51ad37b4525d4eec9f99b14059c6d07aa2fc6200f23b244d62780",
+      "body_preview": "{\"page\":\"private\",\"content\":\"Your dashboard data\",\"auth_level\":\"full\",\"user\":\"alice\"}",
+      "fingerprint": "a3e2641787f10a9efdd4cd7bd74e498f945a46483a6a1231a4e9c94ca6fe2ef5",
+      "elapsed": 0.12788363200002095,
+      "timestamp": 1788469497.7062662,
+      "state": "valid_token",
+      "rep": 0
+    },
+    {
+      "url": "http://127.0.0.1:18926/api/data",
+      "status": 200,
+      "headers": {
+        "Server": "BaseHTTP/0.6 Python/3.12.14",
+        "Date": "Thu, 03 Sep 2026 21:04:58 GMT",
+        "X-Auth-Level": "full",
+        "X-Session": "none",
+        "X-User": "alice",
+        "Content-Type": "application/json",
+        "Content-Length": "85"
+      },
+      "body_hash": "2be446ec2be51ad37b4525d4eec9f99b14059c6d07aa2fc6200f23b244d62780",
+      "body_preview": "{\"page\":\"private\",\"content\":\"Your dashboard data\",\"auth_level\":\"full\",\"user\":\"alice\"}",
+      "fingerprint": "a3e2641787f10a9efdd4cd7bd74e498f945a46483a6a1231a4e9c94ca6fe2ef5",
+      "elapsed": 0.1335551920000171,
+      "timestamp": 1788469498.9910064,
+      "state": "valid_token",
+      "rep": 8
+    },
+    {
+      "url": "http://127.0.0.1:18926/api/data",
+      "status": 200,
+      "headers": {
+        "Server": "BaseHTTP/0.6 Python/3.12.14",
+        "Date": "Thu, 03 Sep 2026 21:04:59 GMT",
+        "X-Auth-Level": "full",
+        "X-Session": "none",
+        "X-User": "alice",
+        "Content-Type": "application/json",
+        "Content-Length": "85"
+      },
+      "body_hash": "2be446ec2be51ad37b4525d4eec9f99b14059c6d07aa2fc6200f23b244d62780",
+      "body_preview": "{\"page\":\"private\",\"content\":\"Your dashboard data\",\"auth_level\":\"full\",\"user\":\"alice\"}",
+      "fingerprint": "a3e2641787f10a9efdd4cd7bd74e498f945a46483a6a1231a4e9c94ca6fe2ef5",
+      "elapsed": 0.13816367200001878,
+      "timestamp": 1788469499.165346,
+      "state": "valid_token",
+      "rep": 4
+    },
+    {
+      "url": "http://127.0.0.1:18926/api/data",
+      "status": 200,
+      "headers": {
+        "Server": "BaseHTTP/0.6 Python/3.12.14",
+        "Date": "Thu, 03 Sep 2026 21:04:59 GMT",
+        "X-Auth-Level": "full",
+        "X-Session": "none",
+        "X-User": "alice",
+        "Content-Type": "application/json",
+        "Content-Length": "85"
+      },
+      "body_hash": "2be446ec2be51ad37b4525d4eec9f99b14059c6d07aa2fc6200f23b244d62780",
+      "body_preview": "{\"page\":\"private\",\"content\":\"Your dashboard data\",\"auth_level\":\"full\",\"user\":\"alice\"}",
+      "fingerprint": "a3e2641787f10a9efdd4cd7bd74e498f945a46483a6a1231a4e9c94ca6fe2ef5",
+      "elapsed": 0.055446194999944964,
+      "timestamp": 1788469499.6642168,
+      "state": "valid_token",
+      "rep": 1
+    }
+  ],
+  "invalid_token": [
+    {
+      "url": "http://127.0.0.1:18926/api/data",
+      "status": 403,
+      "headers": {
+        "Server": "BaseHTTP/0.6 Python/3.12.14",
+        "Date": "Thu, 03 Sep 2026 21:04:51 GMT",
+        "X-Auth-Level": "none",
+        "X-Session": "none",
+        "X-Error": "invalid_token",
+        "Content-Type": "application/json",
+        "Content-Length": "61"
+      },
+      "body_hash": "b185007f5dfdd122554cd2739a127a040b2a02ff0250bc8139486877580ae39b",
+      "body_preview": "{\"error\":\"invalid_token\",\"message\":\"Token is not recognized\"}",
+      "fingerprint": "a9bb8e59db679ad2638a250cc88cb28584c7d2643c5fea630eb7be6e89c674be",
+      "elapsed": 0.0907243249999965,
+      "timestamp": 1788469491.228429,
+      "state": "invalid_token",
+      "rep": 8
+    },
+    {
+      "url": "http://127.0.0.1:18926/api/data",
+      "status": 403,
+      "headers": {
+        "Server": "BaseHTTP/0.6 Python/3.12.14",
+        "Date": "Thu, 03 Sep 2026 21:04:52 GMT",
+        "X-Auth-Level": "none",
+        "X-Session": "none",
+        "X-Error": "invalid_token",
+        "Content-Type": "application/json",
+        "Content-Length": "61"
+      },
+      "body_hash": "b185007f5dfdd122554cd2739a127a040b2a02ff0250bc8139486877580ae39b",
+      "body_preview": "{\"error\":\"invalid_token\",\"message\":\"Token is not recognized\"}",
+      "fingerprint": "a9bb8e59db679ad2638a250cc88cb28584c7d2643c5fea630eb7be6e89c674be",
+      "elapsed": 0.14166346500007876,
+      "timestamp": 1788469492.2685022,
+      "state": "invalid_token",
+      "rep": 5
+    },
+    {
+      "url": "http://127.0.0.1:18926/api/data",
+      "status": 403,
+      "headers": {
+        "Server": "BaseHTTP/0.6 Python/3.12.14",
+        "Date": "Thu, 03 Sep 2026 21:04:52 GMT",
+        "X-Auth-Level": "none",
+        "X-Session": "none",
+        "X-Error": "invalid_token",
+        "Content-Type": "application/json",
+        "Content-Length": "61"
+      },
+      "body_hash": "b185007f5dfdd122554cd2739a127a040b2a02ff0250bc8139486877580ae39b",
+      "body_preview": "{\"error\":\"invalid_token\",\"message\":\"Token is not recognized\"}",
+      "fingerprint": "a9bb8e59db679ad2638a250cc88cb28584c7d2643c5fea630eb7be6e89c674be",
+      "elapsed": 0.11434214099995188,
+      "timestamp": 1788469492.8112032,
+      "state": "invalid_token",
+      "rep": 7
+    },
+    {
+      "url": "http://127.0.0.1:18926/api/data",
+      "status": 403,
+      "headers": {
+        "Server": "BaseHTTP/0.6 Python/3.12.14",
+        "Date": "Thu, 03 Sep 2026 21:04:53 GMT",
+        "X-Auth-Level": "none",
+        "X-Session": "none",
+        "X-Error": "invalid_token",
+        "Content-Type": "application/json",
+        "Content-Length": "61"
+      },
+      "body_hash": "b185007f5dfdd122554cd2739a127a040b2a02ff0250bc8139486877580ae39b",
+      "body_preview": "{\"error\":\"invalid_token\",\"message\":\"Token is not recognized\"}",
+      "fingerprint": "a9bb8e59db679ad2638a250cc88cb28584c7d2643c5fea630eb7be6e89c674be",
+      "elapsed": 0.08052243300005557,
+      "timestamp": 1788469493.0227795,
+      "state": "invalid_token",
+      "rep": 9
+    },
+    {
+      "url": "http://127.0.0.1:18926/api/data",
+      "status": 403,
+      "headers": {
+        "Server": "BaseHTTP/0.6 Python/3.12.14",
+        "Date": "Thu, 03 Sep 2026 21:04:54 GMT",
+        "X-Auth-Level": "none",
+        "X-Session": "none",
+        "X-Error": "invalid_token",
+        "Content-Type": "application/json",
+        "Content-Length": "61"
+      },
+      "body_hash": "b185007f5dfdd122554cd2739a127a040b2a02ff0250bc8139486877580ae39b",
+      "body_preview": "{\"error\":\"invalid_token\",\"message\":\"Token is not recognized\"}",
+      "fingerprint": "a9bb8e59db679ad2638a250cc88cb28584c7d2643c5fea630eb7be6e89c674be",
+      "elapsed": 0.1184504839999363,
+      "timestamp": 1788469494.1165187,
+      "state": "invalid_token",
+      "rep": 0
+    },
+    {
+      "url": "http://127.0.0.1:18926/api/data",
+      "status": 403,
+      "headers": {
+        "Server": "BaseHTTP/0.6 Python/3.12.14",
+        "Date": "Thu, 03 Sep 2026 21:04:56 GMT",
+        "X-Auth-Level": "none",
+        "X-Session": "none",
+        "X-Error": "invalid_token",
+        "Content-Type": "application/json",
+        "Content-Length": "61"
+      },
+      "body_hash": "b185007f5dfdd122554cd2739a127a040b2a02ff0250bc8139486877580ae39b",
+      "body_preview": "{\"error\":\"invalid_token\",\"message\":\"Token is not recognized\"}",
+      "fingerprint": "a9bb8e59db679ad2638a250cc88cb28584c7d2643c5fea630eb7be6e89c674be",
+      "elapsed": 0.09045871199998601,
+      "timestamp": 1788469496.4911838,
+      "state": "invalid_token",
+      "rep": 1
+    },
+    {
+      "url": "http://127.0.0.1:18926/api/data",
+      "status": 403,
+      "headers": {
+        "Server": "BaseHTTP/0.6 Python/3.12.14",
+        "Date": "Thu, 03 Sep 2026 21:04:57 GMT",
+        "X-Auth-Level": "none",
+        "X-Session": "none",
+        "X-Error": "invalid_token",
+        "Content-Type": "application/json",
+        "Content-Length": "61"
+      },
+      "body_hash": "b185007f5dfdd122554cd2739a127a040b2a02ff0250bc8139486877580ae39b",
+      "body_preview": "{\"error\":\"invalid_token\",\"message\":\"Token is not recognized\"}",
+      "fingerprint": "a9bb8e59db679ad2638a250cc88cb28584c7d2643c5fea630eb7be6e89c674be",
+      "elapsed": 0.14719192200004727,
+      "timestamp": 1788469497.510044,
+      "state": "invalid_token",
+      "rep": 2
+    },
+    {
+      "url": "http://127.0.0.1:18926/api/data",
+      "status": 403,
+      "headers": {
+        "Server": "BaseHTTP/0.6 Python/3.12.14",
+        "Date": "Thu, 03 Sep 2026 21:04:58 GMT",
+        "X-Auth-Level": "none",
+        "X-Session": "none",
+        "X-Error": "invalid_token",
+        "Content-Type": "application/json",
+        "Content-Length": "61"
+      },
+      "body_hash": "b185007f5dfdd122554cd2739a127a040b2a02ff0250bc8139486877580ae39b",
+      "body_preview": "{\"error\":\"invalid_token\",\"message\":\"Token is not recognized\"}",
+      "fingerprint": "a9bb8e59db679ad2638a250cc88cb28584c7d2643c5fea630eb7be6e89c674be",
+      "elapsed": 0.14094866000004913,
+      "timestamp": 1788469498.3474777,
+      "state": "invalid_token",
+      "rep": 6
+    },
+    {
+      "url": "http://127.0.0.1:18926/api/data",
+      "status": 403,
+      "headers": {
+        "Server": "BaseHTTP/0.6 Python/3.12.14",
+        "Date": "Thu, 03 Sep 2026 21:05:00 GMT",
+        "X-Auth-Level": "none",
+        "X-Session": "none",
+        "X-Error": "invalid_token",
+        "Content-Type": "application/json",
+        "Content-Length": "61"
+      },
+      "body_hash": "b185007f5dfdd122554cd2739a127a040b2a02ff0250bc8139486877580ae39b",
+      "body_preview": "{\"error\":\"invalid_token\",\"message\":\"Token is not recognized\"}",
+      "fingerprint": "a9bb8e59db679ad2638a250cc88cb28584c7d2643c5fea630eb7be6e89c674be",
+      "elapsed": 0.10550587600005201,
+      "timestamp": 1788469500.2586327,
+      "state": "invalid_token",
+      "rep": 4
+    },
+    {
+      "url": "http://127.0.0.1:18926/api/data",
+      "status": 403,
+      "headers": {
+        "Server": "BaseHTTP/0.6 Python/3.12.14",
+        "Date": "Thu, 03 Sep 2026 21:05:00 GMT",
+        "X-Auth-Level": "none",
+        "X-Session": "none",
+        "X-Error": "invalid_token",
+        "Content-Type": "application/json",
+        "Content-Length": "61"
+      },
+      "body_hash": "b185007f5dfdd122554cd2739a127a040b2a02ff0250bc8139486877580ae39b",
+      "body_preview": "{\"error\":\"invalid_token\",\"message\":\"Token is not recognized\"}",
+      "fingerprint": "a9bb8e59db679ad2638a250cc88cb28584c7d2643c5fea630eb7be6e89c674be",
+      "elapsed": 0.12377546599998368,
+      "timestamp": 1788469500.4371078,
+      "state": "invalid_token",
+      "rep": 3
+    }
+  ],
+  "no_auth": [
+    {
+      "url": "http://127.0.0.1:18926/api/data",
+      "status": 200,
+      "headers": {
+        "Server": "BaseHTTP/0.6 Python/3.12.14",
+        "Date": "Thu, 03 Sep 2026 21:04:51 GMT",
+        "X-Auth-Level": "public",
+        "X-Session": "none",
+        "Content-Type": "application/json",
+        "Content-Length": "76"
+      },
+      "body_hash": "d51ed6a8a2bba70a6794c431eb97d01fb716c74cd065957cd6894b8a6f663ef4",
+      "body_preview": "{\"page\":\"public\",\"content\":\"Welcome to the public page\",\"auth_level\":\"none\"}",
+      "fingerprint": "0279985ae835e27722d3ef0b693927ab148a613ffc1fcb20698c508a1bdf7b32",
+      "elapsed": 0.1183232629999793,
+      "timestamp": 1788469491.6288548,
+      "state": "no_auth",
+      "rep": 8
+    },
+    {
+      "url": "http://127.0.0.1:18926/api/data",
+      "status": 200,
+      "headers": {
+        "Server": "BaseHTTP/0.6 Python/3.12.14",
+        "Date": "Thu, 03 Sep 2026 21:04:53 GMT",
+        "X-Auth-Level": "public",
+        "X-Session": "none",
+        "Content-Type": "application/json",
+        "Content-Length": "76"
+      },
+      "body_hash": "d51ed6a8a2bba70a6794c431eb97d01fb716c74cd065957cd6894b8a6f663ef4",
+      "body_preview": "{\"page\":\"public\",\"content\":\"Welcome to the public page\",\"auth_level\":\"none\"}",
+      "fingerprint": "0279985ae835e27722d3ef0b693927ab148a613ffc1fcb20698c508a1bdf7b32",
+      "elapsed": 0.08754078800006937,
+      "timestamp": 1788469493.8895817,
+      "state": "no_auth",
+      "rep": 4
+    },
+    {
+      "url": "http://127.0.0.1:18926/api/data",
+      "status": 200,
+      "headers": {
+        "Server": "BaseHTTP/0.6 Python/3.12.14",
+        "Date": "Thu, 03 Sep 2026 21:04:54 GMT",
+        "X-Auth-Level": "public",
+        "X-Session": "none",
+        "Content-Type": "application/json",
+        "Content-Length": "76"
+      },
+      "body_hash": "d51ed6a8a2bba70a6794c431eb97d01fb716c74cd065957cd6894b8a6f663ef4",
+      "body_preview": "{\"page\":\"public\",\"content\":\"Welcome to the public page\",\"auth_level\":\"none\"}",
+      "fingerprint": "0279985ae835e27722d3ef0b693927ab148a613ffc1fcb20698c508a1bdf7b32",
+      "elapsed": 0.12092354100002467,
+      "timestamp": 1788469494.7273746,
+      "state": "no_auth",
+      "rep": 3
+    },
+    {
+      "url": "http://127.0.0.1:18926/api/data",
+      "status": 200,
+      "headers": {
+        "Server": "BaseHTTP/0.6 Python/3.12.14",
+        "Date": "Thu, 03 Sep 2026 21:04:54 GMT",
+        "X-Auth-Level": "public",
+        "X-Session": "none",
+        "Content-Type": "application/json",
+        "Content-Length": "76"
+      },
+      "body_hash": "d51ed6a8a2bba70a6794c431eb97d01fb716c74cd065957cd6894b8a6f663ef4",
+      "body_preview": "{\"page\":\"public\",\"content\":\"Welcome to the public page\",\"auth_level\":\"none\"}",
+      "fingerprint": "0279985ae835e27722d3ef0b693927ab148a613ffc1fcb20698c508a1bdf7b32",
+      "elapsed": 0.07011534100001882,
+      "timestamp": 1788469494.9345472,
+      "state": "no_auth",
+      "rep": 5
+    },
+    {
+      "url": "http://127.0.0.1:18926/api/data",
+      "status": 200,
+      "headers": {
+        "Server": "BaseHTTP/0.6 Python/3.12.14",
+        "Date": "Thu, 03 Sep 2026 21:04:55 GMT",
+        "X-Auth-Level": "public",
+        "X-Session": "none",
+        "Content-Type": "application/json",
+        "Content-Length": "76"
+      },
+      "body_hash": "d51ed6a8a2bba70a6794c431eb97d01fb716c74cd065957cd6894b8a6f663ef4",
+      "body_preview": "{\"page\":\"public\",\"content\":\"Welcome to the public page\",\"auth_level\":\"none\"}",
+      "fingerprint": "0279985ae835e27722d3ef0b693927ab148a613ffc1fcb20698c508a1bdf7b32",
+      "elapsed": 0.0523804659999314,
+      "timestamp": 1788469495.2920992,
+      "state": "no_auth",
+      "rep": 9
+    },
+    {
+      "url": "http://127.0.0.1:18926/api/data",
+      "status": 200,
+      "headers": {
+        "Server": "BaseHTTP/0.6 Python/3.12.14",
+        "Date": "Thu, 03 Sep 2026 21:04:55 GMT",
+        "X-Auth-Level": "public",
+        "X-Session": "none",
+        "Content-Type": "application/json",
+        "Content-Length": "76"
+      },
+      "body_hash": "d51ed6a8a2bba70a6794c431eb97d01fb716c74cd065957cd6894b8a6f663ef4",
+      "body_preview": "{\"page\":\"public\",\"content\":\"Welcome to the public page\",\"auth_level\":\"none\"}",
+      "fingerprint": "0279985ae835e27722d3ef0b693927ab148a613ffc1fcb20698c508a1bdf7b32",
+      "elapsed": 0.10771956500002489,
+      "timestamp": 1788469495.6399088,
+      "state": "no_auth",
+      "rep": 2
+    },
+    {
+      "url": "http://127.0.0.1:18926/api/data",
+      "status": 200,
+      "headers": {
+        "Server": "BaseHTTP/0.6 Python/3.12.14",
+        "Date": "Thu, 03 Sep 2026 21:04:58 GMT",
+        "X-Auth-Level": "public",
+        "X-Session": "none",
+        "Content-Type": "application/json",
+        "Content-Length": "76"
+      },
+      "body_hash": "d51ed6a8a2bba70a6794c431eb97d01fb716c74cd065957cd6894b8a6f663ef4",
+      "body_preview": "{\"page\":\"public\",\"content\":\"Welcome to the public page\",\"auth_level\":\"none\"}",
+      "fingerprint": "0279985ae835e27722d3ef0b693927ab148a613ffc1fcb20698c508a1bdf7b32",
+      "elapsed": 0.12781335700003638,
+      "timestamp": 1788469498.0020218,
+      "state": "no_auth",
+      "rep": 6
+    },
+    {
+      "url": "http://127.0.0.1:18926/api/data",
+      "status": 200,
+      "headers": {
+        "Server": "BaseHTTP/0.6 Python/3.12.14",
+        "Date": "Thu, 03 Sep 2026 21:04:58 GMT",
+        "X-Auth-Level": "public",
+        "X-Session": "none",
+        "Content-Type": "application/json",
+        "Content-Length": "76"
+      },
+      "body_hash": "d51ed6a8a2bba70a6794c431eb97d01fb716c74cd065957cd6894b8a6f663ef4",
+      "body_preview": "{\"page\":\"public\",\"content\":\"Welcome to the public page\",\"auth_level\":\"none\"}",
+      "fingerprint": "0279985ae835e27722d3ef0b693927ab148a613ffc1fcb20698c508a1bdf7b32",
+      "elapsed": 0.0706908619999922,
+      "timestamp": 1788469498.1943848,
+      "state": "no_auth",
+      "rep": 0
+    },
+    {
+      "url": "http://127.0.0.1:18926/api/data",
+      "status": 200,
+      "headers": {
+        "Server": "BaseHTTP/0.6 Python/3.12.14",
+        "Date": "Thu, 03 Sep 2026 21:04:58 GMT",
+        "X-Auth-Level": "public",
+        "X-Session": "none",
+        "Content-Type": "application/json",
+        "Content-Length": "76"
+      },
+      "body_hash": "d51ed6a8a2bba70a6794c431eb97d01fb716c74cd065957cd6894b8a6f663ef4",
+      "body_preview": "{\"page\":\"public\",\"content\":\"Welcome to the public page\",\"auth_level\":\"none\"}",
+      "fingerprint": "0279985ae835e27722d3ef0b693927ab148a613ffc1fcb20698c508a1bdf7b32",
+      "elapsed": 0.09071512900004564,
+      "timestamp": 1788469498.8326638,
+      "state": "no_auth",
+      "rep": 1
+    },
+    {
+      "url": "http://127.0.0.1:18926/api/data",
+      "status": 200,
+      "headers": {
+        "Server": "BaseHTTP/0.6 Python/3.12.14",
+        "Date": "Thu, 03 Sep 2026 21:04:59 GMT",
+        "X-Auth-Level": "public",
+        "X-Session": "none",
+        "Content-Type": "application/json",
+        "Content-Length": "76"
+      },
+      "body_hash": "d51ed6a8a2bba70a6794c431eb97d01fb716c74cd065957cd6894b8a6f663ef4",
+      "body_preview": "{\"page\":\"public\",\"content\":\"Welcome to the public page\",\"auth_level\":\"none\"}",
+      "fingerprint": "0279985ae835e27722d3ef0b693927ab148a613ffc1fcb20698c508a1bdf7b32",
+      "elapsed": 0.08190931699994053,
+      "timestamp": 1788469499.870379,
+      "state": "no_auth",
+      "rep": 7
+    }
+  ],
+  "session_cookie": [
+    {
+      "url": "http://127.0.0.1:18926/api/data",
+      "status": 200,
+      "headers": {
+        "Server": "BaseHTTP/0.6 Python/3.12.14",
+        "Date": "Thu, 03 Sep 2026 21:04:52 GMT",
+        "X-Auth-Level": "session",
+        "X-Session": "active",
+        "X-User": "bob",
+        "Content-Type": "application/json",
+        "Content-Length": "90"
+      },
+      "body_hash": "5f9f2ca14dfebcd641ca8d2cc048e5d557c4fa13af3c6552e39370ccaa190a44",
+      "body_preview": "{\"page\":\"private\",\"content\":\"Session-bound user data\",\"auth_level\":\"session\",\"user\":\"bob\"}",
+      "fingerprint": "344abb0ef913e605e7ba2aabb22c57eed674ca8fce25467ebcf6787342fdb857",
+      "elapsed": 0.12561250400005974,
+      "timestamp": 1788469492.118984,
+      "state": "session_cookie",
+      "rep": 9
+    },
+    {
+      "url": "http://127.0.0.1:18926/api/data",
+      "status": 200,
+      "headers": {
+        "Server": "BaseHTTP/0.6 Python/3.12.14",
+        "Date": "Thu, 03 Sep 2026 21:04:53 GMT",
+        "X-Auth-Level": "session",
+        "X-Session": "active",
+        "X-User": "bob",
+        "Content-Type": "application/json",
+        "Content-Length": "90"
+      },
+      "body_hash": "5f9f2ca14dfebcd641ca8d2cc048e5d557c4fa13af3c6552e39370ccaa190a44",
+      "body_preview": "{\"page\":\"private\",\"content\":\"Session-bound user data\",\"auth_level\":\"session\",\"user\":\"bob\"}",
+      "fingerprint": "344abb0ef913e605e7ba2aabb22c57eed674ca8fce25467ebcf6787342fdb857",
+      "elapsed": 0.1355934650000563,
+      "timestamp": 1788469493.481806,
+      "state": "session_cookie",
+      "rep": 0
+    },
+    {
+      "url": "http://127.0.0.1:18926/api/data",
+      "status": 200,
+      "headers": {
+        "Server": "BaseHTTP/0.6 Python/3.12.14",
+        "Date": "Thu, 03 Sep 2026 21:04:55 GMT",
+        "X-Auth-Level": "session",
+        "X-Session": "active",
+        "X-User": "bob",
+        "Content-Type": "application/json",
+        "Content-Length": "90"
+      },
+      "body_hash": "5f9f2ca14dfebcd641ca8d2cc048e5d557c4fa13af3c6552e39370ccaa190a44",
+      "body_preview": "{\"page\":\"private\",\"content\":\"Session-bound user data\",\"auth_level\":\"session\",\"user\":\"bob\"}",
+      "fingerprint": "344abb0ef913e605e7ba2aabb22c57eed674ca8fce25467ebcf6787342fdb857",
+      "elapsed": 0.07145026099999541,
+      "timestamp": 1788469495.0754886,
+      "state": "session_cookie",
+      "rep": 8
+    },
+    {
+      "url": "http://127.0.0.1:18926/api/data",
+      "status": 200,
+      "headers": {
+        "Server": "BaseHTTP/0.6 Python/3.12.14",
+        "Date": "Thu, 03 Sep 2026 21:04:55 GMT",
+        "X-Auth-Level": "session",
+        "X-Session": "active",
+        "X-User": "bob",
+        "Content-Type": "application/json",
+        "Content-Length": "90"
+      },
+      "body_hash": "5f9f2ca14dfebcd641ca8d2cc048e5d557c4fa13af3c6552e39370ccaa190a44",
+      "body_preview": "{\"page\":\"private\",\"content\":\"Session-bound user data\",\"auth_level\":\"session\",\"user\":\"bob\"}",
+      "fingerprint": "344abb0ef913e605e7ba2aabb22c57eed674ca8fce25467ebcf6787342fdb857",
+      "elapsed": 0.10591248200000791,
+      "timestamp": 1788469495.7775595,
+      "state": "session_cookie",
+      "rep": 6
+    },
+    {
+      "url": "http://127.0.0.1:18926/api/data",
+      "status": 200,
+      "headers": {
+        "Server": "BaseHTTP/0.6 Python/3.12.14",
+        "Date": "Thu, 03 Sep 2026 21:04:55 GMT",
+        "X-Auth-Level": "session",
+        "X-Session": "active",
+        "X-User": "bob",
+        "Content-Type": "application/json",
+        "Content-Length": "90"
+      },
+      "body_hash": "5f9f2ca14dfebcd641ca8d2cc048e5d557c4fa13af3c6552e39370ccaa190a44",
+      "body_preview": "{\"page\":\"private\",\"content\":\"Session-bound user data\",\"auth_level\":\"session\",\"user\":\"bob\"}",
+      "fingerprint": "344abb0ef913e605e7ba2aabb22c57eed674ca8fce25467ebcf6787342fdb857",
+      "elapsed": 0.12720093400002952,
+      "timestamp": 1788469495.949705,
+      "state": "session_cookie",
+      "rep": 7
+    },
+    {
+      "url": "http://127.0.0.1:18926/api/data",
+      "status": 200,
+      "headers": {
+        "Server": "BaseHTTP/0.6 Python/3.12.14",
+        "Date": "Thu, 03 Sep 2026 21:04:57 GMT",
+        "X-Auth-Level": "session",
+        "X-Session": "active",
+        "X-User": "bob",
+        "Content-Type": "application/json",
+        "Content-Length": "90"
+      },
+      "body_hash": "5f9f2ca14dfebcd641ca8d2cc048e5d557c4fa13af3c6552e39370ccaa190a44",
+      "body_preview": "{\"page\":\"private\",\"content\":\"Session-bound user data\",\"auth_level\":\"session\",\"user\":\"bob\"}",
+      "fingerprint": "344abb0ef913e605e7ba2aabb22c57eed674ca8fce25467ebcf6787342fdb857",
+      "elapsed": 0.114758801999983,
+      "timestamp": 1788469497.0624201,
+      "state": "session_cookie",
+      "rep": 1
+    },
+    {
+      "url": "http://127.0.0.1:18926/api/data",
+      "status": 200,
+      "headers": {
+        "Server": "BaseHTTP/0.6 Python/3.12.14",
+        "Date": "Thu, 03 Sep 2026 21:04:57 GMT",
+        "X-Auth-Level": "session",
+        "X-Session": "active",
+        "X-User": "bob",
+        "Content-Type": "application/json",
+        "Content-Length": "90"
+      },
+      "body_hash": "5f9f2ca14dfebcd641ca8d2cc048e5d557c4fa13af3c6552e39370ccaa190a44",
+      "body_preview": "{\"page\":\"private\",\"content\":\"Session-bound user data\",\"auth_level\":\"session\",\"user\":\"bob\"}",
+      "fingerprint": "344abb0ef913e605e7ba2aabb22c57eed674ca8fce25467ebcf6787342fdb857",
+      "elapsed": 0.10563296199995875,
+      "timestamp": 1788469497.2397163,
+      "state": "session_cookie",
+      "rep": 3
+    },
+    {
+      "url": "http://127.0.0.1:18926/api/data",
+      "status": 200,
+      "headers": {
+        "Server": "BaseHTTP/0.6 Python/3.12.14",
+        "Date": "Thu, 03 Sep 2026 21:04:58 GMT",
+        "X-Auth-Level": "session",
+        "X-Session": "active",
+        "X-User": "bob",
+        "Content-Type": "application/json",
+        "Content-Length": "90"
+      },
+      "body_hash": "5f9f2ca14dfebcd641ca8d2cc048e5d557c4fa13af3c6552e39370ccaa190a44",
+      "body_preview": "{\"page\":\"private\",\"content\":\"Session-bound user data\",\"auth_level\":\"session\",\"user\":\"bob\"}",
+      "fingerprint": "344abb0ef913e605e7ba2aabb22c57eed674ca8fce25467ebcf6787342fdb857",
+      "elapsed": 0.07801276600002893,
+      "timestamp": 1788469498.5124483,
+      "state": "session_cookie",
+      "rep": 5
+    },
+    {
+      "url": "http://127.0.0.1:18926/api/data",
+      "status": 200,
+      "headers": {
+        "Server": "BaseHTTP/0.6 Python/3.12.14",
+        "Date": "Thu, 03 Sep 2026 21:04:58 GMT",
+        "X-Auth-Level": "session",
+        "X-Session": "active",
+        "X-User": "bob",
+        "Content-Type": "application/json",
+        "Content-Length": "90"
+      },
+      "body_hash": "5f9f2ca14dfebcd641ca8d2cc048e5d557c4fa13af3c6552e39370ccaa190a44",
+      "body_preview": "{\"page\":\"private\",\"content\":\"Session-bound user data\",\"auth_level\":\"session\",\"user\":\"bob\"}",
+      "fingerprint": "344abb0ef913e605e7ba2aabb22c57eed674ca8fce25467ebcf6787342fdb857",
+      "elapsed": 0.09472292700002072,
+      "timestamp": 1788469498.617005,
+      "state": "session_cookie",
+      "rep": 2
+    },
+    {
+      "url": "http://127.0.0.1:18926/api/data",
+      "status": 200,
+      "headers": {
+        "Server": "BaseHTTP/0.6 Python/3.12.14",
+        "Date": "Thu, 03 Sep 2026 21:05:00 GMT",
+        "X-Auth-Level": "session",
+        "X-Session": "active",
+        "X-User": "bob",
+        "Content-Type": "application/json",
+        "Content-Length": "90"
+      },
+      "body_hash": "5f9f2ca14dfebcd641ca8d2cc048e5d557c4fa13af3c6552e39370ccaa190a44",
+      "body_preview": "{\"page\":\"private\",\"content\":\"Session-bound user data\",\"auth_level\":\"session\",\"user\":\"bob\"}",
+      "fingerprint": "344abb0ef913e605e7ba2aabb22c57eed674ca8fce25467ebcf6787342fdb857",
+      "elapsed": 0.09424990399998023,
+      "timestamp": 1788469500.0236936,
+      "state": "session_cookie",
+      "rep": 4
+    }
+  ]
+}
