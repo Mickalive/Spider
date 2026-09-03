@@ -1,14 +1,14 @@
 {
   "lane": "graph",
   "human_paused": false,
-  "active_experiment_id": "EXP-GRAPH-33718012817",
-  "last_experiment_id": "EXP-GRAPH-33528827169",
-  "last_verdict": "PARAM-INHERIT-SUBSTRATE-BROKEN",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-GRAPH-33718012817",
+  "last_verdict": "COMPETITION-UNSAFE",
   "continue_immediately": false,
-  "next_question": "Should literal mechanisms carry a fixed_resource constraint (code fix: add value-based matching for mechanisms with zero parameter_slots), or is universal matching the intended design (spec fix: amend decision rule to exclude literal-unseen from the frozen gate), and does the literal universal match create false accepts when literal and parameterized mechanisms coexist in the same registry?",
+  "next_question": "Should the kernel tie-break at equal confidence prefer parameterized mechanisms over literal (kernel code change in resolve()), or should literal mechanisms carry value-based constraints that reject params conflicting with fixed resources, and what is the smallest safe fix that eliminates false accepts without breaking cold/literal-only/param-only baselines?",
   "promotion_ready": false,
-  "consecutive_failures": 4,
-  "updated_at": "2026-09-03T18:09:42.733204+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "ee1b24b92a766eed03606f1ac95623303234ab03baada15c351940e257c3460c"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-03T21:07:22.532313+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "ebb3de502513621de55c297a32023f20b6f87739cdf00b4d3db025d00f51187a"
 }
