@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-33718012817",
+  "lane": "graph",
+  "github_run_id": "33718012817",
+  "git_commit": "2c036a8ea1d83b0ed8af07f92d65aad7b132ec20",
+  "base_sha": "233d661619fcde6a7cdff551733d3592f672a182",
+  "environment": {
+    "python_version": "3.12.14",
+    "os": "Linux 6.17.0-1022-azure",
+    "platform": "linux"
+  },
+  "code_paths": {
+    "kernel": "src/spider/kernel.py",
+    "models": "src/spider/models.py",
+    "registry": "src/spider/registry.py",
+    "experiment_script": "research/experiments/EXP-GRAPH-33718012817/run_experiment.py"
+  },
+  "frozen_inputs": {
+    "request.json": "research/experiments/EXP-GRAPH-33718012817/request.json",
+    "spec.json": "research/experiments/EXP-GRAPH-33718012817/spec.json",
+    "prereg.md": "research/experiments/EXP-GRAPH-33718012817/prereg.md",
+    "freeze.json": "research/experiments/EXP-GRAPH-33718012817/freeze.json"
+  },
+  "artifacts": {
+    "raw_evidence": {
+      "path": "research/experiments/EXP-GRAPH-33718012817/raw_evidence.json",
+      "sha256": "dce8f3b916a414190b0a02248754aa4d4671a10b80a9837476602519a829fbf5"
+    },
+    "run_script": {
+      "path": "research/experiments/EXP-GRAPH-33718012817/run_experiment.py",
+      "sha256": "469cb8071d10d8aaf99b4b2966b9b30ce3aa54e44214320bb96d68d288935034"
+    }
+  },
+  "parent_experiment": {
+    "experiment_id": "EXP-GRAPH-33528827169",
+    "handoff_path": "research/experiments/EXP-GRAPH-33528827169/handoff.json",
+    "handoff_sha256": "ee1b24b92a766eed03606f1ac95623303234ab03baada15c351940e257c3460c"
+  },
+  "execution_method": "Fresh kernel instance per condition with controlled registry state. No HTTP execution. No model calls. No RNG. Deterministic.",
+  "execution_order": "Conditions 1-13 executed sequentially. Each condition independent (fresh kernel + registry)."
+}

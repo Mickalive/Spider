@@ -29,6 +29,14 @@
         "reason": "Frozen decision rule requires ALL 11 conditions for VALID; B_LITERAL_UNSEEN failed (literal mechanism returned EXECUTABLE for unseen id=2, expected UNKNOWN). Per frozen rule this yields BROKEN verdict. Narrow supported ceiling: parameterized mechanism pipeline (resolve \u2192 _bind \u2192 execute \u2192 verify) validated end-to-end on 5 unseen integer IDs (2-6) via jsonplaceholder substrate, but literal mechanisms universally match their intent due to presence-based slot checking (kernel.py L104-106, required_slots empty \u2192 vacuous pass). Claim cannot advance to VALIDATED until literal discrimination is resolved or spec is amended. Precondition discrimination untested, mechanism competition untested, no LLM distillation tested, no DOM/auth/session/drift. Audit claim ceiling: substrate-gated partial validation only."
       },
       {
+        "experiment_id": "EXP-GRAPH-33718012817",
+        "lane": "graph",
+        "decision": "COMPETITION-UNSAFE",
+        "claim_id": "C-PARAM-INHERIT",
+        "status": "BLOCKED",
+        "reason": "Literal universal matching (required_slots empty, kernel.py L104-106) makes literal mechanisms eligible for all parameter values. At equal confidence (0.95) in a shared registry, the lexicographic mechanism_id tie-break (registry.py sorted(items), not insertion order per audit finding V_TIEBREAK_ARTEFACT_LEXICOGRAPHIC) determines the winner. When literal's ID sorts first ('literal-fetch-posts-1' < 'param-fetch-posts'), literal shadows parameterized for id=2..6, producing 5/5 eligible false accepts (bound_action /posts/1 instead of /posts/{id}). The false-accept risk is real and operational. Confidence-based disambiguation (0.98 vs 0.95) overrides the tie and is validated, but equal confidence remains a realistic scenario. A code fix is required before mixed literal+parameterized registries can be product-safe. Scope ceiling: deterministic substrate only (jsonplaceholder, single fetch intent, preconditions={}, single ${id} slot). No real-web, DOM, auth, session, drift, or LLM distillation generalization."
+      },
+      {
         "experiment_id": "EXP-PRODUCT-33528829801",
         "lane": "product",
         "decision": "SURVIVES \u2014 C-PARAM-INHERIT survives at synthetic in-kernel POC level: distill_parameterized() with _extract_varying_values() correctly induces one parameter slot for isomorphic action paths and resolves to EXECUTABLE with correct bound_action for all 10 unseen single-char identifiers. All four frozen decision-rule conditions satisfied. Audit PASS confirms recomputed metrics match producer. However, the claim ceiling is narrow: single-parameter, single-field, common-prefix heuristic, deterministic synthetic data, hardcoded confidence, simulated baselines. No broader product promotion is authorized by this evidence.",

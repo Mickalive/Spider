@@ -51,6 +51,31 @@
         "handoff.json": "ee1b24b92a766eed03606f1ac95623303234ab03baada15c351940e257c3460c"
       }
     },
+    "EXP-GRAPH-33718012817": {
+      "lane": "graph",
+      "request_id": "45b4f9608080513bedbe37d4",
+      "created_at": "2026-09-03T05:14:20.614410+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT"
+      ],
+      "question": "When both literal (zero-parameter) and parameterized mechanisms coexist in a shared registry, does the literal mechanism's universal matching cause false accepts \u2014 intercepting resolutions that should go to the parameterized mechanism, producing incorrect bound_action URLs?",
+      "audit_status": "REVISE",
+      "decision": "COMPETITION-UNSAFE",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/graph",
+      "hashes": {
+        "request.json": "ec06d399ca66fee7293ec6c7260b15349854d57bfecf249cdb5e0066044bcf73",
+        "spec.json": "cc41cf639b9339300a18018b83a903f0a65e3cd609a6d174530b59a84baea8cd",
+        "prereg.md": "5e5f003859e823752a3679c9279aca60601d0dce2a9672bca7253e365ba1480c",
+        "freeze.json": "b558256b564de3ffb77a48e85aadfc5240a9d2f67c7eb996678a1985eb1d3e05",
+        "result.json": "ca911fb92cf2e45b67e6caa9941b0574a6a6aa885c53e7bbd3d80e28c32c7a7f",
+        "report.md": "31a9d83b60bda25f819995aad2762111e8df494b2c96069e405d70897b9b1280",
+        "provenance.json": "d5c2c9ac2418bf663d2145a2d6d821c309e5ba21b83088938f12a260fbf2bfd1",
+        "audit.json": "383cfd9c7ccc71ae82963b04552462504f20c05492670f0fb03b05a47371bfd4",
+        "verdict.json": "d4ce040ab11407958e07451d249bca4ee1d44b8bbb27805e5541f8a444a13c3b",
+        "handoff.json": "ebb3de502513621de55c297a32023f20b6f87739cdf00b4d3db025d00f51187a"
+      }
+    },
     "EXP-PHYSICS-33528829431": {
       "lane": "physics",
       "request_id": "aefb271e5c3274224c9651fe",
