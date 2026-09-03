@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-33528827169",
+  "lane": "graph",
+  "target_lane": "graph",
+  "next_question": "Should literal mechanisms carry a fixed_resource constraint (code fix: add value-based matching for mechanisms with zero parameter_slots), or is universal matching the intended design (spec fix: amend decision rule to exclude literal-unseen from the frozen gate), and does the literal universal match create false accepts when literal and parameterized mechanisms coexist in the same registry?",
+  "why_next": "The frozen decision rule requires ALL 11 conditions; B_LITERAL_UNSEEN fails due to presence-based slot checking (kernel.py L104-106). The parameterized pipeline is validated but the literal universal-match behavior blocks claim advancement. Before C-PARAM-INHERIT can be declared validated, the next agent must resolve whether this is a kernel bug (add value-based constraint for literal mechanisms) or an acceptable design (amend spec). A shared-registry competition test is also needed to quantify false-accept risk from literal universal matching when both literal and parameterized mechanisms coexist.",
+  "carry_forward": {
+    "established": [
+      "Parameterized mechanism pipeline (resolve → _bind → execute → verify) works end-to-end on jsonplaceholder substrate: 5 unseen integer IDs (2-6) resolved EXECUTABLE with correct bound_action URLs, HTTP 200, JSON keys [userId, id, title, body], verify()=True.",
+      "_bind() correctly substitutes ${id} in action_template URLs for all unseen resource IDs.",
+      "Parameter completeness enforcement works: missing-params condition correctly returns UNKNOWN when required slot absent.",
+      "Applicability guards enforced independently of parameter binding: guard-blocked condition correctly returns UNKNOWN.",
+      "Cold registry (no mechanisms) correctly returns UNKNOWN — kernel abstains when no knowledge exists.",
+      "Literal mechanism correctly resolves EXECUTABLE on its original resource (literal-original positive control passes)."
+    ],
+    "rejected": [
+      "Literal mechanisms DO NOT discriminate by resource identity — a literal mechanism (parameter_slots=[]) returns EXECUTABLE for any params matching its intent and preconditions, including unseen resources. This falsifies the spec's falsification criterion #5 but is consistent with the kernel's presence-based slot checking design."
+    ],
+    "unknown": [
+      "Whether literal universal matching is intended kernel behavior (presence-based, code-as-designed) or a bug requiring value-based constraint — DIRECTOR decision needed.",
+      "Whether literal universal matching creates false accepts in a shared registry with both literal and parameterized mechanisms — mechanism competition untested (each condition used isolated registry).",
+      "Whether verify() postcondition checking works correctly for non-200 HTTP responses or reordered/extra JSON keys — verify_postconditions() hardcodes observed_state={'status':200} (audit finding V_VERIFY_HARDCODED_STATUS).",
+      "Whether the kernel's preconditions matching (_matches) discriminates — all mechanisms registered with preconditions={}, no discrimination tested.",
+      "Whether _bind() preserves type for full-match template strings (int → int) — all templates here are URL-embedded partial match, type-preservation path untested.",
+      "Whether parameterized mechanisms work on real-web endpoints with DOM, auth, session state, drift — jsonplaceholder is a substrate validation only.",
+      "Whether the 'learn on A' half of C-PARAM-INHERIT works (LLM-driven mechanism distillation from exploration) — no model calls in this experiment."
+    ],
+    "do_not_assume": [
+      "Do not assume C-PARAM-INHERIT is validated — frozen verdict is BROKEN; claim status remains EXPERIMENTAL.",
+      "Do not assume literal mechanisms are broken — the kernel correctly implements presence-based slot checking; the spec assumed value-based behavior. This is a design clarification pending DIRECTOR resolution.",
+      "Do not assume the parameterized pipeline generalizes to real-web endpoints — jsonplaceholder is deterministic, no DOM/auth/session/drift, N=5, single ${id} slot.",
+      "Do not assume verify() is a strong control — it hardcodes status=200 and uses list equality for has_keys; invalid for non-200 or schema-varying endpoints.",
+      "Do not assume mechanism competition is safe — literal universal matching in a shared registry could cause false accepts; untested.",
+      "Do not assume this experiment tested LLM-driven mechanism discovery — no model calls were involved.",
+      "Do not assume the substrate validation generalizes to C-FRESHNESS, C-DELTA-REPAIR, C-RESIDUAL-NOVELTY, or any other claim beyond C-PARAM-INHERIT's 'succeed on B' half."
+    ]
+  },
+  "dependencies": [
+    "src/spider/kernel.py (resolve, _bind, verify methods)",
+    "src/spider/registry.py (MechanismRegistry)",
+    "src/spider/models.py (Mechanism dataclass)",
+    "research/claims/registry.json (C-PARAM-INHERIT claim definition)",
+    "research/experiments/EXP-GRAPH-33528827169/result.json (producer evidence)",
+    "research/experiments/EXP-GRAPH-33528827169/audit.json (independent audit)",
+    "research/experiments/EXP-GRAPH-33528827169/raw_results.json (raw condition data)"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-33528827169/result.json",
+    "research/experiments/EXP-GRAPH-33528827169/audit.json",
+    "research/experiments/EXP-GRAPH-33528827169/raw_results.json",
+    "research/experiments/EXP-GRAPH-33528827169/spec.json",
+    "research/experiments/EXP-GRAPH-33528827169/prereg.md",
+    "research/experiments/EXP-GRAPH-33528827169/report.md",
+    "research/experiments/EXP-GRAPH-33528827169/provenance.json",
+    "src/spider/kernel.py:104-106",
+    "research/claims/registry.json"
+  ],
+  "recommended_action": "RESOLVE literal discrimination question before next experiment: (1) Read kernel.py L104-106 and the Mechanism model to determine whether literal mechanisms should carry a fixed_resource constraint or whether presence-based universal matching is the intended design. (2) If code fix: add a value-based constraint for mechanisms with zero parameter_slots (e.g., check that params match the mechanism's static resource identifier). (3) If spec fix: amend the frozen decision rule to exclude B_LITERAL_UNSEEN and re-run with updated falsification criteria. (4) Regardless of resolution: repair verify_postconditions() in run_experiment.py to use actual HTTP status (not hardcoded 200) and subset key checks (not list equality). (5) Add a mechanism-competition test: register both literal and parameterized mechanisms in the same registry, resolve with various params, verify that parameterized mechanisms are not shadowed by literal universal matches."
+}

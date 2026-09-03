@@ -11,6 +11,25 @@ def canonical(obj):
     return json.dumps(obj, sort_keys=True, separators=(",", ":")).encode()
 
 
+def file_sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def parent_handoff_from_state(state: dict) -> dict | None:
+    parent_id = state.get("last_experiment_id")
+    if not parent_id:
+        return None
+    rel = Path("research") / "experiments" / parent_id / "handoff.json"
+    path = ROOT / rel
+    if not path.exists():
+        return None
+    return {
+        "experiment_id": parent_id,
+        "path": rel.as_posix(),
+        "sha256": file_sha256(path),
+    }
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--lane", required=True)
@@ -72,6 +91,12 @@ def main():
                 "base_sha": base_sha,
                 "claim_registry_sha256": hashlib.sha256(claims_bytes).hexdigest(),
             }
+            inherited = parent_handoff_from_state(state)
+            if inherited is not None:
+                seed["parent_handoff"] = inherited
+                seed["inherited_next_question"] = state.get("next_question")
+                seed["inherited_last_verdict"] = state.get("last_verdict")
+
             request_id = hashlib.sha256(canonical(seed)).hexdigest()[:24]
             req = dict(seed, request_id=request_id, created_at=datetime.now(timezone.utc).isoformat())
             req["request_hash"] = hashlib.sha256(canonical({k: v for k, v in req.items() if k != "request_hash"})).hexdigest()
@@ -96,6 +121,8 @@ def main():
             (exp / "spec.json").write_text(json.dumps(spec, indent=2) + "\n", encoding="utf-8")
             (exp / "prereg.md").write_text(f"# {exp_id} preregistration\n\nDESIGN NOT YET FROZEN.\n", encoding="utf-8")
             print(f"SPIDER_NEW experiment_id={exp_id} request_id={request_id}")
+            if inherited is not None:
+                print(f"SPIDER_PARENT_HANDOFF experiment_id={inherited['experiment_id']} sha256={inherited['sha256']}")
         state.update({
             "active_experiment_id": exp_id,
             "continue_immediately": False,

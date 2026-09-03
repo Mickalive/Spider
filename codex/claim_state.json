@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "events_by_claim": {
+    "C-PARAM-INHERIT": [
+      {
+        "experiment_id": "EXP-GRAPH-33528827169",
+        "lane": "graph",
+        "decision": "PARAM-INHERIT-SUBSTRATE-BROKEN",
+        "claim_id": "C-PARAM-INHERIT",
+        "status": "EXPERIMENTAL",
+        "reason": "Frozen decision rule requires ALL 11 conditions for VALID; B_LITERAL_UNSEEN failed (literal mechanism returned EXECUTABLE for unseen id=2, expected UNKNOWN). Per frozen rule this yields BROKEN verdict. Narrow supported ceiling: parameterized mechanism pipeline (resolve \u2192 _bind \u2192 execute \u2192 verify) validated end-to-end on 5 unseen integer IDs (2-6) via jsonplaceholder substrate, but literal mechanisms universally match their intent due to presence-based slot checking (kernel.py L104-106, required_slots empty \u2192 vacuous pass). Claim cannot advance to VALIDATED until literal discrimination is resolved or spec is amended. Precondition discrimination untested, mechanism competition untested, no LLM distillation tested, no DOM/auth/session/drift. Audit claim ceiling: substrate-gated partial validation only."
+      },
+      {
+        "experiment_id": "EXP-PRODUCT-33528829801",
+        "lane": "product",
+        "decision": "SURVIVES \u2014 C-PARAM-INHERIT survives at synthetic in-kernel POC level: distill_parameterized() with _extract_varying_values() correctly induces one parameter slot for isomorphic action paths and resolves to EXECUTABLE with correct bound_action for all 10 unseen single-char identifiers. All four frozen decision-rule conditions satisfied. Audit PASS confirms recomputed metrics match producer. However, the claim ceiling is narrow: single-parameter, single-field, common-prefix heuristic, deterministic synthetic data, hardcoded confidence, simulated baselines. No broader product promotion is authorized by this evidence.",
+        "claim_id": "C-PARAM-INHERIT",
+        "status": "EXPERIMENTAL",
+        "reason": "Survives frozen POC gate: unseen_resolution_rate=1.0 (10/10), binding_accuracy=1.0 (10/10), parameter_induction_fn_rate=0.0 (1/1 detected), literal_fail_rate=1.0 (0/10 EXECUTABLE), positive and null controls pass. Audit PASS confirms recomputation. Ceiling is narrow synthetic single-parameter single-field common-prefix level only; does NOT establish general parameter induction, multi-parameter capability, real-browser viability, or measured end-to-end economics."
+      }
+    ]
+  }
+}
