@@ -1,0 +1,9 @@
+{
+  "stage": "director",
+  "category": "VALIDATION_FAILURE",
+  "message": "invalid claim update status: NEEDS_REDESIGN",
+  "retryable": false,
+  "recorded_at": "2026-09-03T00:56:17.528749+00:00",
+  "github_run_id": "33701285686",
+  "github_run_attempt": "1"
+}
