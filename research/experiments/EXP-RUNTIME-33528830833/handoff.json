@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-33528830833",
+  "lane": "runtime",
+  "target_lane": "runtime",
+  "next_question": "After applying the three mandatory fixes (deterministic fingerprint excluding Date header, strong single-field baselines, and jitter injection), does HTTP observation maintain discrimination on the toy server — and does it survive on an external non-tautological endpoint where response variation is not hand-programmed?",
+  "why_next": "The experiment established that the fingerprint mechanism CAN produce perfect discrimination in a controlled setting, but the claim ceiling is toy-only due to tautological server design, non-deterministic fingerprint serialization, Date header leakage, and straw-man baselines. Three mandatory fixes (audit.json required_fixes #2 fingerprint determinism, #3 Date exclusion, #4 strong baselines) plus a non-tautological server test are needed before C-MEAS-VALID can advance beyond the toy fixture. The existing code and metrics provide a validated scaffold; fixes are incremental, not architectural.",
+  "carry_forward": {
+    "established": [
+      "Stdlib HTTP observation substrate (status, headers, body SHA-256, redirect_chain) produces deterministic fingerprints within a single Python process on a local deterministic http.server: 5/5 states discriminated, 0% intra-state variance, all controls pass (audit.json recomputed_metrics confirm pattern).",
+      "Fingerprint mechanism (SHA-256 of status+headers+body_hash+redirect_chain) CAN achieve perfect discrimination when response bodies/headers vary across states — this is a necessary condition for HTTP-level observation viability.",
+      "Body hash and custom headers each achieve per-field discrimination of 1.0 on the toy server; status code alone achieves 0.833. The full vector is not strictly necessary for discrimination in this fixture.",
+      "Bootstrap 95% CI [0.5, 1.0] for discrimination score confirms point estimate 1.0 is robust to resampling within this fixture."
+    ],
+    "rejected": [
+      "Broader claim that HTTP-level observation is a valid general foundation layer for Runtime — NOT supported; claim ceiling is toy-only (audit.json claim_ceiling).",
+      "B-URL-HASH, B-RANDOM, B-TIMING as adequate baselines — all score 0.0 by construction; not competitive (audit.json baseline_findings).",
+      "Held-out session_cookie as evidence of generalization to unseen auth mechanisms — vacuous because substrate is deterministic SHA-256 with no calibration (audit.json required_fixes #5).",
+      "Drift monotonicity claim as defined (Jaccard <0.5 pairs) — audit found this is not true monotonic ordering, only discriminable pairs (audit.json required_fixes #5)."
+    ],
+    "unknown": [
+      "Does substrate maintain discrimination when Date header is included and requests span multiple seconds? (producer validity_notes unresolved #2, audit V3)",
+      "Does substrate maintain discrimination under injected server processing jitter >100ms with timing excluded from fingerprint? (audit required_fixes #6, falsifier clause 4)",
+      "How does fingerprinting perform against live-site servers with caching, CDN, non-deterministic responses? (audit V1, unresolved)",
+      "What is the discrimination score when Date header is excluded and headers are sorted deterministically? (audit recomputed 5 distinct but not producer-reported as standalone metric)",
+      "Does body-only or header-only observation suffice on non-tautological servers, making full vector unnecessary? (audit baseline_findings B-STRONG-MISSING)",
+      "Can substrate detect continuous session drift as a continuous signal rather than discrete state changes? (producer unresolved #4)"
+    ],
+    "do_not_assume": [
+      "Do not assume toy server results transfer to production live-site environments — V1 tautological server design means discrimination was guaranteed by construction.",
+      "Do not assume fingerprint hashes reproduce across Python processes or versions — V2 repr(frozenset(...)) instability confirmed: audit recompute produced 50/50 mismatches while preserving pattern.",
+      "Do not assume Date header was controlled — it was constant only because all 50 requests executed within one second; it IS part of headers frozenset and would inject spurious variance under multi-second execution.",
+      "Do not assume the substrate exceeds single-field observation — per_field body_hash=1.0 and header_set=1.0 on toy server, meaning the full vector adds no discrimination over its components in this fixture.",
+      "Do not assume C-MEAS-VALID has survived for general HTTP-level observation — it has survived only for this specific toy fixture with specific untested assumptions.",
+      "Do not assume the drift_control Jaccard values (0.303, 0.269) demonstrate monotonic ordering — audit found they demonstrate discriminability, not monotonicity."
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-RUNTIME-33528830833/run_experiment.py — contains the substrate code and toy server; fixes to fingerprint function and baselines apply here",
+    "research/experiments/EXP-RUNTIME-33528830833/raw_observations.json — raw evidence; contains Date headers and elapsed times needed to validate Date-exclusion fix",
+    "research/experiments/EXP-RUNTIME-33528830833/audit.json — enumerates 6 required fixes with exact evidence references; next DESIGN must address all 6"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-33528830833/result.json — producer metrics, controls, observations",
+    "research/experiments/EXP-RUNTIME-33528830833/audit.json — independent audit with 6 required fixes, claim_ceiling, validity_findings V1-V6, baseline_findings",
+    "research/experiments/EXP-RUNTIME-33528830833/raw_observations.json — 50 raw observations with Date headers, elapsed times, fingerprints",
+    "research/experiments/EXP-RUNTIME-33528830833/run_experiment.py — substrate code, server handler, fingerprint function, baselines",
+    "research/experiments/EXP-RUNTIME-33528830833/report.md — producer interpretation (bounded by claim ceiling)",
+    "research/experiments/EXP-RUNTIME-33528830833/provenance.json — execution environment, hashes, reproducibility notes",
+    "research/experiments/EXP-RUNTIME-33528830833/spec.json — frozen experiment design, decision rule, controls",
+    "research/experiments/EXP-RUNTIME-33528830833/freeze.json — immutable freeze record"
+  ],
+  "recommended_action": "DESIGN EXP-RUNTIME-next applying all 6 audit required fixes: (1) replace repr(frozenset(...)) with deterministic sorted-tuple SHA-256 serialization, (2) exclude Date and Server headers from fingerprint vector, (3) add B-STATUS-ONLY and B-BODY-ONLY strong baselines requiring substrate > best single-field with margin, (4) inject calibrated server processing jitter (>100ms random) and verify null FP rate remains <5% with timing excluded from fingerprint, (5) define drift as monotonic distance increase (valid→expired→invalid) and held-out as threshold-based classifier trained on states 1-4, (6) test against an external non-tautological endpoint (e.g., httpbin.org or a simple Flask app with real auth middleware) where response variation is not hand-programmed. Execute fixes in two phases: Phase 1 (toy server with fixes) validates mechanism; Phase 2 (external endpoint) tests ecological validity."
+}
