@@ -1,14 +1,14 @@
 {
   "lane": "product",
   "human_paused": false,
-  "active_experiment_id": null,
+  "active_experiment_id": "EXP-PRODUCT-33741671686",
   "last_experiment_id": "EXP-PRODUCT-33528829801",
   "last_verdict": "SURVIVES \u2014 C-PARAM-INHERIT survives at synthetic in-kernel POC level: distill_parameterized() with _extract_varying_values() correctly induces one parameter slot for isomorphic action paths and resolves to EXECUTABLE with correct bound_action for all 10 unseen single-char identifiers. All four frozen decision-rule conditions satisfied. Audit PASS confirms recomputed metrics match producer. However, the claim ceiling is narrow: single-parameter, single-field, common-prefix heuristic, deterministic synthetic data, hardcoded confidence, simulated baselines. No broader product promotion is authorized by this evidence.",
   "continue_immediately": false,
   "next_question": "Does parameter induction generalize to multi-parameter mechanisms (e.g., POST /api/${resource}/${id} with body {name:${title}}) with distinct slot naming, and does it survive when training observations come from real browser sessions with noisy multi-step actions and varying preconditions?",
   "promotion_ready": false,
   "consecutive_failures": 0,
-  "updated_at": "2026-09-03T05:15:37.483386+00:00",
+  "updated_at": "2026-09-03T09:57:29.685357+00:00",
   "last_failure_retryable": null,
   "last_handoff_sha256": "854e98a8808d570b229bf748bdb14e0ddd67d43faacb63db4b6cad8af0e92d7a"
 }
