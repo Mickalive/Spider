@@ -2,27 +2,127 @@
   "experiment_id": "EXP-PRODUCT-33741671686",
   "lane": "product",
   "claim_ids": ["C-PARAM-INHERIT"],
-  "question": "Does parameter induction generalize to multi-parameter mechanisms with multiple distinct varying fields (path, body, headers) and distinct slot naming, when training observations come from synthetic but structurally realistic multi-field mechanisms?",
-  "hypothesis": "When multiple observations of the same intent share identical preconditions and postconditions but vary across multiple fields (path segments, body values, header values), parameter induction correctly: (1) identifies each independently varying field as a distinct parameter slot, (2) assigns distinct slot names per varying field location, (3) produces an action template where each slot can be independently substituted, and (4) resolves to EXECUTABLE with correct bound_action for unseen parameter combinations that were never jointly observed in training.",
-  "falsifier": "Parameter induction fails to produce distinct slots for distinct varying fields (collapses multiple fields into one slot or misses a varying field entirely), OR bound_action substitutes the wrong value into the wrong slot, OR resolution fails for any unseen parameter combination, OR positive control fails (seen identifier resolution), OR null control fails (mismatched preconditions resolve instead of abstaining).",
+  "question": "Does parameter induction generalize to multi-parameter mechanisms with multiple distinct varying fields (path + body + headers), each receiving a distinct slot name, such that the induced mechanism resolves EXECUTABLE with correct bound_action for unseen multi-parameter combinations?",
+  "hypothesis": "A multi-parameter induction function that compares field values across training observations and names slots by their structural position (not hardcoded 'id') will: (1) induce multiple distinct parameter slots when multiple fields vary across observations; (2) produce correct bound_action substitution for all slots simultaneously; (3) resolve EXECUTABLE for unseen combinations of parameter values; (4) correctly abstain (UNKNOWN) when required slots are missing; (5) handle non-identifier values (URLs, timestamps) that the previous is_id_like regex rejected.",
+  "falsifier": "The hypothesis is FALSIFIED if ANY of: (1) the induction function produces zero parameter slots when multiple fields genuinely vary (slot_count < true_slot_count for any condition); (2) slot naming collisions occur — two distinct varying fields receive the same slot name (e.g., both path.user_id and body.user_id become '${id}'); (3) resolution fails (status != EXECUTABLE) for any unseen combination where all required slots are provided; (4) bound_action contains unsubstituted '${...}' template literals for any resolved slot; (5) the function crashes or produces non-deterministic output for any condition; (6) the positive control fails (single-parameter induction no longer works after the multi-parameter extension).",
   "baselines": [
-    "B1_cold: Cold exploration — no memory, simulated full-task cost (estimated 5 operations: authenticate, navigate, fill body, set headers, submit).",
-    "B2_literal: Literal mechanism replay — mechanism with no parameter slots, cannot bind new identifiers; expected to fail on all unseen combinations.",
-    "B3_single_slot: Single-slot mechanism — mechanism induced by collapsing all varying fields into one param_name='id' slot (current kernel limitation); expected to fail when multiple independent parameters are needed."
+    "B_SINGLE_PARAM: Single-parameter mechanism (previous POC) — induces one slot from path-only variation. Reused as regression baseline: must still work after multi-parameter extension.",
+    "B_LITERAL_REPLAY: Literal mechanism (no parameter slots) — must fail on all unseen multi-parameter combinations, confirming parameterization is necessary.",
+    "B_COLD_EXPLORATION: Simulated cold exploration cost — full re-discovery of multi-parameter mechanism from scratch.",
+    "B_RANDOM_INDUCTION: Random slot assignment — randomly name varying fields; tests whether structural naming outperforms chance."
   ],
-  "positive_control": "Resolution with all seen training identifiers (resource=A, title='Alpha', token='tok-A') returns EXECUTABLE with correct bound_action matching the original observation.",
-  "null_control": "Resolution with mismatched preconditions (authenticated=False when mechanism requires authenticated=True) returns UNKNOWN (abstains).",
+  "positive_control": "Three training observations with identical structure except path contains /api/users/{uid} and body contains {name: {name_value}} where uid and name_value vary across observations. Induction must produce parameter_slots=['user_id', 'name'] (or equivalent distinct names) with action_template containing ${user_id} in path and ${name} in body. Resolution with params={user_id: '42', name: 'Alice'} must yield EXECUTABLE with bound_action containing /api/users/42 in path and {name: 'Alice'} in body.",
+  "null_control": "Three training observations with completely random, non-shared action templates (no common prefix/suffix, no varying fields in the same structural position). Induction should produce zero parameter slots or the mechanism should resolve to UNKNOWN when params don't match. This verifies the function does not hallucinate parameters when no pattern exists.",
   "measurement_validity": [
-    "All observations are synthetic and deterministic; no model calls or browser interactions.",
-    "Training set contains 3 observations with distinct resource/title/token combinations.",
-    "Test set contains 10 unseen combinations never jointly observed in training.",
-    "Parameter induction is performed before resolution testing; no outcome data influences induction design.",
-    "Resolution uses the same kernel.resolve() interface as the previous experiment.",
-    "Confidence threshold (0.8) and min_confidence logic are unchanged from previous experiment."
+    "All observations are synthetic with deterministic structure — no model calls, no network, no browser",
+    "Induction function is pure computation on observation action templates — reproducible from frozen seed",
+    "Resolution uses the existing kernel resolve() -> _bind() pipeline which was validated in EXP-GRAPH-33528827169",
+    "Test conditions are designed to exercise distinct failure modes: single-field, multi-field, non-identifier values, shared slot names",
+    "No outcome-bearing measurements during DESIGN — all measurements deferred to EXECUTE",
+    "Each condition is independent — fresh registry per condition prevents cross-contamination"
   ],
-  "decision_rule": "SURVIVES if ALL of: (1) parameter induction identifies >= 3 distinct parameter slots (one per varying field: resource, title, token), (2) unseen_resolution_rate >= 90% (9/10 unseen combinations resolve to EXECUTABLE), (3) binding_accuracy = 100% (all resolved bound_actions have correct substitutions in correct slots), (4) single_slot_baseline fails on all unseen combinations (literal_fail_rate = 100%), (5) positive_control passes (seen combination resolves to EXECUTABLE), (6) null_control passes (mismatched preconditions resolve to UNKNOWN). Otherwise FALSIFIED.",
-  "product_consequence_positive": "Multi-parameter induction is viable at the kernel level. The mechanism generalizes beyond single-field parameterization. This strengthens C-PARAM-INHERIT toward multi-field mechanisms and justifies proceeding to noisy/real-browser observation testing. Product architecture can support mechanisms with multiple independent parameter slots.",
-  "product_consequence_negative": "If multi-parameter induction fails (collapses slots or misassigns names), C-PARAM-INHERIT remains limited to single-field mechanisms. Product cannot support complex mechanisms like POST endpoints with body + path parameters. Kernel design must be reconsidered before further product investment in parameterized inheritance.",
-  "estimated_cost": "Very low: pure synthetic data, offline computation, no browser/network/model calls. 3 training observations, 10 test combinations, 3 baselines, 2 controls.",
-  "expected_information_gain": "High: directly tests the handoff-identified next step for C-PARAM-INHERIT. A positive result extends the claim ceiling from single-parameter to multi-parameter. A negative result identifies a concrete kernel limitation. The experiment is minimal (same synthetic framework, extended observations) and has clear discriminating power."
+  "conditions": [
+    {
+      "id": "C1-single-path",
+      "description": "Single varying path parameter (regression baseline)",
+      "n_observations": 3,
+      "n_unseen": 5,
+      "fields_varying": ["path"],
+      "action_templates": [
+        {"method": "GET", "url": "https://api.example.com/items/A"},
+        {"method": "GET", "url": "https://api.example.com/items/B"},
+        {"method": "GET", "url": "https://api.example.com/items/C"}
+      ],
+      "unseen_params": [
+        {"id": "D"}, {"id": "E"}, {"id": "F"}, {"id": "G"}, {"id": "H"}
+      ],
+      "expected_slot_count": 1,
+      "expected_slot_names_distinct": true
+    },
+    {
+      "id": "C2-path-and-body",
+      "description": "Two varying fields: path + body (core multi-parameter test)",
+      "n_observations": 3,
+      "n_unseen": 5,
+      "fields_varying": ["path", "body.name"],
+      "action_templates": [
+        {"method": "POST", "url": "https://api.example.com/users/A", "body": {"name": "Alice"}},
+        {"method": "POST", "url": "https://api.example.com/users/B", "body": {"name": "Bob"}},
+        {"method": "POST", "url": "https://api.example.com/users/C", "body": {"name": "Charlie"}}
+      ],
+      "unseen_params": [
+        {"user_id": "D", "name": "Diana"},
+        {"user_id": "E", "name": "Eve"},
+        {"user_id": "F", "name": "Frank"},
+        {"user_id": "G", "name": "Grace"},
+        {"user_id": "H", "name": "Heidi"}
+      ],
+      "expected_slot_count": 2,
+      "expected_slot_names_distinct": true
+    },
+    {
+      "id": "C3-path-body-headers",
+      "description": "Three varying fields: path + body + headers (max complexity)",
+      "n_observations": 3,
+      "n_unseen": 5,
+      "fields_varying": ["path", "body.title", "headers.X-Request-ID"],
+      "action_templates": [
+        {"method": "POST", "url": "https://api.example.com/posts/A", "body": {"title": "First"}, "headers": {"X-Request-ID": "req-1"}},
+        {"method": "POST", "url": "https://api.example.com/posts/B", "body": {"title": "Second"}, "headers": {"X-Request-ID": "req-2"}},
+        {"method": "POST", "url": "https://api.example.com/posts/C", "body": {"title": "Third"}, "headers": {"X-Request-ID": "req-3"}}
+      ],
+      "unseen_params": [
+        {"post_id": "D", "title": "Fourth", "request_id": "req-4"},
+        {"post_id": "E", "title": "Fifth", "request_id": "req-5"},
+        {"post_id": "F", "title": "Sixth", "request_id": "req-6"},
+        {"post_id": "G", "title": "Seventh", "request_id": "req-7"},
+        {"post_id": "H", "title": "Eighth", "request_id": "req-8"}
+      ],
+      "expected_slot_count": 3,
+      "expected_slot_names_distinct": true
+    },
+    {
+      "id": "C4-non-identifier-values",
+      "description": "Non-identifier values (URLs, timestamps) that the old is_id_like regex would reject",
+      "n_observations": 3,
+      "n_unseen": 3,
+      "fields_varying": ["body.callback_url"],
+      "action_templates": [
+        {"method": "POST", "url": "https://api.example.com/webhooks", "body": {"callback_url": "https://site-a.com/hook"}},
+        {"method": "POST", "url": "https://api.example.com/webhooks", "body": {"callback_url": "https://site-b.com/hook"}},
+        {"method": "POST", "url": "https://api.example.com/webhooks", "body": {"callback_url": "https://site-c.com/hook"}}
+      ],
+      "unseen_params": [
+        {"webhook_url": "https://site-d.com/hook"},
+        {"webhook_url": "https://site-e.com/hook"},
+        {"webhook_url": "https://site-f.com/hook"}
+      ],
+      "expected_slot_count": 1,
+      "expected_slot_names_distinct": true
+    },
+    {
+      "id": "C5-shared-slot-name",
+      "description": "Two fields that could collide if naming is naive (path segment and body key with same value pattern)",
+      "n_observations": 3,
+      "n_unseen": 3,
+      "fields_varying": ["path.id", "body.user_id"],
+      "action_templates": [
+        {"method": "PUT", "url": "https://api.example.com/items/A", "body": {"user_id": "A"}},
+        {"method": "PUT", "url": "https://api.example.com/items/B", "body": {"user_id": "B"}},
+        {"method": "PUT", "url": "https://api.example.com/items/C", "body": {"user_id": "C"}}
+      ],
+      "unseen_params": [
+        {"item_id": "D", "owner_id": "D"},
+        {"item_id": "E", "owner_id": "E"},
+        {"item_id": "F", "owner_id": "F"}
+      ],
+      "expected_slot_count": 2,
+      "expected_slot_names_distinct": true
+    }
+  ],
+  "decision_rule": "MULTI-PARAM-SURVIVES if ALL of: (1) C1 single-parameter regression passes (slot_count >= 1, unseen_resolution_rate >= 0.9, binding_accuracy >= 0.9); (2) C2 multi-parameter induces >= 2 distinct slots and resolves all 5 unseen combos with correct bound_action; (3) C3 three-parameter induces >= 3 distinct slots and resolves all 5 unseen combos; (4) C4 non-identifier induces >= 1 slot and resolves all 3 unseen combos; (5) C5 shared-slot induces >= 2 distinct slots (no collision) and resolves all 3 unseen combos; (6) null_control produces zero slots or UNKNOWN resolution; (7) no crashes or non-deterministic output. MULTI-PARAM-FALSIFIED if any condition fails its expected_slot_count or resolution rate < 0.9. MEASUREMENT_INVALID if the induction function is not implementable or crashes on all conditions.",
+  "product_consequence_positive": "Multi-parameter induction validated at synthetic POC level. C-PIM advances: the kernel can induce distinct parameter slots from structured observations with multiple varying fields. Product can register multi-parameter mechanisms for path + body + header patterns. Next gate: noisy observations and real-browser data.",
+  "product_consequence_negative": "If multi-parameter induction fails, C-PARAM-INHERIT remains stuck at single-parameter POC. The kernel cannot handle real API patterns (POST with body, multi-field variation). Product cannot register multi-parameter mechanisms. The smallest next action is to identify which induction step fails (slot discovery, naming, or binding) and redesign the heuristic.",
+  "estimated_cost": "Very low: pure synthetic data generation, offline computation, no browser/network/model calls. ~20 training observations, ~21 unseen test combinations, 5 conditions.",
+  "expected_information_gain": "High: this directly tests the handoff-identified blocker (multi-parameter collision) and determines whether C-PIM can advance beyond single-parameter POC. Both positive and negative outcomes change the product decision. Testing non-identifier values (C4) and shared-slot collision (C5) addresses specific audit findings from the prior experiment."
 }
