@@ -7,8 +7,8 @@
   "continue_immediately": false,
   "next_question": "Should literal mechanisms carry a fixed_resource constraint (code fix: add value-based matching for mechanisms with zero parameter_slots), or is universal matching the intended design (spec fix: amend decision rule to exclude literal-unseen from the frozen gate), and does the literal universal match create false accepts when literal and parameterized mechanisms coexist in the same registry?",
   "promotion_ready": false,
-  "consecutive_failures": 0,
-  "updated_at": "2026-09-03T05:14:20.614727+00:00",
-  "last_failure_retryable": null,
+  "consecutive_failures": 1,
+  "updated_at": "2026-09-03T05:21:55.587987+00:00",
+  "last_failure_retryable": false,
   "last_handoff_sha256": "ee1b24b92a766eed03606f1ac95623303234ab03baada15c351940e257c3460c"
 }

@@ -1,17 +1,138 @@
 {
   "experiment_id": "EXP-GRAPH-33718012817",
   "lane": "graph",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-PARAM-INHERIT"],
+  "question": "When literal and parameterized mechanisms coexist in the same registry with equal confidence, does the literal mechanism's universal matching create false accepts — selecting the literal mechanism and returning an incorrect bound_action URL for unseen resources?",
+  "hypothesis": "In a shared registry containing both a literal mechanism (parameter_slots=[], fixed URL for resource 1) and a parameterized mechanism (parameter_slots=['id'], template URL with ${id} slot), both at equal confidence (0.95), the kernel's resolve() will select the literal mechanism for unseen resource IDs (2, 3, 4) due to alphabetical iteration order (literal-fetch-posts-1 < param-fetch-posts), producing a bound_action URL pointing to resource 1 instead of the requested resource. This constitutes a false accept: the kernel returns EXECUTABLE with an incorrect URL. When the parameterized mechanism has strictly higher confidence, it will be selected correctly with the correct URL.",
+  "falsifier": "The hypothesis is FALSIFIED if: (1) In the equal-confidence shared-registry condition, the parameterized mechanism is selected (not the literal) for unseen resource IDs — indicating the kernel has a specificity tiebreaker or iteration order differs from alphabetical; OR (2) The bound_action URL for the equal-confidence condition correctly targets the requested resource (e.g., /posts/2 for id=2) — indicating the literal mechanism's bound_action is somehow resource-aware; OR (3) Both mechanisms have equal confidence but the kernel sorts by something other than confidence first (e.g., parameter_slots count). Any of these would mean the false-accept scenario does not occur as predicted.",
+  "baselines": [
+    "B_LITERAL_ONLY: Only literal mechanism registered (confidence=0.95). Resolve with params={id: 2}. Must return EXECUTABLE with bound_action url ending /posts/1. Verifies the literal mechanism's universal matching behavior in isolation (reproduces prior finding).",
+    "B_PARAM_ONLY: Only parameterized mechanism registered (confidence=0.95). Resolve with params={id: 2}. Must return EXECUTABLE with bound_action url ending /posts/2. Verifies the parameterized mechanism's correct behavior in isolation (reproduces prior finding).",
+    "B_COLD: No mechanism registered. Resolve with params={id: 2}. Must return UNKNOWN. Verifies kernel abstains (reproduces prior finding)."
+  ],
+  "positive_control": "Register only the parameterized mechanism (confidence=0.95). Resolve with params={id: 3}. Must return EXECUTABLE with bound_action url https://jsonplaceholder.typicode.com/posts/3. Execute HTTP GET, verify status 200 and JSON keys [userId, id, title, body]. This confirms the parameterized pipeline works correctly when no literal mechanism is present to interfere.",
+  "null_control": "Register only the literal mechanism (confidence=0.95). Resolve with params={id: 4}. Must return EXECUTABLE with bound_action url https://jsonplaceholder.typicode.com/posts/1 (the literal's fixed URL, NOT /posts/4). This confirms the literal mechanism returns a wrong URL for unseen resources — the baseline false-accept behavior that the shared-registry test will amplify.",
+  "measurement_validity": [
+    "Test substrate is jsonplaceholder.typicode.com — same as prior experiment (EXP-GRAPH-33528827169). Deterministic, no auth, no session, no DOM. This is a shared-registry competition test, not a real-web-complexity claim.",
+    "Each condition uses a fresh kernel instance with a dedicated registry file containing exactly the specified mechanisms. No cross-condition contamination.",
+    "Resolution is measured by: (a) which mechanism_id is selected; (b) the bound_action URL; (c) the resolution status. HTTP execution is performed only for EXECUTABLE resolutions to verify the bound_action produces a valid response.",
+    "Registry file ordering is deterministic: MechanismRegistry.replace() writes mechanisms sorted by mechanism_id. This means literal-fetch-posts-1 is written before param-fetch-posts, establishing the iteration order that the kernel's resolve() uses for candidate selection.",
+    "No outcome-bearing measurements during DESIGN phase. All measurements deferred to EXECUTE.",
+    "Seed无关 — deterministic test, no RNG.",
+    "The prior experiment (EXP-GRAPH-33528827169) used isolated registries per condition. This experiment explicitly uses SHARED registries to test competition — the key gap identified by the auditor (V_ISOLATION_NO_COMPETITION)."
+  ],
+  "conditions": [
+    {
+      "id": "shared-equal-confidence-id2",
+      "description": "Shared registry, equal confidence, resolve for unseen resource id=2",
+      "mechanisms": [
+        {"id": "literal-fetch-posts-1", "type": "literal", "confidence": 0.95, "parameter_slots": [], "action_template": {"method": "GET", "url": "https://jsonplaceholder.typicode.com/posts/1"}, "postconditions": {"status": 200, "has_keys": ["userId", "id", "title", "body"]}},
+        {"id": "param-fetch-posts", "type": "parameterized", "confidence": 0.95, "parameter_slots": ["id"], "action_template": {"method": "GET", "url": "https://jsonplaceholder.typicode.com/posts/${id}"}, "postconditions": {"status": 200, "has_keys": ["userId", "id", "title", "body"]}}
+      ],
+      "params": {"id": 2},
+      "context": {"base_url": "https://jsonplaceholder.typicode.com"},
+      "expected_resolution": "EXECUTABLE",
+      "expected_selected_mechanism": "param-fetch-posts",
+      "expected_url": "https://jsonplaceholder.typicode.com/posts/2",
+      "falsifier_triggered_if": "literal-fetch-posts-1 is selected OR bound_action url ends /posts/1 instead of /posts/2"
+    },
+    {
+      "id": "shared-equal-confidence-id3",
+      "description": "Shared registry, equal confidence, resolve for unseen resource id=3",
+      "mechanisms": [
+        {"id": "literal-fetch-posts-1", "type": "literal", "confidence": 0.95, "parameter_slots": [], "action_template": {"method": "GET", "url": "https://jsonplaceholder.typicode.com/posts/1"}, "postconditions": {"status": 200, "has_keys": ["userId", "id", "title", "body"]}},
+        {"id": "param-fetch-posts", "type": "parameterized", "confidence": 0.95, "parameter_slots": ["id"], "action_template": {"method": "GET", "url": "https://jsonplaceholder.typicode.com/posts/${id}"}, "postconditions": {"status": 200, "has_keys": ["userId", "id", "title", "body"]}}
+      ],
+      "params": {"id": 3},
+      "context": {"base_url": "https://jsonplaceholder.typicode.com"},
+      "expected_resolution": "EXECUTABLE",
+      "expected_selected_mechanism": "param-fetch-posts",
+      "expected_url": "https://jsonplaceholder.typicode.com/posts/3",
+      "falsifier_triggered_if": "literal-fetch-posts-1 is selected OR bound_action url ends /posts/1 instead of /posts/3"
+    },
+    {
+      "id": "shared-equal-confidence-id4",
+      "description": "Shared registry, equal confidence, resolve for unseen resource id=4",
+      "mechanisms": [
+        {"id": "literal-fetch-posts-1", "type": "literal", "confidence": 0.95, "parameter_slots": [], "action_template": {"method": "GET", "url": "https://jsonplaceholder.typicode.com/posts/1"}, "postconditions": {"status": 200, "has_keys": ["userId", "id", "title", "body"]}},
+        {"id": "param-fetch-posts", "type": "parameterized", "confidence": 0.95, "parameter_slots": ["id"], "action_template": {"method": "GET", "url": "https://jsonplaceholder.typicode.com/posts/${id}"}, "postconditions": {"status": 200, "has_keys": ["userId", "id", "title", "body"]}}
+      ],
+      "params": {"id": 4},
+      "context": {"base_url": "https://jsonplaceholder.typicode.com"},
+      "expected_resolution": "EXECUTABLE",
+      "expected_selected_mechanism": "param-fetch-posts",
+      "expected_url": "https://jsonplaceholder.typicode.com/posts/4",
+      "falsifier_triggered_if": "literal-fetch-posts-1 is selected OR bound_action url ends /posts/1 instead of /posts/4"
+    },
+    {
+      "id": "shared-param-higher-confidence",
+      "description": "Shared registry, parameterized has higher confidence (0.99 vs 0.95)",
+      "mechanisms": [
+        {"id": "literal-fetch-posts-1", "type": "literal", "confidence": 0.95, "parameter_slots": [], "action_template": {"method": "GET", "url": "https://jsonplaceholder.typicode.com/posts/1"}, "postconditions": {"status": 200, "has_keys": ["userId", "id", "title", "body"]}},
+        {"id": "param-fetch-posts", "type": "parameterized", "confidence": 0.99, "parameter_slots": ["id"], "action_template": {"method": "GET", "url": "https://jsonplaceholder.typicode.com/posts/${id}"}, "postconditions": {"status": 200, "has_keys": ["userId", "id", "title", "body"]}}
+      ],
+      "params": {"id": 2},
+      "context": {"base_url": "https://jsonplaceholder.typicode.com"},
+      "expected_resolution": "EXECUTABLE",
+      "expected_selected_mechanism": "param-fetch-posts",
+      "expected_url": "https://jsonplaceholder.typicode.com/posts/2",
+      "falsifier_triggered_if": "literal-fetch-posts-1 is selected OR bound_action url ends /posts/1"
+    },
+    {
+      "id": "shared-literal-higher-confidence",
+      "description": "Shared registry, literal has higher confidence (0.99 vs 0.95)",
+      "mechanisms": [
+        {"id": "literal-fetch-posts-1", "type": "literal", "confidence": 0.99, "parameter_slots": [], "action_template": {"method": "GET", "url": "https://jsonplaceholder.typicode.com/posts/1"}, "postconditions": {"status": 200, "has_keys": ["userId", "id", "title", "body"]}},
+        {"id": "param-fetch-posts", "type": "parameterized", "confidence": 0.95, "parameter_slots": ["id"], "action_template": {"method": "GET", "url": "https://jsonplaceholder.typicode.com/posts/${id}"}, "postconditions": {"status": 200, "has_keys": ["userId", "id", "title", "body"]}}
+      ],
+      "params": {"id": 2},
+      "context": {"base_url": "https://jsonplaceholder.typicode.com"},
+      "expected_resolution": "EXECUTABLE",
+      "expected_selected_mechanism": "literal-fetch-posts-1",
+      "expected_url": "https://jsonplaceholder.typicode.com/posts/1",
+      "falsifier_triggered_if": "param-fetch-posts is selected OR bound_action url ends /posts/2"
+    },
+    {
+      "id": "literal-only-unseen",
+      "description": "Only literal mechanism, resolve for unseen resource (baseline false accept)",
+      "mechanisms": [
+        {"id": "literal-fetch-posts-1", "type": "literal", "confidence": 0.95, "parameter_slots": [], "action_template": {"method": "GET", "url": "https://jsonplaceholder.typicode.com/posts/1"}, "postconditions": {"status": 200, "has_keys": ["userId", "id", "title", "body"]}}
+      ],
+      "params": {"id": 4},
+      "context": {"base_url": "https://jsonplaceholder.typicode.com"},
+      "expected_resolution": "EXECUTABLE",
+      "expected_selected_mechanism": "literal-fetch-posts-1",
+      "expected_url": "https://jsonplaceholder.typicode.com/posts/1",
+      "falsifier_triggered_if": "UNKNOWN returned OR bound_action url ends /posts/4"
+    },
+    {
+      "id": "param-only-unseen",
+      "description": "Only parameterized mechanism, resolve for unseen resource (baseline correct)",
+      "mechanisms": [
+        {"id": "param-fetch-posts", "type": "parameterized", "confidence": 0.95, "parameter_slots": ["id"], "action_template": {"method": "GET", "url": "https://jsonplaceholder.typicode.com/posts/${id}"}, "postconditions": {"status": 200, "has_keys": ["userId", "id", "title", "body"]}}
+      ],
+      "params": {"id": 3},
+      "context": {"base_url": "https://jsonplaceholder.typicode.com"},
+      "expected_resolution": "EXECUTABLE",
+      "expected_selected_mechanism": "param-fetch-posts",
+      "expected_url": "https://jsonplaceholder.typicode.com/posts/3",
+      "falsifier_triggered_if": "UNKNOWN returned OR bound_action url ends /posts/1 instead of /posts/3"
+    },
+    {
+      "id": "cold",
+      "description": "No mechanism registered (null control)",
+      "mechanisms": [],
+      "params": {"id": 2},
+      "context": {"base_url": "https://jsonplaceholder.typicode.com"},
+      "expected_resolution": "UNKNOWN",
+      "expected_selected_mechanism": null,
+      "expected_url": null,
+      "falsifier_triggered_if": "EXECUTABLE returned"
+    }
+  ],
+  "decision_rule": "SHARED-REGISTRY-UNSAFE if ANY of the equal-confidence shared-registry conditions (shared-equal-confidence-id2, shared-equal-confidence-id3, shared-equal-confidence-id4) has the literal mechanism selected instead of the parameterized mechanism, OR the bound_action URL targets the wrong resource. SHARED-REGISTRY-SAFE if ALL equal-confidence conditions select the parameterized mechanism with correct URLs. CONFIDENCE-DOMINATES if the parameterized-higher-confidence condition correctly selects parameterized and the literal-higher-confidence condition correctly selects literal. BASELINE-CONSISTENT if literal-only, param-only, and cold conditions match their expected resolutions.",
+  "product_consequence_positive": "If SHARED-REGISTRY-SAFE: literal universal matching does not create false accepts when parameterized mechanisms are present with equal confidence. The current kernel behavior is safe for shared registries. C-PARAM-INHERIT can advance with the existing literal/parameterized coexistence design. No kernel fix needed for the shared-registry competition issue.",
+  "product_consequence_negative": "If SHARED-REGISTRY-UNSAFE: literal mechanisms create false accepts in shared registries when confidence is tied. The kernel needs a specificity tiebreaker (prefer more parameter_slots when confidence is equal) or literal mechanisms need a fixed_resource constraint before C-PARAM-INHERIT can be declared validated for production use. The fix must be implemented and re-tested before the claim advances.",
+  "estimated_cost": "Negligible — 8 resolution calls (no HTTP for cold/wrong-URL conditions, HTTP for correct-URL conditions to verify bound_action validity). Same substrate as prior experiment. Execution time < 30 seconds.",
+  "expected_information_gain": "HIGH for C-PARAM-INHERIT. This is the exact gap identified by the auditor (V_ISOLATION_NO_COMPETITION) and the parent handoff. The experiment directly answers whether literal universal matching is safe in the realistic shared-registry scenario. Both positive and negative outcomes change the product decision: positive → no fix needed; negative → kernel fix required before claim advancement."
 }
