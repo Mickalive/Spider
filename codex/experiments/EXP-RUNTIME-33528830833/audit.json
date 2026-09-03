@@ -1,0 +1,141 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-33528830833",
+  "lane": "runtime",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Remove circularity: SERVER_STATES in run_experiment.py (lines 29-65) pre-programs distinct X-Auth-Level/X-Session/X-Error/X-User headers and distinct JSON bodies per state (e.g., no_auth body auth_level none vs valid_token auth_level full vs expired_token token_expired). Substrate discrimination is therefore tautological. Required fix: test against an external auth-gated endpoint where response variation is not hand-crafted by the experimenter, or blind the server config and test generalization to an independently authored endpoint.",
+    "Fix fingerprint stability: fingerprint() at run_experiment.py:162-172 uses repr(frozenset(headers.items())) which is hash-randomized (PYTHONHASHSEED) and Python-version-dependent. Recompute in audit (different process) gave 100% mismatch (50/50 fingerprints mismatched) while still preserving intra-state equality and inter-state inequality, confirming the metric pattern replicates but the exact hash is non-reproducible across processes. Required fix: replace repr(frozenset(...)) with deterministic serialization, e.g., hashlib.sha256(repr((status, tuple(sorted(headers.items())), body_hash, redirect_chain)).encode()).hexdigest() and explicitly exclude volatile Date header.",
+    "Fix Date-header confound: raw_observations.json shows Date = 'Wed, 02 Sep 2026 21:08:15 GMT' identical for all 50 requests because all requests executed within one second (timestamps 1788383295.28-298). Validity_notes correctly note Date IS in headers frozenset contribution yet claims it was identical only due to rapid-fire execution; if spread across seconds Date would inject spurious variance and break C1/C3. Required fix: exclude Date (and Server) from fingerprint vector and re-run null-control with inter-request delays spanning seconds.",
+    "Replace straw-man baselines with strong baselines: B-URL-HASH, B-RANDOM, B-TIMING all score 0.0 by construction (result.json baseline_url_hash_discrimination 0.0 etc). Producer's own per_field_discrimination shows status-only =0.833, body_hash=1.0, header_set=1.0 (result.json per_field_discrimination_*). The discriminating baseline is therefore single-field observation, not URL hash. Required fix: add B-STATUS-ONLY and B-BODY-ONLY as competitive baselines; survival must require substrate > best single-field baseline with margin, not > 0.0.",
+    "Fix held-out / drift operationalization: prereg held-out session_cookie (state 5) claimed to test generalization to unseen auth mechanisms, but substrate is not learned — fingerprint is deterministic SHA-256 with no calibration. Novelty check (held_out_novel_fingerprints=1/1 distinct fingerprint, held_out_total=10, held_out_fully_discriminated=true) is vacuous — any new state with distinct programmed body would pass. Similarly C4 drift_monotonic is defined as Jaccard <0.5 for both drift pairs (0.3027, 0.2694) not monotonic ordering. Required fix: define drift as monotonic distance increase valid->expired->invalid and held-out as threshold-based classifier trained on states 1-4 only.",
+    "Test confound attribution explicitly: falsifier clause (4) requires observed differences not fully explained by timing jitter. Timing was not tested — elapsed times 0.00027-0.071s vary but not used in fingerprint, and server had zero jitter by design (spec: Seed for server timing jitter is fixed / spec sampling: timing jitter none). Required fix: inject calibrated server processing jitter (>100ms) and show timing-only observation still fails while state-based fingerprint remains discriminable."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_tautological_server",
+      "severity": "critical",
+      "finding": "Server is authoritative ground truth hand-programmed to return distinct status/body/headers per state (run_experiment.py DeterministicHandler.do_GET branches on Authorization/Cookie). The observation substrate therefore cannot fail discrimination unless it ignores bodies/headers entirely. Ecological validity is explicitly disclaimed (prereg Validity Threats #1) but the claim ceiling in report.md promotes HTTP-level observation as valid foundation for Runtime without that bound.",
+      "evidence": "research/experiments/EXP-RUNTIME-33528830833/run_experiment.py:29-106, research/experiments/EXP-RUNTIME-33528830833/raw_observations.json: 5 distinct fingerprints, 1 per state, 0 intra-state variance"
+    },
+    {
+      "id": "V2_fingerprint_repr_instability",
+      "severity": "high",
+      "finding": "Fingerprint uses repr(vector) with frozenset — non-deterministic across PYTHONHASHSEED. Audit recompute of 50 observations produced 50/50 mismatches vs stored fingerprints (e.g., expired_token stored 2c1395... vs recomputed 796771..., no_auth stored 333cde... vs recomputed 137cbb...), while pattern (1 unique/state, 5 distinct total) preserved. Provenance notes Python-version-dependent serialization; reproducibility across environments not guaranteed.",
+      "evidence": "research/experiments/EXP-RUNTIME-33528830833/run_experiment.py:162-172, research/experiments/EXP-RUNTIME-33528830833/provenance.json: reproducibility_notes, audit recompute 2026-09-03"
+    },
+    {
+      "id": "V3_date_header_leakage",
+      "severity": "high",
+      "finding": "Date header included in fingerprint frozenset but constant in this run (single second). Raw observations all show Date Wed, 02 Sep 2026 21:08:15 GMT. Producer validity_notes contain contradiction: claims Date excluded then admits Date IS part of headers frozenset. Under realistic multi-second execution C1_null_fp_rate and C3_fingerprint_reproducibility would exceed 5% threshold purely from Date variation, breaking reproducibility claim.",
+      "evidence": "research/experiments/EXP-RUNTIME-33528830833/raw_observations.json: all 50 Date headers identical, research/experiments/EXP-RUNTIME-33528830833/result.json: validity_notes[2]"
+    },
+    {
+      "id": "V4_null_control_too_easy",
+      "severity": "medium",
+      "finding": "Null control repeats identical request to deterministic local server with no jitter, caching, CDN, or Date variance. Pass threshold <5% FP rate is therefore trivial; result 0.0% (all states 1 unique/10 total) does not estimate real-world false-positive rate. Prereg acknowledges conservative null-control easier to pass.",
+      "evidence": "research/experiments/EXP-RUNTIME-33528830833/spec.json: null_control, research/experiments/EXP-RUNTIME-33528830833/result.json: controls.C1_null_fp_rate observed 0.0%"
+    },
+    {
+      "id": "V5_observation_vector_completeness",
+      "severity": "medium",
+      "finding": "Observation vector (status, headers, body_sha256, redirect_chain) omits timing distribution, TLS, cookies-set, and server logs (prereg Validity Threats #3). Within this toy server timing is irrelevant, but claim that differences are attributable to state rather than timing (falsifier #4) was not tested — elapsed varied 0.27ms-71ms but never entered fingerprint. No measurement of timing confound contribution.",
+      "evidence": "research/experiments/EXP-RUNTIME-33528830833/spec.json: measurement_validity, research/experiments/EXP-RUNTIME-33528830833/raw_observations.json: elapsed fields"
+    },
+    {
+      "id": "V6_sampling_representation",
+      "severity": "low",
+      "finding": "Sampling: 10 reps/state, randomized order via seed 42, 50 total requests, 0 measurement errors meets prereg Adequacy Rule. Unit of analysis one observation per (request, state) preserved separately from derived fingerprint per spec.",
+      "evidence": "research/experiments/EXP-RUNTIME-33528830833/provenance.json: execution reps_per_state 10, total_requests 50, measurement_errors 0, randomization_seed 42"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-URL-HASH",
+      "producer_id": "B-URL-HASH",
+      "finding": "Straw-man: URL constant across all states (BASE_URL http://127.0.0.1:18923/test). Hash of URL identical for all states => intra_match=inter_match=1.0 => discrimination 0.0 by construction. Does not test whether observation adds signal beyond identity because identity alone is constant.",
+      "producer_value": 0.0,
+      "recomputed_value": 0.0,
+      "strength": "weak",
+      "evidence": "research/experiments/EXP-RUNTIME-33528830833/run_experiment.py:291-293, research/experiments/EXP-RUNTIME-33528830833/result.json: metrics.baseline_url_hash_discrimination"
+    },
+    {
+      "id": "B-RANDOM-REQUEST",
+      "producer_id": "B-RANDOM",
+      "finding": "Straw-man: random 256-bit fingerprints per request. By construction each fingerprint unique, intra_match≈0, inter_match≈0 => discrimination ~0. No chance-level calibration for structured fingerprints. Audit confirms 0.0.",
+      "producer_value": 0.0,
+      "recomputed_value": 0.0,
+      "strength": "weak",
+      "evidence": "research/experiments/EXP-RUNTIME-33528830833/run_experiment.py:296-299"
+    },
+    {
+      "id": "B-TIMING-ONLY",
+      "producer_id": "B-TIMING",
+      "finding": "Straw-man: hash of time.time() at baseline generation time, not request elapsed. Timing fingerprints randomly unique per call, again discrimination ~0. Stronger timing baseline would be elapsed-time-bucketed fingerprint of actual request duration; not tested. Producer's own per-field results show status-only baseline 0.833 would be competitive.",
+      "producer_value": 0.0,
+      "recomputed_value": 0.0,
+      "strength": "weak",
+      "evidence": "research/experiments/EXP-RUNTIME-33528830833/run_experiment.py:302-307, research/experiments/EXP-RUNTIME-33528830833/result.json: metrics.baseline_timing_discrimination"
+    },
+    {
+      "id": "B-STRONG-MISSING",
+      "producer_id": null,
+      "finding": "Missing strong baseline: single-field HTTP observation. Producer per_field_discrimination_status 0.833, body_hash 1.0, header_set 1.0 — showing body or headers alone already achieve perfect discrimination in this toy server. Claim that full vector is needed is unsupported; substrate does not exceed its own components.",
+      "producer_value": null,
+      "recomputed_value": null,
+      "strength": "missing",
+      "evidence": "research/experiments/EXP-RUNTIME-33528830833/result.json: metrics.per_field_discrimination_*"
+    }
+  ],
+  "recomputed_metrics": {
+    "discrimination_score": 1.0,
+    "intra_match_rate": 1.0,
+    "inter_match_rate": 0.0,
+    "mean_intra_jaccard": 1.0,
+    "mean_inter_jaccard": 0.31700704046427514,
+    "bootstrap_95ci_lower": 0.5,
+    "bootstrap_95ci_upper": 1.0,
+    "null_control_fp_rate": 0.0,
+    "positive_control_tp_rate": 1.0,
+    "drift_monotonic": true,
+    "drift_inter_jaccards": [0.3027027027027027, 0.2694300518134715],
+    "held_out_novel_fingerprints": 1,
+    "held_out_total": 10,
+    "held_out_fully_discriminated": true,
+    "per_field_discrimination_status": 0.8333333333333334,
+    "per_field_discrimination_body_hash": 1.0,
+    "per_field_discrimination_header_set": 1.0,
+    "baseline_url_hash_discrimination": 0.0,
+    "baseline_random_discrimination": 0.0,
+    "baseline_timing_discrimination": 0.0,
+    "total_requests": 50,
+    "reps_per_state": 10,
+    "measurement_errors": 0,
+    "fingerprint_recompute_match": 0,
+    "fingerprint_pattern_verified": true,
+    "distinct_fingerprints_total": 5,
+    "unique_Date_headers": 1,
+    "recomputed_without_Date_distinct": 5
+  },
+  "claim_ceiling": "NARROW TOY-ONLY: stdlib HTTP observation (status, headers, body SHA-256, redirect_chain) reproducibly fingerprints a local deterministic http.server that was hand-programmed to return distinct bodies/headers per auth state, with zero jitter and all requests within one second. Within that controlled fixture, null FP rate 0.0% (<5%), positive TP rate 100% (>95%), reproducibility variance 0% (<5%), drift pairs discriminable (Jaccard 0.303/0.269 <0.5), and held-out session_cookie fingerprint novel. No evidence for live-site ecological validity, Date-spanning execution, timing jitter, CDN/caching, or real-world auth flows. C-MEAS-VALID does NOT survive for general HTTP-level observation; it survives only for this fixture and only if Date header excluded and fingerprint serialization made deterministic.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-33528830833/request.json",
+    "research/experiments/EXP-RUNTIME-33528830833/spec.json",
+    "research/experiments/EXP-RUNTIME-33528830833/prereg.md",
+    "research/experiments/EXP-RUNTIME-33528830833/freeze.json",
+    "research/experiments/EXP-RUNTIME-33528830833/result.json",
+    "research/experiments/EXP-RUNTIME-33528830833/report.md",
+    "research/experiments/EXP-RUNTIME-33528830833/provenance.json",
+    "research/experiments/EXP-RUNTIME-33528830833/raw_observations.json",
+    "research/experiments/EXP-RUNTIME-33528830833/run_experiment.py"
+  ],
+  "unresolved": [
+    "Does substrate maintain discrimination when requests span multiple seconds causing Date header variation? (producer validity_notes unresolved #2)",
+    "Does substrate maintain discrimination under injected server timing jitter >100ms and with timing not in fingerprint?",
+    "How does fingerprinting perform against live-site servers with caching, CDN, non-deterministic bodies/headers?",
+    "Can substrate detect continuous session drift vs discrete programmed states?",
+    "What is discrimination score when Date header excluded and headers sorted deterministically? (audit verified still 5 distinct, but not producer-reported)",
+    "Does body-only or header-only observation suffice, making full vector unnecessary? (per_field 1.0 each)"
+  ]
+}
