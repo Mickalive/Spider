@@ -1,9 +1,9 @@
 {
   "stage": "director",
-  "category": "DIRECTOR_FAILURE",
-  "message": "stage exited with code 66",
+  "category": "VALIDATION_FAILURE",
+  "message": "invalid claim update status: REVISED",
   "retryable": false,
-  "recorded_at": "2026-09-03T05:18:17.683577+00:00",
-  "github_run_id": "33718013824",
+  "recorded_at": "2026-09-03T09:59:14.254931+00:00",
+  "github_run_id": "33741669539",
   "github_run_attempt": "1"
 }
