@@ -1,14 +1,14 @@
 {
   "lane": "runtime",
   "human_paused": false,
-  "active_experiment_id": "EXP-RUNTIME-33767375933",
-  "last_experiment_id": "EXP-RUNTIME-33528830833",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-RUNTIME-33767375933",
   "last_verdict": "NARROW_SUCCESS",
   "continue_immediately": false,
-  "next_question": "After applying the three mandatory fixes (deterministic fingerprint excluding Date header, strong single-field baselines, and jitter injection), does HTTP observation maintain discrimination on the toy server \u2014 and does it survive on an external non-tautological endpoint where response variation is not hand-programmed?",
+  "next_question": "On a non-URL-tautological server where the URL is constant and auth state varies (e.g., a Flask app with real JWT/session middleware returning different responses based on Authorization header or Cookie), does the HTTP fingerprint substrate maintain discrimination \u2014 and does the full vector exceed single-field baselines (B-STATUS-ONLY, B-BODY-ONLY) when bodies vary with auth state?",
   "promotion_ready": false,
-  "consecutive_failures": 1,
-  "updated_at": "2026-09-03T14:47:53.006744+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "4b5fb87ad14e0d18e16b8ed6134af6d6140b52df5cdafb207b5a29bf904510f2"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-03T18:05:57.822713+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "fea5b244f4547485ceb42f78d18fabeb664c457927fe26b940d7a0b7e7451f04"
 }
