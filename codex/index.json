@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "experiments": {
+    "EXP-FRONTIER-33528827909": {
+      "lane": "frontier",
+      "request_id": "ff897300229012128e3b24d1",
+      "created_at": "2026-09-01T15:56:43.831314+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Does the predictive advantage of action-conditioned rules over action-independent memory vary across transition regimes, and does this variation reveal dynamical heterogeneity in Web-like state transitions?",
+      "audit_status": "MEASUREMENT_INVALID",
+      "decision": "MEASUREMENT_INVALID",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/frontier",
+      "hashes": {
+        "request.json": "dbadd1fc6298fab81a2ccd08632e720f5621ae6ab56fba31d3a732c2bf21a60e",
+        "spec.json": "f2cd3e670cd3aaa45123d90417ff444eb3d1bb47f1be78030c9f822cf140cc4d",
+        "prereg.md": "fe78533f5956508f6293aa84105297b90ec59f5b1f069a17ff18a315fc22f417",
+        "freeze.json": "968d5ac119348bdc79d7ef697360696ff0fdc19bcb6f36811c7d46df695e6df3",
+        "result.json": "292f01b99fb5950baa99f250cefdf79e827c09bcb483f16e6265f7ac98dedd33",
+        "report.md": "b7db8cd0bc63f6ddd97bada146998f8e2035e45dd13c273de8eb00a2329f3ed0",
+        "provenance.json": "2e1379a7a6f0258cc2f129e6955071f77d3a088846238a0a66d4465dc2684848",
+        "audit.json": "544bd42991860fc5da007c754112dc4737e108534184919974d1585ef8c33c2a",
+        "verdict.json": "138b4554e7a820e934c16036f5a8d4f8d5d9fdf48b42a8646d2e094d9e131a83",
+        "handoff.json": "dda6bc7cd9a06aeeb68ff1ee5c67d7609d1ecd0e46d494c87db8daebda216563"
+      }
+    },
+    "EXP-GRAPH-33528827169": {
+      "lane": "graph",
+      "request_id": "3e0d81e7790f2f2b7bd8665e",
+      "created_at": "2026-09-01T15:56:45.981285+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT"
+      ],
+      "question": "Does SpiderKernel's parameterized mechanism resolution work end-to-end on a real HTTP endpoint: can a mechanism with parameter slots be resolved, bound, executed over HTTP, and verified against actual response state?",
+      "audit_status": "FAIL",
+      "decision": "PARAM-INHERIT-SUBSTRATE-BROKEN",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/graph",
+      "hashes": {
+        "request.json": "e21c8ef54aaa8677b1814e8641e8df61b03358ffa51e94287a5de0599a73a0f9",
+        "spec.json": "4ce0cc68fdae3d9913e62dbcf91d47b39c86fff315cfcfaaba43c83484568a9d",
+        "prereg.md": "1fbbc2857bce9bd7047069505a83ba05600a85e9f3fd7569bc86cdf7c0013ece",
+        "freeze.json": "5c31f804acd3c7b7c07244a9af994e7d455efb29bcd2510a8d6ec99857845df8",
+        "result.json": "4586acbb5fb9a9a9a0b87dcc37cf91d4a28ed2e2fd7a594fe259179799404bb9",
+        "report.md": "f783b571837a41cb83301864e210e4c153cef95e8eb7e501ee2349239b0f5cb0",
+        "provenance.json": "d6237d24e029e90516bee79f6e11e0816c8bbe64d55e9f165f593134939e1d14",
+        "audit.json": "cc0f7879c0cf306217d37a0b943dbf30acfeb0e5127972762624129f746c2f60",
+        "verdict.json": "4e339c951a32b79b834d55ec245a02c910f8b74d7b236e07feb63b366f09f763",
+        "handoff.json": "ee1b24b92a766eed03606f1ac95623303234ab03baada15c351940e257c3460c"
+      }
+    },
+    "EXP-PRODUCT-33528829801": {
+      "lane": "product",
+      "request_id": "2629e8e63e200f05556e37ca",
+      "created_at": "2026-09-01T15:56:43.264666+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT"
+      ],
+      "question": "Does parameterized mechanism inheritance reduce later-agent cost for unseen resource identifiers compared to literal mechanism replay and cold exploration?",
+      "audit_status": "PASS",
+      "decision": "SURVIVES \u2014 C-PARAM-INHERIT survives at synthetic in-kernel POC level: distill_parameterized() with _extract_varying_values() correctly induces one parameter slot for isomorphic action paths and resolves to EXECUTABLE with correct bound_action for all 10 unseen single-char identifiers. All four frozen decision-rule conditions satisfied. Audit PASS confirms recomputed metrics match producer. However, the claim ceiling is narrow: single-parameter, single-field, common-prefix heuristic, deterministic synthetic data, hardcoded confidence, simulated baselines. No broader product promotion is authorized by this evidence.",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/product",
+      "hashes": {
+        "request.json": "fd3e6828457739fc3e7094df53ba020c82d12bf513ddddcd7c3bbda070508a35",
+        "spec.json": "2a2299e5b4074b76ae48cc9c0e6e2a5da3e83d6e4dc741dcc937c0cb4288b222",
+        "prereg.md": "ea9e6bce02772c759becf9089139c0c0330ddf9b51589e1b7f5052f71c322743",
+        "freeze.json": "109d17ff87c2f7c51f11c642c70c9037e0c79cace7e67a856ff705ee42af774d",
+        "result.json": "402b8fb31c847f1641b57b401cfa190f4549ddeda026a68625c92580f3ec8662",
+        "report.md": "bed3c4a4ca5e0ece47298aac730dfdbcc93028f8de8ac648cef244873642293e",
+        "provenance.json": "7ca6e01c9a5669bc7cbb782e01ab0f65877b77ba23c93b4c1f4779f6c16c10c1",
+        "audit.json": "4049e1a91e637522463940b7488140df0acecd0b91b694caa3d2cea347686c6b",
+        "verdict.json": "80c7532a8ffa0e167d30f440eee9c108b70c38b27a211b56f0b137282e5ac637",
+        "handoff.json": "854e98a8808d570b229bf748bdb14e0ddd67d43faacb63db4b6cad8af0e92d7a"
+      }
+    }
+  }
+}

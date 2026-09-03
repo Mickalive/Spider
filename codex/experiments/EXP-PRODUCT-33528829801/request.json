@@ -1,0 +1,13 @@
+{
+  "base_sha": "ef1d4178d6a1c0ec2d4b001d3f2d4ba48f2a12c0",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-01T15:56:43.264666+00:00",
+  "experiment_id": "EXP-PRODUCT-33528829801",
+  "lane": "product",
+  "origin_github_run_id": "33528829801",
+  "reason": "pulse",
+  "request_hash": "3e6301561f5f7f1da4f494cda516404d6606133f209a0c80c81cd8d4d811a151",
+  "request_id": "2629e8e63e200f05556e37ca",
+  "schema_version": 1
+}
