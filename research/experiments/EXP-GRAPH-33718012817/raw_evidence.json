@@ -1,0 +1,233 @@
+[
+  {
+    "condition_id": "cold",
+    "resolution_status": "UNKNOWN",
+    "winning_mechanism_id": null,
+    "resolution_reason": "no applicable validated mechanism",
+    "bound_action": null,
+    "bound_url": null,
+    "confidence": 0.0,
+    "expected_resolution": "UNKNOWN",
+    "expected_url": null,
+    "expected_winning_mechanism": null,
+    "match_expected_resolution": true,
+    "match_expected_url": true,
+    "match_expected_winner": true
+  },
+  {
+    "condition_id": "literal-only-original",
+    "resolution_status": "EXECUTABLE",
+    "winning_mechanism_id": "literal-fetch-posts-1",
+    "resolution_reason": "applicability guards and confidence threshold passed",
+    "bound_action": {
+      "method": "GET",
+      "url": "https://jsonplaceholder.typicode.com/posts/1"
+    },
+    "bound_url": "https://jsonplaceholder.typicode.com/posts/1",
+    "confidence": 0.95,
+    "expected_resolution": "EXECUTABLE",
+    "expected_url": "https://jsonplaceholder.typicode.com/posts/1",
+    "expected_winning_mechanism": "literal-fetch-posts-1",
+    "match_expected_resolution": true,
+    "match_expected_url": true,
+    "match_expected_winner": true
+  },
+  {
+    "condition_id": "literal-only-unseen",
+    "resolution_status": "EXECUTABLE",
+    "winning_mechanism_id": "literal-fetch-posts-1",
+    "resolution_reason": "applicability guards and confidence threshold passed",
+    "bound_action": {
+      "method": "GET",
+      "url": "https://jsonplaceholder.typicode.com/posts/1"
+    },
+    "bound_url": "https://jsonplaceholder.typicode.com/posts/1",
+    "confidence": 0.95,
+    "expected_resolution": "EXECUTABLE",
+    "expected_url": "https://jsonplaceholder.typicode.com/posts/1",
+    "expected_winning_mechanism": "literal-fetch-posts-1",
+    "match_expected_resolution": true,
+    "match_expected_url": true,
+    "match_expected_winner": true
+  },
+  {
+    "condition_id": "param-only-original",
+    "resolution_status": "EXECUTABLE",
+    "winning_mechanism_id": "param-fetch-posts",
+    "resolution_reason": "applicability guards and confidence threshold passed",
+    "bound_action": {
+      "method": "GET",
+      "url": "https://jsonplaceholder.typicode.com/posts/1"
+    },
+    "bound_url": "https://jsonplaceholder.typicode.com/posts/1",
+    "confidence": 0.95,
+    "expected_resolution": "EXECUTABLE",
+    "expected_url": "https://jsonplaceholder.typicode.com/posts/1",
+    "expected_winning_mechanism": "param-fetch-posts",
+    "match_expected_resolution": true,
+    "match_expected_url": true,
+    "match_expected_winner": true
+  },
+  {
+    "condition_id": "param-only-unseen",
+    "resolution_status": "EXECUTABLE",
+    "winning_mechanism_id": "param-fetch-posts",
+    "resolution_reason": "applicability guards and confidence threshold passed",
+    "bound_action": {
+      "method": "GET",
+      "url": "https://jsonplaceholder.typicode.com/posts/2"
+    },
+    "bound_url": "https://jsonplaceholder.typicode.com/posts/2",
+    "confidence": 0.95,
+    "expected_resolution": "EXECUTABLE",
+    "expected_url": "https://jsonplaceholder.typicode.com/posts/2",
+    "expected_winning_mechanism": "param-fetch-posts",
+    "match_expected_resolution": true,
+    "match_expected_url": true,
+    "match_expected_winner": true
+  },
+  {
+    "condition_id": "compete-equal-id1",
+    "resolution_status": "EXECUTABLE",
+    "winning_mechanism_id": "literal-fetch-posts-1",
+    "resolution_reason": "applicability guards and confidence threshold passed",
+    "bound_action": {
+      "method": "GET",
+      "url": "https://jsonplaceholder.typicode.com/posts/1"
+    },
+    "bound_url": "https://jsonplaceholder.typicode.com/posts/1",
+    "confidence": 0.95,
+    "expected_resolution": "EXECUTABLE",
+    "expected_url": "https://jsonplaceholder.typicode.com/posts/1",
+    "expected_winning_mechanism": "literal-fetch-posts-1",
+    "match_expected_resolution": true,
+    "match_expected_url": true,
+    "match_expected_winner": true
+  },
+  {
+    "condition_id": "compete-equal-id2",
+    "resolution_status": "EXECUTABLE",
+    "winning_mechanism_id": "literal-fetch-posts-1",
+    "resolution_reason": "applicability guards and confidence threshold passed",
+    "bound_action": {
+      "method": "GET",
+      "url": "https://jsonplaceholder.typicode.com/posts/1"
+    },
+    "bound_url": "https://jsonplaceholder.typicode.com/posts/1",
+    "confidence": 0.95,
+    "expected_resolution": "EXECUTABLE",
+    "expected_url": "https://jsonplaceholder.typicode.com/posts/1",
+    "expected_winning_mechanism": "literal-fetch-posts-1",
+    "match_expected_resolution": true,
+    "match_expected_url": true,
+    "match_expected_winner": true
+  },
+  {
+    "condition_id": "compete-equal-id3",
+    "resolution_status": "EXECUTABLE",
+    "winning_mechanism_id": "literal-fetch-posts-1",
+    "resolution_reason": "applicability guards and confidence threshold passed",
+    "bound_action": {
+      "method": "GET",
+      "url": "https://jsonplaceholder.typicode.com/posts/1"
+    },
+    "bound_url": "https://jsonplaceholder.typicode.com/posts/1",
+    "confidence": 0.95,
+    "expected_resolution": "EXECUTABLE",
+    "expected_url": "https://jsonplaceholder.typicode.com/posts/1",
+    "expected_winning_mechanism": "literal-fetch-posts-1",
+    "match_expected_resolution": true,
+    "match_expected_url": true,
+    "match_expected_winner": true
+  },
+  {
+    "condition_id": "compete-equal-id4",
+    "resolution_status": "EXECUTABLE",
+    "winning_mechanism_id": "literal-fetch-posts-1",
+    "resolution_reason": "applicability guards and confidence threshold passed",
+    "bound_action": {
+      "method": "GET",
+      "url": "https://jsonplaceholder.typicode.com/posts/1"
+    },
+    "bound_url": "https://jsonplaceholder.typicode.com/posts/1",
+    "confidence": 0.95,
+    "expected_resolution": "EXECUTABLE",
+    "expected_url": "https://jsonplaceholder.typicode.com/posts/1",
+    "expected_winning_mechanism": "literal-fetch-posts-1",
+    "match_expected_resolution": true,
+    "match_expected_url": true,
+    "match_expected_winner": true
+  },
+  {
+    "condition_id": "compete-equal-id5",
+    "resolution_status": "EXECUTABLE",
+    "winning_mechanism_id": "literal-fetch-posts-1",
+    "resolution_reason": "applicability guards and confidence threshold passed",
+    "bound_action": {
+      "method": "GET",
+      "url": "https://jsonplaceholder.typicode.com/posts/1"
+    },
+    "bound_url": "https://jsonplaceholder.typicode.com/posts/1",
+    "confidence": 0.95,
+    "expected_resolution": "EXECUTABLE",
+    "expected_url": "https://jsonplaceholder.typicode.com/posts/1",
+    "expected_winning_mechanism": "literal-fetch-posts-1",
+    "match_expected_resolution": true,
+    "match_expected_url": true,
+    "match_expected_winner": true
+  },
+  {
+    "condition_id": "compete-equal-id6",
+    "resolution_status": "EXECUTABLE",
+    "winning_mechanism_id": "literal-fetch-posts-1",
+    "resolution_reason": "applicability guards and confidence threshold passed",
+    "bound_action": {
+      "method": "GET",
+      "url": "https://jsonplaceholder.typicode.com/posts/1"
+    },
+    "bound_url": "https://jsonplaceholder.typicode.com/posts/1",
+    "confidence": 0.95,
+    "expected_resolution": "EXECUTABLE",
+    "expected_url": "https://jsonplaceholder.typicode.com/posts/1",
+    "expected_winning_mechanism": "literal-fetch-posts-1",
+    "match_expected_resolution": true,
+    "match_expected_url": true,
+    "match_expected_winner": true
+  },
+  {
+    "condition_id": "compete-param-higher",
+    "resolution_status": "EXECUTABLE",
+    "winning_mechanism_id": "param-fetch-posts-higher",
+    "resolution_reason": "applicability guards and confidence threshold passed",
+    "bound_action": {
+      "method": "GET",
+      "url": "https://jsonplaceholder.typicode.com/posts/3"
+    },
+    "bound_url": "https://jsonplaceholder.typicode.com/posts/3",
+    "confidence": 0.98,
+    "expected_resolution": "EXECUTABLE",
+    "expected_url": "https://jsonplaceholder.typicode.com/posts/3",
+    "expected_winning_mechanism": "param-fetch-posts-higher",
+    "match_expected_resolution": true,
+    "match_expected_url": true,
+    "match_expected_winner": true
+  },
+  {
+    "condition_id": "compete-literal-higher",
+    "resolution_status": "EXECUTABLE",
+    "winning_mechanism_id": "literal-fetch-posts-1-higher",
+    "resolution_reason": "applicability guards and confidence threshold passed",
+    "bound_action": {
+      "method": "GET",
+      "url": "https://jsonplaceholder.typicode.com/posts/1"
+    },
+    "bound_url": "https://jsonplaceholder.typicode.com/posts/1",
+    "confidence": 0.98,
+    "expected_resolution": "EXECUTABLE",
+    "expected_url": "https://jsonplaceholder.typicode.com/posts/1",
+    "expected_winning_mechanism": "literal-fetch-posts-1-higher",
+    "match_expected_resolution": true,
+    "match_expected_url": true,
+    "match_expected_winner": true
+  }
+]
