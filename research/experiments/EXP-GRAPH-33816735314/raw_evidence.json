@@ -1,0 +1,790 @@
+[
+  {
+    "condition_id": "cold",
+    "role": "baseline",
+    "registry_mechanisms": [],
+    "params": {
+      "id": 2
+    },
+    "expected_resolution": "UNKNOWN",
+    "expected_url": null,
+    "expected_winning_mechanism": null,
+    "observed_resolution": "UNKNOWN",
+    "observed_mechanism_id": null,
+    "observed_url": null,
+    "raw_resolution": {
+      "status": "UNKNOWN",
+      "mechanism_id": null,
+      "reason": "no applicable validated mechanism",
+      "bound_action": null,
+      "confidence": 0.0
+    },
+    "matches_resolution": true,
+    "matches_url": true,
+    "matches_winning_mechanism": null
+  },
+  {
+    "condition_id": "literal-only-original",
+    "role": "baseline",
+    "registry_mechanisms": [
+      {
+        "mechanism_id": "literal-fetch-posts-1",
+        "intent": "fetch",
+        "preconditions": {},
+        "action_template": {
+          "url": "https://jsonplaceholder.typicode.com/posts/1"
+        },
+        "postconditions": {},
+        "parameter_slots": [],
+        "auth_scope": null,
+        "freshness": {},
+        "applicability_guards": {},
+        "verification_rule": {},
+        "failure_boundary": {},
+        "repair_scope": {},
+        "evidence": [
+          "test"
+        ],
+        "confidence": 0.95,
+        "invalidated": false
+      }
+    ],
+    "params": {
+      "id": 1
+    },
+    "expected_resolution": "EXECUTABLE",
+    "expected_url": "https://jsonplaceholder.typicode.com/posts/1",
+    "expected_winning_mechanism": null,
+    "observed_resolution": "EXECUTABLE",
+    "observed_mechanism_id": "literal-fetch-posts-1",
+    "observed_url": "https://jsonplaceholder.typicode.com/posts/1",
+    "raw_resolution": {
+      "status": "EXECUTABLE",
+      "mechanism_id": "literal-fetch-posts-1",
+      "reason": "applicability guards and confidence threshold passed",
+      "bound_action": {
+        "url": "https://jsonplaceholder.typicode.com/posts/1"
+      },
+      "confidence": 0.95
+    },
+    "matches_resolution": true,
+    "matches_url": true,
+    "matches_winning_mechanism": null
+  },
+  {
+    "condition_id": "literal-only-unseen",
+    "role": "baseline",
+    "registry_mechanisms": [
+      {
+        "mechanism_id": "literal-fetch-posts-1",
+        "intent": "fetch",
+        "preconditions": {},
+        "action_template": {
+          "url": "https://jsonplaceholder.typicode.com/posts/1"
+        },
+        "postconditions": {},
+        "parameter_slots": [],
+        "auth_scope": null,
+        "freshness": {},
+        "applicability_guards": {},
+        "verification_rule": {},
+        "failure_boundary": {},
+        "repair_scope": {},
+        "evidence": [
+          "test"
+        ],
+        "confidence": 0.95,
+        "invalidated": false
+      }
+    ],
+    "params": {
+      "id": 2
+    },
+    "expected_resolution": "EXECUTABLE",
+    "expected_url": "https://jsonplaceholder.typicode.com/posts/1",
+    "expected_winning_mechanism": null,
+    "observed_resolution": "EXECUTABLE",
+    "observed_mechanism_id": "literal-fetch-posts-1",
+    "observed_url": "https://jsonplaceholder.typicode.com/posts/1",
+    "raw_resolution": {
+      "status": "EXECUTABLE",
+      "mechanism_id": "literal-fetch-posts-1",
+      "reason": "applicability guards and confidence threshold passed",
+      "bound_action": {
+        "url": "https://jsonplaceholder.typicode.com/posts/1"
+      },
+      "confidence": 0.95
+    },
+    "matches_resolution": true,
+    "matches_url": true,
+    "matches_winning_mechanism": null
+  },
+  {
+    "condition_id": "param-only-original",
+    "role": "baseline",
+    "registry_mechanisms": [
+      {
+        "mechanism_id": "param-fetch-posts",
+        "intent": "fetch",
+        "preconditions": {},
+        "action_template": {
+          "url": "https://jsonplaceholder.typicode.com/posts/${id}"
+        },
+        "postconditions": {},
+        "parameter_slots": [
+          "id"
+        ],
+        "auth_scope": null,
+        "freshness": {},
+        "applicability_guards": {},
+        "verification_rule": {},
+        "failure_boundary": {},
+        "repair_scope": {},
+        "evidence": [
+          "test"
+        ],
+        "confidence": 0.95,
+        "invalidated": false
+      }
+    ],
+    "params": {
+      "id": 1
+    },
+    "expected_resolution": "EXECUTABLE",
+    "expected_url": "https://jsonplaceholder.typicode.com/posts/1",
+    "expected_winning_mechanism": null,
+    "observed_resolution": "EXECUTABLE",
+    "observed_mechanism_id": "param-fetch-posts",
+    "observed_url": "https://jsonplaceholder.typicode.com/posts/1",
+    "raw_resolution": {
+      "status": "EXECUTABLE",
+      "mechanism_id": "param-fetch-posts",
+      "reason": "applicability guards and confidence threshold passed",
+      "bound_action": {
+        "url": "https://jsonplaceholder.typicode.com/posts/1"
+      },
+      "confidence": 0.95
+    },
+    "matches_resolution": true,
+    "matches_url": true,
+    "matches_winning_mechanism": null
+  },
+  {
+    "condition_id": "param-only-unseen",
+    "role": "baseline",
+    "registry_mechanisms": [
+      {
+        "mechanism_id": "param-fetch-posts",
+        "intent": "fetch",
+        "preconditions": {},
+        "action_template": {
+          "url": "https://jsonplaceholder.typicode.com/posts/${id}"
+        },
+        "postconditions": {},
+        "parameter_slots": [
+          "id"
+        ],
+        "auth_scope": null,
+        "freshness": {},
+        "applicability_guards": {},
+        "verification_rule": {},
+        "failure_boundary": {},
+        "repair_scope": {},
+        "evidence": [
+          "test"
+        ],
+        "confidence": 0.95,
+        "invalidated": false
+      }
+    ],
+    "params": {
+      "id": 2
+    },
+    "expected_resolution": "EXECUTABLE",
+    "expected_url": "https://jsonplaceholder.typicode.com/posts/2",
+    "expected_winning_mechanism": null,
+    "observed_resolution": "EXECUTABLE",
+    "observed_mechanism_id": "param-fetch-posts",
+    "observed_url": "https://jsonplaceholder.typicode.com/posts/2",
+    "raw_resolution": {
+      "status": "EXECUTABLE",
+      "mechanism_id": "param-fetch-posts",
+      "reason": "applicability guards and confidence threshold passed",
+      "bound_action": {
+        "url": "https://jsonplaceholder.typicode.com/posts/2"
+      },
+      "confidence": 0.95
+    },
+    "matches_resolution": true,
+    "matches_url": true,
+    "matches_winning_mechanism": null
+  },
+  {
+    "condition_id": "compete-equal-id1",
+    "role": "intervention",
+    "registry_mechanisms": [
+      {
+        "mechanism_id": "literal-fetch-posts-1",
+        "intent": "fetch",
+        "preconditions": {},
+        "action_template": {
+          "url": "https://jsonplaceholder.typicode.com/posts/1"
+        },
+        "postconditions": {},
+        "parameter_slots": [],
+        "auth_scope": null,
+        "freshness": {},
+        "applicability_guards": {},
+        "verification_rule": {},
+        "failure_boundary": {},
+        "repair_scope": {},
+        "evidence": [
+          "test"
+        ],
+        "confidence": 0.95,
+        "invalidated": false
+      },
+      {
+        "mechanism_id": "param-fetch-posts",
+        "intent": "fetch",
+        "preconditions": {},
+        "action_template": {
+          "url": "https://jsonplaceholder.typicode.com/posts/${id}"
+        },
+        "postconditions": {},
+        "parameter_slots": [
+          "id"
+        ],
+        "auth_scope": null,
+        "freshness": {},
+        "applicability_guards": {},
+        "verification_rule": {},
+        "failure_boundary": {},
+        "repair_scope": {},
+        "evidence": [
+          "test"
+        ],
+        "confidence": 0.95,
+        "invalidated": false
+      }
+    ],
+    "params": {
+      "id": 1
+    },
+    "expected_resolution": "EXECUTABLE",
+    "expected_url": "https://jsonplaceholder.typicode.com/posts/1",
+    "expected_winning_mechanism": "param-fetch-posts",
+    "observed_resolution": "EXECUTABLE",
+    "observed_mechanism_id": "param-fetch-posts",
+    "observed_url": "https://jsonplaceholder.typicode.com/posts/1",
+    "raw_resolution": {
+      "status": "EXECUTABLE",
+      "mechanism_id": "param-fetch-posts",
+      "reason": "applicability guards and confidence threshold passed",
+      "bound_action": {
+        "url": "https://jsonplaceholder.typicode.com/posts/1"
+      },
+      "confidence": 0.95
+    },
+    "matches_resolution": true,
+    "matches_url": true,
+    "matches_winning_mechanism": true
+  },
+  {
+    "condition_id": "compete-equal-id2",
+    "role": "intervention",
+    "registry_mechanisms": [
+      {
+        "mechanism_id": "literal-fetch-posts-1",
+        "intent": "fetch",
+        "preconditions": {},
+        "action_template": {
+          "url": "https://jsonplaceholder.typicode.com/posts/1"
+        },
+        "postconditions": {},
+        "parameter_slots": [],
+        "auth_scope": null,
+        "freshness": {},
+        "applicability_guards": {},
+        "verification_rule": {},
+        "failure_boundary": {},
+        "repair_scope": {},
+        "evidence": [
+          "test"
+        ],
+        "confidence": 0.95,
+        "invalidated": false
+      },
+      {
+        "mechanism_id": "param-fetch-posts",
+        "intent": "fetch",
+        "preconditions": {},
+        "action_template": {
+          "url": "https://jsonplaceholder.typicode.com/posts/${id}"
+        },
+        "postconditions": {},
+        "parameter_slots": [
+          "id"
+        ],
+        "auth_scope": null,
+        "freshness": {},
+        "applicability_guards": {},
+        "verification_rule": {},
+        "failure_boundary": {},
+        "repair_scope": {},
+        "evidence": [
+          "test"
+        ],
+        "confidence": 0.95,
+        "invalidated": false
+      }
+    ],
+    "params": {
+      "id": 2
+    },
+    "expected_resolution": "EXECUTABLE",
+    "expected_url": "https://jsonplaceholder.typicode.com/posts/2",
+    "expected_winning_mechanism": "param-fetch-posts",
+    "observed_resolution": "EXECUTABLE",
+    "observed_mechanism_id": "param-fetch-posts",
+    "observed_url": "https://jsonplaceholder.typicode.com/posts/2",
+    "raw_resolution": {
+      "status": "EXECUTABLE",
+      "mechanism_id": "param-fetch-posts",
+      "reason": "applicability guards and confidence threshold passed",
+      "bound_action": {
+        "url": "https://jsonplaceholder.typicode.com/posts/2"
+      },
+      "confidence": 0.95
+    },
+    "matches_resolution": true,
+    "matches_url": true,
+    "matches_winning_mechanism": true
+  },
+  {
+    "condition_id": "compete-equal-id3",
+    "role": "intervention",
+    "registry_mechanisms": [
+      {
+        "mechanism_id": "literal-fetch-posts-1",
+        "intent": "fetch",
+        "preconditions": {},
+        "action_template": {
+          "url": "https://jsonplaceholder.typicode.com/posts/1"
+        },
+        "postconditions": {},
+        "parameter_slots": [],
+        "auth_scope": null,
+        "freshness": {},
+        "applicability_guards": {},
+        "verification_rule": {},
+        "failure_boundary": {},
+        "repair_scope": {},
+        "evidence": [
+          "test"
+        ],
+        "confidence": 0.95,
+        "invalidated": false
+      },
+      {
+        "mechanism_id": "param-fetch-posts",
+        "intent": "fetch",
+        "preconditions": {},
+        "action_template": {
+          "url": "https://jsonplaceholder.typicode.com/posts/${id}"
+        },
+        "postconditions": {},
+        "parameter_slots": [
+          "id"
+        ],
+        "auth_scope": null,
+        "freshness": {},
+        "applicability_guards": {},
+        "verification_rule": {},
+        "failure_boundary": {},
+        "repair_scope": {},
+        "evidence": [
+          "test"
+        ],
+        "confidence": 0.95,
+        "invalidated": false
+      }
+    ],
+    "params": {
+      "id": 3
+    },
+    "expected_resolution": "EXECUTABLE",
+    "expected_url": "https://jsonplaceholder.typicode.com/posts/3",
+    "expected_winning_mechanism": "param-fetch-posts",
+    "observed_resolution": "EXECUTABLE",
+    "observed_mechanism_id": "param-fetch-posts",
+    "observed_url": "https://jsonplaceholder.typicode.com/posts/3",
+    "raw_resolution": {
+      "status": "EXECUTABLE",
+      "mechanism_id": "param-fetch-posts",
+      "reason": "applicability guards and confidence threshold passed",
+      "bound_action": {
+        "url": "https://jsonplaceholder.typicode.com/posts/3"
+      },
+      "confidence": 0.95
+    },
+    "matches_resolution": true,
+    "matches_url": true,
+    "matches_winning_mechanism": true
+  },
+  {
+    "condition_id": "compete-equal-id4",
+    "role": "intervention",
+    "registry_mechanisms": [
+      {
+        "mechanism_id": "literal-fetch-posts-1",
+        "intent": "fetch",
+        "preconditions": {},
+        "action_template": {
+          "url": "https://jsonplaceholder.typicode.com/posts/1"
+        },
+        "postconditions": {},
+        "parameter_slots": [],
+        "auth_scope": null,
+        "freshness": {},
+        "applicability_guards": {},
+        "verification_rule": {},
+        "failure_boundary": {},
+        "repair_scope": {},
+        "evidence": [
+          "test"
+        ],
+        "confidence": 0.95,
+        "invalidated": false
+      },
+      {
+        "mechanism_id": "param-fetch-posts",
+        "intent": "fetch",
+        "preconditions": {},
+        "action_template": {
+          "url": "https://jsonplaceholder.typicode.com/posts/${id}"
+        },
+        "postconditions": {},
+        "parameter_slots": [
+          "id"
+        ],
+        "auth_scope": null,
+        "freshness": {},
+        "applicability_guards": {},
+        "verification_rule": {},
+        "failure_boundary": {},
+        "repair_scope": {},
+        "evidence": [
+          "test"
+        ],
+        "confidence": 0.95,
+        "invalidated": false
+      }
+    ],
+    "params": {
+      "id": 4
+    },
+    "expected_resolution": "EXECUTABLE",
+    "expected_url": "https://jsonplaceholder.typicode.com/posts/4",
+    "expected_winning_mechanism": "param-fetch-posts",
+    "observed_resolution": "EXECUTABLE",
+    "observed_mechanism_id": "param-fetch-posts",
+    "observed_url": "https://jsonplaceholder.typicode.com/posts/4",
+    "raw_resolution": {
+      "status": "EXECUTABLE",
+      "mechanism_id": "param-fetch-posts",
+      "reason": "applicability guards and confidence threshold passed",
+      "bound_action": {
+        "url": "https://jsonplaceholder.typicode.com/posts/4"
+      },
+      "confidence": 0.95
+    },
+    "matches_resolution": true,
+    "matches_url": true,
+    "matches_winning_mechanism": true
+  },
+  {
+    "condition_id": "compete-equal-id5",
+    "role": "intervention",
+    "registry_mechanisms": [
+      {
+        "mechanism_id": "literal-fetch-posts-1",
+        "intent": "fetch",
+        "preconditions": {},
+        "action_template": {
+          "url": "https://jsonplaceholder.typicode.com/posts/1"
+        },
+        "postconditions": {},
+        "parameter_slots": [],
+        "auth_scope": null,
+        "freshness": {},
+        "applicability_guards": {},
+        "verification_rule": {},
+        "failure_boundary": {},
+        "repair_scope": {},
+        "evidence": [
+          "test"
+        ],
+        "confidence": 0.95,
+        "invalidated": false
+      },
+      {
+        "mechanism_id": "param-fetch-posts",
+        "intent": "fetch",
+        "preconditions": {},
+        "action_template": {
+          "url": "https://jsonplaceholder.typicode.com/posts/${id}"
+        },
+        "postconditions": {},
+        "parameter_slots": [
+          "id"
+        ],
+        "auth_scope": null,
+        "freshness": {},
+        "applicability_guards": {},
+        "verification_rule": {},
+        "failure_boundary": {},
+        "repair_scope": {},
+        "evidence": [
+          "test"
+        ],
+        "confidence": 0.95,
+        "invalidated": false
+      }
+    ],
+    "params": {
+      "id": 5
+    },
+    "expected_resolution": "EXECUTABLE",
+    "expected_url": "https://jsonplaceholder.typicode.com/posts/5",
+    "expected_winning_mechanism": "param-fetch-posts",
+    "observed_resolution": "EXECUTABLE",
+    "observed_mechanism_id": "param-fetch-posts",
+    "observed_url": "https://jsonplaceholder.typicode.com/posts/5",
+    "raw_resolution": {
+      "status": "EXECUTABLE",
+      "mechanism_id": "param-fetch-posts",
+      "reason": "applicability guards and confidence threshold passed",
+      "bound_action": {
+        "url": "https://jsonplaceholder.typicode.com/posts/5"
+      },
+      "confidence": 0.95
+    },
+    "matches_resolution": true,
+    "matches_url": true,
+    "matches_winning_mechanism": true
+  },
+  {
+    "condition_id": "compete-equal-id6",
+    "role": "intervention",
+    "registry_mechanisms": [
+      {
+        "mechanism_id": "literal-fetch-posts-1",
+        "intent": "fetch",
+        "preconditions": {},
+        "action_template": {
+          "url": "https://jsonplaceholder.typicode.com/posts/1"
+        },
+        "postconditions": {},
+        "parameter_slots": [],
+        "auth_scope": null,
+        "freshness": {},
+        "applicability_guards": {},
+        "verification_rule": {},
+        "failure_boundary": {},
+        "repair_scope": {},
+        "evidence": [
+          "test"
+        ],
+        "confidence": 0.95,
+        "invalidated": false
+      },
+      {
+        "mechanism_id": "param-fetch-posts",
+        "intent": "fetch",
+        "preconditions": {},
+        "action_template": {
+          "url": "https://jsonplaceholder.typicode.com/posts/${id}"
+        },
+        "postconditions": {},
+        "parameter_slots": [
+          "id"
+        ],
+        "auth_scope": null,
+        "freshness": {},
+        "applicability_guards": {},
+        "verification_rule": {},
+        "failure_boundary": {},
+        "repair_scope": {},
+        "evidence": [
+          "test"
+        ],
+        "confidence": 0.95,
+        "invalidated": false
+      }
+    ],
+    "params": {
+      "id": 6
+    },
+    "expected_resolution": "EXECUTABLE",
+    "expected_url": "https://jsonplaceholder.typicode.com/posts/6",
+    "expected_winning_mechanism": "param-fetch-posts",
+    "observed_resolution": "EXECUTABLE",
+    "observed_mechanism_id": "param-fetch-posts",
+    "observed_url": "https://jsonplaceholder.typicode.com/posts/6",
+    "raw_resolution": {
+      "status": "EXECUTABLE",
+      "mechanism_id": "param-fetch-posts",
+      "reason": "applicability guards and confidence threshold passed",
+      "bound_action": {
+        "url": "https://jsonplaceholder.typicode.com/posts/6"
+      },
+      "confidence": 0.95
+    },
+    "matches_resolution": true,
+    "matches_url": true,
+    "matches_winning_mechanism": true
+  },
+  {
+    "condition_id": "compete-param-higher",
+    "role": "positive_control",
+    "registry_mechanisms": [
+      {
+        "mechanism_id": "literal-fetch-posts-1",
+        "intent": "fetch",
+        "preconditions": {},
+        "action_template": {
+          "url": "https://jsonplaceholder.typicode.com/posts/1"
+        },
+        "postconditions": {},
+        "parameter_slots": [],
+        "auth_scope": null,
+        "freshness": {},
+        "applicability_guards": {},
+        "verification_rule": {},
+        "failure_boundary": {},
+        "repair_scope": {},
+        "evidence": [
+          "test"
+        ],
+        "confidence": 0.95,
+        "invalidated": false
+      },
+      {
+        "mechanism_id": "param-fetch-posts",
+        "intent": "fetch",
+        "preconditions": {},
+        "action_template": {
+          "url": "https://jsonplaceholder.typicode.com/posts/${id}"
+        },
+        "postconditions": {},
+        "parameter_slots": [
+          "id"
+        ],
+        "auth_scope": null,
+        "freshness": {},
+        "applicability_guards": {},
+        "verification_rule": {},
+        "failure_boundary": {},
+        "repair_scope": {},
+        "evidence": [
+          "test"
+        ],
+        "confidence": 0.98,
+        "invalidated": false
+      }
+    ],
+    "params": {
+      "id": 3
+    },
+    "expected_resolution": "EXECUTABLE",
+    "expected_url": "https://jsonplaceholder.typicode.com/posts/3",
+    "expected_winning_mechanism": "param-fetch-posts",
+    "observed_resolution": "EXECUTABLE",
+    "observed_mechanism_id": "param-fetch-posts",
+    "observed_url": "https://jsonplaceholder.typicode.com/posts/3",
+    "raw_resolution": {
+      "status": "EXECUTABLE",
+      "mechanism_id": "param-fetch-posts",
+      "reason": "applicability guards and confidence threshold passed",
+      "bound_action": {
+        "url": "https://jsonplaceholder.typicode.com/posts/3"
+      },
+      "confidence": 0.98
+    },
+    "matches_resolution": true,
+    "matches_url": true,
+    "matches_winning_mechanism": true
+  },
+  {
+    "condition_id": "compete-literal-higher",
+    "role": "null_control",
+    "registry_mechanisms": [
+      {
+        "mechanism_id": "literal-fetch-posts-1",
+        "intent": "fetch",
+        "preconditions": {},
+        "action_template": {
+          "url": "https://jsonplaceholder.typicode.com/posts/1"
+        },
+        "postconditions": {},
+        "parameter_slots": [],
+        "auth_scope": null,
+        "freshness": {},
+        "applicability_guards": {},
+        "verification_rule": {},
+        "failure_boundary": {},
+        "repair_scope": {},
+        "evidence": [
+          "test"
+        ],
+        "confidence": 0.98,
+        "invalidated": false
+      },
+      {
+        "mechanism_id": "param-fetch-posts",
+        "intent": "fetch",
+        "preconditions": {},
+        "action_template": {
+          "url": "https://jsonplaceholder.typicode.com/posts/${id}"
+        },
+        "postconditions": {},
+        "parameter_slots": [
+          "id"
+        ],
+        "auth_scope": null,
+        "freshness": {},
+        "applicability_guards": {},
+        "verification_rule": {},
+        "failure_boundary": {},
+        "repair_scope": {},
+        "evidence": [
+          "test"
+        ],
+        "confidence": 0.95,
+        "invalidated": false
+      }
+    ],
+    "params": {
+      "id": 3
+    },
+    "expected_resolution": "EXECUTABLE",
+    "expected_url": "https://jsonplaceholder.typicode.com/posts/1",
+    "expected_winning_mechanism": "literal-fetch-posts-1",
+    "observed_resolution": "EXECUTABLE",
+    "observed_mechanism_id": "literal-fetch-posts-1",
+    "observed_url": "https://jsonplaceholder.typicode.com/posts/1",
+    "raw_resolution": {
+      "status": "EXECUTABLE",
+      "mechanism_id": "literal-fetch-posts-1",
+      "reason": "applicability guards and confidence threshold passed",
+      "bound_action": {
+        "url": "https://jsonplaceholder.typicode.com/posts/1"
+      },
+      "confidence": 0.98
+    },
+    "matches_resolution": true,
+    "matches_url": true,
+    "matches_winning_mechanism": true
+  }
+]

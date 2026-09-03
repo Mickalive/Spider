@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-33816735314",
+  "lane": "graph",
+  "github_run_id": "33816735314",
+  "base_sha": "d146fa93a56cfe438294f0418bd2fa28679198ee",
+  "current_sha": "HEAD",
+  "frozen_at": "2026-09-03T23:17:38.662072+00:00",
+  "executed_at": "2026-09-03T23:30:00+00:00",
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.x",
+    "dependencies": "src/spider/kernel.py, src/spider/registry.py, src/spider/models.py"
+  },
+  "code_change": {
+    "file": "src/spider/kernel.py",
+    "line": 112,
+    "before": "candidates.sort(key=lambda m: m.confidence, reverse=True)",
+    "after": "candidates.sort(key=lambda m: (m.confidence, len(m.parameter_slots)), reverse=True)",
+    "sha256": "c0357cd3423eb80459f2123c83ba4d1c2c4d8837b7eda215d72cfd8c08bc09fa"
+  },
+  "artifacts": {
+    "raw_evidence": {
+      "path": "research/experiments/EXP-GRAPH-33816735314/raw_evidence.json",
+      "sha256": "1db2b4598350a21473e0845617f48bcde27b49da9b7acefc10767990e8f2fd58",
+      "role": "raw"
+    },
+    "run_experiment": {
+      "path": "research/experiments/EXP-GRAPH-33816735314/run_experiment.py",
+      "sha256": "d0304255ef3847f84f2952011e005e28f66955807bbf841a7b2936ece3309ca8",
+      "role": "code"
+    },
+    "result": {
+      "path": "research/experiments/EXP-GRAPH-33816735314/result.json",
+      "role": "derived"
+    },
+    "report": {
+      "path": "research/experiments/EXP-GRAPH-33816735314/report.md",
+      "role": "derived"
+    }
+  },
+  "reproduction": {
+    "command": "python research/experiments/EXP-GRAPH-33816735314/run_experiment.py",
+    "working_directory": "/home/runner/work/Spider/Spider",
+    "prerequisites": "Apply code fix to src/spider/kernel.py line 112 before running",
+    "expected_output": "All 13 conditions PASS"
+  },
+  "frozen_inputs": {
+    "request.json": "477aec3869b8fe6ad5875de8e24fd3e856930b1eb36c765efed3c901edbfe6e8",
+    "spec.json": "1139b11faccca9c276f50f167a79ea7f6a67b0d6ce180af27c08339d8a6aac9a",
+    "prereg.md": "0dc9d883d320500f3d2a8e2778bef6f5a0b6b22799a07da6ae83a6f8dcaa6198"
+  },
+  "parent_experiment": {
+    "experiment_id": "EXP-GRAPH-33718012817",
+    "handoff_sha256": "ebb3de502513621de55c297a32023f20b6f87739cdf00b4d3db025d00f51187a"
+  }
+}
