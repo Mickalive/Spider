@@ -1,0 +1,189 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-33528829431",
+  "lane": "physics",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Replace in-sample accuracy (BaselineComputers.fit+evaluate on same transitions) with trajectory-grouped holdout or cross-validated prediction; current metrics memorize (S,A)->S' without leakage control - violates spec measurement_validity 'Preprocessing is fit on TRAIN only' and prereg holdout (site-level holdout). Recompute all accuracies on held-out trajectories.",
+    "Replace bootstrap diff-vs-zero p-values with proper permutation/statistical null (e.g., label-permuted action or trajectory-permuted null distribution). Current compute_bootstrap_and_pvalues mean(diff<=0) is invalid: it declares null_control (random 20-state synthetic) significant at p=0.0 (result.json bootstrap.null_control p_value_corrected=0.0) demonstrating no specificity. Must use independent permutation test.",
+    "Fix shuffle null implementation: BaselineComputers.shuffle_null currently predicts most-common next_state in trajectory on shuffled labels (not action-conditioned), and shares mutable RNG across bootstraps (rng.shuffle side-effect). Should permute next_state labels within trajectory and evaluate action-conditioned predictor on permuted data, with independent RNG per permutation.",
+    "Redesign positive control to discriminate action-frequency baseline: current synthetic graph has 9 globally unique (action_type,target_id) keys -> amap next_state sets all size 1 (recomputed: 0/9 actions with >1 next state, action_frequency_accuracy=1.0 equals action_conditioned_accuracy=1.0). Requires overlapping actions across states to test that (S,A) > A alone.",
+    "Collect adequate live sample per prereg: prereg sampling policy requires 30 trajectories x10 steps = 300 transitions (prereg.md Section 5, spec measurement_validity resampling unit = trajectory). Observed live_test n_transitions=37, n_trajectories=4 (result.json metrics.live_test, report.md Table) = 12.3% of target, due to link-poor sites (example.com 1 link, httpbin.org/html ~0). Must use sites with navigational structure (e-commerce/news/web-app) and full browser (Playwright) as prereg states accessibility tree; current LiveWebCollector is HTTP fetch+HTMLParser (substrate.py LiveWebCollector.fetch_page_structure) not a browser - acknowledged in result.json validity_notes but conflated with browser harness claim.",
+    "Increase state representation fidelity or demonstrate identifiability: State = URL|structure_hash|element_hash (substrate.py State) with structure_features tags:count|elements:count|links:count is too coarse (live_test H(S'|S)=0.27, H(S'|S,A)=0.95, entropy_reduction_pct=-250% indicates H(S'|S,A) > H(S'|S), impossible for true conditional entropy drop and noted as artifact in report.md). Need operational definition that can express action-conditioned structure before testing C-WEB-DYNAMICS.",
+    "Implement true site-level holdout evaluation and split_integrity test on predictor inputs/outputs: current ValidityGates.check_split_integrity only checks URL namespace overlap (synthetic.test vs null.test vs live) and is vacuous; predictor evaluation does not respect site grouping."
+  ],
+  "validity_findings": [
+    {
+      "check": "validity_target_leakage",
+      "producer_control_id": "validity_target_leakage",
+      "expected": "No predictor contains S_next directly or deterministically (spec measurement_validity)",
+      "observed": "Producer reports PASS 0 issues across 737 transitions (result.json controls.validity_target_leakage). Recomputed check via substrate.py ValidityGates.check_target_leakage only tests exact equality action.parameters == next_state.url and substring in hashes. Action target_id is link_{idx} with parameters link_text_{idx}, so exact match never occurs. No check for hash collisions, semantic leakage, or in-sample memorization via (S,A) table lookup. Assessment: check is too weak to rule out leakage via memorization; true leakage is in-sample evaluation (see baseline_findings).",
+      "severity": "medium",
+      "evidence_refs": ["research/physics/substrate.py:580-597 ValidityGates.check_target_leakage", "research/experiments/EXP-PHYSICS-33528829431/result.json:112-118 controls.validity_target_leakage"]
+    },
+    {
+      "check": "validity_split_integrity",
+      "producer_control_id": "validity_split_integrity",
+      "expected": "Site identity does not leak across train/test splits (each site fully train or test, spec measurement_validity, prereg Section 7)",
+      "observed": "Producer reports PASS 5 synthetic, 36 live, 20 null URLs zero overlap. No train/test split was actually performed for predictor evaluation; all accuracies are in-sample (BaselineComputers methods build dict from same transitions). URL namespace separation is by construction of separate collectors, not a holdout test. Prereg holdout 'synthetic train, live sites test' not implemented as evaluation.",
+      "severity": "high",
+      "evidence_refs": ["research/physics/substrate.py:599-619", "research/experiments/EXP-PHYSICS-33528829431/result.json:119-125", "prereg.md:47-50 holdout"]
+    },
+    {
+      "check": "validity_seed_determinism",
+      "producer_control_id": "validity_seed_determinism",
+      "expected": "Seeds deterministic across processes, not process-randomized hash() (spec measurement_validity)",
+      "observed": "PASS 100/100 integers match for np.random.RandomState(42) (substrate.py check_seed_determinism). Correct for numpy path. However trajectory_id uses hashlib.sha256(url) + rng.randint, deterministic, and python hash() not used. This gate passes narrowly but does not cover overall experiment determinism (shared RNG mutation in bootstrap).",
+      "severity": "low",
+      "evidence_refs": ["research/physics/substrate.py:622-634", "research/experiments/EXP-PHYSICS-33528829431/result.json:126-132"]
+    },
+    {
+      "check": "validity_lagged_variables",
+      "producer_control_id": "validity_lagged_variables",
+      "expected": "Lagged variables truly from earlier steps; post-state never leaks into pre-state (spec)",
+      "observed": "PASS 0 issues across 737 transitions, step_index monotonic per trajectory (substrate.py check_lagged_variables). Recomputed: no temporal ordering violations. Gate is trivially satisfied because Transition stores state/action/next_state simultaneously; no lagged feature engineering to test.",
+      "severity": "low",
+      "evidence_refs": ["research/physics/substrate.py:637-654", "research/experiments/EXP-PHYSICS-33528829431/result.json:133-139"]
+    },
+    {
+      "check": "sampling_integrity",
+      "producer_control_id": "live_test",
+      "expected": "Prereg Section 5: Positive 50x10=500, Null 20x10=200, Live 30x10=300 transitions. Live test should be discriminating.",
+      "observed": "Positive 500/50 and Null 200/20 exactly as planned (result.json metrics). Live_test observed n_transitions=37, n_trajectories=4 vs target 30 trajectories (result.json metrics.live_test, provenance.json execution_parameters.live_test n_trajectories_target=30). Reported in observations: 'Only 37 transitions collected from 4 completed trajectories (out of 30 attempted)' due to sites with no links. Sampling is 12.3% of prereg, underpowered and biased to trivial link-following. Falsifier/ adequacy rule cannot be applied.",
+      "severity": "high",
+      "evidence_refs": ["prereg.md:38-43 Sampling Policy", "research/experiments/EXP-PHYSICS-33528829431/result.json:32-40 metrics.live_test", "research/physics/run_experiment.py:101-154 run_live_test", "research/experiments/EXP-PHYSICS-33528829431/report.md:96-104"]
+    },
+    {
+      "check": "representation_validity",
+      "producer_control_id": "live_test_state_representation",
+      "expected": "Prereg Section 2: S = DOM accessibility tree + URL + visible text + form state. Spec question: browser harness.",
+      "observed": "Implemented S = URL|structure_hash|element_hash where structure_features = tags:count|elements:count|links:count and element_features = sorted links[:20] (substrate.py LiveWebCollector.fetch_page_structure). No JS execution, no accessibility tree, no form state. Producer validity_notes acknowledges 'HTTP fetch + HTML parse is not a full browser' and 'representation loss'. Live_test entropy H(S'|S,A)=0.946 > H(S'|S)=0.270 (recomputed, report Table) giving entropy_reduction_pct=-250.2% (result.json metrics.live_test.entropy_reduction_pct). Conditional entropy cannot increase when conditioning on extra variable for true distribution; inversion indicates coarse state hash destroys information and observed environment cannot express tested effect. Same pathology null_control H(S'|S,A)=3.16 > H(S'|S)=2.94 reduction -7.4% expected for random, but magnitude shows hash entropy inflation.",
+      "severity": "high",
+      "evidence_refs": ["prereg.md:13-19 State Representation", "research/physics/substrate.py:174-242 fetch_page_structure", "research/experiments/EXP-PHYSICS-33528829431/result.json:32-42 entropy values", "research/experiments/EXP-PHYSICS-33528829431/result.json:156-163 validity_notes"]
+    },
+    {
+      "check": "positive_control_identifiability",
+      "producer_control_id": "positive_control_synthetic",
+      "expected": "Positive control demonstrates harness captures action-conditioned structure (spec positive_control >90%, prereg adequacy 1)",
+      "observed": "Recomputed positive_control action_conditioned_accuracy=1.0 (500 transitions), H(S'|S,A)=0.0, H(S'|S)=0.961, reduction 100% - matches producer (result.json metrics.positive_control). Syntax check passes threshold. However representation identical to test harness (coarse hashes matching synthetic states) so not a test of browser/real DOM. Also fails to discriminate second baseline (see baseline_findings).",
+      "severity": "medium",
+      "evidence_refs": ["research/physics/substrate.py:71-147 SyntheticPositiveControl", "research/experiments/EXP-PHYSICS-33528829431/result.json:8-19 metrics.positive_control"]
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "shuffle_null_baseline",
+      "producer_control_id": "shuffle_null_baseline",
+      "expected": "Shuffle null randomly permutes S' labels within trajectory to break action-conditioning (spec baselines)",
+      "observed": "Producer reports PASS: shuffle accuracy < action-conditioned for all conditions (0.46 vs1.0, 0.225 vs0.725, 0.189 vs1.0). Recomputed shuffle_null matches 0.46,0.225 (see recomputed_metrics). Implementation in substrate.py BaselineComputers.shuffle_null shuffles next_states within trajectory but predicts most_common next_state overall, not action-conditioned predictor on shuffled data. Bootstrap recompute shows null_control diff 0.5187 significant (p=0.0) even for random data - null_control should be null. Shared mutable rng passed into both shuffle_null and bootstrap resampling creates non-independence. Bootstrap p via mean(diff<=0) is not a valid null test. Therefore decision rule 'shuffle null rejected at p<0.05 Bonferroni' is invalidly satisfied.",
+      "strength": "invalid - lacks specificity",
+      "evidence_refs": ["research/physics/substrate.py:364-389 BaselineComputers.shuffle_null", "research/physics/run_experiment.py:203-254 compute_bootstrap_and_pvalues", "research/experiments/EXP-PHYSICS-33528829431/result.json:44-68 bootstrap"]
+    },
+    {
+      "baseline_id": "action_frequency_baseline",
+      "producer_control_id": "action_frequency_baseline",
+      "expected": "Action-frequency null predicts most common S' per action type ignoring S, should be lower than full (S,A) predictor (spec)",
+      "observed": "Producer reports PASS despite positive_control action_frequency_accuracy=1.0 equal to action_conditioned_accuracy=1.0 ('= equal, deterministic graph' in controls). Recomputed positive_control action_frequency_accuracy=1.0 confirmed; distinct actions 9, distinct (S,A) 9, actions with >1 next_state 0/9 (recomputed). Because (action_type,target_id) globally unique, A alone perfectly predicts S'. Baseline does not discriminate. Positive control thus fails to produce discriminating positive vs null outcome required by falsifier 'harness fails to produce discriminating positive and null outcomes'.",
+      "strength": "weak - fails to falsify alternative explanation (A alone suffices)",
+      "evidence_refs": ["research/physics/substrate.py:391-421 action_frequency_null", "research/experiments/EXP-PHYSICS-33528829431/result.json:98-104", "recomputed_metrics positive_control"]
+    },
+    {
+      "baseline_id": "markov_first_order_baseline",
+      "producer_control_id": "markov_first_order_baseline",
+      "expected": "First-order Markov predicts S' from S ignoring A, should be worse than (S,A) (spec)",
+      "observed": "Producer reports PASS: markov 0.596 vs 1.0 (positive), 0.215 vs 0.725 (null), 0.865 vs 1.0 (live). Recomputed markov values match. However all are in-sample (fit and evaluate on same transitions), inflating accuracies. Live markov 0.865 vs action-conditioned 1.0 on 37 transitions with ~5 distinct states is inflated by memorization and tiny state space, not evidence for action information. Null markov 0.215 vs 0.725 diff also inflated by same memorization (null SA collisions >1: 39/142 distinct SA have collisions).",
+      "strength": "inflated - optimistic due to leakage",
+      "evidence_refs": ["research/physics/substrate.py:423-453", "research/experiments/EXP-PHYSICS-33528829431/result.json:104-111"]
+    },
+    {
+      "baseline_id": "null_control_random",
+      "producer_control_id": "null_control_random",
+      "expected": "Random-policy run on unstructured site should show minimal entropy reduction <5% (result.json expected_behavior)",
+      "observed": "Producer reports PASS entropy_reduction_pct=-7.44% (negative). Recomputed matches -7.4356%. However accuracy-based bootstrap claims significant structure (mean_diff 0.5187 CI [0.46,0.575] p=0.0) for null_control - contradicts entropy claim that null shows no structure. Producer observation acknowledges 'accuracy number reflects repeated use of finite action/state vocabularies, not genuine structure' but still counts bootstrap p=0 as discriminating. This inconsistency shows metric pair (accuracy vs entropy) not coherent and null model is not strong.",
+      "strength": "inconsistent - null declares significant despite being designed random",
+      "evidence_refs": ["research/experiments/EXP-PHYSICS-33528829431/result.json:20-30 metrics.null_control", "research/physics/substrate.py:295-353 NullControlCollector"]
+    },
+    {
+      "baseline_id": "bootstrap_inference",
+      "producer_control_id": "bootstrap",
+      "expected": "Bootstrap CIs grouped by trajectory, Bonferroni 3 tests, report raw and corrected p (prereg Section 11, spec decision_rule p<0.05)",
+      "observed": "Producer bootstrap reports all three mean_diff >0 with p_value_raw=0.0 corrected 0.0, CI excludes 0. Recomputed null_control bootstrap mean_diff ~0.5187 p=0.0 - spurious significance on synthetic random data. run_experiment.py compute_bootstrap_and_pvalues resamples transitions with replacement ignoring trajectory grouping (rng.choice over flat transition list) violating 'grouped by trajectory' prereg. Also uses same rng for resampling and shuffle_null inner shuffle. Therefore p-values and CIs are invalid for decision rule.",
+      "strength": "measurement_invalid",
+      "evidence_refs": ["research/physics/run_experiment.py:203-254", "prereg.md:69-74 Uncertainty Method", "research/experiments/EXP-PHYSICS-33528829431/result.json:44-68"]
+    }
+  ],
+  "recomputed_metrics": {
+    "positive_control": {
+      "n_transitions": 500,
+      "n_trajectories": 50,
+      "action_conditioned_accuracy": 1.0,
+      "shuffle_null_accuracy": 0.46,
+      "action_frequency_accuracy": 1.0,
+      "markov_first_order_accuracy": 0.596,
+      "entropy_h_sa": 0.0,
+      "entropy_h_s_only": 0.9612562188516977,
+      "entropy_reduction_pct": 100.0,
+      "distinct_states": 5,
+      "distinct_actions": 9,
+      "distinct_SA": 9,
+      "actions_with_multiple_next": 0,
+      "note": "Recomputed via substrate.py SyntheticPositiveControl with seed 42 matches producer result.json metrics.positive_control exactly. Confirms in-sample memorization; action-frequency non-discriminating."
+    },
+    "null_control": {
+      "n_transitions": 200,
+      "n_trajectories": 20,
+      "action_conditioned_accuracy": 0.725,
+      "shuffle_null_accuracy": 0.225,
+      "action_frequency_accuracy": 0.205,
+      "markov_first_order_accuracy": 0.215,
+      "entropy_h_sa": 3.1626951259195963,
+      "entropy_h_s_only": 2.943805399417731,
+      "entropy_reduction_pct": -7.435604491559138,
+      "SA_collisions_multiple_next": 39,
+      "distinct_SA": 142,
+      "note": "Recomputed via NullControlCollector seed 44 matches producer. Entropy negative as reported. Bootstrap p=0 spurious."
+    },
+    "live_test": {
+      "n_transitions_reported": 37,
+      "n_trajectories_reported": 4,
+      "n_transitions_prereg_target": 300,
+      "n_trajectories_prereg_target": 30,
+      "sampling_fraction": 0.123,
+      "producer_action_conditioned_accuracy": 1.0,
+      "producer_shuffle_null_accuracy": 0.1891891891891892,
+      "producer_entropy_h_sa": 0.9464743245582129,
+      "producer_entropy_h_s_only": 0.2702702702702703,
+      "producer_entropy_reduction_pct": -250.19550008653874,
+      "note": "Live metrics not recomputed from raw artifacts (no raw transitions artifact provided beyond hashes in provenance.json); producer values taken as given but flagged as artifact of tiny state space and coarse hashing. H(S'|S,A)>H(S'|S) indicates representation inversion. Live_test HTTP fetch used link-poor sites; 26 of 30 attempted trajectories terminated early (report.md Section 6). Cannot recompute without raw live transitions file (provenance data_hashes live_test_transitions a4ff... not resolvable to file)."
+    },
+    "bootstrap": {
+      "positive_control_mean_diff": 0.485006,
+      "null_control_mean_diff": 0.5187,
+      "live_test_mean_diff": 0.6824594594594594,
+      "all_p_corrected": 0.0,
+      "validity": "invalid - in-sample resampling over transitions not trajectories, shared RNG, tests significant even on null_control random data",
+      "note": "Recomputed null_control bootstrap mean_diff 0.518735 CI [0.46,0.575] p=0 matches producer 0.518705 p=0.0; demonstrates bootstrap declares structure where entropy says none."
+    }
+  },
+  "claim_ceiling": "Synthetic-only feasibility: With coarse State=URL|structure_hash|element_hash, the harness can deterministically record in-sample (S,A)->S' for a 5-state/9-(S,A) synthetic graph (action_conditioned_accuracy=1.0, H(S'|S,A)=0.0, seed deterministic via np.random.RandomState) with no exact URL leakage in action.parameters. This does NOT demonstrate a browser harness (tested substrate is HTTP fetch+HTMLParser, no JS/accessibility tree), does NOT discriminate (S,A) vs A alone (action_frequency_accuracy also 1.0 due to globally unique actions), and uses inflated in-sample accuracies. For live Web, no valid claim for C-WEB-DYNAMICS or measurement-valid Web substrate: live_test 37 transitions/4 trajectories vs prereg 300/30, entropy inversion H(S'|S,A)=0.95 > H(S'|S)=0.27 (reduction -250%), and invalid bootstrap (p=0 even on random null_control). Maximum justified: Positive control passes mechanical capture in synthetic domain with noted non-discriminating baseline; live test is feasibility pilot showing HTTP fetch can follow links but insufficient representation and sample to test P(S'|S,A) structure; C-MEAS-VALID for Web not established, C-WEB-DYNAMICS remains unknown.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-33528829431/request.json",
+    "research/experiments/EXP-PHYSICS-33528829431/spec.json: claim_ids C-MEAS-VALID, C-WEB-DYNAMICS; baselines; decision_rule; measurement_validity",
+    "research/experiments/EXP-PHYSICS-33528829431/prereg.md: Sections 2,5,7,8,9,11,12,13",
+    "research/experiments/EXP-PHYSICS-33528829431/freeze.json",
+    "research/experiments/EXP-PHYSICS-33528829431/result.json: metrics.positive_control, metrics.null_control, metrics.live_test, bootstrap, controls, observations, validity_notes, unresolved",
+    "research/experiments/EXP-PHYSICS-33528829431/report.md: Tables 2,3, Section 6 live_test 4/30 trajectories",
+    "research/experiments/EXP-PHYSICS-33528829431/provenance.json: data_hashes live_test_transitions a4ff..., execution_parameters live_test n_trajectories_target 30",
+    "research/physics/substrate.py: SyntheticPositiveControl 71-147, LiveWebCollector 157-288, NullControlCollector 295-353, BaselineComputers 360-485, EntropyMetrics 492-569, ValidityGates 576-654",
+    "research/physics/run_experiment.py: run_positive_control 45-84, run_live_test 101-154, compute_experiment_metrics 157-200, compute_bootstrap_and_pvalues 203-254, determine_verdict 285-311"
+  ],
+  "unresolved": [
+    "Does action-conditioned structure exist on live Web when state includes full DOM/accessibility tree and action is semantic selector (vs coarse URL+hash and link_idx)? Recomputed live entropy inversion suggests current hash loses necessary information; richer representation may reveal structure but not tested.",
+    "What is bootstrap/permutation null power against true Web dynamics? Current invalid bootstrap cannot be used to bound false positive rate; proper trajectory-grouped permutation test needed.",
+    "Would positive control discriminate (S,A) vs A if action keys overlap across states? Current synthetic design with unique actions cannot test identifiability of conditioning on state.",
+    "Can live collector achieve prereg sample size (30 trajectories, 300 transitions) on sites with dense navigation without full browser execution (JS, auth)? Current link-poor sites terminated early; unknown if HTTP fetch alone can sustain trajectories.",
+    "Are derived entropy metrics (H(S'|S,A) vs H(S'|S) via conditional_entropy grouping by action vs state) comparable given grouping mismatch and tiny state space? -250% reduction not interpretable.",
+    "Provenance raw transition artifacts not persisted as files (artifacts sha256 null in result.json), only hashes in provenance.json; recomputation of live_test requires raw evidence file to verify independently."
+  ]
+}
