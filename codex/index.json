@@ -1,6 +1,31 @@
 {
   "schema_version": 1,
   "experiments": {
+    "EXP-FRONTIER-33528827909": {
+      "lane": "frontier",
+      "request_id": "ff897300229012128e3b24d1",
+      "created_at": "2026-09-01T15:56:43.831314+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Does the predictive advantage of action-conditioned rules over action-independent memory vary across transition regimes, and does this variation reveal dynamical heterogeneity in Web-like state transitions?",
+      "audit_status": "MEASUREMENT_INVALID",
+      "decision": "MEASUREMENT_INVALID",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/frontier",
+      "hashes": {
+        "request.json": "dbadd1fc6298fab81a2ccd08632e720f5621ae6ab56fba31d3a732c2bf21a60e",
+        "spec.json": "f2cd3e670cd3aaa45123d90417ff444eb3d1bb47f1be78030c9f822cf140cc4d",
+        "prereg.md": "fe78533f5956508f6293aa84105297b90ec59f5b1f069a17ff18a315fc22f417",
+        "freeze.json": "968d5ac119348bdc79d7ef697360696ff0fdc19bcb6f36811c7d46df695e6df3",
+        "result.json": "292f01b99fb5950baa99f250cefdf79e827c09bcb483f16e6265f7ac98dedd33",
+        "report.md": "b7db8cd0bc63f6ddd97bada146998f8e2035e45dd13c273de8eb00a2329f3ed0",
+        "provenance.json": "2e1379a7a6f0258cc2f129e6955071f77d3a088846238a0a66d4465dc2684848",
+        "audit.json": "544bd42991860fc5da007c754112dc4737e108534184919974d1585ef8c33c2a",
+        "verdict.json": "138b4554e7a820e934c16036f5a8d4f8d5d9fdf48b42a8646d2e094d9e131a83",
+        "handoff.json": "dda6bc7cd9a06aeeb68ff1ee5c67d7609d1ecd0e46d494c87db8daebda216563"
+      }
+    },
     "EXP-GRAPH-33528827169": {
       "lane": "graph",
       "request_id": "3e0d81e7790f2f2b7bd8665e",

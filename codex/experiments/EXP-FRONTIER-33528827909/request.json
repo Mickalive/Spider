@@ -1,0 +1,13 @@
+{
+  "base_sha": "ef1d4178d6a1c0ec2d4b001d3f2d4ba48f2a12c0",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-01T15:56:43.831314+00:00",
+  "experiment_id": "EXP-FRONTIER-33528827909",
+  "lane": "frontier",
+  "origin_github_run_id": "33528827909",
+  "reason": "pulse",
+  "request_hash": "664e5184be53cf22ececb9b1446b37c18503a4afc46de6686dbd1011fe2b162a",
+  "request_id": "ff897300229012128e3b24d1",
+  "schema_version": 1
+}
