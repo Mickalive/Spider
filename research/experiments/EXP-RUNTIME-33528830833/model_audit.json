@@ -1,10 +1,10 @@
 {
-  "status": "failure",
-  "model": "opencode/hy3-free",
-  "attempt": 1,
-  "exit_code": 1,
-  "category": "substantive",
-  "github_run_id": "33700881888",
+  "status": "success",
+  "model": "opencode/muse-spark-1.2-contributor-free",
+  "attempt": 2,
+  "exit_code": 0,
+  "category": "ok",
+  "github_run_id": "33701283333",
   "github_run_attempt": "1",
-  "recorded_at": "2026-09-03T00:46:06.535743+00:00"
+  "recorded_at": "2026-09-03T00:54:22.479491+00:00"
 }
