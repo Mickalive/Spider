@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "events_by_claim": {
+    "C-PARAM-INHERIT": [
+      {
+        "experiment_id": "EXP-GRAPH-33528827169",
+        "lane": "graph",
+        "decision": "PARAM-INHERIT-SUBSTRATE-BROKEN",
+        "claim_id": "C-PARAM-INHERIT",
+        "status": "EXPERIMENTAL",
+        "reason": "Frozen decision rule requires ALL 11 conditions for VALID; B_LITERAL_UNSEEN failed (literal mechanism returned EXECUTABLE for unseen id=2, expected UNKNOWN). Per frozen rule this yields BROKEN verdict. Narrow supported ceiling: parameterized mechanism pipeline (resolve \u2192 _bind \u2192 execute \u2192 verify) validated end-to-end on 5 unseen integer IDs (2-6) via jsonplaceholder substrate, but literal mechanisms universally match their intent due to presence-based slot checking (kernel.py L104-106, required_slots empty \u2192 vacuous pass). Claim cannot advance to VALIDATED until literal discrimination is resolved or spec is amended. Precondition discrimination untested, mechanism competition untested, no LLM distillation tested, no DOM/auth/session/drift. Audit claim ceiling: substrate-gated partial validation only."
+      }
+    ]
+  }
+}

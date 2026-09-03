@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-33528827169",
+  "lane": "graph",
+  "decision": "PARAM-INHERIT-SUBSTRATE-BROKEN",
+  "claim_updates": [
+    {
+      "claim_id": "C-PARAM-INHERIT",
+      "status": "EXPERIMENTAL",
+      "reason": "Frozen decision rule requires ALL 11 conditions for VALID; B_LITERAL_UNSEEN failed (literal mechanism returned EXECUTABLE for unseen id=2, expected UNKNOWN). Per frozen rule this yields BROKEN verdict. Narrow supported ceiling: parameterized mechanism pipeline (resolve → _bind → execute → verify) validated end-to-end on 5 unseen integer IDs (2-6) via jsonplaceholder substrate, but literal mechanisms universally match their intent due to presence-based slot checking (kernel.py L104-106, required_slots empty → vacuous pass). Claim cannot advance to VALIDATED until literal discrimination is resolved or spec is amended. Precondition discrimination untested, mechanism competition untested, no LLM distillation tested, no DOM/auth/session/drift. Audit claim ceiling: substrate-gated partial validation only."
+    }
+  ],
+  "product_action": "DO_NOT_PROMOTE — literal mechanism universal matching is a false-accept risk for product; literal mechanisms in a shared registry would match any intent-aligned request regardless of resource identity. Product must not consume parameterized mechanisms until literal discrimination is resolved. The verify measurement (hardcoded status=200) must also be repaired before product reliance.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Should literal mechanisms carry a fixed_resource constraint (code fix: add value-based matching for mechanisms with zero parameter_slots), or is universal matching the intended design (spec fix: amend decision rule to exclude literal-unseen from the frozen gate), and does the literal universal match create false accepts when literal and parameterized mechanisms coexist in the same registry?",
+  "reason": "The frozen decision rule is unambiguous: ALL 11 conditions must pass for PARAM-INHERIT-SUBSTRATE-VALID. B_LITERAL_UNSEEN fails because the kernel's required_slots check is presence-based, not value-based. A literal mechanism with zero required_slots vacuously passes the slot check and matches any params for its intent — this is a kernel design behavior confirmed by independent audit recompute of kernel.py L104-106. The parameterized pipeline itself is fully validated on 5 unseen resources (resolve → _bind → HTTP 200 → verify all passed). The auditor also identified a high-severity measurement validity issue: verify_postconditions() hardcodes observed_state={'status':200} regardless of actual HTTP status, making verify insensitive to execution failures (not outcome-determinative this run since all HTTP returned 200, but invalidates verify as a strong control for future experiments). The frozen decision rule must be honored; the verdict is BROKEN. The next agent must resolve the literal discrimination question before claiming C-PARAM-INHERIT is validated.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-33528827169/spec.json#/decision_rule",
+    "research/experiments/EXP-GRAPH-33528827169/spec.json#/falsifier",
+    "research/experiments/EXP-GRAPH-33528827169/result.json#/controls/B_LITERAL_UNSEEN",
+    "research/experiments/EXP-GRAPH-33528827169/raw_results.json#/conditions/2",
+    "research/experiments/EXP-GRAPH-33528827169/audit.json#/validity_findings/V_LITERAL_UNIVERSAL_MATCH",
+    "research/experiments/EXP-GRAPH-33528827169/audit.json#/validity_findings/V_VERIFY_HARDCODED_STATUS",
+    "research/experiments/EXP-GRAPH-33528827169/audit.json#/claim_ceiling",
+    "research/experiments/EXP-GRAPH-33528827169/audit.json#/baseline_findings/B_LITERAL_UNSEEN",
+    "src/spider/kernel.py:104-106",
+    "research/experiments/EXP-GRAPH-33528827169/provenance.json"
+  ]
+}
