@@ -1,198 +1,272 @@
-# EXP-PRODUCT-33741671686 — Preregistration
+# EXP-PRODUCT-33741671686 Preregistration
 
-## Experiment Identity
+## 1. Experiment Identity
 
-- **ID:** EXP-PRODUCT-33741671686
-- **Lane:** product
-- **Claim:** C-PARAM-INHERIT — "Mechanisms parameterize to unseen identifiers"
-- **Parent:** EXP-PRODUCT-33528829801 (SURVIVES at single-parameter synthetic POC level)
-- **Status at design:** EXPERIMENTAL (single-parameter POC survived; multi-parameter untested)
-- **Request hash:** d28509c479ff5e4daaa8a41130f06d312f6e1b0ec94d28a62d6cf353cae4b26e
+- **Experiment ID**: EXP-PRODUCT-33741671686
+- **Lane**: Product
+- **Claim**: C-PARAM-INHERIT (Mechanisms parameterize to unseen identifiers)
+- **Date**: 2026-09-03
+- **Status**: DESIGN — NOT YET FROZEN
 
-## Scientific Question
+## 2. Scientific Question
 
-Does parameter induction generalize to multi-parameter mechanisms with distinct slot naming across path, body, and headers fields?
+Does parameter induction generalize to multi-parameter mechanisms with multiple distinct varying fields (path, body, headers) and distinct slot naming, when training observations come from synthetic but structurally realistic multi-field mechanisms?
 
-## Background and Motivation
+## 3. Motivation
 
-### What the parent experiment (EXP-PRODUCT-33528829801) established
-
-- `distill_parameterized()` with `_extract_varying_values()` correctly induces one parameter slot for isomorphic action paths sharing common prefix/suffix (e.g., `/api/items/A`, `/api/items/B`, `/api/items/C` → `/api/items/${id}`)
-- Parameterized mechanism resolves to EXECUTABLE with correct `bound_action` for all 10 unseen single-char identifiers (10/10)
+Prior experiment EXP-PRODUCT-33528829801 established:
+- `distill_parameterized()` with `_extract_varying_values()` correctly induces one parameter slot for isomorphic action paths
+- Parameterized mechanism resolves to EXECUTABLE with correct bound_action for all 10 unseen single-char identifiers (10/10)
 - Literal mechanism replay fails on all unseen identifiers (0/10 EXECUTABLE)
-- Positive and null controls pass
+- Positive control passes (seen identifier resolves correctly)
+- Null control passes (mismatched preconditions abstain)
 
-### What the parent audit identified as the critical limitation
+The claim ceiling is narrow: single-parameter, single-field, common-prefix heuristic only. The audit identified multi-parameter collision as a required fix (kernel `_extract_varying_values()` hardcodes `param_name='id'` for every varying leaf, collapsing distinct logical parameters).
 
-The audit (V_MULTI_FIELD_COLLISION) found:
+The parent handoff explicitly identifies the next question: "Does parameter induction generalize to multi-parameter mechanisms (e.g., POST /api/${resource}/${id} with body {name:${title}}) with distinct slot naming?"
 
-> `_extract_varying_values()` hardcodes `param_name='id'` for every varying leaf. With >1 varying leaf (e.g., path and headers.Authorization both varying) the mechanism collapses distinct logical parameters into one slot `'id'` → `bound_action` forces `token == resource_id`. Requires distinct slot naming per path before claiming multi-parameter induction.
+This experiment tests multi-parameter induction on synthetic observations with three distinct varying fields: a path segment, a body value, and a header value. This is the natural next step because it challenges the same kernel mechanism on a materially harder pattern without requiring external infrastructure.
 
-This is the exact gate this experiment addresses.
+## 4. Hypotheses
 
-### What is NOT established
+### H1: Distinct Slot Induction
+Parameter induction identifies >= 3 distinct parameter slots (one per varying field: resource in path, title in body, token in header).
 
-- Whether distinct slot names can be induced from structural position (path vs body vs headers) when values are structurally identical
-- Whether `_bind()` correctly substitutes multiple distinct slots in a single resolution
-- Whether slot completeness enforcement works for multi-slot mechanisms
-- Whether the heuristic approach generalizes beyond prefix/suffix variation
+### H2: Unseen Resolution
+Unseen parameter combinations resolve to EXECUTABLE with >= 90% rate (9/10 unseen combinations).
 
-## Hypothesis
+### H3: Binding Accuracy
+All resolved bound_actions have correct value substitutions in the correct slots (100% accuracy).
 
-Extending `_extract_varying_values()` to produce distinct parameter slot names per varying field enables multi-parameter inheritance.
+### H4: Single-Slot Baseline Failure
+A single-slot mechanism (all varying fields collapsed to one param_name='id') fails on all unseen multi-parameter combinations.
 
-Concretely, given training observations:
+### H5: Positive Control
+Resolution with all seen training identifiers returns EXECUTABLE with correct bound_action.
 
-| resource_id | path | body.title | headers.Authorization |
-|---|---|---|---|
-| A | `/api/items/A` | `Title A` | `Bearer token-A` |
-| B | `/api/items/B` | `Title B` | `Bearer token-B` |
-| C | `/api/items/C` | `Title C` | `Bearer token-C` |
+### H6: Null Control
+Resolution with mismatched preconditions (authenticated=False) returns UNKNOWN (abstains).
 
-The extended `distill_parameterized()` will produce:
+## 5. Data Generation
 
+### 5.1 Synthetic Observations
+
+All observations share:
+- **Intent**: "create-resource"
+- **Preconditions**: `{"authenticated": true, "role": "admin"}`
+- **Postconditions**: `{"created": true}`
+
+Each observation differs in three fields:
+- **Path**: `/api/${resource}/${id}` (resource and id segments vary)
+- **Body**: `{"title": "${title}", "content": "fixed-content"}` (title varies)
+- **Headers**: `{"Authorization": "Bearer ${token}"}` (token varies)
+
+### 5.2 Training Set (3 observations)
+
+| # | Resource | ID | Title | Token | Expected Slots |
+|---|----------|-----|-------|-------|----------------|
+| T1 | books | 101 | Alpha | tok-alpha | resource, id, title, token |
+| T2 | users | 202 | Beta | tok-beta | resource, id, title, token |
+| T3 | orders | 303 | Gamma | tok-gamma | resource, id, title, token |
+
+### 5.3 Test Set (10 unseen combinations)
+
+Each test combination uses resource/id/title/token values never jointly observed in training:
+
+| # | Resource | ID | Title | Token |
+|---|----------|-----|-------|-------|
+| U1 | products | 404 | Delta | tok-delta |
+| U2 | invoices | 505 | Epsilon | tok-epsilon |
+| U3 | articles | 606 | Zeta | tok-zeta |
+| U4 | comments | 707 | Eta | tok-eta |
+| U5 | reviews | 808 | Theta | tok-theta |
+| U6 | tasks | 909 | Iota | tok-iota |
+| U7 | events | 111 | Kappa | tok-kappa |
+| U8 | messages | 222 | Lambda | tok-lambda |
+| U9 | sessions | 333 | Mu | tok-mu |
+| U10 | profiles | 444 | Nu | tok-nu |
+
+Note: Individual values may overlap with training (e.g., "products" is new but "101" is reused as a number), but no full combination was seen in training.
+
+### 5.4 Induction Method
+
+The kernel's `distill_parameterized()` method receives the 3 training observations and must:
+1. Compare action templates across observations
+2. Identify which fields vary and which are constant
+3. For each varying field, determine the longest common prefix/suffix
+4. Assign distinct parameter slot names per varying field location
+5. Produce an action template with `${slot_name}` placeholders
+
+Expected induced template (conceptual):
 ```json
 {
-  "parameter_slots": ["resource_id", "title", "token"],
-  "action_template": {
-    "method": "POST",
-    "path": "/api/items/${resource_id}",
-    "body": {"title": "${title}"},
-    "headers": {"Authorization": "Bearer ${token}"}
-  }
+  "method": "POST",
+  "path": "/api/${resource}/${id}",
+  "body": {"title": "${title}", "content": "fixed-content"},
+  "headers": {"Authorization": "Bearer ${token}"}
 }
 ```
+With parameter_slots: ["resource", "id", "title", "token"]
 
-And this mechanism will resolve EXECUTABLE for unseen combinations where all three fields vary simultaneously, with correct `bound_action` for each slot independently.
+### 5.5 Sample Size
 
-## Kernel Code Path Being Tested
+- 3 training observations (minimum for cross-observation comparison)
+- 10 test combinations (sufficient for clear binary result at >= 90% threshold)
+- Total: 13 observations
 
-### Current state (frozen kernel.py)
+## 6. Measures
 
-`_extract_varying_values()` does not exist in the current `src/spider/kernel.py`. The parent experiment added it during execution. The current kernel's `distill()` method creates only literal mechanisms with no parameter induction.
+### 6.1 Primary Metric: Distinct Slot Count
+Count of distinct parameter slots identified by induction. Must be >= 3.
 
-### Required extension (within Product lane code roots: src/spider/)
+### 6.2 Primary Metric: Unseen Resolution Rate
+Fraction of 10 unseen combinations resolving to EXECUTABLE. Threshold: >= 90%.
 
-1. Add `_extract_varying_values(observations: list[Observation]) -> dict` that:
-   - Collects all values at each structural position across observations
-   - Identifies positions where values differ across observations
-   - Assigns DISTINCT parameter slot names based on structural path (e.g., `resource_id` for path leaf, `title` for body.title, `token` for headers.Authorization)
-   - Returns a mapping from structural position to slot name
+### 6.3 Primary Metric: Binding Accuracy
+Fraction of resolved combinations where bound_action has correct value substitution in correct slot. Threshold: 100%.
 
-2. Add `distill_parameterized(observations, mechanism_id) -> Mechanism` that:
-   - Calls `_extract_varying_values()` to identify varying fields
-   - Creates an `action_template` with `${slot_name}` placeholders at varying positions
-   - Sets `parameter_slots` to the list of distinct slot names
-   - Sets `confidence=0.9` (matching parent experiment convention)
+### 6.4 Secondary Metric: Single-Slot Baseline Failure Rate
+Fraction of unseen combinations where a single-slot mechanism fails. Expected: 100%.
 
-### What is NOT changed
+### 6.5 Control Metrics
+- Positive control: EXECUTABLE for seen combination
+- Null control: UNKNOWN for mismatched preconditions
 
-- `resolve()` — unchanged; its `required_slots` check already works for arbitrary slot lists
-- `_bind()` — unchanged; its recursive dict/list/string substitution already handles multiple `${...}` patterns
-- `_template_slots()` — unchanged; already finds all `${...}` patterns in a template
-- `Mechanism` model — unchanged; `parameter_slots: list[str]` already supports multiple slots
+## 7. Null Models
 
-The experiment tests whether the INDUCTION (naming) is the binding constraint, not whether the EXECUTION pipeline can handle multiple slots.
+### 7.1 Single-Slot Baseline (B3)
+Mechanism induced with all varying fields collapsed to one param_name='id' slot. This tests whether the previous experiment's single-slot limitation causes failure on multi-parameter data.
 
-## Experimental Design
+### 7.2 Literal Baseline (B2)
+Mechanism with no parameter slots (literal action template). Cannot bind any new identifiers.
 
-### Training Observations
+### 7.3 Cold Baseline (B1)
+No memory; full task re-exploration cost.
 
-3 observations for intent `"create-item"` with state `{"authenticated": true, "role": "admin"}`:
+## 8. Statistical Tests
 
-| Obs | action.path | action.body.title | action.headers.Authorization |
-|---|---|---|---|
-| train-A | `/api/items/A` | `Title A` | `Bearer token-A` |
-| train-B | `/api/items/B` | `Title B` | `Bearer token-B` |
-| train-C | `/api/items/C` | `Title C` | `Bearer token-C` |
+This experiment is deterministic and synthetic. All metrics are computed exactly (no sampling uncertainty). The decision rule is threshold-based, not p-value-based.
 
-All observations share: `method=POST`, `state={authenticated: true, role: admin}`, `next_state={created: true}`, `success=True`.
+- Distinct slot count: integer >= 3
+- Unseen resolution rate: exact fraction >= 0.9
+- Binding accuracy: exact fraction = 1.0
+- Literal failure rate: exact fraction = 1.0
 
-### Test Conditions
+## 9. Controls
 
-| # | Condition | Description | Params | Expected Resolution | Expected bound_action |
-|---|---|---|---|---|---|
-| 1 | cold | No mechanism registered | {resource_id: X, title: Title X, token: token-X} | UNKNOWN | — |
-| 2 | positive-control | Multi-slot on seen resource A | {resource_id: A, title: Title A, token: token-A} | EXECUTABLE | path=/api/items/A, body.title=Title A, headers.Authorization=Bearer token-A |
-| 3 | unseen-X | Multi-slot on unseen combination X | {resource_id: X, title: Title X, token: token-X} | EXECUTABLE | path=/api/items/X, body.title=Title X, headers.Authorization=Bearer token-X |
-| 4 | unseen-Y | Multi-slot on unseen combination Y | {resource_id: Y, title: Title Y, token: token-Y} | EXECUTABLE | path=/api/items/Y, body.title=Title Y, headers.Authorization=Bearer token-Y |
-| 5 | unseen-Z | Multi-slot on unseen combination Z | {resource_id: Z, title: Title Z, token: token-Z} | EXECUTABLE | path=/api/items/Z, body.title=Title Z, headers.Authorization=Bearer token-Z |
-| 6 | partial-missing-title | Multi-slot with title missing | {resource_id: X, token: token-X} | UNKNOWN | — |
-| 7 | partial-missing-token | Multi-slot with token missing | {resource_id: X, title: Title X} | UNKNOWN | — |
-| 8 | null-control | Multi-slot with wrong preconditions | {resource_id: A, title: Title A, token: token-A}, context.authenticated=False | UNKNOWN | — |
-| 9 | single-slot-baseline | Single-slot mechanism on multi-param data | {id: X} | EXECUTABLE | path=/api/items/X, body=literal (Title A), headers=literal (Bearer token-A) |
-| 10 | literal-replay | Literal mechanism on unseen | {} | EXECUTABLE | path=/api/items/A (training resource), body=literal, headers=literal |
+### 9.1 Positive Control
+- Input: Training observation T1 identifiers (resource=A, title=Alpha, token=tok-alpha)
+- Expected: EXECUTABLE with correct bound_action
+- Verifies: Induction did not break seen-combination resolution
 
-### Measurements (for each EXECUTABLE resolution)
+### 9.2 Null Control
+- Input: Mismatched preconditions (authenticated=False)
+- Expected: UNKNOWN (abstains)
+- Verifies: Applicability guards still enforce preconditions
 
-1. `bound_action.path` correctness (exact match)
-2. `bound_action.body.title` correctness (exact match)
-3. `bound_action.headers.Authorization` correctness (exact match)
-4. `parameter_slots` count and names (must be >= 3 distinct names)
-5. Resolution reason string (for debugging)
+### 9.3 Single-Slot Baseline Control
+- Input: Test combinations with single-slot mechanism
+- Expected: Fails on all unseen combinations (multiple parameters cannot be expressed in one slot)
+- Verifies: Multi-parameter induction is necessary, not merely beneficial
 
-### Execution Order
+## 10. Validity Threats
 
-Conditions executed in order 1→10. Each condition uses a fresh registry (isolated). No cross-condition contamination.
+### 10.1 Synthetic Data
+All observations are perfectly structured. Real web observations have noise, varying schemas, and multi-step actions. The parameter induction heuristic may fail on noisier inputs. **Mitigation**: This is a controlled kernel-level test. If the mechanism cannot handle clean multi-parameter data, it cannot handle noisy data.
 
-## Decision Rule
+### 10.2 Simple Parameter Pattern
+Parameters are in distinct fields (path, body, header). Real mechanisms may have parameters in the same field (e.g., two path segments) or nested structures. **Mitigation**: Distinct-field parameters are the minimal multi-parameter case. Same-field parameters are a further generalization for future work.
 
-**C-PARAM-INHERIT-ADVANCES** if ALL of:
-- Condition 1 (cold) → UNKNOWN ✓
-- Condition 2 (positive-control) → EXECUTABLE with all 3 fields correct ✓
-- Conditions 3-5 (unseen-X/Y/Z) → EXECUTABLE with all 3 fields correct ✓
-- Condition 6 (partial-missing-title) → UNKNOWN ✓
-- Condition 7 (partial-missing-token) → UNKNOWN ✓
-- Condition 8 (null-control) → UNKNOWN ✓
-- `parameter_slots` has >= 3 distinct names ✓
+### 10.3 Small Sample
+10 unseen combinations is sufficient for a clear binary result but not for confidence intervals. **Mitigation**: Decision threshold is binary (>= 90%), not a point estimate.
 
-**C-PARAM-INHERIT-BLOCKED** otherwise. The report must identify the exact failing condition and whether the failure is in induction (slot naming), binding (slot substitution), or enforcement (slot completeness).
+### 10.4 Kernel Implementation Risk
+The kernel's `distill_parameterized()` may not currently support multi-parameter induction. If the implementation is missing or incomplete, the experiment will produce a clear negative result (induction fails), which is still informative. **Mitigation**: The experiment measures what exists, not what was promised.
 
-## Controls Summary
+### 10.5 Tautological Construction
+Like the previous experiment, training observations are synthetic and the induction heuristic is designed for prefix/suffix patterns. A positive result demonstrates the mechanism works on its designed input class, not that it generalizes to arbitrary patterns. **Mitigation**: Ceiling is explicitly limited to "synthetic multi-parameter common-prefix" level.
 
-| Control | Condition # | Purpose | Type |
-|---|---|---|---|
-| Cold (no mechanism) | 1 | Kernel abstains when no knowledge exists | Null |
-| Positive control (seen) | 2 | Extended mechanism works on training data | Positive |
-| Unseen full-combination (×3) | 3-5 | Core test: multi-parameter inheritance | Experimental |
-| Partial-missing (×2) | 6-7 | Slot completeness enforcement for multi-slot | Null |
-| Null control (guard) | 8 | Precondition guards work with multi-slot | Null |
-| Single-slot baseline | 9 | Demonstrates parent limitation: single-slot can't parameterize body/headers | Baseline |
-| Literal replay | 10 | Literal mechanisms are universal catch-all but incorrect for unseen | Baseline |
+## 11. Decision Rules
 
-## Validity Threats
+### 11.1 SURVIVES
+If ALL of:
+1. Parameter induction identifies >= 3 distinct parameter slots
+2. Unseen resolution rate >= 90% (9/10)
+3. Binding accuracy = 100% (all resolved bound_actions correct)
+4. Single-slot baseline fails on all unseen combinations (literal_fail_rate = 100%)
+5. Positive control passes (EXECUTABLE)
+6. Null control passes (UNKNOWN)
 
-1. **Synthetic data with correlated variation:** All three varying fields (path, title, token) use the same base value (resource_id). A clever algorithm could detect this correlation and infer a single underlying parameter. **Mitigation:** The experiment tests whether the algorithm produces DISTINCT slots regardless of value correlation. The key is structural position, not value independence. If the algorithm collapses correlated-but-structurally-distinct fields, that IS the failure mode we want to detect.
+### 11.2 FALSIFIED
+If ANY of:
+1. Parameter induction identifies < 3 distinct slots
+2. Unseen resolution rate < 90%
+3. Binding accuracy < 100%
+4. Single-slot baseline succeeds on any unseen combination
+5. Positive control fails
+6. Null control fails
 
-2. **is_id_like regex match on all values:** The values A/B/C/X/Y/Z and Title A/Title X and token-A/token-X all match `^[A-Za-z0-9_\\-]+$`. The algorithm cannot distinguish them by value properties. **Mitigation:** This is intentional — it forces the algorithm to use structural position (path vs body vs headers) for naming, which is the actual capability under test.
+### 11.3 MEASUREMENT_INVALID
+If:
+1. Kernel implementation is missing or produces errors
+2. Induction produces degenerate output (e.g., no slots at all)
+3. Infrastructure failure prevents execution
 
-3. **Single code change scope:** Only `_extract_varying_values()` and `distill_parameterized()` are modified. If the failure is in `resolve()`, `_bind()`, or `_template_slots()`, those are pre-existing bugs, not induction failures. **Mitigation:** The experiment instrument separately reports induction results (slot names produced) vs execution results (resolution + binding), so failures can be attributed.
+## 12. Expected Outcomes
 
-4. **Small N:** 3 training observations, 3 unseen test combinations. **Mitigation:** Sufficient for a mechanism gate. Statistical power is not the goal — correct slot naming and binding on a representative multi-parameter pattern is.
+### 12.1 Positive Result (SURVIVES)
+- Multi-parameter induction is viable at the kernel level
+- C-PARAM-INHERIT claim ceiling extends from single-parameter to multi-parameter
+- Product can support mechanisms with multiple independent parameter slots
+- Next step: noisy/real-browser observation testing
 
-5. **Single-value-type variation:** All varying values are short alphanumeric strings. URL paths, timestamps, JSON, or arbitrary strings are not tested. **Mitigation:** Accepted for this gate. Non-identifier values are a separate experiment (identified as unknown in parent handoff).
+### 12.2 Negative Result (FALSIFIED)
+- Kernel's prefix/suffix heuristic cannot handle multi-parameter patterns
+- C-PARAM-INHERIT remains limited to single-field mechanisms
+- Kernel design must be reconsidered before further product investment
+- Specific failure mode (slot collision, naming failure, binding error) identifies the required fix
 
-6. **No real-browser observations:** All observations are synthetic. The parent handoff identifies real-browser testing as a future gate. **Mitigation:** This experiment stays within the synthetic-data dependency. Real-browser testing requires the runtime substrate (not yet available for multi-parameter observations).
+### 12.3 Invalid Result (MEASUREMENT_INVALID)
+- Kernel infrastructure needs repair before this question can be answered
+- Not scientific evidence for or against
 
-## Consequences
+## 13. Analysis Plan
 
-### If C-PARAM-INHERIT-ADVANCES
+1. **Observation Generation**: Create 3 training and 10 test observations as specified in §5.2-5.3
+2. **Kernel Extension**: Extend `distill_parameterized()` in `src/spider/kernel.py` to support multi-parameter induction with distinct slot naming
+3. **Induction**: Run `distill_parameterized()` on training observations
+4. **Slot Audit**: Count distinct parameter slots; verify >= 3
+5. **Resolution Test**: For each of 10 unseen combinations, call `kernel.resolve()` with the 4 parameter values
+6. **Binding Audit**: For each resolved combination, verify bound_action has correct substitutions
+7. **Baseline Tests**: Run B1 (cold), B2 (literal), B3 (single-slot) baselines
+8. **Controls**: Run positive and null controls
+9. **Decision**: Apply frozen decision rule
 
-- Multi-parameter inheritance is viable at the kernel level
-- C-PARAM-INHERIT claim ceiling raises from single-parameter to multi-parameter synthetic POC
-- Product lane can proceed to test parameterized mechanisms on real-browser observations with multiple varying fields
-- Next experiment: test parameterized mechanisms with non-correlated variation (different value types per field) or with noisy/real-browser observations
-- Promotion readiness increases but remains gated on real-browser and cost measurements
+## 14. Analysis Code
 
-### If C-PARAM-INHERIT-BLOCKED
+Analysis will be implemented in Python using:
+- The existing `spider` kernel module (`src/spider/`)
+- Standard library only for test execution
+- JSON for raw evidence storage
 
-- The `_extract_varying_values()` heuristic approach cannot produce distinct slot names from structural position alone
-- C-PARAM-INHERIT is blocked at single-parameter until a fundamentally different induction approach is found
-- Product architecture must reconsider: either (a) invest in LLM-based slot naming, (b) require human-authored parameter annotations, or (c) limit parameterized inheritance to single-parameter mechanisms
-- The single-parameter POC result remains valid but the generalization path is closed at this level
+Code will be committed to `research/experiments/EXP-PRODUCT-33741671686/` before execution.
 
-## Preregistration Timestamp
+## 15. Pre-registered Expectations
 
-This design was created during the DESIGN phase of EXP-PRODUCT-33741671686.
-No outcome data has been inspected. All measurements are deferred to EXECUTE.
-The design follows the parent handoff's recommended action and preserves all inherited established/rejected/unknown/do_not_assume distinctions.
+From prior experiment:
+- Single-parameter induction works (10/10 unseen resolution, 100% binding accuracy)
+- Kernel uses longest common prefix/suffix heuristic with `is_id_like` regex
+- Kernel hardcodes `param_name='id'` for every varying leaf
+
+Expected challenges for multi-parameter:
+- Distinct slot naming requires tracking which field location varies, not just that it varies
+- Body and header parameters may require different slot naming conventions than path parameters
+- The `is_id_like` regex may reject non-identifier values (titles, tokens with special chars)
+
+## 16. Deviation Policy
+
+Any deviation from this preregistration will be labeled EXPLORATORY and cannot support confirmatory claims. A new confirmatory claim requires a new preregistration.
+
+## 17. Freeze Statement
+
+This preregistration is frozen BEFORE any analysis code is written or any outcome data is inspected. The experiment will be executed exactly as described here.
