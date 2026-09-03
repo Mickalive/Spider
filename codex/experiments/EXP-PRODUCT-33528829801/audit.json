@@ -1,0 +1,211 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-33528829801",
+  "lane": "product",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [
+    "No fix required to sustain the narrow synthetic POC verdict (10/10 EXECUTABLE, binding_accuracy 1.0, fn_rate 0.0, literal 100% fail, controls pass) as recomputed from raw_evidence.json. Fixes listed below are required to justify any broader product ceiling beyond this POC.",
+    "Fix provenance inconsistency: result.json artifacts list raw_evidence.json (sha256 aa68025015783fac40e734363825d12e8f5d7b48de7c23535b51d6d3d90079d5) but an unreferenced raw_results.json exists with divergent B1 ops (5.0 vs 4.0), headers in action_template (Bearer token-${id}) and same 10/10 success. Declare or remove raw_results.json to prevent artifact ambiguity.",
+    "Fix multi-field parameterization collision: _extract_varying_values() hardcodes param_name='id' for every varying leaf. With >1 varying leaf (e.g., path and headers.Authorization both varying as in raw_results.json) the mechanism collapses distinct logical parameters into one slot 'id' -> bound_action forces token == resource_id. Requires distinct slot naming per path before claiming multi-parameter induction.",
+    "Fix empty-identifier edge: kernel.resolve() with params={'id':''} returns EXECUTABLE bound_action {'path':'/api/items/'} with confidence 0.9. Add guard rejecting empty/whitespace or non-id-like bindings, or explicitly define expected behavior.",
+    "Future promotion requires discriminating baselines: B1 and B3 are not measured systems but hardcoded simulated operations (B1=4 ops always succeeds, B3 matched_resource='A' always fails) and B2 literal confidence is hardcoded 0.5 < min_confidence 0.8. Replace with measured nulls (e.g., retrieval that actually replays bound_action, cold cost measured on real agent) for next gate."
+  ],
+  "validity_findings": [
+    {
+      "finding": "Measurement transaction valid for frozen decision rule at synthetic POC scope",
+      "severity": "info",
+      "detail": "Recomputed from raw_evidence.json: unseen_resolution_rate 10/10=1.0, binding_accuracy 10/10=1.0, parameter_induction_false_negative_rate 0/1=0.0, b2_literal_fail_rate 10/10=1.0, positive_control EXECUTABLE, null_control UNKNOWN. All four spec decision_rule conditions (>=90% unseen, 100% binding, 0% literal success, fn<=0.2) satisfied exactly as producer reported. Kernel distill_parameterized correctly extracts common prefix '/api/items/' via _extract_varying_values and binds via _bind('${id}') substitution.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-33528829801/raw_evidence.json -> distillation.action_template=/api/items/${id}, parameter_slots=[id], resolution_results.summary, controls, parameter_induction_audit"
+    },
+    {
+      "finding": "Synthetic data severely limits external validity",
+      "severity": "high",
+      "detail": "All 13 observations synthetic, identical intent='delete-item', identical preconditions {authenticated:true, role:owner} and postconditions {exists:false}. Only varying dimension is single-char resource_id A-M. No browser, network, LLM, noise, timing, or multi-step action. Producer validity_notes correctly discloses this, but product consequence must not be read as real-world parameterization.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-33528829801/spec.json -> measurement_validity, prereg.md -> What This Experiment Does NOT Test, result.json -> validity_notes[0], provenance.json -> datasets_and_fixtures.all_synthetic=true"
+    },
+    {
+      "finding": "Single-parameter single-field pattern only",
+      "severity": "high",
+      "detail": "Tested pattern is exactly one varying leaf (path) with common prefix extraction. is_id_like regex ^[A-Za-z0-9_\\-]+$ rejects spaces/slashes/punctuation so heuristic returns None on realistic varying values. Multi-parameter, nested paths, multiple varying fields, non-identifier strings, timestamps, URLs untested. Reported true_param_count=1 makes false_negative_rate binary (0 or 1).",
+      "evidence_ref": "src/spider/kernel.py -> _extract_varying_values (prefix/suffix, is_id_like, param_name='id'), raw_evidence.json -> distillation.parameter_slots=['id']"
+    },
+    {
+      "finding": "Small isomorphic sample inflates apparent certainty",
+      "severity": "medium",
+      "detail": "n=10 unseen identifiers D-M are isomorphic single letters, same distribution as training A-C, no adversarial/special-char/long/empty cases. 10/10 success yields Wilson 95% interval [0.72,1.0], not 1.0 point estimate. Procedure prereg step 5 repeats for 10 different unseen identifiers - satisfied but insufficient for generalization claim.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-33528829801/raw_evidence.json -> resolution_results.unseen[*].resource_id, provenance.json -> unseen_resources=[D..M]"
+    },
+    {
+      "finding": "Tautological construction: mechanism and data co-designed to match heuristic",
+      "severity": "medium",
+      "detail": "Experiment adds distill_parameterized() implementing longest-common-prefix/suffix heuristic and tests it on data whose variation is exactly a prefix-suffix split. Success demonstrates kernel correctly executes its own template logic, not that parameter induction discovers parameters in natural observations. Prereg anticipates this as POC, but it is not independent evidence of learnability.",
+      "evidence_ref": "src/spider/kernel.py -> distill_parameterized, spec.json -> hypothesis, prereg.md -> Background and Motivation"
+    },
+    {
+      "finding": "Confidence threshold hardcoded, not learned",
+      "severity": "medium",
+      "detail": "Parameterized confidence 0.9 and literal confidence 0.5 are constants in kernel.py (distill returns 0.5, distill_parameterized returns 0.9). min_confidence=0.8 guarantees parameterized EXECUTABLE and literal EXPLORE without empirical calibration. Null control passes because _matches fails on authenticated flag, not because confidence discriminates.",
+      "evidence_ref": "src/spider/kernel.py -> distill (confidence=0.5), distill_parameterized (confidence=0.9), SpiderKernel.__init__ (min_confidence=0.8), src/spider/models.py -> Mechanism.confidence"
+    },
+    {
+      "finding": "Cost comparison simulated, not measured end-to-end economics",
+      "severity": "medium",
+      "detail": "B1 cold 4 ops, parameterized 1 op, cost_ratio 0.25, resolve_time ~76us are synthetic counters/timers on pure dict ops, not model calls, browser work, retrieval, verification, or repair. Lane charter product mission requires end-to-end economics. Producer correctly notes 'No model calls...' in validity_notes[5] but report.md cost table invites over-interpretation as 4x saving.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-33528829801/run_experiment.py -> baseline_cold_exploration_cost (simulated_steps=4), result.json -> metrics.cost_ratio_vs_cold, metrics.avg_parameterized_resolve_time_seconds"
+    },
+    {
+      "finding": "No split leakage but also no holdout challenge",
+      "severity": "low",
+      "detail": "Training A,B,C and unseen D-M are disjoint identifiers, no state leakage, same intent/preconditions/postconditions. No identifier or context leaks across split. However, because all contexts identical ({authenticated:true, role:owner}) the resolution collapses to parameter substitution check only; applicability guard not stress-tested beyond null_control single mismatch.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-33528829801/raw_evidence.json -> observations.*, controls.null"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "B1: Cold exploration (no memory)",
+      "strength": "weak",
+      "expected": "Full task cost, always succeeds eventually; quantifies saving from memory",
+      "observed": "Hardcoded 4 operations per resource, avg 4.0 in raw_evidence.json (5.0 in unreferenced raw_results.json), success true by construction, no variance, no measurement of real exploration",
+      "passes": true,
+      "issue": "Not a measured baseline; circular. Cannot falsify cost hypothesis. Producer discloses as simulated (result.json validity_notes[2]).",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-33528829801/raw_evidence.json -> baselines.B1_cold, research/experiments/EXP-PRODUCT-33528829801/run_experiment.py -> baseline_cold_exploration_cost"
+    },
+    {
+      "baseline_id": "B2: Literal mechanism replay (current distill output)",
+      "strength": "weak-tautological",
+      "expected": "Succeeds only on exact identifier match, fails on all unseen (0% EXECUTABLE) to prove novelty handling gap",
+      "observed": "Recomputed 10/10 EXPLORE (confidence 0.5 < 0.8) with reason 'candidate exists but confidence is below execution threshold', literal_fail_rate 1.0 matches producer. Failure is by construction: literal Mechanism has no parameter_slots, confidence hardcoded low, so resolve with params={} skips parameterized candidate and fails threshold.",
+      "passes": true,
+      "issue": "Confirms kernel's confidence gating, not that literal replay as product feature fails in the wild. Registry during B2 test actually contains both parameterized (0.9) and literal (0.5); parameterized correctly excluded due to missing slot, so measurement is valid but not strong. Would be stronger to isolate literal-only registry and test exact-match positive control for B2.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-33528829801/raw_evidence.json -> baselines.B2_literal.results[*].resolution_status=EXPLORE, src/spider/kernel.py -> resolve (required_slots check, confidence sort)"
+    },
+    {
+      "baseline_id": "B3: Nearest successful trajectory retrieval",
+      "strength": "weak",
+      "expected": "Find most similar prior observation by state similarity, attempt replay; expected to fail on unseen because it replays literal content",
+      "observed": "Recomputed matches training resource A for all 10 queries, operations 2, success false by construction. Raw evidence note 'Retrieval finds nearest observation but replays literal content; fails on unseen'. State similarity is moot because all states identical (SHARED_STATE), so retrieval always returns first observation without similarity discrimination.",
+      "passes": true,
+      "issue": "Simulated baseline with hardcoded success=false, not an actual vector/embedding retrieval execution. Does not test strong memory baseline (e.g., LLM-based retrieval with adaptation). Producer discloses synthetic in validity_notes.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-33528829801/run_experiment.py -> baseline_nearest_retrieval, raw_evidence.json -> baselines.B3_retrieval"
+    },
+    {
+      "baseline_id": "positive_control: seen identifier A",
+      "strength": "adequate",
+      "expected": "EXECUTABLE with correct bound_action",
+      "observed": "Recomputed EXECUTABLE bound_action={method:DELETE, path:/api/items/A}, reason='applicability guards and confidence threshold passed', passed true, matches producer.",
+      "passes": true,
+      "evidence_ref": "research/experiments/EXP-PRODUCT-33528829801/raw_evidence.json -> controls.positive, result.json -> controls.positive_control_seen_identifier"
+    },
+    {
+      "baseline_id": "null_control: mismatched preconditions",
+      "strength": "adequate",
+      "expected": "UNKNOWN (abstain)",
+      "observed": "Recomputed UNKNOWN reason='no applicable validated mechanism' for context {authenticated:false}, passed true. Additional raw_results.json shows second null case {authenticated:true, role:viewer} also UNKNOWN abstention_rate 1.0.",
+      "passes": true,
+      "evidence_ref": "research/experiments/EXP-PRODUCT-33528829801/raw_evidence.json -> controls.null, raw_results.json -> controls.null.results"
+    }
+  ],
+  "recomputed_metrics": {
+    "unseen_resolution_rate": {
+      "producer_value": 1.0,
+      "recomputed_value": 1.0,
+      "n": 10,
+      "match": true,
+      "recomputed_from": "raw_evidence.json -> resolution_results.summary.executable_count=10/10 and independent kernel.resolve() replay with params {id:D..M}",
+      "notes": "All 10 statuses EXECUTABLE, confidence 0.9. Wilson 95% LB 0.72. Empty identifier edge '' also returns EXECUTABLE (questionable but not part of frozen 10)."
+    },
+    "binding_accuracy": {
+      "producer_value": 1.0,
+      "recomputed_value": 1.0,
+      "n": 10,
+      "match": true,
+      "recomputed_from": "raw_evidence.json -> resolution_results.summary.correct_binding_count=10/10; independent check f'/api/items/{rid}'==bound_action.path for each",
+      "notes": "No case of old identifier leakage (e.g., /api/items/A) observed. Numeric '99' and alphanumeric 'item-123' also bind correctly in independent replay (not part of frozen 10)."
+    },
+    "parameter_induction_false_negative_rate": {
+      "producer_value": 0.0,
+      "recomputed_value": 0.0,
+      "true_param_count": 1,
+      "detected_param_count": 1,
+      "match": true,
+      "recomputed_from": "raw_evidence.json -> parameter_induction_audit, kernel _extract_varying_values(['/api/items/A','/api/items/B','/api/items/C']) -> prefix '/api/items/', slot id",
+      "notes": "Binary metric (0 or 1) because only one true parameter. Does not test false-positive rate (spurious slots) or multi-parameter recall."
+    },
+    "parameterized_confidence": {
+      "producer_value": 0.9,
+      "recomputed_value": 0.9,
+      "match": true,
+      "recomputed_from": "raw_evidence.json -> distillation.confidence, src/spider/kernel.py line 294 hardcoded",
+      "notes": "Not learned; constant."
+    },
+    "b2_literal_fail_rate": {
+      "producer_value": 1.0,
+      "recomputed_value": 1.0,
+      "n": 10,
+      "match": true,
+      "recomputed_from": "raw_evidence.json -> baselines.B2_literal.literal_fail_rate and independent literal resolve with params={} -> 10/10 EXPLORE",
+      "notes": "Producer interprets EXPLORE as fail per decision rule; recomputation confirms all 10 not EXECUTABLE."
+    },
+    "b3_retrieval_fail_rate": {
+      "producer_value": 1.0,
+      "recomputed_value": 1.0,
+      "n": 10,
+      "match": true,
+      "recomputed_from": "raw_evidence.json -> baselines.B3_retrieval.all_fail=true, run_experiment.py hardcoded success false",
+      "notes": "Simulated, not measured retrieval execution."
+    },
+    "b1_cold_avg_operations": {
+      "producer_value": 4.0,
+      "recomputed_value": 4.0,
+      "discrepancy": "raw_results.json reports 5.0 avg_ops_per_resource vs raw_evidence.json 4.0; both simulated constants, not measured",
+      "match": true,
+      "recomputed_from": "raw_evidence.json -> baselines.B1_cold.avg_operations, run_experiment.py simulated_steps=4"
+    },
+    "parameterized_ops_per_resolution": {
+      "producer_value": 1.0,
+      "recomputed_value": 1.0,
+      "match": true,
+      "recomputed_from": "result.json and run_experiment.py note parameterized_ops=1 by definition",
+      "notes": "Simulated O(k) where k=1."
+    },
+    "cost_ratio_vs_cold": {
+      "producer_value": 0.25,
+      "recomputed_value": 0.25,
+      "match": true,
+      "recomputed_from": "1/4 = 0.25",
+      "notes": "Derived from simulated ops, not end-to-end token/browser cost."
+    },
+    "avg_parameterized_resolve_time_seconds": {
+      "producer_value": 0.000076,
+      "recomputed_value": 0.00007,
+      "match": true,
+      "notes": "Recomputed mean elapsed ~0.00007-0.00011s; order matches producer. Diagnostic only, not preregistered decision metric."
+    }
+  },
+  "claim_ceiling": "C-PARAM-INHERIT SURVIVES only as a synthetic in-kernel POC at the single-parameter common-prefix level: distill_parameterized() with _extract_varying_values() correctly induces exactly one '${id}' slot for isomorphic action path '/api/items/${id}' from 3 training observations (A,B,C) and resolves to EXECUTABLE with correct bound_action for 10 single-char unseen identifiers (D-M, 10/10) while literal mechanisms correctly fail (0/10 EXECUTABLE) and controls pass. This does NOT support claims of: general parameter induction across varying schemas, multi-parameter or cross-intent parameterization, handling of noisy/real-browser observations, non-identifier or adversarial values, semantic resolution, freshness/delta-repair, LLM-agent benefit, cross-site transfer, or amortized product economics. Any product promotion requires replication with noisy multi-parameter cases, adversarial edge cases, real observations, and measured LLM-agent cost baselines.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-33528829801/spec.json -> claim_ids=[C-PARAM-INHERIT], decision_rule (>=90% unseen, 0% literal, fn<=0.2), baselines B1-B3, positive/null controls",
+    "research/experiments/EXP-PRODUCT-33528829801/prereg.md -> falsification criteria, procedure, validity threats, explicitly out-of-scope list",
+    "research/experiments/EXP-PRODUCT-33528829801/freeze.json -> hashes prereg ea9e6bce..., spec 2a2299e5...",
+    "research/experiments/EXP-PRODUCT-33528829801/result.json -> metrics.unseen_resolution_rate=1.0, binding_accuracy=1.0, parameter_induction_false_negative_rate=0.0, b2_literal_fail_rate=1.0, controls passed",
+    "research/experiments/EXP-PRODUCT-33528829801/raw_evidence.json -> distillation.action_template={method:DELETE,path:/api/items/${id}}, parameter_slots=[id], resolution_results.summary 10/10, controls, baselines",
+    "research/experiments/EXP-PRODUCT-33528829801/raw_evidence.json -> sha256 aa68025015783fac40e734363825d12e8f5d7b48de7c23535b51d6d3d90079d5 (declared artifact)",
+    "research/experiments/EXP-PRODUCT-33528829801/raw_results.json -> undeclared artifact with divergent action_template including headers Authorization Bearer token-${id}, B1 avg 5.0, same 10/10 success (provenance gap)",
+    "research/experiments/EXP-PRODUCT-33528829801/run_experiment.py -> sha256 04bfd067f728812eaaec54e4e1247c709d15358087bd43531dd072de023ca217, deterministic synthetic generator",
+    "src/spider/kernel.py -> sha256 e2563b4d75dead09b47dd4578bf19ca08e4133e6d43158e5100b8f4e50862077, _extract_varying_values, distill, distill_parameterized, resolve, _bind",
+    "src/spider/models.py -> sha256 338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78, Mechanism, ResolutionStatus",
+    "src/spider/registry.py -> sha256 51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c, JSONL registry",
+    "research/experiments/EXP-PRODUCT-33528829801/provenance.json -> all_synthetic true, training_resources [A,B,C], unseen [D..M]"
+  ],
+  "unresolved": [
+    "Does parameter induction generalize to multi-parameter mechanisms (e.g., POST /api/${resource}/${id} with body {name:${title}})? Not tested; heuristic would collide on param_name 'id'.",
+    "Does induction work for non-id-like varying values (spaces, slashes, JSON, timestamps) where is_id_like fails and returns None?",
+    "How does parameterized resolution perform on real browser observations with noisy schemas, multi-step actions, and varying preconditions?",
+    "What is measured end-to-end cost saving for a real LLM agent (model tokens, browser/network, retrieval, verification, repair) vs cold/instruction/retrieval baselines?",
+    "Can confidence 0.9 vs 0.5 be learned/calibrated rather than hardcoded, and does threshold 0.8 correctly trade off EXECUTABLE vs EXPLORE vs UNKNOWN?",
+    "How to handle empty/special-char/long identifiers that currently resolve to EXECUTABLE with potentially invalid bound_action?",
+    "What is false-positive rate of induction (spurious parameterization) when training observations share coincidental prefix/suffix?",
+    "Does provenance divergence between raw_evidence.json (no headers, B1=4) and raw_results.json (with headers, B1=5) indicate an undeclared iteration that undermines single-artifact audit trail?"
+  ]
+}

@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-33528830833",
+  "lane": "runtime",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "discrimination_score": 1.0,
+    "intra_match_rate": 1.0,
+    "inter_match_rate": 0.0,
+    "mean_intra_jaccard": 1.0,
+    "mean_inter_jaccard": 0.31700704046427514,
+    "bootstrap_95ci_lower": 0.5,
+    "bootstrap_95ci_upper": 1.0,
+    "null_control_fp_rate": 0.0,
+    "positive_control_tp_rate": 1.0,
+    "drift_monotonic": true,
+    "drift_inter_jaccards": [0.3027027027027027, 0.2694300518134715],
+    "held_out_novel_fingerprints": 1,
+    "held_out_total": 10,
+    "held_out_fully_discriminated": true,
+    "per_field_discrimination_status": 0.8333333333333334,
+    "per_field_discrimination_body_hash": 1.0,
+    "per_field_discrimination_header_set": 1.0,
+    "baseline_url_hash_discrimination": 0.0,
+    "baseline_random_discrimination": 0.0,
+    "baseline_timing_discrimination": 0.0,
+    "total_requests": 50,
+    "reps_per_state": 10,
+    "measurement_errors": 0
+  },
+  "controls": {
+    "C1_null_fp_rate": {
+      "description": "Repeated identical requests produce different fingerprints in <5% of cases",
+      "threshold": "< 5%",
+      "observed": "0.0%",
+      "pass": true,
+      "evidence_ref": "raw_observations.json — all 5 states have 1 unique fingerprint out of 10 reps"
+    },
+    "C2_positive_tp_rate": {
+      "description": "Auth-state change produces different fingerprint in >95% of cases",
+      "threshold": "> 95%",
+      "observed": "100.0% (10/10 valid_token fingerprints distinct from no_auth)",
+      "pass": true,
+      "evidence_ref": "raw_observations.json — valid_token vs no_auth"
+    },
+    "C3_fingerprint_reproducibility": {
+      "description": "Per-state fingerprint variance <5% across 10 repetitions",
+      "threshold": "per-state FP rate < 5%",
+      "observed": "max=0.0% (all states: 1 unique / 10 total)",
+      "pass": true,
+      "evidence_ref": "raw_observations.json — all states produce identical fingerprints across reps"
+    },
+    "C4_drift_monotonic": {
+      "description": "Token expiry progression produces discriminable fingerprint shifts",
+      "threshold": "all drift pairs discriminable (Jaccard < 0.5)",
+      "observed": "valid_token<->expired_token: 0.303, expired_token<->invalid_token: 0.269",
+      "pass": true,
+      "evidence_ref": "raw_observations.json — drift states"
+    },
+    "C5_held_out_discrimination": {
+      "description": "Held-out session-cookie state correctly discriminated from all seen states",
+      "threshold": "session_cookie discriminated",
+      "observed": "1/10 novel fingerprints, fully discriminated from all seen states",
+      "pass": true,
+      "evidence_ref": "raw_observations.json — session_cookie fingerprints not in any calibration set"
+    },
+    "C6_baseline_superiority": {
+      "description": "Substrate discrimination score exceeds all three baselines",
+      "threshold": "substrate > all baselines",
+      "observed": "substrate=1.0000, best_baseline=0.0000 (B-URL-HASH, B-RANDOM, B-TIMING all 0.0)",
+      "pass": true,
+      "evidence_ref": "run_experiment.py baseline computation"
+    },
+    "positive_control": {
+      "description": "Flip auth header from absent to present on auth-gated endpoint; expect fingerprint change",
+      "expected": "fingerprint changes when auth header is added",
+      "observed": "100% of valid_token fingerprints distinct from no_auth fingerprints",
+      "pass": true
+    },
+    "null_control": {
+      "description": "Repeat identical request 10 times to same endpoint with same state; expect fingerprint variance <5%",
+      "expected": "all fingerprints identical within each state",
+      "observed": "all 5 states produce 1 unique fingerprint out of 10 reps (0% variance)",
+      "pass": true
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-RUNTIME-33528830833/raw_observations.json",
+      "sha256": "dd90c1c44c78357277a6a6ee40d5faaf7d0c323255fcd314b15d38ec6621e904",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-33528830833/run_experiment.py",
+      "sha256": "273ec9bb26138f04caccf686d7aee23ee0e95e3f79ab283d9818a4745a06a47d",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-33528830833/spec.json",
+      "sha256": "6e6946600ea29a2c48b53bcc1746a0c522377f44dba5d254011f6665ed3196f3",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-33528830833/prereg.md",
+      "sha256": "b5ec69cb3b3b4578067862cb89a6ac48668200fa238e8e6349e1c1e17198128f",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-33528830833/freeze.json",
+      "sha256": null,
+      "role": "fixture"
+    }
+  ],
+  "observations": [
+    "All 5 server states served successfully with deterministic responses (10 reps each, 50 total requests, 0 measurement errors).",
+    "Fingerprint function (SHA-256 of status, frozenset(headers.items()), body_sha256, redirect_chain) produces identical fingerprints for identical server state — zero intra-state variance across all 5 states.",
+    "Five distinct fingerprints produced, one per state: no_auth, valid_token, expired_token, invalid_token, session_cookie.",
+    "Body hash alone achieves perfect discrimination (1.0), meaning response body content fully distinguishes all states. Header set also achieves perfect discrimination (1.0). Status code alone achieves 0.833 discrimination (limited by no_auth and valid_token both returning 200).",
+    "Drift control shows valid_token ↔ expired_token Jaccard=0.303 and expired_token ↔ invalid_token Jaccard=0.269 — both well below 0.5 threshold, confirming discriminability across the token degradation progression.",
+    "Held-out session_cookie state produces a fingerprint not seen in any of the 4 calibration states, demonstrating generalization to unseen auth mechanisms.",
+    "All three baselines (B-URL-HASH, B-RANDOM, B-TIMING) produce discrimination score of 0.0 — the substrate's score of 1.0 decisively exceeds all baselines.",
+    "Bootstrap 95% CI for discrimination score is [0.5, 1.0]. The lower bound is at the survival threshold due to the bootstrap resampling of states (some resamples may include duplicate states with fewer distinct inter-state pairs), but the point estimate is perfect discrimination."
+  ],
+  "validity_notes": [
+    "Local deterministic server removes natural variance (timing jitter, caching, CDN effects). This makes the null-control conservative (easier to pass). A live-site experiment would be harder.",
+    "Fingerprint function uses SHA-256 of a repr() serialized tuple — this is deterministic but the repr() serialization is Python-version-dependent. Reproduction requires the same Python major version.",
+    "Date header changes across requests but is excluded from the fingerprint vector (only status, headers frozenset, body hash, and redirect chain are included). However, the Date header IS part of the headers frozenset, which means it contributes to fingerprint uniqueness. In this experiment the Date header was identical across all 10 reps within each rapid-fire state because the server processed requests within the same second. If requests were spread across seconds, Date would introduce fingerprint variance. This is a valid concern for live-site deployment but does not affect this controlled experiment's conclusions.",
+    "Jaccard similarity is computed bitwise on the 256-bit hex fingerprint. This is a reference metric; the primary survival metric is exact fingerprint equality (intra_match_rate - inter_match_rate).",
+    "The experiment tests HTTP-level observation only (status, headers, body hash, redirects). It does not test DOM-level, accessibility-tree, or timing-distribution observation."
+  ],
+  "unresolved": [
+    "Does the substrate maintain discrimination under timing jitter (e.g., server processing time variance >100ms)?",
+    "Does the substrate maintain discrimination when Date header is included in fingerprint vector and requests span multiple seconds?",
+    "How does the substrate perform against live-site servers with caching, CDN, and non-deterministic responses?",
+    "Can the substrate detect session drift (gradual token degradation) as a continuous signal rather than discrete state changes?"
+  ]
+}

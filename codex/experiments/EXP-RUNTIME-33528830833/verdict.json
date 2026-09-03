@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-33528830833",
+  "lane": "runtime",
+  "decision": "NARROW_SUCCESS",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "BLOCKED",
+      "reason": "Audit-ceiling bound: stdlib HTTP observation (status, headers, body SHA-256, redirect_chain) reproducibly fingerprints a local deterministic http.server hand-programmed to return distinct bodies/headers per auth state, with zero jitter and all requests within one second. Within that controlled fixture, null FP rate 0.0% (<5%), positive TP rate 100% (>95%), reproducibility variance 0% (<5%), drift pairs discriminable (Jaccard 0.303/0.269 <0.5), held-out session_cookie fingerprint novel. No evidence for live-site ecological validity, Date-spanning execution, timing jitter, CDN/caching, or real-world auth flows. C-MEAS-VALID survives for this fixture and this fixture only, contingent on: (a) Date header excluded from fingerprint vector, (b) fingerprint serialization made deterministic (replace repr(frozenset(...)) with sorted-tuple SHA-256), and (c) strong baselines added (B-STATUS-ONLY, B-BODY-ONLY) to verify substrate exceeds single-field observation. These three fixes are required before C-MEAS-VALID can be re-evaluated. The producer's broader claim that HTTP-level observation is a valid foundation layer for Runtime is NOT supported by this evidence alone."
+    }
+  ],
+  "product_action": "BLOCKED",
+  "promote_to_product": false,
+  "continue": true,
+  "next_question": "After applying the three mandatory fixes (deterministic fingerprint excluding Date header, strong single-field baselines, and jitter injection), does HTTP observation maintain discrimination on the toy server — and does it survive on an external non-tautological endpoint where response variation is not hand-programmed?",
+  "reason": "Audit found critical validity threats that do not falsify the measurement pattern but do falsify the ecological claim ceiling. V1 (tautological server) means discrimination is guaranteed by construction; V2 (repr instability) means fingerprints don't reproduce across processes; V3 (Date leakage) means reproducibility claim is contingent on rapid-fire execution. The metrics are real and replicate, but the claim must be narrowed to the toy fixture. Six required fixes are enumerated in audit.json; three are blocking for re-evaluation (fingerprint determinism, Date exclusion, strong baselines). The experiment demonstrates that the fingerprint mechanism CAN work — it does not demonstrate that it DOES work in uncontrolled conditions. Next experiment should apply fixes and test on a non-tautological endpoint.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-33528830833/result.json",
+    "research/experiments/EXP-RUNTIME-33528830833/audit.json",
+    "research/experiments/EXP-RUNTIME-33528830833/raw_observations.json",
+    "research/experiments/EXP-RUNTIME-33528830833/run_experiment.py",
+    "research/experiments/EXP-RUNTIME-33528830833/report.md",
+    "research/experiments/EXP-RUNTIME-33528830833/provenance.json",
+    "research/experiments/EXP-RUNTIME-33528830833/spec.json",
+    "research/experiments/EXP-RUNTIME-33528830833/freeze.json"
+  ]
+}

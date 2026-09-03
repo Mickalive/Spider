@@ -1,9 +1,15 @@
 #!/usr/bin/env python3
 from __future__ import annotations
-import argparse, json, shutil, subprocess
+import argparse, json, os, shutil, subprocess
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+CONTROL_ROOTS = [
+    ".gitignore", ".github/scripts", "scripts", ".opencode/agents", "AGENTS.md",
+    "SPIDER_ARCHITECTURE_RESEARCH2.md", "research/claims/registry.json",
+    "research/lanes/registry.json", "research/EXPERIMENT_PACKET.md", "config/models.json",
+    "SPIDER_CODEX.md",
+]
 
 
 def run(*args, check=True):
@@ -24,8 +30,16 @@ def status_paths():
     return sorted(set(paths))
 
 
+def under(path: str, root: str) -> bool:
+    return path == root or path.startswith(root.rstrip("/") + "/")
+
+
+def is_control(path: str) -> bool:
+    return any(under(path, root) for root in CONTROL_ROOTS)
+
+
 def allowed(path, prefixes, exact):
-    return path in exact or any(path == p or path.startswith(p.rstrip("/") + "/") for p in prefixes)
+    return path in exact or any(under(path, p) for p in prefixes)
 
 
 def exists_in_head(path):
@@ -44,6 +58,22 @@ def restore(path):
             p.unlink(missing_ok=True)
 
 
+def verify_control_overlay(repair: bool) -> None:
+    helper = Path(os.environ.get("SPIDER_CONTROL_HELPER", "/tmp/spider-control-plane.py"))
+    if not helper.exists():
+        raise SystemExit("SPIDER_CONTROL_HELPER_MISSING")
+    cmd = ["python", str(helper), "check", "--root", str(ROOT)]
+    proc = subprocess.run(cmd, cwd=ROOT, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    if proc.returncode == 0:
+        return
+    if repair:
+        subprocess.run(["python", str(helper), "stage", "--root", str(ROOT)], cwd=ROOT, check=False)
+    print("SPIDER_CONTROL_SCOPE_VIOLATION")
+    print(proc.stdout)
+    print(proc.stderr)
+    raise SystemExit(2)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--lane", required=True)
@@ -51,6 +81,8 @@ def main():
     ap.add_argument("--stage", required=True, choices=["design", "execute", "audit", "director"])
     ap.add_argument("--repair", action="store_true")
     args = ap.parse_args()
+
+    verify_control_overlay(args.repair)
 
     lanes = json.loads((ROOT / "research/lanes/registry.json").read_text())
     cfg = lanes["lanes"][args.lane]
@@ -75,7 +107,7 @@ def main():
         exact = [f"{exp}/verdict.json", f"{exp}/handoff.json", f"{exp}/failure.json", f"{exp}/model_director.json"]
         protected = {f"{exp}/{x}" for x in ["request.json", "spec.json", "prereg.md", "freeze.json", "execution_checkpoint.json", "result.json", "report.md", "provenance.json", "audit.json", "model_execute.json", "model_audit.json"]} | {lane_state}
 
-    changed = status_paths()
+    changed = [p for p in status_paths() if not is_control(p)]
     bad = sorted({p for p in changed if p in protected or not allowed(p, prefixes, exact)})
     if bad and args.repair:
         for path in bad:

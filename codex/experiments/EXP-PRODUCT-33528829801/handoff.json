@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-33528829801",
+  "lane": "product",
+  "target_lane": "product",
+  "next_question": "Does parameter induction generalize to multi-parameter mechanisms (e.g., POST /api/${resource}/${id} with body {name:${title}}) with distinct slot naming, and does it survive when training observations come from real browser sessions with noisy multi-step actions and varying preconditions?",
+  "why_next": "C-PARAM-INHERIT survived the synthetic POC gate but the claim ceiling is narrow: single-parameter, single-field, common-prefix heuristic only. The audit explicitly identified multi-parameter collision as a required fix (kernel _extract_varying_values hardcodes param_name='id' for every varying leaf, collapsing distinct logical parameters). Testing multi-parameter induction is the natural next step because it challenges the same kernel mechanism on a materially harder pattern — multiple distinct parameter slots with distinct naming — without requiring external infrastructure. This moves toward the unfrozen hard cases while staying within the Product lane's code roots.",
+  "carry_forward": {
+    "established": [
+      "distill_parameterized() with _extract_varying_values() correctly induces one parameter slot for isomorphic action paths sharing common prefix/suffix (e.g., /api/items/A, /api/items/B, /api/items/C -> /api/items/${id})",
+      "Parameterized mechanism resolves to EXECUTABLE with correct bound_action for unseen single-char identifiers (10/10) with matching preconditions",
+      "Literal mechanism replay (no parameter slots, confidence=0.5) fails on all unseen identifiers (0/10 EXECUTABLE), confirming novelty-handling gap",
+      "Positive control passes: parameterized mechanism resolves correctly for seen identifier with correct bound_action",
+      "Null control passes: parameterized mechanism abstains (UNKNOWN) when preconditions mismatch (authenticated=False)",
+      "Kernel execute() correctly substitutes parameter values into bound_action via _bind('${id}') substitution"
+    ],
+    "rejected": [
+      "C-PARAM-INHERIT as a product-ready capability — evidence is synthetic POC only; no real-browser, no multi-parameter, no adversarial, no measured cost baselines",
+      "Literal mechanism replay as a viable product mechanism for unseen identifiers — confirmed to fail on all unseen cases"
+    ],
+    "unknown": [
+      "Does parameter induction generalize to multi-parameter mechanisms with multiple distinct varying fields (path, body, headers) and distinct slot naming?",
+      "Does parameter induction work when varying substrings are not identifier-like (URLs, timestamps, JSON, arbitrary strings) where is_id_like regex fails and returns None?",
+      "How does parameterized resolution perform on real browser observations with noisy schemas, multi-step actions, and varying preconditions?",
+      "What is measured end-to-end cost saving for a real LLM agent (model tokens, browser/network, retrieval, verification, repair) vs cold/instruction/retrieval baselines?",
+      "Can confidence 0.9 vs 0.5 be learned/calibrated rather than hardcoded, and does threshold 0.8 correctly trade off EXECUTABLE vs EXPLORE vs UNKNOWN?",
+      "How to handle empty/special-char/long identifiers that currently resolve to EXECUTABLE with potentially invalid bound_action?",
+      "What is false-positive rate of induction (spurious parameterization) when training observations share coincidental prefix/suffix?",
+      "Does provenance divergence between raw_evidence.json and raw_results.json indicate an undeclared iteration that undermines single-artifact audit trail?"
+    ],
+    "do_not_assume": [
+      "Do not assume parameterized inheritance works for multi-parameter mechanisms — the kernel currently collapses all varying leaves into one param_name='id' slot",
+      "Do not assume the 4x cost reduction claim (cost_ratio_vs_cold=0.25) applies to real agent workloads — B1 is hardcoded 4 ops, not measured exploration",
+      "Do not assume confidence 0.9 vs 0.5 discriminates real-world EXECUTABLE vs EXPLORE — both are hardcoded constants, not learned thresholds",
+      "Do not assume this POC generalizes to noisy, multi-step, cross-intent, or cross-site scenarios — all observations are synthetic single-intent deterministic",
+      "Do not assume the kernel's _extract_varying_values() heuristic handles non-prefix/suffix variation — it uses longest common prefix/suffix with is_id_like regex that rejects spaces, slashes, punctuation",
+      "Do not promote to Product Core without measured end-to-end economics (model calls, browser work, retrieval, verification, repair, latency) on real agent tasks"
+    ]
+  },
+  "dependencies": [
+    "src/spider/kernel.py must be extended to support distinct slot naming per varying field before multi-parameter testing",
+    "raw_results.json provenance divergence must be resolved (declare or remove) before further audit trail integrity",
+    "Multi-parameter test data must be created (e.g., POST /api/${resource}/${id} with body {name:${title}})",
+    "For real-browser testing: runtime substrate must provide noisy multi-step observations with varying preconditions"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-33528829801/result.json -> metrics.unseen_resolution_rate=1.0, binding_accuracy=1.0, parameter_induction_fn_rate=0.0, b2_literal_fail_rate=1.0, controls.passed=true",
+    "research/experiments/EXP-PRODUCT-33528829801/raw_evidence.json -> distillation.parameter_slots=[id], action_template=/api/items/${id}, resolution_results.summary 10/10 EXECUTABLE",
+    "research/experiments/EXP-PRODUCT-33528829801/audit.json -> claim_ceiling=synthetic POC single-parameter common-prefix only, required_fixes=[multi-field collision, empty-identifier edge, discriminating baselines], validity_findings=[tautological construction, hardcoded confidence, simulated costs]",
+    "research/experiments/EXP-PRODUCT-33528829801/spec.json -> decision_rule, falsifier, baselines B1-B3",
+    "src/spider/kernel.py -> _extract_varying_values() hardcodes param_name='id' for every varying leaf, is_id_like regex ^[A-Za-z0-9_\\-]+$ rejects non-identifier values",
+    "research/experiments/EXP-PRODUCT-33528829801/provenance.json -> all_synthetic=true, deterministic, no model calls"
+  ],
+  "recommended_action": "Run follow-up experiment EXP-PRODUCT-multi-parameter testing multi-slot parameter induction (path + body + headers each varying with distinct slot naming) on synthetic data. Requires kernel extension to _extract_varying_values() to name slots distinctly. This stays within Product lane code roots (src/spider/) and tests the next harder generalization step without external infrastructure."
+}
