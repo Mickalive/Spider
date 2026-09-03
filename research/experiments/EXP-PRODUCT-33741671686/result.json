@@ -1,0 +1,256 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-33741671686",
+  "lane": "product",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "overall_unseen_resolution_rate": {
+      "value": 1.0,
+      "unit": "ratio",
+      "n": 21,
+      "description": "Fraction of 21 total unseen test combinations (across all 5 conditions) that resolved with status EXECUTABLE"
+    },
+    "overall_binding_accuracy": {
+      "value": 1.0,
+      "unit": "ratio",
+      "n": 21,
+      "description": "Fraction of resolved unseen combinations where bound_action matched expected binding exactly"
+    },
+    "overall_unsubstituted_template_rate": {
+      "value": 0.0,
+      "unit": "ratio",
+      "n": 21,
+      "description": "Fraction of resolved combinations where bound_action contained unsubstituted ${...} template literals"
+    },
+    "c1_single_path_slot_count": {
+      "value": 1,
+      "unit": "count",
+      "description": "Parameter slots induced for C1 single-path regression condition"
+    },
+    "c1_single_path_unseen_resolution_rate": {
+      "value": 1.0,
+      "unit": "ratio",
+      "n": 5,
+      "description": "Unseen resolution rate for C1 single-path (regression baseline)"
+    },
+    "c1_single_path_binding_accuracy": {
+      "value": 1.0,
+      "unit": "ratio",
+      "n": 5,
+      "description": "Binding accuracy for C1 single-path"
+    },
+    "c2_path_body_slot_count": {
+      "value": 2,
+      "unit": "count",
+      "description": "Parameter slots induced for C2 path+body condition"
+    },
+    "c2_path_body_unseen_resolution_rate": {
+      "value": 1.0,
+      "unit": "ratio",
+      "n": 5,
+      "description": "Unseen resolution rate for C2 path+body"
+    },
+    "c2_path_body_binding_accuracy": {
+      "value": 1.0,
+      "unit": "ratio",
+      "n": 5,
+      "description": "Binding accuracy for C2 path+body"
+    },
+    "c3_path_body_headers_slot_count": {
+      "value": 3,
+      "unit": "count",
+      "description": "Parameter slots induced for C3 path+body+headers condition"
+    },
+    "c3_path_body_headers_unseen_resolution_rate": {
+      "value": 1.0,
+      "unit": "ratio",
+      "n": 5,
+      "description": "Unseen resolution rate for C3 path+body+headers"
+    },
+    "c3_path_body_headers_binding_accuracy": {
+      "value": 1.0,
+      "unit": "ratio",
+      "n": 5,
+      "description": "Binding accuracy for C3 path+body+headers"
+    },
+    "c4_non_identifier_slot_count": {
+      "value": 1,
+      "unit": "count",
+      "description": "Parameter slots induced for C4 non-identifier values (URLs)"
+    },
+    "c4_non_identifier_unseen_resolution_rate": {
+      "value": 1.0,
+      "unit": "ratio",
+      "n": 3,
+      "description": "Unseen resolution rate for C4 non-identifier values"
+    },
+    "c4_non_identifier_binding_accuracy": {
+      "value": 1.0,
+      "unit": "ratio",
+      "n": 3,
+      "description": "Binding accuracy for C4 non-identifier values"
+    },
+    "c5_shared_slot_slot_count": {
+      "value": 2,
+      "unit": "count",
+      "description": "Parameter slots induced for C5 shared-slot-name collision test"
+    },
+    "c5_shared_slot_names_distinct": {
+      "value": true,
+      "unit": "boolean",
+      "description": "Whether induced slot names for path.id and body.user_id are distinct (collision = false)"
+    },
+    "c5_shared_slot_unseen_resolution_rate": {
+      "value": 1.0,
+      "unit": "ratio",
+      "n": 3,
+      "description": "Unseen resolution rate for C5 shared-slot-name"
+    },
+    "c5_shared_slot_binding_accuracy": {
+      "value": 1.0,
+      "unit": "ratio",
+      "n": 3,
+      "description": "Binding accuracy for C5 shared-slot-name"
+    },
+    "slot_names_all_distinct_per_condition": {
+      "value": true,
+      "unit": "boolean",
+      "description": "Across all 5 conditions, every induced mechanism has distinct slot names (no collisions within any condition)"
+    },
+    "b_literal_fail_rate": {
+      "value": 1.0,
+      "unit": "ratio",
+      "n": 5,
+      "description": "Fraction of unseen combinations where literal mechanism replay (no parameter slots) failed to resolve EXECUTABLE"
+    },
+    "b_random_naming_resolution_rate": {
+      "value": 1.0,
+      "unit": "ratio",
+      "n": 5,
+      "description": "Fraction of unseen combinations where random slot naming resolved EXECUTABLE (but with incorrect bindings)"
+    },
+    "b_random_naming_binding_accuracy": {
+      "value": 0.0,
+      "unit": "ratio",
+      "n": 5,
+      "description": "Fraction of random-naming resolutions with correct bound_action (all had swapped/incorrect bindings)"
+    },
+    "parameterized_ops_per_resolution": {
+      "value": 2,
+      "unit": "operations",
+      "description": "Parameterized resolution cost: O(k) where k=2 average parameter slots across multi-parameter conditions"
+    },
+    "cost_ratio_vs_literal_replay": {
+      "value": 0.5,
+      "unit": "ratio",
+      "description": "Parameterized resolution cost (2 ops for 2 slots) / literal replay cost (4 simulated cold ops) = 0.5"
+    },
+    "distill_time_seconds": {
+      "value": 0.0006,
+      "unit": "seconds",
+      "description": "Average wall-clock time for distill_parameterized_v2() across 5 conditions (3 training obs each)"
+    },
+    "avg_resolve_time_seconds": {
+      "value": 0.00005,
+      "unit": "seconds",
+      "description": "Mean wall-clock time for resolve() across all 21 unseen combinations"
+    }
+  },
+  "controls": {
+    "positive_control_c1_regression": {
+      "description": "Resolve parameterized mechanism with seen identifier A from C1 training set",
+      "expected": "EXECUTABLE",
+      "observed": "EXECUTABLE",
+      "passed": true,
+      "bound_action": {"method": "GET", "url": "https://api.example.com/items/A"},
+      "slots": ["url"],
+      "resolve_params": {"url": "A"},
+      "evidence_ref": "raw_evidence.json -> controls.positive_control"
+    },
+    "null_control_random_observations": {
+      "description": "Three random non-shared observations (task-a GET x.com/alpha, task-b DELETE /foo/bar/baz, task-c PATCH data) — no structural pattern to induce",
+      "expected": "no mechanism or UNKNOWN resolution",
+      "observed": "mechanism induced with 4 slots (data, method, path, url) but resolution returns UNKNOWN",
+      "passed": true,
+      "resolution_status": "UNKNOWN",
+      "reason": "No applicable validated mechanism for intent 'task-c' with empty params — null control correctly abstains",
+      "evidence_ref": "raw_evidence.json -> controls.null_control"
+    },
+    "b_literal_no_parameter_slots": {
+      "description": "Literal mechanism from first C2 training observation (POST /api/users/A body {name: Alice}) — no parameter slots, confidence 0.5",
+      "expected": "FAIL on all unseen (EXPLORE or UNKNOWN)",
+      "observed": "5/5 EXPLORE (confidence 0.5 below min_confidence 0.8)",
+      "passed": true,
+      "fail_rate": 1.0,
+      "evidence_ref": "raw_evidence.json -> baselines.B_LITERAL"
+    },
+    "b_random_induction_structural_vs_random": {
+      "description": "C2 induction with randomized slot names (rand_0, rand_1) — resolves EXECUTABLE but bindings are swapped/incorrect",
+      "expected": "EXECUTABLE with incorrect bindings (positional matching works but semantics lost)",
+      "observed": "5/5 EXECUTABLE, 0/5 binding correct — confirms structural naming provides semantic value over random naming",
+      "passed": true,
+      "resolution_rate": 1.0,
+      "binding_accuracy": 0.0,
+      "evidence_ref": "raw_evidence.json -> baselines.B_RANDOM_INDUCTION"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PRODUCT-33741671686/raw_evidence.json",
+      "sha256": "5bc7274be82f8a221f3e8a5f5f091128def7eeca515212c04f074436819377e4",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-33741671686/run_experiment.py",
+      "sha256": "c19d2b4978383f39fc8c8f187c7fb176b74b832c2e10bd94c26baebe4c31f397",
+      "role": "code"
+    },
+    {
+      "path": "src/spider/kernel.py",
+      "sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+      "role": "code"
+    },
+    {
+      "path": "src/spider/models.py",
+      "sha256": "338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78",
+      "role": "code"
+    },
+    {
+      "path": "src/spider/registry.py",
+      "sha256": "51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "C1 regression: distill_parameterized_v2 induces 1 slot named 'url' from 3 training observations with path-only variation (/api/items/A, B, C). Template: {method: GET, url: https://api.example.com/items/${url}}. All 5 unseen (D-H) resolve EXECUTABLE with correct bound_action. Regression baseline passes: single-parameter induction still works after multi-parameter extension.",
+    "C2 multi-parameter: 2 distinct slots induced — 'url' from path variation and 'name' from body.name variation. Template correctly embeds ${url} in URL and ${name} in body. All 5 unseen combinations (user_id=D-H, name=Diana-Heidi) resolve EXECUTABLE with correct bound_action containing both substituted values.",
+    "C3 three-parameter: 3 distinct slots induced — 'url' (path), 'title' (body.title), 'x_request_id' (headers.X-Request-ID with prefix 'req-'). Template: {method: POST, url: .../posts/${url}, body: {title: ${title}}, headers: {X-Request-ID: req-${x_request_id}}}. All 5 unseen resolve EXECUTABLE with correct bound_action across all three structural locations simultaneously.",
+    "C4 non-identifier values: 1 slot 'callback_url' induced from URL values (https://site-a.com/hook, etc.). Common prefix 'https://site-' and suffix '.com/hook' extracted correctly. Template: body.callback_url = 'https://site-${callback_url}.com/hook'. All 3 unseen resolve EXECUTABLE with correct full URL reconstruction. The old is_id_like regex would have rejected these values.",
+    "C5 shared-slot collision: 2 distinct slots induced — 'url' from path.id and 'user_id' from body.user_id. Despite both fields having identical values (A, B, C) across training observations, the induction correctly produces distinct slot names based on structural field position. No collision. All 3 unseen resolve EXECUTABLE with correct bound_action.",
+    "Null control: three completely random observations (different intents, different action structures, no shared patterns) produce a mechanism with 4 slots (data, method, path, url) — but resolution with empty params correctly returns UNKNOWN. The mechanism is induced because each observation has distinct field values, but no applicable validated mechanism exists for the test intent.",
+    "B_LITERAL baseline: literal mechanism from C2 training observation (confidence 0.5) fails on all 5 unseen combinations (EXPLORE status — confidence below min_confidence 0.8). Confirms that literal replay cannot handle novelty.",
+    "B_RANDOM_INDUCTION baseline: when slot names are randomized (rand_0, rand_1 instead of url, name), the mechanism still resolves EXECUTABLE (5/5) because the kernel's _bind() uses positional template substitution. However, all 5 bindings are incorrect — e.g., user_id='D' with name='Diana' produces url=/users/Diana (wrong) and body.name='D' (wrong). Structural naming provides semantic correctness that random naming lacks.",
+    "Induction audit confirms: all 5 conditions have all slots present in the action template (all_slots_in_template=true), slot names are distinct within each condition, and slot counts match expectations exactly.",
+    "All 7 frozen decision-rule checks pass: C1_regression (slot>=1, resolution>=0.9, binding>=0.9), C2_multi_param (slot>=2, distinct, resolution>=0.9, binding>=0.9), C3_three_param (slot>=3, distinct, resolution>=0.9, binding>=0.9), C4_non_identifier (slot>=1, resolution>=0.9, binding>=0.9), C5_no_collision (slot>=2, distinct, resolution>=0.9, binding>=0.9), null_control (passed), no_crashes (all 5 conditions distilled successfully)."
+  ],
+  "validity_notes": [
+    "All observations are synthetic with deterministic structure — no model calls, no network, no browser interactions. This is a POC gate, not evidence of real-world robustness.",
+    "The multi-parameter induction function (distill_parameterized_v2 / _extract_varying_values_multi) is implemented in the experiment script (run_experiment.py), not in kernel.py. The kernel itself was not modified. This means the experiment tests the induction algorithm, not a kernel-shipped capability.",
+    "Slot naming is derived from field path structure (last path segment, cleaned up). The naming is deterministic and reproducible but not semantically optimal — e.g., path.url becomes 'url' rather than 'item_id'. The spec required distinct names, not semantically perfect names.",
+    "The B_RANDOM_INDUCTION baseline reveals that the kernel's _bind() mechanism uses positional template substitution, so any slot naming (even random) produces EXECUTABLE status. The discriminating metric is binding_accuracy, not resolution_rate. Structural naming achieves 100% binding accuracy; random naming achieves 0%.",
+    "The null control mechanism is induced with 4 slots despite completely random observations. This happens because _extract_varying_values_multi treats each observation's action fields as potentially varying. The mechanism is induced but correctly resolves to UNKNOWN because no training observation's intent matches the test intent. The null control passes by a different mechanism than intended (intent mismatch, not pattern absence).",
+    "Confidence is hardcoded at 0.8 (mechanism.confidence = min(0.9, 0.5 + 0.1*3) = 0.8 for 3 training observations). The min_confidence threshold is also 0.8. This means parameterized mechanisms always pass the confidence gate, and the decision rule's resolution_rate >= 0.9 is trivially satisfied. The real discriminating test is binding_accuracy.",
+    "Sample size is small (3 training, 3-5 unseen per condition, 21 total unseen). Sufficient for clear binary result. All conditions achieved 100% — no ambiguity requiring replication.",
+    "The experiment does not test: noisy observations, real browser sessions, multi-step actions, cross-intent transfer, adversarial edge cases, or amortized cost economics. These remain in the 'unknown' category from the parent handoff."
+  ],
+  "unresolved": [
+    "Does multi-parameter induction work when training observations come from real browser sessions with noisy multi-step actions and varying preconditions?",
+    "Does the induction function handle nested structures (e.g., body.nested.field varying) or only flat leaf paths?",
+    "What is the false-positive rate of induction when training observations share coincidental prefix/suffix patterns?",
+    "How does parameterized resolution perform end-to-end with a real LLM agent (model tokens, browser work, retrieval, verification, repair)?",
+    "Can confidence 0.8 be learned/calibrated rather than hardcoded, and does the threshold correctly trade off EXECUTABLE vs EXPLORE vs UNKNOWN?",
+    "Does the null control's unintended pass mechanism (intent mismatch rather than pattern absence) indicate a design flaw in the null control construction?",
+    "The random naming baseline shows all bindings are incorrect but status is EXECUTABLE — should the decision rule require binding_accuracy > 0 as a separate check from resolution_rate?"
+  ]
+}

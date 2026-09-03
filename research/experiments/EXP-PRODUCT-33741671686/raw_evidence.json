@@ -1,14 +1,14 @@
 {
   "experiment_id": "EXP-PRODUCT-33741671686",
-  "timestamp": "2026-09-03T18:11:10Z",
+  "timestamp": "2026-09-03T21:01:11Z",
   "conditions": {
     "C1-single-path": {
       "condition_id": "C1-single-path",
       "training_count": 3,
       "unseen_count": 5,
       "timestamps": {
-        "start": 1788459070.2605708,
-        "end": 1788459070.2614315
+        "start": 1788469271.2330434,
+        "end": 1788469271.233681
       },
       "distill_success": true,
       "mechanism_id": "param-C1-single-path",
@@ -47,7 +47,7 @@
           },
           "reason": "applicability guards and confidence threshold passed",
           "confidence": 0.8,
-          "elapsed_seconds": 0.00010065100002520921,
+          "elapsed_seconds": 8.084000000962988e-05,
           "binding_correct": true,
           "binding_detail": "ok",
           "has_unsubstituted_template": false
@@ -67,7 +67,7 @@
           },
           "reason": "applicability guards and confidence threshold passed",
           "confidence": 0.8,
-          "elapsed_seconds": 8.025900001484843e-05,
+          "elapsed_seconds": 5.2436999993688005e-05,
           "binding_correct": true,
           "binding_detail": "ok",
           "has_unsubstituted_template": false
@@ -87,7 +87,7 @@
           },
           "reason": "applicability guards and confidence threshold passed",
           "confidence": 0.8,
-          "elapsed_seconds": 5.843700000696117e-05,
+          "elapsed_seconds": 4.300399999124238e-05,
           "binding_correct": true,
           "binding_detail": "ok",
           "has_unsubstituted_template": false
@@ -107,7 +107,7 @@
           },
           "reason": "applicability guards and confidence threshold passed",
           "confidence": 0.8,
-          "elapsed_seconds": 5.412999996678991e-05,
+          "elapsed_seconds": 3.829699997481839e-05,
           "binding_correct": true,
           "binding_detail": "ok",
           "has_unsubstituted_template": false
@@ -127,7 +127,7 @@
           },
           "reason": "applicability guards and confidence threshold passed",
           "confidence": 0.8,
-          "elapsed_seconds": 5.226799999036302e-05,
+          "elapsed_seconds": 3.641399999310124e-05,
           "binding_correct": true,
           "binding_detail": "ok",
           "has_unsubstituted_template": false
@@ -146,8 +146,8 @@
       "training_count": 3,
       "unseen_count": 5,
       "timestamps": {
-        "start": 1788459070.2617128,
-        "end": 1788459070.2624152
+        "start": 1788469271.233906,
+        "end": 1788469271.2343895
       },
       "distill_success": true,
       "mechanism_id": "param-C2-path-and-body",
@@ -195,7 +195,7 @@
           },
           "reason": "applicability guards and confidence threshold passed",
           "confidence": 0.8,
-          "elapsed_seconds": 8.33440000178598e-05,
+          "elapsed_seconds": 6.072999997286388e-05,
           "binding_correct": true,
           "binding_detail": "ok",
           "has_unsubstituted_template": false
@@ -220,7 +220,7 @@
           },
           "reason": "applicability guards and confidence threshold passed",
           "confidence": 0.8,
-          "elapsed_seconds": 0.00010440599999128608,
+          "elapsed_seconds": 4.745000001094013e-05,
           "binding_correct": true,
           "binding_detail": "ok",
           "has_unsubstituted_template": false
@@ -245,7 +245,7 @@
           },
           "reason": "applicability guards and confidence threshold passed",
           "confidence": 0.8,
-          "elapsed_seconds": 6.008000002566405e-05,
+          "elapsed_seconds": 4.0310000002818924e-05,
           "binding_correct": true,
           "binding_detail": "ok",
           "has_unsubstituted_template": false
@@ -270,7 +270,7 @@
           },
           "reason": "applicability guards and confidence threshold passed",
           "confidence": 0.8,
-          "elapsed_seconds": 5.3290000096239964e-05,
+          "elapsed_seconds": 3.7845999997898616e-05,
           "binding_correct": true,
           "binding_detail": "ok",
           "has_unsubstituted_template": false
@@ -295,7 +295,7 @@
           },
           "reason": "applicability guards and confidence threshold passed",
           "confidence": 0.8,
-          "elapsed_seconds": 5.223799996656453e-05,
+          "elapsed_seconds": 3.682400000570851e-05,
           "binding_correct": true,
           "binding_detail": "ok",
           "has_unsubstituted_template": false
@@ -314,8 +314,8 @@
       "training_count": 3,
       "unseen_count": 5,
       "timestamps": {
-        "start": 1788459070.262658,
-        "end": 1788459070.2634509
+        "start": 1788469271.2345774,
+        "end": 1788469271.235087
       },
       "distill_success": true,
       "mechanism_id": "param-C3-path-body-headers",
@@ -372,7 +372,7 @@
           },
           "reason": "applicability guards and confidence threshold passed",
           "confidence": 0.8,
-          "elapsed_seconds": 8.093099995676312e-05,
+          "elapsed_seconds": 6.0710000013841636e-05,
           "binding_correct": true,
           "binding_detail": "ok",
           "has_unsubstituted_template": false
@@ -402,7 +402,7 @@
           },
           "reason": "applicability guards and confidence threshold passed",
           "confidence": 0.8,
-          "elapsed_seconds": 6.645899998147797e-05,
+          "elapsed_seconds": 4.900300001509095e-05,
           "binding_correct": true,
           "binding_detail": "ok",
           "has_unsubstituted_template": false
@@ -432,7 +432,7 @@
           },
           "reason": "applicability guards and confidence threshold passed",
           "confidence": 0.8,
-          "elapsed_seconds": 7.222700003239879e-05,
+          "elapsed_seconds": 4.284399997800392e-05,
           "binding_correct": true,
           "binding_detail": "ok",
           "has_unsubstituted_template": false
@@ -462,7 +462,7 @@
           },
           "reason": "applicability guards and confidence threshold passed",
           "confidence": 0.8,
-          "elapsed_seconds": 9.473099999013357e-05,
+          "elapsed_seconds": 5.396899999254856e-05,
           "binding_correct": true,
           "binding_detail": "ok",
           "has_unsubstituted_template": false
@@ -492,7 +492,7 @@
           },
           "reason": "applicability guards and confidence threshold passed",
           "confidence": 0.8,
-          "elapsed_seconds": 8.707000006324961e-05,
+          "elapsed_seconds": 4.326399999854402e-05,
           "binding_correct": true,
           "binding_detail": "ok",
           "has_unsubstituted_template": false
@@ -511,8 +511,8 @@
       "training_count": 3,
       "unseen_count": 3,
       "timestamps": {
-        "start": 1788459070.2637541,
-        "end": 1788459070.2643995
+        "start": 1788469271.2352676,
+        "end": 1788469271.2355993
       },
       "distill_success": true,
       "mechanism_id": "param-C4-non-identifier-values",
@@ -557,7 +557,7 @@
           },
           "reason": "applicability guards and confidence threshold passed",
           "confidence": 0.8,
-          "elapsed_seconds": 0.00012709900011032005,
+          "elapsed_seconds": 5.9879000019691375e-05,
           "binding_correct": true,
           "binding_detail": "ok",
           "has_unsubstituted_template": false
@@ -580,7 +580,7 @@
           },
           "reason": "applicability guards and confidence threshold passed",
           "confidence": 0.8,
-          "elapsed_seconds": 9.320899994236242e-05,
+          "elapsed_seconds": 4.2782999997825755e-05,
           "binding_correct": true,
           "binding_detail": "ok",
           "has_unsubstituted_template": false
@@ -603,7 +603,7 @@
           },
           "reason": "applicability guards and confidence threshold passed",
           "confidence": 0.8,
-          "elapsed_seconds": 7.418099994538352e-05,
+          "elapsed_seconds": 3.744599999322418e-05,
           "binding_correct": true,
           "binding_detail": "ok",
           "has_unsubstituted_template": false
@@ -622,8 +622,8 @@
       "training_count": 3,
       "unseen_count": 3,
       "timestamps": {
-        "start": 1788459070.2646909,
-        "end": 1788459070.265281
+        "start": 1788469271.2357686,
+        "end": 1788469271.236132
       },
       "distill_success": true,
       "mechanism_id": "param-C5-shared-slot-name",
@@ -671,7 +671,7 @@
           },
           "reason": "applicability guards and confidence threshold passed",
           "confidence": 0.8,
-          "elapsed_seconds": 8.241299997280294e-05,
+          "elapsed_seconds": 5.5833000004668065e-05,
           "binding_correct": true,
           "binding_detail": "ok",
           "has_unsubstituted_template": false
@@ -696,7 +696,7 @@
           },
           "reason": "applicability guards and confidence threshold passed",
           "confidence": 0.8,
-          "elapsed_seconds": 7.189699999798904e-05,
+          "elapsed_seconds": 4.731000001356733e-05,
           "binding_correct": true,
           "binding_detail": "ok",
           "has_unsubstituted_template": false
@@ -721,7 +721,7 @@
           },
           "reason": "applicability guards and confidence threshold passed",
           "confidence": 0.8,
-          "elapsed_seconds": 5.630400005429692e-05,
+          "elapsed_seconds": 4.39949999986311e-05,
           "binding_correct": true,
           "binding_detail": "ok",
           "has_unsubstituted_template": false
@@ -767,8 +767,8 @@
         "template": {
           "method": "${method}",
           "url": "${url}",
-          "path": "${path}",
-          "data": "${data}"
+          "data": "${data}",
+          "path": "${path}"
         }
       },
       "resolution_status": "UNKNOWN",
