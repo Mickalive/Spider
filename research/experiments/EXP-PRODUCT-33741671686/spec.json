@@ -1,17 +1,30 @@
 {
   "experiment_id": "EXP-PRODUCT-33741671686",
   "lane": "product",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-PARAM-INHERIT"],
+  "question": "Does parameter induction generalize to multi-parameter mechanisms with distinct slot naming across path, body, and headers fields?",
+  "hypothesis": "Extending _extract_varying_values() to produce distinct parameter slot names per varying field (instead of hardcoding param_name='id') enables distill_parameterized() to induce multiple distinct slots from training observations where path, body, and headers each contain a varying value. The resulting multi-slot mechanism resolves EXECUTABLE with correct bound_action for unseen parameter combinations where all three fields vary simultaneously, and the existing _bind() pipeline correctly substitutes all slots.",
+  "falsifier": "The hypothesis is FALSIFIED if ANY of: (1) the extended _extract_varying_values() produces fewer distinct slot names than true varying fields (e.g., collapses path and headers into one slot) — indicates the extension fails to use structural position for naming; (2) the multi-slot mechanism fails to resolve EXECUTABLE for unseen combinations where all required slots are provided in params — indicates the kernel's required_slots check or _bind() cannot handle multiple slots; (3) bound_action contains an unsubstituted ${...} literal or incorrect value for any slot — indicates _bind() fails on multi-slot substitution; (4) the multi-slot mechanism incorrectly resolves for a partial-combination test where a required slot is missing from params — indicates slot completeness enforcement is broken for multi-slot mechanisms; (5) the original single-slot kernel (before extension) resolves correctly for multi-slot test data — indicates the test data is trivially solvable without distinct naming and therefore not discriminating.",
+  "baselines": [
+    "B1_COLD: No mechanism registered. resolve('create-item', context, {resource_id: 'X', title: 'Title X', token: 'token-X'}) must return UNKNOWN. Verifies kernel abstains when no knowledge exists.",
+    "B2_SINGLE_SLOT: Single-slot parameterized mechanism (parameter_slots=['id'], action_template with ${id} in path only, body and headers literal). resolve('create-item', context, {id: 'X', resource_id: 'X', title: 'Title X', token: 'token-X'}) must return EXECUTABLE but bound_action must have literal body/headers — fails to parameterize body.title and headers.Authorization. This demonstrates the parent experiment's limitation.",
+    "B3_LITERAL_REPLAY: Literal mechanism (no parameter_slots, action_template is fixed to training resource A). resolve('create-item', context, {}) must return EXECUTABLE with bound_action pointing to resource A — a universal catch-all per EXP-GRAPH-33528827169 finding, but with incorrect body/headers for unseen resources.",
+    "B4_NEAREST_RETRIEVAL: Nearest trajectory retrieval — find training observation with most similar state, return its action as replay. Must return the training resource A's action, failing on unseen resources X/Y/Z."
+  ],
+  "positive_control": "Multi-slot mechanism resolved with exact training parameters (resource_id='A', title='Title A', token='token-A'). Must return EXECUTABLE with bound_action correctly substituting all three slots to the training resource values. Verifies the extended mechanism works for seen data.",
+  "null_control": "Multi-slot mechanism resolved with mismatched preconditions (authenticated=False but mechanism requires authenticated=True). Must return UNKNOWN — precondition guard blocks execution despite all parameters being available. Verifies guards work independently of multi-slot binding.",
+  "measurement_validity": [
+    "All observations are synthetic deterministic data with no model calls, no network, no browser — this is a kernel mechanism test, not a real-web-complexity claim",
+    "Parameter slots are tested by exact string comparison of bound_action values against expected values for each slot independently",
+    "Training observations use resource_id values (A, B, C) that are structurally identical to unseen values (X, Y, Z) — same length, same character class — so the algorithm cannot distinguish them by value properties alone; it must use structural position",
+    "The extended _extract_varying_values() is the only code change; resolve(), _bind(), _template_slots(), and the Mechanism model are unchanged from the frozen kernel",
+    "No outcome-bearing measurements during DESIGN phase — all measurements deferred to EXECUTE",
+    "Each test condition uses a fresh registry to prevent cross-contamination between conditions",
+    "The single-slot baseline (B2) uses the SAME training observations as the multi-slot test, ensuring a fair comparison of what the single-slot vs multi-slot mechanisms can extract"
+  ],
+  "decision_rule": "C-PARAM-INHERIT advances to multi-parameter level if ALL of: (1) multi-slot mechanism has >= 3 distinct parameter_slots (one per varying field: resource_id, title, token); (2) all 3 unseen full-combination tests (X, Y, Z) resolve EXECUTABLE with correct bound_action for path, body, and headers independently; (3) partial-combination test (missing title) resolves UNKNOWN; (4) positive control resolves EXECUTABLE with correct bound_action; (5) null control resolves UNKNOWN; (6) cold baseline resolves UNKNOWN. Otherwise C-PARAM-INHERIT is blocked at multi-parameter level.",
+  "product_consequence_positive": "Multi-parameter inheritance is viable at the kernel level. The Product lane can proceed to test parameterized mechanisms on real-browser observations with multiple varying fields (e.g., search + pagination, form + resource, auth + endpoint). Claim ceiling raises from single-parameter synthetic POC to multi-parameter synthetic POC. Promotion readiness increases but remains gated on real-browser and cost measurements.",
+  "product_consequence_negative": "Multi-parameter inheritance fails at the kernel extension level. The _extract_varying_values() heuristic cannot produce distinct slot names from structural position alone. C-PARAM-INHERIT is blocked at single-parameter until a fundamentally different induction approach is found (e.g., LLM-based slot naming, type-aware extraction). Product architecture must reconsider whether parameterized inheritance is viable without external induction.",
+  "estimated_cost": "Low: kernel extension to _extract_varying_values() within src/spider/kernel.py (Product lane code root), synthetic test observations, no external infrastructure, no model calls, no network. Execution time < 30 seconds.",
+  "expected_information_gain": "HIGH for C-PARAM-INHERIT. This is the exact gate identified by the parent experiment's audit as the required next step. A positive result materially extends the claim ceiling from single-parameter to multi-parameter. A negative result identifies a fundamental limitation of the heuristic approach. Both outcomes change the Product lane's next investment decision."
 }
