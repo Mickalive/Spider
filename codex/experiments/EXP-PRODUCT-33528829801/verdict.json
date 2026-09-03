@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-33528829801",
+  "lane": "product",
+  "decision": "SURVIVES — C-PARAM-INHERIT survives at synthetic in-kernel POC level: distill_parameterized() with _extract_varying_values() correctly induces one parameter slot for isomorphic action paths and resolves to EXECUTABLE with correct bound_action for all 10 unseen single-char identifiers. All four frozen decision-rule conditions satisfied. Audit PASS confirms recomputed metrics match producer. However, the claim ceiling is narrow: single-parameter, single-field, common-prefix heuristic, deterministic synthetic data, hardcoded confidence, simulated baselines. No broader product promotion is authorized by this evidence.",
+  "claim_updates": [
+    {
+      "claim_id": "C-PARAM-INHERIT",
+      "status": "EXPERIMENTAL",
+      "reason": "Survives frozen POC gate: unseen_resolution_rate=1.0 (10/10), binding_accuracy=1.0 (10/10), parameter_induction_fn_rate=0.0 (1/1 detected), literal_fail_rate=1.0 (0/10 EXECUTABLE), positive and null controls pass. Audit PASS confirms recomputation. Ceiling is narrow synthetic single-parameter single-field common-prefix level only; does NOT establish general parameter induction, multi-parameter capability, real-browser viability, or measured end-to-end economics."
+    }
+  ],
+  "product_action": "NO_PROMOTION — C-PARAM-INHERIT survives as proven in-kernel capability but does not meet promotion threshold. The evidence is a synthetic POC with tautological data-heuristic alignment, hardcoded confidence (0.9 vs 0.5), simulated baselines (B1=4 ops, B2 hardcoded EXPLORE, B3 hardcoded fail), no model calls, no browser, no noise. Promotion requires: (1) multi-parameter induction with distinct slot naming, (2) noisy/real-browser observation distillation, (3) measured end-to-end cost baselines with real LLM agent, (4) adversarial edge cases (empty, special-char, long identifiers), (5) confidence calibration rather than hardcoded thresholds.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does parameter induction generalize to multi-parameter mechanisms (e.g., POST /api/${resource}/${id} with body {name:${title}}) with distinct slot naming, and does it survive when training observations come from real browser sessions with noisy multi-step actions and varying preconditions?",
+  "reason": "The frozen decision rule had 4 conditions all satisfied (unseen_resolution_rate >= 90%, binding_accuracy 100%, literal_fail_rate 100%, fn_rate <= 0.2). Audit PASS confirmed recomputation from raw_evidence.json. However, the audit claim ceiling explicitly limits survival to synthetic single-parameter common-prefix POC only. The experiment does not test the harder generalization conditions required for product promotion: multi-parameter mechanisms, real-browser noise, adversarial values, or measured LLM-agent cost. Continuing to multi-parameter induction is the natural next step because it tests the same kernel mechanism on a materially harder pattern without requiring external infrastructure.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-33528829801/spec.json -> claim_ids=[C-PARAM-INHERIT], decision_rule, falsifier, baselines B1-B3, positive/null controls",
+    "research/experiments/EXP-PRODUCT-33528829801/freeze.json -> frozen at 2026-09-01T16:10:59, hashes prereg ea9e6bce..., spec 2a2299e5...",
+    "research/experiments/EXP-PRODUCT-33528829801/result.json -> status=COMPLETE, outcome=SUPPORTS, metrics.unseen_resolution_rate=1.0, binding_accuracy=1.0, parameter_induction_fn_rate=0.0, b2_literal_fail_rate=1.0, controls passed",
+    "research/experiments/EXP-PRODUCT-33528829801/raw_evidence.json -> distillation.action_template=/api/items/${id}, parameter_slots=[id], resolution_results.summary 10/10 EXECUTABLE, controls.positive EXECUTABLE, controls.null UNKNOWN, baselines B1/B2/B3 results",
+    "research/experiments/EXP-PRODUCT-33528829801/audit.json -> status=PASS, producer_claim_supported=true, claim_ceiling=synthetic POC single-parameter common-prefix, required_fixes=[provenance inconsistency, multi-field collision, empty-identifier edge, discriminating baselines], validity_findings=[synthetic limits, tautological construction, hardcoded confidence, simulated costs]",
+    "research/experiments/EXP-PRODUCT-33528829801/provenance.json -> all_synthetic=true, training [A,B,C], unseen [D..M], deterministic, no model calls"
+  ]
+}

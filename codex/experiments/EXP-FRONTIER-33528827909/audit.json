@@ -1,0 +1,163 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-33528827909",
+  "lane": "frontier",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Fix Spearman inference: prereg spec requires Spearman rho>=0.7 with p<0.05 after Bonferroni x12, but producer code uses Bonferroni x3 (statistical_tests.spearman_correlation.n_comparisons=3) and reports aggregate p=0.0 / Bonferroni p=0.0 which is impossible for n=4; exact permutation p for n=4 rho=1.0 is p_one_sided=0.0417 (p_two_sided=0.0833); after preregistered x12 correction p_corrected >=0.5, so primary monotonicity test cannot achieve significance with only 4 lambda levels — redesign requires >=6-8 lambda levels or exact test without infeasible Bonferroni",
+    "Fix saturated two-way ANOVA design: frozen spec.json falsifier and decision_rule require test of function x lambda interaction (p>0.05), but with 3 functions x 4 lambda levels x 1 obs/cell the full interaction model has 0 residual df (result.json validity_notes and report.md confirm saturated). Preregistered interaction test is unestimable. Required fix: generate replicates per cell (e.g., 5-10 independent train/test splits per lambda-function) to provide residual df, or preregister CV/monosubstitute BEFORE freeze — post-hoc substitution of CV<0.3 + monotonic ordering violates frozen spec",
+    "Replace CV<0.3 function invariance threshold: CV = std/mean is invalid when mean rule_memory_diff near zero at lambda=0 (0.0533) and lambda=0.25 (0.0867); small absolute variation (std 0.025-0.053) inflates CV to 0.47-0.61 despite no systematic function effect (ANOVA function F=0.0258 p=0.9746, R2=0.967). Fix with absolute-scale metric (e.g., std <0.05 or ANOVA-based equivalence) and require larger test n per cell",
+    "Increase test sample per cell from 50 to >=200: with 50 test transitions at lambda=0 pure noise and lambda=0.25 75% noise, accuracy estimates have SE ~0.07; observed function_2 dip 0.08->0.04 (report.md) is within sampling noise and drives both CV failure and per-function Spearman rho=0.8 p=0.2; prereg validity_notes already flags limited power for d=0.8",
+    "Report frequency and shuffle baselines quantitatively in result.json metrics (currently only qualitative observations): shuffle should ~ memory at lambda=0 and ~ memory at lambda=1; frequency should ~0.10; needed to verify baseline strength and that producer baselines are not mis-implemented",
+    "Recompute and report exact p-values for paired t-tests with df=2 (n=3 functions) using correct distributions; current paired_t_cohens_d_by_lambda values (1.74,1.35,4.05,21.4) indicate t-statistics 3.02 at lambda0 is underpowered (critical t_0.05,df2=4.30) — disclosure that null_control p=0.094 pass reflects lack of power, not evidence of absence"
+  ],
+  "validity_findings": [
+    {
+      "finding": "Target/leakage: NO leakage detected. Rules fit on train only, default_pred from train only, shuffle uses shuffled train labels, test never seen during fitting. Analyze.py fit_rule_baseline / predict_rule and fit_memory_baseline correctly isolate train/test.",
+      "severity": "none",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-33528827909/analyze.py:82-139, result.json validity_notes[5]"
+    },
+    {
+      "finding": "Split/sampling integrity: PASS per cell but design pools 250 transitions per lambda per function then random 80/20 split via single shuffle (analyze.py:178-188). No stratification by (state,action) as prereg 5.4 claims; each (state,action) expected count ~6.25 train, some pairs unseen. Cold-start fallback to marginal most-common is correctly implemented but sparsity inflates variance at low lambda.",
+      "severity": "minor",
+      "evidence_ref": "analyze.py:175-188, prereg.md 5.4"
+    },
+    {
+      "finding": "Representation loss: discrete 10-state 4-action permutation functions (make_deterministic_function seeds 42,43,44) are minimal Web analog; state space finite, deterministic mapping per (state,action) is one-to-one permutation — guarantees learnability at lambda=1 (positive control 100%). Limits generalizability to real Web with larger/structured/continuous spaces; synthetic-to-real gap disclosed in validity_notes[3].",
+      "severity": "major",
+      "evidence_ref": "analyze.py:50-59, provenance.json frozen_parameters, spec.json measurement_validity[2-4]"
+    },
+    {
+      "finding": "Positive control STRONG PASS: rules 1.0,1.0,1.0 at lambda=1 across all functions (result.json metrics.positive_control_rule_accuracy_lambda1) demonstrates environment can express tested effect and pipeline detects it; recomputed matches 1.0",
+      "severity": "none",
+      "evidence_ref": "result.json controls.positive_control, report.md:24"
+    },
+    {
+      "finding": "Null control PASS but underpowered: paired t at lambda0 t=3.024 p=0.094178 df=2 (recomputed t=3.0237 matches) does not reject, but with n=3 and Cohen d=1.75 critical t=4.30, power <20% for small effects; pass is absence of evidence not evidence of absence. Producer correctly reports pass but over-interprets as verification pipeline does not detect structure when absent.",
+      "severity": "major",
+      "evidence_ref": "result.json metrics.null_control_paired_t_p_value_lambda0, controls.null_control, report.md paired_t"
+    },
+    {
+      "finding": "Primary monotonicity effect size ROBUST but inference INVALID: recomputed rule_memory_diff means 0.0533,0.0867,0.3067,0.6533 strictly increasing (recomputed matches producer). Spearman rho=1.0 correct for ranks 1,2,3,4, but reported p=0.0 and Bonferroni p=0.0 are numerically impossible for n=4; exact permutation p_one_sided=0.0417, p_two_sided=0.0833, after Bonferroni x12 (spec) p>=0.5 — would FAIL frozen decision_rule. Code uses x3 not x12 (analyze.py:272). Producer claim of p<0.000001 Bonferroni-corrected is measurement-invalid.",
+      "severity": "critical",
+      "evidence_ref": "result.json metrics.spearman_rho_aggregate, spearman_p_value, spearman_bonferroni_p, spec.json falsifier/decision_rule, analyze.py:260-284"
+    },
+    {
+      "finding": "Function invariance control FAIL is artifact, not evidence of heterogeneity: CV 0.4677 at lambda0 and 0.6057 at lambda0.25 (recomputed CVs match 0.4677,0.6057,0.2016,0.0382) driven by small denominators (mean 0.05-0.08). ANOVA main-effects shows lambda F=58.99 p=7.6e-05, function F=0.0258 p=0.9746, R2=0.9672 (recomputed structure matches; function explains ~0% variance). Non-monotonic function_2 0.08->0.04 at 0->0.25 is single noisy point with n=50 test (SE ~0.07). Substitute CV<0.3 + all-functions-monotonic was not frozen — spec requires ANOVA interaction p>0.05 which is unestimable (0 residual df). Producer validity_notes[1-2] discloses saturation but still bases FALSIFIES on substitute.",
+      "severity": "critical",
+      "evidence_ref": "result.json metrics.function_invariance_cv_by_lambda, controls.function_invariance, result.json metrics.anova_*, report.md Control Checks, analyze.py:307-376, spec.json decision_rule"
+    },
+    {
+      "finding": "Baseline strength: rule and memory baselines are weak but appropriate nulls (majority-vote); frequency baseline expected 0.10 not reported in metrics, shuffle baseline described qualitatively as tracking rule at lambda0 and memory at lambda1 (report observations) but no quantitative metrics — cannot verify shuffle null fully. Baselines do not include stronger alternatives (e.g., n-gram, embedding similarity).",
+      "severity": "minor",
+      "evidence_ref": "spec.json baselines, result.json observations[9], analyze.py:122-138"
+    },
+    {
+      "finding": "Provenance: hashes verified freeze.json_hash_verified true, spec/prereg/request hashes match frozen (provenance.json frozen_inputs). Script hash c832e14 matches artifact, environment python 3.12.14 numpy 2.5.2 etc. Execution exit 0. No provenance failure. File set complete except raw transition artifacts not persisted (derived result.json only).",
+      "severity": "none",
+      "evidence_ref": "provenance.json, freeze.json, result.json artifacts"
+    },
+    {
+      "finding": "Observed environment COULD express effect: lambda manipulation produces monotonic rule accuracy 0.113->0.187->0.547->1.0 and memory 0.06->0.10->0.24->0.347 (result.json rule_accuracy_mean_by_lambda / memory_accuracy_mean_by_lambda, recomputed). Positive control confirms. Failure to find function invariance at low lambda is not failure of environment to express dynamics.",
+      "severity": "none",
+      "evidence_ref": "result.json metrics.rule_accuracy_mean_by_lambda, memory_accuracy_mean_by_lambda, report.md per-function accuracies"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline": "Pure nearest-neighbor memory baseline (no action conditioning)",
+      "strength": "weak appropriate null: majority-vote per state ignoring action; implementation fit_memory_baseline correctly aggregates per-state counts; expected accuracy rises with lambda because S_{t+1} correlated with S_t via deterministic function even when conditioning ignored (0.06 at lambda0 to 0.347 at lambda1) — not a bug",
+      "recomputed": "memory means recomputed 0.06,0.10,0.24,0.3467 match producer",
+      "evidence_ref": "analyze.py:102-120, result.json metrics.memory_accuracy_mean_by_lambda"
+    },
+    {
+      "baseline": "Action-conditioned rule baseline (majority vote of (state,action)->next_state)",
+      "strength": "appropriate test of action-dependence; correctly implements per-(state,action) majority with fallback to marginal; at lambda1 achieves 1.0 proving deterministic functions learnable with 200 train samples for 40 pairs",
+      "recomputed": "rule means recomputed 0.1133,0.1867,0.5467,1.0 match producer; positive_control 1.0,1.0,1.0 verified",
+      "evidence_ref": "analyze.py:82-99, result.json metrics.rule_accuracy_mean_by_lambda"
+    },
+    {
+      "baseline": "Frequency baseline (marginal next-state distribution)",
+      "strength": "trivial chance ~0.10; producer states frequency expected 10% (prereg 7.2) but result.json metrics omit frequency values; observations claim shuffle tracks rule at lambda0 etc. but quantitative frequency accuracy not provided to verify baseline is stronger than memory at lambda0 (it should be similar)",
+      "recomputed": null,
+      "evidence_ref": "spec.json baselines[2], analyze.py:122-130, result.json observations[9]"
+    },
+    {
+      "baseline": "Shuffle baseline (action labels permuted)",
+      "strength": "correct null for action-dependence: shuffling train action labels should destroy rule advantage; producer implements make_shuffled_train via rng.shuffle(actions) and retrains rules; report notes shuffle ~0.11 at lambda0 and ~0.39 at lambda1 near memory — qualitatively correct but not in metrics, cannot recompute without raw artifacts",
+      "recomputed": null,
+      "evidence_ref": "analyze.py:133-138,199-203, result.json observations[9]"
+    }
+  ],
+  "recomputed_metrics": {
+    "rule_memory_diff_mean_by_lambda": {
+      "0.0": 0.0533,
+      "0.25": 0.0867,
+      "0.5": 0.3067,
+      "1.0": 0.6533
+    },
+    "recomputed_rule_memory_diffs_per_function": {
+      "function_1_seed42": [0.02, 0.06, 0.36, 0.66],
+      "function_2_seed43": [0.08, 0.04, 0.34, 0.62],
+      "function_3_seed44": [0.06, 0.16, 0.22, 0.68]
+    },
+    "recomputed_CV_by_lambda": {
+      "0.0": 0.4677,
+      "0.25": 0.6057,
+      "0.5": 0.2016,
+      "1.0": 0.0382
+    },
+    "recomputed_paired_t_lambda0": {
+      "t": 3.0237,
+      "p": 0.094178,
+      "df": 2,
+      "cohens_d": 1.7457,
+      "note": "matches producer p=0.094178; df=2 critical t 4.30, underpowered"
+    },
+    "recomputed_spearman_aggregate": {
+      "rho": 1.0,
+      "reported_p": 0.0,
+      "correct_exact_p_one_sided": 0.0417,
+      "correct_exact_p_two_sided": 0.0833,
+      "bonferroni_x12_corrected_one_sided": 0.5,
+      "bonferroni_x3_corrected_one_sided": 0.125,
+      "producer_bonferroni_p": 0.0,
+      "discrepancy": "producer p=0.0 impossible for n=4; Bonferroni count mismatch spec x12 vs code x3"
+    },
+    "recomputed_per_function_spearman": {
+      "function_1_seed42": {"rho": 1.0, "monotonic": true},
+      "function_2_seed43": {"rho": 0.8, "monotonic": false, "note": "decrease 0.08->0.04 at 0->0.25 breaks monotonic"},
+      "function_3_seed44": {"rho": 1.0, "monotonic": true}
+    },
+    "recomputed_ANOVA_main_effects": {
+      "lambda_F_reported": 58.9885,
+      "lambda_p_reported": 0.000076,
+      "function_F_reported": 0.0258,
+      "function_p_reported": 0.974649,
+      "r_squared_reported": 0.9672,
+      "verdict": "matches reported main-effects model; interaction unestimable due to 0 residual df (saturated 12 cells)"
+    },
+    "recomputed_monotonic_sensitivity": true,
+    "recomputed_positive_control_pass": true,
+    "recomputed_null_control_pass": true,
+    "recomputed_function_invariance_pass": false
+  },
+  "claim_ceiling": "Descriptive only: In synthetic 10-state 4-action permutation transitions with n=250 per lambda per function (50 test), mean rule-memory accuracy difference increases with lambda (0.053 at 0.0, 0.087 at 0.25, 0.307 at 0.5, 0.653 at 1.0) and rule accuracy scales 0.11->1.0 while memory plateaus 0.06->0.35; positive control proves pipeline can detect full action-dependence. No justified inferential claim of Spearman rho significance (n=4 exact p=0.042 one-sided, fails Bonferroni x12), no justified claim of function invariance violation (CV metric invalid at low means, ANOVA interaction unestimable, function main effect p=0.97, variance explained by lambda 96.7%), and no generalization to real Web transitions. Maximum justified is regime-dependent difference in effect size within this synthetic class at moderate-high lambda; function invariance at low lambda remains UNKNOWN and requires replicates and larger n.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-33528827909/spec.json: hypothesis, falsifier, decision_rule, baselines, positive_control, null_control",
+    "research/experiments/EXP-FRONTIER-33528827909/prereg.md: 5-11 decision rules, Bonferroni x12, ANOVA interaction requirement",
+    "research/experiments/EXP-FRONTIER-33528827909/freeze.json: hashes fe78533f, f2cd3e67, dbadd1fc",
+    "research/experiments/EXP-FRONTIER-33528827909/result.json: metrics.* (spearman_rho_aggregate 1.0, spearman_p_value 0.0, rule_memory_diff_mean_by_lambda, anova_lambda_effect_F 58.9885, function_invariance_cv_by_lambda), controls.* (positive_control pass true, null_control pass true, function_invariance pass false), observations, validity_notes",
+    "research/experiments/EXP-FRONTIER-33528827909/report.md: per-function accuracies table, aggregate diff table, statistical tests, control checks",
+    "research/experiments/EXP-FRONTIER-33528827909/analyze.py:50-59 deterministic functions, 63-77 generation, 82-138 baselines, 178-188 split, 260-284 Spearman, 307-376 ANOVA, 382-442 controls",
+    "research/experiments/EXP-FRONTIER-33528827909/provenance.json: frozen_inputs hashes, execution_timestamp 2026-09-02T18:15:00Z, github_run_id 33664084980"
+  ],
+  "unresolved": [
+    "Whether function invariance true failure persists with proper replicated design (5-10 replicates per cell) to estimate interaction and absolute variation; current n=1 per cell makes interaction untestable",
+    "Exact permutation p and power for monotonicity with 4 lambda levels: is there any feasible Bonferroni-corrected significant rho with n=4? Requires redesign with 6-8 lambda levels or different monotonicity test (e.g., Jonckheere-Terpstra)",
+    "Whether Function 2 seed=43 non-monotonic dip (0.08->0.04) is function-specific artifact or sampling noise — needs larger test n (>=200) to resolve",
+    "Real-Web translation: does action-dependence heterogeneity observed in synthetic permutations correspond to Web-like regimes (form submit vs navigation)? Untested; synthetic-to-real gap remains",
+    "Frequency and shuffle baseline quantitative values not in metrics — cannot fully audit baseline strength or confirm expected 10% chance and shuffle~memory"
+  ]
+}

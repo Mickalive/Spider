@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-33528827169",
+  "lane": "graph",
+  "github_run_id": "33664086269",
+  "github_run_attempt": 1,
+  "pre_execute_sha": "1bed83aa7ca959a337070942d55ad258974f2fb4",
+  "post_execute_sha": "feea081ca641bd6aed40a7c6f8b1584a0752c711",
+  "frozen_request_hash": "fc823b0ef78b1a62c61007c0f4234738351c955bf2a39504bc4a2693702e19ce",
+  "frozen_prereg_hash": "1fbbc2857bce9bd7047069505a83ba05600a85e9f3fd7569bc86cdf7c0013ece",
+  "frozen_spec_hash": "4ce0cc68fdae3d9913e62dbcf91d47b39c86fff315cfcfaaba43c83484568a9d",
+  "recorded_at": "2026-09-02T18:00:00.000000+00:00",
+  "datasets": {
+    "test_endpoint": "https://jsonplaceholder.typicode.com",
+    "resources_tested": ["/posts/1", "/posts/2", "/posts/3", "/posts/4", "/posts/5", "/posts/6"],
+    "rationale": "Stable public REST API with deterministic JSON responses, no auth, no session state"
+  },
+  "code_paths": {
+    "kernel": "src/spider/kernel.py",
+    "models": "src/spider/models.py",
+    "registry": "src/spider/registry.py",
+    "experiment_script": "research/experiments/EXP-GRAPH-33528827169/run_experiment.py"
+  },
+  "environment": {
+    "platform": "linux",
+    "python_packages": ["requests"],
+    "model": "opencode/mimo-v2-5-free"
+  },
+  "artifacts": {
+    "raw_results": {
+      "path": "research/experiments/EXP-GRAPH-33528827169/raw_results.json",
+      "role": "raw"
+    },
+    "run_script": {
+      "path": "research/experiments/EXP-GRAPH-33528827169/run_experiment.py",
+      "role": "code"
+    },
+    "spec": {
+      "path": "research/experiments/EXP-GRAPH-33528827169/spec.json",
+      "role": "fixture"
+    },
+    "prereg": {
+      "path": "research/experiments/EXP-GRAPH-33528827169/prereg.md",
+      "role": "fixture"
+    }
+  },
+  "reproduction_command": "python research/experiments/EXP-GRAPH-33528827169/run_experiment.py",
+  "notes": [
+    "The raw_results.json was produced by run_experiment.py during this execution run",
+    "All HTTP requests to jsonplaceholder.typicode.com succeeded (status 200)",
+    "No network failures, timeouts, or API changes observed during execution",
+    "The literal-unseen failure is a design finding, not an infrastructure failure"
+  ]
+}

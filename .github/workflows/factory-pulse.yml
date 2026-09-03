@@ -3,8 +3,21 @@ run-name: Factory pulse ${{ github.run_id }}
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/factory-pulse.yml"
+      - ".github/workflows/spider-lane.yml"
+      - ".github/scripts/**"
+      - ".opencode/**"
+      - "scripts/**"
+      - "research/EXPERIMENT_PACKET.md"
+      - "research/claims/**"
+      - "research/lanes/**"
+      - "AGENTS.md"
+      - "SPIDER_ARCHITECTURE_RESEARCH2.md"
   schedule:
-    - cron: "17,47 * * * *"
+    - cron: "7,22,37,52 * * * *"
 
 permissions:
   contents: read
