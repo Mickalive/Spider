@@ -1,0 +1,9 @@
+{
+  "stage": "director",
+  "category": "DIRECTOR_FAILURE",
+  "message": "stage exited with code 66",
+  "retryable": false,
+  "recorded_at": "2026-09-03T00:56:49.261111+00:00",
+  "github_run_id": "33701283358",
+  "github_run_attempt": "1"
+}
