@@ -1,17 +1,32 @@
 {
   "experiment_id": "EXP-RUNTIME-33767375933",
   "lane": "runtime",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "After applying deterministic fingerprint serialization, Date header exclusion, strong single-field baselines, and calibrated timing jitter, does the HTTP observation substrate maintain discrimination on the fixed toy server — and does it discriminate on a non-tautological external endpoint where response variation is not hand-programmed?",
+  "hypothesis": "The fixed substrate (deterministic SHA-256 of sorted-tuple vector, excluding Date/Server headers) will: (1) maintain discrimination score > 0.5 on the toy server with 0-200ms inter-request jitter (positive control); (2) achieve discrimination score > 0.5 on httpbin.org/status endpoints (external non-tautological endpoint).",
+  "falsifier": "The hypothesis is FALSIFIED if ANY of: (1) Fixed substrate discrimination on jittered toy server < 0.5 (fixes broke mechanism); (2) Fixed substrate discrimination on httpbin.org < 0.5 (ecological validity fails); (3) Null control FP rate > 5% on jittered toy server (jitter causes false positives); (4) Strong baseline B-STATUS-ONLY achieves discrimination >= substrate on toy server (substrate adds no value over single field); (5) Strong baseline B-BODY-ONLY achieves discrimination >= substrate on toy server (substrate adds no value over single field).",
+  "baselines": [
+    "B-URL-HASH: SHA-256 of URL string only — straw-man, expected 0.0",
+    "B-RANDOM: random 256-bit fingerprints — straw-man, expected ~0.0",
+    "B-TIMING: SHA-256 of timestamp string — straw-man, expected ~0.0",
+    "B-STATUS-ONLY: SHA-256 of status code string — strong single-field, expected >0 but < substrate on toy server",
+    "B-BODY-ONLY: SHA-256 of response body bytes — strong single-field, expected 1.0 on toy server (body fully discriminates), expected <1.0 on httpbin.org (bodies may be identical across status codes)"
+  ],
+  "positive_control": "Fixed toy server with jitter: 5 states x 10 reps, 0-200ms random delay between requests. Substrate must achieve discrimination score > 0.5 and positive TP rate > 95%.",
+  "null_control": "Repeated identical requests to same toy server state with jitter: FP rate must be < 5%. Validates that jitter does not cause false fingerprint variation.",
+  "measurement_validity": [
+    "Fingerprint function: SHA-256 of (status, tuple(sorted(headers.items())), body_sha256, redirect_chain) — deterministic, excludes Date and Server headers",
+    "Jitter: random.uniform(0, 0.2) seconds between consecutive requests — spans multiple seconds to expose Date header variation",
+    "Toy server: 5 states x 10 reps = 50 requests, randomized order with seed 42",
+    "External endpoint: 3 states x 10 reps = 30 requests, randomized order with seed 43",
+    "External endpoint: httpbin.org/status/{200,401,403} — real HTTP server, responses not controlled by experimenter",
+    "Drift control: monotonic distance increase valid_token -> expired_token -> invalid_token",
+    "Held-out: session_cookie tested against calibration set of states 1-4 using exact fingerprint equality",
+    "No outcome-bearing measurements during DESIGN phase"
+  ],
+  "decision_rule": "C-MEAS-VALID SURVIVES if ALL of: (1) Phase A (toy server) discrimination > 0.5; (2) Phase A null FP rate < 5%; (3) Phase A positive TP rate > 95%; (4) Phase A B-STATUS-ONLY discrimination < substrate discrimination; (5) Phase A B-BODY-ONLY discrimination < substrate discrimination; (6) Phase B (httpbin.org) discrimination > 0.5. C-MEAS-VALID FALSIFIED if Phase A passes but Phase B discrimination <= 0.5. MEASUREMENT_INVALID if Phase A fails (fixes broke mechanism).",
+  "product_consequence_positive": "HTTP observation is a viable runtime substrate for auth/session drift detection on real servers. C-MEAS-VALID advances to broader testing. Product can build freshness guards and drift detection on this substrate.",
+  "product_consequence_negative": "If Phase A passes but Phase B fails, HTTP observation is not reliable on real servers — the substrate only works in controlled environments. C-MEAS-VALID does not survive for general HTTP-level observation. Product must use alternative observation mechanisms (DOM, accessibility tree, timing distributions).",
+  "estimated_cost": "Low: 50 requests to local server + 30 requests to httpbin.org, no browser automation, no model calls. Execution time < 30 seconds.",
+  "expected_information_gain": "High: This is the ecological validity gate for C-MEAS-VALID. A positive result (substrate works on real server) enables the entire Runtime measurement pipeline. A negative result (substrate fails on real server) is a bounded falsification that constrains the Runtime architecture. Both outcomes are decision-relevant."
 }
