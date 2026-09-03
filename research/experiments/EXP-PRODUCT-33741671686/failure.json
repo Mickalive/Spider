@@ -3,7 +3,7 @@
   "category": "AUDIT_FAILURE",
   "message": "stage exited with code 66",
   "retryable": false,
-  "recorded_at": "2026-09-03T21:05:04.660843+00:00",
-  "github_run_id": "33805283361",
+  "recorded_at": "2026-09-03T23:17:04.186711+00:00",
+  "github_run_id": "33816741995",
   "github_run_attempt": "1"
 }
