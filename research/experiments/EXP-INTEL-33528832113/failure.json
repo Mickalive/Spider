@@ -1,9 +1,9 @@
 {
   "stage": "director",
   "category": "VALIDATION_FAILURE",
-  "message": "invalid claim update status: NOT_UPDATED",
+  "message": "invalid claim update status: evidence_available_not_validated",
   "retryable": false,
-  "recorded_at": "2026-09-03T18:02:56.872739+00:00",
-  "github_run_id": "33788033434",
+  "recorded_at": "2026-09-03T20:58:51.787695+00:00",
+  "github_run_id": "33805283529",
   "github_run_attempt": "1"
 }
