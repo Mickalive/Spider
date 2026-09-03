@@ -64,7 +64,7 @@ This experiment uses **causal effect heterogeneity via direct interventional ana
 ## 4. Hypotheses
 
 ### H1: Monotonic Scaling
-The causal effect heterogeneity (variance of expected next-states across actions) increases monotonically with lambda. Spearman rho(heterogeneity, lambda) >= 0.65.
+The causal effect heterogeneity (variance of expected next-states across actions) increases monotonically with lambda. Aggregate Spearman rho(heterogeneity, lambda) >= 0.65.
 
 ### H2: Positive Control
 At lambda=1 (fully action-determined), heterogeneity >= 0.5 across all 3 deterministic functions.
@@ -146,13 +146,13 @@ For each replication, generate 500 transitions at a given lambda and function. G
 
 ### 6.5 Primary Statistic
 
-Spearman rank correlation between het(lambda) and lambda across the 8 levels, averaged across functions.
+Spearman rank correlation between het(lambda) and lambda across the 8 levels, averaged across functions (aggregate test, n=8, single comparison).
 
 ## 7. Measures
 
 ### 7.1 Primary Metric
 - **causal_het_by_lambda**: Average heterogeneity at each lambda level, averaged across 3 functions x 10 replications
-- **spearman_rho**: Spearman correlation between causal_het_by_lambda and lambda
+- **spearman_rho_aggregate**: Spearman correlation between causal_het_by_lambda and lambda (n=8, single aggregate comparison)
 
 ### 7.2 Secondary Metrics
 - Per-function heterogeneity at each lambda level
@@ -175,10 +175,10 @@ Under no action-dependence (lambda=0), the expected heterogeneity is 0. The perm
 ## 9. Statistical Tests
 
 ### 9.1 Primary Test
-- Spearman rank correlation: rho(causal_het_by_lambda, lambda)
+- Spearman rank correlation: rho(causal_het_by_lambda, lambda) across 8 lambda levels
 - One-sided test: rho > 0
-- Bonferroni correction for 8 lambda levels x 3 functions = 24 comparisons
-- With n=8, rho >= 0.65 gives exact one-sided p <= 0.048 (from Spearman table for n=8). After Bonferroni x24, need p < 0.002, requiring rho >= 0.83. However, the primary test uses the aggregate (averaged across functions), which has n=8 and a single comparison (no correction needed for the aggregate test). Correction applies to per-function tests.
+- **Aggregate test (single comparison, no Bonferroni correction needed)**: rho >= 0.65, p < 0.05 one-sided. For n=8, exact one-sided p(rho >= 0.619) = 0.025; rho >= 0.65 gives p < 0.05 one-sided.
+- **Per-function tests (3 comparisons, Bonferroni corrected)**: rho >= 0.83, p < 0.0021 one-sided (alpha = 0.05/3 = 0.0167). These are secondary confirmation.
 
 ### 9.2 Permutation Tests
 - At lambda=0: permutation test for heterogeneity > 0 (one-sided, 1000 permutations)
@@ -223,7 +223,7 @@ With ~125 transitions per action per cell, per-action means have SE ~0.26. The v
 Only 3 permutation-based functions tested. Other deterministic structures might show different behavior. **Mitigation**: require consistent results across all 3 functions; significant function x lambda interaction invalidates the finding.
 
 ### 11.4 Multiple Comparisons
-With 24 per-function comparisons, Bonferroni is conservative. **Mitigation**: primary test uses aggregate (single comparison, no correction needed); per-function tests are secondary.
+Aggregate test is a single comparison (no correction needed). Per-function tests use Bonferroni x3. **Mitigation**: primary test is aggregate; per-function tests are secondary.
 
 ### 11.5 Spearman Power with n=8
 With n=8 lambda levels, the exact Spearman test has limited power for moderate rho values. **Mitigation**: rho=1.0 from parent experiment suggests the effect is strong; 8 levels give substantially more power than 4; report exact p-values.
@@ -235,7 +235,7 @@ This experiment uses a different metric (causal heterogeneity vs. prediction acc
 
 ### 12.1 SURVIVES_CURRENT_TEST
 If ALL of:
-1. Spearman rho(causal_het_by_lambda, lambda) >= 0.65, p < 0.05 (one-sided, Bonferroni corrected for 24 per-function comparisons)
+1. Aggregate Spearman rho(causal_het_by_lambda, lambda) >= 0.65, p < 0.05 one-sided (single aggregate comparison, no Bonferroni correction)
 2. Positive control passes: heterogeneity >= 0.5 at lambda=1 across all functions
 3. Null control passes: heterogeneity not significantly > 0 at lambda=0 (permutation p > 0.05)
 4. No significant function x lambda interaction (two-way ANOVA p > 0.05)
@@ -243,7 +243,7 @@ If ALL of:
 
 ### 12.2 FALSIFIED-IN-SETTING
 If ANY of:
-1. Spearman rho < 0.65 or p > 0.05 after correction
+1. Aggregate Spearman rho < 0.65 or p > 0.05 one-sided
 2. Positive control fails (heterogeneity < 0.5 at lambda=1 in any function)
 3. Null control fails (heterogeneity significantly > 0 at lambda=0)
 4. Significant function x lambda interaction (p < 0.05)
@@ -277,8 +277,8 @@ If:
 1. **Data Generation**: Generate 120,000 transitions at 8 lambda levels x 3 functions x 10 replications x 500 transitions
 2. **Interventional Distribution Computation**: For each replication-lambda-function cell, group transitions by action, compute sample mean next-state per action
 3. **Heterogeneity Computation**: Compute variance of 4 per-action means → heterogeneity estimate
-4. **Primary Test**: Spearman correlation between average heterogeneity and lambda (n=8)
-5. **Per-Function Tests**: Spearman correlation per function (n=8 each, Bonferroni corrected)
+4. **Primary Test**: Spearman correlation between average heterogeneity and lambda (n=8, single comparison, no correction)
+5. **Per-Function Tests**: Spearman correlation per function (n=8 each, Bonferroni x3 corrected)
 6. **Permutation Tests**: At lambda=0 and lambda=1, test heterogeneity against permutation null (1000 permutations)
 7. **Two-Way ANOVA**: heterogeneity ~ lambda + function + lambda:function (240 observations)
 8. **Controls**: Verify positive, null, permutation null, and function invariance controls
