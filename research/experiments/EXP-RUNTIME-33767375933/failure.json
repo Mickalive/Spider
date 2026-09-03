@@ -1,0 +1,9 @@
+{
+  "stage": "director",
+  "category": "VALIDATION_FAILURE",
+  "message": "invalid claim update status: NARROWLY_SUPPORTED",
+  "retryable": false,
+  "recorded_at": "2026-09-03T14:47:53.006457+00:00",
+  "github_run_id": "33767375933",
+  "github_run_attempt": "1"
+}
