@@ -1,0 +1,991 @@
+{
+  "experiment_id": "EXP-PRODUCT-33741671686",
+  "timestamp": "2026-09-03T18:11:10Z",
+  "conditions": {
+    "C1-single-path": {
+      "condition_id": "C1-single-path",
+      "training_count": 3,
+      "unseen_count": 5,
+      "timestamps": {
+        "start": 1788459070.2605708,
+        "end": 1788459070.2614315
+      },
+      "distill_success": true,
+      "mechanism_id": "param-C1-single-path",
+      "action_template": {
+        "method": "GET",
+        "url": "https://api.example.com/items/${url}"
+      },
+      "parameter_slots": [
+        "url"
+      ],
+      "slot_count": 1,
+      "confidence": 0.8,
+      "preconditions": {
+        "authenticated": true,
+        "role": "owner"
+      },
+      "postconditions": {
+        "exists": false
+      },
+      "slot_count_expected": 1,
+      "slot_count_met": true,
+      "slot_names_distinct": true,
+      "resolution_results": [
+        {
+          "params": {
+            "id": "D"
+          },
+          "resolve_params": {
+            "url": "D"
+          },
+          "status": "EXECUTABLE",
+          "mechanism_id": "param-C1-single-path",
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/items/D"
+          },
+          "reason": "applicability guards and confidence threshold passed",
+          "confidence": 0.8,
+          "elapsed_seconds": 0.00010065100002520921,
+          "binding_correct": true,
+          "binding_detail": "ok",
+          "has_unsubstituted_template": false
+        },
+        {
+          "params": {
+            "id": "E"
+          },
+          "resolve_params": {
+            "url": "E"
+          },
+          "status": "EXECUTABLE",
+          "mechanism_id": "param-C1-single-path",
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/items/E"
+          },
+          "reason": "applicability guards and confidence threshold passed",
+          "confidence": 0.8,
+          "elapsed_seconds": 8.025900001484843e-05,
+          "binding_correct": true,
+          "binding_detail": "ok",
+          "has_unsubstituted_template": false
+        },
+        {
+          "params": {
+            "id": "F"
+          },
+          "resolve_params": {
+            "url": "F"
+          },
+          "status": "EXECUTABLE",
+          "mechanism_id": "param-C1-single-path",
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/items/F"
+          },
+          "reason": "applicability guards and confidence threshold passed",
+          "confidence": 0.8,
+          "elapsed_seconds": 5.843700000696117e-05,
+          "binding_correct": true,
+          "binding_detail": "ok",
+          "has_unsubstituted_template": false
+        },
+        {
+          "params": {
+            "id": "G"
+          },
+          "resolve_params": {
+            "url": "G"
+          },
+          "status": "EXECUTABLE",
+          "mechanism_id": "param-C1-single-path",
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/items/G"
+          },
+          "reason": "applicability guards and confidence threshold passed",
+          "confidence": 0.8,
+          "elapsed_seconds": 5.412999996678991e-05,
+          "binding_correct": true,
+          "binding_detail": "ok",
+          "has_unsubstituted_template": false
+        },
+        {
+          "params": {
+            "id": "H"
+          },
+          "resolve_params": {
+            "url": "H"
+          },
+          "status": "EXECUTABLE",
+          "mechanism_id": "param-C1-single-path",
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/items/H"
+          },
+          "reason": "applicability guards and confidence threshold passed",
+          "confidence": 0.8,
+          "elapsed_seconds": 5.226799999036302e-05,
+          "binding_correct": true,
+          "binding_detail": "ok",
+          "has_unsubstituted_template": false
+        }
+      ],
+      "metrics": {
+        "unseen_resolution_rate": 1.0,
+        "binding_accuracy": 1.0,
+        "unsubstituted_template_rate": 0.0,
+        "executable_count": 5,
+        "binding_correct_count": 5
+      }
+    },
+    "C2-path-and-body": {
+      "condition_id": "C2-path-and-body",
+      "training_count": 3,
+      "unseen_count": 5,
+      "timestamps": {
+        "start": 1788459070.2617128,
+        "end": 1788459070.2624152
+      },
+      "distill_success": true,
+      "mechanism_id": "param-C2-path-and-body",
+      "action_template": {
+        "method": "POST",
+        "url": "https://api.example.com/users/${url}",
+        "body": {
+          "name": "${name}"
+        }
+      },
+      "parameter_slots": [
+        "name",
+        "url"
+      ],
+      "slot_count": 2,
+      "confidence": 0.8,
+      "preconditions": {
+        "authenticated": true,
+        "role": "owner"
+      },
+      "postconditions": {
+        "exists": false
+      },
+      "slot_count_expected": 2,
+      "slot_count_met": true,
+      "slot_names_distinct": true,
+      "resolution_results": [
+        {
+          "params": {
+            "user_id": "D",
+            "name": "Diana"
+          },
+          "resolve_params": {
+            "name": "Diana",
+            "url": "D"
+          },
+          "status": "EXECUTABLE",
+          "mechanism_id": "param-C2-path-and-body",
+          "bound_action": {
+            "body": {
+              "name": "Diana"
+            },
+            "method": "POST",
+            "url": "https://api.example.com/users/D"
+          },
+          "reason": "applicability guards and confidence threshold passed",
+          "confidence": 0.8,
+          "elapsed_seconds": 8.33440000178598e-05,
+          "binding_correct": true,
+          "binding_detail": "ok",
+          "has_unsubstituted_template": false
+        },
+        {
+          "params": {
+            "user_id": "E",
+            "name": "Eve"
+          },
+          "resolve_params": {
+            "name": "Eve",
+            "url": "E"
+          },
+          "status": "EXECUTABLE",
+          "mechanism_id": "param-C2-path-and-body",
+          "bound_action": {
+            "body": {
+              "name": "Eve"
+            },
+            "method": "POST",
+            "url": "https://api.example.com/users/E"
+          },
+          "reason": "applicability guards and confidence threshold passed",
+          "confidence": 0.8,
+          "elapsed_seconds": 0.00010440599999128608,
+          "binding_correct": true,
+          "binding_detail": "ok",
+          "has_unsubstituted_template": false
+        },
+        {
+          "params": {
+            "user_id": "F",
+            "name": "Frank"
+          },
+          "resolve_params": {
+            "name": "Frank",
+            "url": "F"
+          },
+          "status": "EXECUTABLE",
+          "mechanism_id": "param-C2-path-and-body",
+          "bound_action": {
+            "body": {
+              "name": "Frank"
+            },
+            "method": "POST",
+            "url": "https://api.example.com/users/F"
+          },
+          "reason": "applicability guards and confidence threshold passed",
+          "confidence": 0.8,
+          "elapsed_seconds": 6.008000002566405e-05,
+          "binding_correct": true,
+          "binding_detail": "ok",
+          "has_unsubstituted_template": false
+        },
+        {
+          "params": {
+            "user_id": "G",
+            "name": "Grace"
+          },
+          "resolve_params": {
+            "name": "Grace",
+            "url": "G"
+          },
+          "status": "EXECUTABLE",
+          "mechanism_id": "param-C2-path-and-body",
+          "bound_action": {
+            "body": {
+              "name": "Grace"
+            },
+            "method": "POST",
+            "url": "https://api.example.com/users/G"
+          },
+          "reason": "applicability guards and confidence threshold passed",
+          "confidence": 0.8,
+          "elapsed_seconds": 5.3290000096239964e-05,
+          "binding_correct": true,
+          "binding_detail": "ok",
+          "has_unsubstituted_template": false
+        },
+        {
+          "params": {
+            "user_id": "H",
+            "name": "Heidi"
+          },
+          "resolve_params": {
+            "name": "Heidi",
+            "url": "H"
+          },
+          "status": "EXECUTABLE",
+          "mechanism_id": "param-C2-path-and-body",
+          "bound_action": {
+            "body": {
+              "name": "Heidi"
+            },
+            "method": "POST",
+            "url": "https://api.example.com/users/H"
+          },
+          "reason": "applicability guards and confidence threshold passed",
+          "confidence": 0.8,
+          "elapsed_seconds": 5.223799996656453e-05,
+          "binding_correct": true,
+          "binding_detail": "ok",
+          "has_unsubstituted_template": false
+        }
+      ],
+      "metrics": {
+        "unseen_resolution_rate": 1.0,
+        "binding_accuracy": 1.0,
+        "unsubstituted_template_rate": 0.0,
+        "executable_count": 5,
+        "binding_correct_count": 5
+      }
+    },
+    "C3-path-body-headers": {
+      "condition_id": "C3-path-body-headers",
+      "training_count": 3,
+      "unseen_count": 5,
+      "timestamps": {
+        "start": 1788459070.262658,
+        "end": 1788459070.2634509
+      },
+      "distill_success": true,
+      "mechanism_id": "param-C3-path-body-headers",
+      "action_template": {
+        "method": "POST",
+        "url": "https://api.example.com/posts/${url}",
+        "body": {
+          "title": "${title}"
+        },
+        "headers": {
+          "X-Request-ID": "req-${x_request_id}"
+        }
+      },
+      "parameter_slots": [
+        "title",
+        "url",
+        "x_request_id"
+      ],
+      "slot_count": 3,
+      "confidence": 0.8,
+      "preconditions": {
+        "authenticated": true,
+        "role": "owner"
+      },
+      "postconditions": {
+        "exists": false
+      },
+      "slot_count_expected": 3,
+      "slot_count_met": true,
+      "slot_names_distinct": true,
+      "resolution_results": [
+        {
+          "params": {
+            "post_id": "D",
+            "title": "Fourth",
+            "request_id": "4"
+          },
+          "resolve_params": {
+            "title": "Fourth",
+            "x_request_id": "4",
+            "url": "D"
+          },
+          "status": "EXECUTABLE",
+          "mechanism_id": "param-C3-path-body-headers",
+          "bound_action": {
+            "body": {
+              "title": "Fourth"
+            },
+            "headers": {
+              "X-Request-ID": "req-4"
+            },
+            "method": "POST",
+            "url": "https://api.example.com/posts/D"
+          },
+          "reason": "applicability guards and confidence threshold passed",
+          "confidence": 0.8,
+          "elapsed_seconds": 8.093099995676312e-05,
+          "binding_correct": true,
+          "binding_detail": "ok",
+          "has_unsubstituted_template": false
+        },
+        {
+          "params": {
+            "post_id": "E",
+            "title": "Fifth",
+            "request_id": "5"
+          },
+          "resolve_params": {
+            "title": "Fifth",
+            "x_request_id": "5",
+            "url": "E"
+          },
+          "status": "EXECUTABLE",
+          "mechanism_id": "param-C3-path-body-headers",
+          "bound_action": {
+            "body": {
+              "title": "Fifth"
+            },
+            "headers": {
+              "X-Request-ID": "req-5"
+            },
+            "method": "POST",
+            "url": "https://api.example.com/posts/E"
+          },
+          "reason": "applicability guards and confidence threshold passed",
+          "confidence": 0.8,
+          "elapsed_seconds": 6.645899998147797e-05,
+          "binding_correct": true,
+          "binding_detail": "ok",
+          "has_unsubstituted_template": false
+        },
+        {
+          "params": {
+            "post_id": "F",
+            "title": "Sixth",
+            "request_id": "6"
+          },
+          "resolve_params": {
+            "title": "Sixth",
+            "x_request_id": "6",
+            "url": "F"
+          },
+          "status": "EXECUTABLE",
+          "mechanism_id": "param-C3-path-body-headers",
+          "bound_action": {
+            "body": {
+              "title": "Sixth"
+            },
+            "headers": {
+              "X-Request-ID": "req-6"
+            },
+            "method": "POST",
+            "url": "https://api.example.com/posts/F"
+          },
+          "reason": "applicability guards and confidence threshold passed",
+          "confidence": 0.8,
+          "elapsed_seconds": 7.222700003239879e-05,
+          "binding_correct": true,
+          "binding_detail": "ok",
+          "has_unsubstituted_template": false
+        },
+        {
+          "params": {
+            "post_id": "G",
+            "title": "Seventh",
+            "request_id": "7"
+          },
+          "resolve_params": {
+            "title": "Seventh",
+            "x_request_id": "7",
+            "url": "G"
+          },
+          "status": "EXECUTABLE",
+          "mechanism_id": "param-C3-path-body-headers",
+          "bound_action": {
+            "body": {
+              "title": "Seventh"
+            },
+            "headers": {
+              "X-Request-ID": "req-7"
+            },
+            "method": "POST",
+            "url": "https://api.example.com/posts/G"
+          },
+          "reason": "applicability guards and confidence threshold passed",
+          "confidence": 0.8,
+          "elapsed_seconds": 9.473099999013357e-05,
+          "binding_correct": true,
+          "binding_detail": "ok",
+          "has_unsubstituted_template": false
+        },
+        {
+          "params": {
+            "post_id": "H",
+            "title": "Eighth",
+            "request_id": "8"
+          },
+          "resolve_params": {
+            "title": "Eighth",
+            "x_request_id": "8",
+            "url": "H"
+          },
+          "status": "EXECUTABLE",
+          "mechanism_id": "param-C3-path-body-headers",
+          "bound_action": {
+            "body": {
+              "title": "Eighth"
+            },
+            "headers": {
+              "X-Request-ID": "req-8"
+            },
+            "method": "POST",
+            "url": "https://api.example.com/posts/H"
+          },
+          "reason": "applicability guards and confidence threshold passed",
+          "confidence": 0.8,
+          "elapsed_seconds": 8.707000006324961e-05,
+          "binding_correct": true,
+          "binding_detail": "ok",
+          "has_unsubstituted_template": false
+        }
+      ],
+      "metrics": {
+        "unseen_resolution_rate": 1.0,
+        "binding_accuracy": 1.0,
+        "unsubstituted_template_rate": 0.0,
+        "executable_count": 5,
+        "binding_correct_count": 5
+      }
+    },
+    "C4-non-identifier-values": {
+      "condition_id": "C4-non-identifier-values",
+      "training_count": 3,
+      "unseen_count": 3,
+      "timestamps": {
+        "start": 1788459070.2637541,
+        "end": 1788459070.2643995
+      },
+      "distill_success": true,
+      "mechanism_id": "param-C4-non-identifier-values",
+      "action_template": {
+        "method": "POST",
+        "url": "https://api.example.com/webhooks",
+        "body": {
+          "callback_url": "https://site-${callback_url}.com/hook"
+        }
+      },
+      "parameter_slots": [
+        "callback_url"
+      ],
+      "slot_count": 1,
+      "confidence": 0.8,
+      "preconditions": {
+        "authenticated": true,
+        "role": "owner"
+      },
+      "postconditions": {
+        "exists": false
+      },
+      "slot_count_expected": 1,
+      "slot_count_met": true,
+      "slot_names_distinct": true,
+      "resolution_results": [
+        {
+          "params": {
+            "webhook_url": "d"
+          },
+          "resolve_params": {
+            "callback_url": "d"
+          },
+          "status": "EXECUTABLE",
+          "mechanism_id": "param-C4-non-identifier-values",
+          "bound_action": {
+            "body": {
+              "callback_url": "https://site-d.com/hook"
+            },
+            "method": "POST",
+            "url": "https://api.example.com/webhooks"
+          },
+          "reason": "applicability guards and confidence threshold passed",
+          "confidence": 0.8,
+          "elapsed_seconds": 0.00012709900011032005,
+          "binding_correct": true,
+          "binding_detail": "ok",
+          "has_unsubstituted_template": false
+        },
+        {
+          "params": {
+            "webhook_url": "e"
+          },
+          "resolve_params": {
+            "callback_url": "e"
+          },
+          "status": "EXECUTABLE",
+          "mechanism_id": "param-C4-non-identifier-values",
+          "bound_action": {
+            "body": {
+              "callback_url": "https://site-e.com/hook"
+            },
+            "method": "POST",
+            "url": "https://api.example.com/webhooks"
+          },
+          "reason": "applicability guards and confidence threshold passed",
+          "confidence": 0.8,
+          "elapsed_seconds": 9.320899994236242e-05,
+          "binding_correct": true,
+          "binding_detail": "ok",
+          "has_unsubstituted_template": false
+        },
+        {
+          "params": {
+            "webhook_url": "f"
+          },
+          "resolve_params": {
+            "callback_url": "f"
+          },
+          "status": "EXECUTABLE",
+          "mechanism_id": "param-C4-non-identifier-values",
+          "bound_action": {
+            "body": {
+              "callback_url": "https://site-f.com/hook"
+            },
+            "method": "POST",
+            "url": "https://api.example.com/webhooks"
+          },
+          "reason": "applicability guards and confidence threshold passed",
+          "confidence": 0.8,
+          "elapsed_seconds": 7.418099994538352e-05,
+          "binding_correct": true,
+          "binding_detail": "ok",
+          "has_unsubstituted_template": false
+        }
+      ],
+      "metrics": {
+        "unseen_resolution_rate": 1.0,
+        "binding_accuracy": 1.0,
+        "unsubstituted_template_rate": 0.0,
+        "executable_count": 3,
+        "binding_correct_count": 3
+      }
+    },
+    "C5-shared-slot-name": {
+      "condition_id": "C5-shared-slot-name",
+      "training_count": 3,
+      "unseen_count": 3,
+      "timestamps": {
+        "start": 1788459070.2646909,
+        "end": 1788459070.265281
+      },
+      "distill_success": true,
+      "mechanism_id": "param-C5-shared-slot-name",
+      "action_template": {
+        "method": "PUT",
+        "url": "https://api.example.com/items/${url}",
+        "body": {
+          "user_id": "${user_id}"
+        }
+      },
+      "parameter_slots": [
+        "url",
+        "user_id"
+      ],
+      "slot_count": 2,
+      "confidence": 0.8,
+      "preconditions": {
+        "authenticated": true,
+        "role": "owner"
+      },
+      "postconditions": {
+        "exists": false
+      },
+      "slot_count_expected": 2,
+      "slot_count_met": true,
+      "slot_names_distinct": true,
+      "resolution_results": [
+        {
+          "params": {
+            "item_id": "D",
+            "owner_id": "D"
+          },
+          "resolve_params": {
+            "url": "D",
+            "user_id": "D"
+          },
+          "status": "EXECUTABLE",
+          "mechanism_id": "param-C5-shared-slot-name",
+          "bound_action": {
+            "body": {
+              "user_id": "D"
+            },
+            "method": "PUT",
+            "url": "https://api.example.com/items/D"
+          },
+          "reason": "applicability guards and confidence threshold passed",
+          "confidence": 0.8,
+          "elapsed_seconds": 8.241299997280294e-05,
+          "binding_correct": true,
+          "binding_detail": "ok",
+          "has_unsubstituted_template": false
+        },
+        {
+          "params": {
+            "item_id": "E",
+            "owner_id": "E"
+          },
+          "resolve_params": {
+            "url": "E",
+            "user_id": "E"
+          },
+          "status": "EXECUTABLE",
+          "mechanism_id": "param-C5-shared-slot-name",
+          "bound_action": {
+            "body": {
+              "user_id": "E"
+            },
+            "method": "PUT",
+            "url": "https://api.example.com/items/E"
+          },
+          "reason": "applicability guards and confidence threshold passed",
+          "confidence": 0.8,
+          "elapsed_seconds": 7.189699999798904e-05,
+          "binding_correct": true,
+          "binding_detail": "ok",
+          "has_unsubstituted_template": false
+        },
+        {
+          "params": {
+            "item_id": "F",
+            "owner_id": "F"
+          },
+          "resolve_params": {
+            "url": "F",
+            "user_id": "F"
+          },
+          "status": "EXECUTABLE",
+          "mechanism_id": "param-C5-shared-slot-name",
+          "bound_action": {
+            "body": {
+              "user_id": "F"
+            },
+            "method": "PUT",
+            "url": "https://api.example.com/items/F"
+          },
+          "reason": "applicability guards and confidence threshold passed",
+          "confidence": 0.8,
+          "elapsed_seconds": 5.630400005429692e-05,
+          "binding_correct": true,
+          "binding_detail": "ok",
+          "has_unsubstituted_template": false
+        }
+      ],
+      "metrics": {
+        "unseen_resolution_rate": 1.0,
+        "binding_accuracy": 1.0,
+        "unsubstituted_template_rate": 0.0,
+        "executable_count": 3,
+        "binding_correct_count": 3
+      }
+    }
+  },
+  "controls": {
+    "positive_control": {
+      "description": "Resolve with seen identifier A from training set",
+      "expected": "EXECUTABLE",
+      "observed": "EXECUTABLE",
+      "bound_action": {
+        "method": "GET",
+        "url": "https://api.example.com/items/A"
+      },
+      "passed": true,
+      "slots": [
+        "url"
+      ],
+      "resolve_params": {
+        "url": "A"
+      }
+    },
+    "null_control": {
+      "description": "Random non-shared observations produce no parameterized mechanism",
+      "expected": "no mechanism or UNKNOWN",
+      "observed": "mechanism with 4 slots",
+      "mechanism": {
+        "slots": [
+          "data",
+          "method",
+          "path",
+          "url"
+        ],
+        "template": {
+          "method": "${method}",
+          "url": "${url}",
+          "path": "${path}",
+          "data": "${data}"
+        }
+      },
+      "resolution_status": "UNKNOWN",
+      "passed": true
+    }
+  },
+  "baselines": {
+    "B_LITERAL": {
+      "description": "Literal mechanism with no parameter slots",
+      "results": [
+        {
+          "params": {
+            "user_id": "D",
+            "name": "Diana"
+          },
+          "status": "EXPLORE"
+        },
+        {
+          "params": {
+            "user_id": "E",
+            "name": "Eve"
+          },
+          "status": "EXPLORE"
+        },
+        {
+          "params": {
+            "user_id": "F",
+            "name": "Frank"
+          },
+          "status": "EXPLORE"
+        },
+        {
+          "params": {
+            "user_id": "G",
+            "name": "Grace"
+          },
+          "status": "EXPLORE"
+        },
+        {
+          "params": {
+            "user_id": "H",
+            "name": "Heidi"
+          },
+          "status": "EXPLORE"
+        }
+      ],
+      "fail_count": 5,
+      "fail_rate": 1.0,
+      "all_fail": true
+    },
+    "B_RANDOM_INDUCTION": {
+      "description": "Random slot naming on C2 multi-parameter",
+      "original_slots": [
+        "name",
+        "url"
+      ],
+      "randomized_slots": [
+        "rand_0",
+        "rand_1"
+      ],
+      "results": [
+        {
+          "params": {
+            "user_id": "D",
+            "name": "Diana"
+          },
+          "status": "EXECUTABLE",
+          "bound_action": {
+            "body": {
+              "name": "D"
+            },
+            "method": "POST",
+            "url": "https://api.example.com/users/Diana"
+          }
+        },
+        {
+          "params": {
+            "user_id": "E",
+            "name": "Eve"
+          },
+          "status": "EXECUTABLE",
+          "bound_action": {
+            "body": {
+              "name": "E"
+            },
+            "method": "POST",
+            "url": "https://api.example.com/users/Eve"
+          }
+        },
+        {
+          "params": {
+            "user_id": "F",
+            "name": "Frank"
+          },
+          "status": "EXECUTABLE",
+          "bound_action": {
+            "body": {
+              "name": "F"
+            },
+            "method": "POST",
+            "url": "https://api.example.com/users/Frank"
+          }
+        },
+        {
+          "params": {
+            "user_id": "G",
+            "name": "Grace"
+          },
+          "status": "EXECUTABLE",
+          "bound_action": {
+            "body": {
+              "name": "G"
+            },
+            "method": "POST",
+            "url": "https://api.example.com/users/Grace"
+          }
+        },
+        {
+          "params": {
+            "user_id": "H",
+            "name": "Heidi"
+          },
+          "status": "EXECUTABLE",
+          "bound_action": {
+            "body": {
+              "name": "H"
+            },
+            "method": "POST",
+            "url": "https://api.example.com/users/Heidi"
+          }
+        }
+      ],
+      "executable_count": 5,
+      "resolution_rate": 1.0
+    }
+  },
+  "induction_audit": {
+    "C1-single-path": {
+      "slot_count": 1,
+      "expected_slot_count": 1,
+      "slots": [
+        "url"
+      ],
+      "slots_in_template": [
+        "url"
+      ],
+      "all_slots_in_template": true,
+      "slot_names_distinct": true
+    },
+    "C2-path-and-body": {
+      "slot_count": 2,
+      "expected_slot_count": 2,
+      "slots": [
+        "name",
+        "url"
+      ],
+      "slots_in_template": [
+        "name",
+        "url"
+      ],
+      "all_slots_in_template": true,
+      "slot_names_distinct": true
+    },
+    "C3-path-body-headers": {
+      "slot_count": 3,
+      "expected_slot_count": 3,
+      "slots": [
+        "title",
+        "url",
+        "x_request_id"
+      ],
+      "slots_in_template": [
+        "title",
+        "url",
+        "x_request_id"
+      ],
+      "all_slots_in_template": true,
+      "slot_names_distinct": true
+    },
+    "C4-non-identifier-values": {
+      "slot_count": 1,
+      "expected_slot_count": 1,
+      "slots": [
+        "callback_url"
+      ],
+      "slots_in_template": [
+        "callback_url"
+      ],
+      "all_slots_in_template": true,
+      "slot_names_distinct": true
+    },
+    "C5-shared-slot-name": {
+      "slot_count": 2,
+      "expected_slot_count": 2,
+      "slots": [
+        "url",
+        "user_id"
+      ],
+      "slots_in_template": [
+        "url",
+        "user_id"
+      ],
+      "all_slots_in_template": true,
+      "slot_names_distinct": true
+    }
+  },
+  "decision": {
+    "checks": {
+      "C1_regression": true,
+      "C2_multi_param": true,
+      "C3_three_param": true,
+      "C4_non_identifier": true,
+      "C5_no_collision": true,
+      "null_control": true,
+      "no_crashes": true
+    },
+    "verdict": "MULTI-PARAM-SURVIVES",
+    "claim_id": "C-PARAM-INHERIT"
+  }
+}
