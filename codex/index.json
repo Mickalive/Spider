@@ -1,4 +1,30 @@
 {
   "schema_version": 1,
-  "experiments": {}
+  "experiments": {
+    "EXP-GRAPH-33528827169": {
+      "lane": "graph",
+      "request_id": "3e0d81e7790f2f2b7bd8665e",
+      "created_at": "2026-09-01T15:56:45.981285+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT"
+      ],
+      "question": "Does SpiderKernel's parameterized mechanism resolution work end-to-end on a real HTTP endpoint: can a mechanism with parameter slots be resolved, bound, executed over HTTP, and verified against actual response state?",
+      "audit_status": "FAIL",
+      "decision": "PARAM-INHERIT-SUBSTRATE-BROKEN",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/graph",
+      "hashes": {
+        "request.json": "e21c8ef54aaa8677b1814e8641e8df61b03358ffa51e94287a5de0599a73a0f9",
+        "spec.json": "4ce0cc68fdae3d9913e62dbcf91d47b39c86fff315cfcfaaba43c83484568a9d",
+        "prereg.md": "1fbbc2857bce9bd7047069505a83ba05600a85e9f3fd7569bc86cdf7c0013ece",
+        "freeze.json": "5c31f804acd3c7b7c07244a9af994e7d455efb29bcd2510a8d6ec99857845df8",
+        "result.json": "4586acbb5fb9a9a9a0b87dcc37cf91d4a28ed2e2fd7a594fe259179799404bb9",
+        "report.md": "f783b571837a41cb83301864e210e4c153cef95e8eb7e501ee2349239b0f5cb0",
+        "provenance.json": "d6237d24e029e90516bee79f6e11e0816c8bbe64d55e9f165f593134939e1d14",
+        "audit.json": "cc0f7879c0cf306217d37a0b943dbf30acfeb0e5127972762624129f746c2f60",
+        "verdict.json": "4e339c951a32b79b834d55ec245a02c910f8b74d7b236e07feb63b366f09f763",
+        "handoff.json": "ee1b24b92a766eed03606f1ac95623303234ab03baada15c351940e257c3460c"
+      }
+    }
+  }
 }

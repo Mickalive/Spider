@@ -1,0 +1,43 @@
+{
+  "experiment_id": "EXP-GRAPH-33528827169",
+  "lane": "graph",
+  "claim_ids": ["C-PARAM-INHERIT"],
+  "question": "Does SpiderKernel's parameterized mechanism resolution work end-to-end on a real HTTP endpoint: can a mechanism with parameter slots be resolved, bound, executed over HTTP, and verified against actual response state?",
+  "hypothesis": "A parameterized mechanism (parameter_slots=['id'], action_template with ${id} slot) registered in the registry will resolve EXECUTABLE when resolve() is called with all required slots provided in params, produce a correct bound_action with the slot substituted, execute successfully via HTTP, and pass verify() against the observed post-state. A literal (non-parameterized) mechanism will NOT generalize to unseen resource IDs. A parameterized mechanism with missing required params will NOT resolve.",
+  "falsifier": "The hypothesis is FALSIFIED if ANY of: (1) resolve() returns UNKNOWN or EXPLORE for a parameterized mechanism when all required slots ARE present in params — indicates the kernel's slot-checking or preconditions logic is broken; (2) bound_action contains unsubstituted '${id}' literal or incorrect URL — indicates _bind() failure; (3) HTTP execution returns non-200 for a valid resource — indicates bound_action is wrong; (4) verify() returns False despite 200 response with valid JSON matching postcondition schema — indicates verify() logic is broken; (5) a literal mechanism returns EXECUTABLE for an unseen resource ID — indicates parameter slot enforcement is absent; (6) a parameterized mechanism with missing slots returns EXECUTABLE — indicates the required_slots check is bypassed.",
+  "baselines": [
+    "B_COLD: No mechanism registered at all. resolve('fetch', {base_url: 'https://jsonplaceholder.typicode.com'}, {id: 2}) → must return UNKNOWN. Verifies the kernel abstains when no knowledge exists.",
+    "B_LITERAL_ORIG: Literal mechanism (no parameter_slots, action_template={method: GET, url: https://jsonplaceholder.typicode.com/posts/1}) registered. resolve('fetch', {base_url: ...}, {id: 1}) → must return EXECUTABLE with bound_action url ending /posts/1. Positive control: basic resolution works.",
+    "B_LITERAL_UNSEEN: Same literal mechanism. resolve('fetch', {base_url: ...}, {id: 2}) → must return UNKNOWN. Verifies literal mechanisms do NOT generalize to different identifiers.",
+    "B_MISSING_PARAMS: Parameterized mechanism registered. resolve('fetch', {base_url: ...}, {}) → must return UNKNOWN (required slot 'id' not in params). Verifies the kernel enforces parameter completeness."
+  ],
+  "positive_control": "Register a parameterized mechanism with parameter_slots=['id'] and action_template={method: GET, url: 'https://jsonplaceholder.typicode.com/posts/${id}'} and postconditions={status: 200, has_keys: [userId, id, title, body]}. Resolve with params={id: 1}. Must return EXECUTABLE with bound_action={method: GET, url: https://jsonplaceholder.typicode.com/posts/1}. Execute the bound_action via Python requests. Verify postconditions against actual response.",
+  "null_control": "Register the same parameterized mechanism but with applicability_guards={auth_required: true}. Resolve with context={base_url: ..., auth_required: false} and valid params={id: 2}. Must return UNKNOWN — the guard blocks execution despite parameter availability. Verifies applicability_guards are enforced independently of parameter binding.",
+  "measurement_validity": [
+    "Test site is jsonplaceholder.typicode.com — a stable public API with deterministic JSON responses, no auth, no session state, no DOM. This is a substrate validation, not a real-web-complexity claim.",
+    "Parameter binding correctness is verified by exact URL string comparison in bound_action.",
+    "End-to-end HTTP execution uses Python requests library (no browser required for this API-level test).",
+    "verify() checks postconditions against actual HTTP response (status_code, JSON key presence).",
+    "No outcome-bearing measurements during DESIGN phase — all measurements deferred to EXECUTE.",
+    "Seed无关 — this test is deterministic (no RNG, no sampling).",
+    "Each condition is independent — no cross-contamination between test conditions."
+  ],
+  "conditions": [
+    {"id": "cold", "description": "No mechanism registered", "mechanism": "none", "params": {"id": 2}, "expected_resolution": "UNKNOWN"},
+    {"id": "literal-original", "description": "Literal mechanism on original resource", "mechanism": "literal", "params": {"id": 1}, "expected_resolution": "EXECUTABLE", "expected_url": "https://jsonplaceholder.typicode.com/posts/1"},
+    {"id": "literal-unseen", "description": "Literal mechanism on unseen resource", "mechanism": "literal", "params": {"id": 2}, "expected_resolution": "UNKNOWN"},
+    {"id": "missing-params", "description": "Parameterized mechanism with missing slot", "mechanism": "parameterized", "params": {}, "expected_resolution": "UNKNOWN"},
+    {"id": "param-original", "description": "Parameterized mechanism on original resource", "mechanism": "parameterized", "params": {"id": 1}, "expected_resolution": "EXECUTABLE", "expected_url": "https://jsonplaceholder.typicode.com/posts/1"},
+    {"id": "param-unseen-1", "description": "Parameterized mechanism on unseen resource", "mechanism": "parameterized", "params": {"id": 2}, "expected_resolution": "EXECUTABLE", "expected_url": "https://jsonplaceholder.typicode.com/posts/2"},
+    {"id": "param-unseen-2", "description": "Parameterized mechanism on unseen resource", "mechanism": "parameterized", "params": {"id": 3}, "expected_resolution": "EXECUTABLE", "expected_url": "https://jsonplaceholder.typicode.com/posts/3"},
+    {"id": "param-unseen-3", "description": "Parameterized mechanism on unseen resource", "mechanism": "parameterized", "params": {"id": 4}, "expected_resolution": "EXECUTABLE", "expected_url": "https://jsonplaceholder.typicode.com/posts/4"},
+    {"id": "param-unseen-4", "description": "Parameterized mechanism on unseen resource", "mechanism": "parameterized", "params": {"id": 5}, "expected_resolution": "EXECUTABLE", "expected_url": "https://jsonplaceholder.typicode.com/posts/5"},
+    {"id": "param-unseen-5", "description": "Parameterized mechanism on unseen resource", "mechanism": "parameterized", "params": {"id": 6}, "expected_resolution": "EXECUTABLE", "expected_url": "https://jsonplaceholder.typicode.com/posts/6"},
+    {"id": "guard-blocked", "description": "Parameterized mechanism with guard blocking", "mechanism": "parameterized-guarded", "params": {"id": 2}, "context_override": {"auth_required": false}, "expected_resolution": "UNKNOWN"}
+  ],
+  "decision_rule": "PARAM-INHERIT-SUBSTRATE-VALID if ALL of: (1) cold → UNKNOWN, (2) literal-original → EXECUTABLE with correct url, (3) literal-unseen → UNKNOWN, (4) missing-params → UNKNOWN, (5) param-original → EXECUTABLE with correct url, (6) all 5 param-unseen → EXECUTABLE with correct url, (7) guard-blocked → UNKNOWN. For all EXECUTABLE resolutions with params: HTTP execution returns 200, response JSON contains userId/id/title/body keys, verify() returns True. PARAM-INHERIT-SUBSTRATE-BROKEN if any condition fails.",
+  "product_consequence_positive": "The kernel's parameter binding pipeline (resolve → _bind → execute → verify) is validated as a functional substrate. C-PARAM-INHERIT can advance to testing real web navigation mechanisms (pagination, search, form interaction) with parameterized slots. Product can begin registering parameterized mechanisms for external-agent consumption.",
+  "product_consequence_negative": "The kernel has never been end-to-end tested on a live endpoint. If it breaks here, no parameterized inheritance claim is testable until the implementation is repaired. The smallest next action is to fix the identified failure mode in kernel.py and re-run as a regression test.",
+  "estimated_cost": "Negligible — 5 HTTP GET requests to a free public API, no browser automation, no model calls. Execution time < 30 seconds.",
+  "expected_information_gain": "HIGH for claim C-PARAM-INHERIT. This is the foundational gate: if the kernel cannot do parameterized resolution on a trivial case, all higher-order parameterized inheritance experiments (fragment reuse, pagination, cross-task transfer) are blocked. If it works, we have a validated substrate for the next experiment tier. Both outcomes are decision-relevant."
+}
