@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-33528829431",
+  "lane": "physics",
+  "github_run_id": "33528829431",
+  "request_hash": "57f10803335bea5dd52e5001ca43215af1f2bd414069d81e4116dde55967b3aa",
+  "freeze_hash_prereg": "7ace765bc757402169f3c389d143212c2625de43abee9415f39d7c08ca1837d9",
+  "freeze_hash_request": "ed96c0ccde15e7efd71ffacadf8eaeb00415ac5d0233d8afa816b80e9cc076d0",
+  "freeze_hash_spec": "4ae80208f138fea71ef122d68eda5cbeb7fcdb0a0d6163f2bff22caac1f5868b",
+  "pre_execute_sha": "779384ca53dacb08d04194cfa14720b1e24d9174",
+  "code_paths": [
+    "research/physics/substrate.py",
+    "research/physics/run_experiment.py"
+  ],
+  "environment": {
+    "python_version": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "numpy_version": "2.5.2",
+    "platform": "linux"
+  },
+  "data_hashes": {
+    "positive_control_transitions": "19e2264cfde046ad613ebb72505071c5631051faf3f5613bb43f7da2539f65d6",
+    "null_control_transitions": "6d3cfd15d5b027e7044445b86c548c272c858d523bb3adf94f2d6aec74089664",
+    "live_test_transitions": "a4ff2eaabc9c5c4311c52506077ef54a7f0fca99a10f320e187b349428036d1e"
+  },
+  "frozen_inputs": {
+    "request.json": "ed96c0ccde15e7efd71ffacadf8eaeb00415ac5d0233d8afa816b80e9cc076d0",
+    "spec.json": "4ae80208f138fea71ef122d68eda5cbeb7fcdb0a0d6163f2bff22caac1f5868b",
+    "prereg.md": "7ace765bc757402169f3c389d143212c2625de43abee9415f39d7c08ca1837d9",
+    "freeze.json": "verified"
+  },
+  "execution_parameters": {
+    "positive_control": {"n_trajectories": 50, "steps_per_trajectory": 10, "seed": 42},
+    "null_control": {"n_trajectories": 20, "steps_per_trajectory": 10, "seed": 44},
+    "live_test": {"n_trajectories_target": 30, "steps_per_trajectory": 10, "seed": 43},
+    "bootstrap_iterations": 1000,
+    "bonferroni_comparisons": 3
+  },
+  "recorded_at": "2026-09-02T21:08:34Z"
+}

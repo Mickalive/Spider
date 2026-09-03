@@ -51,6 +51,32 @@
         "handoff.json": "ee1b24b92a766eed03606f1ac95623303234ab03baada15c351940e257c3460c"
       }
     },
+    "EXP-PHYSICS-33528829431": {
+      "lane": "physics",
+      "request_id": "aefb271e5c3274224c9651fe",
+      "created_at": "2026-09-01T15:56:43.901752+00:00",
+      "claim_ids": [
+        "C-MEAS-VALID",
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Can we build a measurement-valid substrate that collects action-conditioned environment transitions P(S_next | S_current, A_current) from live browser interactions, avoiding the pathologies that invalidated pre-2.0 WP-003?",
+      "audit_status": "REVISE",
+      "decision": "REVISE",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/physics",
+      "hashes": {
+        "request.json": "ed96c0ccde15e7efd71ffacadf8eaeb00415ac5d0233d8afa816b80e9cc076d0",
+        "spec.json": "4ae80208f138fea71ef122d68eda5cbeb7fcdb0a0d6163f2bff22caac1f5868b",
+        "prereg.md": "7ace765bc757402169f3c389d143212c2625de43abee9415f39d7c08ca1837d9",
+        "freeze.json": "05040405d2daf55452e5b36e9fdfc6be1420dcd71ebb30d762942fbf88ca8a02",
+        "result.json": "940a1ee0a3bad35af2f275966783945c7f4987076d731a6de038013856a20a04",
+        "report.md": "fa467b2400f79be4108a6751cf3cb2d92912bf0bc6277be209594ae5d055776d",
+        "provenance.json": "2bdd37f219f434ec0f61ed33f3fdcecff2da6e5bc5edbb51bfd5f7c9967426e2",
+        "audit.json": "42c55dc179b54360a4602da75bb86547c190ced84ece8057296a06f3eb1a27ac",
+        "verdict.json": "91f0001908f75b6781d144f363d0eec4c7ce50442cbb6fc56b2ddd995adaa6c6",
+        "handoff.json": "d8af42ddf8a0c4910b1b55c1612c18a9e0e4b30a672e019f5c8b82203e0bba88"
+      }
+    },
     "EXP-PRODUCT-33528829801": {
       "lane": "product",
       "request_id": "2629e8e63e200f05556e37ca",
@@ -74,6 +100,31 @@
         "audit.json": "4049e1a91e637522463940b7488140df0acecd0b91b694caa3d2cea347686c6b",
         "verdict.json": "80c7532a8ffa0e167d30f440eee9c108b70c38b27a211b56f0b137282e5ac637",
         "handoff.json": "854e98a8808d570b229bf748bdb14e0ddd67d43faacb63db4b6cad8af0e92d7a"
+      }
+    },
+    "EXP-RUNTIME-33528830833": {
+      "lane": "runtime",
+      "request_id": "cbf791e0cd3fe570d0ff0fd5",
+      "created_at": "2026-09-01T15:56:44.056597+00:00",
+      "claim_ids": [
+        "C-MEAS-VALID"
+      ],
+      "question": "Can a stdlib-only HTTP observation substrate produce measurement-valid, discriminating observations that correctly attribute response differences to auth/session state changes rather than confounds?",
+      "audit_status": "REVISE",
+      "decision": "NARROW_SUCCESS",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/runtime",
+      "hashes": {
+        "request.json": "6145c1903ea8dcba98048817351b4cea1d9f9f6bad7b28fa0745af874da8e2bd",
+        "spec.json": "6e6946600ea29a2c48b53bcc1746a0c522377f44dba5d254011f6665ed3196f3",
+        "prereg.md": "b5ec69cb3b3b4578067862cb89a6ac48668200fa238e8e6349e1c1e17198128f",
+        "freeze.json": "96ff062f46dd84a162ed84e01f7b91f8ce074811d1fc46be0d0da2f6ad0b4d39",
+        "result.json": "f266b097546b10affd6d469733bfa7cf388fc229b9170099dbaa11ad1f89e7d2",
+        "report.md": "c3664e3088cf000383b4b46fe0f994f5eee76bf6391d665561ba0523c3303f14",
+        "provenance.json": "0850ca10aff8b060075f45218a374559ceebc10274b9927feffdd16069d12e4f",
+        "audit.json": "089e063866b5eb7283fc4a4e453718c9ff9501daca12e01350c392f1bd06efae",
+        "verdict.json": "5f9c31af118ec9f9e5665e90d318521930fcf1a2edec6c4a396835c26afb0825",
+        "handoff.json": "4b5fb87ad14e0d18e16b8ed6134af6d6140b52df5cdafb207b5a29bf904510f2"
       }
     }
   }

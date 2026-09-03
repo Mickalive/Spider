@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-33528829431",
+  "lane": "physics",
+  "decision": "REVISE",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "EXPERIMENTAL",
+      "reason": "Producer claimed SUPPORTS but audit demonstrates all accuracies are in-sample (fit+evaluate on same transitions, no holdout), bootstrap p-values invalid (resamples flat transition list not trajectories, shared RNG, declares p=0.0 on random null_control), and validity gates are too weak to rule out memorization. The synthetic-only mechanical capture (action_conditioned_accuracy=1.0, H(S'|S,A)=0.0) is confirmed but does not establish a measurement-valid Web substrate. Live test 37 transitions / 4 trajectories vs prereg 300/30 cannot support any C-MEAS-VALID claim for Web. Status remains EXPERIMENTAL."
+    },
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "HYPOTHESIS",
+      "reason": "Not testable from this experiment. Live test entropy inversion (H(S'|S,A)=0.95 > H(S'|S)=0.27, reduction -250%) is a mathematical artifact of coarse state representation, not evidence for or against action-conditioned Web structure. Sample size 12.3% of prereg target. The hypothesis remains open but this experiment provides no data toward it."
+    }
+  ],
+  "product_action": "NONE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can a trajectory-grouped holdout evaluation with richer state representation (DOM/accessibility tree) and semantic actions reveal genuine action-conditioned transition structure on live Web pages with navigational density, replacing the coarse URL+hash representation that produced entropy inversion?",
+  "reason": "The producer SUPPORTS verdict is not justified per audit findings. Four infrastructure defects jointly invalidate the claimed evidence: (1) in-sample evaluation violates prereg holdout and spec measurement_validity; (2) bootstrap procedure resamples transitions not trajectories with shared RNG, producing p=0.0 even on random null data; (3) positive control with 9 globally unique actions cannot discriminate (S,A) vs A alone; (4) live test uses HTTP fetch+HTMLParser (not a browser) on link-poor sites yielding 12.3% of prereg sample with entropy inversion from coarse state hashing. The synthetic feasibility result (harness mechanically captures deterministic transitions) is confirmed but is a necessary-not-sufficient condition. The substrate requires redesign of evaluation methodology, state representation, action representation, and test site selection before re-running. This is an infrastructure revision, not a scientific falsification of Web dynamics.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-33528829431/spec.json: claim_ids C-MEAS-VALID, C-WEB-DYNAMICS; measurement_validity; decision_rule",
+    "research/experiments/EXP-PHYSICS-33528829431/prereg.md: Sections 5,7,9,11,12,13",
+    "research/experiments/EXP-PHYSICS-33528829431/result.json: metrics.positive_control, metrics.null_control, metrics.live_test, bootstrap, controls, observations, validity_notes",
+    "research/experiments/EXP-PHYSICS-33528829431/report.md: Tables 2,3, Section 6",
+    "research/experiments/EXP-PHYSICS-33528829431/audit.json: validity_findings, baseline_findings, recomputed_metrics, claim_ceiling, required_fixes",
+    "research/experiments/EXP-PHYSICS-33528829431/provenance.json: execution_parameters.live_test n_trajectories_target=30",
+    "research/physics/substrate.py: BaselineComputers 360-485, ValidityGates 576-654, LiveWebCollector 157-288",
+    "research/physics/run_experiment.py: compute_bootstrap_and_pvalues 203-254"
+  ]
+}
