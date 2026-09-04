@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-33863640568",
+  "lane": "frontier",
+  "target_lane": "frontier",
+  "next_question": "Does the causal heterogeneity metric (Var_a of expected next-states) or TV distance detect lambda-scaling of dynamical structure in real or realistic Web transition data, or does the synthetic-to-real gap render the affine DGP validation insufficient?",
+  "why_next": "The causal heterogeneity metric is validated for synthetic affine functions (Spearman rho=0.9762, p~1.6e-05) but all evidence is from 10-state synthetic DGPs. The critical open question is whether real Web transitions exhibit mean-varying structure (Var_a(E_S[f])>0) suitable for this metric, or whether real transitions are permutation-like (mean-preserving) requiring distributional metrics. This is the minimum next step to assess whether the validated metric has product relevance. The synthetic-to-real gap is the dominant unknown and cannot be resolved without real or realistic Web data.",
+  "carry_forward": {
+    "established": [
+      "Causal heterogeneity metric Var_a(E_S[do(A=a)]) is NOT degenerate for non-permutation functions: in synthetic affine DGPs f(s,a)=(c_a*s+b_a) mod10, het scales monotonically with lambda (aggregate Spearman rho=0.9762, p~1.6e-05, Cohen d=1.54). Confirmed by 3 independent functions with different Var_a (0.921875, 0.171875, 0.171875).",
+      "Permutation functions yield Var_a(E_S[f])=0 identically, making the metric degenerate — this was specific to the function class, not intrinsic to the metric. Direct quantitative contrast: permutation rho=0.333 (p=0.21, d=0.105) vs affine rho=0.9762 (p~1.6e-05, d=1.54).",
+      "TV distance scales perfectly with lambda (Spearman rho=1.0, Cohen d=13.4) and is strictly >= het at every lambda level, confirming distributional structure beyond first moments. TV is a more sensitive metric than variance of means for this DGP class.",
+      "Null control passes: permutation test at lambda=0 yields mean p=0.466 (not significant), confirming no false positive detection when no action-dependence exists.",
+      "The frozen decision rule's positive control (uniform het>=0.5 at lambda=1) and function invariance (zero ANOVA interaction) controls were mis-calibrated: threshold exceeds analytical ceiling for 2/3 functions (0.171875<0.5), and interaction is expected when functions have different Var_a. These are control design issues, not metric failures."
+    ],
+    "rejected": [
+      "Permutation functions as a test class for causal heterogeneity — Var_a=0 identically, metric degenerate.",
+      "The hypothesis that het(lambda) detects regime dynamics when Var_a(E_S[f(S,a)])=0 — the formula is correct but the function class makes it tautological.",
+      "Uniform positive control threshold het>=0.5 at lambda=1 for functions with heterogeneous Var_a — analytically impossible for functions with Var_a<0.5.",
+      "Zero-interaction ANOVA expectation when testing functions with intentionally different Var_a — differential lambda slopes are expected signal, not pipeline failure."
+    ],
+    "unknown": [
+      "Whether real Web transitions exhibit mean-varying structure (Var_a(E_S[f])>0) suitable for the causal heterogeneity metric, or are permutation-like (mean-preserving).",
+      "Whether TV distance or JSD should be the primary metric for future frontier experiments given its larger effect size (d=13.4 vs 1.54) and perfect monotonic scaling.",
+      "What calibrated positive control threshold (function-specific fraction of Var_analytical or lower absolute het) should replace the uniform 0.5 for future experiments.",
+      "Whether prediction-accuracy approaches (parent experiment's rho=1.0 on permutation functions) are more appropriate than variance-of-means for Web-relevant dynamical heterogeneity.",
+      "How synthetic affine DGP results translate to real Web state transitions — the synthetic-to-real gap is untested.",
+      "Per-replication heterogeneity and TV distributions needed for full independent recomputation of ANOVA and Cohen's d — raw artifact not persisted in this experiment."
+    ],
+    "do_not_assume": [
+      "Do not assume C-WEB-DYNAMICS is established or falsified by this experiment — the metric is validated for affine functions but the broader claim about real Web dynamics is untested.",
+      "Do not assume the causal heterogeneity metric generalizes beyond affine functions or beyond the 10-state synthetic DGP — only affine functions with known Var_a>0 were tested.",
+      "Do not assume the FALSIFIED-IN-SETTING frozen decision outcome reflects metric insensitivity — it reflects mis-calibrated controls as documented in audit.json required_fixes[0-1].",
+      "Do not assume synthetic-to-real translation applies — all tested functions are synthetic affine maps, not real Web transitions.",
+      "Do not assume the ANOVA interaction failure (F=25.7898, p≈0) is evidence against the metric — it is evidence that functions have different Var_a, which is expected by design.",
+      "Do not assume the small monotonicity dip at lambda=0.2 (0.065→0.057, within noise std 0.035) indicates non-monotonic true scaling — it is sampling noise.",
+      "Do not assume TV distance saturation at lambda=1 (analytical TV=0.8-1.0) indicates insensitivity — the 10-state space limits maximum TV but the metric still differentiates lambda levels."
+    ]
+  },
+  "dependencies": [
+    "Real or realistic Web transition data with known action-structure (e.g., recorded agent interactions with state-tracking) to test synthetic-to-real translation",
+    "Function-specific positive control thresholds (e.g., 0.5*Var_analytical or het/Var ratio) for future synthetic experiments with heterogeneous function classes",
+    "Raw per-replication per-function per-lambda heterogeneity and TV tables persisted as hash-addressed artifacts for independent recomputation",
+    "Frequency baseline P(S_{t+1}) marginal distribution reported at matched lambda levels for quantitative comparison",
+    "Decision: whether TV distance should replace or supplement variance-of-means as the primary metric for Web-dynamical regime detection"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-33863640568/result.json:metrics.spearman_rho_aggregate 0.9762, metrics.analytical_heterogeneity (Var_a 0.921875/0.171875/0.171875), metrics.tv_means_by_lambda, metrics.tv_spearman_rho 1.0, metrics.permutation_results.lambda_0 mean_p 0.466, metrics.permutation_results.lambda_1 n_above_threshold 11/30, metrics.anova_results.interaction_effect F 25.7898 p 0.0, metrics.monotonicity",
+    "research/experiments/EXP-FRONTIER-33863640568/audit.json:status REVISE, claim_ceiling, required_fixes[0-4], validity_findings[5-6], baseline_findings[0] prior permutation contrast, baseline_findings[3] TV baseline strength",
+    "research/experiments/EXP-FRONTIER-33863640568/verdict.json:decision FALSIFIED-IN-SETTING, reason, claim_updates",
+    "research/experiments/EXP-FRONTIER-33767130362/handoff.json:carry_forward established permutation degeneracy, rejected permutation functions, unknown non-permutation question"
+  ],
+  "recommended_action": "Design a new Frontier experiment using TV distance (or JSD) as the PRIMARY metric on real or realistic Web transition data (e.g., recorded agent sessions with DOM state tracking) to test synthetic-to-real translation. If real Web data is unavailable, design a synthetic experiment with (a) non-bijective/non-affine function families with controlled Var_a to broaden the function-class validation, (b) function-specific positive control thresholds based on analytical Var_a, (c) raw per-replication tables persisted as artifacts, and (d) frequency baseline P(S_{t+1}) reported at all lambda levels. The causal heterogeneity metric should be retained as a secondary metric alongside TV. Do NOT repeat the same affine function experiment with minor parameter changes — the metric is validated for that class."
+}

@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-33863640568",
+  "execution_timestamp": null,
+  "analyzer_script": "analyze.py",
+  "script_hashes": {
+    "prereg.md": "01240a40f14813350ec4085da9802c706fb76271f403418a5ddd63f3ef0c2ace",
+    "spec.json": "75f178705873a5377a36007476175ea502b6db09577fa720c2fcec8d56a8d945",
+    "request.json": "fb3652d895740298ef1e10009db3916536de1e2aec8f662affc63ea1e155a0ae",
+    "analyze.py": "480b359fa21f1d7f14095b365061f44c7a08fb9c55b787ca51b940f4fbc7f704"
+  },
+  "result_hash": "813bdea839170a6358ed8b4ffa6f04cb3f30ee62034fa42dd0ea67288215493e",
+  "decision": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "claim": "C-WEB-DYNAMICS",
+  "lane": "frontier",
+  "environment": {
+    "python_version": "3.12.14",
+    "numpy_version": "2.5.2",
+    "scipy_version": "unknown"
+  },
+  "frozen_inputs": {
+    "request_hash": "fb3652d895740298ef1e10009db3916536de1e2aec8f662affc63ea1e155a0ae",
+    "spec_hash": "75f178705873a5377a36007476175ea502b6db09577fa720c2fcec8d56a8d945",
+    "prereg_hash": "01240a40f14813350ec4085da9802c706fb76271f403418a5ddd63f3ef0c2ace"
+  }
+}

@@ -3,7 +3,7 @@
 Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER_CODEX_ULTIME.md`.
 
 This file is generated only from complete finalized Research 2.0 experiment packets.
-Ingested experiments: **11**. Coverage gaps: **0**.
+Ingested experiments: **12**. Coverage gaps: **0**.
 
 ## Index
 
@@ -11,6 +11,7 @@ Ingested experiments: **11**. Coverage gaps: **0**.
 |---|---|---|---|---|
 | EXP-FRONTIER-33528827909 | frontier | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-WEB-DYNAMICS |
 | EXP-FRONTIER-33767130362 | frontier | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-WEB-DYNAMICS |
+| EXP-FRONTIER-33863640568 | frontier | REVISE | FALSIFIED-IN-SETTING | C-WEB-DYNAMICS |
 | EXP-GRAPH-33528827169 | graph | FAIL | PARAM-INHERIT-SUBSTRATE-BROKEN | C-PARAM-INHERIT |
 | EXP-GRAPH-33718012817 | graph | REVISE | COMPETITION-UNSAFE | C-PARAM-INHERIT |
 | EXP-INTEL-33528832113 | intel | REVISE | SUPPORTS | C-CROSSSITE, C-LLM-INHERIT, C-PRODUCT-ECON |
@@ -1926,6 +1927,1141 @@ The falsification is bounded: it applies to this specific metric applied to this
     "research/experiments/EXP-FRONTIER-33528827909/handoff.json: parent descriptive effect (prediction accuracy sensitive to permutation structure, rho=1.0), carry_forward established/rejected/unknown/do_not_assume"
   ],
   "recommended_action": "Design a new Frontier experiment using NON-PERMUTATION deterministic functions (e.g., f(s,a) = (c_a * s + b_a) mod 10 where c_a and b_a vary by action, ensuring E_S[f(S,a)] differs across actions) with the same causal heterogeneity metric and 8 lambda levels x 10 replications. This is the minimal change needed to make the metric non-degenerate. If this also fails, pivot to distributional metrics (TV distance between full P(S_{t+1}|do(a)) distributions) or return to prediction-accuracy approach with the parent's larger-n design."
+}
+```
+
+# EXP-FRONTIER-33863640568
+
+## request.json
+
+```text
+{
+  "base_sha": "5dfd114e3e64c5104727997ba6982eaf5d3374bb",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-04T10:31:35.759787+00:00",
+  "experiment_id": "EXP-FRONTIER-33863640568",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "Can non-permutation deterministic functions (where E_S[f(S,a)] varies across actions, e.g., affine maps f(s,a)=(c_a*s+b_a) mod 10 or action-dependent offsets) yield detectable lambda-scaling of causal heterogeneity, or should the Frontier lane pivot to distributional metrics (TV distance, JSD) that are sensitive to permutation structure?",
+  "lane": "frontier",
+  "origin_github_run_id": "33863640568",
+  "parent_handoff": {
+    "experiment_id": "EXP-FRONTIER-33767130362",
+    "path": "research/experiments/EXP-FRONTIER-33767130362/handoff.json",
+    "sha256": "128562014c5c09d2793692cd05297d571da9cefc4059be95bdc469498fb0e7d8"
+  },
+  "reason": "pulse",
+  "request_hash": "880f001608a5a90242f2476cc4492b3808df83c05efa22241871b8fda609be0c",
+  "request_id": "82a107dee4efe693fde08251",
+  "schema_version": 1
+}
+```
+
+## spec.json
+
+```text
+{
+  "experiment_id": "EXP-FRONTIER-33863640568",
+  "lane": "frontier",
+  "claim_ids": ["C-WEB-DYNAMICS"],
+  "question": "Can non-permutation deterministic functions (affine maps f(s,a) = (c_a * s + b_a) mod 10 where E_S[f(S,a)] varies across actions) yield detectable lambda-scaling of causal effect heterogeneity, or should the Frontier lane pivot to distributional metrics (TV distance) that are sensitive to permutation structure?",
+  "hypothesis": "When synthetic Web-like transitions use affine deterministic functions where E_S[f(S,a)] differs across actions (breaking the permutation mean-preservation property that degenerated the previous experiment), the causal effect heterogeneity metric Var_a(E_S[do(A=a)]) will scale monotonically with lambda, with aggregate Spearman rho >= 0.65 and p < 0.05. Additionally, total variation distance between full P(S_{t+1}|do(A=a)) distributions will also scale with lambda but will be strictly >= the mean-based metric, since TV captures distributional spread beyond first moments. The metric degeneracy was a property of permutation functions, not of the causal heterogeneity approach itself.",
+  "falsifier": "The causal effect heterogeneity does not increase monotonically with lambda for affine functions (aggregate Spearman rho < 0.65, p > 0.05 one-sided), OR heterogeneity is indistinguishable from zero at lambda=1 (permutation test p > 0.05), OR heterogeneity is significantly non-zero at lambda=0 (permutation test p < 0.05), OR the positive control fails (heterogeneity at lambda=1 < 0.5 across all 3 functions), OR results are inconsistent across functions (significant function x lambda interaction in two-way ANOVA, p < 0.05).",
+  "baselines": [
+    "Causal heterogeneity metric (Var_a(E_S[do(A=a)])) from prior experiment EXP-FRONTIER-33767130362 — direct quantitative comparison of metric values between permutation and affine functions at matched lambda levels",
+    "Permutation null: action labels shuffled across transitions; interventional distributions identical across shuffled actions, yielding heterogeneity near zero at all lambda levels",
+    "Frequency baseline: marginal next-state distribution P(S_{t+1}) provides expected heterogeneity under no action-dependence",
+    "TV distance baseline: total variation between P(S_{t+1}|do(A=a)) and P(S_{t+1}|do(A=a')) for all action pairs, as orthogonal secondary metric"
+  ],
+  "positive_control": "At lambda=1 (fully action-determined transitions with affine functions), causal effect heterogeneity must be >= 0.5 across all 3 functions. With affine functions f(s,a) = (c_a*s + b_a) mod 10 where c_a and b_a vary by action, E_S[f(S,a)] differs across actions, so Var_a(E_S[f(S,a)]) > 0 and heterogeneity = lambda^2 * Var_a > 0 at lambda=1. Expected heterogeneity at lambda=1 is analytically computable from the known function parameters.",
+  "null_control": "At lambda=0 (action-independent transitions), causal effect heterogeneity must be indistinguishable from zero (permutation test p > 0.05). This verifies the pipeline does not detect causal structure when none exists.",
+  "measurement_validity": [
+    "Affine functions are analytically verifiable: E_S[(c_a*s + b_a) mod 10] can be computed in closed form for known c_a, b_a, confirming E_S[f(S,a)] differs across actions",
+    "3 independent affine functions with different coefficient sets test generalizability; each has known Var_a(E_S[f(S,a)]) for ground-truth comparison",
+    "Same lambda-ramping framework as prior experiment (lambda=0: pure noise; lambda=1: fully deterministic), ensuring comparability",
+    "8 lambda levels (0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.7, 1.0) with 10 replications x 500 transitions per cell = 120,000 total transitions",
+    "Frozen random seed (seed=42) for reproducibility; each replication uses seed = func_seed * 10000 + rep_idx * 100 + 42",
+    "No target leakage: interventional distributions computed from DGP, not from held-out predictions",
+    "TV distance metric computed from empirical action-conditional next-state distributions (binned to 10 states), providing orthogonal sensitivity to full distributional differences"
+  ],
+  "decision_rule": "SURVIVES_CURRENT_TEST if ALL of: (1) Aggregate Spearman rho(het_by_lambda, lambda) >= 0.65 with p < 0.05 one-sided; (2) Positive control passes: heterogeneity >= 0.5 at lambda=1 across all functions; (3) Null control passes: heterogeneity not significantly > 0 at lambda=0 (permutation p > 0.05); (4) No significant function x lambda interaction (two-way ANOVA p > 0.05); (5) No pipeline errors. FALSIFIED-IN-SETTING if ANY of: (1) Aggregate Spearman rho < 0.65 or p > 0.05; (2) Positive control fails; (3) Null control fails; (4) Significant function x lambda interaction. MEASUREMENT_INVALID if pipeline errors, degenerate functions (Var_a(E_S[f(S,a)]) = 0 for all actions in any function), or heterogeneity CV across replications > 0.5.",
+  "product_consequence_positive": "Validates causal effect heterogeneity as a detection method for Web-dynamical regime structure. Different Web regions with different action-dependence levels can be detected through direct interventional analysis, informing where SPIDER should invest in action-conditioned causal mechanisms. Also establishes whether TV distance provides additional sensitivity beyond mean-based metrics for future experiments.",
+  "product_consequence_negative": "If affine functions also yield degenerate heterogeneity, the causal heterogeneity metric (Var_a of expected next-states) is fundamentally insensitive regardless of function class. The Frontier lane should pivot to distributional metrics (TV, JSD) or return to prediction-accuracy approaches with better-powered designs. Does NOT falsify C-WEB-DYNAMICS — only this specific detection method.",
+  "estimated_cost": "Very low: pure synthetic data generation, analytical interventional distribution computation, offline variance estimation. ~120,000 transitions total. No browser/network/model calls. No train/test splitting. Computation is O(N) per replication.",
+  "expected_information_gain": "High: This is the direct discriminating test that resolves the open question from EXP-FRONTIER-33767130362. A positive result validates the causal heterogeneity metric and opens the path to real-Web regime detection. A negative result closes the metric approach and pivots the lane to distributional or prediction-accuracy methods. The TV distance secondary measurement provides additional information about whether distributional structure exists even when mean-based structure does not."
+}
+```
+
+## prereg.md
+
+```text
+# EXP-FRONTIER-33863640568 — Preregistration
+
+## Status: DESIGN FROZEN (pending freeze.json)
+
+---
+
+## 1. Context and Inherited State
+
+This experiment continues from EXP-FRONTIER-33767130362 (handoff SHA256: 128562014c5c09d2793692cd05297d571da9cefc4059be95bdc469498fb0e7d8).
+
+**Established from parent:**
+- Analytic identity: for any permutation pi of {0..9}, Var_a(E_S[pi_a(S)]) = 0 because E[pi_a(S)] = 4.5 for all actions.
+- Causal heterogeneity metric het(lambda) = lambda^2 * Var_a(E_S[f(S,a)]) is mathematically correct but yields het=0 for all lambda when Var=0.
+- Monte Carlo estimates ~0.04-0.07 are sampling noise around true value of 0.
+- Pipeline executed correctly (status=COMPLETE, 120,000 transitions, 240 cells).
+
+**Rejected from parent:**
+- Permutation functions as a test class for causal heterogeneity.
+- The hypothesis that het(lambda) detects regime dynamics when Var_a(E_S[f(S,a)]) = 0.
+- Positive control threshold het >= 0.5 at lambda=1 for permutation functions.
+
+**Unknown (inherited):**
+- Whether non-permutation functions yield detectable het(lambda).
+- Whether distributional metrics detect structure beyond means.
+- How synthetic results translate to real Web transitions.
+
+**Do Not Assume:**
+- C-WEB-DYNAMICS is not falsified by this experiment.
+- Causal heterogeneity as a general approach is not invalid — only permutation functions are degenerate.
+- The parent's prediction-accuracy finding (rho=1.0) is not refuted.
+
+---
+
+## 2. Scientific Question
+
+Can non-permutation deterministic functions (affine maps where E_S[f(S,a)] varies across actions) yield detectable lambda-scaling of causal effect heterogeneity?
+
+---
+
+## 3. Hypothesis
+
+When synthetic Web-like transitions use affine deterministic functions f(s,a) = (c_a * s + b_a) mod 10 where c_a and b_a vary by action (ensuring E_S[f(S,a)] differs across actions), the causal effect heterogeneity metric Var_a(E_S[do(A=a)]) will scale monotonically with lambda, with aggregate Spearman rho >= 0.65 and p < 0.05 one-sided.
+
+---
+
+## 4. Deterministic Function Design
+
+### 4.1 Affine Function Family
+
+Three affine functions with different coefficient sets:
+
+**Function 1 (seed=42):**
+- c = [2, 3, 5, 7] (action multipliers)
+- b = [1, 3, 0, 6] (action offsets)
+- f(s, a_i) = (c_i * s + b_i) mod 10
+
+**Function 2 (seed=43):**
+- c = [3, 4, 6, 8]
+- b = [2, 5, 1, 4]
+- f(s, a_i) = (c_i * s + b_i) mod 10
+
+**Function 3 (seed=44):**
+- c = [2, 6, 4, 9]
+- b = [7, 2, 8, 3]
+- f(s, a_i) = (c_i * s + b_i) mod 10
+
+### 4.2 Analytic Verification
+
+For each function, E_S[f(S, a_i)] = (c_i * E[S] + b_i) mod 10 is NOT simply c_i * 4.5 + b_i because mod 10 is nonlinear. Instead:
+
+E_S[f(S, a_i)] = (1/10) * sum_{s=0}^{9} (c_i * s + b_i) mod 10
+
+This must be computed numerically for each function/action pair and verified to differ across actions. If any function has E_S[f(S, a)] identical for all actions, it is degenerate and must be replaced.
+
+### 4.3 Expected Analytical Heterogeneity
+
+het(lambda) = lambda^2 * Var_a(E_S[f(S, a)])
+
+At lambda=1: het = Var_a(E_S[f(S, a)]) — analytically computable from the function parameters.
+At lambda=0: het = 0 (pure noise, no action-dependence).
+
+---
+
+## 5. Data Generation
+
+- State space: {0, 1, ..., 9}
+- Actions: ['click', 'fill', 'submit', 'navigate'] (4 actions)
+- Lambda levels: [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.7, 1.0] (8 levels)
+- Transitions per cell: 500
+- Replications per cell: 10
+- Functions: 3 (seeds 42, 43, 44)
+- Total transitions: 8 * 3 * 10 * 500 = 120,000
+
+Transition generation:
+```
+For each transition:
+  s ~ Uniform({0..9})
+  a ~ Uniform(ACTIONS)
+  if rng.random() < lambda:
+    s_next = f(s, a)  # deterministic function
+  else:
+    s_next ~ Uniform({0..9})  # pure noise
+```
+
+Seed mechanism: `func_seed * 10000 + rep_idx * 100 + 42` for each replication RNG.
+
+---
+
+## 6. Metrics
+
+### 6.1 Primary Metric: Causal Effect Heterogeneity
+
+het(lambda) = Var_a(E_S[do(A=a)])
+
+Computed from Monte Carlo samples:
+1. Group transitions by action.
+2. Compute sample mean next-state per action: mean_a = E[S_{t+1} | A_t = a].
+3. Compute variance of the 4 sample means: het = Var(mean_click, mean_fill, mean_submit, mean_navigate).
+
+### 6.2 Secondary Metric: Total Variation Distance
+
+TV_max(lambda) = max_{a,a'} TV(P(S_{t+1}|do(A=a)), P(S_{t+1}|do(A=a')))
+
+Where TV(P, Q) = (1/2) * sum_s |P(s) - Q(s)|.
+
+Computed from empirical action-conditional next-state distributions (10-state histograms).
+
+### 6.3 Aggregate Statistics
+
+- Aggregate Spearman rho(het_by_lambda, lambda) with one-sided p-value
+- Per-function Spearman rho with Bonferroni-corrected p-value (3 functions, alpha=0.05/3)
+- Cohen's d (lambda=1 vs lambda=0) for effect size
+- Two-way ANOVA: lambda effect, function effect, interaction
+
+---
+
+## 7. Controls
+
+### 7.1 Positive Control
+At lambda=1, heterogeneity >= 0.5 across all 3 functions.
+Rationale: With affine functions, Var_a(E_S[f(S,a)]) > 0, so het(1) = Var_a > 0. With 10 states and 4 distinct affine maps, the variance should be substantial.
+
+### 7.2 Null Control
+At lambda=0, permutation test p > 0.05 (heterogeneity not significantly > 0).
+Rationale: Pure noise yields identical interventional distributions across actions.
+
+### 7.3 Permutation Null
+Shuffled action labels yield heterogeneity near zero at all lambda levels.
+Verified analytically: shuffling action labels makes E[S_{t+1}|do(A=a)] identical for all actions.
+
+### 7.4 Function Invariance
+No significant function x lambda interaction (two-way ANOVA p > 0.05).
+All functions should show similar het(lambda) curves because the metric depends on Var_a(E_S[f(S,a)]) which is a property of the function class, not specific coefficients.
+
+### 7.5 Monotonicity Sensitivity
+het_means are monotonically non-decreasing across lambda levels.
+
+---
+
+## 8. Decision Rules
+
+### Primary Decision
+SURVIVES_CURRENT_TEST if ALL of:
+1. Aggregate Spearman rho(het_by_lambda, lambda) >= 0.65 with p < 0.05 one-sided
+2. Positive control passes: heterogeneity >= 0.5 at lambda=1 across all functions
+3. Null control passes: heterogeneity not significantly > 0 at lambda=0 (permutation p > 0.05)
+4. No significant function x lambda interaction (two-way ANOVA p > 0.05)
+5. No pipeline errors
+
+FALSIFIED-IN-SETTING if ANY of:
+1. Aggregate Spearman rho < 0.65 or p > 0.05
+2. Positive control fails
+3. Null control fails
+4. Significant function x lambda interaction
+
+MEASUREMENT_INVALID if:
+- Pipeline errors
+- Degenerate functions (Var_a(E_S[f(S,a)]) = 0 for all actions in any function)
+- Heterogeneity CV across replications > 0.5
+
+### Secondary Confirmation
+Per-function Spearman tests: rho >= 0.83 with p < 0.017 (Bonferroni x3 correction).
+
+### TV Distance Secondary
+TV_max(lambda) should also scale monotonically with lambda and be >= het(lambda) at each level (since TV captures full distributional differences, not just first-moment variance).
+
+---
+
+## 9. Analysis Plan
+
+1. **Function verification**: For each function, compute E_S[f(S, a)] for all 4 actions. Verify they differ. If any function is degenerate, replace and re-verify.
+
+2. **Analytical heterogeneity**: Compute het_analytical = Var_a(E_S[f(S,a)]) for each function. This is the ground-truth value at lambda=1.
+
+3. **Data generation**: Generate 120,000 transitions using frozen seeds.
+
+4. **Monte Carlo heterogeneity estimation**: For each function x lambda x replication, compute het_mc from the 500 transitions.
+
+5. **TV distance computation**: For each function x lambda x replication, compute TV_max from empirical action-conditional distributions.
+
+6. **Primary test**: Aggregate Spearman rho(het_mc_means_by_lambda, lambda_levels).
+
+7. **Controls**: Permutation tests at lambda=0 and lambda=1, ANOVA, monotonicity check.
+
+8. **Effect size**: Cohen's d (lambda=1 vs lambda=0).
+
+9. **Comparison with prior**: Contrast het_mc values with prior experiment's permutation-based values at matched lambda levels.
+
+---
+
+## 10. Validity Threats
+
+1. **Mod 10 nonlinearity**: The mod operation may reduce Var_a(E_S[f(S,a)]). Mitigation: verify analytically that Var > 0 before running.
+
+2. **Small state space**: 10 states limits the maximum possible TV distance. Mitigation: 10 states is sufficient for detection; this is synthetic validation, not real-Web demonstration.
+
+3. **Synthetic-to-real gap**: Affine functions may not represent real Web dynamics. Mitigation: this experiment validates the metric, not the Web. Real-data application is a separate experiment.
+
+4. **Function invariance**: With only 3 functions, ANOVA interaction power is limited. Mitigation: functions are designed to have substantially different coefficient sets to maximize detectable differences.
+
+5. **TV distance sensitivity**: TV distance may be insensitive to subtle distributional differences. Mitigation: TV is a standard, well-understood metric; insensitivity would itself be informative.
+
+---
+
+## 11. Artifacts to Persist
+
+- `analyze.py` — frozen analysis script (code role)
+- `spec.json` — this specification (fixture role)
+- `prereg.md` — this preregistration (fixture role)
+- `request.json` — immutable work request (fixture role)
+- `result.json` — structured measurements (derived role)
+- `provenance.json` — execution provenance (derived role)
+
+---
+
+## 12. Expected Outcomes and Consequences
+
+### Positive outcome (het scales with lambda for affine functions)
+- Validates causal heterogeneity metric as a detection method
+- Opens path to real-Web regime detection
+- TV distance provides additional distributional characterization
+- Next: apply to real Web transition data with regime stratification
+
+### Negative outcome (het does not scale for affine functions)
+- Causal heterogeneity metric (Var_a of expected next-states) is fundamentally insensitive regardless of function class
+- Pivot to: TV/JSD distributional metrics, or prediction-accuracy approaches with larger-n designs
+- Does not falsify C-WEB-DYNAMICS — only this specific metric
+
+### Mixed outcome (het scales but controls fail)
+- Informative about metric limitations
+- Follow-up with modified controls or larger samples
+```
+
+## freeze.json
+
+```text
+{
+  "experiment_id": "EXP-FRONTIER-33863640568",
+  "frozen_at": "2026-09-04T10:36:58.383420+00:00",
+  "hashes": {
+    "prereg.md": "01240a40f14813350ec4085da9802c706fb76271f403418a5ddd63f3ef0c2ace",
+    "request.json": "fb3652d895740298ef1e10009db3916536de1e2aec8f662affc63ea1e155a0ae",
+    "spec.json": "75f178705873a5377a36007476175ea502b6db09577fa720c2fcec8d56a8d945"
+  },
+  "schema_version": 1
+}
+```
+
+## result.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-33863640568",
+  "lane": "frontier",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "spearman_rho_aggregate": 0.9762,
+    "spearman_p_one_sided": 1.7e-05,
+    "cohens_d_lambda1_vs_lambda0": 1.5416,
+    "heterogeneity_means_by_lambda": {
+      "0.0": 0.052259,
+      "0.1": 0.065132,
+      "0.2": 0.056859,
+      "0.3": 0.073155,
+      "0.4": 0.13184,
+      "0.5": 0.164934,
+      "0.7": 0.222619,
+      "1.0": 0.447009
+    },
+    "tv_means_by_lambda": {
+      "0.0": 0.191462,
+      "0.1": 0.199283,
+      "0.2": 0.26065,
+      "0.3": 0.32263,
+      "0.4": 0.414342,
+      "0.5": 0.504043,
+      "0.7": 0.675413,
+      "1.0": 0.94958
+    },
+    "per_function_spearman": [
+      {
+        "function": 1,
+        "seed": 42,
+        "rho": 0.9762,
+        "p_value_two_sided": 3.3e-05,
+        "p_value_one_sided": 1.7e-05
+      },
+      {
+        "function": 2,
+        "seed": 43,
+        "rho": 0.8571,
+        "p_value_two_sided": 0.00653,
+        "p_value_one_sided": 0.003265
+      },
+      {
+        "function": 3,
+        "seed": 44,
+        "rho": 0.8095,
+        "p_value_two_sided": 0.014903,
+        "p_value_one_sided": 0.007451
+      }
+    ],
+    "anova_results": {
+      "design": "3 functions x 8 lambda levels x 10 reps = 240 observations",
+      "full_model": {
+        "lambda_effect": {
+          "F": 76.4713,
+          "p_value": 0.0,
+          "df": 7
+        },
+        "function_effect": {
+          "F": 145.7405,
+          "p_value": 0.0,
+          "df": 2
+        },
+        "interaction_effect": {
+          "F": 25.7898,
+          "p_value": 0.0,
+          "df": 14
+        },
+        "residual_df": 216,
+        "model_r_squared": 0.8461
+      },
+      "interaction_pass": false,
+      "interaction_threshold_alpha": 0.05
+    },
+    "permutation_results": {
+      "lambda_0": {
+        "description": "Heterogeneity significantly > 0 at lambda=0 (should NOT be)",
+        "per_replication_p_values": [
+          0.932,
+          0.506,
+          0.075,
+          0.815,
+          0.062,
+          0.028,
+          0.061,
+          0.352,
+          0.7,
+          0.643,
+          0.336,
+          0.58,
+          0.573,
+          0.524,
+          0.593,
+          0.45,
+          0.975,
+          0.142,
+          0.751,
+          0.439,
+          0.692,
+          0.087,
+          0.44,
+          0.202,
+          0.796,
+          0.433,
+          0.632,
+          0.308,
+          0.147,
+          0.706
+        ],
+        "mean_p_value": 0.466,
+        "pass": true,
+        "threshold_alpha": 0.05,
+        "interpretation": "Null control passes if mean p > alpha (heterogeneity not significantly > 0)"
+      },
+      "lambda_1": {
+        "description": "Heterogeneity >= 0.5 at lambda=1 across all functions/replications",
+        "n_above_threshold": 11,
+        "total_measurements": 30,
+        "per_replication_p_values": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.01,
+          0.006,
+          0.033,
+          0.001,
+          0.003,
+          0.015,
+          0.039,
+          0.0,
+          0.0,
+          0.011,
+          0.024,
+          0.0,
+          0.0,
+          0.001,
+          0.014,
+          0.265,
+          0.145,
+          0.287,
+          0.002,
+          0.001
+        ],
+        "mean_p_value": 0.028567,
+        "pass": false,
+        "threshold_heterogeneity": 0.5,
+        "interpretation": "Positive control passes if all replications have het >= 0.5"
+      }
+    },
+    "analytical_heterogeneity": {
+      "42": {
+        "0.0": 0.0,
+        "0.1": 0.009218750000000005,
+        "0.2": 0.036875000000000026,
+        "0.3": 0.08296875000000008,
+        "0.4": 0.14749999999999994,
+        "0.5": 0.23046875,
+        "0.7": 0.4517187499999999,
+        "1.0": 0.921875
+      },
+      "43": {
+        "0.0": 0.0,
+        "0.1": 0.0017187499999999876,
+        "0.2": 0.006874999999999951,
+        "0.3": 0.015468750000000073,
+        "0.4": 0.027499999999999913,
+        "0.5": 0.04296875,
+        "0.7": 0.08421874999999983,
+        "1.0": 0.171875
+      },
+      "44": {
+        "0.0": 0.0,
+        "0.1": 0.0017187499999999879,
+        "0.2": 0.0068749999999999515,
+        "0.3": 0.015468750000000073,
+        "0.4": 0.027499999999999938,
+        "0.5": 0.04296875,
+        "0.7": 0.08421874999999983,
+        "1.0": 0.171875
+      }
+    },
+    "analytical_tv": {
+      "42": {
+        "0.0": 0.0,
+        "0.1": 0.08000000000000002,
+        "0.2": 0.16000000000000003,
+        "0.3": 0.24,
+        "0.4": 0.32000000000000006,
+        "0.5": 0.4,
+        "0.7": 0.56,
+        "1.0": 0.8
+      },
+      "43": {
+        "0.0": 0.0,
+        "0.1": 0.10000000000000003,
+        "0.2": 0.20000000000000007,
+        "0.3": 0.3000000000000001,
+        "0.4": 0.40000000000000013,
+        "0.5": 0.5000000000000001,
+        "0.7": 0.6999999999999998,
+        "1.0": 1.0
+      },
+      "44": {
+        "0.0": 0.0,
+        "0.1": 0.10000000000000003,
+        "0.2": 0.20000000000000007,
+        "0.3": 0.3000000000000001,
+        "0.4": 0.40000000000000013,
+        "0.5": 0.5000000000000001,
+        "0.7": 0.6999999999999998,
+        "1.0": 1.0
+      }
+    },
+    "tv_spearman_rho": 1.0,
+    "tv_spearman_p_one_sided": 0.0,
+    "tv_ge_het_by_lambda": {
+      "0.0": true,
+      "0.1": true,
+      "0.2": true,
+      "0.3": true,
+      "0.4": true,
+      "0.5": true,
+      "0.7": true,
+      "1.0": true
+    },
+    "effect_sizes": {
+      "cohens_d_lambda1_vs_lambda0": 1.5416,
+      "interpretation": "large",
+      "tv_cohens_d_lambda1_vs_lambda0": 13.4152,
+      "tv_interpretation": "large"
+    },
+    "monotonicity": {
+      "heterogeneity_monotonic": false,
+      "tv_monotonic": true
+    }
+  },
+  "controls": {
+    "positive_control": {
+      "description": "Heterogeneity >= 0.5 at lambda=1 across all functions",
+      "pass": false,
+      "heterogeneity_at_lambda1_mean": 0.447,
+      "heterogeneity_at_lambda1_min": 0.0624,
+      "heterogeneity_at_lambda1_max": 1.1089,
+      "n_above_threshold": 11,
+      "total_measurements": 30,
+      "evidence_ref": "metrics.permutation_results.lambda_1"
+    },
+    "null_control": {
+      "description": "Heterogeneity not significantly > 0 at lambda=0 (permutation p > 0.05)",
+      "pass": true,
+      "heterogeneity_at_lambda0_mean": 0.0523,
+      "permutation_test_mean_p": 0.466,
+      "evidence_ref": "metrics.permutation_results.lambda_0"
+    },
+    "permutation_null": {
+      "description": "Shuffled action labels yield heterogeneity near zero at all lambda levels",
+      "pass": true,
+      "note": "Verified analytically: when action labels are shuffled, E[S_{t+1}|do(A=a)] is identical for all actions, so heterogeneity=0",
+      "evidence_ref": "metrics.analytical_heterogeneity"
+    },
+    "function_invariance": {
+      "description": "No significant function x lambda interaction (two-way ANOVA p > 0.05)",
+      "pass": false,
+      "interaction_p_value": 0.0,
+      "evidence_ref": "metrics.anova_results.full_model.interaction_effect.p_value"
+    },
+    "monotonicity_sensitivity": {
+      "description": "Heterogeneity is monotonically non-decreasing with lambda",
+      "pass": false,
+      "heterogeneity_means_by_lambda": [
+        0.052259,
+        0.065132,
+        0.056859,
+        0.073155,
+        0.13184,
+        0.164934,
+        0.222619,
+        0.447009
+      ],
+      "tv_means_by_lambda": [
+        0.191462,
+        0.199283,
+        0.26065,
+        0.32263,
+        0.414342,
+        0.504043,
+        0.675413,
+        0.94958
+      ]
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-FRONTIER-33863640568/analyze.py",
+      "sha256": "480b359fa21f1d7f14095b365061f44c7a08fb9c55b787ca51b940f4fbc7f704",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-33863640568/result.json",
+      "sha256": "813bdea839170a6358ed8b4ffa6f04cb3f30ee62034fa42dd0ea67288215493e",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-33863640568/provenance.json",
+      "sha256": "9d48856c81a4ecdc1df79dc4560d7c3142ff8994c6ed3b56ad4b91a31aa56544",
+      "role": "derived"
+    }
+  ],
+  "observations": [
+    "All three affine functions are non-degenerate: Var_a(E_S[f(S,a)]) > 0 (0.921875, 0.171875, 0.171875).",
+    "Analytical heterogeneity at lambda=1 equals Var_a(E_S[f(S,a)]): 0.921875, 0.171875, 0.171875.",
+    "Positive control fails: only function seed=42 has het >= 0.5 at lambda=1 (0.921875). Functions 43 and 44 have het=0.171875 < 0.5.",
+    "Aggregate Spearman rho(het, lambda) computed; p-value assessed against threshold rho >= 0.65, p < 0.05.",
+    "TV distance provides orthogonal sensitivity; TV >= het at each lambda level as expected.",
+    "Monotonicity of het and TV across lambda levels assessed.",
+    "Permutation test at lambda=0 verifies null control.",
+    "Two-way ANOVA tests function invariance."
+  ],
+  "validity_notes": [
+    "The experiment pipeline executed correctly with no errors. The negative result (if any) is scientific, not infrastructural.",
+    "The positive control threshold (het >= 0.5 at lambda=1) is strict; two functions have het=0.171875, which is non-zero but below threshold. This indicates the functions are non-degenerate but produce moderate heterogeneity.",
+    "The metric is well-defined and the pipeline is correct. The decision rule is applied as frozen.",
+    "TV distance is strictly >= het at each lambda level, confirming distributional structure beyond first moments.",
+    "Synthetic affine functions may not represent real Web dynamics; this experiment validates the metric, not the Web."
+  ],
+  "unresolved": [
+    "Whether the positive control threshold should be relaxed for functions with moderate heterogeneity (het=0.171875).",
+    "Whether real Web transitions exhibit mean-varying structure suitable for this metric.",
+    "Whether prediction-accuracy approaches would be more appropriate for Web-relevant dynamical heterogeneity."
+  ]
+}
+```
+
+## report.md
+
+```text
+# EXP-FRONTIER-33863640568 — Execution Report
+
+## Status: COMPLETE (FALSIFIED-IN-SETTING)
+
+**Decision:** FALSIFIED-IN-SETTING  
+**Reason:** Positive control fails (heterogeneity < 0.5 at lambda=1 for 2/3 functions) and function invariance fails (significant function × lambda interaction).  
+
+---
+
+## 1. Summary
+
+This experiment tested whether affine deterministic functions \( f(s,a) = (c_a \cdot s + b_a) \mod 10 \) (where \( \mathbb{E}_S[f(S,a)] \) varies across actions) yield detectable lambda-scaling of causal effect heterogeneity, and whether total variation (TV) distance provides additional sensitivity beyond mean-based metrics.
+
+**Key finding:** Affine functions **do** produce strong lambda-scaling of causal heterogeneity (aggregate Spearman \( \rho = 0.9762 \), \( p = 1.7 \times 10^{-5} \)), confirming the metric is not degenerate for non-permutation functions. However, the experiment is **falsified-in-setting** because:
+
+1. **Positive control fails:** Only 11/30 measurements at lambda=1 have heterogeneity ≥ 0.5 (threshold from prereg). Two functions (seeds 43, 44) have analytical heterogeneity 0.171875 at lambda=1, below the 0.5 threshold.
+2. **Function invariance fails:** Two-way ANOVA shows significant function × lambda interaction (p ≈ 0), indicating functions respond differently to lambda due to differing coefficient sets.
+
+---
+
+## 2. Scientific Results
+
+### 2.1 Causal Effect Heterogeneity (Primary Metric)
+
+| Lambda | Het Mean ± Std | Analytical Het (Function 42) |
+|--------|----------------|------------------------------|
+| 0.0    | 0.0523 ± 0.0371 | 0.000000 |
+| 0.1    | 0.0651 ± 0.0611 | 0.009219 |
+| 0.2    | 0.0569 ± 0.0353 | 0.036875 |
+| 0.3    | 0.0732 ± 0.0557 | 0.082969 |
+| 0.4    | 0.1318 ± 0.1265 | 0.147500 |
+| 0.5    | 0.1649 ± 0.1451 | 0.230469 |
+| 0.7    | 0.2226 ± 0.1774 | 0.451719 |
+| 1.0    | 0.4470 ± 0.3541 | 0.921875 |
+
+**Aggregate Spearman \( \rho = 0.9762 \)** (p_one_sided = 1.7e-5) — exceeds threshold \( \rho \ge 0.65, p < 0.05 \).  
+**Cohen's d (lambda=1 vs 0) = 1.5416** (large effect).
+
+### 2.2 Total Variation Distance (Secondary Metric)
+
+| Lambda | TV Mean ± Std | Analytical TV (Function 42) |
+|--------|---------------|-----------------------------|
+| 0.0    | 0.1915 ± 0.0310 | 0.000000 |
+| 0.1    | 0.1993 ± 0.0274 | 0.080000 |
+| 0.2    | 0.2607 ± 0.0396 | 0.160000 |
+| 0.3    | 0.3226 ± 0.0485 | 0.240000 |
+| 0.4    | 0.4143 ± 0.0588 | 0.320000 |
+| 0.5    | 0.5040 ± 0.0505 | 0.400000 |
+| 0.7    | 0.6754 ± 0.0749 | 0.560000 |
+| 1.0    | 0.9496 ± 0.0722 | 0.800000 |
+
+**TV Spearman \( \rho = 1.0000 \)** (p_one_sided ≈ 0). TV distance is **strictly ≥ heterogeneity** at every lambda level, confirming distributional structure beyond first moments.
+
+### 2.3 Per-Function Results
+
+| Function | Seed | Analytical Var_a | Spearman ρ | p_one_sided |
+|----------|------|------------------|------------|-------------|
+| 1        | 42   | 0.921875         | 0.9762     | 1.7e-5      |
+| 2        | 43   | 0.171875         | 0.8571     | 0.0033      |
+| 3        | 44   | 0.171875         | 0.8095     | 0.0075      |
+
+All per-function Spearman correlations are significant after Bonferroni correction (α/3 = 0.0167). Functions 43 and 44 have lower analytical heterogeneity but still show strong monotonic scaling.
+
+---
+
+## 3. Controls
+
+| Control | Threshold | Result | Evidence |
+|---------|-----------|--------|----------|
+| Positive control | het ≥ 0.5 at lambda=1 across all functions | **FAIL** (11/30) | metrics.permutation_results.lambda_1 |
+| Null control | het not significantly > 0 at lambda=0 | **PASS** (p=0.466) | metrics.permutation_results.lambda_0 |
+| Permutation null | Shuffled action labels → het ≈ 0 | **PASS** (analytical) | metrics.analytical_heterogeneity |
+| Function invariance | No significant function × lambda interaction | **FAIL** (p≈0) | metrics.anova_results |
+| Monotonicity | het monotonically non-decreasing with lambda | **FAIL** (dip at lambda=0.2) | metrics.monotonicity |
+
+---
+
+## 4. Interpretation
+
+### 4.1 The Causal Heterogeneity Metric Works for Affine Functions
+
+The previous experiment (EXP-FRONTIER-33767130362) found the metric degenerate for permutation functions because \( \text{Var}_a(\mathbb{E}_S[f(S,a)]) = 0 \) identically. This experiment demonstrates that when \( \text{Var}_a(\mathbb{E}_S[f(S,a)]) > 0 \), the metric scales monotonically with lambda (Spearman ρ = 0.9762). The metric is **not fundamentally insensitive** — it was specific to permutation functions.
+
+### 4.2 Positive Control Failure Is a Threshold Issue, Not a Metric Failure
+
+The positive control threshold (het ≥ 0.5 at lambda=1) was set a priori based on the expectation that affine functions would produce substantial heterogeneity. Functions 43 and 44 have lower Var_a (0.171875) but still produce significant scaling. The threshold is too strict for these functions; a threshold of ≥ 0.1 would pass all functions. However, the frozen decision rule must be applied as written.
+
+### 4.3 Function Invariance Failure Is Expected
+
+Functions have different coefficient sets, leading to different Var_a values. The significant interaction is real, not noise. This does not invalidate the metric; it indicates the metric correctly detects function-specific heterogeneity levels.
+
+### 4.4 TV Distance Provides Additional Sensitivity
+
+TV distance is strictly ≥ heterogeneity at all lambda levels, confirming that distributional differences extend beyond first moments. TV also shows perfect monotonic scaling (ρ = 1.0). For future experiments, TV distance may be a more sensitive metric than variance of means.
+
+---
+
+## 5. Comparison with Parent Experiment (EXP-FRONTIER-33767130362)
+
+| Metric | Permutation (Parent) | Affine (This) |
+|--------|----------------------|---------------|
+| Analytical Var_a | 0.0 | 0.171875 – 0.921875 |
+| Aggregate Spearman ρ | 0.333 (p=0.21) | 0.9762 (p=1.7e-5) |
+| Positive control | 0/30 pass | 11/30 pass |
+| Cohen's d | 0.105 (small) | 1.542 (large) |
+
+The affine functions produce dramatically stronger signal, confirming that the permutation degeneracy was the cause of the prior null result.
+
+---
+
+## 6. Validity Threats
+
+1. **Positive control threshold too strict:** The 0.5 threshold is based on analytical expectations for function 42 only. Functions 43 and 44 have lower Var_a but still produce significant scaling. The threshold should be function-specific or lowered.
+
+2. **Monotonicity dip at lambda=0.2:** Heterogeneity mean at lambda=0.2 (0.0569) is lower than at lambda=0.1 (0.0651). This is sampling noise (std ~0.035) and does not affect the strong overall correlation.
+
+3. **Synthetic-to-real gap:** Affine functions may not represent real Web dynamics. This experiment validates the metric, not the Web.
+
+4. **Raw per-replication tables not persisted:** The aggregated results are sufficient for the primary test, but independent recomputation of per-replication statistics is limited. The experiment is reproducible from frozen parameters and seed.
+
+---
+
+## 7. Product Consequences
+
+### Positive Outcome (Partial)
+The causal heterogeneity metric **does** detect lambda-scaling for non-permutation functions. This validates the metric as a detection method for Web-dynamical regime structure, albeit with the caveat that function-specific heterogeneity levels vary.
+
+### Negative Outcome (Control Failures)
+The positive control and function invariance failures indicate that the frozen decision rule is too strict for this function class. However, the scientific question is answered: the metric works when Var_a > 0.
+
+### Recommendation
+The Frontier lane should:
+1. **Not pivot to distributional metrics yet** — the mean-based metric works for affine functions.
+2. **Consider relaxing the positive control threshold** for future experiments with moderate-heterogeneity functions.
+3. **Apply TV distance as a secondary metric** in future experiments, as it provides additional sensitivity.
+4. **Test with real Web-like transitions** to assess synthetic-to-real translation.
+
+---
+
+## 8. Artifacts
+
+| Path | SHA256 | Role |
+|------|--------|------|
+| research/experiments/EXP-FRONTIER-33863640568/analyze.py | 480b359fa21f1d7f14095b365061f44c7a08fb9c55b787ca51b940f4fbc7f704 | code |
+| research/experiments/EXP-FRONTIER-33863640568/result.json | 813bdea839170a6358ed8b4ffa6f04cb3f30ee62034fa42dd0ea67288215493e | derived |
+| research/experiments/EXP-FRONTIER-33863640568/provenance.json | 9d48856c81a4ecdc1df79dc4560d7c3142ff8994c6ed3b56ad4b91a31aa56544 | derived |
+
+---
+
+## 9. Unresolved Questions
+
+1. Should the positive control threshold be function-specific (based on analytical Var_a) rather than a universal 0.5?
+2. Does the causal heterogeneity metric scale with lambda for real Web transitions (not just synthetic affine functions)?
+3. Is TV distance a more appropriate primary metric for future experiments, given its perfect monotonic scaling and strictly greater sensitivity?
+4. How many functions are needed to reliably estimate function invariance (ANOVA interaction power)?
+```
+
+## provenance.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-33863640568",
+  "execution_timestamp": null,
+  "analyzer_script": "analyze.py",
+  "script_hashes": {
+    "prereg.md": "01240a40f14813350ec4085da9802c706fb76271f403418a5ddd63f3ef0c2ace",
+    "spec.json": "75f178705873a5377a36007476175ea502b6db09577fa720c2fcec8d56a8d945",
+    "request.json": "fb3652d895740298ef1e10009db3916536de1e2aec8f662affc63ea1e155a0ae",
+    "analyze.py": "480b359fa21f1d7f14095b365061f44c7a08fb9c55b787ca51b940f4fbc7f704"
+  },
+  "result_hash": "813bdea839170a6358ed8b4ffa6f04cb3f30ee62034fa42dd0ea67288215493e",
+  "decision": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "claim": "C-WEB-DYNAMICS",
+  "lane": "frontier",
+  "environment": {
+    "python_version": "3.12.14",
+    "numpy_version": "2.5.2",
+    "scipy_version": "unknown"
+  },
+  "frozen_inputs": {
+    "request_hash": "fb3652d895740298ef1e10009db3916536de1e2aec8f662affc63ea1e155a0ae",
+    "spec_hash": "75f178705873a5377a36007476175ea502b6db09577fa720c2fcec8d56a8d945",
+    "prereg_hash": "01240a40f14813350ec4085da9802c706fb76271f403418a5ddd63f3ef0c2ace"
+  }
+}
+```
+
+## audit.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-33863640568",
+  "lane": "frontier",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Positive control threshold het>=0.5 uniform across functions is mis-calibrated: analytical Var_a(E_S[f]) is 0.921875 for seed 42 but only 0.171875 for seeds 43 and 44 (result.json:metrics.analytical_heterogeneity). A threshold > Var cannot be satisfied even analytically; fix requires function-specific threshold (e.g., 0.5*Var_analytical) or lower absolute threshold (e.g., >=0.10) or reporting het/Var ratio. Re-run decision rule with corrected threshold before claiming falsification of metric.",
+    "Function invariance control (ANOVA interaction p>0.05, result.json:controls.function_invariance) is mis-specified: functions were intentionally chosen with different Var_a (0.921 vs 0.171) so interaction F=25.7898 p=0.0 is expected true heterogeneity, not pipeline failure. Remove or replace with slope-consistency test on normalized het/lambda^2 or require same-sign monotonicity rather than identical magnitude. Do not treat expected differential signal as falsifier.",
+    "Persist per-replication per-function per-lambda heterogeneity and TV tables as hash-addressed artifacts. report.md:6 acknowledges raw tables not persisted; result.json:artifacts lists only analyze.py/result.json/provenance.json. Without raw tables independent recomputation of ANOVA residual_df 216, Cohen's d, and per-function het at lambda=1 is limited to aggregated means. Next experiment must emit derived artifact with 240-row table.",
+    "Frequency baseline P(S_{t+1}) from spec.json:baselines[2] not empirically reported. Add marginal distribution baseline at matched lambda levels for quantitative comparison with prior permutation experiment.",
+    "ANOVA p-values rounded to 0.0 (result.json:metrics.anova_results.full_model.lambda_effect.p_value etc.) indicate truncation/underflow; report with scientific notation (<1e-10) and verify assumptions (homoscedasticity, normality of het with n=500 per cell) or use permutation ANOVA."
+  ],
+  "validity_findings": [
+    {
+      "finding": "Frozen hashes verified: freeze.json hashes match actual sha256 of request.json fb3652d895740298ef1e10009db3916536de1e2aec8f662affc63ea1e155a0ae, spec.json 75f178705873a5377a36007476175ea502b6db09577fa720c2fcec8d56a8d945, prereg.md 01240a40f14813350ec4085da9802c706fb76271f403418a5ddd63f3ef0c2ace. No post-freeze re-design.",
+      "severity": "pass",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-33863640568/freeze.json",
+      "control_id": "provenance"
+    },
+    {
+      "finding": "Primary metric causal heterogeneity Var_a(E[S|do(A=a)]) computed correctly as sample variance of 4 action-conditional means (analyze.py:estimate_heterogeneity_mc). No target leakage: interventional distributions from synthetic DGP mixing lambda*deterministic + (1-lambda)*Uniform, not from held-out predictions. Representation loss acknowledged: 10-state discrete space limits max TV but sufficient for synthetic validation.",
+      "severity": "pass",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-33863640568/analyze.py:140-162, research/experiments/EXP-FRONTIER-33863640568/result.json:metrics.heterogeneity_means_by_lambda",
+      "control_id": "measurement_validity"
+    },
+    {
+      "finding": "Aggregate Spearman rho recomputed from 8 lambda means matches producer: rho=0.97619 (reported 0.9762) one-sided p=1.66e-05 (reported 1.7e-05) via scipy.stats.spearmanr. Per-function rhos 0.9762/0.8571/0.8095 all p_one_sided < Bonferroni 0.0167 correctly computed. TV Spearman 1.0 p=0.0 correct. Monotonicity correctly flagged false for het (dip 0.065132 at lambda 0.1 -> 0.056859 at 0.2) within sampling std 0.035, true for TV.",
+      "severity": "pass",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-33863640568/result.json:metrics.spearman_rho_aggregate, metrics.per_function_spearman, metrics.monotonicity",
+      "control_id": "spearman_rho_aggregate"
+    },
+    {
+      "finding": "Analytical heterogeneity verified: E_S[f] variances 0.921875 (seed42) and 0.171875 (seeds 43,44) recomputed from affine_params (c,b mod10) match result.json:metrics.analytical_heterogeneity. Scaling het(lambda)=lambda^2*Var verified at all 8 levels. Monte Carlo pooled mean at lambda1 0.447009 vs analytical pooled mean 0.421875 within sampling variation (std 0.3541). At lambda0 observed het 0.052259 vs analytical 0.0 reflects sampling noise floor ~0.05 consistent with prior permutation experiment 0.04-0.07; not evidence of leakage.",
+      "severity": "pass",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-33863640568/result.json:metrics.analytical_heterogeneity, metrics.heterogeneity_means_by_lambda",
+      "control_id": "analytical_heterogeneity"
+    },
+    {
+      "finding": "Null control correctly passes: permutation test at lambda0 mean p=0.466 (>0.05) with 30 p-values (10 reps x3 funcs) distribution uniform-like (only 1/30 p=0.028 <0.05). Producer correctly uses mean_p>alpha rule from prereg.md:7.2. No false positive at no-signal condition.",
+      "severity": "pass",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-33863640568/result.json:metrics.permutation_results.lambda_0, controls.null_control",
+      "control_id": "null_control"
+    },
+    {
+      "finding": "Positive control correctly fails per frozen rule but rule is invalid: 11/30 measurements >=0.5 at lambda1 (result.json:metrics.permutation_results.lambda_1). Analytical ceiling for seeds 43/44 is 0.171875 <0.5 so failure is predetermined by function design, not metric insensitivity. Product reports this as threshold issue (report.md:4.2) but frozen decision still yields FALSIFIED-IN-SETTING. Audit treats this as required_fix not metric falsification.",
+      "severity": "fail",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-33863640568/result.json:controls.positive_control, metrics.permutation_results.lambda_1, metrics.analytical_heterogeneity",
+      "control_id": "positive_control"
+    },
+    {
+      "finding": "Function invariance control fails correctly per test (ANOVA interaction F=25.7898 p=0.0, residual_df 216, R2 0.8461) but expectation of no interaction is contradicted by design: different Var_a guarantees different lambda slopes. Producer discussion report.md:4.3 correctly notes this is expected. Control is discriminating but decision rule entry is mis-specified; significant interaction is evidence metric IS sensitive to function-specific heterogeneity.",
+      "severity": "fail",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-33863640568/result.json:metrics.anova_results.full_model.interaction_effect, controls.function_invariance",
+      "control_id": "function_invariance"
+    },
+    {
+      "finding": "Infrastructure: status COMPLETE valid (not MEASUREMENT_INVALID). Pipeline executed 120k transitions (8x3x10x500). No blocked substrate. Provenance completeness limited: provenance.json execution_timestamp null, scipy_version unknown, no GitHub run log beyond execution_checkpoint.json github_run_id 33863640568. Not measurement-invalidating but reduces reproducibility. Raw per-replication artifact missing as noted.",
+      "severity": "warn",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-33863640568/provenance.json, execution_checkpoint.json, result.json:artifacts",
+      "control_id": "provenance"
+    },
+    {
+      "finding": "TV distance metric valid orthogonal baseline: TV pooled means 0.191 at lambda0 (noise floor) to 0.949 at lambda1, Spearman 1.0, Cohen's d 13.415 large, TV>=het at every lambda level true (result.json:metrics.tv_ge_het_by_lambda). Confirms distributional structure beyond first moments. However TV analytical values (0.8 and 1.0 at lambda1) vs empirical 0.949 shows TV also near saturation; small state space may ceiling TV.",
+      "severity": "pass",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-33863640568/result.json:metrics.tv_means_by_lambda, metrics.analytical_tv",
+      "control_id": "tv_baseline"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "Causal heterogeneity metric from EXP-FRONTIER-33767130362",
+      "strength": "strong",
+      "comparison": "Prior permutation experiment: analytical Var=0, aggregate rho 0.333 p=0.21, Cohen d 0.105, het means 0.04-0.07 flat. This experiment: analytical Var 0.171-0.921, rho 0.976 p=1.7e-05, Cohen d 1.54, het means 0.052->0.447 monotonic. Direct quantitative contrast confirms metric degeneracy was function-class specific, not intrinsic. Report.md table 5 comparison reproduced.",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-33767130362/handoff.json:carry_forward.established, research/experiments/EXP-FRONTIER-33863640568/report.md:5, result.json:metrics.heterogeneity_means_by_lambda"
+    },
+    {
+      "baseline_id": "Permutation null (shuffled action labels)",
+      "strength": "weak",
+      "comparison": "Verified analytically het=0 when labels shuffled (result.json:controls.permutation_null note). No empirical permutation null distribution reported at all lambdas; only permutation p-values at lambda0/1 from shuffling within-replication action labels. Baseline strength limited to analytic argument, not empirical TV/het near-zero demonstration across lambda continuum. Satisfies prereg 7.3 minimal.",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-33863640568/result.json:controls.permutation_null, analyze.py:197-221"
+    },
+    {
+      "baseline_id": "Frequency baseline P(S_{t+1}) marginal",
+      "strength": "missing",
+      "comparison": "Spec baseline 'marginal next-state distribution provides expected heterogeneity under no action-dependence' not empirically reported as separate metric. Null control at lambda0 (het 0.052) implicitly proxies this but no explicit P(S) heterogeneity value for comparison. Cannot assess whether action-conditional variance exceeds marginal baseline.",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-33863640568/spec.json:baselines[2], result.json:controls.null_control"
+    },
+    {
+      "baseline_id": "TV distance orthogonal metric",
+      "strength": "strong",
+      "comparison": "TV provides strictly greater sensitivity: at each lambda TV_mean > het_mean (0.191>0.052 at 0 to 0.949>0.447 at 1), Spearman 1.0 vs 0.976, Cohen d 13.415 vs 1.54. Analytical TV 0.8-1.0 at lambda1 vs het 0.171-0.921 shows TV captures distributional differences even when mean differences modest (seeds 43/44 TV=1.0 while het=0.171). Supports prereg hypothesis TV >= het.",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-33863640568/result.json:metrics.tv_means_by_lambda, metrics.tv_spearman_rho, metrics.tv_ge_het_by_lambda, metrics.effect_sizes"
+    }
+  ],
+  "recomputed_metrics": {
+    "spearman_rho_aggregate": {
+      "reported": 0.9762,
+      "recomputed": 0.9761904761904763,
+      "method": "scipy.stats.spearmanr on lambda_levels [0.0,0.1,0.2,0.3,0.4,0.5,0.7,1.0] vs reported heterogeneity_means_by_lambda [0.052259,0.065132,0.056859,0.073155,0.13184,0.164934,0.222619,0.447009]",
+      "match": true
+    },
+    "spearman_p_one_sided_aggregate": {
+      "reported": 1.7e-05,
+      "recomputed": 1.657198013100049e-05,
+      "method": "p_two_sided/2 for rho>0; two_sided 3.314e-05 from spearmanr",
+      "match": true
+    },
+    "analytical_var_a_Ef": {
+      "seed_42": 0.921875,
+      "seed_43": 0.171875,
+      "seed_44": 0.171875,
+      "method": "1/10 * sum_{s=0..9} (c_a*s+b_a) mod10, Var across 4 actions; recomputed from AFFINE_PARAMS identical to result.json analytical_heterogeneity at lambda1",
+      "match": true
+    },
+    "analytical_het_lambda_scaling": {
+      "verified": true,
+      "method": "het(lambda)=lambda^2*Var; checked 8 levels for each seed matches result.json to 1e-12",
+      "example_seed42_lambda0.7": 0.4517187499999999
+    },
+    "heterogeneity_means_by_lambda_pooled": {
+      "reported": {
+        "0.0": 0.052259,
+        "1.0": 0.447009
+      },
+      "analytical_pooled_mean_lambda1": 0.421875,
+      "delta": 0.025134,
+      "note": "within 1 std (0.3541) sampling variation; consistent"
+    },
+    "tv_spearman_rho": {
+      "reported": 1.0,
+      "recomputed": 1.0,
+      "method": "spearmanr on tv_means_by_lambda [0.191462,0.199283,0.26065,0.32263,0.414342,0.504043,0.675413,0.94958]",
+      "match": true
+    },
+    "monotonicity_het": {
+      "reported": false,
+      "recomputed": false,
+      "dip_location": "lambda 0.1 (0.065132) -> 0.2 (0.056859) = -0.008273 within noise std 0.035-0.061",
+      "tv_monotonic": true
+    },
+    "controls_recomputed": {
+      "positive_control_n_above_0.5": "11/30 reported matches threshold logic given analytical maxima 0.921 and 0.171",
+      "null_control_mean_p": 0.466,
+      "interaction_F": 25.7898,
+      "interaction_p_truncated": 0.0,
+      "note": "F/p values not independently recomputed without raw per-replication table; reported structure plausible given differential Var"
+    }
+  },
+  "claim_ceiling": "MAXIMUM JUSTIFIED: In synthetic 10-state 4-action affine DGP f(s,a)=(c_a*s+b_a) mod10, causal heterogeneity metric Var_a(E_S[do(A=a)]) is NOT degenerate: it scales monotonically with action-determination lambda (pooled Spearman rho=0.976 p~1.6e-05, Cohen d 1.54) when Var_a(E_S[f])>0 (verified 0.171-0.921). Effect is function-specific magnitude proportional to lambda^2*Var; significant function x lambda interaction (F 25.79 p≈0) demonstrates magnitude dependence on coefficients. TV distance scales perfectly (rho=1.0, d 13.4) and is strictly >= het at all lambdas, confirming distributional signal beyond means. No evidence for permutation functions (prior experiment). No evidence for real Web transitions, other function families, cross-site, or product deployment. Composite SURVIVES_CURRENT_TEST fails only because two frozen controls were mis-calibrated (uniform het>=0.5 threshold > analytical ceiling for 2/3 functions; zero-interaction expectation contradicted by design). Metric validity established; decision rule needs revision.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-33863640568/spec.json:claim_ids C-WEB-DYNAMICS, hypothesis, falsifier, decision_rule, positive_control, null_control, measurement_validity",
+    "research/experiments/EXP-FRONTIER-33863640568/prereg.md:4-8 function design, decision rules, controls",
+    "research/experiments/EXP-FRONTIER-33863640568/freeze.json:hashes verified",
+    "research/experiments/EXP-FRONTIER-33863640568/analyze.py:sha256 480b359fa21f1d7f14095b365061f44c7a08fb9c55b787ca51b940f4fbc7f704",
+    "research/experiments/EXP-FRONTIER-33863640568/result.json:metrics.spearman_rho_aggregate 0.9762, metrics.spearman_p_one_sided 1.7e-05, metrics.heterogeneity_means_by_lambda, metrics.analytical_heterogeneity, metrics.tv_means_by_lambda, metrics.tv_spearman_rho 1.0, metrics.anova_results.full_model.interaction_effect F 25.7898 p 0.0, metrics.permutation_results.lambda_0 mean_p 0.466, metrics.permutation_results.lambda_1 n_above_threshold 11/30, controls.positive_control pass false, controls.null_control pass true, controls.function_invariance pass false",
+    "research/experiments/EXP-FRONTIER-33863640568/report.md:2 heterogeneity and TV tables, section 4 interpretation acknowledging threshold/interaction issues, section 5 parent comparison",
+    "research/experiments/EXP-FRONTIER-33863640568/provenance.json:lane frontier, claim C-WEB-DYNAMICS",
+    "research/experiments/EXP-FRONTIER-33767130362/handoff.json:carry_forward established Var=0 degeneracy, unknown non-permutation question"
+  ],
+  "unresolved": [
+    "Whether real Web transitions exhibit mean-varying structure (Var_a(E_S[f])>0) vs permutation-like mean-preserving structure; synthetic-to-real gap acknowledged in validity_notes not tested.",
+    "What calibrated positive control threshold (function-specific fraction of Var_analytical or lower absolute het) should replace 0.5 for moderate-heterogeneity functions; unresolved per result.json:unresolved[0].",
+    "Whether TV distance (or JSD) should be primary metric for future frontier experiments given its larger effect size and sensitivity to full distribution (unresolved in result.json:unresolved).",
+    "Statistical power of ANOVA interaction with only 3 functions and of Spearman on n=8 lambda levels for small effects; no power analysis reported.",
+    "Per-replication heterogeneity and TV distributions needed to recompute ANOVA and Cohen's d raw variance; missing artifact blocks full independent replication.",
+    "Generalization to larger state spaces, other non-permutation families (non-bijective, action-dependent offsets), and to prediction-accuracy baseline comparison at matched lambda levels."
+  ]
+}
+```
+
+## verdict.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-33863640568",
+  "lane": "frontier",
+  "decision": "FALSIFIED-IN-SETTING",
+  "claim_updates": [
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "HYPOTHESIS",
+      "reason": "This experiment provides strong supporting evidence that the causal heterogeneity metric detects lambda-scaling for non-permutation functions (Spearman rho=0.9762, p~1.6e-05, Cohen d=1.54) in synthetic affine DGPs. However, the frozen decision rule's positive control and function invariance controls were mis-calibrated (threshold het>=0.5 exceeds analytical ceiling for 2/3 functions; zero-interaction expectation contradicted by design with different Var_a). The audit confirms metric validity is established but the decision rule requires revision before the hypothesis can be formally supported or falsified. C-WEB-DYNAMICS remains HYPOTHESIS: this experiment validates a detection method, not the claim itself. Real Web transition evidence is still needed."
+    }
+  ],
+  "product_action": "NONE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does the causal heterogeneity metric (Var_a of expected next-states) or TV distance detect lambda-scaling of dynamical structure in real or realistic Web transition data, or does the synthetic-to-real gap render the affine DGP validation insufficient?",
+  "reason": "The frozen decision rule yields FALSIFIED-IN-SETTING because two controls fail: (1) positive control het>=0.5 at lambda=1 passes only 11/30 measurements — analytical heterogeneity for seeds 43/44 is 0.171875, which is below the 0.5 threshold by construction, not by metric insensitivity; (2) function invariance fails (ANOVA interaction F=25.7898, p≈0) because functions were designed with different Var_a (0.921 vs 0.171), guaranteeing differential lambda slopes — this is expected signal, not pipeline failure. However, the audit (audit.json:status=REVISE, claim_ceiling) correctly identifies both failures as mis-calibrated frozen controls, not metric falsification. The metric itself is strongly validated: aggregate Spearman rho=0.9762 (p~1.6e-05), all 3 functions significant after Bonferroni correction, TV distance rho=1.0, Cohen d=1.54 (large). Null control passes (mean permutation p=0.466). The audit's required_fixes prescribe: (a) function-specific positive control threshold (e.g., 0.5*Var_analytical), (b) replace zero-interaction ANOVA with slope-consistency or normalized het/lambda^2 test, (c) persist per-replication tables as artifacts. Director bounds the claim at the audit ceiling: metric validity established for affine functions; decision rule revision needed before formal hypothesis evaluation. C-WEB-DYNAMICS remains HYPOTHESIS — this experiment validates a detection mechanism, not the broader claim about real Web dynamics.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-33863640568/result.json:metrics.spearman_rho_aggregate 0.9762, metrics.spearman_p_one_sided 1.7e-05, metrics.cohens_d_lambda1_vs_lambda0 1.5416, metrics.heterogeneity_means_by_lambda, metrics.analytical_heterogeneity (Var_a: 0.921875, 0.171875, 0.171875), metrics.tv_means_by_lambda, metrics.tv_spearman_rho 1.0, metrics.permutation_results.lambda_0 mean_p 0.466, metrics.permutation_results.lambda_1 n_above_threshold 11/30, metrics.anova_results.full_model.interaction_effect F 25.7898 p 0.0, metrics.monotonicity",
+    "research/experiments/EXP-FRONTIER-33863640568/audit.json:status REVISE, producer_claim_supported false, claim_ceiling 'Metric validity established; decision rule needs revision', required_fixes[0-4] positive_control threshold mis-calibrated, function_invariance mis-specified, raw artifact missing, frequency baseline missing, ANOVA p-values truncated, validity_findings[5-6] positive_control fail is threshold not metric, function_invariance fail is expected heterogeneity",
+    "research/experiments/EXP-FRONTIER-33863640568/spec.json:claim_ids C-WEB-DYNAMICS, falsifier, decision_rule, positive_control, null_control",
+    "research/experiments/EXP-FRONTIER-33863640568/freeze.json:hashes verified, no post-freeze redesign",
+    "research/experiments/EXP-FRONTIER-33863640568/analyze.py:sha256 480b359fa21f1d7f14095b365061f44c7a08fb9c55b787ca51b940f4fbc7f704, estimate_heterogeneity_mc function",
+    "research/experiments/EXP-FRONTIER-33767130362/handoff.json:carry_forward established permutation degeneracy Var=0, rejected permutation functions for causal heterogeneity, unknown non-permutation functions"
+  ]
+}
+```
+
+## handoff.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-33863640568",
+  "lane": "frontier",
+  "target_lane": "frontier",
+  "next_question": "Does the causal heterogeneity metric (Var_a of expected next-states) or TV distance detect lambda-scaling of dynamical structure in real or realistic Web transition data, or does the synthetic-to-real gap render the affine DGP validation insufficient?",
+  "why_next": "The causal heterogeneity metric is validated for synthetic affine functions (Spearman rho=0.9762, p~1.6e-05) but all evidence is from 10-state synthetic DGPs. The critical open question is whether real Web transitions exhibit mean-varying structure (Var_a(E_S[f])>0) suitable for this metric, or whether real transitions are permutation-like (mean-preserving) requiring distributional metrics. This is the minimum next step to assess whether the validated metric has product relevance. The synthetic-to-real gap is the dominant unknown and cannot be resolved without real or realistic Web data.",
+  "carry_forward": {
+    "established": [
+      "Causal heterogeneity metric Var_a(E_S[do(A=a)]) is NOT degenerate for non-permutation functions: in synthetic affine DGPs f(s,a)=(c_a*s+b_a) mod10, het scales monotonically with lambda (aggregate Spearman rho=0.9762, p~1.6e-05, Cohen d=1.54). Confirmed by 3 independent functions with different Var_a (0.921875, 0.171875, 0.171875).",
+      "Permutation functions yield Var_a(E_S[f])=0 identically, making the metric degenerate — this was specific to the function class, not intrinsic to the metric. Direct quantitative contrast: permutation rho=0.333 (p=0.21, d=0.105) vs affine rho=0.9762 (p~1.6e-05, d=1.54).",
+      "TV distance scales perfectly with lambda (Spearman rho=1.0, Cohen d=13.4) and is strictly >= het at every lambda level, confirming distributional structure beyond first moments. TV is a more sensitive metric than variance of means for this DGP class.",
+      "Null control passes: permutation test at lambda=0 yields mean p=0.466 (not significant), confirming no false positive detection when no action-dependence exists.",
+      "The frozen decision rule's positive control (uniform het>=0.5 at lambda=1) and function invariance (zero ANOVA interaction) controls were mis-calibrated: threshold exceeds analytical ceiling for 2/3 functions (0.171875<0.5), and interaction is expected when functions have different Var_a. These are control design issues, not metric failures."
+    ],
+    "rejected": [
+      "Permutation functions as a test class for causal heterogeneity — Var_a=0 identically, metric degenerate.",
+      "The hypothesis that het(lambda) detects regime dynamics when Var_a(E_S[f(S,a)])=0 — the formula is correct but the function class makes it tautological.",
+      "Uniform positive control threshold het>=0.5 at lambda=1 for functions with heterogeneous Var_a — analytically impossible for functions with Var_a<0.5.",
+      "Zero-interaction ANOVA expectation when testing functions with intentionally different Var_a — differential lambda slopes are expected signal, not pipeline failure."
+    ],
+    "unknown": [
+      "Whether real Web transitions exhibit mean-varying structure (Var_a(E_S[f])>0) suitable for the causal heterogeneity metric, or are permutation-like (mean-preserving).",
+      "Whether TV distance or JSD should be the primary metric for future frontier experiments given its larger effect size (d=13.4 vs 1.54) and perfect monotonic scaling.",
+      "What calibrated positive control threshold (function-specific fraction of Var_analytical or lower absolute het) should replace the uniform 0.5 for future experiments.",
+      "Whether prediction-accuracy approaches (parent experiment's rho=1.0 on permutation functions) are more appropriate than variance-of-means for Web-relevant dynamical heterogeneity.",
+      "How synthetic affine DGP results translate to real Web state transitions — the synthetic-to-real gap is untested.",
+      "Per-replication heterogeneity and TV distributions needed for full independent recomputation of ANOVA and Cohen's d — raw artifact not persisted in this experiment."
+    ],
+    "do_not_assume": [
+      "Do not assume C-WEB-DYNAMICS is established or falsified by this experiment — the metric is validated for affine functions but the broader claim about real Web dynamics is untested.",
+      "Do not assume the causal heterogeneity metric generalizes beyond affine functions or beyond the 10-state synthetic DGP — only affine functions with known Var_a>0 were tested.",
+      "Do not assume the FALSIFIED-IN-SETTING frozen decision outcome reflects metric insensitivity — it reflects mis-calibrated controls as documented in audit.json required_fixes[0-1].",
+      "Do not assume synthetic-to-real translation applies — all tested functions are synthetic affine maps, not real Web transitions.",
+      "Do not assume the ANOVA interaction failure (F=25.7898, p≈0) is evidence against the metric — it is evidence that functions have different Var_a, which is expected by design.",
+      "Do not assume the small monotonicity dip at lambda=0.2 (0.065→0.057, within noise std 0.035) indicates non-monotonic true scaling — it is sampling noise.",
+      "Do not assume TV distance saturation at lambda=1 (analytical TV=0.8-1.0) indicates insensitivity — the 10-state space limits maximum TV but the metric still differentiates lambda levels."
+    ]
+  },
+  "dependencies": [
+    "Real or realistic Web transition data with known action-structure (e.g., recorded agent interactions with state-tracking) to test synthetic-to-real translation",
+    "Function-specific positive control thresholds (e.g., 0.5*Var_analytical or het/Var ratio) for future synthetic experiments with heterogeneous function classes",
+    "Raw per-replication per-function per-lambda heterogeneity and TV tables persisted as hash-addressed artifacts for independent recomputation",
+    "Frequency baseline P(S_{t+1}) marginal distribution reported at matched lambda levels for quantitative comparison",
+    "Decision: whether TV distance should replace or supplement variance-of-means as the primary metric for Web-dynamical regime detection"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-33863640568/result.json:metrics.spearman_rho_aggregate 0.9762, metrics.analytical_heterogeneity (Var_a 0.921875/0.171875/0.171875), metrics.tv_means_by_lambda, metrics.tv_spearman_rho 1.0, metrics.permutation_results.lambda_0 mean_p 0.466, metrics.permutation_results.lambda_1 n_above_threshold 11/30, metrics.anova_results.interaction_effect F 25.7898 p 0.0, metrics.monotonicity",
+    "research/experiments/EXP-FRONTIER-33863640568/audit.json:status REVISE, claim_ceiling, required_fixes[0-4], validity_findings[5-6], baseline_findings[0] prior permutation contrast, baseline_findings[3] TV baseline strength",
+    "research/experiments/EXP-FRONTIER-33863640568/verdict.json:decision FALSIFIED-IN-SETTING, reason, claim_updates",
+    "research/experiments/EXP-FRONTIER-33767130362/handoff.json:carry_forward established permutation degeneracy, rejected permutation functions, unknown non-permutation question"
+  ],
+  "recommended_action": "Design a new Frontier experiment using TV distance (or JSD) as the PRIMARY metric on real or realistic Web transition data (e.g., recorded agent sessions with DOM state tracking) to test synthetic-to-real translation. If real Web data is unavailable, design a synthetic experiment with (a) non-bijective/non-affine function families with controlled Var_a to broaden the function-class validation, (b) function-specific positive control thresholds based on analytical Var_a, (c) raw per-replication tables persisted as artifacts, and (d) frequency baseline P(S_{t+1}) reported at all lambda levels. The causal heterogeneity metric should be retained as a secondary metric alongside TV. Do NOT repeat the same affine function experiment with minor parameter changes — the metric is validated for that class."
 }
 ```
 

@@ -51,6 +51,31 @@
         "handoff.json": "128562014c5c09d2793692cd05297d571da9cefc4059be95bdc469498fb0e7d8"
       }
     },
+    "EXP-FRONTIER-33863640568": {
+      "lane": "frontier",
+      "request_id": "82a107dee4efe693fde08251",
+      "created_at": "2026-09-04T10:31:35.759787+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Can non-permutation deterministic functions (affine maps f(s,a) = (c_a * s + b_a) mod 10 where E_S[f(S,a)] varies across actions) yield detectable lambda-scaling of causal effect heterogeneity, or should the Frontier lane pivot to distributional metrics (TV distance) that are sensitive to permutation structure?",
+      "audit_status": "REVISE",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/frontier",
+      "hashes": {
+        "request.json": "fb3652d895740298ef1e10009db3916536de1e2aec8f662affc63ea1e155a0ae",
+        "spec.json": "75f178705873a5377a36007476175ea502b6db09577fa720c2fcec8d56a8d945",
+        "prereg.md": "01240a40f14813350ec4085da9802c706fb76271f403418a5ddd63f3ef0c2ace",
+        "freeze.json": "91a5e4efed0fa1e74177b3482971f33560ca92c1a9d8bbbd250815d06b5abd41",
+        "result.json": "a0e6daab701ff5b1245e240f30ddb2f44b964a875ca3ec7abffb1d5cccfdc3c5",
+        "report.md": "98fd669e866080b310bb590f3443f5e8e13509d006e1026130188d6b30c27ab8",
+        "provenance.json": "9d48856c81a4ecdc1df79dc4560d7c3142ff8994c6ed3b56ad4b91a31aa56544",
+        "audit.json": "d8659d7edaf1fbaddca119f83996e2b9a0c0c8f25c9b2ed2811dd43f166c78cc",
+        "verdict.json": "af4794efeba28e819fedc8ff1a335bf9553ad5fcfb4fc24a901c2e8dfe85e725",
+        "handoff.json": "7a629b31ec2f6202f72098b0a927e59a280519c8b9cd93242a22d0d3f6d026f0"
+      }
+    },
     "EXP-GRAPH-33528827169": {
       "lane": "graph",
       "request_id": "3e0d81e7790f2f2b7bd8665e",
