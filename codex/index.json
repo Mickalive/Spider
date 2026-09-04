@@ -26,6 +26,31 @@
         "handoff.json": "dda6bc7cd9a06aeeb68ff1ee5c67d7609d1ecd0e46d494c87db8daebda216563"
       }
     },
+    "EXP-FRONTIER-33767130362": {
+      "lane": "frontier",
+      "request_id": "8dae691d254a98b949c72dc8",
+      "created_at": "2026-09-03T14:29:30.122089+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Does the causal effect heterogeneity of actions across states increase monotonically with the action-dependence parameter lambda, demonstrating regime-dependent dynamics in synthetic Web-like state transitions via direct causal intervention rather than correlational prediction accuracy?",
+      "audit_status": "MEASUREMENT_INVALID",
+      "decision": "MEASUREMENT_INVALID",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/frontier",
+      "hashes": {
+        "request.json": "4fd8e220e5b0d682c402df1e674ef6147ab702e6cc34c73aff2514ae1f8746fd",
+        "spec.json": "b4d981a72456fcd3053693bcc63fd70a29d6aad0cd698cb9401b4de2bb21200f",
+        "prereg.md": "0af725f7f790046390cf7a77ee74396c6e272e4c3719d1dcde0435fe68064874",
+        "freeze.json": "ee30d94ceeb4656334339ff37366c1d5007f1b61b49d1db6587848f3a8109ff8",
+        "result.json": "719010428a54f01fa13dc70e3e5714200b0578f8f845ac8b9dd8dff317076075",
+        "report.md": "9ca7b76cda7b4218586f7805eb8aec2ba840a18a19e95d525ca1898e0137b20b",
+        "provenance.json": "36c7fdb30f71a05e950471353814f1424e6ca936bb2a775ef7fbc70610e5dbd1",
+        "audit.json": "a8d52541bab8df9821854619f71db40908934171c67a5f0d97cf7e7ec3ff0a23",
+        "verdict.json": "1b0555da9871b78f2d490dcfdca0da1afad3beca753d4b25b6391fdfad53af99",
+        "handoff.json": "128562014c5c09d2793692cd05297d571da9cefc4059be95bdc469498fb0e7d8"
+      }
+    },
     "EXP-GRAPH-33528827169": {
       "lane": "graph",
       "request_id": "3e0d81e7790f2f2b7bd8665e",
@@ -49,6 +74,58 @@
         "audit.json": "cc0f7879c0cf306217d37a0b943dbf30acfeb0e5127972762624129f746c2f60",
         "verdict.json": "4e339c951a32b79b834d55ec245a02c910f8b74d7b236e07feb63b366f09f763",
         "handoff.json": "ee1b24b92a766eed03606f1ac95623303234ab03baada15c351940e257c3460c"
+      }
+    },
+    "EXP-GRAPH-33718012817": {
+      "lane": "graph",
+      "request_id": "45b4f9608080513bedbe37d4",
+      "created_at": "2026-09-03T05:14:20.614410+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT"
+      ],
+      "question": "When both literal (zero-parameter) and parameterized mechanisms coexist in a shared registry, does the literal mechanism's universal matching cause false accepts \u2014 intercepting resolutions that should go to the parameterized mechanism, producing incorrect bound_action URLs?",
+      "audit_status": "REVISE",
+      "decision": "COMPETITION-UNSAFE",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/graph",
+      "hashes": {
+        "request.json": "ec06d399ca66fee7293ec6c7260b15349854d57bfecf249cdb5e0066044bcf73",
+        "spec.json": "cc41cf639b9339300a18018b83a903f0a65e3cd609a6d174530b59a84baea8cd",
+        "prereg.md": "5e5f003859e823752a3679c9279aca60601d0dce2a9672bca7253e365ba1480c",
+        "freeze.json": "b558256b564de3ffb77a48e85aadfc5240a9d2f67c7eb996678a1985eb1d3e05",
+        "result.json": "ca911fb92cf2e45b67e6caa9941b0574a6a6aa885c53e7bbd3d80e28c32c7a7f",
+        "report.md": "31a9d83b60bda25f819995aad2762111e8df494b2c96069e405d70897b9b1280",
+        "provenance.json": "d5c2c9ac2418bf663d2145a2d6d821c309e5ba21b83088938f12a260fbf2bfd1",
+        "audit.json": "383cfd9c7ccc71ae82963b04552462504f20c05492670f0fb03b05a47371bfd4",
+        "verdict.json": "d4ce040ab11407958e07451d249bca4ee1d44b8bbb27805e5541f8a444a13c3b",
+        "handoff.json": "ebb3de502513621de55c297a32023f20b6f87739cdf00b4d3db025d00f51187a"
+      }
+    },
+    "EXP-INTEL-33528832113": {
+      "lane": "intel",
+      "request_id": "46d19fdaf32e996c0ab24bd7",
+      "created_at": "2026-09-01T15:56:44.223955+00:00",
+      "claim_ids": [
+        "C-CROSSSITE",
+        "C-LLM-INHERIT",
+        "C-PRODUCT-ECON"
+      ],
+      "question": "Which publicly available web-agent benchmarks contain multi-step stateful task structures that could serve as stronger testbeds for SPIDER's cross-site inheritance and LLM-inheritance claims than the current 2-site (quotes/books) corpus?",
+      "audit_status": "REVISE",
+      "decision": "SUPPORTS",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/intel",
+      "hashes": {
+        "request.json": "ac060980eee635b3edec766758f02747cfb02c42f5433aba27178285d1561c15",
+        "spec.json": "27f16b3d2074b16a645307322c646b54232f17b41ef00ed43d2b25f8668562be",
+        "prereg.md": "0bebc672261e2ec247cd53fd1f7bada7654d469acce2a0ba6b5e8efcfbf547de",
+        "freeze.json": "027a1a32009fa516ef2584e0b78a45e9eabf186a7fc8bc7f03a9d1cd2b8ba85f",
+        "result.json": "c273ce1ee626c1222d8eb8cacca3fed377304144b19891907329382067ccc131",
+        "report.md": "f5f8abd62ea53f57e6a95707b70d903dbca0b1293460b040ff0c49fdf876e04a",
+        "provenance.json": "cdad879999e774356e422da40ac9d952974216e81d48e6f6e7179917cd433bfd",
+        "audit.json": "9781215ff59861da4ab8f61774734acd120c9d33efc0874bfdd97631674d4d6b",
+        "verdict.json": "5737ab7e5989ec116fa4610619fdb76c2f27b73bc5e150a5b7be1417b3c16054",
+        "handoff.json": "46853bb92c10fbe26f3ba849ff7664c02b95b23d39e1033fbc6efe33424a3336"
       }
     },
     "EXP-PHYSICS-33528829431": {
@@ -150,6 +227,31 @@
         "audit.json": "e13db7649dbfd34faabfdffb56f0293c15a517d76a75e2325265b5a4b0062789",
         "verdict.json": "cfedf34fddeb96dd3fd5ed104265de2630e8673cbe4dc52a9d2301084a26fb66",
         "handoff.json": "fea5b244f4547485ceb42f78d18fabeb664c457927fe26b940d7a0b7e7451f04"
+      }
+    },
+    "EXP-RUNTIME-33805283356": {
+      "lane": "runtime",
+      "request_id": "1c99edce5a6acfd6fb1c4bd8",
+      "created_at": "2026-09-03T20:57:58.045124+00:00",
+      "claim_ids": [
+        "C-MEAS-VALID"
+      ],
+      "question": "On a constant-URL server where auth state (Bearer token / session cookie) varies and response bodies differ accordingly, does the HTTP fingerprint substrate maintain discrimination \u2014 and does the full observation vector (status + headers + body + redirects) exceed single-field baselines (B-STATUS-ONLY, B-BODY-ONLY) when bodies vary with auth state?",
+      "audit_status": "REVISE",
+      "decision": "NARROW_SUCCESS",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/runtime",
+      "hashes": {
+        "request.json": "c8476dec201ef16f7d3fcdcf80562af142e95461a9a0bdfed44afb21994e946d",
+        "spec.json": "43498a99c09ff9c70d289f7352181f3129b97f40463c82875e01078042c53954",
+        "prereg.md": "5721f8c30d62cc22bd65b5b6dafb2143b13f9fddd0edd6a434501ed7ceb1d12d",
+        "freeze.json": "3ef419c244dab67546c8fbf6e2475b58b042c72e4c8902364d017c81af18fa23",
+        "result.json": "c0bc15fd454a0f5d3fc3eef19854b34ef6120a862a1cba0fac5d5b2b73684d0a",
+        "report.md": "9c80f5fb6c35722cb329a2ecce353ebd28b22523ee30aa668e83f26e320a4731",
+        "provenance.json": "5f501a5213838def50d43864411c486ff729355e0d3cd80821924348902b8ec5",
+        "audit.json": "61f7a88cf5d52c5cd7e6d5e529eefca6c72ba5e320abce11315f09a5bf494076",
+        "verdict.json": "b61cad3195b1a64273f9b1768842f8efbb816175b4c582ed7e858f6ba1cd9320",
+        "handoff.json": "c0cf725e47b7a5596f4400213a228f41e46321d0ee790280dc1144ec00bb7894"
       }
     }
   }

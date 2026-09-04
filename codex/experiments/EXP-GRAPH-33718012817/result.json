@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-33718012817",
+  "lane": "graph",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "total_conditions": 13,
+    "conditions_matching_expected": 13,
+    "competition_safety": "COMPETITION-UNSAFE",
+    "cold_abstains": true,
+    "literal_standalone_pass": true,
+    "param_standalone_pass": true,
+    "param_generalizes_pass": true,
+    "confident_param_wins": true,
+    "confident_literal_wins": true,
+    "shared_equal_false_accepts": 6,
+    "shared_equal_total": 6,
+    "literal_wins_all_shared_equal": true,
+    "param_always_shadowed_at_equal_confidence": true,
+    "false_accept_rate_at_equal_confidence": 1.0
+  },
+  "controls": {
+    "cold_null": {
+      "type": "null",
+      "condition_id": "cold",
+      "expected": "UNKNOWN",
+      "observed": "UNKNOWN",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json[0]"
+    },
+    "literal_standalone_positive": {
+      "type": "positive",
+      "condition_id": "literal-only-original",
+      "expected": "EXECUTABLE url=/posts/1",
+      "observed": "EXECUTABLE url=/posts/1",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json[1]"
+    },
+    "literal_unseen_baseline": {
+      "type": "baseline",
+      "condition_id": "literal-only-unseen",
+      "expected": "EXECUTABLE url=/posts/1",
+      "observed": "EXECUTABLE url=/posts/1",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json[2]"
+    },
+    "param_standalone_positive": {
+      "type": "positive",
+      "condition_id": "param-only-original",
+      "expected": "EXECUTABLE url=/posts/1",
+      "observed": "EXECUTABLE url=/posts/1",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json[3]"
+    },
+    "param_generalizes_positive": {
+      "type": "positive",
+      "condition_id": "param-only-unseen",
+      "expected": "EXECUTABLE url=/posts/2",
+      "observed": "EXECUTABLE url=/posts/2",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json[4]"
+    },
+    "confident_param_wins": {
+      "type": "positive",
+      "condition_id": "compete-param-higher",
+      "expected": "EXECUTABLE url=/posts/3 via param mechanism",
+      "observed": "EXECUTABLE url=/posts/3 via param-fetch-posts-higher",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json[11]"
+    },
+    "confident_literal_wins": {
+      "type": "null",
+      "condition_id": "compete-literal-higher",
+      "expected": "EXECUTABLE url=/posts/1 via literal mechanism",
+      "observed": "EXECUTABLE url=/posts/1 via literal-fetch-posts-1-higher",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json[12]"
+    }
+  },
+  "artifacts": [
+    {"path": "research/experiments/EXP-GRAPH-33718012817/raw_evidence.json", "sha256": "dce8f3b916a414190b0a02248754aa4d4671a10b80a9837476602519a829fbf5", "role": "raw"},
+    {"path": "research/experiments/EXP-GRAPH-33718012817/run_experiment.py", "sha256": "469cb8071d10d8aaf99b4b2966b9b30ce3aa54e44214320bb96d68d288935034", "role": "code"}
+  ],
+  "observations": [
+    "All 13 conditions executed successfully with fresh kernel instances. No infrastructure failures.",
+    "Cold registry (no mechanisms) correctly returns UNKNOWN — kernel abstains as expected.",
+    "Literal mechanism standalone: EXECUTABLE on both original resource (id=1) and unseen resource (id=2), confirming universal matching due to empty required_slots set (kernel.py L104-106).",
+    "Parameterized mechanism standalone: EXECUTABLE on both original (id=1) and unseen (id=2), with correct bound_action URL substitution (/posts/${id} → /posts/1 and /posts/2 respectively).",
+    "In all 6 shared-equal conditions (id=1..6), the literal mechanism wins despite the parameterized mechanism also being a valid candidate. The literal mechanism produces bound_action url=/posts/1 for ALL parameter values, including id=2..6 where the user intended /posts/{id}.",
+    "This confirms false accepts: for id=2, the user wanted /posts/2 but the kernel returns /posts/1. For id=3, wanted /posts/3, got /posts/1. Identical pattern for id=4,5,6.",
+    "The tie-break mechanism is insertion order: candidates.sort(key=lambda m: m.confidence, reverse=True) produces a stable sort; with equal confidence (0.95), the first-inserted mechanism (literal) remains first.",
+    "When the parameterized mechanism has higher confidence (0.98 vs 0.95), it wins correctly — confidence-based disambiguation works.",
+    "When the literal mechanism has higher confidence (0.98 vs 0.95), it wins correctly — confidence-based disambiguation works in both directions.",
+    "The false accept rate at equal confidence is 100% (6/6): every shared-equal condition with id>1 produces a false accept."
+  ],
+  "validity_notes": [
+    "No HTTP execution was performed — only kernel resolution and bound_action correctness were measured. This eliminates network variability but means HTTP correctness is not re-validated here (it was validated in the parent experiment).",
+    "Registry insertion order was explicitly controlled: literal registered before parameterized in shared-equal conditions. The kernel's registry.all() returns mechanisms in JSONL file order, which matches insertion order due to the upsert() method sorting by mechanism_id. Since 'literal-fetch-posts-1' < 'param-fetch-posts' lexicographically, literal is always first in the sorted output.",
+    "Equal confidence (0.95) is a realistic scenario from the parent experiment. Real-world registries may have naturally different confidence values, providing some safety via confidence-based disambiguation.",
+    "Only the 'fetch' intent was tested. The kernel's resolution logic is intent-agnostic (kernel.py L97), so competition behavior should generalize across intents.",
+    "The literal mechanism had empty preconditions ({}), representing the worst case — most aggressive matching. A literal mechanism with specific preconditions would be less competitive.",
+    "All conditions are deterministic with no model calls, no RNG, and no sampling."
+  ],
+  "unresolved": [
+    "Whether literal universal matching is intended kernel behavior or a bug — the kernel correctly implements presence-based slot checking as designed, but the spec assumed value-based behavior. This is a design clarification pending DIRECTOR resolution.",
+    "Whether verify() postcondition checking works correctly for non-200 HTTP responses — not tested in this experiment (verify_postconditions() hardcodes status=200 per audit finding V_VERIFY_HARDCODED_STATUS).",
+    "Whether the kernel's preconditions matching (_matches) discriminates — all mechanisms registered with preconditions={}, no discrimination tested.",
+    "Whether _bind() preserves type for full-match template strings (int → int) — all templates here are URL-embedded partial match, type-preservation path untested.",
+    "Whether parameterized mechanisms work on real-web endpoints with DOM, auth, session state, drift — jsonplaceholder is a substrate validation only.",
+    "Whether the 'learn on A' half of C-PARAM-INHERIT works (LLM-driven mechanism distillation from exploration) — no model calls in this experiment."
+  ]
+}

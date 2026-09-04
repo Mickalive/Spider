@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-33718012817",
+  "lane": "graph",
+  "decision": "COMPETITION-UNSAFE",
+  "claim_updates": [
+    {
+      "claim_id": "C-PARAM-INHERIT",
+      "status": "BLOCKED",
+      "reason": "Literal universal matching (required_slots empty, kernel.py L104-106) makes literal mechanisms eligible for all parameter values. At equal confidence (0.95) in a shared registry, the lexicographic mechanism_id tie-break (registry.py sorted(items), not insertion order per audit finding V_TIEBREAK_ARTEFACT_LEXICOGRAPHIC) determines the winner. When literal's ID sorts first ('literal-fetch-posts-1' < 'param-fetch-posts'), literal shadows parameterized for id=2..6, producing 5/5 eligible false accepts (bound_action /posts/1 instead of /posts/{id}). The false-accept risk is real and operational. Confidence-based disambiguation (0.98 vs 0.95) overrides the tie and is validated, but equal confidence remains a realistic scenario. A code fix is required before mixed literal+parameterized registries can be product-safe. Scope ceiling: deterministic substrate only (jsonplaceholder, single fetch intent, preconditions={}, single ${id} slot). No real-web, DOM, auth, session, drift, or LLM distillation generalization."
+    }
+  ],
+  "product_action": "BLOCK — literal+parameterized mechanisms in shared registry at equal confidence produce false accepts. Code fix required before product registration of mixed mechanism types.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Should the kernel tie-break at equal confidence prefer parameterized mechanisms over literal (kernel code change in resolve()), or should literal mechanisms carry value-based constraints that reject params conflicting with fixed resources, and what is the smallest safe fix that eliminates false accepts without breaking cold/literal-only/param-only baselines?",
+  "reason": "Audit (status=REVISE, producer_claim_supported=false) confirmed the core false-accept mechanism but corrected the tie-break explanation from insertion order to lexicographic mechanism_id ordering. Counterbalanced ID test (audit finding V_TIEBREAK_ARTEFACT_LEXICOGRAPHIC) showed param wins when its ID sorts first ('aaa-param' < 'zzz-literal'), proving the outcome is ID-dependent. False accept rate is 1.0 on the eligible subset (5/5 for id=2..6) and 0.833 overall (5/6 including coincidental id=1). All controls (cold null, literal standalone, param standalone, param generalization, confidence disambiguation x2) pass and replicate. The COMPETITION-UNSAFE verdict stands: literal universal matching creates a genuine operational hazard in shared registries at equal confidence. C-PARAM-INHERIT remains BLOCKED until a code fix resolves the competition hazard.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-33718012817/spec.json",
+    "research/experiments/EXP-GRAPH-33718012817/result.json",
+    "research/experiments/EXP-GRAPH-33718012817/audit.json",
+    "research/experiments/EXP-GRAPH-33718012817/report.md",
+    "research/experiments/EXP-GRAPH-33718012817/raw_evidence.json",
+    "research/experiments/EXP-GRAPH-33718012817/raw_evidence.jsonl",
+    "research/experiments/EXP-GRAPH-33718012817/run_experiment.py",
+    "research/experiments/EXP-GRAPH-33718012817/provenance.json",
+    "research/experiments/EXP-GRAPH-33718012817/prereg.md",
+    "research/experiments/EXP-GRAPH-33718012817/freeze.json",
+    "src/spider/kernel.py:104-113",
+    "src/spider/registry.py:35-38"
+  ]
+}
