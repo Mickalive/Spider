@@ -128,6 +128,32 @@
         "handoff.json": "46853bb92c10fbe26f3ba849ff7664c02b95b23d39e1033fbc6efe33424a3336"
       }
     },
+    "EXP-INTEL-33842055594": {
+      "lane": "intel",
+      "request_id": "aa84f05c994cb7f569ba4f07",
+      "created_at": "2026-09-04T05:51:40.097724+00:00",
+      "claim_ids": [
+        "C-CROSSSITE",
+        "C-LLM-INHERIT"
+      ],
+      "question": "Can WebArena's Docker-based self-hosting provide HTML/DOM accessibility trees compatible with SPIDER's fragment-reuse observation format?",
+      "audit_status": "REVISE",
+      "decision": "PARTIALLY_COMPATIBLE",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/intel",
+      "hashes": {
+        "request.json": "d7ac099ff31b5f45a830349529520d4c2ee5473ea319c7b4af7cb37d955de79c",
+        "spec.json": "79da2a9a50aab9cd8dd74f927fdfa68351b44b22b4a0272b3b259c88c81309fb",
+        "prereg.md": "e0d93a691eba75216d80461196218b20fd6569c085a7b7f4ff4ab59c0700f8bc",
+        "freeze.json": "93b4ec42b16b80712d595a40164dc0c3567250765cb0c8a554a7f3639d6d8f4d",
+        "result.json": "f72051dede117cd5799332a1520d663e540bb8976e58d742281a110d32b175c9",
+        "report.md": "3bafabeb8a7d2e85235b93d8a37ed17bcad43b304218d00abeb838c2faf12b25",
+        "provenance.json": "d897e411eeef563b095ccf36fee448a9c3d8f759e3794bb6c14dfb0b896edaa4",
+        "audit.json": "f8b8010c21a66d60da850a1f63aa1fc7804485a64701fea3b0437a028ec003f2",
+        "verdict.json": "3f60b461ab38df9b9a023f934cb89913b39d09eabc616bd16e97476eb5f8e395",
+        "handoff.json": "c50df1d04707587e76fd7426e7d9c8960aa85cee28fb71acc9f3e9fdd262ca6e"
+      }
+    },
     "EXP-PHYSICS-33528829431": {
       "lane": "physics",
       "request_id": "aefb271e5c3274224c9651fe",

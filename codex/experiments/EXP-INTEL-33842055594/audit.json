@@ -1,0 +1,216 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-33842055594",
+  "lane": "intel",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Downgrade compatibility_level from DIRECTLY_USABLE to REQUIRES_TRANSFORM and update outcome mapping to PARTIALLY_COMPATIBLE per prereg section 10.2: producer acknowledges structured data requires recomposition from obs['text'] string + info['observation_metadata']['text']['obs_nodes_info'] metadata, viewport filtering override, and role-to-tag mapping, which is non-trivial transformation per spec measurement_validity rule 3.",
+    "Correct element_attributes_preserved metric: default accessibility_tree mode provides ARIA properties (focused, expanded, hasPopup) via AccessibilityTreeNode.properties and IGNORED_ACTREE_PROPERTIES filtering, not HTML attributes (class, id, href). HTML attributes only available in html observation mode via DOMNode.attributes from DOMSnapshot.captureSnapshot. Split metric into accessibility_tree_attributes vs html_attributes or mark REQUIRES_TRANSFORM.",
+    "Clarify observation channel: producer maps accessibility_tree_nodes directly to Observation.state, but WebArena's agent observation dict is {'text': str, 'image': npt.NDArray} where text is formatted string from TextObervationProcessor.parse_accessibility_tree(); raw tree nodes are not in obs but in observation_metadata via ObservationHandler.get_observation_metadata()['text']['obs_nodes_info'] and processor.obs_nodes_info. Document exact recomposition path and provide code reference to browser_env/processors.py TextObervationProcessor.process and browser_env/envs.py _get_obs/_get_obs_metadata.",
+    "Address truncation and viewport loss: UTTERANCE_MAX_LENGTH=8192 (browser_env/constants.py, processors.py get_observation_space) and run.py max_obs_length=1920 truncate formatted string before LLM; current_viewport_only filtering (processors.py fetch_page_accessibility_tree and fetch_page_html, run.py main() forces current_viewport_only=True) removes off-screen and zero-area nodes and filtered generics via valid_node/clean_accessibility_tree. State truncation/filtering as validity limit and required override (current_viewport_only=False) for SPIDER, not as DIRECTLY_USABLE.",
+    "Fix provenance reproducibility: artifacts entries have sha256 null and no snapshot hashes; per spec measurement_validity rule 1 provide file hashes or snapshot references for browser_env/envs.py, processors.py, utils.py, constants.py, run.py at inspected HEAD (2026-09-04), and distinguish RAW EVIDENCE (code snippets) from INTERPRETATION in observations.",
+    "Correct null_control encoding: result.json controls.null_control_screenshots_only has pass=false with expected 'if only screenshots are returned, this control passes' but observed 'DOM is present so null does NOT pass' — invert to standard null semantics (pass=true means correctly distinguished DOM-present from DOM-absent/screenshots-only null) or rename control to dom_present_check to avoid confusion.",
+    "Bound cross-site claim: producer claims cross_site_format_consistent true for all 4 site types based on code-level uniform ScriptBrowserEnv; add validity limit that no Docker deployment or live task trace was executed, so format consistency is code-inferred not empirically verified per spec measurement_validity rule 4 (source inspection only). Requires integration experiment for actual DOM availability per site type."
+  ],
+  "validity_findings": [
+    {
+      "finding": "Compatibility level overstated: DIRECTLY_USABLE not justified",
+      "severity": "major",
+      "details": "Producer verdict DIRECTLY_USABLE requires DOM/HTML present, parseable, hierarchy preserved with no transformation to Observation.state dict[str,Any]. Actual WebArena pipeline returns Observation = str | ndarray as {'text': formatted string with indentation, 'image': screenshot ndarray} via ObservationHandler.get_observation(). Structured hierarchy is not in text string alone but requires parsing indentation or joining with obs_nodes_info metadata from info['observation_metadata']['text']['obs_nodes_info'] (processor.meta_data). Recomposition, viewport override, and role-to-tag mapping are required transformations per prereg 10.2. Correct ceiling is REQUIRES_TRANSFORM / PARTIALLY_COMPATIBLE.",
+      "evidence": "research/experiments/EXP-INTEL-33842055594/result.json:metrics.compatibility_level; research/experiments/EXP-INTEL-33842055594/report.md:Compatibility Assessment table and SPIDER Compatibility Mapping; browser_env/processors.py: TextObervationProcessor.parse_accessibility_tree returns (tree_str, obs_nodes_info), process() returns string only, meta_data holds obs_nodes_info; browser_env/processors.py: ObservationHandler.get_observation returns {text: str, image: ndarray}, get_observation_metadata returns {text: {obs_nodes_info}}; browser_env/envs.py: _get_obs and _get_obs_metadata separate; research/experiments/EXP-INTEL-33842055594/spec.json:measurement_validity[2], decision_rule"
+    },
+    {
+      "finding": "Element attributes preservation conflates ARIA properties with HTML attributes",
+      "severity": "major",
+      "details": "Producer marks element_attributes_preserved true claiming accessibility_tree includes properties like focused, expanded, required, hasPopup. Code shows accessibility tree provides AccessibilityTreeNode {role.value, name.value, properties list} with IGNORED_ACTREE_PROPERTIES = (focusable, editable, readonly, level, settable, multiline, invalid) filtered out in parse_accessibility_tree. HTML-specific attributes (class, id, href, src, data-*) are not in accessibility tree; they are only in DOMNode.attributes from fetch_page_html / DOMSnapshot.captureSnapshot used in html mode, which is not default. Fragment reuse relying on HTML attributes would need html mode or DOMSnapshot data, i.e., transform.",
+      "evidence": "research/experiments/EXP-INTEL-33842055594/result.json:metrics.element_attributes_preserved; browser_env/utils.py:AccessibilityTreeNode TypedDict, DOMNode TypedDict; browser_env/constants.py: IGNORED_ACTREE_PROPERTIES; browser_env/processors.py: parse_accessibility_tree IGNORED_ACTREE_PROPERTIES check, fetch_page_html building DOMNode.attributes; browser_env/processors.py: fetch_page_accessibility_tree vs fetch_page_html"
+    },
+    {
+      "finding": "Hierarchy and identity filtered/lossy, not fully preserved",
+      "severity": "major",
+      "details": "Producer claims element_hierarchy_preserved and element_identity_preserved true with parentId/childIds tree. Code filters hierarchy: fetch_page_accessibility_tree removes nodes not in viewport (current_viewport_only=True default, IN_VIEWPORT_RATIO_THRESHOLD=0.6), zero-area nodes, nodes without union_bound, and splices children into parent; parse_accessibility_tree marks valid_node=false for empty generics and filters roles generic/img/list/paragraph etc without name/properties, and clean_accessibility_tree deduplicates statictext lines. Reported hierarchy is pruned, not raw DOM. Requires disclosure and override for full-page fragment extraction.",
+      "evidence": "browser_env/processors.py: fetch_page_accessibility_tree current_viewport_only filtering, remove_node_in_graph, get_element_in_viewport_ratio; parse_accessibility_tree valid_node logic and IGNORED_ACTREE_PROPERTIES; clean_accesibility_tree; browser_env/processors.py: fetch_page_html similar viewport filtering"
+    },
+    {
+      "finding": "Observation split across two channels requires recomposition",
+      "severity": "major",
+      "details": "Report maps state = {accessibility_tree: nodes, obs_nodes_info, browser_config} but actual agent receives obs dict and separate info dict. Env returns (observation, info) where info['observation_metadata']['text']['obs_nodes_info'] holds backend_id/union_bound/text per element ID and info['page'].content holds html via page.content(). Producer interpretation in observations[10] and report SPIDER Compatibility Mapping omits this split. Mapping to SPIDER Observation.state is possible but not direct assignment as described.",
+      "evidence": "browser_env/envs.py: reset() returns (observation, info) with observation_metadata and DetachedPage(page.url, page.content()), step() same; browser_env/processors.py: ObservationHandler.get_observation vs get_observation_metadata; research/experiments/EXP-INTEL-33842055594/report.md:SPIDER Compatibility Mapping code snippet"
+    },
+    {
+      "finding": "Truncation and viewport default threaten measurement validity",
+      "severity": "major",
+      "details": "UTTERANCE_MAX_LENGTH=8192 enforces observation_space Text max_length; run.py max_obs_length=1920 truncates observation before LLM input (prompt construction). For large pages formatted accessibility tree exceeds these limits, losing elements. Default run.py main() sets args.current_viewport_only=True (also processors.py default current_viewport_only param) so off-screen elements are not observed by default. Producer notes SPIDER can set False/override, but this is still a required transformation; default usable observation is viewport-limited and length-limited, contradicting DIRECTLY_USABLE.",
+      "evidence": "browser_env/constants.py: UTTERANCE_MAX_LENGTH=8192; browser_env/processors.py: get_observation_space spaces.Text max_length=UTTERANCE_MAX_LENGTH; run.py: --max_obs_length default 1920, --current_viewport_only action store_true, main() args.current_viewport_only=True; browser_env/envs.py: ScriptBrowserEnv __init__ current_viewport_only default False but run.py overrides to True"
+    },
+    {
+      "finding": "Positive controls pass but are non-discriminating",
+      "severity": "minor",
+      "details": "Playwright usage and CDP Accessibility.getFullAXTree confirmed via browser_env/envs.py sync_playwright import and chromium.launch, and processors.py client.send('Accessibility.getFullAXTree') / DOMSnapshot.captureSnapshot. Controls correctly verify methodology can locate DOM APIs, but passing them provides no evidence of discriminating power between compatible and incompatible observation formats. Null control (screenshots-only) is correctly not triggered, but encoding as pass=false inverts standard semantics where pass should mean correctly distinguished null.",
+      "evidence": "research/experiments/EXP-INTEL-33842055594/result.json:controls.positive_control_playwright_api, positive_control_cdp_accessibility, null_control_screenshots_only; browser_env/envs.py: from playwright.sync_api import sync_playwright, self.playwright.chromium.launch(); browser_env/processors.py: fetch_page_accessibility_tree Accessibility.getFullAXTree"
+    },
+    {
+      "finding": "No empirical deployment; cross-site consistency code-inferred only",
+      "severity": "major",
+      "details": "Per spec measurement_validity rule 4 experiment is source-inspection only, no Docker deployment, no browser execution, no live task solving. Producer correctly notes source-inspection limit in validity_notes, but report Product Consequences states '2-site corpus limitation is resolved — WebArena provides 812 tasks across 4 website types' and claims cross_site_format_consistent true for all 4 site types. Uniform env class suggests format uniformity, but without executing on shopping/reddit/gitlab/wikipedia Docker instances, actual DOM availability, shadow DOM/iframe traversal, and Docker self-hosting compatibility remain unverified. Claim ceiling must remain code-inferred.",
+      "evidence": "research/experiments/EXP-INTEL-33842055594/spec.json:measurement_validity[3]; research/experiments/EXP-INTEL-33842055594/result.json:validity_notes[0], observations[9]; research/experiments/EXP-INTEL-33842055594/report.md:Cross-Site Consistency and Product Consequences; provenance.json:environment no_docker true"
+    },
+    {
+      "finding": "Provenance missing hashes and raw artifact preservation",
+      "severity": "minor",
+      "details": "Provenance lists 8 source files with raw GitHub URLs but sha256 null and no snapshot date/commit hash; result.json artifacts similarly have sha256 null. Spec measurement_validity rule 1 requires citing specific file paths, function names, line numbers at current HEAD — producer cites files and functions but line numbers absent and snapshots not hashed, limiting reproducibility against code evolution. RAW EVIDENCE -> OBSERVATION distinction partially collapsed in report narrative.",
+      "evidence": "research/experiments/EXP-INTEL-33842055594/provenance.json:source_files_inspected 8 entries sha256 null; research/experiments/EXP-INTEL-33842055594/result.json:artifacts sha256 null; research/experiments/EXP-INTEL-33842055594/spec.json:measurement_validity[0]"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "SPIDER Observation model (src/spider/models.py) state dict[str, Any]",
+      "strength": "strong",
+      "finding": "Baseline correctly used: Observation.state is dict[str, Any] generic, verified via live read of src/spider/models.py dataclass frozen with state/next_state dict[str,Any]. No structural constraint prevents storing accessibility_tree string plus obs_nodes_info metadata or raw tree nodes. Producer correctly derives format requirement from actual code, not narrative. Fragment extraction requires element identity/hierarchy/attributes/text which accessibility tree partially provides (role vs tag) — this limits ceiling to REQUIRES_TRANSFORM not baseline failure.",
+      "evidence": "src/spider/models.py: Observation dataclass; research/experiments/EXP-INTEL-33842055594/spec.json:baselines[0]; research/experiments/EXP-INTEL-33842055594/provenance.json:spider_reference_files"
+    },
+    {
+      "baseline_id": "SPIDER current 2-site corpus (quotes.toscrape.com, books.toscrape.com) raw HTML parseable DOM",
+      "strength": "weak",
+      "finding": "Descriptive baseline only; no measurement run on 2-site corpus within this intel experiment (by design, source inspection only). Serves as motivation for why WebArena would expand corpus, not as comparative performance. No representation loss measured.",
+      "evidence": "research/experiments/EXP-INTEL-33842055594/spec.json:baselines[1]; research/experiments/EXP-INTEL-33842055594/prereg.md:8.3"
+    },
+    {
+      "baseline_id": "Mind2Web static HTML snapshots (no live environment)",
+      "strength": "weak",
+      "finding": "Reference baseline for what compatible looks like (static HTML files). Not scored or executed here; provides conceptual contrast to WebArena live DOM via CDP. Appropriate for intel reconnaissance but no quantitative comparison.",
+      "evidence": "research/experiments/EXP-INTEL-33842055594/spec.json:baselines[2]"
+    }
+  ],
+  "recomputed_metrics": {
+    "playwright_usage_confirmed": {
+      "producer_value": true,
+      "recomputed_value": true,
+      "unit": "boolean",
+      "method": "Re-fetched raw https://raw.githubusercontent.com/web-arena-x/webarena/main/browser_env/envs.py — confirms 'from playwright.sync_api import ... sync_playwright' and 'self.playwright = self.context_manager.__enter__()' + 'self.playwright.chromium.launch(headless=...)'; also page.evaluate, page.content usage in DetachedPage. Methodology not broken.",
+      "evidence": "browser_env/envs.py: imports and setup() chromium.launch"
+    },
+    "observation_types_available": {
+      "producer_value": [
+        "accessibility_tree",
+        "html",
+        "image"
+      ],
+      "recomputed_value": [
+        "accessibility_tree",
+        "html",
+        "image"
+      ],
+      "unit": "enum set",
+      "method": "Verified envs.py __init__ match observation_type in ['html','accessibility_tree'] -> text, ['image'] -> image, observation_type choices in run.py ['accessibility_tree','html','image'], processors.py ObservationHandler dispatch to TextObervationProcessor for html/accessibility_tree and ImageObservationProcessor for image.",
+      "evidence": "browser_env/envs.py: __init__ observation_type dispatch; browser_env/processors.py: TextObervationProcessor vs ImageObservationProcessor; run.py --observation_type choices"
+    },
+    "default_observation_type": {
+      "producer_value": "accessibility_tree",
+      "recomputed_value": "accessibility_tree",
+      "unit": "string",
+      "method": "Confirmed run.py parser default='accessibility_tree', minimal_example.py observation_type='accessibility_tree' example, envs.py default param observation_type='html' but run.py overrides at entry point; effective product default is accessibility_tree per documentation and run.py.",
+      "evidence": "run.py: --observation_type default accessibility_tree; minimal_example.py: observation_type accessibility_tree; browser_env/envs.py param default html but deployment uses run.py"
+    },
+    "element_identity_preserved": {
+      "producer_value": true,
+      "recomputed_value": true,
+      "unit": "boolean with caveat",
+      "method": "AccessibilityTreeNode has nodeId str, role.value (link/button/textbox etc), name.value text, backendDOMNodeId. Preserved per node, but filtered nodes (valid_node false) dropped; role is ARIA role not HTML tagName. True for preserved subset after filtering.",
+      "evidence": "browser_env/utils.py AccessibilityTreeNode; browser_env/processors.py parse_accessibility_tree node_str f'[{obs_node_id}] {role} {repr(name)}', obs_nodes_info backend_id"
+    },
+    "element_hierarchy_preserved": {
+      "producer_value": true,
+      "recomputed_value": true,
+      "unit": "boolean with caveat",
+      "method": "AccessibilityTreeNode has parentId and childIds, DFS indentation preserves nesting in formatted string. However hierarchy is pruned by viewport filtering (remove_node_in_graph splices children to parent) and valid_node filtering removes generics, so full raw hierarchy not preserved — pruned hierarchy preserved.",
+      "evidence": "browser_env/utils.py AccessibilityTreeNode parentId/childIds; browser_env/processors.py fetch_page_accessibility_tree remove_node_in_graph, parse_accessibility_tree dfs depth indent"
+    },
+    "element_attributes_preserved": {
+      "producer_value": true,
+      "recomputed_value": false,
+      "unit": "boolean (default mode)",
+      "method": "Recomputed false for default accessibility_tree mode: properties list contains ARIA states (focused, expanded, required, hasPopup) with IGNORED_ACTREE_PROPERTIES filtered out; HTML attributes (class, id, href, name, type) not present. True only for html mode where DOMNode.attributes string contains HTML attributes via DOMSnapshot.captureSnapshot. Producer conflated ARIA properties with HTML attributes.",
+      "evidence": "browser_env/processors.py parse_accessibility_tree properties loop with IGNORED_ACTREE_PROPERTIES, DOMNode.attributes in fetch_page_html/parse_html; browser_env/constants.py IGNORED_ACTREE_PROPERTIES"
+    },
+    "element_text_content_preserved": {
+      "producer_value": true,
+      "recomputed_value": true,
+      "unit": "boolean",
+      "method": "name.value contains visible text, node_str includes repr(name), obs_nodes_info text field and parsed string contains quoted text. StaticText deduplication in clean_accessibility_tree may drop repeated statictext but not primary content.",
+      "evidence": "browser_env/processors.py parse_accessibility_tree name.value, clean_accesibility_tree"
+    },
+    "structured_metadata_available": {
+      "producer_value": true,
+      "recomputed_value": true,
+      "unit": "boolean",
+      "method": "Confirmed obs_nodes_info dict mapping element ID -> {backend_id, union_bound [x,y,w,h], text} populated in TextObervationProcessor.process for both html and accessibility_tree modes, exposed via meta_data / ObservationHandler.get_observation_metadata()['text']['obs_nodes_info'] and used by get_element_center for spatial actions. Not in obs['text'] string itself but available via info channel.",
+      "evidence": "browser_env/processors.py process() meta_data['obs_nodes_info'] = obs_nodes_info, get_element_center, ObservationMetadata TypedDict"
+    },
+    "cross_site_format_consistent": {
+      "producer_value": true,
+      "recomputed_value": true,
+      "unit": "boolean (code-level only)",
+      "method": "Verified observation_type and current_viewport_only configured at ScriptBrowserEnv level, same ObservationHandler/TextObervationProcessor pipeline for all tasks; config_files/*.json task definitions share same env class. No per-site branching in observation code. But no live Docker execution verified actual DOM delivery per site type — code-inferred uniformity only.",
+      "evidence": "browser_env/envs.py ScriptBrowserEnv class single pipeline, ObservationHandler; run.py config_file per task but same env instantiation"
+    },
+    "spider_observation_state_compatible": {
+      "producer_value": true,
+      "recomputed_value": true,
+      "unit": "boolean with transform",
+      "method": "SPIDER Observation.state dict[str,Any] can hold string tree, obs_nodes_info, browser_config, url. Compatibility true but requires transform: recompose split channels, set current_viewport_only=False to avoid filtering, handle truncation (>8192/1920), map ARIA role to fragment tag model or switch to html mode for HTML attributes. Direct assignment of raw nodes not possible without recomposition.",
+      "evidence": "src/spider/models.py Observation.state dict[str,Any]; browser_env/processors.py get_observation split; browser_env/envs.py _get_obs vs _get_obs_metadata"
+    },
+    "compatibility_level": {
+      "producer_value": "DIRECTLY_USABLE",
+      "recomputed_value": "REQUIRES_TRANSFORM",
+      "unit": "enum DIRECTLY_USABLE|REQUIRES_TRANSFORM|ABSENT",
+      "method": "Applied prereg decision rules: DOM/HTML accessible and hierarchy parseable => not ABSENT, not INCOMPATIBLE. But requires non-trivial transformation: split obs/metadata recomposition, viewport override, truncation handling, property/attribute mapping, filtered hierarchy restoration, role vs tag translation. Matches prereg 10.2 PARTIALLY_COMPATIBLE (REQUIRES_TRANSFORM): DOM present but needs conversion and some filtering limits.",
+      "evidence": "research/experiments/EXP-INTEL-33842055594/spec.json decision_rule and measurement_validity[2]; research/experiments/EXP-INTEL-33842055594/prereg.md section 10.2"
+    },
+    "positive_control_pass": {
+      "producer_value": true,
+      "recomputed_value": true,
+      "unit": "boolean",
+      "method": "Playwright and CDP branches verified present; methodology would correctly detect absence. Recomputed true.",
+      "evidence": "browser_env/envs.py playwright import and CDP new_cdp_session, client.send('Accessibility.enable'); browser_env/processors.py client.send('Accessibility.getFullAXTree')"
+    },
+    "null_control_pass": {
+      "producer_value": false,
+      "recomputed_value": false,
+      "unit": "boolean (screenshots-only falsifier not triggered)",
+      "method": "Null of screenshots-only without DOM is correctly not triggered because accessibility_tree and html modes provide DOM; pass=false in producer encoding means null correctly rejected (DOM present). Semantics inverted vs standard pass=true=correctly distinguished, but observation is correct: WebArena is not screenshots-only. Recomputed as false-null-not-triggered (i.e., DOM present, so INCOMPATIBLE falsifier not met).",
+      "evidence": "research/experiments/EXP-INTEL-33842055594/result.json controls.null_control_screenshots_only; browser_env/processors.py ImageObservationProcessor separate from TextObervationProcessor, run.py choices confirm image is optional not exclusive"
+    }
+  },
+  "claim_ceiling": "MAX JUSTIFIED: WebArena's GitHub HEAD (main, 2026-09-04) exposes live DOM to the agent via two CDP pipelines: Accessibility.getFullAXTree (default accessibility_tree mode) and DOMSnapshot.captureSnapshot (html mode), both via browser_env/processors.py TextObervationProcessor, dispatched by browser_env/envs.py ScriptBrowserEnv using Playwright sync_playwright + chromium.launch + CDP session. The agent channel returns Observation dict {text: formatted indented string with element IDs/roles/names/properties, image: screenshot ndarray} plus separate structured metadata via info['observation_metadata']['text']['obs_nodes_info'] (backend_id, union_bound, text) and browser_config. Element identity (nodeId/role/name/backendDOMNodeId), pruned hierarchy (parentId/childIds indentation), text content, and ARIA properties (minus IGNORED_ACTREE_PROPERTIES) are preserved for viewport-visible, non-zero-area, valid nodes; HTML attributes preserved only in html mode. The data maps to SPIDER Observation.state dict[str, Any] with REQUIRES_TRANSFORM (PARTIALLY_COMPATIBLE): must recompose text string + metadata, set current_viewport_only=False to retain off-screen elements, handle UTTERANCE_MAX_LENGTH=8192 / max_obs_length=1920 truncation, translate ARIA role vs HTML tag, and account for filtered generic/cleaned statictext nodes. Format is code-level uniform across the 4 self-hosted site types (shopping, reddit, gitlab, wikipedia) via single env class, but no Docker deployment or live task execution verified actual multi-site DOM delivery, shadow DOM/iframe completeness, or 812-task operability. Does NOT support DIRECTLY_USABLE (no-transform, lossless HTML attributes) or claim that C-CROSSSITE/C-LLM-INHERIT are unblocked; those remain bounded to 2-site corpus pending integration experiment that executes SPIDER fragment extraction against live WebArena Docker with current_viewport_only=False and html vs accessibility_tree mode comparison. Source inspection only; code may evolve after snapshot.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-33842055594/request.json",
+    "research/experiments/EXP-INTEL-33842055594/spec.json",
+    "research/experiments/EXP-INTEL-33842055594/prereg.md",
+    "research/experiments/EXP-INTEL-33842055594/freeze.json",
+    "research/experiments/EXP-INTEL-33842055594/result.json",
+    "research/experiments/EXP-INTEL-33842055594/report.md",
+    "research/experiments/EXP-INTEL-33842055594/provenance.json",
+    "research/experiments/EXP-INTEL-33842055594/execution_checkpoint.json",
+    "src/spider/models.py",
+    "https://raw.githubusercontent.com/web-arena-x/webarena/main/browser_env/envs.py",
+    "https://raw.githubusercontent.com/web-arena-x/webarena/main/browser_env/processors.py",
+    "https://raw.githubusercontent.com/web-arena-x/webarena/main/browser_env/utils.py",
+    "https://raw.githubusercontent.com/web-arena-x/webarena/main/browser_env/constants.py",
+    "https://raw.githubusercontent.com/web-arena-x/webarena/main/run.py",
+    "https://raw.githubusercontent.com/web-arena-x/webarena/main/minimal_example.py",
+    "research/experiments/EXP-INTEL-33528832113/handoff.json",
+    "research/lanes/registry.json"
+  ],
+  "unresolved": [
+    "Whether off-screen elements, shadow DOM, and iframe content are traversally captured by Accessibility.getFullAXTree / DOMSnapshot.captureSnapshot when current_viewport_only=False; requires live Docker execution per site type with viewport override.",
+    "Whether UTTERANCE_MAX_LENGTH=8192 or max_obs_length=1920 truncation discards elements on large pages and affects SPIDER fragment extraction recall; requires measurement of tree length vs truncation on representative WebArena tasks.",
+    "Whether SPIDER fragment extraction should consume accessibility_tree mode (role/name/properties + obs_nodes_info union_bound) or html mode (nodeName/attributes) for element identity/hierarchy; requires integration experiment comparing fragment yield and cross-site transfer between modes.",
+    "Whether HTML attributes (class, id, href, type) needed for SPIDER parameterization are adequately preserved in accessibility_tree mode or require html mode; affects fragment template applicability.",
+    "Whether WebArena Docker self-hosting actually delivers the inspected observation interface end-to-end (Playwright launch, CDP session, Accessibility.enable) without silent fallback or error; requires bounded deployment test per spec do_not_assume that Docker provides HTML/DOM until integration experiment.",
+    "Whether VisualWebArena SoM annotations conflict with or augment text-based fragment model; separate visual modality experiment needed.",
+    "Whether Graph lane C-CROSSSITE and Product lane C-LLM-INHERIT inheritance claims hold on WebArena task distribution (812 tasks, 4 domains) — requires actual integration experiment measuring fragment reuse success, not just observation format availability."
+  ]
+}

@@ -61,6 +61,14 @@
         "claim_id": "C-CROSSSITE",
         "status": "EXPERIMENTAL",
         "reason": "Structured reconnaissance identified WebArena as a candidate testbed meeting all five structural proxies (S1-S5). Integration experiment required to verify HTML/DOM accessibility and fragment extraction compatibility. Audit found measurement validity issues but core finding about benchmark existence stands."
+      },
+      {
+        "experiment_id": "EXP-INTEL-33842055594",
+        "lane": "intel",
+        "decision": "PARTIALLY_COMPATIBLE",
+        "claim_id": "C-CROSSSITE",
+        "status": "HYPOTHESIS",
+        "reason": "WebArena observation format is REQUIRES_TRANSFORM (PARTIALLY_COMPATIBLE) per audit ceiling; DOM is present via CDP but requires non-trivial transformation (split obs/metadata recomposition, viewport override, truncation handling, ARIA-role-to-HTML-tag mapping). Source-inspection only \u2014 no Docker deployment or live task execution verified cross-site DOM delivery, shadow DOM/iframe completeness, or fragment extraction success. C-CROSSSITE remains bounded to 2-site corpus pending integration experiment."
       }
     ],
     "C-LLM-INHERIT": [
@@ -71,6 +79,14 @@
         "claim_id": "C-LLM-INHERIT",
         "status": "EXPERIMENTAL",
         "reason": "Same as C-CROSSSITE: candidate testbed identified; integration experiment required to verify suitability for LLM-inheritance testing."
+      },
+      {
+        "experiment_id": "EXP-INTEL-33842055594",
+        "lane": "intel",
+        "decision": "PARTIALLY_COMPATIBLE",
+        "claim_id": "C-LLM-INHERIT",
+        "status": "HYPOTHESIS",
+        "reason": "WebArena is a viable testbed candidate but observation-format compatibility is REQUIRES_TRANSFORM, not DIRECTLY_USABLE. Whether SPIDER's fragment extraction code works against WebArena's accessibility tree or html mode has not been tested. C-LLM-INHERIT remains bounded to 2-site corpus pending integration experiment testing actual parameter inheritance on WebArena's 812-task distribution."
       }
     ],
     "C-PRODUCT-ECON": [
