@@ -7,8 +7,8 @@
   "continue_immediately": false,
   "next_question": "Can a trajectory-grouped holdout evaluation with richer state representation (DOM/accessibility tree) and semantic actions reveal genuine action-conditioned transition structure on live Web pages with navigational density, replacing the coarse URL+hash representation that produced entropy inversion?",
   "promotion_ready": false,
-  "consecutive_failures": 6,
-  "updated_at": "2026-09-04T10:49:06.417446+00:00",
+  "consecutive_failures": 7,
+  "updated_at": "2026-09-04T14:36:29.063644+00:00",
   "last_failure_retryable": false,
   "last_handoff_sha256": "d8af42ddf8a0c4910b1b55c1612c18a9e0e4b30a672e019f5c8b82203e0bba88"
 }
