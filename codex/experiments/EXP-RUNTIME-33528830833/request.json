@@ -1,0 +1,13 @@
+{
+  "base_sha": "ef1d4178d6a1c0ec2d4b001d3f2d4ba48f2a12c0",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-01T15:56:44.056597+00:00",
+  "experiment_id": "EXP-RUNTIME-33528830833",
+  "lane": "runtime",
+  "origin_github_run_id": "33528830833",
+  "reason": "pulse",
+  "request_hash": "1bfe242999977e87b6f4c165e1a0fc6299f477f0b6a74cd57b3ee80a64c0fc4a",
+  "request_id": "cbf791e0cd3fe570d0ff0fd5",
+  "schema_version": 1
+}

@@ -26,6 +26,31 @@
         "handoff.json": "dda6bc7cd9a06aeeb68ff1ee5c67d7609d1ecd0e46d494c87db8daebda216563"
       }
     },
+    "EXP-FRONTIER-33767130362": {
+      "lane": "frontier",
+      "request_id": "8dae691d254a98b949c72dc8",
+      "created_at": "2026-09-03T14:29:30.122089+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Does the causal effect heterogeneity of actions across states increase monotonically with the action-dependence parameter lambda, demonstrating regime-dependent dynamics in synthetic Web-like state transitions via direct causal intervention rather than correlational prediction accuracy?",
+      "audit_status": "MEASUREMENT_INVALID",
+      "decision": "MEASUREMENT_INVALID",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/frontier",
+      "hashes": {
+        "request.json": "4fd8e220e5b0d682c402df1e674ef6147ab702e6cc34c73aff2514ae1f8746fd",
+        "spec.json": "b4d981a72456fcd3053693bcc63fd70a29d6aad0cd698cb9401b4de2bb21200f",
+        "prereg.md": "0af725f7f790046390cf7a77ee74396c6e272e4c3719d1dcde0435fe68064874",
+        "freeze.json": "ee30d94ceeb4656334339ff37366c1d5007f1b61b49d1db6587848f3a8109ff8",
+        "result.json": "719010428a54f01fa13dc70e3e5714200b0578f8f845ac8b9dd8dff317076075",
+        "report.md": "9ca7b76cda7b4218586f7805eb8aec2ba840a18a19e95d525ca1898e0137b20b",
+        "provenance.json": "36c7fdb30f71a05e950471353814f1424e6ca936bb2a775ef7fbc70610e5dbd1",
+        "audit.json": "a8d52541bab8df9821854619f71db40908934171c67a5f0d97cf7e7ec3ff0a23",
+        "verdict.json": "1b0555da9871b78f2d490dcfdca0da1afad3beca753d4b25b6391fdfad53af99",
+        "handoff.json": "128562014c5c09d2793692cd05297d571da9cefc4059be95bdc469498fb0e7d8"
+      }
+    },
     "EXP-GRAPH-33528827169": {
       "lane": "graph",
       "request_id": "3e0d81e7790f2f2b7bd8665e",
@@ -51,6 +76,84 @@
         "handoff.json": "ee1b24b92a766eed03606f1ac95623303234ab03baada15c351940e257c3460c"
       }
     },
+    "EXP-GRAPH-33718012817": {
+      "lane": "graph",
+      "request_id": "45b4f9608080513bedbe37d4",
+      "created_at": "2026-09-03T05:14:20.614410+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT"
+      ],
+      "question": "When both literal (zero-parameter) and parameterized mechanisms coexist in a shared registry, does the literal mechanism's universal matching cause false accepts \u2014 intercepting resolutions that should go to the parameterized mechanism, producing incorrect bound_action URLs?",
+      "audit_status": "REVISE",
+      "decision": "COMPETITION-UNSAFE",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/graph",
+      "hashes": {
+        "request.json": "ec06d399ca66fee7293ec6c7260b15349854d57bfecf249cdb5e0066044bcf73",
+        "spec.json": "cc41cf639b9339300a18018b83a903f0a65e3cd609a6d174530b59a84baea8cd",
+        "prereg.md": "5e5f003859e823752a3679c9279aca60601d0dce2a9672bca7253e365ba1480c",
+        "freeze.json": "b558256b564de3ffb77a48e85aadfc5240a9d2f67c7eb996678a1985eb1d3e05",
+        "result.json": "ca911fb92cf2e45b67e6caa9941b0574a6a6aa885c53e7bbd3d80e28c32c7a7f",
+        "report.md": "31a9d83b60bda25f819995aad2762111e8df494b2c96069e405d70897b9b1280",
+        "provenance.json": "d5c2c9ac2418bf663d2145a2d6d821c309e5ba21b83088938f12a260fbf2bfd1",
+        "audit.json": "383cfd9c7ccc71ae82963b04552462504f20c05492670f0fb03b05a47371bfd4",
+        "verdict.json": "d4ce040ab11407958e07451d249bca4ee1d44b8bbb27805e5541f8a444a13c3b",
+        "handoff.json": "ebb3de502513621de55c297a32023f20b6f87739cdf00b4d3db025d00f51187a"
+      }
+    },
+    "EXP-INTEL-33528832113": {
+      "lane": "intel",
+      "request_id": "46d19fdaf32e996c0ab24bd7",
+      "created_at": "2026-09-01T15:56:44.223955+00:00",
+      "claim_ids": [
+        "C-CROSSSITE",
+        "C-LLM-INHERIT",
+        "C-PRODUCT-ECON"
+      ],
+      "question": "Which publicly available web-agent benchmarks contain multi-step stateful task structures that could serve as stronger testbeds for SPIDER's cross-site inheritance and LLM-inheritance claims than the current 2-site (quotes/books) corpus?",
+      "audit_status": "REVISE",
+      "decision": "SUPPORTS",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/intel",
+      "hashes": {
+        "request.json": "ac060980eee635b3edec766758f02747cfb02c42f5433aba27178285d1561c15",
+        "spec.json": "27f16b3d2074b16a645307322c646b54232f17b41ef00ed43d2b25f8668562be",
+        "prereg.md": "0bebc672261e2ec247cd53fd1f7bada7654d469acce2a0ba6b5e8efcfbf547de",
+        "freeze.json": "027a1a32009fa516ef2584e0b78a45e9eabf186a7fc8bc7f03a9d1cd2b8ba85f",
+        "result.json": "c273ce1ee626c1222d8eb8cacca3fed377304144b19891907329382067ccc131",
+        "report.md": "f5f8abd62ea53f57e6a95707b70d903dbca0b1293460b040ff0c49fdf876e04a",
+        "provenance.json": "cdad879999e774356e422da40ac9d952974216e81d48e6f6e7179917cd433bfd",
+        "audit.json": "9781215ff59861da4ab8f61774734acd120c9d33efc0874bfdd97631674d4d6b",
+        "verdict.json": "5737ab7e5989ec116fa4610619fdb76c2f27b73bc5e150a5b7be1417b3c16054",
+        "handoff.json": "46853bb92c10fbe26f3ba849ff7664c02b95b23d39e1033fbc6efe33424a3336"
+      }
+    },
+    "EXP-PHYSICS-33528829431": {
+      "lane": "physics",
+      "request_id": "aefb271e5c3274224c9651fe",
+      "created_at": "2026-09-01T15:56:43.901752+00:00",
+      "claim_ids": [
+        "C-MEAS-VALID",
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Can we build a measurement-valid substrate that collects action-conditioned environment transitions P(S_next | S_current, A_current) from live browser interactions, avoiding the pathologies that invalidated pre-2.0 WP-003?",
+      "audit_status": "REVISE",
+      "decision": "REVISE",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/physics",
+      "hashes": {
+        "request.json": "ed96c0ccde15e7efd71ffacadf8eaeb00415ac5d0233d8afa816b80e9cc076d0",
+        "spec.json": "4ae80208f138fea71ef122d68eda5cbeb7fcdb0a0d6163f2bff22caac1f5868b",
+        "prereg.md": "7ace765bc757402169f3c389d143212c2625de43abee9415f39d7c08ca1837d9",
+        "freeze.json": "05040405d2daf55452e5b36e9fdfc6be1420dcd71ebb30d762942fbf88ca8a02",
+        "result.json": "940a1ee0a3bad35af2f275966783945c7f4987076d731a6de038013856a20a04",
+        "report.md": "fa467b2400f79be4108a6751cf3cb2d92912bf0bc6277be209594ae5d055776d",
+        "provenance.json": "2bdd37f219f434ec0f61ed33f3fdcecff2da6e5bc5edbb51bfd5f7c9967426e2",
+        "audit.json": "42c55dc179b54360a4602da75bb86547c190ced84ece8057296a06f3eb1a27ac",
+        "verdict.json": "91f0001908f75b6781d144f363d0eec4c7ce50442cbb6fc56b2ddd995adaa6c6",
+        "handoff.json": "d8af42ddf8a0c4910b1b55c1612c18a9e0e4b30a672e019f5c8b82203e0bba88"
+      }
+    },
     "EXP-PRODUCT-33528829801": {
       "lane": "product",
       "request_id": "2629e8e63e200f05556e37ca",
@@ -74,6 +177,56 @@
         "audit.json": "4049e1a91e637522463940b7488140df0acecd0b91b694caa3d2cea347686c6b",
         "verdict.json": "80c7532a8ffa0e167d30f440eee9c108b70c38b27a211b56f0b137282e5ac637",
         "handoff.json": "854e98a8808d570b229bf748bdb14e0ddd67d43faacb63db4b6cad8af0e92d7a"
+      }
+    },
+    "EXP-RUNTIME-33528830833": {
+      "lane": "runtime",
+      "request_id": "cbf791e0cd3fe570d0ff0fd5",
+      "created_at": "2026-09-01T15:56:44.056597+00:00",
+      "claim_ids": [
+        "C-MEAS-VALID"
+      ],
+      "question": "Can a stdlib-only HTTP observation substrate produce measurement-valid, discriminating observations that correctly attribute response differences to auth/session state changes rather than confounds?",
+      "audit_status": "REVISE",
+      "decision": "NARROW_SUCCESS",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/runtime",
+      "hashes": {
+        "request.json": "6145c1903ea8dcba98048817351b4cea1d9f9f6bad7b28fa0745af874da8e2bd",
+        "spec.json": "6e6946600ea29a2c48b53bcc1746a0c522377f44dba5d254011f6665ed3196f3",
+        "prereg.md": "b5ec69cb3b3b4578067862cb89a6ac48668200fa238e8e6349e1c1e17198128f",
+        "freeze.json": "96ff062f46dd84a162ed84e01f7b91f8ce074811d1fc46be0d0da2f6ad0b4d39",
+        "result.json": "f266b097546b10affd6d469733bfa7cf388fc229b9170099dbaa11ad1f89e7d2",
+        "report.md": "c3664e3088cf000383b4b46fe0f994f5eee76bf6391d665561ba0523c3303f14",
+        "provenance.json": "0850ca10aff8b060075f45218a374559ceebc10274b9927feffdd16069d12e4f",
+        "audit.json": "089e063866b5eb7283fc4a4e453718c9ff9501daca12e01350c392f1bd06efae",
+        "verdict.json": "5f9c31af118ec9f9e5665e90d318521930fcf1a2edec6c4a396835c26afb0825",
+        "handoff.json": "4b5fb87ad14e0d18e16b8ed6134af6d6140b52df5cdafb207b5a29bf904510f2"
+      }
+    },
+    "EXP-RUNTIME-33767375933": {
+      "lane": "runtime",
+      "request_id": "e65b8011c1ed9bf7769a9d88",
+      "created_at": "2026-09-03T14:31:56.939124+00:00",
+      "claim_ids": [
+        "C-MEAS-VALID"
+      ],
+      "question": "After applying deterministic fingerprint serialization, Date header exclusion, strong single-field baselines, and calibrated timing jitter, does the HTTP observation substrate maintain discrimination on the fixed toy server \u2014 and does it discriminate on a non-tautological external endpoint where response variation is not hand-programmed?",
+      "audit_status": "REVISE",
+      "decision": "NARROW_SUCCESS",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/runtime",
+      "hashes": {
+        "request.json": "655f8b7f40f69f7f55ad1411d433bd3eb47b37862604b486bd0246ab586483c5",
+        "spec.json": "a142b96c2b01e47e35faeb7536b95813c9f40449214114601fe41c76df6818c5",
+        "prereg.md": "271afcfaebf68f11db5b459cf914af07f86fdb151af8641985833da78a375fb7",
+        "freeze.json": "75eebda4cbcac15de208e8703e8ef65025a1cca0121577fc2a31f3a0ee137384",
+        "result.json": "d269800f9da84ba30236e5016617c1e5b379320d3498c209f4a21ae94ffea7ea",
+        "report.md": "e08c4d9e2b9acffb136f9c96e675ba81a639e37369374af5d55ebf34f6c8b00b",
+        "provenance.json": "fd2df85acbddc67b4f0a3b87184d117304002bcd1c20326084fd9ce1542250c1",
+        "audit.json": "e13db7649dbfd34faabfdffb56f0293c15a517d76a75e2325265b5a4b0062789",
+        "verdict.json": "cfedf34fddeb96dd3fd5ed104265de2630e8673cbe4dc52a9d2301084a26fb66",
+        "handoff.json": "fea5b244f4547485ceb42f78d18fabeb664c457927fe26b940d7a0b7e7451f04"
       }
     }
   }

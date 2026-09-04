@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-33767130362",
+  "lane": "frontier",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Reclassify outcome per prereg section 12.3 MEASUREMENT_INVALID clause 2 ('Deterministic functions generate degenerate transitions'): permutation functions make true het(lambda)=0 for all lambda by mathematical identity (mean of any permutation of 0..9 =4.5), so positive control threshold het>=0.5 at lambda=1 was a priori unreachable. Empirical FALSIFIES label conflates analytic degeneracy with empirical falsification — re-label as MEASUREMENT_INVALID for testing lambda-scaling via this metric.",
+    "Narrow claim ceiling to analytic observation only: Var_a(E_S[f(S,a)])=0 for permutation functions therefore het(lambda)=lambda^2*0=0. Do not claim empirical falsification of regime-dependent dynamics; report as construct-validation failure that metric is blind to permutation structure.",
+    "Future prereg must use non-permutation deterministic functions where E_S[f(S,a)] varies across actions (e.g., action-constant functions, non-bijective maps, or functions with varying state-action means) or use distributional heterogeneity metric (e.g., variance of P(S_{t+1}|do(A=a)) as distributions, TV distance, or prediction accuracy) that is sensitive to permutation structure.",
+    "Report missing baselines quantitatively: frequency baseline (expected heterogeneity under lambda=0) and prediction-accuracy-difference baseline from EXP-FRONTIER-33528827909 at matching lambda levels; current result.json baselines lack numeric values for these spec-defined baselines.",
+    "Fix provenance.json frozen_inputs freeze.json sha256 null and preserve artifact hashes for result.json and analyze.py in canonical provenance; ensure evidence_refs resolve to stable paths+hashes."
+  ],
+  "validity_findings": [
+    {
+      "check": "target_split_sampling_representation_integrity",
+      "finding": "PASS with caveat: No train/test split by design; DGP ground-truth interventional distributions computed analytically, then Monte Carlo sampled 500 transitions per lambda per function per replication (120k total). Sampling integrity verified; seeds frozen (42,43,44). Representation loss is construct-level: metric Var_a(E[S|do(a)]) discards distributional structure beyond means, making permutation structure invisible.",
+      "evidence": "spec.json:measurement_validity, prereg.md:5-6, research/frontier/causal_heterogeneity/analyze.py:52-87,52-102, provenance.json:execution_parameters"
+    },
+    {
+      "check": "environment_could_express_tested_effect",
+      "finding": "FAIL - environment could NOT express tested effect. For any permutation pi of {0..9}, sum(pi)=45 mean=4.5 for all actions => E_S[f(S,a)]=4.5 for all a => Var_a(E_S[f])=0 identically => true het(lambda)=lambda^2*0=0 for all 8 lambda levels. Positive control expectation 0.5 is mathematically impossible. Empirical Monte Carlo het ~0.04-0.07 consistent with expected sampling noise E[het|H0]=0.0495 (sigma^2=8.25, n~125 per action, k=4). Thus experiment tests tautological null, not contingent hypothesis.",
+      "evidence": "result.json:metrics.analytical_heterogeneity_all_zero true, metrics.heterogeneity_means_by_lambda 0.052-0.064, report.md:2, analyze.py:65-87, recomputed verification seed 42/43/44 Var=0.0"
+    },
+    {
+      "check": "control_integrity",
+      "finding": "MIXED: Positive control correctly FAILS (0/30 >=0.5, max 0.1849 mean 0.057) but failure was predetermined by degeneracy, not empirical. Null control PASSES (mean permutation p=0.466 >0.05, 30 p-values reported) as expected when true het=0. Function invariance PASSES (ANOVA interaction F=0.6516 p=0.819, residual df 216) but trivially passes because all functions identical null. Permutation null analytically 0 — verified. Monotonicity sensitivity FAILS (rho 0.333). Controls executed as coded but do not validate construct validity.",
+      "evidence": "result.json:controls.positive_control.pass false, controls.null_control.pass true, controls.function_invariance.pass true, metrics.anova_results.full_model, metrics.permutation_results"
+    },
+    {
+      "check": "leakage",
+      "finding": "PASS: No model training, no target leakage. Interventional distributions from DGP, not from held-out predictions. Shuffled-action permutation test correctly isolates action-dependence. No leakage path.",
+      "evidence": "spec.json:measurement_validity[7], analyze.py:104-153"
+    },
+    {
+      "check": "measurement_validity_and_discriminating_power",
+      "finding": "FAIL construct validity, PASS pipeline validity. Pipeline computes metric correctly (verified recomputation), no errors, CV not excessive. But metric has zero discriminating power for chosen function class; experiment cannot discriminate lambda regimes. Prereg predicted het=lambda^2*Var_a(E_S[f]) but Var=0 makes prediction degenerate. Boundlessly, this is a failed bounded Physics-style program only for this metric/function pair.",
+      "evidence": "prereg.md:6, spec.json:measurement_validity, result.json:validity_notes[1-2], result.json:observations[1,6]"
+    },
+    {
+      "check": "provenance_and_reproducibility",
+      "finding": "PASS with minor gap: provenance.json identifies python 3.12.14, numpy 2.5.2, scipy 1.18.1, seeds, lambda levels, 120k transitions, analyzer_script hash 096ab2ee matches file, result hash present. Gap: frozen_inputs freeze.json sha256 null, artifact list hashes not propagated to provenance. No impact on recomputation.",
+      "evidence": "provenance.json:frozen_inputs, analyzer_script.sha256 096ab2ee6dbcea27d4db5d9acf39b9ff93d2a75801aa75634e8f0619891ff642, result.json artifacts"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline": "permutation_null (spec.json baselines[1])",
+      "strength": "strong as analytic control but trivial",
+      "finding": "Correctly implemented: 1000 permutations per replication at lambda 0 and 1, mean p 0.466 at lambda0, analytical het 0. Confirms observed het ~0.05 is sampling noise. However permutation null at all lambda levels not reported quantitatively (only lambda 0/1).",
+      "evidence": "result.json:metrics.permutation_results.lambda_0, lambda_1, controls.permutation_null, spec.json:baselines[1]"
+    },
+    {
+      "baseline": "frequency_baseline P(S_{t+1}) (spec.json baselines[2])",
+      "strength": "weak - not quantitatively reported",
+      "finding": "Spec requires marginal next-state distribution baseline as expected heterogeneity under no action-dependence. Producer notes analytical het=0 at lambda0 but does not report frequency baseline numeric values or compare observed het to it. Missing quantitative baseline.",
+      "evidence": "spec.json:baselines[2], result.json:metrics absent frequency baseline, report.md absent"
+    },
+    {
+      "baseline": "prediction_accuracy_difference from EXP-FRONTIER-33528827909 (spec.json baselines[0])",
+      "strength": "weak - descriptive qualitative only",
+      "finding": "Spec lists descriptive comparison to parent rule-memory accuracy differences (0.053,0.087,0.307,0.653). Producer reports qualitative discussion in report.md:5 that prediction accuracy IS sensitive to permutation structure while causal het is not, but no quantitative side-by-side table at matching lambdas. Comparison claim therefore unsupported beyond narrative.",
+      "evidence": "spec.json:baselines[0], report.md:5, prereg.md:6.5, result.json:metrics absent prediction comparison"
+    }
+  ],
+  "recomputed_metrics": {
+    "spearman_rho_aggregate": {
+      "producer": 0.3333,
+      "recomputed": 0.333333,
+      "method": "scipy.stats.spearmanr on producer heterogeneity_means_by_lambda [0.052259,0.054624,0.043709,0.058599,0.064735,0.054376,0.053741,0.057025] vs lambdas [0.0,0.1,0.2,0.3,0.4,0.5,0.7,1.0]",
+      "match": true,
+      "p_one_sided_producer": 0.209877,
+      "p_one_sided_recomputed": 0.209877,
+      "note": "One-sided p = two-sided/2 when rho>0 (0.419753/2). Threshold rho>=0.65 p<0.05 fails as producer reports."
+    },
+    "per_function_spearman": {
+      "producer": [
+        {"function": 1, "seed": 42, "rho": -0.4762},
+        {"function": 2, "seed": 43, "rho": 0.7619},
+        {"function": 3, "seed": 44, "rho": 0.2381}
+      ],
+      "recomputed": "Not fully recomputable without per-function per-lambda means (not published as artifact), but producer per-function rho values are plausible under null noise; aggregate recomputation confirms overall null",
+      "match": "partial - aggregate verified, per-function not independently recomputed due to missing artifact"
+    },
+    "analytical_heterogeneity": {
+      "producer": "0 for all lambda (analytical_heterogeneity_all_zero true)",
+      "recomputed": 0.0,
+      "method": "Recomputed E_S[f(S,a)] for seeds 42,43,44 permutations: all means 4.5 Var 0.0, therefore het = lambda^2*0 =0 for lambda 0.0..1.0",
+      "match": true,
+      "evidence": "analyze.py:65-87"
+    },
+    "expected_het_under_null_noise": {
+      "recomputed": 0.0495,
+      "method": "sigma2=8.25 for Uniform 0..9, n_per_action~125, var_mean=0.066, E[var of 4 means with ddof0]=0.0495",
+      "producer_observed": "0.043-0.064 across lambdas",
+      "match": true,
+      "interpretation": "Observed het consistent with sampling noise around true 0, not signal"
+    },
+    "cohens_d_lambda1_vs_lambda0": {
+      "producer": 0.1046,
+      "recomputed_approx": 0.1065,
+      "method": "Using report table stds 0.0371 and 0.0513, pooled ~0.0447, diff 0.004766 => 0.106; exact 0.1046 using raw per-replication variances (ddof1) plausible",
+      "match": true
+    },
+    "anova": {
+      "producer": {"lambda_F": 0.5643, "lambda_p": 0.784437, "function_F": 0.2626, "function_p": 0.769314, "interaction_F": 0.6516, "interaction_p": 0.819281, "residual_df": 216, "r2": 0.0592},
+      "recomputed": "Not independently recomputed without raw per-replication table (240 rows artifact not persisted), but values consistent with null (all p >>0.05, R2 0.059). Design 3x8x10=240 residual 216 correct.",
+      "match": "plausible, not independently verified"
+    },
+    "positive_control": {
+      "producer": {"n_above_05": 0, "total": 30, "mean": 0.057, "min": 0.0061, "max": 0.1849},
+      "recomputed": "Verified max <0.5 mathematically required because true het 0 + noise ~0.05, 0.5 >9 sigma away, 0/30 expected",
+      "match": true
+    },
+    "null_control_permutation_p": {
+      "producer_mean_p_lambda0": 0.466,
+      "recomputed": "Not recomputed (requires raw transitions), but distribution of 30 p-values uniform-like (0.028-0.975) consistent with null; mean 0.466 plausible",
+      "match": "plausible"
+    }
+  },
+  "claim_ceiling": "Maximum justified: For synthetic 10-state 4-action transitions where deterministic functions are permutations of 0..9, the causal heterogeneity het(lambda)=Var_a(E[S_{t+1}|do(A=a)]) is identically 0 for all lambda in {0.0,0.1,0.2,0.3,0.4,0.5,0.7,1.0} (analytic identity, recomputed Var=0.0 for seeds 42,43,44), Monte Carlo estimates 0.04-0.07 are sampling noise (E~0.0495), aggregate Spearman rho=0.33 p_one_sided=0.21 (n=8) and Cohen d=0.10 show no lambda scaling, positive control 0/30 >=0.5 fails. This demonstrates the specific metric is blind to permutation structure, not that regime-dependent dynamics are absent. No inference to C-WEB-DYNAMICS broadly, no inference to causal heterogeneity generally, no inference to real Web transitions. Next test requires non-permutation functions where E_S[f(S,a)] varies across actions or distributional metric beyond means.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-33767130362/spec.json: claim_ids C-WEB-DYNAMICS, hypothesis het=lambda^2*Var, falsifier rho>=0.65, positive_control het>=0.5, null_control p>0.05, decision_rule SURVIVES/FALSIFIED/MEASUREMENT_INVALID",
+    "research/experiments/EXP-FRONTIER-33767130362/prereg.md: 5-12 decision rules, 12.3 MEASUREMENT_INVALID clause 2 degenerate functions",
+    "research/experiments/EXP-FRONTIER-33767130362/freeze.json: hashes 0af725f7, b4d981a7, 4fd8e220",
+    "research/experiments/EXP-FRONTIER-33767130362/result.json: metrics.spearman_rho_aggregate 0.3333, metrics.spearman_p_one_sided 0.209877, metrics.analytical_heterogeneity_all_zero true, metrics.heterogeneity_means_by_lambda, metrics.per_function_spearman, metrics.anova_results, metrics.permutation_results, controls, observations, validity_notes, status COMPLETE outcome FALSIFIES",
+    "research/experiments/EXP-FRONTIER-33767130362/report.md:2 permutation degeneracy proof, 3.2 Monte Carlo table, 4 control table",
+    "research/experiments/EXP-FRONTIER-33767130362/provenance.json: execution_timestamp 2026-09-03T18:30:00Z, github_run_id 33788040686, seed 42, function_seeds [42,43,44], lambda_levels 8, total_transitions 120000",
+    "research/frontier/causal_heterogeneity/analyze.py: sha256 096ab2ee6dbcea27d4db5d9acf39b9ff93d2a75801aa75634e8f0619891ff642, lines 52-87 analytical het, 106-126 Monte Carlo, 130-153 permutation test",
+    "research/experiments/EXP-FRONTIER-33528827909/handoff.json: carry_forward established/rejected/unknown/do_not_assume, next_question causal intervention",
+    "Recomputed verification: independent python recomputation of Var_a(E_S[f])=0 for seeds 42,43,44 and Spearman rho 0.333333 p 0.209877 and expected null noise 0.0495 matching observed"
+  ],
+  "unresolved": [
+    "Would non-permutation deterministic functions (e.g., action-constant maps, affine f(s,a)=(c_a*s+b_a) mod 10 with non-uniform means, or state-action offsets that break bijectivity) yield het(lambda) proportional to lambda^2 and detectable Spearman rho>=0.65 with 8 levels and 10 reps?",
+    "Is there an alternative causal heterogeneity metric that detects permutation structure while preserving interventional semantics (e.g., TV distance between P(S_{t+1}|do(a)), Jensen-Shannon divergence, or variance of full distributions rather than variance of means)?",
+    "How does prediction-accuracy sensitivity to permutation structure (parent rule-memory diff 0.053->0.653) compare quantitatively at matched lambdas with causal metrics, and which better captures Web-relevant dynamical heterogeneity for product investment?",
+    "Synthetic-to-real translation remains unknown: whether real Web transitions exhibit mean-preserving permutation-like structure or mean-varying structure that would make this metric useful.",
+    "Per-replication raw heterogeneity values (240 observations) and per-function per-lambda means not persisted as artifact, limiting independent recomputation of ANOVA and per-function Spearman; future runs should persist raw table with hashes."
+  ]
+}

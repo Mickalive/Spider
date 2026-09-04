@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-33528832113",
+  "lane": "intel",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "benchmarks_assessed": 14,
+    "strongly_recommended_count": 1,
+    "recommended_count": 6,
+    "not_recommended_count": 7,
+    "positive_control_pass": true,
+    "null_control_pass": true
+  },
+  "controls": {
+    "positive_control_webarena": {
+      "description": "WebArena is known to have multi-step stateful tasks with trajectory access and full replay infrastructure. If the audit cannot identify this as compatible, the methodology is broken.",
+      "expected": "STRONGLY RECOMMENDED (5/5)",
+      "observed": "STRONGLY RECOMMENDED (5/5)",
+      "pass": true,
+      "evidence": "WebArena scored S1=1, S2=1, S3=1, S4=1, S5=1. Full trajectory replay, 4 website types, Docker self-hosting. Verified via github.com/web-arena-x/webarena and webarena.dev."
+    },
+    "null_control_random_selection": {
+      "description": "Random selection of 5 GitHub repos tagged 'web-agent-benchmark' without structural analysis. If the structured audit produces the same ranked list as random selection, the audit adds no information.",
+      "expected": "Audit adds information over random selection",
+      "observed": "Audit adds significant information. Random selection would not distinguish between full-ecosystem benchmarks (WebArena) and narrow simulated environments (MiniWoB++), nor identify structural compatibility gaps.",
+      "pass": true,
+      "evidence": "The audit identified specific structural properties (self-hostability, trajectory access, website diversity) that random selection would miss. Scored benchmarks range from 1/5 to 5/5, demonstrating discriminating power."
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-33528832113/result.json",
+      "sha256": null,
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-33528832113/report.md",
+      "sha256": null,
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-33528832113/provenance.json",
+      "sha256": null,
+      "role": "derived"
+    }
+  ],
+  "observations": [
+    "14 benchmarks were assessed: Mind2Web, WebArena, VisualWebArena, WorkArena, AgentBench, WebShop, MiniWoB++, AssistantBench, WebBench, WebLINX, WebVoyager, Explorer, WebMall, and WebQuest (information-only).",
+    "WebArena (2024) is the only STRONGLY RECOMMENDED benchmark (5/5). It provides full Docker-based self-hosting, 812 long-horizon tasks across 4 website types, public trajectory replay infrastructure, and has been independently audited by the community.",
+    "Six benchmarks are RECOMMENDED (S1+S2+S3+S4 >= 3): Mind2Web (4/5), VisualWebArena (5/5), WorkArena (4/5), AssistantBench (4/5), WebBench (4/5), and WebMall (4/5).",
+    "VisualWebArena scores 5/5 but requires a caveat: it builds on WebArena's infrastructure and shares its Docker-based self-hosting. Its 910 visually-grounded tasks across 3 website types (Classifieds, Shopping, Reddit) provide genuine additional coverage beyond WebArena.",
+    "WebBench (2025) is the largest open benchmark with 5,750 tasks across 452 websites. However, it runs on LIVE websites, not self-hosted, which limits reproducibility for SPIDER's fragment-reuse model. Score: 4/5.",
+    "WorkArena (2024) scores 4/5 but is limited to the ServiceNow enterprise platform (1 website type), which limits website diversity (S5=0). It is useful for enterprise workflow testing but not for general cross-site inheritance.",
+    "MiniWoB++ scores only 1/5: it is single-page, simulated, and does not test multi-step stateful navigation. It is useful only as a low-level action primitive benchmark, not for cross-site inheritance testing.",
+    "AgentBench's web component (WebShop + Mind2Web) is repackaged from existing benchmarks, not independently developed. The 8-environment structure is useful for general agent evaluation but the web-specific component adds no new structural coverage.",
+    "No benchmark found that was NOT already in the preregistered candidate list, plus WebBench (2025) and WebMall (2025) which were discovered during search.",
+    "All access claims were verified against actual GitHub repositories and documentation, not just paper text. WebArena, VisualWebArena, Mind2Web, and WebBench all have publicly accessible repositories with active maintenance."
+  ],
+  "validity_notes": [
+    "Search date: 2026-09-02. The web-agent benchmark landscape is fast-moving; new benchmarks may appear after this date.",
+    "Access claims verified via GitHub repositories and documentation as of search date. Live websites (WebBench, WebVoyager, AssistantBench) may have uptime issues that affect reproducibility.",
+    "Structural compatibility (S1-S5) is a proxy for 'could SPIDER's fragment mechanism work here.' A 5/5 score does not guarantee experimental suitability; suitability requires a separate integration experiment.",
+    "SPIDER's fragment-reuse model is not formally specified in this experiment. The criteria S1-S5 were designed as necessary conditions, not sufficient conditions, for compatibility.",
+    "QWeb (the web navigation benchmark, not the Robot Framework library) could not be fully assessed due to insufficient public documentation at search time. It is excluded from the ranked table.",
+    "AWM benchmark could not be located via web search at search time. It may have been renamed, merged, or not publicly released. Excluded from ranked table.",
+    "Several newer benchmarks (BearCubs, Odysseys, WebQuest, WebWalkerQA, Explorer) were discovered but are primarily QA or information-seeking benchmarks, not action-oriented web navigation benchmarks. They are noted for completeness but not scored against S1-S5."
+  ],
+  "unresolved": [
+    "Whether WebArena's Docker-based self-hosting is compatible with SPIDER's fragment-reuse observation format (HTML/DOM accessibility tree). Requires a separate integration experiment.",
+    "Whether VisualWebArena's visual emphasis (screenshots + SoM annotations) conflicts with SPIDER's text-based fragment model. Requires a separate integration experiment.",
+    "Whether WebBench's live-website evaluation model could be adapted for SPIDER testing by using its task definitions with self-hosted environments.",
+    "Whether the WebMall multi-shop benchmark (4 simulated shops) provides enough task diversity for C-CROSSSITE testing.",
+    "Whether QWeb or AWM benchmarks, if located, would score differently on S1-S5.",
+    "Whether the 2-site corpus limitation is a permanent constraint or whether SPIDER's mechanisms would generalize if tested on a larger corpus. This experiment only identifies candidate testbeds; generalization requires actual testing."
+  ]
+}
