@@ -1,0 +1,9 @@
+{
+  "stage": "director",
+  "category": "VALIDATION_FAILURE",
+  "message": "invalid claim update status: REQUIRES_INTEGRATION",
+  "retryable": false,
+  "recorded_at": "2026-09-04T10:48:45.795670+00:00",
+  "github_run_id": "33863645867",
+  "github_run_attempt": "1"
+}
