@@ -1,17 +1,28 @@
 {
   "experiment_id": "EXP-INTEL-33925056324",
   "lane": "intel",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-CROSSSITE", "C-LLM-INHERIT", "C-PRODUCT-ECON"],
+  "question": "Does existing accessibility-tree-based web agent research provide reusable element-matching or state-tracking patterns that could reduce the REQUIRES_TRANSFORM overhead for WebArena integration, or is SPIDER's fragment extraction a genuinely novel requirement?",
+  "hypothesis": "At least 3 recent (2023-2026) web agent papers using accessibility trees demonstrate structured element matching (via ARIA role, name, and/or bounding-box similarity) with cross-site or cross-environment transfer results, meaning the core element-matching problem is partially solved in the literature and SPIDER can adapt existing patterns rather than building from scratch.",
+  "falsifier": "Fewer than 2 papers demonstrate cross-site element matching from accessibility trees, OR all surveyed papers use site-specific selectors/LLM-only matching without structured reusable patterns, OR no paper reports cross-site element matching accuracy above 70%, meaning the transformation cost is genuinely unaddressed by prior art.",
+  "baselines": [
+    "No structured element matching exists in the literature (all LLM-only or site-specific)",
+    "Element matching exists but only within single sites (no cross-site evidence)",
+    "Element matching exists with cross-site evidence but accuracy < 70%"
+  ],
+  "positive_control": "At least one paper must use accessibility trees with structured element matching (not pure LLM reasoning) and report some form of cross-environment performance metric. If no paper meets this criterion, the survey is operating in the expected failure region.",
+  "null_control": "Papers using only screenshots or HTML (not accessibility trees) must not be counted as accessibility-tree evidence. The survey must correctly exclude non-accessibility-tree work.",
+  "measurement_validity": [
+    "Survey covers 2023-2026 web agent literature (sufficient recency for current methods)",
+    "Search uses 3+ independent query strategies (keyword, venue, author) to avoid selection bias",
+    "Each included paper is verified to use accessibility trees (not just DOM/HTML)",
+    "Element matching strategy is classified using a standardized taxonomy (role-based, name-based, embedding-based, LLM-based, hybrid)",
+    "Cross-site transfer evidence is distinguished from single-site performance",
+    "Papers are assessed for relevance to SPIDER's specific problem (interactive element matching for reuse, not just web navigation)"
+  ],
+  "decision_rule": "If >= 3 papers demonstrate structured element matching from accessibility trees with cross-site evidence (accuracy > 70% or comparable metric), verdict = SUPPORTS. If 1-2 papers demonstrate this, verdict = PARTIALLY_SUPPORTS. If 0 papers demonstrate this (all use site-specific or LLM-only matching, or report < 70% accuracy, or lack cross-site evidence), verdict = DOES_NOT_SUPPORT. If the survey cannot be completed due to search infrastructure failure, verdict = MEASUREMENT_INVALID.",
+  "product_consequence_positive": "If existing work provides reusable element-matching patterns, the graph lane can adapt them for WebArena integration, reducing the REQUIRES_TRANSFORM overhead. WebArena's 812-task corpus becomes more accessible. C-CROSSSITE and C-LLM-INHERIT move closer to experimental testing.",
+  "product_consequence_negative": "If no reusable patterns exist, SPIDER must build fragment extraction from scratch or accept the 2-site corpus as the practical bound. The graph lane integration experiment becomes higher-risk and higher-cost. Intel should then assess whether VisualWebArena or other benchmarks offer a lower-transformation-cost path.",
+  "estimated_cost": "Low: literature search, structured reading, and classification. No compute, browser, or model calls. ~4-8 hours of focused analysis.",
+  "expected_information_gain": "High: directly determines whether the graph lane should adapt existing solutions or build new fragment extraction. Changes the cost-benefit calculation for WebArena integration. A negative result (no reusable patterns) is equally valuable as it prevents wasted integration effort."
 }
