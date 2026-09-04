@@ -7,8 +7,8 @@
   "continue_immediately": false,
   "next_question": "Does parameter induction generalize to multi-parameter mechanisms (e.g., POST /api/${resource}/${id} with body {name:${title}}) with distinct slot naming, and does it survive when training observations come from real browser sessions with noisy multi-step actions and varying preconditions?",
   "promotion_ready": false,
-  "consecutive_failures": 10,
-  "updated_at": "2026-09-04T17:48:29.134017+00:00",
+  "consecutive_failures": 11,
+  "updated_at": "2026-09-04T19:57:53.372136+00:00",
   "last_failure_retryable": false,
   "last_handoff_sha256": "854e98a8808d570b229bf748bdb14e0ddd67d43faacb63db4b6cad8af0e92d7a"
 }
