@@ -1,17 +1,31 @@
 {
   "experiment_id": "EXP-RUNTIME-33902315583",
   "lane": "runtime",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "On a real Flask server with PyJWT validation middleware (not hand-programmed lookup tables), no synthetic X-Auth-Level/X-Session/X-User/X-Error headers, and identical error response bodies for expired vs invalid tokens, does the HTTP fingerprint substrate maintain discrimination > 0.5 — and does the full vector (status+body+standard-headers) exceed B-BODY-ONLY when synthetic header tautology is removed and error states share identical bodies?",
+  "hypothesis": "The deterministic sorted-tuple fingerprint will maintain discrimination > 0.5 on a real Flask/JWT server with 4 auth states (no_auth, valid_token, expired_token, invalid_token) where expired and invalid return identical 401 bodies and identical standard headers. Full vector will exceed B-STATUS-ONLY (which cannot distinguish no_auth from expired/invalid, all returning 401) but will equal B-BODY-ONLY (because expired and invalid share identical bodies and standard headers add no discriminating information beyond what body provides). Server-side jitter (50-150ms) will not cause false fingerprint variation.",
+  "falsifier": "The hypothesis is FALSIFIED if ANY of: (1) Full-vector discrimination <= 0.5 (substrate fails on real Flask/JWT middleware); (2) Null control FP rate > 5% under server-side jitter (jitter causes false fingerprint variation); (3) valid_token vs expired_token drift pair not discriminable (Jaccard >= 0.5 — substrate cannot distinguish valid from expired even though status 200/401 and body differ); (4) B-STATUS-ONLY discrimination >= full-vector discrimination (full vector adds no value over status alone).",
+  "baselines": [
+    "B-STATUS-ONLY: SHA-256 of status code string only — expected to fail to distinguish no_auth (401) from expired/invalid (401), yielding discrimination < full vector",
+    "B-BODY-ONLY: SHA-256 of response body bytes only — expected to equal full vector because expired and invalid share identical bodies and standard headers add no discriminating information",
+    "B-URL-HASH: SHA-256 of URL string only — straw-man, expected 0.0 (URL is constant GET /api/data)",
+    "B-RANDOM: random 256-bit fingerprints — straw-man, expected ~0.0"
+  ],
+  "positive_control": "valid_token (200, unique body) is distinguishable from no_auth (401, different body), expired_token (401, different body), and invalid_token (401, different body). Full-vector discrimination must be > 0.5. This verifies the substrate can detect the difference between 'authenticated successfully' and 'authentication failed' on real Flask/JWT middleware.",
+  "null_control": "Repeated identical requests to the same auth state with server-side jitter (50-150ms random processing delay per request): FP rate must be < 5%. Validates that server-side timing variation does not cause false fingerprint variation when timing is excluded from the vector.",
+  "measurement_validity": [
+    "Server: Flask app with PyJWT JWT validation (HS256, secret key) — not hand-programmed fixed responses; URL is constant GET /api/data; response depends on Authorization Bearer header",
+    "Auth states: (1) no_auth -> 401, body: {\"error\": \"authentication_required\"}; (2) valid_token -> 200, body: {\"data\": \"secret_message\", \"user\": \"alice\"}; (3) expired_token -> 401, body: {\"error\": \"authentication_failed\"}; (4) invalid_token -> 401, body: {\"error\": \"authentication_failed\"} — expired and invalid return IDENTICAL response bodies",
+    "No synthetic headers: server returns only standard HTTP headers (Content-Type, Content-Length) — no X-Auth-Level, X-Session, X-User, X-Error",
+    "Server-side jitter: random.uniform(0.05, 0.15) seconds processing delay per request — spans 50-150ms to test timing confound",
+    "Fingerprint: SHA-256 of (status, tuple(sorted(headers excluding Date/Server)), body_sha256, redirect_chain) — deterministic, excludes timing, inherited from parent fixes",
+    "Sample: 4 states x 10 reps = 40 requests, randomized order with seed 44",
+    "Raw observations persisted: status, headers, body_hash, fingerprint, elapsed, timestamp per request",
+    "No outcome-bearing measurements during DESIGN phase"
+  ],
+  "decision_rule": "C-MEAS-VALID SURVIVES if ALL of: (1) full-vector discrimination > 0.5; (2) null control FP rate < 5% under server-side jitter; (3) valid_token vs expired_token drift pair discriminable (Jaccard < 0.5). C-MEAS-VALID FALSIFIED if full-vector discrimination <= 0.5 OR null FP > 5% OR valid vs expired drift not discriminable. MEASUREMENT_INVALID if Flask server fails to start or >20% request errors. Note: expired_token vs invalid_token drift pair is EXPECTED to be non-discriminable (identical status, body, headers) — this is correct substrate behavior, not a failure.",
+  "product_consequence_positive": "HTTP observation substrate is viable for auth/session drift detection on real Flask/JWT middleware. Full vector exceeds B-STATUS-ONLY (body adds information). C-MEAS-VALID advances to real middleware. Product can build freshness guards and drift detection on this substrate. The comparison full vector vs B-BODY-ONLY constrains product architecture: if equal, body-based observation is sufficient; if full vector exceeds, multi-field observation adds value.",
+  "product_consequence_negative": "If full-vector discrimination <= 0.5 on real Flask/JWT middleware, the substrate is not viable for production auth drift detection. C-MEAS-VALID does not survive beyond synthetic servers. Product must use alternative observation mechanisms (DOM, accessibility tree, timing distributions).",
+  "estimated_cost": "Low: 40 requests to local Flask server, no browser automation, no model calls, no external network. Execution time < 30 seconds.",
+  "expected_information_gain": "High: This is the ecological validity gate for C-MEAS-VALID on real middleware without synthetic headers. A positive result (discrimination > 0.5, full vector > B-STATUS-ONLY) validates the HTTP observation mechanism for real auth drift detection. The comparison full vector vs B-BODY-ONLY constrains product architecture: if equal, body-based observation is sufficient; if full vector exceeds, multi-field observation adds value. Both outcomes change a product decision. Closes two high-severity gaps from parent audit (V1-REAL-MIDDLEWARE-GAP, V2-SYNTHETIC-HEADER-TAUTOLOGY)."
 }
