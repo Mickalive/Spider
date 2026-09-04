@@ -228,6 +228,31 @@
         "verdict.json": "cfedf34fddeb96dd3fd5ed104265de2630e8673cbe4dc52a9d2301084a26fb66",
         "handoff.json": "fea5b244f4547485ceb42f78d18fabeb664c457927fe26b940d7a0b7e7451f04"
       }
+    },
+    "EXP-RUNTIME-33805283356": {
+      "lane": "runtime",
+      "request_id": "1c99edce5a6acfd6fb1c4bd8",
+      "created_at": "2026-09-03T20:57:58.045124+00:00",
+      "claim_ids": [
+        "C-MEAS-VALID"
+      ],
+      "question": "On a constant-URL server where auth state (Bearer token / session cookie) varies and response bodies differ accordingly, does the HTTP fingerprint substrate maintain discrimination \u2014 and does the full observation vector (status + headers + body + redirects) exceed single-field baselines (B-STATUS-ONLY, B-BODY-ONLY) when bodies vary with auth state?",
+      "audit_status": "REVISE",
+      "decision": "NARROW_SUCCESS",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/runtime",
+      "hashes": {
+        "request.json": "c8476dec201ef16f7d3fcdcf80562af142e95461a9a0bdfed44afb21994e946d",
+        "spec.json": "43498a99c09ff9c70d289f7352181f3129b97f40463c82875e01078042c53954",
+        "prereg.md": "5721f8c30d62cc22bd65b5b6dafb2143b13f9fddd0edd6a434501ed7ceb1d12d",
+        "freeze.json": "3ef419c244dab67546c8fbf6e2475b58b042c72e4c8902364d017c81af18fa23",
+        "result.json": "c0bc15fd454a0f5d3fc3eef19854b34ef6120a862a1cba0fac5d5b2b73684d0a",
+        "report.md": "9c80f5fb6c35722cb329a2ecce353ebd28b22523ee30aa668e83f26e320a4731",
+        "provenance.json": "5f501a5213838def50d43864411c486ff729355e0d3cd80821924348902b8ec5",
+        "audit.json": "61f7a88cf5d52c5cd7e6d5e529eefca6c72ba5e320abce11315f09a5bf494076",
+        "verdict.json": "b61cad3195b1a64273f9b1768842f8efbb816175b4c582ed7e858f6ba1cd9320",
+        "handoff.json": "c0cf725e47b7a5596f4400213a228f41e46321d0ee790280dc1144ec00bb7894"
+      }
     }
   }
 }

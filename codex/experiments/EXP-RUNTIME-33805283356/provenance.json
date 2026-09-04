@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-33805283356",
+  "lane": "runtime",
+  "github_run_id": "33805283356",
+  "github_run_attempt": 1,
+  "commits": {
+    "base_sha": "b0e6e43071f1a5bb3be37b5c497be9dcb988c6fd",
+    "freeze_sha": "ac3985f356f622b6b70f5612a75ac9e9cc76e6cb",
+    "execution_sha": "9ccd18f",
+    "recent_commits": [
+      "9ccd18f R2 runtime: execution base EXP-RUNTIME-33805283356",
+      "ac3985f R2 runtime: freeze EXP-RUNTIME-33805283356",
+      "b785907 R2 runtime: allocate EXP-RUNTIME-33805283356",
+      "0310592 Merge remote-tracking branch 'origin/main' into lab2/runtime",
+      "b0e6e43 codex: sync Research 2.0 evidence"
+    ]
+  },
+  "environment": {
+    "python_version": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "platform": "linux",
+    "server_implementation": "stdlib http.server with custom AuthHandler (not Flask)",
+    "server_port": 18926,
+    "server_host": "127.0.0.1"
+  },
+  "frozen_inputs": {
+    "request_json": "research/experiments/EXP-RUNTIME-33805283356/request.json",
+    "spec_json": "research/experiments/EXP-RUNTIME-33805283356/spec.json",
+    "prereg_md": "research/experiments/EXP-RUNTIME-33805283356/prereg.md",
+    "freeze_json": "research/experiments/EXP-RUNTIME-33805283356/freeze.json",
+    "parent_handoff": "research/experiments/EXP-RUNTIME-33767375933/handoff.json"
+  },
+  "code_paths": {
+    "experiment_runner": "research/experiments/EXP-RUNTIME-33805283356/run_experiment.py",
+    "server_handler": "research/experiments/EXP-RUNTIME-33805283356/run_experiment.py (AuthHandler class, lines ~95-130)",
+    "fingerprint_function": "research/experiments/EXP-RUNTIME-33805283356/run_experiment.py (fingerprint function, lines ~170-190)",
+    "metrics_computation": "research/experiments/EXP-RUNTIME-33805283356/run_experiment.py (compute_discrimination_score, bootstrap_ci_discrimination)"
+  },
+  "datasets_fixtures": {
+    "server_states": "Frozen in run_experiment.py SERVER_STATES dict — 5 auth states with status codes, bodies, extra headers",
+    "tokens": "VALID_TOKEN=tok_valid_abc123, EXPIRED_TOKEN=tok_expired_xyz789, INVALID_TOKEN=tok_invalid_wrong, SESSION_COOKIE=sess_cookie_def456",
+    "sample_size": "5 states x 10 reps = 50 requests",
+    "randomization_seed": 44,
+    "client_jitter": "uniform(0, 0.2) seconds inter-request delay",
+    "server_jitter": "uniform(0.05, 0.15) seconds processing delay per request"
+  },
+  "artifacts": {
+    "result_json": {
+      "path": "research/experiments/EXP-RUNTIME-33805283356/result.json",
+      "role": "derived"
+    },
+    "raw_observations": {
+      "path": "research/experiments/EXP-RUNTIME-33805283356/raw_observations.json",
+      "sha256": "80dc6bb572a87e0c963f5af87bd32b8920b07529db19a39acbe9ddf104d53957",
+      "role": "raw"
+    },
+    "report_md": {
+      "path": "research/experiments/EXP-RUNTIME-33805283356/report.md",
+      "role": "derived"
+    },
+    "provenance_json": {
+      "path": "research/experiments/EXP-RUNTIME-33805283356/provenance.json",
+      "role": "derived"
+    }
+  },
+  "execution_notes": {
+    "server_type": "stdlib http.server (not Flask — Flask not installed in environment)",
+    "auth_middleware": "Custom AuthHandler.do_GET with Bearer token and Cookie inspection",
+    "request_method": "urllib.request.urlopen (stdlib)",
+    "fingerprint_method": "SHA-256 of repr((status, tuple(sorted(headers_filtered.items())), body_sha256, redirect_chain))",
+    "header_exclusion": "Date and Server headers excluded from fingerprint vector",
+    "bootstrap_method": "1000 state-resampling bootstrap with seed=42 for 95% CI"
+  }
+}

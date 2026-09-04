@@ -1,0 +1,31 @@
+{
+  "experiment_id": "EXP-RUNTIME-33805283356",
+  "lane": "runtime",
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "On a constant-URL server where auth state (Bearer token / session cookie) varies and response bodies differ accordingly, does the HTTP fingerprint substrate maintain discrimination — and does the full observation vector (status + headers + body + redirects) exceed single-field baselines (B-STATUS-ONLY, B-BODY-ONLY) when bodies vary with auth state?",
+  "hypothesis": "The deterministic sorted-tuple fingerprint will maintain discrimination score > 0.5 on a constant-URL Flask server with real auth-state-dependent responses and server-side processing jitter. The full vector will exceed B-STATUS-ONLY (which cannot distinguish states sharing the same status code) but may equal B-BODY-ONLY (which captures body variation). Server-side jitter (>50ms random processing delay) will not cause false fingerprint variation when timing is excluded from the vector.",
+  "falsifier": "The hypothesis is FALSIFIED if ANY of: (1) Full-vector discrimination score <= 0.5 on the constant-URL server (substrate fails on non-tautological endpoint); (2) B-STATUS-ONLY discrimination score >= full-vector discrimination (full vector adds no value over status alone — expected to fail because multiple auth states share status 200); (3) Null control FP rate > 5% under server-side jitter (jitter causes false fingerprint variation); (4) Drift pairs valid_token vs expired_token vs invalid_token are not all discriminable (Jaccard < 0.5 for each consecutive pair).",
+  "baselines": [
+    "B-STATUS-ONLY: SHA-256 of status code string only — strong single-field baseline, expected to fail to discriminate states sharing status 200 (no_auth, valid_token, session_cookie all return 200)",
+    "B-BODY-ONLY: SHA-256 of response body bytes only — strong single-field baseline, expected to achieve high discrimination because bodies differ across all 5 auth states",
+    "B-URL-HASH: SHA-256 of URL string only — straw-man, expected 0.0 (URL is constant across all states)",
+    "B-RANDOM: random 256-bit fingerprints — straw-man, expected ~0.0"
+  ],
+  "positive_control": "The 5 auth states produce 5 distinct response bodies and 3 distinct status codes (200, 401, 403). Full-vector fingerprint must achieve discrimination > 0.5. B-BODY-ONLY must achieve discrimination > 0.5 (bodies are all different).",
+  "null_control": "Repeated identical requests to the same auth state with server-side jitter (>50ms random processing delay per request): FP rate must be < 5%. Validates that server-side timing variation does not cause false fingerprint variation when timing is excluded from the vector.",
+  "measurement_validity": [
+    "Server: Flask app with real auth middleware (not hand-programmed fixed responses); URL is constant GET /api/data; response depends on Authorization header (Bearer token) or Cookie (session)",
+    "Auth states: (1) no_auth -> 200 public data, (2) valid_token -> 200 private data, (3) expired_token -> 401 error, (4) invalid_token -> 403 error, (5) session_cookie -> 200 session data — 5 states, 3 distinct status codes, 5 distinct bodies",
+    "Server-side jitter: random.uniform(0.05, 0.15) seconds processing delay per request — spans 50-150ms to test timing confound",
+    "Client-side jitter: random.uniform(0, 0.2) seconds inter-request delay (inherited from parent)",
+    "Fingerprint: SHA-256 of (status, tuple(sorted(headers excluding Date/Server)), body_sha256, redirect_chain) — deterministic, excludes timing",
+    "Sample: 5 states x 10 reps = 50 requests, randomized order with seed 44",
+    "Raw observations persisted: status, headers, body_hash, fingerprint, elapsed, timestamp per request",
+    "No outcome-bearing measurements during DESIGN phase"
+  ],
+  "decision_rule": "C-MEAS-VALID SURVIVES if ALL of: (1) full-vector discrimination > 0.5; (2) null control FP rate < 5% under server-side jitter; (3) B-STATUS-ONLY discrimination < full-vector discrimination (full vector adds value over status); (4) drift pairs all discriminable (Jaccard < 0.5). C-MEAS-VALID FALSIFIED if full-vector discrimination <= 0.5 OR B-STATUS-ONLY >= full-vector OR null FP > 5% OR drift pairs not all discriminable. MEASUREMENT_INVALID if server fails to start or >20% request errors.",
+  "product_consequence_positive": "HTTP observation substrate is viable for auth/session drift detection on constant-URL servers. Full vector adds value over status-only when bodies vary with auth state. C-MEAS-VALID advances. Product can build freshness guards and drift detection on this substrate for real auth middleware.",
+  "product_consequence_negative": "If full vector does not exceed B-STATUS-ONLY, the substrate provides no advantage over simple status-code monitoring for auth drift. If bodies vary but discrimination fails, the fingerprint mechanism is not robust to real server behavior. C-MEAS-VALID does not survive for general HTTP-level auth observation. Product must use alternative observation mechanisms.",
+  "estimated_cost": "Low: 50 requests to local Flask server, no browser automation, no model calls, no external network. Execution time < 30 seconds.",
+  "expected_information_gain": "High: This is the ecological validity gate for C-MEAS-VALID on non-tautological servers. A positive result (substrate works on constant-URL auth-varying server, full vector exceeds status-only) validates the HTTP observation mechanism for real auth drift detection. A negative result is a bounded falsification that constrains the Runtime architecture. Both outcomes change a product decision."
+}

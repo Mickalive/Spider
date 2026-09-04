@@ -107,6 +107,14 @@
         "claim_id": "C-MEAS-VALID",
         "status": "BLOCKED",
         "reason": "Phase A (toy server) passes all preregistered controls: discrimination 1.0, null FP 0.0%, TP 100%, B-STATUS-ONLY=0.7 < substrate=1.0, B-BODY-ONLY=1.0 <= substrate=1.0 (equality allowed per prereg Section 8), held-out session_cookie 10/10 novel, drift pairs discriminable. Mechanism integrity after three mandatory parent fixes (deterministic sorted-tuple fingerprint, Date/Server header exclusion, strong single-field baselines) is confirmed. Phase B (httpbin.org/status/{200,401,403}) reports discrimination 1.0 but is URL-tautological: B-URL-HASH=1.0 and B-STATUS-ONLY=1.0 both achieve perfect discrimination without the full substrate (result.json phase_b_baselines; audit.json V1-EXTERNAL-TAUTOLOGY). The full vector adds no discrimination over B-STATUS-ONLY on this endpoint. Phase B does NOT constitute ecological validity for auth/session drift detection. C-MEAS-VALID survives for: deterministic SHA-256 fingerprint of (status, sorted headers excluding Date/Server, body_sha256, redirect_chain) maintains perfect discrimination on a local 5-state toy server with 0-200ms inter-request jitter. C-MEAS-VALID does NOT survive for general HTTP observation on real servers with auth middleware, caching, CDN, or non-deterministic responses. Missing raw observations artifact (audit V2) means Phase B cannot be independently recomputed. Drift control measures discriminability not monotonicity (audit V3). Jitter is client-side only, not server processing (audit V5). Fingerprint remains Python-version-dependent via repr(vector) (audit V6)."
+      },
+      {
+        "experiment_id": "EXP-RUNTIME-33805283356",
+        "lane": "runtime",
+        "decision": "NARROW_SUCCESS",
+        "claim_id": "C-MEAS-VALID",
+        "status": "EXPERIMENTAL",
+        "reason": "C-MEAS-VALID survives ONLY as narrow mechanism integrity on a synthetic constant-URL server. Deterministic SHA-256 fingerprint achieves perfect discrimination 1.0 (225 intra identical, 1000 inter distinct, mean inter Jaccard 0.346) on stdlib http.server with 5 hand-programmed auth states (no_auth/valid_token/session_cookie 200, expired_token 401, invalid_token 403) under 50-150ms server jitter, N=50 seed44, error 0%. Full vector exceeds B-STATUS-ONLY (1.0>0.7) when status overlaps (3x200) but equals B-BODY-ONLY (1.0=1.0). Null FP 0%<5% only for 50-150ms range. Drift pairs discriminable (Jaccard 0.305, 0.366<0.5). Claim does NOT demonstrate ecological validity for real Flask/JWT/OAuth production middleware, CDN/caching, non-deterministic responses, or necessity of full vector over body-only."
       }
     ]
   }
