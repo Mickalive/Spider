@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-33805283356",
+  "lane": "runtime",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "full_vector_discrimination": 1.0,
+    "full_vector_intra_match_rate": 1.0,
+    "full_vector_inter_match_rate": 0.0,
+    "full_vector_mean_intra_jaccard": 1.0,
+    "full_vector_mean_inter_jaccard": 0.34668769773099245,
+    "full_vector_bootstrap_95ci": [
+      1.0,
+      1.0
+    ],
+    "baselines": {
+      "B-URL-HASH": 0.0,
+      "B-RANDOM": 0.0,
+      "B-STATUS-ONLY": 0.7,
+      "B-BODY-ONLY": 1.0
+    },
+    "null_fp_rate": 0.0,
+    "drift_jaccards": [
+      0.305,
+      0.3664921465968586
+    ],
+    "drift_all_discriminable": true,
+    "total_requests": 50,
+    "error_rate": 0.0
+  },
+  "controls": {
+    "C_NULL_FP_RATE": {
+      "expected": "< 5%",
+      "observed": "0.0%",
+      "pass": true,
+      "detail": {
+        "no_auth": {
+          "total": 10,
+          "unique": 1,
+          "false_positive_rate": 0.0
+        },
+        "valid_token": {
+          "total": 10,
+          "unique": 1,
+          "false_positive_rate": 0.0
+        },
+        "expired_token": {
+          "total": 10,
+          "unique": 1,
+          "false_positive_rate": 0.0
+        },
+        "invalid_token": {
+          "total": 10,
+          "unique": 1,
+          "false_positive_rate": 0.0
+        },
+        "session_cookie": {
+          "total": 10,
+          "unique": 1,
+          "false_positive_rate": 0.0
+        }
+      }
+    },
+    "C_POSITIVE_DISCRIMINATION": {
+      "expected": "> 0.5",
+      "observed": "1.000000",
+      "pass": true
+    },
+    "C_BASELINE_SUPERIORITY": {
+      "expected": "B-STATUS-ONLY < full-vector",
+      "observed": "B-STATUS-ONLY=0.700000, full=1.000000",
+      "pass": true
+    },
+    "C_DRIFT_DISCRIMINABILITY": {
+      "expected": "all Jaccard < 0.5",
+      "observed": "jaccards=[0.305, 0.3664921465968586], all_discriminable=True",
+      "pass": true
+    },
+    "C_ERROR_RATE": {
+      "expected": "< 20%",
+      "observed": "0.0%",
+      "pass": true
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-RUNTIME-33805283356/raw_observations.json",
+      "role": "raw"
+    }
+  ],
+  "observations": [
+    "Auth HTTP server started on port 18926 with real auth middleware",
+    "5 auth states x 10 reps = 50 requests completed",
+    "Server-side jitter: 50-150ms random processing delay per request",
+    "Client-side jitter: 0-200ms inter-request delay (seed=44)",
+    "Full-vector discrimination: 1.000000 (threshold: > 0.5)",
+    "Full-vector bootstrap 95% CI: [1.000000, 1.000000]",
+    "B-STATUS-ONLY discrimination: 0.700000 (3 states share status 200)",
+    "B-BODY-ONLY discrimination: 1.000000 (all 5 bodies differ)",
+    "B-URL-HASH discrimination: 0.000000 (URL is constant)",
+    "Null FP rate under server-side jitter: 0.0% (threshold: < 5%)",
+    "Drift pairs discriminable: True (Jaccard thresholds: [0.305, 0.3664921465968586])"
+  ],
+  "validity_notes": [
+    "HTTP server is a stdlib http.server with custom auth handler \u2014 not production middleware; findings may not transfer to production auth systems with caching, CDN, load balancers.",
+    "Fingerprint uses repr(vector) with tuple(sorted(...)) \u2014 deterministic within same Python version but Python-version-dependent.",
+    "Date and Server headers excluded from fingerprint vector to prevent spurious variance.",
+    "Server-side jitter 50-150ms tests timing invariance when timing is excluded from fingerprint.",
+    "Auth states are hand-defined tokens \u2014 real JWT/session middleware may have different response patterns.",
+    "Python version: 3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "Error rate: 0.0% (0 errors out of 50 requests)"
+  ],
+  "unresolved": [
+    "Does the substrate maintain discrimination on production auth middleware (OAuth, JWT validation) with caching, CDN, non-deterministic responses?",
+    "Does the full vector (status+headers+body+redirects) exceed B-BODY-ONLY when bodies vary with auth state? (B-BODY-ONLY may equal full vector on this server.)",
+    "What is the false-positive rate under server-side processing jitter >150ms?",
+    "Can substrate detect continuous session drift as a continuous signal rather than discrete 5-state classification?",
+    "What is cross-Python-version reproducibility of repr(vector) hashes?"
+  ]
+}

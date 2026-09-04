@@ -26,6 +26,31 @@
         "handoff.json": "dda6bc7cd9a06aeeb68ff1ee5c67d7609d1ecd0e46d494c87db8daebda216563"
       }
     },
+    "EXP-FRONTIER-33767130362": {
+      "lane": "frontier",
+      "request_id": "8dae691d254a98b949c72dc8",
+      "created_at": "2026-09-03T14:29:30.122089+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Does the causal effect heterogeneity of actions across states increase monotonically with the action-dependence parameter lambda, demonstrating regime-dependent dynamics in synthetic Web-like state transitions via direct causal intervention rather than correlational prediction accuracy?",
+      "audit_status": "MEASUREMENT_INVALID",
+      "decision": "MEASUREMENT_INVALID",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/frontier",
+      "hashes": {
+        "request.json": "4fd8e220e5b0d682c402df1e674ef6147ab702e6cc34c73aff2514ae1f8746fd",
+        "spec.json": "b4d981a72456fcd3053693bcc63fd70a29d6aad0cd698cb9401b4de2bb21200f",
+        "prereg.md": "0af725f7f790046390cf7a77ee74396c6e272e4c3719d1dcde0435fe68064874",
+        "freeze.json": "ee30d94ceeb4656334339ff37366c1d5007f1b61b49d1db6587848f3a8109ff8",
+        "result.json": "719010428a54f01fa13dc70e3e5714200b0578f8f845ac8b9dd8dff317076075",
+        "report.md": "9ca7b76cda7b4218586f7805eb8aec2ba840a18a19e95d525ca1898e0137b20b",
+        "provenance.json": "36c7fdb30f71a05e950471353814f1424e6ca936bb2a775ef7fbc70610e5dbd1",
+        "audit.json": "a8d52541bab8df9821854619f71db40908934171c67a5f0d97cf7e7ec3ff0a23",
+        "verdict.json": "1b0555da9871b78f2d490dcfdca0da1afad3beca753d4b25b6391fdfad53af99",
+        "handoff.json": "128562014c5c09d2793692cd05297d571da9cefc4059be95bdc469498fb0e7d8"
+      }
+    },
     "EXP-GRAPH-33528827169": {
       "lane": "graph",
       "request_id": "3e0d81e7790f2f2b7bd8665e",
@@ -101,6 +126,32 @@
         "audit.json": "9781215ff59861da4ab8f61774734acd120c9d33efc0874bfdd97631674d4d6b",
         "verdict.json": "5737ab7e5989ec116fa4610619fdb76c2f27b73bc5e150a5b7be1417b3c16054",
         "handoff.json": "46853bb92c10fbe26f3ba849ff7664c02b95b23d39e1033fbc6efe33424a3336"
+      }
+    },
+    "EXP-INTEL-33842055594": {
+      "lane": "intel",
+      "request_id": "aa84f05c994cb7f569ba4f07",
+      "created_at": "2026-09-04T05:51:40.097724+00:00",
+      "claim_ids": [
+        "C-CROSSSITE",
+        "C-LLM-INHERIT"
+      ],
+      "question": "Can WebArena's Docker-based self-hosting provide HTML/DOM accessibility trees compatible with SPIDER's fragment-reuse observation format?",
+      "audit_status": "REVISE",
+      "decision": "PARTIALLY_COMPATIBLE",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/intel",
+      "hashes": {
+        "request.json": "d7ac099ff31b5f45a830349529520d4c2ee5473ea319c7b4af7cb37d955de79c",
+        "spec.json": "79da2a9a50aab9cd8dd74f927fdfa68351b44b22b4a0272b3b259c88c81309fb",
+        "prereg.md": "e0d93a691eba75216d80461196218b20fd6569c085a7b7f4ff4ab59c0700f8bc",
+        "freeze.json": "93b4ec42b16b80712d595a40164dc0c3567250765cb0c8a554a7f3639d6d8f4d",
+        "result.json": "f72051dede117cd5799332a1520d663e540bb8976e58d742281a110d32b175c9",
+        "report.md": "3bafabeb8a7d2e85235b93d8a37ed17bcad43b304218d00abeb838c2faf12b25",
+        "provenance.json": "d897e411eeef563b095ccf36fee448a9c3d8f759e3794bb6c14dfb0b896edaa4",
+        "audit.json": "f8b8010c21a66d60da850a1f63aa1fc7804485a64701fea3b0437a028ec003f2",
+        "verdict.json": "3f60b461ab38df9b9a023f934cb89913b39d09eabc616bd16e97476eb5f8e395",
+        "handoff.json": "c50df1d04707587e76fd7426e7d9c8960aa85cee28fb71acc9f3e9fdd262ca6e"
       }
     },
     "EXP-PHYSICS-33528829431": {
@@ -202,6 +253,31 @@
         "audit.json": "e13db7649dbfd34faabfdffb56f0293c15a517d76a75e2325265b5a4b0062789",
         "verdict.json": "cfedf34fddeb96dd3fd5ed104265de2630e8673cbe4dc52a9d2301084a26fb66",
         "handoff.json": "fea5b244f4547485ceb42f78d18fabeb664c457927fe26b940d7a0b7e7451f04"
+      }
+    },
+    "EXP-RUNTIME-33805283356": {
+      "lane": "runtime",
+      "request_id": "1c99edce5a6acfd6fb1c4bd8",
+      "created_at": "2026-09-03T20:57:58.045124+00:00",
+      "claim_ids": [
+        "C-MEAS-VALID"
+      ],
+      "question": "On a constant-URL server where auth state (Bearer token / session cookie) varies and response bodies differ accordingly, does the HTTP fingerprint substrate maintain discrimination \u2014 and does the full observation vector (status + headers + body + redirects) exceed single-field baselines (B-STATUS-ONLY, B-BODY-ONLY) when bodies vary with auth state?",
+      "audit_status": "REVISE",
+      "decision": "NARROW_SUCCESS",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/runtime",
+      "hashes": {
+        "request.json": "c8476dec201ef16f7d3fcdcf80562af142e95461a9a0bdfed44afb21994e946d",
+        "spec.json": "43498a99c09ff9c70d289f7352181f3129b97f40463c82875e01078042c53954",
+        "prereg.md": "5721f8c30d62cc22bd65b5b6dafb2143b13f9fddd0edd6a434501ed7ceb1d12d",
+        "freeze.json": "3ef419c244dab67546c8fbf6e2475b58b042c72e4c8902364d017c81af18fa23",
+        "result.json": "c0bc15fd454a0f5d3fc3eef19854b34ef6120a862a1cba0fac5d5b2b73684d0a",
+        "report.md": "9c80f5fb6c35722cb329a2ecce353ebd28b22523ee30aa668e83f26e320a4731",
+        "provenance.json": "5f501a5213838def50d43864411c486ff729355e0d3cd80821924348902b8ec5",
+        "audit.json": "61f7a88cf5d52c5cd7e6d5e529eefca6c72ba5e320abce11315f09a5bf494076",
+        "verdict.json": "b61cad3195b1a64273f9b1768842f8efbb816175b4c582ed7e858f6ba1cd9320",
+        "handoff.json": "c0cf725e47b7a5596f4400213a228f41e46321d0ee790280dc1144ec00bb7894"
       }
     }
   }

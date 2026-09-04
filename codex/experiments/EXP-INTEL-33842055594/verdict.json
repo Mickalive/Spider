@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-33842055594",
+  "lane": "intel",
+  "decision": "PARTIALLY_COMPATIBLE",
+  "claim_updates": [
+    {
+      "claim_id": "C-CROSSSITE",
+      "status": "HYPOTHESIS",
+      "reason": "WebArena observation format is REQUIRES_TRANSFORM (PARTIALLY_COMPATIBLE) per audit ceiling; DOM is present via CDP but requires non-trivial transformation (split obs/metadata recomposition, viewport override, truncation handling, ARIA-role-to-HTML-tag mapping). Source-inspection only — no Docker deployment or live task execution verified cross-site DOM delivery, shadow DOM/iframe completeness, or fragment extraction success. C-CROSSSITE remains bounded to 2-site corpus pending integration experiment."
+    },
+    {
+      "claim_id": "C-LLM-INHERIT",
+      "status": "HYPOTHESIS",
+      "reason": "WebArena is a viable testbed candidate but observation-format compatibility is REQUIRES_TRANSFORM, not DIRECTLY_USABLE. Whether SPIDER's fragment extraction code works against WebArena's accessibility tree or html mode has not been tested. C-LLM-INHERIT remains bounded to 2-site corpus pending integration experiment testing actual parameter inheritance on WebArena's 812-task distribution."
+    }
+  ],
+  "product_action": "No product action. Intel lane source-inspection result with REQUIRES_TRANSFORM ceiling does not justify product promotion or code changes.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can SPIDER's fragment extraction code successfully extract and reuse fragments from WebArena's live Docker environment with current_viewport_only=False, comparing accessibility_tree vs html mode for cross-site transfer on a bounded task subset?",
+  "reason": "The producer's core finding is sound: WebArena exposes DOM to the agent via two CDP pipelines (Accessibility.getFullAXTree, DOMSnapshot.captureSnapshot) through browser_env/processors.py TextObervationProcessor, dispatched by browser_env/envs.py ScriptBrowserEnv using Playwright. Positive controls pass. The null control (screenshots-only) correctly does NOT trigger. However, the audit correctly downgrades the ceiling from DIRECTLY_USABLE to REQUIRES_TRANSFORM per prereg §10.2: (1) agent observation is split across obs dict {text: formatted string, image: ndarray} and info dict {observation_metadata.text.obs_nodes_info}, requiring recomposition not direct assignment; (2) default current_viewport_only=True filters off-screen and zero-area nodes, pruning hierarchy; (3) UTTERANCE_MAX_LENGTH=8192 and max_obs_length=1920 truncate observations on large pages; (4) default accessibility_tree mode provides ARIA properties (focused, expanded, hasPopup) but NOT HTML attributes (class, id, href) — HTML attributes are only in html mode via DOMSnapshot; (5) parse_accessibility_tree filters empty generics and deduplicates statictext, producing pruned not raw hierarchy. These are non-trivial transformations per prereg §10.2 measurement_validity rule 3. All metrics recomputed by auditor with evidence refs. Cross-site format consistency is code-level uniform (single env class) but not empirically verified per Docker execution. Source-inspection methodology appropriate for this stage; integration experiment required to determine whether REQUIRES_TRANSFORM ceiling is recoverable or whether the transformation cost negates WebArena's corpus expansion value.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-33842055594/request.json",
+    "research/experiments/EXP-INTEL-33842055594/spec.json",
+    "research/experiments/EXP-INTEL-33842055594/freeze.json",
+    "research/experiments/EXP-INTEL-33842055594/result.json",
+    "research/experiments/EXP-INTEL-33842055594/audit.json",
+    "research/experiments/EXP-INTEL-33842055594/report.md",
+    "research/experiments/EXP-INTEL-33842055594/provenance.json",
+    "research/experiments/EXP-INTEL-33842055594/prereg.md",
+    "research/experiments/EXP-INTEL-33528832113/handoff.json",
+    "browser_env/envs.py (WebArena: playwright sync_playwright, chromium.launch, CDP session)",
+    "browser_env/processors.py (WebArena: Accessibility.getFullAXTree, DOMSnapshot.captureSnapshot, TextObervationProcessor)",
+    "browser_env/utils.py (WebArena: AccessibilityTreeNode TypedDict, DOMNode TypedDict)",
+    "browser_env/constants.py (WebArena: UTTERANCE_MAX_LENGTH=8192, IGNORED_ACTREE_PROPERTIES)",
+    "src/spider/models.py (SPIDER: Observation.state dict[str,Any])"
+  ]
+}

@@ -11,6 +11,14 @@
         "reason": "Measurement invalid: inference errors (Bonferroni count mismatch, saturated ANOVA design) prevent justified inferential update; descriptive effect suggests further investigation."
       },
       {
+        "experiment_id": "EXP-FRONTIER-33767130362",
+        "lane": "frontier",
+        "decision": "MEASUREMENT_INVALID",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "This experiment is MEASUREMENT_INVALID: the causal heterogeneity metric Var_a(E_S[f(S,a)]) is identically 0 for permutation-based deterministic functions by mathematical identity (all permutations of {0..9} have mean 4.5), making the positive control threshold of 0.5 a priori unreachable. The prereg section 12.3 clause 2 ('deterministic functions generate degenerate transitions') applies exactly. This is a construct-validation failure, not an empirical test of regime-dependent dynamics. C-WEB-DYNAMICS remains HYPOTHESIS \u2014 this experiment neither supports nor falsifies it."
+      },
+      {
         "experiment_id": "EXP-PHYSICS-33528829431",
         "lane": "physics",
         "decision": "REVISE",
@@ -53,6 +61,14 @@
         "claim_id": "C-CROSSSITE",
         "status": "EXPERIMENTAL",
         "reason": "Structured reconnaissance identified WebArena as a candidate testbed meeting all five structural proxies (S1-S5). Integration experiment required to verify HTML/DOM accessibility and fragment extraction compatibility. Audit found measurement validity issues but core finding about benchmark existence stands."
+      },
+      {
+        "experiment_id": "EXP-INTEL-33842055594",
+        "lane": "intel",
+        "decision": "PARTIALLY_COMPATIBLE",
+        "claim_id": "C-CROSSSITE",
+        "status": "HYPOTHESIS",
+        "reason": "WebArena observation format is REQUIRES_TRANSFORM (PARTIALLY_COMPATIBLE) per audit ceiling; DOM is present via CDP but requires non-trivial transformation (split obs/metadata recomposition, viewport override, truncation handling, ARIA-role-to-HTML-tag mapping). Source-inspection only \u2014 no Docker deployment or live task execution verified cross-site DOM delivery, shadow DOM/iframe completeness, or fragment extraction success. C-CROSSSITE remains bounded to 2-site corpus pending integration experiment."
       }
     ],
     "C-LLM-INHERIT": [
@@ -63,6 +79,14 @@
         "claim_id": "C-LLM-INHERIT",
         "status": "EXPERIMENTAL",
         "reason": "Same as C-CROSSSITE: candidate testbed identified; integration experiment required to verify suitability for LLM-inheritance testing."
+      },
+      {
+        "experiment_id": "EXP-INTEL-33842055594",
+        "lane": "intel",
+        "decision": "PARTIALLY_COMPATIBLE",
+        "claim_id": "C-LLM-INHERIT",
+        "status": "HYPOTHESIS",
+        "reason": "WebArena is a viable testbed candidate but observation-format compatibility is REQUIRES_TRANSFORM, not DIRECTLY_USABLE. Whether SPIDER's fragment extraction code works against WebArena's accessibility tree or html mode has not been tested. C-LLM-INHERIT remains bounded to 2-site corpus pending integration experiment testing actual parameter inheritance on WebArena's 812-task distribution."
       }
     ],
     "C-PRODUCT-ECON": [
@@ -99,6 +123,14 @@
         "claim_id": "C-MEAS-VALID",
         "status": "BLOCKED",
         "reason": "Phase A (toy server) passes all preregistered controls: discrimination 1.0, null FP 0.0%, TP 100%, B-STATUS-ONLY=0.7 < substrate=1.0, B-BODY-ONLY=1.0 <= substrate=1.0 (equality allowed per prereg Section 8), held-out session_cookie 10/10 novel, drift pairs discriminable. Mechanism integrity after three mandatory parent fixes (deterministic sorted-tuple fingerprint, Date/Server header exclusion, strong single-field baselines) is confirmed. Phase B (httpbin.org/status/{200,401,403}) reports discrimination 1.0 but is URL-tautological: B-URL-HASH=1.0 and B-STATUS-ONLY=1.0 both achieve perfect discrimination without the full substrate (result.json phase_b_baselines; audit.json V1-EXTERNAL-TAUTOLOGY). The full vector adds no discrimination over B-STATUS-ONLY on this endpoint. Phase B does NOT constitute ecological validity for auth/session drift detection. C-MEAS-VALID survives for: deterministic SHA-256 fingerprint of (status, sorted headers excluding Date/Server, body_sha256, redirect_chain) maintains perfect discrimination on a local 5-state toy server with 0-200ms inter-request jitter. C-MEAS-VALID does NOT survive for general HTTP observation on real servers with auth middleware, caching, CDN, or non-deterministic responses. Missing raw observations artifact (audit V2) means Phase B cannot be independently recomputed. Drift control measures discriminability not monotonicity (audit V3). Jitter is client-side only, not server processing (audit V5). Fingerprint remains Python-version-dependent via repr(vector) (audit V6)."
+      },
+      {
+        "experiment_id": "EXP-RUNTIME-33805283356",
+        "lane": "runtime",
+        "decision": "NARROW_SUCCESS",
+        "claim_id": "C-MEAS-VALID",
+        "status": "EXPERIMENTAL",
+        "reason": "C-MEAS-VALID survives ONLY as narrow mechanism integrity on a synthetic constant-URL server. Deterministic SHA-256 fingerprint achieves perfect discrimination 1.0 (225 intra identical, 1000 inter distinct, mean inter Jaccard 0.346) on stdlib http.server with 5 hand-programmed auth states (no_auth/valid_token/session_cookie 200, expired_token 401, invalid_token 403) under 50-150ms server jitter, N=50 seed44, error 0%. Full vector exceeds B-STATUS-ONLY (1.0>0.7) when status overlaps (3x200) but equals B-BODY-ONLY (1.0=1.0). Null FP 0%<5% only for 50-150ms range. Drift pairs discriminable (Jaccard 0.305, 0.366<0.5). Claim does NOT demonstrate ecological validity for real Flask/JWT/OAuth production middleware, CDN/caching, non-deterministic responses, or necessity of full vector over body-only."
       }
     ]
   }
