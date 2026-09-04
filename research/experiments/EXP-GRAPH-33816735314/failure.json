@@ -1,9 +1,9 @@
 {
   "stage": "director",
   "category": "VALIDATION_FAILURE",
-  "message": "invalid claim update status: ADVANCE",
+  "message": "invalid claim update status: CONDITIONALLY_ADVANCED",
   "retryable": false,
-  "recorded_at": "2026-09-04T05:53:30.113709+00:00",
-  "github_run_id": "33842053685",
+  "recorded_at": "2026-09-04T10:34:08.593717+00:00",
+  "github_run_id": "33863642838",
   "github_run_attempt": "1"
 }
