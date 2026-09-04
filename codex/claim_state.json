@@ -45,6 +45,36 @@
         "reason": "Survives frozen POC gate: unseen_resolution_rate=1.0 (10/10), binding_accuracy=1.0 (10/10), parameter_induction_fn_rate=0.0 (1/1 detected), literal_fail_rate=1.0 (0/10 EXECUTABLE), positive and null controls pass. Audit PASS confirms recomputation. Ceiling is narrow synthetic single-parameter single-field common-prefix level only; does NOT establish general parameter induction, multi-parameter capability, real-browser viability, or measured end-to-end economics."
       }
     ],
+    "C-CROSSSITE": [
+      {
+        "experiment_id": "EXP-INTEL-33528832113",
+        "lane": "intel",
+        "decision": "SUPPORTS",
+        "claim_id": "C-CROSSSITE",
+        "status": "EXPERIMENTAL",
+        "reason": "Structured reconnaissance identified WebArena as a candidate testbed meeting all five structural proxies (S1-S5). Integration experiment required to verify HTML/DOM accessibility and fragment extraction compatibility. Audit found measurement validity issues but core finding about benchmark existence stands."
+      }
+    ],
+    "C-LLM-INHERIT": [
+      {
+        "experiment_id": "EXP-INTEL-33528832113",
+        "lane": "intel",
+        "decision": "SUPPORTS",
+        "claim_id": "C-LLM-INHERIT",
+        "status": "EXPERIMENTAL",
+        "reason": "Same as C-CROSSSITE: candidate testbed identified; integration experiment required to verify suitability for LLM-inheritance testing."
+      }
+    ],
+    "C-PRODUCT-ECON": [
+      {
+        "experiment_id": "EXP-INTEL-33528832113",
+        "lane": "intel",
+        "decision": "SUPPORTS",
+        "claim_id": "C-PRODUCT-ECON",
+        "status": "HYPOTHESIS",
+        "reason": "No end-to-end economic measurement performed; claim remains bounded to 2-site corpus until integration experiment provides cost data."
+      }
+    ],
     "C-MEAS-VALID": [
       {
         "experiment_id": "EXP-PHYSICS-33528829431",

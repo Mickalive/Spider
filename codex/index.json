@@ -76,6 +76,33 @@
         "handoff.json": "ebb3de502513621de55c297a32023f20b6f87739cdf00b4d3db025d00f51187a"
       }
     },
+    "EXP-INTEL-33528832113": {
+      "lane": "intel",
+      "request_id": "46d19fdaf32e996c0ab24bd7",
+      "created_at": "2026-09-01T15:56:44.223955+00:00",
+      "claim_ids": [
+        "C-CROSSSITE",
+        "C-LLM-INHERIT",
+        "C-PRODUCT-ECON"
+      ],
+      "question": "Which publicly available web-agent benchmarks contain multi-step stateful task structures that could serve as stronger testbeds for SPIDER's cross-site inheritance and LLM-inheritance claims than the current 2-site (quotes/books) corpus?",
+      "audit_status": "REVISE",
+      "decision": "SUPPORTS",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/intel",
+      "hashes": {
+        "request.json": "ac060980eee635b3edec766758f02747cfb02c42f5433aba27178285d1561c15",
+        "spec.json": "27f16b3d2074b16a645307322c646b54232f17b41ef00ed43d2b25f8668562be",
+        "prereg.md": "0bebc672261e2ec247cd53fd1f7bada7654d469acce2a0ba6b5e8efcfbf547de",
+        "freeze.json": "027a1a32009fa516ef2584e0b78a45e9eabf186a7fc8bc7f03a9d1cd2b8ba85f",
+        "result.json": "c273ce1ee626c1222d8eb8cacca3fed377304144b19891907329382067ccc131",
+        "report.md": "f5f8abd62ea53f57e6a95707b70d903dbca0b1293460b040ff0c49fdf876e04a",
+        "provenance.json": "cdad879999e774356e422da40ac9d952974216e81d48e6f6e7179917cd433bfd",
+        "audit.json": "9781215ff59861da4ab8f61774734acd120c9d33efc0874bfdd97631674d4d6b",
+        "verdict.json": "5737ab7e5989ec116fa4610619fdb76c2f27b73bc5e150a5b7be1417b3c16054",
+        "handoff.json": "46853bb92c10fbe26f3ba849ff7664c02b95b23d39e1033fbc6efe33424a3336"
+      }
+    },
     "EXP-PHYSICS-33528829431": {
       "lane": "physics",
       "request_id": "aefb271e5c3274224c9651fe",

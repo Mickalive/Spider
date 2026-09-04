@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-33528832113",
+  "lane": "intel",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Reconcile metric inconsistencies: result.json metrics (benchmarks_assessed=14, strongly_recommended_count=1, recommended_count=6, not_recommended_count=7) contradict report.md ranked table (13 scored rows, 2 STRONGLY RECOMMENDED, 8 RECOMMENDED per producer S-values, WebShop misclassified as NOT RECOMMENDED despite S1+S2+S3+S4=3 meeting RECOMMENDED threshold) and observations text (lists 6 RECOMMENDED including VisualWebArena as RECOMMENDED not STRONGLY). Provide single consistent table and recomputed counts with derivation trace to S1-S5 per decision_rule in spec.json.",
+    "Correct decision_rule application: WebShop scores S1=1,S2=0,S3=1,S4=1 => S1+S2+S3+S4=3 => RECOMMENDED per spec decision_rule, not NOT RECOMMENDED as listed in report.md Rank 10. Either correct classification or correct S2/S4 values with evidence.",
+    "Execute null_control_random_selection empirically: spec.json and prereg.md require random selection of 5 GitHub repos tagged 'web-agent-benchmark' without structural analysis and comparison of ranked list. Producer result.json controls.null_control_random_selection observed is rhetorical counterfactual ('would not distinguish') with no artifact, no repo list, no scores, no discriminability metric. Provide actual random sample, scored or unscored, with evidence_refs to demonstrate audit adds information.",
+    "Resolve prereg measurement_validity violation 3: spec.json 'No benchmark may be excluded after seeing its structural properties -- all identified benchmarks must be scored' and preregmd section 5 lists QWeb and AWM as must-be-assessed. Result.json validity_notes excludes both (QWeb insufficient documentation, AWM could not be located) without scores, and additionally notes but does not score BearCubs, Odysseys, WebWalkerQA. Provide explicit S1-S5 scores with UNKNOWN/null and verification trace, or provide documented search evidence (search queries, timestamps, snapshot hashes) proving non-existence/inaccessibility at search_date 2026-09-02.",
+    "Provide raw evidence artifacts for measurement_validity rule 1 and 4: All benchmark assessments must cite specific publicly accessible documentation and API/access claims must be verified by checking actual repository. Provenance.json lists evidence_refs but no raw artifacts with sha256, no search logs, no repository snapshot hashes, no trajectory-download verification. Add derived/raw artifacts (paper PDFs, GitHub README snapshots, dataset card snapshots) with paths and hashes under research/experiments/EXP-INTEL-33528832113/ so S1-S5 scores are traceably reproducible. Current artifacts list contains only derived JSON/md with sha256=null.",
+    "Clarify strongly_recommended count and VisualWebArena caveat: result.json claims 1 strongly_recommended (WebArena) while report.md shows WebArena and VisualWebArena both 5/5 STRONGLY RECOMMENDED, and observations text describes VisualWebArena as 5/5 but then lists it among 6 RECOMMENDED. Clarify whether VisualWebArena S5=1 (3 website types = Classifieds, Shopping, Reddit + Wikipedia KB meets >=3) and S2/S4 verification, and whether visual modality caveat downgrades recommendation.",
+    "Fix provenance reproducibility: artifacts sha256 are null, no raw search logs, no distinction between RAW EVIDENCE and INTERPRETATION preserved in report.md. Provide search_sources query logs (GitHub topics, Papers With Code, arXiv, HuggingFace) with dates to support 'exhaustive not selective' claim and to bound search incompleteness threat acknowledged in validity_notes."
+  ],
+  "validity_findings": [
+    {
+      "finding": "Inconsistent metric counts across packet",
+      "severity": "major",
+      "details": "result.json metrics: benchmarks_assessed 14, strongly 1, recommended 6, not 7 (sum 14). report.md table: 13 scored rows (WebArena, VisualWebArena, Mind2Web, AssistantBench, WebBench, WorkArena, WebMall, AgentBench, WebVoyager, WebShop, WebLINX, MiniWoB++, Explorer) + WebQuest information-only unscored = 14 identified but 13 scored. Count of RECOMMENDED per decision_rule S1+S2+S3+S4>=3 on producers own S-values is 11 including 2 STRONGLY (or 10 if WebShop excluded), not 6+1=7. Observations list of 6 RECOMMENDED omits WebLINX, AgentBench, Explorer despite scoring them 4/5 in table.",
+      "evidence": "research/experiments/EXP-INTEL-33528832113/result.json:metrics; research/experiments/EXP-INTEL-33528832113/result.json:observations[0-2]; research/experiments/EXP-INTEL-33528832113/report.md:Ranked Benchmark Table"
+    },
+    {
+      "finding": "Decision_rule misapplied to WebShop",
+      "severity": "major",
+      "details": "WebShop listed as S1=1,S2=0,S3=1,S4=1,S5=0 Total 3/5 Verdict NOT RECOMMENDED. Per spec.json decision_rule RECOMMENDED if S1+S2+S3+S4 >=3 => 1+0+1+1=3 => should be RECOMMENDED. Producer either mis-scored S2/S4 or misapplied threshold, breaking predeclared scoring contract.",
+      "evidence": "research/experiments/EXP-INTEL-33528832113/spec.json:decision_rule; research/experiments/EXP-INTEL-33528832113/report.md:Rank 10 WebShop"
+    },
+    {
+      "finding": "Null control not empirically executed",
+      "severity": "major",
+      "details": "positive_control_webarena passes trivially (expected known 5/5). null_control_random_selection is not a measurement: no random repo list, no scoring, no discriminability metric, only narrative interpretation. Spec requires random selection of 5 GitHub repos tagged web-agent-benchmark without structural analysis; audit adds information only if demonstrated via comparison. Current pass=true is unsupported.",
+      "evidence": "research/experiments/EXP-INTEL-33528832113/spec.json:null_control; research/experiments/EXP-INTEL-33528832113/result.json:controls.null_control_random_selection"
+    },
+    {
+      "finding": "Prereg mandatory inclusion violated",
+      "severity": "major",
+      "details": "prereg.md section 5 mandates assessment of 10 known candidates MUST be included and not excluded after seeing properties. QWeb and AWM excluded from ranked table entirely with validity_notes excuses (insufficient documentation, could not be located via web search). No S-scores provided, violating spec.json measurement_validity rule 3. Additional benchmarks discovered (BearCubs, Odysseys, WebQuest, WebWalkerQA, Explorer) partially handled inconsistently (Explorer scored, others not).",
+      "evidence": "research/experiments/EXP-INTEL-33528832113/prereg.md:5; research/experiments/EXP-INTEL-33528832113/spec.json:measurement_validity[2]; research/experiments/EXP-INTEL-33528832113/result.json:validity_notes[4-5]"
+    },
+    {
+      "finding": "No raw evidence preservation; interpretation collapsed into observation",
+      "severity": "major",
+      "details": "result.json observations are interpretations (e.g., 'Best candidate', 'provides genuine additional coverage') not RAW EVIDENCE. Provenance lists evidence_refs URLs but no durable artifacts with hashes. No search logs, no repository snapshots, no trajectory-download proofs. RAW EVIDENCE -> OBSERVATION -> DERIVED MEASUREMENT chain is broken; downstream reproducibility relies on trusting producer narrative. Infrastructure failure not falsification principle respected, but missing evidence is not documented as null with explanation in required artifact roles.",
+      "evidence": "research/experiments/EXP-INTEL-33528832113/provenance.json:artifacts (sha256 null); research/experiments/EXP-INTEL-33528832113/result.json:artifacts (sha256 null); research/experiments/EXP-INTEL-33528832113/spec.json:measurement_validity"
+    },
+    {
+      "finding": "Positive control is non-discriminating",
+      "severity": "minor",
+      "details": "WebArena as positive control is tautological: any audit that fails to score WebArena 5/5 would be broken, but passing it provides no evidence of audit discriminating power among borderline benchmarks (e.g., WebShop S2, WorkArena S4 via ServiceNow developer instance vs Docker self-hosting per S4 definition requiring Dockerfile/docker-compose/replay server). Baseline strength is low.",
+      "evidence": "research/experiments/EXP-INTEL-33528832113/spec.json:positive_control; research/experiments/EXP-INTEL-33528832113/result.json:controls.positive_control_webarena"
+    },
+    {
+      "finding": "Structural proxy validity threat acknowledged but not bounded",
+      "severity": "minor",
+      "details": "Producer correctly notes in validity_notes that S1-S5 is proxy for could SPIDERs fragment mechanism work, not sufficient, and that SPIDER fragment-reuse model is not formalized. This limits claim ceiling to candidate testbed identification, not suitability or cross-site inheritance generalizability. Report.md product consequences overstates unblocking C-CROSSSITE and C-LLM-INHERIT (e.g., 'directly unblocks') without integration experiment.",
+      "evidence": "research/experiments/EXP-INTEL-33528832113/result.json:validity_notes[2-3]; research/experiments/EXP-INTEL-33528832113/report.md:Product Consequences; research/experiments/EXP-INTEL-33528832113/spec.json:product_consequence_positive"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "Current SPIDER corpus: 2 small structured sites (quotes.toscrape.com, books.toscrape.com)",
+      "strength": "weak",
+      "finding": "Descriptive baseline only; no quantitative SPIDER performance measured on this corpus within this intel experiment (by design). Serves as motivation, not comparator. No null or damage control measured.",
+      "evidence": "research/experiments/EXP-INTEL-33528832113/spec.json:baselines[0]; research/experiments/EXP-INTEL-33528832113/prereg.md:2.1"
+    },
+    {
+      "baseline_id": "Mind2Web (2023), WebArena (2024), VisualWebArena (2024), WorkArena (2024), AgentBench (2023) as prior art references",
+      "strength": "weak",
+      "finding": "Listed as prior art never integrated, not as active baselines with measured task success or fragment-reuse compatibility. Audit scores them but does not run SPIDER on them; therefore no baseline strength to compare SPIDER benefit against. Appropriate for reconnaissance lane, but does not support product economic claims.",
+      "evidence": "research/experiments/EXP-INTEL-33528832113/spec.json:baselines[1-5]; research/experiments/EXP-INTEL-33528832113/prereg.md:2.3"
+    }
+  ],
+  "recomputed_metrics": {
+    "benchmarks_assessed": {
+      "producer_value": 14,
+      "recomputed_value": 13,
+      "unit": "count scored",
+      "method": "Manual recount of report.md ranked table rows with S-scores vs result.json observations list which includes WebQuest as unscored information-only. 13 benchmarks have S1-S5 scores; 14th (WebQuest) has no score.",
+      "evidence": "research/experiments/EXP-INTEL-33528832113/report.md:Ranked Benchmark Table; research/experiments/EXP-INTEL-33528832113/result.json:observations[0]"
+    },
+    "strongly_recommended_count": {
+      "producer_value": 1,
+      "recomputed_value": 2,
+      "unit": "count where S1+S2+S3+S4+S5=5",
+      "method": "Apply spec decision_rule to producers own S-values in report.md: WebArena 1+1+1+1+1=5 and VisualWebArena 1+1+1+1+1=5 both satisfy STRONGLY. Producer observation text claims only WebArena is only STRONGLY, contradicting table.",
+      "evidence": "research/experiments/EXP-INTEL-33528832113/report.md:Rank 1-2; research/experiments/EXP-INTEL-33528832113/result.json:metrics.strongly_recommended_count"
+    },
+    "recommended_count": {
+      "producer_value": 6,
+      "recomputed_value": 9,
+      "unit": "count where S1+S2+S3+S4>=3 excluding STRONGLY",
+      "method": "Recompute per decision_rule from report.md S-values: RECOMMENDED non-strongly should be Mind2Web, AssistantBench, WebBench, WorkArena, WebMall, AgentBench, WebLINX, Explorer, and WebShop (if accepting S-values). That's 9. If WebShop is retained as NOT per producer, 8. Producer lists 6 (Mind2Web, VisualWebArena, WorkArena, AssistantBench, WebBench, WebMall) incorrectly including VisualWebArena (should be STRONGLY) and omitting AgentBench, WebLINX, Explorer.",
+      "evidence": "research/experiments/EXP-INTEL-33528832113/spec.json:decision_rule; research/experiments/EXP-INTEL-33528832113/report.md:Ranked Benchmark Table; research/experiments/EXP-INTEL-33528832113/result.json:observations[2]"
+    },
+    "not_recommended_count": {
+      "producer_value": 7,
+      "recomputed_value": 2,
+      "unit": "count where S1+S2+S3+S4<3",
+      "method": "Per decision_rule, only WebVoyager (1+0+1+0=2) and MiniWoB++ (0+1+0+1=2) fall below threshold. WebShop meets threshold. Producer count 7 is irreconcilable with table total 13.",
+      "evidence": "research/experiments/EXP-INTEL-33528832113/report.md:Ranked Benchmark Table"
+    },
+    "positive_control_pass": {
+      "producer_value": true,
+      "recomputed_value": true,
+      "unit": "boolean",
+      "method": "Verified WebArena indeed provides 812 long-horizon tasks, public trajectories (~170), stateful actions, Docker self-hosting, 4 site types per cited papers/github (arxiv 2307.13854, github.com/web-arena-x/webarena). Audit correctly identifies 5/5, but control is non-discriminating.",
+      "evidence": "research/experiments/EXP-INTEL-33528832113/provenance.json:evidence_refs[0,11,15]"
+    },
+    "null_control_pass": {
+      "producer_value": true,
+      "recomputed_value": false,
+      "unit": "boolean",
+      "method": "Recomputed as FAIL: no empirical random selection executed, no artifact, no metric. Narrative claim that audit adds information over random selection is interpretation, not measurement. Requires actual random sample of 5 GitHub web-agent-benchmark repos with scoring comparison.",
+      "evidence": "research/experiments/EXP-INTEL-33528832113/result.json:controls.null_control_random_selection"
+    }
+  },
+  "claim_ceiling": "MAX JUSTIFIED: At least one public benchmark (WebArena, 812 tasks, 4 site types, Docker self-hostable, public replay) meets all five structural proxies (S1-S5) and VisualWebArena likely meets them (910 tasks, 3 site types, shares Docker infra, but visual modality caveat). Six to nine additional benchmarks meet S1+S2+S3+S4>=3 but lack self-hosting or single-domain diversity, making them RECOMMENDED only as proxies. This is OBSERVATION of candidate testbed existence, not a replication or generalization: structural compatibility ≠ SPIDER fragment-reuse suitability, no SPIDER code ran, no end-to-end economics measured, no cross-site inheritance demonstrated, no leakage/replay compatibility with SPIDER observation format verified. Does NOT support claim that C-CROSSSITE or C-LLM-INHERIT are unblocked or that product economics improve; does NOT support STRONGLY RECOMMENDED >1 without resolving count inconsistency and VisualWebArena visual-dependency. Next step is bounded integration experiment on WebArena to test HTML/DOM accessibility and fragment extraction.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-33528832113/request.json",
+    "research/experiments/EXP-INTEL-33528832113/spec.json",
+    "research/experiments/EXP-INTEL-33528832113/prereg.md",
+    "research/experiments/EXP-INTEL-33528832113/freeze.json",
+    "research/experiments/EXP-INTEL-33528832113/result.json",
+    "research/experiments/EXP-INTEL-33528832113/report.md",
+    "research/experiments/EXP-INTEL-33528832113/provenance.json",
+    "research/experiments/EXP-INTEL-33528832113/execution_checkpoint.json",
+    "research/lanes/registry.json"
+  ],
+  "unresolved": [
+    "Whether QWeb and AWM benchmarks, if located, would alter the candidate set or scores (producer excluded them). Requires targeted search with evidence snapshots.",
+    "Whether WebBench (5,750 tasks, 452 live sites) or AssistantBench could be adapted to self-hosted evaluation for SPIDER despite S4=0, or whether live-website staleness prevents reproducibility.",
+    "Whether VisualWebArena screenshots + SoM annotations conflict with SPIDER text-based fragment model; requires integration experiment checking HTML/DOM availability in Docker.",
+    "Whether WorkArena S4=1 via ServiceNow developer instance satisfies spec S4 definition (self-hostable or API replay with Dockerfile/docker-compose) vs hosted SaaS instance; threatens WorkArena RECOMMENDED status.",
+    "Whether WebShop S2 should be 1 (dataset publicly available) which would raise it to 4/5 and change RECOMMENDED vs NOT classification.",
+    "Whether Explorer synthetic tasks align with SPIDER action-oriented navigation or are QA/information-seeking and thus mis-scored on S1/S3.",
+    "No end-to-end measurement of SPIDER fragment-reuse on any external benchmark, so C-CROSSSITE, C-LLM-INHERIT, C-PRODUCT-ECON remain bounded to 2-site corpus until integration experiment."
+  ]
+}
