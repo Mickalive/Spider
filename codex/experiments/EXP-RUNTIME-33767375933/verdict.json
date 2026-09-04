@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-33767375933",
+  "lane": "runtime",
+  "decision": "NARROW_SUCCESS",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "BLOCKED",
+      "reason": "Phase A (toy server) passes all preregistered controls: discrimination 1.0, null FP 0.0%, TP 100%, B-STATUS-ONLY=0.7 < substrate=1.0, B-BODY-ONLY=1.0 <= substrate=1.0 (equality allowed per prereg Section 8), held-out session_cookie 10/10 novel, drift pairs discriminable. Mechanism integrity after three mandatory parent fixes (deterministic sorted-tuple fingerprint, Date/Server header exclusion, strong single-field baselines) is confirmed. Phase B (httpbin.org/status/{200,401,403}) reports discrimination 1.0 but is URL-tautological: B-URL-HASH=1.0 and B-STATUS-ONLY=1.0 both achieve perfect discrimination without the full substrate (result.json phase_b_baselines; audit.json V1-EXTERNAL-TAUTOLOGY). The full vector adds no discrimination over B-STATUS-ONLY on this endpoint. Phase B does NOT constitute ecological validity for auth/session drift detection. C-MEAS-VALID survives for: deterministic SHA-256 fingerprint of (status, sorted headers excluding Date/Server, body_sha256, redirect_chain) maintains perfect discrimination on a local 5-state toy server with 0-200ms inter-request jitter. C-MEAS-VALID does NOT survive for general HTTP observation on real servers with auth middleware, caching, CDN, or non-deterministic responses. Missing raw observations artifact (audit V2) means Phase B cannot be independently recomputed. Drift control measures discriminability not monotonicity (audit V3). Jitter is client-side only, not server processing (audit V5). Fingerprint remains Python-version-dependent via repr(vector) (audit V6)."
+    }
+  ],
+  "product_action": "NO_CHANGE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "On a non-URL-tautological server where the URL is constant and auth state varies (e.g., a Flask app with real JWT/session middleware returning different responses based on Authorization header or Cookie), does the HTTP fingerprint substrate maintain discrimination — and does the full vector exceed single-field baselines (B-STATUS-ONLY, B-BODY-ONLY) when bodies vary with auth state?",
+  "reason": "Phase A mechanism integrity is confirmed: all three parent fixes (deterministic fingerprint, Date/Server exclusion, strong baselines) verified by audit recomputation. Phase B numeric threshold is met (discrimination 1.0 > 0.5) but the audit correctly identified that httpbin.org/status encodes status in the URL path, making B-URL-HASH=1.0 trivially perfect — this is not evidence of ecological validity for auth/session observation. The substrate works on the toy fixture; it has not been tested on a server where auth state changes are invisible in the URL. No product promotion: claim ceiling is toy-server mechanism integrity only. Raw observations artifact is missing, preventing independent Phase B recomputation. Drift monotonicity is not established (only discriminability). Next experiment must use a constant-URL endpoint where response bodies and headers vary with auth state — this is the only way to test whether the full observation vector adds value over status-only and whether the substrate generalizes beyond tautological test endpoints.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-33767375933/result.json — Phase A metrics (discrimination 1.0, baselines, controls), Phase B metrics (discrimination 1.0, B-URL-HASH 1.0, B-STATUS-ONLY 1.0, B-BODY-ONLY 0.0)",
+    "research/experiments/EXP-RUNTIME-33767375933/audit.json — REVISE status, producer_claim_supported=false, 7 required_fixes, V1-V7 validity_findings, claim_ceiling narrowed to toy-server + trivial status discrimination",
+    "research/experiments/EXP-RUNTIME-33767375933/report.md — producer interpretation acknowledging Phase B status-only sufficiency, claim ceiling, validity threats",
+    "research/experiments/EXP-RUNTIME-33767375933/run_experiment.py — code with SERVER_STATES and EXTERNAL_STATES, fingerprint function, baseline implementations",
+    "research/experiments/EXP-RUNTIME-33767375933/spec.json — frozen decision_rule requiring Phase A >0.5 and Phase B >0.5, baselines, controls",
+    "research/experiments/EXP-RUNTIME-33767375933/prereg.md — Sections 6, 8, 9, 13 defining fingerprint, baselines, controls, decision rules",
+    "research/experiments/EXP-RUNTIME-33767375933/provenance.json — Python 3.12.14, gitCommit e7674715899f, execution environment",
+    "research/experiments/EXP-RUNTIME-33767375933/freeze.json — immutable frozen design hashes",
+    "research/experiments/EXP-RUNTIME-33528830833/handoff.json — parent carry_forward establishing toy-server mechanism, rejected broader claims, 6 required fixes"
+  ]
+}

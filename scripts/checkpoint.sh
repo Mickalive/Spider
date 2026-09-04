@@ -1,10 +1,24 @@
 #!/usr/bin/env bash
 set -euo pipefail
+
+# Never rewrite the script file underneath a running Bash process when restoring the
+# lane snapshot. Re-exec an ephemeral copy first.
+if [[ "${SPIDER_CHECKPOINT_REEXEC:-0}" != "1" ]]; then
+  TMP_CHECKPOINT="/tmp/spider-checkpoint-${GITHUB_RUN_ID:-local}-${RANDOM}.sh"
+  cp "$0" "$TMP_CHECKPOINT"
+  chmod +x "$TMP_CHECKPOINT"
+  SPIDER_CHECKPOINT_REEXEC=1 exec bash "$TMP_CHECKPOINT" "$@"
+fi
+
 STAGE=${1:?stage}
 LANE=${2:?lane}
 EXP_ID=${3:?experiment id}
 MSG=${4:-"SPIDER R2 checkpoint"}
 EXP="research/experiments/$EXP_ID"
+HELPER=${SPIDER_CONTROL_HELPER:-/tmp/spider-control-plane.py}
+ROOT=${GITHUB_WORKSPACE:-$PWD}
+
+[[ -f "$HELPER" ]] || { echo "::error::missing control-plane helper $HELPER"; exit 69; }
 
 paths=()
 case "$STAGE" in
@@ -35,6 +49,12 @@ case "$STAGE" in
     ;;
   *) echo "unknown checkpoint stage: $STAGE" >&2; exit 64 ;;
 esac
+
+# Canonical control files are a live overlay from main, never lane evidence.
+# Restore the lane's own control-plane bytes before staging, then reapply main on exit.
+python "$HELPER" restore --root "$ROOT"
+restage_control() { python "$HELPER" stage --root "$ROOT" >/dev/null 2>&1 || true; }
+trap restage_control EXIT
 
 for p in "${paths[@]}"; do
   git add -u -- "$p" 2>/dev/null || true

@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-33767375933",
+  "lane": "runtime",
+  "github_run_id": "33767375933",
+  "executionEnvironment": {
+    "python_version": "3.12.14",
+    "platform": "linux",
+    "platform_release": "6.5.0-1025-azure",
+    "platform_machine": "x86_64"
+  },
+  "gitCommit": "e7674715899f47efb3e43280a5884b26f1e87a49",
+  "baseSha": "b62a124ebfac4d31e4a105a162371579718d576c",
+  "frozenDesignHashes": {
+    "prereg.md": "271afcfaebf68f11db5b459cf914af07f86fdb151af8641985833da78a375fb7",
+    "request.json": "655f8b7f40f69f7f55ad1411d433bd3eb47b37862604b486bd0246ab586483c5",
+    "spec.json": "a142b96c2b01e47e35faeb7536b95813c9f40449214114601fe41c76df6818c5"
+  },
+  "parentExperiment": {
+    "experiment_id": "EXP-RUNTIME-33528830833",
+    "handoff_sha256": "4b5fb87ad14e0d18e16b8ed6134af6d6140b52df5cdafb207b5a29bf904510f2"
+  },
+  "codePaths": [
+    {
+      "path": "research/experiments/EXP-RUNTIME-33767375933/run_experiment.py",
+      "sha256": "e9818893facfe210b0534512eb03b2e66d20872cb29b8c7bc0e57571b08103c6",
+      "role": "code"
+    }
+  ],
+  "datasets": {
+    "toy_server_states": ["no_auth", "valid_token", "expired_token", "invalid_token", "session_cookie"],
+    "external_endpoint": "httpbin.org/status/{200,401,403}",
+    "reps_per_state": 10,
+    "phase_a_requests": 50,
+    "phase_b_requests": 30
+  },
+  "executionCommands": [
+    "python3 research/experiments/EXP-RUNTIME-33767375933/run_experiment.py"
+  ],
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-RUNTIME-33767375933/result.json",
+      "role": "result"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-33767375933/report.md",
+      "role": "report"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-33767375933/provenance.json",
+      "role": "provenance"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-33767375933/run_experiment.py",
+      "sha256": "e9818893facfe210b0534512eb03b2e66d20872cb29b8c7bc0e57571b08103c6",
+      "role": "code"
+    }
+  ],
+  "randomizationSeeds": {
+    "phase_a": 42,
+    "phase_b": 43
+  },
+  "reproducibilityNotes": [
+    "Fingerprint uses repr(vector) with tuple(sorted(...)) — deterministic within same Python version but Python-version-dependent.",
+    "Server port 18925 with SO_REUSEADDR — may conflict with concurrent runs on same port.",
+    "httpbin.org responses may vary over time (rate limiting, maintenance).",
+    "Jitter is random.uniform(0, 0.2) — non-reproducible without same RNG seed.",
+    "All 50 Phase A requests completed within ~15 seconds (including jitter).",
+    "All 30 Phase B requests completed within ~10 seconds (including jitter)."
+  ]
+}

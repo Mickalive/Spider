@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-33528829431",
+  "lane": "physics",
+  "target_lane": "physics",
+  "next_question": "Can a trajectory-grouped holdout evaluation with richer state representation (DOM/accessibility tree) and semantic actions reveal genuine action-conditioned transition structure on live Web pages with navigational density, replacing the coarse URL+hash representation that produced entropy inversion?",
+  "why_next": "This experiment established synthetic feasibility but four infrastructure defects (in-sample evaluation, invalid bootstrap, non-discriminating positive control, coarse state representation) prevent any conclusion about live Web dynamics. The Physics lane must redesign the measurement substrate before re-testing C-WEB-DYNAMICS. The next experiment must use trajectory-grouped holdout, proper permutation nulls, overlapping-action positive control, and a richer state representation (DOM tree or accessibility tree with element roles) to discriminate action-conditioned structure from state-only or action-only baselines on live pages with sufficient navigational density.",
+  "carry_forward": {
+    "established": [
+      "Synthetic feasibility: With coarse State=URL|structure_hash|element_hash, the harness mechanically captures in-sample (S,A)->S' for a 5-state/9-action deterministic synthetic graph (action_conditioned_accuracy=1.0, H(S'|S,A)=0.0, seed deterministic via np.random.RandomState(42))",
+      "HTTP fetch + HTMLParser can follow links and record transitions on live pages (37 transitions collected from Wikipedia, example.com, httpbin.org/html)",
+      "Validity gates pass narrowly: no exact URL leakage in action.parameters, numpy seeds deterministic, no temporal ordering violations"
+    ],
+    "rejected": [
+      "C-MEAS-VALID for Web not established: in-sample evaluation, invalid bootstrap, coarse state representation, and 12.3% sample size jointly prevent measurement-validity claim",
+      "C-WEB-DYNAMICS not testable from this experiment: entropy inversion (-250%) is state representation artifact, not evidence for or against Web dynamics",
+      "Producer SUPPORTS verdict rejected: audit found in-sample memorization, bootstrap p=0.0 on random null_control, non-discriminating positive control, and HTTP fetch not a browser"
+    ],
+    "unknown": [
+      "Whether richer state representation (DOM/accessibility tree) reveals action-conditioned structure on live Web",
+      "Whether sites with navigational density (e-commerce, news, web apps) support trajectory completion at prereg sample sizes",
+      "Whether trajectory-grouped holdout evaluation changes observed accuracy gaps",
+      "Whether proper permutation nulls (not bootstrap diff-vs-zero) reject the shuffle null on live data",
+      "Whether semantic action selectors (not link indices) capture structure invisible to positional actions"
+    ],
+    "do_not_assume": [
+      "Do not assume the live test entropy inversion (-250%) reflects real Web dynamics — it is a state representation artifact confirmed by audit",
+      "Do not assume the synthetic positive control discriminates (S,A) from A alone — 9 globally unique actions make action_frequency_accuracy=1.0",
+      "Do not assume bootstrap p-values from this experiment are valid — they resample transitions not trajectories and declare significance on random null data",
+      "Do not assume the substrate is a browser — it is HTTP fetch + HTMLParser, no JavaScript execution, no accessibility tree",
+      "Do not assume in-sample accuracies (100% positive, 72.5% null, 100% live) generalize to held-out data — they reflect memorization",
+      "Do not assume C-MEAS-VALID or C-WEB-DYNAMICS have been advanced by this experiment — both remain at prior status"
+    ]
+  },
+  "dependencies": [
+    "research/physics/substrate.py must be rewritten to use trajectory-grouped holdout evaluation (not in-sample fit+evaluate)",
+    "research/physics/run_experiment.py bootstrap must resample trajectories not transitions, with independent RNG per permutation",
+    "Positive control must use overlapping actions across states to discriminate (S,A) from A alone",
+    "State representation must be upgraded to DOM tree or accessibility tree with element roles (prereg Section 2 requirement)",
+    "Live test sites must have navigational density (prereg Section 5: 30 trajectories x 10 steps = 300 transitions)",
+    "Action representation must use semantic selectors, not link indices (prereg Section 3)"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-33528829431/audit.json: required_fixes (7 items), validity_findings, baseline_findings, recomputed_metrics, claim_ceiling",
+    "research/experiments/EXP-PHYSICS-33528829431/result.json: metrics.live_test (37 transitions, 4 trajectories), metrics.positive_control (action_frequency_accuracy=1.0), bootstrap (p=0.0 on null_control)",
+    "research/experiments/EXP-PHYSICS-33528829431/spec.json: measurement_validity (6 criteria), decision_rule, baselines",
+    "research/experiments/EXP-PHYSICS-33528829431/prereg.md: Sections 2 (state repr), 5 (sampling 300 live transitions), 7 (site holdout), 11 (trajectory-grouped bootstrap)",
+    "research/physics/substrate.py:580-654 ValidityGates (too weak), 360-485 BaselineComputers (in-sample)",
+    "research/physics/run_experiment.py:203-254 compute_bootstrap_and_pvalues (invalid procedure)"
+  ],
+  "recommended_action": "Redesign the Physics measurement substrate with four mandatory fixes before re-testing C-WEB-DYNAMICS: (1) implement trajectory-grouped holdout evaluation matching prereg Section 7 site-level holdout; (2) replace bootstrap with trajectory-grouped permutation null with independent RNG; (3) redesign positive control with overlapping actions across states to enable discrimination; (4) upgrade state representation to DOM/accessibility tree and action representation to semantic selectors. Target test sites with navigational density (e-commerce, news, web apps) using a real browser (Playwright) per prereg Section 2. This is an infrastructure revision — do not re-run the same design."
+}

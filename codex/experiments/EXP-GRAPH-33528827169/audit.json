@@ -1,0 +1,229 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-33528827169",
+  "lane": "graph",
+  "status": "FAIL",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Frozen decision rule requires ALL 11 conditions to pass for PARAM-INHERIT-SUBSTRATE-VALID; B_LITERAL_UNSEEN failed (EXPECTED UNKNOWN, OBSERVED EXECUTABLE) so verdict is PARAM-INHERIT-SUBSTRATE-BROKEN — do not weaken prereg after outcome; any retry that claims VALID must first repair kernel or spec.",
+    "Fix or explicitly scope literal-mechanism universal matching: kernel resolve() required_slots = set(parameter_slots) | _template_slots(action_template); for literal mechanism parameter_slots=[] and _template_slots={} => required_slots={} => any(slot not in params for slot in set()) is vacuously False, so literal matches any params for its intent. Either add value-constraint to literal mechanisms or amend spec falsifier #5 and decision rule to acknowledge presence-based matching; cannot claim discrimination without fix.",
+    "Repair verify measurement in run_experiment.py: verify_postconditions() hardcodes observed_state={'status':200} regardless of actual http_status (src kernel.py _matches checks status equality). Verify currently cannot falsify status mismatches and uses list equality for has_keys (order-sensitive, exact match not subset). Make observed_state reflect actual HTTP status and use subset check or explicit key-presence check.",
+    "Add mechanism-competition test: each condition uses an isolated registry (fresh temp file) so literal vs parameterized shadowing is never exercised. Real deployment requires both in same registry; test that parameterized correctly shadows/does not shadow literal when confidence sorting and required_slots interact.",
+    "Scope claim ceiling explicitly to jsonplaceholder substrate: stable REST API, no DOM/auth/session/drift, N=5 unseen ids (2-6), single ${id} slot in URL path, no LLM distillation. No inference to real-web DOM, pagination, cross-task transfer, or freshness."
+  ],
+  "validity_findings": [
+    {
+      "id": "V_LITERAL_UNIVERSAL_MATCH",
+      "severity": "critical",
+      "category": "control_failure_and_falsifier_triggered",
+      "finding": "B_LITERAL_UNSEEN falsifier #5 triggered: literal mechanism returned EXECUTABLE for unseen id=2 with bound_action url https://jsonplaceholder.typicode.com/posts/1 (ignoring params). Root cause confirmed by independent kernel replay and src/spider/kernel.py L104-106: required_slots empty => presence check vacuously passes. Decision rule therefore BROKEN. Producer validity_notes reinterpret as 'spec-kernel design mismatch, not kernel bug' — interpretation, not observation — does not nullify the frozen falsifier.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-33528827169/spec.json#/falsifier",
+        "research/experiments/EXP-GRAPH-33528827169/spec.json#/decision_rule",
+        "research/experiments/EXP-GRAPH-33528827169/result.json#/controls/B_LITERAL_UNSEEN",
+        "research/experiments/EXP-GRAPH-33528827169/raw_results.json#/conditions/2",
+        "src/spider/kernel.py:104-106"
+      ],
+      "observation_vs_interpretation": "Observation: literal-unseen actual_resolution=EXECUTABLE (expected UNKNOWN). Producer interpretation: 'not necessarily a kernel bug' in result.json observations[5-6] is interpretation."
+    },
+    {
+      "id": "V_VERIFY_HARDCODED_STATUS",
+      "severity": "high",
+      "category": "measurement_validity",
+      "finding": "run_experiment.py verify_postconditions() constructs observed_state={'status':200} hardcoded, ignoring http_result['status']. src/spider/kernel.py verify() uses _matches(postconditions, observed_state) which checks status==200 via equality. Therefore verify() cannot fail on non-200 even if HTTP failed; in this run all HTTP were 200 so outcome not changed, but measurement is insensitive to execution failure. Additionally has_keys check is list equality (_matches compares list==list), order-sensitive and exact-match, not subset — brittle to extra keys or reordering.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-33528827169/run_experiment.py:135-140",
+        "src/spider/kernel.py:15-16",
+        "src/spider/kernel.py:125-129",
+        "research/experiments/EXP-GRAPH-33528827169/raw_results.json#/conditions/5/http_status"
+      ],
+      "impact": "Does not invert this run's 5/5 param-unseen verify=True (all returned 200 with exactly [userId,id,title,body]), but invalidates verify as a strong control for future non-200 or schema-varying endpoints."
+    },
+    {
+      "id": "V_PRECONDITIONS_VACUOUS",
+      "severity": "medium",
+      "category": "representation_loss",
+      "finding": "All mechanisms registered with preconditions={}. _matches({}, context) vacuously True for any context. No evidence about precondition discrimination was produced. B_COLD tests empty registry, not precondition filtering. Representation loss acknowledged in spec measurement_validity but not measured.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-33528827169/run_experiment.py:43-77",
+        "research/experiments/EXP-GRAPH-33528827169/spec.json#/measurement_validity",
+        "src/spider/kernel.py:99-100"
+      ]
+    },
+    {
+      "id": "V_SUBSTRATE_SCOPE",
+      "severity": "medium",
+      "category": "generalizability_ceiling",
+      "finding": "Endpoint jsonplaceholder.typicode.com is deterministic, no auth/DOM/session/drift. N=5 unseen deterministic IDs, single slot ${id} in path, no browser. Producer correctly discloses as 'substrate validation, not real-web-complexity claim' (result.json validity_notes[0], report.md Validity Threats). Ceiling must remain substrate-gated; no support for DOM, pagination, C-FRESHNESS, or LLM-driven distillation ('learn on A') half of C-PARAM-INHERIT.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-33528827169/prereg.md#Validity Threats",
+        "research/experiments/EXP-GRAPH-33528827169/spec.json#/measurement_validity",
+        "research/experiments/EXP-GRAPH-33528827169/provenance.json#/datasets"
+      ]
+    },
+    {
+      "id": "V_ISOLATION_NO_COMPETITION",
+      "severity": "medium",
+      "category": "representation_loss",
+      "finding": "Each condition uses create_registry_for_condition() with fresh temp JSONL file containing only the mechanism(s) for that condition. This prevents cross-contamination but also means no condition tests the realistic registry with both literal and parameterized mechanisms coexisting. Confidence sorting and required_slots interaction under competition untested; false-accept risk from literal universal matching would be amplified in shared registry.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-33528827169/run_experiment.py:81-101",
+        "research/experiments/EXP-GRAPH-33528827169/run_experiment.py:143-155"
+      ]
+    },
+    {
+      "id": "V_TYPE_COERCION_UNTTESTED",
+      "severity": "low",
+      "category": "unmeasured_edge",
+      "finding": "Spec prereg notes _bind() full-match '${id}' returns params value type-preserving (int), partial-match 'prefix/${id}/suffix' returns string. All templates here are URL-embedded partial match, so type-preservation path untested — acknowledged in result.json unresolved[2].",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-33528827169/prereg.md#Validity Threats 5",
+        "research/experiments/EXP-GRAPH-33528827169/result.json#/unresolved",
+        "src/spider/kernel.py:35-44"
+      ]
+    }
+  ],
+  "baseline_findings": [
+    {
+      "control_id": "B_COLD",
+      "type": "null",
+      "expected": "UNKNOWN",
+      "observed": "UNKNOWN",
+      "pass": true,
+      "assessment": "Strong null passes. Kernel abstains when registry empty. Recomputed via independent kernel replay: UNKNOWN. Evidence raw_results.json#/conditions/0 actual_resolution UNKNOWN.",
+      "evidence_ref": "research/experiments/EXP-GRAPH-33528827169/raw_results.json#/conditions/0"
+    },
+    {
+      "control_id": "B_LITERAL_ORIG",
+      "type": "positive",
+      "expected": "EXECUTABLE with url https://jsonplaceholder.typicode.com/posts/1",
+      "observed": "EXECUTABLE with url https://jsonplaceholder.typicode.com/posts/1, http_status 200, verify true",
+      "pass": true,
+      "assessment": "Positive control passes and is strong: basic resolution works. Recomputed independently matches.",
+      "evidence_ref": "research/experiments/EXP-GRAPH-33528827169/raw_results.json#/conditions/1"
+    },
+    {
+      "control_id": "B_LITERAL_UNSEEN",
+      "type": "null",
+      "expected": "UNKNOWN",
+      "observed": "EXECUTABLE with bound_action url https://jsonplaceholder.typicode.com/posts/1, http_status 200, verify true",
+      "pass": false,
+      "assessment": "CRITICAL NULL FAILURE. Frozen falsifier #5 explicitly: literal mechanism returning EXECUTABLE for unseen id indicates parameter slot enforcement absent. This is not a measurement error; independent recompute confirms src/spider/kernel.py L104-106 logic yields universal match when required_slots empty. Producer result.json correctly records pass:false, failure_mode literal_mechanism_matched_unseen_resource, but report interpretation minimizes as design clarification. Per frozen decision rule this single failure makes overall verdict BROKEN. Product risk: literal mechanisms are false-accept universal matches for their intent.",
+      "evidence_ref": "research/experiments/EXP-GRAPH-33528827169/raw_results.json#/conditions/2"
+    },
+    {
+      "control_id": "B_MISSING_PARAMS",
+      "type": "null",
+      "expected": "UNKNOWN",
+      "observed": "UNKNOWN",
+      "pass": true,
+      "assessment": "Strong null passes. required_slots={'id'} enforcement works; empty params correctly yields UNKNOWN. Recomputed UNKNOWN.",
+      "evidence_ref": "research/experiments/EXP-GRAPH-33528827169/raw_results.json#/conditions/3"
+    },
+    {
+      "control_id": "B_PARAM_ORIG",
+      "type": "positive",
+      "expected": "EXECUTABLE with url https://jsonplaceholder.typicode.com/posts/1",
+      "observed": "EXECUTABLE with url https://jsonplaceholder.typicode.com/posts/1, http_status 200, verify true",
+      "pass": true,
+      "assessment": "Positive control for parameterized mechanism on seen id passes. Recomputed EXECUTABLE with correct _bind substitution.",
+      "evidence_ref": "research/experiments/EXP-GRAPH-33528827169/raw_results.json#/conditions/4"
+    },
+    {
+      "control_id": "B_PARAM_UNSEEN_1",
+      "type": "experimental",
+      "expected": "EXECUTABLE with url https://jsonplaceholder.typicode.com/posts/2",
+      "observed": "EXECUTABLE with url https://jsonplaceholder.typicode.com/posts/2, http_status 200, verify true",
+      "pass": true,
+      "assessment": "Core parameterized inheritance test passes. Independent _bind recompute yields same URL.",
+      "evidence_ref": "research/experiments/EXP-GRAPH-33528827169/raw_results.json#/conditions/5"
+    },
+    {
+      "control_id": "B_PARAM_UNSEEN_2",
+      "type": "experimental",
+      "expected": "EXECUTABLE with url https://jsonplaceholder.typicode.com/posts/3",
+      "observed": "EXECUTABLE with url https://jsonplaceholder.typicode.com/posts/3, http_status 200, verify true",
+      "pass": true,
+      "assessment": "Pass. Recomputed matches.",
+      "evidence_ref": "research/experiments/EXP-GRAPH-33528827169/raw_results.json#/conditions/6"
+    },
+    {
+      "control_id": "B_PARAM_UNSEEN_3",
+      "type": "experimental",
+      "expected": "EXECUTABLE with url https://jsonplaceholder.typicode.com/posts/4",
+      "observed": "EXECUTABLE with url https://jsonplaceholder.typicode.com/posts/4, http_status 200, verify true",
+      "pass": true,
+      "assessment": "Pass.",
+      "evidence_ref": "research/experiments/EXP-GRAPH-33528827169/raw_results.json#/conditions/7"
+    },
+    {
+      "control_id": "B_PARAM_UNSEEN_4",
+      "type": "experimental",
+      "expected": "EXECUTABLE with url https://jsonplaceholder.typicode.com/posts/5",
+      "observed": "EXECUTABLE with url https://jsonplaceholder.typicode.com/posts/5, http_status 200, verify true",
+      "pass": true,
+      "assessment": "Pass.",
+      "evidence_ref": "research/experiments/EXP-GRAPH-33528827169/raw_results.json#/conditions/8"
+    },
+    {
+      "control_id": "B_PARAM_UNSEEN_5",
+      "type": "experimental",
+      "expected": "EXECUTABLE with url https://jsonplaceholder.typicode.com/posts/6",
+      "observed": "EXECUTABLE with url https://jsonplaceholder.typicode.com/posts/6, http_status 200, verify true",
+      "pass": true,
+      "assessment": "Pass.",
+      "evidence_ref": "research/experiments/EXP-GRAPH-33528827169/raw_results.json#/conditions/9"
+    },
+    {
+      "control_id": "B_GUARD_BLOCKED",
+      "type": "null",
+      "expected": "UNKNOWN",
+      "observed": "UNKNOWN",
+      "pass": true,
+      "assessment": "Strong null passes. applicability_guards={auth_required:true} vs context {auth_required:false} correctly blocks despite params present. Validates guard enforcement independent of binding.",
+      "evidence_ref": "research/experiments/EXP-GRAPH-33528827169/raw_results.json#/conditions/10"
+    }
+  ],
+  "recomputed_metrics": {
+    "total_conditions": 11,
+    "conditions_passing": 10,
+    "conditions_failing": 1,
+    "param_unseen_passing": 5,
+    "param_unseen_failing": 0,
+    "param_unseen_correct_url_rate": 1.0,
+    "param_unseen_http_200_rate": 1.0,
+    "param_unseen_verify_rate": 1.0,
+    "literal_unseen_correct": false,
+    "cold_correct": true,
+    "literal_original_correct": true,
+    "missing_params_correct": true,
+    "param_original_correct": true,
+    "guard_blocked_correct": true,
+    "recompute_method": "Independent kernel replay with src/spider/kernel.py and src/spider/registry.py on temp registries + raw_results.json cross-check; _template_slots and _bind verified; HTTP status/keys taken from raw evidence (network not re-executed for determinism). All 11 condition pass/fail recomputed match result.json metrics exactly.",
+    "recompute_match": true,
+    "raw_evidence_hash_match": "raw_results.json total 11 passing 10 failing 1 matches result.json metrics",
+    "discrepancy": null
+  },
+  "claim_ceiling": "PARAM-INHERIT-SUBSTRATE-BROKEN per frozen decision rule (10/11). Narrow supported ceiling: SpiderKernel resolve()->_bind()->execute->verify pipeline works end-to-end for parameterized mechanism with parameter_slots=['id'] and url template 'https://jsonplaceholder.typicode.com/posts/${id}' on 5 unseen integer ids (2-6) on jsonplaceholder substrate (HTTP 200, JSON keys [userId,id,title,body], verify True). No support for frozen CLAIM C-PARAM-INHERIT at 'Mechanisms parameterize to unseen identifiers' in general: literal mechanisms universally match (B_LITERAL_UNSEEN FAIL), precondition discrimination untested, no competition registry test, no DOM/auth/session/drift, no LLM distillation, N=5 only. Promoting to product requires fixing literal discrimination or scoping decision rule.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-33528827169/request.json",
+    "research/experiments/EXP-GRAPH-33528827169/spec.json",
+    "research/experiments/EXP-GRAPH-33528827169/prereg.md",
+    "research/experiments/EXP-GRAPH-33528827169/freeze.json",
+    "research/experiments/EXP-GRAPH-33528827169/result.json",
+    "research/experiments/EXP-GRAPH-33528827169/report.md",
+    "research/experiments/EXP-GRAPH-33528827169/provenance.json",
+    "research/experiments/EXP-GRAPH-33528827169/raw_results.json",
+    "research/experiments/EXP-GRAPH-33528827169/run_experiment.py",
+    "src/spider/kernel.py",
+    "src/spider/models.py",
+    "src/spider/registry.py"
+  ],
+  "unresolved": [
+    "DIRECTOR decision needed: is literal universal matching intended (presence-based) and spec falsifier #5 wrong, or is kernel bug requiring value-based constraint? Changes whether fix is code or prereg.",
+    "Verify measurement insensitive to status — was not outcome-determinative here but leaves future experiments vulnerable to false verify passes.",
+    "No test of mechanism competition in shared registry (literal+parameterized coexistence) — false-accept amplification unquantified.",
+    "Type-preservation for full-match '${id}' templates untested; list-equality brittleness for has_keys untested with extra/reordered keys.",
+    "No LLM-driven mechanism distillation tested — 'learn on A' half of C-PARAM-INHERIT remains unevidenced in Research 2.0."
+  ]
+}

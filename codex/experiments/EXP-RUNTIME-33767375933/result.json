@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-33767375933",
+  "lane": "runtime",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "phase_a_discrimination": 1.0,
+    "phase_a_intra_match_rate": 1.0,
+    "phase_a_inter_match_rate": 0.0,
+    "phase_a_bootstrap_95ci": [
+      1.0,
+      1.0
+    ],
+    "phase_a_mean_intra_jaccard": 1.0,
+    "phase_a_mean_inter_jaccard": 0.3434061487798568,
+    "phase_a_baselines": {
+      "B-URL-HASH": 0.0,
+      "B-RANDOM": 0.0,
+      "B-TIMING": 0.0,
+      "B-STATUS-ONLY": 0.7,
+      "B-BODY-ONLY": 1.0
+    },
+    "phase_a_null_fp_rate": 0.0,
+    "phase_a_positive_tp_rate": 1.0,
+    "phase_a_drift_jaccards": [
+      0.305,
+      0.3664921465968586
+    ],
+    "phase_a_drift_monotonic": true,
+    "phase_b_discrimination": 1.0,
+    "phase_b_intra_match_rate": 1.0,
+    "phase_b_inter_match_rate": 0.0,
+    "phase_b_bootstrap_95ci": [
+      1.0,
+      1.0
+    ],
+    "phase_b_baselines": {
+      "B-URL-HASH": 1.0,
+      "B-RANDOM": 0.0,
+      "B-TIMING": 0.0,
+      "B-STATUS-ONLY": 1.0,
+      "B-BODY-ONLY": 0.0
+    },
+    "phase_b_error_rate": 0.0
+  },
+  "controls": {
+    "C_NULL_FP_RATE": {
+      "expected": "< 5%",
+      "observed": "0.0%",
+      "pass": true
+    },
+    "C_POSITIVE_TP_RATE": {
+      "expected": "> 95%",
+      "observed": "100.0%",
+      "pass": true
+    },
+    "C_DRIFT_MONOTONIC": {
+      "expected": "monotonic increase, all < 0.5",
+      "observed": "jaccards=[0.305, 0.3664921465968586], all_discriminable=True",
+      "pass": true
+    },
+    "C_BASELINE_SUPERIORITY": {
+      "expected": "substrate > best baseline (1.0000)",
+      "observed": "substrate=1.0000",
+      "pass": true
+    },
+    "C_HELD_OUT": {
+      "expected": "session_cookie novel",
+      "observed": "10/10 novel",
+      "pass": true
+    },
+    "C_PHASE_B_DISCRIMINATION": {
+      "expected": "> 0.5",
+      "observed": "1.000000",
+      "pass": true
+    }
+  },
+  "artifacts": [
+    {"path": "research/experiments/EXP-RUNTIME-33767375933/run_experiment.py", "sha256": "e9818893facfe210b0534512eb03b2e66d20872cb29b8c7bc0e57571b08103c6", "role": "code"}
+  ],
+  "observations": [
+    "Phase A: 5 states x 10 reps = 50 requests completed",
+    "Phase A discrimination score: 1.000000 (threshold: > 0.5)",
+    "Phase A bootstrap 95% CI: [1.000000, 1.000000]",
+    "Phase A null FP rate: 0.0% (threshold: < 5%)",
+    "Phase A positive TP rate: 100.0% (threshold: > 95%)",
+    "Phase B: 3 states x 10 reps = 30 requests completed",
+    "Phase B discrimination score: 1.000000 (threshold: > 0.5)",
+    "Phase B bootstrap 95% CI: [1.000000, 1.000000]",
+    "Phase B error rate: 0.0%"
+  ],
+  "validity_notes": [
+    "Fingerprint uses repr(vector) with tuple(sorted(...)) \u2014 deterministic across processes within same Python version but still Python-version-dependent.",
+    "Date and Server headers excluded from fingerprint vector to prevent spurious variance.",
+    "Jitter 0-200ms injected between requests; timing not included in fingerprint.",
+    "Phase A toy server is still hand-programmed \u2014 discrimination guaranteed by construction.",
+    "Phase B httpbin.org returned 0.0% error rate.",
+    "httpbin.org/status returns minimal body; discrimination primarily from status code.",
+    "Phase B httpbin.org is a testing service, not production auth middleware."
+  ],
+  "unresolved": [
+    "How does fingerprinting perform against production servers with caching, CDN, non-deterministic responses?",
+    "Does body-only or header-only observation suffice on real servers, making full vector unnecessary?",
+    "Can substrate detect continuous session drift as a continuous signal?",
+    "What is the discrimination score with production auth middleware (OAuth, JWT validation)?"
+  ]
+}
