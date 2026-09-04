@@ -7,8 +7,8 @@
   "continue_immediately": false,
   "next_question": "Should the kernel tie-break at equal confidence prefer parameterized mechanisms over literal (kernel code change in resolve()), or should literal mechanisms carry value-based constraints that reject params conflicting with fixed resources, and what is the smallest safe fix that eliminates false accepts without breaking cold/literal-only/param-only baselines?",
   "promotion_ready": false,
-  "consecutive_failures": 7,
-  "updated_at": "2026-09-04T19:58:12.715136+00:00",
+  "consecutive_failures": 8,
+  "updated_at": "2026-09-04T22:22:13.492677+00:00",
   "last_failure_retryable": false,
   "last_handoff_sha256": "ebb3de502513621de55c297a32023f20b6f87739cdf00b4d3db025d00f51187a"
 }
