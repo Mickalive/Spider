@@ -1,17 +1,30 @@
 {
   "experiment_id": "EXP-FRONTIER-33863640568",
   "lane": "frontier",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-WEB-DYNAMICS"],
+  "question": "Can non-permutation deterministic functions (affine maps f(s,a) = (c_a * s + b_a) mod 10 where E_S[f(S,a)] varies across actions) yield detectable lambda-scaling of causal effect heterogeneity, or should the Frontier lane pivot to distributional metrics (TV distance) that are sensitive to permutation structure?",
+  "hypothesis": "When synthetic Web-like transitions use affine deterministic functions where E_S[f(S,a)] differs across actions (breaking the permutation mean-preservation property that degenerated the previous experiment), the causal effect heterogeneity metric Var_a(E_S[do(A=a)]) will scale monotonically with lambda, with aggregate Spearman rho >= 0.65 and p < 0.05. Additionally, total variation distance between full P(S_{t+1}|do(A=a)) distributions will also scale with lambda but will be strictly >= the mean-based metric, since TV captures distributional spread beyond first moments. The metric degeneracy was a property of permutation functions, not of the causal heterogeneity approach itself.",
+  "falsifier": "The causal effect heterogeneity does not increase monotonically with lambda for affine functions (aggregate Spearman rho < 0.65, p > 0.05 one-sided), OR heterogeneity is indistinguishable from zero at lambda=1 (permutation test p > 0.05), OR heterogeneity is significantly non-zero at lambda=0 (permutation test p < 0.05), OR the positive control fails (heterogeneity at lambda=1 < 0.5 across all 3 functions), OR results are inconsistent across functions (significant function x lambda interaction in two-way ANOVA, p < 0.05).",
+  "baselines": [
+    "Causal heterogeneity metric (Var_a(E_S[do(A=a)])) from prior experiment EXP-FRONTIER-33767130362 — direct quantitative comparison of metric values between permutation and affine functions at matched lambda levels",
+    "Permutation null: action labels shuffled across transitions; interventional distributions identical across shuffled actions, yielding heterogeneity near zero at all lambda levels",
+    "Frequency baseline: marginal next-state distribution P(S_{t+1}) provides expected heterogeneity under no action-dependence",
+    "TV distance baseline: total variation between P(S_{t+1}|do(A=a)) and P(S_{t+1}|do(A=a')) for all action pairs, as orthogonal secondary metric"
+  ],
+  "positive_control": "At lambda=1 (fully action-determined transitions with affine functions), causal effect heterogeneity must be >= 0.5 across all 3 functions. With affine functions f(s,a) = (c_a*s + b_a) mod 10 where c_a and b_a vary by action, E_S[f(S,a)] differs across actions, so Var_a(E_S[f(S,a)]) > 0 and heterogeneity = lambda^2 * Var_a > 0 at lambda=1. Expected heterogeneity at lambda=1 is analytically computable from the known function parameters.",
+  "null_control": "At lambda=0 (action-independent transitions), causal effect heterogeneity must be indistinguishable from zero (permutation test p > 0.05). This verifies the pipeline does not detect causal structure when none exists.",
+  "measurement_validity": [
+    "Affine functions are analytically verifiable: E_S[(c_a*s + b_a) mod 10] can be computed in closed form for known c_a, b_a, confirming E_S[f(S,a)] differs across actions",
+    "3 independent affine functions with different coefficient sets test generalizability; each has known Var_a(E_S[f(S,a)]) for ground-truth comparison",
+    "Same lambda-ramping framework as prior experiment (lambda=0: pure noise; lambda=1: fully deterministic), ensuring comparability",
+    "8 lambda levels (0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.7, 1.0) with 10 replications x 500 transitions per cell = 120,000 total transitions",
+    "Frozen random seed (seed=42) for reproducibility; each replication uses seed = func_seed * 10000 + rep_idx * 100 + 42",
+    "No target leakage: interventional distributions computed from DGP, not from held-out predictions",
+    "TV distance metric computed from empirical action-conditional next-state distributions (binned to 10 states), providing orthogonal sensitivity to full distributional differences"
+  ],
+  "decision_rule": "SURVIVES_CURRENT_TEST if ALL of: (1) Aggregate Spearman rho(het_by_lambda, lambda) >= 0.65 with p < 0.05 one-sided; (2) Positive control passes: heterogeneity >= 0.5 at lambda=1 across all functions; (3) Null control passes: heterogeneity not significantly > 0 at lambda=0 (permutation p > 0.05); (4) No significant function x lambda interaction (two-way ANOVA p > 0.05); (5) No pipeline errors. FALSIFIED-IN-SETTING if ANY of: (1) Aggregate Spearman rho < 0.65 or p > 0.05; (2) Positive control fails; (3) Null control fails; (4) Significant function x lambda interaction. MEASUREMENT_INVALID if pipeline errors, degenerate functions (Var_a(E_S[f(S,a)]) = 0 for all actions in any function), or heterogeneity CV across replications > 0.5.",
+  "product_consequence_positive": "Validates causal effect heterogeneity as a detection method for Web-dynamical regime structure. Different Web regions with different action-dependence levels can be detected through direct interventional analysis, informing where SPIDER should invest in action-conditioned causal mechanisms. Also establishes whether TV distance provides additional sensitivity beyond mean-based metrics for future experiments.",
+  "product_consequence_negative": "If affine functions also yield degenerate heterogeneity, the causal heterogeneity metric (Var_a of expected next-states) is fundamentally insensitive regardless of function class. The Frontier lane should pivot to distributional metrics (TV, JSD) or return to prediction-accuracy approaches with better-powered designs. Does NOT falsify C-WEB-DYNAMICS — only this specific detection method.",
+  "estimated_cost": "Very low: pure synthetic data generation, analytical interventional distribution computation, offline variance estimation. ~120,000 transitions total. No browser/network/model calls. No train/test splitting. Computation is O(N) per replication.",
+  "expected_information_gain": "High: This is the direct discriminating test that resolves the open question from EXP-FRONTIER-33767130362. A positive result validates the causal heterogeneity metric and opens the path to real-Web regime detection. A negative result closes the metric approach and pivots the lane to distributional or prediction-accuracy methods. The TV distance secondary measurement provides additional information about whether distributional structure exists even when mean-based structure does not."
 }
