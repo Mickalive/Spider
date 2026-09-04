@@ -683,7 +683,20 @@ def main():
         perm_results, live_info)
     print(f"  OUTCOME: {outcome}")
 
-    status = "COMPLETE" if outcome != "MEASUREMENT_INVALID" else "MEASUREMENT_INVALID"
+    # Map verdict to allowed outcome values per EXPERIMENT_PACKET.md
+    if outcome == "MEASUREMENT_INVALID":
+        status = "MEASUREMENT_INVALID"
+        outcome_mapped = "NOT_APPLICABLE"
+    elif outcome == "SURVIVES_CURRENT_TEST":
+        status = "COMPLETE"
+        outcome_mapped = "SUPPORTS"
+    elif outcome == "FALSIFIED-IN-SETTING":
+        status = "COMPLETE"
+        outcome_mapped = "FALSIFIES"
+    else:
+        status = "COMPLETE"
+        outcome_mapped = "INCONCLUSIVE"
+    outcome = outcome_mapped
 
     # Phase 8: Build result.json
     print("\n--- PHASE 8: WRITE result.json ---")
@@ -957,7 +970,7 @@ Web pages with navigational density?
 
     if live_p_values:
         corrected = bonferroni_correction(live_p_values)
-        report += "\n**Bonferroni correction** (6 comparisons):\n\n"
+        report += f"\n**Bonferroni correction** ({len(live_p_values)} comparisons):\n\n"
         for key, raw_p, corr_p in zip(live_keys, live_raw_p_values, corrected):
             sig = "YES" if corr_p < 0.05 else "NO"
             report += f"- {key}: raw p={raw_p:.4f}, corrected p={corr_p:.4f}, significant={sig}\n"
@@ -1026,12 +1039,12 @@ Web pages with navigational density?
 **{result['outcome']}**
 
 """
-    if result["outcome"] == "SURVIVES_CURRENT_TEST":
+    if result["outcome"] == "SUPPORTS":
         report += ("All validity gates pass. The positive control discriminates. "
                    "At least one live site shows action-conditioned structure above shuffle "
                    "after Bonferroni correction. The corrected substrate is measurement-valid "
                    "and detects genuine action-conditioned transition structure on live Web pages.\n")
-    elif result["outcome"] == "FALSIFIED-IN-SETTING":
+    elif result["outcome"] == "FALSIFIES":
         report += ("The positive control passes and the null control passes, but no live site "
                    "shows action-conditioned structure above shuffle after Bonferroni correction. "
                    "Either (a) the Web genuinely lacks this structure at the tested representation "
@@ -1039,7 +1052,7 @@ Web pages with navigational density?
                    "(b) the sample size is insufficient to detect a small effect. "
                    "This does NOT close the Physics domain — only this specific detection method "
                    "at this representation level.\n")
-    elif result["outcome"] == "MEASUREMENT_INVALID":
+    elif result["outcome"] == "NOT_APPLICABLE":
         report += ("One or more validity gates failed or infrastructure prevented data collection. "
                    "The measurement is invalid. See validity notes above.\n")
 

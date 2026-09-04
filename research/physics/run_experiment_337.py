@@ -121,9 +121,11 @@ def run_live_test(seed: int = 43, n_trajectories: int = 20,
     all_transitions = {}
     collection_info = {}
 
+    # Assign per-site seeds as per frozen spec (Section 5.3)
+    site_seeds = {"wikipedia": 43, "python_docs": 45}
     for site_url, site_name in sites:
         print(f"[live_test] Collecting from {site_name}: {site_url}")
-        collector = LiveWebCollector(seed=seed)
+        collector = LiveWebCollector(seed=site_seeds.get(site_name, seed))
         try:
             transitions = collector.collect_trajectories(
                 start_url=site_url,
@@ -629,11 +631,20 @@ def main():
                                  perm_results, live_info)
     print(f"  OUTCOME: {outcome}")
 
-    # Determine status
+    # Determine status and map verdict to allowed outcome values
     if outcome == "MEASUREMENT_INVALID":
         status = "MEASUREMENT_INVALID"
+        outcome_mapped = "NOT_APPLICABLE"
+    elif outcome == "SURVIVES_CURRENT_TEST":
+        status = "COMPLETE"
+        outcome_mapped = "SUPPORTS"
+    elif outcome == "FALSIFIED-IN-SETTING":
+        status = "COMPLETE"
+        outcome_mapped = "FALSIFIES"
     else:
         status = "COMPLETE"
+        outcome_mapped = "INCONCLUSIVE"
+    outcome = outcome_mapped
 
     # Build controls dict
     controls = {}
