@@ -1,14 +1,14 @@
 {
   "lane": "runtime",
   "human_paused": false,
-  "active_experiment_id": null,
+  "active_experiment_id": "EXP-RUNTIME-33902315583",
   "last_experiment_id": "EXP-RUNTIME-33805283356",
   "last_verdict": "NARROW_SUCCESS",
   "continue_immediately": false,
   "next_question": "On a real Flask server with actual JWT/session middleware (not hand-programmed lookup tables), no synthetic X-Auth-Level/X-Session/X-User/X-Error headers, and identical error response bodies for expired vs invalid tokens, does the HTTP fingerprint substrate maintain discrimination \u2014 and does the full vector (status+body) exceed B-BODY-ONLY when synthetic header tautology is removed and error states share identical bodies?",
   "promotion_ready": false,
   "consecutive_failures": 0,
-  "updated_at": "2026-09-04T14:34:05.450742+00:00",
+  "updated_at": "2026-09-04T17:46:17.283814+00:00",
   "last_failure_retryable": null,
   "last_handoff_sha256": "c0cf725e47b7a5596f4400213a228f41e46321d0ee790280dc1144ec00bb7894"
 }
