@@ -1,0 +1,2336 @@
+{
+  "wikipedia": [
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Special:RecentChanges",
+      "state_key": "d08becc1",
+      "action_type": "click",
+      "action_text": "2027 pretoria capitals season",
+      "next_state_url": "https://en.wikipedia.org/wiki/2027_Pretoria_Capitals_season",
+      "next_state_key": "ec745ffc",
+      "traj": "live_d71ec714_0",
+      "step": 0
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/2027_Pretoria_Capitals_season",
+      "state_key": "ec745ffc",
+      "action_type": "click",
+      "action_text": "article",
+      "next_state_url": "https://en.wikipedia.org/wiki/2027_Pretoria_Capitals_season",
+      "next_state_key": "ec745ffc",
+      "traj": "live_d71ec714_0",
+      "step": 1
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/2027_Pretoria_Capitals_season",
+      "state_key": "ec745ffc",
+      "action_type": "click",
+      "action_text": "https://en.wikipedia.org/w/index.php?title=2027_pretoria_capitals_season&oldid=1373165104",
+      "next_state_url": "https://en.wikipedia.org/w/index.php",
+      "next_state_key": "b58c0469",
+      "traj": "live_d71ec714_0",
+      "step": 2
+    },
+    {
+      "state_url": "https://en.wikipedia.org/w/index.php",
+      "state_key": "b58c0469",
+      "action_type": "click",
+      "action_text": "earth\u2013sun l2",
+      "next_state_url": "https://en.wikipedia.org/wiki/Lagrange_point",
+      "next_state_key": "ead57c92",
+      "traj": "live_d71ec714_0",
+      "step": 3
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Lagrange_point",
+      "state_key": "ead57c92",
+      "action_type": "click",
+      "action_text": "titan",
+      "next_state_url": "https://en.wikipedia.org/wiki/Titan_(moon)",
+      "next_state_key": "90f85a91",
+      "traj": "live_d71ec714_0",
+      "step": 4
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Titan_(moon)",
+      "state_key": "90f85a91",
+      "action_type": "click",
+      "action_text": "scattered disc",
+      "next_state_url": "https://en.wikipedia.org/wiki/Scattered_disc",
+      "next_state_key": "3eaf60c2",
+      "traj": "live_d71ec714_0",
+      "step": 5
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Scattered_disc",
+      "state_key": "3eaf60c2",
+      "action_type": "click",
+      "action_text": "deep ecliptic survey",
+      "next_state_url": "https://en.wikipedia.org/wiki/Deep_Ecliptic_Survey",
+      "next_state_key": "9b5184a1",
+      "traj": "live_d71ec714_0",
+      "step": 6
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Deep_Ecliptic_Survey",
+      "state_key": "9b5184a1",
+      "action_type": "click",
+      "action_text": "square degrees",
+      "next_state_url": "https://en.wikipedia.org/wiki/Square_degree",
+      "next_state_key": "5ddf902d",
+      "traj": "live_d71ec714_0",
+      "step": 7
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/List_of_Singapore_MRT_stations",
+      "state_key": "9a840001",
+      "action_type": "click",
+      "action_text": "newspapersg",
+      "next_state_url": "https://en.wikipedia.org/wiki/NewspaperSG",
+      "next_state_key": "8e165aa9",
+      "traj": "live_d71ec714_1",
+      "step": 0
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/NewspaperSG",
+      "state_key": "8e165aa9",
+      "action_type": "click",
+      "action_text": "historic newspaper digitization projects",
+      "next_state_url": "https://en.wikipedia.org/wiki/Category:Historic_newspaper_digitization_projects",
+      "next_state_key": "02981f12",
+      "traj": "live_d71ec714_1",
+      "step": 1
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Category:Historic_newspaper_digitization_projects",
+      "state_key": "02981f12",
+      "action_type": "click",
+      "action_text": "contents",
+      "next_state_url": "https://en.wikipedia.org/wiki/Wikipedia:Contents",
+      "next_state_key": "8b7925f2",
+      "traj": "live_d71ec714_1",
+      "step": 2
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Wikipedia:Contents",
+      "state_key": "8b7925f2",
+      "action_type": "click",
+      "action_text": "mathematics",
+      "next_state_url": "https://en.wikipedia.org/wiki/Wikipedia:Contents/Mathematics_and_logic",
+      "next_state_key": "302a6580",
+      "traj": "live_d71ec714_1",
+      "step": 3
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Wikipedia:Contents/Mathematics_and_logic",
+      "state_key": "302a6580",
+      "action_type": "click",
+      "action_text": "fundamental theorems",
+      "next_state_url": "https://en.wikipedia.org/wiki/List_of_fundamental_theorems",
+      "next_state_key": "0ab8da2e",
+      "traj": "live_d71ec714_1",
+      "step": 4
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/List_of_fundamental_theorems",
+      "state_key": "0ab8da2e",
+      "action_type": "click",
+      "action_text": "fundamental lemma of the calculus of variations",
+      "next_state_url": "https://en.wikipedia.org/wiki/Fundamental_lemma_of_the_calculus_of_variations",
+      "next_state_key": "4c853d86",
+      "traj": "live_d71ec714_1",
+      "step": 5
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Fundamental_lemma_of_the_calculus_of_variations",
+      "state_key": "4c853d86",
+      "action_type": "click",
+      "action_text": "https://en.wikipedia.org/w/index.php?title=fundamental_lemma_of_the_calculus_of_variations&oldid=135",
+      "next_state_url": "https://en.wikipedia.org/w/index.php",
+      "next_state_key": "b58c0469",
+      "traj": "live_d71ec714_1",
+      "step": 6
+    },
+    {
+      "state_url": "https://en.wikipedia.org/w/index.php",
+      "state_key": "b58c0469",
+      "action_type": "click",
+      "action_text": "archive",
+      "next_state_url": "https://en.wikipedia.org/wiki/Wikipedia:Selected_anniversaries/September",
+      "next_state_key": "e3aeeb53",
+      "traj": "live_d71ec714_1",
+      "step": 7
+    },
+    {
+      "state_url": "https://en.wikipedia.org/w/index.php",
+      "state_key": "b58c0469",
+      "action_type": "click",
+      "action_text": "more current events",
+      "next_state_url": "https://en.wikipedia.org/wiki/Portal:Current_events",
+      "next_state_key": "bd3d3c8b",
+      "traj": "live_d71ec714_2",
+      "step": 0
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Portal:Current_events",
+      "state_key": "bd3d3c8b",
+      "action_type": "click",
+      "action_text": "cartel",
+      "next_state_url": "https://en.wikipedia.org/wiki/Crime_in_Mexico",
+      "next_state_key": "f3faeaaa",
+      "traj": "live_d71ec714_2",
+      "step": 1
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Crime_in_Mexico",
+      "state_key": "f3faeaaa",
+      "action_type": "click",
+      "action_text": "francisco arratia saldierna",
+      "next_state_url": "https://en.wikipedia.org/wiki/Francisco_Arratia",
+      "next_state_key": "723f9807",
+      "traj": "live_d71ec714_2",
+      "step": 2
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Francisco_Arratia",
+      "state_key": "723f9807",
+      "action_type": "click",
+      "action_text": "permanent link",
+      "next_state_url": "https://en.wikipedia.org/w/index.php",
+      "next_state_key": "b58c0469",
+      "traj": "live_d71ec714_2",
+      "step": 3
+    },
+    {
+      "state_url": "https://en.wikipedia.org/w/index.php",
+      "state_key": "b58c0469",
+      "action_type": "click",
+      "action_text": "related changes",
+      "next_state_url": "https://en.wikipedia.org/wiki/Special:RecentChangesLinked/Main_Page",
+      "next_state_key": "4c6329fc",
+      "traj": "live_d71ec714_2",
+      "step": 4
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Special:RecentChangesLinked/Main_Page",
+      "state_key": "4c6329fc",
+      "action_type": "click",
+      "action_text": "hist",
+      "next_state_url": "https://en.wikipedia.org/w/index.php",
+      "next_state_key": "b58c0469",
+      "traj": "live_d71ec714_2",
+      "step": 5
+    },
+    {
+      "state_url": "https://en.wikipedia.org/w/index.php",
+      "state_key": "b58c0469",
+      "action_type": "click",
+      "action_text": "cite this page",
+      "next_state_url": "https://en.wikipedia.org/w/index.php",
+      "next_state_key": "b58c0469",
+      "traj": "live_d71ec714_2",
+      "step": 6
+    },
+    {
+      "state_url": "https://en.wikipedia.org/w/index.php",
+      "state_key": "b58c0469",
+      "action_type": "click",
+      "action_text": "the military junta in niger",
+      "next_state_url": "https://en.wikipedia.org/wiki/National_Council_for_the_Safeguard_of_the_Homeland",
+      "next_state_key": "555b9065",
+      "traj": "live_d71ec714_2",
+      "step": 7
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Special:Statistics",
+      "state_key": "76681b18",
+      "action_type": "click",
+      "action_text": "",
+      "next_state_url": "https://en.wikipedia.org/wiki/Main_Page",
+      "next_state_key": "35f1d102",
+      "traj": "live_d71ec714_3",
+      "step": 0
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Main_Page",
+      "state_key": "35f1d102",
+      "action_type": "click",
+      "action_text": "english",
+      "next_state_url": "https://en.wikipedia.org/wiki/English_language",
+      "next_state_key": "49462043",
+      "traj": "live_d71ec714_3",
+      "step": 1
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/English_language",
+      "state_key": "49462043",
+      "action_type": "click",
+      "action_text": "978-0-521-65236-0",
+      "next_state_url": "https://en.wikipedia.org/wiki/Special:BookSources/978-0-521-65236-0",
+      "next_state_key": "f82c11b7",
+      "traj": "live_d71ec714_3",
+      "step": 2
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Special:BookSources/978-0-521-65236-0",
+      "state_key": "f82c11b7",
+      "action_type": "click",
+      "action_text": "university of york",
+      "next_state_url": "https://en.wikipedia.org/wiki/University_of_York",
+      "next_state_key": "4badd897",
+      "traj": "live_d71ec714_3",
+      "step": 3
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/University_of_York",
+      "state_key": "4badd897",
+      "action_type": "click",
+      "action_text": "lord james",
+      "next_state_url": "https://en.wikipedia.org/wiki/Eric_James,_Baron_James_of_Rusholme",
+      "next_state_key": "06b6126c",
+      "traj": "live_d71ec714_3",
+      "step": 4
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Eric_James,_Baron_James_of_Rusholme",
+      "state_key": "06b6126c",
+      "action_type": "click",
+      "action_text": "knights bachelor",
+      "next_state_url": "https://en.wikipedia.org/wiki/Category:Knights_Bachelor",
+      "next_state_key": "f9db57d6",
+      "traj": "live_d71ec714_3",
+      "step": 5
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Category:Knights_Bachelor",
+      "state_key": "f9db57d6",
+      "action_type": "click",
+      "action_text": "ya",
+      "next_state_url": "https://en.wikipedia.org/wiki/Category:Knights_Bachelor",
+      "next_state_key": "f9db57d6",
+      "traj": "live_d71ec714_3",
+      "step": 6
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Category:Knights_Bachelor",
+      "state_key": "f9db57d6",
+      "action_type": "click",
+      "action_text": "hugh allen (conductor)",
+      "next_state_url": "https://en.wikipedia.org/wiki/Hugh_Allen_(conductor)",
+      "next_state_key": "f0344901",
+      "traj": "live_d71ec714_3",
+      "step": 7
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/1995",
+      "state_key": "3ba7102e",
+      "action_type": "click",
+      "action_text": "iceland",
+      "next_state_url": "https://en.wikipedia.org/wiki/Iceland",
+      "next_state_key": "509dccb9",
+      "traj": "live_d71ec714_4",
+      "step": 0
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Iceland",
+      "state_key": "509dccb9",
+      "action_type": "click",
+      "action_text": "doi",
+      "next_state_url": "https://en.wikipedia.org/wiki/Doi_(identifier)",
+      "next_state_key": "5ee4ce4f",
+      "traj": "live_d71ec714_4",
+      "step": 1
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Doi_(identifier)",
+      "state_key": "5ee4ce4f",
+      "action_type": "click",
+      "action_text": "legal entity identifier",
+      "next_state_url": "https://en.wikipedia.org/wiki/Legal_Entity_Identifier",
+      "next_state_key": "a24a1425",
+      "traj": "live_d71ec714_4",
+      "step": 2
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Legal_Entity_Identifier",
+      "state_key": "a24a1425",
+      "action_type": "click",
+      "action_text": "15288",
+      "next_state_url": "https://en.wikipedia.org/wiki/ISO/IEC_15288",
+      "next_state_key": "cce94cc0",
+      "traj": "live_d71ec714_4",
+      "step": 3
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/ISO/IEC_15288",
+      "state_key": "cce94cc0",
+      "action_type": "click",
+      "action_text": "acquisition process",
+      "next_state_url": "https://en.wikipedia.org/wiki/Procurement",
+      "next_state_key": "86cf9cbe",
+      "traj": "live_d71ec714_4",
+      "step": 4
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Procurement",
+      "state_key": "86cf9cbe",
+      "action_type": "click",
+      "action_text": "view history",
+      "next_state_url": "https://en.wikipedia.org/w/index.php",
+      "next_state_key": "b58c0469",
+      "traj": "live_d71ec714_4",
+      "step": 5
+    },
+    {
+      "state_url": "https://en.wikipedia.org/w/index.php",
+      "state_key": "b58c0469",
+      "action_type": "click",
+      "action_text": "film colorization",
+      "next_state_url": "https://en.wikipedia.org/wiki/Film_colorization",
+      "next_state_key": "af8b876f",
+      "traj": "live_d71ec714_4",
+      "step": 6
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Film_colorization",
+      "state_key": "af8b876f",
+      "action_type": "click",
+      "action_text": "cite this page",
+      "next_state_url": "https://en.wikipedia.org/w/index.php",
+      "next_state_key": "b58c0469",
+      "traj": "live_d71ec714_4",
+      "step": 7
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Mawson_Peak",
+      "state_key": "2bf30f1a",
+      "action_type": "click",
+      "action_text": "log in",
+      "next_state_url": "https://en.wikipedia.org/w/index.php",
+      "next_state_key": "b58c0469",
+      "traj": "live_d71ec714_5",
+      "step": 0
+    },
+    {
+      "state_url": "https://en.wikipedia.org/w/index.php",
+      "state_key": "b58c0469",
+      "action_type": "click",
+      "action_text": "",
+      "next_state_url": "https://en.wikipedia.org/wiki/File:Heard_Island_(cropped).jpg",
+      "next_state_key": "c677e621",
+      "traj": "live_d71ec714_5",
+      "step": 1
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/File:Heard_Island_(cropped).jpg",
+      "state_key": "c677e621",
+      "action_type": "click",
+      "action_text": "user:ral315/main page",
+      "next_state_url": "https://en.wikipedia.org/wiki/User:Ral315/Main_Page",
+      "next_state_key": "f6c129fd",
+      "traj": "live_d71ec714_5",
+      "step": 2
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/User:Ral315/Main_Page",
+      "state_key": "f6c129fd",
+      "action_type": "click",
+      "action_text": "kerguelen plateau",
+      "next_state_url": "https://en.wikipedia.org/wiki/Kerguelen_Plateau",
+      "next_state_key": "61a74f38",
+      "traj": "live_d71ec714_5",
+      "step": 3
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Kerguelen_Plateau",
+      "state_key": "61a74f38",
+      "action_type": "click",
+      "action_text": "gorda ridge",
+      "next_state_url": "https://en.wikipedia.org/wiki/Gorda_Ridge",
+      "next_state_key": "b35aff2d",
+      "traj": "live_d71ec714_5",
+      "step": 4
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Gorda_Ridge",
+      "state_key": "b35aff2d",
+      "action_type": "click",
+      "action_text": "talk",
+      "next_state_url": "https://en.wikipedia.org/wiki/Talk:Gorda_Ridge",
+      "next_state_key": "c72555e7",
+      "traj": "live_d71ec714_5",
+      "step": 5
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Talk:Gorda_Ridge",
+      "state_key": "c72555e7",
+      "action_type": "click",
+      "action_text": "oregon portal",
+      "next_state_url": "https://en.wikipedia.org/wiki/Portal:Oregon",
+      "next_state_key": "29f557d0",
+      "traj": "live_d71ec714_5",
+      "step": 6
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Portal:Oregon",
+      "state_key": "29f557d0",
+      "action_type": "click",
+      "action_text": "",
+      "next_state_url": "https://en.wikipedia.org/wiki/File:Oregon_state_coat_of_arms_(illustrated,_1876).jpg",
+      "next_state_key": "2e17620e",
+      "traj": "live_d71ec714_5",
+      "step": 7
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Special:WhatLinksHere/Main_Page",
+      "state_key": "846f5401",
+      "action_type": "click",
+      "action_text": "edit",
+      "next_state_url": "https://en.wikipedia.org/w/index.php",
+      "next_state_key": "b58c0469",
+      "traj": "live_d71ec714_6",
+      "step": 0
+    },
+    {
+      "state_url": "https://en.wikipedia.org/w/index.php",
+      "state_key": "b58c0469",
+      "action_type": "click",
+      "action_text": "centre culturel international de cerisy-la-salle",
+      "next_state_url": "https://en.wikipedia.org/wiki/Centre_culturel_international_de_Cerisy-la-Salle",
+      "next_state_key": "68686672",
+      "traj": "live_d71ec714_6",
+      "step": 1
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Centre_culturel_international_de_Cerisy-la-Salle",
+      "state_key": "68686672",
+      "action_type": "click",
+      "action_text": "creative commons attribution-sharealike 4.0 license",
+      "next_state_url": "https://en.wikipedia.org/wiki/Wikipedia:Text_of_the_Creative_Commons_Attribution-ShareAlike_4.0_International_License",
+      "next_state_key": "9784230c",
+      "traj": "live_d71ec714_6",
+      "step": 2
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Wikipedia:Text_of_the_Creative_Commons_Attribution-ShareAlike_4.0_International_License",
+      "state_key": "9784230c",
+      "action_type": "click",
+      "action_text": "learn to edit",
+      "next_state_url": "https://en.wikipedia.org/wiki/Help:Introduction",
+      "next_state_key": "d0ddfa0e",
+      "traj": "live_d71ec714_6",
+      "step": 3
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Help:Introduction",
+      "state_key": "d0ddfa0e",
+      "action_type": "click",
+      "action_text": "",
+      "next_state_url": "https://en.wikipedia.org/wiki/Main_Page",
+      "next_state_key": "35f1d102",
+      "traj": "live_d71ec714_6",
+      "step": 4
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Main_Page",
+      "state_key": "35f1d102",
+      "action_type": "click",
+      "action_text": "sub-saharan africa",
+      "next_state_url": "https://en.wikipedia.org/wiki/Sub-Saharan_Africa",
+      "next_state_key": "e10e8a4e",
+      "traj": "live_d71ec714_6",
+      "step": 5
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Sub-Saharan_Africa",
+      "state_key": "e10e8a4e",
+      "action_type": "click",
+      "action_text": "rift valley lakes",
+      "next_state_url": "https://en.wikipedia.org/wiki/Rift_Valley_lakes",
+      "next_state_key": "4b8cf5e7",
+      "traj": "live_d71ec714_6",
+      "step": 6
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Rift_Valley_lakes",
+      "state_key": "4b8cf5e7",
+      "action_type": "click",
+      "action_text": "lakes of the great rift valley",
+      "next_state_url": "https://en.wikipedia.org/wiki/Category:Lakes_of_the_Great_Rift_Valley",
+      "next_state_key": "e7a0c08f",
+      "traj": "live_d71ec714_6",
+      "step": 7
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/File:Wikivoyage-Logo-v3-icon.svg",
+      "state_key": "43c2e302",
+      "action_type": "click",
+      "action_text": "andalusia",
+      "next_state_url": "https://en.wikipedia.org/wiki/Andalusia",
+      "next_state_key": "08695fd8",
+      "traj": "live_d71ec714_7",
+      "step": 0
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Andalusia",
+      "state_key": "08695fd8",
+      "action_type": "click",
+      "action_text": "emilio prados",
+      "next_state_url": "https://en.wikipedia.org/wiki/Emilio_Prados",
+      "next_state_key": "ad79096d",
+      "traj": "live_d71ec714_7",
+      "step": 1
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Emilio_Prados",
+      "state_key": "ad79096d",
+      "action_type": "click",
+      "action_text": "jorge guillen",
+      "next_state_url": "https://en.wikipedia.org/wiki/Jorge_Guillen",
+      "next_state_key": "184443b1",
+      "traj": "live_d71ec714_7",
+      "step": 2
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Jorge_Guillen",
+      "state_key": "184443b1",
+      "action_type": "click",
+      "action_text": "cristina peri rossi",
+      "next_state_url": "https://en.wikipedia.org/wiki/Cristina_Peri_Rossi",
+      "next_state_key": "98335b1a",
+      "traj": "live_d71ec714_7",
+      "step": 3
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Cristina_Peri_Rossi",
+      "state_key": "98335b1a",
+      "action_type": "click",
+      "action_text": "uruguayan",
+      "next_state_url": "https://en.wikipedia.org/wiki/Uruguay",
+      "next_state_key": "e3303e03",
+      "traj": "live_d71ec714_7",
+      "step": 4
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Uruguay",
+      "state_key": "e3303e03",
+      "action_type": "click",
+      "action_text": "tallest building in latin america",
+      "next_state_url": "https://en.wikipedia.org/wiki/List_of_tallest_buildings_in_Latin_America",
+      "next_state_key": "45bf0a3b",
+      "traj": "live_d71ec714_7",
+      "step": 5
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/List_of_tallest_buildings_in_Latin_America",
+      "state_key": "45bf0a3b",
+      "action_type": "click",
+      "action_text": "panama city",
+      "next_state_url": "https://en.wikipedia.org/wiki/Panama_City",
+      "next_state_key": "e2059db2",
+      "traj": "live_d71ec714_7",
+      "step": 6
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Panama_City",
+      "state_key": "e2059db2",
+      "action_type": "click",
+      "action_text": "uber",
+      "next_state_url": "https://en.wikipedia.org/wiki/Uber",
+      "next_state_key": "42008781",
+      "traj": "live_d71ec714_7",
+      "step": 7
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Main_Page",
+      "state_key": "35f1d102",
+      "action_type": "click",
+      "action_text": "latin songwriters hall of fame",
+      "next_state_url": "https://en.wikipedia.org/wiki/Latin_Songwriters_Hall_of_Fame",
+      "next_state_key": "79296ae8",
+      "traj": "live_d71ec714_8",
+      "step": 0
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Latin_Songwriters_Hall_of_Fame",
+      "state_key": "79296ae8",
+      "action_type": "click",
+      "action_text": "sergio george",
+      "next_state_url": "https://en.wikipedia.org/wiki/Sergio_George",
+      "next_state_key": "08c528db",
+      "traj": "live_d71ec714_8",
+      "step": 1
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Sergio_George",
+      "state_key": "08c528db",
+      "action_type": "click",
+      "action_text": "la india",
+      "next_state_url": "https://en.wikipedia.org/wiki/La_India",
+      "next_state_key": "9de0fd3d",
+      "traj": "live_d71ec714_8",
+      "step": 2
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/La_India",
+      "state_key": "9de0fd3d",
+      "action_type": "click",
+      "action_text": "kevin ceballo",
+      "next_state_url": "https://en.wikipedia.org/wiki/Kevin_Ceballo",
+      "next_state_key": "e605d811",
+      "traj": "live_d71ec714_8",
+      "step": 3
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Kevin_Ceballo",
+      "state_key": "e605d811",
+      "action_type": "click",
+      "action_text": "1977 births",
+      "next_state_url": "https://en.wikipedia.org/wiki/Category:1977_births",
+      "next_state_key": "a695a4b3",
+      "traj": "live_d71ec714_8",
+      "step": 4
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Category:1977_births",
+      "state_key": "a695a4b3",
+      "action_type": "click",
+      "action_text": "sergei abrosimov",
+      "next_state_url": "https://en.wikipedia.org/wiki/Sergei_Abrosimov",
+      "next_state_key": "bdb652b6",
+      "traj": "live_d71ec714_8",
+      "step": 5
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Sergei_Abrosimov",
+      "state_key": "bdb652b6",
+      "action_type": "click",
+      "action_text": "recent changes",
+      "next_state_url": "https://en.wikipedia.org/wiki/Special:RecentChanges",
+      "next_state_key": "d983ffc6",
+      "traj": "live_d71ec714_8",
+      "step": 6
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Special:RecentChanges",
+      "state_key": "d983ffc6",
+      "action_type": "click",
+      "action_text": "hist",
+      "next_state_url": "https://en.wikipedia.org/w/index.php",
+      "next_state_key": "b58c0469",
+      "traj": "live_d71ec714_8",
+      "step": 7
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Wikipedia:Featured_pictures",
+      "state_key": "7d11fe1b",
+      "action_type": "click",
+      "action_text": "permanent link",
+      "next_state_url": "https://en.wikipedia.org/w/index.php",
+      "next_state_key": "b58c0469",
+      "traj": "live_d71ec714_9",
+      "step": 0
+    },
+    {
+      "state_url": "https://en.wikipedia.org/w/index.php",
+      "state_key": "b58c0469",
+      "action_type": "click",
+      "action_text": "charolais",
+      "next_state_url": "https://en.wikipedia.org/wiki/Charolais_(cheese)",
+      "next_state_key": "e66e53ab",
+      "traj": "live_d71ec714_9",
+      "step": 1
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Charolais_(cheese)",
+      "state_key": "e66e53ab",
+      "action_type": "click",
+      "action_text": "https://en.wikipedia.org/w/index.php?title=charolais_(cheese)&oldid=1373125422",
+      "next_state_url": "https://en.wikipedia.org/w/index.php",
+      "next_state_key": "b58c0469",
+      "traj": "live_d71ec714_9",
+      "step": 2
+    },
+    {
+      "state_url": "https://en.wikipedia.org/w/index.php",
+      "state_key": "b58c0469",
+      "action_type": "click",
+      "action_text": "",
+      "next_state_url": "https://en.wikipedia.org/wiki/File:Wiktionary-logo-en-v2.svg",
+      "next_state_key": "0a26a517",
+      "traj": "live_d71ec714_9",
+      "step": 3
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/File:Wiktionary-logo-en-v2.svg",
+      "state_key": "0a26a517",
+      "action_type": "click",
+      "action_text": "andorra",
+      "next_state_url": "https://en.wikipedia.org/wiki/Andorra",
+      "next_state_key": "5835d826",
+      "traj": "live_d71ec714_9",
+      "step": 4
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Andorra",
+      "state_key": "5835d826",
+      "action_type": "click",
+      "action_text": "seychelles",
+      "next_state_url": "https://en.wikipedia.org/wiki/Seychelles",
+      "next_state_key": "453274f7",
+      "traj": "live_d71ec714_9",
+      "step": 5
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Seychelles",
+      "state_key": "453274f7",
+      "action_type": "click",
+      "action_text": "kenya",
+      "next_state_url": "https://en.wikipedia.org/wiki/Kenya",
+      "next_state_key": "e2da8109",
+      "traj": "live_d71ec714_9",
+      "step": 6
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Kenya",
+      "state_key": "e2da8109",
+      "action_type": "click",
+      "action_text": "/\u02c8k\u025bnj\u0259/",
+      "next_state_url": "https://en.wikipedia.org/wiki/Help:IPA/English",
+      "next_state_key": "efe98d1c",
+      "traj": "live_d71ec714_9",
+      "step": 7
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/1666",
+      "state_key": "7f3155d7",
+      "action_type": "click",
+      "action_text": "1588",
+      "next_state_url": "https://en.wikipedia.org/wiki/1588",
+      "next_state_key": "1bbcb7d4",
+      "traj": "live_d71ec714_10",
+      "step": 0
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/1588",
+      "state_key": "1bbcb7d4",
+      "action_type": "click",
+      "action_text": "ab urbe condita",
+      "next_state_url": "https://en.wikipedia.org/wiki/Ab_urbe_condita",
+      "next_state_key": "2893ceaa",
+      "traj": "live_d71ec714_10",
+      "step": 1
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Ab_urbe_condita",
+      "state_key": "2893ceaa",
+      "action_type": "click",
+      "action_text": "calendar",
+      "next_state_url": "https://en.wikipedia.org/wiki/Roman_calendar",
+      "next_state_key": "2252d41f",
+      "traj": "live_d71ec714_10",
+      "step": 2
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Roman_calendar",
+      "state_key": "2252d41f",
+      "action_type": "click",
+      "action_text": "mensis september",
+      "next_state_url": "https://en.wikipedia.org/wiki/September_(Roman_month)",
+      "next_state_key": "19252b7b",
+      "traj": "live_d71ec714_10",
+      "step": 3
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/September_(Roman_month)",
+      "state_key": "19252b7b",
+      "action_type": "click",
+      "action_text": "roman emperor",
+      "next_state_url": "https://en.wikipedia.org/wiki/Roman_emperor",
+      "next_state_key": "7cd66df6",
+      "traj": "live_d71ec714_10",
+      "step": 4
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Roman_emperor",
+      "state_key": "7cd66df6",
+      "action_type": "click",
+      "action_text": "assembly",
+      "next_state_url": "https://en.wikipedia.org/wiki/Tribal_assembly",
+      "next_state_key": "556c884e",
+      "traj": "live_d71ec714_10",
+      "step": 5
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Tribal_assembly",
+      "state_key": "556c884e",
+      "action_type": "click",
+      "action_text": "edit",
+      "next_state_url": "https://en.wikipedia.org/w/index.php",
+      "next_state_key": "b58c0469",
+      "traj": "live_d71ec714_10",
+      "step": 6
+    },
+    {
+      "state_url": "https://en.wikipedia.org/w/index.php",
+      "state_key": "b58c0469",
+      "action_type": "click",
+      "action_text": "m\u00e9li\u00e8s",
+      "next_state_url": "https://en.wikipedia.org/wiki/Georges_M\u00e9li\u00e8s",
+      "next_state_key": "8f425a76",
+      "traj": "live_d71ec714_10",
+      "step": 7
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Equality_Act_2010",
+      "state_key": "2937f289",
+      "action_type": "click",
+      "action_text": "manchester",
+      "next_state_url": "https://en.wikipedia.org/wiki/Timeline_of_LGBT_history_in_Manchester",
+      "next_state_key": "31753afe",
+      "traj": "live_d71ec714_11",
+      "step": 0
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Timeline_of_LGBT_history_in_Manchester",
+      "state_key": "31753afe",
+      "action_type": "click",
+      "action_text": "homosexual offences (northern ireland) order 1982",
+      "next_state_url": "https://en.wikipedia.org/wiki/Homosexual_Offences_(Northern_Ireland)_Order_1982",
+      "next_state_key": "542ba47c",
+      "traj": "live_d71ec714_11",
+      "step": 1
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Homosexual_Offences_(Northern_Ireland)_Order_1982",
+      "state_key": "542ba47c",
+      "action_type": "click",
+      "action_text": "1914",
+      "next_state_url": "https://en.wikipedia.org/wiki/List_of_acts_of_the_Parliament_of_the_United_Kingdom_from_1914",
+      "next_state_key": "d8096c7b",
+      "traj": "live_d71ec714_11",
+      "step": 2
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/List_of_acts_of_the_Parliament_of_the_United_Kingdom_from_1914",
+      "state_key": "d8096c7b",
+      "action_type": "click",
+      "action_text": "1740",
+      "next_state_url": "https://en.wikipedia.org/wiki/List_of_acts_of_the_Parliament_of_Great_Britain_from_1740",
+      "next_state_key": "a53d5330",
+      "traj": "live_d71ec714_11",
+      "step": 3
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/List_of_acts_of_the_Parliament_of_Great_Britain_from_1740",
+      "state_key": "a53d5330",
+      "action_type": "click",
+      "action_text": "7",
+      "next_state_url": "https://en.wikipedia.org/wiki/List_of_acts_of_the_7th_session_of_the_5th_Parliament_of_Great_Britain",
+      "next_state_key": "b5218bf3",
+      "traj": "live_d71ec714_11",
+      "step": 4
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/List_of_acts_of_the_7th_session_of_the_5th_Parliament_of_Great_Britain",
+      "state_key": "b5218bf3",
+      "action_type": "click",
+      "action_text": "1434",
+      "next_state_url": "https://en.wikipedia.org/wiki/List_of_acts_of_the_Parliament_of_Scotland_from_1434",
+      "next_state_key": "4f66ab1b",
+      "traj": "live_d71ec714_11",
+      "step": 5
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/List_of_acts_of_the_Parliament_of_Scotland_from_1434",
+      "state_key": "4f66ab1b",
+      "action_type": "click",
+      "action_text": "1523",
+      "next_state_url": "https://en.wikipedia.org/wiki/List_of_acts_of_the_Parliament_of_England_from_1523",
+      "next_state_key": "aa8573b0",
+      "traj": "live_d71ec714_11",
+      "step": 6
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/List_of_acts_of_the_Parliament_of_England_from_1523",
+      "state_key": "aa8573b0",
+      "action_type": "click",
+      "action_text": "1698",
+      "next_state_url": "https://en.wikipedia.org/wiki/List_of_acts_of_the_Parliament_of_England_from_1698",
+      "next_state_key": "86d9c7ef",
+      "traj": "live_d71ec714_11",
+      "step": 7
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Main_Page",
+      "state_key": "35f1d102",
+      "action_type": "click",
+      "action_text": "related changes",
+      "next_state_url": "https://en.wikipedia.org/wiki/Special:RecentChangesLinked/Main_Page",
+      "next_state_key": "4c6329fc",
+      "traj": "live_d71ec714_12",
+      "step": 0
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Special:RecentChangesLinked/Main_Page",
+      "state_key": "4c6329fc",
+      "action_type": "click",
+      "action_text": "hist",
+      "next_state_url": "https://en.wikipedia.org/w/index.php",
+      "next_state_key": "b58c0469",
+      "traj": "live_d71ec714_12",
+      "step": 1
+    },
+    {
+      "state_url": "https://en.wikipedia.org/w/index.php",
+      "state_key": "b58c0469",
+      "action_type": "click",
+      "action_text": "cite this page",
+      "next_state_url": "https://en.wikipedia.org/w/index.php",
+      "next_state_key": "b58c0469",
+      "traj": "live_d71ec714_12",
+      "step": 2
+    },
+    {
+      "state_url": "https://en.wikipedia.org/w/index.php",
+      "state_key": "b58c0469",
+      "action_type": "click",
+      "action_text": "get shortened url",
+      "next_state_url": "https://en.wikipedia.org/w/index.php",
+      "next_state_key": "b58c0469",
+      "traj": "live_d71ec714_12",
+      "step": 3
+    },
+    {
+      "state_url": "https://en.wikipedia.org/w/index.php",
+      "state_key": "b58c0469",
+      "action_type": "click",
+      "action_text": "https://en.wikipedia.org/w/index.php?title=main_page&oldid=1358980925",
+      "next_state_url": "https://en.wikipedia.org/w/index.php",
+      "next_state_key": "b58c0469",
+      "traj": "live_d71ec714_12",
+      "step": 4
+    },
+    {
+      "state_url": "https://en.wikipedia.org/w/index.php",
+      "state_key": "b58c0469",
+      "action_type": "click",
+      "action_text": "about wikipedia",
+      "next_state_url": "https://en.wikipedia.org/wiki/Wikipedia:About",
+      "next_state_key": "f5bfcec8",
+      "traj": "live_d71ec714_12",
+      "step": 5
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Wikipedia:About",
+      "state_key": "f5bfcec8",
+      "action_type": "click",
+      "action_text": "faq",
+      "next_state_url": "https://en.wikipedia.org/wiki/Wikipedia:Wikipedia_Signpost/2013-04-01/WikiProject_report",
+      "next_state_key": "c2ef5263",
+      "traj": "live_d71ec714_12",
+      "step": 6
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Wikipedia:Wikipedia_Signpost/2013-04-01/WikiProject_report",
+      "state_key": "c2ef5263",
+      "action_type": "click",
+      "action_text": "page information",
+      "next_state_url": "https://en.wikipedia.org/w/index.php",
+      "next_state_key": "b58c0469",
+      "traj": "live_d71ec714_12",
+      "step": 7
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/File:Wikispecies-logo.svg",
+      "state_key": "b7eed94c",
+      "action_type": "click",
+      "action_text": "more global usage",
+      "next_state_url": "https://en.wikipedia.org/wiki/Special:GlobalUsage/Wikispecies-logo.svg",
+      "next_state_key": "fe25c823",
+      "traj": "live_d71ec714_13",
+      "step": 0
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Special:GlobalUsage/Wikispecies-logo.svg",
+      "state_key": "fe25c823",
+      "action_type": "click",
+      "action_text": "https://en.wikipedia.org/wiki/special:globalusage/wikispecies-logo.svg",
+      "next_state_url": "https://en.wikipedia.org/wiki/Special:GlobalUsage/Wikispecies-logo.svg",
+      "next_state_key": "fe25c823",
+      "traj": "live_d71ec714_13",
+      "step": 1
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Special:GlobalUsage/Wikispecies-logo.svg",
+      "state_key": "fe25c823",
+      "action_type": "click",
+      "action_text": "create account",
+      "next_state_url": "https://en.wikipedia.org/w/index.php",
+      "next_state_key": "b58c0469",
+      "traj": "live_d71ec714_13",
+      "step": 2
+    },
+    {
+      "state_url": "https://en.wikipedia.org/w/index.php",
+      "state_key": "b58c0469",
+      "action_type": "click",
+      "action_text": "mobile view",
+      "next_state_url": "https://en.wikipedia.org/w/index.php",
+      "next_state_key": "b58c0469",
+      "traj": "live_d71ec714_13",
+      "step": 3
+    },
+    {
+      "state_url": "https://en.wikipedia.org/w/index.php",
+      "state_key": "b58c0469",
+      "action_type": "click",
+      "action_text": "",
+      "next_state_url": "https://en.wikipedia.org/wiki/File:MediaWiki-2020-icon.svg",
+      "next_state_key": "a480e677",
+      "traj": "live_d71ec714_13",
+      "step": 4
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/File:MediaWiki-2020-icon.svg",
+      "state_key": "a480e677",
+      "action_type": "click",
+      "action_text": "wikipedia:historical archive/wikipedia:tourbusstop",
+      "next_state_url": "https://en.wikipedia.org/wiki/Wikipedia:Historical_archive/Wikipedia:TourBusStop",
+      "next_state_key": "07a1f531",
+      "traj": "live_d71ec714_13",
+      "step": 5
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Wikipedia:Historical_archive/Wikipedia:TourBusStop",
+      "state_key": "07a1f531",
+      "action_type": "click",
+      "action_text": "wp:tbs",
+      "next_state_url": "https://en.wikipedia.org/w/index.php",
+      "next_state_key": "b58c0469",
+      "traj": "live_d71ec714_13",
+      "step": 6
+    },
+    {
+      "state_url": "https://en.wikipedia.org/w/index.php",
+      "state_key": "b58c0469",
+      "action_type": "click",
+      "action_text": "dies",
+      "next_state_url": "https://en.wikipedia.org/wiki/Death_and_state_funeral_of_Harald_V",
+      "next_state_key": "9ab09068",
+      "traj": "live_d71ec714_13",
+      "step": 7
+    },
+    {
+      "state_url": "https://en.wikipedia.org/w/index.php",
+      "state_key": "b58c0469",
+      "action_type": "click",
+      "action_text": "",
+      "next_state_url": "https://en.wikipedia.org/wiki/File:Wikisource-logo.svg",
+      "next_state_key": "f2104368",
+      "traj": "live_d71ec714_14",
+      "step": 0
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/File:Wikisource-logo.svg",
+      "state_key": "f2104368",
+      "action_type": "click",
+      "action_text": "community portal",
+      "next_state_url": "https://en.wikipedia.org/wiki/Wikipedia:Community_portal",
+      "next_state_key": "a92e15dc",
+      "traj": "live_d71ec714_14",
+      "step": 1
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Wikipedia:Community_portal",
+      "state_key": "a92e15dc",
+      "action_type": "click",
+      "action_text": "wikipedia editor navigation",
+      "next_state_url": "https://en.wikipedia.org/wiki/Wikipedia:Editor's_index_to_Wikipedia",
+      "next_state_key": "43d6a530",
+      "traj": "live_d71ec714_14",
+      "step": 2
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Wikipedia:Editor's_index_to_Wikipedia",
+      "state_key": "43d6a530",
+      "action_type": "click",
+      "action_text": "wp:adco",
+      "next_state_url": "https://en.wikipedia.org/wiki/Wikipedia:ADCO",
+      "next_state_key": "2b396d9a",
+      "traj": "live_d71ec714_14",
+      "step": 3
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Wikipedia:ADCO",
+      "state_key": "2b396d9a",
+      "action_type": "click",
+      "action_text": "tasks",
+      "next_state_url": "https://en.wikipedia.org/wiki/Wikipedia:Maintenance",
+      "next_state_key": "41a47dbc",
+      "traj": "live_d71ec714_14",
+      "step": 4
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Wikipedia:Maintenance",
+      "state_key": "41a47dbc",
+      "action_type": "click",
+      "action_text": "centralized discussion",
+      "next_state_url": "https://en.wikipedia.org/wiki/Wikipedia:Centralized_discussion",
+      "next_state_key": "d96f5ed4",
+      "traj": "live_d71ec714_14",
+      "step": 5
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Wikipedia:Centralized_discussion",
+      "state_key": "d96f5ed4",
+      "action_type": "click",
+      "action_text": "wp democracy",
+      "next_state_url": "https://en.wikipedia.org/wiki/Wikipedia:WikiProject_Democracy",
+      "next_state_key": "94fc7745",
+      "traj": "live_d71ec714_14",
+      "step": 6
+    },
+    {
+      "state_url": "https://en.wikipedia.org/wiki/Wikipedia:WikiProject_Democracy",
+      "state_key": "94fc7745",
+      "action_type": "click",
+      "action_text": "titleblacklist",
+      "next_state_url": "https://en.wikipedia.org/wiki/MediaWiki_talk:Titleblacklist",
+      "next_state_key": "ef165a44",
+      "traj": "live_d71ec714_14",
+      "step": 7
+    }
+  ],
+  "python_docs": [
+    {
+      "state_url": "https://docs.python.org/3/py-modindex.html",
+      "state_key": "53753786",
+      "action_type": "click",
+      "action_text": "spwd",
+      "next_state_url": "https://docs.python.org/3/library/spwd.html",
+      "next_state_key": "85650801",
+      "traj": "live_26d6a069_0",
+      "step": 0
+    },
+    {
+      "state_url": "https://docs.python.org/3/library/spwd.html",
+      "state_key": "85650801",
+      "action_type": "click",
+      "action_text": "report a bug",
+      "next_state_url": "https://docs.python.org/3/bugs.html",
+      "next_state_key": "1c4bd727",
+      "traj": "live_26d6a069_0",
+      "step": 1
+    },
+    {
+      "state_url": "https://docs.python.org/3/bugs.html",
+      "state_key": "1c4bd727",
+      "action_type": "click",
+      "action_text": "3.14.7 documentation",
+      "next_state_url": "https://docs.python.org/3/index.html",
+      "next_state_key": "eb98c264",
+      "traj": "live_26d6a069_0",
+      "step": 2
+    },
+    {
+      "state_url": "https://docs.python.org/3/index.html",
+      "state_key": "eb98c264",
+      "action_type": "click",
+      "action_text": "python 3.7 (eol)",
+      "next_state_url": "https://docs.python.org/3.7/",
+      "next_state_key": "f5919196",
+      "traj": "live_26d6a069_0",
+      "step": 3
+    },
+    {
+      "state_url": "https://docs.python.org/3.7/",
+      "state_key": "f5919196",
+      "action_type": "click",
+      "action_text": "python howtos",
+      "next_state_url": "https://docs.python.org/3.7/howto/index.html",
+      "next_state_key": "93d4b728",
+      "traj": "live_26d6a069_0",
+      "step": 4
+    },
+    {
+      "state_url": "https://docs.python.org/3.7/howto/index.html",
+      "state_key": "93d4b728",
+      "action_type": "click",
+      "action_text": "instrumenting cpython with dtrace and systemtap",
+      "next_state_url": "https://docs.python.org/3.7/howto/instrumentation.html",
+      "next_state_key": "acb6b8ba",
+      "traj": "live_26d6a069_0",
+      "step": 5
+    },
+    {
+      "state_url": "https://docs.python.org/3.7/howto/instrumentation.html",
+      "state_key": "acb6b8ba",
+      "action_type": "click",
+      "action_text": "python documentation for the current stable release",
+      "next_state_url": "https://docs.python.org/3/howto/instrumentation.html",
+      "next_state_key": "7eec501b",
+      "traj": "live_26d6a069_0",
+      "step": 6
+    },
+    {
+      "state_url": "https://docs.python.org/3/howto/instrumentation.html",
+      "state_key": "7eec501b",
+      "action_type": "click",
+      "action_text": "improve this page",
+      "next_state_url": "https://docs.python.org/3/improve-page-nojs.html",
+      "next_state_key": "8f1ca31b",
+      "traj": "live_26d6a069_0",
+      "step": 7
+    },
+    {
+      "state_url": "https://docs.python.org/3.0/",
+      "state_key": "2fc00430",
+      "action_type": "click",
+      "action_text": "index",
+      "next_state_url": "https://docs.python.org/3.0/genindex.html",
+      "next_state_key": "5d077692",
+      "traj": "live_26d6a069_1",
+      "step": 0
+    },
+    {
+      "state_url": "https://docs.python.org/3.0/genindex.html",
+      "state_key": "5d077692",
+      "action_type": "click",
+      "action_text": "d",
+      "next_state_url": "https://docs.python.org/3.0/genindex-D.html",
+      "next_state_key": "3084d762",
+      "traj": "live_26d6a069_1",
+      "step": 1
+    },
+    {
+      "state_url": "https://docs.python.org/3.0/genindex-D.html",
+      "state_key": "3084d762",
+      "action_type": "click",
+      "action_text": "delayload (http.cookiejar.filecookiejar attribute)",
+      "next_state_url": "https://docs.python.org/3.0/library/http.cookiejar.html",
+      "next_state_key": "712da971",
+      "traj": "live_26d6a069_1",
+      "step": 2
+    },
+    {
+      "state_url": "https://docs.python.org/3.0/library/http.cookiejar.html",
+      "state_key": "712da971",
+      "action_type": "click",
+      "action_text": "ioerror",
+      "next_state_url": "https://docs.python.org/3.0/library/exceptions.html",
+      "next_state_key": "bd757892",
+      "traj": "live_26d6a069_1",
+      "step": 3
+    },
+    {
+      "state_url": "https://docs.python.org/3.0/library/exceptions.html",
+      "state_key": "bd757892",
+      "action_type": "click",
+      "action_text": "open()",
+      "next_state_url": "https://docs.python.org/3.0/library/functions.html",
+      "next_state_key": "ebe6c7e8",
+      "traj": "live_26d6a069_1",
+      "step": 4
+    },
+    {
+      "state_url": "https://docs.python.org/3.0/library/functions.html",
+      "state_key": "ebe6c7e8",
+      "action_type": "click",
+      "action_text": "next",
+      "next_state_url": "https://docs.python.org/3.0/library/constants.html",
+      "next_state_key": "f340d64c",
+      "traj": "live_26d6a069_1",
+      "step": 5
+    },
+    {
+      "state_url": "https://docs.python.org/3.0/library/constants.html",
+      "state_key": "f340d64c",
+      "action_type": "click",
+      "action_text": "next",
+      "next_state_url": "https://docs.python.org/3.0/library/objects.html",
+      "next_state_key": "78854b54",
+      "traj": "live_26d6a069_1",
+      "step": 6
+    },
+    {
+      "state_url": "https://docs.python.org/3.0/library/objects.html",
+      "state_key": "78854b54",
+      "action_type": "click",
+      "action_text": "next",
+      "next_state_url": "https://docs.python.org/3.0/library/stdtypes.html",
+      "next_state_key": "0bcbcbd9",
+      "traj": "live_26d6a069_1",
+      "step": 7
+    },
+    {
+      "state_url": "https://docs.python.org/3.0/",
+      "state_key": "2fc00430",
+      "action_type": "click",
+      "action_text": "python howtos",
+      "next_state_url": "https://docs.python.org/3.0/howto/index.html",
+      "next_state_key": "8387e92e",
+      "traj": "live_26d6a069_2",
+      "step": 0
+    },
+    {
+      "state_url": "https://docs.python.org/3.0/howto/index.html",
+      "state_key": "8387e92e",
+      "action_type": "click",
+      "action_text": "copyright",
+      "next_state_url": "https://docs.python.org/3.0/copyright.html",
+      "next_state_key": "fda761e4",
+      "traj": "live_26d6a069_2",
+      "step": 1
+    },
+    {
+      "state_url": "https://docs.python.org/3.0/copyright.html",
+      "state_key": "fda761e4",
+      "action_type": "click",
+      "action_text": "next",
+      "next_state_url": "https://docs.python.org/3.0/license.html",
+      "next_state_key": "71bfc04c",
+      "traj": "live_26d6a069_2",
+      "step": 2
+    },
+    {
+      "state_url": "https://docs.python.org/3.0/license.html",
+      "state_key": "71bfc04c",
+      "action_type": "click",
+      "action_text": "asynchat",
+      "next_state_url": "https://docs.python.org/3.0/library/asynchat.html",
+      "next_state_key": "e14754f9",
+      "traj": "live_26d6a069_2",
+      "step": 3
+    },
+    {
+      "state_url": "https://docs.python.org/3.0/library/asynchat.html",
+      "state_key": "e14754f9",
+      "action_type": "click",
+      "action_text": "interprocess communication and networking",
+      "next_state_url": "https://docs.python.org/3.0/library/ipc.html",
+      "next_state_key": "0bc89614",
+      "traj": "live_26d6a069_2",
+      "step": 4
+    },
+    {
+      "state_url": "https://docs.python.org/3.0/library/ipc.html",
+      "state_key": "0bc89614",
+      "action_type": "click",
+      "action_text": "python v3.0.1 documentation",
+      "next_state_url": "https://docs.python.org/3.0/index.html",
+      "next_state_key": "0847d40e",
+      "traj": "live_26d6a069_2",
+      "step": 5
+    },
+    {
+      "state_url": "https://docs.python.org/3.0/index.html",
+      "state_key": "0847d40e",
+      "action_type": "click",
+      "action_text": "documenting python",
+      "next_state_url": "https://docs.python.org/3.0/documenting/index.html",
+      "next_state_key": "5343364b",
+      "traj": "live_26d6a069_2",
+      "step": 6
+    },
+    {
+      "state_url": "https://docs.python.org/3.0/documenting/index.html",
+      "state_key": "5343364b",
+      "action_type": "click",
+      "action_text": "python v3.0.1 documentation",
+      "next_state_url": "https://docs.python.org/3.0/index.html",
+      "next_state_key": "0847d40e",
+      "traj": "live_26d6a069_2",
+      "step": 7
+    },
+    {
+      "state_url": "https://docs.python.org/3.9/",
+      "state_key": "9db1ed4b",
+      "action_type": "click",
+      "action_text": "library reference",
+      "next_state_url": "https://docs.python.org/3.9/library/index.html",
+      "next_state_key": "f78576c4",
+      "traj": "live_26d6a069_3",
+      "step": 0
+    },
+    {
+      "state_url": "https://docs.python.org/3.9/library/index.html",
+      "state_key": "f78576c4",
+      "action_type": "click",
+      "action_text": "special attributes",
+      "next_state_url": "https://docs.python.org/3.9/library/stdtypes.html",
+      "next_state_key": "1888df91",
+      "traj": "live_26d6a069_3",
+      "step": 1
+    },
+    {
+      "state_url": "https://docs.python.org/3.9/library/stdtypes.html",
+      "state_key": "1888df91",
+      "action_type": "click",
+      "action_text": "__len__()",
+      "next_state_url": "https://docs.python.org/3.9/reference/datamodel.html",
+      "next_state_key": "05a4be70",
+      "traj": "live_26d6a069_3",
+      "step": 2
+    },
+    {
+      "state_url": "https://docs.python.org/3.9/reference/datamodel.html",
+      "state_key": "05a4be70",
+      "action_type": "click",
+      "action_text": "__import__()",
+      "next_state_url": "https://docs.python.org/3.9/library/functions.html",
+      "next_state_key": "67676713",
+      "traj": "live_26d6a069_3",
+      "step": 3
+    },
+    {
+      "state_url": "https://docs.python.org/3.9/library/functions.html",
+      "state_key": "67676713",
+      "action_type": "click",
+      "action_text": "list.sort()",
+      "next_state_url": "https://docs.python.org/3.9/library/stdtypes.html",
+      "next_state_key": "1888df91",
+      "traj": "live_26d6a069_3",
+      "step": 4
+    },
+    {
+      "state_url": "https://docs.python.org/3.9/library/stdtypes.html",
+      "state_key": "1888df91",
+      "action_type": "click",
+      "action_text": "int",
+      "next_state_url": "https://docs.python.org/3.9/library/functions.html",
+      "next_state_key": "67676713",
+      "traj": "live_26d6a069_3",
+      "step": 5
+    },
+    {
+      "state_url": "https://docs.python.org/3.9/library/functions.html",
+      "state_key": "67676713",
+      "action_type": "click",
+      "action_text": "text encoding",
+      "next_state_url": "https://docs.python.org/3.9/glossary.html",
+      "next_state_key": "0eb3da02",
+      "traj": "live_26d6a069_3",
+      "step": 6
+    },
+    {
+      "state_url": "https://docs.python.org/3.9/glossary.html",
+      "state_key": "0eb3da02",
+      "action_type": "click",
+      "action_text": "bytes",
+      "next_state_url": "https://docs.python.org/3.9/library/stdtypes.html",
+      "next_state_key": "1888df91",
+      "traj": "live_26d6a069_3",
+      "step": 7
+    },
+    {
+      "state_url": "https://docs.python.org/3/download.html",
+      "state_key": "40a22fad",
+      "action_type": "click",
+      "action_text": "download",
+      "next_state_url": "https://docs.python.org/3/archives/python-3.14-docs-html.zip",
+      "next_state_key": "6c6603b5",
+      "traj": "live_26d6a069_4",
+      "step": 0
+    },
+    {
+      "state_url": "https://docs.python.org/3.9/",
+      "state_key": "9db1ed4b",
+      "action_type": "click",
+      "action_text": "modules",
+      "next_state_url": "https://docs.python.org/3.9/py-modindex.html",
+      "next_state_key": "5056faab",
+      "traj": "live_26d6a069_5",
+      "step": 0
+    },
+    {
+      "state_url": "https://docs.python.org/3.9/py-modindex.html",
+      "state_key": "5056faab",
+      "action_type": "click",
+      "action_text": "ast",
+      "next_state_url": "https://docs.python.org/3.9/library/ast.html",
+      "next_state_key": "8921370b",
+      "traj": "live_26d6a069_5",
+      "step": 1
+    },
+    {
+      "state_url": "https://docs.python.org/3.9/library/ast.html",
+      "state_key": "8921370b",
+      "action_type": "click",
+      "action_text": "eval()",
+      "next_state_url": "https://docs.python.org/3.9/library/functions.html",
+      "next_state_key": "67676713",
+      "traj": "live_26d6a069_5",
+      "step": 2
+    },
+    {
+      "state_url": "https://docs.python.org/3.9/library/functions.html",
+      "state_key": "67676713",
+      "action_type": "click",
+      "action_text": "memory views",
+      "next_state_url": "https://docs.python.org/3.9/library/stdtypes.html",
+      "next_state_key": "1888df91",
+      "traj": "live_26d6a069_5",
+      "step": 3
+    },
+    {
+      "state_url": "https://docs.python.org/3.9/library/stdtypes.html",
+      "state_key": "1888df91",
+      "action_type": "click",
+      "action_text": "index",
+      "next_state_url": "https://docs.python.org/3.9/genindex.html",
+      "next_state_key": "4829bd24",
+      "traj": "live_26d6a069_5",
+      "step": 4
+    },
+    {
+      "state_url": "https://docs.python.org/3.9/genindex.html",
+      "state_key": "4829bd24",
+      "action_type": "click",
+      "action_text": "t",
+      "next_state_url": "https://docs.python.org/3.9/genindex-T.html",
+      "next_state_key": "983baa97",
+      "traj": "live_26d6a069_5",
+      "step": 5
+    },
+    {
+      "state_url": "https://docs.python.org/3.9/genindex-T.html",
+      "state_key": "983baa97",
+      "action_type": "click",
+      "action_text": "tzname (in module time)",
+      "next_state_url": "https://docs.python.org/3.9/library/time.html",
+      "next_state_key": "c162b5b8",
+      "traj": "live_26d6a069_5",
+      "step": 6
+    },
+    {
+      "state_url": "https://docs.python.org/3.9/library/time.html",
+      "state_key": "c162b5b8",
+      "action_type": "click",
+      "action_text": "valueerror",
+      "next_state_url": "https://docs.python.org/3.9/library/exceptions.html",
+      "next_state_key": "4c209944",
+      "traj": "live_26d6a069_5",
+      "step": 7
+    },
+    {
+      "state_url": "https://docs.python.org/3.10/",
+      "state_key": "b45179ae",
+      "action_type": "click",
+      "action_text": "copyright",
+      "next_state_url": "https://docs.python.org/3.10/copyright.html",
+      "next_state_key": "8d0f8048",
+      "traj": "live_26d6a069_6",
+      "step": 0
+    },
+    {
+      "state_url": "https://docs.python.org/3.10/copyright.html",
+      "state_key": "8d0f8048",
+      "action_type": "click",
+      "action_text": "report a bug",
+      "next_state_url": "https://docs.python.org/3.10/bugs.html",
+      "next_state_key": "8ca27344",
+      "traj": "live_26d6a069_6",
+      "step": 1
+    },
+    {
+      "state_url": "https://docs.python.org/3.10/bugs.html",
+      "state_key": "8ca27344",
+      "action_type": "click",
+      "action_text": "previous",
+      "next_state_url": "https://docs.python.org/3.10/about.html",
+      "next_state_key": "1bea9c8c",
+      "traj": "live_26d6a069_6",
+      "step": 2
+    },
+    {
+      "state_url": "https://docs.python.org/3.10/about.html",
+      "state_key": "1bea9c8c",
+      "action_type": "click",
+      "action_text": "glossary",
+      "next_state_url": "https://docs.python.org/3.10/glossary.html",
+      "next_state_key": "23552b37",
+      "traj": "live_26d6a069_6",
+      "step": 3
+    },
+    {
+      "state_url": "https://docs.python.org/3.10/glossary.html",
+      "state_key": "23552b37",
+      "action_type": "click",
+      "action_text": "getattr()",
+      "next_state_url": "https://docs.python.org/3.10/library/functions.html",
+      "next_state_key": "df3c65d8",
+      "traj": "live_26d6a069_6",
+      "step": 4
+    },
+    {
+      "state_url": "https://docs.python.org/3.10/library/functions.html",
+      "state_key": "df3c65d8",
+      "action_type": "click",
+      "action_text": "the python standard library",
+      "next_state_url": "https://docs.python.org/3.10/library/index.html",
+      "next_state_key": "503ea73d",
+      "traj": "live_26d6a069_6",
+      "step": 5
+    },
+    {
+      "state_url": "https://docs.python.org/3.10/library/index.html",
+      "state_key": "503ea73d",
+      "action_type": "click",
+      "action_text": "ctypes \u2014 a foreign function library for python",
+      "next_state_url": "https://docs.python.org/3.10/library/ctypes.html",
+      "next_state_key": "63e33142",
+      "traj": "live_26d6a069_6",
+      "step": 6
+    },
+    {
+      "state_url": "https://docs.python.org/3.10/library/ctypes.html",
+      "state_key": "63e33142",
+      "action_type": "click",
+      "action_text": "descriptor",
+      "next_state_url": "https://docs.python.org/3.10/glossary.html",
+      "next_state_key": "23552b37",
+      "traj": "live_26d6a069_6",
+      "step": 7
+    },
+    {
+      "state_url": "https://docs.python.org/3.7/",
+      "state_key": "f5919196",
+      "action_type": "click",
+      "action_text": "python howtos",
+      "next_state_url": "https://docs.python.org/3.7/howto/index.html",
+      "next_state_key": "93d4b728",
+      "traj": "live_26d6a069_7",
+      "step": 0
+    },
+    {
+      "state_url": "https://docs.python.org/3.7/howto/index.html",
+      "state_key": "93d4b728",
+      "action_type": "click",
+      "action_text": "regular expression howto",
+      "next_state_url": "https://docs.python.org/3.7/howto/regex.html",
+      "next_state_key": "c1b8dd8d",
+      "traj": "live_26d6a069_7",
+      "step": 1
+    },
+    {
+      "state_url": "https://docs.python.org/3.7/howto/regex.html",
+      "state_key": "c1b8dd8d",
+      "action_type": "click",
+      "action_text": "sub()",
+      "next_state_url": "https://docs.python.org/3.7/library/re.html",
+      "next_state_key": "2e3d265a",
+      "traj": "live_26d6a069_7",
+      "step": 2
+    },
+    {
+      "state_url": "https://docs.python.org/3.7/library/re.html",
+      "state_key": "2e3d265a",
+      "action_type": "click",
+      "action_text": "difflib \u2014 helpers for computing deltas",
+      "next_state_url": "https://docs.python.org/3.7/library/difflib.html",
+      "next_state_key": "5a5ec03b",
+      "traj": "live_26d6a069_7",
+      "step": 3
+    },
+    {
+      "state_url": "https://docs.python.org/3.7/library/difflib.html",
+      "state_key": "5a5ec03b",
+      "action_type": "click",
+      "action_text": "textwrap \u2014 text wrapping and filling",
+      "next_state_url": "https://docs.python.org/3.7/library/textwrap.html",
+      "next_state_key": "e1805d1e",
+      "traj": "live_26d6a069_7",
+      "step": 4
+    },
+    {
+      "state_url": "https://docs.python.org/3.7/library/textwrap.html",
+      "state_key": "e1805d1e",
+      "action_type": "click",
+      "action_text": "previous",
+      "next_state_url": "https://docs.python.org/3.7/library/difflib.html",
+      "next_state_key": "5a5ec03b",
+      "traj": "live_26d6a069_7",
+      "step": 5
+    },
+    {
+      "state_url": "https://docs.python.org/3.7/library/difflib.html",
+      "state_key": "5a5ec03b",
+      "action_type": "click",
+      "action_text": "previous",
+      "next_state_url": "https://docs.python.org/3.7/library/re.html",
+      "next_state_key": "2e3d265a",
+      "traj": "live_26d6a069_7",
+      "step": 6
+    },
+    {
+      "state_url": "https://docs.python.org/3.7/library/re.html",
+      "state_key": "2e3d265a",
+      "action_type": "click",
+      "action_text": "3.7.17 documentation",
+      "next_state_url": "https://docs.python.org/3.7/index.html",
+      "next_state_key": "18a0ba80",
+      "traj": "live_26d6a069_7",
+      "step": 7
+    },
+    {
+      "state_url": "https://docs.python.org/3.12/",
+      "state_key": "1f3acc99",
+      "action_type": "click",
+      "action_text": "python 3.9 (eol)",
+      "next_state_url": "https://docs.python.org/3.9/",
+      "next_state_key": "9db1ed4b",
+      "traj": "live_26d6a069_8",
+      "step": 0
+    },
+    {
+      "state_url": "https://docs.python.org/3.9/",
+      "state_key": "9db1ed4b",
+      "action_type": "click",
+      "action_text": "copyright",
+      "next_state_url": "https://docs.python.org/3.9/copyright.html",
+      "next_state_key": "2fb26223",
+      "traj": "live_26d6a069_8",
+      "step": 1
+    },
+    {
+      "state_url": "https://docs.python.org/3.9/copyright.html",
+      "state_key": "2fb26223",
+      "action_type": "click",
+      "action_text": "found a bug",
+      "next_state_url": "https://docs.python.org/bugs.html",
+      "next_state_key": "7936a543",
+      "traj": "live_26d6a069_8",
+      "step": 2
+    },
+    {
+      "state_url": "https://docs.python.org/bugs.html",
+      "state_key": "7936a543",
+      "action_type": "click",
+      "action_text": "table of contents",
+      "next_state_url": "https://docs.python.org/contents.html",
+      "next_state_key": "16c2605a",
+      "traj": "live_26d6a069_8",
+      "step": 3
+    },
+    {
+      "state_url": "https://docs.python.org/contents.html",
+      "state_key": "16c2605a",
+      "action_type": "click",
+      "action_text": "mocking asynchronous iterators",
+      "next_state_url": "https://docs.python.org/library/unittest.mock-examples.html",
+      "next_state_key": "6bcd410b",
+      "traj": "live_26d6a069_8",
+      "step": 4
+    },
+    {
+      "state_url": "https://docs.python.org/library/unittest.mock-examples.html",
+      "state_key": "6bcd410b",
+      "action_type": "click",
+      "action_text": "history and license",
+      "next_state_url": "https://docs.python.org/license.html",
+      "next_state_key": "abd0d8fd",
+      "traj": "live_26d6a069_8",
+      "step": 5
+    },
+    {
+      "state_url": "https://docs.python.org/license.html",
+      "state_key": "abd0d8fd",
+      "action_type": "click",
+      "action_text": "copyright",
+      "next_state_url": "https://docs.python.org/copyright.html",
+      "next_state_key": "611cfc44",
+      "traj": "live_26d6a069_8",
+      "step": 6
+    },
+    {
+      "state_url": "https://docs.python.org/copyright.html",
+      "state_key": "611cfc44",
+      "action_type": "click",
+      "action_text": "found a bug",
+      "next_state_url": "https://docs.python.org/bugs.html",
+      "next_state_key": "7936a543",
+      "traj": "live_26d6a069_8",
+      "step": 7
+    },
+    {
+      "state_url": "https://docs.python.org/3/copyright.html",
+      "state_key": "c7bc1b30",
+      "action_type": "click",
+      "action_text": "history and license",
+      "next_state_url": "https://docs.python.org/3/license.html",
+      "next_state_key": "bb09ed48",
+      "traj": "live_26d6a069_9",
+      "step": 0
+    },
+    {
+      "state_url": "https://docs.python.org/3/license.html",
+      "state_key": "bb09ed48",
+      "action_type": "click",
+      "action_text": "tracemalloc",
+      "next_state_url": "https://docs.python.org/3/library/tracemalloc.html",
+      "next_state_key": "628f1a7a",
+      "traj": "live_26d6a069_9",
+      "step": 1
+    },
+    {
+      "state_url": "https://docs.python.org/3/library/tracemalloc.html",
+      "state_key": "628f1a7a",
+      "action_type": "click",
+      "action_text": "importlib",
+      "next_state_url": "https://docs.python.org/3/library/importlib.html",
+      "next_state_key": "1b6e1f75",
+      "traj": "live_26d6a069_9",
+      "step": 2
+    },
+    {
+      "state_url": "https://docs.python.org/3/library/importlib.html",
+      "state_key": "1b6e1f75",
+      "action_type": "click",
+      "action_text": "path entry finder",
+      "next_state_url": "https://docs.python.org/3/glossary.html",
+      "next_state_key": "9820c04f",
+      "traj": "live_26d6a069_9",
+      "step": 3
+    },
+    {
+      "state_url": "https://docs.python.org/3/glossary.html",
+      "state_key": "9820c04f",
+      "action_type": "click",
+      "action_text": "class definitions",
+      "next_state_url": "https://docs.python.org/3/reference/compound_stmts.html",
+      "next_state_key": "760ff585",
+      "traj": "live_26d6a069_9",
+      "step": 4
+    },
+    {
+      "state_url": "https://docs.python.org/3/reference/compound_stmts.html",
+      "state_key": "760ff585",
+      "action_type": "click",
+      "action_text": "9. top-level components",
+      "next_state_url": "https://docs.python.org/3/reference/toplevel_components.html",
+      "next_state_key": "cf8472e6",
+      "traj": "live_26d6a069_9",
+      "step": 5
+    },
+    {
+      "state_url": "https://docs.python.org/3/reference/toplevel_components.html",
+      "state_key": "cf8472e6",
+      "action_type": "click",
+      "action_text": "exec()",
+      "next_state_url": "https://docs.python.org/3/library/functions.html",
+      "next_state_key": "8b7bf0c3",
+      "traj": "live_26d6a069_9",
+      "step": 6
+    },
+    {
+      "state_url": "https://docs.python.org/3/library/functions.html",
+      "state_key": "8b7bf0c3",
+      "action_type": "click",
+      "action_text": "runtimeerror",
+      "next_state_url": "https://docs.python.org/3/library/exceptions.html",
+      "next_state_key": "525aba60",
+      "traj": "live_26d6a069_9",
+      "step": 7
+    },
+    {
+      "state_url": "https://docs.python.org/3.10/",
+      "state_key": "b45179ae",
+      "action_type": "click",
+      "action_text": "python 3.3 (eol)",
+      "next_state_url": "https://docs.python.org/3.3/",
+      "next_state_key": "816816d0",
+      "traj": "live_26d6a069_10",
+      "step": 0
+    },
+    {
+      "state_url": "https://docs.python.org/3.3/",
+      "state_key": "816816d0",
+      "action_type": "click",
+      "action_text": "index",
+      "next_state_url": "https://docs.python.org/3.3/genindex.html",
+      "next_state_key": "89adaeb0",
+      "traj": "live_26d6a069_10",
+      "step": 1
+    },
+    {
+      "state_url": "https://docs.python.org/3.3/genindex.html",
+      "state_key": "89adaeb0",
+      "action_type": "click",
+      "action_text": "n",
+      "next_state_url": "https://docs.python.org/3.3/genindex-N.html",
+      "next_state_key": "53ee7934",
+      "traj": "live_26d6a069_10",
+      "step": 2
+    },
+    {
+      "state_url": "https://docs.python.org/3.3/genindex-N.html",
+      "state_key": "53ee7934",
+      "action_type": "click",
+      "action_text": "nntp_ssl (class in nntplib)",
+      "next_state_url": "https://docs.python.org/3.3/library/nntplib.html",
+      "next_state_key": "3c1e3abf",
+      "traj": "live_26d6a069_10",
+      "step": 3
+    },
+    {
+      "state_url": "https://docs.python.org/3.3/library/nntplib.html",
+      "state_key": "3c1e3abf",
+      "action_type": "click",
+      "action_text": "21.17. smtplib \u2014 smtp protocol client",
+      "next_state_url": "https://docs.python.org/3.3/library/smtplib.html",
+      "next_state_key": "529d54de",
+      "traj": "live_26d6a069_10",
+      "step": 4
+    },
+    {
+      "state_url": "https://docs.python.org/3.3/library/smtplib.html",
+      "state_key": "529d54de",
+      "action_type": "click",
+      "action_text": "modules",
+      "next_state_url": "https://docs.python.org/3.3/py-modindex.html",
+      "next_state_key": "2fcb75d7",
+      "traj": "live_26d6a069_10",
+      "step": 5
+    },
+    {
+      "state_url": "https://docs.python.org/3.3/py-modindex.html",
+      "state_key": "2fcb75d7",
+      "action_type": "click",
+      "action_text": "distutils.version",
+      "next_state_url": "https://docs.python.org/3.3/distutils/apiref.html",
+      "next_state_key": "9b64ee3d",
+      "traj": "live_26d6a069_10",
+      "step": 6
+    },
+    {
+      "state_url": "https://docs.python.org/3.3/distutils/apiref.html",
+      "state_key": "9b64ee3d",
+      "action_type": "click",
+      "action_text": "py_compile",
+      "next_state_url": "https://docs.python.org/3.3/library/py_compile.html",
+      "next_state_key": "885cf3ce",
+      "traj": "live_26d6a069_10",
+      "step": 7
+    },
+    {
+      "state_url": "https://docs.python.org/3/py-modindex.html",
+      "state_key": "53753786",
+      "action_type": "click",
+      "action_text": "imp",
+      "next_state_url": "https://docs.python.org/3/library/imp.html",
+      "next_state_key": "e1d0209d",
+      "traj": "live_26d6a069_11",
+      "step": 0
+    },
+    {
+      "state_url": "https://docs.python.org/3/library/imp.html",
+      "state_key": "e1d0209d",
+      "action_type": "click",
+      "action_text": "modules",
+      "next_state_url": "https://docs.python.org/3/py-modindex.html",
+      "next_state_key": "53753786",
+      "traj": "live_26d6a069_11",
+      "step": 1
+    },
+    {
+      "state_url": "https://docs.python.org/3/py-modindex.html",
+      "state_key": "53753786",
+      "action_type": "click",
+      "action_text": "history and license",
+      "next_state_url": "https://docs.python.org/license.html",
+      "next_state_key": "abd0d8fd",
+      "traj": "live_26d6a069_11",
+      "step": 2
+    },
+    {
+      "state_url": "https://docs.python.org/license.html",
+      "state_key": "abd0d8fd",
+      "action_type": "click",
+      "action_text": "3.14.7 documentation",
+      "next_state_url": "https://docs.python.org/index.html",
+      "next_state_key": "21318f5c",
+      "traj": "live_26d6a069_11",
+      "step": 3
+    },
+    {
+      "state_url": "https://docs.python.org/index.html",
+      "state_key": "21318f5c",
+      "action_type": "click",
+      "action_text": "python howtos",
+      "next_state_url": "https://docs.python.org/howto/index.html",
+      "next_state_key": "5dd4027e",
+      "traj": "live_26d6a069_11",
+      "step": 4
+    },
+    {
+      "state_url": "https://docs.python.org/howto/index.html",
+      "state_key": "5dd4027e",
+      "action_type": "click",
+      "action_text": "instrumenting cpython with dtrace and systemtap",
+      "next_state_url": "https://docs.python.org/howto/instrumentation.html",
+      "next_state_key": "35b213b1",
+      "traj": "live_26d6a069_11",
+      "step": 5
+    },
+    {
+      "state_url": "https://docs.python.org/howto/instrumentation.html",
+      "state_key": "35b213b1",
+      "action_type": "click",
+      "action_text": "an introduction to the ipaddress module",
+      "next_state_url": "https://docs.python.org/howto/ipaddress.html",
+      "next_state_key": "5244a588",
+      "traj": "live_26d6a069_11",
+      "step": 6
+    },
+    {
+      "state_url": "https://docs.python.org/howto/ipaddress.html",
+      "state_key": "5244a588",
+      "action_type": "click",
+      "action_text": "3.14.7 documentation",
+      "next_state_url": "https://docs.python.org/index.html",
+      "next_state_key": "21318f5c",
+      "traj": "live_26d6a069_11",
+      "step": 7
+    },
+    {
+      "state_url": "https://docs.python.org/3.15/",
+      "state_key": "257a0f59",
+      "action_type": "click",
+      "action_text": "deprecations",
+      "next_state_url": "https://docs.python.org/3.15/deprecations/index.html",
+      "next_state_key": "2cc9dbd3",
+      "traj": "live_26d6a069_12",
+      "step": 0
+    },
+    {
+      "state_url": "https://docs.python.org/3.15/deprecations/index.html",
+      "state_key": "2cc9dbd3",
+      "action_type": "click",
+      "action_text": "pyconfig.pathconfig_warnings",
+      "next_state_url": "https://docs.python.org/3.15/c-api/init_config.html",
+      "next_state_key": "ff99d689",
+      "traj": "live_26d6a069_12",
+      "step": 1
+    },
+    {
+      "state_url": "https://docs.python.org/3.15/c-api/init_config.html",
+      "state_key": "ff99d689",
+      "action_type": "click",
+      "action_text": "python development mode",
+      "next_state_url": "https://docs.python.org/3.15/library/devmode.html",
+      "next_state_key": "1f8bdd48",
+      "traj": "live_26d6a069_12",
+      "step": 2
+    },
+    {
+      "state_url": "https://docs.python.org/3.15/library/devmode.html",
+      "state_key": "1f8bdd48",
+      "action_type": "click",
+      "action_text": "-w error",
+      "next_state_url": "https://docs.python.org/3.15/using/cmdline.html",
+      "next_state_key": "39edea11",
+      "traj": "live_26d6a069_12",
+      "step": 3
+    },
+    {
+      "state_url": "https://docs.python.org/3.15/using/cmdline.html",
+      "state_key": "39edea11",
+      "action_type": "click",
+      "action_text": "python utf-8 mode",
+      "next_state_url": "https://docs.python.org/3.15/library/os.html",
+      "next_state_key": "b9bd12d6",
+      "traj": "live_26d6a069_12",
+      "step": 4
+    },
+    {
+      "state_url": "https://docs.python.org/3.15/library/os.html",
+      "state_key": "b9bd12d6",
+      "action_type": "click",
+      "action_text": "availability",
+      "next_state_url": "https://docs.python.org/3.15/library/intro.html",
+      "next_state_key": "f08e3fd9",
+      "traj": "live_26d6a069_12",
+      "step": 5
+    },
+    {
+      "state_url": "https://docs.python.org/3.15/library/intro.html",
+      "state_key": "f08e3fd9",
+      "action_type": "click",
+      "action_text": "improve this page",
+      "next_state_url": "https://docs.python.org/3.15/improve-page-nojs.html",
+      "next_state_key": "0f8a02ea",
+      "traj": "live_26d6a069_12",
+      "step": 6
+    },
+    {
+      "state_url": "https://docs.python.org/3.15/improve-page-nojs.html",
+      "state_key": "0f8a02ea",
+      "action_type": "click",
+      "action_text": "index",
+      "next_state_url": "https://docs.python.org/3.15/genindex.html",
+      "next_state_key": "80373256",
+      "traj": "live_26d6a069_12",
+      "step": 7
+    },
+    {
+      "state_url": "https://docs.python.org/3.9/",
+      "state_key": "9db1ed4b",
+      "action_type": "click",
+      "action_text": "tutorial",
+      "next_state_url": "https://docs.python.org/3.9/tutorial/index.html",
+      "next_state_key": "76109544",
+      "traj": "live_26d6a069_13",
+      "step": 0
+    },
+    {
+      "state_url": "https://docs.python.org/3.9/tutorial/index.html",
+      "state_key": "76109544",
+      "action_type": "click",
+      "action_text": "9.3.4. method objects",
+      "next_state_url": "https://docs.python.org/3.9/tutorial/classes.html",
+      "next_state_key": "e5bbb65f",
+      "traj": "live_26d6a069_13",
+      "step": 1
+    },
+    {
+      "state_url": "https://docs.python.org/3.9/tutorial/classes.html",
+      "state_key": "e5bbb65f",
+      "action_type": "click",
+      "action_text": "nonlocal",
+      "next_state_url": "https://docs.python.org/3.9/reference/simple_stmts.html",
+      "next_state_key": "2f0fe737",
+      "traj": "live_26d6a069_13",
+      "step": 2
+    },
+    {
+      "state_url": "https://docs.python.org/3.9/reference/simple_stmts.html",
+      "state_key": "2f0fe737",
+      "action_type": "click",
+      "action_text": "typeerror",
+      "next_state_url": "https://docs.python.org/3.9/library/exceptions.html",
+      "next_state_key": "4c209944",
+      "traj": "live_26d6a069_13",
+      "step": 3
+    },
+    {
+      "state_url": "https://docs.python.org/3.9/library/exceptions.html",
+      "state_key": "4c209944",
+      "action_type": "click",
+      "action_text": "eisdir",
+      "next_state_url": "https://docs.python.org/3.9/library/errno.html",
+      "next_state_key": "2e06b717",
+      "traj": "live_26d6a069_13",
+      "step": 4
+    },
+    {
+      "state_url": "https://docs.python.org/3.9/library/errno.html",
+      "state_key": "2e06b717",
+      "action_type": "click",
+      "action_text": "history and license",
+      "next_state_url": "https://docs.python.org/license.html",
+      "next_state_key": "abd0d8fd",
+      "traj": "live_26d6a069_13",
+      "step": 5
+    },
+    {
+      "state_url": "https://docs.python.org/license.html",
+      "state_key": "abd0d8fd",
+      "action_type": "click",
+      "action_text": "report a bug",
+      "next_state_url": "https://docs.python.org/bugs.html",
+      "next_state_key": "7936a543",
+      "traj": "live_26d6a069_13",
+      "step": 6
+    },
+    {
+      "state_url": "https://docs.python.org/bugs.html",
+      "state_key": "7936a543",
+      "action_type": "click",
+      "action_text": "improve this page",
+      "next_state_url": "https://docs.python.org/improve-page-nojs.html",
+      "next_state_key": "48880d06",
+      "traj": "live_26d6a069_13",
+      "step": 7
+    },
+    {
+      "state_url": "https://docs.python.org/3/genindex.html",
+      "state_key": "dd182b54",
+      "action_type": "click",
+      "action_text": "u",
+      "next_state_url": "https://docs.python.org/3/genindex-U.html",
+      "next_state_key": "6fbdba86",
+      "traj": "live_26d6a069_14",
+      "step": 0
+    },
+    {
+      "state_url": "https://docs.python.org/3/genindex-U.html",
+      "state_key": "6fbdba86",
+      "action_type": "click",
+      "action_text": "(lzma.lzmadecompressor attribute)",
+      "next_state_url": "https://docs.python.org/3/library/lzma.html",
+      "next_state_key": "573d69c9",
+      "traj": "live_26d6a069_14",
+      "step": 1
+    },
+    {
+      "state_url": "https://docs.python.org/3/library/lzma.html",
+      "state_key": "573d69c9",
+      "action_type": "click",
+      "action_text": "bytes",
+      "next_state_url": "https://docs.python.org/3/library/stdtypes.html",
+      "next_state_key": "0761bdc9",
+      "traj": "live_26d6a069_14",
+      "step": 2
+    },
+    {
+      "state_url": "https://docs.python.org/3/library/stdtypes.html",
+      "state_key": "0761bdc9",
+      "action_type": "click",
+      "action_text": "format string syntax",
+      "next_state_url": "https://docs.python.org/3/library/string.html",
+      "next_state_key": "bf636962",
+      "traj": "live_26d6a069_14",
+      "step": 3
+    },
+    {
+      "state_url": "https://docs.python.org/3/library/string.html",
+      "state_key": "bf636962",
+      "action_type": "click",
+      "action_text": "string.templatelib \u2014 support for template string literals",
+      "next_state_url": "https://docs.python.org/3/library/string.templatelib.html",
+      "next_state_key": "b3e6bae8",
+      "traj": "live_26d6a069_14",
+      "step": 4
+    },
+    {
+      "state_url": "https://docs.python.org/3/library/string.templatelib.html",
+      "state_key": "b3e6bae8",
+      "action_type": "click",
+      "action_text": "object",
+      "next_state_url": "https://docs.python.org/3/library/functions.html",
+      "next_state_key": "8b7bf0c3",
+      "traj": "live_26d6a069_14",
+      "step": 5
+    },
+    {
+      "state_url": "https://docs.python.org/3/library/functions.html",
+      "state_key": "8b7bf0c3",
+      "action_type": "click",
+      "action_text": "awaitable",
+      "next_state_url": "https://docs.python.org/3/glossary.html",
+      "next_state_key": "9820c04f",
+      "traj": "live_26d6a069_14",
+      "step": 6
+    },
+    {
+      "state_url": "https://docs.python.org/3/glossary.html",
+      "state_key": "9820c04f",
+      "action_type": "click",
+      "action_text": "yield",
+      "next_state_url": "https://docs.python.org/3/reference/simple_stmts.html",
+      "next_state_key": "e459dbaf",
+      "traj": "live_26d6a069_14",
+      "step": 7
+    }
+  ]
+}
