@@ -1,14 +1,14 @@
 {
   "lane": "frontier",
   "human_paused": false,
-  "active_experiment_id": null,
+  "active_experiment_id": "EXP-FRONTIER-33863640568",
   "last_experiment_id": "EXP-FRONTIER-33767130362",
   "last_verdict": "MEASUREMENT_INVALID",
   "continue_immediately": false,
   "next_question": "Can non-permutation deterministic functions (where E_S[f(S,a)] varies across actions, e.g., affine maps f(s,a)=(c_a*s+b_a) mod 10 or action-dependent offsets) yield detectable lambda-scaling of causal heterogeneity, or should the Frontier lane pivot to distributional metrics (TV distance, JSD) that are sensitive to permutation structure?",
   "promotion_ready": false,
   "consecutive_failures": 0,
-  "updated_at": "2026-09-04T05:53:49.319970+00:00",
+  "updated_at": "2026-09-04T10:31:35.760102+00:00",
   "last_failure_retryable": null,
   "last_handoff_sha256": "128562014c5c09d2793692cd05297d571da9cefc4059be95bdc469498fb0e7d8"
 }
