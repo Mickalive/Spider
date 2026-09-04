@@ -1,14 +1,14 @@
 {
   "lane": "runtime",
   "human_paused": false,
-  "active_experiment_id": "EXP-RUNTIME-33805283356",
-  "last_experiment_id": "EXP-RUNTIME-33767375933",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-RUNTIME-33805283356",
   "last_verdict": "NARROW_SUCCESS",
   "continue_immediately": false,
-  "next_question": "On a non-URL-tautological server where the URL is constant and auth state varies (e.g., a Flask app with real JWT/session middleware returning different responses based on Authorization header or Cookie), does the HTTP fingerprint substrate maintain discrimination \u2014 and does the full vector exceed single-field baselines (B-STATUS-ONLY, B-BODY-ONLY) when bodies vary with auth state?",
+  "next_question": "On a real Flask server with actual JWT/session middleware (not hand-programmed lookup tables), no synthetic X-Auth-Level/X-Session/X-User/X-Error headers, and identical error response bodies for expired vs invalid tokens, does the HTTP fingerprint substrate maintain discrimination \u2014 and does the full vector (status+body) exceed B-BODY-ONLY when synthetic header tautology is removed and error states share identical bodies?",
   "promotion_ready": false,
-  "consecutive_failures": 5,
-  "updated_at": "2026-09-04T10:33:58.378183+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "fea5b244f4547485ceb42f78d18fabeb664c457927fe26b940d7a0b7e7451f04"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-04T14:34:05.450742+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "c0cf725e47b7a5596f4400213a228f41e46321d0ee790280dc1144ec00bb7894"
 }

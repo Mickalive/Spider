@@ -1,9 +1,0 @@
-{
-  "stage": "director",
-  "category": "VALIDATION_FAILURE",
-  "message": "Expecting ',' delimiter: line 60 column 1 (char 10144)",
-  "retryable": false,
-  "recorded_at": "2026-09-04T10:33:58.377990+00:00",
-  "github_run_id": "33863638559",
-  "github_run_attempt": "1"
-}
