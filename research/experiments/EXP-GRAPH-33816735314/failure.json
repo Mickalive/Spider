@@ -1,9 +1,9 @@
 {
   "stage": "director",
-  "category": "DIRECTOR_FAILURE",
-  "message": "stage exited with code 66",
+  "category": "VALIDATION_FAILURE",
+  "message": "invalid claim update status: CONDITIONALLY_ADVANCED",
   "retryable": false,
-  "recorded_at": "2026-09-04T14:34:43.598991+00:00",
-  "github_run_id": "33884260331",
+  "recorded_at": "2026-09-04T17:48:16.792569+00:00",
+  "github_run_id": "33902315984",
   "github_run_attempt": "1"
 }
