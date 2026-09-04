@@ -1,17 +1,26 @@
 {
   "experiment_id": "EXP-INTEL-33842055594",
   "lane": "intel",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-CROSSSITE", "C-LLM-INHERIT"],
+  "question": "Can WebArena's Docker-based self-hosting provide HTML/DOM accessibility trees compatible with SPIDER's fragment-reuse observation format?",
+  "hypothesis": "WebArena's Playwright-based environment exposes page HTML, DOM content, and accessibility tree data through its observation interface, and this data can be mapped into SPIDER's Observation.state dict format while preserving the structural information (element identity, hierarchy, attributes, text content) required for fragment extraction and reuse.",
+  "falsifier": "WebArena's observation interface provides only screenshots or API JSON responses without accessible DOM/HTML content, OR the DOM/HTML content is present but cannot be mapped to SPIDER's Observation.state dict without destroying the structural information needed for fragment identification (element type, attributes, hierarchy, text content). Specifically: if WebArena's get_accessibility_tree() or equivalent returns None/empty for at least one of the 4 self-hosted website types, or if the returned data lacks element hierarchy (parent-child relationships), OR if the DOM content is fully serialized into a flat string without parseable structure.",
+  "baselines": [
+    "SPIDER Observation model: state dict can hold arbitrary structured data (dict[str, Any]) — the only requirement is that the data preserves element identity and hierarchy for fragment extraction",
+    "SPIDER's current 2-site corpus (quotes.toscape.com, books.toscrape.com) provides raw HTML pages with parseable DOM structure — this is the only known compatible observation format",
+    "Mind2Web provides static HTML snapshots (no live environment) — observation format is HTML files, not live DOM"
+  ],
+  "positive_control": "WebArena's GitHub repository documents Playwright-based browser interaction. Playwright provides page.content() (raw HTML), page.accessibility.snapshot() (accessibility tree), and page.query_selector_all() (DOM elements). If the codebase inspection cannot find these API usages, the methodology is broken.",
+  "null_control": "If WebArena's agent interface returns only screenshots (base64 images) or API JSON responses (e.g., REST endpoint payloads) without DOM/HTML content, this constitutes a negative result. The null control verifies that the inspection distinguishes between DOM-providing and DOM-absent interfaces.",
+  "measurement_validity": [
+    "All claims about WebArena's observation interface must cite specific source files, function names, and line numbers from the github.com/web-arena-x/webarena repository",
+    "SPIDER's Observation format requirements must be derived from the actual models.py Observation dataclass, not assumed",
+    "The compatibility assessment must distinguish between: (a) data is present and directly usable, (b) data is present but requires transformation, (c) data is absent — these are different outcomes with different product consequences",
+    "Each of WebArena's 4 website types (e-commerce, social forum, collaborative coding, CMS) must be checked individually for observation compatibility"
+  ],
+  "decision_rule": "INSPECT WebArena source code for: (1) browser interaction layer (Playwright calls), (2) observation/state extraction functions, (3) what data the agent receives per step. MAP extracted data to SPIDER's Observation.state dict format. COMPATIBLE if: DOM/HTML content is accessible AND contains parseable element hierarchy (tag, attributes, children, text). PARTIALLY_COMPATIBLE if: DOM is accessible but some website types lack full DOM (e.g., iframes, shadow DOM, canvas). INCOMPATIBLE if: agent receives only screenshots or API responses without DOM. MEASUREMENT_INVALID if: repository is inaccessible, code is obfuscated, or observation interface cannot be located.",
+  "product_consequence_positive": "If COMPATIBLE: Graph lane can design C-CROSSSITE integration experiment using WebArena. Product lane can design C-LLM-INHERIT experiment. The 2-site corpus limitation is resolved. Fragment extraction code can target a concrete, well-documented DOM format.",
+  "product_consequence_negative": "If INCOMPATIBLE: WebArena cannot serve as SPIDER testbed despite 5/5 structural score. C-CROSSSITE and C-LLM-INHERIT remain bounded to 2-site corpus OR require VisualWebArena's visual modality OR require building custom integration layer. The structural proxy S1-S5 is shown to be necessary but not sufficient.",
+  "estimated_cost": "Low: source code inspection of a single GitHub repository. No compute, no Docker, no browser. ~20 minutes of agent time.",
+  "expected_information_gain": "HIGH: This resolves a binary blocking question. If compatible, it unblocks two priority claims and two lanes. If incompatible, it falsifies the assumption that structural proxy scores predict observation-format compatibility, which changes the Intel lane's methodology. Either outcome materially changes the roadmap."
 }
