@@ -7,8 +7,8 @@
   "continue_immediately": false,
   "next_question": "Can WebArena's Docker-based self-hosting provide HTML/DOM accessibility trees compatible with SPIDER's fragment-reuse observation format?",
   "promotion_ready": false,
-  "consecutive_failures": 2,
-  "updated_at": "2026-09-04T10:48:45.795907+00:00",
+  "consecutive_failures": 3,
+  "updated_at": "2026-09-04T14:35:35.278223+00:00",
   "last_failure_retryable": false,
   "last_handoff_sha256": "46853bb92c10fbe26f3ba849ff7664c02b95b23d39e1033fbc6efe33424a3336"
 }

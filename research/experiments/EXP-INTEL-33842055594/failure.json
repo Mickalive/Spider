@@ -1,9 +1,9 @@
 {
   "stage": "director",
-  "category": "VALIDATION_FAILURE",
-  "message": "invalid claim update status: REQUIRES_INTEGRATION",
+  "category": "DIRECTOR_FAILURE",
+  "message": "stage exited with code 66",
   "retryable": false,
-  "recorded_at": "2026-09-04T10:48:45.795670+00:00",
-  "github_run_id": "33863645867",
+  "recorded_at": "2026-09-04T14:35:35.277967+00:00",
+  "github_run_id": "33884257911",
   "github_run_attempt": "1"
 }
