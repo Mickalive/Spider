@@ -1,9 +1,9 @@
 {
   "stage": "director",
-  "category": "DIRECTOR_FAILURE",
-  "message": "stage exited with code 66",
+  "category": "VALIDATION_FAILURE",
+  "message": "Expecting ',' delimiter: line 60 column 1 (char 10144)",
   "retryable": false,
-  "recorded_at": "2026-09-04T05:54:16.374413+00:00",
-  "github_run_id": "33842052506",
+  "recorded_at": "2026-09-04T10:33:58.377990+00:00",
+  "github_run_id": "33863638559",
   "github_run_attempt": "1"
 }
