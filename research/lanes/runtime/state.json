@@ -2,13 +2,13 @@
   "lane": "runtime",
   "human_paused": false,
   "active_experiment_id": "EXP-RUNTIME-33902315583",
-  "last_experiment_id": "EXP-RUNTIME-33805283356",
-  "last_verdict": "NARROW_SUCCESS",
+  "last_experiment_id": "EXP-RUNTIME-33902315583",
+  "last_verdict": "C-MEAS-VALID SURVIVES on real Flask 3.1.3 + PyJWT 2.13.0 HS256 middleware. All three frozen decision rules pass: (1) full-vector discrimination 0.833 > 0.5; (2) null FP rate 0.0% < 5% under 50-150ms server jitter; (3) valid-vs-expired drift Jaccard 0.3505 < 0.5 (discriminable). Audit PASS with producer_claim_supported=true; all metrics recomputed match. Parent gaps V1-REAL-MIDDLEWARE-GAP and V2-SYNTHETIC-HEADER-TAUTOLOGY closed. Claim ceiling narrowed to Flask/JWT localhost with standard headers only; does not establish discrimination on production OAuth/OIDC, CDN, volatile headers, jitter >150ms, or cross-Python-version.",
   "continue_immediately": false,
-  "next_question": "On a real Flask server with actual JWT/session middleware (not hand-programmed lookup tables), no synthetic X-Auth-Level/X-Session/X-User/X-Error headers, and identical error response bodies for expired vs invalid tokens, does the HTTP fingerprint substrate maintain discrimination \u2014 and does the full vector (status+body) exceed B-BODY-ONLY when synthetic header tautology is removed and error states share identical bodies?",
+  "next_question": "On production OAuth/OIDC providers (e.g., Auth0, Google, GitHub) with additional response variation (cache-Control, ETag, request IDs, rate-limit headers, chunked encoding, compressed bodies), does the HTTP fingerprint substrate maintain discrimination >0.5, and does the full vector exceed B-BODY-ONLY when standard headers vary independently with auth state?",
   "promotion_ready": false,
   "consecutive_failures": 1,
-  "updated_at": "2026-09-04T18:05:43.013815+00:00",
+  "updated_at": "2026-09-04T19:59:33.449195+00:00",
   "last_failure_retryable": false,
-  "last_handoff_sha256": "c0cf725e47b7a5596f4400213a228f41e46321d0ee790280dc1144ec00bb7894"
+  "last_handoff_sha256": "7d45cc9a983861e0411c5344dd83326e9aab1b190e9b08637e9b8ad8ebfb24b2"
 }
