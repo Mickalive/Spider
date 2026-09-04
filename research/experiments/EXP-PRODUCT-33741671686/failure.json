@@ -1,9 +1,9 @@
 {
   "stage": "director",
-  "category": "VALIDATION_FAILURE",
-  "message": "invalid claim update status: POC_ADVANCED",
+  "category": "DIRECTOR_FAILURE",
+  "message": "stage exited with code 66",
   "retryable": false,
-  "recorded_at": "2026-09-04T10:36:24.435961+00:00",
-  "github_run_id": "33863641313",
+  "recorded_at": "2026-09-04T14:35:33.617470+00:00",
+  "github_run_id": "33884264339",
   "github_run_attempt": "1"
 }
