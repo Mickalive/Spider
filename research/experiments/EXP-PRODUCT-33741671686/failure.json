@@ -1,0 +1,9 @@
+{
+  "stage": "director",
+  "category": "VALIDATION_FAILURE",
+  "message": "invalid claim update status: POC_ADVANCED",
+  "retryable": false,
+  "recorded_at": "2026-09-04T10:36:24.435961+00:00",
+  "github_run_id": "33863641313",
+  "github_run_attempt": "1"
+}
