@@ -1,9 +1,9 @@
 {
   "stage": "director",
-  "category": "DIRECTOR_FAILURE",
-  "message": "stage exited with code 66",
+  "category": "VALIDATION_FAILURE",
+  "message": "invalid claim update status: ADVANCED_TO_MULTI_PARAM_POC",
   "retryable": false,
-  "recorded_at": "2026-09-04T14:35:33.617470+00:00",
-  "github_run_id": "33884264339",
+  "recorded_at": "2026-09-04T17:48:29.133868+00:00",
+  "github_run_id": "33902312702",
   "github_run_attempt": "1"
 }
