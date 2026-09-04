@@ -1,0 +1,730 @@
+{
+  "invalid_token": [
+    {
+      "url": "http://127.0.0.1:18927/api/data",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Fri, 04 Sep 2026 17:56:21 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "34",
+        "Connection": "close"
+      },
+      "body_hash": "16c3e6a8096db3343a5b971e72ba3ee7e8845cad1fd45ed8b7e005bb840eb842",
+      "body_preview": "{\"error\":\"authentication_failed\"}\n",
+      "fingerprint": "9e5019e39f11869c0dd87367da446f3dd62613eb7749654fdbfb321f7038bebe",
+      "elapsed": 0.1516251209999382,
+      "timestamp": 1788544581.9395778,
+      "state": "invalid_token",
+      "rep": 9
+    },
+    {
+      "url": "http://127.0.0.1:18927/api/data",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Fri, 04 Sep 2026 17:56:22 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "34",
+        "Connection": "close"
+      },
+      "body_hash": "16c3e6a8096db3343a5b971e72ba3ee7e8845cad1fd45ed8b7e005bb840eb842",
+      "body_preview": "{\"error\":\"authentication_failed\"}\n",
+      "fingerprint": "9e5019e39f11869c0dd87367da446f3dd62613eb7749654fdbfb321f7038bebe",
+      "elapsed": 0.07014702100002523,
+      "timestamp": 1788544582.0169253,
+      "state": "invalid_token",
+      "rep": 0
+    },
+    {
+      "url": "http://127.0.0.1:18927/api/data",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Fri, 04 Sep 2026 17:56:23 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "34",
+        "Connection": "close"
+      },
+      "body_hash": "16c3e6a8096db3343a5b971e72ba3ee7e8845cad1fd45ed8b7e005bb840eb842",
+      "body_preview": "{\"error\":\"authentication_failed\"}\n",
+      "fingerprint": "9e5019e39f11869c0dd87367da446f3dd62613eb7749654fdbfb321f7038bebe",
+      "elapsed": 0.055559874999971726,
+      "timestamp": 1788544583.440936,
+      "state": "invalid_token",
+      "rep": 8
+    },
+    {
+      "url": "http://127.0.0.1:18927/api/data",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Fri, 04 Sep 2026 17:56:24 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "34",
+        "Connection": "close"
+      },
+      "body_hash": "16c3e6a8096db3343a5b971e72ba3ee7e8845cad1fd45ed8b7e005bb840eb842",
+      "body_preview": "{\"error\":\"authentication_failed\"}\n",
+      "fingerprint": "9e5019e39f11869c0dd87367da446f3dd62613eb7749654fdbfb321f7038bebe",
+      "elapsed": 0.09438665699997273,
+      "timestamp": 1788544584.4992871,
+      "state": "invalid_token",
+      "rep": 1
+    },
+    {
+      "url": "http://127.0.0.1:18927/api/data",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Fri, 04 Sep 2026 17:56:24 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "34",
+        "Connection": "close"
+      },
+      "body_hash": "16c3e6a8096db3343a5b971e72ba3ee7e8845cad1fd45ed8b7e005bb840eb842",
+      "body_preview": "{\"error\":\"authentication_failed\"}\n",
+      "fingerprint": "9e5019e39f11869c0dd87367da446f3dd62613eb7749654fdbfb321f7038bebe",
+      "elapsed": 0.05961551400002918,
+      "timestamp": 1788544584.6898096,
+      "state": "invalid_token",
+      "rep": 5
+    },
+    {
+      "url": "http://127.0.0.1:18927/api/data",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Fri, 04 Sep 2026 17:56:26 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "34",
+        "Connection": "close"
+      },
+      "body_hash": "16c3e6a8096db3343a5b971e72ba3ee7e8845cad1fd45ed8b7e005bb840eb842",
+      "body_preview": "{\"error\":\"authentication_failed\"}\n",
+      "fingerprint": "9e5019e39f11869c0dd87367da446f3dd62613eb7749654fdbfb321f7038bebe",
+      "elapsed": 0.11544529100001455,
+      "timestamp": 1788544586.7288785,
+      "state": "invalid_token",
+      "rep": 7
+    },
+    {
+      "url": "http://127.0.0.1:18927/api/data",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Fri, 04 Sep 2026 17:56:27 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "34",
+        "Connection": "close"
+      },
+      "body_hash": "16c3e6a8096db3343a5b971e72ba3ee7e8845cad1fd45ed8b7e005bb840eb842",
+      "body_preview": "{\"error\":\"authentication_failed\"}\n",
+      "fingerprint": "9e5019e39f11869c0dd87367da446f3dd62613eb7749654fdbfb321f7038bebe",
+      "elapsed": 0.08558504000006906,
+      "timestamp": 1788544587.4912252,
+      "state": "invalid_token",
+      "rep": 2
+    },
+    {
+      "url": "http://127.0.0.1:18927/api/data",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Fri, 04 Sep 2026 17:56:27 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "34",
+        "Connection": "close"
+      },
+      "body_hash": "16c3e6a8096db3343a5b971e72ba3ee7e8845cad1fd45ed8b7e005bb840eb842",
+      "body_preview": "{\"error\":\"authentication_failed\"}\n",
+      "fingerprint": "9e5019e39f11869c0dd87367da446f3dd62613eb7749654fdbfb321f7038bebe",
+      "elapsed": 0.1488338299999441,
+      "timestamp": 1788544587.8186142,
+      "state": "invalid_token",
+      "rep": 6
+    },
+    {
+      "url": "http://127.0.0.1:18927/api/data",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Fri, 04 Sep 2026 17:56:29 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "34",
+        "Connection": "close"
+      },
+      "body_hash": "16c3e6a8096db3343a5b971e72ba3ee7e8845cad1fd45ed8b7e005bb840eb842",
+      "body_preview": "{\"error\":\"authentication_failed\"}\n",
+      "fingerprint": "9e5019e39f11869c0dd87367da446f3dd62613eb7749654fdbfb321f7038bebe",
+      "elapsed": 0.08201045500004511,
+      "timestamp": 1788544589.3484826,
+      "state": "invalid_token",
+      "rep": 4
+    },
+    {
+      "url": "http://127.0.0.1:18927/api/data",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Fri, 04 Sep 2026 17:56:29 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "34",
+        "Connection": "close"
+      },
+      "body_hash": "16c3e6a8096db3343a5b971e72ba3ee7e8845cad1fd45ed8b7e005bb840eb842",
+      "body_preview": "{\"error\":\"authentication_failed\"}\n",
+      "fingerprint": "9e5019e39f11869c0dd87367da446f3dd62613eb7749654fdbfb321f7038bebe",
+      "elapsed": 0.10402491499996813,
+      "timestamp": 1788544589.4750254,
+      "state": "invalid_token",
+      "rep": 3
+    }
+  ],
+  "valid_token": [
+    {
+      "url": "http://127.0.0.1:18927/api/data",
+      "status": 200,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Fri, 04 Sep 2026 17:56:22 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "41",
+        "Connection": "close"
+      },
+      "body_hash": "9e10c5e980b55daadb43d17cb60a670c70c06ccf71abb897e541d3e28a92b419",
+      "body_preview": "{\"data\":\"secret_message\",\"user\":\"alice\"}\n",
+      "fingerprint": "075c2e94e515a00a613bc57d2f2ccc198df37620b0b0493f5539535b63736a46",
+      "elapsed": 0.1014308850000134,
+      "timestamp": 1788544582.1957405,
+      "state": "valid_token",
+      "rep": 3
+    },
+    {
+      "url": "http://127.0.0.1:18927/api/data",
+      "status": 200,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Fri, 04 Sep 2026 17:56:22 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "41",
+        "Connection": "close"
+      },
+      "body_hash": "9e10c5e980b55daadb43d17cb60a670c70c06ccf71abb897e541d3e28a92b419",
+      "body_preview": "{\"data\":\"secret_message\",\"user\":\"alice\"}\n",
+      "fingerprint": "075c2e94e515a00a613bc57d2f2ccc198df37620b0b0493f5539535b63736a46",
+      "elapsed": 0.14859226200007924,
+      "timestamp": 1788544582.983468,
+      "state": "valid_token",
+      "rep": 7
+    },
+    {
+      "url": "http://127.0.0.1:18927/api/data",
+      "status": 200,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Fri, 04 Sep 2026 17:56:23 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "41",
+        "Connection": "close"
+      },
+      "body_hash": "9e10c5e980b55daadb43d17cb60a670c70c06ccf71abb897e541d3e28a92b419",
+      "body_preview": "{\"data\":\"secret_message\",\"user\":\"alice\"}\n",
+      "fingerprint": "075c2e94e515a00a613bc57d2f2ccc198df37620b0b0493f5539535b63736a46",
+      "elapsed": 0.08537453600001754,
+      "timestamp": 1788544583.1186314,
+      "state": "valid_token",
+      "rep": 5
+    },
+    {
+      "url": "http://127.0.0.1:18927/api/data",
+      "status": 200,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Fri, 04 Sep 2026 17:56:24 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "41",
+        "Connection": "close"
+      },
+      "body_hash": "9e10c5e980b55daadb43d17cb60a670c70c06ccf71abb897e541d3e28a92b419",
+      "body_preview": "{\"data\":\"secret_message\",\"user\":\"alice\"}\n",
+      "fingerprint": "075c2e94e515a00a613bc57d2f2ccc198df37620b0b0493f5539535b63736a46",
+      "elapsed": 0.07284553800002413,
+      "timestamp": 1788544584.828603,
+      "state": "valid_token",
+      "rep": 0
+    },
+    {
+      "url": "http://127.0.0.1:18927/api/data",
+      "status": 200,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Fri, 04 Sep 2026 17:56:25 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "41",
+        "Connection": "close"
+      },
+      "body_hash": "9e10c5e980b55daadb43d17cb60a670c70c06ccf71abb897e541d3e28a92b419",
+      "body_preview": "{\"data\":\"secret_message\",\"user\":\"alice\"}\n",
+      "fingerprint": "075c2e94e515a00a613bc57d2f2ccc198df37620b0b0493f5539535b63736a46",
+      "elapsed": 0.13055564100000083,
+      "timestamp": 1788544585.1254811,
+      "state": "valid_token",
+      "rep": 9
+    },
+    {
+      "url": "http://127.0.0.1:18927/api/data",
+      "status": 200,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Fri, 04 Sep 2026 17:56:25 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "41",
+        "Connection": "close"
+      },
+      "body_hash": "9e10c5e980b55daadb43d17cb60a670c70c06ccf71abb897e541d3e28a92b419",
+      "body_preview": "{\"data\":\"secret_message\",\"user\":\"alice\"}\n",
+      "fingerprint": "075c2e94e515a00a613bc57d2f2ccc198df37620b0b0493f5539535b63736a46",
+      "elapsed": 0.09065723399999115,
+      "timestamp": 1788544585.5734215,
+      "state": "valid_token",
+      "rep": 2
+    },
+    {
+      "url": "http://127.0.0.1:18927/api/data",
+      "status": 200,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Fri, 04 Sep 2026 17:56:26 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "41",
+        "Connection": "close"
+      },
+      "body_hash": "9e10c5e980b55daadb43d17cb60a670c70c06ccf71abb897e541d3e28a92b419",
+      "body_preview": "{\"data\":\"secret_message\",\"user\":\"alice\"}\n",
+      "fingerprint": "075c2e94e515a00a613bc57d2f2ccc198df37620b0b0493f5539535b63736a46",
+      "elapsed": 0.1085310200001004,
+      "timestamp": 1788544586.4764764,
+      "state": "valid_token",
+      "rep": 6
+    },
+    {
+      "url": "http://127.0.0.1:18927/api/data",
+      "status": 200,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Fri, 04 Sep 2026 17:56:28 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "41",
+        "Connection": "close"
+      },
+      "body_hash": "9e10c5e980b55daadb43d17cb60a670c70c06ccf71abb897e541d3e28a92b419",
+      "body_preview": "{\"data\":\"secret_message\",\"user\":\"alice\"}\n",
+      "fingerprint": "075c2e94e515a00a613bc57d2f2ccc198df37620b0b0493f5539535b63736a46",
+      "elapsed": 0.1429306270000552,
+      "timestamp": 1788544588.1998801,
+      "state": "valid_token",
+      "rep": 8
+    },
+    {
+      "url": "http://127.0.0.1:18927/api/data",
+      "status": 200,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Fri, 04 Sep 2026 17:56:28 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "41",
+        "Connection": "close"
+      },
+      "body_hash": "9e10c5e980b55daadb43d17cb60a670c70c06ccf71abb897e541d3e28a92b419",
+      "body_preview": "{\"data\":\"secret_message\",\"user\":\"alice\"}\n",
+      "fingerprint": "075c2e94e515a00a613bc57d2f2ccc198df37620b0b0493f5539535b63736a46",
+      "elapsed": 0.08611292399996273,
+      "timestamp": 1788544588.415584,
+      "state": "valid_token",
+      "rep": 4
+    },
+    {
+      "url": "http://127.0.0.1:18927/api/data",
+      "status": 200,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Fri, 04 Sep 2026 17:56:29 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "41",
+        "Connection": "close"
+      },
+      "body_hash": "9e10c5e980b55daadb43d17cb60a670c70c06ccf71abb897e541d3e28a92b419",
+      "body_preview": "{\"data\":\"secret_message\",\"user\":\"alice\"}\n",
+      "fingerprint": "075c2e94e515a00a613bc57d2f2ccc198df37620b0b0493f5539535b63736a46",
+      "elapsed": 0.13893876399993133,
+      "timestamp": 1788544589.0135658,
+      "state": "valid_token",
+      "rep": 1
+    }
+  ],
+  "no_auth": [
+    {
+      "url": "http://127.0.0.1:18927/api/data",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Fri, 04 Sep 2026 17:56:22 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "36",
+        "Connection": "close"
+      },
+      "body_hash": "d5eaf4e1433cef1ee10c899e7a1521989910b6fc636f4cb4c98a8d026e1f30e4",
+      "body_preview": "{\"error\":\"authentication_required\"}\n",
+      "fingerprint": "ac168b5726e93f6f8b9bd69edfd2b99ffe5f80dfaa28b97a37bbe9121179f526",
+      "elapsed": 0.11896191599998929,
+      "timestamp": 1788544582.4103513,
+      "state": "no_auth",
+      "rep": 6
+    },
+    {
+      "url": "http://127.0.0.1:18927/api/data",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Fri, 04 Sep 2026 17:56:23 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "36",
+        "Connection": "close"
+      },
+      "body_hash": "d5eaf4e1433cef1ee10c899e7a1521989910b6fc636f4cb4c98a8d026e1f30e4",
+      "body_preview": "{\"error\":\"authentication_required\"}\n",
+      "fingerprint": "ac168b5726e93f6f8b9bd69edfd2b99ffe5f80dfaa28b97a37bbe9121179f526",
+      "elapsed": 0.12174989200002528,
+      "timestamp": 1788544583.2503865,
+      "state": "no_auth",
+      "rep": 8
+    },
+    {
+      "url": "http://127.0.0.1:18927/api/data",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Fri, 04 Sep 2026 17:56:23 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "36",
+        "Connection": "close"
+      },
+      "body_hash": "d5eaf4e1433cef1ee10c899e7a1521989910b6fc636f4cb4c98a8d026e1f30e4",
+      "body_preview": "{\"error\":\"authentication_required\"}\n",
+      "fingerprint": "ac168b5726e93f6f8b9bd69edfd2b99ffe5f80dfaa28b97a37bbe9121179f526",
+      "elapsed": 0.05840162799995596,
+      "timestamp": 1788544583.6629164,
+      "state": "no_auth",
+      "rep": 2
+    },
+    {
+      "url": "http://127.0.0.1:18927/api/data",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Fri, 04 Sep 2026 17:56:23 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "36",
+        "Connection": "close"
+      },
+      "body_hash": "d5eaf4e1433cef1ee10c899e7a1521989910b6fc636f4cb4c98a8d026e1f30e4",
+      "body_preview": "{\"error\":\"authentication_required\"}\n",
+      "fingerprint": "ac168b5726e93f6f8b9bd69edfd2b99ffe5f80dfaa28b97a37bbe9121179f526",
+      "elapsed": 0.10276152800008731,
+      "timestamp": 1788544583.9935486,
+      "state": "no_auth",
+      "rep": 4
+    },
+    {
+      "url": "http://127.0.0.1:18927/api/data",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Fri, 04 Sep 2026 17:56:26 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "36",
+        "Connection": "close"
+      },
+      "body_hash": "d5eaf4e1433cef1ee10c899e7a1521989910b6fc636f4cb4c98a8d026e1f30e4",
+      "body_preview": "{\"error\":\"authentication_required\"}\n",
+      "fingerprint": "ac168b5726e93f6f8b9bd69edfd2b99ffe5f80dfaa28b97a37bbe9121179f526",
+      "elapsed": 0.14472809200003667,
+      "timestamp": 1788544586.016076,
+      "state": "no_auth",
+      "rep": 9
+    },
+    {
+      "url": "http://127.0.0.1:18927/api/data",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Fri, 04 Sep 2026 17:56:26 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "36",
+        "Connection": "close"
+      },
+      "body_hash": "d5eaf4e1433cef1ee10c899e7a1521989910b6fc636f4cb4c98a8d026e1f30e4",
+      "body_preview": "{\"error\":\"authentication_required\"}\n",
+      "fingerprint": "ac168b5726e93f6f8b9bd69edfd2b99ffe5f80dfaa28b97a37bbe9121179f526",
+      "elapsed": 0.0782564060000368,
+      "timestamp": 1788544586.8765323,
+      "state": "no_auth",
+      "rep": 5
+    },
+    {
+      "url": "http://127.0.0.1:18927/api/data",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Fri, 04 Sep 2026 17:56:27 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "36",
+        "Connection": "close"
+      },
+      "body_hash": "d5eaf4e1433cef1ee10c899e7a1521989910b6fc636f4cb4c98a8d026e1f30e4",
+      "body_preview": "{\"error\":\"authentication_required\"}\n",
+      "fingerprint": "ac168b5726e93f6f8b9bd69edfd2b99ffe5f80dfaa28b97a37bbe9121179f526",
+      "elapsed": 0.13034358100003374,
+      "timestamp": 1788544587.3967223,
+      "state": "no_auth",
+      "rep": 0
+    },
+    {
+      "url": "http://127.0.0.1:18927/api/data",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Fri, 04 Sep 2026 17:56:27 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "36",
+        "Connection": "close"
+      },
+      "body_hash": "d5eaf4e1433cef1ee10c899e7a1521989910b6fc636f4cb4c98a8d026e1f30e4",
+      "body_preview": "{\"error\":\"authentication_required\"}\n",
+      "fingerprint": "ac168b5726e93f6f8b9bd69edfd2b99ffe5f80dfaa28b97a37bbe9121179f526",
+      "elapsed": 0.1020395059999828,
+      "timestamp": 1788544587.6249125,
+      "state": "no_auth",
+      "rep": 3
+    },
+    {
+      "url": "http://127.0.0.1:18927/api/data",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Fri, 04 Sep 2026 17:56:27 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "36",
+        "Connection": "close"
+      },
+      "body_hash": "d5eaf4e1433cef1ee10c899e7a1521989910b6fc636f4cb4c98a8d026e1f30e4",
+      "body_preview": "{\"error\":\"authentication_required\"}\n",
+      "fingerprint": "ac168b5726e93f6f8b9bd69edfd2b99ffe5f80dfaa28b97a37bbe9121179f526",
+      "elapsed": 0.08430395899995347,
+      "timestamp": 1788544587.906019,
+      "state": "no_auth",
+      "rep": 1
+    },
+    {
+      "url": "http://127.0.0.1:18927/api/data",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Fri, 04 Sep 2026 17:56:29 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "36",
+        "Connection": "close"
+      },
+      "body_hash": "d5eaf4e1433cef1ee10c899e7a1521989910b6fc636f4cb4c98a8d026e1f30e4",
+      "body_preview": "{\"error\":\"authentication_required\"}\n",
+      "fingerprint": "ac168b5726e93f6f8b9bd69edfd2b99ffe5f80dfaa28b97a37bbe9121179f526",
+      "elapsed": 0.14136332000009588,
+      "timestamp": 1788544589.226458,
+      "state": "no_auth",
+      "rep": 7
+    }
+  ],
+  "expired_token": [
+    {
+      "url": "http://127.0.0.1:18927/api/data",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Fri, 04 Sep 2026 17:56:22 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "34",
+        "Connection": "close"
+      },
+      "body_hash": "16c3e6a8096db3343a5b971e72ba3ee7e8845cad1fd45ed8b7e005bb840eb842",
+      "body_preview": "{\"error\":\"authentication_failed\"}\n",
+      "fingerprint": "9e5019e39f11869c0dd87367da446f3dd62613eb7749654fdbfb321f7038bebe",
+      "elapsed": 0.08223282000005838,
+      "timestamp": 1788544582.6761496,
+      "state": "expired_token",
+      "rep": 3
+    },
+    {
+      "url": "http://127.0.0.1:18927/api/data",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Fri, 04 Sep 2026 17:56:22 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "34",
+        "Connection": "close"
+      },
+      "body_hash": "16c3e6a8096db3343a5b971e72ba3ee7e8845cad1fd45ed8b7e005bb840eb842",
+      "body_preview": "{\"error\":\"authentication_failed\"}\n",
+      "fingerprint": "9e5019e39f11869c0dd87367da446f3dd62613eb7749654fdbfb321f7038bebe",
+      "elapsed": 0.0689445570000089,
+      "timestamp": 1788544582.7830436,
+      "state": "expired_token",
+      "rep": 7
+    },
+    {
+      "url": "http://127.0.0.1:18927/api/data",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Fri, 04 Sep 2026 17:56:23 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "34",
+        "Connection": "close"
+      },
+      "body_hash": "16c3e6a8096db3343a5b971e72ba3ee7e8845cad1fd45ed8b7e005bb840eb842",
+      "body_preview": "{\"error\":\"authentication_failed\"}\n",
+      "fingerprint": "9e5019e39f11869c0dd87367da446f3dd62613eb7749654fdbfb321f7038bebe",
+      "elapsed": 0.13263283399999182,
+      "timestamp": 1788544583.8830318,
+      "state": "expired_token",
+      "rep": 1
+    },
+    {
+      "url": "http://127.0.0.1:18927/api/data",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Fri, 04 Sep 2026 17:56:24 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "34",
+        "Connection": "close"
+      },
+      "body_hash": "16c3e6a8096db3343a5b971e72ba3ee7e8845cad1fd45ed8b7e005bb840eb842",
+      "body_preview": "{\"error\":\"authentication_failed\"}\n",
+      "fingerprint": "9e5019e39f11869c0dd87367da446f3dd62613eb7749654fdbfb321f7038bebe",
+      "elapsed": 0.12079945699997552,
+      "timestamp": 1788544584.2572858,
+      "state": "expired_token",
+      "rep": 5
+    },
+    {
+      "url": "http://127.0.0.1:18927/api/data",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Fri, 04 Sep 2026 17:56:25 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "34",
+        "Connection": "close"
+      },
+      "body_hash": "16c3e6a8096db3343a5b971e72ba3ee7e8845cad1fd45ed8b7e005bb840eb842",
+      "body_preview": "{\"error\":\"authentication_failed\"}\n",
+      "fingerprint": "9e5019e39f11869c0dd87367da446f3dd62613eb7749654fdbfb321f7038bebe",
+      "elapsed": 0.11273077700002432,
+      "timestamp": 1788544585.36453,
+      "state": "expired_token",
+      "rep": 8
+    },
+    {
+      "url": "http://127.0.0.1:18927/api/data",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Fri, 04 Sep 2026 17:56:25 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "34",
+        "Connection": "close"
+      },
+      "body_hash": "16c3e6a8096db3343a5b971e72ba3ee7e8845cad1fd45ed8b7e005bb840eb842",
+      "body_preview": "{\"error\":\"authentication_failed\"}\n",
+      "fingerprint": "9e5019e39f11869c0dd87367da446f3dd62613eb7749654fdbfb321f7038bebe",
+      "elapsed": 0.1426974019999534,
+      "timestamp": 1788544585.824455,
+      "state": "expired_token",
+      "rep": 0
+    },
+    {
+      "url": "http://127.0.0.1:18927/api/data",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Fri, 04 Sep 2026 17:56:26 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "34",
+        "Connection": "close"
+      },
+      "body_hash": "16c3e6a8096db3343a5b971e72ba3ee7e8845cad1fd45ed8b7e005bb840eb842",
+      "body_preview": "{\"error\":\"authentication_failed\"}\n",
+      "fingerprint": "9e5019e39f11869c0dd87367da446f3dd62613eb7749654fdbfb321f7038bebe",
+      "elapsed": 0.10150261599994792,
+      "timestamp": 1788544586.2089095,
+      "state": "expired_token",
+      "rep": 2
+    },
+    {
+      "url": "http://127.0.0.1:18927/api/data",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Fri, 04 Sep 2026 17:56:27 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "34",
+        "Connection": "close"
+      },
+      "body_hash": "16c3e6a8096db3343a5b971e72ba3ee7e8845cad1fd45ed8b7e005bb840eb842",
+      "body_preview": "{\"error\":\"authentication_failed\"}\n",
+      "fingerprint": "9e5019e39f11869c0dd87367da446f3dd62613eb7749654fdbfb321f7038bebe",
+      "elapsed": 0.057574485999907665,
+      "timestamp": 1788544587.0982797,
+      "state": "expired_token",
+      "rep": 9
+    },
+    {
+      "url": "http://127.0.0.1:18927/api/data",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Fri, 04 Sep 2026 17:56:28 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "34",
+        "Connection": "close"
+      },
+      "body_hash": "16c3e6a8096db3343a5b971e72ba3ee7e8845cad1fd45ed8b7e005bb840eb842",
+      "body_preview": "{\"error\":\"authentication_failed\"}\n",
+      "fingerprint": "9e5019e39f11869c0dd87367da446f3dd62613eb7749654fdbfb321f7038bebe",
+      "elapsed": 0.15106547700008832,
+      "timestamp": 1788544588.6754818,
+      "state": "expired_token",
+      "rep": 4
+    },
+    {
+      "url": "http://127.0.0.1:18927/api/data",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Fri, 04 Sep 2026 17:56:29 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "34",
+        "Connection": "close"
+      },
+      "body_hash": "16c3e6a8096db3343a5b971e72ba3ee7e8845cad1fd45ed8b7e005bb840eb842",
+      "body_preview": "{\"error\":\"authentication_failed\"}\n",
+      "fingerprint": "9e5019e39f11869c0dd87367da446f3dd62613eb7749654fdbfb321f7038bebe",
+      "elapsed": 0.14347554100004345,
+      "timestamp": 1788544589.6867282,
+      "state": "expired_token",
+      "rep": 6
+    }
+  ]
+}
