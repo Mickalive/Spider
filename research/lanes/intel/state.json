@@ -1,14 +1,14 @@
 {
   "lane": "intel",
   "human_paused": false,
-  "active_experiment_id": null,
+  "active_experiment_id": "EXP-INTEL-33925056324",
   "last_experiment_id": "EXP-INTEL-33842055594",
   "last_verdict": "PARTIALLY_COMPATIBLE",
   "continue_immediately": false,
   "next_question": "Can SPIDER's fragment extraction code successfully extract and reuse fragments from WebArena's live Docker environment with current_viewport_only=False, comparing accessibility_tree vs html mode for cross-site transfer on a bounded task subset?",
   "promotion_ready": false,
   "consecutive_failures": 0,
-  "updated_at": "2026-09-04T19:57:27.897101+00:00",
+  "updated_at": "2026-09-04T22:20:20.094724+00:00",
   "last_failure_retryable": null,
   "last_handoff_sha256": "c50df1d04707587e76fd7426e7d9c8960aa85cee28fb71acc9f3e9fdd262ca6e"
 }
