@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-33767130362",
+  "lane": "frontier",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "HYPOTHESIS",
+      "reason": "This experiment is MEASUREMENT_INVALID: the causal heterogeneity metric Var_a(E_S[f(S,a)]) is identically 0 for permutation-based deterministic functions by mathematical identity (all permutations of {0..9} have mean 4.5), making the positive control threshold of 0.5 a priori unreachable. The prereg section 12.3 clause 2 ('deterministic functions generate degenerate transitions') applies exactly. This is a construct-validation failure, not an empirical test of regime-dependent dynamics. C-WEB-DYNAMICS remains HYPOTHESIS — this experiment neither supports nor falsifies it."
+    }
+  ],
+  "product_action": "NONE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can non-permutation deterministic functions (where E_S[f(S,a)] varies across actions, e.g., affine maps f(s,a)=(c_a*s+b_a) mod 10 or action-dependent offsets) yield detectable lambda-scaling of causal heterogeneity, or should the Frontier lane pivot to distributional metrics (TV distance, JSD) that are sensitive to permutation structure?",
+  "reason": "The auditor's MEASUREMENT_INVALID reclassification is accepted. The causal heterogeneity metric Var_a(E_S[f(S,a)]) is mathematically degenerate for permutation functions: for any permutation pi of {0..9}, E[pi(S)] = 4.5 identically, so Var across actions = 0, and het(lambda) = lambda^2 * 0 = 0 for all lambda. This is not sampling failure but analytic impossibility of the positive control. Aggregate Spearman rho=0.33 (p=0.21), positive control 0/30 >= 0.5, Cohen's d=0.105, null control passes (permutation p_mean=0.466), function invariance passes (ANOVA interaction p=0.819). The pipeline executed correctly; the construct is degenerate for this function class. The parent experiment's descriptive monotonic effect (prediction accuracy) remains untouched — prediction accuracy IS sensitive to permutation structure while variance-of-means is not. Bounded falsification: this specific metric + this function class. C-WEB-DYNAMICS broadly remains open.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-33767130362/result.json: metrics.analytical_heterogeneity_all_zero true, metrics.spearman_rho_aggregate 0.3333, metrics.spearman_p_one_sided 0.209877, metrics.cohens_d_lambda1_vs_lambda0 0.1046, metrics.permutation_results.lambda_1.n_above_05 0/30, controls.positive_control.pass false, controls.null_control.pass true, controls.function_invariance.pass true, validity_notes[1] permutation degeneracy proof",
+    "research/experiments/EXP-FRONTIER-33767130362/audit.json: status MEASUREMENT_INVALID, producer_claim_supported false, claim_ceiling 'metric blind to permutation structure', validity_findings[1] environment could NOT express tested effect, required_fixes[0] reclassify per prereg 12.3 clause 2",
+    "research/experiments/EXP-FRONTIER-33767130362/report.md: section 2 permutation degeneracy proof, section 3.2 Monte Carlo table showing all ~0.05 noise, section 4 control table positive control FAIL, section 5 explanation prediction accuracy vs variance-of-means",
+    "research/experiments/EXP-FRONTIER-33767130362/provenance.json: execution_timestamp 2026-09-03T18:30:00Z, github_run_id 33788040686, seed 42, total_transitions 120000",
+    "research/frontier/causal_heterogeneity/analyze.py: sha256 096ab2ee6dbcea27d4db5d9acf39b9ff93d2a75801aa75634e8f0619891ff642",
+    "research/experiments/EXP-FRONTIER-33528827909/handoff.json: parent experiment descriptive monotonic effect (prediction accuracy rho=1.0, rule-memory diff 0.053-0.653) remains valid for permutation functions"
+  ]
+}

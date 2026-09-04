@@ -3,13 +3,14 @@
 Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER_CODEX_ULTIME.md`.
 
 This file is generated only from complete finalized Research 2.0 experiment packets.
-Ingested experiments: **8**. Coverage gaps: **0**.
+Ingested experiments: **9**. Coverage gaps: **0**.
 
 ## Index
 
 | Experiment | Lane | Audit | Verdict | Claims |
 |---|---|---|---|---|
 | EXP-FRONTIER-33528827909 | frontier | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-WEB-DYNAMICS |
+| EXP-FRONTIER-33767130362 | frontier | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-WEB-DYNAMICS |
 | EXP-GRAPH-33528827169 | graph | FAIL | PARAM-INHERIT-SUBSTRATE-BROKEN | C-PARAM-INHERIT |
 | EXP-GRAPH-33718012817 | graph | REVISE | COMPETITION-UNSAFE | C-PARAM-INHERIT |
 | EXP-INTEL-33528832113 | intel | REVISE | SUPPORTS | C-CROSSSITE, C-LLM-INHERIT, C-PRODUCT-ECON |
@@ -924,6 +925,1005 @@ The function invariance failure is a **measurement-sensitivity issue**, not evid
     "research/experiments/EXP-FRONTIER-33528827909/audit.json: status MEASUREMENT_INVALID, producer_claim_supported false, claim_ceiling descriptive only, validity_findings, recomputed_metrics, required_fixes"
   ],
   "recommended_action": "Design a new Frontier experiment using causal intervention (do-calculus) to test regime-dependent dynamics in synthetic Web transitions. Use larger sample sizes (≥200 test transitions per cell), more lambda levels (≥6-8), and replicates per cell (5-10) to provide statistical power and enable interaction estimation. Focus on manipulating action parameters directly to test causality rather than relying on correlation-based prediction accuracy decomposition."
+}
+```
+
+# EXP-FRONTIER-33767130362
+
+## request.json
+
+```text
+{
+  "base_sha": "b62a124ebfac4d31e4a105a162371579718d576c",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-03T14:29:30.122089+00:00",
+  "experiment_id": "EXP-FRONTIER-33767130362",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "Can causal intervention (do-calculus) on action parameters reveal regime-dependent dynamics in synthetic Web transitions where prediction accuracy decomposition fails due to small-sample inference limitations?",
+  "lane": "frontier",
+  "origin_github_run_id": "33767130362",
+  "parent_handoff": {
+    "experiment_id": "EXP-FRONTIER-33528827909",
+    "path": "research/experiments/EXP-FRONTIER-33528827909/handoff.json",
+    "sha256": "dda6bc7cd9a06aeeb68ff1ee5c67d7609d1ecd0e46d494c87db8daebda216563"
+  },
+  "reason": "pulse",
+  "request_hash": "30d2ee592b0d47de476de07b09cdeed43b1c997ce4a6a9674bdbb8e3d2205550",
+  "request_id": "8dae691d254a98b949c72dc8",
+  "schema_version": 1
+}
+```
+
+## spec.json
+
+```text
+{
+  "experiment_id": "EXP-FRONTIER-33767130362",
+  "lane": "frontier",
+  "claim_ids": ["C-WEB-DYNAMICS"],
+  "question": "Does the causal effect heterogeneity of actions across states increase monotonically with the action-dependence parameter lambda, demonstrating regime-dependent dynamics in synthetic Web-like state transitions via direct causal intervention rather than correlational prediction accuracy?",
+  "hypothesis": "When synthetic Web-like transitions are generated with a controlled action-dependence parameter lambda (lambda=0: next-state independent of action; lambda=1: next-state fully determined by action), the causal effect heterogeneity — defined as the variance across actions of the expected next-state under do(A_t=a) — will increase monotonically with lambda. Specifically: at lambda=0, heterogeneity=0 (all actions have identical interventional distributions); at lambda=1, heterogeneity is maximal (each action maps to a distinct deterministic next state); intermediate lambda values produce intermediate heterogeneity proportional to lambda^2. This demonstrates that different transition regimes have qualitatively different causal structure, detectable through direct interventional analysis without model training, prediction accuracy estimation, or train/test splitting.",
+  "falsifier": "The causal effect heterogeneity does not increase monotonically with lambda (aggregate Spearman rho < 0.65, p > 0.05 one-sided), OR heterogeneity is indistinguishable from zero at lambda=1 (permutation test p > 0.05), OR heterogeneity is significantly non-zero at lambda=0 (permutation test p < 0.05), OR the synthetic positive control fails (heterogeneity at lambda=1 < 0.5 across all 3 functions), OR results are inconsistent across deterministic functions (significant function x lambda interaction in two-way ANOVA, p < 0.05).",
+  "baselines": [
+    "Prediction accuracy difference (rule - memory) from prior experiment EXP-FRONTIER-33528827909: descriptive comparison showing whether causal heterogeneity captures the same or different information",
+    "Permutation null: action labels shuffled across transitions; interventional distributions should be identical across shuffled actions, yielding heterogeneity near zero at all lambda levels",
+    "Frequency baseline: marginal next-state distribution P(S_{t+1}) provides the expected heterogeneity under no action-dependence"
+  ],
+  "positive_control": "At lambda=1 (fully action-determined transitions), causal effect heterogeneity must be >= 0.5 across all 3 deterministic functions. This verifies the measurement pipeline can detect maximal causal structure when present. With 10 states and 4 permutation actions, the expected heterogeneity at lambda=1 is the variance of {f(s, a_1), f(s, a_2), f(s, a_3), f(s, a_4)} averaged over states, which is strictly positive for non-trivial permutations.",
+  "null_control": "At lambda=0 (action-independent transitions), causal effect heterogeneity must be indistinguishable from zero (permutation test p > 0.05). This verifies the pipeline does not detect causal structure when none exists.",
+  "measurement_validity": [
+    "Ground-truth interventional distributions are computed analytically from the known data-generating process, not estimated from finite samples. No model training, no train/test split, no prediction accuracy estimation.",
+    "Heterogeneity metric (variance of expected next-states across actions) is computed from Monte Carlo samples of transitions; with 500 transitions per lambda per function per replication and ~125 transitions per action per cell, Monte Carlo SE of per-action means is sqrt(8.25/125) = 0.26, adequate for variance estimation.",
+    "10 independent replications per cell enable variance estimation and permutation testing.",
+    "8 lambda levels (0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.7, 1.0) provide better resolution of the low-lambda regime than the prior 4-level design, improving Spearman power.",
+    "3 independent deterministic functions (seeds 42, 43, 44) test generalizability of the monotonicity finding.",
+    "Frozen random seed (seed=42) for reproducibility; each replication uses seed=42+replication_index.",
+    "No target leakage: interventional distributions are computed from the DGP, not from held-out predictions."
+  ],
+  "decision_rule": "SURVIVES_CURRENT_TEST if ALL of: (1) Aggregate Spearman rho(causal_het_by_lambda, lambda) >= 0.65 with p < 0.05 one-sided (single aggregate comparison, no Bonferroni correction needed); (2) Positive control passes: heterogeneity >= 0.5 at lambda=1 across all functions; (3) Null control passes: heterogeneity not significantly > 0 at lambda=0 (permutation p > 0.05); (4) No significant function x lambda interaction (two-way ANOVA p > 0.05); (5) No pipeline errors. Per-function Spearman tests: rho >= 0.83 with p < 0.0021 (Bonferroni x3 correction for 3 functions) as secondary confirmation. FALSIFIED-IN-SETTING if ANY of: (1) Aggregate Spearman rho < 0.65 or p > 0.05; (2) Positive control fails; (3) Null control fails; (4) Significant function x lambda interaction. MEASUREMENT_INVALID if pipeline errors, degenerate functions, or heterogeneity CV across replications > 0.5.",
+  "product_consequence_positive": "Demonstrates that Web-like transitions have regime-dependent causal structure detectable through direct interventional analysis. Different parts of the Web may require different causal reasoning strategies. This validates causal intervention as an alternative to prediction accuracy for detecting dynamical heterogeneity, and identifies where SPIDER should invest in action-conditioned causal mechanisms vs. memory retrieval.",
+  "product_consequence_negative": "If causal effect heterogeneity does not scale with lambda, it suggests that either (a) the causal heterogeneity metric is not sensitive to dynamical variation in this setting, or (b) the synthetic model does not produce detectable causal regime effects. Physics lane should then focus on other approaches (information-theoretic, multi-scale, or geometric). Does NOT falsify C-WEB-DYNAMICS entirely — only this specific causal detection method.",
+  "estimated_cost": "Very low: pure synthetic data generation, analytical interventional distribution computation, offline variance estimation. ~120,000 transitions total (8 levels x 3 functions x 10 replications x 500 transitions). No browser/network/model calls. No train/test splitting. Computation is O(N) per replication.",
+  "expected_information_gain": "High: This is the first controlled test of whether causal effect heterogeneity can detect Web-dynamical heterogeneity, using an orthogonal method (direct interventional analysis) that avoids the statistical pitfalls of the prior prediction-accuracy experiment (small-sample Spearman inference, saturated ANOVA, CV metric at low means). Testing 8 lambda levels with 10 replications provides adequate power for the Spearman test and enables proper variance estimation. A positive result validates causal intervention as a detection method; a negative result constrains the causal hypothesis."
+}
+```
+
+## prereg.md
+
+```text
+# EXP-FRONTIER-33767130362 Preregistration
+
+## 1. Experiment Identity
+
+- **Experiment ID**: EXP-FRONTIER-33767130362
+- **Lane**: Frontier
+- **Claim**: C-WEB-DYNAMICS (Interactive Web transformations contain predictive dynamical structure beyond memory and ordinary similarity)
+- **Date**: 2026-09-03
+- **Status**: DESIGN — NOT YET FROZEN
+- **Parent Experiment**: EXP-FRONTIER-33528827909 (MEASUREMENT_INVALID)
+- **Request Reason**: pulse (inherited next_question from parent handoff)
+
+## 2. Scientific Question
+
+Does the causal effect heterogeneity of actions across states increase monotonically with the action-dependence parameter lambda, demonstrating regime-dependent dynamics in synthetic Web-like state transitions via direct causal intervention rather than correlational prediction accuracy?
+
+## 3. Motivation
+
+### What the parent experiment established (EXP-FRONTIER-33528827909)
+
+The parent experiment tested whether prediction accuracy advantage of action-conditioned rules over memory scales monotonically with lambda. It produced:
+
+**Established (descriptive):**
+- Monotonic increase of rule-memory accuracy difference with lambda: 0.053 at λ=0, 0.087 at λ=0.25, 0.307 at λ=0.5, 0.653 at λ=1.0
+- Spearman rho=1.0 (perfect monotonic) across 4 lambda levels
+- Positive control passes: rules 100% at λ=1; null control passes: p=0.094 at λ=0
+- Lambda explains 96.7% of variance in rule-memory difference (ANOVA F=58.99)
+
+**Rejected (measurement invalid):**
+- Inferential claim of Bonferroni-corrected significance: exact permutation p=0.042 one-sided with n=4 lambda levels, after Bonferroni x12 p>=0.5. Primary monotonicity test CANNOT achieve significance with 4 levels.
+- Function invariance failure: CV metric invalid at low means (CV inflated by small denominators), ANOVA interaction unestimable (saturated design, 0 residual df), function main effect p=0.97.
+- Producer reported impossible p-values (p=0.0 for n=4).
+
+**Unknown:**
+- Does monotonicity survive with properly powered design?
+- Can causal intervention reveal regime-dependent dynamics beyond correlational prediction?
+- How do synthetic results translate to real Web transitions?
+
+**Do Not Assume:**
+- Monotonicity is inferentially proven (descriptive only)
+- Function invariance failure is real (CV metric invalid)
+- This experiment falsifies C-WEB-DYNAMICS
+- Synthetic-to-real translation
+- Small-sample low-lambda results are stable
+- Null control is evidence of absence (power <20%)
+
+### Why this experiment is different
+
+The parent experiment used **prediction accuracy decomposition**: train a rule model, train a memory baseline, compare accuracy. This approach has three inherent limitations:
+
+1. **Model training introduces sampling variance**: Rule accuracy depends on the train/test split, which introduces noise especially at low lambda where signal is weak.
+2. **The comparison metric (rule - memory accuracy) conflates action information with state information**: Memory accuracy also varies with lambda (because P(S_{t+1}|S_t) is non-uniform even when action-independent), making the difference metric noisy.
+3. **The Spearman test with n=4 lambda levels has minimal power**: exact permutation p=0.042 one-sided cannot survive Bonferroni correction.
+
+This experiment uses **causal effect heterogeneity via direct interventional analysis**: instead of training models and comparing accuracy, we compute ground-truth interventional distributions P(S_{t+1} | do(A_t = a)) from the known data-generating process, then measure how much these distributions vary across actions.
+
+**Key advantages:**
+- No model training → no train/test split noise
+- Ground-truth interventional distributions (computed analytically from the DGP) → no estimation error
+- The heterogeneity metric directly measures what we care about: do different actions have different causal effects?
+- 8 lambda levels (vs. 4) → substantially more power for Spearman test
+- 10 replications per cell → proper variance estimation
+
+## 4. Hypotheses
+
+### H1: Monotonic Scaling
+The causal effect heterogeneity (variance of expected next-states across actions) increases monotonically with lambda. Aggregate Spearman rho(heterogeneity, lambda) >= 0.65.
+
+### H2: Positive Control
+At lambda=1 (fully action-determined), heterogeneity >= 0.5 across all 3 deterministic functions.
+
+### H3: Null Control
+At lambda=0 (action-independent), heterogeneity is indistinguishable from zero (permutation test p > 0.05).
+
+### H4: Function Invariance
+The monotonicity finding is consistent across 3 independent deterministic functions (no significant function x lambda interaction in two-way ANOVA, p > 0.05).
+
+## 5. Data Generation
+
+### 5.1 Synthetic Transition Model
+
+Generate transitions (S_t, A_t, S_{t+1}) where:
+- State space: S = {0, 1, ..., 9} (10 discrete states)
+- Action space: A = {click, fill, submit, navigate} (4 action types)
+- Transition function: S_{t+1} = f(S_t, A_t, lambda, noise)
+
+For each transition:
+1. Draw current state S_t uniformly from S
+2. Draw action A_t uniformly from A
+3. With probability lambda: S_{t+1} = deterministic_function(S_t, A_t)
+4. With probability (1-lambda): S_{t+1} = random from S (uniform)
+
+### 5.2 Deterministic Functions
+
+Three independent frozen lookup tables (seeds 42, 43, 44) that map (state, action) to a unique next state. Each function is a different permutation of the state space for each action. Same functions as parent experiment.
+
+### 5.3 Lambda Levels
+
+Eight conditions (higher resolution than parent's 4 levels):
+- **lambda=0.0**: Pure noise, no action-dependence (null control)
+- **lambda=0.1**: Very low action-dependence
+- **lambda=0.2**: Low action-dependence
+- **lambda=0.3**: Low-moderate action-dependence
+- **lambda=0.4**: Moderate action-dependence
+- **lambda=0.5**: Mixed regime, half noise half signal
+- **lambda=0.7**: High action-dependence
+- **lambda=1.0**: Pure signal, full action-dependence (positive control)
+
+### 5.4 Sample Size
+
+- 500 transitions per lambda level per function per replication (8 levels x 3 functions x 10 replications x 500 = 120,000 total transitions)
+- No train/test split: all transitions used for interventional distribution computation
+- Each replication uses a distinct frozen seed (seed = 42 + replication_index for base generation)
+
+## 6. Causal Effect Heterogeneity Metric
+
+### 6.1 Interventional Distribution
+
+For a given lambda level and deterministic function, the interventional distribution under do(A_t = a) is:
+
+P(S_{t+1} | do(A_t = a)) = lambda * delta_{f(S_t, a)} + (1-lambda) * Uniform(S)
+
+where delta is the point mass at the deterministic next state and S_t ~ Uniform(S).
+
+### 6.2 Expected Next-State Under Intervention
+
+E[S_{t+1} | do(A_t = a)] = lambda * E_S[f(S, a)] + (1-lambda) * 4.5
+
+where E_S[f(S, a)] is the average of f(s, a) over all states s.
+
+### 6.3 Causal Effect Heterogeneity
+
+For a given lambda level and function, the heterogeneity is:
+
+het(lambda) = Var_a(E[S_{t+1} | do(A_t = a)])
+
+where the variance is over the 4 actions {click, fill, submit, navigate}.
+
+At lambda=0: het = 0 (all actions have E[S_{t+1}] = 4.5).
+At lambda=1: het = Var_a(E_S[f(S, a)]) > 0 (each action maps to a distinct permutation).
+At intermediate lambda: het scales proportionally with lambda^2 (since het = lambda^2 * Var_a(E_S[f(S,a)])).
+
+### 6.4 Monte Carlo Estimation
+
+For each replication, generate 500 transitions at a given lambda and function. Group by action (expect ~125 per action). Compute sample mean next-state for each action. Compute variance of the 4 sample means. This is the Monte Carlo estimate of het.
+
+### 6.5 Primary Statistic
+
+Spearman rank correlation between het(lambda) and lambda across the 8 levels, averaged across functions (aggregate test, n=8, single comparison).
+
+## 7. Measures
+
+### 7.1 Primary Metric
+- **causal_het_by_lambda**: Average heterogeneity at each lambda level, averaged across 3 functions x 10 replications
+- **spearman_rho_aggregate**: Spearman correlation between causal_het_by_lambda and lambda (n=8, single aggregate comparison)
+
+### 7.2 Secondary Metrics
+- Per-function heterogeneity at each lambda level
+- Per-replication heterogeneity at each lambda level (variance across replications)
+- Per-action expected next-states at each lambda level
+- Monte Carlo standard error of heterogeneity estimates
+- Cohen's d of heterogeneity at lambda=1 vs lambda=0
+
+### 7.3 Comparison Metrics
+- Prediction accuracy difference (rule - memory) from parent experiment at matching lambda levels (qualitative comparison only)
+
+## 8. Null Models
+
+### 8.1 Permutation Null
+For each replication at each lambda level, shuffle action labels across transitions and recompute heterogeneity. The shuffled heterogeneity distribution provides the null distribution for testing whether observed heterogeneity is significantly > 0.
+
+### 8.2 Frequency Null
+Under no action-dependence (lambda=0), the expected heterogeneity is 0. The permutation null at lambda=0 should yield heterogeneity consistent with sampling noise around 0.
+
+## 9. Statistical Tests
+
+### 9.1 Primary Test
+- Spearman rank correlation: rho(causal_het_by_lambda, lambda) across 8 lambda levels
+- One-sided test: rho > 0
+- **Aggregate test (single comparison, no Bonferroni correction needed)**: rho >= 0.65, p < 0.05 one-sided. For n=8, exact one-sided p(rho >= 0.619) = 0.025; rho >= 0.65 gives p < 0.05 one-sided.
+- **Per-function tests (3 comparisons, Bonferroni corrected)**: rho >= 0.83, p < 0.0021 one-sided (alpha = 0.05/3 = 0.0167). These are secondary confirmation.
+
+### 9.2 Permutation Tests
+- At lambda=0: permutation test for heterogeneity > 0 (one-sided, 1000 permutations)
+- At lambda=1: permutation test for heterogeneity > 0.5 (one-sided, 1000 permutations)
+
+### 9.3 Two-Way ANOVA
+- causal_het ~ lambda + function + lambda:function
+- Non-significant interaction term (p > 0.05) supports function invariance
+- With 8 levels x 3 functions x 10 replications = 240 observations, adequate residual df for interaction estimation (unlike parent's saturated design)
+
+### 9.4 Effect Size
+- Cohen's d for heterogeneity at lambda=1 vs lambda=0
+
+## 10. Controls
+
+### 10.1 Positive Control (lambda=1)
+- Heterogeneity >= 0.5 across all 3 functions
+- This verifies: deterministic functions produce detectable causal heterogeneity, pipeline correctly computes interventional distributions
+
+### 10.2 Null Control (lambda=0)
+- Heterogeneity not significantly > 0 (permutation test p > 0.05)
+- This verifies: pipeline does not detect causal structure when absent
+
+### 10.3 Permutation Null Control
+- Shuffled action labels yield heterogeneity near zero at all lambda levels
+- This verifies: observed heterogeneity is driven by action-dependence, not sampling artifacts
+
+### 10.4 Function Invariance Control
+- Heterogeneity should be similar across functions at each lambda level
+- Two-way ANOVA interaction p > 0.05
+- With 240 observations (8 x 3 x 10), residual df = 240 - 8 - 3 - 24 = 205 (adequate for interaction estimation)
+
+## 11. Validity Threats
+
+### 11.1 Synthetic-to-Real Gap
+Synthetic transitions may not reflect real Web dynamics. **Mitigation**: this is a controlled validation experiment. If the causal heterogeneity metric cannot detect known structure in synthetic data, it cannot be trusted on real data.
+
+### 11.2 Monte Carlo Estimation Error
+With ~125 transitions per action per cell, per-action means have SE ~0.26. The variance of 4 means has sampling variability. **Mitigation**: 10 replications provide direct variance estimation; report confidence intervals.
+
+### 11.3 Deterministic Function Choice
+Only 3 permutation-based functions tested. Other deterministic structures might show different behavior. **Mitigation**: require consistent results across all 3 functions; significant function x lambda interaction invalidates the finding.
+
+### 11.4 Multiple Comparisons
+Aggregate test is a single comparison (no correction needed). Per-function tests use Bonferroni x3. **Mitigation**: primary test is aggregate; per-function tests are secondary.
+
+### 11.5 Spearman Power with n=8
+With n=8 lambda levels, the exact Spearman test has limited power for moderate rho values. **Mitigation**: rho=1.0 from parent experiment suggests the effect is strong; 8 levels give substantially more power than 4; report exact p-values.
+
+### 11.6 Comparison with Parent Experiment
+This experiment uses a different metric (causal heterogeneity vs. prediction accuracy) and different statistical tests. Results are not directly comparable. **Mitigation**: qualitative comparison only; the two experiments test the same underlying hypothesis (regime-dependent dynamics) via different detection methods.
+
+## 12. Decision Rules
+
+### 12.1 SURVIVES_CURRENT_TEST
+If ALL of:
+1. Aggregate Spearman rho(causal_het_by_lambda, lambda) >= 0.65, p < 0.05 one-sided (single aggregate comparison, no Bonferroni correction)
+2. Positive control passes: heterogeneity >= 0.5 at lambda=1 across all functions
+3. Null control passes: heterogeneity not significantly > 0 at lambda=0 (permutation p > 0.05)
+4. No significant function x lambda interaction (two-way ANOVA p > 0.05)
+5. No pipeline errors
+
+### 12.2 FALSIFIED-IN-SETTING
+If ANY of:
+1. Aggregate Spearman rho < 0.65 or p > 0.05 one-sided
+2. Positive control fails (heterogeneity < 0.5 at lambda=1 in any function)
+3. Null control fails (heterogeneity significantly > 0 at lambda=0)
+4. Significant function x lambda interaction (p < 0.05)
+
+### 12.3 MEASUREMENT_INVALID
+If:
+1. Pipeline errors prevent computation
+2. Deterministic functions generate degenerate transitions
+3. Monte Carlo variance is excessive (heterogeneity CV across replications > 0.5)
+
+## 13. Expected Outcomes
+
+### 13.1 Positive Result (SURVIVES_CURRENT_TEST)
+- Demonstrates that Web-like transitions have regime-dependent causal structure
+- Validates causal effect heterogeneity as an alternative detection method to prediction accuracy
+- The causal approach avoids the statistical pitfalls of the parent experiment (no model training, ground-truth interventional distributions, more lambda levels)
+- Justifies stratified causal analysis of real Web data
+- Physics lane should investigate action-type-stratified causal effects
+
+### 13.2 Negative Result (FALSIFIED-IN-SETTING)
+- Suggests that either (a) the causal heterogeneity metric is not sensitive to dynamical variation in this setting, or (b) the synthetic model does not produce detectable causal regime effects
+- Does NOT falsify C-WEB-DYNAMICS entirely — only this specific causal detection method
+- Physics lane should try other approaches (information-theoretic, multi-scale, geometric)
+
+### 13.3 Invalid Result (MEASUREMENT_INVALID)
+- Pipeline needs debugging before this question can be answered
+- Not scientific evidence for or against
+
+## 14. Analysis Plan
+
+1. **Data Generation**: Generate 120,000 transitions at 8 lambda levels x 3 functions x 10 replications x 500 transitions
+2. **Interventional Distribution Computation**: For each replication-lambda-function cell, group transitions by action, compute sample mean next-state per action
+3. **Heterogeneity Computation**: Compute variance of 4 per-action means → heterogeneity estimate
+4. **Primary Test**: Spearman correlation between average heterogeneity and lambda (n=8, single comparison, no correction)
+5. **Per-Function Tests**: Spearman correlation per function (n=8 each, Bonferroni x3 corrected)
+6. **Permutation Tests**: At lambda=0 and lambda=1, test heterogeneity against permutation null (1000 permutations)
+7. **Two-Way ANOVA**: heterogeneity ~ lambda + function + lambda:function (240 observations)
+8. **Controls**: Verify positive, null, permutation null, and function invariance controls
+9. **Robustness**: Report confidence intervals and effect sizes
+10. **Reporting**: Report all outcomes with equal prominence
+
+## 15. Analysis Code
+
+Analysis will be implemented in Python using:
+- `numpy` for array operations, random generation, and variance computation
+- `scipy.stats` for Spearman correlation
+- `scipy.stats.f_oneway` or `statsmodels` for two-way ANOVA
+- `collections.Counter` for action-grouped counting
+- Standard library only (no custom estimators required)
+
+Code will be committed to `research/frontier/causal_heterogeneity/` before execution.
+
+## 16. Pre-registered Expectations
+
+From prior work and theoretical derivation:
+- het(lambda) = lambda^2 * Var_a(E_S[f(S, a)]) for the synthetic DGP
+- This implies het scales quadratically with lambda (not linearly), so Spearman rho should be high (monotonic increasing) even if the relationship is non-linear
+- With 8 lambda levels spanning 0 to 1, Spearman should detect the monotonic trend
+- The parent experiment's descriptive rho=1.0 suggests the effect is strong enough to detect with 8 levels
+
+## 17. Deviation Policy
+
+Any deviation from this preregistration will be labeled EXPLORATORY and cannot support confirmatory claims. A new confirmatory claim requires a new preregistration.
+
+## 18. Freeze Statement
+
+This preregistration is frozen BEFORE any analysis code is written or any outcome data is inspected. The experiment will be executed exactly as described here.
+```
+
+## freeze.json
+
+```text
+{
+  "experiment_id": "EXP-FRONTIER-33767130362",
+  "frozen_at": "2026-09-03T18:05:07.656076+00:00",
+  "hashes": {
+    "prereg.md": "0af725f7f790046390cf7a77ee74396c6e272e4c3719d1dcde0435fe68064874",
+    "request.json": "4fd8e220e5b0d682c402df1e674ef6147ab702e6cc34c73aff2514ae1f8746fd",
+    "spec.json": "b4d981a72456fcd3053693bcc63fd70a29d6aad0cd698cb9401b4de2bb21200f"
+  },
+  "schema_version": 1
+}
+```
+
+## result.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-33767130362",
+  "lane": "frontier",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "spearman_rho_aggregate": 0.3333,
+    "spearman_p_one_sided": 0.209877,
+    "analytical_heterogeneity_all_zero": true,
+    "cohens_d_lambda1_vs_lambda0": 0.1046,
+    "heterogeneity_means_by_lambda": {
+      "0.0": 0.052259,
+      "0.1": 0.054624,
+      "0.2": 0.043709,
+      "0.3": 0.058599,
+      "0.4": 0.064735,
+      "0.5": 0.054376,
+      "0.7": 0.053741,
+      "1.0": 0.057025
+    },
+    "per_function_spearman": [
+      {
+        "function": 1,
+        "seed": 42,
+        "rho": -0.4762,
+        "p_value_two_sided": 0.232936,
+        "p_value_one_sided": 0.883532
+      },
+      {
+        "function": 2,
+        "seed": 43,
+        "rho": 0.7619,
+        "p_value_two_sided": 0.028005,
+        "p_value_one_sided": 0.014002
+      },
+      {
+        "function": 3,
+        "seed": 44,
+        "rho": 0.2381,
+        "p_value_two_sided": 0.570156,
+        "p_value_one_sided": 0.285078
+      }
+    ],
+    "anova_results": {
+      "design": "3 functions x 8 lambda levels x 10 reps = 240 observations",
+      "full_model": {
+        "lambda_effect": {
+          "F": 0.5643,
+          "p_value": 0.784437,
+          "df": 7
+        },
+        "function_effect": {
+          "F": 0.2626,
+          "p_value": 0.769314,
+          "df": 2
+        },
+        "interaction_effect": {
+          "F": 0.6516,
+          "p_value": 0.819281,
+          "df": 14
+        },
+        "residual_df": 216,
+        "model_r_squared": 0.0592
+      },
+      "interaction_pass": true,
+      "interaction_threshold_alpha": 0.05
+    },
+    "permutation_results": {
+      "lambda_0": {
+        "description": "Heterogeneity significantly > 0 at lambda=0 (should NOT be)",
+        "per_replication_p_values": [0.932, 0.506, 0.075, 0.815, 0.062, 0.028, 0.061, 0.352, 0.7, 0.643, 0.336, 0.58, 0.573, 0.524, 0.593, 0.45, 0.975, 0.142, 0.751, 0.439, 0.692, 0.087, 0.44, 0.202, 0.796, 0.433, 0.632, 0.308, 0.147, 0.706],
+        "mean_p_value": 0.466,
+        "pass": true,
+        "threshold_alpha": 0.05,
+        "interpretation": "Null control passes if mean p > alpha (heterogeneity not significantly > 0)"
+      },
+      "lambda_1": {
+        "description": "Heterogeneity >= 0.5 at lambda=1 across all functions/replications",
+        "n_above_05": 0,
+        "total_measurements": 30,
+        "per_replication_p_values": [0.066, 0.945, 0.009, 0.799, 0.929, 0.703, 0.554, 0.666, 0.601, 0.701, 0.098, 0.609, 0.898, 0.274, 0.928, 0.304, 0.292, 0.014, 0.131, 0.377, 0.933, 0.071, 0.178, 0.05, 0.937, 0.902, 0.522, 0.026, 0.748, 0.46],
+        "mean_p_value": 0.490833,
+        "pass": false,
+        "threshold_heterogeneity": 0.5,
+        "interpretation": "Positive control passes if all replications have het >= 0.5"
+      }
+    }
+  },
+  "controls": {
+    "positive_control": {
+      "description": "Heterogeneity >= 0.5 at lambda=1 across all functions",
+      "pass": false,
+      "heterogeneity_at_lambda1_mean": 0.057,
+      "heterogeneity_at_lambda1_min": 0.0061,
+      "heterogeneity_at_lambda1_max": 0.1849,
+      "n_above_05": 0,
+      "total_measurements": 30,
+      "evidence_ref": "metrics.permutation_results.lambda_1"
+    },
+    "null_control": {
+      "description": "Heterogeneity not significantly > 0 at lambda=0 (permutation p > 0.05)",
+      "pass": true,
+      "heterogeneity_at_lambda0_mean": 0.0523,
+      "permutation_test_mean_p": 0.466,
+      "evidence_ref": "metrics.permutation_results.lambda_0"
+    },
+    "permutation_null": {
+      "description": "Shuffled action labels yield heterogeneity near zero at all lambda levels",
+      "pass": true,
+      "note": "Verified analytically: when action labels are shuffled, E[S_{t+1}|do(A=a)] is identical for all actions, so heterogeneity=0",
+      "evidence_ref": "metrics.analytical_heterogeneity_all_zero"
+    },
+    "function_invariance": {
+      "description": "No significant function x lambda interaction (two-way ANOVA p > 0.05)",
+      "pass": true,
+      "interaction_p_value": 0.819281,
+      "evidence_ref": "metrics.anova_results.full_model.interaction_effect.p_value"
+    },
+    "monotonicity_sensitivity": {
+      "description": "Heterogeneity is monotonically increasing with lambda",
+      "pass": false,
+      "heterogeneity_means_by_lambda": [0.052259, 0.054624, 0.043709, 0.058599, 0.064735, 0.054376, 0.053741, 0.057025]
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/frontier/causal_heterogeneity/analyze.py",
+      "sha256": "096ab2ee6dbcea27d4db5d9acf39b9ff93d2a75801aa75634e8f0619891ff642",
+      "role": "code"
+    },
+    {
+      "path": "research/frontier/causal_heterogeneity/result.json",
+      "sha256": "a9fa8ee1e0c4d223c7ccacfaabd422c584057892d55f59cec0894c441e140231",
+      "role": "derived"
+    }
+  ],
+  "observations": [
+    "Analytical heterogeneity is EXACTLY 0 for ALL lambda levels because permutation functions have E_S[f(S, a)] = 4.5 for all actions (mean of any permutation of {0,...,9} is 4.5). This is a mathematical identity, not a sampling artifact.",
+    "Monte Carlo heterogeneity estimates are all ~0.04-0.07 across all lambda levels, consistent with sampling noise around the true value of 0. No lambda level shows signal above noise.",
+    "No monotonic trend: aggregate Spearman rho = 0.3333, p_one_sided = 0.210 (not significant). Fails the decision threshold of rho >= 0.65, p < 0.05.",
+    "Positive control FAILS catastrophically: 0/30 measurements at lambda=1 have heterogeneity >= 0.5. Maximum observed is 0.1849. Mean is 0.057.",
+    "Null control PASSES: permutation test at lambda=0 yields mean p = 0.466 (not significant, as expected when true heterogeneity is 0).",
+    "Function invariance PASSES: ANOVA interaction p = 0.819 (not significant). All 3 functions show the same noise pattern around 0.",
+    "Cohen's d (lambda=1 vs lambda=0) = 0.1046 (very small), confirming no detectable difference between the extreme lambda conditions.",
+    "The prereg's theoretical prediction het = lambda^2 * Var_a(E_S[f(S,a)]) is mathematically correct, but Var_a(E_S[f(S,a)]) = 0 for permutation functions, making het = 0 for all lambda.",
+    "Per-function Spearman correlations are inconsistent: Function 2 (seed=43) shows rho=0.76 (p=0.014), but Function 1 (seed=42) shows rho=-0.47 and Function 3 (seed=44) shows rho=0.24. This inconsistency is expected under the null (sampling noise around 0).",
+    "Two-way ANOVA: lambda main effect F=0.564 (p=0.784), function main effect F=0.263 (p=0.769), interaction F=0.652 (p=0.819). No significant effects. Model R^2 = 0.059 (essentially unexplained variance)."
+  ],
+  "validity_notes": [
+    "The experiment pipeline executed correctly with no errors. The negative result is scientific, not infrastructural. status=COMPLETE.",
+    "CRITICAL DESIGN FLAW: The deterministic functions (permutations of {0,...,9} for each action) are degenerate for the causal heterogeneity metric. For any permutation pi of {0,...,9}, sum(pi(s)) = sum({0,...,9}) = 45, so mean(pi(s)) = 4.5 for ALL actions. Therefore Var_a(E_S[f(S,a)]) = 0 identically, and het(lambda) = lambda^2 * 0 = 0 for all lambda.",
+    "The Monte Carlo estimates (~0.05) are sampling noise around the true value of 0, not evidence of signal. With ~125 transitions per action and state space {0,...,9}, the standard error of per-action means is ~0.26, and the variance of 4 such means has expected value ~0.017 under the null. Observed values of 0.04-0.07 are consistent with this.",
+    "This does NOT falsify C-WEB-DYNAMICS broadly; it falsifies this specific causal heterogeneity metric applied to permutation-based deterministic functions. The metric is well-defined but the function class is degenerate.",
+    "A different choice of deterministic functions (non-permutation, e.g., functions where E_S[f(S,a)] varies across actions) would be needed to test the causal heterogeneity hypothesis properly. The next experiment should use functions that break the permutation mean-preservation property."
+  ],
+  "unresolved": [
+    "Would non-permutation deterministic functions (e.g., affine functions f(s,a) = (a_coeff * s + b_coeff) mod 10, or state-dependent shifts) show the expected lambda-scaling of causal heterogeneity?",
+    "Is the causal heterogeneity metric fundamentally incompatible with permutation-based transitions, or is there a different formulation (e.g., variance of P(S_{t+1}|do(A=a)) as a distribution rather than variance of means) that would detect structure?",
+    "Should the next experiment use a different class of deterministic functions that break the permutation mean-preservation property, such as action-dependent offsets (f(s,a) = (s + offset_a) mod 10 where offset_a varies)?",
+    "The parent experiment's descriptive monotonic effect (Spearman rho=1.0) used prediction accuracy, which is sensitive to state-dependent structure even when the mean is preserved. The causal heterogeneity metric is not sensitive to this structure. Which metric better captures the relevant dynamical variation?"
+  ]
+}
+```
+
+## report.md
+
+```text
+# EXP-FRONTIER-33767130362 — Causal Effect Heterogeneity in Synthetic Web Transitions
+
+## Executive Summary
+
+**Decision: FALSIFIED-IN-SETTING**
+
+The causal effect heterogeneity metric does not detect any lambda-dependent structure in permutation-based synthetic Web transitions. The analytical heterogeneity is exactly 0 for all lambda levels (a mathematical identity), and the Monte Carlo estimates (~0.05) are sampling noise around 0. The positive control fails catastrophically (0/30 measurements above threshold). This falsifies the specific causal heterogeneity metric applied to permutation-based deterministic functions, but does NOT falsify C-WEB-DYNAMICS broadly.
+
+## 1. What Was Tested
+
+**Question:** Does causal effect heterogeneity (variance of expected next-states across actions under do(A_t=a)) increase monotonically with the action-dependence parameter lambda, demonstrating regime-dependent dynamics via direct interventional analysis?
+
+**Hypothesis:** het(lambda) = lambda^2 * Var_a(E_S[f(S,a)]) increases monotonically with lambda.
+
+**Method:** Ground-truth interventional distributions computed analytically from the known DGP. Monte Carlo estimation from 500 transitions per cell. 8 lambda levels x 3 functions x 10 replications = 240 cells.
+
+## 2. Key Finding: Permutation Functions Are Degenerate
+
+The deterministic functions used in this experiment are **permutations** of {0,...,9} for each action. For any permutation pi of {0,...,9}:
+
+```
+sum(pi(s)) = sum({0,...,9}) = 45
+mean(pi(s)) = 4.5 for ALL actions
+```
+
+Therefore:
+```
+E_S[f(S, a)] = 4.5 for all actions a
+Var_a(E_S[f(S, a)]) = 0
+het(lambda) = lambda^2 * 0 = 0 for all lambda
+```
+
+This is a mathematical identity, not a sampling artifact. The causal heterogeneity metric is well-defined but produces exactly 0 for this function class.
+
+## 3. Numerical Results
+
+### 3.1 Analytical Heterogeneity
+All 8 lambda levels: het = 0.000000 (exact)
+
+### 3.2 Monte Carlo Heterogeneity Estimates
+| Lambda | Mean Het | Std Het | True Value |
+|--------|----------|---------|------------|
+| 0.0    | 0.0523   | 0.0371  | 0          |
+| 0.1    | 0.0546   | 0.0543  | 0          |
+| 0.2    | 0.0437   | 0.0322  | 0          |
+| 0.3    | 0.0586   | 0.0332  | 0          |
+| 0.4    | 0.0647   | 0.0536  | 0          |
+| 0.5    | 0.0544   | 0.0333  | 0          |
+| 0.7    | 0.0537   | 0.0336  | 0          |
+| 1.0    | 0.0570   | 0.0513  | 0          |
+
+All values are sampling noise around 0. No lambda level shows signal above noise.
+
+### 3.3 Primary Statistical Test
+- **Aggregate Spearman rho(het, lambda):** 0.3333
+- **Aggregate Spearman p (one-sided):** 0.2099
+- **Threshold:** rho >= 0.65, p < 0.05
+- **Result:** FAILS (rho too low, p not significant)
+
+### 3.4 Per-Function Spearman
+| Function | Seed | rho | p (one-sided) | Bonferroni threshold |
+|----------|------|-----|---------------|---------------------|
+| 1        | 42   | -0.476 | 0.884 | 0.0167 |
+| 2        | 43   | 0.762  | 0.014 | 0.0167 |
+| 3        | 44   | 0.238  | 0.285 | 0.0167 |
+
+Function 2 shows apparent monotonicity (rho=0.76), but this is sampling noise — the true heterogeneity is 0 for all functions. Functions 1 and 3 show no trend.
+
+### 3.5 Two-Way ANOVA (240 observations)
+| Effect | F | p | df |
+|--------|---|---|-----|
+| Lambda | 0.564 | 0.784 | 7 |
+| Function | 0.263 | 0.769 | 2 |
+| Interaction | 0.652 | 0.819 | 14 |
+| Residual | — | — | 216 |
+
+No significant effects. Model R^2 = 0.059.
+
+### 3.6 Effect Size
+- **Cohen's d (lambda=1 vs lambda=0):** 0.1046 (very small)
+
+## 4. Control Results
+
+| Control | Expected | Observed | Pass |
+|---------|----------|----------|------|
+| Positive (lambda=1, het>=0.5) | het >= 0.5 | het_mean = 0.057 | **FAIL** |
+| Null (lambda=0, het ~ 0) | p > 0.05 | p_mean = 0.466 | PASS |
+| Permutation null | het ~ 0 | Analytical het = 0 | PASS |
+| Function invariance | interaction p > 0.05 | p = 0.819 | PASS |
+| Monotonicity | monotonically increasing | Not monotonic | **FAIL** |
+
+The positive control failure is the most informative result: even at lambda=1 (fully action-determined transitions), the heterogeneity is ~0.057, far below the 0.5 threshold. This confirms the permutation degeneracy.
+
+## 5. Why This Happens
+
+The parent experiment (EXP-FRONTIER-33528827909) used **prediction accuracy decomposition**, which IS sensitive to permutation-based structure. Rules that map (state, action) to next-state can achieve 100% accuracy at lambda=1 even when the mean is preserved, because accuracy measures point predictions, not distributional means.
+
+The causal heterogeneity metric measures **variance of expected next-states across actions**. For permutations, all actions have the same expected next-state (4.5), so the variance is 0. The metric is blind to the structure that prediction accuracy detects.
+
+## 6. Implications
+
+### What this falsifies
+- The specific causal heterogeneity metric (Var_a(E_S[f(S,a)])) applied to permutation-based deterministic functions
+- The hypothesis that this metric can detect lambda-dependent dynamics in this function class
+
+### What this does NOT falsify
+- C-WEB-DYNAMICS broadly (the claim that Web transitions contain dynamical structure)
+- Prediction accuracy as a detection method (the parent experiment's descriptive finding stands)
+- Causal intervention as a general approach (only this specific metric is degenerate)
+- The existence of regime-dependent dynamics in synthetic or real Web transitions
+
+### What the next experiment should do
+1. Use **non-permutation deterministic functions** where E_S[f(S,a)] varies across actions (e.g., affine functions, state-dependent shifts, or action-dependent offsets)
+2. Alternatively, use a different causal metric that captures distributional structure beyond means (e.g., variance of P(S_{t+1}|do(A=a)) as a full distribution)
+3. The parent experiment's prediction accuracy approach remains viable with more lambda levels and replications
+
+## 7. Methodology Notes
+
+- **Pipeline:** No errors. status=COMPLETE.
+- **Sample size:** 120,000 transitions total (8 x 3 x 10 x 500). Adequate for the metric.
+- **Statistical power:** With 8 lambda levels and 10 replications, the Spearman test has adequate power for rho >= 0.65 if the effect exists. The effect does not exist for this function class.
+- **Reproducibility:** Frozen seed=42, deterministic functions via numpy RandomState. Results are reproducible.
+
+## 8. Decision Justification
+
+**FALSIFIED-IN-SETTING** because:
+1. Aggregate Spearman rho = 0.33 < 0.65 threshold (FAILED)
+2. Positive control fails: 0/30 measurements at lambda=1 have het >= 0.5 (FAILED)
+3. The failure is explained by a mathematical property of permutation functions, not by insufficient power or pipeline error
+
+The falsification is bounded: it applies to this specific metric applied to this specific function class. The broader claim C-WEB-DYNAMICS remains HYPOTHESIS.
+```
+
+## provenance.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-33767130362",
+  "lane": "frontier",
+  "execution_timestamp": "2026-09-03T18:30:00Z",
+  "github_run_id": "33788040686",
+  "github_run_attempt": 2,
+  "frozen_inputs": {
+    "request.json": {
+      "path": "research/experiments/EXP-FRONTIER-33767130362/request.json",
+      "sha256": "4fd8e220e5b0d682c402df1e674ef6147ab702e6cc34c73aff2514ae1f8746fd"
+    },
+    "spec.json": {
+      "path": "research/experiments/EXP-FRONTIER-33767130362/spec.json",
+      "sha256": "b4d981a72456fcd3053693bcc63fd70a29d6aad0cd698cb9401b4de2bb21200f"
+    },
+    "prereg.md": {
+      "path": "research/experiments/EXP-FRONTIER-33767130362/prereg.md",
+      "sha256": "0af725f7f790046390cf7a77ee74396c6e272e4c3719d1dcde0435fe68064874"
+    },
+    "freeze.json": {
+      "path": "research/experiments/EXP-FRONTIER-33767130362/freeze.json",
+      "sha256": null
+    }
+  },
+  "analyzer_script": {
+    "path": "research/frontier/causal_heterogeneity/analyze.py",
+    "sha256": "096ab2ee6dbcea27d4db5d9acf39b9ff93d2a75801aa75634e8f0619891ff642"
+  },
+  "result_output": {
+    "path": "research/experiments/EXP-FRONTIER-33767130362/result.json",
+    "sha256": "719010428a54f01fa13dc70e3e5714200b0578f8f845ac8b9dd8dff317076075"
+  },
+  "parent_experiment": {
+    "experiment_id": "EXP-FRONTIER-33528827909",
+    "handoff_path": "research/experiments/EXP-FRONTIER-33528827909/handoff.json",
+    "handoff_sha256": "dda6bc7cd9a06aeeb68ff1ee5c67d7609d1ecd0e46d494c87db8daebda216563"
+  },
+  "environment": {
+    "python_version": "3.12.14",
+    "numpy_version": "2.5.2",
+    "scipy_version": "1.18.1",
+    "pandas_version": "3.0.5",
+    "statsmodels_version": "0.15.0",
+    "platform": "linux"
+  },
+  "execution_parameters": {
+    "seed": 42,
+    "function_seeds": [42, 43, 44],
+    "lambda_levels": [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.7, 1.0],
+    "n_transitions_per_cell": 500,
+    "n_replications_per_cell": 10,
+    "n_permutations": 1000,
+    "total_transitions": 120000,
+    "states": 10,
+    "actions": 4
+  },
+  "decision": "FALSIFIES",
+  "claim": "C-WEB-DYNAMICS",
+  "frozen_at": "2026-09-03T18:05:07.656076+00:00"
+}
+```
+
+## audit.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-33767130362",
+  "lane": "frontier",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Reclassify outcome per prereg section 12.3 MEASUREMENT_INVALID clause 2 ('Deterministic functions generate degenerate transitions'): permutation functions make true het(lambda)=0 for all lambda by mathematical identity (mean of any permutation of 0..9 =4.5), so positive control threshold het>=0.5 at lambda=1 was a priori unreachable. Empirical FALSIFIES label conflates analytic degeneracy with empirical falsification — re-label as MEASUREMENT_INVALID for testing lambda-scaling via this metric.",
+    "Narrow claim ceiling to analytic observation only: Var_a(E_S[f(S,a)])=0 for permutation functions therefore het(lambda)=lambda^2*0=0. Do not claim empirical falsification of regime-dependent dynamics; report as construct-validation failure that metric is blind to permutation structure.",
+    "Future prereg must use non-permutation deterministic functions where E_S[f(S,a)] varies across actions (e.g., action-constant functions, non-bijective maps, or functions with varying state-action means) or use distributional heterogeneity metric (e.g., variance of P(S_{t+1}|do(A=a)) as distributions, TV distance, or prediction accuracy) that is sensitive to permutation structure.",
+    "Report missing baselines quantitatively: frequency baseline (expected heterogeneity under lambda=0) and prediction-accuracy-difference baseline from EXP-FRONTIER-33528827909 at matching lambda levels; current result.json baselines lack numeric values for these spec-defined baselines.",
+    "Fix provenance.json frozen_inputs freeze.json sha256 null and preserve artifact hashes for result.json and analyze.py in canonical provenance; ensure evidence_refs resolve to stable paths+hashes."
+  ],
+  "validity_findings": [
+    {
+      "check": "target_split_sampling_representation_integrity",
+      "finding": "PASS with caveat: No train/test split by design; DGP ground-truth interventional distributions computed analytically, then Monte Carlo sampled 500 transitions per lambda per function per replication (120k total). Sampling integrity verified; seeds frozen (42,43,44). Representation loss is construct-level: metric Var_a(E[S|do(a)]) discards distributional structure beyond means, making permutation structure invisible.",
+      "evidence": "spec.json:measurement_validity, prereg.md:5-6, research/frontier/causal_heterogeneity/analyze.py:52-87,52-102, provenance.json:execution_parameters"
+    },
+    {
+      "check": "environment_could_express_tested_effect",
+      "finding": "FAIL - environment could NOT express tested effect. For any permutation pi of {0..9}, sum(pi)=45 mean=4.5 for all actions => E_S[f(S,a)]=4.5 for all a => Var_a(E_S[f])=0 identically => true het(lambda)=lambda^2*0=0 for all 8 lambda levels. Positive control expectation 0.5 is mathematically impossible. Empirical Monte Carlo het ~0.04-0.07 consistent with expected sampling noise E[het|H0]=0.0495 (sigma^2=8.25, n~125 per action, k=4). Thus experiment tests tautological null, not contingent hypothesis.",
+      "evidence": "result.json:metrics.analytical_heterogeneity_all_zero true, metrics.heterogeneity_means_by_lambda 0.052-0.064, report.md:2, analyze.py:65-87, recomputed verification seed 42/43/44 Var=0.0"
+    },
+    {
+      "check": "control_integrity",
+      "finding": "MIXED: Positive control correctly FAILS (0/30 >=0.5, max 0.1849 mean 0.057) but failure was predetermined by degeneracy, not empirical. Null control PASSES (mean permutation p=0.466 >0.05, 30 p-values reported) as expected when true het=0. Function invariance PASSES (ANOVA interaction F=0.6516 p=0.819, residual df 216) but trivially passes because all functions identical null. Permutation null analytically 0 — verified. Monotonicity sensitivity FAILS (rho 0.333). Controls executed as coded but do not validate construct validity.",
+      "evidence": "result.json:controls.positive_control.pass false, controls.null_control.pass true, controls.function_invariance.pass true, metrics.anova_results.full_model, metrics.permutation_results"
+    },
+    {
+      "check": "leakage",
+      "finding": "PASS: No model training, no target leakage. Interventional distributions from DGP, not from held-out predictions. Shuffled-action permutation test correctly isolates action-dependence. No leakage path.",
+      "evidence": "spec.json:measurement_validity[7], analyze.py:104-153"
+    },
+    {
+      "check": "measurement_validity_and_discriminating_power",
+      "finding": "FAIL construct validity, PASS pipeline validity. Pipeline computes metric correctly (verified recomputation), no errors, CV not excessive. But metric has zero discriminating power for chosen function class; experiment cannot discriminate lambda regimes. Prereg predicted het=lambda^2*Var_a(E_S[f]) but Var=0 makes prediction degenerate. Boundlessly, this is a failed bounded Physics-style program only for this metric/function pair.",
+      "evidence": "prereg.md:6, spec.json:measurement_validity, result.json:validity_notes[1-2], result.json:observations[1,6]"
+    },
+    {
+      "check": "provenance_and_reproducibility",
+      "finding": "PASS with minor gap: provenance.json identifies python 3.12.14, numpy 2.5.2, scipy 1.18.1, seeds, lambda levels, 120k transitions, analyzer_script hash 096ab2ee matches file, result hash present. Gap: frozen_inputs freeze.json sha256 null, artifact list hashes not propagated to provenance. No impact on recomputation.",
+      "evidence": "provenance.json:frozen_inputs, analyzer_script.sha256 096ab2ee6dbcea27d4db5d9acf39b9ff93d2a75801aa75634e8f0619891ff642, result.json artifacts"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline": "permutation_null (spec.json baselines[1])",
+      "strength": "strong as analytic control but trivial",
+      "finding": "Correctly implemented: 1000 permutations per replication at lambda 0 and 1, mean p 0.466 at lambda0, analytical het 0. Confirms observed het ~0.05 is sampling noise. However permutation null at all lambda levels not reported quantitatively (only lambda 0/1).",
+      "evidence": "result.json:metrics.permutation_results.lambda_0, lambda_1, controls.permutation_null, spec.json:baselines[1]"
+    },
+    {
+      "baseline": "frequency_baseline P(S_{t+1}) (spec.json baselines[2])",
+      "strength": "weak - not quantitatively reported",
+      "finding": "Spec requires marginal next-state distribution baseline as expected heterogeneity under no action-dependence. Producer notes analytical het=0 at lambda0 but does not report frequency baseline numeric values or compare observed het to it. Missing quantitative baseline.",
+      "evidence": "spec.json:baselines[2], result.json:metrics absent frequency baseline, report.md absent"
+    },
+    {
+      "baseline": "prediction_accuracy_difference from EXP-FRONTIER-33528827909 (spec.json baselines[0])",
+      "strength": "weak - descriptive qualitative only",
+      "finding": "Spec lists descriptive comparison to parent rule-memory accuracy differences (0.053,0.087,0.307,0.653). Producer reports qualitative discussion in report.md:5 that prediction accuracy IS sensitive to permutation structure while causal het is not, but no quantitative side-by-side table at matching lambdas. Comparison claim therefore unsupported beyond narrative.",
+      "evidence": "spec.json:baselines[0], report.md:5, prereg.md:6.5, result.json:metrics absent prediction comparison"
+    }
+  ],
+  "recomputed_metrics": {
+    "spearman_rho_aggregate": {
+      "producer": 0.3333,
+      "recomputed": 0.333333,
+      "method": "scipy.stats.spearmanr on producer heterogeneity_means_by_lambda [0.052259,0.054624,0.043709,0.058599,0.064735,0.054376,0.053741,0.057025] vs lambdas [0.0,0.1,0.2,0.3,0.4,0.5,0.7,1.0]",
+      "match": true,
+      "p_one_sided_producer": 0.209877,
+      "p_one_sided_recomputed": 0.209877,
+      "note": "One-sided p = two-sided/2 when rho>0 (0.419753/2). Threshold rho>=0.65 p<0.05 fails as producer reports."
+    },
+    "per_function_spearman": {
+      "producer": [
+        {"function": 1, "seed": 42, "rho": -0.4762},
+        {"function": 2, "seed": 43, "rho": 0.7619},
+        {"function": 3, "seed": 44, "rho": 0.2381}
+      ],
+      "recomputed": "Not fully recomputable without per-function per-lambda means (not published as artifact), but producer per-function rho values are plausible under null noise; aggregate recomputation confirms overall null",
+      "match": "partial - aggregate verified, per-function not independently recomputed due to missing artifact"
+    },
+    "analytical_heterogeneity": {
+      "producer": "0 for all lambda (analytical_heterogeneity_all_zero true)",
+      "recomputed": 0.0,
+      "method": "Recomputed E_S[f(S,a)] for seeds 42,43,44 permutations: all means 4.5 Var 0.0, therefore het = lambda^2*0 =0 for lambda 0.0..1.0",
+      "match": true,
+      "evidence": "analyze.py:65-87"
+    },
+    "expected_het_under_null_noise": {
+      "recomputed": 0.0495,
+      "method": "sigma2=8.25 for Uniform 0..9, n_per_action~125, var_mean=0.066, E[var of 4 means with ddof0]=0.0495",
+      "producer_observed": "0.043-0.064 across lambdas",
+      "match": true,
+      "interpretation": "Observed het consistent with sampling noise around true 0, not signal"
+    },
+    "cohens_d_lambda1_vs_lambda0": {
+      "producer": 0.1046,
+      "recomputed_approx": 0.1065,
+      "method": "Using report table stds 0.0371 and 0.0513, pooled ~0.0447, diff 0.004766 => 0.106; exact 0.1046 using raw per-replication variances (ddof1) plausible",
+      "match": true
+    },
+    "anova": {
+      "producer": {"lambda_F": 0.5643, "lambda_p": 0.784437, "function_F": 0.2626, "function_p": 0.769314, "interaction_F": 0.6516, "interaction_p": 0.819281, "residual_df": 216, "r2": 0.0592},
+      "recomputed": "Not independently recomputed without raw per-replication table (240 rows artifact not persisted), but values consistent with null (all p >>0.05, R2 0.059). Design 3x8x10=240 residual 216 correct.",
+      "match": "plausible, not independently verified"
+    },
+    "positive_control": {
+      "producer": {"n_above_05": 0, "total": 30, "mean": 0.057, "min": 0.0061, "max": 0.1849},
+      "recomputed": "Verified max <0.5 mathematically required because true het 0 + noise ~0.05, 0.5 >9 sigma away, 0/30 expected",
+      "match": true
+    },
+    "null_control_permutation_p": {
+      "producer_mean_p_lambda0": 0.466,
+      "recomputed": "Not recomputed (requires raw transitions), but distribution of 30 p-values uniform-like (0.028-0.975) consistent with null; mean 0.466 plausible",
+      "match": "plausible"
+    }
+  },
+  "claim_ceiling": "Maximum justified: For synthetic 10-state 4-action transitions where deterministic functions are permutations of 0..9, the causal heterogeneity het(lambda)=Var_a(E[S_{t+1}|do(A=a)]) is identically 0 for all lambda in {0.0,0.1,0.2,0.3,0.4,0.5,0.7,1.0} (analytic identity, recomputed Var=0.0 for seeds 42,43,44), Monte Carlo estimates 0.04-0.07 are sampling noise (E~0.0495), aggregate Spearman rho=0.33 p_one_sided=0.21 (n=8) and Cohen d=0.10 show no lambda scaling, positive control 0/30 >=0.5 fails. This demonstrates the specific metric is blind to permutation structure, not that regime-dependent dynamics are absent. No inference to C-WEB-DYNAMICS broadly, no inference to causal heterogeneity generally, no inference to real Web transitions. Next test requires non-permutation functions where E_S[f(S,a)] varies across actions or distributional metric beyond means.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-33767130362/spec.json: claim_ids C-WEB-DYNAMICS, hypothesis het=lambda^2*Var, falsifier rho>=0.65, positive_control het>=0.5, null_control p>0.05, decision_rule SURVIVES/FALSIFIED/MEASUREMENT_INVALID",
+    "research/experiments/EXP-FRONTIER-33767130362/prereg.md: 5-12 decision rules, 12.3 MEASUREMENT_INVALID clause 2 degenerate functions",
+    "research/experiments/EXP-FRONTIER-33767130362/freeze.json: hashes 0af725f7, b4d981a7, 4fd8e220",
+    "research/experiments/EXP-FRONTIER-33767130362/result.json: metrics.spearman_rho_aggregate 0.3333, metrics.spearman_p_one_sided 0.209877, metrics.analytical_heterogeneity_all_zero true, metrics.heterogeneity_means_by_lambda, metrics.per_function_spearman, metrics.anova_results, metrics.permutation_results, controls, observations, validity_notes, status COMPLETE outcome FALSIFIES",
+    "research/experiments/EXP-FRONTIER-33767130362/report.md:2 permutation degeneracy proof, 3.2 Monte Carlo table, 4 control table",
+    "research/experiments/EXP-FRONTIER-33767130362/provenance.json: execution_timestamp 2026-09-03T18:30:00Z, github_run_id 33788040686, seed 42, function_seeds [42,43,44], lambda_levels 8, total_transitions 120000",
+    "research/frontier/causal_heterogeneity/analyze.py: sha256 096ab2ee6dbcea27d4db5d9acf39b9ff93d2a75801aa75634e8f0619891ff642, lines 52-87 analytical het, 106-126 Monte Carlo, 130-153 permutation test",
+    "research/experiments/EXP-FRONTIER-33528827909/handoff.json: carry_forward established/rejected/unknown/do_not_assume, next_question causal intervention",
+    "Recomputed verification: independent python recomputation of Var_a(E_S[f])=0 for seeds 42,43,44 and Spearman rho 0.333333 p 0.209877 and expected null noise 0.0495 matching observed"
+  ],
+  "unresolved": [
+    "Would non-permutation deterministic functions (e.g., action-constant maps, affine f(s,a)=(c_a*s+b_a) mod 10 with non-uniform means, or state-action offsets that break bijectivity) yield het(lambda) proportional to lambda^2 and detectable Spearman rho>=0.65 with 8 levels and 10 reps?",
+    "Is there an alternative causal heterogeneity metric that detects permutation structure while preserving interventional semantics (e.g., TV distance between P(S_{t+1}|do(a)), Jensen-Shannon divergence, or variance of full distributions rather than variance of means)?",
+    "How does prediction-accuracy sensitivity to permutation structure (parent rule-memory diff 0.053->0.653) compare quantitatively at matched lambdas with causal metrics, and which better captures Web-relevant dynamical heterogeneity for product investment?",
+    "Synthetic-to-real translation remains unknown: whether real Web transitions exhibit mean-preserving permutation-like structure or mean-varying structure that would make this metric useful.",
+    "Per-replication raw heterogeneity values (240 observations) and per-function per-lambda means not persisted as artifact, limiting independent recomputation of ANOVA and per-function Spearman; future runs should persist raw table with hashes."
+  ]
+}
+```
+
+## verdict.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-33767130362",
+  "lane": "frontier",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "HYPOTHESIS",
+      "reason": "This experiment is MEASUREMENT_INVALID: the causal heterogeneity metric Var_a(E_S[f(S,a)]) is identically 0 for permutation-based deterministic functions by mathematical identity (all permutations of {0..9} have mean 4.5), making the positive control threshold of 0.5 a priori unreachable. The prereg section 12.3 clause 2 ('deterministic functions generate degenerate transitions') applies exactly. This is a construct-validation failure, not an empirical test of regime-dependent dynamics. C-WEB-DYNAMICS remains HYPOTHESIS — this experiment neither supports nor falsifies it."
+    }
+  ],
+  "product_action": "NONE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can non-permutation deterministic functions (where E_S[f(S,a)] varies across actions, e.g., affine maps f(s,a)=(c_a*s+b_a) mod 10 or action-dependent offsets) yield detectable lambda-scaling of causal heterogeneity, or should the Frontier lane pivot to distributional metrics (TV distance, JSD) that are sensitive to permutation structure?",
+  "reason": "The auditor's MEASUREMENT_INVALID reclassification is accepted. The causal heterogeneity metric Var_a(E_S[f(S,a)]) is mathematically degenerate for permutation functions: for any permutation pi of {0..9}, E[pi(S)] = 4.5 identically, so Var across actions = 0, and het(lambda) = lambda^2 * 0 = 0 for all lambda. This is not sampling failure but analytic impossibility of the positive control. Aggregate Spearman rho=0.33 (p=0.21), positive control 0/30 >= 0.5, Cohen's d=0.105, null control passes (permutation p_mean=0.466), function invariance passes (ANOVA interaction p=0.819). The pipeline executed correctly; the construct is degenerate for this function class. The parent experiment's descriptive monotonic effect (prediction accuracy) remains untouched — prediction accuracy IS sensitive to permutation structure while variance-of-means is not. Bounded falsification: this specific metric + this function class. C-WEB-DYNAMICS broadly remains open.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-33767130362/result.json: metrics.analytical_heterogeneity_all_zero true, metrics.spearman_rho_aggregate 0.3333, metrics.spearman_p_one_sided 0.209877, metrics.cohens_d_lambda1_vs_lambda0 0.1046, metrics.permutation_results.lambda_1.n_above_05 0/30, controls.positive_control.pass false, controls.null_control.pass true, controls.function_invariance.pass true, validity_notes[1] permutation degeneracy proof",
+    "research/experiments/EXP-FRONTIER-33767130362/audit.json: status MEASUREMENT_INVALID, producer_claim_supported false, claim_ceiling 'metric blind to permutation structure', validity_findings[1] environment could NOT express tested effect, required_fixes[0] reclassify per prereg 12.3 clause 2",
+    "research/experiments/EXP-FRONTIER-33767130362/report.md: section 2 permutation degeneracy proof, section 3.2 Monte Carlo table showing all ~0.05 noise, section 4 control table positive control FAIL, section 5 explanation prediction accuracy vs variance-of-means",
+    "research/experiments/EXP-FRONTIER-33767130362/provenance.json: execution_timestamp 2026-09-03T18:30:00Z, github_run_id 33788040686, seed 42, total_transitions 120000",
+    "research/frontier/causal_heterogeneity/analyze.py: sha256 096ab2ee6dbcea27d4db5d9acf39b9ff93d2a75801aa75634e8f0619891ff642",
+    "research/experiments/EXP-FRONTIER-33528827909/handoff.json: parent experiment descriptive monotonic effect (prediction accuracy rho=1.0, rule-memory diff 0.053-0.653) remains valid for permutation functions"
+  ]
+}
+```
+
+## handoff.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-33767130362",
+  "lane": "frontier",
+  "target_lane": "frontier",
+  "next_question": "Can non-permutation deterministic functions (where E_S[f(S,a)] varies across actions, e.g., affine maps f(s,a)=(c_a*s+b_a) mod 10 or action-dependent offsets) yield detectable lambda-scaling of causal heterogeneity, or should the Frontier lane pivot to distributional metrics (TV distance, JSD) that are sensitive to permutation structure?",
+  "why_next": "This experiment established that Var_a(E_S[f(S,a)]) is identically 0 for permutation functions (analytic degeneracy, not empirical failure). Two orthogonal paths remain open: (A) fix the function class to break the permutation mean-preservation property, or (B) fix the metric to detect distributional structure beyond means. Path A tests whether causal heterogeneity works at all; Path B tests whether permutation structure is detectable causally. Both are high-upside and materially orthogonal to the prediction-accuracy approach of the parent experiment. Path A is recommended as the smaller next step because it reuses the same metric and pipeline with a simple function-class change.",
+  "carry_forward": {
+    "established": [
+      "Analytic identity: for any permutation pi of {0..9}, Var_a(E_S[pi_a(S)]) = 0 because E[pi_a(S)] = 4.5 for all actions. Therefore het(lambda) = lambda^2 * 0 = 0 for all lambda. Recomputed: Var=0.0 for seeds 42,43,44.",
+      "Monte Carlo estimates of het are ~0.04-0.07 across all 8 lambda levels, consistent with sampling noise around true value of 0 (E[het under null] ≈ 0.0495). No lambda level shows signal above noise.",
+      "Pipeline executed correctly with no errors (status=COMPLETE). 120,000 transitions generated, 240 cells analyzed, Spearman/ANOVA/permutation tests computed as preregistered.",
+      "Null control passes: mean permutation p at lambda=0 is 0.466 (not significant).",
+      "Function invariance passes trivially: ANOVA interaction p=0.819 (all functions identical null).",
+      "Cohen's d (lambda=1 vs lambda=0) = 0.105 (very small), confirming no detectable difference between extreme conditions."
+    ],
+    "rejected": [
+      "Causal heterogeneity metric (Var_a(E_S[f(S,a)])) as a detection method for permutation-based deterministic functions — mathematically degenerate, not just empirically insensitive.",
+      "The hypothesis het(lambda) = lambda^2 * Var_a(E_S[f(S,a)]) detects regime-dependent dynamics when Var_a(E_S[f(S,a)]) = 0 — the formula is correct but the function class makes it tautological.",
+      "Positive control threshold het >= 0.5 at lambda=1 as a testable criterion for permutation functions — a priori unreachable."
+    ],
+    "unknown": [
+      "Whether non-permutation deterministic functions (affine maps, action-dependent offsets, non-bijective maps) where E_S[f(S,a)] varies across actions would yield het(lambda) proportional to lambda^2 and detectable Spearman rho >= 0.65.",
+      "Whether distributional metrics (TV distance, JSD, prediction entropy) applied to P(S_{t+1}|do(A=a)) can detect permutation structure while preserving interventional semantics.",
+      "Whether prediction accuracy (parent experiment's approach) is more appropriate than variance-of-means for Web-relevant dynamical heterogeneity — the parent descriptive finding (rho=1.0) used prediction accuracy which IS sensitive to permutation structure.",
+      "How synthetic results translate to real Web transitions — whether real Web data exhibits mean-preserving or mean-varying structure.",
+      "Whether the Frontier lane should pivot entirely to prediction-accuracy approaches with better-powered designs (more lambda levels, replications) rather than continuing causal heterogeneity attempts."
+    ],
+    "do_not_assume": [
+      "Do not assume C-WEB-DYNAMICS is falsified — this experiment is MEASUREMENT_INVALID, not a scientific test of the claim.",
+      "Do not assume causal heterogeneity as a general approach is invalid — only the specific metric + permutation function combination is degenerate.",
+      "Do not assume the parent experiment's descriptive monotonic effect (prediction accuracy rho=1.0) is refuted — it used a different metric that IS sensitive to permutation structure.",
+      "Do not assume non-permutation functions will automatically yield positive results — the metric may be fundamentally insensitive to certain dynamical structures.",
+      "Do not assume synthetic-to-real translation applies — all tested functions are synthetic permutations.",
+      "Do not assume the null control pass at lambda=0 is evidence of absence — power < 20% for small effects at n=8 lambda levels.",
+      "Do not assume the 240-cell ANOVA design is adequate for future experiments — raw per-replication tables were not persisted, limiting recomputation."
+    ]
+  },
+  "dependencies": [
+    "Non-permutation deterministic function generators (e.g., affine maps, action-dependent offsets) with known E_S[f(S,a)] values for analytic verification",
+    "OR distributional divergence metrics (TV distance, JSD) implementation for comparing P(S_{t+1}|do(A=a)) across actions",
+    "Persistence of raw per-replication per-function per-lambda heterogeneity tables as hash-addressed artifacts for independent recomputation",
+    "Frequency baseline and prediction-accuracy-difference baseline implementation at matched lambda levels for quantitative comparison with parent experiment"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-33767130362/result.json: metrics.analytical_heterogeneity_all_zero true, metrics.heterogeneity_means_by_lambda (0.052-0.064 across all lambda), metrics.spearman_rho_aggregate 0.3333, metrics.permutation_results, controls, validity_notes[1-2]",
+    "research/experiments/EXP-FRONTIER-33767130362/audit.json: status MEASUREMENT_INVALID, claim_ceiling 'metric blind to permutation structure', validity_findings[1] environment could NOT express tested effect, required_fixes[0-2]",
+    "research/experiments/EXP-FRONTIER-33767130362/report.md: section 2 permutation degeneracy proof, section 5 metric vs prediction accuracy comparison",
+    "research/experiments/EXP-FRONTIER-33767130362/provenance.json: execution_timestamp 2026-09-03T18:30:00Z, github_run_id 33788040686",
+    "research/frontier/causal_heterogeneity/analyze.py: sha256 096ab2ee6dbcea27d4db5d9acf39b9ff93d2a75801aa75634e8f0619891ff642",
+    "research/experiments/EXP-FRONTIER-33528827909/handoff.json: parent descriptive effect (prediction accuracy sensitive to permutation structure, rho=1.0), carry_forward established/rejected/unknown/do_not_assume"
+  ],
+  "recommended_action": "Design a new Frontier experiment using NON-PERMUTATION deterministic functions (e.g., f(s,a) = (c_a * s + b_a) mod 10 where c_a and b_a vary by action, ensuring E_S[f(S,a)] differs across actions) with the same causal heterogeneity metric and 8 lambda levels x 10 replications. This is the minimal change needed to make the metric non-degenerate. If this also fails, pivot to distributional metrics (TV distance between full P(S_{t+1}|do(a)) distributions) or return to prediction-accuracy approach with the parent's larger-n design."
 }
 ```
 
