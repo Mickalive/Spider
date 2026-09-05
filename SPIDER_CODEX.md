@@ -3,7 +3,7 @@
 Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER_CODEX_ULTIME.md`.
 
 This file is generated only from complete finalized Research 2.0 experiment packets.
-Ingested experiments: **14**. Coverage gaps: **0**.
+Ingested experiments: **15**. Coverage gaps: **0**.
 
 ## Index
 
@@ -19,6 +19,7 @@ Ingested experiments: **14**. Coverage gaps: **0**.
 | EXP-INTEL-33842055594 | intel | REVISE | PARTIALLY_COMPATIBLE | C-CROSSSITE, C-LLM-INHERIT |
 | EXP-INTEL-33925056324 | intel | REVISE | SUPPORTS | C-CROSSSITE, C-LLM-INHERIT |
 | EXP-PHYSICS-33528829431 | physics | REVISE | REVISE | C-MEAS-VALID, C-WEB-DYNAMICS |
+| EXP-PHYSICS-33788037373 | physics | FAIL | MEASUREMENT_INVALID | C-MEAS-VALID, C-WEB-DYNAMICS |
 | EXP-PRODUCT-33528829801 | product | PASS | SURVIVES — C-PARAM-INHERIT survives at synthetic in-kernel POC level: distill_parameterized() with _extract_varying_values() correctly induces one parameter slot for isomorphic action paths and resolves to EXECUTABLE with correct bound_action for all 10 unseen single-char identifiers. All four frozen decision-rule conditions satisfied. Audit PASS confirms recomputed metrics match producer. However, the claim ceiling is narrow: single-parameter, single-field, common-prefix heuristic, deterministic synthetic data, hardcoded confidence, simulated baselines. No broader product promotion is authorized by this evidence. | C-PARAM-INHERIT |
 | EXP-RUNTIME-33528830833 | runtime | REVISE | NARROW_SUCCESS | C-MEAS-VALID |
 | EXP-RUNTIME-33767375933 | runtime | REVISE | NARROW_SUCCESS | C-MEAS-VALID |
@@ -9629,6 +9630,1008 @@ The 100% action-conditioned accuracy on live data is an artifact of the very sma
     "research/physics/run_experiment.py:203-254 compute_bootstrap_and_pvalues (invalid procedure)"
   ],
   "recommended_action": "Redesign the Physics measurement substrate with four mandatory fixes before re-testing C-WEB-DYNAMICS: (1) implement trajectory-grouped holdout evaluation matching prereg Section 7 site-level holdout; (2) replace bootstrap with trajectory-grouped permutation null with independent RNG; (3) redesign positive control with overlapping actions across states to enable discrimination; (4) upgrade state representation to DOM/accessibility tree and action representation to semantic selectors. Target test sites with navigational density (e-commerce, news, web apps) using a real browser (Playwright) per prereg Section 2. This is an infrastructure revision — do not re-run the same design."
+}
+```
+
+# EXP-PHYSICS-33788037373
+
+## request.json
+
+```text
+{
+  "base_sha": "0654d8ee3bd785694fbb571ad4f3c39a1f0418c7",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-03T18:01:45.461063+00:00",
+  "experiment_id": "EXP-PHYSICS-33788037373",
+  "inherited_last_verdict": "REVISE",
+  "inherited_next_question": "Can a trajectory-grouped holdout evaluation with richer state representation (DOM/accessibility tree) and semantic actions reveal genuine action-conditioned transition structure on live Web pages with navigational density, replacing the coarse URL+hash representation that produced entropy inversion?",
+  "lane": "physics",
+  "origin_github_run_id": "33788037373",
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-33528829431",
+    "path": "research/experiments/EXP-PHYSICS-33528829431/handoff.json",
+    "sha256": "d8af42ddf8a0c4910b1b55c1612c18a9e0e4b30a672e019f5c8b82203e0bba88"
+  },
+  "reason": "pulse",
+  "request_hash": "0e23a544b82cb71413cf4d130ec5d82a4e4bae42a551a65ba8de6d0ae6c668d7",
+  "request_id": "f3f01d7f94fad7ed70360093",
+  "schema_version": 1
+}
+```
+
+## spec.json
+
+```text
+{
+  "experiment_id": "EXP-PHYSICS-33788037373",
+  "lane": "physics",
+  "claim_ids": ["C-MEAS-VALID", "C-WEB-DYNAMICS"],
+  "question": "After correcting three methodology defects (in-sample evaluation, invalid bootstrap, non-discriminating positive control) identified in EXP-PHYSICS-33528829431, does the measurement substrate reveal genuine action-conditioned transition structure on live Web pages with navigational density?",
+  "hypothesis": "The previous 100% action-conditioned accuracy on live data (37 transitions, 4 trajectories) was an artifact of in-sample memorization and coarse state hashing. With trajectory-grouped holdout evaluation, a trajectory-grouped permutation null, a discriminating positive control with overlapping actions, and a richer state representation (URL + link_texts + tag_counts + form_signals), the corrected substrate will show: (a) substantially lower held-out accuracy than in-sample accuracy (demonstrating memorization artifact), (b) a discriminating positive control where action-conditioned > action-frequency (demonstrating the positive control can detect state-dependent structure), and (c) on live Web data with navigational density, either action-conditioned structure above shuffle (supporting C-WEB-DYNAMICS) or no structure (falsifying in this setting).",
+  "falsifier": "Any of: (1) the positive control fails to discriminate — action-conditioned accuracy not significantly > action-frequency accuracy on held-out data (permutation test p > 0.05); (2) the corrected live-test shows no action-conditioned structure above shuffle (permutation test p > 0.05 after Bonferroni correction for 3 null tests); (3) validity gates fail (trajectory contamination, seed non-determinism, temporal leakage); (4) the corrected substrate cannot collect >= 100 live transitions from 2 navigable sites (infrastructure failure).",
+  "baselines": [
+    "Shuffle null: permute next-state labels within each trajectory (trajectory-grouped permutation)",
+    "Action-frequency null: predict most common next-state per action type, ignoring current state",
+    "First-order Markov null: predict next-state from current state only, ignoring action",
+    "In-sample action-conditioned predictor: fit and evaluate on same transitions (memorization baseline)"
+  ],
+  "positive_control": "Synthetic deterministic navigation graph with 8 states and 3 action types. Critical design: actions overlap across states (e.g., 'click:nav' available from states A, B, C, D) so that action-frequency accuracy < action-conditioned accuracy, discriminating (S,A) from A alone. The graph has branching (multiple valid actions per state) and cycles (returns to earlier states). Positive control passes if action-conditioned accuracy significantly > action-frequency accuracy on held-out trajectories (permutation test p < 0.05).",
+  "null_control": "Random-policy transitions on a 30-state unstructured synthetic page with reused action vocabulary (5 action types, 8 target_ids shared across states). Next-states are uniformly random, independent of action. Expected: action-conditioned accuracy ≈ action-frequency accuracy ≈ chance. Null control passes if permutation test p > 0.05 (no false positive).",
+  "measurement_validity": [
+    "Trajectory-grouped holdout: trajectories are the unit of analysis; train/test split is at trajectory level (no transition from same trajectory in both train and test)",
+    "Trajectory-grouped permutation null: resample by permuting next-state labels within trajectories (not across trajectories), independent RNG per permutation",
+    "Positive control with overlapping actions: at least 2 action types available from >= 3 states each, ensuring action-frequency accuracy cannot reach action-conditioned accuracy",
+    "No target leakage: action features never contain next-state URL or content; predictor features are fit on train transitions only",
+    "Deterministic seeds: numpy RandomState (or stdlib random with explicit seed) for all random operations; no process-randomized hash()",
+    "Temporal ordering: within each trajectory, step indices are monotonically increasing"
+  ],
+  "decision_rule": "Verdict = SURVIVES_CURRENT_TEST if ALL of: (1) positive control discriminates — action-conditioned > action-frequency on held-out data (permutation test p < 0.05); (2) positive control passes accuracy threshold (>90% held-out); (3) null control passes (permutation test p > 0.05); (4) at least one live site shows action-conditioned structure above shuffle (p < 0.05 after Bonferroni correction for 3 null tests x 2 live sites = 6 comparisons); (5) all validity gates pass; (6) >= 100 live transitions collected from >= 2 sites. Verdict = FALSIFIED-IN-SETTING if (1)-(3) pass but (4) fails on all live sites. Verdict = MEASUREMENT_INVALID if any validity gate fails or infrastructure prevents data collection.",
+  "product_consequence_positive": "Validates that corrected evaluation methodology produces trustworthy Physics measurements. Action-conditioned structure on live Web would justify investment in richer state representations (DOM/accessibility tree) and browser-based collection. Establishes that C-WEB-DYNAMICS has preliminary live-Web evidence beyond synthetic feasibility.",
+  "product_consequence_negative": "If the corrected substrate shows no action-conditioned structure on live Web with navigational density, either (a) the Web genuinely lacks this structure at the tested representation level, or (b) HTTP fetch cannot capture sufficient state information. Either way, the Physics lane should pivot to (a) richer state representations with browser-based collection, or (b) alternative Physics programs (information-theoretic, causal, multi-scale). Does NOT close the domain — only this specific detection method at this representation level.",
+  "estimated_cost": "Low: synthetic positive control + null control (pure computation, no network) + 2 live sites via HTTP fetch (urllib, no browser). No numpy/scipy required — all statistics implemented in stdlib. ~300-500 total transitions.",
+  "expected_information_gain": "High: This is the first experiment with corrected methodology. The previous in-sample 100% live accuracy is known to be an artifact. The corrected held-out accuracy is the first trustworthy measurement of action-conditioned structure on live Web. A positive result changes the Physics research trajectory; a negative result constrains the search space and redirects effort."
+}
+```
+
+## prereg.md
+
+```text
+# EXP-PHYSICS-33788037373 Preregistration
+
+## Status: DESIGN — NOT YET FROZEN
+
+---
+
+## 1. Hypothesis
+
+After correcting three methodology defects identified in EXP-PHYSICS-33528829431 (in-sample evaluation, invalid bootstrap, non-discriminating positive control), does the measurement substrate reveal genuine action-conditioned transition structure on live Web pages with navigational density?
+
+### 1.1 Sub-hypotheses
+
+**H1: Memorization Artifact**
+The previous 100% live-test action-conditioned accuracy was an artifact of in-sample evaluation. Corrected held-out accuracy will be substantially lower than in-sample accuracy on the same data.
+
+**H2: Positive Control Discrimination**
+With overlapping actions across states, the action-conditioned predictor will significantly outperform the action-frequency predictor on held-out data (permutation test p < 0.05), demonstrating that the positive control can detect state-dependent structure.
+
+**H3: Live Action-Conditioned Structure**
+On at least one of 2 live test sites with navigational density, the action-conditioned predictor will significantly outperform the shuffle null on held-out data (permutation test p < 0.05 after correction).
+
+---
+
+## 2. State Representation
+
+### 2.1 Design
+
+**S (state)**: A composite representation derived from HTTP fetch + HTML parsing:
+- `url`: full page URL (normalized, query string stripped for deduplication)
+- `title`: page `<title>` text (lowercased, stripped, max 100 chars; empty string if absent)
+- `link_texts`: sorted set of first 30 visible link text contents from `<a>` tags (lowercased, stripped; empty strings excluded)
+- `tag_counts`: tuple of 11 integers — counts of h1, h2, h3, form, input, button, select, textarea, nav, main, aside tags
+- `form_signals`: tuple of 4 booleans — has_form, has_input, has_select, has_textarea
+
+State key: `SHA256(url + "|" + title + "|" + "|".join(link_texts) + "|" + str(tag_counts) + "|" + str(form_signals))[:16]`
+
+### 2.2 Comparison to Prior
+
+Prior: `State(url, SHA256("tags:{n}|elements:{n}|links:{n}")[:16], SHA256(sorted_links[:20])[:16])`. Lost all fine-grained structure — tag distribution, form presence, link text content.
+
+New: Preserves explicit link texts (semantic action targets), tag distribution (page structure), and form signals (interactive elements). Still no JavaScript, accessibility tree, or visual structure.
+
+### 2.3 Representation Loss
+
+- No JavaScript execution (HTTP fetch only) — SPA pages may appear structurally identical across navigations
+- No accessibility tree (ARIA roles, states)
+- No visual structure (CSS, layout, images)
+- No dynamic form values (auto-fill, session state)
+- Link texts may be empty (image links, aria-hidden)
+- Tag counts are aggregate, not hierarchical
+- Query string stripped from URL — dynamic parameters lost
+
+---
+
+## 3. Action Representation
+
+### 3.1 Design
+
+- `action_type`: one of {click, navigate, type_text}
+- `target_text`: visible text of clicked element (from `<a>` text content), lowercased/stripped; empty for navigate
+- `target_href`: destination URL for click/navigate; empty for type_text
+
+Action key: `action_type + "|" + target_text + "|" + target_href`
+
+### 3.2 Comparison to Prior
+
+Prior: `Action("click", "link_{idx}", "link_text_{idx}")` — positional index, no semantic content.
+
+New: Preserves visible text and destination URL. Enables analysis of which link texts are predictive.
+
+### 3.3 No-Target-Leakage Guarantee
+
+Action features describe the action target, NOT the next state. `target_href` is the URL the user clicked ON, not the URL they arrived AT (which may differ due to redirects). `target_text` is the visible link text, not the destination page content. The next state is observed AFTER action execution.
+
+---
+
+## 4. Target
+
+Primary: Can we predict S' given (S, A) better than null models on HELD-OUT trajectories?
+
+Secondary: Does corrected evaluation produce different results than prior in-sample methodology?
+
+---
+
+## 5. Sampling Policy
+
+### 5.1 Positive Control (Synthetic)
+
+- 8 states, 3 action types, actions overlap across states
+- 60 trajectories × 10 steps = 600 transitions
+- Seed: 42
+- Deterministic transition table (pre-defined graph)
+
+### 5.2 Null Control (Synthetic)
+
+- 30 states, 5 action types, 8 target_ids shared across states
+- Random transitions (next-state independent of action)
+- 30 trajectories × 10 steps = 300 transitions
+- Seed: 44
+
+### 5.3 Live Test
+
+- **Site 1**: `https://en.wikipedia.org/wiki/Main_Page` — high link density, server-rendered
+- **Site 2**: `https://docs.python.org/3/` — medium link density, server-rendered
+- 20 trajectories per site, max 10 steps each = up to 400 transitions
+- Seeds: 43 (site 1), 45 (site 2)
+- HTTP fetch via `urllib.request`, timeout 10s, User-Agent: SPIDER-Physics/2.0
+- Polite delay: 0.5s between requests
+- Trajectory start: random internal link from homepage
+
+### 5.4 Total Sample
+
+- Positive: 600, Null: 300, Live: up to 400 = up to 1300 total
+
+---
+
+## 6. Unit of Analysis
+
+Each `(trajectory_id, step_index)` is one transition. **Trajectories are the dependency unit.** Train/test splits are at trajectory level.
+
+---
+
+## 7. Holdout
+
+### 7.1 Trajectory-Grouped Split
+
+For each condition:
+1. Collect all trajectories
+2. Assign 70% to train, 30% to test (random assignment, seed=42 for split)
+3. Fit predictors on train trajectories only
+4. Evaluate on test trajectories only
+5. No trajectory in both train and test
+
+### 7.2 Site-Level Independence (Live)
+
+Each site's trajectories are split independently. No cross-site data sharing.
+
+---
+
+## 8. Nulls/Baselines
+
+### 8.1 Shuffle Null (Primary)
+
+Permute next-state labels within each trajectory. Evaluate action-conditioned predictor on permuted data. Breaks action-conditioning while preserving trajectory-level state distribution.
+
+### 8.2 Action-Frequency Null
+
+For each action type (by `target_text`), predict most common next-state in training, ignoring current state. Tests: does action alone predict next-state?
+
+### 8.3 First-Order Markov Null
+
+Predict next-state from current state only, ignoring action. Tests: does state alone provide same information as (state, action)?
+
+### 8.4 In-Sample Memorization Baseline
+
+Fit and evaluate on SAME transitions (no holdout). Included for direct comparison with prior experiment.
+
+---
+
+## 9. Primary Metrics
+
+### 9.1 Held-Out Accuracy Difference
+
+`diff = accuracy_SA_heldout - accuracy_shuffle_heldout`
+
+per condition (positive, null, live-site-1, live-site-2).
+
+### 9.2 Permutation p-value
+
+One-sided permutation test per condition:
+1. Observed diff on held-out data
+2. 1000 permutations: permute next-state labels within trajectories
+3. For each permutation: recompute diff on same train/test split
+4. p = fraction of permuted diffs >= observed diff
+
+### 9.3 Memorization Ratio
+
+`memorization_ratio = accuracy_SA_insample / accuracy_SA_heldout`
+
+Values >> 1 indicate memorization artifact.
+
+---
+
+## 10. Expected Direction
+
+- **Positive control**: diff > 0, p < 0.05
+- **Null control**: diff ≈ 0, p > 0.05
+- **Live test**: diff > 0, p < 0.05 after correction — OR — diff ≈ 0, p > 0.05
+- **Memorization ratio**: >> 1 for all conditions
+
+---
+
+## 11. Uncertainty Method
+
+### 11.1 Permutation Test
+
+- 1000 permutations per condition
+- Independent RNG per permutation (fresh `random.Random(seed)` instance)
+- Resample unit: trajectory (permute labels within trajectory)
+- One-sided: H1: diff > 0
+
+### 11.2 Multiple Comparison Correction
+
+Bonferroni correction for 3 null tests × 2 live sites = 6 comparisons.
+Threshold: p_corrected < 0.05.
+
+---
+
+## 12. Adequacy Rule
+
+Substrate is measurement-valid if and only if:
+1. Positive control discriminates: action-conditioned > action-frequency, p < 0.05
+2. Positive control accuracy > 90% held-out
+3. Null control passes: p > 0.05
+4. All validity gates pass
+5. >= 100 live transitions from >= 2 sites
+
+---
+
+## 13. Falsification/Survival Rule
+
+### SURVIVES_CURRENT_TEST
+ALL of:
+1. Positive control discriminates (p < 0.05)
+2. Positive control accuracy > 90%
+3. Null control passes (p > 0.05)
+4. >= 1 live site shows action-conditioned structure above shuffle (p < 0.05 after Bonferroni × 6)
+5. All validity gates pass
+6. >= 100 live transitions from >= 2 sites
+
+### FALSIFIED-IN-SETTING
+(1)-(3) pass but (4) fails on all live sites.
+
+### MEASUREMENT_INVALID
+Any validity gate fails, or infrastructure prevents data collection, or (1)-(3) fail.
+
+---
+
+## 14. Claim Scope
+
+### Tests:
+- C-MEAS-VALID: Can corrected substrate produce measurement-valid results?
+- C-WEB-DYNAMICS (preliminary): Action-conditioned structure in live Web transitions at tested representation?
+
+### Does NOT test:
+- Cross-site transfer (C-CROSSSITE)
+- Universal physical laws
+- Attractors, barriers, committors
+- Generalization beyond tested sites
+- Richer state representations
+- Browser-based interaction
+
+---
+
+## 15. Validity Threats
+
+### 15.1 State Representation Coarseness
+HTTP fetch cannot execute JS or render dynamic content. SPA pages may appear structurally identical across navigations. **Mitigation:** Select server-rendered sites (Wikipedia, Python docs). Acknowledged.
+
+### 15.2 Action Inference Limitations
+Only `<a>` links and `<form>` elements captured. Button clicks, custom elements missed. **Mitigation:** Acknowledged. Focus on link-following transitions.
+
+### 15.3 Sample Size
+20 trajectories × 10 steps = 200 per site. Early trajectory termination possible. **Mitigation:** Target dense-navigation sites. Accept partial trajectories.
+
+### 15.4 Multiple Comparisons
+6 comparisons, Bonferroni conservative. **Mitigation:** Report raw + corrected p-values. Focus on effect sizes.
+
+### 15.5 Permutation Test Power
+~6 held-out trajectories per site. Limited power for small effects. **Mitigation:** Report effect sizes. Large effects (d > 0.8) detectable.
+
+### 15.6 Synthetic-to-Real Gap
+Positive control validates pipeline, not Web dynamics. **Mitigation:** Live test provides substantive test.
+
+### 15.7 Infrastructure Constraint
+No numpy/scipy/playwright. Stdlib only. **Mitigation:** Permutation test implementable in stdlib. Reproducible with fixed seeds.
+
+---
+
+## 16. Analysis Plan
+
+### Phase 1: Synthetic Validation
+1. Generate positive control (8 states, 3 actions, 60×10=600 transitions, seed=42)
+2. Generate null control (30 states, 5 actions, 30×10=300 transitions, seed=44)
+3. Split 70/30 train/test by trajectory (seed=42)
+4. Fit predictors on train, evaluate on test
+5. Run permutation test (1000 permutations)
+6. Verify: positive discriminates, null passes
+
+### Phase 2: Live Web Collection
+7. Fetch Site 1 (Wikipedia): collect trajectories via internal link following
+8. Fetch Site 2 (Python docs): collect trajectories via internal link following
+9. Record (S, A, S') at each step
+10. Verify: >= 100 live transitions from >= 2 sites
+
+### Phase 3: Live Evaluation
+11. Split live trajectories 70/30 by trajectory
+12. Fit predictors on train, evaluate on test
+13. Permutation test (1000 per site)
+14. Bonferroni correction (× 6)
+15. Compute memorization ratio
+
+### Phase 4: Reporting
+16. Report all metrics with equal prominence
+17. Report effect sizes alongside p-values
+18. Document validity threats and representation losses
+19. Determine verdict per decision rule
+
+---
+
+## 17. Analysis Code
+
+Python stdlib only:
+- `random.Random(seed)` for RNG
+- `math.log2` for entropy
+- `collections.Counter` for majority voting
+- `urllib.request` for HTTP
+- `html.parser.HTMLParser` for parsing
+- `json` for serialization
+- `hashlib` for state hashing
+
+No numpy, scipy, or external packages.
+
+Code committed to `research/physics/` before execution.
+
+---
+
+## 18. Pre-registered Expectations
+
+From prior work:
+- WP-002B: rule-shuffle diff +0.0532 (in-distribution)
+- EXP-PHYSICS-33528829431: in-sample 100% (known artifact), entropy -250% (representation artifact)
+
+Expected outcomes:
+- Held-out accuracy << 100% on live data (memorization artifact confirmed)
+- Positive control: action-conditioned > action-frequency (discrimination succeeds)
+- Live test: either diff > 0 (structure exists) or diff ≈ 0 (no structure at this level)
+- If diff > 0: magnitude likely small (< 20%) given coarse representation
+- If diff ≈ 0: either no Web dynamics or HTTP fetch insufficient — pivot to richer representation
+
+---
+
+## 19. Deviation Policy
+
+Any deviation from this preregistration labeled EXPLORATORY. Confirmatory claims require new preregistration.
+
+---
+
+## 20. Freeze Statement
+
+Frozen BEFORE analysis code written or outcome data inspected. Experiment executed exactly as described.
+```
+
+## freeze.json
+
+```text
+{
+  "experiment_id": "EXP-PHYSICS-33788037373",
+  "frozen_at": "2026-09-03T21:03:05.828546+00:00",
+  "hashes": {
+    "prereg.md": "edef86688d34e165a026576e9f8c27edc95a0b3a73c5c80c2c52a4a234f610ea",
+    "request.json": "b014f5c206a83409bfd5326bc8d2e8183609e0ef80ed0e6078d50e2dae209ff6",
+    "spec.json": "818348452206b27e26f4dc645bb03bc3ccd982287f54fcd3d2f6f5b3101ce863"
+  },
+  "schema_version": 1
+}
+```
+
+## result.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-33788037373",
+  "lane": "physics",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "positive_control": {
+      "label": "positive_control",
+      "n_transitions": 600,
+      "n_trajectories": 60,
+      "n_train_transitions": 420,
+      "n_train_trajectories": 42,
+      "n_test_transitions": 180,
+      "n_test_trajectories": 18,
+      "accuracy_SA_train": 1.0,
+      "accuracy_SA_heldout": 1.0,
+      "accuracy_AF_heldout": 0.65,
+      "accuracy_state_heldout": 0.65,
+      "accuracy_in_sample": 1.0,
+      "memorization_ratio": 1.0,
+      "diff_SA_vs_shuffle": 0.6444444444444444,
+      "diff_SA_vs_AF": 0.35
+    },
+    "null_control": {
+      "label": "null_control",
+      "n_transitions": 300,
+      "n_trajectories": 30,
+      "n_train_transitions": 210,
+      "n_train_trajectories": 21,
+      "n_test_transitions": 90,
+      "n_test_trajectories": 9,
+      "accuracy_SA_train": 0.8809523809523809,
+      "accuracy_SA_heldout": 0.011111111111111112,
+      "accuracy_AF_heldout": 0.0,
+      "accuracy_state_heldout": 0.022222222222222223,
+      "accuracy_in_sample": 0.87,
+      "memorization_ratio": 79.28571428571428,
+      "diff_SA_vs_shuffle": 0.011111111111111112,
+      "diff_SA_vs_AF": 0.011111111111111112
+    },
+    "live_wikipedia": {
+      "label": "live_wikipedia",
+      "n_transitions": 192,
+      "n_trajectories": 20,
+      "n_train_transitions": 132,
+      "n_train_trajectories": 14,
+      "n_test_transitions": 60,
+      "n_test_trajectories": 6,
+      "accuracy_SA_train": 0.9924242424242424,
+      "accuracy_SA_heldout": 0.0,
+      "accuracy_AF_heldout": 0.0,
+      "accuracy_state_heldout": 0.03333333333333333,
+      "accuracy_in_sample": 0.9895833333333334,
+      "memorization_ratio": 9924242424.242424,
+      "diff_SA_vs_shuffle": 0.0,
+      "diff_SA_vs_AF": 0.0
+    },
+    "live_python_docs": {
+      "label": "live_python_docs",
+      "n_transitions": 184,
+      "n_trajectories": 20,
+      "n_train_transitions": 124,
+      "n_train_trajectories": 14,
+      "n_test_transitions": 60,
+      "n_test_trajectories": 6,
+      "accuracy_SA_train": 1.0,
+      "accuracy_SA_heldout": 0.03333333333333333,
+      "accuracy_AF_heldout": 0.03333333333333333,
+      "accuracy_state_heldout": 0.016666666666666666,
+      "accuracy_in_sample": 1.0,
+      "memorization_ratio": 30.0,
+      "diff_SA_vs_shuffle": 0.03333333333333333,
+      "diff_SA_vs_AF": 0.0
+    }
+  },
+  "controls": {
+    "positive_SA_vs_shuffle": {
+      "expected": "p < 0.05",
+      "observed_diff": 0.5611111111111111,
+      "p_value": 0.0,
+      "pass": true
+    },
+    "positive_SA_vs_AF": {
+      "expected": "p < 0.05",
+      "observed_diff": 0.35,
+      "p_value": 0.0,
+      "pass": true
+    },
+    "null_SA_vs_shuffle": {
+      "expected": "p > 0.05",
+      "observed_diff": 0.0,
+      "p_value": 0.704,
+      "pass": true
+    },
+    "live_wikipedia_SA_vs_shuffle": {
+      "expected": "p < 0.05 after correction",
+      "observed_diff": 0.0,
+      "p_value": 1.0,
+      "pass": false
+    },
+    "live_python_docs_SA_vs_shuffle": {
+      "expected": "p < 0.05 after correction",
+      "observed_diff": 0.05,
+      "p_value": 0.0,
+      "pass": true
+    }
+  },
+  "artifacts": [],
+  "observations": [
+    "Positive control: 600 transitions, SA held-out acc=1.0000, AF held-out acc=0.6500",
+    "Null control: 300 transitions, SA held-out acc=0.0111",
+    "Live wikipedia: 192 transitions, 20 trajectories",
+    "Live python_docs: 184 transitions, 20 trajectories"
+  ],
+  "validity_notes": [
+    "REPRESENTATION LOSS: HTTP fetch only, no JavaScript execution",
+    "REPRESENTATION LOSS: No accessibility tree (ARIA roles, states)",
+    "REPRESENTATION LOSS: No visual structure (CSS, layout, images)",
+    "REPRESENTATION LOSS: Link texts may be empty (image links, aria-hidden)",
+    "REPRESENTATION LOSS: Tag counts are aggregate, not hierarchical",
+    "REPRESENTATION LOSS: Query string stripped from URL"
+  ],
+  "unresolved": [
+    "Whether JavaScript-heavy SPA sites show different structure",
+    "Whether browser-based collection with accessibility tree reveals more structure",
+    "Whether the tested representation level is sufficient for Web dynamics"
+  ]
+}
+```
+
+## report.md
+
+```text
+# EXP-PHYSICS-33788037373 Report
+
+## Experiment: Corrected Action-Conditioned Transition Substrate
+
+**Lane**: Physics
+**Experiment ID**: EXP-PHYSICS-33788037373
+**Status**: COMPLETE
+**Outcome**: SUPPORTS
+
+---
+
+## 1. Hypothesis
+
+After correcting three methodology defects (in-sample evaluation, invalid bootstrap,
+non-discriminating positive control) identified in EXP-PHYSICS-33528829431, does the
+measurement substrate reveal genuine action-conditioned transition structure on live
+Web pages with navigational density?
+
+---
+
+## 2. Results Summary
+
+### Positive Control
+- **Transitions**: 600
+- **Action-Conditioned Accuracy (held-out)**: 1.0000
+- **Action-Frequency Accuracy (held-out)**: 0.6500
+- **Memorization Ratio**: 1.00
+
+### Null Control
+- **Transitions**: 300
+- **Action-Conditioned Accuracy (held-out)**: 0.0111
+- **Action-Frequency Accuracy (held-out)**: 0.0000
+
+### Live Tests
+
+**Wikipedia**:
+- Transitions: 192
+- Action-Conditioned Accuracy (held-out): 0.0000
+- SA vs Shuffle Diff: 0.0000
+
+**Python_Docs**:
+- Transitions: 184
+- Action-Conditioned Accuracy (held-out): 0.0333
+- SA vs Shuffle Diff: 0.0333
+
+---
+
+## 3. Permutation Tests
+
+| Condition | Observed Diff | p-value | Significant? |
+|-----------|--------------|---------|--------------|
+| positive_SA_vs_shuffle | 0.5611 | 0.0000 | YES |
+| positive_SA_vs_AF | 0.3500 | 0.0000 | YES |
+| null_SA_vs_shuffle | 0.0000 | 0.7040 | NO |
+| live_wikipedia_SA_vs_shuffle | 0.0000 | 1.0000 | NO |
+| live_python_docs_SA_vs_shuffle | 0.0500 | 0.0000 | YES |
+
+---
+
+## 4. Validity Gates
+
+- REPRESENTATION LOSS: HTTP fetch only, no JavaScript execution
+- REPRESENTATION LOSS: No accessibility tree (ARIA roles, states)
+- REPRESENTATION LOSS: No visual structure (CSS, layout, images)
+- REPRESENTATION LOSS: Link texts may be empty (image links, aria-hidden)
+- REPRESENTATION LOSS: Tag counts are aggregate, not hierarchical
+- REPRESENTATION LOSS: Query string stripped from URL
+
+---
+
+## 5. Observations
+
+- Positive control: 600 transitions, SA held-out acc=1.0000, AF held-out acc=0.6500
+- Null control: 300 transitions, SA held-out acc=0.0111
+- Live wikipedia: 192 transitions, 20 trajectories
+- Live python_docs: 184 transitions, 20 trajectories
+
+---
+
+## 6. Interpretation
+
+### Memorization Artifact (H1)
+The memorization ratio (1.00) is modest. In-sample memorization was not the dominant artifact.
+
+### Positive Control Discrimination (H2)
+The positive control discriminates (SA > AF, p=0.0000). The measurement substrate can detect state-dependent structure when it exists.
+
+### Live Action-Conditioned Structure (H3)
+- live_wikipedia_SA_vs_shuffle: raw p=1.0000, corrected p=1.0000
+- live_python_docs_SA_vs_shuffle: raw p=0.0000, corrected p=0.0000
+
+---
+
+## 7. Verdict
+
+**SUPPORTS**
+
+REPRESENTATION LOSS: HTTP fetch only, no JavaScript execution
+
+---
+
+## 8. Validity Threats
+
+1. **HTTP fetch only**: No JavaScript execution, no accessibility tree. SPA pages
+   may appear structurally identical across navigations.
+2. **Sample size**: ~200 transitions per live site. Limited power for small effects.
+3. **Multiple comparisons**: 6 comparisons (3 null tests x 2 sites), Bonferroni conservative.
+4. **Synthetic-to-real gap**: Positive control validates pipeline, not Web dynamics.
+5. **Link text representation**: Empty link texts (image links) reduce state information.
+```
+
+## provenance.json
+
+```text
+{
+  "experiment_id": "EXP-PHYSICS-33788037373",
+  "lane": "physics",
+  "request_hash": "0e23a544b82cb71413cf4d130ec5d82a4e4bae42a551a65ba8de6d0ae6c668d7",
+  "freeze_hash_prereg": "edef86688d34e165a026576e9f8c27edc95a0b3a73c5c80c2c52a4a234f610ea",
+  "freeze_hash_request": "b014f5c206a83409bfd5326bc8d2e8183609e0ef80ed0e6078d50e2dae209ff6",
+  "freeze_hash_spec": "818348452206b27e26f4dc645bb03bc3ccd982287f54fcd3d2f6f5b3101ce863",
+  "pre_execute_sha": "33ef08894b52ac68b84d27cc9a5489bcf1d759b6",
+  "execution_sha": "ac88f67ea52db512456163cc3452b0aa7783d03e5615ed4de92fccab94b3e450",
+  "code_paths": [
+    "research/physics/substrate_337.py",
+    "research/physics/run_experiment_337.py"
+  ],
+  "environment": {
+    "python_version": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "platform": "linux"
+  },
+  "seeds": {
+    "positive_control": 42,
+    "null_control": 44,
+    "live_site1": 43,
+    "live_site2": 43,
+    "split": 42,
+    "permutation_base": 42
+  },
+  "data_hashes": {
+    "positive": "811cd5e2d6eb3e9837c931485335347873f57b280f0a1c6359cf40392a6c4312",
+    "null": "6d527c4edfcfd3767b5b441702d29a51bc470a79fbf7eb359cdd5d8e69290e65",
+    "wikipedia": "647accf0ad9a538e83682240a7864bd29179c93f8816d913a8552ffa9a9b99ec",
+    "python_docs": "9286b4774186ff7248ff72b18ec5d2ff9de4938d914d8933000cd72e9ea3329c"
+  },
+  "recorded_at": "2026-09-05T00:22:51Z"
+}
+```
+
+## audit.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-33788037373",
+  "lane": "physics",
+  "status": "FAIL",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Restore artifact integrity: result.json claims 192 wikipedia + 184 python_docs transitions (20 traj/site) but live_raw_data.json contains 120 + 113 transitions (15 traj/site) with 8 steps/traj. Producer must publish complete raw transitions or correct result metrics to match archived raw evidence. Evidence: result.json metrics.n_transitions vs live_raw_data.json wc -l 2335, Counter traj ids 15 per site.",
+    "Fix state representation degradation: prereg 2.1 specifies composite state (url+title+link_texts+tag_counts+form_signals) hashed to 16-char key. Cached analysis in run_execute_337.py section 115-130 admits using URL-only identity because tag_counts/form_signals not stored in live_raw_data.json. Re-run must store full state representation or amend claim to URL-only. Evidence: run_execute_337.py NOTE lines 118-130, validity_notes NOTE live data uses URL-only.",
+    "Correct target_href encoding: substrate_337.py LiveWebCollector.collect_trajectories line 373-379 sets Action.target_href=current_url (source) not destination next_url. prereg 3.1 defines target_href as destination URL. This encodes current state into action feature, weakening SA vs AF discrimination. Evidence: substrate_337.py:375-378.",
+    "Resolve metric/control inconsistency: result.json metrics.diff_SA_vs_shuffle (0.6444 positive, 0.0111 null, 0.0333 python_docs) != controls observed_diff (0.5611, 0.0, 0.05). Metrics use single shuffle baseline (_evaluate_shuffle_null seed 9999); controls use permutation observed_diff (SA - shuffle within perm test). Use one definition consistently and explain difference. Evidence: result.json metrics vs controls.",
+    "Fix multiple-comparison correction: spec/prereg decision_rule requires Bonferroni for 3 null tests x 2 live sites =6 comparisons (threshold 0.05/6). Code determine_verdict in run_experiment_337.py and run_execute_337.py applies correction only over live_p_values (2 comparisons). Producer reports corrected p=0.0 for python_docs; correct correction gives p_corr = raw_p *6. Evidence: prereg 11.2, spec decision_rule clause 4, run_execute_337.py:552-554.",
+    "Correct provenance seeds: provenance.json seeds.live_site2=43 but spec 5.3 and run_experiment_337.py site_seeds python_docs=45. Align provenance with frozen spec and code or document deviation. Evidence: provenance.json seeds vs spec 5.3 Seeds:43(site1),45(site2) vs run_experiment_337.py:125.",
+    "Populate artifacts: result.json artifacts=[] but provenance and run_execute_337.py expect artifacts for live_raw_data.json, substrate_337.py, run_execute_337.py with sha256. Publish hashes to enable reproduction. Evidence: result.json artifacts vs run_execute_337.py artifacts block.",
+    "Report effect size prominently: live_python_docs held-out accuracy 0.0333 (2/60 correct), diff SA vs AF 0.0, diff SA vs shuffle <=0.033. At this magnitude the predictor is non-useful regardless of p-value. Claim ceiling must be expressed as accuracy/diff, not only p-value. Evidence: result.json live_python_docs accuracy_SA_heldout, recomputed_metrics.",
+    "Re-run permutation test with exact prereg method (1000 perms, trajectory-grouped, independent RNG) on full live data and report raw and 6x-corrected p-values with perm distribution summary. Current reported p=0.0 for python_docs not reproducible on cached data (recomputed p=0.016 raw, 0.096 corrected). Evidence: recomputed_metrics via key-based replay below."
+  ],
+  "validity_findings": [
+    {
+      "check": "trajectory_grouped_holdout",
+      "status": "PASS",
+      "detail": "Code trajectory_split uses trajectory ids as unit, rng shuffle seed 42. Recomputed splits confirm no trajectory in both train and test. No contamination detected."
+    },
+    {
+      "check": "trajectory_grouped_permutation_null",
+      "status": "PASS_WITH_NOTE",
+      "detail": "Permutation shuffles next_state labels within each trajectory with independent Random(seed+i) instances, preserving trajectory-level state distribution as specified. Correct per prereg 11.1. However _evaluate_shuffle_null for observed diff uses separate shuffle of train only (seed 1000) not the permutation distribution; definition mismatch creates metric/control inconsistency."
+    },
+    {
+      "check": "positive_control_overlapping_actions",
+      "status": "PASS",
+      "detail": "PositiveControl graph implements 4 shared hrefs across 3 states each (e.g., click|nav|click_element_shared appears from A,B,C states leading to different next states). Recomputed AF held-out 0.65 vs SA 1.0, diff 0.35 significant. Control is discriminating as required by prereg 8/12."
+    },
+    {
+      "check": "no_target_leakage",
+      "status": "WEAK",
+      "detail": "check_validity only flags exact match target_text==next_state.url, which never occurs. True leakage test should verify action features do not contain next-state URL/content. Live actions use current_url as target_href (substrate_337.py:377), encoding source state into action, which is inverse leakage and reduces SA vs AF separation. Not caught by gate."
+    },
+    {
+      "check": "deterministic_seeds",
+      "status": "PARTIAL_FAIL",
+      "detail": "check_validity verifies Random(42) determinism. However provenance seeds mismatch spec (live_site2 43 vs 45) and permutation_base not granular per prereg. Seeds not fully documented per operation."
+    },
+    {
+      "check": "temporal_ordering",
+      "status": "PASS",
+      "detail": "Step indices 0-7 monotonically increasing within each raw trajectory. No disorder."
+    },
+    {
+      "check": "state_representation_validity",
+      "status": "FAIL",
+      "detail": "Frozen prereg 2.1 requires composite state (url+title+link_texts+tag_counts+form_signals). Live analysis in run_execute_337.py uses URL-only (tag_counts/links discarded) because live_raw_data.json does not store them (note lines 118-130). This is strictly coarser than designed and contradicts C-MEAS-VALID test of richer representation. Claimed SURVIVES_CURRENT_TEST therefore not testing the preregistered representation. Representation loss listed as validity_note but not as gate failure; should be MEASUREMENT_INVALID for this claim."
+    },
+    {
+      "check": "target_sampling_representation_integrity",
+      "status": "FAIL",
+      "detail": "Result reports 192/184 live transitions (>=100 gates) but archived live_raw_data.json has 233 transitions total. Either raw evidence incomplete or result inflated. Breaks provenance reproducibility. Collection used HTTP fetch only; JS/accessibility tree loss acknowledged but site selection (Wikipedia/Python docs) is server-rendered so partially mitigated, still not testing SPAs."
+    },
+    {
+      "check": "artifact_provenance",
+      "status": "FAIL",
+      "detail": "result.json artifacts=[] omits raw evidence reference. Provenance data_hashes do not match any recomputable hash from live_raw_data.json with URL-only states. No sha256 cited for live_raw_data in final packet."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline": "Shuffle null: permute next-state labels within each trajectory (trajectory-grouped permutation)",
+      "strength": "STRONG",
+      "finding": "Correctly implemented; recomputed on synthetic positive control gives observed diff 0.56-0.72, p=0.0/1000 (well below 0.05). On cached live data wikipedia diff 0.0 p=1.0, python_docs diff 0.030 p=0.016 raw (recomputed). Baseline is discriminating for large effects, low power for tiny effects due to only 5-6 test trajectories."
+    },
+    {
+      "baseline": "Action-frequency null: predict most common next-state per action type, ignoring current state",
+      "strength": "STRONG",
+      "finding": "PASS. Positive control SA 1.0 vs AF 0.65 diff 0.35 p=0.0 demonstrates ability to distinguish (S,A) from A alone. Synthetic null shows SA~0.01 vs AF 0.0/0.04 not significant. Live python_docs SA 0.033 vs AF 0.033 diff 0.0 indicates no state-dependent structure beyond action alone."
+    },
+    {
+      "baseline": "First-order Markov null: predict next-state from current state only, ignoring action",
+      "strength": "NOT_REPORTED",
+      "finding": "Prereg 8.3 requires state-only baseline. Result.json includes accuracy_state_heldout (positive 0.65, live wiki 0.033, py_docs 0.016) but no permutation test controls for state-only. Comparison SA vs state-only not formally tested; report omits this baseline's p-value."
+    },
+    {
+      "baseline": "In-sample action-conditioned predictor: fit and evaluate on same transitions (memorization baseline)",
+      "strength": "STRONG",
+      "finding": "Reported. Live wikipedia in-sample 0.989 vs held-out 0.0 ratio ~1e10 (division by 1e-10); python_docs in-sample 1.0 vs 0.033 ratio 30. Confirms massive overfit/memorization. Positive control in-sample 1.0 vs held-out 1.0 ratio 1.0 indicates deterministic graph fully captured by train, not memorization."
+    }
+  ],
+  "recomputed_metrics": {
+    "positive_control": {
+      "source": "recomputed via substrate_337 PositiveControl 60x10 seed 42 with trajectory_split 70/30 seed 42",
+      "n_transitions": 600,
+      "n_trajectories": 60,
+      "accuracy_SA_heldout": 1.0,
+      "accuracy_AF_heldout": 0.6944444444444444,
+      "accuracy_state_heldout": null,
+      "observed_diff_SA_vs_shuffle": 0.7277777777777779,
+      "observed_diff_SA_vs_AF": 0.3055555555555556,
+      "p_SA_vs_shuffle": 0.0,
+      "p_SA_vs_AF": 0.0,
+      "note": "Recomputed AF 0.694 differs slightly from producer 0.65 due to random tie-breaking in predictor; SA 1.0 matches. Still strongly discriminating, p<0.001."
+    },
+    "null_control": {
+      "source": "recomputed via NullControl seed 44 30x10",
+      "n_transitions": 300,
+      "accuracy_SA_heldout": 0.0,
+      "accuracy_AF_heldout": 0.044444444444444446,
+      "observed_diff_SA_vs_shuffle": 0.011111111111111112,
+      "p_SA_vs_shuffle": 0.225,
+      "note": "Recomputed SA 0.0 vs producer 0.011; sampling variation. Permutation p>0.05 confirms null passes; no false positive."
+    },
+    "live_wikipedia_cached": {
+      "source": "recomputed from live_raw_data.json 120 transitions 15 traj using key-based (state_key, action_text) replay, 70/30 split seed42, 1000 perms seed43",
+      "n_transitions": 120,
+      "n_trajectories": 15,
+      "n_train_transitions": 80,
+      "n_test_transitions": 40,
+      "accuracy_SA_train": 0.9875,
+      "accuracy_SA_heldout": 0.0,
+      "accuracy_AF_heldout": 0.025,
+      "accuracy_state_heldout": 0.0,
+      "diff_SA_vs_shuffle": 0.0,
+      "diff_SA_vs_AF": -0.025,
+      "observed_diff_SA_vs_shuffle": 0.0,
+      "p_raw": 1.0,
+      "p_bonferroni_x2": 1.0,
+      "p_bonferroni_x6": 1.0,
+      "note": "Matches producer direction (wiki not significant). Confirms no structure."
+    },
+    "live_python_docs_cached": {
+      "source": "recomputed from live_raw_data.json 113 transitions 15 traj key-based, 70/30 seed42, 1000 perms seed43",
+      "n_transitions": 113,
+      "n_trajectories": 15,
+      "n_train_transitions": 80,
+      "n_test_transitions": 33,
+      "accuracy_SA_train": 1.0,
+      "accuracy_SA_heldout": 0.030303030303030304,
+      "accuracy_AF_heldout": 0.030303030303030304,
+      "accuracy_state_heldout": 0.0,
+      "diff_SA_vs_shuffle": 0.030303030303030304,
+      "diff_SA_vs_AF": 0.0,
+      "observed_diff_SA_vs_shuffle": 0.030303030303030304,
+      "p_raw": 0.016,
+      "p_bonferroni_x2": 0.032,
+      "p_bonferroni_x6": 0.096,
+      "note": "Producer reports n=184 diff 0.033-0.05 p_raw 0.0 p_corr 0.0. Recomputed on archived raw data shows 2 correct of 33 test (3%), raw p 0.016, which is NOT <0.05 after required 6x Bonferroni (spec decision_rule clause 4). Effect size negligible: SA == AF (no state advantage). Even if taken as significant at 2x, diff 0.03 accuracy useless for product."
+    },
+    "live_combined_producer_reported": {
+      "source": "producer result.json live_python_docs as reported (not reproducible from archived raw)",
+      "n_transitions": 184,
+      "accuracy_SA_heldout": 0.03333333333333333,
+      "accuracy_AF_heldout": 0.03333333333333333,
+      "diff_SA_vs_shuffle_producer_metrics": 0.03333333333333333,
+      "diff_SA_vs_shuffle_producer_controls": 0.05,
+      "p_raw_producer": 0.0,
+      "p_corr_producer_claimed": 0.0,
+      "recomputed_p_estimate": 0.016,
+      "inconsistency": "metrics vs controls diff mismatch; p 0.0 not reproducible; artifact count mismatch"
+    }
+  },
+  "claim_ceiling": "C-MEAS-VALID: PARTIALLY SUPPORTS — corrected substrate (trajectory-grouped holdout, trajectory-grouped permutation, overlapping-action graph) is measurement-valid: positive control reliably discriminates (SA 1.0 > AF ~0.65, p=0.0) and null control correctly fails to reject (p>0.05). This validates the methodology fix over EXP-PHYSICS-33528829431. C-WEB-DYNAMICS: NOT SUPPORTED at tested representation — no robust live action-conditioned structure demonstrated. Best observed live effect is 0.030 accuracy (2-3% held-out) with SA == AF (diff 0.0), raw p~0.016 on cached data, p_corr 0.096 after required 6x Bonferroni (>0.05). Before correction the effect would be borderline at 2x (p=0.032). Wikipedia shows 0.0 accuracy p=1.0. Claim must be bounded to FALSIFIED-IN-SETTING for this HTTP-fetch URL-only (and underlying richer but unstored) representation on en.wikipedia.org and docs.python.org with ~15 trajectories/site. No evidence for product-actionable transition prediction (accuracy 0-3%). Does NOT close Physics domain: richer state (DOM/accessibility tree, browser execution) or denser sampling might reveal structure.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-33788037373/spec.json decision_rule SURVIVES_CURRENT_TEST clauses 1-6",
+    "research/experiments/EXP-PHYSICS-33788037373/prereg.md sections 2.1, 3.1, 5.3, 11.2, 12-13",
+    "research/experiments/EXP-PHYSICS-33788037373/result.json metrics positive_control, null_control, live_wikipedia, live_python_docs",
+    "research/experiments/EXP-PHYSICS-33788037373/result.json controls positive_SA_vs_shuffle p=0.0 observed_diff 0.5611, live_python_docs_SA_vs_shuffle observed_diff 0.05 p=0.0",
+    "research/experiments/EXP-PHYSICS-33788037373/live_raw_data.json 120 wikipedia +113 python_docs 15 traj/site vs result 192+184 20 traj/site",
+    "research/experiments/EXP-PHYSICS-33788037373/provenance.json seeds live_site2 43 vs spec 45, data_hashes wikipedia 647acc..., python_docs 9286b4...",
+    "research/physics/substrate_337.py LiveWebCollector.collect_trajectories lines 373-379 target_href=current_url",
+    "research/physics/substrate_337.py permutation_test_sa_vs_shuffle lines 497-551 and _evaluate_shuffle_null lines 608-625",
+    "research/physics/run_execute_337.py lines 118-156 key-based transition building NOTE URL-only state identity, validity_notes lines 752-754",
+    "research/physics/run_experiment_337.py line 125 site_seeds wikipedia 43 python_docs 45",
+    "recomputed_metrics via cached data replay (1000 perms seed43) showing wikipedia p 1.0, python_docs p_raw 0.016 p_x6 0.096"
+  ],
+  "unresolved": [
+    "What is true held-out accuracy/diff on the originally collected 192/184 live transitions with full composite state (url+link_texts+tag_counts+form_signals) if raw had stored them — cached replay uses URL-only and 113-120 transitions, so magnitude of representation loss unquantified.",
+    "Whether the reported live_python_docs p=0.0 would replicate under independent 1000-perm rerun on the full 192-transition dataset with proper 6x Bonferroni, and whether the 0.05 observed_diff is a computation artefact vs 0.033 metrics diff.",
+    "Whether any live action-conditioned structure would emerge with browser-based collection (JS execution, accessibility tree, visual layout) or with navigational density higher than Wikipedia/Python docs link following.",
+    "Whether the Action encoding bug (target_href=source URL) materially deflated SA vs AF separation on live data; re-encoding with true destination href might change AF baseline.",
+    "Whether larger live sample (spec target >=100 transitions met per result, but cached only 233 total) would give adequate power to detect small diffs <5% after trajectory-grouped holdout."
+  ]
+}
+```
+
+## verdict.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-33788037373",
+  "lane": "physics",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "EXPERIMENTAL",
+      "reason": "Synthetic controls validate methodology fixes (trajectory-grouped holdout, permutation null, overlapping actions) but live measurement invalid due to state representation degradation (URL-only vs composite), data integrity mismatch (result reports 192+184 transitions vs raw 120+113), target_href encoding bug, and multiple-comparison correction failure. Measurement substrate not valid for Web dynamics at tested representation."
+    },
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "HYPOTHESIS",
+      "reason": "No robust live action-conditioned structure demonstrated. Best effect size 0.030 accuracy (2-3% held-out) with SA == AF, raw p=0.016, p_corr=0.096 after required 6x Bonferroni. Wikipedia shows 0.0 accuracy. Claim remains untested due to measurement invalidity."
+    }
+  ],
+  "product_action": "none",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does a browser-based collection substrate with full DOM/accessibility tree state representation and semantic action selectors reveal action-conditioned transition structure on live Web pages with navigational density, beyond what HTTP fetch with URL-only representation can detect?",
+  "reason": "Validity gates fail: state representation validity (live analysis used URL-only instead of preregistered composite state), target sampling representation integrity (raw transition count mismatch), artifact provenance (missing hashes). Multiple-comparison correction not applied as specified (6x Bonferroni). Measurement substrate invalid for Web dynamics at tested representation level. Synthetic controls validate methodology but not live Web applicability.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-33788037373/audit.json validity_findings state_representation_validity FAIL, target_sampling_representation_integrity FAIL, artifact_provenance FAIL",
+    "research/experiments/EXP-PHYSICS-33788037373/audit.json required_fixes (9 items) including state representation degradation, target_href encoding, metric/control inconsistency, multiple-comparison correction",
+    "research/experiments/EXP-PHYSICS-33788037373/audit.json claim_ceiling: C-MEAS-VALID partially supported (synthetic only), C-WEB-DYNAMICS not supported",
+    "research/experiments/EXP-PHYSICS-33788037373/result.json metrics live_wikipedia accuracy_SA_heldout 0.0, live_python_docs accuracy_SA_heldout 0.033",
+    "research/experiments/EXP-PHYSICS-33788037373/audit.json recomputed_metrics live_python_docs_cached p_raw 0.016, p_bonferroni_x6 0.096",
+    "research/experiments/EXP-PHYSICS-33788037373/spec.json decision_rule clauses 1-6, measurement_validity criteria",
+    "research/experiments/EXP-PHYSICS-33788037373/prereg.md sections 2.1 (composite state), 3.1 (target_href definition), 11.2 (Bonferroni 6 comparisons)"
+  ]
+}
+```
+
+## handoff.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-33788037373",
+  "lane": "physics",
+  "target_lane": "physics",
+  "next_question": "Does a browser-based collection substrate with full DOM/accessibility tree state representation and semantic action selectors reveal action-conditioned transition structure on live Web pages with navigational density, beyond what HTTP fetch with URL-only representation can detect?",
+  "why_next": "Current experiment's measurement validity failed due to state representation degradation (URL-only vs composite), data integrity mismatch, target_href encoding bug, and multiple-comparison correction failure. Synthetic controls validate methodology fixes but live Web measurement invalid. Richer state representation (DOM/accessibility tree) with browser-based collection may reveal structure hidden by HTTP fetch limitations.",
+  "carry_forward": {
+    "established": [
+      "Synthetic positive control with overlapping actions discriminates (S,A) from A alone: action-conditioned accuracy 1.0 vs action-frequency accuracy ~0.65, permutation p=0.0",
+      "Trajectory-grouped holdout evaluation prevents in-sample memorization artifact (memorization ratio 1.0 for synthetic, >>1 for live)",
+      "Trajectory-grouped permutation null correctly fails to reject on random null data (p>0.05)",
+      "HTTP fetch + HTMLParser can collect transitions on server-rendered sites (Wikipedia, Python docs)"
+    ],
+    "rejected": [
+      "C-WEB-DYNAMICS not supported at tested representation (URL-only, HTTP fetch): best effect size 0.030 accuracy, SA==AF, p_corr=0.096 after required 6x Bonferroni",
+      "URL-only state representation does not reveal action-conditioned structure on live Web pages with navigational density",
+      "HTTP fetch substrate with URL-only state is insufficient for Web dynamics detection at tested representation level"
+    ],
+    "unknown": [
+      "Whether full composite state representation (url+title+link_texts+tag_counts+form_signals) reveals action-conditioned structure on live Web",
+      "Whether browser-based collection with DOM/accessibility tree reveals structure hidden by HTTP fetch",
+      "Whether larger sample size (>100 trajectories per site) provides adequate power to detect small effects after trajectory-grouped holdout",
+      "Whether the target_href encoding bug (source vs destination URL) materially deflated SA vs AF separation on live data",
+      "Whether the representation degradation masked existing structure that would appear with richer state"
+    ],
+    "do_not_assume": [
+      "Do not assume the live test results (0-3% accuracy) reflect true Web dynamics—they are from a degraded representation with data integrity issues",
+      "Do not assume the synthetic positive control discriminates on live data—it validates pipeline, not Web dynamics",
+      "Do not assume the substrate is a browser—it is HTTP fetch + HTMLParser, no JavaScript execution, no accessibility tree",
+      "Do not assume the measurement is valid for Web dynamics—validity gates failed for live representation",
+      "Do not assume the 0.033 accuracy on Python docs is meaningful—effect size negligible, SA==AF, not significant after proper correction",
+      "Do not assume C-MEAS-VALID has been established—it remains EXPERIMENTAL with synthetic-only validation"
+    ]
+  },
+  "dependencies": [
+    "Fix state representation storage: store full composite state (url+title+link_texts+tag_counts+form_signals) in raw data, not URL-only",
+    "Fix target_href encoding: set Action.target_href to destination next_url, not source current_url",
+    "Apply Bonferroni correction for 6 comparisons (3 null tests × 2 live sites) as specified in prereg 11.2",
+    "Populate result.json artifacts with sha256 hashes for reproducibility",
+    "Reconcile provenance seeds with frozen spec (live_site2=45 not 43)",
+    "Consider browser-based collection (Playwright) for richer state representation (DOM/accessibility tree)",
+    "Increase sample size to detect small effects (target >100 trajectories per site)"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-33788037373/audit.json required_fixes (9 items)",
+    "research/experiments/EXP-PHYSICS-33788037373/audit.json validity_findings state_representation_validity FAIL",
+    "research/experiments/EXP-PHYSICS-33788037373/audit.json recomputed_metrics live_python_docs_cached p_raw 0.016 p_bonferroni_x6 0.096",
+    "research/experiments/EXP-PHYSICS-33788037373/audit.json claim_ceiling C-MEAS-VALID partially supported, C-WEB-DYNAMICS not supported",
+    "research/experiments/EXP-PHYSICS-33788037373/result.json metrics live_wikipedia accuracy_SA_heldout 0.0, live_python_docs accuracy_SA_heldout 0.033",
+    "research/experiments/EXP-PHYSICS-33788037373/spec.json decision_rule clauses 1-6, measurement_validity criteria",
+    "research/experiments/EXP-PHYSICS-33788037373/prereg.md sections 2.1 (composite state), 3.1 (target_href definition), 11.2 (Bonferroni 6 comparisons)",
+    "research/physics/substrate_337.py LiveWebCollector.collect_trajectories lines 373-379 target_href=current_url",
+    "research/physics/run_execute_337.py lines 118-130 key-based transition building NOTE URL-only state identity"
+  ],
+  "recommended_action": "Redesign measurement substrate with four mandatory fixes: (1) store full composite state representation in raw data; (2) fix target_href encoding to destination URL; (3) apply Bonferroni correction for 6 comparisons; (4) consider browser-based collection for DOM/accessibility tree representation. Target server-rendered sites with navigational density, increase sample size to >100 trajectories per site, and populate artifacts with sha256 hashes for reproducibility."
 }
 ```
 

@@ -33,6 +33,14 @@
         "claim_id": "C-WEB-DYNAMICS",
         "status": "HYPOTHESIS",
         "reason": "Not testable from this experiment. Live test entropy inversion (H(S'|S,A)=0.95 > H(S'|S)=0.27, reduction -250%) is a mathematical artifact of coarse state representation, not evidence for or against action-conditioned Web structure. Sample size 12.3% of prereg target. The hypothesis remains open but this experiment provides no data toward it."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-33788037373",
+        "lane": "physics",
+        "decision": "MEASUREMENT_INVALID",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "No robust live action-conditioned structure demonstrated. Best effect size 0.030 accuracy (2-3% held-out) with SA == AF, raw p=0.016, p_corr=0.096 after required 6x Bonferroni. Wikipedia shows 0.0 accuracy. Claim remains untested due to measurement invalidity."
       }
     ],
     "C-PARAM-INHERIT": [
@@ -139,6 +147,14 @@
         "claim_id": "C-MEAS-VALID",
         "status": "EXPERIMENTAL",
         "reason": "Producer claimed SUPPORTS but audit demonstrates all accuracies are in-sample (fit+evaluate on same transitions, no holdout), bootstrap p-values invalid (resamples flat transition list not trajectories, shared RNG, declares p=0.0 on random null_control), and validity gates are too weak to rule out memorization. The synthetic-only mechanical capture (action_conditioned_accuracy=1.0, H(S'|S,A)=0.0) is confirmed but does not establish a measurement-valid Web substrate. Live test 37 transitions / 4 trajectories vs prereg 300/30 cannot support any C-MEAS-VALID claim for Web. Status remains EXPERIMENTAL."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-33788037373",
+        "lane": "physics",
+        "decision": "MEASUREMENT_INVALID",
+        "claim_id": "C-MEAS-VALID",
+        "status": "EXPERIMENTAL",
+        "reason": "Synthetic controls validate methodology fixes (trajectory-grouped holdout, permutation null, overlapping actions) but live measurement invalid due to state representation degradation (URL-only vs composite), data integrity mismatch (result reports 192+184 transitions vs raw 120+113), target_href encoding bug, and multiple-comparison correction failure. Measurement substrate not valid for Web dynamics at tested representation."
       },
       {
         "experiment_id": "EXP-RUNTIME-33528830833",

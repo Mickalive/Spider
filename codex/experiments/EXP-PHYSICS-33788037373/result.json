@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-33788037373",
+  "lane": "physics",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "positive_control": {
+      "label": "positive_control",
+      "n_transitions": 600,
+      "n_trajectories": 60,
+      "n_train_transitions": 420,
+      "n_train_trajectories": 42,
+      "n_test_transitions": 180,
+      "n_test_trajectories": 18,
+      "accuracy_SA_train": 1.0,
+      "accuracy_SA_heldout": 1.0,
+      "accuracy_AF_heldout": 0.65,
+      "accuracy_state_heldout": 0.65,
+      "accuracy_in_sample": 1.0,
+      "memorization_ratio": 1.0,
+      "diff_SA_vs_shuffle": 0.6444444444444444,
+      "diff_SA_vs_AF": 0.35
+    },
+    "null_control": {
+      "label": "null_control",
+      "n_transitions": 300,
+      "n_trajectories": 30,
+      "n_train_transitions": 210,
+      "n_train_trajectories": 21,
+      "n_test_transitions": 90,
+      "n_test_trajectories": 9,
+      "accuracy_SA_train": 0.8809523809523809,
+      "accuracy_SA_heldout": 0.011111111111111112,
+      "accuracy_AF_heldout": 0.0,
+      "accuracy_state_heldout": 0.022222222222222223,
+      "accuracy_in_sample": 0.87,
+      "memorization_ratio": 79.28571428571428,
+      "diff_SA_vs_shuffle": 0.011111111111111112,
+      "diff_SA_vs_AF": 0.011111111111111112
+    },
+    "live_wikipedia": {
+      "label": "live_wikipedia",
+      "n_transitions": 192,
+      "n_trajectories": 20,
+      "n_train_transitions": 132,
+      "n_train_trajectories": 14,
+      "n_test_transitions": 60,
+      "n_test_trajectories": 6,
+      "accuracy_SA_train": 0.9924242424242424,
+      "accuracy_SA_heldout": 0.0,
+      "accuracy_AF_heldout": 0.0,
+      "accuracy_state_heldout": 0.03333333333333333,
+      "accuracy_in_sample": 0.9895833333333334,
+      "memorization_ratio": 9924242424.242424,
+      "diff_SA_vs_shuffle": 0.0,
+      "diff_SA_vs_AF": 0.0
+    },
+    "live_python_docs": {
+      "label": "live_python_docs",
+      "n_transitions": 184,
+      "n_trajectories": 20,
+      "n_train_transitions": 124,
+      "n_train_trajectories": 14,
+      "n_test_transitions": 60,
+      "n_test_trajectories": 6,
+      "accuracy_SA_train": 1.0,
+      "accuracy_SA_heldout": 0.03333333333333333,
+      "accuracy_AF_heldout": 0.03333333333333333,
+      "accuracy_state_heldout": 0.016666666666666666,
+      "accuracy_in_sample": 1.0,
+      "memorization_ratio": 30.0,
+      "diff_SA_vs_shuffle": 0.03333333333333333,
+      "diff_SA_vs_AF": 0.0
+    }
+  },
+  "controls": {
+    "positive_SA_vs_shuffle": {
+      "expected": "p < 0.05",
+      "observed_diff": 0.5611111111111111,
+      "p_value": 0.0,
+      "pass": true
+    },
+    "positive_SA_vs_AF": {
+      "expected": "p < 0.05",
+      "observed_diff": 0.35,
+      "p_value": 0.0,
+      "pass": true
+    },
+    "null_SA_vs_shuffle": {
+      "expected": "p > 0.05",
+      "observed_diff": 0.0,
+      "p_value": 0.704,
+      "pass": true
+    },
+    "live_wikipedia_SA_vs_shuffle": {
+      "expected": "p < 0.05 after correction",
+      "observed_diff": 0.0,
+      "p_value": 1.0,
+      "pass": false
+    },
+    "live_python_docs_SA_vs_shuffle": {
+      "expected": "p < 0.05 after correction",
+      "observed_diff": 0.05,
+      "p_value": 0.0,
+      "pass": true
+    }
+  },
+  "artifacts": [],
+  "observations": [
+    "Positive control: 600 transitions, SA held-out acc=1.0000, AF held-out acc=0.6500",
+    "Null control: 300 transitions, SA held-out acc=0.0111",
+    "Live wikipedia: 192 transitions, 20 trajectories",
+    "Live python_docs: 184 transitions, 20 trajectories"
+  ],
+  "validity_notes": [
+    "REPRESENTATION LOSS: HTTP fetch only, no JavaScript execution",
+    "REPRESENTATION LOSS: No accessibility tree (ARIA roles, states)",
+    "REPRESENTATION LOSS: No visual structure (CSS, layout, images)",
+    "REPRESENTATION LOSS: Link texts may be empty (image links, aria-hidden)",
+    "REPRESENTATION LOSS: Tag counts are aggregate, not hierarchical",
+    "REPRESENTATION LOSS: Query string stripped from URL"
+  ],
+  "unresolved": [
+    "Whether JavaScript-heavy SPA sites show different structure",
+    "Whether browser-based collection with accessibility tree reveals more structure",
+    "Whether the tested representation level is sufficient for Web dynamics"
+  ]
+}

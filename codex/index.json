@@ -256,6 +256,32 @@
         "handoff.json": "d8af42ddf8a0c4910b1b55c1612c18a9e0e4b30a672e019f5c8b82203e0bba88"
       }
     },
+    "EXP-PHYSICS-33788037373": {
+      "lane": "physics",
+      "request_id": "f3f01d7f94fad7ed70360093",
+      "created_at": "2026-09-03T18:01:45.461063+00:00",
+      "claim_ids": [
+        "C-MEAS-VALID",
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "After correcting three methodology defects (in-sample evaluation, invalid bootstrap, non-discriminating positive control) identified in EXP-PHYSICS-33528829431, does the measurement substrate reveal genuine action-conditioned transition structure on live Web pages with navigational density?",
+      "audit_status": "FAIL",
+      "decision": "MEASUREMENT_INVALID",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/physics",
+      "hashes": {
+        "request.json": "b014f5c206a83409bfd5326bc8d2e8183609e0ef80ed0e6078d50e2dae209ff6",
+        "spec.json": "818348452206b27e26f4dc645bb03bc3ccd982287f54fcd3d2f6f5b3101ce863",
+        "prereg.md": "edef86688d34e165a026576e9f8c27edc95a0b3a73c5c80c2c52a4a234f610ea",
+        "freeze.json": "f835a55d63a457690b9ed6a790e1de433cf2dc22e16f9ddd707eb34f095501db",
+        "result.json": "7b60da6d0e7fb9f231749646758be7e7f739bc8e57a7fd2033eb064b797d42b1",
+        "report.md": "d18f8cdb723c7dc0bc983c142f095f8e15882e79f21e978fae60277bdee59a34",
+        "provenance.json": "a77f0ca756374b57039e0360fc6194b2f2012c515d7d9cb2340dbbf5e8c71f85",
+        "audit.json": "a8442f540db09145362f3582d7711e0c2f12139ed44887e4ac180b5eeb7018ca",
+        "verdict.json": "99d0bc37dbc228491675bd870344417093ef618e87c32f5cdb22ab6841ebc23e",
+        "handoff.json": "35ac95937cd8eac6486b1df4c51150ae30a6e2cb3851fa326e5a93d2f2f62fad"
+      }
+    },
     "EXP-PRODUCT-33528829801": {
       "lane": "product",
       "request_id": "2629e8e63e200f05556e37ca",
