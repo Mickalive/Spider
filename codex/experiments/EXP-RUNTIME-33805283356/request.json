@@ -1,0 +1,20 @@
+{
+  "base_sha": "b0e6e43071f1a5bb3be37b5c497be9dcb988c6fd",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-03T20:57:58.045124+00:00",
+  "experiment_id": "EXP-RUNTIME-33805283356",
+  "inherited_last_verdict": "NARROW_SUCCESS",
+  "inherited_next_question": "On a non-URL-tautological server where the URL is constant and auth state varies (e.g., a Flask app with real JWT/session middleware returning different responses based on Authorization header or Cookie), does the HTTP fingerprint substrate maintain discrimination \u2014 and does the full vector exceed single-field baselines (B-STATUS-ONLY, B-BODY-ONLY) when bodies vary with auth state?",
+  "lane": "runtime",
+  "origin_github_run_id": "33805283356",
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-33767375933",
+    "path": "research/experiments/EXP-RUNTIME-33767375933/handoff.json",
+    "sha256": "fea5b244f4547485ceb42f78d18fabeb664c457927fe26b940d7a0b7e7451f04"
+  },
+  "reason": "pulse",
+  "request_hash": "b25690f6a4358f0dc911da1d298d67adcb532225bd8f4ec89458ed142e36bd5b",
+  "request_id": "1c99edce5a6acfd6fb1c4bd8",
+  "schema_version": 1
+}
