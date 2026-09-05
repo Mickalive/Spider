@@ -179,6 +179,32 @@
         "handoff.json": "c50df1d04707587e76fd7426e7d9c8960aa85cee28fb71acc9f3e9fdd262ca6e"
       }
     },
+    "EXP-INTEL-33925056324": {
+      "lane": "intel",
+      "request_id": "69900e979d772ca8a1fe7343",
+      "created_at": "2026-09-04T22:20:20.094538+00:00",
+      "claim_ids": [
+        "C-CROSSSITE",
+        "C-LLM-INHERIT"
+      ],
+      "question": "Can SPIDER's fragment extraction logic be adapted to extract reusable fragments from WebArena's accessibility tree observation format, and what is the transformation cost?",
+      "audit_status": "REVISE",
+      "decision": "SUPPORTS",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/intel",
+      "hashes": {
+        "request.json": "edd5c10df7802f25a590a582fbff6a4d8f165ad37f543608596140f57c9af185",
+        "spec.json": "cb953ffd57b362514378a259d79168fb2ba54f6ac9de2c92609980a4a618016c",
+        "prereg.md": "79d5d06666cc38da284c4de10520255559f7dd6963fb4b586200032f7fec5f33",
+        "freeze.json": "2789b2a76ac3f5893a0f1bac01724f0ae4c49c445f7c87bb18a18803022107aa",
+        "result.json": "44ebbb8197b14ef8259533523d9d0c08cf24ca7c30204f245323f987143e34f2",
+        "report.md": "cc8aa99c1bdc59baed1d4dad9ffea64ebef66fd0a9bd1d0826ac1dbfb86126c1",
+        "provenance.json": "50f267444bce9b3276dc69d6f331a3fb71ff36ae970b572c6a70c3d3b074dc9a",
+        "audit.json": "c29d7f10f065c090594081a0a51a8934708b5dd4906f89a1bbe20f288b387520",
+        "verdict.json": "42a35c448f71ccf4f8af78782519d0b5645cdb6f542c37f44790a62b88561f97",
+        "handoff.json": "6f92dd17615985260d2c3828608c7f7c00ff1ba71dd5593f57d82d9555668fce"
+      }
+    },
     "EXP-PHYSICS-33528829431": {
       "lane": "physics",
       "request_id": "aefb271e5c3274224c9651fe",
