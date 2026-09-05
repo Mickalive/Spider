@@ -7,8 +7,8 @@
   "continue_immediately": false,
   "next_question": "Can the induction algorithm be fixed to (1) detect when a supplied param already contains the learned prefix/suffix and avoid double-wrapping, (2) ignore varying fields that lack common prefix/suffix structure with the majority of varying fields, and (3) return slot_count=0 when observations share no common structural pattern \u2014 and do these fixes preserve the faithful regression on clean synthetic inputs?",
   "promotion_ready": false,
-  "consecutive_failures": 1,
-  "updated_at": "2026-09-05T21:52:02.497166+00:00",
+  "consecutive_failures": 2,
+  "updated_at": "2026-09-05T23:34:43.440904+00:00",
   "last_failure_retryable": false,
   "last_handoff_sha256": "073d065ba23df4b9a7ad46e0e8f82d61d33104b7cc481395e2d4665e7fd73170"
 }
