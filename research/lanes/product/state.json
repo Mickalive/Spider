@@ -7,8 +7,8 @@
   "continue_immediately": false,
   "next_question": "Does the multi-parameter induction function survive kernel integration and still produce correct distinct slot naming when shipped in src/spider/kernel.py (not experiment-script-only), and does it still work when training observations come from real browser sessions with noisy multi-step actions and varying preconditions?",
   "promotion_ready": false,
-  "consecutive_failures": 0,
-  "updated_at": "2026-09-05T15:21:52.269408+00:00",
-  "last_failure_retryable": null,
+  "consecutive_failures": 1,
+  "updated_at": "2026-09-05T15:34:05.279460+00:00",
+  "last_failure_retryable": false,
   "last_handoff_sha256": "ac4b40a6bdfd48a7c27d4db3ad9756eefa9efad6b12a01f731337968f35259af"
 }
