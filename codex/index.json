@@ -332,6 +332,31 @@
         "handoff.json": "ac4b40a6bdfd48a7c27d4db3ad9756eefa9efad6b12a01f731337968f35259af"
       }
     },
+    "EXP-PRODUCT-33974562602": {
+      "lane": "product",
+      "request_id": "9e0a4bf69832580fa4460c28",
+      "created_at": "2026-09-05T15:21:52.269085+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT"
+      ],
+      "question": "Does the multi-parameter induction function survive kernel integration (shipping into src/spider/kernel.py) and still produce correct distinct slot naming, and does it also work when training observations come from noisy multi-step browser sessions with varying preconditions?",
+      "audit_status": "PASS",
+      "decision": "KERNEL-INTEGRATION-FALSIFIED",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/product",
+      "hashes": {
+        "request.json": "f3ac6e2ab30480ed7370041882af1fc9ac886489f7fe1668772593145237246f",
+        "spec.json": "a657916036ecf1ed7b98cde2cbcae88cd226a1a68ce5a34397f0d3bcd94a4607",
+        "prereg.md": "bb91946ce19a0b2f2acbf34293d665ded45ccfa5c658d637813d624f906ad052",
+        "freeze.json": "24c9a715d9d2ca66ddc63674e4f6f8a6d2afd51361980b70cfc3b3361a0f1e7d",
+        "result.json": "4f86a2018f479e11f15c6ee606cf56a067966cd9e9b49447cdf679a662977d9c",
+        "report.md": "7325aa9118877ca35237d700d7ec77c46e21d291daf915379269e6da887588cf",
+        "provenance.json": "184559e3b57e6a73c518ee3f666fcdfdd183f41b8a68b1764075a2898286de52",
+        "audit.json": "9c4e603f19fe9659088b3aa028ad19219a78c5e4c12ad3c249787dea8302d2de",
+        "verdict.json": "194773cc2db734d8cd7802df942b8e00b540e39abe92bc3e64d8e74d1897a1e1",
+        "handoff.json": "073d065ba23df4b9a7ad46e0e8f82d61d33104b7cc481395e2d4665e7fd73170"
+      }
+    },
     "EXP-RUNTIME-33528830833": {
       "lane": "runtime",
       "request_id": "cbf791e0cd3fe570d0ff0fd5",
