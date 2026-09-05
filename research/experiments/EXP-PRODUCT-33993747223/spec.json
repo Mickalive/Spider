@@ -1,17 +1,28 @@
 {
   "experiment_id": "EXP-PRODUCT-33993747223",
   "lane": "product",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-PARAM-INHERIT"],
+  "question": "Can three algorithmic fixes — (1) double-prefix detection in bind, (2) noise-field filtering in varying-value extraction, (3) structure-similarity check for pattern absence — be applied to distill_parameterized() in src/spider/kernel.py without breaking regression on clean synthetic inputs, and do the fixes resolve the three failure modes that blocked realistic-input use?",
+  "hypothesis": "The three algorithmic fixes applied to the kernel-integrated distill_parameterized() will: (1) preserve identical slot counts, distinct naming, and 100% unseen resolution/binding on all 5 clean synthetic regression conditions (B1-B5); (2) achieve binding_accuracy >= 0.9 on full-value unseen parameters (C1-C2) by detecting when supplied params already contain the learned prefix/suffix; (3) achieve slot_count matching signal-only fields and resolution >= 0.9 on noisy browser observations (D1-D2) by filtering noise fields that lack common prefix/suffix structure; (4) correctly return slot_count=0 for unrelated observations (E1) via a structure-similarity check. D3 (varying preconditions) is retained as-is from the parent — the precondition matching issue is orthogonal to the three targeted fixes and is tracked as a separate unknown.",
+  "falsifier": "The hypothesis is FALSIFIED if ANY of: (1) any regression condition (B1-B5) produces different slot counts or <100% unseen resolution/binding after the fixes; (2) full-value unseen (C1 or C2) binding_accuracy < 0.9 after double-prefix fix; (3) noisy observation (D1 or D2) slot_count does not match expected signal-only count or resolution < 0.9 after noise filtering; (4) null control E1 produces slot_count > 0 after structure-similarity check; (5) any crash or non-deterministic output across all conditions.",
+  "baselines": [
+    "B_REGRESSION_SYNTHETIC: The 5 conditions from EXP-PRODUCT-33741671686 (B1-B5) run through the fixed kernel-integrated distill_parameterized() — must produce identical slot counts, distinct naming, and 100% unseen resolution/binding as the pre-fix version (21/21 EXECUTABLE, 21/21 binding correct)",
+    "B_LITERAL_REPLAY: Literal mechanism (no parameter slots) from kernel.distill() — must fail on all unseen multi-parameter combinations, confirming parameterization is still necessary after fixes"
+  ],
+  "positive_control": "The 5 synthetic conditions from EXP-PRODUCT-33741671686 (B1-B5) run through the fixed kernel-integrated distill_parameterized(). All must produce identical results: B1 slot=1, B2 slot=2 distinct, B3 slot=3 distinct, B4 slot=1, B5 slot=2 distinct. All 21 unseen combinations must resolve EXECUTABLE with correct bound_action. This verifies the fixes do not break the already-validated clean-synthetic behavior.",
+  "null_control": "E1: Three training observations with completely unrelated action structures (POST /api/payments, GET /api/users/42, DELETE /api/sessions/abc-123). The fixed distill_parameterized() must produce zero parameter slots (slot_count=0) via the new structure-similarity check. E2: Single observation — must produce slot_count=0 (insufficient data). Both null controls test pattern-ABSENCE detection, not just intent mismatch.",
+  "measurement_validity": [
+    "All test observations are synthetic with deterministic structure — no model calls, no network, no browser during measurement",
+    "Regression baseline uses identical synthetic inputs as EXP-PRODUCT-33741671686 — any deviation in slot counts or binding indicates a fix introduced regression",
+    "Full-value unseen test supplies complete URLs/IDs (https://site-d.com/hook, user-4) rather than pre-stripped middles — tests the double-prefix fix",
+    "Noisy observations include extra fields (timestamp, request_duration_ms, retry_count) to test noise filtering — the fix must distinguish signal fields (with common prefix/suffix) from noise fields (without)",
+    "Structure-similarity check for E1 uses a threshold on leaf-path Jaccard similarity — the threshold must be pre-registered and not tuned to E1 specifically",
+    "Each test condition uses a fresh registry instance to prevent cross-contamination",
+    "D3 (varying preconditions) is retained as an observational condition but not part of the primary decision rule — the precondition matching issue is orthogonal to the three targeted fixes"
+  ],
+  "decision_rule": "FIXES-SURVIVE-REGRESSION if ALL of: (1) kernel integration completes without crashes and kernel.py passes existing unit tests; (2) regression baseline: all 5 conditions (B1-B5) produce identical slot counts, distinct naming, and 100% unseen resolution/binding as EXP-PRODUCT-33974562602 (21/21 EXECUTABLE, 21/21 binding correct); (3) full-value unseen: C1 and C2 each resolve all unseen combinations with EXECUTABLE and binding_accuracy >= 0.9; (4) noisy browser: D1 and D2 each achieve slot_count matching expected signal-only count and resolution >= 0.9; (5) null control: E1 produces slot_count=0 and E2 produces slot_count=0; (6) no crashes or non-deterministic output. FIXES-FALSIFIED if any condition fails its expected slot count or resolution rate < 0.9, or null control produces >0 slots, or regression breaks. MEASUREMENT_INVALID if kernel integration cannot complete or the three fixes cannot be implemented without circular dependencies.",
+  "product_consequence_positive": "The three algorithmic failure modes blocking realistic-input use are resolved. C-PARAM-INHERIT advances from 'kernel-shipped, clean-synthetic only' to 'kernel-shipped with realistic-input robustness'. The function can now handle: (a) full-value unseen parameters without double-prefix errors, (b) noisy browser observations without over-parametrization, (c) unrelated observations without hallucinated slots. Product can proceed to real-browser testing and confidence calibration. The claim ceiling advances from synthetic-only to realistic-synthetic.",
+  "product_consequence_negative": "If the fixes break regression on clean synthetic inputs, the algorithmic changes are not safe and a different approach is needed. If the fixes do not resolve the failure modes (e.g., double-prefix persists, noise fields still induce slots, unrelated observations still produce slots), the algorithm requires more fundamental redesign. In either case, C-PARAM-INHERIT remains blocked on realistic inputs and the next action is to identify which fix failed and why.",
+  "estimated_cost": "Low: three targeted code fixes in src/spider/kernel.py (estimated <100 lines changed), plus re-running the same 7 test conditions + 2 null controls from the parent. Pure computation — no browser/network/model calls. ~40 observations, ~40 unseen tests.",
+  "expected_information_gain": "Very high: directly tests the three handoff-identified blockers from EXP-PRODUCT-33974562602. Both positive and negative outcomes change the product decision. A positive result unblocks real-browser testing; a negative result identifies which fix failed and constrains the redesign. The smallest possible experiment that can advance C-PARAM-INHERIT."
 }
