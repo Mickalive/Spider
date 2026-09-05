@@ -5,284 +5,297 @@
 - **Experiment ID**: EXP-GRAPH-33955869291
 - **Lane**: Graph
 - **Claim**: C-PARAM-INHERIT (Mechanisms parameterize to unseen identifiers)
-- **Parent**: EXP-GRAPH-33816735314 (COMPETITION-SAFE, parameter-slot-count tie-break validated on 0-vs-1 slot)
 - **Date**: 2026-09-05
 - **Status**: DESIGN — NOT YET FROZEN
+- **Parent Experiment**: EXP-GRAPH-33816735314 (COMPETITION-SAFE)
+- **Request Reason**: pulse (inherited next_question from parent handoff)
 
 ## 2. Scientific Question
 
-Does the parameter-slot-count tie-break generalize safely to multi-slot mechanisms (2 vs 1 slot), template-only params with parameter_slots=[] but template ${id}, equal-slot-count ties (0 vs 0 or 1 vs 1), and verify() postcondition checking for non-200 HTTP responses?
+Does the parameter-slot-count tie-break generalize safely to multi-slot mechanisms (2 vs 1 slot), template-only params with parameter_slots=[] but template ${id}, equal-slot-count ties (0 vs 0 or 1 vs 1), and does verify() correctly reject non-matching postconditions for non-200 HTTP responses?
 
 ## 3. Motivation
 
-The parent experiment (EXP-GRAPH-33816735314) established that the parameter-slot-count tie-break (Option A) eliminates 5/5 eligible false accepts in mixed literal+parameterized registries at equal confidence on deterministic synthetic substrate. However, the claim ceiling is limited to single-slot, single-intent, deterministic synthetic substrate.
+### What the parent experiment established (EXP-GRAPH-33816735314)
 
-The parent handoff identifies these specific unknowns:
-- Whether the fix generalizes safely to multi-slot mechanisms (2 vs 1 slot tie)
-- Whether template-only params (parameter_slots=[] but template has ${id}) are handled correctly
-- Whether equal-slot-count ties (0 vs 0 or 1 vs 1) remain deterministic
+The parent experiment tested whether a parameter-slot-count secondary tie-break resolves false accepts in mixed literal+parameterized registries at equal confidence. It produced:
+
+**Established:**
+- Parameter-slot-count tie-break (Option A) eliminates 5/5 eligible false accepts in mixed literal+parameterized registries at equal confidence on deterministic synthetic substrate
+- All baseline conditions preserved: cold UNKNOWN, literal-only orig/unseen EXECUTABLE, param-only orig/unseen EXECUTABLE
+- Confidence-based disambiguation preserved: higher confidence wins regardless of slot count
+- Fix makes tie-break ID-independent for 0-vs-1 slot case (audit V_ID_INDEPENDENCE_WITH_FIX)
+- Competition is COMPETITION-SAFE on tested substrate (13/13 conditions pass)
+
+**Rejected:**
+- The tie-break is universally safe: ceiling limited to single-slot, single-intent, deterministic synthetic substrate (audit V_TIEBREAK_SLOT_COUNT_SCOPE_LIMIT)
+- The literal universal matching hazard is root-fixed: hazard mitigated by tie-break, not eliminated (audit V_LIT_UNIVERSAL_STILL_EXISTS)
+
+**Unknown (from parent handoff):**
 - Whether verify() postcondition checking works for non-200 HTTP responses (hardcoded status=200 per parent audit V_VERIFY_HARDCODED_STATUS)
+- Whether kernel preconditions matching (_matches) discriminates beyond empty dict
+- Whether _bind() preserves type for full-match template strings
+- Whether parameterized mechanisms work on real-web endpoints with DOM, auth, session state, drift
+- Whether the fix generalizes safely to multi-slot mechanisms (2 vs 1 slot), template-only params with parameter_slots=[] but template ${id}, and equal-slot-count ties (0 vs 0 or 1 vs 1)
+- Whether the fix has been committed to production kernel
 
-This experiment directly tests all four unknowns. The `required_slots` vs `parameter_slots` divergence is a design issue that the template-only param condition will expose.
+**Do Not Assume:**
+- The fix is committed to production (current HEAD still unfixed)
+- The tie-break is safe for multi-slot mechanisms (only single-slot tested)
+- Template-only params are handled correctly (len(parameter_slots) would be 0)
+- Equal-slot-count ties are deterministic (expected lexicographic/ID-dependent)
+- The literal universal eligibility is removed (mitigated, not eliminated)
+- C-PARAM-INHERIT is fully validated (competition hazard resolved, but learn-on-A and real-web untested)
+
+### Why this experiment is different
+
+The parent experiment tested a **single binary competition**: literal (0 slots) vs single-slot param (1 slot) at equal confidence. This experiment tests **boundary conditions** of the fix:
+
+1. **Multi-slot dominance**: Does 2-slot param beat 1-slot param at equal confidence? The tuple sort (confidence, len(parameter_slots)) predicts yes: (0.95, 2) > (0.95, 1). This is the most natural generalization of the fix.
+
+2. **Template-only params**: A mechanism with parameter_slots=[] but template ${id} has required_slots={id} (computed by _template_slots) but len(parameter_slots)=0. The fix uses len(parameter_slots) not len(required_slots). This means template-only params would lose to declared 1-slot params despite needing params. This is the parent audit finding V_TIEBREAK_SLOT_COUNT_SCOPE_LIMIT. Testing this directly determines whether the fix needs modification.
+
+3. **Equal-slot-count ties**: When both mechanisms have the same parameter_slots length (0 vs 0 or 1 vs 1), the fix does not break the tie — lexicographic ordering on mechanism_id determines the winner. This is deterministic but ID-dependent. Testing confirms this behavior.
+
+4. **verify() with non-200 responses**: The parent audit flagged that verify() postcondition checking was only tested with status=200 (V_VERIFY_HARDCODED_STATUS). This experiment tests verify() with both matching (200) and non-matching (404) postconditions using real HTTP responses.
 
 ## 4. Hypotheses
 
-### H1: Multi-Slot Tie-Break
-At equal confidence, a 2-slot mechanism (parameter_slots=['user_id', 'post_id']) wins over a 1-slot mechanism (parameter_slots=['id']) because len(parameter_slots)=2 > 1 under the fix.
+### H1: Multi-Slot Dominance
+A 2-slot param beats a 1-slot param at equal confidence. Condition multi-slot-beats-1-slot returns EXECUTABLE with param-2slot as winning mechanism.
 
-### H2: Template-Only Param Subordination
-At equal confidence, a 1-slot param mechanism wins over a template-only param mechanism (parameter_slots=[] but template has ${id}) because len(parameter_slots)=1 > 0 under the fix. The template-only param mechanism requires the parameter for binding but declares no slots; the tie-break correctly subordinates it.
+### H2: Template-Only Param Handling
+A template-only param (parameter_slots=[], template=/posts/${id}) loses to a declared 1-slot param at equal confidence. Condition template-only-vs-param returns EXECUTABLE with declared param winning (len=1 > len=0). This confirms the fix uses declared slots only.
 
-### H3: Equal-Slot-Count Degeneracy
-Equal-slot-count ties (0 vs 0, 1 vs 1) are degenerate: the winner depends on insertion order (Python's stable sort), not on slot count. This is an expected limitation, not a regression.
+### H3: Template-Only vs Literal
+A template-only param vs a literal at equal confidence produces a deterministic but ID-dependent outcome. Condition template-only-vs-literal returns EXECUTABLE with the lexicographically smaller mechanism_id winning. The outcome is informative about whether template-only params can compete with literals.
 
-### H4: No Regression
-All baseline conditions (cold, literal-only, 1-slot param-only, 2-slot param-only) produce the expected results on the unfixed kernel. Confidence-based disambiguation (higher confidence wins regardless of slot count) remains intact under the fix.
+### H4: Equal-Slot Ties
+Equal-slot-count ties (0 vs 0 or 1 vs 1) are resolved by lexicographic ordering on mechanism_id. Conditions equal-slot-tie-param-vs-param and equal-slot-tie-lit-vs-lit return EXECUTABLE with deterministic but ID-dependent winners.
 
 ### H5: verify() Correctness
-verify() correctly rejects when postconditions do not match observed state, including non-200 HTTP status codes. Empty postconditions match any state (True). Partial matches (status matches but content_type does not) correctly reject (False).
+verify() correctly accepts matching postconditions (status=200) and rejects non-matching postconditions (status=404). Condition verify-200-match returns True; verify-404-mismatch returns False.
 
-### H6: verify() Fix Idempotence
-The fix (adding len(parameter_slots) to the sort key) does not alter verify() behavior. verify() results are identical for the same mechanism/state pairs under both fixed and unfixed kernels.
+### H6: Baseline Regression
+All 5 baseline conditions match parent experiment results. No regression.
 
-## 5. Design
+## 5. Mechanism Definitions
 
-### 5.1 Code Fix
+### 5.1 Literal Mechanism
+- mechanism_id: "literal-fetch-posts-1"
+- intent: "fetch-post"
+- parameter_slots: []
+- action_template: {"url": "https://jsonplaceholder.typicode.com/posts/1", "method": "GET"}
+- postconditions: {"status": 200}
+- confidence: 0.95 (or 0.98 in confidence-disambiguate)
 
-The same single-line fix from EXP-GRAPH-33816735314 is applied in the test script for fix conditions:
-```python
-# Before fix (current HEAD — used for unfixed conditions):
-candidates.sort(key=lambda m: m.confidence, reverse=True)
-# After fix (applied in test script for fix conditions):
-candidates.sort(key=lambda m: (m.confidence, len(m.parameter_slots)), reverse=True)
-```
+### 5.2 Single-Slot Param Mechanism
+- mechanism_id: "param-fetch-posts"
+- intent: "fetch-post"
+- parameter_slots: ["id"]
+- action_template: {"url": "https://jsonplaceholder.typicode.com/posts/${id}", "method": "GET"}
+- postconditions: {"status": 200}
+- confidence: 0.95 (or 0.98 in confidence-disambiguate)
 
-The fix is NOT committed to production HEAD. This experiment tests the fix's behavior on edge cases and verify() correctness, not its production deployment.
+### 5.3 Two-Slot Param Mechanism
+- mechanism_id: "param-2slot"
+- intent: "fetch-post"
+- parameter_slots: ["id", "category"]
+- action_template: {"url": "https://jsonplaceholder.typicode.com/posts/${id}/${category}", "method": "GET"}
+- postconditions: {"status": 200}
+- confidence: 0.95
 
-### 5.2 Conditions
+### 5.4 Template-Only Mechanism (No Declared Slots)
+- mechanism_id: "template-only-fetch"
+- intent: "fetch-post"
+- parameter_slots: []
+- action_template: {"url": "https://jsonplaceholder.typicode.com/posts/${id}", "method": "GET"}
+- postconditions: {"status": 200}
+- confidence: 0.95
 
-15 conditions total, all deterministic, no HTTP execution, no model calls.
+### 5.5 Equal-Slot Param Mechanism (for tie testing)
+- mechanism_id: "param-fetch-alt"
+- intent: "fetch-post"
+- parameter_slots: ["id"]
+- action_template: {"url": "https://jsonplaceholder.typicode.com/posts/${id}", "method": "GET"}
+- postconditions: {"status": 200}
+- confidence: 0.95
 
-**Baselines on unfixed kernel (5 conditions):**
-- B_COLD: No mechanisms registered
-- B_LITERAL: Literal mechanism only (parameter_slots=[], fixed URL)
-- B_PARAM_1SLOT: 1-slot param only (parameter_slots=['id'], template /posts/${id})
-- B_PARAM_2SLOT: 2-slot param only (parameter_slots=['user_id', 'post_id'], template /users/${user_id}/posts/${post_id})
-- B_UNFIXED_2VS1: 2-slot vs 1-slot at equal confidence on unfixed kernel — documents the problem
+### 5.6 Equal-Slot Literal Mechanism (for tie testing)
+- mechanism_id: "literal-alt"
+- intent: "fetch-post"
+- parameter_slots: []
+- action_template: {"url": "https://jsonplaceholder.typicode.com/posts/2", "method": "GET"}
+- postconditions: {"status": 200}
+- confidence: 0.95
 
-**Interventions on fixed kernel (5 conditions):**
-- COMPETE_2VS1: 2-slot vs 1-slot at equal confidence (0.95)
-- COMPETE_TEMPLATE_VS_PARAM: Template-only param vs 1-slot param at equal confidence (0.95)
-- COMPETE_TEMPLATE_VS_LITERAL: Template-only param vs literal at equal confidence (0.95) — degenerate
-- COMPETE_1VS1_EQUAL: Two 1-slot params at equal confidence — degenerate
-- COMPETE_0VS0_EQUAL: Two literals at equal confidence — degenerate
+## 6. Registry Configurations
 
-**Controls on fixed kernel (2 conditions):**
-- POS_CONTROL: 2-slot higher confidence (0.98) vs 1-slot lower (0.95)
-- NULL_CONTROL: 1-slot higher confidence (0.98) vs 2-slot lower (0.95)
+Each condition uses a fresh kernel with a specific registry:
 
-**verify() tests on unfixed kernel (3 conditions):**
-- VERIFY_EMPTY_POSTCONDITIONS: Empty postconditions always return True
-- VERIFY_STATUS_MISMATCH: Status 200 postcondition vs 404 observed → False
-- VERIFY_MULTI_FIELD_MISMATCH: status=200 + content_type=json postcondition vs status=200 + content_type=html → False
+- **literal-only**: [literal-fetch-posts-1]
+- **param-only**: [param-fetch-posts]
+- **confidence-param-higher**: [param-fetch-posts (0.98), literal-fetch-posts-1 (0.95)]
+- **2slot-vs-1slot-equal-conf**: [param-2slot (0.95), param-fetch-posts (0.95)]
+- **template-only-vs-literal**: [template-only-fetch (0.95), literal-fetch-posts-1 (0.95)]
+- **template-only-vs-param**: [template-only-fetch (0.95), param-fetch-posts (0.95)]
+- **equal-slot-param-vs-param**: [param-fetch-posts (0.95), param-fetch-alt (0.95)]
+- **equal-slot-lit-vs-lit**: [literal-fetch-posts-1 (0.95), literal-alt (0.95)]
 
-**verify() idempotence test (1 condition):**
-- VERIFY_FIX_NO_EFFECT: verify() results identical under fixed and unfixed kernels
+## 7. Measures
 
-### 5.3 Mechanism Definitions
+### 7.1 Primary Metrics
+- **resolution_status**: EXECUTABLE or UNKNOWN for each condition
+- **winning_mechanism_id**: Which mechanism won the competition
+- **bound_action_url**: The resolved URL after parameter binding
+- **verify_result**: True or False for verify() conditions
 
-All mechanisms use jsonplaceholder.typicode.com URLs (consistent with parent experiment). No HTTP execution — only resolution, bound_action correctness, and verify() boolean measured.
+### 7.2 Secondary Metrics
+- **baseline_regression**: All 5 baseline conditions match parent (yes/no)
+- **multi_slot_dominance**: 2-slot beats 1-slot (yes/no)
+- **template_only_handling**: Template-only vs param outcome (param-wins / template-wins / lexicographic)
+- **equal_slot_tie_behavior**: Lexicographic ordering confirmed (yes/no)
+- **verify_correctness**: verify() accepts matching and rejects non-matching (yes/no)
 
-| Mechanism ID | parameter_slots | action_template | confidence |
-|---|---|---|---|
-| literal-fetch-posts | [] | {url: /posts/1} | varies |
-| param-fetch-posts | ['id'] | {url: /posts/${id}} | varies |
-| param-fetch-user-posts | ['user_id', 'post_id'] | {url: /users/${user_id}/posts/${post_id}} | varies |
-| template-only-fetch | [] | {url: /users/${id}/posts} | 0.95 |
-| literal-fetch-alt | [] | {url: /posts/1/comments} | 0.95 |
-| param-fetch-alt | ['id'] | {url: /posts/${id}/comments} | 0.95 |
+## 8. Controls
 
-### 5.4 Registry Configurations
+### 8.1 Baseline Regression Controls (5 conditions)
+- literal-only-original, literal-only-unseen, param-only-original, param-only-unseen, confidence-disambiguate
+- All must match parent experiment results exactly
+- If any regresses → COMPETITION-UNSAFE
 
-| Registry | Mechanisms | Purpose |
-|---|---|---|
-| empty | (none) | Cold baseline |
-| literal-only | literal-fetch-posts (0.95) | Literal baseline |
-| param-1slot-only | param-fetch-posts (0.95) | 1-slot baseline |
-| param-2slot-only | param-fetch-user-posts (0.95) | 2-slot baseline |
-| shared-2v1 | param-fetch-user-posts (0.95) + param-fetch-posts (0.95) | Multi-slot tie-break |
-| shared-template-v-param | template-only-fetch (0.95) + param-fetch-posts (0.95) | Template vs param |
-| shared-template-v-literal | template-only-fetch (0.95) + literal-fetch-posts (0.95) | Template vs literal (degenerate) |
-| shared-1v1 | param-fetch-posts (0.95) + param-fetch-alt (0.95) | Equal-slot degenerate |
-| shared-0v0 | literal-fetch-posts (0.95) + literal-fetch-alt (0.95) | Equal-slot degenerate |
-| shared-pos | param-fetch-user-posts (0.98) + param-fetch-posts (0.95) | Positive control |
-| shared-null | param-fetch-posts (0.98) + param-fetch-user-posts (0.95) | Null control |
+### 8.2 Positive Control: Multi-Slot Dominance (1 condition)
+- multi-slot-beats-1-slot: 2-slot param (len=2) vs 1-slot param (len=1) at equal confidence
+- 2-slot must win: (0.95, 2) > (0.95, 1) in tuple sort
+- If fails → fix does not generalize to multi-slot → COMPETITION-UNSAFE
 
-### 5.5 verify() Test Setup
+### 8.3 Null Control: Confidence Dominance (1 condition)
+- confidence-disambiguate: param (0.98) vs literal (0.95) at different slot counts
+- Higher confidence must win regardless of slot count
+- If fails → fix disrupts confidence-based sorting → COMPETITION-UNSAFE
 
-For verify() conditions, a mechanism is registered with specified postconditions. verify() is then called with an observed_state dict. The verify() function checks `_matches(mechanism.postconditions, observed_state)` — a dict-equality check that returns True if and only if every key in postconditions has the corresponding value in observed_state.
+### 8.4 Intervention: Template-Only Param (2 conditions)
+- template-only-vs-literal: tests whether template-only can compete with literal
+- template-only-vs-param: tests whether template-only loses to declared param
+- Both outcomes are informative; neither is a failure unless unexpected exception occurs
 
-Key code path: `src/spider/kernel.py:125-129`:
-```python
-def verify(self, mechanism_id: str, observed_state: dict[str, Any]) -> bool:
-    mechanism = next((m for m in self.registry.all() if m.mechanism_id == mechanism_id), None)
-    if mechanism is None or mechanism.invalidated:
-        return False
-    return _matches(mechanism.postconditions, observed_state)
-```
+### 8.5 Intervention: Equal-Slot Ties (2 conditions)
+- equal-slot-tie-param-vs-param: 1-slot vs 1-slot → lexicographic
+- equal-slot-tie-lit-vs-lit: 0-slot vs 0-slot → lexicographic
+- Both should be deterministic; record actual winner
 
-And `_matches` at `src/spider/kernel.py:15-16`:
-```python
-def _matches(required: dict[str, Any], actual: dict[str, Any]) -> bool:
-    return all(actual.get(k) == v for k, v in required.items())
-```
+### 8.6 Intervention: verify() Correctness (2 conditions)
+- verify-200-match: postconditions={status:200}, observed={status:200} → True
+- verify-404-mismatch: postconditions={status:200}, observed={status:404} → False
+- If either fails → verify() postcondition matching is broken
 
-This means:
-- Empty postconditions → `all()` over empty iterable → True (always passes)
-- Non-empty postconditions → every key must match exactly
-- Partial matches fail (e.g., status matches but content_type does not)
-- The fix (sort key change) does not touch verify() or _matches
+## 9. Validity Threats
 
-## 6. Measures
+### 9.1 Fix Not Committed to Production
+Current HEAD src/spider/kernel.py still has simple sort key (no tuple). The experiment applies the fix temporarily during execution. This is consistent with parent experiment methodology. Production promotion requires Director-approved commit (separate from this experiment).
 
-### 6.1 Primary Metric
-- **tie_break_generalizes**: Boolean — COMPETE_2VS1 returns 2-slot AND COMPETE_TEMPLATE_VS_PARAM returns 1-slot
+### 9.2 Synthetic Substrate
+All resolution conditions use jsonplaceholder.typicode.com URL templates without HTTP execution. Only verify() conditions make real HTTP requests. This limits generalizability to real-web endpoints but eliminates network variability for core tie-break tests.
 
-### 6.2 Secondary Metrics
-- Baseline pass rate on unfixed kernel (expected: 5/5)
-- Intervention pass rate on fixed kernel (expected: 2/2 non-degenerate)
-- Degenerate condition count (expected: 3, all ID-dependent)
-- Control pass rate (expected: 2/2)
-- verify() pass rate (expected: 4/4)
-- Resolution status consistency (no exceptions, no unexpected statuses)
-- B_UNFIXED_2VS1 winner documentation (insertion-order-dependent)
+### 9.3 Lexicographic Tie-Breaking
+Equal-slot-count ties fall back to lexicographic ordering on mechanism_id. This is deterministic but ID-dependent. The experiment records actual outcomes but does not claim lexicographic ordering is "correct" — it is the observed behavior of the fix.
 
-## 7. Null Models
+### 9.4 Template-Only Param Semantic Ambiguity
+A mechanism with parameter_slots=[] but template ${id} is semantically parameterized but declares no slots. The fix uses len(parameter_slots) not len(required_slots). This means template-only params get no slot-count credit. The experiment tests this directly and records the outcome. If the outcome is suboptimal (template-only loses to literal), the fix may need modification (e.g., use len(required_slots) instead).
 
-### 7.1 Insertion-Order Null
-For degenerate conditions (equal slot count), the winner is determined by insertion order in the registry, not by any mechanism property. This is the expected behavior when the tie-break cannot discriminate.
+### 9.5 verify() Postcondition Matching
+verify() uses _matches(postconditions, observed_state) which checks dict equality. The experiment tests status=200 match and status=404 mismatch. More complex postcondition matching (e.g., partial matching, type coercion) is not tested here.
 
-### 7.2 Confidence-Dominance Null
-When confidence differs, the higher-confidence mechanism wins regardless of slot count. The tie-break only applies at equal confidence.
+### 9.6 Sample Size
+Each condition is a single deterministic run. No sampling, no confidence intervals. Results are exact point comparisons. Replication is trivial (same code, same inputs → same outputs).
 
-### 7.3 Unfixed-Baseline Null
-On the unfixed kernel (confidence-only sort), the winner at equal confidence is determined by insertion order. B_UNFIXED_2VS1 documents this baseline behavior.
+## 10. Decision Rules
 
-## 8. Statistical Tests
-
-All conditions are deterministic. No statistical tests required. Pass/fail is binary.
-
-## 9. Controls
-
-### 9.1 Positive Control (POS_CONTROL)
-2-slot param with higher confidence (0.98) vs 1-slot param (0.95) under the fix. Must return 2-slot mechanism. Verifies confidence dominance works for multi-slot mechanisms.
-
-### 9.2 Null Control (NULL_CONTROL)
-1-slot param with higher confidence (0.98) vs 2-slot param (0.95) under the fix. Must return 1-slot mechanism. Verifies confidence dominance works in reverse.
-
-### 9.3 Baseline Controls (B_COLD, B_LITERAL, B_PARAM_1SLOT, B_PARAM_2SLOT)
-Replicate parent experiment baselines on the unfixed kernel to verify no regression.
-
-### 9.4 Unfixed Baseline Control (B_UNFIXED_2VS1)
-Documents the unfixed kernel's behavior at equal confidence: insertion order determines the winner. This establishes the problem the fix solves.
-
-### 9.5 verify() Controls
-Three verify() conditions test the postcondition matching logic:
-- Empty postconditions (always True) — verifies _matches handles empty dict
-- Status mismatch (False) — verifies non-200 responses are correctly rejected
-- Multi-field mismatch (False) — verifies partial matches correctly reject
-
-## 10. Validity Threats
-
-### 10.1 Fix Not Committed
-The code fix is applied in the test script, not committed to production HEAD. This is intentional: the experiment tests the fix's behavior on edge cases, not its production deployment. The commit question is a separate product/promotion decision.
-
-### 10.2 Template-Only Param Design Issue
-Template-only params (parameter_slots=[] but template has ${id}) expose a divergence: `required_slots` = parameter_slots | template_slots = {'id'}, but `parameter_slots` = []. The tie-break uses `parameter_slots`, so template-only params are treated as 0-slot mechanisms. This is a known design limitation that the experiment will expose. The fix correctly subordinates template-only params to declared-slot params, but the design question of whether template slots should inform the tie-break remains open.
-
-### 10.3 Degenerate Equal-Slot-Count Ties
-Equal-slot-count ties (0 vs 0, 1 vs 1) are expected to be ID-dependent. This is a known limitation, not a regression. The experiment records this but does not gate on it.
-
-### 10.4 Synthetic Substrate
-All conditions use jsonplaceholder.typicode.com URLs. No HTTP execution. Findings apply to kernel resolution logic and verify() boolean checks only, not to real-web endpoints with DOM, auth, session, or drift.
-
-### 10.5 Single Fix Variant
-Only the Option A fix (parameter_slots count) is tested. Alternative fixes (required_slots count, template_slots count) are not tested. If Option A fails, alternatives remain unexplored.
-
-### 10.6 verify() Test Scope
-verify() conditions test dict-matching logic, not actual HTTP response handling. The question "does verify() work for non-200 HTTP responses" is answered at the kernel level: verify() rejects any observed_state that doesn't match postconditions, regardless of HTTP status code. The product-level question of whether mechanisms should be registered with status-specific postconditions is out of scope.
-
-## 11. Decision Rules
-
-### 11.1 MULTI-SLOT-SAFE
+### 10.1 GENERALIZATION-SAFE
 If ALL of:
-1. B_COLD → UNKNOWN
-2. B_LITERAL → EXECUTABLE url=/posts/1
-3. B_PARAM_1SLOT → EXECUTABLE url=/posts/1
-4. B_PARAM_2SLOT → EXECUTABLE url=/users/1/posts/1
-5. COMPETE_2VS1 → EXECUTABLE with param-fetch-user-posts as winning mechanism
-6. COMPETE_TEMPLATE_VS_PARAM → EXECUTABLE with param-fetch-posts as winning mechanism
-7. POS_CONTROL → EXECUTABLE with param-fetch-user-posts as winning mechanism
-8. NULL_CONTROL → EXECUTABLE with param-fetch-posts as winning mechanism
-9. VERIFY_EMPTY_POSTCONDITIONS → True
-10. VERIFY_STATUS_MISMATCH → False
-11. VERIFY_MULTI_FIELD_MISMATCH → False
-12. VERIFY_FIX_NO_EFFECT → both match and mismatch results correct
+1. All 5 baseline conditions match parent results (no regression)
+2. multi-slot-beats-1-slot returns EXECUTABLE with param-2slot winning
+3. template-only-vs-param returns EXECUTABLE with param-fetch-posts (declared slots) winning
+4. verify-200-match returns True
+5. verify-404-mismatch returns False
+6. No Python exceptions or unexpected resolution statuses
 
-### 11.2 MULTI-SLOT-UNSAFE
+### 10.2 SCOPE-LIMITED
+If baselines pass and multi-slot works, but:
+- template-only-vs-literal shows lexicographic dependence (informative but not safe for production)
+- Equal-slot ties show lexicographic dependence (expected, not a failure)
+
+### 10.3 COMPETITION-UNSAFE
 If ANY of:
-1. Any baseline condition (B_COLD, B_LITERAL, B_PARAM_1SLOT, B_PARAM_2SLOT) produces a different result than specified
-2. COMPETE_2VS1 returns param-fetch-posts (1-slot) instead of param-fetch-user-posts (2-slot)
-3. COMPETE_TEMPLATE_VS_PARAM returns template-only-fetch instead of param-fetch-posts
-4. POS_CONTROL or NULL_CONTROL fails
+1. Any baseline condition regresses from parent results
+2. Multi-slot-beats-1-slot fails (2-slot does not win)
+3. verify() accepts non-matching postconditions or rejects matching ones
+4. Fix causes Python exception or unexpected status
 
-### 11.3 VERIFY_BROKEN
-If ANY of:
-1. VERIFY_EMPTY_POSTCONDITIONS returns False
-2. VERIFY_STATUS_MISMATCH returns True
-3. VERIFY_MULTI_FIELD_MISMATCH returns True
-4. VERIFY_FIX_NO_EFFECT shows different results between fixed and unfixed kernels
+### 10.4 MEASUREMENT_INVALID
+If:
+1. HTTP requests fail for verify() conditions (network error, not matching error)
+2. Code fix causes import errors or type mismatches
+3. Registry setup produces degenerate conditions
 
-### 11.4 DEGENERATE
-If conditions COMPETE_TEMPLATE_VS_LITERAL, COMPETE_1VS1_EQUAL, COMPETE_0VS0_EQUAL show ID-dependent behavior. This is expected and recorded but not gate-failing.
+## 11. Expected Outcomes
 
-### 11.5 MEASUREMENT_INVALID
-If code fix causes Python exceptions, type errors, or unexpected resolution statuses in any condition.
+### 11.1 GENERALIZATION-SAFE (best case)
+- Multi-slot dominance works: 2-slot beats 1-slot at equal confidence
+- Template-only params correctly handled: declared param preferred over template-only
+- verify() works with non-200 responses
+- C-PARAM-INHERIT advances with broader safe scope
+- Product can register multi-slot mechanisms safely
 
-## 12. Expected Outcomes
+### 11.2 SCOPE-LIMITED (likely case)
+- Multi-slot works, baselines pass
+- Template-only vs literal shows lexicographic dependence (informative)
+- Equal-slot ties show lexicographic dependence (expected)
+- C-PARAM-INHERIT advances but with noted limitations
+- Product should avoid registering template-only params alongside literals at equal confidence
 
-### 12.1 MULTI-SLOT-SAFE
-The tie-break generalizes to multi-slot mechanisms. C-PARAM-INHERIT advances further. Product registration of multi-slot mechanisms becomes safe at equal confidence. Template-only params are correctly subordinated to declared-slot params. The kernel can handle mechanisms with arbitrary slot counts. verify() correctly handles non-200 responses.
+### 11.3 COMPETITION-UNSAFE (negative case)
+- Multi-slot fails or baseline regresses
+- C-PARAM-INHERIT remains limited to single-slot case
+- Alternative approaches (Option B: value-based constraints, Option C: required_slots-based sort) must be explored
 
-### 12.2 MULTI-SLOT-UNSAFE
-The tie-break does not generalize. The `required_slots` vs `parameter_slots` divergence issue needs to be addressed. C-PARAM-INHERIT remains limited to single-slot mechanisms. Alternative tie-break strategies (e.g., len(required_slots) instead of len(parameter_slots)) must be explored.
+### 11.4 MEASUREMENT_INVALID (infrastructure case)
+- HTTP failures or code errors
+- Not scientific evidence; needs infrastructure fix
 
-### 12.3 VERIFY_BROKEN
-verify() has a correctness issue. This is a separate finding from the tie-break generalization. If verify() fails on empty postconditions or mismatched states, the kernel's postcondition checking needs repair.
+## 12. Analysis Plan
 
-### 12.4 DEGENERATE (Expected)
-Equal-slot-count ties are ID-dependent. This is a known limitation. The fix does not resolve degenerate cases, and this is acceptable because:
-- Degenerate cases only occur when two mechanisms have identical slot counts
-- In practice, mechanisms with identical slot counts but different templates are unlikely to coexist at equal confidence
-- If they do coexist, the confidence-based disambiguation or intent matching should distinguish them
+1. **Setup**: Create fresh kernel instances per condition with specified registries
+2. **Resolution**: Call resolve() with specified params, record status + winning_mechanism + bound_action
+3. **Competition**: For competitive conditions, verify which mechanism won and whether bound_action is correct
+4. **verify()**: For verify conditions, call verify() with specified observed_state, record True/False
+5. **Baseline Check**: Compare all baseline results to parent experiment results
+6. **Decision**: Apply frozen decision rule to determine verdict
+7. **Reporting**: Report all outcomes with equal prominence
 
-## 13. Analysis Plan
+## 13. Analysis Code
 
-1. Apply the one-line fix in the test script for fix conditions; use unfixed kernel for unfixed conditions
-2. Run all 15 conditions with fresh kernel instances
-3. Record resolution status, winning mechanism, and bound_action for resolution conditions
-4. Record verify() boolean for verify conditions
-5. Check baselines on unfixed kernel: all 5 must pass
-6. Check interventions on fixed kernel: COMPETE_2VS1 and COMPETE_TEMPLATE_VS_PARAM must pass
-7. Check degenerate conditions: record ID-dependent behavior
-8. Check controls on fixed kernel: both must pass
-9. Check verify() conditions: all 4 must pass
-10. Determine verdict: MULTI-SLOT-SAFE, MULTI-SLOT-UNSAFE, VERIFY_BROKEN, DEGENERATE, or MEASUREMENT_INVALID
+Analysis will be implemented in Python using:
+- src/spider/kernel.py (SpiderKernel, resolve, verify)
+- src/spider/registry.py (MechanismRegistry)
+- src/spider/models.py (Mechanism, Resolution)
+- Standard library only (json, tempfile, urllib.request for HTTP)
 
-## 14. Deviation Policy
+Code will be committed to research/experiments/EXP-GRAPH-33955869291/ before execution.
+
+## 14. Pre-registered Expectations
+
+From the parent experiment and code analysis:
+- Multi-slot dominance: EXPECTED to work (tuple sort ordering is clear: (0.95,2) > (0.95,1))
+- Template-only vs param: EXPECT param to win (len(parameter_slots)=1 > len(parameter_slots)=0)
+- Template-only vs literal: UNCERTAIN — both have len=0, lexicographic decides
+- Equal-slot ties: EXPECT lexicographic ordering (deterministic but ID-dependent)
+- verify(): EXPECT correct behavior (postcondition matching is simple dict equality)
+
+## 15. Deviation Policy
 
 Any deviation from this preregistration will be labeled EXPLORATORY and cannot support confirmatory claims. A new confirmatory claim requires a new preregistration.
 
-## 15. Freeze Statement
+## 16. Freeze Statement
 
 This preregistration is frozen BEFORE any analysis code is written or any outcome data is inspected. The experiment will be executed exactly as described here.
