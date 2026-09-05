@@ -1,14 +1,14 @@
 {
   "lane": "graph",
   "human_paused": false,
-  "active_experiment_id": "EXP-GRAPH-33816735314",
-  "last_experiment_id": "EXP-GRAPH-33718012817",
-  "last_verdict": "COMPETITION-UNSAFE",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-GRAPH-33816735314",
+  "last_verdict": "COMPETITION-SAFE",
   "continue_immediately": false,
-  "next_question": "Should the kernel tie-break at equal confidence prefer parameterized mechanisms over literal (kernel code change in resolve()), or should literal mechanisms carry value-based constraints that reject params conflicting with fixed resources, and what is the smallest safe fix that eliminates false accepts without breaking cold/literal-only/param-only baselines?",
+  "next_question": "Does the parameter-slot-count tie-break generalize safely to multi-slot mechanisms (2 vs 1 slot), template-only params with parameter_slots=[] but template ${id}, equal-slot-count ties (0 vs 0 or 1 vs 1), and real-web endpoints with DOM/auth/session/drift \u2014 and does it interact with verify() postcondition checking for non-200 HTTP responses?",
   "promotion_ready": false,
-  "consecutive_failures": 9,
-  "updated_at": "2026-09-05T00:15:11.600051+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "ebb3de502513621de55c297a32023f20b6f87739cdf00b4d3db025d00f51187a"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-05T04:42:57.413557+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "54d5cb70b85e95b6afae07f906224a7d6313eff2017280056ccc8780c78f4806"
 }

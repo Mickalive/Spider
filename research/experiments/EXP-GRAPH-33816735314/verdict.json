@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-33816735314",
+  "lane": "graph",
+  "decision": "COMPETITION-SAFE",
+  "claim_updates": [
+    {
+      "claim_id": "C-PARAM-INHERIT",
+      "status": "EXPERIMENTAL",
+      "reason": "COMPETITION-SAFE on deterministic synthetic substrate resolves the BLOCKED state from parent EXP-GRAPH-33718012817. Parameter-slot-count tie-break (Option A) eliminates 5/5 eligible false accepts (id2-6) at equal confidence without breaking cold/literal-only/param-only baselines or confidence-based disambiguation. Fix is single-line change in kernel.py resolve() L112: candidates.sort(key=lambda m: (m.confidence, len(m.parameter_slots)), reverse=True). Audit confirms independent replication (V_FIX_EFFECT_REPLICATES) and ID-independence for 0-vs-1 slot case (V_ID_INDEPENDENCE_WITH_FIX). Claim ceiling: synthetic substrate, single intent fetch, preconditions={}, single slot id, deterministic no-RNG. Advancing from BLOCKED because the competition hazard is resolved on the tested substrate. NOT validated: multi-slot dominance safety, template-only param without declared slots, equal-slot-count ties, real-web endpoints, verify() postconditions, LLM distillation half of C-PARAM-INHERIT."
+    }
+  ],
+  "product_action": "Do not promote to product. Fix is not committed to production HEAD (audit V_CODE_NOT_PERSISTED: current HEAD kernel.py L112 still has simple sort key). Product-safe registration of mixed literal+parameterized mechanisms at equal confidence requires Director-approved commit of the one-line change to src/spider/kernel.py. Additionally, claim ceiling is limited to synthetic substrate; real-web and LLM distillation testing required before product promotion.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does the parameter-slot-count tie-break generalize safely to multi-slot mechanisms (2 vs 1 slot), template-only params with parameter_slots=[] but template ${id}, equal-slot-count ties (0 vs 0 or 1 vs 1), and real-web endpoints with DOM/auth/session/drift — and does it interact with verify() postcondition checking for non-200 HTTP responses?",
+  "reason": "All 13 frozen conditions pass: 5 baseline (cold UNKNOWN, literal-only orig/unseen EXECUTABLE, param-only orig/unseen EXECUTABLE), 6 intervention (compete-equal-id1-6 all EXECUTABLE with param-fetch-posts winning and correct parameterized URLs), 2 control (compete-param-higher param wins, compete-literal-higher literal wins). Audit independently replays all 13/13, confirms fix is causal and deterministic, and resolves parent V_TIEBREAK_ARTEFACT_LEXICOGRAPHIC for the 0-vs-1 slot case. However, the fix uses len(m.parameter_slots) not len(required_slots), limiting the claim ceiling to mechanisms that correctly declare parameter_slots matching template slots (audit V_TIEBREAK_SLOT_COUNT_SCOPE_LIMIT). The literal universal matching mechanism still exists (audit V_LIT_UNIVERSAL_STILL_EXISTS) — hazard mitigated by tie-break, not root-fixed. The fix was applied temporarily for the experiment and is NOT committed to production HEAD (audit V_CODE_NOT_PERSISTED). Frozen decision rule (spec.json Section 10.1) satisfied for COMPETITION-SAFE. The claim advances from BLOCKED because the competition hazard is resolved on the tested substrate, but full validation requires commit of the fix, multi-slot testing, real-web endpoints, and LLM distillation.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-33816735314/spec.json",
+    "research/experiments/EXP-GRAPH-33816735314/result.json",
+    "research/experiments/EXP-GRAPH-33816735314/audit.json",
+    "research/experiments/EXP-GRAPH-33816735314/report.md",
+    "research/experiments/EXP-GRAPH-33816735314/raw_evidence.json",
+    "research/experiments/EXP-GRAPH-33816735314/provenance.json",
+    "research/experiments/EXP-GRAPH-33816735314/freeze.json",
+    "research/experiments/EXP-GRAPH-33816735314/run_experiment.py",
+    "research/experiments/EXP-GRAPH-33718012817/handoff.json",
+    "research/experiments/EXP-GRAPH-33718012817/audit.json",
+    "src/spider/kernel.py:112",
+    "src/spider/kernel.py:104-113",
+    "src/spider/registry.py:35-38",
+    "research/claims/registry.json"
+  ]
+}
