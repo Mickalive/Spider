@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-33863640568",
+  "lane": "frontier",
+  "decision": "FALSIFIED-IN-SETTING",
+  "claim_updates": [
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "HYPOTHESIS",
+      "reason": "This experiment provides strong supporting evidence that the causal heterogeneity metric detects lambda-scaling for non-permutation functions (Spearman rho=0.9762, p~1.6e-05, Cohen d=1.54) in synthetic affine DGPs. However, the frozen decision rule's positive control and function invariance controls were mis-calibrated (threshold het>=0.5 exceeds analytical ceiling for 2/3 functions; zero-interaction expectation contradicted by design with different Var_a). The audit confirms metric validity is established but the decision rule requires revision before the hypothesis can be formally supported or falsified. C-WEB-DYNAMICS remains HYPOTHESIS: this experiment validates a detection method, not the claim itself. Real Web transition evidence is still needed."
+    }
+  ],
+  "product_action": "NONE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does the causal heterogeneity metric (Var_a of expected next-states) or TV distance detect lambda-scaling of dynamical structure in real or realistic Web transition data, or does the synthetic-to-real gap render the affine DGP validation insufficient?",
+  "reason": "The frozen decision rule yields FALSIFIED-IN-SETTING because two controls fail: (1) positive control het>=0.5 at lambda=1 passes only 11/30 measurements — analytical heterogeneity for seeds 43/44 is 0.171875, which is below the 0.5 threshold by construction, not by metric insensitivity; (2) function invariance fails (ANOVA interaction F=25.7898, p≈0) because functions were designed with different Var_a (0.921 vs 0.171), guaranteeing differential lambda slopes — this is expected signal, not pipeline failure. However, the audit (audit.json:status=REVISE, claim_ceiling) correctly identifies both failures as mis-calibrated frozen controls, not metric falsification. The metric itself is strongly validated: aggregate Spearman rho=0.9762 (p~1.6e-05), all 3 functions significant after Bonferroni correction, TV distance rho=1.0, Cohen d=1.54 (large). Null control passes (mean permutation p=0.466). The audit's required_fixes prescribe: (a) function-specific positive control threshold (e.g., 0.5*Var_analytical), (b) replace zero-interaction ANOVA with slope-consistency or normalized het/lambda^2 test, (c) persist per-replication tables as artifacts. Director bounds the claim at the audit ceiling: metric validity established for affine functions; decision rule revision needed before formal hypothesis evaluation. C-WEB-DYNAMICS remains HYPOTHESIS — this experiment validates a detection mechanism, not the broader claim about real Web dynamics.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-33863640568/result.json:metrics.spearman_rho_aggregate 0.9762, metrics.spearman_p_one_sided 1.7e-05, metrics.cohens_d_lambda1_vs_lambda0 1.5416, metrics.heterogeneity_means_by_lambda, metrics.analytical_heterogeneity (Var_a: 0.921875, 0.171875, 0.171875), metrics.tv_means_by_lambda, metrics.tv_spearman_rho 1.0, metrics.permutation_results.lambda_0 mean_p 0.466, metrics.permutation_results.lambda_1 n_above_threshold 11/30, metrics.anova_results.full_model.interaction_effect F 25.7898 p 0.0, metrics.monotonicity",
+    "research/experiments/EXP-FRONTIER-33863640568/audit.json:status REVISE, producer_claim_supported false, claim_ceiling 'Metric validity established; decision rule needs revision', required_fixes[0-4] positive_control threshold mis-calibrated, function_invariance mis-specified, raw artifact missing, frequency baseline missing, ANOVA p-values truncated, validity_findings[5-6] positive_control fail is threshold not metric, function_invariance fail is expected heterogeneity",
+    "research/experiments/EXP-FRONTIER-33863640568/spec.json:claim_ids C-WEB-DYNAMICS, falsifier, decision_rule, positive_control, null_control",
+    "research/experiments/EXP-FRONTIER-33863640568/freeze.json:hashes verified, no post-freeze redesign",
+    "research/experiments/EXP-FRONTIER-33863640568/analyze.py:sha256 480b359fa21f1d7f14095b365061f44c7a08fb9c55b787ca51b940f4fbc7f704, estimate_heterogeneity_mc function",
+    "research/experiments/EXP-FRONTIER-33767130362/handoff.json:carry_forward established permutation degeneracy Var=0, rejected permutation functions for causal heterogeneity, unknown non-permutation functions"
+  ]
+}

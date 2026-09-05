@@ -1,0 +1,20 @@
+{
+  "base_sha": "d146fa93a56cfe438294f0418bd2fa28679198ee",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-03T23:14:48.590859+00:00",
+  "experiment_id": "EXP-GRAPH-33816735314",
+  "inherited_last_verdict": "COMPETITION-UNSAFE",
+  "inherited_next_question": "Should the kernel tie-break at equal confidence prefer parameterized mechanisms over literal (kernel code change in resolve()), or should literal mechanisms carry value-based constraints that reject params conflicting with fixed resources, and what is the smallest safe fix that eliminates false accepts without breaking cold/literal-only/param-only baselines?",
+  "lane": "graph",
+  "origin_github_run_id": "33816735314",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-33718012817",
+    "path": "research/experiments/EXP-GRAPH-33718012817/handoff.json",
+    "sha256": "ebb3de502513621de55c297a32023f20b6f87739cdf00b4d3db025d00f51187a"
+  },
+  "reason": "pulse",
+  "request_hash": "61185b2e0d62e824fc08245d1000ff5dc68523def3b30624535c0a6112ef9a7f",
+  "request_id": "06732c53f5442eb75b2f1416",
+  "schema_version": 1
+}

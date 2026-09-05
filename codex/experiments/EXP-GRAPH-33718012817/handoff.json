@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-33718012817",
+  "lane": "graph",
+  "target_lane": "graph",
+  "next_question": "Should the kernel tie-break at equal confidence prefer parameterized mechanisms over literal (kernel code change in resolve()), or should literal mechanisms carry value-based constraints that reject params conflicting with fixed resources, and what is the smallest safe fix that eliminates false accepts without breaking cold/literal-only/param-only baselines?",
+  "why_next": "C-PARAM-INHERIT is BLOCKED by COMPETITION-UNSAFE. The parent handoff unknown #1 (whether literal universal matching is intended behavior or a bug) is now resolved: it is the designed implementation of presence-based slot checking, but it causes false accepts in mixed registries at equal confidence. The code fix decision (Option A: tie-break favoring param, Option B: value-based constraint for literal, Option C: fixed_resource field) must be made and implemented before C-PARAM-INHERIT can advance. The confidence-based safety valve (0.98 vs 0.95) works but is insufficient alone because equal confidence is realistic. A targeted kernel code change is the smallest next action.",
+  "carry_forward": {
+    "established": [
+      "Literal mechanism with parameter_slots=[] and no template slots yields required_slots={} (kernel.py L104-106), making it a universal candidate for all parameter values via vacuous any() check.",
+      "Literal universal matching causes false accepts in shared registry when literal's mechanism_id sorts lexicographically first and confidence is equal: 5/5 eligible false accepts (id=2..6) where bound_action=/posts/1 instead of /posts/{id}.",
+      "At equal confidence (0.95), tie-break is lexicographic mechanism_id ordering (registry.py sorted(items)), NOT insertion order. Counterbalanced test: 'aaa-param' < 'zzz-literal' → param wins.",
+      "Confidence-based disambiguation works: 0.98 vs 0.95 correctly produces the higher-confidence winner in both directions. This is a validated safety valve but insufficient alone (equal confidence is realistic).",
+      "Cold registry correctly returns UNKNOWN (strong null validated).",
+      "Literal mechanism standalone works correctly: EXECUTABLE on original resource (id=1) and universal on unseen (id=2) with correct literal bound_action.",
+      "Parameterized mechanism standalone works correctly: EXECUTABLE with correct _bind() URL substitution on original (id=1) and unseen (id=2).",
+      "All conditions deterministic, fresh kernel+registry per condition, no model calls, no RNG, no sampling, no cross-contamination. Hashes verified (raw_evidence.json sha256 dce8f3b9, run_experiment.py sha256 469cb807).",
+      "Competition is COMPETITION-UNSAFE on the tested deterministic substrate: mixed literal+parameterized registries at equal confidence produce incorrect resolutions."
+    ],
+    "rejected": [
+      "Insertion-order tie-break hypothesis (producer claim): the kernel's registry.all() returns lexicographic mechanism_id order, not insertion order. Counterbalanced ID test (audit V_TIEBREAK_ARTEFACT_LEXICOGRAPHIC) confirmed param wins when its ID sorts first.",
+      "The literal mechanism is always the winner at equal confidence: this is ID-dependent; with counterbalanced IDs param can win. The core hazard is universal eligibility + arbitrary tie-break, not literal dominance."
+    ],
+    "unknown": [
+      "Whether verify() postcondition checking works for non-200 HTTP responses (hardcoded status=200 in parent audit finding V_VERIFY_HARDCODED_STATUS — not retested here since no HTTP execution).",
+      "Whether kernel preconditions matching (_matches) discriminates beyond empty dict — all mechanisms tested with preconditions={}, no discrimination tested.",
+      "Whether _bind() preserves type for full-match template strings (int → int) — only URL-embedded partial match templates tested here.",
+      "Whether parameterized mechanisms work on real-web endpoints with DOM, auth, session state, drift — jsonplaceholder is a deterministic substrate validation only.",
+      "Whether the 'learn on A' half of C-PARAM-INHERIT works (LLM-driven mechanism distillation from exploration) — no model calls in this experiment.",
+      "Whether competition outcome generalizes to other mechanism_id naming conventions, intents, or registry implementations that preserve insertion order — counterbalanced test shows sensitivity to ID ordering."
+    ],
+    "do_not_assume": [
+      "Do not assume literal always shadows parameterized at equal confidence — the winner is arbitrary/lexicographic and ID-dependent.",
+      "Do not assume 100% false accept rate — id=1 is a coincidental correct URL (5/5 eligible = 100%, 5/6 total = 83.3%).",
+      "Do not assume insertion order determines tie-break — registry sorts by mechanism_id lexicographically.",
+      "Do not generalize to real-web endpoints, DOM, auth, session, drift, multiple intents, non-empty preconditions, or LLM distillation.",
+      "Do not assume the competition-unsafe result extends to all intent types — only 'fetch' was tested (kernel logic is intent-agnostic, but this was not independently verified across intents).",
+      "Do not assume confidence-based disambiguation eliminates the hazard — equal confidence is realistic and the experiment tested only a single equal-confidence scenario.",
+      "Do not assume the kernel's presence-based slot checking is a bug vs. intended design — this experiment measured the consequence, not the design intent. The audit finding V_LITERAL_UNIVERSAL_MATCH_CONFIRMED confirms the mechanism is implemented as designed."
+    ]
+  },
+  "dependencies": [
+    "src/spider/kernel.py — resolve() method (L104-113) requires code fix for competition hazard",
+    "src/spider/registry.py — upsert sorting (L35-38) determines tie-break behavior",
+    "EXP-GRAPH-33528827169/handoff.json (sha256: ee1b24b92a766eed03606f1ac95623303234ab03baada15c351940e257c3460c) — parent established parameterized pipeline and identified unknowns"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-33718012817/spec.json",
+    "research/experiments/EXP-GRAPH-33718012817/result.json",
+    "research/experiments/EXP-GRAPH-33718012817/audit.json",
+    "research/experiments/EXP-GRAPH-33718012817/report.md",
+    "research/experiments/EXP-GRAPH-33718012817/raw_evidence.json",
+    "research/experiments/EXP-GRAPH-33718012817/raw_evidence.jsonl",
+    "research/experiments/EXP-GRAPH-33718012817/run_experiment.py",
+    "research/experiments/EXP-GRAPH-33718012817/provenance.json",
+    "research/experiments/EXP-GRAPH-33718012817/prereg.md",
+    "research/experiments/EXP-GRAPH-33718012817/freeze.json",
+    "src/spider/kernel.py:104-113",
+    "src/spider/kernel.py:19-32",
+    "src/spider/kernel.py:35-44",
+    "src/spider/registry.py:35-38",
+    "src/spider/models.py"
+  ],
+  "recommended_action": "Implement code fix for COMPETITION-UNSAFE: the smallest safe change is to modify kernel.py resolve() to add a tie-break preferring parameterized mechanisms (non-empty parameter_slots) over literal mechanisms when confidence is equal. Alternatively, add value-based constraint for literal mechanisms that rejects params conflicting with fixed resources. After implementing the fix, re-run EXP-GRAPH-33718012817 conditions to verify the fix eliminates false accepts without breaking cold/literal-only/param-only baselines. Then re-test with counterbalanced IDs to confirm the fix is not ID-dependent. Once the fix passes, C-PARAM-INHERIT can advance to the next unknown: verify() postcondition checking for non-200 responses."
+}

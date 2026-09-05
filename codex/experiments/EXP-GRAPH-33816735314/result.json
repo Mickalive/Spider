@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-33816735314",
+  "lane": "graph",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "total_conditions": 13,
+    "conditions_passed": 13,
+    "conditions_failed": 0,
+    "baseline_pass_rate": "5/5",
+    "intervention_pass_rate": "6/6",
+    "control_pass_rate": "2/2",
+    "false_accepts_eliminated": 5,
+    "false_accepts_remaining": 0,
+    "code_fix_applied": "line 112: candidates.sort(key=lambda m: (m.confidence, len(m.parameter_slots)), reverse=True)"
+  },
+  "controls": {
+    "B_COLD": {
+      "expected": "UNKNOWN",
+      "observed": "UNKNOWN",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json[0]"
+    },
+    "B_LITERAL_ONLY_ORIG": {
+      "expected": "EXECUTABLE url=/posts/1",
+      "observed": "EXECUTABLE url=/posts/1",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json[1]"
+    },
+    "B_LITERAL_ONLY_UNSEEN": {
+      "expected": "EXECUTABLE url=/posts/1",
+      "observed": "EXECUTABLE url=/posts/1",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json[2]"
+    },
+    "B_PARAM_ONLY_ORIG": {
+      "expected": "EXECUTABLE url=/posts/1",
+      "observed": "EXECUTABLE url=/posts/1",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json[3]"
+    },
+    "B_PARAM_ONLY_UNSEEN": {
+      "expected": "EXECUTABLE url=/posts/2",
+      "observed": "EXECUTABLE url=/posts/2",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json[4]"
+    },
+    "compete_param_higher": {
+      "expected": "EXECUTABLE url=/posts/3 with param mechanism",
+      "observed": "EXECUTABLE url=/posts/3 with param mechanism",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json[11]"
+    },
+    "compete_literal_higher": {
+      "expected": "EXECUTABLE url=/posts/1 with literal mechanism",
+      "observed": "EXECUTABLE url=/posts/1 with literal mechanism",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json[12]"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-GRAPH-33816735314/raw_evidence.json",
+      "sha256": "1db2b4598350a21473e0845617f48bcde27b49da9b7acefc10767990e8f2fd58",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-33816735314/run_experiment.py",
+      "sha256": "d0304255ef3847f84f2952011e005e28f66955807bbf841a7b2936ece3309ca8",
+      "role": "code"
+    },
+    {
+      "path": "src/spider/kernel.py",
+      "sha256": "c0357cd3423eb80459f2123c83ba4d1c2c4d8837b7eda215d72cfd8c08bc09fa",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "All 13 conditions passed: 5 baseline, 6 intervention, 2 control.",
+    "The parameter-slot-count tie-break eliminates all 5 false accepts (compete-equal-id2 through id6) while preserving all baseline behaviors.",
+    "At equal confidence (0.95), the parameterized mechanism (parameter_slots=['id'], len=1) wins over the literal mechanism (parameter_slots=[], len=0) for all parameter values (id=1..6).",
+    "Confidence-based disambiguation remains intact: higher-confidence mechanism wins regardless of parameter_slots count.",
+    "No Python exceptions, type errors, or unexpected resolution statuses occurred.",
+    "The fix is a single-line change with no new fields, no schema changes, and no impact on existing mechanism types."
+  ],
+  "validity_notes": [
+    "All conditions use identical jsonplaceholder.typicode.com endpoint and mechanism definitions as parent experiment EXP-GRAPH-33718012817, maintaining substrate continuity.",
+    "No HTTP execution required - only resolution and bound_action correctness measured. Eliminates network variability.",
+    "Each condition uses a fresh kernel instance with explicitly controlled registry contents. No cross-contamination.",
+    "All conditions deterministic: no model calls, no RNG, no sampling.",
+    "Post-fix conditions (compete-equal-id2 through id6) are NEW measurements not present in the parent experiment. They test the fix's effectiveness.",
+    "Pre-fix baseline replication conditions are exact replications of parent conditions to verify no regression."
+  ],
+  "unresolved": [
+    "Whether verify() postcondition checking works for non-200 HTTP responses (hardcoded status=200 in parent audit finding V_VERIFY_HARDCODED_STATUS - not retested here since no HTTP execution).",
+    "Whether kernel preconditions matching (_matches) discriminates beyond empty dict - all mechanisms tested with preconditions={}, no discrimination tested.",
+    "Whether _bind() preserves type for full-match template strings (int -> int) - only URL-embedded partial match templates tested here.",
+    "Whether parameterized mechanisms work on real-web endpoints with DOM, auth, session state, drift - jsonplaceholder is a deterministic substrate validation only.",
+    "Whether the 'learn on A' half of C-PARAM-INHERIT works (LLM-driven mechanism distillation from exploration) - no model calls in this experiment.",
+    "Whether competition outcome generalizes to other mechanism_id naming conventions, intents, or registry implementations that preserve insertion order - counterbalanced test shows sensitivity to ID ordering."
+  ]
+}

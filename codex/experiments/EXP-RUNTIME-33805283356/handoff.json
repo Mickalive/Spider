@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-33805283356",
+  "lane": "runtime",
+  "target_lane": "runtime",
+  "next_question": "On a real Flask server with actual JWT/session middleware (not hand-programmed lookup tables), no synthetic X-Auth-Level/X-Session/X-User/X-Error headers, and identical error response bodies for expired vs invalid tokens, does the HTTP fingerprint substrate maintain discrimination — and does the full vector (status+body) exceed B-BODY-ONLY when synthetic header tautology is removed and error states share identical bodies?",
+  "why_next": "This experiment verified mechanism integrity on a synthetic constant-URL server (discrimination 1.0, null FP 0%, drift discriminable) but the audit identified two high-severity gaps: V1-REAL-MIDDLEWARE-GAP (server is stdlib http.server, not Flask with real JWT; discrimination is construction-guaranteed by distinct bodies/headers per state) and V2-SYNTHETIC-HEADER-TAUTOLOGY (X-Auth-Level/X-Session/X-User/X-Error headers perfectly encode state and inflate discrimination). The ecological validity question — does this work on real auth middleware? — remains open. The next experiment must close both gaps: use a real Flask/JWT server, remove synthetic auth-level headers from the fingerprint, and test with identical error bodies for expired vs invalid tokens to determine whether body+status alone (without header tautology) maintains discrimination when some states share identical bodies.",
+  "carry_forward": {
+    "established": [
+      "Deterministic SHA-256 fingerprint of (status, tuple(sorted(headers excluding Date/Server)), body_sha256, redirect_chain) achieves perfect discrimination 1.0 on a constant-URL stdlib http.server with 5 hand-programmed auth states and 50-150ms server-side jitter: intra_match_rate=1.0, inter_match_rate=0.0, null FP 0.0% (result.json metrics, audit recomputed_metrics match).",
+      "Full vector exceeds B-STATUS-ONLY (1.0>0.7) when 3 states share status 200; full vector equals B-BODY-ONLY (1.0=1.0) because bodies fully discriminate on this server (result.json baselines, audit baseline_findings recomputed match).",
+      "URL constancy verified: B-URL-HASH=0.0 on constant GET /api/data endpoint, fixing parent V1-EXTERNAL-TAUTOLOGY (audit V3-URL-CONSTANCY-VERIFIED, raw_observations url 50x identical).",
+      "Server-side jitter invariance validated for 50-150ms range: null FP 0%<5% when timing excluded from fingerprint vector (result.json C_NULL_FP_RATE, audit V5-JITTER-BOUNDED).",
+      "Drift pairs valid_token->expired_token (Jaccard 0.305) and expired_token->invalid_token (Jaccard 0.366) are discriminable (<0.5); monotonicity NOT tested (result.json drift_jaccards, audit recomputed match).",
+      "Three mandatory parent fixes inherited and preserved: (1) sorted-tuple fingerprint eliminates PYTHONHASHSEED non-determinism, (2) Date/Server header exclusion prevents spurious variance, (3) B-STATUS-ONLY=0.7 and B-BODY-ONLY=1.0 are competitive baselines."
+    ],
+    "rejected": [
+      "Phase B httpbin.org constitutes ecological validity — REJECTED (parent V1-EXTERNAL-TAUTOLOGY, URL encodes status in path).",
+      "C-MEAS-VALID survives for general HTTP-level observation on production auth middleware — REJECTED: claim ceiling narrowed to synthetic constant-URL server mechanism integrity only (audit claim_ceiling, V1-REAL-MIDDLEWARE-GAP).",
+      "Full observation vector adds value over body-only — REJECTED on this server: full_vector_discrimination 1.0 equals B-BODY-ONLY 1.0; product advantage is hypothetical, not demonstrated (audit baseline_findings B-BODY-ONLY, V8-CONSTRUCTION-TAUTOLOGY-REMAINS).",
+      "Drift monotonicity is established — REJECTED: only discriminability (<0.5 Jaccard) confirmed; ordering not tested (parent V3-DRIFT-MONOTONIC-MISMEASURED, audit V5)."
+    ],
+    "unknown": [
+      "Does the substrate maintain discrimination on real Flask/JWT/OAuth middleware where bodies may be identical across error states and headers lack synthetic X-Auth-Level/Session/User/Error?",
+      "When bodies are identical or similar (e.g., shared error page for expired vs invalid), does full vector (status+body) exceed B-BODY-ONLY, or does discrimination collapse to status alone?",
+      "Does removing synthetic X- headers (X-Auth-Level, X-Session, X-User, X-Error) preserve discrimination on this server, testing whether body+status alone suffice?",
+      "What is the false-positive rate under server-side jitter >150ms, volatile headers (request IDs, RateLimit), or compressed/chunked encoding?",
+      "Can substrate detect continuous session drift as threshold-based classifier rather than discrete 5-state exact-match discrimination?",
+      "What is cross-Python-version and cross-process reproducibility after replacing repr(vector) with stable canonical serialization (e.g., JSON canonical)?"
+    ],
+    "do_not_assume": [
+      "Do not assume stdlib http.server results transfer to production Flask/JWT/OAuth middleware — SERVER_STATES hand-defines distinct bodies/headers per state; discrimination guaranteed by construction (audit V1-REAL-MIDDLEWARE-GAP, V8-CONSTRUCTION-TAUTOLOGY-REMAINS).",
+      "Do not assume full observation vector is necessary for discrimination — on this server B-BODY-ONLY equals full vector (1.0=1.0); synthetic headers inflate discrimination but are redundant with body signal (audit V2-SYNTHETIC-HEADER-TAUTOLOGY, V8).",
+      "Do not assume fingerprint hashes reproduce across Python versions — repr(vector) is Python-version-dependent; currently validated only on Python 3.12.14 (audit V6-REPR-VERSION-DEPENDENCE-CARRY, provenance python_version).",
+      "Do not assume null FP <5% holds beyond 50-150ms server jitter range — only uniform(0.05,0.15) tested; production jitter, CDN, load-balancer variance untested (audit V5-JITTER-BOUNDED).",
+      "Do not assume drift monotonicity is established — only discriminability (<0.5 Jaccard) confirmed; ordered distance not tested (audit V3, parent V3-DRIFT-MONOTONIC-MISMEASURED).",
+      "Do not assume bootstrap CI [1.0,1.0] reflects fingerprint-level uncertainty — degenerate at perfect separation; method resamples states with set deduplication (audit V4-BOOTSTRAP-DEGENERATE).",
+      "Do not assume product can build auth drift detection on this substrate without production validation — claim ceiling is narrow mechanism integrity on synthetic server only."
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-RUNTIME-33805283356/result.json — COMPLETE SUPPORTS metrics, baselines, controls, null FP, drift jaccards",
+    "research/experiments/EXP-RUNTIME-33805283356/audit.json — REVISE, 6 required_fixes, V1-V8 validity_findings, claim_ceiling, baseline_findings, recomputed_metrics",
+    "research/experiments/EXP-RUNTIME-33805283356/raw_observations.json — 50 entries with per-state distinct body_hash/headers, per-state identical fingerprint, elapsed 0.052-0.148",
+    "research/experiments/EXP-RUNTIME-33805283356/provenance.json — stdlib http.server (not Flask), python 3.12.14, code_paths, datasets_fixtures",
+    "research/experiments/EXP-RUNTIME-33805283356/run_experiment.py — SERVER_STATES hand-defined bodies/headers, AuthHandler 50-150ms sleep, fingerprint repr(sorted), baselines",
+    "research/experiments/EXP-RUNTIME-33805283356/spec.json — frozen decision_rule, baselines, controls, measurement_validity",
+    "research/experiments/EXP-RUNTIME-33767375933/handoff.json — parent carry_forward establishing toy-server mechanism, rejecting httpbin, do_not_assume tautology/py version"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-33805283356/result.json — full_vector_discrimination 1.0, B-STATUS-ONLY 0.7, B-BODY-ONLY 1.0, B-URL-HASH 0.0, null_fp 0.0, drift_jaccards [0.305,0.366], all 5 controls pass",
+    "research/experiments/EXP-RUNTIME-33805283356/audit.json — REVISE producer_claim_supported=false, V1-REAL-MIDDLEWARE-GAP (stdlib not Flask), V2-SYNTHETIC-HEADER-TAUTOLOGY (X- headers encode state), V3-URL-CONSTANCY-VERIFIED, V5-JITTER-BOUNDED, V8-CONSTRUCTION-TAUTOLOGY-REMAINS",
+    "research/experiments/EXP-RUNTIME-33805283356/raw_observations.json — per-state headers include X-Auth-Level/X-Session/X-User/X-Error encoding state label, 5 distinct body_hashes, 5 distinct fingerprints, URL constant 50x",
+    "research/experiments/EXP-RUNTIME-33805283356/provenance.json — server_implementation stdlib http.server (not Flask), python 3.12.14",
+    "research/experiments/EXP-RUNTIME-33805283356/run_experiment.py — SERVER_STATES 41-77 hand-defined, AuthHandler 84-120, fingerprint 178-196 repr(sorted)",
+    "research/experiments/EXP-RUNTIME-33767375933/handoff.json — parent established toy-server 1.0, rejected httpbin, do_not_assume tautology"
+  ],
+  "recommended_action": "DESIGN EXP-RUNTIME-next to close V1-REAL-MIDDLEWARE-GAP and V2-SYNTHETIC-HEADER-TAUTOLOGY: (1) Use a real Flask app with JWT validation (PyJWT or similar) — not a hand-programmed lookup table — serving constant GET /api/data where response depends on Authorization Bearer header and/or Cookie. (2) Do NOT include synthetic auth-level headers (X-Auth-Level, X-Session, X-User, X-Error) in server responses — use only standard HTTP headers (Content-Type, Content-Length, etc.). (3) Design error states (expired_token, invalid_token) to return IDENTICAL response bodies (e.g., same generic error JSON) to test whether status alone discriminates when bodies are identical. (4) Keep the deterministic sorted-tuple fingerprint with Date/Server exclusion. (5) Baselines: B-STATUS-ONLY, B-BODY-ONLY, B-URL-HASH, B-RANDOM. Key test: does full vector (status+body) exceed B-BODY-ONLY when error bodies are identical? (6) Keep server-side jitter 50-150ms and null FP control. (7) Persist raw_observations.json with status, headers, body_hash, fingerprint per request. (8) If B-BODY-ONLY equals full vector even without synthetic headers, this constrains the substrate to body-only observation; if full vector exceeds B-BODY-ONLY when bodies are identical, this demonstrates the value of multi-field observation."
+}

@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-33816735314",
+  "lane": "graph",
+  "target_lane": "graph",
+  "next_question": "Does the parameter-slot-count tie-break generalize safely to multi-slot mechanisms (2 vs 1 slot), template-only params with parameter_slots=[] but template ${id}, equal-slot-count ties (0 vs 0 or 1 vs 1), and real-web endpoints with DOM/auth/session/drift — and does it interact with verify() postcondition checking for non-200 HTTP responses?",
+  "why_next": "The competition hazard (COMPETITION-UNSAFE) from parent EXP-GRAPH-33718012817 is resolved on synthetic substrate: Option A tie-break works for literal (0 slots) vs single-slot param (1 slot) at equal confidence. C-PARAM-INHERIT advances from BLOCKED to EXPERIMENTAL. However, the fix is not committed to production HEAD (audit V_CODE_NOT_PERSISTED), and the claim ceiling is limited to single-slot, single-intent, deterministic synthetic substrate. The next experiment must test the boundaries: multi-slot dominance (does 2-slot always beat 1-slot at equal confidence?), template-only params (mechanism declares parameter_slots=[] but template has ${id}), equal-slot-count ties (0 vs 0 or 1 vs 1 remain lexicographic), real-web endpoints with DOM/auth/session/drift, and verify() postcondition checking for non-200 HTTP responses. The LLM distillation half of C-PARAM-INHERIT ('learn on A') remains untested and requires model calls.",
+  "carry_forward": {
+    "established": [
+      "Parameter-slot-count tie-break (Option A) eliminates 5/5 eligible false accepts in mixed literal+parameterized registries at equal confidence on deterministic synthetic substrate: candidates.sort(key=lambda m: (m.confidence, len(m.parameter_slots)), reverse=True) in kernel.py L112.",
+      "All baseline conditions preserved: cold UNKNOWN, literal-only orig/unseen EXECUTABLE, param-only orig/unseen EXECUTABLE.",
+      "Confidence-based disambiguation preserved: higher confidence wins regardless of slot count (0.98 > 0.95 dominates tuple sort).",
+      "Fix makes tie-break ID-independent for 0-vs-1 slot case (audit V_ID_INDEPENDENCE_WITH_FIX): param wins even with counterbalanced IDs (aaa-param vs zzz-literal).",
+      "Competition is COMPETITION-SAFE on the tested deterministic substrate (13/13 conditions pass, audit PASS, producer_claim_supported=true).",
+      "C-PARAM-INHERIT advances from BLOCKED to EXPERIMENTAL: competition hazard resolved on synthetic substrate, but full validation requires commit, multi-slot, real-web, and LLM distillation testing."
+    ],
+    "rejected": [
+      "The parameter-slot-count tie-break is universally safe: ceiling limited to mechanisms that correctly declare parameter_slots matching template slots, single-slot case, single intent fetch, deterministic synthetic substrate (audit V_TIEBREAK_SLOT_COUNT_SCOPE_LIMIT).",
+      "The literal universal matching hazard is root-fixed: hazard is mitigated by tie-break preference, not eliminated. Literal mechanisms with parameter_slots=[] still match vacuously and would produce false accepts if param absent, invalidated, lower confidence, or equal confidence with len tie (0 vs 0) (audit V_LIT_UNIVERSAL_STILL_EXISTS)."
+    ],
+    "unknown": [
+      "Whether verify() postcondition checking works for non-200 HTTP responses (hardcoded status=200 per parent audit V_VERIFY_HARDCODED_STATUS — not retested, no HTTP execution).",
+      "Whether kernel preconditions matching (_matches) discriminates beyond empty dict — all mechanisms tested with preconditions={}.",
+      "Whether _bind() preserves type for full-match template strings (int -> int) — only URL-embedded partial match tested.",
+      "Whether parameterized mechanisms work on real-web endpoints with DOM, auth, session state, drift — jsonplaceholder is synthetic substrate validation only.",
+      "Whether LLM-driven mechanism distillation ('learn on A' half of C-PARAM-INHERIT) works — no model calls in this experiment.",
+      "Whether fix generalizes safely to multi-slot mechanisms (2 vs 1 slot tie), template-only params with parameter_slots=[] but template ${id}, and equal-slot-count ties (0 vs 0 or 1 vs 1) — not tested; len(parameter_slots) vs required_slots divergence.",
+      "Whether the fix has been committed to production kernel and re-validated in HEAD — current HEAD still unfixed, requires Director action.",
+      "Whether competition outcome generalizes to other intents, registry implementations preserving insertion order, or other mechanism_id naming conventions — counterbalanced synthesis shows fix removes ID dependence for 0-vs-1 but not measured in raw_evidence."
+    ],
+    "do_not_assume": [
+      "Do not assume the fix is committed to production — current HEAD src/spider/kernel.py still has simple sort key (audit V_CODE_NOT_PERSISTED). Product-safe registration requires Director-approved commit.",
+      "Do not assume the tie-break is safe for multi-slot mechanisms — only single-slot (1 vs 0) tested. 2-slot vs 1-slot behavior unmeasured.",
+      "Do not assume template-only params (parameter_slots=[] but template has ${id}) are handled correctly — len(parameter_slots) would be 0, losing tie to declared 1-slot param despite needing params.",
+      "Do not assume equal-slot-count ties (0 vs 0 or 1 vs 1) are deterministic — expected to remain lexicographic/ID-dependent.",
+      "Do not assume the literal universal eligibility is removed — literal still matches vacuously; hazard mitigated by tie-break, not root-fixed.",
+      "Do not generalize to real-web endpoints, DOM, auth, session, drift, multiple intents, non-empty preconditions, or LLM distillation.",
+      "Do not assume C-PARAM-INHERIT is fully validated — competition hazard resolved on synthetic substrate, but 'learn on A' half and real-web testing remain unevidenced."
+    ]
+  },
+  "dependencies": [
+    "src/spider/kernel.py — resolve() method L112 requires Director-approved commit of one-line fix (candidates.sort(key=lambda m: (m.confidence, len(m.parameter_slots)), reverse=True)) before product promotion",
+    "src/spider/registry.py — upsert sorting L35-38 determines tie-break behavior",
+    "src/spider/kernel.py L104-113 — resolve() and _matches() logic for slot checking and eligibility",
+    "research/experiments/EXP-GRAPH-33718012817/handoff.json (sha256: ebb3de502513621de55c297a32023f20b6f87739cdf00b4d3db025d00f51187a) — parent established competition hazard and recommended Option A/B/C",
+    "research/experiments/EXP-GRAPH-33528827169/handoff.json (sha256: ee1b24b92a766eed03606f1ac95623303234ab03baada15c351940e257c3460c) — grandparent established parameterized pipeline substrate validation"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-33816735314/spec.json",
+    "research/experiments/EXP-GRAPH-33816735314/result.json",
+    "research/experiments/EXP-GRAPH-33816735314/audit.json",
+    "research/experiments/EXP-GRAPH-33816735314/report.md",
+    "research/experiments/EXP-GRAPH-33816735314/raw_evidence.json",
+    "research/experiments/EXP-GRAPH-33816735314/provenance.json",
+    "research/experiments/EXP-GRAPH-33816735314/freeze.json",
+    "research/experiments/EXP-GRAPH-33816735314/run_experiment.py",
+    "research/experiments/EXP-GRAPH-33718012817/handoff.json",
+    "research/experiments/EXP-GRAPH-33718012817/audit.json",
+    "research/experiments/EXP-GRAPH-33718012817/result.json",
+    "src/spider/kernel.py:112",
+    "src/spider/kernel.py:104-113",
+    "src/spider/kernel.py:19-32",
+    "src/spider/registry.py:35-38",
+    "src/spider/models.py",
+    "research/claims/registry.json"
+  ],
+  "recommended_action": "Commit the one-line fix (candidates.sort(key=lambda m: (m.confidence, len(m.parameter_slots)), reverse=True)) to src/spider/kernel.py L112 with Director approval, then re-validate in committed HEAD. After commit, run the next experiment testing multi-slot mechanisms (2 vs 1 slot at equal confidence), template-only params (parameter_slots=[] but template has ${id}), and equal-slot-count ties (0 vs 0). Separately test verify() postcondition checking for non-200 HTTP responses. When multi-slot and verify() tests pass, advance to real-web endpoint testing with DOM/auth/session/drift. The LLM distillation half of C-PARAM-INHERIT ('learn on A') requires a model-calling experiment in the graph lane."
+}
