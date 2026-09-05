@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-33955869291",
+  "lane": "graph",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "baseline_regression": "PASS",
+    "baseline_pass_count": 5,
+    "baseline_total": 5,
+    "multi_slot_dominance": "PASS",
+    "multi_slot_winning_mechanism": "param-2slot",
+    "multi_slot_bound_url": "https://jsonplaceholder.typicode.com/posts/3/tech",
+    "template_only_vs_param": "PASS",
+    "template_only_vs_param_winning": "param-fetch-posts",
+    "template_vs_literal_winner": "template-only-fetch",
+    "equal_slot_tie_param_winner": "param-fetch-posts",
+    "equal_slot_tie_lit_winner": "literal-fetch-posts-1",
+    "verify_200_correct": "PASS",
+    "verify_404_correct": "PASS",
+    "verify_200_result": true,
+    "verify_404_result": false,
+    "total_conditions_met": 5,
+    "total_conditions_required": 5,
+    "exceptions_count": 0
+  },
+  "controls": {
+    "B_LITERAL_ONLY_ORIG": {
+      "expected": "EXECUTABLE url=/posts/1",
+      "observed_status": "EXECUTABLE",
+      "observed_url": "https://jsonplaceholder.typicode.com/posts/1",
+      "pass": true
+    },
+    "B_LITERAL_ONLY_UNSEEN": {
+      "expected": "EXECUTABLE url=/posts/1 (literal universal)",
+      "observed_status": "EXECUTABLE",
+      "observed_url": "https://jsonplaceholder.typicode.com/posts/1",
+      "pass": true
+    },
+    "B_PARAM_ONLY_ORIG": {
+      "expected": "EXECUTABLE url=/posts/1",
+      "observed_status": "EXECUTABLE",
+      "observed_url": "https://jsonplaceholder.typicode.com/posts/1",
+      "pass": true
+    },
+    "B_PARAM_ONLY_UNSEEN": {
+      "expected": "EXECUTABLE url=/posts/2 (param generalizes)",
+      "observed_status": "EXECUTABLE",
+      "observed_url": "https://jsonplaceholder.typicode.com/posts/2",
+      "pass": true
+    },
+    "B_CONFIDENCE_DISAMBIGUATE": {
+      "expected": "EXECUTABLE param (0.98) wins over literal (0.95)",
+      "observed_status": "EXECUTABLE",
+      "observed_mechanism": "param-fetch-posts-high",
+      "pass": true
+    },
+    "POS_MULTI_SLOT": {
+      "expected": "EXECUTABLE param-2slot wins (len=2 > len=1)",
+      "observed_status": "EXECUTABLE",
+      "observed_mechanism": "param-2slot",
+      "pass": true
+    },
+    "NULL_CONFIDENCE_DOMINANCE": {
+      "expected": "Higher confidence wins regardless of slot count",
+      "observed": "PASS"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-GRAPH-33955869291/raw_evidence.json",
+      "sha256": "c6262ebc9435cfc64ddf996b5fecf498cebb4875b6d831962040ac0acf8dc8ed",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-33955869291/derived_measurements.json",
+      "sha256": "8f5d199684d312d0f81a8b749bacb14bf302e55ad77347c2661b5376af29de96",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-33955869291/run_experiment.py",
+      "sha256": "5873f9e9946fa609c0466fe5d9d45c53097e540dd7e62ace04312e94c039dfa6",
+      "role": "code"
+    },
+    {
+      "path": "src/spider/kernel.py",
+      "sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+      "role": "code"
+    },
+    {
+      "path": "src/spider/models.py",
+      "sha256": "338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78",
+      "role": "code"
+    },
+    {
+      "path": "src/spider/registry.py",
+      "sha256": "51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "[literal-only-original] type=resolution status=EXECUTABLE mechanism=literal-fetch-posts-1 bound_url=https://jsonplaceholder.typicode.com/posts/1",
+    "[literal-only-unseen] type=resolution status=EXECUTABLE mechanism=literal-fetch-posts-1 bound_url=https://jsonplaceholder.typicode.com/posts/1",
+    "[param-only-original] type=resolution status=EXECUTABLE mechanism=param-fetch-posts bound_url=https://jsonplaceholder.typicode.com/posts/1",
+    "[param-only-unseen] type=resolution status=EXECUTABLE mechanism=param-fetch-posts bound_url=https://jsonplaceholder.typicode.com/posts/2",
+    "[confidence-disambiguate] type=resolution status=EXECUTABLE mechanism=param-fetch-posts-high bound_url=https://jsonplaceholder.typicode.com/posts/3",
+    "[multi-slot-beats-1-slot] type=resolution status=EXECUTABLE mechanism=param-2slot bound_url=https://jsonplaceholder.typicode.com/posts/3/tech",
+    "[template-only-vs-literal] type=resolution status=EXECUTABLE mechanism=template-only-fetch bound_url=https://jsonplaceholder.typicode.com/posts/3",
+    "[template-only-vs-param] type=resolution status=EXECUTABLE mechanism=param-fetch-posts bound_url=https://jsonplaceholder.typicode.com/posts/3",
+    "[equal-slot-tie-param-vs-param] type=resolution status=EXECUTABLE mechanism=param-fetch-posts bound_url=https://jsonplaceholder.typicode.com/posts/3",
+    "[equal-slot-tie-lit-vs-lit] type=resolution status=EXECUTABLE mechanism=literal-fetch-posts-1 bound_url=https://jsonplaceholder.typicode.com/posts/1",
+    "[verify-200-match] type=verify result=True",
+    "[verify-404-mismatch] type=verify result=False"
+  ],
+  "validity_notes": [
+    "Fix applied temporarily during execution \u2014 current HEAD src/spider/kernel.py L112 still has unfixed sort key (m.confidence only). Production commit requires Director approval.",
+    "All resolution conditions deterministic: no model calls, no RNG, no sampling. Single-run exact point comparisons.",
+    "verify() conditions use real HTTP GET to jsonplaceholder.typicode.com. Network availability required.",
+    "Synthetic substrate (jsonplaceholder.typicode.com) \u2014 generalizability to real-web endpoints with DOM, auth, session, drift not tested here.",
+    "Each condition uses a fresh kernel instance with explicitly controlled registry contents. No cross-contamination.",
+    "Template-only-vs-literal and equal-slot-tie conditions have uncertain expected outcomes (lexicographic tie-break on mechanism_id). Results are informative but not pass/fail."
+  ],
+  "unresolved": [
+    "Whether the fix generalizes to real-web endpoints with DOM, auth, session state, drift (not tested here).",
+    "Whether LLM-driven mechanism distillation ('learn on A' half of C-PARAM-INHERIT) works (no model calls).",
+    "Whether _matches() discriminates beyond empty dict preconditions (all mechanisms tested with preconditions={}).",
+    "Whether _bind() preserves type for full-match template strings (int -> int) (only URL-embedded partial match tested).",
+    "Whether the fix has been committed to production HEAD (current HEAD unfixed, requires Director action).",
+    "Whether lexicographic tie-breaking is 'correct' behavior or needs improvement (recorded as-is, not normatively judged)."
+  ]
+}

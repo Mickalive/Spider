@@ -1,9 +1,0 @@
-{
-  "stage": "execute",
-  "category": "VALIDATION_FAILURE",
-  "message": "invalid result outcome: GENERALIZATION-SAFE",
-  "retryable": false,
-  "recorded_at": "2026-09-05T17:28:33.828939+00:00",
-  "github_run_id": "33980998835",
-  "github_run_attempt": "1"
-}
