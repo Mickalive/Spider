@@ -1,9 +1,9 @@
 {
   "stage": "director",
-  "category": "DIRECTOR_FAILURE",
-  "message": "stage exited with code 66",
+  "category": "VALIDATION_FAILURE",
+  "message": "invalid claim update status: SURVIVES_NARROW",
   "retryable": false,
-  "recorded_at": "2026-09-05T04:43:21.576216+00:00",
-  "github_run_id": "33945226153",
+  "recorded_at": "2026-09-05T08:43:16.783073+00:00",
+  "github_run_id": "33955871036",
   "github_run_attempt": "1"
 }
