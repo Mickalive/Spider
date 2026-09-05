@@ -1,9 +1,9 @@
 {
   "stage": "execute",
-  "category": "VALIDATION_FAILURE",
-  "message": "invalid result outcome: FALSIFIED-IN-SETTING",
+  "category": "EXECUTION_FAILURE",
+  "message": "stage exited with code 66",
   "retryable": false,
-  "recorded_at": "2026-09-05T00:25:34.208543+00:00",
-  "github_run_id": "33932275169",
+  "recorded_at": "2026-09-05T04:44:42.010798+00:00",
+  "github_run_id": "33945226546",
   "github_run_attempt": "1"
 }
