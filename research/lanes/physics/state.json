@@ -1,14 +1,14 @@
 {
   "lane": "physics",
   "human_paused": false,
-  "active_experiment_id": "EXP-PHYSICS-33788037373",
-  "last_experiment_id": "EXP-PHYSICS-33528829431",
-  "last_verdict": "REVISE",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-PHYSICS-33788037373",
+  "last_verdict": "MEASUREMENT_INVALID",
   "continue_immediately": false,
-  "next_question": "Can a trajectory-grouped holdout evaluation with richer state representation (DOM/accessibility tree) and semantic actions reveal genuine action-conditioned transition structure on live Web pages with navigational density, replacing the coarse URL+hash representation that produced entropy inversion?",
+  "next_question": "Does a browser-based collection substrate with full DOM/accessibility tree state representation and semantic action selectors reveal action-conditioned transition structure on live Web pages with navigational density, beyond what HTTP fetch with URL-only representation can detect?",
   "promotion_ready": false,
-  "consecutive_failures": 12,
-  "updated_at": "2026-09-05T04:43:12.807742+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "d8af42ddf8a0c4910b1b55c1612c18a9e0e4b30a672e019f5c8b82203e0bba88"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-05T08:43:44.399160+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "35ac95937cd8eac6486b1df4c51150ae30a6e2cb3851fa326e5a93d2f2f62fad"
 }
