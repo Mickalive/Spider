@@ -1,0 +1,241 @@
+{
+  "observations": [
+    {
+      "condition_id": "literal-only-original",
+      "type": "resolution",
+      "status": "EXECUTABLE",
+      "mechanism_id": "literal-fetch-posts-1",
+      "bound_action": {
+        "method": "GET",
+        "url": "https://jsonplaceholder.typicode.com/posts/1"
+      },
+      "confidence": 0.95,
+      "reason": "applicability guards and confidence threshold passed",
+      "expected_status": "EXECUTABLE",
+      "expected_url": "https://jsonplaceholder.typicode.com/posts/1",
+      "expected_winning_mechanism": "literal-fetch-posts-1",
+      "match_expected_status": true,
+      "match_expected_url": true,
+      "match_expected_mechanism": true,
+      "role": "baseline"
+    },
+    {
+      "condition_id": "literal-only-unseen",
+      "type": "resolution",
+      "status": "EXECUTABLE",
+      "mechanism_id": "literal-fetch-posts-1",
+      "bound_action": {
+        "method": "GET",
+        "url": "https://jsonplaceholder.typicode.com/posts/1"
+      },
+      "confidence": 0.95,
+      "reason": "applicability guards and confidence threshold passed",
+      "expected_status": "EXECUTABLE",
+      "expected_url": "https://jsonplaceholder.typicode.com/posts/1",
+      "expected_winning_mechanism": "literal-fetch-posts-1",
+      "match_expected_status": true,
+      "match_expected_url": true,
+      "match_expected_mechanism": true,
+      "role": "baseline"
+    },
+    {
+      "condition_id": "param-only-original",
+      "type": "resolution",
+      "status": "EXECUTABLE",
+      "mechanism_id": "param-fetch-posts",
+      "bound_action": {
+        "method": "GET",
+        "url": "https://jsonplaceholder.typicode.com/posts/1"
+      },
+      "confidence": 0.95,
+      "reason": "applicability guards and confidence threshold passed",
+      "expected_status": "EXECUTABLE",
+      "expected_url": "https://jsonplaceholder.typicode.com/posts/1",
+      "expected_winning_mechanism": "param-fetch-posts",
+      "match_expected_status": true,
+      "match_expected_url": true,
+      "match_expected_mechanism": true,
+      "role": "baseline"
+    },
+    {
+      "condition_id": "param-only-unseen",
+      "type": "resolution",
+      "status": "EXECUTABLE",
+      "mechanism_id": "param-fetch-posts",
+      "bound_action": {
+        "method": "GET",
+        "url": "https://jsonplaceholder.typicode.com/posts/2"
+      },
+      "confidence": 0.95,
+      "reason": "applicability guards and confidence threshold passed",
+      "expected_status": "EXECUTABLE",
+      "expected_url": "https://jsonplaceholder.typicode.com/posts/2",
+      "expected_winning_mechanism": "param-fetch-posts",
+      "match_expected_status": true,
+      "match_expected_url": true,
+      "match_expected_mechanism": true,
+      "role": "baseline"
+    },
+    {
+      "condition_id": "confidence-disambiguate",
+      "type": "resolution",
+      "status": "EXECUTABLE",
+      "mechanism_id": "param-fetch-posts-high",
+      "bound_action": {
+        "method": "GET",
+        "url": "https://jsonplaceholder.typicode.com/posts/3"
+      },
+      "confidence": 0.98,
+      "reason": "applicability guards and confidence threshold passed",
+      "expected_status": "EXECUTABLE",
+      "expected_url": "https://jsonplaceholder.typicode.com/posts/3",
+      "expected_winning_mechanism": "param-fetch-posts-high",
+      "match_expected_status": true,
+      "match_expected_url": true,
+      "match_expected_mechanism": true,
+      "role": "baseline"
+    },
+    {
+      "condition_id": "multi-slot-beats-1-slot",
+      "type": "resolution",
+      "status": "EXECUTABLE",
+      "mechanism_id": "param-2slot",
+      "bound_action": {
+        "method": "GET",
+        "url": "https://jsonplaceholder.typicode.com/posts/3/tech"
+      },
+      "confidence": 0.95,
+      "reason": "applicability guards and confidence threshold passed",
+      "expected_status": "EXECUTABLE",
+      "expected_url": "https://jsonplaceholder.typicode.com/posts/3/tech",
+      "expected_winning_mechanism": "param-2slot",
+      "match_expected_status": true,
+      "match_expected_url": true,
+      "match_expected_mechanism": true,
+      "role": "intervention"
+    },
+    {
+      "condition_id": "template-only-vs-literal",
+      "type": "resolution",
+      "status": "EXECUTABLE",
+      "mechanism_id": "template-only-fetch",
+      "bound_action": {
+        "method": "GET",
+        "url": "https://jsonplaceholder.typicode.com/posts/3"
+      },
+      "confidence": 0.95,
+      "reason": "applicability guards and confidence threshold passed",
+      "expected_status": "EXECUTABLE",
+      "expected_url": null,
+      "expected_winning_mechanism": null,
+      "match_expected_status": true,
+      "match_expected_url": null,
+      "match_expected_mechanism": null,
+      "role": "intervention"
+    },
+    {
+      "condition_id": "template-only-vs-param",
+      "type": "resolution",
+      "status": "EXECUTABLE",
+      "mechanism_id": "param-fetch-posts",
+      "bound_action": {
+        "method": "GET",
+        "url": "https://jsonplaceholder.typicode.com/posts/3"
+      },
+      "confidence": 0.95,
+      "reason": "applicability guards and confidence threshold passed",
+      "expected_status": "EXECUTABLE",
+      "expected_url": "https://jsonplaceholder.typicode.com/posts/3",
+      "expected_winning_mechanism": "param-fetch-posts",
+      "match_expected_status": true,
+      "match_expected_url": true,
+      "match_expected_mechanism": true,
+      "role": "intervention"
+    },
+    {
+      "condition_id": "equal-slot-tie-param-vs-param",
+      "type": "resolution",
+      "status": "EXECUTABLE",
+      "mechanism_id": "param-fetch-posts",
+      "bound_action": {
+        "method": "GET",
+        "url": "https://jsonplaceholder.typicode.com/posts/3"
+      },
+      "confidence": 0.95,
+      "reason": "applicability guards and confidence threshold passed",
+      "expected_status": "EXECUTABLE",
+      "expected_url": null,
+      "expected_winning_mechanism": null,
+      "match_expected_status": true,
+      "match_expected_url": null,
+      "match_expected_mechanism": null,
+      "role": "intervention"
+    },
+    {
+      "condition_id": "equal-slot-tie-lit-vs-lit",
+      "type": "resolution",
+      "status": "EXECUTABLE",
+      "mechanism_id": "literal-fetch-posts-1",
+      "bound_action": {
+        "method": "GET",
+        "url": "https://jsonplaceholder.typicode.com/posts/1"
+      },
+      "confidence": 0.95,
+      "reason": "applicability guards and confidence threshold passed",
+      "expected_status": "EXECUTABLE",
+      "expected_url": null,
+      "expected_winning_mechanism": null,
+      "match_expected_status": true,
+      "match_expected_url": null,
+      "match_expected_mechanism": null,
+      "role": "intervention"
+    },
+    {
+      "condition_id": "verify-200-match",
+      "type": "verify",
+      "verify_result": true,
+      "expected_verify": true,
+      "match_expected": true,
+      "verify_observed": {
+        "status": 200,
+        "body": "post content"
+      },
+      "role": "intervention"
+    },
+    {
+      "condition_id": "verify-404-mismatch",
+      "type": "verify",
+      "verify_result": false,
+      "expected_verify": false,
+      "match_expected": true,
+      "verify_observed": {
+        "status": 404,
+        "body": "not found"
+      },
+      "role": "intervention"
+    }
+  ],
+  "http_evidence": [
+    {
+      "condition": "verify-200-match",
+      "http_request": "GET /posts/1",
+      "response": {
+        "status": 200,
+        "body_snippet": "{\n  \"userId\": 1,\n  \"id\": 1,\n  \"title\": \"sunt aut facere repellat provident occaecati excepturi optio reprehenderit\",\n  \"body\": \"quia et suscipit\\nsuscipit recusandae consequuntur expedita et cum\\nrepr",
+        "error": null
+      }
+    },
+    {
+      "condition": "verify-404-mismatch",
+      "http_request": "GET /posts/99999",
+      "response": {
+        "status": 404,
+        "body_snippet": "{}",
+        "error": "HTTP Error 404: Not Found"
+      }
+    }
+  ],
+  "errors": [],
+  "fix_applied": true,
+  "fix_description": "candidates.sort(key=lambda m: (m.confidence, len(m.parameter_slots)), reverse=True)"
+}

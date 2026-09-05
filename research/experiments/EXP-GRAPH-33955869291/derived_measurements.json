@@ -1,0 +1,155 @@
+{
+  "baseline_pass": true,
+  "baseline_details": [
+    {
+      "id": "literal-only-original",
+      "pass": true
+    },
+    {
+      "id": "literal-only-unseen",
+      "pass": true
+    },
+    {
+      "id": "param-only-original",
+      "pass": true
+    },
+    {
+      "id": "param-only-unseen",
+      "pass": true
+    },
+    {
+      "id": "confidence-disambiguate",
+      "pass": true
+    }
+  ],
+  "multi_slot_dominance": true,
+  "multi_slot_details": {
+    "condition_id": "multi-slot-beats-1-slot",
+    "type": "resolution",
+    "status": "EXECUTABLE",
+    "mechanism_id": "param-2slot",
+    "bound_action": {
+      "method": "GET",
+      "url": "https://jsonplaceholder.typicode.com/posts/3/tech"
+    },
+    "confidence": 0.95,
+    "reason": "applicability guards and confidence threshold passed",
+    "expected_status": "EXECUTABLE",
+    "expected_url": "https://jsonplaceholder.typicode.com/posts/3/tech",
+    "expected_winning_mechanism": "param-2slot",
+    "match_expected_status": true,
+    "match_expected_url": true,
+    "match_expected_mechanism": true,
+    "role": "intervention"
+  },
+  "template_only_handling": true,
+  "template_only_vs_param_details": {
+    "condition_id": "template-only-vs-param",
+    "type": "resolution",
+    "status": "EXECUTABLE",
+    "mechanism_id": "param-fetch-posts",
+    "bound_action": {
+      "method": "GET",
+      "url": "https://jsonplaceholder.typicode.com/posts/3"
+    },
+    "confidence": 0.95,
+    "reason": "applicability guards and confidence threshold passed",
+    "expected_status": "EXECUTABLE",
+    "expected_url": "https://jsonplaceholder.typicode.com/posts/3",
+    "expected_winning_mechanism": "param-fetch-posts",
+    "match_expected_status": true,
+    "match_expected_url": true,
+    "match_expected_mechanism": true,
+    "role": "intervention"
+  },
+  "template_vs_literal_winner": "template-only-fetch",
+  "template_vs_literal_details": {
+    "condition_id": "template-only-vs-literal",
+    "type": "resolution",
+    "status": "EXECUTABLE",
+    "mechanism_id": "template-only-fetch",
+    "bound_action": {
+      "method": "GET",
+      "url": "https://jsonplaceholder.typicode.com/posts/3"
+    },
+    "confidence": 0.95,
+    "reason": "applicability guards and confidence threshold passed",
+    "expected_status": "EXECUTABLE",
+    "expected_url": null,
+    "expected_winning_mechanism": null,
+    "match_expected_status": true,
+    "match_expected_url": null,
+    "match_expected_mechanism": null,
+    "role": "intervention"
+  },
+  "equal_slot_tie_behavior": {
+    "param_vs_param_winner": "param-fetch-posts",
+    "lit_vs_lit_winner": "literal-fetch-posts-1",
+    "deterministic": true
+  },
+  "equal_slot_tie_param_details": {
+    "condition_id": "equal-slot-tie-param-vs-param",
+    "type": "resolution",
+    "status": "EXECUTABLE",
+    "mechanism_id": "param-fetch-posts",
+    "bound_action": {
+      "method": "GET",
+      "url": "https://jsonplaceholder.typicode.com/posts/3"
+    },
+    "confidence": 0.95,
+    "reason": "applicability guards and confidence threshold passed",
+    "expected_status": "EXECUTABLE",
+    "expected_url": null,
+    "expected_winning_mechanism": null,
+    "match_expected_status": true,
+    "match_expected_url": null,
+    "match_expected_mechanism": null,
+    "role": "intervention"
+  },
+  "equal_slot_tie_lit_details": {
+    "condition_id": "equal-slot-tie-lit-vs-lit",
+    "type": "resolution",
+    "status": "EXECUTABLE",
+    "mechanism_id": "literal-fetch-posts-1",
+    "bound_action": {
+      "method": "GET",
+      "url": "https://jsonplaceholder.typicode.com/posts/1"
+    },
+    "confidence": 0.95,
+    "reason": "applicability guards and confidence threshold passed",
+    "expected_status": "EXECUTABLE",
+    "expected_url": null,
+    "expected_winning_mechanism": null,
+    "match_expected_status": true,
+    "match_expected_url": null,
+    "match_expected_mechanism": null,
+    "role": "intervention"
+  },
+  "verify_correctness": true,
+  "verify_200_details": {
+    "condition_id": "verify-200-match",
+    "type": "verify",
+    "verify_result": true,
+    "expected_verify": true,
+    "match_expected": true,
+    "verify_observed": {
+      "status": 200,
+      "body": "post content"
+    },
+    "role": "intervention"
+  },
+  "verify_404_details": {
+    "condition_id": "verify-404-mismatch",
+    "type": "verify",
+    "verify_result": false,
+    "expected_verify": false,
+    "match_expected": true,
+    "verify_observed": {
+      "status": 404,
+      "body": "not found"
+    },
+    "role": "intervention"
+  },
+  "conditions_met": 5,
+  "conditions_required": 5
+}
