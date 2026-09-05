@@ -1,0 +1,60 @@
+{
+  "experiment_id": "EXP-PRODUCT-33974562602",
+  "lane": "product",
+  "created_at": "2026-09-05T15:25:34.767777+00:00",
+  "executed_at": "2026-09-05T16:00:00Z",
+  "github_run_id": "33974562602",
+  "base_sha": "f5821da80d4f0b831723c553b829a6517ae8197c",
+  "frozen_files": {
+    "request.json": "f3ac6e2ab30480ed7370041882af1fc9ac886489f7fe1668772593145237246f",
+    "spec.json": "a657916036ecf1ed7b98cde2cbcae88cd226a1a68ce5a34397f0d3bcd94a4607",
+    "prereg.md": "bb91946ce19a0b2f2acbf34293d665ded45ccfa5c658d637813d624f906ad052"
+  },
+  "code_files": {
+    "src/spider/kernel.py": {
+      "sha256": "f2e8043de03f5191eef34b3cf57c9cd7ab144954179492f0b546c85ffcc461cf",
+      "role": "code under test",
+      "note": "Functions ported from EXP-PRODUCT-33741671686/run_experiment.py. Includes _extract_varying_values_multi, distill_parameterized method on SpiderKernel, and 6 helper functions."
+    },
+    "tests/test_kernel.py": {
+      "sha256": null,
+      "role": "existing tests",
+      "note": "3 tests pass (test_unknown_is_default, test_parameterized_mechanism_binds_only_when_guarded, test_invalidation_forces_abstention)"
+    }
+  },
+  "artifacts": {
+    "raw_evidence.json": {
+      "sha256": "27807c145c40337806195352dd8b1b74e4285567256511107104d8809f6e6b0c",
+      "path": "research/experiments/EXP-PRODUCT-33974562602/raw_evidence.json",
+      "role": "raw evidence"
+    },
+    "result.json": {
+      "sha256": "7d81a1915e5cca8189c26f03b6c3abf53d1d258ce274f2163dc5e8335cfa148e",
+      "path": "research/experiments/EXP-PRODUCT-33974562602/result.json",
+      "role": "result"
+    },
+    "run_experiment.py": {
+      "sha256": "666978465746159ec0e5c5cc1f35251dfbd5b08297e421741d61f95576f4454b",
+      "path": "research/experiments/EXP-PRODUCT-33974562602/run_experiment.py",
+      "role": "code"
+    }
+  },
+  "environment": {
+    "python_version": "3.12.14",
+    "platform": "linux",
+    "dependencies": ["pytest-9.1.1"],
+    "note": "No network, browser, or model calls. All tests are synthetic deterministic computation."
+  },
+  "reproduction": {
+    "command": "PYTHONPATH=src python research/experiments/EXP-PRODUCT-33974562602/run_experiment.py",
+    "working_directory": "/home/runner/work/Spider/Spider",
+    "expected_output": "raw_evidence.json with verdict KERNEL-INTEGRATION-FALSIFIED",
+    "note": "Results are deterministic. The same inputs produce the same outputs."
+  },
+  "parent_experiment": {
+    "experiment_id": "EXP-PRODUCT-33741671686",
+    "handoff_sha256": "ac4b40a6bdfd48a7c27d4db3ad9756eefa9efad6b12a01f731337968f35259af",
+    "relationship": "This experiment extends EXP-PRODUCT-33741671686 by porting the induction function into kernel.py and testing with full-value unseen parameters, noisy browser observations, and stronger null controls."
+  },
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b"
+}
