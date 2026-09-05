@@ -126,6 +126,31 @@
         "handoff.json": "ebb3de502513621de55c297a32023f20b6f87739cdf00b4d3db025d00f51187a"
       }
     },
+    "EXP-GRAPH-33816735314": {
+      "lane": "graph",
+      "request_id": "06732c53f5442eb75b2f1416",
+      "created_at": "2026-09-03T23:14:48.590859+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT"
+      ],
+      "question": "Does adding a parameter-slot-count secondary tie-break in kernel.py resolve() eliminate false accepts in mixed literal+parameterized registries at equal confidence, without breaking cold, literal-only, or parameter-only baselines?",
+      "audit_status": "PASS",
+      "decision": "COMPETITION-SAFE",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/graph",
+      "hashes": {
+        "request.json": "477aec3869b8fe6ad5875de8e24fd3e856930b1eb36c765efed3c901edbfe6e8",
+        "spec.json": "1139b11faccca9c276f50f167a79ea7f6a67b0d6ce180af27c08339d8a6aac9a",
+        "prereg.md": "0dc9d883d320500f3d2a8e2778bef6f5a0b6b22799a07da6ae83a6f8dcaa6198",
+        "freeze.json": "dbc20a430026a7a6f4f4367c731190f8e57b8bd23f0a773ee84bbaa58f00444b",
+        "result.json": "686cc7475f56a2df6e328b01e04a4305611320c21c450f1f8b6ebf5dfab0c2be",
+        "report.md": "74534f6ca350392ed789d463844974416cabb49f48737cae9e6cbd86f5354b82",
+        "provenance.json": "fef72f991337889dc7eece5406d0ff3fc311650cac52165bffa22c1959efcf4a",
+        "audit.json": "6c0653885f471d974bbde46e9121a0966fdbf86cc1329388b3b11d5e7e11f016",
+        "verdict.json": "a28434b0522854ce16252789b468ac27b386fd009d308e06c0479bd7b617f71e",
+        "handoff.json": "54d5cb70b85e95b6afae07f906224a7d6313eff2017280056ccc8780c78f4806"
+      }
+    },
     "EXP-INTEL-33528832113": {
       "lane": "intel",
       "request_id": "46d19fdaf32e996c0ab24bd7",
