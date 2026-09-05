@@ -1,9 +1,0 @@
-{
-  "stage": "execute",
-  "category": "EXECUTION_FAILURE",
-  "message": "stage exited with code 66",
-  "retryable": false,
-  "recorded_at": "2026-09-04T22:24:05.797322+00:00",
-  "github_run_id": "33925059838",
-  "github_run_attempt": "1"
-}
