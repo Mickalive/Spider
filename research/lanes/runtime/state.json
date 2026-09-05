@@ -7,8 +7,8 @@
   "continue_immediately": false,
   "next_question": "On production OAuth/OIDC providers (e.g., Auth0, Google, GitHub) with additional response variation (cache-Control, ETag, request IDs, rate-limit headers, chunked encoding, compressed bodies), does the HTTP fingerprint substrate maintain discrimination >0.5, and does the full vector exceed B-BODY-ONLY when standard headers vary independently with auth state?",
   "promotion_ready": false,
-  "consecutive_failures": 10,
-  "updated_at": "2026-09-05T21:42:39.287689+00:00",
+  "consecutive_failures": 11,
+  "updated_at": "2026-09-05T23:26:35.783747+00:00",
   "last_failure_retryable": false,
   "last_handoff_sha256": "7d45cc9a983861e0411c5344dd83326e9aab1b190e9b08637e9b8ad8ebfb24b2"
 }
