@@ -11,6 +11,209 @@ from .registry import MechanismRegistry
 
 _PARAMETER = re.compile(r"\$\{([A-Za-z_][A-Za-z0-9_]*)\}")
 
+# Pre-registered threshold for structure-similarity check (Fix C)
+_STRUCTURE_SIMILARITY_THRESHOLD = 0.3
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Multi-Parameter Induction Engine (ported from EXP-PRODUCT-33741671686)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+def _deep_get(obj: Any, path: tuple) -> Any:
+    """Get a nested value by path tuple. E.g., _deep_get(d, ('body', 'name'))."""
+    current = obj
+    for key in path:
+        if isinstance(current, dict) and key in current:
+            current = current[key]
+        else:
+            return None
+    return current
+
+
+def _deep_set(obj: dict, path: tuple, value: Any) -> None:
+    """Set a nested value by path tuple."""
+    current = obj
+    for key in path[:-1]:
+        if key not in current:
+            current[key] = {}
+        current = current[key]
+    current[path[-1]] = value
+
+
+def _collect_leaf_paths(obj: Any, prefix: tuple = ()) -> list[tuple]:
+    """Collect all leaf paths in a nested dict/list structure."""
+    paths = []
+    if isinstance(obj, dict):
+        for k, v in obj.items():
+            paths.extend(_collect_leaf_paths(v, prefix + (k,)))
+    elif isinstance(obj, list):
+        for i, item in enumerate(obj):
+            paths.extend(_collect_leaf_paths(item, prefix + (str(i),)))
+    else:
+        paths.append(prefix)
+    return paths
+
+
+def _common_prefix_and_suffix(values: list[str]) -> tuple[str, str, list[str]]:
+    """Find common prefix and suffix across a list of string values.
+    Returns (prefix, suffix, varying_middle_values).
+    """
+    if len(values) < 2:
+        return ("", "", values)
+
+    # Find common prefix
+    prefix = values[0]
+    for v in values[1:]:
+        while not v.startswith(prefix):
+            prefix = prefix[:-1]
+            if not prefix:
+                break
+
+    # Find common suffix (on the full strings, not after prefix removal)
+    suffix = values[0]
+    for v in values[1:]:
+        while not v.endswith(suffix):
+            suffix = suffix[1:]
+            if not suffix:
+                break
+
+    # Varying middle values: strip prefix and suffix from each value
+    middles = []
+    for v in values:
+        mid = v[len(prefix):]
+        if suffix and mid.endswith(suffix):
+            mid = mid[:-len(suffix)]
+        middles.append(mid)
+
+    return (prefix, suffix, middles)
+
+
+def _is_varying_field(field_values: list[Any]) -> bool:
+    """Check if a field genuinely varies across observations."""
+    if len(field_values) < 2:
+        return False
+    str_values = [json.dumps(v, sort_keys=True) for v in field_values]
+    return len(set(str_values)) > 1
+
+
+def _field_path_to_slot_name(field_path: tuple, values: list[str]) -> str:
+    """Generate a descriptive slot name from field path and observed values."""
+    last_seg = str(field_path[-1]).lower()
+    name = re.sub(r'[^a-z0-9_]', '_', last_seg)
+    name = re.sub(r'_+', '_', name).strip('_')
+    if not name:
+        name = "param"
+    return name
+
+
+def _extract_varying_values_multi(observations: list[Observation]) -> dict:
+    """Extract varying fields across observations with distinct slot naming.
+
+    Returns dict: {
+        'slots': {slot_name: {'field_path': tuple, 'prefix': str, 'suffix': str, 'values': list}},
+        'template': dict (action template with ${slot} placeholders),
+        'slot_count': int,
+    }
+    """
+    if len(observations) < 2:
+        return {'slots': {}, 'template': {}, 'slot_count': 0}
+
+    # ─── Fix C: Structure-similarity check ──────────────────────────────────
+    # Compute Jaccard similarity over leaf paths across observations.
+    # If mean pairwise similarity < threshold, observations are unrelated → return 0 slots.
+    all_obs_paths = [_collect_leaf_paths(obs.action) for obs in observations]
+    obs_path_sets = [set(paths) for paths in all_obs_paths]
+
+    if len(obs_path_sets) >= 2:
+        pairwise_sims = []
+        for i in range(len(obs_path_sets)):
+            for j in range(i + 1, len(obs_path_sets)):
+                intersection = obs_path_sets[i] & obs_path_sets[j]
+                union = obs_path_sets[i] | obs_path_sets[j]
+                if union:
+                    pairwise_sims.append(len(intersection) / len(union))
+                else:
+                    pairwise_sims.append(0.0)
+        mean_jaccard = sum(pairwise_sims) / len(pairwise_sims) if pairwise_sims else 0.0
+        if mean_jaccard < _STRUCTURE_SIMILARITY_THRESHOLD:
+            return {'slots': {}, 'template': {}, 'slot_count': 0, 'jaccard_similarity': mean_jaccard}
+
+    # Collect all leaf paths from the first observation's action
+    all_paths = set()
+    for obs in observations:
+        all_paths.update(_collect_leaf_paths(obs.action))
+
+    # Check each path for variation across observations
+    varying_fields = {}
+    for path in all_paths:
+        values = [_deep_get(obs.action, path) for obs in observations]
+        if _is_varying_field(values):
+            str_values = [str(v) for v in values if v is not None]
+            if str_values and all(isinstance(v, str) for v in values if v is not None):
+                varying_fields[path] = str_values
+            elif str_values:
+                varying_fields[path] = [json.dumps(v) for v in values if v is not None]
+
+    if not varying_fields:
+        return {'slots': {}, 'template': {}, 'slot_count': 0}
+
+    # ─── Fix B: Noise-field filtering ───────────────────────────────────────
+    # Filter out fields whose values lack common prefix/suffix structure.
+    # A field passes if and only if len(common_prefix) > 0 OR len(common_suffix) > 0.
+    filtered_fields = {}
+    for field_path, values in varying_fields.items():
+        prefix, suffix, _ = _common_prefix_and_suffix(values)
+        if len(prefix) > 0 or len(suffix) > 0:
+            filtered_fields[field_path] = values
+    # If all fields were filtered out, return 0 slots
+    if not filtered_fields:
+        return {'slots': {}, 'template': {}, 'slot_count': 0}
+    varying_fields = filtered_fields
+
+    # Create distinct slot names for each varying field
+    slots = {}
+    used_names = set()
+
+    for field_path, values in varying_fields.items():
+        base_name = _field_path_to_slot_name(field_path, values)
+        name = base_name
+        counter = 1
+        while name in used_names:
+            name = f"{base_name}_{counter}"
+            counter += 1
+        used_names.add(name)
+
+        prefix, suffix, middles = _common_prefix_and_suffix(values)
+
+        slots[name] = {
+            'field_path': field_path,
+            'prefix': prefix,
+            'suffix': suffix,
+            'values': middles,
+            'raw_values': values,
+        }
+
+    # Build template with ${slot} placeholders
+    template = json.loads(json.dumps(observations[0].action))
+
+    for slot_name, slot_info in slots.items():
+        field_path = slot_info['field_path']
+        prefix = slot_info['prefix']
+        suffix = slot_info['suffix']
+
+        if prefix or suffix:
+            template_val = f"{prefix}${{{slot_name}}}{suffix}"
+        else:
+            template_val = f"${{{slot_name}}}"
+
+        _deep_set(template, field_path, template_val)
+
+    return {
+        'slots': slots,
+        'template': template,
+        'slot_count': len(slots),
+    }
+
 
 def _matches(required: dict[str, Any], actual: dict[str, Any]) -> bool:
     return all(actual.get(k) == v for k, v in required.items())
@@ -37,6 +240,23 @@ def _bind(value: Any, params: dict[str, Any]) -> Any:
         full = _PARAMETER.fullmatch(value)
         if full:
             return params[full.group(1)]
+
+        # ─── Fix A: Double-prefix detection ─────────────────────────────────
+        # Check if any slot's param value already contains the surrounding
+        # template context (prefix + param + suffix = param). If so, the param
+        # is already a complete value and substituting it would double-wrap.
+        # We detect this by checking if the param value starts with the template
+        # prefix (text before ${slot}) and ends with the template suffix (text
+        # after ${slot}). When detected, we replace the ENTIRE template string
+        # with the param value directly, bypassing _PARAMETER.sub.
+        for match in _PARAMETER.finditer(value):
+            slot_name = match.group(1)
+            if slot_name in params:
+                prefix = value[:match.start()]
+                suffix = value[match.end():]
+                param_val = str(params[slot_name])
+                if prefix and suffix and param_val.startswith(prefix) and param_val.endswith(suffix):
+                    return param_val
 
         def replace(match: re.Match[str]) -> str:
             return str(params[match.group(1)])
@@ -88,6 +308,59 @@ class SpiderKernel:
             postconditions=dict(observation.next_state),
             evidence=[oid],
             confidence=0.5,
+        )
+
+    def distill_parameterized(
+        self,
+        observations: list[Observation],
+        mechanism_id: str = "param-multi",
+        intent: str | None = None,
+    ) -> Mechanism | None:
+        """Multi-parameter induction: extract multiple distinct parameter slots.
+
+        This extends single-parameter distill() to handle multiple varying fields
+        with distinct slot naming, prefix/suffix extraction, and template generation.
+        Includes three fixes from EXP-PRODUCT-33993747223:
+        - Fix A: Double-prefix detection in _bind()
+        - Fix B: Noise-field filtering in _extract_varying_values_multi()
+        - Fix C: Structure-similarity check for pattern absence
+        """
+        if not observations:
+            return None
+
+        successful = [obs for obs in observations if obs.success]
+        if not successful:
+            return None
+
+        result = _extract_varying_values_multi(successful)
+
+        if result['slot_count'] == 0:
+            return None
+
+        obs_intent = intent or successful[0].intent
+
+        # Merge preconditions from all observations (first observation)
+        preconditions = dict(successful[0].state)
+
+        # Postconditions from last observation
+        postconditions = dict(successful[-1].next_state)
+
+        # Build evidence list
+        evidence = [hashlib.sha256(json.dumps(obs.action, sort_keys=True).encode()).hexdigest()[:16]
+                    for obs in successful]
+
+        # Confidence: higher when more training observations agree
+        confidence = min(0.9, 0.5 + 0.1 * len(successful))
+
+        return Mechanism(
+            mechanism_id=mechanism_id,
+            intent=obs_intent,
+            preconditions=preconditions,
+            action_template=result['template'],
+            postconditions=postconditions,
+            parameter_slots=sorted(result['slots'].keys()),
+            evidence=evidence,
+            confidence=confidence,
         )
 
     def resolve(self, intent: str, context: dict[str, Any], params: dict[str, Any] | None = None) -> Resolution:
