@@ -151,6 +151,31 @@
         "handoff.json": "54d5cb70b85e95b6afae07f906224a7d6313eff2017280056ccc8780c78f4806"
       }
     },
+    "EXP-GRAPH-33955869291": {
+      "lane": "graph",
+      "request_id": "7be2948230c6159b3eff8eac",
+      "created_at": "2026-09-05T08:39:53.013395+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT"
+      ],
+      "question": "Does the parameter-slot-count tie-break generalize safely to multi-slot mechanisms (2 vs 1 slot), template-only params with parameter_slots=[] but template ${id}, equal-slot-count ties (0 vs 0 or 1 vs 1), and does verify() correctly reject non-matching postconditions for non-200 HTTP responses?",
+      "audit_status": "REVISE",
+      "decision": "SCOPE-LIMITED",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/graph",
+      "hashes": {
+        "request.json": "4b53acf9a0f23b2434203d8fa79bebc7409de22a560f47020e98c775c0fd3aa0",
+        "spec.json": "47ed4dd06d33c3f34413753b35c47b3108a35f0c5e00a7b1f9172c33fd3e3d33",
+        "prereg.md": "4b27a8ca40ea084dcc44708e3040158ba9d5347a0d00e9620677effd7ca8135c",
+        "freeze.json": "4a712b5e7d00765d9ae4af975612a6bce8f6dd27b7bba0bd204aa0b2de568497",
+        "result.json": "2863edbfce87739ce6f14c80f5c3378066107370c366dd8e841c6552c6bf4554",
+        "report.md": "53711a1485b0652068b51040cade6e24cb8a976c760625db738f50d68a311b21",
+        "provenance.json": "395e39d0b2088b14ca29daf8f3ab2539634166d4e1410969f84b469a30c1ab8b",
+        "audit.json": "d179f2624851ab1715b5858ed75ac9a3facba7a95ea85a97f396a3e0e94adab6",
+        "verdict.json": "07f75b8b3bbae3b148a9531cf06b2dc0508ba1a0949bc520af98f285fb5767b4",
+        "handoff.json": "423be67d7374d5c7fb271c44146735e754ab46708b396bdaedb8dd99d93354d4"
+      }
+    },
     "EXP-INTEL-33528832113": {
       "lane": "intel",
       "request_id": "46d19fdaf32e996c0ab24bd7",
