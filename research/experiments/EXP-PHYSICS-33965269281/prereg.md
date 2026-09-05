@@ -32,7 +32,7 @@ Playwright is now available in the execution environment (playwright 1.62.0, Chr
 - JavaScript execution (handling SPAs and dynamic content)
 - Reliable link extraction with rendered text
 
-This experiment directly tests whether the representation was the limiting factor in the prior measurement failure.
+This experiment directly tests whether the representation was the limiting factor in the prior measurement failure, with adequate sample size (>100 trajectories/site as recommended by parent handoff) to detect small effects after trajectory-grouped holdout.
 
 ### 3.3 What Changed from EXP-PHYSICS-33788037373
 
@@ -57,7 +57,7 @@ The random-policy null control will show no significant action-conditioned struc
 At least one live site (Wikipedia or Python docs) will show action-conditioned structure above shuffle after Bonferroni correction for 6 comparisons (p_corr < 0.05), with effect size (diff_SA_vs_shuffle) > 0.03.
 
 ### H5: Representation Improves Detection
-Browser-collected data will show higher diff_SA_vs_shuffle than the HTTP fetch baseline (0.03 for Python docs, 0.0 for Wikipedia) on the same sites, demonstrating that richer state representation reveals structure hidden by URL-only identity.
+Browser-collected data will show higher diff_SA_vs_shuffle than the HTTP fetch baseline (0.03 for Python docs, 0.0 for Wikipedia) on the same sites, with adequate power (>= 100 trajectories/site), demonstrating that richer state representation reveals structure hidden by URL-only identity.
 
 ## 5. Data Collection
 
@@ -81,18 +81,18 @@ Browser-collected data will show higher diff_SA_vs_shuffle than the HTTP fetch b
 **Site 1: en.wikipedia.org**
 - Start URL: https://en.wikipedia.org/wiki/Web_browser
 - Collection: Follow internal links (same domain only)
-- Target: 20+ trajectories, 8-10 steps each
+- Target: 100+ trajectories, 8 steps each
 - Navigational density: high (dense internal link structure)
 
 **Site 2: docs.python.org**
 - Start URL: https://docs.python.org/3/library/index.html
 - Collection: Follow internal links (same domain only)
-- Target: 20+ trajectories, 8-10 steps each
+- Target: 100+ trajectories, 8 steps each
 - Navigational density: high (dense documentation links)
 
 ### 5.4 Browser-Based Collection Protocol
 
-For each trajectory:
+For each trajectory (target: 100+ trajectories per site):
 1. Navigate to start URL using Playwright
 2. Wait for page load (networkidle)
 3. Extract state representation:
@@ -112,11 +112,11 @@ For each trajectory:
 
 ### 5.5 Sample Size
 
-- Synthetic positive control: 600 transitions (60 trajectories × 10 steps)
-- Null control: 300 transitions (30 trajectories × 10 steps)
-- Live Wikipedia: ≥ 160 transitions (20 trajectories × 8 steps)
-- Live Python docs: ≥ 160 transitions (20 trajectories × 8 steps)
-- Total: ≥ 1220 transitions
+- Synthetic positive control: 600 transitions (60 trajectories x 10 steps)
+- Null control: 300 transitions (30 trajectories x 10 steps)
+- Live Wikipedia: >= 800 transitions (100 trajectories x 8 steps)
+- Live Python docs: >= 800 transitions (100 trajectories x 8 steps)
+- Total: >= 2500 transitions
 
 ## 6. State and Action Representation
 
@@ -229,7 +229,7 @@ All of the following must pass or verdict is MEASUREMENT_INVALID:
 7. **Deterministic seeds**: All RNG uses random.Random(seed), not hash()
 8. **Temporal ordering**: Step indices monotonically increasing within trajectories
 9. **Artifact integrity**: result.json artifacts populated with sha256 hashes
-10. **Sample size**: ≥ 50 live transitions per site
+10. **Sample size**: >= 100 live transitions per site
 
 ## 11. Decision Rules
 
@@ -240,7 +240,7 @@ If ALL of:
 3. Null control passes (p > 0.05)
 4. At least one live site shows SA vs shuffle p < 0.05 after 6x Bonferroni correction
 5. All validity gates pass
-6. ≥ 50 live transitions per site
+6. >= 100 live transitions per site (>= 800 total live)
 7. diff_SA_vs_shuffle on at least one site > 0.03
 
 ### 11.2 FALSIFIED-IN-SETTING
@@ -258,22 +258,22 @@ If any validity gate fails or infrastructure prevents collection.
 - Validates browser-based collection as necessary for Physics measurement
 - Justifies investment in Playwright-based measurement substrates
 - C-WEB-DYNAMICS moves from HYPOTHESIS toward EXPERIMENTAL
-- C-MEAS-VALID strengthened (browser-based validation)
+- C-MEAS-VALID strengthened (browser-based validation, adequate sample size)
 
 ### 12.2 Negative Result (FALSIFIED-IN-SETTING)
-- Browser-based collection with full state does NOT reveal structure on these sites
+- Browser-based collection with full state does NOT reveal structure on these sites (with adequate power: >= 100 trajectories/site)
 - Constrains C-WEB-DYNAMICS to richer representations (visual layout, interaction sequences) or different site types
-- Does NOT close Physics domain — only this detection method on these sites
+- Does NOT close Physics domain -- only this detection method on these sites
 - C-MEAS-VALID partially supported (pipeline validated, null control passes)
 
 ### 12.3 Invalid Result (MEASUREMENT_INVALID)
 - Pipeline needs debugging or infrastructure improvement
 - Not scientific evidence for or against
-- Prior MEASUREMENT_INVALID streak continues — consider fundamental redesign
+- Prior MEASUREMENT_INVALID streak continues -- consider fundamental redesign
 
 ## 13. Analysis Plan
 
-1. **Collect**: Playwright-based transitions on synthetic controls and 2 live sites
+1. **Collect**: Playwright-based transitions on synthetic controls and 2 live sites (>100 trajectories/site)
 2. **Split**: Trajectory-grouped 70/30 train/test (seed=42)
 3. **Fit**: Rule baseline (majority vote per (state, action)) on train
 4. **Evaluate**: Accuracy on test for rule, action-frequency, state-only, shuffle
