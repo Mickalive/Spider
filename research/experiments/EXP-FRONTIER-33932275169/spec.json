@@ -1,17 +1,31 @@
 {
   "experiment_id": "EXP-FRONTIER-33932275169",
   "lane": "frontier",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-WEB-DYNAMICS"],
+  "question": "Does TV distance or variance-of-means detect lambda-scaling of dynamical structure in non-affine (quadratic) synthetic Web transitions, or is the validated metric class limited to affine functions?",
+  "hypothesis": "When synthetic Web-like transitions use quadratic deterministic functions f(s,a) = (c_a * s^2 + b_a * s + d_a) mod 10 where E_S[f(S,a)] differs across actions (non-affine, non-permutation, potentially non-injective), both TV distance and variance-of-means will scale monotonically with the action-dependence parameter lambda. Specifically: at lambda=0, both metrics are indistinguishable from zero; at lambda=1, both metrics are maximal; intermediate lambda values produce intermediate values. This demonstrates that the metric generalizes beyond the affine function class validated in EXP-FRONTIER-33863640568.",
+  "falsifier": "TV distance does not increase monotonically with lambda (aggregate Spearman rho < 0.65, p > 0.05 one-sided), OR TV distance is indistinguishable from zero at lambda=1 (permutation test p > 0.05), OR TV distance is significantly non-zero at lambda=0 (permutation test p < 0.05), OR positive control fails (TV at lambda=1 < function-specific analytical threshold across all 3 functions), OR variance-of-means fails to show monotonic scaling (Spearman rho < 0.5), OR results are inconsistent across functions (significant function x lambda interaction in two-way ANOVA, p < 0.05).",
+  "baselines": [
+    "TV distance between P(S_{t+1}|do(A=a)) distributions across actions — primary metric",
+    "Variance-of-means metric Var_a(E_S[do(A=a)]) — secondary metric retained from prior experiments",
+    "Frequency baseline: marginal next-state distribution P(S_{t+1}) provides expected heterogeneity under no action-dependence",
+    "Permutation null: action labels shuffled across transitions; interventional distributions identical across shuffled actions, yielding TV and het near zero"
+  ],
+  "positive_control": "At lambda=1 (fully action-determined transitions with quadratic functions), TV distance must exceed function-specific analytical thresholds. For quadratic functions f(s,a) = (c_a * s^2 + b_a * s + d_a) mod 10, the analytical TV at lambda=1 is computable from the known function parameters. Threshold: TV at lambda=1 > 0.3 for all 3 functions (conservative lower bound based on quadratic structure ensuring non-trivial action-dependent spread).",
+  "null_control": "At lambda=0 (action-independent transitions), TV distance must be indistinguishable from zero (permutation test mean p > 0.05). This verifies the pipeline does not detect structure when absent.",
+  "measurement_validity": [
+    "Quadratic functions are analytically verifiable: E_S[(c_a * s^2 + b_a * s + d_a) mod 10] can be computed in closed form for known coefficients, confirming E_S[f(S,a)] differs across actions",
+    "3 independent quadratic functions with different coefficient sets test generalizability; each has known Var_a(E_S[f(S,a)]) and analytical TV for ground-truth comparison",
+    "Same lambda-ramping framework as prior experiments (lambda=0: pure noise; lambda=1: fully deterministic), ensuring comparability",
+    "6 lambda levels (0.0, 0.2, 0.4, 0.6, 0.8, 1.0) with 10 replications x 500 transitions per cell = 90,000 total transitions",
+    "Frozen random seed (seed=42) for reproducibility; each replication uses seed = func_seed * 10000 + rep_idx * 100 + 42",
+    "No target leakage: interventional distributions computed from DGP, not from held-out predictions",
+    "TV distance computed from empirical action-conditional next-state distributions (binned to 10 states), providing sensitivity to full distributional differences",
+    "Raw per-replication per-function per-lambda heterogeneity and TV tables persisted as hash-addressed artifacts for independent recomputation"
+  ],
+  "decision_rule": "SURVIVES_CURRENT_TEST if ALL of: (1) Aggregate Spearman rho(TV_by_lambda, lambda) >= 0.65 with p < 0.05 one-sided (single aggregate comparison); (2) Positive control passes: TV at lambda=1 > function-specific threshold across all 3 functions; (3) Null control passes: TV not significantly > 0 at lambda=0 (permutation test mean p > 0.05); (4) No significant function x lambda interaction for TV (two-way ANOVA p > 0.05); (5) Variance-of-means shows monotonic scaling (Spearman rho >= 0.5); (6) No pipeline errors. FALSIFIED-IN-SETTING if ANY of: (1) Aggregate Spearman rho < 0.65 or p > 0.05; (2) Positive control fails; (3) Null control fails; (4) Significant function x lambda interaction for TV; (5) Variance-of-means rho < 0.5. MEASUREMENT_INVALID if pipeline errors, degenerate functions (Var_a = 0 for all actions), or TV CV across replications > 0.5.",
+  "product_consequence_positive": "Validates that TV distance generalizes beyond affine functions to non-affine (quadratic) Web-like transitions. The metric can be used broadly for Web-dynamical regime detection in SPIDER's product pipeline. Different Web regions with different action-dependence levels can be detected through distributional analysis, informing where SPIDER should invest in action-conditioned mechanisms. Also establishes variance-of-means as a viable secondary metric for non-affine function classes.",
+  "product_consequence_negative": "If TV distance fails to scale with lambda for non-affine functions, the metric is specific to affine function classes and cannot be trusted for general Web regime detection. The Frontier lane should pivot to prediction-accuracy approaches (which worked for permutation functions in EXP-FRONTIER-33528827909) or develop new distributional metrics. Does NOT falsify C-WEB-DYNAMICS — only this specific detection method's generality is constrained.",
+  "estimated_cost": "Very low: pure synthetic data generation, analytical interventional distribution computation, offline variance/TV estimation. ~90,000 transitions total (6 levels x 3 functions x 10 replications x 500 transitions). No browser/network/model calls. No train/test splitting. Computation is O(N) per replication.",
+  "expected_information_gain": "High: This is the direct discriminating test of metric generalization. A positive result validates TV distance for broad use; a negative result constrains the metric class and redirects the lane. The experiment is minimal (3 functions, 6 lambda levels, 10 reps) yet maximally informative because it tests the critical unknown from the parent handoff."
 }
