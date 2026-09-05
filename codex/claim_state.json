@@ -75,6 +75,14 @@
         "claim_id": "C-PARAM-INHERIT",
         "status": "EXPERIMENTAL",
         "reason": "Survives frozen POC gate: unseen_resolution_rate=1.0 (10/10), binding_accuracy=1.0 (10/10), parameter_induction_fn_rate=0.0 (1/1 detected), literal_fail_rate=1.0 (0/10 EXECUTABLE), positive and null controls pass. Audit PASS confirms recomputation. Ceiling is narrow synthetic single-parameter single-field common-prefix level only; does NOT establish general parameter induction, multi-parameter capability, real-browser viability, or measured end-to-end economics."
+      },
+      {
+        "experiment_id": "EXP-PRODUCT-33741671686",
+        "lane": "product",
+        "decision": "MULTI-PARAM-SURVIVES \u2014 the frozen decision rule passes all 7 checks: C1 regression (slot\u22651, resolution=1.0, binding=1.0), C2 multi-param (slot=2, distinct, resolution=1.0, binding=1.0), C3 three-param (slot=3, distinct, resolution=1.0, binding=1.0), C4 non-identifier (slot=1, resolution=1.0, binding=1.0), C5 no-collision (slot=2, distinct, resolution=1.0, binding=1.0), null_control passed, no crashes. Producer metrics verified: 21/21 EXECUTABLE, 21/21 binding correct, 0/21 unsubstituted templates. Audit PASS confirms all recomputed metrics match producer. However, the claim ceiling remains narrow: synthetic POC implemented only in run_experiment.py (not in kernel.py), single-intent deterministic observations, trivial full-replacement parameterization for body fields, tautological confidence gate (0.8 == min_confidence 0.8), null control passes via intent mismatch not pattern absence, fragile positional slot-to-param mapping in harness. Do NOT promote to Product Core.",
+        "claim_id": "C-PARAM-INHERIT",
+        "status": "EXPERIMENTAL",
+        "reason": "Multi-parameter induction validated at synthetic POC level: the algorithm _extract_varying_values_multi in run_experiment.py (not in kernel.py) induces 1-3 distinct parameter slots from deterministic synthetic observations with varying path, body, and header fields, resolves EXECUTABLE with correct bound_action for all 21 unseen combinations, handles non-identifier values (URLs with prefix/suffix), avoids slot collisions via structural naming, and does not break single-parameter regression (C1). The claim ceiling is explicitly limited to: experiment-script-only implementation, synthetic deterministic data, trivial full-replacement body fields, tautological confidence, single-intent per condition. The audit identifies 8 required_fixes including kernel promotion, null control redesign, full-value unseen tests, and confidence calibration before any broader claim is justified. Next gate requires kernel integration of the induction function."
       }
     ],
     "C-CROSSSITE": [

@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-33741671686",
+  "lane": "product",
+  "target_lane": "product",
+  "next_question": "Does the multi-parameter induction function survive kernel integration and still produce correct distinct slot naming when shipped in src/spider/kernel.py (not experiment-script-only), and does it still work when training observations come from real browser sessions with noisy multi-step actions and varying preconditions?",
+  "why_next": "The synthetic POC validated the induction algorithm (21/21 EXECUTABLE, 21/21 binding correct, all 5 conditions pass decision rule) but the function lives only in run_experiment.py — it is not implemented in kernel.py. The audit identified 8 required_fixes including kernel promotion, null control redesign, full-value unseen tests, and confidence calibration. The natural next step is kernel integration: ship distill_parameterized_v2 / _extract_varying_values_multi into src/spider/kernel.py with unit tests, then test with real-browser noisy observations. This stays within Product lane code roots (src/spider/) and tests the next material generalization step.",
+  "carry_forward": {
+    "established": [
+      "Multi-parameter induction algorithm _extract_varying_values_multi in run_experiment.py induces distinct parameter slots (1-3) from deterministic synthetic observations with varying path, body, and header fields (C1-C5, 5 conditions)",
+      "All 21 unseen combinations (5+5+5+3+3) resolve EXECUTABLE with correct bound_action — unseen_resolution_rate=1.0, binding_accuracy=1.0",
+      "Non-identifier values (URLs with prefix/suffix https://site-...com/hook) are handled correctly — old is_id_like regex would reject these",
+      "Structural slot naming avoids collisions even when two fields have identical values (C5: path.id and body.user_id both A,B,C → slots [url, user_id] distinct)",
+      "Random naming resolves EXECUTABLE (5/5) but binding_accuracy=0.0 — structural naming provides semantic correctness that random naming lacks",
+      "Single-parameter regression (C1) still works after multi-parameter extension: slot=1, unseen_resolution=1.0, binding=1.0",
+      "Literal mechanism replay (confidence 0.5) fails on all unseen multi-param combinations (5/5 EXPLORE) — confirms novelty-handling gap persists"
+    ],
+    "rejected": [
+      "Promotion to Product Core — induction function is experiment-script-only, not kernel-shipped; audit explicitly says 'Do not promote to Product Core'",
+      "Null control as a valid spurious-parameterization falsifier — 4 hallucinated slots from random observations; passes via intent mismatch, not pattern absence",
+      "Literal mechanism viability for unseen multi-parameter combinations — confirmed to fail (5/5 EXPLORE, confidence below threshold)",
+      "Trivial full-replacement parameterization (body.name Alice/Bob/Charlie, body.title First/Second/Third) as evidence of prefix/suffix generalization — common prefix/suffix is empty for these fields, so template is ${name}/${title} full replacement; does not test prefix extraction"
+    ],
+    "unknown": [
+      "Does the induction function survive kernel integration (shipping into src/spider/kernel.py) with correct distinct slot naming?",
+      "Does parameter induction work when training observations come from real browser sessions with noisy multi-step actions and varying preconditions?",
+      "Does the induction handle nested structures (body.nested.field) or only flat leaf paths?",
+      "What is the false-positive rate when training observations share coincidental prefix/suffix (e.g., all URLs share 'https://')?",
+      "If caller supplies full unseen values (https://site-d.com/hook, req-4) instead of pre-stripped middles, does resolution correctly handle full values or produce double-prefix errors?",
+      "What is measured end-to-end cost saving for a real LLM agent (tokens, browser work, retrieval, verification, repair, latency) vs cold exploration?",
+      "Can confidence be learned/calibrated rather than hardcoded (0.5/0.8/0.9), and does the threshold correctly trade off EXECUTABLE vs EXPLORE vs UNKNOWN on real data?",
+      "Does the fragile positional slot-to-param mapping in the harness hide binding errors for other slot naming schemes or param orderings?",
+      "What is behavior for empty, special-char, very long, or non-string varying values?"
+    ],
+    "do_not_assume": [
+      "Do not assume the kernel supports multi-parameter induction — the induction function exists only in run_experiment.py, not in src/spider/kernel.py (sha256 46929b3a unchanged)",
+      "Do not assume the null_control passes correctly — it induces 4 hallucinated slots from random observations and passes via intent mismatch, not pattern-absence detection",
+      "Do not assume binding_accuracy=1.0 generalizes beyond tested single-char middles and trivial full-replacement body fields — only path/header fields exercise non-trivial prefix extraction",
+      "Do not assume the tautological confidence gate (0.8 == min_confidence 0.8) discriminates real-world EXECUTABLE vs EXPLORE — resolution_rate >= 0.9 is not discriminating; binding_accuracy is the real metric",
+      "Do not assume this POC generalizes to noisy, multi-step, cross-intent, cross-site, adversarial, or edge-case scenarios — all observations are synthetic single-intent deterministic",
+      "Do not assume the 0.5 cost_ratio_vs_literal_replay reflects real agent economics — B_COLD is a simulated constant (4 ops), not measured exploration",
+      "Do not assume full-value unseen params (https://site-d.com/hook, req-4) would succeed — test only pre-stripped middles (d, 4); full-value behavior is untested (audit finding #4)",
+      "Do not promote C-PARAM-INHERIT or any sub-claim to Product Core without kernel integration, null control fix, full-value unseen tests, and real-browser replication"
+    ]
+  },
+  "dependencies": [
+    "src/spider/kernel.py must be extended to include _extract_varying_values_multi / distill_parameterized_v2 with unit tests before claiming kernel capability",
+    "Null control must be redesigned: single intent with identical structure, no common prefix/suffix, assert slot_count==0 (not just resolution UNKNOWN)",
+    "Full-value unseen test set must be added (caller supplies https://site-d.com/hook not 'd') to verify prefix extraction is non-circular",
+    "Confidence calibration must be tested: randomize training count to vary confidence above/below min_confidence threshold",
+    "Fragile slot-to-param mapping in run_condition must be replaced with explicit spec-to-slot mapping table",
+    "For real-browser testing: runtime substrate must provide noisy multi-step observations with varying preconditions and schemas"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-33741671686/result.json -> metrics 21/21 EXECUTABLE, 21/21 binding, all conditions pass, controls pass",
+    "research/experiments/EXP-PRODUCT-33741671686/raw_evidence.json -> detailed per-condition resolution_results, induction_audit, baselines, controls",
+    "research/experiments/EXP-PRODUCT-33741671686/audit.json -> status PASS, claim_ceiling synthetic POC experiment-script-only, 8 required_fixes, all recomputed_metrics match",
+    "research/experiments/EXP-PRODUCT-33741671686/spec.json -> decision_rule 7 checks, conditions C1-C5, falsifier, baselines",
+    "research/experiments/EXP-PRODUCT-33741671686/run_experiment.py -> sha256 c19d2b497838, induction function implementation (not in kernel)",
+    "src/spider/kernel.py -> sha256 46929b3a951d, no multi-param induction code, resolve/_bind/_template_slots only",
+    "research/experiments/EXP-PRODUCT-33528829801/handoff.json -> parent chain established/rejected/unknown/do_not_assume",
+    "codex/claim_state.json -> C-PARAM-INHERIT current state EXPERIMENTAL"
+  ],
+  "recommended_action": "Next experiment in Product lane: ship distill_parameterized_v2 / _extract_varying_values_multi into src/spider/kernel.py with unit tests (kernel integration gate), fix null_control to detect pattern absence not just intent mismatch, add full-value unseen tests (caller supplies full URLs/IDs not pre-stripped middles), and calibrate confidence threshold. This tests kernel-level multi-parameter induction and addresses the 8 audit required_fixes before attempting real-browser noisy observations."
+}

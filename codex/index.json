@@ -307,6 +307,31 @@
         "handoff.json": "854e98a8808d570b229bf748bdb14e0ddd67d43faacb63db4b6cad8af0e92d7a"
       }
     },
+    "EXP-PRODUCT-33741671686": {
+      "lane": "product",
+      "request_id": "dcfebb9c0b39364946d91da2",
+      "created_at": "2026-09-03T09:57:29.684982+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT"
+      ],
+      "question": "Does parameter induction generalize to multi-parameter mechanisms with multiple distinct varying fields (path + body + headers), each receiving a distinct slot name, such that the induced mechanism resolves EXECUTABLE with correct bound_action for unseen multi-parameter combinations?",
+      "audit_status": "PASS",
+      "decision": "MULTI-PARAM-SURVIVES \u2014 the frozen decision rule passes all 7 checks: C1 regression (slot\u22651, resolution=1.0, binding=1.0), C2 multi-param (slot=2, distinct, resolution=1.0, binding=1.0), C3 three-param (slot=3, distinct, resolution=1.0, binding=1.0), C4 non-identifier (slot=1, resolution=1.0, binding=1.0), C5 no-collision (slot=2, distinct, resolution=1.0, binding=1.0), null_control passed, no crashes. Producer metrics verified: 21/21 EXECUTABLE, 21/21 binding correct, 0/21 unsubstituted templates. Audit PASS confirms all recomputed metrics match producer. However, the claim ceiling remains narrow: synthetic POC implemented only in run_experiment.py (not in kernel.py), single-intent deterministic observations, trivial full-replacement parameterization for body fields, tautological confidence gate (0.8 == min_confidence 0.8), null control passes via intent mismatch not pattern absence, fragile positional slot-to-param mapping in harness. Do NOT promote to Product Core.",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/product",
+      "hashes": {
+        "request.json": "4b1917a31ca05e7dd0c4cf6c890445f0c08c444ea0b199b514870af6e8b8c554",
+        "spec.json": "2f2a7c4b0fbe9d92813c249cf80fa1cb05659034c9fce12921a373506bd49f5b",
+        "prereg.md": "cf30b6f04081d7cc168bd4f8fbc317942f20f14d6808a30c3cc7939d39b05a0b",
+        "freeze.json": "3323e27885c1ac9839f144820fdd32a8cd233e12817bc0cba16a99535faaacad",
+        "result.json": "425dc2f8c084e802fddc360adf448b820c1bbdbffe29611534ab8621893a1870",
+        "report.md": "70d85e245d1f2412766eeb846a377fbc3f0f320fd9cc5a535f9839bae204ba1c",
+        "provenance.json": "f4d1ddeb2e4aece78d4445b03b1f39a262731ccc7dd378360fbcaedda2d69fd6",
+        "audit.json": "7e1893d6e5615dae06888f02c1808e16b7d8611d08c10cdc905bd1cb31508ef5",
+        "verdict.json": "289ead947d3d9c7efbb4e5dc3c8318c1559b305cdd4be956f5108e142ffa1883",
+        "handoff.json": "ac4b40a6bdfd48a7c27d4db3ad9756eefa9efad6b12a01f731337968f35259af"
+      }
+    },
     "EXP-RUNTIME-33528830833": {
       "lane": "runtime",
       "request_id": "cbf791e0cd3fe570d0ff0fd5",
