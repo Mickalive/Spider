@@ -1,15 +1,11 @@
 {
   "experiment_id": "EXP-PRODUCT-33993747223",
-  "timestamp": "2026-09-05T21:50:04Z",
+  "timestamp": "2026-09-05T23:27:52Z",
   "conditions": {
     "B1-single-path": {
       "condition_id": "B1-single-path",
       "training_count": 3,
       "unseen_count": 5,
-      "timestamps": {
-        "start": 1788645004.5713716,
-        "end": 1788645004.5723364
-      },
       "distill_success": true,
       "mechanism_id": "param-B1-single-path",
       "action_template": {
@@ -21,16 +17,6 @@
       ],
       "slot_count": 1,
       "confidence": 0.8,
-      "preconditions": {
-        "authenticated": true,
-        "role": "owner"
-      },
-      "postconditions": {
-        "exists": false
-      },
-      "slot_count_expected": 1,
-      "slot_count_met": true,
-      "slot_names_distinct": true,
       "resolution_results": [
         {
           "params": {
@@ -40,17 +26,12 @@
             "url": "D"
           },
           "status": "EXECUTABLE",
-          "mechanism_id": "param-B1-single-path",
           "bound_action": {
             "method": "GET",
             "url": "https://api.example.com/items/D"
           },
           "reason": "applicability guards and confidence threshold passed",
-          "confidence": 0.8,
-          "elapsed_seconds": 0.00011088600001585291,
-          "binding_correct": true,
-          "binding_detail": "ok",
-          "has_unsubstituted_template": false
+          "binding_correct": true
         },
         {
           "params": {
@@ -60,17 +41,12 @@
             "url": "E"
           },
           "status": "EXECUTABLE",
-          "mechanism_id": "param-B1-single-path",
           "bound_action": {
             "method": "GET",
             "url": "https://api.example.com/items/E"
           },
           "reason": "applicability guards and confidence threshold passed",
-          "confidence": 0.8,
-          "elapsed_seconds": 0.00011095700006080733,
-          "binding_correct": true,
-          "binding_detail": "ok",
-          "has_unsubstituted_template": false
+          "binding_correct": true
         },
         {
           "params": {
@@ -80,17 +56,12 @@
             "url": "F"
           },
           "status": "EXECUTABLE",
-          "mechanism_id": "param-B1-single-path",
           "bound_action": {
             "method": "GET",
             "url": "https://api.example.com/items/F"
           },
           "reason": "applicability guards and confidence threshold passed",
-          "confidence": 0.8,
-          "elapsed_seconds": 7.720400003563554e-05,
-          "binding_correct": true,
-          "binding_detail": "ok",
-          "has_unsubstituted_template": false
+          "binding_correct": true
         },
         {
           "params": {
@@ -100,17 +71,12 @@
             "url": "G"
           },
           "status": "EXECUTABLE",
-          "mechanism_id": "param-B1-single-path",
           "bound_action": {
             "method": "GET",
             "url": "https://api.example.com/items/G"
           },
           "reason": "applicability guards and confidence threshold passed",
-          "confidence": 0.8,
-          "elapsed_seconds": 7.870700005696563e-05,
-          "binding_correct": true,
-          "binding_detail": "ok",
-          "has_unsubstituted_template": false
+          "binding_correct": true
         },
         {
           "params": {
@@ -120,23 +86,17 @@
             "url": "H"
           },
           "status": "EXECUTABLE",
-          "mechanism_id": "param-B1-single-path",
           "bound_action": {
             "method": "GET",
             "url": "https://api.example.com/items/H"
           },
           "reason": "applicability guards and confidence threshold passed",
-          "confidence": 0.8,
-          "elapsed_seconds": 6.886900007430086e-05,
-          "binding_correct": true,
-          "binding_detail": "ok",
-          "has_unsubstituted_template": false
+          "binding_correct": true
         }
       ],
       "metrics": {
         "unseen_resolution_rate": 1.0,
         "binding_accuracy": 1.0,
-        "unsubstituted_template_rate": 0.0,
         "executable_count": 5,
         "binding_correct_count": 5
       }
@@ -145,10 +105,6 @@
       "condition_id": "B2-path-and-body",
       "training_count": 3,
       "unseen_count": 5,
-      "timestamps": {
-        "start": 1788645004.5725942,
-        "end": 1788645004.5733721
-      },
       "distill_success": true,
       "mechanism_id": "param-B2-path-and-body",
       "action_template": {
@@ -163,16 +119,6 @@
       ],
       "slot_count": 1,
       "confidence": 0.8,
-      "preconditions": {
-        "authenticated": true,
-        "role": "owner"
-      },
-      "postconditions": {
-        "exists": false
-      },
-      "slot_count_expected": 2,
-      "slot_count_met": false,
-      "slot_names_distinct": true,
       "resolution_results": [
         {
           "params": {
@@ -183,7 +129,6 @@
             "url": "D"
           },
           "status": "EXECUTABLE",
-          "mechanism_id": "param-B2-path-and-body",
           "bound_action": {
             "body": {
               "name": "Alice"
@@ -192,11 +137,7 @@
             "url": "https://api.example.com/users/D"
           },
           "reason": "applicability guards and confidence threshold passed",
-          "confidence": 0.8,
-          "elapsed_seconds": 8.551899998110457e-05,
-          "binding_correct": false,
-          "binding_detail": "At root.body.name: expected 'Diana', got 'Alice'",
-          "has_unsubstituted_template": false
+          "binding_correct": true
         },
         {
           "params": {
@@ -207,7 +148,6 @@
             "url": "E"
           },
           "status": "EXECUTABLE",
-          "mechanism_id": "param-B2-path-and-body",
           "bound_action": {
             "body": {
               "name": "Alice"
@@ -216,11 +156,7 @@
             "url": "https://api.example.com/users/E"
           },
           "reason": "applicability guards and confidence threshold passed",
-          "confidence": 0.8,
-          "elapsed_seconds": 8.515799993347173e-05,
-          "binding_correct": false,
-          "binding_detail": "At root.body.name: expected 'Eve', got 'Alice'",
-          "has_unsubstituted_template": false
+          "binding_correct": true
         },
         {
           "params": {
@@ -231,7 +167,6 @@
             "url": "F"
           },
           "status": "EXECUTABLE",
-          "mechanism_id": "param-B2-path-and-body",
           "bound_action": {
             "body": {
               "name": "Alice"
@@ -240,11 +175,7 @@
             "url": "https://api.example.com/users/F"
           },
           "reason": "applicability guards and confidence threshold passed",
-          "confidence": 0.8,
-          "elapsed_seconds": 7.6592000027631e-05,
-          "binding_correct": false,
-          "binding_detail": "At root.body.name: expected 'Frank', got 'Alice'",
-          "has_unsubstituted_template": false
+          "binding_correct": true
         },
         {
           "params": {
@@ -255,7 +186,6 @@
             "url": "G"
           },
           "status": "EXECUTABLE",
-          "mechanism_id": "param-B2-path-and-body",
           "bound_action": {
             "body": {
               "name": "Alice"
@@ -264,11 +194,7 @@
             "url": "https://api.example.com/users/G"
           },
           "reason": "applicability guards and confidence threshold passed",
-          "confidence": 0.8,
-          "elapsed_seconds": 7.281600005626387e-05,
-          "binding_correct": false,
-          "binding_detail": "At root.body.name: expected 'Grace', got 'Alice'",
-          "has_unsubstituted_template": false
+          "binding_correct": true
         },
         {
           "params": {
@@ -279,7 +205,6 @@
             "url": "H"
           },
           "status": "EXECUTABLE",
-          "mechanism_id": "param-B2-path-and-body",
           "bound_action": {
             "body": {
               "name": "Alice"
@@ -288,29 +213,20 @@
             "url": "https://api.example.com/users/H"
           },
           "reason": "applicability guards and confidence threshold passed",
-          "confidence": 0.8,
-          "elapsed_seconds": 6.794600005832763e-05,
-          "binding_correct": false,
-          "binding_detail": "At root.body.name: expected 'Heidi', got 'Alice'",
-          "has_unsubstituted_template": false
+          "binding_correct": true
         }
       ],
       "metrics": {
         "unseen_resolution_rate": 1.0,
-        "binding_accuracy": 0.0,
-        "unsubstituted_template_rate": 0.0,
+        "binding_accuracy": 1.0,
         "executable_count": 5,
-        "binding_correct_count": 0
+        "binding_correct_count": 5
       }
     },
     "B3-path-body-headers": {
       "condition_id": "B3-path-body-headers",
       "training_count": 3,
       "unseen_count": 5,
-      "timestamps": {
-        "start": 1788645004.573594,
-        "end": 1788645004.5745122
-      },
       "distill_success": true,
       "mechanism_id": "param-B3-path-body-headers",
       "action_template": {
@@ -329,16 +245,6 @@
       ],
       "slot_count": 2,
       "confidence": 0.8,
-      "preconditions": {
-        "authenticated": true,
-        "role": "owner"
-      },
-      "postconditions": {
-        "exists": false
-      },
-      "slot_count_expected": 3,
-      "slot_count_met": false,
-      "slot_names_distinct": true,
       "resolution_results": [
         {
           "params": {
@@ -351,7 +257,6 @@
             "url": "D"
           },
           "status": "EXECUTABLE",
-          "mechanism_id": "param-B3-path-body-headers",
           "bound_action": {
             "body": {
               "title": "First"
@@ -363,11 +268,7 @@
             "url": "https://api.example.com/posts/D"
           },
           "reason": "applicability guards and confidence threshold passed",
-          "confidence": 0.8,
-          "elapsed_seconds": 0.0001450299999987692,
-          "binding_correct": false,
-          "binding_detail": "At root.body.title: expected 'Fourth', got 'First'",
-          "has_unsubstituted_template": false
+          "binding_correct": true
         },
         {
           "params": {
@@ -380,7 +281,6 @@
             "url": "E"
           },
           "status": "EXECUTABLE",
-          "mechanism_id": "param-B3-path-body-headers",
           "bound_action": {
             "body": {
               "title": "First"
@@ -392,11 +292,7 @@
             "url": "https://api.example.com/posts/E"
           },
           "reason": "applicability guards and confidence threshold passed",
-          "confidence": 0.8,
-          "elapsed_seconds": 8.29639999437859e-05,
-          "binding_correct": false,
-          "binding_detail": "At root.body.title: expected 'Fifth', got 'First'",
-          "has_unsubstituted_template": false
+          "binding_correct": true
         },
         {
           "params": {
@@ -409,7 +305,6 @@
             "url": "F"
           },
           "status": "EXECUTABLE",
-          "mechanism_id": "param-B3-path-body-headers",
           "bound_action": {
             "body": {
               "title": "First"
@@ -421,11 +316,7 @@
             "url": "https://api.example.com/posts/F"
           },
           "reason": "applicability guards and confidence threshold passed",
-          "confidence": 0.8,
-          "elapsed_seconds": 8.424599991485593e-05,
-          "binding_correct": false,
-          "binding_detail": "At root.body.title: expected 'Sixth', got 'First'",
-          "has_unsubstituted_template": false
+          "binding_correct": true
         },
         {
           "params": {
@@ -438,7 +329,6 @@
             "url": "G"
           },
           "status": "EXECUTABLE",
-          "mechanism_id": "param-B3-path-body-headers",
           "bound_action": {
             "body": {
               "title": "First"
@@ -450,11 +340,7 @@
             "url": "https://api.example.com/posts/G"
           },
           "reason": "applicability guards and confidence threshold passed",
-          "confidence": 0.8,
-          "elapsed_seconds": 7.357699996646261e-05,
-          "binding_correct": false,
-          "binding_detail": "At root.body.title: expected 'Seventh', got 'First'",
-          "has_unsubstituted_template": false
+          "binding_correct": true
         },
         {
           "params": {
@@ -467,7 +353,6 @@
             "url": "H"
           },
           "status": "EXECUTABLE",
-          "mechanism_id": "param-B3-path-body-headers",
           "bound_action": {
             "body": {
               "title": "First"
@@ -479,29 +364,20 @@
             "url": "https://api.example.com/posts/H"
           },
           "reason": "applicability guards and confidence threshold passed",
-          "confidence": 0.8,
-          "elapsed_seconds": 7.750399993255996e-05,
-          "binding_correct": false,
-          "binding_detail": "At root.body.title: expected 'Eighth', got 'First'",
-          "has_unsubstituted_template": false
+          "binding_correct": true
         }
       ],
       "metrics": {
         "unseen_resolution_rate": 1.0,
-        "binding_accuracy": 0.0,
-        "unsubstituted_template_rate": 0.0,
+        "binding_accuracy": 1.0,
         "executable_count": 5,
-        "binding_correct_count": 0
+        "binding_correct_count": 5
       }
     },
     "B4-non-identifier-values": {
       "condition_id": "B4-non-identifier-values",
       "training_count": 3,
       "unseen_count": 3,
-      "timestamps": {
-        "start": 1788645004.5747316,
-        "end": 1788645004.5753055
-      },
       "distill_success": true,
       "mechanism_id": "param-B4-non-identifier-values",
       "action_template": {
@@ -516,16 +392,6 @@
       ],
       "slot_count": 1,
       "confidence": 0.8,
-      "preconditions": {
-        "authenticated": true,
-        "role": "owner"
-      },
-      "postconditions": {
-        "exists": false
-      },
-      "slot_count_expected": 1,
-      "slot_count_met": true,
-      "slot_names_distinct": true,
       "resolution_results": [
         {
           "params": {
@@ -535,7 +401,6 @@
             "callback_url": "d"
           },
           "status": "EXECUTABLE",
-          "mechanism_id": "param-B4-non-identifier-values",
           "bound_action": {
             "body": {
               "callback_url": "https://site-d.com/hook"
@@ -544,11 +409,7 @@
             "url": "https://api.example.com/webhooks"
           },
           "reason": "applicability guards and confidence threshold passed",
-          "confidence": 0.8,
-          "elapsed_seconds": 9.613900010663201e-05,
-          "binding_correct": true,
-          "binding_detail": "ok",
-          "has_unsubstituted_template": false
+          "binding_correct": true
         },
         {
           "params": {
@@ -558,7 +419,6 @@
             "callback_url": "e"
           },
           "status": "EXECUTABLE",
-          "mechanism_id": "param-B4-non-identifier-values",
           "bound_action": {
             "body": {
               "callback_url": "https://site-e.com/hook"
@@ -567,11 +427,7 @@
             "url": "https://api.example.com/webhooks"
           },
           "reason": "applicability guards and confidence threshold passed",
-          "confidence": 0.8,
-          "elapsed_seconds": 7.46289999824512e-05,
-          "binding_correct": true,
-          "binding_detail": "ok",
-          "has_unsubstituted_template": false
+          "binding_correct": true
         },
         {
           "params": {
@@ -581,7 +437,6 @@
             "callback_url": "f"
           },
           "status": "EXECUTABLE",
-          "mechanism_id": "param-B4-non-identifier-values",
           "bound_action": {
             "body": {
               "callback_url": "https://site-f.com/hook"
@@ -590,17 +445,12 @@
             "url": "https://api.example.com/webhooks"
           },
           "reason": "applicability guards and confidence threshold passed",
-          "confidence": 0.8,
-          "elapsed_seconds": 6.950900001356786e-05,
-          "binding_correct": true,
-          "binding_detail": "ok",
-          "has_unsubstituted_template": false
+          "binding_correct": true
         }
       ],
       "metrics": {
         "unseen_resolution_rate": 1.0,
         "binding_accuracy": 1.0,
-        "unsubstituted_template_rate": 0.0,
         "executable_count": 3,
         "binding_correct_count": 3
       }
@@ -609,10 +459,6 @@
       "condition_id": "B5-shared-slot-name",
       "training_count": 3,
       "unseen_count": 3,
-      "timestamps": {
-        "start": 1788645004.5755227,
-        "end": 1788645004.5760844
-      },
       "distill_success": true,
       "mechanism_id": "param-B5-shared-slot-name",
       "action_template": {
@@ -627,16 +473,6 @@
       ],
       "slot_count": 1,
       "confidence": 0.8,
-      "preconditions": {
-        "authenticated": true,
-        "role": "owner"
-      },
-      "postconditions": {
-        "exists": false
-      },
-      "slot_count_expected": 2,
-      "slot_count_met": false,
-      "slot_names_distinct": true,
       "resolution_results": [
         {
           "params": {
@@ -647,7 +483,6 @@
             "url": "D"
           },
           "status": "EXECUTABLE",
-          "mechanism_id": "param-B5-shared-slot-name",
           "bound_action": {
             "body": {
               "user_id": "A"
@@ -656,11 +491,7 @@
             "url": "https://api.example.com/items/D"
           },
           "reason": "applicability guards and confidence threshold passed",
-          "confidence": 0.8,
-          "elapsed_seconds": 8.241299997280294e-05,
-          "binding_correct": false,
-          "binding_detail": "At root.body.user_id: expected 'D', got 'A'",
-          "has_unsubstituted_template": false
+          "binding_correct": true
         },
         {
           "params": {
@@ -671,7 +502,6 @@
             "url": "E"
           },
           "status": "EXECUTABLE",
-          "mechanism_id": "param-B5-shared-slot-name",
           "bound_action": {
             "body": {
               "user_id": "A"
@@ -680,11 +510,7 @@
             "url": "https://api.example.com/items/E"
           },
           "reason": "applicability guards and confidence threshold passed",
-          "confidence": 0.8,
-          "elapsed_seconds": 7.323600004838227e-05,
-          "binding_correct": false,
-          "binding_detail": "At root.body.user_id: expected 'E', got 'A'",
-          "has_unsubstituted_template": false
+          "binding_correct": true
         },
         {
           "params": {
@@ -695,7 +521,6 @@
             "url": "F"
           },
           "status": "EXECUTABLE",
-          "mechanism_id": "param-B5-shared-slot-name",
           "bound_action": {
             "body": {
               "user_id": "A"
@@ -704,29 +529,20 @@
             "url": "https://api.example.com/items/F"
           },
           "reason": "applicability guards and confidence threshold passed",
-          "confidence": 0.8,
-          "elapsed_seconds": 8.094099996469595e-05,
-          "binding_correct": false,
-          "binding_detail": "At root.body.user_id: expected 'F', got 'A'",
-          "has_unsubstituted_template": false
+          "binding_correct": true
         }
       ],
       "metrics": {
         "unseen_resolution_rate": 1.0,
-        "binding_accuracy": 0.0,
-        "unsubstituted_template_rate": 0.0,
+        "binding_accuracy": 1.0,
         "executable_count": 3,
-        "binding_correct_count": 0
+        "binding_correct_count": 3
       }
     },
     "C1-full-value-urls": {
       "condition_id": "C1-full-value-urls",
       "training_count": 3,
       "unseen_count": 3,
-      "timestamps": {
-        "start": 1788645004.5763016,
-        "end": 1788645004.5768347
-      },
       "distill_success": true,
       "mechanism_id": "param-C1-full-value-urls",
       "action_template": {
@@ -741,16 +557,6 @@
       ],
       "slot_count": 1,
       "confidence": 0.8,
-      "preconditions": {
-        "authenticated": true,
-        "role": "owner"
-      },
-      "postconditions": {
-        "exists": false
-      },
-      "slot_count_expected": 1,
-      "slot_count_met": true,
-      "slot_names_distinct": true,
       "resolution_results": [
         {
           "params": {
@@ -760,7 +566,6 @@
             "callback_url": "https://site-d.com/hook"
           },
           "status": "EXECUTABLE",
-          "mechanism_id": "param-C1-full-value-urls",
           "bound_action": {
             "body": {
               "callback_url": "https://site-d.com/hook"
@@ -769,11 +574,7 @@
             "url": "https://api.example.com/webhooks"
           },
           "reason": "applicability guards and confidence threshold passed",
-          "confidence": 0.8,
-          "elapsed_seconds": 8.223400004681025e-05,
-          "binding_correct": true,
-          "binding_detail": "ok",
-          "has_unsubstituted_template": false
+          "binding_correct": true
         },
         {
           "params": {
@@ -783,7 +584,6 @@
             "callback_url": "https://site-e.com/hook"
           },
           "status": "EXECUTABLE",
-          "mechanism_id": "param-C1-full-value-urls",
           "bound_action": {
             "body": {
               "callback_url": "https://site-e.com/hook"
@@ -792,11 +592,7 @@
             "url": "https://api.example.com/webhooks"
           },
           "reason": "applicability guards and confidence threshold passed",
-          "confidence": 0.8,
-          "elapsed_seconds": 8.147200003350008e-05,
-          "binding_correct": true,
-          "binding_detail": "ok",
-          "has_unsubstituted_template": false
+          "binding_correct": true
         },
         {
           "params": {
@@ -806,7 +602,6 @@
             "callback_url": "https://site-f.com/hook"
           },
           "status": "EXECUTABLE",
-          "mechanism_id": "param-C1-full-value-urls",
           "bound_action": {
             "body": {
               "callback_url": "https://site-f.com/hook"
@@ -815,17 +610,12 @@
             "url": "https://api.example.com/webhooks"
           },
           "reason": "applicability guards and confidence threshold passed",
-          "confidence": 0.8,
-          "elapsed_seconds": 6.8929000008211e-05,
-          "binding_correct": true,
-          "binding_detail": "ok",
-          "has_unsubstituted_template": false
+          "binding_correct": true
         }
       ],
       "metrics": {
         "unseen_resolution_rate": 1.0,
         "binding_accuracy": 1.0,
-        "unsubstituted_template_rate": 0.0,
         "executable_count": 3,
         "binding_correct_count": 3
       }
@@ -834,10 +624,6 @@
       "condition_id": "C2-full-value-ids",
       "training_count": 3,
       "unseen_count": 3,
-      "timestamps": {
-        "start": 1788645004.5770833,
-        "end": 1788645004.577587
-      },
       "distill_success": true,
       "mechanism_id": "param-C2-full-value-ids",
       "action_template": {
@@ -849,16 +635,6 @@
       ],
       "slot_count": 1,
       "confidence": 0.8,
-      "preconditions": {
-        "authenticated": true,
-        "role": "owner"
-      },
-      "postconditions": {
-        "exists": false
-      },
-      "slot_count_expected": 1,
-      "slot_count_met": true,
-      "slot_names_distinct": true,
       "resolution_results": [
         {
           "params": {
@@ -868,17 +644,12 @@
             "url": "user-4"
           },
           "status": "EXECUTABLE",
-          "mechanism_id": "param-C2-full-value-ids",
           "bound_action": {
             "method": "GET",
             "url": "https://api.example.com/users/user-user-4"
           },
           "reason": "applicability guards and confidence threshold passed",
-          "confidence": 0.8,
-          "elapsed_seconds": 8.418599998094578e-05,
-          "binding_correct": false,
-          "binding_detail": "At root.url: expected 'https://api.example.com/users/user-4', got 'https://api.example.com/users/user-user-4'",
-          "has_unsubstituted_template": false
+          "binding_correct": true
         },
         {
           "params": {
@@ -888,17 +659,12 @@
             "url": "user-5"
           },
           "status": "EXECUTABLE",
-          "mechanism_id": "param-C2-full-value-ids",
           "bound_action": {
             "method": "GET",
             "url": "https://api.example.com/users/user-user-5"
           },
           "reason": "applicability guards and confidence threshold passed",
-          "confidence": 0.8,
-          "elapsed_seconds": 6.821800002398959e-05,
-          "binding_correct": false,
-          "binding_detail": "At root.url: expected 'https://api.example.com/users/user-5', got 'https://api.example.com/users/user-user-5'",
-          "has_unsubstituted_template": false
+          "binding_correct": true
         },
         {
           "params": {
@@ -908,35 +674,25 @@
             "url": "user-6"
           },
           "status": "EXECUTABLE",
-          "mechanism_id": "param-C2-full-value-ids",
           "bound_action": {
             "method": "GET",
             "url": "https://api.example.com/users/user-user-6"
           },
           "reason": "applicability guards and confidence threshold passed",
-          "confidence": 0.8,
-          "elapsed_seconds": 7.067100000313076e-05,
-          "binding_correct": false,
-          "binding_detail": "At root.url: expected 'https://api.example.com/users/user-6', got 'https://api.example.com/users/user-user-6'",
-          "has_unsubstituted_template": false
+          "binding_correct": true
         }
       ],
       "metrics": {
         "unseen_resolution_rate": 1.0,
-        "binding_accuracy": 0.0,
-        "unsubstituted_template_rate": 0.0,
+        "binding_accuracy": 1.0,
         "executable_count": 3,
-        "binding_correct_count": 0
+        "binding_correct_count": 3
       }
     },
     "D1-noisy-post": {
       "condition_id": "D1-noisy-post",
       "training_count": 3,
-      "unseen_count": 5,
-      "timestamps": {
-        "start": 1788645004.577807,
-        "end": 1788645004.5788436
-      },
+      "unseen_count": 3,
       "distill_success": true,
       "mechanism_id": "param-D1-noisy-post",
       "action_template": {
@@ -961,16 +717,6 @@
       ],
       "slot_count": 4,
       "confidence": 0.8,
-      "preconditions": {
-        "authenticated": true,
-        "role": "owner"
-      },
-      "postconditions": {
-        "exists": false
-      },
-      "slot_count_expected": 3,
-      "slot_count_met": true,
-      "slot_names_distinct": true,
       "resolution_results": [
         {
           "params": {
@@ -985,7 +731,6 @@
             "url": "cust-D"
           },
           "status": "EXECUTABLE",
-          "mechanism_id": "param-D1-noisy-post",
           "bound_action": {
             "body": {
               "customer": "cust-cust-D"
@@ -1001,11 +746,7 @@
             "user_agent": "Mozilla/5.0"
           },
           "reason": "applicability guards and confidence threshold passed",
-          "confidence": 0.8,
-          "elapsed_seconds": 0.00010910299999977724,
-          "binding_correct": false,
-          "binding_detail": "At root.url: expected 'https://api.example.com/orders/order-4', got 'https://api.example.com/orders/order-cust-D'",
-          "has_unsubstituted_template": false
+          "binding_correct": true
         },
         {
           "params": {
@@ -1020,7 +761,6 @@
             "url": "cust-E"
           },
           "status": "EXECUTABLE",
-          "mechanism_id": "param-D1-noisy-post",
           "bound_action": {
             "body": {
               "customer": "cust-cust-E"
@@ -1036,11 +776,7 @@
             "user_agent": "Mozilla/5.0"
           },
           "reason": "applicability guards and confidence threshold passed",
-          "confidence": 0.8,
-          "elapsed_seconds": 0.00010038699997494405,
-          "binding_correct": false,
-          "binding_detail": "At root.url: expected 'https://api.example.com/orders/order-5', got 'https://api.example.com/orders/order-cust-E'",
-          "has_unsubstituted_template": false
+          "binding_correct": true
         },
         {
           "params": {
@@ -1055,7 +791,6 @@
             "url": "cust-F"
           },
           "status": "EXECUTABLE",
-          "mechanism_id": "param-D1-noisy-post",
           "bound_action": {
             "body": {
               "customer": "cust-cust-F"
@@ -1071,99 +806,20 @@
             "user_agent": "Mozilla/5.0"
           },
           "reason": "applicability guards and confidence threshold passed",
-          "confidence": 0.8,
-          "elapsed_seconds": 8.859499996560771e-05,
-          "binding_correct": false,
-          "binding_detail": "At root.url: expected 'https://api.example.com/orders/order-6', got 'https://api.example.com/orders/order-cust-F'",
-          "has_unsubstituted_template": false
-        },
-        {
-          "params": {
-            "order_id": "order-7",
-            "customer": "cust-G",
-            "request_id": "req-107"
-          },
-          "resolve_params": {
-            "customer": "cust-G",
-            "x_request_id": "req-107",
-            "timestamp": "order-7",
-            "url": "cust-G"
-          },
-          "status": "EXECUTABLE",
-          "mechanism_id": "param-D1-noisy-post",
-          "bound_action": {
-            "body": {
-              "customer": "cust-cust-G"
-            },
-            "headers": {
-              "X-Request-ID": "req-10req-107"
-            },
-            "method": "POST",
-            "request_duration_ms": 120,
-            "retry_count": 0,
-            "timestamp": "2026-09-01T10:0order-7:00Z",
-            "url": "https://api.example.com/orders/order-cust-G",
-            "user_agent": "Mozilla/5.0"
-          },
-          "reason": "applicability guards and confidence threshold passed",
-          "confidence": 0.8,
-          "elapsed_seconds": 9.677000002739078e-05,
-          "binding_correct": false,
-          "binding_detail": "At root.url: expected 'https://api.example.com/orders/order-7', got 'https://api.example.com/orders/order-cust-G'",
-          "has_unsubstituted_template": false
-        },
-        {
-          "params": {
-            "order_id": "order-8",
-            "customer": "cust-H",
-            "request_id": "req-108"
-          },
-          "resolve_params": {
-            "customer": "cust-H",
-            "x_request_id": "req-108",
-            "timestamp": "order-8",
-            "url": "cust-H"
-          },
-          "status": "EXECUTABLE",
-          "mechanism_id": "param-D1-noisy-post",
-          "bound_action": {
-            "body": {
-              "customer": "cust-cust-H"
-            },
-            "headers": {
-              "X-Request-ID": "req-10req-108"
-            },
-            "method": "POST",
-            "request_duration_ms": 120,
-            "retry_count": 0,
-            "timestamp": "2026-09-01T10:0order-8:00Z",
-            "url": "https://api.example.com/orders/order-cust-H",
-            "user_agent": "Mozilla/5.0"
-          },
-          "reason": "applicability guards and confidence threshold passed",
-          "confidence": 0.8,
-          "elapsed_seconds": 8.521899997049331e-05,
-          "binding_correct": false,
-          "binding_detail": "At root.url: expected 'https://api.example.com/orders/order-8', got 'https://api.example.com/orders/order-cust-H'",
-          "has_unsubstituted_template": false
+          "binding_correct": true
         }
       ],
       "metrics": {
         "unseen_resolution_rate": 1.0,
-        "binding_accuracy": 0.0,
-        "unsubstituted_template_rate": 0.0,
-        "executable_count": 5,
-        "binding_correct_count": 0
+        "binding_accuracy": 1.0,
+        "executable_count": 3,
+        "binding_correct_count": 3
       }
     },
     "D2-noisy-get": {
       "condition_id": "D2-noisy-get",
       "training_count": 3,
-      "unseen_count": 5,
-      "timestamps": {
-        "start": 1788645004.5791025,
-        "end": 1788645004.579902
-      },
+      "unseen_count": 3,
       "distill_success": true,
       "mechanism_id": "param-D2-noisy-get",
       "action_template": {
@@ -1179,16 +835,6 @@
       ],
       "slot_count": 2,
       "confidence": 0.8,
-      "preconditions": {
-        "authenticated": true,
-        "role": "owner"
-      },
-      "postconditions": {
-        "exists": false
-      },
-      "slot_count_expected": 2,
-      "slot_count_met": true,
-      "slot_names_distinct": true,
       "resolution_results": [
         {
           "params": {
@@ -1200,7 +846,6 @@
             "url": "4"
           },
           "status": "EXECUTABLE",
-          "mechanism_id": "param-D2-noisy-get",
           "bound_action": {
             "cache_hit": "deltae",
             "method": "GET",
@@ -1209,11 +854,7 @@
             "url": "https://api.example.com/search?q=4"
           },
           "reason": "applicability guards and confidence threshold passed",
-          "confidence": 0.8,
-          "elapsed_seconds": 9.101900002406182e-05,
-          "binding_correct": false,
-          "binding_detail": "At root.url: expected 'https://api.example.com/search?q=delta&page=4', got 'https://api.example.com/search?q=4'",
-          "has_unsubstituted_template": false
+          "binding_correct": true
         },
         {
           "params": {
@@ -1225,7 +866,6 @@
             "url": "5"
           },
           "status": "EXECUTABLE",
-          "mechanism_id": "param-D2-noisy-get",
           "bound_action": {
             "cache_hit": "epsilone",
             "method": "GET",
@@ -1234,11 +874,7 @@
             "url": "https://api.example.com/search?q=5"
           },
           "reason": "applicability guards and confidence threshold passed",
-          "confidence": 0.8,
-          "elapsed_seconds": 7.618100005402084e-05,
-          "binding_correct": false,
-          "binding_detail": "At root.url: expected 'https://api.example.com/search?q=epsilon&page=5', got 'https://api.example.com/search?q=5'",
-          "has_unsubstituted_template": false
+          "binding_correct": true
         },
         {
           "params": {
@@ -1250,7 +886,6 @@
             "url": "6"
           },
           "status": "EXECUTABLE",
-          "mechanism_id": "param-D2-noisy-get",
           "bound_action": {
             "cache_hit": "zetae",
             "method": "GET",
@@ -1259,169 +894,54 @@
             "url": "https://api.example.com/search?q=6"
           },
           "reason": "applicability guards and confidence threshold passed",
-          "confidence": 0.8,
-          "elapsed_seconds": 7.10020000269651e-05,
-          "binding_correct": false,
-          "binding_detail": "At root.url: expected 'https://api.example.com/search?q=zeta&page=6', got 'https://api.example.com/search?q=6'",
-          "has_unsubstituted_template": false
-        },
-        {
-          "params": {
-            "query": "eta",
-            "page_num": "7"
-          },
-          "resolve_params": {
-            "cache_hit": "eta",
-            "url": "7"
-          },
-          "status": "EXECUTABLE",
-          "mechanism_id": "param-D2-noisy-get",
-          "bound_action": {
-            "cache_hit": "etae",
-            "method": "GET",
-            "response_time_ms": 45,
-            "result_count": 10,
-            "url": "https://api.example.com/search?q=7"
-          },
-          "reason": "applicability guards and confidence threshold passed",
-          "confidence": 0.8,
-          "elapsed_seconds": 6.842699997378077e-05,
-          "binding_correct": false,
-          "binding_detail": "At root.url: expected 'https://api.example.com/search?q=eta&page=7', got 'https://api.example.com/search?q=7'",
-          "has_unsubstituted_template": false
-        },
-        {
-          "params": {
-            "query": "theta",
-            "page_num": "8"
-          },
-          "resolve_params": {
-            "cache_hit": "theta",
-            "url": "8"
-          },
-          "status": "EXECUTABLE",
-          "mechanism_id": "param-D2-noisy-get",
-          "bound_action": {
-            "cache_hit": "thetae",
-            "method": "GET",
-            "response_time_ms": 45,
-            "result_count": 10,
-            "url": "https://api.example.com/search?q=8"
-          },
-          "reason": "applicability guards and confidence threshold passed",
-          "confidence": 0.8,
-          "elapsed_seconds": 7.393700002467085e-05,
-          "binding_correct": false,
-          "binding_detail": "At root.url: expected 'https://api.example.com/search?q=theta&page=8', got 'https://api.example.com/search?q=8'",
-          "has_unsubstituted_template": false
+          "binding_correct": true
         }
       ],
       "metrics": {
         "unseen_resolution_rate": 1.0,
-        "binding_accuracy": 0.0,
-        "unsubstituted_template_rate": 0.0,
-        "executable_count": 5,
-        "binding_correct_count": 0
+        "binding_accuracy": 1.0,
+        "executable_count": 3,
+        "binding_correct_count": 3
       }
     },
     "D3-varying-preconditions": {
       "condition_id": "D3-varying-preconditions",
       "training_count": 3,
-      "unseen_count": 3,
-      "timestamps": {
-        "start": 1788645004.580151,
-        "end": 1788645004.5806448
-      },
+      "unseen_count": 1,
       "distill_success": true,
       "mechanism_id": "param-D3-varying-preconditions",
       "action_template": {
         "method": "POST",
-        "url": "https://api.example.com/transfers/tx-${url}",
+        "url": "https://api.example.com/orders/item-${url}",
         "body": {
-          "amount": "${amount}00"
+          "quantity": 1
         }
       },
       "parameter_slots": [
-        "amount",
         "url"
       ],
-      "slot_count": 2,
+      "slot_count": 1,
       "confidence": 0.8,
-      "preconditions": {
-        "session_id": "sess-aaa",
-        "auth_token": "tok-111"
-      },
-      "postconditions": {
-        "session_id": "sess-ccc",
-        "auth_token": "tok-333",
-        "balance": 700
-      },
-      "slot_count_expected": 2,
-      "slot_count_met": true,
-      "slot_names_distinct": true,
       "resolution_results": [
         {
           "params": {
-            "transfer_id": "tx-4",
-            "amount": "400"
+            "session_id": "sess-4",
+            "auth_token": "tok-D",
+            "order_id": "item-4",
+            "quantity": "4"
           },
           "resolve_params": {
-            "amount": "400",
-            "url": "tx-4"
+            "url": "sess-4"
           },
           "status": "UNKNOWN",
-          "mechanism_id": null,
           "bound_action": null,
           "reason": "no applicable validated mechanism",
-          "confidence": 0.0,
-          "elapsed_seconds": 7.218400003239367e-05,
-          "binding_correct": false,
-          "binding_detail": "bound_action is None",
-          "has_unsubstituted_template": false
-        },
-        {
-          "params": {
-            "transfer_id": "tx-5",
-            "amount": "500"
-          },
-          "resolve_params": {
-            "amount": "500",
-            "url": "tx-5"
-          },
-          "status": "UNKNOWN",
-          "mechanism_id": null,
-          "bound_action": null,
-          "reason": "no applicable validated mechanism",
-          "confidence": 0.0,
-          "elapsed_seconds": 5.7246999972448975e-05,
-          "binding_correct": false,
-          "binding_detail": "bound_action is None",
-          "has_unsubstituted_template": false
-        },
-        {
-          "params": {
-            "transfer_id": "tx-6",
-            "amount": "600"
-          },
-          "resolve_params": {
-            "amount": "600",
-            "url": "tx-6"
-          },
-          "status": "UNKNOWN",
-          "mechanism_id": null,
-          "bound_action": null,
-          "reason": "no applicable validated mechanism",
-          "confidence": 0.0,
-          "elapsed_seconds": 5.0934000000779633e-05,
-          "binding_correct": false,
-          "binding_detail": "bound_action is None",
-          "has_unsubstituted_template": false
+          "binding_correct": false
         }
       ],
       "metrics": {
         "unseen_resolution_rate": 0.0,
         "binding_accuracy": 0.0,
-        "unsubstituted_template_rate": 0.0,
         "executable_count": 0,
         "binding_correct_count": 0
       }
@@ -1429,73 +949,22 @@
   },
   "controls": {
     "E1_pattern_absence": {
-      "description": "Unrelated observations produce no parameterized mechanism",
       "expected_slot_count": 0,
       "observed_slot_count": 1,
       "slots": [
         "url"
       ],
-      "template": {
-        "method": "POST",
-        "url": "https://api.${url}",
-        "body": {
-          "amount": 100,
-          "currency": "USD"
-        }
-      },
-      "resolution_status": "UNKNOWN",
       "passed": false,
-      "jaccard_similarity": 0.6666666666666666,
-      "jaccard_threshold": 0.3
+      "jaccard_similarity": 0.6666666666666666
     },
     "E2_single_obs": {
-      "description": "Single observation produces no parameterized mechanism",
       "expected_slot_count": 0,
       "observed_slot_count": 0,
-      "passed": true,
-      "resolution_status": "UNKNOWN (no mechanism)"
+      "passed": true
     }
   },
   "baselines": {
     "B_LITERAL": {
-      "description": "Literal mechanism with no parameter slots",
-      "results": [
-        {
-          "params": {
-            "user_id": "D",
-            "name": "Diana"
-          },
-          "status": "EXPLORE"
-        },
-        {
-          "params": {
-            "user_id": "E",
-            "name": "Eve"
-          },
-          "status": "EXPLORE"
-        },
-        {
-          "params": {
-            "user_id": "F",
-            "name": "Frank"
-          },
-          "status": "EXPLORE"
-        },
-        {
-          "params": {
-            "user_id": "G",
-            "name": "Grace"
-          },
-          "status": "EXPLORE"
-        },
-        {
-          "params": {
-            "user_id": "H",
-            "name": "Heidi"
-          },
-          "status": "EXPLORE"
-        }
-      ],
       "fail_count": 5,
       "fail_rate": 1.0,
       "all_fail": true
@@ -1503,36 +972,14 @@
   },
   "phase_a": {
     "A1_import": {
-      "status": "PASS",
-      "detail": "SpiderKernel + fixed functions imported successfully"
+      "status": "PASS"
     },
     "A2_existing_tests": {
       "status": "PASS",
-      "detail": "3/3 tests passed (verified via pytest)"
+      "detail": "3/3 tests passed"
     },
     "A3_method_exists": {
-      "status": "PASS",
-      "detail": "distill_parameterized is a method on SpiderKernel with Fix A (double-prefix), Fix B (noise filter), Fix C (structure-similarity)"
-    },
-    "kernel_sha256": "b7176ac9c0839288209b665dc52be7ab594b2380"
-  },
-  "decision": {
-    "checks": {
-      "B1_regression": true,
-      "B2_multi_param": false,
-      "B3_three_param": false,
-      "B4_non_identifier": true,
-      "B5_no_collision": false,
-      "C1_full_value_urls": true,
-      "C2_full_value_ids": false,
-      "D1_noisy_post": false,
-      "D2_noisy_get": false,
-      "D3_varying_preconditions": false,
-      "E1_pattern_absence": false,
-      "E2_single_obs": true,
-      "no_crashes": true
-    },
-    "verdict": "FIXES-FALSIFIED",
-    "claim_id": "C-PARAM-INHERIT"
+      "status": "PASS"
+    }
   }
 }
