@@ -1,17 +1,33 @@
 {
   "experiment_id": "EXP-PHYSICS-33965269281",
   "lane": "physics",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-MEAS-VALID", "C-WEB-DYNAMICS"],
+  "question": "Does a browser-based collection substrate with full DOM and accessibility tree state representation reveal action-conditioned transition structure on live Web pages with navigational density, beyond what HTTP fetch with URL-only representation can detect?",
+  "hypothesis": "The previous MEASUREMENT_INVALID result (EXP-PHYSICS-33788037373) was caused by representation degradation: HTTP fetch discarded DOM structure, accessibility tree, and form signals, collapsing composite state to URL-only identity. With Playwright-based collection extracting full DOM structure, accessibility tree, link texts, tag counts, and form signals as the state representation, and with four mandatory fixes from the prior handoff (target_href encoding, state representation storage, Bonferroni correction, artifact hashing), the corrected substrate will show: (a) the synthetic positive control discriminates (SA > AF, p < 0.05), (b) the null control passes (p > 0.05), and (c) at least one live site shows action-conditioned structure above shuffle (p < 0.05 after Bonferroni correction for 6 comparisons) at an effect size exceeding the HTTP fetch baseline (diff_SA_vs_shuffle > 0.03).",
+  "falsifier": "Any of: (1) positive control fails — action-conditioned accuracy not significantly > action-frequency on held-out data (permutation test p > 0.05); (2) null control fails — false positive on unstructured synthetic data (p < 0.05); (3) both live sites show no action-conditioned structure above shuffle after 6x Bonferroni correction (p_corr > 0.05 for both); (4) effect size on live sites is negligible (diff_SA_vs_shuffle < 0.05) even if nominally significant; (5) any validity gate fails (trajectory contamination, seed non-determinism, state representation incomplete, target_href encoding wrong); (6) infrastructure failure prevents data collection from >= 2 sites.",
+  "baselines": [
+    "Shuffle null: permute next-state labels within each trajectory (trajectory-grouped permutation, 1000 permutations)",
+    "Action-frequency null: predict most common next-state per action type, ignoring current state",
+    "First-order Markov null: predict next-state from current state only, ignoring action",
+    "In-sample action-conditioned predictor: fit and evaluate on same transitions (memorization diagnostic)",
+    "HTTP fetch baseline: comparison to EXP-PHYSICS-33788037373 results on same sites (Wikipedia, Python docs) with URL-only representation"
+  ],
+  "positive_control": "Synthetic deterministic navigation graph with 8 states and 3 action types. Actions overlap across states (e.g., 'click:nav' available from states A, B, C, D) so that action-frequency accuracy < action-conditioned accuracy, discriminating (S,A) from A alone. The graph has branching and cycles. Positive control passes if action-conditioned accuracy significantly > action-frequency accuracy on held-out trajectories (permutation test p < 0.05) AND held-out accuracy > 90%.",
+  "null_control": "Random-policy transitions on a 30-state unstructured synthetic page with reused action vocabulary (5 action types, 8 target_ids shared across states). Next-states are uniformly random, independent of action. Expected: action-conditioned accuracy ≈ action-frequency accuracy ≈ chance. Null control passes if permutation test p > 0.05 (no false positive).",
+  "measurement_validity": [
+    "Trajectory-grouped holdout: trajectories are the unit of analysis; train/test split is at trajectory level (no transition from same trajectory in both train and test), split ratio 70/30",
+    "Trajectory-grouped permutation null: resample by permuting next-state labels within trajectories (not across trajectories), independent RNG per permutation",
+    "Positive control with overlapping actions: at least 2 action types available from >= 3 states each, ensuring action-frequency accuracy cannot reach action-conditioned accuracy",
+    "No target leakage: action features never contain next-state URL or content; target_href set to destination URL (not source URL)",
+    "Full state representation stored: raw data contains url, title, link_texts, tag_counts, form_signals for every transition; state key computed from full composite",
+    "Deterministic seeds: random.Random(seed) for all random operations; no process-randomized hash()",
+    "Temporal ordering: within each trajectory, step indices are monotonically increasing",
+    "Browser-based collection: Playwright with Chromium headless; DOM parsed via page.content(); accessibility tree extracted via page.accessibility.snapshot(); JavaScript execution enabled",
+    "Artifact integrity: result.json artifacts populated with sha256 hashes for all raw/derived files"
+  ],
+  "decision_rule": "Verdict = SURVIVES_CURRENT_TEST if ALL of: (1) positive control discriminates — action-conditioned > action-frequency on held-out data (permutation test p < 0.05); (2) positive control passes accuracy threshold (>90% held-out); (3) null control passes (permutation test p > 0.05); (4) at least one live site shows action-conditioned structure above shuffle (p < 0.05 after Bonferroni correction for 3 null tests x 2 live sites = 6 comparisons); (5) all validity gates pass; (6) >= 50 live transitions collected from >= 2 sites; (7) diff_SA_vs_shuffle on browser-collected data > 0.03 (exceeding HTTP fetch baseline of 0.03). Verdict = FALSIFIED-IN-SETTING if (1)-(3) pass but (4) fails on all live sites with effect sizes < 0.05. Verdict = MEASUREMENT_INVALID if any validity gate fails or infrastructure prevents data collection.",
+  "product_consequence_positive": "Validates that browser-based collection with rich state representation is necessary for trustworthy Web dynamics measurement. Action-conditioned structure on live Web would justify investment in Playwright-based measurement substrates and richer state representations for the Physics program. First measurement-valid positive signal for C-WEB-DYNAMICS on live Web.",
+  "product_consequence_negative": "If browser-based collection with full DOM/accessibility tree shows no action-conditioned structure on live Web with navigational density, either (a) the Web genuinely lacks this structure at the tested representation level (URL + title + link_texts + tag_counts + form_signals + accessibility roles), or (b) the test sites are not representative of dynamical regimes. Physics lane should then consider (a) even richer representations (visual layout, CSS, interaction sequences), (b) different site types (SPAs, form-heavy, authenticated), or (c) alternative Physics programs (information-theoretic, causal, multi-scale). Does NOT close the Physics domain — only this specific detection method at this representation level on these sites.",
+  "estimated_cost": "Low-medium: Playwright + Chromium headless already installed. Synthetic controls are pure computation. Live collection requires browser automation (slower than HTTP fetch but still minutes per site). ~200-400 total transitions. No external API calls or model inference.",
+  "expected_information_gain": "High: This is the first measurement with browser-based collection and full state representation. The prior result was MEASUREMENT_INVALID due to representation degradation. This experiment directly tests whether the representation was the limiting factor. A positive result is the first trustworthy Web dynamics signal; a negative result constrains the search space to richer representations or different sites."
 }
