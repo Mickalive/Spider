@@ -1,0 +1,341 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-33863640568",
+  "lane": "frontier",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "spearman_rho_aggregate": 0.9762,
+    "spearman_p_one_sided": 1.7e-05,
+    "cohens_d_lambda1_vs_lambda0": 1.5416,
+    "heterogeneity_means_by_lambda": {
+      "0.0": 0.052259,
+      "0.1": 0.065132,
+      "0.2": 0.056859,
+      "0.3": 0.073155,
+      "0.4": 0.13184,
+      "0.5": 0.164934,
+      "0.7": 0.222619,
+      "1.0": 0.447009
+    },
+    "tv_means_by_lambda": {
+      "0.0": 0.191462,
+      "0.1": 0.199283,
+      "0.2": 0.26065,
+      "0.3": 0.32263,
+      "0.4": 0.414342,
+      "0.5": 0.504043,
+      "0.7": 0.675413,
+      "1.0": 0.94958
+    },
+    "per_function_spearman": [
+      {
+        "function": 1,
+        "seed": 42,
+        "rho": 0.9762,
+        "p_value_two_sided": 3.3e-05,
+        "p_value_one_sided": 1.7e-05
+      },
+      {
+        "function": 2,
+        "seed": 43,
+        "rho": 0.8571,
+        "p_value_two_sided": 0.00653,
+        "p_value_one_sided": 0.003265
+      },
+      {
+        "function": 3,
+        "seed": 44,
+        "rho": 0.8095,
+        "p_value_two_sided": 0.014903,
+        "p_value_one_sided": 0.007451
+      }
+    ],
+    "anova_results": {
+      "design": "3 functions x 8 lambda levels x 10 reps = 240 observations",
+      "full_model": {
+        "lambda_effect": {
+          "F": 76.4713,
+          "p_value": 0.0,
+          "df": 7
+        },
+        "function_effect": {
+          "F": 145.7405,
+          "p_value": 0.0,
+          "df": 2
+        },
+        "interaction_effect": {
+          "F": 25.7898,
+          "p_value": 0.0,
+          "df": 14
+        },
+        "residual_df": 216,
+        "model_r_squared": 0.8461
+      },
+      "interaction_pass": false,
+      "interaction_threshold_alpha": 0.05
+    },
+    "permutation_results": {
+      "lambda_0": {
+        "description": "Heterogeneity significantly > 0 at lambda=0 (should NOT be)",
+        "per_replication_p_values": [
+          0.932,
+          0.506,
+          0.075,
+          0.815,
+          0.062,
+          0.028,
+          0.061,
+          0.352,
+          0.7,
+          0.643,
+          0.336,
+          0.58,
+          0.573,
+          0.524,
+          0.593,
+          0.45,
+          0.975,
+          0.142,
+          0.751,
+          0.439,
+          0.692,
+          0.087,
+          0.44,
+          0.202,
+          0.796,
+          0.433,
+          0.632,
+          0.308,
+          0.147,
+          0.706
+        ],
+        "mean_p_value": 0.466,
+        "pass": true,
+        "threshold_alpha": 0.05,
+        "interpretation": "Null control passes if mean p > alpha (heterogeneity not significantly > 0)"
+      },
+      "lambda_1": {
+        "description": "Heterogeneity >= 0.5 at lambda=1 across all functions/replications",
+        "n_above_threshold": 11,
+        "total_measurements": 30,
+        "per_replication_p_values": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.01,
+          0.006,
+          0.033,
+          0.001,
+          0.003,
+          0.015,
+          0.039,
+          0.0,
+          0.0,
+          0.011,
+          0.024,
+          0.0,
+          0.0,
+          0.001,
+          0.014,
+          0.265,
+          0.145,
+          0.287,
+          0.002,
+          0.001
+        ],
+        "mean_p_value": 0.028567,
+        "pass": false,
+        "threshold_heterogeneity": 0.5,
+        "interpretation": "Positive control passes if all replications have het >= 0.5"
+      }
+    },
+    "analytical_heterogeneity": {
+      "42": {
+        "0.0": 0.0,
+        "0.1": 0.009218750000000005,
+        "0.2": 0.036875000000000026,
+        "0.3": 0.08296875000000008,
+        "0.4": 0.14749999999999994,
+        "0.5": 0.23046875,
+        "0.7": 0.4517187499999999,
+        "1.0": 0.921875
+      },
+      "43": {
+        "0.0": 0.0,
+        "0.1": 0.0017187499999999876,
+        "0.2": 0.006874999999999951,
+        "0.3": 0.015468750000000073,
+        "0.4": 0.027499999999999913,
+        "0.5": 0.04296875,
+        "0.7": 0.08421874999999983,
+        "1.0": 0.171875
+      },
+      "44": {
+        "0.0": 0.0,
+        "0.1": 0.0017187499999999879,
+        "0.2": 0.0068749999999999515,
+        "0.3": 0.015468750000000073,
+        "0.4": 0.027499999999999938,
+        "0.5": 0.04296875,
+        "0.7": 0.08421874999999983,
+        "1.0": 0.171875
+      }
+    },
+    "analytical_tv": {
+      "42": {
+        "0.0": 0.0,
+        "0.1": 0.08000000000000002,
+        "0.2": 0.16000000000000003,
+        "0.3": 0.24,
+        "0.4": 0.32000000000000006,
+        "0.5": 0.4,
+        "0.7": 0.56,
+        "1.0": 0.8
+      },
+      "43": {
+        "0.0": 0.0,
+        "0.1": 0.10000000000000003,
+        "0.2": 0.20000000000000007,
+        "0.3": 0.3000000000000001,
+        "0.4": 0.40000000000000013,
+        "0.5": 0.5000000000000001,
+        "0.7": 0.6999999999999998,
+        "1.0": 1.0
+      },
+      "44": {
+        "0.0": 0.0,
+        "0.1": 0.10000000000000003,
+        "0.2": 0.20000000000000007,
+        "0.3": 0.3000000000000001,
+        "0.4": 0.40000000000000013,
+        "0.5": 0.5000000000000001,
+        "0.7": 0.6999999999999998,
+        "1.0": 1.0
+      }
+    },
+    "tv_spearman_rho": 1.0,
+    "tv_spearman_p_one_sided": 0.0,
+    "tv_ge_het_by_lambda": {
+      "0.0": true,
+      "0.1": true,
+      "0.2": true,
+      "0.3": true,
+      "0.4": true,
+      "0.5": true,
+      "0.7": true,
+      "1.0": true
+    },
+    "effect_sizes": {
+      "cohens_d_lambda1_vs_lambda0": 1.5416,
+      "interpretation": "large",
+      "tv_cohens_d_lambda1_vs_lambda0": 13.4152,
+      "tv_interpretation": "large"
+    },
+    "monotonicity": {
+      "heterogeneity_monotonic": false,
+      "tv_monotonic": true
+    }
+  },
+  "controls": {
+    "positive_control": {
+      "description": "Heterogeneity >= 0.5 at lambda=1 across all functions",
+      "pass": false,
+      "heterogeneity_at_lambda1_mean": 0.447,
+      "heterogeneity_at_lambda1_min": 0.0624,
+      "heterogeneity_at_lambda1_max": 1.1089,
+      "n_above_threshold": 11,
+      "total_measurements": 30,
+      "evidence_ref": "metrics.permutation_results.lambda_1"
+    },
+    "null_control": {
+      "description": "Heterogeneity not significantly > 0 at lambda=0 (permutation p > 0.05)",
+      "pass": true,
+      "heterogeneity_at_lambda0_mean": 0.0523,
+      "permutation_test_mean_p": 0.466,
+      "evidence_ref": "metrics.permutation_results.lambda_0"
+    },
+    "permutation_null": {
+      "description": "Shuffled action labels yield heterogeneity near zero at all lambda levels",
+      "pass": true,
+      "note": "Verified analytically: when action labels are shuffled, E[S_{t+1}|do(A=a)] is identical for all actions, so heterogeneity=0",
+      "evidence_ref": "metrics.analytical_heterogeneity"
+    },
+    "function_invariance": {
+      "description": "No significant function x lambda interaction (two-way ANOVA p > 0.05)",
+      "pass": false,
+      "interaction_p_value": 0.0,
+      "evidence_ref": "metrics.anova_results.full_model.interaction_effect.p_value"
+    },
+    "monotonicity_sensitivity": {
+      "description": "Heterogeneity is monotonically non-decreasing with lambda",
+      "pass": false,
+      "heterogeneity_means_by_lambda": [
+        0.052259,
+        0.065132,
+        0.056859,
+        0.073155,
+        0.13184,
+        0.164934,
+        0.222619,
+        0.447009
+      ],
+      "tv_means_by_lambda": [
+        0.191462,
+        0.199283,
+        0.26065,
+        0.32263,
+        0.414342,
+        0.504043,
+        0.675413,
+        0.94958
+      ]
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-FRONTIER-33863640568/analyze.py",
+      "sha256": "480b359fa21f1d7f14095b365061f44c7a08fb9c55b787ca51b940f4fbc7f704",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-33863640568/result.json",
+      "sha256": "813bdea839170a6358ed8b4ffa6f04cb3f30ee62034fa42dd0ea67288215493e",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-33863640568/provenance.json",
+      "sha256": "9d48856c81a4ecdc1df79dc4560d7c3142ff8994c6ed3b56ad4b91a31aa56544",
+      "role": "derived"
+    }
+  ],
+  "observations": [
+    "All three affine functions are non-degenerate: Var_a(E_S[f(S,a)]) > 0 (0.921875, 0.171875, 0.171875).",
+    "Analytical heterogeneity at lambda=1 equals Var_a(E_S[f(S,a)]): 0.921875, 0.171875, 0.171875.",
+    "Positive control fails: only function seed=42 has het >= 0.5 at lambda=1 (0.921875). Functions 43 and 44 have het=0.171875 < 0.5.",
+    "Aggregate Spearman rho(het, lambda) computed; p-value assessed against threshold rho >= 0.65, p < 0.05.",
+    "TV distance provides orthogonal sensitivity; TV >= het at each lambda level as expected.",
+    "Monotonicity of het and TV across lambda levels assessed.",
+    "Permutation test at lambda=0 verifies null control.",
+    "Two-way ANOVA tests function invariance."
+  ],
+  "validity_notes": [
+    "The experiment pipeline executed correctly with no errors. The negative result (if any) is scientific, not infrastructural.",
+    "The positive control threshold (het >= 0.5 at lambda=1) is strict; two functions have het=0.171875, which is non-zero but below threshold. This indicates the functions are non-degenerate but produce moderate heterogeneity.",
+    "The metric is well-defined and the pipeline is correct. The decision rule is applied as frozen.",
+    "TV distance is strictly >= het at each lambda level, confirming distributional structure beyond first moments.",
+    "Synthetic affine functions may not represent real Web dynamics; this experiment validates the metric, not the Web."
+  ],
+  "unresolved": [
+    "Whether the positive control threshold should be relaxed for functions with moderate heterogeneity (het=0.171875).",
+    "Whether real Web transitions exhibit mean-varying structure suitable for this metric.",
+    "Whether prediction-accuracy approaches would be more appropriate for Web-relevant dynamical heterogeneity."
+  ]
+}

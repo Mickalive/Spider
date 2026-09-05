@@ -19,6 +19,14 @@
         "reason": "This experiment is MEASUREMENT_INVALID: the causal heterogeneity metric Var_a(E_S[f(S,a)]) is identically 0 for permutation-based deterministic functions by mathematical identity (all permutations of {0..9} have mean 4.5), making the positive control threshold of 0.5 a priori unreachable. The prereg section 12.3 clause 2 ('deterministic functions generate degenerate transitions') applies exactly. This is a construct-validation failure, not an empirical test of regime-dependent dynamics. C-WEB-DYNAMICS remains HYPOTHESIS \u2014 this experiment neither supports nor falsifies it."
       },
       {
+        "experiment_id": "EXP-FRONTIER-33863640568",
+        "lane": "frontier",
+        "decision": "FALSIFIED-IN-SETTING",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "This experiment provides strong supporting evidence that the causal heterogeneity metric detects lambda-scaling for non-permutation functions (Spearman rho=0.9762, p~1.6e-05, Cohen d=1.54) in synthetic affine DGPs. However, the frozen decision rule's positive control and function invariance controls were mis-calibrated (threshold het>=0.5 exceeds analytical ceiling for 2/3 functions; zero-interaction expectation contradicted by design with different Var_a). The audit confirms metric validity is established but the decision rule requires revision before the hypothesis can be formally supported or falsified. C-WEB-DYNAMICS remains HYPOTHESIS: this experiment validates a detection method, not the claim itself. Real Web transition evidence is still needed."
+      },
+      {
         "experiment_id": "EXP-PHYSICS-33528829431",
         "lane": "physics",
         "decision": "REVISE",
@@ -69,6 +77,14 @@
         "claim_id": "C-CROSSSITE",
         "status": "HYPOTHESIS",
         "reason": "WebArena observation format is REQUIRES_TRANSFORM (PARTIALLY_COMPATIBLE) per audit ceiling; DOM is present via CDP but requires non-trivial transformation (split obs/metadata recomposition, viewport override, truncation handling, ARIA-role-to-HTML-tag mapping). Source-inspection only \u2014 no Docker deployment or live task execution verified cross-site DOM delivery, shadow DOM/iframe completeness, or fragment extraction success. C-CROSSSITE remains bounded to 2-site corpus pending integration experiment."
+      },
+      {
+        "experiment_id": "EXP-INTEL-33925056324",
+        "lane": "intel",
+        "decision": "SUPPORTS",
+        "claim_id": "C-CROSSSITE",
+        "status": "HYPOTHESIS",
+        "reason": "Bounded SUPPORTS at synthetic-only ceiling. Adapter parses synthetic WebArena accessibility tree string + obs_nodes_info with element_recall=1.0 (threshold 0.90), attribute_preservation=1.0 (threshold 0.80, 32/31/34 propertied elements per site type), hierarchy_preservation=1.0 (threshold 0.80) across 3 site types (result.json metrics, audit recomputed). Auditor ceiling (audit.json claim_ceiling) narrows from producer's broader claim: generator and adapter share identical formatting grammar (run_experiment.py line 332-340 f'[{id}] {role} \"{name}\" {props}' + indent, webarena_adapter.py _ELEMENT_RE + stack), making perfect scores tautological self-consistency, not independent measurement. Hierarchy depth trivial (87/100 at depth 2), attribute denominator limited (single property per element), role normalization masks 1% raw error. Live WebArena unknowns remain: Docker DOM delivery, truncation, viewport filtering, IGNORED_ACTREE_PROPERTIES, HTML attributes vs ARIA, shadow DOM/iframe. C-CROSSSITE requires bounded integration experiment on live Docker to measure real REQUIRES_TRANSFORM overhead."
       }
     ],
     "C-LLM-INHERIT": [
@@ -87,6 +103,14 @@
         "claim_id": "C-LLM-INHERIT",
         "status": "HYPOTHESIS",
         "reason": "WebArena is a viable testbed candidate but observation-format compatibility is REQUIRES_TRANSFORM, not DIRECTLY_USABLE. Whether SPIDER's fragment extraction code works against WebArena's accessibility tree or html mode has not been tested. C-LLM-INHERIT remains bounded to 2-site corpus pending integration experiment testing actual parameter inheritance on WebArena's 812-task distribution."
+      },
+      {
+        "experiment_id": "EXP-INTEL-33925056324",
+        "lane": "intel",
+        "decision": "SUPPORTS",
+        "claim_id": "C-LLM-INHERIT",
+        "status": "HYPOTHESIS",
+        "reason": "Bounded SUPPORTS at synthetic-only ceiling. Transformation logic sound on synthetic format (224 lines, 0 deps, audit recomputed LOC). Auditor ceiling (audit.json validity_findings[6]) states truncation and viewport filtering explicitly out of scope yet central to REQUIRES_TRANSFORM overhead. Real transformation cost unknown: adapter 224 LOC excludes recomposition of obs_nodes_info channel, viewport override, truncation handling, shadow DOM. C-LLM-INHERIT requires end-to-end fragment yield and cross-site transfer rate on live WebArena tasks."
       }
     ],
     "C-PRODUCT-ECON": [

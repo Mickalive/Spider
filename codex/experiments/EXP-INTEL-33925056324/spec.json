@@ -1,0 +1,26 @@
+{
+  "experiment_id": "EXP-INTEL-33925056324",
+  "lane": "intel",
+  "claim_ids": ["C-CROSSSITE", "C-LLM-INHERIT"],
+  "question": "Can SPIDER's fragment extraction logic be adapted to extract reusable fragments from WebArena's accessibility tree observation format, and what is the transformation cost?",
+  "hypothesis": "A minimal adapter that recomposes the split observation channels (text string + obs_nodes_info metadata) and overrides viewport filtering can extract elements with identity, hierarchy, attributes, and text content from synthetic WebArena observations, achieving >90% element recall and >80% attribute preservation across synthetic site types.",
+  "falsifier": "The adapter fails to extract >50% of elements or loses hierarchy/attributes in >20% of extracted fragments across any synthetic site type, indicating the transformation cost is not recoverable.",
+  "baselines": [
+    "Current SPIDER fragment extraction on raw HTML (2-site corpus): baseline element recall and attribute preservation on raw HTML pages (reference only, not executed)",
+    "Positive control: synthetic WebArena accessibility tree observation with known element structure, known attributes, known hierarchy",
+    "Null control: synthetic observation without DOM (screenshots only) – adapter should extract zero elements"
+  ],
+  "positive_control": "Synthetic observation with 100 elements (20 links, 30 buttons, 50 textboxes) with unique IDs, ARIA roles, names, properties (focused, expanded, required), parent-child hierarchy, and bounding boxes. Adapter must extract all 100 elements with correct attributes.",
+  "null_control": "Synthetic observation with only screenshot image (base64) and empty text string. Adapter must extract zero elements.",
+  "measurement_validity": [
+    "Synthetic observations must mimic WebArena's exact accessibility tree format: formatted indented string with element IDs, roles, names, properties, and obs_nodes_info metadata mapping element ID to backend_id, union_bound, text.",
+    "Three synthetic site types: e-commerce (product listing), social forum (thread view), collaborative coding (file tree). Each site type has distinct element patterns.",
+    "Element extraction must use the same logic as SPIDER's current fragment extraction (adapted for accessibility tree format). Code must be committed to research/intel/ before execution.",
+    "Metrics computed per site type and aggregated. No Docker, no browser, no LLM calls. Offline computation only."
+  ],
+  "decision_rule": "If element_recall >= 0.90 AND attribute_preservation >= 0.80 AND hierarchy_preservation >= 0.80 across all three synthetic site types, verdict = SUPPORTS. If element_recall < 0.50 OR attribute_preservation < 0.50 across any site type, verdict = FALSIFIES. Otherwise verdict = MIXED.",
+  "product_consequence_positive": "Transformation cost is low; WebArena's 812-task corpus expansion is worth the REQUIRES_TRANSFORM overhead. C-CROSSSITE and C-LLM-INHERIT can proceed with integration experiment.",
+  "product_consequence_negative": "Transformation cost high; 2-site corpus remains practical bound. Intel lane should assess whether other benchmarks offer lower-transformation-cost path.",
+  "estimated_cost": "Very low: synthetic data generation, offline computation, no Docker, no browser, no LLM calls. ~1-2 hours of agent time.",
+  "expected_information_gain": "MEDIUM-HIGH: directly tests the transformation cost blocking unknown from EXP-INTEL-33842055594. Positive result unblocks integration experiment; negative result constrains corpus expansion."
+}
