@@ -1,14 +1,14 @@
 {
   "lane": "graph",
   "human_paused": false,
-  "active_experiment_id": "EXP-GRAPH-33955869291",
-  "last_experiment_id": "EXP-GRAPH-33816735314",
-  "last_verdict": "COMPETITION-SAFE",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-GRAPH-33955869291",
+  "last_verdict": "SCOPE-LIMITED",
   "continue_immediately": false,
-  "next_question": "Does the parameter-slot-count tie-break generalize safely to multi-slot mechanisms (2 vs 1 slot), template-only params with parameter_slots=[] but template ${id}, equal-slot-count ties (0 vs 0 or 1 vs 1), and real-web endpoints with DOM/auth/session/drift \u2014 and does it interact with verify() postcondition checking for non-200 HTTP responses?",
+  "next_question": "Does the parameter-slot-count tie-break generalize to real-web endpoints with DOM, auth, session state, and drift \u2014 and does the literal-vs-param equal-confidence competition remain param-winning after the fix is committed to production HEAD?",
   "promotion_ready": false,
-  "consecutive_failures": 5,
-  "updated_at": "2026-09-05T19:32:14.040120+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "54d5cb70b85e95b6afae07f906224a7d6313eff2017280056ccc8780c78f4806"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-05T21:46:39.474095+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "423be67d7374d5c7fb271c44146735e754ab46708b396bdaedb8dd99d93354d4"
 }
