@@ -1,0 +1,20 @@
+{
+  "base_sha": "22c8a45bc052bd6e220ffde4663ebd1a6ed68f2b",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-05T23:24:57.812810+00:00",
+  "experiment_id": "EXP-GRAPH-33998605047",
+  "inherited_last_verdict": "SCOPE-LIMITED",
+  "inherited_next_question": "Does the parameter-slot-count tie-break generalize to real-web endpoints with DOM, auth, session state, and drift \u2014 and does the literal-vs-param equal-confidence competition remain param-winning after the fix is committed to production HEAD?",
+  "lane": "graph",
+  "origin_github_run_id": "33998605047",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-33955869291",
+    "path": "research/experiments/EXP-GRAPH-33955869291/handoff.json",
+    "sha256": "423be67d7374d5c7fb271c44146735e754ab46708b396bdaedb8dd99d93354d4"
+  },
+  "reason": "pulse",
+  "request_hash": "ab7c2d2ba10a7108058599f93e5e0041be7eeb4d0bc6b30537c56b3c6bd3a1a6",
+  "request_id": "a68901b6b8bbe0d3de1db9e0",
+  "schema_version": 1
+}
