@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-33925056324",
+  "lane": "intel",
+  "github_run_id": "33925056324",
+  "base_sha": "b3887300fb8c1f68242366e0160824ba23be6f7c",
+  "executed_at": "2026-09-05T00:30:00+00:00",
+  "code_paths": {
+    "adapter": "research/intel/webarena_adapter.py",
+    "runner": "research/intel/run_experiment.py",
+    "raw_results": "research/intel/raw_results.json"
+  },
+  "code_hashes": {
+    "adapter": "46cb46542d9927f2a1b1bd3c29fef169aafa7009c5ba3f2b797531dbb6038fee",
+    "runner": "5e02795e352247dae39a1be3c7005f8ebd553a9807c42765b7d070d3f363a528",
+    "raw_results": "3a51fd9f1eea38a3bb7ac2da8035f339e48d0c6223313c36ae13536b6664f263"
+  },
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.x",
+    "dependencies": "standard library only (json, re, random, statistics, dataclasses, typing)",
+    "external_api_calls": 0,
+    "docker_used": false,
+    "browser_used": false,
+    "llm_calls": 0
+  },
+  "datasets": {
+    "synthetic_observations": {
+      "description": "3 site types x 100 elements = 300 total elements, deterministic seed=42",
+      "site_types": ["ecommerce", "social_forum", "coding"],
+      "elements_per_site": 100,
+      "seed": 42
+    },
+    "positive_control": {
+      "description": "100 elements with known structure, deterministic seed=43",
+      "elements": 100,
+      "seed": 43
+    },
+    "null_control": {
+      "description": "Empty observation (no DOM elements)",
+      "elements": 0
+    }
+  },
+  "execution": {
+    "command": "python3 run_experiment.py",
+    "working_directory": "research/intel",
+    "exit_code": 0,
+    "stdout_summary": "Raw results written to research/intel/raw_results.json"
+  },
+  "frozen_inputs": {
+    "request_hash": "edd5c10df7802f25a590a582fbff6a4d8f165ad37f543608596140f57c9af185",
+    "spec_hash": "cb953ffd57b362514378a259d79168fb2ba54f6ac9de2c92609980a4a618016c",
+    "prereg_hash": "79d5d06666cc38da284c4de10520255559f7dd6963fb4b586200032f7fec5f33"
+  },
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-33842055594/handoff.json",
+    "research/experiments/EXP-INTEL-33842055594/result.json",
+    "research/experiments/EXP-INTEL-33842055594/audit.json",
+    "src/spider/models.py",
+    "src/spider/kernel.py"
+  ],
+  "reproduction_notes": [
+    "Run: cd research/intel && python3 run_experiment.py",
+    "Produces raw_results.json with all metrics and raw evidence",
+    "Deterministic: seed=42 for synthetic generation, seed=43 for positive control",
+    "No network, Docker, browser, or LLM calls required"
+  ]
+}

@@ -1,0 +1,291 @@
+{
+  "site_types": {
+    "ecommerce": {
+      "num_ground_truth": 100,
+      "num_extracted": 100,
+      "element_recall": 1.0,
+      "element_recall_correct": 100,
+      "attribute_preservation": 1.0,
+      "attribute_preservation_correct": 32,
+      "hierarchy_preservation": 1.0,
+      "hierarchy_preservation_correct": 100,
+      "formatted_text_preview": "[0] RootWebArea \"Online Store\"\n  [1] navigation \"Main Navigation\"\n    [2] link \"Home\"\n    [3] link \"Products\"\n    [4] link \"Cart\"\n  [5] group \"Product Listing\"\n    [6] group \"Product Card 1\"\n      [7] img \"Product Image\"\n      [8] link \"Product Title\" expanded: True\n      [9] button \"Add to Cart\" required: True\n      [10] textbox \"Quantity\"\n    [11] group \"Product Card 2\" required: False\n      [12] img \"Product Image\" hasPopup: False\n      [13] link \"Product Title\"\n      [14] button \"Add to Cart",
+      "sample_ground_truth": [
+        {
+          "id": 0,
+          "role": "RootWebArea",
+          "name": "Online Store",
+          "props": {},
+          "parent": null
+        },
+        {
+          "id": 1,
+          "role": "navigation",
+          "name": "Main Navigation",
+          "props": {},
+          "parent": 0
+        },
+        {
+          "id": 2,
+          "role": "link",
+          "name": "Home",
+          "props": {},
+          "parent": 1
+        },
+        {
+          "id": 3,
+          "role": "link",
+          "name": "Products",
+          "props": {},
+          "parent": 1
+        },
+        {
+          "id": 4,
+          "role": "link",
+          "name": "Cart",
+          "props": {},
+          "parent": 1
+        }
+      ],
+      "sample_extracted": [
+        {
+          "id": 0,
+          "role": "root",
+          "name": "Online Store",
+          "props": {},
+          "parent": null
+        },
+        {
+          "id": 1,
+          "role": "navigation",
+          "name": "Main Navigation",
+          "props": {},
+          "parent": 0
+        },
+        {
+          "id": 2,
+          "role": "link",
+          "name": "Home",
+          "props": {},
+          "parent": 1
+        },
+        {
+          "id": 3,
+          "role": "link",
+          "name": "Products",
+          "props": {},
+          "parent": 1
+        },
+        {
+          "id": 4,
+          "role": "link",
+          "name": "Cart",
+          "props": {},
+          "parent": 1
+        }
+      ]
+    },
+    "social_forum": {
+      "num_ground_truth": 100,
+      "num_extracted": 100,
+      "element_recall": 1.0,
+      "element_recall_correct": 100,
+      "attribute_preservation": 1.0,
+      "attribute_preservation_correct": 31,
+      "hierarchy_preservation": 1.0,
+      "hierarchy_preservation_correct": 100,
+      "formatted_text_preview": "[0] RootWebArea \"Community Forum\"\n  [1] navigation \"Forum Navigation\"\n    [2] link \"Home\"\n    [3] link \"Categories\"\n    [4] link \"Members\"\n  [5] group \"Thread View\"\n    [6] group \"Post 1\"\n      [7] link \"User Profile\"\n      [8] text \"Post content text\" expanded: True\n      [9] button \"Like\" required: True\n      [10] button \"Reply\"\n    [11] group \"Post 2\" required: False\n      [12] link \"User Profile\" hasPopup: False\n      [13] text \"Post content text\"\n      [14] button \"Like\"\n      [15] button \"",
+      "sample_ground_truth": [
+        {
+          "id": 0,
+          "role": "RootWebArea",
+          "name": "Community Forum",
+          "props": {},
+          "parent": null
+        },
+        {
+          "id": 1,
+          "role": "navigation",
+          "name": "Forum Navigation",
+          "props": {},
+          "parent": 0
+        },
+        {
+          "id": 2,
+          "role": "link",
+          "name": "Home",
+          "props": {},
+          "parent": 1
+        },
+        {
+          "id": 3,
+          "role": "link",
+          "name": "Categories",
+          "props": {},
+          "parent": 1
+        },
+        {
+          "id": 4,
+          "role": "link",
+          "name": "Members",
+          "props": {},
+          "parent": 1
+        }
+      ],
+      "sample_extracted": [
+        {
+          "id": 0,
+          "role": "root",
+          "name": "Community Forum",
+          "props": {},
+          "parent": null
+        },
+        {
+          "id": 1,
+          "role": "navigation",
+          "name": "Forum Navigation",
+          "props": {},
+          "parent": 0
+        },
+        {
+          "id": 2,
+          "role": "link",
+          "name": "Home",
+          "props": {},
+          "parent": 1
+        },
+        {
+          "id": 3,
+          "role": "link",
+          "name": "Categories",
+          "props": {},
+          "parent": 1
+        },
+        {
+          "id": 4,
+          "role": "link",
+          "name": "Members",
+          "props": {},
+          "parent": 1
+        }
+      ]
+    },
+    "coding": {
+      "num_ground_truth": 100,
+      "num_extracted": 100,
+      "element_recall": 1.0,
+      "element_recall_correct": 100,
+      "attribute_preservation": 1.0,
+      "attribute_preservation_correct": 34,
+      "hierarchy_preservation": 1.0,
+      "hierarchy_preservation_correct": 100,
+      "formatted_text_preview": "[0] RootWebArea \"Code Repository\"\n  [1] navigation \"File Tree\"\n    [2] tree \"Root Directory\"\n      [3] treeitem \"src\"\n        [4] treeitem \"main.py\"\n        [5] treeitem \"utils.py\"\n      [6] treeitem \"tests\"\n        [7] treeitem \"test_main.py\"\n      [8] treeitem \"README.md\" expanded: True\n  [9] group \"File Content\" required: True\n    [10] text \"Source code content\"\n  [11] group \"Actions\" required: False\n    [12] button \"Commit\" hasPopup: False\n    [13] button \"Push\"\n    [14] button \"New File\"\n  ",
+      "sample_ground_truth": [
+        {
+          "id": 0,
+          "role": "RootWebArea",
+          "name": "Code Repository",
+          "props": {},
+          "parent": null
+        },
+        {
+          "id": 1,
+          "role": "navigation",
+          "name": "File Tree",
+          "props": {},
+          "parent": 0
+        },
+        {
+          "id": 2,
+          "role": "tree",
+          "name": "Root Directory",
+          "props": {},
+          "parent": 1
+        },
+        {
+          "id": 3,
+          "role": "treeitem",
+          "name": "src",
+          "props": {},
+          "parent": 2
+        },
+        {
+          "id": 4,
+          "role": "treeitem",
+          "name": "main.py",
+          "props": {},
+          "parent": 3
+        }
+      ],
+      "sample_extracted": [
+        {
+          "id": 0,
+          "role": "root",
+          "name": "Code Repository",
+          "props": {},
+          "parent": null
+        },
+        {
+          "id": 1,
+          "role": "navigation",
+          "name": "File Tree",
+          "props": {},
+          "parent": 0
+        },
+        {
+          "id": 2,
+          "role": "tree",
+          "name": "Root Directory",
+          "props": {},
+          "parent": 1
+        },
+        {
+          "id": 3,
+          "role": "treeitem",
+          "name": "src",
+          "props": {},
+          "parent": 2
+        },
+        {
+          "id": 4,
+          "role": "treeitem",
+          "name": "main.py",
+          "props": {},
+          "parent": 3
+        }
+      ]
+    }
+  },
+  "positive_control": {
+    "num_ground_truth": 100,
+    "num_extracted": 100,
+    "element_recall": 1.0,
+    "attribute_preservation": 1.0,
+    "hierarchy_preservation": 1.0,
+    "pass": true
+  },
+  "null_control": {
+    "num_extracted": 0,
+    "element_recall": 0.0,
+    "pass": true
+  },
+  "aggregate": {
+    "mean_element_recall": 1.0,
+    "stdev_element_recall": 0.0,
+    "min_element_recall": 1.0,
+    "max_element_recall": 1.0,
+    "mean_attribute_preservation": 1.0,
+    "stdev_attribute_preservation": 0.0,
+    "min_attribute_preservation": 1.0,
+    "mean_hierarchy_preservation": 1.0,
+    "stdev_hierarchy_preservation": 0.0,
+    "min_hierarchy_preservation": 1.0,
+    "all_thresholds_met": true,
+    "any_falsifier_triggered": false
+  },
+  "transformation_cost": {
+    "adapter_lines_of_code": 224,
+    "dependencies_added": 0,
+    "external_api_calls": 0
+  }
+}
