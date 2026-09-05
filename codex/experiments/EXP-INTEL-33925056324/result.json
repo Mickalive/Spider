@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-33925056324",
+  "lane": "intel",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "element_recall": {
+      "value": 1.0,
+      "threshold": 0.90,
+      "per_site_type": {
+        "ecommerce": 1.0,
+        "social_forum": 1.0,
+        "coding": 1.0
+      },
+      "mean": 1.0,
+      "stdev": 0.0,
+      "min": 1.0,
+      "max": 1.0
+    },
+    "attribute_preservation": {
+      "value": 1.0,
+      "threshold": 0.80,
+      "per_site_type": {
+        "ecommerce": 1.0,
+        "social_forum": 1.0,
+        "coding": 1.0
+      },
+      "mean": 1.0,
+      "stdev": 0.0,
+      "min": 1.0,
+      "max": 1.0,
+      "note": "Computed only over ground truth elements that have ARIA properties (32 of 100 per site type)"
+    },
+    "hierarchy_preservation": {
+      "value": 1.0,
+      "threshold": 0.80,
+      "per_site_type": {
+        "ecommerce": 1.0,
+        "social_forum": 1.0,
+        "coding": 1.0
+      },
+      "mean": 1.0,
+      "stdev": 0.0,
+      "min": 1.0,
+      "max": 1.0
+    },
+    "transformation_cost": {
+      "adapter_lines_of_code": 224,
+      "dependencies_added": 0,
+      "external_api_calls": 0
+    }
+  },
+  "controls": {
+    "positive_control": {
+      "description": "Synthetic observation with 100 elements (20 links, 30 buttons, 50 textboxes) with unique IDs, ARIA roles, names, properties, parent-child hierarchy",
+      "expected": "element_recall=1.0, attribute_preservation=1.0, hierarchy_preservation=1.0",
+      "observed": {
+        "element_recall": 1.0,
+        "attribute_preservation": 1.0,
+        "hierarchy_preservation": 1.0
+      },
+      "pass": true
+    },
+    "null_control": {
+      "description": "Synthetic observation with only screenshot (base64) and empty text string, no DOM elements",
+      "expected": "element_recall=0.0, zero elements extracted",
+      "observed": {
+        "num_extracted": 0,
+        "element_recall": 0.0
+      },
+      "pass": true
+    },
+    "baseline_reference": {
+      "description": "Current SPIDER fragment extraction on raw HTML (reference only, not executed in this experiment)",
+      "expected": "N/A — baseline reference for context only",
+      "pass": "N/A"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/intel/webarena_adapter.py",
+      "sha256": "46cb46542d9927f2a1b1bd3c29fef169aafa7009c5ba3f2b797531dbb6038fee",
+      "role": "code"
+    },
+    {
+      "path": "research/intel/run_experiment.py",
+      "sha256": "5e02795e352247dae39a1be3c7005f8ebd553a9807c42765b7d070d3f363a528",
+      "role": "code"
+    },
+    {
+      "path": "research/intel/raw_results.json",
+      "sha256": "3a51fd9f1eea38a3bb7ac2da8035f339e48d0c6223313c36ae13536b6664f263",
+      "role": "raw"
+    }
+  ],
+  "observations": [
+    "The adapter (224 lines, zero external dependencies) successfully parses WebArena's formatted indented accessibility tree string and recomposes split observation channels (text string + obs_nodes_info metadata) into extracted elements with identity, hierarchy, attributes, and text.",
+    "All 100 elements per site type were extracted with correct ID, normalized role, and name across all three synthetic site types (ecommerce, social_forum, coding).",
+    "All ARIA properties (focused, expanded, required, hasPopup, selected, checked) were correctly preserved for the 32 elements per site type that carry properties.",
+    "Parent-child hierarchy reconstructed from indentation parsing was 100% correct across all site types.",
+    "Positive control (100 known elements) passed: all elements extracted with correct attributes and hierarchy.",
+    "Null control (screenshots only, no DOM) passed: zero elements extracted.",
+    "Role normalization (RootWebArea -> root, StaticText -> text) is applied by the adapter; ground truth roles were normalized for comparison.",
+    "The adapter handles the exact WebArena observation format: [id] role \"name\" prop: val with indentation-based hierarchy."
+  ],
+  "validity_notes": [
+    "Synthetic-to-real gap: observations are synthetic, mimicking WebArena's exact format but not generated from live Docker. If adapter fails on synthetic, it will fail on real; success on synthetic is necessary but not sufficient for real WebArena DOM.",
+    "The adapter is minimal (224 lines) and covers core extraction (identity, hierarchy, attributes, text). Complex transformations (viewport override, truncation handling, shadow DOM, iframes) are out of scope for this experiment.",
+    "Only 300 elements across 3 site types were tested. The adapter's perfect score on synthetic data suggests the transformation logic is sound, but real WebArena DOM may present edge cases not captured in synthetic data.",
+    "HTML attributes (class, id, href) are NOT tested — the adapter operates on accessibility_tree mode which provides ARIA properties only. HTML attributes are available only in html mode.",
+    "The adapter does not handle UTTERANCE_MAX_LENGTH=8192 truncation or max_obs_length=1920 filtering. These are runtime concerns, not transformation concerns.",
+    "Element_recall computed with role normalization (adapter normalizes RootWebArea -> root). Without normalization, recall would be 0.99 for the root element."
+  ],
+  "unresolved": [
+    "Whether the adapter works on real WebArena Docker accessibility tree output (requires Docker deployment).",
+    "Whether html mode (DOMNode.attributes from DOMSnapshot) yields better fragment extraction than accessibility_tree mode.",
+    "Whether shadow DOM and iframe content are traversed by Accessibility.getFullAXTree / DOMSnapshot.captureSnapshot.",
+    "Whether UTTERANCE_MAX_LENGTH=8192 / max_obs_length=1920 truncation discards fragments on representative WebArena tasks.",
+    "Whether the REQUIRES_TRANSFORM overhead (recomposition, viewport override, role-to-tag mapping) negates WebArena's 812-task corpus expansion value vs. 2-site raw HTML.",
+    "Whether VisualWebArena's SoM annotations conflict with or augment SPIDER's text-based fragment model."
+  ]
+}

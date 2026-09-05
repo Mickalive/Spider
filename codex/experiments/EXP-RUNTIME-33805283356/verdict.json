@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-33805283356",
+  "lane": "runtime",
+  "decision": "NARROW_SUCCESS",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "EXPERIMENTAL",
+      "reason": "C-MEAS-VALID survives ONLY as narrow mechanism integrity on a synthetic constant-URL server. Deterministic SHA-256 fingerprint achieves perfect discrimination 1.0 (225 intra identical, 1000 inter distinct, mean inter Jaccard 0.346) on stdlib http.server with 5 hand-programmed auth states (no_auth/valid_token/session_cookie 200, expired_token 401, invalid_token 403) under 50-150ms server jitter, N=50 seed44, error 0%. Full vector exceeds B-STATUS-ONLY (1.0>0.7) when status overlaps (3x200) but equals B-BODY-ONLY (1.0=1.0). Null FP 0%<5% only for 50-150ms range. Drift pairs discriminable (Jaccard 0.305, 0.366<0.5). Claim does NOT demonstrate ecological validity for real Flask/JWT/OAuth production middleware, CDN/caching, non-deterministic responses, or necessity of full vector over body-only."
+    }
+  ],
+  "product_action": "NONE — experimental code did not pass frozen gate (audit REVISE, producer_claim_supported=false). Server is synthetic stdlib http.server, not production middleware. Full vector equals body-only; no empirical product advantage demonstrated. Product must not build auth drift detection on this substrate without production validation.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "On a real Flask server with actual JWT/session middleware (not hand-programmed lookup tables), no synthetic X-Auth-Level/X-Session/X-User/X-Error headers, and identical error response bodies for expired vs invalid tokens, does the HTTP fingerprint substrate maintain discrimination — and does the full vector (status+body) exceed B-BODY-ONLY when synthetic header tautology is removed and error states share identical bodies?",
+  "reason": "The audit identified two high-severity validity gaps that prevent broader claims: (1) V1-REAL-MIDDLEWARE-GAP — server is stdlib http.server with hand-defined SERVER_STATES lookup table, not Flask with real JWT/session middleware as spec required; discrimination 1.0 is construction-guaranteed by distinct bodies/headers per state, not by auth logic fidelity. (2) V2-SYNTHETIC-HEADER-TAUTOLOGY — fingerprint includes X-Auth-Level, X-Session, X-User, X-Error headers that perfectly encode state label and are included in the fingerprint vector, inflating discrimination. With these gaps, C-MEAS-VALID survives only as mechanism integrity on a synthetic server: the fingerprint math works, jitter invariance holds for 50-150ms, URL constancy is verified, and drift pairs are discriminable. But the ecological validity question — does this work on real auth middleware? — remains open. The next experiment must close V1 and V2 by using a real Flask/JWT server with no synthetic auth-level headers and identical error bodies for expired vs invalid tokens, testing whether body+status alone (without header tautology) maintains discrimination.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-33805283356/result.json — COMPLETE SUPPORTS, full_vector_discrimination 1.0, baselines B-STATUS-ONLY 0.7 B-BODY-ONLY 1.0 B-URL-HASH 0.0, null_fp 0.0, drift_jaccards [0.305,0.366], all controls pass",
+    "research/experiments/EXP-RUNTIME-33805283356/audit.json — REVISE producer_claim_supported=false, V1-REAL-MIDDLEWARE-GAP (stdlib not Flask), V2-SYNTHETIC-HEADER-TAUTOLOGY (X-Auth-Level etc encode state), V3-URL-CONSTANCY-VERIFIED, V5-JITTER-BOUNDED (50-150ms only), V8-CONSTRUCTION-TAUTOLOGY-REMAINS, claim_ceiling narrow mechanism integrity",
+    "research/experiments/EXP-RUNTIME-33805283356/raw_observations.json — 50 entries, per-state distinct body_hash and filtered headers including X-Auth-Level/X-Session/X-User/X-Error, per-state identical fingerprint, elapsed 0.052-0.148",
+    "research/experiments/EXP-RUNTIME-33805283356/provenance.json — server_implementation stdlib http.server (not Flask), python 3.12.14, code_paths run_experiment.py AuthHandler/fingerprint",
+    "research/experiments/EXP-RUNTIME-33805283356/run_experiment.py — SERVER_STATES hand-defined bodies/headers lines 41-77, AuthHandler lines 84-120 with 50-150ms sleep, fingerprint lines 178-196 repr(sorted) excluding date/server",
+    "research/experiments/EXP-RUNTIME-33805283356/spec.json — frozen question/hypothesis/falsifier/decision_rule requiring full>0.5, B-STATUS-ONLY<full, null<5%, drift Jaccard<0.5",
+    "research/experiments/EXP-RUNTIME-33767375933/handoff.json — parent established toy-server 1.0, rejected httpbin URL-tautology, do_not_assume toy transfer/py version/full-vector necessity"
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-33528832113",
+  "lane": "intel",
+  "target_lane": "graph",
+  "next_question": "Can WebArena's Docker-based self-hosting provide HTML/DOM accessibility trees compatible with SPIDER's fragment-reuse observation format?",
+  "why_next": "To design and execute an integration experiment testing WebArena's HTML/DOM accessibility and fragment extraction compatibility with SPIDER's observation format. This directly addresses the unresolved suitability question and moves C-CROSSSITE toward actual testing.",
+  "carry_forward": {
+    "established": [
+      "WebArena (2024) is a public benchmark with 812 long-horizon tasks, 4 website types (e-commerce, social forum, collaborative coding, CMS), Docker self-hosting, public trajectory replay infrastructure, and scores 5/5 on structural proxies S1-S5.",
+      "VisualWebArena (2024) likely meets all five structural proxies but requires visual modality compatibility check.",
+      "Six to nine additional benchmarks (Mind2Web, AssistantBench, WebBench, WorkArena, WebMall, Explorer, WebLINX, AgentBench) meet S1+S2+S3+S4>=3 but lack self-hosting or single-domain diversity, making them RECOMMENDED only as proxies."
+    ],
+    "rejected": [],
+    "unknown": [
+      "Whether WebArena's Docker environment provides HTML/DOM accessibility trees compatible with SPIDER's fragment-reuse observation format.",
+      "Whether VisualWebArena's visual emphasis (screenshots + SoM annotations) conflicts with SPIDER's text-based fragment model.",
+      "Whether WebBench's live-website evaluation model could be adapted for SPIDER testing.",
+      "Whether WorkArena's ServiceNow developer instance satisfies spec S4 definition (self-hostable or API replay).",
+      "Whether WebShop's trajectory data availability (S2) should be 1, which would raise it to RECOMMENDED.",
+      "Whether Explorer's synthetic tasks align with SPIDER action-oriented navigation or are QA/information-seeking.",
+      "Whether QWeb or AWM benchmarks, if located, would alter the candidate set."
+    ],
+    "do_not_assume": [
+      "Do not assume that structural compatibility (S1-S5) equals SPIDER fragment-reuse suitability.",
+      "Do not assume that C-CROSSSITE or C-LLM-INHERIT are unblocked; they remain bounded to 2-site corpus until integration experiment.",
+      "Do not assume that WebArena's Docker environment provides HTML/DOM accessibility trees compatible with SPIDER.",
+      "Do not assume that VisualWebArena's visual modality is compatible with SPIDER's text-based fragment model.",
+      "Do not assume that the audit's metric inconsistencies affect the core finding about WebArena's existence.",
+      "Do not assume that the null control failure invalidates the entire audit; it indicates measurement incompleteness, not falsification.",
+      "Do not assume that any benchmark is experimentally suitable without a separate integration experiment."
+    ]
+  },
+  "dependencies": [
+    "EXP-INTEL-33528832113 (this experiment)",
+    "WebArena Docker environment (github.com/web-arena-x/webarena)",
+    "SPIDER fragment extraction code (research/harness)"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-33528832113/result.json",
+    "research/experiments/EXP-INTEL-33528832113/report.md",
+    "research/experiments/EXP-INTEL-33528832113/audit.json",
+    "research/experiments/EXP-INTEL-33528832113/provenance.json"
+  ],
+  "recommended_action": "Design a bounded integration experiment on WebArena to test HTML/DOM accessibility tree availability and fragment extraction compatibility. Prior to that, resolve metric inconsistencies and missing raw evidence by executing the audit's required_fixes. The integration experiment should be preregistered in the graph lane with clear falsifiers for SPIDER observation format compatibility."
+}

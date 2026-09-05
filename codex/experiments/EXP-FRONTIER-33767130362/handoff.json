@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-33767130362",
+  "lane": "frontier",
+  "target_lane": "frontier",
+  "next_question": "Can non-permutation deterministic functions (where E_S[f(S,a)] varies across actions, e.g., affine maps f(s,a)=(c_a*s+b_a) mod 10 or action-dependent offsets) yield detectable lambda-scaling of causal heterogeneity, or should the Frontier lane pivot to distributional metrics (TV distance, JSD) that are sensitive to permutation structure?",
+  "why_next": "This experiment established that Var_a(E_S[f(S,a)]) is identically 0 for permutation functions (analytic degeneracy, not empirical failure). Two orthogonal paths remain open: (A) fix the function class to break the permutation mean-preservation property, or (B) fix the metric to detect distributional structure beyond means. Path A tests whether causal heterogeneity works at all; Path B tests whether permutation structure is detectable causally. Both are high-upside and materially orthogonal to the prediction-accuracy approach of the parent experiment. Path A is recommended as the smaller next step because it reuses the same metric and pipeline with a simple function-class change.",
+  "carry_forward": {
+    "established": [
+      "Analytic identity: for any permutation pi of {0..9}, Var_a(E_S[pi_a(S)]) = 0 because E[pi_a(S)] = 4.5 for all actions. Therefore het(lambda) = lambda^2 * 0 = 0 for all lambda. Recomputed: Var=0.0 for seeds 42,43,44.",
+      "Monte Carlo estimates of het are ~0.04-0.07 across all 8 lambda levels, consistent with sampling noise around true value of 0 (E[het under null] ≈ 0.0495). No lambda level shows signal above noise.",
+      "Pipeline executed correctly with no errors (status=COMPLETE). 120,000 transitions generated, 240 cells analyzed, Spearman/ANOVA/permutation tests computed as preregistered.",
+      "Null control passes: mean permutation p at lambda=0 is 0.466 (not significant).",
+      "Function invariance passes trivially: ANOVA interaction p=0.819 (all functions identical null).",
+      "Cohen's d (lambda=1 vs lambda=0) = 0.105 (very small), confirming no detectable difference between extreme conditions."
+    ],
+    "rejected": [
+      "Causal heterogeneity metric (Var_a(E_S[f(S,a)])) as a detection method for permutation-based deterministic functions — mathematically degenerate, not just empirically insensitive.",
+      "The hypothesis het(lambda) = lambda^2 * Var_a(E_S[f(S,a)]) detects regime-dependent dynamics when Var_a(E_S[f(S,a)]) = 0 — the formula is correct but the function class makes it tautological.",
+      "Positive control threshold het >= 0.5 at lambda=1 as a testable criterion for permutation functions — a priori unreachable."
+    ],
+    "unknown": [
+      "Whether non-permutation deterministic functions (affine maps, action-dependent offsets, non-bijective maps) where E_S[f(S,a)] varies across actions would yield het(lambda) proportional to lambda^2 and detectable Spearman rho >= 0.65.",
+      "Whether distributional metrics (TV distance, JSD, prediction entropy) applied to P(S_{t+1}|do(A=a)) can detect permutation structure while preserving interventional semantics.",
+      "Whether prediction accuracy (parent experiment's approach) is more appropriate than variance-of-means for Web-relevant dynamical heterogeneity — the parent descriptive finding (rho=1.0) used prediction accuracy which IS sensitive to permutation structure.",
+      "How synthetic results translate to real Web transitions — whether real Web data exhibits mean-preserving or mean-varying structure.",
+      "Whether the Frontier lane should pivot entirely to prediction-accuracy approaches with better-powered designs (more lambda levels, replications) rather than continuing causal heterogeneity attempts."
+    ],
+    "do_not_assume": [
+      "Do not assume C-WEB-DYNAMICS is falsified — this experiment is MEASUREMENT_INVALID, not a scientific test of the claim.",
+      "Do not assume causal heterogeneity as a general approach is invalid — only the specific metric + permutation function combination is degenerate.",
+      "Do not assume the parent experiment's descriptive monotonic effect (prediction accuracy rho=1.0) is refuted — it used a different metric that IS sensitive to permutation structure.",
+      "Do not assume non-permutation functions will automatically yield positive results — the metric may be fundamentally insensitive to certain dynamical structures.",
+      "Do not assume synthetic-to-real translation applies — all tested functions are synthetic permutations.",
+      "Do not assume the null control pass at lambda=0 is evidence of absence — power < 20% for small effects at n=8 lambda levels.",
+      "Do not assume the 240-cell ANOVA design is adequate for future experiments — raw per-replication tables were not persisted, limiting recomputation."
+    ]
+  },
+  "dependencies": [
+    "Non-permutation deterministic function generators (e.g., affine maps, action-dependent offsets) with known E_S[f(S,a)] values for analytic verification",
+    "OR distributional divergence metrics (TV distance, JSD) implementation for comparing P(S_{t+1}|do(A=a)) across actions",
+    "Persistence of raw per-replication per-function per-lambda heterogeneity tables as hash-addressed artifacts for independent recomputation",
+    "Frequency baseline and prediction-accuracy-difference baseline implementation at matched lambda levels for quantitative comparison with parent experiment"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-33767130362/result.json: metrics.analytical_heterogeneity_all_zero true, metrics.heterogeneity_means_by_lambda (0.052-0.064 across all lambda), metrics.spearman_rho_aggregate 0.3333, metrics.permutation_results, controls, validity_notes[1-2]",
+    "research/experiments/EXP-FRONTIER-33767130362/audit.json: status MEASUREMENT_INVALID, claim_ceiling 'metric blind to permutation structure', validity_findings[1] environment could NOT express tested effect, required_fixes[0-2]",
+    "research/experiments/EXP-FRONTIER-33767130362/report.md: section 2 permutation degeneracy proof, section 5 metric vs prediction accuracy comparison",
+    "research/experiments/EXP-FRONTIER-33767130362/provenance.json: execution_timestamp 2026-09-03T18:30:00Z, github_run_id 33788040686",
+    "research/frontier/causal_heterogeneity/analyze.py: sha256 096ab2ee6dbcea27d4db5d9acf39b9ff93d2a75801aa75634e8f0619891ff642",
+    "research/experiments/EXP-FRONTIER-33528827909/handoff.json: parent descriptive effect (prediction accuracy sensitive to permutation structure, rho=1.0), carry_forward established/rejected/unknown/do_not_assume"
+  ],
+  "recommended_action": "Design a new Frontier experiment using NON-PERMUTATION deterministic functions (e.g., f(s,a) = (c_a * s + b_a) mod 10 where c_a and b_a vary by action, ensuring E_S[f(S,a)] differs across actions) with the same causal heterogeneity metric and 8 lambda levels x 10 replications. This is the minimal change needed to make the metric non-degenerate. If this also fails, pivot to distributional metrics (TV distance between full P(S_{t+1}|do(a)) distributions) or return to prediction-accuracy approach with the parent's larger-n design."
+}

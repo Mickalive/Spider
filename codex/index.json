@@ -26,6 +26,56 @@
         "handoff.json": "dda6bc7cd9a06aeeb68ff1ee5c67d7609d1ecd0e46d494c87db8daebda216563"
       }
     },
+    "EXP-FRONTIER-33767130362": {
+      "lane": "frontier",
+      "request_id": "8dae691d254a98b949c72dc8",
+      "created_at": "2026-09-03T14:29:30.122089+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Does the causal effect heterogeneity of actions across states increase monotonically with the action-dependence parameter lambda, demonstrating regime-dependent dynamics in synthetic Web-like state transitions via direct causal intervention rather than correlational prediction accuracy?",
+      "audit_status": "MEASUREMENT_INVALID",
+      "decision": "MEASUREMENT_INVALID",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/frontier",
+      "hashes": {
+        "request.json": "4fd8e220e5b0d682c402df1e674ef6147ab702e6cc34c73aff2514ae1f8746fd",
+        "spec.json": "b4d981a72456fcd3053693bcc63fd70a29d6aad0cd698cb9401b4de2bb21200f",
+        "prereg.md": "0af725f7f790046390cf7a77ee74396c6e272e4c3719d1dcde0435fe68064874",
+        "freeze.json": "ee30d94ceeb4656334339ff37366c1d5007f1b61b49d1db6587848f3a8109ff8",
+        "result.json": "719010428a54f01fa13dc70e3e5714200b0578f8f845ac8b9dd8dff317076075",
+        "report.md": "9ca7b76cda7b4218586f7805eb8aec2ba840a18a19e95d525ca1898e0137b20b",
+        "provenance.json": "36c7fdb30f71a05e950471353814f1424e6ca936bb2a775ef7fbc70610e5dbd1",
+        "audit.json": "a8d52541bab8df9821854619f71db40908934171c67a5f0d97cf7e7ec3ff0a23",
+        "verdict.json": "1b0555da9871b78f2d490dcfdca0da1afad3beca753d4b25b6391fdfad53af99",
+        "handoff.json": "128562014c5c09d2793692cd05297d571da9cefc4059be95bdc469498fb0e7d8"
+      }
+    },
+    "EXP-FRONTIER-33863640568": {
+      "lane": "frontier",
+      "request_id": "82a107dee4efe693fde08251",
+      "created_at": "2026-09-04T10:31:35.759787+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Can non-permutation deterministic functions (affine maps f(s,a) = (c_a * s + b_a) mod 10 where E_S[f(S,a)] varies across actions) yield detectable lambda-scaling of causal effect heterogeneity, or should the Frontier lane pivot to distributional metrics (TV distance) that are sensitive to permutation structure?",
+      "audit_status": "REVISE",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/frontier",
+      "hashes": {
+        "request.json": "fb3652d895740298ef1e10009db3916536de1e2aec8f662affc63ea1e155a0ae",
+        "spec.json": "75f178705873a5377a36007476175ea502b6db09577fa720c2fcec8d56a8d945",
+        "prereg.md": "01240a40f14813350ec4085da9802c706fb76271f403418a5ddd63f3ef0c2ace",
+        "freeze.json": "91a5e4efed0fa1e74177b3482971f33560ca92c1a9d8bbbd250815d06b5abd41",
+        "result.json": "a0e6daab701ff5b1245e240f30ddb2f44b964a875ca3ec7abffb1d5cccfdc3c5",
+        "report.md": "98fd669e866080b310bb590f3443f5e8e13509d006e1026130188d6b30c27ab8",
+        "provenance.json": "9d48856c81a4ecdc1df79dc4560d7c3142ff8994c6ed3b56ad4b91a31aa56544",
+        "audit.json": "d8659d7edaf1fbaddca119f83996e2b9a0c0c8f25c9b2ed2811dd43f166c78cc",
+        "verdict.json": "af4794efeba28e819fedc8ff1a335bf9553ad5fcfb4fc24a901c2e8dfe85e725",
+        "handoff.json": "7a629b31ec2f6202f72098b0a927e59a280519c8b9cd93242a22d0d3f6d026f0"
+      }
+    },
     "EXP-GRAPH-33528827169": {
       "lane": "graph",
       "request_id": "3e0d81e7790f2f2b7bd8665e",
@@ -74,6 +124,110 @@
         "audit.json": "383cfd9c7ccc71ae82963b04552462504f20c05492670f0fb03b05a47371bfd4",
         "verdict.json": "d4ce040ab11407958e07451d249bca4ee1d44b8bbb27805e5541f8a444a13c3b",
         "handoff.json": "ebb3de502513621de55c297a32023f20b6f87739cdf00b4d3db025d00f51187a"
+      }
+    },
+    "EXP-GRAPH-33816735314": {
+      "lane": "graph",
+      "request_id": "06732c53f5442eb75b2f1416",
+      "created_at": "2026-09-03T23:14:48.590859+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT"
+      ],
+      "question": "Does adding a parameter-slot-count secondary tie-break in kernel.py resolve() eliminate false accepts in mixed literal+parameterized registries at equal confidence, without breaking cold, literal-only, or parameter-only baselines?",
+      "audit_status": "PASS",
+      "decision": "COMPETITION-SAFE",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/graph",
+      "hashes": {
+        "request.json": "477aec3869b8fe6ad5875de8e24fd3e856930b1eb36c765efed3c901edbfe6e8",
+        "spec.json": "1139b11faccca9c276f50f167a79ea7f6a67b0d6ce180af27c08339d8a6aac9a",
+        "prereg.md": "0dc9d883d320500f3d2a8e2778bef6f5a0b6b22799a07da6ae83a6f8dcaa6198",
+        "freeze.json": "dbc20a430026a7a6f4f4367c731190f8e57b8bd23f0a773ee84bbaa58f00444b",
+        "result.json": "686cc7475f56a2df6e328b01e04a4305611320c21c450f1f8b6ebf5dfab0c2be",
+        "report.md": "74534f6ca350392ed789d463844974416cabb49f48737cae9e6cbd86f5354b82",
+        "provenance.json": "fef72f991337889dc7eece5406d0ff3fc311650cac52165bffa22c1959efcf4a",
+        "audit.json": "6c0653885f471d974bbde46e9121a0966fdbf86cc1329388b3b11d5e7e11f016",
+        "verdict.json": "a28434b0522854ce16252789b468ac27b386fd009d308e06c0479bd7b617f71e",
+        "handoff.json": "54d5cb70b85e95b6afae07f906224a7d6313eff2017280056ccc8780c78f4806"
+      }
+    },
+    "EXP-INTEL-33528832113": {
+      "lane": "intel",
+      "request_id": "46d19fdaf32e996c0ab24bd7",
+      "created_at": "2026-09-01T15:56:44.223955+00:00",
+      "claim_ids": [
+        "C-CROSSSITE",
+        "C-LLM-INHERIT",
+        "C-PRODUCT-ECON"
+      ],
+      "question": "Which publicly available web-agent benchmarks contain multi-step stateful task structures that could serve as stronger testbeds for SPIDER's cross-site inheritance and LLM-inheritance claims than the current 2-site (quotes/books) corpus?",
+      "audit_status": "REVISE",
+      "decision": "SUPPORTS",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/intel",
+      "hashes": {
+        "request.json": "ac060980eee635b3edec766758f02747cfb02c42f5433aba27178285d1561c15",
+        "spec.json": "27f16b3d2074b16a645307322c646b54232f17b41ef00ed43d2b25f8668562be",
+        "prereg.md": "0bebc672261e2ec247cd53fd1f7bada7654d469acce2a0ba6b5e8efcfbf547de",
+        "freeze.json": "027a1a32009fa516ef2584e0b78a45e9eabf186a7fc8bc7f03a9d1cd2b8ba85f",
+        "result.json": "c273ce1ee626c1222d8eb8cacca3fed377304144b19891907329382067ccc131",
+        "report.md": "f5f8abd62ea53f57e6a95707b70d903dbca0b1293460b040ff0c49fdf876e04a",
+        "provenance.json": "cdad879999e774356e422da40ac9d952974216e81d48e6f6e7179917cd433bfd",
+        "audit.json": "9781215ff59861da4ab8f61774734acd120c9d33efc0874bfdd97631674d4d6b",
+        "verdict.json": "5737ab7e5989ec116fa4610619fdb76c2f27b73bc5e150a5b7be1417b3c16054",
+        "handoff.json": "46853bb92c10fbe26f3ba849ff7664c02b95b23d39e1033fbc6efe33424a3336"
+      }
+    },
+    "EXP-INTEL-33842055594": {
+      "lane": "intel",
+      "request_id": "aa84f05c994cb7f569ba4f07",
+      "created_at": "2026-09-04T05:51:40.097724+00:00",
+      "claim_ids": [
+        "C-CROSSSITE",
+        "C-LLM-INHERIT"
+      ],
+      "question": "Can WebArena's Docker-based self-hosting provide HTML/DOM accessibility trees compatible with SPIDER's fragment-reuse observation format?",
+      "audit_status": "REVISE",
+      "decision": "PARTIALLY_COMPATIBLE",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/intel",
+      "hashes": {
+        "request.json": "d7ac099ff31b5f45a830349529520d4c2ee5473ea319c7b4af7cb37d955de79c",
+        "spec.json": "79da2a9a50aab9cd8dd74f927fdfa68351b44b22b4a0272b3b259c88c81309fb",
+        "prereg.md": "e0d93a691eba75216d80461196218b20fd6569c085a7b7f4ff4ab59c0700f8bc",
+        "freeze.json": "93b4ec42b16b80712d595a40164dc0c3567250765cb0c8a554a7f3639d6d8f4d",
+        "result.json": "f72051dede117cd5799332a1520d663e540bb8976e58d742281a110d32b175c9",
+        "report.md": "3bafabeb8a7d2e85235b93d8a37ed17bcad43b304218d00abeb838c2faf12b25",
+        "provenance.json": "d897e411eeef563b095ccf36fee448a9c3d8f759e3794bb6c14dfb0b896edaa4",
+        "audit.json": "f8b8010c21a66d60da850a1f63aa1fc7804485a64701fea3b0437a028ec003f2",
+        "verdict.json": "3f60b461ab38df9b9a023f934cb89913b39d09eabc616bd16e97476eb5f8e395",
+        "handoff.json": "c50df1d04707587e76fd7426e7d9c8960aa85cee28fb71acc9f3e9fdd262ca6e"
+      }
+    },
+    "EXP-INTEL-33925056324": {
+      "lane": "intel",
+      "request_id": "69900e979d772ca8a1fe7343",
+      "created_at": "2026-09-04T22:20:20.094538+00:00",
+      "claim_ids": [
+        "C-CROSSSITE",
+        "C-LLM-INHERIT"
+      ],
+      "question": "Can SPIDER's fragment extraction logic be adapted to extract reusable fragments from WebArena's accessibility tree observation format, and what is the transformation cost?",
+      "audit_status": "REVISE",
+      "decision": "SUPPORTS",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/intel",
+      "hashes": {
+        "request.json": "edd5c10df7802f25a590a582fbff6a4d8f165ad37f543608596140f57c9af185",
+        "spec.json": "cb953ffd57b362514378a259d79168fb2ba54f6ac9de2c92609980a4a618016c",
+        "prereg.md": "79d5d06666cc38da284c4de10520255559f7dd6963fb4b586200032f7fec5f33",
+        "freeze.json": "2789b2a76ac3f5893a0f1bac01724f0ae4c49c445f7c87bb18a18803022107aa",
+        "result.json": "44ebbb8197b14ef8259533523d9d0c08cf24ca7c30204f245323f987143e34f2",
+        "report.md": "cc8aa99c1bdc59baed1d4dad9ffea64ebef66fd0a9bd1d0826ac1dbfb86126c1",
+        "provenance.json": "50f267444bce9b3276dc69d6f331a3fb71ff36ae970b572c6a70c3d3b074dc9a",
+        "audit.json": "c29d7f10f065c090594081a0a51a8934708b5dd4906f89a1bbe20f288b387520",
+        "verdict.json": "42a35c448f71ccf4f8af78782519d0b5645cdb6f542c37f44790a62b88561f97",
+        "handoff.json": "6f92dd17615985260d2c3828608c7f7c00ff1ba71dd5593f57d82d9555668fce"
       }
     },
     "EXP-PHYSICS-33528829431": {
@@ -175,6 +329,31 @@
         "audit.json": "e13db7649dbfd34faabfdffb56f0293c15a517d76a75e2325265b5a4b0062789",
         "verdict.json": "cfedf34fddeb96dd3fd5ed104265de2630e8673cbe4dc52a9d2301084a26fb66",
         "handoff.json": "fea5b244f4547485ceb42f78d18fabeb664c457927fe26b940d7a0b7e7451f04"
+      }
+    },
+    "EXP-RUNTIME-33805283356": {
+      "lane": "runtime",
+      "request_id": "1c99edce5a6acfd6fb1c4bd8",
+      "created_at": "2026-09-03T20:57:58.045124+00:00",
+      "claim_ids": [
+        "C-MEAS-VALID"
+      ],
+      "question": "On a constant-URL server where auth state (Bearer token / session cookie) varies and response bodies differ accordingly, does the HTTP fingerprint substrate maintain discrimination \u2014 and does the full observation vector (status + headers + body + redirects) exceed single-field baselines (B-STATUS-ONLY, B-BODY-ONLY) when bodies vary with auth state?",
+      "audit_status": "REVISE",
+      "decision": "NARROW_SUCCESS",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/runtime",
+      "hashes": {
+        "request.json": "c8476dec201ef16f7d3fcdcf80562af142e95461a9a0bdfed44afb21994e946d",
+        "spec.json": "43498a99c09ff9c70d289f7352181f3129b97f40463c82875e01078042c53954",
+        "prereg.md": "5721f8c30d62cc22bd65b5b6dafb2143b13f9fddd0edd6a434501ed7ceb1d12d",
+        "freeze.json": "3ef419c244dab67546c8fbf6e2475b58b042c72e4c8902364d017c81af18fa23",
+        "result.json": "c0bc15fd454a0f5d3fc3eef19854b34ef6120a862a1cba0fac5d5b2b73684d0a",
+        "report.md": "9c80f5fb6c35722cb329a2ecce353ebd28b22523ee30aa668e83f26e320a4731",
+        "provenance.json": "5f501a5213838def50d43864411c486ff729355e0d3cd80821924348902b8ec5",
+        "audit.json": "61f7a88cf5d52c5cd7e6d5e529eefca6c72ba5e320abce11315f09a5bf494076",
+        "verdict.json": "b61cad3195b1a64273f9b1768842f8efbb816175b4c582ed7e858f6ba1cd9320",
+        "handoff.json": "c0cf725e47b7a5596f4400213a228f41e46321d0ee790280dc1144ec00bb7894"
       }
     }
   }
