@@ -4,243 +4,224 @@
 
 - **Experiment ID**: EXP-INTEL-33925056324
 - **Lane**: Intel
-- **Claims**: C-CROSSSITE, C-LLM-INHERIT, C-PRODUCT-ECON
-- **Date**: 2026-09-04
+- **Claims**: C-CROSSSITE, C-LLM-INHERIT
+- **Date**: 2026-09-05
 - **Status**: DESIGN — NOT YET FROZEN
 
 ## 2. Scientific Question
 
-Does existing accessibility-tree-based web agent research provide reusable element-matching or state-tracking patterns that could reduce the REQUIRES_TRANSFORM overhead for WebArena integration, or is SPIDER's fragment extraction a genuinely novel requirement?
+Can SPIDER's fragment extraction logic be adapted to extract reusable fragments from WebArena's accessibility tree observation format, and what is the transformation cost?
 
 ## 3. Motivation
 
-The parent handoff (EXP-INTEL-33842055594) established that:
-- WebArena exposes DOM via CDP in accessibility_tree and html modes
-- The observation format requires non-trivial transformation (REQUIRES_TRANSFORM / PARTIALLY_COMPATIBLE)
-- The critical unknown is whether the transformation cost is recoverable
+Prior intel experiment EXP-INTEL-33842055594 established that WebArena's observation format is REQUIRES_TRANSFORM (PARTIALLY_COMPATIBLE). DOM is present via CDP but requires non-trivial transformation: recomposition of split observation channels (text string + obs_nodes_info metadata), viewport filtering override (current_viewport_only=False), truncation handling, and ARIA role to HTML tag mapping.
 
-The parent handoff recommended a graph-lane integration experiment (Docker deployment + fragment extraction). However, SPIDER currently has NO fragment extraction code (research/harness/ does not exist). Before the graph lane builds new code, Intel should determine whether the accessibility-tree web agent literature already provides reusable patterns.
+The critical unknown is whether this transformation cost is recoverable: whether SPIDER fragment extraction actually works against WebArena's observation format. This experiment tests that using synthetic observations that mimic WebArena's exact format, without Docker deployment.
 
-If existing work demonstrates structured element matching from accessibility trees with cross-site transfer, the graph lane can adapt these patterns rather than building from scratch, dramatically reducing integration cost. If no such work exists, the graph lane faces a genuinely novel engineering challenge and the cost-benefit calculus for WebArena changes.
+## 4. Hypotheses
 
-## 4. Scope
+### H1: Element Recall
+A minimal adapter that recomposes split observation channels can extract >90% of elements from synthetic WebArena observations across three site types.
 
-### 4.1 What This Survey Covers
+### H2: Attribute Preservation
+Extracted elements preserve >80% of attributes (ARIA properties: focused, expanded, required, hasPopup) across all site types.
 
-Recent (2023-2026) web agent papers that:
-1. Use accessibility trees (ARIA structure from browser DevTools) as a primary observation modality
-2. Perform some form of element matching, selection, or grounding for interactive tasks
-3. Report cross-site, cross-environment, or generalizable element-matching results
+### H3: Hierarchy Preservation
+Extracted elements preserve >80% of parent-child relationships across all site types.
 
-### 4.2 What This Survey Excludes
+### H4: Positive Control
+Adapter extracts all 100 elements from the positive control synthetic observation with correct attributes.
 
-- Papers using only screenshots, HTML, or raw DOM (not accessibility trees)
-- Papers using accessibility trees only for page understanding (not element matching)
-- Papers before 2023 (pre-dates current accessibility-tree-based web agent methods)
-- Papers without published results or peer review
+### H5: Null Control
+Adapter extracts zero elements from the null control (screenshots-only) observation.
 
-### 4.3 Relevance Criterion
+## 5. Synthetic Data Generation
 
-Each paper is assessed for relevance to SPIDER's specific problem: can its element-matching approach be adapted to extract reusable fragments from WebArena's accessibility tree output for cross-site transfer? Papers that use accessibility trees for navigation but not for reusable fragment extraction are included but flagged as partially relevant.
+### 5.1 Accessibility Tree Format
 
-## 5. Search Strategy
+Synthetic observations will mimic WebArena's exact output:
+- `obs["text"]`: formatted indented string with element IDs, roles, names, properties
+- `obs_nodes_info`: dict mapping element ID to `{backend_id, union_bound, text}`
+- `obs["image"]`: base64 placeholder (not used)
 
-### 5.1 Query Strategy
+Example element string: `[4] button "Submit" focused: True`
 
-Use 3+ independent search approaches:
+### 5.2 Site Types
 
-1. **Keyword search**: "accessibility tree" + "web agent", "accessibility tree" + "element matching", "accessibility tree" + "cross-site", "ARIA" + "web navigation" + "agent"
-2. **Venue/conference search**: ACL, EMNLP, NeurIPS, ICML, ICLR, AAAI, CHI, UIST proceedings (2023-2026)
-3. **Citation tracking**: Forward/backward citation from key papers (e.g., Mind2Web, WebArena, SeeAct, AutoWebGLM)
-4. **Author search**: Known web agent research groups (Notre Dame Mind2Web team, Microsoft Research, Google DeepMind)
+Three synthetic site types with distinct element patterns:
 
-### 5.2 Inclusion Criteria
+1. **E-commerce** (product listing): 100 elements total
+   - 20 links (product titles, categories)
+   - 30 buttons (add to cart, wishlist, compare)
+   - 50 textboxes (search, quantity, filter inputs)
+   - Hierarchy: root -> sections -> groups -> elements
 
-A paper is included if ALL of:
-- Published 2023-2026
-- Uses accessibility trees (Accessibility.getFullAXTree or equivalent) as input
-- Addresses interactive web tasks (not just static page analysis)
-- Reports some quantitative performance metric
+2. **Social forum** (thread view): 100 elements total
+   - 25 links (user profiles, reply, quote)
+   - 35 buttons (like, report, follow)
+   - 40 textboxes (comment, reply, search)
+   - Hierarchy: root -> posts -> actions -> elements
 
-### 5.3 Exclusion Criteria
+3. **Collaborative coding** (file tree): 100 elements total
+   - 15 links (file names, directory links)
+   - 40 buttons (expand, collapse, rename, delete)
+   - 45 textboxes (file search, commit message, branch name)
+   - Hierarchy: root -> directories -> files -> actions
 
-A paper is excluded if ANY of:
-- Uses only screenshots, HTML, or raw DOM (no accessibility tree)
-- Pre-2023 publication
-- No quantitative results
-- Accessibility tree is mentioned but not used as primary observation
+### 5.3 Sample Size
 
-## 6. Data Extraction
+- 3 site types x 100 elements = 300 total elements
+- Each element has unique ID, role, name, properties, parent-child relationship
+- Synthetic generation uses deterministic seed (seed=42) for reproducibility
 
-For each included paper, extract:
+## 6. Adapter Implementation
 
-### 6.1 Paper Metadata
-- Title, authors, year, venue
-- Task type (navigation, form filling, information extraction, etc.)
-- Number of sites/tasks tested
-- Whether tasks span multiple sites (cross-site evidence)
+### 6.1 Current SPIDER Fragment Extraction
 
-### 6.2 Accessibility Tree Usage
-- Which accessibility tree API: getFullAXTree, getAccessibilityTree, other
-- What properties are extracted: role, name, state, bounding box, relationships
-- How the tree is structured/processed (raw, pruned, flattened, hierarchical)
-- Whether current_viewport_only filtering is applied
+SPIDER's current fragment extraction operates on raw HTML pages (quotes.toscrape.com, books.toscrape.com). It extracts elements by parsing HTML tags, attributes, and hierarchy. This serves as baseline reference only.
 
-### 6.3 Element Matching Strategy
-- Classification: role-based, name-based, embedding-based, LLM-based, hybrid
-- Whether matching is structured (algorithmic) or unstructured (LLM reasoning)
-- Whether matches are reusable across sites or site-specific
-- Whether the approach handles dynamic state changes
+### 6.2 Minimal Adapter for Accessibility Tree
 
-### 6.4 Cross-Site Evidence
-- Does the paper test across multiple sites?
-- What is the element matching accuracy (if reported)?
-- Is the accuracy reported per-site or aggregate?
-- Does the paper explicitly claim cross-site generalization?
+The adapter will:
+1. Parse the formatted indented string to extract element IDs, roles, names, properties
+2. Parse indentation to reconstruct parent-child hierarchy
+3. Map element IDs to `obs_nodes_info` metadata for backend_id, union_bound, text
+4. Override viewport filtering (assume all elements are visible)
+5. Output extracted fragments with identity, hierarchy, attributes, text
 
-### 6.5 Relevance to SPIDER
-- Can the element-matching approach be adapted for fragment extraction?
-- What transformation would be required to map from their representation to SPIDER's Observation.state?
-- Does the approach preserve enough structure for SPIDER's Mechanism model (preconditions, postconditions, parameter slots)?
+### 6.3 Code Location
 
-## 7. Classification Taxonomy
+Adapter code will be committed to `research/intel/webarena_adapter.py` before execution.
 
-### 7.1 Element Matching Strategy Types
+## 7. Measures
 
-| Type | Description | Example |
-|------|-------------|---------|
-| ROLE-NAME | Match by ARIA role + accessible name | "button[name='Submit']" |
-| ROLE-STATE | Match by role + state (focused, expanded, etc.) | "textbox[focused=True]" |
-| EMBEDDING | Embed element text/properties, match by cosine similarity | Sentence-BERT on element text |
-| LLM | Use LLM to identify/select elements | GPT-4 with element descriptions |
-| HYBRID | Combine structured + LLM approaches | Role-name with LLM fallback |
-| SITE-SPECIFIC | Hardcoded selectors per site | CSS selectors, XPath |
+### 7.1 Primary Metric
+- **element_recall**: fraction of synthetic elements successfully extracted (elements with correct ID, role, name)
 
-### 7.2 Cross-Site Evidence Levels
+### 7.2 Secondary Metrics
+- **attribute_preservation**: fraction of extracted elements with correct ARIA properties (focused, expanded, required, hasPopup)
+- **hierarchy_preservation**: fraction of extracted elements with correct parent-child relationships
+- **transformation_cost_lines**: lines of code required for adapter (qualitative)
 
-| Level | Description |
-|-------|-------------|
-| NONE | No cross-site testing |
-| WITHIN-DOMAIN | Tests across sites of same type (e.g., multiple e-commerce) |
-| CROSS-DOMAIN | Tests across different site types |
-| PROVEN-TRANSFER | Explicitly demonstrates transfer to unseen sites |
+### 7.3 Per-Site Metrics
+All metrics computed per site type and aggregated.
 
 ## 8. Controls
 
 ### 8.1 Positive Control
-At least one paper must use accessibility trees with structured (not pure LLM) element matching and report cross-site or cross-environment results. If no paper meets this, the survey is in the expected failure region.
+- Synthetic observation with 100 elements, known structure
+- Expected: element_recall = 1.0, attribute_preservation = 1.0, hierarchy_preservation = 1.0
 
 ### 8.2 Null Control
-Papers using HTML, DOM, or screenshots (not accessibility trees) must be correctly excluded. The survey must not inflate counts by including non-accessibility-tree work.
+- Synthetic observation with only screenshot (base64) and empty text
+- Expected: element_recall = 0.0, attribute_preservation = 0.0, hierarchy_preservation = 0.0
 
-### 8.3 Sensitivity Control
-The search must use 3+ independent strategies to avoid missing relevant work. If all papers are found via a single strategy, the survey may be biased.
+### 8.3 Baseline Control
+- Current SPIDER fragment extraction on raw HTML (reference only, not executed)
+- Provides context for what "good" looks like on compatible format
 
-## 9. Measurement Validity
+## 9. Statistical Tests
 
-### 9.1 Representation Loss
-- Literature surveys are inherently incomplete; we cannot guarantee all relevant papers are found
-- Mitigation: multiple search strategies, forward/backward citation, known research groups
-- The survey reports what was found, not a claim of exhaustive coverage
+### 9.1 Primary Test
+- One-sample t-test: element_recall > 0.90 across site types
+- One-sample t-test: attribute_preservation > 0.80 across site types
+- One-sample t-test: hierarchy_preservation > 0.80 across site types
 
-### 9.2 Classification Ambiguity
-- Some papers may use hybrid approaches that don't fit neatly into one category
-- Mitigation: classify by primary approach, note hybrid nature in extraction
+### 9.2 Effect Size
+- Cohen's d for each metric vs threshold (0.90, 0.80, 0.80)
 
-### 9.3 Metric Heterogeneity
-- Different papers report different metrics (accuracy, success rate, F1, etc.)
-- Mitigation: extract the primary metric used, note when metrics are not comparable
-
-### 9.4 Publication Bias
-- Published papers may overrepresent successful approaches
-- Mitigation: note this limitation; negative results in the survey are valuable
+### 9.3 Site Type Comparison
+- Paired t-test: metric differences across site types
+- Coefficient of variation across site types
 
 ## 10. Validity Threats
 
-### 10.1 Search Coverage
-With 3+ search strategies and citation tracking, we expect to find most high-impact papers. However, very recent (2026) or very niche papers may be missed. This is a completeness threat, not a validity threat.
+### 10.1 Synthetic-to-Real Gap
+Synthetic observations may not reflect real WebArena DOM. Mitigation: format mimics exact WebArena output; if adapter fails on synthetic, it will fail on real.
 
-### 10.2 Recency
-Papers from 2023-2026 are selected to capture current methods. Earlier work may have relevant findings but uses older accessibility tree APIs or browser versions.
+### 10.2 Adapter Simplicity
+Minimal adapter may not capture all transformation nuances. Mitigation: adapter focuses on core extraction (identity, hierarchy, attributes, text); complex transformations (viewport override, truncation handling) are out of scope.
 
-### 10.3 Relevance Assessment
-The relevance criterion (can it be adapted for SPIDER?) is subjective. Mitigation: use explicit criteria (structured matching, cross-site evidence, adaptability) and document reasoning for each paper.
+### 10.3 Sample Size
+Only 300 elements across 3 site types. Mitigation: sufficient for detecting large effects (d>0.8) with >80% power.
 
-### 10.4 Cross-Site Definition
-"Cross-site" is defined as testing on sites not used for training/development. Some papers may test on sites from the same domain (e.g., multiple Wikipedia pages) which is not true cross-site transfer. Mitigation: distinguish within-domain vs cross-domain vs proven-transfer in extraction.
+### 10.4 Element Diversity
+Synthetic elements may not capture real WebArena element diversity. Mitigation: three distinct site types cover e-commerce, social, coding patterns.
 
 ## 11. Decision Rules
 
 ### 11.1 SUPPORTS
 If ALL of:
-1. >= 3 papers demonstrate structured element matching from accessibility trees
-2. At least 1 paper demonstrates cross-domain transfer (different site types)
-3. At least 1 paper reports element matching accuracy > 70% on cross-site tasks
-4. The matching approach is algorithmic (not pure LLM reasoning)
+1. element_recall >= 0.90 across all site types
+2. attribute_preservation >= 0.80 across all site types
+3. hierarchy_preservation >= 0.80 across all site types
+4. Positive control passes (recall = 1.0)
+5. Null control passes (recall = 0.0)
+6. No pipeline errors
 
-### 11.2 PARTIALLY_SUPPORTS
-If:
-1. 1-2 papers demonstrate structured element matching from accessibility trees with cross-site evidence, OR
-2. >= 3 papers demonstrate structured matching but only within-domain, OR
-3. >= 3 papers demonstrate cross-site matching but accuracy < 70%
+### 11.2 FALSIFIES
+If ANY of:
+1. element_recall < 0.50 across any site type
+2. attribute_preservation < 0.50 across any site type
+3. Positive control fails (recall < 0.90)
+4. Null control fails (recall > 0.0)
+5. Pipeline errors prevent extraction
 
-### 11.3 DOES_NOT_SUPPORT
-If:
-1. 0 papers demonstrate structured element matching from accessibility trees with cross-site evidence, OR
-2. All surveyed papers use site-specific selectors or pure LLM matching, OR
-3. No paper reports cross-site element matching accuracy > 70%
-
-### 11.4 MEASUREMENT_INVALID
-If:
-1. Search infrastructure fails (no access to academic databases)
-2. Fewer than 5 papers are found meeting inclusion criteria (insufficient evidence base)
+### 11.3 MIXED
+Otherwise (partial success, metrics between thresholds)
 
 ## 12. Expected Outcomes
 
-### 12.1 SUPPORTS
-If existing work provides reusable patterns, the graph lane should:
-- Identify the most promising matching approach for adaptation
-- Estimate transformation cost from WebArena's accessibility tree to adapted approach
-- Proceed with integration experiment using adapted patterns (lower risk)
-- C-CROSSSITE moves toward EXPERIMENTAL
+### 12.1 Positive Result (SUPPORTS)
+- Transformation cost is low; adapter requires minimal code
+- WebArena 812-task corpus expansion is worth the REQUIRES_TRANSFORM overhead
+- C-CROSSSITE and C-LLM-INHERIT can proceed with integration experiment
+- Graph lane can design Docker-based integration experiment
 
-### 12.2 PARTIALLY_SUPPORTS
-If partial evidence exists, the graph lane should:
-- Combine multiple partial approaches into a hybrid strategy
-- Accept higher integration risk but with informed design choices
-- Consider whether the available patterns justify the 812-task corpus expansion
-- C-CROSSSITE remains HYPOTHESIS with narrowed unknowns
+### 12.2 Negative Result (FALSIFIES)
+- Transformation cost high; adapter requires extensive code or fails to extract
+- 2-site corpus remains practical bound
+- Intel lane should assess whether other benchmarks offer lower-transformation-cost path
+- VisualWebArena or other benchmarks may be better candidates
 
-### 12.3 DOES_NOT_SUPPORT
-If no reusable patterns exist, the graph lane should:
-- Accept that fragment extraction is a genuinely novel requirement
-- Decide whether to build from scratch (higher cost) or accept 2-site corpus (lower cost)
-- Consider whether VisualWebArena or other benchmarks offer lower transformation cost
-- C-CROSSSITE remains HYPOTHESIS with the additional unknown: "Can novel fragment extraction be built?"
+### 12.3 Mixed Result
+- Partial extraction success; some site types work, others don't
+- Requires site-specific adapters or additional transformation logic
+- Integration experiment should focus on compatible site types first
 
 ## 13. Analysis Plan
 
-1. **Search execution**: Run all 4 search strategies, collect candidate papers
-2. **Deduplication**: Remove duplicates across strategies
-3. **Screening**: Apply inclusion/exclusion criteria
-4. **Data extraction**: For each included paper, extract structured metadata per Section 6
-5. **Classification**: Classify element matching strategy and cross-site evidence level
-6. **Assessment**: For each paper, assess relevance to SPIDER's problem
-7. **Synthesis**: Build evidence matrix, compute summary statistics
-8. **Decision**: Apply decision rules from Section 11
-9. **Reporting**: Structured report with per-paper findings and overall verdict
+1. **Data Generation**: Generate 3 synthetic site types (100 elements each) with deterministic seed=42
+2. **Adapter Implementation**: Write minimal adapter in `research/intel/webarena_adapter.py`
+3. **Extraction**: Run adapter on each synthetic observation
+4. **Metric Computation**: Compute element_recall, attribute_preservation, hierarchy_preservation per site type
+5. **Statistical Tests**: One-sample t-tests vs thresholds, effect sizes
+6. **Controls**: Verify positive and null controls
+7. **Reporting**: Report all outcomes with equal prominence
 
-## 14. Analysis Artifacts
+## 14. Analysis Code
 
-- `survey_results.json`: Structured extraction per paper
-- `evidence_matrix.md`: Cross-tabulation of papers vs capabilities
-- `relevance_assessment.md`: Per-paper assessment of SPIDER adaptability
-- This preregistration and spec.json
+Analysis will be implemented in Python using:
+- `json` for parsing observation metadata
+- `re` for parsing formatted indented string
+- `statistics` for mean, stdev, t-tests
+- Standard library only (no external dependencies)
 
-## 15. Deviation Policy
+Code will be committed to `research/intel/` before execution.
 
-Any deviation from this preregistration (e.g., expanding scope, changing inclusion criteria) will be labeled EXPLORATORY and cannot support confirmatory claims about C-CROSSSITE. A new confirmatory claim requires a new preregistration.
+## 15. Pre-registered Expectations
 
-## 16. Freeze Statement
+From prior intel experiment:
+- WebArena provides structured DOM via CDP (accessibility_tree mode)
+- Observation split across text string and obs_nodes_info metadata requires recomposition
+- ARIA properties (focused, expanded, required) are available in accessibility tree
+- HTML attributes (class, id, href) are NOT available in accessibility_tree mode (only in html mode)
+- Adapter should handle ARIA properties; HTML attributes are out of scope for this experiment
 
-This preregistration is frozen BEFORE any literature search is conducted or any papers are read. The survey will be executed exactly as described here.
+## 16. Deviation Policy
+
+Any deviation from this preregistration will be labeled EXPLORATORY and cannot support confirmatory claims. A new confirmatory claim requires a new preregistration.
+
+## 17. Freeze Statement
+
+This preregistration is frozen BEFORE any analysis code is written or any outcome data is inspected. The experiment will be executed exactly as described here.
