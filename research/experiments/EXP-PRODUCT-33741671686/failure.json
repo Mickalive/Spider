@@ -1,9 +1,0 @@
-{
-  "stage": "director",
-  "category": "VALIDATION_FAILURE",
-  "message": "invalid claim update status: SURVIVES_NARROW",
-  "retryable": false,
-  "recorded_at": "2026-09-05T08:43:16.783073+00:00",
-  "github_run_id": "33955871036",
-  "github_run_attempt": "1"
-}
