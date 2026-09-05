@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-33528827909",
+  "lane": "frontier",
+  "target_lane": "frontier",
+  "next_question": "Can causal intervention (do-calculus) on action parameters reveal regime-dependent dynamics in synthetic Web transitions where prediction accuracy decomposition fails due to small-sample inference limitations?",
+  "why_next": "The current experiment failed to provide inferential evidence due to measurement invalidity (statistical design flaws) but revealed a robust descriptive monotonic effect. The next high-information question should be orthogonal: instead of further prediction accuracy decomposition (which requires larger n and more lambda levels), shift to causal intervention methods that can directly manipulate action parameters and test regime-dependent dynamics without relying on correlation-based inference. This is high-upside because causal mechanisms could provide stronger evidence for dynamical heterogeneity and align with the claim's next gate (effect factorization, barriers, timescales, geometry).",
+  "carry_forward": {
+    "established": [
+      "Descriptive monotonic increase of rule-memory accuracy difference with lambda in synthetic 10-state 4-action permutation transitions (n=250 per lambda per function, 50 test). Rule-memory diff means: 0.053 at λ=0, 0.087 at λ=0.25, 0.307 at λ=0.5, 0.653 at λ=1.0.",
+      "Positive control passes: rules achieve 100% accuracy at λ=1 across all 3 deterministic functions, demonstrating pipeline can detect full action-dependence.",
+      "Null control passes but underpowered: paired t-test at λ=0 p=0.094 (df=2, Cohen d=1.75) does not reject; pass reflects lack of power, not evidence of absence.",
+      "Lambda explains 96.7% of variance in rule-memory difference (ANOVA main-effects F=58.99 p<0.0001); function main effect negligible (F=0.026 p=0.97)."
+    ],
+    "rejected": [
+      "Inferential claim that Spearman rho is Bonferroni-corrected significant with 4 lambda levels (exact permutation p=0.042 one-sided, after Bonferroni x12 p>=0.5).",
+      "Function invariance failure as evidence of heterogeneous dynamics: CV metric invalid at low means (CV inflated by small denominators), ANOVA interaction unestimable (saturated design, 0 residual df), function main effect p=0.97.",
+      "Producer's reported p-values (spearman_p_value=0.0, spearman_bonferroni_p=0.0) are measurement-invalid (impossible for n=4)."
+    ],
+    "unknown": [
+      "Does the monotonicity finding survive with properly powered design (≥6-8 lambda levels, ≥200 test transitions per cell, replicates per cell for interaction estimation)?",
+      "Is the non-monotonic behavior of Function 2 (seed=43) at λ=0.25 a genuine function-specific artifact or sampling noise? Needs larger test n (≥200) to resolve.",
+      "Can causal intervention (do-calculus) reveal regime-dependent dynamics beyond correlational prediction?",
+      "How do synthetic permutation results translate to real Web transitions? Synthetic-to-real gap remains untested.",
+      "Quantitative values for frequency and shuffle baselines not reported in metrics; cannot fully audit baseline strength."
+    ],
+    "do_not_assume": [
+      "Do not assume monotonicity is inferentially proven; effect size is robust but statistical significance not established due to measurement invalidity.",
+      "Do not assume function invariance failure is real; CV metric is invalid at low means and interaction unestimable.",
+      "Do not assume this experiment falsifies C-WEB-DYNAMICS; the claim remains HYPOTHESIS; only this specific detection method failed to provide justified inference.",
+      "Do not assume synthetic-to-real translation; findings are limited to controlled synthetic permutation transitions.",
+      "Do not assume small-sample low-lambda results are stable; accuracy estimates at λ=0 and λ=0.25 have high variance (SE ~0.07).",
+      "Do not assume the saturated ANOVA design provides evidence for or against function x lambda interaction; interaction is unestimable.",
+      "Do not assume the null control pass at λ=0 is evidence of absence; power is <20% for small effects."
+    ]
+  },
+  "dependencies": [
+    "Causal intervention framework (do-calculus) implementation for synthetic Web transitions.",
+    "Larger sample sizes (≥200 test transitions per cell) and more lambda levels (≥6-8) for future prediction-accuracy experiments.",
+    "Replicates per cell (5-10 independent train/test splits) to estimate interaction and provide residual df for ANOVA."
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-33528827909/spec.json: hypothesis, falsifier, decision_rule, baselines, positive_control, null_control",
+    "research/experiments/EXP-FRONTIER-33528827909/prereg.md: 5-11 decision rules, Bonferroni x12, ANOVA interaction requirement",
+    "research/experiments/EXP-FRONTIER-33528827909/freeze.json: hashes fe78533f, f2cd3e67, dbadd1fc",
+    "research/experiments/EXP-FRONTIER-33528827909/result.json: metrics.* (spearman_rho_aggregate 1.0, spearman_p_value 0.0, rule_memory_diff_mean_by_lambda, anova_lambda_effect_F 58.9885, function_invariance_cv_by_lambda), controls.* (positive_control pass true, null_control pass true, function_invariance pass false), observations, validity_notes",
+    "research/experiments/EXP-FRONTIER-33528827909/report.md: per-function accuracies table, aggregate diff table, statistical tests, control checks",
+    "research/experiments/EXP-FRONTIER-33528827909/analyze.py:50-59 deterministic functions, 63-77 generation, 82-138 baselines, 178-188 split, 260-284 Spearman, 307-376 ANOVA, 382-442 controls",
+    "research/experiments/EXP-FRONTIER-33528827909/provenance.json: frozen_inputs hashes, execution_timestamp 2026-09-02T18:15:00Z, github_run_id 33664084980",
+    "research/experiments/EXP-FRONTIER-33528827909/audit.json: status MEASUREMENT_INVALID, producer_claim_supported false, claim_ceiling descriptive only, validity_findings, recomputed_metrics, required_fixes"
+  ],
+  "recommended_action": "Design a new Frontier experiment using causal intervention (do-calculus) to test regime-dependent dynamics in synthetic Web transitions. Use larger sample sizes (≥200 test transitions per cell), more lambda levels (≥6-8), and replicates per cell (5-10) to provide statistical power and enable interaction estimation. Focus on manipulating action parameters directly to test causality rather than relying on correlation-based prediction accuracy decomposition."
+}

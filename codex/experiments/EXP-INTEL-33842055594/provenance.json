@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-33842055594",
+  "lane": "intel",
+  "execution_date": "2026-09-04",
+  "methodology": "source_code_inspection",
+  "repository": {
+    "name": "web-arena-x/webarena",
+    "url": "https://github.com/web-arena-x/webarena",
+    "branch": "main",
+    "accessed_at": "2026-09-04"
+  },
+  "source_files_inspected": [
+    {
+      "path": "browser_env/envs.py",
+      "url": "https://raw.githubusercontent.com/web-arena-x/webarena/main/browser_env/envs.py",
+      "role": "ScriptBrowserEnv class, Playwright initialization, observation pipeline entry point",
+      "key_findings": [
+        "Imports sync_playwright from playwright.sync_api",
+        "Creates Playwright browser via self.playwright.chromium.launch()",
+        "Creates CDP session via self.context.new_cdp_session(page)",
+        "Sends Accessibility.enable for accessibility_tree mode",
+        "Delegates observation to ObservationHandler"
+      ]
+    },
+    {
+      "path": "browser_env/processors.py",
+      "url": "https://raw.githubusercontent.com/web-arena-x/webarena/main/browser_env/processors.py",
+      "role": "ObservationHandler, TextObervationProcessor — core observation extraction",
+      "key_findings": [
+        "TextObervationProcessor handles accessibility_tree and html modes",
+        "fetch_page_accessibility_tree() calls client.send('Accessibility.getFullAXTree', {})",
+        "fetch_page_html() calls client.send('DOMSnapshot.captureSnapshot', ...)",
+        "parse_accessibility_tree() formats tree into readable string with element IDs",
+        "obs_nodes_info maps element IDs to {backend_id, union_bound, text}",
+        "get_element_center() uses union_bound for spatial positioning"
+      ]
+    },
+    {
+      "path": "browser_env/utils.py",
+      "url": "https://raw.githubusercontent.com/web-arena-x/webarena/main/browser_env/utils.py",
+      "role": "Type definitions for AccessibilityTreeNode, DOMNode, Observation",
+      "key_findings": [
+        "AccessibilityTreeNode TypedDict: nodeId, role, name, properties, childIds, parentId, backendDOMNodeId, union_bound",
+        "DOMNode TypedDict: nodeId, nodeType, nodeName, nodeValue, attributes, backendNodeId, parentId, childIds, union_bound",
+        "Observation = str | npt.NDArray[np.uint8]"
+      ]
+    },
+    {
+      "path": "browser_env/constants.py",
+      "url": "https://raw.githubusercontent.com/web-arena-x/webarena/main/browser_env/constants.py",
+      "role": "Observation constants, ignored properties, role definitions",
+      "key_findings": [
+        "IGNORED_ACTREE_PROPERTIES = ('focusable', 'editable', 'readonly', 'level', 'settable', 'multiline', 'invalid')",
+        "ROLES tuple lists all standard accessibility roles",
+        "UTTERANCE_MAX_LENGTH = 8192"
+      ]
+    },
+    {
+      "path": "minimal_example.py",
+      "url": "https://raw.githubusercontent.com/web-arena-x/webarena/main/minimal_example.py",
+      "role": "Reference example showing observation usage",
+      "key_findings": [
+        "observation_type='accessibility_tree' is the example default",
+        "obs['text'] returns formatted accessibility tree string",
+        "Element IDs are used for action targeting via regex matching",
+        "Shows the expected output format: '[4] RootWebArea ... [12] link ...'"
+      ]
+    },
+    {
+      "path": "run.py",
+      "url": "https://raw.githubusercontent.com/web-arena-x/webarena/main/run.py",
+      "role": "End-to-end evaluation script showing observation type configuration",
+      "key_findings": [
+        "Default observation_type='accessibility_tree'",
+        "Choices: ['accessibility_tree', 'html', 'image']",
+        "Enforces action-observation compatibility: id_accessibility_tree requires accessibility_tree observation",
+        "max_obs_length=1920 truncates observation before LLM input"
+      ]
+    },
+    {
+      "path": "agent/agent.py",
+      "url": "https://raw.githubusercontent.com/web-arena-x/webarena/main/agent/agent.py",
+      "role": "Agent classes showing observation consumption",
+      "key_findings": [
+        "PromptAgent receives trajectory containing StateInfo with observation dict",
+        "action_set_tag='id_accessibility_tree' is the default action space",
+        "Agent constructs prompts from trajectory observations"
+      ]
+    },
+    {
+      "path": "README.md",
+      "url": "https://raw.githubusercontent.com/web-arena-x/webarena/main/README.md",
+      "role": "Project documentation",
+      "key_findings": [
+        "States 'observation_type=\"accessibility_tree\"' in quick start code",
+        "Shows obs['text'] accessor for text observation",
+        "Documents 4 website types: shopping, reddit, gitlab, wikipedia"
+      ]
+    }
+  ],
+  "spider_reference_files": [
+    {
+      "path": "src/spider/models.py",
+      "role": "Observation dataclass definition",
+      "key_finding": "Observation.state is dict[str, Any] — can hold arbitrary structured data"
+    }
+  ],
+  "inherited_evidence": {
+    "parent_experiment": "EXP-INTEL-33528832113",
+    "parent_handoff_path": "research/experiments/EXP-INTEL-33528832113/handoff.json",
+    "parent_handoff_sha256": "46853bb92c10fbe26f3ba849ff7664c02b95b23d39e1033fbc6efe33424a3336"
+  },
+  "environment": {
+    "methodology": "Source code inspection via GitHub API and raw file fetching",
+    "no_docker": true,
+    "no_browser_execution": true,
+    "no_llm_calls": true
+  },
+  "limitations": [
+    "Source code inspection only — no live execution to verify runtime behavior",
+    "Shadow DOM and iframe traversal not verified in live execution",
+    "Observation truncation (max_obs_length) is agent-side, not environment limitation",
+    "Code may evolve after inspection date"
+  ]
+}

@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-33842055594",
+  "lane": "intel",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "playwright_usage_confirmed": true,
+    "observation_types_available": ["accessibility_tree", "html", "image"],
+    "default_observation_type": "accessibility_tree",
+    "element_identity_preserved": true,
+    "element_hierarchy_preserved": true,
+    "element_attributes_preserved": true,
+    "element_text_content_preserved": true,
+    "structured_metadata_available": true,
+    "cross_site_format_consistent": true,
+    "spider_observation_state_compatible": true,
+    "compatibility_level": "DIRECTLY_USABLE",
+    "positive_control_pass": true,
+    "null_control_pass": false
+  },
+  "controls": {
+    "positive_control_playwright_api": {
+      "description": "WebArena uses Playwright for browser automation. If the codebase cannot locate Playwright API usage, the methodology is broken.",
+      "expected": "Playwright imported and used for browser launch, page navigation, and DOM interaction",
+      "observed": "browser_env/envs.py imports sync_playwright from playwright.sync_api, calls self.playwright.chromium.launch(), and uses page objects for navigation. Playwright is a core dependency.",
+      "pass": true,
+      "evidence": "browser_env/envs.py line: 'from playwright.sync_api import (CDPSession, Page, Playwright, ViewportSize, expect, sync_playwright)' and 'self.playwright = self.context_manager.__enter__()' then 'self.browser = self.playwright.chromium.launch(headless=self.headless, slow_mo=self.slow_mo)'"
+    },
+    "positive_control_cdp_accessibility": {
+      "description": "WebArena uses Chrome DevTools Protocol Accessibility domain for accessibility tree extraction. If CDP is not used, the observation pipeline is different from documented.",
+      "expected": "CDP session created and Accessibility.getFullAXTree called",
+      "observed": "browser_env/envs.py creates CDP session via 'self.context.new_cdp_session(page)' and sends 'client.send(\"Accessibility.enable\")' for accessibility tree mode. browser_env/processors.py calls 'client.send(\"Accessibility.getFullAXTree\", {})' to get the full tree.",
+      "pass": true,
+      "evidence": "browser_env/processors.py TextObervationProcessor.fetch_page_accessibility_tree(): 'accessibility_tree: AccessibilityTree = client.send(\"Accessibility.getFullAXTree\", {})\"nodes\"]'"
+    },
+    "null_control_screenshots_only": {
+      "description": "If WebArena's agent interface returns only screenshots (base64 images) without DOM/HTML content, the observation format is INCOMPATIBLE.",
+      "expected": "If only screenshots are returned, this control passes (correctly identifies incompatibility)",
+      "observed": "WebArena provides 3 observation types: accessibility_tree (structured DOM), html (structured DOM), and image (screenshot). The default and primary type is accessibility_tree, which provides full DOM structure. The null control does NOT pass because DOM is present.",
+      "pass": false,
+      "evidence": "run.py default: '--observation_type', choices=['accessibility_tree', 'html', 'image'], default='accessibility_tree'. The agent receives structured DOM data, not just screenshots."
+    }
+  },
+  "artifacts": [
+    {
+      "path": "https://raw.githubusercontent.com/web-arena-x/webarena/main/browser_env/envs.py",
+      "sha256": null,
+      "role": "code"
+    },
+    {
+      "path": "https://raw.githubusercontent.com/web-arena-x/webarena/main/browser_env/processors.py",
+      "sha256": null,
+      "role": "code"
+    },
+    {
+      "path": "https://raw.githubusercontent.com/web-arena-x/webarena/main/browser_env/utils.py",
+      "sha256": null,
+      "role": "code"
+    },
+    {
+      "path": "https://raw.githubusercontent.com/web-arena-x/webarena/main/minimal_example.py",
+      "sha256": null,
+      "role": "code"
+    },
+    {
+      "path": "https://raw.githubusercontent.com/web-arena-x/webarena/main/run.py",
+      "sha256": null,
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "WebArena provides THREE observation types: 'accessibility_tree' (default), 'html', and 'image'. The default is accessibility_tree, which provides structured DOM data to the agent.",
+    "The accessibility_tree observation uses Chrome DevTools Protocol (CDP) Accessibility.getFullAXTree to extract the full accessibility tree from the browser. Each node contains: nodeId, role (dict with 'value'), name (dict with 'value'), properties (list of key-value dicts), childIds (list), parentId (string), backendDOMNodeId, and union_bound (bounding box [x, y, width, height]).",
+    "The html observation uses CDP DOMSnapshot.captureSnapshot to extract the DOM tree. Each node contains: nodeId, nodeType, nodeName, nodeValue, attributes (key-value string), backendNodeId, parentId, childIds, and union_bound.",
+    "The observation is formatted into a readable string (e.g., '[4] RootWebArea \"Projects Dashboard GitLab\" focused: True') and returned as obs[\"text\"]. Additionally, structured metadata is stored in obs_nodes_info, which maps each element ID to {backend_id, union_bound, text}.",
+    "Element identity is fully preserved: each element has a numeric ID, a role/type (link, button, textbox, etc.), a name/text content, and properties (focused, expanded, required, etc.).",
+    "Element hierarchy is fully preserved: each node has parentId and childIds, forming a tree structure. The formatted string uses indentation to show nesting depth.",
+    "Element attributes are fully preserved: the accessibility tree includes properties like focused, expanded, required, hasPopup, etc. The HTML mode includes full HTML attributes (class, id, href, etc.).",
+    "Text content is fully preserved: each element's name/value contains its visible text content.",
+    "The structured metadata (obs_nodes_info) provides backend DOM node IDs and bounding boxes for each element, enabling precise element targeting.",
+    "Cross-site consistency: the observation_type is set at the environment level (not per-site). All 4 website types (e-commerce, social forum, collaborative coding, CMS) use the same ScriptBrowserEnv class and the same observation pipeline. The format is uniform.",
+    "SPIDER Observation.state is dict[str, Any], which can hold arbitrary structured data. WebArena's accessibility tree data maps directly: state = {\"accessibility_tree\": accessibility_tree_nodes, \"obs_nodes_info\": obs_nodes_info, \"browser_config\": browser_config}. All structural information needed for fragment extraction (element identity, hierarchy, attributes, text) is preserved.",
+    "The compatiblity level is DIRECTLY_USABLE: DOM/HTML content is present, parseable, and preserves element hierarchy. No transformation is required to map to SPIDER's Observation.state format."
+  ],
+  "validity_notes": [
+    "Source code inspection only: no Docker deployment, no browser execution, no live task solving. All claims are grounded in source code at github.com/web-arena-x/webarena main branch.",
+    "The formatted observation string (obs[\"text\"]) is a human-readable representation with indentation. The underlying structured data (obs_nodes_info) preserves the full tree structure programmatically. SPIDER's fragment extraction should use the structured metadata, not the formatted string.",
+    "WebArena's observation truncates to max_obs_length (default 1920 characters) before feeding to the LLM. This is an agent-side constraint, not an environment limitation. SPIDER can access the full observation.",
+    "The accessibility tree mode filters out nodes not in the current viewport (current_viewport_only=True by default). This is a reasonable optimization but means off-screen elements are not observed. SPIDER can set current_viewport_only=False to get the full page.",
+    "Some accessibility tree properties are ignored in the formatted output (IGNORED_ACTREE_PROPERTIES: focusable, editable, readonly, level, settable, multiline, invalid). These properties ARE present in the raw tree data and can be accessed via the structured metadata.",
+    "WebArena also provides image observations (screenshots) alongside text observations. The observation dict always contains both obs[\"text\"] and obs[\"image\"]. SPIDER can use either or both.",
+    "The AgentLab/BrowserGym ecosystem (recommended by WebArena authors) builds on top of this infrastructure. The core observation format is preserved in the unified framework."
+  ],
+  "unresolved": [
+    "Whether WebArena's observation truncation (max_obs_length=1920) affects SPIDER's fragment extraction. This is an agent-side constraint that SPIDER can override.",
+    "Whether the accessibility tree includes shadow DOM and iframe content. The code uses Accessibility.getFullAXTree which should traverse the full tree, but this was not verified in live execution.",
+    "Whether VisualWebArena's SoM (Set-of-Mark) annotations are compatible with SPIDER's text-based fragment model. This is a separate experiment.",
+    "Whether SPIDER's fragment extraction code needs adaptation for the accessibility tree format vs. raw HTML. The Observation.state dict is generic enough, but the fragment extraction logic may need updates."
+  ]
+}

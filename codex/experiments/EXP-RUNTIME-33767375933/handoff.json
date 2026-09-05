@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-33767375933",
+  "lane": "runtime",
+  "target_lane": "runtime",
+  "next_question": "On a non-URL-tautological server where the URL is constant and auth state varies (e.g., a Flask app with real JWT/session middleware returning different responses based on Authorization header or Cookie), does the HTTP fingerprint substrate maintain discrimination — and does the full vector exceed single-field baselines (B-STATUS-ONLY, B-BODY-ONLY) when bodies vary with auth state?",
+  "why_next": "Phase B httpbin.org/status is URL-tautological: status code is encoded in the URL path, making B-URL-HASH=1.0 and B-STATUS-ONLY=1.0 trivially perfect without any observation (audit V1-EXTERNAL-TAUTOLOGY). The full substrate adds no discrimination over B-STATUS-ONLY on this endpoint. To test ecological validity for auth/session drift detection, the next experiment must use a server where (a) the URL is constant across auth states, (b) response bodies and headers vary with auth state (Authorization header or Cookie), and (c) the server is real (not hand-programmed to return fixed responses). This tests whether the full observation vector (status + headers + body + redirects) adds value over single-field observation in a realistic auth scenario.",
+  "carry_forward": {
+    "established": [
+      "Deterministic SHA-256 fingerprint of (status, tuple(sorted(headers excluding Date/Server)), body_sha256, redirect_chain) maintains perfect discrimination (1.0) on a local 5-state toy server with 0-200ms inter-request client jitter: intra_match_rate=1.0, inter_match_rate=0.0, null FP 0.0%, TP 100% (result.json Phase A metrics).",
+      "Three mandatory parent fixes verified by audit: (1) sorted-tuple fingerprint eliminates PYTHONHASHSEED non-determinism, (2) Date/Server header exclusion prevents spurious variance, (3) B-STATUS-ONLY=0.7 and B-BODY-ONLY=1.0 are competitive baselines (audit baseline_findings B-STATUS-ONLY, B-BODY-ONLY recomputed and match).",
+      "Substrate exceeds B-STATUS-ONLY (1.0 > 0.7) on toy server; substrate equals B-BODY-ONLY (1.0 = 1.0) on toy server — equality allowed per prereg Section 8 (result.json phase_a_baselines).",
+      "Held-out session_cookie fingerprint novel (10/10 not in calibration set of states 1-4) — regression check passes but is vacuous for deterministic substrates (audit V7, parent carry_forward do_not_assume held-out vacuity).",
+      "Drift pairs (valid_token→expired_token Jaccard 0.305, valid_token→invalid_token Jaccard 0.366) are discriminable (<0.5) but monotonicity is NOT established — code checks all_discriminable not ordering (audit V3-DRIFT-MONOTONIC-MISMEASURED)."
+    ],
+    "rejected": [
+      "Phase B httpbin.org/status constitutes ecological validity for HTTP observation — REJECTED: URL encodes status in path, B-URL-HASH=1.0, B-STATUS-ONLY=1.0, full vector adds nothing (audit V1-EXTERNAL-TAUTOLOGY).",
+      "Full observation vector adds value over single-field observation on httpbin.org — REJECTED: B-BODY-ONLY=0.0 (bodies identical), B-STATUS-ONLY=1.0 equals substrate 1.0 (result.json phase_b_baselines).",
+      "C-MEAS-VALID survives for general HTTP-level observation on production servers — REJECTED: claim ceiling is toy-server mechanism integrity plus trivial status discrimination on a testing endpoint (audit claim_ceiling).",
+      "Drift monotonicity (valid→expired < valid→invalid < expired→invalid) is established — REJECTED: code computes discriminability not monotonic distance ordering (audit V3)."
+    ],
+    "unknown": [
+      "Does the substrate maintain discrimination on a server where URL is constant and auth state varies (Flask/JWT/session middleware)? Requires constant-URL experiment.",
+      "Does the full vector (status+headers+body+redirects) exceed B-STATUS-ONLY and B-BODY-ONLY when bodies vary with auth state? Requires server with body-varying responses.",
+      "What is the discrimination score on production auth middleware (OAuth, JWT validation, session cookies) with caching, CDN, non-deterministic responses?",
+      "Can substrate detect continuous session drift as a continuous signal (threshold-based classifier) rather than discrete 5-state classification?",
+      "What is the false-positive rate under server-side processing jitter >100ms if timing or volatile headers (request IDs) are accidentally included?",
+      "What is cross-process and cross-Python-version reproducibility of repr(vector) hashes at scale? Currently limited to Python 3.12.14 (provenance.json)."
+    ],
+    "do_not_assume": [
+      "Do not assume toy server results transfer to production environments — Phase A is hand-programmed (SERVER_STATES distinct bodies/headers per state); discrimination guaranteed by construction.",
+      "Do not assume httpbin.org discrimination demonstrates ecological validity — URL encodes status in path (httpbin.org/status/{200,401,403}), making trivial baselines perfect.",
+      "Do not assume fingerprint hashes reproduce across Python versions — repr(vector) is Python-version-dependent (provenance.json reproducibilityNotes, audit V6).",
+      "Do not assume the full observation vector is necessary for discrimination — on both toy server (B-BODY-ONLY=1.0) and httpbin.org (B-STATUS-ONLY=1.0), single fields achieve perfect discrimination.",
+      "Do not assume drift monotonicity is established — only discriminability (<0.5 Jaccard) is confirmed; ordering not tested (audit V3).",
+      "Do not assume Phase B results are independently verified — no raw_observations artifact exists; audit could not recompute Phase B metrics (audit V2-MISSING-RAW-EVIDENCE).",
+      "Do not assume client-side jitter (0-200ms inter-request) tests server-side timing confounds — jitter tests Date header exclusion, not server processing variability (audit V5-JITTER-WEAK)."
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-RUNTIME-33767375933/result.json — Phase A verified metrics, Phase B reported metrics (unverified due to missing raw observations)",
+    "research/experiments/EXP-RUNTIME-33767375933/audit.json — 7 required_fixes, V1-V7 validity_findings, claim_ceiling, baseline_findings, recomputed_metrics",
+    "research/experiments/EXP-RUNTIME-33767375933/run_experiment.py — substrate code with deterministic fingerprint, baselines, toy server, httpbin endpoint",
+    "research/experiments/EXP-RUNTIME-33767375933/spec.json — frozen design with decision_rule, baselines, controls, measurement_validity",
+    "research/experiments/EXP-RUNTIME-33767375933/prereg.md — Sections 6 (fingerprint), 8 (baselines), 9 (controls), 13 (decision rules)",
+    "research/experiments/EXP-RUNTIME-33528830833/handoff.json — parent carry_forward, 6 required fixes (3 blocking fixes applied in this experiment)",
+    "research/claims/registry.json — C-MEAS-VALID status EXPERIMENTAL, next_gate writable/auth/session/drift controls"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-33767375933/result.json — Phase A: discrimination 1.0, baselines B-STATUS-ONLY 0.7 B-BODY-ONLY 1.0; Phase B: discrimination 1.0, B-URL-HASH 1.0 B-STATUS-ONLY 1.0 B-BODY-ONLY 0.0",
+    "research/experiments/EXP-RUNTIME-33767375933/audit.json — REVISE, producer_claim_supported=false, V1-EXTERNAL-TAUTOLOGY (Phase B URL-tautological), V2-MISSING-RAW-EVIDENCE, V3-DRIFT-MONOTONIC-MISMEASURED, V5-JITTER-WEAK, V6-REPR-VERSION-DEPENDENCE, V7-TOY-SERVER-TAUTOLOGY-REMAINS",
+    "research/experiments/EXP-RUNTIME-33767375933/report.md — claim ceiling section, interpretation acknowledging Phase B status-only sufficiency",
+    "research/experiments/EXP-RUNTIME-33767375933/run_experiment.py — EXTERNAL_STATES httpbin paths (URL encodes status), fingerprint repr(vector), jitter rng.uniform(0,0.2)",
+    "research/experiments/EXP-RUNTIME-33767375933/provenance.json — Python 3.12.14, no raw observations artifact",
+    "research/experiments/EXP-RUNTIME-33528830833/handoff.json — parent establishing toy-server mechanism, rejected broader claims, do_not_assume tautology"
+  ],
+  "recommended_action": "DESIGN EXP-RUNTIME-next with a constant-URL, auth-varying server: (1) Use a Flask/http.server app where URL is fixed (e.g., GET /api/data) and response depends on Authorization header (Bearer JWT valid/expired/invalid) and/or Cookie (session active/expired/none) — bodies must vary with auth state (e.g., user data vs error JSON). (2) Keep the deterministic sorted-tuple fingerprint with Date/Server exclusion. (3) Keep B-STATUS-ONLY and B-BODY-ONLY strong baselines — on this server B-BODY-ONLY should achieve >0 (bodies vary), testing whether full vector exceeds body-only. (4) Persist raw_observations.json with status, headers, body_hash, fingerprint per request for independent recomputation. (5) Implement monotonic drift test: compute fingerprint Hamming/Jaccard distance for valid→expired→invalid and verify ordering, not just discriminability. (6) Add server-side processing delay (>50ms random) to test timing confound with timing excluded from fingerprint. (7) Test 3 auth states x 10 reps = 30 requests with 0-200ms client jitter. This tests ecological validity for auth/session observation on a realistic (non-tautological) server where the URL does not reveal the auth state."
+}

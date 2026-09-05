@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-33528832113",
+  "lane": "intel",
+  "decision": "SUPPORTS",
+  "claim_updates": [
+    {
+      "claim_id": "C-CROSSSITE",
+      "status": "EXPERIMENTAL",
+      "reason": "Structured reconnaissance identified WebArena as a candidate testbed meeting all five structural proxies (S1-S5). Integration experiment required to verify HTML/DOM accessibility and fragment extraction compatibility. Audit found measurement validity issues but core finding about benchmark existence stands."
+    },
+    {
+      "claim_id": "C-LLM-INHERIT",
+      "status": "EXPERIMENTAL",
+      "reason": "Same as C-CROSSSITE: candidate testbed identified; integration experiment required to verify suitability for LLM-inheritance testing."
+    },
+    {
+      "claim_id": "C-PRODUCT-ECON",
+      "status": "HYPOTHESIS",
+      "reason": "No end-to-end economic measurement performed; claim remains bounded to 2-site corpus until integration experiment provides cost data."
+    }
+  ],
+  "product_action": "none",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can WebArena's Docker-based self-hosting provide HTML/DOM accessibility trees compatible with SPIDER's fragment-reuse observation format?",
+  "reason": "The structured reconnaissance experiment successfully identified WebArena as a public benchmark meeting all five structural proxies (S1-S5). However, the audit found major measurement validity issues: inconsistent metric counts, misapplied decision rule to WebShop, missing empirical null control, missing mandatory benchmark assessments, and lack of raw evidence preservation. The director bounds the claim to candidate testbed identification only; suitability requires a separate integration experiment. The hypothesis is supported but the claim ceiling is narrowed.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-33528832113/request.json",
+    "research/experiments/EXP-INTEL-33528832113/spec.json",
+    "research/experiments/EXP-INTEL-33528832113/prereg.md",
+    "research/experiments/EXP-INTEL-33528832113/freeze.json",
+    "research/experiments/EXP-INTEL-33528832113/result.json",
+    "research/experiments/EXP-INTEL-33528832113/report.md",
+    "research/experiments/EXP-INTEL-33528832113/provenance.json",
+    "research/experiments/EXP-INTEL-33528832113/audit.json",
+    "research/claims/registry.json"
+  ]
+}

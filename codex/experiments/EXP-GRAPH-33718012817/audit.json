@@ -1,0 +1,233 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-33718012817",
+  "lane": "graph",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Correct tie-break explanation: report and validity_notes claim insertion-order tie-break, but registry.upsert sorts mechanisms by mechanism_id (registry.py:38 sorted(items)). Independent replay shows registry.all() returns lexicographically sorted order regardless of upsert order; therefore equal-confidence winner is determined by mechanism_id string ordering ('literal-fetch-posts-1' < 'param-fetch-posts'), not insertion order. Update spec/prereg measurement_validity or code to either preserve insertion order or document lexicographic determinism; re-run counterbalanced IDs to separate literal-vs-param property from naming artefact.",
+    "Correct false-accept metric: result.json metrics shared_equal_false_accepts=6 and false_accept_rate_at_equal_confidence=1.0 counts compete-equal-id1 (id=1, both mechanisms produce /posts/1) as a false accept. Report correctly marks id1 as 'No (coincidental)' (report.md Table Competition Conditions). Recompute yields 5 true false accepts for id=2..6 (params mismatched) out of 5 eligible, or 5/6 total shared-equal conditions. Amend metrics to shared_equal_false_accepts=5, shared_equal_eligible=5, false_accept_rate_eligible=1.0, false_accept_rate_total=0.833, or exclude id1 explicitly.",
+    "Add counterbalanced mechanism_id competition test: register literal as 'zzz-literal' and parameterized as 'aaa-param' at equal confidence; independent replay shows param wins (aaa-param < zzz-literal). Without this, claim 'literal always shadows param at equal confidence' is not justified beyond the chosen ID pair. Fix by either adding ID-counterbalanced condition or restating claim as 'equal-confidence competition winner is arbitrary, determined by sorted mechanism_id; when literal ID sorts first, literal shadows param and causes false accept; universal matching still makes literal eligible for all params, creating false-accept risk regardless of which wins.'",
+    "Scope competition-unsafe ceiling explicitly to tested substrate: deterministic SpiderKernel resolve->_bind path only (no HTTP execution), jsonplaceholder URL template, single intent fetch, preconditions={}, single ${id} slot, N=6 shared-equal conditions (5 eligible for false accept), mechanism_id pair literal-fetch-posts-1 / param-fetch-posts, confidence 0.95 equal, registry file sorting behavior. No inference to real-web DOM/auth/session/drift, multiple intents, non-empty preconditions, or LLM-driven distillation."
+  ],
+  "validity_findings": [
+    {
+      "id": "V_TIEBREAK_ARTEFACT_LEXICOGRAPHIC",
+      "severity": "high",
+      "category": "generalizability_ceiling_and_representation_loss",
+      "finding": "Competition outcome at equal confidence is not a property of literal vs parameterized mechanism type, but of mechanism_id lexicographic order imposed by MechanismRegistry.upsert sorting (registry.py:38 sorted(items)). Independent replay: upserting param then literal still yields stored order ['literal-fetch-posts-1','param-fetch-posts']; reverse-named test with 'aaa-param' (0.95) vs 'zzz-literal' (0.95) yields winner 'aaa-param' with bound_action /posts/5, flipping the result. Kernel candidates.sort(key=confidence, reverse=True) is stable but preserves registry.all() sorted order, not insertion order. Spec spec.json validity_notes and report Mechanism #3 claim 'insertion order tie-break' is inaccurate; result is ID-artefactual.",
+      "evidence_refs": [
+        "src/spider/registry.py:35-38",
+        "src/spider/kernel.py:112-113",
+        "research/experiments/EXP-GRAPH-33718012817/spec.json#/conditions",
+        "research/experiments/EXP-GRAPH-33718012817/spec.json#/measurement_validity",
+        "research/experiments/EXP-GRAPH-33718012817/report.md#Mechanism",
+        "research/experiments/EXP-GRAPH-33718012817/result.json#/validity_notes",
+        "research/experiments/EXP-GRAPH-33718012817/run_experiment.py:101-103",
+        "research/experiments/EXP-GRAPH-33718012817/raw_evidence.jsonl"
+      ],
+      "observation_vs_interpretation": "Observation: 6/6 shared-equal conditions with chosen IDs won by literal-fetch-posts-1. Producer interpretation: 'insertion order determines winner' is contradicted by code; counterbalanced replay observation is param wins when its ID sorts first.",
+      "impact": "Does not falsify existence of false-accept risk (literal is always candidate due to empty required_slots, kernel.py L104-106), but limits claim 'literal always shadows param' to ID-dependent version. Correct ceiling is nondeterministic/arbitrary winner at equal confidence; false accept occurs when literal's ID sorts first. Confidence-based disambiguation (0.98 vs 0.95) correctly overrides lexicographic order, validated independently."
+    },
+    {
+      "id": "V_FALSE_ACCEPT_OVERCOUNT_ID1",
+      "severity": "low",
+      "category": "measurement_validity",
+      "finding": "Producer metrics count compete-equal-id1 as false_accept despite coincident correct URL. Spec expected_url for compete-equal-id1 is /posts/1 (same as literal fixed URL), and literal and param both produce /posts/1 for id=1. Report correctly marks False Accept? No (coincidental). Result.json metrics shared_equal_false_accepts=6, shared_equal_total=6, false_accept_rate=1.0 therefore overcounts by 1. Recompute: 5/5 eligible (id 2..6) false accepts, 5/6 total conditions include coincidental. No effect on COMPETITION-UNSAFE verdict for eligible ids, but metric ceiling overstated.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-33718012817/spec.json#/conditions/5",
+        "research/experiments/EXP-GRAPH-33718012817/result.json#/metrics",
+        "research/experiments/EXP-GRAPH-33718012817/report.md#Competition Conditions",
+        "research/experiments/EXP-GRAPH-33718012817/raw_evidence.json#/5"
+      ],
+      "impact": "Minor quantitative correction; claim ceiling should distinguish eligible false_accept_rate=1.0 (5/5) from total 5/6=0.833."
+    },
+    {
+      "id": "V_LITERAL_UNIVERSAL_MATCH_CONFIRMED",
+      "severity": "critical",
+      "category": "independent_replication",
+      "finding": "Independent kernel replay confirms producer's core mechanism: literal mechanism with parameter_slots=[] and _template_slots(action_template)=={} yields required_slots=={} (kernel.py L104). any(slot not in params for slot in set()) vacuously False, so literal passes required_slots check for all params {id:1..6} and is always candidate. Param mechanism requires id. At equal confidence, both are candidates; winner determined by sorting. Producer observation of literal universal matching and param generalization replicates exactly (13/13 match_expected_*). Validates parent handoff unknown #2 about competition.",
+      "evidence_refs": [
+        "src/spider/kernel.py:104-106",
+        "src/spider/kernel.py:19-32",
+        "research/experiments/EXP-GRAPH-33718012817/raw_evidence.json",
+        "research/experiments/EXP-GRAPH-33718012817/raw_evidence.jsonl",
+        "research/experiments/EXP-GRAPH-33718012817/run_experiment.py:26-34"
+      ],
+      "observation_vs_interpretation": "Observation confirmed: literal-only-unseen and all shared-equal resolve EXECUTABLE with literal. Interpretation that this is presence-based design (not bug) is producer interpretation, not tested."
+    },
+    {
+      "id": "V_SUBSTRATE_SCOPE",
+      "severity": "medium",
+      "category": "generalizability_ceiling",
+      "finding": "No HTTP execution (spec frozen, provenance confirms), single jsonplaceholder URL template, single intent fetch, preconditions={} vacuously true, single slot ${id}, N=6 shared-equal, no DOM/auth/session/drift, no LLM distillation, no browser. Producer correctly discloses in validity_notes (no HTTP, single intent, empty preconditions worst case). Ceiling must remain substrate-gated; cannot infer to C-FRESHNESS, C-DELTA-REPAIR, C-RESIDUAL-NOVELTY, cross-site, or 'learn on A' half of C-PARAM-INHERIT.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-33718012817/spec.json#/measurement_validity",
+        "research/experiments/EXP-GRAPH-33718012817/result.json#/validity_notes",
+        "research/experiments/EXP-GRAPH-33718012817/provenance.json",
+        "research/experiments/EXP-GRAPH-33718012817/prereg.md#Validity Threats"
+      ]
+    },
+    {
+      "id": "V_CONFIDENCE_DISAMBIGUATION_VALID",
+      "severity": "info",
+      "category": "positive_control_validation",
+      "finding": "Independent replay confirms confidence-based sorting overrides lexicographic tie-break: 0.98 vs 0.95 produces correct winner in both directions (param-higher wins /posts/3, literal-higher wins /posts/1). This provides a practical safety valve, but equal confidence remains realistic and common per parent experiment.",
+      "evidence_refs": [
+        "src/spider/kernel.py:112-113",
+        "research/experiments/EXP-GRAPH-33718012817/raw_evidence.json#/11",
+        "research/experiments/EXP-GRAPH-33718012817/raw_evidence.json#/12"
+      ]
+    },
+    {
+      "id": "V_DETERMINISM_NO_LEAKAGE_SAMPLING",
+      "severity": "info",
+      "category": "measurement_validity",
+      "finding": "All 13 conditions deterministic, fresh kernel+temp registry per condition, no model calls, no RNG, no sampling, no cross-condition contamination. No target/split leakage (no ML split), no sampling bias. Registry per condition intentionally isolates baselines; shared-equal conditions correctly share registry. Hashes verified: raw_evidence.json sha256 dce8f3b916a414190b0a02248754aa4d4671a10b80a9837476602519a829fbf5 matches provenance; run_experiment.py sha256 469cb8071d10d8aaf99b4b2966b9b30ce3aa54e44214320bb96d68d288935034 matches provenance.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-33718012817/provenance.json",
+        "research/experiments/EXP-GRAPH-33718012817/run_experiment.py:94-108",
+        "research/experiments/EXP-GRAPH-33718012817/raw_evidence.json",
+        "research/experiments/EXP-GRAPH-33718012817/raw_evidence.jsonl"
+      ]
+    }
+  ],
+  "baseline_findings": [
+    {
+      "control_id": "cold_null",
+      "type": "null",
+      "expected": "UNKNOWN",
+      "observed": "UNKNOWN",
+      "pass": true,
+      "assessment": "Strong null replicates: empty registry returns UNKNOWN (resolution_reason no applicable validated mechanism). Recomputed via independent SpiderKernel replay matches raw_evidence.json[0] and raw_evidence.jsonl line1.",
+      "evidence_ref": "research/experiments/EXP-GRAPH-33718012817/raw_evidence.json#/0"
+    },
+    {
+      "control_id": "literal_standalone_positive",
+      "type": "positive",
+      "condition_id": "literal-only-original",
+      "expected": "EXECUTABLE url=/posts/1",
+      "observed": "EXECUTABLE url=/posts/1 via literal-fetch-posts-1 confidence 0.95",
+      "pass": true,
+      "assessment": "Positive control replicates: literal standalone on original resource resolves EXECUTABLE with correct bound_action. Confirms kernel can resolve literal mechanisms.",
+      "evidence_ref": "research/experiments/EXP-GRAPH-33718012817/raw_evidence.json#/1"
+    },
+    {
+      "control_id": "literal_unseen_baseline",
+      "type": "baseline",
+      "condition_id": "literal-only-unseen",
+      "expected": "EXECUTABLE url=/posts/1",
+      "observed": "EXECUTABLE url=/posts/1 via literal-fetch-posts-1",
+      "pass": true,
+      "assessment": "Baseline replicates: literal with empty required_slots is universal match, returning EXECUTABLE for unseen id=2 with literal URL. This is the presence-based behavior under audit (kernel.py L104-106). Not a control failure here; it is the expected hypothesized behavior.",
+      "evidence_ref": "research/experiments/EXP-GRAPH-33718012817/raw_evidence.json#/2"
+    },
+    {
+      "control_id": "param_standalone_positive",
+      "type": "positive",
+      "condition_id": "param-only-original",
+      "expected": "EXECUTABLE url=/posts/1",
+      "observed": "EXECUTABLE url=/posts/1 via param-fetch-posts",
+      "pass": true,
+      "assessment": "Positive control replicates: parameterized mechanism alone on original id correctly _binds ${id} to /posts/1.",
+      "evidence_ref": "research/experiments/EXP-GRAPH-33718012817/raw_evidence.json#/3"
+    },
+    {
+      "control_id": "param_generalizes_positive",
+      "type": "positive",
+      "condition_id": "param-only-unseen",
+      "expected": "EXECUTABLE url=/posts/2",
+      "observed": "EXECUTABLE url=/posts/2 via param-fetch-posts",
+      "pass": true,
+      "assessment": "Key generalization control replicates: param mechanism generalizes to unseen id=2 with correct URL substitution via _bind. Confirms parent established param pipeline.",
+      "evidence_ref": "research/experiments/EXP-GRAPH-33718012817/raw_evidence.json#/4"
+    },
+    {
+      "control_id": "confident_param_wins",
+      "type": "positive",
+      "condition_id": "compete-param-higher",
+      "expected": "EXECUTABLE url=/posts/3 via param mechanism",
+      "observed": "EXECUTABLE url=/posts/3 via param-fetch-posts-higher confidence 0.98",
+      "pass": true,
+      "assessment": "Positive disambiguation control replicates: higher-confidence param (0.98) overrides literal (0.95) despite literal's lexicographic priority, producing correct parameterized URL. Validates confidence sorting is strong baseline and practical safety valve.",
+      "evidence_ref": "research/experiments/EXP-GRAPH-33718012817/raw_evidence.json#/11"
+    },
+    {
+      "control_id": "confident_literal_wins",
+      "type": "null",
+      "condition_id": "compete-literal-higher",
+      "expected": "EXECUTABLE url=/posts/1 via literal mechanism",
+      "observed": "EXECUTABLE url=/posts/1 via literal-fetch-posts-1-higher confidence 0.98",
+      "pass": true,
+      "assessment": "Null/reverse disambiguation replicates: higher-confidence literal wins opposite direction, confirming sorting is symmetric and not biased toward param. Also validates literal higher confidence still produces literal fixed URL (not param).",
+      "evidence_ref": "research/experiments/EXP-GRAPH-33718012817/raw_evidence.json#/12"
+    },
+    {
+      "control_id": "shared_equal_competition_experimental",
+      "type": "experimental",
+      "expected": "EXECUTABLE url=/posts/1 via literal-fetch-posts-1 (hypothesized)",
+      "observed": "EXECUTABLE url=/posts/1 via literal-fetch-posts-1 for all 6 ids (1..6)",
+      "pass": true,
+      "assessment": "Experimental competition conditions (6) all match expected per frozen spec assuming literal lexicographically first. Recomputed via raw_evidence.json[5-10] and independent kernel replay. However finding V_TIEBREAK_ARTEFACT shows pass is ID-dependent; with counterbalanced IDs ('aaa-param' < 'zzz-literal') param would win at equal confidence. Therefore competition is not a strong demonstration of literal dominance, but of arbitrary tie-break + universal eligibility.",
+      "evidence_ref": "research/experiments/EXP-GRAPH-33718012817/raw_evidence.json#/5-10"
+    }
+  ],
+  "recomputed_metrics": {
+    "total_conditions": 13,
+    "conditions_matching_expected": 13,
+    "recompute_match": true,
+    "recompute_method": "Independent SpiderKernel+MechanismRegistry replay on temp JSONL registries per condition + cross-check raw_evidence.json vs raw_evidence.jsonl vs run_summary.json; hashes verified; _template_slots/_bind/candidates sort verified",
+    "competition_safety": "COMPETITION-UNSAFE (eligible subset)",
+    "cold_abstains": true,
+    "literal_standalone_pass": true,
+    "param_standalone_pass": true,
+    "param_generalizes_pass": true,
+    "confident_param_wins": true,
+    "confident_literal_wins": true,
+    "shared_equal_total": 6,
+    "shared_equal_false_accepts_reported": 6,
+    "shared_equal_false_accepts_recomputed_eligible": 5,
+    "shared_equal_eligible_total": 5,
+    "literal_wins_all_shared_equal_reported": true,
+    "literal_wins_all_shared_equal_recomputed_chosen_ids": true,
+    "literal_wins_all_counterbalanced_ids": false,
+    "counterbalanced_winner_aaa_param_vs_zzz_literal": "aaa-param",
+    "false_accept_rate_at_equal_confidence_reported": 1.0,
+    "false_accept_rate_eligible_recomputed": 1.0,
+    "false_accept_rate_total_recomputed": 0.8333333333333334,
+    "registry_order_mechanism": "lexicographic sorted by mechanism_id (registry.py sorted(items)), not insertion order",
+    "kernel_required_slots_literal": "set() -> vacuously passes",
+    "raw_evidence_hash_match": true,
+    "raw_evidence_sha256": "dce8f3b916a414190b0a02248754aa4d4671a10b80a9837476602519a829fbf5",
+    "run_experiment_sha256": "469cb8071d10d8aaf99b4b2966b9b30ce3aa54e44214320bb96d68d288935034",
+    "discrepancy": "False-accept count 6 vs eligible 5 (id1 coincidental); tie-break description insertion-order vs lexicographic"
+  },
+  "claim_ceiling": "COMPETITION-UNSAFE demonstrated on deterministic substrate with narrow ceiling: SpiderKernel universal matching (required_slots empty) makes literal mechanism eligible for all fetch params {id:1..6}; at equal confidence (0.95) with shared registry containing literal-fetch-posts-1 and param-fetch-posts, and with registry's lexicographic ordering (literal < param), literal shadows param for 6/6 conditions, producing 5/5 true false accepts for id=2..6 (bound_action /posts/1 instead of /posts/{id}) and 1/6 coincidental correct for id=1. False-accept rate 1.0 on eligible subset (5/5), 0.833 overall. GENERAL ceiling: existence of false-accept risk when literal and parameterized mechanisms coexist and confidence tie (or literal higher) is strongly supported; but 'literal always wins at equal confidence' is not general — counterbalanced IDs (aaa-param < zzz-literal) makes param win, so tie is arbitrary/lexicographic. Confidence-based disambiguation (0.98 vs 0.95) reliably overrides tie and is validated. No support for real-web generalization, multiple intents, non-empty preconditions, or LLM distillation. Product cannot safely register mixed literal+parameterized mechanisms in same registry at equal confidence without tie-break fix or literal value-constraint fix.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-33718012817/request.json",
+    "research/experiments/EXP-GRAPH-33718012817/spec.json",
+    "research/experiments/EXP-GRAPH-33718012817/prereg.md",
+    "research/experiments/EXP-GRAPH-33718012817/freeze.json",
+    "research/experiments/EXP-GRAPH-33718012817/result.json",
+    "research/experiments/EXP-GRAPH-33718012817/report.md",
+    "research/experiments/EXP-GRAPH-33718012817/provenance.json",
+    "research/experiments/EXP-GRAPH-33718012817/raw_evidence.json",
+    "research/experiments/EXP-GRAPH-33718012817/raw_evidence.jsonl",
+    "research/experiments/EXP-GRAPH-33718012817/run_experiment.py",
+    "research/experiments/EXP-GRAPH-33718012817/run_summary.json",
+    "src/spider/kernel.py:104-113",
+    "src/spider/kernel.py:19-32",
+    "src/spider/kernel.py:35-44",
+    "src/spider/registry.py:35-38",
+    "src/spider/models.py"
+  ],
+  "unresolved": [
+    "Whether to fix tie-break to prefer parameterized mechanisms at equal confidence (kernel code change) or to accept arbitrary lexicographic tie and rely on confidence differentiation — DIRECTOR decision needed from parent handoff unknown #1.",
+    "Whether verify() postcondition checking works for non-200 (hardcoded status=200 in parent, not exercised here since no HTTP) — audit finding V_VERIFY_HARDCODED_STATUS from parent persists, substrate not retested.",
+    "Whether kernel preconditions matching discriminates beyond empty dict — all mechanisms preconditions={} here, no test.",
+    "Whether _bind type-preservation for full-match templates works — only URL-embedded partial match templates tested.",
+    "Whether parameterized mechanisms work on real-web endpoints with DOM/auth/session/drift — jsonplaceholder deterministic only.",
+    "Whether LLM-driven mechanism distillation ('learn on A') half of C-PARAM-INHERIT works — no model calls in this experiment.",
+    "Whether competition outcome generalizes to other mechanism_id naming conventions, intents, or registry implementations that preserve insertion order — counterbalanced test shows sensitivity to ID ordering."
+  ]
+}

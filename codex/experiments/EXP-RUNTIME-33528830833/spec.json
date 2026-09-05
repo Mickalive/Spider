@@ -1,0 +1,28 @@
+{
+  "experiment_id": "EXP-RUNTIME-33528830833",
+  "lane": "runtime",
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "Can a stdlib-only HTTP observation substrate produce measurement-valid, discriminating observations that correctly attribute response differences to auth/session state changes rather than confounds?",
+  "hypothesis": "An HTTP observation substrate built on Python stdlib (urllib, http.server, json, hashlib) captures response fingerprints (status, headers, body hash, redirect chain) that are (a) deterministic for identical server state, (b) discriminable across auth/session states, and (c) not confounded by timing or server-side randomness, thereby satisfying the C-MEAS-VALID gate for HTTP-level observation.",
+  "falsifier": "The substrate fails C-MEAS-VALID if any of: (1) repeated identical requests produce fingerprint variance >5% (reproducibility failure), (2) auth-state changes produce fingerprint similarity >95% (discrimination failure), (3) null-control false-positive rate exceeds 5%, or (4) observed differences are fully explained by timing jitter rather than state.",
+  "baselines": [
+    {"id": "B-URL-HASH", "description": "Hash of URL only, no HTTP observation — tests whether observation adds signal beyond identity"},
+    {"id": "B-RANDOM-REQUEST", "description": "Random header/body fingerprint — tests whether substrate discriminates above chance"},
+    {"id": "B-TIMING-ONLY", "description": "Timestamp-only observation — tests whether timing confound explains differences"}
+  ],
+  "positive_control": "Flip auth header from absent to present on an auth-gated endpoint; expect observation fingerprint change.",
+  "null_control": "Repeat identical request 10 times to same endpoint with same state; expect fingerprint variance <5%.",
+  "drift_control": "Advance a session token through valid → near-expiry → expired states; expect monotonic fingerprint shift.",
+  "measurement_validity": [
+    "Raw observations (status, headers, body bytes, redirect chain) preserved separately from derived fingerprints",
+    "Server state is controlled and deterministic (local http.server, not live site)",
+    "No external network dependency — fully self-contained",
+    "Seed for server timing jitter is fixed",
+    "Fingerprint function is frozen before execution"
+  ],
+  "decision_rule": "C-MEAS-VALID survives for HTTP-level observation if and only if: (a) null-control FP rate <5%, (b) positive-control TP rate >95%, (c) fingerprint reproducibility variance <5%, (d) drift signal is monotonic across expiry states. If any criterion fails, HTTP-level observation alone is insufficient and DOM/browser-level substrate is required.",
+  "product_consequence_positive": "HTTP-level observation is a valid foundation layer; Runtime can build auth/session/drift detection on top without requiring browser automation for basic state discrimination.",
+  "product_consequence_negative": "HTTP-level observation alone cannot satisfy C-MEAS-VALID; Runtime must prioritize browser-level substrate (Playwright/Selenium) before auth/session/drift claims can advance.",
+  "estimated_cost": "Low — stdlib only, local server, ~200 lines of Python, <1 minute execution",
+  "expected_information_gain": "High — produces a clear go/no-go verdict on HTTP-level observation viability, directly gates whether Runtime can proceed with HTTP-only substrates or must invest in browser automation first"
+}

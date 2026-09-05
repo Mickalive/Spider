@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-33925056324",
+  "lane": "intel",
+  "target_lane": "graph",
+  "next_question": "Can SPIDER's fragment extraction code successfully extract and reuse fragments from WebArena's live Docker accessibility tree output, measuring real truncation, viewport filtering, and fragment yield on 2-3 task types to bound the REQUIRES_TRANSFORM overhead?",
+  "why_next": "Synthetic-only experiment confirms transformation logic is sound (element_recall=1.0, attribute_preservation=1.0, hierarchy_preservation=1.0 across 3 site types, 300 elements). However, auditor ceiling (audit.json claim_ceiling) establishes this as self-consistency check on shared formatting grammar, not independent measurement. The 6 remaining unknowns from this experiment (live Docker output, truncation, viewport filtering, html vs accessibility_tree mode, REQUIRES_TRANSFORM overhead, shadow DOM/iframe) all require live Docker deployment, which is a graph-lane integration experiment. Intel lane's bounded contribution is complete: the adapter exists and works on synthetic format. The next high-information question is live integration to measure real overhead and determine whether WebArena's 812-task corpus is worth the transformation cost.",
+  "carry_forward": {
+    "established": [
+      "A 224-line stdlib-only adapter (research/intel/webarena_adapter.py sha256 46cb46542d9927f2a1b1bd3c29fef169aafa7009c5ba3f2b797531dbb6038fee) correctly parses synthetic WebArena accessibility tree formatted string ([id] role \"name\" props with 2-space indent) and recomposes obs_nodes_info metadata, extracting elements with identity (role normalized RootWebArea->root), single ARIA property, and parent-child hierarchy across 3 synthetic site types (ecommerce/social_forum/coding, 100 elements each, seed 42) with element_recall=1.0 (>=0.90), attribute_preservation=1.0 (>=0.80) over 32/31/34 propertied elements, hierarchy_preservation=1.0 (>=0.80), positive_control PASS (100/100), null_control PASS (0/0).",
+      "WebArena (2024) is a public benchmark with 812 long-horizon tasks, 4 website types, Docker self-hosting, public trajectory replay, scores 5/5 on structural proxies S1-S5. DOM is available via CDP: Accessibility.getFullAXTree (accessibility_tree mode) and DOMSnapshot.captureSnapshot (html mode). Observation format requires REQUIRES_TRANSFORM: split channels (text string + obs_nodes_info metadata), viewport filtering (current_viewport_only=True default), truncation (UTTERANCE_MAX_LENGTH=812, max_obs_length=1920), ARIA role to HTML tag mapping.",
+      "SPIDER Observation.state is dict[str,Any] — structurally compatible with storing accessibility tree data, but fragment extraction code needs adaptation for ARIA role vs HTML tag model.",
+      "Transformation cost measured as adapter LOC: 224 lines, 0 dependencies, 0 API calls. Excludes: recomposition of obs_nodes_info channel, viewport override, truncation handling, shadow DOM traversal — understates real integration cost."
+    ],
+    "rejected": [
+      "WebArena is NOT DIRECTLY_USABLE without transformation (REQUIRES_TRANSFORM / PARTIALLY_COMPATIBLE, from EXP-INTEL-33842055594 audit ceiling).",
+      "Producer's broader SUPPORTS ceiling ('transformation cost is low; 812-task corpus worth REQUIRES_TRANSFORM overhead; C-CROSSSITE/C-LLM-INHERIT can proceed') is NOT justified by synthetic-only results. Auditor ceiling (audit.json claim_ceiling) restricts to synthetic format compatibility only. Synthetic generator and adapter share identical formatting grammar making perfect scores tautological."
+    ],
+    "unknown": [
+      "Whether adapter works on real WebArena Docker accessibility tree output with live DOM, truncation, viewport filtering, and node pruning (requires Docker deployment).",
+      "Whether html mode (DOMSnapshot DOMNode.attributes) yields better fragment extraction than accessibility_tree mode (ARIA properties only, no HTML class/id/href).",
+      "Whether UTTERANCE_MAX_LENGTH=8192 / max_obs_length=1920 truncation discards fragments on representative WebArena tasks (requires measurement on live pages).",
+      "Whether shadow DOM and iframe content are traversed by Accessibility.getFullAXTree / DOMSnapshot.captureSnapshot on live WebArena site types.",
+      "Whether REQUIRES_TRANSFORM overhead (recomposition + viewport override + role-to-tag mapping + truncation handling) negates value of 812-task corpus vs 2-site raw HTML for C-CROSSSITE/C-LLM-INHERIT (requires integration experiment measuring fragment yield and cross-site transfer rate).",
+      "Whether VisualWebArena's SoM annotations conflict with or augment SPIDER's text-based fragment model.",
+      "Whether WebArena Docker self-hosting actually delivers the inspected observation interface end-to-end without silent fallback."
+    ],
+    "do_not_assume": [
+      "Do not assume transformation cost is low for live WebArena. The 224 LOC adapter covers synthetic parsing only; real integration requires recomposition, viewport override, truncation handling, shadow DOM — actual cost unknown.",
+      "Do not assume C-CROSSSITE or C-LLM-INHERIT are unblocked. They remain HYPOTHESIS bounded to 2-site corpus per EXP-INTEL-33842055594 REQUIRES_TRANSFORM ceiling, pending live Docker integration experiment.",
+      "Do not assume that 1.0 scores on synthetic data predict performance on live WebArena DOM. Synthetic generator and adapter share formatting grammar; this is self-consistency, not independent validation.",
+      "Do not assume attribute_preservation=1.0 generalizes: computed over 32/100 elements with single ARIA property each (not 100 elements, not multi-property, not HTML attributes).",
+      "Do not assume hierarchy_preservation=1.0 generalizes: 87/100 elements at depth 2 with trivial stack reconstruction; does not stress deep nesting, iframe, shadow-DOM, or viewport-filtered hierarchies.",
+      "Do not assume that role normalization (RootWebArea->root) is free; without normalization recall is 0.99 (1/100 root mismatch per site type). Real WebArena role set may require broader mapping.",
+      "Do not assume the null_control (empty string, not base64 screenshot as spec describes) tests real screenshot-only input handling.",
+      "Do not assume that structural compatibility (S1-S5 proxies) equals observation-format compatibility or SPIDER fragment-reuse suitability."
+    ]
+  },
+  "dependencies": [
+    "EXP-INTEL-33528832113 (parent: benchmark structural reconnaissance)",
+    "EXP-INTEL-33842055594 (parent: observation-format source inspection, REQUIRES_TRANSFORM/PARTIALLY_COMPATIBLE)",
+    "EXP-INTEL-33925056324 (this experiment: synthetic adapter validation)",
+    "WebArena Docker environment (github.com/web-arena-x/webarena, main branch)",
+    "SPIDER fragment extraction code (research/harness)",
+    "SPIDER Observation model (src/spider/models.py)",
+    "research/intel/webarena_adapter.py (sha256 46cb46542d9927f2a1b1bd3c29fef169aafa7009c5ba3f2b797531dbb6038fee) — synthetic adapter, starting point for live integration",
+    "research/intel/run_experiment.py (sha256 5e02795e352247dae39a1be3c7005f8ebd553a9807c42765b7d070d3f363a528) — synthetic test harness"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-33925056324/request.json",
+    "research/experiments/EXP-INTEL-33925056324/spec.json",
+    "research/experiments/EXP-INTEL-33925056324/freeze.json",
+    "research/experiments/EXP-INTEL-33925056324/result.json",
+    "research/experiments/EXP-INTEL-33925056324/audit.json",
+    "research/experiments/EXP-INTEL-33925056324/report.md",
+    "research/experiments/EXP-INTEL-33925056324/provenance.json",
+    "research/experiments/EXP-INTEL-33925056324/prereg.md",
+    "research/intel/webarena_adapter.py sha256 46cb46542d9927f2a1b1bd3c29fef169aafa7009c5ba3f2b797531dbb6038fee",
+    "research/intel/run_experiment.py sha256 5e02795e352247dae39a1be3c7005f8ebd553a9807c42765b7d070d3f363a528",
+    "research/intel/raw_results.json sha256 3a51fd9f1eea38a3bb7ac2da8035f339e48d0c6223313c36ae13536b6664f263",
+    "research/experiments/EXP-INTEL-33842055594/handoff.json",
+    "research/experiments/EXP-INTEL-33842055594/audit.json",
+    "research/experiments/EXP-INTEL-33842055594/result.json"
+  ],
+  "recommended_action": "Design a bounded graph-lane integration experiment: deploy WebArena Docker for 2-3 task types (one per site category: e-commerce, social forum, collaborative coding), connect SPIDER fragment extraction with current_viewport_only=False, measure real element yield accounting for truncation (UTTERANCE_MAX_LENGTH=8192, max_obs_length=1920), viewport filtering, IGNORED_ACTREE_PROPERTIES/valid_node pruning, and shadow DOM/iframe traversal. Compare accessibility_tree vs html mode for fragment quality and cross-site transfer rate. Falsifier: if fragment extraction fails on >50% of tasks or cross-site transfer rate is <10% despite DOM availability, REQUIRES_TRANSFORM overhead negates corpus expansion and 2-site corpus remains practical bound. If integration succeeds, C-CROSSSITE and C-LLM-INHERIT move to EXPERIMENTAL. Use research/intel/webarena_adapter.py as starting point for the live adapter."
+}

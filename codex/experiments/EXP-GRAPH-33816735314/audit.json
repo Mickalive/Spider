@@ -1,0 +1,234 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-33816735314",
+  "lane": "graph",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    {
+      "id": "V_FIX_EFFECT_REPLICATES",
+      "severity": "info",
+      "category": "independent_replication",
+      "finding": "Independent replay confirms producer effect is causal and deterministic. With current HEAD kernel (candidates.sort(key=lambda m: m.confidence, reverse=True)) shared-equal at 0.95 yields literal-fetch-posts-1 winner for all id=1..6 (literal universal match + lexicographic tie). With fix applied (candidates.sort(key=lambda m: (m.confidence, len(m.parameter_slots)), reverse=True)) same conditions yield param-fetch-posts winner for all id=1..6 with correct bound_action /posts/{id}. 13/13 producer observations match independent logic. Fix is single-line tuple tie-break, confidence dominates: (0.98,0) > (0.95,1) so higher confidence still wins regardless of slot count.",
+      "evidence_refs": [
+        "src/spider/kernel.py:112",
+        "research/experiments/EXP-GRAPH-33816735314/run_experiment.py:64-115",
+        "research/experiments/EXP-GRAPH-33816735314/raw_evidence.json",
+        "research/experiments/EXP-GRAPH-33816735314/provenance.json#/code_change",
+        "research/experiments/EXP-GRAPH-33816735314/result.json#/metrics"
+      ],
+      "observation_vs_interpretation": "Observation: 13/13 matches_resolution && matches_url with fix; without fix 5/6 intervention fail (literal wins). Interpretation that fix eliminates 5 eligible false accepts (id2-6) is supported; id1 coincidental correctness correctly excluded from false_accept count.",
+      "impact": "Strong replication of frozen decision rule: COMPETITION-SAFE criteria all satisfied only with fix. Without fix, would be COMPETITION-UNSAFE. This validates that producer's SUPPORTS outcome is attributable to code fix, not artefact."
+    },
+    {
+      "id": "V_ID_INDEPENDENCE_WITH_FIX",
+      "severity": "info",
+      "category": "generalizability_ceiling_and_representation_loss",
+      "finding": "Fix makes tie-break ID-independent for 0-vs-1 slot case. Tested counterbalanced pair aaa-param (0.95,1 slot) vs zzz-literal (0.95,0 slots): tuple sort yields param winner irrespective of lexicographic order, whereas before fix zzz-literal would lose to aaa-param due to ID order. Producer did not include counterbalanced condition in raw_evidence (used literal-fetch-posts-1 < param-fetch-posts), but independent replay with fix shows param wins even when IDs reversed. Resolves parent audit V_TIEBREAK_ARTEFACT_LEXICOGRAPHIC for this 0-vs-1 case.",
+      "evidence_refs": [
+        "src/spider/registry.py:35-38",
+        "src/spider/kernel.py:112",
+        "research/experiments/EXP-GRAPH-33718012817/audit.json#/validity_findings/V_TIEBREAK_ARTEFACT_LEXICOGRAPHIC",
+        "research/experiments/EXP-GRAPH-33816735314/raw_evidence.json#/5-10"
+      ],
+      "impact": "Removes ID-artefact threat for the tested literal vs 1-slot param competition. Does not generalize to ties where parameter_slots length equal (e.g., two literals 0 vs 0, or two params 1 vs 1) where lexicographic tie remains."
+    },
+    {
+      "id": "V_TIEBREAK_SLOT_COUNT_SCOPE_LIMIT",
+      "severity": "medium",
+      "category": "generalizability_ceiling",
+      "finding": "Fix uses len(m.parameter_slots) not len(required_slots) where required_slots = parameter_slots ∪ _template_slots(action_template) (kernel.py L104). A mechanism that declares parameter_slots=[] but has template ${id} would have required_slots={id} yet len=0 and would lose tie to a declared 1-slot param despite needing params. Producer mechanisms all declare slots explicitly, so not triggered here. Also multi-slot dominance: at equal confidence 2-slot param beats 1-slot param (len 2 > 1) even if not semantically more specific. Single-slot id only tested; multi-param behavior not measured.",
+      "evidence_refs": [
+        "src/spider/kernel.py:104-112",
+        "src/spider/kernel.py:19-32",
+        "research/experiments/EXP-GRAPH-33816735314/spec.json#/conditions",
+        "research/experiments/EXP-GRAPH-33816735314/prereg.md#9.2"
+      ],
+      "observation_vs_interpretation": "Observation: single-slot competition at equal confidence correctly resolved. Interpretation that len(parameter_slots) is total order generalizing to any number of slots is plausible but unverified for mismatched template-vs-declared slots and contested multi-param ties.",
+      "impact": "Limits claim ceiling to mechanisms that correctly declare parameter_slots matching template slots, single-slot case, single intent fetch. Broader claim that tie-break is safe for arbitrary slot counts/templates requires new experiment with multi-slot and template-only param mechanisms."
+    },
+    {
+      "id": "V_SUBSTRATE_SCOPE",
+      "severity": "medium",
+      "category": "generalizability_ceiling",
+      "finding": "No HTTP execution (spec frozen, raw_evidence shows only resolve/bound_action), single jsonplaceholder URL template, single intent fetch, preconditions={} and applicability_guards={} vacuously true, single slot ${id}, N=6 intervention + 2 controls, deterministic no model/RNG/sampling, fresh temp registry per condition. No test of real-web DOM/auth/session/drift, multiple intents, non-empty preconditions discrimination, verify() postcondition (hardcoded status=200 per parent), _bind full-match int preservation, or LLM distillation half of C-PARAM-INHERIT. Producer correctly discloses in validity_notes and unresolved.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-33816735314/spec.json#/measurement_validity",
+        "research/experiments/EXP-GRAPH-33816735314/result.json#/validity_notes",
+        "research/experiments/EXP-GRAPH-33816735314/result.json#/unresolved",
+        "research/experiments/EXP-GRAPH-33816735314/provenance.json#/reproduction",
+        "research/experiments/EXP-GRAPH-33718012817/handoff.json#/carry_forward/unknown"
+      ],
+      "impact": "Ceiling remains kernel sorting logic on synthetic substrate. Cannot infer to real-web endpoint correctness, freshness, delta-repair, cross-site, or learn-on-A. COMPETITION-SAFE only for tested deterministic resolve path."
+    },
+    {
+      "id": "V_CODE_NOT_PERSISTED",
+      "severity": "low",
+      "category": "provenance",
+      "finding": "Current HEAD src/spider/kernel.py sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61 still contains simple sort key=lambda m: m.confidence (no tuple). Producer provenance reports fixed sha c0357cd3423eb80459f2123c83ba4d1c2c4d8837b7eda215d72cfd8c08bc09fa, and report.md Next Steps explicitly says fix was temporary and must be reverted or committed after DIRECTOR approval. Provenance is accurate but product is still COMPETITION-UNSAFE until fix is committed. Audit recomputed by temporarily applying fix and reverting, matching producer hashes.",
+      "evidence_refs": [
+        "src/spider/kernel.py:112",
+        "research/experiments/EXP-GRAPH-33816735314/provenance.json#/code_change",
+        "research/experiments/EXP-GRAPH-33816735314/report.md#Next Steps",
+        "research/experiments/EXP-GRAPH-33816735314/raw_evidence.json"
+      ],
+      "impact": "No measurement invalidity; experiment correctly tested hypothesis. Product consequence requires Director-approved commit of one-line change before C-PARAM-INHERIT can advance past BLOCKED in production."
+    },
+    {
+      "id": "V_NO_LEAKAGE_SAMPLING_DETERMINISM",
+      "severity": "info",
+      "category": "measurement_validity",
+      "finding": "All 13 conditions deterministic, fresh kernel+temp registry per condition, no cross-contamination, no model calls, no RNG, no sampling, no train/test split leakage (no ML). Metrics are exact point comparisons. Hashes verified: raw_evidence.json sha256 1db2b4598350a21473e0845617f48bcde27b49da9b7acefc10767990e8f2fd58 matches result.json artifact; run_experiment.py sha256 d0304255ef3847f84f2952011e005e28f66955807bbf841a7b2936ece3309ca8 matches provenance; freeze hashes match freeze.json.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-33816735314/freeze.json",
+        "research/experiments/EXP-GRAPH-33816735314/run_experiment.py:64-115",
+        "research/experiments/EXP-GRAPH-33816735314/raw_evidence.json",
+        "research/experiments/EXP-GRAPH-33816735314/result.json#/artifacts",
+        "research/experiments/EXP-GRAPH-33816735314/provenance.json#/frozen_inputs"
+      ],
+      "impact": "No leakage or sampling threat. Measurement validity strong within synthetic scope."
+    },
+    {
+      "id": "V_LIT_UNIVERSAL_STILL_EXISTS",
+      "severity": "low",
+      "category": "interpretation_boundary",
+      "finding": "Literal universal matching mechanism (required_slots={} vacuously passes) is unchanged. Fix only changes tie-break; literal remains candidate for all params and would still produce false accept if param absent, invalidated, lower confidence, or equal confidence but with len tie (0 vs 0). Hazard mitigated for 1-slot param vs literal at equal confidence, not eliminated root-cause. Producer does not claim root fix, only tie-break.",
+      "evidence_refs": [
+        "src/spider/kernel.py:104-106",
+        "research/experiments/EXP-GRAPH-33816735314/spec.json#/hypothesis",
+        "research/experiments/EXP-GRAPH-33816735314/report.md#Interpretation"
+      ],
+      "impact": "Ceiling is tie-break preference, not eligibility fix. Alternative Options B/C (value-based constraints or fixed_resource field) remain relevant for stronger isolation if needed."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "control_id": "B_COLD",
+      "type": "null",
+      "expected": "UNKNOWN",
+      "observed": "UNKNOWN",
+      "pass": true,
+      "assessment": "Strong null replicates parent: empty registry returns UNKNOWN no applicable validated mechanism. Recomputed matches raw_evidence.json[0] and holds with and without fix.",
+      "evidence_ref": "research/experiments/EXP-GRAPH-33816735314/raw_evidence.json#/0"
+    },
+    {
+      "control_id": "B_LITERAL_ONLY_ORIG",
+      "type": "baseline",
+      "expected": "EXECUTABLE url=/posts/1",
+      "observed": "EXECUTABLE url=/posts/1 via literal-fetch-posts-1",
+      "pass": true,
+      "assessment": "Literal standalone on original id=1 unchanged by fix. Recomputed with fix still EXECUTABLE correct URL.",
+      "evidence_ref": "research/experiments/EXP-GRAPH-33816735314/raw_evidence.json#/1"
+    },
+    {
+      "control_id": "B_LITERAL_ONLY_UNSEEN",
+      "type": "baseline",
+      "expected": "EXECUTABLE url=/posts/1",
+      "observed": "EXECUTABLE url=/posts/1 via literal-fetch-posts-1",
+      "pass": true,
+      "assessment": "Literal universal matching unchanged: literal-only with unseen id=2 still EXECUTABLE literal URL. Confirms fix does not filter literal eligibility; only affects competition tie.",
+      "evidence_ref": "research/experiments/EXP-GRAPH-33816735314/raw_evidence.json#/2"
+    },
+    {
+      "control_id": "B_PARAM_ONLY_ORIG",
+      "type": "baseline",
+      "expected": "EXECUTABLE url=/posts/1",
+      "observed": "EXECUTABLE url=/posts/1 via param-fetch-posts",
+      "pass": true,
+      "assessment": "Param standalone on original id correctly binds /posts/1. Unaffected by tie-break.",
+      "evidence_ref": "research/experiments/EXP-GRAPH-33816735314/raw_evidence.json#/3"
+    },
+    {
+      "control_id": "B_PARAM_ONLY_UNSEEN",
+      "type": "baseline",
+      "expected": "EXECUTABLE url=/posts/2",
+      "observed": "EXECUTABLE url=/posts/2 via param-fetch-posts",
+      "pass": true,
+      "assessment": "Param generalizes to unseen id=2 with correct _bind substitution. Unaffected by tie-break, confirms _bind works under fix.",
+      "evidence_ref": "research/experiments/EXP-GRAPH-33816735314/raw_evidence.json#/4"
+    },
+    {
+      "control_id": "compete-param-higher",
+      "type": "positive",
+      "expected": "EXECUTABLE url=/posts/3 with param mechanism",
+      "observed": "EXECUTABLE url=/posts/3 via param-fetch-posts confidence 0.98",
+      "pass": true,
+      "assessment": "Positive control: param 0.98 vs literal 0.95 → param wins despite len tie-break. Tuple (0.98,1) > (0.95,0) confidence dominates. Replicates parent and proves fix does not create blanket param preference.",
+      "evidence_ref": "research/experiments/EXP-GRAPH-33816735314/raw_evidence.json#/11"
+    },
+    {
+      "control_id": "compete-literal-higher",
+      "type": "null",
+      "expected": "EXECUTABLE url=/posts/1 with literal mechanism",
+      "observed": "EXECUTABLE url=/posts/1 via literal-fetch-posts-1 confidence 0.98",
+      "pass": true,
+      "assessment": "Null control: literal 0.98 vs param 0.95 → literal wins (0.98,0) > (0.95,1). Proves confidence deltas dominate slot count; fix does not invert higher-confidence winner.",
+      "evidence_ref": "research/experiments/EXP-GRAPH-33816735314/raw_evidence.json#/12"
+    },
+    {
+      "control_id": "compete-equal-id1..6",
+      "type": "experimental",
+      "expected": "EXECUTABLE with param-fetch-posts and parameterized URL /posts/{id}",
+      "observed": "EXECUTABLE param-fetch-posts for id1=/posts/1, id2=/posts/2, id3=/posts/3, id4=/posts/4, id5=/posts/5, id6=/posts/6",
+      "pass": true,
+      "assessment": "6/6 intervention conditions pass with fix. Without fix independent replay shows 0/6 param wins (literal wins all). 5 eligible false accepts (id2-6) eliminated; id1 coincidental. Demonstrates tie-break is both necessary and sufficient for claimed effect within tested ID pair.",
+      "evidence_ref": "research/experiments/EXP-GRAPH-33816735314/raw_evidence.json#/5-10"
+    }
+  ],
+  "recomputed_metrics": {
+    "total_conditions": 13,
+    "conditions_passed_recomputed": 13,
+    "conditions_failed_recomputed": 0,
+    "baseline_pass_rate_recomputed": "5/5",
+    "intervention_pass_rate_recomputed": "6/6",
+    "control_pass_rate_recomputed": "2/2",
+    "false_accepts_eliminated_recomputed": 5,
+    "false_accepts_remaining_recomputed": 0,
+    "false_accepts_eligible_total": 5,
+    "false_accept_rate_eligible_with_fix": 0.0,
+    "false_accept_rate_eligible_without_fix": 1.0,
+    "recompute_match": true,
+    "recompute_method": "Independent SpiderKernel+MechanismRegistry replay on temp JSONL registries per condition; cross-checked raw_evidence.json vs result.json metrics vs run_experiment.py logic; verified tuple sort (confidence,len) vs simple confidence; counterbalanced ID replay aaa-param vs zzz-literal; hash verification of freeze inputs and artifacts",
+    "raw_evidence_sha256": "1db2b4598350a21473e0845617f48bcde27b49da9b7acefc10767990e8f2fd58",
+    "run_experiment_sha256": "d0304255ef3847f84f2952011e005e28f66955807bbf841a7b2936ece3309ca8",
+    "provenance_fixed_kernel_sha256": "c0357cd3423eb80459f2123c83ba4d1c2c4d8837b7eda215d72cfd8c08bc09fa",
+    "current_head_kernel_sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+    "current_head_has_fix": false,
+    "without_fix_intervention_wins": "literal-fetch-posts-1 6/6",
+    "with_fix_intervention_wins": "param-fetch-posts 6/6",
+    "confidence_dominance_preserved": true,
+    "id_independence_with_fix_for_0_vs_1": true,
+    "hash_match_freeze": true
+  },
+  "claim_ceiling": "CONDITIONALLY COMPETITION-SAFE on deterministic synthetic substrate only, contingent on committing fix: With candidates.sort(key=lambda m: (m.confidence, len(m.parameter_slots)), reverse=True) in src/spider/kernel.py:112, mixed registry {literal-fetch-posts-1 (0.95,0 slots,/posts/1) + param-fetch-posts (0.95,1 slot,/posts/${id})} at equal confidence yields param wins for all tested params id=1..6 with correct bound_action URLs, eliminating 5/5 eligible false accepts (id2-6); baseline cold UNKNOWN and literal-only/param-only behaviors preserved; confidence-based disambiguation (0.98 vs 0.95) still determines winner regardless of slot count. Ceiling: single intent fetch, preconditions={}, applicability_guards={}, single slot id, jsonplaceholder URL, no HTTP execution, no DOM/auth/session/drift, deterministic no-RNG, mechanism definitions with explicitly declared parameter_slots. Does NOT establish: multi-slot dominance safety, template-only param without declared slots, equal-slot-count tie determinism, real-web endpoints, cross-intent or non-empty preconditions, verify() postconditions, LLM distillation, or that literal universal eligibility is removed. Production HEAD without fix remains COMPETITION-UNSAFE; product-safe registration of mixed literal+param at equal confidence requires Director-approved commit of the one-line change.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-33816735314/request.json",
+    "research/experiments/EXP-GRAPH-33816735314/spec.json",
+    "research/experiments/EXP-GRAPH-33816735314/prereg.md",
+    "research/experiments/EXP-GRAPH-33816735314/freeze.json",
+    "research/experiments/EXP-GRAPH-33816735314/result.json",
+    "research/experiments/EXP-GRAPH-33816735314/report.md",
+    "research/experiments/EXP-GRAPH-33816735314/provenance.json",
+    "research/experiments/EXP-GRAPH-33816735314/raw_evidence.json",
+    "research/experiments/EXP-GRAPH-33816735314/run_experiment.py",
+    "src/spider/kernel.py:104-113",
+    "src/spider/kernel.py:19-32",
+    "src/spider/kernel.py:35-49",
+    "src/spider/registry.py:35-38",
+    "src/spider/models.py",
+    "research/experiments/EXP-GRAPH-33718012817/handoff.json",
+    "research/experiments/EXP-GRAPH-33718012817/audit.json"
+  ],
+  "unresolved": [
+    "Whether verify() postcondition checking works for non-200 HTTP responses (hardcoded status=200 per parent audit, not retested, no HTTP execution here).",
+    "Whether kernel preconditions matching (_matches) discriminates beyond empty dict — all mechanisms preconditions={}.",
+    "Whether _bind preserves type for full-match template strings (int->int) — only URL-embedded partial match tested.",
+    "Whether parameterized mechanisms work on real-web endpoints with DOM, auth, session state, drift — jsonplaceholder synthetic only.",
+    "Whether LLM-driven mechanism distillation ('learn on A') half of C-PARAM-INHERIT works — no model calls in this experiment.",
+    "Whether fix generalizes safely to multi-slot mechanisms (2 vs 1 slot tie) and to template-only param mechanisms with parameter_slots=[] — not tested; len(parameter_slots) vs required_slots divergence.",
+    "Whether equal-slot-count ties (0 vs 0 or 1 vs 1) remain lexicographic/ID-dependent — not tested, expected to remain arbitrary.",
+    "Whether fix has been committed to production kernel and re-validated in HEAD — current HEAD still unfixed, requires Director action.",
+    "Whether competition outcome generalizes to other intents, registry implementations preserving insertion order, or other mechanism_id naming conventions beyond tested pair — counterbalanced synthesis shows fix removes ID dependence for 0-vs-1 but not measured in raw_evidence."
+  ]
+}

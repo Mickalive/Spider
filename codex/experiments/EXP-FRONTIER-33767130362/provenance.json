@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-33767130362",
+  "lane": "frontier",
+  "execution_timestamp": "2026-09-03T18:30:00Z",
+  "github_run_id": "33788040686",
+  "github_run_attempt": 2,
+  "frozen_inputs": {
+    "request.json": {
+      "path": "research/experiments/EXP-FRONTIER-33767130362/request.json",
+      "sha256": "4fd8e220e5b0d682c402df1e674ef6147ab702e6cc34c73aff2514ae1f8746fd"
+    },
+    "spec.json": {
+      "path": "research/experiments/EXP-FRONTIER-33767130362/spec.json",
+      "sha256": "b4d981a72456fcd3053693bcc63fd70a29d6aad0cd698cb9401b4de2bb21200f"
+    },
+    "prereg.md": {
+      "path": "research/experiments/EXP-FRONTIER-33767130362/prereg.md",
+      "sha256": "0af725f7f790046390cf7a77ee74396c6e272e4c3719d1dcde0435fe68064874"
+    },
+    "freeze.json": {
+      "path": "research/experiments/EXP-FRONTIER-33767130362/freeze.json",
+      "sha256": null
+    }
+  },
+  "analyzer_script": {
+    "path": "research/frontier/causal_heterogeneity/analyze.py",
+    "sha256": "096ab2ee6dbcea27d4db5d9acf39b9ff93d2a75801aa75634e8f0619891ff642"
+  },
+  "result_output": {
+    "path": "research/experiments/EXP-FRONTIER-33767130362/result.json",
+    "sha256": "719010428a54f01fa13dc70e3e5714200b0578f8f845ac8b9dd8dff317076075"
+  },
+  "parent_experiment": {
+    "experiment_id": "EXP-FRONTIER-33528827909",
+    "handoff_path": "research/experiments/EXP-FRONTIER-33528827909/handoff.json",
+    "handoff_sha256": "dda6bc7cd9a06aeeb68ff1ee5c67d7609d1ecd0e46d494c87db8daebda216563"
+  },
+  "environment": {
+    "python_version": "3.12.14",
+    "numpy_version": "2.5.2",
+    "scipy_version": "1.18.1",
+    "pandas_version": "3.0.5",
+    "statsmodels_version": "0.15.0",
+    "platform": "linux"
+  },
+  "execution_parameters": {
+    "seed": 42,
+    "function_seeds": [42, 43, 44],
+    "lambda_levels": [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.7, 1.0],
+    "n_transitions_per_cell": 500,
+    "n_replications_per_cell": 10,
+    "n_permutations": 1000,
+    "total_transitions": 120000,
+    "states": 10,
+    "actions": 4
+  },
+  "decision": "FALSIFIES",
+  "claim": "C-WEB-DYNAMICS",
+  "frozen_at": "2026-09-03T18:05:07.656076+00:00"
+}

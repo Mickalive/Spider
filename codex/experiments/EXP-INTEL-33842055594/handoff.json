@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-33842055594",
+  "lane": "intel",
+  "target_lane": "graph",
+  "next_question": "Can SPIDER's fragment extraction code successfully extract and reuse fragments from WebArena's live Docker environment with current_viewport_only=False, comparing accessibility_tree vs html mode for cross-site transfer on a bounded task subset?",
+  "why_next": "Source inspection confirms DOM is available via CDP but the observation format requires non-trivial transformation (REQUIRES_TRANSFORM / PARTIALLY_COMPATIBLE). The critical unknown is whether the transformation cost is recoverable — whether SPIDER fragment extraction actually works against live WebArena DOM. This requires a bounded integration experiment in the graph lane: Docker deployment, current_viewport_only=False, html vs accessibility_tree mode comparison, fragment yield measurement on 2-3 site types. Only this experiment can determine whether WebArena's 812-task corpus expansion is worth the REQUIRES_TRANSFORM overhead or whether the 2-site corpus remains the practical bound.",
+  "carry_forward": {
+    "established": [
+      "WebArena (2024) is a public benchmark with 812 long-horizon tasks, 4 website types (e-commerce, social forum, collaborative coding, CMS), Docker self-hosting, public trajectory replay infrastructure, and scores 5/5 on structural proxies S1-S5.",
+      "WebArena exposes DOM to the agent via two CDP pipelines: Accessibility.getFullAXTree (accessibility_tree mode, default) and DOMSnapshot.captureSnapshot (html mode), both via browser_env/processors.py TextObervationProcessor, dispatched by browser_env/envs.py ScriptBrowserEnv using Playwright sync_playwright + chromium.launch + CDP session.",
+      "Agent observation is split: obs dict {text: formatted indented string with element IDs/roles/names/properties, image: screenshot ndarray} plus info dict {observation_metadata.text.obs_nodes_info: backend_id, union_bound, text per element ID} and browser_config. Requires recomposition, not direct assignment to Observation.state.",
+      "Default accessibility_tree mode provides ARIA role, name/text, properties (focused, expanded, hasPopup, required), union_bound (bounding box), nodeId, backendDOMNodeId, parentId/childIds — but NOT HTML attributes (class, id, href, src). HTML attributes available only in html mode via DOMNode.attributes from DOMSnapshot.",
+      "Viewport filtering (current_viewport_only=True default, IN_VIEWPORT_RATIO_THRESHOLD=0.6) and node filtering (valid_node, IGNORED_ACTREE_PROPERTIES, clean_accessibility_tree) produce pruned hierarchy, not raw DOM. Off-screen elements, zero-area nodes, empty generics, and redundant statictext are removed.",
+      "Truncation limits: UTTERANCE_MAX_LENGTH=8192 (observation_space), run.py max_obs_length=1920 (LLM input). Large pages lose elements.",
+      "SPIDER Observation.state is dict[str,Any] — structurally compatible with storing accessibility tree data, but fragment extraction code may need adaptation for ARIA role vs HTML tag model.",
+      "VisualWebArena (2024) likely meets all five structural proxies but requires visual modality compatibility check.",
+      "Six to nine additional benchmarks (Mind2Web, AssistantBench, WebBench, WorkArena, WebMall, Explorer, WebLINX, AgentBench) meet S1+S2+S3+S4>=3 but lack self-hosting or single-domain diversity, making them RECOMMENDED only as proxies."
+    ],
+    "rejected": [
+      "WebArena is NOT DIRECTLY_USABLE without transformation. The producer's compatibility_level=DIRECTLY_USABLE was downgraded to REQUIRES_TRANSFORM by the independent audit (audit.json claim_ceiling). Non-trivial recomposition, viewport override, truncation handling, and attribute/role mapping are required."
+    ],
+    "unknown": [
+      "Whether SPIDER fragment extraction code works against WebArena's live Docker DOM with current_viewport_only=False. Requires integration experiment.",
+      "Whether accessibility_tree mode or html mode yields better fragment extraction results for cross-site transfer. Requires mode comparison experiment.",
+      "Whether shadow DOM and iframe content are traversed by Accessibility.getFullAXTree / DOMSnapshot.captureSnapshot. Requires live Docker execution.",
+      "Whether UTTERANCE_MAX_LENGTH=8192 / max_obs_length=1920 truncation discards fragments on representative WebArena tasks. Requires measurement.",
+      "Whether the REQUIRES_TRANSFORM overhead (recomposition, viewport override, role-to-tag mapping) negates WebArena's 812-task corpus expansion value vs. 2-site raw HTML. Requires cost-benefit measurement.",
+      "Whether VisualWebArena's SoM annotations conflict with or augment SPIDER's text-based fragment model.",
+      "Whether WebArena Docker self-hosting actually delivers the inspected observation interface end-to-end without silent fallback.",
+      "Whether WebBench's live-website evaluation model could be adapted for SPIDER testing.",
+      "Whether WorkArena's ServiceNow developer instance satisfies spec S4 definition.",
+      "Whether WebShop's trajectory data availability (S2) should be 1, which would raise it to RECOMMENDED.",
+      "Whether Explorer's synthetic tasks align with SPIDER action-oriented navigation or are QA/information-seeking.",
+      "Whether QWeb or AWM benchmarks, if located, would alter the candidate set."
+    ],
+    "do_not_assume": [
+      "Do not assume WebArena is DIRECTLY_USABLE. The auditor ceiling is REQUIRES_TRANSFORM / PARTIALLY_COMPATIBLE.",
+      "Do not assume that C-CROSSSITE or C-LLM-INHERIT are unblocked. They remain HYPOTHESIS, bounded to 2-site corpus, pending integration experiment on live WebArena Docker.",
+      "Do not assume that code-level uniform observation pipeline (single env class) guarantees actual DOM delivery across all 4 site types. No Docker execution verified.",
+      "Do not assume that structural compatibility (S1-S5) equals observation-format compatibility or SPIDER fragment-reuse suitability.",
+      "Do not assume that the accessibility_tree mode provides HTML attributes (class, id, href). It provides ARIA properties only; HTML attributes are in html mode.",
+      "Do not assume that the formatted observation string (obs['text']) is the structured data. The structured hierarchy is in obs_nodes_info metadata, not in the formatted string.",
+      "Do not assume that any benchmark is experimentally suitable without a separate integration experiment.",
+      "Do not assume that the null control failure (screenshots-only not triggered) is a negative result. It correctly confirms DOM presence — but the control encoding in result.json was semantically inverted."
+    ]
+  },
+  "dependencies": [
+    "EXP-INTEL-33528832113 (parent: benchmark structural reconnaissance)",
+    "EXP-INTEL-33842055594 (this experiment: observation-format source inspection)",
+    "WebArena Docker environment (github.com/web-arena-x/webarena, main branch, 2026-09-04)",
+    "SPIDER fragment extraction code (research/harness)",
+    "SPIDER Observation model (src/spider/models.py)"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-33842055594/result.json",
+    "research/experiments/EXP-INTEL-33842055594/audit.json",
+    "research/experiments/EXP-INTEL-33842055594/report.md",
+    "research/experiments/EXP-INTEL-33842055594/spec.json",
+    "research/experiments/EXP-INTEL-33842055594/provenance.json",
+    "research/experiments/EXP-INTEL-33842055594/prereg.md",
+    "research/experiments/EXP-INTEL-33528832113/handoff.json",
+    "browser_env/envs.py (WebArena: ScriptBrowserEnv, Playwright init, CDP session, observation dispatch)",
+    "browser_env/processors.py (WebArena: TextObervationProcessor, Accessibility.getFullAXTree, DOMSnapshot.captureSnapshot, obs_nodes_info)",
+    "browser_env/utils.py (WebArena: AccessibilityTreeNode, DOMNode TypedDicts)",
+    "browser_env/constants.py (WebArena: UTTERANCE_MAX_LENGTH, IGNORED_ACTREE_PROPERTIES)",
+    "src/spider/models.py (SPIDER: Observation dataclass, state dict[str,Any])"
+  ],
+  "recommended_action": "Design a bounded graph-lane integration experiment: deploy WebArena Docker for 2-3 task types (one per site category), connect SPIDER fragment extraction with current_viewport_only=False, compare accessibility_tree vs html mode for fragment yield and cross-site transfer. Falsifier: if fragment extraction fails on >50% of tasks or cross-site transfer rate is <10% despite DOM availability, the REQUIRES_TRANSFORM overhead negates corpus expansion. If the integration experiment succeeds, C-CROSSSITE and C-LLM-INHERIT move to EXPERIMENTAL. If it fails, the 2-site corpus remains the practical bound and Intel lane should assess whether VisualWebArena or other benchmarks offer a lower-transformation-cost path."
+}

@@ -1,0 +1,313 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-33741671686",
+  "lane": "product",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [
+    "No fix required to sustain the narrow synthetic POC verdict (21/21 EXECUTABLE, 21/21 binding correct, all 5 conditions meet slot_count and distinctness, controls pass) as recomputed from raw_evidence.json and independent kernel replay. Fixes below are required to justify any broader claim beyond this POC or to ship as kernel capability.",
+    "Promote induction into kernel: distill_parameterized_v2 / _extract_varying_values_multi lives only in run_experiment.py (sha256 c19d2b497838...), not in src/spider/kernel.py (sha256 46929b3a951df48... unchanged since base_sha b3d02e190f...). Producer validity_notes correctly discloses this. Before claiming C-PARAM-INHERIT as kernel capability, move tested logic into src/spider/kernel.py with unit tests and remove experiment-script-only status.",
+    "Fix null_control construction: null_control_training() with intents task-a/task-b/task-c and heterogeneous keys produces 4 hallucinated slots [data,method,path,url] (raw_evidence.json controls.null_control mechanism.slots) instead of 0 slots. It passes only because intent mismatch (task-a mechanism vs empty-params UNKNOWN) not because pattern absence is detected. Redesign null control to use single intent with identical structure and no common prefix/suffix, and assert slot_count==0, not just resolution UNKNOWN.",
+    "Align spec vs implementation semantics for middles: spec.json C3 unseen_params request_id=req-4 and C4 webhook_url=https://site-d.com/hook (full values) but run_experiment.py c3_unseen provides request_id='4' and c4_unseen provides webhook_url='d' (middles only) and c3_expected_bindings/c4_expected_bindings reconstruct full strings using training-derived prefix/suffix. This makes binding_accuracy circular for those fields. Clarify prereg whether params are middles or full values, and add a second unseen set that supplies full values to test caller-side stripping.",
+    "Fix fragile param mapping in run_condition: slot_to_param uses substring heuristics (k==slot or slot in k or k in slot) then fallback positional matching with bug: unmatched_params = {k:v for k,v in params.items() if k not in slot_to_param.values()} compares keys to values, so fallback always assigns first param value to first unmatched slot by insertion order. For C2 slots [name,url] vs params {user_id:D,name:Diana} this coincidentally succeeds but is order-dependent. Replace with explicit spec-to-slot mapping table and fail loudly on ambiguous mapping.",
+    "Replace simulated baselines with measured discriminating baselines: B_LITERAL fails solely due to hardcoded confidence 0.5 < min_confidence 0.8 (kernel.py distill confidence 0.5), not template mismatch; B_RANDOM_INDUCTION resolution_rate 1.0 is expected because kernel._bind succeeds for any slot names, so resolution_rate is non-discriminating — binding_accuracy must be the decision metric for that baseline. Future gates need real retrieval/cost baselines and confidence calibration.",
+    "Address trivial full-replacement parameterization: C2 body.name training values [Alice,Bob,Charlie] and C3 body.title [First,Second,Third] share no common prefix/suffix, so _common_prefix_and_suffix returns ('','',middles) and template becomes '${name}'/'${title}' full replacement — any unseen string trivially succeeds. Add conditions with varying values that DO share structure to test prefix/suffix extraction non-trivially.",
+    "Fix hardcoded confidence tautology: confidence = min(0.9, 0.5+0.1*3)=0.8 equals min_confidence 0.8, so all parameterized mechanisms trivially pass confidence gate and unseen_resolution_rate >=0.9 is not discriminating. Calibrate or randomize training count to test threshold sensitivity, and test empty/missing-param abstention (UNKNOWN) explicitly."
+  ],
+  "validity_findings": [
+    {
+      "finding": "Measurement transaction reproduces exactly; numeric metrics verified",
+      "severity": "info",
+      "detail": "Recomputed from raw_evidence.json: C1 slot 1 (expected 1) 5/5 EXECUTABLE 5/5 binding; C2 slot 2 (expected 2) 5/5 5/5; C3 slot 3 (expected 3) 5/5 5/5; C4 slot 1 (expected 1) 3/3 3/3; C5 slot 2 (expected 2) distinct true 3/3 3/3; total 21/21 EXECUTABLE (overall_unseen_resolution_rate 1.0) and 21/21 binding_accuracy 1.0, unsubstituted_template_rate 0.0. All 7 decision checks true. Hashes verified: raw_evidence 5bc7274be82f..., run_experiment c19d2b497838..., kernel 46929b3a951d..., models 338aaf4d7ba0..., registry 51fb440d3827... match provenance.json. Deterministic re-run yields identical result.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-33741671686/raw_evidence.json -> conditions.*.metrics, induction_audit, decision.verdict=MULTI-PARAM-SURVIVES; result.json -> metrics.*; provenance.json -> code_paths.*.sha256"
+    },
+    {
+      "finding": "Synthetic deterministic data limits external validity",
+      "severity": "high",
+      "detail": "All 15 training observations synthetic, single intent per condition, identical preconditions {authenticated:true, role:owner}, single-char path middles A-C vs unseen D-H, no browser/network/model calls, no noise, no multi-step actions, no cross-intent or cross-site variation. Producer validity_notes[0] and measurement_validity[0] correctly disclose POC gate only. Parent handoff do_not_assume explicitly warns not to generalize to noisy real-browser observations.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-33741671686/spec.json -> measurement_validity, prereg.md section 9.2, result.json validity_notes[0], run_experiment.py SHARED_STATE/SHARED_NEXT_STATE"
+    },
+    {
+      "finding": "Induction not shipped in kernel; product consequence overstates deployability",
+      "severity": "high",
+      "detail": "Kernel still only implements literal distill() (confidence 0.5) and resolve()->_bind(). Multi-parameter logic _extract_varying_values_multi, _deep_get/_collect_leaf_paths, _common_prefix_and_suffix, _field_path_to_slot_name, distill_parameterized_v2 reside only in run_experiment.py. Provenance kernel sha unchanged. Product cannot register multi-parameter mechanisms via kernel without shipping the experimental function. Producer correctly notes in validity_notes[1] but report section 7 overstates 'kernel can induce'.",
+      "evidence_ref": "src/spider/kernel.py -> distill, resolve, _bind (no multi-param code); research/experiments/EXP-PRODUCT-33741671686/run_experiment.py -> lines 28-281 distill_parameterized_v2; provenance.json code_paths.kernel.sha256=46929b3a... vs experiment_script sha c19d2b..."
+    },
+    {
+      "finding": "Null control hallucinates parameters; passes via wrong mechanism",
+      "severity": "high",
+      "detail": "Spec null_control expected zero slots or UNKNOWN when no pattern exists (random non-shared templates). Implementation produces 4 slots [data,method,path,url] with template {method:'${method}',url:'${url}',data:'${data}',path:'${path}'} because _collect_leaf_paths treats heterogeneous dict keys as varying fields (values are None vs missing). It resolves to UNKNOWN only because mech.intent=task-a (first observation) requires slots that empty params={} cannot satisfy, not because pattern absence was detected. The test therefore does not falsify hallucination; it masks it with intent mismatch.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-33741671686/raw_evidence.json -> controls.null_control.mechanism.slots=[data,method,path,url], resolution_status=UNKNOWN; run_experiment.py null_control_training() intents task-a/b/c heterogeneous actions; _extract_varying_values_multi varying_fields detection"
+    },
+    {
+      "finding": "Spec vs implementation divergence for C3 and C4 middles makes those bindings circular",
+      "severity": "medium",
+      "detail": "spec.json C4 unseen_params webhook_url='https://site-d.com/hook' (full) and C3 request_id='req-4' (full) but impl c4_unseen returns webhook_url='d' and c3_unseen returns request_id='4' (middles only). Template extraction yields prefix 'https://site-' suffix '.com/hook' and 'req-' prefix, and expected_bindings rebuild full strings from middles (c4_expected_bindings returns f'https://site-{params[webhook_url]}.com/hook'). Thus correctness is guaranteed if template uses those exact prefix/suffix; test does not verify caller supplies full values or that prefix extraction is correct independently. C1/C2/C5 not affected (full-replacement or single-char middles).",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-33741671686/spec.json -> conditions C3 unseen_params request_id req-4, C4 webhook_url https://site-d.com/hook; run_experiment.py c3_unseen/c4_unseen and c3_expected_bindings/c4_expected_bindings; raw_evidence.json C3 template headers X-Request-ID req-${x_request_id}, C4 body.callback_url https://site-${callback_url}.com/hook"
+    },
+    {
+      "finding": "Trivial parameterization for body fields reduces evidential weight",
+      "severity": "medium",
+      "detail": "C2 body.name values Alice/Bob/Charlie and C3 body.title First/Second/Third have longest common prefix '' and suffix '', so _common_prefix_and_suffix returns ('','',values) and template becomes '${name}'/'${title}' full replacement. Any unseen string trivially binds; success does not demonstrate prefix/suffix generalization for those fields. Only path and header fields exercise non-trivial prefix extraction.",
+      "evidence_ref": "run_experiment.py _common_prefix_and_suffix, c2_training body.name values, c3_training body.title values, raw_evidence.json templates body.name=${name}, body.title=${title}"
+    },
+    {
+      "finding": "Confidence gate tautology and small n inflate certainty",
+      "severity": "medium",
+      "detail": "confidence = min(0.9,0.5+0.1*3)=0.8 exactly equals SpiderKernel min_confidence 0.8, so all param mechanisms trivially pass EXECUTABLE threshold; literal baseline confidence 0.5 guarantees EXPLORE. Decision rule resolution_rate>=0.9 therefore not discriminating; binding_accuracy is the real metric. n=21 total unseen (5,5,5,3,3) all isomorphic single-char or full-replacement middles; 21/21 yields Wilson 95% LB ~0.85, not 1.0 certainty. No adversarial/empty/long/special-char cases tested.",
+      "evidence_ref": "run_experiment.py distill_parameterized_v2 confidence line 269, src/spider/kernel.py SpiderKernel.__init__ min_confidence 0.8, result.json validity_notes[5], raw_evidence.json resolution_results[*].confidence=0.8"
+    },
+    {
+      "finding": "Fragile harness mapping with logic bug; does not affect verdict but reduces robustness",
+      "severity": "low",
+      "detail": "run_condition maps spec param keys to induced slot names via substring heuristic then fallback positional: for C2 slots [name,url] vs params {user_id:D,name:Diana} it correctly assigns name->Diana via 'name'==key, then fallback for url incorrectly filters unmatched_params by 'k not in slot_to_param.values()' (keys vs values) so unmatched_params always equals all params, and zip assigns first value D to url coincidentally. Different insertion order or duplicate values would mis-assign. No leakage but harness fragility should be fixed.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-33741671686/run_experiment.py run_condition lines 528-549 slot_to_param mapping"
+    },
+    {
+      "finding": "No split leakage but also no holdout challenge",
+      "severity": "low",
+      "detail": "Training middles A,B,C and unseen D-H are disjoint; no identifier reuse across split, preconditions identical so no context leakage. Provenance cold cost and random induction baselines are simulated, not measured. Recomputed hashes match, no provenance divergence unlike parent.",
+      "evidence_ref": "raw_evidence.json conditions.*.resolution_results params vs training action values, provenance.json reproduction_notes deterministic"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "B_SINGLE_PARAM regression (C1)",
+      "strength": "adequate",
+      "expected": "Single-parameter induction still works after multi-parameter extension: slot_count >=1, unseen_resolution >=0.9, binding >=0.9",
+      "observed": "C1 induces slot 'url' template https://api.example.com/items/${url}, 5/5 EXECUTABLE 5/5 binding, matches parent single-param POC. Recomputed confirms slot_count 1 distinct true.",
+      "passes": true,
+      "issue": "None; regression gate satisfied. Note slot named 'url' not 'id' — spec allows distinct names, so naming change is not a failure.",
+      "evidence_ref": "raw_evidence.json C1-single-path slot_count 1 slots [url] metrics resolution 1.0 binding 1.0; result.json c1_single_path_*"
+    },
+    {
+      "baseline_id": "B_LITERAL_REPLAY",
+      "strength": "weak",
+      "expected": "Literal mechanism (no slots, confidence 0.5) must fail on all unseen multi-param combos (EXPLORE or UNKNOWN)",
+      "observed": "B_LITERAL from c2_training()[0] literal distill, confidence 0.5, 5/5 EXPLORE (confidence below min 0.8). Recomputed fail_rate 1.0 matches producer.",
+      "passes": true,
+      "issue": "Fails due to hardcoded confidence gate, not because template lacks slots; any literal with confidence 0.5 fails regardless. Does not prove parameterization is necessary via template semantics; need literal with confidence 0.8+ and exact-match positive control to strengthen.",
+      "evidence_ref": "raw_evidence.json baselines.B_LITERAL 5/5 EXPLORE; src/spider/kernel.py distill confidence 0.5, resolve confidence check"
+    },
+    {
+      "baseline_id": "B_RANDOM_INDUCTION",
+      "strength": "weak",
+      "expected": "Random slot naming should fail binding_accuracy while still resolving EXECUTABLE, showing structural naming matters",
+      "observed": "Randomized slots [rand_0,rand_1] on C2 still 5/5 EXECUTABLE (kernel _bind succeeds for any names) but 0/5 binding correct (producer reports 0.0, recomputed 0.0). Producer correctly interprets as EXECUTABLE with incorrect bindings, but decision rule does not use this baseline for falsification.",
+      "passes": true,
+      "issue": "Resolution_rate 1.0 is expected for any naming; baseline only discriminates via binding_accuracy. Strength is low because it is simulated renaming, not an alternative induction algorithm. Highlights that report's overall_unseen_resolution_rate is non-discriminating without binding check.",
+      "evidence_ref": "raw_evidence.json baselines.B_RANDOM_INDUCTION randomized_slots [rand_0,rand_1] results 5/5 EXECUTABLE bound_action url=/users/Diana body.name=D etc.; result.json b_random_naming_*"
+    },
+    {
+      "baseline_id": "B_COLD_EXPLORATION",
+      "strength": "weak",
+      "expected": "Simulated cold exploration cost for reference (full re-discovery)",
+      "observed": "Not measured in this experiment beyond cost_ratio_vs_literal_replay 0.5 (2 ops avg vs 4 simulated cold ops). No real browser/model cost; provenance notes stdlib only.",
+      "passes": true,
+      "issue": "Simulated constant, not end-to-end economics. Lane requires model calls/tokens, browser/network, retrieval, verification, repair, latency, amortization. Producer validity_notes correctly excludes these.",
+      "evidence_ref": "result.json metrics parameterized_ops_per_resolution 2, cost_ratio_vs_literal_replay 0.5, provenance.json environment stdlib only"
+    },
+    {
+      "baseline_id": "positive_control_c1_regression seen identifier",
+      "strength": "adequate",
+      "expected": "EXECUTABLE for seen identifier",
+      "observed": "Seen id A resolves EXECUTABLE bound_action https://api.example.com/items/A with slot url. Recomputed matches producer.",
+      "passes": true,
+      "evidence_ref": "raw_evidence.json controls.positive_control observed EXECUTABLE; result.json controls.positive_control_c1_regression"
+    },
+    {
+      "baseline_id": "null_control_random_observations",
+      "strength": "weak",
+      "expected": "Zero slots or UNKNOWN when no pattern exists",
+      "observed": "Mechanism with 4 slots induced but resolution UNKNOWN due to missing params/intent mismatch. Producer marks passed true. Recomputed confirms but finds hallucination.",
+      "passes": true,
+      "issue": "Null control construction flawed (see validity_findings); it demonstrates abstention via missing params, not correct sparsity. Strength should be considered weak, not adequate, for future gates.",
+      "evidence_ref": "raw_evidence.json controls.null_control observed mechanism with 4 slots slots [data,method,path,url] resolution_status UNKNOWN; result.json controls.null_control_random_observations"
+    }
+  ],
+  "recomputed_metrics": {
+    "overall_unseen_resolution_rate": {
+      "producer_value": 1.0,
+      "recomputed_value": 1.0,
+      "n": 21,
+      "match": true,
+      "recomputed_from": "raw_evidence.json sum executable_count 5+5+5+3+3=21 / total_unseen 21",
+      "notes": "All 21 statuses EXECUTABLE; confidence 0.8 == threshold, so gate trivially passed."
+    },
+    "overall_binding_accuracy": {
+      "producer_value": 1.0,
+      "recomputed_value": 1.0,
+      "n": 21,
+      "match": true,
+      "recomputed_from": "raw_evidence.json sum binding_correct_count 5+5+5+3+3=21 /21; independent _check_bound_action confirms expected==bound_action for each",
+      "notes": "No unsubstituted ${...} in any bound_action."
+    },
+    "overall_unsubstituted_template_rate": {
+      "producer_value": 0.0,
+      "recomputed_value": 0.0,
+      "n": 21,
+      "match": true,
+      "recomputed_from": "raw_evidence.json 0/21 has_unsubstituted_template false for all"
+    },
+    "c1_single_path_slot_count": {
+      "producer_value": 1,
+      "recomputed_value": 1,
+      "match": true,
+      "recomputed_from": "raw_evidence.json C1 action_template https://api.example.com/items/${url} parameter_slots [url]"
+    },
+    "c1_single_path_unseen_resolution_rate": {
+      "producer_value": 1.0,
+      "recomputed_value": 1.0,
+      "n": 5,
+      "match": true,
+      "recomputed_from": "raw_evidence.json C1 metrics executable 5/5"
+    },
+    "c1_single_path_binding_accuracy": {
+      "producer_value": 1.0,
+      "recomputed_value": 1.0,
+      "n": 5,
+      "match": true
+    },
+    "c2_path_body_slot_count": {
+      "producer_value": 2,
+      "recomputed_value": 2,
+      "match": true,
+      "recomputed_from": "raw_evidence.json C2 slots [name,url] template url=${url} body.name=${name}"
+    },
+    "c2_path_body_unseen_resolution_rate": {
+      "producer_value": 1.0,
+      "recomputed_value": 1.0,
+      "n": 5,
+      "match": true
+    },
+    "c2_path_body_binding_accuracy": {
+      "producer_value": 1.0,
+      "recomputed_value": 1.0,
+      "n": 5,
+      "match": true
+    },
+    "c3_path_body_headers_slot_count": {
+      "producer_value": 3,
+      "recomputed_value": 3,
+      "match": true,
+      "recomputed_from": "raw_evidence.json C3 slots [title,url,x_request_id] template url posts/${url} body.title=${title} headers X-Request-ID req-${x_request_id}"
+    },
+    "c3_path_body_headers_unseen_resolution_rate": {
+      "producer_value": 1.0,
+      "recomputed_value": 1.0,
+      "n": 5,
+      "match": true
+    },
+    "c3_path_body_headers_binding_accuracy": {
+      "producer_value": 1.0,
+      "recomputed_value": 1.0,
+      "n": 5,
+      "match": true
+    },
+    "c4_non_identifier_slot_count": {
+      "producer_value": 1,
+      "recomputed_value": 1,
+      "match": true,
+      "recomputed_from": "raw_evidence.json C4 slots [callback_url] template https://site-${callback_url}.com/hook prefix https://site- suffix .com/hook"
+    },
+    "c4_non_identifier_unseen_resolution_rate": {
+      "producer_value": 1.0,
+      "recomputed_value": 1.0,
+      "n": 3,
+      "match": true
+    },
+    "c4_non_identifier_binding_accuracy": {
+      "producer_value": 1.0,
+      "recomputed_value": 1.0,
+      "n": 3,
+      "match": true
+    },
+    "c5_shared_slot_slot_count": {
+      "producer_value": 2,
+      "recomputed_value": 2,
+      "match": true,
+      "recomputed_from": "raw_evidence.json C5 slots [url,user_id] despite identical training values A,B,C across two fields"
+    },
+    "c5_shared_slot_names_distinct": {
+      "producer_value": true,
+      "recomputed_value": true,
+      "match": true,
+      "recomputed_from": "raw_evidence.json C5 slot_names_distinct true, used_names deduplication via counter suffix"
+    },
+    "c5_shared_slot_unseen_resolution_rate": {
+      "producer_value": 1.0,
+      "recomputed_value": 1.0,
+      "n": 3,
+      "match": true
+    },
+    "c5_shared_slot_binding_accuracy": {
+      "producer_value": 1.0,
+      "recomputed_value": 1.0,
+      "n": 3,
+      "match": true
+    },
+    "slot_names_all_distinct_per_condition": {
+      "producer_value": true,
+      "recomputed_value": true,
+      "match": true,
+      "recomputed_from": "raw_evidence.json induction_audit all 5 conditions distinct true and all_slots_in_template true"
+    },
+    "b_literal_fail_rate": {
+      "producer_value": 1.0,
+      "recomputed_value": 1.0,
+      "n": 5,
+      "match": true,
+      "recomputed_from": "raw_evidence.json baselines.B_LITERAL 5/5 EXPLORE"
+    },
+    "b_random_naming_resolution_rate": {
+      "producer_value": 1.0,
+      "recomputed_value": 1.0,
+      "n": 5,
+      "match": true,
+      "recomputed_from": "raw_evidence.json B_RANDOM_INDUCTION 5/5 EXECUTABLE"
+    },
+    "b_random_naming_binding_accuracy": {
+      "producer_value": 0.0,
+      "recomputed_value": 0.0,
+      "n": 5,
+      "match": true,
+      "recomputed_from": "raw_evidence.json B_RANDOM_INDUCTION all bindings swapped: recomputed bound_action body.name=D url=/users/Diana etc. incorrect"
+    },
+    "positive_control_c1_regression": {
+      "producer_value": "EXECUTABLE",
+      "recomputed_value": "EXECUTABLE",
+      "match": true,
+      "recomputed_from": "raw_evidence.json controls.positive_control observed EXECUTABLE, bound_action /items/A"
+    },
+    "null_control_random_observations": {
+      "producer_value": "UNKNOWN",
+      "recomputed_value": "UNKNOWN",
+      "match": true,
+      "recomputed_from": "raw_evidence.json controls.null_control resolution_status UNKNOWN but mechanism has 4 slots (hallucination)"
+    }
+  },
+  "claim_ceiling": "C-PARAM-INHERIT MULTI-PARAM-SURVIVES only as a synthetic POC implemented in the experiment script (not yet in kernel): _extract_varying_values_multi correctly induces 1-3 distinct parameter slots from deterministic synthetic observations with common prefix/suffix or trivial full-replacement fields (path, body, headers) and resolves EXECUTABLE with correct bound_action for 21/21 unseen middle-value combinations (C1 5, C2 5, C3 5, C4 3, C5 3) with distinct slot naming and no collisions for the tested single-char/middle-only values. This does NOT support claims of: kernel-shipped multi-parameter induction, general schemas or nested structures, handling of full unseen values that include prefix/suffix without caller-side stripping, robustness to noisy/real-browser multi-step observations, adversarial or coincidental-prefix false positives, empty/special-char handling, learned confidence calibration, cross-intent or cross-site transfer, or measured end-to-end product economics. Do not promote to Product Core; next gate requires kernel integration, fixed null control, full-value unseen tests, and real-observation replication.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-33741671686/spec.json -> claim_ids [C-PARAM-INHERIT], question/hypothesis/falsifier, baselines B_SINGLE_PARAM/B_LITERAL/B_COLD/B_RANDOM, decision_rule 7 checks",
+    "research/experiments/EXP-PRODUCT-33741671686/prereg.md -> falsification criteria, conditions C1-C5, controls, expected_information_gain remains POC",
+    "research/experiments/EXP-PRODUCT-33741671686/freeze.json -> hashes prereg cf30b6f0..., spec 2f2a7c4b..., request 4b1917a3...",
+    "research/experiments/EXP-PRODUCT-33741671686/result.json -> metrics 21/21 EXECUTABLE, 21/21 binding, controls passed, outcome SUPPORTS",
+    "research/experiments/EXP-PRODUCT-33741671686/raw_evidence.json -> conditions C1-C5 detailed resolution_results, induction_audit all_slots_in_template true, decision verdict MULTI-PARAM-SURVIVES, baselines B_LITERAL 5/5 EXPLORE, B_RANDOM 5/5 EXECUTABLE 0/5 binding, controls null 4 slots UNKNOWN",
+    "research/experiments/EXP-PRODUCT-33741671686/run_experiment.py -> sha256 c19d2b497838..., _extract_varying_values_multi, distill_parameterized_v2, _common_prefix_and_suffix, _field_path_to_slot_name, c*_training/c*_unseen/c*_expected_bindings, run_condition mapping bug",
+    "research/experiments/EXP-PRODUCT-33741671686/provenance.json -> execution run 33805283361 model mimo-v2.5-free, kernel sha 46929b3a951d... unchanged, deterministic stdlib only, reproduction_command python3 run_experiment.py",
+    "src/spider/kernel.py -> sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61, SpiderKernel.resolve, _bind, _template_slots, distill confidence 0.5, min_confidence 0.8",
+    "src/spider/models.py -> sha256 338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78, Mechanism, ResolutionStatus",
+    "src/spider/registry.py -> sha256 51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c",
+    "research/experiments/EXP-PRODUCT-33528829801/handoff.json -> parent verdict SURVIVES single-param POC, required_fixes multi-parameter collision (now addressed in script but not kernel), do_not_assume about non-prefix variation and hardcoded confidence"
+  ],
+  "unresolved": [
+    "Does multi-parameter induction work when training observations come from real browser sessions with noisy multi-step actions, varying preconditions, and schemas that are not identical across observations?",
+    "Does the induction handle nested structures (e.g., body.nested.field) or lists, not only flat leaf paths tested here?",
+    "What is false-positive rate when training observations share coincidental prefix/suffix (e.g., all URLs share 'https://') — does it spuriously parameterize non-parameter fields?",
+    "If caller supplies full unseen values (https://site-d.com/hook, req-4) instead of pre-stripped middles, does resolution correctly handle full values or produce double-prefix errors?",
+    "How does parameterized resolution perform end-to-end with a real LLM agent (tokens, browser work, retrieval, verification, repair, latency) and what is amortization vs cold exploration on real tasks?",
+    "Can confidence be learned/calibrated rather than hardcoded 0.5/0.8/0.9, and does threshold 0.8 correctly trade off EXECUTABLE vs EXPLORE vs UNKNOWN on real data?",
+    "Does the fragile positional mapping in the harness hide binding errors for other slot naming schemes or param orderings?",
+    "What is behavior for empty, special-char, very long, or non-string varying values when confidence gate is bypassed?"
+  ]
+}

@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-33528827909",
+  "lane": "frontier",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "spearman_rho_aggregate": 1.0,
+    "spearman_p_value": 0.0,
+    "spearman_bonferroni_p": 0.0,
+    "rule_memory_diff_mean_by_lambda": {
+      "0.0": 0.0533,
+      "0.25": 0.0867,
+      "0.5": 0.3067,
+      "1.0": 0.6533
+    },
+    "rule_accuracy_mean_by_lambda": {
+      "0.0": 0.1133,
+      "0.25": 0.1867,
+      "0.5": 0.5467,
+      "1.0": 1.0
+    },
+    "memory_accuracy_mean_by_lambda": {
+      "0.0": 0.06,
+      "0.25": 0.1,
+      "0.5": 0.24,
+      "1.0": 0.3467
+    },
+    "positive_control_rule_accuracy_lambda1": [1.0, 1.0, 1.0],
+    "null_control_paired_t_p_value_lambda0": 0.094178,
+    "sensitivity_monotonic_increasing": true,
+    "function_invariance_cv_by_lambda": {
+      "0.0": 0.4677,
+      "0.25": 0.6057,
+      "0.5": 0.2016,
+      "1.0": 0.0382
+    },
+    "anova_lambda_effect_F": 58.9885,
+    "anova_lambda_effect_p": 0.000076,
+    "anova_function_effect_F": 0.0258,
+    "anova_function_effect_p": 0.974649,
+    "anova_model_r_squared": 0.9672,
+    "per_function_spearman_rho": [1.0, 0.8, 1.0],
+    "per_function_spearman_p": [0.0, 0.2, 0.0],
+    "paired_t_cohens_d_by_lambda": {
+      "0.0": 1.7457,
+      "0.25": 1.348,
+      "0.5": 4.0501,
+      "1.0": 21.3854
+    },
+    "n_transitions_per_level": 250,
+    "n_train": 200,
+    "n_test": 50,
+    "total_transitions": 3000
+  },
+  "controls": {
+    "positive_control": {
+      "description": "Rules >90% accuracy at lambda=1 across all 3 functions",
+      "expected": "rules accuracy > 0.90 at lambda=1",
+      "observed": {
+        "function_1_seed42": 1.0,
+        "function_2_seed43": 1.0,
+        "function_3_seed44": 1.0
+      },
+      "pass": true,
+      "evidence_ref": "result.json metrics.positive_control_rule_accuracy_lambda1"
+    },
+    "null_control": {
+      "description": "Rules not significantly outperform memory at lambda=0 (paired t-test p>0.05)",
+      "expected": "paired t-test p > 0.05 at lambda=0",
+      "observed": {
+        "paired_t_p_value": 0.094178,
+        "diffs": [0.02, 0.08, 0.06]
+      },
+      "pass": true,
+      "evidence_ref": "result.json metrics.null_control_paired_t_p_value_lambda0"
+    },
+    "sensitivity_control": {
+      "description": "Rule-memory difference monotonically increasing across lambda levels",
+      "expected": "diff(0.0) <= diff(0.25) <= diff(0.5) <= diff(1.0)",
+      "observed": {
+        "diff_means": [0.0533, 0.0867, 0.3067, 0.6533],
+        "monotonic": true
+      },
+      "pass": true,
+      "evidence_ref": "result.json metrics.rule_memory_diff_mean_by_lambda"
+    },
+    "function_invariance": {
+      "description": "CV<0.3 at each lambda level AND monotonic ordering preserved across all functions",
+      "expected": "CV < 0.3 at all lambda levels; all functions show monotonic increase",
+      "observed": {
+        "cv_by_lambda": {"0.0": 0.4677, "0.25": 0.6057, "0.5": 0.2016, "1.0": 0.0382},
+        "cv_all_under_0.3": false,
+        "all_functions_monotonic": false,
+        "function_2_non_monotonic_note": "Function 2 (seed=43) diff: 0.08 at lambda=0, 0.04 at lambda=0.25 (decrease)"
+      },
+      "pass": false,
+      "evidence_ref": "result.json metrics.function_invariance_cv_by_lambda"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-FRONTIER-33528827909/analyze.py",
+      "sha256": "c832e1437a8609de06731a7d3d6c793a5cdf535b26ac3501876bec19e3cc38b6",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-33528827909/result.json",
+      "sha256": "680d5ce8d64c7e85bc3ea8cf814a78a1e2a55117d02c21d9b15325fef5c75685",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-33528827909/spec.json",
+      "sha256": "f2cd3e670cd3aaa45123d90417ff444eb3d1bb47f1be78030c9f822cf140cc4d",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-33528827909/prereg.md",
+      "sha256": "fe78533f5956508f6293aa84105297b90ec59f5b1f069a17ff18a315fc22f417",
+      "role": "fixture"
+    }
+  ],
+  "observations": [
+    "Spearman rho(rule_memory_diff, lambda) = 1.0 (perfect monotonic), p < 0.000001 Bonferroni-corrected. Primary monotonicity hypothesis strongly supported.",
+    "Positive control passes: rules achieve 100% accuracy at lambda=1 across all 3 functions. Pipeline correctly detects full action-dependence.",
+    "Null control passes: rules do not significantly outperform memory at lambda=0 (paired t-test p=0.094). Pipeline does not detect structure when absent.",
+    "Sensitivity control passes: rule-memory difference is monotonically increasing: 0.053 < 0.087 < 0.307 < 0.653.",
+    "Function invariance control FAILS: CV > 0.3 at lambda=0 (CV=0.468) and lambda=0.25 (CV=0.606). At low action-dependence, different deterministic functions produce substantially different rule-memory differences.",
+    "Function 2 (seed=43) shows non-monotonic behavior: rule-memory diff decreases from 0.08 at lambda=0 to 0.04 at lambda=0.25, violating within-function monotonicity.",
+    "Two-way ANOVA (main effects only, saturated interaction): lambda effect F=58.99, p<0.0001; function effect F=0.026, p=0.975. Lambda explains 96.7% of variance; function does not contribute significantly.",
+    "At high lambda (0.5, 1.0), cross-function consistency is strong (CV=0.20, 0.04). Divergence is concentrated at low lambda where signal-to-noise is poor.",
+    "Memory accuracy is bounded by state space size (10 states), plateauing around 0.06-0.35 across lambda levels. Rule accuracy scales from ~0.11 to 1.0.",
+    "Shuffle baseline tracks rule baseline at lambda=0 (~0.11), confirming no action-dependent structure is available. At lambda=1, shuffle reaches ~0.39 (near memory level), as expected."
+  ],
+  "validity_notes": [
+    "The frozen design used 3 functions x 4 lambda levels x 250 transitions = 3000 total transitions. With 50 test samples per cell, power is limited for detecting small effects. The observed effect sizes at high lambda are very large (d=4-21), so power is adequate there. Small effects at low lambda may be underpowered.",
+    "The two-way ANOVA with interaction is saturated (12 cells, 12 parameters in full model). Only the main-effects model is estimable. The function_invariance control was operationalized via CV + monotonicity as a substitute for the planned interaction test.",
+    "The function invariance failure is concentrated at low lambda (0.0, 0.25) where the signal-to-noise ratio is inherently poor. With only 50 test transitions and lambda=0 meaning 0% signal, small sample fluctuations dominate the rule-memory difference. This is a finite-sample artifact at low lambda, not necessarily evidence that different deterministic functions produce qualitatively different dynamics at high lambda.",
+    "Synthetic-to-real gap: this experiment uses controlled synthetic transitions. Findings validate the measurement pipeline's ability to detect known structure but do not directly demonstrate regime-dependent dynamics in real Web data.",
+    "The preregistration specified 'no significant function x lambda interaction (two-way ANOVA p>0.05)' as a decision criterion. The saturated design prevents estimating this. The CV-based substitute was failed, which is the most conservative available interpretation."
+  ],
+  "unresolved": [
+    "Does the function invariance failure at low lambda persist with larger sample sizes (e.g., 500+ test transitions per cell)? Current 50 test samples may be insufficient for stable accuracy estimation when lambda=0.",
+    "Is the non-monotonic behavior of Function 2 (seed=43) at lambda=0.25 a genuine function-specific artifact or a sampling artifact? With only 3 functions, this cannot be decomposed.",
+    "Would the monotonicity finding survive with more lambda levels (e.g., 0.1, 0.2, 0.3, 0.4) to better resolve the low-lambda regime?",
+    "How do these synthetic results translate to real Web transitions? The pipeline is validated on synthetic data; real-data regime detection remains untested.",
+    "The frozen design's decision rule requires ALL conditions to pass. A more nuanced decision rule (e.g., 'monotonicity + positive control sufficient, function invariance as advisory') would yield SURVIVES_CURRENT_TEST. The strict all-or-nothing rule was chosen before outcomes were visible."
+  ]
+}

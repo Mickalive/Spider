@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-33528827909",
+  "lane": "frontier",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "HYPOTHESIS",
+      "reason": "Measurement invalid: inference errors (Bonferroni count mismatch, saturated ANOVA design) prevent justified inferential update; descriptive effect suggests further investigation."
+    }
+  ],
+  "product_action": "No product action; measurement invalid.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can causal intervention (do-calculus) on action parameters reveal regime-dependent dynamics in synthetic Web transitions where prediction accuracy decomposition fails due to small-sample inference limitations?",
+  "reason": "The experiment produced a robust descriptive monotonic increase of rule-memory accuracy difference with lambda (Spearman rho=1.0, means 0.053->0.087->0.307->0.653) and passed positive/null controls, but statistical inference is invalid: producer reported impossible p-values (p=0.0) and used Bonferroni x3 instead of preregistered x12, making primary monotonicity test non-significant (exact permutation p=0.042 one-sided, after Bonferroni x12 p>=0.5). Function invariance control failure is artifact of CV metric at low means (CV inflated by small denominators) and saturated ANOVA design (0 residual df). Audit status MEASUREMENT_INVALID; claim ceiling is descriptive only. No justified inferential claim for or against C-WEB-DYNAMICS; the hypothesis remains open.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-33528827909/spec.json: hypothesis, falsifier, decision_rule, baselines, positive_control, null_control",
+    "research/experiments/EXP-FRONTIER-33528827909/prereg.md: 5-11 decision rules, Bonferroni x12, ANOVA interaction requirement",
+    "research/experiments/EXP-FRONTIER-33528827909/freeze.json: hashes fe78533f, f2cd3e67, dbadd1fc",
+    "research/experiments/EXP-FRONTIER-33528827909/result.json: metrics.* (spearman_rho_aggregate 1.0, spearman_p_value 0.0, rule_memory_diff_mean_by_lambda, anova_lambda_effect_F 58.9885, function_invariance_cv_by_lambda), controls.* (positive_control pass true, null_control pass true, function_invariance pass false), observations, validity_notes",
+    "research/experiments/EXP-FRONTIER-33528827909/report.md: per-function accuracies table, aggregate diff table, statistical tests, control checks",
+    "research/experiments/EXP-FRONTIER-33528827909/analyze.py:50-59 deterministic functions, 63-77 generation, 82-138 baselines, 178-188 split, 260-284 Spearman, 307-376 ANOVA, 382-442 controls",
+    "research/experiments/EXP-FRONTIER-33528827909/provenance.json: frozen_inputs hashes, execution_timestamp 2026-09-02T18:15:00Z, github_run_id 33664084980",
+    "research/experiments/EXP-FRONTIER-33528827909/audit.json: status MEASUREMENT_INVALID, producer_claim_supported false, claim_ceiling descriptive only, validity_findings, recomputed_metrics, required_fixes"
+  ]
+}
