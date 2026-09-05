@@ -1,0 +1,33 @@
+{
+  "experiment_id": "EXP-PHYSICS-33788037373",
+  "lane": "physics",
+  "request_hash": "0e23a544b82cb71413cf4d130ec5d82a4e4bae42a551a65ba8de6d0ae6c668d7",
+  "freeze_hash_prereg": "edef86688d34e165a026576e9f8c27edc95a0b3a73c5c80c2c52a4a234f610ea",
+  "freeze_hash_request": "b014f5c206a83409bfd5326bc8d2e8183609e0ef80ed0e6078d50e2dae209ff6",
+  "freeze_hash_spec": "818348452206b27e26f4dc645bb03bc3ccd982287f54fcd3d2f6f5b3101ce863",
+  "pre_execute_sha": "33ef08894b52ac68b84d27cc9a5489bcf1d759b6",
+  "execution_sha": "ac88f67ea52db512456163cc3452b0aa7783d03e5615ed4de92fccab94b3e450",
+  "code_paths": [
+    "research/physics/substrate_337.py",
+    "research/physics/run_experiment_337.py"
+  ],
+  "environment": {
+    "python_version": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "platform": "linux"
+  },
+  "seeds": {
+    "positive_control": 42,
+    "null_control": 44,
+    "live_site1": 43,
+    "live_site2": 43,
+    "split": 42,
+    "permutation_base": 42
+  },
+  "data_hashes": {
+    "positive": "811cd5e2d6eb3e9837c931485335347873f57b280f0a1c6359cf40392a6c4312",
+    "null": "6d527c4edfcfd3767b5b441702d29a51bc470a79fbf7eb359cdd5d8e69290e65",
+    "wikipedia": "647accf0ad9a538e83682240a7864bd29179c93f8816d913a8552ffa9a9b99ec",
+    "python_docs": "9286b4774186ff7248ff72b18ec5d2ff9de4938d914d8933000cd72e9ea3329c"
+  },
+  "recorded_at": "2026-09-05T00:22:51Z"
+}

@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-33974562602",
+  "lane": "product",
+  "decision": "KERNEL-INTEGRATION-FALSIFIED",
+  "claim_updates": [
+    {
+      "claim_id": "C-PARAM-INHERIT",
+      "status": "EXPERIMENTAL",
+      "reason": "Kernel-integrated distill_parameterized() in src/spider/kernel.py is verified faithful to experiment-script version on clean synthetic inputs (B1-B5 regression: 21/21 EXECUTABLE, 21/21 binding correct, all slot counts/names identical). However, 6 of 13 decision checks fail: C1/C2 full-value unseen produce double-prefix errors (binding_accuracy=0.0), D1/D2 noisy browser observations induce extra spurious slots from noise fields (D1: 6 vs 3 expected, D2: 4 vs 2 expected, 0% resolution), D3 varying preconditions 0% resolution, and E1 unrelated observations hallucinate 4 slots vs expected 0. The algorithm works correctly only on clean synthetic training data with caller-supplied varying-middle tokens. C-PARAM-INHERIT remains at experiment-script-only POC level for realistic inputs. The kernel integration milestone is complete but the induction algorithm requires noise filtering, pattern-absence detection, and full-value handling fixes before advancing."
+    }
+  ],
+  "product_action": "NO_PROMOTION — kernel integration is faithful but algorithm fails on full-value unseen params (double-prefix), noisy observations (over-parametrization), and unrelated observations (hallucinated slots). C-PARAM-INHERIT must remain EXPERIMENTAL until noise filtering, pattern-absence detection, and full-value handling are fixed and retested.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can the induction algorithm be fixed to (1) detect when a supplied param already contains the learned prefix/suffix and avoid double-wrapping, (2) ignore varying fields that lack common prefix/suffix structure with the majority of varying fields, and (3) return slot_count=0 when observations share no common structural pattern — and do these fixes preserve the faithful regression on clean synthetic inputs?",
+  "reason": "The frozen decision rule KERNEL-INTEGRATION-SURVIVES requires all 7 check groups. Five pass (B1-B5 regression, literal baseline, E2 single-obs, no crashes). Six fail: C1/C2 full-value binding_accuracy=0.0 (double-prefix: template wraps already-complete values), D1/D2 noisy over-param (noise fields timestamp/retry_count/response_time_ms detected as params), D3 varying-preconditions 0% resolution (preconditions from first observation mismatch resolve context), E1 pattern-absence hallucination (4 slots from unrelated observations). The kernel integration itself is a complete success — all failures are algorithmic limitations, not integration bugs. The claim ceiling is bounded to clean synthetic inputs only. Three distinct algorithmic failure modes must be addressed: (a) double-prefix in _bind when caller supplies full values, (b) no signal/noise discrimination in _extract_varying_values_multi, (c) no structure-similarity check to detect unrelated observations. Do NOT promote to Product Core.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-33974562602/result.json — metrics: kernel_regression_pass=true, full_value_binding_accuracy=0.0, noisy_resolution_rate=0.0, null_control_E1_slot_count=4",
+    "research/experiments/EXP-PRODUCT-33974562602/result.json — controls: B_REGRESSION_SYNTHETIC PASS, B_LITERAL_REPLAY PASS, E1_PATTERN_ABSENCE FAIL (4 vs 0 slots), E2_SINGLE_OBS PASS",
+    "research/experiments/EXP-PRODUCT-33974562602/raw_evidence.json — conditions B1-B5 each 1.0 resolution/binding, C1/C2 binding_correct=false double-prefix detail, D1 slot_count=6, D2 slot_count=4, D3 0% resolution, E1 4 hallucinated slots",
+    "research/experiments/EXP-PRODUCT-33974562602/audit.json — status PASS, producer_claim_supported=true, claim_ceiling narrow synthetic only, 7 required_fixes, all recomputed_metrics match producer",
+    "research/experiments/EXP-PRODUCT-33974562602/raw_evidence.json — decision.checks: B1-B5=true, C1/C2=false, D1/D2/D3=false, E1=false, E2=true, no_crashes=true",
+    "research/experiments/EXP-PRODUCT-33974562602/raw_evidence.json — C1 bound_action detail: 'https://site-https://site-d.com/hook.com/hook' (double-prefix)",
+    "research/experiments/EXP-PRODUCT-33974562602/raw_evidence.json — D1 parameter_slots includes timestamp/request_duration_ms/retry_count as extra slots",
+    "research/experiments/EXP-PRODUCT-33741671686/handoff.json — parent chain: synthetic POC validated, 8 required_fixes, 'Do NOT promote to Product Core'",
+    "src/spider/kernel.py sha256 f2e8043de03f5191eef34b3cf57c9cd7ab144954179492f0b546c85ffcc461cf — kernel integration verified faithful",
+    "research/experiments/EXP-PRODUCT-33974562602/provenance.json — base_sha f5821da80d4f0b831723c553b829a6517ae8197c, github_run_id 33974562602, deterministic reproduction"
+  ]
+}
