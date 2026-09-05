@@ -1,0 +1,1522 @@
+{
+  "total_tasks": 812,
+  "site_types": [
+    "gitlab",
+    "map",
+    "reddit",
+    "shopping",
+    "shopping_admin",
+    "wikipedia"
+  ],
+  "site_stats": {
+    "gitlab": {
+      "task_count": 196,
+      "unique_templates": 44,
+      "eval_types": {
+        "url_match": 49,
+        "string_match": 54,
+        "program_html": 126
+      },
+      "fraction_login_required": 1.0,
+      "median_intent_length": 87.5
+    },
+    "map": {
+      "task_count": 112,
+      "unique_templates": 30,
+      "eval_types": {
+        "string_match": 90,
+        "program_html": 17,
+        "url_match": 5
+      },
+      "fraction_login_required": 1.0,
+      "median_intent_length": 84.0
+    },
+    "reddit": {
+      "task_count": 114,
+      "unique_templates": 23,
+      "eval_types": {
+        "string_match": 11,
+        "program_html": 103,
+        "url_match": 66
+      },
+      "fraction_login_required": 1.0,
+      "median_intent_length": 92.5
+    },
+    "shopping": {
+      "task_count": 192,
+      "unique_templates": 49,
+      "eval_types": {
+        "string_match": 88,
+        "program_html": 62,
+        "url_match": 57
+      },
+      "fraction_login_required": 1.0,
+      "median_intent_length": 77.5
+    },
+    "shopping_admin": {
+      "task_count": 182,
+      "unique_templates": 41,
+      "eval_types": {
+        "string_match": 88,
+        "url_match": 28,
+        "program_html": 91
+      },
+      "fraction_login_required": 1.0,
+      "median_intent_length": 64.0
+    },
+    "wikipedia": {
+      "task_count": 16,
+      "unique_templates": 3,
+      "eval_types": {
+        "string_match": 4,
+        "program_html": 12
+      },
+      "fraction_login_required": 1.0,
+      "median_intent_length": 89.0
+    }
+  },
+  "method1_element_count": {
+    "gitlab": {
+      "page_types": {
+        "project_list": {
+          "estimated_elements": 80,
+          "estimated_chars": 5200,
+          "weight": 0.15,
+          "truncation_yield": 1.0,
+          "viewport_yield": 0.55,
+          "pruning_yield": 0.88,
+          "combined_yield": 0.484,
+          "llm_truncation_yield": 0.369
+        },
+        "repo_file_tree": {
+          "estimated_elements": 100,
+          "estimated_chars": 6500,
+          "weight": 0.15,
+          "truncation_yield": 1.0,
+          "viewport_yield": 0.55,
+          "pruning_yield": 0.88,
+          "combined_yield": 0.484,
+          "llm_truncation_yield": 0.295
+        },
+        "code_view": {
+          "estimated_elements": 70,
+          "estimated_chars": 4550,
+          "weight": 0.15,
+          "truncation_yield": 1.0,
+          "viewport_yield": 0.55,
+          "pruning_yield": 0.88,
+          "combined_yield": 0.484,
+          "llm_truncation_yield": 0.422
+        },
+        "issue_list": {
+          "estimated_elements": 60,
+          "estimated_chars": 3900,
+          "weight": 0.15,
+          "truncation_yield": 1.0,
+          "viewport_yield": 0.55,
+          "pruning_yield": 0.88,
+          "combined_yield": 0.484,
+          "llm_truncation_yield": 0.492
+        },
+        "merge_request": {
+          "estimated_elements": 80,
+          "estimated_chars": 5200,
+          "weight": 0.15,
+          "truncation_yield": 1.0,
+          "viewport_yield": 0.55,
+          "pruning_yield": 0.88,
+          "combined_yield": 0.484,
+          "llm_truncation_yield": 0.369
+        },
+        "pipeline": {
+          "estimated_elements": 50,
+          "estimated_chars": 3250,
+          "weight": 0.1,
+          "truncation_yield": 1.0,
+          "viewport_yield": 0.55,
+          "pruning_yield": 0.88,
+          "combined_yield": 0.484,
+          "llm_truncation_yield": 0.591
+        },
+        "settings": {
+          "estimated_elements": 40,
+          "estimated_chars": 2600,
+          "weight": 0.05,
+          "truncation_yield": 1.0,
+          "viewport_yield": 0.55,
+          "pruning_yield": 0.88,
+          "combined_yield": 0.484,
+          "llm_truncation_yield": 0.738
+        },
+        "dashboard": {
+          "estimated_elements": 60,
+          "estimated_chars": 3900,
+          "weight": 0.1,
+          "truncation_yield": 1.0,
+          "viewport_yield": 0.55,
+          "pruning_yield": 0.88,
+          "combined_yield": 0.484,
+          "llm_truncation_yield": 0.492
+        }
+      },
+      "weighted_median_yield": 0.484,
+      "weighted_llm_yield": 0.437
+    },
+    "map": {
+      "page_types": {
+        "map_view": {
+          "estimated_elements": 60,
+          "estimated_chars": 3900,
+          "weight": 0.3,
+          "truncation_yield": 1.0,
+          "viewport_yield": 0.65,
+          "pruning_yield": 0.92,
+          "combined_yield": 0.598,
+          "llm_truncation_yield": 0.492
+        },
+        "search_results": {
+          "estimated_elements": 40,
+          "estimated_chars": 2600,
+          "weight": 0.25,
+          "truncation_yield": 1.0,
+          "viewport_yield": 0.65,
+          "pruning_yield": 0.92,
+          "combined_yield": 0.598,
+          "llm_truncation_yield": 0.738
+        },
+        "place_detail": {
+          "estimated_elements": 50,
+          "estimated_chars": 3250,
+          "weight": 0.25,
+          "truncation_yield": 1.0,
+          "viewport_yield": 0.65,
+          "pruning_yield": 0.92,
+          "combined_yield": 0.598,
+          "llm_truncation_yield": 0.591
+        },
+        "directions": {
+          "estimated_elements": 30,
+          "estimated_chars": 1950,
+          "weight": 0.2,
+          "truncation_yield": 1.0,
+          "viewport_yield": 0.65,
+          "pruning_yield": 0.92,
+          "combined_yield": 0.598,
+          "llm_truncation_yield": 0.985
+        }
+      },
+      "weighted_median_yield": 0.598,
+      "weighted_llm_yield": 0.677
+    },
+    "reddit": {
+      "page_types": {
+        "subreddit_home": {
+          "estimated_elements": 120,
+          "estimated_chars": 7800,
+          "weight": 0.2,
+          "truncation_yield": 1.0,
+          "viewport_yield": 0.5,
+          "pruning_yield": 0.9,
+          "combined_yield": 0.45,
+          "llm_truncation_yield": 0.246
+        },
+        "post_thread": {
+          "estimated_elements": 100,
+          "estimated_chars": 6500,
+          "weight": 0.25,
+          "truncation_yield": 1.0,
+          "viewport_yield": 0.5,
+          "pruning_yield": 0.9,
+          "combined_yield": 0.45,
+          "llm_truncation_yield": 0.295
+        },
+        "comment_section": {
+          "estimated_elements": 120,
+          "estimated_chars": 7800,
+          "weight": 0.25,
+          "truncation_yield": 1.0,
+          "viewport_yield": 0.5,
+          "pruning_yield": 0.9,
+          "combined_yield": 0.45,
+          "llm_truncation_yield": 0.246
+        },
+        "user_profile": {
+          "estimated_elements": 60,
+          "estimated_chars": 3900,
+          "weight": 0.1,
+          "truncation_yield": 1.0,
+          "viewport_yield": 0.5,
+          "pruning_yield": 0.9,
+          "combined_yield": 0.45,
+          "llm_truncation_yield": 0.492
+        },
+        "search_results": {
+          "estimated_elements": 80,
+          "estimated_chars": 5200,
+          "weight": 0.1,
+          "truncation_yield": 1.0,
+          "viewport_yield": 0.5,
+          "pruning_yield": 0.9,
+          "combined_yield": 0.45,
+          "llm_truncation_yield": 0.369
+        },
+        "settings": {
+          "estimated_elements": 30,
+          "estimated_chars": 1950,
+          "weight": 0.1,
+          "truncation_yield": 1.0,
+          "viewport_yield": 0.5,
+          "pruning_yield": 0.9,
+          "combined_yield": 0.45,
+          "llm_truncation_yield": 0.985
+        }
+      },
+      "weighted_median_yield": 0.45,
+      "weighted_llm_yield": 0.369
+    },
+    "shopping": {
+      "page_types": {
+        "product_listing": {
+          "estimated_elements": 150,
+          "estimated_chars": 9750,
+          "weight": 0.3,
+          "truncation_yield": 0.84,
+          "viewport_yield": 0.45,
+          "pruning_yield": 0.88,
+          "combined_yield": 0.333,
+          "llm_truncation_yield": 0.197
+        },
+        "product_detail": {
+          "estimated_elements": 120,
+          "estimated_chars": 7800,
+          "weight": 0.25,
+          "truncation_yield": 1.0,
+          "viewport_yield": 0.45,
+          "pruning_yield": 0.88,
+          "combined_yield": 0.396,
+          "llm_truncation_yield": 0.246
+        },
+        "cart": {
+          "estimated_elements": 60,
+          "estimated_chars": 3900,
+          "weight": 0.1,
+          "truncation_yield": 1.0,
+          "viewport_yield": 0.45,
+          "pruning_yield": 0.88,
+          "combined_yield": 0.396,
+          "llm_truncation_yield": 0.492
+        },
+        "search": {
+          "estimated_elements": 160,
+          "estimated_chars": 10400,
+          "weight": 0.15,
+          "truncation_yield": 0.788,
+          "viewport_yield": 0.45,
+          "pruning_yield": 0.88,
+          "combined_yield": 0.312,
+          "llm_truncation_yield": 0.185
+        },
+        "reviews": {
+          "estimated_elements": 80,
+          "estimated_chars": 5200,
+          "weight": 0.1,
+          "truncation_yield": 1.0,
+          "viewport_yield": 0.45,
+          "pruning_yield": 0.88,
+          "combined_yield": 0.396,
+          "llm_truncation_yield": 0.369
+        },
+        "account_orders": {
+          "estimated_elements": 50,
+          "estimated_chars": 3250,
+          "weight": 0.1,
+          "truncation_yield": 1.0,
+          "viewport_yield": 0.45,
+          "pruning_yield": 0.88,
+          "combined_yield": 0.396,
+          "llm_truncation_yield": 0.591
+        }
+      },
+      "weighted_median_yield": 0.365,
+      "weighted_llm_yield": 0.294
+    },
+    "shopping_admin": {
+      "page_types": {
+        "dashboard": {
+          "estimated_elements": 80,
+          "estimated_chars": 5200,
+          "weight": 0.2,
+          "truncation_yield": 1.0,
+          "viewport_yield": 0.55,
+          "pruning_yield": 0.85,
+          "combined_yield": 0.468,
+          "llm_truncation_yield": 0.369
+        },
+        "product_list": {
+          "estimated_elements": 100,
+          "estimated_chars": 6500,
+          "weight": 0.25,
+          "truncation_yield": 1.0,
+          "viewport_yield": 0.55,
+          "pruning_yield": 0.85,
+          "combined_yield": 0.468,
+          "llm_truncation_yield": 0.295
+        },
+        "order_list": {
+          "estimated_elements": 80,
+          "estimated_chars": 5200,
+          "weight": 0.25,
+          "truncation_yield": 1.0,
+          "viewport_yield": 0.55,
+          "pruning_yield": 0.85,
+          "combined_yield": 0.468,
+          "llm_truncation_yield": 0.369
+        },
+        "analytics": {
+          "estimated_elements": 60,
+          "estimated_chars": 3900,
+          "weight": 0.15,
+          "truncation_yield": 1.0,
+          "viewport_yield": 0.55,
+          "pruning_yield": 0.85,
+          "combined_yield": 0.468,
+          "llm_truncation_yield": 0.492
+        },
+        "settings": {
+          "estimated_elements": 40,
+          "estimated_chars": 2600,
+          "weight": 0.15,
+          "truncation_yield": 1.0,
+          "viewport_yield": 0.55,
+          "pruning_yield": 0.85,
+          "combined_yield": 0.468,
+          "llm_truncation_yield": 0.738
+        }
+      },
+      "weighted_median_yield": 0.468,
+      "weighted_llm_yield": 0.424
+    },
+    "wikipedia": {
+      "page_types": {
+        "article": {
+          "estimated_elements": 45,
+          "estimated_chars": 2925,
+          "weight": 0.4,
+          "truncation_yield": 1.0,
+          "viewport_yield": 0.55,
+          "pruning_yield": 0.94,
+          "combined_yield": 0.517,
+          "llm_truncation_yield": 0.656
+        },
+        "article_list": {
+          "estimated_elements": 35,
+          "estimated_chars": 2275,
+          "weight": 0.2,
+          "truncation_yield": 1.0,
+          "viewport_yield": 0.55,
+          "pruning_yield": 0.94,
+          "combined_yield": 0.517,
+          "llm_truncation_yield": 0.844
+        },
+        "talk_page": {
+          "estimated_elements": 25,
+          "estimated_chars": 1625,
+          "weight": 0.15,
+          "truncation_yield": 1.0,
+          "viewport_yield": 0.55,
+          "pruning_yield": 0.94,
+          "combined_yield": 0.517,
+          "llm_truncation_yield": 1.0
+        },
+        "search": {
+          "estimated_elements": 30,
+          "estimated_chars": 1950,
+          "weight": 0.15,
+          "truncation_yield": 1.0,
+          "viewport_yield": 0.55,
+          "pruning_yield": 0.94,
+          "combined_yield": 0.517,
+          "llm_truncation_yield": 0.985
+        },
+        "user_page": {
+          "estimated_elements": 20,
+          "estimated_chars": 1300,
+          "weight": 0.1,
+          "truncation_yield": 1.0,
+          "viewport_yield": 0.55,
+          "pruning_yield": 0.94,
+          "combined_yield": 0.517,
+          "llm_truncation_yield": 1.0
+        }
+      },
+      "weighted_median_yield": 0.517,
+      "weighted_llm_yield": 0.829
+    }
+  },
+  "method2_char_length": {
+    "gitlab": {
+      "page_types": {
+        "project_list": {
+          "estimated_elements": 80,
+          "chars_range": [
+            2000,
+            5200,
+            9600
+          ],
+          "yield_at_utterance_8192": 1.0,
+          "yield_range_at_utterance": [
+            0.853,
+            1.0,
+            1.0
+          ],
+          "yield_at_llm_1920": 0.369,
+          "yield_range_at_llm": [
+            0.2,
+            0.369,
+            0.96
+          ],
+          "max_elements_at_utterance": 80,
+          "max_elements_at_llm": 29,
+          "weight": 0.15
+        },
+        "repo_file_tree": {
+          "estimated_elements": 100,
+          "chars_range": [
+            2500,
+            6500,
+            12000
+          ],
+          "yield_at_utterance_8192": 1.0,
+          "yield_range_at_utterance": [
+            0.683,
+            1.0,
+            1.0
+          ],
+          "yield_at_llm_1920": 0.295,
+          "yield_range_at_llm": [
+            0.16,
+            0.295,
+            0.768
+          ],
+          "max_elements_at_utterance": 100,
+          "max_elements_at_llm": 29,
+          "weight": 0.15
+        },
+        "code_view": {
+          "estimated_elements": 70,
+          "chars_range": [
+            1750,
+            4550,
+            8400
+          ],
+          "yield_at_utterance_8192": 1.0,
+          "yield_range_at_utterance": [
+            0.975,
+            1.0,
+            1.0
+          ],
+          "yield_at_llm_1920": 0.422,
+          "yield_range_at_llm": [
+            0.229,
+            0.422,
+            1.0
+          ],
+          "max_elements_at_utterance": 70,
+          "max_elements_at_llm": 29,
+          "weight": 0.15
+        },
+        "issue_list": {
+          "estimated_elements": 60,
+          "chars_range": [
+            1500,
+            3900,
+            7200
+          ],
+          "yield_at_utterance_8192": 1.0,
+          "yield_range_at_utterance": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "yield_at_llm_1920": 0.492,
+          "yield_range_at_llm": [
+            0.267,
+            0.492,
+            1.0
+          ],
+          "max_elements_at_utterance": 60,
+          "max_elements_at_llm": 29,
+          "weight": 0.15
+        },
+        "merge_request": {
+          "estimated_elements": 80,
+          "chars_range": [
+            2000,
+            5200,
+            9600
+          ],
+          "yield_at_utterance_8192": 1.0,
+          "yield_range_at_utterance": [
+            0.853,
+            1.0,
+            1.0
+          ],
+          "yield_at_llm_1920": 0.369,
+          "yield_range_at_llm": [
+            0.2,
+            0.369,
+            0.96
+          ],
+          "max_elements_at_utterance": 80,
+          "max_elements_at_llm": 29,
+          "weight": 0.15
+        },
+        "pipeline": {
+          "estimated_elements": 50,
+          "chars_range": [
+            1250,
+            3250,
+            6000
+          ],
+          "yield_at_utterance_8192": 1.0,
+          "yield_range_at_utterance": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "yield_at_llm_1920": 0.591,
+          "yield_range_at_llm": [
+            0.32,
+            0.591,
+            1.0
+          ],
+          "max_elements_at_utterance": 50,
+          "max_elements_at_llm": 29,
+          "weight": 0.1
+        },
+        "settings": {
+          "estimated_elements": 40,
+          "chars_range": [
+            1000,
+            2600,
+            4800
+          ],
+          "yield_at_utterance_8192": 1.0,
+          "yield_range_at_utterance": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "yield_at_llm_1920": 0.738,
+          "yield_range_at_llm": [
+            0.4,
+            0.738,
+            1.0
+          ],
+          "max_elements_at_utterance": 40,
+          "max_elements_at_llm": 29,
+          "weight": 0.05
+        },
+        "dashboard": {
+          "estimated_elements": 60,
+          "chars_range": [
+            1500,
+            3900,
+            7200
+          ],
+          "yield_at_utterance_8192": 1.0,
+          "yield_range_at_utterance": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "yield_at_llm_1920": 0.492,
+          "yield_range_at_llm": [
+            0.267,
+            0.492,
+            1.0
+          ],
+          "max_elements_at_utterance": 60,
+          "max_elements_at_llm": 29,
+          "weight": 0.1
+        }
+      },
+      "weighted_median_yield": 1.0,
+      "weighted_llm_yield": 0.437
+    },
+    "map": {
+      "page_types": {
+        "map_view": {
+          "estimated_elements": 60,
+          "chars_range": [
+            1500,
+            3900,
+            7200
+          ],
+          "yield_at_utterance_8192": 1.0,
+          "yield_range_at_utterance": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "yield_at_llm_1920": 0.492,
+          "yield_range_at_llm": [
+            0.267,
+            0.492,
+            1.0
+          ],
+          "max_elements_at_utterance": 60,
+          "max_elements_at_llm": 29,
+          "weight": 0.3
+        },
+        "search_results": {
+          "estimated_elements": 40,
+          "chars_range": [
+            1000,
+            2600,
+            4800
+          ],
+          "yield_at_utterance_8192": 1.0,
+          "yield_range_at_utterance": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "yield_at_llm_1920": 0.738,
+          "yield_range_at_llm": [
+            0.4,
+            0.738,
+            1.0
+          ],
+          "max_elements_at_utterance": 40,
+          "max_elements_at_llm": 29,
+          "weight": 0.25
+        },
+        "place_detail": {
+          "estimated_elements": 50,
+          "chars_range": [
+            1250,
+            3250,
+            6000
+          ],
+          "yield_at_utterance_8192": 1.0,
+          "yield_range_at_utterance": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "yield_at_llm_1920": 0.591,
+          "yield_range_at_llm": [
+            0.32,
+            0.591,
+            1.0
+          ],
+          "max_elements_at_utterance": 50,
+          "max_elements_at_llm": 29,
+          "weight": 0.25
+        },
+        "directions": {
+          "estimated_elements": 30,
+          "chars_range": [
+            750,
+            1950,
+            3600
+          ],
+          "yield_at_utterance_8192": 1.0,
+          "yield_range_at_utterance": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "yield_at_llm_1920": 0.985,
+          "yield_range_at_llm": [
+            0.533,
+            0.985,
+            1.0
+          ],
+          "max_elements_at_utterance": 30,
+          "max_elements_at_llm": 29,
+          "weight": 0.2
+        }
+      },
+      "weighted_median_yield": 1.0,
+      "weighted_llm_yield": 0.677
+    },
+    "reddit": {
+      "page_types": {
+        "subreddit_home": {
+          "estimated_elements": 120,
+          "chars_range": [
+            3000,
+            7800,
+            14400
+          ],
+          "yield_at_utterance_8192": 1.0,
+          "yield_range_at_utterance": [
+            0.569,
+            1.0,
+            1.0
+          ],
+          "yield_at_llm_1920": 0.246,
+          "yield_range_at_llm": [
+            0.133,
+            0.246,
+            0.64
+          ],
+          "max_elements_at_utterance": 120,
+          "max_elements_at_llm": 29,
+          "weight": 0.2
+        },
+        "post_thread": {
+          "estimated_elements": 100,
+          "chars_range": [
+            2500,
+            6500,
+            12000
+          ],
+          "yield_at_utterance_8192": 1.0,
+          "yield_range_at_utterance": [
+            0.683,
+            1.0,
+            1.0
+          ],
+          "yield_at_llm_1920": 0.295,
+          "yield_range_at_llm": [
+            0.16,
+            0.295,
+            0.768
+          ],
+          "max_elements_at_utterance": 100,
+          "max_elements_at_llm": 29,
+          "weight": 0.25
+        },
+        "comment_section": {
+          "estimated_elements": 120,
+          "chars_range": [
+            3000,
+            7800,
+            14400
+          ],
+          "yield_at_utterance_8192": 1.0,
+          "yield_range_at_utterance": [
+            0.569,
+            1.0,
+            1.0
+          ],
+          "yield_at_llm_1920": 0.246,
+          "yield_range_at_llm": [
+            0.133,
+            0.246,
+            0.64
+          ],
+          "max_elements_at_utterance": 120,
+          "max_elements_at_llm": 29,
+          "weight": 0.25
+        },
+        "user_profile": {
+          "estimated_elements": 60,
+          "chars_range": [
+            1500,
+            3900,
+            7200
+          ],
+          "yield_at_utterance_8192": 1.0,
+          "yield_range_at_utterance": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "yield_at_llm_1920": 0.492,
+          "yield_range_at_llm": [
+            0.267,
+            0.492,
+            1.0
+          ],
+          "max_elements_at_utterance": 60,
+          "max_elements_at_llm": 29,
+          "weight": 0.1
+        },
+        "search_results": {
+          "estimated_elements": 80,
+          "chars_range": [
+            2000,
+            5200,
+            9600
+          ],
+          "yield_at_utterance_8192": 1.0,
+          "yield_range_at_utterance": [
+            0.853,
+            1.0,
+            1.0
+          ],
+          "yield_at_llm_1920": 0.369,
+          "yield_range_at_llm": [
+            0.2,
+            0.369,
+            0.96
+          ],
+          "max_elements_at_utterance": 80,
+          "max_elements_at_llm": 29,
+          "weight": 0.1
+        },
+        "settings": {
+          "estimated_elements": 30,
+          "chars_range": [
+            750,
+            1950,
+            3600
+          ],
+          "yield_at_utterance_8192": 1.0,
+          "yield_range_at_utterance": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "yield_at_llm_1920": 0.985,
+          "yield_range_at_llm": [
+            0.533,
+            0.985,
+            1.0
+          ],
+          "max_elements_at_utterance": 30,
+          "max_elements_at_llm": 29,
+          "weight": 0.1
+        }
+      },
+      "weighted_median_yield": 1.0,
+      "weighted_llm_yield": 0.369
+    },
+    "shopping": {
+      "page_types": {
+        "product_listing": {
+          "estimated_elements": 150,
+          "chars_range": [
+            3750,
+            9750,
+            18000
+          ],
+          "yield_at_utterance_8192": 0.84,
+          "yield_range_at_utterance": [
+            0.455,
+            0.84,
+            1.0
+          ],
+          "yield_at_llm_1920": 0.197,
+          "yield_range_at_llm": [
+            0.107,
+            0.197,
+            0.512
+          ],
+          "max_elements_at_utterance": 126,
+          "max_elements_at_llm": 29,
+          "weight": 0.3
+        },
+        "product_detail": {
+          "estimated_elements": 120,
+          "chars_range": [
+            3000,
+            7800,
+            14400
+          ],
+          "yield_at_utterance_8192": 1.0,
+          "yield_range_at_utterance": [
+            0.569,
+            1.0,
+            1.0
+          ],
+          "yield_at_llm_1920": 0.246,
+          "yield_range_at_llm": [
+            0.133,
+            0.246,
+            0.64
+          ],
+          "max_elements_at_utterance": 120,
+          "max_elements_at_llm": 29,
+          "weight": 0.25
+        },
+        "cart": {
+          "estimated_elements": 60,
+          "chars_range": [
+            1500,
+            3900,
+            7200
+          ],
+          "yield_at_utterance_8192": 1.0,
+          "yield_range_at_utterance": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "yield_at_llm_1920": 0.492,
+          "yield_range_at_llm": [
+            0.267,
+            0.492,
+            1.0
+          ],
+          "max_elements_at_utterance": 60,
+          "max_elements_at_llm": 29,
+          "weight": 0.1
+        },
+        "search": {
+          "estimated_elements": 160,
+          "chars_range": [
+            4000,
+            10400,
+            19200
+          ],
+          "yield_at_utterance_8192": 0.788,
+          "yield_range_at_utterance": [
+            0.427,
+            0.788,
+            1.0
+          ],
+          "yield_at_llm_1920": 0.185,
+          "yield_range_at_llm": [
+            0.1,
+            0.185,
+            0.48
+          ],
+          "max_elements_at_utterance": 126,
+          "max_elements_at_llm": 29,
+          "weight": 0.15
+        },
+        "reviews": {
+          "estimated_elements": 80,
+          "chars_range": [
+            2000,
+            5200,
+            9600
+          ],
+          "yield_at_utterance_8192": 1.0,
+          "yield_range_at_utterance": [
+            0.853,
+            1.0,
+            1.0
+          ],
+          "yield_at_llm_1920": 0.369,
+          "yield_range_at_llm": [
+            0.2,
+            0.369,
+            0.96
+          ],
+          "max_elements_at_utterance": 80,
+          "max_elements_at_llm": 29,
+          "weight": 0.1
+        },
+        "account_orders": {
+          "estimated_elements": 50,
+          "chars_range": [
+            1250,
+            3250,
+            6000
+          ],
+          "yield_at_utterance_8192": 1.0,
+          "yield_range_at_utterance": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "yield_at_llm_1920": 0.591,
+          "yield_range_at_llm": [
+            0.32,
+            0.591,
+            1.0
+          ],
+          "max_elements_at_utterance": 50,
+          "max_elements_at_llm": 29,
+          "weight": 0.1
+        }
+      },
+      "weighted_median_yield": 0.92,
+      "weighted_llm_yield": 0.294
+    },
+    "shopping_admin": {
+      "page_types": {
+        "dashboard": {
+          "estimated_elements": 80,
+          "chars_range": [
+            2000,
+            5200,
+            9600
+          ],
+          "yield_at_utterance_8192": 1.0,
+          "yield_range_at_utterance": [
+            0.853,
+            1.0,
+            1.0
+          ],
+          "yield_at_llm_1920": 0.369,
+          "yield_range_at_llm": [
+            0.2,
+            0.369,
+            0.96
+          ],
+          "max_elements_at_utterance": 80,
+          "max_elements_at_llm": 29,
+          "weight": 0.2
+        },
+        "product_list": {
+          "estimated_elements": 100,
+          "chars_range": [
+            2500,
+            6500,
+            12000
+          ],
+          "yield_at_utterance_8192": 1.0,
+          "yield_range_at_utterance": [
+            0.683,
+            1.0,
+            1.0
+          ],
+          "yield_at_llm_1920": 0.295,
+          "yield_range_at_llm": [
+            0.16,
+            0.295,
+            0.768
+          ],
+          "max_elements_at_utterance": 100,
+          "max_elements_at_llm": 29,
+          "weight": 0.25
+        },
+        "order_list": {
+          "estimated_elements": 80,
+          "chars_range": [
+            2000,
+            5200,
+            9600
+          ],
+          "yield_at_utterance_8192": 1.0,
+          "yield_range_at_utterance": [
+            0.853,
+            1.0,
+            1.0
+          ],
+          "yield_at_llm_1920": 0.369,
+          "yield_range_at_llm": [
+            0.2,
+            0.369,
+            0.96
+          ],
+          "max_elements_at_utterance": 80,
+          "max_elements_at_llm": 29,
+          "weight": 0.25
+        },
+        "analytics": {
+          "estimated_elements": 60,
+          "chars_range": [
+            1500,
+            3900,
+            7200
+          ],
+          "yield_at_utterance_8192": 1.0,
+          "yield_range_at_utterance": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "yield_at_llm_1920": 0.492,
+          "yield_range_at_llm": [
+            0.267,
+            0.492,
+            1.0
+          ],
+          "max_elements_at_utterance": 60,
+          "max_elements_at_llm": 29,
+          "weight": 0.15
+        },
+        "settings": {
+          "estimated_elements": 40,
+          "chars_range": [
+            1000,
+            2600,
+            4800
+          ],
+          "yield_at_utterance_8192": 1.0,
+          "yield_range_at_utterance": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "yield_at_llm_1920": 0.738,
+          "yield_range_at_llm": [
+            0.4,
+            0.738,
+            1.0
+          ],
+          "max_elements_at_utterance": 40,
+          "max_elements_at_llm": 29,
+          "weight": 0.15
+        }
+      },
+      "weighted_median_yield": 1.0,
+      "weighted_llm_yield": 0.424
+    },
+    "wikipedia": {
+      "page_types": {
+        "article": {
+          "estimated_elements": 45,
+          "chars_range": [
+            1125,
+            2925,
+            5400
+          ],
+          "yield_at_utterance_8192": 1.0,
+          "yield_range_at_utterance": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "yield_at_llm_1920": 0.656,
+          "yield_range_at_llm": [
+            0.356,
+            0.656,
+            1.0
+          ],
+          "max_elements_at_utterance": 45,
+          "max_elements_at_llm": 29,
+          "weight": 0.4
+        },
+        "article_list": {
+          "estimated_elements": 35,
+          "chars_range": [
+            875,
+            2275,
+            4200
+          ],
+          "yield_at_utterance_8192": 1.0,
+          "yield_range_at_utterance": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "yield_at_llm_1920": 0.844,
+          "yield_range_at_llm": [
+            0.457,
+            0.844,
+            1.0
+          ],
+          "max_elements_at_utterance": 35,
+          "max_elements_at_llm": 29,
+          "weight": 0.2
+        },
+        "talk_page": {
+          "estimated_elements": 25,
+          "chars_range": [
+            625,
+            1625,
+            3000
+          ],
+          "yield_at_utterance_8192": 1.0,
+          "yield_range_at_utterance": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "yield_at_llm_1920": 1.0,
+          "yield_range_at_llm": [
+            0.64,
+            1.0,
+            1.0
+          ],
+          "max_elements_at_utterance": 25,
+          "max_elements_at_llm": 25,
+          "weight": 0.15
+        },
+        "search": {
+          "estimated_elements": 30,
+          "chars_range": [
+            750,
+            1950,
+            3600
+          ],
+          "yield_at_utterance_8192": 1.0,
+          "yield_range_at_utterance": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "yield_at_llm_1920": 0.985,
+          "yield_range_at_llm": [
+            0.533,
+            0.985,
+            1.0
+          ],
+          "max_elements_at_utterance": 30,
+          "max_elements_at_llm": 29,
+          "weight": 0.15
+        },
+        "user_page": {
+          "estimated_elements": 20,
+          "chars_range": [
+            500,
+            1300,
+            2400
+          ],
+          "yield_at_utterance_8192": 1.0,
+          "yield_range_at_utterance": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "yield_at_llm_1920": 1.0,
+          "yield_range_at_llm": [
+            0.8,
+            1.0,
+            1.0
+          ],
+          "max_elements_at_utterance": 20,
+          "max_elements_at_llm": 20,
+          "weight": 0.1
+        }
+      },
+      "weighted_median_yield": 1.0,
+      "weighted_llm_yield": 0.829
+    }
+  },
+  "method3_task_type": {
+    "gitlab": {
+      "task_count": 196,
+      "median_intent_length": 87.5,
+      "mean_intent_length": 85.3,
+      "min_intent_length": 13,
+      "max_intent_length": 200,
+      "complexity_class": "high",
+      "estimated_yield": 0.6,
+      "unique_template_ids": 44,
+      "eval_type_diversity": 3,
+      "eval_types": {
+        "url_match": 49,
+        "string_match": 54,
+        "program_html": 126
+      },
+      "fraction_requiring_login": 1.0,
+      "fraction_with_reference_url": 0.25
+    },
+    "map": {
+      "task_count": 112,
+      "median_intent_length": 84.0,
+      "mean_intent_length": 93.8,
+      "min_intent_length": 31,
+      "max_intent_length": 290,
+      "complexity_class": "high",
+      "estimated_yield": 0.55,
+      "unique_template_ids": 30,
+      "eval_type_diversity": 3,
+      "eval_types": {
+        "string_match": 90,
+        "program_html": 17,
+        "url_match": 5
+      },
+      "fraction_requiring_login": 1.0,
+      "fraction_with_reference_url": 0.045
+    },
+    "reddit": {
+      "task_count": 114,
+      "median_intent_length": 92.5,
+      "mean_intent_length": 94.2,
+      "min_intent_length": 38,
+      "max_intent_length": 186,
+      "complexity_class": "high",
+      "estimated_yield": 0.65,
+      "unique_template_ids": 23,
+      "eval_type_diversity": 3,
+      "eval_types": {
+        "string_match": 11,
+        "program_html": 103,
+        "url_match": 66
+      },
+      "fraction_requiring_login": 1.0,
+      "fraction_with_reference_url": 0.579
+    },
+    "shopping": {
+      "task_count": 192,
+      "median_intent_length": 77.5,
+      "mean_intent_length": 88.8,
+      "min_intent_length": 17,
+      "max_intent_length": 256,
+      "complexity_class": "moderate",
+      "estimated_yield": 0.65,
+      "unique_template_ids": 49,
+      "eval_type_diversity": 3,
+      "eval_types": {
+        "string_match": 88,
+        "program_html": 62,
+        "url_match": 57
+      },
+      "fraction_requiring_login": 1.0,
+      "fraction_with_reference_url": 0.297
+    },
+    "shopping_admin": {
+      "task_count": 182,
+      "median_intent_length": 64.0,
+      "mean_intent_length": 68.8,
+      "min_intent_length": 16,
+      "max_intent_length": 139,
+      "complexity_class": "moderate",
+      "estimated_yield": 0.6,
+      "unique_template_ids": 41,
+      "eval_type_diversity": 3,
+      "eval_types": {
+        "string_match": 88,
+        "url_match": 28,
+        "program_html": 91
+      },
+      "fraction_requiring_login": 1.0,
+      "fraction_with_reference_url": 0.159
+    },
+    "wikipedia": {
+      "task_count": 16,
+      "median_intent_length": 89.0,
+      "mean_intent_length": 88,
+      "min_intent_length": 62,
+      "max_intent_length": 120,
+      "complexity_class": "high",
+      "estimated_yield": 0.5,
+      "unique_template_ids": 3,
+      "eval_type_diversity": 2,
+      "eval_types": {
+        "string_match": 4,
+        "program_html": 12
+      },
+      "fraction_requiring_login": 1.0,
+      "fraction_with_reference_url": 0.0
+    }
+  },
+  "aggregated": {
+    "gitlab": {
+      "median_yield": 0.6,
+      "mean_yield": 0.695,
+      "method_yields": [
+        0.484,
+        1.0,
+        0.6
+      ],
+      "element_diversity": 21,
+      "task_count": 196,
+      "unique_templates": 44
+    },
+    "map": {
+      "median_yield": 0.598,
+      "mean_yield": 0.716,
+      "method_yields": [
+        0.598,
+        1.0,
+        0.55
+      ],
+      "element_diversity": 16,
+      "task_count": 112,
+      "unique_templates": 30
+    },
+    "reddit": {
+      "median_yield": 0.65,
+      "mean_yield": 0.7,
+      "method_yields": [
+        0.45,
+        1.0,
+        0.65
+      ],
+      "element_diversity": 17,
+      "task_count": 114,
+      "unique_templates": 23
+    },
+    "shopping": {
+      "median_yield": 0.65,
+      "mean_yield": 0.645,
+      "method_yields": [
+        0.365,
+        0.92,
+        0.65
+      ],
+      "element_diversity": 21,
+      "task_count": 192,
+      "unique_templates": 49
+    },
+    "shopping_admin": {
+      "median_yield": 0.6,
+      "mean_yield": 0.689,
+      "method_yields": [
+        0.468,
+        1.0,
+        0.6
+      ],
+      "element_diversity": 22,
+      "task_count": 182,
+      "unique_templates": 41
+    },
+    "wikipedia": {
+      "median_yield": 0.517,
+      "mean_yield": 0.672,
+      "method_yields": [
+        0.517,
+        1.0,
+        0.5
+      ],
+      "element_diversity": 17,
+      "task_count": 16,
+      "unique_templates": 3
+    }
+  },
+  "method_agreement": {
+    "spearman_m1_m2": 0.37142857142857144,
+    "spearman_m1_m3": -0.9428571428571428,
+    "spearman_m2_m3": -0.5428571428571429
+  },
+  "kruskal_wallis": {
+    "H": 0.1579,
+    "df": 5,
+    "p_approx": 0.9988
+  },
+  "threshold_tests": {
+    "sites_above_50pct": [
+      "gitlab",
+      "map",
+      "reddit",
+      "shopping",
+      "shopping_admin",
+      "wikipedia"
+    ],
+    "sites_below_30pct": [],
+    "support_count": 6,
+    "falsify_count": 0
+  },
+  "controls": {
+    "positive_control_shopping_high": true,
+    "positive_control_shopping_yield": 0.65,
+    "null_control_wikipedia_lowest": true,
+    "null_control_wikipedia_yield": 0.517,
+    "method_agreement_ok": false
+  },
+  "truncation_sensitivity": {
+    "gitlab": {
+      "yield_at_8192": 1.0,
+      "yield_at_1920": 0.471,
+      "sensitivity_ratio": 0.471
+    },
+    "map": {
+      "yield_at_8192": 1.0,
+      "yield_at_1920": 0.702,
+      "sensitivity_ratio": 0.702
+    },
+    "reddit": {
+      "yield_at_8192": 1.0,
+      "yield_at_1920": 0.439,
+      "sensitivity_ratio": 0.439
+    },
+    "shopping": {
+      "yield_at_8192": 0.938,
+      "yield_at_1920": 0.347,
+      "sensitivity_ratio": 0.37
+    },
+    "shopping_admin": {
+      "yield_at_8192": 1.0,
+      "yield_at_1920": 0.453,
+      "sensitivity_ratio": 0.453
+    },
+    "wikipedia": {
+      "yield_at_8192": 1.0,
+      "yield_at_1920": 0.897,
+      "sensitivity_ratio": 0.897
+    }
+  },
+  "verdict": "MIXED"
+}
