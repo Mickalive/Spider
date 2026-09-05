@@ -3,7 +3,7 @@
   "category": "VALIDATION_FAILURE",
   "message": "invalid result outcome: FALSIFIED-IN-SETTING",
   "retryable": false,
-  "recorded_at": "2026-09-05T15:29:45.076113+00:00",
-  "github_run_id": "33974562114",
+  "recorded_at": "2026-09-05T17:29:45.935117+00:00",
+  "github_run_id": "33980997625",
   "github_run_attempt": "1"
 }
