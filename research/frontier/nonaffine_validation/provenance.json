@@ -1,19 +1,18 @@
 {
   "experiment_id": "EXP-FRONTIER-33932275169",
-  "execution_timestamp": "2026-09-05T00:30:00+00:00",
+  "execution_timestamp": null,
   "analyzer_script": "analyze.py",
   "script_hashes": {
     "prereg.md": "148b09e78ca0d63892102a463b5de93f57dbc224ea163eb5e0901eac5a3de6d9",
     "spec.json": "1586fe87a0d13055ed7126c99308d5791a7d3a150ee04fe419c2a71aebfbda7c",
     "request.json": "1b231c2b8bfde60e6ba3693de74a87b33e7d85aeabd091e87a057831e43366c5",
     "analyze.py": "bc24c3a8911488533566b8499f041ed2e4676ff63902b62c850a6f4b9af27582",
-    "result.json": "089cccd24baba0432831f6e35559cc461c0b9bee0a3224ce47291f35b582957a",
+    "result.json": "954ccfc209cc491c989fd5f49d6374a531ba9d32bc11c325cc0c87ad23ea761e",
     "raw_tables.json": "e90d1aabf4060e1b0e5db80c2627684a798953f22efcdba7d73f866a1691e0da",
     "frequency_baseline.json": "ed58b31b0a79a108db647bc1a1957d40b86f6d6fa7d0f1994a94264aab868669",
-    "analytical_ground_truth.json": "34859d4702d6bf052a3999581ddad631b2d02c7f29229afe62a166dbb5550ad2",
-    "report.md": "671f245595762a33a4868a4fced7f1efe3641af93356eb17ef0e624685909e27"
+    "analytical_ground_truth.json": "34859d4702d6bf052a3999581ddad631b2d02c7f29229afe62a166dbb5550ad2"
   },
-  "result_hash": "089cccd24baba0432831f6e35559cc461c0b9bee0a3224ce47291f35b582957a",
+  "result_hash": "954ccfc209cc491c989fd5f49d6374a531ba9d32bc11c325cc0c87ad23ea761e",
   "status": "COMPLETE",
   "outcome": "FALSIFIED-IN-SETTING",
   "claim": "C-WEB-DYNAMICS",
@@ -21,26 +20,11 @@
   "environment": {
     "python_version": "3.12.14",
     "numpy_version": "2.5.2",
-    "scipy_version": "1.18.1",
-    "pandas_version": "3.0.5",
-    "statsmodels_version": "0.15.0",
-    "platform": "linux",
-    "compiler": "GCC 13.3.0"
+    "scipy_version": "unknown"
   },
   "frozen_inputs": {
     "prereg_hash": "148b09e78ca0d63892102a463b5de93f57dbc224ea163eb5e0901eac5a3de6d9",
     "request_hash": "1b231c2b8bfde60e6ba3693de74a87b33e7d85aeabd091e87a057831e43366c5",
     "spec_hash": "1586fe87a0d13055ed7126c99308d5791a7d3a150ee04fe419c2a71aebfbda7c"
-  },
-  "reproduction": {
-    "command": "cd research/frontier/nonaffine_validation && python3 analyze.py",
-    "total_transitions": 90000,
-    "cells": "6 lambda x 3 functions x 10 reps x 500 transitions",
-    "deterministic": true,
-    "seed": 42
-  },
-  "parent_experiment": {
-    "experiment_id": "EXP-FRONTIER-33863640568",
-    "handoff_hash": "7a629b31ec2f6202f72098b0a927e59a280519c8b9cd93242a22d0d3f6d026f0"
   }
 }

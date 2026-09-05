@@ -269,14 +269,6 @@
     {
       "path": "research/frontier/nonaffine_validation/raw_tables.json",
       "role": "raw"
-    },
-    {
-      "path": "research/frontier/nonaffine_validation/frequency_baseline.json",
-      "role": "derived"
-    },
-    {
-      "path": "research/frontier/nonaffine_validation/analytical_ground_truth.json",
-      "role": "fixture"
     }
   ],
   "observations": [
@@ -292,7 +284,7 @@
     "Null control (permutation p>0.05 at lambda=0): True",
     "Positive control (TV > analytical threshold at lambda=1): True",
     "Analytical Var_a per function: [0.125, 0.3125, 0.1875]",
-    "Analytical TV at lambda=1 per function: [0.7667, 0.75, 0.5333]"
+    "Analytical TV at lambda=1 per function: [np.float64(0.7667), np.float64(0.75), np.float64(0.5333)]"
   ],
   "validity_notes": [
     "Quadratic functions are analytically verifiable: E_S[f(S,a)] computed in closed form confirms E_S[f(S,a)] differs across actions",
@@ -304,9 +296,7 @@
     "TV distance computed from empirical action-conditional next-state distributions (10 states), providing sensitivity to full distributional differences",
     "Raw per-replication per-function per-lambda heterogeneity and TV tables persisted as hash-addressed artifacts for independent recomputation",
     "ANOVA interaction may be significant if functions have different Var_a values (this is expected signal, not pipeline failure, per parent handoff do_not_assume)",
-    "Permutation test at lambda=0 uses 1000 shuffles per replication; mean p-value across replications controls family-wise error",
-    "CRITICAL: The function invariance control (ANOVA interaction p<0.05) FAILS because the 3 quadratic functions have intentionally different Var_a values (0.125, 0.3125, 0.1875). This produces different TV-lambda slopes, which is EXPECTED SIGNAL, not pipeline failure. Parent handoff (EXP-FRONTIER-33863640568) explicitly states: 'Do not assume the ANOVA interaction failure is evidence against the metric — it is evidence that functions have different Var_a, which is expected by design.' The frozen decision rule classifies this as FALSIFIED-IN-SETTING, but the metric itself demonstrates perfect monotonic scaling (rho=1.0) with large effect size (d=7.85).",
-    "TV distance non-zero at lambda=0 (mean=0.1498) reflects sampling noise in empirical TV estimation from 500 transitions; permutation test confirms this is not statistically significant (mean p=0.508)."
+    "Permutation test at lambda=0 uses 1000 shuffles per replication; mean p-value across replications controls family-wise error"
   ],
   "unresolved": [
     "Whether real Web transitions exhibit quadratic-like non-affine structure suitable for TV detection",
