@@ -7,8 +7,8 @@
   "continue_immediately": false,
   "next_question": "Does the parameter-slot-count tie-break generalize safely to multi-slot mechanisms (2 vs 1 slot), template-only params with parameter_slots=[] but template ${id}, equal-slot-count ties (0 vs 0 or 1 vs 1), and real-web endpoints with DOM/auth/session/drift \u2014 and does it interact with verify() postcondition checking for non-200 HTTP responses?",
   "promotion_ready": false,
-  "consecutive_failures": 0,
-  "updated_at": "2026-09-05T08:39:53.013704+00:00",
-  "last_failure_retryable": null,
+  "consecutive_failures": 1,
+  "updated_at": "2026-09-05T08:45:17.729537+00:00",
+  "last_failure_retryable": false,
   "last_handoff_sha256": "54d5cb70b85e95b6afae07f906224a7d6313eff2017280056ccc8780c78f4806"
 }
