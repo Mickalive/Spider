@@ -6,7 +6,6 @@
       "status": "UNKNOWN",
       "mechanism_id": null,
       "bound_action": null,
-      "bound_url": null,
       "confidence": 0.0,
       "reason": "no applicable validated mechanism",
       "expected_status": "UNKNOWN",
@@ -15,7 +14,8 @@
       "match_expected_status": true,
       "match_expected_url": null,
       "match_expected_mechanism": null,
-      "role": "baseline"
+      "role": "baseline",
+      "note": null
     },
     {
       "condition_id": "literal-only-original",
@@ -26,7 +26,6 @@
         "method": "GET",
         "url": "https://jsonplaceholder.typicode.com/posts/1"
       },
-      "bound_url": "https://jsonplaceholder.typicode.com/posts/1",
       "confidence": 0.95,
       "reason": "applicability guards and confidence threshold passed",
       "expected_status": "EXECUTABLE",
@@ -35,7 +34,8 @@
       "match_expected_status": true,
       "match_expected_url": true,
       "match_expected_mechanism": true,
-      "role": "baseline"
+      "role": "baseline",
+      "note": null
     },
     {
       "condition_id": "literal-only-unseen",
@@ -46,7 +46,6 @@
         "method": "GET",
         "url": "https://jsonplaceholder.typicode.com/posts/1"
       },
-      "bound_url": "https://jsonplaceholder.typicode.com/posts/1",
       "confidence": 0.95,
       "reason": "applicability guards and confidence threshold passed",
       "expected_status": "EXECUTABLE",
@@ -55,7 +54,8 @@
       "match_expected_status": true,
       "match_expected_url": true,
       "match_expected_mechanism": true,
-      "role": "baseline"
+      "role": "baseline",
+      "note": null
     },
     {
       "condition_id": "param-only-original",
@@ -66,7 +66,6 @@
         "method": "GET",
         "url": "https://jsonplaceholder.typicode.com/posts/1"
       },
-      "bound_url": "https://jsonplaceholder.typicode.com/posts/1",
       "confidence": 0.95,
       "reason": "applicability guards and confidence threshold passed",
       "expected_status": "EXECUTABLE",
@@ -75,7 +74,8 @@
       "match_expected_status": true,
       "match_expected_url": true,
       "match_expected_mechanism": true,
-      "role": "baseline"
+      "role": "baseline",
+      "note": null
     },
     {
       "condition_id": "param-only-unseen",
@@ -86,7 +86,6 @@
         "method": "GET",
         "url": "https://jsonplaceholder.typicode.com/posts/2"
       },
-      "bound_url": "https://jsonplaceholder.typicode.com/posts/2",
       "confidence": 0.95,
       "reason": "applicability guards and confidence threshold passed",
       "expected_status": "EXECUTABLE",
@@ -95,7 +94,8 @@
       "match_expected_status": true,
       "match_expected_url": true,
       "match_expected_mechanism": true,
-      "role": "baseline"
+      "role": "baseline",
+      "note": null
     },
     {
       "condition_id": "compete-param-higher",
@@ -106,7 +106,6 @@
         "method": "GET",
         "url": "https://jsonplaceholder.typicode.com/posts/3"
       },
-      "bound_url": "https://jsonplaceholder.typicode.com/posts/3",
       "confidence": 0.98,
       "reason": "applicability guards and confidence threshold passed",
       "expected_status": "EXECUTABLE",
@@ -115,27 +114,28 @@
       "match_expected_status": true,
       "match_expected_url": true,
       "match_expected_mechanism": true,
-      "role": "baseline"
+      "role": "baseline",
+      "note": null
     },
     {
       "condition_id": "compete-literal-higher",
       "type": "resolution",
       "status": "EXECUTABLE",
-      "mechanism_id": "param-fetch-posts-high",
+      "mechanism_id": "literal-fetch-posts-1-high",
       "bound_action": {
         "method": "GET",
-        "url": "https://jsonplaceholder.typicode.com/posts/3"
+        "url": "https://jsonplaceholder.typicode.com/posts/1"
       },
-      "bound_url": "https://jsonplaceholder.typicode.com/posts/3",
       "confidence": 0.98,
       "reason": "applicability guards and confidence threshold passed",
       "expected_status": "EXECUTABLE",
       "expected_url": "https://jsonplaceholder.typicode.com/posts/1",
-      "expected_winning_mechanism": "literal-fetch-posts-1-low",
+      "expected_winning_mechanism": "literal-fetch-posts-1-high",
       "match_expected_status": true,
-      "match_expected_url": false,
-      "match_expected_mechanism": false,
-      "role": "baseline"
+      "match_expected_url": true,
+      "match_expected_mechanism": true,
+      "role": "baseline",
+      "note": null
     },
     {
       "condition_id": "compete-equal-id2",
@@ -146,7 +146,6 @@
         "method": "GET",
         "url": "https://jsonplaceholder.typicode.com/posts/2"
       },
-      "bound_url": "https://jsonplaceholder.typicode.com/posts/2",
       "confidence": 0.95,
       "reason": "applicability guards and confidence threshold passed",
       "expected_status": "EXECUTABLE",
@@ -155,7 +154,8 @@
       "match_expected_status": true,
       "match_expected_url": true,
       "match_expected_mechanism": true,
-      "role": "intervention"
+      "role": "intervention",
+      "note": "Original hazard: before fix, literal won (false accept). After fix, param must win."
     },
     {
       "condition_id": "compete-equal-id3",
@@ -166,7 +166,6 @@
         "method": "GET",
         "url": "https://jsonplaceholder.typicode.com/posts/3"
       },
-      "bound_url": "https://jsonplaceholder.typicode.com/posts/3",
       "confidence": 0.95,
       "reason": "applicability guards and confidence threshold passed",
       "expected_status": "EXECUTABLE",
@@ -175,7 +174,8 @@
       "match_expected_status": true,
       "match_expected_url": true,
       "match_expected_mechanism": true,
-      "role": "intervention"
+      "role": "intervention",
+      "note": "Original hazard: before fix, literal won (false accept). After fix, param must win."
     },
     {
       "condition_id": "compete-equal-id4",
@@ -186,7 +186,6 @@
         "method": "GET",
         "url": "https://jsonplaceholder.typicode.com/posts/4"
       },
-      "bound_url": "https://jsonplaceholder.typicode.com/posts/4",
       "confidence": 0.95,
       "reason": "applicability guards and confidence threshold passed",
       "expected_status": "EXECUTABLE",
@@ -195,7 +194,8 @@
       "match_expected_status": true,
       "match_expected_url": true,
       "match_expected_mechanism": true,
-      "role": "intervention"
+      "role": "intervention",
+      "note": "Original hazard: before fix, literal won (false accept). After fix, param must win."
     },
     {
       "condition_id": "compete-equal-id5",
@@ -206,7 +206,6 @@
         "method": "GET",
         "url": "https://jsonplaceholder.typicode.com/posts/5"
       },
-      "bound_url": "https://jsonplaceholder.typicode.com/posts/5",
       "confidence": 0.95,
       "reason": "applicability guards and confidence threshold passed",
       "expected_status": "EXECUTABLE",
@@ -215,7 +214,8 @@
       "match_expected_status": true,
       "match_expected_url": true,
       "match_expected_mechanism": true,
-      "role": "intervention"
+      "role": "intervention",
+      "note": "Original hazard: before fix, literal won (false accept). After fix, param must win."
     },
     {
       "condition_id": "compete-equal-id6",
@@ -226,7 +226,6 @@
         "method": "GET",
         "url": "https://jsonplaceholder.typicode.com/posts/6"
       },
-      "bound_url": "https://jsonplaceholder.typicode.com/posts/6",
       "confidence": 0.95,
       "reason": "applicability guards and confidence threshold passed",
       "expected_status": "EXECUTABLE",
@@ -235,7 +234,8 @@
       "match_expected_status": true,
       "match_expected_url": true,
       "match_expected_mechanism": true,
-      "role": "intervention"
+      "role": "intervention",
+      "note": "Original hazard: before fix, literal won (false accept). After fix, param must win."
     },
     {
       "condition_id": "multi-slot-beats-1-slot",
@@ -246,7 +246,6 @@
         "method": "GET",
         "url": "https://jsonplaceholder.typicode.com/posts/3/tech"
       },
-      "bound_url": "https://jsonplaceholder.typicode.com/posts/3/tech",
       "confidence": 0.95,
       "reason": "applicability guards and confidence threshold passed",
       "expected_status": "EXECUTABLE",
@@ -255,7 +254,8 @@
       "match_expected_status": true,
       "match_expected_url": true,
       "match_expected_mechanism": true,
-      "role": "intervention"
+      "role": "intervention",
+      "note": "2-slot param (len=2) beats 1-slot param (len=1) at equal confidence via tuple sort."
     },
     {
       "condition_id": "template-only-vs-param",
@@ -266,7 +266,6 @@
         "method": "GET",
         "url": "https://jsonplaceholder.typicode.com/posts/3"
       },
-      "bound_url": "https://jsonplaceholder.typicode.com/posts/3",
       "confidence": 0.95,
       "reason": "applicability guards and confidence threshold passed",
       "expected_status": "EXECUTABLE",
@@ -275,7 +274,8 @@
       "match_expected_status": true,
       "match_expected_url": true,
       "match_expected_mechanism": true,
-      "role": "intervention"
+      "role": "intervention",
+      "note": "Template-only (parameter_slots=[], len=0) vs declared param (parameter_slots=['id'], len=1). Declared param wins."
     },
     {
       "condition_id": "template-only-vs-literal",
@@ -286,7 +286,6 @@
         "method": "GET",
         "url": "https://jsonplaceholder.typicode.com/posts/3"
       },
-      "bound_url": "https://jsonplaceholder.typicode.com/posts/3",
       "confidence": 0.95,
       "reason": "applicability guards and confidence threshold passed",
       "expected_status": "EXECUTABLE",
@@ -295,7 +294,8 @@
       "match_expected_status": true,
       "match_expected_url": null,
       "match_expected_mechanism": null,
-      "role": "intervention"
+      "role": "intervention",
+      "note": "Template-only vs literal at equal confidence. Both len=0 -> tie -> lexicographic. Record actual winner."
     },
     {
       "condition_id": "equal-slot-tie-param-vs-param",
@@ -306,7 +306,6 @@
         "method": "GET",
         "url": "https://jsonplaceholder.typicode.com/posts/3"
       },
-      "bound_url": "https://jsonplaceholder.typicode.com/posts/3",
       "confidence": 0.95,
       "reason": "applicability guards and confidence threshold passed",
       "expected_status": "EXECUTABLE",
@@ -315,13 +314,12 @@
       "match_expected_status": true,
       "match_expected_url": null,
       "match_expected_mechanism": null,
-      "role": "intervention"
+      "role": "intervention",
+      "note": "Two params with same slot count at equal confidence. Tie -> lexicographic. Record actual winner."
     }
   ],
   "errors": [],
   "fix_applied": true,
   "fix_description": "candidates.sort(key=lambda m: (m.confidence, len(m.parameter_slots)), reverse=True)",
-  "fix_line_original": "candidates.sort(key=lambda m: m.confidence, reverse=True)",
-  "fix_line_fixed": "candidates.sort(key=lambda m: (m.confidence, len(m.parameter_slots)), reverse=True)",
-  "kernel_sha256_before_fix": "46929b3a951df48d7f9d1fd850871073c0d91c186aa117e13d389fe274e8d61"
+  "kernel_source_sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61"
 }
