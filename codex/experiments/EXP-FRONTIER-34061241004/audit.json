@@ -1,0 +1,213 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-34061241004",
+  "lane": "frontier",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Recalibrate positive_control threshold to realized finite-sample noise floor: observed TV_max at lambda=0 is 0.281 +-0.033 with permutation null TV_max 0.274 +-0.032 for 125 samples/action on 20x20 grid with concentrated Gaussian marginal. Threshold >=0.1 is trivially below floor and non-discriminating. Replace with threshold >= null_floor + 2*SD e.g. >=0.35 or bias-corrected TV, and re-validate that lambda=1 signal (0.843-0.856) remains well above. See result.json:metrics.tv_means_by_lambda 0.0=0.281, provenance recomputed null simulation 0.27.",
+    "Bias-correct TV for finite-sample sparsity and report bin-size sensitivity: prereg 12.2 and spec measurement_validity promised 10x10/20x20/30x30 sensitivity; only 20x20 reported. With 500 transitions ~125/action across 400 bins, many empty bins inflate TV by ~0.27 under null. Report TV with permutation-null subtraction or analytical bias correction, and demonstrate qualitative monotonicity holds at multiple resolutions.",
+    "Fix WF vs UM baseline comparison estimator mismatch and underpowered test: result.json:metrics.comparison_wf_vs_um compares empirical binned WF TV (finite-sample, includes ~0.27 bias, 500 samples) to analytical infinite-sample UM TV 0.7667/0.75/0.5333. Comparison is not apples-to-apples; paired t uses n=3 (t=2.21, two-sided p=0.157, one-sided wf<um p=0.921). Claim of larger signal in Web-faithful DGPs not formally established. Recompute with empirical binned UM TV at matched sample size/binning, or report non-inferiority only with confidence interval, and enlarge n for power.",
+    "Resolve report.md vs result.json inconsistency for permutation at lambda=1: report.md 1.3 table claims mean p=0.039 at lambda=1 'marginally significant', but result.json:controls contains only null_control mean_perm_p 0.456467 for lambda=0; analyze.py perm_results for lambda=1 expected ~0.0 given separation 0.849 vs null 0.27. With 1000 permutations, observed TV 0.84 should yield p=0.0, not 0.039. Provide full per-cell permutation distributions and correct reporting, or explain limited resolution artefact.",
+    "Bound claim language to this specific synthetic DGP: spec hypothesis asserts 'Web-faithful DGP' and product consequence asserts 'opens path to real Web data testing' implying synthetic-to-real gap reduced. Validated environment is 2D uniform [0,1]^2 with 3 toy affine maps (rotation/scaling/translation+sin) and clipped heteroscedastic Gaussian noise sigma_base=0.05*(1+0.5||s-center||). This omits DOM, high-d LI, auth/latency, history, non-Gaussian noise. Retain C-WEB-DYNAMICS as HYPOTHESIS and state ceiling as continuous 2D affine toy DGP only; do not claim Web-faithful superiority without real Web data.",
+    "Address state clipping artefact: analyze.py:145 clips s_next to [0,1] after adding noise, truncating tails and concentrating at edges. For rotation/scaling maps translating by 0.1-0.15 near boundaries, clipping differentially affects action-conditional distributions and may inflate TV. Report fraction clipped per lambda/function and sensitivity without clipping or with toroidal wrap, or justify clipping as Web-faithful boundary."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_sampling_integrity",
+      "severity": "low",
+      "finding": "Sampling integrity intact: 8 lambdas x 3 functions x 10 reps x 500 = 120,000 transitions verified from raw_tables.json (240 rows). Seeds distinct per spec: rep_seed = func_seed*10000 + rep_idx*100 + 42. No train/test split. No target leakage: TV from empirical P(S'|do(A)) via binning.",
+      "evidence": "research/frontier/web_faithful_tv/raw_tables.json:240 rows; research/frontier/web_faithful_tv/analyze.py:280-281; result.json:metrics.per_function",
+      "affects_decision": false
+    },
+    {
+      "id": "V2_recomputed_monotonicity",
+      "severity": "info",
+      "finding": "Core monotonicity recomputed exactly: aggregate TV_max means [0.281,0.357,0.429,0.499,0.556,0.621,0.726,0.849] strictly increasing, Spearman rho=1.0 for aggregate and per-function 42/43/44, p_one_sided 0.0 (n=8, minimal achievable ~2e-5). Per-function rho 1.0 matches result.json. Cohen's d recomputed 20.76/21.95/17.81 per function, aggregate 20.30 matches result.json:metrics.effect_sizes_cohens_d. CV at lambda0 0.108/0.113/0.141 matches result.json.",
+      "evidence": "result.json:metrics.aggregate.spearman_rho_tv 1.0, tv_max_means_by_lambda, effect_sizes_cohens_d; recomputation script confirmed",
+      "affects_decision": false
+    },
+    {
+      "id": "V3_anova_interaction",
+      "severity": "info",
+      "finding": "Function invariance passes recomputation: two-way ANOVA tv_max ~ lambda + function + lambda:function, 240 obs, interaction p=0.862 (>0.05). Lambda F=2487.5, function F=0.12 consistent with near-identical TV curves (0.843,0.856,0.848 at lambda1). Unlike prior quadratic DGP where different analytical ceilings produced expected significant interaction, here functions share similar ceilings so test is appropriate and passes.",
+      "evidence": "result.json:controls.function_invariance.interaction_p 0.861861; report.md 2.2; analyze.py:382-422",
+      "affects_decision": false
+    },
+    {
+      "id": "V4_null_control_valid",
+      "severity": "info",
+      "finding": "Null control passes but interpretation requires noise-floor context: TV at lambda0 0.281 equals estimated permutation null TV_max 0.274 +-0.032 for concentrated Gaussian (N(center,0.05^2) clipped, 125/action, 20x20 grid). Independent simulation gives null 0.2736 for tv_max, 0.234 for pairwise TV. Permutation mean p 0.456 at lambda0 correctly indicates no action dependence beyond finite-sample bias. Control is valid conditional on recognizing floor ~=0.28.",
+      "evidence": "result.json:controls.null_control.mean_perm_p 0.456467, metrics.cv_at_lambda_0; analyze.py:197-216; independent null simulation 0.273 +-0.032",
+      "affects_decision": false
+    },
+    {
+      "id": "V5_positive_control_trivial_threshold",
+      "severity": "high",
+      "finding": "Positive control threshold >=0.1 is calibrated below empirical noise floor (0.27-0.28), making it non-discriminating. Any DGP, even pure noise, would pass if judged on observed TV alone. Fortunately lambda1 TV 0.84 >> floor so passes even with corrected threshold >=0.35, but decision rule as frozen is weak. Prior audit flagged same class of threshold miscalibration.",
+      "evidence": "spec.json:positive_control >=0.1; result.json:controls.positive_control tv_at_lambda1 0.843-0.856; result.json:metrics.tv_means_by_lambda 0.0=0.281",
+      "affects_decision": true
+    },
+    {
+      "id": "V6_binning_representation_loss",
+      "severity": "medium",
+      "finding": "20x20 grid (400 bins) with ~125 samples/action gives ~0.31 samples per bin per action on average. TV estimator upward biased by ~0.27 under null. Bias not subtracted; effect magnitude inflated but monotonicity robust because lambda1 0.849 - floor 0.27 = 0.58 true separation still large vs intermediate levels. Missing required sensitivity to 10x10/30x30 bin sizes promised in prereg 12.2/12.6 limits robustness claim.",
+      "evidence": "prereg.md 8.1/12.2 grid binning; analyze.py:151-193 GRID_SIZE=20; report.md 1.1 SD ~0.03; validity_notes mention Monte Carlo SE ~0.04",
+      "affects_decision": true
+    },
+    {
+      "id": "V7_clipping_boundary",
+      "severity": "medium",
+      "finding": "Clipping s_next to [0,1] after adding heteroscedastic noise truncates tails and creates edge mass. State-dependent maps with offsets 0.1-0.15 near boundaries interact with clipping to inflate separability. Not quantified. Heteroscedastic sigma(s)=0.05*(1+0.5||s-center||) gives higher variance near edges where clipping more severe, partially offsetting but not eliminating artefact.",
+      "evidence": "analyze.py:117-120 compute_noise_sigma, 139-145 generation and clipping; prereg 5.6",
+      "affects_decision": true
+    },
+    {
+      "id": "V8_heteroscedastic_implementation_vs_spec",
+      "severity": "low",
+      "finding": "Heteroscedastic noise correctly added when lambda branch taken: f(s,a)+N(0,sigma(s)^2 I). Spec 5.6 says s_next = f(s,a)+epsilon. Prereg 6 text simplifies to pure noise else deterministic without state-dependent variance at lambda0, but code uses pure N(center,0.05^2) at lambda0 consistent with additive noise null. Implementation faithful to Web-faithful intent.",
+      "evidence": "analyze.py:124-147 generate_transitions; spec.json:measurement_validity",
+      "affects_decision": false
+    },
+    {
+      "id": "V9_wf_vs_um_estimator_mismatch",
+      "severity": "high",
+      "finding": "WF vs UM comparison uses mismatched estimators and tiny n=3. WF TV empirical binned finite-sample (includes bias) vs UM analytical infinite-sample pushforward TV. Paired one-sided t for H1 wf<um gives t=2.21 p=0.921 (correctly not lower), but two-sided superiority test p=0.157 not significant; claim 'WF larger' unsupported. Requires matched empirical estimation or bias correction and larger function sample.",
+      "evidence": "result.json:metrics.comparison_wf_vs_um wf_tv_at_lambda1 0.849, um_analytical_at_lambda1 [0.7667,0.75,0.5333], paired_t_p_one_sided 0.921; report.md 2.4",
+      "affects_decision": true
+    },
+    {
+      "id": "V10_permutation_lambda1_inconsistency",
+      "severity": "medium",
+      "finding": "Report claims permutation at lambda1 mean p=0.039 marginally significant, but expected p ~0.0 given 0.84 vs 0.27 separation with 1000 permutations. result.json omits lambda1 permutation metric, preventing verification. Indicates either reporting error (e.g., inverted p, aggregated incorrectly) or implementation quirk. Does not affect primary decision which requires only lambda0 permutation, but undermines provenance completeness.",
+      "evidence": "report.md 1.3 table lambda1 mean p 0.039; result.json:controls no lambda1 entry; analyze.py:358-376 perm_results for both lambdas but only mean p for 0.0 stored in controls",
+      "affects_decision": false
+    },
+    {
+      "id": "V11_environment_expressiveness",
+      "severity": "medium",
+      "finding": "Environment can express tested effect: continuous 2D state with state-dependent affine dynamics does produce graded action-dependent TV scaling with lambda, confirming abstract mechanism. However 'Web-faithful' label overstates generalizability: no DOM, high-dimensional, history, auth, non-stationary or heavy-tailed Web noise. Synthetic-to-real gap remains dominant unknown, as parent handoff established.",
+      "evidence": "spec.json:question, hypothesis; prereg 5.1-5.6; provenance design_summary 2D [0,1]^2",
+      "affects_decision": true
+    },
+    {
+      "id": "V12_frozen_input_integrity",
+      "severity": "info",
+      "finding": "Frozen inputs intact: spec.json hash 270de16bc8a85, prereg d0a9a98fbe5a, request c307fca8608e match freeze.json. Provenance hashes consistent. No post-freeze spec modification.",
+      "evidence": "freeze.json hashes; provenance.json frozen_inputs; bash recomputed sha256 matches",
+      "affects_decision": false
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B1_uniform_mixture_baseline",
+      "baseline_key": "Uniform-mixture DGP baseline",
+      "strength": "weak",
+      "finding": "Baseline correctly sourced from EXP-FRONTIER-34029326102 analytical TV at clean 0.697 and range 0.3156-0.4745 at max noise, but comparison suffers estimator mismatch (analytical vs empirical binned) and n=3 low power. Pass of 'not significantly lower' (p=0.92) is technically correct for one-sided test but does not support 'WF produces larger signal' interpretation. Strength is comparative non-inferiority only.",
+      "evidence": "result.json:metrics.uniform_mixture_baseline, comparison_wf_vs_um; spec.json:baselines[0]"
+    },
+    {
+      "id": "B2_permutation_null",
+      "baseline_key": "Permutation null",
+      "strength": "strong",
+      "finding": "Permutation shuffling action labels correctly implements null of no action-dependence. With 1000 permutations per cell, 10 reps, mean p 0.456 at lambda0 correctly fails to reject. Appropriately accounts for finite-sample TV bias because permuted TV has same sparsity. Missing lambda1 aggregate p in result.json weakens completeness but lambda0 control adequate.",
+      "evidence": "analyze.py:197-216 permutation_test_tv; result.json:controls.null_control"
+    },
+    {
+      "id": "B3_frequency_baseline",
+      "baseline_key": "Frequency baseline P(S_{t+1})",
+      "strength": "medium",
+      "finding": "Frequency baseline computed as promised: marginal non-uniformity ~0.385-0.389 and mean TV marginal vs action-conditional 0.566-0.588 (report 0.578). Correctly shows marginal non-uniformity does not explain conditional TV, because action-conditionals differ from marginal by ~0.58 > uniform distance 0.39. Artifact research/frontier/web_faithful_tv/frequency_baselines.json present. Not integrated into decision rule, informational only, satisfying inherited unknown from parent.",
+      "evidence": "frequency_baselines.json 3 entries; result.json:observations frequency baseline 0.5780; spec.json:baselines[2]"
+    },
+    {
+      "id": "B4_memory_baseline",
+      "baseline_key": "Memory baseline",
+      "strength": "absent",
+      "finding": "Spec baseline[3] 'Memory baseline: prediction accuracy of state-only model' not computed or reported. Prereg 8/11 lists it as inherited comparison but result.json and report omit it. Not required for decision rule but represents missing baseline from spec.",
+      "evidence": "spec.json:baselines[3]; result.json metrics no memory baseline"
+    },
+    {
+      "id": "B5_positive_control_baseline",
+      "baseline_key": "Positive control (TV >=0.1 at lambda=1)",
+      "strength": "weak",
+      "finding": "Threshold below noise floor as in V5. Pass is true (0.843-0.856) but discriminative power weak. A bias-corrected or floor-calibrated threshold would still pass, so baseline outcome would not change, but strength remains weak without recalibration.",
+      "evidence": "result.json:controls.positive_control per_function pass true"
+    }
+  ],
+  "recomputed_metrics": {
+    "aggregate_spearman_rho_tv": 1.0,
+    "aggregate_spearman_p_one_sided_tv": 0.0,
+    "aggregate_tv_max_means_by_lambda": {
+      "0.0": 0.2808676340302173,
+      "0.1": 0.3569247332172655,
+      "0.2": 0.4286123180929572,
+      "0.3": 0.4985463546028541,
+      "0.4": 0.556298419149547,
+      "0.5": 0.620770177010428,
+      "0.7": 0.7260315471918318,
+      "1.0": 0.8490228038936048
+    },
+    "per_function_spearman_rho": {
+      "42_rotation": 1.0,
+      "43_scaling": 1.0,
+      "44_translation": 1.0
+    },
+    "per_function_tv_max_at_lambda1": {
+      "42": 0.8431243613106245,
+      "43": 0.8562203052335983,
+      "44": 0.847723745136592
+    },
+    "effect_sizes_cohens_d": {
+      "42": 20.762527747802398,
+      "43": 21.952816017540915,
+      "44": 17.8092004539765,
+      "aggregate": 20.29755780248794
+    },
+    "cv_at_lambda0": {
+      "42": 0.10822778199318747,
+      "43": 0.1126534085596913,
+      "44": 0.14118175358215612
+    },
+    "null_floor_simulation_tv_max": 0.273632,
+    "null_floor_pairwise_TV": 0.23444,
+    "anova_interaction_p": 0.861861,
+    "anova_lambda_F": 2487.5,
+    "wf_vs_um_paired_t_stat": 2.213238642190179,
+    "wf_vs_um_p_one_sided_wf_lower": 0.9213308563152282,
+    "wf_vs_um_two_sided_p": 0.15733828736954364,
+    "wf_per_function_at_1": [
+      0.8431243613106245,
+      0.8562203052335983,
+      0.847723745136592
+    ],
+    "recomputation_match": "All primary metrics match result.json within floating tolerance; aggregate Spearman and per-function rho exact, Cohen d exact to 1e-12, CV exact.",
+    "artifacts_verified": [
+      "research/frontier/web_faithful_tv/raw_tables.json 240 rows verified",
+      "research/frontier/web_faithful_tv/frequency_baselines.json 3 entries verified",
+      "research/frontier/web_faithful_tv/analyze.py GRID_SIZE 20, SIGMA_BASE 0.05, BETA 0.5"
+    ]
+  },
+  "claim_ceiling": "MAXIMUM JUSTIFIED: TV distance scales monotonically with lambda and achieves large separation (0.58 above finite-sample floor) in this specific synthetic 2D continuous 2D [0,1]^2 DGP with 3 toy affine deterministic families (rotation/scaling/translation+sin) and clipped heteroscedastic Gaussian noise, measured via 20x20 binned TV_max on 500 transitions/cell. Positive and null controls pass within this biased estimator setting. Non-inferiority to prior uniform-mixture analytical TV holds (not significantly lower, one-sided p=0.92), but superiority not established due to estimator mismatch and n=3. No evidence for real Web transitions, high-dimensional DOM state, or non-Gaussian/auth/latency mechanisms. C-WEB-DYNAMICS remains HYPOTHESIS. Product deployment readiness not established; at most gates a follow-on experiment on recorded real Web sessions with proper bias correction and calibrated thresholds.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-34061241004/spec.json:claim_ids C-WEB-DYNAMICS, hypothesis, falsifier, decision_rule, baselines, positive_control, null_control, measurement_validity",
+    "research/experiments/EXP-FRONTIER-34061241004/prereg.md:sections 5 deterministic functions, 6 lambda ramping, 8 metrics TV_max 20x20 grid, 9 controls, 10 decision rules, 12 validity threats",
+    "research/experiments/EXP-FRONTIER-34061241004/freeze.json:hashes prereg d0a9a98fbe5a, spec 270de16bc8a85, request c307fca8608e",
+    "research/experiments/EXP-FRONTIER-34061241004/result.json:status COMPLETE outcome SUPPORTS metrics.aggregate tv_max_means_by_lambda, per_function spearman 1.0, controls positive_control/null_control/function_invariance/wf_vs_um, validity_notes",
+    "research/experiments/EXP-FRONTIER-34061241004/report.md:tables 1.1 TV means 0.281-0.849, 1.3 permutation p 0.456, 2.2 ANOVA p 0.862, 2.4 WF vs UM comparison, 4 decision rule assessment",
+    "research/experiments/EXP-FRONTIER-34061241004/provenance.json:execution 2026-09-06T22:00:00, analyzer_script web_faithful_tv/analyze.py, total_transitions 120000",
+    "research/frontier/web_faithful_tv/analyze.py: generate_transitions lambda mixing 124-147, bin_state 151-155, compute_empirical_distributions_binned 158-175, permutation_test_tv 197-216, comparison t 473-490, seeds 39-42",
+    "research/frontier/web_faithful_tv/raw_tables.json: 240 rows per-replication TV_max/TV_mean, recomputedmeans match result.json",
+    "research/frontier/web_faithful_tv/frequency_baselines.json: marginal_non_uniformity 0.385-0.389, mean_tv_marginal_vs_action 0.565-0.588",
+    "research/experiments/EXP-FRONTIER-34029326102/handoff.json: carry_forward established TV monotonic in uniform-mixture, rejected controls, unknown synthetic-to-real gap"
+  ],
+  "unresolved": [
+    "Whether real Web transitions exhibit action-dependent TV suitable for detection; parent synthetic-to-real gap dominant unknown unchanged.",
+    "Whether bias-corrected TV (subtracting ~0.27 floor) or larger state space would change threshold calibration and product decision thresholds.",
+    "Whether bin-size sensitivity (10x10 vs 30x30) and alternative continuous TV estimators (e.g., KDE, kNN) preserve monotonicity.",
+    "Whether clipping to [0,1] inflates separability and fraction clipped per condition.",
+    "Whether WF superiority over UM holds with matched empirical estimators and adequate power (n>>3) and bias correction.",
+    "Whether permutation at lambda=1 is truly p~0.0 or 0.039 as reported; need per-cell p distribution.",
+    "Whether 2D continuous generalizes to high-dimensional Web state spaces (DOM embeddings) and to combined non-stationary/heteroscedastic Web noise."
+  ]
+}

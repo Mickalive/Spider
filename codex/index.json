@@ -126,6 +126,31 @@
         "handoff.json": "f7d2a875c7227e81f12fe501a3b16f34f6b5145138fbc14c29ce44b7ab4fc244"
       }
     },
+    "EXP-FRONTIER-34061241004": {
+      "lane": "frontier",
+      "request_id": "aedf2e5d903ae3373e2dc66b",
+      "created_at": "2026-09-06T21:30:01.569212+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Does TV distance detect action-dependent dynamical structure in realistic synthetic Web transition DGPs with continuous state, state-dependent dynamics, and heteroscedastic noise, or does the synthetic-to-real gap (uniform-mixture noise on discrete states vs realistic Web-faithful stochasticity) render all synthetic DGP validation insufficient for product deployment?",
+      "audit_status": "REVISE",
+      "decision": "SURVIVES_CURRENT_TEST",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/frontier",
+      "hashes": {
+        "request.json": "c307fca8608e2b9c1f7d246c67dfcbe0840173ae920aca112319e4ecede89c7f",
+        "spec.json": "270de16bc8a851fdcb4cfd7c230ef0e3c4f50847204dfc09765197018c6d06e2",
+        "prereg.md": "d0a9a98fbe5a0946434a28bc1e9e3d2f49ece0cccfb002a918371bd836b711bc",
+        "freeze.json": "50b7d14c1804cd2c951319a78f730c476014570955d0fa16c7505ce6a8c10803",
+        "result.json": "a5c391deae34e93519a73f76433297b5e359f70b01fb0bd5b1666c22a953b2d5",
+        "report.md": "b524ddd9b0f83cfc235694a1fe7ad37bf2fdcb0ae5c0b89ce669b02dbbe2ffcb",
+        "provenance.json": "b9e337f8902cd05aa7f2adf6bc66458be9633fe4f0d903d8287a83ed2a78e26f",
+        "audit.json": "c964f45787b0e0c1f1494e340146517101c31b877b4b7594b3336f98ac54eeb2",
+        "verdict.json": "57eee6f9a0f1b49ad21b3ff8e9506198134ee8bac3ff165ebb861d5ab01edd17",
+        "handoff.json": "f0bd29f254c6e84e1b8f8c0a3b8ab122d70f4830c5c58b354fc484a098834dc1"
+      }
+    },
     "EXP-GRAPH-33528827169": {
       "lane": "graph",
       "request_id": "3e0d81e7790f2f2b7bd8665e",

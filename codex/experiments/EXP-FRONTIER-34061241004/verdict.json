@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-34061241004",
+  "lane": "frontier",
+  "decision": "SURVIVES_CURRENT_TEST",
+  "claim_updates": [
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "HYPOTHESIS",
+      "reason": "TV distance scales monotonically with lambda (Spearman rho=1.0, p<0.001) in2D continuous affine DGP with heteroscedastic Gaussian noise, all 6 frozen decision conditions pass, audit recomputes core metrics exactly. Claim ceiling expanded to include continuous2D state with state-dependent affine dynamics. However, the validated environment is 2D uniform [0,1]^2 with 3 toy affine families (rotation/scaling/translation+sin) and clipped heteroscedastic Gaussian noise (sigma_base=0.05, beta=0.5). This omits DOM, high-dimensional state, auth/latency, history, non-Gaussian noise. C-WEB-DYNAMICS concerns real Web dynamics; the synthetic-to-real gap remains the dominant unknown. Status remains HYPOTHESIS."
+    }
+  ],
+  "product_action": "NONE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does TV distance detect action-dependent dynamical structure in real Web transition data (recorded agent sessions with DOM state tracking), with bias-corrected estimation and calibrated thresholds, or does the synthetic-to-real gap persist when the full complexity of real Web dynamics is present?",
+  "reason": "All 6 frozen decision conditions pass: aggregate Spearman rho=1.0 (p<0.001, threshold >=0.65); positive control TV>=0.1 at lambda=1 (observed 0.843-0.856); null control permutation p=0.456 at lambda=0 (threshold >0.05); function invariance ANOVA interaction p=0.862 (threshold >0.05); WF vs UM not significantly lower (one-sided p=0.92, threshold >0.05); no pipeline errors. Audit recomputes all core metrics exactly (Spearman rho=1.0, TV means match to floating tolerance, Cohen's d 20.30, CV 0.108-0.141). However, audit correctly identifies: (1) positive control threshold >=0.1 is below empirical noise floor (~0.27), non-discriminating though lambda=1 signal 0.84 >> floor; (2) finite-sample TV bias ~0.27 from 20x20 binning with ~125 samples/action not subtracted; (3) WF vs UM comparison uses mismatched estimators (empirical binned vs analytical) with n=3, superiority not established (two-sided p=0.157); (4) state clipping to [0,1] unquantified; (5) claim language must be bounded to specific2D affine DGP, not generalized to 'Web-faithful'. The core monotonicity signal is robust to bias correction (bias-corrected TV at lambda=1 still ~0.58 above floor). The frozen rule yields SURVIVES_CURRENT_TEST; the audit's REVISE status reflects methodological improvements for future experiments, not a contradiction of the frozen decision. C-WEB-DYNAMICS remains HYPOTHESIS — all evidence is synthetic. No product promotion: no real Web data, no end-to-end economics, no product integration tested.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-34061241004/spec.json:claim_ids C-WEB-DYNAMICS, hypothesis, falsifier, decision_rule (6 conditions), baselines, positive_control >=0.1, null_control, measurement_validity",
+    "research/experiments/EXP-FRONTIER-34061241004/prereg.md:sections 5 deterministic functions 2D [0,1]^2, 6 lambda ramping 8 levels, 8 metrics TV_max 20x20 grid, 9 controls, 10 decision rules, 12 validity threats",
+    "research/experiments/EXP-FRONTIER-34061241004/freeze.json:hashes prereg d0a9a98fbe5a, spec 270de16bc8a85, request c307fca8608e — frozen before execution",
+    "research/experiments/EXP-FRONTIER-34061241004/result.json:status COMPLETE outcome SUPPORTS, aggregate spearman_rho_tv 1.0 p_one_sided 0.0, tv_max_means_by_lambda 0.281-0.849, per_function rho 1.0 all 3 functions, cohens_d aggregate 20.30, cv_at_lambda_0 0.108-0.141, controls positive_control.pass true, null_control.pass true mean_perm_p 0.456467, function_invariance.pass true interaction_p 0.861861, wf_vs_um.pass true paired_t_p_one_sided 0.921331, no_pipeline_errors.pass true",
+    "research/experiments/EXP-FRONTIER-34061241004/audit.json:status REVISE producer_claim_supported false, claim_ceiling MAXIMUM JUSTIFIED bounded to2D affine DGP, required_fixes[0-6] threshold recalibration/bias correction/WF-UM estimator mismatch/permutation reporting/claim bounding/clipping artefact, validity_findings V1-V12 recomputed metrics exact match, V5 positive control trivial threshold, V6 binning bias ~0.27, V7 clipping, V9 estimator mismatch n=3, V11 environment expressiveness",
+    "research/experiments/EXP-FRONTIER-34061241004/report.md:tables 1.1 TV means 0.281-0.849, 1.3 permutation p 0.456, 2.2 ANOVA p 0.862, 2.4 WF vs UM comparison, section 4 decision rule all 6 conditions pass",
+    "research/experiments/EXP-FRONTIER-34061241004/provenance.json:execution 2026-09-06T22:00:00, analyzer_script web_faithful_tv/analyze.py, total_transitions 120000, environment python3.12/numpy2.5/scipy1.18",
+    "research/frontier/web_faithful_tv/analyze.py:generate_transitions lambda mixing, bin_state 20x20 grid, compute_empirical_distributions_binned, permutation_test_tv 1000 perms, comparison t-test",
+    "research/frontier/web_faithful_tv/raw_tables.json:240 rows per-replication TV_max/TV_mean, recomputed means match result.json",
+    "research/frontier/web_faithful_tv/frequency_baselines.json:marginal_non_uniformity 0.385-0.389, mean_tv_marginal_vs_action 0.565-0.588",
+    "research/experiments/EXP-FRONTIER-34029326102/handoff.json:carry_forward established TV monotonic in uniform-mixture, rejected sign-reversed/null/interaction, unknown synthetic-to-real gap, recommended_action real Web data"
+  ]
+}

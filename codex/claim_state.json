@@ -43,6 +43,14 @@
         "reason": "This experiment tests only synthetic uniform-mixture noise on 10-state 4-action quadratic DGPs. TV distance shows robust detection under synthetic noise (aggregate |rho|=1.0, Cohen d 1.39-2.40, permutation p=0.000 at noise_intensity=0.5). However, all noise models are synthetic uniform-replacement mixtures, not real or realistic Web transitions. The dominant unknown \u2014 whether real Web transitions exhibit Var_a(E_S[f])>0 or are permutation-like \u2014 remains untested. The synthetic-to-real gap is the critical bottleneck. C-WEB-DYNAMICS stays HYPOTHESIS. The frozen FALSIFIED-IN-SETTING outcome is an artifact of three mis-calibrated controls (sign-reversed Spearman, impossible null control on finite state space, ANOVA interaction mis-calibrated for heterogeneous functions) identified identically in the parent audit \u2014 not a falsification of TV sensitivity in this synthetic regime."
       },
       {
+        "experiment_id": "EXP-FRONTIER-34061241004",
+        "lane": "frontier",
+        "decision": "SURVIVES_CURRENT_TEST",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "TV distance scales monotonically with lambda (Spearman rho=1.0, p<0.001) in2D continuous affine DGP with heteroscedastic Gaussian noise, all 6 frozen decision conditions pass, audit recomputes core metrics exactly. Claim ceiling expanded to include continuous2D state with state-dependent affine dynamics. However, the validated environment is 2D uniform [0,1]^2 with 3 toy affine families (rotation/scaling/translation+sin) and clipped heteroscedastic Gaussian noise (sigma_base=0.05, beta=0.5). This omits DOM, high-dimensional state, auth/latency, history, non-Gaussian noise. C-WEB-DYNAMICS concerns real Web dynamics; the synthetic-to-real gap remains the dominant unknown. Status remains HYPOTHESIS."
+      },
+      {
         "experiment_id": "EXP-PHYSICS-33528829431",
         "lane": "physics",
         "decision": "REVISE",
