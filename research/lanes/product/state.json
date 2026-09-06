@@ -1,14 +1,14 @@
 {
   "lane": "product",
   "human_paused": false,
-  "active_experiment_id": null,
+  "active_experiment_id": "EXP-PRODUCT-34003641840",
   "last_experiment_id": "EXP-PRODUCT-33993747223",
   "last_verdict": "FIXES-FALSIFIED",
-  "continue_immediately": true,
+  "continue_immediately": false,
   "next_question": "Can a redesigned noise filter (field-path relevance: only fields within action-template-relevant paths body/headers/url, excluding top-level metadata) and a higher-structure-similarity threshold (>0.67, or weighted by path depth and HTTP method differentiation) be implemented without breaking the B1/B4 regression that still passes, and does this redesign resolve D1/D2 noisy-observation over-parametrization and E1 pattern-absence hallucination while preserving clean-synthetic regression?",
   "promotion_ready": false,
   "consecutive_failures": 0,
-  "updated_at": "2026-09-06T01:20:26.645929+00:00",
+  "updated_at": "2026-09-06T01:20:44.161422+00:00",
   "last_failure_retryable": null,
   "last_handoff_sha256": "38b84992e2c908619e66823aadb2eee4776520d759abbfd943840dc134da8022"
 }
