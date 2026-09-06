@@ -1,0 +1,329 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-33998605047",
+  "lane": "graph",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Fix B_CONFIDENCE_LITERAL_HIGHER baseline implementation: spec.json requires literal (0.98) vs param (0.95) with literal winning, but run_experiment.py REGISTRIES shared-literal-higher uses literal-fetch-posts-1-low (0.95) vs param-fetch-posts-high (0.98) — identical to B_CONFIDENCE_PARAM_HIGHER, not literal-higher. No literal with 0.98 exists, so literal-higher disambiguation is not measured. Introduce literal-fetch-posts-1-high confidence 0.98 or correct REGISTRIES mapping and expected mechanism/URL.",
+    "Correct report.md baseline table row for compete-literal-higher: report claims EXECUTABLE literal-fetch-posts-1-low /posts/1 PASS which contradicts raw_evidence.json and result.json observation [compete-literal-higher] mechanism=param-fetch-posts-high bound_url=https://jsonplaceholder.typicode.com/posts/3 confidence=0.98. Raw shows param wins (0.98) contrary to literal-higher expectation because implementation is inverted.",
+    "Narrow baseline_pass claim from 7/7 status-only to semantic 6/7: producer baseline_pass uses match_expected_status only, masking mechanism+URL mismatch on B_CONFIDENCE_LITERAL_HIGHER (match_expected_mechanism=false, match_expected_url=false in raw_evidence.json). Decision rule FIX-VALIDATED requires all baselines match expected outcomes, not just status. Correct metric to check mechanism/URL or explicitly downgrade that baseline to NOT_MEASURED.",
+    "Disclose fix not persisted: HEAD src/spider/kernel.py L112 remains candidates.sort(key=lambda m: m.confidence, reverse=True) sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61 (provenance.json). Temporary monkey-patch only. Production remains COMPETITION-UNSAFE until Director commits. Do not claim FIX-VALIDATED for production HEAD.",
+    "Bound claim ceiling to single-slot + single multi-slot pair (2 vs 1) synthetic substrate: only one 2-slot template /posts/${id}/${category} vs /posts/${id} and one declared-vs-template-only comparison measured, single intent fetch-post, preconditions={}, no HTTP, deterministic n=1 per condition, unfixed HEAD. Do not generalize to 3 vs 2, 5 vs 1, other intents, or real-web DOM/auth/session/drift.",
+    "Clarify equal-slot tie handling: template-only-vs-literal and equal-slot-tie-param-vs-param both len 0 or len 1 ties resolve by stable insertion order (Python sort stability), not lexicographic. Producer validity_notes correctly state insertion-order dependency, but claim ceiling must reflect that outcome is registry-order-dependent and unpredictable without controlling insertion order."
+  ],
+  "validity_findings": [
+    {
+      "id": "V_RECOMPUTED_CORE_HAZARD",
+      "severity": "info",
+      "category": "independent_replication",
+      "finding": "Independent replay reproduces core hazard elimination: WITHOUT fix, shared-equal registry [literal-fetch-posts-1 (0.95,0), param-fetch-posts (0.95,1)] winner is literal-fetch-posts-1 with /posts/1 for id=2..6 (false accept). WITH patched sort (confidence, len(parameter_slots)) winner flips to param-fetch-posts with /posts/{id} for all 5 id values (id2..id6). Raw evidence 5/5 param wins matches recomputation. Also multi-slot 2 vs 1 and template-only-vs-param (declared param beats template-only) match both orders.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-33998605047/raw_evidence.json#/observations/7-11",
+        "research/experiments/EXP-GRAPH-33998605047/run_experiment.py#apply_fix",
+        "research/experiments/EXP-GRAPH-33998605047/result.json#/controls/NULL_FALSE_ACCEPT_ELIMINATION",
+        "src/spider/kernel.py:112"
+      ],
+      "observation_vs_interpretation": "Observation: 5/5 compete-equal-id conditions mechanism=param-fetch-posts with correct bound URLs /posts/2..6, confidence 0.95. Interpretation that false accepts eliminated is supported. Core hazard re-test succeeds where parent EXP-GRAPH-33955869291 did not measure it.",
+      "impact": "Primary hypothesis H1 (false accept elimination) and H3/H4 (multi-slot dominance, template-only handling) measurement transaction valid for synthetic substrate."
+    },
+    {
+      "id": "V_BASELINE_LITERAL_HIGHER_INVALID",
+      "severity": "high",
+      "category": "baseline_strength",
+      "finding": "B_CONFIDENCE_LITERAL_HIGHER (spec: literal 0.98 beats param 0.95) not measured: implementation REGISTRIES shared-literal-higher = [literal-fetch-posts-1-low (0.95), param-fetch-posts-high (0.98)] is param-higher, not literal-higher. Raw evidence shows compete-literal-higher status EXECUTABLE but mechanism param-fetch-posts-high /posts/3 confidence 0.98 with match_expected_mechanism=false and match_expected_url=false. Producer marks control pass=true via status-only check. Report.md fabricates row literal-fetch-posts-1-low /posts/1 PASS contradicting raw.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-33998605047/spec.json#/baselines/6",
+        "research/experiments/EXP-GRAPH-33998605047/spec.json#/conditions/6",
+        "research/experiments/EXP-GRAPH-33998605047/run_experiment.py#MECHANISMS",
+        "research/experiments/EXP-GRAPH-33998605047/run_experiment.py#REGISTRIES",
+        "research/experiments/EXP-GRAPH-33998605047/raw_evidence.json#/observations/6",
+        "research/experiments/EXP-GRAPH-33998605047/result.json#/controls/B_CONFIDENCE_LITERAL_HIGHER",
+        "research/experiments/EXP-GRAPH-33998605047/report.md#2"
+      ],
+      "observation_vs_interpretation": "Observation: compete-literal-higher correctly returns param (0.98) winning because param has higher confidence. Interpretation as 'literal-higher baseline PASS' is false — condition does not contain a 0.98 literal to test. Confidence-dominance for literal-higher is not measured in this run.",
+      "impact": "Baseline preservation claim 7/7 overstates validity. FIX-VALIDATED decision requires all 7 baselines match expected mechanisms/URLs, not just status. Semantic baseline pass is 6/7 (or 6 correct + 1 not-measured). Independent counterbalanced replay with correct literal 0.98 vs param 0.95 confirms literal does win under fix ((0.98,0) > (0.95,1)), so property holds scientifically, but this experiment does not demonstrate it. Measurement validity for this baseline is invalid."
+    },
+    {
+      "id": "V_REPORT_CONTRADICTS_RAW",
+      "severity": "high",
+      "category": "measurement_validity",
+      "finding": "Report.md Table Section 2 claims compete-literal-higher EXECUTABLE literal-fetch-posts-1-low /posts/1 PASS, while raw_evidence.json, derived_measurements.json, and result.json observations all record [compete-literal-higher] mechanism=param-fetch-posts-high bound_url=https://jsonplaceholder.typicode.com/posts/3 confidence=0.98. Direct contradiction between human-readable report and canonical result/raw. Result.json control even records observed_mechanism param-fetch-posts-high but still pass:true.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-33998605047/report.md#2",
+        "research/experiments/EXP-GRAPH-33998605047/raw_evidence.json#/observations/6",
+        "research/experiments/EXP-GRAPH-33998605047/result.json#/observations/5",
+        "research/experiments/EXP-GRAPH-33998605047/result.json#/controls/B_CONFIDENCE_LITERAL_HIGHER",
+        "research/experiments/EXP-GRAPH-33998605047/derived_measurements.json#/baseline_details/6"
+      ],
+      "observation_vs_interpretation": "Observation: raw and derived canonical JSON show param winner; report markdown shows literal winner. Interpretation in report that all baselines match is not faithful to raw evidence.",
+      "impact": "Undermines interpretive fidelity; audit must preserve metric/control identifiers and flag inconsistency. Does not invalidate core hazard measurement but requires REVISE before Director decision."
+    },
+    {
+      "id": "V_MULTI_SLOT_ROBUST",
+      "severity": "info",
+      "category": "positive_control",
+      "finding": "Multi-slot dominance (param-2slot len2 vs param-fetch-posts len1 at equal 0.95) recomputed robust to registry order: both [param-2slot, param-fetch-posts] and [param-fetch-posts, param-2slot] yield param-2slot winner via tuple (0.95,2) > (0.95,1). Bound URL /posts/3/tech correct. Confirms slot-count credit causal for this pair.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-33998605047/spec.json#/positive_control",
+        "research/experiments/EXP-GRAPH-33998605047/raw_evidence.json#/observations/12",
+        "research/experiments/EXP-GRAPH-33998605047/result.json#/controls/POS_MULTI_SLOT"
+      ],
+      "observation_vs_interpretation": "Observation: param-2slot wins. Interpretation multi-slot generalization supported for this single pair (n=1).",
+      "impact": "Positive control passes as claimed, but not generalizable beyond single tested template/ slot count."
+    },
+    {
+      "id": "V_TEMPLATE_ONLY_CONFIRMED",
+      "severity": "info",
+      "category": "positive_control",
+      "finding": "Template-only-vs-param (template-only-fetch len0 vs param-fetch-posts len1 at 0.95) correctly yields param-fetch-posts winner regardless of registry order, because fix uses len(parameter_slots) not len(required_slots). Template-only still requires {id} via _template_slots but gets no slot credit. Confirms parent scope limit.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-33998605047/raw_evidence.json#/observations/13",
+        "src/spider/kernel.py:19-32",
+        "src/spider/kernel.py:104-112",
+        "research/experiments/EXP-GRAPH-33998605047/result.json#/controls/POS_TEMPLATE_VS_PARAM"
+      ],
+      "observation_vs_interpretation": "Observation: declared param wins. Interpretation template-only handling PASS supported.",
+      "impact": "Bounds ceiling: template-only params not reliably preferred; product should avoid them at equal confidence."
+    },
+    {
+      "id": "V_TIE_INSERTION_DEPENDENT",
+      "severity": "medium",
+      "category": "measurement_validity",
+      "finding": "Equal-slot ties (template-only-vs-literal both len0, equal-slot-tie-param-vs-param both len1) resolve by stable insertion order, not lexicographic. Raw shows template-only-fetch wins when registered first [template-only-fetch, literal-fetch-posts-1] and param-fetch-posts wins when first [param-fetch-posts, param-fetch-alt]. Independent replay with reversed order flips winner. Producer validity_notes correctly label insertion-order dependent and derived measurements record as-is without pass/fail.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-33998605047/raw_evidence.json#/observations/14-15",
+        "research/experiments/EXP-GRAPH-33998605047/run_experiment.py:268",
+        "research/experiments/EXP-GRAPH-33998605047/result.json#/validity_notes/5",
+        "src/spider/kernel.py:112"
+      ],
+      "observation_vs_interpretation": "Observation: tie winner = first in registry.all(). Interpretation as insertion-order dependent is correct.",
+      "impact": "Does not affect primary tie-break (0 vs 1, 1 vs 2) but shows equal-slot case arbitrary. Production registry.py upsert sorts by mechanism_id, but this experiment uses replace() without sorting, so production tie behavior may differ."
+    },
+    {
+      "id": "V_STATUS_ONLY_BASELINE_INFLATION",
+      "severity": "medium",
+      "category": "baseline_strength",
+      "finding": "Producer baseline_pass = all(o['match_expected_status']) only checks status UNKNOWN/EXECUTABLE, not mechanism or bound_url. Thus B_CONFIDENCE_LITERAL_HIGHER passes despite mechanism and URL mismatch. Similarly specification conditions expected_winning_mechanism literal-fetch-posts-1 vs actual param-fetch-posts-high mismatch masked. Semantic baseline validation requires mechanism+URL check for competition conditions.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-33998605047/run_experiment.py#311",
+        "research/experiments/EXP-GRAPH-33998605047/derived_measurements.json#/baseline_details",
+        "research/experiments/EXP-GRAPH-33998605047/raw_evidence.json#/observations/6"
+      ],
+      "observation_vs_interpretation": "Observation: 7/7 statuses match but 1/7 mechanisms/URLs do not. Interpretation '7/7 baselines PASS no regression' is status-only, not full semantic.",
+      "impact": "Inflates baseline pass rate. True semantic pass is 6/7 measured correctly + 1 not measured. Alternative honest metric is 6/6 valid baselines pass + 1 invalid baseline not tested."
+    },
+    {
+      "id": "V_CODE_NOT_PERSISTED",
+      "severity": "medium",
+      "category": "provenance",
+      "finding": "HEAD src/spider/kernel.py L112 still candidates.sort(key=lambda m: m.confidence, reverse=True) sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61. Provenance correctly reports fix_applied:true with note unfixed HEAD and validity_notes disclose temporary monkey-patch. No commit in this experiment. Production remains COMPETITION-UNSAFE.",
+      "evidence_refs": [
+        "src/spider/kernel.py:112",
+        "research/experiments/EXP-GRAPH-33998605047/provenance.json#/code_artifacts/kernel.py",
+        "research/experiments/EXP-GRAPH-33998605047/result.json#/validity_notes/0",
+        "research/experiments/EXP-GRAPH-33998605047/provenance.json#/experiment_design/fix_applied"
+      ],
+      "observation_vs_interpretation": "Observation: fix not in HEAD. Interpretation that experiment validates fix for production is conditional on Director commit.",
+      "impact": "No falsification but blocks product promotion until commit + re-validation."
+    },
+    {
+      "id": "V_SUBSTRATE_SCOPE",
+      "severity": "medium",
+      "category": "generalizability_ceiling",
+      "finding": "All resolution conditions use jsonplaceholder URL templates without HTTP execution, single intent fetch-post, preconditions={} vacuously true, no model calls/RNG/sampling, fresh kernel per condition, synthetic substrate only. No test of real-web DOM/auth/session/drift, multiple intents, non-empty preconditions, cross-site, _bind type preservation, or LLM distillation (learn-on-A half of C-PARAM-INHERIT). Producer correctly discloses in validity_notes and unresolved.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-33998605047/spec.json#/measurement_validity",
+        "research/experiments/EXP-GRAPH-33998605047/result.json#/validity_notes",
+        "research/experiments/EXP-GRAPH-33998605047/result.json#/unresolved"
+      ],
+      "observation_vs_interpretation": "Observation: deterministic synthetic substrate. Interpretation as synthetic-only validation is correct; real-web ceiling not reached.",
+      "impact": "Ceiling cannot extend beyond kernel sort logic on synthetic substrate."
+    },
+    {
+      "id": "V_RECOMPUTED_MATCH_EXCEPT_BASELINE",
+      "severity": "info",
+      "category": "independent_replication",
+      "finding": "All 16 raw observations recomputed via independent kernel+registry replay match producer exactly: 5/5 solo baselines, 2 confidence competitions (1 correct 1 misimplemented), 5 compete-equal param wins, multi-slot, template-only vs param, template-only vs literal, equal-slot tie. 0 exceptions, 0 unexpected statuses, deterministic. Artifact hashes of run_experiment.py, raw_evidence, derived_measurements verified via provenance.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-33998605047/raw_evidence.json",
+        "research/experiments/EXP-GRAPH-33998605047/derived_measurements.json",
+        "research/experiments/EXP-GRAPH-33998605047/result.json#/observations",
+        "research/experiments/EXP-GRAPH-33998605047/run_experiment.py"
+      ],
+      "observation_vs_interpretation": "Observation: 16/16 type/status/mechanism/bound_action/confidence match. Interpretation that total_conditions_with_correct_status 16/16 is status-only correct, mechanism-level 15/16.",
+      "impact": "Measurement transaction valid; no silent rewriting of metric identifiers required to reconcile."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "control_id": "B_COLD",
+      "type": "baseline",
+      "expected": "UNKNOWN",
+      "observed": "UNKNOWN mechanism=None confidence=0.0",
+      "pass": true,
+      "assessment": "Recomputed UNKNOWN with no applicable mechanism. Fresh empty registry. Pass.",
+      "evidence_ref": "research/experiments/EXP-GRAPH-33998605047/raw_evidence.json#/observations/0"
+    },
+    {
+      "control_id": "B_LITERAL_ONLY_ORIG",
+      "type": "baseline",
+      "expected": "EXECUTABLE url=/posts/1",
+      "observed": "EXECUTABLE literal-fetch-posts-1 https://jsonplaceholder.typicode.com/posts/1",
+      "pass": true,
+      "assessment": "Literal solo binds correctly. Unaffected by tuple sort. Pass.",
+      "evidence_ref": "research/experiments/EXP-GRAPH-33998605047/raw_evidence.json#/observations/1"
+    },
+    {
+      "control_id": "B_LITERAL_ONLY_UNSEEN",
+      "type": "baseline",
+      "expected": "EXECUTABLE url=/posts/1 (literal universal)",
+      "observed": "EXECUTABLE literal-fetch-posts-1 https://jsonplaceholder.typicode.com/posts/1",
+      "pass": true,
+      "assessment": "Literal universal matching unchanged: unseen id=2 still literal URL. Pass.",
+      "evidence_ref": "research/experiments/EXP-GRAPH-33998605047/raw_evidence.json#/observations/2"
+    },
+    {
+      "control_id": "B_PARAM_ONLY_ORIG",
+      "type": "baseline",
+      "expected": "EXECUTABLE url=/posts/1",
+      "observed": "EXECUTABLE param-fetch-posts https://jsonplaceholder.typicode.com/posts/1",
+      "pass": true,
+      "assessment": "Param solo binds correctly to /posts/1. Pass.",
+      "evidence_ref": "research/experiments/EXP-GRAPH-33998605047/raw_evidence.json#/observations/3"
+    },
+    {
+      "control_id": "B_PARAM_ONLY_UNSEEN",
+      "type": "baseline",
+      "expected": "EXECUTABLE url=/posts/2 (param generalizes)",
+      "observed": "EXECUTABLE param-fetch-posts https://jsonplaceholder.typicode.com/posts/2",
+      "pass": true,
+      "assessment": "Param generalizes to unseen id 2 with correct _bind /posts/2. Pass.",
+      "evidence_ref": "research/experiments/EXP-GRAPH-33998605047/raw_evidence.json#/observations/4"
+    },
+    {
+      "control_id": "B_CONFIDENCE_PARAM_HIGHER",
+      "type": "baseline",
+      "expected": "EXECUTABLE param (0.98) wins",
+      "observed": "EXECUTABLE param-fetch-posts-high (0.98) https://jsonplaceholder.typicode.com/posts/3",
+      "pass": true,
+      "assessment": "Confidence dominates slot count: (0.98,1) > (0.95,0). Param higher correctly wins over literal low. Recomputed matches. Pass.",
+      "evidence_ref": "research/experiments/EXP-GRAPH-33998605047/raw_evidence.json#/observations/5"
+    },
+    {
+      "control_id": "B_CONFIDENCE_LITERAL_HIGHER",
+      "type": "baseline",
+      "expected": "EXECUTABLE literal (0.98) wins over param (0.95) url=/posts/1",
+      "observed": "EXECUTABLE param-fetch-posts-high (0.98) https://jsonplaceholder.typicode.com/posts/3 confidence 0.98 match_expected_mechanism=false match_expected_url=false",
+      "pass": false,
+      "assessment": "FAIL as implemented: registry contains no 0.98 literal, only literal 0.95 vs param 0.98, so param wins. Spec expectation literal wins cannot be satisfied. Producer marks pass via status-only (EXECUTABLE) but mechanism and URL wrong. Valid literal-higher test not measured. Independent correct replay with literal 0.98 vs param 0.95 confirms literal would win under fix, but not in evidence.",
+      "evidence_ref": "research/experiments/EXP-GRAPH-33998605047/raw_evidence.json#/observations/6"
+    },
+    {
+      "control_id": "NULL_FALSE_ACCEPT_ELIMINATION",
+      "type": "null",
+      "expected": "All 5 compete-equal-id conditions return param-fetch-posts (false accepts eliminated)",
+      "observed": "0 false accepts, 5/5 param-fetch-posts with URLs /posts/2..6",
+      "pass": true,
+      "assessment": "Null (no fix) expectation was literal wins at equal confidence; with fix param wins. Recomputed without fix literal wins id2, with fix param wins all 5. Elimination confirmed for tested ids. Pass.",
+      "evidence_ref": "research/experiments/EXP-GRAPH-33998605047/raw_evidence.json#/observations/7-11"
+    },
+    {
+      "control_id": "POS_MULTI_SLOT",
+      "type": "positive",
+      "expected": "EXECUTABLE param-2slot wins (len=2 > len=1)",
+      "observed": "EXECUTABLE param-2slot https://jsonplaceholder.typicode.com/posts/3/tech",
+      "pass": true,
+      "assessment": "Positive control passes and robust to order reversal: counterbalanced [param-fetch-posts, param-2slot] still param-2slot wins. Pass for single tested pair.",
+      "evidence_ref": "research/experiments/EXP-GRAPH-33998605047/raw_evidence.json#/observations/12"
+    },
+    {
+      "control_id": "POS_TEMPLATE_VS_PARAM",
+      "type": "positive",
+      "expected": "EXECUTABLE param-fetch-posts wins over template-only",
+      "observed": "EXECUTABLE param-fetch-posts https://jsonplaceholder.typicode.com/posts/3",
+      "pass": true,
+      "assessment": "Declared param len1 beats template-only len0 at equal confidence. Robust to order. Pass.",
+      "evidence_ref": "research/experiments/EXP-GRAPH-33998605047/raw_evidence.json#/observations/13"
+    }
+  ],
+  "recomputed_metrics": {
+    "baseline_pass_producer_status_only": true,
+    "baseline_pass_count_producer": 7,
+    "baseline_total_producer": 7,
+    "baseline_semantic_pass_recomputed": false,
+    "baseline_semantic_pass_count_recomputed": 6,
+    "baseline_semantic_total_recomputed": 7,
+    "B_CONFIDENCE_LITERAL_HIGHER_mechanism_match_recomputed": false,
+    "B_CONFIDENCE_LITERAL_HIGHER_url_match_recomputed": false,
+    "B_CONFIDENCE_LITERAL_HIGHER_status_match_recomputed": true,
+    "false_accepts_eliminated_recomputed": true,
+    "false_accept_count_recomputed": 0,
+    "compete_equal_total_recomputed": 5,
+    "compete_equal_details_recomputed": [
+      {"id": "compete-equal-id2", "mechanism": "param-fetch-posts", "url": "https://jsonplaceholder.typicode.com/posts/2", "param_wins": true},
+      {"id": "compete-equal-id3", "mechanism": "param-fetch-posts", "url": "https://jsonplaceholder.typicode.com/posts/3", "param_wins": true},
+      {"id": "compete-equal-id4", "mechanism": "param-fetch-posts", "url": "https://jsonplaceholder.typicode.com/posts/4", "param_wins": true},
+      {"id": "compete-equal-id5", "mechanism": "param-fetch-posts", "url": "https://jsonplaceholder.typicode.com/posts/5", "param_wins": true},
+      {"id": "compete-equal-id6", "mechanism": "param-fetch-posts", "url": "https://jsonplaceholder.typicode.com/posts/6", "param_wins": true}
+    ],
+    "false_accept_without_fix_recomputed_mechanism": "literal-fetch-posts-1",
+    "multi_slot_dominance_recomputed": true,
+    "multi_slot_winning_mechanism_recomputed": "param-2slot",
+    "multi_slot_bound_url_recomputed": "https://jsonplaceholder.typicode.com/posts/3/tech",
+    "multi_slot_counterbalanced_winner_recomputed": "param-2slot",
+    "template_only_vs_param_recomputed": "PASS",
+    "template_only_vs_param_winning_recomputed": "param-fetch-posts",
+    "template_only_vs_param_counterbalanced_winner_recomputed": "param-fetch-posts",
+    "template_vs_literal_winner_recomputed": "template-only-fetch",
+    "template_vs_literal_counterbalanced_winner_recomputed": "literal-fetch-posts-1",
+    "equal_slot_tie_param_winner_recomputed": "param-fetch-posts",
+    "equal_slot_tie_param_counterbalanced_winner_recomputed": "param-fetch-alt",
+    "equal_slot_tie_is_insertion_order_recomputed": true,
+    "equal_slot_tie_is_lexicographic_recomputed": false,
+    "cold_baseline_pass_recomputed": true,
+    "exceptions_count_recomputed": 0,
+    "total_conditions_recomputed": 16,
+    "conditions_with_correct_status_recomputed": 16,
+    "conditions_with_correct_mechanism_recomputed": 15,
+    "recompute_match_overall": true,
+    "recompute_match_except_report_row": true,
+    "recompute_method": "Independent SpiderKernel+MechanismRegistry replay per condition on temp JSONL registries using patched resolve tuple sort (confidence,len(parameter_slots)); plus NO-FIX replay for hazard, plus correct literal-high 0.98 vs param 0.95 counterbalanced replay, plus reversed-order replays for multi-slot, template-only, and equal-slot ties; HEAD kernel L112 inspected; hashes verified",
+    "current_head_kernel_sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+    "current_head_has_fix": false,
+    "literally_high_confidence_would_win_under_fix_recomputed": true
+  },
+  "claim_ceiling": "With temporary fix candidates.sort(key=lambda m: (m.confidence, len(m.parameter_slots)), reverse=True) on deterministic synthetic substrate (jsonplaceholder URL templates, single intent fetch-post, preconditions={}, fresh kernel per condition, no HTTP for resolve, n=1 per condition): (a) false accepts eliminated for literal (0 slots) vs param (1 slot) at equal confidence 0.95 for tested ids 2..6 (5/5 param wins; without fix literal wins); (b) 2-slot param [id,category] /posts/${id}/${category} beats 1-slot param [id] /posts/${id} at equal 0.95 for single tested pair, robust to order; (c) declared param [id] beats template-only param (parameter_slots=[] but template ${id}) at equal 0.95 regardless of order because fix counts declared slots only; (d) 6/7 valid baselines preserve (cold, literal-only orig/unseen, param-only orig/unseen, param-higher confidence 0.98 vs 0.95). Does NOT establish: (i) literal-higher confidence (0.98 literal vs 0.95 param) dominance in this run — not correctly measured due to REGISTRIES bug, though independent correct replay shows (0.98,0) > (0.95,1) still literal wins; (ii) equal-slot ties are lexicographic — they are stable insertion-order and flip with registry order; (iii) general multi-slot counts/templates beyond single 2 vs 1 pair, multiple intents, non-empty preconditions, _bind type preservation, verify() beyond dict equality, LLM distillation, or real-web DOM/auth/session/drift. Production HEAD remains unfixed and COMPETITION-UNSAFE until committed and re-validated.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-33998605047/request.json",
+    "research/experiments/EXP-GRAPH-33998605047/spec.json",
+    "research/experiments/EXP-GRAPH-33998605047/prereg.md",
+    "research/experiments/EXP-GRAPH-33998605047/freeze.json",
+    "research/experiments/EXP-GRAPH-33998605047/result.json",
+    "research/experiments/EXP-GRAPH-33998605047/report.md",
+    "research/experiments/EXP-GRAPH-33998605047/provenance.json",
+    "research/experiments/EXP-GRAPH-33998605047/raw_evidence.json",
+    "research/experiments/EXP-GRAPH-33998605047/derived_measurements.json",
+    "research/experiments/EXP-GRAPH-33998605047/run_experiment.py",
+    "src/spider/kernel.py:104-113",
+    "src/spider/kernel.py:112",
+    "src/spider/kernel.py:19-32",
+    "src/spider/kernel.py:35-49",
+    "src/spider/registry.py",
+    "src/spider/models.py",
+    "research/experiments/EXP-GRAPH-33955869291/handoff.json",
+    "research/experiments/EXP-GRAPH-33955869291/audit.json"
+  ],
+  "unresolved": [
+    "Whether B_CONFIDENCE_LITERAL_HIGHER (literal 0.98 vs param 0.95) remains literal-winning after fix commit — not correctly measured here; independent replay suggests yes but needs in-experiment measurement with correct 0.98 literal mechanism.",
+    "Whether fix has been committed to production HEAD and re-validated — current HEAD sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61 remains unfixed, requires Director action.",
+    "Whether fix generalizes to other slot counts (3 vs 2, 5 vs 1), other template shapes, or other intents beyond fetch-post — only single 2 vs 1 pair tested.",
+    "Whether equal-slot ties should be explicitly randomized, insertion-order, or lexicographic — current behavior is stable sort artefact, registry.py upsert sorts by mechanism_id but experiment uses replace() without sorting, production behavior may differ.",
+    "Whether template-only params need explicit handling via required_slots rather than declared slots for production use — they lose to declared params and tie with literals by insertion order.",
+    "Whether kernel preconditions matching (_matches) discriminates beyond empty dict — all mechanisms preconditions={}.",
+    "Whether _bind preserves type for full-match template strings (int->int) — only URL-embedded partial match tested.",
+    "Whether fix generalizes to real-web endpoints with DOM, auth, session state, drift — synthetic substrate only.",
+    "Whether LLM-driven mechanism distillation ('learn on A' half of C-PARAM-INHERIT) works — no model calls in this experiment.",
+    "Whether report.md baseline table will be corrected to match raw_evidence.json before verdict — current contradiction remains."
+  ]
+}
