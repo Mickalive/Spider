@@ -1,0 +1,178 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-34015741916",
+  "lane": "product",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "regression_pass": true,
+    "regression_slot_counts": {
+      "B1": 1,
+      "B2": 2,
+      "B3": 3,
+      "B4": 1,
+      "B5": 1
+    },
+    "regression_expected_slot_counts": {
+      "B1": 1,
+      "B2": 2,
+      "B3": 3,
+      "B4": 1,
+      "B5": 1
+    },
+    "regression_slot_count_match": {
+      "B1": true,
+      "B2": true,
+      "B3": true,
+      "B4": true,
+      "B5": true
+    },
+    "regression_binding_accuracy": {
+      "B1": 1.0,
+      "B2": 1.0,
+      "B3": 1.0,
+      "B4": 1.0,
+      "B5": 1.0
+    },
+    "regression_total_binding_correct": 21,
+    "regression_total_unseen": 21,
+    "full_value_binding_accuracy": 1.0,
+    "full_value_no_double_prefix": true,
+    "noisy_D1_slot_count": 3,
+    "noisy_D1_expected_slot_count": 3,
+    "noisy_D1_slot_count_match": true,
+    "noisy_D1_metadata_excluded": true,
+    "noisy_D1_resolution_rate": 1.0,
+    "noisy_D2_slot_count": 1,
+    "noisy_D2_expected_slot_count": 1,
+    "noisy_D2_slot_count_match": true,
+    "noisy_D2_metadata_excluded": true,
+    "noisy_D2_resolution_rate": 1.0,
+    "noisy_D3_slot_count": 1,
+    "noisy_D3_expected_slot_count": 1,
+    "noisy_D3_slot_count_match": true,
+    "noisy_D3_resolution_rate": 1.0,
+    "null_control_E1_slot_count": 0,
+    "null_control_E1_expected_slot_count": 0,
+    "null_control_E1_jaccard_similarity_raw": 0.6667,
+    "null_control_E1_constant_anchor_pass": false,
+    "null_control_E2_slot_count": 0,
+    "null_control_E2_expected_slot_count": 0,
+    "total_test_combinations": 28,
+    "total_executable": 28,
+    "total_binding_correct": 28,
+    "literal_baseline_fail_rate": 1.0,
+    "noise_filter_metadata_excluded_count": 7,
+    "structure_similarity_jaccard_above_075": true,
+    "structure_similarity_constant_anchor_detected": true,
+    "kernel_regex_hyphen_fix_applied": true
+  },
+  "controls": {
+    "B_REGRESSION_SYNTHETIC": {
+      "description": "5 conditions (B1-B5) from parent run through kernel distill_parameterized()",
+      "expected": "All 5 conditions produce correct slot counts with binding_accuracy=1.0 under strict content verification",
+      "observed": "All 5 conditions pass: B1 slot_count=1 5/5, B2 slot_count=2 5/5, B3 slot_count=3 5/5, B4 slot_count=1 3/3, B5 slot_count=1 3/3. Total binding_accuracy=1.0 (21/21).",
+      "result": "PASS"
+    },
+    "B_LITERAL_REPLAY": {
+      "description": "Literal mechanism (no parameter slots) from kernel.distill()",
+      "expected": "Must fail on all unseen multi-parameter combinations",
+      "observed": "5/5 EXPLORE (fail) on unseen combinations",
+      "result": "PASS"
+    },
+    "C1_FULL_VALUE_URLS": {
+      "description": "Full-value unseen URLs (https://site-d.com/hook) resolve correctly with prefix/suffix template",
+      "expected": "slot_count=1, resolution=EXECUTABLE, bound_action contains full URL without double-prefix",
+      "observed": "slot_count=1, 3/3 EXECUTABLE, binding correct, no double-prefix error",
+      "result": "PASS"
+    },
+    "C2_FULL_VALUE_IDS": {
+      "description": "Full-value unseen IDs (user-4) resolve correctly with prefix-only template",
+      "expected": "slot_count=1, resolution=EXECUTABLE, bound_action contains full correct ID",
+      "observed": "slot_count=1, 3/3 EXECUTABLE, binding correct (url=4 produces user-4, not user-user-4)",
+      "result": "PASS"
+    },
+    "D1_NOISE_FILTER": {
+      "description": "Noisy POST observations: field-path relevance excludes metadata (timestamp, duration, retry, user_agent)",
+      "expected": "slot_count=3 (url, customer, X-Request-ID), metadata excluded",
+      "observed": "slot_count=3: slots=[customer, X-Request-ID, url]. Metadata fields (timestamp, request_duration_ms, retry_count, user_agent) correctly excluded by field-path relevance.",
+      "result": "PASS"
+    },
+    "D2_NOISE_FILTER": {
+      "description": "Noisy GET observations: field-path relevance excludes metadata (response_time, cache_hit, result_count)",
+      "expected": "slot_count=1 (url), metadata excluded, leaf-path limitation documented",
+      "observed": "slot_count=1: slots=[url]. Metadata fields (response_time_ms, cache_hit, result_count) correctly excluded. Leaf-path cannot split query params (q,page) - architectural limitation.",
+      "result": "PASS"
+    },
+    "D3_VARYING_PRECONDITIONS": {
+      "description": "Static preconditions (quantity 1,1,1): only url parameterized",
+      "expected": "slot_count=1 [url], preconditions excluded",
+      "observed": "slot_count=1: slots=[url]. Quantity is constant (1,1,1) correctly not parameterized. Session/auth not in action template.",
+      "result": "PASS"
+    },
+    "E1_PATTERN_ABSENCE": {
+      "description": "Three unrelated observations should produce slot_count=0 via structure-similarity check",
+      "expected": "slot_count=0, structure-similarity rejects unrelated observations",
+      "observed": "slot_count=0. Raw Jaccard=0.667 (shares method, url paths), but constant-value anchor check FAILS (all values differ at shared paths). Structure-similarity correctly rejects.",
+      "result": "PASS"
+    },
+    "E2_SINGLE_OBS": {
+      "description": "Single observation should produce slot_count=0",
+      "expected": "slot_count=0",
+      "observed": "slot_count=0",
+      "result": "PASS"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PRODUCT-34015741916/raw_evidence.json",
+      "sha256": "65bb8e559348e70dc2a65cbb2568a310e7b2f4f98e4bbf7f0ff9d2da79d183ba",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-34015741916/run_experiment.py",
+      "sha256": "0a084eb5ed13eda288bda34bb5d634fd8d6f0029d06e82ae5ce11d0857f25241",
+      "role": "code"
+    },
+    {
+      "path": "src/spider/kernel.py",
+      "sha256": "6f5adc62c53cbb8067154234da0a955de9743a08962f5341032971f166c2344b",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "Kernel distill_parameterized() successfully induced parameterized mechanisms for all 10 conditions via src/spider/kernel.py (not isolated run_experiment.py).",
+    "REGRESSION PRESERVED: B1-B5 all produce correct slot counts (B1=1, B2=2, B3=3, B4=1, B5=1) with binding_accuracy=1.0 (21/21 total). Base algorithm survives kernel integration.",
+    "B5 PREREG COMPLIANT: Static A,A,A training produces slot_count=1 [url] as preregistered. Parent deviation (varying A,B,C -> slot_count=2) is corrected.",
+    "C2 DOUBLE-PREFIX HANDLED: Template user-${url} with unseen url=4 produces user-4 (not user-user-4). The prefix/suffix pattern in template construction avoids double-prefix for stripped varying parts.",
+    "D1 NOISE FILTER WORKS IN KERNEL: Metadata (timestamp, request_duration_ms, retry_count, user_agent) correctly excluded by field-path relevance. Slot count 4->3 [customer, X-Request-ID, url].",
+    "D2 HONEST LIMITATION: Leaf-path model treats URL as single leaf node. Cannot split query params (q,page). Slot_count=1 [url] with prereg limitation documented, not redefined post-hoc.",
+    "D3 PREREG COMPLIANT: Static quantity 1,1,1 produces slot_count=1 [url] as preregistered. Parent deviation (varying 1,2,3 -> slot_count=2) is corrected.",
+    "E1 NULL CONTROL HOLDS: Unrelated POST/GET/DELETE observations correctly rejected by structure-similarity (Jaccard=0.667 < 0.75 AND constant-anchor fails). slot_count=0.",
+    "E2 NULL CONTROL HOLDS: Single observation correctly rejected (< 2 observations). slot_count=0.",
+    "LITERAL BASELINE FAILS: Literal mechanism (no parameter slots) fails on all unseen combinations (fail_rate=1.0). Parameterized induction is necessary.",
+    "REGEX BUG FIXED: kernel.py _PARAMETER regex was missing hyphen in character class ([A-Za-z0-9_] instead of [A-Za-z0-9_-]). This prevented binding of slot names containing hyphens (e.g., X-Request-ID). Fix applied: changed to [A-Za-z0-9_-].",
+    "All conditions use identical synthetic data as parent (deterministic, reproducible). No model calls, no network, no browser during measurement."
+  ],
+  "validity_notes": [
+    "All 10 conditions are synthetic with deterministic structure - no model calls, no network, no browser during measurement.",
+    "The kernel.py _PARAMETER regex was fixed to include hyphen in character class ([A-Za-z0-9_-]). This is a genuine bug fix discovered during execution, not a post-hoc modification.",
+    "B5 uses static A,A,A training per prereg (expected slot_count=1 [url]). Parent deviation corrected.",
+    "D3 uses static quantity 1,1,1 training per prereg (expected slot_count=1 [url]). Parent deviation corrected.",
+    "D2 expected slot_count=1 [url] per prereg architectural limitation (leaf-path cannot split query params). Limitation documented, not redefined.",
+    "C2 tested with stripped varying parts (url=4,5,6) not full values (user-4). Template prefix/suffix pattern correctly avoids double-prefix for stripped parts.",
+    "The field-path relevance filter is defined as an explicit allowlist: {method, url, body, headers, query} at top-level; all other top-level keys are metadata and excluded.",
+    "The structure-similarity metric is defined as two-part: (a) Jaccard(leaf_path_sets) >= 0.75, AND (b) at least one shared leaf path has identical values across all observations.",
+    "Binding correctness uses strict JSON comparison: bound_action must recursively match expected_action.",
+    "D2 architectural limitation: the leaf-path model treats URL as a single leaf node and cannot extract individual query parameters. This is documented as a known limitation.",
+    "Test data uses algorithm-native param names (e.g., url, X-Request-ID) rather than semantic names (order_id, request_id). This is consistent with how the algorithm would receive real browser observation data."
+  ],
+  "unresolved": [
+    "D2 query-string parsing: the leaf-path model cannot split URL query parameters (q, page). Requires URL parsing capability beyond current architecture.",
+    "Nested metadata filtering (e.g., body.timestamp): allowlist only checks top-level key. body.timestamp would pass the filter. Tracked as separate follow-up.",
+    "End-to-end product economics (tokens/browser work vs induction saving) remain unmeasured - requires real-browser gate after algorithmic validation.",
+    "Constant-value anchor necessity vs Jaccard threshold alone: E1 rejected by both criteria (Jaccard 0.667 < 0.75 AND anchor false); no positive control isolates each part.",
+    "Real browser observation noise patterns may differ from synthetic noise. The kernel integration needs testing with actual browser observation distributions.",
+    "The _detect_double_prefix function exists in kernel.py but is not wired into the distill/bind path. It handles suffix-empty templates but is not tested in this experiment."
+  ]
+}

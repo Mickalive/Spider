@@ -9,7 +9,7 @@ from .models import Mechanism, Observation, Resolution, ResolutionStatus
 from .registry import MechanismRegistry
 
 
-_PARAMETER = re.compile(r"\$\{([A-Za-z_][A-Za-z0-9_]*)\}")
+_PARAMETER = re.compile(r"\$\{([A-Za-z_][A-Za-z0-9_-]*)\}")
 
 
 def _matches(required: dict[str, Any], actual: dict[str, Any]) -> bool:

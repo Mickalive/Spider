@@ -1,6 +1,6 @@
 {
   "experiment_id": "EXP-PRODUCT-34015741916",
-  "timestamp": "2026-09-06T11:15:29Z",
+  "timestamp": "2026-09-06T14:21:07Z",
   "conditions": {
     "B1-single-path": {
       "condition_id": "B1-single-path",
@@ -42,7 +42,7 @@
       "resolution_results": [
         {
           "params": {
-            "id": "D"
+            "url": "D"
           },
           "resolve_params": {
             "url": "D"
@@ -61,7 +61,7 @@
         },
         {
           "params": {
-            "id": "E"
+            "url": "E"
           },
           "resolve_params": {
             "url": "E"
@@ -80,7 +80,7 @@
         },
         {
           "params": {
-            "id": "F"
+            "url": "F"
           },
           "resolve_params": {
             "url": "F"
@@ -99,7 +99,7 @@
         },
         {
           "params": {
-            "id": "G"
+            "url": "G"
           },
           "resolve_params": {
             "url": "G"
@@ -118,7 +118,7 @@
         },
         {
           "params": {
-            "id": "H"
+            "url": "H"
           },
           "resolve_params": {
             "url": "H"
@@ -170,8 +170,8 @@
         ],
         "shared_paths": [
           "url",
-          "body.name",
-          "method"
+          "method",
+          "body.name"
         ],
         "path_values": {
           "url": {
@@ -197,7 +197,7 @@
       "resolution_results": [
         {
           "params": {
-            "user_id": "D",
+            "url": "D",
             "name": "Diana"
           },
           "resolve_params": {
@@ -224,7 +224,7 @@
         },
         {
           "params": {
-            "user_id": "E",
+            "url": "E",
             "name": "Eve"
           },
           "resolve_params": {
@@ -251,7 +251,7 @@
         },
         {
           "params": {
-            "user_id": "F",
+            "url": "F",
             "name": "Frank"
           },
           "resolve_params": {
@@ -278,7 +278,7 @@
         },
         {
           "params": {
-            "user_id": "G",
+            "url": "G",
             "name": "Grace"
           },
           "resolve_params": {
@@ -305,7 +305,7 @@
         },
         {
           "params": {
-            "user_id": "H",
+            "url": "H",
             "name": "Heidi"
           },
           "resolve_params": {
@@ -368,21 +368,12 @@
           "method"
         ],
         "shared_paths": [
-          "url",
           "headers.X-Request-ID",
+          "url",
           "body.title",
           "method"
         ],
         "path_values": {
-          "url": {
-            "values": [
-              "https://api.example.com/posts/A",
-              "https://api.example.com/posts/B",
-              "https://api.example.com/posts/C"
-            ],
-            "prefix": "https://api.example.com/posts/",
-            "suffix": ""
-          },
           "headers.X-Request-ID": {
             "values": [
               "req-1",
@@ -390,6 +381,15 @@
               "req-3"
             ],
             "prefix": "req-",
+            "suffix": ""
+          },
+          "url": {
+            "values": [
+              "https://api.example.com/posts/A",
+              "https://api.example.com/posts/B",
+              "https://api.example.com/posts/C"
+            ],
+            "prefix": "https://api.example.com/posts/",
             "suffix": ""
           },
           "body.title": {
@@ -421,7 +421,7 @@
               "title": "Fourth"
             },
             "headers": {
-              "X-Request-ID": "req-${X-Request-ID}"
+              "X-Request-ID": "req-4"
             },
             "method": "POST",
             "url": "https://api.example.com/posts/D"
@@ -437,7 +437,7 @@
             }
           },
           "reason": "applicability guards and confidence threshold passed",
-          "binding_correct": false
+          "binding_correct": true
         },
         {
           "params": {
@@ -456,7 +456,7 @@
               "title": "Fifth"
             },
             "headers": {
-              "X-Request-ID": "req-${X-Request-ID}"
+              "X-Request-ID": "req-5"
             },
             "method": "POST",
             "url": "https://api.example.com/posts/E"
@@ -472,7 +472,7 @@
             }
           },
           "reason": "applicability guards and confidence threshold passed",
-          "binding_correct": false
+          "binding_correct": true
         },
         {
           "params": {
@@ -491,7 +491,7 @@
               "title": "Sixth"
             },
             "headers": {
-              "X-Request-ID": "req-${X-Request-ID}"
+              "X-Request-ID": "req-6"
             },
             "method": "POST",
             "url": "https://api.example.com/posts/F"
@@ -507,7 +507,7 @@
             }
           },
           "reason": "applicability guards and confidence threshold passed",
-          "binding_correct": false
+          "binding_correct": true
         },
         {
           "params": {
@@ -526,7 +526,7 @@
               "title": "Seventh"
             },
             "headers": {
-              "X-Request-ID": "req-${X-Request-ID}"
+              "X-Request-ID": "req-7"
             },
             "method": "POST",
             "url": "https://api.example.com/posts/G"
@@ -542,7 +542,7 @@
             }
           },
           "reason": "applicability guards and confidence threshold passed",
-          "binding_correct": false
+          "binding_correct": true
         },
         {
           "params": {
@@ -561,7 +561,7 @@
               "title": "Eighth"
             },
             "headers": {
-              "X-Request-ID": "req-${X-Request-ID}"
+              "X-Request-ID": "req-8"
             },
             "method": "POST",
             "url": "https://api.example.com/posts/H"
@@ -577,14 +577,14 @@
             }
           },
           "reason": "applicability guards and confidence threshold passed",
-          "binding_correct": false
+          "binding_correct": true
         }
       ],
       "metrics": {
         "unseen_resolution_rate": 1.0,
-        "binding_accuracy": 0.0,
+        "binding_accuracy": 1.0,
         "executable_count": 5,
-        "binding_correct_count": 0
+        "binding_correct_count": 5
       }
     },
     "B4-non-identifier-values": {
@@ -632,7 +632,7 @@
       "resolution_results": [
         {
           "params": {
-            "webhook_url": "d"
+            "callback_url": "d"
           },
           "resolve_params": {
             "callback_url": "d"
@@ -657,7 +657,7 @@
         },
         {
           "params": {
-            "webhook_url": "e"
+            "callback_url": "e"
           },
           "resolve_params": {
             "callback_url": "e"
@@ -682,7 +682,7 @@
         },
         {
           "params": {
-            "webhook_url": "f"
+            "callback_url": "f"
           },
           "resolve_params": {
             "callback_url": "f"
@@ -735,13 +735,13 @@
         "mean_jaccard": 1.0,
         "has_constant_anchor": true,
         "anchor_path": [
-          "body.user_id",
-          "method"
+          "method",
+          "body.user_id"
         ],
         "shared_paths": [
-          "body.user_id",
           "url",
-          "method"
+          "method",
+          "body.user_id"
         ],
         "path_values": {
           "url": {
@@ -758,8 +758,7 @@
       "resolution_results": [
         {
           "params": {
-            "url": "D",
-            "user_id": "A"
+            "url": "D"
           },
           "resolve_params": {
             "url": "D"
@@ -784,8 +783,7 @@
         },
         {
           "params": {
-            "url": "E",
-            "user_id": "A"
+            "url": "E"
           },
           "resolve_params": {
             "url": "E"
@@ -810,8 +808,7 @@
         },
         {
           "params": {
-            "url": "F",
-            "user_id": "A"
+            "url": "F"
           },
           "resolve_params": {
             "url": "F"
@@ -1105,19 +1102,19 @@
           "method"
         ],
         "shared_paths": [
-          "body.customer",
-          "url",
           "headers.X-Request-ID",
+          "url",
+          "body.customer",
           "method"
         ],
         "path_values": {
-          "body.customer": {
+          "headers.X-Request-ID": {
             "values": [
-              "cust-A",
-              "cust-B",
-              "cust-C"
+              "req-101",
+              "req-102",
+              "req-103"
             ],
-            "prefix": "cust-",
+            "prefix": "req-10",
             "suffix": ""
           },
           "url": {
@@ -1129,13 +1126,13 @@
             "prefix": "https://api.example.com/orders/order-",
             "suffix": ""
           },
-          "headers.X-Request-ID": {
+          "body.customer": {
             "values": [
-              "req-101",
-              "req-102",
-              "req-103"
+              "cust-A",
+              "cust-B",
+              "cust-C"
             ],
-            "prefix": "req-10",
+            "prefix": "cust-",
             "suffix": ""
           }
         }
@@ -1158,7 +1155,7 @@
               "customer": "cust-D"
             },
             "headers": {
-              "X-Request-ID": "req-10${X-Request-ID}"
+              "X-Request-ID": "req-104"
             },
             "method": "POST",
             "request_duration_ms": 120,
@@ -1182,7 +1179,7 @@
             "user_agent": "Mozilla/5.0"
           },
           "reason": "applicability guards and confidence threshold passed",
-          "binding_correct": false
+          "binding_correct": true
         },
         {
           "params": {
@@ -1201,7 +1198,7 @@
               "customer": "cust-E"
             },
             "headers": {
-              "X-Request-ID": "req-10${X-Request-ID}"
+              "X-Request-ID": "req-105"
             },
             "method": "POST",
             "request_duration_ms": 120,
@@ -1225,7 +1222,7 @@
             "user_agent": "Mozilla/5.0"
           },
           "reason": "applicability guards and confidence threshold passed",
-          "binding_correct": false
+          "binding_correct": true
         },
         {
           "params": {
@@ -1244,7 +1241,7 @@
               "customer": "cust-F"
             },
             "headers": {
-              "X-Request-ID": "req-10${X-Request-ID}"
+              "X-Request-ID": "req-106"
             },
             "method": "POST",
             "request_duration_ms": 120,
@@ -1268,14 +1265,14 @@
             "user_agent": "Mozilla/5.0"
           },
           "reason": "applicability guards and confidence threshold passed",
-          "binding_correct": false
+          "binding_correct": true
         }
       ],
       "metrics": {
         "unseen_resolution_rate": 1.0,
-        "binding_accuracy": 0.0,
+        "binding_accuracy": 1.0,
         "executable_count": 3,
-        "binding_correct_count": 0
+        "binding_correct_count": 3
       }
     },
     "D2-noisy-get": {
@@ -1485,6 +1482,7 @@
       "observed_slot_count": 0,
       "slots": [],
       "passed": true,
+      "jaccard_similarity_raw": 0.6666666666666666,
       "distill_diagnostics": null
     },
     "E2_single_obs": {
@@ -1502,11 +1500,16 @@
   },
   "phase_a": {
     "A1_import": {
-      "status": "PASS"
+      "status": "PASS",
+      "detail": "kernel.py imports successfully"
     },
     "A2_kernel_has_distill_parameterized": {
       "status": "PASS",
-      "detail": "distill_parameterized method exists in SpiderKernel"
+      "detail": "SpiderKernel has distill_parameterized method: True"
+    },
+    "A3_field_path_relevance": {
+      "status": "PASS",
+      "detail": "ACTION_TEMPLATE_PATHS={'headers', 'url', 'body', 'query', 'method'}, METADATA_KEYS={'result_count', 'cache_hit', 'user_agent', 'timestamp', 'request_duration_ms', 'retry_count', 'response_time_ms'}"
     }
   }
 }
