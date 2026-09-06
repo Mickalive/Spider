@@ -1,17 +1,28 @@
 {
   "experiment_id": "EXP-PRODUCT-34015741916",
   "lane": "product",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-PARAM-INHERIT"],
+  "question": "Do the field-path relevance noise filter, two-part structure-similarity check, and double-prefix detection — validated in isolation in EXP-PRODUCT-34003641840 — transfer correctly when ported into src/spider/kernel.py, such that all 10 conditions pass with correct prereg training data (B5 static A,A,A; D3 static quantity 1,1,1), the C2 double-prefix bug is fixed, D2 documents the query-string limitation honestly, and the result is validated end-to-end in the kernel?",
+  "hypothesis": "Porting distill_parameterized() with field-path relevance (allowlist: method, url, body, headers, query; exclude metadata), two-part structure-similarity (Jaccard>=0.75 + constant-value anchor), double-prefix detection for suffix-empty templates, and strict binding verification into src/spider/kernel.py will produce identical slot counts and binding correctness as the isolated implementation in run_experiment.py for all 10 conditions, when using correct prereg training data (B5: static A,A,A; D3: static quantity 1,1,1).",
+  "falsifier": "ANY of: (1) B1 slot_count != 1 or binding_correct fails (regression broken in kernel); (2) B4 slot_count != 1 or binding_correct fails; (3) D1 slot_count != 3 or metadata not excluded (noise filter broken in kernel); (4) E1 slot_count != 0 (hallucination persists in kernel); (5) C2 produces double-prefix (bug not fixed in kernel); (6) B5 slot_count != 1 with correct static training data (prereg violation not fixed); (7) D3 slot_count != 1 with correct static training data (prereg violation not fixed); (8) any previously-passing condition regresses vs EXP-PRODUCT-34003641840.",
+  "baselines": [
+    "B1 (single-path url): slot_count=1, all 5 unseen bindings correct — anchors base algorithm fidelity in kernel",
+    "B4 (non-identifier URL values): slot_count=1, all 3 unseen bindings correct — anchors prefix/suffix template handling in kernel",
+    "E2 (single observation null control): slot_count=0 — anchors minimum-data requirement in kernel"
+  ],
+  "positive_control": "B1 passes with slot_count=1 and all 5 binding_correct=true under strict content verification in the kernel. This verifies the ported distill_parameterized algorithm is intact.",
+  "null_control": "E2 (single observation) produces slot_count=0. E1 (unrelated observations) produces slot_count=0. Both verify the kernel does not hallucinate parameters.",
+  "measurement_validity": [
+    "Deterministic synthetic test data — no randomness in test conditions",
+    "Same observation data as EXP-PRODUCT-34003641840 — direct comparability",
+    "Correct prereg training data: B5 uses static A,A,A (not varying A,B,C), D3 uses static quantity 1,1,1 (not varying 1,2,3)",
+    "Strict binding_correct verification: bound_action content compared against expected unseen values",
+    "Kernel tested in isolated test mode — no external dependencies, no browser, no network",
+    "Double-prefix detection tested with true unseen full values (e.g., user-4 not just 4)"
+  ],
+  "decision_rule": "KERNEL-INTEGRATION-SURVIVES if ALL of: (1) B1 slot_count=1 AND all 5 binding_correct=true; (2) B4 slot_count=1 AND all 3 binding_correct=true; (3) D1 slot_count=3 with slots ⊆ {customer, url, x_request_id}; (4) E1 slot_count=0; (5) C1 slot_count=1 AND all 3 binding_correct=true; (6) C2 slot_count=1 AND all 3 binding_correct=true with no double-prefix; (7) E2 slot_count=0; (8) B5 slot_count=1 with correct static A,A,A training; (9) D3 slot_count=1 with correct static 1,1,1 training; (10) no condition regresses vs EXP-PRODUCT-34003641840. KERNEL-INTEGRATION-FALSIFIED if any condition fails. MEASUREMENT_INVALID if kernel cannot execute in test mode.",
+  "product_consequence_positive": "Validates that parameterized induction transfers from isolated POC to production kernel code path. C-PARAM-INHERIT advances to kernel-validated level. Enables next gate: real-browser observation testing. Product can expose distill_parameterized as a kernel capability.",
+  "product_consequence_negative": "If the ported code fails conditions that passed in isolation, the kernel integration introduces breakage (different data flow, interface mismatch, or model incompatibility). Diagnosis of which condition fails identifies the exact integration gap. C-PARAM-INHERIT remains at isolated-POC level. Product cannot expose parameterized induction.",
+  "estimated_cost": "Very low: port ~150-200 lines of validated algorithm into kernel.py, run 10 existing test conditions, no browser/network/model calls. Reuses all observation data from EXP-PRODUCT-34003641840.",
+  "expected_information_gain": "High: This is the minimum test that determines whether algorithmic gains transfer to the production code path. A positive result is a prerequisite for product promotion. A negative result identifies the exact integration gap. The experiment changes the product decision from 'algorithm validated in isolation' to 'kernel integration validated' or 'integration broken'."
 }
