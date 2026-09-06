@@ -1,0 +1,29 @@
+{
+  "experiment_id": "EXP-FRONTIER-34061241004",
+  "execution_timestamp": null,
+  "analyzer_script": "analyze.py",
+  "script_hashes": {
+    "prereg.md": "d0a9a98fbe5a0946434a28bc1e9e3d2f49ece0cccfb002a918371bd836b711bc",
+    "spec.json": "270de16bc8a851fdcb4cfd7c230ef0e3c4f50847204dfc09765197018c6d06e2",
+    "request.json": "c307fca8608e2b9c1f7d246c67dfcbe0840173ae920aca112319e4ecede89c7f",
+    "freeze.json": "50b7d14c1804cd2c951319a78f730c476014570955d0fa16c7505ce6a8c10803",
+    "result.json": "a92d5573fdfd8407ca78d6308c3a9161eabcc51c21b3a2be95fae20e6c6c0f55",
+    "raw_tables.json": "bde941dd4b4adaaae6b96600c5ca12793bf7ca82cb0950d529a07790a3725354",
+    "frequency_baselines.json": "4719f5aa3366e6df68b918085d0d3677538be5abafad0974ae6a3e1c93da6073"
+  },
+  "result_hash": "a92d5573fdfd8407ca78d6308c3a9161eabcc51c21b3a2be95fae20e6c6c0f55",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "claim": "C-WEB-DYNAMICS",
+  "lane": "frontier",
+  "environment": {
+    "python_version": "3.12.14",
+    "numpy_version": "2.5.3",
+    "scipy_version": "unknown"
+  },
+  "frozen_inputs": {
+    "prereg_hash": "d0a9a98fbe5a0946434a28bc1e9e3d2f49ece0cccfb002a918371bd836b711bc",
+    "request_hash": "c307fca8608e2b9c1f7d246c67dfcbe0840173ae920aca112319e4ecede89c7f",
+    "spec_hash": "270de16bc8a851fdcb4cfd7c230ef0e3c4f50847204dfc09765197018c6d06e2"
+  }
+}

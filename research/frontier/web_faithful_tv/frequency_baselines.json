@@ -1,0 +1,38 @@
+[
+  {
+    "func_seed": 42,
+    "func_name": "rotation",
+    "marginal_non_uniformity": 0.38850000000000007,
+    "tv_marginal_vs_action": {
+      "click": 0.5860000000000001,
+      "fill": 0.5227755102040816,
+      "submit": 0.5741016949152542,
+      "navigate": 0.5792280701754386
+    },
+    "mean_tv_marginal_vs_action": 0.5655263188236936
+  },
+  {
+    "func_seed": 43,
+    "func_name": "scaling",
+    "marginal_non_uniformity": 0.385,
+    "tv_marginal_vs_action": {
+      "click": 0.551297709923664,
+      "fill": 0.6155966386554621,
+      "submit": 0.574755905511811,
+      "navigate": 0.6100000000000001
+    },
+    "mean_tv_marginal_vs_action": 0.5879125635227342
+  },
+  {
+    "func_seed": 44,
+    "func_name": "translation",
+    "marginal_non_uniformity": 0.3865,
+    "tv_marginal_vs_action": {
+      "click": 0.610954954954955,
+      "fill": 0.6173043478260869,
+      "submit": 0.566529411764706,
+      "navigate": 0.5277681159420291
+    },
+    "mean_tv_marginal_vs_action": 0.5806392076219442
+  }
+]

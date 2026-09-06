@@ -1,0 +1,210 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-34061241004",
+  "lane": "frontier",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "aggregate": {
+      "spearman_rho_tv": 1.0,
+      "spearman_p_one_sided_tv": 0.0,
+      "tv_max_means_by_lambda": {
+        "0.0": 0.2808676340302173,
+        "0.1": 0.3569247332172655,
+        "0.2": 0.4286123180929572,
+        "0.3": 0.4985463546028541,
+        "0.4": 0.556298419149547,
+        "0.5": 0.620770177010428,
+        "0.7": 0.7260315471918318,
+        "1.0": 0.8490228038936048
+      },
+      "cohens_d_lambda0_vs_1": 20.29755780248794
+    },
+    "per_function": {
+      "42": {
+        "func_name": "rotation",
+        "spearman_rho": 1.0,
+        "spearman_p_one_sided": 0.0,
+        "tv_max_means_by_lambda": {
+          "0.0": 0.27806011966448174,
+          "0.1": 0.3609646881406948,
+          "0.2": 0.4283036586311841,
+          "0.3": 0.504693413702212,
+          "0.4": 0.570862151312326,
+          "0.5": 0.628767949710687,
+          "0.7": 0.7234780328091657,
+          "1.0": 0.8431243613106245
+        },
+        "monotonic": true
+      },
+      "43": {
+        "func_name": "scaling",
+        "spearman_rho": 1.0,
+        "spearman_p_one_sided": 0.0,
+        "tv_max_means_by_lambda": {
+          "0.0": 0.2875000706449088,
+          "0.1": 0.35192856377346093,
+          "0.2": 0.427389898926093,
+          "0.3": 0.494615227363728,
+          "0.4": 0.5469660133396995,
+          "0.5": 0.6241245795314269,
+          "0.7": 0.7373292117668686,
+          "1.0": 0.8562203052335983
+        },
+        "monotonic": true
+      },
+      "44": {
+        "func_name": "translation",
+        "spearman_rho": 1.0,
+        "spearman_p_one_sided": 0.0,
+        "tv_max_means_by_lambda": {
+          "0.0": 0.2770427117812614,
+          "0.1": 0.3578809477376407,
+          "0.2": 0.4301433967215943,
+          "0.3": 0.49633042274262246,
+          "0.4": 0.5510670927966156,
+          "0.5": 0.6094180017891704,
+          "0.7": 0.7172873969994604,
+          "1.0": 0.847723745136592
+        },
+        "monotonic": true
+      }
+    },
+    "tv_means_by_lambda": {
+      "0.0": 0.2808676340302173,
+      "0.1": 0.3569247332172655,
+      "0.2": 0.4286123180929572,
+      "0.3": 0.4985463546028541,
+      "0.4": 0.556298419149547,
+      "0.5": 0.620770177010428,
+      "0.7": 0.7260315471918318,
+      "1.0": 0.8490228038936048
+    },
+    "effect_sizes_cohens_d": {
+      "42": 20.762527747802398,
+      "43": 21.952816017540915,
+      "44": 17.8092004539765,
+      "aggregate": 20.29755780248794
+    },
+    "cv_at_lambda_0": {
+      "42": 0.10822778199318747,
+      "43": 0.1126534085596913,
+      "44": 0.14118175358215612
+    },
+    "uniform_mixture_baseline": {
+      "tv_at_clean": 0.697,
+      "tv_at_max_noise_range": [
+        0.3156,
+        0.4745
+      ],
+      "tv_at_max_noise_mean": 0.3816
+    },
+    "comparison_wf_vs_um": {
+      "wf_tv_at_lambda1": 0.8490228038936048,
+      "um_analytical_at_lambda1": [
+        0.7667,
+        0.75,
+        0.5333
+      ],
+      "wf_per_function_at_1": {
+        "42": 0.8431243613106245,
+        "43": 0.8562203052335983,
+        "44": 0.847723745136592
+      },
+      "paired_t_statistic": 2.213238642190179,
+      "paired_t_p_one_sided": 0.9213308563152282,
+      "wf_not_lower_than_um": true
+    }
+  },
+  "controls": {
+    "positive_control": {
+      "description": "TV_max >= 0.1 at lambda=1 across all 3 functions",
+      "pass": true,
+      "per_function": {
+        "42": {
+          "pass": true,
+          "tv_at_lambda1": 0.8431243613106245
+        },
+        "43": {
+          "pass": true,
+          "tv_at_lambda1": 0.8562203052335983
+        },
+        "44": {
+          "pass": true,
+          "tv_at_lambda1": 0.847723745136592
+        }
+      }
+    },
+    "null_control": {
+      "description": "TV_max not significantly > 0 at lambda=0 (permutation test p > 0.05)",
+      "pass": true,
+      "mean_perm_p": 0.456467
+    },
+    "spearman_test": {
+      "description": "Aggregate Spearman rho >= 0.65 with p < 0.05 one-sided",
+      "pass": true,
+      "rho": 1.0,
+      "p_one_sided": 0.0
+    },
+    "function_invariance": {
+      "description": "No significant function x lambda interaction (two-way ANOVA p > 0.05)",
+      "pass": true,
+      "interaction_p": 0.861861
+    },
+    "wf_vs_um_comparison": {
+      "description": "Web-faithful TV at lambda=1 is not significantly LOWER than uniform-mixture",
+      "pass": true,
+      "paired_t_p_one_sided": 0.9213308563152282
+    },
+    "no_pipeline_errors": {
+      "description": "No pipeline errors during execution",
+      "pass": true
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/frontier/web_faithful_tv/analyze.py",
+      "role": "code"
+    },
+    {
+      "path": "research/frontier/web_faithful_tv/raw_tables.json",
+      "role": "raw"
+    },
+    {
+      "path": "research/frontier/web_faithful_tv/frequency_baselines.json",
+      "role": "derived"
+    }
+  ],
+  "observations": [
+    "Overall decision: SURVIVES_CURRENT_TEST",
+    "Aggregate Spearman rho(TV_max, lambda)=1.0000, p_one_sided=0.000000",
+    "Positive control (TV>=0.1 at lambda=1): PASS",
+    "Null control (permutation p>0.05 at lambda=0): PASS",
+    "Function invariance (ANOVA interaction): PASS",
+    "Web-faithful vs uniform-mixture: PASS (p=0.921331)",
+    "Aggregate Cohen's d (lambda=0 vs 1): 20.2976",
+    "Frequency baseline mean TV (marginal vs action-conditional): 0.5780",
+    "Function 42 (rotation): Spearman rho=1.0000, p_one_sided=0.000000, monotonic=True",
+    "Function 43 (scaling): Spearman rho=1.0000, p_one_sided=0.000000, monotonic=True",
+    "Function 44 (translation): Spearman rho=1.0000, p_one_sided=0.000000, monotonic=True"
+  ],
+  "validity_notes": [
+    "500 transitions per cell with ~125 per action; Monte Carlo SE ~0.04",
+    "10 replications per cell enable variance estimation",
+    "8 lambda levels provide degradation curve resolution",
+    "3 independent continuous function families (rotation, scaling, translation)",
+    "Frozen random seed (seed=42) for reproducibility",
+    "No target leakage: TV computed from empirical action-conditional distributions",
+    "20x20 grid binning for TV on continuous 2D state space",
+    "Heteroscedastic Gaussian noise (state-dependent variance)",
+    "Permutation tests at lambda=0 and lambda=1 control false positive/negative rates",
+    "Comparison with uniform-mixture baseline uses analytical TV from prior experiment",
+    "ANOVA interaction may be significant when functions have intentionally different TV ceilings"
+  ],
+  "unresolved": [
+    "Whether real Web transitions exhibit action-dependent structure suitable for TV detection",
+    "Whether TV remains robust under combined noise models (this experiment tests each noise source once)",
+    "Whether 2D continuous state generalizes to high-dimensional Web state spaces",
+    "Whether frequency baseline P(S_{t+1}) confounds conditional TV in continuous state spaces"
+  ]
+}
