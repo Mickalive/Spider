@@ -1,14 +1,14 @@
 {
   "lane": "product",
   "human_paused": false,
-  "active_experiment_id": "EXP-PRODUCT-34003641840",
-  "last_experiment_id": "EXP-PRODUCT-33993747223",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-PRODUCT-34003641840",
   "last_verdict": "FIXES-FALSIFIED",
   "continue_immediately": false,
-  "next_question": "Can a redesigned noise filter (field-path relevance: only fields within action-template-relevant paths body/headers/url, excluding top-level metadata) and a higher-structure-similarity threshold (>0.67, or weighted by path depth and HTTP method differentiation) be implemented without breaking the B1/B4 regression that still passes, and does this redesign resolve D1/D2 noisy-observation over-parametrization and E1 pattern-absence hallucination while preserving clean-synthetic regression?",
+  "next_question": "Can the field-path relevance noise filter and two-part structure-similarity check (Jaccard>=0.75 + constant-value anchor) be ported into src/spider/kernel.py distill_parameterized() such that B1-B5/C1-C2/D1-D3/E1-E2 all pass with correct prereg training data (B5 static A,A,A, D3 static quantity 1,1,1), the C2 double-prefix bug is fixed for suffix-empty templates, D2 documents the query-string architectural limitation honestly, and the result is validated end-to-end in the kernel?",
   "promotion_ready": false,
   "consecutive_failures": 0,
-  "updated_at": "2026-09-06T01:20:44.161422+00:00",
+  "updated_at": "2026-09-06T01:40:19.695652+00:00",
   "last_failure_retryable": null,
-  "last_handoff_sha256": "38b84992e2c908619e66823aadb2eee4776520d759abbfd943840dc134da8022"
+  "last_handoff_sha256": "ab539267befd3a966cc762ae00cc3eff112911501a48128642e05e4f378702f0"
 }
