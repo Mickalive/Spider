@@ -101,6 +101,31 @@
         "handoff.json": "60114d687d01d0e194c2ced91fe6f883ffad4f3e9c9dee5b5e9019c799a0c433"
       }
     },
+    "EXP-FRONTIER-34029326102": {
+      "lane": "frontier",
+      "request_id": "e28e889380827ad8a27445f8",
+      "created_at": "2026-09-06T11:07:35.454892+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Does TV distance maintain its ability to detect action-dependent dynamical structure when synthetic Web transitions include realistic noise mechanisms (action-dependent heteroscedasticity, non-stationarity, state-dependent stochasticity), or does the signal degrade below detection threshold under realistic noise, rendering all prior clean-DGP validation insufficient for product deployment?",
+      "audit_status": "REVISE",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/frontier",
+      "hashes": {
+        "request.json": "c41a142a4c8e69b271678b4c32800520e0cb5293a1f1bccd2e9e4da1f0a63ac6",
+        "spec.json": "265b36230072f6b6cfc61a7d33d242bee90d054a55251a3408781f787696047c",
+        "prereg.md": "e2c9bba36f073f21179f59737ebf75fdd11099d37807b69ac83b5456c7ccd9f8",
+        "freeze.json": "09a8ede961ab069ea8ec0526bfe811a8e60289f20c5c3968448e67eb66258a5d",
+        "result.json": "85b14b72a9938f1070df0ac9f60b54d014fce4638061e82b76257fc5c75ff305",
+        "report.md": "66e2f88480c369cee1bbaf018de5afb129fb23e34e94d8a6b8be1c757188d42f",
+        "provenance.json": "95b5646b68c11844c72ef11ee8a608526c488160ac4b3ec54b8d1d2022dee4c4",
+        "audit.json": "259f696d4b0e984d597a7fa6c48e86867034285dfa13acc1c170d78fdd689c94",
+        "verdict.json": "19465d1e92d906dd8cd33e239cd18876f2660558f5e404061da27c54a62eec46",
+        "handoff.json": "f7d2a875c7227e81f12fe501a3b16f34f6b5145138fbc14c29ce44b7ab4fc244"
+      }
+    },
     "EXP-GRAPH-33528827169": {
       "lane": "graph",
       "request_id": "3e0d81e7790f2f2b7bd8665e",

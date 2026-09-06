@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-34029326102",
+  "execution_timestamp": "2026-09-06T19:24:23.953441+00:00",
+  "analyzer_script": "research/experiments/EXP-FRONTIER-34029326102/analyze.py",
+  "script_hashes": {
+    "prereg.md": "e2c9bba36f073f21179f59737ebf75fdd11099d37807b69ac83b5456c7ccd9f8",
+    "spec.json": "265b36230072f6b6cfc61a7d33d242bee90d054a55251a3408781f787696047c",
+    "request.json": "c41a142a4c8e69b271678b4c32800520e0cb5293a1f1bccd2e9e4da1f0a63ac6",
+    "freeze.json": "09a8ede961ab069ea8ec0526bfe811a8e60289f20c5c3968448e67eb66258a5d"
+  },
+  "output_hashes": {
+    "result.json": "85b14b72a9938f1070df0ac9f60b54d014fce4638061e82b76257fc5c75ff305",
+    "raw_tables.json": "a0db3166cbc92b78c2dcedc36c6e7442e1ba1e73dcda8d9a1cdc15c7310964c0",
+    "report.md": "66e2f88480c369cee1bbaf018de5afb129fb23e34e94d8a6b8be1c757188d42f"
+  },
+  "result_hash": "85b14b72a9938f1070df0ac9f60b54d014fce4638061e82b76257fc5c75ff305",
+  "report_hash": "66e2f88480c369cee1bbaf018de5afb129fb23e34e94d8a6b8be1c757188d42f",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "claim": "C-WEB-DYNAMICS",
+  "lane": "frontier",
+  "git_sha": "ad8dfd6784a29355ec067694e05e53dbd25009fb",
+  "git_branch": "lab2/frontier",
+  "environment": {
+    "python_version": "3.12.14",
+    "numpy_version": "2.5.3",
+    "scipy_version": "unknown"
+  },
+  "frozen_inputs": {
+    "prereg.md": "e2c9bba36f073f21179f59737ebf75fdd11099d37807b69ac83b5456c7ccd9f8",
+    "spec.json": "265b36230072f6b6cfc61a7d33d242bee90d054a55251a3408781f787696047c",
+    "request.json": "c41a142a4c8e69b271678b4c32800520e0cb5293a1f1bccd2e9e4da1f0a63ac6",
+    "freeze.json": "09a8ede961ab069ea8ec0526bfe811a8e60289f20c5c3968448e67eb66258a5d"
+  },
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-34029326102/result.json",
+    "research/experiments/EXP-FRONTIER-34029326102/raw_tables.json",
+    "research/experiments/EXP-FRONTIER-34029326102/report.md",
+    "research/experiments/EXP-FRONTIER-33932275169/handoff.json"
+  ]
+}
