@@ -1,17 +1,30 @@
 {
   "experiment_id": "EXP-PHYSICS-34038570933",
   "lane": "physics",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-WEB-DYNAMICS"],
+  "question": "Can pointwise mutual information (PMI) between actions and next-states, conditioned on current state, detect action-conditioned structure on live Web pages that point-prediction accuracy metrics fail to detect due to sparse state spaces and self-loop contamination?",
+  "hypothesis": "PMI between actions and next-states (conditioned on current state) is positive and significantly exceeds the shuffled-action-label null on live Web transitions, especially when self-loop transitions are excluded. This demonstrates that action-conditioned structure exists in live Web data even though predictive accuracy metrics (SA vs AF) show SA < AF due to sparse memorization and self-loop contamination. Information-theoretic measures detect distributional structure that point-prediction classifiers cannot exploit.",
+  "falsifier": "PMI is not significantly > 0 on live Web transitions after Bonferroni correction for4 primary comparisons (2 sites x 2 conditions: all/non-self), OR PMI does not significantly exceed shuffled-action PMI, OR PMI is lower on non-self-loop transitions than on all transitions, OR the synthetic positive control fails (PMI < 1.0 bit on fully action-determined synthetic data).",
+  "baselines": [
+    "Shuffled-action PMI: action labels permuted within trajectories; PMI should be ~0 when action labels carry no information",
+    "Marginal action entropy H(A): upper bound on how much action identity alone contributes; PMI cannot exceed H(A)",
+    "Point-prediction accuracy comparison: SA accuracy, AF accuracy, diff_SA_vs_AF from parent experiment (EXP-PHYSICS-33965269281) for qualitative comparison of what accuracy vs PMI detect"
+  ],
+  "positive_control": "Synthetic data with lambda=1.0 (actions fully determine next-state): PMI must be >= 1.0 bit. With 10 states and 4 permutation actions, the expected PMI is log2(10) - H(S') which is > 1.0 bit when actions are deterministic. This verifies the PMI computation detects known structure.",
+  "null_control": "Shuffled action labels on live Web transitions: PMI must not be significantly > 0 (permutation test p > 0.05). This verifies the PMI computation does not detect structure when action labels carry no information.",
+  "measurement_validity": [
+    "Raw transition data loaded from parent experiment files (raw_live_wikipedia.json, raw_live_python_docs.json, raw_positive.json, raw_null.json) with SHA-256 integrity verified",
+    "State representation uses URL as the state identifier for PMI computation (consistent with parent's state discretization via BrowserState.to_key())",
+    "Laplace smoothing (alpha=1.0) applied to marginal probability estimates to avoid log(0) on sparse state spaces; joint probabilities use raw counts",
+    "Self-loop transitions identified as those where state_before.url == state_after.url; excluded from non-self-loop analysis",
+    "Trajectory-grouped permutation null: action labels shuffled within trajectories (not across) to preserve trajectory structure; 1000 permutations per test",
+    "Bonferroni correction for 4 primary comparisons (2 live sites x 2 conditions: all transitions, non-self-only)",
+    "Synthetic positive control uses parent's raw_positive.json with known deterministic transitions (lambda=1.0)",
+    "Deterministic random seed (seed=42) for all permutation tests; PYTHONHASHSEED=0 set at execution start for reproducibility"
+  ],
+  "decision_rule": "SURVIVES_CURRENT_TEST if ALL of: (1) Mean PMI on live all-transitions > 0 with permutation p < 0.05 after Bonferroni x4 correction for both sites; (2) Mean PMI on live non-self-loop transitions > 0 with permutation p < 0.05 after Bonferroni x4 for both sites; (3) Mean PMI significantly > shuffled-action PMI (paired test p < 0.05); (4) Synthetic positive control PMI >= 1.0 bit; (5) Null control PMI not significantly > 0 (permutation p > 0.05); (6) No pipeline errors. FALSIFIED-IN-SETTING if ANY of: (1) PMI not > 0 on live data after correction; (2) PMI does not exceed shuffled baseline; (3) PMI on non-self-loop < PMI on all transitions; (4) Positive control fails; (5) Null control fails. MEASUREMENT_INVALID if pipeline errors, data loading failure, or fewer than 100 transitions per site.",
+  "product_consequence_positive": "Validates information-theoretic measures as a detection method for Web-dynamical structure. Demonstrates that action-conditioned structure exists even when point-prediction classifiers cannot exploit it. Justifies: (a) using PMI as a complementary metric to accuracy for evaluating action-conditioned mechanisms, (b) investigating why accuracy metrics fail (sparsity, memorization) while PMI succeeds (distributional), (c) designing PMI-guided exploration policies that leverage action-conditioned structure without requiring point-prediction generalization.",
+  "product_consequence_negative": "If PMI also fails to detect structure, the information-theoretic detection paradigm is not viable for these sites/representations. Physics lane should investigate: (a) whether richer state representations (visual, interaction history) are needed, (b) whether different site types (SPAs, form-heavy) have structure, (c) whether the tested sites genuinely lack action-conditioned dynamics. Does NOT falsify C-WEB-DYNAMICS entirely — only this specific detection method on these specific sites.",
+  "estimated_cost": "Very low: re-analysis of existing parent experiment data (raw_live_wikipedia.json, raw_live_python_docs.json, raw_positive.json, raw_null.json). No browser/network/model calls. Pure offline computation. ~1760 live transitions + 900 synthetic transitions. PMI computation is O(N) per dataset.",
+  "expected_information_gain": "High: This is the first test of information-theoretic detection of Web-dynamical structure, directly addressing the parent experiment's recommended next question. PMI operates on distributions rather than point predictions, naturally handles sparse state spaces, and tests a mathematically different object (mutual information vs classification accuracy). A positive result identifies a new detection paradigm; a negative result constrains the information-theoretic hypothesis. The experiment re-uses existing data at zero collection cost."
 }
