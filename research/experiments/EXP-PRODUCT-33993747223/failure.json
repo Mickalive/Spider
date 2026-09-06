@@ -1,9 +1,0 @@
-{
-  "stage": "director",
-  "category": "VALIDATION_FAILURE",
-  "message": "invalid claim update status: experimental",
-  "retryable": false,
-  "recorded_at": "2026-09-05T23:34:43.440663+00:00",
-  "github_run_id": "33998604320",
-  "github_run_attempt": "1"
-}

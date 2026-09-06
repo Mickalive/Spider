@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-33993747223",
+  "lane": "product",
+  "target_lane": "product",
+  "next_question": "Can a redesigned noise filter (field-path relevance: only fields within action-template-relevant paths body/headers/url, excluding top-level metadata) and a higher-structure-similarity threshold (>0.67, or weighted by path depth and HTTP method differentiation) be implemented without breaking the B1/B4 regression that still passes, and does this redesign resolve D1/D2 noisy-observation over-parametrization and E1 pattern-absence hallucination while preserving clean-synthetic regression?",
+  "why_next": "The three targeted fixes (double-prefix detection, noise-filter heuristic, Jaccard 0.3 structure-similarity) all fail to advance C-PARAM-INHERIT. However, the failures are mechanistically diagnosed: Fix B (noise filter) conflates value-pattern presence with signal relevance — genuine parameters without prefix/suffix (names, titles) are filtered while noise with structural patterns (timestamps) passes. Fix C (Jaccard 0.3) is too low for unrelated observations sharing generic leaf paths (method, url). Fix A partially works but fails when suffix is empty. B1/B4 still pass, confirming the base algorithm is sound for simple cases. The next experiment must redesign noise filtering using field-path relevance (action-template-aware) rather than value-pattern heuristics, raise the structure-similarity threshold or weight by path specificity, and handle suffix-empty double-prefix — while preserving B1/B4 regression. This is the minimum path to advancing C-PARAM-INHERIT.",
+  "carry_forward": {
+    "established": [
+      "Kernel integration is faithful on clean synthetic inputs: B1 (single-path slot=1) and B4 (non-identifier URLs slot=1) pass regression identically to parent EXP-PRODUCT-33974562602, confirming the base distill_parameterized() algorithm is sound for simple cases (evidence: raw_evidence.json B1 slot_count=1 5/5 EXECUTABLE 5/5 binding correct, B4 slot_count=1 3/3 EXECUTABLE 3/3 binding correct)",
+      "Literal mechanism replay still fails on all unseen multi-param combinations (5/5 EXPLORE) — parameterization remains necessary after fixes (evidence: raw_evidence.json baselines B_LITERAL fail_rate 1.0)",
+      "Single-observation null control (E2) correctly produces slot_count=0 — function requires at least 2 observations for induction (evidence: raw_evidence.json controls E2_single_obs slot_count=0)",
+      "Fix A (double-prefix detection in _bind) is PARTIALLY validated: succeeds when both prefix and suffix are non-empty (C1 https://site-d.com/hook correct, 3/3 EXECUTABLE binding correct) — detection logic prefix+param_value+suffix==param_value is correct for this case (evidence: raw_evidence.json C1-full-value-urls bound_action correct)",
+      "The three fixes are mechanistically diagnosed as independently flawed: Fix A works for suffix-non-empty but fails suffix-empty; Fix B conflates pattern presence with signal; Fix C threshold too low. Each fix can be refined independently without cross-dependency"
+    ],
+    "rejected": [
+      "Noise-filter heuristic len(common_prefix)>0 OR len(common_suffix)>0 — PROVABLY INSUFFICIENT: false-positive (timestamp passes: prefix 2026-09-01T10:0, suffix :00Z), false-negative (body.name filtered: Alice/Bob/Charlie empty prefix/suffix) (evidence: audit.json required_fixes ALGORITHM, raw_evidence.json D1 timestamp included, B2 body.name missing)",
+      "Structure-similarity Jaccard threshold 0.3 for unrelated observations — TOO LOW: E1 unrelated POST/GET/DELETE share generic leaf paths method/url giving Jaccard=0.667 > 0.3, so check does not trigger (evidence: raw_evidence.json controls E1 jaccard 0.667 slot_count 1)",
+      "Fix A double-prefix detection when suffix is empty — FAILS: C2 template user-${url} with param user-4 produces user-user-4 double prefix because _bind requires both prefix AND suffix non-empty (evidence: raw_evidence.json C2 bound_action user-user-4, audit.json recomputed full_value_C2_double_prefix=true)",
+      "Promotion to Product Core for distill_parameterized() — NOT AUTHORIZED: fixes fail regression and do not advance C-PARAM-INHERIT to realistic-synthetic robustness (evidence: audit.json claim_ceiling FIXES-FALSIFIED)",
+      "Producer binding_accuracy claims for C2 (1.0) and D1/D2 — INFLATED: harness measures binding_correct when status==EXECUTABLE without verifying bound_action content; strict audit recompute gives regression_binding_accuracy_strict=0.381, full_value_binding_accuracy_strict=0.5 (evidence: audit.json recomputed_metrics, required_fixes MEASUREMENT binding_correct harness bug)"
+    ],
+    "unknown": [
+      "Can field-path-relevance noise filtering (only consider fields within action-template-relevant paths: body.*, headers.*, url; ignore top-level metadata like timestamp, request_duration_ms, retry_count, user_agent) distinguish signal from noise without prefix/suffix heuristics? What is the false-positive rate when genuine parameters happen to be in non-template paths?",
+      "What structure-similarity threshold or metric correctly separates related observations (Jaccard 1.0 for same-intent) from unrelated observations (observed 0.667 for method/url overlap)? Options: threshold >0.67, weighted Jaccard (path depth, HTTP method), or value-diversity weighting",
+      "Should the double-prefix fix handle suffix-empty templates by checking prefix-only (if param starts with prefix, strip prefix and use suffix of template), or should the caller contract require supplying varying middle only?",
+      "D2 conflation of q and page into single url slot: the leaf-path model cannot split query-string parameters — does parameterization need URL parsing or value-level tokenization vs the current leaf-path model?",
+      "What is the correct binding correctness definition: should partial binding (url correct but body static as template literal) count as success? Producer used EXECUTABLE as proxy; audit strict requires all parameterized fields correct",
+      "How should varying preconditions (D3 session_id/auth_token) be handled — excluded from induction, intersected, or separate mechanism? This remains orthogonal to the noise-filter and structure-similarity issues",
+      "End-to-end product economics (tokens/browser work vs induction saving, confidence calibration, staleness) remain unmeasured — requires real-browser gate after algorithmic fixes"
+    ],
+    "do_not_assume": [
+      "Do not assume Fix A works universally — it fails when suffix is empty (C2 user-user-4 double prefix). The detection requires both prefix AND suffix non-empty in current implementation",
+      "Do not assume the noise-filter heuristic is salvageable without fundamental redesign — the criterion len(prefix)>0 OR len(suffix)>0 is provably insufficient for distinguishing signal from noise (both false positives and false negatives documented)",
+      "Do not assume B1/B4 passing means the algorithm is generally correct — B2/B3/B5 regress because body.name/title/user_id fields are filtered as noise. The algorithm works only for path-only or URL-value parameterization",
+      "Do not assume Jaccard over leaf paths is the right structure-similarity metric — the metric lacks specificity weighting for path depth, value diversity, and HTTP method differentiation",
+      "Do not assume the producer's binding_accuracy metrics are reliable — harness binding_correct bug inflates binding_correct when status==EXECUTABLE without checking bound_action content; audit strict recompute gives lower values",
+      "Do not assume the three fixes are independent in practice — Fix B (noise filter) causes regression B2/B3/B5 which interacts with the binding accuracy measurement, creating compound failures",
+      "Do not assume D2's slot_count=2 matching expected means D2 passes — the slots are wrong identity [cache_hit,url] instead of [q,page], and binding is incorrect",
+      "Do not assume real browser sessions will behave like these synthetic noise patterns — the noise-filter redesign needs testing with actual browser observation noise distributions"
+    ]
+  },
+  "dependencies": [
+    "src/spider/kernel.py distill_parameterized() — noise-filter redesign must use field-path relevance (action-template-aware) instead of value-pattern prefix/suffix heuristic",
+    "src/spider/kernel.py _bind() — must handle suffix-empty (or prefix-empty) templates for double-prefix detection",
+    "src/spider/kernel.py _extract_varying_values_multi() — structure-similarity threshold must be raised to >0.67 or metric must weight path specificity",
+    "Regression baseline B1/B4 must continue to pass after any redesign — these are the only conditions that still pass and anchor the base algorithm",
+    "Test harness binding_correct measurement must verify bound_action content against expected unseen values, not just status==EXECUTABLE"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-33993747223/spec.json hypothesis, falsifier, decision_rule FIXES-SURVIVE-REGRESSION vs FIXES-FALSIFIED",
+    "research/experiments/EXP-PRODUCT-33993747223/result.json metrics regression_pass=false, B2=1 vs 2, B3=2 vs 3, B5=1 vs 2, regression_binding_accuracy=0.6667, noisy_D1_slot_count=4 vs 3, null_control_E1_jaccard=0.667",
+    "research/experiments/EXP-PRODUCT-33993747223/result.json controls B_REGRESSION_SYNTHETIC FAIL, C1 PASS, C2 PASS (inflated), D1 FAIL, D2 FAIL, E1 FAIL, E2 PASS",
+    "research/experiments/EXP-PRODUCT-33993747223/audit.json claim_ceiling FIXES-FALSIFIED, required_fixes ALGORITHM Fix B/Fix C/Fix A, MEASUREMENT binding_correct harness bug, recomputed_metrics regression_binding_accuracy_strict=0.381 full_value_binding_accuracy_strict=0.5",
+    "research/experiments/EXP-PRODUCT-33993747223/raw_evidence.json B2 action_template body.name Alice static, D1 slots [customer,timestamp,url,x_request_id], D2 slots [cache_hit,url], C2 bound_action user-user-4, E1 jaccard 0.667",
+    "research/experiments/EXP-PRODUCT-33993747223/prereg.md 5.3 noise filter len(prefix)>0 OR len(suffix)>0, 5.4 Jaccard 0.3, 5.2 Fix A prefix+suffix both non-empty",
+    "research/experiments/EXP-PRODUCT-33974562602/handoff.json established kernel-integration-faithful, rejected full-value/noisy/E1, recommended three algorithmic fixes",
+    "src/spider/kernel.py sha256 76035599b1e6bf6af4205ad8d0b06bcd29ee2b9a4d42137f2cccf2c7c24b116e _bind 238-264 _extract_varying_values_multi 109-215"
+  ],
+  "recommended_action": "Redesign noise filtering using field-path relevance: only consider fields within action-template-relevant paths (body.*, headers.*, url), exclude top-level metadata (timestamp, request_duration_ms, retry_count, user_agent, response_time_ms, cache_hit, result_count). Raise structure-similarity threshold to >0.67 or switch to weighted Jaccard (path depth + HTTP method differentiation). Fix double-prefix detection for suffix-empty templates (check prefix-only when suffix is empty, or contract requires caller supply varying middle only). Fix harness binding_correct to verify bound_action content. Re-run B1/B4 regression (must still pass) plus all conditions B1-B5, C1-C2, D1-D2, E1. This stays in Product lane and is the minimum path to advancing C-PARAM-INHERIT."
+}
