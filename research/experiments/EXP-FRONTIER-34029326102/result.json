@@ -1,0 +1,401 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-34029326102",
+  "lane": "frontier",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "per_noise_model": {
+      "A": {
+        "spearman_rho_tv": -1.0,
+        "spearman_p_one_sided_tv": 1.0,
+        "spearman_rho_het": -1.0,
+        "tv_means_by_intensity": {
+          "0.0": 0.697031,
+          "0.25": 0.608125,
+          "0.5": 0.516001,
+          "0.75": 0.434263,
+          "1.0": 0.354635
+        },
+        "het_means_by_intensity": {
+          "0.0": 0.223921,
+          "0.25": 0.163458,
+          "0.5": 0.133089,
+          "0.75": 0.105273,
+          "1.0": 0.061872
+        },
+        "moderate_noise": {
+          "mean_p_value": 0.0,
+          "tv_at_05": 0.5160012825656797,
+          "significant": true
+        },
+        "high_noise": {
+          "tv_at_1": 0.3546354626624215,
+          "tv_at_0": 0.6970306099225,
+          "ratio_to_null": 0.5087803284591074,
+          "below_2x": true,
+          "mean_perm_p": 0.0
+        },
+        "permutation_tests": {
+          "0.0": {
+            "mean_p_value": 0.0,
+            "pass": false
+          },
+          "1.0": {
+            "mean_p_value": 0.0,
+            "pass": false
+          }
+        },
+        "anova": {
+          "design": "3 functions x 5 intensities x 10 reps = 150 observations",
+          "full_model": {
+            "intensity_effect": {
+              "F": 1588.8322,
+              "p_value": 0.0
+            },
+            "function_effect": {
+              "F": 1571.4973,
+              "p_value": 0.0
+            },
+            "interaction_effect": {
+              "F": 16.073,
+              "p_value": 0.0
+            },
+            "model_r_squared": 0.9862
+          },
+          "interaction_pass": false
+        },
+        "decision": "FALSIFIED-IN-SETTING"
+      },
+      "B": {
+        "spearman_rho_tv": -1.0,
+        "spearman_p_one_sided_tv": 1.0,
+        "spearman_rho_het": -1.0,
+        "tv_means_by_intensity": {
+          "0.0": 0.697031,
+          "0.25": 0.620857,
+          "0.5": 0.559324,
+          "0.75": 0.505622,
+          "1.0": 0.474543
+        },
+        "het_means_by_intensity": {
+          "0.0": 0.223921,
+          "0.25": 0.185477,
+          "0.5": 0.170239,
+          "0.75": 0.14925,
+          "1.0": 0.144609
+        },
+        "moderate_noise": {
+          "mean_p_value": 0.0,
+          "tv_at_05": 0.559324041899265,
+          "significant": true
+        },
+        "high_noise": {
+          "tv_at_1": 0.4745428491130641,
+          "tv_at_0": 0.6970306099225,
+          "ratio_to_null": 0.6808063266630809,
+          "below_2x": true,
+          "mean_perm_p": 0.0
+        },
+        "permutation_tests": {
+          "0.0": {
+            "mean_p_value": 0.0,
+            "pass": false
+          },
+          "1.0": {
+            "mean_p_value": 0.0,
+            "pass": false
+          }
+        },
+        "anova": {
+          "design": "3 functions x 5 intensities x 10 reps = 150 observations",
+          "full_model": {
+            "intensity_effect": {
+              "F": 1163.5731,
+              "p_value": 0.0
+            },
+            "function_effect": {
+              "F": 2927.2584,
+              "p_value": 0.0
+            },
+            "interaction_effect": {
+              "F": 142.1291,
+              "p_value": 0.0
+            },
+            "model_r_squared": 0.9885
+          },
+          "interaction_pass": false
+        },
+        "decision": "FALSIFIED-IN-SETTING"
+      },
+      "C": {
+        "spearman_rho_tv": -1.0,
+        "spearman_p_one_sided_tv": 1.0,
+        "spearman_rho_het": -0.9,
+        "tv_means_by_intensity": {
+          "0.0": 0.697031,
+          "0.25": 0.600935,
+          "0.5": 0.501279,
+          "0.75": 0.408644,
+          "1.0": 0.315637
+        },
+        "het_means_by_intensity": {
+          "0.0": 0.223921,
+          "0.25": 0.152734,
+          "0.5": 0.104647,
+          "0.75": 0.08998,
+          "1.0": 0.095924
+        },
+        "moderate_noise": {
+          "mean_p_value": 0.0,
+          "tv_at_05": 0.5012788054531285,
+          "significant": true
+        },
+        "high_noise": {
+          "tv_at_1": 0.3156368092629655,
+          "tv_at_0": 0.6970306099225,
+          "ratio_to_null": 0.45283062862628065,
+          "below_2x": true,
+          "mean_perm_p": 0.0
+        },
+        "permutation_tests": {
+          "0.0": {
+            "mean_p_value": 0.0,
+            "pass": false
+          },
+          "1.0": {
+            "mean_p_value": 0.0,
+            "pass": false
+          }
+        },
+        "anova": {
+          "design": "3 functions x 5 intensities x 10 reps = 150 observations",
+          "full_model": {
+            "intensity_effect": {
+              "F": 2413.9432,
+              "p_value": 0.0
+            },
+            "function_effect": {
+              "F": 776.1583,
+              "p_value": 0.0
+            },
+            "interaction_effect": {
+              "F": 68.5018,
+              "p_value": 0.0
+            },
+            "model_r_squared": 0.9886
+          },
+          "interaction_pass": false
+        },
+        "decision": "FALSIFIED-IN-SETTING"
+      }
+    },
+    "tv_means_by_intensity": {
+      "0.0": 0.697031,
+      "0.25": 0.609972,
+      "0.5": 0.525535,
+      "0.75": 0.44951,
+      "1.0": 0.381605
+    },
+    "het_means_by_intensity": {
+      "0.0": 0.223921,
+      "0.25": 0.167223,
+      "0.5": 0.135992,
+      "0.75": 0.114834,
+      "1.0": 0.100801
+    },
+    "effect_sizes_cohens_d": {
+      "A": 1.8990995395583123,
+      "B": 1.3852146131779006,
+      "C": 2.4025789563913325
+    },
+    "cv_at_noise_0": {
+      "A": 0.1424229485992803,
+      "B": 0.1424229485992803,
+      "C": 0.1424229485992803
+    },
+    "analytical_tv_at_lambda1": {
+      "42": 0.7667,
+      "43": 0.75,
+      "44": 0.5333
+    }
+  },
+  "controls": {
+    "positive_control": {
+      "description": "TV at noise_intensity=0 matches analytical TV within 10% for all functions",
+      "pass": true,
+      "per_noise_model": {
+        "A": {
+          "pass": true,
+          "per_function": {
+            "42": {
+              "threshold": 0.6133,
+              "mean_tv": 0.7748,
+              "all_above": true
+            },
+            "43": {
+              "threshold": 0.6,
+              "mean_tv": 0.7564,
+              "all_above": true
+            },
+            "44": {
+              "threshold": 0.4267,
+              "mean_tv": 0.5599,
+              "all_above": true
+            }
+          }
+        },
+        "B": {
+          "pass": true,
+          "per_function": {
+            "42": {
+              "threshold": 0.6133,
+              "mean_tv": 0.7748,
+              "all_above": true
+            },
+            "43": {
+              "threshold": 0.6,
+              "mean_tv": 0.7564,
+              "all_above": true
+            },
+            "44": {
+              "threshold": 0.4267,
+              "mean_tv": 0.5599,
+              "all_above": true
+            }
+          }
+        },
+        "C": {
+          "pass": true,
+          "per_function": {
+            "42": {
+              "threshold": 0.6133,
+              "mean_tv": 0.7748,
+              "all_above": true
+            },
+            "43": {
+              "threshold": 0.6,
+              "mean_tv": 0.7564,
+              "all_above": true
+            },
+            "44": {
+              "threshold": 0.4267,
+              "mean_tv": 0.5599,
+              "all_above": true
+            }
+          }
+        }
+      }
+    },
+    "null_control": {
+      "description": "TV at noise_intensity=1.0 not significantly above permutation null (p > 0.05)",
+      "pass": false,
+      "per_noise_model": {
+        "A": {
+          "pass": false,
+          "mean_perm_p": 0.0
+        },
+        "B": {
+          "pass": false,
+          "mean_perm_p": 0.0
+        },
+        "C": {
+          "pass": false,
+          "mean_perm_p": 0.0
+        }
+      }
+    },
+    "sensitivity_control": {
+      "description": "TV at noise_intensity=0.5 significantly above permutation null (p < 0.05)",
+      "pass": true,
+      "per_noise_model": {
+        "A": {
+          "pass": true
+        },
+        "B": {
+          "pass": true
+        },
+        "C": {
+          "pass": true
+        }
+      }
+    },
+    "monotonic_control": {
+      "description": "TV at each noise level <= TV at previous level (monotonic degradation)",
+      "pass": true,
+      "per_noise_model": {
+        "A": {
+          "pass": true
+        },
+        "B": {
+          "pass": true
+        },
+        "C": {
+          "pass": true
+        }
+      }
+    },
+    "function_invariance": {
+      "description": "No significant noise_model x function interaction (two-way ANOVA p > 0.05)",
+      "pass": false,
+      "per_noise_model": {
+        "A": {
+          "pass": false
+        },
+        "B": {
+          "pass": false
+        },
+        "C": {
+          "pass": false
+        }
+      }
+    },
+    "no_pipeline_errors": {
+      "description": "No pipeline errors during execution",
+      "pass": true
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/frontier/noise_robustness/analyze.py",
+      "role": "code"
+    },
+    {
+      "path": "research/frontier/noise_robustness/raw_tables.json",
+      "role": "raw"
+    }
+  ],
+  "observations": [
+    "Overall decision: FALSIFIED-IN-SETTING",
+    "Per-noise-model decisions: {'A': 'FALSIFIED-IN-SETTING', 'B': 'FALSIFIED-IN-SETTING', 'C': 'FALSIFIED-IN-SETTING'}",
+    "Model A: Spearman rho(TV,noise_intensity)=-1.0000, p_one_sided=1.000000",
+    "Model A: TV at noise=0.5 = 0.5160, permutation p = 0.000000",
+    "Model A: Monotonic degradation = True",
+    "Model A: Function invariance (ANOVA interaction) = False",
+    "Model B: Spearman rho(TV,noise_intensity)=-1.0000, p_one_sided=1.000000",
+    "Model B: TV at noise=0.5 = 0.5593, permutation p = 0.000000",
+    "Model B: Monotonic degradation = True",
+    "Model B: Function invariance (ANOVA interaction) = False",
+    "Model C: Spearman rho(TV,noise_intensity)=-1.0000, p_one_sided=1.000000",
+    "Model C: TV at noise=0.5 = 0.5013, permutation p = 0.000000",
+    "Model C: Monotonic degradation = True",
+    "Model C: Function invariance (ANOVA interaction) = False"
+  ],
+  "validity_notes": [
+    "1000 transitions per cell with ~250 per action; Monte Carlo SE ~0.03",
+    "10 replications per cell enable variance estimation",
+    "5 noise intensity levels provide degradation curve resolution",
+    "3 independent quadratic functions from EXP-FRONTIER-33932275169 ensure comparability",
+    "Frozen random seed (seed=42) for reproducibility",
+    "No target leakage: TV computed from empirical action-conditional distributions",
+    "Three orthogonal noise models test generality of degradation pattern",
+    "ANOVA interaction may be significant when functions have intentionally different noise sensitivity (expected signal, per parent handoff)",
+    "Permutation tests at noise=0.0, 0.5, and 1.0 control false positive/negative rates"
+  ],
+  "unresolved": [
+    "Whether real Web transitions exhibit noise patterns similar to the three synthetic models",
+    "Whether TV distance remains robust under combined noise models (this experiment tests each separately)",
+    "Whether the synthetic-to-real gap applies even with realistic noise",
+    "Optimal noise intensity calibration for product deployment thresholds"
+  ]
+}
