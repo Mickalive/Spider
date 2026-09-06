@@ -609,6 +609,31 @@
         "verdict.json": "eae423db32205d7dadbd6fbb557000fe3b7f2a7552894c75e5661404d0a280a7",
         "handoff.json": "ef4350875b7915635d892cc0b1d09761992f481a7bc1691a43e1afbb55712056"
       }
+    },
+    "EXP-RUNTIME-34015740602": {
+      "lane": "runtime",
+      "request_id": "5f22552b28107946244a0aa3",
+      "created_at": "2026-09-06T06:09:00.936040+00:00",
+      "claim_ids": [
+        "C-MEAS-VALID"
+      ],
+      "question": "Does the HTTP fingerprint substrate maintain discrimination > 0.5 on a production-like OAuth/OIDC middleware with realistic response variation (cache-Control, ETag, X-Request-Id, Set-Cookie, rate-limit headers) \u2014 and does the full vector (status + body + all headers) ever exceed B-BODY-ONLY when headers vary independently with auth state?",
+      "audit_status": "REVISE",
+      "decision": "CONSTRAINED \u2014 C-MEAS-VALID survives narrowly. All three mandatory decision criteria pass (full-vector discrimination 1.0 > 0.5, null FP 0.0% < 5%, valid vs expired Jaccard 0.328 < 0.5). However, the producer's claim ceiling is overgeneralized: claim extends only to Flask 3.1.3 + PyJWT 2.13.0 HS256 on localhost 127.0.0.1:18928 with 4 states returning distinct bodies, headers filtered (Date/Server/X-Request-Id excluded), Cache-Control no-store/no-cache, ETag W/body_sha, Set-Cookie session only for valid_token, jitter 50-150ms uniform, N=40 seed 44, Python 3.12.14. The exploratory H4 test (full vector > B-BODY-ONLY) is INCONCLUSIVE due to ceiling effect: with all 4 bodies distinct, discrimination is at 1.0 and headers cannot improve beyond perfect. Full vector = B-BODY-ONLY (1.0 = 1.0) reflects body dominance under distinct-body design, not proof headers are non-discriminative. The bootstrap CI [1.0, 1.0] is degenerate at ceiling (uninformative, not high-precision). ETag and Content-Length are body-correlated by construction. Only Cache-Control and Set-Cookie are state-varying independent headers; each achieves 0.5 discrimination alone but is redundant when bodies already separate.",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/runtime",
+      "hashes": {
+        "request.json": "603a862fdad3677be7895d680130f98f046d54e4effcdcc440ad9fc6b4c326f7",
+        "spec.json": "44d9fc2f7fb73ee01c23bf8c836417d4758db1858c08158ea9ab8b8738e015df",
+        "prereg.md": "d3f66c9f24367f214997db6f95af19231cdd376e086ec78edc67e4c04c7afc5a",
+        "freeze.json": "cc2808910282c3018f9853d7fd4943a738227d0409f173c2fc6e016f516fe61d",
+        "result.json": "66caa354f25031b9a3ab73fc1e557a0f97531d18257a91e89ac1d776161c09b0",
+        "report.md": "e233303c9abd552f6c9419392f4e28ac9936ef2d8d463e8b31fac5decf10fdf8",
+        "provenance.json": "491908d7cc804c5641cd5f986057b17a2a1722d03891a3c462def57a6f9b20a2",
+        "audit.json": "fe431d0854562553fbc0cef1f17cea17983fbdea81f4d101bb35abbd16093ea2",
+        "verdict.json": "fff813988930a446bae23b9fe952cfa6174bfa7c58f6cc33ebd015d1223848d3",
+        "handoff.json": "68538996eba323cb60ed47841f67217c0fe1b7d191c1c3686de0dd1ee9728c5e"
+      }
     }
   }
 }
