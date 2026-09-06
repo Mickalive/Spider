@@ -1,0 +1,17 @@
+{
+  "experiment_id": "EXP-PHYSICS-34038570933",
+  "lane": "physics",
+  "claim_ids": [],
+  "question": "",
+  "hypothesis": "",
+  "falsifier": "",
+  "baselines": [],
+  "positive_control": "",
+  "null_control": "",
+  "measurement_validity": [],
+  "decision_rule": "",
+  "product_consequence_positive": "",
+  "product_consequence_negative": "",
+  "estimated_cost": "",
+  "expected_information_gain": ""
+}

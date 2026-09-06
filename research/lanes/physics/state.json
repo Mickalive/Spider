@@ -1,14 +1,14 @@
 {
   "lane": "physics",
   "human_paused": false,
-  "active_experiment_id": null,
+  "active_experiment_id": "EXP-PHYSICS-34038570933",
   "last_experiment_id": "EXP-PHYSICS-33965269281",
   "last_verdict": "MEASUREMENT_INVALID",
   "continue_immediately": false,
   "next_question": "Can information-theoretic measures (pointwise mutual information between actions and next-states conditioned on current state, or trajectory-level entropy rates) detect action-conditioned structure on live Web pages, avoiding the sparse-state memorization and self-loop contamination that undermine point-prediction accuracy metrics?",
   "promotion_ready": false,
   "consecutive_failures": 0,
-  "updated_at": "2026-09-06T11:10:24.320968+00:00",
+  "updated_at": "2026-09-06T14:15:18.450789+00:00",
   "last_failure_retryable": null,
   "last_handoff_sha256": "7f0b538ceb9a666cda9654b153bd9c83001b13f195e0cb48ee80bcd161c2079e"
 }
