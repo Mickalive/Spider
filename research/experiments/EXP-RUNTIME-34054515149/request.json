@@ -1,0 +1,20 @@
+{
+  "base_sha": "3c8b18f71460ae9c94bd28167a6b56eb563ac1e5",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-06T19:19:18.243701+00:00",
+  "experiment_id": "EXP-RUNTIME-34054515149",
+  "inherited_last_verdict": "CONSTRAINED \u2014 C-MEAS-VALID survives narrowly. All three mandatory decision criteria pass (full-vector discrimination 1.0 > 0.5, null FP 0.0% < 5%, valid vs expired Jaccard 0.328 < 0.5). However, the producer's claim ceiling is overgeneralized: claim extends only to Flask 3.1.3 + PyJWT 2.13.0 HS256 on localhost 127.0.0.1:18928 with 4 states returning distinct bodies, headers filtered (Date/Server/X-Request-Id excluded), Cache-Control no-store/no-cache, ETag W/body_sha, Set-Cookie session only for valid_token, jitter 50-150ms uniform, N=40 seed 44, Python 3.12.14. The exploratory H4 test (full vector > B-BODY-ONLY) is INCONCLUSIVE due to ceiling effect: with all 4 bodies distinct, discrimination is at 1.0 and headers cannot improve beyond perfect. Full vector = B-BODY-ONLY (1.0 = 1.0) reflects body dominance under distinct-body design, not proof headers are non-discriminative. The bootstrap CI [1.0, 1.0] is degenerate at ceiling (uninformative, not high-precision). ETag and Content-Length are body-correlated by construction. Only Cache-Control and Set-Cookie are state-varying independent headers; each achieves 0.5 discrimination alone but is redundant when bodies already separate.",
+  "inherited_next_question": "Does the HTTP fingerprint substrate's full vector exceed B-BODY-ONLY when bodies are NOT perfectly discriminative (e.g., identical error bodies for expired/invalid token states) but headers (Cache-Control, Set-Cookie) vary independently with auth state \u2014 the incremental header value test that was vacuous at ceiling 1.0 in this experiment?",
+  "lane": "runtime",
+  "origin_github_run_id": "34054515149",
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-34015740602",
+    "path": "research/experiments/EXP-RUNTIME-34015740602/handoff.json",
+    "sha256": "68538996eba323cb60ed47841f67217c0fe1b7d191c1c3686de0dd1ee9728c5e"
+  },
+  "reason": "pulse",
+  "request_hash": "462d3760831dd6034f2ee826d8114813ee360064c92c40bb9cc5fa7dc86673b5",
+  "request_id": "b8944cf14917e79019158adb",
+  "schema_version": 1
+}
