@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-33902315583",
+  "lane": "runtime",
+  "decision": "C-MEAS-VALID survives narrowly on real Flask/JWT middleware within tested scope. Full-vector discrimination 0.833 > 0.5, null FP 0.0% < 5%, valid vs expired discriminable Jaccard 0.3505 < 0.5. All three decision criteria pass. Full vector equals B-BODY-ONLY (0.833 = 0.833) — standard headers add no independent discriminating information; body is the dominant signal. Parent gaps V1-REAL-MIDDLEWARE-GAP and V2-SYNTHETIC-HEADER-TAUTOLOGY closed. Claim ceiling bounded to Flask 3.1.3 + PyJWT 2.13.0 HS256, localhost, 4 states, no synthetic headers, standard headers only, jitter 50-150ms, N=40.",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "EXPERIMENTAL",
+      "reason": "Survives on real Flask 3.1.3 + PyJWT 2.13.0 HS256 middleware with discrimination 0.833 > 0.5, null FP 0.0% < 5%, valid vs expired discriminable Jaccard 0.3505 < 0.5. Claim ceiling narrowly bounded: Flask/JWT localhost, 4 auth states, no synthetic headers, standard headers only (Content-Type, Content-Length, Connection), jitter 50-150ms, N=40 seed 44, Python 3.12.14. Does NOT establish viability on production OAuth/OIDC, CDN/caching, volatile headers, jitter >150ms, compressed encoding, or cross-Python-version reproducibility. Full vector = B-BODY-ONLY (body-only observation sufficient in this scenario)."
+    }
+  ],
+  "product_action": "No product code promotion. Product may use body-based auth drift observation on Flask/JWT servers within tested scope. Full vector adds no value over body-only in this scenario (0.833 = 0.833). Product must not assume viability on production OAuth/OIDC without further validation.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does the HTTP fingerprint substrate maintain discrimination on production OAuth/OIDC providers with additional response variation (cache-Control, ETag, request IDs, rate-limit headers, compressed encoding) — and does the full vector ever exceed B-BODY-ONLY when standard headers vary independently with auth state in production middleware?",
+  "reason": "Producer result COMPLETE SUPPORTS, audit PASS with producer_claim_supported=true. All metrics recomputed and match. Parent gaps V1-REAL-MIDDLEWARE-GAP and V2-SYNTHETIC-HEADER-TAUTOLOGY closed. Bootstrap CI degenerate [0.0, 1.0] but point estimate 0.833 passes threshold. Claim status remains EXPERIMENTAL (not SUPPORTED) because claim ceiling is narrow: Flask/JWT localhost only, not production OAuth/OIDC. Product action: no promotion (no Product-lane code in this experiment). Continue=false: next step requires new experiment design with production-like middleware, not immediate chaining.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-33902315583/result.json — COMPLETE SUPPORTS, full_vector_discrimination 0.8333, B-STATUS-ONLY 0.5, B-BODY-ONLY 0.8333, null_fp 0.0, drift_jaccards [0.3505,1.0], all 6 controls pass",
+    "research/experiments/EXP-RUNTIME-33902315583/audit.json — PASS producer_claim_supported=true, V1-REAL-MIDDLEWARE-VERIFIED, V2-SYNTHETIC-HEADER-TAUTOLOGY-CLOSED, V3-IDENTICAL-ERROR-BODY-CORRECT, V4-HEADERS-REDUNDANT, V5-NULL-CONTROL-JITTER-BOUNDED, V6-BOOTSTRAP-CI-DEGENERATE-WIDE, V7-REPR-VERSION-DEPENDENCE-CARRY, V8-SAMPLE-AND-TARGET-INTEGRITY, claim_ceiling bounded to Flask/JWT localhost",
+    "research/experiments/EXP-RUNTIME-33902315583/raw_observations.json — 40 entries, 3 distinct fingerprints, expired/invalid identical body_hash 16c3e6, no_auth d5eaf4, valid 9e10c5, headers only Server/Date/Content-Type/Content-Length/Connection, no X- prefix",
+    "research/experiments/EXP-RUNTIME-33902315583/spec.json — frozen claim C-MEAS-VALID, decision_rule, baselines B-STATUS/B-BODY/B-URL-HASH/B-RANDOM, measurement_validity Flask PyJWT HS256 4 states identical bodies no synthetic headers",
+    "research/experiments/EXP-RUNTIME-33902315583/provenance.json — flask 3.1.3, pyjwt 2.13.0, python 3.12.14, port 18927, jitter 0.05-0.15, synthetic_headers false",
+    "research/experiments/EXP-RUNTIME-33805283356/handoff.json — parent carry_forward with V1-REAL-MIDDLEWARE-GAP and V2-SYNTHETIC-HEADER-TAUTOLOGY rejected, recommended next closing both gaps",
+    "research/claims/registry.json — C-MEAS-VALID status EXPERIMENTAL owner_lanes runtime/physics"
+  ]
+}

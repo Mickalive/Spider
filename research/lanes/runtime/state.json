@@ -1,14 +1,14 @@
 {
   "lane": "runtime",
   "human_paused": false,
-  "active_experiment_id": "EXP-RUNTIME-33902315583",
+  "active_experiment_id": null,
   "last_experiment_id": "EXP-RUNTIME-33902315583",
-  "last_verdict": "C-MEAS-VALID SURVIVES on real Flask 3.1.3 + PyJWT 2.13.0 HS256 middleware. All three frozen decision rules pass: (1) full-vector discrimination 0.833 > 0.5; (2) null FP rate 0.0% < 5% under 50-150ms server jitter; (3) valid-vs-expired drift Jaccard 0.3505 < 0.5 (discriminable). Audit PASS with producer_claim_supported=true; all metrics recomputed match. Parent gaps V1-REAL-MIDDLEWARE-GAP and V2-SYNTHETIC-HEADER-TAUTOLOGY closed. Claim ceiling narrowed to Flask/JWT localhost with standard headers only; does not establish discrimination on production OAuth/OIDC, CDN, volatile headers, jitter >150ms, or cross-Python-version.",
+  "last_verdict": "C-MEAS-VALID survives narrowly on real Flask/JWT middleware within tested scope. Full-vector discrimination 0.833 > 0.5, null FP 0.0% < 5%, valid vs expired discriminable Jaccard 0.3505 < 0.5. All three decision criteria pass. Full vector equals B-BODY-ONLY (0.833 = 0.833) \u2014 standard headers add no independent discriminating information; body is the dominant signal. Parent gaps V1-REAL-MIDDLEWARE-GAP and V2-SYNTHETIC-HEADER-TAUTOLOGY closed. Claim ceiling bounded to Flask 3.1.3 + PyJWT 2.13.0 HS256, localhost, 4 states, no synthetic headers, standard headers only, jitter 50-150ms, N=40.",
   "continue_immediately": false,
-  "next_question": "On production OAuth/OIDC providers (e.g., Auth0, Google, GitHub) with additional response variation (cache-Control, ETag, request IDs, rate-limit headers, chunked encoding, compressed bodies), does the HTTP fingerprint substrate maintain discrimination >0.5, and does the full vector exceed B-BODY-ONLY when standard headers vary independently with auth state?",
+  "next_question": "Does the HTTP fingerprint substrate maintain discrimination on production OAuth/OIDC providers with additional response variation (cache-Control, ETag, request IDs, rate-limit headers, compressed encoding) \u2014 and does the full vector ever exceed B-BODY-ONLY when standard headers vary independently with auth state in production middleware?",
   "promotion_ready": false,
-  "consecutive_failures": 11,
-  "updated_at": "2026-09-05T23:26:35.783747+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "7d45cc9a983861e0411c5344dd83326e9aab1b190e9b08637e9b8ad8ebfb24b2"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-06T01:20:32.384500+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "ef4350875b7915635d892cc0b1d09761992f481a7bc1691a43e1afbb55712056"
 }
