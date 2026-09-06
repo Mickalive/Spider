@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-33945226776",
+  "lane": "intel",
+  "decision": "MIXED",
+  "claim_updates": [
+    {
+      "claim_id": "C-CROSSSITE",
+      "status": "HYPOTHESIS",
+      "reason": "Heuristic yield estimates (0.517-0.65 median) suggest WebArena 812-task corpus may support cross-site diversity, but method disagreement (Spearman rho -0.943 to 0.371) and Kruskal-Wallis p=0.999 mean estimates are non-discriminating priors, not measurements. C-CROSSSITE remains bounded to 2-site corpus until live Docker validation confirms actual fragment yield."
+    },
+    {
+      "claim_id": "C-LLM-INHERIT",
+      "status": "HYPOTHESIS",
+      "reason": "Heuristic analysis suggests WebArena pages may have sufficient element diversity (21-22 unique types for shopping/gitlab/shopping_admin) for LLM transfer, but all estimates are heuristic priors not measured from live DOM. Method 1 (element-count, the only method modeling viewport and pruning) gives shopping yield 0.365, contradicting the aggregated 0.65. C-LLM-INHERIT remains bounded to 2-site corpus pending live validation."
+    },
+    {
+      "claim_id": "C-PRODUCT-ECON",
+      "status": "HYPOTHESIS",
+      "reason": "Estimated transformation cost (324 LOC, 0 API calls) is plausible but not measured on live integration. Null control failed (wikipedia yield 0.517 > 0.40 threshold) and positive control was weakened (diversity 21 < prereg >30). No product decision can be made on heuristic priors with method disagreement."
+    }
+  ],
+  "product_action": "NO_ACTION",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can WebArena Docker be deployed for 2-3 tasks (one shopping, one gitlab) to measure actual fragment yield, truncation at 8192/1920, viewport filtering, and IGNORED_ACTREE_PROPERTIES pruning, resolving whether heuristic estimates match live DOM extraction?",
+  "reason": "Aggregated median yield >50% for all 6 site types is inflated by degenerate Method 2 (char-length, yields 1.0 for 5/6 sites). Method 1 (element-count, modeling viewport+pruning) gives shopping 0.365, reddit 0.45, gitlab 0.484 — all below 50%. Method agreement fails (Spearman rho -0.943 to 0.371). Kruskal-Wallis p=0.999 shows no discriminating power across site types. Null control fails (wikipedia 0.517 > 0.40). Positive control weakened (diversity 21 < prereg >30). Auditor ceiling correctly bounds this to 'heuristic exploratory triage only'. The MIXED verdict reflects genuine uncertainty: heuristic priors suggest WebArena may be suitable but cannot confirm without live Docker measurement. The bounded negative result from Method 1 (shopping yield 0.365) is a material signal that dense product pages may lose >60% of fragments to truncation+viewport+pruning, but this requires live validation before any product decision.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-33945226776/result.json metrics.estimated_fragment_yield_by_site_type, metrics.method_agreement, metrics.kruskal_wallis",
+    "research/experiments/EXP-INTEL-33945226776/audit.json claim_ceiling, validity_findings, baseline_findings, recomputed_metrics.method1_only_threshold",
+    "research/experiments/EXP-INTEL-33945226776/analysis_output.json method1_element_count.shopping.weighted_median_yield 0.365, method_agreement, kruskal_wallis p=0.9988",
+    "research/experiments/EXP-INTEL-33945226776/spec.json decision_rule thresholds",
+    "research/experiments/EXP-INTEL-33945226776/prereg.md sections 10.1, 10.2, 10.4, 12.1-12.3"
+  ]
+}
