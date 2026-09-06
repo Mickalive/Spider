@@ -101,6 +101,31 @@
         "handoff.json": "60114d687d01d0e194c2ced91fe6f883ffad4f3e9c9dee5b5e9019c799a0c433"
       }
     },
+    "EXP-FRONTIER-34029326102": {
+      "lane": "frontier",
+      "request_id": "e28e889380827ad8a27445f8",
+      "created_at": "2026-09-06T11:07:35.454892+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Does TV distance maintain its ability to detect action-dependent dynamical structure when synthetic Web transitions include realistic noise mechanisms (action-dependent heteroscedasticity, non-stationarity, state-dependent stochasticity), or does the signal degrade below detection threshold under realistic noise, rendering all prior clean-DGP validation insufficient for product deployment?",
+      "audit_status": "REVISE",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/frontier",
+      "hashes": {
+        "request.json": "c41a142a4c8e69b271678b4c32800520e0cb5293a1f1bccd2e9e4da1f0a63ac6",
+        "spec.json": "265b36230072f6b6cfc61a7d33d242bee90d054a55251a3408781f787696047c",
+        "prereg.md": "e2c9bba36f073f21179f59737ebf75fdd11099d37807b69ac83b5456c7ccd9f8",
+        "freeze.json": "09a8ede961ab069ea8ec0526bfe811a8e60289f20c5c3968448e67eb66258a5d",
+        "result.json": "85b14b72a9938f1070df0ac9f60b54d014fce4638061e82b76257fc5c75ff305",
+        "report.md": "66e2f88480c369cee1bbaf018de5afb129fb23e34e94d8a6b8be1c757188d42f",
+        "provenance.json": "95b5646b68c11844c72ef11ee8a608526c488160ac4b3ec54b8d1d2022dee4c4",
+        "audit.json": "259f696d4b0e984d597a7fa6c48e86867034285dfa13acc1c170d78fdd689c94",
+        "verdict.json": "19465d1e92d906dd8cd33e239cd18876f2660558f5e404061da27c54a62eec46",
+        "handoff.json": "f7d2a875c7227e81f12fe501a3b16f34f6b5145138fbc14c29ce44b7ab4fc244"
+      }
+    },
     "EXP-GRAPH-33528827169": {
       "lane": "graph",
       "request_id": "3e0d81e7790f2f2b7bd8665e",
@@ -280,6 +305,33 @@
         "handoff.json": "6f92dd17615985260d2c3828608c7f7c00ff1ba71dd5593f57d82d9555668fce"
       }
     },
+    "EXP-INTEL-33945226776": {
+      "lane": "intel",
+      "request_id": "ec3b6099b3b6260aeb947f90",
+      "created_at": "2026-09-05T04:41:18.128059+00:00",
+      "claim_ids": [
+        "C-CROSSSITE",
+        "C-LLM-INHERIT",
+        "C-PRODUCT-ECON"
+      ],
+      "question": "Given WebArena's public task definitions, site configurations, and source code (without Docker deployment), what is the estimated page complexity distribution, truncation risk, and fragment yield across task types, and which 2-3 task types maximize information gain for the C-CROSSSITE/C-LLM-INHERIT integration experiment?",
+      "audit_status": "REVISE",
+      "decision": "MIXED",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/intel",
+      "hashes": {
+        "request.json": "bb5b84eb9c0144aaa540ff513c65e954751faa98d0b0f2423083e4fd7a4d51db",
+        "spec.json": "e05886c4ead8672ceee8880f3bc4f78e68d50566f8c84781d3401d586892ebda",
+        "prereg.md": "763f9086d690421ad2350c00536b17636d42f325aef21c4ec9a34992359a7445",
+        "freeze.json": "5bc671e8840ee19b302ebce125434a94b427e445271e0cccc1a9942d4ef4d4d7",
+        "result.json": "5a3b705fb389a6cb760618dc6a1945315d313008eff4c43df11456f3486bf268",
+        "report.md": "da6c1e52afbb1202aa70954789b9c02a326f2567b5b855e0960c669e24324088",
+        "provenance.json": "1a3470cd60b8e6df0ca48befff3391f918b8cf0adb2f5beb76795cff5a25a345",
+        "audit.json": "13d28ebb31053fe10dc82df99398a7ea773693856bae7a6dceaf0e2491ea009a",
+        "verdict.json": "8ad47ed78419813e5da03d210d075f200fdf0bf75a86d10f277eda50cbac86c9",
+        "handoff.json": "5e5ff97a5b2d776b81eafe3eeed7af3ebdfe7b0bdb302929a9a79ed62521644a"
+      }
+    },
     "EXP-PHYSICS-33528829431": {
       "lane": "physics",
       "request_id": "aefb271e5c3274224c9651fe",
@@ -330,6 +382,32 @@
         "audit.json": "a8442f540db09145362f3582d7711e0c2f12139ed44887e4ac180b5eeb7018ca",
         "verdict.json": "99d0bc37dbc228491675bd870344417093ef618e87c32f5cdb22ab6841ebc23e",
         "handoff.json": "35ac95937cd8eac6486b1df4c51150ae30a6e2cb3851fa326e5a93d2f2f62fad"
+      }
+    },
+    "EXP-PHYSICS-33965269281": {
+      "lane": "physics",
+      "request_id": "427c52ecd223a2a85c63a0fd",
+      "created_at": "2026-09-05T12:10:09.776311+00:00",
+      "claim_ids": [
+        "C-MEAS-VALID",
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Does a browser-based collection substrate with full DOM and accessibility tree state representation reveal action-conditioned transition structure on live Web pages with navigational density, beyond what HTTP fetch with URL-only representation can detect?",
+      "audit_status": "MEASUREMENT_INVALID",
+      "decision": "MEASUREMENT_INVALID",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/physics",
+      "hashes": {
+        "request.json": "1e2103fdc982e84c4ec36d2ee7cab2393a663c14de893a8ee5a1884d60d59d6a",
+        "spec.json": "0717f4c5c8c4b161389094ec7987a2bc410088d599825d606292e26781235b40",
+        "prereg.md": "5158b63d7e3d646e932cf7fa677d0709fd25da2c8a2d2ed866057dd5104491d8",
+        "freeze.json": "ba5d9e1ca8b07799f10c9b961cecf7236ea083f7eab300d7c3fcf003ccea924d",
+        "result.json": "0cbeb031077a97f44b1880e2a9417ed16467da671706b08e9db1a02d20d6fd16",
+        "report.md": "2b7b7889b8c3dfa10ee97bdf278a012c8007dfadc09725776ce6d888722474f1",
+        "provenance.json": "1fe7d93f6bf8be5478f0ef640fc7717699d5063f987a5dc7fdd7ebf59cf68b28",
+        "audit.json": "2ce7b6509c81771efc9a7186205ec85dd32a7de744fb294fe2a65b49186000eb",
+        "verdict.json": "813b8227fb7b3e5f883a10235ca9ca22aab250a9c450ad3db97c4280ab2d9625",
+        "handoff.json": "7f0b538ceb9a666cda9654b153bd9c83001b13f195e0cb48ee80bcd161c2079e"
       }
     },
     "EXP-PRODUCT-33528829801": {
@@ -555,6 +633,31 @@
         "audit.json": "44b319783f6f8cdad9183c1b8a9c562e24afbcb4c7679d4d612d5ab789c448cf",
         "verdict.json": "eae423db32205d7dadbd6fbb557000fe3b7f2a7552894c75e5661404d0a280a7",
         "handoff.json": "ef4350875b7915635d892cc0b1d09761992f481a7bc1691a43e1afbb55712056"
+      }
+    },
+    "EXP-RUNTIME-34015740602": {
+      "lane": "runtime",
+      "request_id": "5f22552b28107946244a0aa3",
+      "created_at": "2026-09-06T06:09:00.936040+00:00",
+      "claim_ids": [
+        "C-MEAS-VALID"
+      ],
+      "question": "Does the HTTP fingerprint substrate maintain discrimination > 0.5 on a production-like OAuth/OIDC middleware with realistic response variation (cache-Control, ETag, X-Request-Id, Set-Cookie, rate-limit headers) \u2014 and does the full vector (status + body + all headers) ever exceed B-BODY-ONLY when headers vary independently with auth state?",
+      "audit_status": "REVISE",
+      "decision": "CONSTRAINED \u2014 C-MEAS-VALID survives narrowly. All three mandatory decision criteria pass (full-vector discrimination 1.0 > 0.5, null FP 0.0% < 5%, valid vs expired Jaccard 0.328 < 0.5). However, the producer's claim ceiling is overgeneralized: claim extends only to Flask 3.1.3 + PyJWT 2.13.0 HS256 on localhost 127.0.0.1:18928 with 4 states returning distinct bodies, headers filtered (Date/Server/X-Request-Id excluded), Cache-Control no-store/no-cache, ETag W/body_sha, Set-Cookie session only for valid_token, jitter 50-150ms uniform, N=40 seed 44, Python 3.12.14. The exploratory H4 test (full vector > B-BODY-ONLY) is INCONCLUSIVE due to ceiling effect: with all 4 bodies distinct, discrimination is at 1.0 and headers cannot improve beyond perfect. Full vector = B-BODY-ONLY (1.0 = 1.0) reflects body dominance under distinct-body design, not proof headers are non-discriminative. The bootstrap CI [1.0, 1.0] is degenerate at ceiling (uninformative, not high-precision). ETag and Content-Length are body-correlated by construction. Only Cache-Control and Set-Cookie are state-varying independent headers; each achieves 0.5 discrimination alone but is redundant when bodies already separate.",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/runtime",
+      "hashes": {
+        "request.json": "603a862fdad3677be7895d680130f98f046d54e4effcdcc440ad9fc6b4c326f7",
+        "spec.json": "44d9fc2f7fb73ee01c23bf8c836417d4758db1858c08158ea9ab8b8738e015df",
+        "prereg.md": "d3f66c9f24367f214997db6f95af19231cdd376e086ec78edc67e4c04c7afc5a",
+        "freeze.json": "cc2808910282c3018f9853d7fd4943a738227d0409f173c2fc6e016f516fe61d",
+        "result.json": "66caa354f25031b9a3ab73fc1e557a0f97531d18257a91e89ac1d776161c09b0",
+        "report.md": "e233303c9abd552f6c9419392f4e28ac9936ef2d8d463e8b31fac5decf10fdf8",
+        "provenance.json": "491908d7cc804c5641cd5f986057b17a2a1722d03891a3c462def57a6f9b20a2",
+        "audit.json": "fe431d0854562553fbc0cef1f17cea17983fbdea81f4d101bb35abbd16093ea2",
+        "verdict.json": "fff813988930a446bae23b9fe952cfa6174bfa7c58f6cc33ebd015d1223848d3",
+        "handoff.json": "68538996eba323cb60ed47841f67217c0fe1b7d191c1c3686de0dd1ee9728c5e"
       }
     }
   }
