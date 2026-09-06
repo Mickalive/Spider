@@ -27,6 +27,14 @@
         "reason": "This experiment provides strong supporting evidence that the causal heterogeneity metric detects lambda-scaling for non-permutation functions (Spearman rho=0.9762, p~1.6e-05, Cohen d=1.54) in synthetic affine DGPs. However, the frozen decision rule's positive control and function invariance controls were mis-calibrated (threshold het>=0.5 exceeds analytical ceiling for 2/3 functions; zero-interaction expectation contradicted by design with different Var_a). The audit confirms metric validity is established but the decision rule requires revision before the hypothesis can be formally supported or falsified. C-WEB-DYNAMICS remains HYPOTHESIS: this experiment validates a detection method, not the claim itself. Real Web transition evidence is still needed."
       },
       {
+        "experiment_id": "EXP-FRONTIER-33932275169",
+        "lane": "frontier",
+        "decision": "FALSIFIED-IN-SETTING",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "This experiment tests only synthetic quadratic DGPs on a 10-state 4-action space. TV distance shows perfect monotonic scaling (rho=1.0, Cohen d=7.85) in this setting, but no real or realistic Web transitions were tested. The claim concerns real Web dynamics and remains untested. C-WEB-DYNAMICS stays HYPOTHESIS."
+      },
+      {
         "experiment_id": "EXP-PHYSICS-33528829431",
         "lane": "physics",
         "decision": "REVISE",
@@ -41,6 +49,14 @@
         "claim_id": "C-WEB-DYNAMICS",
         "status": "HYPOTHESIS",
         "reason": "No robust live action-conditioned structure demonstrated. Best effect size 0.030 accuracy (2-3% held-out) with SA == AF, raw p=0.016, p_corr=0.096 after required 6x Bonferroni. Wikipedia shows 0.0 accuracy. Claim remains untested due to measurement invalidity."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-33965269281",
+        "lane": "physics",
+        "decision": "MEASUREMENT_INVALID",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "Not testable from this experiment due to measurement invalidity. Even setting validity failures aside, audit reveals fundamental concerns: SA underperforms AF on both live sites (wiki diff_SA_vs_AF=-0.121, python -0.159), meaning action alone predicts next state better than (state,action) pairs. Extreme memorization ratios (wiki 32.9, python 4.12) indicate near-unique state-action keys (607 keys for 616 wiki train transitions). Self-loop rates of 17% (wiki) and 49% (python) dominate metrics. Recomputed SA_heldout ranges (wiki 0.011-0.030, python 0.19-0.24) are below AF baselines (wiki 0.14-0.15, python 0.40-0.43). Nominal p=0.0 for SA vs shuffle is uninterpretable when SA < AF. The predictive accuracy paradigm may not be the right detection method for sparse-state live Web data. Claim remains untested but the research program should consider orthogonal detection methods."
       }
     ],
     "C-PARAM-INHERIT": [
@@ -141,6 +157,14 @@
         "claim_id": "C-CROSSSITE",
         "status": "HYPOTHESIS",
         "reason": "Bounded SUPPORTS at synthetic-only ceiling. Adapter parses synthetic WebArena accessibility tree string + obs_nodes_info with element_recall=1.0 (threshold 0.90), attribute_preservation=1.0 (threshold 0.80, 32/31/34 propertied elements per site type), hierarchy_preservation=1.0 (threshold 0.80) across 3 site types (result.json metrics, audit recomputed). Auditor ceiling (audit.json claim_ceiling) narrows from producer's broader claim: generator and adapter share identical formatting grammar (run_experiment.py line 332-340 f'[{id}] {role} \"{name}\" {props}' + indent, webarena_adapter.py _ELEMENT_RE + stack), making perfect scores tautological self-consistency, not independent measurement. Hierarchy depth trivial (87/100 at depth 2), attribute denominator limited (single property per element), role normalization masks 1% raw error. Live WebArena unknowns remain: Docker DOM delivery, truncation, viewport filtering, IGNORED_ACTREE_PROPERTIES, HTML attributes vs ARIA, shadow DOM/iframe. C-CROSSSITE requires bounded integration experiment on live Docker to measure real REQUIRES_TRANSFORM overhead."
+      },
+      {
+        "experiment_id": "EXP-INTEL-33945226776",
+        "lane": "intel",
+        "decision": "MIXED",
+        "claim_id": "C-CROSSSITE",
+        "status": "HYPOTHESIS",
+        "reason": "Heuristic yield estimates (0.517-0.65 median) suggest WebArena 812-task corpus may support cross-site diversity, but method disagreement (Spearman rho -0.943 to 0.371) and Kruskal-Wallis p=0.999 mean estimates are non-discriminating priors, not measurements. C-CROSSSITE remains bounded to 2-site corpus until live Docker validation confirms actual fragment yield."
       }
     ],
     "C-LLM-INHERIT": [
@@ -167,6 +191,14 @@
         "claim_id": "C-LLM-INHERIT",
         "status": "HYPOTHESIS",
         "reason": "Bounded SUPPORTS at synthetic-only ceiling. Transformation logic sound on synthetic format (224 lines, 0 deps, audit recomputed LOC). Auditor ceiling (audit.json validity_findings[6]) states truncation and viewport filtering explicitly out of scope yet central to REQUIRES_TRANSFORM overhead. Real transformation cost unknown: adapter 224 LOC excludes recomposition of obs_nodes_info channel, viewport override, truncation handling, shadow DOM. C-LLM-INHERIT requires end-to-end fragment yield and cross-site transfer rate on live WebArena tasks."
+      },
+      {
+        "experiment_id": "EXP-INTEL-33945226776",
+        "lane": "intel",
+        "decision": "MIXED",
+        "claim_id": "C-LLM-INHERIT",
+        "status": "HYPOTHESIS",
+        "reason": "Heuristic analysis suggests WebArena pages may have sufficient element diversity (21-22 unique types for shopping/gitlab/shopping_admin) for LLM transfer, but all estimates are heuristic priors not measured from live DOM. Method 1 (element-count, the only method modeling viewport and pruning) gives shopping yield 0.365, contradicting the aggregated 0.65. C-LLM-INHERIT remains bounded to 2-site corpus pending live validation."
       }
     ],
     "C-PRODUCT-ECON": [
@@ -177,6 +209,14 @@
         "claim_id": "C-PRODUCT-ECON",
         "status": "HYPOTHESIS",
         "reason": "No end-to-end economic measurement performed; claim remains bounded to 2-site corpus until integration experiment provides cost data."
+      },
+      {
+        "experiment_id": "EXP-INTEL-33945226776",
+        "lane": "intel",
+        "decision": "MIXED",
+        "claim_id": "C-PRODUCT-ECON",
+        "status": "HYPOTHESIS",
+        "reason": "Estimated transformation cost (324 LOC, 0 API calls) is plausible but not measured on live integration. Null control failed (wikipedia yield 0.517 > 0.40 threshold) and positive control was weakened (diversity 21 < prereg >30). No product decision can be made on heuristic priors with method disagreement."
       }
     ],
     "C-MEAS-VALID": [
@@ -195,6 +235,14 @@
         "claim_id": "C-MEAS-VALID",
         "status": "EXPERIMENTAL",
         "reason": "Synthetic controls validate methodology fixes (trajectory-grouped holdout, permutation null, overlapping actions) but live measurement invalid due to state representation degradation (URL-only vs composite), data integrity mismatch (result reports 192+184 transitions vs raw 120+113), target_href encoding bug, and multiple-comparison correction failure. Measurement substrate not valid for Web dynamics at tested representation."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-33965269281",
+        "lane": "physics",
+        "decision": "MEASUREMENT_INVALID",
+        "claim_id": "C-MEAS-VALID",
+        "status": "EXPERIMENTAL",
+        "reason": "Synthetic positive control validates pipeline (SA=1.0 vs AF=0.678, p=0.0, memorization ratio 1.0) and null control passes (p=0.241), confirming trajectory-grouped holdout and permutation null methodology. However, live Web measurement is invalid: trajectory split non-deterministic (set ordering hash-randomized, audit recomputes wiki SA_heldout 0.011-0.030 across PYTHONHASHSEED values), accessibility tree 0% populated (880/880 empty per audit), Bonferroni correction applied at 2x not frozen 6x, and target_href_encoding gate is a false-positive triggered by legitimate self-loops (auditor confirms 148/148 wiki and 435/435 python flagged cases have state_before.url == state_after.url == target_href). Validity gates fail on deterministic seeds, full state representation, and Bonferroni \u2014 measurement not reproducible. Browser-based collection does collect transitions with DOM/tag_counts/form_signals/link_texts but cannot support measurement-valid live Web claims."
       },
       {
         "experiment_id": "EXP-RUNTIME-33528830833",
@@ -227,6 +275,14 @@
         "claim_id": "C-MEAS-VALID",
         "status": "EXPERIMENTAL",
         "reason": "Survives on real Flask 3.1.3 + PyJWT 2.13.0 HS256 middleware with discrimination 0.833 > 0.5, null FP 0.0% < 5%, valid vs expired discriminable Jaccard 0.3505 < 0.5. Claim ceiling narrowly bounded: Flask/JWT localhost, 4 auth states, no synthetic headers, standard headers only (Content-Type, Content-Length, Connection), jitter 50-150ms, N=40 seed 44, Python 3.12.14. Does NOT establish viability on production OAuth/OIDC, CDN/caching, volatile headers, jitter >150ms, compressed encoding, or cross-Python-version reproducibility. Full vector = B-BODY-ONLY (body-only observation sufficient in this scenario)."
+      },
+      {
+        "experiment_id": "EXP-RUNTIME-34015740602",
+        "lane": "runtime",
+        "decision": "CONSTRAINED \u2014 C-MEAS-VALID survives narrowly. All three mandatory decision criteria pass (full-vector discrimination 1.0 > 0.5, null FP 0.0% < 5%, valid vs expired Jaccard 0.328 < 0.5). However, the producer's claim ceiling is overgeneralized: claim extends only to Flask 3.1.3 + PyJWT 2.13.0 HS256 on localhost 127.0.0.1:18928 with 4 states returning distinct bodies, headers filtered (Date/Server/X-Request-Id excluded), Cache-Control no-store/no-cache, ETag W/body_sha, Set-Cookie session only for valid_token, jitter 50-150ms uniform, N=40 seed 44, Python 3.12.14. The exploratory H4 test (full vector > B-BODY-ONLY) is INCONCLUSIVE due to ceiling effect: with all 4 bodies distinct, discrimination is at 1.0 and headers cannot improve beyond perfect. Full vector = B-BODY-ONLY (1.0 = 1.0) reflects body dominance under distinct-body design, not proof headers are non-discriminative. The bootstrap CI [1.0, 1.0] is degenerate at ceiling (uninformative, not high-precision). ETag and Content-Length are body-correlated by construction. Only Cache-Control and Set-Cookie are state-varying independent headers; each achieves 0.5 discrimination alone but is redundant when bodies already separate.",
+        "claim_id": "C-MEAS-VALID",
+        "status": "EXPERIMENTAL",
+        "reason": "C-MEAS-VALID survives on Flask 3.1.3 + PyJWT 2.13.0 HS256 localhost with production-like headers (Cache-Control, ETag, Set-Cookie, X-Request-Id excluded). Full-vector discrimination 1.0 > 0.5, null FP 0.0% < 5%, valid vs expired Jaccard 0.328 < 0.5. Claim ceiling bounded to exact tested configuration: 4 states with distinct bodies, jitter 50-150ms, N=40, Python 3.12.14. Does NOT extend to production OAuth/OIDC (Auth0/Okta/Keycloak), CDN, rate-limit, compression, jitter >150ms, or scenarios with identical error bodies. The H4 multi-field value test is inconclusive due to ceiling effect."
       }
     ]
   }
