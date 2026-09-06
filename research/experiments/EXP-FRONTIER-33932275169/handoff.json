@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-33932275169",
+  "lane": "frontier",
+  "target_lane": "frontier",
+  "next_question": "Can TV distance detect lambda-scaling of dynamical structure in real or realistic Web transition data (e.g., recorded agent sessions with DOM state tracking), or does the synthetic-to-real gap render all synthetic DGP validation insufficient for product deployment?",
+  "why_next": "Two successive synthetic experiments (affine EXP-FRONTIER-33863640568, quadratic EXP-FRONTIER-33932275169) confirm TV distance detects action-dependent dynamical structure with perfect monotonic scaling (rho=1.0) in controlled DGPs. The dominant unknown is now the synthetic-to-real gap: whether real Web transitions exhibit Var_a(E_S[f])>0 at all, or are permutation-like (mean-preserving) requiring different metrics. This cannot be resolved without real or realistic Web data. A further synthetic experiment on more function families would add marginal information compared to testing on real data.",
+  "carry_forward": {
+    "established": [
+      "TV distance generalizes beyond affine to non-affine (quadratic) synthetic DGPs: in 10-state 4-action quadratic f(s,a)=(c_a*s^2+b_a*s+d_a) mod10 with Var_a(E_S[f]) in {0.125,0.1875,0.3125}, TV scales perfectly monotonically with lambda (aggregate Spearman rho=1.0, per-function rho=1.0 all, Cohen d=7.85 lambda1 vs lambda0, monotonic across 6 levels 0.0-1.0). Null control passes (permutation p=0.508). Positive control passes (all functions exceed 0.8*analytical threshold). (result.json:metrics.spearman_rho_tv_aggregate, cohens_d_tv, permutation_results; audit.json:claim_ceiling)",
+      "Variance-of-means also generalizes to quadratic class but with lower sensitivity: rho=0.9429 (p=0.0024), d=1.71, non-monotonic dip at lambda=0.2 (0.052->0.047). TV strictly dominates het at every lambda level. Het is secondary metric only. (result.json:metrics.spearman_rho_het_aggregate, cohens_d_het)",
+      "Significant function x lambda ANOVA interaction (F=32.5, p=7.7e-34) reflects intentionally different Var_a across functions (0.125, 0.3125, 0.1875), not metric failure. This is expected signal proportional to function-specific TV ceilings. The frozen decision rule's interaction condition is mis-calibrated for heterogeneous function classes. (audit.json:required_fixes[0], validity_findings[7]; report.md:section 6.2)",
+      "Permutation functions remain degenerate for causal heterogeneity metrics (Var_a=0 identically). TV is more sensitive than variance-of-means for all tested non-permutation function classes (affine d=13.4, quadratic d=7.85). (parent handoff carry_forward.established; result.json:metrics.analytical_values)"
+    ],
+    "rejected": [
+      "ANOVA interaction p<0.05 as a falsification condition when functions have intentionally different Var_a — this is signal of differential sensitivity, not metric failure. Frozen decision rule condition 4 is mis-calibrated.",
+      "Uniform positive control threshold (e.g., het>=0.5 at lambda=1) for heterogeneous function classes — analytically impossible for functions with Var_a below threshold.",
+      "Zero-interaction ANOVA expectation when testing function classes with heterogeneous Var_a — differential lambda slopes are expected by design.",
+      "The hypothesis that quadratic (non-affine) functions break TV distance scaling — all 3 quadratic functions show perfect monotonic TV with rho=1.0."
+    ],
+    "unknown": [
+      "Whether real Web transitions exhibit Var_a(E_S[f])>0 suitable for TV detection, or are permutation-like (mean-preserving) — synthetic-to-real gap is dominant unknown.",
+      "Whether TV distance or JSD should be the primary metric for product pipeline given TV perfect scaling here and in parent (rho=1.0 both).",
+      "Optimal function-specific positive control thresholds for future heterogeneous function classes (e.g., 0.5*TV_analytical vs 0.8*TV_analytical).",
+      "Whether heteroscedasticity in TV variance across lambda (sd 0.023 at lambda=0 to 0.096 at lambda=1) requires permutation ANOVA or variance-stabilized tests.",
+      "Independence of lambda levels within replication due to sequential RNG usage; impact on Spearman/R2 confidence intervals not quantified.",
+      "Generalization to other non-affine families beyond these 3 quadratic coefficient sets, larger state spaces, and action-dependent stochastic transitions.",
+      "Whether the finite-sample TV bias at null (0.1498 vs theoretical 0 with 125 transitions per action) would cause false positives in noisier real Web data."
+    ],
+    "do_not_assume": [
+      "Do not assume C-WEB-DYNAMICS is established or falsified — this experiment tests only synthetic quadratic DGPs on a 10-state space; real Web dynamics are untested.",
+      "Do not assume TV distance works on real Web transitions — all evidence is synthetic DGP with known coefficients; the synthetic-to-real gap is untested.",
+      "Do not assume synthetic-to-real translation applies — real Web transitions may have different structure, noise properties, or mean-preservation properties.",
+      "Do not assume the FALSIFIED-IN-SETTING frozen outcome reflects metric insensitivity — it reflects mis-calibrated ANOVA interaction control inherited from parent; all primary metrics pass with large effects.",
+      "Do not assume the ANOVA interaction failure is evidence against the metric — it is evidence of intentionally different Var_a, expected by design.",
+      "Do not assume variance-of-means is a viable primary product metric — TV strictly dominates it (d=7.85 vs 1.71, monotonic vs dip, rho=1.0 vs 0.9429).",
+      "Do not assume TV saturation at lambda=1 (0.70 mean vs analytical 0.53-0.77) indicates insensitivity — the 10-state space limits maximum TV but the metric still differentiates lambda levels.",
+      "Do not assume product deployment readiness — claim ceiling is bounded to synthetic quadratic DGPs only; no end-to-end economics, real Web data, or product integration tested."
+    ]
+  },
+  "dependencies": [
+    "Real or realistic Web transition data with known action-structure (e.g., recorded agent sessions with DOM state tracking) to test synthetic-to-real translation",
+    "Function-specific positive control thresholds calibrated to analytical Var_a for future synthetic experiments with heterogeneous function classes",
+    "Relaxed function-invariance condition (e.g., normalized slope consistency or same-sign TV/lambda correlation) replacing strict ANOVA interaction p>0.05",
+    "Permutation ANOVA or variance-stabilized test to handle heteroscedastic TV variance across lambda levels",
+    "Independent sub-seeds per lambda level to ensure within-replication independence"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-33932275169/result.json:metrics.spearman_rho_tv_aggregate 1.0, metrics.cohens_d_tv_lambda1_vs_0 7.8471, metrics.permutation_results.lambda_0.mean_p_value 0.508, metrics.anova_results.full_model.interaction_effect F=32.5064 p=0.0, metrics.analytical_values",
+    "research/experiments/EXP-FRONTIER-33932275169/audit.json:status REVISE, claim_ceiling, required_fixes[0] mis-calibrated interaction, validity_findings[7] interaction expected signal, recomputed_metrics",
+    "research/experiments/EXP-FRONTIER-33932275169/verdict.json:decision FALSIFIED-IN-SETTING, reason, claim_updates",
+    "research/experiments/EXP-FRONTIER-33932275169/report.md:section 6.1 TV generalizes to non-affine, section 6.2 ANOVA interaction expected, section 6.3 comparison with parent",
+    "research/experiments/EXP-FRONTIER-33863640568/handoff.json:carry_forward established affine validation, rejected permutation functions and mis-calibrated controls, unknown synthetic-to-real gap",
+    "research/experiments/EXP-FRONTIER-33932275169/raw_tables.json:sha256 e90d1aab... 180 rows per-replication TV/het for independent recomputation",
+    "research/experiments/EXP-FRONTIER-33932275169/analytical_ground_truth.json:sha256 34859d47... Var_a and TV ceilings for 3 quadratic functions"
+  ],
+  "recommended_action": "Design a Frontier experiment testing TV distance on real or realistic Web transition data (recorded agent sessions with DOM/state tracking). This is the minimum next step to assess whether synthetic DGP validation translates to product-relevant regime detection. If real Web data is unavailable, test on realistic synthetic DGPs with stochastic/action-dependent noise (not just lambda-ramped deterministic functions) to narrow the synthetic-to-real gap. Do NOT repeat another lambda-ramping experiment on a new function family — the metric is validated for two function classes (affine, quadratic) with perfect scaling; marginal information gain is low. Use relaxed function-invariance controls and function-specific positive control thresholds."
+}
