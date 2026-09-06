@@ -1,0 +1,156 @@
+{
+  "experiment_id": "EXP-PHYSICS-34038570933",
+  "lane": "physics",
+  "datasets_loaded": {
+    "live_wikipedia": 880,
+    "live_python_docs": 880,
+    "positive_control": 600,
+    "null_control": 300
+  },
+  "self_loop_stats": {
+    "live_wikipedia": {
+      "total": 880,
+      "self_loops": 155,
+      "self_loop_fraction": 0.17613636363636365
+    },
+    "live_python_docs": {
+      "total": 880,
+      "self_loops": 436,
+      "self_loop_fraction": 0.4954545454545455
+    }
+  },
+  "pmi_all_transitions": {
+    "live_wikipedia": {
+      "mean_pmi": 1.073053425557045,
+      "N": 880,
+      "unique_states": 551,
+      "unique_SA_pairs": 809
+    },
+    "live_python_docs": {
+      "mean_pmi": 1.5015537212838317,
+      "N": 880,
+      "unique_states": 206,
+      "unique_SA_pairs": 494
+    },
+    "positive_control": {
+      "mean_pmi": 0.8554147966268488,
+      "N": 600,
+      "unique_states": 8,
+      "unique_SA_pairs": 17
+    },
+    "null_control": {
+      "mean_pmi": 0.009513717966261472,
+      "N": 300,
+      "unique_states": 30,
+      "unique_SA_pairs": 30
+    }
+  },
+  "pmi_nonself_transitions": {
+    "live_wikipedia": {
+      "mean_pmi": 0.8993808635774722,
+      "N": 725
+    },
+    "live_python_docs": {
+      "mean_pmi": 1.5368875901780754,
+      "N": 444
+    }
+  },
+  "permutation_tests": {
+    "live_wikipedia_all": {
+      "observed_pmi": 1.073053425557045,
+      "p_value": 0.000999000999000999,
+      "null_mean": 0.9799142797949036,
+      "null_std": 0.016172091244366114,
+      "effect_size_d": 5.759251809476916
+    },
+    "live_wikipedia_nonself": {
+      "observed_pmi": 0.8993808635774722,
+      "p_value": 0.000999000999000999,
+      "null_mean": 0.8368872110733987,
+      "null_std": 0.017699940368794884,
+      "effect_size_d": 3.5307267257380253
+    },
+    "live_python_docs_all": {
+      "observed_pmi": 1.5015537212838317,
+      "p_value": 0.000999000999000999,
+      "null_mean": 1.1608489006850748,
+      "null_std": 0.023457210511009435,
+      "effect_size_d": 14.524524151703803
+    },
+    "live_python_docs_nonself": {
+      "observed_pmi": 1.5368875901780754,
+      "p_value": 0.000999000999000999,
+      "null_mean": 1.3519683595868832,
+      "null_std": 0.028358829294794337,
+      "effect_size_d": 6.520693385080488
+    },
+    "positive_control": {
+      "observed_pmi": 0.8554147966268488,
+      "p_value": 0.000999000999000999,
+      "null_mean": 0.1000840882023524,
+      "null_std": 0.014973939601258352,
+      "effect_size_d": 50.44301823957012
+    },
+    "null_control": {
+      "observed_pmi": 0.009513717966261472,
+      "p_value": 1.0,
+      "null_mean": 0.009513717966261468,
+      "null_std": 3.469446951953614e-18,
+      "effect_size_d": 1.0
+    }
+  },
+  "survives_checks": {
+    "live_wikipedia_all": {
+      "observed_pmi": 1.073053425557045,
+      "p_raw": 0.000999000999000999,
+      "p_bonferroni": 0.003996003996003996,
+      "passes": true
+    },
+    "live_python_docs_all": {
+      "observed_pmi": 1.5015537212838317,
+      "p_raw": 0.000999000999000999,
+      "p_bonferroni": 0.003996003996003996,
+      "passes": true
+    },
+    "live_wikipedia_nonself": {
+      "observed_pmi": 0.8993808635774722,
+      "p_raw": 0.000999000999000999,
+      "p_bonferroni": 0.003996003996003996,
+      "passes": true
+    },
+    "live_python_docs_nonself": {
+      "observed_pmi": 1.5368875901780754,
+      "p_raw": 0.000999000999000999,
+      "p_bonferroni": 0.003996003996003996,
+      "passes": true
+    },
+    "positive_control": {
+      "pmi": 0.8554147966268488,
+      "passes": false
+    },
+    "null_control": {
+      "pmi": 0.009513717966261472,
+      "p": 1.0,
+      "passes": true
+    }
+  },
+  "nonself_vs_all": {
+    "live_wikipedia": {
+      "pmi_all": 1.073053425557045,
+      "pmi_nonself": 0.8993808635774722,
+      "passes": false
+    },
+    "live_python_docs": {
+      "pmi_all": 1.5015537212838317,
+      "pmi_nonself": 1.5368875901780754,
+      "passes": true
+    }
+  },
+  "survives": false,
+  "falsified": true,
+  "falsification_reasons": [
+    "positive_control failed"
+  ],
+  "outcome": "FALSIFIES",
+  "status": "COMPLETE"
+}
