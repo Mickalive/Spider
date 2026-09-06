@@ -5,321 +5,279 @@
 - **Experiment ID**: EXP-FRONTIER-34029326102
 - **Lane**: Frontier
 - **Claim**: C-WEB-DYNAMICS (Interactive Web transformations contain predictive dynamical structure beyond memory and ordinary similarity)
-- **Parent**: EXP-FRONTIER-33932275169 (quadratic TV distance validation)
 - **Date**: 2026-09-06
 - **Status**: DESIGN — NOT YET FROZEN
 
 ## 2. Scientific Question
 
-Does TV distance maintain monotonic lambda-scaling of dynamical structure detection under realistic stochastic noise conditions, or does noise destroy the metric's discriminating power before product-relevant noise levels are reached?
+Does TV distance maintain its ability to detect action-dependent dynamical structure when synthetic Web transitions include realistic noise mechanisms (action-dependent heteroscedasticity, non-stationarity, state-dependent stochasticity), or does the signal degrade below detection threshold under realistic noise, rendering all prior clean-DGP validation insufficient for product deployment?
 
 ## 3. Motivation
 
-### 3.1 Parent Evidence
+Two successive synthetic experiments (EXP-FRONTIER-33863640568 affine, EXP-FRONTIER-33932275169 quadratic) confirm TV distance detects action-dependent dynamical structure with perfect monotonic scaling (Spearman rho=1.0) in controlled DGPs. However, all evidence is from clean, deterministic, lambda-ramped DGPs where action-dependence is artificially controlled via a single parameter.
 
-EXP-FRONTIER-33932275169 validated TV distance on quadratic synthetic DGPs:
-- TV scales perfectly monotonically with lambda (aggregate Spearman rho=1.0)
-- TV dominates variance-of-means at every lambda level (d=7.85 vs 1.71)
-- Null control passes (permutation p=0.508)
-- Positive control passes (all functions exceed 0.8x analytical threshold)
+Real Web transitions are expected to be:
+- **Stochastic**: not purely deterministic; actions produce probabilistic outcomes
+- **Noisy**: environmental noise varies by action type (e.g., form submissions are noisier than navigation)
+- **Non-stationary**: website behavior changes over time
+- **State-dependent**: some states (e.g., error pages) have noisier transitions than others
 
-The parent verdict was FALSIFIED-IN-SETTING due to a mis-calibrated ANOVA interaction control inherited from the affine experiment — not due to metric failure. All primary metrics pass with large effects.
+The dominant unknown is the **synthetic-to-real gap**: whether TV distance detection survives these realistic noise mechanisms. A further clean-DGP experiment would add marginal information compared to testing under noise.
 
-### 3.2 Inherited Unknowns
-
-The parent handoff identifies the synthetic-to-real gap as the dominant unknown:
-- Whether real Web transitions exhibit Var_a(E_S[f])>0 suitable for TV detection
-- Whether real Web transitions are permutation-like (mean-preserving) requiring different metrics
-- Whether finite-sample TV bias at null (0.1498 vs theoretical 0) causes false positives in noisier data
-
-### 3.3 Why Noise Testing Is the Minimum Next Step
-
-The parent handoff recommends testing on real or realistic Web data. Real Web data requires browser infrastructure (Playwright, site access, state tracking) not available in this experiment. Stochastic noise injection is the minimum informative approximation: it tests whether TV distance degrades gracefully under conditions that approximate real Web properties (stochastic transitions, variable noise, state-dependent dynamics).
-
-Key real-Web properties approximated by noise injection:
-- **Stochastic server responses**: Same action from same state can yield different next states (additive uniform noise)
-- **Variable page complexity**: Some pages have dynamic content, ads, A/B tests (heteroscedastic noise)
-- **Mixed dynamics**: Different transition types have different noise characteristics (mixed noise)
-- **Mean-preserving transitions**: Some Web transitions add spread without shifting the mean state (mean-preserving spread)
+This experiment bridges the gap by systematically degrading clean DGPs with three orthogonal noise models, each capturing a different aspect of real Web transitions.
 
 ## 4. Hypotheses
 
-### H1: Graceful Degradation
-TV scaling (Spearman rho(TV, lambda)) degrades monotonically with noise fraction across all noise types. The relationship between noise fraction and TV scaling strength is monotonic (Spearman rho >= 0.7).
+### H1: Positive Control
+At noise_intensity=0 (clean DGP), TV distance equals the analytical value from EXP-FRONTIER-33932275169 within 10% across all 3 functions. This verifies pipeline consistency.
 
-### H2: Noise-Type Ordering
-Mean-preserving noise breaks TV scaling first (at lowest noise fraction), additive uniform noise breaks it last. Ordering: mean-preserving < heteroscedastic < mixed < additive-uniform in terms of noise fraction at which TV scaling breaks (rho < 0.7).
+### H2: Monotonic Degradation
+TV distance degrades monotonically with noise intensity for each noise model. Aggregate Spearman rho(TV, noise_intensity) >= 0.65 with p < 0.05 one-sided.
 
-### H3: Persistence Threshold
-TV scaling persists (rho >= 0.7) at noise_fraction <= 0.6 for ALL noise types. This defines a product-relevant robustness bound.
+### H3: Moderate-Noise Detection
+At noise_intensity=0.5, TV remains significantly above the permutation null (permutation p < 0.05). This is the critical test: can TV detect structure under moderate realistic noise?
 
-### H4: Positive Control
-At lambda=1, noise_fraction=0: rules achieve >90% test accuracy across all 3 function families (replicating parent).
+### H4: High-Noise Convergence
+At noise_intensity=1.0, TV approaches the permutation null (mean TV at high noise < 2x the permutation-null TV). Noise destroys the signal.
 
-### H5: Null Control
-At lambda=0, noise_fraction=0: rules do not significantly outperform memory (paired t-test p>0.05) (replicating parent).
+### H5: Function Invariance
+The degradation pattern is consistent across 3 independent deterministic functions (no significant function x noise_model interaction in two-way ANOVA, p > 0.05).
 
 ## 5. Data Generation
 
-### 5.1 Base Signal (Same as Parent)
+### 5.1 Base DGP
 
-Three quadratic function families (seeds 42, 43, 44):
-- f(s,a) = (c_a * s^2 + b_a * s + d_a) mod 10
-- State space: S = {0, 1, ..., 9} (10 states)
-- Action space: A = {click, fill, submit, navigate} (4 actions)
-- Lambda parameterizes mix of deterministic signal vs uniform noise
+Same as EXP-FRONTIER-33932275169:
+- State space: S = {0, 1, ..., 9} (10 discrete states)
+- Action space: A = {click, fill, submit, navigate} (4 action types)
+- Transition function: S_{t+1} = f(S_t, A_t) where f is quadratic: f(s,a) = (c_a * s^2 + b_a * s + d_a) mod 10
+- 3 deterministic functions (seeds 42, 43, 44) with known analytical TV at lambda=1
 
-### 5.2 Noise Injection Model
+### 5.2 Noise Models
 
-For each transition (S_t, A_t, S_{t+1}):
-1. Generate deterministic signal: S_signal = f(S_t, A_t) (from quadratic function)
-2. With probability lambda: S_{t+1} = S_signal
-3. With probability (1-lambda): S_{t+1} = draw from noise distribution (varies by DGP variant)
+Three orthogonal noise models, each parameterized by noise_intensity ∈ {0.0, 0.25, 0.5, 0.75, 1.0}:
 
-The noise fraction controls the probability of drawing from the noise distribution rather than the deterministic signal. This is identical to the parent's lambda-ramping mechanism but with different noise distributions.
+#### Model A: Action-Dependent Heteroscedastic Noise
+Different actions have different noise levels. This models the real Web where form submissions are noisier than navigation.
 
-### 5.3 DGP Variants
+For each action a, define action-specific noise concentration κ_a:
+- κ_click = 10 (low noise: navigation is predictable)
+- κ_fill = 5 (moderate noise: form filling is somewhat predictable)
+- κ_submit = 2 (high noise: submission outcomes are variable)
+- κ_navigate = 8 (low-moderate noise: page loads are mostly predictable)
 
-**DGP-1: Pure Signal (Baseline)**
-- Noise distribution: Uniform over S = {0,...,9}
-- Same as parent: 100% signal at lambda=1, 100% uniform at lambda=0
-- Purpose: Replicate parent results exactly
+Transition: S_{t+1} ~ Categorical(softmax(κ_a * noise_intensity * one_hot(f(s,a)) + (1-noise_intensity*κ_a/10) * uniform))
 
-**DGP-2: Additive Uniform**
-- Noise distribution: Uniform over S = {0,...,9}
-- Identical to DGP-1 in mathematical form
-- Purpose: Explicit replication arm; differences from DGP-1 would indicate implementation error
+More precisely:
+- With probability (1 - noise_intensity * w_a): S_{t+1} = f(s, a) deterministically
+- With probability noise_intensity * w_a: S_{t+1} ~ Uniform(S)
 
-**DGP-3: Heteroscedastic State-Dependent**
-- Noise distribution: Mixture — with probability 0.7, uniform over all states; with probability 0.3, uniform over a biased subset
-- Biased subset for each state s: {(s+5) mod 10, (s+6) mod 10, (s+7) mod 10} (3-state neighborhood)
-- Meaning: some transitions are noisier than others depending on current state
-- Purpose: Approximate pages with variable dynamic content (e.g., homepage vs article page)
+where w_a = κ_a / max(κ) is the action-specific weight:
+- w_click = 10/10 = 1.0
+- w_fill = 5/10 = 0.5
+- w_submit = 2/10 = 0.2
+- w_navigate = 8/10 = 0.8
 
-**DGP-4: Mixed Noise**
-- Noise distribution: Randomly select one of three sub-distributions per transition:
-  - 1/3 probability: uniform over S (additive uniform)
-  - 1/3 probability: heteroscedastic (biased subset as in DGP-3)
-  - 1/3 probability: action-dependent (noise centered on f(S_t, A_other) for random A_other != A_t)
-- Purpose: Approximate real Web where different transition types have different noise characteristics
+#### Model B: Non-Stationary Dynamics
+Website behavior changes over time. This models real Web drift.
 
-**DGP-5: Mean-Preserving Spread**
-- Noise distribution: Symmetric around deterministic signal
-- S_{t+1} = (S_signal + delta) mod 10, where delta ~ Uniform({-2,-1,0,1,2})
-- At lambda=0: S_{t+1} is uniform (symmetric spread covers all states)
-- At lambda=1: S_{t+1} = S_signal (no spread)
-- Purpose: Test whether TV detects variance changes when the mean is preserved. If Var_a(E_S[f]) is the key quantity, mean-preserving spread should reduce TV scaling more than asymmetric noise.
+Two sub-models blended:
+- Function f1 (seed 42): "initial website state"
+- Function f2 (seed 43): "drifted website state"
 
-### 5.4 Noise Fraction Levels
+At time step t:
+- With probability (1 - noise_intensity * (t/T)): S_{t+1} = f1(s, a)
+- With probability noise_intensity * (t/T): S_{t+1} = f2(s, a)
 
-Seven levels: 0.0, 0.2, 0.4, 0.6, 0.8, 0.9, 1.0
-- 0.0: Pure noise (null control condition)
-- 0.2-0.4: Low noise (realistic for stable Web pages)
-- 0.6: Moderate noise (realistic for dynamic pages)
-- 0.8-0.9: High noise (realistic for highly dynamic/interactive pages)
-- 1.0: Pure signal (positive control condition)
+where T is the total number of transitions. This creates a gradual drift from f1 to f2.
 
-### 5.5 Sample Size
+#### Model C: State-Dependent Stochasticity
+Some states have noisier transitions. This models error pages, loading states, etc.
 
-- 500 transitions per noise-fraction x DGP-variant x function cell
-- 5 independent replications per cell (different RNG seeds)
-- Total: 7 noise fractions x 5 DGP variants x 3 functions x 500 transitions x 5 replications = 52,500 transitions
-- 80/20 train/test split: 400 train, 100 test per cell
+Define per-state noise levels based on state index:
+- States 0-3: low noise (κ=10) — "stable" states
+- States 4-6: moderate noise (κ=5) — "transitional" states
+- States 7-9: high noise (κ=2) — "unstable" states
 
-### 5.6 Random Seeds
+Transition: S_{t+1} ~ Categorical(softmax(κ_s * noise_intensity * one_hot(f(s,a)) + (1-noise_intensity*κ_s/10) * uniform))
 
-- Base seed: 42 (same as parent)
-- Function seeds: 42, 43, 44 (same as parent)
-- Replication seeds: 1000, 1001, 1002, 1003, 1004
-- Noise injection uses seeded RNG per cell
+where κ_s is the state-specific concentration:
+- κ_s = 10 for s ∈ {0,1,2,3}
+- κ_s = 5 for s ∈ {4,5,6}
+- κ_s = 2 for s ∈ {7,8,9}
+
+### 5.3 Lambda Levels (Noise Intensity)
+
+Five conditions:
+- **noise_intensity=0.0**: Pure clean DGP, no noise (positive control)
+- **noise_intensity=0.25**: Low noise (25% signal degradation)
+- **noise_intensity=0.5**: Moderate noise (50% signal degradation) — critical test
+- **noise_intensity=0.75**: High noise (75% signal degradation)
+- **noise_intensity=1.0**: Maximum noise (100% signal degradation, approaches uniform)
+
+### 5.4 Sample Size
+
+- 1000 transitions per noise_model x noise_intensity x function x replication
+- 10 replications per cell (3 noise_models x 5 intensities x 3 functions x 10 reps = 450 cells)
+- Total transitions: 450,000
+- Permutation tests at noise_intensity=0.0 and noise_intensity=1.0: 1000 shuffles per replication
 
 ## 6. Measures
 
-### 6.1 TV Distance (Primary)
-- For each lambda level within a cell: compute TV = (1/|A|) * sum_a ||P(S_{t+1}|S_t, A_t=a) - P(S_{t+1}|S_t)||_1
-- Averaged over random S_t draws from test set
-- Same computation as parent
+### 6.1 TV Distance
+For each cell:
+1. Compute empirical P(S_{t+1} | do(A=a)) from transitions for each action a
+2. Compute average pairwise TV distance: TV = (1/6) * sum_{i<j} TV(P_a_i, P_a_j)
+3. TV(P, Q) = 0.5 * sum_s |P(s) - Q(s)|
 
-### 6.2 Variance-of-Means (Secondary)
-- For each lambda level: compute Var_a(E_S[f(S,a)])
-- Expected to degrade faster than TV under noise
+### 6.2 Variance-of-Means (het)
+For each cell:
+1. Compute per-action mean next-state: mean_a = E[S_{t+1} | A=a]
+2. Compute variance across actions: het = Var_a(mean_a)
 
-### 6.3 Baselines
-- Rule accuracy: per-(state,action) majority vote from train
-- Memory accuracy: per-state majority vote from train
-- Rule-memory difference: accuracy(rule) - accuracy(memory)
-- Shuffle accuracy: rules trained on shuffled action labels
+### 6.3 Primary Metric
+- **TV_degradation_spearman**: Spearman rho between TV and noise_intensity across the 5 levels, computed per noise model and per function
+- **TV_at_moderate_noise**: TV value at noise_intensity=0.5, compared to permutation null
 
-### 6.4 Primary Metric
-- **rho_TV_by_noise**: Spearman rho between TV and lambda at each noise fraction, averaged across functions and replications
-- **monotonic_degradation**: Spearman rho between rho_TV_by_noise and noise_fraction (across 7 noise levels)
-
-### 6.5 Secondary Metrics
-- Cohen's d for TV at lambda=1 vs lambda=0 at each noise fraction
-- Permutation p-value for TV at noise=0 (replication of parent null test)
-- Per-function rho_TV_by_noise for consistency check
-- Variance of rho_TV across replications at each noise fraction
-- Variance-of-means rho_het_by_noise for comparison
+### 6.4 Secondary Metrics
+- TV at each noise level for each function for each noise model
+- Variance-of-means at each noise level for each function for each noise model
+- Permutation p-values at noise_intensity=0.0 and 1.0
+- Cohen's d for TV at noise_intensity=0 vs noise_intensity=0.5
 
 ## 7. Null Models
 
-### 7.1 Shuffle Null
-Permute action labels. Rules trained on shuffled data should have rho_TV ≈ 0 at all noise fractions.
+### 7.1 Permutation Null
+Permute action labels across transitions. TV between shuffled action-conditional distributions should be near zero. Compute at noise_intensity=0.0 and noise_intensity=1.0.
 
 ### 7.2 Frequency Null
-Predict next state from marginal distribution P(S_{t+1}). Expected accuracy: 1/10 = 10%.
+Predict next-state from marginal distribution P(S_{t+1}). TV between frequency and action-conditional distributions should equal TV at that noise level.
 
-### 7.3 Per-Replication Variance
-5 replications per cell provide empirical variance of TV estimates. If variance is high (CV > 0.3 across replications), the metric is unstable at that noise level.
+### 7.3 Clean-DGP Ceiling
+TV values from EXP-FRONTIER-33932275169 provide the performance ceiling. Any degradation is due to noise, not metric insensitivity.
 
 ## 8. Statistical Tests
 
-### 8.1 Primary Test: Monotonic Degradation
-- Spearman rho(rho_TV_at_noise_fraction, noise_fraction) for each noise type
-- One-sided: rho < 0 (negative correlation = degradation with noise)
-- Bonferroni correction for 5 noise types x 3 functions = 15 comparisons
+### 8.1 Primary Test
+- Spearman rank correlation: rho(TV, noise_intensity) per noise model
+- One-sided test: rho > 0
+- Single comparison per noise model (3 noise models = 3 comparisons, Bonferroni x3)
 
-### 8.2 Persistence Threshold
-- At each noise fraction: one-sided t-test, rho_TV > 0.7
-- Bonferroni corrected across 7 noise fractions x 5 noise types = 35 comparisons
+### 8.2 Permutation Tests
+- At noise_intensity=0.0: permutation test p > 0.05 (null control: TV not significantly > 0 when noise=0)
+- At noise_intensity=1.0: permutation test p > 0.05 (null control: TV not significantly > 0 when noise=1)
 
-### 8.3 Noise-Type Ordering
-- Compare noise fraction at which rho_TV drops below 0.7 across noise types
-- Non-parametric: Kruskal-Wallis test on per-replication rho_TV at each noise fraction
+### 8.3 Effect Size
+- Cohen's d for TV at noise_intensity=0 vs noise_intensity=0.5
 
-### 8.4 Effect Size
-- Cohen's d for TV at lambda=1 vs lambda=0 at each noise fraction
-
-### 8.5 TV vs Variance-of-Means
-- Paired comparison: rho_TV vs rho_het at each noise fraction
-- Expected: rho_TV >= rho_het at all noise levels (replicating parent finding)
+### 8.4 Function Invariance
+- Two-way ANOVA: TV ~ noise_intensity + function + noise_intensity:function
+- Non-significant interaction term (p > 0.05) supports function invariance
 
 ## 9. Controls
 
-### 9.1 Positive Control (lambda=1, noise=0)
-- Rules must achieve >90% accuracy across all 3 functions
-- Replicates parent positive control
-- Verifies pipeline integrity
+### 9.1 Positive Control (noise_intensity=0)
+TV must match analytical value from EXP-FRONTIER-33932275169 within 10% across all 3 functions. This verifies pipeline consistency with prior validated experiments.
 
-### 9.2 Null Control (lambda=0, noise=0)
-- Rules must not significantly outperform memory (paired t-test p>0.05)
-- Replicates parent null control
+### 9.2 Null Control (noise_intensity=1.0)
+TV must not significantly exceed the permutation null (permutation p > 0.05). This verifies noise destroys detectable structure.
 
-### 9.3 DGP-1 Replication Control
-- DGP-1 (pure signal) results must match parent experiment within 10% relative error
-- rho_TV aggregate at noise=0 should be ~1.0 (perfect monotonic)
-- If replication fails, pipeline has implementation error
+### 9.3 Sensitivity Control (noise_intensity=0.5)
+TV must remain significantly above the permutation null (permutation p < 0.05). This is the critical test of robustness.
 
-### 9.4 Variance-of-Means Comparison
-- At each noise fraction: rho_TV >= rho_het
-- If variance-of-means outperforms TV at any noise level, the parent finding does not generalize
-
-### 9.5 Cross-Function Consistency
-- At each noise fraction: CV of rho_TV across 3 functions should be < 0.3
-- If CV > 0.3, function-specific effects dominate noise effects
+### 9.4 Degradation Control
+TV at each level must be <= TV at the previous level (monotonic degradation). Non-monotonic degradation indicates noise-type-specific effects.
 
 ## 10. Validity Threats
 
-### 10.1 Synthetic-to-Real Gap
-Stochastic noise injection approximates but does not replicate real Web transition noise. Real Web transitions may have correlated noise, non-stationary dynamics, or continuous state spaces. Mitigation: this is a controlled robustness test; failure here strongly suggests failure on real data, while success is necessary but not sufficient.
+### 10.1 Sample Size
+With 1000 transitions per cell and ~250 transitions per action, Monte Carlo SE of per-action means is sqrt(p*(1-p)/250) ~ 0.03. TV estimation is reliable. With 10 replications, TV variance estimation is adequate.
 
-### 10.2 Noise Model Specificity
-The 5 DGP variants are parametric approximations. Real Web noise may have different structure. Mitigation: test multiple noise types to bound the range of noise characteristics under which TV works.
+### 10.2 Noise Model Calibration
+The three noise models use different parameterizations. Direct comparison across models requires normalization. Mitigation: each model is analyzed independently; cross-model comparison uses relative degradation (TV at noise=0.5 / TV at noise=0).
 
-### 10.3 Sample Size
-500 transitions per cell, 100 test samples. Power analysis: for detecting rho_TV = 0.7 with n=6 lambda levels, power is ~80% at alpha=0.05. Smaller effects at high noise may be underpowered. Mitigation: report confidence intervals; 5 replications provide variance estimates.
+### 10.3 Synthetic-to-Real Gap (Remaining)
+Even with realistic noise, synthetic transitions may not capture all real-Web complexity (e.g., continuous state spaces, authentication state, network latency). Mitigation: this experiment narrows the gap; full closure requires real Web data.
 
-### 10.4 Finite-Sample TV Bias
-Parent observed TV=0.1498 at null (theoretical 0) with 125 transitions per action. With 500 transitions per cell, bias should be smaller (~0.075 expected as 1/sqrt(500) scaling). Mitigation: measure and report TV at lambda=0 for each noise fraction.
+### 10.4 Deterministic Function Choice
+3 functions from EXP-FRONTIER-33932275169 (quadratic, seeds 42-44) ensure comparability but limit diversity. Mitigation: function x noise_model interaction test checks consistency.
 
-### 10.5 Interaction Between Lambda and Noise
-The experiment varies both lambda and noise fraction independently. If lambda x noise fraction interaction is strong, the interpretation becomes more complex. Mitigation: two-way ANOVA on rho_TV as function of lambda and noise fraction.
-
-### 10.6 Replication Independence
-5 replications use different RNG seeds but share the same deterministic function and noise model. Independence assumption is valid for the statistic of interest (rho_TV) but not for raw transitions. Mitigation: report both per-replication and aggregate statistics.
+### 10.5 Multiple Comparisons
+3 noise models x 1 primary test each = 3 comparisons. Bonferroni x3 is conservative. Mitigation: report both corrected and uncorrected p-values; focus on effect sizes.
 
 ## 11. Decision Rules
 
 ### 11.1 SURVIVES_CURRENT_TEST
 If ALL of:
-1. Monotonic degradation: Spearman rho(rho_TV, noise_fraction) >= 0.7 for each noise type (Bonferroni corrected, 15 comparisons)
-2. Persistence: rho_TV >= 0.7 at noise_fraction <= 0.6 for ALL noise types
-3. Positive control: rules >90% at lambda=1, noise=0 (all functions)
-4. Null control: rules not significantly > memory at lambda=0, noise=0
-5. DGP-1 replication: rho_TV at noise=0 within 10% of parent (rho=1.0)
-6. No pipeline errors
+1. Positive control passes: TV at noise_intensity=0 matches analytical value within 10% across all functions
+2. Null control passes: TV at noise_intensity=1.0 not significantly above permutation null (p > 0.05)
+3. Aggregate Spearman rho(TV, noise_intensity) >= 0.65 with p < 0.05 (one-sided, Bonferroni x3) for EACH noise model
+4. No significant function x noise_model interaction (two-way ANOVA p > 0.05)
+5. No pipeline errors
 
 ### 11.2 FALSIFIED-IN-SETTING
 If ANY of:
-1. rho_TV < 0.7 at noise_fraction <= 0.4 for any noise type
-2. Monotonic degradation rho < 0.7 (TV scaling does not degrade smoothly with noise)
-3. Positive control fails
-4. Null control fails
-5. DGP-1 replication fails (rho_TV at noise=0 deviates >20% from parent)
+1. Positive control fails
+2. Null control fails
+3. Spearman rho < 0.65 or p > 0.05 for ANY noise model
+4. Significant function x noise_model interaction (p < 0.05)
 
 ### 11.3 MEASUREMENT_INVALID
 If:
 1. Pipeline errors prevent computation
-2. Fewer than 3 of 5 replications complete
-3. Sample sizes insufficient (<100 test transitions per cell)
+2. TV CV across replications > 0.5 at noise_intensity=0 (indicates unstable baseline)
+3. Deterministic functions generate degenerate transitions under noise
 
 ## 12. Expected Outcomes
 
-### 12.1 Best Case (SURVIVES_CURRENT_TEST)
-- TV distance is robust to stochastic noise at product-relevant levels
-- Graceful degradation provides a calibration bound for real-world deployment
-- Mean-preserving noise breaks TV first, confirming that variance structure matters
-- Product can deploy TV-based regime detection with quantified confidence bounds
+### 12.1 Positive Result (SURVIVES_CURRENT_TEST)
+- Demonstrates TV distance is robust to realistic noise mechanisms
+- Clean-DGP validation generalizes to noisy Web-like transitions
+- SPIDER can use TV distance in product pipelines without requiring perfectly clean data
+- The synthetic-to-real gap, while real, does not invalidate TV-based detection at moderate noise
+- Physics lane can proceed with TV-based regime detection on real Web data
 
-### 12.2 Moderate Case (FALSIFIED-IN-SETTING at high noise)
-- TV breaks at noise_fraction = 0.6-0.8 (moderate noise)
-- Product must preprocess transitions to reduce noise before TV computation
-- Still informative: quantifies the noise threshold for regime detection
+### 12.2 Negative Result (FALSIFIED-IN-SETTING)
+- Clean-DGP validation is insufficient for product deployment
+- TV distance is not robust to realistic noise
+- SPIDER must either (a) develop noise-robust TV variants, (b) restrict TV to high-signal regimes, or (c) abandon TV as primary metric
+- Physics lane should investigate alternative detection methods
+- Does NOT falsify C-WEB-DYNAMICS entirely — only TV as the detection method under noise
 
-### 12.3 Worst Case (FALSIFIED-IN-SETTING at low noise)
-- TV breaks at noise_fraction <= 0.4 (low noise)
-- Synthetic-to-real gap is likely insurmountable for raw TV distance
-- Product must develop alternative metrics or noise-reduction preprocessing
-- Frontier should explore fundamentally different approaches
-
-### 12.4 Invalid (MEASUREMENT_INVALID)
+### 12.3 Invalid Result (MEASUREMENT_INVALID)
 - Pipeline needs debugging
 - Not scientific evidence for or against
 
 ## 13. Analysis Plan
 
-1. **Data Generation**: Generate 52,500 transitions across 7 noise fractions x 5 DGP variants x 3 functions x 5 replications
-2. **Train/Test Split**: 80/20 stratified by lambda within each cell
-3. **TV Computation**: Compute TV at each lambda level within each cell
-4. **Baseline Fitting**: Fit rule and memory baselines on train, evaluate on test
-5. **Statistical Tests**: Spearman correlations, persistence tests, ANOVA, effect sizes
-6. **Control Verification**: Check positive, null, replication, and cross-metric controls
-7. **Robustness**: Report confidence intervals, per-replication variance, cross-function CV
-8. **Reporting**: Report all outcomes with equal prominence
+1. **Data Generation**: Generate 450,000 transitions across 3 noise_models x 5 intensities x 3 functions x 10 reps x 1000 transitions
+2. **TV Computation**: Compute empirical action-conditional distributions and pairwise TV for each cell
+3. **Heterogeneity Computation**: Compute variance-of-means for each cell
+4. **Permutation Tests**: Run 1000-shuffle permutation tests at noise_intensity=0.0 and 1.0
+5. **Spearman Correlation**: Compute rho(TV, noise_intensity) per noise model and per function
+6. **ANOVA**: Two-way ANOVA: TV ~ noise_intensity + function + noise_intensity:function
+7. **Effect Sizes**: Cohen's d for TV at noise=0 vs noise=0.5
+8. **Control Checks**: Verify positive, null, sensitivity, and degradation controls
+9. **Reporting**: Report all outcomes with equal prominence
 
 ## 14. Analysis Code
 
 Analysis will be implemented in Python using:
 - `numpy` for array operations and random generation
-- `scipy.stats` for Spearman correlation, t-tests, Kruskal-Wallis
-- `scipy.stats.f_oneway` or `statsmodels` for two-way ANOVA
-- `collections.Counter` for majority voting
-- Standard library only (no custom estimators)
+- `scipy.stats` for Spearman correlation and permutation tests
+- `statsmodels` for two-way ANOVA
+- Standard library only (no custom estimators required)
 
-Code will be committed to `research/frontier/noise_robustness/` before execution.
+Code will be committed to `research/experiments/EXP-FRONTIER-34029326102/` before execution.
 
 ## 15. Pre-registered Expectations
 
-From parent experiment:
-- TV distance has perfect monotonic scaling on clean DGPs (rho=1.0)
-- TV dominates variance-of-means (d=7.85)
-- Variance-of-means has lower sensitivity (rho=0.9429, non-monotonic dip)
-
-Expected under noise:
-- TV scaling degrades monotonically with noise fraction
-- Mean-preserving noise degrades TV faster than asymmetric noise (because it reduces Var_a directly)
-- Variance-of-means degrades faster than TV under all noise types
-- Cross-function consistency holds at low noise, degrades at high noise
+From prior work:
+- Clean DGPs (noise_intensity=0) should reproduce EXP-FRONTIER-33932275169 results (TV rho=1.0)
+- Action-dependent noise (Model A) should degrade TV more slowly than uniform noise because the most predictable actions (click, navigate) retain structure longer
+- Non-stationary noise (Model B) should degrade TV faster because the signal shifts rather than simply noising
+- State-dependent noise (Model C) should show non-uniform degradation: states 0-3 retain structure longer than states 7-9
+- Variance-of-means should degrade faster than TV under all noise models (consistent with EXP-FRONTIER-33932275169 where TV dominated het)
 
 ## 16. Deviation Policy
 
