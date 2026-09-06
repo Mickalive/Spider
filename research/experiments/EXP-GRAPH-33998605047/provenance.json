@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-33998605047",
+  "lane": "graph",
+  "github_run_id": "33998605047",
+  "git_commit": "38ccb045b7411ad77b60cbe39c7b717cb60a38b9",
+  "base_sha": "22c8a45bc052bd6e220ffde4663ebd1a6ed68f2b",
+  "origin_github_run_id": "33998605047",
+  "execution_timestamp": "2026-09-06T00:00:00Z",
+  "environment": {
+    "os": "linux",
+    "python_version": "3.x",
+    "model_id": "opencode/mimo-v2.5-free"
+  },
+  "frozen_inputs": {
+    "request.json": {
+      "path": "research/experiments/EXP-GRAPH-33998605047/request.json",
+      "sha256": "1ecf2440e6e1872cb02667017d912ad32f0dc8f2367781cccece88f9065406d5"
+    },
+    "spec.json": {
+      "path": "research/experiments/EXP-GRAPH-33998605047/spec.json",
+      "sha256": "dc70d7b0add0c0d7e73a321d3f0e6fe2efa12f6cd708da4d208fe8790b9ce2f9"
+    },
+    "prereg.md": {
+      "path": "research/experiments/EXP-GRAPH-33998605047/prereg.md",
+      "sha256": "fd6beb15bb4ea66a89cd565dcd5c0859bac89f856c359044f2468acf77703b17"
+    },
+    "freeze.json": {
+      "path": "research/experiments/EXP-GRAPH-33998605047/freeze.json",
+      "sha256": null
+    }
+  },
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-33955869291",
+    "path": "research/experiments/EXP-GRAPH-33955869291/handoff.json",
+    "sha256": "423be67d7374d5c7fb271c44146735e754ab46708b396bdaedb8dd99d93354d4"
+  },
+  "code_artifacts": {
+    "kernel.py": {
+      "path": "src/spider/kernel.py",
+      "sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+      "note": "Unfixed HEAD — L112 uses candidates.sort(key=lambda m: m.confidence, reverse=True). Fix applied temporarily during execution."
+    },
+    "models.py": {
+      "path": "src/spider/models.py",
+      "sha256": "338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78"
+    },
+    "registry.py": {
+      "path": "src/spider/registry.py",
+      "sha256": "51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c"
+    },
+    "run_experiment.py": {
+      "path": "research/experiments/EXP-GRAPH-33998605047/run_experiment.py",
+      "sha256": "e7b02e5a80fdd1c12b03cbd25ef893ba2c7b973bfc2b117877a26634a8d186eb"
+    }
+  },
+  "outputs": {
+    "result.json": {
+      "path": "research/experiments/EXP-GRAPH-33998605047/result.json",
+      "sha256": "f213bf2a298353d853c820cbdc81fc750247f6501a3364515e67e01876a9c134"
+    },
+    "raw_evidence.json": {
+      "path": "research/experiments/EXP-GRAPH-33998605047/raw_evidence.json",
+      "sha256": "3cde9110a9e8454617ecadc751feed2f3b9a39836b5dba76983c15d0c7268ba6"
+    },
+    "derived_measurements.json": {
+      "path": "research/experiments/EXP-GRAPH-33998605047/derived_measurements.json",
+      "sha256": "fe35f5188bd44358c841cbc3164b894dac395483931af44841919fceb71f9638"
+    },
+    "report.md": {
+      "path": "research/experiments/EXP-GRAPH-33998605047/report.md",
+      "sha256": null
+    }
+  },
+  "experiment_design": {
+    "total_conditions": 16,
+    "conditions_executed": 16,
+    "conditions_with_exceptions": 0,
+    "fix_applied": true,
+    "fix_description": "candidates.sort(key=lambda m: (m.confidence, len(m.parameter_slots)), reverse=True)",
+    "fix_target": "src/spider/kernel.py L112",
+    "http_execution": false,
+    "model_calls": 0,
+    "deterministic": true
+  },
+  "evidence_chain": {
+    "raw_evidence_path": "research/experiments/EXP-GRAPH-33998605047/raw_evidence.json",
+    "derived_measurements_path": "research/experiments/EXP-GRAPH-33998605047/derived_measurements.json",
+    "result_path": "research/experiments/EXP-GRAPH-33998605047/result.json",
+    "interpretation_in_report": true,
+    "interpretation_in_result": false
+  },
+  "reproduction": {
+    "command": "python3 research/experiments/EXP-GRAPH-33998605047/run_experiment.py",
+    "working_directory": ".",
+    "dependencies": ["src/spider/kernel.py", "src/spider/models.py", "src/spider/registry.py"],
+    "environment_requirements": ["Python 3.x", "No external dependencies beyond stdlib"]
+  }
+}

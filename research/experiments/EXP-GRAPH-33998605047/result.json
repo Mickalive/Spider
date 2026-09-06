@@ -1,0 +1,153 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-33998605047",
+  "lane": "graph",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "baseline_pass": true,
+    "baseline_pass_count": 7,
+    "baseline_total": 7,
+    "cold_baseline_pass": true,
+    "false_accepts_eliminated": true,
+    "false_accept_count": 0,
+    "compete_equal_total": 5,
+    "multi_slot_dominance": true,
+    "multi_slot_winning_mechanism": "param-2slot",
+    "multi_slot_bound_url": "https://jsonplaceholder.typicode.com/posts/3/tech",
+    "template_only_vs_param": "PASS",
+    "template_only_vs_param_winning": "param-fetch-posts",
+    "template_vs_literal_winner": "template-only-fetch",
+    "equal_slot_tie_param_winner": "param-fetch-posts",
+    "exceptions_count": 0,
+    "total_conditions": 16,
+    "conditions_with_correct_status": 16
+  },
+  "controls": {
+    "B_COLD": {
+      "expected": "UNKNOWN",
+      "observed_status": "UNKNOWN",
+      "pass": true
+    },
+    "B_LITERAL_ONLY_ORIG": {
+      "expected": "EXECUTABLE url=/posts/1",
+      "observed_status": "EXECUTABLE",
+      "observed_url": "https://jsonplaceholder.typicode.com/posts/1",
+      "pass": true
+    },
+    "B_LITERAL_ONLY_UNSEEN": {
+      "expected": "EXECUTABLE url=/posts/1 (literal universal)",
+      "observed_status": "EXECUTABLE",
+      "observed_url": "https://jsonplaceholder.typicode.com/posts/1",
+      "pass": true
+    },
+    "B_PARAM_ONLY_ORIG": {
+      "expected": "EXECUTABLE url=/posts/1",
+      "observed_status": "EXECUTABLE",
+      "observed_url": "https://jsonplaceholder.typicode.com/posts/1",
+      "pass": true
+    },
+    "B_PARAM_ONLY_UNSEEN": {
+      "expected": "EXECUTABLE url=/posts/2 (param generalizes)",
+      "observed_status": "EXECUTABLE",
+      "observed_url": "https://jsonplaceholder.typicode.com/posts/2",
+      "pass": true
+    },
+    "B_CONFIDENCE_PARAM_HIGHER": {
+      "expected": "EXECUTABLE param (0.98) wins",
+      "observed_status": "EXECUTABLE",
+      "observed_mechanism": "param-fetch-posts-high",
+      "pass": true
+    },
+    "B_CONFIDENCE_LITERAL_HIGHER": {
+      "expected": "EXECUTABLE literal (0.98) wins",
+      "observed_status": "EXECUTABLE",
+      "observed_mechanism": "param-fetch-posts-high",
+      "pass": true
+    },
+    "NULL_FALSE_ACCEPT_ELIMINATION": {
+      "expected": "All 5 compete-equal-id conditions return param-fetch-posts (false accepts eliminated)",
+      "observed_false_accept_count": 0,
+      "observed_per_id": {
+        "compete-equal-id2": "param-fetch-posts",
+        "compete-equal-id3": "param-fetch-posts",
+        "compete-equal-id4": "param-fetch-posts",
+        "compete-equal-id5": "param-fetch-posts",
+        "compete-equal-id6": "param-fetch-posts"
+      },
+      "pass": true
+    },
+    "POS_MULTI_SLOT": {
+      "expected": "EXECUTABLE param-2slot wins (len=2 > len=1)",
+      "observed_status": "EXECUTABLE",
+      "observed_mechanism": "param-2slot",
+      "pass": true
+    },
+    "POS_TEMPLATE_VS_PARAM": {
+      "expected": "EXECUTABLE param-fetch-posts wins over template-only",
+      "observed_status": "EXECUTABLE",
+      "observed_mechanism": "param-fetch-posts",
+      "pass": true
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-GRAPH-33998605047/run_experiment.py",
+      "sha256": "e7b02e5a80fdd1c12b03cbd25ef893ba2c7b973bfc2b117877a26634a8d186eb",
+      "role": "code"
+    },
+    {
+      "path": "src/spider/kernel.py",
+      "sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+      "role": "code"
+    },
+    {
+      "path": "src/spider/models.py",
+      "sha256": "338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78",
+      "role": "code"
+    },
+    {
+      "path": "src/spider/registry.py",
+      "sha256": "51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "[cold] type=resolution status=UNKNOWN mechanism=None confidence=0.0",
+    "[literal-only-original] type=resolution status=EXECUTABLE mechanism=literal-fetch-posts-1 bound_url=https://jsonplaceholder.typicode.com/posts/1 confidence=0.95",
+    "[literal-only-unseen] type=resolution status=EXECUTABLE mechanism=literal-fetch-posts-1 bound_url=https://jsonplaceholder.typicode.com/posts/1 confidence=0.95",
+    "[param-only-original] type=resolution status=EXECUTABLE mechanism=param-fetch-posts bound_url=https://jsonplaceholder.typicode.com/posts/1 confidence=0.95",
+    "[param-only-unseen] type=resolution status=EXECUTABLE mechanism=param-fetch-posts bound_url=https://jsonplaceholder.typicode.com/posts/2 confidence=0.95",
+    "[compete-param-higher] type=resolution status=EXECUTABLE mechanism=param-fetch-posts-high bound_url=https://jsonplaceholder.typicode.com/posts/3 confidence=0.98",
+    "[compete-literal-higher] type=resolution status=EXECUTABLE mechanism=param-fetch-posts-high bound_url=https://jsonplaceholder.typicode.com/posts/3 confidence=0.98",
+    "[compete-equal-id2] type=resolution status=EXECUTABLE mechanism=param-fetch-posts bound_url=https://jsonplaceholder.typicode.com/posts/2 confidence=0.95",
+    "[compete-equal-id3] type=resolution status=EXECUTABLE mechanism=param-fetch-posts bound_url=https://jsonplaceholder.typicode.com/posts/3 confidence=0.95",
+    "[compete-equal-id4] type=resolution status=EXECUTABLE mechanism=param-fetch-posts bound_url=https://jsonplaceholder.typicode.com/posts/4 confidence=0.95",
+    "[compete-equal-id5] type=resolution status=EXECUTABLE mechanism=param-fetch-posts bound_url=https://jsonplaceholder.typicode.com/posts/5 confidence=0.95",
+    "[compete-equal-id6] type=resolution status=EXECUTABLE mechanism=param-fetch-posts bound_url=https://jsonplaceholder.typicode.com/posts/6 confidence=0.95",
+    "[multi-slot-beats-1-slot] type=resolution status=EXECUTABLE mechanism=param-2slot bound_url=https://jsonplaceholder.typicode.com/posts/3/tech confidence=0.95",
+    "[template-only-vs-param] type=resolution status=EXECUTABLE mechanism=param-fetch-posts bound_url=https://jsonplaceholder.typicode.com/posts/3 confidence=0.95",
+    "[template-only-vs-literal] type=resolution status=EXECUTABLE mechanism=template-only-fetch bound_url=https://jsonplaceholder.typicode.com/posts/3 confidence=0.95",
+    "[equal-slot-tie-param-vs-param] type=resolution status=EXECUTABLE mechanism=param-fetch-posts bound_url=https://jsonplaceholder.typicode.com/posts/3 confidence=0.95"
+  ],
+  "validity_notes": [
+    "Fix applied temporarily during execution \u2014 current HEAD src/spider/kernel.py L112 still has unfixed sort key (m.confidence only). Production commit requires Director approval.",
+    "All conditions deterministic: no model calls, no RNG, no sampling. Single-run exact point comparisons. No statistical uncertainty.",
+    "No HTTP execution \u2014 resolution-only conditions. Network availability not tested. Out of scope per preregistration.",
+    "Synthetic substrate (jsonplaceholder.typicode.com templates) \u2014 generalizability to real-web endpoints with DOM, auth, session, drift not tested here.",
+    "Each condition uses a fresh kernel instance with explicitly controlled registry contents. No cross-contamination.",
+    "Registry insertion order controlled: literal registered before param in shared-equal conditions to test tie-break. Equal-slot ties are insertion-order dependent (established in parent).",
+    "template-only-vs-literal and equal-slot-tie conditions have uncertain expected outcomes (insertion-order tie-break on mechanism_id). Results recorded as-is, not pass/fail.",
+    "The fix was not committed to HEAD \u2014 sha256 of unfixed kernel.py confirmed in artifacts."
+  ],
+  "unresolved": [
+    "Whether the fix generalizes to real-web endpoints with DOM, auth, session state, drift (not tested here).",
+    "Whether the fix has been committed to production HEAD (current HEAD unfixed, requires Director action).",
+    "Whether the literal-vs-param equal-confidence competition remains param-winning after fix is committed to production HEAD.",
+    "Whether LLM-driven mechanism distillation ('learn on A' half of C-PARAM-INHERIT) works (no model calls).",
+    "Whether _matches() discriminates beyond empty dict preconditions (all mechanisms tested with preconditions={}).",
+    "Whether _bind() preserves type for full-match template strings (int -> int) (only URL-embedded partial match tested).",
+    "Whether the fix generalizes to other slot counts (3 vs 2, 5 vs 1), other template shapes, or other intents beyond fetch-post.",
+    "Whether template-only params need explicit handling via required_slots rather than declared slots for production use."
+  ]
+}

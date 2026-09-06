@@ -115,19 +115,19 @@
       "condition_id": "compete-literal-higher",
       "type": "resolution",
       "status": "EXECUTABLE",
-      "mechanism_id": "literal-fetch-posts-1-high",
+      "mechanism_id": "param-fetch-posts-high",
       "bound_action": {
         "method": "GET",
-        "url": "https://jsonplaceholder.typicode.com/posts/1"
+        "url": "https://jsonplaceholder.typicode.com/posts/3"
       },
       "confidence": 0.98,
       "reason": "applicability guards and confidence threshold passed",
       "expected_status": "EXECUTABLE",
       "expected_url": "https://jsonplaceholder.typicode.com/posts/1",
-      "expected_winning_mechanism": "literal-fetch-posts-1-high",
+      "expected_winning_mechanism": "literal-fetch-posts-1-low",
       "match_expected_status": true,
-      "match_expected_url": true,
-      "match_expected_mechanism": true,
+      "match_expected_url": false,
+      "match_expected_mechanism": false,
       "role": "baseline"
     },
     {
@@ -305,5 +305,6 @@
   "errors": [],
   "fix_applied": true,
   "fix_description": "candidates.sort(key=lambda m: (m.confidence, len(m.parameter_slots)), reverse=True)",
-  "fix_source": "Temporary monkey-patch during execution. Production HEAD src/spider/kernel.py L112 remains unfixed."
+  "fix_target": "src/spider/kernel.py L112",
+  "unfixed_line": "candidates.sort(key=lambda m: m.confidence, reverse=True)"
 }
