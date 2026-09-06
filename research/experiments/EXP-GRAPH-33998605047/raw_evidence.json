@@ -14,8 +14,7 @@
       "match_expected_status": true,
       "match_expected_url": null,
       "match_expected_mechanism": null,
-      "role": "baseline",
-      "note": null
+      "role": "baseline"
     },
     {
       "condition_id": "literal-only-original",
@@ -34,8 +33,7 @@
       "match_expected_status": true,
       "match_expected_url": true,
       "match_expected_mechanism": true,
-      "role": "baseline",
-      "note": null
+      "role": "baseline"
     },
     {
       "condition_id": "literal-only-unseen",
@@ -54,8 +52,7 @@
       "match_expected_status": true,
       "match_expected_url": true,
       "match_expected_mechanism": true,
-      "role": "baseline",
-      "note": null
+      "role": "baseline"
     },
     {
       "condition_id": "param-only-original",
@@ -74,8 +71,7 @@
       "match_expected_status": true,
       "match_expected_url": true,
       "match_expected_mechanism": true,
-      "role": "baseline",
-      "note": null
+      "role": "baseline"
     },
     {
       "condition_id": "param-only-unseen",
@@ -94,8 +90,7 @@
       "match_expected_status": true,
       "match_expected_url": true,
       "match_expected_mechanism": true,
-      "role": "baseline",
-      "note": null
+      "role": "baseline"
     },
     {
       "condition_id": "compete-param-higher",
@@ -114,8 +109,7 @@
       "match_expected_status": true,
       "match_expected_url": true,
       "match_expected_mechanism": true,
-      "role": "baseline",
-      "note": null
+      "role": "baseline"
     },
     {
       "condition_id": "compete-literal-higher",
@@ -134,8 +128,7 @@
       "match_expected_status": true,
       "match_expected_url": true,
       "match_expected_mechanism": true,
-      "role": "baseline",
-      "note": null
+      "role": "baseline"
     },
     {
       "condition_id": "compete-equal-id2",
@@ -154,8 +147,7 @@
       "match_expected_status": true,
       "match_expected_url": true,
       "match_expected_mechanism": true,
-      "role": "intervention",
-      "note": "Original hazard: before fix, literal won (false accept). After fix, param must win."
+      "role": "intervention"
     },
     {
       "condition_id": "compete-equal-id3",
@@ -174,8 +166,7 @@
       "match_expected_status": true,
       "match_expected_url": true,
       "match_expected_mechanism": true,
-      "role": "intervention",
-      "note": "Original hazard: before fix, literal won (false accept). After fix, param must win."
+      "role": "intervention"
     },
     {
       "condition_id": "compete-equal-id4",
@@ -194,8 +185,7 @@
       "match_expected_status": true,
       "match_expected_url": true,
       "match_expected_mechanism": true,
-      "role": "intervention",
-      "note": "Original hazard: before fix, literal won (false accept). After fix, param must win."
+      "role": "intervention"
     },
     {
       "condition_id": "compete-equal-id5",
@@ -214,8 +204,7 @@
       "match_expected_status": true,
       "match_expected_url": true,
       "match_expected_mechanism": true,
-      "role": "intervention",
-      "note": "Original hazard: before fix, literal won (false accept). After fix, param must win."
+      "role": "intervention"
     },
     {
       "condition_id": "compete-equal-id6",
@@ -234,8 +223,7 @@
       "match_expected_status": true,
       "match_expected_url": true,
       "match_expected_mechanism": true,
-      "role": "intervention",
-      "note": "Original hazard: before fix, literal won (false accept). After fix, param must win."
+      "role": "intervention"
     },
     {
       "condition_id": "multi-slot-beats-1-slot",
@@ -254,8 +242,7 @@
       "match_expected_status": true,
       "match_expected_url": true,
       "match_expected_mechanism": true,
-      "role": "intervention",
-      "note": "2-slot param (len=2) beats 1-slot param (len=1) at equal confidence via tuple sort."
+      "role": "intervention"
     },
     {
       "condition_id": "template-only-vs-param",
@@ -274,8 +261,7 @@
       "match_expected_status": true,
       "match_expected_url": true,
       "match_expected_mechanism": true,
-      "role": "intervention",
-      "note": "Template-only (parameter_slots=[], len=0) vs declared param (parameter_slots=['id'], len=1). Declared param wins."
+      "role": "intervention"
     },
     {
       "condition_id": "template-only-vs-literal",
@@ -294,8 +280,7 @@
       "match_expected_status": true,
       "match_expected_url": null,
       "match_expected_mechanism": null,
-      "role": "intervention",
-      "note": "Template-only vs literal at equal confidence. Both len=0 -> tie -> lexicographic. Record actual winner."
+      "role": "intervention"
     },
     {
       "condition_id": "equal-slot-tie-param-vs-param",
@@ -314,12 +299,11 @@
       "match_expected_status": true,
       "match_expected_url": null,
       "match_expected_mechanism": null,
-      "role": "intervention",
-      "note": "Two params with same slot count at equal confidence. Tie -> lexicographic. Record actual winner."
+      "role": "intervention"
     }
   ],
   "errors": [],
   "fix_applied": true,
   "fix_description": "candidates.sort(key=lambda m: (m.confidence, len(m.parameter_slots)), reverse=True)",
-  "kernel_source_sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61"
+  "fix_source": "Temporary monkey-patch during execution. Production HEAD src/spider/kernel.py L112 remains unfixed."
 }
