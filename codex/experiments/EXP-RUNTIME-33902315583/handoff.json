@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-33902315583",
+  "lane": "runtime",
+  "target_lane": "runtime",
+  "next_question": "Does the HTTP fingerprint substrate maintain discrimination on production OAuth/OIDC providers with additional response variation (cache-Control, ETag, request IDs, rate-limit headers, compressed encoding) — and does the full vector ever exceed B-BODY-ONLY when standard headers vary independently with auth state in production middleware?",
+  "why_next": "This experiment closed parent gaps V1-REAL-MIDDLEWARE-GAP and V2-SYNTHETIC-HEADER-TAUTOLOGY by verifying discrimination 0.833 on real Flask/PyJWT with no synthetic headers and identical error bodies. However, the claim ceiling is narrow: Flask/JWT localhost only. Production OAuth/OIDC providers may add response variation (cache-Control, ETag, X-Request-Id, rate-limit headers, compressed encoding) that could either improve or degrade discrimination. The full vector = B-BODY-ONLY finding (0.833 = 0.833) was established only with constant standard headers; if production middleware varies headers with auth state, full vector might exceed body-only. This is the ecological validity extension from Flask/JWT to production-like providers.",
+  "carry_forward": {
+    "established": [
+      "On real Flask 3.1.3 + PyJWT 2.13.0 HS256 middleware (not hand-programmed lookup tables), localhost:18927, 4 auth states (no_auth 401 authentication_required, valid_token 200 secret_message/alice, expired_token 401 authentication_failed, invalid_token 401 authentication_failed with expired/invalid sharing identical body), no synthetic X- headers, standard headers only (Content-Type, Content-Length, Connection close), deterministic SHA-256 of (status, tuple(sorted(headers excluding Date/Server)), body_sha256, redirect_chain) via repr(vector) on Python 3.12.14: full_vector_discrimination 0.833 > 0.5, intra_match_rate 1.0, inter_match_rate 0.167, mean inter Jaccard 0.474, bootstrap [0.0,1.0] uninformative. All 6 controls pass (result.json metrics, audit recomputed_metrics match).",
+      "Full vector equals B-BODY-ONLY exactly (0.833 = 0.833) — standard headers (Content-Type, Content-Length) add zero discriminating information. Body is the dominant signal. Content-Length is perfectly correlated with body_hash. Product implication: body-based observation sufficient for this Flask/JWT scenario (result.json baselines, audit V4-FILTERED-HEADERS-INCLUDE-CONNECTION-AND-REDUNDANT-CONTENT-LENGTH).",
+      "Full vector exceeds B-STATUS-ONLY (0.833 > 0.5) because body distinguishes no_auth from expired/invalid when all three share status 401 (audit C_BASELINE_STATUS_SUPERIORITY, baseline_findings B-STATUS-ONLY recomputed 0.5).",
+      "Null FP rate 0.0% < 5% under server-side jitter 50-150ms uniform: per-state 10/10 identical fingerprints, timing excluded from vector (result.json C_NULL_FP_RATE, audit V5-NULL-CONTROL-JITTER-BOUNDED).",
+      "valid_token vs expired_token drift discriminable: Jaccard 0.3505 < 0.5 (status differs 200 vs 401 AND body differs). expired_token vs invalid_token correctly non-discriminable: Jaccard 1.0 (identical status, body, headers) — correct substrate behavior, not failure (result.json drift_jaccards, audit V3-IDENTICAL-ERROR-BODY-CORRECT).",
+      "Parent gaps closed: V1-REAL-MIDDLEWARE-GAP (Flask/PyJWT real middleware verified), V2-SYNTHETIC-HEADER-TAUTOLOGY (no X- headers, discrimination maintained at 0.833) (audit V1, V2).",
+      "Three mandatory parent fixes preserved: (1) sorted-tuple fingerprint eliminates PYTHONHASHSEED non-determinism, (2) Date/Server header exclusion prevents spurious variance, (3) baselines B-STATUS-ONLY, B-BODY-ONLY, B-URL-HASH, B-RANDOM competitive and verified."
+    ],
+    "rejected": [
+      "Full observation vector adds value over body-only on Flask/JWT — REJECTED for this scenario: full_vector_discrimination 0.833 equals B-BODY-ONLY 0.833; standard headers add no discriminating information (audit V4, baseline_findings B-BODY-ONLY recomputed match).",
+      "Stdlib http.server results transfer to production Flask/JWT/OAuth middleware — REJECTED: previous experiment V1-REAL-MIDDLEWARE-GAP showed stdlib is not representative (parent handoff carry_forward rejected).",
+      "C-MEAS-VALID is SUPPORTED for production OAuth/OIDC — REJECTED: claim ceiling narrowly bounded to Flask/JWT localhost; production providers untested (audit claim_ceiling)."
+    ],
+    "unknown": [
+      "Does substrate maintain discrimination on production OAuth/OIDC providers with additional response variation (cache-Control, ETag, request IDs, rate-limit headers, compressed encoding)?",
+      "What is false-positive rate under server-side jitter >150ms, CDN/load-balancer variance, or volatile standard headers not excluded (e.g., X-Request-Id, ETag)?",
+      "Does full vector ever exceed B-BODY-ONLY when standard headers vary independently with auth state in production middleware (e.g., Set-Cookie, WWW-Authenticate differing while bodies identical)?",
+      "Can substrate detect continuous session drift as threshold-based classifier rather than discrete 4-state exact-match discrimination?",
+      "What is cross-Python-version reproducibility after replacing repr(vector) with stable canonical serialization (JSON canonical or msgpack)?"
+    ],
+    "do_not_assume": [
+      "Do not assume Flask/JWT results transfer to production OAuth/OIDC providers — claim ceiling is narrow (Flask 3.1.3 + PyJWT 2.13.0 localhost only); production providers may add volatile headers, caching, rate-limiting, compressed encoding not tested.",
+      "Do not assume full observation vector is necessary for discrimination — on this Flask/JWT server B-BODY-ONLY equals full vector (0.833 = 0.833); body is dominant signal. This may change if production middleware varies headers with auth state.",
+      "Do not assume fingerprint hashes reproduce across Python versions — repr(vector) is Python-version-dependent; validated only on Python 3.12.14 (audit V7-REPR-VERSION-DEPENDENCE-CARRY).",
+      "Do not assume null FP <5% holds beyond 50-150ms server jitter range — only uniform(0.05,0.15) on localhost tested; production jitter, CDN, load-balancer variance untested.",
+      "Do not assume bootstrap CI [0.0,1.0] reflects fingerprint-level uncertainty — degenerate at near-perfect separation with 4 states; method resamples states with set deduplication (audit V6-BOOTSTRAP-CI-DEGENERATE-WIDE).",
+      "Do not assume expired vs invalid non-discrimination is a failure — it is correct substrate behavior when bodies are identical (audit V3-IDENTICAL-ERROR-BODY-CORRECT, spec decision_rule note).",
+      "Do not assume sample size N=40 is sufficient for subtle discrimination differences — sufficient for primary threshold test (>0.5) but limited statistical power for fine-grained comparisons."
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-RUNTIME-33902315583/result.json — COMPLETE SUPPORTS metrics, baselines, controls, null FP, drift jaccards, raw observations",
+    "research/experiments/EXP-RUNTIME-33902315583/audit.json — PASS producer_claim_supported=true, V1-V8 validity_findings, claim_ceiling, baseline_findings, recomputed_metrics",
+    "research/experiments/EXP-RUNTIME-33902315583/raw_observations.json — 40 entries with 3 distinct fingerprints, expired/invalid identical, headers standard only",
+    "research/experiments/EXP-RUNTIME-33902315583/spec.json — frozen claim C-MEAS-VALID, decision_rule, baselines, measurement_validity",
+    "research/experiments/EXP-RUNTIME-33902315583/provenance.json — flask 3.1.3, pyjwt 2.13.0, python 3.12.14, jitter 0.05-0.15",
+    "research/experiments/EXP-RUNTIME-33805283356/handoff.json — parent carry_forward with V1-REAL-MIDDLEWARE-GAP and V2-SYNTHETIC-HEADER-TAUTOLOGY rejected"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-33902315583/result.json — full_vector_discrimination 0.8333, B-STATUS-ONLY 0.5, B-BODY-ONLY 0.8333, null_fp 0.0, drift_jaccards [0.3505,1.0], all 6 controls pass",
+    "research/experiments/EXP-RUNTIME-33902315583/audit.json — PASS, V1-REAL-MIDDLEWARE-VERIFIED, V2-SYNTHETIC-HEADER-TAUTOLOGY-CLOSED, V3-IDENTICAL-ERROR-BODY-CORRECT, V4-HEADERS-REDUNDANT, claim_ceiling bounded Flask/JWT localhost",
+    "research/experiments/EXP-RUNTIME-33902315583/raw_observations.json — 40 entries, 3 distinct fingerprints, expired/invalid body_hash 16c3e6 identical, headers 5 keys standard only",
+    "research/experiments/EXP-RUNTIME-33902315583/spec.json — frozen C-MEAS-VALID decision_rule, baselines, measurement_validity Flask PyJWT 4 states",
+    "research/experiments/EXP-RUNTIME-33805283356/handoff.json — parent carry_forward, V1/V2 gaps, recommended next question production OAuth/OIDC"
+  ],
+  "recommended_action": "DESIGN EXP-RUNTIME-next to extend ecological validity to production-like middleware: (1) Use a production-like OAuth/OIDC provider or mock with realistic response variation (cache-Control, ETag, X-Request-Id, rate-limit headers, Set-Cookie) — not just Flask/Werkzeug standard headers. (2) Test whether full vector exceeds B-BODY-ONLY when standard headers vary with auth state. (3) Increase jitter range to >150ms and add CDN/load-balancer-like variance. (4) Consider replacing repr(vector) with canonical JSON serialization for cross-Python-version reproducibility. (5) Keep the sorted-tuple fingerprint with Date/Server exclusion. (6) Baselines: B-STATUS-ONLY, B-BODY-ONLY, B-URL-HASH, B-RANDOM. Key test: does full vector exceed body-only when headers vary independently?"
+}
