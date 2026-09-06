@@ -1,0 +1,20 @@
+{
+  "base_sha": "87909a84d570084ce953e1125c93e917ed25aebd",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-06T06:09:02.304578+00:00",
+  "experiment_id": "EXP-PRODUCT-34015741916",
+  "inherited_last_verdict": "FIXES-FALSIFIED",
+  "inherited_next_question": "Can the field-path relevance noise filter and two-part structure-similarity check (Jaccard>=0.75 + constant-value anchor) be ported into src/spider/kernel.py distill_parameterized() such that B1-B5/C1-C2/D1-D3/E1-E2 all pass with correct prereg training data (B5 static A,A,A, D3 static quantity 1,1,1), the C2 double-prefix bug is fixed for suffix-empty templates, D2 documents the query-string architectural limitation honestly, and the result is validated end-to-end in the kernel?",
+  "lane": "product",
+  "origin_github_run_id": "34015741916",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-34003641840",
+    "path": "research/experiments/EXP-PRODUCT-34003641840/handoff.json",
+    "sha256": "ab539267befd3a966cc762ae00cc3eff112911501a48128642e05e4f378702f0"
+  },
+  "reason": "pulse",
+  "request_hash": "10fd6a33bf8766f315664dc297de8255c50c958e44de0707b1b8a4b50f56f786",
+  "request_id": "0a5237d3c531bc25f9bb4197",
+  "schema_version": 1
+}
