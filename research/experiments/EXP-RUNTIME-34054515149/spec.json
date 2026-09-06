@@ -1,17 +1,34 @@
 {
   "experiment_id": "EXP-RUNTIME-34054515149",
   "lane": "runtime",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "Does the HTTP fingerprint substrate's full vector exceed B-BODY-ONLY when bodies are NOT perfectly discriminative (e.g., identical error bodies for expired/invalid token states) but headers (Cache-Control, Set-Cookie) vary independently with auth state?",
+  "hypothesis": "When expired_token and invalid_token share identical bodies but Cache-Control varies by state (no-store for expired, no-cache for invalid) and Set-Cookie is present only for valid_token, the full fingerprint vector will achieve discrimination greater than B-BODY-ONLY, because Cache-Control and Set-Cookie provide independent discrimining information that body-only observation cannot capture.",
+  "falsifier": "full_vector_discrimination == B-BODY-ONLY (i.e., Cache-Control and Set-Cookie add no incremental discrimination despite varying with state), OR full_vector_discrimination <= 0.5 (fails primary threshold), OR null FP > 5%, OR Cache-Control-only discrimination == 0 (headers do not actually vary with state)",
+  "baselines": [
+    "B-STATUS-ONLY: fingerprint based on HTTP status code only (expected: 0.5, since 4 states map to 2 statuses)",
+    "B-BODY-ONLY: fingerprint based on body hash only (expected: < 1.0 because expired/invalid share identical body, so body-only can distinguish at most 3 groups)",
+    "B-URL-HASH: fingerprint based on URL hash only (expected: 0.0, all requests to same endpoint)",
+    "B-RANDOM: random assignment fingerprint (expected: ~0.0)"
+  ],
+  "positive_control": "Cache-Control-only discrimination > 0: Cache-Control header varies by auth state (no-store/no-cache/absent), so a fingerprint based on Cache-Control alone should achieve some discrimination",
+  "null_control": "B-RANDOM discrimination ~ 0.0: random assignment should not achieve meaningful discrimination",
+  "measurement_validity": [
+    "Flask 3.1.3 + PyJWT 2.13.0 HS256 on localhost (same as parent EXP-RUNTIME-34015740602)",
+    "4 auth states: no_auth (401, no Set-Cookie), valid_token (200, Set-Cookie session), expired_token (401, Cache-Control no-store, no Set-Cookie), invalid_token (401, Cache-Control no-cache, no Set-Cookie)",
+    "expired_token and invalid_token return IDENTICAL bodies (same as EXP-RUNTIME-33902315583 scenario)",
+    "Headers filtered: Date/Server/X-Request-Id excluded from fingerprint",
+    "Cache-Control varies by state: no-store for expired_token, no-cache for invalid_token, absent for no_auth/valid_token",
+    "Set-Cookie: present only for valid_token (session cookie)",
+    "ETag: W/body_sha (body-correlated, expected to be redundant)",
+    "Deterministic SHA-256(repr((status, tuple(sorted(filtered_headers)), body_sha256, ''))) on Python 3.12.14",
+    "N=40 (4 states x 10 requests), seed 44",
+    "Server jitter 50-150ms uniform",
+    "Client inter-request 0-200ms"
+  ],
+  "decision_rule": "If ALL of: (1) full_vector_discrimination > B-BODY-ONLY, (2) full_vector_discrimination > 0.5, (3) null FP < 5%, (4) Cache-Control-only discrimination > 0, then verdict = SURVIVES_CURRENT_TEST for C-MEAS-VALID. If full_vector_discrimination == B-BODY-ONLY OR Cache-Control-only discrimination == 0, verdict = FALSIFIED-IN-SETTING (headers add no incremental value). If full_vector_discrimination <= 0.5 OR null FP > 5%, verdict = MEASUREMENT_INVALID.",
+  "product_consequence_positive": "Headers provide incremental value over body-only observation when bodies are not distinct. Product architecture should use full vector observation (status + headers + body) rather than body-only, because Cache-Control and Set-Cookie capture auth-state information that body alone cannot when error responses share identical bodies.",
+  "product_consequence_negative": "Headers add no incremental value over body-only observation even in degraded body scenarios. Product architecture can safely use body-only observation, reducing fingerprint storage and computation. The H4 ceiling effect in parent reflects a genuine architectural property, not an artifact.",
+  "estimated_cost": "Low: same Flask/PyJWT setup as parent, no new infrastructure. ~40 requests, 4 baselines, discrimination analysis.",
+  "expected_information_gain": "High: resolves the H4 question that was vacuous at ceiling 1.0 in parent EXP-RUNTIME-34015740602. This is the only design that can answer whether Cache-Control and Set-Cookie provide incremental discrimination when body signal is degraded. Positive result changes product architecture (use full vector); negative result confirms body-only sufficiency."
 }
