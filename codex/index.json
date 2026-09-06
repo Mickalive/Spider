@@ -332,6 +332,32 @@
         "handoff.json": "35ac95937cd8eac6486b1df4c51150ae30a6e2cb3851fa326e5a93d2f2f62fad"
       }
     },
+    "EXP-PHYSICS-33965269281": {
+      "lane": "physics",
+      "request_id": "427c52ecd223a2a85c63a0fd",
+      "created_at": "2026-09-05T12:10:09.776311+00:00",
+      "claim_ids": [
+        "C-MEAS-VALID",
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Does a browser-based collection substrate with full DOM and accessibility tree state representation reveal action-conditioned transition structure on live Web pages with navigational density, beyond what HTTP fetch with URL-only representation can detect?",
+      "audit_status": "MEASUREMENT_INVALID",
+      "decision": "MEASUREMENT_INVALID",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/physics",
+      "hashes": {
+        "request.json": "1e2103fdc982e84c4ec36d2ee7cab2393a663c14de893a8ee5a1884d60d59d6a",
+        "spec.json": "0717f4c5c8c4b161389094ec7987a2bc410088d599825d606292e26781235b40",
+        "prereg.md": "5158b63d7e3d646e932cf7fa677d0709fd25da2c8a2d2ed866057dd5104491d8",
+        "freeze.json": "ba5d9e1ca8b07799f10c9b961cecf7236ea083f7eab300d7c3fcf003ccea924d",
+        "result.json": "0cbeb031077a97f44b1880e2a9417ed16467da671706b08e9db1a02d20d6fd16",
+        "report.md": "2b7b7889b8c3dfa10ee97bdf278a012c8007dfadc09725776ce6d888722474f1",
+        "provenance.json": "1fe7d93f6bf8be5478f0ef640fc7717699d5063f987a5dc7fdd7ebf59cf68b28",
+        "audit.json": "2ce7b6509c81771efc9a7186205ec85dd32a7de744fb294fe2a65b49186000eb",
+        "verdict.json": "813b8227fb7b3e5f883a10235ca9ca22aab250a9c450ad3db97c4280ab2d9625",
+        "handoff.json": "7f0b538ceb9a666cda9654b153bd9c83001b13f195e0cb48ee80bcd161c2079e"
+      }
+    },
     "EXP-PRODUCT-33528829801": {
       "lane": "product",
       "request_id": "2629e8e63e200f05556e37ca",

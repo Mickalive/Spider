@@ -49,6 +49,14 @@
         "claim_id": "C-WEB-DYNAMICS",
         "status": "HYPOTHESIS",
         "reason": "No robust live action-conditioned structure demonstrated. Best effect size 0.030 accuracy (2-3% held-out) with SA == AF, raw p=0.016, p_corr=0.096 after required 6x Bonferroni. Wikipedia shows 0.0 accuracy. Claim remains untested due to measurement invalidity."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-33965269281",
+        "lane": "physics",
+        "decision": "MEASUREMENT_INVALID",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "Not testable from this experiment due to measurement invalidity. Even setting validity failures aside, audit reveals fundamental concerns: SA underperforms AF on both live sites (wiki diff_SA_vs_AF=-0.121, python -0.159), meaning action alone predicts next state better than (state,action) pairs. Extreme memorization ratios (wiki 32.9, python 4.12) indicate near-unique state-action keys (607 keys for 616 wiki train transitions). Self-loop rates of 17% (wiki) and 49% (python) dominate metrics. Recomputed SA_heldout ranges (wiki 0.011-0.030, python 0.19-0.24) are below AF baselines (wiki 0.14-0.15, python 0.40-0.43). Nominal p=0.0 for SA vs shuffle is uninterpretable when SA < AF. The predictive accuracy paradigm may not be the right detection method for sparse-state live Web data. Claim remains untested but the research program should consider orthogonal detection methods."
       }
     ],
     "C-PARAM-INHERIT": [
@@ -203,6 +211,14 @@
         "claim_id": "C-MEAS-VALID",
         "status": "EXPERIMENTAL",
         "reason": "Synthetic controls validate methodology fixes (trajectory-grouped holdout, permutation null, overlapping actions) but live measurement invalid due to state representation degradation (URL-only vs composite), data integrity mismatch (result reports 192+184 transitions vs raw 120+113), target_href encoding bug, and multiple-comparison correction failure. Measurement substrate not valid for Web dynamics at tested representation."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-33965269281",
+        "lane": "physics",
+        "decision": "MEASUREMENT_INVALID",
+        "claim_id": "C-MEAS-VALID",
+        "status": "EXPERIMENTAL",
+        "reason": "Synthetic positive control validates pipeline (SA=1.0 vs AF=0.678, p=0.0, memorization ratio 1.0) and null control passes (p=0.241), confirming trajectory-grouped holdout and permutation null methodology. However, live Web measurement is invalid: trajectory split non-deterministic (set ordering hash-randomized, audit recomputes wiki SA_heldout 0.011-0.030 across PYTHONHASHSEED values), accessibility tree 0% populated (880/880 empty per audit), Bonferroni correction applied at 2x not frozen 6x, and target_href_encoding gate is a false-positive triggered by legitimate self-loops (auditor confirms 148/148 wiki and 435/435 python flagged cases have state_before.url == state_after.url == target_href). Validity gates fail on deterministic seeds, full state representation, and Bonferroni \u2014 measurement not reproducible. Browser-based collection does collect transitions with DOM/tag_counts/form_signals/link_texts but cannot support measurement-valid live Web claims."
       },
       {
         "experiment_id": "EXP-RUNTIME-33528830833",
