@@ -1,17 +1,32 @@
 {
   "experiment_id": "EXP-FRONTIER-34065969836",
   "lane": "frontier",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-WEB-DYNAMICS"],
+  "question": "Does TV distance detect action-dependent dynamical structure in higher-dimensional (10D) continuous state spaces with non-Gaussian heteroscedastic noise, or does the 2D result fail to generalize when state dimensionality and noise distribution complexity increase toward Web-realistic conditions?",
+  "hypothesis": "When synthetic Web-like transitions use 10D continuous state spaces with state-dependent deterministic dynamics and non-Gaussian heteroscedastic noise (mixture of 3 Gaussians per state dimension), TV distance between action-conditional next-state distributions scales monotonically with the action-dependence parameter lambda, with aggregate Spearman rho >= 0.65 and p < 0.05 one-sided. The TV signal survives bias correction and multi-resolution binning, demonstrating that the 2D monotonicity finding generalizes to higher-dimensional non-Gaussian settings.",
+  "falsifier": "TV distance does not scale monotonically with lambda in 10D non-Gaussian DGP (aggregate Spearman rho < 0.65, p > 0.05 one-sided after bias correction), OR TV at lambda=1 is not significantly above permutation null (permutation test p > 0.05 after bias correction), OR TV at lambda=0 is significantly above zero (permutation test p < 0.05), OR positive control fails (bias-corrected TV at lambda=1 < 0.05 across all functions), OR significant function x lambda interaction (two-way ANOVA p < 0.05), OR bias-corrected TV monotonicity fails at any bin resolution (10x10, 20x20, 30x30), falsifying the hypothesis that TV generalizes beyond 2D Gaussian settings.",
+  "baselines": [
+    "2D affine DGP baseline from EXP-FRONTIER-34061241004: TV distance at matched lambda levels from continuous2D rotation/scaling/translation with heteroscedastic Gaussian noise — direct quantitative comparison of signal strength between 2D Gaussian and 10D non-Gaussian DGPs",
+    "Permutation null: action labels shuffled across transitions; TV between action-conditional distributions should be near zero at all lambda levels after bias correction",
+    "Frequency baseline P(S_{t+1}): marginal next-state distribution provides expected TV under no action-dependence — computes whether marginal non-uniformity confounds conditional TV in 10D non-Gaussian spaces",
+    "Gaussian noise baseline: same 10D state space with Gaussian (not mixture) heteroscedastic noise — isolates whether non-Gaussian noise specifically degrades TV detection"
+  ],
+  "positive_control": "At lambda=1 (fully action-determined transitions in 10D non-Gaussian DGP), bias-corrected TV distance between action-conditional next-state distributions must be >= 0.05 across all 3 deterministic function families. This verifies the pipeline can detect action-dependent structure in 10D non-Gaussian state spaces after bias correction. Threshold is lower than 2D (0.1) because higher dimensionality and non-Gaussian noise may reduce separability.",
+  "null_control": "At lambda=0 (pure non-Gaussian noise, no action-dependence), bias-corrected TV distance must be indistinguishable from zero (permutation test p > 0.05). This verifies the pipeline does not detect structure when none exists, even with 10D non-Gaussian heteroscedastic noise.",
+  "measurement_validity": [
+    "10D continuous state space: points in [0,1]^10 with mixture-of-Gaussians heteroscedastic noise — tests TV on genuinely high-dimensional continuous distributions with non-Gaussian noise",
+    "State-dependent deterministic transitions: each action applies a state-dependent affine transformation generalized to 10D (rotation, scaling, translation that depends on current state) — not permutation of discrete states",
+    "Non-Gaussian heteroscedastic noise: noise distribution is a mixture of 3 Gaussians per dimension with state-dependent mixing weights — more Web-like than single Gaussian, tests TV sensitivity to noise distribution shape",
+    "3 independent deterministic function families test generalizability: (A) rotation-based, (B) scaling-based, (C) translation-based transformations in 10D",
+    "8 lambda levels (0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.7, 1.0) with 10 replications x 500 transitions per cell = 120,000 total transitions",
+    "Multi-resolution binning (10x10, 20x20, 30x30 grids on 10D projected to 2D via PCA) for bias correction and sensitivity analysis",
+    "Bias-corrected TV: permutation-null subtraction or analytical correction for finite-sample sparsity bias",
+    "Frozen random seed (seed=42) for reproducibility; each replication uses seed = func_seed * 10000 + rep_idx * 100 + 42",
+    "No target leakage: TV computed from empirical action-conditional next-state distributions, not from held-out predictions"
+  ],
+  "decision_rule": "SURVIVES_CURRENT_TEST if ALL of: (1) Aggregate Spearman rho(bias_corrected_tv_by_lambda, lambda) >= 0.65 with p < 0.05 one-sided (single aggregate comparison, no Bonferroni correction); (2) Positive control passes: bias-corrected TV >= 0.05 at lambda=1 across all functions; (3) Null control passes: bias-corrected TV not significantly > 0 at lambda=0 (permutation p > 0.05); (4) No significant function x lambda interaction (two-way ANOVA p > 0.05); (5) Monotonicity holds across all 3 bin resolutions (10x10, 20x20, 30x30) — at least 2 of 3 must show monotonic bias-corrected TV; (6) No pipeline errors. Per-function Spearman tests: rho >= 0.65 with p < 0.017 (Bonferroni x3 correction) as secondary confirmation. FALSIFIED-IN-SETTING if ANY of: (1) Aggregate Spearman rho < 0.65 or p > 0.05 after bias correction; (2) Positive control fails; (3) Null control fails; (4) Significant function x lambda interaction; (5) Monotonicity fails at all 3 bin resolutions. MEASUREMENT_INVALID if pipeline errors, degenerate functions (deterministic transitions produce identical distributions for all actions), or bias correction produces negative TV values at lambda=1.",
+  "product_consequence_positive": "Demonstrates that TV distance generalizes beyond 2D Gaussian settings to 10D non-Gaussian state spaces. This substantially expands the claim ceiling for C-WEB-DYNAMICS and justifies designing TV-based regime detection for higher-dimensional Web state spaces (e.g., DOM embeddings, session vectors). Product lane can begin integrating TV into exploration strategy with calibrated confidence for high-dimensional inputs.",
+  "product_consequence_negative": "If TV fails in 10D non-Gaussian DGP, the 2D result is isolated to low-dimensional Gaussian settings and does not generalize. The Frontier lane must either (A) pivot to real Web data collection (requires runtime infrastructure), (B) develop fundamentally different detection metrics for high-dimensional non-Gaussian settings, or (C) accept that TV-based regime detection is limited to simple settings. C-WEB-DYNAMICS remains HYPOTHESIS; the specific detection method is constrained to 2D Gaussian DGPs only.",
+  "estimated_cost": "Very low: pure synthetic data generation, analytical bias correction, offline statistical tests. ~120,000 transitions total (8 levels x 3 functions x 10 reps x 500 transitions). Multi-resolution binning adds 2x computation (3 grid sizes). No browser/network/model calls. No train/test splitting.",
+  "expected_information_gain": "Very high: directly tests generalization beyond 2D, the primary limitation of all prior synthetic validation. A positive result substantially expands the claim ceiling and justifies product integration; a negative result isolates the 2D finding and closes the TV detection approach for high-dimensional settings. This is the smallest experiment that can change the C-WEB-DYNAMICS claim ceiling or product decision."
 }
