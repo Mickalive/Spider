@@ -73,6 +73,14 @@
         "claim_id": "C-WEB-DYNAMICS",
         "status": "HYPOTHESIS",
         "reason": "Not testable from this experiment due to measurement invalidity. Even setting validity failures aside, audit reveals fundamental concerns: SA underperforms AF on both live sites (wiki diff_SA_vs_AF=-0.121, python -0.159), meaning action alone predicts next state better than (state,action) pairs. Extreme memorization ratios (wiki 32.9, python 4.12) indicate near-unique state-action keys (607 keys for 616 wiki train transitions). Self-loop rates of 17% (wiki) and 49% (python) dominate metrics. Recomputed SA_heldout ranges (wiki 0.011-0.030, python 0.19-0.24) are below AF baselines (wiki 0.14-0.15, python 0.40-0.43). Nominal p=0.0 for SA vs shuffle is uninterpretable when SA < AF. The predictive accuracy paradigm may not be the right detection method for sparse-state live Web data. Claim remains untested but the research program should consider orthogonal detection methods."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-34038570933",
+        "lane": "physics",
+        "decision": "FALSIFIED-IN-SETTING",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "Frozen decision_rule triggers FALSIFIED-IN-SETTING on two independent clauses: (1) positive_control PMI 0.855 < 1.0 bit threshold (prereg clause 12.2 item 4); (2) Wikipedia non-self PMI 0.899 < all PMI 1.073 (prereg clause 12.2 item 3, hypothesis H2). Audit additionally finds the PMI signal is confounded by action.target_href == state_after.url in 92-98% of transitions, meaning PMI measures destination predictability from action encoding rather than state-conditioned dynamics. The four primary PMI>0 tests nominally pass (p_bonf=0.004) but the maximum justified ceiling is FALSIFIED-IN-SETTING per the frozen rules. Claim remains HYPOTHESIS: no evidence accumulated for or against Web-dynamical structure beyond memory from this experiment."
       }
     ],
     "C-PARAM-INHERIT": [

@@ -435,6 +435,31 @@
         "handoff.json": "7f0b538ceb9a666cda9654b153bd9c83001b13f195e0cb48ee80bcd161c2079e"
       }
     },
+    "EXP-PHYSICS-34038570933": {
+      "lane": "physics",
+      "request_id": "71856e15a43f3a430061bdeb",
+      "created_at": "2026-09-06T14:15:18.450423+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Can pointwise mutual information (PMI) between actions and next-states, conditioned on current state, detect action-conditioned structure on live Web pages that point-prediction accuracy metrics fail to detect due to sparse state spaces and self-loop contamination?",
+      "audit_status": "FAIL",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/physics",
+      "hashes": {
+        "request.json": "ef69b2ab824ab126390fbdac9ba24183c8873d792d6b668b36758642e41920c5",
+        "spec.json": "d6615a3e3e02c47b4d9372502a833be51d4a7d69431957f09ce299a23bc1e2e7",
+        "prereg.md": "3219a324a7775a82da58b4fe40891ac8681b66b8b7ac5b75d3eadabc91c9365e",
+        "freeze.json": "b1938ae667eb630dca081805d3673bcedec8e81926f8bc851f09b963522a006b",
+        "result.json": "d6e971279599e67db8b1bcc0573d2f25dcc90d5cd14f4b19ffd2dac9930fd4ef",
+        "report.md": "ed738cd5ea45c29fd9af020864845905b63b895100d8743c0340bb7da30863b5",
+        "provenance.json": "a03f78cb301f63503caf89615698d95ffbd927bd2f6950643a3b97546f9b4544",
+        "audit.json": "e613744bc1290a0d6e359f6dccf301b2ff77e3eba962604cc6a07aa1eb962cca",
+        "verdict.json": "914e67c30b7079eb406e7a8200979cef6a1c811a4ac29ab681726d7b1ac2d3a7",
+        "handoff.json": "e11f8fa1e4a05857519c496350d625fe69138b4a6a233ba50ff72a134483b3ac"
+      }
+    },
     "EXP-PRODUCT-33528829801": {
       "lane": "product",
       "request_id": "2629e8e63e200f05556e37ca",

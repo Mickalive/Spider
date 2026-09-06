@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34038570933",
+  "lane": "physics",
+  "target_lane": "frontier",
+  "next_question": "Can a blinded action representation (hash of href, or action_type categorical only) isolate state-conditioned dynamical structure from trivial action-to-destination URL leakage, using the same PMI framework on these or structurally different sites (SPAs, form-heavy pages) where action.target_href != state_after.url?",
+  "why_next": "This experiment FALSIFIED-IN-SETTING because PMI with unblinded actions (href=target) measures destination predictability, not state-conditioned dynamics. The critical audit finding (action_leakage_href_equals_next: 92-98% of actions encode the next URL) means PMI collapses to -log P(a|s) for those transitions. To test whether state-conditioned structure exists beyond trivial href mapping, the action vocabulary must be blinded so that PMI cannot be satisfied by action==next_state alone. SPA/form-heavy sites where actions do not trivially encode URLs are also needed as orthogonal test sites.",
+  "carry_forward": {
+    "established": [
+      "PMI pipeline is computationally correct: positive control detects deterministic synthetic structure (d=50.4, p=0.001); null control correctly does not reject random data (p=1.0); trajectory-grouped permutation test is reproducible under PYTHONHASHSEED=0",
+      "URL-level Web transitions are deterministic: H(S'|S,A)=0 for both Wikipedia and Python docs (each (state, action) pair maps to exactly one next-state)",
+      "All 4 primary PMI>0 tests pass permutation after Bonferroni correction (p_bonf=0.004, d=3.5-14.5) — PMI is positive and distinguishable from shuffled-action null, but the signal is confounded by action-to-destination leakage",
+      "Self-loop rates: Wikipedia 17.6%, Python docs 49.5%; self-loops have PMI ~0 (0.0002-0.0008 bits) as expected",
+      "Laplace alpha=1.0 smoothing produces shuffled null PMI of 0.98-1.36 bits (not ~0), indicating the null is not clean under this parameterization"
+    ],
+    "rejected": [
+      "PMI at URL-only representation with unblinded actions as evidence for C-WEB-DYNAMICS: FALSIFIED-IN-SETTING per frozen decision_rule (positive control threshold fail, self-loop falsifier fail) and audit action_leakage critical finding",
+      "H(S'|S,A)=0 as evidence of non-trivial Web dynamics: tautological when action.target_href == state_after.url in 92-98% of transitions",
+      "Producer claim that 'PMI detects action-conditioned structure that accuracy cannot': unsupported because PMI inherits the same href-to-next leakage that caused SA<AF in parent; shuffled null is not ~0"
+    ],
+    "unknown": [
+      "Whether blinded action representations (hashed href, action_type only) would yield PMI > 0 — the identifiability test for state contribution beyond trivial mapping was not performed",
+      "Whether JavaScript-heavy SPA sites or form-heavy sites (where action.target_href != state_after.url) have action-conditioned dynamical structure detectable by PMI or other information-theoretic measures",
+      "Whether trajectory-level entropy rates provide more sensitive detection than transition-level PMI under sparse key regimes",
+      "What the correct expected PMI is for the actual synthetic data (8 states, 8 actions, some single-action states) under alpha=0 vs alpha=1.0 — the preregistered 1.0 bit threshold was based on incorrect 10x4 assumptions",
+      "Whether richer state representations (composite BrowserState with title, link_texts, tag_counts, form_signals, accessibility) would change PMI results",
+      "Whether the Wikipedia non-self < all PMI effect generalizes or is site-specific (depends on self-loop rate interaction with hub state distribution)"
+    ],
+    "do_not_assume": [
+      "That PMI > 0 on live data indicates action-conditioned structure beyond trivial href-to-destination mapping — the signal is confounded by action leakage (92-98% href==next)",
+      "That H(S'|S,A)=0 implies non-trivial Web dynamics — it is a mechanical consequence of (action == next_url) and near-unique SA pairs",
+      "That positive result (PMI detection) and formal falsification (threshold/self-loop triggers) can be reconciled by calling it a 'design issue' — frozen decision_rule clause 17 requires labeling such deviations EXPLORATORY",
+      "That the shuffled-action null is a strong null for Web dynamics — it does not preserve the action-to-next mapping and produces PMI ~0.98-1.36 bits rather than ~0",
+      "That PMI at URL level generalizes to C-WEB-DYNAMICS for richer representations or different site types — ceiling is URL-only with unblinded actions on Wikipedia/Python docs",
+      "That the parent experiment's SA < AF result is explained by PMI detecting what accuracy cannot — PMI inherits the same leakage and sparsity issues"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-PHYSICS-33965269281/raw_live_wikipedia.json (sha256: 87e6d8fcecb436ab9b1067a27c7f5708c393bace5efbb0225bfe1f57aa87bc5e)",
+    "research/experiments/EXP-PHYSICS-33965269281/raw_live_python_docs.json (sha256: a7634ca3734360a4d6a2ffdb89d859ae9ff466df710be3323da8ac5c5d2fa648)",
+    "research/experiments/EXP-PHYSICS-33965269281/raw_positive.json (sha256: 3eef0bbc382fef44eb63d55481e3d417b2a98478d6f4fa4e1eb06331a99fc73f)",
+    "research/experiments/EXP-PHYSICS-33965269281/raw_null.json (sha256: 3ae136b4cc36b5f736252af8b819613d1864625fc9647cfbdd649b13c72c713e)",
+    "research/physics/information_theoretic/pmi_analysis.py (sha256: 5818abdc2d07e820423caac1438878acf87c60c3df1a6cef49e7538239894bb5)",
+    "research/experiments/EXP-PHYSICS-33965269281/audit.json (parent audit with action_frequency_null FAIL_INVERTED and target_href_encoding FAIL)"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-34038570933/result.json metrics.decision_checks check_5 FAIL (0.855 < 1.0), check_7 FAIL (0.899 < 1.073)",
+    "research/experiments/EXP-PHYSICS-34038570933/audit.json validity_findings action_leakage_href_equals_next FAIL critical severity",
+    "research/experiments/EXP-PHYSICS-34038570933/audit.json validity_findings shuffled_null_not_zero FAIL major severity",
+    "research/experiments/EXP-PHYSICS-34038570933/audit.json validity_findings deterministic_HSA_claim FAIL major severity",
+    "research/experiments/EXP-PHYSICS-34038570933/audit.json claim_ceiling FALSIFIED-IN-SETTING",
+    "research/experiments/EXP-PHYSICS-34038570933/audit.json required_fixes 7 items",
+    "research/experiments/EXP-PHYSICS-34038570933/audit.json recomputed_metrics recomputation_method PASS, reproducibility PASS"
+  ],
+  "recommended_action": "DEPLOY to frontier lane for orthogonal testing: (1) Design a blinded-action PMI experiment where action vocabulary is hashed or categorical (action_type only), destroying the href-to-next mapping while preserving action identity; (2) Collect transitions on SPA/form-heavy sites where action.target_href != state_after.url by construction; (3) Alternatively, test trajectory-level entropy rate (H(S_1, S_2, ..., S_T) vs H(S_1) + sum H(S_{t+1}|S_t)) as an aggregate measure that may be more robust to per-transition leakage. All three approaches test C-WEB-DYNAMICS at a materially orthogonal level of description. Do NOT repeat URL-level PMI with unblinded actions on similar server-rendered sites."
+}
