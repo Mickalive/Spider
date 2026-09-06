@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-33974562602",
+  "lane": "product",
+  "target_lane": "product",
+  "next_question": "Can the induction algorithm be fixed to (1) detect when a supplied param already contains the learned prefix/suffix and avoid double-wrapping, (2) ignore varying fields that lack common prefix/suffix structure with the majority of varying fields, and (3) return slot_count=0 when observations share no common structural pattern — and do these fixes preserve the faithful regression on clean synthetic inputs?",
+  "why_next": "This experiment proved kernel integration is faithful (regression B1-B5 all pass identically) but exposed three distinct algorithmic failure modes that block all realistic-input use: (a) double-prefix in _bind when caller supplies full values containing prefix/suffix, (b) no signal/noise discrimination in _extract_varying_values_multi causing over-parametrization from noise fields, (c) no structure-similarity check causing hallucinated slots from unrelated observations. These are algorithmic fixes in src/spider/kernel.py, not integration issues. The kernel-integrated function is already shipped and regression-verified, so fixing these 3 issues and re-running the same test conditions is the smallest path to advancing C-PARAM-INHERIT.",
+  "carry_forward": {
+    "established": [
+      "Kernel integration is faithful: distill_parameterized() method on SpiderKernel in src/spider/kernel.py (sha256 f2e8043de03f5191eef34b3cf57c9cd7ab144954179492f0b546c85ffcc461cf) produces identical slot counts, distinct slot naming, and 100% EXECUTABLE/correct binding as the experiment-script version on clean synthetic inputs (5 regression conditions C1-C5, 21/21 unseen combinations resolved with binding_correct=true)",
+      "Literal mechanism replay still fails on all unseen multi-param combinations (5/5 EXPLORE) — confirms parameterization is necessary after kernel integration",
+      "Single-observation null control (E2) correctly produces slot_count=0 — function requires at least 2 observations for induction",
+      "The function correctly induces 1-3 distinct parameter slots from clean synthetic observations with varying path, body, and header fields when training data is deterministic and noise-free"
+    ],
+    "rejected": [
+      "Promotion to Product Core — kernel-integrated function works on clean synthetic only; algorithm fails on full-value unseen params (0% binding), noisy observations (0% resolution), and unrelated observations (hallucinated slots)",
+      "Full-value unseen params (caller supplies complete URLs/IDs) — double-prefix error: template wraps already-complete values producing 'https://site-https://site-d.com/hook.com/hook'",
+      "Noisy browser observations as viable training data — noise fields (timestamps, durations, cache flags) induce spurious parameter slots causing 0% resolution on D1/D2/D3",
+      "Unrelated observations produce zero slots — function hallucinates 4 parameter slots from observations with no common structural pattern (E1: POST /api/payments, GET /api/users/42, DELETE /api/sessions/abc-123)",
+      "Null control via intent mismatch as sufficient — E1 shows the function has no mechanism for detecting 'these observations are unrelated' (same failure mode as parent experiment)"
+    ],
+    "unknown": [
+      "Can the double-prefix error be fixed by detecting when supplied param already contains prefix/suffix and skipping re-wrapping, or does this require an API contract change (caller must supply varying middle only)?",
+      "Can noise filtering be implemented by ignoring fields whose values don't follow the prefix/suffix pattern of the majority of varying fields, without discarding true varying params?",
+      "Is there a principled structure-similarity metric (e.g., Jaccard over leaf paths or prefix/suffix length) that reliably returns slot_count=0 for unrelated observations, and what is its false-positive rate on real browser sessions?",
+      "Should varying preconditions (D3) be excluded from induction entirely, intersected across observations, or handled as a separate mechanism?",
+      "What is the false-positive slot rate on real browser session data with realistic noise patterns?",
+      "Does the tautological confidence gate (0.8 == min_confidence 0.8) discriminate anything in practice, and can confidence be calibrated on real data?",
+      "What is measured end-to-end cost saving for a real LLM agent vs cold exploration?"
+    ],
+    "do_not_assume": [
+      "Do not assume the kernel-integrated function works on real browser session data — all validated conditions are synthetic deterministic with clean structure",
+      "Do not assume full-value unseen params succeed — double-prefix error documented at raw_evidence.json C1-full-value-urls binding_detail",
+      "Do not assume noise fields are ignored — D1/D2 show timestamp/retry_count/response_time_ms are treated as parameter slots",
+      "Do not assume unrelated observations produce zero slots — E1 hallucinates 4 slots from completely different action structures",
+      "Do not assume the tautological confidence gate (0.8 == min_confidence 0.8) is meaningful — resolution_rate threshold is not discriminating; binding_accuracy is the real metric",
+      "Do not assume the 0% noisy resolution rate indicates the algorithm is unsalvageable — it may need a principled noise filter, not a fundamental redesign",
+      "Do not assume the parent's fragility of positional slot-to-param mapping has been fixed — this experiment did not address that issue"
+    ]
+  },
+  "dependencies": [
+    "src/spider/kernel.py distill_parameterized() must be extended with: (a) prefix/suffix presence detection in _bind to avoid double-wrapping, (b) noise-filter heuristic in _extract_varying_values_multi to ignore fields without common prefix/suffix structure, (c) structure-similarity check to return slot_count=0 when observations share no common pattern",
+    "Regression baseline B1-B5 must continue to pass identically after any algorithmic fixes",
+    "C1/C2 full-value unseen tests must achieve binding_accuracy >= 0.9 after double-prefix fix",
+    "D1/D2 noisy tests must achieve slot_count matching expected signal slots and resolution >= 0.9 after noise filtering",
+    "E1 pattern-absence must achieve slot_count=0 after structure-similarity check"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-33974562602/result.json — metrics: kernel_regression_pass=true, full_value_binding_accuracy=0.0, noisy_resolution_rate=0.0, null_control_E1_slot_count=4",
+    "research/experiments/EXP-PRODUCT-33974562602/result.json — controls: B_REGRESSION_SYNTHETIC PASS, E1_PATTERN_ABSENCE FAIL (4 vs 0 slots)",
+    "research/experiments/EXP-PRODUCT-33974562602/raw_evidence.json — C1 binding_detail: 'expected https://site-d.com/hook, got https://site-https://site-d.com/hook.com/hook'",
+    "research/experiments/EXP-PRODUCT-33974562602/raw_evidence.json — D1 parameter_slots [customer, request_duration_ms, retry_count, timestamp, url, x_request_id] (6 vs 3 expected)",
+    "research/experiments/EXP-PRODUCT-33974562602/raw_evidence.json — E1 template {'method':'${method}','url':'https://api.${url}'} from unrelated observations",
+    "research/experiments/EXP-PRODUCT-33974562602/audit.json — claim_ceiling: 'KERNEL-INTEGRATED distill_parameterized() in src/spider/kernel.py is FAITHFUL... CEILING STOPS THERE'",
+    "research/experiments/EXP-PRODUCT-33974562602/audit.json — required_fixes: ALGORITHM double-prefix, ALGORITHM noise-field over-param, ALGORITHM pattern-absence hallucination, ALGORITHM varying preconditions, EXPERIMENT missing B_COLD_EXPLORATION, MEASUREMENT minor miscount, MEASUREMENT kernel_integration_time placeholder",
+    "research/experiments/EXP-PRODUCT-33741671686/handoff.json — parent established: 21/21 EXECUTABLE synthetic POC, 8 required_fixes, 'Do NOT promote to Product Core'",
+    "src/spider/kernel.py sha256 f2e8043de03f5191eef34b3cf57c9cd7ab144954179492f0b546c85ffcc461cf",
+    "codex/claim_state.json — C-PARAM-INHERIT current status EXPERIMENTAL across 5 experiments"
+  ],
+  "recommended_action": "Fix the three algorithmic failure modes in src/spider/kernel.py: (1) in _bind, detect when supplied param already contains prefix/suffix and skip re-wrapping to fix double-prefix error on full-value unseen params; (2) in _extract_varying_values_multi, add noise-filter heuristic that ignores fields without common prefix/suffix structure or that fall outside action-template-relevant paths; (3) add structure-similarity check (e.g., Jaccard over leaf paths or minimum prefix/suffix length threshold) to return slot_count=0 when observations share no common pattern. Then re-run all conditions B1-B5 (must still pass identically), C1-C2 (must achieve binding_accuracy >= 0.9), D1-D2 (must achieve slot_count matching signal-only and resolution >= 0.9), E1 (must achieve slot_count=0). This stays in Product lane, addresses the 3 most critical audit required_fixes, and is the smallest path to advancing C-PARAM-INHERIT toward real-browser testing."
+}

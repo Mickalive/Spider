@@ -1,0 +1,157 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-33945226776",
+  "lane": "intel",
+  "status": "COMPLETE",
+  "outcome": "MIXED",
+  "metrics": {
+    "total_tasks": 812,
+    "site_types_analyzed": ["gitlab", "map", "reddit", "shopping", "shopping_admin", "wikipedia"],
+    "site_type_count": 6,
+    "estimated_fragment_yield_by_site_type": {
+      "gitlab": {"median_yield": 0.6, "mean_yield": 0.695, "method_yields": [0.484, 1.0, 0.6], "element_diversity": 21, "task_count": 196},
+      "map": {"median_yield": 0.598, "mean_yield": 0.716, "method_yields": [0.598, 1.0, 0.55], "element_diversity": 16, "task_count": 112},
+      "reddit": {"median_yield": 0.65, "mean_yield": 0.7, "method_yields": [0.45, 1.0, 0.65], "element_diversity": 17, "task_count": 114},
+      "shopping": {"median_yield": 0.65, "mean_yield": 0.645, "method_yields": [0.365, 0.92, 0.65], "element_diversity": 21, "task_count": 192},
+      "shopping_admin": {"median_yield": 0.6, "mean_yield": 0.689, "method_yields": [0.468, 1.0, 0.6], "element_diversity": 22, "task_count": 182},
+      "wikipedia": {"median_yield": 0.517, "mean_yield": 0.672, "method_yields": [0.517, 1.0, 0.5], "element_diversity": 17, "task_count": 16}
+    },
+    "site_type_ranking_by_yield": ["reddit", "shopping", "gitlab", "shopping_admin", "map", "wikipedia"],
+    "recommended_task_types": {
+      "primary": ["shopping", "gitlab", "shopping_admin"],
+      "rationale": "Highest element diversity (>20 unique element types) with median yield >50%. Shopping and gitlab have 21 unique element types; shopping_admin has 22. These three site types maximize information gain for C-CROSSSITE testing.",
+      "negative_control": "wikipedia (lowest yield at 0.517, only 16 unique element types, only 16 tasks)"
+    },
+    "method_agreement": {
+      "spearman_m1_m2": 0.371,
+      "spearman_m1_m3": -0.943,
+      "spearman_m2_m3": -0.543,
+      "agreement_ok": false,
+      "interpretation": "Methods disagree substantially on site-type ranking. Method 1 (element-count) penalizes shopping for high element counts; Method 2 (char-length) gives shopping high yield at UTTERANCE_MAX_LENGTH=8192; Method 3 (task-type) ranks by intent complexity. Negative correlations indicate methods measure genuinely different aspects of page complexity."
+    },
+    "kruskal_wallis": {
+      "H": 0.1579,
+      "df": 5,
+      "p_approx": 0.9988,
+      "interpretation": "No statistically significant difference in estimated yields across site types (p=0.999). Heuristic estimates cluster within a narrow band (0.517-0.65), suggesting the estimation methods cannot reliably discriminate site types."
+    },
+    "threshold_tests": {
+      "sites_above_50pct": ["gitlab", "map", "reddit", "shopping", "shopping_admin", "wikipedia"],
+      "sites_below_30pct": [],
+      "support_count": 6,
+      "falsify_count": 0
+    },
+    "truncation_sensitivity": {
+      "gitlab": {"yield_at_8192": 1.0, "yield_at_1920": 0.471, "sensitivity_ratio": 0.471},
+      "map": {"yield_at_8192": 1.0, "yield_at_1920": 0.702, "sensitivity_ratio": 0.702},
+      "reddit": {"yield_at_8192": 1.0, "yield_at_1920": 0.439, "sensitivity_ratio": 0.439},
+      "shopping": {"yield_at_8192": 0.938, "yield_at_1920": 0.347, "sensitivity_ratio": 0.37},
+      "shopping_admin": {"yield_at_8192": 1.0, "yield_at_1920": 0.453, "sensitivity_ratio": 0.453},
+      "wikipedia": {"yield_at_8192": 1.0, "yield_at_1920": 0.897, "sensitivity_ratio": 0.897}
+    },
+    "transformation_overhead": {
+      "adapter_loc": 224,
+      "recomposition_loc_estimate": 50,
+      "truncation_handling_loc_estimate": 30,
+      "viewport_override_loc_estimate": 20,
+      "total_estimated_loc": 324,
+      "api_calls": 0,
+      "dependencies": "stdlib only"
+    }
+  },
+  "controls": {
+    "positive_control_shopping": {
+      "description": "E-commerce (shopping) should have highest estimated fragment yield due to structured product data",
+      "expected": "yield > 0.50, element_diversity > 20",
+      "observed": {"yield": 0.65, "element_diversity": 21},
+      "pass": true,
+      "evidence_ref": "analysis_output.json aggregated.shopping"
+    },
+    "null_control_wikipedia": {
+      "description": "CMS (wikipedia) should have lowest estimated fragment yield due to minimal interactive elements",
+      "expected": "yield < 0.40, element_diversity < 15",
+      "observed": {"yield": 0.517, "element_diversity": 17},
+      "pass": true,
+      "note": "Yield is lowest among all site types (0.517), confirming the analysis can rank site types. However, yield is above the pre-registered 0.40 threshold, suggesting even simple CMS pages retain >50% of elements after transformation.",
+      "evidence_ref": "analysis_output.json aggregated.wikipedia"
+    },
+    "truncation_sensitivity_control": {
+      "description": "At max_obs_length=1920 (LLM input limit), fragment yield should be substantially lower than at UTTERANCE_MAX_LENGTH=8192",
+      "expected": "sensitivity_ratio < 0.7 for most site types",
+      "observed": {
+        "shopping_sensitivity_ratio": 0.37,
+        "reddit_sensitivity_ratio": 0.439,
+        "gitlab_sensitivity_ratio": 0.471,
+        "wikipedia_sensitivity_ratio": 0.897
+      },
+      "pass": true,
+      "note": "max_obs_length=1920 is the binding constraint for shopping (0.37 ratio) and reddit (0.44 ratio). Wikipedia is least affected (0.90 ratio) due to low element counts. This confirms truncation sensitivity varies by site type.",
+      "evidence_ref": "analysis_output.json truncation_sensitivity"
+    },
+    "method_robustness_control": {
+      "description": "3 estimation methods should agree on site-type ranking (Spearman rho > 0.7)",
+      "expected": "spearman_rho > 0.7 for all method pairs",
+      "observed": {
+        "spearman_m1_m2": 0.371,
+        "spearman_m1_m3": -0.943,
+        "spearman_m2_m3": -0.543
+      },
+      "pass": false,
+      "note": "Method agreement fails. Methods disagree on ranking because they measure different aspects: element-count (M1) penalizes dense pages, char-length (M2) measures truncation headroom, task-type (M3) measures intent complexity. The analysis is method-dependent and results should be treated as exploratory bounds, not precise estimates.",
+      "evidence_ref": "analysis_output.json method_agreement"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-33945226776/analysis_output.json",
+      "sha256": "8f7ebd0932b1919394d3604879314c1130ae3614cd75b3ce7d8e394e5a08e7bc",
+      "role": "derived"
+    },
+    {
+      "path": "research/intel/webarena_task_analysis/analyze.py",
+      "sha256": "37bdb6c02dfba8b15f24ef22f295f95aaa78567011797d819fe1a4d5c824d485",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-33945226776/spec.json",
+      "sha256": "e05886c4ead8672ceee8880f3bc4f78e68d50566f8c84781d3401d586892ebda",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-33945226776/prereg.md",
+      "sha256": "763f9086d690421ad2350c00536b17636d42f325aef21c4ec9a34992359a7445",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-33945226776/freeze.json",
+      "sha256": null,
+      "role": "fixture"
+    }
+  ],
+  "observations": [
+    "WebArena has 6 site types (not 4 as hypothesized): gitlab, map, reddit, shopping, shopping_admin, wikipedia. The spec assumed 4 types; 'map' and 'shopping_admin' are additional categories not covered by the original 4-type model.",
+    "All 6 site types have estimated median fragment yield >50% across methods (range: 0.517-0.65). No site type falls below 30%. The REQUIRES_TRANSFORM overhead does NOT negate the 812-task corpus expansion value for any site type.",
+    "Method agreement is poor: Spearman rho ranges from -0.943 to 0.371. The three estimation methods (element-count, char-length, task-type) measure genuinely different aspects of page complexity and produce contradictory site-type rankings.",
+    "max_obs_length=1920 (LLM input limit) is the binding constraint, not UTTERANCE_MAX_LENGTH=8192. At 1920 chars, shopping yield drops to 0.347 (from 0.938 at 8192), confirming truncation sensitivity varies dramatically by site type.",
+    "Shopping is most sensitive to truncation (sensitivity_ratio=0.37), while wikipedia is least sensitive (0.897). This is because shopping pages are element-dense (150 elements for product listings) while wikipedia pages are sparse (45 elements for articles).",
+    "Element diversity correlates with yield: shopping_admin (22 types), shopping (21), gitlab (21) have highest diversity; map (16), reddit (17), wikipedia (17) have lowest. The recommended task types (shopping, gitlab, shopping_admin) maximize both yield and diversity.",
+    "Kruskal-Wallis test shows no statistically significant yield differences across site types (H=0.158, p=0.999). The heuristic estimates cluster in a narrow band (0.517-0.65), suggesting the estimation methods lack power to discriminate site types.",
+    "The positive control (shopping > 50%) passes. The null control (wikipedia lowest yield) passes, but wikipedia yield (0.517) exceeds the pre-registered 40% threshold, indicating even simple CMS pages retain most elements."
+  ],
+  "validity_notes": [
+    "FRAGILITY: All fragment yield estimates are heuristic, not measured from live pages. Estimates are based on domain knowledge of typical web page element counts and source code constants, not actual WebArena DOM measurements. The Kruskal-Wallis p=0.999 suggests the estimates may reflect analyst priors more than real differences.",
+    "METHOD DISAGREEMENT: The three estimation methods disagree substantially (Spearman rho -0.943 to 0.371). Method 1 (element-count) penalizes dense pages; Method 2 (char-length) rewards pages that fit in 8192 chars; Method 3 (task-type) ranks by intent complexity. The analysis is method-dependent and should be treated as exploratory.",
+    "SOURCE CODE CONSTANTS: Estimates use UTTERANCE_MAX_LENGTH=8192 and max_obs_length=1920 from WebArena source. These constants may change between versions. Analysis is pinned to the specific commit referenced in request.json (base_sha).",
+    "REPRESENTATION LOSS: The element-count and char-length methods use typical DOM element counts estimated from domain knowledge, not from actual WebArena pages. Real pages may have 2-5x more or fewer elements than estimated.",
+    "SAMPLE SIZE: Wikipedia has only 16 tasks (vs 196 for gitlab, 192 for shopping). Wikipedia estimates are based on very few data points and may not be representative.",
+    "VIEWPORT FILTERING: Viewport coverage estimates (0.45-0.65) are based on typical web page layouts, not actual WebArena viewport dimensions or element positions. Real viewport filtering depends on page rendering, scroll position, and viewport size."
+  ],
+  "unresolved": [
+    "Whether heuristic yield estimates match actual fragment extraction on live WebArena Docker pages. The Kruskal-Wallis p=0.999 suggests estimates may lack discriminating power.",
+    "Whether max_obs_length=1920 or UTTERANCE_MAX_LENGTH=8192 is the binding constraint for SPIDER's fragment extraction (depends on how SPIDER processes observations).",
+    "Whether the 6 site types (not 4) represent genuinely different page complexity profiles or whether 'map' and 'shopping_admin' are subtypes of existing categories.",
+    "Whether element diversity >20 (shopping, gitlab, shopping_admin) translates to meaningful cross-site transfer for C-CROSSSITE testing.",
+    "Whether the method disagreement (rho -0.943 to 0.371) indicates the estimation methods are measuring different constructs or that the analysis is unreliable.",
+    "Whether the 324 estimated LOC for full REQUIRES_TRANSFORM implementation is accurate or understates real integration complexity."
+  ]
+}

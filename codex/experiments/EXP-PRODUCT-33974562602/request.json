@@ -1,0 +1,20 @@
+{
+  "base_sha": "f5821da80d4f0b831723c553b829a6517ae8197c",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-05T15:21:52.269085+00:00",
+  "experiment_id": "EXP-PRODUCT-33974562602",
+  "inherited_last_verdict": "MULTI-PARAM-SURVIVES \u2014 the frozen decision rule passes all 7 checks: C1 regression (slot\u22651, resolution=1.0, binding=1.0), C2 multi-param (slot=2, distinct, resolution=1.0, binding=1.0), C3 three-param (slot=3, distinct, resolution=1.0, binding=1.0), C4 non-identifier (slot=1, resolution=1.0, binding=1.0), C5 no-collision (slot=2, distinct, resolution=1.0, binding=1.0), null_control passed, no crashes. Producer metrics verified: 21/21 EXECUTABLE, 21/21 binding correct, 0/21 unsubstituted templates. Audit PASS confirms all recomputed metrics match producer. However, the claim ceiling remains narrow: synthetic POC implemented only in run_experiment.py (not in kernel.py), single-intent deterministic observations, trivial full-replacement parameterization for body fields, tautological confidence gate (0.8 == min_confidence 0.8), null control passes via intent mismatch not pattern absence, fragile positional slot-to-param mapping in harness. Do NOT promote to Product Core.",
+  "inherited_next_question": "Does the multi-parameter induction function survive kernel integration and still produce correct distinct slot naming when shipped in src/spider/kernel.py (not experiment-script-only), and does it still work when training observations come from real browser sessions with noisy multi-step actions and varying preconditions?",
+  "lane": "product",
+  "origin_github_run_id": "33974562602",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-33741671686",
+    "path": "research/experiments/EXP-PRODUCT-33741671686/handoff.json",
+    "sha256": "ac4b40a6bdfd48a7c27d4db3ad9756eefa9efad6b12a01f731337968f35259af"
+  },
+  "reason": "pulse",
+  "request_hash": "a1ac504d3d46ef40ce73644cea78a6e28cea06b7153c6ea594ab7713dff97529",
+  "request_id": "9e0a4bf69832580fa4460c28",
+  "schema_version": 1
+}

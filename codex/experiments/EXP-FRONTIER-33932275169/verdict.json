@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-33932275169",
+  "lane": "frontier",
+  "decision": "FALSIFIED-IN-SETTING",
+  "claim_updates": [
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "HYPOTHESIS",
+      "reason": "This experiment tests only synthetic quadratic DGPs on a 10-state 4-action space. TV distance shows perfect monotonic scaling (rho=1.0, Cohen d=7.85) in this setting, but no real or realistic Web transitions were tested. The claim concerns real Web dynamics and remains untested. C-WEB-DYNAMICS stays HYPOTHESIS."
+    }
+  ],
+  "product_action": "NO_ACTION",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can TV distance detect lambda-scaling of dynamical structure in real or realistic Web transition data (e.g., recorded agent sessions with DOM state tracking), or does the synthetic-to-real gap render all synthetic DGP validation insufficient for product deployment?",
+  "reason": "Frozen decision rule condition 4 (ANOVA interaction p>0.05) triggers FALSIFIED-IN-SETTING. However, the audit explicitly identifies this as a mis-calibrated control inherited from parent EXP-FRONTIER-33863640568 — the significant interaction (F=32.5, p=7.7e-34) reflects intentionally different Var_a across functions (0.125, 0.3125, 0.1875), not metric failure. All primary scientific metrics pass: TV rho=1.0 (perfect monotonicity), Cohen d=7.85 (very large effect), null control passes (permutation p=0.508), positive control passes (all functions exceed analytical thresholds). The Director bounds the claim ceiling strictly: TV distance generalizes beyond affine to quadratic synthetic DGPs, but NO evidence exists for real Web transitions. The frozen rule must be respected; future experiments should use a relaxed function-invariance condition (e.g., normalized slope consistency) when Var_a differences are expected by design.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-33932275169/spec.json:claim_ids, decision_rule condition 4",
+    "research/experiments/EXP-FRONTIER-33932275169/result.json:metrics.spearman_rho_tv_aggregate 1.0, metrics.cohens_d_tv_lambda1_vs_0 7.8471, metrics.permutation_results.lambda_0.mean_p_value 0.508, metrics.permutation_results.lambda_1.pass true, metrics.anova_results.full_model.interaction_effect F=32.5064 p=0.0, controls.function_invariance.pass false, controls.positive_control.pass true, controls.null_control.pass true",
+    "research/experiments/EXP-FRONTIER-33932275169/audit.json:status REVISE, claim_ceiling, required_fixes[0] mis-calibrated interaction control, validity_findings[7] interaction is expected signal",
+    "research/experiments/EXP-FRONTIER-33932275169/report.md:section 6.1 establishes TV generalizes to non-affine, section 6.2 ANOVA interaction is expected signal not failure",
+    "research/experiments/EXP-FRONTIER-33932275169/parent_handoff:research/experiments/EXP-FRONTIER-33863640568/handoff.json:carry_forward.do_not_assume warns interaction not metric failure",
+    "research/experiments/EXP-FRONTIER-33932275169/provenance.json:decision.frozen_rule_outcome FALSIFIED-IN-SETTING, decision.note interaction expected by design"
+  ]
+}

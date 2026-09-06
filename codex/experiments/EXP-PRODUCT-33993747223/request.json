@@ -1,0 +1,20 @@
+{
+  "base_sha": "b45f7205d31a521b77177640e03e93567d41e140",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-05T21:41:11.731077+00:00",
+  "experiment_id": "EXP-PRODUCT-33993747223",
+  "inherited_last_verdict": "KERNEL-INTEGRATION-FALSIFIED",
+  "inherited_next_question": "Can the induction algorithm be fixed to (1) detect when a supplied param already contains the learned prefix/suffix and avoid double-wrapping, (2) ignore varying fields that lack common prefix/suffix structure with the majority of varying fields, and (3) return slot_count=0 when observations share no common structural pattern \u2014 and do these fixes preserve the faithful regression on clean synthetic inputs?",
+  "lane": "product",
+  "origin_github_run_id": "33993747223",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-33974562602",
+    "path": "research/experiments/EXP-PRODUCT-33974562602/handoff.json",
+    "sha256": "073d065ba23df4b9a7ad46e0e8f82d61d33104b7cc481395e2d4665e7fd73170"
+  },
+  "reason": "pulse",
+  "request_hash": "0b62856679dac42ba4216286b35996fbb4cdfa666c990d4c8a6049b36d5caf18",
+  "request_id": "f2b438ee3cfdf8480ca8add5",
+  "schema_version": 1
+}

@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-33993747223",
+  "github_run_id": "33993747223",
+  "base_sha": "b45f7205d31a521b77177640e03e93567d41e140",
+  "execution_sha": "523b5cb",
+  "kernel_py_sha256": "76035599b1e6bf6af4205ad8d0b06bcd29ee2b9a4d42137f2cccf2c7c24b116e",
+  "parent_experiment": {
+    "experiment_id": "EXP-PRODUCT-33974562602",
+    "handoff_sha256": "073d065ba23df4b9a7ad46e0e8f82d61d33104b7cc481395e2d4665e7fd73170",
+    "parent_kernel_sha256": "f2e8043de03f5191eef34b3cf57c9cd7ab144954179492f0b546c85ffcc461cf"
+  },
+  "environment": {
+    "python_version": "3.12.14",
+    "platform": "linux",
+    "spider_package_version": "0.1.0"
+  },
+  "code_paths": [
+    {
+      "path": "src/spider/kernel.py",
+      "sha256": "76035599b1e6bf6af4205ad8d0b06bcd29ee2b9a4d42137f2cccf2c7c24b116e",
+      "role": "code",
+      "description": "Kernel with distill_parameterized() and three fixes (A, B, C)"
+    },
+    {
+      "path": "src/spider/models.py",
+      "role": "code",
+      "description": "Observation, Mechanism, Resolution dataclasses"
+    },
+    {
+      "path": "src/spider/registry.py",
+      "role": "code",
+      "description": "MechanismRegistry for persistence"
+    },
+    {
+      "path": "tests/test_kernel.py",
+      "role": "code",
+      "description": "Existing kernel unit tests (3/3 passed)"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-33993747223/run_experiment.py",
+      "sha256": "18966ed18d5767a7241de4643229168a942c15dc9a93c6051d5fa548739c18c9",
+      "role": "code",
+      "description": "Experiment runner script"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PRODUCT-33993747223/raw_evidence.json",
+      "sha256": "922d0404ac110e399a5171c94a94111c30f66a883099de0b8a85e567c33d22ba",
+      "role": "raw",
+      "description": "Raw experimental data from all conditions"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-33993747223/result.json",
+      "role": "derived",
+      "description": "Aggregated metrics, controls, and decision"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-33993747223/report.md",
+      "role": "derived",
+      "description": "Human-readable analysis and interpretation"
+    }
+  ],
+  "frozen_inputs": {
+    "request.json": "research/experiments/EXP-PRODUCT-33993747223/request.json",
+    "spec.json": "research/experiments/EXP-PRODUCT-33993747223/spec.json",
+    "prereg.md": "research/experiments/EXP-PRODUCT-33993747223/prereg.md",
+    "freeze.json": "research/experiments/EXP-PRODUCT-33993747223/freeze.json"
+  },
+  "test_conditions": {
+    "total_conditions": 12,
+    "total_test_combinations": 28,
+    "conditions_executed": [
+      "B1-single-path",
+      "B2-path-and-body",
+      "B3-path-body-headers",
+      "B4-non-identifier-values",
+      "B5-shared-slot-name",
+      "C1-full-value-urls",
+      "C2-full-value-ids",
+      "D1-noisy-post",
+      "D2-noisy-get",
+      "D3-varying-preconditions",
+      "E1-unrelated-structures",
+      "E2-single-observation"
+    ]
+  },
+  "execution_commands": [
+    "python -m unittest tests.test_kernel -v",
+    "python research/experiments/EXP-PRODUCT-33993747223/run_experiment.py"
+  ],
+  "deviations": [
+    "Binding accuracy measurement uses exact JSON comparison instead of the parent's heuristic check, which may have masked some binding issues in prior experiments.",
+    "The D1 noise-field test uses slightly different noise field values than the parent experiment (timestamps, durations) but tests the same algorithmic behavior."
+  ]
+}
