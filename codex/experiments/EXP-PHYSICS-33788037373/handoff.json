@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-33788037373",
+  "lane": "physics",
+  "target_lane": "physics",
+  "next_question": "Does a browser-based collection substrate with full DOM/accessibility tree state representation and semantic action selectors reveal action-conditioned transition structure on live Web pages with navigational density, beyond what HTTP fetch with URL-only representation can detect?",
+  "why_next": "Current experiment's measurement validity failed due to state representation degradation (URL-only vs composite), data integrity mismatch, target_href encoding bug, and multiple-comparison correction failure. Synthetic controls validate methodology fixes but live Web measurement invalid. Richer state representation (DOM/accessibility tree) with browser-based collection may reveal structure hidden by HTTP fetch limitations.",
+  "carry_forward": {
+    "established": [
+      "Synthetic positive control with overlapping actions discriminates (S,A) from A alone: action-conditioned accuracy 1.0 vs action-frequency accuracy ~0.65, permutation p=0.0",
+      "Trajectory-grouped holdout evaluation prevents in-sample memorization artifact (memorization ratio 1.0 for synthetic, >>1 for live)",
+      "Trajectory-grouped permutation null correctly fails to reject on random null data (p>0.05)",
+      "HTTP fetch + HTMLParser can collect transitions on server-rendered sites (Wikipedia, Python docs)"
+    ],
+    "rejected": [
+      "C-WEB-DYNAMICS not supported at tested representation (URL-only, HTTP fetch): best effect size 0.030 accuracy, SA==AF, p_corr=0.096 after required 6x Bonferroni",
+      "URL-only state representation does not reveal action-conditioned structure on live Web pages with navigational density",
+      "HTTP fetch substrate with URL-only state is insufficient for Web dynamics detection at tested representation level"
+    ],
+    "unknown": [
+      "Whether full composite state representation (url+title+link_texts+tag_counts+form_signals) reveals action-conditioned structure on live Web",
+      "Whether browser-based collection with DOM/accessibility tree reveals structure hidden by HTTP fetch",
+      "Whether larger sample size (>100 trajectories per site) provides adequate power to detect small effects after trajectory-grouped holdout",
+      "Whether the target_href encoding bug (source vs destination URL) materially deflated SA vs AF separation on live data",
+      "Whether the representation degradation masked existing structure that would appear with richer state"
+    ],
+    "do_not_assume": [
+      "Do not assume the live test results (0-3% accuracy) reflect true Web dynamics—they are from a degraded representation with data integrity issues",
+      "Do not assume the synthetic positive control discriminates on live data—it validates pipeline, not Web dynamics",
+      "Do not assume the substrate is a browser—it is HTTP fetch + HTMLParser, no JavaScript execution, no accessibility tree",
+      "Do not assume the measurement is valid for Web dynamics—validity gates failed for live representation",
+      "Do not assume the 0.033 accuracy on Python docs is meaningful—effect size negligible, SA==AF, not significant after proper correction",
+      "Do not assume C-MEAS-VALID has been established—it remains EXPERIMENTAL with synthetic-only validation"
+    ]
+  },
+  "dependencies": [
+    "Fix state representation storage: store full composite state (url+title+link_texts+tag_counts+form_signals) in raw data, not URL-only",
+    "Fix target_href encoding: set Action.target_href to destination next_url, not source current_url",
+    "Apply Bonferroni correction for 6 comparisons (3 null tests × 2 live sites) as specified in prereg 11.2",
+    "Populate result.json artifacts with sha256 hashes for reproducibility",
+    "Reconcile provenance seeds with frozen spec (live_site2=45 not 43)",
+    "Consider browser-based collection (Playwright) for richer state representation (DOM/accessibility tree)",
+    "Increase sample size to detect small effects (target >100 trajectories per site)"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-33788037373/audit.json required_fixes (9 items)",
+    "research/experiments/EXP-PHYSICS-33788037373/audit.json validity_findings state_representation_validity FAIL",
+    "research/experiments/EXP-PHYSICS-33788037373/audit.json recomputed_metrics live_python_docs_cached p_raw 0.016 p_bonferroni_x6 0.096",
+    "research/experiments/EXP-PHYSICS-33788037373/audit.json claim_ceiling C-MEAS-VALID partially supported, C-WEB-DYNAMICS not supported",
+    "research/experiments/EXP-PHYSICS-33788037373/result.json metrics live_wikipedia accuracy_SA_heldout 0.0, live_python_docs accuracy_SA_heldout 0.033",
+    "research/experiments/EXP-PHYSICS-33788037373/spec.json decision_rule clauses 1-6, measurement_validity criteria",
+    "research/experiments/EXP-PHYSICS-33788037373/prereg.md sections 2.1 (composite state), 3.1 (target_href definition), 11.2 (Bonferroni 6 comparisons)",
+    "research/physics/substrate_337.py LiveWebCollector.collect_trajectories lines 373-379 target_href=current_url",
+    "research/physics/run_execute_337.py lines 118-130 key-based transition building NOTE URL-only state identity"
+  ],
+  "recommended_action": "Redesign measurement substrate with four mandatory fixes: (1) store full composite state representation in raw data; (2) fix target_href encoding to destination URL; (3) apply Bonferroni correction for 6 comparisons; (4) consider browser-based collection for DOM/accessibility tree representation. Target server-rendered sites with navigational density, increase sample size to >100 trajectories per site, and populate artifacts with sha256 hashes for reproducibility."
+}

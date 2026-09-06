@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-33974562602",
+  "lane": "product",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "kernel_regression_pass": true,
+    "regression_slot_counts": {
+      "B1": 1,
+      "B2": 2,
+      "B3": 3,
+      "B4": 1,
+      "B5": 2
+    },
+    "regression_slot_names_distinct": {
+      "B1": true,
+      "B2": true,
+      "B3": true,
+      "B4": true,
+      "B5": true
+    },
+    "regression_unseen_resolution_rate": 1.0,
+    "regression_binding_accuracy": 1.0,
+    "regression_total_unseen": 21,
+    "regression_executable": 21,
+    "regression_binding_correct": 21,
+    "full_value_resolution_rate": 1.0,
+    "full_value_binding_accuracy": 0.0,
+    "full_value_double_prefix_error": true,
+    "noisy_resolution_rate": 0.0,
+    "noisy_binding_accuracy": 0.0,
+    "noisy_extra_slots_induced": true,
+    "noisy_D1_slot_count": 6,
+    "noisy_D1_expected_slot_count": 3,
+    "noisy_D2_slot_count": 4,
+    "noisy_D2_expected_slot_count": 2,
+    "noisy_D3_slot_count": 2,
+    "noisy_D3_expected_slot_count": 2,
+    "null_control_E1_slot_count": 4,
+    "null_control_E1_expected_slot_count": 0,
+    "null_control_E2_slot_count": 0,
+    "null_control_E2_expected_slot_count": 0,
+    "total_test_combinations": 42,
+    "total_executable": 21,
+    "total_binding_correct": 21,
+    "kernel_integration_time_seconds": 0,
+    "literal_baseline_fail_rate": 1.0
+  },
+  "controls": {
+    "B_REGRESSION_SYNTHETIC": {
+      "description": "5 conditions from EXP-PRODUCT-33741671686 run through kernel.distill_parameterized()",
+      "expected": "All 5 conditions produce identical slot counts, distinct naming, 21/21 EXECUTABLE, 21/21 binding correct",
+      "observed": "All 5 conditions pass: B1 slot=1, B2 slot=2 distinct, B3 slot=3 distinct, B4 slot=1, B5 slot=2 distinct. 21/21 EXECUTABLE, 21/21 binding correct",
+      "result": "PASS"
+    },
+    "B_LITERAL_REPLAY": {
+      "description": "Literal mechanism (no parameter slots) from kernel.distill()",
+      "expected": "Must fail on all unseen multi-parameter combinations",
+      "observed": "5/5 EXPLORE (fail) on unseen combinations",
+      "result": "PASS"
+    },
+    "E1_PATTERN_ABSENCE": {
+      "description": "Three unrelated observations (POST /api/payments, GET /api/users/42, DELETE /api/sessions/abc-123)",
+      "expected": "slot_count=0, resolution=UNKNOWN for all params",
+      "observed": "slot_count=4 (hallucinated slots from unrelated observations), slots=['amount', 'method', 'session_id', 'url']",
+      "result": "FAIL"
+    },
+    "E2_SINGLE_OBS": {
+      "description": "Single observation only (insufficient for induction)",
+      "expected": "slot_count=0, no mechanism",
+      "observed": "No mechanism induced (distill_parameterized returned None)",
+      "result": "PASS"
+    },
+    "POSITIVE_CONTROL_REGRESSION": {
+      "description": "5 synthetic conditions produce identical results as EXP-PRODUCT-33741671686",
+      "expected": "Exact match on slot counts, slot names, resolution rate, binding accuracy",
+      "observed": "Exact match: 21/21 EXECUTABLE, 21/21 binding, all slot counts and names match",
+      "result": "PASS"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PRODUCT-33974562602/raw_evidence.json",
+      "sha256": "27807c145c40337806195352dd8b1b74e4285567256511107104d8809f6e6b0c",
+      "role": "raw"
+    },
+    {
+      "path": "src/spider/kernel.py",
+      "sha256": "f2e8043de03f5191eef34b3cf57c9cd7ab144954179492f0b546c85ffcc461cf",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-33974562602/run_experiment.py",
+      "sha256": "666978465746159ec0e5c5cc1f35251dfbd5b08297e421741d61f95576f4454b",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "Kernel integration is FAITHFUL: distill_parameterized() method on SpiderKernel produces identical results to the experiment-script version (EXP-PRODUCT-33741671686) on all 5 regression conditions. 21/21 EXECUTABLE, 21/21 binding correct, all slot counts and names match exactly.",
+    "Full-value unseen tests produce DOUBLE-PREFIX ERROR: when caller supplies 'https://site-d.com/hook' instead of 'd', the template 'https://site-${callback_url}.com/hook' produces 'https://site-https://site-d.com/hook.com/hook'. The prefix extraction is circular when the caller supplies full values. Resolution is EXECUTABLE (100%) but binding accuracy is 0%.",
+    "Noisy browser observations induce EXTRA PARAMETER SLOTS from noise fields: D1 induces 6 slots instead of 3 (timestamp, request_duration_ms, retry_count, user_agent are detected as varying), D2 induces 4 slots instead of 2 (response_time_ms, cache_hit, result_count are varying). The function cannot distinguish signal from noise in multi-step observations.",
+    "D3 (varying preconditions) induces correct slot count (2) but 0% resolution because the preconditions vary across observations and the resolve() method cannot match them. The function extracts slots from action structure but ignores precondition variation.",
+    "Null control E1 (unrelated observations) produces 4 hallucinated slots (amount, method, session_id, url) from observations with completely different structures. The function detects varying fields even when observations share no common prefix/suffix pattern. This is the same failure mode as the parent experiment's null control.",
+    "Null control E2 (single observation) correctly produces no mechanism. The function correctly requires at least 2 observations for induction.",
+    "Literal baseline confirms parameterization is still necessary: 5/5 EXPLORE on unseen multi-param combinations.",
+    "The kernel integration itself (Phase A + B) is a complete success. All failures are in the algorithm's behavior on realistic inputs, not in the integration."
+  ],
+  "validity_notes": [
+    "All test conditions are synthetic with deterministic structure — no model calls, no network, no browser during measurement. This is a strength: failures are algorithmic, not environmental.",
+    "The slot-to-param mapping heuristic is inherited from the parent experiment and is fragile (positional fallback). Binding failures could partially be caused by incorrect slot-to-param mapping rather than template errors. However, the double-prefix error in C1/C2 is clearly a template/prefix issue, not a mapping issue.",
+    "The noisy observation design uses realistic noise fields (timestamps, metadata) that genuinely vary across observations. The function's inability to distinguish signal from noise is a real limitation, not a design flaw in the test.",
+    "The null control E1 uses 3 observations with maximally different structures (different HTTP methods, endpoints, body shapes). The fact that it still induces 4 slots indicates the function has no mechanism for detecting 'these observations are unrelated'.",
+    "Frozen kernel.py sha256 (f2e8043d) matches the pre-experiment hash, confirming no unintended modifications."
+  ],
+  "unresolved": [
+    "Does the double-prefix error have a simple fix (e.g., detect when supplied value already contains prefix/suffix and skip re-wrapping)?",
+    "Can the noise filtering be improved by ignoring fields that don't share structural positions with the majority of varying fields (e.g., timestamps that vary but are not in path/body/header)?",
+    "Is there a principled way to detect 'unrelated observations' and return slot_count=0, or does this require a similarity threshold between observation structures?",
+    "Does the D3 failure (varying preconditions) indicate that preconditions should be excluded from the induction entirely, or should the function handle precondition variation separately?",
+    "What is the false-positive rate for slot induction on real browser session data with realistic noise patterns?"
+  ]
+}

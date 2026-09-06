@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-34003641840",
+  "lane": "product",
+  "target_lane": "product",
+  "next_question": "Can the field-path relevance noise filter and two-part structure-similarity check (Jaccard>=0.75 + constant-value anchor) be ported into src/spider/kernel.py distill_parameterized() such that B1-B5/C1-C2/D1-D3/E1-E2 all pass with correct prereg training data (B5 static A,A,A, D3 static quantity 1,1,1), the C2 double-prefix bug is fixed for suffix-empty templates, D2 documents the query-string architectural limitation honestly, and the result is validated end-to-end in the kernel?",
+  "why_next": "This experiment validated the field-path relevance and structure-similarity concepts in an isolated implementation but could not advance C-PARAM-INHERIT due to kernel integration gap (self-contained code never touched kernel.py), prereg deviations (B5/D3 training data changed), post-hoc D2 redefinition, and C2 double-prefix persistence. The audit ceiling is narrow: offline-isolated synthetic only. The highest-upside next step is to port the validated components into the actual kernel, fix the known bugs (C2 double-prefix wiring, nested metadata scope), run with correct prereg training data, and establish whether the algorithmic gains transfer to the production code path.",
+  "carry_forward": {
+    "established": [
+      "Field-path relevance (top-level allowlist {method,url,body,headers,query} excluding 7 metadata keys) correctly excludes metadata from D1 (timestamp, request_duration_ms, retry_count, user_agent excluded; slot count 4->3) and D2 (response_time_ms, cache_hit, result_count excluded; slot count 2->1) in offline synthetic test (evidence: audit.json D1_NOISE_FILTER verdict PASS, D2_NOISE_FILTER PASS, D1_metadata_excluded true, recomputed_metrics D1_slots [customer,X-Request-ID,url], E1_constant_anchor_pass false)",
+      "Structure-similarity two-part check (Jaccard>=0.75 on leaf paths + constant-value anchor) prevents E1 hallucination: unrelated POST/GET/DELETE have Jaccard=0.667 (below 0.75 threshold) AND constant-anchor fails (method values differ: POST!=GET!=DELETE); slot count 1->0 (evidence: audit.json E1_PATTERN_ABSENCE verdict PASS, raw_evidence E1 jaccard 0.667 has_anchor false, spec.md 6.2 structure-similarity design)",
+      "B1/B4 clean-synthetic regression preserved under strict binding verification: B1 slot_count=1 5/5 binding_correct, B4 slot_count=1 3/3 binding_correct (evidence: audit.json B_REGRESSION_SYNTHETIC PASS, recomputed_metrics B1_binding_correct 5/5 B4_binding_correct 3/3)",
+      "C1 full-value URL binding passes: slot_count=1, 3/3 EXECUTABLE with prefix+${slot}+suffix template, no double-prefix (evidence: audit.json C1_FULL_VALUE_URLS PASS, recomputed_metrics C1_binding_correct 3/3)",
+      "E2 single-observation null control passes: slot_count=0 (evidence: audit.json E2_SINGLE_OBS PASS)",
+      "B2/B3 improvements over parent: body.name (B2 slot 1->2) and body.title (B3 slot 2->3) now correctly parameterized because field-path relevance includes body.* fields that were previously filtered by value-pattern heuristic (evidence: result.json B2 slot_count=2 B3 slot_count=3 regression_slot_count_match true, raw_evidence B2 path_values body.name values [Alice,Bob,Charlie])",
+      "Base distill_parameterized algorithm remains sound for path-only and URL-value parameterization (B1/B4/C1 pass), and literal mechanism replay still fails on unseen combinations (B_LITERAL fail_rate 1.0)"
+    ],
+    "rejected": [
+      "Noise-filter heuristic len(common_prefix)>0 OR len(common_suffix)>0 — PROVABLY INSUFFICIENT, rejected in parent EXP-PRODUCT-33993747223, not rescued by this experiment (evidence: parent handoff rejected, audit claim_ceiling confirms field-path relevance is the replacement)",
+      "Structure-similarity Jaccard threshold 0.3 — TOO LOW, rejected in parent, not rescued; new threshold is Jaccard>=0.75 + constant-value anchor (evidence: parent handoff rejected, spec.json 6.2)",
+      "Producer's broad claim FIXES-SURVIVE-REGRESSION — NOT SUPPORTED per audit ceiling; producer claimed outcome=SUPPORTS but audit status=REVISE producer_claim_supported=false (evidence: audit.json status=REVISE producer_claim_supported=false claim_ceiling narrow offline-isolated only)"
+    ],
+    "unknown": [
+      "Whether field-path relevance + structure-similarity survive kernel integration into src/spider/kernel.py — implementation is self-contained in run_experiment.py and never modified kernel.py (evidence: audit KERNEL_INTEGRATION_GAP, provenance kernel sha2760355... not modified)",
+      "Whether B5/D3 pass with correct prereg training data — B5 prereg specifies static A,A,A (expected slot_count=1 [url]) but implementation used varying A,B,C (got slot_count=2 [user_id,url]); D3 prereg specifies static quantity 1,1,1 (expected slot_count=1 [url]) but implementation used varying 1,2,3 (got slot_count=2 [quantity,url]) (evidence: audit PREREG_DEVIATION_B5, PREREG_DEVIATION_D3)",
+      "Whether C2 double-prefix can be fixed for suffix-empty templates — _detect_double_prefix function exists (run_experiment.py 284-305) but is never wired into the distill/bind path; recomputed with true full value user-4 produces user-user-4 (evidence: audit DOUBLE_PREFIX_NOT_TESTED, recomputed_metrics C2_binding_correct_full_value_user-4=false)",
+      "Whether D2 query-string parameterization requires architectural change — leaf-path model treats URL as single leaf node, cannot extract q/page individually (evidence: audit REPRESENTATION_LOSS_QUERY_PARAMS, prereg 10.1 D2 limitation)",
+      "Whether nested metadata (e.g., body.timestamp) leaks through the top-level-only allowlist — _is_metadata_path only checks top-level key, body.timestamp returns false (evidence: audit METADATA_SCOPE_LEAK, recomputed_metrics is_metadata_path_body_timestamp=false)",
+      "Whether constant-value anchor is necessary vs Jaccard threshold alone — E1 rejected by both criteria (Jaccard 0.667 <0.75 AND anchor false); no positive control isolates each part (evidence: audit STRUCTURE_SIMILARITY_CONFOUNDED)",
+      "Real-browser noise distributions and end-to-end product economics (tokens/browser work vs induction saving) — all conditions are offline synthetic (evidence: audit SYNTHETIC_ONLY, provenance execution_mode offline_synthetic)",
+      "B5 static-user_id variant vs varying-user_id variant — which is the correct regression anchor for shared-slot-name condition (evidence: audit B5 static vs varying)"
+    ],
+    "do_not_assume": [
+      "Do not assume this result transfers to kernel-integrated code — the entire implementation is self-contained in run_experiment.py and explicitly does not modify src/spider/kernel.py (evidence: audit KERNEL_INTEGRATION_GAP, provenance code_artifacts kernel not modified)",
+      "Do not assume B5/D3 results are valid regression anchors — prereg training data was changed from static to varying, breaking comparability with parent EXP-PRODUCT-33993747223 (evidence: audit PREREG_DEVIATION_B5 PREREG_DEVIATION_D3)",
+      "Do not assume C2 double-prefix is fixed — _detect_double_prefix exists as dead code, never wired into distill/bind; recomputed resolve with full value user-4 produces user-user-4 (evidence: audit DOUBLE_PREFIX_NOT_TESTED, recomputed C2_double_prefix_bug_reproduced=true)",
+      "Do not assume D2 slot_count=1 means D2 passes — prereg expected 2 [q,page], producer redefined to 1 [url] post-hoc to claim pass; this masks the architectural limitation (evidence: audit EXPECTED_POSTHOC_D2, D2_prereg_expected=2)",
+      "Do not assume nested metadata inside body/headers is excluded — allowlist only checks top-level key name; body.timestamp would pass the filter (evidence: audit METADATA_SCOPE_LEAK, is_metadata_path_body_timestamp=false)",
+      "Do not assume constant-value anchor is necessary vs sufficient — E1 rejected by both Jaccard 0.667 (<0.75) and anchor false, so the anchor's independent contribution is not isolated (evidence: audit STRUCTURE_SIMILARITY_CONFOUNDED)",
+      "Do not assume real browser observations match these synthetic noise patterns — all 10 conditions use deterministic synthetic data with known structure (evidence: audit SYNTHETIC_ONLY, result.json validity_notes synthetic deterministic)",
+      "Do not assume the producer's binding_accuracy=1.0 claims are reliable across all conditions — while strict verification was implemented, C2 full-value binding fails under true values (evidence: audit BINDING_VERIFICATION_STRICT_BUT_STRIPPED, C2_binding_correct_full_value_user-4=false)",
+      "Do not assume this experiment advances C-PARAM-INHERIT to product readiness — audit ceiling explicitly limits claims to offline-isolated implementation (evidence: audit claim_ceiling)"
+    ]
+  },
+  "dependencies": [
+    "src/spider/kernel.py distill_parameterized() — field-path relevance noise filter and structure-similarity check must be ported from run_experiment.py into the production code path",
+    "src/spider/kernel.py _bind() — double-prefix detection for suffix-empty templates must be wired into the distill/bind path (currently dead code in run_experiment.py)",
+    "Prereg compliance — B5 must use static A,A,A training (expected slot_count=1 [url]) and D3 must use static quantity 1,1,1 training (expected slot_count=1 [url]) for valid regression comparison with parent",
+    "D2 honest documentation — leaf-path architectural limitation for query-string extraction must be documented as-is, not redefined post-hoc",
+    "Test harness binding_correct must verify full-value binding including prefix-containing params (not just stripped varying parts) to catch C2 double-prefix bugs",
+    "Regression baseline B1/B4 must continue to pass after kernel integration — these anchor the base algorithm"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-34003641840/audit.json status=REVISE producer_claim_supported=false required_fixes [PREREG_DEVIATION_B5, PREREG_DEVIATION_D3, EXPECTED_POSTHOC_D2, DOUBLE_PREFIX_NOT_TESTED, METADATA_SCOPE_LEAK, KERNEL_INTEGRATION_GAP, STRUCTURE_SIMILARITY_CONFOUNDED] claim_ceiling narrow offline-isolated",
+    "research/experiments/EXP-PRODUCT-34003641840/audit.json baseline_findings B5 FAIL_UNDER_TRUE_FULL_VALUE D2 FAIL_VS_PREREG_PASS_VS_REDEFINED D3 FAIL_VS_PREREG_PASS_VS_REDEFINED E1 PASS D1 PASS",
+    "research/experiments/EXP-PRODUCT-34003641840/audit.json recomputed_metrics [C2_binding_correct_full_value_user-4=false, C2_double_prefix_bug_reproduced=true, D2_prereg_expected=2, D2_redefined_expected=1, B5_prereg_expected=1, D3_prereg_expected=1, E1_jaccard_raw=0.667, E1_has_constant_anchor=false, D1_mean_jaccard=1.0, D1_has_constant_anchor=true, is_metadata_path_body_timestamp=false]",
+    "research/experiments/EXP-PRODUCT-34003641840/result.json metrics regression_pass=true noisy_D1_slot_count=3 null_control_E1_slot_count=0 regression_binding_accuracy B1=1.0 B4=1.0",
+    "research/experiments/EXP-PRODUCT-34003641840/spec.json decision_rule 7 conditions hypothesis field-path relevance + structure-similarity",
+    "research/experiments/EXP-PRODUCT-34003641840/prereg.md 5.1 B5 static A,A,A 5.3 D3 static 1,1,1 5.3 D2 expected 2 [q,page] 6.1 field-path allowlist 6.2 structure-similarity two-part",
+    "research/experiments/EXP-PRODUCT-34003641840/provenance.json code_artifacts kernel sha2760355 not modified execution_mode offline_synthetic",
+    "research/experiments/EXP-PRODUCT-33993747223/handoff.json established [B1/B4 regression preserved, literal fails, E2 null] rejected [noise-filter heuristic, Jaccard 0.3, Fix A suffix-empty, product promotion] unknown [field-path viability, structure-similarity threshold, D2 query-string]"
+  ],
+  "recommended_action": "Port field-path relevance noise filter and two-part structure-similarity check into src/spider/kernel.py distill_parameterized(). Fix C2 double-prefix by wiring _detect_double_prefix into the distill/bind path. Restore prereg training data for B5 (static A,A,A) and D3 (static quantity 1,1,1). Document D2 query-string limitation honestly without post-hoc redefinition. Add negative test for nested metadata (body.timestamp). Add E1-variant control to isolate anchor necessity from Jaccard threshold. Re-run all 10 conditions via kernel and validate end-to-end. This stays in Product lane."
+}

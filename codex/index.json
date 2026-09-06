@@ -51,6 +51,31 @@
         "handoff.json": "128562014c5c09d2793692cd05297d571da9cefc4059be95bdc469498fb0e7d8"
       }
     },
+    "EXP-FRONTIER-33863640568": {
+      "lane": "frontier",
+      "request_id": "82a107dee4efe693fde08251",
+      "created_at": "2026-09-04T10:31:35.759787+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Can non-permutation deterministic functions (affine maps f(s,a) = (c_a * s + b_a) mod 10 where E_S[f(S,a)] varies across actions) yield detectable lambda-scaling of causal effect heterogeneity, or should the Frontier lane pivot to distributional metrics (TV distance) that are sensitive to permutation structure?",
+      "audit_status": "REVISE",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/frontier",
+      "hashes": {
+        "request.json": "fb3652d895740298ef1e10009db3916536de1e2aec8f662affc63ea1e155a0ae",
+        "spec.json": "75f178705873a5377a36007476175ea502b6db09577fa720c2fcec8d56a8d945",
+        "prereg.md": "01240a40f14813350ec4085da9802c706fb76271f403418a5ddd63f3ef0c2ace",
+        "freeze.json": "91a5e4efed0fa1e74177b3482971f33560ca92c1a9d8bbbd250815d06b5abd41",
+        "result.json": "a0e6daab701ff5b1245e240f30ddb2f44b964a875ca3ec7abffb1d5cccfdc3c5",
+        "report.md": "98fd669e866080b310bb590f3443f5e8e13509d006e1026130188d6b30c27ab8",
+        "provenance.json": "9d48856c81a4ecdc1df79dc4560d7c3142ff8994c6ed3b56ad4b91a31aa56544",
+        "audit.json": "d8659d7edaf1fbaddca119f83996e2b9a0c0c8f25c9b2ed2811dd43f166c78cc",
+        "verdict.json": "af4794efeba28e819fedc8ff1a335bf9553ad5fcfb4fc24a901c2e8dfe85e725",
+        "handoff.json": "7a629b31ec2f6202f72098b0a927e59a280519c8b9cd93242a22d0d3f6d026f0"
+      }
+    },
     "EXP-GRAPH-33528827169": {
       "lane": "graph",
       "request_id": "3e0d81e7790f2f2b7bd8665e",
@@ -101,6 +126,56 @@
         "handoff.json": "ebb3de502513621de55c297a32023f20b6f87739cdf00b4d3db025d00f51187a"
       }
     },
+    "EXP-GRAPH-33816735314": {
+      "lane": "graph",
+      "request_id": "06732c53f5442eb75b2f1416",
+      "created_at": "2026-09-03T23:14:48.590859+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT"
+      ],
+      "question": "Does adding a parameter-slot-count secondary tie-break in kernel.py resolve() eliminate false accepts in mixed literal+parameterized registries at equal confidence, without breaking cold, literal-only, or parameter-only baselines?",
+      "audit_status": "PASS",
+      "decision": "COMPETITION-SAFE",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/graph",
+      "hashes": {
+        "request.json": "477aec3869b8fe6ad5875de8e24fd3e856930b1eb36c765efed3c901edbfe6e8",
+        "spec.json": "1139b11faccca9c276f50f167a79ea7f6a67b0d6ce180af27c08339d8a6aac9a",
+        "prereg.md": "0dc9d883d320500f3d2a8e2778bef6f5a0b6b22799a07da6ae83a6f8dcaa6198",
+        "freeze.json": "dbc20a430026a7a6f4f4367c731190f8e57b8bd23f0a773ee84bbaa58f00444b",
+        "result.json": "686cc7475f56a2df6e328b01e04a4305611320c21c450f1f8b6ebf5dfab0c2be",
+        "report.md": "74534f6ca350392ed789d463844974416cabb49f48737cae9e6cbd86f5354b82",
+        "provenance.json": "fef72f991337889dc7eece5406d0ff3fc311650cac52165bffa22c1959efcf4a",
+        "audit.json": "6c0653885f471d974bbde46e9121a0966fdbf86cc1329388b3b11d5e7e11f016",
+        "verdict.json": "a28434b0522854ce16252789b468ac27b386fd009d308e06c0479bd7b617f71e",
+        "handoff.json": "54d5cb70b85e95b6afae07f906224a7d6313eff2017280056ccc8780c78f4806"
+      }
+    },
+    "EXP-GRAPH-33955869291": {
+      "lane": "graph",
+      "request_id": "7be2948230c6159b3eff8eac",
+      "created_at": "2026-09-05T08:39:53.013395+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT"
+      ],
+      "question": "Does the parameter-slot-count tie-break generalize safely to multi-slot mechanisms (2 vs 1 slot), template-only params with parameter_slots=[] but template ${id}, equal-slot-count ties (0 vs 0 or 1 vs 1), and does verify() correctly reject non-matching postconditions for non-200 HTTP responses?",
+      "audit_status": "REVISE",
+      "decision": "SCOPE-LIMITED",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/graph",
+      "hashes": {
+        "request.json": "4b53acf9a0f23b2434203d8fa79bebc7409de22a560f47020e98c775c0fd3aa0",
+        "spec.json": "47ed4dd06d33c3f34413753b35c47b3108a35f0c5e00a7b1f9172c33fd3e3d33",
+        "prereg.md": "4b27a8ca40ea084dcc44708e3040158ba9d5347a0d00e9620677effd7ca8135c",
+        "freeze.json": "4a712b5e7d00765d9ae4af975612a6bce8f6dd27b7bba0bd204aa0b2de568497",
+        "result.json": "2863edbfce87739ce6f14c80f5c3378066107370c366dd8e841c6552c6bf4554",
+        "report.md": "53711a1485b0652068b51040cade6e24cb8a976c760625db738f50d68a311b21",
+        "provenance.json": "395e39d0b2088b14ca29daf8f3ab2539634166d4e1410969f84b469a30c1ab8b",
+        "audit.json": "d179f2624851ab1715b5858ed75ac9a3facba7a95ea85a97f396a3e0e94adab6",
+        "verdict.json": "07f75b8b3bbae3b148a9531cf06b2dc0508ba1a0949bc520af98f285fb5767b4",
+        "handoff.json": "423be67d7374d5c7fb271c44146735e754ab46708b396bdaedb8dd99d93354d4"
+      }
+    },
     "EXP-INTEL-33528832113": {
       "lane": "intel",
       "request_id": "46d19fdaf32e996c0ab24bd7",
@@ -126,6 +201,58 @@
         "audit.json": "9781215ff59861da4ab8f61774734acd120c9d33efc0874bfdd97631674d4d6b",
         "verdict.json": "5737ab7e5989ec116fa4610619fdb76c2f27b73bc5e150a5b7be1417b3c16054",
         "handoff.json": "46853bb92c10fbe26f3ba849ff7664c02b95b23d39e1033fbc6efe33424a3336"
+      }
+    },
+    "EXP-INTEL-33842055594": {
+      "lane": "intel",
+      "request_id": "aa84f05c994cb7f569ba4f07",
+      "created_at": "2026-09-04T05:51:40.097724+00:00",
+      "claim_ids": [
+        "C-CROSSSITE",
+        "C-LLM-INHERIT"
+      ],
+      "question": "Can WebArena's Docker-based self-hosting provide HTML/DOM accessibility trees compatible with SPIDER's fragment-reuse observation format?",
+      "audit_status": "REVISE",
+      "decision": "PARTIALLY_COMPATIBLE",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/intel",
+      "hashes": {
+        "request.json": "d7ac099ff31b5f45a830349529520d4c2ee5473ea319c7b4af7cb37d955de79c",
+        "spec.json": "79da2a9a50aab9cd8dd74f927fdfa68351b44b22b4a0272b3b259c88c81309fb",
+        "prereg.md": "e0d93a691eba75216d80461196218b20fd6569c085a7b7f4ff4ab59c0700f8bc",
+        "freeze.json": "93b4ec42b16b80712d595a40164dc0c3567250765cb0c8a554a7f3639d6d8f4d",
+        "result.json": "f72051dede117cd5799332a1520d663e540bb8976e58d742281a110d32b175c9",
+        "report.md": "3bafabeb8a7d2e85235b93d8a37ed17bcad43b304218d00abeb838c2faf12b25",
+        "provenance.json": "d897e411eeef563b095ccf36fee448a9c3d8f759e3794bb6c14dfb0b896edaa4",
+        "audit.json": "f8b8010c21a66d60da850a1f63aa1fc7804485a64701fea3b0437a028ec003f2",
+        "verdict.json": "3f60b461ab38df9b9a023f934cb89913b39d09eabc616bd16e97476eb5f8e395",
+        "handoff.json": "c50df1d04707587e76fd7426e7d9c8960aa85cee28fb71acc9f3e9fdd262ca6e"
+      }
+    },
+    "EXP-INTEL-33925056324": {
+      "lane": "intel",
+      "request_id": "69900e979d772ca8a1fe7343",
+      "created_at": "2026-09-04T22:20:20.094538+00:00",
+      "claim_ids": [
+        "C-CROSSSITE",
+        "C-LLM-INHERIT"
+      ],
+      "question": "Can SPIDER's fragment extraction logic be adapted to extract reusable fragments from WebArena's accessibility tree observation format, and what is the transformation cost?",
+      "audit_status": "REVISE",
+      "decision": "SUPPORTS",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/intel",
+      "hashes": {
+        "request.json": "edd5c10df7802f25a590a582fbff6a4d8f165ad37f543608596140f57c9af185",
+        "spec.json": "cb953ffd57b362514378a259d79168fb2ba54f6ac9de2c92609980a4a618016c",
+        "prereg.md": "79d5d06666cc38da284c4de10520255559f7dd6963fb4b586200032f7fec5f33",
+        "freeze.json": "2789b2a76ac3f5893a0f1bac01724f0ae4c49c445f7c87bb18a18803022107aa",
+        "result.json": "44ebbb8197b14ef8259533523d9d0c08cf24ca7c30204f245323f987143e34f2",
+        "report.md": "cc8aa99c1bdc59baed1d4dad9ffea64ebef66fd0a9bd1d0826ac1dbfb86126c1",
+        "provenance.json": "50f267444bce9b3276dc69d6f331a3fb71ff36ae970b572c6a70c3d3b074dc9a",
+        "audit.json": "c29d7f10f065c090594081a0a51a8934708b5dd4906f89a1bbe20f288b387520",
+        "verdict.json": "42a35c448f71ccf4f8af78782519d0b5645cdb6f542c37f44790a62b88561f97",
+        "handoff.json": "6f92dd17615985260d2c3828608c7f7c00ff1ba71dd5593f57d82d9555668fce"
       }
     },
     "EXP-PHYSICS-33528829431": {
@@ -154,6 +281,32 @@
         "handoff.json": "d8af42ddf8a0c4910b1b55c1612c18a9e0e4b30a672e019f5c8b82203e0bba88"
       }
     },
+    "EXP-PHYSICS-33788037373": {
+      "lane": "physics",
+      "request_id": "f3f01d7f94fad7ed70360093",
+      "created_at": "2026-09-03T18:01:45.461063+00:00",
+      "claim_ids": [
+        "C-MEAS-VALID",
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "After correcting three methodology defects (in-sample evaluation, invalid bootstrap, non-discriminating positive control) identified in EXP-PHYSICS-33528829431, does the measurement substrate reveal genuine action-conditioned transition structure on live Web pages with navigational density?",
+      "audit_status": "FAIL",
+      "decision": "MEASUREMENT_INVALID",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/physics",
+      "hashes": {
+        "request.json": "b014f5c206a83409bfd5326bc8d2e8183609e0ef80ed0e6078d50e2dae209ff6",
+        "spec.json": "818348452206b27e26f4dc645bb03bc3ccd982287f54fcd3d2f6f5b3101ce863",
+        "prereg.md": "edef86688d34e165a026576e9f8c27edc95a0b3a73c5c80c2c52a4a234f610ea",
+        "freeze.json": "f835a55d63a457690b9ed6a790e1de433cf2dc22e16f9ddd707eb34f095501db",
+        "result.json": "7b60da6d0e7fb9f231749646758be7e7f739bc8e57a7fd2033eb064b797d42b1",
+        "report.md": "d18f8cdb723c7dc0bc983c142f095f8e15882e79f21e978fae60277bdee59a34",
+        "provenance.json": "a77f0ca756374b57039e0360fc6194b2f2012c515d7d9cb2340dbbf5e8c71f85",
+        "audit.json": "a8442f540db09145362f3582d7711e0c2f12139ed44887e4ac180b5eeb7018ca",
+        "verdict.json": "99d0bc37dbc228491675bd870344417093ef618e87c32f5cdb22ab6841ebc23e",
+        "handoff.json": "35ac95937cd8eac6486b1df4c51150ae30a6e2cb3851fa326e5a93d2f2f62fad"
+      }
+    },
     "EXP-PRODUCT-33528829801": {
       "lane": "product",
       "request_id": "2629e8e63e200f05556e37ca",
@@ -177,6 +330,106 @@
         "audit.json": "4049e1a91e637522463940b7488140df0acecd0b91b694caa3d2cea347686c6b",
         "verdict.json": "80c7532a8ffa0e167d30f440eee9c108b70c38b27a211b56f0b137282e5ac637",
         "handoff.json": "854e98a8808d570b229bf748bdb14e0ddd67d43faacb63db4b6cad8af0e92d7a"
+      }
+    },
+    "EXP-PRODUCT-33741671686": {
+      "lane": "product",
+      "request_id": "dcfebb9c0b39364946d91da2",
+      "created_at": "2026-09-03T09:57:29.684982+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT"
+      ],
+      "question": "Does parameter induction generalize to multi-parameter mechanisms with multiple distinct varying fields (path + body + headers), each receiving a distinct slot name, such that the induced mechanism resolves EXECUTABLE with correct bound_action for unseen multi-parameter combinations?",
+      "audit_status": "PASS",
+      "decision": "MULTI-PARAM-SURVIVES \u2014 the frozen decision rule passes all 7 checks: C1 regression (slot\u22651, resolution=1.0, binding=1.0), C2 multi-param (slot=2, distinct, resolution=1.0, binding=1.0), C3 three-param (slot=3, distinct, resolution=1.0, binding=1.0), C4 non-identifier (slot=1, resolution=1.0, binding=1.0), C5 no-collision (slot=2, distinct, resolution=1.0, binding=1.0), null_control passed, no crashes. Producer metrics verified: 21/21 EXECUTABLE, 21/21 binding correct, 0/21 unsubstituted templates. Audit PASS confirms all recomputed metrics match producer. However, the claim ceiling remains narrow: synthetic POC implemented only in run_experiment.py (not in kernel.py), single-intent deterministic observations, trivial full-replacement parameterization for body fields, tautological confidence gate (0.8 == min_confidence 0.8), null control passes via intent mismatch not pattern absence, fragile positional slot-to-param mapping in harness. Do NOT promote to Product Core.",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/product",
+      "hashes": {
+        "request.json": "4b1917a31ca05e7dd0c4cf6c890445f0c08c444ea0b199b514870af6e8b8c554",
+        "spec.json": "2f2a7c4b0fbe9d92813c249cf80fa1cb05659034c9fce12921a373506bd49f5b",
+        "prereg.md": "cf30b6f04081d7cc168bd4f8fbc317942f20f14d6808a30c3cc7939d39b05a0b",
+        "freeze.json": "3323e27885c1ac9839f144820fdd32a8cd233e12817bc0cba16a99535faaacad",
+        "result.json": "425dc2f8c084e802fddc360adf448b820c1bbdbffe29611534ab8621893a1870",
+        "report.md": "70d85e245d1f2412766eeb846a377fbc3f0f320fd9cc5a535f9839bae204ba1c",
+        "provenance.json": "f4d1ddeb2e4aece78d4445b03b1f39a262731ccc7dd378360fbcaedda2d69fd6",
+        "audit.json": "7e1893d6e5615dae06888f02c1808e16b7d8611d08c10cdc905bd1cb31508ef5",
+        "verdict.json": "289ead947d3d9c7efbb4e5dc3c8318c1559b305cdd4be956f5108e142ffa1883",
+        "handoff.json": "ac4b40a6bdfd48a7c27d4db3ad9756eefa9efad6b12a01f731337968f35259af"
+      }
+    },
+    "EXP-PRODUCT-33974562602": {
+      "lane": "product",
+      "request_id": "9e0a4bf69832580fa4460c28",
+      "created_at": "2026-09-05T15:21:52.269085+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT"
+      ],
+      "question": "Does the multi-parameter induction function survive kernel integration (shipping into src/spider/kernel.py) and still produce correct distinct slot naming, and does it also work when training observations come from noisy multi-step browser sessions with varying preconditions?",
+      "audit_status": "PASS",
+      "decision": "KERNEL-INTEGRATION-FALSIFIED",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/product",
+      "hashes": {
+        "request.json": "f3ac6e2ab30480ed7370041882af1fc9ac886489f7fe1668772593145237246f",
+        "spec.json": "a657916036ecf1ed7b98cde2cbcae88cd226a1a68ce5a34397f0d3bcd94a4607",
+        "prereg.md": "bb91946ce19a0b2f2acbf34293d665ded45ccfa5c658d637813d624f906ad052",
+        "freeze.json": "24c9a715d9d2ca66ddc63674e4f6f8a6d2afd51361980b70cfc3b3361a0f1e7d",
+        "result.json": "4f86a2018f479e11f15c6ee606cf56a067966cd9e9b49447cdf679a662977d9c",
+        "report.md": "7325aa9118877ca35237d700d7ec77c46e21d291daf915379269e6da887588cf",
+        "provenance.json": "184559e3b57e6a73c518ee3f666fcdfdd183f41b8a68b1764075a2898286de52",
+        "audit.json": "9c4e603f19fe9659088b3aa028ad19219a78c5e4c12ad3c249787dea8302d2de",
+        "verdict.json": "194773cc2db734d8cd7802df942b8e00b540e39abe92bc3e64d8e74d1897a1e1",
+        "handoff.json": "073d065ba23df4b9a7ad46e0e8f82d61d33104b7cc481395e2d4665e7fd73170"
+      }
+    },
+    "EXP-PRODUCT-33993747223": {
+      "lane": "product",
+      "request_id": "f2b438ee3cfdf8480ca8add5",
+      "created_at": "2026-09-05T21:41:11.731077+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT"
+      ],
+      "question": "Can three algorithmic fixes \u2014 (1) double-prefix detection in bind, (2) noise-field filtering in varying-value extraction, (3) structure-similarity check for pattern absence \u2014 be applied to distill_parameterized() in src/spider/kernel.py without breaking regression on clean synthetic inputs, and do the fixes resolve the three failure modes that blocked realistic-input use?",
+      "audit_status": "PASS",
+      "decision": "FIXES-FALSIFIED",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/product",
+      "hashes": {
+        "request.json": "77e2c8039f4cc0dd2813eb3fd231667e388cfca68372b727c979a7172bfa296e",
+        "spec.json": "ff5481a39191a311385e69b2a223284fa197d4f5ce7de7aa2bf922da7f1b3d9e",
+        "prereg.md": "abd89e5054ade48677c0b40da96c45efec86b6e60e2c1a98729778cfa67b52ad",
+        "freeze.json": "2a8d59a87552a23b5ac7fca50b2605710e0eee6412a4c4b1e4c1bb1121742135",
+        "result.json": "d2ef46771d91bd3332526eb8ee0dc68b6c427d1fc0055b8f79a0dfcb1d05a9c0",
+        "report.md": "08aac2a482318e002cc4e47d0cf4e4139c042f95783b7118bdbcc74ae5cf8ad4",
+        "provenance.json": "4e75b705f8573900b43696aaf57147aea9364fb7cec35f8839d0b3bd6f580d56",
+        "audit.json": "f3aad5e76c97da47aef8fc1bf9cc3f5a609c0082fd0235dc7c7ad3ce24dc9418",
+        "verdict.json": "51371b8429e857f111ceaf700529380df42ee4a3d8bd5fec93b2e35bb32d590f",
+        "handoff.json": "38b84992e2c908619e66823aadb2eee4776520d759abbfd943840dc134da8022"
+      }
+    },
+    "EXP-PRODUCT-34003641840": {
+      "lane": "product",
+      "request_id": "9dbd4a88a82692c295079e8a",
+      "created_at": "2026-09-06T01:20:44.161079+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT"
+      ],
+      "question": "Can a redesigned noise filter using field-path relevance (only action-template-relevant paths: body.*, headers.*, url; excluding top-level metadata) and a higher structure-similarity threshold (>0.67) be implemented without breaking the B1/B4 clean-synthetic regression that still passes, and does this redesign resolve D1 noisy-observation over-parametrization and E1 pattern-absence hallucination while preserving clean-synthetic regression?",
+      "audit_status": "REVISE",
+      "decision": "FIXES-FALSIFIED",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/product",
+      "hashes": {
+        "request.json": "d8aa047873053228069f0ae6f2a40d37a124c6489b58135e0f8a2fe7e7e5c6bb",
+        "spec.json": "90a4024586a23b8e2c560a83b76bfeb3ba686cea6fb9670b4b49888b8219401b",
+        "prereg.md": "858efbada200631859d364f3b9668ab9a3653464d07e891d114839bcaf064ce2",
+        "freeze.json": "d58edf357ef2d65bf4226f94551617fe957bef29e2bfc8020ac7dad9a3af1167",
+        "result.json": "d802e7bfaa71aa4be0a9d176db5aad426d0e4af749e555d65d399886432b0ec8",
+        "report.md": "eeac7397d1a52f50d7620f6b793784775197a34d167ca4a89db9f2eba89dccb0",
+        "provenance.json": "78bde2a64ce2f36334e828f934ace6deb43793e6d56f8bc4be45a2eab53076d7",
+        "audit.json": "18db5d1e3635a9e00dfab76970b315fcbc24c6ec9b5eca75a69961fe4bdd705f",
+        "verdict.json": "f2ebb2dff1e4ab0850986a6ac2acc1a323c2ebfe0ae88d1dfea32a573d5474de",
+        "handoff.json": "ab539267befd3a966cc762ae00cc3eff112911501a48128642e05e4f378702f0"
       }
     },
     "EXP-RUNTIME-33528830833": {
@@ -252,6 +505,31 @@
         "audit.json": "61f7a88cf5d52c5cd7e6d5e529eefca6c72ba5e320abce11315f09a5bf494076",
         "verdict.json": "b61cad3195b1a64273f9b1768842f8efbb816175b4c582ed7e858f6ba1cd9320",
         "handoff.json": "c0cf725e47b7a5596f4400213a228f41e46321d0ee790280dc1144ec00bb7894"
+      }
+    },
+    "EXP-RUNTIME-33902315583": {
+      "lane": "runtime",
+      "request_id": "644deeddb692b3f5c2834a60",
+      "created_at": "2026-09-04T17:46:17.283501+00:00",
+      "claim_ids": [
+        "C-MEAS-VALID"
+      ],
+      "question": "On a real Flask server with PyJWT validation middleware (not hand-programmed lookup tables), no synthetic X-Auth-Level/X-Session/X-User/X-Error headers, and identical error response bodies for expired vs invalid tokens, does the HTTP fingerprint substrate maintain discrimination > 0.5 \u2014 and does the full vector (status+body+standard-headers) exceed B-BODY-ONLY when synthetic header tautology is removed and error states share identical bodies?",
+      "audit_status": "PASS",
+      "decision": "C-MEAS-VALID survives narrowly on real Flask/JWT middleware within tested scope. Full-vector discrimination 0.833 > 0.5, null FP 0.0% < 5%, valid vs expired discriminable Jaccard 0.3505 < 0.5. All three decision criteria pass. Full vector equals B-BODY-ONLY (0.833 = 0.833) \u2014 standard headers add no independent discriminating information; body is the dominant signal. Parent gaps V1-REAL-MIDDLEWARE-GAP and V2-SYNTHETIC-HEADER-TAUTOLOGY closed. Claim ceiling bounded to Flask 3.1.3 + PyJWT 2.13.0 HS256, localhost, 4 states, no synthetic headers, standard headers only, jitter 50-150ms, N=40.",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/runtime",
+      "hashes": {
+        "request.json": "a3d8fc09cf58ccfda3463926e286c1c9bbe996567cc4306cd617d9b652de804e",
+        "spec.json": "37ce093b69bcf8c00029a5b755e5204d66a2a6827a48d71f9ef18c645239002b",
+        "prereg.md": "cba7f1bdc4a52097f0164e9b269f267e141e6b33715d0780b8b7a33f079fedee",
+        "freeze.json": "8411de39aa84925009ef8d3740ad30ddbc78b275afcadec254c6d164810cb12e",
+        "result.json": "384238fda23f97a663c9b8e0c79154d99fdfa9b406fb040320cd76106110e98c",
+        "report.md": "a89bcc4a58a08a6d88b64a71f281872bb68f80122e23f76705cef1778073abc0",
+        "provenance.json": "6044906f11bb6e3585bcf975428f2ccda9e377648bd4343572d7a01c9a69eaf1",
+        "audit.json": "44b319783f6f8cdad9183c1b8a9c562e24afbcb4c7679d4d612d5ab789c448cf",
+        "verdict.json": "eae423db32205d7dadbd6fbb557000fe3b7f2a7552894c75e5661404d0a280a7",
+        "handoff.json": "ef4350875b7915635d892cc0b1d09761992f481a7bc1691a43e1afbb55712056"
       }
     }
   }

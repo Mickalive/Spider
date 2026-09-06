@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-33741671686",
+  "lane": "product",
+  "execution": {
+    "github_run_id": "33805283361",
+    "github_run_attempt": 1,
+    "executed_at": "2026-09-03T21:01:11Z",
+    "model": "opencode/mimo-v2.5-free",
+    "exit_code": 0,
+    "status": "success"
+  },
+  "commits": {
+    "pre_execute_sha": "8c2784abbb78b8fe70b31e1d23f31ee011416d9e",
+    "post_execute_sha": "8c2784abbb78b8fe70b31e1d23f31ee011416d9e",
+    "freeze_sha": "5063f7cc52f70b4603df4c8dc416644f5083dc80",
+    "base_sha": "b3d02e190f28a74d65397c181b3daaa3858d20ba"
+  },
+  "frozen_inputs": {
+    "request.json": "research/experiments/EXP-PRODUCT-33741671686/request.json",
+    "spec.json": "research/experiments/EXP-PRODUCT-33741671686/spec.json",
+    "prereg.md": "research/experiments/EXP-PRODUCT-33741671686/prereg.md",
+    "freeze.json": "research/experiments/EXP-PRODUCT-33741671686/freeze.json"
+  },
+  "code_paths": {
+    "experiment_script": {
+      "path": "research/experiments/EXP-PRODUCT-33741671686/run_experiment.py",
+      "sha256": "c19d2b4978383f39fc8c8f187c7fb176b74b832c2e10bd94c26baebe4c31f397",
+      "role": "experiment runner with multi-parameter induction implementation"
+    },
+    "kernel": {
+      "path": "src/spider/kernel.py",
+      "sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+      "role": "SpiderKernel with resolve(), _bind(), _template_slots() — NOT modified during experiment"
+    },
+    "models": {
+      "path": "src/spider/models.py",
+      "sha256": "338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78",
+      "role": "Mechanism, Observation, Resolution dataclasses"
+    },
+    "registry": {
+      "path": "src/spider/registry.py",
+      "sha256": "51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c",
+      "role": "MechanismRegistry JSONL persistence"
+    }
+  },
+  "artifacts": {
+    "raw_evidence": {
+      "path": "research/experiments/EXP-PRODUCT-33741671686/raw_evidence.json",
+      "sha256": "5bc7274be82f8a221f3e8a5f5f091128def7eeca515212c04f074436819377e4",
+      "role": "raw"
+    },
+    "result": {
+      "path": "research/experiments/EXP-PRODUCT-33741671686/result.json",
+      "sha256": "425dc2f8c084e802fddc360adf448b820c1bbdbffe29611534ab8621893a1870",
+      "role": "derived"
+    },
+    "report": {
+      "path": "research/experiments/EXP-PRODUCT-33741671686/report.md",
+      "sha256": "70d85e245d1f2412766eeb846a377fbc3f0f320fd9cc5a535f9839bae204ba1c",
+      "role": "derived"
+    }
+  },
+  "environment": {
+    "python_version": "3.12.14",
+    "platform": "Linux 6.17.0-1022-azure x86_64",
+    "dependencies": "stdlib only (json, hashlib, re, tempfile, time, pathlib, dataclasses, enum)"
+  },
+  "parent_chain": {
+    "parent_experiment_id": "EXP-PRODUCT-33528829801",
+    "parent_handoff_path": "research/experiments/EXP-PRODUCT-33528829801/handoff.json",
+    "parent_handoff_sha256": "854e98a8808d570b229bf748bdb14e0ddd67d43faacb63db4b6cad8af0e92d7a",
+    "parent_verdict": "SURVIVES at single-parameter synthetic POC"
+  },
+  "reproduction_command": "python3 research/experiments/EXP-PRODUCT-33741671686/run_experiment.py",
+  "reproduction_notes": [
+    "Experiment is fully deterministic — no random state, no model calls, no network",
+    "All synthetic test data is hardcoded in run_experiment.py",
+    "Induction function (distill_parameterized_v2) is pure computation on Observation action templates",
+    "Resolution uses kernel resolve() -> _bind() pipeline validated in EXP-GRAPH-33528827169",
+    "Results are identical across runs (verified: prior run produced same metrics)"
+  ]
+}
