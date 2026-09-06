@@ -1,9 +1,9 @@
 {
   "stage": "director",
-  "category": "DIRECTOR_FAILURE",
-  "message": "stage exited with code 66",
+  "category": "VALIDATION_FAILURE",
+  "message": "invalid claim update status: CONSTRAINED",
   "retryable": false,
-  "recorded_at": "2026-09-06T11:12:56.329490+00:00",
-  "github_run_id": "34029326733",
+  "recorded_at": "2026-09-06T14:17:27.832389+00:00",
+  "github_run_id": "34038572255",
   "github_run_attempt": "1"
 }
