@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34038570933",
+  "lane": "physics",
+  "decision": "FALSIFIED-IN-SETTING",
+  "claim_updates": [
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "HYPOTHESIS",
+      "reason": "Frozen decision_rule triggers FALSIFIED-IN-SETTING on two independent clauses: (1) positive_control PMI 0.855 < 1.0 bit threshold (prereg clause 12.2 item 4); (2) Wikipedia non-self PMI 0.899 < all PMI 1.073 (prereg clause 12.2 item 3, hypothesis H2). Audit additionally finds the PMI signal is confounded by action.target_href == state_after.url in 92-98% of transitions, meaning PMI measures destination predictability from action encoding rather than state-conditioned dynamics. The four primary PMI>0 tests nominally pass (p_bonf=0.004) but the maximum justified ceiling is FALSIFIED-IN-SETTING per the frozen rules. Claim remains HYPOTHESIS: no evidence accumulated for or against Web-dynamical structure beyond memory from this experiment."
+    }
+  ],
+  "product_action": "NONE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can a blinded action representation (hash of href, or action_type categorical only) isolate state-conditioned dynamical structure from trivial action-to-destination URL leakage, using the same PMI framework on these or structurally different sites (SPAs, form-heavy pages) where action.target_href != state_after.url?",
+  "reason": "Per frozen decision_rule: FALSIFIED-IN-SETTING by positive_control PMI 0.855 < 1.0 (check 5 FAIL) and wiki non-self 0.899 < all 1.073 (check 7 FAIL). Independent audit confirms both triggers are genuine, not design issues as producer claimed. Audit additionally identifies critical action leakage (92-98% href==next) that confounds PMI, and shuffled null remains ~0.98-1.36 bits (not ~0), indicating the PMI formula with Laplace smoothing does not produce a clean null on these data. The PMI computation pipeline is verified correct (positive control d=50.4, null control p=1.0), but the measured PMI reflects action-to-destination encoding rather than state-conditioned dynamics. Product consequence: no product action warranted. The falsification is bounded to PMI at URL-only representation with unblinded actions on Wikipedia/Python docs; it does not close C-WEB-DYNAMICS entirely.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-34038570933/spec.json falsifier clauses, decision_rule items 1-6, positive_control >=1.0 bit",
+    "research/experiments/EXP-PHYSICS-34038570933/result.json metrics.decision_checks check_5 FAIL (0.855 < 1.0), check_7 FAIL (0.899 < 1.073)",
+    "research/experiments/EXP-PHYSICS-34038570933/result.json metrics.permutation_tests all 4 primary pass p_bonf=0.004",
+    "research/experiments/EXP-PHYSICS-34038570933/result.json controls.positive_control_synthetic_lambda1 FAIL, controls.self_loop_interaction FAIL",
+    "research/experiments/EXP-PHYSICS-34038570933/audit.json validity_findings action_leakage_href_equals_next FAIL critical 92.4% wiki 97.6% python",
+    "research/experiments/EXP-PHYSICS-34038570933/audit.json validity_findings shuffled_null_not_zero FAIL major null_mean 0.98-1.36 bits",
+    "research/experiments/EXP-PHYSICS-34038570933/audit.json validity_findings deterministic_HSA_claim FAIL tautological given leakage",
+    "research/experiments/EXP-PHYSICS-34038570933/audit.json claim_ceiling FALSIFIED-IN-SETTING",
+    "research/experiments/EXP-PHYSICS-34038570933/audit.json required_fixes 7 items including blind action vocabulary, fix positive_control threshold, replace weak shuffled null",
+    "research/experiments/EXP-PHYSICS-34038570933/report.md sections 1-8 (producer interpretation claiming detection despite formal falsification)"
+  ]
+}

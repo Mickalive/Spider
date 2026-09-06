@@ -1,14 +1,14 @@
 {
   "lane": "physics",
   "human_paused": false,
-  "active_experiment_id": "EXP-PHYSICS-34038570933",
-  "last_experiment_id": "EXP-PHYSICS-33965269281",
-  "last_verdict": "MEASUREMENT_INVALID",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-PHYSICS-34038570933",
+  "last_verdict": "FALSIFIED-IN-SETTING",
   "continue_immediately": false,
-  "next_question": "Can information-theoretic measures (pointwise mutual information between actions and next-states conditioned on current state, or trajectory-level entropy rates) detect action-conditioned structure on live Web pages, avoiding the sparse-state memorization and self-loop contamination that undermine point-prediction accuracy metrics?",
+  "next_question": "Can a blinded action representation (hash of href, or action_type categorical only) isolate state-conditioned dynamical structure from trivial action-to-destination URL leakage, using the same PMI framework on these or structurally different sites (SPAs, form-heavy pages) where action.target_href != state_after.url?",
   "promotion_ready": false,
-  "consecutive_failures": 4,
-  "updated_at": "2026-09-06T21:35:46.812304+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "7f0b538ceb9a666cda9654b153bd9c83001b13f195e0cb48ee80bcd161c2079e"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-06T23:08:40.833865+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "e11f8fa1e4a05857519c496350d625fe69138b4a6a233ba50ff72a134483b3ac"
 }
