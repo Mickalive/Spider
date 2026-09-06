@@ -76,6 +76,31 @@
         "handoff.json": "7a629b31ec2f6202f72098b0a927e59a280519c8b9cd93242a22d0d3f6d026f0"
       }
     },
+    "EXP-FRONTIER-33932275169": {
+      "lane": "frontier",
+      "request_id": "60b90919e4a52f54bfc8a11e",
+      "created_at": "2026-09-05T00:13:58.653306+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Does TV distance or variance-of-means detect lambda-scaling of dynamical structure in non-affine (quadratic) synthetic Web transitions, or is the validated metric class limited to affine functions?",
+      "audit_status": "REVISE",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/frontier",
+      "hashes": {
+        "request.json": "1b231c2b8bfde60e6ba3693de74a87b33e7d85aeabd091e87a057831e43366c5",
+        "spec.json": "1586fe87a0d13055ed7126c99308d5791a7d3a150ee04fe419c2a71aebfbda7c",
+        "prereg.md": "148b09e78ca0d63892102a463b5de93f57dbc224ea163eb5e0901eac5a3de6d9",
+        "freeze.json": "87d0e8bbc010dc883d2054188690d64ca3c066cfa837d1ad034b5203fb5c9ee9",
+        "result.json": "0520aa5f31a0d02b864817505bf0384f56d0d7007bca4060b87be9dfa7317406",
+        "report.md": "f9cc6dfc8cdd49b31f1b34cc8c1f99f6bac3e6bd147a7bc1c4e9af6ca431fed6",
+        "provenance.json": "9f8dd4cd5a70e3531513e91da67229796b68b23a653b70edb07cd9d79611b7f7",
+        "audit.json": "e94b6ba41af54d7c48a35f1c424b9166b78fa63e60a1984b48e5fe3df22d8a5d",
+        "verdict.json": "1205ead8546e9338e3c820fbd45e61aeee36da8f2ca4f954d00324331c806393",
+        "handoff.json": "60114d687d01d0e194c2ced91fe6f883ffad4f3e9c9dee5b5e9019c799a0c433"
+      }
+    },
     "EXP-GRAPH-33528827169": {
       "lane": "graph",
       "request_id": "3e0d81e7790f2f2b7bd8665e",

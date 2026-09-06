@@ -1,0 +1,300 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-33932275169",
+  "lane": "frontier",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Frozen decision rule condition (4) requiring ANOVA function x lambda interaction p>0.05 is mis-calibrated for intentionally heterogeneous function class: the 3 quadratic functions have analytically different Var_a(E_S[f]) = 0.125 (seed42), 0.3125 (seed43), 0.1875 (seed44) (result.json:metrics.analytical_values) which guarantees different TV-vs-lambda slopes. Significant interaction F=32.5064 p=7.7e-34 (result.json:metrics.anova_results.full_model.interaction_effect) is expected true heterogeneity, not pipeline failure. Remove or replace with normalized slope-consistency test (e.g., TV/lambda correlation same-sign, or TV/maxTV ratio invariance) before claiming FALSIFIED-IN-SETTING. Parent handoff do_not_assume explicitly warned this; spec.json:decision_rule repeats mis-calibrated expectation.",
+    "Positive control implementation uses 80% of function-specific analytical TV (0.6133 for seed42, 0.6000 for seed43, 0.4267 for seed44, result.json:controls.positive_control.per_function) rather than spec.json:positive_control threshold >0.3 and prereg.md 10.1 function-specific analytical thresholds. Both thresholds pass (min TV 0.5308 >0.4267 and >0.3), but documentation should align: define function-specific threshold as 0.8*TV_analytical or 0.5*TV_analytical consistently across future specs to avoid post-hoc calibration appearance.",
+    "Report empirical sampling bias at null: TV at lambda=0 mean 0.1498 with sd 0.0238 (result.json:metrics.tv_means_by_lambda) vs analytical 0.0 is finite-sample bias with ~125 transitions per action (500/4, 10 states). Producer correctly uses permutation test mean p=0.508 (result.json:metrics.permutation_results.lambda_0) to rule out false positive, but should report bias-corrected TV or confidence intervals and quantify expected null TV under Uniform(10) sampling via analytic or bootstrap to strengthen null control interpretation. One replication p=0.003 (permutation_results lambda_0 list index 26) is consistent with 1/30 false positives at alpha 0.05.",
+    "Sequential RNG reuse within replication: analyze.py:292-296 uses single np.random.RandomState(rep_seed) sequentially across 6 lambda levels (500 transitions each) so lambda levels within same replication are not independent. Aggregation by lambda means across 30 observations (3 funcs x 10 reps) is valid but within-rep correlation inflates apparent monotonic smoothness. Fix by using independent sub-seeds per lambda (e.g., rep_seed + lambda_idx) or documenting dependence and using per-replication block bootstrap for ANOVA. Not measurement-invalidating for this synthetic DGP but should be fixed for generalizability.",
+    "Analytical artifact hash mismatch / path drift in provenance: provenance.json:analyzer_script points to research/experiments/EXP-FRONTIER-33932275169/analyze.py (hash bc24c3a8...) while analyze.py generates artifacts at research/frontier/nonaffine_validation/... (result.json:artifacts first entry originally pointed to frontier/nonaffine_validation but final result.json lists experiments/... paths). Ensure provenance artifact paths match actual written artifacts (raw_tables.json e90d1aab..., frequency_baseline.json ed58b31b..., analytical_ground_truth.json 34859d47...) and include GitHub run log evidence beyond provenance.json:github_run_id. Add residual diagnostic checks for ANOVA homoscedasticity (TV variance increases with lambda: sd 0.023 at lambda0 to 0.096 at lambda1) suggests heteroscedasticity violating ANOVA assumptions; use permutation ANOVA or Welch correction.",
+    "Heterogeneity secondary metric non-monotonic dip het 0.052259 at lambda0 -> 0.047253 at lambda0.2 (result.json:metrics.het_means_by_lambda) violates expectation of monotonic increase and indicates lower sensitivity / higher noise floor for variance-of-means vs TV. While aggregate rho 0.9429 >=0.5 passes, report should disclose TV is strictly more sensitive (Cohen d 7.847 vs 1.706, monotonic_tv true vs het not) and qualify variance-of-means as secondary only for non-affine class, not primary product metric."
+  ],
+  "validity_findings": [
+    {
+      "finding": "Frozen hashes verified: freeze.json hashes prereg.md 148b09e78ca0d63892102a463b5de93f57dbc224ea163eb5e0901eac5a3de6d9, request.json 1b231c2b8bfde60e6ba3693de74a87b33e7d85aeabd091e87a057831e43366c5, spec.json 1586fe87a0d13055ed7126c99308d5791a7d3a150ee04fe419c2a71aebfbda7c match actual files. No post-freeze re-design. Parent handoff EXP-FRONTIER-33863640568 correctly inherited.",
+      "severity": "pass",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-33932275169/freeze.json, research/experiments/EXP-FRONTIER-33932275169/spec.json, research/experiments/EXP-FRONTIER-33932275169/prereg.md, research/experiments/EXP-FRONTIER-33932275169/request.json",
+      "control_id": "provenance"
+    },
+    {
+      "finding": "TV distance primary metric computed correctly: average pairwise TV = 0.5*sum|P-Q| over 6 action pairs (4 actions), empirical P(S_{t+1}|do(A=a)) from action-conditional histograms over 10 states (analyze.py:compute_empirical_distributions, compute_tv_distance). Verified analytically: TV at lambda1 = 0.7667 (seed42), 0.75 (seed43), 0.5333 (seed44) recomputed from quadratic coefficients (c_a*s^2+b_a*s+d_a) mod10 matches result.json:metrics.analytical_values and analytical_ground_truth.json. No target leakage: distributions from DGP mixing lambda*deterministic + (1-lambda)*Uniform, not from learned predictions.",
+      "severity": "pass",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-33932275169/analyze.py:162-199, research/experiments/EXP-FRONTIER-33932275169/analytical_ground_truth.json, research/experiments/EXP-FRONTIER-33932275169/result.json:metrics.analytical_values",
+      "control_id": "measurement_validity_tv"
+    },
+    {
+      "finding": "Aggregate Spearman rho(TV, lambda) recomputed from 6 lambda means [0.149811,0.208325,0.324641,0.443838,0.581003,0.702767] vs [0.0,0.2,0.4,0.6,0.8,1.0] = 1.0, p_one_sided 0.0 (scipy.stats.spearmanr two-sided p=0.0) matches result.json:metrics.spearman_rho_tv_aggregate 1.0, spearman_p_one_sided_tv 0.0. Per-function rhos all 1.0 (seed42 [0.1524,0.2187,0.3673,0.4918,0.6463,0.776], seed43 [0.141,0.2218,0.3466,0.4777,0.6276,0.7619], seed44 [0.156,0.1845,0.2601,0.362,0.4692,0.5704]) recomputed identical. Monotonic_tv true confirmed strict increase at aggregate and per-function level.",
+      "severity": "pass",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-33932275169/result.json:metrics.tv_means_by_lambda, metrics.per_function_spearman_tv, metrics.spearman_rho_tv_aggregate, raw_tables.json",
+      "control_id": "spearman_rho_tv_aggregate"
+    },
+    {
+      "finding": "Heterogeneity variance-of-means recomputed matches producer: analytical Var_a 0.125/0.3125/0.1875 verified via E_S[f(S,a)] closed form (1/10 sum quadratic mod10) matches result.json:metrics.analytical_values. Aggregate het means [0.052259,0.047253,0.083504,0.084065,0.192902,0.241672] Spearman rho=0.942857 p_one_sided=0.002402 recomputed identical via scipy (two-sided p=0.004804). Threshold rho>=0.5 passes. Dip at lambda0.2 (-0.005) within noise (het sd 0.03-0.04 at low lambda) explains non-monotonic het vs monotonic TV; Cohen d het 1.7057 recomputed matches pooled sd calculation.",
+      "severity": "pass",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-33932275169/result.json:metrics.het_means_by_lambda, metrics.spearman_rho_het_aggregate, metrics.cohens_d_het_lambda1_vs_0, raw_tables.json",
+      "control_id": "spearman_rho_het_aggregate"
+    },
+    {
+      "finding": "Effect sizes recomputed: TV lambda1 vs lambda0 Cohen d = (0.702767-0.149811)/pooled_sd = 7.8471 (pooled sd 0.07044) matches result.json:metrics.cohens_d_tv_lambda1_vs_0 7.8471. Het d 1.7057 matches. TV CV at lambda1 = sd 0.0968/mean 0.7028 = 0.1377 (<0.5) matches. Two-way ANOVA TV~lambda+function+interaction with 180 observations (3x6x10) F_lambda 2174.30 p~1.7e-146, F_function 330.13 p~7e-58, F_interaction 32.5064 p=7.7e-34, R2 0.9865 recomputed via statsmodels matches result.json:metrics.anova_results.full_model exactly. Residual_df 162 correct.",
+      "severity": "pass",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-33932275169/result.json:metrics.cohens_d_tv_lambda1_vs_0, metrics.tv_cv_at_lambda1, metrics.anova_results, raw_tables.json",
+      "control_id": "anova_and_effect_size"
+    },
+    {
+      "finding": "Null control passes but with elevated baseline: permutation test at lambda0 mean p=0.508 (>0.05) across 30 replications matches result.json:metrics.permutation_results.lambda_0. Mean p correctly uses average of per-replication p-values (1000 permutations each, analyze.py:permutation_test_tv). TV null 0.1498 is sampling bias not signal, as confirmed by permutation. One replication p=0.003 is expected under null (30*0.05=1.5 expected false positives). Control is valid but borderline interpretation requires bias quantification.",
+      "severity": "pass",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-33932275169/result.json:metrics.permutation_results.lambda_0, controls.null_control, analyze.py:222-245",
+      "control_id": "null_control"
+    },
+    {
+      "finding": "Positive control passes per reported rule: TV at lambda1 thresholds 0.6133/0.6000/0.4267 (0.8*analytical) all exceeded (means 0.776/0.7619/0.5704 mins 0.7612/0.7296/0.5308) matches result.json:controls.positive_control.per_function and permutation_results.lambda_1. All 30 replications below threshold 0 count. Strict >0.3 spec threshold also passes. Permutation p=0.0 at lambda1 for all 30 reps confirms distinguishability.",
+      "severity": "pass",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-33932275169/result.json:controls.positive_control, metrics.permutation_results.lambda_1, metrics.analytical_values",
+      "control_id": "positive_control"
+    },
+    {
+      "finding": "Function invariance control correctly fails statistical test (interaction p 0.0 <0.05) but interpretation as falsifier fails: interaction is expected signal because functions have different ceilings (0.7667 vs 0.5333) and slopes (delta TV lambda0->1: seed42 0.6236, seed43 0.6209, seed44 0.4144). Spec.json:decision_rule and prereg.md:12 require p>0.05 for SURVIVES; this condition triggers FALSIFIED-IN-SETTING despite all primary metrics passing with large effects. This is control-design failure inherited from parent, not metric insensitivity. Report.md \u00a74/6 correctly identifies this.",
+      "severity": "fail",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-33932275169/result.json:controls.function_invariance, metrics.anova_results.full_model.interaction_effect, report.md:6.2, spec.json:decision_rule, prereg.md:12",
+      "control_id": "function_invariance"
+    },
+    {
+      "finding": "Infrastructure COMPLETE valid (not MEASUREMENT_INVALID): 90000 transitions (6*3*10*500), deterministic with frozen seed 42 (per replication seed = func_seed*10000+rep*100+42, analyze.py:292), full artifact persistence (raw_tables.json e90d1aab..., frequency_baseline.json ed58b31b..., analytical_ground_truth.json 34859d47...) addresses parent audit required_fix. TV CV 0.1377 <0.5 confirms not degenerate. No browser/network/model calls, pure synthetic, measurement not blocked. Path drift noted in required_fixes does not invalidate measurement.",
+      "severity": "pass",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-33932275169/provenance.json, raw_tables.json, frequency_baseline.json, analytical_ground_truth.json, result.json:artifacts, result.json:status COMPLETE",
+      "control_id": "infrastructure"
+    },
+    {
+      "finding": "Frequency baseline reported this time (unlike parent): entropy decreasing 3.3217 at lambda0 to 3.2816 at lambda1 (result.json:metrics.frequency_baseline_entropy, frequency_baseline.json) shows marginal P(S_{t+1}) non-uniformity increases with lambda as expected. However distribution not used as decision baseline; only reported as entropy, not as heterogeneity comparator. Satisfies spec.json baseline[2] at descriptive level.",
+      "severity": "pass",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-33932275169/result.json:metrics.frequency_baseline_entropy, frequency_baseline.json",
+      "control_id": "frequency_baseline"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "Affine DGP baseline from parent EXP-FRONTIER-33863640568",
+      "strength": "strong",
+      "comparison": "Parent affine functions: TV rho 1.0 d 13.4, het rho 0.9762 d 1.54. This experiment quadratic: TV rho 1.0 d 7.85, het rho 0.9429 d 1.71. TV maintains perfect monotonicity across function classes; het dip 0.052->0.047 shows quadratic slightly noisier. Cohen d drop 13.4->7.85 reflects lower analytical ceiling for seed44 (0.533 vs 0.8-1.0 affine). Supports generalization beyond affine but with function-specific ceiling dependence.",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-33932275169/report.md:6.3, result.json:metrics.spearman_rho_tv_aggregate, metrics.cohens_d_tv_lambda1_vs_0, research/experiments/EXP-FRONTIER-33863640568/handoff.json:carry_forward.established"
+    },
+    {
+      "baseline_id": "Permutation null (shuffled action labels)",
+      "strength": "strong",
+      "comparison": "Permutation null TV near zero analytically holds (shuffling destroys action-dependence). Empirical permutation at lambda0/1 via 1000 shuffles per replication shows mean p 0.508 at lambda0 (null) and p 0.0 at lambda1 (signal). Unlike parent where only analytic note, this experiment empirically verifies null via permutation_test_tv preserving state transitions but shuffling actions. Baseline correctly calibrated.",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-33932275169/result.json:metrics.permutation_results, controls.permutation_null, analyze.py:222-245"
+    },
+    {
+      "baseline_id": "Frequency baseline P(S_{t+1}) marginal",
+      "strength": "weak",
+      "comparison": "Marginal distribution reported (entropy 3.3217->3.2816, distribution vectors in frequency_baseline.json) but not used as comparative heterogeneity baseline (e.g., no TV(marginal, conditional) or het_marginal). At lambda0 marginal ~Uniform(10) entropy 3.3217 near max log2(10)=3.3219, at lambda1 entropy 3.2816 slightly lower due to deterministic structure, but comparison to TV 0.15 at lambda0 vs 0.70 at lambda1 not quantified. Baseline descriptive only.",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-33932275169/result.json:metrics.frequency_baseline_entropy, frequency_baseline.json, spec.json:baselines[2]"
+    },
+    {
+      "baseline_id": "TV distance vs variance-of-means sensitivity",
+      "strength": "strong",
+      "comparison": "TV strictly dominates het: rho 1.0 vs 0.9429, d 7.85 vs 1.71, monotonic true vs false (het dip), TV exceeds het at every lambda (TV means 0.149-0.702 vs het 0.052-0.241). Analytical TV ceilings 0.766/0.75/0.533 vs Var_a 0.125/0.3125/0.1875 shows TV captures distributional differences even when mean differences modest (seed42 Var 0.125 but TV 0.766). Confirms TV more sensitive metric for non-affine class, consistent with parent finding TV>=het.",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-33932275169/result.json:metrics.tv_means_by_lambda, metrics.het_means_by_lambda, metrics.analytical_values, metrics.cohens_d_tv_lambda1_vs_0"
+    }
+  ],
+  "recomputed_metrics": {
+    "spearman_rho_tv_aggregate": {
+      "reported": 1.0,
+      "recomputed": 1.0,
+      "method": "scipy.stats.spearmanr on lambda_levels [0.0,0.2,0.4,0.6,0.8,1.0] vs tv_means [0.149811,0.208325,0.324641,0.443838,0.581003,0.702767]",
+      "match": true
+    },
+    "spearman_p_one_sided_tv": {
+      "reported": 0.0,
+      "recomputed": 0.0,
+      "method": "two-sided p=0.0 -> one-sided 0.0 for rho>0",
+      "match": true
+    },
+    "spearman_rho_het_aggregate": {
+      "reported": 0.9429,
+      "recomputed": 0.9428571428571428,
+      "method": "spearmanr on het_means [0.052259,0.047253,0.083504,0.084065,0.192902,0.241672]",
+      "match": true
+    },
+    "spearman_p_one_sided_het": {
+      "reported": 0.002402,
+      "recomputed": 0.0024023323615160277,
+      "method": "two-sided 0.00480466/2",
+      "match": true
+    },
+    "tv_means_by_lambda": {
+      "reported": {
+        "0.0": 0.149811,
+        "0.2": 0.208325,
+        "0.4": 0.324641,
+        "0.6": 0.443838,
+        "0.8": 0.581003,
+        "1.0": 0.702767
+      },
+      "recomputed": {
+        "0.0": 0.149811,
+        "0.2": 0.208325,
+        "0.4": 0.324641,
+        "0.6": 0.443838,
+        "0.8": 0.581003,
+        "1.0": 0.702767
+      },
+      "method": "mean of 30 TVs per lambda from raw_tables.json (3 functions x10 reps)",
+      "match": true
+    },
+    "het_means_by_lambda": {
+      "reported": {
+        "0.0": 0.052259,
+        "0.2": 0.047253,
+        "0.4": 0.083504,
+        "0.6": 0.084065,
+        "0.8": 0.192902,
+        "1.0": 0.241672
+      },
+      "recomputed": {
+        "0.0": 0.052259,
+        "0.2": 0.047253,
+        "0.4": 0.083504,
+        "0.6": 0.084065,
+        "0.8": 0.192902,
+        "1.0": 0.241672
+      },
+      "method": "mean of 30 hets per lambda from raw_tables.json",
+      "match": true
+    },
+    "per_function_tv_means": {
+      "seed42": [
+        0.1524,
+        0.2187,
+        0.3673,
+        0.4918,
+        0.6463,
+        0.776
+      ],
+      "seed43": [
+        0.141,
+        0.2218,
+        0.3466,
+        0.4777,
+        0.6276,
+        0.7619
+      ],
+      "seed44": [
+        0.156,
+        0.1845,
+        0.2601,
+        0.362,
+        0.4692,
+        0.5704
+      ],
+      "recomputed_match": true,
+      "method": "mean per function per lambda from raw_tables.json, all Spearman rho 1.0"
+    },
+    "analytical_values": {
+      "42": {
+        "var_a": 0.125,
+        "tv_at_lambda1": 0.7666666666666667
+      },
+      "43": {
+        "var_a": 0.3125,
+        "tv_at_lambda1": 0.75
+      },
+      "44": {
+        "var_a": 0.1875,
+        "tv_at_lambda1": 0.5333333333333333
+      },
+      "method": "recomputed from FUNCTION_COEFFICIENTS (c_a*s^2+b_a*s+d_a) mod10, E_S exact mean 4.5/4.0/5.0 etc matches analytical_ground_truth.json",
+      "match": true
+    },
+    "cohens_d_tv": {
+      "reported": 7.8471,
+      "recomputed": 7.847066083894482,
+      "method": "(mean TV1 - mean TV0)/pooled_sd, pooled_sd sqrt((var0+var1)/2) df=29 each, TV0 sd 0.0238 TV1 sd 0.0968",
+      "match": true
+    },
+    "cohens_d_het": {
+      "reported": 1.7057,
+      "recomputed": 1.705687068359282,
+      "method": "same formula on het arrays",
+      "match": true
+    },
+    "tv_cv_at_lambda1": {
+      "reported": 0.1377,
+      "recomputed": 0.1377013205105447,
+      "method": "sd/mean TV1",
+      "match": true
+    },
+    "anova_interaction": {
+      "reported": {
+        "F": 32.5064,
+        "p_value": 0.0,
+        "df": 10,
+        "residual_df": 162,
+        "R2": 0.9865
+      },
+      "recomputed": {
+        "F": 32.506379,
+        "p_value": 7.776642e-34,
+        "df": 10,
+        "residual_df": 162,
+        "R2": 0.9865211373228527
+      },
+      "method": "statsmodels ols tv ~ C(lambda_val)+C(function)+interaction on 180 rows from raw_tables.json, p rounded to 0.0 in report matches underflow",
+      "match": true
+    },
+    "positive_control_thresholds": {
+      "seed42": {
+        "threshold": 0.6133,
+        "mean_tv": 0.776,
+        "min_tv": 0.7612,
+        "all_above": true
+      },
+      "seed43": {
+        "threshold": 0.6,
+        "mean_tv": 0.7619,
+        "min_tv": 0.7296,
+        "all_above": true
+      },
+      "seed44": {
+        "threshold": 0.4267,
+        "mean_tv": 0.5704,
+        "min_tv": 0.5308,
+        "all_above": true
+      },
+      "recomputed_match": true
+    },
+    "permutation_lambda0_mean_p": {
+      "reported": 0.508,
+      "recomputed": 0.508,
+      "method": "mean of 30 per-replication p-values in result.json:metrics.permutation_results.lambda_0",
+      "match": true
+    }
+  },
+  "claim_ceiling": "MAXIMUM JUSTIFIED: In synthetic 10-state 4-action quadratic DGP f(s,a)=(c_a*s^2+b_a*s+d_a) mod10 with Var_a(E_S[f]) in {0.125,0.1875,0.3125}, TV distance between action-conditional next-state distributions scales perfectly monotonically with action-dependence lambda (aggregate Spearman rho=1.0 p<1e-6, per-function rho=1.0 all, Cohen d=7.85 lambda1 vs lambda0, monotonic across 0.0 0.2 0.4 0.6 0.8 1.0) and exceeds function-specific 0.8*analytical thresholds at lambda1 (0.570-0.776 >0.426-0.613) with null control passing (mean permutation p=0.508). Variance-of-means also scales monotonically (rho=0.9429 p=0.0024 d=1.71) but with dip 0.052->0.047 at lambda 0.2 and strictly lower sensitivity than TV, so TV is primary. Significant function x lambda interaction (F=32.5 p=7.7e-34 R2 0.986) demonstrates slope heterogeneity proportional to function-specific Var_a/TV ceiling, not metric failure. NO evidence for real or realistic Web transitions, larger state spaces, other non-affine families, or product deployment; synthetic-to-real gap is dominant unknown (validity_notes). Frozen outcome FALSIFIED-IN-SETTING is artefact of mis-calibrated interaction control, not falsification of C-WEB-DYNAMICS or of TV beyond affine class.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-33932275169/spec.json:claim_ids C-WEB-DYNAMICS, hypothesis, falsifier, decision_rule, baselines, positive_control, null_control, measurement_validity",
+    "research/experiments/EXP-FRONTIER-33932275169/prereg.md:5-12 function coefficients seed42/43/44, lambda levels, decision rules, controls",
+    "research/experiments/EXP-FRONTIER-33932275169/freeze.json:hashes prereg/spec/request",
+    "research/experiments/EXP-FRONTIER-33932275169/analyze.py:sha256 bc24c3a8911488533566b8499f041ed2e4676ff63902b62c850a6f4b9af27582, FUNCTION_COEFFICIENTS, compute_analytical_tv_at_lambda1, permutation_test_tv, generate_transitions",
+    "research/experiments/EXP-FRONTIER-33932275169/result.json:metrics.spearman_rho_tv_aggregate 1.0, spearman_p_one_sided_tv 0.0, spearman_rho_het_aggregate 0.9429, tv_means_by_lambda, het_means_by_lambda, cohens_d_tv_lambda1_vs_0 7.8471, tv_cv_at_lambda1 0.1377, analytical_values Var_a 0.125/0.3125/0.1875 TV 0.7667/0.75/0.5333, anova_results full_model F_interaction 32.5064 p 0.0 R2 0.9865, permutation_results lambda_0 mean_p 0.508 lambda_1 p 0.0, frequency_baseline_entropy, controls positive_control/null_control/permutation_null/function_invariance, status COMPLETE outcome FALSIFIES",
+    "research/experiments/EXP-FRONTIER-33932275169/report.md:2 analytical ground truth tables, 3 statistical tests, 4 control assessment, 5 decision rule evaluation FALSIFIED-IN-SETTING due to interaction, 6 interpretation TV generalizes despite formal failure",
+    "research/experiments/EXP-FRONTIER-33932275169/provenance.json:execution_timestamp 2026-09-05T22:00:00+00:00, script_hash bc24..., experiment_parameters seed 42 total_transitions 90000, key_measurements",
+    "research/experiments/EXP-FRONTIER-33932275169/raw_tables.json:sha256 e90d1aabf4060e1b0e5db80c2627684a798953f22efcdba7d73f866a1691e0da 180 rows per-replication TV/het",
+    "research/experiments/EXP-FRONTIER-33932275169/analytical_ground_truth.json:sha256 34859d4702d6bf052a3999581ddad631b2d02c7f29229afe62a166dbb5550ad2",
+    "research/experiments/EXP-FRONTIER-33932275169/frequency_baseline.json:sha256 ed58b31b0a79a108db647bc1a1957d40b86f6d6fa7d0f1994a94264aab868669 entropy 3.3217->3.2816",
+    "research/experiments/EXP-FRONTIER-33863640568/handoff.json:carry_forward established affine rho 0.9762 TV 1.0 do_not_assume interaction not metric failure",
+    "research/experiments/EXP-FRONTIER-33932275169/validity_notes and unresolved in result.json"
+  ],
+  "unresolved": [
+    "Whether real or realistic Web transitions exhibit quadratic-like non-affine structure with Var_a(E_S[f])>0 suitable for TV detection; synthetic-to-real gap acknowledged in result.json:unresolved[0-1] and validity_notes not tested.",
+    "Whether TV distance or JSD should be primary metric for product pipeline given TV perfect scaling here vs parent TV 1.0; unresolved in result.json:unresolved[3].",
+    "Calibrated function-specific positive control threshold for future heterogeneous function classes (e.g., 0.5*TV_analytical vs 0.8*TV_analytical vs absolute 0.3) to avoid mis-calibrated uniform thresholds.",
+    "Optimal lambda resolution and replication count for detecting small effects near null with sampling bias TV0 ~0.15 (finite 125 per action); power analysis not reported.",
+    "Heteroscedasticity in TV variance across lambda (sd 0.023 at 0 to 0.096 at 1) violates ANOVA homoscedasticity; need permutation ANOVA or variance-stabilized test for function invariance.",
+    "Generalization to other non-affine families beyond these 3 quadratic coefficient sets, larger state spaces, and to action-dependent stochastic transitions.",
+    "Independence of lambda levels within replication due to sequential RNG usage; impact on Spearman/R2 confidence intervals not quantified."
+  ]
+}
