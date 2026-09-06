@@ -7,8 +7,8 @@
   "continue_immediately": false,
   "next_question": "Does the HTTP fingerprint substrate's full vector exceed B-BODY-ONLY when bodies are NOT perfectly discriminative (e.g., identical error bodies for expired/invalid token states) but headers (Cache-Control, Set-Cookie) vary independently with auth state \u2014 the incremental header value test that was vacuous at ceiling 1.0 in this experiment?",
   "promotion_ready": false,
-  "consecutive_failures": 2,
-  "updated_at": "2026-09-06T21:31:32.457928+00:00",
+  "consecutive_failures": 3,
+  "updated_at": "2026-09-06T23:09:23.606022+00:00",
   "last_failure_retryable": false,
   "last_handoff_sha256": "68538996eba323cb60ed47841f67217c0fe1b7d191c1c3686de0dd1ee9728c5e"
 }
