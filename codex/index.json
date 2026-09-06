@@ -280,6 +280,33 @@
         "handoff.json": "6f92dd17615985260d2c3828608c7f7c00ff1ba71dd5593f57d82d9555668fce"
       }
     },
+    "EXP-INTEL-33945226776": {
+      "lane": "intel",
+      "request_id": "ec3b6099b3b6260aeb947f90",
+      "created_at": "2026-09-05T04:41:18.128059+00:00",
+      "claim_ids": [
+        "C-CROSSSITE",
+        "C-LLM-INHERIT",
+        "C-PRODUCT-ECON"
+      ],
+      "question": "Given WebArena's public task definitions, site configurations, and source code (without Docker deployment), what is the estimated page complexity distribution, truncation risk, and fragment yield across task types, and which 2-3 task types maximize information gain for the C-CROSSSITE/C-LLM-INHERIT integration experiment?",
+      "audit_status": "REVISE",
+      "decision": "MIXED",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/intel",
+      "hashes": {
+        "request.json": "bb5b84eb9c0144aaa540ff513c65e954751faa98d0b0f2423083e4fd7a4d51db",
+        "spec.json": "e05886c4ead8672ceee8880f3bc4f78e68d50566f8c84781d3401d586892ebda",
+        "prereg.md": "763f9086d690421ad2350c00536b17636d42f325aef21c4ec9a34992359a7445",
+        "freeze.json": "5bc671e8840ee19b302ebce125434a94b427e445271e0cccc1a9942d4ef4d4d7",
+        "result.json": "5a3b705fb389a6cb760618dc6a1945315d313008eff4c43df11456f3486bf268",
+        "report.md": "da6c1e52afbb1202aa70954789b9c02a326f2567b5b855e0960c669e24324088",
+        "provenance.json": "1a3470cd60b8e6df0ca48befff3391f918b8cf0adb2f5beb76795cff5a25a345",
+        "audit.json": "13d28ebb31053fe10dc82df99398a7ea773693856bae7a6dceaf0e2491ea009a",
+        "verdict.json": "8ad47ed78419813e5da03d210d075f200fdf0bf75a86d10f277eda50cbac86c9",
+        "handoff.json": "5e5ff97a5b2d776b81eafe3eeed7af3ebdfe7b0bdb302929a9a79ed62521644a"
+      }
+    },
     "EXP-PHYSICS-33528829431": {
       "lane": "physics",
       "request_id": "aefb271e5c3274224c9651fe",
