@@ -3,7 +3,7 @@
   "category": "VALIDATION_FAILURE",
   "message": "invalid claim update status: PARTIAL_VALIDATED",
   "retryable": false,
-  "recorded_at": "2026-09-06T19:20:45.148492+00:00",
-  "github_run_id": "34054513336",
+  "recorded_at": "2026-09-06T21:36:55.150566+00:00",
+  "github_run_id": "34061241300",
   "github_run_attempt": "1"
 }
