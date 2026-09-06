@@ -107,6 +107,14 @@
         "claim_id": "C-PARAM-INHERIT",
         "status": "EXPERIMENTAL",
         "reason": "Three algorithmic fixes applied to distill_parameterized() in src/spider/kernel.py FAIL regression on clean synthetic inputs and do NOT advance C-PARAM-INHERIT to realistic-synthetic robustness. Regression baseline B2/B3/B5 slot counts wrong (1 vs 2, 2 vs 3, 1 vs 2) due to Fix B noise-filter heuristic filtering genuine varying body fields. Fix C structure-similarity Jaccard threshold 0.3 too low (E1 Jaccard=0.667 > 0.3, produces 1 slot instead of 0). Fix A partially validated: succeeds on C1 (prefix+suffix both non-empty) but fails on C2 (suffix-empty, produces user-user-4 double prefix \u2014 audit recompute). Claim ceiling REMAINS at parent kernel-integration-faithful on clean synthetic only (EXP-PRODUCT-33974562602); does not advance. No promotion to Product Core."
+      },
+      {
+        "experiment_id": "EXP-PRODUCT-34003641840",
+        "lane": "product",
+        "decision": "FIXES-FALSIFIED",
+        "claim_id": "C-PARAM-INHERIT",
+        "status": "EXPERIMENTAL",
+        "reason": "Audit ceiling narrows to: field-path relevance (top-level allowlist {method,url,body,headers,query}) plus two-part structure-check (Jaccard>=0.75 + constant-value anchor) resolves synthetic D1 over-parametrization and synthetic E1 hallucination in an offline isolated implementation while preserving B1/B4 regression. Cannot advance toward product promotion due to: (a) kernel integration gap \u2014 implementation is self-contained in run_experiment.py, does not modify src/spider/kernel.py (audit KERNEL_INTEGRATION_GAP); (b) prereg training-data deviations on B5 (PREREG_DEVIATION_B5: varying A,B,C instead of static A,A,A) and D3 (PREREG_DEVIATION_D3: varying 1,2,3 instead of static 1,1,1) break condition (7) comparability with parent; (c) D2 post-hoc redefinition of expected slot_count from 2 to 1 (EXPECTED_POSTHOC_D2); (d) C2 double-prefix persists under true full values \u2014 _detect_double_prefix exists but is not wired into distill/bind path (DOUBLE_PREFIX_NOT_TESTED); (e) nested metadata scope leak \u2014 allowlist only checks top-level key (METADATA_SCOPE_LEAK). Claim stays EXPERIMENTAL; see handoff for next steps."
       }
     ],
     "C-CROSSSITE": [
