@@ -7,8 +7,8 @@
   "continue_immediately": false,
   "next_question": "Does a browser-based collection substrate with full DOM/accessibility tree state representation and semantic action selectors reveal action-conditioned transition structure on live Web pages with navigational density, beyond what HTTP fetch with URL-only representation can detect?",
   "promotion_ready": false,
-  "consecutive_failures": 6,
-  "updated_at": "2026-09-05T23:26:16.551381+00:00",
+  "consecutive_failures": 7,
+  "updated_at": "2026-09-06T01:21:12.173569+00:00",
   "last_failure_retryable": false,
   "last_handoff_sha256": "35ac95937cd8eac6486b1df4c51150ae30a6e2cb3851fa326e5a93d2f2f62fad"
 }
