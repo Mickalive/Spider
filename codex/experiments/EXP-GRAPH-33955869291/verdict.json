@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-33955869291",
+  "lane": "graph",
+  "decision": "SCOPE-LIMITED",
+  "claim_updates": [
+    {
+      "claim_id": "C-PARAM-INHERIT",
+      "status": "EXPERIMENTAL",
+      "reason": "Audit ceiling narrows producer GENERALIZATION-SAFE to SCOPE-LIMITED: multi-slot dominance confirmed for single tested pair (param-2slot [id,category] vs param-fetch-posts [id] at equal confidence 0.95, n=1, synthetic substrate, deterministic). Template-only params confirmed losing to declared params (len(parameter_slots) scope limit). verify() dict equality confirmed. However: (1) equal-slot ties are stable insertion-order, NOT lexicographic as producer interpreted (audit V_TIE_LEXICOGRAPHIC_MISCHARACTERIZED); (2) literal-vs-param equal-confidence 0.95 not retested in this experiment — inherited from parent (audit V_BASELINE_GAP_CORE_COMPETITION_NOT_RETESTED); (3) fix not committed to production HEAD (audit V_CODE_NOT_PERSISTED); (4) synthetic substrate only, no real-web DOM/auth/session/drift (audit V_SUBSTRATE_SCOPE); (5) verify() tests dict equality not HTTP integration (audit V_VERIFY_DICT_MATCH_ONLY). C-PARAM-INHERIT cannot advance to PRODUCT without fix commit + re-validation and real-web testing."
+    }
+  ],
+  "product_action": "none",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does the parameter-slot-count tie-break generalize to real-web endpoints with DOM, auth, session state, and drift — and does the literal-vs-param equal-confidence competition remain param-winning after the fix is committed to production HEAD?",
+  "reason": "Producer reports GENERALIZATION-SAFE with all 5 decision-rule conditions met. Independent audit confirms all 12 observations recomputed identically and multi-slot dominance survives counterbalanced order. However, audit status is REVISE with producer_claim_supported=false: (1) equal-slot ties are insertion-order-dependent, not lexicographic as producer claims — same mechanism_id coincidence masked this; (2) the core literal-vs-param equal-confidence competition (the exact hazard the fix solves) is not retested here, only inherited from parent; (3) fix not committed to HEAD (production remains COMPETITION-UNSAFE); (4) synthetic substrate only; (5) verify() tests dict equality not HTTP integration. The frozen decision rule's 5 conditions are technically satisfied, but the audit ceiling limits GENERALIZATION-SAFE to the single tested pair. Director decision: SCOPE-LIMITED — fix works for tested multi-slot pair on synthetic substrate, but claim cannot be generalized without fix commit, re-validation in HEAD, real-web testing, and re-inclusion of literal-vs-param equal-confidence competition.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-33955869291/spec.json",
+    "research/experiments/EXP-GRAPH-33955869291/result.json",
+    "research/experiments/EXP-GRAPH-33955869291/audit.json",
+    "research/experiments/EXP-GRAPH-33955869291/report.md",
+    "research/experiments/EXP-GRAPH-33955869291/prereg.md",
+    "research/experiments/EXP-GRAPH-33955869291/raw_evidence.json",
+    "research/experiments/EXP-GRAPH-33955869291/derived_measurements.json",
+    "research/experiments/EXP-GRAPH-33955869291/provenance.json",
+    "research/experiments/EXP-GRAPH-33955869291/freeze.json",
+    "research/experiments/EXP-GRAPH-33955869291/run_experiment.py",
+    "research/experiments/EXP-GRAPH-33816735314/handoff.json",
+    "research/experiments/EXP-GRAPH-33816735314/audit.json",
+    "src/spider/kernel.py:104-113",
+    "src/spider/kernel.py:19-32",
+    "src/spider/kernel.py:125-129",
+    "src/spider/registry.py",
+    "src/spider/models.py"
+  ]
+}
