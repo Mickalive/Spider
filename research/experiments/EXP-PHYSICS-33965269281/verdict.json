@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-33965269281",
+  "lane": "physics",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "EXPERIMENTAL",
+      "reason": "Synthetic positive control validates pipeline (SA=1.0 vs AF=0.678, p=0.0, memorization ratio 1.0) and null control passes (p=0.241), confirming trajectory-grouped holdout and permutation null methodology. However, live Web measurement is invalid: trajectory split non-deterministic (set ordering hash-randomized, audit recomputes wiki SA_heldout 0.011-0.030 across PYTHONHASHSEED values), accessibility tree 0% populated (880/880 empty per audit), Bonferroni correction applied at 2x not frozen 6x, and target_href_encoding gate is a false-positive triggered by legitimate self-loops (auditor confirms 148/148 wiki and 435/435 python flagged cases have state_before.url == state_after.url == target_href). Validity gates fail on deterministic seeds, full state representation, and Bonferroni — measurement not reproducible. Browser-based collection does collect transitions with DOM/tag_counts/form_signals/link_texts but cannot support measurement-valid live Web claims."
+    },
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "HYPOTHESIS",
+      "reason": "Not testable from this experiment due to measurement invalidity. Even setting validity failures aside, audit reveals fundamental concerns: SA underperforms AF on both live sites (wiki diff_SA_vs_AF=-0.121, python -0.159), meaning action alone predicts next state better than (state,action) pairs. Extreme memorization ratios (wiki 32.9, python 4.12) indicate near-unique state-action keys (607 keys for 616 wiki train transitions). Self-loop rates of 17% (wiki) and 49% (python) dominate metrics. Recomputed SA_heldout ranges (wiki 0.011-0.030, python 0.19-0.24) are below AF baselines (wiki 0.14-0.15, python 0.40-0.43). Nominal p=0.0 for SA vs shuffle is uninterpretable when SA < AF. The predictive accuracy paradigm may not be the right detection method for sparse-state live Web data. Claim remains untested but the research program should consider orthogonal detection methods."
+    }
+  ],
+  "product_action": "none",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can information-theoretic measures (pointwise mutual information between actions and next-states conditioned on current state, or trajectory-level entropy rates) detect action-conditioned structure on live Web pages, avoiding the sparse-state memorization and self-loop contamination that undermine point-prediction accuracy metrics?",
+  "reason": "Multiple validity gates fail per frozen decision rule: (1) trajectory split non-deterministic — audit demonstrates PYTHONHASHSEED-dependent set ordering produces wiki SA_heldout 0.011-0.030 variance at fixed seed 42, violating measurement_validity deterministic seeds; (2) accessibility tree 0% populated — 880/880 live transitions have empty accessibility_roles, violating frozen composite state representation claim; (3) Bonferroni correction at 2x not 6x as specified in decision_rule clause 4 and prereg 7.2/11.1 — same bug flagged as mandatory fix in prior experiment EXP-PHYSICS-33788037373 not resolved. The target_href_encoding gate failure reported by the producer is a false positive (auditor confirms all flagged cases are legitimate self-loops). Beyond validity gates, audit reveals SA < AF on both live sites with extreme memorization, suggesting the (state,action)->next_state prediction paradigm breaks down when state-action keys are near-unique and self-loops dominate. This is a measurement infrastructure failure, not a scientific falsification of Web dynamics.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-33965269281/result.json metrics positive_control SA_heldout 1.0 AF_heldout 0.678, null_control p 0.241, live Wikipedia SA 0.030 diff 0.023, live Python SA 0.242 diff 0.087",
+    "research/experiments/EXP-PHYSICS-33965269281/result.json validity_notes target_href_encoding FAILED, controls positive_SA_vs_AF p 0.0, null_SA_vs_shuffle p 0.241",
+    "research/experiments/EXP-PHYSICS-33965269281/audit.json validity_findings deterministic_seeds_trajectory_split FAIL (wiki SA 0.011-0.030 across PYTHONHASHSEED), full_state_representation_accessibility FAIL (880/880 empty), Bonferroni_6x_correction FAIL (2x not 6x), target_href_encoding FAIL (false-positive self-loops)",
+    "research/experiments/EXP-PHYSICS-33965269281/audit.json baseline_findings action_frequency_null FAIL_INVERTED (AF >> SA, wiki -0.121, python -0.159), in_sample_memorization_diagnostic wiki 32.9 python 4.12",
+    "research/experiments/EXP-PHYSICS-33965269281/audit.json claim_ceiling MEASUREMENT_INVALID no justified claim for C-WEB-DYNAMICS or C-MEAS-VALID on live Web",
+    "research/experiments/EXP-PHYSICS-33965269281/audit.json recomputed_metrics live_wikipedia SA_heldout_range 0.0114-0.0303, live_python_docs SA_heldout 0.193",
+    "research/physics/substrate_339.py trajectory_split lines 421-436 (set ordering non-deterministic), check_validity lines 662-723",
+    "research/physics/run_staged_339.py Bonferroni 2x not 6x lines 328-339",
+    "research/experiments/EXP-PHYSICS-33965269281/raw_live_wikipedia.json accessibility_roles empty 880/880, self_link among eq 148/148",
+    "research/experiments/EXP-PHYSICS-33965269281/raw_live_python_docs.json accessibility_roles empty 880/880, self_link among eq 435/435",
+    "research/experiments/EXP-PHYSICS-33965269281/spec.json decision_rule clauses 1-7, measurement_validity gates"
+  ]
+}
