@@ -7,8 +7,8 @@
   "continue_immediately": false,
   "next_question": "Can TV distance detect lambda-scaling of dynamical structure in real or realistic Web transition data (e.g., recorded agent sessions with DOM state tracking), or does the synthetic-to-real gap render all synthetic DGP validation insufficient for product deployment?",
   "promotion_ready": false,
-  "consecutive_failures": 2,
-  "updated_at": "2026-09-06T14:32:52.769928+00:00",
+  "consecutive_failures": 3,
+  "updated_at": "2026-09-06T17:20:50.959235+00:00",
   "last_failure_retryable": false,
   "last_handoff_sha256": "60114d687d01d0e194c2ced91fe6f883ffad4f3e9c9dee5b5e9019c799a0c433"
 }
