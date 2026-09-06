@@ -1,9 +1,9 @@
 {
   "stage": "director",
   "category": "VALIDATION_FAILURE",
-  "message": "invalid claim update status: PARTIAL_VALIDATED",
+  "message": "invalid claim update status: PARTIAL-VALIDATION",
   "retryable": false,
-  "recorded_at": "2026-09-06T21:36:55.150566+00:00",
-  "github_run_id": "34061241300",
+  "recorded_at": "2026-09-06T23:08:58.284529+00:00",
+  "github_run_id": "34065970710",
   "github_run_attempt": "1"
 }

@@ -7,8 +7,8 @@
   "continue_immediately": false,
   "next_question": "Does the parameter-slot-count tie-break generalize to real-web endpoints with DOM, auth, session state, and drift \u2014 and does the literal-vs-param equal-confidence competition remain param-winning after the fix is committed to production HEAD?",
   "promotion_ready": false,
-  "consecutive_failures": 8,
-  "updated_at": "2026-09-06T21:36:55.150835+00:00",
+  "consecutive_failures": 9,
+  "updated_at": "2026-09-06T23:08:58.284812+00:00",
   "last_failure_retryable": false,
   "last_handoff_sha256": "423be67d7374d5c7fb271c44146735e754ab46708b396bdaedb8dd99d93354d4"
 }
