@@ -1,17 +1,31 @@
 {
   "experiment_id": "EXP-FRONTIER-34029326102",
   "lane": "frontier",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-WEB-DYNAMICS"],
+  "question": "Does TV distance maintain monotonic lambda-scaling of dynamical structure detection under realistic stochastic noise conditions (additive uniform, heteroscedastic state-dependent, mixed, and mean-preserving), or does noise destroy the metric's discriminating power before product-relevant noise levels are reached?",
+  "hypothesis": "TV distance maintains monotonic lambda-scaling (Spearman rho(TV, lambda) >= 0.7 at each noise fraction) across all noise conditions up to 60% noise fraction, degrading gracefully rather than catastrophically. The noise fraction at which TV scaling breaks down (rho < 0.7) differs across noise types: mean-preserving noise breaks down earliest (least information loss), additive uniform noise breaks down latest (most information preserved), and heteroscedastic/mixed noise fall between.",
+  "falsifier": "TV scaling fails (Spearman rho(TV, lambda) < 0.7 or p>0.05 after Bonferroni correction) at noise fraction <= 0.4 for ANY noise type, OR TV scaling degrades non-monotonically with noise fraction (Spearman rho between rho_TV and noise_fraction < 0.7), OR positive control fails (rules >90% at lambda=1, noise=0 for all 3 functions), OR null control fails (rules not significantly > memory at lambda=0, noise=0).",
+  "baselines": [
+    "Action-conditioned rule baseline (majority vote of (state,action)->next_state) — same as parent",
+    "Pure nearest-neighbor memory baseline (no action conditioning) — same as parent",
+    "Variance-of-means baseline — same as parent, expected to degrade faster than TV under noise",
+    "Shuffle baseline (action labels permuted) — null for action-dependence"
+  ],
+  "positive_control": "At lambda=1, noise_fraction=0: rules achieve >90% test accuracy across all 3 quadratic function families. This replicates parent positive control and verifies pipeline integrity under the new DGP variants.",
+  "null_control": "At lambda=0, noise_fraction=0: rules do not significantly outperform memory (paired t-test p>0.05). This replicates parent null control.",
+  "measurement_validity": [
+    "Each noise-fraction x DGP-variant x function cell has 500 transitions for stable TV estimation",
+    "5 independent replications per cell (different RNG seeds) for variance estimation",
+    "Same 3 quadratic function families as parent (seeds 42, 43, 44) for direct comparability",
+    "Same state space (10 states) and action space (4 actions) as parent",
+    "Noise is injected AFTER deterministic signal, preserving signal structure",
+    "Frozen random seeds for reproducibility (base seed=42, replication seeds=1000..1004)",
+    "No target leakage: baselines fit on train only, TV computed on held-out transitions",
+    "Train/test split: 80/20 stratified by lambda and function within each noise condition"
+  ],
+  "decision_rule": "If ALL of: (1) TV scaling monotonic degradation holds: Spearman rho(rho_TV_at_noise_fraction, noise_fraction) >= 0.7 across noise fractions for each noise type (Bonferroni corrected for 5 noise types x 3 functions = 15 comparisons), (2) TV scaling persists (rho >= 0.7) at noise_fraction <= 0.6 for ALL noise types, (3) positive control passes, (4) null control passes, (5) no pipeline errors: verdict = SURVIVES_CURRENT_TEST. If TV scaling breaks at noise_fraction <= 0.4 for any noise type, OR degrades non-monotonically, OR controls fail: verdict = FALSIFIED-IN-SETTING. If infrastructure prevents execution: MEASUREMENT_INVALID.",
+  "product_consequence_positive": "TV distance is robust to stochastic noise at levels typical of real Web transitions. Product pipeline can deploy TV-based regime detection with expected degradation quantified per noise type. The noise fraction at which TV breaks down provides a calibration bound for real-world confidence. Heteroscedastic robustness confirms TV works on pages with variable dynamic content.",
+  "product_consequence_negative": "If TV scaling breaks at low noise fractions (<=0.4), the synthetic-to-real gap is likely insurmountable for raw TV distance. Product must either (a) develop noise-reduction preprocessing before TV computation, (b) use alternative metrics robust to stochastic transitions, or (c) restrict regime detection to low-noise Web transitions (e.g., static pages, deterministic APIs). This would substantially delay product deployment of physics-based regime detection.",
+  "estimated_cost": "Low-moderate: pure synthetic data generation, offline computation. 5 DGP variants x 3 functions x 7 noise fractions x 500 transitions x 5 replications = 52,500 transitions total. TV computation is O(n^2) per cell but n=500 is small. Estimated runtime < 30 minutes on single machine.",
+  "expected_information_gain": "High: This is the first test of TV distance robustness under realistic noise. The parent experiment validated TV on clean deterministic DGPs; this experiment bridges toward real Web conditions. Identifying which noise types break TV scaling first provides actionable guidance for product deployment (e.g., if mean-preserving noise is benign, many Web transitions may be regime-detectable despite stochasticity). If all noise types break TV at similar thresholds, the metric has a universal robustness bound."
 }
