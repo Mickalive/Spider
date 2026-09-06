@@ -1,14 +1,14 @@
 {
   "lane": "runtime",
   "human_paused": false,
-  "active_experiment_id": "EXP-RUNTIME-34015740602",
-  "last_experiment_id": "EXP-RUNTIME-33902315583",
-  "last_verdict": "C-MEAS-VALID survives narrowly on real Flask/JWT middleware within tested scope. Full-vector discrimination 0.833 > 0.5, null FP 0.0% < 5%, valid vs expired discriminable Jaccard 0.3505 < 0.5. All three decision criteria pass. Full vector equals B-BODY-ONLY (0.833 = 0.833) \u2014 standard headers add no independent discriminating information; body is the dominant signal. Parent gaps V1-REAL-MIDDLEWARE-GAP and V2-SYNTHETIC-HEADER-TAUTOLOGY closed. Claim ceiling bounded to Flask 3.1.3 + PyJWT 2.13.0 HS256, localhost, 4 states, no synthetic headers, standard headers only, jitter 50-150ms, N=40.",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-RUNTIME-34015740602",
+  "last_verdict": "CONSTRAINED \u2014 C-MEAS-VALID survives narrowly. All three mandatory decision criteria pass (full-vector discrimination 1.0 > 0.5, null FP 0.0% < 5%, valid vs expired Jaccard 0.328 < 0.5). However, the producer's claim ceiling is overgeneralized: claim extends only to Flask 3.1.3 + PyJWT 2.13.0 HS256 on localhost 127.0.0.1:18928 with 4 states returning distinct bodies, headers filtered (Date/Server/X-Request-Id excluded), Cache-Control no-store/no-cache, ETag W/body_sha, Set-Cookie session only for valid_token, jitter 50-150ms uniform, N=40 seed 44, Python 3.12.14. The exploratory H4 test (full vector > B-BODY-ONLY) is INCONCLUSIVE due to ceiling effect: with all 4 bodies distinct, discrimination is at 1.0 and headers cannot improve beyond perfect. Full vector = B-BODY-ONLY (1.0 = 1.0) reflects body dominance under distinct-body design, not proof headers are non-discriminative. The bootstrap CI [1.0, 1.0] is degenerate at ceiling (uninformative, not high-precision). ETag and Content-Length are body-correlated by construction. Only Cache-Control and Set-Cookie are state-varying independent headers; each achieves 0.5 discrimination alone but is redundant when bodies already separate.",
   "continue_immediately": false,
-  "next_question": "Does the HTTP fingerprint substrate maintain discrimination on production OAuth/OIDC providers with additional response variation (cache-Control, ETag, request IDs, rate-limit headers, compressed encoding) \u2014 and does the full vector ever exceed B-BODY-ONLY when standard headers vary independently with auth state in production middleware?",
+  "next_question": "Does the HTTP fingerprint substrate's full vector exceed B-BODY-ONLY when bodies are NOT perfectly discriminative (e.g., identical error bodies for expired/invalid token states) but headers (Cache-Control, Set-Cookie) vary independently with auth state \u2014 the incremental header value test that was vacuous at ceiling 1.0 in this experiment?",
   "promotion_ready": false,
-  "consecutive_failures": 3,
-  "updated_at": "2026-09-06T14:17:27.832672+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "ef4350875b7915635d892cc0b1d09761992f481a7bc1691a43e1afbb55712056"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-06T17:11:36.114317+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "68538996eba323cb60ed47841f67217c0fe1b7d191c1c3686de0dd1ee9728c5e"
 }
