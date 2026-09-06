@@ -1,0 +1,1512 @@
+{
+  "experiment_id": "EXP-PRODUCT-34015741916",
+  "timestamp": "2026-09-06T11:15:29Z",
+  "conditions": {
+    "B1-single-path": {
+      "condition_id": "B1-single-path",
+      "training_count": 3,
+      "unseen_count": 5,
+      "distill_success": true,
+      "mechanism_id": "param-B1-single-path",
+      "action_template": {
+        "method": "GET",
+        "url": "https://api.example.com/items/${url}"
+      },
+      "parameter_slots": [
+        "url"
+      ],
+      "slot_count": 1,
+      "confidence": 0.8,
+      "distill_diagnostics": {
+        "mean_jaccard": 1.0,
+        "has_constant_anchor": true,
+        "anchor_path": [
+          "method"
+        ],
+        "shared_paths": [
+          "url",
+          "method"
+        ],
+        "path_values": {
+          "url": {
+            "values": [
+              "https://api.example.com/items/A",
+              "https://api.example.com/items/B",
+              "https://api.example.com/items/C"
+            ],
+            "prefix": "https://api.example.com/items/",
+            "suffix": ""
+          }
+        }
+      },
+      "resolution_results": [
+        {
+          "params": {
+            "id": "D"
+          },
+          "resolve_params": {
+            "url": "D"
+          },
+          "status": "EXECUTABLE",
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/items/D"
+          },
+          "expected_action": {
+            "method": "GET",
+            "url": "https://api.example.com/items/D"
+          },
+          "reason": "applicability guards and confidence threshold passed",
+          "binding_correct": true
+        },
+        {
+          "params": {
+            "id": "E"
+          },
+          "resolve_params": {
+            "url": "E"
+          },
+          "status": "EXECUTABLE",
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/items/E"
+          },
+          "expected_action": {
+            "method": "GET",
+            "url": "https://api.example.com/items/E"
+          },
+          "reason": "applicability guards and confidence threshold passed",
+          "binding_correct": true
+        },
+        {
+          "params": {
+            "id": "F"
+          },
+          "resolve_params": {
+            "url": "F"
+          },
+          "status": "EXECUTABLE",
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/items/F"
+          },
+          "expected_action": {
+            "method": "GET",
+            "url": "https://api.example.com/items/F"
+          },
+          "reason": "applicability guards and confidence threshold passed",
+          "binding_correct": true
+        },
+        {
+          "params": {
+            "id": "G"
+          },
+          "resolve_params": {
+            "url": "G"
+          },
+          "status": "EXECUTABLE",
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/items/G"
+          },
+          "expected_action": {
+            "method": "GET",
+            "url": "https://api.example.com/items/G"
+          },
+          "reason": "applicability guards and confidence threshold passed",
+          "binding_correct": true
+        },
+        {
+          "params": {
+            "id": "H"
+          },
+          "resolve_params": {
+            "url": "H"
+          },
+          "status": "EXECUTABLE",
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/items/H"
+          },
+          "expected_action": {
+            "method": "GET",
+            "url": "https://api.example.com/items/H"
+          },
+          "reason": "applicability guards and confidence threshold passed",
+          "binding_correct": true
+        }
+      ],
+      "metrics": {
+        "unseen_resolution_rate": 1.0,
+        "binding_accuracy": 1.0,
+        "executable_count": 5,
+        "binding_correct_count": 5
+      }
+    },
+    "B2-path-and-body": {
+      "condition_id": "B2-path-and-body",
+      "training_count": 3,
+      "unseen_count": 5,
+      "distill_success": true,
+      "mechanism_id": "param-B2-path-and-body",
+      "action_template": {
+        "method": "POST",
+        "url": "https://api.example.com/users/${url}",
+        "body": {
+          "name": "${name}"
+        }
+      },
+      "parameter_slots": [
+        "name",
+        "url"
+      ],
+      "slot_count": 2,
+      "confidence": 0.8,
+      "distill_diagnostics": {
+        "mean_jaccard": 1.0,
+        "has_constant_anchor": true,
+        "anchor_path": [
+          "method"
+        ],
+        "shared_paths": [
+          "url",
+          "body.name",
+          "method"
+        ],
+        "path_values": {
+          "url": {
+            "values": [
+              "https://api.example.com/users/A",
+              "https://api.example.com/users/B",
+              "https://api.example.com/users/C"
+            ],
+            "prefix": "https://api.example.com/users/",
+            "suffix": ""
+          },
+          "body.name": {
+            "values": [
+              "Alice",
+              "Bob",
+              "Charlie"
+            ],
+            "prefix": "",
+            "suffix": ""
+          }
+        }
+      },
+      "resolution_results": [
+        {
+          "params": {
+            "user_id": "D",
+            "name": "Diana"
+          },
+          "resolve_params": {
+            "name": "Diana",
+            "url": "D"
+          },
+          "status": "EXECUTABLE",
+          "bound_action": {
+            "body": {
+              "name": "Diana"
+            },
+            "method": "POST",
+            "url": "https://api.example.com/users/D"
+          },
+          "expected_action": {
+            "method": "POST",
+            "url": "https://api.example.com/users/D",
+            "body": {
+              "name": "Diana"
+            }
+          },
+          "reason": "applicability guards and confidence threshold passed",
+          "binding_correct": true
+        },
+        {
+          "params": {
+            "user_id": "E",
+            "name": "Eve"
+          },
+          "resolve_params": {
+            "name": "Eve",
+            "url": "E"
+          },
+          "status": "EXECUTABLE",
+          "bound_action": {
+            "body": {
+              "name": "Eve"
+            },
+            "method": "POST",
+            "url": "https://api.example.com/users/E"
+          },
+          "expected_action": {
+            "method": "POST",
+            "url": "https://api.example.com/users/E",
+            "body": {
+              "name": "Eve"
+            }
+          },
+          "reason": "applicability guards and confidence threshold passed",
+          "binding_correct": true
+        },
+        {
+          "params": {
+            "user_id": "F",
+            "name": "Frank"
+          },
+          "resolve_params": {
+            "name": "Frank",
+            "url": "F"
+          },
+          "status": "EXECUTABLE",
+          "bound_action": {
+            "body": {
+              "name": "Frank"
+            },
+            "method": "POST",
+            "url": "https://api.example.com/users/F"
+          },
+          "expected_action": {
+            "method": "POST",
+            "url": "https://api.example.com/users/F",
+            "body": {
+              "name": "Frank"
+            }
+          },
+          "reason": "applicability guards and confidence threshold passed",
+          "binding_correct": true
+        },
+        {
+          "params": {
+            "user_id": "G",
+            "name": "Grace"
+          },
+          "resolve_params": {
+            "name": "Grace",
+            "url": "G"
+          },
+          "status": "EXECUTABLE",
+          "bound_action": {
+            "body": {
+              "name": "Grace"
+            },
+            "method": "POST",
+            "url": "https://api.example.com/users/G"
+          },
+          "expected_action": {
+            "method": "POST",
+            "url": "https://api.example.com/users/G",
+            "body": {
+              "name": "Grace"
+            }
+          },
+          "reason": "applicability guards and confidence threshold passed",
+          "binding_correct": true
+        },
+        {
+          "params": {
+            "user_id": "H",
+            "name": "Heidi"
+          },
+          "resolve_params": {
+            "name": "Heidi",
+            "url": "H"
+          },
+          "status": "EXECUTABLE",
+          "bound_action": {
+            "body": {
+              "name": "Heidi"
+            },
+            "method": "POST",
+            "url": "https://api.example.com/users/H"
+          },
+          "expected_action": {
+            "method": "POST",
+            "url": "https://api.example.com/users/H",
+            "body": {
+              "name": "Heidi"
+            }
+          },
+          "reason": "applicability guards and confidence threshold passed",
+          "binding_correct": true
+        }
+      ],
+      "metrics": {
+        "unseen_resolution_rate": 1.0,
+        "binding_accuracy": 1.0,
+        "executable_count": 5,
+        "binding_correct_count": 5
+      }
+    },
+    "B3-path-body-headers": {
+      "condition_id": "B3-path-body-headers",
+      "training_count": 3,
+      "unseen_count": 5,
+      "distill_success": true,
+      "mechanism_id": "param-B3-path-body-headers",
+      "action_template": {
+        "method": "POST",
+        "url": "https://api.example.com/posts/${url}",
+        "body": {
+          "title": "${title}"
+        },
+        "headers": {
+          "X-Request-ID": "req-${X-Request-ID}"
+        }
+      },
+      "parameter_slots": [
+        "title",
+        "X-Request-ID",
+        "url"
+      ],
+      "slot_count": 3,
+      "confidence": 0.8,
+      "distill_diagnostics": {
+        "mean_jaccard": 1.0,
+        "has_constant_anchor": true,
+        "anchor_path": [
+          "method"
+        ],
+        "shared_paths": [
+          "url",
+          "headers.X-Request-ID",
+          "body.title",
+          "method"
+        ],
+        "path_values": {
+          "url": {
+            "values": [
+              "https://api.example.com/posts/A",
+              "https://api.example.com/posts/B",
+              "https://api.example.com/posts/C"
+            ],
+            "prefix": "https://api.example.com/posts/",
+            "suffix": ""
+          },
+          "headers.X-Request-ID": {
+            "values": [
+              "req-1",
+              "req-2",
+              "req-3"
+            ],
+            "prefix": "req-",
+            "suffix": ""
+          },
+          "body.title": {
+            "values": [
+              "First",
+              "Second",
+              "Third"
+            ],
+            "prefix": "",
+            "suffix": ""
+          }
+        }
+      },
+      "resolution_results": [
+        {
+          "params": {
+            "url": "D",
+            "title": "Fourth",
+            "X-Request-ID": "4"
+          },
+          "resolve_params": {
+            "title": "Fourth",
+            "X-Request-ID": "4",
+            "url": "D"
+          },
+          "status": "EXECUTABLE",
+          "bound_action": {
+            "body": {
+              "title": "Fourth"
+            },
+            "headers": {
+              "X-Request-ID": "req-${X-Request-ID}"
+            },
+            "method": "POST",
+            "url": "https://api.example.com/posts/D"
+          },
+          "expected_action": {
+            "method": "POST",
+            "url": "https://api.example.com/posts/D",
+            "body": {
+              "title": "Fourth"
+            },
+            "headers": {
+              "X-Request-ID": "req-4"
+            }
+          },
+          "reason": "applicability guards and confidence threshold passed",
+          "binding_correct": false
+        },
+        {
+          "params": {
+            "url": "E",
+            "title": "Fifth",
+            "X-Request-ID": "5"
+          },
+          "resolve_params": {
+            "title": "Fifth",
+            "X-Request-ID": "5",
+            "url": "E"
+          },
+          "status": "EXECUTABLE",
+          "bound_action": {
+            "body": {
+              "title": "Fifth"
+            },
+            "headers": {
+              "X-Request-ID": "req-${X-Request-ID}"
+            },
+            "method": "POST",
+            "url": "https://api.example.com/posts/E"
+          },
+          "expected_action": {
+            "method": "POST",
+            "url": "https://api.example.com/posts/E",
+            "body": {
+              "title": "Fifth"
+            },
+            "headers": {
+              "X-Request-ID": "req-5"
+            }
+          },
+          "reason": "applicability guards and confidence threshold passed",
+          "binding_correct": false
+        },
+        {
+          "params": {
+            "url": "F",
+            "title": "Sixth",
+            "X-Request-ID": "6"
+          },
+          "resolve_params": {
+            "title": "Sixth",
+            "X-Request-ID": "6",
+            "url": "F"
+          },
+          "status": "EXECUTABLE",
+          "bound_action": {
+            "body": {
+              "title": "Sixth"
+            },
+            "headers": {
+              "X-Request-ID": "req-${X-Request-ID}"
+            },
+            "method": "POST",
+            "url": "https://api.example.com/posts/F"
+          },
+          "expected_action": {
+            "method": "POST",
+            "url": "https://api.example.com/posts/F",
+            "body": {
+              "title": "Sixth"
+            },
+            "headers": {
+              "X-Request-ID": "req-6"
+            }
+          },
+          "reason": "applicability guards and confidence threshold passed",
+          "binding_correct": false
+        },
+        {
+          "params": {
+            "url": "G",
+            "title": "Seventh",
+            "X-Request-ID": "7"
+          },
+          "resolve_params": {
+            "title": "Seventh",
+            "X-Request-ID": "7",
+            "url": "G"
+          },
+          "status": "EXECUTABLE",
+          "bound_action": {
+            "body": {
+              "title": "Seventh"
+            },
+            "headers": {
+              "X-Request-ID": "req-${X-Request-ID}"
+            },
+            "method": "POST",
+            "url": "https://api.example.com/posts/G"
+          },
+          "expected_action": {
+            "method": "POST",
+            "url": "https://api.example.com/posts/G",
+            "body": {
+              "title": "Seventh"
+            },
+            "headers": {
+              "X-Request-ID": "req-7"
+            }
+          },
+          "reason": "applicability guards and confidence threshold passed",
+          "binding_correct": false
+        },
+        {
+          "params": {
+            "url": "H",
+            "title": "Eighth",
+            "X-Request-ID": "8"
+          },
+          "resolve_params": {
+            "title": "Eighth",
+            "X-Request-ID": "8",
+            "url": "H"
+          },
+          "status": "EXECUTABLE",
+          "bound_action": {
+            "body": {
+              "title": "Eighth"
+            },
+            "headers": {
+              "X-Request-ID": "req-${X-Request-ID}"
+            },
+            "method": "POST",
+            "url": "https://api.example.com/posts/H"
+          },
+          "expected_action": {
+            "method": "POST",
+            "url": "https://api.example.com/posts/H",
+            "body": {
+              "title": "Eighth"
+            },
+            "headers": {
+              "X-Request-ID": "req-8"
+            }
+          },
+          "reason": "applicability guards and confidence threshold passed",
+          "binding_correct": false
+        }
+      ],
+      "metrics": {
+        "unseen_resolution_rate": 1.0,
+        "binding_accuracy": 0.0,
+        "executable_count": 5,
+        "binding_correct_count": 0
+      }
+    },
+    "B4-non-identifier-values": {
+      "condition_id": "B4-non-identifier-values",
+      "training_count": 3,
+      "unseen_count": 3,
+      "distill_success": true,
+      "mechanism_id": "param-B4-non-identifier-values",
+      "action_template": {
+        "method": "POST",
+        "url": "https://api.example.com/webhooks",
+        "body": {
+          "callback_url": "https://site-${callback_url}.com/hook"
+        }
+      },
+      "parameter_slots": [
+        "callback_url"
+      ],
+      "slot_count": 1,
+      "confidence": 0.8,
+      "distill_diagnostics": {
+        "mean_jaccard": 1.0,
+        "has_constant_anchor": true,
+        "anchor_path": [
+          "url",
+          "method"
+        ],
+        "shared_paths": [
+          "body.callback_url",
+          "url",
+          "method"
+        ],
+        "path_values": {
+          "body.callback_url": {
+            "values": [
+              "https://site-a.com/hook",
+              "https://site-b.com/hook",
+              "https://site-c.com/hook"
+            ],
+            "prefix": "https://site-",
+            "suffix": ".com/hook"
+          }
+        }
+      },
+      "resolution_results": [
+        {
+          "params": {
+            "webhook_url": "d"
+          },
+          "resolve_params": {
+            "callback_url": "d"
+          },
+          "status": "EXECUTABLE",
+          "bound_action": {
+            "body": {
+              "callback_url": "https://site-d.com/hook"
+            },
+            "method": "POST",
+            "url": "https://api.example.com/webhooks"
+          },
+          "expected_action": {
+            "method": "POST",
+            "url": "https://api.example.com/webhooks",
+            "body": {
+              "callback_url": "https://site-d.com/hook"
+            }
+          },
+          "reason": "applicability guards and confidence threshold passed",
+          "binding_correct": true
+        },
+        {
+          "params": {
+            "webhook_url": "e"
+          },
+          "resolve_params": {
+            "callback_url": "e"
+          },
+          "status": "EXECUTABLE",
+          "bound_action": {
+            "body": {
+              "callback_url": "https://site-e.com/hook"
+            },
+            "method": "POST",
+            "url": "https://api.example.com/webhooks"
+          },
+          "expected_action": {
+            "method": "POST",
+            "url": "https://api.example.com/webhooks",
+            "body": {
+              "callback_url": "https://site-e.com/hook"
+            }
+          },
+          "reason": "applicability guards and confidence threshold passed",
+          "binding_correct": true
+        },
+        {
+          "params": {
+            "webhook_url": "f"
+          },
+          "resolve_params": {
+            "callback_url": "f"
+          },
+          "status": "EXECUTABLE",
+          "bound_action": {
+            "body": {
+              "callback_url": "https://site-f.com/hook"
+            },
+            "method": "POST",
+            "url": "https://api.example.com/webhooks"
+          },
+          "expected_action": {
+            "method": "POST",
+            "url": "https://api.example.com/webhooks",
+            "body": {
+              "callback_url": "https://site-f.com/hook"
+            }
+          },
+          "reason": "applicability guards and confidence threshold passed",
+          "binding_correct": true
+        }
+      ],
+      "metrics": {
+        "unseen_resolution_rate": 1.0,
+        "binding_accuracy": 1.0,
+        "executable_count": 3,
+        "binding_correct_count": 3
+      }
+    },
+    "B5-shared-slot-name": {
+      "condition_id": "B5-shared-slot-name",
+      "training_count": 3,
+      "unseen_count": 3,
+      "distill_success": true,
+      "mechanism_id": "param-B5-shared-slot-name",
+      "action_template": {
+        "method": "PUT",
+        "url": "https://api.example.com/items/${url}",
+        "body": {
+          "user_id": "A"
+        }
+      },
+      "parameter_slots": [
+        "url"
+      ],
+      "slot_count": 1,
+      "confidence": 0.8,
+      "distill_diagnostics": {
+        "mean_jaccard": 1.0,
+        "has_constant_anchor": true,
+        "anchor_path": [
+          "body.user_id",
+          "method"
+        ],
+        "shared_paths": [
+          "body.user_id",
+          "url",
+          "method"
+        ],
+        "path_values": {
+          "url": {
+            "values": [
+              "https://api.example.com/items/A",
+              "https://api.example.com/items/B",
+              "https://api.example.com/items/C"
+            ],
+            "prefix": "https://api.example.com/items/",
+            "suffix": ""
+          }
+        }
+      },
+      "resolution_results": [
+        {
+          "params": {
+            "url": "D",
+            "user_id": "A"
+          },
+          "resolve_params": {
+            "url": "D"
+          },
+          "status": "EXECUTABLE",
+          "bound_action": {
+            "body": {
+              "user_id": "A"
+            },
+            "method": "PUT",
+            "url": "https://api.example.com/items/D"
+          },
+          "expected_action": {
+            "method": "PUT",
+            "url": "https://api.example.com/items/D",
+            "body": {
+              "user_id": "A"
+            }
+          },
+          "reason": "applicability guards and confidence threshold passed",
+          "binding_correct": true
+        },
+        {
+          "params": {
+            "url": "E",
+            "user_id": "A"
+          },
+          "resolve_params": {
+            "url": "E"
+          },
+          "status": "EXECUTABLE",
+          "bound_action": {
+            "body": {
+              "user_id": "A"
+            },
+            "method": "PUT",
+            "url": "https://api.example.com/items/E"
+          },
+          "expected_action": {
+            "method": "PUT",
+            "url": "https://api.example.com/items/E",
+            "body": {
+              "user_id": "A"
+            }
+          },
+          "reason": "applicability guards and confidence threshold passed",
+          "binding_correct": true
+        },
+        {
+          "params": {
+            "url": "F",
+            "user_id": "A"
+          },
+          "resolve_params": {
+            "url": "F"
+          },
+          "status": "EXECUTABLE",
+          "bound_action": {
+            "body": {
+              "user_id": "A"
+            },
+            "method": "PUT",
+            "url": "https://api.example.com/items/F"
+          },
+          "expected_action": {
+            "method": "PUT",
+            "url": "https://api.example.com/items/F",
+            "body": {
+              "user_id": "A"
+            }
+          },
+          "reason": "applicability guards and confidence threshold passed",
+          "binding_correct": true
+        }
+      ],
+      "metrics": {
+        "unseen_resolution_rate": 1.0,
+        "binding_accuracy": 1.0,
+        "executable_count": 3,
+        "binding_correct_count": 3
+      }
+    },
+    "C1-full-value-urls": {
+      "condition_id": "C1-full-value-urls",
+      "training_count": 3,
+      "unseen_count": 3,
+      "distill_success": true,
+      "mechanism_id": "param-C1-full-value-urls",
+      "action_template": {
+        "method": "POST",
+        "url": "https://api.example.com/webhooks",
+        "body": {
+          "callback_url": "https://site-${callback_url}.com/hook"
+        }
+      },
+      "parameter_slots": [
+        "callback_url"
+      ],
+      "slot_count": 1,
+      "confidence": 0.8,
+      "distill_diagnostics": {
+        "mean_jaccard": 1.0,
+        "has_constant_anchor": true,
+        "anchor_path": [
+          "url",
+          "method"
+        ],
+        "shared_paths": [
+          "body.callback_url",
+          "url",
+          "method"
+        ],
+        "path_values": {
+          "body.callback_url": {
+            "values": [
+              "https://site-a.com/hook",
+              "https://site-b.com/hook",
+              "https://site-c.com/hook"
+            ],
+            "prefix": "https://site-",
+            "suffix": ".com/hook"
+          }
+        }
+      },
+      "resolution_results": [
+        {
+          "params": {
+            "callback_url": "d"
+          },
+          "resolve_params": {
+            "callback_url": "d"
+          },
+          "status": "EXECUTABLE",
+          "bound_action": {
+            "body": {
+              "callback_url": "https://site-d.com/hook"
+            },
+            "method": "POST",
+            "url": "https://api.example.com/webhooks"
+          },
+          "expected_action": {
+            "method": "POST",
+            "url": "https://api.example.com/webhooks",
+            "body": {
+              "callback_url": "https://site-d.com/hook"
+            }
+          },
+          "reason": "applicability guards and confidence threshold passed",
+          "binding_correct": true
+        },
+        {
+          "params": {
+            "callback_url": "e"
+          },
+          "resolve_params": {
+            "callback_url": "e"
+          },
+          "status": "EXECUTABLE",
+          "bound_action": {
+            "body": {
+              "callback_url": "https://site-e.com/hook"
+            },
+            "method": "POST",
+            "url": "https://api.example.com/webhooks"
+          },
+          "expected_action": {
+            "method": "POST",
+            "url": "https://api.example.com/webhooks",
+            "body": {
+              "callback_url": "https://site-e.com/hook"
+            }
+          },
+          "reason": "applicability guards and confidence threshold passed",
+          "binding_correct": true
+        },
+        {
+          "params": {
+            "callback_url": "f"
+          },
+          "resolve_params": {
+            "callback_url": "f"
+          },
+          "status": "EXECUTABLE",
+          "bound_action": {
+            "body": {
+              "callback_url": "https://site-f.com/hook"
+            },
+            "method": "POST",
+            "url": "https://api.example.com/webhooks"
+          },
+          "expected_action": {
+            "method": "POST",
+            "url": "https://api.example.com/webhooks",
+            "body": {
+              "callback_url": "https://site-f.com/hook"
+            }
+          },
+          "reason": "applicability guards and confidence threshold passed",
+          "binding_correct": true
+        }
+      ],
+      "metrics": {
+        "unseen_resolution_rate": 1.0,
+        "binding_accuracy": 1.0,
+        "executable_count": 3,
+        "binding_correct_count": 3
+      }
+    },
+    "C2-full-value-ids": {
+      "condition_id": "C2-full-value-ids",
+      "training_count": 3,
+      "unseen_count": 3,
+      "distill_success": true,
+      "mechanism_id": "param-C2-full-value-ids",
+      "action_template": {
+        "method": "GET",
+        "url": "https://api.example.com/users/user-${url}"
+      },
+      "parameter_slots": [
+        "url"
+      ],
+      "slot_count": 1,
+      "confidence": 0.8,
+      "distill_diagnostics": {
+        "mean_jaccard": 1.0,
+        "has_constant_anchor": true,
+        "anchor_path": [
+          "method"
+        ],
+        "shared_paths": [
+          "url",
+          "method"
+        ],
+        "path_values": {
+          "url": {
+            "values": [
+              "https://api.example.com/users/user-1",
+              "https://api.example.com/users/user-2",
+              "https://api.example.com/users/user-3"
+            ],
+            "prefix": "https://api.example.com/users/user-",
+            "suffix": ""
+          }
+        }
+      },
+      "resolution_results": [
+        {
+          "params": {
+            "url": "4"
+          },
+          "resolve_params": {
+            "url": "4"
+          },
+          "status": "EXECUTABLE",
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/users/user-4"
+          },
+          "expected_action": {
+            "method": "GET",
+            "url": "https://api.example.com/users/user-4"
+          },
+          "reason": "applicability guards and confidence threshold passed",
+          "binding_correct": true
+        },
+        {
+          "params": {
+            "url": "5"
+          },
+          "resolve_params": {
+            "url": "5"
+          },
+          "status": "EXECUTABLE",
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/users/user-5"
+          },
+          "expected_action": {
+            "method": "GET",
+            "url": "https://api.example.com/users/user-5"
+          },
+          "reason": "applicability guards and confidence threshold passed",
+          "binding_correct": true
+        },
+        {
+          "params": {
+            "url": "6"
+          },
+          "resolve_params": {
+            "url": "6"
+          },
+          "status": "EXECUTABLE",
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/users/user-6"
+          },
+          "expected_action": {
+            "method": "GET",
+            "url": "https://api.example.com/users/user-6"
+          },
+          "reason": "applicability guards and confidence threshold passed",
+          "binding_correct": true
+        }
+      ],
+      "metrics": {
+        "unseen_resolution_rate": 1.0,
+        "binding_accuracy": 1.0,
+        "executable_count": 3,
+        "binding_correct_count": 3
+      }
+    },
+    "D1-noisy-post": {
+      "condition_id": "D1-noisy-post",
+      "training_count": 3,
+      "unseen_count": 3,
+      "distill_success": true,
+      "mechanism_id": "param-D1-noisy-post",
+      "action_template": {
+        "method": "POST",
+        "url": "https://api.example.com/orders/order-${url}",
+        "body": {
+          "customer": "cust-${customer}"
+        },
+        "headers": {
+          "X-Request-ID": "req-10${X-Request-ID}"
+        },
+        "timestamp": "2026-09-01T10:00:00Z",
+        "request_duration_ms": 120,
+        "retry_count": 0,
+        "user_agent": "Mozilla/5.0"
+      },
+      "parameter_slots": [
+        "customer",
+        "X-Request-ID",
+        "url"
+      ],
+      "slot_count": 3,
+      "confidence": 0.8,
+      "distill_diagnostics": {
+        "mean_jaccard": 1.0,
+        "has_constant_anchor": true,
+        "anchor_path": [
+          "method"
+        ],
+        "shared_paths": [
+          "body.customer",
+          "url",
+          "headers.X-Request-ID",
+          "method"
+        ],
+        "path_values": {
+          "body.customer": {
+            "values": [
+              "cust-A",
+              "cust-B",
+              "cust-C"
+            ],
+            "prefix": "cust-",
+            "suffix": ""
+          },
+          "url": {
+            "values": [
+              "https://api.example.com/orders/order-1",
+              "https://api.example.com/orders/order-2",
+              "https://api.example.com/orders/order-3"
+            ],
+            "prefix": "https://api.example.com/orders/order-",
+            "suffix": ""
+          },
+          "headers.X-Request-ID": {
+            "values": [
+              "req-101",
+              "req-102",
+              "req-103"
+            ],
+            "prefix": "req-10",
+            "suffix": ""
+          }
+        }
+      },
+      "resolution_results": [
+        {
+          "params": {
+            "url": "4",
+            "customer": "D",
+            "X-Request-ID": "4"
+          },
+          "resolve_params": {
+            "customer": "D",
+            "X-Request-ID": "4",
+            "url": "4"
+          },
+          "status": "EXECUTABLE",
+          "bound_action": {
+            "body": {
+              "customer": "cust-D"
+            },
+            "headers": {
+              "X-Request-ID": "req-10${X-Request-ID}"
+            },
+            "method": "POST",
+            "request_duration_ms": 120,
+            "retry_count": 0,
+            "timestamp": "2026-09-01T10:00:00Z",
+            "url": "https://api.example.com/orders/order-4",
+            "user_agent": "Mozilla/5.0"
+          },
+          "expected_action": {
+            "method": "POST",
+            "url": "https://api.example.com/orders/order-4",
+            "body": {
+              "customer": "cust-D"
+            },
+            "headers": {
+              "X-Request-ID": "req-104"
+            },
+            "timestamp": "2026-09-01T10:00:00Z",
+            "request_duration_ms": 120,
+            "retry_count": 0,
+            "user_agent": "Mozilla/5.0"
+          },
+          "reason": "applicability guards and confidence threshold passed",
+          "binding_correct": false
+        },
+        {
+          "params": {
+            "url": "5",
+            "customer": "E",
+            "X-Request-ID": "5"
+          },
+          "resolve_params": {
+            "customer": "E",
+            "X-Request-ID": "5",
+            "url": "5"
+          },
+          "status": "EXECUTABLE",
+          "bound_action": {
+            "body": {
+              "customer": "cust-E"
+            },
+            "headers": {
+              "X-Request-ID": "req-10${X-Request-ID}"
+            },
+            "method": "POST",
+            "request_duration_ms": 120,
+            "retry_count": 0,
+            "timestamp": "2026-09-01T10:00:00Z",
+            "url": "https://api.example.com/orders/order-5",
+            "user_agent": "Mozilla/5.0"
+          },
+          "expected_action": {
+            "method": "POST",
+            "url": "https://api.example.com/orders/order-5",
+            "body": {
+              "customer": "cust-E"
+            },
+            "headers": {
+              "X-Request-ID": "req-105"
+            },
+            "timestamp": "2026-09-01T10:00:00Z",
+            "request_duration_ms": 120,
+            "retry_count": 0,
+            "user_agent": "Mozilla/5.0"
+          },
+          "reason": "applicability guards and confidence threshold passed",
+          "binding_correct": false
+        },
+        {
+          "params": {
+            "url": "6",
+            "customer": "F",
+            "X-Request-ID": "6"
+          },
+          "resolve_params": {
+            "customer": "F",
+            "X-Request-ID": "6",
+            "url": "6"
+          },
+          "status": "EXECUTABLE",
+          "bound_action": {
+            "body": {
+              "customer": "cust-F"
+            },
+            "headers": {
+              "X-Request-ID": "req-10${X-Request-ID}"
+            },
+            "method": "POST",
+            "request_duration_ms": 120,
+            "retry_count": 0,
+            "timestamp": "2026-09-01T10:00:00Z",
+            "url": "https://api.example.com/orders/order-6",
+            "user_agent": "Mozilla/5.0"
+          },
+          "expected_action": {
+            "method": "POST",
+            "url": "https://api.example.com/orders/order-6",
+            "body": {
+              "customer": "cust-F"
+            },
+            "headers": {
+              "X-Request-ID": "req-106"
+            },
+            "timestamp": "2026-09-01T10:00:00Z",
+            "request_duration_ms": 120,
+            "retry_count": 0,
+            "user_agent": "Mozilla/5.0"
+          },
+          "reason": "applicability guards and confidence threshold passed",
+          "binding_correct": false
+        }
+      ],
+      "metrics": {
+        "unseen_resolution_rate": 1.0,
+        "binding_accuracy": 0.0,
+        "executable_count": 3,
+        "binding_correct_count": 0
+      }
+    },
+    "D2-noisy-get": {
+      "condition_id": "D2-noisy-get",
+      "training_count": 3,
+      "unseen_count": 3,
+      "distill_success": true,
+      "mechanism_id": "param-D2-noisy-get",
+      "action_template": {
+        "method": "GET",
+        "url": "https://api.example.com/search?q=${url}",
+        "response_time_ms": 45,
+        "cache_hit": false,
+        "result_count": 10
+      },
+      "parameter_slots": [
+        "url"
+      ],
+      "slot_count": 1,
+      "confidence": 0.8,
+      "distill_diagnostics": {
+        "mean_jaccard": 1.0,
+        "has_constant_anchor": true,
+        "anchor_path": [
+          "method"
+        ],
+        "shared_paths": [
+          "url",
+          "method"
+        ],
+        "path_values": {
+          "url": {
+            "values": [
+              "https://api.example.com/search?q=alpha&page=1",
+              "https://api.example.com/search?q=beta&page=2",
+              "https://api.example.com/search?q=gamma&page=3"
+            ],
+            "prefix": "https://api.example.com/search?q=",
+            "suffix": ""
+          }
+        }
+      },
+      "resolution_results": [
+        {
+          "params": {
+            "url": "delta"
+          },
+          "resolve_params": {
+            "url": "delta"
+          },
+          "status": "EXECUTABLE",
+          "bound_action": {
+            "cache_hit": false,
+            "method": "GET",
+            "response_time_ms": 45,
+            "result_count": 10,
+            "url": "https://api.example.com/search?q=delta"
+          },
+          "expected_action": {
+            "method": "GET",
+            "url": "https://api.example.com/search?q=delta",
+            "response_time_ms": 45,
+            "cache_hit": false,
+            "result_count": 10
+          },
+          "reason": "applicability guards and confidence threshold passed",
+          "binding_correct": true
+        },
+        {
+          "params": {
+            "url": "epsilon"
+          },
+          "resolve_params": {
+            "url": "epsilon"
+          },
+          "status": "EXECUTABLE",
+          "bound_action": {
+            "cache_hit": false,
+            "method": "GET",
+            "response_time_ms": 45,
+            "result_count": 10,
+            "url": "https://api.example.com/search?q=epsilon"
+          },
+          "expected_action": {
+            "method": "GET",
+            "url": "https://api.example.com/search?q=epsilon",
+            "response_time_ms": 45,
+            "cache_hit": false,
+            "result_count": 10
+          },
+          "reason": "applicability guards and confidence threshold passed",
+          "binding_correct": true
+        },
+        {
+          "params": {
+            "url": "zeta"
+          },
+          "resolve_params": {
+            "url": "zeta"
+          },
+          "status": "EXECUTABLE",
+          "bound_action": {
+            "cache_hit": false,
+            "method": "GET",
+            "response_time_ms": 45,
+            "result_count": 10,
+            "url": "https://api.example.com/search?q=zeta"
+          },
+          "expected_action": {
+            "method": "GET",
+            "url": "https://api.example.com/search?q=zeta",
+            "response_time_ms": 45,
+            "cache_hit": false,
+            "result_count": 10
+          },
+          "reason": "applicability guards and confidence threshold passed",
+          "binding_correct": true
+        }
+      ],
+      "metrics": {
+        "unseen_resolution_rate": 1.0,
+        "binding_accuracy": 1.0,
+        "executable_count": 3,
+        "binding_correct_count": 3
+      }
+    },
+    "D3-varying-preconditions": {
+      "condition_id": "D3-varying-preconditions",
+      "training_count": 3,
+      "unseen_count": 1,
+      "distill_success": true,
+      "mechanism_id": "param-D3-varying-preconditions",
+      "action_template": {
+        "method": "POST",
+        "url": "https://api.example.com/orders/item-${url}",
+        "body": {
+          "quantity": 1
+        }
+      },
+      "parameter_slots": [
+        "url"
+      ],
+      "slot_count": 1,
+      "confidence": 0.8,
+      "distill_diagnostics": {
+        "mean_jaccard": 1.0,
+        "has_constant_anchor": true,
+        "anchor_path": [
+          "body.quantity",
+          "method"
+        ],
+        "shared_paths": [
+          "body.quantity",
+          "url",
+          "method"
+        ],
+        "path_values": {
+          "url": {
+            "values": [
+              "https://api.example.com/orders/item-1",
+              "https://api.example.com/orders/item-2",
+              "https://api.example.com/orders/item-3"
+            ],
+            "prefix": "https://api.example.com/orders/item-",
+            "suffix": ""
+          }
+        }
+      },
+      "resolution_results": [
+        {
+          "params": {
+            "url": "4"
+          },
+          "resolve_params": {
+            "url": "4"
+          },
+          "status": "EXECUTABLE",
+          "bound_action": {
+            "body": {
+              "quantity": 1
+            },
+            "method": "POST",
+            "url": "https://api.example.com/orders/item-4"
+          },
+          "expected_action": {
+            "method": "POST",
+            "url": "https://api.example.com/orders/item-4",
+            "body": {
+              "quantity": 1
+            }
+          },
+          "reason": "applicability guards and confidence threshold passed",
+          "binding_correct": true
+        }
+      ],
+      "metrics": {
+        "unseen_resolution_rate": 1.0,
+        "binding_accuracy": 1.0,
+        "executable_count": 1,
+        "binding_correct_count": 1
+      }
+    }
+  },
+  "controls": {
+    "E1_pattern_absence": {
+      "expected_slot_count": 0,
+      "observed_slot_count": 0,
+      "slots": [],
+      "passed": true,
+      "distill_diagnostics": null
+    },
+    "E2_single_obs": {
+      "expected_slot_count": 0,
+      "observed_slot_count": 0,
+      "passed": true
+    }
+  },
+  "baselines": {
+    "B_LITERAL": {
+      "fail_count": 5,
+      "fail_rate": 1.0,
+      "all_fail": true
+    }
+  },
+  "phase_a": {
+    "A1_import": {
+      "status": "PASS"
+    },
+    "A2_kernel_has_distill_parameterized": {
+      "status": "PASS",
+      "detail": "distill_parameterized method exists in SpiderKernel"
+    }
+  }
+}
