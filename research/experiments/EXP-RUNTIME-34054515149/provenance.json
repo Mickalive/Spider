@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-34054515149",
+  "lane": "runtime",
+  "github_run_id": "34054515149",
+  "github_run_attempt": 1,
+  "commits": {
+    "base_sha": "3c8b18f71460ae9c94bd28167a6b56eb563ac1e5",
+    "execution_checkpoint_sha": "aaa10a92080d6d6210c7fcaade38734893c9b348"
+  },
+  "environment": {
+    "python_version": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "platform": "linux",
+    "flask_version": "3.1.3",
+    "pyjwt_version": "2.13.0",
+    "requests_version": "2.34.2",
+    "werkzeug_version": "3.1.8"
+  },
+  "server_config": {
+    "host": "127.0.0.1",
+    "port": 18929,
+    "secret_key": "test-secret-key-12345",
+    "algorithm": "HS256",
+    "jitter_range": [0.05, 0.15],
+    "client_inter_request": [0.0, 0.2]
+  },
+  "frozen_inputs": {
+    "request_json_hash": "ba9cefd4d44540e65e090e9fae5bad7e919fb5b1eef3eb4d2348dbb9454d7d8c",
+    "spec_json_hash": "26aa1fda330358740f7278c80ba773c3be0a02979bcc8d2a0cbbfb3a6570517c",
+    "prereg_md_hash": "1d0de2ee1c5f404dcecbc3e126f0b3e7a78484b7c4fc6c765d159e30d4e337e0",
+    "freeze_json_hash": "see freeze.json"
+  },
+  "artifacts": {
+    "run_experiment.py": {
+      "sha256": "cb72f9e10587f78a3c98c68874f0b6e0579d9472a534af3578307339e8cf306e",
+      "role": "code"
+    },
+    "raw_observations.json": {
+      "sha256": "4c39b0f3b34bb3c65a40c03e9fa3a3b89e42c30a6def2016d62867df161411ce",
+      "role": "raw"
+    },
+    "result.json": {
+      "sha256": "dfbffc02b91a5788dc96cc087c1d7bf438f700a3aa91ad52d582b37e192ed3fa",
+      "role": "derived"
+    }
+  },
+  "design_sources": {
+    "parent_handoff": {
+      "experiment_id": "EXP-RUNTIME-34015740602",
+      "path": "research/experiments/EXP-RUNTIME-34015740602/handoff.json",
+      "sha256": "68538996eba323cb60ed47841f67217c0fe1b7d191c1c3686de0dd1ee9728c5e"
+    },
+    "parent_result": "research/experiments/EXP-RUNTIME-34015740602/result.json",
+    "parent_audit": "research/experiments/EXP-RUNTIME-34015740602/audit.json",
+    "grandparent_handoff": "research/experiments/EXP-RUNTIME-33902315583/handoff.json"
+  },
+  "fingerprint_config": {
+    "algorithm": "SHA-256(repr((status, tuple(sorted(filtered_headers)), body_sha256, redirect_chain)))",
+    "excluded_headers": ["date", "server", "x-request-id"],
+    "python_repr": true,
+    "deterministic_within_python_version": true
+  },
+  "sampling": {
+    "N": 40,
+    "states": 4,
+    "reps_per_state": 10,
+    "seed": 44,
+    "randomization": "shuffle plan with seed 44"
+  },
+  "recorded_at": "2026-09-06T19:23:22+00:00"
+}

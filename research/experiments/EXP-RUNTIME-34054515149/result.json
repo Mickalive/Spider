@@ -1,0 +1,219 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-34054515149",
+  "lane": "runtime",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "full_vector_discrimination": 1.0,
+    "full_vector_intra_match_rate": 1.0,
+    "full_vector_inter_match_rate": 0.0,
+    "full_vector_mean_intra_jaccard": 1.0,
+    "full_vector_mean_inter_jaccard": 0.34198787706642,
+    "full_vector_bootstrap_95ci": [
+      1.0,
+      1.0
+    ],
+    "baselines": {
+      "B-URL-HASH": 0.0,
+      "B-RANDOM": 0.0,
+      "B-STATUS-ONLY": 0.5,
+      "B-BODY-ONLY": 0.8333333333333334
+    },
+    "incremental_header_value": 0.16666666666666663,
+    "full_vs_body_only_ratio": 1.2,
+    "cache_control_only_discrimination": 0.8333333333333334,
+    "set_cookie_only_discrimination": 0.5,
+    "etag_only_discrimination": 0.8333333333333334,
+    "null_fp_rate": 0.0,
+    "drift_jaccards": [
+      0.32474226804123707,
+      0.3812154696132597
+    ],
+    "drift_all_discriminable": true,
+    "total_requests": 40,
+    "error_rate": 0.0
+  },
+  "controls": {
+    "C_NULL_FP_RATE": {
+      "expected": "< 5%",
+      "observed": "0.0%",
+      "pass": true,
+      "detail": {
+        "no_auth": {
+          "total": 10,
+          "unique": 1,
+          "false_positive_rate": 0.0
+        },
+        "valid_token": {
+          "total": 10,
+          "unique": 1,
+          "false_positive_rate": 0.0
+        },
+        "expired_token": {
+          "total": 10,
+          "unique": 1,
+          "false_positive_rate": 0.0
+        },
+        "invalid_token": {
+          "total": 10,
+          "unique": 1,
+          "false_positive_rate": 0.0
+        }
+      }
+    },
+    "C_POSITIVE_DISCRIMINATION": {
+      "expected": "> 0.5",
+      "observed": "1.000000",
+      "pass": true
+    },
+    "C_CACHE_CONTROL_VARIATION": {
+      "expected": "Cache-Control-only discrimination > 0",
+      "observed": "0.833333",
+      "pass": true,
+      "detail": {
+        "no_auth": {
+          "expected": null,
+          "observed_values": [
+            "(absent)"
+          ],
+          "consistent": true
+        },
+        "valid_token": {
+          "expected": null,
+          "observed_values": [
+            "(absent)"
+          ],
+          "consistent": true
+        },
+        "expired_token": {
+          "expected": "no-store",
+          "observed_values": [
+            "no-store"
+          ],
+          "consistent": true
+        },
+        "invalid_token": {
+          "expected": "no-cache",
+          "observed_values": [
+            "no-cache"
+          ],
+          "consistent": true
+        }
+      }
+    },
+    "C_SET_COOKIE_VARIATION": {
+      "expected": "Set-Cookie-only discrimination > 0",
+      "observed": "0.500000",
+      "pass": true,
+      "detail": {
+        "no_auth": {
+          "expected": false,
+          "observed_present": false,
+          "consistent": true
+        },
+        "valid_token": {
+          "expected": true,
+          "observed_present": true,
+          "consistent": true
+        },
+        "expired_token": {
+          "expected": false,
+          "observed_present": false,
+          "consistent": true
+        },
+        "invalid_token": {
+          "expected": false,
+          "observed_present": false,
+          "consistent": true
+        }
+      }
+    },
+    "C_INCREMENTAL_HEADER_VALUE": {
+      "expected": "full_vector_discrimination > B-BODY-ONLY",
+      "observed": "full=1.000000, body_only=0.833333, delta=0.166667",
+      "pass": true
+    },
+    "C_BODY_CORRELATION_ETAG": {
+      "expected": "ETag discrimination == B-BODY-ONLY (body-correlated)",
+      "observed": "ETag=0.833333, body=0.833333",
+      "pass": true
+    },
+    "C_BODY_IDENTITY_EXPIRED_INVALID": {
+      "expected": "expired_token and invalid_token share identical body hash",
+      "observed": "expired=['a138b3ee71692c2d1035ca6d4ade9700a3e8ad450925b98d11a6468751a89022'], invalid=['a138b3ee71692c2d1035ca6d4ade9700a3e8ad450925b98d11a6468751a89022']",
+      "pass": true
+    },
+    "C_DRIFT_VALID_VS_EXPIRED": {
+      "expected": "Jaccard < 0.5 (discriminable)",
+      "observed": "Jaccard=0.3247",
+      "pass": true
+    },
+    "C_DRIFT_EXPIRED_VS_INVALID": {
+      "expected": "Jaccard < 0.5 (discriminable via Cache-Control)",
+      "observed": "Jaccard=0.3812",
+      "pass": true
+    },
+    "C_ERROR_RATE": {
+      "expected": "< 20%",
+      "observed": "0.0%",
+      "pass": true
+    }
+  },
+  "artifacts": [
+    {
+      "path": "raw_observations.json",
+      "role": "raw"
+    }
+  ],
+  "observations": [
+    "Production-like OAuth middleware server started on port 18929 with PyJWT HS256 validation",
+    "4 auth states x 10 reps = 40 requests completed",
+    "Server-side jitter: 50-150ms random processing delay per request",
+    "Client-side jitter: 0-200ms inter-request delay (seed=44)",
+    "Key design: expired_token and invalid_token return IDENTICAL bodies (error_response)",
+    "Cache-Control varies: no-store (expired), no-cache (invalid), absent (no_auth, valid_token)",
+    "Set-Cookie present only for valid_token (session cookie)",
+    "Headers filtered: Date/Server/X-Request-Id excluded from fingerprint",
+    "Cache-Control verification: {\"no_auth\": {\"expected\": null, \"observed_values\": [\"(absent)\"], \"consistent\": true}, \"valid_token\": {\"expected\": null, \"observed_values\": [\"(absent)\"], \"consistent\": true}, \"expired_token\": {\"expected\": \"no-store\", \"observed_values\": [\"no-store\"], \"consistent\": true}, \"invalid_token\": {\"expected\": \"no-cache\", \"observed_values\": [\"no-cache\"], \"consistent\": true}}",
+    "Set-Cookie verification: {\"no_auth\": {\"expected\": false, \"observed_present\": false, \"consistent\": true}, \"valid_token\": {\"expected\": true, \"observed_present\": true, \"consistent\": true}, \"expired_token\": {\"expected\": false, \"observed_present\": false, \"consistent\": true}, \"invalid_token\": {\"expected\": false, \"observed_present\": false, \"consistent\": true}}",
+    "expired_token and invalid_token body hashes identical: True",
+    "Full-vector discrimination: 1.000000 (threshold: > 0.5)",
+    "Full-vector bootstrap 95% CI: [1.000000, 1.000000]",
+    "B-STATUS-ONLY discrimination: 0.500000",
+    "B-BODY-ONLY discrimination: 0.833333 (expired/invalid share body -> 3 groups)",
+    "B-URL-HASH discrimination: 0.000000",
+    "Cache-Control-only discrimination: 0.833333",
+    "Set-Cookie-only discrimination: 0.500000",
+    "ETag-only discrimination: 0.833333 (body-correlated)",
+    "Null FP rate under server-side jitter: 0.0% (threshold: < 5%)",
+    "Incremental header value (full - body_only): 0.166667",
+    "valid_token vs expired_token drift Jaccard: 0.3247",
+    "expired_token vs invalid_token drift Jaccard: 0.3812"
+  ],
+  "validity_notes": [
+    "Server is Flask 3.1.3 with PyJWT 2.13.0 HS256 validation \u2014 real JWT middleware with production-like headers.",
+    "Fingerprint uses repr(vector) with tuple(sorted(...)) \u2014 deterministic within same Python version but Python-version-dependent.",
+    "Date and Server headers excluded from fingerprint vector to prevent spurious variance.",
+    "X-Request-Id (UUID per request) excluded from fingerprint \u2014 volatile per-request identifier, not state-discriminative.",
+    "Cache-Control varies by auth state: no-store for expired, no-cache for invalid, absent for no_auth/valid_token.",
+    "Set-Cookie present only for valid_token \u2014 binary header signal varying with auth state.",
+    "ETag is body-dependent (W/\"<body_sha256>\") \u2014 correlated with body_hash, adds no independent information.",
+    "expired_token and invalid_token return IDENTICAL bodies \u2014 key design for testing incremental header value.",
+    "Cache-Control header verification: all states consistent with design: True",
+    "Set-Cookie header verification: all states consistent with design: True",
+    "expired_invalid body identity verified: True",
+    "Server-side jitter 50-150ms tests timing invariance when timing is excluded from fingerprint.",
+    "Python version: 3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "Error rate: 0.0% (0 errors out of 40 requests)",
+    "Sample size: 40 requests (4 states x 10 reps) \u2014 limited statistical power for subtle discrimination differences.",
+    "Discrimination metric: intra_match_rate - inter_match_rate. Range [-1, 1]. Perfect = 1, no discrimination = 0."
+  ],
+  "unresolved": [
+    "Does the substrate maintain discrimination on real production OAuth/OIDC providers (Auth0, Okta, Keycloak) with CDN, load-balancer variance, and compressed encoding?",
+    "What is the false-positive rate under server-side processing jitter >150ms or volatile standard headers beyond X-Request-Id?",
+    "Can substrate detect continuous session drift as a continuous signal rather than discrete state classification?",
+    "What is cross-Python-version reproducibility of repr(vector) hashes?",
+    "What is the incremental header value when MORE than 2 error states share identical bodies (e.g., 3+ states with same body but different headers)?"
+  ]
+}
