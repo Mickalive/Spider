@@ -1,17 +1,31 @@
 {
   "experiment_id": "EXP-RUNTIME-34015740602",
   "lane": "runtime",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "Does the HTTP fingerprint substrate maintain discrimination > 0.5 on a production-like OAuth/OIDC middleware with realistic response variation (cache-Control, ETag, X-Request-Id, Set-Cookie, rate-limit headers) — and does the full vector (status + body + all headers) ever exceed B-BODY-ONLY when headers vary independently with auth state?",
+  "hypothesis": "The deterministic sorted-tuple fingerprint will maintain discrimination > 0.5 on a production-like OAuth middleware with 4 auth states where: (1) each auth state returns distinct response bodies (no_auth -> 401 login required, valid_token -> 200 user profile, expired_token -> 401 token expired, invalid_token -> 401 invalid token); (2) response headers include realistic production variation: cache-Control varies by auth state (no-store for authenticated responses, no-cache for error responses), ETag is computed from body hash (unique per response), X-Request-Id is a UUID per request (not state-discriminative), Set-Cookie is present only for valid_token (session cookie), rate-limit headers are constant across states; (3) the full vector will exceed B-BODY-ONLY because Set-Cookie distinguishes valid_token from no_auth (both could have similar body structure), and cache-Control policy varies with auth state. Alternatively, if bodies are fully discriminative, full vector will equal B-BODY-ONLY (as on Flask/JWT).",
+  "falsifier": "The hypothesis is FALSIFIED if ANY of: (1) Full-vector discrimination <= 0.5 (substrate fails on production-like middleware); (2) Null control FP rate > 5% under server-side jitter (jitter causes false fingerprint variation); (3) valid_token vs expired_token drift pair not discriminable (Jaccard >= 0.5); (4) B-STATUS-ONLY discrimination >= full-vector discrimination (full vector adds no value over status alone). The hypothesis is CONSTRAINED (not falsified) if full vector equals B-BODY-ONLY (body is dominant signal, headers add no independent information — same as Flask/JWT).",
+  "baselines": [
+    "B-STATUS-ONLY: SHA-256 of status code string only — expected to fail to distinguish no_auth (401) from expired/invalid (401), yielding discrimination < full vector",
+    "B-BODY-ONLY: SHA-256 of response body bytes only — expected to equal or be slightly less than full vector depending on whether Set-Cookie and cache-Control add independent discriminating information",
+    "B-URL-HASH: SHA-256 of URL string only — straw-man, expected 0.0 (URL is constant GET /api/userinfo)",
+    "B-RANDOM: random 256-bit fingerprints — straw-man, expected ~0.0"
+  ],
+  "positive_control": "valid_token (200, unique body, Set-Cookie present) is distinguishable from no_auth (401, different body, no Set-Cookie), expired_token (401, different body, no Set-Cookie), and invalid_token (401, different body, no Set-Cookie). Full-vector discrimination must be > 0.5. This verifies the substrate can detect the difference between 'authenticated successfully' and 'authentication failed' on production-like OAuth middleware with realistic header variation.",
+  "null_control": "Repeated identical requests to the same auth state with server-side jitter (50-150ms random processing delay per request): FP rate must be < 5%. Validates that server-side timing variation and per-request UUID (X-Request-Id) do not cause false fingerprint variation when timing is excluded from the vector. NOTE: X-Request-Id is a UUID per request, so it MUST be excluded from the fingerprint vector (it varies per request regardless of auth state). This is a design constraint, not a bug — production fingerprints must exclude volatile per-request identifiers.",
+  "measurement_validity": [
+    "Server: Flask app with OAuth2-like middleware (token introspection via local lookup, not external OIDC provider) — production-like response headers, not hand-programmed fixed responses",
+    "Auth states: (1) no_auth -> 401, body: {\"error\": \"login_required\", \"message\": \"Authentication required\"}, cache-Control: no-cache; (2) valid_token -> 200, body: {\"sub\": \"alice\", \"name\": \"Alice\", \"email\": \"alice@example.com\", \"iat\": <timestamp>, \"exp\": <timestamp>}, cache-Control: no-store, Set-Cookie: session=<token>; (3) expired_token -> 401, body: {\"error\": \"token_expired\", \"message\": \"Token has expired\"}, cache-Control: no-cache; (4) invalid_token -> 401, body: {\"error\": \"invalid_token\", \"message\": \"Token validation failed\"}, cache-Control: no-cache — expired and invalid return DIFFERENT bodies (unlike Flask/JWT experiment where they were identical) to test whether cache-Control + Set-Cookie add value when bodies differ",
+    "Realistic headers: ETag: W/\"<body_sha256>\" (weak validator, body-dependent), X-Request-Id: <uuid4()> per request (EXCLUDED from fingerprint), Cache-Control: varies by auth state, Set-Cookie: present only for valid_token, Content-Type: application/json, Content-Length: <body_length>",
+    "Fingerprint: SHA-256 of (status, tuple(sorted(headers excluding Date/Server/X-Request-Id)), body_sha256, redirect_chain) — deterministic, excludes timing AND volatile per-request identifiers, inherited from parent fixes",
+    "Server-side jitter: random.uniform(0.05, 0.15) seconds processing delay per request — spans 50-150ms",
+    "Sample: 4 states x 10 reps = 40 requests, randomized order with seed 44",
+    "Raw observations persisted: status, headers (all), body_hash, fingerprint, elapsed, timestamp per request",
+    "No outcome-bearing measurements during DESIGN phase"
+  ],
+  "decision_rule": "C-MEAS-VALID SURVIVES if ALL of: (1) full-vector discrimination > 0.5; (2) null control FP rate < 5% under server-side jitter; (3) valid_token vs expired_token drift pair discriminable (Jaccard < 0.5). C-MEAS-VALID FALSIFIED if full-vector discrimination <= 0.5 OR null FP > 5% OR valid vs expired drift not discriminable. MEASUREMENT_INVALID if Flask server fails to start or >20% request errors. Note on B-BODY-ONLY comparison: if full vector equals B-BODY-ONLY, this CONSTRAINES but does not FALSIFY — it confirms body is dominant signal (consistent with Flask/JWT finding). If full vector exceeds B-BODY-ONLY, this demonstrates multi-field observation adds value on production-like middleware. If full vector is less than B-BODY-ONLY, this indicates headers introduce noise, which is a new finding.",
+  "product_consequence_positive": "HTTP observation substrate is viable for auth/session drift detection on production-like OAuth middleware with realistic header variation. If full vector exceeds B-BODY-ONLY, product should use multi-field observation (status + body + filtered headers). If full vector equals B-BODY-ONLY, product can use body-only observation (simpler, fewer failure modes). Either outcome constrains product architecture. C-MEAS-VALID claim ceiling extends to production-like OAuth middleware.",
+  "product_consequence_negative": "If full-vector discrimination <= 0.5 on production-like OAuth middleware, the substrate is not viable for production auth drift detection. C-MEAS-VALID does not survive beyond Flask/JWT localhost. Product must use alternative observation mechanisms (DOM, accessibility tree, timing distributions, or endpoint-specific schemas).",
+  "estimated_cost": "Low: 40 requests to local Flask server with OAuth-like middleware, no browser automation, no model calls, no external network. Execution time < 30 seconds.",
+  "expected_information_gain": "High: This is the ecological validity gate for C-MEAS-VALID on production-like middleware with realistic header variation. The previous experiment (EXP-RUNTIME-33902315583) established discrimination 0.833 on Flask/JWT with minimal standard headers. This experiment adds production-like headers (cache-Control, ETag, Set-Cookie, X-Request-Id) that vary with auth state or per request. Three outcomes change a product decision: (1) discrimination holds + full vector > B-BODY-ONLY → multi-field observation adds value → product architecture changes; (2) discrimination holds + full vector = B-BODY-ONLY → body-only observation confirmed → simpler product; (3) discrimination fails → substrate not viable for production → alternative mechanisms needed. All three outcomes are high-information."
 }
