@@ -1,0 +1,860 @@
+{
+  "invalid_token": [
+    {
+      "url": "http://127.0.0.1:18928/api/userinfo",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Sun, 06 Sep 2026 06:13:39 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "61",
+        "Cache-Control": "no-cache",
+        "ETag": "W/\"c4986e183a76974987cc6a6544903f5f698672fadd7fbf1d6654ea02b4890e48\"",
+        "X-Request-Id": "97e02a08-e114-41ca-8262-fd0be19b5d0e",
+        "Connection": "close"
+      },
+      "body_hash": "c4986e183a76974987cc6a6544903f5f698672fadd7fbf1d6654ea02b4890e48",
+      "body_preview": "{\"error\":\"invalid_token\",\"message\":\"Token validation failed\"}",
+      "fingerprint": "9e3481fa59b3d5f963c0f7a64cc2a30f6f0929e213a8b8f1b972f86e7e0980cd",
+      "elapsed": 0.09502553099991928,
+      "timestamp": 1788675219.6415381,
+      "state": "invalid_token",
+      "rep": 9
+    },
+    {
+      "url": "http://127.0.0.1:18928/api/userinfo",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Sun, 06 Sep 2026 06:13:39 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "61",
+        "Cache-Control": "no-cache",
+        "ETag": "W/\"c4986e183a76974987cc6a6544903f5f698672fadd7fbf1d6654ea02b4890e48\"",
+        "X-Request-Id": "3008acf7-62e1-40c6-9298-640e3549c202",
+        "Connection": "close"
+      },
+      "body_hash": "c4986e183a76974987cc6a6544903f5f698672fadd7fbf1d6654ea02b4890e48",
+      "body_preview": "{\"error\":\"invalid_token\",\"message\":\"Token validation failed\"}",
+      "fingerprint": "9e3481fa59b3d5f963c0f7a64cc2a30f6f0929e213a8b8f1b972f86e7e0980cd",
+      "elapsed": 0.06965976500009674,
+      "timestamp": 1788675219.7183726,
+      "state": "invalid_token",
+      "rep": 0
+    },
+    {
+      "url": "http://127.0.0.1:18928/api/userinfo",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Sun, 06 Sep 2026 06:13:41 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "61",
+        "Cache-Control": "no-cache",
+        "ETag": "W/\"c4986e183a76974987cc6a6544903f5f698672fadd7fbf1d6654ea02b4890e48\"",
+        "X-Request-Id": "889b2719-bc49-4460-a28d-7f1b86ddf6c4",
+        "Connection": "close"
+      },
+      "body_hash": "c4986e183a76974987cc6a6544903f5f698672fadd7fbf1d6654ea02b4890e48",
+      "body_preview": "{\"error\":\"invalid_token\",\"message\":\"Token validation failed\"}",
+      "fingerprint": "9e3481fa59b3d5f963c0f7a64cc2a30f6f0929e213a8b8f1b972f86e7e0980cd",
+      "elapsed": 0.08067743099991276,
+      "timestamp": 1788675221.2118688,
+      "state": "invalid_token",
+      "rep": 8
+    },
+    {
+      "url": "http://127.0.0.1:18928/api/userinfo",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Sun, 06 Sep 2026 06:13:42 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "61",
+        "Cache-Control": "no-cache",
+        "ETag": "W/\"c4986e183a76974987cc6a6544903f5f698672fadd7fbf1d6654ea02b4890e48\"",
+        "X-Request-Id": "1fe65ea6-e719-43ee-9f0f-5616408b2fb2",
+        "Connection": "close"
+      },
+      "body_hash": "c4986e183a76974987cc6a6544903f5f698672fadd7fbf1d6654ea02b4890e48",
+      "body_preview": "{\"error\":\"invalid_token\",\"message\":\"Token validation failed\"}",
+      "fingerprint": "9e3481fa59b3d5f963c0f7a64cc2a30f6f0929e213a8b8f1b972f86e7e0980cd",
+      "elapsed": 0.0889904220000517,
+      "timestamp": 1788675222.2984335,
+      "state": "invalid_token",
+      "rep": 1
+    },
+    {
+      "url": "http://127.0.0.1:18928/api/userinfo",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Sun, 06 Sep 2026 06:13:42 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "61",
+        "Cache-Control": "no-cache",
+        "ETag": "W/\"c4986e183a76974987cc6a6544903f5f698672fadd7fbf1d6654ea02b4890e48\"",
+        "X-Request-Id": "806536b3-f359-4a57-8e75-bc840105fb38",
+        "Connection": "close"
+      },
+      "body_hash": "c4986e183a76974987cc6a6544903f5f698672fadd7fbf1d6654ea02b4890e48",
+      "body_preview": "{\"error\":\"invalid_token\",\"message\":\"Token validation failed\"}",
+      "fingerprint": "9e3481fa59b3d5f963c0f7a64cc2a30f6f0929e213a8b8f1b972f86e7e0980cd",
+      "elapsed": 0.08952048300011484,
+      "timestamp": 1788675222.5188615,
+      "state": "invalid_token",
+      "rep": 5
+    },
+    {
+      "url": "http://127.0.0.1:18928/api/userinfo",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Sun, 06 Sep 2026 06:13:44 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "61",
+        "Cache-Control": "no-cache",
+        "ETag": "W/\"c4986e183a76974987cc6a6544903f5f698672fadd7fbf1d6654ea02b4890e48\"",
+        "X-Request-Id": "a96b5252-8233-48ff-a25c-69e678c540d8",
+        "Connection": "close"
+      },
+      "body_hash": "c4986e183a76974987cc6a6544903f5f698672fadd7fbf1d6654ea02b4890e48",
+      "body_preview": "{\"error\":\"invalid_token\",\"message\":\"Token validation failed\"}",
+      "fingerprint": "9e3481fa59b3d5f963c0f7a64cc2a30f6f0929e213a8b8f1b972f86e7e0980cd",
+      "elapsed": 0.0835393520001162,
+      "timestamp": 1788675224.3469827,
+      "state": "invalid_token",
+      "rep": 7
+    },
+    {
+      "url": "http://127.0.0.1:18928/api/userinfo",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Sun, 06 Sep 2026 06:13:45 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "61",
+        "Cache-Control": "no-cache",
+        "ETag": "W/\"c4986e183a76974987cc6a6544903f5f698672fadd7fbf1d6654ea02b4890e48\"",
+        "X-Request-Id": "85963970-7112-4946-b994-8fbacd9de52b",
+        "Connection": "close"
+      },
+      "body_hash": "c4986e183a76974987cc6a6544903f5f698672fadd7fbf1d6654ea02b4890e48",
+      "body_preview": "{\"error\":\"invalid_token\",\"message\":\"Token validation failed\"}",
+      "fingerprint": "9e3481fa59b3d5f963c0f7a64cc2a30f6f0929e213a8b8f1b972f86e7e0980cd",
+      "elapsed": 0.13736314400011906,
+      "timestamp": 1788675225.2086024,
+      "state": "invalid_token",
+      "rep": 2
+    },
+    {
+      "url": "http://127.0.0.1:18928/api/userinfo",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Sun, 06 Sep 2026 06:13:45 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "61",
+        "Cache-Control": "no-cache",
+        "ETag": "W/\"c4986e183a76974987cc6a6544903f5f698672fadd7fbf1d6654ea02b4890e48\"",
+        "X-Request-Id": "3eccd645-79f7-465b-a713-f4d17079a327",
+        "Connection": "close"
+      },
+      "body_hash": "c4986e183a76974987cc6a6544903f5f698672fadd7fbf1d6654ea02b4890e48",
+      "body_preview": "{\"error\":\"invalid_token\",\"message\":\"Token validation failed\"}",
+      "fingerprint": "9e3481fa59b3d5f963c0f7a64cc2a30f6f0929e213a8b8f1b972f86e7e0980cd",
+      "elapsed": 0.13960713799997393,
+      "timestamp": 1788675225.5555305,
+      "state": "invalid_token",
+      "rep": 6
+    },
+    {
+      "url": "http://127.0.0.1:18928/api/userinfo",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Sun, 06 Sep 2026 06:13:46 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "61",
+        "Cache-Control": "no-cache",
+        "ETag": "W/\"c4986e183a76974987cc6a6544903f5f698672fadd7fbf1d6654ea02b4890e48\"",
+        "X-Request-Id": "bf941b30-d2bf-4b8c-ab2b-bade7eb1f645",
+        "Connection": "close"
+      },
+      "body_hash": "c4986e183a76974987cc6a6544903f5f698672fadd7fbf1d6654ea02b4890e48",
+      "body_preview": "{\"error\":\"invalid_token\",\"message\":\"Token validation failed\"}",
+      "fingerprint": "9e3481fa59b3d5f963c0f7a64cc2a30f6f0929e213a8b8f1b972f86e7e0980cd",
+      "elapsed": 0.12977813099996638,
+      "timestamp": 1788675226.9685397,
+      "state": "invalid_token",
+      "rep": 4
+    },
+    {
+      "url": "http://127.0.0.1:18928/api/userinfo",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Sun, 06 Sep 2026 06:13:47 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "61",
+        "Cache-Control": "no-cache",
+        "ETag": "W/\"c4986e183a76974987cc6a6544903f5f698672fadd7fbf1d6654ea02b4890e48\"",
+        "X-Request-Id": "fb60e6d6-a31f-4316-b07b-ea3eeab7269b",
+        "Connection": "close"
+      },
+      "body_hash": "c4986e183a76974987cc6a6544903f5f698672fadd7fbf1d6654ea02b4890e48",
+      "body_preview": "{\"error\":\"invalid_token\",\"message\":\"Token validation failed\"}",
+      "fingerprint": "9e3481fa59b3d5f963c0f7a64cc2a30f6f0929e213a8b8f1b972f86e7e0980cd",
+      "elapsed": 0.06433255499996449,
+      "timestamp": 1788675227.055362,
+      "state": "invalid_token",
+      "rep": 3
+    }
+  ],
+  "valid_token": [
+    {
+      "url": "http://127.0.0.1:18928/api/userinfo",
+      "status": 200,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Sun, 06 Sep 2026 06:13:39 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "92",
+        "Cache-Control": "no-store",
+        "ETag": "W/\"799bf39f81566ce74798ec8511ae550bbe44cc488ff250e152fbe907366830e3\"",
+        "X-Request-Id": "b35154bb-1520-4701-a2a0-3e8c047eedee",
+        "Set-Cookie": "session=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbGljZSIsIm5hbWUiOiJBbGljZSIsImVtYWlsIjoiYWxpY2VAZXhhbXBsZS5jb20iLCJpYXQiOjE3ODg2NzUyMTgsImV4cCI6MTc4ODY3ODgxOH0.ZTvM8D7t5A1-nCb9dra30wrmfa31tL5Wj77QJfXz-f4; Path=/; HttpOnly",
+        "Connection": "close"
+      },
+      "body_hash": "799bf39f81566ce74798ec8511ae550bbe44cc488ff250e152fbe907366830e3",
+      "body_preview": "{\"email\":\"alice@example.com\",\"exp\":1788678818,\"iat\":1788675218,\"name\":\"Alice\",\"sub\":\"alice\"}",
+      "fingerprint": "fa7226ff9e1647ffefad2817d94d2ee9814cd115c6cbba624b245b247e208358",
+      "elapsed": 0.0850756149998233,
+      "timestamp": 1788675219.8807979,
+      "state": "valid_token",
+      "rep": 3
+    },
+    {
+      "url": "http://127.0.0.1:18928/api/userinfo",
+      "status": 200,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Sun, 06 Sep 2026 06:13:40 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "92",
+        "Cache-Control": "no-store",
+        "ETag": "W/\"799bf39f81566ce74798ec8511ae550bbe44cc488ff250e152fbe907366830e3\"",
+        "X-Request-Id": "9245f43e-19af-4a2b-8889-14e12ed2948b",
+        "Set-Cookie": "session=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbGljZSIsIm5hbWUiOiJBbGljZSIsImVtYWlsIjoiYWxpY2VAZXhhbXBsZS5jb20iLCJpYXQiOjE3ODg2NzUyMTgsImV4cCI6MTc4ODY3ODgxOH0.ZTvM8D7t5A1-nCb9dra30wrmfa31tL5Wj77QJfXz-f4; Path=/; HttpOnly",
+        "Connection": "close"
+      },
+      "body_hash": "799bf39f81566ce74798ec8511ae550bbe44cc488ff250e152fbe907366830e3",
+      "body_preview": "{\"email\":\"alice@example.com\",\"exp\":1788678818,\"iat\":1788675218,\"name\":\"Alice\",\"sub\":\"alice\"}",
+      "fingerprint": "fa7226ff9e1647ffefad2817d94d2ee9814cd115c6cbba624b245b247e208358",
+      "elapsed": 0.12251237200007381,
+      "timestamp": 1788675220.6776152,
+      "state": "valid_token",
+      "rep": 7
+    },
+    {
+      "url": "http://127.0.0.1:18928/api/userinfo",
+      "status": 200,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Sun, 06 Sep 2026 06:13:40 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "92",
+        "Cache-Control": "no-store",
+        "ETag": "W/\"799bf39f81566ce74798ec8511ae550bbe44cc488ff250e152fbe907366830e3\"",
+        "X-Request-Id": "6b7a0a6e-15ec-40c2-a081-1232919872d8",
+        "Set-Cookie": "session=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbGljZSIsIm5hbWUiOiJBbGljZSIsImVtYWlsIjoiYWxpY2VAZXhhbXBsZS5jb20iLCJpYXQiOjE3ODg2NzUyMTgsImV4cCI6MTc4ODY3ODgxOH0.ZTvM8D7t5A1-nCb9dra30wrmfa31tL5Wj77QJfXz-f4; Path=/; HttpOnly",
+        "Connection": "close"
+      },
+      "body_hash": "799bf39f81566ce74798ec8511ae550bbe44cc488ff250e152fbe907366830e3",
+      "body_preview": "{\"email\":\"alice@example.com\",\"exp\":1788678818,\"iat\":1788675218,\"name\":\"Alice\",\"sub\":\"alice\"}",
+      "fingerprint": "fa7226ff9e1647ffefad2817d94d2ee9814cd115c6cbba624b245b247e208358",
+      "elapsed": 0.10794663599995147,
+      "timestamp": 1788675220.8353639,
+      "state": "valid_token",
+      "rep": 5
+    },
+    {
+      "url": "http://127.0.0.1:18928/api/userinfo",
+      "status": 200,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Sun, 06 Sep 2026 06:13:42 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "92",
+        "Cache-Control": "no-store",
+        "ETag": "W/\"799bf39f81566ce74798ec8511ae550bbe44cc488ff250e152fbe907366830e3\"",
+        "X-Request-Id": "c3b3f4e5-1639-412f-bfba-abda671cb869",
+        "Set-Cookie": "session=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbGljZSIsIm5hbWUiOiJBbGljZSIsImVtYWlsIjoiYWxpY2VAZXhhbXBsZS5jb20iLCJpYXQiOjE3ODg2NzUyMTgsImV4cCI6MTc4ODY3ODgxOH0.ZTvM8D7t5A1-nCb9dra30wrmfa31tL5Wj77QJfXz-f4; Path=/; HttpOnly",
+        "Connection": "close"
+      },
+      "body_hash": "799bf39f81566ce74798ec8511ae550bbe44cc488ff250e152fbe907366830e3",
+      "body_preview": "{\"email\":\"alice@example.com\",\"exp\":1788678818,\"iat\":1788675218,\"name\":\"Alice\",\"sub\":\"alice\"}",
+      "fingerprint": "fa7226ff9e1647ffefad2817d94d2ee9814cd115c6cbba624b245b247e208358",
+      "elapsed": 0.05352529800006778,
+      "timestamp": 1788675222.6383307,
+      "state": "valid_token",
+      "rep": 0
+    },
+    {
+      "url": "http://127.0.0.1:18928/api/userinfo",
+      "status": 200,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Sun, 06 Sep 2026 06:13:42 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "92",
+        "Cache-Control": "no-store",
+        "ETag": "W/\"799bf39f81566ce74798ec8511ae550bbe44cc488ff250e152fbe907366830e3\"",
+        "X-Request-Id": "c1673d22-b3e1-4ddb-8ee2-28711d5e3e4d",
+        "Set-Cookie": "session=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbGljZSIsIm5hbWUiOiJBbGljZSIsImVtYWlsIjoiYWxpY2VAZXhhbXBsZS5jb20iLCJpYXQiOjE3ODg2NzUyMTgsImV4cCI6MTc4ODY3ODgxOH0.ZTvM8D7t5A1-nCb9dra30wrmfa31tL5Wj77QJfXz-f4; Path=/; HttpOnly",
+        "Connection": "close"
+      },
+      "body_hash": "799bf39f81566ce74798ec8511ae550bbe44cc488ff250e152fbe907366830e3",
+      "body_preview": "{\"email\":\"alice@example.com\",\"exp\":1788678818,\"iat\":1788675218,\"name\":\"Alice\",\"sub\":\"alice\"}",
+      "fingerprint": "fa7226ff9e1647ffefad2817d94d2ee9814cd115c6cbba624b245b247e208358",
+      "elapsed": 0.11175084000001334,
+      "timestamp": 1788675222.9164116,
+      "state": "valid_token",
+      "rep": 9
+    },
+    {
+      "url": "http://127.0.0.1:18928/api/userinfo",
+      "status": 200,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Sun, 06 Sep 2026 06:13:43 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "92",
+        "Cache-Control": "no-store",
+        "ETag": "W/\"799bf39f81566ce74798ec8511ae550bbe44cc488ff250e152fbe907366830e3\"",
+        "X-Request-Id": "97056e9f-5f41-47bc-88ca-0ed331441bac",
+        "Set-Cookie": "session=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbGljZSIsIm5hbWUiOiJBbGljZSIsImVtYWlsIjoiYWxpY2VAZXhhbXBsZS5jb20iLCJpYXQiOjE3ODg2NzUyMTgsImV4cCI6MTc4ODY3ODgxOH0.ZTvM8D7t5A1-nCb9dra30wrmfa31tL5Wj77QJfXz-f4; Path=/; HttpOnly",
+        "Connection": "close"
+      },
+      "body_hash": "799bf39f81566ce74798ec8511ae550bbe44cc488ff250e152fbe907366830e3",
+      "body_preview": "{\"email\":\"alice@example.com\",\"exp\":1788678818,\"iat\":1788675218,\"name\":\"Alice\",\"sub\":\"alice\"}",
+      "fingerprint": "fa7226ff9e1647ffefad2817d94d2ee9814cd115c6cbba624b245b247e208358",
+      "elapsed": 0.07988854400014134,
+      "timestamp": 1788675223.374332,
+      "state": "valid_token",
+      "rep": 2
+    },
+    {
+      "url": "http://127.0.0.1:18928/api/userinfo",
+      "status": 200,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Sun, 06 Sep 2026 06:13:44 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "92",
+        "Cache-Control": "no-store",
+        "ETag": "W/\"799bf39f81566ce74798ec8511ae550bbe44cc488ff250e152fbe907366830e3\"",
+        "X-Request-Id": "bc7073a3-1d8d-42da-96c7-a2939451ac1e",
+        "Set-Cookie": "session=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbGljZSIsIm5hbWUiOiJBbGljZSIsImVtYWlsIjoiYWxpY2VAZXhhbXBsZS5jb20iLCJpYXQiOjE3ODg2NzUyMTgsImV4cCI6MTc4ODY3ODgxOH0.ZTvM8D7t5A1-nCb9dra30wrmfa31tL5Wj77QJfXz-f4; Path=/; HttpOnly",
+        "Connection": "close"
+      },
+      "body_hash": "799bf39f81566ce74798ec8511ae550bbe44cc488ff250e152fbe907366830e3",
+      "body_preview": "{\"email\":\"alice@example.com\",\"exp\":1788678818,\"iat\":1788675218,\"name\":\"Alice\",\"sub\":\"alice\"}",
+      "fingerprint": "fa7226ff9e1647ffefad2817d94d2ee9814cd115c6cbba624b245b247e208358",
+      "elapsed": 0.06817924500001027,
+      "timestamp": 1788675224.1264646,
+      "state": "valid_token",
+      "rep": 6
+    },
+    {
+      "url": "http://127.0.0.1:18928/api/userinfo",
+      "status": 200,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Sun, 06 Sep 2026 06:13:45 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "92",
+        "Cache-Control": "no-store",
+        "ETag": "W/\"799bf39f81566ce74798ec8511ae550bbe44cc488ff250e152fbe907366830e3\"",
+        "X-Request-Id": "10fc67e0-43be-4035-a9fc-e22e5a808ef4",
+        "Set-Cookie": "session=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbGljZSIsIm5hbWUiOiJBbGljZSIsImVtYWlsIjoiYWxpY2VAZXhhbXBsZS5jb20iLCJpYXQiOjE3ODg2NzUyMTgsImV4cCI6MTc4ODY3ODgxOH0.ZTvM8D7t5A1-nCb9dra30wrmfa31tL5Wj77QJfXz-f4; Path=/; HttpOnly",
+        "Connection": "close"
+      },
+      "body_hash": "799bf39f81566ce74798ec8511ae550bbe44cc488ff250e152fbe907366830e3",
+      "body_preview": "{\"email\":\"alice@example.com\",\"exp\":1788678818,\"iat\":1788675218,\"name\":\"Alice\",\"sub\":\"alice\"}",
+      "fingerprint": "fa7226ff9e1647ffefad2817d94d2ee9814cd115c6cbba624b245b247e208358",
+      "elapsed": 0.0734898420000718,
+      "timestamp": 1788675225.8845954,
+      "state": "valid_token",
+      "rep": 8
+    },
+    {
+      "url": "http://127.0.0.1:18928/api/userinfo",
+      "status": 200,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Sun, 06 Sep 2026 06:13:46 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "92",
+        "Cache-Control": "no-store",
+        "ETag": "W/\"799bf39f81566ce74798ec8511ae550bbe44cc488ff250e152fbe907366830e3\"",
+        "X-Request-Id": "4183685e-a62d-4257-94e6-951a675b8228",
+        "Set-Cookie": "session=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbGljZSIsIm5hbWUiOiJBbGljZSIsImVtYWlsIjoiYWxpY2VAZXhhbXBsZS5jb20iLCJpYXQiOjE3ODg2NzUyMTgsImV4cCI6MTc4ODY3ODgxOH0.ZTvM8D7t5A1-nCb9dra30wrmfa31tL5Wj77QJfXz-f4; Path=/; HttpOnly",
+        "Connection": "close"
+      },
+      "body_hash": "799bf39f81566ce74798ec8511ae550bbe44cc488ff250e152fbe907366830e3",
+      "body_preview": "{\"email\":\"alice@example.com\",\"exp\":1788678818,\"iat\":1788675218,\"name\":\"Alice\",\"sub\":\"alice\"}",
+      "fingerprint": "fa7226ff9e1647ffefad2817d94d2ee9814cd115c6cbba624b245b247e208358",
+      "elapsed": 0.10163630000010926,
+      "timestamp": 1788675226.115787,
+      "state": "valid_token",
+      "rep": 4
+    },
+    {
+      "url": "http://127.0.0.1:18928/api/userinfo",
+      "status": 200,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Sun, 06 Sep 2026 06:13:46 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "92",
+        "Cache-Control": "no-store",
+        "ETag": "W/\"799bf39f81566ce74798ec8511ae550bbe44cc488ff250e152fbe907366830e3\"",
+        "X-Request-Id": "fab2f01c-4c89-4e00-becc-8ee91bccde1a",
+        "Set-Cookie": "session=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbGljZSIsIm5hbWUiOiJBbGljZSIsImVtYWlsIjoiYWxpY2VAZXhhbXBsZS5jb20iLCJpYXQiOjE3ODg2NzUyMTgsImV4cCI6MTc4ODY3ODgxOH0.ZTvM8D7t5A1-nCb9dra30wrmfa31tL5Wj77QJfXz-f4; Path=/; HttpOnly",
+        "Connection": "close"
+      },
+      "body_hash": "799bf39f81566ce74798ec8511ae550bbe44cc488ff250e152fbe907366830e3",
+      "body_preview": "{\"email\":\"alice@example.com\",\"exp\":1788678818,\"iat\":1788675218,\"name\":\"Alice\",\"sub\":\"alice\"}",
+      "fingerprint": "fa7226ff9e1647ffefad2817d94d2ee9814cd115c6cbba624b245b247e208358",
+      "elapsed": 0.09005120599999827,
+      "timestamp": 1788675226.5986457,
+      "state": "valid_token",
+      "rep": 1
+    }
+  ],
+  "no_auth": [
+    {
+      "url": "http://127.0.0.1:18928/api/userinfo",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Sun, 06 Sep 2026 06:13:40 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "62",
+        "Cache-Control": "no-cache",
+        "ETag": "W/\"ae00c5f717c854eff774aa4fb70b01a2ba75020e21e16969f98a43bc18045066\"",
+        "X-Request-Id": "57fdda09-acd3-46be-b2de-2e641cfb75f3",
+        "Connection": "close"
+      },
+      "body_hash": "ae00c5f717c854eff774aa4fb70b01a2ba75020e21e16969f98a43bc18045066",
+      "body_preview": "{\"error\":\"login_required\",\"message\":\"Authentication required\"}",
+      "fingerprint": "7487fecd2759549de73f629afda693726c488efc5378af5121a169615d96e00b",
+      "elapsed": 0.10867847400004393,
+      "timestamp": 1788675220.0851035,
+      "state": "no_auth",
+      "rep": 6
+    },
+    {
+      "url": "http://127.0.0.1:18928/api/userinfo",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Sun, 06 Sep 2026 06:13:40 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "62",
+        "Cache-Control": "no-cache",
+        "ETag": "W/\"ae00c5f717c854eff774aa4fb70b01a2ba75020e21e16969f98a43bc18045066\"",
+        "X-Request-Id": "56fabd37-d84e-4d65-aff1-8560aa6be4b3",
+        "Connection": "close"
+      },
+      "body_hash": "ae00c5f717c854eff774aa4fb70b01a2ba75020e21e16969f98a43bc18045066",
+      "body_preview": "{\"error\":\"login_required\",\"message\":\"Authentication required\"}",
+      "fingerprint": "7487fecd2759549de73f629afda693726c488efc5378af5121a169615d96e00b",
+      "elapsed": 0.15088967600013348,
+      "timestamp": 1788675220.996241,
+      "state": "no_auth",
+      "rep": 8
+    },
+    {
+      "url": "http://127.0.0.1:18928/api/userinfo",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Sun, 06 Sep 2026 06:13:41 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "62",
+        "Cache-Control": "no-cache",
+        "ETag": "W/\"ae00c5f717c854eff774aa4fb70b01a2ba75020e21e16969f98a43bc18045066\"",
+        "X-Request-Id": "b92d5719-857d-45a3-8ec5-14e63c99e1f5",
+        "Connection": "close"
+      },
+      "body_hash": "ae00c5f717c854eff774aa4fb70b01a2ba75020e21e16969f98a43bc18045066",
+      "body_preview": "{\"error\":\"login_required\",\"message\":\"Authentication required\"}",
+      "fingerprint": "7487fecd2759549de73f629afda693726c488efc5378af5121a169615d96e00b",
+      "elapsed": 0.12245628599998781,
+      "timestamp": 1788675221.497895,
+      "state": "no_auth",
+      "rep": 2
+    },
+    {
+      "url": "http://127.0.0.1:18928/api/userinfo",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Sun, 06 Sep 2026 06:13:41 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "62",
+        "Cache-Control": "no-cache",
+        "ETag": "W/\"ae00c5f717c854eff774aa4fb70b01a2ba75020e21e16969f98a43bc18045066\"",
+        "X-Request-Id": "fc77c0ff-eda1-4f51-b830-6f8abedde790",
+        "Connection": "close"
+      },
+      "body_hash": "ae00c5f717c854eff774aa4fb70b01a2ba75020e21e16969f98a43bc18045066",
+      "body_preview": "{\"error\":\"login_required\",\"message\":\"Authentication required\"}",
+      "fingerprint": "7487fecd2759549de73f629afda693726c488efc5378af5121a169615d96e00b",
+      "elapsed": 0.07139137699982712,
+      "timestamp": 1788675221.8158574,
+      "state": "no_auth",
+      "rep": 4
+    },
+    {
+      "url": "http://127.0.0.1:18928/api/userinfo",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Sun, 06 Sep 2026 06:13:43 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "62",
+        "Cache-Control": "no-cache",
+        "ETag": "W/\"ae00c5f717c854eff774aa4fb70b01a2ba75020e21e16969f98a43bc18045066\"",
+        "X-Request-Id": "8107e76f-bb21-4fff-8ec1-87e566580877",
+        "Connection": "close"
+      },
+      "body_hash": "ae00c5f717c854eff774aa4fb70b01a2ba75020e21e16969f98a43bc18045066",
+      "body_preview": "{\"error\":\"login_required\",\"message\":\"Authentication required\"}",
+      "fingerprint": "7487fecd2759549de73f629afda693726c488efc5378af5121a169615d96e00b",
+      "elapsed": 0.0660838880000938,
+      "timestamp": 1788675223.6902802,
+      "state": "no_auth",
+      "rep": 9
+    },
+    {
+      "url": "http://127.0.0.1:18928/api/userinfo",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Sun, 06 Sep 2026 06:13:44 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "62",
+        "Cache-Control": "no-cache",
+        "ETag": "W/\"ae00c5f717c854eff774aa4fb70b01a2ba75020e21e16969f98a43bc18045066\"",
+        "X-Request-Id": "3d139be4-c232-4bf6-88da-1b9501dba093",
+        "Connection": "close"
+      },
+      "body_hash": "ae00c5f717c854eff774aa4fb70b01a2ba75020e21e16969f98a43bc18045066",
+      "body_preview": "{\"error\":\"login_required\",\"message\":\"Authentication required\"}",
+      "fingerprint": "7487fecd2759549de73f629afda693726c488efc5378af5121a169615d96e00b",
+      "elapsed": 0.1359100289998878,
+      "timestamp": 1788675224.552296,
+      "state": "no_auth",
+      "rep": 5
+    },
+    {
+      "url": "http://127.0.0.1:18928/api/userinfo",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Sun, 06 Sep 2026 06:13:45 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "62",
+        "Cache-Control": "no-cache",
+        "ETag": "W/\"ae00c5f717c854eff774aa4fb70b01a2ba75020e21e16969f98a43bc18045066\"",
+        "X-Request-Id": "81e183e9-f89b-4d5f-9acd-4c7c7c1cd2a3",
+        "Connection": "close"
+      },
+      "body_hash": "ae00c5f717c854eff774aa4fb70b01a2ba75020e21e16969f98a43bc18045066",
+      "body_preview": "{\"error\":\"login_required\",\"message\":\"Authentication required\"}",
+      "fingerprint": "7487fecd2759549de73f629afda693726c488efc5378af5121a169615d96e00b",
+      "elapsed": 0.06760768799995276,
+      "timestamp": 1788675225.0623467,
+      "state": "no_auth",
+      "rep": 0
+    },
+    {
+      "url": "http://127.0.0.1:18928/api/userinfo",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Sun, 06 Sep 2026 06:13:45 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "62",
+        "Cache-Control": "no-cache",
+        "ETag": "W/\"ae00c5f717c854eff774aa4fb70b01a2ba75020e21e16969f98a43bc18045066\"",
+        "X-Request-Id": "4ea2c1d8-8713-4058-8c8b-b4693bbca446",
+        "Connection": "close"
+      },
+      "body_hash": "ae00c5f717c854eff774aa4fb70b01a2ba75020e21e16969f98a43bc18045066",
+      "body_preview": "{\"error\":\"login_required\",\"message\":\"Authentication required\"}",
+      "fingerprint": "7487fecd2759549de73f629afda693726c488efc5378af5121a169615d96e00b",
+      "elapsed": 0.13086378799994236,
+      "timestamp": 1788675225.3711045,
+      "state": "no_auth",
+      "rep": 3
+    },
+    {
+      "url": "http://127.0.0.1:18928/api/userinfo",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Sun, 06 Sep 2026 06:13:45 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "62",
+        "Cache-Control": "no-cache",
+        "ETag": "W/\"ae00c5f717c854eff774aa4fb70b01a2ba75020e21e16969f98a43bc18045066\"",
+        "X-Request-Id": "fed7283c-6782-4d1f-b0af-f54b68612521",
+        "Connection": "close"
+      },
+      "body_hash": "ae00c5f717c854eff774aa4fb70b01a2ba75020e21e16969f98a43bc18045066",
+      "body_preview": "{\"error\":\"login_required\",\"message\":\"Authentication required\"}",
+      "fingerprint": "7487fecd2759549de73f629afda693726c488efc5378af5121a169615d96e00b",
+      "elapsed": 0.1016067469997779,
+      "timestamp": 1788675225.6602063,
+      "state": "no_auth",
+      "rep": 1
+    },
+    {
+      "url": "http://127.0.0.1:18928/api/userinfo",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Sun, 06 Sep 2026 06:13:46 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "62",
+        "Cache-Control": "no-cache",
+        "ETag": "W/\"ae00c5f717c854eff774aa4fb70b01a2ba75020e21e16969f98a43bc18045066\"",
+        "X-Request-Id": "20480f91-1cab-4763-b1c6-544c95e681f0",
+        "Connection": "close"
+      },
+      "body_hash": "ae00c5f717c854eff774aa4fb70b01a2ba75020e21e16969f98a43bc18045066",
+      "body_preview": "{\"error\":\"login_required\",\"message\":\"Authentication required\"}",
+      "fingerprint": "7487fecd2759549de73f629afda693726c488efc5378af5121a169615d96e00b",
+      "elapsed": 0.12861715099984394,
+      "timestamp": 1788675226.798787,
+      "state": "no_auth",
+      "rep": 7
+    }
+  ],
+  "expired_token": [
+    {
+      "url": "http://127.0.0.1:18928/api/userinfo",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Sun, 06 Sep 2026 06:13:40 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "55",
+        "Cache-Control": "no-cache",
+        "ETag": "W/\"6038e719570e4dabeecaabdc1ae0f99813df3e3609e22d6ea6d22f384de2ef11\"",
+        "X-Request-Id": "60a0643a-b4a2-4e23-bb63-48983d9ae313",
+        "Connection": "close"
+      },
+      "body_hash": "6038e719570e4dabeecaabdc1ae0f99813df3e3609e22d6ea6d22f384de2ef11",
+      "body_preview": "{\"error\":\"token_expired\",\"message\":\"Token has expired\"}",
+      "fingerprint": "7714b350e90e5b86d329d01888a89b07753ec5f162a0d242984edd6509b32fc2",
+      "elapsed": 0.06466222399990329,
+      "timestamp": 1788675220.3333092,
+      "state": "expired_token",
+      "rep": 3
+    },
+    {
+      "url": "http://127.0.0.1:18928/api/userinfo",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Sun, 06 Sep 2026 06:13:40 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "55",
+        "Cache-Control": "no-cache",
+        "ETag": "W/\"6038e719570e4dabeecaabdc1ae0f99813df3e3609e22d6ea6d22f384de2ef11\"",
+        "X-Request-Id": "4232ccf8-4525-474b-a122-056bf74a8027",
+        "Connection": "close"
+      },
+      "body_hash": "6038e719570e4dabeecaabdc1ae0f99813df3e3609e22d6ea6d22f384de2ef11",
+      "body_preview": "{\"error\":\"token_expired\",\"message\":\"Token has expired\"}",
+      "fingerprint": "7714b350e90e5b86d329d01888a89b07753ec5f162a0d242984edd6509b32fc2",
+      "elapsed": 0.13202537699999084,
+      "timestamp": 1788675220.503227,
+      "state": "expired_token",
+      "rep": 7
+    },
+    {
+      "url": "http://127.0.0.1:18928/api/userinfo",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Sun, 06 Sep 2026 06:13:41 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "55",
+        "Cache-Control": "no-cache",
+        "ETag": "W/\"6038e719570e4dabeecaabdc1ae0f99813df3e3609e22d6ea6d22f384de2ef11\"",
+        "X-Request-Id": "06a5979f-2db6-4e82-b73b-3ea4beac0a68",
+        "Connection": "close"
+      },
+      "body_hash": "6038e719570e4dabeecaabdc1ae0f99813df3e3609e22d6ea6d22f384de2ef11",
+      "body_preview": "{\"error\":\"token_expired\",\"message\":\"Token has expired\"}",
+      "fingerprint": "7714b350e90e5b86d329d01888a89b07753ec5f162a0d242984edd6509b32fc2",
+      "elapsed": 0.15130927399991378,
+      "timestamp": 1788675221.736721,
+      "state": "expired_token",
+      "rep": 1
+    },
+    {
+      "url": "http://127.0.0.1:18928/api/userinfo",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Sun, 06 Sep 2026 06:13:42 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "55",
+        "Cache-Control": "no-cache",
+        "ETag": "W/\"6038e719570e4dabeecaabdc1ae0f99813df3e3609e22d6ea6d22f384de2ef11\"",
+        "X-Request-Id": "3307e2fc-93f4-45ab-a6c4-cdb89c096b95",
+        "Connection": "close"
+      },
+      "body_hash": "6038e719570e4dabeecaabdc1ae0f99813df3e3609e22d6ea6d22f384de2ef11",
+      "body_preview": "{\"error\":\"token_expired\",\"message\":\"Token has expired\"}",
+      "fingerprint": "7714b350e90e5b86d329d01888a89b07753ec5f162a0d242984edd6509b32fc2",
+      "elapsed": 0.10304175099986423,
+      "timestamp": 1788675222.0618126,
+      "state": "expired_token",
+      "rep": 5
+    },
+    {
+      "url": "http://127.0.0.1:18928/api/userinfo",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Sun, 06 Sep 2026 06:13:43 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "55",
+        "Cache-Control": "no-cache",
+        "ETag": "W/\"6038e719570e4dabeecaabdc1ae0f99813df3e3609e22d6ea6d22f384de2ef11\"",
+        "X-Request-Id": "039ba714-5192-4928-b4ad-7352d59f2286",
+        "Connection": "close"
+      },
+      "body_hash": "6038e719570e4dabeecaabdc1ae0f99813df3e3609e22d6ea6d22f384de2ef11",
+      "body_preview": "{\"error\":\"token_expired\",\"message\":\"Token has expired\"}",
+      "fingerprint": "7714b350e90e5b86d329d01888a89b07753ec5f162a0d242984edd6509b32fc2",
+      "elapsed": 0.1334859679998317,
+      "timestamp": 1788675223.1762328,
+      "state": "expired_token",
+      "rep": 8
+    },
+    {
+      "url": "http://127.0.0.1:18928/api/userinfo",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Sun, 06 Sep 2026 06:13:43 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "55",
+        "Cache-Control": "no-cache",
+        "ETag": "W/\"6038e719570e4dabeecaabdc1ae0f99813df3e3609e22d6ea6d22f384de2ef11\"",
+        "X-Request-Id": "4fe3e9f4-428b-43ec-bdae-a9eaa842a989",
+        "Connection": "close"
+      },
+      "body_hash": "6038e719570e4dabeecaabdc1ae0f99813df3e3609e22d6ea6d22f384de2ef11",
+      "body_preview": "{\"error\":\"token_expired\",\"message\":\"Token has expired\"}",
+      "fingerprint": "7714b350e90e5b86d329d01888a89b07753ec5f162a0d242984edd6509b32fc2",
+      "elapsed": 0.0947232769999573,
+      "timestamp": 1788675223.5773592,
+      "state": "expired_token",
+      "rep": 0
+    },
+    {
+      "url": "http://127.0.0.1:18928/api/userinfo",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Sun, 06 Sep 2026 06:13:43 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "55",
+        "Cache-Control": "no-cache",
+        "ETag": "W/\"6038e719570e4dabeecaabdc1ae0f99813df3e3609e22d6ea6d22f384de2ef11\"",
+        "X-Request-Id": "97b6c371-525e-4e20-80d6-051da7d56890",
+        "Connection": "close"
+      },
+      "body_hash": "6038e719570e4dabeecaabdc1ae0f99813df3e3609e22d6ea6d22f384de2ef11",
+      "body_preview": "{\"error\":\"token_expired\",\"message\":\"Token has expired\"}",
+      "fingerprint": "7714b350e90e5b86d329d01888a89b07753ec5f162a0d242984edd6509b32fc2",
+      "elapsed": 0.11766765500010479,
+      "timestamp": 1788675223.8992543,
+      "state": "expired_token",
+      "rep": 2
+    },
+    {
+      "url": "http://127.0.0.1:18928/api/userinfo",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Sun, 06 Sep 2026 06:13:44 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "55",
+        "Cache-Control": "no-cache",
+        "ETag": "W/\"6038e719570e4dabeecaabdc1ae0f99813df3e3609e22d6ea6d22f384de2ef11\"",
+        "X-Request-Id": "ac8bf616-9d70-4802-b6e4-334768df5be0",
+        "Connection": "close"
+      },
+      "body_hash": "6038e719570e4dabeecaabdc1ae0f99813df3e3609e22d6ea6d22f384de2ef11",
+      "body_preview": "{\"error\":\"token_expired\",\"message\":\"Token has expired\"}",
+      "fingerprint": "7714b350e90e5b86d329d01888a89b07753ec5f162a0d242984edd6509b32fc2",
+      "elapsed": 0.11022737499979485,
+      "timestamp": 1788675224.8266675,
+      "state": "expired_token",
+      "rep": 9
+    },
+    {
+      "url": "http://127.0.0.1:18928/api/userinfo",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Sun, 06 Sep 2026 06:13:46 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "55",
+        "Cache-Control": "no-cache",
+        "ETag": "W/\"6038e719570e4dabeecaabdc1ae0f99813df3e3609e22d6ea6d22f384de2ef11\"",
+        "X-Request-Id": "5ff7c998-fbbd-455f-b4d1-231b8745cc3a",
+        "Connection": "close"
+      },
+      "body_hash": "6038e719570e4dabeecaabdc1ae0f99813df3e3609e22d6ea6d22f384de2ef11",
+      "body_preview": "{\"error\":\"token_expired\",\"message\":\"Token has expired\"}",
+      "fingerprint": "7714b350e90e5b86d329d01888a89b07753ec5f162a0d242984edd6509b32fc2",
+      "elapsed": 0.08486440599995149,
+      "timestamp": 1788675226.3094943,
+      "state": "expired_token",
+      "rep": 4
+    },
+    {
+      "url": "http://127.0.0.1:18928/api/userinfo",
+      "status": 401,
+      "headers": {
+        "Server": "Werkzeug/3.1.8 Python/3.12.14",
+        "Date": "Sun, 06 Sep 2026 06:13:47 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "55",
+        "Cache-Control": "no-cache",
+        "ETag": "W/\"6038e719570e4dabeecaabdc1ae0f99813df3e3609e22d6ea6d22f384de2ef11\"",
+        "X-Request-Id": "a4f700a5-d8da-464f-abfa-bb1890d99b5c",
+        "Connection": "close"
+      },
+      "body_hash": "6038e719570e4dabeecaabdc1ae0f99813df3e3609e22d6ea6d22f384de2ef11",
+      "body_preview": "{\"error\":\"token_expired\",\"message\":\"Token has expired\"}",
+      "fingerprint": "7714b350e90e5b86d329d01888a89b07753ec5f162a0d242984edd6509b32fc2",
+      "elapsed": 0.06507009300003119,
+      "timestamp": 1788675227.1886575,
+      "state": "expired_token",
+      "rep": 6
+    }
+  ]
+}
