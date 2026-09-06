@@ -1,0 +1,20 @@
+{
+  "base_sha": "b2944467ce29b8a2add80ae45831c35d3f5c408c",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-06T23:07:22.600761+00:00",
+  "experiment_id": "EXP-FRONTIER-34065969836",
+  "inherited_last_verdict": "SURVIVES_CURRENT_TEST",
+  "inherited_next_question": "Does TV distance detect action-dependent dynamical structure in real Web transition data (recorded agent sessions with DOM state tracking), with bias-corrected estimation and calibrated thresholds, or does the synthetic-to-real gap persist when the full complexity of real Web dynamics is present?",
+  "lane": "frontier",
+  "origin_github_run_id": "34065969836",
+  "parent_handoff": {
+    "experiment_id": "EXP-FRONTIER-34061241004",
+    "path": "research/experiments/EXP-FRONTIER-34061241004/handoff.json",
+    "sha256": "f0bd29f254c6e84e1b8f8c0a3b8ab122d70f4830c5c58b354fc484a098834dc1"
+  },
+  "reason": "pulse",
+  "request_hash": "6350321565f6f1f94454f0c89a0c882c8a4a16c2d41cfa72f27f29dbf444e648",
+  "request_id": "5f68f63d28f9078900ab600b",
+  "schema_version": 1
+}
