@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-33788037373",
+  "lane": "physics",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "EXPERIMENTAL",
+      "reason": "Synthetic controls validate methodology fixes (trajectory-grouped holdout, permutation null, overlapping actions) but live measurement invalid due to state representation degradation (URL-only vs composite), data integrity mismatch (result reports 192+184 transitions vs raw 120+113), target_href encoding bug, and multiple-comparison correction failure. Measurement substrate not valid for Web dynamics at tested representation."
+    },
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "HYPOTHESIS",
+      "reason": "No robust live action-conditioned structure demonstrated. Best effect size 0.030 accuracy (2-3% held-out) with SA == AF, raw p=0.016, p_corr=0.096 after required 6x Bonferroni. Wikipedia shows 0.0 accuracy. Claim remains untested due to measurement invalidity."
+    }
+  ],
+  "product_action": "none",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does a browser-based collection substrate with full DOM/accessibility tree state representation and semantic action selectors reveal action-conditioned transition structure on live Web pages with navigational density, beyond what HTTP fetch with URL-only representation can detect?",
+  "reason": "Validity gates fail: state representation validity (live analysis used URL-only instead of preregistered composite state), target sampling representation integrity (raw transition count mismatch), artifact provenance (missing hashes). Multiple-comparison correction not applied as specified (6x Bonferroni). Measurement substrate invalid for Web dynamics at tested representation level. Synthetic controls validate methodology but not live Web applicability.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-33788037373/audit.json validity_findings state_representation_validity FAIL, target_sampling_representation_integrity FAIL, artifact_provenance FAIL",
+    "research/experiments/EXP-PHYSICS-33788037373/audit.json required_fixes (9 items) including state representation degradation, target_href encoding, metric/control inconsistency, multiple-comparison correction",
+    "research/experiments/EXP-PHYSICS-33788037373/audit.json claim_ceiling: C-MEAS-VALID partially supported (synthetic only), C-WEB-DYNAMICS not supported",
+    "research/experiments/EXP-PHYSICS-33788037373/result.json metrics live_wikipedia accuracy_SA_heldout 0.0, live_python_docs accuracy_SA_heldout 0.033",
+    "research/experiments/EXP-PHYSICS-33788037373/audit.json recomputed_metrics live_python_docs_cached p_raw 0.016, p_bonferroni_x6 0.096",
+    "research/experiments/EXP-PHYSICS-33788037373/spec.json decision_rule clauses 1-6, measurement_validity criteria",
+    "research/experiments/EXP-PHYSICS-33788037373/prereg.md sections 2.1 (composite state), 3.1 (target_href definition), 11.2 (Bonferroni 6 comparisons)"
+  ]
+}

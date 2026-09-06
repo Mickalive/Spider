@@ -1,0 +1,182 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-33925056324",
+  "lane": "intel",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Downgrade producer SUPPORTS ceiling from 'transformation cost is low; 812-task corpus worth REQUIRES_TRANSFORM overhead; C-CROSSSITE/C-LLM-INHERIT can proceed' to synthetic-only: adapter parses synthetic WebArena accessibility tree string + obs_nodes_info with perfect scores under shared synthetic format; real WebArena Docker suitability remains UNKNOWN pending live integration (do_not_assume from EXP-INTEL-33842055594). Remove claim that corpus expansion is worth overhead until integration experiment measures truncation, viewport filtering, and fragment reuse.",
+    "Disclose role-normalization dependency for element_recall: reported 1.0 requires RootWebArea->root mapping via _ROLE_MAP; without normalization recall is 0.99 (1/100 root mismatch). State metric as 'recall_with_normalization' and report raw value.",
+    "Disclose attribute_preservation denominator: 1.0 computed over only 32/31/34 elements per site type that carry ARIA properties (single property each), not over 100. Report denominator and that synthetic assigns at most one property per element via \"key: Value\" formatting which exactly matches _PROPERTY_RE; real WebArena may have multiple properties, IGNORED_ACTREE_PROPERTIES filtering, and HTML attributes (class/id/href) not tested.",
+    "Disclose synthetic circularity: generate_synthetic_observation formats text as f'[{id}] {role} \"{name}\" {props}' with indentation \"  \"*depth which is exactly the grammar of _ELEMENT_RE and indentation-stack hierarchy reconstruction. Perfect hierarchy_preservation is tautological given shared 2-space indent assumption; bound claim to synthetic format correctness, not to real WebArena DOM robustness. Require live WebArena accessibility tree traces for non-circular validation.",
+    "Fix or disclose missing preregistered statistics: prereg.md 9.1-9.3 specifies one-sample t-tests vs thresholds (0.90/0.80), Cohen's d, paired t-test across site types and CV; result.json/report.md report only means 1.0 stdev 0.0 with zero variance and no p-values/effect sizes. Execute or explicitly mark as not computed and therefore exploratory.",
+    "Strengthen null_control realism and reporting: spec null is 'synthetic observation with only screenshot image (base64) and empty text string' but run_experiment.py generate_null_control returns (\"\", {}) without image. Report as empty-string null (non-discriminating, zero-elements trivially) not as screenshots-only. Note positive_control is same synthetic generator (ecommerce, seed 43) not an independent format.",
+    "Disclose shallow hierarchy validity limit: synthetic depth distribution is 1 at depth 0, 4 at depth 1, 8 at depth 3, 87 at depth 2 (siblings under groups). Depth-2 dominance makes parent-child reconstruction trivial; does not stress deeply nested, iframe, shadow-DOM, or viewport-filtered hierarchies which are explicitly out of scope per validity_notes."
+  ],
+  "validity_findings": [
+    {
+      "finding": "Synthetic-to-real gap: perfect scores do not measure transformation cost on live WebArena",
+      "severity": "major",
+      "details": "Generator and adapter share identical formatting contract: indent = \"  \"*depth, line = f'[{id}] {role} \"{name}\" {props_str}' where props_str = \" \".join(f\"{k}: {v}\" for k,v in props). Adapter regex _ELEMENT_RE = r'^(\\s*)\\[(\\d+)\\]\\s+(\\S+)\\s+\"([^\"]*)\"(?:\\s+(.*))?$' and _PROPERTY_RE = r'(\\w+):\\s*(\\S+)' exactly match generator. Hierarchy stack uses len(indent_str) vs depth. Therefore 1.0 across all metrics is a self-consistency check of shared code, not an independent measurement of real WebArena observation variance (truncation UTTERANCE_MAX_LENGTH=8192 / max_obs_length=1920, viewport filtering current_viewport_only, valid_node/IGNORED_ACTREE_PROPERTIES/clean_accessibility_tree pruning, shadow DOM/iframe traversal, HTML attributes). Producer validity_notes correctly states 'success on synthetic is necessary but not sufficient' yet report.md product consequence upgrades to '812-task corpus worth overhead' and 'C-CROSSSITE can proceed'. Ceiling must remain synthetic.",
+      "evidence": "research/intel/run_experiment.py: generate_synthetic_observation lines 332-340 formatted text generation and depth_stack parent assignment; research/intel/webarena_adapter.py: _ELEMENT_RE, _PROPERTY_RE, parse_accessibility_tree stack while stack[-1][0] >= indent_level; research/experiments/EXP-INTEL-33925056324/result.json: validity_notes[0] synthetic-to-real gap; research/experiments/EXP-INTEL-33925056324/report.md: Product Consequence section; research/experiments/EXP-INTEL-33842055594/handoff.json: do_not_assume and unknown list"
+    },
+    {
+      "finding": "Element hierarchy preserved is trivial given synthetic depth distribution",
+      "severity": "major",
+      "details": "Recomputed depth distribution for 100 elements: depth 0=1 (root), depth 1=4, depth 3=8, depth 2=87. 87 siblings at same indent level parentId determined by single stack pop. Adapter's while stack[-1][0] >= indent_level pop correctly handles this flat case but does not test deep nesting (real pages may have depth 10+), mixed indent (tabs vs 2 spaces), or pruned nodes from valid_node filtering. Hierarchy preservation 1.0 over 100 elements per site type is not discriminating for real complexity.",
+      "evidence": "research/intel/run_experiment.py: HIERARCHY_TEMPLATES 20-23 elements then depth 2 fill for remaining 76+ (line 298 depth 2); audit recomputation: Counter depth {2:87,3:8,1:4,0:1}; research/intel/webarena_adapter.py: stack logic lines 168-186"
+    },
+    {
+      "finding": "Attribute preservation denominator and single-property per element limits generalizability",
+      "severity": "major",
+      "details": "Recomputed gt_with_props = 32 ecommerce, 31 social_forum, 34 coding (mean 32). Each synthetic element gets at most one property (if rng.random()<0.30 then one of 6 keys). Real WebArena AccessibilityTreeNode.properties may contain multiple keys and IGNORED_ACTREE_PROPERTIES filtering removes focusable/editable etc. HTML attributes (class,id,href) not in accessibility_tree mode; producer notes this in validity_notes[3] but metric does not test it. 1.0 preservation over single-value parsing of \"key: Value\" via (\\w+):\\s*(\\S+) is trivial and does not measure multi-property or HTML attribute preservation needed for SPIDER parameterization.",
+      "evidence": "research/intel/run_experiment.py: prop_choices 6 keys, if rng.random()<0.3 one property (lines 257-259 and 293-295); recomputed 32/31/34; research/intel/webarena_adapter.py: _PROPERTY_RE parsing; research/experiments/EXP-INTEL-33925056324/result.json: metrics.attribute_preservation.note '32 of 100 per site'; spec.md 15 pre-registered expectation HTML attributes NOT available in accessibility_tree mode"
+    },
+    {
+      "finding": "Role normalization masks 1% recall error and ARIA-to-tag mapping not validated",
+      "severity": "minor",
+      "details": "Ground truth role RootWebArea normalized to root via _ROLE_MAP. Recomputed without normalization: 99/100 correct (root mismatch). With normalization: 100/100. Real WebArena ARIA role set includes generic, StaticText, etc mapped via _ROLE_MAP. Fragment reuse may depend on HTML tagName not ARIA role; translation cost not measured. Report states 'Role normalization RootWebArea -> root is applied' but decision rule threshold >=0.90 would still PASS at 0.99, so finding is disclosure not falsification.",
+      "evidence": "research/intel/webarena_adapter.py: _ROLE_MAP RootWebArea->root, StaticText->text, normalize_role; research/intel/run_experiment.py: compute_element_recall gt_role_normalized = normalize_role(gt_elem.role); audit recompute correct_no_norm 99 vs correct_norm 100; research/experiments/EXP-INTEL-33925056324/result.json: validity_notes[5] re normalization"
+    },
+    {
+      "finding": "Controls are non-discriminating and null_control implementation mismatches spec",
+      "severity": "minor",
+      "details": "Positive control uses generate_positive_control() which calls generate_synthetic_observation('ecommerce', seed 43, 100) — same generator as site types, different seed. Pass confirms deterministic generation not adapter robustness to real variance. Null control spec: 'Synthetic observation with only screenshot image (base64) and empty text string' but run_experiment.py returns (\"\", {}) with no image; adapter returns 0 elements trivially because lines = ''.strip().split('\\n') skips empty. Does not test screenshot-only image handling or adapter hallucination on base64 string. Controls pass but have low falsification power.",
+      "evidence": "research/intel/run_experiment.py: generate_null_control lines 355-358 return \"\",{} and generate_positive_control seed 43; research/intel/webarena_adapter.py: parse_accessibility_tree lines 137-142 empty text handling; research/experiments/EXP-INTEL-33925056324/spec.json: positive_control and null_control definitions"
+    },
+    {
+      "finding": "Truncation and viewport filtering explicitly out of scope yet central to transformation cost",
+      "severity": "major",
+      "details": "Producer excludes UTTERANCE_MAX_LENGTH=8192 / max_obs_length=1920 truncation and current_viewport_only filtering from adapter scope (validity_notes[4][5]). Prior audit ceiling REQUIRES_TRANSFORM identifies these as required transformations. Synthetic observations are 100 elements ~3000 chars formatted string, never exceed truncation. No measurement of loss on large pages. Adapter line count 224 therefore underestimates real overhead (recomposition + viewport override + truncation handling). Transformation_cost metric correct as LOC but incomplete for product consequence.",
+      "evidence": "research/experiments/EXP-INTEL-33842055594/audit.json: validity_findings truncation and viewport; research/experiments/EXP-INTEL-33925056324/result.json: validity_notes[4][5] out of scope; research/experiments/EXP-INTEL-33925056324/spec.json: measurement_validity[2] viewport filtering override"
+    },
+    {
+      "finding": "Preregistered inferential statistics not reported",
+      "severity": "minor",
+      "details": "Prereg.md 9.1-9.3 specifies one-sample t-test element_recall >0.90, attribute >0.80, hierarchy >0.80, Cohen's d, paired t-test across site types, coefficient of variation. Result.json reports mean 1.0 stdev 0.0 min 1.0 with zero variance; report.md table shows means only. No t-statistic, p-value, effect size, or CV reported. With zero variance across 3 site types, t-test is degenerate (division by zero). Decision rule based on thresholds (>=0.90) is still evaluable, but prereg deviation should be disclosed as exploratory or not applicable due to synthetic determinism.",
+      "evidence": "research/experiments/EXP-INTEL-33925056324/prereg.md: sections 9.1-9.3 Statistical Tests; research/experiments/EXP-INTEL-33925056324/result.json: metrics per-site 1.0 stdev 0.0 no t-test fields; research/experiments/EXP-INTEL-33925056324/report.md: results table"
+    },
+    {
+      "finding": "Reproduction succeeds but infrastructure substrate untested by design",
+      "severity": "minor",
+      "details": "Artifacts hashes verified: webarena_adapter.py 46cb46542d9927f2a1b1bd3c29fef169afa..., run_experiment.py 5e02795e..., raw_results.json 3a51fd9f... Match provenance.json. Command python3 run_experiment.py reproduces deterministically (seed 42). Environment linux, python stdlib only, no Docker/browser/LLM. Measurement transaction completed validly as offline synthetic per spec. This is not a failure; it bounds claim to offline computation.",
+      "evidence": "research/intel/raw_results.json aggregate mean 1.0; provenance.json code_hashes match sha256sum recomputation; research/experiments/EXP-INTEL-33925056324/provenance.json environment docker_used false browser_used false llm_calls 0"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "Current SPIDER fragment extraction on raw HTML (2-site corpus) — reference only",
+      "strength": "weak",
+      "finding": "Listed in spec baselines[0] as 'baseline element recall and attribute preservation on raw HTML pages (reference only, not executed)'. Producer result.json controls.baseline_reference pass N/A. No measurement executed by design. Provides context for what good looks like but no comparative calibration. Weak baseline correctly not claimed as comparison; no representation loss measured.",
+      "evidence": "research/experiments/EXP-INTEL-33925056324/spec.json: baselines[0]; research/experiments/EXP-INTEL-33925056324/result.json: controls.baseline_reference; research/experiments/EXP-INTEL-33925056324/prereg.md: 8.3 Baseline Control"
+    },
+    {
+      "baseline_id": "positive_control: synthetic WebArena observation 100 elements with known structure",
+      "strength": "strong",
+      "finding": "Recomputed PASS: 100/100 elements extracted with correct role (normalized), name, properties, hierarchy for seed 43 ecommerce synthetic. Confirms adapter can parse known synthetic structure. Non-discriminating because same generator/grammar as main site types; strong within synthetic tautology, weak for real WebArena variance.",
+      "evidence": "research/intel/run_experiment.py: generate_positive_control seed 43; audit recompute positive recall 1.0 attribute 1.0 hierarchy 1.0; research/experiments/EXP-INTEL-33925056324/result.json: controls.positive_control pass true observed 1.0"
+    },
+    {
+      "baseline_id": "null_control: synthetic observation without DOM (screenshots only)",
+      "strength": "strong",
+      "finding": "Recomputed PASS: 0 elements extracted from empty string. Adapter correctly returns empty list (no hallucination). However implementation is empty string not base64 screenshot as spec describes, so null is weaker than specified. Still strong for empty-input falsification; does not test image-only handling.",
+      "evidence": "research/intel/run_experiment.py: generate_null_control return \"\",{}; audit recompute null len 0; research/experiments/EXP-INTEL-33925056324/result.json: controls.null_control observed num_extracted 0 pass true"
+    }
+  ],
+  "recomputed_metrics": {
+    "element_recall": {
+      "producer_value": 1.0,
+      "recomputed_value": 1.0,
+      "unit": "fraction per site type, threshold 0.90",
+      "method": "Ran extract_fragments_from_observation on synthetic observations generated with seed 42 per site type (100 elements each, deterministic). compute_element_recall counts matches where extracted role == normalize_role(gt_role) and name == gt_name by element_id. Recomputed ecommerce 100/100=1.0, social_forum 100/100=1.0, coding 100/100=1.0, mean 1.0 stdev 0.0 min 1.0 max 1.0. Without role normalization raw exact match 99/100 (RootWebArea vs root) per site type per audit.",
+      "evidence": "research/intel/run_experiment.py: compute_element_recall; research/intel/raw_results.json: site_types.*.element_recall 1.0; audit python recomputation seed 42"
+    },
+    "attribute_preservation": {
+      "producer_value": 1.0,
+      "recomputed_value": 1.0,
+      "unit": "fraction over gt elements carrying properties, threshold 0.80",
+      "method": "compute_attribute_preservation: denominator = gt_with_props (elements where properties non-empty), numerator = extracted props match all expected keys. Recomputed 32/32 ecommerce=1.0, 31/31 social=1.0, 34/34 coding=1.0. Single property per element, value str(True/False) parsed by _PROPERTY_RE. If computed over all 100 elements, preservation would be ambiguous; producer correctly reports note '32 of 100 per site type'. Zero variance.",
+      "evidence": "research/intel/run_experiment.py: compute_attribute_preservation lines 420-472; research/intel/raw_results.json: attribute_preservation_correct 32,31,34 each 1.0; research/experiments/EXP-INTEL-33925056324/result.json: metrics.attribute_preservation.note"
+    },
+    "hierarchy_preservation": {
+      "producer_value": 1.0,
+      "recomputed_value": 1.0,
+      "unit": "fraction with correct parent_id and children_ids, threshold 0.80",
+      "method": "compute_hierarchy_preservation compares parent_id equality and set(children_ids) equality for each extracted element present in gt. Recomputed 100/100 per site type. Trivial given 87 depth-2 siblings and deterministic stack reconstruction from \"  \"*depth indentation. Does not test viewport-filtered or valid_node-pruned hierarchies.",
+      "evidence": "research/intel/run_experiment.py: compute_hierarchy_preservation; research/intel/webarena_adapter.py: parent_id stack and parent_to_children second pass; audit recompute 1.0 all sites"
+    },
+    "transformation_cost": {
+      "producer_value": {
+        "adapter_lines_of_code": 224,
+        "dependencies_added": 0,
+        "external_api_calls": 0
+      },
+      "recomputed_value": {
+        "adapter_lines_of_code": 224,
+        "dependencies_added": 0,
+        "external_api_calls": 0
+      },
+      "unit": "lines, count, count",
+      "method": "wc -l research/intel/webarena_adapter.py = 224 lines including docstring, regex, _ROLE_MAP, parse_accessibility_tree. sha256 46cb46542d9927f2a1b1bd3c29fef169afa7009c5ba3f2b797531dbb6038fee matches provenance. Zero external dependencies (re, dataclasses, typing) confirmed. Cost excludes out-of-scope recomposition of obs_nodes_info channel, viewport override, truncation handling, shadow DOM — so understates real integration cost.",
+      "evidence": "sha256sum webarena_adapter.py 46cb46...; research/intel/raw_results.json: transformation_cost adapter_lines 224"
+    },
+    "positive_control": {
+      "producer_value": {
+        "element_recall": 1.0,
+        "attribute_preservation": 1.0,
+        "hierarchy_preservation": 1.0,
+        "pass": true
+      },
+      "recomputed_value": {
+        "element_recall": 1.0,
+        "attribute_preservation": 1.0,
+        "hierarchy_preservation": 1.0,
+        "pass": true
+      },
+      "unit": "fraction/boolean",
+      "method": "generate_positive_control seed 43 ecommerce 100 elements, extract and compute as above. Recomputed 1.0 all metrics, pass true (>=0.9).",
+      "evidence": "research/intel/run_experiment.py: generate_positive_control; audit recompute positive 1.0"
+    },
+    "null_control": {
+      "producer_value": {
+        "num_extracted": 0,
+        "element_recall": 0.0,
+        "pass": true
+      },
+      "recomputed_value": {
+        "num_extracted": 0,
+        "element_recall": 0.0,
+        "pass": true
+      },
+      "unit": "count/fraction/boolean",
+      "method": "generate_null_control() -> (\"\",{}), parse returns 0 elements (line.strip empty skip). Recomputed 0 extracted, recall 0.0, pass true (zero elements). Note spec describes base64 image but implementation uses empty string.",
+      "evidence": "research/intel/run_experiment.py: generate_null_control; research/intel/webarena_adapter.py: empty text early continue; audit recompute null 0"
+    }
+  },
+  "claim_ceiling": "MAX JUSTIFIED: A 224-line stdlib-only adapter (research/intel/webarena_adapter.py sha256 46cb46...) that recomposes synthetic WebArena accessibility tree string ([id] role \"name\" props with 2-space indent) + obs_nodes_info metadata correctly extracts elements with identity (role normalized RootWebArea->root), single ARIA property, and parent-child hierarchy on synthetic observations across three site types (ecommerce/social_forum/coding, 100 elements each, seed 42) with element_recall=1.0 (>=0.90), attribute_preservation=1.0 (>=0.80) over 32/31/34 propertied elements, hierarchy_preservation=1.0 (>=0.80), positive_control PASS (100/100) and null_control PASS (0/0) in offline stdlib-only computation. Does NOT support that transformation cost is low for live WebArena, that 812-task corpus expansion is worth REQUIRES_TRANSFORM overhead, or that C-CROSSSITE/C-LLM-INHERIT are unblocked; those remain HYPOTHESIS bounded to 2-site corpus per EXP-INTEL-33842055594 REQUIRES_TRANSFORM ceiling. Synthetic generator and adapter share identical formatting grammar making perfect scores tautological; real WebArena unknowns remain: live Docker DOM delivery per site type, truncation (UTTERANCE_MAX_LENGTH=8192/max_obs_length=1920), viewport filtering (current_viewport_only=False override), IGNORED_ACTREE_PROPERTIES/valid_node pruning, HTML attributes vs ARIA properties, shadow DOM/iframe traversal, and html vs accessibility_tree mode comparison — all require bounded graph-lane integration experiment with live Docker execution.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-33925056324/request.json",
+    "research/experiments/EXP-INTEL-33925056324/spec.json",
+    "research/experiments/EXP-INTEL-33925056324/prereg.md",
+    "research/experiments/EXP-INTEL-33925056324/freeze.json",
+    "research/experiments/EXP-INTEL-33925056324/result.json",
+    "research/experiments/EXP-INTEL-33925056324/report.md",
+    "research/experiments/EXP-INTEL-33925056324/provenance.json",
+    "research/intel/webarena_adapter.py sha256 46cb46542d9927f2a1b1bd3c29fef169aafa7009c5ba3f2b797531dbb6038fee",
+    "research/intel/run_experiment.py sha256 5e02795e352247dae39a1be3c7005f8ebd553a9807c42765b7d070d3f363a528",
+    "research/intel/raw_results.json sha256 3a51fd9f1eea38a3bb7ac2da8035f339e48d0c6223313c36ae13536b6664f263",
+    "research/experiments/EXP-INTEL-33842055594/handoff.json",
+    "research/experiments/EXP-INTEL-33842055594/audit.json",
+    "research/experiments/EXP-INTEL-33842055594/result.json",
+    "research/lanes/registry.json"
+  ],
+  "unresolved": [
+    "Whether adapter parses real WebArena Docker accessibility tree traces with truncation >1920 chars and viewport filtering; requires live Docker execution with current_viewport_only=False and measurement of tree length vs max_obs_length.",
+    "Whether hierarchy reconstruction handles real-world indentation variance, deep nesting >5 levels, and pruned nodes from valid_node/clean_accessibility_tree filtering.",
+    "Whether ARIA properties vs HTML attributes: html mode (DOMSnapshot DOMNode.attributes) yields better fragment parameterization than accessibility_tree mode for SPIDER cross-site transfer.",
+    "Whether recomposition of split channels (obs['text'] string + info['observation_metadata']['text']['obs_nodes_info'] backend_id/union_bound/text) works end-to-end in SPIDER Observation.state dict with live Playwright CDP session.",
+    "Whether shadow DOM and iframe content are captured by Accessibility.getFullAXTree / DOMSnapshot.captureSnapshot in live WebArena site types (shopping/reddit/gitlab/wikipedia).",
+    "Whether REQUIRES_TRANSFORM overhead (recomposition + viewport override + role-to-tag mapping + truncation handling) negates value of 812-task corpus vs 2-site raw HTML for C-CROSSSITE/C-LLM-INHERIT; requires integration experiment measuring fragment yield and cross-site transfer rate.",
+    "Whether VisualWebArena SoM annotations conflict with or augment SPIDER text-based fragment model."
+  ]
+}

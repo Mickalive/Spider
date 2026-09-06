@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-33925056324",
+  "lane": "intel",
+  "decision": "SUPPORTS",
+  "claim_updates": [
+    {
+      "claim_id": "C-CROSSSITE",
+      "status": "HYPOTHESIS",
+      "reason": "Bounded SUPPORTS at synthetic-only ceiling. Adapter parses synthetic WebArena accessibility tree string + obs_nodes_info with element_recall=1.0 (threshold 0.90), attribute_preservation=1.0 (threshold 0.80, 32/31/34 propertied elements per site type), hierarchy_preservation=1.0 (threshold 0.80) across 3 site types (result.json metrics, audit recomputed). Auditor ceiling (audit.json claim_ceiling) narrows from producer's broader claim: generator and adapter share identical formatting grammar (run_experiment.py line 332-340 f'[{id}] {role} \"{name}\" {props}' + indent, webarena_adapter.py _ELEMENT_RE + stack), making perfect scores tautological self-consistency, not independent measurement. Hierarchy depth trivial (87/100 at depth 2), attribute denominator limited (single property per element), role normalization masks 1% raw error. Live WebArena unknowns remain: Docker DOM delivery, truncation, viewport filtering, IGNORED_ACTREE_PROPERTIES, HTML attributes vs ARIA, shadow DOM/iframe. C-CROSSSITE requires bounded integration experiment on live Docker to measure real REQUIRES_TRANSFORM overhead."
+    },
+    {
+      "claim_id": "C-LLM-INHERIT",
+      "status": "HYPOTHESIS",
+      "reason": "Bounded SUPPORTS at synthetic-only ceiling. Transformation logic sound on synthetic format (224 lines, 0 deps, audit recomputed LOC). Auditor ceiling (audit.json validity_findings[6]) states truncation and viewport filtering explicitly out of scope yet central to REQUIRES_TRANSFORM overhead. Real transformation cost unknown: adapter 224 LOC excludes recomposition of obs_nodes_info channel, viewport override, truncation handling, shadow DOM. C-LLM-INHERIT requires end-to-end fragment yield and cross-site transfer rate on live WebArena tasks."
+    }
+  ],
+  "product_action": "NO_CHANGE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can SPIDER's fragment extraction code successfully extract and reuse fragments from WebArena's live Docker accessibility tree output, measuring real truncation, viewport filtering, and fragment yield on 2-3 task types to bound the REQUIRES_TRANSFORM overhead?",
+  "reason": "The frozen decision rule thresholds are met: element_recall=1.0>=0.90, attribute_preservation=1.0>=0.80, hierarchy_preservation=1.0>=0.80 across all three synthetic site types; positive_control PASS; null_control PASS. However, the independent audit (audit.json status=REVISE, producer_claim_supported=false) narrows the claim ceiling significantly: (1) Synthetic generator and adapter share identical formatting grammar (audit.json validity_findings[0], evidence: run_experiment.py lines 332-340, webarena_adapter.py _ELEMENT_RE + stack), making perfect scores a self-consistency check not independent measurement; (2) Hierarchy trivial (87/100 elements at depth 2, audit validity_findings[1]); (3) Attribute denominator limited to 32/31/34 elements with single property each (audit validity_findings[2]); (4) Role normalization masks 1% raw recall error (audit validity_findings[3]); (5) Null control implementation mismatches spec (empty string not base64, audit validity_findings[4]); (6) Truncation and viewport filtering out of scope yet central (audit validity_findings[6]); (7) Preregistered inferential stats not computed (audit validity_findings[5]). Therefore the bounded ceiling is: transformation logic is sound on synthetic WebArena format. Does NOT support that transformation cost is low for live WebArena, that 812-task corpus expansion is worth REQUIRES_TRANSFORM overhead, or that C-CROSSSITE/C-LLM-INHERIT are unblocked. Next step: live Docker integration experiment in graph lane.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-33925056324/request.json",
+    "research/experiments/EXP-INTEL-33925056324/spec.json",
+    "research/experiments/EXP-INTEL-33925056324/freeze.json",
+    "research/experiments/EXP-INTEL-33925056324/result.json",
+    "research/experiments/EXP-INTEL-33925056324/audit.json",
+    "research/experiments/EXP-INTEL-33925056324/report.md",
+    "research/experiments/EXP-INTEL-33925056324/provenance.json",
+    "research/experiments/EXP-INTEL-33925056324/prereg.md",
+    "research/intel/webarena_adapter.py sha256 46cb46542d9927f2a1b1bd3c29fef169aafa7009c5ba3f2b797531dbb6038fee",
+    "research/intel/run_experiment.py sha256 5e02795e352247dae39a1be3c7005f8ebd553a9807c42765b7d070d3f363a528",
+    "research/intel/raw_results.json sha256 3a51fd9f1eea38a3bb7ac2da8035f339e48d0c6223313c36ae13536b6664f263",
+    "research/experiments/EXP-INTEL-33842055594/handoff.json",
+    "research/experiments/EXP-INTEL-33842055594/audit.json",
+    "research/experiments/EXP-INTEL-33842055594/result.json"
+  ]
+}

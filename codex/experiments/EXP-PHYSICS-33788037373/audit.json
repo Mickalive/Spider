@@ -1,0 +1,180 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-33788037373",
+  "lane": "physics",
+  "status": "FAIL",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Restore artifact integrity: result.json claims 192 wikipedia + 184 python_docs transitions (20 traj/site) but live_raw_data.json contains 120 + 113 transitions (15 traj/site) with 8 steps/traj. Producer must publish complete raw transitions or correct result metrics to match archived raw evidence. Evidence: result.json metrics.n_transitions vs live_raw_data.json wc -l 2335, Counter traj ids 15 per site.",
+    "Fix state representation degradation: prereg 2.1 specifies composite state (url+title+link_texts+tag_counts+form_signals) hashed to 16-char key. Cached analysis in run_execute_337.py section 115-130 admits using URL-only identity because tag_counts/form_signals not stored in live_raw_data.json. Re-run must store full state representation or amend claim to URL-only. Evidence: run_execute_337.py NOTE lines 118-130, validity_notes NOTE live data uses URL-only.",
+    "Correct target_href encoding: substrate_337.py LiveWebCollector.collect_trajectories line 373-379 sets Action.target_href=current_url (source) not destination next_url. prereg 3.1 defines target_href as destination URL. This encodes current state into action feature, weakening SA vs AF discrimination. Evidence: substrate_337.py:375-378.",
+    "Resolve metric/control inconsistency: result.json metrics.diff_SA_vs_shuffle (0.6444 positive, 0.0111 null, 0.0333 python_docs) != controls observed_diff (0.5611, 0.0, 0.05). Metrics use single shuffle baseline (_evaluate_shuffle_null seed 9999); controls use permutation observed_diff (SA - shuffle within perm test). Use one definition consistently and explain difference. Evidence: result.json metrics vs controls.",
+    "Fix multiple-comparison correction: spec/prereg decision_rule requires Bonferroni for 3 null tests x 2 live sites =6 comparisons (threshold 0.05/6). Code determine_verdict in run_experiment_337.py and run_execute_337.py applies correction only over live_p_values (2 comparisons). Producer reports corrected p=0.0 for python_docs; correct correction gives p_corr = raw_p *6. Evidence: prereg 11.2, spec decision_rule clause 4, run_execute_337.py:552-554.",
+    "Correct provenance seeds: provenance.json seeds.live_site2=43 but spec 5.3 and run_experiment_337.py site_seeds python_docs=45. Align provenance with frozen spec and code or document deviation. Evidence: provenance.json seeds vs spec 5.3 Seeds:43(site1),45(site2) vs run_experiment_337.py:125.",
+    "Populate artifacts: result.json artifacts=[] but provenance and run_execute_337.py expect artifacts for live_raw_data.json, substrate_337.py, run_execute_337.py with sha256. Publish hashes to enable reproduction. Evidence: result.json artifacts vs run_execute_337.py artifacts block.",
+    "Report effect size prominently: live_python_docs held-out accuracy 0.0333 (2/60 correct), diff SA vs AF 0.0, diff SA vs shuffle <=0.033. At this magnitude the predictor is non-useful regardless of p-value. Claim ceiling must be expressed as accuracy/diff, not only p-value. Evidence: result.json live_python_docs accuracy_SA_heldout, recomputed_metrics.",
+    "Re-run permutation test with exact prereg method (1000 perms, trajectory-grouped, independent RNG) on full live data and report raw and 6x-corrected p-values with perm distribution summary. Current reported p=0.0 for python_docs not reproducible on cached data (recomputed p=0.016 raw, 0.096 corrected). Evidence: recomputed_metrics via key-based replay below."
+  ],
+  "validity_findings": [
+    {
+      "check": "trajectory_grouped_holdout",
+      "status": "PASS",
+      "detail": "Code trajectory_split uses trajectory ids as unit, rng shuffle seed 42. Recomputed splits confirm no trajectory in both train and test. No contamination detected."
+    },
+    {
+      "check": "trajectory_grouped_permutation_null",
+      "status": "PASS_WITH_NOTE",
+      "detail": "Permutation shuffles next_state labels within each trajectory with independent Random(seed+i) instances, preserving trajectory-level state distribution as specified. Correct per prereg 11.1. However _evaluate_shuffle_null for observed diff uses separate shuffle of train only (seed 1000) not the permutation distribution; definition mismatch creates metric/control inconsistency."
+    },
+    {
+      "check": "positive_control_overlapping_actions",
+      "status": "PASS",
+      "detail": "PositiveControl graph implements 4 shared hrefs across 3 states each (e.g., click|nav|click_element_shared appears from A,B,C states leading to different next states). Recomputed AF held-out 0.65 vs SA 1.0, diff 0.35 significant. Control is discriminating as required by prereg 8/12."
+    },
+    {
+      "check": "no_target_leakage",
+      "status": "WEAK",
+      "detail": "check_validity only flags exact match target_text==next_state.url, which never occurs. True leakage test should verify action features do not contain next-state URL/content. Live actions use current_url as target_href (substrate_337.py:377), encoding source state into action, which is inverse leakage and reduces SA vs AF separation. Not caught by gate."
+    },
+    {
+      "check": "deterministic_seeds",
+      "status": "PARTIAL_FAIL",
+      "detail": "check_validity verifies Random(42) determinism. However provenance seeds mismatch spec (live_site2 43 vs 45) and permutation_base not granular per prereg. Seeds not fully documented per operation."
+    },
+    {
+      "check": "temporal_ordering",
+      "status": "PASS",
+      "detail": "Step indices 0-7 monotonically increasing within each raw trajectory. No disorder."
+    },
+    {
+      "check": "state_representation_validity",
+      "status": "FAIL",
+      "detail": "Frozen prereg 2.1 requires composite state (url+title+link_texts+tag_counts+form_signals). Live analysis in run_execute_337.py uses URL-only (tag_counts/links discarded) because live_raw_data.json does not store them (note lines 118-130). This is strictly coarser than designed and contradicts C-MEAS-VALID test of richer representation. Claimed SURVIVES_CURRENT_TEST therefore not testing the preregistered representation. Representation loss listed as validity_note but not as gate failure; should be MEASUREMENT_INVALID for this claim."
+    },
+    {
+      "check": "target_sampling_representation_integrity",
+      "status": "FAIL",
+      "detail": "Result reports 192/184 live transitions (>=100 gates) but archived live_raw_data.json has 233 transitions total. Either raw evidence incomplete or result inflated. Breaks provenance reproducibility. Collection used HTTP fetch only; JS/accessibility tree loss acknowledged but site selection (Wikipedia/Python docs) is server-rendered so partially mitigated, still not testing SPAs."
+    },
+    {
+      "check": "artifact_provenance",
+      "status": "FAIL",
+      "detail": "result.json artifacts=[] omits raw evidence reference. Provenance data_hashes do not match any recomputable hash from live_raw_data.json with URL-only states. No sha256 cited for live_raw_data in final packet."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline": "Shuffle null: permute next-state labels within each trajectory (trajectory-grouped permutation)",
+      "strength": "STRONG",
+      "finding": "Correctly implemented; recomputed on synthetic positive control gives observed diff 0.56-0.72, p=0.0/1000 (well below 0.05). On cached live data wikipedia diff 0.0 p=1.0, python_docs diff 0.030 p=0.016 raw (recomputed). Baseline is discriminating for large effects, low power for tiny effects due to only 5-6 test trajectories."
+    },
+    {
+      "baseline": "Action-frequency null: predict most common next-state per action type, ignoring current state",
+      "strength": "STRONG",
+      "finding": "PASS. Positive control SA 1.0 vs AF 0.65 diff 0.35 p=0.0 demonstrates ability to distinguish (S,A) from A alone. Synthetic null shows SA~0.01 vs AF 0.0/0.04 not significant. Live python_docs SA 0.033 vs AF 0.033 diff 0.0 indicates no state-dependent structure beyond action alone."
+    },
+    {
+      "baseline": "First-order Markov null: predict next-state from current state only, ignoring action",
+      "strength": "NOT_REPORTED",
+      "finding": "Prereg 8.3 requires state-only baseline. Result.json includes accuracy_state_heldout (positive 0.65, live wiki 0.033, py_docs 0.016) but no permutation test controls for state-only. Comparison SA vs state-only not formally tested; report omits this baseline's p-value."
+    },
+    {
+      "baseline": "In-sample action-conditioned predictor: fit and evaluate on same transitions (memorization baseline)",
+      "strength": "STRONG",
+      "finding": "Reported. Live wikipedia in-sample 0.989 vs held-out 0.0 ratio ~1e10 (division by 1e-10); python_docs in-sample 1.0 vs 0.033 ratio 30. Confirms massive overfit/memorization. Positive control in-sample 1.0 vs held-out 1.0 ratio 1.0 indicates deterministic graph fully captured by train, not memorization."
+    }
+  ],
+  "recomputed_metrics": {
+    "positive_control": {
+      "source": "recomputed via substrate_337 PositiveControl 60x10 seed 42 with trajectory_split 70/30 seed 42",
+      "n_transitions": 600,
+      "n_trajectories": 60,
+      "accuracy_SA_heldout": 1.0,
+      "accuracy_AF_heldout": 0.6944444444444444,
+      "accuracy_state_heldout": null,
+      "observed_diff_SA_vs_shuffle": 0.7277777777777779,
+      "observed_diff_SA_vs_AF": 0.3055555555555556,
+      "p_SA_vs_shuffle": 0.0,
+      "p_SA_vs_AF": 0.0,
+      "note": "Recomputed AF 0.694 differs slightly from producer 0.65 due to random tie-breaking in predictor; SA 1.0 matches. Still strongly discriminating, p<0.001."
+    },
+    "null_control": {
+      "source": "recomputed via NullControl seed 44 30x10",
+      "n_transitions": 300,
+      "accuracy_SA_heldout": 0.0,
+      "accuracy_AF_heldout": 0.044444444444444446,
+      "observed_diff_SA_vs_shuffle": 0.011111111111111112,
+      "p_SA_vs_shuffle": 0.225,
+      "note": "Recomputed SA 0.0 vs producer 0.011; sampling variation. Permutation p>0.05 confirms null passes; no false positive."
+    },
+    "live_wikipedia_cached": {
+      "source": "recomputed from live_raw_data.json 120 transitions 15 traj using key-based (state_key, action_text) replay, 70/30 split seed42, 1000 perms seed43",
+      "n_transitions": 120,
+      "n_trajectories": 15,
+      "n_train_transitions": 80,
+      "n_test_transitions": 40,
+      "accuracy_SA_train": 0.9875,
+      "accuracy_SA_heldout": 0.0,
+      "accuracy_AF_heldout": 0.025,
+      "accuracy_state_heldout": 0.0,
+      "diff_SA_vs_shuffle": 0.0,
+      "diff_SA_vs_AF": -0.025,
+      "observed_diff_SA_vs_shuffle": 0.0,
+      "p_raw": 1.0,
+      "p_bonferroni_x2": 1.0,
+      "p_bonferroni_x6": 1.0,
+      "note": "Matches producer direction (wiki not significant). Confirms no structure."
+    },
+    "live_python_docs_cached": {
+      "source": "recomputed from live_raw_data.json 113 transitions 15 traj key-based, 70/30 seed42, 1000 perms seed43",
+      "n_transitions": 113,
+      "n_trajectories": 15,
+      "n_train_transitions": 80,
+      "n_test_transitions": 33,
+      "accuracy_SA_train": 1.0,
+      "accuracy_SA_heldout": 0.030303030303030304,
+      "accuracy_AF_heldout": 0.030303030303030304,
+      "accuracy_state_heldout": 0.0,
+      "diff_SA_vs_shuffle": 0.030303030303030304,
+      "diff_SA_vs_AF": 0.0,
+      "observed_diff_SA_vs_shuffle": 0.030303030303030304,
+      "p_raw": 0.016,
+      "p_bonferroni_x2": 0.032,
+      "p_bonferroni_x6": 0.096,
+      "note": "Producer reports n=184 diff 0.033-0.05 p_raw 0.0 p_corr 0.0. Recomputed on archived raw data shows 2 correct of 33 test (3%), raw p 0.016, which is NOT <0.05 after required 6x Bonferroni (spec decision_rule clause 4). Effect size negligible: SA == AF (no state advantage). Even if taken as significant at 2x, diff 0.03 accuracy useless for product."
+    },
+    "live_combined_producer_reported": {
+      "source": "producer result.json live_python_docs as reported (not reproducible from archived raw)",
+      "n_transitions": 184,
+      "accuracy_SA_heldout": 0.03333333333333333,
+      "accuracy_AF_heldout": 0.03333333333333333,
+      "diff_SA_vs_shuffle_producer_metrics": 0.03333333333333333,
+      "diff_SA_vs_shuffle_producer_controls": 0.05,
+      "p_raw_producer": 0.0,
+      "p_corr_producer_claimed": 0.0,
+      "recomputed_p_estimate": 0.016,
+      "inconsistency": "metrics vs controls diff mismatch; p 0.0 not reproducible; artifact count mismatch"
+    }
+  },
+  "claim_ceiling": "C-MEAS-VALID: PARTIALLY SUPPORTS — corrected substrate (trajectory-grouped holdout, trajectory-grouped permutation, overlapping-action graph) is measurement-valid: positive control reliably discriminates (SA 1.0 > AF ~0.65, p=0.0) and null control correctly fails to reject (p>0.05). This validates the methodology fix over EXP-PHYSICS-33528829431. C-WEB-DYNAMICS: NOT SUPPORTED at tested representation — no robust live action-conditioned structure demonstrated. Best observed live effect is 0.030 accuracy (2-3% held-out) with SA == AF (diff 0.0), raw p~0.016 on cached data, p_corr 0.096 after required 6x Bonferroni (>0.05). Before correction the effect would be borderline at 2x (p=0.032). Wikipedia shows 0.0 accuracy p=1.0. Claim must be bounded to FALSIFIED-IN-SETTING for this HTTP-fetch URL-only (and underlying richer but unstored) representation on en.wikipedia.org and docs.python.org with ~15 trajectories/site. No evidence for product-actionable transition prediction (accuracy 0-3%). Does NOT close Physics domain: richer state (DOM/accessibility tree, browser execution) or denser sampling might reveal structure.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-33788037373/spec.json decision_rule SURVIVES_CURRENT_TEST clauses 1-6",
+    "research/experiments/EXP-PHYSICS-33788037373/prereg.md sections 2.1, 3.1, 5.3, 11.2, 12-13",
+    "research/experiments/EXP-PHYSICS-33788037373/result.json metrics positive_control, null_control, live_wikipedia, live_python_docs",
+    "research/experiments/EXP-PHYSICS-33788037373/result.json controls positive_SA_vs_shuffle p=0.0 observed_diff 0.5611, live_python_docs_SA_vs_shuffle observed_diff 0.05 p=0.0",
+    "research/experiments/EXP-PHYSICS-33788037373/live_raw_data.json 120 wikipedia +113 python_docs 15 traj/site vs result 192+184 20 traj/site",
+    "research/experiments/EXP-PHYSICS-33788037373/provenance.json seeds live_site2 43 vs spec 45, data_hashes wikipedia 647acc..., python_docs 9286b4...",
+    "research/physics/substrate_337.py LiveWebCollector.collect_trajectories lines 373-379 target_href=current_url",
+    "research/physics/substrate_337.py permutation_test_sa_vs_shuffle lines 497-551 and _evaluate_shuffle_null lines 608-625",
+    "research/physics/run_execute_337.py lines 118-156 key-based transition building NOTE URL-only state identity, validity_notes lines 752-754",
+    "research/physics/run_experiment_337.py line 125 site_seeds wikipedia 43 python_docs 45",
+    "recomputed_metrics via cached data replay (1000 perms seed43) showing wikipedia p 1.0, python_docs p_raw 0.016 p_x6 0.096"
+  ],
+  "unresolved": [
+    "What is true held-out accuracy/diff on the originally collected 192/184 live transitions with full composite state (url+link_texts+tag_counts+form_signals) if raw had stored them — cached replay uses URL-only and 113-120 transitions, so magnitude of representation loss unquantified.",
+    "Whether the reported live_python_docs p=0.0 would replicate under independent 1000-perm rerun on the full 192-transition dataset with proper 6x Bonferroni, and whether the 0.05 observed_diff is a computation artefact vs 0.033 metrics diff.",
+    "Whether any live action-conditioned structure would emerge with browser-based collection (JS execution, accessibility tree, visual layout) or with navigational density higher than Wikipedia/Python docs link following.",
+    "Whether the Action encoding bug (target_href=source URL) materially deflated SA vs AF separation on live data; re-encoding with true destination href might change AF baseline.",
+    "Whether larger live sample (spec target >=100 transitions met per result, but cached only 233 total) would give adequate power to detect small diffs <5% after trajectory-grouped holdout."
+  ]
+}
