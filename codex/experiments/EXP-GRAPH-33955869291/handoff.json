@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-33955869291",
+  "lane": "graph",
+  "target_lane": "graph",
+  "next_question": "Does the parameter-slot-count tie-break generalize to real-web endpoints with DOM, auth, session state, and drift — and does the literal-vs-param equal-confidence competition remain param-winning after the fix is committed to production HEAD?",
+  "why_next": "The fix generalizes to a single multi-slot pair (2 vs 1) and template-only params are correctly handled by declared-slot credit, but claim ceiling is limited to synthetic substrate + single tested pair + unfixed HEAD. The two highest-upside open questions are: (1) real-web endpoints with DOM/auth/session/drift — the core generalization gap for product viability; (2) literal-vs-param equal-confidence retest in committed HEAD — the original hazard the fix solves, not re-measured in this experiment. Both are materially orthogonal to each other and to the synthetic-substrate bound established here. Real-web testing requires the fix to be committed first.",
+  "carry_forward": {
+    "established": [
+      "Multi-slot dominance confirmed for single tested pair: param-2slot [id,category] /posts/${id}/${category} beats param-fetch-posts [id] /posts/${id} at equal confidence 0.95, robust to registry insertion order (audit V_MULTI_SLOT_COUNTERBALANCED_ROBUST). Claim ceiling: single pair, synthetic substrate, deterministic, n=1.",
+      "Template-only params (parameter_slots=[] but template has ${id}) lose to declared 1-slot param at equal confidence because fix uses len(parameter_slots) not len(required_slots) (audit V_TEMPLATE_ONLY_SCOPE_LIMIT_CONFIRMED). Parent V_TIEBREAK_SLOT_COUNT_SCOPE_LIMIT confirmed and bounded.",
+      "verify() dict equality correctly accepts matching postconditions ({status:200} == {status:200}) and rejects non-matching ({status:404} != {status:200}) (audit V_VERIFY_DICT_MATCH_ONLY). Scope: dict equality only, not HTTP integration.",
+      "5/5 solo baselines preserved: literal-only orig/unseen, param-only orig/unseen, confidence-disambiguate — no regression from parent (audit V_RECOMPUTED_MATCH).",
+      "Confidence dominates slot count: (0.98,1) > (0.95,0) — higher confidence wins regardless of slot difference (audit V_RECOMPUTED_MATCH).",
+      "All 12 observations independently recomputed and match producer exactly (audit V_RECOMPUTED_MATCH). Measurement transaction valid.",
+      "Fix not committed to HEAD: src/spider/kernel.py L112 still candidates.sort(key=lambda m: m.confidence, reverse=True), sha256 46929b3a951df48d7f9d1fd850871073c0d91c186aa117e13d389fe274e8d61. Production remains COMPETITION-UNSAFE (audit V_CODE_NOT_PERSISTED).",
+      "C-PARAM-INHERIT remains EXPERIMENTAL: competition hazard resolved on synthetic substrate for single-slot and single multi-slot pair, but fix commit + re-validation + real-web testing required before PRODUCT."
+    ],
+    "rejected": [
+      "Equal-slot-count ties are lexicographic on mechanism_id: they are stable insertion-order (Python sort stability), not lexicographic. Producer interpretation masked by mechanism_id coincidence (audit V_TIE_LEXICOGRAPHIC_MISCHARACTERIZED). Equal-slot ties flip with registry order.",
+      "The fix generalizes safely to arbitrary multi-slot counts/templates: only single tested pair (2 vs 1, intent fetch-post). No other slot counts, templates, or registry sizes tested (audit claim ceiling).",
+      "Template-only params are reliably handled: they lose to declared params and to literals by insertion order at equal confidence — not reliably preferred in any competition (audit V_TEMPLATE_ONLY_SCOPE_LIMIT_CONFIRMED, V_TEMPLATE_VS_LITERAL_INSERTION_DEPENDENT).",
+      "verify() is integration-tested with real HTTP responses: only dict equality tested; http_evidence not piped into verify (audit V_VERIFY_DICT_MATCH_ONLY)."
+    ],
+    "unknown": [
+      "Whether the fix generalizes to real-web endpoints with DOM, auth, session state, and drift — synthetic substrate only.",
+      "Whether the literal-vs-param equal-confidence competition remains param-winning after fix is committed to production HEAD — not retested in this experiment, inherited from parent only.",
+      "Whether the fix generalizes to other slot counts (3 vs 2, 5 vs 1), other template shapes, or other intents beyond fetch-post.",
+      "Whether LLM-driven mechanism distillation ('learn on A' half of C-PARAM-INHERIT) works — no model calls.",
+      "Whether kernel preconditions matching (_matches) discriminates beyond empty dict — all mechanisms tested with preconditions={}.",
+      "Whether _bind() preserves type for full-match template strings (int -> int) — only URL-embedded partial match tested.",
+      "Whether registry upsert sorting (registry.py L35-38) affects production tie-break behavior — this experiment uses replace() without sorting.",
+      "Whether template-only params need explicit handling via required_slots rather than declared slots for production use."
+    ],
+    "do_not_assume": [
+      "Do not assume the fix is committed to production — current HEAD src/spider/kernel.py L112 is unfixed. Product promotion requires Director-approved commit + re-validation.",
+      "Do not assume equal-slot ties are lexicographic or deterministic — they are stable insertion-order and flip with registry order.",
+      "Do not assume the fix generalizes beyond the single tested multi-slot pair (2 vs 1, fetch-post, synthetic substrate).",
+      "Do not assume template-only params are handled correctly in production — they lose to declared params and to literals by insertion order.",
+      "Do not assume verify() works end-to-end with real HTTP responses — only dict equality tested.",
+      "Do not assume literal-vs-param equal-confidence competition was retested here — it was inherited from parent, not measured in this experiment's raw evidence.",
+      "Do not generalize to real-web endpoints, DOM, auth, session, drift, multiple intents, non-empty preconditions, LLM distillation, or _bind type preservation.",
+      "Do not assume the spec null_control text ('literal winning at equal confidence') is correct — it contradicts the hypothesis and was not implemented as written (audit V_SPEC_NULL_CONTROL_CONTRADICTION)."
+    ]
+  },
+  "dependencies": [
+    "src/spider/kernel.py L112 — fix candidates.sort(key=lambda m: (m.confidence, len(m.parameter_slots)), reverse=True) must be committed to HEAD before real-web testing or product promotion",
+    "src/spider/kernel.py L104-113 — resolve() and _matches() logic",
+    "src/spider/registry.py L35-38 — upsert sorting determines tie-break behavior in production",
+    "src/spider/models.py — Mechanism, Resolution dataclasses",
+    "research/experiments/EXP-GRAPH-33816735314/handoff.json (sha256: 54d5cb70b85e95b6afae07f906224a7d6313eff2017280056ccc8780c78f4806) — parent established competition hazard resolved on synthetic substrate",
+    "research/experiments/EXP-GRAPH-33718012817/handoff.json (sha256: ebb3de502513621de55c297a32023f20b6f87739cdf00b4d3db025d00f51187a) — grandparent established parameterized pipeline substrate validation"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-33955869291/spec.json",
+    "research/experiments/EXP-GRAPH-33955869291/result.json",
+    "research/experiments/EXP-GRAPH-33955869291/audit.json",
+    "research/experiments/EXP-GRAPH-33955869291/report.md",
+    "research/experiments/EXP-GRAPH-33955869291/prereg.md",
+    "research/experiments/EXP-GRAPH-33955869291/raw_evidence.json",
+    "research/experiments/EXP-GRAPH-33955869291/derived_measurements.json",
+    "research/experiments/EXP-GRAPH-33955869291/provenance.json",
+    "research/experiments/EXP-GRAPH-33955869291/freeze.json",
+    "research/experiments/EXP-GRAPH-33955869291/run_experiment.py",
+    "research/experiments/EXP-GRAPH-33816735314/handoff.json",
+    "research/experiments/EXP-GRAPH-33816735314/audit.json",
+    "src/spider/kernel.py:104-113",
+    "src/spider/kernel.py:19-32",
+    "src/spider/kernel.py:125-129",
+    "src/spider/kernel.py:112",
+    "src/spider/registry.py",
+    "src/spider/models.py"
+  ],
+  "recommended_action": "First: commit the one-line fix to src/spider/kernel.py L112 (candidates.sort(key=lambda m: (m.confidence, len(m.parameter_slots)), reverse=True)) with Director approval. Second: re-validate in committed HEAD with a re-run of the core literal-vs-param equal-confidence competition (the original hazard) to confirm fix still works post-commit. Third: advance to real-web endpoint testing with DOM, auth, session state, and drift — the highest-upside generalization gap. Separately: consider whether template-only params need explicit required_slots-based handling or should be deprecated alongside literals at equal confidence. The LLM distillation half of C-PARAM-INHERIT ('learn on A') requires a model-calling experiment in the graph lane but is lower priority than fix commit + real-web validation."
+}

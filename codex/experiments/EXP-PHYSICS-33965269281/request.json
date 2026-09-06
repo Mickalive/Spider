@@ -1,0 +1,20 @@
+{
+  "base_sha": "e21ede2aa2fd44083ec1cee0a519af5984650d99",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-05T12:10:09.776311+00:00",
+  "experiment_id": "EXP-PHYSICS-33965269281",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "Does a browser-based collection substrate with full DOM/accessibility tree state representation and semantic action selectors reveal action-conditioned transition structure on live Web pages with navigational density, beyond what HTTP fetch with URL-only representation can detect?",
+  "lane": "physics",
+  "origin_github_run_id": "33965269281",
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-33788037373",
+    "path": "research/experiments/EXP-PHYSICS-33788037373/handoff.json",
+    "sha256": "35ac95937cd8eac6486b1df4c51150ae30a6e2cb3851fa326e5a93d2f2f62fad"
+  },
+  "reason": "pulse",
+  "request_hash": "5128ce15f6cae2a19a4b7c4526f74ee77b74d803fcb91dabeb6048c65e01f55e",
+  "request_id": "427c52ecd223a2a85c63a0fd",
+  "schema_version": 1
+}
