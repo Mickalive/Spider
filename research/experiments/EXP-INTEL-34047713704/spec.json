@@ -1,33 +1,29 @@
 {
   "experiment_id": "EXP-INTEL-34047713704",
   "lane": "intel",
-  "claim_ids": ["C-CROSSSITE", "C-LLM-INHERIT"],
-  "question": "Do heuristic fragment yield estimates from EXP-INTEL-33945226776 match actual DOM extraction on live WebArena Docker pages, and is Method 1 (element-count) or aggregated median more predictive of live yield?",
-  "hypothesis": "Live fragment yield on WebArena Docker pages will be within +/-0.10 of Method 1 (element-count) estimates for at least 2 of 3 tested site types (shopping M1=0.365, gitlab M1=0.484, wikipedia M1=0.517). Method 1 is the only heuristic method that models viewport coverage (0.45-0.65) and node pruning (0.06-0.15), making it the most conservative and most likely to approximate the full REQUIRES_TRANSFORM pipeline. If live yield deviates from M1 by >0.10 for >=2 site types, the heuristic method is not a reliable prior for corpus suitability decisions.",
-  "falsifier": "Live fragment yield deviates from Method 1 estimates by >0.10 for >=2 of 3 site types, OR shopping yield <0.25 (well below M1 0.365), OR gitlab yield <0.35 (well below M1 0.484), OR wikipedia yield >0.60 (above all heuristic estimates), OR Docker deployment fails to produce valid accessibility tree observations for >=1 task, OR shopping yield < wikipedia yield (ranking inversion).",
+  "claim_ids": ["C-CROSSSITE", "C-LLM-INHERIT", "C-PRODUCT-ECON"],
+  "question": "Do heuristic fragment yield estimates (0.517-0.65) from EXP-INTEL-33945226776 match actual fragment extraction on live WebArena Docker pages with current_viewport_only=True, clean_accessibility_tree filtering, and IGNORED_ACTREE_PROPERTIES pruning?",
+  "hypothesis": "Heuristic yield estimates are within 15 percentage points of actual measured yield for at least 2 of 3 tested site types (shopping, gitlab, wikipedia), validating the 812-task corpus as suitable for C-CROSSSITE/C-LLM-INHERIT integration experiments.",
+  "falsifier": "If actual measured yield deviates from heuristic estimate by >15 percentage points for ANY tested site type, the heuristic model is not calibrated and the 812-task corpus requires reassessment. If Docker/Playwright infrastructure fails to deploy for all 3 tasks, the experiment is BLOCKED (not a scientific falsification).",
   "baselines": [
-    "Method 1 (element-count) estimates from EXP-INTEL-33945226776: shopping 0.365, gitlab 0.484, wikipedia 0.517 — the only method modeling viewport coverage and node pruning",
-    "Aggregated median estimates from EXP-INTEL-33945226776: shopping 0.65, gitlab 0.60, wikipedia 0.517 — inflated by degenerate Method 2 (char-length, yields 1.0 for 5/6 site types)",
-    "Truncation sensitivity ratios from EXP-INTEL-33945226776: shopping 0.37, reddit 0.439, gitlab 0.471, shopping_admin 0.453, map 0.702, wikipedia 0.897",
-    "Synthetic adapter baseline from EXP-INTEL-33925056324: element_recall=1.0 on 100-element synthetic observations (tautological upper bound, not predictive of live performance)",
-    "Structural suitability baseline from EXP-INTEL-33528832113: S1-S5 5/5 structural suitability without observation-format measurement"
+    "Heuristic yield estimates from EXP-INTEL-33945226776: shopping 0.65, gitlab 0.60, wikipedia 0.517",
+    "Method 1 (element-count) estimates: shopping 0.365, gitlab 0.484, wikipedia 0.517",
+    "Truncation sensitivity ratios from EXP-INTEL-33945226776: shopping 0.37, gitlab 0.471, wikipedia 0.897"
   ],
-  "positive_control": "Shopping task (consumer-facing e-commerce) should have highest actual fragment yield due to structured product data with interactive elements. Expected: actual yield >0.30 based on M1 estimate of 0.365. Shopping yield must exceed wikipedia yield.",
-  "null_control": "Wikipedia task (CMS, minimal interactive elements) should have lowest actual fragment yield among the three site types. Expected: actual yield <0.60 and wikipedia yield < shopping yield AND wikipedia yield < gitlab yield.",
+  "positive_control": "Shopping task (e-commerce) should have the highest actual yield among the 3 tested site types, with >40% of DOM elements surviving the full REQUIRES_TRANSFORM pipeline. This verifies the measurement pipeline can extract fragments from a live complex page.",
+  "null_control": "Wikipedia task (CMS) should have the lowest actual yield among the 3 tested site types, with <60% of DOM elements surviving (due to simpler page structure). This verifies the pipeline can distinguish site types on live pages.",
   "measurement_validity": [
-    "WebArena Docker environment must be deployable and produce valid accessibility tree observations (obs['text'] + obs_nodes_info) for all 3 tasks",
-    "Each task produces at least 1 observation with non-empty accessibility tree text",
-    "Accessibility tree parsing via research/intel/webarena_adapter.py succeeds without errors for each observation",
-    "Formatted observation string length is measured before and after REQUIRES_TRANSFORM pipeline (viewport filtering, IGNORED_ACTREE_PROPERTIES pruning, truncation)",
-    "Yield is computed as: elements_surviving_transform / total_elements_in_observation",
-    "Truncation is measured at both UTTERANCE_MAX_LENGTH=8192 and max_obs_length=1920",
-    "Viewport filtering is measured with current_viewport_only=True (WebArena default) vs False",
-    "IGNORED_ACTREE_PROPERTIES pruning effect is measured by counting elements with pruned properties",
-    "Task selection follows parent recommendation: one shopping (product listing), one gitlab (project/repository view), one wikipedia (article page)"
+    "WebArena Docker images are pulled from ghcr.io/web-arena-x/ for each site type (shopping, gitlab, wikipedia)",
+    "Playwright headless browser extracts accessibility tree with current_viewport_only=True, viewport_size=1280x720",
+    "Accessibility tree is parsed using webarena_adapter.py (research/intel/webarena_adapter.py)",
+    "Fragment yield = elements_surviving_pipeline / total_elements_in_observation",
+    "Pipeline applies: (1) viewport filtering (current_viewport_only=True), (2) IGNORED_ACTREE_PROPERTIES pruning, (3) truncation at UTTERANCE_MAX_LENGTH=8192 and max_obs_length=1920",
+    "Each task is measured once (N=1 per site type) — this is a pilot calibration, not a powered statistical test",
+    "1 negative control task (wikipedia) validates the pipeline can detect low-complexity pages"
   ],
-  "decision_rule": "If actual yield deviates from M1 estimate by <=0.10 for >=2 site types AND shopping yield >0.30 AND gitlab yield >0.30 AND wikipedia yield < shopping yield AND wikipedia yield < gitlab yield AND Docker deployment succeeds for all 3 tasks: verdict = SUPPORTS. C-CROSSSITE and C-LLM-INHERIT move toward EXPERIMENTAL with caveat that 3-task sample is small. If shopping yield <0.25 OR gitlab yield <0.35 OR deviation from M1 >0.15 for >=2 site types OR wikipedia yield > shopping yield: verdict = FALSIFIES. 2-site corpus remains practical bound and Intel should assess VisualWebArena/Mind2Web as alternatives. If NOT SUPPORTS AND NOT FALSIFIES: verdict = MIXED, inconclusive, need larger task sample. If Docker deployment fails for >=1 task: verdict = MEASUREMENT_INVALID.",
-  "product_consequence_positive": "If live yield matches M1 estimates within +/-0.10, Method 1 is validated as a reliable prior for corpus suitability. The 812-task WebArena corpus becomes suitable for C-CROSSSITE and C-LLM-INHERIT integration experiments. Product lane can proceed with REQUIRES_TRANSFORM implementation (estimated 324 LOC) knowing the corpus expansion value is real, not heuristic. Graph lane can design cross-site transfer experiments using WebArena tasks.",
-  "product_consequence_negative": "If live yield deviates substantially from M1 estimates (especially if Method 1 is more accurate than aggregated median), the 812-task corpus expansion provides less value than assumed. Product lane should bound REQUIRES_TRANSFORM investment to 2-site corpus and assess whether VisualWebArena or Mind2Web offer better yield-per-task economics. Intel should prioritize alternative benchmark reconnaissance.",
-  "estimated_cost": "Medium: requires Docker deployment (WebArena images ~5-10GB), 3 task executions with browser automation, accessibility tree extraction and analysis. Estimated 2-4 hours compute time. No LLM API calls required (observation extraction is deterministic).",
-  "expected_information_gain": "Very high: resolves the central unknown from EXP-INTEL-33945226776 — whether heuristic yield estimates match live DOM extraction. This single experiment changes the product decision about whether to invest in REQUIRES_TRANSFORM for the 812-task corpus. A positive result (yield within +/-0.10 of M1) justifies corpus expansion; a negative result constrains to 2-site corpus and redirects Intel to alternative benchmarks."
+  "decision_rule": "If actual yield is within 15 percentage points of heuristic estimate for ALL 3 site types, verdict = SUPPORTS (heuristic model is calibrated, proceed with C-CROSSSITE integration). If actual yield deviates >15pp for ANY site type, verdict = FALSIFIES (heuristic model is not calibrated, 812-task corpus requires reassessment). If Docker/Playwright infrastructure fails to deploy for all 3 tasks, verdict = BLOCKED.",
+  "product_consequence_positive": "Validates that heuristic yield estimates from EXP-INTEL-33945226776 are calibrated within 15pp of actual extraction. Graph lane can proceed with WebArena Docker integration for C-CROSSSITE/C-LLM-INHERIT testing using the 812-task corpus with confidence that the heuristic ranking is informative.",
+  "product_consequence_negative": "If heuristic estimates are not calibrated (deviation >15pp), the 812-task corpus yield is unknown and the REQUIRES_TRANSFORM overhead cannot be assessed from heuristics alone. Intel should reassess whether VisualWebArena, Mind2Web, or other benchmarks offer a lower-uncertainty path to cross-site diversity.",
+  "estimated_cost": "Medium: requires Docker image pulls (~5-10GB per site), Playwright installation, WebArena package setup. ~1-2 hours of infrastructure setup + 30 minutes of measurement. May fail due to network, disk, or dependency constraints.",
+  "expected_information_gain": "HIGH: directly resolves the central unknown from EXP-INTEL-33945226776 (whether heuristic estimates match live extraction). A positive result (SUPPORTS) unblocks C-CROSSSITE integration. A negative result (FALSIFIES) saves the graph lane from deploying on an unsuitable corpus. Even a BLOCKED result is informative: it identifies infrastructure barriers that must be resolved before live measurement is possible."
 }

@@ -4,235 +4,214 @@
 
 - **Experiment ID**: EXP-INTEL-34047713704
 - **Lane**: Intel
-- **Claims**: C-CROSSSITE (Reusable mechanisms transfer across website holdout), C-LLM-INHERIT (A real LLM agent benefits from SPIDER beyond strong memory/instruction baselines)
-- **Date**: 2026-09-06
+- **Claims**: C-CROSSSITE, C-LLM-INHERIT, C-PRODUCT-ECON
+- **Date**: 2026-09-07
 - **Status**: DESIGN — NOT YET FROZEN
+- **Parent Experiment**: EXP-INTEL-33945226776 (MIXED)
+- **Request Reason**: pulse (inherited next_question from parent handoff)
 
 ## 2. Scientific Question
 
-Do heuristic fragment yield estimates from EXP-INTEL-33945226776 match actual DOM extraction on live WebArena Docker pages, and is Method 1 (element-count) or aggregated median more predictive of live yield?
+Do heuristic fragment yield estimates (0.517-0.65) from EXP-INTEL-33945226776 match actual fragment extraction on live WebArena Docker pages with `current_viewport_only=True`, `clean_accessibility_tree` filtering, and `IGNORED_ACTREE_PROPERTIES` pruning?
 
 ## 3. Motivation
 
-Prior Intel work (EXP-INTEL-33945226776) performed heuristic analysis of 812 WebArena tasks across 6 site types, finding:
+### What the parent experiment established (EXP-INTEL-33945226776)
 
-- Aggregated median yield >50% for all 6 site types (0.517-0.65)
-- Method disagreement (Spearman rho -0.943 to 0.371) and Kruskal-Wallis p=0.999 — estimates are non-discriminating priors
-- Method 1 (element-count, the only method modeling viewport+pruning) gives materially lower yields: shopping 0.365, gitlab 0.484, wikipedia 0.517
-- Method 2 (char-length at UTTERANCE_MAX_LENGTH=8192) is degenerate: yields 1.0 for 5/6 site types, inflating aggregated medians
-- max_obs_length=1920 (LLM input limit) is the binding constraint, not UTTERANCE_MAX_LENGTH=8192
-- Null control failed (wikipedia 0.517 > 0.40 threshold)
-- Auditor ceiling bounds this to "heuristic exploratory triage only"
+The parent experiment performed heuristic analysis of 812 WebArena tasks across 6 site types without deploying Docker. It found:
 
-The central unresolved question is whether these heuristic estimates match actual fragment extraction on live WebArena Docker pages. This experiment deploys WebArena Docker for 3 tasks (one shopping, one gitlab, one wikipedia) to measure actual fragment yield, truncation at 8192/1920, viewport filtering, and IGNORED_ACTREE_PROPERTIES pruning on live DOM.
+**Established (descriptive):**
+- WebArena has 6 site types (not 4): gitlab (196 tasks), shopping (192), shopping_admin (182), reddit (114), map (112), wikipedia (16)
+- Heuristic median yield estimates: shopping 0.65, reddit 0.65, gitlab 0.60, shopping_admin 0.60, map 0.598, wikipedia 0.517
+- Method 1 (element-count, modeling viewport+pruning) gives materially lower yields: shopping 0.365, gitlab 0.484, wikipedia 0.517
+- max_obs_length=1920 is the binding constraint, not UTTERANCE_MAX_LENGTH=8192
+- Shopping truncation sensitivity ratio: 0.37 (most sensitive); wikipedia: 0.897 (least sensitive)
 
-This resolves whether:
-1. The 812-task corpus is suitable for C-CROSSSITE and C-LLM-INHERIT integration
-2. Method 1 (element-count, shopping 0.365) or aggregated median (0.65) is more predictive of live yield
-3. The 324 LOC REQUIRES_TRANSFORM implementation is justified
-4. Intel should assess VisualWebArena/Mind2Web as alternatives
+**Rejected (measurement invalid):**
+- All 4 hypotheses (H1-H4) are NOT confirmed: method disagreement (Spearman rho -0.943 to 0.371), Kruskal-Wallis p=0.999
+- Aggregated median yield >50% is inflated by degenerate Method 2 (char-length)
+- Producer's broader interpretation not justified as evidential
+
+**Unknown:**
+- Whether heuristic yield estimates match actual fragment extraction on live WebArena Docker pages
+- Whether Method 1 (element-count, shopping 0.365) or aggregated median (0.65) is more predictive of live yield
+- Whether the 812-task corpus is suitable for C-CROSSSITE/C-LLM-INHERIT testing
+
+**Do Not Assume:**
+- WebArena's 812-task corpus is suitable for C-CROSSSITE or C-LLM-INHERIT (all yield estimates are heuristic priors)
+- Aggregated median yield >50% is evidential (Method 2 is degenerate)
+- The 224 LOC adapter cost generalizes to live integration
+- Synthetic adapter scores predict live performance
+
+### Why this experiment is different
+
+The parent experiment used **heuristic estimation**: domain knowledge of typical web page element counts and source code constants to estimate yields. This approach has fundamental limitations:
+1. Estimates are based on analyst priors, not measurements
+2. Three estimation methods disagree substantially (rho -0.943 to 0.371)
+3. Kruskal-Wallis p=0.999 suggests estimates lack discriminating power
+
+This experiment uses **live Docker deployment**: deploy WebArena's self-hosted websites in Docker, use Playwright to render pages, extract actual accessibility trees, and measure fragment yield through the full REQUIRES_TRANSFORM pipeline.
+
+**Key advantages:**
+- Ground-truth measurements from actual rendered pages
+- Tests the complete pipeline (viewport filtering + pruning + truncation)
+- Resolves whether heuristic estimates are calibrated or misleading
+- Directly determines whether the 812-task corpus is worth deploying
+
+**Key limitation:**
+- Only 3 tasks tested (1 per site type) — this is a pilot calibration, not a powered statistical test
+- Infrastructure may fail (Docker images, Playwright, dependencies)
 
 ## 4. Hypotheses
 
-### H1: Method 1 Calibration
-Live fragment yield will be within +/-0.10 of Method 1 (element-count) estimates for at least 2 of 3 tested site types (shopping M1=0.365, gitlab M1=0.484, wikipedia M1=0.517).
+### H1: Heuristic Calibration
+Heuristic yield estimates are within 15 percentage points of actual measured yield for all 3 tested site types (shopping, gitlab, wikipedia).
 
-### H2: Shopping Positive Control
-Shopping task will have highest actual fragment yield due to structured product data with interactive elements. Expected: actual yield >0.30 (based on M1 estimate 0.365 with live DOM typically having more elements than heuristic estimates). Shopping yield must exceed wikipedia yield.
+### H2: Positive Control
+Shopping task has the highest actual yield among the 3 tested site types, with >40% of DOM elements surviving the full pipeline.
 
-### H3: Wikipedia Negative Control
-Wikipedia task will have lowest actual fragment yield among the three site types. Expected: actual yield <0.60 (based on all heuristic estimates 0.517-1.0). Wikipedia yield must be less than both shopping and gitlab yields.
+### H3: Null Control
+Wikipedia task has the lowest actual yield among the 3 tested site types, with <60% of DOM elements surviving.
 
 ### H4: Truncation Sensitivity
-max_obs_length=1920 will be the binding constraint for shopping and gitlab (sensitivity ratio <0.7), matching heuristic estimates (shopping 0.37, gitlab 0.471).
+max_obs_length=1920 is the binding truncation constraint for shopping (sensitivity ratio <0.5), confirming the parent experiment's finding.
 
-## 5. Task Selection
+## 5. Infrastructure Setup
 
-Following parent handoff recommendation (EXP-INTEL-33945226776/handoff.json):
+### 5.1 Docker Deployment
 
-### 5.1 Shopping Task
-- **Site type**: shopping (consumer-facing e-commerce)
-- **Page type**: product listing page with interactive elements (buttons, textboxes, links)
-- **Rationale**: Highest heuristic element diversity (21 unique types), positive control for C-CROSSSITE
-- **Selection criteria**: Task must involve product browsing/search, not account management
+Deploy WebArena websites using Docker Compose:
+- **Shopping**: `ghcr.io/web-arena-x/webarena-shopping:latest` (e-commerce site)
+- **Gitlab**: `ghcr.io/web-arena-x/webarena-gitlab:latest` (code hosting)
+- **Wikipedia**: `ghcr.io/web-arena-x/webarena-wikipedia-like:latest` (CMS)
 
-### 5.2 Gitlab Task
-- **Site type**: gitlab (self-hosted code repository)
-- **Page type**: project/repository view with file tree, actions, search
-- **Rationale**: High heuristic element diversity (21 unique types), tests code-focused interaction patterns
-- **Selection criteria**: Task must involve repository navigation, not CI/CD configuration
+Each container runs a self-hosted website with pre-populated data.
 
-### 5.3 Wikipedia Task (Negative Control)
-- **Site type**: wikipedia (CMS, minimal interactive elements)
-- **Page type**: article page with navigation, content, minimal interactivity
-- **Rationale**: Lowest heuristic yield (0.517), only 16 tasks in corpus, tests CMS complexity bound
-- **Selection criteria**: Task must involve article reading/navigation, not editing
+### 5.2 Playwright Setup
 
-## 6. Measurement Protocol
+Install Playwright for headless browser automation:
+```bash
+pip install playwright
+playwright install chromium
+```
 
-### 6.1 Docker Deployment
-1. Clone WebArena repository at base_sha 8bc5034
-2. Build Docker images for shopping, gitlab, wikipedia sites
-3. Start container instances for each site type
-4. Verify containers are healthy and accessible
+### 5.3 WebArena Package
 
-### 6.2 Task Execution
-1. For each selected task:
-   a. Initialize WebArena environment with task definition
-   b. Navigate to initial URL
-   c. Extract observation using WebArena's observation interface:
-      - obs["text"]: formatted indented string with element IDs, roles, names, properties
-      - obs_nodes_info: dict mapping element ID to {backend_id, union_bound, text}
-   d. Record raw observation and metadata
-   e. Terminate environment
+Install WebArena's observation extraction code:
+```bash
+git clone https://github.com/web-arena-x/webarena.git /tmp/webarena
+cd /tmp/webarena && pip install -e .
+```
 
-### 6.3 Fragment Extraction Pipeline
-For each raw observation:
-1. Parse accessibility tree using research/intel/webarena_adapter.py
-2. Count total elements (N_total)
-3. Apply viewport filtering (current_viewport_only=True):
-   - Filter elements by IN_VIEWPORT_RATIO_THRESHOLD=0.6
-   - Count viewport elements (N_viewport)
-4. Apply IGNORED_ACTREE_PROPERTIES pruning:
-   - Remove properties: focusable, editable, readonly, level, settable, multiline, invalid
-   - Count pruned properties per element
-5. Compute formatted observation string length (L_formatted)
-6. Apply truncation at UTTERANCE_MAX_LENGTH=8192:
-   - Count elements surviving truncation (N_8192)
-7. Apply truncation at max_obs_length=1920:
-   - Count elements surviving truncation (N_1920)
+### 5.4 Task Selection
 
-### 6.4 Yield Computation
-For each truncation level:
-- yield_8192 = N_8192 / N_total
-- yield_1920 = N_1920 / N_total
-- sensitivity_ratio = yield_1920 / yield_8192
+Select 1 task per site type from WebArena's task definitions:
+- **Shopping**: A product search/listing task (high element density)
+- **Gitlab**: A project/code viewing task (moderate element density)
+- **Wikipedia**: An article reading task (low element density, negative control)
 
-Viewport filtering yield:
-- viewport_yield = N_viewport / N_total
+Task definitions are taken from WebArena's `test.raw.json` file at base_sha 8bc5034.
 
-## 7. Metrics
+## 6. Measurement Procedure
 
-### 7.1 Primary Metrics
-- **actual_yield_by_site_type**: {shopping: float, gitlab: float, wikipedia: float} at max_obs_length=1920
-- **method1_vs_actual_deviation**: |method1_estimate - actual_yield| for each site type
-- **truncation_sensitivity_ratio**: yield_1920 / yield_8192 for each site type
+### 6.1 Page Rendering
 
-### 7.2 Secondary Metrics
-- **total_elements_by_site_type**: N_total for each task
-- **formatted_string_length**: L_formatted for each observation
-- **viewport_filtering_effect**: 1 - viewport_yield for each site type
-- **property_pruning_effect**: average properties pruned per element
-- **aggregated_median_vs_actual_deviation**: |aggregated_median - actual_yield| for each site type
+For each selected task:
+1. Start the corresponding Docker container
+2. Navigate Playwright to the task's starting URL
+3. Wait for page load (networkidle)
+4. Capture the full accessibility tree using Playwright's `page.accessibility.snapshot()`
 
-### 7.3 Derived Metrics
-- **yield_ranking_agreement**: Does actual yield ranking match M1 ranking (wikipedia > gitlab > shopping)?
-- **method1_predictive_power**: Absolute deviation of M1 from actual yield, averaged across site types
-- **corpus_suitability_score**: Fraction of tested site types with actual yield >0.30
+### 6.2 Accessibility Tree Extraction
 
-## 8. Controls
+From the rendered page:
+1. Extract the raw accessibility tree (all elements, not viewport-filtered)
+2. Extract the viewport-filtered tree (`current_viewport_only=True`, viewport 1280x720)
+3. Apply `IGNORED_ACTREE_PROPERTIES` pruning (remove focusable, editable, readonly, level, settable, multiline, invalid properties)
+4. Format as WebArena's observation string: `[id] role "name" prop1: val1 prop2: val2`
 
-### 8.1 Positive Control (Shopping)
-- **Expected**: actual yield >0.30 (based on M1 estimate 0.365 with live DOM typically having more elements)
-- **Pass condition**: shopping yield >0.30 AND shopping yield > wikipedia yield
-- **Fail condition**: shopping yield <0.25 OR shopping yield < wikipedia yield
+### 6.3 Fragment Yield Measurement
 
-### 8.2 Negative Control (Wikipedia)
-- **Expected**: actual yield <0.60 (based on all heuristic estimates 0.517-1.0)
-- **Pass condition**: wikipedia yield <0.60 AND wikipedia yield < shopping yield AND wikipedia yield < gitlab yield
-- **Fail condition**: wikipedia yield >0.60 OR wikipedia yield > shopping yield
+For each task, compute:
+- **total_elements**: total elements in raw accessibility tree
+- **viewport_elements**: elements within viewport (1280x720)
+- **pruned_elements**: elements surviving IGNORED_ACTREE_PROPERTIES pruning
+- **truncated_8192**: elements within UTTERANCE_MAX_LENGTH=8192 chars
+- **truncated_1920**: elements within max_obs_length=1920 chars
+- **actual_yield**: elements surviving full pipeline / total elements
 
-### 8.3 Truncation Sensitivity Control
-- **Expected**: sensitivity_ratio <0.7 for shopping and gitlab (matching heuristic estimates shopping 0.37, gitlab 0.471)
-- **Pass condition**: shopping sensitivity_ratio <0.7 AND gitlab sensitivity_ratio <0.7
-- **Fail condition**: shopping sensitivity_ratio >0.8 OR gitlab sensitivity_ratio >0.8
+### 6.4 Comparison Metrics
 
-### 8.4 Adapter Functionality Control
-- **Expected**: webarena_adapter.py parses all observations without errors
-- **Pass condition**: all 3 observations parsed, no parsing errors
-- **Fail condition**: parsing errors on any observation
+For each task:
+- **yield_delta**: |actual_yield - heuristic_yield|
+- **yield_ratio**: actual_yield / heuristic_yield
+- **truncation_sensitivity**: truncated_1920 / truncated_8192
+- **element_diversity**: unique roles in extracted observation
 
-## 9. Decision Rules
+## 7. Decision Rules
+
+### 7.1 SUPPORTS
+If ALL of:
+1. yield_delta < 0.15 for shopping
+2. yield_delta < 0.15 for gitlab
+3. yield_delta < 0.15 for wikipedia
+4. Shopping has highest actual yield
+5. Wikipedia has lowest actual yield
+6. No infrastructure failures
+
+### 7.2 FALSIFIES
+If ANY of:
+1. yield_delta > 0.15 for any site type
+2. Shopping does NOT have highest actual yield (violates positive control)
+3. Wikipedia does NOT have lowest actual yield (violates null control)
+
+### 7.3 BLOCKED
+If:
+1. Docker images cannot be pulled (network/disk failure)
+2. Playwright cannot be installed or run
+3. WebArena environment fails to start for all 3 tasks
+4. Accessibility tree extraction fails for all 3 tasks
+
+## 8. Validity Threats
+
+### 8.1 Small Sample Size
+Only 3 tasks tested (1 per site type). This is a pilot calibration, not a powered test. Results may not generalize to the full 812-task corpus. **Mitigation**: report exact measurements and confidence intervals; design follow-up experiment with more tasks if SUPPORTS.
+
+### 8.2 Task Selection Bias
+Selected tasks may not be representative of their site type. A product listing page may have different yield than a product detail page. **Mitigation**: select tasks with typical intent descriptions (not edge cases); report which specific task was tested.
+
+### 8.3 Infrastructure Failure
+Docker deployment may fail due to network, disk, or dependency constraints. This is NOT a scientific falsification. **Mitigation**: distinguish BLOCKED (infrastructure) from FALSIFIES (scientific). If BLOCKED, document exact failure and smallest next action.
+
+### 8.4 Playwright vs WebArena Rendering
+Playwright's accessibility tree extraction may differ from WebArena's internal extraction (which uses a custom browser). **Mitigation**: use WebArena's own observation extraction code where possible; document any differences.
+
+### 8.5 Single Observation Per Task
+Each task produces one observation (initial page load). Real agent interaction produces multiple observations across page navigations. **Mitigation**: this experiment measures initial page complexity, not full task trajectory. Follow-up can measure multi-step yield.
+
+## 9. Expected Outcomes
 
 ### 9.1 SUPPORTS
-If ALL of:
-1. Docker deployment succeeds for all 3 tasks
-2. heuristic_vs_actual_deviation <=0.10 for >=2 site types (using M1 estimates)
-3. Shopping yield >0.30
-4. Gitlab yield >0.30
-5. Wikipedia yield < shopping yield
-6. Wikipedia yield < gitlab yield
-
-Then: C-CROSSSITE and C-LLM-INHERIT move toward EXPERIMENTAL with caveat that 3-task sample is small. Product lane can proceed with REQUIRES_TRANSFORM implementation.
+- Heuristic estimates are calibrated within 15pp
+- The 812-task corpus is suitable for C-CROSSSITE/C-LLM-INHERIT testing
+- Graph lane can proceed with Docker integration
+- Intel provides the task-type ranking grounded in live measurements
 
 ### 9.2 FALSIFIES
-If ANY of:
-1. Shopping yield <0.25 OR gitlab yield <0.35
-2. Wikipedia yield > shopping yield OR Wikipedia yield > gitlab yield
-3. heuristic_vs_actual_deviation >0.15 for >=2 site types (using M1 estimates)
+- Heuristic estimates are not calibrated
+- The 812-task corpus yield is unknown
+- Intel should reassess VisualWebArena, Mind2Web, or other benchmarks
+- Graph lane should not deploy Docker on unvalidated corpus
 
-Then: 2-site corpus remains practical bound. Intel should assess VisualWebArena/Mind2Web as alternatives.
+### 9.3 BLOCKED
+- Infrastructure barriers prevent live measurement
+- Smallest next action: resolve specific Docker/Playwright/dependency failure
+- Does NOT inform scientific question; informs infrastructure investment
 
-### 9.3 MIXED
-If NOT SUPPORTS AND NOT FALSIFIES:
-- Shopping or gitlab yield between 0.25-0.30
-- OR heuristic_vs_actual_deviation between 0.10-0.15 for >=1 site type
-- OR truncation sensitivity inconsistent with estimates
-
-Then: Inconclusive. Need larger task sample (5-10 tasks per site type).
-
-### 9.4 MEASUREMENT_INVALID
-If:
-1. Docker deployment fails for >=1 task
-2. Accessibility tree parsing fails for >=1 observation
-3. Observation text is empty for >=1 task
-4. WebArena environment produces invalid observations (e.g., screenshot-only without DOM)
-
-## 10. Validity Threats
-
-### 10.1 Sample Size
-With only 3 tasks (1 per site type), estimates have high sampling error. A single task may not be representative of its site type. Mitigation: report confidence intervals and acknowledge small sample in verdict. The experiment is designed as a proof-of-concept for Docker deployment feasibility and heuristic calibration, not a comprehensive yield survey.
-
-### 10.2 Task Selection Bias
-Selected tasks may not be representative of their site types. Mitigation: select tasks following parent recommendation criteria (product listing for shopping, project view for gitlab, article for wikipedia). Document exact task URLs and characteristics.
-
-### 10.3 Docker vs Production Environment
-WebArena Docker environment may differ from production websites in DOM structure, JavaScript rendering, and element counts. Mitigation: acknowledge Docker-specific findings. If Docker yield is substantially different from heuristic estimates, this itself is informative about Docker-based benchmark validity.
-
-### 10.4 Accessibility Tree Completeness
-WebArena's accessibility tree may not capture all DOM elements (e.g., elements hidden from assistive technology). Mitigation: compare accessibility_tree mode vs html mode if both are available. Acknowledge representation loss in validity_notes.
-
-### 10.5 Viewport Dependency
-Viewport filtering depends on viewport size and scroll position. WebArena uses fixed viewport dimensions. Mitigation: measure with current_viewport_only=True (default) and=False to bound viewport effect. Report both yields.
-
-### 10.6 Heuristic Estimate Uncertainty
-Heuristic estimates from EXP-INTEL-33945226776 have known weaknesses: Method 2 is degenerate, Method 1 uses assumed viewport coverage and pruning fractions, Kruskal-Wallis p=0.999 shows no discrimination. Mitigation: use M1 as primary calibration target (most conservative), also report deviation from aggregated median for comparison.
-
-## 11. Analysis Plan
-
-1. **Docker Setup**: Deploy WebArena Docker for shopping, gitlab, wikipedia sites at base_sha 8bc5034
-2. **Task Execution**: Run 3 tasks, extract raw observations (obs["text"] + obs_nodes_info)
-3. **Parsing**: Parse accessibility trees using webarena_adapter.py, verify no errors
-4. **Element Counting**: Count total elements, viewport elements, pruned elements per observation
-5. **Truncation Measurement**: Compute formatted string length, measure yield at 8192 and 1920
-6. **Yield Computation**: Compute actual_yield, viewport_yield, sensitivity_ratio per site type
-7. **Heuristic Comparison**: Compare actual yield to M1 estimates (primary) and aggregated median (secondary)
-8. **Control Checks**: Verify positive control (shopping >0.30), negative control (wikipedia <0.60), truncation sensitivity (<0.7), adapter functionality (no errors)
-9. **Decision**: Apply frozen decision rule (SUPPORTS/FALSIFIES/MIXED/MEASUREMENT_INVALID)
-10. **Reporting**: Report all metrics, controls, deviations, and validity threats
-
-## 12. Deviation Policy
+## 10. Deviation Policy
 
 Any deviation from this preregistration will be labeled EXPLORATORY and cannot support confirmatory claims. A new confirmatory claim requires a new preregistration.
 
-Deviations that require labeling:
-- Changing task selection criteria
-- Modifying truncation thresholds (8192/1920)
-- Changing viewport filtering parameters
-- Adding or removing site types
-- Modifying yield computation formula
-- Changing decision rule thresholds
+## 11. Freeze Statement
 
-## 13. Freeze Statement
-
-This preregistration is frozen BEFORE any Docker deployment, task execution, or outcome data inspection. The experiment will be executed exactly as described here.
+This preregistration is frozen BEFORE any Docker deployment, Playwright installation, or outcome data is collected. The experiment will be executed exactly as described here.
