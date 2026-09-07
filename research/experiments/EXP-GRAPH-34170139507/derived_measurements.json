@@ -1,0 +1,78 @@
+{
+  "baseline_pass": true,
+  "baseline_pass_count": 6,
+  "baseline_total": 6,
+  "baseline_details": [
+    {
+      "id": "cold",
+      "pass": true,
+      "status": "UNKNOWN",
+      "url": null,
+      "http_id": null
+    },
+    {
+      "id": "literal-only-original",
+      "pass": true,
+      "status": "EXECUTABLE",
+      "url": "https://jsonplaceholder.typicode.com/posts/1",
+      "http_id": 1
+    },
+    {
+      "id": "literal-only-unseen",
+      "pass": true,
+      "status": "EXECUTABLE",
+      "url": "https://jsonplaceholder.typicode.com/posts/1",
+      "http_id": 1
+    },
+    {
+      "id": "param-only-original",
+      "pass": true,
+      "status": "EXECUTABLE",
+      "url": "https://jsonplaceholder.typicode.com/posts/1",
+      "http_id": 1
+    },
+    {
+      "id": "param-only-unseen",
+      "pass": true,
+      "status": "EXECUTABLE",
+      "url": "https://jsonplaceholder.typicode.com/posts/7",
+      "http_id": 7
+    },
+    {
+      "id": "compete-param-higher",
+      "pass": true,
+      "status": "EXECUTABLE",
+      "url": "https://jsonplaceholder.typicode.com/posts/7",
+      "http_id": 7
+    }
+  ],
+  "cold_baseline_pass": true,
+  "compete_equal_param_wins": true,
+  "compete_equal_details": {
+    "mechanism": "param-fetch-posts",
+    "url": "https://jsonplaceholder.typicode.com/posts/7",
+    "http_id": 7,
+    "http_status": 200
+  },
+  "literal_does_not_generalize": true,
+  "literal_unseen_details": {
+    "mechanism": "literal-fetch-posts-1",
+    "url": "https://jsonplaceholder.typicode.com/posts/1",
+    "http_id": 1
+  },
+  "param_generalizes": true,
+  "param_unseen_details": {
+    "mechanism": "param-fetch-posts",
+    "url": "https://jsonplaceholder.typicode.com/posts/7",
+    "http_id": 7
+  },
+  "multi_slot_dominance": false,
+  "multi_slot_details": {
+    "mechanism": "param-2slot",
+    "url": "https://jsonplaceholder.typicode.com/posts/1/tech",
+    "http_valid": false,
+    "http_status": null
+  },
+  "conditions_met_count": 8,
+  "conditions_total": 8
+}
