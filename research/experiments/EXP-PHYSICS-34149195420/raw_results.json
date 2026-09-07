@@ -1,0 +1,105 @@
+{
+  "experiment_id": "EXP-PHYSICS-34149195420",
+  "primary_dataset": {
+    "n_transitions": 500,
+    "n_trajectories": 25,
+    "trajectory_length": 20,
+    "non_leakage_violations": 0,
+    "unique_urls": 3,
+    "unique_titles": 8
+  },
+  "positive_control_dataset": {
+    "n_transitions": 200,
+    "n_trajectories": 10,
+    "trajectory_length": 20,
+    "non_leakage_violations": 0
+  },
+  "pmi_by_representation": {
+    "url_only": {
+      "mean_pmi": 0.6933101309975662,
+      "N": 500,
+      "unique_states": 3,
+      "unique_actions": 4,
+      "unique_sa_pairs": 12
+    },
+    "url_title": {
+      "mean_pmi": 1.9701557636973992,
+      "N": 500,
+      "unique_states": 8,
+      "unique_actions": 4,
+      "unique_sa_pairs": 32
+    },
+    "url_title_form": {
+      "mean_pmi": 1.9701557636973992,
+      "N": 500,
+      "unique_states": 8,
+      "unique_actions": 4,
+      "unique_sa_pairs": 32
+    }
+  },
+  "permutation_tests": {
+    "url_only": {
+      "observed_pmi": 0.6933101309975662,
+      "p_value": 0.000999000999000999,
+      "null_mean": 0.020311385548241814,
+      "null_std": 0.009262032180103548,
+      "effect_size_d": 72.66210399215007
+    },
+    "url_title": {
+      "observed_pmi": 1.9701557636973992,
+      "p_value": 0.000999000999000999,
+      "null_mean": 0.1217595741948245,
+      "null_std": 0.023027726139070483,
+      "effect_size_d": 80.268289554063
+    },
+    "url_title_form": {
+      "observed_pmi": 1.9701557636973992,
+      "p_value": 0.000999000999000999,
+      "null_mean": 0.1217595741948245,
+      "null_std": 0.023027726139070483,
+      "effect_size_d": 80.268289554063
+    }
+  },
+  "positive_control": {
+    "pmi": 1.9114573396484875,
+    "p_value": 0.000999000999000999,
+    "passes": true
+  },
+  "null_control": {
+    "null_mean_pmi": 0.1217595741948245,
+    "p_value": 0.000999000999000999,
+    "passes": false
+  },
+  "decision_checks": {
+    "positive_control": {
+      "pmi": 1.9114573396484875,
+      "p_value": 0.000999000999000999,
+      "threshold": 0.5,
+      "passes": true
+    },
+    "null_control": {
+      "null_mean_pmi": 0.1217595741948245,
+      "p_value": 0.000999000999000999,
+      "passes": false
+    },
+    "representation_significance": {
+      "url_title_pmi": 1.9701557636973992,
+      "url_title_p": 0.000999000999000999,
+      "url_title_sig": true,
+      "url_title_form_pmi": 1.9701557636973992,
+      "url_title_form_p": 0.000999000999000999,
+      "url_title_form_sig": true,
+      "bonferroni_threshold": 0.025,
+      "passes": true
+    },
+    "richer_vs_url_only": {
+      "url_only_pmi": 0.6933101309975662,
+      "url_title_pmi": 1.9701557636973992,
+      "url_title_form_pmi": 1.9701557636973992,
+      "passes": true
+    }
+  },
+  "survives": false,
+  "outcome": "FALSIFIES",
+  "status": "COMPLETE"
+}
