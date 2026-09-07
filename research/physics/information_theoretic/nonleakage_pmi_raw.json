@@ -1,0 +1,122 @@
+{
+  "experiment_id": "EXP-PHYSICS-34071626363",
+  "lane": "physics",
+  "datasets_loaded": {
+    "live_wikipedia": 880,
+    "live_python_docs": 880,
+    "positive_control": 600
+  },
+  "non_leakage_counts": {
+    "live_wikipedia": 67,
+    "live_python_docs": 21
+  },
+  "non_leakage_fractions": {
+    "live_wikipedia": 0.07613636363636364,
+    "live_python_docs": 0.023863636363636365
+  },
+  "pmi_all_transitions": {
+    "live_wikipedia": {
+      "mean_pmi": 1.073053425557045,
+      "N": 880,
+      "unique_states": 551,
+      "unique_sa_pairs": 809
+    },
+    "live_python_docs": {
+      "mean_pmi": 1.5015537212838317,
+      "N": 880,
+      "unique_states": 206,
+      "unique_sa_pairs": 494
+    }
+  },
+  "pmi_nonleakage": {
+    "live_wikipedia": {
+      "mean_pmi": 0.0,
+      "N": 67,
+      "unique_states": 58,
+      "unique_actions": 6,
+      "unique_sa_pairs": 58
+    },
+    "live_python_docs": {
+      "mean_pmi": 0.8736479080287151,
+      "N": 21,
+      "unique_states": 14,
+      "unique_actions": 8,
+      "unique_sa_pairs": 20
+    }
+  },
+  "pmi_hashed_actions": {
+    "live_wikipedia": {
+      "mean_pmi": 0.0,
+      "N": 67
+    },
+    "live_python_docs": {
+      "mean_pmi": 0.8736479080287151,
+      "N": 21
+    }
+  },
+  "pmi_action_type_categorical": {
+    "live_wikipedia": {
+      "mean_pmi": 0.0,
+      "N": 67
+    },
+    "live_python_docs": {
+      "mean_pmi": 0.0019510371931574365,
+      "N": 21
+    }
+  },
+  "permutation_tests": {
+    "live_wikipedia": {
+      "observed_pmi": 0.0,
+      "p_value": 1.0,
+      "null_mean": 0.001021219482067978,
+      "null_std": 0.0014356001411064219,
+      "effect_size_d": -0.7113537069458079
+    },
+    "live_python_docs": {
+      "observed_pmi": 0.8736479080287151,
+      "p_value": 0.6673326673326674,
+      "null_mean": 0.8431528733675799,
+      "null_std": 0.043158856704258106,
+      "effect_size_d": 0.706576517309052
+    }
+  },
+  "positive_control": {
+    "pmi": 0.8554147966268488,
+    "p_value": 0.000999000999000999,
+    "passes": false
+  },
+  "null_control": {
+    "null_mean_pmi": 0.001021219482067978,
+    "p_value": 1.0,
+    "passes": true
+  },
+  "decision_checks": {
+    "check_1_wiki_nonleakage": {
+      "pmi": 0.0,
+      "p_raw": 1.0,
+      "p_threshold": 0.025,
+      "passes": false
+    },
+    "check_2_python_nonleakage": {
+      "pmi": 0.8736479080287151,
+      "p_raw": 0.6673326673326674,
+      "p_threshold": 0.025,
+      "passes": false
+    },
+    "check_3_positive_control": {
+      "pmi": 0.8554147966268488,
+      "passes": false
+    },
+    "check_4_null_control": {
+      "null_mean_pmi": 0.001021219482067978,
+      "p_value": 1.0,
+      "passes": true
+    },
+    "check_5_no_pipeline_errors": {
+      "passes": true
+    }
+  },
+  "survives": false,
+  "outcome": "FALSIFIES",
+  "status": "COMPLETE"
+}
