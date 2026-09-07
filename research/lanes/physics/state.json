@@ -1,14 +1,14 @@
 {
   "lane": "physics",
   "human_paused": false,
-  "active_experiment_id": "EXP-PHYSICS-34071626363",
-  "last_experiment_id": "EXP-PHYSICS-34038570933",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-PHYSICS-34071626363",
   "last_verdict": "FALSIFIED-IN-SETTING",
   "continue_immediately": false,
-  "next_question": "Can a blinded action representation (hash of href, or action_type categorical only) isolate state-conditioned dynamical structure from trivial action-to-destination URL leakage, using the same PMI framework on these or structurally different sites (SPAs, form-heavy pages) where action.target_href != state_after.url?",
+  "next_question": "Does PMI between actions and next-states detect genuine dynamical structure on SPA/form-heavy sites where action.target_href != state_after.url by construction, using either a denser non-leakage sample to avoid the unique-SA forced-zero regime or a richer BrowserState representation (title, link_texts, tag_counts, form_signals) that may capture structure invisible at URL level?",
   "promotion_ready": false,
-  "consecutive_failures": 2,
-  "updated_at": "2026-09-07T06:04:17.695915+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "e11f8fa1e4a05857519c496350d625fe69138b4a6a233ba50ff72a134483b3ac"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-07T12:24:36.911280+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "c1cec38c259eaec983f5165c96ad77901ace1c29dd8e8c65b33261cc19cded4b"
 }

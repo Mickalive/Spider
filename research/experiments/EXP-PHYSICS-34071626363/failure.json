@@ -1,9 +1,0 @@
-{
-  "stage": "director",
-  "category": "VALIDATION_FAILURE",
-  "message": "invalid claim update status: FALSIFIED-IN-SETTING",
-  "retryable": false,
-  "recorded_at": "2026-09-07T06:04:17.695586+00:00",
-  "github_run_id": "34089067064",
-  "github_run_attempt": "1"
-}
