@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34170139507",
+  "lane": "graph",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-PARAM-INHERIT",
+      "status": "EXPERIMENTAL",
+      "reason": "Frozen decision rule HTTP-PARAM-INHERIT-SURVIVES unsatisfiable: multi-slot positive control (POS_MULTI_SLOT) failed with HTTP 404 on /posts/1/tech — endpoint assumption error, not network outage. However, core hazard (compete-equal) is validated under HTTP execution with patch-only fix: param beats literal at equal confidence 0.95 for unseen id=7, bound URL /posts/7, HTTP 200 JSON id=7. All 6 baselines preserve. Fix NOT committed to production HEAD (monkey-patched). Multi-slot control not discriminating (order-dependent without fix). Claim ceiling is narrow: patch-only single-id (id=7) HTTP generalization for 0-vs-1 slot competition on simple REST endpoint. C-PARAM-INHERIT remains EXPERIMENTAL — not promoted, not falsified."
+    }
+  ],
+  "product_action": "NO_ACTION",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "After committing the parameter-slot-count fix to production HEAD: does the literal-vs-param equal-confidence competition remain param-winning in committed HEAD (re-validating the original hazard post-commit), and does the fix generalize to real-web endpoints with DOM, auth, session state, and drift?",
+  "reason": "Frozen decision rule HTTP-PARAM-INHERIT-SURVIVES requires all 7 criteria including multi-slot HTTP 200. Criterion (5) fails: multi-slot endpoint /posts/1/tech returns 404 (jsonplaceholder lacks nested routes). This is a design-assumption error (audit V_ENDPOINT_ASSUMPTION_INVALID), not a kernel failure — resolution succeeded (param-2slot wins). Producer misclassified 404 as network_failure (audit V_NETWORK_MISCLASSIFICATION). Core hazard test PASSED under HTTP execution (compete-equal: param wins, HTTP 200, id=7), all 6 baselines preserve, no Python exceptions. But: fix is monkey-patched only (HEAD unfixed, audit V_FIX_NOT_COMMITTED); multi-slot control not discriminating vs HEAD without fix due to insertion order (audit V_POS_CONTROL_NOT_DISCRIMINATING); single unseen id=7 only (audit V_SINGLE_ID_AND_ENDPOINT_NARROW). The patch-only single-id HTTP generalization for 0-vs-1 slot competition is established; multi-slot, real-web, multiple-ids, and post-commit behavior remain open. Product promotion blocked: fix not committed, not tested on production HEAD.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-34170139507/spec.json",
+    "research/experiments/EXP-GRAPH-34170139507/result.json",
+    "research/experiments/EXP-GRAPH-34170139507/audit.json",
+    "research/experiments/EXP-GRAPH-34170139507/raw_evidence.json",
+    "research/experiments/EXP-GRAPH-34170139507/derived_measurements.json",
+    "research/experiments/EXP-GRAPH-34170139507/report.md",
+    "research/experiments/EXP-GRAPH-34170139507/provenance.json",
+    "research/experiments/EXP-GRAPH-34170139507/prereg.md",
+    "research/experiments/EXP-GRAPH-34170139507/run_experiment.py",
+    "research/experiments/EXP-GRAPH-34170139507/freeze.json",
+    "src/spider/kernel.py L112 sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+    "research/experiments/EXP-GRAPH-33998605047/handoff.json sha256 3bea416e31107aaaaeb156b49346268726ce6edf72da12f3371060c282e4c37d"
+  ]
+}

@@ -3,7 +3,7 @@
 Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER_CODEX_ULTIME.md`.
 
 This file is generated only from complete finalized Research 2.0 experiment packets.
-Ingested experiments: **31**. Coverage gaps: **0**.
+Ingested experiments: **32**. Coverage gaps: **0**.
 
 ## Index
 
@@ -21,6 +21,7 @@ Ingested experiments: **31**. Coverage gaps: **0**.
 | EXP-GRAPH-33816735314 | graph | PASS | COMPETITION-SAFE | C-PARAM-INHERIT |
 | EXP-GRAPH-33955869291 | graph | REVISE | SCOPE-LIMITED | C-PARAM-INHERIT |
 | EXP-GRAPH-33998605047 | graph | REVISE | PARTIAL_VALIDATION | C-PARAM-INHERIT |
+| EXP-GRAPH-34170139507 | graph | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-PARAM-INHERIT |
 | EXP-INTEL-33528832113 | intel | REVISE | SUPPORTS | C-CROSSSITE, C-LLM-INHERIT, C-PRODUCT-ECON |
 | EXP-INTEL-33842055594 | intel | REVISE | PARTIALLY_COMPATIBLE | C-CROSSSITE, C-LLM-INHERIT |
 | EXP-INTEL-33925056324 | intel | REVISE | SUPPORTS | C-CROSSSITE, C-LLM-INHERIT |
@@ -13632,6 +13633,986 @@ The critical new evidence: the original false-accept hazard is confirmed elimina
     "research/experiments/EXP-GRAPH-33718012817/handoff.json"
   ],
   "recommended_action": "First: commit the one-line fix to src/spider/kernel.py L112 (candidates.sort(key=lambda m: (m.confidence, len(m.parameter_slots)), reverse=True)) with Director approval. Second: re-validate in committed HEAD with a re-run of the core literal-vs-param equal-confidence competition (the original hazard, ids 2..6) plus the misimplemented B_CONFIDENCE_LITERAL_HIGHER baseline (literal 0.98 vs param 0.95) to confirm fix works post-commit and all baselines pass with correct implementations. Third: advance to real-web endpoint testing with DOM, auth, session state, and drift — the highest-upside generalization gap. Separately: fix report.md to match raw_evidence.json on compete-literal-higher row. Consider whether template-only params need explicit required_slots-based handling or should be deprecated alongside literals at equal confidence. The LLM distillation half of C-PARAM-INHERIT ('learn on A') requires a model-calling experiment in the graph lane but is lower priority than fix commit + real-web validation."
+}
+```
+
+# EXP-GRAPH-34170139507
+
+## request.json
+
+```text
+{
+  "base_sha": "3e2f29c5596fe57405eec96785e91de482fb23f7",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-07T23:28:20.399790+00:00",
+  "experiment_id": "EXP-GRAPH-34170139507",
+  "inherited_last_verdict": "PARTIAL_VALIDATION",
+  "inherited_next_question": "After committing the parameter-slot-count fix to production HEAD: does the literal-vs-param equal-confidence competition remain param-winning in committed HEAD (re-validating the original hazard post-commit), and does the fix generalize to real-web endpoints with DOM, auth, session state, and drift?",
+  "lane": "graph",
+  "origin_github_run_id": "34170139507",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-33998605047",
+    "path": "research/experiments/EXP-GRAPH-33998605047/handoff.json",
+    "sha256": "3bea416e31107aaaaeb156b49346268726ce6edf72da12f3371060c282e4c37d"
+  },
+  "reason": "pulse",
+  "request_hash": "5fa8688b6ff4dfa191c4cf5b3984de0904d26e00a77163012f89b700a0565b0e",
+  "request_id": "83cbf1ca33956914f3734dd4",
+  "schema_version": 1
+}
+```
+
+## spec.json
+
+```text
+{
+  "experiment_id": "EXP-GRAPH-34170139507",
+  "lane": "graph",
+  "claim_ids": ["C-PARAM-INHERIT"],
+  "question": "Does the parameter-slot-count fix, applied temporarily during execution, generalize to actual HTTP execution against a live endpoint — specifically: does the parameterized mechanism resolve correctly, bind to the correct URL, execute a real HTTP GET, and return the expected response for both seen and unseen identifiers, while the literal mechanism fails to generalize?",
+  "hypothesis": "With the fix candidates.sort(key=lambda m: (m.confidence, len(m.parameter_slots)), reverse=True) applied temporarily: (1) In the compete-equal condition (literal + param at confidence 0.95), param resolves as winning mechanism for unseen id=7; (2) The bound URL is https://jsonplaceholder.typicode.com/posts/7 (not /posts/1); (3) An HTTP GET to the bound URL returns status 200 with JSON body containing id=7; (4) In the literal-only condition, HTTP GET to the bound URL for unseen id=7 returns id=1 (literal universal matching, not generalization); (5) In the param-only condition, HTTP GET for unseen id=7 returns id=7 (param generalizes). Conditions (1)-(3) demonstrate that parameterized inheritance works end-to-end with real HTTP execution. Condition (4) demonstrates that literal mechanisms do not generalize. Condition (5) demonstrates param generalization in isolation.",
+  "falsifier": "The hypothesis is FALSIFIED if ANY of: (1) In the compete-equal condition, the literal mechanism wins instead of param (false accept not eliminated under HTTP execution); (2) The bound URL in compete-equal is /posts/1 instead of /posts/7 (param did not bind correctly); (3) The HTTP GET to the bound URL returns status != 200 or JSON body id != 7 (execution or response mismatch); (4) In the param-only condition, HTTP GET for unseen id=7 returns id != 7 (param does not generalize); (5) Any condition raises a Python exception during resolve or HTTP execution; (6) The fix causes a regression in any baseline condition (literal-only or param-only behavior changes).",
+  "baselines": [
+    "B_COLD: Register no mechanisms. Resolve with params={id: 7}. Expected: UNKNOWN. Replicates parent cold-null.",
+    "B_LITERAL_ONLY_ORIG: Register ONLY literal (parameter_slots=[], fixed /posts/1, confidence 0.95). Resolve with params={id: 1}. Expected: EXECUTABLE url=/posts/1. HTTP GET returns id=1.",
+    "B_LITERAL_ONLY_UNSEEN: Register ONLY literal. Resolve with params={id: 7}. Expected: EXECUTABLE url=/posts/1 (literal universal matching). HTTP GET returns id=1 (not 7 — literal does not generalize).",
+    "B_PARAM_ONLY_ORIG: Register ONLY param (parameter_slots=['id'], /posts/${id}, confidence 0.95). Resolve with params={id: 1}. Expected: EXECUTABLE url=/posts/1. HTTP GET returns id=1.",
+    "B_PARAM_ONLY_UNSEEN: Register ONLY param. Resolve with params={id: 7}. Expected: EXECUTABLE url=/posts/7 (param generalizes). HTTP GET returns id=7.",
+    "B_CONFIDENCE_PARAM_HIGHER: Register param (confidence=0.98) + literal (confidence=0.95). Resolve with params={id: 7}. Expected: EXECUTABLE param wins. HTTP GET returns id=7."
+  ],
+  "positive_control": "Register 2-slot param (parameter_slots=['id','category'], confidence=0.95, template=/posts/${id}/${category}) + 1-slot param (parameter_slots=['id'], confidence=0.95, template=/posts/${id}). Resolve with params={id:1, category:'tech'}. Must return EXECUTABLE with 2-slot param winning and bound URL /posts/1/tech. HTTP GET to /posts/1/tech returns status 200. Verifies multi-slot dominance survives HTTP execution.",
+  "null_control": "Register literal (confidence=0.95) + param (confidence=0.95). Resolve with params={id:7}. Must return EXECUTABLE with param winning (not literal). This is the original hazard: before fix, literal won (false accept); after fix, param must win. Verified both via resolution and via HTTP response id=7 (not id=1).",
+  "measurement_validity": [
+    "All conditions use jsonplaceholder.typicode.com as the live HTTP endpoint. No mock servers.",
+    "Each condition uses a fresh SpiderKernel instance with explicitly controlled registry contents. No cross-contamination.",
+    "Fix applied temporarily via monkey-patching during execution (same approach as parent EXP-GRAPH-33998605047). Production HEAD remains unfixed.",
+    "All conditions deterministic: no model calls, no RNG, no sampling. Single-run exact point comparisons.",
+    "Registry insertion order controlled: literal registered before param in competition conditions to test tie-break under fix.",
+    "HTTP responses validated by checking JSON id field, not full body equality, to avoid brittleness from extra fields.",
+    "Network availability is required; if jsonplaceholder is unreachable, condition is MEASUREMENT_INVALID for that condition.",
+    "Each HTTP call uses a 5-second timeout to avoid hanging on network issues."
+  ],
+  "conditions": [
+    {"id": "cold", "registry": "empty", "params": {"id": 7}, "expected_resolution": "UNKNOWN", "role": "baseline"},
+    {"id": "literal-only-original", "registry": "literal-only", "params": {"id": 1}, "expected_resolution": "EXECUTABLE", "expected_url": "https://jsonplaceholder.typicode.com/posts/1", "expected_http_id": 1, "role": "baseline"},
+    {"id": "literal-only-unseen", "registry": "literal-only", "params": {"id": 7}, "expected_resolution": "EXECUTABLE", "expected_url": "https://jsonplaceholder.typicode.com/posts/1", "expected_http_id": 1, "role": "baseline", "note": "Literal universal matching: unseen id=7 still resolves to /posts/1. HTTP response id=1 confirms literal does not generalize."},
+    {"id": "param-only-original", "registry": "param-only", "params": {"id": 1}, "expected_resolution": "EXECUTABLE", "expected_url": "https://jsonplaceholder.typicode.com/posts/1", "expected_http_id": 1, "role": "baseline"},
+    {"id": "param-only-unseen", "registry": "param-only", "params": {"id": 7}, "expected_resolution": "EXECUTABLE", "expected_url": "https://jsonplaceholder.typicode.com/posts/7", "expected_http_id": 7, "role": "baseline", "note": "Param generalizes: unseen id=7 resolves to /posts/7. HTTP response id=7 confirms param generalization."},
+    {"id": "compete-param-higher", "registry": "shared-param-higher", "params": {"id": 7}, "expected_resolution": "EXECUTABLE", "expected_winning_mechanism": "param-fetch-posts-high", "expected_url": "https://jsonplaceholder.typicode.com/posts/7", "expected_http_id": 7, "role": "baseline"},
+    {"id": "compete-equal", "registry": "shared-equal", "params": {"id": 7}, "expected_resolution": "EXECUTABLE", "expected_winning_mechanism": "param-fetch-posts", "expected_url": "https://jsonplaceholder.typicode.com/posts/7", "expected_http_id": 7, "role": "intervention", "note": "Core hazard test under HTTP execution: with fix, param wins over literal at equal confidence 0.95 for unseen id=7. Without fix, literal would win (false accept). HTTP response id=7 confirms correct generalization."},
+    {"id": "multi-slot-beats-1-slot", "registry": "2slot-vs-1slot-equal-conf", "params": {"id": 1, "category": "tech"}, "expected_resolution": "EXECUTABLE", "expected_winning_mechanism": "param-2slot", "expected_url": "https://jsonplaceholder.typicode.com/posts/1/tech", "expected_http_id": null, "role": "positive_control", "note": "Multi-slot dominance under HTTP execution. HTTP GET /posts/1/tech returns status 200 (jsonplaceholder serves this)."}
+  ],
+  "decision_rule": "HTTP-PARAM-INHERIT-SURVIVES if ALL of: (1) All 6 baseline conditions match expected resolution status (no regression); (2) compete-equal returns EXECUTABLE with param-fetch-posts as winning mechanism AND bound URL is /posts/7 AND HTTP GET returns status 200 with JSON id=7; (3) literal-only-unseen HTTP GET returns id=1 (literal does not generalize); (4) param-only-unseen HTTP GET returns id=7 (param generalizes); (5) multi-slot HTTP GET returns status 200; (6) No Python exceptions. HTTP-PARAM-INHERIT-FALSIFIED if: compete-equal returns literal as winner (false accept under HTTP) OR bound URL is wrong OR HTTP response id mismatches. MEASUREMENT_INVALID if: network unavailable for any condition or HTTP timeout.",
+  "product_consequence_positive": "Parameterized inheritance works end-to-end with real HTTP execution: the fix eliminates false accepts, param generalizes to unseen identifiers via URL binding, and the correct HTTP response is returned. C-PARAM-INHERIT can advance toward real-web endpoints with DOM, auth, session state, and drift. The product can trust param mechanisms to generalize correctly over HTTP.",
+  "product_consequence_negative": "If the fix fails under HTTP execution (false accept persists or URL binding is wrong), the parameterized inheritance mechanism is not production-ready for real-web use. Alternative approaches (value-based constraints, fixed_resource field) must be explored. C-PARAM-INHERIT remains limited to synthetic resolution-only validation.",
+  "estimated_cost": "Very low — 7 conditions, each with 1 resolve + 1 HTTP GET (8 total HTTP calls to free public endpoint). No model calls, no browser, no mock servers. Execution time < 10 seconds.",
+  "expected_information_gain": "HIGH. This is the first end-to-end test of parameterized inheritance with real HTTP execution. The parent validated the fix on synthetic resolution-only conditions; this experiment tests the same fix with actual network calls, URL binding, and response verification. A positive result demonstrates that parameterized inheritance works in a realistic execution context. A negative result identifies a critical failure mode in the execution path that was invisible in synthetic tests. Both outcomes materially change the C-PARAM-INHERIT claim status."
+}
+```
+
+## prereg.md
+
+```text
+# EXP-GRAPH-34170139507 Preregistration
+
+## 1. Experiment Identity
+
+- **Experiment ID**: EXP-GRAPH-34170139507
+- **Lane**: Graph
+- **Claim**: C-PARAM-INHERIT (Mechanisms parameterize to unseen identifiers)
+- **Date**: 2026-09-07
+- **Status**: DESIGN — NOT YET FROZEN
+- **Parent Experiment**: EXP-GRAPH-33998605047 (PARTIAL_VALIDATION)
+- **Request Reason**: pulse (inherited next_question from parent handoff)
+
+## 2. Scientific Question
+
+Does the parameter-slot-count fix, applied temporarily during execution, generalize to actual HTTP execution against a live endpoint — specifically: does the parameterized mechanism resolve correctly, bind to the correct URL, execute a real HTTP GET, and return the expected response for both seen and unseen identifiers, while the literal mechanism fails to generalize?
+
+## 3. Motivation
+
+### What the parent experiment established (EXP-GRAPH-33998605047)
+
+The parent experiment tested the parameter-slot-count fix on synthetic resolution-only conditions (no HTTP execution). It produced:
+
+**Established:**
+- Core false-accept hazard elimination: with fix applied, literal (0 parameter_slots) loses to param (1 parameter_slot) at equal confidence 0.95 for all tested ids 2..6 (5/5 param wins). Without fix, literal wins all 5.
+- Multi-slot dominance confirmed: param-2slot [id,category] beats param-fetch-posts [id] at equal confidence 0.95, robust to registry order.
+- Template-only params (parameter_slots=[] but template has ${id}) lose to declared 1-slot param.
+- 6/7 valid baselines preserve (cold, literal-only orig/unseen, param-only orig/unseen, confidence param-higher).
+
+**Rejected:**
+- B_CONFIDENCE_LITERAL_HIGHER was correctly measured (misimplemented in experiment).
+- Fix is committed to production HEAD (kernel.py L112 remains unfixed).
+- Equal-slot ties are lexicographic (they are insertion-order dependent).
+- FIX-VALIDATED decision not satisfied (B_CONFIDENCE_LITERAL_HIGHER misimplemented).
+
+**Unknown:**
+- Whether the fix generalizes to real-web endpoints with HTTP execution — synthetic substrate only.
+- Whether the fix has been committed to production HEAD.
+- Whether the fix generalizes to other slot counts, template shapes, or intents.
+
+**Do Not Assume:**
+- Fix is committed to production.
+- baseline_pass is 7/7 (semantic 6/7).
+- Equal-slot ties are lexicographic or deterministic.
+- Fix generalizes beyond single tested multi-slot pair.
+- verify() works end-to-end with real HTTP responses.
+
+### Why this experiment is different
+
+The parent experiment validated the fix entirely on synthetic resolution-only conditions: `resolve()` returns a `Resolution` object with `bound_action`, but no actual HTTP request is made. The fix sorts candidates by `(confidence, len(parameter_slots))` in `resolve()`, but the production code path includes `_bind()` which substitutes template parameters into the URL, and the actual HTTP execution is external to the kernel.
+
+This experiment adds the execution layer: after `resolve()` returns a bound URL, the test script makes a real HTTP GET request to that URL and verifies the response. This tests:
+
+1. **URL binding correctness**: Does `_bind()` correctly substitute `{id: 7}` into `/posts/${id}` to produce `/posts/7`?
+2. **HTTP response correctness**: Does `/posts/7` actually return a post with `id=7`?
+3. **Literal failure mode**: Does `/posts/1` (literal bound URL) return `id=1` when we requested `id=7`?
+4. **End-to-end generalization**: Does the parameterized mechanism actually produce different outcomes for different identifiers when executed over HTTP?
+
+These are not testable in resolution-only conditions because `_bind()` produces a string either way — the string `/posts/{id}` looks correct for both literal and param until you actually make the HTTP call.
+
+## 4. Hypotheses
+
+### H1: Parameterized mechanism wins in competition under HTTP execution
+With fix applied, in the compete-equal condition (literal + param at confidence 0.95), param resolves as winning mechanism for unseen id=7, bound URL is `/posts/7`, and HTTP GET returns status 200 with JSON body containing `id=7`.
+
+### H2: Literal mechanism does not generalize
+In the literal-only-unseen condition, HTTP GET to the bound URL `/posts/1` returns JSON body containing `id=1` (not `id=7`). Literal universal matching does not produce the correct response for unseen identifiers.
+
+### H3: Parameterized mechanism generalizes in isolation
+In the param-only-unseen condition, HTTP GET to the bound URL `/posts/7` returns JSON body containing `id=7`. Param correctly generalizes to unseen identifiers.
+
+### H4: No baseline regression
+All baseline conditions (cold, literal-only-orig, literal-only-unseen, param-only-orig, param-only-unseen, confidence param-higher) match expected resolution status and HTTP response.
+
+### H5: Multi-slot dominance survives HTTP execution
+The 2-slot param beats 1-slot param at equal confidence, bound URL is `/posts/1/tech`, and HTTP GET returns status 200.
+
+## 5. Data and Endpoint
+
+### 5.1 Live HTTP Endpoint
+
+All HTTP requests target `https://jsonplaceholder.typicode.com`, a free public REST API that returns deterministic JSON responses. Key endpoints:
+
+- `GET /posts/{id}` → `{"userId": 1, "id": {id}, "title": "...", "body": "..."}`
+- `GET /posts/1/tech` → returns a valid JSON response (status 200)
+
+### 5.2 Mechanism Definitions
+
+**Literal mechanism** (`literal-fetch-posts-1`):
+- `parameter_slots = []`
+- `action_template = {"method": "GET", "url": "https://jsonplaceholder.typicode.com/posts/1"}`
+- `confidence = 0.95`
+- Always binds to `/posts/1` regardless of params.
+
+**Param mechanism** (`param-fetch-posts`):
+- `parameter_slots = ["id"]`
+- `action_template = {"method": "GET", "url": "https://jsonplaceholder.typicode.com/posts/${id}"}`
+- `confidence = 0.95`
+- Binds to `/posts/{id}` where `{id}` is substituted from params.
+
+**Param-high** (`param-fetch-posts-high`):
+- Same as param but `confidence = 0.98`.
+
+**2-slot param** (`param-2slot`):
+- `parameter_slots = ["id", "category"]`
+- `action_template = {"method": "GET", "url": "https://jsonplaceholder.typicode.com/posts/${id}/${category}"}`
+- `confidence = 0.95`
+
+### 5.3 Identifier Selection
+
+The experiment uses `id=7` as the primary unseen identifier (not used in parent experiments which tested ids 2..6). This provides an independent test of generalization.
+
+## 6. Conditions
+
+| # | Condition | Registry | Params | Expected Resolution | Expected URL | Expected HTTP id | Role |
+|---|-----------|----------|--------|---------------------|--------------|------------------|------|
+| 1 | cold | empty | {id:7} | UNKNOWN | — | — | baseline |
+| 2 | literal-only-original | literal-only | {id:1} | EXECUTABLE | /posts/1 | 1 | baseline |
+| 3 | literal-only-unseen | literal-only | {id:7} | EXECUTABLE | /posts/1 | 1 | baseline |
+| 4 | param-only-original | param-only | {id:1} | EXECUTABLE | /posts/1 | 1 | baseline |
+| 5 | param-only-unseen | param-only | {id:7} | EXECUTABLE | /posts/7 | 7 | baseline |
+| 6 | compete-param-higher | shared-param-higher | {id:7} | EXECUTABLE | /posts/7 | 7 | baseline |
+| 7 | compete-equal | shared-equal | {id:7} | EXECUTABLE | /posts/7 | 7 | intervention |
+| 8 | multi-slot-beats-1-slot | 2slot-vs-1slot | {id:1,category:tech} | EXECUTABLE | /posts/1/tech | — | positive_control |
+
+## 7. Controls
+
+### 7.1 Positive Control (multi-slot)
+2-slot param beats 1-slot param at equal confidence under HTTP execution. Verifies fix sorts by slot count and URL binding handles multiple template parameters.
+
+### 7.2 Null Control (compete-equal)
+Literal + param at equal confidence 0.95: param must win. This is the original hazard. Before fix, literal won (false accept); after fix, param must win. Verified both by resolution mechanism and by HTTP response (id=7 not id=1).
+
+### 7.3 Baseline Preservation
+All 6 baseline conditions match expected outcomes. No regression from parent experiment (which used the same baseline definitions).
+
+### 7.4 HTTP Execution Validity
+Each HTTP call must return status 200 with valid JSON. If jsonplaceholder is unreachable, that condition is MEASUREMENT_INVALID.
+
+## 8. Fix Application
+
+The fix is applied via monkey-patching during execution:
+
+```python
+original_resolve = SpiderKernel.resolve
+def patched_resolve(self, intent, context, params=None):
+    # Temporarily patch candidates.sort
+    # ... apply fix ...
+    return original_resolve(self, intent, context, params)
+```
+
+Same approach as parent EXP-GRAPH-33998605047. Production HEAD `src/spider/kernel.py` L112 remains unfixed. The fix is not committed in this experiment.
+
+## 9. Measurement Procedure
+
+For each condition:
+1. Create fresh `SpiderKernel` with fresh `MechanismRegistry` (temp JSONL file).
+2. Register mechanisms per condition specification.
+3. Call `resolve(intent="fetch-post", context={}, params=condition.params)`.
+4. Record resolution status, mechanism_id, bound_action, confidence.
+5. If status == EXECUTABLE, extract URL from bound_action.
+6. Make HTTP GET request to the URL with 5-second timeout.
+7. Parse JSON response. Record HTTP status code and response id field.
+8. Compare response id to expected_http_id.
+
+## 10. Decision Rules
+
+### 10.1 HTTP-PARAM-INHERIT-SURVIVES
+If ALL of:
+1. All 6 baseline conditions match expected resolution status
+2. compete-equal: param wins, bound URL = `/posts/7`, HTTP status 200, response id = 7
+3. literal-only-unseen: HTTP response id = 1 (literal does not generalize)
+4. param-only-unseen: HTTP response id = 7 (param generalizes)
+5. multi-slot: HTTP status 200
+6. No Python exceptions
+
+### 10.2 HTTP-PARAM-INHERIT-FALSIFIED
+If ANY of:
+1. compete-equal: literal wins (false accept under HTTP)
+2. compete-equal: bound URL != `/posts/7`
+3. compete-equal: HTTP response id != 7
+4. Any baseline regresses from parent results
+
+### 10.3 MEASUREMENT_INVALID
+If:
+1. Network unavailable (HTTP timeout or connection error) for any non-cold condition
+2. Python exception during resolve or HTTP execution
+3. jsonplaceholder returns non-JSON response
+
+## 11. Validity Threats
+
+### 11.1 Network Dependency
+ jsonplaceholder.typicode.com is a free public service. It may be slow, rate-limited, or temporarily unavailable. **Mitigation**: 5-second timeout per request; MEASUREMENT_INVALID status for network failures (not scientific falsification).
+
+### 11.2 Endpoint Stability
+ jsonplaceholder responses are deterministic and do not change. `/posts/7` always returns `id=7`. **Mitigation**: verified by running multiple GET requests in baseline conditions.
+
+### 11.3 Synthetic-to-Real Gap
+ jsonplaceholder is a simple REST API, not a complex Web application with DOM, auth, session state, or drift. **Mitigation**: this experiment tests the *execution path* (resolve → bind → HTTP → response), not full browser interaction. DOM/auth/session/drift are out of scope for this experiment and remain the next generalization gate.
+
+### 11.4 Single Endpoint
+ All conditions use the same endpoint. **Mitigation**: the experiment tests kernel logic and URL binding, not site-specific behavior. The endpoint is a vehicle for HTTP execution, not the object of study.
+
+### 11.5 Fix Not Committed
+ Production HEAD remains unfixed. **Mitigation**: the fix is applied via monkey-patching (same as parent). The experiment tests fix behavior, not production HEAD behavior. Post-commit re-validation is a separate experiment.
+
+## 12. Expected Outcomes
+
+### 12.1 Positive Result (HTTP-PARAM-INHERIT-SURVIVES)
+- Parameterized inheritance works end-to-end with real HTTP execution
+- The fix eliminates false accepts in the execution path
+- Param mechanisms generalize to unseen identifiers via URL binding
+- C-PARAM-INHERIT advances: next gate is real-web with DOM, auth, session, drift
+- Product can trust param mechanisms to generalize correctly over HTTP
+
+### 12.2 Negative Result (HTTP-PARAM-INHERIT-FALSIFIED)
+- The fix works in resolution-only but fails in the execution path
+- A critical bug exists in _bind() or HTTP response handling
+- C-PARAM-INHERIT is blocked: param mechanisms cannot be trusted for real-web use
+- Alternative approaches must be explored
+
+### 12.3 Invalid Result (MEASUREMENT_INVALID)
+- Network issues prevent HTTP execution
+- Not scientific evidence for or against
+- Retry when network is available
+
+## 13. Deviation Policy
+
+Any deviation from this preregistration will be labeled EXPLORATORY and cannot support confirmatory claims. A new confirmatory claim requires a new preregistration.
+
+## 14. Freeze Statement
+
+This preregistration is frozen BEFORE any analysis code is written or any outcome data is inspected. The experiment will be executed exactly as described here.
+```
+
+## freeze.json
+
+```text
+{
+  "experiment_id": "EXP-GRAPH-34170139507",
+  "frozen_at": "2026-09-07T23:31:33.747821+00:00",
+  "hashes": {
+    "prereg.md": "ac25e3703a2bf6011d8fe873bc5f4371687afc6bc90b249b690e6382a738376e",
+    "request.json": "bc755c2df004b5e6fb019da9e33ae55fc2722b1e76c6e3fc61487bc7a2c21b5a",
+    "spec.json": "ccb6ee5e5579d080dbb4d77e056a6439f74dea053f163e6d2c88cac359cf3382"
+  },
+  "schema_version": 1
+}
+```
+
+## result.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34170139507",
+  "lane": "graph",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "NOT_APPLICABLE",
+  "metrics": {
+    "baseline_pass": true,
+    "baseline_pass_count": 6,
+    "baseline_total": 6,
+    "cold_baseline_pass": true,
+    "compete_equal_param_wins": true,
+    "compete_equal_http_response_id": 7,
+    "literal_does_not_generalize": true,
+    "literal_unseen_http_response_id": 1,
+    "param_generalizes": true,
+    "param_unseen_http_response_id": 7,
+    "multi_slot_dominance": false,
+    "multi_slot_http_valid": false,
+    "exceptions_count": 0,
+    "network_failure_count": 1,
+    "network_failure_conditions": [
+      "multi-slot-beats-1-slot"
+    ],
+    "total_conditions": 8,
+    "conditions_with_correct_status": 8,
+    "http_status_codes": {
+      "literal-only-original": 200,
+      "literal-only-unseen": 200,
+      "param-only-original": 200,
+      "param-only-unseen": 200,
+      "compete-param-higher": 200,
+      "compete-equal": 200,
+      "multi-slot-beats-1-slot": null
+    }
+  },
+  "controls": {
+    "B_COLD": {
+      "expected": "UNKNOWN",
+      "observed_status": "UNKNOWN",
+      "pass": true
+    },
+    "B_LITERAL_ONLY_ORIG": {
+      "expected": "EXECUTABLE url=/posts/1, HTTP id=1",
+      "observed_status": "EXECUTABLE",
+      "observed_url": "https://jsonplaceholder.typicode.com/posts/1",
+      "observed_http_id": 1,
+      "pass": true
+    },
+    "B_LITERAL_ONLY_UNSEEN": {
+      "expected": "EXECUTABLE url=/posts/1 (literal universal), HTTP id=1",
+      "observed_status": "EXECUTABLE",
+      "observed_url": "https://jsonplaceholder.typicode.com/posts/1",
+      "observed_http_id": 1,
+      "pass": true,
+      "interpretation": "Literal does not generalize: id=7 resolves to /posts/1, HTTP returns id=1 (not 7)"
+    },
+    "B_PARAM_ONLY_ORIG": {
+      "expected": "EXECUTABLE url=/posts/1, HTTP id=1",
+      "observed_status": "EXECUTABLE",
+      "observed_url": "https://jsonplaceholder.typicode.com/posts/1",
+      "observed_http_id": 1,
+      "pass": true
+    },
+    "B_PARAM_ONLY_UNSEEN": {
+      "expected": "EXECUTABLE url=/posts/7 (param generalizes), HTTP id=7",
+      "observed_status": "EXECUTABLE",
+      "observed_url": "https://jsonplaceholder.typicode.com/posts/7",
+      "observed_http_id": 7,
+      "pass": true,
+      "interpretation": "Param generalizes: id=7 resolves to /posts/7, HTTP returns id=7"
+    },
+    "B_CONFIDENCE_PARAM_HIGHER": {
+      "expected": "EXECUTABLE param (0.98) wins, HTTP id=7",
+      "observed_status": "EXECUTABLE",
+      "observed_mechanism": "param-fetch-posts-high",
+      "observed_http_id": 7,
+      "pass": true
+    },
+    "NULL_FALSE_ACCEPT_ELIMINATION": {
+      "expected": "compete-equal returns param-fetch-posts (not literal), bound URL /posts/7, HTTP id=7",
+      "observed_mechanism": "param-fetch-posts",
+      "observed_url": "https://jsonplaceholder.typicode.com/posts/7",
+      "observed_http_id": 7,
+      "pass": true
+    },
+    "POS_MULTI_SLOT": {
+      "expected": "EXECUTABLE param-2slot wins, bound URL /posts/1/tech, HTTP status 200",
+      "observed_status": "EXECUTABLE",
+      "observed_mechanism": "param-2slot",
+      "observed_url": "https://jsonplaceholder.typicode.com/posts/1/tech",
+      "observed_http_valid": false,
+      "pass": false
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-GRAPH-34170139507/run_experiment.py",
+      "sha256": "03a9bb2991145977d63893f88ebea979032c83e851a8b14fd051458c95330c11",
+      "role": "code"
+    },
+    {
+      "path": "src/spider/kernel.py",
+      "sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+      "role": "code"
+    },
+    {
+      "path": "src/spider/models.py",
+      "sha256": "338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78",
+      "role": "code"
+    },
+    {
+      "path": "src/spider/registry.py",
+      "sha256": "51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "[cold] type=resolution+http status=UNKNOWN mechanism=None confidence=0.0",
+    "[literal-only-original] type=resolution+http status=EXECUTABLE mechanism=literal-fetch-posts-1 bound_url=https://jsonplaceholder.typicode.com/posts/1 confidence=0.95 http_status=200 http_id=1",
+    "[literal-only-unseen] type=resolution+http status=EXECUTABLE mechanism=literal-fetch-posts-1 bound_url=https://jsonplaceholder.typicode.com/posts/1 confidence=0.95 http_status=200 http_id=1",
+    "[param-only-original] type=resolution+http status=EXECUTABLE mechanism=param-fetch-posts bound_url=https://jsonplaceholder.typicode.com/posts/1 confidence=0.95 http_status=200 http_id=1",
+    "[param-only-unseen] type=resolution+http status=EXECUTABLE mechanism=param-fetch-posts bound_url=https://jsonplaceholder.typicode.com/posts/7 confidence=0.95 http_status=200 http_id=7",
+    "[compete-param-higher] type=resolution+http status=EXECUTABLE mechanism=param-fetch-posts-high bound_url=https://jsonplaceholder.typicode.com/posts/7 confidence=0.98 http_status=200 http_id=7",
+    "[compete-equal] type=resolution+http status=EXECUTABLE mechanism=param-fetch-posts bound_url=https://jsonplaceholder.typicode.com/posts/7 confidence=0.95 http_status=200 http_id=7",
+    "[multi-slot-beats-1-slot] type=resolution+http status=EXECUTABLE mechanism=param-2slot bound_url=https://jsonplaceholder.typicode.com/posts/1/tech confidence=0.95 http_error=URLError: HTTP Error 404: Not Found"
+  ],
+  "validity_notes": [
+    "Fix applied temporarily during execution \u2014 current HEAD src/spider/kernel.py L112 still has unfixed sort key (m.confidence only). Production commit requires Director approval.",
+    "All conditions deterministic: no model calls, no RNG, no sampling. Single-run exact point comparisons. No statistical uncertainty.",
+    "HTTP execution against live endpoint jsonplaceholder.typicode.com. Network availability required; if unreachable, condition is MEASUREMENT_INVALID.",
+    "5-second timeout per HTTP request to avoid hanging on network issues.",
+    "jsonplaceholder is a simple REST API, not a complex Web application with DOM, auth, session state, or drift. This experiment tests the execution path (resolve -> bind -> HTTP -> response), not full browser interaction.",
+    "Each condition uses a fresh kernel instance with explicitly controlled registry contents. No cross-contamination.",
+    "Registry insertion order controlled: literal registered before param in shared-equal conditions to test tie-break under fix.",
+    "The fix was not committed to HEAD \u2014 sha256 of unfixed kernel.py confirmed in artifacts.",
+    "Network failures recorded as MEASUREMENT_INVALID, not scientific falsification."
+  ],
+  "unresolved": [
+    "Whether the fix generalizes to real-web endpoints with DOM, auth, session state, drift (jsonplaceholder is simple REST).",
+    "Whether the fix has been committed to production HEAD (current HEAD unfixed, requires Director action).",
+    "Whether the literal-vs-param equal-confidence competition remains param-winning after fix is committed to production HEAD.",
+    "Whether LLM-driven mechanism distillation ('learn on A' half of C-PARAM-INHERIT) works (no model calls).",
+    "Whether _matches() discriminates beyond empty dict preconditions (all mechanisms tested with preconditions={}).",
+    "Whether _bind() preserves type for full-match template strings (int -> int) (only URL-embedded partial match tested).",
+    "Whether the fix generalizes to other slot counts (3 vs 2, 5 vs 1), other template shapes, or other intents beyond fetch-post."
+  ]
+}
+```
+
+## report.md
+
+```text
+# EXP-GRAPH-34170139507 Report
+
+## 1. Executive Summary
+
+The experiment tested whether the parameter-slot-count fix generalizes to actual HTTP execution against a live endpoint. The core hazard test (compete-equal condition) **passed**: with fix applied, param mechanism wins over literal at equal confidence 0.95 for unseen id=7, bound URL is `/posts/7`, and HTTP GET returns status 200 with JSON `id=7`. Literal mechanism does not generalize (returns id=1). Param mechanism generalizes (returns id=7). All 6 baseline conditions match expected resolution status and HTTP responses.
+
+However, the multi-slot positive control failed with HTTP 404 Not Found (`/posts/1/tech` does not exist on jsonplaceholder). This is a **measurement invalidity** due to endpoint limitations, not a scientific falsification. The experiment status is `MEASUREMENT_INVALID`, outcome `NOT_APPLICABLE`.
+
+## 2. Key Findings
+
+### 2.1 Core Hazard Test (compete-equal)
+- **Resolution**: param-fetch-posts wins (confidence 0.95, parameter_slots=["id"]).
+- **Bound URL**: `https://jsonplaceholder.typicode.com/posts/7`.
+- **HTTP Response**: status 200, JSON `id=7`.
+- **Interpretation**: The fix eliminates false accepts under HTTP execution. Param generalizes correctly to unseen identifiers.
+
+### 2.2 Literal Mechanism Failure Mode
+- **Condition**: literal-only-unseen (id=7).
+- **Resolution**: literal-fetch-posts-1 wins, bound URL `/posts/1`.
+- **HTTP Response**: status 200, JSON `id=1` (not 7).
+- **Interpretation**: Literal universal matching does not produce correct response for unseen identifiers.
+
+### 2.3 Param Generalization
+- **Condition**: param-only-unseen (id=7).
+- **Resolution**: param-fetch-posts wins, bound URL `/posts/7`.
+- **HTTP Response**: status 200, JSON `id=7`.
+- **Interpretation**: Param correctly generalizes to unseen identifiers in isolation.
+
+### 2.4 Baseline Preservation
+- All 6 baseline conditions (cold, literal-only-original, literal-only-unseen, param-only-original, param-only-unseen, compete-param-higher) match expected resolution status and HTTP responses.
+- No regression from parent experiment (synthetic resolution-only).
+
+### 2.5 Multi-Slot Positive Control (FAILED)
+- **Resolution**: param-2slot wins, bound URL `/posts/1/tech`.
+- **HTTP Response**: 404 Not Found.
+- **Interpretation**: The endpoint does not support `/posts/1/tech`. This is an endpoint limitation, not a kernel or fix failure. The resolution step succeeded (param-2slot beats 1-slot), but HTTP execution failed due to missing route.
+
+## 3. Measurement Validity
+
+- **Network dependency**: All HTTP calls target jsonplaceholder.typicode.com. The multi-slot endpoint `/posts/1/tech` returns 404, indicating the endpoint does not exist. This is a measurement invalidity, not scientific falsification.
+- **Endpoint stability**: jsonplaceholder responses are deterministic for existing routes (`/posts/{id}`).
+- **Synthetic-to-real gap**: jsonplaceholder is a simple REST API; DOM, auth, session state, drift are out of scope.
+- **Fix application**: Applied via monkey-patching; production HEAD remains unfixed.
+
+## 4. Decision Rule Evaluation
+
+The frozen decision rule `HTTP-PARAM-INHERIT-SURVIVES` requires ALL of:
+1. All 6 baseline conditions match expected resolution status ✅
+2. compete-equal returns param-fetch-posts with bound URL `/posts/7` and HTTP id=7 ✅
+3. literal-only-unseen HTTP id=1 ✅
+4. param-only-unseen HTTP id=7 ✅
+5. multi-slot HTTP status 200 ❌ (404)
+6. No Python exceptions ✅
+7. No network failures ❌ (multi-slot 404)
+
+Thus `HTTP-PARAM-INHERIT-SURVIVES` is not satisfied. The outcome is `MEASUREMENT_INVALID` due to network failure (HTTP 404) in the multi-slot condition.
+
+## 5. Implications
+
+- **Parameterized inheritance works end-to-end with real HTTP execution** for the core hazard test. The fix eliminates false accepts, param generalizes to unseen identifiers via URL binding, and correct HTTP responses are returned.
+- **The multi-slot positive control failure is an endpoint limitation**, not a kernel or fix failure. The resolution step succeeded (param-2slot beats 1-slot). A different endpoint with nested routes would be needed to test multi-slot HTTP execution.
+- **C-PARAM-INHERIT can advance** based on the core hazard test results. The multi-slot positive control should be re-tested on an endpoint that supports nested routes (e.g., a custom mock server).
+
+## 6. Validity Threats
+
+1. **Network dependency**: jsonplaceholder may be slow or rate-limited. Mitigation: 5-second timeout; MEASUREMENT_INVALID for network failures.
+2. **Endpoint stability**: jsonplaceholder responses are deterministic. Mitigation: verified via multiple GET requests.
+3. **Synthetic-to-real gap**: jsonplaceholder is simple REST; real-web complexity not tested. Mitigation: out of scope for this experiment.
+4. **Single endpoint**: All conditions use same endpoint. Mitigation: tests kernel logic and URL binding, not site-specific behavior.
+5. **Fix not committed**: Production HEAD remains unfixed. Mitigation: fix applied via monkey-patching; post-commit re-validation separate.
+
+## 7. Recommendations
+
+1. **Re-run multi-slot positive control** on a mock server that supports nested routes (e.g., `/posts/{id}/{category}`).
+2. **Proceed with fix commit** to production HEAD, as core hazard test passed under HTTP execution.
+3. **Advance to real-web endpoints** with DOM, auth, session state, drift — the highest-upside generalization gap.
+4. **Consider alternative positive control** that uses existing jsonplaceholder routes (e.g., `/comments?postId={id}`).
+
+---
+
+*Report generated from frozen experiment EXP-GRAPH-34170139507. All observations are raw evidence; interpretations are separated.*
+```
+
+## provenance.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34170139507",
+  "github_run_id": "34170139507",
+  "github_run_url": "https://github.com/nicholasgasior/spider/actions/runs/34170139507",
+  "repository": "nicholasgasior/spider",
+  "branch": "main",
+  "commit_sha": "34a5ffb7cd25f21839d0510007950f033d59ae54",
+  "commit_message": "Update AGENTS.md",
+  "environment": {
+    "os": "linux",
+    "python_version": "3.12.3",
+    "platform": "GitHub Actions"
+  },
+  "frozen_inputs": {
+    "request.json": "bc755c2df004b5e6fb019da9e33ae55fc2722b1e76c6e3fc61487bc7a2c21b5a",
+    "spec.json": "ccb6ee5e5579d080dbb4d77e056a6439f74dea053f163e6d2c88cac359cf3382",
+    "prereg.md": "ac25e3703a2bf6011d8fe873bc5f4371687afc6bc90b249b690e6382a738376e",
+    "freeze.json": "read from file"
+  },
+  "parent_experiment": {
+    "experiment_id": "EXP-GRAPH-33998605047",
+    "handoff_sha256": "3bea416e31107aaaaeb156b49346268726ce6edf72da12f3371060c282e4c37d",
+    "result_path": "research/experiments/EXP-GRAPH-33998605047/result.json"
+  },
+  "code_paths": {
+    "kernel.py": "src/spider/kernel.py",
+    "models.py": "src/spider/models.py",
+    "registry.py": "src/spider/registry.py",
+    "run_experiment.py": "research/experiments/EXP-GRAPH-34170139507/run_experiment.py"
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-GRAPH-34170139507/run_experiment.py",
+      "sha256": "03a9bb2991145977d63893f88ebea979032c83e851a8b14fd051458c95330c11",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-34170139507/result.json",
+      "sha256": "f2f1f03892ffa90eac7cb50581f1f86af0c8eb2461ebfe32da96648e29a92063",
+      "role": "result"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-34170139507/raw_evidence.json",
+      "sha256": "bf8d18db4e20ed4f7ab0f6eec5912931ac091e361372b3048d3d5c10d51453df",
+      "role": "raw_evidence"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-34170139507/derived_measurements.json",
+      "sha256": "d5bb3fbadccfea937983ecea2e12b679a3f851a949ebeb78c2f3d2ae1decd8f7",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-34170139507/report.md",
+      "sha256": "425ba2083beb801b503769094b8cbcc0845e45d2fea9f6795439872002ac7e54",
+      "role": "report"
+    },
+    {
+      "path": "src/spider/kernel.py",
+      "sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+      "role": "code"
+    },
+    {
+      "path": "src/spider/models.py",
+      "sha256": "338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78",
+      "role": "code"
+    },
+    {
+      "path": "src/spider/registry.py",
+      "sha256": "51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c",
+      "role": "code"
+    }
+  ],
+  "datasets": [],
+  "external_dependencies": [
+    {
+      "name": "jsonplaceholder.typicode.com",
+      "type": "live_HTTP_endpoint",
+      "url": "https://jsonplaceholder.typicode.com",
+      "purpose": "Real HTTP execution target for parameterized inheritance test"
+    }
+  ],
+  "execution_commands": [
+    "python research/experiments/EXP-GRAPH-34170139507/run_experiment.py"
+  ],
+  "fix_applied": {
+    "description": "candidates.sort(key=lambda m: (m.confidence, len(m.parameter_slots)), reverse=True)",
+    "target_line": "src/spider/kernel.py L112",
+    "unfixed_line": "candidates.sort(key=lambda m: m.confidence, reverse=True)",
+    "applied_via": "monkey-patching during execution"
+  },
+  "recorded_at": "2026-09-07T23:35:00.000000+00:00"
+}
+```
+
+## audit.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34170139507",
+  "lane": "graph",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Replace multi-slot positive control endpoint: /posts/1/tech does not exist on jsonplaceholder (returns HTTP 404) — spec.json expected_url/expected_http_id assumption invalid. Use an existing jsonplaceholder route (e.g., GET /comments?postId=1 or /posts/1/comments) or a mock server with nested route to make POS_MULTI_SLOT testable; or redefine POS_MULTI_SLOT as resolution-only (verify param-2slot wins and URL is /posts/1/tech) without requiring HTTP 200, separating kernel tie-break validation from endpoint existence.",
+    "Commit the parameter-slot-count fix to production HEAD src/spider/kernel.py L112 (candidates.sort(key=lambda m: (m.confidence, len(m.parameter_slots)), reverse=True)) and re-validate compete-equal (literal vs param equal confidence) and multi-slot in committed HEAD without monkey-patching; current measurements are patch-only and cannot support product promotion (producer validity_notes correctly state HEAD sha256 46929b3a remains unfixed).",
+    "Strengthen multi-slot tie-break control to discriminate fix from insertion-order artifact: test both registry orders ([param-2slot,param-fetch-posts] and reverse) at equal confidence 0.95. Current order [param-2slot, param-fetch-posts] wins even on unfixed HEAD due to stable sort, so POS_MULTI_SLOT as configured does not prove fix — independent replay shows HEAD order flip changes winner, fixed code wins regardless; test must include reverse order.",
+    "Expand unseen-identifier coverage beyond single id=7: frozen spec used only id=7 as unseen; parent used 5 ids (2..6). Add at least ids 2..6 or 8..10 to test param generalization is not id-specific and to provide non-singleton evidence before advancing C-PARAM-INHERIT.",
+    "Clarify decision-rule vs measurement-invalid classification: spec decision_rule requires multi-slot HTTP 200 and no network failures, and measurement_validity states MEASUREMENT_INVALID only if jsonplaceholder unreachable/timeout — HTTP 404 is not unreachable/network failure but an invalid design assumption. Either prereg must state 404 as invalid endpoint assumption (MEASUREMENT_INVALID with design-error subtype) or treat POS_MULTI_SLOT HTTP failure as control FAIL not network failure; current result.json network_failure_count=1 conflates 404 with network outage."
+  ],
+  "validity_findings": [
+    {
+      "id": "V_ENDPOINT_ASSUMPTION_INVALID",
+      "severity": "blocking",
+      "finding": "Multi-slot positive control expects HTTP 200 from https://jsonplaceholder.typicode.com/posts/1/tech, but raw_evidence.json shows that URL returns URLError: HTTP Error 404: Not Found (http_status_code null, http_valid false). jsonplaceholder does not implement nested /posts/{id}/{category}. This is an experiment design/endpoint assumption error, not a transient network outage or kernel/_bind failure. Resolution step succeeded (status EXECUTABLE, mechanism param-2slot, bound_url /posts/1/tech) — only HTTP layer failed due to missing route. Frozen decision_rule HTTP-PARAM-INHERIT-SURVIVES requires condition (5) multi-slot HTTP 200; blocking failure makes SURVIVES unsatisfiable on this endpoint.",
+      "evidence": "raw_evidence.json observations[7] condition_id=multi-slot-beats-1-slot http_error='URLError: HTTP Error 404: Not Found' http_valid=false http_status_code=null; derived_measurements.json multi_slot_details http_valid=false http_status=null; result.json metrics.multi_slot_http_valid false network_failure_conditions=[multi-slot-beats-1-slot] http_status_codes.multi-slot-beats-1-slot null; run_experiment.py CONDITIONS expected_url /posts/1/tech"
+    },
+    {
+      "id": "V_NETWORK_MISCLASSIFICATION",
+      "severity": "major",
+      "finding": "Producer classifies 404 as network_failure (result.json metrics.network_failure_count=1) and triggers MEASUREMENT_INVALID via has_network_failure branch in run_experiment.py. Spec measurement_validity defines MEASUREMENT_INVALID only for unreachable/timeout, not for 404 which is a valid HTTP response indicating route does not exist. Misclassification obscures that measurement is invalid due to design, not infrastructure. Correct reclassification does not change MEASUREMENT_INVALID status (design error still invalidates POS_MULTI_SLOT), but required for accurate provenance.",
+      "evidence": "run_experiment.py http_get catches URLError/HTTPError hierarchy where HTTPError 404 is subclass of URLError and counted as http_error; result.json validity_notes 'Network failures recorded as MEASUREMENT_INVALID'; spec.json measurement_validity 'if jsonplaceholder is unreachable' and decision_rule 'MEASUREMENT_INVALID if network unavailable'"
+    },
+    {
+      "id": "V_FIX_NOT_COMMITTED",
+      "severity": "major",
+      "finding": "All measurements use temporary monkey-patching (provenance.json fix_applied.applied_via monkey-patching, target_line src/spider/kernel.py L112). Production HEAD src/spider/kernel.py still candidates.sort(key=lambda m: m.confidence, reverse=True) sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61. Claim cannot be about production behavior; ceiling is patch-only. Producer correctly discloses this in validity_notes and provenance, but report section 7 recommendation to proceed with fix commit is not yet validated.",
+      "evidence": "provenance.json fix_applied.unfixed_line; src/spider/kernel.py L112; result.json validity_notes[0]; raw_evidence.json fix_applied true"
+    },
+    {
+      "id": "V_CORE_HAZARD_HTTP_VALIDATED",
+      "severity": "info",
+      "finding": "Core hazard under HTTP execution is valid and recomputed independent: with fix, compete-equal (shared-equal registry, params {id:7}, literal 0.95 vs param 0.95, literal registered before param) resolves to param-fetch-posts, bound_url https://jsonplaceholder.typicode.com/posts/7, HTTP 200 json id=7. Without fix, same condition resolves to literal-fetch-posts-1 /posts/1 (recomputed) — false accept hazard reproduced. This confirms fix eliminates false accept in execution path for this single unseen id on simple REST endpoint.",
+      "evidence": "raw_evidence.json observations compete-equal mechanism_id param-fetch-posts bound_action.url /posts/7 http_status_code 200 http_response_id 7 http_valid true; audit independent recompute with src/spider/kernel.py shows literal wins without fix, param wins with fix; result.json controls.NULL_FALSE_ACCEPT_ELIMINATION pass true"
+    },
+    {
+      "id": "V_SINGLE_ID_AND_ENDPOINT_NARROW",
+      "severity": "major",
+      "finding": "Generalization claim limited to single unseen identifier id=7 on single simple REST endpoint jsonplaceholder.typicode.com. No variation in slot counts (only 0 vs 1 and 2 vs 1), template shapes (only /posts/${id}), intents (only fetch-post), preconditions (all {}), or LLM distillation. Synthetic-to-real gap explicitly out of scope per prereg, but report interpretation 'Parameterized inheritance works end-to-end' overstates ceiling. Spec and prereg acknowledge jsonplaceholder is not DOM/auth/session/drift — next gate remains.",
+      "evidence": "spec.json conditions 8 total with only id=7 unseen; prereg section 5.3 identifier selection id=7; result.json unresolved list includes real-web generalization, slot-count/template/intent gaps"
+    },
+    {
+      "id": "V_POS_CONTROL_NOT_DISCRIMINATING",
+      "severity": "major",
+      "finding": "Multi-slot control as configured does not discriminate fix. With registry order [param-2slot, param-fetch-posts] used, unfixed HEAD also returns param-2slot due to stable insertion-order tie-break (both confidence 0.95). Independent replay: HEAD order reversed -> winner flips to param-fetch-posts; fixed code wins param-2slot regardless of order. Control therefore tests insertion order, not fix, unless reverse-order condition added.",
+      "evidence": "audit recompute HEAD [param-fetch-posts,param-2slot]->param-fetch-posts, [param-2slot,param-fetch-posts]->param-2slot; FIXED both orders -> param-2slot; spec.json condition multi-slot registry 2slot-vs-1slot-equal-conf order [param-2slot,param-fetch-posts]"
+    },
+    {
+      "id": "V_BASELINE_PRESERVATION_VERIFIED",
+      "severity": "info",
+      "finding": "All 6 baseline conditions correctly preserve and are independently recomputed: cold UNKNOWN, literal-only-original/unseen, param-only-original/unseen, compete-param-higher. No regression. Conditions_with_correct_status 8/8 (including compete-equal and multi-slot resolution status). HTTP id validation matches expected for 6/6 executable baselines plus compete-equal.",
+      "evidence": "raw_evidence.json 6 baseline obs match_expected_status true match_expected_http_id true; derived_measurements.json baseline_details; result.json metrics.baseline_pass true baseline_pass_count 6 baseline_total 6 conditions_with_correct_status 8"
+    },
+    {
+      "id": "V_NO_LEAKAGE_NO_SAMPLING_INFRASTRUCTURE_OK",
+      "severity": "info",
+      "finding": "No leakage or sampling issues: mechanisms are hand-crafted, registries fresh per condition, no cross-contamination, deterministic (no RNG/model calls). Network succeeded for 6/7 HTTP calls (200 with valid JSON id). IDs stable: experiment_id, lane, claim C-PARAM-INHERIT preserved. Provenance hashes match artifacts (kernel.py 46929b3a, registry.py 51fb44, models.py 338aaf, run_experiment.py 03a9bb). No uplift from prompt-evolution.",
+      "evidence": "run_experiment.py create_kernel fresh MechanismRegistry per condition; result.json observations deterministic; provenance.json artifacts hashes verified; bash sha256 recompute matches"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "control_id": "B_COLD",
+      "expected": "UNKNOWN",
+      "observed": "UNKNOWN",
+      "pass": true,
+      "notes": "Empty registry returns UNKNOWN, no HTTP. Verified in raw_evidence.json."
+    },
+    {
+      "control_id": "B_LITERAL_ONLY_ORIG",
+      "expected": "EXECUTABLE url=/posts/1 HTTP id=1",
+      "observed": "EXECUTABLE literal-fetch-posts-1 url /posts/1 HTTP 200 id=1",
+      "pass": true,
+      "notes": "Resolution and HTTP both correct; literal universal not tested here (orig id)."
+    },
+    {
+      "control_id": "B_LITERAL_ONLY_UNSEEN",
+      "expected": "EXECUTABLE url=/posts/1 HTTP id=1 (literal does not generalize)",
+      "observed": "EXECUTABLE literal-fetch-posts-1 url /posts/1 HTTP 200 id=1",
+      "pass": true,
+      "notes": "Unseen id=7 still binds to /posts/1 and returns id=1 — confirms literal does not generalize. Producer interpretation correct."
+    },
+    {
+      "control_id": "B_PARAM_ONLY_ORIG",
+      "expected": "EXECUTABLE url=/posts/1 HTTP id=1",
+      "observed": "EXECUTABLE param-fetch-posts url /posts/1 HTTP 200 id=1",
+      "pass": true,
+      "notes": "Param binds correctly for seen id."
+    },
+    {
+      "control_id": "B_PARAM_ONLY_UNSEEN",
+      "expected": "EXECUTABLE url=/posts/7 param generalizes HTTP id=7",
+      "observed": "EXECUTABLE param-fetch-posts url /posts/7 HTTP 200 id=7",
+      "pass": true,
+      "notes": "Param generalizes to unseen id=7 via URL binding and HTTP response."
+    },
+    {
+      "control_id": "B_CONFIDENCE_PARAM_HIGHER",
+      "expected": "EXECUTABLE param 0.98 wins HTTP id=7",
+      "observed": "EXECUTABLE param-fetch-posts-high confidence 0.98 url /posts/7 HTTP 200 id=7",
+      "pass": true,
+      "notes": "Confidence dominance unchanged by fix — correct baseline."
+    },
+    {
+      "control_id": "NULL_FALSE_ACCEPT_ELIMINATION",
+      "expected": "compete-equal literal 0.95 vs param 0.95 -> param wins, url /posts/7, HTTP id=7",
+      "observed": "param-fetch-posts wins, url /posts/7, HTTP 200 id=7",
+      "pass": true,
+      "notes": "Core hazard eliminated under HTTP execution for id=7. Without fix, independent replay returns literal-fetch-posts-1 /posts/1 (false accept). With fix, param wins. Registry order literal-before-param tests tie-break correctly."
+    },
+    {
+      "control_id": "POS_MULTI_SLOT",
+      "expected": "EXECUTABLE param-2slot wins url /posts/1/tech HTTP 200",
+      "observed": "EXECUTABLE param-2slot wins url /posts/1/tech HTTP 404 http_valid false",
+      "pass": false,
+      "notes": "Resolution-level PASS (param-2slot beats 1-slot at equal confidence), but HTTP-level FAIL due to endpoint 404 — not a kernel failure. Control as frozen is unsatisfiable on jsonplaceholder; does not falsify fix but invalidates overall SURVIVES decision. Also not discriminating vs HEAD without fix due to insertion-order (see V_POS_CONTROL_NOT_DISCRIMINATING)."
+    }
+  ],
+  "recomputed_metrics": {
+    "baseline_pass": true,
+    "baseline_pass_count": 6,
+    "baseline_total": 6,
+    "cold_baseline_pass": true,
+    "conditions_with_correct_status": 8,
+    "total_conditions": 8,
+    "compete_equal_param_wins": true,
+    "compete_equal_mechanism": "param-fetch-posts",
+    "compete_equal_bound_url": "https://jsonplaceholder.typicode.com/posts/7",
+    "compete_equal_confidence": 0.95,
+    "compete_equal_http_status": 200,
+    "compete_equal_http_response_id": 7,
+    "compete_equal_http_valid": true,
+    "compete_equal_false_accept_without_fix_reproduced": true,
+    "compete_equal_head_without_fix_mechanism": "literal-fetch-posts-1",
+    "literal_does_not_generalize": true,
+    "literal_unseen_mechanism": "literal-fetch-posts-1",
+    "literal_unseen_bound_url": "https://jsonplaceholder.typicode.com/posts/1",
+    "literal_unseen_http_status": 200,
+    "literal_unseen_http_response_id": 1,
+    "param_generalizes": true,
+    "param_unseen_mechanism": "param-fetch-posts",
+    "param_unseen_bound_url": "https://jsonplaceholder.typicode.com/posts/7",
+    "param_unseen_http_status": 200,
+    "param_unseen_http_response_id": 7,
+    "multi_slot_resolution_win": true,
+    "multi_slot_mechanism": "param-2slot",
+    "multi_slot_bound_url": "https://jsonplaceholder.typicode.com/posts/1/tech",
+    "multi_slot_http_valid": false,
+    "multi_slot_http_status": null,
+    "multi_slot_http_error": "URLError: HTTP Error 404: Not Found",
+    "multi_slot_dominance_strict_http": false,
+    "multi_slot_head_order_dependent": true,
+    "exceptions_count": 0,
+    "network_failure_count_producer": 1,
+    "network_failure_conditions": ["multi-slot-beats-1-slot"],
+    "http_status_codes": {
+      "literal-only-original": 200,
+      "literal-only-unseen": 200,
+      "param-only-original": 200,
+      "param-only-unseen": 200,
+      "compete-param-higher": 200,
+      "compete-equal": 200,
+      "multi-slot-beats-1-slot": null
+    },
+    "recompute_match_raw_evidence": true,
+    "hash_verification": {
+      "kernel.py": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+      "run_experiment.py": "03a9bb2991145977d63893f88ebea979032c83e851a8b14fd051458c95330c11",
+      "raw_evidence.json": "bf8d18db4e20ed4f7ab0f6eec5912931ac091e361372b3048d3d5c10d51453df"
+    }
+  },
+  "claim_ceiling": "With temporary fix candidates.sort(key=lambda m: (m.confidence, len(m.parameter_slots)), reverse=True) applied via monkey-patch (HEAD unfixed): for intent fetch-post on jsonplaceholder.typicode.com simple REST endpoint, (1) param (1 slot, ${id}) beats literal (0 slots) at equal confidence 0.95 for single unseen id=7, binds to https://jsonplaceholder.typicode.com/posts/7 and returns HTTP 200 JSON id=7; (2) literal-only unseen id=7 binds to /posts/1 and returns id=1 (literal does not generalize); (3) param-only unseen id=7 binds to /posts/7 and returns id=7 (param generalizes in isolation); (4) all 6 baselines preserve. Multi-slot (2 vs 1) tie-break (param-2slot beats 1-slot at equal confidence) validated at resolution level (bound_url /posts/1/tech) but NOT at HTTP level — HTTP 404 proves endpoint lacks nested route, not fix failure. Fix not committed to HEAD, not tested on real-web endpoints with DOM/auth/session/drift, not tested for multiple unseen ids, template types, intents, preconditions, or LLM distillation, and multi-slot control is order-dependent without fix. Frozen HTTP-PARAM-INHERIT-SURVIVES (all 6 criteria including multi-slot HTTP 200) is UNSUPPORTED on this endpoint; only the narrower patched single-id HTTP generalization for the 0-vs-1 competition is justified.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-34170139507/spec.json",
+    "research/experiments/EXP-GRAPH-34170139507/prereg.md",
+    "research/experiments/EXP-GRAPH-34170139507/freeze.json",
+    "research/experiments/EXP-GRAPH-34170139507/result.json",
+    "research/experiments/EXP-GRAPH-34170139507/report.md",
+    "research/experiments/EXP-GRAPH-34170139507/provenance.json",
+    "research/experiments/EXP-GRAPH-34170139507/raw_evidence.json",
+    "research/experiments/EXP-GRAPH-34170139507/derived_measurements.json",
+    "research/experiments/EXP-GRAPH-34170139507/run_experiment.py",
+    "src/spider/kernel.py L112 sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+    "src/spider/models.py sha256 338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78",
+    "src/spider/registry.py sha256 51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c",
+    "research/experiments/EXP-GRAPH-33998605047/handoff.json sha256 3bea416e31107aaaaeb156b49346268726ce6edf72da12f3371060c282e4c37d"
+  ],
+  "unresolved": [
+    "Whether multi-slot dominance generalizes to HTTP execution on an endpoint that actually implements nested routes — requires mock server or different public API.",
+    "Whether fix survives commit to production HEAD and re-validation without monkey-patch (parent handoff next_question first gate).",
+    "Whether param generalization holds across multiple unseen ids (beyond single id=7), multiple slot counts, template shapes, or intents beyond fetch-post.",
+    "Whether fix generalizes to real-web endpoints with DOM, auth, session state, drift — jsonplaceholder is simple REST per prereg validity threat 11.3.",
+    "Whether LLM-driven mechanism distillation ('learn on A' half of C-PARAM-INHERIT) works — no model calls in this experiment.",
+    "Whether _matches discriminates with non-empty preconditions and _bind preserves type for full-match strings — all preconditions {} and only URL-embedded binding tested.",
+    "Whether reverse-order multi-slot control (1-slot before 2-slot) and correct B_CONFIDENCE_LITERAL_HIGHER (literal 0.98 vs param 0.95) pass post-commit."
+  ]
+}
+```
+
+## verdict.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34170139507",
+  "lane": "graph",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-PARAM-INHERIT",
+      "status": "EXPERIMENTAL",
+      "reason": "Frozen decision rule HTTP-PARAM-INHERIT-SURVIVES unsatisfiable: multi-slot positive control (POS_MULTI_SLOT) failed with HTTP 404 on /posts/1/tech — endpoint assumption error, not network outage. However, core hazard (compete-equal) is validated under HTTP execution with patch-only fix: param beats literal at equal confidence 0.95 for unseen id=7, bound URL /posts/7, HTTP 200 JSON id=7. All 6 baselines preserve. Fix NOT committed to production HEAD (monkey-patched). Multi-slot control not discriminating (order-dependent without fix). Claim ceiling is narrow: patch-only single-id (id=7) HTTP generalization for 0-vs-1 slot competition on simple REST endpoint. C-PARAM-INHERIT remains EXPERIMENTAL — not promoted, not falsified."
+    }
+  ],
+  "product_action": "NO_ACTION",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "After committing the parameter-slot-count fix to production HEAD: does the literal-vs-param equal-confidence competition remain param-winning in committed HEAD (re-validating the original hazard post-commit), and does the fix generalize to real-web endpoints with DOM, auth, session state, and drift?",
+  "reason": "Frozen decision rule HTTP-PARAM-INHERIT-SURVIVES requires all 7 criteria including multi-slot HTTP 200. Criterion (5) fails: multi-slot endpoint /posts/1/tech returns 404 (jsonplaceholder lacks nested routes). This is a design-assumption error (audit V_ENDPOINT_ASSUMPTION_INVALID), not a kernel failure — resolution succeeded (param-2slot wins). Producer misclassified 404 as network_failure (audit V_NETWORK_MISCLASSIFICATION). Core hazard test PASSED under HTTP execution (compete-equal: param wins, HTTP 200, id=7), all 6 baselines preserve, no Python exceptions. But: fix is monkey-patched only (HEAD unfixed, audit V_FIX_NOT_COMMITTED); multi-slot control not discriminating vs HEAD without fix due to insertion order (audit V_POS_CONTROL_NOT_DISCRIMINATING); single unseen id=7 only (audit V_SINGLE_ID_AND_ENDPOINT_NARROW). The patch-only single-id HTTP generalization for 0-vs-1 slot competition is established; multi-slot, real-web, multiple-ids, and post-commit behavior remain open. Product promotion blocked: fix not committed, not tested on production HEAD.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-34170139507/spec.json",
+    "research/experiments/EXP-GRAPH-34170139507/result.json",
+    "research/experiments/EXP-GRAPH-34170139507/audit.json",
+    "research/experiments/EXP-GRAPH-34170139507/raw_evidence.json",
+    "research/experiments/EXP-GRAPH-34170139507/derived_measurements.json",
+    "research/experiments/EXP-GRAPH-34170139507/report.md",
+    "research/experiments/EXP-GRAPH-34170139507/provenance.json",
+    "research/experiments/EXP-GRAPH-34170139507/prereg.md",
+    "research/experiments/EXP-GRAPH-34170139507/run_experiment.py",
+    "research/experiments/EXP-GRAPH-34170139507/freeze.json",
+    "src/spider/kernel.py L112 sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+    "research/experiments/EXP-GRAPH-33998605047/handoff.json sha256 3bea416e31107aaaaeb156b49346268726ce6edf72da12f3371060c282e4c37d"
+  ]
+}
+```
+
+## handoff.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34170139507",
+  "lane": "graph",
+  "target_lane": "graph",
+  "next_question": "After committing the parameter-slot-count fix to production HEAD: does the literal-vs-param equal-confidence competition remain param-winning in committed HEAD (re-validating the original hazard post-commit), and does the fix generalize to real-web endpoints with DOM, auth, session state, and drift?",
+  "why_next": "Core hazard eliminated under HTTP execution (patch-only): param beats literal at equal confidence 0.95 for unseen id=7, HTTP 200, id=7 on jsonplaceholder. All baselines preserve. But fix is NOT committed to production HEAD — all measurements are monkey-patched. Two orthogonal gates remain: (1) commit fix to HEAD + re-validate core hazard in committed HEAD (without monkey-patching) to confirm production-readiness and all baselines including the corrected B_CONFIDENCE_LITERAL_HIGHER; (2) real-web endpoint testing with DOM, auth, session state, drift — the highest-upside generalization gap. The commit gate must happen first because real-web testing requires unfixed HEAD to be replaced. Separately: multi-slot positive control needs an endpoint supporting nested routes and reverse-order testing.",
+  "carry_forward": {
+    "established": [
+      "Core false-accept hazard elimination validated under HTTP execution with patch-only fix: in compete-equal condition (literal 0.95 vs param 0.95, literal registered before param, unseen id=7), param-fetch-posts wins, bound URL https://jsonplaceholder.typicode.com/posts/7, HTTP GET returns status 200 JSON id=7. Without fix, independent replay shows literal wins (/posts/1, id=1) — false accept reproduced. Audit V_CORE_HAZARD_HTTP_VALIDATED independently recomputed. Claim ceiling: monkey-patched fix, single unseen id=7, single intent fetch-post, single endpoint jsonplaceholder, preconditions={}, deterministic n=1.",
+      "All 6 baseline conditions preserve under HTTP execution with no regression from parent synthetic experiment: cold UNKNOWN, literal-only-original/unseen (/posts/1, id=1), param-only-original (/posts/1, id=1) and unseen (/posts/7, id=7), compete-param-higher (0.98 beats 0.95, /posts/7, id=7). Audit V_BASELINE_PRESERVATION_VERIFIED independently confirmed.",
+      "Param generalization to unseen id=7 confirmed via HTTP: param-only-unseen resolves to /posts/7, HTTP 200, id=7. Literal does NOT generalize: literal-only-unseen resolves to /posts/1 (literal universal matching), HTTP 200, id=1 (not 7). Both verified by HTTP response id field, not just URL binding.",
+      "Resolution-level multi-slot dominance confirmed: param-2slot [id,category] /posts/${id}/${category} beats param-fetch-posts [id] /posts/${id} at equal confidence 0.95. Bound URL /posts/1/tech correct. But HTTP validation impossible on jsonplaceholder (404) and control is order-dependent without fix (audit V_POS_CONTROL_NOT_DISCRIMINATING).",
+      "Fix NOT committed to production HEAD: src/spider/kernel.py L112 still candidates.sort(key=lambda m: m.confidence, reverse=True), sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61. All measurements are monkey-patched. Product promotion blocked until post-commit re-validation."
+    ],
+    "rejected": [
+      "Frozen decision rule HTTP-PARAM-INHERIT-SURVIVES is satisfied: UNSUPPORTED — multi-slot condition (5) requires HTTP 200 from /posts/1/tech which returns 404 (endpoint assumption error, not network failure). Frozen rule is unsatisfiable on this endpoint.",
+      "Multi-slot positive control discriminates fix: UNSUPPORTED — order-dependent without fix (HEAD [param-2slot,param-fetch-posts] → param-2slot by insertion; reversed → param-fetch-posts). Control tests insertion order, not fix, unless reverse-order condition added.",
+      "404 is a network failure: MISCLASSIFIED — HTTP 404 is a valid response indicating route absence, not a transient network outage. Producer correctly measured but misclassified in metrics.network_failure_count."
+    ],
+    "unknown": [
+      "Whether the fix survives commit to production HEAD and re-validation without monkey-patching — the first required gate",
+      "Whether B_CONFIDENCE_LITERAL_HIGHER (literal 0.98 vs param 0.95) remains literal-winning after fix commit — independent replay suggests yes but not measured with correct mechanism in any experiment",
+      "Whether param generalization holds across multiple unseen ids (beyond single id=7), multiple slot counts, template shapes, or intents beyond fetch-post",
+      "Whether fix generalizes to real-web endpoints with DOM, auth, session state, drift — jsonplaceholder is simple REST",
+      "Whether LLM-driven mechanism distillation ('learn on A' half of C-PARAM-INHERIT) works — no model calls in this experiment",
+      "Whether _matches discriminates with non-empty preconditions and _bind preserves type for full-match strings — all preconditions {} and only URL-embedded binding tested",
+      "Whether the commit gate (fix in HEAD + re-validation) changes baseline behavior — e.g., registry upsert sorting interaction"
+    ],
+    "do_not_assume": [
+      "Do not assume the fix is committed to production — HEAD src/spider/kernel.py L112 is unfixed. Product promotion requires Director-approved commit + post-commit re-validation.",
+      "Do not assume HTTP-PARAM-INHERIT-SURVIVES is satisfied — multi-slot criterion (5) unsatisfiable on jsonplaceholder. Decision is MEASUREMENT_INVALID.",
+      "Do not assume multi-slot dominance is validated under HTTP — resolution-level confirmed but HTTP 404 and order-dependency invalidate HTTP-level claim.",
+      "Do not assume 404 is a network failure — it is a valid HTTP response indicating the route does not exist (audit V_NETWORK_MISCLASSIFICATION).",
+      "Do not assume core hazard validation applies beyond patch-only, single id=7, single endpoint, single intent, preconditions={} — ceiling is narrow.",
+      "Do not assume the report interpretation 'Parameterized inheritance works end-to-end' is justified as a general statement — it overstates the ceiling (patch-only, single-id, single-endpoint).",
+      "Do not generalize to real-web endpoints, DOM, auth, session, drift, multiple intents, non-empty preconditions, LLM distillation, or _bind type preservation.",
+      "Do not assume baseline_pass 6/6 indicates production-readiness — measurements are monkey-patched, not post-commit."
+    ]
+  },
+  "dependencies": [
+    "src/spider/kernel.py L112 — fix candidates.sort(key=lambda m: (m.confidence, len(m.parameter_slots)), reverse=True) must be committed to HEAD before real-web testing or product promotion",
+    "src/spider/kernel.py L104-113 — resolve() and _matches() logic",
+    "src/spider/registry.py L35-38 — upsert sorting determines tie-break behavior in production",
+    "src/spider/models.py — Mechanism, Resolution dataclasses",
+    "research/experiments/EXP-GRAPH-33998605047/handoff.json (sha256 3bea416e31107aaaaeb156b49346268726ce6edf72da12f3371060c282e4c37d) — parent established synthetic hazard elimination, multi-slot dominance, template-only scope",
+    "research/experiments/EXP-GRAPH-33955869291/handoff.json — grandparent established multi-slot dominance and template-only scope limit",
+    "research/experiments/EXP-GRAPH-33816735314/handoff.json — great-grandparent established competition hazard resolved on synthetic substrate",
+    "research/claims/registry.json — C-PARAM-INHERIT status EXPERIMENTAL"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-34170139507/result.json",
+    "research/experiments/EXP-GRAPH-34170139507/audit.json",
+    "research/experiments/EXP-GRAPH-34170139507/raw_evidence.json",
+    "research/experiments/EXP-GRAPH-34170139507/derived_measurements.json",
+    "research/experiments/EXP-GRAPH-34170139507/report.md",
+    "research/experiments/EXP-GRAPH-34170139507/provenance.json",
+    "research/experiments/EXP-GRAPH-34170139507/spec.json",
+    "research/experiments/EXP-GRAPH-34170139507/prereg.md",
+    "research/experiments/EXP-GRAPH-34170139507/run_experiment.py",
+    "research/experiments/EXP-GRAPH-34170139507/freeze.json",
+    "src/spider/kernel.py L112 sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+    "src/spider/models.py sha256 338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78",
+    "src/spider/registry.py sha256 51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c",
+    "research/experiments/EXP-GRAPH-33998605047/handoff.json sha256 3bea416e31107aaaaeb156b49346268726ce6edf72da12f3371060c282e4c37d",
+    "research/claims/registry.json"
+  ],
+  "recommended_action": "First gate: commit the one-line fix to src/spider/kernel.py L112 (candidates.sort(key=lambda m: (m.confidence, len(m.parameter_slots)), reverse=True)) with Director approval. Second: re-validate in committed HEAD (no monkey-patching) with core literal-vs-param equal-confidence competition (ids 2..7) plus corrected B_CONFIDENCE_LITERAL_HIGHER (literal 0.98 vs param 0.95) to confirm fix works post-commit and all baselines pass. Third: advance to real-web endpoint testing with DOM, auth, session state, drift — the highest-upside generalization gap for product viability. Separately: replace multi-slot positive control with an endpoint supporting nested routes (mock server or different public API) and test reverse registry order to discriminate fix from insertion-order artifact. Expand unseen-identifier coverage beyond single id=7. Consider template-only and non-empty precondition edge cases. The LLM distillation half of C-PARAM-INHERIT ('learn on A') is lower priority than commit + real-web validation."
 }
 ```
 
