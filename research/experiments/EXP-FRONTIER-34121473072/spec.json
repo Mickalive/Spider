@@ -1,17 +1,35 @@
 {
   "experiment_id": "EXP-FRONTIER-34121473072",
   "lane": "frontier",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-WEB-DYNAMICS"],
+  "question": "Does bias-corrected kNN TV recover uniform function invariance in 10D non-Gaussian spaces after removing finite-sample bias floor, and does clipping artefact quantitatively explain the translation-scaling asymmetry?",
+  "hypothesis": "Bias correction (permutation-null subtraction) will reduce the aggregate TV range but preserve monotonic scaling for translation; scaling function may show improved signal after bias subtraction. Function invariance may improve if bias floor is uniform across functions. Clipping artefact will partially explain translation's strong signal but not fully.",
+  "falsifier": "After bias correction, function invariance still fails (two-way ANOVA interaction p<0.05), OR scaling function shows no monotonic increase (Spearman rho<0.5, p>0.05), OR clipping sensitivity test shows >80% of translation separation is clip-driven (toroidal separation <0.05).",
+  "baselines": [
+    "Bias-corrected kNN TV (permutation-null subtraction at each lambda/function/kNN scale)",
+    "Toroidal wrapping (wrap coordinates modulo 1 to eliminate clipping artefact)",
+    "Frequency baseline P(S_{t+1}) marginal distribution",
+    "Gaussian noise baseline (same 10D with single Gaussian heteroscedastic noise)"
+  ],
+  "positive_control": "After bias correction, translation function (seed=44) still shows monotonic increase (Spearman rho>=0.8, p<0.05) with separation >0.05 between lambda=0 and lambda=1.",
+  "null_control": "After bias correction, scaling function (seed=43) shows no monotonic increase (Spearman rho<0.5, p>0.05) if scaling failure persists; OR if scaling recovers, rho>=0.5 p<0.05.",
+  "measurement_validity": [
+    "Same synthetic DGP as parent EXP-FRONTIER-34065969836: 10D uniform [0,1]^10, mixture-of-3-Gaussians heteroscedastic noise, 3 function families (rotation, scaling, translation)",
+    "Frozen random seed (seed=42) for reproducibility; same function seeds (42,43,44)",
+    "8 lambda levels (0.0,0.1,0.2,0.3,0.4,0.5,0.7,1.0)",
+    "500 transitions per cell (3 funcs x 8 lambdas x 10 reps = 240 rows)",
+    "kNN TV estimator at k=20 (primary) and multiscale k=5,10,20,50",
+    "1000 permutations per cell for bias estimation (not 200)",
+    "Bias-corrected TV = max(0, TV - permutation_mean_at_lambda)",
+    "Toroidal wrapping: after noise addition, wrap coordinates modulo 1 to eliminate clipping",
+    "Frequency baseline: compute marginal next-state distribution and expected TV under independence",
+    "Gaussian baseline: generate same DGP but with single Gaussian noise (not mixture) to isolate non-Gaussian effect",
+    "Compute clipping fractions per lambda/function to quantify edge mass",
+    "No target leakage: bias correction uses permutation null at same lambda/function, not test data"
+  ],
+  "decision_rule": "If after bias correction: (1) function invariance passes (two-way ANOVA interaction p>0.05), AND (2) scaling monotonic passes (Spearman rho>=0.5, p<0.05), AND (3) clipping sensitivity shows translation separation remains >0.05 after toroidal wrapping, verdict = SURVIVES_CURRENT_TEST. If (1) function invariance fails AND scaling monotonic fails, verdict = FALSIFIED-IN-SETTING. If mixed results (e.g., function invariance passes but scaling fails, or vice versa), verdict = MIXED. If pipeline errors or sample size insufficient, verdict = MEASUREMENT_INVALID.",
+  "product_consequence_positive": "If bias correction rescues scaling and function invariance, TV distance can detect scaling-type dynamics in high-dimensional non-Gaussian spaces, expanding the regime where TV is useful for action-dependent structure detection. Product lane can consider TV-based regime detection for action-conditioned mechanisms across diverse dynamical families.",
+  "product_consequence_negative": "If bias correction does not rescue scaling, scaling-type dynamics are not detectable by kNN TV in high-dimensional spaces. Product lane should focus on translation-like dynamics only, or consider alternative high-dimensional density divergence estimators (KDE, neural density estimation). The TV regime detection claim would be bounded to translation-type dynamics.",
+  "estimated_cost": "Moderate: reuse existing DGP code from research/frontier/highdim_nongaussian_tv/, add bias correction, toroidal wrapping, frequency baseline, Gaussian baseline. Compute ~24000 permutations (1000 per cell) plus TV recomputation. Estimated runtime ~30 minutes on single machine.",
+  "expected_information_gain": "High: directly resolves the audit's critical validity threats (bias floor, clipping artefact, missing baselines) and determines whether scaling failure is estimator artefact or genuine signal absence. A positive result rescues the scaling function and justifies broader TV applicability; a negative result bounds TV to translation-like dynamics. Both outcomes change claim C-WEB-DYNAMICS decision."
 }
