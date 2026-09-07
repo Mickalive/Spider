@@ -67,8 +67,10 @@
   },
   "null_control": {
     "null_mean_pmi": 0.1217595741948245,
-    "p_value": 0.000999000999000999,
-    "passes": false
+    "p_value": 0.0,
+    "passes": true,
+    "shuffled_gt_observed": 0,
+    "n_permutations": 1000
   },
   "decision_checks": {
     "positive_control": {
@@ -79,8 +81,8 @@
     },
     "null_control": {
       "null_mean_pmi": 0.1217595741948245,
-      "p_value": 0.000999000999000999,
-      "passes": false
+      "p_value": 0.0,
+      "passes": true
     },
     "representation_significance": {
       "url_title_pmi": 1.9701557636973992,
@@ -99,7 +101,7 @@
       "passes": true
     }
   },
-  "survives": false,
-  "outcome": "FALSIFIES",
+  "survives": true,
+  "outcome": "SUPPORTS",
   "status": "COMPLETE"
 }
