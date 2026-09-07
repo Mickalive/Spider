@@ -151,6 +151,31 @@
         "handoff.json": "f0bd29f254c6e84e1b8f8c0a3b8ab122d70f4830c5c58b354fc484a098834dc1"
       }
     },
+    "EXP-FRONTIER-34065969836": {
+      "lane": "frontier",
+      "request_id": "5f68f63d28f9078900ab600b",
+      "created_at": "2026-09-06T23:07:22.600761+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Does TV distance detect action-dependent dynamical structure in higher-dimensional (10D) continuous state spaces with non-Gaussian heteroscedastic noise, or does the 2D result fail to generalize when state dimensionality and noise distribution complexity increase toward Web-realistic conditions?",
+      "audit_status": "REVISE",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/frontier",
+      "hashes": {
+        "request.json": "7e41f131747af8a2a3b2ef8fbf911c5a86de89b3534b77271a209d9ef3d5ac80",
+        "spec.json": "daf47a2e57a7372b2cfce9854240100162e434f332eeada223d238d8a985ff32",
+        "prereg.md": "b5311e10b8560745548d63b6465d6c8d9db75945ed3bc1ada70a3dcccaedaa33",
+        "freeze.json": "670d6baeab6ac66b580ebe8d8086a4c1c705f100a6fac7f8ed8d784789ec5dea",
+        "result.json": "7d0e180bbced137cee1f2f53968750e274f2409deb0496e839ea3fbd9f062592",
+        "report.md": "cba8f27d78c39dc7c5525c417df5f39cad43a182957f88ebd6d65a147d0dda49",
+        "provenance.json": "187f41a10ea7708f775e099ca4de893f354ffb0fcf849ab1b14bd3fd071d6fcf",
+        "audit.json": "b4a7cfbc0e121128485d82022f173f25eeea5cae159c7487889169b1b17a6ba2",
+        "verdict.json": "d8a5483c7cc260cbd81d1c4b996ac7fcb99b90f219571f11b3d920adf1b84a8e",
+        "handoff.json": "26e7bd90e02cd678328699e7a7cd2d1e0e6e0873361d309d1e775253ff0ef805"
+      }
+    },
     "EXP-GRAPH-33528827169": {
       "lane": "graph",
       "request_id": "3e0d81e7790f2f2b7bd8665e",
