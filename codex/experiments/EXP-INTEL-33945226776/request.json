@@ -1,0 +1,20 @@
+{
+  "base_sha": "8bc5034de7e319b850be80f4e9db446b3874af9d",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-05T04:41:18.128059+00:00",
+  "experiment_id": "EXP-INTEL-33945226776",
+  "inherited_last_verdict": "SUPPORTS",
+  "inherited_next_question": "Can SPIDER's fragment extraction code successfully extract and reuse fragments from WebArena's live Docker accessibility tree output, measuring real truncation, viewport filtering, and fragment yield on 2-3 task types to bound the REQUIRES_TRANSFORM overhead?",
+  "lane": "intel",
+  "origin_github_run_id": "33945226776",
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-33925056324",
+    "path": "research/experiments/EXP-INTEL-33925056324/handoff.json",
+    "sha256": "6f92dd17615985260d2c3828608c7f7c00ff1ba71dd5593f57d82d9555668fce"
+  },
+  "reason": "pulse",
+  "request_hash": "d8a99674b71fb522496c30fd2ebac873d70ac3188cf64d816d8355e571cedb49",
+  "request_id": "ec3b6099b3b6260aeb947f90",
+  "schema_version": 1
+}

@@ -1,0 +1,27 @@
+{
+  "experiment_id": "EXP-INTEL-33945226776",
+  "lane": "intel",
+  "claim_ids": ["C-CROSSSITE", "C-LLM-INHERIT", "C-PRODUCT-ECON"],
+  "question": "Given WebArena's public task definitions, site configurations, and source code (without Docker deployment), what is the estimated page complexity distribution, truncation risk, and fragment yield across task types, and which 2-3 task types maximize information gain for the C-CROSSSITE/C-LLM-INHERIT integration experiment?",
+  "hypothesis": "WebArena's 4 site types have distinct page complexity profiles, with at least 2 site types having >50% of tasks with estimated fragment yield >50% after REQUIRES_TRANSFORM overhead (truncation at UTTERANCE_MAX_LENGTH=8192, viewport filtering at current_viewport_only=True, node pruning via IGNORED_ACTREE_PROPERTIES), making them suitable for the graph-lane integration experiment.",
+  "falsifier": "If all 4 site types have estimated fragment yield <30% after transformation (indicating >70% of tasks would lose most fragments to truncation/viewport filtering/pruning), the REQUIRES_TRANSFORM overhead negates the 812-task corpus expansion value and the 2-site corpus remains the practical bound for C-CROSSSITE/C-LLM-INHERIT.",
+  "baselines": [
+    "2-site corpus (current baseline): 2 websites, raw HTML, no transformation, no truncation, no viewport filtering — fragment yield ~100% of DOM elements available",
+    "Synthetic adapter results (EXP-INTEL-33925056324): element_recall=1.0 on 100-element synthetic observations — tautological upper bound under shared formatting grammar",
+    "WebArena structural proxies (EXP-INTEL-33528832113): S1-S5 scores 5/5 — structural suitability without observation-format measurement"
+  ],
+  "positive_control": "E-commerce site type (shopping) task definitions should reference product listing/search pages with structured product data (prices, titles, images, buttons), estimated at >30 extractable elements per page, yielding >60% fragment yield after transformation.",
+  "null_control": "CMS site type (wikipedia-style) task definitions should reference simple content pages with minimal interactive elements, estimated at <15 extractable elements per page, yielding <40% fragment yield after transformation. This verifies the analysis can distinguish high-complexity from low-complexity site types.",
+  "measurement_validity": [
+    "Task definitions are parsed from WebArena's public GitHub repository (github.com/web-arena-x/webarena, main branch) — no Docker, no browser, no LLM calls, offline analysis only",
+    "Page complexity estimation uses task metadata (site_type, URL patterns, task_description length, evaluation_type) and source code constants (UTTERANCE_MAX_LENGTH=8192, max_obs_length=1920, IN_VIEWPORT_RATIO_THRESHOLD=0.6, IGNORED_ACTREE_PROPERTIES) rather than live page rendering",
+    "Fragment yield estimation is a heuristic bound, not a measurement — it estimates the fraction of DOM elements that survive truncation + viewport filtering + node pruning, based on page complexity heuristics and source code constants",
+    "Three independent estimation methods (element-count-based, char-length-based, task-type-based) test robustness of the ranking across site types",
+    "Analysis code must be committed to research/intel/ before execution"
+  ],
+  "decision_rule": "If >=2 site types have estimated median fragment yield >50% AND the recommended 2-3 task types have estimated element diversity >20 unique element types per page, verdict = SUPPORTS (proceed with Docker integration on recommended tasks). If all site types have estimated median fragment yield <30%, verdict = FALSIFIES (2-site corpus remains practical bound). Otherwise verdict = MIXED.",
+  "product_consequence_positive": "Graph lane should proceed with Docker integration on the recommended 2-3 task types; C-CROSSSITE and C-LLM-INHERIT move toward EXPERIMENTAL with bounded task selection. Intel provides the task-type ranking that guides the integration experiment.",
+  "product_consequence_negative": "2-site corpus remains practical bound for C-CROSSSITE/C-LLM-INHERIT; Intel should assess whether VisualWebArena, Mind2Web, or other benchmarks offer a lower-transformation-cost path to cross-site diversity.",
+  "estimated_cost": "Very low: parse public repo files (task JSON definitions, source code constants, site configuration), offline heuristic analysis, no Docker/browser/LLM. ~2-4 hours of agent time.",
+  "expected_information_gain": "HIGH: directly determines whether WebArena integration is worth pursuing and provides the task-type ranking that guides the graph-lane integration experiment. A negative result saves the graph lane from deploying Docker on an unsuitable corpus. A positive result identifies the specific tasks that maximize information gain for C-CROSSSITE testing."
+}

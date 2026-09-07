@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-33945226776",
+  "lane": "intel",
+  "github_run_id": "34029326568",
+  "github_run_attempt": 1,
+  "execution_recorded_at": "2026-09-06T11:11:35.748429+00:00",
+  "freeze_recorded_at": "2026-09-05T08:43:21.866089+00:00",
+  "base_sha": "8bc5034de7e319b850be80f4e9db446b3874af9d",
+  "pre_execute_sha": "c4ee4422b4d01bc3231abc0a6ff78d1b110e0aa9",
+  "commit_chain": [
+    {
+      "sha": "8bc5034de7e319b850be80f4e9db446b3874af9d",
+      "role": "base",
+      "description": "Base commit for experiment creation"
+    },
+    {
+      "sha": "c4ee4422b4d01bc3231abc0a6ff78d1b110e0aa9",
+      "role": "pre_execute",
+      "description": "Commit at freeze time, before execution"
+    }
+  ],
+  "code_artifacts": [
+    {
+      "path": "research/intel/webarena_task_analysis/analyze.py",
+      "sha256": "37bdb6c02dfba8b15f24ef22f295f95aaa78567011797d819fe1a4d5c824d485",
+      "role": "analysis_code",
+      "language": "python3",
+      "lines": 664,
+      "description": "Main analysis script implementing 3 estimation methods, statistical tests, and control checks"
+    }
+  ],
+  "data_sources": [
+    {
+      "name": "WebArena task definitions",
+      "source": "WebArena public GitHub repository (github.com/web-arena-x/webarena)",
+      "commit": "main branch at base_sha 8bc5034de7e319b850be80f4e9db446b3874af9d",
+      "format": "JSON task definition files",
+      "total_tasks": 812,
+      "site_types": ["gitlab", "map", "reddit", "shopping", "shopping_admin", "wikipedia"],
+      "description": "Task definitions containing site_type, intent, eval_types, intent_template_id, require_login, has_reference_url"
+    },
+    {
+      "name": "WebArena source code constants",
+      "source": "WebArena source code at base_sha",
+      "constants": {
+        "UTTERANCE_MAX_LENGTH": 8192,
+        "MAX_OBS_LENGTH": 1920,
+        "IN_VIEWPORT_RATIO_THRESHOLD": 0.6,
+        "IGNORED_ACTREE_PROPERTIES": ["focusable", "editable", "readonly", "level", "settable", "multiline", "invalid"]
+      },
+      "description": "Source code constants used for truncation and filtering estimates"
+    }
+  ],
+  "derived_artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-33945226776/analysis_output.json",
+      "sha256": "8f7ebd0932b1919394d3604879314c1130ae3614cd75b3ce7d8e394e5a08e7bc",
+      "role": "derived",
+      "description": "Full analysis output with per-site-type yields, method agreement, statistical tests, controls, and truncation sensitivity"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-33945226776/result.json",
+      "sha256": null,
+      "role": "result",
+      "description": "Canonical experiment result packet"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-33945226776/report.md",
+      "sha256": null,
+      "role": "report",
+      "description": "Human-readable analysis report"
+    }
+  ],
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.x",
+    "dependencies": "stdlib only (json, re, sys, collections, dataclasses, statistics, math)",
+    "no_external_dependencies": true,
+    "no_docker": true,
+    "no_browser": true,
+    "no_llm_calls": true,
+    "offline_analysis": true
+  },
+  "execution_commands": [
+    {
+      "command": "python3 research/intel/webarena_task_analysis/analyze.py /tmp/webarena_tasks.json",
+      "description": "Run the analysis on parsed WebArena task definitions",
+      "exit_code": 0,
+      "note": "Task definitions must be pre-parsed from WebArena repo into /tmp/webarena_tasks.json"
+    }
+  ],
+  "parent_experiment": {
+    "experiment_id": "EXP-INTEL-33925056324",
+    "path": "research/experiments/EXP-INTEL-33925056324/",
+    "handoff_sha256": "6f92dd17615985260d2c3828608c7f7c00ff1ba71dd5593f57d82d9555668fce",
+    "verdict": "SUPPORTS",
+    "ceiling": "synthetic adapter validation only"
+  },
+  "frozen_inputs": {
+    "request.json": "bb5b84eb9c0144aaa540ff513c65e954751faa98d0b0f2423083e4fd7a4d51db",
+    "spec.json": "e05886c4ead8672ceee8880f3bc4f78e68d50566f8c84781d3401d586892ebda",
+    "prereg.md": "763f9086d690421ad2350c00536b17636d42f325aef21c4ec9a34992359a7445"
+  },
+  "inherited_evidence": [
+    {
+      "experiment_id": "EXP-INTEL-33528832113",
+      "claim": "WebArena structural proxies S1-S5 score 5/5",
+      "relevance": "Structural suitability without observation-format measurement"
+    },
+    {
+      "experiment_id": "EXP-INTEL-33842055594",
+      "claim": "WebArena REQUIRES_TRANSFORM / PARTIALLY_COMPATIBLE",
+      "relevance": "Observation format requires transformation, not directly usable"
+    },
+    {
+      "experiment_id": "EXP-INTEL-33925056324",
+      "claim": "224-line adapter parses synthetic format with element_recall=1.0",
+      "relevance": "Adapter exists and works on synthetic format; real performance unknown"
+    }
+  ],
+  "reproducibility_notes": [
+    "Analysis is fully deterministic given the same input task definitions and source code constants",
+    "Element count estimates (ELEMENT_COUNT_ESTIMATES) are based on domain knowledge and may be revised after live validation",
+    "Viewport coverage and node pruning fractions are estimated from typical web layouts, not measured from WebArena",
+    "The Kruskal-Wallis p-value (0.999) suggests the heuristic estimates may reflect analyst priors more than real differences",
+    "To reproduce: parse WebArena task definitions from GitHub, run analyze.py with the parsed JSON"
+  ]
+}
