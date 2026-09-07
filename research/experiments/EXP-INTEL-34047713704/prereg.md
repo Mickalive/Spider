@@ -10,14 +10,17 @@
 
 ## 2. Scientific Question
 
-Do heuristic fragment yield estimates (0.517-0.65) from EXP-INTEL-33945226776 match actual DOM extraction on live WebArena Docker pages, and does Method 1 (element-count, shopping 0.365) or aggregated median (0.65) predict live yield more accurately?
+Do heuristic fragment yield estimates from EXP-INTEL-33945226776 match actual DOM extraction on live WebArena Docker pages, and is Method 1 (element-count) or aggregated median more predictive of live yield?
 
 ## 3. Motivation
 
 Prior Intel work (EXP-INTEL-33945226776) performed heuristic analysis of 812 WebArena tasks across 6 site types, finding:
+
 - Aggregated median yield >50% for all 6 site types (0.517-0.65)
-- Method disagreement (Spearman rho -0.943 to 0.371) and Kruskal-Wallis p=0.999
-- Method 1 (element-count, the only method modeling viewport+pruning) gives shopping yield 0.365, contradicting aggregated 0.65 inflated by degenerate Method 2
+- Method disagreement (Spearman rho -0.943 to 0.371) and Kruskal-Wallis p=0.999 — estimates are non-discriminating priors
+- Method 1 (element-count, the only method modeling viewport+pruning) gives materially lower yields: shopping 0.365, gitlab 0.484, wikipedia 0.517
+- Method 2 (char-length at UTTERANCE_MAX_LENGTH=8192) is degenerate: yields 1.0 for 5/6 site types, inflating aggregated medians
+- max_obs_length=1920 (LLM input limit) is the binding constraint, not UTTERANCE_MAX_LENGTH=8192
 - Null control failed (wikipedia 0.517 > 0.40 threshold)
 - Auditor ceiling bounds this to "heuristic exploratory triage only"
 
@@ -25,23 +28,23 @@ The central unresolved question is whether these heuristic estimates match actua
 
 This resolves whether:
 1. The 812-task corpus is suitable for C-CROSSSITE and C-LLM-INHERIT integration
-2. Method 1 (element-count, shopping 0.365) or aggregated median (0.65) is more predictive
+2. Method 1 (element-count, shopping 0.365) or aggregated median (0.65) is more predictive of live yield
 3. The 324 LOC REQUIRES_TRANSFORM implementation is justified
 4. Intel should assess VisualWebArena/Mind2Web as alternatives
 
 ## 4. Hypotheses
 
-### H1: Yield Consistency
-Live fragment yield will be within +/-0.15 of heuristic estimates for at least 2 of 3 tested site types (shopping, gitlab, wikipedia).
+### H1: Method 1 Calibration
+Live fragment yield will be within +/-0.10 of Method 1 (element-count) estimates for at least 2 of 3 tested site types (shopping M1=0.365, gitlab M1=0.484, wikipedia M1=0.517).
 
 ### H2: Shopping Positive Control
-Shopping task will have highest actual fragment yield due to structured product data with interactive elements. Expected: actual yield >0.40.
+Shopping task will have highest actual fragment yield due to structured product data with interactive elements. Expected: actual yield >0.30 (based on M1 estimate 0.365 with live DOM typically having more elements than heuristic estimates). Shopping yield must exceed wikipedia yield.
 
 ### H3: Wikipedia Negative Control
-Wikipedia task will have lowest actual fragment yield. Expected: actual yield <0.60 and wikipedia yield < shopping yield.
+Wikipedia task will have lowest actual fragment yield among the three site types. Expected: actual yield <0.60 (based on all heuristic estimates 0.517-1.0). Wikipedia yield must be less than both shopping and gitlab yields.
 
 ### H4: Truncation Sensitivity
-max_obs_length=1920 will be the binding constraint for shopping and gitlab (sensitivity ratio <0.7), matching heuristic estimates.
+max_obs_length=1920 will be the binding constraint for shopping and gitlab (sensitivity ratio <0.7), matching heuristic estimates (shopping 0.37, gitlab 0.471).
 
 ## 5. Task Selection
 
@@ -112,7 +115,7 @@ Viewport filtering yield:
 
 ### 7.1 Primary Metrics
 - **actual_yield_by_site_type**: {shopping: float, gitlab: float, wikipedia: float} at max_obs_length=1920
-- **heuristic_vs_actual_deviation**: |heuristic_median - actual_yield| for each site type
+- **method1_vs_actual_deviation**: |method1_estimate - actual_yield| for each site type
 - **truncation_sensitivity_ratio**: yield_1920 / yield_8192 for each site type
 
 ### 7.2 Secondary Metrics
@@ -120,19 +123,19 @@ Viewport filtering yield:
 - **formatted_string_length**: L_formatted for each observation
 - **viewport_filtering_effect**: 1 - viewport_yield for each site type
 - **property_pruning_effect**: average properties pruned per element
-- **method1_vs_actual_deviation**: |method1_estimate - actual_yield| for each site type
+- **aggregated_median_vs_actual_deviation**: |aggregated_median - actual_yield| for each site type
 
 ### 7.3 Derived Metrics
-- **yield_ranking_agreement**: Does actual yield ranking match heuristic ranking?
-- **method1_predictive_power**: Correlation between M1 estimates and actual yield
-- **corpus_suitability_score**: Fraction of tested site types with actual yield >0.50
+- **yield_ranking_agreement**: Does actual yield ranking match M1 ranking (wikipedia > gitlab > shopping)?
+- **method1_predictive_power**: Absolute deviation of M1 from actual yield, averaged across site types
+- **corpus_suitability_score**: Fraction of tested site types with actual yield >0.30
 
 ## 8. Controls
 
 ### 8.1 Positive Control (Shopping)
-- **Expected**: actual yield >0.40 (based on M1 estimate 0.365 with live DOM typically having more elements)
-- **Pass condition**: shopping yield >0.40 AND shopping yield > wikipedia yield
-- **Fail condition**: shopping yield <0.30 OR shopping yield < wikipedia yield
+- **Expected**: actual yield >0.30 (based on M1 estimate 0.365 with live DOM typically having more elements)
+- **Pass condition**: shopping yield >0.30 AND shopping yield > wikipedia yield
+- **Fail condition**: shopping yield <0.25 OR shopping yield < wikipedia yield
 
 ### 8.2 Negative Control (Wikipedia)
 - **Expected**: actual yield <0.60 (based on all heuristic estimates 0.517-1.0)
@@ -140,40 +143,40 @@ Viewport filtering yield:
 - **Fail condition**: wikipedia yield >0.60 OR wikipedia yield > shopping yield
 
 ### 8.3 Truncation Sensitivity Control
-- **Expected**: sensitivity_ratio <0.7 for shopping and gitlab (matching heuristic estimates)
+- **Expected**: sensitivity_ratio <0.7 for shopping and gitlab (matching heuristic estimates shopping 0.37, gitlab 0.471)
 - **Pass condition**: shopping sensitivity_ratio <0.7 AND gitlab sensitivity_ratio <0.7
 - **Fail condition**: shopping sensitivity_ratio >0.8 OR gitlab sensitivity_ratio >0.8
 
 ### 8.4 Adapter Functionality Control
 - **Expected**: webarena_adapter.py parses all observations without errors
-- **Pass condition**: all 3 observations parsed, element_recall >0.90 on synthetic positive control
-- **Fail condition**: parsing errors on any observation OR synthetic recall <0.90
+- **Pass condition**: all 3 observations parsed, no parsing errors
+- **Fail condition**: parsing errors on any observation
 
 ## 9. Decision Rules
 
 ### 9.1 SUPPORTS
 If ALL of:
 1. Docker deployment succeeds for all 3 tasks
-2. Shopping yield >0.50
-3. Gitlab yield >0.50
-4. Wikipedia yield < shopping yield
-5. Wikipedia yield < gitlab yield
-6. heuristic_vs_actual_deviation <0.15 for >=2 site types
+2. heuristic_vs_actual_deviation <=0.10 for >=2 site types (using M1 estimates)
+3. Shopping yield >0.30
+4. Gitlab yield >0.30
+5. Wikipedia yield < shopping yield
+6. Wikipedia yield < gitlab yield
 
-Then: C-CROSSSITE and C-LLM-INHERIT move toward EXPERIMENTAL. Product lane can proceed with REQUIRES_TRANSFORM implementation.
+Then: C-CROSSSITE and C-LLM-INHERIT move toward EXPERIMENTAL with caveat that 3-task sample is small. Product lane can proceed with REQUIRES_TRANSFORM implementation.
 
 ### 9.2 FALSIFIES
 If ANY of:
-1. Shopping yield <0.30 OR gitlab yield <0.30
+1. Shopping yield <0.25 OR gitlab yield <0.35
 2. Wikipedia yield > shopping yield OR Wikipedia yield > gitlab yield
-3. heuristic_vs_actual_deviation >0.15 for >=2 site types
+3. heuristic_vs_actual_deviation >0.15 for >=2 site types (using M1 estimates)
 
 Then: 2-site corpus remains practical bound. Intel should assess VisualWebArena/Mind2Web as alternatives.
 
 ### 9.3 MIXED
 If NOT SUPPORTS AND NOT FALSIFIES:
-- Shopping or gitlab yield between 0.30-0.50
-- OR heuristic_vs_actual_deviation between 0.15-0.25 for >=1 site type
+- Shopping or gitlab yield between 0.25-0.30
+- OR heuristic_vs_actual_deviation between 0.10-0.15 for >=1 site type
 - OR truncation sensitivity inconsistent with estimates
 
 Then: Inconclusive. Need larger task sample (5-10 tasks per site type).
@@ -188,13 +191,13 @@ If:
 ## 10. Validity Threats
 
 ### 10.1 Sample Size
-With only 3 tasks (1 per site type), estimates have high sampling error. A single task may not be representative of its site type. Mitigation: report confidence intervals and acknowledge small sample in verdict. The experiment is designed as a proof-of-concept for Docker deployment feasibility, not a comprehensive yield survey.
+With only 3 tasks (1 per site type), estimates have high sampling error. A single task may not be representative of its site type. Mitigation: report confidence intervals and acknowledge small sample in verdict. The experiment is designed as a proof-of-concept for Docker deployment feasibility and heuristic calibration, not a comprehensive yield survey.
 
 ### 10.2 Task Selection Bias
 Selected tasks may not be representative of their site types. Mitigation: select tasks following parent recommendation criteria (product listing for shopping, project view for gitlab, article for wikipedia). Document exact task URLs and characteristics.
 
 ### 10.3 Docker vs Production Environment
-WebArena Docker environment may differ from production websites in DOM structure, JavaScript rendering, and element counts. Mitigation: acknowledge Docker-specific findings. If Docker yield is substantially different from heuristic estimates, this itself is informative.
+WebArena Docker environment may differ from production websites in DOM structure, JavaScript rendering, and element counts. Mitigation: acknowledge Docker-specific findings. If Docker yield is substantially different from heuristic estimates, this itself is informative about Docker-based benchmark validity.
 
 ### 10.4 Accessibility Tree Completeness
 WebArena's accessibility tree may not capture all DOM elements (e.g., elements hidden from assistive technology). Mitigation: compare accessibility_tree mode vs html mode if both are available. Acknowledge representation loss in validity_notes.
@@ -203,7 +206,7 @@ WebArena's accessibility tree may not capture all DOM elements (e.g., elements h
 Viewport filtering depends on viewport size and scroll position. WebArena uses fixed viewport dimensions. Mitigation: measure with current_viewport_only=True (default) and=False to bound viewport effect. Report both yields.
 
 ### 10.6 Heuristic Estimate Uncertainty
-Heuristic estimates from EXP-INTEL-33945226776 have known weaknesses: Method 2 is degenerate, Method 1 uses assumed viewport coverage and pruning fractions, Kruskal-Wallis p=0.999 shows no discrimination. Mitigation: compare actual yield to both aggregated median AND Method 1 alone to determine which is more predictive.
+Heuristic estimates from EXP-INTEL-33945226776 have known weaknesses: Method 2 is degenerate, Method 1 uses assumed viewport coverage and pruning fractions, Kruskal-Wallis p=0.999 shows no discrimination. Mitigation: use M1 as primary calibration target (most conservative), also report deviation from aggregated median for comparison.
 
 ## 11. Analysis Plan
 
@@ -213,8 +216,8 @@ Heuristic estimates from EXP-INTEL-33945226776 have known weaknesses: Method 2 i
 4. **Element Counting**: Count total elements, viewport elements, pruned elements per observation
 5. **Truncation Measurement**: Compute formatted string length, measure yield at 8192 and 1920
 6. **Yield Computation**: Compute actual_yield, viewport_yield, sensitivity_ratio per site type
-7. **Heuristic Comparison**: Compare actual yield to heuristic estimates (aggregated median and M1)
-8. **Control Checks**: Verify positive control (shopping >0.40), negative control (wikipedia <0.60), truncation sensitivity (<0.7)
+7. **Heuristic Comparison**: Compare actual yield to M1 estimates (primary) and aggregated median (secondary)
+8. **Control Checks**: Verify positive control (shopping >0.30), negative control (wikipedia <0.60), truncation sensitivity (<0.7), adapter functionality (no errors)
 9. **Decision**: Apply frozen decision rule (SUPPORTS/FALSIFIES/MIXED/MEASUREMENT_INVALID)
 10. **Reporting**: Report all metrics, controls, deviations, and validity threats
 
