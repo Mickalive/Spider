@@ -89,6 +89,14 @@
         "claim_id": "C-WEB-DYNAMICS",
         "status": "HYPOTHESIS",
         "reason": "Frozen decision_rule triggers FALSIFIED-IN-SETTING on two independent clauses: (1) positive_control PMI 0.855 < 1.0 bit threshold (prereg clause 12.2 item 4); (2) Wikipedia non-self PMI 0.899 < all PMI 1.073 (prereg clause 12.2 item 3, hypothesis H2). Audit additionally finds the PMI signal is confounded by action.target_href == state_after.url in 92-98% of transitions, meaning PMI measures destination predictability from action encoding rather than state-conditioned dynamics. The four primary PMI>0 tests nominally pass (p_bonf=0.004) but the maximum justified ceiling is FALSIFIED-IN-SETTING per the frozen rules. Claim remains HYPOTHESIS: no evidence accumulated for or against Web-dynamical structure beyond memory from this experiment."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-34071626363",
+        "lane": "physics",
+        "decision": "FALSIFIED-IN-SETTING",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "Frozen decision_rule triggers FALSIFIED-IN-SETTING on multiple clauses: (1) Wikipedia non-leakage PMI = 0.0, permutation p = 1.0 \u2014 not > 0 after Bonferroni correction (prereg clause 12.2 item 1); (2) Python docs non-leakage PMI = 0.874, permutation p = 0.667 \u2014 not > 0 after correction (prereg clause 12.2 item 1); (3) Positive control PMI = 0.855 < 1.0 bit threshold (prereg clause 12.2 item 2). Audit confirms all triggers are genuine: wiki PMI = 0.0 is mathematically forced by unique SA pairs (58 unique SA for 67 transitions) under Laplace alpha=1.0; permutation test is degenerate due to singleton trajectory groups (30/47 wiki, 14/17 python); positive control threshold was misspecified for actual synthetic data structure. PMI drops dramatically when leakage removed (wiki 1.073 -> 0.0, python 1.502 -> 0.874), confirming parent signal was driven by action.target_href == state_after.url leakage. Claim remains HYPOTHESIS: falsification is bounded to URL-level PMI with target_href action representation, Laplace alpha=1.0, within-trajectory permutation on these server-rendered sites (Wikipedia 7.6% non-leakage N=67, Python docs 2.4% N=21). No evidence about SPA/form-heavy sites, richer BrowserState representations, or trajectory-level entropy rates."
       }
     ],
     "C-PARAM-INHERIT": [

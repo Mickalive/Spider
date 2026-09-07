@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34071626363",
+  "lane": "physics",
+  "github_run_id": "34071626363",
+  "git_commit": "0b88a4c09041c9a0105dfc56d87d6132715a6494",
+  "git_branch": "main",
+  "python_version": "3.10.12",
+  "numpy_version": "1.24.3",
+  "environment": {
+    "platform": "linux",
+    "PYTHONHASHSEED": "0",
+    "random_seed": 42,
+    "n_permutations": 1000,
+    "alpha_laplace": 1.0,
+    "bonferroni_comparisons": 2
+  },
+  "frozen_inputs": {
+    "request_json": {
+      "path": "research/experiments/EXP-PHYSICS-34071626363/request.json",
+      "sha256": "f9d4ed3f84e89331f2ac83f9f85bbddc32365434e231210382f56bb1bb7f4ec3"
+    },
+    "spec_json": {
+      "path": "research/experiments/EXP-PHYSICS-34071626363/spec.json",
+      "sha256": "5c74470e1485f9f75209089c809d14f0973bf4c5f0c2ad329f5a75d386ab1119"
+    },
+    "prereg_md": {
+      "path": "research/experiments/EXP-PHYSICS-34071626363/prereg.md",
+      "sha256": "802474e9b32e0e400349971433b94be137bd89ea9ec0f54f220f7fc9e4a9e6bf"
+    },
+    "freeze_json": {
+      "path": "research/experiments/EXP-PHYSICS-34071626363/freeze.json",
+      "sha256": null
+    }
+  },
+  "input_data": {
+    "raw_live_wikipedia": {
+      "path": "research/experiments/EXP-PHYSICS-33965269281/raw_live_wikipedia.json",
+      "sha256": "87e6d8fcecb436ab9b1067a27c7f5708c393bace5efbb0225bfe1f57aa87bc5e",
+      "n_transitions": 880
+    },
+    "raw_live_python_docs": {
+      "path": "research/experiments/EXP-PHYSICS-33965269281/raw_live_python_docs.json",
+      "sha256": "a7634ca3734360a4d6a2ffdb89d859ae9ff466df710be3323da8ac5c5d2fa648",
+      "n_transitions": 880
+    },
+    "raw_positive_control": {
+      "path": "research/experiments/EXP-PHYSICS-33965269281/raw_positive.json",
+      "sha256": "3eef0bbc382fef44eb63d55481e3d417b2a98478d6f4fa4e1eb06331a99fc73f",
+      "n_transitions": 600
+    }
+  },
+  "analysis_code": {
+    "path": "research/physics/information_theoretic/nonleakage_pmi.py",
+    "sha256": "84096498e6c50b2771e199bdffeb2901b644e603a52ed850af339bb85d046904"
+  },
+  "output_artifacts": {
+    "result_json": {
+      "path": "research/experiments/EXP-PHYSICS-34071626363/result.json",
+      "sha256": null
+    },
+    "report_md": {
+      "path": "research/experiments/EXP-PHYSICS-34071626363/report.md",
+      "sha256": null
+    },
+    "raw_results": {
+      "path": "research/physics/information_theoretic/nonleakage_pmi_raw.json",
+      "sha256": "f4c1a45499a73f58c3ed71ea83881cb37f2fac7bfffa00a2bf81c88f9b0026b6"
+    }
+  },
+  "execution_commands": [
+    "PYTHONHASHSEED=0 python3 research/physics/information_theoretic/nonleakage_pmi.py"
+  ],
+  "parent_experiment": {
+    "experiment_id": "EXP-PHYSICS-34038570933",
+    "handoff_path": "research/experiments/EXP-PHYSICS-34038570933/handoff.json",
+    "handoff_sha256": "e11f8fa1e4a05857519c496350d625fe69138b4a6a233ba50ff72a134483b3ac"
+  },
+  "reproduction_notes": [
+    "All computation is deterministic under PYTHONHASHSEED=0 and seed=42",
+    "Data files are verified by SHA-256 hash before analysis",
+    "Non-leakage transitions identified by action.target_href != state_after.url after URL normalization",
+    "Laplace smoothing alpha=1.0 applied to marginal probability estimates",
+    "Permutation test uses 1000 within-trajectory shuffles of action labels",
+    "Bonferroni correction for 2 primary comparisons (threshold 0.025)"
+  ]
+}

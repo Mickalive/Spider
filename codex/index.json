@@ -485,6 +485,31 @@
         "handoff.json": "e11f8fa1e4a05857519c496350d625fe69138b4a6a233ba50ff72a134483b3ac"
       }
     },
+    "EXP-PHYSICS-34071626363": {
+      "lane": "physics",
+      "request_id": "e8d89173638ed6403debdccd",
+      "created_at": "2026-09-07T01:01:14.041519+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Does pointwise mutual information (PMI) between actions and next-states, conditioned on current state, remain positive when action-to-destination URL leakage is eliminated (i.e., transitions where action.target_href != state_after.url)?",
+      "audit_status": "PASS",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/physics",
+      "hashes": {
+        "request.json": "f9d4ed3f84e89331f2ac83f9f85bbddc32365434e231210382f56bb1bb7f4ec3",
+        "spec.json": "5c74470e1485f9f75209089c809d14f0973bf4c5f0c2ad329f5a75d386ab1119",
+        "prereg.md": "802474e9b32e0e400349971433b94be137bd89ea9ec0f54f220f7fc9e4a9e6bf",
+        "freeze.json": "13ae575c5ae16ee9cf556af7772d12e2dd33132f39ac607e8a9547f94b91c210",
+        "result.json": "6164cbe587766adf0357826c23debe94be7e0c932a92844c24d65c91ded670d6",
+        "report.md": "7417372e4981082ec3634bfdc9e316583f8058a5af575dcec3d7e7d3c4b14cf7",
+        "provenance.json": "f40b78c849f0b8f4e76e68e16a9f512b4683e32d0dfc7403a80fe32bf6595f17",
+        "audit.json": "487307ac399a94b01d08c03698c2b5ba400969663a50b4a6f48554773738c628",
+        "verdict.json": "987f0e9036cef99e70ad23aec70d8e0b664100ebabcdbc494750d2b63fef3950",
+        "handoff.json": "c1cec38c259eaec983f5165c96ad77901ace1c29dd8e8c65b33261cc19cded4b"
+      }
+    },
     "EXP-PRODUCT-33528829801": {
       "lane": "product",
       "request_id": "2629e8e63e200f05556e37ca",
