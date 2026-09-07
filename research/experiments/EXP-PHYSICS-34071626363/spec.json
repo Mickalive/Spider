@@ -1,17 +1,31 @@
 {
   "experiment_id": "EXP-PHYSICS-34071626363",
   "lane": "physics",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-WEB-DYNAMICS"],
+  "question": "Does pointwise mutual information (PMI) between actions and next-states, conditioned on current state, remain positive when action-to-destination URL leakage is eliminated (i.e., transitions where action.target_href != state_after.url)?",
+  "hypothesis": "PMI is positive on the subset of live Web transitions where action.target_href != state_after.url, indicating state-conditioned dynamical structure beyond trivial action-to-destination mapping. This subset excludes the 92-98% of transitions where PMI is confounded by action==next_state equality.",
+  "falsifier": "PMI is not significantly > 0 on non-leakage transitions for both live sites after Bonferroni correction, OR PMI on non-leakage subset is lower than PMI on all transitions, OR synthetic positive control fails (PMI < 1.0 bit), OR null control fails (shuffled PMI significantly > 0).",
+  "baselines": [
+    "Unblinded action PMI (target_href) on all transitions (parent baseline)",
+    "Hashed action PMI (sha256 of target_href) on all transitions (breaks equality but preserves uniqueness)",
+    "Action-type categorical PMI (all actions are 'click') on all transitions (negative control)",
+    "Shuffled-action PMI null (within-trajectory permutation, 1000 permutations)"
+  ],
+  "positive_control": "Synthetic data with lambda=1.0 (actions fully determine next-state): PMI must be >= 1.0 bit. This verifies the PMI computation detects known structure.",
+  "null_control": "Shuffled action labels on non-leakage transitions: PMI must not be significantly > 0 (permutation test p > 0.05). This verifies the PMI computation does not detect structure when action labels carry no information.",
+  "measurement_validity": [
+    "Raw transition data loaded from parent experiment files (raw_live_wikipedia.json, raw_live_python_docs.json, raw_positive.json) with SHA-256 integrity verified",
+    "Non-leakage transitions identified as those where action.target_href != state_after.url after normalization",
+    "State representation uses URL as the state identifier (consistent with parent)",
+    "Laplace smoothing (alpha=1.0) applied to marginal probability estimates",
+    "Trajectory-grouped permutation null: action labels shuffled within trajectories; 1000 permutations per test",
+    "Bonferroni correction for 2 primary comparisons (2 live sites)",
+    "Synthetic positive control uses parent's raw_positive.json with known deterministic transitions",
+    "Deterministic random seed (seed=42) for all permutation tests; PYTHONHASHSEED=0 set at execution start"
+  ],
+  "decision_rule": "SURVIVES_CURRENT_TEST if ALL of: (1) Mean PMI on non-leakage Wikipedia transitions > 0 with permutation p < 0.025 (Bonferroni x2); (2) Mean PMI on non-leakage Python docs transitions > 0 with permutation p < 0.025; (3) Synthetic positive control PMI >= 1.0 bit; (4) Null control PMI not significantly > 0 (permutation p > 0.05); (5) No pipeline errors. FALSIFIED-IN-SETTING if ANY of: (1) PMI not > 0 on non-leakage transitions for both sites after correction; (2) Positive control fails; (3) Null control fails. MEASUREMENT_INVALID if pipeline errors, data loading failure, or fewer than 10 non-leakage transitions per site.",
+  "product_consequence_positive": "Validates that state-conditioned dynamical structure exists beyond trivial action-to-destination mapping. Demonstrates that PMI can detect genuine Web dynamics when leakage is eliminated. Justifies: (a) using non-leakage transitions as a clean test bed for Web dynamics, (b) designing mechanisms that leverage action-conditioned structure without relying on href-to-URL mapping, (c) focusing physics research on sites where action.target_href != state_after.url (SPAs, form-heavy).",
+  "product_consequence_negative": "If PMI is not positive on non-leakage transitions, the detected structure in prior experiments was entirely due to trivial action-to-destination leakage. Does NOT falsify C-WEB-DYNAMICS entirely — only this detection method on these specific sites. Physics lane should investigate: (a) SPA/form-heavy sites where non-leakage is more frequent, (b) richer state representations, (c) trajectory-level entropy rates.",
+  "estimated_cost": "Very low: re-analysis of existing parent experiment data (raw_live_wikipedia.json, raw_live_python_docs.json, raw_positive.json). No browser/network/model calls. Pure offline computation. ~80 non-leakage transitions total across both sites.",
+  "expected_information_gain": "High: This is the first test of whether PMI detects structure beyond trivial action-to-destination leakage. The parent experiment found PMI positive but confounded by 92-98% leakage. This experiment isolates the non-leakage subset to test for genuine dynamical structure. A positive result identifies a clean detection method; a negative result suggests prior PMI was artifactual."
 }
