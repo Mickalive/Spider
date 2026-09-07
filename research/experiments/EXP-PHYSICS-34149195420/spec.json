@@ -1,17 +1,32 @@
 {
   "experiment_id": "EXP-PHYSICS-34149195420",
   "lane": "physics",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-WEB-DYNAMICS"],
+  "question": "Does PMI between actions and next-states detect genuine dynamical structure in non-leakage SPA transitions when the state representation is enriched beyond URL to include title and form signals?",
+  "hypothesis": "On synthetic SPA-like data where action.target_href != state_after.url by construction and a known action→next-state dependency exists, PMI computed with a richer state representation (URL + title + form_signals) will be significantly positive under cross-trajectory permutation, while PMI computed with URL-only representation will be indistinguishable from zero due to structural ambiguity from repeated URLs with different action-outcome mappings. This demonstrates that richer BrowserState representations can reveal dynamical structure invisible at URL level in non-leakage regimes.",
+  "falsifier": "PMI with richer state representation is not significantly > 0 after Bonferroni correction (p >= 0.025), OR the positive control fails (PMI < 0.5 bits on deterministic synthetic data), OR the null control fails (shuffled PMI significantly > 0, p < 0.05), OR the richer representation does not show higher PMI than URL-only (richer PMI <= URL-only PMI).",
+  "baselines": [
+    "URL-only state PMI (state = URL)",
+    "URL + title state PMI (state = (URL, title))",
+    "URL + title + form_signals state PMI (state = (URL, title, form_signals))",
+    "Cross-trajectory shuffled-action null distribution (1000 permutations)",
+    "Frequency baseline (marginal next-state distribution)"
+  ],
+  "positive_control": "Synthetic deterministic SPA with 8 states, 4 actions, action→next-state mapping with known structure (same URL appears with 3 different titles, each action leads to a unique next-state-title pair). PMI with title-aware representation must be >= 0.5 bits. This verifies the PMI pipeline detects known structure in the SPA-like data format.",
+  "null_control": "Cross-trajectory permutation test on the primary SPA dataset: shuffle action labels across entire trajectories (preserving trajectory structure but breaking action→outcome dependency). Shuffled PMI must not be significantly > observed PMI (permutation p > 0.05 for null hypothesis).",
+  "measurement_validity": [
+    "Synthetic data generation uses frozen random seed (seed=42, PYTHONHASHSEED=0) for reproducibility",
+    "Each state has >=3 actions leading to distinct next-states, ensuring SA pairs are NOT unique in the richer representation",
+    "URL-only representation intentionally has repeated URLs with different actions and different next-states, creating structural ambiguity that PMI cannot resolve",
+    "Richer representation (URL + title) groups transitions so that each (URL, title, action) pair maps to exactly one next-state, resolving the ambiguity",
+    "500 total transitions across 25 trajectories of 20 transitions each, providing sufficient sample size for PMI estimation and permutation testing",
+    "1000 permutations for cross-trajectory permutation test, providing resolution to p = 0.001",
+    "No target leakage: PMI is computed on observed triples, no post-state information used in pre-state features",
+    "Positive control uses a separate synthetic dataset with known deterministic structure, not the primary SPA dataset"
+  ],
+  "decision_rule": "If ALL of: (1) positive control PMI >= 0.5 bits, (2) null control permutation p > 0.05, (3) at least one representation (URL+title or URL+title+form_signals) has mean PMI > 0 with permutation p < 0.025 after Bonferroni correction (2 comparisons: URL+title, URL+title+form_signals), (4) richer representation PMI > URL-only PMI, then verdict = SURVIVES_CURRENT_TEST. If positive control fails OR no representation achieves significant PMI OR richer <= URL-only, verdict = FALSIFIED-IN-SETTING. If sample sizes are insufficient or pipeline errors occur, verdict = MEASUREMENT_INVALID.",
+  "product_consequence_positive": "Demonstrates that richer BrowserState representations (title, form_signals) capture dynamical structure invisible at URL level in non-leakage SPA regimes. This directly informs SPIDER's state representation design: state identity should include semantic features beyond URL to detect action-conditioned structure. Product lane should incorporate title and form signals into state fingerprints for non-URL-change transitions.",
+  "product_consequence_negative": "If richer representations do not help, either (a) the SPA-like synthetic structure does not produce detectable PMI at any representation level, or (b) PMI is not the right tool for non-leakage SPA dynamics. Physics lane should then investigate alternative information-theoretic measures (transfer entropy, mutual information on trajectories) or abandon transition-level PMI in favor of trajectory-level analysis.",
+  "estimated_cost": "Very low: pure synthetic data generation, offline computation, no browser/network/model calls. ~500 transitions, 3 PMI computations, 3000 permutations (3 representations x 1000), 1 positive control, 1 null control.",
+  "expected_information_gain": "High: directly tests the parent experiment's two proposed escape routes (denser sampling + richer representation) in a controlled setting. A positive result justifies real SPA data collection; a negative result constrains the PMI approach for non-leakage regimes. The URL-only vs. richer comparison is the key discriminating test."
 }
