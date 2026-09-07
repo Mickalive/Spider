@@ -7,261 +7,307 @@
 - **Claim**: C-WEB-DYNAMICS (Interactive Web transformations contain predictive dynamical structure beyond memory and ordinary similarity)
 - **Date**: 2026-09-07
 - **Status**: DESIGN — NOT YET FROZEN
+- **Parent Experiment**: EXP-FRONTIER-34065969836 (FALSIFIED-IN-SETTING)
+- **Request Reason**: pulse (inherited next_question from parent handoff)
 
 ## 2. Scientific Question
 
-Does bias-corrected kNN TV recover uniform function invariance in 10D non-Gaussian spaces after removing finite-sample bias floor, and does clipping artefact quantitatively explain the translation-scaling asymmetry?
+Does bias-corrected kNN TV (permutation-null subtraction removing the ~0.52 finite-sample floor) recover uniform function invariance in 10D non-Gaussian spaces, or does the scaling function failure persist after bias correction — and does the clipping artefact (~50% at lambda=1) quantitatively explain translation's strong signal (separation=0.201) vs scaling's weakness (separation=0.022)?
 
 ## 3. Motivation
 
-Parent experiment EXP-FRONTIER-34065969836 falsified uniform TV generalization from 2D Gaussian to 10D non-Gaussian settings via function invariance failure (ANOVA p~1e-30) and positive control failure under frozen spec (permutation p~0.14 at lambda=1). However, the audit identified two critical validity threats that may change the quantitative picture:
+### What the parent experiment established (EXP-FRONTIER-34065969836)
 
-1. **kNN bias floor ~0.52**: TV at pure-noise lambda=0 is 0.5227 (k=20) aggregate, not ~0. The entire dynamic range (0.094 aggregate, 0.201 translation, 0.022 scaling) is within the noise floor. Bias-corrected TV not computed.
+The parent experiment tested whether TV distance generalizes from 2D Gaussian to 10D non-Gaussian settings. It produced:
 
-2. **Clipping artefact**: ~50% of transitions clipped to [0,1]^10 at lambda=1 (0.498 rotation, 0.486 scaling, 0.493 translation) vs 2.3-2.5% at lambda=0. Edge mass inflates TV at high lambda differentially by function family.
+**Established:**
+- kNN-based TV works in 10D [0,1]^10 without distance degeneracy (fraction finite distances = 1.0)
+- Translation-type dynamics produce strong TV signal: Spearman rho=1.0, Cohen's d=9.11, separation=0.201
+- Rotation-type dynamics produce moderate TV signal: rho=0.83, d=2.09, separation=0.058
+- Scaling-type dynamics produce negligible TV signal: rho=-0.07, d=0.85, separation=0.022
+- Aggregate Spearman rho=1.0 but driven by translation dominance
+- Function invariance decisively fails (ANOVA p~1e-30)
 
-These threats may explain why translation shows strong signal (separation=0.201) while scaling shows weak signal (separation=0.022). The next experiment must apply the audit's required_fixes before the scaling failure can be attributed to genuine signal absence vs estimator artefact.
+**Rejected:**
+- Uniform TV generalization from 2D Gaussian to 10D non-Gaussian — function invariance failure
+- Positive control redefinition (tv_at_1 > tv_at_0 instead of permutation null test) — spec requires permutation null p<0.05
+
+**Unknown (from parent audit):**
+- Whether kNN bias floor ~0.52 is ignorable — it exceeds the entire dynamic range (0.094 aggregate)
+- Whether clipping to [0,1] at lambda=1 ~50% creates edge mass that inflates TV at high lambda differentially by function
+- Whether frequency baseline P(S_{t+1}) explains the ~0.52 TV floor at lambda=0
+- Whether Gaussian vs non-Gaussian noise comparison would show scaling recovers under Gaussian noise
+
+**Do Not Assume (from parent audit):**
+- Do not assume aggregate Spearman rho=1.0 means TV works uniformly — it is weighted average of translation (rho=1.0), rotation (rho=0.83), and scaling (rho=-0.07)
+- Do not assume kNN TV bias floor ~0.52 is ignorable — it exceeds the entire dynamic range
+- Do not assume clipping to [0,1] is neutral — ~50% of transitions clipped at lambda=1
+- Do not assume frozen decision rule thresholds are well-calibrated — positive control threshold >=0.1 is below noise floor (~0.52)
+
+### Why this experiment is different
+
+The parent experiment used raw kNN TV without bias correction. The audit identified three critical validity threats:
+
+1. **kNN bias floor ~0.52**: At lambda=0 (no action-dependence), TV is ~0.52 instead of 0. This floor exceeds the entire dynamic range (0.094 aggregate, 0.201 translation, 0.022 scaling). The entire observed signal may be within the noise floor.
+
+2. **Clipping artefact**: ~50% of transitions are clipped to [0,1] at lambda=1. Clipping creates edge mass that inflates TV at high lambda. Differential clipping by function family may explain translation's strong signal vs scaling's weakness.
+
+3. **Missing baselines**: Frequency baseline P(S_{t+1}) and Gaussian noise baseline were specified in the parent preregistration but never computed.
+
+This experiment addresses all three by:
+- Applying permutation-null bias subtraction at each lambda/function/kNN scale
+- Testing toroidal wrapping as alternative to clipping
+- Computing frequency and Gaussian noise baselines
+- Using 1000 permutations per cell (vs parent's 200)
+
+If bias correction rescues scaling and improves function invariance, the parent's per-function heterogeneity was estimator artefact. If not, scaling genuinely lacks signal and the Frontier lane must pivot.
 
 ## 4. Hypotheses
 
-### H1: Bias Correction Rescues Function Invariance
-After subtracting per-lambda permutation mean (bias correction), the function x lambda interaction becomes non-significant (two-way ANOVA p>0.05). This would indicate that the observed function invariance failure is an artefact of non-uniform bias across functions.
+### H1: Bias-Corrected Monotonicity
+After permutation-null bias subtraction, bias-corrected TV still scales monotonically with lambda. Aggregate Spearman rho(bias_corrected_TV, lambda) >= 0.65, p < 0.05 one-sided.
 
-### H2: Scaling Monotonic Recovers After Bias Correction
-After bias correction, scaling function (seed=43) shows monotonic increase (Spearman rho>=0.5, p<0.05). This would indicate that scaling failure was due to bias floor masking a weak but real signal.
+### H2: Bias-Corrected Function Invariance
+After bias subtraction, the per-function heterogeneity is reduced because the bias floor is shared across function families. Two-way ANOVA interaction p > 0.05 on bias-corrected TV.
 
-### H3: Clipping Artefact Explains Part of Translation Signal
-Toroidal wrapping (eliminating clipping) reduces translation separation by >30% but not >80%. This would indicate that clipping inflates translation signal but does not fully explain it.
+### H3: Positive Control
+After bias correction, TV at lambda=1 remains detectably above zero across all 3 functions (bias-corrected TV > 0, permutation p < 0.05). Bias subtraction does not destroy genuine signal.
 
-### H4: Frequency Baseline Explains Bias Floor
-The marginal next-state distribution P(S_{t+1}) is non-uniform, contributing to the ~0.52 TV floor at lambda=0. Frequency baseline TV quantifies this contribution.
+### H4: Null Control
+After bias correction, TV at lambda=0 is indistinguishable from zero (bias-corrected TV ≈ 0, permutation p > 0.05). Bias subtraction successfully removes the finite-sample floor.
+
+### H5: Clipping Quantification
+Toroidal wrapping (modular arithmetic) reduces translation's separation advantage over scaling by >50% compared to clipping. This tests whether clipping differentially inflates translation vs scaling.
+
+### H6: Frequency Baseline
+The frequency baseline P(S_{t+1}) explains a substantial fraction (>50%) of the ~0.52 TV floor at lambda=0, confirming that marginal non-uniformity contributes to the bias.
 
 ## 5. Data Generation
 
-### 5.1 Synthetic Transition Model (Identical to Parent)
+### 5.1 Synthetic Transition Model
 
-Same DGP as EXP-FRONTIER-34065969836:
+Same as parent: transitions (S_t, A_t, S_{t+1}) where:
+- State space: [0,1]^10 continuous
+- Action space: 4 actions
+- 3 function families: rotation (seed=42), scaling (seed=43), translation (seed=44)
+- Mixture-of-3-Gaussians heteroscedastic noise per state dimension
 
-- State space: S = [0,1]^10 (continuous, uniform)
-- Action space: A = {click, fill, submit, navigate} (4 actions)
-- Transition function: S_{t+1} = f(S_t, A_t, lambda) + noise
-- Noise: mixture-of-3-Gaussians heteroscedastic (parent's noise model)
-- Lambda levels: 0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.7, 1.0 (8 levels)
-- Function families: rotation (seed=42), scaling (seed=43), translation (seed=44)
-- 500 transitions per cell, 10 reps per cell
-- Total transitions: 3 funcs x 8 lambdas x 10 reps x 500 = 120,000
+### 5.2 Lambda Levels
 
-### 5.2 Frozen Random Seed
+Eight conditions (same as parent): 0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.7, 1.0
 
-Seed=42 for base DGP; function seeds 42,43,44 identical to parent.
+### 5.3 Sample Size
+
+- 500 transitions per lambda level per function per replication (same as parent)
+- 10 replications per cell
+- Total: 120,000 transitions (same as parent)
+- Plus: 1000 permutations per cell for bias floor estimation (240 cells x 1000 = 240,000 permutation samples)
+
+### 5.4 Bias Correction Method
+
+For each lambda level, function family, and kNN scale k:
+1. Compute raw kNN TV from observed transitions
+2. Compute permutation-null TV: shuffle action labels 1000 times, compute TV for each shuffle
+3. Bias_corrected_TV(lambda) = raw_TV(lambda) - mean(permutation_null_TV(lambda))
+4. This removes the finite-sample bias floor ~0.52 at lambda=0
+
+### 5.5 Clipping Alternatives
+
+Two boundary treatments:
+- **Clipping** (parent method): transitions outside [0,1]^10 are clipped to boundary
+- **Toroidal wrapping**: transitions outside [0,1]^10 are wrapped using modular arithmetic: x_wrapped = x - floor(x)
+
+### 5.6 Frequency Baseline
+
+For each lambda level and function:
+1. Compute marginal next-state distribution P(S_{t+1}) by averaging across all actions
+2. Compute TV between P(S_{t+1} | do(A=click)) and P(S_{t+1} | do(A=fill)) using the marginal as reference
+3. This measures how much of the observed TV at lambda=0 is due to marginal non-uniformity
+
+### 5.7 Gaussian Noise Baseline
+
+Same 10D state space with single-Gaussian heteroscedastic noise (not mixture):
+- For each state dimension i, noise ~ N(0, sigma_i^2) where sigma_i depends on state
+- Compare TV between Gaussian and mixture-of-Gaussians noise at matched lambda levels
+- Isolate whether non-Gaussian noise specifically degrades scaling detection
 
 ## 6. Measures
 
-### 6.1 Bias-Corrected kNN TV
+### 6.1 Primary Metric
+- **bias_corrected_tv_by_lambda**: Bias-corrected kNN TV at each lambda level, averaged across functions and replications, at k=20 (matching parent's primary scale)
+- **spearman_rho_bias_corrected**: Spearman correlation between bias_corrected_tv_by_lambda and lambda (n=8, single aggregate comparison)
 
-For each lambda, function, kNN scale (k=5,10,20,50):
-1. Compute TV at lambda (TV_raw) as in parent
-2. Compute permutation mean at same lambda: permute action labels 1000 times, compute TV for each permutation, take mean (perm_mean)
-3. Bias-corrected TV = max(0, TV_raw - perm_mean)
+### 6.2 Secondary Metrics
+- Per-function bias-corrected TV at each lambda level
+- Per-kNN-scale bias-corrected TV (k=5, 10, 20, 50)
+- Bias floor magnitude at lambda=0 (permutation null mean)
+- Translation-scaling separation ratio before and after bias correction
+- Toroidal vs clipping TV difference per function
+- Frequency baseline TV at each lambda level
+- Gaussian vs mixture noise TV difference
 
-### 6.2 Toroidal Wrapping
-
-For each transition: after noise addition, wrap coordinates modulo 1: S_wrap = S mod 1. This eliminates clipping to [0,1]^10. Compute TV on wrapped transitions.
-
-### 6.3 Frequency Baseline
-
-Compute marginal next-state distribution P(S_{t+1}) across all transitions at each lambda. Compute expected TV under independence: TV_freq = TV(P(S_{t+1}) || uniform). This quantifies floor contribution from marginal non-uniformity.
-
-### 6.4 Gaussian Noise Baseline
-
-Generate same DGP but replace mixture-of-3-Gaussians with single Gaussian heteroscedastic noise (same variance parameters). Compute TV at each lambda/function. Isolate non-Gaussian effect.
-
-### 6.5 Clipping Fraction
-
-Compute fraction of transitions where any coordinate is clipped to [0,1] (i.e., after noise addition, coordinate <0 or >1). Report per lambda/function.
-
-### 6.6 Primary Metric
-
-- **bias_corrected_tv_max_k20**: bias-corrected TV at k=20 (primary estimator)
-- **Spearman rho** between bias_corrected_tv_max_k20 and lambda per function
-- **Function invariance**: two-way ANOVA interaction p-value on bias_corrected_tv
-
-### 6.7 Secondary Metrics
-
-- Raw TV (un-corrected) for comparison with parent
-- Effect sizes (Cohen's d) lambda=0 vs lambda=1 after bias correction
-- Multiscale monotonicity across k=5,10,20,50
-- Toroidal TV separation (translation, scaling, rotation)
-- Frequency baseline TV
-- Gaussian baseline TV per function/lambda
+### 6.3 Comparison Metrics
+- Raw (uncorrected) TV from parent EXP-FRONTIER-34065969836 (direct reuse of parent raw_tables.json)
 
 ## 7. Null Models
 
-### 7.1 Permutation Null (Bias Estimation)
+### 7.1 Permutation Null (for bias floor)
+1000 permutations per cell: shuffle action labels, recompute TV. Mean permutation TV at each lambda level is the bias floor for subtraction.
 
-For each lambda/function/kNN scale: permute action labels 1000 times, compute TV for each permutation. Mean of permutation distribution = bias estimate. Subtract from raw TV.
+### 7.2 Frequency Baseline
+TV between action-conditional distributions using marginal P(S_{t+1}) as reference. Expected to explain part of the ~0.52 floor at lambda=0.
 
-### 7.2 Frequency Null
-
-Predict next state from marginal P(S_{t+1}). Expected TV under independence = TV(P(S_{t+1}) || uniform). If non-zero, explains part of floor.
-
-### 7.3 Gaussian Null
-
-Same DGP with single Gaussian noise. If scaling recovers under Gaussian noise, isolates non-Gaussianity as cause of scaling failure.
+### 7.3 Gaussian Noise Baseline
+Same DGP with single-Gaussian noise. Tests whether non-Gaussian mixture noise specifically affects scaling detection.
 
 ## 8. Statistical Tests
 
-### 8.1 Primary: Spearman Correlation on Bias-Corrected TV
-
-- Per function: rho(bias_corrected_tv, lambda)
+### 8.1 Primary Test
+- Spearman rank correlation: rho(bias_corrected_tv, lambda) across 8 lambda levels
 - One-sided test: rho > 0
-- Bonferroni correction for 3 functions x 1 test = 3 comparisons
-- Threshold: rho >= 0.5 with p < 0.05 after correction
+- Aggregate test (single comparison, no Bonferroni): rho >= 0.65, p < 0.05
+- For n=8, rho >= 0.65 gives p < 0.05 one-sided
 
-### 8.2 Function Invariance (Two-Way ANOVA)
+### 8.2 Per-Function Tests
+- Per-function Spearman rho on bias-corrected TV
+- Bonferroni x3 correction: rho >= 0.83, p < 0.017
 
-- Model: bias_corrected_tv ~ lambda + function + lambda:function
-- Interaction p > 0.05 supports invariance
-- Full model with replications (10 reps per cell) provides residual df
+### 8.3 Permutation Tests
+- At lambda=0: permutation test for bias-corrected TV ≈ 0 (p > 0.05)
+- At lambda=1: permutation test for bias-corrected TV > 0 (p < 0.05)
 
-### 8.3 Clipping Sensitivity
+### 8.4 Two-Way ANOVA
+- bias_corrected_TV ~ lambda + function + lambda:function
+- Non-significant interaction (p > 0.05) supports function invariance
+- With 8 levels x 3 functions x 10 reps = 240 observations, adequate residual df
 
-- Paired t-test: TV_raw vs TV_toroidal at lambda=1 across functions
-- Separation after toroidal wrapping > 0.05 required for positive control
+### 8.5 Clipping Comparison
+- Paired t-test: TV(clipping) vs TV(toroidal) at lambda=1 for each function
+- Effect size: Cohen's d of clipping vs toroidal
 
-### 8.4 Bias Correction Magnitude
-
-- Compute mean bias per lambda (permutation mean)
-- Report bias-corrected dynamic range: (TV_max - bias_max) - (TV_min - bias_min)
+### 8.6 Frequency Baseline Comparison
+- Correlation between frequency baseline TV and raw TV floor at lambda=0
+- Fraction of raw TV at lambda=0 explained by frequency baseline
 
 ## 9. Controls
 
-### 9.1 Positive Control (Translation)
-After bias correction, translation function (seed=44) shows monotonic increase (rho>=0.8, p<0.05) with separation >0.05 between lambda=0 and lambda=1.
+### 9.1 Positive Control (lambda=1)
+After bias correction, TV at lambda=1 must be > 0 across all functions (permutation p < 0.05). Verifies bias subtraction does not destroy genuine signal.
 
-### 9.2 Null Control (Scaling)
-After bias correction, scaling function (seed=43) shows no monotonic increase (rho<0.5, p>0.05) if scaling failure persists; OR if scaling recovers, rho>=0.5 p<0.05.
+### 9.2 Null Control (lambda=0)
+After bias correction, TV at lambda=0 must be ≈ 0 (permutation p > 0.05). Verifies bias subtraction removes the finite-sample floor.
 
-### 9.3 Bias Floor Uniformity
-Bias (permutation mean) should be similar across functions at each lambda. If bias differs substantially across functions, function invariance failure may be bias-driven.
+### 9.3 Bias Floor Consistency
+Permutation null TV at lambda=0 should be consistent across function families (CV < 0.1), confirming the bias floor is shared.
 
-### 9.4 Toroidal Clipping Control
-Toroidal wrapping should not change TV at lambda=0 (where clipping is minimal). If it does, indicates boundary artefact in DGP.
-
-### 9.5 Frequency Baseline Control
-Frequency baseline TV should be near zero if marginal distribution is uniform. If non-zero, quantifies floor contribution.
+### 9.4 Toroidal Wrapping Sanity Check
+TV at lambda=0 with toroidal wrapping should be ≈ 0 (no clipping artefact at lambda=0).
 
 ## 10. Validity Threats
 
-### 10.1 Same DGP as Parent
-This experiment uses identical synthetic data. Findings are bounded to this DGP; synthetic-to-real gap persists.
+### 10.1 Bias Over-Correction
+If permutation null overestimates the true bias floor, bias-corrected TV could be negative at lambda=1. Mitigation: flag as MEASUREMENT_INVALID if >10% of bias-corrected TV values are negative at lambda=1.
 
-### 10.2 Permutation Bias Estimation
-1000 permutations per cell gives bias estimate with SE ~0.01 (assuming TV variance ~0.01). Bias correction may introduce noise if permutation variance high. Mitigation: report bias SE per cell.
+### 10.2 Permutation Null Variance
+With 1000 permutations per cell, the permutation null estimate has SE ≈ sd(permutation_TVs) / sqrt(1000). If variance is high (>0.1), the bias floor estimate is noisy. Mitigation: report permutation null variance; flag MEASUREMENT_INVALID if CV > 0.5 across replications at lambda=0.
 
 ### 10.3 Toroidal Wrapping Distortion
-Wrapping modulo 1 may distort spatial structure if transitions cross boundaries frequently. Mitigation: compute clipping fraction; if >50% at lambda=1, wrapping may distort more than clipping.
+Toroidal wrapping changes the geometry of the state space (points near boundary 0 wrap to near boundary 1). This may introduce artefactual structure. Mitigation: compare TV at lambda=0 with toroidal wrapping — should be ≈ 0.
 
-### 10.4 Gaussian Baseline Mismatch
-Single Gaussian noise may not match mixture variance parameters exactly. Mitigation: use same variance parameters as mixture marginal.
+### 10.4 Synthetic-to-Real Gap
+Same as parent: findings limited to controlled synthetic DGP.
 
-### 10.5 Multiple Comparisons
-3 functions x 4 kNN scales = 12 secondary comparisons. Bonferroni correction applied to primary per-function tests (3 comparisons).
+### 10.5 kNN Scale Sensitivity
+Bias correction may behave differently at different kNN scales. Mitigation: test at k=5, 10, 20, 50 and report per-scale results.
+
+### 10.6 Frequency Baseline Interpretation
+If frequency baseline explains most of the TV floor, the residual (bias-corrected TV) may have insufficient dynamic range for meaningful function invariance testing. Mitigation: report dynamic range after bias correction and assess whether it supports discriminating tests.
 
 ## 11. Decision Rules
 
 ### 11.1 SURVIVES_CURRENT_TEST
 If ALL of:
-1. Function invariance passes (two-way ANOVA interaction p>0.05) on bias-corrected TV
-2. Scaling monotonic passes (rho>=0.5, p<0.05) on bias-corrected TV
-3. Translation separation >0.05 after toroidal wrapping
-4. No pipeline errors
+1. Aggregate Spearman rho(bias_corrected_TV, lambda) >= 0.65, p < 0.05 one-sided
+2. Positive control passes: bias-corrected TV > 0 at lambda=1 across all functions
+3. Null control passes: bias-corrected TV ≈ 0 at lambda=0 (permutation p > 0.05)
+4. Function invariance passes: two-way ANOVA interaction p > 0.05
+5. Clipping removal reduces translation's separation advantage over scaling by >50%
+6. No pipeline errors
 
 ### 11.2 FALSIFIED-IN-SETTING
 If ANY of:
-1. Function invariance fails (interaction p<0.05) AND scaling monotonic fails (rho<0.5, p>0.05)
-2. Translation separation <0.05 after toroidal wrapping (clipping explains >80% of signal)
-3. Positive control fails (translation monotonic rho<0.8)
+1. Aggregate Spearman rho < 0.65 or p > 0.05
+2. Positive control fails
+3. Null control fails
+4. Function invariance still fails (interaction p < 0.05)
+5. Clipping removal does not reduce translation-scaling gap by >50%
 
-### 11.3 MIXED
-If mixed results: e.g., function invariance passes but scaling fails, or vice versa.
-
-### 11.4 MEASUREMENT_INVALID
-If pipeline errors or sample size insufficient (<500 transitions per cell).
+### 11.3 MEASUREMENT_INVALID
+If:
+1. Pipeline errors
+2. >10% of bias-corrected TV values negative at lambda=1 (over-correction)
+3. Permutation null CV > 0.5 across replications at lambda=0
+4. Toroidal wrapping produces TV > 0.1 at lambda=0 (geometry artefact)
 
 ## 12. Expected Outcomes
 
 ### 12.1 Positive Result (SURVIVES_CURRENT_TEST)
-- Bias correction rescues scaling and function invariance
-- Scaling failure was estimator artefact, not genuine signal absence
-- TV distance works uniformly across function families in 10D non-Gaussian spaces after bias correction
-- Claim C-WEB-DYNAMICS strengthened for high-dimensional settings
-- Product lane can consider TV-based regime detection across diverse dynamical families
+- Bias correction rescues function invariance: per-function heterogeneity was estimator artefact (shared bias floor + clipping)
+- TV-based regime detection validated for 10D non-Gaussian settings with proper bias correction
+- Product lane can integrate bias-corrected TV with calibrated thresholds
+- C-WEB-DYNAMICS claim ceiling expanded to 10D non-Gaussian (not just 2D Gaussian)
 
 ### 12.2 Negative Result (FALSIFIED-IN-SETTING)
-- Bias correction does not rescue scaling
-- Scaling-type dynamics are not detectable by kNN TV in high-dimensional spaces
-- TV claim bounded to translation-like dynamics only
-- Product lane should focus on translation-like dynamics or alternative estimators
+- Scaling genuinely lacks action-dependent structure detectable by TV
+- Bias correction does not rescue scaling or function invariance
+- TV limited to translation-like dynamics in high-dimensional non-Gaussian spaces
+- Frontier lane must pivot: alternative estimators (KDE, neural density) or real Web data
 
-### 12.3 Mixed Result (MIXED)
-- Bias correction partially rescues function invariance but scaling remains weak
-- Clipping artefact partially explains translation signal
-- Requires nuanced interpretation and possibly further experiments
+### 12.3 Invalid Result (MEASUREMENT_INVALID)
+- Bias correction methodology needs refinement
+- Not scientific evidence for or against
 
 ## 13. Analysis Plan
 
-1. **Data Generation**: Regenerate same DGP as parent (seed=42, same functions, lambdas, reps). Total 120,000 transitions.
-2. **Raw TV Computation**: Compute kNN TV at k=5,10,20,50 for each transition set.
-3. **Permutation Bias Estimation**: For each lambda/function/kNN scale, permute actions 1000 times, compute TV, take mean.
-4. **Bias Correction**: TV_corrected = max(0, TV_raw - perm_mean).
-5. **Toroidal Wrapping**: Wrap coordinates modulo 1, recompute TV.
-6. **Frequency Baseline**: Compute marginal P(S_{t+1}), compute TV under independence.
-7. **Gaussian Baseline**: Generate same DGP with single Gaussian noise, compute TV.
-8. **Statistical Tests**: Spearman correlation on bias-corrected TV, two-way ANOVA, paired t-tests for clipping sensitivity.
-9. **Controls**: Verify positive, null, bias uniformity, toroidal, frequency controls.
-10. **Reporting**: Report raw and bias-corrected results, effect sizes, confidence intervals.
+1. **Data Generation**: Generate 120,000 transitions using parent's DGP (same seeds, same functions, same noise model)
+2. **Raw TV Computation**: Compute kNN TV at k=5,10,20,50 for each cell (reproduce parent's results)
+3. **Permutation Null**: For each cell, shuffle action labels 1000 times, compute TV for each shuffle, store full null distribution
+4. **Bias Correction**: Subtract permutation null mean from raw TV at each lambda/function/kNN scale
+5. **Toroidal Wrapping**: Re-generate transitions with toroidal wrapping instead of clipping; recompute TV
+6. **Frequency Baseline**: Compute marginal P(S_{t+1}) TV at each lambda level
+7. **Gaussian Noise Baseline**: Generate 10D transitions with single-Gaussian noise; compute TV
+8. **Statistical Tests**: Spearman correlation, ANOVA, permutation tests, paired t-tests
+9. **Controls**: Verify positive, null, bias floor consistency, toroidal sanity
+10. **Reporting**: Report all outcomes with equal prominence
 
-## 14. Deviation Policy
+## 14. Analysis Code
+
+Analysis will be implemented in Python using:
+- `numpy` for array operations and random generation
+- `scipy.stats` for Spearman correlation and t-tests
+- `scipy.stats.f_oneway` or `statsmodels` for two-way ANOVA
+- `sklearn.neighbors.KDTree` for kNN distance computation
+- Standard library only
+
+Code will be committed to `research/experiments/EXP-FRONTIER-34121473072/` before execution.
+
+## 15. Pre-registered Expectations
+
+From parent experiment:
+- Raw TV at lambda=0 ≈ 0.52 (bias floor)
+- Translation separation = 0.201, scaling separation = 0.022
+- Function invariance fails (ANOVA p~1e-30)
+
+Expected after bias correction:
+- Bias-corrected TV at lambda=0 ≈ 0 (by construction)
+- Bias-corrected TV dynamic range reduced (floor removed, ceiling may also drop)
+- If bias floor is shared across functions, function invariance should improve
+- If clipping inflates translation more than scaling, toroidal wrapping should reduce the gap
+
+## 16. Deviation Policy
 
 Any deviation from this preregistration will be labeled EXPLORATORY and cannot support confirmatory claims. A new confirmatory claim requires a new preregistration.
 
-## 15. Freeze Statement
+## 17. Freeze Statement
 
 This preregistration is frozen BEFORE any analysis code is written or any outcome data is inspected. The experiment will be executed exactly as described here.
-
-## 16. Parent Handoff Inheritance
-
-### Established (from parent carry_forward)
-- kNN-based TV estimator works in 10D [0,1]^10 without distance degeneracy
-- Translation-type dynamics produce strong TV signal in 10D non-Gaussian DGP (rho=1.0, d=9.11)
-- Rotation-type dynamics produce moderate TV signal (rho=0.83)
-- Scaling-type dynamics produce negligible TV signal (rho=-0.07)
-- kNN TV finite-sample bias floor ~0.52 at lambda=0 across all kNN scales
-- Aggregate Spearman rho=1.0 holds but driven by translation dominance
-
-### Rejected (from parent)
-- Uniform TV generalization from 2D Gaussian to 10D non-Gaussian settings (decisively falsified)
-- Producer's positive control redefinition (invalid under frozen spec)
-
-### Unknown (from parent)
-- Whether bias-corrected kNN TV preserves aggregate monotonic rho=1.0
-- Whether clipping artefact quantitatively explains translation's strong signal
-- Whether scaling failure replicates under alternative parameterizations
-- Whether Gaussian vs non-Gaussian noise comparison shows difference
-- Whether frequency baseline explains ~0.52 TV floor
-- Whether kNN TV remains calibrated at >10D
-- Whether real Web transitions show action-dependent structure
-- Whether rotation's non-monotonic dip is noise or genuine
-
-### Do Not Assume (from parent)
-- Do not assume TV works on real Web transitions (all evidence synthetic)
-- Do not assume C-WEB-DYNAMICS is established (claim ceiling bounded)
-- Do not assume product deployment readiness
-- Do not assume aggregate rho=1.0 means TV works uniformly
-- Do not assume bias floor ~0.52 is ignorable
-- Do not assume clipping to [0,1] is neutral
-- Do not assume frozen decision rule thresholds are well-calibrated
-- Do not assume effect sizes generalize to real Web
-- Do not assume combined noise robustness
-- Do not assume multi-scale monotonicity is fully robust
