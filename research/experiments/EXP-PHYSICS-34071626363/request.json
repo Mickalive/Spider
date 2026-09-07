@@ -1,0 +1,20 @@
+{
+  "base_sha": "12d65f53b9bdbe5a4a1dfbe8d29c5bb0be0d5e82",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-07T01:01:14.041519+00:00",
+  "experiment_id": "EXP-PHYSICS-34071626363",
+  "inherited_last_verdict": "FALSIFIED-IN-SETTING",
+  "inherited_next_question": "Can a blinded action representation (hash of href, or action_type categorical only) isolate state-conditioned dynamical structure from trivial action-to-destination URL leakage, using the same PMI framework on these or structurally different sites (SPAs, form-heavy pages) where action.target_href != state_after.url?",
+  "lane": "physics",
+  "origin_github_run_id": "34071626363",
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-34038570933",
+    "path": "research/experiments/EXP-PHYSICS-34038570933/handoff.json",
+    "sha256": "e11f8fa1e4a05857519c496350d625fe69138b4a6a233ba50ff72a134483b3ac"
+  },
+  "reason": "pulse",
+  "request_hash": "991b0ea6ba013f87df44539703ceceb782f4425f5167910fdf9d628101d11068",
+  "request_id": "e8d89173638ed6403debdccd",
+  "schema_version": 1
+}
