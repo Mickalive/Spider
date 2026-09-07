@@ -276,6 +276,31 @@
         "handoff.json": "423be67d7374d5c7fb271c44146735e754ab46708b396bdaedb8dd99d93354d4"
       }
     },
+    "EXP-GRAPH-33998605047": {
+      "lane": "graph",
+      "request_id": "a68901b6b8bbe0d3de1db9e0",
+      "created_at": "2026-09-05T23:24:57.812810+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT"
+      ],
+      "question": "Does the parameter-slot-count fix, applied temporarily during execution, eliminate the original 5/5 false accepts from the literal-vs-param equal-confidence hazard (EXP-GRAPH-33718012817) without regressing any baseline conditions, and does it generalize to multi-slot (2 vs 1) and template-only parameter scenarios?",
+      "audit_status": "REVISE",
+      "decision": "PARTIAL_VALIDATION",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/graph",
+      "hashes": {
+        "request.json": "1ecf2440e6e1872cb02667017d912ad32f0dc8f2367781cccece88f9065406d5",
+        "spec.json": "dc70d7b0add0c0d7e73a321d3f0e6fe2efa12f6cd708da4d208fe8790b9ce2f9",
+        "prereg.md": "fd6beb15bb4ea66a89cd565dcd5c0859bac89f856c359044f2468acf77703b17",
+        "freeze.json": "396c33eb7aad7bb0ccb39214e9d8e378db06c02a2f7e820c3ee0ecf9d18ed83b",
+        "result.json": "f213bf2a298353d853c820cbdc81fc750247f6501a3364515e67e01876a9c134",
+        "report.md": "371ce1238126dd3f06f96ade2dd09a3a553b8a559184e8d13b6164517291ff4a",
+        "provenance.json": "c02317b026d9bc34c445a8a6028cc4e3d243a9a47c545925ae79378b2a973e61",
+        "audit.json": "16bfdb99df3f4a883168016ce85bf67447cc677fb0f118f29ccca6a3f41e112d",
+        "verdict.json": "589fa4d3e23609bd23b68234f6f3d87bbd34119fc43b5b4003fa2971b4e30dce",
+        "handoff.json": "3bea416e31107aaaaeb156b49346268726ce6edf72da12f3371060c282e4c37d"
+      }
+    },
     "EXP-INTEL-33528832113": {
       "lane": "intel",
       "request_id": "46d19fdaf32e996c0ab24bd7",
