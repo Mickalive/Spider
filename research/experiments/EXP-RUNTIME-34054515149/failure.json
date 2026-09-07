@@ -1,9 +1,9 @@
 {
   "stage": "director",
   "category": "VALIDATION_FAILURE",
-  "message": "invalid claim update status: CONSTRAINED",
+  "message": "invalid claim update status: SURVIVES_CURRENT_TEST",
   "retryable": false,
-  "recorded_at": "2026-09-07T01:03:40.307572+00:00",
-  "github_run_id": "34071627860",
+  "recorded_at": "2026-09-07T06:03:57.219881+00:00",
+  "github_run_id": "34089066568",
   "github_run_attempt": "1"
 }
