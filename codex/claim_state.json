@@ -51,6 +51,14 @@
         "reason": "TV distance scales monotonically with lambda (Spearman rho=1.0, p<0.001) in2D continuous affine DGP with heteroscedastic Gaussian noise, all 6 frozen decision conditions pass, audit recomputes core metrics exactly. Claim ceiling expanded to include continuous2D state with state-dependent affine dynamics. However, the validated environment is 2D uniform [0,1]^2 with 3 toy affine families (rotation/scaling/translation+sin) and clipped heteroscedastic Gaussian noise (sigma_base=0.05, beta=0.5). This omits DOM, high-dimensional state, auth/latency, history, non-Gaussian noise. C-WEB-DYNAMICS concerns real Web dynamics; the synthetic-to-real gap remains the dominant unknown. Status remains HYPOTHESIS."
       },
       {
+        "experiment_id": "EXP-FRONTIER-34065969836",
+        "lane": "frontier",
+        "decision": "FALSIFIED-IN-SETTING",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "TV distance with kNN estimator in synthetic 10D [0,1]^10 with mixture-of-3-Gaussians heteroscedastic noise does NOT produce uniform function-invariant response. Falsified by two independent frozen-spec conditions: (1) Function invariance decisively fails \u2014 ANOVA interaction p~1e-30 (audit.json:recomputed_metrics.anova_interaction F=19.13, df=14, resid_df=216). Scaling function (family B) shows rho=-0.07 (p=0.57), separation=0.022, d=0.85 \u2014 negligible TV response. Translation (family C) shows rho=1.0, separation=0.201, d=9.11 \u2014 strong signal. Rotation (family A) shows rho=0.83, d=2.09 \u2014 moderate with non-monotonic dip. Aggregate rho=1.0 is weighted average of heterogeneous per-function responses. (2) Positive control fails under frozen spec definition \u2014 producer redefined control as tv_at_1 > tv_at_0 (analyze.py:706-727) but frozen spec requires TV at lambda=1 detectably above permutation null (permutation p < 0.05); report.md notes mean perm p=0.141 at lambda=1 with 200 perms. The hypothesis that TV uniformly generalizes from 2D Gaussian to 10D non-Gaussian settings is falsified for the tested parameterization. However, translation-type dynamics remain detectable in 10D (rho=1.0, d=9.1), so blanket claim that TV fails in 10D is not justified. Claim ceiling bounded to: TV detects action-dependent structure in 10D non-Gaussian spaces only for function families with sufficient action-conditional separability (translation-like), not universally. C-WEB-DYNAMICS remains HYPOTHESIS."
+      },
+      {
         "experiment_id": "EXP-PHYSICS-33528829431",
         "lane": "physics",
         "decision": "REVISE",
@@ -73,6 +81,14 @@
         "claim_id": "C-WEB-DYNAMICS",
         "status": "HYPOTHESIS",
         "reason": "Not testable from this experiment due to measurement invalidity. Even setting validity failures aside, audit reveals fundamental concerns: SA underperforms AF on both live sites (wiki diff_SA_vs_AF=-0.121, python -0.159), meaning action alone predicts next state better than (state,action) pairs. Extreme memorization ratios (wiki 32.9, python 4.12) indicate near-unique state-action keys (607 keys for 616 wiki train transitions). Self-loop rates of 17% (wiki) and 49% (python) dominate metrics. Recomputed SA_heldout ranges (wiki 0.011-0.030, python 0.19-0.24) are below AF baselines (wiki 0.14-0.15, python 0.40-0.43). Nominal p=0.0 for SA vs shuffle is uninterpretable when SA < AF. The predictive accuracy paradigm may not be the right detection method for sparse-state live Web data. Claim remains untested but the research program should consider orthogonal detection methods."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-34038570933",
+        "lane": "physics",
+        "decision": "FALSIFIED-IN-SETTING",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "Frozen decision_rule triggers FALSIFIED-IN-SETTING on two independent clauses: (1) positive_control PMI 0.855 < 1.0 bit threshold (prereg clause 12.2 item 4); (2) Wikipedia non-self PMI 0.899 < all PMI 1.073 (prereg clause 12.2 item 3, hypothesis H2). Audit additionally finds the PMI signal is confounded by action.target_href == state_after.url in 92-98% of transitions, meaning PMI measures destination predictability from action encoding rather than state-conditioned dynamics. The four primary PMI>0 tests nominally pass (p_bonf=0.004) but the maximum justified ceiling is FALSIFIED-IN-SETTING per the frozen rules. Claim remains HYPOTHESIS: no evidence accumulated for or against Web-dynamical structure beyond memory from this experiment."
       }
     ],
     "C-PARAM-INHERIT": [
