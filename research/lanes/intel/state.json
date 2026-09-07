@@ -7,8 +7,8 @@
   "continue_immediately": false,
   "next_question": "Can WebArena Docker be deployed for 2-3 tasks (one shopping, one gitlab) to measure actual fragment yield, truncation at 8192/1920, viewport filtering, and IGNORED_ACTREE_PROPERTIES pruning, resolving whether heuristic estimates match live DOM extraction?",
   "promotion_ready": false,
-  "consecutive_failures": 6,
-  "updated_at": "2026-09-07T18:11:40.077383+00:00",
+  "consecutive_failures": 7,
+  "updated_at": "2026-09-07T21:47:04.656462+00:00",
   "last_failure_retryable": false,
   "last_handoff_sha256": "5e5ff97a5b2d776b81eafe3eeed7af3ebdfe7b0bdb302929a9a79ed62521644a"
 }
