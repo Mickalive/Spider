@@ -7,8 +7,8 @@
   "continue_immediately": false,
   "next_question": "Can a blinded action representation (hash of href, or action_type categorical only) isolate state-conditioned dynamical structure from trivial action-to-destination URL leakage, using the same PMI framework on these or structurally different sites (SPAs, form-heavy pages) where action.target_href != state_after.url?",
   "promotion_ready": false,
-  "consecutive_failures": 1,
-  "updated_at": "2026-09-07T01:16:25.644970+00:00",
+  "consecutive_failures": 2,
+  "updated_at": "2026-09-07T06:04:17.695915+00:00",
   "last_failure_retryable": false,
   "last_handoff_sha256": "e11f8fa1e4a05857519c496350d625fe69138b4a6a233ba50ff72a134483b3ac"
 }
