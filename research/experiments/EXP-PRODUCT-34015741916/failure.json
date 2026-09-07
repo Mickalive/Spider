@@ -1,9 +1,9 @@
 {
   "stage": "director",
   "category": "VALIDATION_FAILURE",
-  "message": "invalid claim update status: PARTIAL",
+  "message": "invalid claim update status: kernel-integrated-synthetic-partial",
   "retryable": false,
-  "recorded_at": "2026-09-07T01:02:51.477510+00:00",
-  "github_run_id": "34071627640",
+  "recorded_at": "2026-09-07T06:04:34.532160+00:00",
+  "github_run_id": "34089065390",
   "github_run_attempt": "1"
 }
