@@ -1,0 +1,227 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-34015740602",
+  "lane": "runtime",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Narrow claim ceiling: producer report.md claims 'C-MEAS-VALID claim ceiling extends to production-like OAuth middleware with realistic header variation' — this is not justified by a single Flask 3.1.3 localhost mock. Required: explicitly bound ceiling to Flask 3.1.3 + PyJWT 2.13.0 HS256 on 127.0.0.1:18928, 4 states with DISTINCT error bodies (unlike parent identical), filtered headers (Cache-Control no-store/no-cache, ETag weak validator body-dependent, Set-Cookie session only for valid_token, Connection close, Content-Type/Length body-correlated, X-Request-Id excluded), jitter 50-150ms uniform, N=40 seed 44. Do not generalize to Auth0/Okta/Keycloak, CDN, rate-limit, compression.",
+    "Correct H4 multi-field interpretation for ceiling effect: report.md finding 'Set-Cookie and cache-Control add no independent information' is tautologically confounded because discrimination already at ceiling 1.0 via distinct bodies (all 4 body_hash distinct). Headers DO vary discriminatively (Cache-Control only discrimination 0.5, Set-Cookie only 0.5) but are redundant when bodies max out. Required: disclose that test was under-powered to detect header value; a valid test of 'full > body-only' requires a scenario where bodies are NOT perfectly discriminative (e.g., identical error bodies as in parent or body-hash collision) so header signal could be incremental. Current data only shows headers are redundant under distinct-body design, not that they are non-discriminative.",
+    "Downgrade bootstrap inference: result.json bootstrap_95ci [1.0,1.0] is degenerate (point estimate at ceiling with deterministic fingerprints). Must be labeled uninformative/perfect-separation artifact, not a 95% CI with coverage. Prior parent had [0.0,1.0] wide interval; here narrow interval does not imply high precision due to N=40 and 4-state set-resampling. Required: report bootstrap as degenerate under ceiling, do not use for product decision.",
+    "Disclose ETag/Content-Length redundancy: ETag is W/\"<body_sha256>\" perfectly correlated with body_hash; Content-Length perfectly correlated with body length. Their inclusion cannot add independent information by construction. Required: state that only Cache-Control (no-store vs no-cache) and Set-Cookie (present/absent) are state-varying headers independent of body hash, and with distinct bodies they are still redundant."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1-FLASK-PYJWT-MOCK-VERIFIED",
+      "severity": "info",
+      "finding": "Server is genuine Flask 3.1.3 + PyJWT 2.13.0 HS256 middleware, not hand-programmed lookup table. run_experiment.py get_userinfo() branches on jwt.decode with HS256, handling ExpiredSignatureError vs InvalidTokenError and returning Flask Response with production-like headers. Provenance confirms flask 3.1.3 pyjwt 2.13.0 werkzeug 3.1.8 python 3.12.14. Real JWT validation within tested scope verified.",
+      "evidence": "run_experiment.py 129-205 app.route get_userinfo jwt.decode SECRET_KEY HS256 try/except branches, BODIES 4 distinct bodies; provenance.json dependencies flask 3.1.3 pyjwt 2.13.0; raw_observations headers Server Werkzeug/3.1.8 status 200/401 as expected; result.json validity_notes Flask/PyJWT",
+      "impact": "Supports ecological validity step from stdlib to Flask/JWT within narrow localhost scope. Does NOT establish production OAuth/OIDC (Auth0/Okta) validity — prereg Validity Threat 11.1 explicitly notes mock vs production gap."
+    },
+    {
+      "id": "V2-HEADER-VARIATION-AND-EXCLUSION-CORRECT",
+      "severity": "info",
+      "finding": "Production-realistic headers correctly implemented and filtered: Cache-Control no-store (valid) vs no-cache (3 errors) varies by state, Set-Cookie present only for valid_token, ETag W/\"<body_sha>\" body-dependent, X-Request-Id UUID per request EXCLUDED from fingerprint (excluded set date,server,x-request-id). Recomputed fingerprints from raw_observations exactly match stored (4/4 states 0 mismatches) using SHA-256(repr((status, tuple(sorted(filtered headers)), body_hash, ''))). With X-Request-Id included, unique fingerprints would be 10/10 per state (validated), so exclusion is necessary and correctly applied. Date/Server also excluded.",
+      "evidence": "run_experiment.py fingerprint 260-272 excluded={'date','server','x-request-id'}; raw_observations 40 entries X-Request-Id 40 distinct UUIDs but 4 unique fingerprints total, Cache-Control values per state, Set-Cookie only in valid_token, audit recompute 4/4 match true; provenance excluded_headers date,server,x-request-id",
+      "impact": "Null FP 0.0% correctly attributed to volatile exclusion. Demonstrates that volatile per-request identifiers must be excluded for stable fingerprints, validating prereg design constraint. Cache-Control and Set-Cookie DO carry state-discriminative information (recomputed single-field discrimination 0.5 each) but are redundant in full vector under distinct-body ceiling."
+    },
+    {
+      "id": "V3-DISTINCT-BODY-CEILING-CONFOUND",
+      "severity": "high",
+      "finding": "All 4 states have distinct bodies (no_auth ae00c5..., valid 799bf3..., expired 6038e7..., invalid c4986e...) — unlike parent where expired==invalid identical. This pushes full-vector and B-BODY-ONLY discrimination to ceiling 1.0 (intra 180/180=1.0, inter 0/600=0.0). Consequently the exploratory test 'does full exceed B-BODY-ONLY when headers vary independently?' is vacuous: headers cannot improve beyond perfect. Producer correctly reports equality (1.0=1.0) but interpretation overstates 'headers add no independent information' as general finding; under this design they are redundant, not non-informative. Same finding as parent (0.833=0.833) replicated, but now due to design choice not header irrelevance.",
+      "evidence": "raw_observations body_hash 4 distinct values each 10 reps; result.json full_vector_discrimination 1.0 baselines B-BODY-ONLY 1.0 ratio 1.0; report.md Key Finding 2 'Full Vector Equals B-BODY-ONLY' and comparison table; prereg 5.3 BODIES distinct, Table 5.1; audit recomputed intra 1.0 inter 0.0 disc 1.0 and B-BODY-ONLY 1.0",
+      "impact": "Constrains but does not falsify C-MEAS-VALID per decision_rule note. However it prevents any inference that headers are useless in scenarios where bodies collide — the very scenario where headers would matter. Product recommendation 'body-only sufficient' is valid only when bodies are distinct; not tested for identical-body error states on production providers."
+    },
+    {
+      "id": "V4-ETAG-CONTENT-LENGTH-REDUNDANCY",
+      "severity": "low",
+      "finding": "ETag is W/\"<body_sha256>\" perfectly correlated with body_hash; Content-Length (92 vs 62 vs 55 vs 61) perfectly correlated with body length. Both are deterministic functions of body, contributing zero independent information. Only Cache-Control and Set-Cookie are header signals independent of body. Their single-field discriminations are 0.5 each (valid vs 3 errors two-group split), while body-only already achieves 1.0. Full vector equality therefore partly reflects inclusion of body-correlated headers.",
+      "evidence": "run_experiment.py ETag f'W/\"{body_sha}\"' 152-203, headers ETag equals W/body_hash; raw_observations ETag matches body_hash, Content-Length 92/62/55/61 per body; audit recompute Cache-Control-only disc 0.5 Set-Cookie-only 0.5 vs full 1.0",
+      "impact": "Does not falsify but must be disclosed. The claim 'headers add no value' should be qualified to 'body-correlated headers ETag/Content-Length add no value by construction; state-varying independent headers Cache-Control/Set-Cookie are redundant only because bodies already separate.'"
+    },
+    {
+      "id": "V5-NULL-CONTROL-BOUNDED-TO-50-150MS",
+      "severity": "low",
+      "finding": "Null FP 0.0% verified: per-state 10/10 identical fingerprints unique 1 FP 0.0, overall 0/180 intra pairs differ. Elapsed observed 0.053-0.150s confirms server jitter random.uniform(0.05,0.15) present and correctly excluded from vector (elapsed not in fingerprint). However bounded to 50-150ms uniform localhost and X-Request-Id exclusion; production jitter >150ms, CDN/load-balancer variance, compressed encoding not tested. Validity note correctly bounds this.",
+      "evidence": "run_experiment.py get_userinfo time.sleep 0.05-0.15 fingerprint excludes elapsed; raw_observations elapsed min 0.053 max 0.151; result.json C_NULL_FP_RATE 0.0% pass; prereg 7.2 threshold <5%",
+      "impact": "Passes spec falsifier null>5%. Do not extrapolate beyond tested jitter. Already in unresolved."
+    },
+    {
+      "id": "V6-BOOTSTRAP-DEGENERATE",
+      "severity": "medium",
+      "finding": "Bootstrap 95% CI [1.0,1.0] is degenerate artifact of perfect separation (intra 1.0 inter 0.0). With deterministic fingerprints, every bootstrap resample yields disc 1.0, so CI width 0. Does not indicate high statistical power; with N=40 and 4 states, power to detect subtle difference between full and body-only is zero at ceiling. Parent had degenerate wide [0.0,1.0] due to set deduplication; here degenerate narrow. Producer reports it without inflating confidence but does not label as degenerate.",
+      "evidence": "result.json full_vector_bootstrap_95ci [1.0,1.0]; run_experiment.py bootstrap_ci_discrimination set(sampled) resampling; recomputed disc 1.0 all bootstraps 1.0; validity_notes sample size 40 limited power",
+      "impact": "Not a falsifier (decision rule uses point >0.5). But CI should be annotated as uninformative/perfect-separation and not used for product architecture certainty."
+    },
+    {
+      "id": "V7-REPR-VERSION-DEPENDENCE-CARRY",
+      "severity": "low",
+      "finding": "Fingerprint uses hashlib.sha256(repr(vector).encode()) with tuple(sorted(...)). Recomputed 0/40 mismatches on Python 3.12.14 as in provenance. Deterministic within this version but Python-version-dependent as disclosed. Cross-version portability requires canonical serialization. Same limitation as parent.",
+      "evidence": "run_experiment.py fingerprint 254-272 repr(vector); provenance python_version 3.12.14; audit recompute 0 mismatches; result.json validity_notes repr deterministic within same version",
+      "impact": "Replication within 3.12 verified; do_not_assume cross-version. Not a falsifier."
+    },
+    {
+      "id": "V8-SAMPLE-TARGET-INTEGRITY",
+      "severity": "info",
+      "finding": "Target integrity satisfactory: 4 states x10 reps =40 requests randomized seed 44, error_rate 0.0% <20% threshold, no server errors, statuses match expected (200 valid, 401 others), fingerprints per-state identical inter discriminable (0 matches across 600 inter pairs). URL constant http://127.0.0.1:18928/api/userinfo B-URL-HASH 0.0 verified, no leakage.",
+      "evidence": "result.json total_requests 40 error_rate 0.0 C_ERROR_RATE pass; raw_observations per-state 10 entries status/body_hash as per BODIES; recomputed intra 180/180 inter 0/600; B-URL 0.0; run_experiment.py plan shuffle seed 44",
+      "impact": "Supports COMPLETE status, not MEASUREMENT_INVALID. Split/sampling integrity verified."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-STATUS-ONLY",
+      "reported": 0.5,
+      "recomputed": 0.5,
+      "assessment": "PASS - Exact. Three states share 401 (no_auth, expired, invalid) single hash, valid 200 distinct => intra 1.0, inter 3/6 state-pairs matching among 401 group => 300/600 matches => discrimination 0.5. Full vector 1.0 exceeds it, satisfying falsifier (4) full > B-STATUS-ONLY. Status alone insufficient when multiple errors share 401.",
+      "evidence": "result.json baselines B-STATUS-ONLY 0.5 recomputed 0.5 via hash(str(status)); raw_observations status 200 vs 401; run_experiment.py baseline_status_only"
+    },
+    {
+      "id": "B-BODY-ONLY",
+      "reported": 1.0,
+      "recomputed": 1.0,
+      "assessment": "PASS - Exact but tautologically at ceiling due to distinct bodies design. All 4 body_hash distinct => intra 1.0 inter 0.0 => 1.0 equals full vector. Shows body is dominant signal only because bodies were made distinct; does not test scenario where bodies collide and headers could add value. Competitive baseline (not straw-man) correctly used; equality finding is CONSTRAINED outcome per spec, not value-add demonstration.",
+      "evidence": "result.json B-BODY-ONLY 1.0 recomputed 1.0 via body_hash; raw body_hash 4 distinct values; run_experiment.py baseline_body_only"
+    },
+    {
+      "id": "B-URL-HASH",
+      "reported": 0.0,
+      "recomputed": 0.0,
+      "assessment": "PASS - Verified straw-man. URL constant GET /api/userinfo => identical hash => intra 1.0 inter 1.0 => 0.0. Performs as intended, confirming discrimination not URL-tautological.",
+      "evidence": "result.json 0.0 recomputed 0.0 constant sha256; raw_observations url identical 40x; run_experiment.py baseline_url_hash"
+    },
+    {
+      "id": "B-RANDOM",
+      "reported": 0.0,
+      "recomputed": 0.0,
+      "assessment": "PASS - Verified straw-man. 40 random 256-bit hashes seed 99 partitioned 10/state => negligible collisions => discrimination ~0.0 calibrated floor.",
+      "evidence": "result.json 0.0 recomputed 0.0 via baseline_random seed 99; run_experiment.py baseline_random"
+    },
+    {
+      "id": "C_BASELINE_STATUS_SUPERIORITY",
+      "reported": "B-STATUS-ONLY=0.500000, full=1.000000 pass true",
+      "recomputed": "B-STATUS-ONLY 0.5 < full 1.0 true",
+      "assessment": "PASS - Control correctly true. Falsifier condition B-STATUS-ONLY >= full not triggered. Body adds value over status alone even on production-like mock.",
+      "evidence": "result.json controls C_BASELINE_STATUS_SUPERIORITY pass true; spec falsifier (4)"
+    }
+  ],
+  "recomputed_metrics": {
+    "full_vector_discrimination": {
+      "reported": 1.0,
+      "recomputed": 1.0,
+      "match": true,
+      "method": "Recomputed from raw_observations fingerprints: 4 states x10 reps => intra 180 pairs all identical (4*45), inter 600 pairs 0 identical (all 4 states distinct fingerprints) => intra 1.0 inter 0.0 => discrimination 1.0. Fingerprint replay via SHA-256(repr((status, tuple(sorted(filtered headers excluding date/server/x-request-id)), body_hash, ''))) 0/40 mismatches."
+    },
+    "full_vector_intra_match_rate": {
+      "reported": 1.0,
+      "recomputed": 1.0,
+      "match": true
+    },
+    "full_vector_inter_match_rate": {
+      "reported": 0.0,
+      "recomputed": 0.0,
+      "match": true
+    },
+    "full_vector_mean_intra_jaccard": {
+      "reported": 1.0,
+      "recomputed": 1.0,
+      "match": true
+    },
+    "full_vector_mean_inter_jaccard": {
+      "reported": 0.34680306063520056,
+      "recomputed": 0.34680306063520056,
+      "match": true,
+      "method": "Mean bitwise Jaccard over 600 inter pairs via hex_to_bits 256 bits, matches reported within float precision"
+    },
+    "full_vector_bootstrap_95ci": {
+      "reported": [1.0, 1.0],
+      "recomputed": [1.0, 1.0],
+      "match": true,
+      "notes": "Degenerate narrow interval due to perfect separation; all 1000 bootstraps 1.0, uninformative despite appearing precise"
+    },
+    "baselines": {
+      "reported": {
+        "B-URL-HASH": 0.0,
+        "B-RANDOM": 0.0,
+        "B-STATUS-ONLY": 0.5,
+        "B-BODY-ONLY": 1.0
+      },
+      "recomputed": {
+        "B-URL-HASH": 0.0,
+        "B-RANDOM": 0.0,
+        "B-STATUS-ONLY": 0.5,
+        "B-BODY-ONLY": 1.0
+      },
+      "match": true,
+      "method": "Recomputed via identical logic: B-URL constant URL, B-RANDOM seed 99, B-STATUS hash(str(status)), B-BODY body_hash direct equality; compute_discrimination intra-inter"
+    },
+    "full_vs_body_only_ratio": {
+      "reported": 1.0,
+      "recomputed": 1.0,
+      "match": true
+    },
+    "null_fp_rate": {
+      "reported": 0.0,
+      "recomputed": 0.0,
+      "match": true,
+      "method": "Per-state unique 1/10 => (1-1)/(10-1)=0.0 each, overall 0/180 intra pairs differ => 0.0% <5%"
+    },
+    "drift_jaccards": {
+      "reported": [0.328042328042328, 0.3315508021390374],
+      "recomputed": [0.328042328042328, 0.3315508021390374],
+      "match": true,
+      "method": "Mean bitwise Jaccard valid->expired 100 pairs 0.3280, expired->invalid 100 pairs 0.3315 both <0.5 discriminable"
+    },
+    "drift_all_discriminable": {
+      "reported": true,
+      "recomputed": true,
+      "match": true,
+      "notes": "True here unlike parent false because expired vs invalid now have distinct bodies (design change); both drift pairs discriminable as expected"
+    },
+    "total_requests": {
+      "reported": 40,
+      "recomputed": 40,
+      "match": true
+    },
+    "error_rate": {
+      "reported": 0.0,
+      "recomputed": 0.0,
+      "match": true
+    },
+    "elapsed_range": {
+      "reported": null,
+      "recomputed": {
+        "min": 0.05352529800006778,
+        "max": 0.15088967600013348
+      },
+      "notes": "Observed elapsed spans server jitter 50-150ms; timing excluded from fingerprint"
+    },
+    "single_header_discrimination": {
+      "reported": null,
+      "recomputed": {
+        "Cache-Control-only": 0.5,
+        "Set-Cookie-only": 0.5
+      },
+      "notes": "Audit-derived: single state-varying independent headers each achieve 0.5 discrimination (valid vs 3 errors), confirming they ARE discriminative but redundant when body 1.0"
+    }
+  },
+  "claim_ceiling": "C-MEAS-VALID survives narrowly on Flask 3.1.3 + PyJWT 2.13.0 HS256 localhost 127.0.0.1:18928, 4 states (no_auth 401 login_required, valid_token 200 alice profile with Set-Cookie session, expired_token 401 token_expired, invalid_token 401 invalid_token — latter two DISTINCT bodies unlike parent identical), headers after Date/Server/X-Request-Id exclusion (Cache-Control no-store/no-cache, ETag W/body_sha body-correlated, Content-Type/Length body-correlated, Connection close constant, Set-Cookie binary), deterministic SHA-256(repr((status, tuple(sorted(filtered headers)), body_sha256, ''))) on Python 3.12.14, N=40 (4x10 seed 44) server jitter 50-150ms uniform client 0-200ms: full_vector_discrimination 1.0 (180/180 intra, 0/600 inter, mean inter Jaccard 0.346, bootstrap [1.0,1.0] degenerate at ceiling), exceeds B-STATUS-ONLY 0.5 and equals B-BODY-ONLY 1.0 (headers redundant when bodies distinct; Cache-Control and Set-Cookie each 0.5 alone), null FP 0.0% <5% under jitter with X-Request-Id excluded, valid vs expired Jaccard 0.328 <0.5 and expired vs invalid 0.331 <0.5 discriminable. Does NOT establish general production OAuth/OIDC, CDN/caching, rate-limit, compression, jitter >150ms, or that body-only suffices when bodies collide.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-34015740602/request.json — lane runtime pulse, parent_handoff EXP-RUNTIME-33902315583 sha ef43, inherited_next_question production OAuth/OIDC with cache-Control ETag request IDs rate-limit",
+    "research/experiments/EXP-RUNTIME-34015740602/spec.json — claim C-MEAS-VALID, question production-like variation and full vs B-BODY-ONLY, hypothesis distinct bodies + header variation, falsifier full<=0.5 or null>5% or valid vs expired >=0.5 or B-STATUS>=full, four baselines, fingerprint SHA-256 sorted headers excluding Date/Server/X-Request-Id, 4x10 N=40 seed44 jitter 50-150, decision_rule SURVIVES requires full>0.5 & null<5% & valid vs expired <0.5",
+    "research/experiments/EXP-RUNTIME-34015740602/prereg.md — Sections 5 server mock OAuth with local JWT lookup not external provider, 5.1 auth states table 4 states distinct bodies, 5.3 fingerprint vector sorted tuple excluding Date/Server/X-Request-Id, 6 baselines, 10 decision rules SURVIVES, 11 validity threats mock vs production, X-Request-Id exclusion, body distinctness, sample size, ETag correlation",
+    "research/experiments/EXP-RUNTIME-34015740602/freeze.json — frozen_at 2026-09-06T06:11:32.128447 hashes prereg d3f66c..., request 603a86..., spec 44d9fc...",
+    "research/experiments/EXP-RUNTIME-34015740602/result.json — status COMPLETE outcome SUPPORTS metrics full 1.0 intra1.0 inter0.0 meanInter0.346 bootstrap[1,1] baselines B-STATUS0.5 B-BODY1.0 B-URL0 B-RANDOM0 ratio1.0 null0.0 drift[0.3280,0.3315] drift_all true total40 error0 controls 6 passes",
+    "research/experiments/EXP-RUNTIME-34015740602/report.md — interpretation C-MEAS-VALID SURVIVES perfect 1.0 due distinct bodies, full=B-BODY 1.0=1.0 body dominant, Set-Cookie/cache-Control add no independent info, comparison parent 0.833->1.0 design change, product recommendation body-only",
+    "research/experiments/EXP-RUNTIME-34015740602/provenance.json — python 3.12.14 linux flask 3.1.3 pyjwt 2.13.0 requests 2.34.2 port 18928 seed44 jitter 0.05-0.15 inter 0-0.2 fingerprint SHA-256 sorted tuple excluding date/server/x-request-id, artifacts raw_observations sha 6ee57f...",
+    "research/experiments/EXP-RUNTIME-34015740602/raw_observations.json — 40 entries 4x10 URL constant http://127.0.0.1:18928/api/userinfo body_hash 4 distinct ae00c5 no_auth,799bf3 valid,6038e7 expired,c4986e invalid fingerprint 4 values 7487fe no_auth fa7226 valid 7714b3 expired 9e3481 invalid headers Cache-Control no-store/no-cache ETag W/body_sha X-Request-Id 40 UUIDs Set-Cookie only valid Content-Length 92/62/55/61 Server Werkzeug Date, recomputed match 0/40 mismatches",
+    "research/experiments/EXP-RUNTIME-34015740602/run_experiment.py — SECRET_KEY test-secret-key, BODIES valid iat/exp dynamic, AUTH_STATES 4x10, get_userinfo jwt.decode HS256 with time.sleep 0.05-0.15 ETag/Set-Cookie/Cache-Control logic, fingerprint 260-272, compute_discrimination intra-inter, baselines B-URL/B-RANDOM/B-STATUS/B-BODY, null per-state unique, drift Jaccard bitwise"
+  ],
+  "unresolved": [
+    "Does substrate maintain discrimination on production OAuth/OIDC providers (Auth0, Okta, Keycloak) with CDN, load-balancer variance, rate-limit headers, chunked encoding, compression?",
+    "What is FP rate under jitter >150ms, multi-second Date spanning, or volatile headers beyond X-Request-Id (e.g., ETag variation via CDN)?",
+    "Does full vector exceed B-BODY-ONLY when bodies are NOT distinct (e.g., identical error bodies) but headers vary independently with auth state — the incremental value test not achievable at ceiling 1.0?",
+    "Can substrate detect continuous session drift as threshold classifier rather than discrete 4-state exact-match?",
+    "What is cross-Python-version reproducibility after replacing repr(vector) with canonical JSON/msgpack serialization?"
+  ]
+}

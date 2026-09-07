@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-33902315583",
+  "lane": "runtime",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "full_vector_discrimination": 0.8333333333333334,
+    "full_vector_intra_match_rate": 1.0,
+    "full_vector_inter_match_rate": 0.16666666666666666,
+    "full_vector_mean_intra_jaccard": 1.0,
+    "full_vector_mean_inter_jaccard": 0.47376918104181553,
+    "full_vector_bootstrap_95ci": [
+      0.0,
+      1.0
+    ],
+    "baselines": {
+      "B-URL-HASH": 0.0,
+      "B-RANDOM": 0.0,
+      "B-STATUS-ONLY": 0.5,
+      "B-BODY-ONLY": 0.8333333333333334
+    },
+    "null_fp_rate": 0.0,
+    "drift_jaccards": [
+      0.35051546391752575,
+      1.0
+    ],
+    "drift_all_discriminable": false,
+    "total_requests": 40,
+    "error_rate": 0.0
+  },
+  "controls": {
+    "C_NULL_FP_RATE": {
+      "expected": "< 5%",
+      "observed": "0.0%",
+      "pass": true,
+      "detail": {
+        "no_auth": {
+          "total": 10,
+          "unique": 1,
+          "false_positive_rate": 0.0
+        },
+        "valid_token": {
+          "total": 10,
+          "unique": 1,
+          "false_positive_rate": 0.0
+        },
+        "expired_token": {
+          "total": 10,
+          "unique": 1,
+          "false_positive_rate": 0.0
+        },
+        "invalid_token": {
+          "total": 10,
+          "unique": 1,
+          "false_positive_rate": 0.0
+        }
+      }
+    },
+    "C_POSITIVE_DISCRIMINATION": {
+      "expected": "> 0.5",
+      "observed": "0.833333",
+      "pass": true
+    },
+    "C_BASELINE_STATUS_SUPERIORITY": {
+      "expected": "full-vector > B-STATUS-ONLY",
+      "observed": "B-STATUS-ONLY=0.500000, full=0.833333",
+      "pass": true
+    },
+    "C_DRIFT_VALID_VS_EXPIRED": {
+      "expected": "Jaccard < 0.5 (discriminable)",
+      "observed": "Jaccard=0.3505",
+      "pass": true
+    },
+    "C_DRIFT_EXPIRED_VS_INVALID": {
+      "expected": "Jaccard >= 0.5 (non-discriminable, correct behavior)",
+      "observed": "Jaccard=1.0000",
+      "pass": true
+    },
+    "C_ERROR_RATE": {
+      "expected": "< 20%",
+      "observed": "0.0%",
+      "pass": true
+    }
+  },
+  "artifacts": [
+    {
+      "path": "raw_observations.json",
+      "role": "raw"
+    }
+  ],
+  "observations": [
+    "Flask/JWT server started on port 18927 with PyJWT HS256 validation middleware",
+    "4 auth states x 10 reps = 40 requests completed",
+    "Server-side jitter: 50-150ms random processing delay per request",
+    "Client-side jitter: 0-200ms inter-request delay (seed=44)",
+    "No synthetic headers: server returns only standard HTTP headers (Content-Type, Content-Length)",
+    "expired_token and invalid_token return IDENTICAL response bodies (401, {\"error\": \"authentication_failed\"})",
+    "Full-vector discrimination: 0.833333 (threshold: > 0.5)",
+    "Full-vector bootstrap 95% CI: [0.000000, 1.000000]",
+    "B-STATUS-ONLY discrimination: 0.500000 (3 states share status 401)",
+    "B-BODY-ONLY discrimination: 0.833333 (expired and invalid share identical bodies)",
+    "B-URL-HASH discrimination: 0.000000 (URL is constant)",
+    "Null FP rate under server-side jitter: 0.0% (threshold: < 5%)",
+    "valid_token vs expired_token drift Jaccard: 0.3505 (threshold: < 0.5)",
+    "expired_token vs invalid_token drift Jaccard: 1.0000 (expected >= 0.5, correct non-discrimination)"
+  ],
+  "validity_notes": [
+    "Server is Flask 3.1.3 with PyJWT 2.13.0 HS256 validation \u2014 real JWT middleware, not hand-programmed lookup tables.",
+    "Fingerprint uses repr(vector) with tuple(sorted(...)) \u2014 deterministic within same Python version but Python-version-dependent.",
+    "Date and Server headers excluded from fingerprint vector to prevent spurious variance.",
+    "Server-side jitter 50-150ms tests timing invariance when timing is excluded from fingerprint.",
+    "expired_token and invalid_token share IDENTICAL response bodies by design \u2014 non-discrimination is correct substrate behavior.",
+    "Python version: 3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "Error rate: 0.0% (0 errors out of 40 requests)",
+    "Flask may add Werkzeug/Server header (excluded from fingerprint) and Date header (excluded from fingerprint).",
+    "Sample size: 40 requests (4 states x 10 reps) \u2014 limited statistical power for subtle discrimination differences."
+  ],
+  "unresolved": [
+    "Does the substrate maintain discrimination on production OAuth/OIDC providers with additional response variation (cache-Control, ETag, request IDs)?",
+    "What is the false-positive rate under server-side processing jitter >150ms or volatile standard headers?",
+    "Can substrate detect continuous session drift as a continuous signal rather than discrete state classification?",
+    "What is cross-Python-version reproducibility of repr(vector) hashes?",
+    "Does full vector exceed B-BODY-ONLY when standard headers vary with auth state in production middleware?"
+  ]
+}

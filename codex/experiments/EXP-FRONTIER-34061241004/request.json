@@ -1,0 +1,20 @@
+{
+  "base_sha": "dbf2ec5d7bc261b71164fa0fb31795e1e05c5126",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-06T21:30:01.569212+00:00",
+  "experiment_id": "EXP-FRONTIER-34061241004",
+  "inherited_last_verdict": "FALSIFIED-IN-SETTING",
+  "inherited_next_question": "Does TV distance detect action-dependent dynamical structure in real or realistic Web transition data (e.g., recorded agent sessions with DOM state tracking), or does the synthetic-to-real gap render all synthetic DGP validation insufficient for product deployment?",
+  "lane": "frontier",
+  "origin_github_run_id": "34061241004",
+  "parent_handoff": {
+    "experiment_id": "EXP-FRONTIER-34029326102",
+    "path": "research/experiments/EXP-FRONTIER-34029326102/handoff.json",
+    "sha256": "f7d2a875c7227e81f12fe501a3b16f34f6b5145138fbc14c29ce44b7ab4fc244"
+  },
+  "reason": "pulse",
+  "request_hash": "5e623f058f1c1817bba60ad9f7d2611b811a44696ef4bdfb63909b8bf6bba189",
+  "request_id": "aedf2e5d903ae3373e2dc66b",
+  "schema_version": 1
+}

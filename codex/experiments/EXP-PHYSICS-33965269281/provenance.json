@@ -1,0 +1,39 @@
+{
+  "experiment_id": "EXP-PHYSICS-33965269281",
+  "lane": "physics",
+  "request_hash": "5128ce15f6cae2a19a4b7c4526f74ee77b74d803fcb91dabeb6048c65e01f55e",
+  "freeze_hash_prereg": "5158b63d7e3d646e932cf7fa677d0709fd25da2c8a2d2ed866057dd5104491d8",
+  "freeze_hash_request": "1e2103fdc982e84c4ec36d2ee7cab2393a663c14de893a8ee5a1884d60d59d6a",
+  "freeze_hash_spec": "0717f4c5c8c4b161389094ec7987a2bc410088d599825d606292e26781235b40",
+  "git_sha": "84583d1f8a86cbe450ed1624dbbe8dc4d00c859e",
+  "execution_sha": "9e9b9a86502f66f86dcb70cd6a175b1b09d38063f85b70633c1e707830ab1568",
+  "code_paths": [
+    "research/physics/substrate_339.py",
+    "research/physics/run_staged_339.py"
+  ],
+  "environment": {
+    "python_version": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "platform": "linux"
+  },
+  "seeds": {
+    "positive_control": 42,
+    "null_control": 44,
+    "live_wikipedia": 43,
+    "live_python_docs": 45,
+    "split": 42,
+    "permutation_base": 42,
+    "shuffle_null": 9999
+  },
+  "data_hashes": {
+    "positive_transitions": "58fcc47caa9eea58f40231209c26b9ce3132798375b4bfe48eb25ca9aaeeea43",
+    "null_transitions": "74adea5c11e492eb16c054c1d9ac5689e1ca5375b75b8b19305437dc32f8cebc",
+    "positive_metrics": "ce6d189c9ca900853e9173176ad9a5601b7fed73dc5119bdab7411650344df91",
+    "null_metrics": "aad379d385a237afaebaa58e0bc5f2be9b3f3e454a1532be96cb71845943ace5",
+    "perm_positive_SA_vs_shuffle": "f09f34157986f469dae80d9e019f1e512dfe83857adb05307153fa0e10ce1281",
+    "perm_positive_SA_vs_AF": "0ee626ecab7651accb7e7a52d2c1bbb52112fc7a615bab0fc11ee92c917abb7c",
+    "perm_null_SA_vs_shuffle": "946073be915103f2f1810e2d1d7f7682837a6442c0ebba8c55e274f564dc3f23",
+    "wikipedia": "069618622cecd208038c8623a13ae14e5ff4a573af3c4a48e001e22c174b9f0f",
+    "python_docs": "fb5b26884dd0ce004c17fc4a5fd8d03b2b5ab9a968e003ac9134389765ae43f5"
+  },
+  "recorded_at": "2026-09-05T18:02:06Z"
+}

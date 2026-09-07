@@ -1,0 +1,52 @@
+{
+  "experiment_id": "EXP-PRODUCT-34003641840",
+  "schema_version": 1,
+  "github_run_id": "34003641840",
+  "base_sha": "22c8a45bc052bd6e220ffde4663ebd1a6ed68f2b",
+  "parent_experiment": "EXP-PRODUCT-33993747223",
+  "parent_handoff_sha256": "38b84992e2c908619e66823aadb2eee4776520d759abbfd943840dc134da8022",
+  "freeze_sha256_prereg": "858efbada200631859d364f3b9668ab9a3653464d07e891d114839bcaf064ce2",
+  "freeze_sha256_request": "d8aa047873053228069f0ae6f2a40d37a124c6489b58135e0f8a2fe7e7e5c6bb",
+  "freeze_sha256_spec": "90a4024586a23b8e2c560a83b76bfeb3ba686cea6fb9670b4b49888b8219401b",
+  "code_artifacts": [
+    {
+      "path": "research/experiments/EXP-PRODUCT-34003641840/run_experiment.py",
+      "sha256": "ff5c31be6aa81db9edd1b84651b79f1e1a30527273807122ab7c4cafc2795bd9",
+      "description": "Self-contained experiment implementation with redesigned noise filter and structure-similarity check"
+    },
+    {
+      "path": "src/spider/kernel.py",
+      "sha256": "76035599b1e6bf6af4205ad8d0b06bcd29ee2b9a4d42137f2cccf2c7c24b116e",
+      "description": "Original kernel.py (not modified by this experiment)"
+    }
+  ],
+  "evidence_artifacts": [
+    {
+      "path": "research/experiments/EXP-PRODUCT-34003641840/raw_evidence.json",
+      "sha256": "89743441b6176249cca240e4604f57b639001b71da0f77e6c4f1c649072b9d4b",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-34003641840/result.json",
+      "role": "result"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-34003641840/report.md",
+      "role": "report"
+    }
+  ],
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.x",
+    "dependencies": "standard library only (no external packages)",
+    "execution_mode": "offline synthetic, no network/browser/model calls"
+  },
+  "reproduction_command": "python3 research/experiments/EXP-PRODUCT-34003641840/run_experiment.py",
+  "key_algorithms": [
+    "field-path relevance noise filter: allowlist {method, url, body, headers, query}, exclude metadata",
+    "structure-similarity: Jaccard >= 0.75 on leaf paths + constant-value anchor check",
+    "prefix/suffix template construction from varying values",
+    "strict binding_correct: JSON comparison of bound_action against expected_action"
+  ],
+  "datasets_fixtures": "Synthetic test data identical to parent EXP-PRODUCT-33993747223 (10 conditions, 28 unseen test cases)"
+}

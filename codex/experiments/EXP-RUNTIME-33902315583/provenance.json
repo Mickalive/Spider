@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-33902315583",
+  "github_run_id": "33902315583",
+  "github_run_attempt": "1",
+  "python_version": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+  "platform": "linux",
+  "dependencies": {
+    "flask": "3.1.3",
+    "pyjwt": "2.13.0",
+    "requests": "2.34.2",
+    "werkzeug": "3.1.8"
+  },
+  "code_paths": {
+    "run_experiment": "research/experiments/EXP-RUNTIME-33902315583/run_experiment.py",
+    "flask_app": "research/experiments/EXP-RUNTIME-33902315583/run_experiment.py:get_data (lines 73-93)",
+    "fingerprint": "research/experiments/EXP-RUNTIME-33902315583/run_experiment.py:fingerprint (lines 108-123)",
+    "metrics": "research/experiments/EXP-RUNTIME-33902315583/run_experiment.py:compute_discrimination_score (lines 129-175)"
+  },
+  "datasets_fixtures": {
+    "valid_token": "JWT with sub=alice, exp=now+1h, HS256 (generated at runtime)",
+    "expired_token": "JWT with sub=alice, exp=1h ago, HS256 (generated at runtime)",
+    "invalid_token": "String 'not-a-real-jwt-token' (malformed, fails PyJWT validation)",
+    "secret_key": "test-secret-key-12345 (21 bytes, HS256)"
+  },
+  "server_config": {
+    "host": "127.0.0.1",
+    "port": 18927,
+    "jitter_range": [0.05, 0.15],
+    "synthetic_headers": false,
+    "auth_states": ["no_auth", "valid_token", "expired_token", "invalid_token"]
+  },
+  "artifacts": {
+    "result.json": {
+      "path": "research/experiments/EXP-RUNTIME-33902315583/result.json",
+      "sha256": "384238fda23f97a663c9b8e0c79154d99fdfa9b406fb040320cd76106110e98c",
+      "role": "derived"
+    },
+    "raw_observations.json": {
+      "path": "research/experiments/EXP-RUNTIME-33902315583/raw_observations.json",
+      "sha256": "068bcbe02db8f2dd5e4a7a1fdd96a1a96420a09d9ab68eea466e10d43138933e",
+      "role": "raw"
+    },
+    "run_experiment.py": {
+      "path": "research/experiments/EXP-RUNTIME-33902315583/run_experiment.py",
+      "sha256": "18f524bfdd72ac8e0f7cdd93a9153046cb0c35691d2070ccd20952c7e563fb18",
+      "role": "code"
+    },
+    "report.md": {
+      "path": "research/experiments/EXP-RUNTIME-33902315583/report.md",
+      "sha256": "a89bcc4a58a08a6d88b64a71f281872bb68f80122e23f76705cef1778073abc0",
+      "role": "derived"
+    }
+  },
+  "frozen_inputs": {
+    "request.json": "research/experiments/EXP-RUNTIME-33902315583/request.json",
+    "spec.json": "research/experiments/EXP-RUNTIME-33902315583/spec.json",
+    "prereg.md": "research/experiments/EXP-RUNTIME-33902315583/prereg.md",
+    "freeze.json": "research/experiments/EXP-RUNTIME-33902315583/freeze.json"
+  },
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-33805283356",
+    "path": "research/experiments/EXP-RUNTIME-33805283356/handoff.json",
+    "sha256": "c0cf725e47b7a5596f4400213a228f41e46321d0ee790280dc1144ec00bb7894"
+  },
+  "execution_environment": {
+    "os": "linux",
+    "cpu": "x86_64",
+    "memory": "unknown",
+    "network": "localhost only (127.0.0.1:18927)"
+  },
+  "reproduction_notes": [
+    "Tokens generated at runtime with jwt.encode(); validity depends on wall-clock time",
+    "expired_token valid for ~1 hour before experiment, invalid after",
+    "Flask dev server (not production WSGI) — sufficient for local validation",
+    "Seed 44 controls request order but not server-side jitter",
+    "Port 18927 chosen to avoid collision with parent experiment on 18926"
+  ]
+}

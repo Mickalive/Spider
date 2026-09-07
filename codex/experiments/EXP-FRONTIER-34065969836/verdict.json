@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-34065969836",
+  "lane": "frontier",
+  "decision": "FALSIFIED-IN-SETTING",
+  "claim_updates": [
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "HYPOTHESIS",
+      "reason": "TV distance with kNN estimator in synthetic 10D [0,1]^10 with mixture-of-3-Gaussians heteroscedastic noise does NOT produce uniform function-invariant response. Falsified by two independent frozen-spec conditions: (1) Function invariance decisively fails — ANOVA interaction p~1e-30 (audit.json:recomputed_metrics.anova_interaction F=19.13, df=14, resid_df=216). Scaling function (family B) shows rho=-0.07 (p=0.57), separation=0.022, d=0.85 — negligible TV response. Translation (family C) shows rho=1.0, separation=0.201, d=9.11 — strong signal. Rotation (family A) shows rho=0.83, d=2.09 — moderate with non-monotonic dip. Aggregate rho=1.0 is weighted average of heterogeneous per-function responses. (2) Positive control fails under frozen spec definition — producer redefined control as tv_at_1 > tv_at_0 (analyze.py:706-727) but frozen spec requires TV at lambda=1 detectably above permutation null (permutation p < 0.05); report.md notes mean perm p=0.141 at lambda=1 with 200 perms. The hypothesis that TV uniformly generalizes from 2D Gaussian to 10D non-Gaussian settings is falsified for the tested parameterization. However, translation-type dynamics remain detectable in 10D (rho=1.0, d=9.1), so blanket claim that TV fails in 10D is not justified. Claim ceiling bounded to: TV detects action-dependent structure in 10D non-Gaussian spaces only for function families with sufficient action-conditional separability (translation-like), not universally. C-WEB-DYNAMICS remains HYPOTHESIS."
+    }
+  ],
+  "product_action": "NO_ACTION",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can bias-corrected kNN TV (permutation-null subtraction removing the ~0.52 finite-sample floor) recover uniform function invariance in 10D non-Gaussian spaces, or does the scaling function failure persist after bias correction — and does the clipping artefact (~50% at lambda=1) quantitatively explain translation's strong signal (separation=0.201) vs scaling's weakness (separation=0.022)?",
+  "reason": "Decision grounded in frozen spec decision_rule (spec.json): function invariance (ANOVA interaction p>0.05) is required; observed p~1e-30 decisively fails (audit.json:recomputed_metrics.anova_interaction). Independent falsification via positive control: frozen spec requires permutation p<0.05 at lambda=1; producer's 200-perm mean p=0.141 fails this (audit.json:required_fixes[0], V4_positive_control_redefinition). The audit's 6 required_fixes must be addressed before quantitative conclusions are trustworthy: positive control redefinition, kNN bias floor ~0.52 uncorrected (V3), clipping at lambda=1 ~50% inflating edge mass (V2), frequency baseline and Gaussian noise baseline missing (audit.json:baseline_findings), 200 perms instead of 1000 (V5). Despite these validity threats, function invariance failure is robust across all kNN scales and per-function recomputation. No product promotion: C-WEB-DYNAMICS remains HYPOTHESIS; no real Web data tested; no end-to-end economics measured.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-34065969836/spec.json:decision_rule 6 conditions, function invariance required (p>0.05), positive_control permutation null (p<0.05), claim_ids C-WEB-DYNAMICS",
+    "research/experiments/EXP-FRONTIER-34065969836/result.json:status COMPLETE outcome FALSIFIES, per_function 43 scaling rho -0.07 p 0.57 d 0.85 separation 0.022, 44 translation rho 1.0 d 9.11 separation 0.201, 42 rotation rho 0.83 d 2.09, controls.function_invariance PASS false interaction_p 0.0, controls.positive_control PASS true (redefined by producer), clipping_fractions 0.486-0.498 at lambda=1, multiscale 2/4 monotonic (k=10 k=20)",
+    "research/experiments/EXP-FRONTIER-34065969836/audit.json:status REVISE producer_claim_supported true, claim_ceiling function-dependent not uniform, required_fixes[0] positive_control redefinition [1] bias_correction [2] clipping [3] missing baselines [4] permutation_power [5] multi-scale rule, validity_findings V2_clipping V3_knn_bias_floor V4_positive_control_redefinition, recomputed_metrics anova_interaction F=19.13 p=1.2e-30, baseline_findings frequency_missing gaussian_missing",
+    "research/experiments/EXP-FRONTIER-34065969836/report.md:section 4.2 scaling failure root cause weak action signal overwhelmed by 10D noise, section 4.3 aggregate vs per-function tension, section 5 parent comparison TV range compression 6x effect size reduction 13x",
+    "research/experiments/EXP-FRONTIER-34065969836/provenance.json:total_transitions 120000 execution 312.5s seed 42 environment python 3.12",
+    "research/experiments/EXP-FRONTIER-34061241004/handoff.json:parent SURVIVES_CURRENT_TEST established 2D Gaussian monotonic rho=1.0 d=20.3 function_invariance PASS p=0.86"
+  ]
+}

@@ -1,0 +1,175 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-33965269281",
+  "lane": "physics",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "NOT_APPLICABLE",
+  "metrics": {
+    "positive_control": {
+      "label": "positive_control",
+      "n_transitions": 600,
+      "n_trajectories": 60,
+      "n_train_transitions": 420,
+      "n_train_trajectories": 42,
+      "n_test_transitions": 180,
+      "n_test_trajectories": 18,
+      "accuracy_SA_train": 1.0,
+      "accuracy_SA_heldout": 1.0,
+      "accuracy_AF_heldout": 0.6777777777777778,
+      "accuracy_state_heldout": 0.5944444444444444,
+      "accuracy_in_sample": 1.0,
+      "accuracy_shuffle": 0.35,
+      "memorization_ratio": 1.0,
+      "diff_SA_vs_shuffle": 0.65,
+      "diff_SA_vs_AF": 0.3222222222222222
+    },
+    "null_control": {
+      "label": "null_control",
+      "n_transitions": 300,
+      "n_trajectories": 30,
+      "n_train_transitions": 210,
+      "n_train_trajectories": 21,
+      "n_test_transitions": 90,
+      "n_test_trajectories": 9,
+      "accuracy_SA_train": 0.9285714285714286,
+      "accuracy_SA_heldout": 0.0,
+      "accuracy_AF_heldout": 0.011111111111111112,
+      "accuracy_state_heldout": 0.022222222222222223,
+      "accuracy_in_sample": 0.87,
+      "accuracy_shuffle": 0.03333333333333333,
+      "memorization_ratio": 9285714285.714285,
+      "diff_SA_vs_shuffle": -0.03333333333333333,
+      "diff_SA_vs_AF": -0.011111111111111112
+    },
+    "live_wikipedia": {
+      "label": "live_wikipedia",
+      "n_transitions": 880,
+      "n_trajectories": 110,
+      "n_train_transitions": 616,
+      "n_train_trajectories": 77,
+      "n_test_transitions": 264,
+      "n_test_trajectories": 33,
+      "accuracy_SA_train": 0.9983766233766234,
+      "accuracy_SA_heldout": 0.030303030303030304,
+      "accuracy_AF_heldout": 0.15151515151515152,
+      "accuracy_state_heldout": 0.011363636363636364,
+      "accuracy_in_sample": 0.9988636363636364,
+      "accuracy_shuffle": 0.007575757575757576,
+      "memorization_ratio": 32.94642857142857,
+      "diff_SA_vs_shuffle": 0.022727272727272728,
+      "diff_SA_vs_AF": -0.12121212121212122
+    },
+    "live_python_docs": {
+      "label": "live_python_docs",
+      "n_transitions": 880,
+      "n_trajectories": 110,
+      "n_train_transitions": 616,
+      "n_train_trajectories": 77,
+      "n_test_transitions": 264,
+      "n_test_trajectories": 33,
+      "accuracy_SA_train": 1.0,
+      "accuracy_SA_heldout": 0.24242424242424243,
+      "accuracy_AF_heldout": 0.4015151515151515,
+      "accuracy_state_heldout": 0.3333333333333333,
+      "accuracy_in_sample": 1.0,
+      "accuracy_shuffle": 0.1553030303030303,
+      "memorization_ratio": 4.125,
+      "diff_SA_vs_shuffle": 0.08712121212121213,
+      "diff_SA_vs_AF": -0.15909090909090906
+    }
+  },
+  "controls": {
+    "positive_SA_vs_shuffle": {
+      "expected": "p < 0.05",
+      "observed_diff": 0.6,
+      "p_value": 0.0,
+      "pass": true
+    },
+    "positive_SA_vs_AF": {
+      "expected": "p < 0.05",
+      "observed_diff": 0.3222222222222222,
+      "p_value": 0.0,
+      "pass": true
+    },
+    "null_SA_vs_shuffle": {
+      "expected": "p > 0.05",
+      "observed_diff": 0.011111111111111112,
+      "p_value": 0.241,
+      "pass": true
+    },
+    "live_wikipedia_SA_vs_shuffle": {
+      "expected": "p < 0.05 after correction",
+      "observed_diff": 0.01893939393939394,
+      "p_value": 0.0,
+      "pass": true
+    },
+    "live_python_docs_SA_vs_shuffle": {
+      "expected": "p < 0.05 after correction",
+      "observed_diff": 0.10227272727272728,
+      "p_value": 0.0,
+      "pass": true
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-33965269281/raw_positive.json",
+      "sha256": "3eef0bbc382fef44eb63d55481e3d417b2a98478d6f4fa4e1eb06331a99fc73f",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-33965269281/raw_null.json",
+      "sha256": "3ae136b4cc36b5f736252af8b819613d1864625fc9647cfbdd649b13c72c713e",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-33965269281/raw_live_wikipedia.json",
+      "sha256": "87e6d8fcecb436ab9b1067a27c7f5708c393bace5efbb0225bfe1f57aa87bc5e",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-33965269281/raw_live_python_docs.json",
+      "sha256": "a7634ca3734360a4d6a2ffdb89d859ae9ff466df710be3323da8ac5c5d2fa648",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-33965269281/result.json",
+      "sha256": "fa0f29fa56ef9479ffd7a675dc2eb8ffee3f718ced072cfd4fed2fdb2f78514e",
+      "role": "result"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-33965269281/report.md",
+      "sha256": "2b7b7889b8c3dfa10ee97bdf278a012c8007dfadc09725776ce6d888722474f1",
+      "role": "report"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-33965269281/provenance.json",
+      "sha256": "1fe7d93f6bf8be5478f0ef640fc7717699d5063f987a5dc7fdd7ebf59cf68b28",
+      "role": "provenance"
+    }
+  ],
+  "observations": [
+    "Positive control: 600 transitions, SA held-out acc=1.0000, AF held-out acc=0.6778, diff_SA_vs_AF=0.3222",
+    "Null control: 300 transitions, SA held-out acc=0.0000, diff_SA_vs_shuffle=-0.0333",
+    "Live wikipedia: 880 transitions, 110 trajectories, SA held-out acc=0.0303, diff_SA_vs_shuffle=0.0227",
+    "Live python_docs: 880 transitions, 110 trajectories, SA held-out acc=0.2424, diff_SA_vs_shuffle=0.0871"
+  ],
+  "validity_notes": [
+    "VALIDITY GATE FAILURE: see validity checks above",
+    "Validity gate target_href_encoding FAILED: ['target_href equals source URL: https://en.wikipedia.org/wiki/Samsung_Browser', 'target_href equals source URL: https://en.wikipedia.org/wiki/-shat', 'target_href equals source URL: https://en.wikipedia.org/wiki/-shat', 'target_href equals source URL: https://en.wikipedia.org/wiki/CSS', 'target_href equals source URL: https://en.wikipedia.org/wiki/CSS']",
+    "REPRESENTATION: Playwright-based collection with full DOM, accessibility tree, link texts, tag_counts, form_signals",
+    "REPRESENTATION LOSS: No visual layout or CSS structure",
+    "REPRESENTATION LOSS: No interaction history (hover, scroll, focus)",
+    "REPRESENTATION LOSS: Accessibility tree may be incomplete on some pages",
+    "REPRESENTATION LOSS: Query string stripped from URL",
+    "COLLECTION: Chromium headless, JavaScript enabled, domcontentloaded wait",
+    "FIX APPLIED: target_href = destination URL (not source URL as in EXP-PHYSICS-33788037373)",
+    "FIX APPLIED: Full state representation stored in raw data",
+    "FIX APPLIED: Bonferroni correction for 6 comparisons"
+  ],
+  "unresolved": [
+    "Whether JavaScript-heavy SPA sites show different structure",
+    "Whether even richer representations reveal more structure",
+    "Whether authenticated/form-heavy sites show different dynamics",
+    "Whether the tested sites are representative of dynamical regimes"
+  ]
+}

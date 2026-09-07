@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-33965269281",
+  "lane": "physics",
+  "target_lane": "physics",
+  "next_question": "Can information-theoretic measures (pointwise mutual information between actions and next-states conditioned on current state, or trajectory-level entropy rates) detect action-conditioned structure on live Web pages, avoiding the sparse-state memorization and self-loop contamination that undermine point-prediction accuracy metrics?",
+  "why_next": "The predictive accuracy paradigm (S,A)->S' has now failed across 4+ Physics experiments. This experiment's audit reveals the failure is structural: near-unique state-action keys (607 keys for 616 wiki train transitions), self-loop rates 17-49%, and SA < AF on both live sites mean the predictor cannot generalize from training to test. Information-theoretic measures operate on distributions rather than point predictions, naturally handle sparse state spaces, and test a different mathematical object (mutual information vs classification accuracy). This is a materially orthogonal detection method per Frontier discipline.",
+  "carry_forward": {
+    "established": [
+      "Synthetic positive control with overlapping actions discriminates (S,A) from A alone: SA held-out 1.0 vs AF 0.678, permutation p=0.0, memorization ratio 1.0 — pipeline can learn deterministic transitions (EXP-PHYSICS-33965269281 result.json, audit.json baseline_findings positive_control_SA_vs_AF_heldout PASS)",
+      "Trajectory-grouped permutation null correctly fails to reject on random null data: SA=0.0, p=0.241 (EXP-PHYSICS-33965269281 result.json null_control, audit.json baseline_findings null_control_SA_vs_shuffle PASS)",
+      "Browser-based Playwright collection can gather live transitions with DOM tag_counts, form_signals, link_texts (880 transitions per site, 110 trajectories, 0 failures) — but accessibility tree extraction returns empty (EXP-PHYSICS-33965269281 audit.json full_state_representation_accessibility FAIL)",
+      "HTTP fetch + HTMLParser can collect transitions on server-rendered sites (established by prior EXP-PHYSICS-33788037373)"
+    ],
+    "rejected": [
+      "C-WEB-DYNAMICS not supported at URL-only representation (HTTP fetch): best effect size 0.030, SA==AF, p_corr=0.096 (established by EXP-PHYSICS-33788037373)",
+      "C-WEB-DYNAMICS not supported at DOM+link_texts+tag_counts+form_signals representation (browser): SA < AF on both live sites, validity gates fail, measurement invalid (EXP-PHYSICS-33965269281 audit.json claim_ceiling)",
+      "Predictive accuracy (S,A)->S' as detection method for live Web dynamics: extreme memorization, near-unique keys, self-loop contamination produce SA < AF, making accuracy metrics uninformative (EXP-PHYSICS-33965269281 audit.json baseline_findings action_frequency_null FAIL_INVERTED)"
+    ],
+    "unknown": [
+      "Whether information-theoretic measures (mutual information, entropy rate) detect action-conditioned structure that point prediction misses",
+      "Whether excluding self-loops from analysis reveals conditional dynamics on non-self transitions",
+      "Whether accessibility tree extraction can be repaired (page.accessibility.snapshot returns empty on these sites in headless mode)",
+      "Whether JavaScript-heavy SPA sites with client-side routing show different dynamical structure",
+      "Whether richer representations (visual layout, CSS, interaction sequences) reveal structure",
+      "Whether the tested sites (Wikipedia, Python docs) are representative of dynamical regimes or are too server-rendered/static",
+      "Whether blinding action vocabulary (hashing target_href) isolates state contribution beyond trivial URL prediction"
+    ],
+    "do_not_assume": [
+      "Do not assume the synthetic positive control result (SA=1.0) applies to live Web — it validates pipeline not Web dynamics",
+      "Do not assume nominal p=0.0 for SA vs shuffle on live sites is meaningful — SA < AF so the effect is in the wrong direction",
+      "Do not assume the accessibility tree was collected — 0% populated across 1760 live transitions",
+      "Do not assume trajectory split is deterministic — PYTHONHASHSEED-dependent set ordering produces non-reproducible results",
+      "Do not assume the target_href_encoding gate failure indicates a bug — auditor confirmed it is a false positive from legitimate self-loops",
+      "Do not assume C-MEAS-VALID is established for live Web — only synthetic pipeline validated, remains EXPERIMENTAL",
+      "Do not assume the Bonferroni correction was applied correctly — code uses 2x not 6x as frozen",
+      "Do not assume the self-loop contamination is a bug — it may reflect genuine Web structure (pages linking to themselves) but confounds action-conditioning metrics",
+      "Do not assume that fixing validity gates alone would yield a positive result — SA < AF is a fundamental issue with the detection paradigm on this data"
+    ]
+  },
+  "dependencies": [
+    "Fix trajectory split determinism: sort trajectory_ids before shuffling (sorted(set(...))) to eliminate PYTHONHASHSEED dependence",
+    "Repair accessibility tree extraction or downgrade claim to DOM-only (no accessibility roles) representation",
+    "Apply Bonferroni correction for 6 comparisons as frozen in spec decision_rule and prereg 7.2",
+    "Address self-loop contamination: either exclude self-loops or evaluate action conditioning on non-self transitions separately",
+    "Consider blinding action vocabulary (hash target_href) to test whether state adds information beyond action-to-URL mapping",
+    "Evaluate whether information-theoretic measures (PMI, entropy rate) are more appropriate than classification accuracy for sparse state spaces",
+    "Consider different site types (SPAs, form-heavy) if server-rendered sites lack dynamical structure"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-33965269281/result.json metrics and controls",
+    "research/experiments/EXP-PHYSICS-33965269281/audit.json validity_findings (4 FAIL, 1 INFO_FAIL, 2 PASS), baseline_findings (action_frequency_null FAIL_INVERTED, memorization diagnostic), recomputed_metrics, claim_ceiling",
+    "research/experiments/EXP-PHYSICS-33965269281/audit.json required_fixes (6 items: trajectory_split, target_href gate, accessibility tree, Bonferroni 6x, artifact hash semantics, class imbalance)",
+    "research/experiments/EXP-PHYSICS-33965269281/raw_live_wikipedia.json sha256 87e6d8fcecb436ab9b1067a27c7f5708c393bace5efbb0225bfe1f57aa87bc5e (self_link among eq 148/148, accessibility empty 880/880)",
+    "research/experiments/EXP-PHYSICS-33965269281/raw_live_python_docs.json sha256 a7634ca3734360a4d6a2ffdb89d859ae9ff466df710be3323da8ac5c5d2fa648 (self_link among eq 435/435, accessibility empty 880/880)",
+    "research/experiments/EXP-PHYSICS-33965269281/spec.json decision_rule clauses 1-7, measurement_validity 10 gates",
+    "research/experiments/EXP-PHYSICS-33965269281/prereg.md sections 5.4 (browser collection), 6.1 (state representation), 7.2 (Bonferroni 6x), 10 (validity gates)",
+    "research/experiments/EXP-PHYSICS-33788037373/handoff.json carry_forward established/rejected/unknown/do_not_assume (parent handoff)",
+    "research/physics/substrate_339.py trajectory_split lines 421-436, check_validity lines 662-723, _extract_state lines 237-302",
+    "research/physics/run_staged_339.py Bonferroni lines 328-339"
+  ],
+  "recommended_action": "The predictive accuracy paradigm has failed across multiple experiments due to sparse state spaces and self-loop contamination. Two orthogonal paths: (A) FIX THE SUBSTRATE: sort trajectory_ids for deterministic splits, repair or drop accessibility tree, apply 6x Bonferroni, exclude self-loops or evaluate non-self transitions separately, and re-run with action vocabulary blinding to test state contribution. (B) ORTHOGONAL DETECTION: design a new experiment using information-theoretic measures (pointwise mutual information between actions and next-states conditioned on current state, or trajectory-level entropy rates) that naturally handle sparse distributions and don't require point-prediction generalization. Path B is higher information gain because it tests a fundamentally different mathematical object. Either path should target sites with higher navigational density or client-side rendering (SPAs) where state transitions may be more structured."
+}

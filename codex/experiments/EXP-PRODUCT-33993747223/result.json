@@ -1,0 +1,166 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-33993747223",
+  "lane": "product",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "regression_pass": false,
+    "regression_slot_counts": {
+      "B1": 1,
+      "B2": 1,
+      "B3": 2,
+      "B4": 1,
+      "B5": 1
+    },
+    "regression_expected_slot_counts": {
+      "B1": 1,
+      "B2": 2,
+      "B3": 3,
+      "B4": 1,
+      "B5": 2
+    },
+    "regression_slot_names_distinct": {
+      "B1": true,
+      "B2": true,
+      "B3": true,
+      "B4": true,
+      "B5": true
+    },
+    "regression_slot_count_match_parent": {
+      "B1": true,
+      "B2": false,
+      "B3": false,
+      "B4": true,
+      "B5": false
+    },
+    "regression_executable_count": 21,
+    "regression_executable_rate": 1.0,
+    "regression_binding_correct": 14,
+    "regression_binding_accuracy": 0.6667,
+    "regression_parent_binding_accuracy": 1.0,
+    "regression_binding_regression": true,
+    "full_value_binding_accuracy": 1.0,
+    "full_value_no_double_prefix": true,
+    "noisy_D1_slot_count": 4,
+    "noisy_D1_expected_slot_count": 3,
+    "noisy_D1_slot_count_match": false,
+    "noisy_D1_resolution_rate": 1.0,
+    "noisy_D2_slot_count": 2,
+    "noisy_D2_expected_slot_count": 2,
+    "noisy_D2_slot_count_match": true,
+    "noisy_D2_resolution_rate": 1.0,
+    "noisy_D3_slot_count": 1,
+    "noisy_D3_expected_slot_count": 2,
+    "noisy_D3_resolution_rate": 0.0,
+    "null_control_E1_slot_count": 1,
+    "null_control_E1_expected_slot_count": 0,
+    "null_control_E1_jaccard_similarity": 0.6667,
+    "null_control_E2_slot_count": 0,
+    "null_control_E2_expected_slot_count": 0,
+    "total_test_combinations": 28,
+    "total_executable": 24,
+    "total_binding_correct": 17,
+    "literal_baseline_fail_rate": 1.0,
+    "noise_filter_timestamp_included": true,
+    "noise_filter_body_name_filtered": true,
+    "structure_similarity_jaccard_above_threshold": true
+  },
+  "controls": {
+    "B_REGRESSION_SYNTHETIC": {
+      "description": "5 conditions from EXP-PRODUCT-33741671686 run through fixed kernel.distill_parameterized()",
+      "expected": "All 5 conditions produce identical slot counts as parent (21/21 EXECUTABLE, 21/21 binding correct)",
+      "observed": "B1 and B4 match parent slot counts. B2 (1 vs 2), B3 (2 vs 3), B5 (1 vs 2) have wrong slot counts. Binding accuracy 67% (14/21) vs parent 100% (21/21). Body.name fields are static in template, not parameterized.",
+      "result": "FAIL"
+    },
+    "B_LITERAL_REPLAY": {
+      "description": "Literal mechanism (no parameter slots) from kernel.distill()",
+      "expected": "Must fail on all unseen multi-parameter combinations",
+      "observed": "5/5 EXPLORE (fail) on unseen combinations",
+      "result": "PASS"
+    },
+    "C1_DOUBLE_PREFIX_FIX": {
+      "description": "Full-value unseen URLs (https://site-d.com/hook) should not produce double-prefix",
+      "expected": "slot_count=1, resolution=EXECUTABLE, bound_action contains full URL without double-prefix",
+      "observed": "slot_count=1, 3/3 EXECUTABLE, binding correct, no double-prefix error",
+      "result": "PASS"
+    },
+    "C2_DOUBLE_PREFIX_FIX": {
+      "description": "Full-value unseen IDs (user-4) should resolve correctly",
+      "expected": "slot_count=1, resolution=EXECUTABLE, bound_action contains full correct ID",
+      "observed": "slot_count=1, 3/3 EXECUTABLE, binding correct",
+      "result": "PASS"
+    },
+    "D1_NOISE_FILTER": {
+      "description": "Noisy POST observations should filter timestamp/duration/retry/user_agent noise",
+      "expected": "slot_count=3 (url, customer, X-Request-ID), noise fields filtered",
+      "observed": "slot_count=4: timestamp included (has common prefix '2026-09-01T10:0' and suffix ':00Z'), body.name filtered (no common prefix/suffix)",
+      "result": "FAIL"
+    },
+    "D2_NOISE_FILTER": {
+      "description": "Noisy GET observations should filter response_time/cache_hit/result_count noise",
+      "expected": "slot_count=2 (q, page), noise fields filtered",
+      "observed": "slot_count=2 but wrong slots: cache_hit (has prefix/suffix) included, page filtered",
+      "result": "FAIL"
+    },
+    "D3_VARYING_PRECONDITIONS": {
+      "description": "Varying preconditions should produce slot_count >= 2 (observational only)",
+      "expected": "slot_count >= 2, resolution is observational",
+      "observed": "slot_count=1, body.quantity filtered by noise filter",
+      "result": "FAIL"
+    },
+    "E1_PATTERN_ABSENCE": {
+      "description": "Three unrelated observations should produce slot_count=0 via Jaccard < 0.3",
+      "expected": "slot_count=0, Jaccard < 0.3",
+      "observed": "slot_count=1, Jaccard=0.667 (observations share 'method' and 'url' paths despite different structures)",
+      "result": "FAIL"
+    },
+    "E2_SINGLE_OBS": {
+      "description": "Single observation should produce slot_count=0",
+      "expected": "slot_count=0",
+      "observed": "slot_count=0",
+      "result": "PASS"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PRODUCT-33993747223/raw_evidence.json",
+      "sha256": "922d0404ac110e399a5171c94a94111c30f66a883099de0b8a85e567c33d22ba",
+      "role": "raw"
+    },
+    {
+      "path": "src/spider/kernel.py",
+      "sha256": "76035599b1e6bf6af4205ad8d0b06bcd29ee2b9a4d42137f2cccf2c7c24b116e",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-33993747223/run_experiment.py",
+      "sha256": "18966ed18d5767a7241de4643229168a942c15dc9a93c6051d5fa548739c18c9",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "Fix A (double-prefix detection) WORKS: C1 and C2 both resolve EXECUTABLE with correct binding, no double-prefix error. The detection in _bind() correctly identifies when supplied param already contains prefix+suffix and returns the param value directly.",
+    "Fix B (noise-filter heuristic) FAILS: The pre-registered criterion (len(common_prefix) > 0 OR len(common_suffix) > 0) is insufficient. Timestamp fields have common prefix '2026-09-01T10:0' and suffix ':00Z' so they pass the filter (D1 produces 4 slots instead of 3). Meanwhile, genuine varying fields like body.name with values ['Alice','Bob','Charlie'] have no common prefix/suffix and are incorrectly filtered out (B2 produces 1 slot instead of 2, B3 produces 2 instead of 3).",
+    "Fix C (structure-similarity check) FAILS: The pre-registered Jaccard threshold of 0.3 is too low. Unrelated observations (POST /api/payments, GET /api/users/42, DELETE /api/sessions/abc-123) share generic leaf paths ('method', 'url') giving Jaccard=0.667 > 0.3, so the check doesn't trigger. E1 produces 1 slot instead of 0.",
+    "Regression slot counts are WRONG for B2 (1 vs 2), B3 (2 vs 3), B5 (1 vs 2) because the noise filter removes genuine varying body fields. Binding accuracy is 67% (14/21) vs parent 100% (21/21) — body.name/body.title/body.user_id are static in template, not parameterized.",
+    "E2 (single observation) correctly produces slot_count=0 — function requires at least 2 observations.",
+    "Literal baseline correctly fails on all unseen multi-parameter combinations — parameterization is still necessary.",
+    "The three fixes are orthogonal: Fix A works independently, but Fix B and Fix C both need refinement. Fix B needs a better noise-detection criterion (e.g., field path filtering rather than prefix/suffix). Fix C needs a higher threshold or richer structural features."
+  ],
+  "validity_notes": [
+    "All test conditions are synthetic with deterministic structure — no model calls, no network, no browser during measurement. Failures are algorithmic, not environmental.",
+    "The noise-filter heuristic as pre-registered (non-empty prefix OR suffix) is provably insufficient: it passes timestamp fields (which have structural prefix/suffix) and filters genuine varying fields like body.name (which have no common prefix/suffix). This is a design flaw in the heuristic, not a measurement issue.",
+    "The Jaccard threshold of 0.3 is too low for unrelated observations that share generic paths (method, url). The observations are structurally different (POST with body vs GET vs DELETE) but share 2/4 leaf paths, giving Jaccard=0.667.",
+    "Binding accuracy measurement uses exact JSON comparison. The parent experiment used a more lenient heuristic that may have masked some binding issues. Our exact comparison reveals that body.name is always 'Alice' (from template) instead of the unseen value.",
+    "The regression regression (B2/B3/B5 slot count decrease) is CAUSED by Fix B: the noise filter incorrectly removes genuine varying body fields. This is a direct consequence of the flawed heuristic, not an independent regression.",
+    "D3 (varying preconditions) is observational only and not part of the primary decision rule. Its slot_count=1 is also affected by the noise filter removing body.quantity."
+  ],
+  "unresolved": [
+    "The noise-filter heuristic needs a fundamentally different approach: filtering by field path relevance (e.g., only fields within action-template-relevant paths) rather than prefix/suffix presence. Timestamp/duration fields are top-level and not part of the action template.",
+    "The structure-similarity threshold needs to be higher (>0.667) or the similarity metric needs to weight path depth/complexity rather than just presence/absence of leaf paths.",
+    "Should body.name fields with no common prefix/suffix be treated as noise or as genuine parameters? The current heuristic says noise, but they are clearly genuine parameters.",
+    "Is there a way to distinguish 'structural prefix/suffix' (like 'https://site-' in URLs) from 'incidental prefix/suffix' (like '2026-09-01T10:0' in timestamps)?",
+    "The interaction between Fix B and regression conditions needs investigation: Fix B was designed to filter noise but is also filtering genuine parameters."
+  ]
+}

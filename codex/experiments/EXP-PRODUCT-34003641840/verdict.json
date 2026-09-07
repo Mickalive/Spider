@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-34003641840",
+  "lane": "product",
+  "decision": "FIXES-FALSIFIED",
+  "claim_updates": [
+    {
+      "claim_id": "C-PARAM-INHERIT",
+      "status": "EXPERIMENTAL",
+      "reason": "Audit ceiling narrows to: field-path relevance (top-level allowlist {method,url,body,headers,query}) plus two-part structure-check (Jaccard>=0.75 + constant-value anchor) resolves synthetic D1 over-parametrization and synthetic E1 hallucination in an offline isolated implementation while preserving B1/B4 regression. Cannot advance toward product promotion due to: (a) kernel integration gap — implementation is self-contained in run_experiment.py, does not modify src/spider/kernel.py (audit KERNEL_INTEGRATION_GAP); (b) prereg training-data deviations on B5 (PREREG_DEVIATION_B5: varying A,B,C instead of static A,A,A) and D3 (PREREG_DEVIATION_D3: varying 1,2,3 instead of static 1,1,1) break condition (7) comparability with parent; (c) D2 post-hoc redefinition of expected slot_count from 2 to 1 (EXPECTED_POSTHOC_D2); (d) C2 double-prefix persists under true full values — _detect_double_prefix exists but is not wired into distill/bind path (DOUBLE_PREFIX_NOT_TESTED); (e) nested metadata scope leak — allowlist only checks top-level key (METADATA_SCOPE_LEAK). Claim stays EXPERIMENTAL; see handoff for next steps."
+    }
+  ],
+  "product_action": "DO_NOT_PROMOTE — field-path relevance and structure-similarity components are validated only in offline isolated implementation; kernel integration, prereg compliance, C2 double-prefix fix, D2 query-string parsing, and real-browser validation are prerequisites for any product consideration.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can the field-path relevance noise filter and two-part structure-similarity check (Jaccard>=0.75 + constant-value anchor) be ported into src/spider/kernel.py distill_parameterized() such that B1-B5/C1-C2/D1-D3/E1-E2 all pass with correct prereg training data (B5 static A,A,A, D3 static quantity 1,1,1), the C2 double-prefix bug is fixed for suffix-empty templates, D2 documents the query-string architectural limitation honestly, and the result is validated end-to-end in the kernel?",
+  "reason": "The frozen decision rule's 7 literal conditions appear to pass on their face: (1)-(6) all hold per audit recomputed metrics. However, condition (7) — no condition regresses vs parent — cannot be validated because B5 and D3 training data deviated from prereg (audit PREREG_DEVIATION_B5, PREREG_DEVIATION_D3), breaking direct before/after comparability with parent EXP-PRODUCT-33993747223. D2 expected was redefined post-hoc from 2 to 1 (audit EXPECTED_POSTHOC_D2), masking the leaf-path architectural limitation rather than documenting it. C2 double-prefix persists under true full values (audit DOUBLE_PREFIX_NOT_TESTED: _detect_double_prefix defined but unused in distill/bind path). The audit status is REVISE with producer_claim_supported=false. The audit's claim ceiling is narrow: field-path relevance + structure-check resolve synthetic D1/E1 in offline isolated implementation — nothing more. Product promotion is blocked by kernel integration gap, prereg deviations, unresolved C2/D2, and the synthetic-only measurement scope. The algorithmic direction (field-path relevance, constant-value anchor) is promising and partially validated, but the implementation has too many compliance and validity gaps to support the producer's broad SUPPORTS claim.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-34003641840/audit.json status=REVISE producer_claim_supported=false required_fixes PREREG_DEVIATION_B5 PREREG_DEVIATION_D3 EXPECTED_POSTHOC_D2 DOUBLE_PREFIX_NOT_TESTED METADATA_SCOPE_LEAK KERNEL_INTEGRATION_GAP STRUCTURE_SIMILARITY_CONFOUNDED claim_ceiling narrow offline-isolated",
+    "research/experiments/EXP-PRODUCT-34003641840/audit.json baseline_findings B5 FAIL_UNDER_TRUE_FULL_VALUE D2 FAIL_VS_PREREG_PASS_VS_REDEFINED D3 FAIL_VS_PREREG_PASS_VS_REDEFINED C2 FAIL_UNDER_TRUE_FULL_VALUE",
+    "research/experiments/EXP-PRODUCT-34003641840/audit.json recomputed_metrics C2_binding_correct_full_value_user-4=false C2_double_prefix_bug_reproduced=true D2_prereg_expected=2 D2_redefined_expected=1 B5_prereg_expected=1 D3_prereg_expected=1",
+    "research/experiments/EXP-PRODUCT-34003641840/result.json metrics regression_pass=true noisy_D1_slot_count=3 null_control_E1_slot_count=0 controls D1 PASS E1 PASS B_REGRESSION PASS",
+    "research/experiments/EXP-PRODUCT-34003641840/spec.json decision_rule 7 conditions hypothesis field-path relevance + structure-similarity",
+    "research/experiments/EXP-PRODUCT-34003641840/prereg.md 5.1 B5 static A,A,A 5.3 D3 static 1,1,1 5.3 D2 expected 2 [q,page]",
+    "research/experiments/EXP-PRODUCT-34003641840/provenance.json code_artifacts kernel sha2760355... not modified execution_mode offline_synthetic",
+    "research/experiments/EXP-PRODUCT-33993747223/handoff.json established B1/B4 regression preserved, rejected noise-filter heuristic Jaccard 0.3, unknown field-path relevance viability",
+    "research/experiments/EXP-PRODUCT-34003641840/raw_evidence.json E1 jaccard 0.667 has_anchor false D1 mean_jaccard 1.0 has_anchor true"
+  ]
+}

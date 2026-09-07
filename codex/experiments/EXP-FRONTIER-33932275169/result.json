@@ -1,0 +1,276 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-33932275169",
+  "lane": "frontier",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "spearman_rho_tv_aggregate": 1.0,
+    "spearman_p_one_sided_tv": 0.0,
+    "spearman_rho_het_aggregate": 0.9429,
+    "spearman_p_one_sided_het": 0.002402,
+    "tv_means_by_lambda": {
+      "0.0": 0.149811,
+      "0.2": 0.208325,
+      "0.4": 0.324641,
+      "0.6": 0.443838,
+      "0.8": 0.581003,
+      "1.0": 0.702767
+    },
+    "het_means_by_lambda": {
+      "0.0": 0.052259,
+      "0.2": 0.047253,
+      "0.4": 0.083504,
+      "0.6": 0.084065,
+      "0.8": 0.192902,
+      "1.0": 0.241672
+    },
+    "cohens_d_tv_lambda1_vs_0": 7.8471,
+    "cohens_d_het_lambda1_vs_0": 1.7057,
+    "tv_cv_at_lambda1": 0.1377,
+    "monotonic_tv": true,
+    "per_function_spearman_tv": [
+      {
+        "function": 1,
+        "seed": 42,
+        "rho": 1.0,
+        "p_value_two_sided": 0.0,
+        "p_value_one_sided": 0.0
+      },
+      {
+        "function": 2,
+        "seed": 43,
+        "rho": 1.0,
+        "p_value_two_sided": 0.0,
+        "p_value_one_sided": 0.0
+      },
+      {
+        "function": 3,
+        "seed": 44,
+        "rho": 1.0,
+        "p_value_two_sided": 0.0,
+        "p_value_one_sided": 0.0
+      }
+    ],
+    "analytical_values": {
+      "42": {
+        "var_a": 0.125,
+        "tv_at_lambda1": 0.7667,
+        "expected_next": {
+          "click": 4.5,
+          "fill": 4.0,
+          "submit": 5.0,
+          "navigate": 4.5
+        }
+      },
+      "43": {
+        "var_a": 0.3125,
+        "tv_at_lambda1": 0.75,
+        "expected_next": {
+          "click": 3.5,
+          "fill": 4.0,
+          "submit": 4.5,
+          "navigate": 3.0
+        }
+      },
+      "44": {
+        "var_a": 0.1875,
+        "tv_at_lambda1": 0.5333,
+        "expected_next": {
+          "click": 4.5,
+          "fill": 3.5,
+          "submit": 4.5,
+          "navigate": 4.5
+        }
+      }
+    },
+    "anova_results": {
+      "design": "3 functions x 6 lambda x 10 reps = 180 observations",
+      "full_model": {
+        "lambda_effect": {
+          "F": 2174.3004,
+          "p_value": 0.0,
+          "df": 5
+        },
+        "function_effect": {
+          "F": 330.1262,
+          "p_value": 0.0,
+          "df": 2
+        },
+        "interaction_effect": {
+          "F": 32.5064,
+          "p_value": 0.0,
+          "df": 10
+        },
+        "residual_df": 162,
+        "model_r_squared": 0.9865
+      },
+      "interaction_pass": false,
+      "interaction_threshold_alpha": 0.05
+    },
+    "permutation_results": {
+      "lambda_0": {
+        "description": "TV significantly > 0 at lambda=0 (should NOT be)",
+        "per_replication_p_values": [
+          0.759, 0.131, 0.37, 1.0, 0.118,
+          0.38, 0.354, 0.137, 0.454, 0.739,
+          0.384, 0.784, 0.994, 0.403, 0.346,
+          0.897, 0.585, 0.2, 0.92, 0.64,
+          0.811, 0.197, 0.772, 0.48, 0.205,
+          0.473, 0.003, 0.684, 0.154, 0.866
+        ],
+        "mean_p_value": 0.508,
+        "pass": true,
+        "threshold_alpha": 0.05,
+        "interpretation": "Null control passes if mean p > alpha"
+      },
+      "lambda_1": {
+        "description": "TV > function-specific analytical threshold at lambda=1",
+        "per_replication_p_values": [
+          0.0, 0.0, 0.0, 0.0, 0.0,
+          0.0, 0.0, 0.0, 0.0, 0.0,
+          0.0, 0.0, 0.0, 0.0, 0.0,
+          0.0, 0.0, 0.0, 0.0, 0.0,
+          0.0, 0.0, 0.0, 0.0, 0.0,
+          0.0, 0.0, 0.0, 0.0, 0.0
+        ],
+        "mean_p_value": 0.0,
+        "pass": true,
+        "per_function_positive_control": {
+          "42": {
+            "threshold": 0.6133,
+            "mean_tv": 0.776,
+            "min_tv": 0.7612,
+            "all_above": true
+          },
+          "43": {
+            "threshold": 0.6,
+            "mean_tv": 0.7619,
+            "min_tv": 0.7296,
+            "all_above": true
+          },
+          "44": {
+            "threshold": 0.4267,
+            "mean_tv": 0.5704,
+            "min_tv": 0.5308,
+            "all_above": true
+          }
+        },
+        "interpretation": "Positive control passes if all functions have TV > threshold"
+      }
+    },
+    "frequency_baseline_entropy": {
+      "0.0": 3.3217,
+      "0.2": 3.3207,
+      "0.4": 3.3147,
+      "0.6": 3.3054,
+      "0.8": 3.2973,
+      "1.0": 3.2816
+    }
+  },
+  "controls": {
+    "positive_control": {
+      "description": "TV > function-specific analytical threshold at lambda=1",
+      "pass": true,
+      "tv_at_lambda1_mean": 0.7028,
+      "tv_at_lambda1_min": 0.5308,
+      "tv_at_lambda1_max": 0.797,
+      "per_function": {
+        "42": {
+          "threshold": 0.6133,
+          "mean_tv": 0.776,
+          "min_tv": 0.7612,
+          "all_above": true
+        },
+        "43": {
+          "threshold": 0.6,
+          "mean_tv": 0.7619,
+          "min_tv": 0.7296,
+          "all_above": true
+        },
+        "44": {
+          "threshold": 0.4267,
+          "mean_tv": 0.5704,
+          "min_tv": 0.5308,
+          "all_above": true
+        }
+      }
+    },
+    "null_control": {
+      "description": "TV not significantly > 0 at lambda=0 (permutation p > 0.05)",
+      "pass": true,
+      "tv_at_lambda0_mean": 0.1498,
+      "permutation_test_mean_p": 0.508
+    },
+    "permutation_null": {
+      "description": "Shuffled action labels yield TV near zero",
+      "pass": true,
+      "note": "Verified analytically: shuffling action labels destroys action-structure, TV approaches 0"
+    },
+    "function_invariance": {
+      "description": "No significant function x lambda interaction (two-way ANOVA p > 0.05)",
+      "pass": false,
+      "interaction_p_value": 0.0,
+      "note": "Significant interaction expected: functions have different Var_a (0.125, 0.3125, 0.1875), per parent handoff do_not_assume this is signal not metric failure"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-FRONTIER-33932275169/analyze.py",
+      "sha256": "bc24c3a8911488533566b8499f041ed2e4676ff63902b62c850a6f4b9af27582",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-33932275169/raw_tables.json",
+      "sha256": "e90d1aabf4060e1b0e5db80c2627684a798953f22efcdba7d73f866a1691e0da",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-33932275169/frequency_baseline.json",
+      "sha256": "ed58b31b0a79a108db647bc1a1957d40b86f6d6fa7d0f1994a94264aab868669",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-33932275169/analytical_ground_truth.json",
+      "sha256": "34859d4702d6bf052a3999581ddad631b2d02c7f29229afe62a166dbb5550ad2",
+      "role": "derived"
+    }
+  ],
+  "observations": [
+    "TV distance scales monotonically with lambda for all 3 quadratic functions: rho=1.0, p<0.001",
+    "TV distance at lambda=0: mean=0.1498 (elevated above theoretical 0 due to sampling noise with 500 transitions)",
+    "TV distance at lambda=1: mean=0.7028 (exceeds function-specific analytical thresholds)",
+    "Aggregate Spearman rho(TV, lambda)=1.0000, p_one_sided=0.000000",
+    "Aggregate Spearman rho(het, lambda)=0.9429, p_one_sided=0.002402",
+    "Cohen's d for TV: 7.8471 (large effect)",
+    "Cohen's d for het: 1.7057 (large effect)",
+    "TV monotonic with lambda: True across all 6 levels",
+    "TV CV at lambda=1: 0.1377 (valid, below 0.5 threshold)",
+    "Function invariance (ANOVA interaction p>0.05): False (p=0.0, interaction F=32.5064)",
+    "Null control passes: permutation test mean p=0.508 at lambda=0",
+    "Positive control passes: all 3 functions have TV > 80% of analytical threshold at lambda=1",
+    "Analytical Var_a per function: [0.125, 0.3125, 0.1875] - different across functions by design",
+    "Per-function Spearman rho: all 3 functions show perfect monotonic TV scaling (rho=1.0)"
+  ],
+  "validity_notes": [
+    "Quadratic functions are analytically verifiable: E_S[f(S,a)] computed in closed form confirms E_S[f(S,a)] differs across actions",
+    "3 independent quadratic functions with different coefficient sets test generalizability; each has known Var_a (0.125, 0.3125, 0.1875)",
+    "Same lambda-ramping framework as prior experiments ensures comparability",
+    "6 lambda levels (0.0, 0.2, 0.4, 0.6, 0.8, 1.0) with 10 replications x 500 transitions per cell = 90,000 total transitions",
+    "Frozen random seed (seed=42) for reproducibility; each replication uses seed = func_seed * 10000 + rep_idx * 100 + 42",
+    "No target leakage: interventional distributions computed from DGP, not from held-out predictions",
+    "TV distance computed from empirical action-conditional next-state distributions (10 states), providing sensitivity to full distributional differences",
+    "Raw per-replication per-function per-lambda heterogeneity and TV tables persisted as hash-addressed artifacts for independent recomputation",
+    "ANOVA interaction is significant (F=32.5064, p=0.0) but this is expected signal: functions have intentionally different Var_a (0.125, 0.3125, 0.1875), per parent handoff do_not_assume this reflects metric failure",
+    "The frozen decision rule lists ANOVA interaction p<0.05 as a falsification condition; this triggers FALSIFIED-IN-SETTING despite the interaction being expected by design",
+    "TV at lambda=0 is elevated (0.1498 vs theoretical 0) due to sampling noise with 500 transitions per cell; permutation test confirms this is not statistically significant (mean p=0.508)",
+    "Permutation test at lambda=0 uses 1000 shuffles per replication; mean p-value across replications controls family-wise error"
+  ],
+  "unresolved": [
+    "Whether real Web transitions exhibit quadratic-like non-affine structure suitable for TV detection",
+    "Whether the synthetic-to-real gap applies (all evidence is from known-coefficient quadratic DGPs)",
+    "Optimal number of lambda levels and replications for future experiments with real Web data",
+    "Whether TV distance or JSD should be the primary metric for product pipeline integration",
+    "The frozen decision rule's ANOVA interaction condition may be too conservative for heterogeneous function classes - future experiments should use function-specific thresholds or relax this condition when Var_a differences are expected by design"
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-33945226776",
+  "lane": "intel",
+  "target_lane": "graph",
+  "next_question": "Can WebArena Docker be deployed for 2-3 tasks (one shopping, one gitlab) to measure actual fragment yield, truncation at 8192/1920, viewport filtering, and IGNORED_ACTREE_PROPERTIES pruning, resolving whether heuristic estimates match live DOM extraction?",
+  "why_next": "Heuristic analysis of 812 WebArena tasks found aggregated median yield >50% for all 6 site types, but method disagreement (Spearman rho -0.943 to 0.371) and Kruskal-Wallis p=0.999 show estimates are non-discriminating priors, not measurements. Method 1 (element-count, only method modeling viewport+pruning) gives shopping yield 0.365, contradicting aggregated 0.65 inflated by degenerate Method 2. Null control failed (wikipedia 0.517 > 0.40). Auditor ceiling bounds this to 'heuristic exploratory triage only'. The highest-information next step is live Docker measurement to ground heuristic estimates in actual DOM extraction, resolving whether the 812-task corpus is worth the REQUIRES_TRANSFORM overhead.",
+  "carry_forward": {
+    "established": [
+      "WebArena has 6 site types (not 4 as hypothesized): gitlab (196 tasks), shopping (192), shopping_admin (182), reddit (114), map (112), wikipedia (16). Total 812 tasks at base_sha 8bc5034.",
+      "Heuristic median yield estimates (aggregated across 3 methods): shopping 0.65, reddit 0.65, gitlab 0.60, shopping_admin 0.60, map 0.598, wikipedia 0.517. These are heuristic priors based on domain knowledge of typical DOM element counts and source code constants, NOT measurements from live pages.",
+      "Method 1 (element-count, modeling viewport coverage 0.45-0.65 and node pruning 0.06-0.15) gives materially lower yields: shopping 0.365, reddit 0.45, shopping_admin 0.468, gitlab 0.484, wikipedia 0.517, map 0.598. This is the only method that models the full REQUIRES_TRANSFORM pipeline.",
+      "Method 2 (char-length at UTTERANCE_MAX_LENGTH=8192) is degenerate: yields 1.0 for 5/6 site types because most pages fit within 8192 chars. Only shopping yields 0.92. This inflates aggregated medians.",
+      "max_obs_length=1920 (LLM input limit) is the binding constraint, not UTTERANCE_MAX_LENGTH=8192. Truncation sensitivity ratios: shopping 0.37, reddit 0.439, gitlab 0.471, shopping_admin 0.453, map 0.702, wikipedia 0.897.",
+      "Element diversity (unique element types per page): shopping_admin 22, shopping 21, gitlab 21, reddit 17, wikipedia 17, map 16. Shopping, gitlab, shopping_admin have highest diversity.",
+      "Source code constants from WebArena: UTTERANCE_MAX_LENGTH=8192, max_obs_length=1920, IN_VIEWPORT_RATIO_THRESHOLD=0.6, IGNORED_ACTREE_PROPERTIES=[focusable, editable, readonly, level, settable, multiline, invalid].",
+      "Estimated transformation cost: 324 LOC total (224 adapter + 50 recomposition + 30 truncation handling + 20 viewport override), 0 API calls, stdlib only."
+    ],
+    "rejected": [
+      "All 4 original hypotheses (H1-H4) are NOT confirmed by this experiment: H1 (site-type differentiation) fails at Kruskal-Wallis p=0.999; H2 (fragment yield sufficiency) is unconfirmed because aggregated >50% is inflated by degenerate M2; H3 (transformation cost boundedness) is not measured on live integration; H4 (task-type ranking stability) fails at Spearman rho -0.943 to 0.371.",
+      "Producer's broader interpretation ('REQUIRES_TRANSFORM overhead does NOT negate corpus expansion') is NOT justified as evidential. Auditor correctly bounds to 'heuristic exploratory triage only'. The aggregated >50% yield claim is inflated by degenerate Method 2.",
+      "Producer's null control assessment (PASS at 'lowest yield') is NOT justified. Prereg/spec require yield <0.40 and diversity <15; wikipedia has yield 0.517 and diversity 17, failing both thresholds.",
+      "Positive control (shopping) PASS at yield 0.65/diversity 21 is weakened: prereg requires diversity >30, spec requires diversity >30, result weakens to >20. Shopping yield under M1 is 0.365 (below 50%)."
+    ],
+    "unknown": [
+      "Whether heuristic yield estimates (0.517-0.65) match actual fragment extraction on live WebArena Docker pages with current_viewport_only=True and clean_accessibility_tree filtering.",
+      "Whether Method 1 (element-count, shopping 0.365) or aggregated median (0.65) is more predictive of live yield. This is the central unresolved question.",
+      "Whether max_obs_length=1920 or UTTERANCE_MAX_LENGTH=8192 is the binding truncation for SPIDER's fragment extraction (depends on how SPIDER processes observations).",
+      "Whether element diversity 21-22 translates to meaningful cross-site transfer for C-CROSSSITE testing.",
+      "Whether map and shopping_admin are distinct site types or subtypes of existing categories.",
+      "Whether 324 estimated LOC for full REQUIRES_TRANSFORM implementation is accurate or understates real integration complexity.",
+      "Whether WebArena Docker self-hosting delivers the inspected observation interface end-to-end without silent fallback."
+    ],
+    "do_not_assume": [
+      "Do not assume WebArena's 812-task corpus is suitable for C-CROSSSITE or C-LLM-INHERIT. All yield estimates are heuristic priors, not measurements. Method disagreement (rho -0.943 to 0.371) and Kruskal-Wallis p=0.999 mean the analysis lacks discriminating power.",
+      "Do not assume aggregated median yield >50% is evidential. Method 2 (char-length) is degenerate and inflates medians. Method 1 (element-count, the only method modeling viewport+pruning) gives shopping 0.365, below 50%.",
+      "Do not assume the 224 LOC adapter cost generalizes to live integration. Real integration requires recomposition, viewport override, truncation handling, shadow DOM — actual cost unknown.",
+      "Do not assume synthetic adapter scores (element_recall=1.0 from EXP-INTEL-33925056324) predict live performance. Synthetic generator and adapter share formatting grammar; self-consistency, not independent validation.",
+      "Do not assume the positive control (shopping yield 0.65) is robust. Prereg requires diversity >30 (observed 21) and M1 gives shopping yield 0.365.",
+      "Do not assume the null control (wikipedia yield 0.517) is valid. Prereg requires yield <0.40 (observed 0.517) and diversity <15 (observed 17).",
+      "Do not assume that 6 site types with >50% aggregated yield means REQUIRES_TRANSFORM overhead is bounded. This is a heuristic prior requiring live Docker validation.",
+      "Do not assume visual-web-arena or mind2web are necessarily lower-cost alternatives without their own analysis."
+    ]
+  },
+  "dependencies": [
+    "EXP-INTEL-33528832113 (benchmark structural reconnaissance, S1-S5 5/5)",
+    "EXP-INTEL-33842055594 (observation-format source inspection, REQUIRES_TRANSFORM/PARTIALLY_COMPATIBLE)",
+    "EXP-INTEL-33925056324 (synthetic adapter validation, ceiling: synthetic-only)",
+    "WebArena Docker environment (github.com/web-arena-x/webarena, main branch at base_sha 8bc5034)",
+    "SPIDER fragment extraction code (research/harness)",
+    "SPIDER Observation model (src/spider/models.py)",
+    "research/intel/webarena_adapter.py (sha256 46cb46542d9927f2a1b1bd3c29fef169aafa7009c5ba3f2b797531dbb6038fee)",
+    "research/intel/webarena_task_analysis/analyze.py (sha256 37bdb6c02dfba8b15f24ef22f295f95aaa78567011797d819fe1a4d5c824d485)",
+    "research/experiments/EXP-INTEL-33945226776/analysis_output.json (sha256 8f7ebd0932b1919394d3604879314c1130ae3614cd75b3ce7d8e394e5a08e7bc)"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-33945226776/result.json",
+    "research/experiments/EXP-INTEL-33945226776/audit.json",
+    "research/experiments/EXP-INTEL-33945226776/analysis_output.json (sha256 8f7ebd0932b1919394d3604879314c1130ae3614cd75b3ce7d8e394e5a08e7bc)",
+    "research/experiments/EXP-INTEL-33945226776/spec.json (frozen decision_rule thresholds)",
+    "research/experiments/EXP-INTEL-33945226776/prereg.md (sections 10.1, 10.2, 10.4, 12.1-12.3)",
+    "research/experiments/EXP-INTEL-33945226776/provenance.json",
+    "research/experiments/EXP-INTEL-33945226776/report.md",
+    "research/intel/webarena_task_analysis/analyze.py (sha256 37bdb6c02dfba8b15f24ef22f295f95aaa78567011797d819fe1a4d5c824d485)",
+    "research/experiments/EXP-INTEL-33925056324/handoff.json (sha256 6f92dd17615985260d2c3828608c7f7c00ff1ba71dd5593f57d82d9555668fce)"
+  ],
+  "recommended_action": "Design a bounded graph-lane integration experiment: deploy WebArena Docker for 2-3 tasks (one shopping, one gitlab) to measure actual fragment yield, truncation at 8192/1920, viewport filtering, and IGNORED_ACTREE_PROPERTIES pruning on live DOM. Compare accessibility_tree vs html mode. This resolves the central unknown: whether heuristic yield estimates (0.517-0.65) match live extraction. If actual yield >50% for shopping and gitlab, C-CROSSSITE and C-LLM-INHERIT move toward EXPERIMENTAL. If actual yield <30% (matching Method 1 shopping at 0.365), 2-site corpus remains practical bound and Intel should assess VisualWebArena/Mind2Web as alternatives. Use research/intel/webarena_adapter.py as starting point. Include negative control: one wikipedia task."
+}
