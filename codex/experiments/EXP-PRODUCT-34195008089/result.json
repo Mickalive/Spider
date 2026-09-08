@@ -1,0 +1,178 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-34195008089",
+  "lane": "product",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "c2_fix_works": false,
+    "c2_binding_accuracy_full_value": 0.0,
+    "c2_double_prefix_bug_reproduced": true,
+    "c2_bound_url_with_user_4": "https://api.example.com/users/user-user-4",
+    "c2_expected_url": "https://api.example.com/users/user-4",
+    "regression_pass_all_9": true,
+    "regression_slot_counts": {
+      "B1": 1,
+      "B2": 2,
+      "B3": 3,
+      "B4": 1,
+      "B5": 1,
+      "C1": 1,
+      "D1": 3,
+      "D2": 1,
+      "D3": 1
+    },
+    "regression_expected_slot_counts": {
+      "B1": 1,
+      "B2": 2,
+      "B3": 3,
+      "B4": 1,
+      "B5": 1,
+      "C1": 1,
+      "D1": 3,
+      "D2": 1,
+      "D3": 1
+    },
+    "regression_slot_count_match": {
+      "B1": true,
+      "B2": true,
+      "B3": true,
+      "B4": true,
+      "B5": true,
+      "C1": true,
+      "D1": true,
+      "D2": true,
+      "D3": true
+    },
+    "regression_binding_accuracy": {
+      "B1": 1.0,
+      "B2": 1.0,
+      "B3": 1.0,
+      "B4": 1.0,
+      "B5": 1.0,
+      "C1": 1.0,
+      "D1": 1.0,
+      "D2": 1.0,
+      "D3": 1.0
+    },
+    "regression_total_binding_correct": 31,
+    "regression_total_unseen": 35,
+    "overall_binding_accuracy": 0.8857,
+    "null_control_E1_slot_count": 0,
+    "null_control_E1_expected_slot_count": 0,
+    "null_control_E1_jaccard_similarity_raw": 0.6667,
+    "null_control_E2_slot_count": 0,
+    "null_control_E2_expected_slot_count": 0,
+    "literal_baseline_fail_rate": 1.0,
+    "total_test_combinations": 35,
+    "total_executable": 35,
+    "total_binding_correct": 31,
+    "kernel_prefix_strip_fix_applied": true,
+    "c2_induced_template": "https://api.example.com/users/user-${url}",
+    "c2_template_prefix": "https://api.example.com/users/user-",
+    "c2_fix_reason": "Fix checks if param value starts with full template prefix (https://api.example.com/users/user-), but param value 'user-4' only starts with 'user-', not the full prefix. Strip logic never triggers."
+  },
+  "controls": {
+    "B_REGRESSION_SYNTHETIC": {
+      "description": "5 conditions (B1-B5) from parent run through kernel distill_parameterized()",
+      "expected": "All 5 conditions produce correct slot counts with binding_accuracy=1.0",
+      "observed": "All 5 conditions pass: B1 slot_count=1 5/5, B2 slot_count=2 5/5, B3 slot_count=3 5/5, B4 slot_count=1 3/3, B5 slot_count=1 3/3. Total binding_accuracy=1.0 (21/21).",
+      "result": "PASS"
+    },
+    "B_LITERAL_REPLAY": {
+      "description": "Literal mechanism (no parameter slots) from kernel.distill()",
+      "expected": "Must fail on all unseen multi-parameter combinations",
+      "observed": "5/5 EXPLORE (fail) on unseen combinations",
+      "result": "PASS"
+    },
+    "C1_FULL_VALUE_URLS": {
+      "description": "Full-value unseen URLs (https://site-d.com/hook) resolve correctly with prefix/suffix template",
+      "expected": "slot_count=1, resolution=EXECUTABLE, bound_action contains full URL without double-prefix",
+      "observed": "slot_count=1, 3/3 EXECUTABLE, binding correct, no double-prefix error",
+      "result": "PASS"
+    },
+    "C2_FULL_VALUE_IDS": {
+      "description": "Full-value unseen IDs (user-4) resolve correctly with prefix-only template",
+      "expected": "slot_count=1, resolution=EXECUTABLE, bound_action contains 'user-4' not 'user-user-4'",
+      "observed": "slot_count=1, 3/3 EXECUTABLE, binding INCORRECT: bound URLs contain 'user-user-4' (not 'user-4'). Fix did not work because induced template prefix is full path not short prefix.",
+      "result": "FAIL"
+    },
+    "D1_NOISE_FILTER": {
+      "description": "Noisy POST observations: field-path relevance excludes metadata",
+      "expected": "slot_count=3 (url, customer, X-Request-ID), metadata excluded",
+      "observed": "slot_count=3: slots=[customer, X-Request-ID, url]. Metadata correctly excluded. 3/3 binding correct.",
+      "result": "PASS"
+    },
+    "D2_NOISE_FILTER": {
+      "description": "Noisy GET observations: field-path relevance excludes metadata",
+      "expected": "slot_count=1 (url), metadata excluded",
+      "observed": "slot_count=1: slots=[url]. Metadata correctly excluded. 3/3 binding correct.",
+      "result": "PASS"
+    },
+    "D3_VARYING_PRECONDITIONS": {
+      "description": "Static preconditions (quantity 1,1,1): only url parameterized",
+      "expected": "slot_count=1 [url], preconditions excluded",
+      "observed": "slot_count=1: slots=[url]. 1/1 binding correct.",
+      "result": "PASS"
+    },
+    "E1_PATTERN_ABSENCE": {
+      "description": "Three unrelated observations should produce slot_count=0",
+      "expected": "slot_count=0",
+      "observed": "slot_count=0. Jaccard=0.667 < 0.75 AND constant-anchor fails.",
+      "result": "PASS"
+    },
+    "E2_SINGLE_OBS": {
+      "description": "Single observation should produce slot_count=0",
+      "expected": "slot_count=0",
+      "observed": "slot_count=0",
+      "result": "PASS"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PRODUCT-34195008089/raw_evidence.json",
+      "sha256": "5f38ec4f350784082453adad5de750bce101b4fa5af34663e736bfc019fd8058",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-34195008089/run_experiment.py",
+      "sha256": "74d38963f8790a2025b5c158d6fd99f7606f218f1a64028d40a11a277e2090d5",
+      "role": "code"
+    },
+    {
+      "path": "src/spider/kernel.py",
+      "sha256": "7957b72e5d31f306af65ba317578493788f711b82c1e243035b8669c4f43d664",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "C2 DOUBLE-PREFIX BUG NOT FIXED: Template user-${url} with full value params={'url':'user-4'} produces user-user-4 (not user-4). The _bind() prefix-strip fix did not work.",
+    "ROOT CAUSE: The induced template prefix is 'https://api.example.com/users/user-' (full path), not just 'user-'. The param value 'user-4' does not start with the full template prefix, so the strip logic never triggers.",
+    "FIX APPROACH FUNDAMENTALLY WRONG: The prereg assumed template prefix would be short (e.g., 'user-'), but distill_parameterized() induces the full common prefix including the URL path. The fix checks val.startswith(template_prefix) which is False for C2.",
+    "ALL 9 OTHER CONDITIONS PASS: B1-B5, C1, D1-D3, E1-E2 all produce correct slot counts with binding_accuracy=1.0 (31/31 correct).",
+    "C1 NOT AFFECTED: C1 prefix+suffix template works correctly (no over-strip).",
+    "NO REGRESSION: The _bind() fix does not break any condition that previously passed.",
+    "INDUCED TEMPLATE FOR C2: distill_parameterized() induces template 'https://api.example.com/users/user-${url}' with prefix 'https://api.example.com/users/user-' and empty suffix. This is the correct template from the training data (user-1, user-2, user-3).",
+    "DECISION RULE TRIGGERED: C2 fails (binding_accuracy=0.0, bound URLs contain 'user-user-4') but all other 9 conditions pass. Verdict per prereg = C2-FIX-FALSIFIED.",
+    "FIX MODIFICATION DID NOT BREAK EXISTING BEHAVIOR: The prefix-strip code only triggers when val.startswith(template_prefix) AND len(val) > len(template_prefix). For all passing conditions, this condition is False, so the fix is inert.",
+    "LITERAL BASELINE FAILS: Literal mechanism (no parameter slots) fails on all unseen combinations (fail_rate=1.0). Parameterized induction is necessary."
+  ],
+  "validity_notes": [
+    "All 10 conditions are synthetic with deterministic structure - no model calls, no network, no browser during measurement.",
+    "C2 tested with full values (user-4, user-5, user-6) per spec measurement_validity, not stripped parts.",
+    "The _bind() prefix-strip fix was applied exactly as proposed in the prereg. The fix logic is correct for the assumed template structure but wrong for the actual induced template.",
+    "The key insight: distill_parameterized() induces templates with the FULL common prefix (e.g., 'https://api.example.com/users/user-'), not a short prefix (e.g., 'user-'). The fix assumed a short prefix.",
+    "D2 expected slot_count=1 [url] per prereg architectural limitation (leaf-path cannot split query params).",
+    "B5 uses static A,A,A training per prereg (expected slot_count=1 [url]).",
+    "D3 uses static quantity 1,1,1 training per prereg (expected slot_count=1 [url]).",
+    "The field-path relevance filter excludes top-level metadata (timestamp, request_duration_ms, etc.).",
+    "Binding correctness uses strict JSON comparison: bound_action must recursively match expected_action."
+  ],
+  "unresolved": [
+    "The _bind() prefix-strip approach is fundamentally wrong for induced templates with long prefixes. A different fix strategy is needed: either (a) modify distill_parameterized() to detect the prefix-only pattern and induce a shorter template, or (b) modify _bind() to strip the prefix from the param value based on the slot name pattern, not the template prefix.",
+    "Root cause analysis: distill_parameterized() induces template 'user-${url}' from training data 'user-1', 'user-2', 'user-3'. The prefix is 'user-'. But when param value is 'user-4', the full template prefix 'https://api.example.com/users/user-' doesn't match. The fix needs to work at a different level.",
+    "Nested metadata filtering (e.g., body.timestamp) is still unresolved from parent.",
+    "End-to-end product economics remain unmeasured.",
+    "Real browser observation noise patterns may differ from synthetic noise."
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "base_sha": "e154c4b7e40be655197dde556076f81df1098829",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-08T01:22:28.134028+00:00",
+  "experiment_id": "EXP-GRAPH-34176416673",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "After committing the parameter-slot-count fix to production HEAD: does the literal-vs-param equal-confidence competition remain param-winning in committed HEAD (re-validating the original hazard post-commit), and does the fix generalize to real-web endpoints with DOM, auth, session state, and drift?",
+  "lane": "graph",
+  "origin_github_run_id": "34176416673",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-34170139507",
+    "path": "research/experiments/EXP-GRAPH-34170139507/handoff.json",
+    "sha256": "65c6fcfeae4ea36110fddc6ba21e48357f9f33e7af529c867adf8debe8532bfc"
+  },
+  "reason": "pulse",
+  "request_hash": "0c47e3268d3ded43b8f57f8fee4ad0199eaebd743ab6bc34ca49b5f6e1cde145",
+  "request_id": "01ce31b800eafd10675d34b5",
+  "schema_version": 1
+}

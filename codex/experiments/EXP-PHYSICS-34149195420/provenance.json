@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34149195420",
+  "lane": "physics",
+  "github_run_id": "34149195420",
+  "execution_github_run_id": "34161320909",
+  "git_commit": "385489e95d30e140f134ba8c6811f1048c5efa49",
+  "git_commit_message": "R2 physics: execute EXP-PHYSICS-34149195420",
+  "base_sha": "eaa317b85ad8673df891cf9b5008bfc271d75486",
+  "pre_execute_sha": "49f71af78fcf665c0cc953f3cb856e2c51ec6c72",
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.x",
+    "numpy_version": "2.5.3",
+    "random_seed": 42,
+    "pythonhashseed": "0"
+  },
+  "frozen_inputs": {
+    "request.json": "d21d7d22acb66d4f11314a8b972e483bc7d090c512548dff9a342563aa04afca",
+    "spec.json": "dcd4698c7dddfb446e9b86484832846f184efde07007f79542926302049295d8",
+    "prereg.md": "63810d581ddf29ba3d2abadd17f081ca090c5e0d9cc27af99fb0fc92a3c0b635",
+    "freeze.json": "531a2d98e54541a155787a30187da04f3160a4b38acdafda0301ad4c8b79eccd"
+  },
+  "code_artifacts": {
+    "spa_pmi.py": "8d6db688de638c5e826fa6dd4c946d5d4de59348e03685996cc9bdfc70cf8eac"
+  },
+  "derived_artifacts": {
+    "raw_results.json": "ef794187b6acb3b4d83c6fa3070bec85497c22933d3640f0c0827823a8eb97a9"
+  },
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-34071626363",
+    "path": "research/experiments/EXP-PHYSICS-34071626363/handoff.json",
+    "sha256": "c1cec38c259eaec983f5165c96ad77901ace1c29dd8e8c65b33261cc19cded4b"
+  },
+  "dependencies": [
+    "research/experiments/EXP-PHYSICS-34071626363/handoff.json"
+  ],
+  "execution_notes": [
+    "Prior execution (github_run_id=34161320909) failed with exit code 66 due to null_control p-value direction bug.",
+    "Bug: permutation_test function computed P(shuffled >= observed) = 0.001 for both significance tests and null control.",
+    "Null control prereg requires P(shuffled > observed) — when shuffled means are all < observed, this is ~0.0, meaning null is NOT rejected (passes).",
+    "Fix: Separated null control computation from significance test p-value. Null control counts shuffled > observed (0/1000), correctly passing.",
+    "Re-execution with corrected code produced SUPPORTS outcome with all four decision checks passing."
+  ]
+}
