@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34222171093",
+  "lane": "graph",
+  "decision": "BLOCKED",
+  "claim_updates": [
+    {
+      "claim_id": "C-PARAM-INHERIT",
+      "status": "EXPERIMENTAL",
+      "reason": "Fix prerequisite not committed to production HEAD. Experiment BLOCKED — no new scientific evidence obtained for fix effectiveness. Existing monkey-patched hazard elimination (parent EXP-GRAPH-34176416673) remains the highest validated evidence. C-PARAM-INHERIT status unchanged."
+    }
+  ],
+  "product_action": "BLOCKED — do not advance C-PARAM-INHERIT. Prerequisite fix (one-line sort key change to src/spider/kernel.py L112) must be committed to HEAD with Director approval before re-validation experiment can produce a post-commit claim.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "After committing the parameter-slot-count fix to production HEAD (candidates.sort key includes len(parameter_slots)): does the literal-vs-param equal-confidence competition resolve to param for all unseen ids 2-7 without monkey-patching, do all 6 baseline conditions pass, and does the corrected B_CONFIDENCE_LITERAL_HIGHER condition (literal 0.98 > param 0.95) remain literal-winning?",
+  "reason": "Experiment BLOCKED because the one-line fix to src/spider/kernel.py L112 (parameter_slots in sort key) is NOT committed to production HEAD. Verified by sha256 46929b3a and line112 content 'candidates.sort(key=lambda m: m.confidence, reverse=True)' lacking parameter_slots. This is an infrastructure prerequisite failure, not a scientific falsification. Baselines confirmed no regression (6/6 pass). Null control confirmed confidence ordering preserved (literal 0.98 beats param 0.95). Core hazard 6/6 literal wins on unfixed HEAD confirms hazard persists without fix (exploratory, not confirmatory for fix). No new evidence for fix effectiveness obtained. The exact same prerequisite and next question from parent handoff EXP-GRAPH-34176416673 still apply: commit the fix, then re-run this experiment without monkey-patching.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-34222171093/result.json — status BLOCKED, outcome NOT_APPLICABLE, fix_committed=false, fix_line_present=false, baseline_pass_count=6/6, null_control_pass=true, hazard_elimination_rate=0.0",
+    "research/experiments/EXP-GRAPH-34222171093/audit.json — status PASS, producer_claim_supported=false, recomputed_metrics match producer, claim_ceiling BLOCKED",
+    "research/experiments/EXP-GRAPH-34222171093/raw_evidence.json — 13 observations, all match_expected_status true, fix_committed=false, line112_content unfixed",
+    "research/experiments/EXP-GRAPH-34222171093/derived_measurements.json — baseline_pass 6/6, null_control_pass true, hazard_elimination_rate 0.0",
+    "research/experiments/EXP-GRAPH-34222171093/report.md — BLOCKED report, fix not committed, all baselines pass, hazard persists",
+    "research/experiments/EXP-GRAPH-34222171093/provenance.json — code_paths.kernel.fix_present=false, kernel_sha256 46929b3a",
+    "src/spider/kernel.py L112 sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61 — fix line absent, sort key uses m.confidence only",
+    "research/experiments/EXP-GRAPH-34176416673/handoff.json sha256 92b95d054dfedc48d99ad6c56ca23f6ad80172107fa378355da8db5cce90620c — parent handoff inherited, BLOCKED status with same prerequisite"
+  ]
+}
