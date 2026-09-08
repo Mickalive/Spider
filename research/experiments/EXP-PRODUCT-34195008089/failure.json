@@ -1,9 +1,0 @@
-{
-  "stage": "director",
-  "category": "VALIDATION_FAILURE",
-  "message": "unknown claim update id: C2-FIX-APPROACH-REJECTED",
-  "retryable": false,
-  "recorded_at": "2026-09-08T15:25:25.291447+00:00",
-  "github_run_id": "34244449825",
-  "github_run_attempt": "1"
-}
