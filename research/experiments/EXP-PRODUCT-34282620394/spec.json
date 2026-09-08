@@ -1,17 +1,30 @@
 {
   "experiment_id": "EXP-PRODUCT-34282620394",
   "lane": "product",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-PARAM-INHERIT"],
+  "question": "Can C2 full-value binding be fixed by modifying distill_parameterized() to detect prefix-only varying segments and induce shorter templates, such that binding user-${url} with params={'url':'user-4'} produces user-4 not user-user-4, and all 10 conditions pass?",
+  "hypothesis": "When distill_parameterized() processes training data where the varying segment in a URL path always starts with a consistent prefix (e.g., 'user-1', 'user-2', 'user-3' all start with 'user-'), the algorithm can detect that the prefix is part of the varying segment's identity (not a structural URL component) and induce a shorter template (e.g., ${url} instead of user-${url}). This shorter template, when bound with full value params={'url':'user-4'}, produces the correct output 'user-4' without double-prefix. The mechanism: compute the longest common prefix of the varying values at each path; if that prefix is a proper prefix of all varying values AND removing it still leaves a non-empty varying segment, strip the prefix from the template and store it as a slot-level prefix annotation. At bind time, the slot value is inserted directly without prefix manipulation.",
+  "falsifier": "ANY of: (1) C2 binding_accuracy < 1.0 (bound URLs contain user-user-4 instead of user-4); (2) any of the 9 previously-passing conditions (B1-B5, C1, D1-D3) regresses (slot_count mismatch or binding_accuracy < 1.0); (3) E1 or E2 null controls fail (slot_count > 0 when expected 0); (4) distill_parameterized() crashes or returns None for any condition that previously succeeded.",
+  "baselines": [
+    "B1-B5 regression: slot counts correct (B1=1, B2=2, B3=3, B4=1, B5=1), binding_accuracy=1.0",
+    "C1 prefix+Suffix full-value URL binding: slot_count=1, binding_accuracy=1.0",
+    "D1/D2/D3 noise filtering: metadata excluded, correct slot counts",
+    "E1/E2 null controls: slot_count=0",
+    "Literal baseline: fail_rate=1.0 on unseen combinations"
+  ],
+  "positive_control": "C2 full-value binding: slot_count=1, resolution=EXECUTABLE, bound URLs contain 'user-4' not 'user-user-4' for all 3 unseen values (user-4, user-5, user-6). This directly tests the fix.",
+  "null_control": "E1 pattern absence: three unrelated observations produce slot_count=0. E2 single observation: slot_count=0. These verify the fix does not hallucinate parameterization where none should exist.",
+  "measurement_validity": [
+    "All 10 conditions use the same synthetic deterministic data as parent EXP-PRODUCT-34195008089",
+    "C2 tested with full values (user-4, user-5, user-6) per spec, not stripped parts",
+    "Binding correctness uses strict JSON comparison: bound_action must recursively match expected_action",
+    "distill_parameterized() is the kernel method, not an isolated local implementation",
+    "No model calls, no network, no browser during measurement - pure offline synthetic",
+    "Each condition uses a fresh temporary registry to prevent cross-condition contamination"
+  ],
+  "decision_rule": "If C2 binding_accuracy == 1.0 AND all 9 regression conditions pass (slot_count match AND binding_accuracy=1.0) AND E1/E2 null controls pass (slot_count=0) AND no crashes, verdict = C2-FIX-SURVIVES. If C2 fails OR any regression OR null control fails, verdict = C2-FIX-FALSIFIED. If distill_parameterized() crashes or returns unexpected None, verdict = MEASUREMENT_INVALID.",
+  "product_consequence_positive": "C2 is the sole blocker preventing KERNEL-INTEGRATION-SURVIVES (9/10 -> 10/10). If C2 passes, the parameterized inheritance kernel achieves full synthetic coverage. This unblocks end-to-end product economics measurement (C-PRODUCT-ECON) and promotion readiness assessment.",
+  "product_consequence_negative": "If C2 fix fails again, the prefix-bearing ID pattern may require a fundamentally different approach: either (a) a contract change where callers pass stripped values ('4' not 'user-4'), or (b) a two-phase template system that separates structural URL components from identity components. The kernel integration remains PARTIAL (9/10).",
+  "estimated_cost": "Very low: pure synthetic data, offline computation, no browser/network/model calls. Reuses parent test harness with identical 10-condition structure. Code change is localized to distill_parameterized() in kernel.py (~20-40 lines).",
+  "expected_information_gain": "High: This is the third attempt at fixing C2, with two clearly diagnosed failure modes from prior experiments. The root cause (full prefix vs short prefix mismatch) is well-understood. A positive result closes the C2 blocker; a negative result with clear diagnostics narrows the remaining options to contract change or architectural redesign. Either outcome is high-information."
 }
