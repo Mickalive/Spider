@@ -667,18 +667,18 @@ def run_experiment():
 
     # --- 4.7 Translation-Scaling Separation Gap ---
     print("--- 4.7 Translation-Scaling Separation Gap ---")
-    # Before bias correction (raw TV)
-    raw_trans_sep = float(np.mean(raw_knn_tv[PRIMARY_K][3][1.0]) -
-                          np.mean(raw_knn_tv[PRIMARY_K][3][0.0]))
-    raw_scal_sep = float(np.mean(raw_knn_tv[PRIMARY_K][2][1.0]) -
-                         np.mean(raw_knn_tv[PRIMARY_K][2][0.0]))
+    # Before bias correction (raw TV) - f_idx 2=translation(44), 1=scaling(43)
+    raw_trans_sep = float(np.mean(raw_knn_tv[PRIMARY_K][2][1.0]) -
+                          np.mean(raw_knn_tv[PRIMARY_K][2][0.0]))
+    raw_scal_sep = float(np.mean(raw_knn_tv[PRIMARY_K][1][1.0]) -
+                         np.mean(raw_knn_tv[PRIMARY_K][1][0.0]))
     raw_gap = raw_trans_sep - raw_scal_sep
 
     # After bias correction
-    bc_trans_sep = float(np.mean(bias_corrected_tv[PRIMARY_K][3][1.0]) -
-                         np.mean(bias_corrected_tv[PRIMARY_K][3][0.0]))
-    bc_scal_sep = float(np.mean(bias_corrected_tv[PRIMARY_K][2][1.0]) -
-                        np.mean(bias_corrected_tv[PRIMARY_K][2][0.0]))
+    bc_trans_sep = float(np.mean(bias_corrected_tv[PRIMARY_K][2][1.0]) -
+                         np.mean(bias_corrected_tv[PRIMARY_K][2][0.0]))
+    bc_scal_sep = float(np.mean(bias_corrected_tv[PRIMARY_K][1][1.0]) -
+                        np.mean(bias_corrected_tv[PRIMARY_K][1][0.0]))
     bc_gap = bc_trans_sep - bc_scal_sep
 
     gap_reduction = (raw_gap - bc_gap) / raw_gap if raw_gap > 0 else 0.0
