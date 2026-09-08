@@ -1,0 +1,20 @@
+{
+  "base_sha": "87909a84d570084ce953e1125c93e917ed25aebd",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-06T06:09:00.936040+00:00",
+  "experiment_id": "EXP-RUNTIME-34015740602",
+  "inherited_last_verdict": "C-MEAS-VALID survives narrowly on real Flask/JWT middleware within tested scope. Full-vector discrimination 0.833 > 0.5, null FP 0.0% < 5%, valid vs expired discriminable Jaccard 0.3505 < 0.5. All three decision criteria pass. Full vector equals B-BODY-ONLY (0.833 = 0.833) \u2014 standard headers add no independent discriminating information; body is the dominant signal. Parent gaps V1-REAL-MIDDLEWARE-GAP and V2-SYNTHETIC-HEADER-TAUTOLOGY closed. Claim ceiling bounded to Flask 3.1.3 + PyJWT 2.13.0 HS256, localhost, 4 states, no synthetic headers, standard headers only, jitter 50-150ms, N=40.",
+  "inherited_next_question": "Does the HTTP fingerprint substrate maintain discrimination on production OAuth/OIDC providers with additional response variation (cache-Control, ETag, request IDs, rate-limit headers, compressed encoding) \u2014 and does the full vector ever exceed B-BODY-ONLY when standard headers vary independently with auth state in production middleware?",
+  "lane": "runtime",
+  "origin_github_run_id": "34015740602",
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-33902315583",
+    "path": "research/experiments/EXP-RUNTIME-33902315583/handoff.json",
+    "sha256": "ef4350875b7915635d892cc0b1d09761992f481a7bc1691a43e1afbb55712056"
+  },
+  "reason": "pulse",
+  "request_hash": "8cccde47af862162ce95bda505815dd568532966331c43a3a44867941ff4d571",
+  "request_id": "5f22552b28107946244a0aa3",
+  "schema_version": 1
+}

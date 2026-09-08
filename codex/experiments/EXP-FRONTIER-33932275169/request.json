@@ -1,0 +1,20 @@
+{
+  "base_sha": "0f683cdaa941e2cb6a21a257957a6249ee3c7901",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-05T00:13:58.653306+00:00",
+  "experiment_id": "EXP-FRONTIER-33932275169",
+  "inherited_last_verdict": "FALSIFIED-IN-SETTING",
+  "inherited_next_question": "Does the causal heterogeneity metric (Var_a of expected next-states) or TV distance detect lambda-scaling of dynamical structure in real or realistic Web transition data, or does the synthetic-to-real gap render the affine DGP validation insufficient?",
+  "lane": "frontier",
+  "origin_github_run_id": "33932275169",
+  "parent_handoff": {
+    "experiment_id": "EXP-FRONTIER-33863640568",
+    "path": "research/experiments/EXP-FRONTIER-33863640568/handoff.json",
+    "sha256": "7a629b31ec2f6202f72098b0a927e59a280519c8b9cd93242a22d0d3f6d026f0"
+  },
+  "reason": "pulse",
+  "request_hash": "7561c1386f5b7467a550dd0855afb078645c4cc420f7ceb5ac08782bd955a1d2",
+  "request_id": "60b90919e4a52f54bfc8a11e",
+  "schema_version": 1
+}

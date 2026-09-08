@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-34015740602",
+  "lane": "runtime",
+  "decision": "CONSTRAINED — C-MEAS-VALID survives narrowly. All three mandatory decision criteria pass (full-vector discrimination 1.0 > 0.5, null FP 0.0% < 5%, valid vs expired Jaccard 0.328 < 0.5). However, the producer's claim ceiling is overgeneralized: claim extends only to Flask 3.1.3 + PyJWT 2.13.0 HS256 on localhost 127.0.0.1:18928 with 4 states returning distinct bodies, headers filtered (Date/Server/X-Request-Id excluded), Cache-Control no-store/no-cache, ETag W/body_sha, Set-Cookie session only for valid_token, jitter 50-150ms uniform, N=40 seed 44, Python 3.12.14. The exploratory H4 test (full vector > B-BODY-ONLY) is INCONCLUSIVE due to ceiling effect: with all 4 bodies distinct, discrimination is at 1.0 and headers cannot improve beyond perfect. Full vector = B-BODY-ONLY (1.0 = 1.0) reflects body dominance under distinct-body design, not proof headers are non-discriminative. The bootstrap CI [1.0, 1.0] is degenerate at ceiling (uninformative, not high-precision). ETag and Content-Length are body-correlated by construction. Only Cache-Control and Set-Cookie are state-varying independent headers; each achieves 0.5 discrimination alone but is redundant when bodies already separate.",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "EXPERIMENTAL",
+      "reason": "C-MEAS-VALID survives on Flask 3.1.3 + PyJWT 2.13.0 HS256 localhost with production-like headers (Cache-Control, ETag, Set-Cookie, X-Request-Id excluded). Full-vector discrimination 1.0 > 0.5, null FP 0.0% < 5%, valid vs expired Jaccard 0.328 < 0.5. Claim ceiling bounded to exact tested configuration: 4 states with distinct bodies, jitter 50-150ms, N=40, Python 3.12.14. Does NOT extend to production OAuth/OIDC (Auth0/Okta/Keycloak), CDN, rate-limit, compression, jitter >150ms, or scenarios with identical error bodies. The H4 multi-field value test is inconclusive due to ceiling effect."
+    }
+  ],
+  "product_action": "Body-based observation is sufficient for auth drift detection within the tested scope (Flask/PyJWT localhost with distinct auth-state bodies). Product should use body-only observation as the default architecture. However, this recommendation is qualified: the body-only sufficiency finding was tested only with distinct error bodies. If production providers return identical error bodies for different auth failure modes (as the parent experiment showed for expired/invalid), headers may add incremental value. The next experiment should test the identical-body scenario to close this gap before finalizing product architecture.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does the HTTP fingerprint substrate's full vector exceed B-BODY-ONLY when bodies are NOT perfectly discriminative (e.g., identical error bodies for expired/invalid token states) but headers (Cache-Control, Set-Cookie) vary independently with auth state — the incremental header value test that was vacuous at ceiling 1.0 in this experiment?",
+  "reason": "The audit correctly identified that the producer's claim ceiling was overgeneralized and that the H4 multi-field test was confounded by ceiling effect. All core metrics are verified: discrimination 1.0, null FP 0.0%, drift discriminable. The CONSTRAINED decision narrows the claim ceiling to the exact tested configuration without falsifying the underlying measurement. The key unresolved question is whether headers add value when bodies collide — the scenario where multi-field observation would actually matter. This is a materially orthogonal test to the current experiment (different body design, same header variation) and should be the next step.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-34015740602/result.json — COMPLETE SUPPORTS metrics: full_vector_discrimination 1.0, null_fp 0.0%, drift_jaccards [0.328, 0.332], baselines B-STATUS-ONLY 0.5, B-BODY-ONLY 1.0, all 6 controls pass",
+    "research/experiments/EXP-RUNTIME-34015740602/audit.json — REVISE producer_claim_supported=false, V3-DISTINCT-BODY-CEILING-CONFOUND (high severity), V4-ETAG-CONTENT-LENGTH-REDUNDANCY, V6-BOOTSTRAP-DEGENERATE, claim_ceiling bounded to exact Flask/PyJWT config, single_header_discrimination Cache-Control 0.5 Set-Cookie 0.5",
+    "research/experiments/EXP-RUNTIME-34015740602/raw_observations.json — 40 entries, 4 distinct body_hashes (ae00c5, 799bf3, 6038e7, c4986e), 4 distinct fingerprints, X-Request-Id 40 UUIDs excluded, Cache-Control/Set-Cookie per state",
+    "research/experiments/EXP-RUNTIME-34015740602/provenance.json — flask 3.1.3, pyjwt 2.13.0, python 3.12.14, port 18928, seed 44, jitter 0.05-0.15",
+    "research/experiments/EXP-RUNTIME-34015740602/spec.json — frozen C-MEAS-VALID, decision_rule, baselines, measurement_validity",
+    "research/experiments/EXP-RUNTIME-34015740602/prereg.md — Section 5 server design, 5.1 auth states distinct bodies, 11.5 ETag correlation, 14 deviation policy"
+  ]
+}

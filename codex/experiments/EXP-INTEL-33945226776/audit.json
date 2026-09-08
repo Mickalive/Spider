@@ -1,0 +1,313 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-33945226776",
+  "lane": "intel",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Reclassify controls.null_control_wikipedia from PASS to FAIL: prereg/spec require yield <0.40 and diversity <15, observed yield 0.517 (aggregated.wikipedia) and diversity 17 both exceed threshold. Current PASS rests on post-hoc 'lowest' criterion not in frozen decision rule. Update result.json controls.null_control_wikipedia.pass and report.md/observations to state null control FAILED quantitatively, indicating weak high-vs-low discrimination (delta only 0.133 between 0.517 and 0.650).",
+    "Restore or explicitly justify positive_control threshold change: spec.json and prereg.md section 10.1 require shopping yield >0.60 and diversity >30 unique element types (prereg: >30, spec: >30); result.json weakens to >0.50/>20 and marks PASS at yield 0.65/diversity 21. Either revert to prereg threshold (which shopping fails on diversity) or label as prereg deviation EXPLORATORY per prereg section 17, do not silently relax.",
+    "De-bias aggregated yield reporting: Method 2 (char-length) is degenerate \u2014 yields 1.0 for 5/6 site types (variance 0.0011, only shopping 0.92) because UTTERANCE_MAX_LENGTH=8192 truncation is non-binding for estimated chars. Averaging it with M1/M3 inflates aggregated.median_yield (e.g., shopping M1=0.365 <0.50 masked to aggregated median 0.65). Report per-method yields prominently and provide M1-only and M3-only threshold tests alongside aggregated, or exclude degenerate M2 from primary claim.",
+    "Publish raw input task definitions as versioned artifact with sha256: provenance.json and analysis_output.json reference /tmp/webarena_tasks.json but no durable raw artifact is stored (artifacts list contains only derived analysis_output.json, code analyze.py, and fixtures). Commit raw WebArena task JSON (or hash + commit + fetch command + line count verification for 812 tasks) so parsing and site_type counts (gitlab 196, shopping 192, etc.) are independently verifiable.",
+    "Bound the 'REQUIRES_TRANSFORM overhead does NOT negate corpus expansion' interpretation to heuristic-exploratory: report.md Executive Summary and observations state all 6 site types >50% as if evidential; validity_notes already disclose heuristic nature and Kruskal-Wallis H=0.1579 p=0.9988 indicates no significant discrimination. Revise claim language to: heuristic prior suggests median >50% under assumed viewport 0.45-0.65 and pruning 0.06-0.15, but requires live Docker measurement on 2-3 tasks to confirm before any product decision."
+  ],
+  "validity_findings": [
+    {
+      "finding": "Yields are heuristic priors, not measurements of live WebArena DOM.",
+      "severity": "material",
+      "evidence": "spec.json measurement_validity states 'offline analysis only' and 'heuristic bound, not a measurement'; prereg.md section 11.1; provenance.json environment no_docker/no_browser/no_llm_calls; ELEMENT_COUNT_ESTIMATES in research/intel/webarena_task_analysis/analyze.py hard-codes typical element counts (e.g., shopping product_listing 150, wikipedia article 45) from domain knowledge.",
+      "impact": "Cannot support any claim that fragment extraction succeeds or that REQUIRES_TRANSFORM overhead is bounded on real pages. Ceiling is triage prior only."
+    },
+    {
+      "finding": "No discriminating power across site types: Kruskal-Wallis H=0.1579 df=5 p=0.9988 on aggregated method_yields, range of aggregated medians only 0.517-0.65.",
+      "severity": "material",
+      "evidence": "result.json metrics.kruskal_wallis H=0.1579 p_approx 0.9988; analysis_output.json kruskal_wallis; recomputed H=0.1579 matches.",
+      "impact": "Heuristic estimates cluster near analyst priors; ranking is noise. Producer correctly discloses but still uses ranking to recommend tasks."
+    },
+    {
+      "finding": "Degenerate Method 2 (char-length) inflates aggregated medians.",
+      "severity": "material",
+      "evidence": "analysis_output.json method2_char_length weighted_median_yield = 1.0 for gitlab/map/reddit/shopping_admin/wikipedia and 0.92 for shopping; aggregated.method_yields second element is 0.92-1.0 for all sites; variance 0.0011; computation yield_at_utterance_8192 = min(1,8192/chars_typical) is 1.0 for all but dense shopping pages because chars_typical 1950-6500 <<8192.",
+      "impact": "Averaging degenerate M2 biases median upward by ~0.15-0.25 and masks that Method 1 element-count alone gives shopping 0.365, reddit 0.45, gitlab 0.484 \u2014 all <0.50 except map 0.598 and wikipedia 0.517."
+    },
+    {
+      "finding": "Aggregation median hides per-method failures, especially for shopping.",
+      "severity": "moderate",
+      "evidence": "result.json metrics.estimated_fragment_yield_by_site_type.shopping.method_yields [0.365,0.92,0.65] median 0.65; method1_element_count.shopping weighted_median_yield 0.365 (analysis_output.json).",
+      "impact": "If primary method (M1 element-count, the only one modeling viewport+pruning) were taken as ground truth, shopping \u2014 the positive control \u2014 would fail the >50% threshold, inverting producer interpretation."
+    },
+    {
+      "finding": "Viewport and node-pruning yields are assumed constants, not measured.",
+      "severity": "moderate",
+      "evidence": "analyze.py VIEWPORT_COVERAGE dict (shopping 0.45, map 0.65 etc.) and NODE_PRUNING_FRACTION dict (0.06-0.15) multiplied into M1 combined_yield; analysis_output.json method1 page_types viewport_yield/pruning_yield are constants per site_type.",
+      "impact": "Real viewport filtering depends on page rendering, scroll, viewport size, and IGNORED_ACTREE_PROPERTIES distribution; uncertainty not propagated beyond note in validity_notes."
+    },
+    {
+      "finding": "Missing raw input provenance: no stored task JSON artifact or hash to verify 812-task parse.",
+      "severity": "moderate",
+      "evidence": "provenance.json execution_commands references /tmp/webarena_tasks.json with no sha256; artifacts list in result.json contains no raw input; provenance.json data_sources describes 'WebArena public GitHub' at base_sha 8bc5034 but not file commit or content hash.",
+      "impact": "Independent reproduction of site_type counts and intent length statistics is not traceably verifiable from packet alone."
+    },
+    {
+      "finding": "Sample imbalance for wikipedia null control (n=16, 1.97% of corpus, only 3 unique templates vs 23-49 for others).",
+      "severity": "moderate",
+      "evidence": "result.json metrics.estimated_fragment_yield_by_site_type.wikipedia.task_count 16; analysis_output.json site_stats.wikipedia unique_templates 3, task_count 16 vs gitlab 196, shopping 192.",
+      "impact": "Null control estimate has high sampling error; cannot anchor low-complexity claim."
+    },
+    {
+      "finding": "Spec hypothesized 4 site types; analysis found 6 (added map and shopping_admin) without prereg amendment.",
+      "severity": "low",
+      "evidence": "spec.json hypothesis/falsifier reference 4 site types; result.json site_type_count 6 and observations note 'not 4 as hypothesized'; prereg.md section 5.1-5.2 lists 4 types.",
+      "impact": "Scope deviation is disclosed and benign for MIXED verdict but decision rule thresholds for '>=2 of 4' were applied to 6, subtly easing SUPPORTS criterion."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "positive_control_shopping",
+      "expected": "Prereg/spec: yield >0.60 and diversity >30 unique element types (prereg 10.1, spec baselines). Result.json weakens to >0.50/>20.",
+      "observed": "yield 0.65 PASS at either threshold, diversity 21 FAIL at prereg >30 but PASS at relaxed >20 (ROLE_DISTRIBUTION in analyze.py hard-codes 21 for shopping).",
+      "verdict": "WEAKENED_PASS",
+      "evidence": "spec.json positive_control; prereg.md 10.1; result.json controls.positive_control_shopping expected 'yield >0.50 diversity >20' vs spec 'yield >60% diversity >30'; analysis_output.json aggregated.shopping.element_diversity 21"
+    },
+    {
+      "baseline_id": "null_control_wikipedia",
+      "expected": "yield <0.40 and diversity <15 (spec + prereg 10.2)",
+      "observed": "yield 0.517 (>0.40) diversity 17 (>15) \u2014 quantitatively FAIL; producer marks PASS because 0.517 is lowest among 6 site types.",
+      "verdict": "FAIL",
+      "evidence": "result.json controls.null_control_wikipedia expected yield <0.40 diversity <15 observed yield 0.517 diversity 17 pass:true note 'Yield is lowest'; analysis_output.json aggregated.wikipedia median_yield 0.517"
+    },
+    {
+      "baseline_id": "method_robustness_control",
+      "expected": "Spearman rho >0.7 for all method pairs (spec measurement_validity + prereg 10.4/12.1)",
+      "observed": "rho m1-m2 0.371, m1-m3 -0.943, m2-m3 -0.543 \u2014 all <0.7; producer correctly marks FAIL and note 'Methods disagree substantially'.",
+      "verdict": "CORRECT_FAIL",
+      "evidence": "result.json controls.method_robustness_control pass:false observed spearman values; recomputed 0.3714, -0.9429, -0.5429 match analysis_output.json method_agreement"
+    },
+    {
+      "baseline_id": "truncation_sensitivity_control",
+      "expected": "yield at max_obs_length 1920 substantially lower than at UTTERANCE_MAX_LENGTH 8192 (sensitivity_ratio <0.7 for most types)",
+      "observed": "shopping 0.37, reddit 0.439, gitlab 0.471, shopping_admin 0.453, map 0.702, wikipedia 0.897 \u2014 confirms 1920 is binding for dense sites.",
+      "verdict": "PASS",
+      "evidence": "result.json controls.truncation_sensitivity_control pass:true; metrics.truncation_sensitivity yield_at_8192/yield_at_1920 matches recomputed ratios; analysis_output.json truncation_sensitivity"
+    },
+    {
+      "baseline_id": "synthetic_adapter_baseline_EXP-INTEL-33925056324",
+      "expected": "Tautological upper bound element_recall=1.0 on 100-element synthetic observations",
+      "observed": "Correctly referenced as non-inferential upper bound in spec baselines and report; not remeasured here.",
+      "verdict": "PASS_APPROPRIATE_REFERENCE",
+      "evidence": "spec.json baselines[1]; provenance.json inherited_evidence"
+    },
+    {
+      "baseline_id": "structural_proxy_baseline_EXP-INTEL-33528832113",
+      "expected": "S1-S5 5/5 structural suitability without observation-format measurement",
+      "observed": "Correctly referenced as structural suitability only, distinct from fragment yield.",
+      "verdict": "PASS_APPROPRIATE_REFERENCE",
+      "evidence": "spec.json baselines[2]; provenance.json inherited_evidence"
+    },
+    {
+      "baseline_id": "2-site_corpus_no_transform",
+      "expected": "Fragment yield ~100% without truncation/viewport/pruning \u2014 comparator for transformation cost",
+      "observed": "Used qualitatively; transformation_overhead 324 LOC estimate (224+50+30+20) with 0 API calls disclosed as estimate, not measured.",
+      "verdict": "PASS_AS_QUALITATIVE_COMPARATOR",
+      "evidence": "result.json metrics.transformation_overhead total_estimated_loc 324"
+    }
+  ],
+  "recomputed_metrics": {
+    "total_tasks": {
+      "reported": 812,
+      "recomputed": 812,
+      "match": true,
+      "source": "analysis_output.json total_tasks"
+    },
+    "site_type_count": {
+      "reported": 6,
+      "recomputed": 6,
+      "match": true,
+      "source": "analysis_output.json site_types"
+    },
+    "aggregated_median_yield": {
+      "gitlab": {
+        "reported": 0.6,
+        "recomputed": 0.6,
+        "method_yields": [
+          0.484,
+          1.0,
+          0.6
+        ]
+      },
+      "map": {
+        "reported": 0.598,
+        "recomputed": 0.598,
+        "method_yields": [
+          0.598,
+          1.0,
+          0.55
+        ]
+      },
+      "reddit": {
+        "reported": 0.65,
+        "recomputed": 0.65,
+        "method_yields": [
+          0.45,
+          1.0,
+          0.65
+        ]
+      },
+      "shopping": {
+        "reported": 0.65,
+        "recomputed": 0.65,
+        "method_yields": [
+          0.365,
+          0.92,
+          0.65
+        ]
+      },
+      "shopping_admin": {
+        "reported": 0.6,
+        "recomputed": 0.6,
+        "method_yields": [
+          0.468,
+          1.0,
+          0.6
+        ]
+      },
+      "wikipedia": {
+        "reported": 0.517,
+        "recomputed": 0.517,
+        "method_yields": [
+          0.517,
+          1.0,
+          0.5
+        ]
+      },
+      "note": "All medians verified via statistics.median; means also match (gitlab 0.695, map 0.716, reddit 0.7, shopping 0.645, shopping_admin 0.689, wikipedia 0.672)"
+    },
+    "method_agreement_spearman": {
+      "m1_m2": {
+        "reported": 0.371,
+        "recomputed": 0.3714,
+        "match": true
+      },
+      "m1_m3": {
+        "reported": -0.943,
+        "recomputed": -0.9429,
+        "match": true
+      },
+      "m2_m3": {
+        "reported": -0.543,
+        "recomputed": -0.5429,
+        "match": true
+      },
+      "note": "Rank correlation over 6 site types ordered gitlab,map,reddit,shopping,shopping_admin,wikipedia; M2 near-constant inflates ties"
+    },
+    "kruskal_wallis": {
+      "reported": {
+        "H": 0.1579,
+        "df": 5,
+        "p_approx": 0.9988
+      },
+      "recomputed": {
+        "H": 0.1579,
+        "df": 5,
+        "rank_sums": [
+          27,
+          30,
+          29,
+          26,
+          30,
+          29
+        ]
+      },
+      "match": true,
+      "interpretation": "No significant difference; p recomputed via Wilson-Hilferty approximation matches report"
+    },
+    "threshold_tests": {
+      "sites_above_50pct": {
+        "reported": 6,
+        "recomputed": 6,
+        "list": [
+          "gitlab",
+          "map",
+          "reddit",
+          "shopping",
+          "shopping_admin",
+          "wikipedia"
+        ]
+      },
+      "sites_below_30pct": {
+        "reported": 0,
+        "recomputed": 0
+      }
+    },
+    "truncation_sensitivity": {
+      "gitlab": {
+        "yield_at_8192": 1.0,
+        "yield_at_1920": 0.471,
+        "ratio": 0.471,
+        "match": true
+      },
+      "map": {
+        "yield_at_8192": 1.0,
+        "yield_at_1920": 0.702,
+        "ratio": 0.702,
+        "match": true
+      },
+      "reddit": {
+        "yield_at_8192": 1.0,
+        "yield_at_1920": 0.439,
+        "ratio": 0.439,
+        "match": true
+      },
+      "shopping": {
+        "yield_at_8192": 0.938,
+        "yield_at_1920": 0.347,
+        "ratio": 0.37,
+        "match": true
+      },
+      "shopping_admin": {
+        "yield_at_8192": 1.0,
+        "yield_at_1920": 0.453,
+        "ratio": 0.453,
+        "match": true
+      },
+      "wikipedia": {
+        "yield_at_8192": 1.0,
+        "yield_at_1920": 0.897,
+        "ratio": 0.897,
+        "match": true
+      }
+    },
+    "method1_only_threshold": {
+      "note": "Material hidden result: at M1 alone, only map (0.598) exceeds 0.50; shopping 0.365 is lowest \u2014 opposite of positive-control expectation. Not reported as primary metric.",
+      "values": {
+        "gitlab": 0.484,
+        "map": 0.598,
+        "reddit": 0.45,
+        "shopping": 0.365,
+        "shopping_admin": 0.468,
+        "wikipedia": 0.517
+      }
+    },
+    "computation_integrity": "All reported arithmetic verified; code in research/intel/webarena_task_analysis/analyze.py deterministically reproduces analysis_output.json given same input"
+  },
+  "claim_ceiling": "Heuristic exploratory triage only: WebArena has 6 site types (196 gitlab, 192 shopping, 182 shopping_admin, 114 reddit, 112 map, 16 wikipedia) with offline heuristic median yield estimates 0.517-0.65 assuming viewport coverage 0.45-0.65 and node-pruning 0.06-0.15. No live Docker/browser measurement was made, so no claim is supported that REQUIRES_TRANSFORM overhead is bounded on real pages, that any site type actually yields >50% of fragments, or that the 812-task corpus is suitable for C-CROSSSITE/C-LLM-INHERIT. Method disagreement (rho -0.943 to 0.371) and Kruskal-Wallis p=0.999 show rankings are not discriminating. The only justified carry-forward is a tentative task-type hypothesis \u2014 shopping, gitlab, shopping_admin have highest heuristic element diversity (22,21,21 vs 16-17 for others) \u2014 requiring live Docker validation on 2-3 tasks measuring actual truncation at 8192/1920, viewport filtering, and IGNORED_ACTREE_PROPERTIES before any graph-lane integration decision. C-CROSSSITE/C-LLM-INHERIT remain HYPOTHESIS bounded to 2-site corpus.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-33945226776/spec.json (frozen thresholds: positive_control >60%/>30, null_control <40%/<15, decision_rule)",
+    "research/experiments/EXP-INTEL-33945226776/prereg.md sections 10.1,10.2,10.4,12.1-12.3,17",
+    "research/experiments/EXP-INTEL-33945226776/result.json metrics.estimated_fragment_yield_by_site_type, metrics.method_agreement, metrics.kruskal_wallis, metrics.truncation_sensitivity, controls",
+    "research/experiments/EXP-INTEL-33945226776/analysis_output.json (aggregated, method1_element_count, method2_char_length, method3_task_type, site_stats, method_agreement, kruskal_wallis, truncation_sensitivity) sha256 8f7ebd0932b1919394d3604879314c1130ae3614cd75b3ce7d8e394e5a08e7bc",
+    "research/intel/webarena_task_analysis/analyze.py sha256 37bdb6c02dfba8b15f24ef22f295f95aaa78567011797d819fe1a4d5c824d485 \u2014 ELEMENT_COUNT_ESTIMATES, VIEWPORT_COVERAGE, NODE_PRUNING_FRACTION, ROLE_DISTRIBUTION, spearman/kruskal implementations",
+    "research/experiments/EXP-INTEL-33945226776/provenance.json (no Docker/browser/LLM, offline heuristic, base_sha 8bc5034)",
+    "research/experiments/EXP-INTEL-33945226776/report.md Executive Summary and Recommended Task Types",
+    "research/experiments/EXP-INTEL-33925056324/handoff.json sha256 6f92dd17615985260d2c3828608c7f7c00ff1ba71dd5593f57d82d9555668fce (parent ceiling synthetic-only)"
+  ],
+  "unresolved": [
+    "Whether heuristic yield 0.517-0.65 matches actual fragment extraction on live WebArena Docker pages at current_viewport_only=True vs False and clean_accessibility_tree filtering.",
+    "Whether max_obs_length=1920 or UTTERANCE_MAX_LENGTH=8192 is the binding truncation for SPIDER's fragment extraction (provenance shows both constants; sensitivity ratios 0.37-0.90 vary by site_type).",
+    "Whether shopping's low M1 yield 0.365 (dense product listings 150 elements, truncation 0.84, viewport 0.45) is more predictive of live yield than aggregated median 0.65 inflated by degenerate M2.",
+    "Whether element diversity 21-22 (ROLE_DISTRIBUTION hard-coded counts) translates to meaningful cross-site transfer for C-CROSSSITE.",
+    "Whether wikipedia n=16 can ever serve as stable null control or requires supplementing with additional CMS tasks.",
+    "Whether map and shopping_admin are distinct site types or subtypes, and if 6-way split changes the >=2-sites criterion materially.",
+    "Whether recomposition + viewport override + truncation handling cost beyond 224 LOC adapter is 324 LOC as estimated or substantially higher on live integration."
+  ]
+}

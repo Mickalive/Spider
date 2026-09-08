@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-33932275169",
+  "lane": "frontier",
+  "execution_timestamp": "2026-09-05T22:00:00+00:00",
+  "github_run_id": "33932275169",
+  "github_run_attempt": 1,
+  "analyzer_script": "research/experiments/EXP-FRONTIER-33932275169/analyze.py",
+  "script_hash": "bc24c3a8911488533566b8499f041ed2e4676ff63902b62c850a6f4b9af27582",
+  "frozen_inputs": {
+    "request_hash": "1b231c2b8bfde60e6ba3693de74a87b33e7d85aeabd091e87a057831e43366c5",
+    "spec_hash": "1586fe87a0d13055ed7126c99308d5791a7d3a150ee04fe419c2a71aebfbda7c",
+    "prereg_hash": "148b09e78ca0d63892102a463b5de93f57dbc224ea163eb5e0901eac5a3de6d9",
+    "freeze_timestamp": "2026-09-05T00:20:57.475111+00:00"
+  },
+  "parent_handoff": {
+    "experiment_id": "EXP-FRONTIER-33863640568",
+    "handoff_hash": "7a629b31ec2f6202f72098b0a927e59a280519c8b9cd93242a22d0d3f6d026f0"
+  },
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.12.14",
+    "numpy_version": "2.5.2",
+    "scipy_version": "1.18.1",
+    "pandas_version": "3.0.5",
+    "statsmodels_version": "0.15.0"
+  },
+  "artifacts": {
+    "result.json": {
+      "path": "research/experiments/EXP-FRONTIER-33932275169/result.json",
+      "role": "result"
+    },
+    "report.md": {
+      "path": "research/experiments/EXP-FRONTIER-33932275169/report.md",
+      "role": "report"
+    },
+    "analyze.py": {
+      "path": "research/experiments/EXP-FRONTIER-33932275169/analyze.py",
+      "sha256": "bc24c3a8911488533566b8499f041ed2e4676ff63902b62c850a6f4b9af27582",
+      "role": "code"
+    },
+    "raw_tables.json": {
+      "path": "research/experiments/EXP-FRONTIER-33932275169/raw_tables.json",
+      "sha256": "e90d1aabf4060e1b0e5db80c2627684a798953f22efcdba7d73f866a1691e0da",
+      "role": "raw"
+    },
+    "frequency_baseline.json": {
+      "path": "research/experiments/EXP-FRONTIER-33932275169/frequency_baseline.json",
+      "sha256": "ed58b31b0a79a108db647bc1a1957d40b86f6d6fa7d0f1994a94264aab868669",
+      "role": "derived"
+    },
+    "analytical_ground_truth.json": {
+      "path": "research/experiments/EXP-FRONTIER-33932275169/analytical_ground_truth.json",
+      "sha256": "34859d4702d6bf052a3999581ddad631b2d02c7f29229afe62a166dbb5550ad2",
+      "role": "derived"
+    }
+  },
+  "experiment_parameters": {
+    "seed": 42,
+    "function_seeds": [42, 43, 44],
+    "lambda_levels": [0.0, 0.2, 0.4, 0.6, 0.8, 1.0],
+    "n_transitions_per_cell": 500,
+    "n_replications_per_cell": 10,
+    "n_permutations": 1000,
+    "total_transitions": 90000,
+    "state_space_size": 10,
+    "n_actions": 4,
+    "n_functions": 3,
+    "alpha": 0.05
+  },
+  "key_measurements": {
+    "spearman_rho_tv_aggregate": 1.0,
+    "spearman_rho_het_aggregate": 0.9429,
+    "cohens_d_tv": 7.8471,
+    "cohens_d_het": 1.7057,
+    "anova_interaction_F": 32.5064,
+    "anova_interaction_p": 0.0,
+    "null_control_mean_p": 0.508,
+    "tv_cv_at_lambda1": 0.1377
+  },
+  "decision": {
+    "frozen_rule_outcome": "FALSIFIED-IN-SETTING",
+    "packet_outcome": "FALSIFIES",
+    "failing_condition": "function_invariance (ANOVA interaction p=0.0 < 0.05)",
+    "note": "ANOVA interaction is expected by design (different Var_a across functions); parent handoff do_not_assume warns this is signal not metric failure"
+  },
+  "reproduction": {
+    "command": "python3 research/experiments/EXP-FRONTIER-33932275169/analyze.py",
+    "expected_outputs": [
+      "research/experiments/EXP-FRONTIER-33932275169/result.json",
+      "research/experiments/EXP-FRONTIER-33932275169/raw_tables.json",
+      "research/experiments/EXP-FRONTIER-33932275169/frequency_baseline.json",
+      "research/experiments/EXP-FRONTIER-33932275169/analytical_ground_truth.json"
+    ],
+    "deterministic": true,
+    "frozen_seed": 42
+  }
+}
