@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-34015741916",
+  "lane": "product",
+  "github_run_id": "34015741916",
+  "execution_timestamp": "2026-09-06T14:21:07Z",
+  "base_commit": "87909a84d570084ce953e1125c93e917ed25aebd",
+  "code_artifacts": {
+    "kernel_modified": true,
+    "kernel_path": "src/spider/kernel.py",
+    "kernel_sha256": "6f5adc62c53cbb8067154234da0a955de9743a08962f5341032971f166c2344b",
+    "kernel_change_description": "Fixed _PARAMETER regex to include hyphen in character class: [A-Za-z0-9_] -> [A-Za-z0-9_-]. This enables binding of slot names containing hyphens (e.g., X-Request-ID).",
+    "test_harness_path": "research/experiments/EXP-PRODUCT-34015741916/run_experiment.py",
+    "test_harness_sha256": "0a084eb5ed13eda288bda34bb5d634fd8d6f0029d06e82ae5ce11d0857f25241",
+    "parent_isolated_path": "research/experiments/EXP-PRODUCT-34003641840/run_experiment.py",
+    "parent_isolated_sha256": "ff5c31be6aa81db9edd1b84651b79f1e1a30527273807122ab7c4cafc2795bd9"
+  },
+  "frozen_inputs": {
+    "request_hash": "10fd6a33bf8766f315664dc297de8255c50c958e44de0707b1b8a4b50f56f786",
+    "spec_hash": "11561ee6b9f6333be15ed2ea3f1df8f23ce8a51cbb51df2c8201592402a23e2a",
+    "prereg_hash": "4b8c91395f5244fc6fd2ebfc0c0a7995417cc6bd3b6eacc6b37e2a90740f67bf",
+    "freeze_timestamp": "2026-09-06T11:10:20.420976+00:00"
+  },
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-34003641840",
+    "handoff_path": "research/experiments/EXP-PRODUCT-34003641840/handoff.json",
+    "handoff_sha256": "ab539267befd3a966cc762ae00cc3eff112911501a48128642e05e4f378702f0"
+  },
+  "execution_mode": "offline_synthetic",
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.x",
+    "model_calls": 0,
+    "network_calls": 0,
+    "browser_calls": 0
+  },
+  "artifacts": {
+    "raw_evidence_path": "research/experiments/EXP-PRODUCT-34015741916/raw_evidence.json",
+    "raw_evidence_sha256": "65bb8e559348e70dc2a65cbb2568a310e7b2f4f98e4bbf7f0ff9d2da79d183ba",
+    "result_path": "research/experiments/EXP-PRODUCT-34015741916/result.json",
+    "report_path": "research/experiments/EXP-PRODUCT-34015741916/report.md"
+  },
+  "reproduction_commands": [
+    "python3 research/experiments/EXP-PRODUCT-34015741916/run_experiment.py"
+  ],
+  "key_findings": [
+    "All 10 conditions pass with binding_accuracy=1.0 (28/28)",
+    "B5/D3 prereg compliance restored (static training data)",
+    "_PARAMETER regex bug fixed (hyphen in character class)",
+    "KERNEL_INTEGRATION_GAP resolved",
+    "D2 query-string limitation documented (architectural)"
+  ]
+}

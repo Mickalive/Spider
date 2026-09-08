@@ -326,6 +326,31 @@
         "handoff.json": "65c6fcfeae4ea36110fddc6ba21e48357f9f33e7af529c867adf8debe8532bfc"
       }
     },
+    "EXP-GRAPH-34176416673": {
+      "lane": "graph",
+      "request_id": "01ce31b800eafd10675d34b5",
+      "created_at": "2026-09-08T01:22:28.134028+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT"
+      ],
+      "question": "Does the parameter-slot-count fix survive commitment to production HEAD and re-validation without monkey-patching, and does param generalization hold across multiple unseen identifiers in committed HEAD?",
+      "audit_status": "PASS",
+      "decision": "BLOCKED",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/graph",
+      "hashes": {
+        "request.json": "b21878c4933f8f841b0056fd14377a235c35ed93557756b907d387186ddde530",
+        "spec.json": "64ae407c09ca941c008dd5aae07a93408923aff31f94b9f9ba7267674be21427",
+        "prereg.md": "964392a420c4c5cfdea19f39ccf981ff3765c21f0df0a5eb90d3645f536f1c85",
+        "freeze.json": "661c8efffa4d44422f1876b66bfc433f605dd996e77c2db55571c00fa223200f",
+        "result.json": "fa9d552c6b99c0367f9bbfe4fa50edd0de4d206302fcba129c6edcb6f2a12682",
+        "report.md": "7e771dba03dfea2f28ce59af0d2e7b70b41befcc46eb1df2d2d01bbdfc2c2931",
+        "provenance.json": "5a9ec0cbb823c9afa385f5d5d4c26279a38b1422d767b9ec9ed7572a6bed8893",
+        "audit.json": "12be8d067b8606e2f8df8657102e5fc9abec7485d8ad14f116dc5c07c6ecec89",
+        "verdict.json": "96439c73507b04d92685d0272b2b2a779f4a7215b631ee079e623579f01906c3",
+        "handoff.json": "92b95d054dfedc48d99ad6c56ca23f6ad80172107fa378355da8db5cce90620c"
+      }
+    },
     "EXP-INTEL-33528832113": {
       "lane": "intel",
       "request_id": "46d19fdaf32e996c0ab24bd7",
@@ -683,6 +708,31 @@
         "audit.json": "18db5d1e3635a9e00dfab76970b315fcbc24c6ec9b5eca75a69961fe4bdd705f",
         "verdict.json": "f2ebb2dff1e4ab0850986a6ac2acc1a323c2ebfe0ae88d1dfea32a573d5474de",
         "handoff.json": "ab539267befd3a966cc762ae00cc3eff112911501a48128642e05e4f378702f0"
+      }
+    },
+    "EXP-PRODUCT-34015741916": {
+      "lane": "product",
+      "request_id": "0a5237d3c531bc25f9bb4197",
+      "created_at": "2026-09-06T06:09:02.304578+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT"
+      ],
+      "question": "Can the field-path relevance noise filter, two-part structure-similarity check (Jaccard>=0.75 + constant-value anchor), and double-prefix detection be ported from run_experiment.py into src/spider/kernel.py distill_parameterized() such that all 10 test conditions (B1-B5, C1-C2, D1-D3, E1-E2) pass with correct prereg training data?",
+      "audit_status": "FAIL",
+      "decision": "KERNEL-INTEGRATION-PARTIAL",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/product",
+      "hashes": {
+        "request.json": "8637bf8cae798a7888136c6b2ddde5787bb45a4a3cfda5af414e9e8bcbed25f7",
+        "spec.json": "11561ee6b9f6333be15ed2ea3f1df8f23ce8a51cbb51df2c8201592402a23e2a",
+        "prereg.md": "4b8c91395f5244fc6fd2ebfc0c0a7995417cc6bd3b6eacc6b37e2a90740f67bf",
+        "freeze.json": "e2580a8a93172b7399b85cc4154a725aa05a364945d459ddd11c78d7568019a5",
+        "result.json": "e9b34b65d05f37c5c137bbf2119b302cee34afe2e4a49b5787b9663b920512c2",
+        "report.md": "a5364646856d2294a6f30636128478764e361901ae02e654a82c83a31b402288",
+        "provenance.json": "d713746488d1bba311b871ac0edabdb7b4987cbb90afd737b9e1847fc715982b",
+        "audit.json": "0dfd5d6e638e2ac94500ee0e1fc971a098072155fdb26e4f4d07211035ace2db",
+        "verdict.json": "5512425b1fbff67715454ca0837382b081be875155010bb0555cddb64b7841b7",
+        "handoff.json": "8075b37b31e48bc5bfbd139c33cd1e0c8c4c9b81fdac6fba43589388806b8a14"
       }
     },
     "EXP-RUNTIME-33528830833": {
