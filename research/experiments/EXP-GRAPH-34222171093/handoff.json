@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34222171093",
+  "lane": "graph",
+  "target_lane": "graph",
+  "next_question": "After committing the parameter-slot-count fix to production HEAD (candidates.sort key includes len(parameter_slots)): does the literal-vs-param equal-confidence competition resolve to param for all unseen ids 2-7 without monkey-patching, do all 6 baseline conditions pass, and does the corrected B_CONFIDENCE_LITERAL_HIGHER condition (literal 0.98 > param 0.95) remain literal-winning?",
+  "why_next": "This experiment is BLOCKED (fix not committed to production HEAD). The core hazard cannot be tested in committed HEAD until the one-line fix is committed. After commit, the exact same question from the parent handoff applies: confirm param beats literal at equal confidence for unseen ids 2-7 in committed HEAD without monkey-patching, then advance to real-web testing (highest-upside generalization gap). The two orthogonal gates remain: (1) commit fix + re-validate core hazard in committed HEAD; (2) real-web endpoint testing with DOM/auth/session/drift.",
+  "carry_forward": {
+    "established": [
+      "Core false-accept hazard elimination validated under HTTP execution with monkey-patched fix (parent EXP-GRAPH-34176416673): compete-equal (literal 0.95 vs param 0.95, literal registered before param, unseen id=7) resolves to param-fetch-posts, bound URL /posts/7, HTTP 200, id=7. Without fix, independent replay shows literal wins (/posts/1, id=1) — false accept reproduced.",
+      "All 6 baseline conditions preserve under HTTP execution on both monkey-patched (parent) and unfixed HEAD (this experiment): cold UNKNOWN, literal-only-original/unseen (/posts/1, id=1), param-only-original (/posts/1, id=1) and unseen (/posts/7, id=7), compete-param-higher (0.98 beats 0.95, /posts/7, id=7). No regression between HEAD states.",
+      "Param generalization to unseen id=7 confirmed: param-only-unseen resolves to /posts/7, HTTP 200, id=7. Literal does NOT generalize: literal-only-unseen resolves to /posts/1, HTTP 200, id=1. Both verified by HTTP response id field.",
+      "Hazard is systematic across unseen ids: null control (compete-equal on unfixed HEAD) resolves to literal for ALL tested ids (id=7 from parent, ids 2-6 exploratory from this experiment). Literal wins at equal confidence 0.95 due to insertion-order tie-break for every unseen id tested.",
+      "Confidence ordering preserved: literal (0.98) beats param (0.95) for unseen id=7 when confidence differs (null control B-LITERAL-HIGHER-CONF). Fix does not override strict confidence ordering.",
+      "Baseline regression check on unfixed HEAD: 6/6 baselines pass (this experiment), matching parent experiment behavior. No regression."
+    ],
+    "rejected": [
+      "Frozen decision rule HTTP-PARAM-INHERIT-SURVIVES satisfied (parent): UNSUPPORTED — multi-slot condition requires HTTP 200 from /posts/1/tech which returns 404 (endpoint assumption error).",
+      "Multi-slot positive control discriminates fix (parent): UNSUPPORTED — order-dependent without fix. Control tests insertion order, not fix.",
+      "404 is a network failure (parent): MISCLASSIFIED — HTTP 404 is a valid response indicating route absence.",
+      "This experiment advances C-PARAM-INHERIT beyond parent ceiling: UNSUPPORTED — fix not committed, BLOCKED status, no new post-commit evidence."
+    ],
+    "unknown": [
+      "Whether the fix survives commit to production HEAD and re-validation without monkey-patching — the first required gate",
+      "Whether B_CONFIDENCE_LITERAL_HIGHER (literal 0.98 vs param 0.95) remains literal-winning after fix commit",
+      "Whether param generalization holds across multiple unseen ids (2-7) in committed HEAD (not monkey-patched)",
+      "Whether fix generalizes to real-web endpoints with DOM, auth, session state, drift — jsonplaceholder is simple REST",
+      "Whether LLM-driven mechanism distillation ('learn on A' half of C-PARAM-INHERIT) works — no model calls",
+      "Whether _matches discriminates with non-empty preconditions and _bind preserves type for full-match strings",
+      "Whether registry upsert sorting (production) interacts with fix tie-break differently than replace() used here"
+    ],
+    "do_not_assume": [
+      "Do not assume the fix is committed to production — HEAD src/spider/kernel.py L112 is unfixed (sha256 46929b3a). Product promotion requires Director-approved commit + post-commit re-validation.",
+      "Do not assume C-PARAM-INHERIT SURVIVES_POST_COMMIT is tested — prerequisite not met, BLOCKED status.",
+      "Do not assume baseline_pass 6/6 on unfixed HEAD indicates production-readiness — measurements are on unfixed code, not post-commit.",
+      "Do not assume the hazard being systematic across ids 2-7 without fix means the fix will work for all ids — post-commit validation required.",
+      "Do not assume core hazard validation extends beyond patch-only, single endpoint (jsonplaceholder), single intent (fetch-post), preconditions={}, deterministic n=1.",
+      "Do not generalize to real-web endpoints, DOM, auth, session, drift, multiple intents, non-empty preconditions, LLM distillation, or _bind type preservation.",
+      "Do not treat exploratory ids 2-6 literal wins as evidence against the fix — they correctly confirm hazard persists without fix and must flip to param after commit."
+    ]
+  },
+  "dependencies": [
+    "src/spider/kernel.py L112 — fix candidates.sort(key=lambda m: (m.confidence, len(m.parameter_slots)), reverse=True) must be committed to HEAD",
+    "src/spider/kernel.py L104-113 — resolve() and _matches() logic",
+    "src/spider/registry.py L35-38 — upsert sorting determines tie-break behavior in production",
+    "src/spider/models.py — Mechanism, Resolution dataclasses",
+    "research/experiments/EXP-GRAPH-34176416673/handoff.json sha256 92b95d054dfedc48d99ad6c56ca23f6ad80172107fa378355da8db5cce90620c — parent established monkey-patched hazard elimination, baseline preservation, param generalization",
+    "research/experiments/EXP-GRAPH-34170139507/handoff.json sha256 65c6fcfeae4ea36110fddc6ba21e48357f9f33e7af529c867adf8debe8532bfc — grandparent established synthetic hazard elimination, multi-slot dominance, template-only scope",
+    "research/claims/registry.json — C-PARAM-INHERIT status EXPERIMENTAL"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-34222171093/result.json sha256 50b01f09ac4d620a3e9c6806e21defbd20829a85b17f2a9f390fe4f4efae8d69 — status BLOCKED, outcome NOT_APPLICABLE, fix_committed=false, baseline_pass_count=6/6, null_control_pass=true, hazard_elimination_rate=0.0",
+    "research/experiments/EXP-GRAPH-34222171093/audit.json — status PASS, producer_claim_supported=false, recomputed_metrics match producer, claim_ceiling BLOCKED",
+    "research/experiments/EXP-GRAPH-34222171093/raw_evidence.json sha256 bda35973c7573c597da0504920666d5f888b68b4c7ba0654e30ab031e085aafa — 13 observations, all match_expected_status true, fix_committed=false",
+    "research/experiments/EXP-GRAPH-34222171093/derived_measurements.json sha256 08118bd4614dfe063e2b9d4c1cdf3f660371fa852c9dff4c22aab53a7b8cc8bc — baseline_pass 6/6, null_control_pass true, hazard_elimination_rate 0.0",
+    "research/experiments/EXP-GRAPH-34222171093/provenance.json sha256 8d73df89acb0b2c46a7eac6f6a62933f974bf593582cd06eb57c1ed2583bc351 — code_paths.kernel.fix_present=false",
+    "src/spider/kernel.py L112 sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61 — fix line absent",
+    "research/experiments/EXP-GRAPH-34176416673/handoff.json sha256 92b95d054dfedc48d99ad6c56ca23f6ad80172107fa378355da8db5cce90620c — parent carry_forward inherited"
+  ],
+  "recommended_action": "First gate: commit the one-line fix to src/spider/kernel.py L112 (candidates.sort(key=lambda m: (m.confidence, len(m.parameter_slots)), reverse=True)) with Director approval. Second: re-run this exact experiment (no monkey-patching) in committed HEAD to confirm: (a) fix survives commitment, (b) compete-equal resolves to param for ALL unseen ids 2-7, (c) all 6 baselines pass, (d) corrected B_CONFIDENCE_LITERAL_HIGHER (literal 0.98 vs param 0.95) measured. Third: after post-commit validation, advance to real-web endpoint testing with DOM, auth, session state, drift — highest-upside generalization gap. Separately: replace multi-slot positive control with an endpoint supporting nested routes; expand unseen-identifier coverage; consider template-only and non-empty precondition edge cases. LLM distillation half of C-PARAM-INHERIT is lower priority than commit + real-web validation."
+}

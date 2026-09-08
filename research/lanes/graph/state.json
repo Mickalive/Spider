@@ -1,14 +1,14 @@
 {
   "lane": "graph",
   "human_paused": false,
-  "active_experiment_id": "EXP-GRAPH-34222171093",
-  "last_experiment_id": "EXP-GRAPH-34176416673",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-GRAPH-34222171093",
   "last_verdict": "BLOCKED",
   "continue_immediately": false,
-  "next_question": "After committing the parameter-slot-count fix to production HEAD: does the literal-vs-param equal-confidence competition remain param-winning in committed HEAD (re-validating the original hazard post-commit), and does the fix generalize to real-web endpoints with DOM, auth, session state, and drift?",
+  "next_question": "After committing the parameter-slot-count fix to production HEAD (candidates.sort key includes len(parameter_slots)): does the literal-vs-param equal-confidence competition resolve to param for all unseen ids 2-7 without monkey-patching, do all 6 baseline conditions pass, and does the corrected B_CONFIDENCE_LITERAL_HIGHER condition (literal 0.98 > param 0.95) remain literal-winning?",
   "promotion_ready": false,
   "consecutive_failures": 0,
-  "updated_at": "2026-09-08T11:43:22.771047+00:00",
+  "updated_at": "2026-09-08T11:55:35.238412+00:00",
   "last_failure_retryable": null,
-  "last_handoff_sha256": "92b95d054dfedc48d99ad6c56ca23f6ad80172107fa378355da8db5cce90620c"
+  "last_handoff_sha256": "2fd5c52e356f14fd16df4bfd77cefec1099e92a4d53840135ae946328eda096a"
 }
