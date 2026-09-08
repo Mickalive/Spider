@@ -1,0 +1,193 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34244445713",
+  "lane": "graph",
+  "status": "BLOCKED",
+  "outcome": "NOT_APPLICABLE",
+  "metrics": {
+    "fix_committed": false,
+    "fix_verification_line_112": "candidates.sort(key=lambda m: m.confidence, reverse=True)",
+    "kernel_sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+    "baseline_pass_count": "6/6",
+    "baseline_pass_rate": 1.0,
+    "hazard_elimination_rate": 0.0,
+    "hazard_param_wins_count": "0/6",
+    "hazard_literal_wins_count": "6/6",
+    "null_control_pass": true,
+    "null_control_literal_wins": true,
+    "exception_count": 0,
+    "network_failure_count": 0,
+    "total_conditions": 13,
+    "http_success_rate": "13/13"
+  },
+  "controls": {
+    "B-COLD": {
+      "expected_status": "UNKNOWN",
+      "observed_status": "UNKNOWN",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json#conditions[0]"
+    },
+    "B-LITERAL-ONLY-ORIG": {
+      "expected_status": "EXECUTABLE",
+      "expected_url": "/posts/1",
+      "expected_http_id": 1,
+      "observed_status": "EXECUTABLE",
+      "observed_url": "/posts/1",
+      "observed_http_id": 1,
+      "pass": true,
+      "evidence_ref": "raw_evidence.json#conditions[1]"
+    },
+    "B-LITERAL-ONLY-UNSEEN": {
+      "expected_status": "EXECUTABLE",
+      "expected_url": "/posts/1",
+      "expected_http_id": 1,
+      "observed_status": "EXECUTABLE",
+      "observed_url": "/posts/1",
+      "observed_http_id": 1,
+      "pass": true,
+      "note": "Literal does not generalize: resolves to /posts/1 for unseen id=7",
+      "evidence_ref": "raw_evidence.json#conditions[2]"
+    },
+    "B-PARAM-ONLY-ORIG": {
+      "expected_status": "EXECUTABLE",
+      "expected_url": "/posts/1",
+      "expected_http_id": 1,
+      "observed_status": "EXECUTABLE",
+      "observed_url": "/posts/1",
+      "observed_http_id": 1,
+      "pass": true,
+      "evidence_ref": "raw_evidence.json#conditions[3]"
+    },
+    "B-PARAM-ONLY-UNSEEN": {
+      "expected_status": "EXECUTABLE",
+      "expected_url": "/posts/7",
+      "expected_http_id": 7,
+      "observed_status": "EXECUTABLE",
+      "observed_url": "/posts/7",
+      "observed_http_id": 7,
+      "pass": true,
+      "note": "Param generalizes: resolves to /posts/7 for unseen id=7",
+      "evidence_ref": "raw_evidence.json#conditions[4]"
+    },
+    "B-COMPETE-PARAM-HIGHER": {
+      "expected_status": "EXECUTABLE",
+      "expected_mechanism": "param-posts-id",
+      "expected_url": "/posts/7",
+      "expected_http_id": 7,
+      "observed_status": "EXECUTABLE",
+      "observed_mechanism": "param-posts-id",
+      "observed_url": "/posts/7",
+      "observed_http_id": 7,
+      "pass": true,
+      "evidence_ref": "raw_evidence.json#conditions[5]"
+    },
+    "C-EQUAL-ID2": {
+      "expected_mechanism": "param-posts-id",
+      "expected_url": "/posts/2",
+      "observed_mechanism": "literal-posts-1",
+      "observed_url": "/posts/1",
+      "pass": false,
+      "note": "Hazard persists: literal wins at equal confidence (fix not committed)",
+      "evidence_ref": "raw_evidence.json#conditions[6]"
+    },
+    "C-EQUAL-ID3": {
+      "expected_mechanism": "param-posts-id",
+      "expected_url": "/posts/3",
+      "observed_mechanism": "literal-posts-1",
+      "observed_url": "/posts/1",
+      "pass": false,
+      "note": "Hazard persists: literal wins at equal confidence (fix not committed)",
+      "evidence_ref": "raw_evidence.json#conditions[7]"
+    },
+    "C-EQUAL-ID4": {
+      "expected_mechanism": "param-posts-id",
+      "expected_url": "/posts/4",
+      "observed_mechanism": "literal-posts-1",
+      "observed_url": "/posts/1",
+      "pass": false,
+      "note": "Hazard persists: literal wins at equal confidence (fix not committed)",
+      "evidence_ref": "raw_evidence.json#conditions[8]"
+    },
+    "C-EQUAL-ID5": {
+      "expected_mechanism": "param-posts-id",
+      "expected_url": "/posts/5",
+      "observed_mechanism": "literal-posts-1",
+      "observed_url": "/posts/1",
+      "pass": false,
+      "note": "Hazard persists: literal wins at equal confidence (fix not committed)",
+      "evidence_ref": "raw_evidence.json#conditions[9]"
+    },
+    "C-EQUAL-ID6": {
+      "expected_mechanism": "param-posts-id",
+      "expected_url": "/posts/6",
+      "observed_mechanism": "literal-posts-1",
+      "observed_url": "/posts/1",
+      "pass": false,
+      "note": "Hazard persists: literal wins at equal confidence (fix not committed)",
+      "evidence_ref": "raw_evidence.json#conditions[10]"
+    },
+    "C-EQUAL-ID7": {
+      "expected_mechanism": "param-posts-id",
+      "expected_url": "/posts/7",
+      "observed_mechanism": "literal-posts-1",
+      "observed_url": "/posts/1",
+      "pass": false,
+      "note": "Hazard persists: literal wins at equal confidence (fix not committed)",
+      "evidence_ref": "raw_evidence.json#conditions[11]"
+    },
+    "B-CONFIDENCE-LITERAL-HIGHER": {
+      "expected_mechanism": "literal-posts-1",
+      "expected_url": "/posts/1",
+      "observed_mechanism": "literal-posts-1",
+      "observed_url": "/posts/1",
+      "pass": true,
+      "note": "Confidence ordering preserved: literal 0.98 beats param 0.95 as expected",
+      "evidence_ref": "raw_evidence.json#conditions[12]"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-GRAPH-34244445713/raw_evidence.json",
+      "sha256": "7cb058bde9befdae8c1b491feb7bf07f1f2e3decd8e4f717f782381031a7e86a",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-34244445713/run_experiment.py",
+      "sha256": "1fdff0dac153133a457e6d2c29c03c3dcbd35b3cb89de414844acce5cc07d2f4",
+      "role": "code"
+    },
+    {
+      "path": "src/spider/kernel.py",
+      "sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "FIX VERIFICATION: src/spider/kernel.py L112 content is 'candidates.sort(key=lambda m: m.confidence, reverse=True)'. The parameter-slot-count fix (len(m.parameter_slots) as secondary sort key) is NOT present in committed HEAD. Kernel file sha256: 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61. Git log shows last kernel change was commit 1e6f32b ('r2: bind parameters safely inside action templates') — no fix commit.",
+    "BASELINE B-COLD: Empty registry resolves to UNKNOWN with reason 'no applicable validated mechanism'. Matches expected. Pass.",
+    "BASELINE B-LITERAL-ONLY-ORIG: Literal mechanism resolves to EXECUTABLE with url=/posts/1 for context id=1. HTTP 200, response id=1. Pass.",
+    "BASELINE B-LITERAL-ONLY-UNSEEN: Literal mechanism resolves to EXECUTABLE with url=/posts/1 for unseen context id=7. Literal does NOT generalize — returns /posts/1 (its literal template) instead of /posts/7. Pass (expected behavior).",
+    "BASELINE B-PARAM-ONLY-ORIG: Param mechanism resolves to EXECUTABLE with url=/posts/1 for context id=1. HTTP 200, response id=1. Pass.",
+    "BASELINE B-PARAM-ONLY-UNSEEN: Param mechanism resolves to EXECUTABLE with url=/posts/7 for unseen context id=7. Param generalizes via ${id} template binding. HTTP 200, response id=7. Pass.",
+    "BASELINE B-COMPETE-PARAM-HIGHER: With param 0.98 > literal 0.95, param wins for unseen id=7. Resolves to url=/posts/7, HTTP 200, id=7. Confidence ordering works correctly. Pass.",
+    "CORE HAZARD C-EQUAL-ID2 through C-EQUAL-ID7 (6 conditions): At equal confidence 0.95 with literal registered before param (worst-case insertion order), literal wins for ALL unseen ids 2-7. Literal resolves to url=/posts/1 (literal template, no generalization). Param should have won via parameter_slots tie-break but the fix is absent. Hazard persists: 0/6 param wins, 6/6 literal wins. This is consistent with the parent experiment's finding on unfixed HEAD.",
+    "NULL CONTROL B-CONFIDENCE-LITERAL-HIGHER: With literal 0.98 > param 0.95, literal wins as expected. Strict confidence ordering is not overridden. Pass.",
+    "All 13 HTTP requests succeeded (100% success rate against jsonplaceholder.typicode.com). No network failures, no exceptions, no crashes.",
+    "This experiment is BLOCKED per the frozen decision rule: fix not present in committed HEAD (gate 1 of 6 not met). The hazard test results (0/6 param wins) are consistent with the BLOCKED status — they confirm the hazard persists on unfixed HEAD, exactly as the parent experiment found. These hazard results do NOT constitute a scientific falsification of the fix; they are diagnostic evidence that the prerequisite (fix commit) has not been met."
+  ],
+  "validity_notes": [
+    "The experiment is BLOCKED because the prerequisite fix is not committed to production HEAD. All 13 conditions executed successfully, but the primary gate (fix presence) failed, making the post-commit question unanswerable from this run.",
+    "All conditions are deterministic (no model calls, no RNG, no sampling). Single-run exact point comparisons are valid for this kernel-level test.",
+    "HTTP endpoint jsonplaceholder.typicode.com is a simple REST API with no DOM, auth, session state, or drift. Claim ceiling is bounded to simple REST parameterized inheritance.",
+    "Registry insertion order was controlled: literal registered before param in all equal-confidence conditions (worst-case for param). This matches the parent experiment's protocol.",
+    "The kernel sha256 (46929b3a) matches the parent experiment's evidence, confirming no code change between experiments.",
+    "No monkey-patching was used. The experiment ran on committed HEAD exactly as the frozen design required."
+  ],
+  "unresolved": [
+    "The one-line fix (candidates.sort key includes len(parameter_slots)) has not been committed to production HEAD. The first gate from the parent handoff remains unmet.",
+    "Whether the fix survives commitment and resolves the hazard for all unseen ids 2-7 cannot be determined from this BLOCKED run.",
+    "Whether baselines regress after fix commit cannot be determined from this BLOCKED run.",
+    "Whether B_CONFIDENCE_LITERAL_HIGHER remains literal-winning after fix commit cannot be determined from this BLOCKED run.",
+    "The next action remains: commit the one-line fix to src/spider/kernel.py L112 with Director approval, then re-run this exact experiment."
+  ]
+}

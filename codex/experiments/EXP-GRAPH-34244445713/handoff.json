@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34244445713",
+  "lane": "graph",
+  "target_lane": "graph",
+  "next_question": "After committing the parameter-slot-count fix to production HEAD (candidates.sort key includes len(parameter_slots)): does the literal-vs-param equal-confidence competition resolve to param for all unseen ids 2-7 without monkey-patching, do all 6 baseline conditions pass, and does the corrected B_CONFIDENCE_LITERAL_HIGHER condition (literal 0.98 > param 0.95) remain literal-winning?",
+  "why_next": "The experiment is BLOCKED because the prerequisite fix (len(parameter_slots) as secondary sort key in src/spider/kernel.py L112) has not been committed to production HEAD. The frozen decision rule requires fix presence as gate 1 before the post-commit hazard question can be answered. All 13 conditions executed successfully on unfixed HEAD (6/6 baselines pass, null control passes, 0/6 hazard elimination confirms the hazard persists). The next experiment must wait for the fix to be committed before re-running this exact frozen spec. No new measurements are needed — the same spec suffices once the prerequisite is met.",
+  "carry_forward": {
+    "established": [
+      "Fix NOT present in committed HEAD src/spider/kernel.py L112 (sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61, line 'candidates.sort(key=lambda m: m.confidence, reverse=True)') — BLOCKED per frozen decision rule",
+      "6/6 baseline conditions pass deterministically on unfixed HEAD: B-COLD UNKNOWN, B-LITERAL-ONLY-ORIG/UNSEEN → /posts/1 id=1 (literal non-generalization), B-PARAM-ONLY-ORIG → /posts/1 id=1 and UNSEEN → /posts/7 id=7 (param generalization via ${id} binding), B-COMPETE-PARAM-HIGHER param 0.98 beats literal 0.95 → /posts/7 id=7",
+      "Null control B-CONFIDENCE-LITERAL-HIGHER preserved: literal 0.98 beats param 0.95 → /posts/1 id=1, strict confidence ordering not overridden",
+      "Core hazard persists systematically without fix: at equal confidence 0.95 with literal registered before param (worst-case insertion order), literal wins for ALL unseen ids 2-7 (0/6 param wins, 6/6 literal wins, stable insertion-order tie-break confirmed by auditor independent replay)",
+      "No exceptions, no network failures, 13/13 HTTP successes against jsonplaceholder.typicode.com",
+      "Auditor verified BLOCKED status justified, no misclassification of diagnostic hazard results as scientific falsification",
+      "Claim C-PARAM-INHERIT remains EXPERIMENTAL — no SURVIVES_POST_COMMIT or FALSIFIED_POST_COMMIT possible until fix is committed"
+    ],
+    "rejected": [
+      "Post-commit hazard elimination claim (fix not committed — prerequisite unmet, cannot test)",
+      "Any scientific falsification of the fix (diagnostic hazard results on unfixed HEAD are expected behavior, not evidence against fix effectiveness)"
+    ],
+    "unknown": [
+      "Whether the fix survives commitment to production HEAD and resolves the hazard for all unseen ids 2-7 without monkey-patching",
+      "Whether all 6 baselines remain passing after fix commit (cannot be tested from BLOCKED run)",
+      "Whether B_CONFIDENCE_LITERAL_HIGHER remains literal-winning after fix commit (strict confidence ordering under new sort key with len(parameter_slots) as secondary key)",
+      "Whether param generalization holds across multiple unseen ids beyond 2-7 in committed HEAD",
+      "Whether fix generalizes to real-web endpoints with DOM, auth, session state, drift (jsonplaceholder is simple REST)",
+      "Whether registry upsert sorting (production) interacts with fix tie-break differently than replace() used in experiment",
+      "Whether LLM-driven mechanism distillation half of C-PARAM-INHERIT works (no model calls in this experiment)"
+    ],
+    "do_not_assume": [
+      "Fix is committed (verified unfixed at experiment time — kernel sha256 46929b3a unchanged from parent)",
+      "Post-commit behavior matches monkey-patched behavior (no monkey-patching was used; fix must be in committed code)",
+      "Core hazard test results (0/6 param wins) constitute falsification of the fix (they are diagnostic on unfixed HEAD, not evidence against fix effectiveness)",
+      "Production-readiness (jsonplaceholder is simple REST; no DOM, auth, session state, drift)",
+      "Generalization beyond single intent (fetch-post), single endpoint (/posts/{id}), preconditions={}, deterministic n=1",
+      "Fix was applied or tested in any way (experiment ran on committed HEAD exactly as designed, no modification)"
+    ]
+  },
+  "dependencies": [
+    "The one-line fix must be committed to src/spider/kernel.py L112: candidates.sort(key=lambda m: (m.confidence, len(m.parameter_slots)), reverse=True) with Director approval",
+    "After fix commit, the exact same frozen spec (EXP-GRAPH-34244445713 or successor) must be re-executed against committed HEAD without monkey-patching",
+    "Measurement validity controls must be preserved: fresh kernel per condition, deterministic n=1, HTTP id verification against jsonplaceholder.typicode.com, registry insertion order literal before param (worst-case), no cross-contamination, 5s timeout"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-34244445713/request.json sha256 49e55f0d601f0478c5bd0a6f883854a1db27fbe77d76cefd68571437c0c70ad2",
+    "research/experiments/EXP-GRAPH-34244445713/spec.json sha256 687bc393a6c783c54fe898657fff544a1c5aa4cefd4d647d533a37ef813e8577",
+    "research/experiments/EXP-GRAPH-34244445713/result.json sha256 322e8c53a1698dc8b922c24bb8a1fbd8ce63b4f94ea69485f48ddeceafd20c6a",
+    "research/experiments/EXP-GRAPH-34244445713/raw_evidence.json sha256 7cb058bde9befdae8c1b491feb7bf07f1f2e3decd8e4f717f782381031a7e86a",
+    "research/experiments/EXP-GRAPH-34244445713/audit.json status=PASS producer_claim_supported=false claim_ceiling=BLOCKED",
+    "research/experiments/EXP-GRAPH-34244445713/provenance.json",
+    "research/experiments/EXP-GRAPH-34244445713/report.md sha256 03219214f311b4b38ece3e94b81e74aa751c3fa6dc180fb1d5b98a21ab25a424",
+    "src/spider/kernel.py sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61 L112 unfixed",
+    "src/spider/models.py parameter_slots_field list[str] default_factory=list",
+    "src/spider/registry.py upsert sorted by mechanism_id replace() used in experiment",
+    "research/experiments/EXP-GRAPH-34222171093/handoff.json sha256 2fd5c52e356f14fd16df4bfd77cefec1099e92a4d53840135ae946328eda096a parent BLOCKED"
+  ],
+  "recommended_action": "Commit the one-line fix to src/spider/kernel.py L112 (candidates.sort key includes len(parameter_slots)) with Director approval, then re-run this exact frozen experiment against committed HEAD. Do not weaken the design or skip the fix-verification gate. The same 13-condition spec with identical controls is sufficient."
+}

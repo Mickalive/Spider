@@ -1,0 +1,20 @@
+{
+  "base_sha": "2e55e50f6b0bd79b7648b79bfc801a642d1c9c37",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-08T15:23:44.338689+00:00",
+  "experiment_id": "EXP-GRAPH-34244445713",
+  "inherited_last_verdict": "BLOCKED",
+  "inherited_next_question": "After committing the parameter-slot-count fix to production HEAD (candidates.sort key includes len(parameter_slots)): does the literal-vs-param equal-confidence competition resolve to param for all unseen ids 2-7 without monkey-patching, do all 6 baseline conditions pass, and does the corrected B_CONFIDENCE_LITERAL_HIGHER condition (literal 0.98 > param 0.95) remain literal-winning?",
+  "lane": "graph",
+  "origin_github_run_id": "34244445713",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-34222171093",
+    "path": "research/experiments/EXP-GRAPH-34222171093/handoff.json",
+    "sha256": "2fd5c52e356f14fd16df4bfd77cefec1099e92a4d53840135ae946328eda096a"
+  },
+  "reason": "pulse",
+  "request_hash": "adda86eefeece72114838ffcdddf244ed4a846bee503ff7615ea11d244faca57",
+  "request_id": "925d0c299d1541b60bc44db9",
+  "schema_version": 1
+}

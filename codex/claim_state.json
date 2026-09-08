@@ -173,6 +173,14 @@
         "reason": "Fix prerequisite not committed to production HEAD. Experiment BLOCKED \u2014 no new scientific evidence obtained for fix effectiveness. Existing monkey-patched hazard elimination (parent EXP-GRAPH-34176416673) remains the highest validated evidence. C-PARAM-INHERIT status unchanged."
       },
       {
+        "experiment_id": "EXP-GRAPH-34244445713",
+        "lane": "graph",
+        "decision": "BLOCKED",
+        "claim_id": "C-PARAM-INHERIT",
+        "status": "EXPERIMENTAL",
+        "reason": "BLOCKED per frozen decision rule: fix not present in committed HEAD src/spider/kernel.py L112 (sha256 46929b3a, line 'candidates.sort(key=lambda m: m.confidence, reverse=True)'). Post-commit hazard elimination cannot be tested. Established only: (1) 6/6 baselines pass deterministically on unfixed HEAD; (2) null control B-CONFIDENCE-LITERAL-HIGHER preserved; (3) core hazard persists systematically (0/6 param wins, 6/6 literal wins at equal confidence 0.95 literal-before-param). NOT established: fix effectiveness, tie-break on len(parameter_slots), generalization beyond jsonplaceholder /posts/{id}."
+      },
+      {
         "experiment_id": "EXP-PRODUCT-33528829801",
         "lane": "product",
         "decision": "SURVIVES \u2014 C-PARAM-INHERIT survives at synthetic in-kernel POC level: distill_parameterized() with _extract_varying_values() correctly induces one parameter slot for isomorphic action paths and resolves to EXECUTABLE with correct bound_action for all 10 unseen single-char identifiers. All four frozen decision-rule conditions satisfied. Audit PASS confirms recomputed metrics match producer. However, the claim ceiling is narrow: single-parameter, single-field, common-prefix heuristic, deterministic synthetic data, hardcoded confidence, simulated baselines. No broader product promotion is authorized by this evidence.",

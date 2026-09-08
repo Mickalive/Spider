@@ -3,7 +3,7 @@
 Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER_CODEX_ULTIME.md`.
 
 This file is generated only from complete finalized Research 2.0 experiment packets.
-Ingested experiments: **37**. Coverage gaps: **0**.
+Ingested experiments: **38**. Coverage gaps: **0**.
 
 ## Index
 
@@ -24,6 +24,7 @@ Ingested experiments: **37**. Coverage gaps: **0**.
 | EXP-GRAPH-34170139507 | graph | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-PARAM-INHERIT |
 | EXP-GRAPH-34176416673 | graph | PASS | BLOCKED | C-PARAM-INHERIT |
 | EXP-GRAPH-34222171093 | graph | PASS | BLOCKED | C-PARAM-INHERIT |
+| EXP-GRAPH-34244445713 | graph | PASS | BLOCKED | C-PARAM-INHERIT |
 | EXP-INTEL-33528832113 | intel | REVISE | SUPPORTS | C-CROSSSITE, C-LLM-INHERIT, C-PRODUCT-ECON |
 | EXP-INTEL-33842055594 | intel | REVISE | PARTIALLY_COMPATIBLE | C-CROSSSITE, C-LLM-INHERIT |
 | EXP-INTEL-33925056324 | intel | REVISE | SUPPORTS | C-CROSSSITE, C-LLM-INHERIT |
@@ -16468,6 +16469,1031 @@ The core hazard test results are **EXPLORATORY** in BLOCKED status. They confirm
     "research/experiments/EXP-GRAPH-34176416673/handoff.json sha256 92b95d054dfedc48d99ad6c56ca23f6ad80172107fa378355da8db5cce90620c — parent carry_forward inherited"
   ],
   "recommended_action": "First gate: commit the one-line fix to src/spider/kernel.py L112 (candidates.sort(key=lambda m: (m.confidence, len(m.parameter_slots)), reverse=True)) with Director approval. Second: re-run this exact experiment (no monkey-patching) in committed HEAD to confirm: (a) fix survives commitment, (b) compete-equal resolves to param for ALL unseen ids 2-7, (c) all 6 baselines pass, (d) corrected B_CONFIDENCE_LITERAL_HIGHER (literal 0.98 vs param 0.95) measured. Third: after post-commit validation, advance to real-web endpoint testing with DOM, auth, session state, drift — highest-upside generalization gap. Separately: replace multi-slot positive control with an endpoint supporting nested routes; expand unseen-identifier coverage; consider template-only and non-empty precondition edge cases. LLM distillation half of C-PARAM-INHERIT is lower priority than commit + real-web validation."
+}
+```
+
+# EXP-GRAPH-34244445713
+
+## request.json
+
+```text
+{
+  "base_sha": "2e55e50f6b0bd79b7648b79bfc801a642d1c9c37",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-08T15:23:44.338689+00:00",
+  "experiment_id": "EXP-GRAPH-34244445713",
+  "inherited_last_verdict": "BLOCKED",
+  "inherited_next_question": "After committing the parameter-slot-count fix to production HEAD (candidates.sort key includes len(parameter_slots)): does the literal-vs-param equal-confidence competition resolve to param for all unseen ids 2-7 without monkey-patching, do all 6 baseline conditions pass, and does the corrected B_CONFIDENCE_LITERAL_HIGHER condition (literal 0.98 > param 0.95) remain literal-winning?",
+  "lane": "graph",
+  "origin_github_run_id": "34244445713",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-34222171093",
+    "path": "research/experiments/EXP-GRAPH-34222171093/handoff.json",
+    "sha256": "2fd5c52e356f14fd16df4bfd77cefec1099e92a4d53840135ae946328eda096a"
+  },
+  "reason": "pulse",
+  "request_hash": "adda86eefeece72114838ffcdddf244ed4a846bee503ff7615ea11d244faca57",
+  "request_id": "925d0c299d1541b60bc44db9",
+  "schema_version": 1
+}
+```
+
+## spec.json
+
+```text
+{
+  "experiment_id": "EXP-GRAPH-34244445713",
+  "lane": "graph",
+  "claim_ids": ["C-PARAM-INHERIT"],
+  "question": "After committing the parameter-slot-count tie-break fix to src/spider/kernel.py L112 (sort key includes len(parameter_slots)), does the literal-vs-param equal-confidence competition resolve to param for all unseen ids 2-7 without monkey-patching, do all 6 baseline conditions pass on committed HEAD, and does the corrected B_CONFIDENCE_LITERAL_HIGHER condition (literal 0.98 > param 0.95) remain literal-winning?",
+  "hypothesis": "With the fix committed to production HEAD, when a literal mechanism and a parametrized mechanism have equal confidence (0.95) and the literal is registered before the param (worst-case insertion order), the resolve() function will select the param mechanism for all unseen ids 2-7 because param has more parameter_slots (len >= 1) than literal (len = 0), and the sort key (confidence, len(parameter_slots)) breaks the tie in favor of param. Additionally, all 6 baseline conditions (cold, literal-only orig/unseen, param-only orig/unseen, compete-param-higher) remain unchanged, and B_CONFIDENCE_LITERAL_HIGHER (literal 0.98 > param 0.95) remains literal-winning because strict confidence ordering is not overridden by the fix.",
+  "falsifier": "ANY of: (a) compete-equal resolves to literal for any of unseen ids 2-7 (hazard persists despite fix); (b) any of the 6 baseline conditions regress (fail to match expected outcome); (c) B_CONFIDENCE_LITERAL_HIGHER resolves to param instead of literal (fix overrides confidence ordering); (d) fix is not present in committed HEAD (src/spider/kernel.py L112 sort key does not include len(parameter_slots)), in which case status=BLOCKED; (e) HTTP execution fails for any condition (network/endpoint failure); (f) any exception or crash during resolution.",
+  "baselines": [
+    "B-COLD: Empty registry, intent 'fetch-post' → UNKNOWN (no applicable validated mechanism)",
+    "B-LITERAL-ONLY-ORIG: Literal mechanism for /posts/1 only, context id=1 → EXECUTABLE url=/posts/1, HTTP 200, id=1",
+    "B-LITERAL-ONLY-UNSEEN: Literal mechanism for /posts/1 only, context id=7 → EXECUTABLE url=/posts/1, HTTP 200, id=1 (literal does not generalize)",
+    "B-PARAM-ONLY-ORIG: Param mechanism for /posts/{id} only, context id=1 → EXECUTABLE url=/posts/1, HTTP 200, id=1",
+    "B-PARAM-ONLY-UNSEEN: Param mechanism for /posts/{id} only, context id=7 → EXECUTABLE url=/posts/7, HTTP 200, id=7 (param generalizes)",
+    "B-COMPETE-PARAM-HIGHER: Param (0.98) vs literal (0.95), context id=7 → param wins, EXECUTABLE url=/posts/7, HTTP 200, id=7"
+  ],
+  "positive_control": "B-COMPETE-PARAM-HIGHER: When param confidence (0.98) exceeds literal confidence (0.95), param must win for unseen id=7. This verifies confidence ordering works correctly and is not broken by the fix.",
+  "null_control": "B-CONFIDENCE-LITERAL-HIGHER: When literal confidence (0.98) exceeds param confidence (0.95), literal must win for unseen id=7. This verifies the fix does not override strict confidence ordering. Additionally, the BLOCKED-control: if fix is not present in HEAD, experiment must emit status=BLOCKED, not FALSIFIES or SUPPORTS.",
+  "measurement_validity": [
+    "All conditions are deterministic: no model calls, no RNG, no sampling. Single-run exact point comparisons.",
+    "HTTP execution against live endpoint jsonplaceholder.typicode.com with 5-second timeout per request.",
+    "Each condition uses a fresh kernel instance with explicitly controlled registry contents. No cross-contamination between conditions.",
+    "Registry insertion order controlled: literal registered before param in all shared-equal conditions (worst-case for param).",
+    "Fix presence verified by inspecting src/spider/kernel.py L112 sort key before execution.",
+    "No monkey-patching or runtime modification of kernel.py during execution.",
+    "HTTP response id field verified against expected id for each condition."
+  ],
+  "decision_rule": "SURVIVES_POST_COMMIT if ALL of: (1) fix is present in committed HEAD (L112 sort key includes len(parameter_slots)); (2) compete-equal resolves to param for ALL unseen ids 2-7 (6/6 param wins); (3) all 6 baselines pass (6/6); (4) B_CONFIDENCE_LITERAL_HIGHER resolves to literal (literal 0.98 wins); (5) no exceptions or crashes; (6) no monkey-patching. FALSIFIED-POST-COMMIT if: fix is present but (a) compete-equal resolves to literal for any unseen id, OR (b) any baseline regresses, OR (c) B_CONFIDENCE_LITERAL_HIGHER resolves to param. BLOCKED if: fix is not present in committed HEAD (L112 sort key does not include len(parameter_slots)). MEASUREMENT_INVALID if: HTTP failures, exceptions, or infrastructure issues prevent measurement.",
+  "product_consequence_positive": "SURVIVES_POST_COMMIT means the core false-accept hazard is eliminated in committed production code. The parameter-slot-count tie-break correctly favors parametrized mechanisms over literal mechanisms at equal confidence, enabling safe param generalization to unseen identifiers. This is a prerequisite for advancing C-PARAM-INHERIT toward real-web testing (the highest-upside generalization gap). Product can proceed to test parameterized inheritance on real endpoints with DOM, auth, session state, and drift.",
+  "product_consequence_negative": "FALSIFIED-POST-COMMIT means the fix does not work as intended in committed code. The hazard persists or new regressions are introduced. Product cannot advance to real-web testing. Root cause analysis required: is the sort key incorrect? Does registry upsert sorting interact differently with the tie-break than replace()? Is there a code path that bypasses the sort?",
+  "estimated_cost": "Very low: deterministic single-run resolution against live endpoint, 13 conditions total, no model calls, no browser automation, no RNG. ~13 HTTP requests with 5s timeout each. Total execution < 2 minutes.",
+  "expected_information_gain": "High: This is the critical gate between BLOCKED and SURVIVES_POST_COMMIT for C-PARAM-INHERIT. A positive result unblocks the highest-upside generalization gap (real-web testing). A negative result identifies a specific code-level failure. A BLOCKED result confirms the prerequisite is still unmet. The experiment directly resolves the parent handoff's inherited next_question and can change the claim status from EXPERIMENTAL to a narrower ceiling or to REJECTED."
+}
+```
+
+## prereg.md
+
+```text
+# EXP-GRAPH-34244445713 Preregistration
+
+## 1. Experiment Identity
+
+- **Experiment ID**: EXP-GRAPH-34244445713
+- **Lane**: Graph
+- **Claim**: C-PARAM-INHERIT (Mechanisms parameterize to unseen identifiers)
+- **Date**: 2026-09-08
+- **Status**: DESIGN — NOT YET FROZEN
+- **Parent Experiment**: EXP-GRAPH-34222171093 (BLOCKED)
+- **Request Reason**: pulse (inherited next_question from parent handoff)
+
+## 2. Scientific Question
+
+After committing the parameter-slot-count tie-break fix to src/spider/kernel.py L112, does the literal-vs-param equal-confidence competition resolve to param for all unseen ids 2-7 without monkey-patching, do all 6 baseline conditions pass on committed HEAD, and does the corrected B_CONFIDENCE_LITERAL_HIGHER condition (literal 0.98 > param 0.95) remain literal-winning?
+
+## 3. Motivation
+
+### What the parent experiment established (EXP-GRAPH-34222171093)
+
+The parent experiment tested the core false-accept hazard and baseline behavior on UNFIXED production HEAD. It produced:
+
+**Established (descriptive):**
+- Core hazard validated: at equal confidence (0.95), literal beats param for ALL unseen ids 2-7 (6/6 literal wins, 0/6 hazard elimination) when literal is registered before param
+- Param generalizes: param-only-unseen resolves to /posts/7, HTTP 200, id=7
+- Literal does not generalize: literal-only-unseen resolves to /posts/1, HTTP 200, id=1
+- All 6 baselines pass on unfixed HEAD (cold, literal-only orig/unseen, param-only orig/unseen, compete-param-higher)
+- Confidence ordering preserved: B-LITERAL-HIGHER-CONF literal 0.98 beats param 0.95
+
+**Rejected (unsupported):**
+- Post-commit claim (fix not committed)
+- Multi-slot positive control (endpoint assumption error)
+
+**Unknown:**
+- Whether fix survives commit to production HEAD
+- Whether param wins at equal confidence for ALL unseen ids after fix commit
+- Whether baselines regress after fix commit
+- Whether B_CONFIDENCE_LITERAL_HIGHER remains literal-winning after fix commit
+
+**Do Not Assume:**
+- Fix is committed (verified unfixed at parent experiment time)
+- Post-commit behavior matches monkey-patched behavior
+- Production-readiness (jsonplaceholder is simple REST)
+- Generalization beyond single intent, single endpoint, preconditions={}, deterministic n=1
+
+### Why this experiment is different
+
+This experiment is identical in structure to the parent but differs in one critical dimension:
+
+**Parent**: Tested on UNFIXED HEAD (fix absent, monkey-patching used for hazard validation)
+**This experiment**: Tests on COMMITTED HEAD (fix present, no monkey-patching)
+
+The fix is a one-line change to src/spider/kernel.py L112:
+```python
+# BEFORE (unfixed):
+candidates.sort(key=lambda m: m.confidence, reverse=True)
+# AFTER (fixed):
+candidates.sort(key=lambda m: (m.confidence, len(m.parameter_slots)), reverse=True)
+```
+
+The fix adds `len(parameter_slots)` as a secondary sort key. When confidences are equal, mechanisms with more parameter slots (param, slots >= 1) sort higher than mechanisms with zero parameter slots (literal, slots = 0).
+
+**Key difference from parent**: No monkey-patching. The fix must be committed to production HEAD before execution. If the fix is not present, the experiment is BLOCKED (not FALSIFIED).
+
+## 4. Hypotheses
+
+### H1: Post-Commit Hazard Elimination
+With the fix committed, compete-equal (literal 0.95 vs param 0.95, literal registered first) resolves to param for ALL unseen ids 2-7 (6/6 param wins).
+
+### H2: Baseline Preservation
+All 6 baseline conditions pass on committed HEAD with the fix present. No regression from parent experiment baseline behavior.
+
+### H3: Confidence Ordering Preservation
+B_CONFIDENCE_LITERAL_HIGHER (literal 0.98 vs param 0.95) remains literal-winning. The fix does not override strict confidence ordering.
+
+### H4: Fix Presence
+The fix is verified present in committed HEAD: src/spider/kernel.py L112 sort key includes `len(parameter_slots)`.
+
+## 5. Conditions
+
+### 5.1 Fix Verification
+- Read src/spider/kernel.py L112
+- Verify sort key includes `len(parameter_slots)`
+- If absent: status=BLOCKED, skip all conditions
+
+### 5.2 Baseline Conditions (6)
+
+| ID | Registry | Context ID | Expected Status | Expected URL | Expected HTTP ID |
+|----|----------|------------|-----------------|--------------|------------------|
+| B-COLD | Empty | any | UNKNOWN | N/A | N/A |
+| B-LITERAL-ONLY-ORIG | literal /posts/1 | 1 | EXECUTABLE | /posts/1 | 1 |
+| B-LITERAL-ONLY-UNSEEN | literal /posts/1 | 7 | EXECUTABLE | /posts/1 | 1 |
+| B-PARAM-ONLY-ORIG | param /posts/{id} | 1 | EXECUTABLE | /posts/1 | 1 |
+| B-PARAM-ONLY-UNSEEN | param /posts/{id} | 7 | EXECUTABLE | /posts/7 | 7 |
+| B-COMPETE-PARAM-HIGHER | literal (0.95) + param (0.98) | 7 | EXECUTABLE | /posts/7 | 7 |
+
+### 5.3 Core Hazard Conditions (6)
+
+| ID | Registry | Context ID | Expected Mechanism | Expected URL | Expected HTTP ID |
+|----|----------|------------|--------------------|--------------|------------------|
+| C-EQUAL-ID2 | literal (0.95) + param (0.95) | 2 | param | /posts/2 | 2 |
+| C-EQUAL-ID3 | literal (0.95) + param (0.95) | 3 | param | /posts/3 | 3 |
+| C-EQUAL-ID4 | literal (0.95) + param (0.95) | 4 | param | /posts/4 | 4 |
+| C-EQUAL-ID5 | literal (0.95) + param (0.95) | 5 | param | /posts/5 | 5 |
+| C-EQUAL-ID6 | literal (0.95) + param (0.95) | 6 | param | /posts/6 | 6 |
+| C-EQUAL-ID7 | literal (0.95) + param (0.95) | 7 | param | /posts/7 | 7 |
+
+**Registry order**: literal registered BEFORE param (worst-case insertion order, same as parent).
+
+### 5.4 Null Control Condition (1)
+
+| ID | Registry | Context ID | Expected Mechanism | Expected URL | Expected HTTP ID |
+|----|----------|------------|--------------------|--------------|------------------|
+| B-CONFIDENCE-LITERAL-HIGHER | literal (0.98) + param (0.95) | 7 | literal | /posts/1 | 1 |
+
+**Purpose**: Verify fix does not override strict confidence ordering.
+
+### 5.5 Total Conditions
+- 6 baselines (B-COLD, B-LITERAL-ONLY-ORIG, B-LITERAL-ONLY-UNSEEN, B-PARAM-ONLY-ORIG, B-PARAM-ONLY-UNSEEN, B-COMPETE-PARAM-HIGHER)
+- 6 core hazard (C-EQUAL-ID2 through C-EQUAL-ID7, equal confidence 0.95)
+- 1 null control (B-CONFIDENCE-LITERAL-HIGHER, literal higher confidence)
+= 13 conditions total
+
+Note: B-COMPETE-PARAM-HIGHER (param 0.98 > literal 0.95) and C-EQUAL-ID7 (param 0.95 == literal 0.95) are different conditions with different confidence configurations. IDs 2-6 are exploratory extensions of the parent's primary condition (id=7).
+
+## 6. Measures
+
+### 6.1 Primary Metric
+- **hazard_elimination_rate**: Fraction of core hazard conditions (ids 2-7) where param wins at equal confidence. Target: 6/6 = 1.0.
+- **baseline_pass_rate**: Fraction of baseline conditions matching expected outcome. Target: 6/6 = 1.0.
+
+### 6.2 Secondary Metrics
+- Per-condition resolution status, mechanism_id, bound_url, confidence
+- HTTP status code and response id field for each EXECUTABLE condition
+- Fix verification: L112 content, kernel.py sha256
+- Exception/crash count
+- Network failure count
+
+## 7. Controls
+
+### 7.1 Fix Presence Control (prerequisite)
+- Read src/spider/kernel.py L112
+- Verify sort key includes `len(parameter_slots)`
+- If absent: status=BLOCKED, outcome=NOT_APPLICABLE
+
+### 7.2 Baseline Preservation Controls (6 conditions)
+Same as parent experiment. All 6 must pass to confirm no regression.
+
+### 7.3 Core Hazard Test (6 conditions)
+Same as parent experiment's C-COMPETE-EQUAL-HAZARD but with fix committed. All 6 must resolve to param.
+
+### 7.4 Confidence Ordering Null Control (1 condition)
+Same as parent experiment's B-LITERAL-HIGHER-CONF. Must remain literal-winning.
+
+### 7.5 No-Monkey-Patch Attestation
+The experiment script must not modify kernel.py at runtime. Fix must be in committed code.
+
+## 8. Validity Threats
+
+### 8.1 Fix Not Committed
+If src/spider/kernel.py L112 is still unfixed, the experiment is BLOCKED. This is the correct outcome per the parent handoff's first gate. The experiment must not weaken the design to work around an unfixed codebase.
+
+### 8.2 HTTP Endpoint Availability
+jsonplaceholder.typicode.com must be reachable. Network failures are infrastructure issues, not scientific results. Record and report but do not classify as FALSIFIES.
+
+### 8.3 Insertion Order Sensitivity
+Literal is registered before param in all equal-confidence conditions (worst case). If the fix works under worst-case insertion order, it works under all insertion orders.
+
+### 8.4 Simple REST Limitation
+jsonplaceholder is not real Web (no DOM, no auth, no session state, no drift). Claim ceiling is bounded to simple REST parameterized inheritance. Real-web generalization is a separate future experiment.
+
+### 8.5 Deterministic n=1
+All conditions are deterministic (no model calls, no RNG). Single-run exact comparisons are valid for this kernel-level test. No statistical inference needed.
+
+### 8.6 Single Endpoint
+Only /posts/{id} is tested. Generalization to other endpoints, multi-parameter templates, nested routes, and non-empty preconditions is not tested here.
+
+## 9. Decision Rules
+
+### 9.1 SURVIVES_POST_COMMIT
+If ALL of:
+1. Fix is present in committed HEAD (L112 sort key includes len(parameter_slots))
+2. compete-equal resolves to param for ALL unseen ids 2-7 (6/6 param wins)
+3. All 6 baselines pass (6/6)
+4. B_CONFIDENCE_LITERAL_HIGHER resolves to literal (literal 0.98 wins)
+5. No exceptions or crashes
+6. No monkey-patching
+
+### 9.2 FALSIFIED-POST-COMMIT
+If fix is present but ANY of:
+1. compete-equal resolves to literal for any unseen id (hazard persists)
+2. Any baseline regresses (fails to match expected outcome)
+3. B_CONFIDENCE_LITERAL_HIGHER resolves to param (fix overrides confidence)
+
+### 9.3 BLOCKED
+If fix is NOT present in committed HEAD (L112 sort key does not include len(parameter_slots))
+
+### 9.4 MEASUREMENT_INVALID
+If:
+1. HTTP failures prevent measurement for any condition
+2. Exceptions or crashes prevent resolution
+3. Infrastructure issues (timeout, DNS, etc.)
+
+## 10. Expected Outcomes
+
+### 10.1 Positive Result (SURVIVES_POST_COMMIT)
+- Core false-accept hazard eliminated in committed production code
+- Parameter-slot-count tie-break works correctly for all tested unseen ids
+- No baseline regressions
+- Confidence ordering preserved
+- C-PARAM-INHERIT advances to: real-web endpoint testing with DOM, auth, session state, drift (highest-upside generalization gap)
+- Claim ceiling: narrow (single intent, single endpoint, preconditions={}, deterministic n=1, jsonplaceholder REST)
+
+### 10.2 Negative Result (FALSIFIED-POST-COMMIT)
+- Fix does not work as intended in committed code
+- Root cause analysis required:
+  - Is the sort key incorrect?
+  - Does registry upsert sorting interact differently with tie-break than replace()?
+  - Is there a code path that bypasses the sort?
+- Product cannot advance to real-web testing
+- Possible: different fix approach needed, or different tie-breaking mechanism
+
+### 10.3 Blocked Result (BLOCKED)
+- Fix not committed to production HEAD
+- First gate from parent handoff not met
+- Cannot test post-commit behavior
+- Next action: commit fix with Director approval
+
+### 10.4 Invalid Result (MEASUREMENT_INVALID)
+- Infrastructure failure, not scientific result
+- Retry after infrastructure repair
+
+## 11. Analysis Plan
+
+1. **Fix Verification**: Read src/spider/kernel.py L112, verify sort key includes len(parameter_slots). If absent → BLOCKED.
+2. **Baseline Execution**: Run 6 baseline conditions, verify each matches expected outcome.
+3. **Core Hazard Execution**: Run 6 core hazard conditions (ids 2-7), verify param wins for all.
+4. **Null Control Execution**: Run B_CONFIDENCE_LITERAL_HIGHER, verify literal wins.
+5. **Metrics Computation**: Compute hazard_elimination_rate and baseline_pass_rate.
+6. **Control Verification**: Check all controls pass/fail.
+7. **Reporting**: Report all outcomes with equal prominence.
+
+## 12. Analysis Code
+
+Analysis will be implemented in Python using:
+- `spider.kernel.SpiderKernel` for resolution
+- `spider.registry.MechanismRegistry` for mechanism storage
+- `spider.models.Mechanism`, `Observation`, `Resolution` for data structures
+- `requests` for HTTP execution against jsonplaceholder.typicode.com
+- Standard library only (no custom estimators required)
+
+Code will be committed to `research/experiments/EXP-GRAPH-34244445713/` before execution.
+
+## 13. Pre-registered Expectations
+
+From parent experiment and theoretical derivation:
+- Fix adds len(parameter_slots) as secondary sort key
+- Param mechanisms have parameter_slots >= 1 (e.g., ['id'])
+- Literal mechanisms have parameter_slots = [] (empty)
+- len([]) = 0 < len(['id']) = 1
+- At equal confidence, param sorts higher than literal with the fix
+- Without the fix, literal wins (insertion-order tie-break)
+- Confidence ordering is primary: 0.98 > 0.95 regardless of parameter_slots
+- Baseline behavior is independent of the fix (fix only affects tie-breaking)
+
+## 14. Deviation Policy
+
+Any deviation from this preregistration will be labeled EXPLORATORY and cannot support confirmatory claims. A new confirmatory claim requires a new preregistration.
+
+## 15. Freeze Statement
+
+This preregistration is frozen BEFORE any analysis code is written or any outcome data is inspected. The experiment will be executed exactly as described here.
+```
+
+## freeze.json
+
+```text
+{
+  "experiment_id": "EXP-GRAPH-34244445713",
+  "frozen_at": "2026-09-08T21:51:27.022877+00:00",
+  "hashes": {
+    "prereg.md": "f7368371532d1441cd024e4ac2de0c489fc504e0a9b89e6046a22db4881eb86b",
+    "request.json": "49e55f0d601f0478c5bd0a6f883854a1db27fbe77d76cefd68571437c0c70ad2",
+    "spec.json": "687bc393a6c783c54fe898657fff544a1c5aa4cefd4d647d533a37ef813e8577"
+  },
+  "schema_version": 1
+}
+```
+
+## result.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34244445713",
+  "lane": "graph",
+  "status": "BLOCKED",
+  "outcome": "NOT_APPLICABLE",
+  "metrics": {
+    "fix_committed": false,
+    "fix_verification_line_112": "candidates.sort(key=lambda m: m.confidence, reverse=True)",
+    "kernel_sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+    "baseline_pass_count": "6/6",
+    "baseline_pass_rate": 1.0,
+    "hazard_elimination_rate": 0.0,
+    "hazard_param_wins_count": "0/6",
+    "hazard_literal_wins_count": "6/6",
+    "null_control_pass": true,
+    "null_control_literal_wins": true,
+    "exception_count": 0,
+    "network_failure_count": 0,
+    "total_conditions": 13,
+    "http_success_rate": "13/13"
+  },
+  "controls": {
+    "B-COLD": {
+      "expected_status": "UNKNOWN",
+      "observed_status": "UNKNOWN",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json#conditions[0]"
+    },
+    "B-LITERAL-ONLY-ORIG": {
+      "expected_status": "EXECUTABLE",
+      "expected_url": "/posts/1",
+      "expected_http_id": 1,
+      "observed_status": "EXECUTABLE",
+      "observed_url": "/posts/1",
+      "observed_http_id": 1,
+      "pass": true,
+      "evidence_ref": "raw_evidence.json#conditions[1]"
+    },
+    "B-LITERAL-ONLY-UNSEEN": {
+      "expected_status": "EXECUTABLE",
+      "expected_url": "/posts/1",
+      "expected_http_id": 1,
+      "observed_status": "EXECUTABLE",
+      "observed_url": "/posts/1",
+      "observed_http_id": 1,
+      "pass": true,
+      "note": "Literal does not generalize: resolves to /posts/1 for unseen id=7",
+      "evidence_ref": "raw_evidence.json#conditions[2]"
+    },
+    "B-PARAM-ONLY-ORIG": {
+      "expected_status": "EXECUTABLE",
+      "expected_url": "/posts/1",
+      "expected_http_id": 1,
+      "observed_status": "EXECUTABLE",
+      "observed_url": "/posts/1",
+      "observed_http_id": 1,
+      "pass": true,
+      "evidence_ref": "raw_evidence.json#conditions[3]"
+    },
+    "B-PARAM-ONLY-UNSEEN": {
+      "expected_status": "EXECUTABLE",
+      "expected_url": "/posts/7",
+      "expected_http_id": 7,
+      "observed_status": "EXECUTABLE",
+      "observed_url": "/posts/7",
+      "observed_http_id": 7,
+      "pass": true,
+      "note": "Param generalizes: resolves to /posts/7 for unseen id=7",
+      "evidence_ref": "raw_evidence.json#conditions[4]"
+    },
+    "B-COMPETE-PARAM-HIGHER": {
+      "expected_status": "EXECUTABLE",
+      "expected_mechanism": "param-posts-id",
+      "expected_url": "/posts/7",
+      "expected_http_id": 7,
+      "observed_status": "EXECUTABLE",
+      "observed_mechanism": "param-posts-id",
+      "observed_url": "/posts/7",
+      "observed_http_id": 7,
+      "pass": true,
+      "evidence_ref": "raw_evidence.json#conditions[5]"
+    },
+    "C-EQUAL-ID2": {
+      "expected_mechanism": "param-posts-id",
+      "expected_url": "/posts/2",
+      "observed_mechanism": "literal-posts-1",
+      "observed_url": "/posts/1",
+      "pass": false,
+      "note": "Hazard persists: literal wins at equal confidence (fix not committed)",
+      "evidence_ref": "raw_evidence.json#conditions[6]"
+    },
+    "C-EQUAL-ID3": {
+      "expected_mechanism": "param-posts-id",
+      "expected_url": "/posts/3",
+      "observed_mechanism": "literal-posts-1",
+      "observed_url": "/posts/1",
+      "pass": false,
+      "note": "Hazard persists: literal wins at equal confidence (fix not committed)",
+      "evidence_ref": "raw_evidence.json#conditions[7]"
+    },
+    "C-EQUAL-ID4": {
+      "expected_mechanism": "param-posts-id",
+      "expected_url": "/posts/4",
+      "observed_mechanism": "literal-posts-1",
+      "observed_url": "/posts/1",
+      "pass": false,
+      "note": "Hazard persists: literal wins at equal confidence (fix not committed)",
+      "evidence_ref": "raw_evidence.json#conditions[8]"
+    },
+    "C-EQUAL-ID5": {
+      "expected_mechanism": "param-posts-id",
+      "expected_url": "/posts/5",
+      "observed_mechanism": "literal-posts-1",
+      "observed_url": "/posts/1",
+      "pass": false,
+      "note": "Hazard persists: literal wins at equal confidence (fix not committed)",
+      "evidence_ref": "raw_evidence.json#conditions[9]"
+    },
+    "C-EQUAL-ID6": {
+      "expected_mechanism": "param-posts-id",
+      "expected_url": "/posts/6",
+      "observed_mechanism": "literal-posts-1",
+      "observed_url": "/posts/1",
+      "pass": false,
+      "note": "Hazard persists: literal wins at equal confidence (fix not committed)",
+      "evidence_ref": "raw_evidence.json#conditions[10]"
+    },
+    "C-EQUAL-ID7": {
+      "expected_mechanism": "param-posts-id",
+      "expected_url": "/posts/7",
+      "observed_mechanism": "literal-posts-1",
+      "observed_url": "/posts/1",
+      "pass": false,
+      "note": "Hazard persists: literal wins at equal confidence (fix not committed)",
+      "evidence_ref": "raw_evidence.json#conditions[11]"
+    },
+    "B-CONFIDENCE-LITERAL-HIGHER": {
+      "expected_mechanism": "literal-posts-1",
+      "expected_url": "/posts/1",
+      "observed_mechanism": "literal-posts-1",
+      "observed_url": "/posts/1",
+      "pass": true,
+      "note": "Confidence ordering preserved: literal 0.98 beats param 0.95 as expected",
+      "evidence_ref": "raw_evidence.json#conditions[12]"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-GRAPH-34244445713/raw_evidence.json",
+      "sha256": "7cb058bde9befdae8c1b491feb7bf07f1f2e3decd8e4f717f782381031a7e86a",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-34244445713/run_experiment.py",
+      "sha256": "1fdff0dac153133a457e6d2c29c03c3dcbd35b3cb89de414844acce5cc07d2f4",
+      "role": "code"
+    },
+    {
+      "path": "src/spider/kernel.py",
+      "sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "FIX VERIFICATION: src/spider/kernel.py L112 content is 'candidates.sort(key=lambda m: m.confidence, reverse=True)'. The parameter-slot-count fix (len(m.parameter_slots) as secondary sort key) is NOT present in committed HEAD. Kernel file sha256: 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61. Git log shows last kernel change was commit 1e6f32b ('r2: bind parameters safely inside action templates') — no fix commit.",
+    "BASELINE B-COLD: Empty registry resolves to UNKNOWN with reason 'no applicable validated mechanism'. Matches expected. Pass.",
+    "BASELINE B-LITERAL-ONLY-ORIG: Literal mechanism resolves to EXECUTABLE with url=/posts/1 for context id=1. HTTP 200, response id=1. Pass.",
+    "BASELINE B-LITERAL-ONLY-UNSEEN: Literal mechanism resolves to EXECUTABLE with url=/posts/1 for unseen context id=7. Literal does NOT generalize — returns /posts/1 (its literal template) instead of /posts/7. Pass (expected behavior).",
+    "BASELINE B-PARAM-ONLY-ORIG: Param mechanism resolves to EXECUTABLE with url=/posts/1 for context id=1. HTTP 200, response id=1. Pass.",
+    "BASELINE B-PARAM-ONLY-UNSEEN: Param mechanism resolves to EXECUTABLE with url=/posts/7 for unseen context id=7. Param generalizes via ${id} template binding. HTTP 200, response id=7. Pass.",
+    "BASELINE B-COMPETE-PARAM-HIGHER: With param 0.98 > literal 0.95, param wins for unseen id=7. Resolves to url=/posts/7, HTTP 200, id=7. Confidence ordering works correctly. Pass.",
+    "CORE HAZARD C-EQUAL-ID2 through C-EQUAL-ID7 (6 conditions): At equal confidence 0.95 with literal registered before param (worst-case insertion order), literal wins for ALL unseen ids 2-7. Literal resolves to url=/posts/1 (literal template, no generalization). Param should have won via parameter_slots tie-break but the fix is absent. Hazard persists: 0/6 param wins, 6/6 literal wins. This is consistent with the parent experiment's finding on unfixed HEAD.",
+    "NULL CONTROL B-CONFIDENCE-LITERAL-HIGHER: With literal 0.98 > param 0.95, literal wins as expected. Strict confidence ordering is not overridden. Pass.",
+    "All 13 HTTP requests succeeded (100% success rate against jsonplaceholder.typicode.com). No network failures, no exceptions, no crashes.",
+    "This experiment is BLOCKED per the frozen decision rule: fix not present in committed HEAD (gate 1 of 6 not met). The hazard test results (0/6 param wins) are consistent with the BLOCKED status — they confirm the hazard persists on unfixed HEAD, exactly as the parent experiment found. These hazard results do NOT constitute a scientific falsification of the fix; they are diagnostic evidence that the prerequisite (fix commit) has not been met."
+  ],
+  "validity_notes": [
+    "The experiment is BLOCKED because the prerequisite fix is not committed to production HEAD. All 13 conditions executed successfully, but the primary gate (fix presence) failed, making the post-commit question unanswerable from this run.",
+    "All conditions are deterministic (no model calls, no RNG, no sampling). Single-run exact point comparisons are valid for this kernel-level test.",
+    "HTTP endpoint jsonplaceholder.typicode.com is a simple REST API with no DOM, auth, session state, or drift. Claim ceiling is bounded to simple REST parameterized inheritance.",
+    "Registry insertion order was controlled: literal registered before param in all equal-confidence conditions (worst-case for param). This matches the parent experiment's protocol.",
+    "The kernel sha256 (46929b3a) matches the parent experiment's evidence, confirming no code change between experiments.",
+    "No monkey-patching was used. The experiment ran on committed HEAD exactly as the frozen design required."
+  ],
+  "unresolved": [
+    "The one-line fix (candidates.sort key includes len(parameter_slots)) has not been committed to production HEAD. The first gate from the parent handoff remains unmet.",
+    "Whether the fix survives commitment and resolves the hazard for all unseen ids 2-7 cannot be determined from this BLOCKED run.",
+    "Whether baselines regress after fix commit cannot be determined from this BLOCKED run.",
+    "Whether B_CONFIDENCE_LITERAL_HIGHER remains literal-winning after fix commit cannot be determined from this BLOCKED run.",
+    "The next action remains: commit the one-line fix to src/spider/kernel.py L112 with Director approval, then re-run this exact experiment."
+  ]
+}
+```
+
+## report.md
+
+```text
+# EXP-GRAPH-34244445713 — Execution Report
+
+## Status: BLOCKED
+
+**Outcome**: NOT_APPLICABLE — The parameter-slot-count tie-break fix is not present in committed production HEAD. The experiment's primary gate (fix presence verification) failed, making the post-commit question unanswerable from this run.
+
+## Summary
+
+| Metric | Value |
+|--------|-------|
+| Fix committed | **NO** |
+| Baseline pass rate | 6/6 (1.0) |
+| Hazard elimination rate | 0/6 (0.0) |
+| Null control pass | true |
+| Exceptions | 0 |
+| Network failures | 0 |
+| Total conditions | 13 |
+
+## Fix Verification
+
+The frozen design required verifying that `src/spider/kernel.py` L112 contains the parameter-slot-count fix:
+
+```python
+# Expected (fixed):
+candidates.sort(key=lambda m: (m.confidence, len(m.parameter_slots)), reverse=True)
+
+# Actual (unfixed):
+candidates.sort(key=lambda m: m.confidence, reverse=True)
+```
+
+**The fix is NOT present.** The kernel file sha256 is `46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61`, matching the parent experiment's evidence. Git log confirms the last kernel change was commit `1e6f32b` ("r2: bind parameters safely inside action templates"), which is unrelated to the tie-break fix.
+
+Per the frozen decision rule: **BLOCKED** — fix not present in committed HEAD (gate 1 of 6 not met).
+
+## Baseline Results (6/6 Pass)
+
+All 6 baseline conditions pass on unfixed HEAD, confirming no regression from the parent experiment:
+
+| Condition | Status | URL | HTTP | Pass |
+|-----------|--------|-----|------|------|
+| B-COLD | UNKNOWN | N/A | N/A | ✓ |
+| B-LITERAL-ONLY-ORIG | EXECUTABLE | /posts/1 | 200 | ✓ |
+| B-LITERAL-ONLY-UNSEEN | EXECUTABLE | /posts/1 | 200 | ✓ |
+| B-PARAM-ONLY-ORIG | EXECUTABLE | /posts/1 | 200 | ✓ |
+| B-PARAM-ONLY-UNSEEN | EXECUTABLE | /posts/7 | 200 | ✓ |
+| B-COMPETE-PARAM-HIGHER | EXECUTABLE | /posts/7 | 200 | ✓ |
+
+Key observations:
+- **Literal does not generalize**: B-LITERAL-ONLY-UNSEEN resolves to `/posts/1` for unseen id=7 (literal template, no parameter binding)
+- **Param generalizes**: B-PARAM-ONLY-UNSEEN resolves to `/posts/7` for unseen id=7 via `${id}` template binding
+- **Confidence ordering works**: B-COMPETE-PARAM-HIGHER resolves to param when param confidence (0.98) exceeds literal (0.95)
+
+## Core Hazard Results (0/6 Param Wins — Hazard Persists)
+
+All 6 equal-confidence conditions (literal 0.95 vs param 0.95, literal registered first) resolve to **literal**, not param. The hazard persists on unfixed HEAD:
+
+| Condition | Expected | Observed | URL | HTTP | Pass |
+|-----------|----------|----------|-----|------|------|
+| C-EQUAL-ID2 | param | literal | /posts/1 | 200 | ✗ |
+| C-EQUAL-ID3 | param | literal | /posts/1 | 200 | ✗ |
+| C-EQUAL-ID4 | param | literal | /posts/1 | 200 | ✗ |
+| C-EQUAL-ID5 | param | literal | /posts/1 | 200 | ✗ |
+| C-EQUAL-ID6 | param | literal | /posts/1 | 200 | ✗ |
+| C-EQUAL-ID7 | param | literal | /posts/1 | 200 | ✗ |
+
+**Interpretation**: Without the fix, the sort key is only `m.confidence`. When confidences are equal (0.95 == 0.95), Python's `sorted()` is stable and preserves insertion order. Since literal is registered before param (worst-case), literal wins the tie-break for every unseen id. This is exactly what the parent experiment found.
+
+**This does NOT falsify the fix** — it confirms the hazard persists on unfixed HEAD, which is the expected prerequisite state. The fix must be committed before the hazard test becomes meaningful.
+
+## Null Control (1/1 Pass)
+
+B-CONFIDENCE-LITERAL-HIGHER: literal (0.98) vs param (0.95) for unseen id=7. Literal wins as expected. Strict confidence ordering is preserved. The fix (when committed) would not override this because the primary sort key is confidence, and 0.98 > 0.95 regardless of parameter_slots.
+
+## Interpretation
+
+This experiment is BLOCKED, not FALSIFIED. The distinction matters:
+
+- **BLOCKED** = prerequisite not met (fix not committed). The experiment cannot answer its question. No scientific conclusion about the fix's effectiveness can be drawn.
+- **FALSIFIED** = prerequisite met but the fix doesn't work. This would require the fix to be present and the hazard to persist.
+
+The hazard test results (0/6 param wins) are diagnostic evidence that:
+1. The hazard is systematic across all tested unseen ids (2-7), not just id=7
+2. The hazard mechanism is insertion-order tie-breaking (literal registered first always wins)
+3. The baseline behavior is stable between this experiment and the parent experiment
+
+## Next Action
+
+The single blocking action remains: **commit the one-line fix to `src/spider/kernel.py` L112** with Director approval:
+
+```python
+# Change L112 from:
+candidates.sort(key=lambda m: m.confidence, reverse=True)
+# To:
+candidates.sort(key=lambda m: (m.confidence, len(m.parameter_slots)), reverse=True)
+```
+
+After commit, re-run this exact experiment (EXP-GRAPH-34244445713 or a successor) to:
+1. Confirm fix survives commitment
+2. Verify hazard elimination for all unseen ids 2-7
+3. Confirm baseline preservation
+4. Confirm confidence ordering preservation
+5. Advance C-PARAM-INHERIT to real-web testing
+
+## Claim Ceiling
+
+This experiment does not advance C-PARAM-INHERIT beyond its current ceiling (EXPERIMENTAL, BLOCKED). The claim ceiling remains bounded to:
+- Single intent (fetch-post)
+- Single endpoint (jsonplaceholder /posts/{id})
+- Preconditions = {}
+- Deterministic n=1
+- Simple REST (no DOM, auth, session state, drift)
+```
+
+## provenance.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34244445713",
+  "lane": "graph",
+  "github_run_id": "34244445713",
+  "git_commit": "a3044bfe58c0032d05fc6867e168c3746a07605c",
+  "git_commit_message": "R2 graph: execution base EXP-GRAPH-34244445713",
+  "base_sha_from_request": "2e55e50f6b0bd79b7648b79bfc801a642d1c9c37",
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.x",
+    "model_id": "opencode/mimo-v2.5-free"
+  },
+  "datasets_fixtures": [
+    "jsonplaceholder.typicode.com/posts/{id} (live HTTP endpoint)"
+  ],
+  "code_paths": {
+    "kernel": {
+      "path": "src/spider/kernel.py",
+      "sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+      "fix_present": false,
+      "line_112": "candidates.sort(key=lambda m: m.confidence, reverse=True)"
+    },
+    "models": {
+      "path": "src/spider/models.py",
+      "parameter_slots_field": "list[str] default_factory=list"
+    },
+    "registry": {
+      "path": "src/spider/registry.py",
+      "upsert_sorting": "sorted by mechanism_id"
+    },
+    "experiment_script": {
+      "path": "research/experiments/EXP-GRAPH-34244445713/run_experiment.py",
+      "sha256": "1fdff0dac153133a457e6d2c29c03c3dcbd35b3cb89de414844acce5cc07d2f4"
+    }
+  },
+  "frozen_inputs": {
+    "request_json_sha256": "49e55f0d601f0478c5bd0a6f883854a1db27fbe77d76cefd68571437c0c70ad2",
+    "spec_json_sha256": "687bc393a6c783c54fe898657fff544a1c5aa4cefd4d647d533a37ef813e8577",
+    "prereg_md_sha256": "f7368371532d1441cd024e4ac2de0c489fc504e0a9b89e6046a22db4881eb86b",
+    "freeze_json_sha256": "b0f2e8b90081f1525abda303da6ea30d2bc1059577fe9f1b86c6610a6207b4ca"
+  },
+  "artifacts": {
+    "raw_evidence": {
+      "path": "research/experiments/EXP-GRAPH-34244445713/raw_evidence.json",
+      "sha256": "7cb058bde9befdae8c1b491feb7bf07f1f2e3decd8e4f717f782381031a7e86a"
+    },
+    "result_json": {
+      "path": "research/experiments/EXP-GRAPH-34244445713/result.json",
+      "sha256": "322e8c53a1698dc8b922c24bb8a1fbd8ce63b4f94ea69485f48ddeceafd20c6a"
+    },
+    "report_md": {
+      "path": "research/experiments/EXP-GRAPH-34244445713/report.md",
+      "sha256": "03219214f311b4b38ece3e94b81e74aa751c3fa6dc180fb1d5b98a21ab25a424"
+    },
+    "kernel_py": {
+      "path": "src/spider/kernel.py",
+      "sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61"
+    }
+  },
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-34222171093",
+    "path": "research/experiments/EXP-GRAPH-34222171093/handoff.json",
+    "sha256": "2fd5c52e356f14fd16df4bfd77cefec1099e92a4d53840135ae946328eda096a"
+  },
+  "execution_commands": [
+    "python3 research/experiments/EXP-GRAPH-34244445713/run_experiment.py"
+  ],
+  "execution_timestamp": "2026-09-08T22:00:00+00:00"
+}
+```
+
+## audit.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34244445713",
+  "lane": "graph",
+  "status": "PASS",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Commit fix to src/spider/kernel.py L112: candidates.sort(key=lambda m: (m.confidence, len(m.parameter_slots)), reverse=True) with Director approval — prerequisite for SURVIVES_POST_COMMIT not met, verified by sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61 and line112_content 'candidates.sort(key=lambda m: m.confidence, reverse=True)' (result.json metrics.fix_committed=false, raw_evidence.json fix_verification.fix_present=false, provenance.json code_paths.kernel.fix_present=false)",
+    "Re-run this exact frozen spec (6 baselines B-COLD/B-LITERAL-ONLY-ORIG/B-LITERAL-ONLY-UNSEEN/B-PARAM-ONLY-ORIG/B-PARAM-ONLY-UNSEEN/B-COMPETE-PARAM-HIGHER + 6 hazard C-EQUAL-ID2-7 at equal confidence 0.95 literal before param + 1 null B-CONFIDENCE-LITERAL-HIGHER literal 0.98 vs param 0.95) against committed HEAD without monkey-patching to obtain confirmatory SURVIVES_POST_COMMIT measurement — no post-commit evidence exists in this BLOCKED run",
+    "Preserve measurement validity controls in next run: fresh kernel per condition, deterministic n=1, HTTP id verification against jsonplaceholder.typicode.com, registry insertion order literal before param (worst-case), no cross-contamination, 5s timeout"
+  ],
+  "validity_findings": [
+    {
+      "finding": "Fix verification correct — BLOCKED status justified per frozen decision rule",
+      "severity": "none",
+      "details": "Independent recompute confirms HEAD L112 is unfixed: src/spider/kernel.py sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61, line 112 'candidates.sort(key=lambda m: m.confidence, reverse=True)' lacking len(parameter_slots). result.json metrics.fix_verification_line_112 and metrics.kernel_sha256 match file hash; raw_evidence.json fix_verification.fix_present=false; provenance.json code_paths.kernel.fix_present=false. Frozen spec falsifier (d) and decision_rule require status=BLOCKED when fix absent; producer correctly emits status=BLOCKED outcome=NOT_APPLICABLE rather than SUPPORTS or FALSIFIES. Freeze hashes verified: request 49e55f0d..., spec 687bc393..., prereg f7368371... all match recomputed hashes.",
+      "evidence": "src/spider/kernel.py L112 sha256 46929b3a..., result.json metrics.fix_verification_line_112, raw_evidence.json fix_verification.line_112_content, provenance.json code_paths.kernel.line_112, freeze.json hashes"
+    },
+    {
+      "finding": "Producer does not misclassify infrastructure failure or BLOCKED diagnostic as scientific falsification",
+      "severity": "none",
+      "details": "BLOCKED vs FALSIFIED_POST_COMMIT vs MEASUREMENT_INVALID distinction preserved per EXPERIMENT_PACKET.md. Core hazard 0/6 param wins (6/6 literal wins) presented as exploratory confirmation that hazard persists without fix, not as evidence against fix. result.json observations[7] and validity_notes[0] explicitly state results do NOT constitute falsification; report.md Interpretation section correctly labels BLOCKED≠FALSIFIED. No exception or network failure occurred.",
+      "evidence": "result.json status BLOCKED outcome NOT_APPLICABLE, result.json observations[7], validity_notes[0], report.md ## Interpretation, result.json unresolved"
+    },
+    {
+      "finding": "No monkey-patching, registry isolation preserved, insertion-order hazard mechanism independently confirmed",
+      "severity": "none",
+      "details": "run_experiment.py inspected: no runtime modification of kernel.py, no exec/eval, creates fresh MechanismRegistry via tempfile per condition and registry.replace(). Independent kernel replay with sys.path src confirms: equal confidence 0.95 literal before param -> literal-posts-1 (/posts/1) wins; param before literal -> param-posts-id wins; param 0.98 vs literal 0.95 -> param wins; literal 0.98 vs param 0.95 -> literal wins. Confirms producer's worst-case ordering (literal before param) is the correct discriminating tie-break test and that observed hazard is insertion-order stable sort, not artifact.",
+      "evidence": "research/experiments/EXP-GRAPH-34244445713/run_experiment.py sha256 1fdff0dac153133a457e6d2c29c03c3dcbd35b3cb89de414844acce5cc07d2f4, independent SpiderKernel replay literal-first vs param-first, src/spider/kernel.py L112 sort key"
+    },
+    {
+      "finding": "Measurement environment could express tested effect — resolution+HTTP valid, deterministic",
+      "severity": "none",
+      "details": "All 13 conditions returned expected resolution status and, where EXECUTABLE, HTTP 200 with correct id field (jsonplaceholder reachable). No timeout, no DNS failure, no exception (exception_count 0, network_failure_count 0, http_success_rate 13/13). Resolution deterministic: no model calls, no RNG, no sampling; single-run exact point comparisons valid per prereg measurement_validity. Raw evidence shows resolution_time_ms 0.02-0.15ms and bound_action URLs consistent with mechanism selection.",
+      "evidence": "raw_evidence.json 13 conditions all http_status_code 200 where applicable, http_body.id matches expected url, result.json metrics.http_success_rate 13/13, raw_evidence.json resolution_time_ms"
+    },
+    {
+      "finding": "Target/split/sampling/representation integrity intact — no leakage, no inflation",
+      "severity": "none",
+      "details": "No sampling or split: deterministic kernel-level test with explicitly controlled registry contents, fresh kernel per condition, context id 2-7 unseen with params {id: str(id)}. No training leakage; literal and param mechanisms constructed de-novo per condition. Representation is template URL via _bind and parameter_slots; _template_slots and _bind verified to preserve substitution. Producer discloses representation loss: single intent fetch-post, single endpoint /posts/{id}, preconditions={}, jsonplaceholder simple REST not real-web DOM/auth/session/drift, deterministic n=1.",
+      "evidence": "prereg.md 5.2-5.5 and 8.4-8.6, result.json validity_notes[1-3], report.md Claim Ceiling, src/spider/kernel.py _matches/_bind/_template_slots"
+    },
+    {
+      "finding": "Baselines strong, controls appropriate, provenance and lineage intact",
+      "severity": "none",
+      "details": "6 baselines match parent EXP-GRAPH-34222171093 on unfixed HEAD: cold UNKNOWN, literal-only (orig/unseen) non-generalization, param-only (orig/unseen) generalization, compete-param-higher positive control (param 0.98>literal 0.95). Null control B-CONFIDENCE-LITERAL-HIGHER (literal 0.98>param 0.95) correctly tests that fix does not override strict confidence ordering — passes. Provenance identifies github_run_id 34244445713, git_commit a3044bfe, base_sha 2e55e50f, kernel sha256, experiment script sha256, execution command. Parent handoff lineage preserved (request.json parent_handoff EXP-GRAPH-34222171093 sha256 2fd5c52e). No post-freeze spec change.",
+      "evidence": "result.json controls 7/7 baseline+null pass true, raw_evidence.json conditions 0-5, provenance.json parent_handoff, request.json parent_handoff, spec.json baselines/positive_control/null_control"
+    },
+    {
+      "finding": "Metric/control identifier preservation verified — no renaming to hide disagreement",
+      "severity": "none",
+      "details": "Producer preserves frozen identifiers: B-COLD, B-LITERAL-ONLY-ORIG, B-LITERAL-ONLY-UNSEEN, B-PARAM-ONLY-ORIG, B-PARAM-ONLY-UNSEEN, B-COMPETE-PARAM-HIGHER, C-EQUAL-ID2..7, B-CONFIDENCE-LITERAL-HIGHER. Metric names hazard_elimination_rate, baseline_pass_rate, fix_committed, kernel_sha256 match spec prereg. Auditor recomputed using same identifiers; no drift. Minor note: baseline_pass_count string '6/6' plus rate 1.0 explicit and consistent.",
+      "evidence": "spec.json baselines/positive_control/null_control vs result.json controls keys, result.json metrics keys"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "B-COLD",
+      "expected": "UNKNOWN with empty registry (no applicable validated mechanism)",
+      "observed": "UNKNOWN status, mechanism_id null, confidence 0.0, reason 'no applicable validated mechanism', no HTTP",
+      "pass": true,
+      "recomputed": true,
+      "evidence": "raw_evidence.json#conditions[0] B-COLD status UNKNOWN, result.json controls.B-COLD pass true"
+    },
+    {
+      "baseline_id": "B-LITERAL-ONLY-ORIG",
+      "expected": "EXECUTABLE literal-posts-1 url=/posts/1 HTTP 200 id=1 for context id=1",
+      "observed": "EXECUTABLE literal-posts-1 url=/posts/1 confidence 0.95 HTTP 200 id=1 title sunt aut facere...",
+      "pass": true,
+      "recomputed": true,
+      "evidence": "raw_evidence.json#conditions[1] B-LITERAL-ONLY-ORIG http_body.id 1, result.json controls.B-LITERAL-ONLY-ORIG pass true"
+    },
+    {
+      "baseline_id": "B-LITERAL-ONLY-UNSEEN",
+      "expected": "EXECUTABLE literal-posts-1 url=/posts/1 HTTP 200 id=1 for unseen id=7 (literal does not generalize)",
+      "observed": "EXECUTABLE literal-posts-1 url=/posts/1 HTTP 200 id=1 confirms literal non-generalization",
+      "pass": true,
+      "recomputed": true,
+      "evidence": "raw_evidence.json#conditions[2] B-LITERAL-ONLY-UNSEEN http_body.id 1, result.json controls.B-LITERAL-ONLY-UNSEEN note"
+    },
+    {
+      "baseline_id": "B-PARAM-ONLY-ORIG",
+      "expected": "EXECUTABLE param-posts-id url=/posts/1 HTTP 200 id=1 for id=1",
+      "observed": "EXECUTABLE param-posts-id url=/posts/1 HTTP 200 id=1",
+      "pass": true,
+      "recomputed": true,
+      "evidence": "raw_evidence.json#conditions[3] B-PARAM-ONLY-ORIG http_body.id 1, result.json controls.B-PARAM-ONLY-ORIG pass true"
+    },
+    {
+      "baseline_id": "B-PARAM-ONLY-UNSEEN",
+      "expected": "EXECUTABLE param-posts-id url=/posts/7 HTTP 200 id=7 for unseen id=7 (param generalizes)",
+      "observed": "EXECUTABLE param-posts-id url=/posts/7 HTTP 200 id=7 confirms param generalization",
+      "pass": true,
+      "recomputed": true,
+      "evidence": "raw_evidence.json#conditions[4] B-PARAM-ONLY-UNSEEN http_body.id 7, result.json controls.B-PARAM-ONLY-UNSEEN note"
+    },
+    {
+      "baseline_id": "B-COMPETE-PARAM-HIGHER",
+      "expected": "EXECUTABLE param-posts-id url=/posts/7 HTTP 200 id=7 when param 0.98 > literal 0.95 for id=7 (positive_control)",
+      "observed": "EXECUTABLE param-posts-id confidence 0.98 url=/posts/7 HTTP 200 id=7 — confidence ordering works, param wins",
+      "pass": true,
+      "recomputed": true,
+      "evidence": "raw_evidence.json#conditions[5] B-COMPETE-PARAM-HIGHER mechanism_id param-posts-id confidence 0.98"
+    },
+    {
+      "baseline_id": "B-CONFIDENCE-LITERAL-HIGHER",
+      "expected": "EXECUTABLE literal-posts-1 url=/posts/1 HTTP 200 id=1 when literal 0.98 > param 0.95 for id=7 (null_control, strict confidence ordering preserved)",
+      "observed": "EXECUTABLE literal-posts-1 confidence 0.98 url=/posts/1 HTTP 200 id=1 — literal wins, fix would not override 0.98>0.95",
+      "pass": true,
+      "recomputed": true,
+      "evidence": "raw_evidence.json#conditions[12] B-CONFIDENCE-LITERAL-HIGHER mechanism_id literal-posts-1 confidence 0.98, result.json controls.B-CONFIDENCE-LITERAL-HIGHER pass true"
+    },
+    {
+      "baseline_id": "C-EQUAL-ID2..7 (core hazard, equal confidence 0.95 literal before param)",
+      "expected": "EXPECTED post-fix: param-posts-id url=/posts/{id} HTTP 200 id={id} for each id 2-7; OBSERVED unfixed: literal wins",
+      "observed": "6/6 literal-posts-1 url=/posts/1 HTTP 200 id=1 for ids 2,3,4,5,6,7 — hazard persists, systematic insertion-order tie-break, 0/6 param wins",
+      "pass": false,
+      "recomputed": true,
+      "evidence": "raw_evidence.json#conditions[6-11] C-EQUAL-ID2..7 all mechanism_id literal-posts-1 url /posts/1 id 1, result.json controls C-EQUAL-ID2..7 pass false, metrics.hazard_elimination_rate 0.0"
+    }
+  ],
+  "recomputed_metrics": {
+    "fix_committed": false,
+    "fix_verification_line_112": "candidates.sort(key=lambda m: m.confidence, reverse=True)",
+    "kernel_sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+    "kernel_sha256_recomputed": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+    "line112_recomputed": "candidates.sort(key=lambda m: m.confidence, reverse=True)",
+    "baseline_pass_count": "6/6",
+    "baseline_pass_rate": 1.0,
+    "baseline_pass_rate_recomputed": 1.0,
+    "hazard_elimination_rate": 0.0,
+    "hazard_elimination_rate_recomputed": 0.0,
+    "hazard_param_wins_count": "0/6",
+    "hazard_literal_wins_count": "6/6",
+    "hazard_param_wins_recomputed": 0,
+    "hazard_literal_wins_recomputed": 6,
+    "null_control_pass": true,
+    "null_control_literal_wins": true,
+    "null_control_pass_recomputed": true,
+    "exception_count": 0,
+    "exception_count_recomputed": 0,
+    "network_failure_count": 0,
+    "network_failure_count_recomputed": 0,
+    "total_conditions": 13,
+    "total_conditions_recomputed": 13,
+    "http_success_rate": "13/13",
+    "http_success_rate_recomputed": "13/13",
+    "recompute_notes": "Recomputed from raw_evidence.json 13 conditions: 6/6 baselines match expected status+url+http_id; 1/1 null control literal wins; 0/6 hazard param wins (6/6 literal wins) with independent SpiderKernel replay confirming equal-confidence literal-first resolves to literal-posts-1 and confidence ordering preserved (param 0.98 beats literal 0.95, literal 0.98 beats param 0.95). Kernel file hash recomputed via sha256 matches producer. No divergence from producer metrics; hazard 0.0 is diagnostic under BLOCKED, not falsification."
+  },
+  "claim_ceiling": "MAX JUSTIFIED CEILING: BLOCKED — no SURVIVES_POST_COMMIT claim for C-PARAM-INHERIT. Established only: (1) fix absent from committed HEAD src/spider/kernel.py L112 (sha256 46929b3a, line 'candidates.sort(key=lambda m: m.confidence, reverse=True)'); (2) 6/6 baselines pass deterministically on unfixed HEAD: B-COLD UNKNOWN, literal-only orig/unseen -> /posts/1 id=1 (literal non-generalization), param-only orig -> /posts/1 id=1 and unseen -> /posts/7 id=7 (param generalization), B-COMPETE-PARAM-HIGHER param 0.98 beats literal 0.95 -> /posts/7 id=7; (3) null control B-CONFIDENCE-LITERAL-HIGHER preserved: literal 0.98 beats param 0.95 -> /posts/1 id=1; (4) core hazard systematic without fix: at equal confidence 0.95 literal before param, literal wins for ALL unseen ids 2-7 (0/6 hazard elimination, 6/6 literal wins, stable insertion-order tie-break); (5) no SUPPORTS/FALSIFIES for post-commit hazard elimination — prerequisite not met. NOT established: fix effectiveness post-commit, tie-break on len(parameter_slots), generalization beyond jsonplaceholder /posts/{id} single intent fetch-post preconditions={} deterministic n=1, real-web DOM/auth/session/drift, LLM distillation, multi-intent, non-empty preconditions, registry upsert sorting interaction.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-34244445713/request.json sha256 49e55f0d601f0478c5bd0a6f883854a1db27fbe77d76cefd68571437c0c70ad2",
+    "research/experiments/EXP-GRAPH-34244445713/spec.json sha256 687bc393a6c783c54fe898657fff544a1c5aa4cefd4d647d533a37ef813e8577",
+    "research/experiments/EXP-GRAPH-34244445713/prereg.md sha256 f7368371532d1441cd024e4ac2de0c489fc504e0a9b89e6046a22db4881eb86b",
+    "research/experiments/EXP-GRAPH-34244445713/freeze.json sha256 b0f2e8b90081f1525abda303da6ea30d2bc1059577fe9f1b86c6610a6207b4ca",
+    "research/experiments/EXP-GRAPH-34244445713/result.json sha256 322e8c53a1698dc8b922c24bb8a1fbd8ce63b4f94ea69485f48ddeceafd20c6a",
+    "research/experiments/EXP-GRAPH-34244445713/raw_evidence.json sha256 7cb058bde9befdae8c1b491feb7bf07f1f2e3decd8e4f717f782381031a7e86a 13 conditions",
+    "research/experiments/EXP-GRAPH-34244445713/run_experiment.py sha256 1fdff0dac153133a457e6d2c29c03c3dcbd35b3cb89de414844acce5cc07d2f4",
+    "research/experiments/EXP-GRAPH-34244445713/report.md sha256 03219214f311b4b38ece3e94b81e74aa751c3fa6dc180fb1d5b98a21ab25a424",
+    "research/experiments/EXP-GRAPH-34244445713/provenance.json",
+    "src/spider/kernel.py sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61 L112 candidates.sort(key=lambda m: m.confidence, reverse=True)",
+    "src/spider/models.py parameter_slots_field list[str] default_factory=list",
+    "src/spider/registry.py upsert sorted by mechanism_id, replace() used in experiment",
+    "research/experiments/EXP-GRAPH-34222171093/handoff.json sha256 2fd5c52e356f14fd16df4bfd77cefec1099e92a4d53840135ae946328eda096a parent BLOCKED"
+  ],
+  "unresolved": [
+    "Whether fix survives commit to production HEAD and resolves hazard for all unseen ids 2-7 without monkey-patching (first gate unmet)",
+    "Whether all 6 baselines remain passing after fix commit (cannot be tested from BLOCKED run)",
+    "Whether B_CONFIDENCE_LITERAL_HIGHER remains literal-winning after fix commit (strict confidence ordering under new sort key)",
+    "Whether param generalization holds across multiple unseen ids beyond 2-7 in committed HEAD",
+    "Whether fix generalizes to real-web endpoints with DOM, auth, session state, drift — jsonplaceholder is simple REST",
+    "Whether registry upsert sorting (production) interacts with fix tie-break differently than replace() used here",
+    "Whether _matches discriminates with non-empty preconditions and _bind preserves type for full-match strings (out of scope)",
+    "Whether LLM-driven mechanism distillation half of C-PARAM-INHERIT works (no model calls)"
+  ]
+}
+```
+
+## verdict.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34244445713",
+  "lane": "graph",
+  "decision": "BLOCKED",
+  "claim_updates": [
+    {
+      "claim_id": "C-PARAM-INHERIT",
+      "status": "EXPERIMENTAL",
+      "reason": "BLOCKED per frozen decision rule: fix not present in committed HEAD src/spider/kernel.py L112 (sha256 46929b3a, line 'candidates.sort(key=lambda m: m.confidence, reverse=True)'). Post-commit hazard elimination cannot be tested. Established only: (1) 6/6 baselines pass deterministically on unfixed HEAD; (2) null control B-CONFIDENCE-LITERAL-HIGHER preserved; (3) core hazard persists systematically (0/6 param wins, 6/6 literal wins at equal confidence 0.95 literal-before-param). NOT established: fix effectiveness, tie-break on len(parameter_slots), generalization beyond jsonplaceholder /posts/{id}."
+    }
+  ],
+  "product_action": "NO_ACTION",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "After committing the parameter-slot-count fix to production HEAD (candidates.sort key includes len(parameter_slots)): does the literal-vs-param equal-confidence competition resolve to param for all unseen ids 2-7 without monkey-patching, do all 6 baseline conditions pass, and does the corrected B_CONFIDENCE_LITERAL_HIGHER condition (literal 0.98 > param 0.95) remain literal-winning?",
+  "reason": "Experiment is BLOCKED per frozen decision rule gate 1: fix not present in committed HEAD src/spider/kernel.py L112. Kernel sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61 confirms no code change from parent experiment. All 13 conditions executed successfully (13/13 HTTP, 0 exceptions), but the primary gate (fix presence) failed. 6/6 baselines pass on unfixed HEAD (no regression). Core hazard persists: at equal confidence 0.95 with literal registered before param, literal wins for all unseen ids 2-7 (0/6 param wins). Null control passes (literal 0.98 > param 0.95 → literal wins). Auditor confirms BLOCKED status justified, no misclassification of diagnostic results as scientific falsification. The single blocking action remains: commit the one-line fix to src/spider/kernel.py L112 with Director approval, then re-run this exact frozen experiment.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-34244445713/request.json sha256 49e55f0d601f0478c5bd0a6f883854a1db27fbe77d76cefd68571437c0c70ad2",
+    "research/experiments/EXP-GRAPH-34244445713/spec.json sha256 687bc393a6c783c54fe898657fff544a1c5aa4cefd4d647d533a37ef813e8577",
+    "research/experiments/EXP-GRAPH-34244445713/freeze.json sha256 b0f2e8b90081f1525abda303da6ea30d2bc1059577fe9f1b86c6610a6207b4ca",
+    "research/experiments/EXP-GRAPH-34244445713/result.json sha256 322e8c53a1698dc8b922c24bb8a1fbd8ce63b4f94ea69485f48ddeceafd20c6a",
+    "research/experiments/EXP-GRAPH-34244445713/raw_evidence.json sha256 7cb058bde9befdae8c1b491feb7bf07f1f2e3decd8e4f717f782381031a7e86a",
+    "research/experiments/EXP-GRAPH-34244445713/audit.json status=PASS producer_claim_supported=false",
+    "research/experiments/EXP-GRAPH-34244445713/provenance.json",
+    "research/experiments/EXP-GRAPH-34244445713/report.md sha256 03219214f311b4b38ece3e94b81e74aa751c3fa6dc180fb1d5b98a21ab25a424",
+    "src/spider/kernel.py sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61 L112 unfixed",
+    "research/experiments/EXP-GRAPH-34222171093/handoff.json sha256 2fd5c52e356f14fd16df4bfd77cefec1099e92a4d53840135ae946328eda096a parent BLOCKED"
+  ]
+}
+```
+
+## handoff.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34244445713",
+  "lane": "graph",
+  "target_lane": "graph",
+  "next_question": "After committing the parameter-slot-count fix to production HEAD (candidates.sort key includes len(parameter_slots)): does the literal-vs-param equal-confidence competition resolve to param for all unseen ids 2-7 without monkey-patching, do all 6 baseline conditions pass, and does the corrected B_CONFIDENCE_LITERAL_HIGHER condition (literal 0.98 > param 0.95) remain literal-winning?",
+  "why_next": "The experiment is BLOCKED because the prerequisite fix (len(parameter_slots) as secondary sort key in src/spider/kernel.py L112) has not been committed to production HEAD. The frozen decision rule requires fix presence as gate 1 before the post-commit hazard question can be answered. All 13 conditions executed successfully on unfixed HEAD (6/6 baselines pass, null control passes, 0/6 hazard elimination confirms the hazard persists). The next experiment must wait for the fix to be committed before re-running this exact frozen spec. No new measurements are needed — the same spec suffices once the prerequisite is met.",
+  "carry_forward": {
+    "established": [
+      "Fix NOT present in committed HEAD src/spider/kernel.py L112 (sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61, line 'candidates.sort(key=lambda m: m.confidence, reverse=True)') — BLOCKED per frozen decision rule",
+      "6/6 baseline conditions pass deterministically on unfixed HEAD: B-COLD UNKNOWN, B-LITERAL-ONLY-ORIG/UNSEEN → /posts/1 id=1 (literal non-generalization), B-PARAM-ONLY-ORIG → /posts/1 id=1 and UNSEEN → /posts/7 id=7 (param generalization via ${id} binding), B-COMPETE-PARAM-HIGHER param 0.98 beats literal 0.95 → /posts/7 id=7",
+      "Null control B-CONFIDENCE-LITERAL-HIGHER preserved: literal 0.98 beats param 0.95 → /posts/1 id=1, strict confidence ordering not overridden",
+      "Core hazard persists systematically without fix: at equal confidence 0.95 with literal registered before param (worst-case insertion order), literal wins for ALL unseen ids 2-7 (0/6 param wins, 6/6 literal wins, stable insertion-order tie-break confirmed by auditor independent replay)",
+      "No exceptions, no network failures, 13/13 HTTP successes against jsonplaceholder.typicode.com",
+      "Auditor verified BLOCKED status justified, no misclassification of diagnostic hazard results as scientific falsification",
+      "Claim C-PARAM-INHERIT remains EXPERIMENTAL — no SURVIVES_POST_COMMIT or FALSIFIED_POST_COMMIT possible until fix is committed"
+    ],
+    "rejected": [
+      "Post-commit hazard elimination claim (fix not committed — prerequisite unmet, cannot test)",
+      "Any scientific falsification of the fix (diagnostic hazard results on unfixed HEAD are expected behavior, not evidence against fix effectiveness)"
+    ],
+    "unknown": [
+      "Whether the fix survives commitment to production HEAD and resolves the hazard for all unseen ids 2-7 without monkey-patching",
+      "Whether all 6 baselines remain passing after fix commit (cannot be tested from BLOCKED run)",
+      "Whether B_CONFIDENCE_LITERAL_HIGHER remains literal-winning after fix commit (strict confidence ordering under new sort key with len(parameter_slots) as secondary key)",
+      "Whether param generalization holds across multiple unseen ids beyond 2-7 in committed HEAD",
+      "Whether fix generalizes to real-web endpoints with DOM, auth, session state, drift (jsonplaceholder is simple REST)",
+      "Whether registry upsert sorting (production) interacts with fix tie-break differently than replace() used in experiment",
+      "Whether LLM-driven mechanism distillation half of C-PARAM-INHERIT works (no model calls in this experiment)"
+    ],
+    "do_not_assume": [
+      "Fix is committed (verified unfixed at experiment time — kernel sha256 46929b3a unchanged from parent)",
+      "Post-commit behavior matches monkey-patched behavior (no monkey-patching was used; fix must be in committed code)",
+      "Core hazard test results (0/6 param wins) constitute falsification of the fix (they are diagnostic on unfixed HEAD, not evidence against fix effectiveness)",
+      "Production-readiness (jsonplaceholder is simple REST; no DOM, auth, session state, drift)",
+      "Generalization beyond single intent (fetch-post), single endpoint (/posts/{id}), preconditions={}, deterministic n=1",
+      "Fix was applied or tested in any way (experiment ran on committed HEAD exactly as designed, no modification)"
+    ]
+  },
+  "dependencies": [
+    "The one-line fix must be committed to src/spider/kernel.py L112: candidates.sort(key=lambda m: (m.confidence, len(m.parameter_slots)), reverse=True) with Director approval",
+    "After fix commit, the exact same frozen spec (EXP-GRAPH-34244445713 or successor) must be re-executed against committed HEAD without monkey-patching",
+    "Measurement validity controls must be preserved: fresh kernel per condition, deterministic n=1, HTTP id verification against jsonplaceholder.typicode.com, registry insertion order literal before param (worst-case), no cross-contamination, 5s timeout"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-34244445713/request.json sha256 49e55f0d601f0478c5bd0a6f883854a1db27fbe77d76cefd68571437c0c70ad2",
+    "research/experiments/EXP-GRAPH-34244445713/spec.json sha256 687bc393a6c783c54fe898657fff544a1c5aa4cefd4d647d533a37ef813e8577",
+    "research/experiments/EXP-GRAPH-34244445713/result.json sha256 322e8c53a1698dc8b922c24bb8a1fbd8ce63b4f94ea69485f48ddeceafd20c6a",
+    "research/experiments/EXP-GRAPH-34244445713/raw_evidence.json sha256 7cb058bde9befdae8c1b491feb7bf07f1f2e3decd8e4f717f782381031a7e86a",
+    "research/experiments/EXP-GRAPH-34244445713/audit.json status=PASS producer_claim_supported=false claim_ceiling=BLOCKED",
+    "research/experiments/EXP-GRAPH-34244445713/provenance.json",
+    "research/experiments/EXP-GRAPH-34244445713/report.md sha256 03219214f311b4b38ece3e94b81e74aa751c3fa6dc180fb1d5b98a21ab25a424",
+    "src/spider/kernel.py sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61 L112 unfixed",
+    "src/spider/models.py parameter_slots_field list[str] default_factory=list",
+    "src/spider/registry.py upsert sorted by mechanism_id replace() used in experiment",
+    "research/experiments/EXP-GRAPH-34222171093/handoff.json sha256 2fd5c52e356f14fd16df4bfd77cefec1099e92a4d53840135ae946328eda096a parent BLOCKED"
+  ],
+  "recommended_action": "Commit the one-line fix to src/spider/kernel.py L112 (candidates.sort key includes len(parameter_slots)) with Director approval, then re-run this exact frozen experiment against committed HEAD. Do not weaken the design or skip the fix-verification gate. The same 13-condition spec with identical controls is sufficient."
 }
 ```
 

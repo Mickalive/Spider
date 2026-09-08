@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34244445713",
+  "lane": "graph",
+  "github_run_id": "34244445713",
+  "git_commit": "a3044bfe58c0032d05fc6867e168c3746a07605c",
+  "git_commit_message": "R2 graph: execution base EXP-GRAPH-34244445713",
+  "base_sha_from_request": "2e55e50f6b0bd79b7648b79bfc801a642d1c9c37",
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.x",
+    "model_id": "opencode/mimo-v2.5-free"
+  },
+  "datasets_fixtures": [
+    "jsonplaceholder.typicode.com/posts/{id} (live HTTP endpoint)"
+  ],
+  "code_paths": {
+    "kernel": {
+      "path": "src/spider/kernel.py",
+      "sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+      "fix_present": false,
+      "line_112": "candidates.sort(key=lambda m: m.confidence, reverse=True)"
+    },
+    "models": {
+      "path": "src/spider/models.py",
+      "parameter_slots_field": "list[str] default_factory=list"
+    },
+    "registry": {
+      "path": "src/spider/registry.py",
+      "upsert_sorting": "sorted by mechanism_id"
+    },
+    "experiment_script": {
+      "path": "research/experiments/EXP-GRAPH-34244445713/run_experiment.py",
+      "sha256": "1fdff0dac153133a457e6d2c29c03c3dcbd35b3cb89de414844acce5cc07d2f4"
+    }
+  },
+  "frozen_inputs": {
+    "request_json_sha256": "49e55f0d601f0478c5bd0a6f883854a1db27fbe77d76cefd68571437c0c70ad2",
+    "spec_json_sha256": "687bc393a6c783c54fe898657fff544a1c5aa4cefd4d647d533a37ef813e8577",
+    "prereg_md_sha256": "f7368371532d1441cd024e4ac2de0c489fc504e0a9b89e6046a22db4881eb86b",
+    "freeze_json_sha256": "b0f2e8b90081f1525abda303da6ea30d2bc1059577fe9f1b86c6610a6207b4ca"
+  },
+  "artifacts": {
+    "raw_evidence": {
+      "path": "research/experiments/EXP-GRAPH-34244445713/raw_evidence.json",
+      "sha256": "7cb058bde9befdae8c1b491feb7bf07f1f2e3decd8e4f717f782381031a7e86a"
+    },
+    "result_json": {
+      "path": "research/experiments/EXP-GRAPH-34244445713/result.json",
+      "sha256": "322e8c53a1698dc8b922c24bb8a1fbd8ce63b4f94ea69485f48ddeceafd20c6a"
+    },
+    "report_md": {
+      "path": "research/experiments/EXP-GRAPH-34244445713/report.md",
+      "sha256": "03219214f311b4b38ece3e94b81e74aa751c3fa6dc180fb1d5b98a21ab25a424"
+    },
+    "kernel_py": {
+      "path": "src/spider/kernel.py",
+      "sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61"
+    }
+  },
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-34222171093",
+    "path": "research/experiments/EXP-GRAPH-34222171093/handoff.json",
+    "sha256": "2fd5c52e356f14fd16df4bfd77cefec1099e92a4d53840135ae946328eda096a"
+  },
+  "execution_commands": [
+    "python3 research/experiments/EXP-GRAPH-34244445713/run_experiment.py"
+  ],
+  "execution_timestamp": "2026-09-08T22:00:00+00:00"
+}
