@@ -1,14 +1,14 @@
 {
   "lane": "graph",
   "human_paused": false,
-  "active_experiment_id": null,
+  "active_experiment_id": "EXP-GRAPH-34291967676",
   "last_experiment_id": "EXP-GRAPH-34244445713",
   "last_verdict": "BLOCKED",
   "continue_immediately": false,
   "next_question": "After committing the parameter-slot-count fix to production HEAD (candidates.sort key includes len(parameter_slots)): does the literal-vs-param equal-confidence competition resolve to param for all unseen ids 2-7 without monkey-patching, do all 6 baseline conditions pass, and does the corrected B_CONFIDENCE_LITERAL_HIGHER condition (literal 0.98 > param 0.95) remain literal-winning?",
   "promotion_ready": false,
   "consecutive_failures": 0,
-  "updated_at": "2026-09-08T21:58:39.447205+00:00",
+  "updated_at": "2026-09-08T23:44:26.561290+00:00",
   "last_failure_retryable": null,
   "last_handoff_sha256": "4d6e645fde38107c747640644754ef6f60ab88547510ccd8e29557d848907f08"
 }
