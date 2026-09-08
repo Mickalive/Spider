@@ -1,17 +1,32 @@
 {
   "experiment_id": "EXP-GRAPH-34222171093",
   "lane": "graph",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-PARAM-INHERIT"],
+  "question": "After committing the parameter-slot-count fix to production HEAD (candidates.sort key includes len(parameter_slots)): does the literal-vs-param equal-confidence competition resolve to param for all unseen ids 2-7 without monkey-patching, do all 6 baseline conditions pass, and does the corrected B_CONFIDENCE_LITERAL_HIGHER condition (literal 0.98 > param 0.95) remain literal-winning?",
+  "hypothesis": "The one-line fix to src/spider/kernel.py L112, once committed to HEAD, eliminates the false-accept hazard: at equal confidence 0.95 with literal registered before param, the resolution mechanism will choose param (which has more parameter_slots) over literal for unseen identifiers. This is because the sort key (confidence, len(parameter_slots)) now breaks ties in favor of parameterized mechanisms. All 6 baseline conditions from prior experiments (cold UNKNOWN, literal-only-original, literal-only-unseen, param-only-original, param-only-unseen, compete-param-higher) remain unchanged. The B_CONFIDENCE_LITERAL_HIGHER condition (literal 0.98 vs param 0.95) remains literal-winning because literal has strictly higher confidence.",
+  "falsifier": "ANY of: (a) compete-equal on fixed HEAD resolves to literal for ANY unseen id in {2,3,4,5,6,7} (the core hazard persists post-commit); (b) ANY of the 6 baseline conditions fails on fixed HEAD (regression); (c) B_CONFIDENCE_LITERAL_HIGHER resolves to param instead of literal (confidence ordering broken); (d) fix line is absent from committed HEAD src/spider/kernel.py L112 (commit failed); (e) _bind produces unsubstituted template strings for param conditions.",
+  "baselines": [
+    "B-COLD-UNKNOWN: no mechanisms registered, intent 'fetch-post' with params {} -> Resolution UNKNOWN",
+    "B-LITERAL-ONLY-ORIG: only literal mechanism for id=1 registered, params {id:1} -> resolves to /posts/1, HTTP 200, id=1",
+    "B-LITERAL-ONLY-UNSEEN: only literal mechanism for id=1 registered, params {id:7} -> resolves to /posts/1 (literal does not generalize), HTTP 200, id=1",
+    "B-PARAM-ONLY-ORIG: only param mechanism registered, params {id:1} -> resolves to /posts/1, HTTP 200, id=1",
+    "B-PARAM-ONLY-UNSEEN: only param mechanism registered, params {id:7} -> resolves to /posts/7 (param generalizes), HTTP 200, id=7",
+    "B-COMPETE-PARAM-HIGHER: param (conf 0.98) vs literal (conf 0.95), params {id:7} -> param wins, resolves to /posts/7, HTTP 200, id=7"
+  ],
+  "positive_control": "B-COMPETE-PARAM-HIGHER passes: param (0.98) beats literal (0.95) for unseen id=7. This verifies the resolution mechanism correctly favors higher-confidence candidates and that the fix does not disrupt confidence-based ordering.",
+  "null_control": "B-LITERAL-HIGHER-CONF (literal 0.98 vs param 0.95) resolves to literal for unseen id=7. This verifies the fix does not override strict confidence ordering — parameter_slots only matters as a tie-break when confidence is equal.",
+  "measurement_validity": [
+    "Fix is committed to src/spider/kernel.py HEAD before any test execution (verified by inspecting L112)",
+    "No monkey-patching: all tests run against committed kernel code directly",
+    "Each condition is a deterministic resolution call with frozen mechanism registry state",
+    "HTTP verification: each resolution endpoint is fetched and response id field checked",
+    "Unseen ids 2-7 tested to confirm hazard elimination across the full range (not just id=7)",
+    "Seed=42 for all RNG where applicable",
+    "Mechanism registry is rebuilt fresh for each condition to avoid cross-contamination"
+  ],
+  "decision_rule": "SURVIVES_POST_COMMIT if ALL of: (1) compete-equal resolves to param for ALL unseen ids 2-7 (0/6 literal wins); (2) all 6 baseline conditions pass (B-COLD-UNKNOWN, B-LITERAL-ONLY-ORIG, B-LITERAL-ONLY-UNSEEN, B-PARAM-ONLY-ORIG, B-PARAM-ONLY-UNSEEN, B-COMPETE-PARAM-HIGHER); (3) B-LITERAL-HIGHER-CONF resolves to literal (null control); (4) fix line present at src/spider/kernel.py L112 with parameter_slots in sort key; (5) no unsubstituted templates. FALSIFIES_POST_COMMIT if ANY of: (1) compete-equal resolves to literal for any unseen id 2-7; (2) any baseline fails; (3) null control fails; (4) fix line absent. MEASUREMENT_INVALID if: (1) commit fails or cannot be verified; (2) HTTP endpoints unreachable; (3) infrastructure prevents execution.",
+  "product_consequence_positive": "Core false-accept hazard eliminated in production HEAD. C-PARAM-INHERIT advances from EXPERIMENTAL with a validated fix. The parameter mechanism correctly wins tie-breaks against literal for unseen identifiers. Product can proceed to real-web generalization testing (DOM, auth, session, drift) as the next gate.",
+  "product_consequence_negative": "If the fix fails to eliminate the hazard in committed HEAD, the mechanism is either insufficient (tie-breaking on parameter_slots is not the right criterion) or the commit process altered behavior. Product cannot proceed to real-web testing until the hazard is resolved. The fix may need revision or a different tie-breaking strategy.",
+  "estimated_cost": "Low: deterministic resolution calls against local HTTP server (jsonplaceholder), no LLM calls, no browser automation. ~20 resolution calls + 6 HTTP verifications + baseline checks. Estimated wall time < 5 minutes.",
+  "expected_information_gain": "High: this is the gate between BLOCKED and progressing to real-web testing. A positive result validates the fix in committed code and unblocks the highest-upside generalization gap (real-web endpoints with DOM, auth, session, drift). A negative result identifies a regression or insufficient fix. Either outcome materially changes the C-PARAM-INHERIT claim status."
 }
