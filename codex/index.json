@@ -351,6 +351,31 @@
         "handoff.json": "92b95d054dfedc48d99ad6c56ca23f6ad80172107fa378355da8db5cce90620c"
       }
     },
+    "EXP-GRAPH-34222171093": {
+      "lane": "graph",
+      "request_id": "15f0af4523477a46175f2345",
+      "created_at": "2026-09-08T11:43:22.770720+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT"
+      ],
+      "question": "After committing the parameter-slot-count fix to production HEAD (candidates.sort key includes len(parameter_slots)): does the literal-vs-param equal-confidence competition resolve to param for all unseen ids 2-7 without monkey-patching, do all 6 baseline conditions pass, and does the corrected B_CONFIDENCE_LITERAL_HIGHER condition (literal 0.98 > param 0.95) remain literal-winning?",
+      "audit_status": "PASS",
+      "decision": "BLOCKED",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/graph",
+      "hashes": {
+        "request.json": "c48613bd90a76990a0622d94b3ead95384fcfa30d05d9df244baf5de268c24f9",
+        "spec.json": "963de61d99b995b02728e167cad65290f2310744510521571fb99539ba0703f3",
+        "prereg.md": "32de18e0ca11597772c688177506cc2a563ac9b144e4712714bb59cb32c8286c",
+        "freeze.json": "6cb40f94a31ff89e2c6098be6d838753acbc3b2ba11e33c1281443be7b361428",
+        "result.json": "50b01f09ac4d620a3e9c6806e21defbd20829a85b17f2a9f390fe4f4efae8d69",
+        "report.md": "33ca665a54f6578376c30b4275e0ea31a8327bb2ed04e9ed7e0ab1e7f604f0ed",
+        "provenance.json": "c87935d24f5b6c919c2107f23e947cfba15a362d9a60516647cb0e471403b95b",
+        "audit.json": "629ef51ace7f169a01cae11e46c948c3da4b8a673a8b200f1c8fdb4528810825",
+        "verdict.json": "09b0cc2a90783fa342381ad34a80149e6eb4d767bcab9a45758ee372bd03b6d8",
+        "handoff.json": "2fd5c52e356f14fd16df4bfd77cefec1099e92a4d53840135ae946328eda096a"
+      }
+    },
     "EXP-INTEL-33528832113": {
       "lane": "intel",
       "request_id": "46d19fdaf32e996c0ab24bd7",
