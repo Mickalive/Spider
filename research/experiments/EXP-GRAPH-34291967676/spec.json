@@ -1,17 +1,33 @@
 {
   "experiment_id": "EXP-GRAPH-34291967676",
   "lane": "graph",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-PARAM-INHERIT"],
+  "question": "After committing the parameter-slot-count tie-break fix to src/spider/kernel.py L112 (sort key includes len(parameter_slots)), does the literal-vs-param equal-confidence competition resolve to param for all unseen ids 2-7 without monkey-patching, do all 6 baseline conditions pass on committed HEAD, does the corrected B_CONFIDENCE_LITERAL_HIGHER condition (literal 0.98 > param 0.95) remain literal-winning, and does the fix interact correctly with registry upsert sorting (production-like ordering)?",
+  "hypothesis": "With the fix committed to production HEAD, when a literal mechanism and a parametrized mechanism have equal confidence (0.95) and the literal is registered before the param (worst-case insertion order), the resolve() function will select the param mechanism for all unseen ids 2-7 because param has more parameter_slots (len >= 1) than literal (len = 0), and the sort key (confidence, len(parameter_slots)) breaks the tie in favor of param. Additionally, all 6 baseline conditions (cold, literal-only orig/unseen, param-only orig/unseen, compete-param-higher) remain unchanged, B_CONFIDENCE_LITERAL_HIGHER (literal 0.98 > param 0.95) remains literal-winning because strict confidence ordering is not overridden by the fix, and the fix remains effective under registry upsert sorting (production-like ordering by mechanism_id).",
+  "falsifier": "ANY of: (a) compete-equal resolves to literal for any of unseen ids 2-7 (hazard persists despite fix); (b) any of the 6 baseline conditions regress (fail to match expected outcome); (c) B_CONFIDENCE_LITERAL_HIGHER resolves to param instead of literal (fix overrides confidence ordering); (d) fix is not present in committed HEAD (src/spider/kernel.py L112 sort key does not include len(parameter_slots)), in which case status=BLOCKED; (e) HTTP execution fails for any condition (network/endpoint failure); (f) any exception or crash during resolution; (g) compete-equal under upsert sorting resolves to literal for unseen id=7 (fix fails under production-like ordering).",
+  "baselines": [
+    "B-COLD: Empty registry, intent 'fetch-post' → UNKNOWN (no applicable validated mechanism)",
+    "B-LITERAL-ONLY-ORIG: Literal mechanism for /posts/1 only, context id=1 → EXECUTABLE url=/posts/1, HTTP 200, id=1",
+    "B-LITERAL-ONLY-UNSEEN: Literal mechanism for /posts/1 only, context id=7 → EXECUTABLE url=/posts/1, HTTP 200, id=1 (literal does not generalize)",
+    "B-PARAM-ONLY-ORIG: Param mechanism for /posts/{id} only, context id=1 → EXECUTABLE url=/posts/1, HTTP 200, id=1",
+    "B-PARAM-ONLY-UNSEEN: Param mechanism for /posts/{id} only, context id=7 → EXECUTABLE url=/posts/7, HTTP 200, id=7 (param generalizes)",
+    "B-COMPETE-PARAM-HIGHER: Param (0.98) vs literal (0.95), context id=7 → param wins, EXECUTABLE url=/posts/7, HTTP 200, id=7",
+    "C-EQUAL-UPSERT-ID7: equal confidence 0.95, literal registered first via upsert (production-like ordering), context id=7 → param wins, EXECUTABLE url=/posts/7, HTTP 200, id=7"
+  ],
+  "positive_control": "B-COMPETE-PARAM-HIGHER: When param confidence (0.98) exceeds literal confidence (0.95), param must win for unseen id=7. This verifies confidence ordering works correctly and is not broken by the fix.",
+  "null_control": "B-CONFIDENCE-LITERAL-HIGHER: When literal confidence (0.98) exceeds param confidence (0.95), literal must win for unseen id=7. This verifies the fix does not override strict confidence ordering. Additionally, the BLOCKED-control: if fix is not present in HEAD, experiment must emit status=BLOCKED, not FALSIFIES or SUPPORTS.",
+  "measurement_validity": [
+    "All conditions are deterministic: no model calls, no RNG, no sampling. Single-run exact point comparisons.",
+    "HTTP execution against live endpoint jsonplaceholder.typicode.com with 5-second timeout per request.",
+    "Each condition uses a fresh kernel instance with explicitly controlled registry contents. No cross-contamination between conditions.",
+    "Registry insertion order controlled: literal registered before param in all shared-equal conditions (worst-case for param). For upsert conditions, mechanisms inserted sequentially with upsert; final ordering determined by mechanism_id sorting.",
+    "Fix presence verified by inspecting src/spider/kernel.py L112 sort key before execution.",
+    "No monkey-patching or runtime modification of kernel.py during execution.",
+    "HTTP response id field verified against expected id for each condition."
+  ],
+  "decision_rule": "SURVIVES_POST_COMMIT if ALL of: (1) fix is present in committed HEAD (L112 sort key includes len(parameter_slots)); (2) compete-equal resolves to param for ALL unseen ids 2-7 (6/6 param wins); (3) all 6 baselines pass (6/6); (4) B_CONFIDENCE_LITERAL_HIGHER resolves to literal (literal 0.98 wins); (5) no exceptions or crashes; (6) no monkey-patching; (7) C-EQUAL-UPSERT-ID7 resolves to param (fix works under upsert). FALSIFIED-POST-COMMIT if: fix is present but (a) compete-equal resolves to literal for any unseen id, OR (b) any baseline regresses, OR (c) B_CONFIDENCE_LITERAL_HIGHER resolves to param, OR (d) C-EQUAL-UPSERT-ID7 resolves to literal. BLOCKED if: fix is not present in committed HEAD (L112 sort key does not include len(parameter_slots)). MEASUREMENT_INVALID if: HTTP failures, exceptions, or infrastructure issues prevent measurement.",
+  "product_consequence_positive": "SURVIVES_POST_COMMIT means the core false-accept hazard is eliminated in committed production code, and the fix is robust under production-like registry ordering. The parameter-slot-count tie-break correctly favors parametrized mechanisms over literal mechanisms at equal confidence, enabling safe param generalization to unseen identifiers. This is a prerequisite for advancing C-PARAM-INHERIT toward real-web testing (the highest-upside generalization gap). Product can proceed to test parameterized inheritance on real endpoints with DOM, auth, session state, and drift.",
+  "product_consequence_negative": "FALSIFIED-POST-COMMIT means the fix does not work as intended in committed code, or fails under upsert sorting. The hazard persists or new regressions are introduced. Product cannot advance to real-web testing. Root cause analysis required: is the sort key incorrect? Does registry upsert sorting interact differently with the tie-break than replace()? Is there a code path that bypasses the sort?",
+  "estimated_cost": "Very low: deterministic single-run resolution against live endpoint, 14 conditions total, no model calls, no browser automation, no RNG. ~14 HTTP requests with 5s timeout each. Total execution < 2 minutes.",
+  "expected_information_gain": "High: This is the critical gate between BLOCKED and SURVIVES_POST_COMMIT for C-PARAM-INHERIT. A positive result unblocks the highest-upside generalization gap (real-web testing) and confirms production-like ordering compatibility. A negative result identifies a specific code-level failure or upsert interaction. A BLOCKED result confirms the prerequisite is still unmet. The experiment directly resolves the parent handoff's inherited next_question and can change the claim status from EXPERIMENTAL to a narrower ceiling or to REJECTED."
 }
