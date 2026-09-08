@@ -1,0 +1,285 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34149195420",
+  "lane": "physics",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Narrow claimed ceiling from 'richer BrowserState representations capture dynamical structure invisible at URL level in non-leakage SPA regimes' to 'PMI pipeline detects synthetic deterministic structure and title-aware PMI > URL-only PMI on this synthetic SPA dataset': URL-only PMI is significantly >0 (0.693 bits p=0.001), so structure is not invisible at URL level; improvement is 184% additional information, not 0->positive. Revise report executive summary and product_consequence_positive accordingly.",
+    "Disclose that form_signals add zero marginal information (url_title_form PMI 1.970 == url_title 1.970) because titles uniquely identify states in synthetic design; H3 is untested. Do not claim product lane should incorporate form_signals based on this experiment; flag as unresolved requiring real data where titles are ambiguous.",
+    "Correct null_control prereg wording vs implementation: spec says 'p >0.05' but producer implements scientifically correct 'shuffled NOT > observed' as count<5% (p=0.0 passes). Either fix spec phrasing to 'P(shuffled > observed) <0.05 passes' or report both the literal (p+1)/(N+1) =0.001 and empirical 0/1000 proportion, noting the inversion is intentional and provenance documents prior bug fix (execution_github_run_id 34161320909 failure code 66).",
+    "Disclose PMI smoothing bias: compute_pmi_stats uses Laplace alpha=1.0 for marginals P(a|s), P(s'|s) but unsmoothed P(a,s'|s). This inflates mean PMI >0 even under null (null_mean url_only 0.020, url_title 0.122) and inflates effect sizes (d 72-80 due to null_std 0.009-0.023). Report sensitivity to alpha=0.5/0/2.0 or include unsmoothed variant to bound inflation.",
+    "Acknowledge synthetic-to-real gap as blocking product promotion: deterministic 8-state, 4-action, fully observed, title-perfect discriminator world does not test stochastic transitions, noisy/missing titles, or real SPA heterogeneity. Required next experiment is real SPA/form-heavy browser transitions before any Product Core change.",
+    "Report permutation resolution limit: with 1000 perms p=0.000999 is the minimum achievable; identical p across all three representations (0.000999) reflects resolution floor, not equal evidence. Provide exact count (0/1000 exceed) and note that effect sizes d are driven by tiny null variance, not by large sample heterogeneity."
+  ],
+  "validity_findings": [
+    {
+      "id": "recomputation_match",
+      "severity": "info",
+      "finding": "All material metrics recomputed from frozen code and seed 42 match producer exactly: url_only 0.6933101309975662, url_title 1.9701557636973992, url_title_form 1.9701557636973992, positive_control 1.9114573396484875, url_only p 0.000999 d72.662, url_title p 0.000999 d80.268, null_control 0/1000 shuffled>observed null_mean 0.12176, N 500/25 trajectories, unique_states 3->8, SA pairs 12->32. Re-execution via research/physics/information_theoretic/spa_pmi.py reproduces raw_results.json.",
+      "evidence_ref": "research/physics/information_theoretic/spa_pmi.py sha256 8d6db688de638c5e826fa6dd4c946d5d4de59348e03685996cc9bdfc70cf8eac; research/experiments/EXP-PHYSICS-34149195420/raw_results.json sha256 ef794187b6acb3b4d83c6fa3070bec85497c22933d3640f0c0827823a8eb97a9; result.json metrics",
+      "status": "PASS"
+    },
+    {
+      "id": "non_leakage_verified",
+      "severity": "info",
+      "finding": "Non-leakage verified: 0 violations for 500 primary + 200 positive_control transitions. target_href is dummy http://dummy.test/action_* never equals state_after.url by construction. Origin requirement (action.target_href != state_after.url) satisfied.",
+      "evidence_ref": "research/physics/information_theoretic/spa_pmi.py verify_non_leakage; result.json metrics non_leakage_violations 0; raw_results.json primary_dataset non_leakage_violations 0",
+      "status": "PASS"
+    },
+    {
+      "id": "sampling_density_avoids_sparse_regime",
+      "severity": "info",
+      "finding": "Sampling avoids unique-SA forced-zero regime that falsified parent: 500 transitions over 32 SA (title-aware) ~15.6 each, over 12 SA (URL-only) ~41.6 each. Ensures SA pairs are not unique and PMI not mathematically forced to 0. Satisfies spec measurement_validity states >=3 actions per state distinct next-states and 500/25x20 design.",
+      "evidence_ref": "spec.json measurement_validity[2][3][5]; raw_results.json pmi_by_representation unique_sa_pairs 12/32",
+      "status": "PASS"
+    },
+    {
+      "id": "url_only_not_zero_H1_violated",
+      "severity": "major",
+      "finding": "Pre-registered H1 expected URL-only PMI <0.1 and 'indistinguishable from zero' due to structural ambiguity. Observed 0.693 bits p=0.001 d=72.7 significantly >0, violating H1. Root cause: 3 URL-level states have heterogeneous visitation (dashboard 209, form 178, settings 113) and distinct marginal action/next distributions, so URL-level states are not exchangeable. Structural ambiguity is partial, not complete. Producer report correctly acknowledges this but decision_rule does not falsify on H1 miss; claim of 'invisible at URL level' is thus overstated. Correct interpretation is additional, not exclusive, information from titles (+1.277 bits, 184%).",
+      "evidence_ref": "prereg.md 4.H1; spec.json hypothesis; result.json metrics url_only_pmi 0.693 url_only_permutation_p 0.000999; report.md 'URL-only PMI is not zero (0.693)'; raw_results.json pmi_by_representation url_only",
+      "status": "FAIL"
+    },
+    {
+      "id": "synthetic_deterministic_tautology",
+      "severity": "major",
+      "finding": "Synthetic world is tautological low bar: 8 states deterministic (state,action)->next_state with title as perfect discriminator, sampled randomly 25x20. Pipeline detecting known deterministic structure is pipeline validation, not evidence for C-WEB-DYNAMICS on real web. Does not test stochastic dynamics, noise, or genuine web dynamical structure beyond the constructed mapping. Supports survivability of PMI pipeline in non-leakage regime but not C-WEB-DYNAMICS generally.",
+      "evidence_ref": "research/physics/information_theoretic/spa_pmi.py STATES TRANSITIONS deterministic; prereg.md 5.1; provenance.json random_seed 42",
+      "status": "FAIL"
+    },
+    {
+      "id": "form_signals_redundant_H3_untested",
+      "severity": "major",
+      "finding": "H3 (form signals add marginal information) untested because design makes form_signals redundant with title: 8 unique titles already uniquely identify states so url_title_form has identical 8 states, 32 SA, PMI 1.970 as url_title. No discrimination possible. Producer validity_notes correctly state redundancy, but spec baseline 'URL+title+form_signals' provides no independent test.",
+      "evidence_ref": "research/physics/information_theoretic/spa_pmi.py STATES form_signals; raw_results.json pmi_by_representation url_title_form mean_pmi 1.970155; result.json observations[2]",
+      "status": "FAIL"
+    },
+    {
+      "id": "pmi_smoothing_asymmetry_bias",
+      "severity": "major",
+      "finding": "compute_pmi_stats uses smoothed marginals (alpha=1.0) but unsmoothed joint P(a,s'|s)=count/N_s. This asymmetry inflates PMI positive even under null (null means 0.020 url_only, 0.122 url_title) and contributes to large effect sizes. Prior experiments used same scheme so comparable, but absolute bits not interpretable as true mutual information without sensitivity analysis. Not disclosed as validity threat beyond generic Laplace note.",
+      "evidence_ref": "research/physics/information_theoretic/spa_pmi.py compute_pmi_stats L210-233 p_a_given_s p_s_next_given_s smoothed vs p_joint_given_s unsmoothed; raw_results.json permutation_tests null_mean 0.02031/0.12176",
+      "status": "FAIL"
+    },
+    {
+      "id": "permutation_resolution_floor",
+      "severity": "minor",
+      "finding": "Permutation p=0.000999 is minimum achievable with 1000 perms ((0+1)/1001). Identical p across all three representations (url_only, url_title, url_title_form) and positive control reflects resolution floor, not equal strength. Effect sizes differ (72.66 vs 80.26) but are inflated by tiny null_std (0.009-0.023). Producer correctly reports Bonferroni threshold 0.025 but does not disclose p resolution limit.",
+      "evidence_ref": "research/physics/information_theoretic/spa_pmi.py permutation_test p_value (count_gt+1)/(N+1); result.json metrics url_only_permutation_p 0.000999 etc; raw_results.json permutation_tests",
+      "status": "FAIL"
+    },
+    {
+      "id": "null_control_direction_fix_documented",
+      "severity": "minor",
+      "finding": "Spec null_control wording 'p >0.05 passes' is literal opposite of correct directional test (small p means shuffled clearly NOT > observed, so passes). Producer code correctly inverts to count<5% (0/1000 passes) and provenance documents prior failure (github_run 34161320909 exit 66 due to p direction bug) with fix separating null control from significance test. Literal spec vs implementation divergence is acknowledged and scientifically correct, but is a prereg deviation that must be disclosed.",
+      "evidence_ref": "spec.json null_control: 'Shuffled PMI must not be significantly > observed PMI (permutation p > 0.05)'; research/physics/information_theoretic/spa_pmi.py L382-406 null_passes logic; provenance.json execution_notes bug fix; result.json controls.null_control",
+      "status": "PASS"
+    },
+    {
+      "id": "cross_trajectory_null_valid",
+      "severity": "info",
+      "finding": "Cross-trajectory shuffle (permute entire action sequences across trajectories) validly preserves trajectory structure and marginal action frequencies while breaking action->outcome dependency, addressing parent's degenerate within-trajectory singleton issue (30/47 wiki groups singleton). Reassembled triples keep (s, s_next) coupling intact, isolating action-conditioned information as intended per prereg.",
+      "evidence_ref": "research/physics/information_theoretic/spa_pmi.py cross_trajectory_shuffle; prereg.md 8.1; spec.json baselines cross-trajectory",
+      "status": "PASS"
+    },
+    {
+      "id": "positive_control_passes_but_low_bar",
+      "severity": "info",
+      "finding": "Positive control PMI 1.911 >=0.5 p=0.001 passes; verifies pipeline detects deterministic structure in same data format with unique URLs (no ambiguity). However positive control uses same deterministic generative mechanism as primary, so not strong independent baseline; threshold 0.5 is low relative to observed 1.9. Still satisfies frozen decision check.",
+      "evidence_ref": "spec.json positive_control PMI >=0.5; result.json controls.positive_control pass true PMI 1.911; raw_results.json positive_control",
+      "status": "PASS"
+    },
+    {
+      "id": "provenance_complete",
+      "severity": "info",
+      "finding": "Provenance complete: git commit 385489e95d30e140f134ba8c6811f1048c5efa49, base_sha eaa317b85ad8673df891cf9b5008bfc271d75486, frozen hashes verified, code artifact sha matches, prior failure documented with retry, environment python 3.x numpy 2.5.3 seed 42 PYTHONHASHSEED 0. Execution notes disclose bug fix transparently.",
+      "evidence_ref": "provenance.json frozen_inputs, code_artifacts, execution_notes; freeze.json hashes",
+      "status": "PASS"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "url_only_state_PMI",
+      "expected": "Mean PMI <0.1 near zero due to URL-level structural ambiguity (prereg H1)",
+      "observed": "0.693310 bits p=0.000999 d=72.66 null_mean 0.020 null_std 0.009 unique_states 3 SA12",
+      "pass_fail": "FAIL",
+      "evidence_ref": "result.json metrics url_only_pmi; raw_results.json pmi_by_representation url_only; permutation_tests url_only",
+      "notes": "Significantly >0 contrary to H1 but passes frozen richer_vs_url_only check. Captures URL-level heterogeneity (unequal state visitation) - not a clean null baseline."
+    },
+    {
+      "id": "url_title_state_PMI",
+      "expected": "Significantly >0 p<0.025 Bonferroni, and > url_only",
+      "observed": "1.970156 bits p=0.000999 d=80.27 null_mean 0.122 null_std 0.023 unique_states 8 SA32; +1.277 bits (+184%) vs url_only",
+      "pass_fail": "PASS",
+      "evidence_ref": "result.json metrics url_title_pmi 1.970155 url_title_permutation_p 0.000999; raw_results.json pmi_by_representation url_title",
+      "notes": "Highly significant under cross-trajectory null; title resolves within-URL ambiguity as designed. Identical to url_title_form."
+    },
+    {
+      "id": "url_title_form_state_PMI",
+      "expected": ">= url_title (prereg H3 marginal gain)",
+      "observed": "1.970156 bits identical to url_title p=0.000999 d=80.27 unique_states 8 SA32",
+      "pass_fail": "PASS",
+      "evidence_ref": "result.json metrics url_title_form_pmi 1.970155; raw_results.json pmi_by_representation url_title_form",
+      "notes": "Zero marginal gain because form_signals redundant with unique titles in synthetic design; does not test H3."
+    },
+    {
+      "id": "cross_trajectory_shuffled_null",
+      "expected": "Shuffled PMI distribution mean ~0, p>0.05 for null_control not significantly > observed",
+      "observed": "url_title shuffled mean 0.12176 std 0.023 0/1000 > observed (p_empirical 0.0, p_(count+1)/1001 0.000999); url_only shuffled mean 0.02031 std 0.009",
+      "pass_fail": "PASS",
+      "evidence_ref": "raw_results.json permutation_tests null_mean/null_std; result.json controls.null_control 0/1000",
+      "notes": "Null destroys 93.8% of PMI (0.122 vs 1.970). Correctly shows observed >> null. Spec p-direction wording inverted but implementation directionally correct."
+    },
+    {
+      "id": "positive_control_deterministic_unique_urls",
+      "expected": "PMI >=0.5 bits p<0.001 (spec positive_control)",
+      "observed": "1.911457 bits p=0.000999 N200 trajectories10 unique_urls 8",
+      "pass_fail": "PASS",
+      "evidence_ref": "result.json metrics positive_control_pmi 1.911457 positive_control_p 0.000999; raw_results.json positive_control",
+      "notes": "Verifies pipeline on separate deterministic dataset with unique URLs; comparable magnitude to url_title primary (1.970) as expected."
+    },
+    {
+      "id": "frequency_baseline_implicit",
+      "expected": "Marginal next-state distribution baseline per spec",
+      "observed": "Implicit in PMI denominator P(s'|s); no separate frequency baseline reported but PMI formula itself contrasts joint vs marginals. Null mean 0.020-0.122 shows marginal baseline >0 due to smoothing.",
+      "pass_fail": "PASS",
+      "evidence_ref": "spec.json baselines[4] Frequency baseline; research/physics/information_theoretic/spa_pmi.py compute_pmi_stats",
+      "notes": "Not a separate artifact but encoded in PMI definition; adequate for this controlled test."
+    }
+  ],
+  "recomputed_metrics": {
+    "url_only_pmi": {
+      "producer": 0.6933101309975662,
+      "recomputed": 0.6933101309975662,
+      "match": true,
+      "method": "Re-executed research/physics/information_theoretic/spa_pmi.py with seed 42 PYTHONHASHSEED 0; extract_triples state_url_only + compute_pmi_stats alpha1.0",
+      "evidence_ref": "raw_results.json pmi_by_representation.url_only.mean_pmi"
+    },
+    "url_title_pmi": {
+      "producer": 1.9701557636973992,
+      "recomputed": 1.9701557636973992,
+      "match": true,
+      "method": "Same re-execution state_url_title",
+      "evidence_ref": "raw_results.json pmi_by_representation.url_title.mean_pmi"
+    },
+    "url_title_form_pmi": {
+      "producer": 1.9701557636973992,
+      "recomputed": 1.9701557636973992,
+      "match": true,
+      "method": "state_url_title_form identical to url_title in this design",
+      "evidence_ref": "raw_results.json pmi_by_representation.url_title_form.mean_pmi"
+    },
+    "positive_control_pmi": {
+      "producer": 1.9114573396484875,
+      "recomputed": 1.9114573396484875,
+      "match": true,
+      "method": "Separate dataset 200 transitions unique URLs POSITIVE_STATES",
+      "evidence_ref": "raw_results.json positive_control.pmi"
+    },
+    "url_only_permutation_p": {
+      "producer": 0.000999000999000999,
+      "recomputed": 0.000999000999000999,
+      "match": true,
+      "method": "cross_trajectory_shuffle 1000 perms count_gt+1 /1001, observed 0.693 null_mean 0.02031 null_std 0.00926 d72.66",
+      "evidence_ref": "raw_results.json permutation_tests.url_only.p_value"
+    },
+    "url_title_permutation_p": {
+      "producer": 0.000999000999000999,
+      "recomputed": 0.000999000999000999,
+      "match": true,
+      "method": "observed 1.970 null_mean 0.12176 null_std 0.02303 d80.27",
+      "evidence_ref": "raw_results.json permutation_tests.url_title.p_value"
+    },
+    "url_title_form_permutation_p": {
+      "producer": 0.000999000999000999,
+      "recomputed": 0.000999000999000999,
+      "match": true,
+      "method": "identical to url_title",
+      "evidence_ref": "raw_results.json permutation_tests.url_title_form.p_value"
+    },
+    "positive_control_p": {
+      "producer": 0.000999000999000999,
+      "recomputed": 0.000999000999000999,
+      "match": true,
+      "evidence_ref": "raw_results.json positive_control.p_value"
+    },
+    "null_control_shuffled_gt_observed": {
+      "producer": 0,
+      "recomputed": 0,
+      "match": true,
+      "method": "url_title shuffled_means > observed count 0/1000 empirical p 0.0 vs (0+1)/1001 0.000999",
+      "evidence_ref": "raw_results.json null_control.shuffled_gt_observed; result.json metrics null_control_shuffled_gt_observed"
+    },
+    "null_control_null_mean": {
+      "producer": 0.1217595741948245,
+      "recomputed": 0.1217595741948245,
+      "match": true,
+      "evidence_ref": "raw_results.json null_control.null_mean_pmi"
+    },
+    "effect_size_d_url_only": {
+      "producer": 72.66210399215007,
+      "recomputed": 72.66210399215007,
+      "match": true,
+      "evidence_ref": "result.json metrics url_only_effect_size_d"
+    },
+    "effect_size_d_url_title": {
+      "producer": 80.268289554063,
+      "recomputed": 80.268289554063,
+      "match": true,
+      "evidence_ref": "result.json metrics url_title_effect_size_d"
+    },
+    "unique_states_url_only": {
+      "producer": 3,
+      "recomputed": 3,
+      "match": true,
+      "evidence_ref": "raw_results.json pmi_by_representation.url_only.unique_states"
+    },
+    "unique_states_url_title": {
+      "producer": 8,
+      "recomputed": 8,
+      "match": true,
+      "evidence_ref": "raw_results.json pmi_by_representation.url_title.unique_states"
+    },
+    "unique_sa_pairs_url_only": {
+      "producer": 12,
+      "recomputed": 12,
+      "match": true,
+      "evidence_ref": "raw_results.json pmi_by_representation.url_only.unique_sa_pairs"
+    },
+    "unique_sa_pairs_url_title": {
+      "producer": 32,
+      "recomputed": 32,
+      "match": true,
+      "evidence_ref": "raw_results.json pmi_by_representation.url_title.unique_sa_pairs"
+    },
+    "non_leakage_violations": {
+      "producer": 0,
+      "recomputed": 0,
+      "match": true,
+      "evidence_ref": "result.json metrics non_leakage_violations; raw_results.json primary_dataset non_leakage_violations"
+    }
+  },
+  "claim_ceiling": "SURVIVES_CURRENT_TEST as narrow pipeline validation on synthetic SPA data with frozen decision_rule (positive_control 1.911>=0.5, null_control 0/1000 passes, Bonferroni p<0.025, richer>url_only): title-aware PMI (1.970 bits) > URL-only PMI (0.693 bits) under cross-trajectory permutation (1000 perms seed42 alpha1.0 Laplace). Establishes that PMI pipeline can detect deterministic action->next-state structure in non-leakage regime when richer state (URL+title) resolves URL-level ambiguity and sampling avoids unique-SA forced-zero (500 transitions/32 SA ~15 each). Does NOT establish C-WEB-DYNAMICS on real web, does NOT show title resolves invisible structure (URL-only is already 0.693 p=0.001, so structure is partially visible), does NOT test form_signals, and does NOT justify product promotion. Generalization to real SPA/form-heavy sites where titles may be noisy and transitions stochastic remains UNKNOWN and requires browser-collected non-leakage dataset.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-34149195420/request.json sha256 d21d7d22acb66d4f11314a8b972e483bc7d090c512548dff9a342563aa04afca",
+    "research/experiments/EXP-PHYSICS-34149195420/spec.json sha256 dcd4698c7dddfb446e9b86484832846f184efde07007f79542926302049295d8",
+    "research/experiments/EXP-PHYSICS-34149195420/prereg.md sha256 63810d581ddf29ba3d2abadd17f081ca090c5e0d9cc27af99fb0fc92a3c0b635",
+    "research/experiments/EXP-PHYSICS-34149195420/freeze.json sha256 531a2d98e54541a155787a30187da04f3160a4b38acdafda0301ad4c8b79eccd",
+    "research/experiments/EXP-PHYSICS-34149195420/result.json metrics url_only_pmi 0.693310 url_title_pmi 1.970155 positive_control_pmi 1.911457 permutation p 0.000999",
+    "research/experiments/EXP-PHYSICS-34149195420/report.md verdict SUPPORTS decision checks all PASS",
+    "research/experiments/EXP-PHYSICS-34149195420/provenance.json github_run 34149195420 execution 34161320909 commit 385489e95d30e140f134ba8c6811f1048c5efa49 execution_notes bug fix code66",
+    "research/experiments/EXP-PHYSICS-34149195420/raw_results.json sha256 ef794187b6acb3b4d83c6fa3070bec85497c22933d3640f0c0827823a8eb97a9",
+    "research/physics/information_theoretic/spa_pmi.py sha256 8d6db688de638c5e826fa6dd4c946d5d4de59348e03685996cc9bdfc70cf8eac compute_pmi_stats cross_trajectory_shuffle",
+    "research/experiments/EXP-PHYSICS-34071626363/handoff.json FALSIFIED-IN-SETTING parent question about denser non-leakage + richer representation"
+  ],
+  "unresolved": [
+    "Whether real SPA/form-heavy sites show same pattern: title-aware PMI significantly > URL-only PMI on non-leakage transitions with sufficient density and duplicate SA pairs - synthetic validation does not test real web dynamics.",
+    "Whether form_signals provide marginal information beyond titles when titles are ambiguous/missing on real pages - synthetic redundancy prevents test.",
+    "Whether URL-only PMI >0 generalizes to real SPA sites where URL-level states may be more homogeneous or more heterogeneous than synthetic 209/178/113 distribution.",
+    "Sensitivity of PMI to Laplace alpha (0, 0.5, 2.0): how much of 0.693/1.970 bits and null_mean 0.02/0.12 is smoothing artifact from unsmoothed joint vs smoothed marginals.",
+    "Whether trajectory-level entropy rates or alternative information-theoretic measures detect structure that transition-level PMI misses in sparse or stochastic regimes.",
+    "Causal mechanism of non-leakage on real SPA sites (form submissions, JS navigation, client-side routing) and whether richer BrowserState should include link_texts/tag_counts beyond title.",
+    "Statistical power with real noisy titles and stochastic transitions vs deterministic synthetic perfect discriminator."
+  ]
+}

@@ -97,6 +97,14 @@
         "claim_id": "C-WEB-DYNAMICS",
         "status": "HYPOTHESIS",
         "reason": "Frozen decision_rule triggers FALSIFIED-IN-SETTING on multiple clauses: (1) Wikipedia non-leakage PMI = 0.0, permutation p = 1.0 \u2014 not > 0 after Bonferroni correction (prereg clause 12.2 item 1); (2) Python docs non-leakage PMI = 0.874, permutation p = 0.667 \u2014 not > 0 after correction (prereg clause 12.2 item 1); (3) Positive control PMI = 0.855 < 1.0 bit threshold (prereg clause 12.2 item 2). Audit confirms all triggers are genuine: wiki PMI = 0.0 is mathematically forced by unique SA pairs (58 unique SA for 67 transitions) under Laplace alpha=1.0; permutation test is degenerate due to singleton trajectory groups (30/47 wiki, 14/17 python); positive control threshold was misspecified for actual synthetic data structure. PMI drops dramatically when leakage removed (wiki 1.073 -> 0.0, python 1.502 -> 0.874), confirming parent signal was driven by action.target_href == state_after.url leakage. Claim remains HYPOTHESIS: falsification is bounded to URL-level PMI with target_href action representation, Laplace alpha=1.0, within-trajectory permutation on these server-rendered sites (Wikipedia 7.6% non-leakage N=67, Python docs 2.4% N=21). No evidence about SPA/form-heavy sites, richer BrowserState representations, or trajectory-level entropy rates."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-34149195420",
+        "lane": "physics",
+        "decision": "SURVIVES_CURRENT_TEST",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "EXPERIMENTAL",
+        "reason": "Narrow pipeline validation: title-aware PMI (1.970 bits) > URL-only PMI (0.693 bits) on synthetic SPA data with non-leakage by construction (p=0.001, d=80.3, 1000 cross-trajectory permutations). PMI pipeline detects known deterministic structure in SPA-like format. However: (1) URL-only PMI is significantly >0 (0.693 bits), contradicting pre-registered H1 that it would be 'near zero' \u2014 titles provide additional (+184%), not exclusive, information; (2) form_signals add zero marginal information (url_title_form PMI = url_title PMI = 1.970) because titles uniquely identify states in the synthetic design \u2014 H3 is untested; (3) synthetic deterministic 8-state world is a controlled pipeline validation, not evidence for C-WEB-DYNAMICS on real web where transitions are stochastic and titles may be noisy. The ceiling is: PMI pipeline + richer state representation survives on synthetic SPA data. Real SPA/form-heavy browser data required before any stronger claim."
       }
     ],
     "C-PARAM-INHERIT": [
@@ -131,6 +139,38 @@
         "claim_id": "C-PARAM-INHERIT",
         "status": "EXPERIMENTAL",
         "reason": "Audit ceiling narrows producer GENERALIZATION-SAFE to SCOPE-LIMITED: multi-slot dominance confirmed for single tested pair (param-2slot [id,category] vs param-fetch-posts [id] at equal confidence 0.95, n=1, synthetic substrate, deterministic). Template-only params confirmed losing to declared params (len(parameter_slots) scope limit). verify() dict equality confirmed. However: (1) equal-slot ties are stable insertion-order, NOT lexicographic as producer interpreted (audit V_TIE_LEXICOGRAPHIC_MISCHARACTERIZED); (2) literal-vs-param equal-confidence 0.95 not retested in this experiment \u2014 inherited from parent (audit V_BASELINE_GAP_CORE_COMPETITION_NOT_RETESTED); (3) fix not committed to production HEAD (audit V_CODE_NOT_PERSISTED); (4) synthetic substrate only, no real-web DOM/auth/session/drift (audit V_SUBSTRATE_SCOPE); (5) verify() tests dict equality not HTTP integration (audit V_VERIFY_DICT_MATCH_ONLY). C-PARAM-INHERIT cannot advance to PRODUCT without fix commit + re-validation and real-web testing."
+      },
+      {
+        "experiment_id": "EXP-GRAPH-33998605047",
+        "lane": "graph",
+        "decision": "PARTIAL_VALIDATION",
+        "claim_id": "C-PARAM-INHERIT",
+        "status": "EXPERIMENTAL",
+        "reason": "Core hazard elimination validated on synthetic substrate: 5/5 false accepts eliminated (literal 0 slots vs param 1 slot at equal confidence 0.95 for ids 2..6). Multi-slot dominance confirmed for single tested pair (2 vs 1). Template-only params correctly lose to declared params. However: (1) fix not committed to production HEAD \u2014 kernel.py L112 still unfixed (audit V_CODE_NOT_PERSISTED); (2) B_CONFIDENCE_LITERAL_HIGHER baseline misimplemented \u2014 no 0.98 literal mechanism existed in registry, so literal-higher dominance not measured in this run (audit V_BASELINE_LITERAL_HIGHER_INVALID); (3) baseline_pass inflated from 6/7 semantic to 7/7 status-only (audit V_STATUS_ONLY_BASELINE_INFLATION); (4) claim ceiling bounded to synthetic substrate only \u2014 no real-web DOM/auth/session/drift tested. Fix validated for single-slot, one multi-slot pair, and template-only on synthetic substrate. Advancement to PRODUCT requires: fix commit to HEAD + post-commit re-validation + real-web endpoint testing."
+      },
+      {
+        "experiment_id": "EXP-GRAPH-34170139507",
+        "lane": "graph",
+        "decision": "MEASUREMENT_INVALID",
+        "claim_id": "C-PARAM-INHERIT",
+        "status": "EXPERIMENTAL",
+        "reason": "Frozen decision rule HTTP-PARAM-INHERIT-SURVIVES unsatisfiable: multi-slot positive control (POS_MULTI_SLOT) failed with HTTP 404 on /posts/1/tech \u2014 endpoint assumption error, not network outage. However, core hazard (compete-equal) is validated under HTTP execution with patch-only fix: param beats literal at equal confidence 0.95 for unseen id=7, bound URL /posts/7, HTTP 200 JSON id=7. All 6 baselines preserve. Fix NOT committed to production HEAD (monkey-patched). Multi-slot control not discriminating (order-dependent without fix). Claim ceiling is narrow: patch-only single-id (id=7) HTTP generalization for 0-vs-1 slot competition on simple REST endpoint. C-PARAM-INHERIT remains EXPERIMENTAL \u2014 not promoted, not falsified."
+      },
+      {
+        "experiment_id": "EXP-GRAPH-34176416673",
+        "lane": "graph",
+        "decision": "BLOCKED",
+        "claim_id": "C-PARAM-INHERIT",
+        "status": "EXPERIMENTAL",
+        "reason": "Primary hypothesis (fix survives commitment to production HEAD) untestable: fix not committed to src/spider/kernel.py L112 (sha256 46929b3a, line still 'candidates.sort(key=lambda m: m.confidence, reverse=True)'). BLOCKED status correctly applied per frozen decision_rule. No new positive evidence for post-commit hazard elimination. Baseline preservation on unfixed HEAD and null control for ids 2-6 are diagnostic only, not claim-advancing. Claim ceiling remains parent monkey-patched single-id=7 ceiling."
+      },
+      {
+        "experiment_id": "EXP-GRAPH-34222171093",
+        "lane": "graph",
+        "decision": "BLOCKED",
+        "claim_id": "C-PARAM-INHERIT",
+        "status": "EXPERIMENTAL",
+        "reason": "Fix prerequisite not committed to production HEAD. Experiment BLOCKED \u2014 no new scientific evidence obtained for fix effectiveness. Existing monkey-patched hazard elimination (parent EXP-GRAPH-34176416673) remains the highest validated evidence. C-PARAM-INHERIT status unchanged."
       },
       {
         "experiment_id": "EXP-PRODUCT-33528829801",
@@ -171,6 +211,14 @@
         "claim_id": "C-PARAM-INHERIT",
         "status": "EXPERIMENTAL",
         "reason": "Audit ceiling narrows to: field-path relevance (top-level allowlist {method,url,body,headers,query}) plus two-part structure-check (Jaccard>=0.75 + constant-value anchor) resolves synthetic D1 over-parametrization and synthetic E1 hallucination in an offline isolated implementation while preserving B1/B4 regression. Cannot advance toward product promotion due to: (a) kernel integration gap \u2014 implementation is self-contained in run_experiment.py, does not modify src/spider/kernel.py (audit KERNEL_INTEGRATION_GAP); (b) prereg training-data deviations on B5 (PREREG_DEVIATION_B5: varying A,B,C instead of static A,A,A) and D3 (PREREG_DEVIATION_D3: varying 1,2,3 instead of static 1,1,1) break condition (7) comparability with parent; (c) D2 post-hoc redefinition of expected slot_count from 2 to 1 (EXPECTED_POSTHOC_D2); (d) C2 double-prefix persists under true full values \u2014 _detect_double_prefix exists but is not wired into distill/bind path (DOUBLE_PREFIX_NOT_TESTED); (e) nested metadata scope leak \u2014 allowlist only checks top-level key (METADATA_SCOPE_LEAK). Claim stays EXPERIMENTAL; see handoff for next steps."
+      },
+      {
+        "experiment_id": "EXP-PRODUCT-34015741916",
+        "lane": "product",
+        "decision": "KERNEL-INTEGRATION-PARTIAL",
+        "claim_id": "C-PARAM-INHERIT",
+        "status": "EXPERIMENTAL",
+        "reason": "Kernel integration partial: 9/10 synthetic conditions survive (B1-B5 regression 21/21 binding_correct, C1 prefix+suffix 3/3, D1/D2/D3 noise filtering 7/7, E1/E2 null controls slot_count=0, literal baseline fail_rate=1.0). C2 full-value binding with prefix-containing params fails spec-required test: _detect_double_prefix is dead code (guard always False because url_template contains ${url}), recomputed kernel.resolve('get-user', {}, params={'url':'user-4'}) => 'user-user-4' (binding_correct false). Producer claimed KERNEL-INTEGRATION-SURVIVES with outcome=SUPPORTS but used stripped parts (url=4) not full values (user-4) per spec measurement_validity. C-PARAM-INHERIT advances from kernel-integration-gap to kernel-integrated-synthetic but C2 blocker prevents product readiness. Claim ceiling: synthetic top-level metadata, single-whole-URL, body/headers leaf parameterization only."
       }
     ],
     "C-CROSSSITE": [

@@ -1,0 +1,148 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34170139507",
+  "lane": "graph",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "NOT_APPLICABLE",
+  "metrics": {
+    "baseline_pass": true,
+    "baseline_pass_count": 6,
+    "baseline_total": 6,
+    "cold_baseline_pass": true,
+    "compete_equal_param_wins": true,
+    "compete_equal_http_response_id": 7,
+    "literal_does_not_generalize": true,
+    "literal_unseen_http_response_id": 1,
+    "param_generalizes": true,
+    "param_unseen_http_response_id": 7,
+    "multi_slot_dominance": false,
+    "multi_slot_http_valid": false,
+    "exceptions_count": 0,
+    "network_failure_count": 1,
+    "network_failure_conditions": [
+      "multi-slot-beats-1-slot"
+    ],
+    "total_conditions": 8,
+    "conditions_with_correct_status": 8,
+    "http_status_codes": {
+      "literal-only-original": 200,
+      "literal-only-unseen": 200,
+      "param-only-original": 200,
+      "param-only-unseen": 200,
+      "compete-param-higher": 200,
+      "compete-equal": 200,
+      "multi-slot-beats-1-slot": null
+    }
+  },
+  "controls": {
+    "B_COLD": {
+      "expected": "UNKNOWN",
+      "observed_status": "UNKNOWN",
+      "pass": true
+    },
+    "B_LITERAL_ONLY_ORIG": {
+      "expected": "EXECUTABLE url=/posts/1, HTTP id=1",
+      "observed_status": "EXECUTABLE",
+      "observed_url": "https://jsonplaceholder.typicode.com/posts/1",
+      "observed_http_id": 1,
+      "pass": true
+    },
+    "B_LITERAL_ONLY_UNSEEN": {
+      "expected": "EXECUTABLE url=/posts/1 (literal universal), HTTP id=1",
+      "observed_status": "EXECUTABLE",
+      "observed_url": "https://jsonplaceholder.typicode.com/posts/1",
+      "observed_http_id": 1,
+      "pass": true,
+      "interpretation": "Literal does not generalize: id=7 resolves to /posts/1, HTTP returns id=1 (not 7)"
+    },
+    "B_PARAM_ONLY_ORIG": {
+      "expected": "EXECUTABLE url=/posts/1, HTTP id=1",
+      "observed_status": "EXECUTABLE",
+      "observed_url": "https://jsonplaceholder.typicode.com/posts/1",
+      "observed_http_id": 1,
+      "pass": true
+    },
+    "B_PARAM_ONLY_UNSEEN": {
+      "expected": "EXECUTABLE url=/posts/7 (param generalizes), HTTP id=7",
+      "observed_status": "EXECUTABLE",
+      "observed_url": "https://jsonplaceholder.typicode.com/posts/7",
+      "observed_http_id": 7,
+      "pass": true,
+      "interpretation": "Param generalizes: id=7 resolves to /posts/7, HTTP returns id=7"
+    },
+    "B_CONFIDENCE_PARAM_HIGHER": {
+      "expected": "EXECUTABLE param (0.98) wins, HTTP id=7",
+      "observed_status": "EXECUTABLE",
+      "observed_mechanism": "param-fetch-posts-high",
+      "observed_http_id": 7,
+      "pass": true
+    },
+    "NULL_FALSE_ACCEPT_ELIMINATION": {
+      "expected": "compete-equal returns param-fetch-posts (not literal), bound URL /posts/7, HTTP id=7",
+      "observed_mechanism": "param-fetch-posts",
+      "observed_url": "https://jsonplaceholder.typicode.com/posts/7",
+      "observed_http_id": 7,
+      "pass": true
+    },
+    "POS_MULTI_SLOT": {
+      "expected": "EXECUTABLE param-2slot wins, bound URL /posts/1/tech, HTTP status 200",
+      "observed_status": "EXECUTABLE",
+      "observed_mechanism": "param-2slot",
+      "observed_url": "https://jsonplaceholder.typicode.com/posts/1/tech",
+      "observed_http_valid": false,
+      "pass": false
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-GRAPH-34170139507/run_experiment.py",
+      "sha256": "03a9bb2991145977d63893f88ebea979032c83e851a8b14fd051458c95330c11",
+      "role": "code"
+    },
+    {
+      "path": "src/spider/kernel.py",
+      "sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+      "role": "code"
+    },
+    {
+      "path": "src/spider/models.py",
+      "sha256": "338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78",
+      "role": "code"
+    },
+    {
+      "path": "src/spider/registry.py",
+      "sha256": "51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "[cold] type=resolution+http status=UNKNOWN mechanism=None confidence=0.0",
+    "[literal-only-original] type=resolution+http status=EXECUTABLE mechanism=literal-fetch-posts-1 bound_url=https://jsonplaceholder.typicode.com/posts/1 confidence=0.95 http_status=200 http_id=1",
+    "[literal-only-unseen] type=resolution+http status=EXECUTABLE mechanism=literal-fetch-posts-1 bound_url=https://jsonplaceholder.typicode.com/posts/1 confidence=0.95 http_status=200 http_id=1",
+    "[param-only-original] type=resolution+http status=EXECUTABLE mechanism=param-fetch-posts bound_url=https://jsonplaceholder.typicode.com/posts/1 confidence=0.95 http_status=200 http_id=1",
+    "[param-only-unseen] type=resolution+http status=EXECUTABLE mechanism=param-fetch-posts bound_url=https://jsonplaceholder.typicode.com/posts/7 confidence=0.95 http_status=200 http_id=7",
+    "[compete-param-higher] type=resolution+http status=EXECUTABLE mechanism=param-fetch-posts-high bound_url=https://jsonplaceholder.typicode.com/posts/7 confidence=0.98 http_status=200 http_id=7",
+    "[compete-equal] type=resolution+http status=EXECUTABLE mechanism=param-fetch-posts bound_url=https://jsonplaceholder.typicode.com/posts/7 confidence=0.95 http_status=200 http_id=7",
+    "[multi-slot-beats-1-slot] type=resolution+http status=EXECUTABLE mechanism=param-2slot bound_url=https://jsonplaceholder.typicode.com/posts/1/tech confidence=0.95 http_error=URLError: HTTP Error 404: Not Found"
+  ],
+  "validity_notes": [
+    "Fix applied temporarily during execution \u2014 current HEAD src/spider/kernel.py L112 still has unfixed sort key (m.confidence only). Production commit requires Director approval.",
+    "All conditions deterministic: no model calls, no RNG, no sampling. Single-run exact point comparisons. No statistical uncertainty.",
+    "HTTP execution against live endpoint jsonplaceholder.typicode.com. Network availability required; if unreachable, condition is MEASUREMENT_INVALID.",
+    "5-second timeout per HTTP request to avoid hanging on network issues.",
+    "jsonplaceholder is a simple REST API, not a complex Web application with DOM, auth, session state, or drift. This experiment tests the execution path (resolve -> bind -> HTTP -> response), not full browser interaction.",
+    "Each condition uses a fresh kernel instance with explicitly controlled registry contents. No cross-contamination.",
+    "Registry insertion order controlled: literal registered before param in shared-equal conditions to test tie-break under fix.",
+    "The fix was not committed to HEAD \u2014 sha256 of unfixed kernel.py confirmed in artifacts.",
+    "Network failures recorded as MEASUREMENT_INVALID, not scientific falsification."
+  ],
+  "unresolved": [
+    "Whether the fix generalizes to real-web endpoints with DOM, auth, session state, drift (jsonplaceholder is simple REST).",
+    "Whether the fix has been committed to production HEAD (current HEAD unfixed, requires Director action).",
+    "Whether the literal-vs-param equal-confidence competition remains param-winning after fix is committed to production HEAD.",
+    "Whether LLM-driven mechanism distillation ('learn on A' half of C-PARAM-INHERIT) works (no model calls).",
+    "Whether _matches() discriminates beyond empty dict preconditions (all mechanisms tested with preconditions={}).",
+    "Whether _bind() preserves type for full-match template strings (int -> int) (only URL-embedded partial match tested).",
+    "Whether the fix generalizes to other slot counts (3 vs 2, 5 vs 1), other template shapes, or other intents beyond fetch-post."
+  ]
+}
