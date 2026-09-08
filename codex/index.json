@@ -376,6 +376,31 @@
         "handoff.json": "2fd5c52e356f14fd16df4bfd77cefec1099e92a4d53840135ae946328eda096a"
       }
     },
+    "EXP-GRAPH-34244445713": {
+      "lane": "graph",
+      "request_id": "925d0c299d1541b60bc44db9",
+      "created_at": "2026-09-08T15:23:44.338689+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT"
+      ],
+      "question": "After committing the parameter-slot-count tie-break fix to src/spider/kernel.py L112 (sort key includes len(parameter_slots)), does the literal-vs-param equal-confidence competition resolve to param for all unseen ids 2-7 without monkey-patching, do all 6 baseline conditions pass on committed HEAD, and does the corrected B_CONFIDENCE_LITERAL_HIGHER condition (literal 0.98 > param 0.95) remain literal-winning?",
+      "audit_status": "PASS",
+      "decision": "BLOCKED",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/graph",
+      "hashes": {
+        "request.json": "49e55f0d601f0478c5bd0a6f883854a1db27fbe77d76cefd68571437c0c70ad2",
+        "spec.json": "687bc393a6c783c54fe898657fff544a1c5aa4cefd4d647d533a37ef813e8577",
+        "prereg.md": "f7368371532d1441cd024e4ac2de0c489fc504e0a9b89e6046a22db4881eb86b",
+        "freeze.json": "b0f2e8b90081f1525abda303da6ea30d2bc1059577fe9f1b86c6610a6207b4ca",
+        "result.json": "322e8c53a1698dc8b922c24bb8a1fbd8ce63b4f94ea69485f48ddeceafd20c6a",
+        "report.md": "03219214f311b4b38ece3e94b81e74aa751c3fa6dc180fb1d5b98a21ab25a424",
+        "provenance.json": "fc32efaa90796662814faaae2aa7c7c1e39881dd35e01b99ebc3894463f14619",
+        "audit.json": "58fb34097eb4e3dc1a209d8cf31ce6d381bb21a771e1add3d532c7f888c8bae1",
+        "verdict.json": "769221e4789079093ca0f6a537b3787e1765b32b88615e9dc35aa1ae7173ac26",
+        "handoff.json": "4d6e645fde38107c747640644754ef6f60ab88547510ccd8e29557d848907f08"
+      }
+    },
     "EXP-INTEL-33528832113": {
       "lane": "intel",
       "request_id": "46d19fdaf32e996c0ab24bd7",
@@ -610,6 +635,31 @@
         "handoff.json": "c1cec38c259eaec983f5165c96ad77901ace1c29dd8e8c65b33261cc19cded4b"
       }
     },
+    "EXP-PHYSICS-34149195420": {
+      "lane": "physics",
+      "request_id": "519dd95dcd99ae5437b5b6c4",
+      "created_at": "2026-09-07T17:50:01.867868+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Does PMI between actions and next-states detect genuine dynamical structure in non-leakage SPA transitions when the state representation is enriched beyond URL to include title and form signals?",
+      "audit_status": "REVISE",
+      "decision": "SURVIVES_CURRENT_TEST",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/physics",
+      "hashes": {
+        "request.json": "d21d7d22acb66d4f11314a8b972e483bc7d090c512548dff9a342563aa04afca",
+        "spec.json": "dcd4698c7dddfb446e9b86484832846f184efde07007f79542926302049295d8",
+        "prereg.md": "63810d581ddf29ba3d2abadd17f081ca090c5e0d9cc27af99fb0fc92a3c0b635",
+        "freeze.json": "531a2d98e54541a155787a30187da04f3160a4b38acdafda0301ad4c8b79eccd",
+        "result.json": "43262409c82b6c85f7351ee47aa3203cf6b87dd1b3076af2cbad152ecd1d4301",
+        "report.md": "378cdd8ee30e09e09bb12af8ff0e3c0f6cb1dd1101761d77922116b578f2841a",
+        "provenance.json": "1b44f820a736b54f4a9d777cd26ef931f93a978d60f7689e51abffce93350836",
+        "audit.json": "a31e0481721b17b837bbef70ca4842bb005eb4b5449ac2612043dff41490b9b2",
+        "verdict.json": "c14b8a3017f0cff9f254645b98a0d263a99ac475026bdc873bdade8e6becd906",
+        "handoff.json": "a3e4d8268994ad3bf053958a277db1e4db9b7b3c66c0b2a8e1f4976c8ace3e4c"
+      }
+    },
     "EXP-PRODUCT-33528829801": {
       "lane": "product",
       "request_id": "2629e8e63e200f05556e37ca",
@@ -758,6 +808,31 @@
         "audit.json": "0dfd5d6e638e2ac94500ee0e1fc971a098072155fdb26e4f4d07211035ace2db",
         "verdict.json": "5512425b1fbff67715454ca0837382b081be875155010bb0555cddb64b7841b7",
         "handoff.json": "8075b37b31e48bc5bfbd139c33cd1e0c8c4c9b81fdac6fba43589388806b8a14"
+      }
+    },
+    "EXP-PRODUCT-34195008089": {
+      "lane": "product",
+      "request_id": "cb9f09281605aa2c14bdc150",
+      "created_at": "2026-09-08T06:31:18.436352+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT"
+      ],
+      "question": "Can the C2 double-prefix bug be fixed by modifying _bind() in src/spider/kernel.py to detect when a full-value parameter already contains the template prefix and strip it before substitution, such that binding user-${url} with params={'url':'user-4'} produces user-4 (not user-user-4), and all 10 test conditions (B1-B5, C1-C2, D1-D3, E1-E2) continue to pass with correct outcomes?",
+      "audit_status": "PASS",
+      "decision": "C2-FIX-FALSIFIED",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/product",
+      "hashes": {
+        "request.json": "ce4b6c34736ca35f2a986a7f7ea40647c45ba76637b3bd4efbd4db38f546a7cc",
+        "spec.json": "196d1a0ae9ab0908e124017004df8120641043ac2f53a1c1f2d400505e118095",
+        "prereg.md": "42cb87c816fb4bbd21a07e23ce6b45403546141cdb4d17c0fdf5d9186e465869",
+        "freeze.json": "ca523e6286cce716904cc3b1231ee0501e29b35e615cbb1645181b44b5d4ce03",
+        "result.json": "feeb0224f95aea6a9446d2cd8f85d778fe9a4f720c985ff1c2ce1aea63d3cca6",
+        "report.md": "cb7a435d11f346048d34993cf55938c8406e419ed0801901c0bcc35d1c168956",
+        "provenance.json": "45e00eb55aeab968a19f36dcb3eb0a1d649e7cc90adf7932ce8bd87670e454fd",
+        "audit.json": "93e80be4a0899cbafe874d7ae45b0be032ada83e45dde25965ebbbdde541b7ad",
+        "verdict.json": "6d733c13672d2627e19309c433bebcd31996115064da7422e79d4037401b7584",
+        "handoff.json": "531dc40daddb3339fa9159d30e5c9f1edb6adec0de8bd5e4d41416df52eca88f"
       }
     },
     "EXP-RUNTIME-33528830833": {
