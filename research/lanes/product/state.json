@@ -1,14 +1,14 @@
 {
   "lane": "product",
   "human_paused": false,
-  "active_experiment_id": null,
+  "active_experiment_id": "EXP-PRODUCT-34282620394",
   "last_experiment_id": "EXP-PRODUCT-34195008089",
   "last_verdict": "C2-FIX-FALSIFIED",
   "continue_immediately": false,
   "next_question": "Can C2 full-value binding be fixed by modifying distill_parameterized() to detect when the varying segment in a prefix-only template (e.g., user-${url} from training data user-1/2/3) represents a prefix-bearing ID and induce a shorter template (e.g., ${url} instead of user-${url}), OR by modifying _bind() to strip slot-specific prefix patterns based on the distribution of training values rather than the full template prefix, such that binding user-${url} with params={'url':'user-4'} produces user-4 not user-user-4, and all 10 conditions pass?",
   "promotion_ready": false,
   "consecutive_failures": 0,
-  "updated_at": "2026-09-08T18:59:05.443774+00:00",
+  "updated_at": "2026-09-08T21:48:52.475305+00:00",
   "last_failure_retryable": null,
   "last_handoff_sha256": "531dc40daddb3339fa9159d30e5c9f1edb6adec0de8bd5e4d41416df52eca88f"
 }
