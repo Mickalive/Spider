@@ -1,0 +1,378 @@
+{
+  "observations": [
+    {
+      "condition_id": "cold",
+      "type": "resolution+http",
+      "status": "UNKNOWN",
+      "mechanism_id": null,
+      "bound_action": null,
+      "confidence": 0.0,
+      "reason": "no applicable validated mechanism",
+      "expected_status": "UNKNOWN",
+      "expected_url": null,
+      "expected_http_id": null,
+      "match_expected_status": true,
+      "match_expected_url": null,
+      "role": "baseline",
+      "http_status_code": null,
+      "http_json_body": null,
+      "http_error": null,
+      "http_response_id": null,
+      "http_valid": null,
+      "match_expected_http_id": null
+    },
+    {
+      "condition_id": "literal-only-original",
+      "type": "resolution+http",
+      "status": "EXECUTABLE",
+      "mechanism_id": "literal-fetch-posts-1",
+      "bound_action": {
+        "method": "GET",
+        "url": "https://jsonplaceholder.typicode.com/posts/1"
+      },
+      "confidence": 0.95,
+      "reason": "applicability guards and confidence threshold passed",
+      "expected_status": "EXECUTABLE",
+      "expected_url": "https://jsonplaceholder.typicode.com/posts/1",
+      "expected_http_id": 1,
+      "match_expected_status": true,
+      "match_expected_url": true,
+      "role": "baseline",
+      "http_status_code": 200,
+      "http_json_body": {
+        "userId": 1,
+        "id": 1,
+        "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+        "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+      },
+      "http_error": null,
+      "http_response_id": 1,
+      "http_valid": true,
+      "match_expected_http_id": true
+    },
+    {
+      "condition_id": "literal-only-unseen",
+      "type": "resolution+http",
+      "status": "EXECUTABLE",
+      "mechanism_id": "literal-fetch-posts-1",
+      "bound_action": {
+        "method": "GET",
+        "url": "https://jsonplaceholder.typicode.com/posts/1"
+      },
+      "confidence": 0.95,
+      "reason": "applicability guards and confidence threshold passed",
+      "expected_status": "EXECUTABLE",
+      "expected_url": "https://jsonplaceholder.typicode.com/posts/1",
+      "expected_http_id": 1,
+      "match_expected_status": true,
+      "match_expected_url": true,
+      "role": "baseline",
+      "http_status_code": 200,
+      "http_json_body": {
+        "userId": 1,
+        "id": 1,
+        "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+        "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+      },
+      "http_error": null,
+      "http_response_id": 1,
+      "http_valid": true,
+      "match_expected_http_id": true
+    },
+    {
+      "condition_id": "param-only-original",
+      "type": "resolution+http",
+      "status": "EXECUTABLE",
+      "mechanism_id": "param-fetch-posts",
+      "bound_action": {
+        "method": "GET",
+        "url": "https://jsonplaceholder.typicode.com/posts/1"
+      },
+      "confidence": 0.95,
+      "reason": "applicability guards and confidence threshold passed",
+      "expected_status": "EXECUTABLE",
+      "expected_url": "https://jsonplaceholder.typicode.com/posts/1",
+      "expected_http_id": 1,
+      "match_expected_status": true,
+      "match_expected_url": true,
+      "role": "baseline",
+      "http_status_code": 200,
+      "http_json_body": {
+        "userId": 1,
+        "id": 1,
+        "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+        "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+      },
+      "http_error": null,
+      "http_response_id": 1,
+      "http_valid": true,
+      "match_expected_http_id": true
+    },
+    {
+      "condition_id": "param-only-unseen",
+      "type": "resolution+http",
+      "status": "EXECUTABLE",
+      "mechanism_id": "param-fetch-posts",
+      "bound_action": {
+        "method": "GET",
+        "url": "https://jsonplaceholder.typicode.com/posts/7"
+      },
+      "confidence": 0.95,
+      "reason": "applicability guards and confidence threshold passed",
+      "expected_status": "EXECUTABLE",
+      "expected_url": "https://jsonplaceholder.typicode.com/posts/7",
+      "expected_http_id": 7,
+      "match_expected_status": true,
+      "match_expected_url": true,
+      "role": "baseline",
+      "http_status_code": 200,
+      "http_json_body": {
+        "userId": 1,
+        "id": 7,
+        "title": "magnam facilis autem",
+        "body": "dolore placeat quibusdam ea quo vitae\nmagni quis enim qui quis quo nemo aut saepe\nquidem repellat excepturi ut quia\nsunt ut sequi eos ea sed quas"
+      },
+      "http_error": null,
+      "http_response_id": 7,
+      "http_valid": true,
+      "match_expected_http_id": true
+    },
+    {
+      "condition_id": "compete-param-higher",
+      "type": "resolution+http",
+      "status": "EXECUTABLE",
+      "mechanism_id": "param-fetch-posts-high",
+      "bound_action": {
+        "method": "GET",
+        "url": "https://jsonplaceholder.typicode.com/posts/7"
+      },
+      "confidence": 0.98,
+      "reason": "applicability guards and confidence threshold passed",
+      "expected_status": "EXECUTABLE",
+      "expected_url": "https://jsonplaceholder.typicode.com/posts/7",
+      "expected_http_id": 7,
+      "match_expected_status": true,
+      "match_expected_url": true,
+      "role": "baseline",
+      "http_status_code": 200,
+      "http_json_body": {
+        "userId": 1,
+        "id": 7,
+        "title": "magnam facilis autem",
+        "body": "dolore placeat quibusdam ea quo vitae\nmagni quis enim qui quis quo nemo aut saepe\nquidem repellat excepturi ut quia\nsunt ut sequi eos ea sed quas"
+      },
+      "http_error": null,
+      "http_response_id": 7,
+      "http_valid": true,
+      "match_expected_http_id": true
+    },
+    {
+      "condition_id": "compete-literal-higher",
+      "type": "resolution+http",
+      "status": "EXECUTABLE",
+      "mechanism_id": "literal-fetch-posts-high",
+      "bound_action": {
+        "method": "GET",
+        "url": "https://jsonplaceholder.typicode.com/posts/1"
+      },
+      "confidence": 0.98,
+      "reason": "applicability guards and confidence threshold passed",
+      "expected_status": "EXECUTABLE",
+      "expected_url": "https://jsonplaceholder.typicode.com/posts/1",
+      "expected_http_id": 1,
+      "match_expected_status": true,
+      "match_expected_url": true,
+      "role": "null_control",
+      "http_status_code": 200,
+      "http_json_body": {
+        "userId": 1,
+        "id": 1,
+        "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+        "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+      },
+      "http_error": null,
+      "http_response_id": 1,
+      "http_valid": true,
+      "match_expected_http_id": true
+    },
+    {
+      "condition_id": "compete-equal-id2",
+      "type": "resolution+http",
+      "status": "EXECUTABLE",
+      "mechanism_id": "literal-fetch-posts-1",
+      "bound_action": {
+        "method": "GET",
+        "url": "https://jsonplaceholder.typicode.com/posts/1"
+      },
+      "confidence": 0.95,
+      "reason": "applicability guards and confidence threshold passed",
+      "expected_status": "EXECUTABLE",
+      "expected_url": "https://jsonplaceholder.typicode.com/posts/1",
+      "expected_http_id": 1,
+      "match_expected_status": true,
+      "match_expected_url": true,
+      "role": "core_hazard",
+      "http_status_code": 200,
+      "http_json_body": {
+        "userId": 1,
+        "id": 1,
+        "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+        "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+      },
+      "http_error": null,
+      "http_response_id": 1,
+      "http_valid": true,
+      "match_expected_http_id": true
+    },
+    {
+      "condition_id": "compete-equal-id3",
+      "type": "resolution+http",
+      "status": "EXECUTABLE",
+      "mechanism_id": "literal-fetch-posts-1",
+      "bound_action": {
+        "method": "GET",
+        "url": "https://jsonplaceholder.typicode.com/posts/1"
+      },
+      "confidence": 0.95,
+      "reason": "applicability guards and confidence threshold passed",
+      "expected_status": "EXECUTABLE",
+      "expected_url": "https://jsonplaceholder.typicode.com/posts/1",
+      "expected_http_id": 1,
+      "match_expected_status": true,
+      "match_expected_url": true,
+      "role": "core_hazard",
+      "http_status_code": 200,
+      "http_json_body": {
+        "userId": 1,
+        "id": 1,
+        "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+        "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+      },
+      "http_error": null,
+      "http_response_id": 1,
+      "http_valid": true,
+      "match_expected_http_id": true
+    },
+    {
+      "condition_id": "compete-equal-id4",
+      "type": "resolution+http",
+      "status": "EXECUTABLE",
+      "mechanism_id": "literal-fetch-posts-1",
+      "bound_action": {
+        "method": "GET",
+        "url": "https://jsonplaceholder.typicode.com/posts/1"
+      },
+      "confidence": 0.95,
+      "reason": "applicability guards and confidence threshold passed",
+      "expected_status": "EXECUTABLE",
+      "expected_url": "https://jsonplaceholder.typicode.com/posts/1",
+      "expected_http_id": 1,
+      "match_expected_status": true,
+      "match_expected_url": true,
+      "role": "core_hazard",
+      "http_status_code": 200,
+      "http_json_body": {
+        "userId": 1,
+        "id": 1,
+        "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+        "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+      },
+      "http_error": null,
+      "http_response_id": 1,
+      "http_valid": true,
+      "match_expected_http_id": true
+    },
+    {
+      "condition_id": "compete-equal-id5",
+      "type": "resolution+http",
+      "status": "EXECUTABLE",
+      "mechanism_id": "literal-fetch-posts-1",
+      "bound_action": {
+        "method": "GET",
+        "url": "https://jsonplaceholder.typicode.com/posts/1"
+      },
+      "confidence": 0.95,
+      "reason": "applicability guards and confidence threshold passed",
+      "expected_status": "EXECUTABLE",
+      "expected_url": "https://jsonplaceholder.typicode.com/posts/1",
+      "expected_http_id": 1,
+      "match_expected_status": true,
+      "match_expected_url": true,
+      "role": "core_hazard",
+      "http_status_code": 200,
+      "http_json_body": {
+        "userId": 1,
+        "id": 1,
+        "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+        "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+      },
+      "http_error": null,
+      "http_response_id": 1,
+      "http_valid": true,
+      "match_expected_http_id": true
+    },
+    {
+      "condition_id": "compete-equal-id6",
+      "type": "resolution+http",
+      "status": "EXECUTABLE",
+      "mechanism_id": "literal-fetch-posts-1",
+      "bound_action": {
+        "method": "GET",
+        "url": "https://jsonplaceholder.typicode.com/posts/1"
+      },
+      "confidence": 0.95,
+      "reason": "applicability guards and confidence threshold passed",
+      "expected_status": "EXECUTABLE",
+      "expected_url": "https://jsonplaceholder.typicode.com/posts/1",
+      "expected_http_id": 1,
+      "match_expected_status": true,
+      "match_expected_url": true,
+      "role": "core_hazard",
+      "http_status_code": 200,
+      "http_json_body": {
+        "userId": 1,
+        "id": 1,
+        "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+        "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+      },
+      "http_error": null,
+      "http_response_id": 1,
+      "http_valid": true,
+      "match_expected_http_id": true
+    },
+    {
+      "condition_id": "compete-equal-id7",
+      "type": "resolution+http",
+      "status": "EXECUTABLE",
+      "mechanism_id": "literal-fetch-posts-1",
+      "bound_action": {
+        "method": "GET",
+        "url": "https://jsonplaceholder.typicode.com/posts/1"
+      },
+      "confidence": 0.95,
+      "reason": "applicability guards and confidence threshold passed",
+      "expected_status": "EXECUTABLE",
+      "expected_url": "https://jsonplaceholder.typicode.com/posts/1",
+      "expected_http_id": 1,
+      "match_expected_status": true,
+      "match_expected_url": true,
+      "role": "core_hazard",
+      "http_status_code": 200,
+      "http_json_body": {
+        "userId": 1,
+        "id": 1,
+        "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+        "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+      },
+      "http_error": null,
+      "http_response_id": 1,
+      "http_valid": true,
+      "match_expected_http_id": true
+    }
+  ],
+  "errors": [],
+  "fix_committed": false,
+  "kernel_sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+  "fix_line_present": false,
+  "line112_content": "candidates.sort(key=lambda m: m.confidence, reverse=True)"
+}
