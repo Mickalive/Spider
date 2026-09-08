@@ -785,6 +785,31 @@
         "handoff.json": "8075b37b31e48bc5bfbd139c33cd1e0c8c4c9b81fdac6fba43589388806b8a14"
       }
     },
+    "EXP-PRODUCT-34195008089": {
+      "lane": "product",
+      "request_id": "cb9f09281605aa2c14bdc150",
+      "created_at": "2026-09-08T06:31:18.436352+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT"
+      ],
+      "question": "Can the C2 double-prefix bug be fixed by modifying _bind() in src/spider/kernel.py to detect when a full-value parameter already contains the template prefix and strip it before substitution, such that binding user-${url} with params={'url':'user-4'} produces user-4 (not user-user-4), and all 10 test conditions (B1-B5, C1-C2, D1-D3, E1-E2) continue to pass with correct outcomes?",
+      "audit_status": "PASS",
+      "decision": "C2-FIX-FALSIFIED",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/product",
+      "hashes": {
+        "request.json": "ce4b6c34736ca35f2a986a7f7ea40647c45ba76637b3bd4efbd4db38f546a7cc",
+        "spec.json": "196d1a0ae9ab0908e124017004df8120641043ac2f53a1c1f2d400505e118095",
+        "prereg.md": "42cb87c816fb4bbd21a07e23ce6b45403546141cdb4d17c0fdf5d9186e465869",
+        "freeze.json": "ca523e6286cce716904cc3b1231ee0501e29b35e615cbb1645181b44b5d4ce03",
+        "result.json": "feeb0224f95aea6a9446d2cd8f85d778fe9a4f720c985ff1c2ce1aea63d3cca6",
+        "report.md": "cb7a435d11f346048d34993cf55938c8406e419ed0801901c0bcc35d1c168956",
+        "provenance.json": "45e00eb55aeab968a19f36dcb3eb0a1d649e7cc90adf7932ce8bd87670e454fd",
+        "audit.json": "93e80be4a0899cbafe874d7ae45b0be032ada83e45dde25965ebbbdde541b7ad",
+        "verdict.json": "6d733c13672d2627e19309c433bebcd31996115064da7422e79d4037401b7584",
+        "handoff.json": "531dc40daddb3339fa9159d30e5c9f1edb6adec0de8bd5e4d41416df52eca88f"
+      }
+    },
     "EXP-RUNTIME-33528830833": {
       "lane": "runtime",
       "request_id": "cbf791e0cd3fe570d0ff0fd5",
