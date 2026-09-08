@@ -1,0 +1,16 @@
+{
+  "experiment_id": "EXP-INTEL-34047713704",
+  "sites": {
+    "shopping": {
+      "site_type": "shopping",
+      "url": "http://localhost:7770/",
+      "status": "error",
+      "error": "'Page' object has no attribute 'accessibility'",
+      "metrics": null,
+      "raw_accessibility_tree": null,
+      "http_status": 200
+    }
+  },
+  "controls": {},
+  "aggregate": {}
+}
