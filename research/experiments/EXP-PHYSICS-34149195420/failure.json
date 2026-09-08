@@ -1,9 +1,9 @@
 {
   "stage": "director",
-  "category": "DIRECTOR_FAILURE",
-  "message": "stage exited with code 66",
+  "category": "VALIDATION_FAILURE",
+  "message": "invalid claim update status: PARTIAL_SUPPORT",
   "retryable": false,
-  "recorded_at": "2026-09-08T01:26:51.488384+00:00",
-  "github_run_id": "34176416576",
+  "recorded_at": "2026-09-08T06:32:35.214320+00:00",
+  "github_run_id": "34195010709",
   "github_run_attempt": "1"
 }
