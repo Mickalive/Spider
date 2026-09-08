@@ -7,8 +7,8 @@
   "continue_immediately": false,
   "next_question": "Can the C2 double-prefix bug be fixed by wiring _detect_double_prefix into the kernel's _bind() or resolve() path (or by stripping the template prefix from the param value before substitution), such that full-value binding with prefix-containing params (e.g., user-4) produces user-4 not user-user-4, and the spec-required test (training on user-1/2/3, binding with params={'url':'user-4'}, expecting 'user-4') passes?",
   "promotion_ready": false,
-  "consecutive_failures": 2,
-  "updated_at": "2026-09-08T11:54:26.521701+00:00",
+  "consecutive_failures": 3,
+  "updated_at": "2026-09-08T15:25:25.291636+00:00",
   "last_failure_retryable": false,
   "last_handoff_sha256": "8075b37b31e48bc5bfbd139c33cd1e0c8c4c9b81fdac6fba43589388806b8a14"
 }
