@@ -187,6 +187,14 @@
         "claim_id": "C-PARAM-INHERIT",
         "status": "EXPERIMENTAL",
         "reason": "Audit ceiling narrows to: field-path relevance (top-level allowlist {method,url,body,headers,query}) plus two-part structure-check (Jaccard>=0.75 + constant-value anchor) resolves synthetic D1 over-parametrization and synthetic E1 hallucination in an offline isolated implementation while preserving B1/B4 regression. Cannot advance toward product promotion due to: (a) kernel integration gap \u2014 implementation is self-contained in run_experiment.py, does not modify src/spider/kernel.py (audit KERNEL_INTEGRATION_GAP); (b) prereg training-data deviations on B5 (PREREG_DEVIATION_B5: varying A,B,C instead of static A,A,A) and D3 (PREREG_DEVIATION_D3: varying 1,2,3 instead of static 1,1,1) break condition (7) comparability with parent; (c) D2 post-hoc redefinition of expected slot_count from 2 to 1 (EXPECTED_POSTHOC_D2); (d) C2 double-prefix persists under true full values \u2014 _detect_double_prefix exists but is not wired into distill/bind path (DOUBLE_PREFIX_NOT_TESTED); (e) nested metadata scope leak \u2014 allowlist only checks top-level key (METADATA_SCOPE_LEAK). Claim stays EXPERIMENTAL; see handoff for next steps."
+      },
+      {
+        "experiment_id": "EXP-PRODUCT-34015741916",
+        "lane": "product",
+        "decision": "KERNEL-INTEGRATION-PARTIAL",
+        "claim_id": "C-PARAM-INHERIT",
+        "status": "EXPERIMENTAL",
+        "reason": "Kernel integration partial: 9/10 synthetic conditions survive (B1-B5 regression 21/21 binding_correct, C1 prefix+suffix 3/3, D1/D2/D3 noise filtering 7/7, E1/E2 null controls slot_count=0, literal baseline fail_rate=1.0). C2 full-value binding with prefix-containing params fails spec-required test: _detect_double_prefix is dead code (guard always False because url_template contains ${url}), recomputed kernel.resolve('get-user', {}, params={'url':'user-4'}) => 'user-user-4' (binding_correct false). Producer claimed KERNEL-INTEGRATION-SURVIVES with outcome=SUPPORTS but used stripped parts (url=4) not full values (user-4) per spec measurement_validity. C-PARAM-INHERIT advances from kernel-integration-gap to kernel-integrated-synthetic but C2 blocker prevents product readiness. Claim ceiling: synthetic top-level metadata, single-whole-URL, body/headers leaf parameterization only."
       }
     ],
     "C-CROSSSITE": [
