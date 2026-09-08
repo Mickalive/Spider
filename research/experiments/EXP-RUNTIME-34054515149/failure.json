@@ -1,9 +1,9 @@
 {
   "stage": "director",
   "category": "VALIDATION_FAILURE",
-  "message": "invalid claim update status: SURVIVES",
+  "message": "invalid claim update status: SUPPORTED",
   "retryable": false,
-  "recorded_at": "2026-09-08T18:59:26.168120+00:00",
-  "github_run_id": "34266104311",
+  "recorded_at": "2026-09-08T21:50:07.475004+00:00",
+  "github_run_id": "34282617816",
   "github_run_attempt": "1"
 }
