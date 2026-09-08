@@ -301,6 +301,31 @@
         "handoff.json": "3bea416e31107aaaaeb156b49346268726ce6edf72da12f3371060c282e4c37d"
       }
     },
+    "EXP-GRAPH-34170139507": {
+      "lane": "graph",
+      "request_id": "83cbf1ca33956914f3734dd4",
+      "created_at": "2026-09-07T23:28:20.399790+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT"
+      ],
+      "question": "Does the parameter-slot-count fix, applied temporarily during execution, generalize to actual HTTP execution against a live endpoint \u2014 specifically: does the parameterized mechanism resolve correctly, bind to the correct URL, execute a real HTTP GET, and return the expected response for both seen and unseen identifiers, while the literal mechanism fails to generalize?",
+      "audit_status": "MEASUREMENT_INVALID",
+      "decision": "MEASUREMENT_INVALID",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/graph",
+      "hashes": {
+        "request.json": "bc755c2df004b5e6fb019da9e33ae55fc2722b1e76c6e3fc61487bc7a2c21b5a",
+        "spec.json": "ccb6ee5e5579d080dbb4d77e056a6439f74dea053f163e6d2c88cac359cf3382",
+        "prereg.md": "ac25e3703a2bf6011d8fe873bc5f4371687afc6bc90b249b690e6382a738376e",
+        "freeze.json": "ce2feb11df6f9b041a8b1a2594e3ee0e11e33c02f8df4a8763de88b545b9cef1",
+        "result.json": "f2f1f03892ffa90eac7cb50581f1f86af0c8eb2461ebfe32da96648e29a92063",
+        "report.md": "425ba2083beb801b503769094b8cbcc0845e45d2fea9f6795439872002ac7e54",
+        "provenance.json": "c301b389918886f1213a3569f45c98f0ef8f495c1a659ff1a3369e6b50667e4b",
+        "audit.json": "090f892bf674fc09afa2d8e9a0c1acc13ae6d8d775c4b46d760bb5d2f707b548",
+        "verdict.json": "3916dc94f760c43da1a033dfa946839842466dc2a20cada3548c0db816acc73e",
+        "handoff.json": "65c6fcfeae4ea36110fddc6ba21e48357f9f33e7af529c867adf8debe8532bfc"
+      }
+    },
     "EXP-INTEL-33528832113": {
       "lane": "intel",
       "request_id": "46d19fdaf32e996c0ab24bd7",
