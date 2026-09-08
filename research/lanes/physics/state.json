@@ -1,14 +1,14 @@
 {
   "lane": "physics",
   "human_paused": false,
-  "active_experiment_id": null,
+  "active_experiment_id": "EXP-PHYSICS-34266105229",
   "last_experiment_id": "EXP-PHYSICS-34149195420",
   "last_verdict": "SURVIVES_CURRENT_TEST",
   "continue_immediately": false,
   "next_question": "Does title-aware PMI detect dynamical structure on real SPA/form-heavy browser transitions (React/Vue apps, form-heavy pages) where non-leakage transitions are frequent by construction and titles may be noisy or ambiguous, using browser-collected action->next-state data with sufficient transition density?",
   "promotion_ready": false,
   "consecutive_failures": 0,
-  "updated_at": "2026-09-08T15:26:11.868938+00:00",
+  "updated_at": "2026-09-08T18:57:34.482453+00:00",
   "last_failure_retryable": null,
   "last_handoff_sha256": "a3e4d8268994ad3bf053958a277db1e4db9b7b3c66c0b2a8e1f4976c8ace3e4c"
 }
