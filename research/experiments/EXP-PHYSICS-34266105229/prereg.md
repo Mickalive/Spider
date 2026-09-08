@@ -76,47 +76,62 @@ The synthetic SPA pipeline produces PMI >= 0.5 bits on known deterministic struc
 
 ## 5. Data Collection
 
-### 5.1 Site Selection
+### 5.1 Infrastructure Setup
+
+Before data collection:
+1. Install Playwright: `pip install playwright`
+2. Download browser binaries: `playwright install chromium`
+3. Verify Playwright works: simple page load test
+
+### 5.2 Site Selection
 
 Select 2 JavaScript-heavy SPA/form-heavy sites meeting these criteria:
 - Client-side routing (React Router, Vue Router, or equivalent)
 - Form interactions (multi-step forms, checkout flows, registration)
 - Non-leakage transitions: form submissions that trigger client-side state changes without URL action keywords
 - Accessible without authentication (or use demo accounts)
+- Known to be stable and not blocking automated access
 
 Candidate sites (to be finalized at execution):
 1. **Site A**: A React/Vue multi-step form application (e.g., demo e-commerce checkout, survey builder)
 2. **Site B**: A form-heavy SPA dashboard (e.g., project management tool, analytics dashboard)
 
-### 5.2 Interaction Protocol
+### 5.3 Interaction Protocol
 
 For each site:
 1. Navigate to the site's entry point
-2. Execute a fixed interaction script: 20-30 actions per site, cycling through available form interactions, button clicks, and navigation
-3. Record browser state (URL, title, DOM form signals) before and after each action
-4. Record action type and label
-5. Use deterministic action selection (seed=42) for reproducibility
+2. Execute random-walk trajectories: 100 trajectories of 8 steps each = 800 total transitions per site
+3. At each step:
+   a. Extract BrowserState (URL, title, form_signals)
+   b. Extract available actions (clickable same-domain links)
+   c. Randomly select an action (uniform, seed=42 for reproducibility)
+   d. Execute the action (Playwright click)
+   e. Wait for page load (>= 1 second polite delay)
+   f. Extract next BrowserState
+   g. Record transition (state, action, next_state)
+4. Filter out leakage transitions (action.target_href == state.url)
+5. Ensure sufficient non-leakage density (>= 50 transitions per site, target 100+)
 
-### 5.3 State Representation
+### 5.4 State Representation
 
 For each transition (S_t, A_t, S_{t+1}):
 - **URL**: window.location.href
-- **Title**: document.title
-- **Form signals**: [n_inputs, n_textareas, n_selects, n_buttons] — counts of form elements in DOM
-- **Action label**: human-readable action description (e.g., "form_submit", "button_click", "link_nav")
+- **Title**: document.title (truncated to 100 chars)
+- **Form signals**: (has_form, has_input, has_select, has_textarea) — 4 booleans from DOM inspection
 
-### 5.4 Non-Leakage Classification
+### 5.5 Non-Leakage Classification
 
-A transition is classified as non-leakage ONLY if:
-1. The action label (case-insensitive) does NOT appear as a substring in S_{t+1}.url
-2. The action label does NOT appear as a substring in S_{t+1}.title
-3. The action label does NOT appear as a substring in any S_{t+1}.form_signals text representation
+A transition is classified as leakage ONLY if:
+- action.target_href == state_after.url (the action's target URL is the current state's URL)
 
-This is a conservative criterion designed to exclude transitions where the action literally names the next state.
+All other transitions are non-leakage. This matches the parent experiment's definition.
 
-### 5.5 Sample Size
+### 5.6 Sample Size
 
-Target: >= 100 non-leakage transitions per site (minimum 50 per site for validity). With 20-30 actions per site and non-leakage filtering, expect ~60-80% non-leakage rate on SPA form interactions (based on parent finding that SPA/form-heavy sites have denser non-leakage by construction).
+- 2 sites x 100 trajectories x 8 steps = 1600 total transitions
+- Expected non-leakage: ~60-80% on SPA sites (960-1280 transitions)
+- Minimum valid: 50 non-leakage transitions per site
+- Target: 100+ non-leakage transitions per site
 
 ## 6. PMI Computation
 
@@ -142,6 +157,13 @@ For each permutation:
 
 Observed PMI is significant if fewer than 5/1000 shuffled means exceed observed (one-sided p < 0.005, or p < 0.001 if 0/1000 exceed).
 
+### 6.4 Trajectory-Level Entropy Rates (Complementary Measure)
+
+Compute trajectory-level entropy rates as a complementary measure for stochastic transitions:
+- H(S_{t+1} | S_t, A_t) = -sum P(s'|s,a) log2 P(s'|s,a)
+- Compare with URL-only and URL+title representations
+- This is exploratory and does not affect the primary decision rule
+
 ## 7. Measures
 
 ### 7.1 Primary Metrics
@@ -161,6 +183,10 @@ Observed PMI is significant if fewer than 5/1000 shuffled means exceed observed 
 - **parent_synthetic_url_only**: 0.693 bits (parent EXP-PHYSICS-34149195420)
 - **parent_synthetic_url_title**: 1.970 bits (parent EXP-PHYSICS-34149195420)
 - **parent_synthetic_improvement**: +184% (parent EXP-PHYSICS-34149195420)
+
+### 7.4 Exploratory Metrics
+- **trajectory_entropy_url_only**: Trajectory-level entropy rate using URL-only representation
+- **trajectory_entropy_url_title**: Trajectory-level entropy rate using URL+title representation
 
 ## 8. Null Models
 
@@ -214,9 +240,9 @@ Real web pages may have duplicate, missing, or generic titles (e.g., "Dashboard"
 Conservative non-leakage criteria may exclude genuine transitions or include spurious ones.
 **Mitigation**: Manual inspection of 10% of classified transitions. Report false positive/negative rates.
 
-### 11.3 Small Sample Size
-With 20-30 actions per site and ~60-80% non-leakage, expect ~12-24 non-leakage transitions per site. This is below the 50-transition target.
-**Mitigation**: If initial collection yields <50 transitions, extend interaction script to 50-60 actions per site. Target 100+ non-leakage transitions per site.
+### 11.3 Sample Size
+With 100 trajectories x 8 steps = 800 transitions per site and 60-80% non-leakage, expect 480-640 non-leakage transitions per site. This exceeds the 50-transition minimum.
+**Mitigation**: If initial collection yields <50 transitions, extend to 200 trajectories per site.
 
 ### 11.4 Site Selection Bias
 Two sites may not represent the diversity of SPA architectures.
@@ -229,6 +255,14 @@ PMI values are sensitive to alpha. Results are specific to alpha=1.0.
 ### 11.6 Browser State Capture Timing
 DOM state may change between action execution and state capture (async loading, animations).
 **Mitigation**: Wait 2 seconds after each action before capturing state. Report any capture failures.
+
+### 11.7 Playwright Installation Failure
+Playwright or browser binaries may fail to install.
+**Mitigation**: If installation fails, experiment is MEASUREMENT_INVALID. Document exact error and retry.
+
+### 11.8 Site Access Failure
+Real SPA sites may block automated access (403, CAPTCHA, rate limiting).
+**Mitigation**: Use polite delays (>= 1 second), rotate user agents if needed, select sites known to be accessible. If all sites fail, experiment is MEASUREMENT_INVALID.
 
 ## 12. Decision Rules
 
@@ -251,7 +285,8 @@ If ANY of:
 If:
 1. Fewer than 50 non-leakage transitions from either site
 2. Pipeline errors prevent computation
-3. Non-leakage classification reveals systematic leakage in collected data (manual inspection finds >10% misclassification)
+3. Playwright fails to access sites or browser state extraction fails
+4. Non-leakage classification reveals systematic leakage in collected data (manual inspection finds >10% misclassification)
 
 ## 13. Expected Outcomes
 
@@ -276,20 +311,22 @@ If:
 
 ## 14. Analysis Plan
 
-1. **Data Collection**: Browser automation on 2 SPA/form-heavy sites, recording (URL, title, form_signals, action) before/after each interaction
-2. **Non-Leakage Classification**: Apply conservative criteria to identify non-leakage transitions
-3. **PMI Computation**: Compute PMI for URL-only, URL+title, URL+title+form representations per site
-4. **Permutation Testing**: Cross-trajectory permutation (1000 iterations) per representation per site
-5. **Positive Control**: Run synthetic SPA pipeline alongside real data
-6. **Comparison**: Compare real-data PMI with parent synthetic results
-7. **Form Signals**: Test whether URL+title+form > URL+title on sites with ambiguous titles
-8. **Reporting**: Report all outcomes with equal prominence
+1. **Infrastructure Setup**: Install Playwright, download browser binaries, verify works
+2. **Data Collection**: Browser automation on 2 SPA/form-heavy sites, 100 trajectories x 8 steps each, recording (URL, title, form_signals, action) before/after each interaction
+3. **Non-Leakage Classification**: Apply parent definition (action.target_href == state.url) to identify non-leakage transitions
+4. **PMI Computation**: Compute PMI for URL-only, URL+title, URL+title+form representations per site
+5. **Permutation Testing**: Cross-trajectory permutation (1000 iterations) per representation per site
+6. **Positive Control**: Run synthetic SPA pipeline alongside real data
+7. **Comparison**: Compare real-data PMI with parent synthetic results
+8. **Form Signals**: Test whether URL+title+form > URL+title on sites with ambiguous titles
+9. **Trajectory Entropy**: Compute trajectory-level entropy rates as complementary measure (exploratory)
+10. **Reporting**: Report all outcomes with equal prominence
 
 ## 15. Analysis Code
 
 Analysis will be implemented in Python using:
 - PMI computation from `research/physics/information_theoretic/spa_pmi.py` (reused from parent)
-- Browser automation via Playwright or Selenium for state collection
+- Browser automation via Playwright for state collection
 - `numpy` for statistical tests
 - `scipy.stats` for permutation tests
 - Standard library only for PMI computation
@@ -304,6 +341,7 @@ From parent experiment and theoretical reasoning:
 - URL-only PMI should be > 0 on real SPA data (URL-level states are not exchangeable)
 - Form signals may provide marginal information on real data where titles are ambiguous
 - Non-leakage transitions should be frequent on SPA/form-heavy sites (parent expected ~60-80%)
+- Trajectory-level entropy rates may detect structure that transition-level PMI misses
 
 ## 17. Deviation Policy
 
