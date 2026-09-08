@@ -1,0 +1,262 @@
+{
+  "experiment_id": "EXP-GRAPH-34244445713",
+  "fix_verification": {
+    "line_112_content": "candidates.sort(key=lambda m: m.confidence, reverse=True)",
+    "fix_present": false,
+    "kernel_sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61"
+  },
+  "conditions": [
+    {
+      "label": "B-COLD",
+      "status": "UNKNOWN",
+      "mechanism_id": null,
+      "bound_action": null,
+      "confidence": 0.0,
+      "reason": "no applicable validated mechanism",
+      "resolution_time_ms": 0.02,
+      "http_status_code": null,
+      "http_body": null,
+      "http_error": null
+    },
+    {
+      "label": "B-LITERAL-ONLY-ORIG",
+      "status": "EXECUTABLE",
+      "mechanism_id": "literal-posts-1",
+      "bound_action": {
+        "method": "GET",
+        "url": "/posts/1"
+      },
+      "confidence": 0.95,
+      "reason": "applicability guards and confidence threshold passed",
+      "resolution_time_ms": 0.09,
+      "http_status_code": 200,
+      "http_body": {
+        "userId": 1,
+        "id": 1,
+        "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+        "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+      },
+      "http_error": null
+    },
+    {
+      "label": "B-LITERAL-ONLY-UNSEEN",
+      "status": "EXECUTABLE",
+      "mechanism_id": "literal-posts-1",
+      "bound_action": {
+        "method": "GET",
+        "url": "/posts/1"
+      },
+      "confidence": 0.95,
+      "reason": "applicability guards and confidence threshold passed",
+      "resolution_time_ms": 0.12,
+      "http_status_code": 200,
+      "http_body": {
+        "userId": 1,
+        "id": 1,
+        "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+        "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+      },
+      "http_error": null
+    },
+    {
+      "label": "B-PARAM-ONLY-ORIG",
+      "status": "EXECUTABLE",
+      "mechanism_id": "param-posts-id",
+      "bound_action": {
+        "method": "GET",
+        "url": "/posts/1"
+      },
+      "confidence": 0.95,
+      "reason": "applicability guards and confidence threshold passed",
+      "resolution_time_ms": 0.1,
+      "http_status_code": 200,
+      "http_body": {
+        "userId": 1,
+        "id": 1,
+        "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+        "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+      },
+      "http_error": null
+    },
+    {
+      "label": "B-PARAM-ONLY-UNSEEN",
+      "status": "EXECUTABLE",
+      "mechanism_id": "param-posts-id",
+      "bound_action": {
+        "method": "GET",
+        "url": "/posts/7"
+      },
+      "confidence": 0.95,
+      "reason": "applicability guards and confidence threshold passed",
+      "resolution_time_ms": 0.12,
+      "http_status_code": 200,
+      "http_body": {
+        "userId": 1,
+        "id": 7,
+        "title": "magnam facilis autem",
+        "body": "dolore placeat quibusdam ea quo vitae\nmagni quis enim qui quis quo nemo aut saepe\nquidem repellat excepturi ut quia\nsunt ut sequi eos ea sed quas"
+      },
+      "http_error": null
+    },
+    {
+      "label": "B-COMPETE-PARAM-HIGHER",
+      "status": "EXECUTABLE",
+      "mechanism_id": "param-posts-id",
+      "bound_action": {
+        "method": "GET",
+        "url": "/posts/7"
+      },
+      "confidence": 0.98,
+      "reason": "applicability guards and confidence threshold passed",
+      "resolution_time_ms": 0.12,
+      "http_status_code": 200,
+      "http_body": {
+        "userId": 1,
+        "id": 7,
+        "title": "magnam facilis autem",
+        "body": "dolore placeat quibusdam ea quo vitae\nmagni quis enim qui quis quo nemo aut saepe\nquidem repellat excepturi ut quia\nsunt ut sequi eos ea sed quas"
+      },
+      "http_error": null
+    },
+    {
+      "label": "C-EQUAL-ID2",
+      "status": "EXECUTABLE",
+      "mechanism_id": "literal-posts-1",
+      "bound_action": {
+        "method": "GET",
+        "url": "/posts/1"
+      },
+      "confidence": 0.95,
+      "reason": "applicability guards and confidence threshold passed",
+      "resolution_time_ms": 0.11,
+      "http_status_code": 200,
+      "http_body": {
+        "userId": 1,
+        "id": 1,
+        "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+        "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+      },
+      "http_error": null
+    },
+    {
+      "label": "C-EQUAL-ID3",
+      "status": "EXECUTABLE",
+      "mechanism_id": "literal-posts-1",
+      "bound_action": {
+        "method": "GET",
+        "url": "/posts/1"
+      },
+      "confidence": 0.95,
+      "reason": "applicability guards and confidence threshold passed",
+      "resolution_time_ms": 0.13,
+      "http_status_code": 200,
+      "http_body": {
+        "userId": 1,
+        "id": 1,
+        "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+        "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+      },
+      "http_error": null
+    },
+    {
+      "label": "C-EQUAL-ID4",
+      "status": "EXECUTABLE",
+      "mechanism_id": "literal-posts-1",
+      "bound_action": {
+        "method": "GET",
+        "url": "/posts/1"
+      },
+      "confidence": 0.95,
+      "reason": "applicability guards and confidence threshold passed",
+      "resolution_time_ms": 0.13,
+      "http_status_code": 200,
+      "http_body": {
+        "userId": 1,
+        "id": 1,
+        "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+        "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+      },
+      "http_error": null
+    },
+    {
+      "label": "C-EQUAL-ID5",
+      "status": "EXECUTABLE",
+      "mechanism_id": "literal-posts-1",
+      "bound_action": {
+        "method": "GET",
+        "url": "/posts/1"
+      },
+      "confidence": 0.95,
+      "reason": "applicability guards and confidence threshold passed",
+      "resolution_time_ms": 0.12,
+      "http_status_code": 200,
+      "http_body": {
+        "userId": 1,
+        "id": 1,
+        "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+        "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+      },
+      "http_error": null
+    },
+    {
+      "label": "C-EQUAL-ID6",
+      "status": "EXECUTABLE",
+      "mechanism_id": "literal-posts-1",
+      "bound_action": {
+        "method": "GET",
+        "url": "/posts/1"
+      },
+      "confidence": 0.95,
+      "reason": "applicability guards and confidence threshold passed",
+      "resolution_time_ms": 0.13,
+      "http_status_code": 200,
+      "http_body": {
+        "userId": 1,
+        "id": 1,
+        "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+        "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+      },
+      "http_error": null
+    },
+    {
+      "label": "C-EQUAL-ID7",
+      "status": "EXECUTABLE",
+      "mechanism_id": "literal-posts-1",
+      "bound_action": {
+        "method": "GET",
+        "url": "/posts/1"
+      },
+      "confidence": 0.95,
+      "reason": "applicability guards and confidence threshold passed",
+      "resolution_time_ms": 0.15,
+      "http_status_code": 200,
+      "http_body": {
+        "userId": 1,
+        "id": 1,
+        "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+        "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+      },
+      "http_error": null
+    },
+    {
+      "label": "B-CONFIDENCE-LITERAL-HIGHER",
+      "status": "EXECUTABLE",
+      "mechanism_id": "literal-posts-1",
+      "bound_action": {
+        "method": "GET",
+        "url": "/posts/1"
+      },
+      "confidence": 0.98,
+      "reason": "applicability guards and confidence threshold passed",
+      "resolution_time_ms": 0.14,
+      "http_status_code": 200,
+      "http_body": {
+        "userId": 1,
+        "id": 1,
+        "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+        "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+      },
+      "http_error": null
+    }
+  ]
+}
