@@ -1,9 +1,9 @@
 {
   "stage": "director",
-  "category": "VALIDATION_FAILURE",
-  "message": "invalid claim update status: SURVIVES_NARROWLY",
+  "category": "DIRECTOR_FAILURE",
+  "message": "stage exited with code 66",
   "retryable": false,
-  "recorded_at": "2026-09-08T11:45:58.168754+00:00",
-  "github_run_id": "34222171080",
+  "recorded_at": "2026-09-08T15:26:40.112000+00:00",
+  "github_run_id": "34244451982",
   "github_run_attempt": "1"
 }
