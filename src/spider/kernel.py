@@ -456,7 +456,11 @@ class SpiderKernel:
             prefix = info["prefix"]
             suffix = info["suffix"]
 
-            # Slot-level prefix detection for metadata (stripping happens at bind time)
+            # Slot-level prefix detection: record for bind-time use.
+            # Do NOT strip from template here — callers pass the full value
+            # (e.g., 'user-4' for C2, 'd' for B4) and the template already
+            # contains the prefix. Strip only at bind time when the value
+            # already starts with the slot-level prefix (prevents double-prefix).
             slot_prefix = _detect_slot_level_prefix(info["values"], prefix)
             if slot_prefix:
                 slot_prefixes[slot_name] = slot_prefix

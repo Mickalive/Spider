@@ -1,6 +1,6 @@
 {
   "experiment_id": "EXP-PRODUCT-34282620394",
-  "timestamp": "2026-09-08T21:59:57Z",
+  "timestamp": "2026-09-08T23:51:20Z",
   "conditions": {
     "B1-single-path": {
       "condition_id": "B1-single-path",
@@ -170,8 +170,8 @@
           "method"
         ],
         "shared_paths": [
-          "url",
           "body.name",
+          "url",
           "method"
         ],
         "path_values": {
@@ -371,8 +371,8 @@
         ],
         "shared_paths": [
           "url",
-          "headers.X-Request-ID",
           "body.title",
+          "headers.X-Request-ID",
           "method"
         ],
         "path_values": {
@@ -385,15 +385,6 @@
             "prefix": "https://api.example.com/posts/",
             "suffix": ""
           },
-          "headers.X-Request-ID": {
-            "values": [
-              "req-1",
-              "req-2",
-              "req-3"
-            ],
-            "prefix": "req-",
-            "suffix": ""
-          },
           "body.title": {
             "values": [
               "First",
@@ -401,6 +392,15 @@
               "Third"
             ],
             "prefix": "",
+            "suffix": ""
+          },
+          "headers.X-Request-ID": {
+            "values": [
+              "req-1",
+              "req-2",
+              "req-3"
+            ],
+            "prefix": "req-",
             "suffix": ""
           }
         },
@@ -617,8 +617,8 @@
         ],
         "shared_paths": [
           "url",
-          "method",
-          "body.callback_url"
+          "body.callback_url",
+          "method"
         ],
         "path_values": {
           "body.callback_url": {
@@ -873,8 +873,8 @@
         ],
         "shared_paths": [
           "url",
-          "method",
-          "body.callback_url"
+          "body.callback_url",
+          "method"
         ],
         "path_values": {
           "body.callback_url": {
@@ -1442,8 +1442,8 @@
           "method"
         ],
         "shared_paths": [
-          "url",
           "body.quantity",
+          "url",
           "method"
         ],
         "path_values": {
@@ -1529,7 +1529,7 @@
     },
     "A3_field_path_relevance": {
       "status": "PASS",
-      "detail": "ACTION_TEMPLATE_PATHS={'body', 'query', 'url', 'method', 'headers'}, METADATA_KEYS={'retry_count', 'cache_hit', 'user_agent', 'response_time_ms', 'request_duration_ms', 'result_count', 'timestamp'}"
+      "detail": "ACTION_TEMPLATE_PATHS={'url', 'body', 'method', 'headers', 'query'}, METADATA_KEYS={'request_duration_ms', 'result_count', 'response_time_ms', 'cache_hit', 'user_agent', 'retry_count', 'timestamp'}"
     }
   }
 }
