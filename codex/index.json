@@ -610,6 +610,31 @@
         "handoff.json": "c1cec38c259eaec983f5165c96ad77901ace1c29dd8e8c65b33261cc19cded4b"
       }
     },
+    "EXP-PHYSICS-34149195420": {
+      "lane": "physics",
+      "request_id": "519dd95dcd99ae5437b5b6c4",
+      "created_at": "2026-09-07T17:50:01.867868+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Does PMI between actions and next-states detect genuine dynamical structure in non-leakage SPA transitions when the state representation is enriched beyond URL to include title and form signals?",
+      "audit_status": "REVISE",
+      "decision": "SURVIVES_CURRENT_TEST",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/physics",
+      "hashes": {
+        "request.json": "d21d7d22acb66d4f11314a8b972e483bc7d090c512548dff9a342563aa04afca",
+        "spec.json": "dcd4698c7dddfb446e9b86484832846f184efde07007f79542926302049295d8",
+        "prereg.md": "63810d581ddf29ba3d2abadd17f081ca090c5e0d9cc27af99fb0fc92a3c0b635",
+        "freeze.json": "531a2d98e54541a155787a30187da04f3160a4b38acdafda0301ad4c8b79eccd",
+        "result.json": "43262409c82b6c85f7351ee47aa3203cf6b87dd1b3076af2cbad152ecd1d4301",
+        "report.md": "378cdd8ee30e09e09bb12af8ff0e3c0f6cb1dd1101761d77922116b578f2841a",
+        "provenance.json": "1b44f820a736b54f4a9d777cd26ef931f93a978d60f7689e51abffce93350836",
+        "audit.json": "a31e0481721b17b837bbef70ca4842bb005eb4b5449ac2612043dff41490b9b2",
+        "verdict.json": "c14b8a3017f0cff9f254645b98a0d263a99ac475026bdc873bdade8e6becd906",
+        "handoff.json": "a3e4d8268994ad3bf053958a277db1e4db9b7b3c66c0b2a8e1f4976c8ace3e4c"
+      }
+    },
     "EXP-PRODUCT-33528829801": {
       "lane": "product",
       "request_id": "2629e8e63e200f05556e37ca",

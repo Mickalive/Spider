@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34149195420",
+  "lane": "physics",
+  "decision": "SURVIVES_CURRENT_TEST",
+  "claim_updates": [
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "EXPERIMENTAL",
+      "reason": "Narrow pipeline validation: title-aware PMI (1.970 bits) > URL-only PMI (0.693 bits) on synthetic SPA data with non-leakage by construction (p=0.001, d=80.3, 1000 cross-trajectory permutations). PMI pipeline detects known deterministic structure in SPA-like format. However: (1) URL-only PMI is significantly >0 (0.693 bits), contradicting pre-registered H1 that it would be 'near zero' — titles provide additional (+184%), not exclusive, information; (2) form_signals add zero marginal information (url_title_form PMI = url_title PMI = 1.970) because titles uniquely identify states in the synthetic design — H3 is untested; (3) synthetic deterministic 8-state world is a controlled pipeline validation, not evidence for C-WEB-DYNAMICS on real web where transitions are stochastic and titles may be noisy. The ceiling is: PMI pipeline + richer state representation survives on synthetic SPA data. Real SPA/form-heavy browser data required before any stronger claim."
+    }
+  ],
+  "product_action": "NONE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does title-aware PMI detect dynamical structure on real SPA/form-heavy browser transitions (React/Vue apps, form-heavy pages) where non-leakage transitions are frequent by construction and titles may be noisy or ambiguous, using browser-collected action->next-state data with sufficient transition density?",
+  "reason": "All four frozen decision checks pass (positive_control 1.911>=0.5, null_control 0/1000 passes, Bonferroni p<0.025, richer>url_only). Auditor confirms all metrics recomputed identically from frozen code+seed. However, auditor correctly narrows the ceiling: (1) URL-only PMI is significantly >0 (0.693 bits p=0.001), so structure is partially visible at URL level — titles add information but do not reveal 'invisible' structure; (2) the synthetic deterministic design is a pipeline validation, not evidence for C-WEB-DYNAMICS on real web; (3) form_signals are redundant with titles in this design and untested as an independent variable; (4) PMI smoothing asymmetry (smoothed marginals, unsmoothed joint) inflates absolute bit values and effect sizes. The experiment succeeds as a controlled validation: PMI can detect known structure in SPA-like non-leakage data when richer state representation resolves URL-level ambiguity and sampling avoids the unique-SA forced-zero regime. The critical next step is real SPA browser data.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-34149195420/result.json metrics url_only_pmi 0.693 url_title_pmi 1.970 positive_control_pmi 1.911 permutation p 0.000999",
+    "research/experiments/EXP-PHYSICS-34149195420/audit.json claim_ceiling SURVIVES_CURRENT_TEST narrow synthetic validation",
+    "research/experiments/EXP-PHYSICS-34149195420/audit.json validity_findings url_only_not_zero_H1_violated FAIL, synthetic_deterministic_tautology FAIL, form_signals_redundant_H3_untested FAIL, pmi_smoothing_asymmetry_bias FAIL",
+    "research/experiments/EXP-PHYSICS-34149195420/audit.json recomputed_metrics all match producer",
+    "research/experiments/EXP-PHYSICS-34149195420/raw_results.json decision_checks all passes true",
+    "research/experiments/EXP-PHYSICS-34149195420/spec.json decision_rule frozen four-check criteria",
+    "research/experiments/EXP-PHYSICS-34149195420/report.md URL-only PMI 0.693 not zero, URL+title 1.970 (+184%), form_signals redundant",
+    "research/physics/information_theoretic/spa_pmi.py sha256 8d6db688de638c5e826fa6dd4c946d5d4de59348e03685996cc9bdfc70cf8eac"
+  ]
+}

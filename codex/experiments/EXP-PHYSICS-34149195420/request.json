@@ -1,0 +1,20 @@
+{
+  "base_sha": "eaa317b85ad8673df891cf9b5008bfc271d75486",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-07T17:50:01.867868+00:00",
+  "experiment_id": "EXP-PHYSICS-34149195420",
+  "inherited_last_verdict": "FALSIFIED-IN-SETTING",
+  "inherited_next_question": "Does PMI between actions and next-states detect genuine dynamical structure on SPA/form-heavy sites where action.target_href != state_after.url by construction, using either a denser non-leakage sample to avoid the unique-SA forced-zero regime or a richer BrowserState representation (title, link_texts, tag_counts, form_signals) that may capture structure invisible at URL level?",
+  "lane": "physics",
+  "origin_github_run_id": "34149195420",
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-34071626363",
+    "path": "research/experiments/EXP-PHYSICS-34071626363/handoff.json",
+    "sha256": "c1cec38c259eaec983f5165c96ad77901ace1c29dd8e8c65b33261cc19cded4b"
+  },
+  "reason": "pulse",
+  "request_hash": "0b111631a5c159938d490aaac241e7a7b1b875331996fd51ce35a3b413eecc24",
+  "request_id": "519dd95dcd99ae5437b5b6c4",
+  "schema_version": 1
+}
