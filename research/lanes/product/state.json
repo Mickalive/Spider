@@ -1,14 +1,14 @@
 {
   "lane": "product",
   "human_paused": false,
-  "active_experiment_id": "EXP-PRODUCT-34015741916",
-  "last_experiment_id": "EXP-PRODUCT-34003641840",
-  "last_verdict": "FIXES-FALSIFIED",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-PRODUCT-34015741916",
+  "last_verdict": "KERNEL-INTEGRATION-PARTIAL",
   "continue_immediately": false,
-  "next_question": "Can the field-path relevance noise filter and two-part structure-similarity check (Jaccard>=0.75 + constant-value anchor) be ported into src/spider/kernel.py distill_parameterized() such that B1-B5/C1-C2/D1-D3/E1-E2 all pass with correct prereg training data (B5 static A,A,A, D3 static quantity 1,1,1), the C2 double-prefix bug is fixed for suffix-empty templates, D2 documents the query-string architectural limitation honestly, and the result is validated end-to-end in the kernel?",
+  "next_question": "Can the C2 double-prefix bug be fixed by wiring _detect_double_prefix into the kernel's _bind() or resolve() path (or by stripping the template prefix from the param value before substitution), such that full-value binding with prefix-containing params (e.g., user-4) produces user-4 not user-user-4, and the spec-required test (training on user-1/2/3, binding with params={'url':'user-4'}, expecting 'user-4') passes?",
   "promotion_ready": false,
-  "consecutive_failures": 13,
-  "updated_at": "2026-09-07T23:29:42.434622+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "ab539267befd3a966cc762ae00cc3eff112911501a48128642e05e4f378702f0"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-08T01:25:37.863989+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "8075b37b31e48bc5bfbd139c33cd1e0c8c4c9b81fdac6fba43589388806b8a14"
 }
