@@ -1,0 +1,20 @@
+{
+  "base_sha": "60239fcaf3b043033b953b635013e9f187525e9f",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-08T06:31:18.436352+00:00",
+  "experiment_id": "EXP-PRODUCT-34195008089",
+  "inherited_last_verdict": "KERNEL-INTEGRATION-PARTIAL",
+  "inherited_next_question": "Can the C2 double-prefix bug be fixed by wiring _detect_double_prefix into the kernel's _bind() or resolve() path (or by stripping the template prefix from the param value before substitution), such that full-value binding with prefix-containing params (e.g., user-4) produces user-4 not user-user-4, and the spec-required test (training on user-1/2/3, binding with params={'url':'user-4'}, expecting 'user-4') passes?",
+  "lane": "product",
+  "origin_github_run_id": "34195008089",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-34015741916",
+    "path": "research/experiments/EXP-PRODUCT-34015741916/handoff.json",
+    "sha256": "8075b37b31e48bc5bfbd139c33cd1e0c8c4c9b81fdac6fba43589388806b8a14"
+  },
+  "reason": "pulse",
+  "request_hash": "5e469e5f801da930c65fde45d2ff2ba9e54ad1667babcfd0013146911a7810b7",
+  "request_id": "cb9f09281605aa2c14bdc150",
+  "schema_version": 1
+}
