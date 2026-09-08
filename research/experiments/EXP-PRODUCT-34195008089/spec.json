@@ -1,17 +1,29 @@
 {
   "experiment_id": "EXP-PRODUCT-34195008089",
   "lane": "product",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-PARAM-INHERIT"],
+  "question": "Can the C2 double-prefix bug be fixed by modifying _bind() in src/spider/kernel.py to detect when a full-value parameter already contains the template prefix and strip it before substitution, such that binding user-${url} with params={'url':'user-4'} produces user-4 (not user-user-4), and all 10 test conditions (B1-B5, C1-C2, D1-D3, E1-E2) continue to pass with correct outcomes?",
+  "hypothesis": "A minimal modification to _bind() that detects prefix overlap between the parameter value and the template's literal prefix (text before ${slot}) and strips the prefix before substitution will fix C2 full-value binding without breaking any of the 9 conditions that already pass. The fix is applied at bind time only; template construction during distill_parameterized() is unchanged. The test harness c2_unseen() is corrected to pass full values {'url':'user-4'} per spec.",
+  "falsifier": "Any of: (1) C2 full-value binding still produces user-user-4 instead of user-4 (fix does not work), (2) any of B1-B5 slot counts change from expected (regression), (3) any of B1-B5 binding_accuracy drops below 1.0 (regression), (4) C1 prefix+suffix binding breaks (over-strip), (5) D1/D2/D3 noise filtering breaks (metadata re-appears), (6) E1/E2 null controls produce slot_count > 0, (7) distill_parameterized() crashes or returns None for conditions that should succeed.",
+  "baselines": [
+    "Parent kernel integration (EXP-PRODUCT-34015741916) — 9/10 conditions pass, C2 fails spec-required full-value test",
+    "Literal mechanism replay (kernel.distill()) — must fail on all unseen multi-parameter combinations",
+    "Pre-fix kernel _bind() — produces user-user-4 for C2 full-value binding (known bug)"
+  ],
+  "positive_control": "B1 (single-path URL parameterization) produces slot_count=1 with binding_accuracy=1.0. This verifies the base algorithm and _bind() fix do not break the simplest case.",
+  "null_control": "E1 (three unrelated observations) produces slot_count=0. E2 (single observation) produces slot_count=0. These verify structure-similarity and minimum-observation guard are unaffected by _bind() changes.",
+  "measurement_validity": [
+    "C2 tested with full values user-4, user-5, user-6 (not stripped middles) per spec measurement_validity",
+    "B5 uses static A,A,A training per prereg (expected slot_count=1 [url])",
+    "D3 uses static quantity 1,1,1 training per prereg (expected slot_count=1 [url])",
+    "All 10 conditions use identical synthetic data as parent EXP-PRODUCT-34015741916",
+    "Binding correctness uses strict JSON comparison (bound_action == expected_action)",
+    "The _bind() fix is the only kernel code change; distill_parameterized() template construction is unchanged",
+    "Test harness c2_unseen() returns [{'url':'user-4'}] not [{'url':'4'}] per spec"
+  ],
+  "decision_rule": "If ALL of: (1) B1-B5 produce correct slot counts (B1=1, B2=2, B3=3, B4=1, B5=1) with binding_accuracy=1.0, (2) C1 produces slot_count=1 with binding_accuracy=1.0 (prefix+suffix no over-strip), (3) C2 produces slot_count=1 with binding_accuracy=1.0 AND bound url is 'https://api.example.com/users/user-4' (not 'user-user-4'), (4) D1 produces slot_count=3 with metadata excluded, (5) D2 produces slot_count=1 [url] with metadata excluded, (6) D3 produces slot_count=1 [url], (7) E1 produces slot_count=0, (8) E2 produces slot_count=0, (9) literal baseline fails on all unseen combinations, then verdict = C2-FIX-SURVIVES. If C2 fails but all other 9 conditions pass, verdict = C2-FIX-FALSIFIED (fix insufficient). If any other condition regresses, verdict = C2-FIX-REGRESSED. If infrastructure prevents execution, verdict = MEASUREMENT_INVALID.",
+  "product_consequence_positive": "C2 full-value binding works. The kernel can accept full-value parameters (e.g., user-4) for prefix-only templates (user-${url}) without producing double-prefix. This completes the kernel integration gate from EXP-PRODUCT-34015741916 (9/10 -> 10/10). C-PARAM-INHERIT advances to KERNEL-INTEGRATION-SURVIVES, enabling product economics testing.",
+  "product_consequence_negative": "If the _bind() prefix-strip fix does not work or causes regressions, the C2 blocker persists. Product lane must either (a) redesign template construction to avoid prefix-only templates, (b) adopt the stripped-value API (caller passes '4' not 'user-4'), or (c) accept C2 as a known limitation. C-PARAM-INHERIT remains KERNEL-INTEGRATION-PARTIAL.",
+  "estimated_cost": "Very low: single-function modification to kernel.py _bind() (~10 lines), corrected test harness c2_unseen() (~3 lines), re-run 10 synthetic conditions. No model/network/browser calls.",
+  "expected_information_gain": "High: this is the sole blocker from EXP-PRODUCT-34015741916. A positive result completes the kernel integration gate. A negative result identifies whether the fix approach is fundamentally wrong or needs refinement. Either outcome directly unblocks or redirects C-PARAM-INHERIT progression."
 }
