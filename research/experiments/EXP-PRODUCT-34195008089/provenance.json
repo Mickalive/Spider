@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-34195008089",
+  "lane": "product",
+  "execution_environment": {
+    "platform": "linux",
+    "python_version": "3.12",
+    "working_directory": "/home/runner/work/Spider/Spider",
+    "execution_mode": "offline_synthetic",
+    "model_calls": 0,
+    "network_calls": 0,
+    "browser_calls": 0
+  },
+  "git_state": {
+    "base_sha": "60239fcaf3b043033b953b635013e9f187525e9f",
+    "execution_base_sha": "df2da5c",
+    "kernel_py_sha256": "7957b72e5d31f306af65ba317578493788f711b82c1e243035b8669c4f43d664",
+    "kernel_py_source": "restored from commit 44a0309 (parent experiment execution), then modified with _bind() fix",
+    "kernel_py_lines": 451,
+    "parent_kernel_py_sha256": "6f5adc62c53cbb8067154234da0a955de9743a08962f5341032971f166c2344b"
+  },
+  "frozen_inputs": {
+    "request_json_sha256": "ce4b6c34736ca35f2a986a7f7ea40647c45ba76637b3bd4efbd4db38f546a7cc",
+    "spec_json_sha256": "196d1a0ae9ab0908e124017004df8120641043ac2f53a1c1f2d400505e118095",
+    "prereg_md_sha256": "42cb87c816fb4bbd21a07e23ce6b45403546141cdb4d17c0fdf5d9186e465869"
+  },
+  "artifacts": {
+    "raw_evidence": {
+      "path": "research/experiments/EXP-PRODUCT-34195008089/raw_evidence.json",
+      "sha256": "5f38ec4f350784082453adad5de750bce101b4fa5af34663e736bfc019fd8058"
+    },
+    "run_experiment": {
+      "path": "research/experiments/EXP-PRODUCT-34195008089/run_experiment.py",
+      "sha256": "74d38963f8790a2025b5c158d6fd99f7606f218f1a64028d40a11a277e2090d5"
+    },
+    "kernel_modified": {
+      "path": "src/spider/kernel.py",
+      "sha256": "7957b72e5d31f306af65ba317578493788f711b82c1e243035b8669c4f43d664",
+      "modification": "Applied _bind() prefix-strip fix per frozen spec (lines 41-52)"
+    }
+  },
+  "code_changes": [
+    {
+      "file": "src/spider/kernel.py",
+      "description": "Restored parent experiment version (438 lines with distill_parameterized and helper functions), then applied _bind() prefix-strip fix",
+      "parent_sha256": "6f5adc62c53cbb8067154234da0a955de9743a08962f5341032971f166c2344b",
+      "modified_sha256": "7957b72e5d31f306af65ba317578493788f711b82c1e243035b8669c4f43d664",
+      "fix_description": "Added prefix overlap detection to _bind(): checks if param value starts with template prefix and strips it before substitution"
+    }
+  ],
+  "execution_commands": [
+    "python research/experiments/EXP-PRODUCT-34195008089/run_experiment.py"
+  ],
+  "parent_experiment": {
+    "experiment_id": "EXP-PRODUCT-34015741916",
+    "verdict": "KERNEL-INTEGRATION-PARTIAL",
+    "handoff_sha256": "8075b37b31e48bc5bfbd139c33cd1e0c8c4c9b81fdac6fba43589388806b8a14"
+  },
+  "reproduction_notes": [
+    "The experiment is fully deterministic: all 10 conditions use synthetic data with no model/network/browser calls.",
+    "To reproduce: restore kernel.py from commit 44a0309, apply the _bind() fix, and run the test harness.",
+    "The parent experiment's kernel.py (sha256 6f5adc62...) was restored from git history and then modified.",
+    "The _bind() fix adds 11 lines of code (lines 41-52) to the parent kernel.py."
+  ]
+}
