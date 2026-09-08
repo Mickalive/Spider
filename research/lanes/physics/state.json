@@ -7,8 +7,8 @@
   "continue_immediately": false,
   "next_question": "Does PMI between actions and next-states detect genuine dynamical structure on SPA/form-heavy sites where action.target_href != state_after.url by construction, using either a denser non-leakage sample to avoid the unique-SA forced-zero regime or a richer BrowserState representation (title, link_texts, tag_counts, form_signals) that may capture structure invisible at URL level?",
   "promotion_ready": false,
-  "consecutive_failures": 5,
-  "updated_at": "2026-09-08T06:32:35.214581+00:00",
+  "consecutive_failures": 6,
+  "updated_at": "2026-09-08T11:46:51.084177+00:00",
   "last_failure_retryable": false,
   "last_handoff_sha256": "c1cec38c259eaec983f5165c96ad77901ace1c29dd8e8c65b33261cc19cded4b"
 }
