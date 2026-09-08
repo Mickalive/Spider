@@ -65,7 +65,7 @@ The fix adds `len(parameter_slots)` as a secondary sort key. When confidences ar
 ## 4. Hypotheses
 
 ### H1: Post-Commit Hazard Elimination
-With the fix committed, compete-equal (literal 0.95 vs param 0.95, literal registered first) resolves to param for ALL unseen ids 2-7 (7/7 param wins).
+With the fix committed, compete-equal (literal 0.95 vs param 0.95, literal registered first) resolves to param for ALL unseen ids 2-7 (6/6 param wins).
 
 ### H2: Baseline Preservation
 All 6 baseline conditions pass on committed HEAD with the fix present. No regression from parent experiment baseline behavior.
