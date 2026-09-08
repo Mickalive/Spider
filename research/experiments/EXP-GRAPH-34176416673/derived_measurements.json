@@ -1,0 +1,91 @@
+{
+  "fix_committed": false,
+  "baseline_pass": true,
+  "baseline_pass_count": 6,
+  "baseline_total": 6,
+  "baseline_details": [
+    {
+      "id": "cold",
+      "pass": true,
+      "status": "UNKNOWN",
+      "url": null,
+      "http_id": null
+    },
+    {
+      "id": "literal-only-original",
+      "pass": true,
+      "status": "EXECUTABLE",
+      "url": "https://jsonplaceholder.typicode.com/posts/1",
+      "http_id": 1
+    },
+    {
+      "id": "literal-only-unseen",
+      "pass": true,
+      "status": "EXECUTABLE",
+      "url": "https://jsonplaceholder.typicode.com/posts/1",
+      "http_id": 1
+    },
+    {
+      "id": "param-only-original",
+      "pass": true,
+      "status": "EXECUTABLE",
+      "url": "https://jsonplaceholder.typicode.com/posts/1",
+      "http_id": 1
+    },
+    {
+      "id": "param-only-unseen",
+      "pass": true,
+      "status": "EXECUTABLE",
+      "url": "https://jsonplaceholder.typicode.com/posts/7",
+      "http_id": 7
+    },
+    {
+      "id": "compete-param-higher",
+      "pass": true,
+      "status": "EXECUTABLE",
+      "url": "https://jsonplaceholder.typicode.com/posts/7",
+      "http_id": 7
+    }
+  ],
+  "cold_baseline_pass": true,
+  "null_control_pass": true,
+  "null_control_details": {
+    "mechanism": "literal-fetch-posts-1",
+    "url": "https://jsonplaceholder.typicode.com/posts/1",
+    "http_id": 1,
+    "http_status": 200
+  },
+  "additional_literal_wins": true,
+  "additional_conditions": [
+    {
+      "id": "compete-equal-head-2",
+      "mechanism": "literal-fetch-posts-1",
+      "url": "https://jsonplaceholder.typicode.com/posts/1",
+      "http_id": 1
+    },
+    {
+      "id": "compete-equal-head-3",
+      "mechanism": "literal-fetch-posts-1",
+      "url": "https://jsonplaceholder.typicode.com/posts/1",
+      "http_id": 1
+    },
+    {
+      "id": "compete-equal-head-4",
+      "mechanism": "literal-fetch-posts-1",
+      "url": "https://jsonplaceholder.typicode.com/posts/1",
+      "http_id": 1
+    },
+    {
+      "id": "compete-equal-head-5",
+      "mechanism": "literal-fetch-posts-1",
+      "url": "https://jsonplaceholder.typicode.com/posts/1",
+      "http_id": 1
+    },
+    {
+      "id": "compete-equal-head-6",
+      "mechanism": "literal-fetch-posts-1",
+      "url": "https://jsonplaceholder.typicode.com/posts/1",
+      "http_id": 1
+    }
+  ]
+}
