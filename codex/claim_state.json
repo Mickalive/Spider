@@ -205,6 +205,14 @@
         "reason": "Third consecutive BLOCKED result: fix NOT present in committed HEAD src/spider/kernel.py L112 (sha256 46929b3a, line 'candidates.sort(key=lambda m: m.confidence, reverse=True)'). 0/14 conditions executed per frozen decision rule 9.3. No post-commit evidence exists for hazard elimination, baseline preservation, confidence ordering, or upsert compatibility. The prerequisite (one-line fix committed with Director approval) remains unmet. This is operational delay (fix not committed), not scientific closure (hypothesis not rejected)."
       },
       {
+        "experiment_id": "EXP-GRAPH-34395286092",
+        "lane": "graph",
+        "decision": "BLOCKED_CLOSE_AND_PIVOT",
+        "claim_id": "C-PARAM-INHERIT",
+        "status": "BLOCKED",
+        "reason": "Fourth consecutive BLOCKED: fix absent from committed HEAD (src/spider/kernel.py L112 = 'candidates.sort(key=lambda m: m.confidence, reverse=True)', sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61). 0/14 conditions executed per frozen decision rule 9.3. No scientific measurement occurred. Fix absent from all 12+ branches checked (raw_evidence.json fix_found_on_any_branch=false). Prerequisite (one-line fix commit) unmet across four experiments with identical kernel state. Audit PASS confirms BLOCKED status correctly justified (audit.json status=PASS, claim_ceiling=BLOCKED). C-PARAM-INHERIT cannot advance without this prerequisite; Director closes claim with explicit rationale and pivots graph lane to orthogonal high-upside question."
+      },
+      {
         "experiment_id": "EXP-PRODUCT-33528829801",
         "lane": "product",
         "decision": "SURVIVES \u2014 C-PARAM-INHERIT survives at synthetic in-kernel POC level: distill_parameterized() with _extract_varying_values() correctly induces one parameter slot for isomorphic action paths and resolves to EXECUTABLE with correct bound_action for all 10 unseen single-char identifiers. All four frozen decision-rule conditions satisfied. Audit PASS confirms recomputed metrics match producer. However, the claim ceiling is narrow: single-parameter, single-field, common-prefix heuristic, deterministic synthetic data, hardcoded confidence, simulated baselines. No broader product promotion is authorized by this evidence.",

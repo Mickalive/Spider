@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34395286092",
+  "lane": "graph",
+  "github_run_id": "34395286092",
+  "base_sha": "f1e10eebc93f888a3ac65c1afba07d12337f3f7c",
+  "head_commit": "27c3f6d30b64106ed2762b1b710d2b39462ab234",
+  "current_branch": "lab2/graph",
+  "kernel_file": {
+    "path": "src/spider/kernel.py",
+    "sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+    "l112_content": "candidates.sort(key=lambda m: m.confidence, reverse=True)",
+    "fix_present": false
+  },
+  "frozen_inputs": {
+    "request.json": {
+      "path": "research/experiments/EXP-GRAPH-34395286092/request.json",
+      "sha256": "3ba94d499c5c79aa09bf1be2163fdc84d99024e38e48261a67ac852e6b6c64fb"
+    },
+    "spec.json": {
+      "path": "research/experiments/EXP-GRAPH-34395286092/spec.json",
+      "sha256": "87bb648b7610a2b335e0625008d6e4556d6e951655926e3f1a7080d2a7d7494f"
+    },
+    "prereg.md": {
+      "path": "research/experiments/EXP-GRAPH-34395286092/prereg.md",
+      "sha256": "d0104f69a7129f0d4287cf84a57e50c478de1d73374969763966f2317b909b6e"
+    },
+    "freeze.json": {
+      "path": "research/experiments/EXP-GRAPH-34395286092/freeze.json",
+      "sha256": "computed_at_freeze_time"
+    }
+  },
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-34320613096",
+    "path": "research/experiments/EXP-GRAPH-34320613096/handoff.json",
+    "sha256": "95197b2fb0c5af9d49eeedbb9bc0c678a97abb3da7a027cf8d5803bba9981382"
+  },
+  "produced_artifacts": {
+    "result.json": {
+      "path": "research/experiments/EXP-GRAPH-34395286092/result.json",
+      "sha256": "1a08dff811dd9650e698b5cb82f6d9544488eb221c632e2409a374b7faaae325"
+    },
+    "report.md": {
+      "path": "research/experiments/EXP-GRAPH-34395286092/report.md",
+      "sha256": "3f207e7123c522cc7c3b28771dbeb7dad0bd33fc50fbb60f346d7293d8946b9f"
+    },
+    "provenance.json": {
+      "path": "research/experiments/EXP-GRAPH-34395286092/provenance.json",
+      "sha256": "3deedf6959b566082f7a5d8e63590886c9195728e0c3322f176a98bfe70ea5d0"
+    },
+    "raw_evidence.json": {
+      "path": "research/experiments/EXP-GRAPH-34395286092/raw_evidence.json",
+      "sha256": "10a5f990d7c6d38db2e0f32ebee04d55724f4f9df996fb36ad3a8467a1326157"
+    }
+  },
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.x",
+    "working_directory": "/home/runner/work/Spider/Spider",
+    "model_id": "opencode/mimo-v2.5-free",
+    "git_branches_checked": [
+      "lab2/graph",
+      "main",
+      "remotes/origin/archive/spider-codex-ultimate",
+      "remotes/origin/lab2/frontier",
+      "remotes/origin/lab2/graph",
+      "remotes/origin/lab2/intel",
+      "remotes/origin/lab2/physics",
+      "remotes/origin/lab2/product",
+      "remotes/origin/lab2/runtime",
+      "remotes/origin/main",
+      "remotes/origin/research2/bootstrap",
+      "remotes/origin/research2/codex-unification",
+      "remotes/origin/research2/hotfix-control-overlay"
+    ],
+    "total_branches_checked": 12,
+    "fix_found_on_any_branch": false
+  },
+  "execution_mode": "BLOCKED — no conditions executed, no HTTP requests made, no scientific measurement occurred",
+  "consecutive_blocked_experiments": [
+    "EXP-GRAPH-34244445713",
+    "EXP-GRAPH-34291967676",
+    "EXP-GRAPH-34320613096",
+    "EXP-GRAPH-34395286092"
+  ]
+}
