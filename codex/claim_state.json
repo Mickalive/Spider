@@ -267,6 +267,22 @@
         "claim_id": "C-PARAM-INHERIT",
         "status": "EXPERIMENTAL",
         "reason": "C2 double-prefix bug persists: _bind() prefix-strip fix is structurally inert because distill_parameterized() induces full template prefix (https://api.example.com/users/user-${url}), not short prefix (user-${url}). The fix's val.startswith(template_prefix) condition is always False for induced templates with long prefixes. C2 binding_accuracy=0.0 0/3, bound URLs contain user-user-4 instead of user-4. All 9 other conditions pass (31/31 binding correct). Kernel integration remains PARTIAL (9/10 synthetic). Fix approach rejected; different strategy needed (template construction change or slot-level prefix detection)."
+      },
+      {
+        "experiment_id": "EXP-PRODUCT-34282620394",
+        "lane": "product",
+        "decision": "C2-FIX-FALSIFIED",
+        "claim_id": "C-PARAM-INHERIT",
+        "status": "EXPERIMENTAL",
+        "reason": "C2 distill-time prefix stripping works in isolation (binding_accuracy=1.0, template correctly shortened to https://api.example.com/users/${url}) but under the frozen 10-condition spec the fix is FALSIFIED: 4/9 regression conditions fail (B4, C1, D1, D3 binding_accuracy=0.0) because distill-time stripping mandates full-value callers while the harness uses short values. Per frozen decision_rule, any regression triggers C2-FIX-FALSIFIED. Kernel integration remains PARTIAL (6/10 full-pass under this implementation, 9/10 under prior baseline without this fix). C-PARAM-INHERIT is NOT product-ready."
+      },
+      {
+        "experiment_id": "EXP-PRODUCT-34282620394",
+        "lane": "product",
+        "decision": "C2-FIX-FALSIFIED",
+        "claim_id": "C-PARAM-INHERIT",
+        "status": "EXPERIMENTAL",
+        "reason": "Distill-time prefix stripping mechanism (detect slot-level prefix from training values, strip from template, bind full value directly) is now FALSIFIED as a standalone fix: it breaks the value contract for callers passing short values. The mechanism is technically sound for full-value-only convention but incompatible with the existing mixed-convention harness. Two viable alternatives remain: (a) revert to bind-time double-prefix detection which handled both conventions, or (b) adopt full-value-only contract and update all callers."
       }
     ],
     "C-CROSSSITE": [

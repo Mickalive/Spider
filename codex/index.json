@@ -962,6 +962,31 @@
         "handoff.json": "531dc40daddb3339fa9159d30e5c9f1edb6adec0de8bd5e4d41416df52eca88f"
       }
     },
+    "EXP-PRODUCT-34282620394": {
+      "lane": "product",
+      "request_id": "314409ac96d19025f5423c4b",
+      "created_at": "2026-09-08T21:48:52.474992+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT"
+      ],
+      "question": "Can C2 full-value binding be fixed by modifying distill_parameterized() to detect prefix-only varying segments and induce shorter templates, such that binding user-${url} with params={'url':'user-4'} produces user-4 not user-user-4, and all 10 conditions pass?",
+      "audit_status": "FAIL",
+      "decision": "C2-FIX-FALSIFIED",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/product",
+      "hashes": {
+        "request.json": "ba041eed4d24d1e99ed377e2f3a85a5d2a89e4806f79b563532b727a1b7a72d1",
+        "spec.json": "bd7d552cf9f099f26ee5b313e2b1ccf7194495e3c0ca57e7fa0c02d9f0919a6a",
+        "prereg.md": "b476866fdba2cc3c38cb8d97df89283a8dbc6ce489d72103169e8fbd3a7b9575",
+        "freeze.json": "7b39e36f0aabf4d015ab8726b0c7940804104da859874c735d8f92ffaf0be755",
+        "result.json": "b64cb9b1c0c863f95d4c8ccfe72db239fa982c6fffab2fb60c36c271cd226df8",
+        "report.md": "4815731a280f5f2a8d402652da0c3a250bf0bebd18bc489ee29930041597b6f2",
+        "provenance.json": "3dc853813f6801a315d95d70782bfaab1960c61736f95238dcf826c06d7a99a0",
+        "audit.json": "0ef767324483cf9d6930d527dcabdb6c610df8a85d3d16e640daa968a1f50b0d",
+        "verdict.json": "21a4550b2a8f3ba2134f54d7d06984eadcd1b3f581aca9a6e6cc557ad626e884",
+        "handoff.json": "da36422c7bc4db61ac01783ebba08de0770998a0004462ebcfc2308277f6c155"
+      }
+    },
     "EXP-RUNTIME-33528830833": {
       "lane": "runtime",
       "request_id": "cbf791e0cd3fe570d0ff0fd5",
