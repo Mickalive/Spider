@@ -11,7 +11,7 @@
 
 ## 2. Scientific Question
 
-Can ANY publicly-accessible WebArena deployment path provide a live DOM surface for measuring actual fragment yield, thereby resolving whether heuristic yield estimates (0.517-0.65) are calibrated?
+Can ANY publicly-accessible WebArena deployment path (Docker Hub WebArena-Verified images or Mind2Web HuggingFace dataset) provide a live DOM surface for measuring actual fragment yield, thereby resolving whether heuristic yield estimates (0.517-0.65) are calibrated OR whether Mind2Web offers a viable alternative testbed?
 
 ## 3. Motivation
 
@@ -21,9 +21,11 @@ Three prior Intel experiments have attempted to validate heuristic yield estimat
 
 2. **EXP-INTEL-34047713704**: BLOCKED. Docker images from ghcr.io/web-arena-x/ denied without authentication. Playwright + Chromium confirmed working. Measurement script prepared but viewport filtering uses depth/role heuristic instead of geometry-faithful union_bound. Central question remains unanswered.
 
-3. **This experiment (EXP-INTEL-34377576886)**: Pulse-triggered retry. Prior design attempted same ghcr.io path and failed (failure.json: stage exited code 66). New design must test DIFFERENT deployment paths.
+3. **Prior design attempt for this experiment**: Failed with exit code 66. Existing spec.json tested 3 Docker paths (Docker Hub, ZIM+Kiwix, ghcr.io). Design was comprehensive but execution failed.
 
-**Key new finding from this design phase**: WebArena-Verified (ServiceNow) images are publicly available on Docker Hub (am1n3e/*), not just ghcr.io. Wikipedia image is 40MB (arm64-only). Shopping image is 5GB (single-platform). Kiwix ZIM files for Wikipedia are freely available (~310MB for 100-article version). These were NOT tested in prior experiments.
+4. **This experiment (EXP-INTEL-34377576886, revised)**: Simplified design testing 2 paths: (A) Docker Hub shopping image (smallest, no auth required), (B) Mind2Web HuggingFace (Docker-free alternative). Addresses auditor required_fixes: geometry-faithful viewport filtering, durable artifact hashes, pilot disclosure.
+
+**Key new finding from this design phase**: WebArena-Verified (ServiceNow) images are publicly available on Docker Hub (am1n3e/*), not just ghcr.io. Shopping image is 5GB (single-platform). These were NOT tested in prior experiments. Mind2Web (OSU-NLP-Group) provides 2000+ tasks across 137 websites with trajectory data on HuggingFace — no Docker required.
 
 **Parent handoff four-way distinction preserved:**
 
@@ -44,12 +46,11 @@ Three prior Intel experiments have attempted to validate heuristic yield estimat
 - Whether heuristic estimates match actual yield (CENTRAL QUESTION)
 - Whether Method 1 or aggregated median is more predictive
 - Whether shopping positive control would show highest yield >40%
-- Whether wikipedia null control would show lowest yield <60%
 - Whether max_obs_length=1920 is binding truncation on live pages
 - Whether 812-task corpus is suitable for C-CROSSSITE/C-LLM-INHERIT
 - Whether Docker Hub images work on linux/amd64
-- Whether ZIM+Kiwix can serve WebArena-compatible pages
-- Whether VisualWebArena/Mind2Web offer lower-uncertainty path
+- Whether Mind2Web is structurally compatible with SPIDER fragment model
+- Whether VisualWebArena offers lower-uncertainty path if both fail
 
 **do_not_assume**:
 - Heuristic estimates are calibrated (they are unvalidated priors)
@@ -57,105 +58,121 @@ Three prior Intel experiments have attempted to validate heuristic yield estimat
 - 224 LOC adapter cost generalizes to live integration
 - Synthetic adapter scores predict live performance
 - Positive control (shopping 0.65) is robust (Method 1 gives 0.365)
-- Null control (wikipedia 0.517) is valid (prereg requires <0.40)
 - BLOCKED status implies heuristic estimates are wrong (they are unvalidated)
-- Depth/role viewport heuristic is equivalent to geometry-faithful union_bound
+- Depth/role viewport heuristic is equivalent to geometry-faithful implementation
 - N=1 pilot can generalize to full 812-task corpus
 - Resolving Docker auth alone is sufficient (viewport filtering must also be corrected)
 - Docker Hub images are available on amd64 (wikipedia is arm64-only)
-- ZIM+Kiwix Wikipedia serves the same pages as WebArena Docker Wikipedia
+- Mind2Web HTML snapshots are equivalent to live DOM (they are static dumps)
 
 ## 4. Hypotheses
 
-### H1: Deployment Path Viability
-At least 1 of 3 deployment paths is viable in the current environment:
-- **Path A**: Docker Hub am1n3e/webarena-verified-* images pullable on linux/amd64
-- **Path B**: ZIM+Kiwix local Wikipedia server serves HTTP content accessible by Playwright
-- **Path C**: ghcr.io/web-arena-x images pullable with GITHUB_TOKEN/PAT authentication
+### H1: Path A Viability (Docker Hub Shopping)
+The Docker Hub image `am1n3e/webarena-verified-shopping:latest` is pullable on linux/amd64 within 10 minutes and serves HTTP content on an exposed port.
 
-### H2: Heuristic Calibration (conditional on H1 success)
-If any deployment path succeeds, actual measured yield (with geometry-faithful viewport filtering) is within 15 percentage points of the heuristic estimate for the tested site type.
+### H2: Path B Viability (Mind2Web)
+The Mind2Web dataset (osu-nlp-group/Mind2Web) loads successfully from HuggingFace and contains >=50% of tasks with HTML snapshots AND trajectory/action data.
 
-### H3: Pipeline Functionality (conditional on H1 success)
-If any deployment path succeeds, the observation pipeline (accessibility tree extraction + viewport filtering + pruning + truncation) produces a non-empty observation with measurable yield.
+### H3: Heuristic Calibration (conditional on H1 success)
+If Path A succeeds, actual measured yield (with geometry-faithful viewport filtering) is within 15 percentage points of the heuristic estimate for shopping (0.65).
+
+### H4: Pipeline Functionality (conditional on H1 success)
+If Path A succeeds, the observation pipeline (accessibility tree extraction + geometry-faithful viewport filtering + pruning + truncation) produces a non-empty observation with measurable yield.
 
 ## 5. Infrastructure Census (Step 1)
 
-### 5.1 Path A: Docker Hub WebArena-Verified Images
-Test in order (smallest to largest):
-1. `docker pull --platform linux/amd64 am1n3e/webarena-verified-wikipedia:latest` (40MB claimed, may be arm64-only)
-2. `docker pull --platform linux/amd64 am1n3e/webarena-verified-shopping_admin:latest` (1.16GB)
-3. `docker pull --platform linux/amd64 am1n3e/webarena-verified-map:latest` (1.11GB)
-4. `docker pull --platform linux/amd64 am1n3e/webarena-verified-shopping:latest` (5.05GB)
-5. `docker pull --platform linux/amd64 am1n3e/webarena-verified-reddit:latest` (4.26GB)
-6. `docker pull --platform linux/amd64 am1n3e/webarena-verified-gitlab:latest` (20.49GB — likely infeasible)
+### 5.1 Path A: Docker Hub WebArena-Verified Shopping Image
+Test sequence:
+1. `docker pull --platform linux/amd64 am1n3e/webarena-verified-shopping:latest` (5GB claimed)
+2. Record: pull status, actual image size, platform mismatch errors, timeout (10min limit)
+3. If pull succeeds: `docker run -d -p 8080:8080 am1n3e/webarena-verified-shopping:latest`
+4. Verify HTTP response at http://localhost:8080
+5. Record: container start status, HTTP response code, response time
 
-For each attempt, record: pull status, actual image size, platform mismatch errors, timeout status.
+### 5.2 Path B: Mind2Web Dataset Assessment
+1. Load dataset: `datasets.load_dataset("osu-nlp-group/Mind2Web")`
+2. Analyze splits: train/dev/test sizes
+3. Count unique websites across all splits
+4. Check for HTML content: does any field contain HTML markup?
+5. Check for trajectory data: are action sequences included?
+6. Sample 1 task: examine full structure (fields, data types, completeness)
+7. Record: dataset size, website count, HTML availability, trajectory availability
 
-### 5.2 Path B: ZIM+Kiwix Wikipedia
-1. Download wikipedia_en_100_2026-08.zim (~310MB) from download.kiwix.org
-2. Start Kiwix server: `docker run -d -p 8888:80 -v /path/to/zim:/data ghcr.io/kiwix/kiwix-serve:3.3.0 wikipedia_en_100_2026-08.zim`
-3. Verify HTTP response at http://localhost:8888
-4. This is a DIFFERENT Wikipedia than WebArena's (Kiwix vs Docker self-hosted). Disclosure required.
+### 5.3 Infrastructure Prerequisites
+- Docker daemon running (verified in parent)
+- Playwright 1.62.0 + Chromium installed (verified in parent)
+- 86GB disk / 15GB RAM available (verified in parent)
+- Internet access for Docker Hub and HuggingFace
 
-### 5.3 Path C: ghcr.io Authentication
-1. Check GITHUB_TOKEN environment variable
-2. Attempt `docker login ghcr.io` with available credentials
-3. If login succeeds, pull one image (smallest available)
-4. Record exact auth method and error messages
-
-### 5.4 Dataset Analysis (independent of deployment)
-1. Load AmineHA/WebArena-Verified from HuggingFace
-2. Analyze: site type distribution, multi-site tasks (how many tasks span multiple sites?), intent template complexity, eval evaluator types
-3. This provides structural intelligence about the corpus even if no Docker path works
-
-## 6. Measurement Pipeline (Steps 3-5)
+## 6. Measurement Pipeline (Steps 3-4, conditional on Path A success)
 
 ### 6.1 Task Selection
-Select 1 task per viable deployment path:
-- If Path A succeeds: first available task matching the deployed site type
-- If Path B succeeds: a Wikipedia task from WebArena-Verified dataset (note: Kiwix Wikipedia is NOT the same as WebArena Docker Wikipedia — disclose this limitation)
-- If Path C succeeds: first available task matching the pulled image type
+Select 1 shopping task from WebArena-Verified dataset (HuggingFace AmineHA/WebArena-Verified):
+- Filter: site_type == "shopping"
+- Select: first task with non-empty starting_url
+- Record: task_id, starting_url, intent, eval_spec
 
-### 6.2 Viewport Filtering (CORRECTED)
+### 6.2 Viewport Filtering (GEOMETRY-FAITHFUL)
 **CRITICAL**: Replace depth/role heuristic with geometry-faithful implementation.
 
-Required implementation (in order of preference):
-1. **Playwright CDP**: Use `page.evaluate()` to call `Accessibility.getFullAXTree` with `union_bound` geometry, compute viewport intersection ratio
-2. **Bounding box**: Use `page.locator().bounding_box()` for each element, intersect with viewport rect (0, 0, 1280, 720)
-3. **Pilot approximation**: If neither geometry method is achievable, use depth/role heuristic but explicitly label as pilot with error bound
-
+Implementation:
 ```python
 # CORRECT: Geometry-faithful viewport filtering
-# Use Playwright/CDP to get element bounding boxes
+# Use Playwright locator.bounding_box() for each element
 # intersect with viewport rectangle (0, 0, 1280, 720)
-# keep elements with intersection_area / element_area > IN_VIEWPORT_RATIO_THRESHOLD
+# keep elements with intersection_area / element_area > 0.5
+
+from playwright.sync_api import sync_playwright
+
+viewport_rect = {"x": 0, "y": 0, "width": 1280, "height": 720}
+
+def compute_intersection_area(box, viewport):
+    """Compute intersection area between element bounding box and viewport."""
+    x1 = max(box["x"], viewport["x"])
+    y1 = max(box["y"], viewport["y"])
+    x2 = min(box["x"] + box["width"], viewport["x"] + viewport["width"])
+    y2 = min(box["y"] + box["height"], viewport["y"] + viewport["height"])
+    if x1 >= x2 or y1 >= y2:
+        return 0.0
+    return (x2 - x1) * (y2 - y1)
+
+def is_in_viewport(element, viewport, threshold=0.5):
+    """Check if element is sufficiently within viewport."""
+    box = element.bounding_box()
+    if box is None:
+        return False
+    element_area = box["width"] * box["height"]
+    if element_area == 0:
+        return False
+    intersection = compute_intersection_area(box, viewport)
+    return (intersection / element_area) > threshold
 
 # PROHIBITED as primary: Depth/role heuristic
 # keep indent <= 4 or role in viewport_roles  ← VALIDITY GAP
 ```
 
 ### 6.3 Pipeline Steps
-For each task:
+For the selected task:
 1. Launch Playwright headless Chromium (viewport 1280x720)
-2. Navigate to task starting URL
+2. Navigate to task starting_url
 3. Wait for page load (networkidle or 10s timeout)
-4. Extract accessibility tree via CDP
+4. Extract accessibility tree via CDP (page.evaluate with Accessibility.getFullAXTree)
 5. Apply geometry-faithful viewport filtering (section 6.2)
-6. Apply IGNORED_ACTREE_PROPERTIES pruning
-7. Truncate at UTTERANCE_MAX_LENGTH=8192 and max_obs_length=1920
+6. Apply IGNORED_ACTREE_PROPERTIES pruning (remove: focused, hash, keyshortcuts, level, bonusDescription, description, descriptionFrom, details, readonly, required, checked, expanded, popup, cursor, roleDescription, value, valueForRange, valuemin, valuemax, valuetext)
+7. Truncate at UTTERANCE_MAX_LENGTH=8192 (character-level) and max_obs_length=1920 (element-level)
 8. Compute: total_elements, viewport_elements, pruned_elements, truncated_elements
 9. Compute: actual_yield = truncated_elements / total_elements
 10. Save raw accessibility tree with sha256 hash
 
 ### 6.4 Data Preservation
-Save for each task:
+Save for each measurement:
 - Raw accessibility tree (JSON) with sha256 hash
 - Filtered/pruned/truncated element counts
 - Actual yield
-- Viewport geometry parameters
-- Deployment path used (A/B/C)
+- Viewport geometry parameters (1280x720)
+- Deployment path used (A or B)
 - Any errors or warnings
+- Playwright version, Chromium version, Python version
 
 ## 7. Measures
 
@@ -168,16 +185,21 @@ Save for each task:
 - **pruning_rate**: pruned_elements / viewport_elements
 - **truncation_rate**: truncated_elements / pruned_elements
 - **total_elements**: raw accessibility tree size
+- **character_count**: observation character count after truncation
 
 ### 7.3 Infrastructure Metrics
-- **deployment_paths_tested**: count
-- **deployment_paths_succeeded**: count
-- **docker_hub_pullable**: boolean (per image)
-- **kiwix_zim_served**: boolean
-- **ghcr_auth_success**: boolean
+- **docker_hub_pull_success**: boolean
+- **docker_hub_image_size_gb**: float
+- **docker_hub_pull_time_seconds**: float
+- **docker_container_start_success**: boolean
+- **docker_http_response_code**: integer
+- **mind2web_load_success**: boolean
+- **mind2web_task_count**: integer
+- **mind2web_website_count**: integer
+- **mind2web_html_available**: boolean
+- **mind2web_trajectory_available**: boolean
 - **playwright_available**: boolean
-- **hf_dataset_loaded**: boolean (812 tasks)
-- **measurement_time_seconds**: per task
+- **measurement_time_seconds**: float
 
 ## 8. Null Models
 
@@ -188,29 +210,32 @@ Heuristic estimates from EXP-INTEL-33945226776. Primary comparison: yield_delta 
 Element-count estimates. Secondary comparison: which heuristic method is closer to actual?
 
 ### 8.3 Frequency Baseline
-If actual yield ≈ 1.0 for all site types, the pipeline is not filtering meaningfully. If actual yield ≈ 0.0, the pipeline is too aggressive.
+If actual_yield ≈ 1.0, pipeline is not filtering meaningfully. If actual_yield ≈ 0.0, pipeline is too aggressive.
 
 ## 9. Controls
 
 ### 9.1 Positive Control (Pipeline Functionality)
-If any environment deploys, the observation pipeline must produce a non-empty observation. Verifies pipeline can extract structured data from live DOM.
+If Path A deploys, observation pipeline must produce non-empty observation with >0 elements. Verifies pipeline can extract structured data from live DOM.
 
-### 9.2 Infrastructure Control (Deployment Census)
-All 3 deployment paths are systematically tested. Even if all fail, the census is informative for the next experiment's design.
+### 9.2 Null Control (Environment Functionality)
+If Path A deploys, at least 1 shopping task starting URL must return HTTP 200. If 404/500, environment is not functional (infrastructure finding).
 
 ### 9.3 Viewport Control (Geometry Faithfulness)
-Viewport filtering uses actual bounding-box intersection, not depth/role heuristic. If geometry-faithful implementation is not achievable, measurement is labeled as pilot approximation.
+Viewport filtering uses locator.bounding_box() intersection, NOT depth/role heuristic. If bounding_box is not achievable (e.g., elements not queryable), measurement is labeled as pilot with error bound.
+
+### 9.4 Mind2Web Control (Structural Compatibility)
+Mind2Web assessment must check: (a) HTML snapshots present in >=50% of tasks, (b) trajectory/action data present, (c) >=100 unique websites. If any check fails, Mind2Web is structurally incompatible.
 
 ## 10. Validity Threats
 
 ### 10.1 Platform Mismatch
-Docker Hub Wikipedia image is arm64-only. Shopping image may also be arm64. Mitigation: test with --platform linux/amd64 explicitly; if no amd64 images exist, this is an infrastructure finding.
+Docker Hub shopping image may be arm64-only. Mitigation: test with --platform linux/amd64 explicitly; if no amd64 image exists, this is an infrastructure finding.
 
-### 10.2 ZIM+Kiwix Wikipedia ≠ WebArena Docker Wikipedia
-Kiwix serves static Wikipedia dumps; WebArena Docker serves a self-hosted Wikipedia with interactive features (edit, search, user pages). Yield on Kiwix may differ from WebArena Docker Wikipedia. Mitigation: disclose explicitly; Kiwix measurement is a lower-bound estimate for pipeline functionality, not a direct yield comparison.
+### 10.2 Docker Image Size
+Shopping image is 5GB. May exceed disk or timeout constraints. Mitigation: 10min timeout; if pull fails, record exact error and move to Path B.
 
-### 10.3 Docker Image Size
-Shopping (5GB) and gitlab (20GB) images may exceed disk or timeout constraints. Mitigation: test smallest images first; record pull times; if large images cannot be pulled, this is an infrastructure finding.
+### 10.3 Mind2Web HTML Snapshots
+Mind2Web may store HTML as compressed files, URLs, or derived features — not raw HTML. Mitigation: explicitly check for HTML markup in dataset fields; if not present, disclose as structural gap.
 
 ### 10.4 Sample Size
 N=1 per viable path (pilot calibration). Cannot generalize to 812-task corpus. Mitigation: disclose as pilot; require minimum 2-3 tasks per site type before SUPPORTS verdict for C-CROSSSITE/C-LLM-INHERIT.
@@ -219,64 +244,84 @@ N=1 per viable path (pilot calibration). Cannot generalize to 812-task corpus. M
 Method 1 (shopping 0.365) and aggregated median (shopping 0.65) disagree by 28.5pp. Decision rule uses heuristic_yield (aggregated median) as primary; Method 1 is secondary comparison.
 
 ### 10.6 Viewport Filtering Approximation
-Geometry-faithful CDP union_bound may not be directly accessible. Fallback to bounding_box intersection. If neither achievable, use depth/role heuristic with explicit pilot label and error bound.
+Geometry-faithful bounding_box intersection requires elements to be queryable via Playwright locators. If accessibility tree nodes don't have corresponding locators, fallback to depth/role heuristic with explicit pilot label.
+
+### 10.7 Static vs Live DOM
+Mind2Web HTML snapshots are static dumps, not live DOM. Yield measurements on Mind2Web would not reflect dynamic content, JavaScript execution, or network requests. Disclosure required.
 
 ## 11. Decision Rules
 
-### 11.1 SUPPORTS
+### 11.1 SUPPORTS (Path A)
 If ALL of:
-1. At least 1 deployment path succeeds
-2. actual_yield within 15pp of heuristic_yield for the tested site type
+1. Path A succeeds (Docker Hub shopping image pullable and serving HTTP)
+2. actual_yield within 15pp of heuristic_yield (0.65) for shopping
 3. Positive control passes (pipeline produces non-empty observation)
 4. Viewport filtering is geometry-faithful or explicitly labeled as pilot approximation
 
-### 11.2 FALSIFIES
-If ANY of:
-1. At least 1 deployment path succeeds AND actual_yield deviates >15pp from heuristic
-2. At least 1 deployment path succeeds AND positive control fails (empty observation)
+### 11.2 SUPPORTS (Path B)
+If ALL of:
+1. Path A fails (Docker Hub shopping image not pullable or not serving)
+2. Mind2Web loads successfully
+3. Mind2Web has >=50% tasks with HTML snapshots AND trajectory data
+4. Mind2Web has >=100 unique websites
 
-### 11.3 BLOCKED
+### 11.3 FALSIFIES (Heuristic)
 If:
-1. ALL 3 deployment paths fail (no environment can be deployed)
-2. OR no image is pullable on linux/amd64 within disk/time constraints
+1. Path A succeeds AND actual_yield deviates >15pp from heuristic (0.65)
 
-### 11.4 MEASUREMENT_INVALID
+### 11.4 FALSIFIES (Mind2Web)
 If:
-1. A path deploys but pipeline errors prevent yield computation
+1. Path A fails AND Mind2Web has <50% tasks with HTML snapshots OR no trajectory data OR <100 websites
+
+### 11.5 BLOCKED
+If:
+1. Path A fails (Docker Hub shopping image not pullable or not serving HTTP)
+2. AND Path B fails (Mind2Web doesn't load or is structurally incompatible)
+
+### 11.6 MEASUREMENT_INVALID
+If:
+1. Path A succeeds but pipeline errors prevent yield computation
 2. Viewport filtering cannot be implemented (neither geometry-faithful nor heuristic)
 3. Raw data artifacts cannot be preserved
 
 ## 12. Expected Outcomes
 
-### 12.1 SUPPORTS
-- At least one deployment path works
-- Heuristic yield estimate is calibrated within 15pp for that site type
-- Intel can recommend that site type for C-CROSSSITE/C-LLM-INHERIT testing
+### 12.1 SUPPORTS (Path A)
+- Docker Hub shopping image works on linux/amd64
+- Heuristic yield estimate (0.65) is calibrated within 15pp
+- Intel can recommend shopping site type for C-CROSSSITE/C-LLM-INHERIT testing
 - Other site types remain unvalidated
 
-### 12.2 FALSIFIES
-- At least one deployment path works
-- Heuristic yield estimate is NOT calibrated (>15pp deviation)
+### 12.2 SUPPORTS (Path B)
+- Docker Hub shopping image doesn't work
+- Mind2Web is structurally compatible (HTML + trajectories + diverse sites)
+- Intel can recommend Mind2Web as Docker-free alternative for cross-site diversity
+- Different corpus than WebArena — separate yield calibration needed
+
+### 12.3 FALSIFIES (Heuristic)
+- Docker Hub shopping image works
+- Heuristic yield estimate (0.65) is NOT calibrated (>15pp deviation)
 - 812-task corpus heuristic priors are unreliable
-- Intel should reassess VisualWebArena/Mind2Web as alternatives
+- Intel should reassess VisualWebArena or other benchmarks
 
-### 12.3 BLOCKED
-- No deployment path works in the current environment
+### 12.4 FALSIFIES (Mind2Web)
+- Docker Hub shopping image doesn't work
+- Mind2Web lacks HTML snapshots or trajectory data
+- Mind2Web cannot serve as SPIDER testbed
+- Intel should assess VisualWebArena or other benchmarks
+
+### 12.5 BLOCKED
+- Neither Docker Hub nor Mind2Web works
 - Complete infrastructure census available for next design
-- Intel should consider: (a) VisualWebArena (different Docker images), (b) Mind2Web (HuggingFace, no Docker needed), (c) public WebArena demo instances, (d) AWS AMI approach
-
-### 12.4 MEASUREMENT_INVALID
-- Pipeline debugging needed
-- Not scientific evidence for or against
+- Intel should consider: (a) VisualWebArena (different Docker images), (b) public WebArena demo instances, (c) AWS AMI approach
 
 ## 13. Analysis Plan
 
-1. **Infrastructure Census**: Test Path A (Docker Hub), Path B (ZIM+Kiwix), Path C (ghcr.io) in order. Record exact status.
-2. **Dataset Analysis**: Load HuggingFace WebArena-Verified. Analyze task metadata. This is independent of Docker.
-3. **Measurement**: For each viable path, deploy environment, run Playwright pipeline, compute yield.
-4. **Comparison**: Compare actual_yield to heuristic_yield and Method 1.
-5. **Controls**: Verify positive control (non-empty observation) and infrastructure control (census completeness).
-6. **Decision**: Apply frozen decision_rule.
+1. **Infrastructure Census**: Test Path A (Docker Hub shopping), Path B (Mind2Web). Record exact status.
+2. **Measurement** (conditional on Path A): Deploy shopping environment, run Playwright pipeline, compute yield.
+3. **Comparison**: Compare actual_yield to heuristic_yield and Method 1.
+4. **Controls**: Verify positive control (non-empty observation) and null control (HTTP 200).
+5. **Decision**: Apply frozen decision_rule.
 
 ## 14. Deviation Policy
 

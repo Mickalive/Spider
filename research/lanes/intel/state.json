@@ -7,8 +7,8 @@
   "continue_immediately": false,
   "next_question": "Can ghcr.io/web-arena-x Docker authentication be obtained (GITHUB_TOKEN with read:packages scope or docker login ghcr.io with PAT) and the full REQUIRES_TRANSFORM pipeline re-executed with geometry-faithful viewport filtering (Playwright/CDP union_bound, not depth/role heuristic) for 2-3 WebArena tasks, resolving whether heuristic yield estimates (0.517-0.65) match actual live DOM extraction?",
   "promotion_ready": false,
-  "consecutive_failures": 2,
-  "updated_at": "2026-09-09T19:43:47.607630+00:00",
+  "consecutive_failures": 3,
+  "updated_at": "2026-09-09T21:59:29.540403+00:00",
   "last_failure_retryable": false,
   "last_handoff_sha256": "5f6b0d3c6feb324b2a23b76fec341b91186c180fb74a62b469768064ad3eb7cc"
 }
