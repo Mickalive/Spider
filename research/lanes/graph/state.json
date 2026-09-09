@@ -1,14 +1,14 @@
 {
   "lane": "graph",
   "human_paused": false,
-  "active_experiment_id": "EXP-GRAPH-34395286092",
-  "last_experiment_id": "EXP-GRAPH-34320613096",
-  "last_verdict": "BLOCKED",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-GRAPH-34395286092",
+  "last_verdict": "BLOCKED_CLOSE_AND_PIVOT",
   "continue_immediately": false,
-  "next_question": "After committing the parameter-slot-count fix to production HEAD (src/spider/kernel.py L112 sort key includes len(parameter_slots)), does the literal-vs-param equal-confidence competition resolve to param for all unseen ids 2-7 without monkey-patching, do all 6 baseline conditions pass, does the corrected B_CONFIDENCE_LITERAL_HIGHER condition (literal 0.98 > param 0.95) remain literal-winning, and does the fix interact correctly with registry upsert sorting (production-like ordering)?",
+  "next_question": "Given four consecutive BLOCKED results on C-PARAM-INHERIT, can the graph lane demonstrate semantic resolution (C-SEMANTIC-RESOLVE): does the kernel resolve a URL template with semantic aliasing (e.g., /users/{userId} vs /accounts/{id} pointing to the same REST resource) to the correct parametrized mechanism when both are registered with equal confidence, and does it correctly select the mechanism whose template matches the intent structure?",
   "promotion_ready": false,
   "consecutive_failures": 0,
-  "updated_at": "2026-09-09T19:28:53.539918+00:00",
+  "updated_at": "2026-09-09T19:40:22.333454+00:00",
   "last_failure_retryable": null,
-  "last_handoff_sha256": "95197b2fb0c5af9d49eeedbb9bc0c678a97abb3da7a027cf8d5803bba9981382"
+  "last_handoff_sha256": "57025732a13bd1e17f553c003db00a646ef45bb9d940d4b5fbfc6b6902757bbf"
 }
