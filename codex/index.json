@@ -401,6 +401,31 @@
         "handoff.json": "4d6e645fde38107c747640644754ef6f60ab88547510ccd8e29557d848907f08"
       }
     },
+    "EXP-GRAPH-34291967676": {
+      "lane": "graph",
+      "request_id": "72019db243fb8a628868e941",
+      "created_at": "2026-09-08T23:44:26.560967+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT"
+      ],
+      "question": "After committing the parameter-slot-count tie-break fix to src/spider/kernel.py L112 (sort key includes len(parameter_slots)), does the literal-vs-param equal-confidence competition resolve to param for all unseen ids 2-7 without monkey-patching, do all 6 baseline conditions pass on committed HEAD, does the corrected B_CONFIDENCE_LITERAL_HIGHER condition (literal 0.98 > param 0.95) remain literal-winning, and does the fix interact correctly with registry upsert sorting (production-like ordering)?",
+      "audit_status": "PASS",
+      "decision": "BLOCKED",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/graph",
+      "hashes": {
+        "request.json": "2c5a03f4d4ca241aeff79df1acecd1c0f90a5fa3bf1709d515193e28bcd27242",
+        "spec.json": "eb387cdba93a9a1fae7dcc42eab03a746bd46018ceb412e9b86eaa128b888e64",
+        "prereg.md": "d829a65aaab1ece94719a5571eb77a929138529d16b335695791e5f02cc18711",
+        "freeze.json": "ca41a5e4c4d72c6d7a8be4a7b2506ab2a7982a293feb7eff9b40301b91eaaf82",
+        "result.json": "d03f48ef7fbbcfecae944e890252af3422289b17486f722454e3f94e06f3666a",
+        "report.md": "e91ce7fd6e40b52415b80b805d4f6c63b5c18f6d207a7d174420f3f54ae4cf75",
+        "provenance.json": "089e45f672ee11e357b942767de42a70bfb7f01b017fc2be676b318e0c18fde0",
+        "audit.json": "364b40b9eece681c1feb0fef5862db77be42d03cfe2e47a16bebd2a6a9e5d62c",
+        "verdict.json": "7fabef407e96276dd644d6fdac24213f0ed7f68ffe160b42084512ad60922eba",
+        "handoff.json": "8c9ab18ce8dbb83cd6eea32b5affb134af5a5bc773614c1d5ac1d850a3d0e183"
+      }
+    },
     "EXP-INTEL-33528832113": {
       "lane": "intel",
       "request_id": "46d19fdaf32e996c0ab24bd7",

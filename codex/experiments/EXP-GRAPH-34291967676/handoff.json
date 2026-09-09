@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34291967676",
+  "lane": "graph",
+  "target_lane": "graph",
+  "next_question": "After committing the parameter-slot-count fix to production HEAD (src/spider/kernel.py L112 sort key includes len(parameter_slots)), does the literal-vs-param equal-confidence competition resolve to param for all unseen ids 2-7 without monkey-patching, do all 6 baseline conditions pass, does the corrected B_CONFIDENCE_LITERAL_HIGHER condition (literal 0.98 > param 0.95) remain literal-winning, and does the fix interact correctly with registry upsert sorting (production-like ordering)?",
+  "why_next": "Experiment BLOCKED again — fix prerequisite still not met after two consecutive BLOCKED results (parent EXP-GRAPH-34244445713 and this run). Fix NOT present in committed HEAD (kernel sha256 46929b3a, L112 still 'candidates.sort(key=lambda m: m.confidence, reverse=True)'). 0/14 conditions executed per frozen BLOCKED decision rule. No post-commit evidence exists. The one-line fix must be committed with Director approval before the same frozen spec can be re-run to obtain confirmatory SURVIVES_POST_COMMIT measurement. The graph lane cannot advance C-PARAM-INHERIT without this prerequisite.",
+  "carry_forward": {
+    "established": [
+      "Fix NOT present in committed HEAD src/spider/kernel.py L112 — verified independently by producer and auditor: kernel sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61, line 112 'candidates.sort(key=lambda m: m.confidence, reverse=True)', no len(parameter_slots) in sort key. Same state as parent EXP-GRAPH-34244445713 — fix has not been committed despite two BLOCKED results.",
+      "BLOCKED status correctly applied per frozen decision rule 9.3: fix absent → status=BLOCKED, outcome=NOT_APPLICABLE, 0/14 conditions executed, all 14 skipped. Producer correctly did not misclassify BLOCKED as FALSIFIED or SUPPORTS.",
+      "Parent experiment diagnostic results remain the only evidence: 6/6 baselines pass on unfixed HEAD (B-COLD UNKNOWN, literal-only orig/unseen /posts/1 id=1, param-only orig /posts/1 id=1 unseen /posts/7 id=7, compete-param-higher param 0.98 beats literal 0.95 → /posts/7 id=7), null control literal 0.98 beats param 0.95 → /posts/1 id=1, core hazard 0/6 param wins (6/6 literal wins at equal confidence 0.95 with literal registered first). All 13/13 HTTP successes against jsonplaceholder. These are diagnostic on unfixed HEAD, not evidence against fix effectiveness.",
+      "No infrastructure failures, no exceptions, no monkey-patching. Measurement validity controls preserved: fresh kernel per condition, deterministic n=1, HTTP id verification, registry insertion order literal before param (worst-case), no cross-contamination.",
+      "Auditor PASS confirms: recomputed kernel hash matches producer, L112 content matches producer, all 14 controls correctly show fix_presence fail and others unknown, no metric inflation, no identifier renaming, provenance and lineage intact."
+    ],
+    "rejected": [
+      "Post-commit hazard elimination claim (C-PARAM-INHERIT SURVIVES_POST_COMMIT) — fix not committed, prerequisite unmet, cannot test",
+      "Any scientific falsification of the fix (diagnostic hazard results on unfixed HEAD from parent experiment are expected behavior without fix, not evidence against fix effectiveness)",
+      "FALSIFIED_POST_COMMIT status — not applicable because fix is absent; FALSIFIED requires fix present but failing"
+    ],
+    "unknown": [
+      "Whether the fix survives commitment to production HEAD and resolves the hazard for all unseen ids 2-7 without monkey-patching",
+      "Whether all 6 baselines remain passing after fix commit (cannot be tested from BLOCKED run)",
+      "Whether B_CONFIDENCE_LITERAL_HIGHER remains literal-winning after fix commit (strict confidence ordering under new sort key with len(parameter_slots) as secondary key)",
+      "Whether param generalization holds across multiple unseen ids beyond 2-7 in committed HEAD",
+      "Whether fix generalizes to real-web endpoints with DOM, auth, session state, drift (jsonplaceholder is simple REST)",
+      "Whether registry upsert sorting (production) interacts with fix tie-break differently than replace()",
+      "Whether LLM-driven mechanism distillation half of C-PARAM-INHERIT works (no model calls in this experiment)"
+    ],
+    "do_not_assume": [
+      "Fix is committed (verified unfixed at experiment time — kernel sha256 46929b3a unchanged across two experiments)",
+      "Post-commit behavior matches monkey-patched behavior (no monkey-patching used; fix must be in committed code)",
+      "Core hazard test results on unfixed HEAD (0/6 param wins) constitute falsification of the fix (they are diagnostic on unfixed HEAD, expected behavior)",
+      "Production-readiness (jsonplaceholder is simple REST; no DOM, auth, session state, drift)",
+      "Generalization beyond single intent (fetch-post), single endpoint (/posts/{id}), preconditions={}, deterministic n=1",
+      "Fix was applied or tested in any way (experiment ran on committed HEAD exactly as designed, no modification)",
+      "BLOCKED status means the underlying hypothesis is false (BLOCKED means prerequisite unmet, not hypothesis rejected)",
+      "Two BLOCKED results means the fix will never be committed (operational delay, not scientific closure)"
+    ]
+  },
+  "dependencies": [
+    "The one-line fix must be committed to src/spider/kernel.py L112: candidates.sort(key=lambda m: (m.confidence, len(m.parameter_slots)), reverse=True) with Director approval",
+    "After fix commit, the exact same frozen spec must be re-executed against committed HEAD without monkey-patching to obtain SURVIVES_POST_COMMIT measurement",
+    "Measurement validity controls must be preserved: fresh kernel per condition, deterministic n=1, HTTP id verification against jsonplaceholder.typicode.com, registry insertion order literal before param (worst-case), upsert ordering by mechanism_id, no cross-contamination, 5s timeout"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-34291967676/request.json sha256 2c5a03f4d4ca241aeff79df1acecd1c0f90a5fa3bf1709d515193e28bcd27242",
+    "research/experiments/EXP-GRAPH-34291967676/spec.json sha256 eb387cdba93a9a1fae7dcc42eab03a746bd46018ceb412e9b86eaa128b888e64",
+    "research/experiments/EXP-GRAPH-34291967676/prereg.md sha256 d829a65aaab1ece94719a5571eb77a929138529d16b335695791e5f02cc18711",
+    "research/experiments/EXP-GRAPH-34291967676/freeze.json sha256 ca41a5e4c4d72c6d7a8be4a7b2506ab2a7982a293feb7eff9b40301b91eaaf82",
+    "research/experiments/EXP-GRAPH-34291967676/result.json sha256 d03f48ef7fbbcfecae944e890252af3422289b17486f722454e3f94e06f3666a",
+    "research/experiments/EXP-GRAPH-34291967676/raw_evidence.json sha256 3239d14afdaf60d9b0cd812961db81e8ec124b3c355691fbd40857d501d36517",
+    "research/experiments/EXP-GRAPH-34291967676/audit.json status=PASS producer_claim_supported=false claim_ceiling=BLOCKED",
+    "research/experiments/EXP-GRAPH-34291967676/report.md sha256 e91ce7fd6e40b52415b80b805d4f6c63b5c18f6d207a7d174420f3f54ae4cf75",
+    "research/experiments/EXP-GRAPH-34291967676/provenance.json github_run_id=34291967676 kernel_sha256=46929b3a fix_present=false",
+    "src/spider/kernel.py sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61 L112 candidates.sort(key=lambda m: m.confidence, reverse=True)",
+    "research/experiments/EXP-GRAPH-34244445713/handoff.json sha256 4d6e645fde38107c747640644754ef6f60ab88547510ccd8e29557d848907f08 parent BLOCKED"
+  ],
+  "recommended_action": "Commit the one-line fix to src/spider/kernel.py L112: candidates.sort(key=lambda m: (m.confidence, len(m.parameter_slots)), reverse=True) with Director approval. This is the second consecutive BLOCKED result confirming the prerequisite is unmet. After fix commit, re-run the exact same frozen spec against committed HEAD without monkey-patching. All 14 conditions (6 baselines, 6 core hazard, 1 null control, 1 upsert compatibility) are sufficient — no spec changes needed. The fix is a one-line change; the blocking is operational, not scientific."
+}
