@@ -1,0 +1,164 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34266105229",
+  "lane": "physics",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "site_todomvc_react": {
+      "url_only_pmi_bits": 1.360076527495342,
+      "url_title_pmi_bits": 1.360076527495342,
+      "url_title_form_pmi_bits": 1.360076527495342,
+      "url_title_improvement_pct": 0.0,
+      "form_signals_marginal_bits": 0.0,
+      "spearman_richness_vs_pmi": 0.0,
+      "n_non_leakage": 400,
+      "n_total": 400,
+      "non_leakage_fraction": 1.0,
+      "unique_urls": 3,
+      "unique_titles": 1,
+      "unique_actions": 6,
+      "unique_sa_pairs": 18,
+      "permutation_p_url_only": 0.000999000999000999,
+      "permutation_p_url_title": 0.000999000999000999,
+      "permutation_effect_d_url_only": 83.14421684311813,
+      "permutation_effect_d_url_title": 83.14421684311813,
+      "url_title_gt_url_only": false,
+      "url_title_gt_05": true,
+      "permutation_p_lt_001": true,
+      "data_sufficient": true
+    },
+    "site_todomvc_vue": {
+      "url_only_pmi_bits": 1.3232577149184857,
+      "url_title_pmi_bits": 1.3232577149184857,
+      "url_title_form_pmi_bits": 1.3232577149184857,
+      "url_title_improvement_pct": 0.0,
+      "form_signals_marginal_bits": 0.0,
+      "spearman_richness_vs_pmi": 0.0,
+      "n_non_leakage": 400,
+      "n_total": 400,
+      "non_leakage_fraction": 1.0,
+      "unique_urls": 3,
+      "unique_titles": 1,
+      "unique_actions": 6,
+      "unique_sa_pairs": 18,
+      "permutation_p_url_only": 0.000999000999000999,
+      "permutation_p_url_title": 0.000999000999000999,
+      "permutation_effect_d_url_only": 85.66026096855953,
+      "permutation_effect_d_url_title": 85.66026096855953,
+      "url_title_gt_url_only": false,
+      "url_title_gt_05": true,
+      "permutation_p_lt_001": true,
+      "data_sufficient": true
+    },
+    "positive_control": {
+      "url_only_pmi_bits": 0.6933101309975662,
+      "permutation_p": 0.000999000999000999,
+      "passes": true,
+      "n_transitions": 500,
+      "threshold": 0.5
+    },
+    "aggregate_decision": {
+      "url_title_gt_url_only_both_sites": false,
+      "url_title_gt_05_any_site": true,
+      "permutation_p_lt_001_any_site": true,
+      "positive_control_passes": true,
+      "sufficient_data_both_sites": true,
+      "survives": false,
+      "bonferroni_alpha": 0.025,
+      "n_sites": 2
+    },
+    "parent_comparison": {
+      "parent_url_only_pmi": 0.693,
+      "parent_url_title_pmi": 1.970,
+      "parent_improvement_pct": 184,
+      "real_url_only_react": 1.360076527495342,
+      "real_url_only_vue": 1.3232577149184857,
+      "real_url_title_react": 1.360076527495342,
+      "real_url_title_vue": 1.3232577149184857
+    }
+  },
+  "controls": {
+    "positive_control_synthetic_spa": {
+      "type": "positive_control",
+      "description": "Synthetic SPA with 8 states, 4 actions, deterministic transitions. Must produce PMI >= 0.5 bits.",
+      "expected": "PMI >= 0.5 bits, permutation p < 0.001",
+      "observed": "PMI = 0.6933101309975662 bits, p = 0.000999",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-PHYSICS-34266105229/raw_results.json positive_control"
+    },
+    "null_control_permutation": {
+      "type": "null_control",
+      "description": "Cross-trajectory permutation: shuffled PMI must not exceed observed in >5% of permutations",
+      "expected": "p < 0.05 for URL+title representation on both sites",
+      "observed": "p = 0.000999 on both sites (0/1000 shuffled exceed observed)",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-PHYSICS-34266105229/raw_results.json perm fields"
+    },
+    "url_only_baseline": {
+      "type": "baseline",
+      "description": "URL-only PMI as lower-bound reference for representation quality",
+      "expected": "URL-only PMI > 0 (URL-level states are not exchangeable)",
+      "observed": "React: 1.360 bits, Vue: 1.323 bits (both significantly > 0)",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-PHYSICS-34266105229/raw_results.json pmi.url_only"
+    },
+    "parent_synthetic_baseline": {
+      "type": "baseline",
+      "description": "Parent synthetic results for quantitative comparison (EXP-PHYSICS-34149195420)",
+      "expected": "URL-only PMI ~0.693, URL+title PMI ~1.970, +184% improvement",
+      "observed": "Real URL-only PMI 1.32-1.36 exceeds parent synthetic 0.693; real URL+title shows 0% improvement vs parent +184%",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-PHYSICS-34149195420/result.json metrics"
+    },
+    "data_sufficiency": {
+      "type": "threshold",
+      "description": "At least 50 non-leakage transitions per site",
+      "expected": "n_non_leakage >= 50 per site",
+      "observed": "React: 400, Vue: 400 (both well above threshold)",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-PHYSICS-34266105229/raw_results.json site_decisions"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-34266105229/raw_results.json",
+      "sha256": "643ec2776575ebecb939a5fc61e43bded7f9fb54e59ba2556ba5fbcc30915b05",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-34266105229/raw_transitions.json",
+      "sha256": "4e3b772e731d770a1d8bf3f2db8025ed4de3e41d27db653e7c59d091577456c8",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-34266105229/execute_real_spa.py",
+      "sha256": "378fb2dc4873b7003698ba0221ed7ab1a784b801f21eb3b415ca94f02b88dcf8",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "Both TodoMVC sites (React and Vue) use a single constant document.title across all client-side routes: 'TodoMVC: React' and 'TodoMVC: Vue' respectively. This means URL+title state representation is isomorphic to URL-only representation — adding title information provides exactly zero additional discrimination power.",
+    "URL-only PMI on real SPA data (React: 1.360 bits, Vue: 1.323 bits) is significantly higher than the parent synthetic baseline (0.693 bits), indicating that real TodoMVC transitions have richer action-conditioned structure than the synthetic 8-state model.",
+    "All 400 transitions per site were classified as non-leakage (100% non-leakage rate), because TodoMVC hash-based navigation means action.target_href never equals state_after.url. This is by construction: filter/toggle/add actions change internal state, not the URL path.",
+    "Cross-trajectory permutation null is powerful on both sites: 0/1000 shuffled means exceed observed PMI (p=0.001), with very large effect sizes (d=83.1 on React, d=85.7 on Vue). This confirms that URL-level action→next-state dependency is genuine and strong.",
+    "Form_signals add zero marginal information beyond titles on both sites, consistent with parent synthetic finding — but here it is because titles are constant, not because form signals are redundant with discriminative titles.",
+    "Title uniqueness is 1/400 on both sites (all titles identical), making the title representation completely uninformative as a state discriminator. The hypothesis was designed for sites with varying titles (multi-step forms, different page contexts), not constant-title SPAs.",
+    "The positive control (synthetic SPA) produces PMI=0.693 bits with p=0.001, confirming pipeline integrity."
+  ],
+  "validity_notes": [
+    "The falsification is scientifically valid but narrowly scoped: it falsifies the specific hypothesis that title-aware PMI exceeds URL-only PMI on TodoMVC-like SPAs with constant titles. It does NOT falsify the broader C-WEB-DYNAMICS claim or the general principle that richer state representations can detect dynamical structure.",
+    "TodoMVC is a degenerate case for title-aware PMI because document.title is constant. The experiment was designed for sites with varying titles (multi-step forms with different page contexts). The result is uninformative about title-aware PMI on sites where titles actually vary across states.",
+    "Non-leakage classification at 100% is unusual and reflects TodoMVC's hash-based SPA architecture: filter/toggle/add actions do not change the URL path, so action.target_href (which describes the action, not the destination) never equals state_after.url. This is legitimate non-leakage per the parent definition.",
+    "The 18 unique (state, action) pairs across 400 transitions means each SA pair is sampled ~22 times on average, providing stable PMI estimates. The permutation test's extreme effect sizes (d>80) confirm high statistical power.",
+    "Playwright was not available in the current environment. The experiment was executed in a prior run (GitHub run ID 34282618261/34300002506) and raw data artifacts are preserved. This run uses the verified raw results rather than re-executing the browser collection.",
+    "The raw_results.json uses a slightly different field structure than the execute_real_spa.py output schema (e.g., 'pmi' vs 'pmi_by_representation', 'perm' vs 'permutation_tests'). The result.json normalizes all fields to the EXPERIMENT_PACKET.md schema."
+  ],
+  "unresolved": [
+    "Whether title-aware PMI detects dynamical structure on real SPA/form-heavy sites where titles actually vary across states (e.g., multi-step forms with 'Step 1: Shipping', 'Step 2: Payment', 'Order Confirmation'). TodoMVC with constant titles cannot answer this.",
+    "Whether the 0% title improvement is a property of TodoMVC specifically (constant titles by design) or a general property of JavaScript SPA title behavior. Most real SPAs use framework-specific title management (React Helmet, Vue Meta) that varies titles by route.",
+    "Whether the high URL-only PMI (1.32-1.36 bits vs parent synthetic 0.693 bits) reflects genuinely richer dynamical structure in real TodoMVC or is an artifact of the small state space (3 URLs × 6 actions = 18 SA pairs sampled ~22 times each).",
+    "The parent experiment's +184% improvement (0.693→1.970 bits) was on synthetic data with 8 states and 8 unique titles. Real SPA sites with 8+ unique titles and 8+ URLs may show the expected improvement. This experiment did not test such sites.",
+    "Whether trajectory-level entropy rates (planned as exploratory measure) would detect structure differences between representations when transition-level PMI is identical."
+  ]
+}
