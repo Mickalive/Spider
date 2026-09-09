@@ -105,6 +105,14 @@
         "claim_id": "C-WEB-DYNAMICS",
         "status": "EXPERIMENTAL",
         "reason": "Narrow pipeline validation: title-aware PMI (1.970 bits) > URL-only PMI (0.693 bits) on synthetic SPA data with non-leakage by construction (p=0.001, d=80.3, 1000 cross-trajectory permutations). PMI pipeline detects known deterministic structure in SPA-like format. However: (1) URL-only PMI is significantly >0 (0.693 bits), contradicting pre-registered H1 that it would be 'near zero' \u2014 titles provide additional (+184%), not exclusive, information; (2) form_signals add zero marginal information (url_title_form PMI = url_title PMI = 1.970) because titles uniquely identify states in the synthetic design \u2014 H3 is untested; (3) synthetic deterministic 8-state world is a controlled pipeline validation, not evidence for C-WEB-DYNAMICS on real web where transitions are stochastic and titles may be noisy. The ceiling is: PMI pipeline + richer state representation survives on synthetic SPA data. Real SPA/form-heavy browser data required before any stronger claim."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-34266105229",
+        "lane": "physics",
+        "decision": "FALSIFIED-IN-SETTING",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "EXPERIMENTAL",
+        "reason": "The experiment is an uninformative (degenerate) test of title-aware PMI on real SPA sites: both TodoMVC sites have constant document.title (unique_titles=1), making URL+title isomorphic to URL-only (0% improvement forced by zero title variance). The preregistered hypothesis about titles noisy/ambiguous on form-heavy SPAs was never tested because the selected sites are not form-heavy (single input.new-todo, no multi-step flows) and have no title variation. URL-only PMI is strongly positive (1.32-1.36 bits, permutation p=0.001, d>83), confirming action->next-state dynamical structure at URL level \u2014 consistent with but not caused by this experiment. The claim ceiling is bounded to: URL-level PMI detects dynamical structure on TodoMVC hash-SPA transitions. Title-aware PMI benefit remains untested on real sites with varying titles. Do not update claim status beyond EXPERIMENTAL based on this experiment."
       }
     ],
     "C-PARAM-INHERIT": [
@@ -173,6 +181,22 @@
         "reason": "Fix prerequisite not committed to production HEAD. Experiment BLOCKED \u2014 no new scientific evidence obtained for fix effectiveness. Existing monkey-patched hazard elimination (parent EXP-GRAPH-34176416673) remains the highest validated evidence. C-PARAM-INHERIT status unchanged."
       },
       {
+        "experiment_id": "EXP-GRAPH-34244445713",
+        "lane": "graph",
+        "decision": "BLOCKED",
+        "claim_id": "C-PARAM-INHERIT",
+        "status": "EXPERIMENTAL",
+        "reason": "BLOCKED per frozen decision rule: fix not present in committed HEAD src/spider/kernel.py L112 (sha256 46929b3a, line 'candidates.sort(key=lambda m: m.confidence, reverse=True)'). Post-commit hazard elimination cannot be tested. Established only: (1) 6/6 baselines pass deterministically on unfixed HEAD; (2) null control B-CONFIDENCE-LITERAL-HIGHER preserved; (3) core hazard persists systematically (0/6 param wins, 6/6 literal wins at equal confidence 0.95 literal-before-param). NOT established: fix effectiveness, tie-break on len(parameter_slots), generalization beyond jsonplaceholder /posts/{id}."
+      },
+      {
+        "experiment_id": "EXP-GRAPH-34291967676",
+        "lane": "graph",
+        "decision": "BLOCKED",
+        "claim_id": "C-PARAM-INHERIT",
+        "status": "EXPERIMENTAL",
+        "reason": "Fix prerequisite not met \u2014 src/spider/kernel.py L112 sort key still 'candidates.sort(key=lambda m: m.confidence, reverse=True)', fix absent from committed HEAD (kernel sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61). 0/14 conditions executed per frozen BLOCKED decision rule. No SURVIVES_POST_COMMIT or FALSIFIED_POST_COMMIT possible. Claim ceiling unchanged from parent: no post-commit evidence exists. Fix must be committed with Director approval before re-run."
+      },
+      {
         "experiment_id": "EXP-PRODUCT-33528829801",
         "lane": "product",
         "decision": "SURVIVES \u2014 C-PARAM-INHERIT survives at synthetic in-kernel POC level: distill_parameterized() with _extract_varying_values() correctly induces one parameter slot for isomorphic action paths and resolves to EXECUTABLE with correct bound_action for all 10 unseen single-char identifiers. All four frozen decision-rule conditions satisfied. Audit PASS confirms recomputed metrics match producer. However, the claim ceiling is narrow: single-parameter, single-field, common-prefix heuristic, deterministic synthetic data, hardcoded confidence, simulated baselines. No broader product promotion is authorized by this evidence.",
@@ -219,6 +243,14 @@
         "claim_id": "C-PARAM-INHERIT",
         "status": "EXPERIMENTAL",
         "reason": "Kernel integration partial: 9/10 synthetic conditions survive (B1-B5 regression 21/21 binding_correct, C1 prefix+suffix 3/3, D1/D2/D3 noise filtering 7/7, E1/E2 null controls slot_count=0, literal baseline fail_rate=1.0). C2 full-value binding with prefix-containing params fails spec-required test: _detect_double_prefix is dead code (guard always False because url_template contains ${url}), recomputed kernel.resolve('get-user', {}, params={'url':'user-4'}) => 'user-user-4' (binding_correct false). Producer claimed KERNEL-INTEGRATION-SURVIVES with outcome=SUPPORTS but used stripped parts (url=4) not full values (user-4) per spec measurement_validity. C-PARAM-INHERIT advances from kernel-integration-gap to kernel-integrated-synthetic but C2 blocker prevents product readiness. Claim ceiling: synthetic top-level metadata, single-whole-URL, body/headers leaf parameterization only."
+      },
+      {
+        "experiment_id": "EXP-PRODUCT-34195008089",
+        "lane": "product",
+        "decision": "C2-FIX-FALSIFIED",
+        "claim_id": "C-PARAM-INHERIT",
+        "status": "EXPERIMENTAL",
+        "reason": "C2 double-prefix bug persists: _bind() prefix-strip fix is structurally inert because distill_parameterized() induces full template prefix (https://api.example.com/users/user-${url}), not short prefix (user-${url}). The fix's val.startswith(template_prefix) condition is always False for induced templates with long prefixes. C2 binding_accuracy=0.0 0/3, bound URLs contain user-user-4 instead of user-4. All 9 other conditions pass (31/31 binding correct). Kernel integration remains PARTIAL (9/10 synthetic). Fix approach rejected; different strategy needed (template construction change or slot-level prefix detection)."
       }
     ],
     "C-CROSSSITE": [
@@ -371,6 +403,14 @@
         "claim_id": "C-MEAS-VALID",
         "status": "EXPERIMENTAL",
         "reason": "C-MEAS-VALID survives on Flask 3.1.3 + PyJWT 2.13.0 HS256 localhost with production-like headers (Cache-Control, ETag, Set-Cookie, X-Request-Id excluded). Full-vector discrimination 1.0 > 0.5, null FP 0.0% < 5%, valid vs expired Jaccard 0.328 < 0.5. Claim ceiling bounded to exact tested configuration: 4 states with distinct bodies, jitter 50-150ms, N=40, Python 3.12.14. Does NOT extend to production OAuth/OIDC (Auth0/Okta/Keycloak), CDN, rate-limit, compression, jitter >150ms, or scenarios with identical error bodies. The H4 multi-field value test is inconclusive due to ceiling effect."
+      },
+      {
+        "experiment_id": "EXP-RUNTIME-34054515149",
+        "lane": "runtime",
+        "decision": "SURVIVES_CURRENT_TEST \u2014 C-MEAS-VALID survives narrowly. All four frozen decision criteria pass: full_vector_discrimination 1.0 > B-BODY-ONLY 0.833 (incremental header value 0.167), full_vector_discrimination 1.0 > 0.5, null FP 0.0% < 5%, Cache-Control-only discrimination 0.833 > 0. The parent H4 ceiling confound (V3-DISTINCT-BODY-CEILING-CONFOUND) is resolved: when expired_token and invalid_token share identical bodies, Cache-Control no-store vs no-cache provides the discriminating signal that body-only cannot capture, lifting full vector from 0.833 to 1.0. Audit V4 (ENGINEERED-HEADER-TAUTOLOGY-CONSTRAINT, medium severity) constrains the claim ceiling: incremental header value is by construction (application-set Cache-Control/Set-Cookie per auth state in Flask middleware), not discovery of natural production header variance. Claim extends only to Flask 3.1.3 + PyJWT 2.13.0 HS256 on localhost 127.0.0.1:18929, 4 states (no_auth 401 login_required body ae00c5, valid_token 200 alice_profile body 65d603 with Set-Cookie session, expired_token 401 auth_failed body a138b3 Cache-Control no-store, invalid_token 401 auth_failed body a138b3 identical to expired Cache-Control no-cache), headers after Date/Server/X-Request-Id exclusion, deterministic SHA-256(repr((status, tuple(sorted(filtered_headers.items())), body_sha256, ''))) on Python 3.12.14, N=40 (4x10 seed 44) server jitter 50-150ms uniform client 0-200ms. Does NOT extend to production OAuth/OIDC (Auth0/Okta/Keycloak), CDN/caching, load-balancer, rate-limit, compression, jitter >150ms, or natural (non-application-set) header variance. Product architecture recommendation to use full vector is supported only within this synthetic Flask localhost pattern where headers are application-set per state.",
+        "claim_id": "C-MEAS-VALID",
+        "status": "EXPERIMENTAL",
+        "reason": "C-MEAS-VALID survives narrowly on Flask 3.1.3 + PyJWT 2.13.0 HS256 localhost 127.0.0.1:18929, 4 states with identical error bodies for expired/invalid, production-like header variation (Cache-Control no-store/no-cache, Set-Cookie present only for valid_token). Full-vector discrimination 1.0 > B-BODY-ONLY 0.833 (incremental header value 0.167), null FP 0.0% < 5%, Cache-Control-only discrimination 0.833 > 0. Resolves parent H4 ceiling confound. Audit V4 constrains: headers are application-set per state by construction, not natural production variance. Claim does NOT extend to production OAuth/OIDC, CDN, jitter >150ms, or natural header variance."
       }
     ]
   }
