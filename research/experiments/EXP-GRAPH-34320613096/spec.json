@@ -1,17 +1,33 @@
 {
   "experiment_id": "EXP-GRAPH-34320613096",
   "lane": "graph",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-PARAM-INHERIT"],
+  "question": "Does the parameter-slot-count fix exist in the committed HEAD (src/spider/kernel.py L112 sort key includes len(parameter_slots)), and if so, does it resolve the equal-confidence hazard for all unseen ids 2-7 under production-like registry upsert ordering without monkey-patching?",
+  "hypothesis": "If the fix is present, the resolve() function will select the param mechanism for all unseen ids 2-7 when confidence equal (0.95) and literal registered first (worst-case insertion order), because param has more parameter_slots (len >= 1) than literal (len = 0). Additionally, all 6 baseline conditions remain unchanged, B_CONFIDENCE_LITERAL_HIGHER remains literal-winning, and the fix works under registry upsert sorting (production-like ordering by mechanism_id). If the fix is not present, the experiment will be BLOCKED per frozen decision rule.",
+  "falsifier": "ANY of: (a) fix present but compete-equal resolves to literal for any of unseen ids 2-7; (b) fix present but any baseline regresses; (c) fix present but B_CONFIDENCE_LITERAL_HIGHER resolves to param; (d) fix present but C-EQUAL-UPSERT-ID7 resolves to literal; (e) fix not present (status=BLOCKED); (f) HTTP execution fails; (g) any exception or crash; (h) monkey-patching detected.",
+  "baselines": [
+    "B-COLD: Empty registry, intent 'fetch-post' → UNKNOWN",
+    "B-LITERAL-ONLY-ORIG: Literal mechanism for /posts/1 only, context id=1 → EXECUTABLE url=/posts/1, HTTP 200, id=1",
+    "B-LITERAL-ONLY-UNSEEN: Literal mechanism for /posts/1 only, context id=7 → EXECUTABLE url=/posts/1, HTTP 200, id=1",
+    "B-PARAM-ONLY-ORIG: Param mechanism for /posts/{id} only, context id=1 → EXECUTABLE url=/posts/1, HTTP 200, id=1",
+    "B-PARAM-ONLY-UNSEEN: Param mechanism for /posts/{id} only, context id=7 → EXECUTABLE url=/posts/7, HTTP 200, id=7",
+    "B-COMPETE-PARAM-HIGHER: Param (0.98) vs literal (0.95), context id=7 → param wins, EXECUTABLE url=/posts/7, HTTP 200, id=7"
+  ],
+  "positive_control": "B-COMPETE-PARAM-HIGHER: When param confidence (0.98) exceeds literal confidence (0.95), param must win for unseen id=7. Verifies confidence ordering works correctly.",
+  "null_control": "B-CONFIDENCE_LITERAL_HIGHER: When literal confidence (0.98) exceeds param confidence (0.95), literal must win for unseen id=7. Verifies fix does not override strict confidence ordering. Additionally, BLOCKED-control: if fix not present, experiment emits status=BLOCKED.",
+  "measurement_validity": [
+    "All conditions deterministic: no model calls, no RNG, no sampling. Single-run exact point comparisons.",
+    "HTTP execution against live endpoint jsonplaceholder.typicode.com with 5-second timeout per request.",
+    "Each condition uses a fresh kernel instance with explicitly controlled registry contents. No cross-contamination.",
+    "Registry insertion order controlled: literal registered before param in all shared-equal conditions (worst-case). For upsert conditions, mechanisms inserted sequentially with upsert; final ordering determined by mechanism_id sorting.",
+    "Fix presence verified by inspecting src/spider/kernel.py L112 sort key before execution.",
+    "No monkey-patching or runtime modification of kernel.py during execution.",
+    "HTTP response id field verified against expected id for each condition.",
+    "Additional diagnostic checks: git log for commits touching kernel.py L112 since base_sha, check if any open PRs include the fix, check if fix present in other branches (lab/graph, main)."
+  ],
+  "decision_rule": "SURVIVES_POST_COMMIT if ALL of: (1) fix present in committed HEAD (L112 sort key includes len(parameter_slots)); (2) compete-equal resolves to param for ALL unseen ids 2-7 (6/6 param wins); (3) all 6 baselines pass; (4) B_CONFIDENCE_LITERAL_HIGHER resolves to literal; (5) no exceptions or crashes; (6) no monkey-patching; (7) C-EQUAL-UPSERT-ID7 resolves to param. FALSIFIED-POST-COMMIT if fix present but any of (a)-(d) fail. BLOCKED if fix not present. MEASUREMENT_INVALID if HTTP failures, exceptions, or infrastructure issues prevent measurement.",
+  "product_consequence_positive": "SURVIVES_POST_COMMIT means the core false-accept hazard is eliminated in committed production code, and the fix is robust under production-like registry ordering. The parameter-slot-count tie-break correctly favors parametrized mechanisms over literal mechanisms at equal confidence, enabling safe param generalization to unseen identifiers. This unblocks real-web testing for C-PARAM-INHERIT.",
+  "product_consequence_negative": "FALSIFIED-POST-COMMIT means the fix does not work as intended in committed code, or fails under upsert sorting. The hazard persists or new regressions are introduced. BLOCKED means the prerequisite is still unmet; Director must commit the fix before re-running.",
+  "estimated_cost": "Very low: deterministic single-run resolution against live endpoint, 14 conditions total, no model calls, no browser automation, no RNG. ~14 HTTP requests with 5s timeout each. Total execution < 2 minutes. Additional diagnostic git checks are cheap.",
+  "expected_information_gain": "High: resolves the BLOCKED status by providing actionable diagnostic about fix presence and potential paths to unblock. If fix present, provides confirmatory evidence for C-PARAM-INHERIT advancement. If fix absent, provides diagnostic about why fix not committed (git log, PRs, branch status) to inform Director decision."
 }
