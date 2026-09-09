@@ -685,6 +685,31 @@
         "handoff.json": "a3e4d8268994ad3bf053958a277db1e4db9b7b3c66c0b2a8e1f4976c8ace3e4c"
       }
     },
+    "EXP-PHYSICS-34266105229": {
+      "lane": "physics",
+      "request_id": "9ad6c1d15bef92e3946f4e5a",
+      "created_at": "2026-09-08T18:57:34.482242+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Does title-aware PMI detect dynamical structure on real SPA/form-heavy browser transitions (React/Vue apps, form-heavy pages) where non-leakage transitions are frequent by construction and titles may be noisy or ambiguous, using browser-collected action->next-state data with sufficient transition density?",
+      "audit_status": "REVISE",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/physics",
+      "hashes": {
+        "request.json": "44296e8a0f05e80ee7026b229d7c44b62590c4f0681126d65789312020965899",
+        "spec.json": "ff42f58514372b6de3cea12482e406a5398fb7e0f007f2c09c286ebf7fb96b9a",
+        "prereg.md": "d35a1caa8d48239bbd7117e4c7fb38df6de237aeecbbb0a6c9b22190e4eca66c",
+        "freeze.json": "5f8a5a9b6dba605ecc1d1d0c9252f6cce5ac9dbe747526d2a53c75f5c889b403",
+        "result.json": "ca3777efa990f854ced875465bf5f586df19745a0e441dd4256b58e0f05b40bc",
+        "report.md": "227e640fdfb2c47e0dddb9c285637996940c470fb0a1cfd5df84e54e645f999a",
+        "provenance.json": "319c0b257218f9eccf53da18816f46af62eb20d24a47156d38e4491e844d2be9",
+        "audit.json": "7a4546a050094fd9cf92d4504f59b9bb0fa4ccd8155a02b89a14e95b9d833b78",
+        "verdict.json": "0a25fd1741c3d4304765c2ee5c6237d5e6fb95267f3c1d74e15d84c41f7d683c",
+        "handoff.json": "6b154e2ff4deb9b597236c2cf4993676fe7f8e39b2d61024e198a1596733ca16"
+      }
+    },
     "EXP-PRODUCT-33528829801": {
       "lane": "product",
       "request_id": "2629e8e63e200f05556e37ca",

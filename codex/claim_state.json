@@ -105,6 +105,14 @@
         "claim_id": "C-WEB-DYNAMICS",
         "status": "EXPERIMENTAL",
         "reason": "Narrow pipeline validation: title-aware PMI (1.970 bits) > URL-only PMI (0.693 bits) on synthetic SPA data with non-leakage by construction (p=0.001, d=80.3, 1000 cross-trajectory permutations). PMI pipeline detects known deterministic structure in SPA-like format. However: (1) URL-only PMI is significantly >0 (0.693 bits), contradicting pre-registered H1 that it would be 'near zero' \u2014 titles provide additional (+184%), not exclusive, information; (2) form_signals add zero marginal information (url_title_form PMI = url_title PMI = 1.970) because titles uniquely identify states in the synthetic design \u2014 H3 is untested; (3) synthetic deterministic 8-state world is a controlled pipeline validation, not evidence for C-WEB-DYNAMICS on real web where transitions are stochastic and titles may be noisy. The ceiling is: PMI pipeline + richer state representation survives on synthetic SPA data. Real SPA/form-heavy browser data required before any stronger claim."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-34266105229",
+        "lane": "physics",
+        "decision": "FALSIFIED-IN-SETTING",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "EXPERIMENTAL",
+        "reason": "The experiment is an uninformative (degenerate) test of title-aware PMI on real SPA sites: both TodoMVC sites have constant document.title (unique_titles=1), making URL+title isomorphic to URL-only (0% improvement forced by zero title variance). The preregistered hypothesis about titles noisy/ambiguous on form-heavy SPAs was never tested because the selected sites are not form-heavy (single input.new-todo, no multi-step flows) and have no title variation. URL-only PMI is strongly positive (1.32-1.36 bits, permutation p=0.001, d>83), confirming action->next-state dynamical structure at URL level \u2014 consistent with but not caused by this experiment. The claim ceiling is bounded to: URL-level PMI detects dynamical structure on TodoMVC hash-SPA transitions. Title-aware PMI benefit remains untested on real sites with varying titles. Do not update claim status beyond EXPERIMENTAL based on this experiment."
       }
     ],
     "C-PARAM-INHERIT": [
