@@ -1,0 +1,15 @@
+{
+  "fix_verification": {
+    "file": "src/spider/kernel.py",
+    "line": 112,
+    "content": "candidates.sort(key=lambda m: m.confidence, reverse=True)",
+    "fix_present": false,
+    "expected_fix": "candidates.sort(key=lambda m: (m.confidence, len(m.parameter_slots)), reverse=True)",
+    "kernel_sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61"
+  },
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.12.0",
+    "git_sha": "fdd8bb4f5962364140eae09e8f148fb7ae6d60b2"
+  }
+}
