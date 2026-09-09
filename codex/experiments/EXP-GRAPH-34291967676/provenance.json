@@ -1,0 +1,56 @@
+{
+  "experiment_id": "EXP-GRAPH-34291967676",
+  "github_run_id": "34291967676",
+  "base_sha": "d7c6aa2ddc5605c63277f4ffa12b14f21ca52e5a",
+  "current_git_sha": "fdd8bb4f5962364140eae09e8f148fb7ae6d60b2",
+  "kernel_sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+  "code_paths": {
+    "kernel": "src/spider/kernel.py",
+    "kernel_fix_line": 112,
+    "fix_present": false
+  },
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.12.0",
+    "git_sha_at_execution": "fdd8bb4f5962364140eae09e8f148fb7ae6d60b2"
+  },
+  "artifacts": {
+    "raw_evidence": {
+      "path": "research/experiments/EXP-GRAPH-34291967676/raw_evidence.json",
+      "sha256": "3239d14afdaf60d9b0cd812961db81e8ec124b3c355691fbd40857d501d36517"
+    },
+    "result": {
+      "path": "research/experiments/EXP-GRAPH-34291967676/result.json",
+      "sha256": "d03f48ef7fbbcfecae944e890252af3422289b17486f722454e3f94e06f3666a"
+    },
+    "report": {
+      "path": "research/experiments/EXP-GRAPH-34291967676/report.md",
+      "sha256": "e91ce7fd6e40b52415b80b805d4f6c63b5c18f6d207a7d174420f3f54ae4cf75"
+    },
+    "freeze": {
+      "path": "research/experiments/EXP-GRAPH-34291967676/freeze.json",
+      "sha256": "ca41a5e4c4d72c6d7a8be4a7b2506ab2a7982a293feb7eff9b40301b91eaaf82"
+    },
+    "spec": {
+      "path": "research/experiments/EXP-GRAPH-34291967676/spec.json",
+      "sha256": "eb387cdba93a9a1fae7dcc42eab03a746bd46018ceb412e9b86eaa128b888e64"
+    },
+    "prereg": {
+      "path": "research/experiments/EXP-GRAPH-34291967676/prereg.md",
+      "sha256": "d829a65aaab1ece94719a5571eb77a929138529d16b335695791e5f02cc18711"
+    }
+  },
+  "execution": {
+    "conditions_executed": 0,
+    "conditions_skipped": 14,
+    "skip_reason": "BLOCKED per decision rule: fix not present in committed HEAD",
+    "monkey_patching_applied": false,
+    "http_requests": 0,
+    "exceptions": 0
+  },
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-34244445713",
+    "path": "research/experiments/EXP-GRAPH-34244445713/handoff.json",
+    "sha256": "4d6e645fde38107c747640644754ef6f60ab88547510ccd8e29557d848907f08"
+  }
+}

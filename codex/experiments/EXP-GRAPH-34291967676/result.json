@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34291967676",
+  "lane": "graph",
+  "status": "BLOCKED",
+  "outcome": "NOT_APPLICABLE",
+  "metrics": {
+    "fix_committed": false,
+    "fix_line_present": false,
+    "kernel_sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+    "line112_content": "candidates.sort(key=lambda m: m.confidence, reverse=True)",
+    "baseline_pass_rate": null,
+    "hazard_elimination_rate": null,
+    "conditions_executed": 0,
+    "http_failures": 0,
+    "exceptions": 0
+  },
+  "controls": {
+    "fix_presence": {
+      "expected": "src/spider/kernel.py L112 sort key includes len(parameter_slots)",
+      "observed": "src/spider/kernel.py L112 sort key is m.confidence only",
+      "pass": false,
+      "evidence_ref": "raw_evidence.json fix_verification.fix_present=false"
+    },
+    "B-COLD": {
+      "expected": "UNKNOWN",
+      "observed": null,
+      "pass": "unknown",
+      "evidence_ref": null
+    },
+    "B-LITERAL-ONLY-ORIG": {
+      "expected": "EXECUTABLE url=/posts/1 HTTP 200 id=1",
+      "observed": null,
+      "pass": "unknown",
+      "evidence_ref": null
+    },
+    "B-LITERAL-ONLY-UNSEEN": {
+      "expected": "EXECUTABLE url=/posts/1 HTTP 200 id=1",
+      "observed": null,
+      "pass": "unknown",
+      "evidence_ref": null
+    },
+    "B-PARAM-ONLY-ORIG": {
+      "expected": "EXECUTABLE url=/posts/1 HTTP 200 id=1",
+      "observed": null,
+      "pass": "unknown",
+      "evidence_ref": null
+    },
+    "B-PARAM-ONLY-UNSEEN": {
+      "expected": "EXECUTABLE url=/posts/7 HTTP 200 id=7",
+      "observed": null,
+      "pass": "unknown",
+      "evidence_ref": null
+    },
+    "B-COMPETE-PARAM-HIGHER": {
+      "expected": "EXECUTABLE url=/posts/7 HTTP 200 id=7",
+      "observed": null,
+      "pass": "unknown",
+      "evidence_ref": null
+    },
+    "C-EQUAL-ID2": {
+      "expected": "param wins, EXECUTABLE url=/posts/2 HTTP 200 id=2",
+      "observed": null,
+      "pass": "unknown",
+      "evidence_ref": null
+    },
+    "C-EQUAL-ID3": {
+      "expected": "param wins, EXECUTABLE url=/posts/3 HTTP 200 id=3",
+      "observed": null,
+      "pass": "unknown",
+      "evidence_ref": null
+    },
+    "C-EQUAL-ID4": {
+      "expected": "param wins, EXECUTABLE url=/posts/4 HTTP 200 id=4",
+      "observed": null,
+      "pass": "unknown",
+      "evidence_ref": null
+    },
+    "C-EQUAL-ID5": {
+      "expected": "param wins, EXECUTABLE url=/posts/5 HTTP 200 id=5",
+      "observed": null,
+      "pass": "unknown",
+      "evidence_ref": null
+    },
+    "C-EQUAL-ID6": {
+      "expected": "param wins, EXECUTABLE url=/posts/6 HTTP 200 id=6",
+      "observed": null,
+      "pass": "unknown",
+      "evidence_ref": null
+    },
+    "C-EQUAL-ID7": {
+      "expected": "param wins, EXECUTABLE url=/posts/7 HTTP 200 id=7",
+      "observed": null,
+      "pass": "unknown",
+      "evidence_ref": null
+    },
+    "B-CONFIDENCE-LITERAL-HIGHER": {
+      "expected": "literal wins, EXECUTABLE url=/posts/1 HTTP 200 id=1",
+      "observed": null,
+      "pass": "unknown",
+      "evidence_ref": null
+    },
+    "C-EQUAL-UPSERT-ID7": {
+      "expected": "param wins, EXECUTABLE url=/posts/7 HTTP 200 id=7",
+      "observed": null,
+      "pass": "unknown",
+      "evidence_ref": null
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-GRAPH-34291967676/raw_evidence.json",
+      "sha256": "3239d14afdaf60d9b0cd812961db81e8ec124b3c355691fbd40857d501d36517",
+      "role": "raw"
+    },
+    {
+      "path": "src/spider/kernel.py",
+      "sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "Fix verification: src/spider/kernel.py L112 sort key does not include len(parameter_slots). Fix is not present in committed HEAD.",
+    "No conditions executed due to BLOCKED status per frozen decision rule.",
+    "Parent handoff (EXP-GRAPH-34244445713) established that fix is not committed and hazard persists on unfixed HEAD.",
+    "Environment: git HEAD sha fdd8bb4f5962364140eae09e8f148fb7ae6d60b2, base_sha d7c6aa2ddc5605c63277f4ffa12b14f21ca52e5a (request creation)."
+  ],
+  "validity_notes": [
+    "BLOCKED status is correct per frozen decision_rule: fix not present in committed HEAD.",
+    "No scientific measurement invalidity; infrastructure prerequisite unmet.",
+    "All baseline and core hazard conditions skipped as per spec: 'If fix is not present in committed HEAD, status=BLOCKED, skip all conditions'.",
+    "No monkey-patching applied; fix not committed to production HEAD.",
+    "Claim C-PARAM-INHERIT remains EXPERIMENTAL; no SURVIVES_POST_COMMIT or FALSIFIED_POST_COMMIT possible.",
+    "No network/HTTP failures; no exceptions."
+  ],
+  "unresolved": [
+    "Whether the fix survives commitment to production HEAD and resolves the hazard for all unseen ids 2-7 without monkey-patching.",
+    "Whether all 6 baselines remain passing after fix commit.",
+    "Whether B_CONFIDENCE_LITERAL_HIGHER remains literal-winning after fix commit.",
+    "Whether param generalization holds across multiple unseen ids beyond 2-7 in committed HEAD.",
+    "Whether fix generalizes to real-web endpoints with DOM, auth, session state, drift.",
+    "Whether registry upsert sorting interacts with fix tie-break differently than replace().",
+    "Whether LLM-driven mechanism distillation half of C-PARAM-INHERIT works."
+  ]
+}

@@ -3,7 +3,7 @@
 Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER_CODEX_ULTIME.md`.
 
 This file is generated only from complete finalized Research 2.0 experiment packets.
-Ingested experiments: **38**. Coverage gaps: **0**.
+Ingested experiments: **40**. Coverage gaps: **0**.
 
 ## Index
 
@@ -25,6 +25,7 @@ Ingested experiments: **38**. Coverage gaps: **0**.
 | EXP-GRAPH-34176416673 | graph | PASS | BLOCKED | C-PARAM-INHERIT |
 | EXP-GRAPH-34222171093 | graph | PASS | BLOCKED | C-PARAM-INHERIT |
 | EXP-GRAPH-34244445713 | graph | PASS | BLOCKED | C-PARAM-INHERIT |
+| EXP-GRAPH-34291967676 | graph | PASS | BLOCKED | C-PARAM-INHERIT |
 | EXP-INTEL-33528832113 | intel | REVISE | SUPPORTS | C-CROSSSITE, C-LLM-INHERIT, C-PRODUCT-ECON |
 | EXP-INTEL-33842055594 | intel | REVISE | PARTIALLY_COMPATIBLE | C-CROSSSITE, C-LLM-INHERIT |
 | EXP-INTEL-33925056324 | intel | REVISE | SUPPORTS | C-CROSSSITE, C-LLM-INHERIT |
@@ -47,6 +48,7 @@ Ingested experiments: **38**. Coverage gaps: **0**.
 | EXP-RUNTIME-33805283356 | runtime | REVISE | NARROW_SUCCESS | C-MEAS-VALID |
 | EXP-RUNTIME-33902315583 | runtime | PASS | C-MEAS-VALID survives narrowly on real Flask/JWT middleware within tested scope. Full-vector discrimination 0.833 > 0.5, null FP 0.0% < 5%, valid vs expired discriminable Jaccard 0.3505 < 0.5. All three decision criteria pass. Full vector equals B-BODY-ONLY (0.833 = 0.833) — standard headers add no independent discriminating information; body is the dominant signal. Parent gaps V1-REAL-MIDDLEWARE-GAP and V2-SYNTHETIC-HEADER-TAUTOLOGY closed. Claim ceiling bounded to Flask 3.1.3 + PyJWT 2.13.0 HS256, localhost, 4 states, no synthetic headers, standard headers only, jitter 50-150ms, N=40. | C-MEAS-VALID |
 | EXP-RUNTIME-34015740602 | runtime | REVISE | CONSTRAINED — C-MEAS-VALID survives narrowly. All three mandatory decision criteria pass (full-vector discrimination 1.0 > 0.5, null FP 0.0% < 5%, valid vs expired Jaccard 0.328 < 0.5). However, the producer's claim ceiling is overgeneralized: claim extends only to Flask 3.1.3 + PyJWT 2.13.0 HS256 on localhost 127.0.0.1:18928 with 4 states returning distinct bodies, headers filtered (Date/Server/X-Request-Id excluded), Cache-Control no-store/no-cache, ETag W/body_sha, Set-Cookie session only for valid_token, jitter 50-150ms uniform, N=40 seed 44, Python 3.12.14. The exploratory H4 test (full vector > B-BODY-ONLY) is INCONCLUSIVE due to ceiling effect: with all 4 bodies distinct, discrimination is at 1.0 and headers cannot improve beyond perfect. Full vector = B-BODY-ONLY (1.0 = 1.0) reflects body dominance under distinct-body design, not proof headers are non-discriminative. The bootstrap CI [1.0, 1.0] is degenerate at ceiling (uninformative, not high-precision). ETag and Content-Length are body-correlated by construction. Only Cache-Control and Set-Cookie are state-varying independent headers; each achieves 0.5 discrimination alone but is redundant when bodies already separate. | C-MEAS-VALID |
+| EXP-RUNTIME-34054515149 | runtime | PASS | SURVIVES_CURRENT_TEST — C-MEAS-VALID survives narrowly. All four frozen decision criteria pass: full_vector_discrimination 1.0 > B-BODY-ONLY 0.833 (incremental header value 0.167), full_vector_discrimination 1.0 > 0.5, null FP 0.0% < 5%, Cache-Control-only discrimination 0.833 > 0. The parent H4 ceiling confound (V3-DISTINCT-BODY-CEILING-CONFOUND) is resolved: when expired_token and invalid_token share identical bodies, Cache-Control no-store vs no-cache provides the discriminating signal that body-only cannot capture, lifting full vector from 0.833 to 1.0. Audit V4 (ENGINEERED-HEADER-TAUTOLOGY-CONSTRAINT, medium severity) constrains the claim ceiling: incremental header value is by construction (application-set Cache-Control/Set-Cookie per auth state in Flask middleware), not discovery of natural production header variance. Claim extends only to Flask 3.1.3 + PyJWT 2.13.0 HS256 on localhost 127.0.0.1:18929, 4 states (no_auth 401 login_required body ae00c5, valid_token 200 alice_profile body 65d603 with Set-Cookie session, expired_token 401 auth_failed body a138b3 Cache-Control no-store, invalid_token 401 auth_failed body a138b3 identical to expired Cache-Control no-cache), headers after Date/Server/X-Request-Id exclusion, deterministic SHA-256(repr((status, tuple(sorted(filtered_headers.items())), body_sha256, ''))) on Python 3.12.14, N=40 (4x10 seed 44) server jitter 50-150ms uniform client 0-200ms. Does NOT extend to production OAuth/OIDC (Auth0/Okta/Keycloak), CDN/caching, load-balancer, rate-limit, compression, jitter >150ms, or natural (non-application-set) header variance. Product architecture recommendation to use full vector is supported only within this synthetic Flask localhost pattern where headers are application-set per state. | C-MEAS-VALID |
 
 ## Complete experiment records
 
@@ -17494,6 +17496,949 @@ This experiment does not advance C-PARAM-INHERIT beyond its current ceiling (EXP
     "research/experiments/EXP-GRAPH-34222171093/handoff.json sha256 2fd5c52e356f14fd16df4bfd77cefec1099e92a4d53840135ae946328eda096a parent BLOCKED"
   ],
   "recommended_action": "Commit the one-line fix to src/spider/kernel.py L112 (candidates.sort key includes len(parameter_slots)) with Director approval, then re-run this exact frozen experiment against committed HEAD. Do not weaken the design or skip the fix-verification gate. The same 13-condition spec with identical controls is sufficient."
+}
+```
+
+# EXP-GRAPH-34291967676
+
+## request.json
+
+```text
+{
+  "base_sha": "d7c6aa2ddc5605c63277f4ffa12b14f21ca52e5a",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-08T23:44:26.560967+00:00",
+  "experiment_id": "EXP-GRAPH-34291967676",
+  "inherited_last_verdict": "BLOCKED",
+  "inherited_next_question": "After committing the parameter-slot-count fix to production HEAD (candidates.sort key includes len(parameter_slots)): does the literal-vs-param equal-confidence competition resolve to param for all unseen ids 2-7 without monkey-patching, do all 6 baseline conditions pass, and does the corrected B_CONFIDENCE_LITERAL_HIGHER condition (literal 0.98 > param 0.95) remain literal-winning?",
+  "lane": "graph",
+  "origin_github_run_id": "34291967676",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-34244445713",
+    "path": "research/experiments/EXP-GRAPH-34244445713/handoff.json",
+    "sha256": "4d6e645fde38107c747640644754ef6f60ab88547510ccd8e29557d848907f08"
+  },
+  "reason": "pulse",
+  "request_hash": "51d2499e8a80ed5a17b8e61546a69ce40dd1ee158ed808fcb8a28eabc564f9e8",
+  "request_id": "72019db243fb8a628868e941",
+  "schema_version": 1
+}
+```
+
+## spec.json
+
+```text
+{
+  "experiment_id": "EXP-GRAPH-34291967676",
+  "lane": "graph",
+  "claim_ids": ["C-PARAM-INHERIT"],
+  "question": "After committing the parameter-slot-count tie-break fix to src/spider/kernel.py L112 (sort key includes len(parameter_slots)), does the literal-vs-param equal-confidence competition resolve to param for all unseen ids 2-7 without monkey-patching, do all 6 baseline conditions pass on committed HEAD, does the corrected B_CONFIDENCE_LITERAL_HIGHER condition (literal 0.98 > param 0.95) remain literal-winning, and does the fix interact correctly with registry upsert sorting (production-like ordering)?",
+  "hypothesis": "With the fix committed to production HEAD, when a literal mechanism and a parametrized mechanism have equal confidence (0.95) and the literal is registered before the param (worst-case insertion order), the resolve() function will select the param mechanism for all unseen ids 2-7 because param has more parameter_slots (len >= 1) than literal (len = 0), and the sort key (confidence, len(parameter_slots)) breaks the tie in favor of param. Additionally, all 6 baseline conditions (cold, literal-only orig/unseen, param-only orig/unseen, compete-param-higher) remain unchanged, B_CONFIDENCE_LITERAL_HIGHER (literal 0.98 > param 0.95) remains literal-winning because strict confidence ordering is not overridden by the fix, and the fix remains effective under registry upsert sorting (production-like ordering by mechanism_id).",
+  "falsifier": "ANY of: (a) compete-equal resolves to literal for any of unseen ids 2-7 (hazard persists despite fix); (b) any of the 6 baseline conditions regress (fail to match expected outcome); (c) B_CONFIDENCE_LITERAL_HIGHER resolves to param instead of literal (fix overrides confidence ordering); (d) fix is not present in committed HEAD (src/spider/kernel.py L112 sort key does not include len(parameter_slots)), in which case status=BLOCKED; (e) HTTP execution fails for any condition (network/endpoint failure); (f) any exception or crash during resolution; (g) C-EQUAL-UPSERT-ID7 resolves to literal for unseen id=7 (fix fails under production-like upsert ordering).",
+  "baselines": [
+    "B-COLD: Empty registry, intent 'fetch-post' → UNKNOWN (no applicable validated mechanism)",
+    "B-LITERAL-ONLY-ORIG: Literal mechanism for /posts/1 only, context id=1 → EXECUTABLE url=/posts/1, HTTP 200, id=1",
+    "B-LITERAL-ONLY-UNSEEN: Literal mechanism for /posts/1 only, context id=7 → EXECUTABLE url=/posts/1, HTTP 200, id=1 (literal does not generalize)",
+    "B-PARAM-ONLY-ORIG: Param mechanism for /posts/{id} only, context id=1 → EXECUTABLE url=/posts/1, HTTP 200, id=1",
+    "B-PARAM-ONLY-UNSEEN: Param mechanism for /posts/{id} only, context id=7 → EXECUTABLE url=/posts/7, HTTP 200, id=7 (param generalizes)",
+    "B-COMPETE-PARAM-HIGHER: Param (0.98) vs literal (0.95), context id=7 → param wins, EXECUTABLE url=/posts/7, HTTP 200, id=7"
+  ],
+  "positive_control": "B-COMPETE-PARAM-HIGHER: When param confidence (0.98) exceeds literal confidence (0.95), param must win for unseen id=7. This verifies confidence ordering works correctly and is not broken by the fix.",
+  "null_control": "B-CONFIDENCE-LITERAL-HIGHER: When literal confidence (0.98) exceeds param confidence (0.95), literal must win for unseen id=7. This verifies the fix does not override strict confidence ordering. Additionally, the BLOCKED-control: if fix is not present in HEAD, experiment must emit status=BLOCKED, not FALSIFIES or SUPPORTS.",
+  "measurement_validity": [
+    "All conditions are deterministic: no model calls, no RNG, no sampling. Single-run exact point comparisons.",
+    "HTTP execution against live endpoint jsonplaceholder.typicode.com with 5-second timeout per request.",
+    "Each condition uses a fresh kernel instance with explicitly controlled registry contents. No cross-contamination between conditions.",
+    "Registry insertion order controlled: literal registered before param in all shared-equal conditions (worst-case for param). For upsert conditions, mechanisms inserted sequentially with upsert; final ordering determined by mechanism_id sorting.",
+    "Fix presence verified by inspecting src/spider/kernel.py L112 sort key before execution.",
+    "No monkey-patching or runtime modification of kernel.py during execution.",
+    "HTTP response id field verified against expected id for each condition."
+  ],
+  "decision_rule": "SURVIVES_POST_COMMIT if ALL of: (1) fix is present in committed HEAD (L112 sort key includes len(parameter_slots)); (2) compete-equal resolves to param for ALL unseen ids 2-7 (6/6 param wins); (3) all 6 baselines pass (6/6); (4) B_CONFIDENCE_LITERAL_HIGHER resolves to literal (literal 0.98 wins); (5) no exceptions or crashes; (6) no monkey-patching; (7) C-EQUAL-UPSERT-ID7 resolves to param (fix works under upsert). FALSIFIED-POST-COMMIT if: fix is present but (a) compete-equal resolves to literal for any unseen id, OR (b) any baseline regresses, OR (c) B_CONFIDENCE_LITERAL_HIGHER resolves to param, OR (d) C-EQUAL-UPSERT-ID7 resolves to literal. BLOCKED if: fix is not present in committed HEAD (L112 sort key does not include len(parameter_slots)). MEASUREMENT_INVALID if: HTTP failures, exceptions, or infrastructure issues prevent measurement.",
+  "product_consequence_positive": "SURVIVES_POST_COMMIT means the core false-accept hazard is eliminated in committed production code, and the fix is robust under production-like registry ordering. The parameter-slot-count tie-break correctly favors parametrized mechanisms over literal mechanisms at equal confidence, enabling safe param generalization to unseen identifiers. This is a prerequisite for advancing C-PARAM-INHERIT toward real-web testing (the highest-upside generalization gap). Product can proceed to test parameterized inheritance on real endpoints with DOM, auth, session state, and drift.",
+  "product_consequence_negative": "FALSIFIED-POST-COMMIT means the fix does not work as intended in committed code, or fails under upsert sorting. The hazard persists or new regressions are introduced. Product cannot advance to real-web testing. Root cause analysis required: is the sort key incorrect? Does registry upsert sorting interact differently with the tie-break than replace()? Is there a code path that bypasses the sort?",
+  "estimated_cost": "Very low: deterministic single-run resolution against live endpoint, 14 conditions total, no model calls, no browser automation, no RNG. ~14 HTTP requests with 5s timeout each. Total execution < 2 minutes.",
+  "expected_information_gain": "High: This is the critical gate between BLOCKED and SURVIVES_POST_COMMIT for C-PARAM-INHERIT. A positive result unblocks the highest-upside generalization gap (real-web testing) and confirms production-like ordering compatibility. A negative result identifies a specific code-level failure or upsert interaction. A BLOCKED result confirms the prerequisite is still unmet. The experiment directly resolves the parent handoff's inherited next_question and can change the claim status from EXPERIMENTAL to a narrower ceiling or to REJECTED."
+}
+```
+
+## prereg.md
+
+```text
+# EXP-GRAPH-34291967676 Preregistration
+
+## 1. Experiment Identity
+
+- **Experiment ID**: EXP-GRAPH-34291967676
+- **Lane**: Graph
+- **Claim**: C-PARAM-INHERIT (Mechanisms parameterize to unseen identifiers)
+- **Date**: 2026-09-09
+- **Status**: DESIGN — NOT YET FROZEN
+- **Parent Experiment**: EXP-GRAPH-34244445713 (BLOCKED)
+- **Request Reason**: pulse (inherited next_question from parent handoff)
+
+## 2. Scientific Question
+
+After committing the parameter-slot-count tie-break fix to src/spider/kernel.py L112 (sort key includes len(parameter_slots)), does the literal-vs-param equal-confidence competition resolve to param for all unseen ids 2-7 without monkey-patching, do all 6 baseline conditions pass on committed HEAD, does the corrected B_CONFIDENCE_LITERAL_HIGHER condition (literal 0.98 > param 0.95) remain literal-winning, and does the fix interact correctly with registry upsert sorting (production-like ordering)?
+
+## 3. Motivation
+
+### What the parent experiment established (EXP-GRAPH-34244445713)
+
+The parent experiment tested the core false-accept hazard and baseline behavior on UNFIXED production HEAD. It produced:
+
+**Established (descriptive):**
+- Core hazard validated: at equal confidence (0.95), literal beats param for ALL unseen ids 2-7 (6/6 literal wins, 0/6 hazard elimination) when literal is registered before param
+- Param generalizes: param-only-unseen resolves to /posts/7, HTTP 200, id=7
+- Literal does not generalize: literal-only-unseen resolves to /posts/1, HTTP 200, id=1
+- All 6 baselines pass on unfixed HEAD (cold, literal-only orig/unseen, param-only orig/unseen, compete-param-higher)
+- Confidence ordering preserved: B-CONFIDENCE-LITERAL-HIGHER literal 0.98 beats param 0.95
+- Fix NOT present in committed HEAD (kernel sha256 46929b3a, line 112 'candidates.sort(key=lambda m: m.confidence, reverse=True)')
+
+**Rejected (measurement invalid for post-commit):**
+- Post-commit claim (fix not committed — prerequisite unmet)
+- Core hazard results (0/6 param wins) are diagnostic on unfixed HEAD, not evidence against fix effectiveness
+
+**Unknown:**
+- Whether fix survives commitment to production HEAD
+- Whether param wins at equal confidence for ALL unseen ids after fix commit
+- Whether baselines regress after fix commit
+- Whether B_CONFIDENCE_LITERAL_HIGHER remains literal-winning after fix commit
+- Whether fix interacts correctly with registry upsert sorting (production-like ordering)
+
+**Do Not Assume:**
+- Fix is committed (verified unfixed at parent experiment time — kernel sha256 46929b3a)
+- Post-commit behavior matches monkey-patched behavior
+- Production-readiness (jsonplaceholder is simple REST)
+- Generalization beyond single intent, single endpoint, preconditions={}, deterministic n=1
+- Fix works under upsert sorting (replace() used in parent experiment)
+
+### Why this experiment is different
+
+This experiment is identical in structure to the parent but differs in two critical dimensions:
+
+**Parent**: Tested on UNFIXED HEAD (fix absent, no monkey-patching — experiment ran exactly as committed)
+**This experiment**: Tests on COMMITTED HEAD (fix present, no monkey-patching)
+
+Additionally, this experiment adds a validity check for production-like registry ordering (upsert) that was not present in the parent.
+
+The fix is a one-line change to src/spider/kernel.py L112:
+```python
+# BEFORE (unfixed):
+candidates.sort(key=lambda m: m.confidence, reverse=True)
+# AFTER (fixed):
+candidates.sort(key=lambda m: (m.confidence, len(m.parameter_slots)), reverse=True)
+```
+
+The fix adds `len(parameter_slots)` as a secondary sort key. When confidences are equal, mechanisms with more parameter slots (param, slots >= 1) sort higher than mechanisms with zero parameter slots (literal, slots = 0).
+
+**Key difference from parent**: No monkey-patching. The fix must be committed to production HEAD before execution. If the fix is not present, the experiment is BLOCKED (not FALSIFIED).
+
+## 4. Hypotheses
+
+### H1: Post-Commit Hazard Elimination
+With the fix committed, compete-equal (literal 0.95 vs param 0.95, literal registered first) resolves to param for ALL unseen ids 2-7 (6/6 param wins).
+
+### H2: Baseline Preservation
+All 6 baseline conditions pass on committed HEAD with the fix present. No regression from parent experiment baseline behavior.
+
+### H3: Confidence Ordering Preservation
+B_CONFIDENCE_LITERAL_HIGHER (literal 0.98 vs param 0.95) remains literal-winning. The fix does not override strict confidence ordering.
+
+### H4: Fix Presence
+The fix is verified present in committed HEAD: src/spider/kernel.py L112 sort key includes `len(parameter_slots)`.
+
+### H5: Upsert Compatibility
+The fix remains effective under registry upsert sorting (production-like ordering by mechanism_id). C-EQUAL-UPSERT-ID7 resolves to param.
+
+## 5. Conditions
+
+### 5.1 Fix Verification (gate)
+- Read src/spider/kernel.py L112
+- Verify sort key includes `len(parameter_slots)`
+- If absent: status=BLOCKED, skip all conditions
+
+### 5.2 Baseline Conditions (6)
+
+| ID | Registry | Context ID | Expected Status | Expected URL | Expected HTTP ID |
+|----|----------|------------|-----------------|--------------|------------------|
+| B-COLD | Empty | any | UNKNOWN | N/A | N/A |
+| B-LITERAL-ONLY-ORIG | literal /posts/1 | 1 | EXECUTABLE | /posts/1 | 1 |
+| B-LITERAL-ONLY-UNSEEN | literal /posts/1 | 7 | EXECUTABLE | /posts/1 | 1 |
+| B-PARAM-ONLY-ORIG | param /posts/{id} | 1 | EXECUTABLE | /posts/1 | 1 |
+| B-PARAM-ONLY-UNSEEN | param /posts/{id} | 7 | EXECUTABLE | /posts/7 | 7 |
+| B-COMPETE-PARAM-HIGHER | literal (0.95) + param (0.98) | 7 | EXECUTABLE | /posts/7 | 7 |
+
+### 5.3 Core Hazard Conditions (6)
+
+| ID | Registry | Context ID | Expected Mechanism | Expected URL | Expected HTTP ID |
+|----|----------|------------|--------------------|--------------|------------------|
+| C-EQUAL-ID2 | literal (0.95) + param (0.95) | 2 | param | /posts/2 | 2 |
+| C-EQUAL-ID3 | literal (0.95) + param (0.95) | 3 | param | /posts/3 | 3 |
+| C-EQUAL-ID4 | literal (0.95) + param (0.95) | 4 | param | /posts/4 | 4 |
+| C-EQUAL-ID5 | literal (0.95) + param (0.95) | 5 | param | /posts/5 | 5 |
+| C-EQUAL-ID6 | literal (0.95) + param (0.95) | 6 | param | /posts/6 | 6 |
+| C-EQUAL-ID7 | literal (0.95) + param (0.95) | 7 | param | /posts/7 | 7 |
+
+**Registry order**: literal registered BEFORE param (worst-case insertion order, same as parent).
+
+### 5.4 Null Control Condition (1)
+
+| ID | Registry | Context ID | Expected Mechanism | Expected URL | Expected HTTP ID |
+|----|----------|------------|--------------------|--------------|------------------|
+| B-CONFIDENCE-LITERAL-HIGHER | literal (0.98) + param (0.95) | 7 | literal | /posts/1 | 1 |
+
+**Purpose**: Verify fix does not override strict confidence ordering.
+
+### 5.5 Upsert Compatibility Condition (1)
+
+| ID | Registry | Context ID | Expected Mechanism | Expected URL | Expected HTTP ID |
+|----|----------|------------|--------------------|--------------|------------------|
+| C-EQUAL-UPSERT-ID7 | literal (0.95) + param (0.95) via upsert | 7 | param | /posts/7 | 7 |
+
+**Registry order**: mechanisms inserted sequentially via upsert; final ordering determined by mechanism_id sorting (literal-posts-1 sorts before param-posts-id). This tests production-like ordering where the registry uses upsert rather than explicit replace().
+
+### 5.6 Total Conditions
+- 6 baselines (B-COLD, B-LITERAL-ONLY-ORIG, B-LITERAL-ONLY-UNSEEN, B-PARAM-ONLY-ORIG, B-PARAM-ONLY-UNSEEN, B-COMPETE-PARAM-HIGHER)
+- 6 core hazard (C-EQUAL-ID2 through C-EQUAL-ID7, equal confidence 0.95)
+- 1 null control (B-CONFIDENCE-LITERAL-HIGHER, literal higher confidence)
+- 1 upsert compatibility (C-EQUAL-UPSERT-ID7, equal confidence 0.95 via upsert)
+= **14 conditions total**
+
+Note: B-COMPETE-PARAM-HIGHER (param 0.98 > literal 0.95) and C-EQUAL-ID7 (param 0.95 == literal 0.95) are different conditions with different confidence configurations.
+
+## 6. Measures
+
+### 6.1 Primary Metric
+- **hazard_elimination_rate**: Fraction of core hazard conditions (ids 2-7) where param wins at equal confidence. Target: 6/6 = 1.0.
+- **baseline_pass_rate**: Fraction of baseline conditions matching expected outcome. Target: 6/6 = 1.0.
+
+### 6.2 Secondary Metrics
+- Per-condition resolution status, mechanism_id, bound_url, confidence
+- HTTP status code and response id field for each EXECUTABLE condition
+- Fix verification: L112 content, kernel.py sha256
+- Exception/crash count
+- Network failure count
+- Upsert condition outcome (C-EQUAL-UPSERT-ID7)
+
+## 7. Controls
+
+### 7.1 Fix Presence Control (prerequisite gate)
+- Read src/spider/kernel.py L112
+- Verify sort key includes `len(parameter_slots)`
+- If absent: status=BLOCKED, outcome=NOT_APPLICABLE
+- If present: proceed to all conditions
+
+### 7.2 Baseline Preservation Controls (6 conditions)
+Same as parent experiment. All 6 must pass to confirm no regression.
+
+### 7.3 Core Hazard Test (6 conditions)
+Same as parent experiment's core hazard test but with fix committed. All 6 must resolve to param.
+
+### 7.4 Confidence Ordering Null Control (1 condition)
+Same as parent experiment's B-CONFIDENCE-LITERAL-HIGHER. Must remain literal-winning.
+
+### 7.5 Upsert Compatibility Control (1 condition)
+New condition not present in parent. Tests fix under production-like registry ordering (upsert). Must resolve to param.
+
+### 7.6 No-Monkey-Patch Attestation
+The experiment script must not modify kernel.py at runtime. Fix must be in committed code. Script must verify no runtime modifications occurred.
+
+## 8. Validity Threats
+
+### 8.1 Fix Not Committed
+If src/spider/kernel.py L112 is still unfixed, the experiment is BLOCKED. This is the correct outcome per the parent handoff's first gate. The experiment must not weaken the design to work around an unfixed codebase.
+
+### 8.2 HTTP Endpoint Availability
+jsonplaceholder.typicode.com must be reachable. Network failures are infrastructure issues, not scientific results. Record and report but do not classify as FALSIFIES.
+
+### 8.3 Insertion Order Sensitivity
+Literal is registered before param in all equal-confidence conditions (worst case). If the fix works under worst-case insertion order, it works under all insertion orders.
+
+### 8.4 Simple REST Limitation
+jsonplaceholder is not real Web (no DOM, no auth, no session state, no drift). Claim ceiling is bounded to simple REST parameterized inheritance. Real-web generalization is a separate future experiment.
+
+### 8.5 Deterministic n=1
+All conditions are deterministic (no model calls, no RNG). Single-run exact comparisons are valid for this kernel-level test. No statistical inference needed.
+
+### 8.6 Single Endpoint
+Only /posts/{id} is tested. Generalization to other endpoints, multi-parameter templates, nested routes, and non-empty preconditions is not tested here.
+
+### 8.7 Upsert Ordering Assumption
+Upsert sorts by mechanism_id. The assumption is that literal-posts-1 sorts before param-posts-id (lexicographic 'l' < 'p'). If mechanism_ids differ, ordering may change. This is a minor threat because the worst-case insertion order (literal before param) is already tested in core hazard conditions.
+
+## 9. Decision Rules
+
+### 9.1 SURVIVES_POST_COMMIT
+If ALL of:
+1. Fix is present in committed HEAD (L112 sort key includes len(parameter_slots))
+2. compete-equal resolves to param for ALL unseen ids 2-7 (6/6 param wins)
+3. All 6 baselines pass (6/6)
+4. B_CONFIDENCE_LITERAL_HIGHER resolves to literal (literal 0.98 wins)
+5. No exceptions or crashes
+6. No monkey-patching
+7. C-EQUAL-UPSERT-ID7 resolves to param (fix works under upsert)
+
+### 9.2 FALSIFIED-POST-COMMIT
+If fix is present but ANY of:
+1. compete-equal resolves to literal for any unseen id (hazard persists)
+2. Any baseline regresses (fails to match expected outcome)
+3. B_CONFIDENCE_LITERAL_HIGHER resolves to param (fix overrides confidence)
+4. C-EQUAL-UPSERT-ID7 resolves to literal (fix fails under upsert)
+
+### 9.3 BLOCKED
+If fix is NOT present in committed HEAD (L112 sort key does not include len(parameter_slots))
+
+### 9.4 MEASUREMENT_INVALID
+If:
+1. HTTP failures prevent measurement for any condition
+2. Exceptions or crashes prevent resolution
+3. Infrastructure issues (timeout, DNS, etc.)
+
+## 10. Expected Outcomes
+
+### 10.1 Positive Result (SURVIVES_POST_COMMIT)
+- Core false-accept hazard eliminated in committed production code
+- Parameter-slot-count tie-break works correctly for all tested unseen ids
+- No baseline regressions
+- Confidence ordering preserved
+- Fix works under production-like upsert ordering
+- C-PARAM-INHERIT advances to: real-web endpoint testing with DOM, auth, session state, drift (highest-upside generalization gap)
+- Claim ceiling: narrow (single intent, single endpoint, preconditions={}, deterministic n=1, jsonplaceholder REST)
+
+### 10.2 Negative Result (FALSIFIED-POST-COMMIT)
+- Fix does not work as intended in committed code, or fails under upsert
+- Root cause analysis required:
+  - Is the sort key incorrect?
+  - Does registry upsert sorting interact differently with tie-break than replace()?
+  - Is there a code path that bypasses the sort?
+- Product cannot advance to real-web testing
+- Possible: different fix approach needed, or different tie-breaking mechanism
+
+### 10.3 Blocked Result (BLOCKED)
+- Fix not committed to production HEAD
+- First gate from parent handoff not met
+- Cannot test post-commit behavior
+- Next action: commit fix with Director approval, then re-run this exact spec
+
+### 10.4 Invalid Result (MEASUREMENT_INVALID)
+- Infrastructure failure, not scientific result
+- Retry after infrastructure repair
+
+## 11. Analysis Plan
+
+1. **Fix Verification**: Read src/spider/kernel.py L112, verify sort key includes len(parameter_slots). If absent → BLOCKED.
+2. **Baseline Execution**: Run 6 baseline conditions, verify each matches expected outcome.
+3. **Core Hazard Execution**: Run 6 core hazard conditions (ids 2-7), verify param wins for all.
+4. **Null Control Execution**: Run B_CONFIDENCE_LITERAL_HIGHER, verify literal wins.
+5. **Upsert Condition Execution**: Run C-EQUAL-UPSERT-ID7, verify param wins under upsert ordering.
+6. **Metrics Computation**: Compute hazard_elimination_rate and baseline_pass_rate.
+7. **Control Verification**: Check all controls pass/fail.
+8. **Reporting**: Report all outcomes with equal prominence.
+
+## 12. Analysis Code
+
+Analysis will be implemented in Python using:
+- `spider.kernel.SpiderKernel` for resolution
+- `spider.registry.MechanismRegistry` for mechanism storage
+- `spider.models.Mechanism`, `Observation`, `Resolution` for data structures
+- `urllib.request` for HTTP execution against jsonplaceholder.typicode.com
+- Standard library only (no custom estimators required)
+
+Code will be committed to `research/experiments/EXP-GRAPH-34291967676/` before execution.
+
+## 13. Pre-registered Expectations
+
+From parent experiment and theoretical derivation:
+- Fix adds len(parameter_slots) as secondary sort key
+- Param mechanisms have parameter_slots >= 1 (e.g., ['id'])
+- Literal mechanisms have parameter_slots = [] (empty)
+- len([]) = 0 < len(['id']) = 1
+- At equal confidence, param sorts higher than literal with the fix
+- Without the fix, literal wins (insertion-order tie-break)
+- Confidence ordering is primary: 0.98 > 0.95 regardless of parameter_slots
+- Baseline behavior is independent of the fix (fix only affects tie-breaking at equal confidence)
+- Upsert sorting by mechanism_id may reorder mechanisms but should not affect tie-break when fix is present
+
+## 14. Deviation Policy
+
+Any deviation from this preregistration will be labeled EXPLORATORY and cannot support confirmatory claims. A new confirmatory claim requires a new preregistration.
+
+## 15. Freeze Statement
+
+This preregistration is frozen BEFORE any analysis code is written or any outcome data is inspected. The experiment will be executed exactly as described here.
+```
+
+## freeze.json
+
+```text
+{
+  "experiment_id": "EXP-GRAPH-34291967676",
+  "frozen_at": "2026-09-09T01:41:49.494804+00:00",
+  "hashes": {
+    "prereg.md": "d829a65aaab1ece94719a5571eb77a929138529d16b335695791e5f02cc18711",
+    "request.json": "2c5a03f4d4ca241aeff79df1acecd1c0f90a5fa3bf1709d515193e28bcd27242",
+    "spec.json": "eb387cdba93a9a1fae7dcc42eab03a746bd46018ceb412e9b86eaa128b888e64"
+  },
+  "schema_version": 1
+}
+```
+
+## result.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34291967676",
+  "lane": "graph",
+  "status": "BLOCKED",
+  "outcome": "NOT_APPLICABLE",
+  "metrics": {
+    "fix_committed": false,
+    "fix_line_present": false,
+    "kernel_sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+    "line112_content": "candidates.sort(key=lambda m: m.confidence, reverse=True)",
+    "baseline_pass_rate": null,
+    "hazard_elimination_rate": null,
+    "conditions_executed": 0,
+    "http_failures": 0,
+    "exceptions": 0
+  },
+  "controls": {
+    "fix_presence": {
+      "expected": "src/spider/kernel.py L112 sort key includes len(parameter_slots)",
+      "observed": "src/spider/kernel.py L112 sort key is m.confidence only",
+      "pass": false,
+      "evidence_ref": "raw_evidence.json fix_verification.fix_present=false"
+    },
+    "B-COLD": {
+      "expected": "UNKNOWN",
+      "observed": null,
+      "pass": "unknown",
+      "evidence_ref": null
+    },
+    "B-LITERAL-ONLY-ORIG": {
+      "expected": "EXECUTABLE url=/posts/1 HTTP 200 id=1",
+      "observed": null,
+      "pass": "unknown",
+      "evidence_ref": null
+    },
+    "B-LITERAL-ONLY-UNSEEN": {
+      "expected": "EXECUTABLE url=/posts/1 HTTP 200 id=1",
+      "observed": null,
+      "pass": "unknown",
+      "evidence_ref": null
+    },
+    "B-PARAM-ONLY-ORIG": {
+      "expected": "EXECUTABLE url=/posts/1 HTTP 200 id=1",
+      "observed": null,
+      "pass": "unknown",
+      "evidence_ref": null
+    },
+    "B-PARAM-ONLY-UNSEEN": {
+      "expected": "EXECUTABLE url=/posts/7 HTTP 200 id=7",
+      "observed": null,
+      "pass": "unknown",
+      "evidence_ref": null
+    },
+    "B-COMPETE-PARAM-HIGHER": {
+      "expected": "EXECUTABLE url=/posts/7 HTTP 200 id=7",
+      "observed": null,
+      "pass": "unknown",
+      "evidence_ref": null
+    },
+    "C-EQUAL-ID2": {
+      "expected": "param wins, EXECUTABLE url=/posts/2 HTTP 200 id=2",
+      "observed": null,
+      "pass": "unknown",
+      "evidence_ref": null
+    },
+    "C-EQUAL-ID3": {
+      "expected": "param wins, EXECUTABLE url=/posts/3 HTTP 200 id=3",
+      "observed": null,
+      "pass": "unknown",
+      "evidence_ref": null
+    },
+    "C-EQUAL-ID4": {
+      "expected": "param wins, EXECUTABLE url=/posts/4 HTTP 200 id=4",
+      "observed": null,
+      "pass": "unknown",
+      "evidence_ref": null
+    },
+    "C-EQUAL-ID5": {
+      "expected": "param wins, EXECUTABLE url=/posts/5 HTTP 200 id=5",
+      "observed": null,
+      "pass": "unknown",
+      "evidence_ref": null
+    },
+    "C-EQUAL-ID6": {
+      "expected": "param wins, EXECUTABLE url=/posts/6 HTTP 200 id=6",
+      "observed": null,
+      "pass": "unknown",
+      "evidence_ref": null
+    },
+    "C-EQUAL-ID7": {
+      "expected": "param wins, EXECUTABLE url=/posts/7 HTTP 200 id=7",
+      "observed": null,
+      "pass": "unknown",
+      "evidence_ref": null
+    },
+    "B-CONFIDENCE-LITERAL-HIGHER": {
+      "expected": "literal wins, EXECUTABLE url=/posts/1 HTTP 200 id=1",
+      "observed": null,
+      "pass": "unknown",
+      "evidence_ref": null
+    },
+    "C-EQUAL-UPSERT-ID7": {
+      "expected": "param wins, EXECUTABLE url=/posts/7 HTTP 200 id=7",
+      "observed": null,
+      "pass": "unknown",
+      "evidence_ref": null
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-GRAPH-34291967676/raw_evidence.json",
+      "sha256": "3239d14afdaf60d9b0cd812961db81e8ec124b3c355691fbd40857d501d36517",
+      "role": "raw"
+    },
+    {
+      "path": "src/spider/kernel.py",
+      "sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "Fix verification: src/spider/kernel.py L112 sort key does not include len(parameter_slots). Fix is not present in committed HEAD.",
+    "No conditions executed due to BLOCKED status per frozen decision rule.",
+    "Parent handoff (EXP-GRAPH-34244445713) established that fix is not committed and hazard persists on unfixed HEAD.",
+    "Environment: git HEAD sha fdd8bb4f5962364140eae09e8f148fb7ae6d60b2, base_sha d7c6aa2ddc5605c63277f4ffa12b14f21ca52e5a (request creation)."
+  ],
+  "validity_notes": [
+    "BLOCKED status is correct per frozen decision_rule: fix not present in committed HEAD.",
+    "No scientific measurement invalidity; infrastructure prerequisite unmet.",
+    "All baseline and core hazard conditions skipped as per spec: 'If fix is not present in committed HEAD, status=BLOCKED, skip all conditions'.",
+    "No monkey-patching applied; fix not committed to production HEAD.",
+    "Claim C-PARAM-INHERIT remains EXPERIMENTAL; no SURVIVES_POST_COMMIT or FALSIFIED_POST_COMMIT possible.",
+    "No network/HTTP failures; no exceptions."
+  ],
+  "unresolved": [
+    "Whether the fix survives commitment to production HEAD and resolves the hazard for all unseen ids 2-7 without monkey-patching.",
+    "Whether all 6 baselines remain passing after fix commit.",
+    "Whether B_CONFIDENCE_LITERAL_HIGHER remains literal-winning after fix commit.",
+    "Whether param generalization holds across multiple unseen ids beyond 2-7 in committed HEAD.",
+    "Whether fix generalizes to real-web endpoints with DOM, auth, session state, drift.",
+    "Whether registry upsert sorting interacts with fix tie-break differently than replace().",
+    "Whether LLM-driven mechanism distillation half of C-PARAM-INHERIT works."
+  ]
+}
+```
+
+## report.md
+
+```text
+# EXP-GRAPH-34291967676 Report
+
+## Summary
+
+Experiment **BLOCKED** — fix prerequisite not met. No scientific measurement performed.
+
+## Fix Verification
+
+- **File**: `src/spider/kernel.py`
+- **Line 112**: `candidates.sort(key=lambda m: m.confidence, reverse=True)`
+- **Expected fix**: `candidates.sort(key=lambda m: (m.confidence, len(m.parameter_slots)), reverse=True)`
+- **Fix present**: **NO**
+- **Kernel SHA256**: `46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61`
+
+## Decision Rule Application
+
+Per frozen spec decision rule **9.3 BLOCKED**: "If fix is NOT present in committed HEAD (L112 sort key does not include len(parameter_slots))". This condition is satisfied. The experiment is BLOCKED, not FALSIFIED or SUPPORTS.
+
+## Baseline and Core Hazard Conditions
+
+All 14 conditions (6 baselines, 6 core hazard, 1 null control, 1 upsert compatibility) were skipped per spec: "If fix is not present in committed HEAD, status=BLOCKED, skip all conditions." No measurements were taken.
+
+## Observations
+
+1. Fix verification confirms the one-line fix has not been committed to production HEAD.
+2. Parent handoff (EXP-GRAPH-34244445713) also reported fix absent and hazard persists on unfixed HEAD.
+3. No monkey-patching was applied during this experiment.
+4. No network or infrastructure failures.
+
+## Validity Notes
+
+- BLOCKED status is correct per frozen decision rule.
+- No scientific measurement invalidity; prerequisite unmet.
+- Claim C-PARAM-INHERIT remains EXPERIMENTAL; no SURVIVES_POST_COMMIT or FALSIFIED_POST_COMMIT possible.
+- No new evidence for fix effectiveness obtained.
+
+## Unresolved Questions
+
+1. Whether the fix survives commitment to production HEAD.
+2. Whether the fix resolves the hazard for all unseen ids 2-7 without monkey-patching.
+3. Whether baselines regress after fix commit.
+4. Whether B_CONFIDENCE_LITERAL_HIGHER remains literal-winning after fix commit.
+5. Whether fix interacts correctly with registry upsert sorting.
+6. Whether fix generalizes to real-web endpoints.
+
+## Recommended Action
+
+Commit the one-line fix to `src/spider/kernel.py` L112 with Director approval, then re-run this exact experiment against committed HEAD without monkey-patching.
+```
+
+## provenance.json
+
+```text
+{
+  "experiment_id": "EXP-GRAPH-34291967676",
+  "github_run_id": "34291967676",
+  "base_sha": "d7c6aa2ddc5605c63277f4ffa12b14f21ca52e5a",
+  "current_git_sha": "fdd8bb4f5962364140eae09e8f148fb7ae6d60b2",
+  "kernel_sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+  "code_paths": {
+    "kernel": "src/spider/kernel.py",
+    "kernel_fix_line": 112,
+    "fix_present": false
+  },
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.12.0",
+    "git_sha_at_execution": "fdd8bb4f5962364140eae09e8f148fb7ae6d60b2"
+  },
+  "artifacts": {
+    "raw_evidence": {
+      "path": "research/experiments/EXP-GRAPH-34291967676/raw_evidence.json",
+      "sha256": "3239d14afdaf60d9b0cd812961db81e8ec124b3c355691fbd40857d501d36517"
+    },
+    "result": {
+      "path": "research/experiments/EXP-GRAPH-34291967676/result.json",
+      "sha256": "d03f48ef7fbbcfecae944e890252af3422289b17486f722454e3f94e06f3666a"
+    },
+    "report": {
+      "path": "research/experiments/EXP-GRAPH-34291967676/report.md",
+      "sha256": "e91ce7fd6e40b52415b80b805d4f6c63b5c18f6d207a7d174420f3f54ae4cf75"
+    },
+    "freeze": {
+      "path": "research/experiments/EXP-GRAPH-34291967676/freeze.json",
+      "sha256": "ca41a5e4c4d72c6d7a8be4a7b2506ab2a7982a293feb7eff9b40301b91eaaf82"
+    },
+    "spec": {
+      "path": "research/experiments/EXP-GRAPH-34291967676/spec.json",
+      "sha256": "eb387cdba93a9a1fae7dcc42eab03a746bd46018ceb412e9b86eaa128b888e64"
+    },
+    "prereg": {
+      "path": "research/experiments/EXP-GRAPH-34291967676/prereg.md",
+      "sha256": "d829a65aaab1ece94719a5571eb77a929138529d16b335695791e5f02cc18711"
+    }
+  },
+  "execution": {
+    "conditions_executed": 0,
+    "conditions_skipped": 14,
+    "skip_reason": "BLOCKED per decision rule: fix not present in committed HEAD",
+    "monkey_patching_applied": false,
+    "http_requests": 0,
+    "exceptions": 0
+  },
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-34244445713",
+    "path": "research/experiments/EXP-GRAPH-34244445713/handoff.json",
+    "sha256": "4d6e645fde38107c747640644754ef6f60ab88547510ccd8e29557d848907f08"
+  }
+}
+```
+
+## audit.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34291967676",
+  "lane": "graph",
+  "status": "PASS",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Commit fix to src/spider/kernel.py L112: candidates.sort(key=lambda m: (m.confidence, len(m.parameter_slots)), reverse=True) with Director approval — prerequisite for SURVIVES_POST_COMMIT not met, verified by recomputed sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61 and L112 'candidates.sort(key=lambda m: m.confidence, reverse=True)' (result.json metrics.fix_committed=false, metrics.fix_line_present=false, raw_evidence.json fix_verification.fix_present=false, provenance.json code_paths.fix_present=false)",
+    "Re-run this exact frozen spec (6 baselines B-COLD/B-LITERAL-ONLY-ORIG/B-LITERAL-ONLY-UNSEEN/B-PARAM-ONLY-ORIG/B-PARAM-ONLY-UNSEEN/B-COMPETE-PARAM-HIGHER + 6 hazard C-EQUAL-ID2..7 at equal confidence 0.95 literal before param + 1 null B-CONFIDENCE-LITERAL-HIGHER literal 0.98 vs param 0.95 + 1 upsert C-EQUAL-UPSERT-ID7) against committed HEAD without monkey-patching to obtain confirmatory SURVIVES_POST_COMMIT measurement — no post-commit evidence exists in this BLOCKED run (conditions_executed 0, 14 skipped)",
+    "Preserve measurement validity controls in next run: fresh kernel per condition, deterministic n=1, HTTP id verification against jsonplaceholder.typicode.com, registry insertion order literal before param (worst-case), upsert ordering by mechanism_id, no cross-contamination, 5s timeout"
+  ],
+  "validity_findings": [
+    {
+      "finding": "Fix verification correct — BLOCKED status justified per frozen decision rule",
+      "severity": "none",
+      "details": "Independent recompute confirms HEAD L112 is unfixed: src/spider/kernel.py sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61, line 112 'candidates.sort(key=lambda m: m.confidence, reverse=True)' lacking len(parameter_slots). result.json metrics.kernel_sha256 and metrics.line112_content match recomputed file hash and line; raw_evidence.json fix_verification.fix_present=false and kernel_sha256 match; provenance.json code_paths.kernel_fix_line 112 fix_present false and kernel_sha256 match; current_git_sha fdd8bb4f5962364140eae09e8f148fb7ae6d60b2 matches execution environment. Freeze hashes verified: request 2c5a03f4d4ca241aeff79df1acecd1c0f90a5fa3bf1709d515193e28bcd27242, spec eb387cdba93a9a1fae7dcc42eab03a746bd46018ceb412e9b86eaa128b888e64, prereg d829a65aaab1ece94719a5571eb77a929138529d16b335695791e5f02cc18711 all match recomputed sha256. Frozen spec falsifier (d) and decision_rule require status=BLOCKED when fix absent; producer correctly emits status=BLOCKED outcome=NOT_APPLICABLE rather than SUPPORTS or FALSIFIES and correctly skips all 14 conditions.",
+      "evidence": "src/spider/kernel.py L112 sha256 46929b3a..., result.json metrics.fix_committed, metrics.fix_line_present, metrics.kernel_sha256, metrics.line112_content, raw_evidence.json fix_verification, provenance.json code_paths, freeze.json hashes"
+    },
+    {
+      "finding": "Producer does not misclassify BLOCKED as scientific falsification or infrastructure failure — RAW vs INTERPRETATION separation preserved",
+      "severity": "none",
+      "details": "BLOCKED vs FALSIFIED_POST_COMMIT vs MEASUREMENT_INVALID distinction preserved per EXPERIMENT_PACKET.md and AGENTS.md. Producer keeps RAW EVIDENCE (fix_verification only) distinct from OBSERVATIONS (fix absent, no conditions executed) and DERIVED MEASUREMENTS (metrics baseline_pass_rate null, hazard_elimination_rate null). INTERPRETATION correctly states claim C-PARAM-INHERIT remains EXPERIMENTAL with no SURVIVES_POST_COMMIT or FALSIFIED_POST_COMMIT possible. No missing evidence turned into negative result; no infrastructure failure encoded as falsification (http_failures 0, exceptions 0). Report.md and result.json validity_notes correctly label BLOCKED as prerequisite unmet, not measurement invalidity.",
+      "evidence": "result.json status BLOCKED outcome NOT_APPLICABLE, result.json observations, validity_notes, unresolved, report.md Summary and Decision Rule Application, raw_evidence.json fix_verification only"
+    },
+    {
+      "finding": "No monkey-patching, no registry contamination, execution fidelity preserved",
+      "severity": "none",
+      "details": "provenance.json execution.monkey_patching_applied false, conditions_executed 0, conditions_skipped 14, skip_reason BLOCKED per decision rule. src/spider/kernel.py inspected at audit time still unfixed and no runtime modification detected (kernel hash unchanged from parent 46929b3a). Producer did not attempt to weaken preregistration after seeing outcomes. Independent replay of sort logic confirms theoretical fix behavior: equal confidence 0.95 literal before param -> unfixed literal-posts-1 wins (stable sort insertion-order tie-break), fixed param-posts-id wins (len slots 0 vs 1); param 0.98 vs literal 0.95 -> param wins under both sorts; literal 0.98 vs param 0.95 -> literal wins under both sorts; upsert ordering sorted by mechanism_id literal before param then fixed sort still param wins. This confirms worst-case ordering is discriminating and environment could express effect after fix.",
+      "evidence": "provenance.json execution, src/spider/kernel.py L112, independent sort replay with Mechanism mocks, result.json validity_notes no monkey-patching"
+    },
+    {
+      "finding": "Target/split/sampling/representation integrity intact — no leakage, no inflation (within BLOCKED scope)",
+      "severity": "none",
+      "details": "No sampling or split: deterministic kernel-level test would use explicitly controlled registry contents with fresh kernel per condition and context params {id: str(id)} if executed. No training leakage; mechanisms constructed de-novo per condition. Representation is template URL via _bind/${id} and parameter_slots; _template_slots/_bind verified. Producer discloses representation loss in prereg 8.4-8.6 and validity_notes: single intent fetch-post, single endpoint /posts/{id}, preconditions={}, jsonplaceholder simple REST not real-web DOM/auth/session/drift, deterministic n=1, single endpoint. No inflated claim beyond this narrow scope attempted in this BLOCKED run.",
+      "evidence": "prereg.md 5.2-5.5, prereg.md 8.4-8.7, spec.json measurement_validity, src/spider/kernel.py _matches/_bind/_template_slots"
+    },
+    {
+      "finding": "Measurement validity threat — HTTP execution not exercised in this run, but gate correctly prevented invalid measurement",
+      "severity": "none",
+      "details": "All 14 conditions skipped, so no HTTP against jsonplaceholder.typicode.com executed (provenance http_requests 0). This is correct per spec 5.1 gate: if fix absent status=BLOCKED skip all. No HTTP failures or exceptions to misclassify (metrics http_failures 0, exceptions 0). Had fix been present, HTTP execution would be required to verify bound_url id field; audit cannot verify liveness in this run but parent EXP-GRAPH-34244445713 demonstrated 13/13 HTTP successes with 200 and correct ids, establishing endpoint availability prior. No MEASUREMENT_INVALID needed.",
+      "evidence": "result.json metrics http_failures 0, exceptions 0, provenance.json execution.http_requests 0, spec.json decision_rule BLOCKED, parent handoff 13/13 HTTP successes"
+    },
+    {
+      "finding": "Provenance and lineage intact — artifact hashes and parent handoff verified",
+      "severity": "none",
+      "details": "Provenance identifies github_run_id 34291967676, base_sha d7c6aa2ddc5605c63277f4ffa12b14f21ca52e5a, current_git_sha fdd8bb4f5962364140eae09e8f148fb7ae6d60b2, kernel sha256, python 3.12 linux. Artifacts list includes raw_evidence.json sha256 3239d14afdaf60d9b0cd812961db81e8ec124b3c355691fbd40857d501d36517 recomputed match, kernel code sha. Request parent_handoff path research/experiments/EXP-GRAPH-34244445713/handoff.json sha256 4d6e645fde38107c747640644754ef6f60ab88547510ccd8e29557d848907f08 recomputed match. No post-freeze spec change (freeze hashes match). Execution checkpoint github_run_id 34300003616 corresponds to provenance.",
+      "evidence": "provenance.json, request.json parent_handoff, raw_evidence.json sha256, result.json artifacts, execution_checkpoint.json"
+    },
+    {
+      "finding": "Metric/control identifier preservation verified — no renaming to hide disagreement",
+      "severity": "none",
+      "details": "Producer preserves frozen identifiers: fix_presence, B-COLD, B-LITERAL-ONLY-ORIG, B-LITERAL-ONLY-UNSEEN, B-PARAM-ONLY-ORIG, B-PARAM-ONLY-UNSEEN, B-COMPETE-PARAM-HIGHER, C-EQUAL-ID2..7, B-CONFIDENCE-LITERAL-HIGHER, C-EQUAL-UPSERT-ID7 matching spec baselines/positive_control/null_control and prereg conditions. Metrics names fix_committed, fix_line_present, kernel_sha256, line112_content, baseline_pass_rate, hazard_elimination_rate, conditions_executed match prereg 6.1/6.2. All controls correctly use pass false for fix_presence and pass unknown (string) for unmeasured conditions per contract null/unknown semantics distinct from pass/fail.",
+      "evidence": "spec.json baselines/positive_control/null_control/falsifier vs result.json controls keys and metrics keys"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "fix_presence (gate)",
+      "expected": "src/spider/kernel.py L112 sort key includes len(parameter_slots)",
+      "observed": "L112 is 'candidates.sort(key=lambda m: m.confidence, reverse=True)' — fix absent, sha256 46929b3a",
+      "pass": false,
+      "recomputed": true,
+      "evidence": "result.json controls.fix_presence pass false, raw_evidence.json fix_verification.fix_present false, recomputed L112 lack len(parameter_slots)"
+    },
+    {
+      "baseline_id": "B-COLD",
+      "expected": "UNKNOWN with empty registry",
+      "observed": null,
+      "pass": "unknown",
+      "recomputed": true,
+      "evidence": "result.json controls.B-COLD observed null pass unknown evidence_ref null — correctly skipped per BLOCKED gate, no measurement"
+    },
+    {
+      "baseline_id": "B-LITERAL-ONLY-ORIG",
+      "expected": "EXECUTABLE url=/posts/1 HTTP 200 id=1 for context id=1",
+      "observed": null,
+      "pass": "unknown",
+      "recomputed": true,
+      "evidence": "result.json controls.B-LITERAL-ONLY-ORIG observed null pass unknown — correctly not executed due to BLOCKED"
+    },
+    {
+      "baseline_id": "B-LITERAL-ONLY-UNSEEN",
+      "expected": "EXECUTABLE url=/posts/1 HTTP 200 id=1 for unseen id=7 (literal does not generalize)",
+      "observed": null,
+      "pass": "unknown",
+      "recomputed": true,
+      "evidence": "result.json controls.B-LITERAL-ONLY-UNSEEN observed null pass unknown — correctly skipped"
+    },
+    {
+      "baseline_id": "B-PARAM-ONLY-ORIG",
+      "expected": "EXECUTABLE url=/posts/1 HTTP 200 id=1 for id=1",
+      "observed": null,
+      "pass": "unknown",
+      "recomputed": true,
+      "evidence": "result.json controls.B-PARAM-ONLY-ORIG observed null pass unknown — correctly skipped"
+    },
+    {
+      "baseline_id": "B-PARAM-ONLY-UNSEEN",
+      "expected": "EXECUTABLE url=/posts/7 HTTP 200 id=7 for unseen id=7 (param generalizes)",
+      "observed": null,
+      "pass": "unknown",
+      "recomputed": true,
+      "evidence": "result.json controls.B-PARAM-ONLY-UNSEEN observed null pass unknown — correctly skipped"
+    },
+    {
+      "baseline_id": "B-COMPETE-PARAM-HIGHER (positive_control)",
+      "expected": "EXECUTABLE url=/posts/7 HTTP 200 id=7 when param 0.98 > literal 0.95 for id=7",
+      "observed": null,
+      "pass": "unknown",
+      "recomputed": true,
+      "evidence": "result.json controls.B-COMPETE-PARAM-HIGHER observed null pass unknown — correctly skipped; parent unfixed HEAD showed param wins, preservation untestable in BLOCKED run"
+    },
+    {
+      "baseline_id": "C-EQUAL-ID2..7 (core hazard, 6 conditions equal confidence 0.95 literal before param)",
+      "expected": "param wins url=/posts/{id} HTTP 200 id={id} for each id 2-7 post-fix",
+      "observed": null,
+      "pass": "unknown",
+      "recomputed": true,
+      "evidence": "result.json controls C-EQUAL-ID2..7 all observed null pass unknown — correctly not measured due to BLOCKED; parent diagnostic on unfixed HEAD showed 0/6 param wins (6/6 literal wins) confirming hazard persists without fix"
+    },
+    {
+      "baseline_id": "B-CONFIDENCE-LITERAL-HIGHER (null_control)",
+      "expected": "literal wins url=/posts/1 HTTP 200 id=1 when literal 0.98 > param 0.95",
+      "observed": null,
+      "pass": "unknown",
+      "recomputed": true,
+      "evidence": "result.json controls.B-CONFIDENCE-LITERAL-HIGHER observed null pass unknown — correctly skipped; preservation of strict confidence ordering not tested in BLOCKED run, parent showed literal wins"
+    },
+    {
+      "baseline_id": "C-EQUAL-UPSERT-ID7 (upsert compatibility)",
+      "expected": "param wins url=/posts/7 HTTP 200 id=7 via upsert ordering",
+      "observed": null,
+      "pass": "unknown",
+      "recomputed": true,
+      "evidence": "result.json controls.C-EQUAL-UPSERT-ID7 observed null pass unknown — new condition in this spec vs parent, not measured in BLOCKED run; independent replay confirms fixed sort would still resolve to param under upsert sorted-by-mechanism_id ordering"
+    }
+  ],
+  "recomputed_metrics": {
+    "fix_committed": false,
+    "fix_committed_recomputed": false,
+    "fix_line_present": false,
+    "fix_line_present_recomputed": false,
+    "kernel_sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+    "kernel_sha256_recomputed": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+    "line112_content": "candidates.sort(key=lambda m: m.confidence, reverse=True)",
+    "line112_content_recomputed": "candidates.sort(key=lambda m: m.confidence, reverse=True)",
+    "line112_contains_len_parameter_slots": false,
+    "line112_contains_len_parameter_slots_recomputed": false,
+    "baseline_pass_rate": null,
+    "baseline_pass_rate_recomputed": null,
+    "hazard_elimination_rate": null,
+    "hazard_elimination_rate_recomputed": null,
+    "conditions_executed": 0,
+    "conditions_executed_recomputed": 0,
+    "conditions_skipped": 14,
+    "conditions_skipped_recomputed": 14,
+    "http_failures": 0,
+    "http_failures_recomputed": 0,
+    "exceptions": 0,
+    "exceptions_recomputed": 0,
+    "recompute_notes": "Independent recompute via sha256sum and sed -n 112p confirms kernel hash and L112 content match producer. All 14 controls correctly show fix_presence fail and others unknown due to BLOCKED gate. No baseline/hazard rates determinable in BLOCKED run — producer correctly emits null not 0 or 1. Sort-logic replay confirms fix would yield 6/6 hazard elimination and preserve confidence ordering, but not tested in committed HEAD."
+  },
+  "claim_ceiling": "MAX JUSTIFIED CEILING: BLOCKED — no SURVIVES_POST_COMMIT claim for C-PARAM-INHERIT. Established only: (1) fix NOT present in committed HEAD src/spider/kernel.py L112 (sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61, line 'candidates.sort(key=lambda m: m.confidence, reverse=True)'); (2) 0/14 conditions executed, 14/14 skipped per gate — no post-commit evidence for 6/6 baselines, 6/6 hazard elimination, null control, or upsert compatibility in this run; (3) prior diagnostic on unfixed HEAD from parent EXP-GRAPH-34244445713 remains the only evidence: 6/6 baselines pass, null control literal 0.98 beats param 0.95, core hazard 0/6 param wins (6/6 literal wins) confirming systematic insertion-order tie-break without fix. NOT established: fix effectiveness post-commit, tie-break on len(parameter_slots), baseline preservation after fix, confidence ordering under new sort key, upsert interaction, generalization beyond jsonplaceholder /posts/{id} single intent fetch-post preconditions={} deterministic n=1, real-web DOM/auth/session/drift, LLM distillation, multi-intent, non-empty preconditions.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-34291967676/request.json sha256 2c5a03f4d4ca241aeff79df1acecd1c0f90a5fa3bf1709d515193e28bcd27242",
+    "research/experiments/EXP-GRAPH-34291967676/spec.json sha256 eb387cdba93a9a1fae7dcc42eab03a746bd46018ceb412e9b86eaa128b888e64",
+    "research/experiments/EXP-GRAPH-34291967676/prereg.md sha256 d829a65aaab1ece94719a5571eb77a929138529d16b335695791e5f02cc18711",
+    "research/experiments/EXP-GRAPH-34291967676/freeze.json sha256 ca41a5e4c4d72c6d7a8be4a7b2506ab2a7982a293feb7eff9b40301b91eaaf82",
+    "research/experiments/EXP-GRAPH-34291967676/result.json sha256 d03f48ef7fbbcfecae944e890252af3422289b17486f722454e3f94e06f3666a",
+    "research/experiments/EXP-GRAPH-34291967676/raw_evidence.json sha256 3239d14afdaf60d9b0cd812961db81e8ec124b3c355691fbd40857d501d36517",
+    "research/experiments/EXP-GRAPH-34291967676/report.md sha256 e91ce7fd6e40b52415b80b805d4f6c63b5c18f6d207a7d174420f3f54ae4cf75",
+    "research/experiments/EXP-GRAPH-34291967676/provenance.json sha256 089e45f672ee11e357b942767de42a70bfb7f01b017fc2be676b318e0c18fde0",
+    "src/spider/kernel.py sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61 L112 candidates.sort(key=lambda m: m.confidence, reverse=True)",
+    "src/spider/models.py parameter_slots_field list[str] default_factory=list",
+    "src/spider/registry.py upsert sorted by mechanism_id",
+    "research/experiments/EXP-GRAPH-34244445713/handoff.json sha256 4d6e645fde38107c747640644754ef6f60ab88547510ccd8e29557d848907f08 parent BLOCKED"
+  ],
+  "unresolved": [
+    "Whether the fix survives commitment to production HEAD and resolves the hazard for all unseen ids 2-7 without monkey-patching",
+    "Whether all 6 baselines remain passing after fix commit (untestable from BLOCKED run)",
+    "Whether B_CONFIDENCE_LITERAL_HIGHER remains literal-winning after fix commit (strict confidence ordering under new sort key with len(parameter_slots) as secondary key)",
+    "Whether param generalization holds across multiple unseen ids beyond 2-7 in committed HEAD",
+    "Whether fix generalizes to real-web endpoints with DOM, auth, session state, drift — jsonplaceholder is simple REST",
+    "Whether registry upsert sorting interacts with fix tie-break differently than replace() used in spec alternative description",
+    "Whether LLM-driven mechanism distillation half of C-PARAM-INHERIT works (no model calls in this experiment)"
+  ]
+}
+```
+
+## verdict.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34291967676",
+  "lane": "graph",
+  "decision": "BLOCKED",
+  "claim_updates": [
+    {
+      "claim_id": "C-PARAM-INHERIT",
+      "status": "EXPERIMENTAL",
+      "reason": "Fix prerequisite not met — src/spider/kernel.py L112 sort key still 'candidates.sort(key=lambda m: m.confidence, reverse=True)', fix absent from committed HEAD (kernel sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61). 0/14 conditions executed per frozen BLOCKED decision rule. No SURVIVES_POST_COMMIT or FALSIFIED_POST_COMMIT possible. Claim ceiling unchanged from parent: no post-commit evidence exists. Fix must be committed with Director approval before re-run."
+    }
+  ],
+  "product_action": "NONE — prerequisite unmet, no scientific measurement performed, no product-relevant evidence generated",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "After committing the parameter-slot-count fix to production HEAD (src/spider/kernel.py L112 sort key includes len(parameter_slots)), does the literal-vs-param equal-confidence competition resolve to param for all unseen ids 2-7 without monkey-patching, do all 6 baseline conditions pass, does the corrected B_CONFIDENCE_LITERAL_HIGHER condition (literal 0.98 > param 0.95) remain literal-winning, and does the fix interact correctly with registry upsert sorting (production-like ordering)?",
+  "reason": "Experiment BLOCKED per frozen decision rule 9.3: fix NOT present in committed HEAD (L112 sort key does not include len(parameter_slots)). Producer correctly emits status=BLOCKED outcome=NOT_APPLICABLE with 0/14 conditions executed. Independent audit confirms BLOCKED justified: kernel sha256 46929b3a recomputed matches producer, L112 content recomputed matches producer, all 14 controls correctly show fix_presence fail and others unknown. No scientific measurement performed — no baselines, no hazard test, no null control, no upsert test. This is the same BLOCKED state as parent EXP-GRAPH-34244445713 (fix still absent). The experiment cannot advance C-PARAM-INHERIT without the one-line fix committed to production HEAD. Root cause: prerequisite fix has not been committed despite two BLOCKED results confirming it is needed.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-34291967676/request.json sha256 2c5a03f4d4ca241aeff79df1acecd1c0f90a5fa3bf1709d515193e28bcd27242",
+    "research/experiments/EXP-GRAPH-34291967676/spec.json sha256 eb387cdba93a9a1fae7dcc42eab03a746bd46018ceb412e9b86eaa128b888e64",
+    "research/experiments/EXP-GRAPH-34291967676/prereg.md sha256 d829a65aaab1ece94719a5571eb77a929138529d16b335695791e5f02cc18711",
+    "research/experiments/EXP-GRAPH-34291967676/freeze.json sha256 ca41a5e4c4d72c6d7a8be4a7b2506ab2a7982a293feb7eff9b40301b91eaaf82",
+    "research/experiments/EXP-GRAPH-34291967676/result.json sha256 d03f48ef7fbbcfecae944e890252af3422289b17486f722454e3f94e06f3666a",
+    "research/experiments/EXP-GRAPH-34291967676/raw_evidence.json sha256 3239d14afdaf60d9b0cd812961db81e8ec124b3c355691fbd40857d501d36517",
+    "research/experiments/EXP-GRAPH-34291967676/audit.json status=PASS producer_claim_supported=false claim_ceiling=BLOCKED",
+    "research/experiments/EXP-GRAPH-34291967676/report.md sha256 e91ce7fd6e40b52415b80b805d4f6c63b5c18f6d207a7d174420f3f54ae4cf75",
+    "research/experiments/EXP-GRAPH-34291967676/provenance.json github_run_id=34291967676 kernel_sha256=46929b3a fix_present=false",
+    "src/spider/kernel.py sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61 L112 candidates.sort(key=lambda m: m.confidence, reverse=True)",
+    "research/experiments/EXP-GRAPH-34244445713/handoff.json sha256 4d6e645fde38107c747640644754ef6f60ab88547510ccd8e29557d848907f08 parent BLOCKED"
+  ]
+}
+```
+
+## handoff.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34291967676",
+  "lane": "graph",
+  "target_lane": "graph",
+  "next_question": "After committing the parameter-slot-count fix to production HEAD (src/spider/kernel.py L112 sort key includes len(parameter_slots)), does the literal-vs-param equal-confidence competition resolve to param for all unseen ids 2-7 without monkey-patching, do all 6 baseline conditions pass, does the corrected B_CONFIDENCE_LITERAL_HIGHER condition (literal 0.98 > param 0.95) remain literal-winning, and does the fix interact correctly with registry upsert sorting (production-like ordering)?",
+  "why_next": "Experiment BLOCKED again — fix prerequisite still not met after two consecutive BLOCKED results (parent EXP-GRAPH-34244445713 and this run). Fix NOT present in committed HEAD (kernel sha256 46929b3a, L112 still 'candidates.sort(key=lambda m: m.confidence, reverse=True)'). 0/14 conditions executed per frozen BLOCKED decision rule. No post-commit evidence exists. The one-line fix must be committed with Director approval before the same frozen spec can be re-run to obtain confirmatory SURVIVES_POST_COMMIT measurement. The graph lane cannot advance C-PARAM-INHERIT without this prerequisite.",
+  "carry_forward": {
+    "established": [
+      "Fix NOT present in committed HEAD src/spider/kernel.py L112 — verified independently by producer and auditor: kernel sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61, line 112 'candidates.sort(key=lambda m: m.confidence, reverse=True)', no len(parameter_slots) in sort key. Same state as parent EXP-GRAPH-34244445713 — fix has not been committed despite two BLOCKED results.",
+      "BLOCKED status correctly applied per frozen decision rule 9.3: fix absent → status=BLOCKED, outcome=NOT_APPLICABLE, 0/14 conditions executed, all 14 skipped. Producer correctly did not misclassify BLOCKED as FALSIFIED or SUPPORTS.",
+      "Parent experiment diagnostic results remain the only evidence: 6/6 baselines pass on unfixed HEAD (B-COLD UNKNOWN, literal-only orig/unseen /posts/1 id=1, param-only orig /posts/1 id=1 unseen /posts/7 id=7, compete-param-higher param 0.98 beats literal 0.95 → /posts/7 id=7), null control literal 0.98 beats param 0.95 → /posts/1 id=1, core hazard 0/6 param wins (6/6 literal wins at equal confidence 0.95 with literal registered first). All 13/13 HTTP successes against jsonplaceholder. These are diagnostic on unfixed HEAD, not evidence against fix effectiveness.",
+      "No infrastructure failures, no exceptions, no monkey-patching. Measurement validity controls preserved: fresh kernel per condition, deterministic n=1, HTTP id verification, registry insertion order literal before param (worst-case), no cross-contamination.",
+      "Auditor PASS confirms: recomputed kernel hash matches producer, L112 content matches producer, all 14 controls correctly show fix_presence fail and others unknown, no metric inflation, no identifier renaming, provenance and lineage intact."
+    ],
+    "rejected": [
+      "Post-commit hazard elimination claim (C-PARAM-INHERIT SURVIVES_POST_COMMIT) — fix not committed, prerequisite unmet, cannot test",
+      "Any scientific falsification of the fix (diagnostic hazard results on unfixed HEAD from parent experiment are expected behavior without fix, not evidence against fix effectiveness)",
+      "FALSIFIED_POST_COMMIT status — not applicable because fix is absent; FALSIFIED requires fix present but failing"
+    ],
+    "unknown": [
+      "Whether the fix survives commitment to production HEAD and resolves the hazard for all unseen ids 2-7 without monkey-patching",
+      "Whether all 6 baselines remain passing after fix commit (cannot be tested from BLOCKED run)",
+      "Whether B_CONFIDENCE_LITERAL_HIGHER remains literal-winning after fix commit (strict confidence ordering under new sort key with len(parameter_slots) as secondary key)",
+      "Whether param generalization holds across multiple unseen ids beyond 2-7 in committed HEAD",
+      "Whether fix generalizes to real-web endpoints with DOM, auth, session state, drift (jsonplaceholder is simple REST)",
+      "Whether registry upsert sorting (production) interacts with fix tie-break differently than replace()",
+      "Whether LLM-driven mechanism distillation half of C-PARAM-INHERIT works (no model calls in this experiment)"
+    ],
+    "do_not_assume": [
+      "Fix is committed (verified unfixed at experiment time — kernel sha256 46929b3a unchanged across two experiments)",
+      "Post-commit behavior matches monkey-patched behavior (no monkey-patching used; fix must be in committed code)",
+      "Core hazard test results on unfixed HEAD (0/6 param wins) constitute falsification of the fix (they are diagnostic on unfixed HEAD, expected behavior)",
+      "Production-readiness (jsonplaceholder is simple REST; no DOM, auth, session state, drift)",
+      "Generalization beyond single intent (fetch-post), single endpoint (/posts/{id}), preconditions={}, deterministic n=1",
+      "Fix was applied or tested in any way (experiment ran on committed HEAD exactly as designed, no modification)",
+      "BLOCKED status means the underlying hypothesis is false (BLOCKED means prerequisite unmet, not hypothesis rejected)",
+      "Two BLOCKED results means the fix will never be committed (operational delay, not scientific closure)"
+    ]
+  },
+  "dependencies": [
+    "The one-line fix must be committed to src/spider/kernel.py L112: candidates.sort(key=lambda m: (m.confidence, len(m.parameter_slots)), reverse=True) with Director approval",
+    "After fix commit, the exact same frozen spec must be re-executed against committed HEAD without monkey-patching to obtain SURVIVES_POST_COMMIT measurement",
+    "Measurement validity controls must be preserved: fresh kernel per condition, deterministic n=1, HTTP id verification against jsonplaceholder.typicode.com, registry insertion order literal before param (worst-case), upsert ordering by mechanism_id, no cross-contamination, 5s timeout"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-34291967676/request.json sha256 2c5a03f4d4ca241aeff79df1acecd1c0f90a5fa3bf1709d515193e28bcd27242",
+    "research/experiments/EXP-GRAPH-34291967676/spec.json sha256 eb387cdba93a9a1fae7dcc42eab03a746bd46018ceb412e9b86eaa128b888e64",
+    "research/experiments/EXP-GRAPH-34291967676/prereg.md sha256 d829a65aaab1ece94719a5571eb77a929138529d16b335695791e5f02cc18711",
+    "research/experiments/EXP-GRAPH-34291967676/freeze.json sha256 ca41a5e4c4d72c6d7a8be4a7b2506ab2a7982a293feb7eff9b40301b91eaaf82",
+    "research/experiments/EXP-GRAPH-34291967676/result.json sha256 d03f48ef7fbbcfecae944e890252af3422289b17486f722454e3f94e06f3666a",
+    "research/experiments/EXP-GRAPH-34291967676/raw_evidence.json sha256 3239d14afdaf60d9b0cd812961db81e8ec124b3c355691fbd40857d501d36517",
+    "research/experiments/EXP-GRAPH-34291967676/audit.json status=PASS producer_claim_supported=false claim_ceiling=BLOCKED",
+    "research/experiments/EXP-GRAPH-34291967676/report.md sha256 e91ce7fd6e40b52415b80b805d4f6c63b5c18f6d207a7d174420f3f54ae4cf75",
+    "research/experiments/EXP-GRAPH-34291967676/provenance.json github_run_id=34291967676 kernel_sha256=46929b3a fix_present=false",
+    "src/spider/kernel.py sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61 L112 candidates.sort(key=lambda m: m.confidence, reverse=True)",
+    "research/experiments/EXP-GRAPH-34244445713/handoff.json sha256 4d6e645fde38107c747640644754ef6f60ab88547510ccd8e29557d848907f08 parent BLOCKED"
+  ],
+  "recommended_action": "Commit the one-line fix to src/spider/kernel.py L112: candidates.sort(key=lambda m: (m.confidence, len(m.parameter_slots)), reverse=True) with Director approval. This is the second consecutive BLOCKED result confirming the prerequisite is unmet. After fix commit, re-run the exact same frozen spec against committed HEAD without monkey-patching. All 14 conditions (6 baselines, 6 core hazard, 1 null control, 1 upsert compatibility) are sufficient — no spec changes needed. The fix is a one-line change; the blocking is operational, not scientific."
 }
 ```
 
@@ -39590,5 +40535,1056 @@ The improvement from 0.833 to 1.0 is entirely explained by the design change (di
     "research/experiments/EXP-RUNTIME-33902315583/handoff.json — parent carry_forward with identical expired/invalid bodies, discrimination 0.833, full=B-BODY-ONLY"
   ],
   "recommended_action": "DESIGN EXP-RUNTIME-next to test the identical-error-body scenario with production-like header variation: (1) Use Flask/PyJWT middleware where expired_token and invalid_token return IDENTICAL bodies (as in parent EXP-RUNTIME-33902315583), but with production-like headers (Cache-Control varies by state, Set-Cookie present only for valid_token, ETag body-dependent). (2) Key test: does full vector exceed B-BODY-ONLY when bodies are NOT perfectly discriminative? If Cache-Control and Set-Cookie add independent information, full vector should exceed body-only (discrimination > 0.833). (3) Keep sorted-tuple fingerprint with Date/Server/X-Request-Id exclusion. (4) Keep N=40, jitter 50-150ms, seed 44 for comparability. (5) Baselines: B-STATUS-ONLY, B-BODY-ONLY, B-URL-HASH, B-RANDOM. This is the only design that can answer the H4 question that was vacuous at ceiling in this experiment."
+}
+```
+
+# EXP-RUNTIME-34054515149
+
+## request.json
+
+```text
+{
+  "base_sha": "3c8b18f71460ae9c94bd28167a6b56eb563ac1e5",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-06T19:19:18.243701+00:00",
+  "experiment_id": "EXP-RUNTIME-34054515149",
+  "inherited_last_verdict": "CONSTRAINED \u2014 C-MEAS-VALID survives narrowly. All three mandatory decision criteria pass (full-vector discrimination 1.0 > 0.5, null FP 0.0% < 5%, valid vs expired Jaccard 0.328 < 0.5). However, the producer's claim ceiling is overgeneralized: claim extends only to Flask 3.1.3 + PyJWT 2.13.0 HS256 on localhost 127.0.0.1:18928 with 4 states returning distinct bodies, headers filtered (Date/Server/X-Request-Id excluded), Cache-Control no-store/no-cache, ETag W/body_sha, Set-Cookie session only for valid_token, jitter 50-150ms uniform, N=40 seed 44, Python 3.12.14. The exploratory H4 test (full vector > B-BODY-ONLY) is INCONCLUSIVE due to ceiling effect: with all 4 bodies distinct, discrimination is at 1.0 and headers cannot improve beyond perfect. Full vector = B-BODY-ONLY (1.0 = 1.0) reflects body dominance under distinct-body design, not proof headers are non-discriminative. The bootstrap CI [1.0, 1.0] is degenerate at ceiling (uninformative, not high-precision). ETag and Content-Length are body-correlated by construction. Only Cache-Control and Set-Cookie are state-varying independent headers; each achieves 0.5 discrimination alone but is redundant when bodies already separate.",
+  "inherited_next_question": "Does the HTTP fingerprint substrate's full vector exceed B-BODY-ONLY when bodies are NOT perfectly discriminative (e.g., identical error bodies for expired/invalid token states) but headers (Cache-Control, Set-Cookie) vary independently with auth state \u2014 the incremental header value test that was vacuous at ceiling 1.0 in this experiment?",
+  "lane": "runtime",
+  "origin_github_run_id": "34054515149",
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-34015740602",
+    "path": "research/experiments/EXP-RUNTIME-34015740602/handoff.json",
+    "sha256": "68538996eba323cb60ed47841f67217c0fe1b7d191c1c3686de0dd1ee9728c5e"
+  },
+  "reason": "pulse",
+  "request_hash": "462d3760831dd6034f2ee826d8114813ee360064c92c40bb9cc5fa7dc86673b5",
+  "request_id": "b8944cf14917e79019158adb",
+  "schema_version": 1
+}
+```
+
+## spec.json
+
+```text
+{
+  "experiment_id": "EXP-RUNTIME-34054515149",
+  "lane": "runtime",
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "Does the HTTP fingerprint substrate's full vector exceed B-BODY-ONLY when bodies are NOT perfectly discriminative (e.g., identical error bodies for expired/invalid token states) but headers (Cache-Control, Set-Cookie) vary independently with auth state?",
+  "hypothesis": "When expired_token and invalid_token share identical bodies but Cache-Control varies by state (no-store for expired, no-cache for invalid) and Set-Cookie is present only for valid_token, the full fingerprint vector will achieve discrimination greater than B-BODY-ONLY, because Cache-Control and Set-Cookie provide independent discrimining information that body-only observation cannot capture.",
+  "falsifier": "full_vector_discrimination == B-BODY-ONLY (i.e., Cache-Control and Set-Cookie add no incremental discrimination despite varying with state), OR full_vector_discrimination <= 0.5 (fails primary threshold), OR null FP > 5%, OR Cache-Control-only discrimination == 0 (headers do not actually vary with state)",
+  "baselines": [
+    "B-STATUS-ONLY: fingerprint based on HTTP status code only (expected: 0.5, since 4 states map to 2 statuses)",
+    "B-BODY-ONLY: fingerprint based on body hash only (expected: < 1.0 because expired/invalid share identical body, so body-only can distinguish at most 3 groups)",
+    "B-URL-HASH: fingerprint based on URL hash only (expected: 0.0, all requests to same endpoint)",
+    "B-RANDOM: random assignment fingerprint (expected: ~0.0)"
+  ],
+  "positive_control": "Cache-Control-only discrimination > 0: Cache-Control header varies by auth state (no-store/no-cache/absent), so a fingerprint based on Cache-Control alone should achieve some discrimination",
+  "null_control": "B-RANDOM discrimination ~ 0.0: random assignment should not achieve meaningful discrimination",
+  "measurement_validity": [
+    "Flask 3.1.3 + PyJWT 2.13.0 HS256 on localhost (same as parent EXP-RUNTIME-34015740602)",
+    "4 auth states: no_auth (401, no Set-Cookie), valid_token (200, Set-Cookie session), expired_token (401, Cache-Control no-store, no Set-Cookie), invalid_token (401, Cache-Control no-cache, no Set-Cookie)",
+    "expired_token and invalid_token return IDENTICAL bodies (same as EXP-RUNTIME-33902315583 scenario)",
+    "Headers filtered: Date/Server/X-Request-Id excluded from fingerprint",
+    "Cache-Control varies by state: no-store for expired_token, no-cache for invalid_token, absent for no_auth/valid_token",
+    "Set-Cookie: present only for valid_token (session cookie)",
+    "ETag: W/body_sha (body-correlated, expected to be redundant)",
+    "Deterministic SHA-256(repr((status, tuple(sorted(filtered_headers)), body_sha256, ''))) on Python 3.12.14",
+    "N=40 (4 states x 10 requests), seed 44",
+    "Server jitter 50-150ms uniform",
+    "Client inter-request 0-200ms"
+  ],
+  "decision_rule": "If ALL of: (1) full_vector_discrimination > B-BODY-ONLY, (2) full_vector_discrimination > 0.5, (3) null FP < 5%, (4) Cache-Control-only discrimination > 0, then verdict = SURVIVES_CURRENT_TEST for C-MEAS-VALID. If full_vector_discrimination == B-BODY-ONLY OR Cache-Control-only discrimination == 0, verdict = FALSIFIED-IN-SETTING (headers add no incremental value). If full_vector_discrimination <= 0.5 OR null FP > 5%, verdict = MEASUREMENT_INVALID.",
+  "product_consequence_positive": "Headers provide incremental value over body-only observation when bodies are not distinct. Product architecture should use full vector observation (status + headers + body) rather than body-only, because Cache-Control and Set-Cookie capture auth-state information that body alone cannot when error responses share identical bodies.",
+  "product_consequence_negative": "Headers add no incremental value over body-only observation even in degraded body scenarios. Product architecture can safely use body-only observation, reducing fingerprint storage and computation. The H4 ceiling effect in parent reflects a genuine architectural property, not an artifact.",
+  "estimated_cost": "Low: same Flask/PyJWT setup as parent, no new infrastructure. ~40 requests, 4 baselines, discrimination analysis.",
+  "expected_information_gain": "High: resolves the H4 question that was vacuous at ceiling 1.0 in parent EXP-RUNTIME-34015740602. This is the only design that can answer whether Cache-Control and Set-Cookie provide incremental discrimination when body signal is degraded. Positive result changes product architecture (use full vector); negative result confirms body-only sufficiency."
+}
+```
+
+## prereg.md
+
+```text
+# EXP-RUNTIME-34054515149 Preregistration
+
+## 1. Experiment Identity
+
+- **Experiment ID**: EXP-RUNTIME-34054515149
+- **Lane**: Runtime
+- **Claim**: C-MEAS-VALID (Measurement substrate is intervention-valid)
+- **Date**: 2026-09-06
+- **Status**: DESIGN — NOT YET FROZEN
+- **Parent Handoff**: EXP-RUNTIME-34015740602 (CONSTRAINED, C-MEAS-VALID survives narrowly)
+
+## 2. Scientific Question
+
+Does the HTTP fingerprint substrate's full vector exceed B-BODY-ONLY when bodies are NOT perfectly discriminative (e.g., identical error bodies for expired/invalid token states) but headers (Cache-Control, Set-Cookie) vary independently with auth state?
+
+## 3. Motivation
+
+Parent experiment EXP-RUNTIME-34015740602 established discrimination 1.0 on Flask/PyJWT with 4 DISTINCT bodies. The H4 exploratory test (full vector > B-BODY-ONLY) was vacuous due to ceiling effect: with all 4 bodies distinct, discrimination is at 1.0 and headers cannot improve beyond perfect. The auditor correctly identified this as V3-DISTINCT-BODY-CEILING-CONFOUND.
+
+The auditor noted that Cache-Control and Set-Cookie each achieve 0.5 discrimination alone (audit single_header_discrimination) but are redundant when bodies already achieve perfect discrimination (1.0). The critical unknown is whether these headers add incremental value when body signal is degraded.
+
+Grandparent EXP-RUNTIME-33902315583 tested the identical-error-body scenario (expired_token and invalid_token sharing identical bodies) with standard headers only (Content-Type, Content-Length, Connection). Full vector equaled B-BODY-ONLY (0.833 = 0.833). But that experiment used only standard headers that do NOT vary with auth state. Cache-Control and Set-Cookie were not present.
+
+This experiment combines both conditions: identical error bodies (degraded body signal) + production-like headers that vary with auth state (Cache-Control no-store/no-cache, Set-Cookie session). This is the only design that can answer the H4 question.
+
+## 4. Hypotheses
+
+### H1: Incremental Header Value
+When expired_token and invalid_token share identical bodies, Cache-Control and Set-Cookie provide incremental discrimination. Full vector discrimination > B-BODY-ONLY.
+
+### H2: Cache-Control Discrimination
+Cache-Control header varies by auth state (no-store for expired, no-cache for invalid, absent for no_auth/valid_token). Cache-Control-only discrimination > 0.
+
+### H3: Primary Threshold
+Full vector discrimination > 0.5 (primary C-MEAS-VALID threshold).
+
+### H4: Null FP
+Null FP rate < 5% under server-side jitter 50-150ms uniform.
+
+### H5: Set-Cookie Discrimination
+Set-Cookie header varies by auth state (present only for valid_token). Set-Cookie-only discrimination > 0.
+
+## 5. Server Configuration
+
+### 5.1 Middleware
+- Flask 3.1.3 + PyJWT 2.13.0 HS256
+- Localhost 127.0.0.1 (port TBD, different from parent)
+
+### 5.2 Auth States
+
+| State | Status | Body | Cache-Control | Set-Cookie |
+|-------|--------|------|---------------|------------|
+| no_auth | 401 | login_required | (absent) | (absent) |
+| valid_token | 200 | alice_profile | (absent) | session=abc123 |
+| expired_token | 401 | error_response | no-store | (absent) |
+| invalid_token | 401 | error_response | no-cache | (absent) |
+
+Key design: expired_token and invalid_token share IDENTICAL bodies (error_response). Cache-Control differs: no-store vs no-cache. Set-Cookie present only for valid_token.
+
+### 5.3 Headers Excluded from Fingerprint
+- Date (volatile per-request)
+- Server (deployment artifact)
+- X-Request-Id (volatile UUID)
+
+### 5.4 Headers Included in Fingerprint
+- Cache-Control (varies by state)
+- Set-Cookie (varies by state)
+- Content-Type (constant)
+- Content-Length (body-correlated)
+- ETag (body-correlated, W/body_sha)
+
+## 6. Fingerprinting
+
+Deterministic SHA-256 of:
+```python
+repr((status, tuple(sorted(filtered_headers)), body_sha256, ''))
+```
+
+Where `filtered_headers` excludes Date, Server, X-Request-Id. Python 3.12.14.
+
+## 7. Sampling
+
+- N = 40 (4 states x 10 requests)
+- Seed = 44 (for comparability with parent)
+- Server jitter = 50-150ms uniform
+- Client inter-request = 0-200ms
+- Per-state: 10 requests, expect identical fingerprints within state
+
+## 8. Baselines
+
+| Baseline | Description | Expected Discrimination |
+|----------|-------------|------------------------|
+| B-STATUS-ONLY | Fingerprint based on status code only | 0.5 (2 statuses: 200, 401) |
+| B-BODY-ONLY | Fingerprint based on body hash only | < 1.0 (expired/invalid share body, so 3 groups not 4) |
+| B-URL-HASH | Fingerprint based on URL hash only | 0.0 (same endpoint) |
+| B-RANDOM | Random assignment | ~0.0 |
+
+### 8.1 Baseline Baseline Comparison
+- B-BODY-ONLY expected: With expired/invalid sharing identical bodies, body-only can distinguish at most 3 groups (no_auth, valid_token, error_group). Discrimination should be less than 1.0.
+- Full vector expected: If Cache-Control and Set-Cookie add information, full vector should distinguish all 4 states (Cache-Control differentiates expired vs invalid).
+
+## 9. Measures
+
+### 9.1 Primary Metric
+- **full_vector_discrimination**: Jaccard-based discrimination score for full fingerprint vector
+- **b_body_only_discrimination**: Jaccard-based discrimination score for body-only fingerprint
+- **incremental_header_value**: full_vector_discrimination - b_body_only_discrimination
+
+### 9.2 Secondary Metrics
+- Cache-Control-only discrimination
+- Set-Cookie-only discrimination
+- Per-state fingerprint match rate (intra-state)
+- Cross-state fingerprint match rate (inter-state)
+- Mean inter-state Jaccard distance
+- Bootstrap CI for full_vector_discrimination
+
+### 9.3 Control Metrics
+- Null FP rate (per-state identical fingerprints)
+- Drift discriminability (valid_token vs expired_token Jaccard, expired_token vs invalid_token Jaccard)
+
+## 10. Controls
+
+### 10.1 Positive Control: Cache-Control Varies with State
+Cache-Control-only discrimination > 0. Cache-Control is no-store for expired, no-cache for invalid, absent for no_auth/valid_token. If Cache-Control-only discrimination == 0, the experiment is MEASUREMENT_INVALID (headers do not actually vary as designed).
+
+### 10.2 Null Control: Random Fingerprint
+B-RANDOM discrimination ~ 0.0. Random assignment should not achieve meaningful discrimination.
+
+### 10.3 Body Correlation Control: ETag Redundancy
+ETag = W/body_sha is body-correlated by construction. ETag-only discrimination should equal body-only discrimination. This verifies body-correlated headers are correctly redundant.
+
+### 10.4 Set-Cookie Control: Valid Token Only
+Set-Cookie present only for valid_token. Set-Cookie-only discrimination should distinguish valid_token from other states (at least 3 groups: valid_token, others).
+
+## 11. Decision Rule
+
+### 11.1 SURVIVES_CURRENT_TEST
+If ALL of:
+1. full_vector_discrimination > B-BODY-ONLY
+2. full_vector_discrimination > 0.5
+3. null FP < 5%
+4. Cache-Control-only discrimination > 0
+
+### 11.2 FALSIFIED-IN-SETTING
+If ANY of:
+1. full_vector_discrimination == B-BODY-ONLY (headers add no incremental value)
+2. Cache-Control-only discrimination == 0 (headers do not vary with state)
+
+### 11.3 MEASUREMENT_INVALID
+If ANY of:
+1. full_vector_discrimination <= 0.5 (primary threshold fails)
+2. null FP > 5%
+3. Server fails to start or respond
+4. Fewer than 4 distinct fingerprints observed (setup error)
+
+## 12. Validity Threats
+
+### 12.1 Cache-Control Header Interpretation
+Flask/Werkzeug may or may not support arbitrary Cache-Control values in responses. If Cache-Control is not actually present in responses, the experiment is MEASUREMENT_INVALID. Mitigation: verify Cache-Control presence in raw HTTP responses before fingerprinting.
+
+### 12.2 ETag Correlation
+ETag = W/body_sha is body-correlated by construction. When expired/invalid share identical bodies, ETag will also be identical. This is expected and does not affect the Cache-Control/Set-Cookie test.
+
+### 12.3 Content-Length Correlation
+Content-Length = body length. When expired/invalid share identical bodies, Content-Length will also be identical. This is expected and does not affect the Cache-Control/Set-Cookie test.
+
+### 12.4 Sample Size
+N=40 (4 states x 10 requests) provides 10 intra-state pairs per state for fingerprint matching. Sufficient for primary threshold test (>0.5) but limited power for fine-grained comparisons. Same as parent for comparability.
+
+### 12.5 Jitter Range
+Server jitter 50-150ms uniform, same as parent. Null FP < 5% expected under this range (established in parent and grandparent).
+
+### 12.6 Python Version Dependency
+repr(vector) is Python-version-dependent. Results validated only on Python 3.12.14. Cross-version reproducibility remains unknown (parent unknown).
+
+## 13. Expected Outcomes
+
+### 13.1 Positive Result (SURVIVES_CURRENT_TEST)
+Headers provide incremental value over body-only observation when bodies are not distinct. Cache-Control and Set-Cookie capture auth-state information that body alone cannot. Product architecture should use full vector observation. The H4 ceiling effect in parent was an artifact of distinct-body design, not a general property.
+
+### 13.2 Negative Result (FALSIFIED-IN-SETTING)
+Headers add no incremental value even in degraded body scenarios. Body-only observation is sufficient. The H4 ceiling effect in parent reflects a genuine architectural property. Product can safely use body-only observation.
+
+### 13.3 Invalid Result (MEASUREMENT_INVALID)
+Infrastructure or setup failure. Not scientific evidence for or against.
+
+## 14. Analysis Plan
+
+1. **Setup Verification**: Confirm Cache-Control and Set-Cookie present in raw HTTP responses for each state
+2. **Fingerprinting**: Compute full vector, body-only, status-only, URL-hash, random fingerprints for all 40 requests
+3. **Discrimination**: Compute Jaccard-based discrimination score for each fingerprint method
+4. **Baselines**: Compare full_vector_discrimination to B-BODY-ONLY, B-STATUS-ONLY, B-URL-HASH, B-RANDOM
+5. **Controls**: Verify positive control (Cache-Control varies), null control (random ~ 0), body correlation (ETag = body-only)
+6. **Bootstrap**: Compute bootstrap CI for full_vector_discrimination (1000 iterations, resample states with deduplication)
+7. **Drift**: Compute Jaccard distances for valid_token vs expired_token, expired_token vs invalid_token
+8. **Reporting**: Report all outcomes with equal prominence
+
+## 15. Deviation Policy
+
+Any deviation from this preregistration will be labeled EXPLORATORY and cannot support confirmatory claims. A new confirmatory claim requires a new preregistration.
+
+## 16. Freeze Statement
+
+This preregistration is frozen BEFORE any analysis code is written or any outcome data is inspected. The experiment will be executed exactly as described here.
+```
+
+## freeze.json
+
+```text
+{
+  "experiment_id": "EXP-RUNTIME-34054515149",
+  "frozen_at": "2026-09-06T19:21:20.473484+00:00",
+  "hashes": {
+    "prereg.md": "1d0de2ee1c5f404dcecbc3e126f0b3e7a78484b7c4fc6c765d159e30d4e337e0",
+    "request.json": "ba9cefd4d44540e65e090e9fae5bad7e919fb5b1eef3eb4d2348dbb9454d7d8c",
+    "spec.json": "26aa1fda330358740f7278c80ba773c3be0a02979bcc8d2a0cbbfb3a6570517c"
+  },
+  "schema_version": 1
+}
+```
+
+## result.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-34054515149",
+  "lane": "runtime",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "full_vector_discrimination": 1.0,
+    "full_vector_intra_match_rate": 1.0,
+    "full_vector_inter_match_rate": 0.0,
+    "full_vector_mean_intra_jaccard": 1.0,
+    "full_vector_mean_inter_jaccard": 0.34198787706642,
+    "full_vector_bootstrap_95ci": [
+      1.0,
+      1.0
+    ],
+    "baselines": {
+      "B-URL-HASH": 0.0,
+      "B-RANDOM": 0.0,
+      "B-STATUS-ONLY": 0.5,
+      "B-BODY-ONLY": 0.8333333333333334
+    },
+    "incremental_header_value": 0.16666666666666663,
+    "full_vs_body_only_ratio": 1.2,
+    "cache_control_only_discrimination": 0.8333333333333334,
+    "set_cookie_only_discrimination": 0.5,
+    "etag_only_discrimination": 0.8333333333333334,
+    "null_fp_rate": 0.0,
+    "drift_jaccards": [
+      0.32474226804123707,
+      0.3812154696132597
+    ],
+    "drift_all_discriminable": true,
+    "total_requests": 40,
+    "error_rate": 0.0
+  },
+  "controls": {
+    "C_NULL_FP_RATE": {
+      "expected": "< 5%",
+      "observed": "0.0%",
+      "pass": true,
+      "detail": {
+        "no_auth": {
+          "total": 10,
+          "unique": 1,
+          "false_positive_rate": 0.0
+        },
+        "valid_token": {
+          "total": 10,
+          "unique": 1,
+          "false_positive_rate": 0.0
+        },
+        "expired_token": {
+          "total": 10,
+          "unique": 1,
+          "false_positive_rate": 0.0
+        },
+        "invalid_token": {
+          "total": 10,
+          "unique": 1,
+          "false_positive_rate": 0.0
+        }
+      }
+    },
+    "C_POSITIVE_DISCRIMINATION": {
+      "expected": "> 0.5",
+      "observed": "1.000000",
+      "pass": true
+    },
+    "C_CACHE_CONTROL_VARIATION": {
+      "expected": "Cache-Control-only discrimination > 0",
+      "observed": "0.833333",
+      "pass": true,
+      "detail": {
+        "no_auth": {
+          "expected": null,
+          "observed_values": [
+            "(absent)"
+          ],
+          "consistent": true
+        },
+        "valid_token": {
+          "expected": null,
+          "observed_values": [
+            "(absent)"
+          ],
+          "consistent": true
+        },
+        "expired_token": {
+          "expected": "no-store",
+          "observed_values": [
+            "no-store"
+          ],
+          "consistent": true
+        },
+        "invalid_token": {
+          "expected": "no-cache",
+          "observed_values": [
+            "no-cache"
+          ],
+          "consistent": true
+        }
+      }
+    },
+    "C_SET_COOKIE_VARIATION": {
+      "expected": "Set-Cookie-only discrimination > 0",
+      "observed": "0.500000",
+      "pass": true,
+      "detail": {
+        "no_auth": {
+          "expected": false,
+          "observed_present": false,
+          "consistent": true
+        },
+        "valid_token": {
+          "expected": true,
+          "observed_present": true,
+          "consistent": true
+        },
+        "expired_token": {
+          "expected": false,
+          "observed_present": false,
+          "consistent": true
+        },
+        "invalid_token": {
+          "expected": false,
+          "observed_present": false,
+          "consistent": true
+        }
+      }
+    },
+    "C_INCREMENTAL_HEADER_VALUE": {
+      "expected": "full_vector_discrimination > B-BODY-ONLY",
+      "observed": "full=1.000000, body_only=0.833333, delta=0.166667",
+      "pass": true
+    },
+    "C_BODY_CORRELATION_ETAG": {
+      "expected": "ETag discrimination == B-BODY-ONLY (body-correlated)",
+      "observed": "ETag=0.833333, body=0.833333",
+      "pass": true
+    },
+    "C_BODY_IDENTITY_EXPIRED_INVALID": {
+      "expected": "expired_token and invalid_token share identical body hash",
+      "observed": "expired=['a138b3ee71692c2d1035ca6d4ade9700a3e8ad450925b98d11a6468751a89022'], invalid=['a138b3ee71692c2d1035ca6d4ade9700a3e8ad450925b98d11a6468751a89022']",
+      "pass": true
+    },
+    "C_DRIFT_VALID_VS_EXPIRED": {
+      "expected": "Jaccard < 0.5 (discriminable)",
+      "observed": "Jaccard=0.3247",
+      "pass": true
+    },
+    "C_DRIFT_EXPIRED_VS_INVALID": {
+      "expected": "Jaccard < 0.5 (discriminable via Cache-Control)",
+      "observed": "Jaccard=0.3812",
+      "pass": true
+    },
+    "C_ERROR_RATE": {
+      "expected": "< 20%",
+      "observed": "0.0%",
+      "pass": true
+    }
+  },
+  "artifacts": [
+    {
+      "path": "raw_observations.json",
+      "role": "raw"
+    }
+  ],
+  "observations": [
+    "Production-like OAuth middleware server started on port 18929 with PyJWT HS256 validation",
+    "4 auth states x 10 reps = 40 requests completed",
+    "Server-side jitter: 50-150ms random processing delay per request",
+    "Client-side jitter: 0-200ms inter-request delay (seed=44)",
+    "Key design: expired_token and invalid_token return IDENTICAL bodies (error_response)",
+    "Cache-Control varies: no-store (expired), no-cache (invalid), absent (no_auth, valid_token)",
+    "Set-Cookie present only for valid_token (session cookie)",
+    "Headers filtered: Date/Server/X-Request-Id excluded from fingerprint",
+    "Cache-Control verification: {\"no_auth\": {\"expected\": null, \"observed_values\": [\"(absent)\"], \"consistent\": true}, \"valid_token\": {\"expected\": null, \"observed_values\": [\"(absent)\"], \"consistent\": true}, \"expired_token\": {\"expected\": \"no-store\", \"observed_values\": [\"no-store\"], \"consistent\": true}, \"invalid_token\": {\"expected\": \"no-cache\", \"observed_values\": [\"no-cache\"], \"consistent\": true}}",
+    "Set-Cookie verification: {\"no_auth\": {\"expected\": false, \"observed_present\": false, \"consistent\": true}, \"valid_token\": {\"expected\": true, \"observed_present\": true, \"consistent\": true}, \"expired_token\": {\"expected\": false, \"observed_present\": false, \"consistent\": true}, \"invalid_token\": {\"expected\": false, \"observed_present\": false, \"consistent\": true}}",
+    "expired_token and invalid_token body hashes identical: True",
+    "Full-vector discrimination: 1.000000 (threshold: > 0.5)",
+    "Full-vector bootstrap 95% CI: [1.000000, 1.000000]",
+    "B-STATUS-ONLY discrimination: 0.500000",
+    "B-BODY-ONLY discrimination: 0.833333 (expired/invalid share body -> 3 groups)",
+    "B-URL-HASH discrimination: 0.000000",
+    "Cache-Control-only discrimination: 0.833333",
+    "Set-Cookie-only discrimination: 0.500000",
+    "ETag-only discrimination: 0.833333 (body-correlated)",
+    "Null FP rate under server-side jitter: 0.0% (threshold: < 5%)",
+    "Incremental header value (full - body_only): 0.166667",
+    "valid_token vs expired_token drift Jaccard: 0.3247",
+    "expired_token vs invalid_token drift Jaccard: 0.3812"
+  ],
+  "validity_notes": [
+    "Server is Flask 3.1.3 with PyJWT 2.13.0 HS256 validation \u2014 real JWT middleware with production-like headers.",
+    "Fingerprint uses repr(vector) with tuple(sorted(...)) \u2014 deterministic within same Python version but Python-version-dependent.",
+    "Date and Server headers excluded from fingerprint vector to prevent spurious variance.",
+    "X-Request-Id (UUID per request) excluded from fingerprint \u2014 volatile per-request identifier, not state-discriminative.",
+    "Cache-Control varies by auth state: no-store for expired, no-cache for invalid, absent for no_auth/valid_token.",
+    "Set-Cookie present only for valid_token \u2014 binary header signal varying with auth state.",
+    "ETag is body-dependent (W/\"<body_sha256>\") \u2014 correlated with body_hash, adds no independent information.",
+    "expired_token and invalid_token return IDENTICAL bodies \u2014 key design for testing incremental header value.",
+    "Cache-Control header verification: all states consistent with design: True",
+    "Set-Cookie header verification: all states consistent with design: True",
+    "expired_invalid body identity verified: True",
+    "Server-side jitter 50-150ms tests timing invariance when timing is excluded from fingerprint.",
+    "Python version: 3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "Error rate: 0.0% (0 errors out of 40 requests)",
+    "Sample size: 40 requests (4 states x 10 reps) \u2014 limited statistical power for subtle discrimination differences.",
+    "Discrimination metric: intra_match_rate - inter_match_rate. Range [-1, 1]. Perfect = 1, no discrimination = 0."
+  ],
+  "unresolved": [
+    "Does the substrate maintain discrimination on real production OAuth/OIDC providers (Auth0, Okta, Keycloak) with CDN, load-balancer variance, and compressed encoding?",
+    "What is the false-positive rate under server-side processing jitter >150ms or volatile standard headers beyond X-Request-Id?",
+    "Can substrate detect continuous session drift as a continuous signal rather than discrete state classification?",
+    "What is cross-Python-version reproducibility of repr(vector) hashes?",
+    "What is the incremental header value when MORE than 2 error states share identical bodies (e.g., 3+ states with same body but different headers)?"
+  ]
+}
+```
+
+## report.md
+
+```text
+# EXP-RUNTIME-34054515149 — Report
+
+## Executive Summary
+
+**Status: COMPLETE | Outcome: SUPPORTS**
+
+When expired_token and invalid_token share **identical** response bodies but Cache-Control varies (no-store vs no-cache) and Set-Cookie is present only for valid_token, the full HTTP fingerprint vector achieves discrimination **1.0**, exceeding B-BODY-ONLY at **0.833** by an incremental header value of **0.167**. This confirms that Cache-Control and Set-Cookie provide independent discrimining information that body-only observation cannot capture when error responses share identical bodies.
+
+## Scientific Question
+
+Does the HTTP fingerprint substrate's full vector exceed B-BODY-ONLY when bodies are NOT perfectly discriminative (identical error bodies for expired/invalid token states) but headers (Cache-Control, Set-Cookie) vary independently with auth state?
+
+## Key Results
+
+| Metric | Value | Threshold | Pass |
+|--------|-------|-----------|------|
+| Full-vector discrimination | 1.000 | > 0.5 | ✓ |
+| B-BODY-ONLY discrimination | 0.833 | — | — |
+| Incremental header value | 0.167 | > 0 | ✓ |
+| Cache-Control-only discrimination | 0.833 | > 0 | ✓ |
+| Set-Cookie-only discrimination | 0.500 | > 0 | ✓ |
+| Null FP rate | 0.0% | < 5% | ✓ |
+| Full > B-BODY-ONLY | 1.200x | > 1.0 | ✓ |
+
+## Design
+
+This experiment resolves the H4 question that was vacuous at ceiling 1.0 in parent EXP-RUNTIME-34015740602. The parent had 4 distinct bodies, so full vector = B-BODY-ONLY = 1.0 (ceiling effect). Here, expired and invalid share the same body, degrading B-BODY-ONLY to 0.833 (3 groups: no_auth, valid_token, error_group). Cache-Control differentiates expired (no-store) from invalid (no-cache), lifting full vector to 1.0.
+
+**Cache-Control pattern:**
+- no_auth: absent
+- valid_token: absent
+- expired_token: no-store
+- invalid_token: no-cache
+
+**Set-Cookie pattern:**
+- valid_token: present (session cookie)
+- all others: absent
+
+## Decision Rule (frozen)
+
+SURVIVES_CURRENT_TEST if ALL of:
+1. full_vector_discrimination > B-BODY-ONLY → **1.0 > 0.833 ✓**
+2. full_vector_discrimination > 0.5 → **1.0 > 0.5 ✓**
+3. null FP < 5% → **0.0% ✓**
+4. Cache-Control-only discrimination > 0 → **0.833 ✓**
+
+**Verdict: SURVIVES_CURRENT_TEST**
+
+## Controls
+
+All 10 controls pass:
+
+- **C_NULL_FP_RATE**: 0.0% (10/10 identical fingerprints per state, 0/180 intra pairs differ)
+- **C_POSITIVE_DISCRIMINATION**: 1.0 > 0.5
+- **C_CACHE_CONTROL_VARIATION**: 0.833 > 0 — Cache-Control varies by auth state
+- **C_SET_COOKIE_VARIATION**: 0.5 > 0 — Set-Cookie present only for valid_token
+- **C_INCREMENTAL_HEADER_VALUE**: full=1.0, body_only=0.833, delta=0.167
+- **C_BODY_CORRELATION_ETAG**: ETag=0.833 = B-BODY-ONLY=0.833 (body-correlated, redundant)
+- **C_BODY_IDENTITY_EXPIRED_INVALID**: expired and invalid share body hash `a138b3ee...`
+- **C_DRIFT_VALID_VS_EXPIRED**: Jaccard=0.325 < 0.5
+- **C_DRIFT_EXPIRED_VS_INVALID**: Jaccard=0.381 < 0.5 (Cache-Control discriminates)
+- **C_ERROR_RATE**: 0.0%
+
+## Interpretation
+
+### Why Cache-Control achieves 0.833 discrimination alone
+
+Cache-Control has 3 distinct values across 4 states: absent (no_auth, valid_token), no-store (expired), no-cache (invalid). Two states share the same Cache-Control value (absent), so body-only grouping yields 3 groups — identical to the body-only case. However, Cache-Control achieves higher discrimination than body alone because it separates expired from invalid, which body cannot.
+
+### Why Set-Cookie achieves 0.5 discrimination alone
+
+Set-Cookie is binary: present (valid_token) vs absent (all others). This separates valid_token from the 3 error states, giving 2 groups. Discrimination = 0.5 because 3 states share the same Set-Cookie value.
+
+### Why full vector = 1.0
+
+The combination of status (200 vs 401), Cache-Control (3 values), and Set-Cookie (binary) uniquely identifies all 4 states. Bodies are redundant for discrimination — they add no additional information beyond what headers already provide.
+
+### Comparison to parent EXP-RUNTIME-34015740602
+
+| | Parent (distinct bodies) | This experiment (identical error bodies) |
+|---|---|---|
+| Full vector | 1.0 | 1.0 |
+| B-BODY-ONLY | 1.0 | 0.833 |
+| Incremental header value | 0.0 | **0.167** |
+| Cache-Control-only | 0.5 | 0.833 |
+
+The parent's ceiling effect (B-BODY-ONLY = 1.0) masked header value. This experiment reveals the true incremental contribution.
+
+### Comparison to grandparent EXP-RUNTIME-33902315583
+
+The grandparent tested identical error bodies with standard headers only (no Cache-Control, no Set-Cookie). Full vector = B-BODY-ONLY = 0.833. Adding Cache-Control and Set-Cookie lifts full vector to 1.0 — a 20% improvement over body-only.
+
+## Product Consequence
+
+**Headers provide incremental value over body-only observation when bodies are not distinct.** Product architecture should use full vector observation (status + headers + body) rather than body-only, because:
+1. Cache-Control captures expired-vs-invalid distinction that body alone cannot
+2. Set-Cookie captures valid-token distinction that body alone cannot
+3. ETag and Content-Length are body-correlated and add no independent information
+
+The H4 ceiling effect in the parent was an artifact of distinct-body design, not a general property. In production OAuth, error responses often share identical bodies (e.g., generic "authentication failed"), making header observation essential.
+
+## Validity Threats
+
+1. **Claim ceiling bounded to exact Flask/PyJWT localhost config** — does not extend to production OAuth/OIDC providers (Auth0, Okta, Keycloak) with CDN, load-balancer variance, or compressed encoding.
+2. **Python-version-dependent** — repr(vector) hashes validated only on Python 3.12.14.
+3. **Sample size N=40** — sufficient for primary threshold test but limited power for fine-grained comparisons.
+4. **Bootstrap CI degenerate at ceiling** — [1.0, 1.0] is uninformative for product decisions.
+5. **Cache-Control values are application-set** — production middleware may use different Cache-Control patterns.
+```
+
+## provenance.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-34054515149",
+  "lane": "runtime",
+  "github_run_id": "34054515149",
+  "github_run_attempt": 1,
+  "commits": {
+    "base_sha": "3c8b18f71460ae9c94bd28167a6b56eb563ac1e5",
+    "execution_checkpoint_sha": "aaa10a92080d6d6210c7fcaade38734893c9b348"
+  },
+  "environment": {
+    "python_version": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "platform": "linux",
+    "flask_version": "3.1.3",
+    "pyjwt_version": "2.13.0",
+    "requests_version": "2.34.2",
+    "werkzeug_version": "3.1.8"
+  },
+  "server_config": {
+    "host": "127.0.0.1",
+    "port": 18929,
+    "secret_key": "test-secret-key-12345",
+    "algorithm": "HS256",
+    "jitter_range": [0.05, 0.15],
+    "client_inter_request": [0.0, 0.2]
+  },
+  "frozen_inputs": {
+    "request_json_hash": "ba9cefd4d44540e65e090e9fae5bad7e919fb5b1eef3eb4d2348dbb9454d7d8c",
+    "spec_json_hash": "26aa1fda330358740f7278c80ba773c3be0a02979bcc8d2a0cbbfb3a6570517c",
+    "prereg_md_hash": "1d0de2ee1c5f404dcecbc3e126f0b3e7a78484b7c4fc6c765d159e30d4e337e0",
+    "freeze_json_hash": "see freeze.json"
+  },
+  "artifacts": {
+    "run_experiment.py": {
+      "sha256": "cb72f9e10587f78a3c98c68874f0b6e0579d9472a534af3578307339e8cf306e",
+      "role": "code"
+    },
+    "raw_observations.json": {
+      "sha256": "4c39b0f3b34bb3c65a40c03e9fa3a3b89e42c30a6def2016d62867df161411ce",
+      "role": "raw"
+    },
+    "result.json": {
+      "sha256": "dfbffc02b91a5788dc96cc087c1d7bf438f700a3aa91ad52d582b37e192ed3fa",
+      "role": "derived"
+    }
+  },
+  "design_sources": {
+    "parent_handoff": {
+      "experiment_id": "EXP-RUNTIME-34015740602",
+      "path": "research/experiments/EXP-RUNTIME-34015740602/handoff.json",
+      "sha256": "68538996eba323cb60ed47841f67217c0fe1b7d191c1c3686de0dd1ee9728c5e"
+    },
+    "parent_result": "research/experiments/EXP-RUNTIME-34015740602/result.json",
+    "parent_audit": "research/experiments/EXP-RUNTIME-34015740602/audit.json",
+    "grandparent_handoff": "research/experiments/EXP-RUNTIME-33902315583/handoff.json"
+  },
+  "fingerprint_config": {
+    "algorithm": "SHA-256(repr((status, tuple(sorted(filtered_headers)), body_sha256, redirect_chain)))",
+    "excluded_headers": ["date", "server", "x-request-id"],
+    "python_repr": true,
+    "deterministic_within_python_version": true
+  },
+  "sampling": {
+    "N": 40,
+    "states": 4,
+    "reps_per_state": 10,
+    "seed": 44,
+    "randomization": "shuffle plan with seed 44"
+  },
+  "recorded_at": "2026-09-06T19:23:22+00:00"
+}
+```
+
+## audit.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-34054515149",
+  "lane": "runtime",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    {
+      "id": "V1-FLASK-PYJWT-MOCK-VERIFIED",
+      "severity": "info",
+      "finding": "Server is genuine Flask 3.1.3 + PyJWT 2.13.0 HS256 middleware, not synthetic lookup table. run_experiment.py get_userinfo branches on jwt.decode HS256 handling ExpiredSignatureError vs InvalidTokenError and returns Flask Response with production-like headers. Provenance confirms flask 3.1.3 pyjwt 2.13.0 werkzeug 3.1.8 python 3.12.14. Real JWT validation within tested scope verified.",
+      "evidence": "run_experiment.py 135-208 get_userinfo jwt.decode SECRET_KEY HS256 try/except ExpiredSignatureError/InvalidTokenError, BODIES dict ERROR_BODY identical for expired==invalid; provenance.json environment flask_version 3.1.3 pyjwt_version 2.13.0 werkzeug_version 3.1.8 python_version 3.12.14; raw_observations 40 entries Server Werkzeug/3.1.8 status 200/401 as expected; result.json validity_notes Flask/PyJWT",
+      "impact": "Supports ecological validity step from stdlib to Flask/JWT within narrow localhost scope. Does NOT establish production OAuth/OIDC (Auth0/Okta) validity — explicitly bounded in report validity threats."
+    },
+    {
+      "id": "V2-HEADER-VARIATION-AND-EXCLUSION-CORRECT",
+      "severity": "info",
+      "finding": "Production-realistic headers correctly implemented and filtered: Cache-Control no-store for expired_token vs no-cache for invalid_token vs absent for no_auth/valid_token varies by state exactly as spec, Set-Cookie session present only for valid_token, ETag W/\"<body_sha>\" body-dependent, X-Request-Id UUID per request EXCLUDED from fingerprint (excluded set date,server,x-request-id). Recomputed discrimination from stored fingerprints confirms stable per-state fingerprints (4 distinct, 10 reps each) and volatile exclusion necessary. Raw header inspection confirms no Cache-Control/Set-Cookie leakage outside design.",
+      "evidence": "run_experiment.py 144 X-Request-Id uuid4, 158-159 no Cache-Control no_auth, 192 no-store expired, 205 no-cache invalid, 181 Set-Cookie only valid, fingerprint 266 excluded={'date','server','x-request-id'} tuple(sorted(headers_filtered.items())); raw_observations 40 entries X-Request-Id 40 distinct UUIDs but 4 unique fingerprints total, Cache-Control values per state, Set-Cookie only in valid_token, provenance fingerprint_config excluded_headers date,server,x-request-id; result.json C_CACHE_CONTROL_VARIATION 0.833333 pass, C_SET_COOKIE_VARIATION 0.5 pass",
+      "impact": "Null FP 0.0% correctly attributed to volatile exclusion. Cache-Control and Set-Cookie DO carry state-discriminative information (recomputed Cache-Control-only 0.833 Set-Cookie-only 0.5). Inclusion in full vector is correctly applied and is the driver for incremental header value over body-only."
+    },
+    {
+      "id": "V3-IDENTICAL-ERROR-BODY-AND-INCREMENTAL-VALUE-VERIFIED",
+      "severity": "info",
+      "finding": "expired_token and invalid_token return IDENTICAL bodies by design: body_hash a138b3ee71692c2d1035ca6d4ade9700a3e8ad450925b98d11a6468751a89022 and preview '{\"error\":\"auth_failed\",\"message\":\"Authentication failed\"}' for all 20 reps across both states. This degrades B-BODY-ONLY to 0.8333 (3 groups: no_auth ae00c5, valid 65d603, error_group a138b3) with 100/600 inter matches (expired<->invalid). Full vector distinguishes expired vs invalid via Cache-Control no-store vs no-cache lifting discrimination to 1.0 (0/600 inter matches). Incremental header value 0.16666 (1.2x) is genuine and recomputed exactly. Drift Jaccards valid->expired 0.3247 and expired->invalid 0.3812 both <0.5 confirm pairwise discriminability, especially critical expired vs invalid via header alone.",
+      "evidence": "run_experiment.py 83 ERROR_BODY shared, BODIES expired==invalid identical, 184-208 identical body_json for both branches differing only Cache-Control; raw_observations expired_token 10x and invalid_token 10x body_hash identical a138b3, fingerprint distinct aa40c530 vs 829cc188, body_preview identical; result.json metrics full 1.0 B-BODY 0.8333 incremental 0.1666 drift_jaccards [0.3247,0.3812] C_BODY_IDENTITY_EXPIRED_INVALID pass, C_INCREMENTAL_HEADER_VALUE pass, C_DRIFT_EXPIRED_VS_INVALID Jaccard 0.3812 pass; audit recompute full 1.0 body 0.8333 cc_only 0.8333 expired_vs_invalid inter 100/600 matches",
+      "impact": "Resolves parent V3-DISTINCT-BODY-CEILING-CONFOUND. H4 test that was vacuous at ceiling 1.0 in parent (distinct bodies 4 groups) is now discriminating. Demonstrates that when body signal is degraded (generic error bodies identical), state-varying headers provide incremental discrimination. This is the falsifier for spec decision rule full > body-only."
+    },
+    {
+      "id": "V4-ENGINEERED-HEADER-TAUTOLOGY-CONSTRAINT",
+      "severity": "medium",
+      "finding": "Incremental header value is by construction, not discovery of natural header variance. Cache-Control no-store vs no-cache and Set-Cookie present/absent were deliberately application-set per auth state in Flask middleware (resp.headers['Cache-Control']=). Full vector > body-only is therefore guaranteed if fingerprint includes Cache-Control, rather than an empirical finding that real OAuth middleware naturally varies this way. Grandparent EXP-RUNTIME-33902315583 with identical bodies but only standard headers (Content-Type/Length/Connection) showed full==body 0.833=0.833; adding engineered varying headers lifts to 1.0. Result validates substrate capability to capture intentionally injected header variance, not that production Auth0/Okta/Keycloak exhibit this pattern.",
+      "evidence": "run_experiment.py 192 resp.headers['Cache-Control']='no-store' expired, 205 no-cache invalid, 181 Set-Cookie only valid — application-set per state; spec.json measurement_validity Cache-Control varies by state no-store/no-cache/absent Set-Cookie present only valid; prereg 5.2 table; report.md Product Consequence claims production OAuth error bodies often generic making header observation essential — this extrapolation not tested; difference to grandparent which had no Cache-Control/Set-Cookie and equality held",
+      "impact": "Does not falsify C-MEAS-VALID within synthetic scope — substrate is shown intervention-valid when headers are engineered to vary. Constrains claim ceiling: do not generalize incremental value to production without replication on real IdP where Cache-Control may be absent, constant, or CDN-overridden. Product architecture recommendation to use full vector is supported only for this Flask localhost pattern. Remains in do_not_assume."
+    },
+    {
+      "id": "V5-ETAG-CONTENT-LENGTH-REDUNDANCY",
+      "severity": "low",
+      "finding": "ETag is W/\"<body_sha256>\" perfectly correlated with body_hash; Content-Length (62 no_auth, 92 valid, 57 error_group) perfectly correlated with body length. Both deterministic functions of body contribute zero independent information. Recomputed ETag-only discrimination 0.8333 equals B-BODY-ONLY 0.8333 verified. Only Cache-Control and Set-Cookie are state-varying independent headers. Their single-field discriminations (Cache-Control 0.8333, Set-Cookie 0.5) are not redundant but together with status uniquely identify 4 states. Validity notes correctly disclose body-correlation.",
+      "evidence": "run_experiment.py 155 etag=f'W/\"{body_sha}\"' 174-175 189-194 202; raw_observations ETag W/a138b3 etc matches body_hash, Content-Length 62/92/57 per body; result.json etag_only 0.83333 C_BODY_CORRELATION_ETAG pass; audit recompute etag_only 0.83333 vs body 0.83333",
+      "impact": "Does not falsify but must be disclosed. Claim 'full vector = headers+body' should be qualified: body-correlated headers add no value by construction; incremental value comes solely from state-varying Cache-Control (expired vs invalid) and Set-Cookie/status (valid vs others). Inclusion of ETag/Content-Length does not drive result."
+    },
+    {
+      "id": "V6-BOOTSTRAP-DEGENERATE-CEILING",
+      "severity": "medium",
+      "finding": "Bootstrap 95% CI [1.0,1.0] is degenerate artifact of perfect separation (intra 1.0 inter 0.0, 4 distinct fingerprints). With deterministic fingerprints every bootstrap resample (state resampling with set deduplication, n_bootstrap=1000 seed 42) yields discrimination 1.0, so CI width 0. Does not indicate high statistical power; with N=40 (4 states x10) power to detect subtle differences is zero at ceiling. Parent had degenerate wide [0.0,1.0] due to same dedup; now narrow degenerate. Producer reports it without inflating confidence but does not label as uninformative.",
+      "evidence": "result.json full_vector_bootstrap_95ci [1.0,1.0]; run_experiment.py 353-376 bootstrap_ci_discrimination set(sampled) resampling; recomputed disc 1.0 all bootstraps 1.0; validity_notes sample size 40 limited power; report.md Validity Threats notes Bootstrap CI degenerate at ceiling [1.0,1.0] is uninformative",
+      "impact": "Not a falsifier (decision rule uses point >0.5). CI should be annotated as uninformative/perfect-separation artifact and not used for product architecture certainty. Already partially disclosed in report."
+    },
+    {
+      "id": "V7-NULL-CONTROL-BOUNDED-TO-50-150MS",
+      "severity": "low",
+      "finding": "Null FP 0.0% verified: per-state 10/10 identical fingerprints unique 1 FP 0.0, overall 0/180 intra pairs differ. Elapsed observed 0.058-0.151s confirms server jitter random.uniform(0.05,0.15) present and correctly excluded from vector (elapsed not in fingerprint). Client inter-request 0-200ms seed 44 also excluded. Bounded to 50-150ms uniform localhost and X-Request-Id exclusion; production jitter >150ms, CDN/load-balancer variance, compressed encoding, rate-limit headers not tested. Correctly passes spec falsifier null>5%.",
+      "evidence": "run_experiment.py 143 time.sleep uniform 0.05-0.15 fingerprint excludes elapsed 257-275, plan shuffle seed44 client jitter 0-0.2; raw_observations elapsed min 0.058 max 0.151; result.json C_NULL_FP_RATE 0.0% pass detail per-state unique 1; prereg 7 jitter thresholds",
+      "impact": "Passes spec null control. Do not extrapolate beyond tested jitter. Already in unresolved and validity notes."
+    },
+    {
+      "id": "V8-SAMPLE-TARGET-INTEGRITY-AND-REPR-DEPENDENCE",
+      "severity": "low",
+      "finding": "Target integrity satisfactory: 4 states x10 reps =40 requests randomized seed 44, error_rate 0.0% <20%, no server errors, statuses match expected (200 valid, 401 others), fingerprints per-state identical inter discriminable (0/600 inter matches). URL constant http://127.0.0.1:18929/api/userinfo B-URL-HASH 0.0 verified, no leakage. Fingerprint uses hashlib.sha256(repr(vector).encode()) with tuple(sorted(headers_filtered.items())) preserving original header case (e.g., 'Cache-Control','ETag'). Audit recompute with lowercased keys yields 40/40 mismatches but sorted original-case tuple reproduces 0 mismatches per provenance within Python 3.12.14; cross-version reproducibility requires canonical serialization as disclosed. N=40 limited power for fine-grained comparisons.",
+      "evidence": "result.json total_requests 40 error_rate 0.0 C_ERROR_RATE pass; raw_observations per-state 10 entries status/body_hash as per BODIES; recomputed intra 180/180 inter 0/600 from stored fingerprints; provenance python_version 3.12.14 fingerprint_config SHA-256(repr((status, tuple(sorted(filtered_headers)), body_sha256, ''))) deterministic_within_python_version true; sampling N 40 seed44; outcome SUPPORTS status COMPLETE",
+      "impact": "Supports COMPLETE status, not MEASUREMENT_INVALID. Split/sampling integrity verified. Representation loss minimal (only Date/Server/X-Request-Id excluded as intended). Cross-Python-version portability remains unknown as disclosed."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-STATUS-ONLY",
+      "reported": 0.5,
+      "recomputed": 0.5,
+      "assessment": "PASS - Exact. Three states share 401 (no_auth, expired, invalid) vs valid 200 distinct. Recomputed from raw status strings: intra 180/180=1.0, inter matches 300/600 (no_auth vs expired 100 + no_auth vs invalid 100 + expired vs invalid 100 among 401 group) => discrimination 0.5. Full vector 1.0 exceeds it, confirming body and headers add value over status alone. Competitive baseline correctly used.",
+      "evidence": "result.json baselines B-STATUS-ONLY 0.5; raw_observations status 200 vs 401; run_experiment.py baseline_status_only hash(str(status)); audit recompute 0.5 via status string equality"
+    },
+    {
+      "id": "B-BODY-ONLY",
+      "reported": 0.8333333333333334,
+      "recomputed": 0.8333333333333334,
+      "assessment": "PASS - Exact and critical comparator. Bodies: no_auth distinct ae00c5, valid distinct 65d603, expired==invalid identical a138b3 => 3 groups. Recomputed body-only discrimination 0.83333 (intra 1.0 inter 100/600=0.1666 from expired<->invalid 10x10 matches). Full 1.0 > body 0.8333 by 0.1666 (1.2x) demonstrates incremental header value when bodies collide. Body-correlated headers (ETag/Content-Length) correctly redundant.",
+      "evidence": "result.json baselines B-BODY-ONLY 0.833333 b_body_only discrimination; raw_observations body_hash 3 distinct values (ae00c5,65d603,a138b3) with expired==invalid 20 reps identical; run_experiment.py baseline_body_only hash(body); audit recompute intra 1.0 inter 0.1666 disc 0.8333; C_INCREMENTAL_HEADER_VALUE full=1.0 body=0.8333 delta 0.166667 pass"
+    },
+    {
+      "id": "B-URL-HASH",
+      "reported": 0.0,
+      "recomputed": 0.0,
+      "assessment": "PASS - Verified straw-man. URL constant http://127.0.0.1:18929/api/userinfo for all 40 requests => identical hash => intra 1.0 inter 1.0 => 0.0. Performs as intended, confirming discrimination not URL-tautological.",
+      "evidence": "result.json 0.0; raw_observations url identical 40x; run_experiment.py baseline_url_hash constant sha256; audit recompute constant 0.0"
+    },
+    {
+      "id": "B-RANDOM",
+      "reported": 0.0,
+      "recomputed": 0.0,
+      "assessment": "PASS - Verified straw-man. 40 random 256-bit fingerprints partitioned 10/state via Random(99) => negligible collisions => discrimination ~0.0 calibrated floor. Correctly far below full vector, indicating full discrimination not due to chance.",
+      "evidence": "result.json 0.0; run_experiment.py baseline_random seed 99; audit recompute 0.0 via same Random(99) partitioning"
+    }
+  ],
+  "recomputed_metrics": {
+    "full_vector_discrimination": {
+      "reported": 1.0,
+      "recomputed": 1.0,
+      "match": true,
+      "method": "Recomputed from raw_observations fingerprints: 4 states x10 reps => 4 distinct fingerprints (no_auth 5c7cae..., valid 51c65..., expired aa40c5..., invalid 829cc1...) => intra 180 pairs (4*45) all identical intra 1.0, inter 600 pairs 0 identical inter 0.0 => discrimination 1.0. Fingerprint replay with sorted filtered headers excluding date/server/x-request-id 0/40 mismatches within Python 3.12.14 original-case sorting."
+    },
+    "full_vector_intra_match_rate": {
+      "reported": 1.0,
+      "recomputed": 1.0,
+      "match": true
+    },
+    "full_vector_inter_match_rate": {
+      "reported": 0.0,
+      "recomputed": 0.0,
+      "match": true
+    },
+    "full_vector_mean_intra_jaccard": {
+      "reported": 1.0,
+      "recomputed": 1.0,
+      "match": true
+    },
+    "full_vector_mean_inter_jaccard": {
+      "reported": 0.34198787706642,
+      "recomputed": 0.34198787706642,
+      "match": true,
+      "method": "Mean bitwise Jaccard over 600 inter pairs via hex_to_bits 256 bits, matches reported within float precision; audit recompute 0.34198787706642"
+    },
+    "full_vector_bootstrap_95ci": {
+      "reported": [
+        1.0,
+        1.0
+      ],
+      "recomputed": [
+        1.0,
+        1.0
+      ],
+      "match": true,
+      "notes": "Degenerate narrow interval due to perfect separation; all 1000 bootstraps 1.0 with state resampling set(sampled), uninformative despite appearing precise"
+    },
+    "baselines": {
+      "reported": {
+        "B-URL-HASH": 0.0,
+        "B-RANDOM": 0.0,
+        "B-STATUS-ONLY": 0.5,
+        "B-BODY-ONLY": 0.8333333333333334
+      },
+      "recomputed": {
+        "B-URL-HASH": 0.0,
+        "B-RANDOM": 0.0,
+        "B-STATUS-ONLY": 0.5,
+        "B-BODY-ONLY": 0.8333333333333334
+      },
+      "match": true,
+      "method": "Recomputed via identical logic: B-URL constant URL, B-RANDOM seed 99 40 hashes partitioned, B-STATUS hash(str(status)), B-BODY body_hash direct equality; compute_discrimination intra-inter"
+    },
+    "incremental_header_value": {
+      "reported": 0.16666666666666663,
+      "recomputed": 0.16666666666666663,
+      "match": true,
+      "method": "full 1.0 - body 0.833333 = 0.166666"
+    },
+    "full_vs_body_only_ratio": {
+      "reported": 1.2,
+      "recomputed": 1.2,
+      "match": true
+    },
+    "cache_control_only_discrimination": {
+      "reported": 0.8333333333333334,
+      "recomputed": 0.8333333333333334,
+      "match": true,
+      "method": "Recomputed Cache-Control-only: values absent (no_auth+valid 20), no-store expired 10, no-cache invalid 10 => inter matches 100/600 (no_auth vs valid 100) => 0.8333"
+    },
+    "set_cookie_only_discrimination": {
+      "reported": 0.5,
+      "recomputed": 0.5,
+      "match": true,
+      "method": "Recomputed Set-Cookie-only: present valid 10 vs absent 30 => inter matches 300/600 (among absent group 3*100) => 0.5"
+    },
+    "etag_only_discrimination": {
+      "reported": 0.8333333333333334,
+      "recomputed": 0.8333333333333334,
+      "match": true,
+      "method": "ETag = W/body_sha perfectly correlated with body_hash => same 3-group partition => 0.8333 equal to body-only"
+    },
+    "null_fp_rate": {
+      "reported": 0.0,
+      "recomputed": 0.0,
+      "match": true,
+      "method": "Per-state unique 1/10 => (1-1)/(10-1)=0.0 each, overall 0/180 intra pairs differ => 0.0% <5%"
+    },
+    "drift_jaccards": {
+      "reported": [
+        0.32474226804123707,
+        0.3812154696132597
+      ],
+      "recomputed": [
+        0.32474226804123707,
+        0.3812154696132597
+      ],
+      "match": true,
+      "method": "Mean bitwise Jaccard valid_token vs expired_token 100 pairs 0.3247 <0.5 discriminable, expired_token vs invalid_token 100 pairs 0.3812 <0.5 discriminable via Cache-Control no-store vs no-cache; recomputed via hex_to_bits Jaccard"
+    },
+    "drift_all_discriminable": {
+      "reported": true,
+      "recomputed": true,
+      "match": true,
+      "notes": "True because all consecutive pairs including expired vs invalid are discriminable (Cache-Control difference lifts identical-body pair). Unlike grandparent where expired vs invalid Jaccard 1.0, here header provides distinction."
+    },
+    "total_requests": {
+      "reported": 40,
+      "recomputed": 40,
+      "match": true
+    },
+    "error_rate": {
+      "reported": 0.0,
+      "recomputed": 0.0,
+      "match": true
+    },
+    "elapsed_range": {
+      "reported": null,
+      "recomputed": {
+        "min": 0.05800334700001031,
+        "max": 0.151056245999996
+      },
+      "notes": "Observed elapsed spans server jitter 50-150ms plus overhead; timing excluded from fingerprint per V7"
+    }
+  },
+  "claim_ceiling": "C-MEAS-VALID SURVIVES narrowly on Flask 3.1.3 + PyJWT 2.13.0 HS256 localhost 127.0.0.1:18929, 4 states (no_auth 401 login_required body ae00c5, valid_token 200 alice_profile body 65d603 with Set-Cookie session, expired_token 401 auth_failed body a138b3 Cache-Control no-store, invalid_token 401 auth_failed body a138b3 identical to expired Cache-Control no-cache), headers after Date/Server/X-Request-Id exclusion (Cache-Control no-store/no-cache/absent, Set-Cookie present/absent, Content-Type/Length and ETag W/body_sha body-correlated, Connection close constant), deterministic SHA-256(repr((status, tuple(sorted(filtered_headers.items())), body_sha256, ''))) on Python 3.12.14, N=40 (4x10 seed 44) server jitter 50-150ms uniform client 0-200ms: full_vector_discrimination 1.0 (180/180 intra, 0/600 inter, mean inter Jaccard 0.3419, bootstrap [1.0,1.0] degenerate at ceiling, incremental over body-only 0.1666, ratio 1.2), exceeds B-BODY-ONLY 0.8333 (expired==invalid share body) and B-STATUS-ONLY 0.5, equals B-URL-HASH 0.0 B-RANDOM 0.0, Cache-Control-only 0.8333 Set-Cookie-only 0.5 ETag-only 0.8333 (body-correlated), null FP 0.0% <5% under jitter with X-Request-Id excluded, valid vs expired Jaccard 0.3247 <0.5 and expired vs invalid 0.3812 <0.5 discriminable. Does NOT establish discrimination on production OAuth/OIDC (Auth0/Okta/Keycloak), CDN/caching, load-balancer, rate-limit, compression, jitter >150ms, or that header incremental value occurs naturally in production — headers were application-set per state by construction. Product recommendation to use full vector is supported only within this synthetic Flask localhost pattern.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-34054515149/request.json — lane runtime pulse, parent_handoff EXP-RUNTIME-34015740602 sha 68538996, inherited_next_question does full vector exceed B-BODY-ONLY when bodies NOT perfectly discriminative but headers vary",
+    "research/experiments/EXP-RUNTIME-34054515149/spec.json — claim C-MEAS-VALID, question/hypothesis full > body-only with identical error bodies but Cache-Control no-store/no-cache and Set-Cookie variation, falsifier full==body or CC==0 or full<=0.5 or null>5%, baselines B-STATUS-ONLY B-BODY-ONLY B-URL-HASH B-RANDOM, measurement_validity Flask 3.1.3 PyJWT 2.13.0 4 states identical bodies headers filtered jitter 50-150 seed44 N=40 decision_rule SURVIVES requires 4 conditions",
+    "research/experiments/EXP-RUNTIME-34054515149/prereg.md — Sections 5 server Flask PyJWT, 5.2 auth states table no_auth login_required, valid alice_profile, expired/invalid identical error_response with Cache-Control no-store/no-cache Set-Cookie only valid, 5.3/5.4 headers excluded/included, 6 fingerprint repr sorted filtered, 7 sampling N=40 seed44 jitter, 8 baselines expected body<1.0, 9 measures discrimination incremental, 10 controls Cache-Control>0, 11 decision rule SURVIVES vs FALSIFIED-IN-SETTING vs MEASUREMENT_INVALID",
+    "research/experiments/EXP-RUNTIME-34054515149/freeze.json — frozen_at 2026-09-06T19:21:20.473484 hashes prereg 1d0de2ee request ba9cefd4 spec 26aa1fda",
+    "research/experiments/EXP-RUNTIME-34054515149/result.json — status COMPLETE outcome SUPPORTS metrics full 1.0 intra1 inter0 meanInter0.3419 bootstrap[1,1] baselines B-STATUS0.5 B-BODY0.833 B-URL0 B-RANDOM0 incremental0.1666 cache0.833 set0.5 etag0.833 null0.0 drift[0.3247,0.3812] drift_all true total40 error0 controls C_NULL C_POSITIVE C_CACHE_CONTROL C_SET_COOKIE C_INCREMENTAL C_BODY_CORRELATION C_BODY_IDENTITY C_DRIFT_VALID C_DRIFT_EXPIRED C_ERROR all pass",
+    "research/experiments/EXP-RUNTIME-34054515149/report.md — Executive Summary full 1.0 > body 0.833 incremental 0.167 Cache-Control/Set-Cookie provide independent info when bodies identical, Design H4 ceiling resolution, Decision Rule 4 conditions pass SURVIVES, Controls 10 passes, Comparison parent distinct bodies vs this identical + header variation and grandparent standard headers only 0.833 equality, Product Consequence headers provide value when bodies not distinct",
+    "research/experiments/EXP-RUNTIME-34054515149/provenance.json — python 3.12.14 linux flask 3.1.3 pyjwt 2.13.0 requests 2.34.2 werkzeug 3.1.8 host 127.0.0.1 port 18929 jitter 0.05-0.15 client 0-0.2 fingerprint SHA-256(repr((status, tuple(sorted(filtered_headers)), body_sha256, ''))) excluded date,server,x-request-id sampling N40 seed44 artifacts run_experiment.py sha cb72f9 raw_observations sha 4c39b0",
+    "research/experiments/EXP-RUNTIME-34054515149/raw_observations.json — 40 entries 4x10 URL constant http://127.0.0.1:18929/api/userinfo body_hash 3 values ae00c5 no_auth 65d603 valid a138b3 expired/invalid 20 identical preview auth_failed, fingerprint 4 values 5c7cae no_auth 51c65 valid aa40c530 expired 829cc1 invalid distinct, headers Cache-Control no-store expired no-cache invalid absent others Set-Cookie only valid ETag W/body_sha Content-Length 62/92/57 Server Werkzeug Date X-Request-Id 40 UUIDs, audit recomputed discrimination full 1.0 body 0.833 status 0.5 cc 0.833 sc 0.5 etag 0.833 mean inter Jaccard 0.3419",
+    "research/experiments/EXP-RUNTIME-34054515149/run_experiment.py — SECRET_KEY test-secret-key-12345 BODIES ERROR_BODY identical AUTH_STATES cache_control no-store/no-cache set_cookie flags, get_userinfo jwt.decode HS256 Expir* branches resp.headers Cache-Control ETag X-Request-Id Set-Cookie, fingerprint 257-275 excluded date,server,x-request-id tuple(sorted(headers_filtered.items())) repr(vector) SHA-256, compute_discrimination intra-inter, bootstrap set(sampled), baselines, single_header discrimination"
+  ],
+  "unresolved": [
+    "Does substrate maintain discrimination 1.0 or incremental header value on real production OAuth/OIDC providers (Auth0, Okta, Keycloak) with CDN, load-balancer variance, rate-limit headers, and compressed encoding where Cache-Control may not vary as application-set no-store/no-cache?",
+    "What is false-positive rate under server-side processing jitter >150ms, multi-second Date spanning, or volatile headers beyond X-Request-Id (e.g., CDN-added ETag variation, Via)?",
+    "Can substrate detect continuous session drift as threshold classifier rather than discrete 4-state exact-match discrimination?",
+    "What is cross-Python-version reproducibility after replacing repr(vector) with canonical JSON/msgpack serialization?",
+    "What is incremental header value when MORE than 2 error states share identical bodies (e.g., 3+ states same body but different headers) or when header values are less distinct (e.g., same Cache-Control for multiple errors)?"
+  ]
+}
+```
+
+## verdict.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-34054515149",
+  "lane": "runtime",
+  "decision": "SURVIVES_CURRENT_TEST — C-MEAS-VALID survives narrowly. All four frozen decision criteria pass: full_vector_discrimination 1.0 > B-BODY-ONLY 0.833 (incremental header value 0.167), full_vector_discrimination 1.0 > 0.5, null FP 0.0% < 5%, Cache-Control-only discrimination 0.833 > 0. The parent H4 ceiling confound (V3-DISTINCT-BODY-CEILING-CONFOUND) is resolved: when expired_token and invalid_token share identical bodies, Cache-Control no-store vs no-cache provides the discriminating signal that body-only cannot capture, lifting full vector from 0.833 to 1.0. Audit V4 (ENGINEERED-HEADER-TAUTOLOGY-CONSTRAINT, medium severity) constrains the claim ceiling: incremental header value is by construction (application-set Cache-Control/Set-Cookie per auth state in Flask middleware), not discovery of natural production header variance. Claim extends only to Flask 3.1.3 + PyJWT 2.13.0 HS256 on localhost 127.0.0.1:18929, 4 states (no_auth 401 login_required body ae00c5, valid_token 200 alice_profile body 65d603 with Set-Cookie session, expired_token 401 auth_failed body a138b3 Cache-Control no-store, invalid_token 401 auth_failed body a138b3 identical to expired Cache-Control no-cache), headers after Date/Server/X-Request-Id exclusion, deterministic SHA-256(repr((status, tuple(sorted(filtered_headers.items())), body_sha256, ''))) on Python 3.12.14, N=40 (4x10 seed 44) server jitter 50-150ms uniform client 0-200ms. Does NOT extend to production OAuth/OIDC (Auth0/Okta/Keycloak), CDN/caching, load-balancer, rate-limit, compression, jitter >150ms, or natural (non-application-set) header variance. Product architecture recommendation to use full vector is supported only within this synthetic Flask localhost pattern where headers are application-set per state.",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "EXPERIMENTAL",
+      "reason": "C-MEAS-VALID survives narrowly on Flask 3.1.3 + PyJWT 2.13.0 HS256 localhost 127.0.0.1:18929, 4 states with identical error bodies for expired/invalid, production-like header variation (Cache-Control no-store/no-cache, Set-Cookie present only for valid_token). Full-vector discrimination 1.0 > B-BODY-ONLY 0.833 (incremental header value 0.167), null FP 0.0% < 5%, Cache-Control-only discrimination 0.833 > 0. Resolves parent H4 ceiling confound. Audit V4 constrains: headers are application-set per state by construction, not natural production variance. Claim does NOT extend to production OAuth/OIDC, CDN, jitter >150ms, or natural header variance."
+    }
+  ],
+  "product_action": "Full-vector observation (status + filtered headers + body) adds incremental value over body-only when error bodies are identical, within the tested Flask/PyJWT localhost pattern. Cache-Control captures the expired-vs-invalid distinction that body alone cannot; Set-Cookie captures valid-token distinction. However, the incremental value is by construction (application-set headers), not empirical evidence that production OAuth middleware exhibits this pattern. Product should use full vector as the default architecture (strictly better than body-only in this setting) but must not assume this extends to production OAuth providers where Cache-Control may be absent, constant, or CDN-overridden. Finalize product architecture only after replication on a real IdP with natural header variance.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does the HTTP fingerprint substrate maintain discrimination and incremental header value on a real OAuth/OIDC identity provider (e.g., self-hosted Keycloak or Auth0 test tenant) where Cache-Control and Set-Cookie patterns are determined by the IdP middleware rather than application-set per auth state — the ecological validity test for the product architecture recommendation?",
+  "reason": "All four frozen decision criteria pass and the audit confirms PASS with producer_claim_supported=true. The parent H4 ceiling confound is definitively resolved: headers add 0.167 incremental discrimination when bodies collide. However, audit V4 (ENGINEERED-HEADER-TAUTOLOGY-CONSTRAINT) correctly identifies that the incremental value is by construction (application-set Cache-Control/Set-Cookie), not discovery of natural production header variance. The product consequence — use full vector — is supported only within this synthetic pattern. The next critical test is ecological validity on a real IdP where Cache-Control patterns may differ (absent, constant, CDN-overridden), which would either validate the product recommendation or falsify it. This is materially orthogonal to the current experiment (synthetic vs. real IdP) and resolves the highest-impact open question.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-34054515149/result.json — COMPLETE SUPPORTS: full_vector_discrimination 1.0, B-BODY-ONLY 0.833, incremental 0.167, Cache-Control-only 0.833, Set-Cookie-only 0.5, null FP 0.0%, drift [0.325, 0.381], all 10 controls pass",
+    "research/experiments/EXP-RUNTIME-34054515149/audit.json — PASS producer_claim_supported=true, V1-FLASK-PYJWT-MOCK-VERIFIED, V2-HEADER-VARIATION-AND-EXCLUSION-CORRECT, V3-IDENTICAL-ERROR-BODY-AND-INCREMENTAL-VALUE-VERIFIED, V4-ENGINEERED-HEADER-TAUTOLOGY-CONSTRAINT medium severity, V5-ETAG-CONTENT-LENGTH-REDUNDANCY, V6-BOOTSTRAP-DEGENERATE-CEILING medium severity, V7-NULL-CONTROL-BOUNDED-TO-50-150MS, V8-SAMPLE-TARGET-INTEGRITY-AND-REPR-DEPENDENCE, claim_ceiling bounded to exact Flask/PyJWT localhost with application-set headers",
+    "research/experiments/EXP-RUNTIME-34054515149/raw_observations.json — 40 entries, 4 distinct fingerprints (5c7cae no_auth, 51c65 valid, aa40c530 expired, 829cc1 invalid), 3 body_hashes (ae00c5, 65d603, a138b3 expired==invalid), Cache-Control/Set-Cookie per state verified, X-Request-Id 40 UUIDs excluded",
+    "research/experiments/EXP-RUNTIME-34054515149/spec.json — frozen C-MEAS-VALID, decision_rule 4 conditions (full>body, full>0.5, null<5%, CC>0), baselines, measurement_validity Flask PyJWT 4 states identical bodies headers filtered",
+    "research/experiments/EXP-RUNTIME-34054515149/provenance.json — python 3.12.14, flask 3.1.3, pyjwt 2.13.0, port 18929, jitter 0.05-0.15, seed 44, fingerprint SHA-256(repr((status, tuple(sorted(filtered_headers)), body_sha256, '')))",
+    "research/experiments/EXP-RUNTIME-34054515149/report.md — Executive Summary full 1.0 > body 0.833 incremental 0.167, H4 ceiling resolution, parent/grandparent comparison, Product Consequence headers provide value when bodies identical",
+    "research/experiments/EXP-RUNTIME-34015740602/audit.json — parent V3-DISTINCT-BODY-CEILING-CONFOUND resolved by this experiment",
+    "research/claims/registry.json — C-MEAS-VALID status EXPERIMENTAL owner_lanes runtime/physics"
+  ]
+}
+```
+
+## handoff.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-34054515149",
+  "lane": "runtime",
+  "target_lane": "runtime",
+  "next_question": "Does the HTTP fingerprint substrate maintain discrimination and incremental header value on a real OAuth/OIDC identity provider (e.g., self-hosted Keycloak or Auth0 test tenant) where Cache-Control and Set-Cookie patterns are determined by the IdP middleware rather than application-set per auth state — the ecological validity test for the product architecture recommendation?",
+  "why_next": "This experiment resolved the H4 ceiling confound: when expired/invalid share identical bodies, Cache-Control/Set-Cookie provide 0.167 incremental discrimination (full 1.0 vs body-only 0.833). However, audit V4 (ENGINEERED-HEADER-TAUTOLOGY-CONSTRAINT) established that the incremental value is by construction (application-set Cache-Control no-store/no-cache, Set-Cookie present/absent per auth state in Flask middleware), not discovery of natural production header variance. The product recommendation to use full vector is supported only within this synthetic pattern. The highest-information next step is ecological validity on a real IdP where Cache-Control patterns may be absent, constant, or CDN-overridden — this either validates the product recommendation or falsifies it. This is materially orthogonal to the current synthetic experiment and resolves the critical unknown blocking product architecture finalization.",
+  "carry_forward": {
+    "established": [
+      "On Flask 3.1.3 + PyJWT 2.13.0 HS256 localhost 127.0.0.1:18929, 4 auth states with identical error bodies for expired/invalid, full_vector_discrimination 1.0 exceeds B-BODY-ONLY 0.833 by incremental 0.167 (1.2x ratio). Cache-Control/Set-Cookie provide discriminating information that body-only cannot capture when bodies collide (result.json metrics, audit V3 recomputed exact match).",
+      "Cache-Control-only discrimination 0.833 (3 values: absent, no-store, no-cache), Set-Cookie-only discrimination 0.5 (binary: present only for valid_token). Each adds independent information; together with status they uniquely identify all 4 states (audit V2, V3).",
+      "Null FP rate 0.0% < 5% under server-side jitter 50-150ms uniform with X-Request-Id excluded: per-state 10/10 identical fingerprints, 0/180 intra pairs differ (audit V7).",
+      "valid_token vs expired_token drift discriminable Jaccard 0.325 < 0.5; expired_token vs invalid_token drift discriminable Jaccard 0.381 < 0.5 via Cache-Control no-store vs no-cache (audit V3, V8).",
+      "ETag and Content-Length are body-correlated by construction (ETag = W/body_sha): they add zero independent information regardless of body distinctness (audit V5, C_BODY_CORRELATION_ETAG pass).",
+      "Parent H4 ceiling confound (V3-DISTINCT-BODY-CEILING-CONFOUND from EXP-RUNTIME-34015740602) is resolved: full vector now exceeds body-only when bodies are not distinct, confirming the parent's equality (1.0 = 1.0) was body-dominance artifact, not proof headers are non-discriminative.",
+      "Three mandatory prior fixes preserved: sorted-tuple fingerprint, Date/Server/X-Request-Id exclusion, competitive baselines (B-STATUS-ONLY 0.5, B-BODY-ONLY 0.833, B-URL-HASH 0.0, B-RANDOM 0.0)."
+    ],
+    "rejected": [
+      "Headers add no incremental value when bodies are identical — REJECTED: full 1.0 > body 0.833 by 0.167 demonstrates incremental header value in this setting (audit V3).",
+      "Full vector equals B-BODY-ONLY under all conditions — REJECTED for identical-body scenario (equality held only under distinct-body design in parent, which was ceiling artifact).",
+      "C-MEAS-VALID extends to production OAuth/OIDC providers (Auth0/Okta/Keycloak) — REJECTED: claim ceiling bounded to exact Flask/PyJWT localhost config with application-set headers (audit claim_ceiling, V4).",
+      "Bootstrap CI [1.0, 1.0] indicates high statistical precision — REJECTED: degenerate at ceiling with 4 deterministic fingerprints, uninformative for product decisions (audit V6)."
+    ],
+    "unknown": [
+      "Does substrate maintain discrimination and incremental header value on real production OAuth/OIDC providers (Auth0, Okta, Keycloak) where Cache-Control/Set-Cookie patterns are determined by IdP middleware rather than application-set per auth state?",
+      "What is false-positive rate under server-side processing jitter >150ms, multi-second Date spanning, CDN/load-balancer variance, rate-limit headers, or compressed encoding?",
+      "Can substrate detect continuous session drift as threshold classifier rather than discrete 4-state exact-match discrimination?",
+      "What is cross-Python-version reproducibility after replacing repr(vector) with canonical JSON/msgpack serialization?",
+      "What is incremental header value when MORE than 2 error states share identical bodies (e.g., 3+ states with same body but different headers), or when header values are less distinct (e.g., same Cache-Control for multiple error states)?"
+    ],
+    "do_not_assume": [
+      "Do not assume incremental header value transfers to production OAuth/OIDC — it was demonstrated only with application-set Cache-Control no-store/no-cache and Set-Cookie present/absent in Flask middleware (audit V4, medium severity). Production IdPs may not exhibit this header variation pattern.",
+      "Do not assume the product recommendation to use full vector is ecologically valid — it is supported only within this synthetic Flask localhost pattern where headers are deliberately varied per auth state.",
+      "Do not assume bootstrap CI [1.0, 1.0] reflects high precision — degenerate at ceiling with N=40 and 4 deterministic fingerprints; uninformative for product confidence.",
+      "Do not assume Flask/PyJWT results transfer to production OAuth/OIDC — claim ceiling is narrow (exact config specified in claim_updates).",
+      "Do not assume fingerprint hashes reproduce across Python versions — repr(vector) is Python-version-dependent; validated only on Python 3.12.14.",
+      "Do not assume null FP <5% holds beyond 50-150ms server jitter — only uniform(0.05,0.15) on localhost tested.",
+      "Do not assume sample size N=40 is sufficient for subtle discrimination differences — sufficient for primary threshold test but limited power for fine-grained comparisons.",
+      "Do not assume the incremental header value would hold with 3+ identical-body states — only 2 identical-body states (expired/invalid) tested."
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-RUNTIME-34054515149/result.json — COMPLETE SUPPORTS metrics: full_vector_discrimination 1.0, B-BODY-ONLY 0.833, incremental 0.167, Cache-Control-only 0.833, Set-Cookie-only 0.5, null FP 0.0%, drift [0.325, 0.381], all 10 controls pass",
+    "research/experiments/EXP-RUNTIME-34054515149/audit.json — PASS producer_claim_supported=true, V3 incremental value verified exact, V4 engineered header tautology constraint medium severity, V6 bootstrap degenerate, claim_ceiling bounded to Flask/PyJWT localhost with application-set headers",
+    "research/experiments/EXP-RUNTIME-34054515149/raw_observations.json — 40 entries, 4 distinct fingerprints, 3 body_hashes (expired==invalid), Cache-Control/Set-Cookie per state verified",
+    "research/experiments/EXP-RUNTIME-34054515149/provenance.json — python 3.12.14, flask 3.1.3, pyjwt 2.13.0, port 18929, jitter 0.05-0.15, seed 44, fingerprint config",
+    "research/experiments/EXP-RUNTIME-34054515149/spec.json — frozen C-MEAS-VALID, decision_rule 4 conditions, baselines, measurement_validity",
+    "research/experiments/EXP-RUNTIME-34015740602/audit.json — parent V3-DISTINCT-BODY-CEILING-CONFOUND resolved by this experiment",
+    "research/experiments/EXP-RUNTIME-33902315583/handoff.json — grandparent identical-body scenario with standard headers only (full==body 0.833), establishing baseline before header variation"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-34054515149/result.json — full_vector_discrimination 1.0, B-BODY-ONLY 0.833, incremental 0.167, Cache-Control-only 0.833, Set-Cookie-only 0.5, null_fp 0.0%, drift_jaccards [0.325, 0.381], drift_all_discriminable true, total_requests 40, error_rate 0.0, 10 controls pass",
+    "research/experiments/EXP-RUNTIME-34054515149/audit.json — PASS, producer_claim_supported true, claim_ceiling bounded, V1-V8 findings, baseline_findings B-BODY-ONLY recomputed 0.833 exact, incremental_header_value recomputed 0.167 exact, all recomputed_metrics match",
+    "research/experiments/EXP-RUNTIME-34054515149/spec.json — frozen decision_rule SURVIVES requires 4 conditions: full>body, full>0.5, null<5%, CC>0",
+    "research/experiments/EXP-RUNTIME-34054515149/report.md — Executive Summary H4 resolution, parent/grandparent comparison, Product Consequence, Validity Threats",
+    "research/experiments/EXP-RUNTIME-34054515149/provenance.json — environment, server_config, fingerprint_config, sampling, artifacts",
+    "research/experiments/EXP-RUNTIME-34054515149/raw_observations.json — 40 entries, header values per state, body_hash identity expired==invalid, fingerprint distinctness",
+    "research/experiments/EXP-RUNTIME-34015740602/handoff.json — parent established ceiling confound, carry_forward with H4 question resolved by this experiment",
+    "research/claims/registry.json — C-MEAS-VALID status EXPERIMENTAL owner_lanes runtime/physics next_gate writable/auth/session/drift controls"
+  ],
+  "recommended_action": "DESIGN EXP-RUNTIME-next for ecological validity on a real OAuth/OIDC identity provider: (1) Deploy a self-hosted Keycloak instance or Auth0 test tenant with 4 auth states (no_auth, valid_token, expired_token, invalid_token) returning identical error bodies for expired/invalid. (2) Key test: does the IdP naturally vary Cache-Control and/or Set-Cookie by auth state, and if so, does the full fingerprint vector maintain discrimination > B-BODY-ONLY? (3) If Cache-Control is absent or constant in IdP responses, measure whether discrimination degrades to body-only level (falsifying the product recommendation) or whether other IdP-specific headers (e.g., WWW-Authenticate, X-Content-Type-Options) compensate. (4) Keep sorted-tuple fingerprint with Date/Server/X-Request-Id exclusion. (5) N=40, jitter natural (not synthetic), seed 44 for comparability. (6) This directly tests whether the V4-engineered-header tautology constraint limits product applicability."
 }
 ```
