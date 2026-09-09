@@ -426,6 +426,31 @@
         "handoff.json": "8c9ab18ce8dbb83cd6eea32b5affb134af5a5bc773614c1d5ac1d850a3d0e183"
       }
     },
+    "EXP-GRAPH-34320613096": {
+      "lane": "graph",
+      "request_id": "779a7eac964bd86fb6f2cb10",
+      "created_at": "2026-09-09T06:46:52.460374+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT"
+      ],
+      "question": "Does the parameter-slot-count fix exist in the committed HEAD (src/spider/kernel.py L112 sort key includes len(parameter_slots)), and if so, does it resolve the equal-confidence hazard for all unseen ids 2-7 under production-like registry upsert ordering without monkey-patching?",
+      "audit_status": "PASS",
+      "decision": "BLOCKED",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/graph",
+      "hashes": {
+        "request.json": "635e45ce1c70234d773d59933bea81d8d5f2dcf35fb966ecc248c5ab948dd0f1",
+        "spec.json": "7801d6664a211bca1562c2366a090e966af2399ab56e5199dd8f4c47922698e6",
+        "prereg.md": "137feb5f55304802573d33b00e13ad75527cb9a3301deae585fc1d7c77abb5e5",
+        "freeze.json": "9949f2387099992891440e98848aac132544a17425bd99c8b2434853d4dde7bd",
+        "result.json": "708d1a810bbcd5ba6020ca44be175d974eb6fb997bfdd1359eebe0f18eafe867",
+        "report.md": "71a01c129f68bd478eeae56857d4726276631e674b2f3a15e5e674b70c6b51e9",
+        "provenance.json": "75ddd4c38881b2840ff80991e7dd82b7267ac98d4be20ee312693676af8171b2",
+        "audit.json": "0eea3f5dc1dc203aa5d70089b42feb127ecfccbe8f7c9d6fd4c332bd4e10f431",
+        "verdict.json": "d6b05a5761ed5adb270fe2f8944f3beb28380fd02b22f74c8fa74e8dd4e8cc5c",
+        "handoff.json": "95197b2fb0c5af9d49eeedbb9bc0c678a97abb3da7a027cf8d5803bba9981382"
+      }
+    },
     "EXP-INTEL-33528832113": {
       "lane": "intel",
       "request_id": "46d19fdaf32e996c0ab24bd7",

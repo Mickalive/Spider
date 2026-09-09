@@ -3,7 +3,7 @@
 Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER_CODEX_ULTIME.md`.
 
 This file is generated only from complete finalized Research 2.0 experiment packets.
-Ingested experiments: **42**. Coverage gaps: **0**.
+Ingested experiments: **43**. Coverage gaps: **0**.
 
 ## Index
 
@@ -26,6 +26,7 @@ Ingested experiments: **42**. Coverage gaps: **0**.
 | EXP-GRAPH-34222171093 | graph | PASS | BLOCKED | C-PARAM-INHERIT |
 | EXP-GRAPH-34244445713 | graph | PASS | BLOCKED | C-PARAM-INHERIT |
 | EXP-GRAPH-34291967676 | graph | PASS | BLOCKED | C-PARAM-INHERIT |
+| EXP-GRAPH-34320613096 | graph | PASS | BLOCKED | C-PARAM-INHERIT |
 | EXP-INTEL-33528832113 | intel | REVISE | SUPPORTS | C-CROSSSITE, C-LLM-INHERIT, C-PRODUCT-ECON |
 | EXP-INTEL-33842055594 | intel | REVISE | PARTIALLY_COMPATIBLE | C-CROSSSITE, C-LLM-INHERIT |
 | EXP-INTEL-33925056324 | intel | REVISE | SUPPORTS | C-CROSSSITE, C-LLM-INHERIT |
@@ -18441,6 +18442,1125 @@ Commit the one-line fix to `src/spider/kernel.py` L112 with Director approval, t
     "research/experiments/EXP-GRAPH-34244445713/handoff.json sha256 4d6e645fde38107c747640644754ef6f60ab88547510ccd8e29557d848907f08 parent BLOCKED"
   ],
   "recommended_action": "Commit the one-line fix to src/spider/kernel.py L112: candidates.sort(key=lambda m: (m.confidence, len(m.parameter_slots)), reverse=True) with Director approval. This is the second consecutive BLOCKED result confirming the prerequisite is unmet. After fix commit, re-run the exact same frozen spec against committed HEAD without monkey-patching. All 14 conditions (6 baselines, 6 core hazard, 1 null control, 1 upsert compatibility) are sufficient — no spec changes needed. The fix is a one-line change; the blocking is operational, not scientific."
+}
+```
+
+# EXP-GRAPH-34320613096
+
+## request.json
+
+```text
+{
+  "base_sha": "51c43f0f8d4641e91e8247071cad8bafb4f4dd81",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-09T06:46:52.460374+00:00",
+  "experiment_id": "EXP-GRAPH-34320613096",
+  "inherited_last_verdict": "BLOCKED",
+  "inherited_next_question": "After committing the parameter-slot-count fix to production HEAD (src/spider/kernel.py L112 sort key includes len(parameter_slots)), does the literal-vs-param equal-confidence competition resolve to param for all unseen ids 2-7 without monkey-patching, do all 6 baseline conditions pass, does the corrected B_CONFIDENCE_LITERAL_HIGHER condition (literal 0.98 > param 0.95) remain literal-winning, and does the fix interact correctly with registry upsert sorting (production-like ordering)?",
+  "lane": "graph",
+  "origin_github_run_id": "34320613096",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-34291967676",
+    "path": "research/experiments/EXP-GRAPH-34291967676/handoff.json",
+    "sha256": "8c9ab18ce8dbb83cd6eea32b5affb134af5a5bc773614c1d5ac1d850a3d0e183"
+  },
+  "reason": "pulse",
+  "request_hash": "8f8919a663d64af7f910725944f4f9d82c23e79f42adf3022d3f72f133d8319f",
+  "request_id": "779a7eac964bd86fb6f2cb10",
+  "schema_version": 1
+}
+```
+
+## spec.json
+
+```text
+{
+  "experiment_id": "EXP-GRAPH-34320613096",
+  "lane": "graph",
+  "claim_ids": ["C-PARAM-INHERIT"],
+  "question": "Does the parameter-slot-count fix exist in the committed HEAD (src/spider/kernel.py L112 sort key includes len(parameter_slots)), and if so, does it resolve the equal-confidence hazard for all unseen ids 2-7 under production-like registry upsert ordering without monkey-patching?",
+  "hypothesis": "If the fix is present, the resolve() function will select the param mechanism for all unseen ids 2-7 when confidence equal (0.95) and literal registered first (worst-case insertion order), because param has more parameter_slots (len >= 1) than literal (len = 0). Additionally, all 6 baseline conditions remain unchanged, B_CONFIDENCE_LITERAL_HIGHER remains literal-winning, and the fix works under registry upsert sorting (production-like ordering by mechanism_id). If the fix is not present, the experiment will be BLOCKED per frozen decision rule.",
+  "falsifier": "ANY of: (a) fix present but compete-equal resolves to literal for any of unseen ids 2-7; (b) fix present but any baseline regresses; (c) fix present but B_CONFIDENCE_LITERAL_HIGHER resolves to param; (d) fix present but C-EQUAL-UPSERT-ID7 resolves to literal; (e) fix not present (status=BLOCKED); (f) HTTP execution fails; (g) any exception or crash; (h) monkey-patching detected.",
+  "baselines": [
+    "B-COLD: Empty registry, intent 'fetch-post' → UNKNOWN",
+    "B-LITERAL-ONLY-ORIG: Literal mechanism for /posts/1 only, context id=1 → EXECUTABLE url=/posts/1, HTTP 200, id=1",
+    "B-LITERAL-ONLY-UNSEEN: Literal mechanism for /posts/1 only, context id=7 → EXECUTABLE url=/posts/1, HTTP 200, id=1",
+    "B-PARAM-ONLY-ORIG: Param mechanism for /posts/{id} only, context id=1 → EXECUTABLE url=/posts/1, HTTP 200, id=1",
+    "B-PARAM-ONLY-UNSEEN: Param mechanism for /posts/{id} only, context id=7 → EXECUTABLE url=/posts/7, HTTP 200, id=7",
+    "B-COMPETE-PARAM-HIGHER: Param (0.98) vs literal (0.95), context id=7 → param wins, EXECUTABLE url=/posts/7, HTTP 200, id=7"
+  ],
+  "positive_control": "B-COMPETE-PARAM-HIGHER: When param confidence (0.98) exceeds literal confidence (0.95), param must win for unseen id=7. Verifies confidence ordering works correctly.",
+  "null_control": "B-CONFIDENCE_LITERAL_HIGHER: When literal confidence (0.98) exceeds param confidence (0.95), literal must win for unseen id=7. Verifies fix does not override strict confidence ordering. Additionally, BLOCKED-control: if fix not present, experiment emits status=BLOCKED.",
+  "measurement_validity": [
+    "All conditions deterministic: no model calls, no RNG, no sampling. Single-run exact point comparisons.",
+    "HTTP execution against live endpoint jsonplaceholder.typicode.com with 5-second timeout per request.",
+    "Each condition uses a fresh kernel instance with explicitly controlled registry contents. No cross-contamination.",
+    "Registry insertion order controlled: literal registered before param in all shared-equal conditions (worst-case). For upsert conditions, mechanisms inserted sequentially with upsert; final ordering determined by mechanism_id sorting.",
+    "Fix presence verified by inspecting src/spider/kernel.py L112 sort key before execution.",
+    "No monkey-patching or runtime modification of kernel.py during execution.",
+    "HTTP response id field verified against expected id for each condition.",
+    "Additional diagnostic checks: git log for commits touching kernel.py L112 since base_sha, check if any open PRs include the fix, check if fix present in other branches (lab/graph, main)."
+  ],
+  "decision_rule": "SURVIVES_POST_COMMIT if ALL of: (1) fix present in committed HEAD (L112 sort key includes len(parameter_slots)); (2) compete-equal resolves to param for ALL unseen ids 2-7 (6/6 param wins); (3) all 6 baselines pass; (4) B_CONFIDENCE_LITERAL_HIGHER resolves to literal; (5) no exceptions or crashes; (6) no monkey-patching; (7) C-EQUAL-UPSERT-ID7 resolves to param. FALSIFIED-POST-COMMIT if fix present but any of (a)-(d) fail. BLOCKED if fix not present. MEASUREMENT_INVALID if HTTP failures, exceptions, or infrastructure issues prevent measurement.",
+  "product_consequence_positive": "SURVIVES_POST_COMMIT means the core false-accept hazard is eliminated in committed production code, and the fix is robust under production-like registry ordering. The parameter-slot-count tie-break correctly favors parametrized mechanisms over literal mechanisms at equal confidence, enabling safe param generalization to unseen identifiers. This unblocks real-web testing for C-PARAM-INHERIT.",
+  "product_consequence_negative": "FALSIFIED-POST-COMMIT means the fix does not work as intended in committed code, or fails under upsert sorting. The hazard persists or new regressions are introduced. BLOCKED means the prerequisite is still unmet; Director must commit the fix before re-running.",
+  "estimated_cost": "Very low: deterministic single-run resolution against live endpoint, 14 conditions total, no model calls, no browser automation, no RNG. ~14 HTTP requests with 5s timeout each. Total execution < 2 minutes. Additional diagnostic git checks are cheap.",
+  "expected_information_gain": "High: resolves the BLOCKED status by providing actionable diagnostic about fix presence and potential paths to unblock. If fix present, provides confirmatory evidence for C-PARAM-INHERIT advancement. If fix absent, provides diagnostic about why fix not committed (git log, PRs, branch status) to inform Director decision."
+}
+```
+
+## prereg.md
+
+```text
+# EXP-GRAPH-34320613096 Preregistration
+
+## 1. Experiment Identity
+
+- **Experiment ID**: EXP-GRAPH-34320613096
+- **Lane**: Graph
+- **Claim**: C-PARAM-INHERIT (Mechanisms parameterize to unseen identifiers)
+- **Date**: 2026-09-09
+- **Status**: DESIGN — NOT YET FROZEN
+- **Parent Experiment**: EXP-GRAPH-34291967676 (BLOCKED)
+- **Request Reason**: pulse (inherited next_question from parent handoff)
+
+## 2. Scientific Question
+
+Does the parameter-slot-count fix exist in the committed HEAD (src/spider/kernel.py L112 sort key includes len(parameter_slots)), and if so, does it resolve the equal-confidence hazard for all unseen ids 2-7 under production-like registry upsert ordering without monkey-patching?
+
+## 3. Motivation
+
+### What the parent experiment established (EXP-GRAPH-34291967676)
+
+The parent experiment tested the core false-accept hazard and baseline behavior on UNFIXED production HEAD. It produced:
+
+**Established (descriptive):**
+- Core hazard validated: at equal confidence (0.95), literal beats param for ALL unseen ids 2-7 (6/6 literal wins, 0/6 hazard elimination) when literal is registered before param
+- Param generalizes: param-only-unseen resolves to /posts/7, HTTP 200, id=7
+- Literal does not generalize: literal-only-unseen resolves to /posts/1, HTTP 200, id=1
+- All 6 baselines pass on unfixed HEAD (cold, literal-only orig/unseen, param-only orig/unseen, compete-param-higher)
+- Confidence ordering preserved: B-CONFIDENCE-LITERAL-HIGHER literal 0.98 beats param 0.95
+- Fix NOT present in committed HEAD (kernel sha256 46929b3a, line 112 'candidates.sort(key=lambda m: m.confidence, reverse=True)')
+
+**Rejected (measurement invalid for post-commit):**
+- Post-commit claim (fix not committed — prerequisite unmet)
+- Core hazard results (0/6 param wins) are diagnostic on unfixed HEAD, not evidence against fix effectiveness
+
+**Unknown:**
+- Whether fix survives commitment to production HEAD
+- Whether param wins at equal confidence for ALL unseen ids after fix commit
+- Whether baselines regress after fix commit
+- Whether B_CONFIDENCE_LITERAL_HIGHER remains literal-winning after fix commit
+- Whether fix interacts correctly with registry upsert sorting (production-like ordering)
+
+**Do Not Assume:**
+- Fix is committed (verified unfixed at parent experiment time — kernel sha256 46929b3a)
+- Post-commit behavior matches monkey-patched behavior
+- Production-readiness (jsonplaceholder is simple REST)
+- Generalization beyond single intent, single endpoint, preconditions={}, deterministic n=1
+- Fix works under upsert sorting (replace() used in parent experiment)
+
+### Why this experiment is different
+
+This experiment is identical in structure to the parent but differs in two critical dimensions:
+
+**Parent**: Tested on UNFIXED HEAD (fix absent, no monkey-patching — experiment ran exactly as committed)
+**This experiment**: Tests on COMMITTED HEAD (fix present, no monkey-patching)
+
+Additionally, this experiment adds a validity check for production-like registry ordering (upsert) that was not present in the parent.
+
+The fix is a one-line change to src/spider/kernel.py L112:
+```python
+# BEFORE (unfixed):
+candidates.sort(key=lambda m: m.confidence, reverse=True)
+# AFTER (fixed):
+candidates.sort(key=lambda m: (m.confidence, len(m.parameter_slots)), reverse=True)
+```
+
+The fix adds `len(parameter_slots)` as a secondary sort key. When confidences are equal, mechanisms with more parameter slots (param, slots >= 1) sort higher than mechanisms with zero parameter slots (literal, slots = 0).
+
+**Key difference from parent**: No monkey-patching. The fix must be committed to production HEAD before execution. If the fix is not present, the experiment is BLOCKED (not FALSIFIED).
+
+## 4. Hypotheses
+
+### H1: Post-Commit Hazard Elimination
+With the fix committed, compete-equal (literal 0.95 vs param 0.95, literal registered first) resolves to param for ALL unseen ids 2-7 (6/6 param wins).
+
+### H2: Baseline Preservation
+All 6 baseline conditions pass on committed HEAD with the fix present. No regression from parent experiment baseline behavior.
+
+### H3: Confidence Ordering Preservation
+B_CONFIDENCE_LITERAL_HIGHER (literal 0.98 vs param 0.95) remains literal-winning. The fix does not override strict confidence ordering.
+
+### H4: Fix Presence
+The fix is verified present in committed HEAD: src/spider/kernel.py L112 sort key includes `len(parameter_slots)`.
+
+### H5: Upsert Compatibility
+The fix remains effective under registry upsert sorting (production-like ordering by mechanism_id). C-EQUAL-UPSERT-ID7 resolves to param.
+
+### H6: Diagnostic Insight
+If fix is not present, diagnostic checks (git log, PR search, branch status) provide actionable information about why fix has not been committed.
+
+## 5. Conditions
+
+### 5.1 Fix Verification (gate)
+- Read src/spider/kernel.py L112
+- Verify sort key includes `len(parameter_slots)`
+- If absent: status=BLOCKED, skip all conditions, proceed to diagnostic checks
+- If present: proceed to all conditions
+
+### 5.2 Baseline Conditions (6)
+
+| ID | Registry | Context ID | Expected Status | Expected URL | Expected HTTP ID |
+|----|----------|------------|-----------------|--------------|------------------|
+| B-COLD | Empty | any | UNKNOWN | N/A | N/A |
+| B-LITERAL-ONLY-ORIG | literal /posts/1 | 1 | EXECUTABLE | /posts/1 | 1 |
+| B-LITERAL-ONLY-UNSEEN | literal /posts/1 | 7 | EXECUTABLE | /posts/1 | 1 |
+| B-PARAM-ONLY-ORIG | param /posts/{id} | 1 | EXECUTABLE | /posts/1 | 1 |
+| B-PARAM-ONLY-UNSEEN | param /posts/{id} | 7 | EXECUTABLE | /posts/7 | 7 |
+| B-COMPETE-PARAM-HIGHER | literal (0.95) + param (0.98) | 7 | EXECUTABLE | /posts/7 | 7 |
+
+### 5.3 Core Hazard Conditions (6)
+
+| ID | Registry | Context ID | Expected Mechanism | Expected URL | Expected HTTP ID |
+|----|----------|------------|--------------------|--------------|------------------|
+| C-EQUAL-ID2 | literal (0.95) + param (0.95) | 2 | param | /posts/2 | 2 |
+| C-EQUAL-ID3 | literal (0.95) + param (0.95) | 3 | param | /posts/3 | 3 |
+| C-EQUAL-ID4 | literal (0.95) + param (0.95) | 4 | param | /posts/4 | 4 |
+| C-EQUAL-ID5 | literal (0.95) + param (0.95) | 5 | param | /posts/5 | 5 |
+| C-EQUAL-ID6 | literal (0.95) + param (0.95) | 6 | param | /posts/6 | 6 |
+| C-EQUAL-ID7 | literal (0.95) + param (0.95) | 7 | param | /posts/7 | 7 |
+
+**Registry order**: literal registered BEFORE param (worst-case insertion order, same as parent).
+
+### 5.4 Null Control Condition (1)
+
+| ID | Registry | Context ID | Expected Mechanism | Expected URL | Expected HTTP ID |
+|----|----------|------------|--------------------|--------------|------------------|
+| B-CONFIDENCE-LITERAL-HIGHER | literal (0.98) + param (0.95) | 7 | literal | /posts/1 | 1 |
+
+**Purpose**: Verify fix does not override strict confidence ordering.
+
+### 5.5 Upsert Compatibility Condition (1)
+
+| ID | Registry | Context ID | Expected Mechanism | Expected URL | Expected HTTP ID |
+|----|----------|------------|--------------------|--------------|------------------|
+| C-EQUAL-UPSERT-ID7 | literal (0.95) + param (0.95) via upsert | 7 | param | /posts/7 | 7 |
+
+**Registry order**: mechanisms inserted sequentially via upsert; final ordering determined by mechanism_id sorting (literal-posts-1 sorts before param-posts-id). This tests production-like ordering where the registry uses upsert rather than explicit replace().
+
+### 5.6 Diagnostic Checks (if fix not present)
+If fix is not present, perform additional diagnostic checks:
+1. `git log --oneline -20 -- src/spider/kernel.py` to see recent commits touching kernel.py
+2. `git log --oneline -20 --all -- src/spider/kernel.py` to see commits across all branches
+3. `git branch -a | grep -v HEAD` to list all branches
+4. Check if any open PRs include the fix (via GitHub API if available)
+5. Record current kernel.py sha256 and L112 content for Director review
+
+### 5.7 Total Conditions
+- 6 baselines (B-COLD, B-LITERAL-ONLY-ORIG, B-LITERAL-ONLY-UNSEEN, B-PARAM-ONLY-ORIG, B-PARAM-ONLY-UNSEEN, B-COMPETE-PARAM-HIGHER)
+- 6 core hazard (C-EQUAL-ID2 through C-EQUAL-ID7, equal confidence 0.95)
+- 1 null control (B-CONFIDENCE-LITERAL-HIGHER, literal higher confidence)
+- 1 upsert compatibility (C-EQUAL-UPSERT-ID7, equal confidence 0.95 via upsert)
+= **14 conditions total** (if fix present); **0 conditions + diagnostic checks** (if fix absent)
+
+## 6. Measures
+
+### 6.1 Primary Metric
+- **hazard_elimination_rate**: Fraction of core hazard conditions (ids 2-7) where param wins at equal confidence. Target: 6/6 = 1.0.
+- **baseline_pass_rate**: Fraction of baseline conditions matching expected outcome. Target: 6/6 = 1.0.
+
+### 6.2 Secondary Metrics
+- Per-condition resolution status, mechanism_id, bound_url, confidence
+- HTTP status code and response id field for each EXECUTABLE condition
+- Fix verification: L112 content, kernel.py sha256
+- Exception/crash count
+- Network failure count
+- Upsert condition outcome (C-EQUAL-UPSERT-ID7)
+
+### 6.3 Diagnostic Metrics (if fix absent)
+- Recent commits touching kernel.py (last 20)
+- Branch list
+- Open PR status (if GitHub API available)
+- Current kernel.py sha256 and L112 content
+
+## 7. Controls
+
+### 7.1 Fix Presence Control (prerequisite gate)
+- Read src/spider/kernel.py L112
+- Verify sort key includes `len(parameter_slots)`
+- If absent: status=BLOCKED, outcome=NOT_APPLICABLE, proceed to diagnostic checks
+- If present: proceed to all conditions
+
+### 7.2 Baseline Preservation Controls (6 conditions)
+Same as parent experiment. All 6 must pass to confirm no regression.
+
+### 7.3 Core Hazard Test (6 conditions)
+Same as parent experiment's core hazard test but with fix committed. All 6 must resolve to param.
+
+### 7.4 Confidence Ordering Null Control (1 condition)
+Same as parent experiment's B-CONFIDENCE-LITERAL-HIGHER. Must remain literal-winning.
+
+### 7.5 Upsert Compatibility Control (1 condition)
+New condition not present in parent. Tests fix under production-like registry ordering (upsert). Must resolve to param.
+
+### 7.6 No-Monkey-Patch Attestation
+The experiment script must not modify kernel.py at runtime. Fix must be in committed code. Script must verify no runtime modifications occurred.
+
+### 7.7 Diagnostic Control (if fix absent)
+If fix is not present, diagnostic checks must be performed to provide actionable information for Director.
+
+## 8. Validity Threats
+
+### 8.1 Fix Not Committed
+If src/spider/kernel.py L112 is still unfixed, the experiment is BLOCKED. This is the correct outcome per the parent handoff's first gate. The experiment must not weaken the design to work around an unfixed codebase.
+
+### 8.2 HTTP Endpoint Availability
+jsonplaceholder.typicode.com must be reachable. Network failures are infrastructure issues, not scientific results. Record and report but do not classify as FALSIFIES.
+
+### 8.3 Insertion Order Sensitivity
+Literal is registered before param in all equal-confidence conditions (worst case). If the fix works under worst-case insertion order, it works under all insertion orders.
+
+### 8.4 Simple REST Limitation
+jsonplaceholder is not real Web (no DOM, no auth, no session state, no drift). Claim ceiling is bounded to simple REST parameterized inheritance. Real-web generalization is a separate future experiment.
+
+### 8.5 Deterministic n=1
+All conditions are deterministic (no model calls, no RNG). Single-run exact comparisons are valid for this kernel-level test. No statistical inference needed.
+
+### 8.6 Single Endpoint
+Only /posts/{id} is tested. Generalization to other endpoints, multi-parameter templates, nested routes, and non-empty preconditions is not tested here.
+
+### 8.7 Upsert Ordering Assumption
+Upsert sorts by mechanism_id. The assumption is that literal-posts-1 sorts before param-posts-id (lexicographic 'l' < 'p'). If mechanism_ids differ, ordering may change. This is a minor threat because the worst-case insertion order (literal before param) is already tested in core hazard conditions.
+
+### 8.8 Diagnostic Check Limitations
+Git log and branch checks may not reveal open PRs or pending commits. GitHub API may not be available. Diagnostic checks are best-effort, not exhaustive.
+
+## 9. Decision Rules
+
+### 9.1 SURVIVES_POST_COMMIT
+If ALL of:
+1. Fix is present in committed HEAD (L112 sort key includes len(parameter_slots))
+2. compete-equal resolves to param for ALL unseen ids 2-7 (6/6 param wins)
+3. All 6 baselines pass (6/6)
+4. B_CONFIDENCE_LITERAL_HIGHER resolves to literal (literal 0.98 wins)
+5. No exceptions or crashes
+6. No monkey-patching
+7. C-EQUAL-UPSERT-ID7 resolves to param (fix works under upsert)
+
+### 9.2 FALSIFIED-POST-COMMIT
+If fix is present but ANY of:
+1. compete-equal resolves to literal for any unseen id (hazard persists)
+2. Any baseline regresses (fails to match expected outcome)
+3. B_CONFIDENCE_LITERAL_HIGHER resolves to param (fix overrides confidence)
+4. C-EQUAL-UPSERT-ID7 resolves to literal (fix fails under upsert)
+
+### 9.3 BLOCKED
+If fix is NOT present in committed HEAD (L112 sort key does not include len(parameter_slots)). Diagnostic checks are performed and recorded.
+
+### 9.4 MEASUREMENT_INVALID
+If:
+1. HTTP failures prevent measurement for any condition (when fix present)
+2. Exceptions or crashes prevent resolution
+3. Infrastructure issues (timeout, DNS, etc.)
+
+## 10. Expected Outcomes
+
+### 10.1 Positive Result (SURVIVES_POST_COMMIT)
+- Core false-accept hazard eliminated in committed production code
+- Parameter-slot-count tie-break works correctly for all tested unseen ids
+- No baseline regressions
+- Confidence ordering preserved
+- Fix works under production-like upsert ordering
+- C-PARAM-INHERIT advances to: real-web endpoint testing with DOM, auth, session state, drift (highest-upside generalization gap)
+- Claim ceiling: narrow (single intent, single endpoint, preconditions={}, deterministic n=1, jsonplaceholder REST)
+
+### 10.2 Negative Result (FALSIFIED-POST-COMMIT)
+- Fix does not work as intended in committed code, or fails under upsert
+- Root cause analysis required:
+  - Is the sort key incorrect?
+  - Does registry upsert sorting interact differently with tie-break than replace()?
+  - Is there a code path that bypasses the sort?
+- Product cannot advance to real-web testing
+- Possible: different fix approach needed, or different tie-breaking mechanism
+
+### 10.3 Blocked Result (BLOCKED)
+- Fix not committed to production HEAD
+- First gate from parent handoff not met
+- Cannot test post-commit behavior
+- Diagnostic checks provide actionable information about why fix not committed
+- Next action: commit fix with Director approval, then re-run this exact spec
+
+### 10.4 Invalid Result (MEASUREMENT_INVALID)
+- Infrastructure failure, not scientific result
+- Retry after infrastructure repair
+
+## 11. Analysis Plan
+
+1. **Fix Verification**: Read src/spider/kernel.py L112, verify sort key includes len(parameter_slots). If absent → BLOCKED, proceed to diagnostic checks.
+2. **Diagnostic Checks** (if fix absent): git log, branch list, PR status, kernel.py sha256.
+3. **Baseline Execution** (if fix present): Run 6 baseline conditions, verify each matches expected outcome.
+4. **Core Hazard Execution** (if fix present): Run 6 core hazard conditions (ids 2-7), verify param wins for all.
+5. **Null Control Execution** (if fix present): Run B_CONFIDENCE_LITERAL_HIGHER, verify literal wins.
+6. **Upsert Condition Execution** (if fix present): Run C-EQUAL-UPSERT-ID7, verify param wins under upsert ordering.
+7. **Metrics Computation**: Compute hazard_elimination_rate and baseline_pass_rate.
+8. **Control Verification**: Check all controls pass/fail.
+9. **Reporting**: Report all outcomes with equal prominence.
+
+## 12. Analysis Code
+
+Analysis will be implemented in Python using:
+- `spider.kernel.SpiderKernel` for resolution
+- `spider.registry.MechanismRegistry` for mechanism storage
+- `spider.models.Mechanism`, `Observation`, `Resolution` for data structures
+- `urllib.request` for HTTP execution against jsonplaceholder.typicode.com
+- `subprocess` for git diagnostic checks
+- Standard library only (no custom estimators required)
+
+Code will be committed to `research/experiments/EXP-GRAPH-34320613096/` before execution.
+
+## 13. Pre-registered Expectations
+
+From parent experiment and theoretical derivation:
+- Fix adds len(parameter_slots) as secondary sort key
+- Param mechanisms have parameter_slots >= 1 (e.g., ['id'])
+- Literal mechanisms have parameter_slots = [] (empty)
+- len([]) = 0 < len(['id']) = 1
+- At equal confidence, param sorts higher than literal with the fix
+- Without the fix, literal wins (insertion-order tie-break)
+- Confidence ordering is primary: 0.98 > 0.95 regardless of parameter_slots
+- Baseline behavior is independent of the fix (fix only affects tie-breaking at equal confidence)
+- Upsert sorting by mechanism_id may reorder mechanisms but should not affect tie-break when fix is present
+- If fix not present, diagnostic checks will reveal recent commits, branch status, and potential PRs
+
+## 14. Deviation Policy
+
+Any deviation from this preregistration will be labeled EXPLORATORY and cannot support confirmatory claims. A new confirmatory claim requires a new preregistration.
+
+## 15. Freeze Statement
+
+This preregistration is frozen BEFORE any analysis code is written or any outcome data is inspected. The experiment will be executed exactly as described here.
+```
+
+## freeze.json
+
+```text
+{
+  "experiment_id": "EXP-GRAPH-34320613096",
+  "frozen_at": "2026-09-09T06:49:57.299658+00:00",
+  "hashes": {
+    "prereg.md": "137feb5f55304802573d33b00e13ad75527cb9a3301deae585fc1d7c77abb5e5",
+    "request.json": "635e45ce1c70234d773d59933bea81d8d5f2dcf35fb966ecc248c5ab948dd0f1",
+    "spec.json": "7801d6664a211bca1562c2366a090e966af2399ab56e5199dd8f4c47922698e6"
+  },
+  "schema_version": 1
+}
+```
+
+## result.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34320613096",
+  "lane": "graph",
+  "status": "BLOCKED",
+  "outcome": "NOT_APPLICABLE",
+  "metrics": {
+    "fix_present_in_committed_head": false,
+    "kernel_l112_content": "candidates.sort(key=lambda m: m.confidence, reverse=True)",
+    "kernel_sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+    "conditions_executed": 0,
+    "conditions_skipped": 14,
+    "hazard_elimination_rate": null,
+    "baseline_pass_rate": null,
+    "total_http_requests": 0,
+    "total_exceptions": 0,
+    "monkey_patching_detected": false,
+    "fix_found_on_any_branch": false,
+    "branches_checked": [
+      "lab2/graph",
+      "main",
+      "remotes/origin/lab2/frontier",
+      "remotes/origin/lab2/graph",
+      "remotes/origin/lab2/intel",
+      "remotes/origin/lab2/physics",
+      "remotes/origin/lab2/product",
+      "remotes/origin/lab2/runtime",
+      "remotes/origin/main",
+      "remotes/origin/research2/bootstrap",
+      "remotes/origin/research2/codex-unification",
+      "remotes/origin/research2/hotfix-control-overlay"
+    ],
+    "uncommitted_changes_to_kernel": false
+  },
+  "controls": {
+    "FIX-PRESENCE": {
+      "expected": "L112 sort key includes len(parameter_slots)",
+      "observed": "L112 is 'candidates.sort(key=lambda m: m.confidence, reverse=True)' — no parameter_slots in sort key",
+      "pass": false,
+      "evidence_ref": "research/experiments/EXP-GRAPH-34320613096/raw_evidence.json fix_verification"
+    },
+    "B-COLD": {
+      "expected": "UNKNOWN (empty registry, intent 'fetch-post')",
+      "observed": null,
+      "pass": "unknown",
+      "evidence_ref": "skipped — BLOCKED gate"
+    },
+    "B-LITERAL-ONLY-ORIG": {
+      "expected": "EXECUTABLE url=/posts/1, HTTP 200, id=1",
+      "observed": null,
+      "pass": "unknown",
+      "evidence_ref": "skipped — BLOCKED gate"
+    },
+    "B-LITERAL-ONLY-UNSEEN": {
+      "expected": "EXECUTABLE url=/posts/1, HTTP 200, id=1",
+      "observed": null,
+      "pass": "unknown",
+      "evidence_ref": "skipped — BLOCKED gate"
+    },
+    "B-PARAM-ONLY-ORIG": {
+      "expected": "EXECUTABLE url=/posts/1, HTTP 200, id=1",
+      "observed": null,
+      "pass": "unknown",
+      "evidence_ref": "skipped — BLOCKED gate"
+    },
+    "B-PARAM-ONLY-UNSEEN": {
+      "expected": "EXECUTABLE url=/posts/7, HTTP 200, id=7",
+      "observed": null,
+      "pass": "unknown",
+      "evidence_ref": "skipped — BLOCKED gate"
+    },
+    "B-COMPETE-PARAM-HIGHER": {
+      "expected": "param wins, EXECUTABLE url=/posts/7, HTTP 200, id=7",
+      "observed": null,
+      "pass": "unknown",
+      "evidence_ref": "skipped — BLOCKED gate"
+    },
+    "C-EQUAL-ID2": {
+      "expected": "param wins at equal confidence 0.95",
+      "observed": null,
+      "pass": "unknown",
+      "evidence_ref": "skipped — BLOCKED gate"
+    },
+    "C-EQUAL-ID3": {
+      "expected": "param wins at equal confidence 0.95",
+      "observed": null,
+      "pass": "unknown",
+      "evidence_ref": "skipped — BLOCKED gate"
+    },
+    "C-EQUAL-ID4": {
+      "expected": "param wins at equal confidence 0.95",
+      "observed": null,
+      "pass": "unknown",
+      "evidence_ref": "skipped — BLOCKED gate"
+    },
+    "C-EQUAL-ID5": {
+      "expected": "param wins at equal confidence 0.95",
+      "observed": null,
+      "pass": "unknown",
+      "evidence_ref": "skipped — BLOCKED gate"
+    },
+    "C-EQUAL-ID6": {
+      "expected": "param wins at equal confidence 0.95",
+      "observed": null,
+      "pass": "unknown",
+      "evidence_ref": "skipped — BLOCKED gate"
+    },
+    "C-EQUAL-ID7": {
+      "expected": "param wins at equal confidence 0.95",
+      "observed": null,
+      "pass": "unknown",
+      "evidence_ref": "skipped — BLOCKED gate"
+    },
+    "B-CONFIDENCE-LITERAL-HIGHER": {
+      "expected": "literal wins (literal 0.98 > param 0.95)",
+      "observed": null,
+      "pass": "unknown",
+      "evidence_ref": "skipped — BLOCKED gate"
+    },
+    "C-EQUAL-UPSERT-ID7": {
+      "expected": "param wins at equal confidence 0.95 via upsert ordering",
+      "observed": null,
+      "pass": "unknown",
+      "evidence_ref": "skipped — BLOCKED gate"
+    },
+    "NO-MONKEY-PATCHING": {
+      "expected": "No runtime modification of kernel.py",
+      "observed": "No modifications detected; experiment did not execute any conditions",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-GRAPH-34320613096/raw_evidence.json monkey_patching_detected=false"
+    },
+    "DIAGNOSTIC-GIT-LOG": {
+      "expected": "Recent commits touching kernel.py captured",
+      "observed": "2 commits on current branch, 14 commits across all branches — none include the parameter_slots fix",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-GRAPH-34320613096/raw_evidence.json git_diagnostics"
+    },
+    "DIAGNOSTIC-BRANCH-COVERAGE": {
+      "expected": "Fix checked on all accessible branches",
+      "observed": "12 branches checked, fix found on NONE",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-GRAPH-34320613096/raw_evidence.json fix_found_on_branches=[]"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-GRAPH-34320613096/raw_evidence.json",
+      "sha256": "17272dd37ab6c0fd56d0d069aab9b3d95ff900a610286c5e383ca27d2e0259a0",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-34320613096/execute_blocked.py",
+      "sha256": "00341b6cc2844d04e05da838b028048bdf77b78ad0002e5e91931396b50cafd6",
+      "role": "code"
+    },
+    {
+      "path": "src/spider/kernel.py",
+      "sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+      "role": "fixture"
+    }
+  ],
+  "observations": [
+    "Fix NOT present in committed HEAD: kernel.py L112 is 'candidates.sort(key=lambda m: m.confidence, reverse=True)', confirmed by automated grep across all 12 accessible branches",
+    "Kernel file sha256 46929b3a unchanged from parent experiment EXP-GRAPH-34291967676 (two consecutive BLOCKED runs on same kernel hash)",
+    "Only 2 commits touch kernel.py on current branch (lab2/graph): 'r2: bind parameters safely inside action templates' and 'r2: add product kernel and experiment transaction tooling' — neither includes the parameter_slots fix",
+    "14 commits touch kernel.py across all branches — all are product-lane execute/verdict commits; none include the parameter_slots fix",
+    "No uncommitted changes to kernel.py (clean working tree)",
+    "Fix not present on any of 12 branches: lab2/graph, main, lab2/frontier, lab2/intel, lab2/physics, lab2/product, lab2/runtime, research2/bootstrap, research2/codex-unification, research2/hotfix-control-overlay, plus remotes",
+    "0/14 conditions executed per frozen BLOCKED decision rule 9.3 — no scientific measurement occurred",
+    "This is the third consecutive BLOCKED result (EXP-GRAPH-34244445713, EXP-GRAPH-34291967676, EXP-GRAPH-34320613096) — same kernel hash, same unfixed L112"
+  ],
+  "validity_notes": [
+    "BLOCKED status is the correct per-frozen-spec outcome: decision rule 9.3 specifies BLOCKED when fix is absent",
+    "No scientific measurement occurred — BLOCKED means prerequisite unmet, not hypothesis rejected",
+    "All 14 condition controls correctly show status=unknown (skipped), not pass/fail — no false negatives introduced",
+    "Diagnostic checks (git log, branch sweep, kernel hash) are valid and correctly performed",
+    "Kernel file hash 46929b3a matches parent experiment — no changes to production HEAD",
+    "The BLOCKED status carries forward all inherited state from parent handoff unchanged — no new scientific claims are made",
+    "Infrastructure: no HTTP requests were attempted (correct for BLOCKED), no exceptions, no network dependencies"
+  ],
+  "unresolved": [
+    "Why has the one-line fix not been committed after three consecutive BLOCKED results? Is this a deliberate decision, an oversight, or a dependency on another lane's work?",
+    "Does any open PR or draft branch contain the fix but not yet merged? (GitHub API not available from this environment)",
+    "Is there a blocking dependency (e.g., runtime lane or product lane gate) preventing the fix commit?",
+    "Director must decide: commit the fix and re-run this spec, or close C-PARAM-INHERIT with rationale"
+  ]
+}
+```
+
+## report.md
+
+```text
+# EXP-GRAPH-34320613096 — BLOCKED Execution Report
+
+## Experiment Identity
+
+- **Experiment ID**: EXP-GRAPH-34320613096
+- **Lane**: Graph
+- **Claim**: C-PARAM-INHERIT (Mechanisms parameterize to unseen identifiers)
+- **Parent**: EXP-GRAPH-34291967676 (BLOCKED)
+- **Status**: BLOCKED (decision rule 9.3)
+- **Outcome**: NOT_APPLICABLE (0/14 conditions executed)
+
+## Summary
+
+The parameter-slot-count fix is **not present** in committed HEAD. Line 112 of `src/spider/kernel.py` remains:
+
+```python
+candidates.sort(key=lambda m: m.confidence, reverse=True)
+```
+
+The expected fix would be:
+
+```python
+candidates.sort(key=lambda m: (m.confidence, len(m.parameter_slots)), reverse=True)
+```
+
+Per frozen decision rule 9.3, the experiment is BLOCKED: no conditions executed, no HTTP requests made, no scientific measurement occurred. This is the **third consecutive BLOCKED result** (EXP-GRAPH-34244445713, EXP-GRAPH-34291967676, EXP-GRAPH-34320613096) on the same kernel hash (46929b3a).
+
+## Diagnostic Evidence
+
+### Fix Verification (Gate)
+- **L112 content**: `candidates.sort(key=lambda m: m.confidence, reverse=True)`
+- **Fix present**: No
+- **Kernel sha256**: 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61 (unchanged from parent experiment)
+- **Uncommitted changes**: None (clean working tree)
+
+### Git History (kernel.py)
+- **Current branch (lab2/graph)**: 2 commits — `r2: bind parameters safely inside action templates` and `r2: add product kernel and experiment transaction tooling` — neither includes the fix
+- **All branches**: 14 commits — all are product-lane execute/verdict commits; none include the fix
+
+### Branch Sweep
+- **12 branches checked**: lab2/graph, main, lab2/frontier, lab2/intel, lab2/physics, lab2/product, lab2/runtime, research2/bootstrap, research2/codex-unification, research2/hotfix-control-overlay, plus remotes
+- **Fix found on**: NONE
+
+### No-Monkey-Patching
+- Confirmed: no runtime modification of kernel.py occurred
+- Experiment correctly skipped all conditions per BLOCKED decision rule
+
+## Controls
+
+All 14 condition controls correctly show status=`unknown` (skipped). No false negatives or false positives introduced. The BLOCKED gate operated correctly.
+
+| Control | Status | Note |
+|---------|--------|------|
+| FIX-PRESENCE | **FAIL** | Gate — fix absent |
+| B-COLD | unknown | Skipped |
+| B-LITERAL-ONLY-ORIG | unknown | Skipped |
+| B-LITERAL-ONLY-UNSEEN | unknown | Skipped |
+| B-PARAM-ONLY-ORIG | unknown | Skipped |
+| B-PARAM-ONLY-UNSEEN | unknown | Skipped |
+| B-COMPETE-PARAM-HIGHER | unknown | Skipped |
+| C-EQUAL-ID2–ID7 (6) | unknown | Skipped |
+| B-CONFIDENCE-LITERAL-HIGHER | unknown | Skipped |
+| C-EQUAL-UPSERT-ID7 | unknown | Skipped |
+| NO-MONKEY-PATCHING | PASS | No modifications |
+| DIAGNOSTIC-GIT-LOG | PASS | Commits captured |
+| DIAGNOSTIC-BRANCH-COVERAGE | PASS | All branches checked |
+
+## Interpretation
+
+This experiment produced **no scientific measurement**. The BLOCKED status means the prerequisite (fix committed to production HEAD) remains unmet. The inherited state from the parent handoff is carried forward unchanged:
+
+- **Established**: Core hazard validated on unfixed HEAD (parent), baseline behavior on unfixed HEAD (parent), fix absent across all branches
+- **Rejected**: Post-commit hazard elimination claim (cannot test), any scientific falsification of the fix
+- **Unknown**: Whether fix survives commitment, whether baselines regress, whether upsert interacts with fix
+- **Do Not Assume**: Fix is committed, post-commit behavior matches monkey-patched behavior, production-readiness
+
+### Consecutive BLOCKED Pattern
+
+This is the third consecutive BLOCKED result. The kernel hash has not changed across any of the three runs. The fix has not appeared on any branch. This is an operational delay (fix not committed), not scientific closure (hypothesis not rejected).
+
+## Recommendation to Director
+
+The one-line fix must be committed with Director approval:
+
+```python
+# Line 112 of src/spider/kernel.py
+# BEFORE (current):
+candidates.sort(key=lambda m: m.confidence, reverse=True)
+# AFTER (fix):
+candidates.sort(key=lambda m: (m.confidence, len(m.parameter_slots)), reverse=True)
+```
+
+After fix commit, the exact same frozen spec (EXP-GRAPH-34320613096) should be re-executed against committed HEAD without monkey-patching. All 14 conditions are sufficient — no spec changes needed.
+```
+
+## provenance.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34320613096",
+  "lane": "graph",
+  "github_run_id": "34320613096",
+  "base_sha": "51c43f0f8d4641e91e8247071cad8bafb4f4dd81",
+  "head_commit": "da0ea6feb89b8c37235ba5dc2428ae2f2430718a",
+  "current_branch": "lab2/graph",
+  "kernel_file": {
+    "path": "src/spider/kernel.py",
+    "sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+    "l112_content": "candidates.sort(key=lambda m: m.confidence, reverse=True)",
+    "fix_present": false
+  },
+  "frozen_inputs": {
+    "request.json": {
+      "path": "research/experiments/EXP-GRAPH-34320613096/request.json",
+      "sha256": "635e45ce1c70234d773d59933bea81d8d5f2dcf35fb966ecc248c5ab948dd0f1"
+    },
+    "spec.json": {
+      "path": "research/experiments/EXP-GRAPH-34320613096/spec.json",
+      "sha256": "7801d6664a211bca1562c2366a090e966af2399ab56e5199dd8f4c47922698e6"
+    },
+    "prereg.md": {
+      "path": "research/experiments/EXP-GRAPH-34320613096/prereg.md",
+      "sha256": "137feb5f55304802573d33b00e13ad75527cb9a3301deae585fc1d7c77abb5e5"
+    },
+    "freeze.json": {
+      "path": "research/experiments/EXP-GRAPH-34320613096/freeze.json",
+      "sha256": "9949f2387099992891440e98848aac132544a17425bd99c8b2434853d4dde7bd"
+    }
+  },
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-34291967676",
+    "path": "research/experiments/EXP-GRAPH-34291967676/handoff.json",
+    "sha256": "8c9ab18ce8dbb83cd6eea32b5affb134af5a5bc773614c1d5ac1d850a3d0e183"
+  },
+  "produced_artifacts": {
+    "result.json": {
+      "path": "research/experiments/EXP-GRAPH-34320613096/result.json",
+      "sha256": "21a0557ba01f62d055e5773002a749b1be6ea6a2b2f34572d6cedad437f36465"
+    },
+    "report.md": {
+      "path": "research/experiments/EXP-GRAPH-34320613096/report.md",
+      "sha256": "71a01c129f68bd478eeae56857d4726276631e674b2f3a15e5e674b70c6b51e9"
+    },
+    "provenance.json": {
+      "path": "research/experiments/EXP-GRAPH-34320613096/provenance.json",
+      "sha256": "7fbac974b336b8bde6bab9324cd519578bf37d1a64d3838941028cd8260783d0"
+    },
+    "raw_evidence.json": {
+      "path": "research/experiments/EXP-GRAPH-34320613096/raw_evidence.json",
+      "sha256": "17272dd37ab6c0fd56d0d069aab9b3d95ff900a610286c5e383ca27d2e0259a0"
+    },
+    "execute_blocked.py": {
+      "path": "research/experiments/EXP-GRAPH-34320613096/execute_blocked.py",
+      "sha256": "00341b6cc2844d04e05da838b028048bdf77b78ad0002e5e91931396b50cafd6"
+    }
+  },
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.x",
+    "working_directory": "/home/runner/work/Spider/Spider",
+    "model_id": "opencode/mimo-v2.5-free",
+    "git_branches_checked": [
+      "lab2/graph",
+      "main",
+      "remotes/origin/archive/spider-codex-ultimate",
+      "remotes/origin/lab2/frontier",
+      "remotes/origin/lab2/graph",
+      "remotes/origin/lab2/intel",
+      "remotes/origin/lab2/physics",
+      "remotes/origin/lab2/product",
+      "remotes/origin/lab2/runtime",
+      "remotes/origin/main",
+      "remotes/origin/research2/bootstrap",
+      "remotes/origin/research2/codex-unification",
+      "remotes/origin/research2/hotfix-control-overlay"
+    ],
+    "total_branches_checked": 12,
+    "fix_found_on_any_branch": false
+  },
+  "execution_mode": "BLOCKED — no conditions executed, no HTTP requests made, no scientific measurement occurred"
+}
+```
+
+## audit.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34320613096",
+  "lane": "graph",
+  "status": "PASS",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Commit fix to src/spider/kernel.py L112: candidates.sort(key=lambda m: (m.confidence, len(m.parameter_slots)), reverse=True) with Director approval — prerequisite for SURVIVES_POST_COMMIT not met, verified by recomputed sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61 and L112 'candidates.sort(key=lambda m: m.confidence, reverse=True)' lacking len(parameter_slots) (result.json metrics.fix_present_in_committed_head=false, metrics.kernel_sha256=46929b3a..., metrics.kernel_l112_content matches recomputed, raw_evidence.json fix_verification.fix_present=false)",
+    "Re-run this exact frozen spec (6 baselines B-COLD/B-LITERAL-ONLY-ORIG/B-LITERAL-ONLY-UNSEEN/B-PARAM-ONLY-ORIG/B-PARAM-ONLY-UNSEEN/B-COMPETE-PARAM-HIGHER + 6 hazard C-EQUAL-ID2..7 at equal confidence 0.95 literal before param + 1 null B-CONFIDENCE-LITERAL-HIGHER literal 0.98 vs param 0.95 + 1 upsert C-EQUAL-UPSERT-ID7) against committed HEAD without monkey-patching to obtain confirmatory SURVIVES_POST_COMMIT measurement — no post-commit evidence exists in this BLOCKED run (metrics.conditions_executed=0, metrics.conditions_skipped=14)",
+    "Preserve measurement validity controls in next run: fresh kernel per condition, deterministic n=1, HTTP id verification against jsonplaceholder.typicode.com, registry insertion order literal before param (worst-case), upsert ordering by mechanism_id, no cross-contamination, 5s timeout — per spec.json measurement_validity and prereg.md 5.2-5.5"
+  ],
+  "validity_findings": [
+    {
+      "finding": "Fix verification correct — BLOCKED status justified per frozen decision rule",
+      "severity": "none",
+      "details": "Independent recompute confirms HEAD L112 is unfixed: src/spider/kernel.py sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61, line 112 'candidates.sort(key=lambda m: m.confidence, reverse=True)' lacking len(parameter_slots) and parameter_slots. result.json metrics.kernel_sha256 and metrics.kernel_l112_content match recomputed file hash and line; raw_evidence.json fix_verification.fix_present=false, sort_key_includes_parameter_slots=false, and kernel_file.sha256 match; provenance.json kernel_file.sha256 and kernel_file.l112_content and kernel_file.fix_present=false match; head_commit da0ea6feb89b8c37235ba5dc2428ae2f2430718a, base_sha 51c43f0f8d4641e91e8247071cad8bafb4f4dd81. Freeze hashes verified: request 635e45ce1c70234d773d59933bea81d8d5f2dcf35fb966ecc248c5ab948dd0f1, spec 7801d6664a211bca1562c2366a090e966af2399ab56e5199dd8f4c47922698e6, prereg 137feb5f55304802573d33b00e13ad75527cb9a3301deae585fc1d7c77abb5e5 all match recomputed sha256. Frozen spec falsifier (e) and decision_rule require status=BLOCKED when fix absent; producer correctly emits status=BLOCKED outcome=NOT_APPLICABLE rather than SUPPORTS or FALSIFIES and correctly skips all 14 conditions.",
+      "evidence": "src/spider/kernel.py L112 sha256 46929b3a..., result.json metrics.fix_present_in_committed_head false, metrics.kernel_sha256, metrics.kernel_l112_content, raw_evidence.json fix_verification, provenance.json kernel_file, freeze.json hashes"
+    },
+    {
+      "finding": "Producer does not misclassify BLOCKED as scientific falsification or infrastructure failure — RAW vs INTERPRETATION separation preserved",
+      "severity": "none",
+      "details": "BLOCKED vs FALSIFIED-POST-COMMIT vs MEASUREMENT_INVALID distinction preserved per EXPERIMENT_PACKET.md and AGENTS.md. Producer keeps RAW EVIDENCE (fix_verification and git_diagnostics only) distinct from OBSERVATIONS (fix absent, 0/14 executed, no changes to kernel hash) and DERIVED MEASUREMENTS (metrics.hazard_elimination_rate null, metrics.baseline_pass_rate null). INTERPRETATION correctly states no SURVIVES_POST_COMMIT or FALSIFIED-POST-COMMIT possible. No missing evidence turned into negative result; no infrastructure failure encoded as falsification (metrics.total_http_requests 0, metrics.total_exceptions 0). Report.md and result.json validity_notes correctly label BLOCKED as prerequisite unmet, not measurement invalidity. All 14 condition controls correctly show pass='unknown' (string) per contract null/unknown semantics distinct from pass/fail.",
+      "evidence": "result.json status BLOCKED outcome NOT_APPLICABLE, result.json metrics hazard_elimination_rate null baseline_pass_rate null, result.json controls FIX-PRESENCE pass false others unknown, result.json observations validity_notes unresolved, report.md Summary and Controls, raw_evidence.json fix_verification only"
+    },
+    {
+      "finding": "No monkey-patching, no registry contamination, execution fidelity preserved",
+      "severity": "none",
+      "details": "result.json controls.NO-MONKEY-PATCHING pass true observed 'No modifications detected', metrics.monkey_patching_detected false, raw_evidence.json monkey_patching_detected false, provenance.json not applicable but execution_mode BLOCKED — no conditions executed. src/spider/kernel.py inspected at audit time still unfixed and no runtime modification detected (kernel hash unchanged from parent experiments 46929b3a). Producer did not attempt to weaken preregistration after seeing outcomes. Independent replay of sort logic confirms theoretical fix behavior: equal confidence 0.95 literal before param -> unfixed literal wins (stable sort insertion-order tie-break), fixed param wins (len slots 0 vs 1); param 0.98 vs literal 0.95 -> param wins under both sorts; literal 0.98 vs param 0.95 -> literal wins under both sorts; upsert ordering sorted by mechanism_id literal before param then fixed sort still param wins. This confirms worst-case ordering is discriminating and environment could express effect after fix.",
+      "evidence": "result.json controls NO-MONKEY-PATCHING, metrics.monkey_patching_detected, raw_evidence.json monkey_patching_detected, src/spider/kernel.py L112, independent sort replay with Mechanism mocks"
+    },
+    {
+      "finding": "Target/split/sampling/representation integrity intact — no leakage, no inflation (within BLOCKED scope)",
+      "severity": "none",
+      "details": "No sampling or split: deterministic kernel-level test would use explicitly controlled registry contents with fresh kernel per condition and context params {id} if executed. No training leakage; mechanisms constructed de-novo per condition. Representation is template URL via _bind/${id} and parameter_slots; _template_slots/_bind verified in src/spider/kernel.py lines 19-49. Producer discloses representation loss in prereg 8.4-8.6 and validity_notes: single intent fetch-post, single endpoint /posts/{id}, preconditions={}, jsonplaceholder simple REST not real-web DOM/auth/session/drift, deterministic n=1, single endpoint. No inflated claim beyond this narrow scope attempted in this BLOCKED run. Branch sweep correctly checked 12 branches including lab2/graph, main, remotes/origin/* — none contain fix, matching raw_evidence.json fix_found_on_branches=[] and metrics.fix_found_on_any_branch false.",
+      "evidence": "prereg.md 5.2-5.5, prereg.md 8.4-8.7, spec.json measurement_validity, src/spider/kernel.py _matches/_bind/_template_slots, raw_evidence.json git_diagnostics.fix_found_on_branches"
+    },
+    {
+      "finding": "Measurement validity threat — HTTP execution not exercised in this run, but gate correctly prevented invalid measurement",
+      "severity": "none",
+      "details": "All 14 conditions skipped, so no HTTP against jsonplaceholder.typicode.com executed (metrics.total_http_requests 0, raw_evidence.json total_http_requests 0). This is correct per spec 5.1 gate and decision_rule BLOCKED: if fix absent skip all. No HTTP failures or exceptions to misclassify (metrics.total_exceptions 0, raw_evidence.json exceptions []). Had fix been present, HTTP execution would be required to verify bound_url id field; audit cannot verify liveness in this run but parent diagnostics and prior handoff established endpoint availability. No MEASUREMENT_INVALID needed.",
+      "evidence": "result.json metrics total_http_requests 0 total_exceptions 0, raw_evidence.json conditions_executed 0 total_http_requests 0, spec.json decision_rule BLOCKED, provenance.json execution_mode BLOCKED"
+    },
+    {
+      "finding": "Provenance and lineage intact — artifact hashes and parent handoff verified",
+      "severity": "none",
+      "details": "Provenance identifies github_run_id 34320613096, base_sha 51c43f0f8d4641e91e8247071cad8bafb4f4dd81, head_commit da0ea6feb89b8c37235ba5dc2428ae2f2430718a, current_branch lab2/graph, kernel sha256, platform linux python 3.x model opencode/mimo-v2.5-free. Artifacts list includes raw_evidence.json sha256 17272dd37ab6c0fd56d0d069aab9b3d95ff900a610286c5e383ca27d2e0259a0 recomputed match, execute_blocked.py sha256 00341b6cc2844d04e05da838b028048bdf77b78ad0002e5e91931396b50cafd6, src/spider/kernel.py sha256 46929b3a... recomputed. Request parent_handoff path research/experiments/EXP-GRAPH-34291967676/handoff.json sha256 8c9ab18ce8dbb83cd6eea32b5affb134af5a5bc773614c1d5ac1d850a3d0e183. No post-freeze spec change (freeze hashes match). Execution_checkpoint github_run_id matches provenance.",
+      "evidence": "provenance.json, request.json parent_handoff, raw_evidence.json sha256, result.json artifacts, execution_checkpoint.json"
+    },
+    {
+      "finding": "Metric/control identifier preservation verified — no renaming to hide disagreement",
+      "severity": "none",
+      "details": "Producer preserves frozen identifiers: FIX-PRESENCE, B-COLD, B-LITERAL-ONLY-ORIG, B-LITERAL-ONLY-UNSEEN, B-PARAM-ONLY-ORIG, B-PARAM-ONLY-UNSEEN, B-COMPETE-PARAM-HIGHER, C-EQUAL-ID2..7, B-CONFIDENCE-LITERAL-HIGHER, C-EQUAL-UPSERT-ID7, NO-MONKEY-PATCHING, DIAGNOSTIC-GIT-LOG, DIAGNOSTIC-BRANCH-COVERAGE matching spec.json baselines/positive_control/null_control and prereg conditions. Metrics names fix_present_in_committed_head, kernel_l112_content, kernel_sha256, conditions_executed, conditions_skipped, hazard_elimination_rate, baseline_pass_rate, total_http_requests, total_exceptions, monkey_patching_detected, fix_found_on_any_branch, branches_checked, uncommitted_changes_to_kernel match prereg 6.1/6.2. All controls correctly use pass false for fix_presence and pass 'unknown' string for unmeasured conditions per contract.",
+      "evidence": "spec.json baselines/positive_control/null_control/falsifier vs result.json controls keys and metrics keys"
+    },
+    {
+      "finding": "Consecutive BLOCKED pattern correctly reported — third of three, no hash drift",
+      "severity": "none",
+      "details": "Producer correctly identifies this as third consecutive BLOCKED result (EXP-GRAPH-34244445713, EXP-GRAPH-34291967676, EXP-GRAPH-34320613096) on same kernel hash 46929b3a. Recomputed git diagnostics confirm only 2 commits touch kernel.py on current branch (1e6f32b, 6a13e20) and 14 commits across all branches none include fix. No uncommitted changes (metrics.uncommitted_changes_to_kernel false). This is operational delay not scientific closure, correctly preserved as do_not_assume in parent handoff.",
+      "evidence": "result.json observations 'third consecutive BLOCKED', raw_evidence.json git_diagnostics.recent_commits_current_branch/all_branches, metrics.uncommitted_changes_to_kernel false"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "FIX-PRESENCE (gate)",
+      "expected": "src/spider/kernel.py L112 sort key includes len(parameter_slots)",
+      "observed": "L112 is 'candidates.sort(key=lambda m: m.confidence, reverse=True)' — no parameter_slots in sort key, sha256 46929b3a",
+      "pass": false,
+      "recomputed": true,
+      "evidence": "result.json controls.FIX-PRESENCE pass false observed L112 content, raw_evidence.json fix_verification.fix_present false, recomputed L112 lacks len(parameter_slots)"
+    },
+    {
+      "baseline_id": "B-COLD",
+      "expected": "UNKNOWN with empty registry intent fetch-post",
+      "observed": null,
+      "pass": "unknown",
+      "recomputed": true,
+      "evidence": "result.json controls.B-COLD observed null pass unknown evidence_ref skipped — BLOCKED gate — correctly skipped"
+    },
+    {
+      "baseline_id": "B-LITERAL-ONLY-ORIG",
+      "expected": "EXECUTABLE url=/posts/1 HTTP 200 id=1 for context id=1",
+      "observed": null,
+      "pass": "unknown",
+      "recomputed": true,
+      "evidence": "result.json controls.B-LITERAL-ONLY-ORIG observed null pass unknown — correctly not executed due to BLOCKED"
+    },
+    {
+      "baseline_id": "B-LITERAL-ONLY-UNSEEN",
+      "expected": "EXECUTABLE url=/posts/1 HTTP 200 id=1 for unseen id=7 (literal does not generalize)",
+      "observed": null,
+      "pass": "unknown",
+      "recomputed": true,
+      "evidence": "result.json controls.B-LITERAL-ONLY-UNSEEN observed null pass unknown — correctly skipped"
+    },
+    {
+      "baseline_id": "B-PARAM-ONLY-ORIG",
+      "expected": "EXECUTABLE url=/posts/1 HTTP 200 id=1 for id=1",
+      "observed": null,
+      "pass": "unknown",
+      "recomputed": true,
+      "evidence": "result.json controls.B-PARAM-ONLY-ORIG observed null pass unknown — correctly skipped"
+    },
+    {
+      "baseline_id": "B-PARAM-ONLY-UNSEEN",
+      "expected": "EXECUTABLE url=/posts/7 HTTP 200 id=7 for unseen id=7 (param generalizes)",
+      "observed": null,
+      "pass": "unknown",
+      "recomputed": true,
+      "evidence": "result.json controls.B-PARAM-ONLY-UNSEEN observed null pass unknown — correctly skipped"
+    },
+    {
+      "baseline_id": "B-COMPETE-PARAM-HIGHER (positive_control)",
+      "expected": "EXECUTABLE url=/posts/7 HTTP 200 id=7 when param 0.98 > literal 0.95 for id=7",
+      "observed": null,
+      "pass": "unknown",
+      "recomputed": true,
+      "evidence": "result.json controls.B-COMPETE-PARAM-HIGHER observed null pass unknown — correctly skipped; parent unfixed HEAD showed param wins, preservation untestable in BLOCKED run"
+    },
+    {
+      "baseline_id": "C-EQUAL-ID2..7 (core hazard, 6 conditions equal confidence 0.95 literal before param)",
+      "expected": "param wins url=/posts/{id} HTTP 200 id={id} for each id 2-7 post-fix",
+      "observed": null,
+      "pass": "unknown",
+      "recomputed": true,
+      "evidence": "result.json controls C-EQUAL-ID2..7 all observed null pass unknown — correctly not measured due to BLOCKED; parent diagnostic on unfixed HEAD showed 0/6 param wins (6/6 literal wins) confirming hazard persists without fix"
+    },
+    {
+      "baseline_id": "B-CONFIDENCE-LITERAL-HIGHER (null_control)",
+      "expected": "literal wins url=/posts/1 HTTP 200 id=1 when literal 0.98 > param 0.95",
+      "observed": null,
+      "pass": "unknown",
+      "recomputed": true,
+      "evidence": "result.json controls.B-CONFIDENCE-LITERAL-HIGHER observed null pass unknown — correctly skipped; preservation of strict confidence ordering not tested in BLOCKED run, parent showed literal wins"
+    },
+    {
+      "baseline_id": "C-EQUAL-UPSERT-ID7 (upsert compatibility)",
+      "expected": "param wins url=/posts/7 HTTP 200 id=7 via upsert ordering",
+      "observed": null,
+      "pass": "unknown",
+      "recomputed": true,
+      "evidence": "result.json controls.C-EQUAL-UPSERT-ID7 observed null pass unknown — new condition vs parent, not measured in BLOCKED run; independent replay confirms fixed sort would still resolve to param under upsert sorted-by-mechanism_id ordering"
+    },
+    {
+      "baseline_id": "NO-MONKEY-PATCHING",
+      "expected": "No runtime modification of kernel.py",
+      "observed": "No modifications detected; experiment did not execute any conditions",
+      "pass": true,
+      "recomputed": true,
+      "evidence": "result.json controls.NO-MONKEY-PATCHING pass true, metrics.monkey_patching_detected false, raw_evidence.json monkey_patching_detected false"
+    },
+    {
+      "baseline_id": "DIAGNOSTIC-GIT-LOG",
+      "expected": "Recent commits touching kernel.py captured",
+      "observed": "2 commits on current branch, 14 commits across all branches — none include the parameter_slots fix",
+      "pass": true,
+      "recomputed": true,
+      "evidence": "result.json controls.DIAGNOSTIC-GIT-LOG pass true, raw_evidence.json git_diagnostics.recent_commits_current_branch/all_branches"
+    },
+    {
+      "baseline_id": "DIAGNOSTIC-BRANCH-COVERAGE",
+      "expected": "Fix checked on all accessible branches",
+      "observed": "12 branches checked, fix found on NONE",
+      "pass": true,
+      "recomputed": true,
+      "evidence": "result.json controls.DIAGNOSTIC-BRANCH-COVERAGE pass true, metrics.branches_checked 12 branches, metrics.fix_found_on_any_branch false, raw_evidence.json git_diagnostics.fix_found_on_branches=[]"
+    }
+  ],
+  "recomputed_metrics": {
+    "fix_present_in_committed_head": false,
+    "fix_present_in_committed_head_recomputed": false,
+    "kernel_l112_content": "candidates.sort(key=lambda m: m.confidence, reverse=True)",
+    "kernel_l112_content_recomputed": "candidates.sort(key=lambda m: m.confidence, reverse=True)",
+    "kernel_sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+    "kernel_sha256_recomputed": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+    "conditions_executed": 0,
+    "conditions_executed_recomputed": 0,
+    "conditions_skipped": 14,
+    "conditions_skipped_recomputed": 14,
+    "hazard_elimination_rate": null,
+    "hazard_elimination_rate_recomputed": null,
+    "baseline_pass_rate": null,
+    "baseline_pass_rate_recomputed": null,
+    "total_http_requests": 0,
+    "total_http_requests_recomputed": 0,
+    "total_exceptions": 0,
+    "total_exceptions_recomputed": 0,
+    "monkey_patching_detected": false,
+    "monkey_patching_detected_recomputed": false,
+    "fix_found_on_any_branch": false,
+    "fix_found_on_any_branch_recomputed": false,
+    "uncommitted_changes_to_kernel": false,
+    "uncommitted_changes_to_kernel_recomputed": false,
+    "recompute_notes": "Independent recompute via sha256sum and sed -n 112p confirms kernel hash and L112 content match producer. branches_checked 12 recomputed via git branch -a, fix sweep via git show */src/spider/kernel.py grep len(parameter_slots) yields 0 matches. All 14 condition controls correctly show FIX-PRESENCE fail and others unknown due to BLOCKED gate. hazard_elimination_rate and baseline_pass_rate correctly null not 0 or 1. Sort-logic replay confirms fix would yield 6/6 hazard elimination and preserve confidence ordering, but not tested in committed HEAD."
+  },
+  "claim_ceiling": "MAX JUSTIFIED CEILING: BLOCKED — no SURVIVES_POST_COMMIT claim for C-PARAM-INHERIT. Established only: (1) fix NOT present in committed HEAD src/spider/kernel.py L112 (sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61, line 'candidates.sort(key=lambda m: m.confidence, reverse=True)'); (2) 0/14 conditions executed, 14/14 skipped per frozen decision rule 9.3 — no post-commit evidence for 6/6 baselines, 6/6 hazard elimination rate, null control B_CONFIDENCE_LITERAL_HIGHER, or upsert compatibility C-EQUAL-UPSERT-ID7 in this run; (3) prior diagnostic on unfixed HEAD from parent EXP-GRAPH-34291967676 handoff remains the only evidence: 6/6 baselines pass, null control literal 0.98 beats param 0.95, core hazard 0/6 param wins (6/6 literal wins) confirming systematic insertion-order tie-break without fix, 13/13 HTTP successes. NOT established: fix effectiveness post-commit, tie-break on len(parameter_slots), baseline preservation after fix, confidence ordering under new sort key, upsert interaction, generalization beyond jsonplaceholder /posts/{id} single intent fetch-post preconditions={} deterministic n=1, real-web DOM/auth/session/drift, LLM distillation, multi-intent, non-empty preconditions. Third consecutive BLOCKED (EXP-GRAPH-34244445713, EXP-GRAPH-34291967676, EXP-GRAPH-34320613096) — operational delay not scientific closure.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-34320613096/request.json sha256 635e45ce1c70234d773d59933bea81d8d5f2dcf35fb966ecc248c5ab948dd0f1",
+    "research/experiments/EXP-GRAPH-34320613096/spec.json sha256 7801d6664a211bca1562c2366a090e966af2399ab56e5199dd8f4c47922698e6",
+    "research/experiments/EXP-GRAPH-34320613096/prereg.md sha256 137feb5f55304802573d33b00e13ad75527cb9a3301deae585fc1d7c77abb5e5",
+    "research/experiments/EXP-GRAPH-34320613096/freeze.json sha256 9949f2387099992891440e98848aac132544a17425bd99c8b2434853d4dde7bd",
+    "research/experiments/EXP-GRAPH-34320613096/result.json sha256 708d1a810bbcd5ba6020ca44be175d974eb6fb997bfdd1359eebe0f18eafe867",
+    "research/experiments/EXP-GRAPH-34320613096/raw_evidence.json sha256 17272dd37ab6c0fd56d0d069aab9b3d95ff900a610286c5e383ca27d2e0259a0",
+    "research/experiments/EXP-GRAPH-34320613096/provenance.json sha256 75ddd4c38881b2840ff80991e7dd82b7267ac98d4be20ee312693676af8171b2",
+    "research/experiments/EXP-GRAPH-34320613096/report.md sha256 71a01c129f68bd478eeae56857d4726276631e674b2f3a15e5e674b70c6b51e9",
+    "research/experiments/EXP-GRAPH-34320613096/execute_blocked.py sha256 00341b6cc2844d04e05da838b028048bdf77b78ad0002e5e91931396b50cafd6",
+    "src/spider/kernel.py sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61 L112 candidates.sort(key=lambda m: m.confidence, reverse=True)",
+    "research/experiments/EXP-GRAPH-34291967676/handoff.json sha256 8c9ab18ce8dbb83cd6eea32b5affb134af5a5bc773614c1d5ac1d850a3d0e183 parent BLOCKED",
+    "research/experiments/EXP-GRAPH-34291967676/result.json parent diagnostic 6/6 baselines 0/6 hazard",
+    "src/spider/models.py parameter_slots field",
+    "src/spider/registry.py upsert sorted by mechanism_id"
+  ],
+  "unresolved": [
+    "Why has the one-line fix not been committed after three consecutive BLOCKED results? Is this a deliberate decision, an oversight, or a dependency on another lane's work?",
+    "Does any open PR or draft branch contain the fix but not yet merged? (GitHub API not available from this environment — raw_evidence.json notes diagnostic limitation)",
+    "Is there a blocking dependency (e.g., runtime lane or product lane gate) preventing the fix commit?",
+    "Whether the fix survives commitment to production HEAD and resolves the hazard for all unseen ids 2-7 without monkey-patching (untestable until fix committed)",
+    "Whether all 6 baselines remain passing after fix commit (untestable from BLOCKED run)",
+    "Whether B_CONFIDENCE_LITERAL_HIGHER remains literal-winning after fix commit (strict confidence ordering under new sort key)",
+    "Whether fix generalizes to real-web endpoints with DOM, auth, session state, drift — jsonplaceholder is simple REST",
+    "Whether registry upsert sorting interacts with fix tie-break differently than replace() (independent replay suggests no interaction, but requires committed-HEAD measurement)",
+    "Whether LLM-driven mechanism distillation half of C-PARAM-INHERIT works (no model calls in this experiment)"
+  ]
+}
+```
+
+## verdict.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34320613096",
+  "lane": "graph",
+  "decision": "BLOCKED",
+  "claim_updates": [
+    {
+      "claim_id": "C-PARAM-INHERIT",
+      "status": "BLOCKED",
+      "reason": "Third consecutive BLOCKED result: fix NOT present in committed HEAD src/spider/kernel.py L112 (sha256 46929b3a, line 'candidates.sort(key=lambda m: m.confidence, reverse=True)'). 0/14 conditions executed per frozen decision rule 9.3. No post-commit evidence exists for hazard elimination, baseline preservation, confidence ordering, or upsert compatibility. The prerequisite (one-line fix committed with Director approval) remains unmet. This is operational delay (fix not committed), not scientific closure (hypothesis not rejected)."
+    }
+  ],
+  "product_action": "NONE — BLOCKED status means no scientific measurement occurred, no product evidence produced. Fix must be committed before C-PARAM-INHERIT can advance to post-commit testing.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "After committing the parameter-slot-count fix to production HEAD (src/spider/kernel.py L112 sort key includes len(parameter_slots)), does the literal-vs-param equal-confidence competition resolve to param for all unseen ids 2-7 without monkey-patching, do all 6 baseline conditions pass, does the corrected B_CONFIDENCE_LITERAL_HIGHER condition (literal 0.98 > param 0.95) remain literal-winning, and does the fix interact correctly with registry upsert sorting (production-like ordering)?",
+  "reason": "Auditor PASS confirms producer correctly executed BLOCKED protocol: fix verification via independent recompute (kernel sha256 46929b3a, L112 content matches), all 14 condition controls correctly show fix_presence fail and others unknown, no metric inflation, no identifier renaming, provenance and lineage intact. Producer correctly did not misclassify BLOCKED as FALSIFIED or SUPPORTS. No scientific measurement occurred (0 conditions executed, 0 HTTP requests). The fix absent state is confirmed by 12-branch sweep (fix found on NONE), git diagnostics (14 commits across branches, none include fix), and clean working tree. Third consecutive BLOCKED on same kernel hash — the one-line fix must be committed with Director approval before re-running the exact frozen spec.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-34320613096/result.json — status BLOCKED, outcome NOT_APPLICABLE, metrics.fix_present_in_committed_head=false, 0/14 conditions executed",
+    "research/experiments/EXP-GRAPH-34320613096/audit.json — status PASS, producer_claim_supported=false, claim_ceiling BLOCKED, all controls verified",
+    "research/experiments/EXP-GRAPH-34320613096/raw_evidence.json — fix_verification.fix_present=false, git_diagnostics fix_found_on_branches=[], 12 branches checked",
+    "research/experiments/EXP-GRAPH-34320613096/report.md — BLOCKED execution report, third consecutive BLOCKED, recommendation to commit fix",
+    "src/spider/kernel.py sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61 L112 — unfixed sort key",
+    "research/experiments/EXP-GRAPH-34291967676/handoff.json sha256 8c9ab18ce8dbb83cd6eea32b5affb134af5a5bc773614c1d5ac1d850a3d0e183 — parent BLOCKED handoff",
+    "research/experiments/EXP-GRAPH-34320613096/freeze.json — frozen inputs verified, no post-freeze spec change",
+    "research/experiments/EXP-GRAPH-34320613096/provenance.json — github_run_id=34320613096, kernel sha256, branch coverage"
+  ]
+}
+```
+
+## handoff.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34320613096",
+  "lane": "graph",
+  "target_lane": "graph",
+  "next_question": "After committing the parameter-slot-count fix to production HEAD (src/spider/kernel.py L112 sort key includes len(parameter_slots)), does the literal-vs-param equal-confidence competition resolve to param for all unseen ids 2-7 without monkey-patching, do all 6 baseline conditions pass, does the corrected B_CONFIDENCE_LITERAL_HIGHER condition (literal 0.98 > param 0.95) remain literal-winning, and does the fix interact correctly with registry upsert sorting (production-like ordering)?",
+  "why_next": "Third consecutive BLOCKED result — fix prerequisite still not met after three consecutive BLOCKED results (EXP-GRAPH-34244445713, EXP-GRAPH-34291967676, EXP-GRAPH-34320613096). Fix NOT present in committed HEAD (kernel sha256 46929b3a, L112 still 'candidates.sort(key=lambda m: m.confidence, reverse=True)'). 0/14 conditions executed per frozen BLOCKED decision rule. No post-commit evidence exists. The one-line fix must be committed with Director approval before the same frozen spec can be re-run to obtain confirmatory SURVIVES_POST_COMMIT measurement. The graph lane cannot advance C-PARAM-INHERIT without this prerequisite. If fix remains uncommitted after a fourth attempt, Director should consider closing C-PARAM-INHERIT with rationale or pivoting to an orthogonal question.",
+  "carry_forward": {
+    "established": [
+      "Fix NOT present in committed HEAD src/spider/kernel.py L112 — verified independently by producer and auditor across three consecutive BLOCKED experiments: kernel sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61, line 112 'candidates.sort(key=lambda m: m.confidence, reverse=True)', no len(parameter_slots) in sort key. Same state across all three experiments — fix has not been committed despite three BLOCKED results.",
+      "BLOCKED status correctly applied per frozen decision rule 9.3 across all three runs: fix absent → status=BLOCKED, outcome=NOT_APPLICABLE, 0/14 conditions executed, all 14 skipped. Producer correctly did not misclassify BLOCKED as FALSIFIED or SUPPORTS.",
+      "Parent experiment diagnostic results remain the only evidence: 6/6 baselines pass on unfixed HEAD (B-COLD UNKNOWN, literal-only orig/unseen /posts/1 id=1, param-only orig /posts/1 id=1 unseen /posts/7 id=7, compete-param-higher param 0.98 beats literal 0.95 → /posts/7 id=7), null control literal 0.98 beats param 0.95 → /posts/1 id=1, core hazard 0/6 param wins (6/6 literal wins at equal confidence 0.95 with literal registered first). All 13/13 HTTP successes against jsonplaceholder. These are diagnostic on unfixed HEAD, not evidence against fix effectiveness.",
+      "No infrastructure failures, no exceptions, no monkey-patching across all three runs. Measurement validity controls preserved: fresh kernel per condition, deterministic n=1, HTTP id verification, registry insertion order literal before param (worst-case), no cross-contamination.",
+      "Auditor PASS on all three runs confirms: recomputed kernel hash matches producer, L112 content matches producer, all 14 controls correctly show fix_presence fail and others unknown, no metric inflation, no identifier renaming, provenance and lineage intact.",
+      "12-branch sweep confirms fix absent on ALL branches: lab2/graph, main, lab2/frontier, lab2/intel, lab2/physics, lab2/product, lab2/runtime, research2/bootstrap, research2/codex-unification, research2/hotfix-control-overlay, plus remotes. Fix found on NONE."
+    ],
+    "rejected": [
+      "Post-commit hazard elimination claim (C-PARAM-INHERIT SURVIVES_POST_COMMIT) — fix not committed, prerequisite unmet, cannot test",
+      "Any scientific falsification of the fix (diagnostic hazard results on unfixed HEAD from parent experiment are expected behavior without fix, not evidence against fix effectiveness)",
+      "FALSIFIED_POST_COMMIT status — not applicable because fix is absent; FALSIFIED requires fix present but failing"
+    ],
+    "unknown": [
+      "Whether the fix survives commitment to production HEAD and resolves the hazard for all unseen ids 2-7 without monkey-patching",
+      "Whether all 6 baselines remain passing after fix commit (cannot be tested from BLOCKED run)",
+      "Whether B_CONFIDENCE_LITERAL_HIGHER remains literal-winning after fix commit (strict confidence ordering under new sort key with len(parameter_slots) as secondary key)",
+      "Whether param generalization holds across multiple unseen ids beyond 2-7 in committed HEAD",
+      "Whether fix generalizes to real-web endpoints with DOM, auth, session state, drift (jsonplaceholder is simple REST)",
+      "Whether registry upsert sorting (production) interacts with fix tie-break differently than replace()",
+      "Whether LLM-driven mechanism distillation half of C-PARAM-INHERIT works (no model calls in this experiment)",
+      "Why the one-line fix has not been committed after three consecutive BLOCKED results — is this deliberate, an oversight, or blocked by another lane's dependency?"
+    ],
+    "do_not_assume": [
+      "Fix is committed (verified unfixed across three experiments — kernel sha256 46929b3a unchanged)",
+      "Post-commit behavior matches monkey-patched behavior (no monkey-patching used; fix must be in committed code)",
+      "Core hazard test results on unfixed HEAD (0/6 param wins) constitute falsification of the fix (they are diagnostic on unfixed HEAD, expected behavior without fix)",
+      "Production-readiness (jsonplaceholder is simple REST; no DOM, auth, session state, drift)",
+      "Generalization beyond single intent (fetch-post), single endpoint (/posts/{id}), preconditions={}, deterministic n=1",
+      "Fix was applied or tested in any way (experiment ran on committed HEAD exactly as designed, no modification)",
+      "BLOCKED status means the underlying hypothesis is false (BLOCKED means prerequisite unmet, not hypothesis rejected)",
+      "Three BLOCKED results means the fix will never be committed (operational delay, not scientific closure)",
+      "The fix would work if committed (theoretical sort replay suggests it would, but no committed-HEAD measurement exists)"
+    ]
+  },
+  "dependencies": [
+    "The one-line fix must be committed to src/spider/kernel.py L112: candidates.sort(key=lambda m: (m.confidence, len(m.parameter_slots)), reverse=True) with Director approval",
+    "After fix commit, the exact same frozen spec must be re-executed against committed HEAD without monkey-patching to obtain SURVIVES_POST_COMMIT measurement",
+    "Measurement validity controls must be preserved: fresh kernel per condition, deterministic n=1, HTTP id verification against jsonplaceholder.typicode.com, registry insertion order literal before param (worst-case), upsert ordering by mechanism_id, no cross-contamination, 5s timeout"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-34320613096/result.json sha256 708d1a810bbcd5ba6020ca44be175d974eb6fb997bfdd1359eebe0f18eafe867 — BLOCKED, 0/14 executed",
+    "research/experiments/EXP-GRAPH-34320613096/audit.json — PASS, producer_claim_supported=false, claim_ceiling BLOCKED",
+    "research/experiments/EXP-GRAPH-34320613096/raw_evidence.json sha256 17272dd37ab6c0fd56d0d069aab9b3d95ff900a610286c5e383ca27d2e0259a0 — fix_verification, git_diagnostics",
+    "research/experiments/EXP-GRAPH-34320613096/report.md sha256 71a01c129f68bd478eeae56857d4726276631e674b2f3a15e5e674b70c6b51e9 — BLOCKED report, third consecutive",
+    "src/spider/kernel.py sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61 L112 — unfixed sort key",
+    "research/experiments/EXP-GRAPH-34291967676/handoff.json sha256 8c9ab18ce8dbb83cd6eea32b5affb134af5a5bc773614c1d5ac1d850a3d0e183 — parent BLOCKED handoff",
+    "research/experiments/EXP-GRAPH-34244445713/handoff.json — grandparent BLOCKED handoff (first consecutive BLOCKED)",
+    "research/experiments/EXP-GRAPH-34320613096/freeze.json — frozen inputs verified",
+    "research/experiments/EXP-GRAPH-34320613096/provenance.json — github_run_id=34320613096, kernel sha256, branch coverage"
+  ],
+  "recommended_action": "Commit the one-line fix to src/spider/kernel.py L112: candidates.sort(key=lambda m: (m.confidence, len(m.parameter_slots)), reverse=True) with Director approval. This is the third consecutive BLOCKED result confirming the prerequisite is unmet. After fix commit, re-run the exact same frozen spec against committed HEAD without monkey-patching. All 14 conditions (6 baselines, 6 core hazard, 1 null control, 1 upsert compatibility) are sufficient — no spec changes needed. If fix remains uncommitted after this handoff, Director should either (a) commit the fix directly or (b) close C-PARAM-INHERIT with explicit rationale and pivot the graph lane to an orthogonal high-upside question (e.g., C-SEMANTIC-RESOLVE or C-FRESHNESS)."
 }
 ```
 
