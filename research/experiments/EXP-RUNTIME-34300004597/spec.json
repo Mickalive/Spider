@@ -1,17 +1,31 @@
 {
   "experiment_id": "EXP-RUNTIME-34300004597",
   "lane": "runtime",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "Does the HTTP fingerprint substrate maintain full-vector discrimination and incremental header value on a real OAuth/OIDC identity provider (self-hosted Keycloak) where Cache-Control and Set-Cookie patterns are determined by the IdP middleware rather than application-set per auth state?",
+  "hypothesis": "When Keycloak returns identical error bodies for expired_token and invalid_token states, but Cache-Control varies by error type (no-store for expired, no-cache for invalid) and Set-Cookie is present only for valid_token, the full fingerprint vector (status + filtered headers + body hash) achieves discrimination greater than B-BODY-ONLY. This is the ecological validity test: if the V4-engineered-header-tautology constraint from EXP-RUNTIME-34054515149 limits product applicability, this experiment will show full == body (no incremental header value). If the IdP naturally varies these headers, full > body and the product recommendation transfers.",
+  "falsifier": "full_vector_discrimination == B-BODY-ONLY (Cache-Control and Set-Cookie add no incremental discrimination on real IdP), OR full_vector_discrimination <= 0.5 (fails primary threshold), OR null FP > 5% (measurement instability), OR Cache-Control-only discrimination == 0 (IdP does not vary Cache-Control by auth state), OR Keycloak deployment fails (infrastructure failure, not scientific falsification)",
+  "baselines": [
+    "B-STATUS-ONLY: fingerprint from HTTP status code only (expected: ~0.5, since 4 states map to 2 statuses: 200 for valid, 401 for the other three)",
+    "B-BODY-ONLY: fingerprint from response body hash only (expected: < 1.0 because expired/invalid share identical body, so body-only distinguishes at most 3 groups)",
+    "B-URL-HASH: fingerprint from URL hash only (expected: 0.0, all requests to same endpoint)",
+    "B-RANDOM: random 256-bit fingerprints (expected: ~0.0)"
+  ],
+  "positive_control": "Cache-Control-only discrimination > 0: Keycloak varies Cache-Control header by auth state (e.g., no-store for expired_token, no-cache for invalid_token, absent for no_auth/valid_token). This is the V4 tautology test — if Cache-Control is constant or absent across all states, the IdP does not provide the header variation that was by construction in Flask.",
+  "null_control": "B-RANDOM discrimination ~ 0.0: random fingerprints should not achieve meaningful discrimination. Verifies measurement pipeline stability.",
+  "measurement_validity": [
+    "Keycloak 25.x deployed via Docker on localhost, realm configured with 4 auth states",
+    "expired_token and invalid_token return IDENTICAL error bodies (same as parent Flask design)",
+    "Headers filtered: Date/Server/X-Request-Id excluded from fingerprint (inherited from parent)",
+    "Cache-Control and Set-Cookie are IdP-determined, not application-set (key difference from Flask parent)",
+    "Deterministic SHA-256(repr((status, tuple(sorted(filtered_headers.items())), body_sha256, ''))) on Python 3.12.14",
+    "N=40 (4 states x 10 requests), seed 44 for comparability with parent",
+    "Natural network jitter (no synthetic jitter applied — IdP responses have their own timing)",
+    "ETag is body-correlated (W/body_sha) — expected to be redundant with body hash"
+  ],
+  "decision_rule": "If ALL of: (1) full_vector_discrimination > B-BODY-ONLY, (2) full_vector_discrimination > 0.5, (3) null FP < 5%, (4) Cache-Control-only discrimination > 0, then verdict = SURVIVES_CURRENT_TEST for C-MEAS-VALID. If full_vector_discrimination == B-BODY-ONLY OR Cache-Control-only discrimination == 0, verdict = FALSIFIED-IN-SETTING (headers add no incremental value on real IdP — V4 tautology confirmed). If full_vector_discrimination <= 0.5 OR null FP > 5%, verdict = MEASUREMENT_INVALID. If Keycloak deployment fails, verdict = BLOCKED with infrastructure diagnosis.",
+  "product_consequence_positive": "Headers provide incremental value over body-only observation on a real OAuth/OIDC provider. The product architecture recommendation to use full vector (status + headers + body) is ecologically valid and transfers beyond the synthetic Flask pattern. External agents using SPIDER should include headers in their fingerprint.",
+  "product_consequence_negative": "Headers add no incremental value over body-only observation on a real OAuth/OIDC provider. The V4-engineered-header-tautology constraint limits product applicability: the incremental value seen in Flask was an artifact of application-set headers, not a property of real IdP behavior. Product architecture can safely use body-only observation, reducing fingerprint storage and computation. The full-vector recommendation does not transfer.",
+  "estimated_cost": "Medium: requires Docker deployment of Keycloak (~2-5 min startup), OIDC realm configuration, 40 HTTP requests. No model calls, no browser automation. Total wall-clock ~10-15 min.",
+  "expected_information_gain": "Very high: directly resolves the critical unknown blocking product architecture finalization. This is the ecological validity test that the parent V4 audit identified as the highest-priority next step. A positive result validates the product recommendation; a negative result falsifies it and redirects to body-only architecture. Either outcome changes a concrete product decision."
 }
