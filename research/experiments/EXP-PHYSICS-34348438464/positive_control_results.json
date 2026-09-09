@@ -1,0 +1,29 @@
+{
+  "positive_control": {
+    "url_only": {
+      "mean_pmi": 0.6933101309975662,
+      "N": 500,
+      "unique_states": 3,
+      "unique_sa_pairs": 12,
+      "permutation_p": 0.009900990099009901,
+      "effect_size_d": 79.19384247835495
+    },
+    "url_title": {
+      "mean_pmi": 1.9701557636973992,
+      "N": 500,
+      "unique_states": 8,
+      "unique_sa_pairs": 32,
+      "permutation_p": 0.009900990099009901,
+      "effect_size_d": 81.0216220440594
+    },
+    "url_title_form": {
+      "mean_pmi": 1.9701557636973992,
+      "N": 500,
+      "unique_states": 8,
+      "unique_sa_pairs": 32,
+      "permutation_p": 0.009900990099009901,
+      "effect_size_d": 81.0216220440594
+    }
+  },
+  "passes": true
+}

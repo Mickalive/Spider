@@ -1,0 +1,32 @@
+{
+  "url_only": {
+    "mean_pmi": 0.6933101309975662,
+    "N": 500,
+    "unique_states": 3,
+    "unique_sa_pairs": 12,
+    "perm_p": 0.000999000999000999,
+    "perm_null_mean": 0.018275886764178906,
+    "perm_null_std": 0.007448332108849864,
+    "effect_d": 90.62891320747282
+  },
+  "url_title": {
+    "mean_pmi": 1.9701557636973992,
+    "N": 500,
+    "unique_states": 8,
+    "unique_sa_pairs": 32,
+    "perm_p": 0.000999000999000999,
+    "perm_null_mean": 0.11545811440952936,
+    "perm_null_std": 0.01998747486930672,
+    "effect_d": 92.79299468368521
+  },
+  "url_title_form": {
+    "mean_pmi": 1.9701557636973992,
+    "N": 500,
+    "unique_states": 8,
+    "unique_sa_pairs": 32,
+    "perm_p": 0.000999000999000999,
+    "perm_null_mean": 0.11545811440952936,
+    "perm_null_std": 0.01998747486930672,
+    "effect_d": 92.79299468368521
+  }
+}

@@ -1,0 +1,4668 @@
+{
+  "github": {
+    "name": "GitHub",
+    "raw_transitions": [
+      {
+        "trajectory_id": 0,
+        "step": 0,
+        "state_before": {
+          "url": "https://github.com/",
+          "title": "GitHub \u00b7 Change is constant. GitHub keeps you ahead. \u00b7 GitHub",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/apps/desktop"
+        },
+        "state_after": {
+          "url": "https://github.com/apps/desktop",
+          "title": "GitHub Desktop | Simple collaboration from your desktop \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 0,
+        "step": 1,
+        "state_before": {
+          "url": "https://github.com/apps/desktop",
+          "title": "GitHub Desktop | Simple collaboration from your desktop \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/"
+        },
+        "state_after": {
+          "url": "https://github.com/",
+          "title": "GitHub \u00b7 Change is constant. GitHub keeps you ahead. \u00b7 GitHub",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 0,
+        "step": 2,
+        "state_before": {
+          "url": "https://github.com/",
+          "title": "GitHub \u00b7 Change is constant. GitHub keeps you ahead. \u00b7 GitHub",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/pricing"
+        },
+        "state_after": {
+          "url": "https://github.com/pricing",
+          "title": "Pricing \u00b7 Plans for every developer \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 0,
+        "step": 3,
+        "state_before": {
+          "url": "https://github.com/pricing",
+          "title": "Pricing \u00b7 Plans for every developer \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/newsroom"
+        },
+        "state_after": {
+          "url": "https://github.com/newsroom",
+          "title": "GitHub Newsroom \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 0,
+        "step": 4,
+        "state_before": {
+          "url": "https://github.com/newsroom",
+          "title": "GitHub Newsroom \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/enterprise"
+        },
+        "state_after": {
+          "url": "https://github.com/enterprise",
+          "title": "GitHub Enterprise \u00b7 The AI-powered developer platform for the agent-ready enterprise \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 0,
+        "step": 5,
+        "state_before": {
+          "url": "https://github.com/enterprise",
+          "title": "GitHub Enterprise \u00b7 The AI-powered developer platform for the agent-ready enterprise \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/account/enterprises/new?experience=control&locale=en-US"
+        },
+        "state_after": {
+          "url": "https://github.com/account/enterprises/new?experience=control&locale=en-US",
+          "title": "github.com",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 1,
+        "step": 0,
+        "state_before": {
+          "url": "https://github.com/",
+          "title": "GitHub \u00b7 Change is constant. GitHub keeps you ahead. \u00b7 GitHub",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/security/advanced-security/secret-protection"
+        },
+        "state_after": {
+          "url": "https://github.com/security/advanced-security/secret-protection",
+          "title": "GitHub Secret Protection \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 1,
+        "step": 1,
+        "state_before": {
+          "url": "https://github.com/security/advanced-security/secret-protection",
+          "title": "GitHub Secret Protection \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/security/advanced-security/software-supply-chain?locale=en-US"
+        },
+        "state_after": {
+          "url": "https://github.com/security/advanced-security/software-supply-chain",
+          "title": "GitHub Supply Chain Security \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 1,
+        "step": 2,
+        "state_before": {
+          "url": "https://github.com/security/advanced-security/software-supply-chain",
+          "title": "GitHub Supply Chain Security \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/security/advanced-security/secret-protection?locale=en-US"
+        },
+        "state_after": {
+          "url": "https://github.com/security/advanced-security/secret-protection",
+          "title": "GitHub Secret Protection \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 1,
+        "step": 3,
+        "state_before": {
+          "url": "https://github.com/security/advanced-security/secret-protection",
+          "title": "GitHub Secret Protection \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/github"
+        },
+        "state_after": {
+          "url": "https://github.com/github",
+          "title": "GitHub \u00b7 GitHub",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 1,
+        "step": 4,
+        "state_before": {
+          "url": "https://github.com/github",
+          "title": "GitHub \u00b7 GitHub",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/search?q=topic%3Agithub+org%3Agithub+fork%3Atrue&type=repositories"
+        },
+        "state_after": {
+          "url": "https://github.com/search?q=topic%3Agithub+org%3Agithub+fork%3Atrue&type=repositories",
+          "title": "Too many requests \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 1,
+        "step": 5,
+        "state_before": {
+          "url": "https://github.com/search?q=topic%3Agithub+org%3Agithub+fork%3Atrue&type=repositories",
+          "title": "Too many requests \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/login"
+        },
+        "state_after": {
+          "url": "https://github.com/login",
+          "title": "Sign in to GitHub \u00b7 GitHub",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 2,
+        "step": 0,
+        "state_before": {
+          "url": "https://github.com/",
+          "title": "GitHub \u00b7 Change is constant. GitHub keeps you ahead. \u00b7 GitHub",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/resources/articles/devops-tools-comparison"
+        },
+        "state_after": {
+          "url": "https://github.com/resources/articles/devops-tools-comparison",
+          "title": "How does GitHub compare to other DevOps tools? \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 2,
+        "step": 1,
+        "state_before": {
+          "url": "https://github.com/resources/articles/devops-tools-comparison",
+          "title": "How does GitHub compare to other DevOps tools? \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/mobile"
+        },
+        "state_after": {
+          "url": "https://github.com/mobile",
+          "title": "GitHub Mobile \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 2,
+        "step": 2,
+        "state_before": {
+          "url": "https://github.com/mobile",
+          "title": "GitHub Mobile \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/login?return_to=https%3A%2F%2Fgithub.com%2Fmobile"
+        },
+        "state_after": {
+          "url": "https://github.com/login?return_to=https%3A%2F%2Fgithub.com%2Fmobile",
+          "title": "Sign in to GitHub \u00b7 GitHub",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 2,
+        "step": 3,
+        "state_before": {
+          "url": "https://github.com/login?return_to=https%3A%2F%2Fgithub.com%2Fmobile",
+          "title": "Sign in to GitHub \u00b7 GitHub",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/password_reset"
+        },
+        "state_after": {
+          "url": "https://github.com/password_reset",
+          "title": "github.com",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 3,
+        "step": 0,
+        "state_before": {
+          "url": "https://github.com/",
+          "title": "GitHub \u00b7 Change is constant. GitHub keeps you ahead. \u00b7 GitHub",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/features/copilot"
+        },
+        "state_after": {
+          "url": "https://github.com/features/copilot",
+          "title": "GitHub Copilot \u00b7 Your AI pair programmer \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 3,
+        "step": 1,
+        "state_before": {
+          "url": "https://github.com/features/copilot",
+          "title": "GitHub Copilot \u00b7 Your AI pair programmer \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/copilot?locale=en-US"
+        },
+        "state_after": {
+          "url": "https://github.com/copilot?locale=en-US",
+          "title": "GitHub Copilot \u00b7 GitHub",
+          "form_signals": [
+            true,
+            false,
+            false,
+            true
+          ]
+        }
+      },
+      {
+        "trajectory_id": 4,
+        "step": 0,
+        "state_before": {
+          "url": "https://github.com/",
+          "title": "GitHub \u00b7 Change is constant. GitHub keeps you ahead. \u00b7 GitHub",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/security"
+        },
+        "state_after": {
+          "url": "https://github.com/security",
+          "title": "GitHub Security \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 4,
+        "step": 1,
+        "state_before": {
+          "url": "https://github.com/security",
+          "title": "GitHub Security \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/marketplace"
+        },
+        "state_after": {
+          "url": "https://github.com/marketplace",
+          "title": "Marketplace \u00b7 Tools to improve your workflow \u00b7 GitHub",
+          "form_signals": [
+            false,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 4,
+        "step": 2,
+        "state_before": {
+          "url": "https://github.com/marketplace",
+          "title": "Marketplace \u00b7 Tools to improve your workflow \u00b7 GitHub",
+          "form_signals": [
+            false,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/pricing"
+        },
+        "state_after": {
+          "url": "https://github.com/pricing",
+          "title": "Pricing \u00b7 Plans for every developer \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 4,
+        "step": 3,
+        "state_before": {
+          "url": "https://github.com/pricing",
+          "title": "Pricing \u00b7 Plans for every developer \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/apps/desktop"
+        },
+        "state_after": {
+          "url": "https://github.com/apps/desktop",
+          "title": "GitHub Desktop | Simple collaboration from your desktop \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 4,
+        "step": 4,
+        "state_before": {
+          "url": "https://github.com/apps/desktop",
+          "title": "GitHub Desktop | Simple collaboration from your desktop \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/features/ai"
+        },
+        "state_after": {
+          "url": "https://github.com/features/ai",
+          "title": "GitHub AI \u00b7 AI built into every step of your workflow \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 4,
+        "step": 5,
+        "state_before": {
+          "url": "https://github.com/features/ai",
+          "title": "GitHub AI \u00b7 AI built into every step of your workflow \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/readme"
+        },
+        "state_after": {
+          "url": "https://github.com/readme",
+          "title": "The ReadME Project \u00b7\u00a0Meet the people behind the projects you love \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 5,
+        "step": 0,
+        "state_before": {
+          "url": "https://github.com/",
+          "title": "GitHub \u00b7 Change is constant. GitHub keeps you ahead. \u00b7 GitHub",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/services"
+        },
+        "state_after": {
+          "url": "https://github.com/services",
+          "title": "Expert Services | GitHub \u00b7 GitHub",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 5,
+        "step": 1,
+        "state_before": {
+          "url": "https://github.com/services",
+          "title": "Expert Services | GitHub \u00b7 GitHub",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/education"
+        },
+        "state_after": {
+          "url": "https://github.com/education",
+          "title": "GitHub Education \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 5,
+        "step": 2,
+        "state_before": {
+          "url": "https://github.com/education",
+          "title": "GitHub Education \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/github/roadmap"
+        },
+        "state_after": {
+          "url": "https://github.com/github/roadmap",
+          "title": "GitHub - github/roadmap: GitHub public roadmap \u00b7 GitHub",
+          "form_signals": [
+            false,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 5,
+        "step": 3,
+        "state_before": {
+          "url": "https://github.com/github/roadmap",
+          "title": "GitHub - github/roadmap: GitHub public roadmap \u00b7 GitHub",
+          "form_signals": [
+            false,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/github/roadmap/security"
+        },
+        "state_after": {
+          "url": "https://github.com/github/roadmap",
+          "title": "Overview \u00b7 github/roadmap \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 5,
+        "step": 4,
+        "state_before": {
+          "url": "https://github.com/github/roadmap/security",
+          "title": "Overview \u00b7 github/roadmap \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/github/roadmap/security"
+        },
+        "state_after": {
+          "url": "https://github.com/github/roadmap/security",
+          "title": "Overview \u00b7 github/roadmap \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 5,
+        "step": 5,
+        "state_before": {
+          "url": "https://github.com/github/roadmap/security",
+          "title": "Overview \u00b7 github/roadmap \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/security"
+        },
+        "state_after": {
+          "url": "https://github.com/security",
+          "title": "GitHub Security \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 7,
+        "step": 0,
+        "state_before": {
+          "url": "https://github.com/",
+          "title": "GitHub \u00b7 Change is constant. GitHub keeps you ahead. \u00b7 GitHub",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/readme"
+        },
+        "state_after": {
+          "url": "https://github.com/readme",
+          "title": "The ReadME Project \u00b7\u00a0Meet the people behind the projects you love \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 7,
+        "step": 1,
+        "state_before": {
+          "url": "https://github.com/readme",
+          "title": "The ReadME Project \u00b7\u00a0Meet the people behind the projects you love \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/"
+        },
+        "state_after": {
+          "url": "https://github.com/",
+          "title": "GitHub \u00b7 Change is constant. GitHub keeps you ahead. \u00b7 GitHub",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 7,
+        "step": 2,
+        "state_before": {
+          "url": "https://github.com/",
+          "title": "GitHub \u00b7 Change is constant. GitHub keeps you ahead. \u00b7 GitHub",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/about"
+        },
+        "state_after": {
+          "url": "https://github.com/about",
+          "title": "About GitHub \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 7,
+        "step": 3,
+        "state_before": {
+          "url": "https://github.com/about",
+          "title": "About GitHub \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/about/press?locale=en-US"
+        },
+        "state_after": {
+          "url": "https://github.com/about/press?locale=en-US",
+          "title": "Press \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 7,
+        "step": 4,
+        "state_before": {
+          "url": "https://github.com/about/press?locale=en-US",
+          "title": "Press \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/github"
+        },
+        "state_after": {
+          "url": "https://github.com/github",
+          "title": "GitHub \u00b7 GitHub",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 7,
+        "step": 5,
+        "state_before": {
+          "url": "https://github.com/github",
+          "title": "GitHub \u00b7 GitHub",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/nathos"
+        },
+        "state_after": {
+          "url": "https://github.com/nathos",
+          "title": "nathos (Nathan Henderson) \u00b7 GitHub",
+          "form_signals": [
+            true,
+            true,
+            false,
+            true
+          ]
+        }
+      },
+      {
+        "trajectory_id": 8,
+        "step": 0,
+        "state_before": {
+          "url": "https://github.com/",
+          "title": "GitHub \u00b7 Change is constant. GitHub keeps you ahead. \u00b7 GitHub",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/customer-stories/mercedes-benz"
+        },
+        "state_after": {
+          "url": "https://github.com/customer-stories/mercedes-benz",
+          "title": "Mercedes-Benz \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 8,
+        "step": 1,
+        "state_before": {
+          "url": "https://github.com/customer-stories/mercedes-benz",
+          "title": "Mercedes-Benz \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/account/organizations/new?plan=free&ref_cta=Create+a+free+organization&ref_loc=Footer+cards&ref_page=%2Fcustomer-stories%2Fmercedes-benz"
+        },
+        "state_after": {
+          "url": "https://github.com/account/organizations/new?plan=free&ref_cta=Create+a+free+organization&ref_loc=Footer+cards&ref_page=%2Fcustomer-stories%2Fmercedes-benz",
+          "title": "github.com",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 10,
+        "step": 0,
+        "state_before": {
+          "url": "https://github.com/",
+          "title": "GitHub \u00b7 Change is constant. GitHub keeps you ahead. \u00b7 GitHub",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/security/advanced-security/software-supply-chain"
+        },
+        "state_after": {
+          "url": "https://github.com/security/advanced-security/software-supply-chain",
+          "title": "GitHub Supply Chain Security \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 10,
+        "step": 1,
+        "state_before": {
+          "url": "https://github.com/security/advanced-security/software-supply-chain",
+          "title": "GitHub Supply Chain Security \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/pricing"
+        },
+        "state_after": {
+          "url": "https://github.com/pricing",
+          "title": "Pricing \u00b7 Plans for every developer \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 10,
+        "step": 2,
+        "state_before": {
+          "url": "https://github.com/pricing",
+          "title": "Pricing \u00b7 Plans for every developer \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/join?plan=business&pricing_exp=true&ref_cta=Continue%2520with%2520Team&ref_loc=cards&ref_page=%2Fpricing&setup_organization=true&source=pricing-card-team&plan_duration=month"
+        },
+        "state_after": {
+          "url": "https://github.com/signup?return_to=%2Faccount%2Forganizations%2Fnew%3Fplan%3Dbusiness%26plan_duration%3Dyear",
+          "title": "github.com",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 11,
+        "step": 0,
+        "state_before": {
+          "url": "https://github.com/",
+          "title": "GitHub \u00b7 Change is constant. GitHub keeps you ahead. \u00b7 GitHub",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/features/copilot"
+        },
+        "state_after": {
+          "url": "https://github.com/features/copilot",
+          "title": "GitHub Copilot \u00b7 Your AI pair programmer \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 11,
+        "step": 1,
+        "state_before": {
+          "url": "https://github.com/features/copilot",
+          "title": "GitHub Copilot \u00b7 Your AI pair programmer \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/github-copilot/max?cft=copilot_li.copilot_plans.cfi"
+        },
+        "state_after": {
+          "url": "https://github.com/login?return_to=https%3A%2F%2Fgithub.com%2Fgithub-copilot%2Fmax%3Fcft%3Dcopilot_li.copilot_plans.cfi",
+          "title": "Sign in to GitHub \u00b7 GitHub",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 11,
+        "step": 2,
+        "state_before": {
+          "url": "https://github.com/login?return_to=https%3A%2F%2Fgithub.com%2Fgithub-copilot%2Fmax%3Fcft%3Dcopilot_li.copilot_plans.cfi",
+          "title": "Sign in to GitHub \u00b7 GitHub",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/password_reset"
+        },
+        "state_after": {
+          "url": "https://github.com/password_reset",
+          "title": "github.com",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 12,
+        "step": 0,
+        "state_before": {
+          "url": "https://github.com/",
+          "title": "GitHub \u00b7 Change is constant. GitHub keeps you ahead. \u00b7 GitHub",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/customer-stories/mercado-libre"
+        },
+        "state_after": {
+          "url": "https://github.com/customer-stories/mercado-libre",
+          "title": "Mercado Libre \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 12,
+        "step": 1,
+        "state_before": {
+          "url": "https://github.com/customer-stories/mercado-libre",
+          "title": "Mercado Libre \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/features/copilot"
+        },
+        "state_after": {
+          "url": "https://github.com/features/copilot",
+          "title": "GitHub Copilot \u00b7 Your AI pair programmer \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 12,
+        "step": 2,
+        "state_before": {
+          "url": "https://github.com/features/copilot",
+          "title": "GitHub Copilot \u00b7 Your AI pair programmer \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/resources/articles/devops-tools-comparison"
+        },
+        "state_after": {
+          "url": "https://github.com/resources/articles/devops-tools-comparison",
+          "title": "How does GitHub compare to other DevOps tools? \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 12,
+        "step": 3,
+        "state_before": {
+          "url": "https://github.com/resources/articles/devops-tools-comparison",
+          "title": "How does GitHub compare to other DevOps tools? \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/features/copilot/agents"
+        },
+        "state_after": {
+          "url": "https://github.com/resources/articles/devops-tools-comparison",
+          "title": "How does GitHub compare to other DevOps tools? \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 12,
+        "step": 4,
+        "state_before": {
+          "url": "https://github.com/resources/articles/devops-tools-comparison",
+          "title": "How does GitHub compare to other DevOps tools? \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/organizations/enterprise_plan?ref_cta=Start%2520a%2520free%2520trial&ref_loc=card&ref_page=compete"
+        },
+        "state_after": {
+          "url": "https://github.com/organizations/enterprise_plan?ref_cta=Start%2520a%2520free%2520trial&ref_loc=card&ref_page=compete",
+          "title": "Choose an Enterprise plan \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 12,
+        "step": 5,
+        "state_before": {
+          "url": "https://github.com/organizations/enterprise_plan?ref_cta=Start%2520a%2520free%2520trial&ref_loc=card&ref_page=compete",
+          "title": "Choose an Enterprise plan \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com"
+        },
+        "state_after": {
+          "url": "https://github.com/",
+          "title": "GitHub \u00b7 Change is constant. GitHub keeps you ahead. \u00b7 GitHub",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 13,
+        "step": 0,
+        "state_before": {
+          "url": "https://github.com/",
+          "title": "GitHub \u00b7 Change is constant. GitHub keeps you ahead. \u00b7 GitHub",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/enterprise"
+        },
+        "state_after": {
+          "url": "https://github.com/enterprise",
+          "title": "GitHub Enterprise \u00b7 The AI-powered developer platform for the agent-ready enterprise \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 13,
+        "step": 1,
+        "state_before": {
+          "url": "https://github.com/enterprise",
+          "title": "GitHub Enterprise \u00b7 The AI-powered developer platform for the agent-ready enterprise \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/education"
+        },
+        "state_after": {
+          "url": "https://github.com/education",
+          "title": "GitHub Education \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 13,
+        "step": 2,
+        "state_before": {
+          "url": "https://github.com/education",
+          "title": "GitHub Education \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/education/schools?locale=en-US"
+        },
+        "state_after": {
+          "url": "https://github.com/education/schools",
+          "title": "Schools - GitHub Education \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 13,
+        "step": 3,
+        "state_before": {
+          "url": "https://github.com/education/schools",
+          "title": "Schools - GitHub Education \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/partners"
+        },
+        "state_after": {
+          "url": "https://github.com/partners",
+          "title": "GitHub Partner Program \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 13,
+        "step": 4,
+        "state_before": {
+          "url": "https://github.com/partners",
+          "title": "GitHub Partner Program \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/partners/technology-partners?locale=en-US"
+        },
+        "state_after": {
+          "url": "https://github.com/partners/technology-partners",
+          "title": "GitHub Partner Program | Technology Partners \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 13,
+        "step": 5,
+        "state_before": {
+          "url": "https://github.com/partners/technology-partners",
+          "title": "GitHub Partner Program | Technology Partners \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/git-guides"
+        },
+        "state_after": {
+          "url": "https://github.com/git-guides",
+          "title": "Git \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        }
+      }
+    ],
+    "non_leakage": [
+      {
+        "trajectory_id": 1,
+        "step": 1,
+        "state_before": {
+          "url": "https://github.com/security/advanced-security/secret-protection",
+          "title": "GitHub Secret Protection \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/security/advanced-security/software-supply-chain?locale=en-US"
+        },
+        "state_after": {
+          "url": "https://github.com/security/advanced-security/software-supply-chain",
+          "title": "GitHub Supply Chain Security \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 1,
+        "step": 2,
+        "state_before": {
+          "url": "https://github.com/security/advanced-security/software-supply-chain",
+          "title": "GitHub Supply Chain Security \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/security/advanced-security/secret-protection?locale=en-US"
+        },
+        "state_after": {
+          "url": "https://github.com/security/advanced-security/secret-protection",
+          "title": "GitHub Secret Protection \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 5,
+        "step": 3,
+        "state_before": {
+          "url": "https://github.com/github/roadmap",
+          "title": "GitHub - github/roadmap: GitHub public roadmap \u00b7 GitHub",
+          "form_signals": [
+            false,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/github/roadmap/security"
+        },
+        "state_after": {
+          "url": "https://github.com/github/roadmap",
+          "title": "Overview \u00b7 github/roadmap \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 10,
+        "step": 2,
+        "state_before": {
+          "url": "https://github.com/pricing",
+          "title": "Pricing \u00b7 Plans for every developer \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/join?plan=business&pricing_exp=true&ref_cta=Continue%2520with%2520Team&ref_loc=cards&ref_page=%2Fpricing&setup_organization=true&source=pricing-card-team&plan_duration=month"
+        },
+        "state_after": {
+          "url": "https://github.com/signup?return_to=%2Faccount%2Forganizations%2Fnew%3Fplan%3Dbusiness%26plan_duration%3Dyear",
+          "title": "github.com",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 11,
+        "step": 1,
+        "state_before": {
+          "url": "https://github.com/features/copilot",
+          "title": "GitHub Copilot \u00b7 Your AI pair programmer \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/github-copilot/max?cft=copilot_li.copilot_plans.cfi"
+        },
+        "state_after": {
+          "url": "https://github.com/login?return_to=https%3A%2F%2Fgithub.com%2Fgithub-copilot%2Fmax%3Fcft%3Dcopilot_li.copilot_plans.cfi",
+          "title": "Sign in to GitHub \u00b7 GitHub",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 12,
+        "step": 3,
+        "state_before": {
+          "url": "https://github.com/resources/articles/devops-tools-comparison",
+          "title": "How does GitHub compare to other DevOps tools? \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/features/copilot/agents"
+        },
+        "state_after": {
+          "url": "https://github.com/resources/articles/devops-tools-comparison",
+          "title": "How does GitHub compare to other DevOps tools? \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 12,
+        "step": 5,
+        "state_before": {
+          "url": "https://github.com/organizations/enterprise_plan?ref_cta=Start%2520a%2520free%2520trial&ref_loc=card&ref_page=compete",
+          "title": "Choose an Enterprise plan \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com"
+        },
+        "state_after": {
+          "url": "https://github.com/",
+          "title": "GitHub \u00b7 Change is constant. GitHub keeps you ahead. \u00b7 GitHub",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 13,
+        "step": 2,
+        "state_before": {
+          "url": "https://github.com/education",
+          "title": "GitHub Education \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/education/schools?locale=en-US"
+        },
+        "state_after": {
+          "url": "https://github.com/education/schools",
+          "title": "Schools - GitHub Education \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 13,
+        "step": 4,
+        "state_before": {
+          "url": "https://github.com/partners",
+          "title": "GitHub Partner Program \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://github.com/partners/technology-partners?locale=en-US"
+        },
+        "state_after": {
+          "url": "https://github.com/partners/technology-partners",
+          "title": "GitHub Partner Program | Technology Partners \u00b7 GitHub",
+          "form_signals": [
+            false,
+            false,
+            false,
+            false
+          ]
+        }
+      }
+    ],
+    "n_leakage": 47,
+    "unique_titles": 9
+  },
+  "mdn": {
+    "name": "MDN Web Docs",
+    "raw_transitions": [
+      {
+        "trajectory_id": 0,
+        "step": 0,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/",
+          "title": "MDN Web Docs",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/pong/click?code=aHR0cHM6Ly9zcnYuYnV5c2VsbGFkcy5jb20vYWRzL2NsaWNrL3gvR1RORDQyN1lGVEFJVktKSUZUN0xZS1FVRlRBSVZLSkpGNllJUFozSkNBQURMMlFJRjZBRFQySktDS0JERTVRTkY2QklDNTNMQ0tZSUwyN0pDQUFJSzI3S0M2U0lFNTM3RjZZSTZLM0VISk5DTFNJWg%3D%3D.bPd4NiFPXRdZfkW1RtxMgyvLA%2BRcpvAyFb5lr4BGl8o%3D&version=2"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/",
+          "title": "MDN Web Docs",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 0,
+        "step": 1,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/",
+          "title": "MDN Web Docs",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/docs/MDN/Writing_guidelines/Attrib_copyright_license"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/docs/MDN/Writing_guidelines/Attrib_copyright_license",
+          "title": "Attribution and copyright licensing - MDN Web Docs | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 0,
+        "step": 2,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/docs/MDN/Writing_guidelines/Attrib_copyright_license",
+          "title": "Attribution and copyright licensing - MDN Web Docs | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/docs/MDN/Writing_guidelines/Attrib_copyright_license"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/docs/MDN/Writing_guidelines/Attrib_copyright_license",
+          "title": "Attribution and copyright licensing - MDN Web Docs | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 0,
+        "step": 3,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/docs/MDN/Writing_guidelines/Attrib_copyright_license",
+          "title": "Attribution and copyright licensing - MDN Web Docs | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/docs/MDN/Guides"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/docs/MDN/Guides",
+          "title": "Web developer guides - MDN Web Docs | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 0,
+        "step": 4,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/docs/MDN/Guides",
+          "title": "Web developer guides - MDN Web Docs | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/canvas"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/canvas",
+          "title": "<canvas> HTML graphics canvas element - HTML | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 0,
+        "step": 5,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/canvas",
+          "title": "<canvas> HTML graphics canvas element - HTML | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/blog/"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/blog/",
+          "title": "MDN Blog",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 1,
+        "step": 0,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/",
+          "title": "MDN Web Docs",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/docs/Web/HTML"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/docs/Web/HTML",
+          "title": "HTML: HyperText Markup Language | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 1,
+        "step": 1,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/docs/Web/HTML",
+          "title": "HTML: HyperText Markup Language | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/docs/Web/JavaScript"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+          "title": "JavaScript | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 1,
+        "step": 2,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+          "title": "JavaScript | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/",
+          "title": "MDN Web Docs",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 1,
+        "step": 3,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/",
+          "title": "MDN Web Docs",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/blog/"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/blog/",
+          "title": "MDN Blog",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 1,
+        "step": 4,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/blog/",
+          "title": "MDN Blog",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/blog/regular-expressions-reference-updates/"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/blog/regular-expressions-reference-updates/",
+          "title": "New reference pages on MDN for JavaScript regular expressions",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 1,
+        "step": 5,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/blog/regular-expressions-reference-updates/",
+          "title": "New reference pages on MDN for JavaScript regular expressions",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Regular_expressions/Named_capturing_group#using_named_capturing_groups"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Regular_expressions/Named_capturing_group#using_named_capturing_groups",
+          "title": "Named capturing group: (?<name>...) - JavaScript | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 2,
+        "step": 0,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/",
+          "title": "MDN Web Docs",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/docs/Web/JavaScript"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+          "title": "JavaScript | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 2,
+        "step": 1,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+          "title": "JavaScript | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Client-side_APIs"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Client-side_APIs",
+          "title": "Client-side web APIs - Learn web development | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 2,
+        "step": 2,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Client-side_APIs",
+          "title": "Client-side web APIs - Learn web development | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics",
+          "title": "CSS styling basics - Learn web development | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 2,
+        "step": 3,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics",
+          "title": "CSS styling basics - Learn web development | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Getting_started/Web_standards"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Getting_started/Web_standards",
+          "title": "Web standards - Learn web development | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 2,
+        "step": 4,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Getting_started/Web_standards",
+          "title": "Web standards - Learn web development | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Design_for_developers"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Design_for_developers",
+          "title": "Design for developers - Learn web development | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 2,
+        "step": 5,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Design_for_developers",
+          "title": "Design for developers - Learn web development | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/docs/MDN/Tutorials"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/docs/MDN/Tutorials",
+          "title": "Web development tutorials - MDN Web Docs | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 3,
+        "step": 0,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/",
+          "title": "MDN Web Docs",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/pong/click?code=aHR0cHM6Ly9zcnYuYnV5c2VsbGFkcy5jb20vYWRzL2NsaWNrL3gvR1RORDQyN1lGVEFJVktKSUZUN0xZS1FVRlRBSVZLSkpGNllJUFozSkNBQURMMlFJRjZBRFQySktDNjdJTDJRTUY2U0k1NVE3Q1dZSTYySldDWVNJRTJRV0hFWUk1NTNZRjZBSTRLSkVDVE5DWUJaNTJL.yQPck660lEZBCqlqC7vwmxXixhyiRBnNXfQnJHBDukQ%3D&version=2"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/",
+          "title": "MDN Web Docs",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 3,
+        "step": 1,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/",
+          "title": "MDN Web Docs",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/community"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/community",
+          "title": "Contribute to MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 3,
+        "step": 2,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/community",
+          "title": "Contribute to MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/docs/MDN/Community/Translated_content#active_locales"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/docs/MDN/Community/Translated_content#active_locales",
+          "title": "MDN Web Docs localization - MDN Web Docs | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 3,
+        "step": 3,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/docs/MDN/Community/Translated_content#active_locales",
+          "title": "MDN Web Docs localization - MDN Web Docs | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/docs/MDN/Community/Community_Participation_Guidelines"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/docs/MDN/Community/Community_Participation_Guidelines",
+          "title": "Code of conduct enforcement guidelines - MDN Web Docs | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 3,
+        "step": 4,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/docs/MDN/Community/Community_Participation_Guidelines",
+          "title": "Code of conduct enforcement guidelines - MDN Web Docs | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/docs/MDN/Community/Roles_teams"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/docs/MDN/Community/Roles_teams",
+          "title": "MDN Web Docs roles and teams - MDN Web Docs | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 3,
+        "step": 5,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/docs/MDN/Community/Roles_teams",
+          "title": "MDN Web Docs roles and teams - MDN Web Docs | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/",
+          "title": "MDN Web Docs",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 4,
+        "step": 0,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/",
+          "title": "MDN Web Docs",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/plus?ref=nope"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/plus?ref=nope",
+          "title": "MDN Plus",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 4,
+        "step": 1,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/plus?ref=nope",
+          "title": "MDN Plus",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/blog/rss.xml"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/plus?ref=nope",
+          "title": "MDN Plus",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 4,
+        "step": 2,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/plus?ref=nope",
+          "title": "MDN Plus",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/docs/MDN/Tutorials"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/docs/MDN/Tutorials",
+          "title": "Web development tutorials - MDN Web Docs | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 4,
+        "step": 3,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/docs/MDN/Tutorials",
+          "title": "Web development tutorials - MDN Web Docs | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/docs/Web"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/docs/Web",
+          "title": "Web technology for developers | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 4,
+        "step": 4,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/docs/Web",
+          "title": "Web technology for developers | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/docs/Glossary"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/docs/Glossary",
+          "title": "Glossary of web terms | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 4,
+        "step": 5,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/docs/Glossary",
+          "title": "Glossary of web terms | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/community"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/community",
+          "title": "Contribute to MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 5,
+        "step": 0,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/",
+          "title": "MDN Web Docs",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/pong/click?code=aHR0cHM6Ly9zcnYuYnV5c2VsbGFkcy5jb20vYWRzL2NsaWNrL3gvR1RORDQyN1lGVEFJVktKSUZUN0xZS1FVRlRBSVZLSkpGNllJUFozSkNBQURMMlFJRjZBRFQySktDNlNJRTUzSkNFQklWMkpMQ0FCSUNLUUpDVDdETDVRTUhFWUk1NTNZRjZBSTRLSkVDVE5DWUJaNTJL.qv2y6jnEZXgmQYVRqovEvoMUVwRcmCwKzy4HaGwK2mc%3D&version=2"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/",
+          "title": "MDN Web Docs",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 5,
+        "step": 1,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/",
+          "title": "MDN Web Docs",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/docs/Web/API"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/docs/Web/API",
+          "title": "Web APIs | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 5,
+        "step": 2,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/docs/Web/API",
+          "title": "Web APIs | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/docs/Web/API/VRStageParameters"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/docs/Web/API/VRStageParameters",
+          "title": "VRStageParameters - Web APIs | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 5,
+        "step": 3,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/docs/Web/API/VRStageParameters",
+          "title": "VRStageParameters - Web APIs | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/docs/Web/API/VRLayerInit"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/docs/Web/API/VRLayerInit",
+          "title": "VRLayerInit - Web APIs | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 5,
+        "step": 4,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/docs/Web/API/VRLayerInit",
+          "title": "VRLayerInit - Web APIs | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/docs/Web/API/WebXR_Device_API/Fundamentals"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/docs/Web/API/WebXR_Device_API/Fundamentals",
+          "title": "Fundamentals of WebXR - Web APIs | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 5,
+        "step": 5,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/docs/Web/API/WebXR_Device_API/Fundamentals",
+          "title": "Fundamentals of WebXR - Web APIs | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/docs/Web/API/XRSystem/devicechange_event"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/docs/Web/API/XRSystem/devicechange_event",
+          "title": "XRSystem: devicechange event - Web APIs | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 6,
+        "step": 0,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/",
+          "title": "MDN Web Docs",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/",
+          "title": "MDN Web Docs",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 6,
+        "step": 1,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/",
+          "title": "MDN Web Docs",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/blog/mdn-front-end-deep-dive/"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/blog/mdn-front-end-deep-dive/",
+          "title": "Under the hood of MDN's new frontend",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 6,
+        "step": 2,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/blog/mdn-front-end-deep-dive/",
+          "title": "Under the hood of MDN's new frontend",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/plus?ref=nope"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/plus?ref=nope",
+          "title": "MDN Plus",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 6,
+        "step": 3,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/plus?ref=nope",
+          "title": "MDN Plus",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/docs/MDN/Tutorials"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/docs/MDN/Tutorials",
+          "title": "Web development tutorials - MDN Web Docs | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 6,
+        "step": 4,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/docs/MDN/Tutorials",
+          "title": "Web development tutorials - MDN Web Docs | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/about"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/about",
+          "title": "About MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 6,
+        "step": 5,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/about",
+          "title": "About MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/observatory"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/observatory",
+          "title": "HTTP Header Security Test - HTTP Observatory | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 7,
+        "step": 0,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/",
+          "title": "MDN Web Docs",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/users/fxa/login/authenticate/?next=%2Fen-US%2F"
+        },
+        "state_after": {
+          "url": "https://accounts.firefox.com/authorization?response_type=code&client_id=720bc80adfa6988d&state=oVNWB-h6f2w34z52YmTAdQ&redirect_uri=https%3A%2F%2Fdeveloper.mozilla.org%2Fusers%2Ffxa%2Flogin%2Fcallback%2F&scope=openid+openid+profile+email+profile%3Asubscriptions&access_type=offline&nonce=45ime29tXHP5JnQMcejSDQ",
+          "title": "Client Challenge",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 8,
+        "step": 0,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/",
+          "title": "MDN Web Docs",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/blog/"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/blog/",
+          "title": "MDN Blog",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 8,
+        "step": 1,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/blog/",
+          "title": "MDN Blog",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/blog/welcome-to-the-MDN-blog/"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/blog/welcome-to-the-MDN-blog/",
+          "title": "Welcome to the MDN blog",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 8,
+        "step": 2,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/blog/welcome-to-the-MDN-blog/",
+          "title": "Welcome to the MDN blog",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/blog/welcome-to-the-MDN-blog/"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/blog/welcome-to-the-MDN-blog/",
+          "title": "Welcome to the MDN blog",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 8,
+        "step": 3,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/blog/welcome-to-the-MDN-blog/",
+          "title": "Welcome to the MDN blog",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/community"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/community",
+          "title": "Contribute to MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 8,
+        "step": 4,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/community",
+          "title": "Contribute to MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/community"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/community",
+          "title": "Contribute to MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 8,
+        "step": 5,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/community",
+          "title": "Contribute to MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/docs/MDN/Writing_guidelines"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/docs/MDN/Writing_guidelines",
+          "title": "Writing guidelines - MDN Web Docs | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 9,
+        "step": 0,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/",
+          "title": "MDN Web Docs",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/blog/rss.xml"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/",
+          "title": "MDN Web Docs",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 9,
+        "step": 1,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/",
+          "title": "MDN Web Docs",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/blog/mdn-front-end-deep-dive/"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/blog/mdn-front-end-deep-dive/",
+          "title": "Under the hood of MDN's new frontend",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 9,
+        "step": 2,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/blog/mdn-front-end-deep-dive/",
+          "title": "Under the hood of MDN's new frontend",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/blog/launching-new-front-end/"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/blog/launching-new-front-end/",
+          "title": "Launching MDN's new front end",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 9,
+        "step": 3,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/blog/launching-new-front-end/",
+          "title": "Launching MDN's new front end",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/advertising"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/advertising",
+          "title": "Advertise with us | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 9,
+        "step": 4,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/advertising",
+          "title": "Advertise with us | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/docs/MDN/Writing_guidelines/Attrib_copyright_license"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/docs/MDN/Writing_guidelines/Attrib_copyright_license",
+          "title": "Attribution and copyright licensing - MDN Web Docs | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 9,
+        "step": 5,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/docs/MDN/Writing_guidelines/Attrib_copyright_license",
+          "title": "Attribution and copyright licensing - MDN Web Docs | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/advertising"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/docs/MDN/Writing_guidelines/Attrib_copyright_license",
+          "title": "Attribution and copyright licensing - MDN Web Docs | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 10,
+        "step": 0,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/",
+          "title": "MDN Web Docs",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/blog/"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/blog/",
+          "title": "MDN Blog",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 10,
+        "step": 1,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/blog/",
+          "title": "MDN Blog",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/blog/new-community-page/"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/blog/new-community-page/",
+          "title": "Introducing the new MDN Community page",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 10,
+        "step": 2,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/blog/new-community-page/",
+          "title": "Introducing the new MDN Community page",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/advertising"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/blog/new-community-page/",
+          "title": "Introducing the new MDN Community page",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 10,
+        "step": 3,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/blog/new-community-page/",
+          "title": "Introducing the new MDN Community page",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/docs/Learn_web_development"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development",
+          "title": "Learn web development | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 10,
+        "step": 4,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development",
+          "title": "Learn web development | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/docs/Learn_web_development"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development",
+          "title": "Learn web development | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 10,
+        "step": 5,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development",
+          "title": "Learn web development | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/curriculum/"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/curriculum/",
+          "title": "MDN Curriculum",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 11,
+        "step": 0,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/",
+          "title": "MDN Web Docs",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/blog/"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/blog/",
+          "title": "MDN Blog",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 11,
+        "step": 1,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/blog/",
+          "title": "MDN Blog",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/blog/javascript-temporal-is-coming/"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/blog/javascript-temporal-is-coming/",
+          "title": "JavaScript Temporal is coming",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 11,
+        "step": 2,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/blog/javascript-temporal-is-coming/",
+          "title": "JavaScript Temporal is coming",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/",
+          "title": "MDN Web Docs",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 11,
+        "step": 3,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/",
+          "title": "MDN Web Docs",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/advertising"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/",
+          "title": "MDN Web Docs",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 11,
+        "step": 4,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/",
+          "title": "MDN Web Docs",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/docs/Learn_web_development"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development",
+          "title": "Learn web development | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 11,
+        "step": 5,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development",
+          "title": "Learn web development | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/advertising"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development",
+          "title": "Learn web development | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 12,
+        "step": 0,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/",
+          "title": "MDN Web Docs",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/blog/"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/blog/",
+          "title": "MDN Blog",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 12,
+        "step": 1,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/blog/",
+          "title": "MDN Blog",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/blog/mdn-docs-june-2023/"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/blog/mdn-docs-june-2023/",
+          "title": "MDN doc updates: CSS selectors & media queries, WebGPU & WebTransport APIs, Progressive web apps",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 12,
+        "step": 2,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/blog/mdn-docs-june-2023/",
+          "title": "MDN doc updates: CSS selectors & media queries, WebGPU & WebTransport APIs, Progressive web apps",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/docs/Glossary"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/docs/Glossary",
+          "title": "Glossary of web terms | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 12,
+        "step": 3,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/docs/Glossary",
+          "title": "Glossary of web terms | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/docs/Glossary/Reporting_directive"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/docs/Glossary/Reporting_directive",
+          "title": "Reporting directive - Glossary | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 12,
+        "step": 4,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/docs/Glossary/Reporting_directive",
+          "title": "Reporting directive - Glossary | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/docs/Glossary/WCAG"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/docs/Glossary/WCAG",
+          "title": "WCAG - Glossary | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 12,
+        "step": 5,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/docs/Glossary/WCAG",
+          "title": "WCAG - Glossary | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/docs/Glossary/Presto"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/docs/Glossary/Presto",
+          "title": "Presto - Glossary | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 13,
+        "step": 0,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/",
+          "title": "MDN Web Docs",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/community"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/community",
+          "title": "Contribute to MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 13,
+        "step": 1,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/community",
+          "title": "Contribute to MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/about"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/about",
+          "title": "About MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 13,
+        "step": 2,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/about",
+          "title": "About MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/docs/Learn_web_development"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development",
+          "title": "Learn web development | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 13,
+        "step": 3,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development",
+          "title": "Learn web development | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/plus?ref=nope"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/plus?ref=nope",
+          "title": "MDN Plus",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 13,
+        "step": 4,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/plus?ref=nope",
+          "title": "MDN Plus",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/community"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/community",
+          "title": "Contribute to MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 13,
+        "step": 5,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/community",
+          "title": "Contribute to MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/community/spotlight/joshua-chen"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/community/spotlight/joshua-chen",
+          "title": "Joshua Chen - Contributor Spotlight | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 14,
+        "step": 0,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/",
+          "title": "MDN Web Docs",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/docs/Web/CSS"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS",
+          "title": "CSS: Cascading Style Sheets | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 14,
+        "step": 1,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS",
+          "title": "CSS: Cascading Style Sheets | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/pong/click?code=aHR0cHM6Ly9zcnYuYnV5c2VsbGFkcy5jb20vYWRzL2NsaWNrL3gvR1RORDQyN1lGVEFJVkszTUZUQkxZS1FVRlRBSVZLSlVDSzdJNFozSkNBQURMMlFJRjZCSTRLN0tDNlNJNks3SkNLQkRFNTNZRlQ3RDZLUUxGVEFENjUzVUhFWUk1NTNZRjZBSTRLSkVDVE5DWUJaNTJL.GB6gmaXVxIvK4yq8sT7%2BW9YTr7QAQRnxc8OwKGdNNXc%3D&version=2"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS",
+          "title": "CSS: Cascading Style Sheets | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 14,
+        "step": 2,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS",
+          "title": "CSS: Cascading Style Sheets | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout",
+          "title": "CSS layout - Learn web development | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 14,
+        "step": 3,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout",
+          "title": "CSS layout - Learn web development | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Fundamental_Layout_Comprehension"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Fundamental_Layout_Comprehension",
+          "title": "Challenge: Fundamental layout comprehension - Learn web development | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 14,
+        "step": 4,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Fundamental_Layout_Comprehension",
+          "title": "Challenge: Fundamental layout comprehension - Learn web development | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/users/fxa/login/authenticate/?next=%2Fen-US%2Fdocs%2FLearn_web_development%2FCore%2FCSS_layout%2FFundamental_Layout_Comprehension"
+        },
+        "state_after": {
+          "url": "https://accounts.firefox.com/authorization?response_type=code&client_id=720bc80adfa6988d&state=cHN0YWLfN0I0jCGo3JQdWQ&redirect_uri=https%3A%2F%2Fdeveloper.mozilla.org%2Fusers%2Ffxa%2Flogin%2Fcallback%2F&scope=openid+openid+profile+email+profile%3Asubscriptions&access_type=offline&nonce=LBhJOzD3eENRCijNy17w5A",
+          "title": "Client Challenge",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      }
+    ],
+    "non_leakage": [
+      {
+        "trajectory_id": 0,
+        "step": 0,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/",
+          "title": "MDN Web Docs",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/pong/click?code=aHR0cHM6Ly9zcnYuYnV5c2VsbGFkcy5jb20vYWRzL2NsaWNrL3gvR1RORDQyN1lGVEFJVktKSUZUN0xZS1FVRlRBSVZLSkpGNllJUFozSkNBQURMMlFJRjZBRFQySktDS0JERTVRTkY2QklDNTNMQ0tZSUwyN0pDQUFJSzI3S0M2U0lFNTM3RjZZSTZLM0VISk5DTFNJWg%3D%3D.bPd4NiFPXRdZfkW1RtxMgyvLA%2BRcpvAyFb5lr4BGl8o%3D&version=2"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/",
+          "title": "MDN Web Docs",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 0,
+        "step": 1,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/",
+          "title": "MDN Web Docs",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/docs/MDN/Writing_guidelines/Attrib_copyright_license"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/docs/MDN/Writing_guidelines/Attrib_copyright_license",
+          "title": "Attribution and copyright licensing - MDN Web Docs | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 1,
+        "step": 2,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+          "title": "JavaScript | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/",
+          "title": "MDN Web Docs",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 3,
+        "step": 0,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/",
+          "title": "MDN Web Docs",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/pong/click?code=aHR0cHM6Ly9zcnYuYnV5c2VsbGFkcy5jb20vYWRzL2NsaWNrL3gvR1RORDQyN1lGVEFJVktKSUZUN0xZS1FVRlRBSVZLSkpGNllJUFozSkNBQURMMlFJRjZBRFQySktDNjdJTDJRTUY2U0k1NVE3Q1dZSTYySldDWVNJRTJRV0hFWUk1NTNZRjZBSTRLSkVDVE5DWUJaNTJL.yQPck660lEZBCqlqC7vwmxXixhyiRBnNXfQnJHBDukQ%3D&version=2"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/",
+          "title": "MDN Web Docs",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 4,
+        "step": 1,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/plus?ref=nope",
+          "title": "MDN Plus",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/blog/rss.xml"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/plus?ref=nope",
+          "title": "MDN Plus",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 5,
+        "step": 0,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/",
+          "title": "MDN Web Docs",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/pong/click?code=aHR0cHM6Ly9zcnYuYnV5c2VsbGFkcy5jb20vYWRzL2NsaWNrL3gvR1RORDQyN1lGVEFJVktKSUZUN0xZS1FVRlRBSVZLSkpGNllJUFozSkNBQURMMlFJRjZBRFQySktDNlNJRTUzSkNFQklWMkpMQ0FCSUNLUUpDVDdETDVRTUhFWUk1NTNZRjZBSTRLSkVDVE5DWUJaNTJL.qv2y6jnEZXgmQYVRqovEvoMUVwRcmCwKzy4HaGwK2mc%3D&version=2"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/",
+          "title": "MDN Web Docs",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 6,
+        "step": 0,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/",
+          "title": "MDN Web Docs",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/",
+          "title": "MDN Web Docs",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 7,
+        "step": 0,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/",
+          "title": "MDN Web Docs",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/users/fxa/login/authenticate/?next=%2Fen-US%2F"
+        },
+        "state_after": {
+          "url": "https://accounts.firefox.com/authorization?response_type=code&client_id=720bc80adfa6988d&state=oVNWB-h6f2w34z52YmTAdQ&redirect_uri=https%3A%2F%2Fdeveloper.mozilla.org%2Fusers%2Ffxa%2Flogin%2Fcallback%2F&scope=openid+openid+profile+email+profile%3Asubscriptions&access_type=offline&nonce=45ime29tXHP5JnQMcejSDQ",
+          "title": "Client Challenge",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 9,
+        "step": 0,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/",
+          "title": "MDN Web Docs",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/blog/rss.xml"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/",
+          "title": "MDN Web Docs",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 9,
+        "step": 4,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/advertising",
+          "title": "Advertise with us | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/docs/MDN/Writing_guidelines/Attrib_copyright_license"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/docs/MDN/Writing_guidelines/Attrib_copyright_license",
+          "title": "Attribution and copyright licensing - MDN Web Docs | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 9,
+        "step": 5,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/docs/MDN/Writing_guidelines/Attrib_copyright_license",
+          "title": "Attribution and copyright licensing - MDN Web Docs | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/advertising"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/docs/MDN/Writing_guidelines/Attrib_copyright_license",
+          "title": "Attribution and copyright licensing - MDN Web Docs | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 10,
+        "step": 2,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/blog/new-community-page/",
+          "title": "Introducing the new MDN Community page",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/advertising"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/blog/new-community-page/",
+          "title": "Introducing the new MDN Community page",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 11,
+        "step": 2,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/blog/javascript-temporal-is-coming/",
+          "title": "JavaScript Temporal is coming",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/",
+          "title": "MDN Web Docs",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 11,
+        "step": 3,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/",
+          "title": "MDN Web Docs",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/advertising"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/",
+          "title": "MDN Web Docs",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 11,
+        "step": 5,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development",
+          "title": "Learn web development | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/en-US/advertising"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development",
+          "title": "Learn web development | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 14,
+        "step": 1,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS",
+          "title": "CSS: Cascading Style Sheets | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/pong/click?code=aHR0cHM6Ly9zcnYuYnV5c2VsbGFkcy5jb20vYWRzL2NsaWNrL3gvR1RORDQyN1lGVEFJVkszTUZUQkxZS1FVRlRBSVZLSlVDSzdJNFozSkNBQURMMlFJRjZCSTRLN0tDNlNJNks3SkNLQkRFNTNZRlQ3RDZLUUxGVEFENjUzVUhFWUk1NTNZRjZBSTRLSkVDVE5DWUJaNTJL.GB6gmaXVxIvK4yq8sT7%2BW9YTr7QAQRnxc8OwKGdNNXc%3D&version=2"
+        },
+        "state_after": {
+          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS",
+          "title": "CSS: Cascading Style Sheets | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "trajectory_id": 14,
+        "step": 4,
+        "state_before": {
+          "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Fundamental_Layout_Comprehension",
+          "title": "Challenge: Fundamental layout comprehension - Learn web development | MDN",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "action": {
+          "action_type": "link_nav",
+          "target_href": "https://developer.mozilla.org/users/fxa/login/authenticate/?next=%2Fen-US%2Fdocs%2FLearn_web_development%2FCore%2FCSS_layout%2FFundamental_Layout_Comprehension"
+        },
+        "state_after": {
+          "url": "https://accounts.firefox.com/authorization?response_type=code&client_id=720bc80adfa6988d&state=cHN0YWLfN0I0jCGo3JQdWQ&redirect_uri=https%3A%2F%2Fdeveloper.mozilla.org%2Fusers%2Ffxa%2Flogin%2Fcallback%2F&scope=openid+openid+profile+email+profile%3Asubscriptions&access_type=offline&nonce=LBhJOzD3eENRCijNy17w5A",
+          "title": "Client Challenge",
+          "form_signals": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      }
+    ],
+    "n_leakage": 67,
+    "unique_titles": 10
+  }
+}

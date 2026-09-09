@@ -1,0 +1,107 @@
+[
+  {
+    "name": "GitHub",
+    "entry_url": "https://github.com",
+    "total_routes": 6,
+    "unique_titles": 6,
+    "title_variance": 1.0,
+    "titles": [
+      "GitHub \u00b7 Change is constant. GitHub keeps you ahead. \u00b7 GitHub",
+      "GitHub Features \u00b7 GitHub",
+      "Pricing \u00b7 Plans for every developer \u00b7 GitHub",
+      "Sign in to GitHub \u00b7 GitHub",
+      "About GitHub \u00b7 GitHub",
+      "Marketplace \u00b7 Tools to improve your workflow \u00b7 GitHub"
+    ],
+    "urls": [
+      "https://github.com/",
+      "https://github.com/features",
+      "https://github.com/pricing",
+      "https://github.com/login",
+      "https://github.com/about",
+      "https://github.com/marketplace"
+    ],
+    "errors": [],
+    "passes": true
+  },
+  {
+    "name": "MDN Web Docs",
+    "entry_url": "https://developer.mozilla.org",
+    "total_routes": 5,
+    "unique_titles": 5,
+    "title_variance": 1.0,
+    "titles": [
+      "MDN Web Docs",
+      "JavaScript | MDN",
+      "HTML: HyperText Markup Language | MDN",
+      "CSS: Cascading Style Sheets | MDN",
+      "Document - Web APIs | MDN"
+    ],
+    "urls": [
+      "https://developer.mozilla.org/en-US/",
+      "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+      "https://developer.mozilla.org/en-US/docs/Web/HTML",
+      "https://developer.mozilla.org/en-US/docs/Web/CSS",
+      "https://developer.mozilla.org/en-US/docs/Web/API/Document"
+    ],
+    "errors": [],
+    "passes": true
+  },
+  {
+    "name": "TodoMVC React",
+    "entry_url": "https://todomvc.com/examples/react/dist/",
+    "total_routes": 3,
+    "unique_titles": 1,
+    "title_variance": 0.3333333333333333,
+    "titles": [
+      "TodoMVC: React",
+      "TodoMVC: React",
+      "TodoMVC: React"
+    ],
+    "urls": [
+      "https://todomvc.com/examples/react/dist/",
+      "https://todomvc.com/examples/react/dist/#/active",
+      "https://todomvc.com/examples/react/dist/#/completed"
+    ],
+    "errors": [],
+    "passes": false
+  },
+  {
+    "name": "StackBlitz",
+    "entry_url": "https://stackblitz.com",
+    "total_routes": 3,
+    "unique_titles": 3,
+    "title_variance": 1.0,
+    "titles": [
+      "StackBlitz | Instant Dev Environments | Click. Code. Done.",
+      "React - StackBlitz",
+      "React (duplicated) - StackBlitz"
+    ],
+    "urls": [
+      "https://stackblitz.com/",
+      "https://stackblitz.com/edit/react?file=package.json",
+      "https://stackblitz.com/edit/react-ys8pvqis?file=package.json"
+    ],
+    "errors": [],
+    "passes": true
+  },
+  {
+    "name": "CodeSandbox",
+    "entry_url": "https://codesandbox.io",
+    "total_routes": 3,
+    "unique_titles": 2,
+    "title_variance": 0.6666666666666666,
+    "titles": [
+      "CodeSandbox: Instant Cloud Development Environments",
+      "Just a moment...",
+      "Just a moment..."
+    ],
+    "urls": [
+      "https://codesandbox.io/",
+      "https://codesandbox.io/p/react",
+      "https://codesandbox.io/p/vue"
+    ],
+    "errors": [],
+    "passes": false
+  }
+]
