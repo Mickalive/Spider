@@ -1,0 +1,185 @@
+{
+  "experiment_id": "EXP-PHYSICS-34266105229",
+  "lane": "physics",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "survives": false,
+  "failures": [
+    "URL+title not > URL-only both sites"
+  ],
+  "site_results": {
+    "todomvc_react": {
+      "status": "COMPLETE",
+      "name": "TodoMVC React",
+      "url": "https://todomvc.com/examples/react/dist/#/",
+      "fw": "react",
+      "n_total": 400,
+      "n_nl": 400,
+      "nl_frac": 1.0,
+      "uniq_urls": 3,
+      "uniq_titles": 1,
+      "uniq_actions": 6,
+      "url_dist": {
+        "https://todomvc.com/examples/react/dist/#/": 213,
+        "https://todomvc.com/examples/react/dist/#/active": 105,
+        "https://todomvc.com/examples/react/dist/#/completed": 82
+      },
+      "title_dist": {
+        "TodoMVC: React": 400
+      },
+      "action_dist": {
+        "filter_all": 82,
+        "filter_active": 79,
+        "toggle_0": 73,
+        "filter_completed": 71,
+        "add_todo": 66,
+        "clear_completed": 29
+      },
+      "pmi": {
+        "url_only": {
+          "mean_pmi": 1.360076527495342,
+          "N": 400,
+          "states": 3,
+          "sa": 18
+        },
+        "url_title": {
+          "mean_pmi": 1.360076527495342,
+          "N": 400,
+          "states": 3,
+          "sa": 18
+        },
+        "url_title_form": {
+          "mean_pmi": 1.360076527495342,
+          "N": 400,
+          "states": 3,
+          "sa": 18
+        }
+      },
+      "perm": {
+        "url_only": {
+          "p": 0.000999000999000999,
+          "obs": 1.360076527495342,
+          "null": 0.05994243285655704,
+          "d": 83.14421684311813
+        },
+        "url_title": {
+          "p": 0.000999000999000999,
+          "obs": 1.360076527495342,
+          "null": 0.05994243285655704,
+          "d": 83.14421684311813
+        },
+        "url_title_form": {
+          "p": 0.000999000999000999,
+          "obs": 1.360076527495342,
+          "null": 0.05994243285655704,
+          "d": 83.14421684311813
+        }
+      }
+    },
+    "todomvc_vue": {
+      "status": "COMPLETE",
+      "name": "TodoMVC Vue",
+      "url": "https://todomvc.com/examples/vue/dist/#/",
+      "fw": "vue",
+      "n_total": 400,
+      "n_nl": 400,
+      "nl_frac": 1.0,
+      "uniq_urls": 3,
+      "uniq_titles": 1,
+      "uniq_actions": 6,
+      "url_dist": {
+        "https://todomvc.com/examples/vue/dist/#/": 202,
+        "https://todomvc.com/examples/vue/dist/#/active": 106,
+        "https://todomvc.com/examples/vue/dist/#/completed": 92
+      },
+      "title_dist": {
+        "TodoMVC: Vue": 400
+      },
+      "action_dist": {
+        "filter_all": 87,
+        "filter_active": 83,
+        "filter_completed": 82,
+        "add_todo": 68,
+        "toggle_0": 55,
+        "clear_completed": 25
+      },
+      "pmi": {
+        "url_only": {
+          "mean_pmi": 1.3232577149184857,
+          "N": 400,
+          "states": 3,
+          "sa": 18
+        },
+        "url_title": {
+          "mean_pmi": 1.3232577149184857,
+          "N": 400,
+          "states": 3,
+          "sa": 18
+        },
+        "url_title_form": {
+          "mean_pmi": 1.3232577149184857,
+          "N": 400,
+          "states": 3,
+          "sa": 18
+        }
+      },
+      "perm": {
+        "url_only": {
+          "p": 0.000999000999000999,
+          "obs": 1.3232577149184857,
+          "null": 0.06040391066530815,
+          "d": 85.66026096855953
+        },
+        "url_title": {
+          "p": 0.000999000999000999,
+          "obs": 1.3232577149184857,
+          "null": 0.06040391066530815,
+          "d": 85.66026096855953
+        },
+        "url_title_form": {
+          "p": 0.000999000999000999,
+          "obs": 1.3232577149184857,
+          "null": 0.06040391066530815,
+          "d": 85.66026096855953
+        }
+      }
+    }
+  },
+  "site_decisions": {
+    "todomvc_react": {
+      "url_pmi": 1.360076527495342,
+      "ut_pmi": 1.360076527495342,
+      "ut_gt_url": false,
+      "ut_gt_05": true,
+      "p": 0.000999000999000999,
+      "p_lt_001": true,
+      "nl": 400,
+      "enough": true
+    },
+    "todomvc_vue": {
+      "url_pmi": 1.3232577149184857,
+      "ut_pmi": 1.3232577149184857,
+      "ut_gt_url": false,
+      "ut_gt_05": true,
+      "p": 0.000999000999000999,
+      "p_lt_001": true,
+      "nl": 400,
+      "enough": true
+    }
+  },
+  "positive_control": {
+    "pmi": 0.6933101309975662,
+    "p": 0.000999000999000999,
+    "pass": true,
+    "n": 500
+  },
+  "decision_rules": {
+    "ut_gt_url": false,
+    "ut_gt_05": true,
+    "perm_lt": true,
+    "pos": true,
+    "enough": true,
+    "n_comp": 2,
+    "bonf": 0.025
+  }
+}
