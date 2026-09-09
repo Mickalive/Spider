@@ -1,17 +1,31 @@
 {
   "experiment_id": "EXP-GRAPH-34409639346",
   "lane": "graph",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-SEMANTIC-RESOLVE"],
+  "question": "Does the kernel resolve a URL template with semantic aliasing (e.g., /users/{userId} vs /accounts/{id} pointing to the same REST resource) to the correct parametrized mechanism when both are registered with equal confidence, and does it correctly select the mechanism whose template matches the intent structure?",
+  "hypothesis": "The kernel will FAIL to resolve semantically aliased templates to the correct mechanism when both have equal confidence and identical intent strings. The kernel's resolve() function (kernel.py L93-123) filters candidates by exact intent match, preconditions match, applicability_guards match, and required parameter slots, then sorts by confidence descending. When two mechanisms share the same intent string and confidence, the kernel has no template-matching or intent-structure-matching logic — it returns whichever candidate sorts first by mechanism_id. Semantic aliasing resolution requires either (a) different intent strings (exact match, not semantic), (b) different preconditions that filter one mechanism out, or (c) different applicability_guards. The kernel currently lacks any mechanism to match template structure against intent structure.",
+  "falsifier": "ANY of: (a) in the core condition (two mechanisms, same intent, equal confidence, different templates, both parameter slots satisfied), the kernel selects the mechanism whose template is NOT the first registered — demonstrating sort-order dependence rather than semantic matching; (b) in the preconditions condition, the kernel fails to filter by preconditions (both mechanisms remain candidates despite different preconditions); (c) any baseline regresses (B-COLD returns non-UNKNOWN, B-SINGLE-USER fails to resolve, B-SINGLE-USER-EXECUTE fails HTTP); (d) any exception or crash; (e) HTTP execution fails for any condition that reaches EXECUTABLE status.",
+  "baselines": [
+    "B-COLD: Empty registry, intent='get-user', context={resource_type: 'user', id: 7} → UNKNOWN (no mechanisms registered)",
+    "B-SINGLE-USER: Single mechanism with template /users/${userId}, intent='get-user', context={resource_type: 'user', userId: 7, id: 7} → EXECUTABLE, bound_action url=/users/7",
+    "B-SINGLE-USER-EXECUTE: Same as B-SINGLE-USER but with HTTP execution against jsonplaceholder.typicode.com/users/7 → HTTP 200, id=7",
+    "B-INTENT-DIFFERENT: Two mechanisms with DIFFERENT intent strings ('get-user' vs 'get-account'), same confidence (0.95), context intent='get-user' → resolves to get-user mechanism (exact intent match filters out get-account)"
+  ],
+  "positive_control": "B-SINGLE-USER: The kernel correctly resolves a single mechanism with template /users/${userId} to EXECUTABLE with bound_action url=/users/7 when context provides userId=7. Verifies basic template binding works.",
+  "null_control": "B-COLD: Empty registry returns UNKNOWN. Verifies the kernel does not fabricate mechanisms. Additionally, NULL-ARBITRARY: Two mechanisms with identical intent, confidence, preconditions, applicability_guards, and parameter_slots satisfied — selection is determined by mechanism_id sort order, demonstrating no semantic resolution.",
+  "measurement_validity": [
+    "All conditions deterministic: no model calls, no RNG, no sampling. Single-run exact point comparisons.",
+    "HTTP execution against live endpoint jsonplaceholder.typicode.com with 5-second timeout per request.",
+    "Each condition uses a fresh kernel instance with explicitly controlled registry contents. No cross-contamination.",
+    "Mechanism registration order controlled: in core condition, mechanism-beta (template /accounts/${id}) registered BEFORE mechanism-alpha (template /users/${userId}) via sequential upsert — worst-case for alpha selection.",
+    "Mechanism_ids chosen so mechanism-alpha sorts BEFORE mechanism-beta alphabetically (alpha < beta in sort order).",
+    "No monkey-patching or runtime modification of kernel.py during execution.",
+    "HTTP response id field verified against expected id for each EXECUTABLE condition.",
+    "Parameter slots provided in context for all conditions where template binding is tested."
+  ],
+  "decision_rule": "SURVIVES_CURRENT_TEST if ALL of: (1) B-COLD returns UNKNOWN; (2) B-SINGLE-USER returns EXECUTABLE with correct bound_action; (3) B-SINGLE-USER-EXECUTE returns HTTP 200 with correct id; (4) B-INTENT-DIFFERENT resolves to the get-user mechanism; (5) in CORE-DUAL-TEMPLATE, selection is deterministic and reproducible (same result across 2 runs); (6) in PRECONDITIONS-DISAMBIGUATE, preconditions correctly filter to the matching mechanism; (7) no exceptions or crashes; (8) no monkey-patching. FALSIFIED-IN-SETTING if: (a) CORE-DUAL-TEMPLATE selection depends on registration order (not mechanism_id sort order) — demonstrates instability; (b) PRECONDITIONS-DISAMBIGUATE fails to filter by preconditions; (c) any baseline regresses; (d) the kernel selects the mechanism whose template does NOT match the context parameters when preconditions could disambiguate. MEASUREMENT_INVALID if: HTTP failures, exceptions, or infrastructure issues prevent measurement.",
+  "product_consequence_positive": "If the kernel correctly uses preconditions to disambiguate semantically aliased templates (PRECONDITIONS-DISAMBIGUATE passes), this demonstrates that preconditions-based filtering is a viable mechanism for semantic resolution. The product can encode intent structure in preconditions to guide template selection. This opens a path for C-SEMANTIC-RESOLVE without modifying the kernel's resolve() function.",
+  "product_consequence_negative": "If the kernel fails to disambiguate even with preconditions (PRECONDITIONS-DISAMBIGUATE fails), or if selection is arbitrary in CORE-DUAL-TEMPLATE, this demonstrates the kernel lacks semantic resolution capability. The product cannot rely on the current resolve() to handle semantically aliased templates. C-SEMANTIC-RESOLVE requires kernel modification (e.g., template-structure matching, intent-classification, or precondition-based filtering enhancement). The graph lane should investigate whether precondition-based filtering is the correct extension point.",
+  "estimated_cost": "Very low: deterministic single-run resolution against live endpoint, 8 conditions total (4 baselines + 3 test + 1 null), no model calls, no browser automation, no RNG. ~8 HTTP requests with 5s timeout each. Total execution < 2 minutes.",
+  "expected_information_gain": "High: This is the first test of semantic resolution capability in the kernel. A negative result (arbitrary selection) definitively characterizes the kernel's limitation and identifies preconditions as the extension point. A positive result (preconditions-based disambiguation works) demonstrates an existing capability that was not previously recognized. Either outcome changes the product decision about how to handle semantically aliased templates."
 }
