@@ -105,6 +105,14 @@
         "claim_id": "C-WEB-DYNAMICS",
         "status": "EXPERIMENTAL",
         "reason": "Narrow pipeline validation: title-aware PMI (1.970 bits) > URL-only PMI (0.693 bits) on synthetic SPA data with non-leakage by construction (p=0.001, d=80.3, 1000 cross-trajectory permutations). PMI pipeline detects known deterministic structure in SPA-like format. However: (1) URL-only PMI is significantly >0 (0.693 bits), contradicting pre-registered H1 that it would be 'near zero' \u2014 titles provide additional (+184%), not exclusive, information; (2) form_signals add zero marginal information (url_title_form PMI = url_title PMI = 1.970) because titles uniquely identify states in the synthetic design \u2014 H3 is untested; (3) synthetic deterministic 8-state world is a controlled pipeline validation, not evidence for C-WEB-DYNAMICS on real web where transitions are stochastic and titles may be noisy. The ceiling is: PMI pipeline + richer state representation survives on synthetic SPA data. Real SPA/form-heavy browser data required before any stronger claim."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-34266105229",
+        "lane": "physics",
+        "decision": "FALSIFIED-IN-SETTING",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "EXPERIMENTAL",
+        "reason": "The experiment is an uninformative (degenerate) test of title-aware PMI on real SPA sites: both TodoMVC sites have constant document.title (unique_titles=1), making URL+title isomorphic to URL-only (0% improvement forced by zero title variance). The preregistered hypothesis about titles noisy/ambiguous on form-heavy SPAs was never tested because the selected sites are not form-heavy (single input.new-todo, no multi-step flows) and have no title variation. URL-only PMI is strongly positive (1.32-1.36 bits, permutation p=0.001, d>83), confirming action->next-state dynamical structure at URL level \u2014 consistent with but not caused by this experiment. The claim ceiling is bounded to: URL-level PMI detects dynamical structure on TodoMVC hash-SPA transitions. Title-aware PMI benefit remains untested on real sites with varying titles. Do not update claim status beyond EXPERIMENTAL based on this experiment."
       }
     ],
     "C-PARAM-INHERIT": [
@@ -187,6 +195,14 @@
         "claim_id": "C-PARAM-INHERIT",
         "status": "EXPERIMENTAL",
         "reason": "Fix prerequisite not met \u2014 src/spider/kernel.py L112 sort key still 'candidates.sort(key=lambda m: m.confidence, reverse=True)', fix absent from committed HEAD (kernel sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61). 0/14 conditions executed per frozen BLOCKED decision rule. No SURVIVES_POST_COMMIT or FALSIFIED_POST_COMMIT possible. Claim ceiling unchanged from parent: no post-commit evidence exists. Fix must be committed with Director approval before re-run."
+      },
+      {
+        "experiment_id": "EXP-GRAPH-34320613096",
+        "lane": "graph",
+        "decision": "BLOCKED",
+        "claim_id": "C-PARAM-INHERIT",
+        "status": "BLOCKED",
+        "reason": "Third consecutive BLOCKED result: fix NOT present in committed HEAD src/spider/kernel.py L112 (sha256 46929b3a, line 'candidates.sort(key=lambda m: m.confidence, reverse=True)'). 0/14 conditions executed per frozen decision rule 9.3. No post-commit evidence exists for hazard elimination, baseline preservation, confidence ordering, or upsert compatibility. The prerequisite (one-line fix committed with Director approval) remains unmet. This is operational delay (fix not committed), not scientific closure (hypothesis not rejected)."
       },
       {
         "experiment_id": "EXP-PRODUCT-33528829801",
@@ -277,6 +293,14 @@
         "claim_id": "C-CROSSSITE",
         "status": "HYPOTHESIS",
         "reason": "Heuristic yield estimates (0.517-0.65 median) suggest WebArena 812-task corpus may support cross-site diversity, but method disagreement (Spearman rho -0.943 to 0.371) and Kruskal-Wallis p=0.999 mean estimates are non-discriminating priors, not measurements. C-CROSSSITE remains bounded to 2-site corpus until live Docker validation confirms actual fragment yield."
+      },
+      {
+        "experiment_id": "EXP-INTEL-34047713704",
+        "lane": "intel",
+        "decision": "BLOCKED",
+        "claim_id": "C-CROSSSITE",
+        "status": "HYPOTHESIS",
+        "reason": "BLOCKED \u2014 no live measurement performed. WebArena Docker images on ghcr.io/web-arena-x/ require authentication (denied on all 3 images plus tags v1/v2/stable). Heuristic yield estimates (shopping 0.65, gitlab 0.60, wikipedia 0.517) remain unvalidated priors from EXP-INTEL-33945226776. No evidence to promote, reject, or advance. Audit ceiling: BLOCKED infrastructure diagnostic only."
       }
     ],
     "C-LLM-INHERIT": [
@@ -311,6 +335,14 @@
         "claim_id": "C-LLM-INHERIT",
         "status": "HYPOTHESIS",
         "reason": "Heuristic analysis suggests WebArena pages may have sufficient element diversity (21-22 unique types for shopping/gitlab/shopping_admin) for LLM transfer, but all estimates are heuristic priors not measured from live DOM. Method 1 (element-count, the only method modeling viewport and pruning) gives shopping yield 0.365, contradicting the aggregated 0.65. C-LLM-INHERIT remains bounded to 2-site corpus pending live validation."
+      },
+      {
+        "experiment_id": "EXP-INTEL-34047713704",
+        "lane": "intel",
+        "decision": "BLOCKED",
+        "claim_id": "C-LLM-INHERIT",
+        "status": "HYPOTHESIS",
+        "reason": "BLOCKED \u2014 no live measurement performed. Central question (whether heuristic yield estimates match actual fragment extraction) remains UNANSWERED. 812-task corpus suitability for C-LLM-INHERIT testing cannot be assessed without authenticated Docker deployment and geometry-faithful viewport filtering. Audit ceiling: BLOCKED infrastructure diagnostic only."
       }
     ],
     "C-PRODUCT-ECON": [
@@ -329,6 +361,14 @@
         "claim_id": "C-PRODUCT-ECON",
         "status": "HYPOTHESIS",
         "reason": "Estimated transformation cost (324 LOC, 0 API calls) is plausible but not measured on live integration. Null control failed (wikipedia yield 0.517 > 0.40 threshold) and positive control was weakened (diversity 21 < prereg >30). No product decision can be made on heuristic priors with method disagreement."
+      },
+      {
+        "experiment_id": "EXP-INTEL-34047713704",
+        "lane": "intel",
+        "decision": "BLOCKED",
+        "claim_id": "C-PRODUCT-ECON",
+        "status": "HYPOTHESIS",
+        "reason": "BLOCKED \u2014 no live measurement performed. REQUIRES_TRANSFORM overhead cannot be assessed from heuristics alone. Product consequence of either positive or negative result not realized. Audit ceiling: BLOCKED infrastructure diagnostic only."
       }
     ],
     "C-MEAS-VALID": [

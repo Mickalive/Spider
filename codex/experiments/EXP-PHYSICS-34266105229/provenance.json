@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34266105229",
+  "lane": "physics",
+  "provenance": {
+    "github_run_id": "34282618261",
+    "github_run_attempt": 1,
+    "execution_commit": "86f69c3f0de20b7ce3426bc391af9af59abeef63",
+    "freeze_commit": "86f69c3f0de20b7ce3426bc391af9af59abeef63",
+    "result_commit": "90696f47402c52ccd8429d18c2d85cdcbbc7c7f7",
+    "execution_timestamp": "2026-09-08T21:55:37.137589+00:00",
+    "parent_experiment_id": "EXP-PHYSICS-34149195420",
+    "parent_handoff_sha256": "a3e4d8268994ad3bf053958a277db1e4db9b7b3c66c0b2a8e1f4976c8ace3e4c"
+  },
+  "datasets": [
+    {
+      "name": "TodoMVC React browser transitions",
+      "source": "https://todomvc.com/examples/react/dist/#/",
+      "collection_method": "Playwright headless Chromium, random walk (seed=42), 100 trajectories × 8 steps",
+      "n_transitions": 400,
+      "n_non_leakage": 400,
+      "artifact_path": "research/experiments/EXP-PHYSICS-34266105229/raw_transitions.json",
+      "artifact_sha256": "4e3b772e731d770a1d8bf3f2db8025ed4de3e41d27db653e7c59d091577456c8"
+    },
+    {
+      "name": "TodoMVC Vue browser transitions",
+      "source": "https://todomvc.com/examples/vue/dist/#/",
+      "collection_method": "Playwright headless Chromium, random walk (seed=42), 100 trajectories × 8 steps",
+      "n_transitions": 400,
+      "n_non_leakage": 400,
+      "artifact_path": "research/experiments/EXP-PHYSICS-34266105229/raw_transitions.json",
+      "artifact_sha256": "4e3b772e731d770a1d8bf3f2db8025ed4de3e41d27db653e7c59d091577456c8"
+    },
+    {
+      "name": "Synthetic SPA positive control",
+      "source": "Generated from parent EXP-PHYSICS-34149195420 synthetic model (8 states, 4 actions, deterministic)",
+      "n_transitions": 500,
+      "artifact_path": null,
+      "artifact_sha256": null
+    }
+  ],
+  "code": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-34266105229/execute_real_spa.py",
+      "sha256": "378fb2dc4873b7003698ba0221ed7ab1a784b801f21eb3b415ca94f02b88dcf8",
+      "role": "primary execution script"
+    },
+    {
+      "path": "research/physics/information_theoretic/real_spa_pmi.py",
+      "sha256": null,
+      "role": "reference PMI computation code (not executed in this run)"
+    },
+    {
+      "path": "research/physics/information_theoretic/spa_pmi.py",
+      "sha256": "8d6db688de638c5e826fa6dd4c946d5d4de59348e03685996cc9bdfc70cf8eac",
+      "role": "parent PMI computation code (referenced by parent handoff)"
+    }
+  ],
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.x",
+    "dependencies": ["numpy", "playwright"],
+    "browser": "Chromium (headless)",
+    "note": "Playwright was installed in the execution environment. Current environment may lack Playwright; raw results from the execution run are used."
+  },
+  "frozen_inputs": {
+    "request.json": {
+      "path": "research/experiments/EXP-PHYSICS-34266105229/request.json",
+      "sha256": "44296e8a0f05e80ee7026b229d7c44b62590c4f0681126d65789312020965899"
+    },
+    "spec.json": {
+      "path": "research/experiments/EXP-PHYSICS-34266105229/spec.json",
+      "sha256": "ff42f58514372b6de3cea12482e406a5398fb7e0f007f2c09c286ebf7fb96b9a"
+    },
+    "prereg.md": {
+      "path": "research/experiments/EXP-PHYSICS-34266105229/prereg.md",
+      "sha256": "d35a1caa8d48239bbd7117e4c7fb38df6de237aeecbbb0a6c9b22190e4eca66c"
+    },
+    "freeze.json": {
+      "path": "research/experiments/EXP-PHYSICS-34266105229/freeze.json",
+      "sha256": null
+    }
+  },
+  "execution_artifacts": {
+    "raw_results.json": {
+      "path": "research/experiments/EXP-PHYSICS-34266105229/raw_results.json",
+      "sha256": "643ec2776575ebecb939a5fc61e43bded7f9fb54e59ba2556ba5fbcc30915b05",
+      "generated_by": "execute_real_spa.py"
+    },
+    "raw_transitions.json": {
+      "path": "research/experiments/EXP-PHYSICS-34266105229/raw_transitions.json",
+      "sha256": "4e3b772e731d770a1d8bf3f2db8025ed4de3e41d27db653e7c59d091577456c8",
+      "generated_by": "execute_real_spa.py"
+    }
+  },
+  "reproduction": {
+    "seed": 42,
+    "alpha_laplace": 1.0,
+    "n_permutations": 1000,
+    "n_trajectories_per_site": 100,
+    "trajectory_length": 8,
+    "polite_delay_seconds": 1.0,
+    "state_capture_delay_seconds": 0.5,
+    "bonferroni_comparisons": 2,
+    "bonferroni_alpha": 0.025,
+    "non_leakage_definition": "action.target_href == state_after.url defines leakage; all other transitions are non-leakage"
+  }
+}

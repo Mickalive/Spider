@@ -1,0 +1,205 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-34047713704",
+  "lane": "intel",
+  "status": "BLOCKED",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Obtain ghcr.io authentication (GITHUB_TOKEN/PAT with read:packages scope and `docker login ghcr.io`) and re-execute before any claim about heuristic calibration; producer correctly identified this as smallest unblocking action in result.json validity_notes and report.md Smallest Next Action — retain that exact remediation and record token scope/image visibility verification in next provenance.json",
+    "Publish durable hash for measurement script /tmp/opencode/measure_yield.py: current provenance.json code_artifacts.measurement_script.sha256 is null and result.json artifacts list omits the script's hash; on retry, store versioned artifact with sha256 and commit reference so viewport/pruning/truncation logic is independently verifiable",
+    "Fix viewport filtering validity gap in measurement script before retry: current /tmp/opencode/measure_yield.py apply_viewport_filter uses depth<=4 and role heuristics as proxy for bounding-box viewport (IN_VIEWPORT_RATIO_THRESHOLD=0.6); prereg spec requires actual current_viewport_only=True geometry via WebArena's fetch_page_accessibility_tree union_bound/get_element_in_viewport_ratio. Replace heuristic with Playwright/CDP union_bound extraction or explicitly label heuristic as pilot approximation with quantified error bound",
+    "Do not downgrade N=1 per site pilot to evidential ranking on retry: spec.json measurement_validity states N=1 pilot calibration not powered test — retain validity_notes disclosure and require at minimum 2-3 tasks per site or repeated viewport/scroll measurements before any SUPPORTS verdict for C-CROSSSITE/C-LLM-INHERIT",
+    "On retry, preserve exact frozen metric/control identifiers (shopping_actual_yield, shopping_yield_delta, gitlab_actual_yield, wikipedia_actual_yield, positive_control_shopping, null_control_wikipedia, docker_access, heuristic_baseline) and decision_rule thresholds (yield_delta <0.15 for ALL 3, BLOCKED if all 3 Docker pulls fail) without renaming or threshold relaxation"
+  ],
+  "validity_findings": [
+    {
+      "finding": "Infrastructure BLOCKED correctly classified — not a scientific falsification",
+      "severity": "info",
+      "evidence": "result.json status BLOCKED outcome NOT_APPLICABLE metrics.docker_images_pullable false docker_pull_error denied; controls.docker_access pass false observed 'denied — all 3 image pulls return denied'; report.md correctly applies frozen decision_rule BLOCKED branch; independent recompute: docker pull ghcr.io/web-arena-x/webarena-shopping:latest returns 'Head https://ghcr.io/v2/web-arena-x/webarena-shopping/manifests/latest: denied' (verified during audit)",
+      "impact": "No scientific claim about heuristic calibration is justified; heuristic estimates 0.517-0.65 remain heuristic priors as in parent handoff EXP-INTEL-33945226776"
+    },
+    {
+      "finding": "No outcome-bearing measurement executed — all scientific metrics correctly null",
+      "severity": "material",
+      "evidence": "result.json metrics shopping_actual_yield null, shopping_yield_delta null, gitlab_actual_yield null, wikipedia_actual_yield null (and all raw/viewport/pruned/truncated element counts null); observations OBS-DOCKER-ACCESS-DENIED, OBS-HEURISTIC-UNRESOLVED explicitly state no live measurement possible",
+      "impact": "Cannot evaluate falsifier (yield_delta >0.15 for any site type) or controls; ceiling is infrastructure diagnostic only. Producer correctly does not infer SUPPORTS or FALSIFIES"
+    },
+    {
+      "finding": "Controls handled with integrity — positive/null correctly left UNKNOWN not forced",
+      "severity": "info",
+      "evidence": "result.json controls.positive_control_shopping pass null observed 'BLOCKED — cannot measure', controls.null_control_wikipedia pass null, controls.docker_access pass false, controls.playwright_chromium pass true, controls.heuristic_baseline pass null; report.md Controls Status table matches",
+      "impact": "No control misclassification; prevents false PASS/FAIL from missing data (contrast with parent EXP-INTEL-33945226776 null-control misclassification)"
+    },
+    {
+      "finding": "Measurement script prepared but contains validity approximation for viewport filtering",
+      "severity": "moderate",
+      "evidence": "/tmp/opencode/measure_yield.py apply_viewport_filter heuristics: keep indent<=4 or role in viewport_roles; spec.json measurement_validity requires current_viewport_only=True with viewport_size 1280x720 via Playwright accessibility tree union_bound; prereg section 6.2 requires webarena_adapter.py parsing; spec requires viewport filtering via actual geometry, not depth/role proxy",
+      "impact": "If Docker had been accessible, reported actual_yield would have understated viewport loss and pruned element counts would be approximate; requires fix before retry to avoid measurement-invalid yield comparison to heuristic (heuristic viewport coverage 0.45-0.65 constants)"
+    },
+    {
+      "finding": "Provenance missing durable hash for measurement script",
+      "severity": "low",
+      "evidence": "provenance.json code_artifacts.measurement_script sha256 null note 'Written during execution'; result.json artifacts lacks entry for /tmp/opencode/measure_yield.py with hash; only webarena_adapter.py has sha256 46cb46542d9927f2a1b1bd3c29fef169aafa7009c5ba3f2b797531dbb6038fee",
+      "impact": "Independent verification of pipeline logic (IGNORED_ACTREE_PROPERTIES pruning, truncation at 8192/1920) not traceably bound to hash; low for BLOCKED but must be fixed on retry"
+    },
+    {
+      "finding": "Sample size and representation correctly disclosed as pilot limit",
+      "severity": "info",
+      "evidence": "spec.json measurement_validity 'Each task is measured once (N=1 per site type) — pilot calibration, not powered test'; result.json validity_notes 'Sample size is N=1 per site type (pilot calibration), so even if Docker were accessible, statistical power would be limited'; prereg sections 8.1-8.2 task selection bias, single observation per task",
+      "impact": "Even on unblock, one task per site cannot generalize to 812-task corpus; producer correctly avoids overgeneralization"
+    },
+    {
+      "finding": "No leakage or data integrity violation — no live pages observed",
+      "severity": "info",
+      "evidence": "result.json validity_notes 'BLOCKED is NOT scientific falsification'; observations contain no raw accessibility tree artifacts; no task URLs or Docker container outputs stored",
+      "impact": "No risk of truncated observation being mistaken for successful extraction; environment correctly expressed effect but was denied at image-pull stage"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "heuristic_baseline_shopping_0.65_gitlab_0.60_wikipedia_0.517",
+      "expected": "Heuristic yields from EXP-INTEL-33945226776 aggregated median: shopping 0.65, gitlab 0.60, wikipedia 0.517",
+      "observed": "Inherited not re-measured; result.json metrics shopping_heuristic_yield 0.65 gitlab 0.60 wikipedia 0.517 controls.heuristic_baseline observed inherited pass null",
+      "verdict": "PASS_APPROPRIATE_REFERENCE",
+      "evidence": "result.json metrics; spec.json baselines heuristic yield estimates; provenance.json parent_analysis_output analysis_output.json sha256 8f7ebd0932b1919394d3604879314c1130ae3614cd75b3ce7d8e394e5a08e7bc"
+    },
+    {
+      "baseline_id": "method1_element_count_shopping_0.365_gitlab_0.484_wikipedia_0.517",
+      "expected": "Method 1 (element-count modeling viewport+pruning) gives shopping 0.365 gitlab 0.484 wikipedia 0.517 per parent",
+      "observed": "Inherited not re-measured; spec lists as baseline; no live comparison possible due to BLOCKED",
+      "verdict": "PASS_APPROPRIATE_REFERENCE",
+      "evidence": "spec.json baselines Method 1 estimates; parent handoff EXP-INTEL-33945226776 carry_forward established Method 1 yields"
+    },
+    {
+      "baseline_id": "truncation_sensitivity_shopping_0.37_gitlab_0.471_wikipedia_0.897",
+      "expected": "Truncation sensitivity ratios from parent: shopping 0.37 gitlab 0.471 wikipedia 0.897 indicating max_obs_length 1920 binding",
+      "observed": "Inherited not re-measured; spec baseline; no live truncation measurement attempted beyond script preparation",
+      "verdict": "PASS_APPROPRIATE_REFERENCE",
+      "evidence": "spec.json baselines truncation sensitivity ratios"
+    },
+    {
+      "baseline_id": "positive_control_shopping",
+      "expected": "Shopping has highest actual yield >40% after full pipeline (spec positive_control)",
+      "observed": "BLOCKED — cannot measure without Docker image access; pass null",
+      "verdict": "UNKNOWN_BLOCKED",
+      "evidence": "result.json controls.positive_control_shopping; spec.json positive_control; prereg H2"
+    },
+    {
+      "baseline_id": "null_control_wikipedia",
+      "expected": "Wikipedia has lowest actual yield <60% after full pipeline (spec null_control)",
+      "observed": "BLOCKED — cannot measure without Docker image access; pass null",
+      "verdict": "UNKNOWN_BLOCKED",
+      "evidence": "result.json controls.null_control_wikipedia; spec.json null_control; prereg H3"
+    },
+    {
+      "baseline_id": "docker_access_ghcr_io",
+      "expected": "ghcr.io/web-arena-x images are pullable",
+      "observed": "denied — all 3 image pulls return denied from ghcr.io with alternative tags v1 v2 stable also denied",
+      "verdict": "FAIL_INFRASTRUCTURE",
+      "evidence": "result.json controls.docker_access pass false; provenance.json docker_images_attempted 3 denied errors; report.md What Failed table; audit independent docker pull confirms denied"
+    },
+    {
+      "baseline_id": "playwright_chromium",
+      "expected": "Playwright with Chromium is installed and functional",
+      "observed": "Playwright 1.62.0 installed Chromium 151.0.7922.34 downloaded successfully",
+      "verdict": "PASS",
+      "evidence": "result.json controls.playwright_chromium pass true; provenance.json infrastructure_verification playwright_installed true chromium_installed true; observations OBS-PLAYWRIGHT-OK"
+    }
+  ],
+  "recomputed_metrics": {
+    "docker_pull_verification": {
+      "reported": {
+        "docker_images_pullable": false,
+        "docker_pull_error": "denied",
+        "images_attempted": 3
+      },
+      "recomputed": {
+        "docker_pull_stdout": "Head \"https://ghcr.io/v2/web-arena-x/webarena-shopping/manifests/latest\": denied",
+        "all_denied": true,
+        "verified": true
+      },
+      "match": true,
+      "method": "Re-executed docker pull ghcr.io/web-arena-x/webarena-shopping:latest during audit; observed same denied error as provenance.json docker_images_attempted",
+      "evidence": "provenance.json docker_images_attempted; result.json metrics.docker_pull_error"
+    },
+    "scientific_metrics_null_integrity": {
+      "reported": {
+        "shopping_actual_yield": null,
+        "shopping_yield_delta": null,
+        "gitlab_actual_yield": null,
+        "gitlab_yield_delta": null,
+        "wikipedia_actual_yield": null,
+        "wikipedia_yield_delta": null
+      },
+      "recomputed": {
+        "all_null": true,
+        "any_non_null_yield": false
+      },
+      "match": true,
+      "method": "Parsed result.json metrics; confirmed all outcome-bearing metrics (shopping/gitlab/wikipedia raw/viewport/pruned/truncated elements and actual_yield/yield_delta) are null as required for BLOCKED; heuristic_yields 0.65/0.60/0.517 are correctly retained as frozen baselines not measurements",
+      "evidence": "result.json metrics.*_actual_yield null, *_yield_delta null, *_heuristic_yield retained"
+    },
+    "playwright_chromium_verification": {
+      "reported": {
+        "playwright_available": true,
+        "chromium_installed": true,
+        "playwright_version": "1.62.0",
+        "chromium_version": "151.0.7922.34"
+      },
+      "recomputed": {
+        "provenance_playwright_version": "1.62.0",
+        "provenance_chromium_installed": true,
+        "docker_daemon_running": true,
+        "consistent": true
+      },
+      "match": true,
+      "method": "Cross-checked result.json metrics.playwright_available true with provenance.json infrastructure_verification playwright_installed true chromium_installed true and observations OBS-PLAYWRIGHT-OK",
+      "evidence": "result.json metrics; provenance.json infrastructure_verification; observations OBS-PLAYWRIGHT-OK"
+    },
+    "falsifier_decision_rule_application": {
+      "reported": "BLOCKED — Docker images cannot be pulled for all 3 tasks per decision_rule",
+      "recomputed": "BLOCKED — yield_delta not computable, positive/null controls unknown, but docker_access fail for all 3 matches prereg 7.3 and spec decision_rule BLOCKED condition 'Docker/Playwright infrastructure fails to deploy for all 3 tasks'",
+      "match": true,
+      "method": "Applied frozen spec.json decision_rule to result.json metrics/controls: SUPPORTS requires yield_delta<0.15 for ALL 3 AND controls pass AND no infra failure — not reachable; FALSIFIES requires yield_delta>0.15 or control violation — not measurable; BLOCKED requires docker pull failure for all 3 — satisfied",
+      "evidence": "spec.json decision_rule; prereg.md section 7; result.json outcomes; report.md Decision Rule Application"
+    },
+    "measurement_script_pipeline_completeness": {
+      "reported": "Full REQUIRES_TRANSFORM pipeline implemented in /tmp/opencode/measure_yield.py (viewport, IGNORED_ACTREE_PROPERTIES, truncation 8192/1920)",
+      "recomputed": {
+        "script_exists": true,
+        "lines": 20079,
+        "viewport_heuristic": true,
+        "pruning_implemented": true,
+        "truncation_implemented": true,
+        "actual_yield_computed": "truncated_1920 / raw"
+      },
+      "match": "partial — pipeline present but viewport uses depth/role heuristic not union_bound geometry",
+      "method": "Inspected /tmp/opencode/measure_yield.py: UTTERANCE_MAX_LENGTH 8192 MAX_OBS_LENGTH 1920 IGNORED_ACTREE_PROPERTIES correctly defined, functions parse_accessibility_tree_elements, format_observation_string, apply_viewport_filter, apply_ignored_properties_pruning, truncate_observation, MeasurementResult fields verified; audit notes viewport heuristic divergence",
+      "evidence": "/tmp/opencode/measure_yield.py; spec.json measurement_validity pipeline steps"
+    }
+  },
+  "claim_ceiling": "BLOCKED — NO scientific claim about heuristic yield calibration is supported. Maximum justified: WebArena Docker images ghcr.io/web-arena-x/webarena-shopping:latest, webarena-gitlab:latest, webarena-wikipedia-like:latest are not pullable without ghcr.io authentication (denied on all 3 plus tags v1/v2/stable) in this Ubuntu Azure runner environment (Docker 28.0.4, Python 3.12.14, 86GB disk, 15GB RAM), while Playwright 1.62.0 + Chromium 151.0.7922.34 install correctly — confirming the blocking factor is registry auth, not disk/memory/Playwright. Heuristic yields 0.65/0.60/0.517 and Method1 0.365/0.484/0.517 remain unvalidated priors from EXP-INTEL-33945226776; N=1 pilot not executed. C-CROSSSITE/C-LLM-INHERIT/C-PRODUCT-ECON remain HYPOTHESIS bounded to heuristic exploratory triage ceiling from parent; 812-task corpus suitability, viewport/pruning/truncation actual yields, and site-type ranking are UNKNOWN pending authenticated Docker deployment with geometry-faithful viewport filtering.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-34047713704/request.json (parent_handoff EXP-INTEL-33945226776, inherited_next_question Docker deployment for 2-3 tasks)",
+    "research/experiments/EXP-INTEL-34047713704/spec.json (frozen hypothesis within 15pp for all 3, decision_rule SUPPORTS/FALSIFIES/BLOCKED, baselines heuristic 0.65/0.60/0.517)",
+    "research/experiments/EXP-INTEL-34047713704/prereg.md sections 4-7 (H1-H4, decision rules, N=1 pilot not powered)",
+    "research/experiments/EXP-INTEL-34047713704/freeze.json (hashes prereg d9c711e9c2..., spec 4880305583..., request 7ee0962085...)",
+    "research/experiments/EXP-INTEL-34047713704/result.json (status BLOCKED outcome NOT_APPLICABLE, all actual_yield/yield_delta null, docker_images_pullable false, controls pass null/false/true)",
+    "research/experiments/EXP-INTEL-34047713704/report.md (Infrastructure Assessment tables, Smallest Next Action ghcr auth, Carry-Forward Established nothing new)",
+    "research/experiments/EXP-INTEL-34047713704/provenance.json (github_run_id 34300002394, docker 28.0.4, playwright 1.62.0 chromium 151.0.7922.34, docker_images_attempted 3 denied, frozen_inputs hashes)",
+    "/tmp/opencode/measure_yield.py (pipeline code, viewport heuristic, pruning, truncation, sha missing)",
+    "research/intel/webarena_adapter.py sha256 46cb46542d9927f2a1b1bd3c29fef169aafa7009c5ba3f2b797531dbb6038fee (adapter referenced in spec)",
+    "research/experiments/EXP-INTEL-33945226776/handoff.json sha256 5e5ff97a5b... (parent ceiling heuristic exploratory triage only, Method1 vs aggregated median dispute)",
+    "audit independent verification: docker pull ghcr.io/web-arena-x/webarena-shopping:latest -> denied"
+  ],
+  "unresolved": [
+    "Whether heuristic yield estimates (shopping 0.65, gitlab 0.60, wikipedia 0.517) are within 15pp of actual live yield — central question remains unanswered due to BLOCKED",
+    "Whether Method1 element-count (shopping 0.365) or aggregated median (0.65) is more predictive of live yield",
+    "Whether max_obs_length=1920 is binding truncation vs UTTERANCE_MAX_LENGTH=8192 on live pages (truncation sensitivity 0.37-0.897 from heuristics unvalidated)",
+    "Whether shopping positive control would show highest yield >40% and wikipedia null control lowest <60% on live DOM",
+    "How to authenticate to ghcr.io/web-arena-x/ in CI (GITHUB_TOKEN read:packages vs PAT, image visibility, alternative registry or public demo instance)",
+    "Whether WebArena Docker self-hosting delivers inspected observation interface end-to-end (Playwright launch, CDP Accessibility.getFullAXTree, union_bound viewport geometry) without silent fallback — requires authenticated deployment",
+    "Whether 812-task corpus is suitable for C-CROSSSITE/C-LLM-INHERIT testing and whether VisualWebArena/Mind2Web offer lower-uncertainty path if live yield <30%",
+    "Whether heuristic viewport coverage constants (shopping 0.45 etc.) and IGNORED_ACTREE_PROPERTIES pruning fractions generalize to live rendering"
+  ]
+}

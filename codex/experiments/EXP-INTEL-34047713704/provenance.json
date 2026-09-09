@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-34047713704",
+  "lane": "intel",
+  "github_run_id": "34300002394",
+  "github_run_attempt": 1,
+  "recorded_at": "2026-09-09T01:45:00+00:00",
+  "execution_environment": {
+    "platform": "linux",
+    "os": "Ubuntu (Azure runner)",
+    "kernel": "6.17.0-1022-azure",
+    "architecture": "x86_64",
+    "python_version": "3.12.14",
+    "docker_version": "28.0.4",
+    "docker_compose_version": "v2.38.2",
+    "playwright_version": "1.62.0",
+    "chromium_version": "151.0.7922.34",
+    "disk_available_gb": 86,
+    "memory_gb": 15,
+    "model": "opencode/mimo-v2.5-free"
+  },
+  "git_provenance": {
+    "commit_sha": "2e6d11256ed218371c194a6cd2c9062755e6cb75",
+    "branch": "lab2/intel",
+    "pre_execute_sha": "ae5114f8918bccaf8d19edefd1488f07d6b2513d",
+    "base_sha": "157c3c8b9be9b7ce13692444ab15e39a8e0df430"
+  },
+  "frozen_inputs": {
+    "request_json": {
+      "path": "research/experiments/EXP-INTEL-34047713704/request.json",
+      "sha256": "7ee0962085333152786c15e640a9fa22623c1153b8c80a2a4bf868e7099f7e3f"
+    },
+    "spec_json": {
+      "path": "research/experiments/EXP-INTEL-34047713704/spec.json",
+      "sha256": "4880305583c61511a7f2f47a2dfaf042414e40c946f150e2298fafcec87f77c8"
+    },
+    "prereg_md": {
+      "path": "research/experiments/EXP-INTEL-34047713704/prereg.md",
+      "sha256": "d9c711e9c2067a99ff19221930d0a0a50bedca1838ffaf60427c1dee556b7012"
+    },
+    "freeze_json": {
+      "path": "research/experiments/EXP-INTEL-34047713704/freeze.json",
+      "sha256": null
+    }
+  },
+  "parent_experiment": {
+    "experiment_id": "EXP-INTEL-33945226776",
+    "handoff_path": "research/experiments/EXP-INTEL-33945226776/handoff.json",
+    "handoff_sha256": "5e5ff97a5b2d776b81eafe3eeed7af3ebdfe7b0bdb302929a9a79ed62521644a"
+  },
+  "code_artifacts": {
+    "webarena_adapter": {
+      "path": "research/intel/webarena_adapter.py",
+      "sha256": "46cb46542d9927f2a1b1bd3c29fef169aafa7009c5ba3f2b797531dbb6038fee"
+    },
+    "measurement_script": {
+      "path": "/tmp/opencode/measure_yield.py",
+      "sha256": null,
+      "note": "Written during execution; implements full REQUIRES_TRANSFORM pipeline"
+    },
+    "parent_analysis_output": {
+      "path": "research/experiments/EXP-INTEL-33945226776/analysis_output.json",
+      "sha256": "8f7ebd0932b1919394d3604879314c1130ae3614cd75b3ce7d8e394e5a08e7bc"
+    }
+  },
+  "docker_images_attempted": [
+    {
+      "image": "ghcr.io/web-arena-x/webarena-shopping:latest",
+      "pull_status": "denied",
+      "error": "Head \"https://ghcr.io/v2/web-arena-x/webarena-shopping/manifests/latest\": denied"
+    },
+    {
+      "image": "ghcr.io/web-arena-x/webarena-gitlab:latest",
+      "pull_status": "denied",
+      "error": "Head \"https://ghcr.io/v2/web-arena-x/webarena-gitlab/manifests/latest\": denied"
+    },
+    {
+      "image": "ghcr.io/web-arena-x/webarena-wikipedia-like:latest",
+      "pull_status": "denied",
+      "error": "Head \"https://ghcr.io/v2/web-arena-x/webarena-wikipedia-like/manifests/latest\": denied"
+    }
+  ],
+  "infrastructure_verification": {
+    "docker_daemon_running": true,
+    "docker_version": "28.0.4",
+    "playwright_installed": true,
+    "playwright_version": "1.62.0",
+    "chromium_installed": true,
+    "chromium_path": "/home/runner/.cache/ms-playwright/chromium-1234",
+    "python_available": true,
+    "python_version": "3.12.14"
+  },
+  "execution_commands": [
+    "pip3 install playwright",
+    "playwright install chromium",
+    "docker pull ghcr.io/web-arena-x/webarena-shopping:latest  # DENIED",
+    "docker pull ghcr.io/web-arena-x/webarena-gitlab:latest  # DENIED",
+    "docker pull ghcr.io/web-arena-x/webarena-wikipedia-like:latest  # DENIED"
+  ],
+  "evidence_files": [
+    "research/experiments/EXP-INTEL-34047713704/result.json",
+    "research/experiments/EXP-INTEL-34047713704/report.md",
+    "research/experiments/EXP-INTEL-34047713704/provenance.json"
+  ]
+}

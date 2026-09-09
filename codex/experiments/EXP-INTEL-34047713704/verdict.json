@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-34047713704",
+  "lane": "intel",
+  "decision": "BLOCKED",
+  "claim_updates": [
+    {
+      "claim_id": "C-CROSSSITE",
+      "status": "HYPOTHESIS",
+      "reason": "BLOCKED — no live measurement performed. WebArena Docker images on ghcr.io/web-arena-x/ require authentication (denied on all 3 images plus tags v1/v2/stable). Heuristic yield estimates (shopping 0.65, gitlab 0.60, wikipedia 0.517) remain unvalidated priors from EXP-INTEL-33945226776. No evidence to promote, reject, or advance. Audit ceiling: BLOCKED infrastructure diagnostic only."
+    },
+    {
+      "claim_id": "C-LLM-INHERIT",
+      "status": "HYPOTHESIS",
+      "reason": "BLOCKED — no live measurement performed. Central question (whether heuristic yield estimates match actual fragment extraction) remains UNANSWERED. 812-task corpus suitability for C-LLM-INHERIT testing cannot be assessed without authenticated Docker deployment and geometry-faithful viewport filtering. Audit ceiling: BLOCKED infrastructure diagnostic only."
+    },
+    {
+      "claim_id": "C-PRODUCT-ECON",
+      "status": "HYPOTHESIS",
+      "reason": "BLOCKED — no live measurement performed. REQUIRES_TRANSFORM overhead cannot be assessed from heuristics alone. Product consequence of either positive or negative result not realized. Audit ceiling: BLOCKED infrastructure diagnostic only."
+    }
+  ],
+  "product_action": "NONE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can ghcr.io/web-arena-x Docker authentication be obtained (GITHUB_TOKEN with read:packages scope or docker login ghcr.io with PAT) and the full REQUIRES_TRANSFORM pipeline re-executed with geometry-faithful viewport filtering (Playwright/CDP union_bound, not depth/role heuristic) for 2-3 WebArena tasks, resolving whether heuristic yield estimates (0.517-0.65) match actual live DOM extraction?",
+  "reason": "Experiment is BLOCKED per frozen decision_rule branch: Docker images cannot be pulled for all 3 tasks (ghcr.io/web-arena-x/webarena-shopping:latest, webarena-gitlab:latest, webarena-wikipedia-like:latest all return 'denied'). This is an infrastructure failure, NOT a scientific falsification. Playwright 1.62.0 + Chromium 151.0.7922.34 installed successfully; Docker 28.0.4 running; 86GB disk / 15GB RAM available. The blocking factor is registry authentication, not compute resources. Measurement script at /tmp/opencode/measure_yield.py implements full pipeline but viewport filtering uses depth/role heuristic (depth<=4, role in viewport_roles) instead of required union_bound geometry — must be fixed before retry per auditor required_fixes. No outcome-bearing measurements executed; all actual_yield and yield_delta metrics null. Heuristic estimates 0.65/0.60/0.517 and Method 1 0.365/0.484/0.517 remain unvalidated priors. N=1 pilot design acknowledged but not executed. Smallest next action: obtain ghcr.io authentication and re-execute with corrected viewport filtering.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-34047713704/result.json (status BLOCKED, outcome NOT_APPLICABLE, docker_images_pullable false, all actual_yield null)",
+    "research/experiments/EXP-INTEL-34047713704/audit.json (status BLOCKED, producer_claim_supported false, claim_ceiling BLOCKED, required_fixes viewport/auth/script-hash)",
+    "research/experiments/EXP-INTEL-34047713704/report.md (Infrastructure Assessment tables, Decision Rule Application BLOCKED branch matched)",
+    "research/experiments/EXP-INTEL-34047713704/provenance.json (docker_images_attempted 3 denied, infrastructure_verification docker_daemon true playwright true)",
+    "research/experiments/EXP-INTEL-34047713704/spec.json (frozen decision_rule BLOCKED branch: Docker/Playwright fails for all 3 tasks)",
+    "research/experiments/EXP-INTEL-34047713704/prereg.md (sections 7.3 BLOCKED criteria, section 8.4 viewport validity threat)",
+    "research/experiments/EXP-INTEL-33945226776/handoff.json (parent: heuristic exploratory triage ceiling, unknown yield calibration)",
+    "research/experiments/EXP-INTEL-34047713704/failure.json (prior director exit code 66)"
+  ]
+}

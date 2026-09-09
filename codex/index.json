@@ -426,6 +426,31 @@
         "handoff.json": "8c9ab18ce8dbb83cd6eea32b5affb134af5a5bc773614c1d5ac1d850a3d0e183"
       }
     },
+    "EXP-GRAPH-34320613096": {
+      "lane": "graph",
+      "request_id": "779a7eac964bd86fb6f2cb10",
+      "created_at": "2026-09-09T06:46:52.460374+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT"
+      ],
+      "question": "Does the parameter-slot-count fix exist in the committed HEAD (src/spider/kernel.py L112 sort key includes len(parameter_slots)), and if so, does it resolve the equal-confidence hazard for all unseen ids 2-7 under production-like registry upsert ordering without monkey-patching?",
+      "audit_status": "PASS",
+      "decision": "BLOCKED",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/graph",
+      "hashes": {
+        "request.json": "635e45ce1c70234d773d59933bea81d8d5f2dcf35fb966ecc248c5ab948dd0f1",
+        "spec.json": "7801d6664a211bca1562c2366a090e966af2399ab56e5199dd8f4c47922698e6",
+        "prereg.md": "137feb5f55304802573d33b00e13ad75527cb9a3301deae585fc1d7c77abb5e5",
+        "freeze.json": "9949f2387099992891440e98848aac132544a17425bd99c8b2434853d4dde7bd",
+        "result.json": "708d1a810bbcd5ba6020ca44be175d974eb6fb997bfdd1359eebe0f18eafe867",
+        "report.md": "71a01c129f68bd478eeae56857d4726276631e674b2f3a15e5e674b70c6b51e9",
+        "provenance.json": "75ddd4c38881b2840ff80991e7dd82b7267ac98d4be20ee312693676af8171b2",
+        "audit.json": "0eea3f5dc1dc203aa5d70089b42feb127ecfccbe8f7c9d6fd4c332bd4e10f431",
+        "verdict.json": "d6b05a5761ed5adb270fe2f8944f3beb28380fd02b22f74c8fa74e8dd4e8cc5c",
+        "handoff.json": "95197b2fb0c5af9d49eeedbb9bc0c678a97abb3da7a027cf8d5803bba9981382"
+      }
+    },
     "EXP-INTEL-33528832113": {
       "lane": "intel",
       "request_id": "46d19fdaf32e996c0ab24bd7",
@@ -530,6 +555,33 @@
         "audit.json": "13d28ebb31053fe10dc82df99398a7ea773693856bae7a6dceaf0e2491ea009a",
         "verdict.json": "8ad47ed78419813e5da03d210d075f200fdf0bf75a86d10f277eda50cbac86c9",
         "handoff.json": "5e5ff97a5b2d776b81eafe3eeed7af3ebdfe7b0bdb302929a9a79ed62521644a"
+      }
+    },
+    "EXP-INTEL-34047713704": {
+      "lane": "intel",
+      "request_id": "bffdbf95181e1d9c8b9ad63f",
+      "created_at": "2026-09-06T17:09:41.237555+00:00",
+      "claim_ids": [
+        "C-CROSSSITE",
+        "C-LLM-INHERIT",
+        "C-PRODUCT-ECON"
+      ],
+      "question": "Do heuristic fragment yield estimates (0.517-0.65) from EXP-INTEL-33945226776 match actual fragment extraction on live WebArena Docker pages with current_viewport_only=True, clean_accessibility_tree filtering, and IGNORED_ACTREE_PROPERTIES pruning?",
+      "audit_status": "BLOCKED",
+      "decision": "BLOCKED",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/intel",
+      "hashes": {
+        "request.json": "7ee0962085333152786c15e640a9fa22623c1153b8c80a2a4bf868e7099f7e3f",
+        "spec.json": "4880305583c61511a7f2f47a2dfaf042414e40c946f150e2298fafcec87f77c8",
+        "prereg.md": "d9c711e9c2067a99ff19221930d0a0a50bedca1838ffaf60427c1dee556b7012",
+        "freeze.json": "279662975e7af3d470e50666624922a2947e6bcc419bfc85fcdfd1196797eb85",
+        "result.json": "5e27aaa7ad1f4143d4f8c9d7e3e66b1ad340cdb97ae4d39f545f4dd07026e6ba",
+        "report.md": "b9e243b341da2c465cfe00b5c6ee9aa4dcb5506d076b058c88ca7a28a37e3cdb",
+        "provenance.json": "d0a1dabbeed5ee104421c3a40f6fb65851927cbda35b8f0bd767e883ccba978b",
+        "audit.json": "9caafbfacab658bb3b78f0c8345f64a8390874ec7de6ea637e2681144f6957b4",
+        "verdict.json": "1e9ea1fde87a9149035b7628b2c35f58813030848a336684af9c48ba8e4c05e4",
+        "handoff.json": "5f6b0d3c6feb324b2a23b76fec341b91186c180fb74a62b469768064ad3eb7cc"
       }
     },
     "EXP-PHYSICS-33528829431": {
@@ -683,6 +735,31 @@
         "audit.json": "a31e0481721b17b837bbef70ca4842bb005eb4b5449ac2612043dff41490b9b2",
         "verdict.json": "c14b8a3017f0cff9f254645b98a0d263a99ac475026bdc873bdade8e6becd906",
         "handoff.json": "a3e4d8268994ad3bf053958a277db1e4db9b7b3c66c0b2a8e1f4976c8ace3e4c"
+      }
+    },
+    "EXP-PHYSICS-34266105229": {
+      "lane": "physics",
+      "request_id": "9ad6c1d15bef92e3946f4e5a",
+      "created_at": "2026-09-08T18:57:34.482242+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Does title-aware PMI detect dynamical structure on real SPA/form-heavy browser transitions (React/Vue apps, form-heavy pages) where non-leakage transitions are frequent by construction and titles may be noisy or ambiguous, using browser-collected action->next-state data with sufficient transition density?",
+      "audit_status": "REVISE",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/physics",
+      "hashes": {
+        "request.json": "44296e8a0f05e80ee7026b229d7c44b62590c4f0681126d65789312020965899",
+        "spec.json": "ff42f58514372b6de3cea12482e406a5398fb7e0f007f2c09c286ebf7fb96b9a",
+        "prereg.md": "d35a1caa8d48239bbd7117e4c7fb38df6de237aeecbbb0a6c9b22190e4eca66c",
+        "freeze.json": "5f8a5a9b6dba605ecc1d1d0c9252f6cce5ac9dbe747526d2a53c75f5c889b403",
+        "result.json": "ca3777efa990f854ced875465bf5f586df19745a0e441dd4256b58e0f05b40bc",
+        "report.md": "227e640fdfb2c47e0dddb9c285637996940c470fb0a1cfd5df84e54e645f999a",
+        "provenance.json": "319c0b257218f9eccf53da18816f46af62eb20d24a47156d38e4491e844d2be9",
+        "audit.json": "7a4546a050094fd9cf92d4504f59b9bb0fa4ccd8155a02b89a14e95b9d833b78",
+        "verdict.json": "0a25fd1741c3d4304765c2ee5c6237d5e6fb95267f3c1d74e15d84c41f7d683c",
+        "handoff.json": "6b154e2ff4deb9b597236c2cf4993676fe7f8e39b2d61024e198a1596733ca16"
       }
     },
     "EXP-PRODUCT-33528829801": {
