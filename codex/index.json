@@ -101,6 +101,81 @@
         "handoff.json": "60114d687d01d0e194c2ced91fe6f883ffad4f3e9c9dee5b5e9019c799a0c433"
       }
     },
+    "EXP-FRONTIER-34029326102": {
+      "lane": "frontier",
+      "request_id": "e28e889380827ad8a27445f8",
+      "created_at": "2026-09-06T11:07:35.454892+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Does TV distance maintain its ability to detect action-dependent dynamical structure when synthetic Web transitions include realistic noise mechanisms (action-dependent heteroscedasticity, non-stationarity, state-dependent stochasticity), or does the signal degrade below detection threshold under realistic noise, rendering all prior clean-DGP validation insufficient for product deployment?",
+      "audit_status": "REVISE",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/frontier",
+      "hashes": {
+        "request.json": "c41a142a4c8e69b271678b4c32800520e0cb5293a1f1bccd2e9e4da1f0a63ac6",
+        "spec.json": "265b36230072f6b6cfc61a7d33d242bee90d054a55251a3408781f787696047c",
+        "prereg.md": "e2c9bba36f073f21179f59737ebf75fdd11099d37807b69ac83b5456c7ccd9f8",
+        "freeze.json": "09a8ede961ab069ea8ec0526bfe811a8e60289f20c5c3968448e67eb66258a5d",
+        "result.json": "85b14b72a9938f1070df0ac9f60b54d014fce4638061e82b76257fc5c75ff305",
+        "report.md": "66e2f88480c369cee1bbaf018de5afb129fb23e34e94d8a6b8be1c757188d42f",
+        "provenance.json": "95b5646b68c11844c72ef11ee8a608526c488160ac4b3ec54b8d1d2022dee4c4",
+        "audit.json": "259f696d4b0e984d597a7fa6c48e86867034285dfa13acc1c170d78fdd689c94",
+        "verdict.json": "19465d1e92d906dd8cd33e239cd18876f2660558f5e404061da27c54a62eec46",
+        "handoff.json": "f7d2a875c7227e81f12fe501a3b16f34f6b5145138fbc14c29ce44b7ab4fc244"
+      }
+    },
+    "EXP-FRONTIER-34061241004": {
+      "lane": "frontier",
+      "request_id": "aedf2e5d903ae3373e2dc66b",
+      "created_at": "2026-09-06T21:30:01.569212+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Does TV distance detect action-dependent dynamical structure in realistic synthetic Web transition DGPs with continuous state, state-dependent dynamics, and heteroscedastic noise, or does the synthetic-to-real gap (uniform-mixture noise on discrete states vs realistic Web-faithful stochasticity) render all synthetic DGP validation insufficient for product deployment?",
+      "audit_status": "REVISE",
+      "decision": "SURVIVES_CURRENT_TEST",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/frontier",
+      "hashes": {
+        "request.json": "c307fca8608e2b9c1f7d246c67dfcbe0840173ae920aca112319e4ecede89c7f",
+        "spec.json": "270de16bc8a851fdcb4cfd7c230ef0e3c4f50847204dfc09765197018c6d06e2",
+        "prereg.md": "d0a9a98fbe5a0946434a28bc1e9e3d2f49ece0cccfb002a918371bd836b711bc",
+        "freeze.json": "50b7d14c1804cd2c951319a78f730c476014570955d0fa16c7505ce6a8c10803",
+        "result.json": "a5c391deae34e93519a73f76433297b5e359f70b01fb0bd5b1666c22a953b2d5",
+        "report.md": "b524ddd9b0f83cfc235694a1fe7ad37bf2fdcb0ae5c0b89ce669b02dbbe2ffcb",
+        "provenance.json": "b9e337f8902cd05aa7f2adf6bc66458be9633fe4f0d903d8287a83ed2a78e26f",
+        "audit.json": "c964f45787b0e0c1f1494e340146517101c31b877b4b7594b3336f98ac54eeb2",
+        "verdict.json": "57eee6f9a0f1b49ad21b3ff8e9506198134ee8bac3ff165ebb861d5ab01edd17",
+        "handoff.json": "f0bd29f254c6e84e1b8f8c0a3b8ab122d70f4830c5c58b354fc484a098834dc1"
+      }
+    },
+    "EXP-FRONTIER-34065969836": {
+      "lane": "frontier",
+      "request_id": "5f68f63d28f9078900ab600b",
+      "created_at": "2026-09-06T23:07:22.600761+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Does TV distance detect action-dependent dynamical structure in higher-dimensional (10D) continuous state spaces with non-Gaussian heteroscedastic noise, or does the 2D result fail to generalize when state dimensionality and noise distribution complexity increase toward Web-realistic conditions?",
+      "audit_status": "REVISE",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/frontier",
+      "hashes": {
+        "request.json": "7e41f131747af8a2a3b2ef8fbf911c5a86de89b3534b77271a209d9ef3d5ac80",
+        "spec.json": "daf47a2e57a7372b2cfce9854240100162e434f332eeada223d238d8a985ff32",
+        "prereg.md": "b5311e10b8560745548d63b6465d6c8d9db75945ed3bc1ada70a3dcccaedaa33",
+        "freeze.json": "670d6baeab6ac66b580ebe8d8086a4c1c705f100a6fac7f8ed8d784789ec5dea",
+        "result.json": "7d0e180bbced137cee1f2f53968750e274f2409deb0496e839ea3fbd9f062592",
+        "report.md": "cba8f27d78c39dc7c5525c417df5f39cad43a182957f88ebd6d65a147d0dda49",
+        "provenance.json": "187f41a10ea7708f775e099ca4de893f354ffb0fcf849ab1b14bd3fd071d6fcf",
+        "audit.json": "b4a7cfbc0e121128485d82022f173f25eeea5cae159c7487889169b1b17a6ba2",
+        "verdict.json": "d8a5483c7cc260cbd81d1c4b996ac7fcb99b90f219571f11b3d920adf1b84a8e",
+        "handoff.json": "26e7bd90e02cd678328699e7a7cd2d1e0e6e0873361d309d1e775253ff0ef805"
+      }
+    },
     "EXP-GRAPH-33528827169": {
       "lane": "graph",
       "request_id": "3e0d81e7790f2f2b7bd8665e",
@@ -199,6 +274,131 @@
         "audit.json": "d179f2624851ab1715b5858ed75ac9a3facba7a95ea85a97f396a3e0e94adab6",
         "verdict.json": "07f75b8b3bbae3b148a9531cf06b2dc0508ba1a0949bc520af98f285fb5767b4",
         "handoff.json": "423be67d7374d5c7fb271c44146735e754ab46708b396bdaedb8dd99d93354d4"
+      }
+    },
+    "EXP-GRAPH-33998605047": {
+      "lane": "graph",
+      "request_id": "a68901b6b8bbe0d3de1db9e0",
+      "created_at": "2026-09-05T23:24:57.812810+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT"
+      ],
+      "question": "Does the parameter-slot-count fix, applied temporarily during execution, eliminate the original 5/5 false accepts from the literal-vs-param equal-confidence hazard (EXP-GRAPH-33718012817) without regressing any baseline conditions, and does it generalize to multi-slot (2 vs 1) and template-only parameter scenarios?",
+      "audit_status": "REVISE",
+      "decision": "PARTIAL_VALIDATION",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/graph",
+      "hashes": {
+        "request.json": "1ecf2440e6e1872cb02667017d912ad32f0dc8f2367781cccece88f9065406d5",
+        "spec.json": "dc70d7b0add0c0d7e73a321d3f0e6fe2efa12f6cd708da4d208fe8790b9ce2f9",
+        "prereg.md": "fd6beb15bb4ea66a89cd565dcd5c0859bac89f856c359044f2468acf77703b17",
+        "freeze.json": "396c33eb7aad7bb0ccb39214e9d8e378db06c02a2f7e820c3ee0ecf9d18ed83b",
+        "result.json": "f213bf2a298353d853c820cbdc81fc750247f6501a3364515e67e01876a9c134",
+        "report.md": "371ce1238126dd3f06f96ade2dd09a3a553b8a559184e8d13b6164517291ff4a",
+        "provenance.json": "c02317b026d9bc34c445a8a6028cc4e3d243a9a47c545925ae79378b2a973e61",
+        "audit.json": "16bfdb99df3f4a883168016ce85bf67447cc677fb0f118f29ccca6a3f41e112d",
+        "verdict.json": "589fa4d3e23609bd23b68234f6f3d87bbd34119fc43b5b4003fa2971b4e30dce",
+        "handoff.json": "3bea416e31107aaaaeb156b49346268726ce6edf72da12f3371060c282e4c37d"
+      }
+    },
+    "EXP-GRAPH-34170139507": {
+      "lane": "graph",
+      "request_id": "83cbf1ca33956914f3734dd4",
+      "created_at": "2026-09-07T23:28:20.399790+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT"
+      ],
+      "question": "Does the parameter-slot-count fix, applied temporarily during execution, generalize to actual HTTP execution against a live endpoint \u2014 specifically: does the parameterized mechanism resolve correctly, bind to the correct URL, execute a real HTTP GET, and return the expected response for both seen and unseen identifiers, while the literal mechanism fails to generalize?",
+      "audit_status": "MEASUREMENT_INVALID",
+      "decision": "MEASUREMENT_INVALID",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/graph",
+      "hashes": {
+        "request.json": "bc755c2df004b5e6fb019da9e33ae55fc2722b1e76c6e3fc61487bc7a2c21b5a",
+        "spec.json": "ccb6ee5e5579d080dbb4d77e056a6439f74dea053f163e6d2c88cac359cf3382",
+        "prereg.md": "ac25e3703a2bf6011d8fe873bc5f4371687afc6bc90b249b690e6382a738376e",
+        "freeze.json": "ce2feb11df6f9b041a8b1a2594e3ee0e11e33c02f8df4a8763de88b545b9cef1",
+        "result.json": "f2f1f03892ffa90eac7cb50581f1f86af0c8eb2461ebfe32da96648e29a92063",
+        "report.md": "425ba2083beb801b503769094b8cbcc0845e45d2fea9f6795439872002ac7e54",
+        "provenance.json": "c301b389918886f1213a3569f45c98f0ef8f495c1a659ff1a3369e6b50667e4b",
+        "audit.json": "090f892bf674fc09afa2d8e9a0c1acc13ae6d8d775c4b46d760bb5d2f707b548",
+        "verdict.json": "3916dc94f760c43da1a033dfa946839842466dc2a20cada3548c0db816acc73e",
+        "handoff.json": "65c6fcfeae4ea36110fddc6ba21e48357f9f33e7af529c867adf8debe8532bfc"
+      }
+    },
+    "EXP-GRAPH-34176416673": {
+      "lane": "graph",
+      "request_id": "01ce31b800eafd10675d34b5",
+      "created_at": "2026-09-08T01:22:28.134028+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT"
+      ],
+      "question": "Does the parameter-slot-count fix survive commitment to production HEAD and re-validation without monkey-patching, and does param generalization hold across multiple unseen identifiers in committed HEAD?",
+      "audit_status": "PASS",
+      "decision": "BLOCKED",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/graph",
+      "hashes": {
+        "request.json": "b21878c4933f8f841b0056fd14377a235c35ed93557756b907d387186ddde530",
+        "spec.json": "64ae407c09ca941c008dd5aae07a93408923aff31f94b9f9ba7267674be21427",
+        "prereg.md": "964392a420c4c5cfdea19f39ccf981ff3765c21f0df0a5eb90d3645f536f1c85",
+        "freeze.json": "661c8efffa4d44422f1876b66bfc433f605dd996e77c2db55571c00fa223200f",
+        "result.json": "fa9d552c6b99c0367f9bbfe4fa50edd0de4d206302fcba129c6edcb6f2a12682",
+        "report.md": "7e771dba03dfea2f28ce59af0d2e7b70b41befcc46eb1df2d2d01bbdfc2c2931",
+        "provenance.json": "5a9ec0cbb823c9afa385f5d5d4c26279a38b1422d767b9ec9ed7572a6bed8893",
+        "audit.json": "12be8d067b8606e2f8df8657102e5fc9abec7485d8ad14f116dc5c07c6ecec89",
+        "verdict.json": "96439c73507b04d92685d0272b2b2a779f4a7215b631ee079e623579f01906c3",
+        "handoff.json": "92b95d054dfedc48d99ad6c56ca23f6ad80172107fa378355da8db5cce90620c"
+      }
+    },
+    "EXP-GRAPH-34222171093": {
+      "lane": "graph",
+      "request_id": "15f0af4523477a46175f2345",
+      "created_at": "2026-09-08T11:43:22.770720+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT"
+      ],
+      "question": "After committing the parameter-slot-count fix to production HEAD (candidates.sort key includes len(parameter_slots)): does the literal-vs-param equal-confidence competition resolve to param for all unseen ids 2-7 without monkey-patching, do all 6 baseline conditions pass, and does the corrected B_CONFIDENCE_LITERAL_HIGHER condition (literal 0.98 > param 0.95) remain literal-winning?",
+      "audit_status": "PASS",
+      "decision": "BLOCKED",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/graph",
+      "hashes": {
+        "request.json": "c48613bd90a76990a0622d94b3ead95384fcfa30d05d9df244baf5de268c24f9",
+        "spec.json": "963de61d99b995b02728e167cad65290f2310744510521571fb99539ba0703f3",
+        "prereg.md": "32de18e0ca11597772c688177506cc2a563ac9b144e4712714bb59cb32c8286c",
+        "freeze.json": "6cb40f94a31ff89e2c6098be6d838753acbc3b2ba11e33c1281443be7b361428",
+        "result.json": "50b01f09ac4d620a3e9c6806e21defbd20829a85b17f2a9f390fe4f4efae8d69",
+        "report.md": "33ca665a54f6578376c30b4275e0ea31a8327bb2ed04e9ed7e0ab1e7f604f0ed",
+        "provenance.json": "c87935d24f5b6c919c2107f23e947cfba15a362d9a60516647cb0e471403b95b",
+        "audit.json": "629ef51ace7f169a01cae11e46c948c3da4b8a673a8b200f1c8fdb4528810825",
+        "verdict.json": "09b0cc2a90783fa342381ad34a80149e6eb4d767bcab9a45758ee372bd03b6d8",
+        "handoff.json": "2fd5c52e356f14fd16df4bfd77cefec1099e92a4d53840135ae946328eda096a"
+      }
+    },
+    "EXP-GRAPH-34244445713": {
+      "lane": "graph",
+      "request_id": "925d0c299d1541b60bc44db9",
+      "created_at": "2026-09-08T15:23:44.338689+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT"
+      ],
+      "question": "After committing the parameter-slot-count tie-break fix to src/spider/kernel.py L112 (sort key includes len(parameter_slots)), does the literal-vs-param equal-confidence competition resolve to param for all unseen ids 2-7 without monkey-patching, do all 6 baseline conditions pass on committed HEAD, and does the corrected B_CONFIDENCE_LITERAL_HIGHER condition (literal 0.98 > param 0.95) remain literal-winning?",
+      "audit_status": "PASS",
+      "decision": "BLOCKED",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/graph",
+      "hashes": {
+        "request.json": "49e55f0d601f0478c5bd0a6f883854a1db27fbe77d76cefd68571437c0c70ad2",
+        "spec.json": "687bc393a6c783c54fe898657fff544a1c5aa4cefd4d647d533a37ef813e8577",
+        "prereg.md": "f7368371532d1441cd024e4ac2de0c489fc504e0a9b89e6046a22db4881eb86b",
+        "freeze.json": "b0f2e8b90081f1525abda303da6ea30d2bc1059577fe9f1b86c6610a6207b4ca",
+        "result.json": "322e8c53a1698dc8b922c24bb8a1fbd8ce63b4f94ea69485f48ddeceafd20c6a",
+        "report.md": "03219214f311b4b38ece3e94b81e74aa751c3fa6dc180fb1d5b98a21ab25a424",
+        "provenance.json": "fc32efaa90796662814faaae2aa7c7c1e39881dd35e01b99ebc3894463f14619",
+        "audit.json": "58fb34097eb4e3dc1a209d8cf31ce6d381bb21a771e1add3d532c7f888c8bae1",
+        "verdict.json": "769221e4789079093ca0f6a537b3787e1765b32b88615e9dc35aa1ae7173ac26",
+        "handoff.json": "4d6e645fde38107c747640644754ef6f60ab88547510ccd8e29557d848907f08"
       }
     },
     "EXP-INTEL-33528832113": {
@@ -385,6 +585,81 @@
         "handoff.json": "7f0b538ceb9a666cda9654b153bd9c83001b13f195e0cb48ee80bcd161c2079e"
       }
     },
+    "EXP-PHYSICS-34038570933": {
+      "lane": "physics",
+      "request_id": "71856e15a43f3a430061bdeb",
+      "created_at": "2026-09-06T14:15:18.450423+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Can pointwise mutual information (PMI) between actions and next-states, conditioned on current state, detect action-conditioned structure on live Web pages that point-prediction accuracy metrics fail to detect due to sparse state spaces and self-loop contamination?",
+      "audit_status": "FAIL",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/physics",
+      "hashes": {
+        "request.json": "ef69b2ab824ab126390fbdac9ba24183c8873d792d6b668b36758642e41920c5",
+        "spec.json": "d6615a3e3e02c47b4d9372502a833be51d4a7d69431957f09ce299a23bc1e2e7",
+        "prereg.md": "3219a324a7775a82da58b4fe40891ac8681b66b8b7ac5b75d3eadabc91c9365e",
+        "freeze.json": "b1938ae667eb630dca081805d3673bcedec8e81926f8bc851f09b963522a006b",
+        "result.json": "d6e971279599e67db8b1bcc0573d2f25dcc90d5cd14f4b19ffd2dac9930fd4ef",
+        "report.md": "ed738cd5ea45c29fd9af020864845905b63b895100d8743c0340bb7da30863b5",
+        "provenance.json": "a03f78cb301f63503caf89615698d95ffbd927bd2f6950643a3b97546f9b4544",
+        "audit.json": "e613744bc1290a0d6e359f6dccf301b2ff77e3eba962604cc6a07aa1eb962cca",
+        "verdict.json": "914e67c30b7079eb406e7a8200979cef6a1c811a4ac29ab681726d7b1ac2d3a7",
+        "handoff.json": "e11f8fa1e4a05857519c496350d625fe69138b4a6a233ba50ff72a134483b3ac"
+      }
+    },
+    "EXP-PHYSICS-34071626363": {
+      "lane": "physics",
+      "request_id": "e8d89173638ed6403debdccd",
+      "created_at": "2026-09-07T01:01:14.041519+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Does pointwise mutual information (PMI) between actions and next-states, conditioned on current state, remain positive when action-to-destination URL leakage is eliminated (i.e., transitions where action.target_href != state_after.url)?",
+      "audit_status": "PASS",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/physics",
+      "hashes": {
+        "request.json": "f9d4ed3f84e89331f2ac83f9f85bbddc32365434e231210382f56bb1bb7f4ec3",
+        "spec.json": "5c74470e1485f9f75209089c809d14f0973bf4c5f0c2ad329f5a75d386ab1119",
+        "prereg.md": "802474e9b32e0e400349971433b94be137bd89ea9ec0f54f220f7fc9e4a9e6bf",
+        "freeze.json": "13ae575c5ae16ee9cf556af7772d12e2dd33132f39ac607e8a9547f94b91c210",
+        "result.json": "6164cbe587766adf0357826c23debe94be7e0c932a92844c24d65c91ded670d6",
+        "report.md": "7417372e4981082ec3634bfdc9e316583f8058a5af575dcec3d7e7d3c4b14cf7",
+        "provenance.json": "f40b78c849f0b8f4e76e68e16a9f512b4683e32d0dfc7403a80fe32bf6595f17",
+        "audit.json": "487307ac399a94b01d08c03698c2b5ba400969663a50b4a6f48554773738c628",
+        "verdict.json": "987f0e9036cef99e70ad23aec70d8e0b664100ebabcdbc494750d2b63fef3950",
+        "handoff.json": "c1cec38c259eaec983f5165c96ad77901ace1c29dd8e8c65b33261cc19cded4b"
+      }
+    },
+    "EXP-PHYSICS-34149195420": {
+      "lane": "physics",
+      "request_id": "519dd95dcd99ae5437b5b6c4",
+      "created_at": "2026-09-07T17:50:01.867868+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Does PMI between actions and next-states detect genuine dynamical structure in non-leakage SPA transitions when the state representation is enriched beyond URL to include title and form signals?",
+      "audit_status": "REVISE",
+      "decision": "SURVIVES_CURRENT_TEST",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/physics",
+      "hashes": {
+        "request.json": "d21d7d22acb66d4f11314a8b972e483bc7d090c512548dff9a342563aa04afca",
+        "spec.json": "dcd4698c7dddfb446e9b86484832846f184efde07007f79542926302049295d8",
+        "prereg.md": "63810d581ddf29ba3d2abadd17f081ca090c5e0d9cc27af99fb0fc92a3c0b635",
+        "freeze.json": "531a2d98e54541a155787a30187da04f3160a4b38acdafda0301ad4c8b79eccd",
+        "result.json": "43262409c82b6c85f7351ee47aa3203cf6b87dd1b3076af2cbad152ecd1d4301",
+        "report.md": "378cdd8ee30e09e09bb12af8ff0e3c0f6cb1dd1101761d77922116b578f2841a",
+        "provenance.json": "1b44f820a736b54f4a9d777cd26ef931f93a978d60f7689e51abffce93350836",
+        "audit.json": "a31e0481721b17b837bbef70ca4842bb005eb4b5449ac2612043dff41490b9b2",
+        "verdict.json": "c14b8a3017f0cff9f254645b98a0d263a99ac475026bdc873bdade8e6becd906",
+        "handoff.json": "a3e4d8268994ad3bf053958a277db1e4db9b7b3c66c0b2a8e1f4976c8ace3e4c"
+      }
+    },
     "EXP-PRODUCT-33528829801": {
       "lane": "product",
       "request_id": "2629e8e63e200f05556e37ca",
@@ -510,6 +785,56 @@
         "handoff.json": "ab539267befd3a966cc762ae00cc3eff112911501a48128642e05e4f378702f0"
       }
     },
+    "EXP-PRODUCT-34015741916": {
+      "lane": "product",
+      "request_id": "0a5237d3c531bc25f9bb4197",
+      "created_at": "2026-09-06T06:09:02.304578+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT"
+      ],
+      "question": "Can the field-path relevance noise filter, two-part structure-similarity check (Jaccard>=0.75 + constant-value anchor), and double-prefix detection be ported from run_experiment.py into src/spider/kernel.py distill_parameterized() such that all 10 test conditions (B1-B5, C1-C2, D1-D3, E1-E2) pass with correct prereg training data?",
+      "audit_status": "FAIL",
+      "decision": "KERNEL-INTEGRATION-PARTIAL",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/product",
+      "hashes": {
+        "request.json": "8637bf8cae798a7888136c6b2ddde5787bb45a4a3cfda5af414e9e8bcbed25f7",
+        "spec.json": "11561ee6b9f6333be15ed2ea3f1df8f23ce8a51cbb51df2c8201592402a23e2a",
+        "prereg.md": "4b8c91395f5244fc6fd2ebfc0c0a7995417cc6bd3b6eacc6b37e2a90740f67bf",
+        "freeze.json": "e2580a8a93172b7399b85cc4154a725aa05a364945d459ddd11c78d7568019a5",
+        "result.json": "e9b34b65d05f37c5c137bbf2119b302cee34afe2e4a49b5787b9663b920512c2",
+        "report.md": "a5364646856d2294a6f30636128478764e361901ae02e654a82c83a31b402288",
+        "provenance.json": "d713746488d1bba311b871ac0edabdb7b4987cbb90afd737b9e1847fc715982b",
+        "audit.json": "0dfd5d6e638e2ac94500ee0e1fc971a098072155fdb26e4f4d07211035ace2db",
+        "verdict.json": "5512425b1fbff67715454ca0837382b081be875155010bb0555cddb64b7841b7",
+        "handoff.json": "8075b37b31e48bc5bfbd139c33cd1e0c8c4c9b81fdac6fba43589388806b8a14"
+      }
+    },
+    "EXP-PRODUCT-34195008089": {
+      "lane": "product",
+      "request_id": "cb9f09281605aa2c14bdc150",
+      "created_at": "2026-09-08T06:31:18.436352+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT"
+      ],
+      "question": "Can the C2 double-prefix bug be fixed by modifying _bind() in src/spider/kernel.py to detect when a full-value parameter already contains the template prefix and strip it before substitution, such that binding user-${url} with params={'url':'user-4'} produces user-4 (not user-user-4), and all 10 test conditions (B1-B5, C1-C2, D1-D3, E1-E2) continue to pass with correct outcomes?",
+      "audit_status": "PASS",
+      "decision": "C2-FIX-FALSIFIED",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/product",
+      "hashes": {
+        "request.json": "ce4b6c34736ca35f2a986a7f7ea40647c45ba76637b3bd4efbd4db38f546a7cc",
+        "spec.json": "196d1a0ae9ab0908e124017004df8120641043ac2f53a1c1f2d400505e118095",
+        "prereg.md": "42cb87c816fb4bbd21a07e23ce6b45403546141cdb4d17c0fdf5d9186e465869",
+        "freeze.json": "ca523e6286cce716904cc3b1231ee0501e29b35e615cbb1645181b44b5d4ce03",
+        "result.json": "feeb0224f95aea6a9446d2cd8f85d778fe9a4f720c985ff1c2ce1aea63d3cca6",
+        "report.md": "cb7a435d11f346048d34993cf55938c8406e419ed0801901c0bcc35d1c168956",
+        "provenance.json": "45e00eb55aeab968a19f36dcb3eb0a1d649e7cc90adf7932ce8bd87670e454fd",
+        "audit.json": "93e80be4a0899cbafe874d7ae45b0be032ada83e45dde25965ebbbdde541b7ad",
+        "verdict.json": "6d733c13672d2627e19309c433bebcd31996115064da7422e79d4037401b7584",
+        "handoff.json": "531dc40daddb3339fa9159d30e5c9f1edb6adec0de8bd5e4d41416df52eca88f"
+      }
+    },
     "EXP-RUNTIME-33528830833": {
       "lane": "runtime",
       "request_id": "cbf791e0cd3fe570d0ff0fd5",
@@ -633,6 +958,31 @@
         "audit.json": "fe431d0854562553fbc0cef1f17cea17983fbdea81f4d101bb35abbd16093ea2",
         "verdict.json": "fff813988930a446bae23b9fe952cfa6174bfa7c58f6cc33ebd015d1223848d3",
         "handoff.json": "68538996eba323cb60ed47841f67217c0fe1b7d191c1c3686de0dd1ee9728c5e"
+      }
+    },
+    "EXP-RUNTIME-34054515149": {
+      "lane": "runtime",
+      "request_id": "b8944cf14917e79019158adb",
+      "created_at": "2026-09-06T19:19:18.243701+00:00",
+      "claim_ids": [
+        "C-MEAS-VALID"
+      ],
+      "question": "Does the HTTP fingerprint substrate's full vector exceed B-BODY-ONLY when bodies are NOT perfectly discriminative (e.g., identical error bodies for expired/invalid token states) but headers (Cache-Control, Set-Cookie) vary independently with auth state?",
+      "audit_status": "PASS",
+      "decision": "SURVIVES_CURRENT_TEST \u2014 C-MEAS-VALID survives narrowly. All four frozen decision criteria pass: full_vector_discrimination 1.0 > B-BODY-ONLY 0.833 (incremental header value 0.167), full_vector_discrimination 1.0 > 0.5, null FP 0.0% < 5%, Cache-Control-only discrimination 0.833 > 0. The parent H4 ceiling confound (V3-DISTINCT-BODY-CEILING-CONFOUND) is resolved: when expired_token and invalid_token share identical bodies, Cache-Control no-store vs no-cache provides the discriminating signal that body-only cannot capture, lifting full vector from 0.833 to 1.0. Audit V4 (ENGINEERED-HEADER-TAUTOLOGY-CONSTRAINT, medium severity) constrains the claim ceiling: incremental header value is by construction (application-set Cache-Control/Set-Cookie per auth state in Flask middleware), not discovery of natural production header variance. Claim extends only to Flask 3.1.3 + PyJWT 2.13.0 HS256 on localhost 127.0.0.1:18929, 4 states (no_auth 401 login_required body ae00c5, valid_token 200 alice_profile body 65d603 with Set-Cookie session, expired_token 401 auth_failed body a138b3 Cache-Control no-store, invalid_token 401 auth_failed body a138b3 identical to expired Cache-Control no-cache), headers after Date/Server/X-Request-Id exclusion, deterministic SHA-256(repr((status, tuple(sorted(filtered_headers.items())), body_sha256, ''))) on Python 3.12.14, N=40 (4x10 seed 44) server jitter 50-150ms uniform client 0-200ms. Does NOT extend to production OAuth/OIDC (Auth0/Okta/Keycloak), CDN/caching, load-balancer, rate-limit, compression, jitter >150ms, or natural (non-application-set) header variance. Product architecture recommendation to use full vector is supported only within this synthetic Flask localhost pattern where headers are application-set per state.",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/runtime",
+      "hashes": {
+        "request.json": "ba9cefd4d44540e65e090e9fae5bad7e919fb5b1eef3eb4d2348dbb9454d7d8c",
+        "spec.json": "26aa1fda330358740f7278c80ba773c3be0a02979bcc8d2a0cbbfb3a6570517c",
+        "prereg.md": "1d0de2ee1c5f404dcecbc3e126f0b3e7a78484b7c4fc6c765d159e30d4e337e0",
+        "freeze.json": "2f3273751d2c78f30c6ac15802e3c9b502a04a0039ad03a2a6a48858066e5d45",
+        "result.json": "dfbffc02b91a5788dc96cc087c1d7bf438f700a3aa91ad52d582b37e192ed3fa",
+        "report.md": "6c50bb8479f4aa1cf7d19500d50a10ddd972fbfd3e1095c12f32622c06ac41bf",
+        "provenance.json": "50a48819f1087eb68500b9efbeb27030eb79eb4e0303257fa953a63611aad0e7",
+        "audit.json": "12aad69418501dd304624a7b998ca5adf0d136e3aae109ed6e8b69eaf216a999",
+        "verdict.json": "660be2af5c84faf3a1d077409aab30aa85f8d0a277ef23ee2b0baf524aff9c97",
+        "handoff.json": "7b28391976ee38f749fd1283549e41e5eafbe2e07671138ed99cc3647ffc3956"
       }
     }
   }

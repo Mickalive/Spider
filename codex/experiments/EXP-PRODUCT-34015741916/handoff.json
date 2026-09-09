@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-34015741916",
+  "lane": "product",
+  "target_lane": "product",
+  "next_question": "Can the C2 double-prefix bug be fixed by wiring _detect_double_prefix into the kernel's _bind() or resolve() path (or by stripping the template prefix from the param value before substitution), such that full-value binding with prefix-containing params (e.g., user-4) produces user-4 not user-user-4, and the spec-required test (training on user-1/2/3, binding with params={'url':'user-4'}, expecting 'user-4') passes?",
+  "why_next": "This experiment proved the algorithmic core (field-path relevance, structure-similarity, noise filtering, null controls) survives kernel integration for 9/10 synthetic conditions. The sole blocker is C2: _detect_double_prefix is dead code (guard always False because template already contains ${url}), and the test harness uses stripped parts (url=4) instead of spec-required full values (user-4). Fixing C2 requires either wiring the detection into the bind/resolve path or redesigning template construction to avoid double-prefix at induction time. This is the highest-upside next step because it completes the kernel integration gate and unblocks C-PARAM-INHERIT advancement.",
+  "carry_forward": {
+    "established": [
+      "B1-B5 regression preserved in kernel distill_parameterized(): slot counts B1=1, B2=2, B3=3, B4=1, B5=1 all correct with binding_accuracy=1.0 (21/21). B5 uses static A,A,A per prereg (slot_count=1 [url]), fixing parent PREREG_DEVIATION_B5. D3 uses static quantity 1,1,1 per prereg (slot_count=1 [url]), fixing parent PREREG_DEVIATION_D3. (evidence: audit.json B_REGRESSION_SYNTHETIC PASS, recomputed_metrics regression_binding_accuracy all 1.0, result.json controls B_REGRESSION_SYNTHETIC observed 'All 5 conditions pass')",
+      "C1 prefix+suffix full-value URL binding works in kernel: slot_count=1, 3/3 EXECUTABLE, bound URLs correct with prefix+${slot}+suffix, no double-prefix (evidence: audit.json C1_FULL_VALUE_URLS PASS, recomputed_metrics C1_full_value_prefix_suffix_correct=true)",
+      "D1/D2/D3 noise filtering works in kernel for top-level metadata: D1 slot_count=3 [customer, X-Request-ID, url] with metadata excluded (timestamp, request_duration_ms, retry_count, user_agent), D2 slot_count=1 [url] with metadata excluded (response_time_ms, cache_hit, result_count), D3 slot_count=1 [url] with static quantity (evidence: audit.json D1_NOISE_FILTER PASS, D2_NOISE_FILTER PASS_with_ceiling, D3_VARYING_PRECONDITIONS PASS)",
+      "E1/E2 null controls hold in kernel: E1 slot_count=0 (Jaccard=0.667 <0.75 AND constant-anchor fails), E2 slot_count=0 (< 2 observations) (evidence: audit.json E1_PATTERN_ABSENCE PASS, E2_SINGLE_OBS PASS)",
+      "Literal mechanism replay still fails on all unseen combinations: fail_rate=1.0 via kernel.distill() (evidence: audit.json B_LITERAL_REPLAY PASS, result.json metrics literal_baseline_fail_rate=1.0)",
+      "_PARAMETER regex hyphen fix is genuine and necessary: [A-Za-z0-9_] -> [A-Za-z0-9_-] enables binding of slot names containing hyphens (e.g., X-Request-ID). Without fix, B3 and D1 would fail (evidence: audit.json baseline_findings B_REGRESSION_SYNTHETIC 'B3 would FAIL without kernel_regex_hyphen_fix_applied', result.json metrics kernel_regex_hyphen_fix_applied=true)",
+      "Field-path relevance noise filter and two-part structure-similarity (Jaccard>=0.75 + constant-value anchor) survive port from run_experiment.py into src/spider/kernel.py for 9/10 synthetic conditions (evidence: audit.json claim_ceiling '9/10 synthetic conditions survive')"
+    ],
+    "rejected": [
+      "C2 full-value binding with prefix-containing params works — FALSIFIED: _detect_double_prefix is dead code (guard `if not _PARAMETER.search(url_template)` always False because template contains ${url}). Recomputed: kernel.resolve('get-user', {}, params={'url':'user-4'}) => 'user-user-4' (binding_correct false). Producer used stripped parts (url=4) not full values (user-4) per spec. (evidence: audit.json required_fixes C2_DOUBLE_PREFIX_WIRING, recomputed_metrics C2_binding_accuracy_full_value_user_4=0.0, C2_double_prefix_bug_reproduced=true)",
+      "Test harness C2 tests full-value binding as spec requires — FALSIFIED: run_experiment.py c2_unseen() returns [{'url':'4'}] (stripped), c2_expected() expects 'user-4' via prefix+slot. This tests stripped binding, not full-value binding. Spec requires training on user-1/2/3 then binding with params={'url':'user-4'} expecting 'user-4'. (evidence: audit.json required_fixes C2_HARNESS_CORRECTNESS, result.json validity_notes[5] 'C2 tested with stripped varying parts')",
+      "_detect_double_prefix is functional code — REJECTED: Function exists in kernel.py (lines 223-244) but is unreachable dead code. Guard in Step 4 (lines 404-414) is always False. Not wired into _bind() or _resolve(). (evidence: audit.json recomputed_metrics _detect_double_prefix_wired_into_bind_or_resolve=false, audit.json required_fixes C2_DOUBLE_PREFIX_WIRING)",
+      "Producer claim KERNEL-INTEGRATION-SURVIVES with outcome=SUPPORTS — NOT SUPPORTED: Maximum justified is KERNEL-INTEGRATION-PARTIAL (9/10 synthetic). C2 fails spec-required test. Aggregate metrics miscounted (28 reported vs 34 raw). (evidence: audit.json status=FAIL producer_claim_supported=false, claim_ceiling)"
+    ],
+    "unknown": [
+      "Whether wiring _detect_double_prefix into _bind() vs resolve() is the correct architectural fix for suffix-empty templates, and whether it should strip prefix from param value before substitution or adjust template construction to avoid double-prefix at induction time (evidence: audit.json unresolved[0])",
+      "Whether nested metadata filtering requires recursive allowlist or denylist — body.timestamp currently leaks (recomputed _is_metadata_path('body.timestamp')==False) (evidence: audit.json required_fixes NESTED_METADATA_SCOPE_LEAK, recomputed_metrics is_metadata_path_nested_body_timestamp=false)",
+      "Whether constant-value anchor is independently necessary or Jaccard>=0.75 alone suffices — E1 rejected by both criteria, no isolated control (evidence: audit.json unresolved[2], parent STRUCTURE_SIMILARITY_CONFOUNDED)",
+      "What full-value C2 binding semantics should be for product use — should IND/GUI expose prefix-stripped slot (caller passes '4') or full-value slot (caller passes 'user-4' with kernel stripping)? Spec assumes latter but harness assumes former. (evidence: audit.json unresolved[4])",
+      "End-to-end product economics (tokens/browser work, retrieval, verification, latency vs induction saving) — still unmeasured, requires real-browser gate (evidence: audit.json unresolved[5], provenance execution_mode offline_synthetic)",
+      "Real-browser observation noise distributions vs synthetic metadata patterns used here (evidence: audit.json unresolved[6], validity_findings SYNTHETIC_ONLY)"
+    ],
+    "do_not_assume": [
+      "Do not assume C-PARAM-INHERIT is product-ready — C2 full-value binding is broken, nested metadata leaks, all conditions are synthetic with 0 browser/network/model calls (evidence: audit.json claim_ceiling 'C-PARAM-INHERIT remains kernel-integrated-synthetic, not product-ready')",
+      "Do not assume C2 double-prefix is fixed — _detect_double_prefix is dead code, recomputed full-value binding produces user-user-4 (evidence: audit.json recomputed_metrics C2_double_prefix_bug_reproduced=true, _detect_double_prefix_dead_code_guard_false)",
+      "Do not assume nested metadata inside body/headers is excluded — allowlist only checks top-level key; body.timestamp would pass the filter (evidence: audit.json required_fixes NESTED_METADATA_SCOPE_LEAK, recomputed_metrics is_metadata_path_nested_body_timestamp=false)",
+      "Do not assume this result transfers to real browser observations — all 10 conditions are offline deterministic synthetic with 0 model/network/browser calls (evidence: audit.json validity_findings SYNTHETIC_ONLY, provenance execution_mode offline_synthetic)",
+      "Do not assume aggregate metrics are accurate — result.json claims 28/28 but raw_evidence.json has 34/34 (delta 6 = C1(3)+C2(3)) (evidence: audit.json required_fixes METRICS_COUNT_MISMATCH, recomputed_metrics reported_vs_recomputed_mismatch)",
+      "Do not assume constant-value anchor's independent contribution — E1 rejected by both Jaccard 0.667 (<0.75) and anchor false; no isolated control (evidence: audit.json unresolved[2], STRUCTURE_SIMILARITY_CONFOUNDED from parent)"
+    ]
+  },
+  "dependencies": [
+    "src/spider/kernel.py _detect_double_prefix must be wired into _bind() or resolve() path for C2 full-value binding fix",
+    "run_experiment.py C2 test harness must be updated to test full-value binding (params={'url':'user-4'} not {'url':'4'}) per spec measurement_validity",
+    "Nested metadata allowlist must be extended or replaced with recursive path check to exclude body.timestamp etc.",
+    "Product lane must test with real-browser observation noise before claiming product readiness"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-34015741916/audit.json status=FAIL producer_claim_supported=false claim_ceiling KERNEL-INTEGRATION-PARTIAL 9/10",
+    "research/experiments/EXP-PRODUCT-34015741916/audit.json required_fixes C2_DOUBLE_PREFIX_WIRING C2_HARNESS_CORRECTNESS METRICS_COUNT_MISMATCH NESTED_METADATA_SCOPE_LEAK D2_REPRESENTATION_CLAIM_CEILING",
+    "research/experiments/EXP-PRODUCT-34015741916/audit.json recomputed_metrics C2_binding_accuracy_full_value_user_4=0.0 C2_bound_url_with_full_value_user_4='user-user-4' _detect_double_prefix_wired_into_bind_or_resolve=false total_unseen_B_C_D_raw=34 total_test_combinations_reported=28",
+    "research/experiments/EXP-PRODUCT-34015741916/audit.json baseline_findings B_REGRESSION_SYNTHETIC PASS C1 PASS C2_FULL_VALUE_IDS FAIL_vs_spec D1 PASS D2 PASS_with_ceiling D3 PASS E1 PASS E2 PASS B_LITERAL PASS",
+    "research/experiments/EXP-PRODUCT-34015741916/audit.json validity_findings SYNTHETIC_ONLY C2_MEASUREMENT_NOT_PROBATIVE B5_D3_PREREG_COMPLIANCE_VERIFIED BINDING_VERIFICATION_STRICT_BUT_INPUT_WEAK",
+    "research/experiments/EXP-PRODUCT-34015741916/result.json controls B_REGRESSION_SYNTHETIC PASS C1_C2 PASS D1/D2/D3 PASS E1/E2 PASS metrics regression_binding_accuracy all 1.0",
+    "research/experiments/EXP-PRODUCT-34015741916/spec.json decision_rule condition 7 C2 measurement_validity C2 tested with full values",
+    "research/experiments/EXP-PRODUCT-34015741916/prereg.md 7 C2 critical test 'Template is user-${url}. When binding with {url: \"4\"}, result must be user-4 not user-user-4'",
+    "src/spider/kernel.py lines 223-244 _detect_double_prefix definition lines 404-414 dead code guard",
+    "research/experiments/EXP-PRODUCT-34003641840/handoff.json carry_forward establishing field-path relevance and structure-similarity viability in isolated implementation"
+  ],
+  "recommended_action": "Fix C2 double-prefix bug: wire _detect_double_prefix into kernel _bind() or resolve(), or redesign template construction to strip prefix from param value before substitution. Update run_experiment.py C2 test harness to use full-value params (params={'url':'user-4'} per spec). Re-run all 10 conditions. Separately: extend metadata allowlist to handle nested paths (body.timestamp). After C2 fix, kernel integration may achieve KERNEL-INTEGRATION-SURVIVES, enabling end-to-end product economics testing. This stays in Product lane."
+}

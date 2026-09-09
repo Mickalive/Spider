@@ -1,0 +1,326 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34038570933",
+  "lane": "physics",
+  "status": "FAIL",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Blind action vocabulary to isolate state contribution: the PMI signal is confounded by action target_href encoding the next URL (wiki 813/880 = 92.4% and python 859/880 = 97.6% action.target_href == state_after.url). PMI = log P(a,s'|s)/P(a|s)P(s'|s) collapses to -log P(a|s) when a~s', measuring destination predictability not action-conditioned dynamics beyond trivial href mapping. Re-run with hashed/blinded actions (e.g., action_type only or hash of href) or with actions where target_href != next_state.url to test whether (s,a) adds information beyond a->s' leakage. Parent audit required_fix #6 already flagged this; PMI inherits the same leakage.",
+    "Fix or justify positive-control threshold: frozen spec positive_control requires PMI >=1.0 bit on synthetic lambda=1.0. Observed 0.855415 <1.0 triggers falsifier per decision_rule clause 4. Post-hoc reinterpretation as 'design issue' violates prereg deviation policy (prereg 17). Either correct the threshold before execution (with re-preregistration) based on actual 8-state/8-action structure, or report threshold failure as genuine falsification. With 1 of 8 states having single action (products->navigate_element_shared, PMI=0), mean is inherently <1.0; threshold should be derived from actual data-generating process, not assumed 10x4 uniform.",
+    "Replace or augment weak shuffled null: spec baseline expects shuffled PMI ~0 when action carries no info. Observed shuffled null_mean is 0.9799 wiki_all, 0.8369 wiki_nonself, 1.1608 python_all, 1.3519 python_nonself, 0.1001 synthetic — highly >0, not ~0. This reveals PMI formula with Laplace alpha=1.0 and deterministic (s,a)->s' mapping yields high PMI even under null due to distributional coupling. Null std ~0.016-0.028 gives inflated Cohen d 3.5-14.5 for delta of only 0.09-0.34 bits (wiki delta 0.093, python delta 0.341). Report raw delta and sensitivity to alpha=0 vs 1.0; add stronger null that preserves a->s' leakage (e.g., shuffle that keeps marginal action==next rate).",
+    "Honor frozen self-loop falsifier: spec falsifier and decision_rule clause 3 define PMI on non-self-loop < PMI on all as FALSIFIED. Wikipedia non-self 0.899381 < all 1.073053 triggers falsification. Producer validity_notes reframes this as 'distributional interaction' but the frozen rule cannot be reinterpreted after outcome. If self-loop inclusion genuinely inflates PMI via P(s'|s) denominator, pre-register alternative decomposition (e.g., compute marginals on full set but evaluate PMI only on non-self) before re-test.",
+    "Disclose representation loss and identifiability limit: URL-only state ignores title/link_texts/tag_counts/form_signals and accessibility is 0% (inherited from parent). Producer information_theoretic H(S'|S,A)=0 (deterministic) is tautological when action==next_url; it does not demonstrate Web-dynamical structure 'beyond memory and ordinary similarity' (C-WEB-DYNAMICS). State-blind baseline (action frequency) already exceeds SA accuracy (parent diff -0.121 wiki, -0.159 python). PMI inherits same leakage, so no identifiability argument for state-conditioned dynamics.",
+    "Increase permutation resolution and report permutation floor: all 4 primary live tests report p=0.000999 = 1/(1000+1) floor, p_bonf=0.003996. With null_std tiny, any delta >0 is declared significant. Use >=10k permutations or exact test and report confidence interval for delta_E = observed - null_mean; do not rely solely on p_floor.",
+    "Provide Laplace alpha sensitivity: alpha=1.0 inflates P(a|s) and P(s'|s) for sparse states, reducing PMI for sparse states and increasing denominator effect for hubs. No sensitivity analysis provided. Recompute with alpha=0, 0.1, 1.0 and show mean PMI and shuffled delta are not alpha-driven."
+  ],
+  "validity_findings": [
+    {
+      "check": "action_leakage_href_equals_next",
+      "status": "FAIL",
+      "severity": "critical",
+      "expected": "Action carries information about next-state beyond destination URL encoding; PMI should measure P(s'|s,a) vs P(s'|s) with a not trivially equal to s'.",
+      "observed": "In live data, action.target_href == state_after.url in 813/880 (92.4%) wiki and 859/880 (97.6%) python_docs. For those triples, P(a,s'|s) = P(s'|s) empirically, so PMI = -log2 P(a|s). Hub states (Main_Page 60 trans, 43 SA pairs, H(S'|S,A)=0) have PMIs up to 5.45 bits driven purely by -log P(a|s). H(S'|S,A)=0 is trivial consequence of leakage, not evidence of dynamics.",
+      "evidence": "research/experiments/EXP-PHYSICS-33965269281/raw_live_wikipedia.json 813/880 href==next, raw_live_python_docs.json 859/880; research/physics/information_theoretic/pmi_analysis.py compute_pmi_stats; result.json metrics information_theoretic H(S'|S,A)=0.0 both sites",
+      "impact": "PMI>0 does not test C-WEB-DYNAMICS beyond memory; it measures that different actions from same state lead to different destinations by construction. Parent audit baseline action_frequency_null FAIL_INVERTED (-0.12 wiki, -0.15 python) already diagnosed this leakage. PMI inherits leakage, so significant PMI>0 cannot be generalized as 'action-conditioned structure exists'.",
+      "producer_field": "metrics.pmi_all_transitions.live_wikipedia.mean_pmi_bits=1.073, live_python_docs=1.502; report.md section 2 claim deterministic dynamics"
+    },
+    {
+      "check": "shuffled_null_not_zero",
+      "status": "FAIL",
+      "severity": "major",
+      "expected": "Shuffled-action PMI ~0 per spec baselines and null_control (permutation p>0.05 corresponds to ~0).",
+      "observed": "Shuffled null_mean = 0.9799 wiki_all, 0.8369 wiki_nonself, 1.1608 python_all, 1.3519 python_nonself, 0.1001 synthetic. Observed - null delta only 0.093 wiki_all (8.6% increase, 1.073 vs 0.980), 0.062 wiki_nonself, 0.341 python_all, 0.185 python_nonself. Null_std 0.016-0.028 inflates Cohen d to 3.5-14.5 despite small absolute delta. Recomputed unsmoothed wiki shuffled mean 0.962 vs observed 1.062 confirms effect persists without Laplace.",
+      "evidence": "result.json metrics.permutation_tests null_mean values; raw_results.json permutation_tests; recomputed via pmi_analysis.py compute_pmi_stats/permutation_test and no-smooth verification (wiki unsmoothed shuffled 0.9619, obs 1.0623, delta 0.100)",
+      "impact": "Permutation test significant (p=0.000999 floor, p_bonf=0.003996) is driven by tiny null variance, not large effect. Spec baseline 'PMI should be ~0 when action labels carry no info' is violated even under null. Test is not a strong null for C-WEB-DYNAMICS."
+    },
+    {
+      "check": "positive_control_threshold",
+      "status": "FAIL",
+      "severity": "major",
+      "expected": "Positive control synthetic lambda=1.0 PMI >=1.0 bit per spec positive_control and prereg 10.1, decision_rule check 5.",
+      "observed": "Observed 0.855415 <1.0, fails. Effect is real (p=0.000999, d=50.44) but mean dragged down by states with single action: 8 states/8 actions actual vs 10/4 assumed; products state has 1 action -> PMI=0 for those transitions; 17 SA pairs for 8 states. Laplace smoothing further reduces.",
+      "evidence": "result.json metrics.pmi_all_transitions.positive_control.mean_pmi_bits 0.8554147966268488, controls.positive_control_synthetic_lambda1 observed_pmi 0.855, result FAIL; raw_positive.json states 8 actions 8 unique SA 17; prereg 10.1 expected ~3.32 bits",
+      "impact": "Per frozen decision_rule, this alone triggers FALSIFIED-IN-SETTING. Producer correctly reports outcome FALSIFIES but then dismisses as prereg assumption mismatch. Deviation policy (prereg 17) requires labeling deviation EXPLORATORY; threshold cannot be relaxed post-hoc to rescue claim. Ceiling cannot be SURVIVES_CURRENT_TEST."
+    },
+    {
+      "check": "self_loop_non_self_less_than_all",
+      "status": "FAIL",
+      "severity": "major",
+      "expected": "PMI non-self >= PMI all per decision_rule falsifier clause 3 and spec hypothesis H2; excludes self-loops should not reduce signal.",
+      "observed": "Wikipedia non-self 0.899381 < all 1.073053 (delta -0.1737). Python non-self 1.536888 > all 1.501554 passes. Producer margin: self-loops PMI ~0 (0.0002 wiki, 0.0008 python) but including them reduces P(s'|s) for non-self transitions, inflating their PMI when marginals recomputed on full set. Producer recomputes marginals on filtered non-self set only, changing definition.",
+      "evidence": "result.json metrics.pmi_all_transitions vs pmi_nonself_transitions, controls.self_loop_interaction live_wikipedia FAIL, self_loop_stats pmi_self_loops 0.0002/0.0008; pmi_analysis.py lines 277-288 non-self filtering and marginal recomputation",
+      "impact": "Second independent falsifier triggers. Producer interpretation as 'distributional interaction' is post-hoc and violates frozen falsifier. Cannot claim H2 holds."
+    },
+    {
+      "check": "URL_only_state_representation",
+      "status": "INFO_FAIL",
+      "severity": "major",
+      "expected": "State representation tests Web dynamics beyond trivial URL identity; parent used 6-field BrowserState.",
+      "observed": "PMI uses URL only (spec measurement_validity states 'URL as state identifier'), ignoring title/link_texts/tag_counts/form_signals and accessibility_roles which are 0% in parent live data (880/880 empty). 551 wiki unique URLs for 880 trans (426 singletons), 206 python URLs for 880 trans. Singletons contribute PMI 0 due to distinct count=1 causing P=1.0 with Laplace. Hub contributions dominate mean.",
+      "evidence": "spec.json measurement_validity bullet 2, prereg 5.2, result.json metrics unique_states 551 wiki 206 python unique_SA 809/494; parent audit validity_findings full_state_representation_accessibility FAIL",
+      "impact": "Ceiling limited to URL-level. Cannot generalize to 'interactive Web transformations contain predictive dynamical structure' without controlling for href leakage at URL level."
+    },
+    {
+      "check": "deterministic_HSA_claim",
+      "status": "FAIL",
+      "severity": "major",
+      "expected": "H(S'|S,A)=0 indicates environment determinism beyond trivial mapping.",
+      "observed": "H(S'|S,A)=0 for both sites because every (s,a) maps to exactly one s' (809 SA pairs for 880 wiki, 494 for 880 python). This holds mechanically when a==s' and each SA pair is near-unique (607 keys for 616 train trans in parent). Null H(A) 8.652 wiki, 6.710 python vs I=1.062/1.454 shows action entropy far exceeds mutual info.",
+      "evidence": "result.json metrics information_theoretic H_Sprime_given_SA_bits 0.0 both sites, I_A_Sprime_given_S_bits 1.062/1.454; recompute mapping deterministic check (809 wiki, 494 python) and href==next rates 92.4/97.6%",
+      "impact": "Determinism claim is tautological given leakage and sparsity, not evidence that information-theoretic measure detects non-trivial dynamics missed by accuracy."
+    },
+    {
+      "check": "permutation_floor_and_Bonferroni",
+      "status": "PASS_WITH_NOTE",
+      "severity": "minor",
+      "expected": "Trajectory-grouped permutation 1000 perms, Bonferroni 4x, deterministic seed 42.",
+      "observed": "All 4 primary tests hit p floor 0.000999, p_bonf 0.003996 <0.0125, so all nominally PASS. Execution used PYTHONHASHSEED=0, seed=42, verified. Bonferroni 4x correctly applied vs parent 2x error. However floor indicates insufficient permutations to resolve true p; any positive delta will appear significant due to small null_std.",
+      "evidence": "result.json metrics.permutation_tests p_value 0.000999000999 all live, p_bonferroni 0.003996, provenance.json PYTHONHASHSEED 0 seed 42, pmi_analysis.py lines 176-203 permutation_test",
+      "impact": "Primary PMI>0 passes are mechanically correct per frozen rule but effect strength over-stated by using p_floor; delta and null_mean should be primary, not p."
+    },
+    {
+      "check": "data_integrity_SHA_and_N",
+      "status": "PASS",
+      "severity": "info",
+      "expected": "SHA-256 verified parent raw files, N>=100 per site, no pipeline errors.",
+      "observed": "All 4 files SHA verified, N=880 per live site, 600 positive, 300 null, total 2660 transitions, 110 trajectories per live site. Provenance verified true. Code sha 5818abdc2d07e820423 matches.",
+      "evidence": "provenance.json data_sources verified true, result.json artifacts sha matches, raw_results.json datasets_loaded 880/880/600/300",
+      "impact": "No data loading failure; MEASUREMENT_INVALID mechanical gate not triggered, supporting FAIL rather than BLOCKED."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline": "Shuffled-action PMI",
+      "status": "FAIL_WEAK",
+      "expected": "Permute action labels within trajectories; PMI ~0 when labels carry no info (spec baselines).",
+      "observed": "Null_mean 0.98 wiki_all, 1.16 python_all (not ~0). Even null_control synthetic shuffled mean 0.1001 vs observed null_control 0.0095 for random data shows null_control case is closer to 0, but live shuffled remains high. Trajectory-grouped shuffle preserves state-next distribution but not href==next coupling, yet PMI stays high due to formula structure. Baseline is not strong — does not preserve leakage, but also does not reduce to 0.",
+      "evidence": "result.json metrics.permutation_tests null_mean; controls.null_control_shuffled_actions PASS (0.0095 p=1.0) vs controls.permutation_null_all_4_primary PASS",
+      "interpretation": "Significant PMI> shuffled is not evidence of Web dynamics beyond destination encoding; even random permutation retains distributional PMI because P(s'|s) and P(a|s) remain structured. Need stronger null that blinds action->next mapping."
+    },
+    {
+      "baseline": "Marginal action entropy H(A)",
+      "status": "PASS",
+      "expected": "PMI cannot exceed H(A) upper bound.",
+      "observed": "Wiki PMI 1.073 < H_A 8.652, Python PMI 1.502 < H_A 6.710. I(A;S'|S)=1.062 wiki, 1.454 python also < H(A). Bound holds but not restrictive (trivial). H(A) large due to 579 wiki distinct hrefs / 199 python.",
+      "evidence": "result.json metrics.information_theoretic H_A_bits 8.6521/6.7098, metrics.pmi_all_transitions mean_pmi",
+      "interpretation": "Upper bound not discriminating; does not validate PMI sensitivity."
+    },
+    {
+      "baseline": "Point-prediction accuracy comparison",
+      "status": "PASS_WITH_NOTE",
+      "expected": "Qualitative comparison to parent SA vs AF (wiki SA 0.030 AF 0.152 diff -0.121, python SA 0.242 AF 0.402 diff -0.159). PMI should detect structure when accuracy fails.",
+      "observed": "Producer shows PMI 1.07 wiki and 1.50 python where SA<AF, claiming PMI detects structure accuracy cannot. However parent SA<AF already indicates action alone predicts better than (state,action) due to leakage and sparsity (607 SA keys for 616 train). PMI does not correct for leakage, so comparison is apples-to-oranges.",
+      "evidence": "result.json metrics.parent_accuracy_comparison live_wikipedia/live_python_docs pmi_detects_structure true, parent_accuracy SA/AF diff -0.121/-0.159; parent audit baseline_findings action_frequency_null FAIL_INVERTED",
+      "interpretation": "Comparison confirms PMI and accuracy test different objects, but does not demonstrate PMI detects non-trivial dynamics. Accuracy fails due to sparsity; PMI 'succeeds' due to measuring leakage. No causal isolation of state contribution."
+    }
+  ],
+  "recomputed_metrics": {
+    "pmi_all_transitions": {
+      "live_wikipedia": {
+        "mean_pmi_bits": 1.073053425557045,
+        "N": 880,
+        "unique_states": 551,
+        "unique_SA_pairs": 809,
+        "recomputed_match": true
+      },
+      "live_python_docs": {
+        "mean_pmi_bits": 1.5015537212838317,
+        "N": 880,
+        "unique_states": 206,
+        "unique_SA_pairs": 494,
+        "recomputed_match": true
+      },
+      "positive_control": {
+        "mean_pmi_bits": 0.8554147966268488,
+        "N": 600,
+        "unique_states": 8,
+        "unique_SA_pairs": 17,
+        "recomputed_match": true,
+        "actual_states_actions": "8 states, 8 actions, per-state actions {products:1, about:2, gallery:2, home:3, detail:3, footer:2, contact:2, sidebar:2}"
+      },
+      "null_control": {
+        "mean_pmi_bits": 0.009513717966261472,
+        "N": 300,
+        "unique_states": 30,
+        "unique_SA_pairs": 30,
+        "recomputed_match": true
+      }
+    },
+    "pmi_nonself_transitions": {
+      "live_wikipedia": {
+        "mean_pmi_bits": 0.8993808635774722,
+        "N": 725,
+        "recomputed_match": true
+      },
+      "live_python_docs": {
+        "mean_pmi_bits": 1.5368875901780754,
+        "N": 444,
+        "recomputed_match": true
+      }
+    },
+    "permutation_tests": {
+      "live_wikipedia_all": {
+        "observed_pmi": 1.073053425557045,
+        "p_value": 0.000999000999000999,
+        "p_bonferroni": 0.003996003996003996,
+        "null_mean": 0.9799142797949036,
+        "null_std": 0.016172091244366114,
+        "effect_size_d": 5.759251809476916,
+        "delta_observed_minus_null": 0.0931391457621414,
+        "recomputed_match": true,
+        "pass_per_spec": true
+      },
+      "live_wikipedia_nonself": {
+        "observed_pmi": 0.8993808635774722,
+        "p_value": 0.000999000999000999,
+        "p_bonferroni": 0.003996003996003996,
+        "null_mean": 0.8368872110733987,
+        "null_std": 0.017699940368794884,
+        "effect_size_d": 3.5307267257380253,
+        "delta": 0.0624936525040735,
+        "pass_per_spec": true
+      },
+      "live_python_docs_all": {
+        "observed_pmi": 1.5015537212838317,
+        "p_value": 0.000999000999000999,
+        "p_bonferroni": 0.003996003996003996,
+        "null_mean": 1.1608489006850748,
+        "null_std": 0.023457210511009435,
+        "effect_size_d": 14.524524151703803,
+        "delta": 0.3407048205987569,
+        "pass_per_spec": true
+      },
+      "live_python_docs_nonself": {
+        "observed_pmi": 1.5368875901780754,
+        "p_value": 0.000999000999000999,
+        "p_bonferroni": 0.003996003996003996,
+        "null_mean": 1.3519683595868832,
+        "null_std": 0.028358829294794337,
+        "effect_size_d": 6.520693385080488,
+        "delta": 0.1849192305911922,
+        "pass_per_spec": true
+      },
+      "positive_control": {
+        "observed_pmi": 0.8554147966268488,
+        "p_value": 0.000999000999000999,
+        "null_mean": 0.1000840882023524,
+        "null_std": 0.014973939601258352,
+        "effect_size_d": 50.44301823957012,
+        "delta": 0.7553307084244964,
+        "threshold_1_0": 1.0,
+        "pass_threshold": false
+      },
+      "null_control": {
+        "observed_pmi": 0.009513717966261472,
+        "p_value": 1.0,
+        "null_mean": 0.009513717966261468,
+        "null_std": 3.469446951953614e-18,
+        "pass": true
+      }
+    },
+    "self_loop_stats": {
+      "live_wikipedia": {
+        "total": 880,
+        "self_loops": 155,
+        "self_loop_fraction": 0.17613636363636365,
+        "pmi_self_loops": 0.0002,
+        "pmi_nonself": 0.8994,
+        "recomputed_match": true,
+        "href_equals_next": "813/880 (92.4%)"
+      },
+      "live_python_docs": {
+        "total": 880,
+        "self_loops": 436,
+        "self_loop_fraction": 0.4954545454545455,
+        "pmi_self_loops": 0.0008,
+        "pmi_nonself": 1.5369,
+        "recomputed_match": true,
+        "href_equals_next": "859/880 (97.6%)"
+      }
+    },
+    "information_theoretic": {
+      "live_wikipedia": {
+        "H_A_bits": 8.6521,
+        "H_Sprime_given_S_bits": 1.0623,
+        "H_Sprime_given_SA_bits": 0.0,
+        "I_A_Sprime_given_S_bits": 1.0623,
+        "note": "H(S'|S,A)=0 tautological when (s,a)->s' deterministic via leakage; I=H(S'|S) holds, not evidence of dynamics"
+      },
+      "live_python_docs": {
+        "H_A_bits": 6.7098,
+        "H_Sprime_given_S_bits": 1.454,
+        "H_Sprime_given_SA_bits": 0.0,
+        "I_A_Sprime_given_S_bits": 1.454
+      }
+    },
+    "decision_checks": {
+      "check_1_wiki_all_pmi_gt_0": {
+        "pass": true,
+        "pmi": 1.0731,
+        "p_bonf": 0.003996
+      },
+      "check_2_python_all_pmi_gt_0": {
+        "pass": true,
+        "pmi": 1.5016,
+        "p_bonf": 0.003996
+      },
+      "check_3_wiki_nonself_pmi_gt_0": {
+        "pass": true,
+        "pmi": 0.8994,
+        "p_bonf": 0.003996
+      },
+      "check_4_python_nonself_pmi_gt_0": {
+        "pass": true,
+        "pmi": 1.5369,
+        "p_bonf": 0.003996
+      },
+      "check_5_positive_control_pmi_gte_1": {
+        "pass": false,
+        "pmi": 0.8554,
+        "threshold": 1.0
+      },
+      "check_6_null_control_not_sig": {
+        "pass": true,
+        "p": 1.0
+      },
+      "check_7_wiki_nonself_gte_all": {
+        "pass": false,
+        "pmi_nonself": 0.8994,
+        "pmi_all": 1.0731
+      },
+      "check_8_python_nonself_gte_all": {
+        "pass": true,
+        "pmi_nonself": 1.5369,
+        "pmi_all": 1.5016
+      }
+    },
+    "recomputation_method": "Re-ran research/physics/information_theoretic/pmi_analysis.py with PYTHONHASHSEED=0 seed=42; verified SHA-256 of parent files; manually recomputed action==next rates, per-state counts, no-smooth PMI (wiki unsmoothed 1.0623 vs shuffled 0.9619), and entropy decomposition; all producer numbers match within floating error.",
+    "reproducibility": "PASS: computation deterministic under PYTHONHASHSEED=0 (unlike parent trajectory_split). Tiny null_std indicates p_floor, not variance estimation failure."
+  },
+  "claim_ceiling": "FALSIFIED-IN-SETTING per frozen decision_rule: information-theoretic PMI at URL-only representation does NOT SURVIVE current test. Two independent falsifiers trigger (positive_control PMI 0.855 <1.0 and wiki non-self 0.899 < all 1.073). The four primary PMI>0 tests nominally pass (p_bonf=0.004, d=3.5-14.5) but maximum justified claim is that PMI is positive largely due to trivial action->next URL encoding (92-98% href==next, H(S'|S,A)=0 tautological). No justified claim for C-WEB-DYNAMICS beyond memory/URL similarity on Wikipedia/Python docs at this representation. The substantive producer interpretation that 'PMI detects action-conditioned structure that accuracy cannot' is unsupported because PMI inherits the same leakage that caused SA<AF, and shuffled null remains ~0.98-1.36 bits (not ~0). Synthetic discrimination (positive p=0.001 d=50.4) supports pipeline correctness only, not Web dynamics. Any future PMI claim requires blinded-action null and site types where href does not equal destination (SPAs, forms).",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-34038570933/spec.json claim_ids C-WEB-DYNAMICS, falsifier, decision_rule clauses 1-6, positive_control >=1.0",
+    "research/experiments/EXP-PHYSICS-34038570933/prereg.md sections 4, 10.1, 10.2, 12.1-12.3, 17 deviation policy",
+    "research/experiments/EXP-PHYSICS-34038570933/result.json metrics.pmi_all_transitions, pmi_nonself_transitions, permutation_tests, decision_checks, controls.positive_control_synthetic_lambda1 FAIL, controls.self_loop_interaction, validity_notes",
+    "research/experiments/EXP-PHYSICS-34038570933/report.md sections 1-6 (detects structure interpretation)",
+    "research/experiments/EXP-PHYSICS-34038570933/provenance.json data_sources SHA verified, code pmi_analysis.py sha 5818abdc2d07e820423",
+    "research/physics/information_theoretic/pmi_analysis.py lines 89-150 compute_pmi_stats (Laplace alpha=1.0), 176-203 permutation_test, 277-314 non-self filtering",
+    "research/physics/information_theoretic/raw_results.json permutation_tests null_mean 0.9799/1.1608",
+    "research/experiments/EXP-PHYSICS-33965269281/raw_live_wikipedia.json sha256 87e6d8fcecb436ab9b1067a27c7f5708c393bace5efbb0225bfe1f57aa87bc5e 880 trans",
+    "research/experiments/EXP-PHYSICS-33965269281/raw_live_python_docs.json sha256 a7634ca3734360a4d6a2ffdb89d859ae9ff466df710be3323da8ac5c5d2fa648 880 trans",
+    "research/experiments/EXP-PHYSICS-33965269281/raw_positive.json sha256 3eef0bbc382fef44eb63d55481e3d417b2a98478d6f4fa4e1eb06331a99fc73f 600 trans 8 states 8 actions 17 SA pairs",
+    "research/experiments/EXP-PHYSICS-33965269281/raw_null.json sha256 3ae136b4cc36b5f736252af8b819613d1864625fc9647cfbdd649b13c72c713e 300 trans",
+    "research/experiments/EXP-PHYSICS-33965269281/audit.json baseline_findings action_frequency_null FAIL_INVERTED SA<AF -0.12/-0.159, validity_findings target_href_encoding FAIL and accessibility FAIL",
+    "research/experiments/EXP-PHYSICS-33965269281/handoff.json carry_forward rejected SA<AF and established synthetic pipeline, dependencies self-loop and blinding",
+    "audit recompute: href==next 813/880 wiki 92.4% 859/880 python 97.6%; unsmoothed wiki 1.062 vs shuffled 0.962 delta 0.100; per-state singleton 426/551 wiki states"
+  ],
+  "unresolved": [
+    "Would PMI remain >0 after blinding action vocabulary (hash href or use action_type only) to remove href==next leakage? This is the identifiability test for state contribution beyond trivial mapping; not done.",
+    "Is positive-control threshold achievable with this synthetic data if recalculated correctly (8 states 8 actions, some single-action states)? What is the correct expected PMI for that generation process under alpha=0 vs 1.0?",
+    "Why does wiki non-self < all while python non-self > all? Site-specific interaction of self-loop rate (17.6% vs 49.5%) with hub state distribution and Laplace inflation needs modeling.",
+    "What is Laplace alpha sensitivity curve for mean PMI and shuffled delta on live data? Producer used single alpha=1.0 without justification.",
+    "Would PMI detect structure on JavaScript-heavy SPA/form sites where URL changes are rarer and action does not equal next URL, or with richer state (visual/layout) rather than URL-only?",
+    "Does trajectory-level entropy rate (alternative prereg unknown) provide more sensitive detection than transition-level PMI under sparse keys?",
+    "How to construct a strong null that preserves action->next leakage but destroys state-conditioned dependence (e.g., shuffle actions across states with same href frequency)? Current trajectory-grouped shuffle is weak."
+  ]
+}

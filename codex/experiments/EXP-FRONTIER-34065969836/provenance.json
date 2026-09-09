@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-34065969836",
+  "execution_timestamp": "2026-09-07T01:30:00.000000+00:00",
+  "analyzer_script": "research/frontier/highdim_nongaussian_tv/analyze.py",
+  "script_hashes": {
+    "prereg.md": "b5311e10b8560745548d63b6465d6c8d9db75945ed3bc1ada70a3dcccaedaa33",
+    "spec.json": "daf47a2e57a7372b2cfce9854240100162e434f332eeada223d238d8a985ff32",
+    "request.json": "7e41f131747af8a2a3b2ef8fbf911c5a86de89b3534b77271a209d9ef3d5ac80",
+    "freeze.json": "670d6baeab6ac66b580ebe8d8086a4c1c705f100a6fac7f8ed8d784789ec5dea",
+    "result.json": "7d0e180bbced137cee1f2f53968750e274f2409deb0496e839ea3fbd9f062592",
+    "analyze.py": "66409074e553363ab6331ec448b47796baef0ba6123f12514a2e446b258ec323",
+    "raw_tables.json": "5dd5577af770588b417ba64dff2eab6c70732a940f45db440c3afcbd18370416"
+  },
+  "result_hash": "7d0e180bbced137cee1f2f53968750e274f2409deb0496e839ea3fbd9f062592",
+  "report_path": "research/experiments/EXP-FRONTIER-34065969836/report.md",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "claim": "C-WEB-DYNAMICS",
+  "lane": "frontier",
+  "environment": {
+    "python_version": "3.12.14",
+    "numpy_version": "2.5.3",
+    "scipy_version": "1.18.1",
+    "sklearn_version": "1.9.0",
+    "pandas_version": "3.0.5",
+    "statsmodels_version": "0.15.0"
+  },
+  "frozen_inputs": {
+    "prereg_hash": "b5311e10b8560745548d63b6465d6c8d9db75945ed3bc1ada70a3dcccaedaa33",
+    "request_hash": "7e41f131747af8a2a3b2ef8fbf911c5a86de89b3534b77271a209d9ef3d5ac80",
+    "spec_hash": "daf47a2e57a7372b2cfce9854240100162e434f332eeada223d238d8a985ff32",
+    "freeze_hash": "670d6baeab6ac66b580ebe8d8086a4c1c705f100a6fac7f8ed8d784789ec5dea"
+  },
+  "parent_experiment": {
+    "experiment_id": "EXP-FRONTIER-34061241004",
+    "handoff_sha256": "f0bd29f254c6e84e1b8f8c0a3b8ab122d70f4830c5c58b354fc484a098834dc1"
+  },
+  "total_transitions": 120000,
+  "execution_seconds": 312.5,
+  "reproducibility": {
+    "seed": 42,
+    "frozen_random_seeds": "func_seed * 10000 + rep_idx * 100 + 42",
+    "numpy_random_state": "np.random.RandomState(rep_seed)"
+  },
+  "artifacts": [
+    {
+      "path": "research/frontier/highdim_nongaussian_tv/analyze.py",
+      "sha256": "66409074e553363ab6331ec448b47796baef0ba6123f12514a2e446b258ec323",
+      "role": "code"
+    },
+    {
+      "path": "research/frontier/highdim_nongaussian_tv/raw_tables.json",
+      "sha256": "5dd5577af770588b417ba64dff2eab6c70732a940f45db440c3afcbd18370416",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-34065969836/result.json",
+      "sha256": "7d0e180bbced137cee1f2f53968750e274f2409deb0496e839ea3fbd9f062592",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-34065969836/report.md",
+      "sha256": "cba8f27d78c39dc7c5525c417df5f39cad43a182957f88ebd6d65a147d0dda49",
+      "role": "derived"
+    }
+  ]
+}

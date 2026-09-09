@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-34054515149",
+  "lane": "runtime",
+  "target_lane": "runtime",
+  "next_question": "Does the HTTP fingerprint substrate maintain discrimination and incremental header value on a real OAuth/OIDC identity provider (e.g., self-hosted Keycloak or Auth0 test tenant) where Cache-Control and Set-Cookie patterns are determined by the IdP middleware rather than application-set per auth state — the ecological validity test for the product architecture recommendation?",
+  "why_next": "This experiment resolved the H4 ceiling confound: when expired/invalid share identical bodies, Cache-Control/Set-Cookie provide 0.167 incremental discrimination (full 1.0 vs body-only 0.833). However, audit V4 (ENGINEERED-HEADER-TAUTOLOGY-CONSTRAINT) established that the incremental value is by construction (application-set Cache-Control no-store/no-cache, Set-Cookie present/absent per auth state in Flask middleware), not discovery of natural production header variance. The product recommendation to use full vector is supported only within this synthetic pattern. The highest-information next step is ecological validity on a real IdP where Cache-Control patterns may be absent, constant, or CDN-overridden — this either validates the product recommendation or falsifies it. This is materially orthogonal to the current synthetic experiment and resolves the critical unknown blocking product architecture finalization.",
+  "carry_forward": {
+    "established": [
+      "On Flask 3.1.3 + PyJWT 2.13.0 HS256 localhost 127.0.0.1:18929, 4 auth states with identical error bodies for expired/invalid, full_vector_discrimination 1.0 exceeds B-BODY-ONLY 0.833 by incremental 0.167 (1.2x ratio). Cache-Control/Set-Cookie provide discriminating information that body-only cannot capture when bodies collide (result.json metrics, audit V3 recomputed exact match).",
+      "Cache-Control-only discrimination 0.833 (3 values: absent, no-store, no-cache), Set-Cookie-only discrimination 0.5 (binary: present only for valid_token). Each adds independent information; together with status they uniquely identify all 4 states (audit V2, V3).",
+      "Null FP rate 0.0% < 5% under server-side jitter 50-150ms uniform with X-Request-Id excluded: per-state 10/10 identical fingerprints, 0/180 intra pairs differ (audit V7).",
+      "valid_token vs expired_token drift discriminable Jaccard 0.325 < 0.5; expired_token vs invalid_token drift discriminable Jaccard 0.381 < 0.5 via Cache-Control no-store vs no-cache (audit V3, V8).",
+      "ETag and Content-Length are body-correlated by construction (ETag = W/body_sha): they add zero independent information regardless of body distinctness (audit V5, C_BODY_CORRELATION_ETAG pass).",
+      "Parent H4 ceiling confound (V3-DISTINCT-BODY-CEILING-CONFOUND from EXP-RUNTIME-34015740602) is resolved: full vector now exceeds body-only when bodies are not distinct, confirming the parent's equality (1.0 = 1.0) was body-dominance artifact, not proof headers are non-discriminative.",
+      "Three mandatory prior fixes preserved: sorted-tuple fingerprint, Date/Server/X-Request-Id exclusion, competitive baselines (B-STATUS-ONLY 0.5, B-BODY-ONLY 0.833, B-URL-HASH 0.0, B-RANDOM 0.0)."
+    ],
+    "rejected": [
+      "Headers add no incremental value when bodies are identical — REJECTED: full 1.0 > body 0.833 by 0.167 demonstrates incremental header value in this setting (audit V3).",
+      "Full vector equals B-BODY-ONLY under all conditions — REJECTED for identical-body scenario (equality held only under distinct-body design in parent, which was ceiling artifact).",
+      "C-MEAS-VALID extends to production OAuth/OIDC providers (Auth0/Okta/Keycloak) — REJECTED: claim ceiling bounded to exact Flask/PyJWT localhost config with application-set headers (audit claim_ceiling, V4).",
+      "Bootstrap CI [1.0, 1.0] indicates high statistical precision — REJECTED: degenerate at ceiling with 4 deterministic fingerprints, uninformative for product decisions (audit V6)."
+    ],
+    "unknown": [
+      "Does substrate maintain discrimination and incremental header value on real production OAuth/OIDC providers (Auth0, Okta, Keycloak) where Cache-Control/Set-Cookie patterns are determined by IdP middleware rather than application-set per auth state?",
+      "What is false-positive rate under server-side processing jitter >150ms, multi-second Date spanning, CDN/load-balancer variance, rate-limit headers, or compressed encoding?",
+      "Can substrate detect continuous session drift as threshold classifier rather than discrete 4-state exact-match discrimination?",
+      "What is cross-Python-version reproducibility after replacing repr(vector) with canonical JSON/msgpack serialization?",
+      "What is incremental header value when MORE than 2 error states share identical bodies (e.g., 3+ states with same body but different headers), or when header values are less distinct (e.g., same Cache-Control for multiple error states)?"
+    ],
+    "do_not_assume": [
+      "Do not assume incremental header value transfers to production OAuth/OIDC — it was demonstrated only with application-set Cache-Control no-store/no-cache and Set-Cookie present/absent in Flask middleware (audit V4, medium severity). Production IdPs may not exhibit this header variation pattern.",
+      "Do not assume the product recommendation to use full vector is ecologically valid — it is supported only within this synthetic Flask localhost pattern where headers are deliberately varied per auth state.",
+      "Do not assume bootstrap CI [1.0, 1.0] reflects high precision — degenerate at ceiling with N=40 and 4 deterministic fingerprints; uninformative for product confidence.",
+      "Do not assume Flask/PyJWT results transfer to production OAuth/OIDC — claim ceiling is narrow (exact config specified in claim_updates).",
+      "Do not assume fingerprint hashes reproduce across Python versions — repr(vector) is Python-version-dependent; validated only on Python 3.12.14.",
+      "Do not assume null FP <5% holds beyond 50-150ms server jitter — only uniform(0.05,0.15) on localhost tested.",
+      "Do not assume sample size N=40 is sufficient for subtle discrimination differences — sufficient for primary threshold test but limited power for fine-grained comparisons.",
+      "Do not assume the incremental header value would hold with 3+ identical-body states — only 2 identical-body states (expired/invalid) tested."
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-RUNTIME-34054515149/result.json — COMPLETE SUPPORTS metrics: full_vector_discrimination 1.0, B-BODY-ONLY 0.833, incremental 0.167, Cache-Control-only 0.833, Set-Cookie-only 0.5, null FP 0.0%, drift [0.325, 0.381], all 10 controls pass",
+    "research/experiments/EXP-RUNTIME-34054515149/audit.json — PASS producer_claim_supported=true, V3 incremental value verified exact, V4 engineered header tautology constraint medium severity, V6 bootstrap degenerate, claim_ceiling bounded to Flask/PyJWT localhost with application-set headers",
+    "research/experiments/EXP-RUNTIME-34054515149/raw_observations.json — 40 entries, 4 distinct fingerprints, 3 body_hashes (expired==invalid), Cache-Control/Set-Cookie per state verified",
+    "research/experiments/EXP-RUNTIME-34054515149/provenance.json — python 3.12.14, flask 3.1.3, pyjwt 2.13.0, port 18929, jitter 0.05-0.15, seed 44, fingerprint config",
+    "research/experiments/EXP-RUNTIME-34054515149/spec.json — frozen C-MEAS-VALID, decision_rule 4 conditions, baselines, measurement_validity",
+    "research/experiments/EXP-RUNTIME-34015740602/audit.json — parent V3-DISTINCT-BODY-CEILING-CONFOUND resolved by this experiment",
+    "research/experiments/EXP-RUNTIME-33902315583/handoff.json — grandparent identical-body scenario with standard headers only (full==body 0.833), establishing baseline before header variation"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-34054515149/result.json — full_vector_discrimination 1.0, B-BODY-ONLY 0.833, incremental 0.167, Cache-Control-only 0.833, Set-Cookie-only 0.5, null_fp 0.0%, drift_jaccards [0.325, 0.381], drift_all_discriminable true, total_requests 40, error_rate 0.0, 10 controls pass",
+    "research/experiments/EXP-RUNTIME-34054515149/audit.json — PASS, producer_claim_supported true, claim_ceiling bounded, V1-V8 findings, baseline_findings B-BODY-ONLY recomputed 0.833 exact, incremental_header_value recomputed 0.167 exact, all recomputed_metrics match",
+    "research/experiments/EXP-RUNTIME-34054515149/spec.json — frozen decision_rule SURVIVES requires 4 conditions: full>body, full>0.5, null<5%, CC>0",
+    "research/experiments/EXP-RUNTIME-34054515149/report.md — Executive Summary H4 resolution, parent/grandparent comparison, Product Consequence, Validity Threats",
+    "research/experiments/EXP-RUNTIME-34054515149/provenance.json — environment, server_config, fingerprint_config, sampling, artifacts",
+    "research/experiments/EXP-RUNTIME-34054515149/raw_observations.json — 40 entries, header values per state, body_hash identity expired==invalid, fingerprint distinctness",
+    "research/experiments/EXP-RUNTIME-34015740602/handoff.json — parent established ceiling confound, carry_forward with H4 question resolved by this experiment",
+    "research/claims/registry.json — C-MEAS-VALID status EXPERIMENTAL owner_lanes runtime/physics next_gate writable/auth/session/drift controls"
+  ],
+  "recommended_action": "DESIGN EXP-RUNTIME-next for ecological validity on a real OAuth/OIDC identity provider: (1) Deploy a self-hosted Keycloak instance or Auth0 test tenant with 4 auth states (no_auth, valid_token, expired_token, invalid_token) returning identical error bodies for expired/invalid. (2) Key test: does the IdP naturally vary Cache-Control and/or Set-Cookie by auth state, and if so, does the full fingerprint vector maintain discrimination > B-BODY-ONLY? (3) If Cache-Control is absent or constant in IdP responses, measure whether discrimination degrades to body-only level (falsifying the product recommendation) or whether other IdP-specific headers (e.g., WWW-Authenticate, X-Content-Type-Options) compensate. (4) Keep sorted-tuple fingerprint with Date/Server/X-Request-Id exclusion. (5) N=40, jitter natural (not synthetic), seed 44 for comparability. (6) This directly tests whether the V4-engineered-header tautology constraint limits product applicability."
+}

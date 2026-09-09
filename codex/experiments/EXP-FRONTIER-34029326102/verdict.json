@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-34029326102",
+  "lane": "frontier",
+  "decision": "FALSIFIED-IN-SETTING",
+  "claim_updates": [
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "HYPOTHESIS",
+      "reason": "This experiment tests only synthetic uniform-mixture noise on 10-state 4-action quadratic DGPs. TV distance shows robust detection under synthetic noise (aggregate |rho|=1.0, Cohen d 1.39-2.40, permutation p=0.000 at noise_intensity=0.5). However, all noise models are synthetic uniform-replacement mixtures, not real or realistic Web transitions. The dominant unknown — whether real Web transitions exhibit Var_a(E_S[f])>0 or are permutation-like — remains untested. The synthetic-to-real gap is the critical bottleneck. C-WEB-DYNAMICS stays HYPOTHESIS. The frozen FALSIFIED-IN-SETTING outcome is an artifact of three mis-calibrated controls (sign-reversed Spearman, impossible null control on finite state space, ANOVA interaction mis-calibrated for heterogeneous functions) identified identically in the parent audit — not a falsification of TV sensitivity in this synthetic regime."
+    }
+  ],
+  "product_action": "NO_ACTION",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does TV distance detect action-dependent dynamical structure in real or realistic Web transition data (e.g., recorded agent sessions with DOM state tracking), or does the synthetic-to-real gap render all synthetic DGP validation insufficient for product deployment?",
+  "reason": "Frozen decision rule triggers FALSIFIED-IN-SETTING via null control failure (noise_intensity=1.0 permutation p=0.0, result.json:controls.null_control) and function invariance failure (ANOVA interaction F=16-142 p=0.0, result.json:metrics.per_noise_model.*.anova). The audit (audit.json:status REVISE, required_fixes) identifies ALL failures as control mis-calibration, not metric insensitivity: (1) Spearman direction error — frozen rule requires rho>=0.65 but TV decreases (rho=-1.0); correct test |rho|>=0.65 passes with |rho|=1.0 (audit.json:validity_findings[4], analyze.py:389-390); (2) Null control impossible — max uniform noise on 10-state space preserves deterministic signal (Model A submit retains 80% structure, audit.json:required_fixes[1]); (3) ANOVA interaction is expected signal from intentionally different analytical TV ceilings (0.7667/0.75/0.5333, audit.json:validity_findings[7], result.json:metrics.analytical_tv_at_lambda1). The Director bounds the claim ceiling per audit.json:claim_ceiling: TV distance degrades strictly monotonically with synthetic uniform-mixture noise (aggregate Spearman rho=-1.0, Cohen d 1.39-2.40) and remains significantly above permutation null at moderate noise (p=0.000) in 10-state quadratic DGPs. This does NOT generalize to real Web noise — the synthetic-to-real gap remains the dominant unknown (audit.json:validity_findings[8], audit.json:unresolved[0]). No product promotion is justified. The frozen rule must be respected; future experiments should use corrected decision rules with |rho|, function-specific null thresholds, and relaxed interaction conditions (per parent handoff EXP-FRONTIER-33932275169 recommended_action).",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-34029326102/spec.json:decision_rule, falsifier, hypothesis, baselines, positive_control, null_control",
+    "research/experiments/EXP-FRONTIER-34029326102/result.json:status COMPLETE outcome FALSIFIES, metrics.per_noise_model.*.spearman_rho_tv -1.0, spearman_p_one_sided_tv 1.0, tv_means_by_intensity, het_means_by_intensity, moderate_noise, high_noise, permutation_tests, anova, effect_sizes_cohens_d, cv_at_noise_0, analytical_tv_at_lambda1, controls.positive_control.pass true, controls.null_control.pass false, controls.sensitivity_control.pass true, controls.monotonic_control.pass true, controls.function_invariance.pass false, controls.no_pipeline_errors.pass true",
+    "research/experiments/EXP-FRONTIER-34029326102/audit.json:status REVISE, producer_claim_supported false, claim_ceiling, required_fixes[0-6] direction error/null control/interaction/realism/RNG/positive_control/permutation, validity_findings[0-11] passes and fails, baseline_findings, recomputed_metrics, unresolved[0-6]",
+    "research/experiments/EXP-FRONTIER-34029326102/report.md:section 1.2 TV means, section 1.3 metrics, section 3.1 degradation curves, section 3.2 control assessment, section 4.1 decision rule mis-calibration, section 4.2 primary scientific finding, section 7 failure analysis",
+    "research/experiments/EXP-FRONTIER-34029326102/provenance.json:execution_timestamp, analyzer_script, environment python3.12/numpy2.5",
+    "research/experiments/EXP-FRONTIER-34029326102/raw_tables.json:450 rows per-replication TV/het",
+    "research/experiments/EXP-FRONTIER-33932275169/handoff.json:carry_forward.established TV generalizes to quadratic, carry_forward.rejected ANOVA interaction as falsifier, carry_forward.unknown synthetic-to-real gap, recommended_action real Web data",
+    "research/experiments/EXP-FRONTIER-33932275169/verdict.json:decision FALSIFIED-IN-SETTING, claim_updates C-WEB-DYNAMICS HYPOTHESIS"
+  ]
+}
