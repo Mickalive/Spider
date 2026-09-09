@@ -41,30 +41,10 @@ def _bind(value: Any, params: dict[str, Any]) -> Any:
         if full:
             return params[full.group(1)]
 
-        # Double-prefix detection for suffix-empty templates.
-        # When template has prefix before ${slot} and param value starts with
-        # the last segment of that prefix (after last '/'), strip the segment
-        # to avoid double-prefix (e.g., user-${url} + url='user-4' -> user-4).
-        result = value
-        for m in _PARAMETER.finditer(value):
-            slot_name = m.group(1)
-            if slot_name not in params:
-                continue
-            param_val = str(params[slot_name])
-            prefix = value[:m.start()]
-            # Find last segment of prefix (after last '/')
-            last_slash = prefix.rfind('/')
-            if last_slash >= 0:
-                last_segment = prefix[last_slash + 1:]
-                if (last_segment
-                        and last_segment[-1] in _BOUNDARY_CHARS
-                        and param_val.startswith(last_segment)
-                        and len(param_val) > len(last_segment)):
-                    # Strip the last segment from param value to avoid double-prefix
-                    params = {k: v[len(last_segment):] if k == slot_name else v
-                              for k, v in params.items()}
-                    break
-
+        # Direct substitution: distill_parameterized() already stripped
+        # slot-level prefixes from templates, so param values bind directly
+        # without prefix manipulation (e.g., template '${url}' + param
+        # 'user-4' -> 'user-4').
         def replace(match: re.Match[str]) -> str:
             return str(params[match.group(1)])
 
@@ -456,16 +436,23 @@ class SpiderKernel:
             prefix = info["prefix"]
             suffix = info["suffix"]
 
-            # Slot-level prefix detection: record for bind-time use.
-            # Do NOT strip from template here — callers pass the full value
-            # (e.g., 'user-4' for C2, 'd' for B4) and the template already
-            # contains the prefix. Strip only at bind time when the value
-            # already starts with the slot-level prefix (prevents double-prefix).
+            # Slot-level prefix detection and distill-time stripping.
+            # When varying values share a prefix ending with a boundary char
+            # (e.g., 'user-' from 'user-1', 'user-2', 'user-3'), strip it
+            # from the template so full-value binding works correctly.
+            # Template becomes 'https://.../${url}' instead of
+            # 'https://.../user-${url}', preventing double-prefix when
+            # caller passes full value 'user-4'.
             slot_prefix = _detect_slot_level_prefix(info["values"], prefix)
             if slot_prefix:
                 slot_prefixes[slot_name] = slot_prefix
+                # Strip slot-level prefix from the structural prefix
+                # prefix='https://api.example.com/users/user-' -> 'https://api.example.com/users/'
+                stripped_prefix = prefix[:-len(slot_prefix)]
+            else:
+                stripped_prefix = prefix
 
-            template_str = f"{prefix}${{{slot_name}}}{suffix}"
+            template_str = f"{stripped_prefix}${{{slot_name}}}{suffix}"
 
             # Set the template value
             _set_template_value(action_template, path, template_str)

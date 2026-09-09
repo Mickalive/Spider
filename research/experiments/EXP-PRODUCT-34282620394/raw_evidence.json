@@ -1,6 +1,6 @@
 {
   "experiment_id": "EXP-PRODUCT-34282620394",
-  "timestamp": "2026-09-09T01:40:19Z",
+  "timestamp": "2026-09-09T06:49:53Z",
   "conditions": {
     "B1-single-path": {
       "condition_id": "B1-single-path",
@@ -24,8 +24,8 @@
           "method"
         ],
         "shared_paths": [
-          "method",
-          "url"
+          "url",
+          "method"
         ],
         "path_values": {
           "url": {
@@ -170,20 +170,11 @@
           "method"
         ],
         "shared_paths": [
+          "url",
           "method",
-          "body.name",
-          "url"
+          "body.name"
         ],
         "path_values": {
-          "body.name": {
-            "values": [
-              "Alice",
-              "Bob",
-              "Charlie"
-            ],
-            "prefix": "",
-            "suffix": ""
-          },
           "url": {
             "values": [
               "https://api.example.com/users/A",
@@ -191,6 +182,15 @@
               "https://api.example.com/users/C"
             ],
             "prefix": "https://api.example.com/users/",
+            "suffix": ""
+          },
+          "body.name": {
+            "values": [
+              "Alice",
+              "Bob",
+              "Charlie"
+            ],
+            "prefix": "",
             "suffix": ""
           }
         },
@@ -370,19 +370,19 @@
           "method"
         ],
         "shared_paths": [
-          "body.title",
-          "method",
+          "headers.X-Request-ID",
           "url",
-          "headers.X-Request-ID"
+          "method",
+          "body.title"
         ],
         "path_values": {
-          "body.title": {
+          "headers.X-Request-ID": {
             "values": [
-              "First",
-              "Second",
-              "Third"
+              "req-1",
+              "req-2",
+              "req-3"
             ],
-            "prefix": "",
+            "prefix": "req-",
             "suffix": ""
           },
           "url": {
@@ -394,13 +394,13 @@
             "prefix": "https://api.example.com/posts/",
             "suffix": ""
           },
-          "headers.X-Request-ID": {
+          "body.title": {
             "values": [
-              "req-1",
-              "req-2",
-              "req-3"
+              "First",
+              "Second",
+              "Third"
             ],
-            "prefix": "req-",
+            "prefix": "",
             "suffix": ""
           }
         },
@@ -600,7 +600,7 @@
         "method": "POST",
         "url": "https://api.example.com/webhooks",
         "body": {
-          "callback_url": "https://site-${callback_url}.com/hook"
+          "callback_url": "https://${callback_url}.com/hook"
         }
       },
       "parameter_slots": [
@@ -612,13 +612,13 @@
         "mean_jaccard": 1.0,
         "has_constant_anchor": true,
         "anchor_path": [
-          "method",
-          "url"
+          "url",
+          "method"
         ],
         "shared_paths": [
           "body.callback_url",
-          "method",
-          "url"
+          "url",
+          "method"
         ],
         "path_values": {
           "body.callback_url": {
@@ -646,7 +646,7 @@
           "status": "EXECUTABLE",
           "bound_action": {
             "body": {
-              "callback_url": "https://site-d.com/hook"
+              "callback_url": "https://d.com/hook"
             },
             "method": "POST",
             "url": "https://api.example.com/webhooks"
@@ -659,7 +659,7 @@
             }
           },
           "reason": "applicability guards and confidence threshold passed",
-          "binding_correct": true
+          "binding_correct": false
         },
         {
           "params": {
@@ -671,7 +671,7 @@
           "status": "EXECUTABLE",
           "bound_action": {
             "body": {
-              "callback_url": "https://site-e.com/hook"
+              "callback_url": "https://e.com/hook"
             },
             "method": "POST",
             "url": "https://api.example.com/webhooks"
@@ -684,7 +684,7 @@
             }
           },
           "reason": "applicability guards and confidence threshold passed",
-          "binding_correct": true
+          "binding_correct": false
         },
         {
           "params": {
@@ -696,7 +696,7 @@
           "status": "EXECUTABLE",
           "bound_action": {
             "body": {
-              "callback_url": "https://site-f.com/hook"
+              "callback_url": "https://f.com/hook"
             },
             "method": "POST",
             "url": "https://api.example.com/webhooks"
@@ -709,14 +709,14 @@
             }
           },
           "reason": "applicability guards and confidence threshold passed",
-          "binding_correct": true
+          "binding_correct": false
         }
       ],
       "metrics": {
         "unseen_resolution_rate": 1.0,
-        "binding_accuracy": 1.0,
+        "binding_accuracy": 0.0,
         "executable_count": 3,
-        "binding_correct_count": 3
+        "binding_correct_count": 0
       }
     },
     "B5-shared-slot-name": {
@@ -741,13 +741,13 @@
         "mean_jaccard": 1.0,
         "has_constant_anchor": true,
         "anchor_path": [
-          "method",
-          "body.user_id"
+          "body.user_id",
+          "method"
         ],
         "shared_paths": [
-          "method",
+          "body.user_id",
           "url",
-          "body.user_id"
+          "method"
         ],
         "path_values": {
           "url": {
@@ -856,7 +856,7 @@
         "method": "POST",
         "url": "https://api.example.com/webhooks",
         "body": {
-          "callback_url": "https://site-${callback_url}.com/hook"
+          "callback_url": "https://${callback_url}.com/hook"
         }
       },
       "parameter_slots": [
@@ -868,13 +868,13 @@
         "mean_jaccard": 1.0,
         "has_constant_anchor": true,
         "anchor_path": [
-          "method",
-          "url"
+          "url",
+          "method"
         ],
         "shared_paths": [
           "body.callback_url",
-          "method",
-          "url"
+          "url",
+          "method"
         ],
         "path_values": {
           "body.callback_url": {
@@ -902,7 +902,7 @@
           "status": "EXECUTABLE",
           "bound_action": {
             "body": {
-              "callback_url": "https://site-d.com/hook"
+              "callback_url": "https://d.com/hook"
             },
             "method": "POST",
             "url": "https://api.example.com/webhooks"
@@ -915,7 +915,7 @@
             }
           },
           "reason": "applicability guards and confidence threshold passed",
-          "binding_correct": true
+          "binding_correct": false
         },
         {
           "params": {
@@ -927,7 +927,7 @@
           "status": "EXECUTABLE",
           "bound_action": {
             "body": {
-              "callback_url": "https://site-e.com/hook"
+              "callback_url": "https://e.com/hook"
             },
             "method": "POST",
             "url": "https://api.example.com/webhooks"
@@ -940,7 +940,7 @@
             }
           },
           "reason": "applicability guards and confidence threshold passed",
-          "binding_correct": true
+          "binding_correct": false
         },
         {
           "params": {
@@ -952,7 +952,7 @@
           "status": "EXECUTABLE",
           "bound_action": {
             "body": {
-              "callback_url": "https://site-f.com/hook"
+              "callback_url": "https://f.com/hook"
             },
             "method": "POST",
             "url": "https://api.example.com/webhooks"
@@ -965,14 +965,14 @@
             }
           },
           "reason": "applicability guards and confidence threshold passed",
-          "binding_correct": true
+          "binding_correct": false
         }
       ],
       "metrics": {
         "unseen_resolution_rate": 1.0,
-        "binding_accuracy": 1.0,
+        "binding_accuracy": 0.0,
         "executable_count": 3,
-        "binding_correct_count": 3
+        "binding_correct_count": 0
       }
     },
     "C2-full-value-ids": {
@@ -983,7 +983,7 @@
       "mechanism_id": "param-C2-full-value-ids",
       "action_template": {
         "method": "GET",
-        "url": "https://api.example.com/users/user-${url}"
+        "url": "https://api.example.com/users/${url}"
       },
       "parameter_slots": [
         "url"
@@ -997,8 +997,8 @@
           "method"
         ],
         "shared_paths": [
-          "method",
-          "url"
+          "url",
+          "method"
         ],
         "path_values": {
           "url": {
@@ -1089,7 +1089,7 @@
       "mechanism_id": "param-D1-noisy-post",
       "action_template": {
         "method": "POST",
-        "url": "https://api.example.com/orders/order-${url}",
+        "url": "https://api.example.com/orders/${url}",
         "body": {
           "customer": "cust-${customer}"
         },
@@ -1115,12 +1115,21 @@
           "method"
         ],
         "shared_paths": [
-          "method",
-          "url",
+          "headers.X-Request-ID",
           "body.customer",
-          "headers.X-Request-ID"
+          "url",
+          "method"
         ],
         "path_values": {
+          "headers.X-Request-ID": {
+            "values": [
+              "req-101",
+              "req-102",
+              "req-103"
+            ],
+            "prefix": "req-10",
+            "suffix": ""
+          },
           "body.customer": {
             "values": [
               "cust-A",
@@ -1137,15 +1146,6 @@
               "https://api.example.com/orders/order-3"
             ],
             "prefix": "https://api.example.com/orders/order-",
-            "suffix": ""
-          },
-          "headers.X-Request-ID": {
-            "values": [
-              "req-101",
-              "req-102",
-              "req-103"
-            ],
-            "prefix": "req-10",
             "suffix": ""
           }
         },
@@ -1177,7 +1177,7 @@
             "request_duration_ms": 120,
             "retry_count": 0,
             "timestamp": "2026-09-01T10:00:00Z",
-            "url": "https://api.example.com/orders/order-4",
+            "url": "https://api.example.com/orders/4",
             "user_agent": "Mozilla/5.0"
           },
           "expected_action": {
@@ -1195,7 +1195,7 @@
             "user_agent": "Mozilla/5.0"
           },
           "reason": "applicability guards and confidence threshold passed",
-          "binding_correct": true
+          "binding_correct": false
         },
         {
           "params": {
@@ -1220,7 +1220,7 @@
             "request_duration_ms": 120,
             "retry_count": 0,
             "timestamp": "2026-09-01T10:00:00Z",
-            "url": "https://api.example.com/orders/order-5",
+            "url": "https://api.example.com/orders/5",
             "user_agent": "Mozilla/5.0"
           },
           "expected_action": {
@@ -1238,7 +1238,7 @@
             "user_agent": "Mozilla/5.0"
           },
           "reason": "applicability guards and confidence threshold passed",
-          "binding_correct": true
+          "binding_correct": false
         },
         {
           "params": {
@@ -1263,7 +1263,7 @@
             "request_duration_ms": 120,
             "retry_count": 0,
             "timestamp": "2026-09-01T10:00:00Z",
-            "url": "https://api.example.com/orders/order-6",
+            "url": "https://api.example.com/orders/6",
             "user_agent": "Mozilla/5.0"
           },
           "expected_action": {
@@ -1281,14 +1281,14 @@
             "user_agent": "Mozilla/5.0"
           },
           "reason": "applicability guards and confidence threshold passed",
-          "binding_correct": true
+          "binding_correct": false
         }
       ],
       "metrics": {
         "unseen_resolution_rate": 1.0,
-        "binding_accuracy": 1.0,
+        "binding_accuracy": 0.0,
         "executable_count": 3,
-        "binding_correct_count": 3
+        "binding_correct_count": 0
       }
     },
     "D2-noisy-get": {
@@ -1316,8 +1316,8 @@
           "method"
         ],
         "shared_paths": [
-          "method",
-          "url"
+          "url",
+          "method"
         ],
         "path_values": {
           "url": {
@@ -1424,7 +1424,7 @@
       "mechanism_id": "param-D3-varying-preconditions",
       "action_template": {
         "method": "POST",
-        "url": "https://api.example.com/orders/item-${url}",
+        "url": "https://api.example.com/orders/${url}",
         "body": {
           "quantity": 1
         }
@@ -1442,8 +1442,8 @@
           "body.quantity"
         ],
         "shared_paths": [
-          "method",
           "url",
+          "method",
           "body.quantity"
         ],
         "path_values": {
@@ -1475,7 +1475,7 @@
               "quantity": 1
             },
             "method": "POST",
-            "url": "https://api.example.com/orders/item-4"
+            "url": "https://api.example.com/orders/4"
           },
           "expected_action": {
             "method": "POST",
@@ -1485,14 +1485,14 @@
             }
           },
           "reason": "applicability guards and confidence threshold passed",
-          "binding_correct": true
+          "binding_correct": false
         }
       ],
       "metrics": {
         "unseen_resolution_rate": 1.0,
-        "binding_accuracy": 1.0,
+        "binding_accuracy": 0.0,
         "executable_count": 1,
-        "binding_correct_count": 1
+        "binding_correct_count": 0
       }
     }
   },
@@ -1529,7 +1529,7 @@
     },
     "A3_field_path_relevance": {
       "status": "PASS",
-      "detail": "ACTION_TEMPLATE_PATHS={'query', 'url', 'headers', 'body', 'method'}, METADATA_KEYS={'request_duration_ms', 'response_time_ms', 'timestamp', 'user_agent', 'retry_count', 'cache_hit', 'result_count'}"
+      "detail": "ACTION_TEMPLATE_PATHS={'body', 'method', 'query', 'url', 'headers'}, METADATA_KEYS={'retry_count', 'result_count', 'request_duration_ms', 'response_time_ms', 'timestamp', 'cache_hit', 'user_agent'}"
     }
   }
 }
