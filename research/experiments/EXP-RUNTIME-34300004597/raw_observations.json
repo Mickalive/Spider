@@ -1,0 +1,820 @@
+{
+  "invalid_token": [
+    {
+      "url": "http://127.0.0.1:18080/realms/spider-test/protocol/openid-connect/userinfo",
+      "status": 401,
+      "headers": {
+        "content-length": "0",
+        "Content-Type": "text/plain;charset=utf-8",
+        "Referrer-Policy": "no-referrer",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "WWW-Authenticate": "Bearer realm=\"spider-test\", error=\"invalid_token\", error_description=\"Token verification failed\"",
+        "X-Content-Type-Options": "nosniff",
+        "X-XSS-Protection": "1; mode=block"
+      },
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_preview": "",
+      "fingerprint": "196af3d9ca51535f78bceaba1b043160b1b9f5363dc2a49f143f7a55e76c33bf",
+      "elapsed": 0.01033065600000782,
+      "timestamp": 1788972062.288752,
+      "state": "invalid_token",
+      "rep": 9
+    },
+    {
+      "url": "http://127.0.0.1:18080/realms/spider-test/protocol/openid-connect/userinfo",
+      "status": 401,
+      "headers": {
+        "content-length": "0",
+        "Content-Type": "text/plain;charset=utf-8",
+        "Referrer-Policy": "no-referrer",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "WWW-Authenticate": "Bearer realm=\"spider-test\", error=\"invalid_token\", error_description=\"Token verification failed\"",
+        "X-Content-Type-Options": "nosniff",
+        "X-XSS-Protection": "1; mode=block"
+      },
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_preview": "",
+      "fingerprint": "196af3d9ca51535f78bceaba1b043160b1b9f5363dc2a49f143f7a55e76c33bf",
+      "elapsed": 0.005980914000019766,
+      "timestamp": 1788972062.301997,
+      "state": "invalid_token",
+      "rep": 0
+    },
+    {
+      "url": "http://127.0.0.1:18080/realms/spider-test/protocol/openid-connect/userinfo",
+      "status": 401,
+      "headers": {
+        "content-length": "0",
+        "Content-Type": "text/plain;charset=utf-8",
+        "Referrer-Policy": "no-referrer",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "WWW-Authenticate": "Bearer realm=\"spider-test\", error=\"invalid_token\", error_description=\"Token verification failed\"",
+        "X-Content-Type-Options": "nosniff",
+        "X-XSS-Protection": "1; mode=block"
+      },
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_preview": "",
+      "fingerprint": "196af3d9ca51535f78bceaba1b043160b1b9f5363dc2a49f143f7a55e76c33bf",
+      "elapsed": 0.00445368700002291,
+      "timestamp": 1788972062.9871268,
+      "state": "invalid_token",
+      "rep": 8
+    },
+    {
+      "url": "http://127.0.0.1:18080/realms/spider-test/protocol/openid-connect/userinfo",
+      "status": 401,
+      "headers": {
+        "content-length": "0",
+        "Content-Type": "text/plain;charset=utf-8",
+        "Referrer-Policy": "no-referrer",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "WWW-Authenticate": "Bearer realm=\"spider-test\", error=\"invalid_token\", error_description=\"Token verification failed\"",
+        "X-Content-Type-Options": "nosniff",
+        "X-XSS-Protection": "1; mode=block"
+      },
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_preview": "",
+      "fingerprint": "196af3d9ca51535f78bceaba1b043160b1b9f5363dc2a49f143f7a55e76c33bf",
+      "elapsed": 0.004587408000020332,
+      "timestamp": 1788972063.5592244,
+      "state": "invalid_token",
+      "rep": 1
+    },
+    {
+      "url": "http://127.0.0.1:18080/realms/spider-test/protocol/openid-connect/userinfo",
+      "status": 401,
+      "headers": {
+        "content-length": "0",
+        "Content-Type": "text/plain;charset=utf-8",
+        "Referrer-Policy": "no-referrer",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "WWW-Authenticate": "Bearer realm=\"spider-test\", error=\"invalid_token\", error_description=\"Token verification failed\"",
+        "X-Content-Type-Options": "nosniff",
+        "X-XSS-Protection": "1; mode=block"
+      },
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_preview": "",
+      "fingerprint": "196af3d9ca51535f78bceaba1b043160b1b9f5363dc2a49f143f7a55e76c33bf",
+      "elapsed": 0.00438456900002393,
+      "timestamp": 1788972063.6945257,
+      "state": "invalid_token",
+      "rep": 5
+    },
+    {
+      "url": "http://127.0.0.1:18080/realms/spider-test/protocol/openid-connect/userinfo",
+      "status": 401,
+      "headers": {
+        "content-length": "0",
+        "Content-Type": "text/plain;charset=utf-8",
+        "Referrer-Policy": "no-referrer",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "WWW-Authenticate": "Bearer realm=\"spider-test\", error=\"invalid_token\", error_description=\"Token verification failed\"",
+        "X-Content-Type-Options": "nosniff",
+        "X-XSS-Protection": "1; mode=block"
+      },
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_preview": "",
+      "fingerprint": "196af3d9ca51535f78bceaba1b043160b1b9f5363dc2a49f143f7a55e76c33bf",
+      "elapsed": 0.004409729999963474,
+      "timestamp": 1788972064.7603166,
+      "state": "invalid_token",
+      "rep": 7
+    },
+    {
+      "url": "http://127.0.0.1:18080/realms/spider-test/protocol/openid-connect/userinfo",
+      "status": 401,
+      "headers": {
+        "content-length": "0",
+        "Content-Type": "text/plain;charset=utf-8",
+        "Referrer-Policy": "no-referrer",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "WWW-Authenticate": "Bearer realm=\"spider-test\", error=\"invalid_token\", error_description=\"Token verification failed\"",
+        "X-Content-Type-Options": "nosniff",
+        "X-XSS-Protection": "1; mode=block"
+      },
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_preview": "",
+      "fingerprint": "196af3d9ca51535f78bceaba1b043160b1b9f5363dc2a49f143f7a55e76c33bf",
+      "elapsed": 0.003485597000008056,
+      "timestamp": 1788972065.1877968,
+      "state": "invalid_token",
+      "rep": 2
+    },
+    {
+      "url": "http://127.0.0.1:18080/realms/spider-test/protocol/openid-connect/userinfo",
+      "status": 401,
+      "headers": {
+        "content-length": "0",
+        "Content-Type": "text/plain;charset=utf-8",
+        "Referrer-Policy": "no-referrer",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "WWW-Authenticate": "Bearer realm=\"spider-test\", error=\"invalid_token\", error_description=\"Token verification failed\"",
+        "X-Content-Type-Options": "nosniff",
+        "X-XSS-Protection": "1; mode=block"
+      },
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_preview": "",
+      "fingerprint": "196af3d9ca51535f78bceaba1b043160b1b9f5363dc2a49f143f7a55e76c33bf",
+      "elapsed": 0.0055023909999931675,
+      "timestamp": 1788972065.2735415,
+      "state": "invalid_token",
+      "rep": 6
+    },
+    {
+      "url": "http://127.0.0.1:18080/realms/spider-test/protocol/openid-connect/userinfo",
+      "status": 401,
+      "headers": {
+        "content-length": "0",
+        "Content-Type": "text/plain;charset=utf-8",
+        "Referrer-Policy": "no-referrer",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "WWW-Authenticate": "Bearer realm=\"spider-test\", error=\"invalid_token\", error_description=\"Token verification failed\"",
+        "X-Content-Type-Options": "nosniff",
+        "X-XSS-Protection": "1; mode=block"
+      },
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_preview": "",
+      "fingerprint": "196af3d9ca51535f78bceaba1b043160b1b9f5363dc2a49f143f7a55e76c33bf",
+      "elapsed": 0.004668193999975756,
+      "timestamp": 1788972066.012057,
+      "state": "invalid_token",
+      "rep": 4
+    },
+    {
+      "url": "http://127.0.0.1:18080/realms/spider-test/protocol/openid-connect/userinfo",
+      "status": 401,
+      "headers": {
+        "content-length": "0",
+        "Content-Type": "text/plain;charset=utf-8",
+        "Referrer-Policy": "no-referrer",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "WWW-Authenticate": "Bearer realm=\"spider-test\", error=\"invalid_token\", error_description=\"Token verification failed\"",
+        "X-Content-Type-Options": "nosniff",
+        "X-XSS-Protection": "1; mode=block"
+      },
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_preview": "",
+      "fingerprint": "196af3d9ca51535f78bceaba1b043160b1b9f5363dc2a49f143f7a55e76c33bf",
+      "elapsed": 0.0038119840000376826,
+      "timestamp": 1788972066.038395,
+      "state": "invalid_token",
+      "rep": 3
+    }
+  ],
+  "valid_token": [
+    {
+      "url": "http://127.0.0.1:18080/realms/spider-test/protocol/openid-connect/userinfo",
+      "status": 200,
+      "headers": {
+        "content-length": "189",
+        "Cache-Control": "no-cache",
+        "Content-Type": "application/json",
+        "Referrer-Policy": "no-referrer",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block"
+      },
+      "body_hash": "7ce161aad19b73d4d0401f9e89b0be7d2eba425d5dfcb82bd94c53f70f53547b",
+      "body_preview": "{\"sub\":\"1d42bb43-fba0-4252-a9cc-7a06bbf92912\",\"email_verified\":true,\"name\":\"Alice Smith\",\"preferred_username\":\"alice\",\"given_name\":\"Alice\",\"family_name\":\"Smith\",\"email\":\"alice@example.com\"}",
+      "fingerprint": "5e7fae4a8d5f2463246f96b94278838d4ad5c8ac99d5f2e9524d46fb5843314c",
+      "elapsed": 0.00851098999999067,
+      "timestamp": 1788972062.3879156,
+      "state": "valid_token",
+      "rep": 3
+    },
+    {
+      "url": "http://127.0.0.1:18080/realms/spider-test/protocol/openid-connect/userinfo",
+      "status": 200,
+      "headers": {
+        "content-length": "189",
+        "Cache-Control": "no-cache",
+        "Content-Type": "application/json",
+        "Referrer-Policy": "no-referrer",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block"
+      },
+      "body_hash": "7ce161aad19b73d4d0401f9e89b0be7d2eba425d5dfcb82bd94c53f70f53547b",
+      "body_preview": "{\"sub\":\"1d42bb43-fba0-4252-a9cc-7a06bbf92912\",\"email_verified\":true,\"name\":\"Alice Smith\",\"preferred_username\":\"alice\",\"given_name\":\"Alice\",\"family_name\":\"Smith\",\"email\":\"alice@example.com\"}",
+      "fingerprint": "5e7fae4a8d5f2463246f96b94278838d4ad5c8ac99d5f2e9524d46fb5843314c",
+      "elapsed": 0.005828986000040004,
+      "timestamp": 1788972062.7779799,
+      "state": "valid_token",
+      "rep": 7
+    },
+    {
+      "url": "http://127.0.0.1:18080/realms/spider-test/protocol/openid-connect/userinfo",
+      "status": 200,
+      "headers": {
+        "content-length": "189",
+        "Cache-Control": "no-cache",
+        "Content-Type": "application/json",
+        "Referrer-Policy": "no-referrer",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block"
+      },
+      "body_hash": "7ce161aad19b73d4d0401f9e89b0be7d2eba425d5dfcb82bd94c53f70f53547b",
+      "body_preview": "{\"sub\":\"1d42bb43-fba0-4252-a9cc-7a06bbf92912\",\"email_verified\":true,\"name\":\"Alice Smith\",\"preferred_username\":\"alice\",\"given_name\":\"Alice\",\"family_name\":\"Smith\",\"email\":\"alice@example.com\"}",
+      "fingerprint": "5e7fae4a8d5f2463246f96b94278838d4ad5c8ac99d5f2e9524d46fb5843314c",
+      "elapsed": 0.006081165000011879,
+      "timestamp": 1788972062.8338993,
+      "state": "valid_token",
+      "rep": 5
+    },
+    {
+      "url": "http://127.0.0.1:18080/realms/spider-test/protocol/openid-connect/userinfo",
+      "status": 200,
+      "headers": {
+        "content-length": "189",
+        "Cache-Control": "no-cache",
+        "Content-Type": "application/json",
+        "Referrer-Policy": "no-referrer",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block"
+      },
+      "body_hash": "7ce161aad19b73d4d0401f9e89b0be7d2eba425d5dfcb82bd94c53f70f53547b",
+      "body_preview": "{\"sub\":\"1d42bb43-fba0-4252-a9cc-7a06bbf92912\",\"email_verified\":true,\"name\":\"Alice Smith\",\"preferred_username\":\"alice\",\"given_name\":\"Alice\",\"family_name\":\"Smith\",\"email\":\"alice@example.com\"}",
+      "fingerprint": "5e7fae4a8d5f2463246f96b94278838d4ad5c8ac99d5f2e9524d46fb5843314c",
+      "elapsed": 0.00611645200001476,
+      "timestamp": 1788972063.7666056,
+      "state": "valid_token",
+      "rep": 0
+    },
+    {
+      "url": "http://127.0.0.1:18080/realms/spider-test/protocol/openid-connect/userinfo",
+      "status": 200,
+      "headers": {
+        "content-length": "189",
+        "Cache-Control": "no-cache",
+        "Content-Type": "application/json",
+        "Referrer-Policy": "no-referrer",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block"
+      },
+      "body_hash": "7ce161aad19b73d4d0401f9e89b0be7d2eba425d5dfcb82bd94c53f70f53547b",
+      "body_preview": "{\"sub\":\"1d42bb43-fba0-4252-a9cc-7a06bbf92912\",\"email_verified\":true,\"name\":\"Alice Smith\",\"preferred_username\":\"alice\",\"given_name\":\"Alice\",\"family_name\":\"Smith\",\"email\":\"alice@example.com\"}",
+      "fingerprint": "5e7fae4a8d5f2463246f96b94278838d4ad5c8ac99d5f2e9524d46fb5843314c",
+      "elapsed": 0.005625200999986646,
+      "timestamp": 1788972063.9385667,
+      "state": "valid_token",
+      "rep": 9
+    },
+    {
+      "url": "http://127.0.0.1:18080/realms/spider-test/protocol/openid-connect/userinfo",
+      "status": 200,
+      "headers": {
+        "content-length": "189",
+        "Cache-Control": "no-cache",
+        "Content-Type": "application/json",
+        "Referrer-Policy": "no-referrer",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block"
+      },
+      "body_hash": "7ce161aad19b73d4d0401f9e89b0be7d2eba425d5dfcb82bd94c53f70f53547b",
+      "body_preview": "{\"sub\":\"1d42bb43-fba0-4252-a9cc-7a06bbf92912\",\"email_verified\":true,\"name\":\"Alice Smith\",\"preferred_username\":\"alice\",\"given_name\":\"Alice\",\"family_name\":\"Smith\",\"email\":\"alice@example.com\"}",
+      "fingerprint": "5e7fae4a8d5f2463246f96b94278838d4ad5c8ac99d5f2e9524d46fb5843314c",
+      "elapsed": 0.005855182999994213,
+      "timestamp": 1788972064.1941142,
+      "state": "valid_token",
+      "rep": 2
+    },
+    {
+      "url": "http://127.0.0.1:18080/realms/spider-test/protocol/openid-connect/userinfo",
+      "status": 200,
+      "headers": {
+        "content-length": "189",
+        "Cache-Control": "no-cache",
+        "Content-Type": "application/json",
+        "Referrer-Policy": "no-referrer",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block"
+      },
+      "body_hash": "7ce161aad19b73d4d0401f9e89b0be7d2eba425d5dfcb82bd94c53f70f53547b",
+      "body_preview": "{\"sub\":\"1d42bb43-fba0-4252-a9cc-7a06bbf92912\",\"email_verified\":true,\"name\":\"Alice Smith\",\"preferred_username\":\"alice\",\"given_name\":\"Alice\",\"family_name\":\"Smith\",\"email\":\"alice@example.com\"}",
+      "fingerprint": "5e7fae4a8d5f2463246f96b94278838d4ad5c8ac99d5f2e9524d46fb5843314c",
+      "elapsed": 0.005392004999976052,
+      "timestamp": 1788972064.6189141,
+      "state": "valid_token",
+      "rep": 6
+    },
+    {
+      "url": "http://127.0.0.1:18080/realms/spider-test/protocol/openid-connect/userinfo",
+      "status": 200,
+      "headers": {
+        "content-length": "189",
+        "Cache-Control": "no-cache",
+        "Content-Type": "application/json",
+        "Referrer-Policy": "no-referrer",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block"
+      },
+      "body_hash": "7ce161aad19b73d4d0401f9e89b0be7d2eba425d5dfcb82bd94c53f70f53547b",
+      "body_preview": "{\"sub\":\"1d42bb43-fba0-4252-a9cc-7a06bbf92912\",\"email_verified\":true,\"name\":\"Alice Smith\",\"preferred_username\":\"alice\",\"given_name\":\"Alice\",\"family_name\":\"Smith\",\"email\":\"alice@example.com\"}",
+      "fingerprint": "5e7fae4a8d5f2463246f96b94278838d4ad5c8ac99d5f2e9524d46fb5843314c",
+      "elapsed": 0.006506760000036138,
+      "timestamp": 1788972065.436398,
+      "state": "valid_token",
+      "rep": 8
+    },
+    {
+      "url": "http://127.0.0.1:18080/realms/spider-test/protocol/openid-connect/userinfo",
+      "status": 200,
+      "headers": {
+        "content-length": "189",
+        "Cache-Control": "no-cache",
+        "Content-Type": "application/json",
+        "Referrer-Policy": "no-referrer",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block"
+      },
+      "body_hash": "7ce161aad19b73d4d0401f9e89b0be7d2eba425d5dfcb82bd94c53f70f53547b",
+      "body_preview": "{\"sub\":\"1d42bb43-fba0-4252-a9cc-7a06bbf92912\",\"email_verified\":true,\"name\":\"Alice Smith\",\"preferred_username\":\"alice\",\"given_name\":\"Alice\",\"family_name\":\"Smith\",\"email\":\"alice@example.com\"}",
+      "fingerprint": "5e7fae4a8d5f2463246f96b94278838d4ad5c8ac99d5f2e9524d46fb5843314c",
+      "elapsed": 0.006044062000000849,
+      "timestamp": 1788972065.5720725,
+      "state": "valid_token",
+      "rep": 4
+    },
+    {
+      "url": "http://127.0.0.1:18080/realms/spider-test/protocol/openid-connect/userinfo",
+      "status": 200,
+      "headers": {
+        "content-length": "189",
+        "Cache-Control": "no-cache",
+        "Content-Type": "application/json",
+        "Referrer-Policy": "no-referrer",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block"
+      },
+      "body_hash": "7ce161aad19b73d4d0401f9e89b0be7d2eba425d5dfcb82bd94c53f70f53547b",
+      "body_preview": "{\"sub\":\"1d42bb43-fba0-4252-a9cc-7a06bbf92912\",\"email_verified\":true,\"name\":\"Alice Smith\",\"preferred_username\":\"alice\",\"given_name\":\"Alice\",\"family_name\":\"Smith\",\"email\":\"alice@example.com\"}",
+      "fingerprint": "5e7fae4a8d5f2463246f96b94278838d4ad5c8ac99d5f2e9524d46fb5843314c",
+      "elapsed": 0.006154613999967751,
+      "timestamp": 1788972065.8914306,
+      "state": "valid_token",
+      "rep": 1
+    }
+  ],
+  "no_auth": [
+    {
+      "url": "http://127.0.0.1:18080/realms/spider-test/protocol/openid-connect/userinfo",
+      "status": 401,
+      "headers": {
+        "content-length": "0",
+        "Content-Type": "text/plain;charset=utf-8",
+        "Referrer-Policy": "no-referrer",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "WWW-Authenticate": "Bearer realm=\"spider-test\"",
+        "X-Content-Type-Options": "nosniff",
+        "X-XSS-Protection": "1; mode=block"
+      },
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_preview": "",
+      "fingerprint": "61c534065a31c01715e8ea398454c968a3d994ba256b3eee5dbf164111c65421",
+      "elapsed": 0.004502479999985098,
+      "timestamp": 1788972062.488135,
+      "state": "no_auth",
+      "rep": 6
+    },
+    {
+      "url": "http://127.0.0.1:18080/realms/spider-test/protocol/openid-connect/userinfo",
+      "status": 401,
+      "headers": {
+        "content-length": "0",
+        "Content-Type": "text/plain;charset=utf-8",
+        "Referrer-Policy": "no-referrer",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "WWW-Authenticate": "Bearer realm=\"spider-test\"",
+        "X-Content-Type-Options": "nosniff",
+        "X-XSS-Protection": "1; mode=block"
+      },
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_preview": "",
+      "fingerprint": "61c534065a31c01715e8ea398454c968a3d994ba256b3eee5dbf164111c65421",
+      "elapsed": 0.0037951750000502216,
+      "timestamp": 1788972062.8477318,
+      "state": "no_auth",
+      "rep": 8
+    },
+    {
+      "url": "http://127.0.0.1:18080/realms/spider-test/protocol/openid-connect/userinfo",
+      "status": 401,
+      "headers": {
+        "content-length": "0",
+        "Content-Type": "text/plain;charset=utf-8",
+        "Referrer-Policy": "no-referrer",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "WWW-Authenticate": "Bearer realm=\"spider-test\"",
+        "X-Content-Type-Options": "nosniff",
+        "X-XSS-Protection": "1; mode=block"
+      },
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_preview": "",
+      "fingerprint": "61c534065a31c01715e8ea398454c968a3d994ba256b3eee5dbf164111c65421",
+      "elapsed": 0.004436896999948203,
+      "timestamp": 1788972063.1551535,
+      "state": "no_auth",
+      "rep": 2
+    },
+    {
+      "url": "http://127.0.0.1:18080/realms/spider-test/protocol/openid-connect/userinfo",
+      "status": 401,
+      "headers": {
+        "content-length": "0",
+        "Content-Type": "text/plain;charset=utf-8",
+        "Referrer-Policy": "no-referrer",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "WWW-Authenticate": "Bearer realm=\"spider-test\"",
+        "X-Content-Type-Options": "nosniff",
+        "X-XSS-Protection": "1; mode=block"
+      },
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_preview": "",
+      "fingerprint": "61c534065a31c01715e8ea398454c968a3d994ba256b3eee5dbf164111c65421",
+      "elapsed": 0.003266230999997788,
+      "timestamp": 1788972063.258776,
+      "state": "no_auth",
+      "rep": 4
+    },
+    {
+      "url": "http://127.0.0.1:18080/realms/spider-test/protocol/openid-connect/userinfo",
+      "status": 401,
+      "headers": {
+        "content-length": "0",
+        "Content-Type": "text/plain;charset=utf-8",
+        "Referrer-Policy": "no-referrer",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "WWW-Authenticate": "Bearer realm=\"spider-test\"",
+        "X-Content-Type-Options": "nosniff",
+        "X-XSS-Protection": "1; mode=block"
+      },
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_preview": "",
+      "fingerprint": "61c534065a31c01715e8ea398454c968a3d994ba256b3eee5dbf164111c65421",
+      "elapsed": 0.00415521100001115,
+      "timestamp": 1788972064.3585167,
+      "state": "no_auth",
+      "rep": 9
+    },
+    {
+      "url": "http://127.0.0.1:18080/realms/spider-test/protocol/openid-connect/userinfo",
+      "status": 401,
+      "headers": {
+        "content-length": "0",
+        "Content-Type": "text/plain;charset=utf-8",
+        "Referrer-Policy": "no-referrer",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "WWW-Authenticate": "Bearer realm=\"spider-test\"",
+        "X-Content-Type-Options": "nosniff",
+        "X-XSS-Protection": "1; mode=block"
+      },
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_preview": "",
+      "fingerprint": "61c534065a31c01715e8ea398454c968a3d994ba256b3eee5dbf164111c65421",
+      "elapsed": 0.004233739999961017,
+      "timestamp": 1788972064.8339572,
+      "state": "no_auth",
+      "rep": 5
+    },
+    {
+      "url": "http://127.0.0.1:18080/realms/spider-test/protocol/openid-connect/userinfo",
+      "status": 401,
+      "headers": {
+        "content-length": "0",
+        "Content-Type": "text/plain;charset=utf-8",
+        "Referrer-Policy": "no-referrer",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "WWW-Authenticate": "Bearer realm=\"spider-test\"",
+        "X-Content-Type-Options": "nosniff",
+        "X-XSS-Protection": "1; mode=block"
+      },
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_preview": "",
+      "fingerprint": "61c534065a31c01715e8ea398454c968a3d994ba256b3eee5dbf164111c65421",
+      "elapsed": 0.004381225999964045,
+      "timestamp": 1788972065.175387,
+      "state": "no_auth",
+      "rep": 0
+    },
+    {
+      "url": "http://127.0.0.1:18080/realms/spider-test/protocol/openid-connect/userinfo",
+      "status": 401,
+      "headers": {
+        "content-length": "0",
+        "Content-Type": "text/plain;charset=utf-8",
+        "Referrer-Policy": "no-referrer",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "WWW-Authenticate": "Bearer realm=\"spider-test\"",
+        "X-Content-Type-Options": "nosniff",
+        "X-XSS-Protection": "1; mode=block"
+      },
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_preview": "",
+      "fingerprint": "61c534065a31c01715e8ea398454c968a3d994ba256b3eee5dbf164111c65421",
+      "elapsed": 0.003773737000017263,
+      "timestamp": 1788972065.2232141,
+      "state": "no_auth",
+      "rep": 3
+    },
+    {
+      "url": "http://127.0.0.1:18080/realms/spider-test/protocol/openid-connect/userinfo",
+      "status": 401,
+      "headers": {
+        "content-length": "0",
+        "Content-Type": "text/plain;charset=utf-8",
+        "Referrer-Policy": "no-referrer",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "WWW-Authenticate": "Bearer realm=\"spider-test\"",
+        "X-Content-Type-Options": "nosniff",
+        "X-XSS-Protection": "1; mode=block"
+      },
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_preview": "",
+      "fingerprint": "61c534065a31c01715e8ea398454c968a3d994ba256b3eee5dbf164111c65421",
+      "elapsed": 0.0023832360000142216,
+      "timestamp": 1788972065.2790196,
+      "state": "no_auth",
+      "rep": 1
+    },
+    {
+      "url": "http://127.0.0.1:18080/realms/spider-test/protocol/openid-connect/userinfo",
+      "status": 401,
+      "headers": {
+        "content-length": "0",
+        "Content-Type": "text/plain;charset=utf-8",
+        "Referrer-Policy": "no-referrer",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "WWW-Authenticate": "Bearer realm=\"spider-test\"",
+        "X-Content-Type-Options": "nosniff",
+        "X-XSS-Protection": "1; mode=block"
+      },
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_preview": "",
+      "fingerprint": "61c534065a31c01715e8ea398454c968a3d994ba256b3eee5dbf164111c65421",
+      "elapsed": 0.004332928999986052,
+      "timestamp": 1788972065.967346,
+      "state": "no_auth",
+      "rep": 7
+    }
+  ],
+  "expired_token": [
+    {
+      "url": "http://127.0.0.1:18080/realms/spider-test/protocol/openid-connect/userinfo",
+      "status": 401,
+      "headers": {
+        "content-length": "0",
+        "Content-Type": "text/plain;charset=utf-8",
+        "Referrer-Policy": "no-referrer",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "WWW-Authenticate": "Bearer realm=\"spider-test\", error=\"invalid_token\", error_description=\"Token verification failed\"",
+        "X-Content-Type-Options": "nosniff",
+        "X-XSS-Protection": "1; mode=block"
+      },
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_preview": "",
+      "fingerprint": "196af3d9ca51535f78bceaba1b043160b1b9f5363dc2a49f143f7a55e76c33bf",
+      "elapsed": 0.005526808000013261,
+      "timestamp": 1788972062.6772957,
+      "state": "expired_token",
+      "rep": 3
+    },
+    {
+      "url": "http://127.0.0.1:18080/realms/spider-test/protocol/openid-connect/userinfo",
+      "status": 401,
+      "headers": {
+        "content-length": "0",
+        "Content-Type": "text/plain;charset=utf-8",
+        "Referrer-Policy": "no-referrer",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "WWW-Authenticate": "Bearer realm=\"spider-test\", error=\"invalid_token\", error_description=\"Token verification failed\"",
+        "X-Content-Type-Options": "nosniff",
+        "X-XSS-Protection": "1; mode=block"
+      },
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_preview": "",
+      "fingerprint": "196af3d9ca51535f78bceaba1b043160b1b9f5363dc2a49f143f7a55e76c33bf",
+      "elapsed": 0.005012625999995635,
+      "timestamp": 1788972062.7202528,
+      "state": "expired_token",
+      "rep": 7
+    },
+    {
+      "url": "http://127.0.0.1:18080/realms/spider-test/protocol/openid-connect/userinfo",
+      "status": 401,
+      "headers": {
+        "content-length": "0",
+        "Content-Type": "text/plain;charset=utf-8",
+        "Referrer-Policy": "no-referrer",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "WWW-Authenticate": "Bearer realm=\"spider-test\", error=\"invalid_token\", error_description=\"Token verification failed\"",
+        "X-Content-Type-Options": "nosniff",
+        "X-XSS-Protection": "1; mode=block"
+      },
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_preview": "",
+      "fingerprint": "196af3d9ca51535f78bceaba1b043160b1b9f5363dc2a49f143f7a55e76c33bf",
+      "elapsed": 0.005052501000022858,
+      "timestamp": 1788972063.2477329,
+      "state": "expired_token",
+      "rep": 1
+    },
+    {
+      "url": "http://127.0.0.1:18080/realms/spider-test/protocol/openid-connect/userinfo",
+      "status": 401,
+      "headers": {
+        "content-length": "0",
+        "Content-Type": "text/plain;charset=utf-8",
+        "Referrer-Policy": "no-referrer",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "WWW-Authenticate": "Bearer realm=\"spider-test\", error=\"invalid_token\", error_description=\"Token verification failed\"",
+        "X-Content-Type-Options": "nosniff",
+        "X-XSS-Protection": "1; mode=block"
+      },
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_preview": "",
+      "fingerprint": "196af3d9ca51535f78bceaba1b043160b1b9f5363dc2a49f143f7a55e76c33bf",
+      "elapsed": 0.005232395999996697,
+      "timestamp": 1788972063.4069788,
+      "state": "expired_token",
+      "rep": 5
+    },
+    {
+      "url": "http://127.0.0.1:18080/realms/spider-test/protocol/openid-connect/userinfo",
+      "status": 401,
+      "headers": {
+        "content-length": "0",
+        "Content-Type": "text/plain;charset=utf-8",
+        "Referrer-Policy": "no-referrer",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "WWW-Authenticate": "Bearer realm=\"spider-test\", error=\"invalid_token\", error_description=\"Token verification failed\"",
+        "X-Content-Type-Options": "nosniff",
+        "X-XSS-Protection": "1; mode=block"
+      },
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_preview": "",
+      "fingerprint": "196af3d9ca51535f78bceaba1b043160b1b9f5363dc2a49f143f7a55e76c33bf",
+      "elapsed": 0.005092660999991949,
+      "timestamp": 1788972064.0700133,
+      "state": "expired_token",
+      "rep": 8
+    },
+    {
+      "url": "http://127.0.0.1:18080/realms/spider-test/protocol/openid-connect/userinfo",
+      "status": 401,
+      "headers": {
+        "content-length": "0",
+        "Content-Type": "text/plain;charset=utf-8",
+        "Referrer-Policy": "no-referrer",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "WWW-Authenticate": "Bearer realm=\"spider-test\", error=\"invalid_token\", error_description=\"Token verification failed\"",
+        "X-Content-Type-Options": "nosniff",
+        "X-XSS-Protection": "1; mode=block"
+      },
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_preview": "",
+      "fingerprint": "196af3d9ca51535f78bceaba1b043160b1b9f5363dc2a49f143f7a55e76c33bf",
+      "elapsed": 0.004969318000007661,
+      "timestamp": 1788972064.307452,
+      "state": "expired_token",
+      "rep": 0
+    },
+    {
+      "url": "http://127.0.0.1:18080/realms/spider-test/protocol/openid-connect/userinfo",
+      "status": 401,
+      "headers": {
+        "content-length": "0",
+        "Content-Type": "text/plain;charset=utf-8",
+        "Referrer-Policy": "no-referrer",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "WWW-Authenticate": "Bearer realm=\"spider-test\", error=\"invalid_token\", error_description=\"Token verification failed\"",
+        "X-Content-Type-Options": "nosniff",
+        "X-XSS-Protection": "1; mode=block"
+      },
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_preview": "",
+      "fingerprint": "196af3d9ca51535f78bceaba1b043160b1b9f5363dc2a49f143f7a55e76c33bf",
+      "elapsed": 0.004635479000000942,
+      "timestamp": 1788972064.4545043,
+      "state": "expired_token",
+      "rep": 2
+    },
+    {
+      "url": "http://127.0.0.1:18080/realms/spider-test/protocol/openid-connect/userinfo",
+      "status": 401,
+      "headers": {
+        "content-length": "0",
+        "Content-Type": "text/plain;charset=utf-8",
+        "Referrer-Policy": "no-referrer",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "WWW-Authenticate": "Bearer realm=\"spider-test\", error=\"invalid_token\", error_description=\"Token verification failed\"",
+        "X-Content-Type-Options": "nosniff",
+        "X-XSS-Protection": "1; mode=block"
+      },
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_preview": "",
+      "fingerprint": "196af3d9ca51535f78bceaba1b043160b1b9f5363dc2a49f143f7a55e76c33bf",
+      "elapsed": 0.004774653999959355,
+      "timestamp": 1788972065.0028932,
+      "state": "expired_token",
+      "rep": 9
+    },
+    {
+      "url": "http://127.0.0.1:18080/realms/spider-test/protocol/openid-connect/userinfo",
+      "status": 401,
+      "headers": {
+        "content-length": "0",
+        "Content-Type": "text/plain;charset=utf-8",
+        "Referrer-Policy": "no-referrer",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "WWW-Authenticate": "Bearer realm=\"spider-test\", error=\"invalid_token\", error_description=\"Token verification failed\"",
+        "X-Content-Type-Options": "nosniff",
+        "X-XSS-Protection": "1; mode=block"
+      },
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_preview": "",
+      "fingerprint": "196af3d9ca51535f78bceaba1b043160b1b9f5363dc2a49f143f7a55e76c33bf",
+      "elapsed": 0.00510762600004,
+      "timestamp": 1788972065.6860783,
+      "state": "expired_token",
+      "rep": 4
+    },
+    {
+      "url": "http://127.0.0.1:18080/realms/spider-test/protocol/openid-connect/userinfo",
+      "status": 401,
+      "headers": {
+        "content-length": "0",
+        "Content-Type": "text/plain;charset=utf-8",
+        "Referrer-Policy": "no-referrer",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "WWW-Authenticate": "Bearer realm=\"spider-test\", error=\"invalid_token\", error_description=\"Token verification failed\"",
+        "X-Content-Type-Options": "nosniff",
+        "X-XSS-Protection": "1; mode=block"
+      },
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_preview": "",
+      "fingerprint": "196af3d9ca51535f78bceaba1b043160b1b9f5363dc2a49f143f7a55e76c33bf",
+      "elapsed": 0.00477915099997972,
+      "timestamp": 1788972066.1114335,
+      "state": "expired_token",
+      "rep": 6
+    }
+  ]
+}

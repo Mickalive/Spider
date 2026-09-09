@@ -7,8 +7,8 @@
   "continue_immediately": false,
   "next_question": "Does the HTTP fingerprint substrate maintain discrimination and incremental header value on a real OAuth/OIDC identity provider (e.g., self-hosted Keycloak or Auth0 test tenant) where Cache-Control and Set-Cookie patterns are determined by the IdP middleware rather than application-set per auth state \u2014 the ecological validity test for the product architecture recommendation?",
   "promotion_ready": false,
-  "consecutive_failures": 3,
-  "updated_at": "2026-09-09T12:02:25.312980+00:00",
+  "consecutive_failures": 4,
+  "updated_at": "2026-09-09T16:42:53.181018+00:00",
   "last_failure_retryable": false,
   "last_handoff_sha256": "7b28391976ee38f749fd1283549e41e5eafbe2e07671138ed99cc3647ffc3956"
 }
