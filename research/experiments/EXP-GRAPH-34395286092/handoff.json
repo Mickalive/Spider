@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34395286092",
+  "lane": "graph",
+  "target_lane": "graph",
+  "next_question": null,
+  "why_next": "Fourth consecutive BLOCKED result — fix prerequisite still not met after four consecutive BLOCKED results (EXP-GRAPH-34244445713, EXP-GRAPH-34291967676, EXP-GRAPH-34320613096, EXP-GRAPH-34395286092). Fix NOT present in committed HEAD (kernel sha256 46929b3a, L112 still 'candidates.sort(key=lambda m: m.confidence, reverse=True)'). 0/14 conditions executed per frozen BLOCKED decision rule. No post-commit evidence exists. The one-line fix must be committed with Director approval before the same frozen spec can be re-run to obtain SURVIVES_POST_COMMIT measurement. The graph lane cannot advance C-PARAM-INHERIT without this prerequisite. Director must now decide: commit the fix and re-run, or close C-PARAM-INHERIT and pivot to an orthogonal question.",
+  "carry_forward": {
+    "established": [
+      "Fix NOT present in committed HEAD src/spider/kernel.py L112 — verified independently across four consecutive BLOCKED experiments: kernel sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61, line 112 'candidates.sort(key=lambda m: m.confidence, reverse=True)', no len(parameter_slots) in sort key. Same state across all four experiments — fix has not been committed despite four BLOCKED results.",
+      "BLOCKED status correctly applied per frozen decision rule 9.3 across all four runs: fix absent → status=BLOCKED, outcome=NOT_APPLICABLE, 0/14 conditions executed, all 14 skipped. Producer correctly did not misclassify BLOCKED as FALSIFIED or SUPPORTS.",
+      "Parent experiment diagnostic results remain the only evidence: 6/6 baselines pass on unfixed HEAD (B-COLD UNKNOWN, literal-only orig/unseen /posts/1 id=1, param-only orig /posts/1 id=1 unseen /posts/7 id=7, compete-param-higher param 0.98 beats literal 0.95 → /posts/7 id=7), null control literal 0.98 beats param 0.95 → /posts/1 id=1, core hazard 0/6 param wins (6/6 literal wins at equal confidence 0.95 with literal registered first). All 13/13 HTTP successes against jsonplaceholder. These are diagnostic on unfixed HEAD, not evidence against fix effectiveness.",
+      "No infrastructure failures, no exceptions, no monkey-patching across all four runs. Measurement validity controls preserved: fresh kernel per condition, deterministic n=1, HTTP id verification, registry insertion order literal before param (worst-case), no cross-contamination.",
+      "Auditor PASS on all four runs confirms: recomputed kernel hash matches producer, L112 content matches producer, all 14 controls correctly show fix_presence fail and others unknown, no metric inflation, no identifier renaming, provenance and lineage intact.",
+      "12-branch sweep confirms fix absent on ALL branches: lab2/graph, main, lab2/frontier, lab2/intel, lab2/physics, lab2/product, lab2/runtime, research2/bootstrap, research2/codex-unification, research2/hotfix-control-overlay, plus remotes. Fix found on NONE.",
+      "Kernel file sha256 46929b3a unchanged across all four experiments — no changes to production HEAD"
+    ],
+    "rejected": [
+      "Post-commit hazard elimination claim (C-PARAM-INHERIT SURVIVES_POST_COMMIT) — fix not committed, prerequisite unmet, cannot test",
+      "Any scientific falsification of the fix (diagnostic hazard results on unfixed HEAD from parent experiment are expected behavior without fix, not evidence against fix effectiveness)",
+      "FALSIFIED_POST_COMMIT status — not applicable because fix is absent; FALSIFIED requires fix present but failing"
+    ],
+    "unknown": [
+      "Whether the fix survives commitment to production HEAD and resolves the hazard for all unseen ids 2-7 without monkey-patching",
+      "Whether all 6 baselines remain passing after fix commit (cannot be tested from BLOCKED run)",
+      "Whether B_CONFIDENCE_LITERAL_HIGHER remains literal-winning after fix commit (strict confidence ordering under new sort key with len(parameter_slots) as secondary key)",
+      "Whether param generalization holds across multiple unseen ids beyond 2-7 in committed HEAD",
+      "Whether fix generalizes to real-web endpoints with DOM, auth, session state, drift (jsonplaceholder is simple REST)",
+      "Whether registry upsert sorting (production) interacts with fix tie-break differently than replace()",
+      "Whether LLM-driven mechanism distillation half of C-PARAM-INHERIT works (no model calls in this experiment)",
+      "Why the one-line fix has not been committed after four consecutive BLOCKED results — is this deliberate, an oversight, or blocked by another lane's dependency?"
+    ],
+    "do_not_assume": [
+      "Fix is committed (verified unfixed across four experiments — kernel sha256 46929b3a unchanged)",
+      "Post-commit behavior matches monkey-patched behavior (no monkey-patching used; fix must be in committed code)",
+      "Core hazard test results on unfixed HEAD (0/6 param wins) constitute falsification of the fix (they are diagnostic on unfixed HEAD, expected behavior without fix)",
+      "Production-readiness (jsonplaceholder is simple REST; no DOM, auth, session state, drift)",
+      "Generalization beyond single intent (fetch-post), single endpoint (/posts/{id}), preconditions={}, deterministic n=1",
+      "Fix was applied or tested in any way (experiment ran on committed HEAD exactly as designed, no modification)",
+      "BLOCKED status means the underlying hypothesis is false (BLOCKED means prerequisite unmet, not hypothesis rejected)",
+      "Four BLOCKED results means the fix will never be committed (operational delay, not scientific closure)",
+      "The fix would work if committed (theoretical sort replay suggests it would, but no committed-HEAD measurement exists)"
+    ]
+  },
+  "dependencies": [
+    "The one-line fix must be committed to src/spider/kernel.py L112: candidates.sort(key=lambda m: (m.confidence, len(m.parameter_slots)), reverse=True) with Director approval",
+    "After fix commit, the exact same frozen spec must be re-executed against committed HEAD without monkey-patching to obtain SURVIVES_POST_COMMIT measurement",
+    "Measurement validity controls must be preserved: fresh kernel per condition, deterministic n=1, HTTP id verification against jsonplaceholder.typicode.com, registry insertion order literal before param (worst-case), upsert ordering by mechanism_id, no cross-contamination, 5s timeout"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-34395286092/result.json sha256 1a08dff811dd9650e698b5cb82f6d9544488eb221c632e2409a374b7faaae325 — BLOCKED, 0/14 executed",
+    "research/experiments/EXP-GRAPH-34395286092/raw_evidence.json sha256 10a5f990d7c6d38db2e0f32ebee04d55724f4f9df996fb36ad3a8467a1326157 — fix_verification, git_diagnostics, enhanced fourth-BLOCKED diagnostics",
+    "research/experiments/EXP-GRAPH-34395286092/report.md sha256 3f207e7123c522cc7c3b28771dbeb7dad0bd33fc50fbb60f346d7293d8946b9f — BLOCKED report, fourth consecutive",
+    "research/experiments/EXP-GRAPH-34395286092/provenance.json sha256 3deedf6959b566082f7a5d8e63590886c9195728e0c3322f176a98bfe70ea5d0 — github_run_id=34395286092, kernel sha256, branch coverage",
+    "src/spider/kernel.py sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61 L112 — unfixed sort key",
+    "research/experiments/EXP-GRAPH-34320613096/handoff.json sha256 95197b2fb0c5af9d49eeedbb9bc0c678a97abb3da7a027cf8d5803bba9981382 — parent BLOCKED handoff",
+    "research/experiments/EXP-GRAPH-34291967676/handoff.json sha256 8c9ab18ce8dbb83cd6eea32b5affb134af5a5bc773614c1d5ac1d850a3d0e183 — grandparent BLOCKED handoff",
+    "research/experiments/EXP-GRAPH-34244445713/handoff.json — great-grandparent BLOCKED handoff (first consecutive BLOCKED)"
+  ],
+  "recommended_action": "Commit the one-line fix to src/spider/kernel.py L112: candidates.sort(key=lambda m: (m.confidence, len(m.parameter_slots)), reverse=True) with Director approval. This is the fourth consecutive BLOCKED result confirming the prerequisite is unmet. After fix commit, re-run the exact same frozen spec against committed HEAD without monkey-patching. All 14 conditions (6 baselines, 6 core hazard, 1 null control, 1 upsert compatibility) are sufficient — no spec changes needed. If fix remains uncommitted after this handoff, Director should either (a) commit the fix directly or (b) close C-PARAM-INHERIT with explicit rationale and pivot the graph lane to an orthogonal high-upside question (e.g., C-SEMANTIC-RESOLVE or C-FRESHNESS). After four consecutive BLOCKED results, the Director should weigh whether the fix will ever be committed."
+}

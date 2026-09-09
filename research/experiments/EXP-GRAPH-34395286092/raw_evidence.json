@@ -1,0 +1,96 @@
+{
+  "experiment_id": "EXP-GRAPH-34395286092",
+  "fix_verification": {
+    "l112_content": "        candidates.sort(key=lambda m: m.confidence, reverse=True)",
+    "fix_present": false,
+    "sort_key_includes_parameter_slots": false,
+    "expected_fix": "candidates.sort(key=lambda m: (m.confidence, len(m.parameter_slots)), reverse=True)",
+    "actual_line": "        candidates.sort(key=lambda m: m.confidence, reverse=True)"
+  },
+  "kernel_file": {
+    "path": "src/spider/kernel.py",
+    "sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+    "line_count": 132
+  },
+  "git_diagnostics": {
+    "head_commit": "27c3f6d30b64106ed2762b1b710d2b39462ab234",
+    "current_branch": "lab2/graph",
+    "recent_commits_current_branch": [
+      "27c3f6d R2 graph: execution base EXP-GRAPH-34395286092",
+      "26ac85f R2 graph: freeze EXP-GRAPH-34395286092",
+      "304eb0e R2 graph: allocate EXP-GRAPH-34395286092",
+      "ae3b75a Merge remote-tracking branch 'origin/main' into lab2/graph",
+      "f1e10ee codex: sync Research 2.0 evidence"
+    ],
+    "recent_commits_all_branches": [
+      "cfce4e3 R2 product: execute EXP-PRODUCT-34282620394",
+      "de63be5 R2 product: execute EXP-PRODUCT-34282620394",
+      "2b0dd0e R2 product: execute EXP-PRODUCT-34282620394",
+      "b6a0886 R2 product: verdict EXP-PRODUCT-34195008089",
+      "2a7bd9d R2 product: execute EXP-PRODUCT-34195008089",
+      "74256fb R2 product: verdict EXP-PRODUCT-34015741916",
+      "44a0309 R2 product: execute EXP-PRODUCT-34015741916",
+      "7485daf R2 product: execute EXP-PRODUCT-34015741916",
+      "44d59cf R2 product: verdict EXP-PRODUCT-33993747223",
+      "523b5cb R2 product: execute EXP-PRODUCT-33993747223",
+      "bcbc236 R2 product: verdict EXP-PRODUCT-33974562602",
+      "a8c0277 R2 product: execute EXP-PRODUCT-33974562602",
+      "fb05ae4 R2 product: verdict EXP-PRODUCT-33528829801",
+      "4779ea4 R2 product: execute EXP-PRODUCT-33528829801",
+      "1e6f32b r2: bind parameters safely inside action templates",
+      "6a13e20 r2: add product kernel and experiment transaction tooling"
+    ],
+    "all_branches": [
+      "lab2/graph",
+      "main",
+      "remotes/origin/archive/spider-codex-ultimate",
+      "remotes/origin/lab2/frontier",
+      "remotes/origin/lab2/graph",
+      "remotes/origin/lab2/intel",
+      "remotes/origin/lab2/physics",
+      "remotes/origin/lab2/product",
+      "remotes/origin/lab2/runtime",
+      "remotes/origin/main",
+      "remotes/origin/research2/bootstrap",
+      "remotes/origin/research2/codex-unification",
+      "remotes/origin/research2/hotfix-control-overlay"
+    ],
+    "fix_found_on_any_branch": false,
+    "uncommitted_changes_to_kernel": false
+  },
+  "enhanced_diagnostics_fourth_blocked": {
+    "graph_lane_recent_commits": [
+      "27c3f6d R2 graph: execution base EXP-GRAPH-34395286092",
+      "26ac85f R2 graph: freeze EXP-GRAPH-34395286092",
+      "304eb0e R2 graph: allocate EXP-GRAPH-34395286092",
+      "ae3b75a Merge remote-tracking branch 'origin/main' into lab2/graph",
+      "f1e10ee codex: sync Research 2.0 evidence"
+    ],
+    "remote_kernel_commits": [
+      "cfce4e3 refs/remotes/origin/lab2/product R2 product: execute EXP-PRODUCT-34282620394",
+      "de63be5 refs/remotes/origin/lab2/product R2 product: execute EXP-PRODUCT-34282620394",
+      "2b0dd0e refs/remotes/origin/lab2/product R2 product: execute EXP-PRODUCT-34282620394",
+      "b6a0886 refs/remotes/origin/lab2/product R2 product: verdict EXP-PRODUCT-34195008089",
+      "2a7bd9d refs/remotes/origin/lab2/product R2 product: execute EXP-PRODUCT-34195008089",
+      "74256fb refs/remotes/origin/lab2/product R2 product: verdict EXP-PRODUCT-34015741916",
+      "44a0309 refs/remotes/origin/lab2/product R2 product: execute EXP-PRODUCT-34015741916",
+      "7485daf refs/remotes/origin/lab2/product R2 product: execute EXP-PRODUCT-34015741916",
+      "44d59cf refs/remotes/origin/lab2/product R2 product: verdict EXP-PRODUCT-33993747223",
+      "523b5cb refs/remotes/origin/lab2/product R2 product: execute EXP-PRODUCT-33993747223",
+      "bcbc236 refs/remotes/origin/lab2/product R2 product: verdict EXP-PRODUCT-33974562602",
+      "a8c0277 refs/remotes/origin/lab2/product R2 product: execute EXP-PRODUCT-33974562602",
+      "fb05ae4 refs/remotes/origin/lab2/product R2 product: verdict EXP-PRODUCT-33528829801",
+      "4779ea4 refs/remotes/origin/lab2/product R2 product: execute EXP-PRODUCT-33528829801",
+      "1e6f32b refs/remotes/origin/research2/bootstrap r2: bind parameters safely inside action templates",
+      "6a13e20 refs/remotes/origin/research2/bootstrap r2: add product kernel and experiment transaction tooling"
+    ],
+    "fix_found_in_remote_branches": false,
+    "total_remote_commits_touching_kernel": 16,
+    "all_remote_commits_are_product_lane": true
+  },
+  "conditions_executed": 0,
+  "conditions_skipped": 14,
+  "http_requests_made": 0,
+  "exceptions": 0,
+  "monkey_patching_detected": false
+}
