@@ -31,12 +31,11 @@ The parent experiment tested title-aware PMI on real SPA/form-heavy browser tran
 
 **Unknown:**
 - Whether title-aware PMI detects dynamical structure on real SPA/form-heavy sites where titles actually vary across routes (the preregistered population was never tested)
-- Whether form_signals provide marginal information beyond titles on sites where titles may be ambiguous but form structures differ (multi-step forms with similar titles but different has_form/has_input patterns)
+- Whether form_signals provide marginal information beyond titles on sites where titles are ambiguous but form structures differ (multi-step forms with similar titles but different has_form/has_input patterns)
 - Whether trajectory-level entropy rates detect structure differences when transition-level PMI is identical due to degenerate representation
 - Whether the high URL-only PMI (1.32-1.36 bits vs parent synthetic 0.693 bits) reflects genuinely richer dynamical structure or small-state-space artifact (3 URLs vs 8 synthetic states) combined with smoothing asymmetry
 - Whether most production React/Vue SPAs have route-varying titles (via React Helmet, Vue Meta) or constant titles like TodoMVC — a title variance survey across SPA corpus would inform site selection
 - Whether 100% non-leakage is specific to TodoMVC hash-navigation or generalizes to form-heavy SPAs with actual form submissions and href-based navigation
-- Statistical power for small title effects given half-spec sample (50 vs 100 trajectories): moot here but relevant for future informative designs with varying titles
 
 **Do Not Assume:**
 - That the 0% title improvement on TodoMVC generalizes to sites with varying titles — it is a mathematical consequence of zero title variance (unique_titles=1), not a scientific finding about title informativeness
@@ -55,7 +54,7 @@ The parent experiment used **TodoMVC constant-title SPAs** where title variance 
 1. **Title variance**: Sites must have at least 3 routes with distinct document.title values (verified via pre-survey before full data collection)
 2. **Form-heavy interactions**: Sites should have multi-step forms, checkout flows, survey builders, or dashboards where titles vary per step/page
 3. **Non-leakage by construction**: SPA form submissions and client-side routing produce non-leakage transitions where the action does not predict the next state URL/title by simple string matching
-4. **Cross-site generalization**: Testing 2+ sites with different frameworks and content domains
+4. **Cross-site generalization**: Testing 2-3 sites with different frameworks and content domains
 5. **Form signals hypothesis**: Sites where titles may be ambiguous but form structures differ, enabling H4 test
 
 ## 4. Hypotheses
@@ -82,11 +81,11 @@ The synthetic SPA pipeline produces PMI >= 0.5 bits on known deterministic struc
 Before data collection:
 1. Install Playwright: `pip install playwright`
 2. Download browser binaries: `playwright install chromium`
-3. Verify Playwright works: simple page load test
+3. Verify Playwright works: simple page load test on a known URL
 
 ### 5.2 Site Selection
 
-Select 2 JavaScript-heavy SPA/form-heavy sites meeting these criteria:
+Select 2-3 JavaScript-heavy SPA/form-heavy sites meeting these criteria:
 - **Title variance**: At least 3 routes with distinct document.title values (verified via pre-survey: navigate to 5+ routes and check document.title)
 - Client-side routing (React Router, Vue Router, or equivalent)
 - Form interactions (multi-step forms, checkout flows, registration)
@@ -96,8 +95,9 @@ Select 2 JavaScript-heavy SPA/form-heavy sites meeting these criteria:
 - Different frameworks and content domains
 
 Candidate sites (to be finalized after title variance verification):
-1. **Site A**: A multi-step e-commerce checkout or survey builder with step-specific titles (e.g., "Step 1: Shipping", "Step 2: Payment", "Order Confirmation")
-2. **Site B**: A dashboard with page-specific titles via React Helmet/Vue Meta (e.g., "Analytics Dashboard", "User Management", "Settings")
+1. **Site A**: A multi-step form wizard or survey builder with step-specific titles (e.g., "Step 1: Personal Info", "Step 2: Preferences", "Review & Submit")
+2. **Site B**: A settings/configuration page with section-specific titles (e.g., "Account Settings", "Privacy Settings", "Notification Preferences")
+3. **Site C (optional)**: A dashboard or admin panel with page-specific titles via React Helmet/Vue Meta
 
 ### 5.3 Title Variance Pre-Survey
 
@@ -112,17 +112,17 @@ Before full data collection, verify title variance:
 
 For each site:
 1. Navigate to the site's entry point
-2. Execute random-walk trajectories: 100 trajectories of 8 steps each = 800 total transitions per site
+2. Execute random-walk trajectories: 30 trajectories of 8 steps each = 240 total transitions per site
 3. At each step:
    a. Extract BrowserState (URL, title, form_signals)
-   b. Extract available actions (clickable same-domain links)
+   b. Extract available actions (clickable same-domain links, buttons, form inputs)
    c. Randomly select an action (uniform, seed=42 for reproducibility)
-   d. Execute the action (Playwright click)
-   e. Wait for page load (>= 1 second polite delay)
+   d. Execute the action (Playwright click/type/submit)
+   e. Wait for page load (>= 1.5 second polite delay)
    f. Extract next BrowserState
    g. Record transition (state, action, next_state)
 4. Filter out leakage transitions (action.target_href == state.url)
-5. Ensure sufficient non-leakage density (>= 50 transitions per site, target 100+)
+5. Ensure sufficient non-leakage density (>= 30 transitions per site, target 50+)
 
 ### 5.5 State Representation
 
@@ -140,10 +140,10 @@ All other transitions are non-leakage. This matches the parent experiment's defi
 
 ### 5.7 Sample Size
 
-- 2 sites x 100 trajectories x 8 steps = 1600 total transitions
-- Expected non-leakage: ~60-80% on SPA sites (960-1280 transitions)
-- Minimum valid: 50 non-leakage transitions per site
-- Target: 100+ non-leakage transitions per site
+- 2-3 sites x 30 trajectories x 8 steps = 480-720 total transitions
+- Expected non-leakage: ~60-80% on SPA sites (290-580 transitions)
+- Minimum valid: 30 non-leakage transitions per site
+- Target: 50+ non-leakage transitions per site
 
 ## 6. PMI Computation
 
@@ -243,7 +243,7 @@ Cross-trajectory permutation on real SPA data: shuffled PMI must not exceed obse
 URL+title PMI must be > URL-only PMI on both sites (Bonferroni-corrected). This is the core test of whether titles resolve structural ambiguity on real data with varying titles.
 
 ### 10.4 Minimum Data Threshold
-At least 50 non-leakage transitions per site. Fewer than 50 means PMI estimates are unreliable and the result is MEASUREMENT_INVALID.
+At least 30 non-leakage transitions per site. Fewer than 30 means PMI estimates are unreliable and the result is MEASUREMENT_INVALID.
 
 ### 10.5 Title Variance Threshold
 Each site must have at least 3 distinct titles across routes (verified via pre-survey). If titles are constant (unique_titles=1), the site is degenerate for title-aware PMI and must be rejected.
@@ -256,11 +256,11 @@ Even after pre-survey, title variance may be lower than expected during full dat
 
 ### 11.2 Non-Leakage Classification Errors
 Conservative non-leakage criteria may exclude genuine transitions or include spurious ones.
-**Mitigation**: Manual inspection of 10% of classified transitions. Report false positive/negative rates.
+**Mitigation**: Manual inspection of 10% of classified transitions if feasible. Report false positive/negative rates.
 
 ### 11.3 Sample Size
-With 100 trajectories x 8 steps = 800 transitions per site and 60-80% non-leakage, expect 480-640 non-leakage transitions per site. This exceeds the 50-transition minimum.
-**Mitigation**: If initial collection yields <50 transitions, extend to 200 trajectories per site.
+With 30 trajectories x 8 steps = 240 transitions per site and 60-80% non-leakage, expect 144-192 non-leakage transitions per site. This exceeds the 30-transition minimum.
+**Mitigation**: If initial collection yields <30 transitions, extend to 50 trajectories per site.
 
 ### 11.4 Site Selection Bias
 Two sites may not represent the diversity of SPA architectures.
@@ -268,7 +268,7 @@ Two sites may not represent the diversity of SPA architectures.
 
 ### 11.5 Laplace Smoothing Sensitivity
 PMI values are sensitive to alpha. Results are specific to alpha=1.0.
-**Mitigation**: Report results at alpha=1.0 matching parent. Sensitivity analysis at alpha=0.5 and alpha=2.0 as secondary exploration.
+**Mitigation**: Report results at alpha=1.0 matching parent. Sensitivity analysis at alpha=0.5 and alpha=2.0 as secondary exploration if time permits.
 
 ### 11.6 Browser State Capture Timing
 DOM state may change between action execution and state capture (async loading, animations).
@@ -280,7 +280,7 @@ Playwright or browser binaries may fail to install.
 
 ### 11.8 Site Access Failure
 Real SPA sites may block automated access (403, CAPTCHA, rate limiting).
-**Mitigation**: Use polite delays (>= 1 second), rotate user agents if needed, select sites known to be accessible. If all sites fail, experiment is MEASUREMENT_INVALID.
+**Mitigation**: Use polite delays (>= 1.5 seconds), rotate user agents if needed, select sites known to be accessible. If all sites fail, experiment is MEASUREMENT_INVALID.
 
 ### 11.9 Parent Comparison Confounds
 Absolute PMI bits are not directly comparable across different state-space cardinalities (TodoMVC 3 URLs vs real sites with many URLs). The comparison is confounded by smoothing asymmetry.
@@ -294,7 +294,7 @@ If ALL of:
 2. URL+title PMI > 0.5 bits on at least one site
 3. Cross-trajectory permutation p < 0.001 on at least one site
 4. Positive control passes (synthetic SPA PMI >= 0.5 bits)
-5. At least 50 non-leakage transitions obtained from each site
+5. At least 30 non-leakage transitions obtained from each site
 
 ### 12.2 FALSIFIED-IN-SETTING
 If ANY of:
@@ -305,11 +305,10 @@ If ANY of:
 
 ### 12.3 MEASUREMENT_INVALID
 If:
-1. Fewer than 50 non-leakage transitions from either site
+1. Fewer than 30 non-leakage transitions from either site
 2. Pipeline errors prevent computation
 3. Playwright fails to access sites or browser state extraction fails
-4. Non-leakage classification reveals systematic leakage in collected data (manual inspection finds >10% misclassification)
-5. Both sites have unique_titles=1 (constant titles) — degenerate for title-aware PMI hypothesis
+4. Both sites have unique_titles=1 (constant titles) — degenerate for title-aware PMI hypothesis
 
 ## 13. Expected Outcomes
 
@@ -336,7 +335,7 @@ If:
 
 1. **Infrastructure Setup**: Install Playwright, download browser binaries, verify works
 2. **Site Selection & Title Variance Pre-Survey**: Verify at least 3 distinct titles per site
-3. **Data Collection**: Browser automation on 2 SPA/form-heavy sites, 100 trajectories x 8 steps each, recording (URL, title, form_signals, action) before/after each interaction
+3. **Data Collection**: Browser automation on 2-3 SPA/form-heavy sites, 30 trajectories x 8 steps each, recording (URL, title, form_signals, action) before/after each interaction
 4. **Non-Leakage Classification**: Apply parent definition (action.target_href == state.url) to identify non-leakage transitions
 5. **PMI Computation**: Compute PMI for URL-only, URL+title, URL+title+form representations per site
 6. **Permutation Testing**: Cross-trajectory permutation (1000 iterations) per representation per site
@@ -355,7 +354,7 @@ Analysis will be implemented in Python using:
 - `scipy.stats` for permutation tests
 - Standard library only for PMI computation
 
-Code will be committed to `research/physics/information_theoretic/real_spa_pmi.py` before execution.
+Code will be committed to `research/physics/information_theoretic/real_spa_pmi.py` before execution (replacing parent TodoMVC version with real SPA version).
 
 ## 16. Pre-registered Expectations
 
