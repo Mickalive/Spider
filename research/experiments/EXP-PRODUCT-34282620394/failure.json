@@ -1,9 +1,9 @@
 {
   "stage": "director",
-  "category": "DIRECTOR_FAILURE",
-  "message": "stage exited with code 66",
+  "category": "VALIDATION_FAILURE",
+  "message": "unknown claim update id: C2-FIX",
   "retryable": false,
-  "recorded_at": "2026-09-09T16:37:29.432767+00:00",
-  "github_run_id": "34377573476",
+  "recorded_at": "2026-09-09T19:30:39.167854+00:00",
+  "github_run_id": "34395288790",
   "github_run_attempt": "1"
 }
