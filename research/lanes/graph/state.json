@@ -1,14 +1,14 @@
 {
   "lane": "graph",
   "human_paused": false,
-  "active_experiment_id": "EXP-GRAPH-34291967676",
-  "last_experiment_id": "EXP-GRAPH-34244445713",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-GRAPH-34291967676",
   "last_verdict": "BLOCKED",
   "continue_immediately": false,
-  "next_question": "After committing the parameter-slot-count fix to production HEAD (candidates.sort key includes len(parameter_slots)): does the literal-vs-param equal-confidence competition resolve to param for all unseen ids 2-7 without monkey-patching, do all 6 baseline conditions pass, and does the corrected B_CONFIDENCE_LITERAL_HIGHER condition (literal 0.98 > param 0.95) remain literal-winning?",
+  "next_question": "After committing the parameter-slot-count fix to production HEAD (src/spider/kernel.py L112 sort key includes len(parameter_slots)), does the literal-vs-param equal-confidence competition resolve to param for all unseen ids 2-7 without monkey-patching, do all 6 baseline conditions pass, does the corrected B_CONFIDENCE_LITERAL_HIGHER condition (literal 0.98 > param 0.95) remain literal-winning, and does the fix interact correctly with registry upsert sorting (production-like ordering)?",
   "promotion_ready": false,
-  "consecutive_failures": 1,
-  "updated_at": "2026-09-08T23:47:51.878029+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "4d6e645fde38107c747640644754ef6f60ab88547510ccd8e29557d848907f08"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-09T01:49:23.702741+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "8c9ab18ce8dbb83cd6eea32b5affb134af5a5bc773614c1d5ac1d850a3d0e183"
 }
