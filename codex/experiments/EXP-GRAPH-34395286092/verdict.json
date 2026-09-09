@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34395286092",
+  "lane": "graph",
+  "decision": "BLOCKED_CLOSE_AND_PIVOT",
+  "claim_updates": [
+    {
+      "claim_id": "C-PARAM-INHERIT",
+      "status": "BLOCKED",
+      "reason": "Fourth consecutive BLOCKED: fix absent from committed HEAD (src/spider/kernel.py L112 = 'candidates.sort(key=lambda m: m.confidence, reverse=True)', sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61). 0/14 conditions executed per frozen decision rule 9.3. No scientific measurement occurred. Fix absent from all 12+ branches checked (raw_evidence.json fix_found_on_any_branch=false). Prerequisite (one-line fix commit) unmet across four experiments with identical kernel state. Audit PASS confirms BLOCKED status correctly justified (audit.json status=PASS, claim_ceiling=BLOCKED). C-PARAM-INHERIT cannot advance without this prerequisite; Director closes claim with explicit rationale and pivots graph lane to orthogonal high-upside question."
+    }
+  ],
+  "product_action": "NO_CHANGE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Given four consecutive BLOCKED results on C-PARAM-INHERIT, can the graph lane demonstrate semantic resolution (C-SEMANTIC-RESOLVE): does the kernel resolve a URL template with semantic aliasing (e.g., /users/{userId} vs /accounts/{id} pointing to the same REST resource) to the correct parametrized mechanism when both are registered with equal confidence, and does it correctly select the mechanism whose template matches the intent structure?",
+  "reason": "Director closes C-PARAM-INHERIT after four consecutive BLOCKED experiments on identical unfixed kernel (EXP-GRAPH-34244445713, EXP-GRAPH-34291967676, EXP-GRAPH-34320613096, EXP-GRAPH-34395286092). The prerequisite one-line fix has been absent from all 12+ branches across four experiments spanning multiple weeks. All remote kernel.py commits are product-lane activity; no graph-lane or research-lane commits touch kernel.py. The frozen test design is correct but the prerequisite is an external dependency the graph lane cannot resolve. Continuing to re-run the same BLOCKED spec yields zero information gain (metrics.hazard_elimination_rate=null, baseline_pass_rate=null across all four runs). The graph lane must move to a materially orthogonal question that does not depend on an uncommitted code change. C-SEMANTIC-RESOLVE is a high-upside orthogonal question within the graph lane charter (priority_claims includes C-SEMANTIC-RESOLVE) that tests a different mechanism (semantic aliasing resolution) and does not require the parameter-slot-count fix.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-34395286092/result.json — status=BLOCKED, outcome=NOT_APPLICABLE, metrics.fix_present_in_committed_head=false, metrics.kernel_sha256=46929b3a, metrics.conditions_executed=0, metrics.conditions_skipped=14, metrics.consecutive_blocked_count=4",
+    "research/experiments/EXP-GRAPH-34395286092/audit.json — status=PASS, producer_claim_supported=false, claim_ceiling=BLOCKED, recomputed_metrics confirm fix absent",
+    "research/experiments/EXP-GRAPH-34395286092/raw_evidence.json — fix_verification.fix_present=false, fix_found_on_any_branch=false, branches_checked=12+",
+    "src/spider/kernel.py sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61 — L112 unfixed",
+    "research/experiments/EXP-GRAPH-34395286092/provenance.json — consecutive_blocked_experiments lists four BLOCKED runs",
+    "research/experiments/EXP-GRAPH-34320613096/handoff.json sha256 95197b2fb0c5af9d49eeedbb9bc0c678a97abb3da7a027cf8d5803bba9981382 — parent recommends Director pivot after fourth BLOCKED",
+    "research/experiments/EXP-GRAPH-34395286092/spec.json — frozen decision_rule 9.3 BLOCKED when fix absent",
+    "research/lanes/registry.json — graph lane priority_claims includes C-SEMANTIC-RESOLVE"
+  ]
+}
