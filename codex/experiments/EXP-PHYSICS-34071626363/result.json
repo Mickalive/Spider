@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34071626363",
+  "lane": "physics",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "mean_pmi_non_leakage_wiki": 0.0,
+    "mean_pmi_non_leakage_python": 0.873648,
+    "permutation_p_wiki": 1.0,
+    "permutation_p_python": 0.667333,
+    "mean_pmi_all_wiki": 1.073053,
+    "mean_pmi_all_python": 1.501554,
+    "mean_pmi_hashed_wiki": 0.0,
+    "mean_pmi_hashed_python": 0.873648,
+    "mean_pmi_action_type_wiki": 0.0,
+    "mean_pmi_action_type_python": 0.001951,
+    "non_leakage_fraction_wiki": 0.076136,
+    "non_leakage_fraction_python": 0.023864,
+    "unique_states_non_leakage_wiki": 58,
+    "unique_states_non_leakage_python": 14,
+    "unique_actions_non_leakage_wiki": 6,
+    "unique_actions_non_leakage_python": 8,
+    "unique_sa_pairs_non_leakage_wiki": 58,
+    "unique_sa_pairs_non_leakage_python": 20,
+    "positive_control_pmi": 0.855415,
+    "positive_control_p_value": 0.000999,
+    "null_control_p_value": 1.0,
+    "effect_size_d_wiki": -0.711354,
+    "effect_size_d_python": 0.706577,
+    "null_mean_shuffled_wiki": 0.001021,
+    "null_std_shuffled_wiki": 0.001436,
+    "null_mean_shuffled_python": 0.843153,
+    "null_std_shuffled_python": 0.043159,
+    "bonferroni_threshold": 0.025,
+    "diff_pmi_nonleakage_vs_all_wiki": -1.073053,
+    "diff_pmi_nonleakage_vs_all_python": -0.627906
+  },
+  "controls": {
+    "positive_control_synthetic": {
+      "description": "Synthetic lambda=1.0 data with deterministic action->next-state mapping. PMI must be >= 1.0 bit.",
+      "expected": "PMI >= 1.0 bit",
+      "observed": "PMI = 0.855415 bits",
+      "pass_fail": "FAIL",
+      "evidence_ref": "research/physics/information_theoretic/nonleakage_pmi_raw.json -> positive_control.pmi"
+    },
+    "null_control_shuffled": {
+      "description": "Shuffled action labels on non-leakage transitions. PMI must not be significantly > 0 (permutation p > 0.05).",
+      "expected": "permutation p > 0.05",
+      "observed": "p = 1.0",
+      "pass_fail": "PASS",
+      "evidence_ref": "research/physics/information_theoretic/nonleakage_pmi_raw.json -> null_control.p_value"
+    },
+    "baseline_unblinded_pmi_wiki": {
+      "description": "Unblinded action PMI (target_href) on all transitions (parent baseline).",
+      "expected": "PMI > 0 (known from parent)",
+      "observed": "PMI = 1.073053 bits, N = 880",
+      "pass_fail": "PASS",
+      "evidence_ref": "research/physics/information_theoretic/nonleakage_pmi_raw.json -> pmi_all_transitions.live_wikipedia"
+    },
+    "baseline_unblinded_pmi_python": {
+      "description": "Unblinded action PMI (target_href) on all transitions (parent baseline).",
+      "expected": "PMI > 0 (known from parent)",
+      "observed": "PMI = 1.501554 bits, N = 880",
+      "pass_fail": "PASS",
+      "evidence_ref": "research/physics/information_theoretic/nonleakage_pmi_raw.json -> pmi_all_transitions.live_python_docs"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/physics/information_theoretic/nonleakage_pmi.py",
+      "sha256": "84096498e6c50b2771e199bdffeb2901b644e603a52ed850af339bb85d046904",
+      "role": "code"
+    },
+    {
+      "path": "research/physics/information_theoretic/nonleakage_pmi_raw.json",
+      "sha256": "f4c1a45499a73f58c3ed71ea83881cb37f2fac7bfffa00a2bf81c88f9b0026b6",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-33965269281/raw_live_wikipedia.json",
+      "sha256": "87e6d8fcecb436ab9b1067a27c7f5708c393bace5efbb0225bfe1f57aa87bc5e",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-33965269281/raw_live_python_docs.json",
+      "sha256": "a7634ca3734360a4d6a2ffdb89d859ae9ff466df710be3323da8ac5c5d2fa648",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-33965269281/raw_positive.json",
+      "sha256": "3eef0bbc382fef44eb63d55481e3d417b2a98478d6f4fa4e1eb06331a99fc73f",
+      "role": "fixture"
+    }
+  ],
+  "observations": [
+    "Wikipedia non-leakage subset has 67 transitions (7.6% of 880), with 58 unique states and 58 unique (state, action) pairs. Every SA pair is unique, meaning each state-action combination appears exactly once. Under this condition, PMI is exactly 0.0 bits because P(a,s'|s) = P(a|s) = P(s'|s) = 1/count(s) for each transition.",
+    "Python docs non-leakage subset has 21 transitions (2.4% of 880), with 14 unique states and 20 unique SA pairs. PMI = 0.874 bits, but permutation test p = 0.667 (not significant). The shuffled null has mean PMI = 0.843, very close to observed. Effect size d = 0.71 is moderate but not statistically distinguishable from null.",
+    "Hashed action representation (SHA-256 of target_href) yields identical PMI to unblinded actions on non-leakage transitions. This is expected: hashing preserves uniqueness, so when each SA pair is already unique, hashing does not change the PMI computation.",
+    "Action-type categorical representation (all actions = 'click') yields PMI = 0.0 on Wikipedia and PMI = 0.002 on Python docs. When all actions are identical, PMI measures only state-to-next-state predictability, which is ~0 for these sparse state spaces.",
+    "Positive control PMI = 0.855 bits (< 1.0 threshold). This was also observed in the parent experiment. The preregistered 1.0 bit threshold is based on incorrect assumptions about the synthetic data structure (8 states, 8 actions, some single-action states). The positive control is statistically significant (p = 0.001) but does not meet the arbitrary 1.0 bit threshold.",
+    "Null control passes: shuffled PMI = 0.001, p = 1.0. The PMI computation correctly does not detect structure when action labels carry no information.",
+    "PMI on non-leakage transitions is LOWER than PMI on all transitions at both sites (Wikipedia: 0.0 vs 1.073; Python: 0.874 vs 1.502). This confirms that the high PMI in the parent experiment was driven by the 92-98% of transitions where action.target_href == state_after.url (action-to-destination leakage).",
+    "Self-loop transitions (state_before.url == state_after.url) are classified as leakage when action.target_href == state_after.url. Non-leakage transitions exclude self-loops where the href matches the destination."
+  ],
+  "validity_notes": [
+    "The non-leakage subset is small (67 wiki, 21 python), limiting statistical power. Wikipedia sample is large enough for interpretation; Python docs sample is too small for strong conclusions.",
+    "Positive control PMI = 0.855 < 1.0 threshold fails the preregistered check. This failure was inherited from the parent experiment where the 1.0 bit threshold was based on incorrect assumptions about synthetic data structure. The positive control IS statistically significant (p = 0.001) and demonstrates the PMI computation detects known structure; the threshold is the issue, not the computation.",
+    "The action-type categorical representation is a weak test: when all actions are 'click', PMI reduces to state-to-next-state predictability, which is expected to be ~0 for sparse state spaces. This does not test whether actions carry information beyond the href.",
+    "URL normalization is minimal (trailing slash only). Relative URLs in the raw data are already resolved to absolute URLs by the parent experiment's data collection pipeline.",
+    "Laplace smoothing (alpha=1.0) affects PMI estimates in sparse regimes. With 58 unique SA pairs on Wikipedia (each appearing once), smoothing inflates P(a|s) and P(s'|s) but not P(a,s'|s), pushing PMI toward 0.",
+    "The experiment uses the same state representation (URL) as the parent. Richer representations (title, link_texts, etc.) might reveal structure not visible at URL level."
+  ],
+  "unresolved": [
+    "Whether PMI is positive on non-leakage transitions at SPA/form-heavy sites where the non-leakage fraction is higher and the sparse-state-space issue is less severe.",
+    "Whether trajectory-level entropy rates (H(S_1,...,S_T) vs H(S_1) + sum H(S_{t+1}|S_t)) would detect structure that transition-level PMI misses on these sparse subsets.",
+    "Whether the positive control threshold should be revised downward (e.g., >= 0.5 bits) given the synthetic data structure, or whether the synthetic data needs to be redesigned with more states/actions.",
+    "The causal mechanism behind non-leakage transitions: are they form submissions, JavaScript navigation, redirects, or other non-standard navigation patterns?",
+    "Whether the 6 unique actions on Wikipedia non-leakage subset represent a meaningful action vocabulary or are artifacts of the sparse sampling."
+  ]
+}

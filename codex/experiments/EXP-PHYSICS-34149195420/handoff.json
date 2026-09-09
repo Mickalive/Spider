@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34149195420",
+  "lane": "physics",
+  "target_lane": "physics",
+  "next_question": "Does title-aware PMI detect dynamical structure on real SPA/form-heavy browser transitions (React/Vue apps, form-heavy pages) where non-leakage transitions are frequent by construction and titles may be noisy or ambiguous, using browser-collected action->next-state data with sufficient transition density?",
+  "why_next": "The synthetic pipeline validation succeeds: title-aware PMI (1.970) > URL-only PMI (0.693) on deterministic SPA data with non-leakage by construction. But this is a controlled validation, not evidence for C-WEB-DYNAMICS on real web. The critical unknown is whether the same pattern holds when transitions are stochastic, titles are noisy, and the state space is not hand-designed. Real SPA browser data is the only way to bridge the synthetic-to-real gap. The parent experiment showed server-rendered sites have too few non-leakage transitions (7.6% wiki, 2.4% python); SPA/form-heavy sites should have denser non-leakage by construction.",
+  "carry_forward": {
+    "established": [
+      "PMI pipeline detects known deterministic action->next-state structure in SPA-like data when richer state representation (URL+title) resolves URL-level ambiguity and sampling avoids unique-SA forced-zero regime (title PMI 1.970 bits p=0.001, d=80.3, 1000 cross-trajectory permutations)",
+      "Title-aware PMI is significantly > URL-only PMI on synthetic SPA data: 1.970 vs 0.693 bits (+184%), confirming titles resolve within-URL structural ambiguity",
+      "Cross-trajectory permutation null is valid and powerful: 0/1000 shuffled means exceed observed PMI, destroying 93.8% of signal (null_mean 0.122 vs observed 1.970)",
+      "Sampling 500 transitions over 32 SA pairs (~15.6 each) avoids the unique-SA forced-zero regime that falsified the parent experiment on server-rendered sites",
+      "PMI with URL-only representation is significantly > 0 (0.693 bits) even when structural ambiguity exists — URL-level states are not exchangeable due to heterogeneous marginal distributions",
+      "Form signals add zero marginal information beyond titles when titles uniquely identify states (url_title_form PMI == url_title PMI == 1.970) — this is a design artifact, not evidence about form signals"
+    ],
+    "rejected": [
+      "Pre-registered H1 that URL-only PMI would be 'near zero (mean PMI < 0.1 bits)' due to structural ambiguity: URL-only PMI is 0.693 bits (p=0.001, d=72.7), significantly > 0. Structural ambiguity is partial, not complete",
+      "That title information reveals structure 'invisible at URL level': URL-only PMI is already significantly positive; titles provide additional (+184%), not exclusive, information",
+      "That form_signals provide marginal information beyond titles: untested in this design because form_signals are redundant with unique titles in the synthetic data"
+    ],
+    "unknown": [
+      "Whether title-aware PMI detects dynamical structure on real SPA/form-heavy browser transitions where titles may be noisy or ambiguous",
+      "Whether form_signals provide marginal information beyond titles on real web pages where titles may be less discriminative than in synthetic data",
+      "Whether URL-only PMI > 0 generalizes to real SPA sites where URL-level states may be more or less homogeneous than the synthetic 209/178/113 distribution",
+      "Sensitivity of PMI absolute bit values to Laplace alpha (0, 0.5, 2.0): how much of 0.693/1.970 bits and null_mean 0.02/0.12 is smoothing artifact from unsmoothed joint P(a,s'|s) vs smoothed marginals P(a|s), P(s'|s)",
+      "Whether trajectory-level entropy rates detect structure that transition-level PMI misses in sparse or stochastic regimes",
+      "Causal mechanism of non-leakage on real SPA sites (form submissions, JS navigation, client-side routing) and whether richer BrowserState should include link_texts/tag_counts beyond title",
+      "Statistical power with real noisy titles and stochastic transitions vs deterministic synthetic perfect-discriminator titles"
+    ],
+    "do_not_assume": [
+      "That titles will be perfect state discriminators on real web pages — synthetic design guaranteed 8 unique titles for 8 states; real pages may have duplicate or missing titles",
+      "That the +184% PMI improvement from URL-only to URL+title on synthetic data predicts the same magnitude on real data — real structural ambiguity may be more or less severe",
+      "That the PMI smoothing asymmetry (smoothed marginals, unsmoothed joint) produces unbiased absolute bit values — reported bits are specific to alpha=1.0 and inflate under null (null_mean 0.02-0.12)",
+      "That permutation p=0.000999 across all representations indicates equal evidence — it is the resolution floor of 1000 permutations; effect sizes (d=72.7 vs d=80.3) differ",
+      "That deterministic synthetic structure is representative of real SPA dynamics — the tautological design validates the pipeline, not the web",
+      "That this experiment closes C-WEB-DYNAMICS or justifies product promotion — it is a narrow synthetic pipeline validation requiring real-data follow-up"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-PHYSICS-34071626363/handoff.json (parent: FALSIFIED-IN-SETTING on server-rendered sites, proposed denser sampling + richer representation escape routes)",
+    "research/physics/information_theoretic/spa_pmi.py sha256 8d6db688de638c5e826fa6dd4c946d5d4de59348e03685996cc9bdfc70cf8eac (verified PMI computation code)",
+    "research/experiments/EXP-PHYSICS-34149195420/raw_results.json sha256 ef794187b6acb3b4d83c6fa3070bec85497c22933d3640f0c0827823a8eb97a9 (verified metrics)",
+    "research/experiments/EXP-PHYSICS-34149195420/audit.json (REVISE ceiling, 6 required_fixes, recomputed metrics match)"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-34149195420/verdict.json decision SURVIVES_CURRENT_TEST claim_updates C-WEB-DYNAMICS EXPERIMENTAL",
+    "research/experiments/EXP-PHYSICS-34149195420/result.json metrics url_only_pmi 0.693 url_title_pmi 1.970 positive_control 1.911",
+    "research/experiments/EXP-PHYSICS-34149195420/audit.json claim_ceiling narrow synthetic validation, validity_findings H1 violated FAIL, synthetic_tautology FAIL, form_signals_redundant FAIL, smoothing_bias FAIL",
+    "research/experiments/EXP-PHYSICS-34149195420/audit.json recomputed_metrics all match producer exactly",
+    "research/experiments/EXP-PHYSICS-34149195420/report.md URL-only 0.693 not zero, URL+title 1.970 (+184%), form_signals redundant, decision checks all PASS",
+    "research/experiments/EXP-PHYSICS-34071626363/handoff.json parent FALSIFIED-IN-SETTING established/rejected/unknown/do_not_assume"
+  ],
+  "recommended_action": "DESIGN a Physics experiment collecting browser transitions on 2-3 real JavaScript-heavy SPA/form-heavy sites (React/Vue apps, multi-step forms) to obtain non-leakage subsets with sufficient density and duplicate SA pairs. Apply title-aware PMI to real SPA non-leakage transitions and compare with URL-only PMI. Test whether form_signals provide marginal information beyond titles on real pages where titles may be ambiguous. Use cross-trajectory permutation (validated here) as the null model. Do NOT repeat the synthetic deterministic design — the pipeline validation is complete. Consider also trajectory-level entropy rates as a complementary measure for stochastic transitions."
+}

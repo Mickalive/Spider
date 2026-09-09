@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-33998605047",
+  "lane": "graph",
+  "decision": "PARTIAL_VALIDATION",
+  "claim_updates": [
+    {
+      "claim_id": "C-PARAM-INHERIT",
+      "status": "EXPERIMENTAL",
+      "reason": "Core hazard elimination validated on synthetic substrate: 5/5 false accepts eliminated (literal 0 slots vs param 1 slot at equal confidence 0.95 for ids 2..6). Multi-slot dominance confirmed for single tested pair (2 vs 1). Template-only params correctly lose to declared params. However: (1) fix not committed to production HEAD — kernel.py L112 still unfixed (audit V_CODE_NOT_PERSISTED); (2) B_CONFIDENCE_LITERAL_HIGHER baseline misimplemented — no 0.98 literal mechanism existed in registry, so literal-higher dominance not measured in this run (audit V_BASELINE_LITERAL_HIGHER_INVALID); (3) baseline_pass inflated from 6/7 semantic to 7/7 status-only (audit V_STATUS_ONLY_BASELINE_INFLATION); (4) claim ceiling bounded to synthetic substrate only — no real-web DOM/auth/session/drift tested. Fix validated for single-slot, one multi-slot pair, and template-only on synthetic substrate. Advancement to PRODUCT requires: fix commit to HEAD + post-commit re-validation + real-web endpoint testing."
+    }
+  ],
+  "product_action": "NONE — fix not committed to production HEAD (src/spider/kernel.py L112 sha256 46929b3a... unfixed). C-PARAM-INHERIT remains EXPERIMENTAL. No product promotion authorized.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "After committing the parameter-slot-count fix to production HEAD: does the literal-vs-param equal-confidence competition remain param-winning in committed HEAD (re-validating the original hazard post-commit), and does the fix generalize to real-web endpoints with DOM, auth, session state, and drift?",
+  "reason": "Producer reported SUPPORTS with 7/7 baseline pass and 0 false accepts. Audit downgraded to REVISE: B_CONFIDENCE_LITERAL_HIGHER baseline misimplemented (no 0.98 literal in REGISTRIES shared-literal-higher — contains param 0.98 vs literal 0.95, identical to B_CONFIDENCE_PARAM_HIGHER), report.md contradicts raw_evidence.json on compete-literal-higher mechanism/URL, baseline_pass inflated via status-only check (semantic 6/7 not 7/7). However, the core hazard measurement is valid: audit independently replayed 5/5 compete-equal-id conditions and confirmed param wins with fix, literal wins without fix (V_RECOMPUTED_CORE_HAZARD). Multi-slot dominance (V_MULTI_SLOT_ROBUST) and template-only handling (V_TEMPLATE_ONLY_CONFIRMED) are robust. Fix is not persisted to HEAD (audit V_CODE_NOT_PERSISTED). Frozen decision rule FIX-VALIDATED requires ALL baselines match expected outcomes — the misimplemented B_CONFIDENCE_LITERAL_HIGHER means this condition is not satisfied. PARTIAL_VALIDATION reflects: core intervention validated, one baseline not correctly measured, fix not committed. Next step: commit fix + re-validate core hazard in committed HEAD + advance to real-web testing.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-33998605047/result.json",
+    "research/experiments/EXP-GRAPH-33998605047/audit.json",
+    "research/experiments/EXP-GRAPH-33998605047/raw_evidence.json",
+    "research/experiments/EXP-GRAPH-33998605047/derived_measurements.json",
+    "research/experiments/EXP-GRAPH-33998605047/report.md",
+    "research/experiments/EXP-GRAPH-33998605047/spec.json",
+    "research/experiments/EXP-GRAPH-33998605047/provenance.json",
+    "research/experiments/EXP-GRAPH-33998605047/prereg.md",
+    "research/experiments/EXP-GRAPH-33998605047/run_experiment.py",
+    "src/spider/kernel.py:112",
+    "src/spider/kernel.py:104-113",
+    "research/claims/registry.json",
+    "research/experiments/EXP-GRAPH-33955869291/handoff.json"
+  ]
+}

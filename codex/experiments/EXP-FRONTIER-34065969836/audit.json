@@ -1,0 +1,235 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-34065969836",
+  "lane": "frontier",
+  "status": "REVISE",
+  "producer_claim_supported": true,
+  "required_fixes": [
+    "Restore prereg positive control definition: TV at lambda=1 must be tested against permutation null (permutation p < 0.05) per function, not tv_at_1 > tv_at_0. Producer redefinition in analyze.py:706-727 marks positive_control PASS via strict improvement; report.md notes mean perm p=0.141 at lambda=1 with 200 perms - under frozen spec this fails positive control, which independently yields FALSIFIED-IN-SETTING but via different control identity. Recompute with 1000 perms per cell and report per-function p-values; averaging p-values (result.json:controls.null_control.mean_perm_p) is invalid.",
+    "Bias correction for kNN TV finite-sample floor: absolute TV at lambda=0 is 0.5227 (k=20) not ~0, indicating ~0.52 estimator bias with N~125/action in 10D. Spec measurement_validity states kNN needs no correction - contradicted by observed floor. Compute and subtract permutation mean at each lambda (bias_corrected_TV = max(0, TV - perm_mean)) and retest monotonicity on bias-corrected values; report bias-corrected effect range.",
+    "Clipping artefact control: ~50% of transitions clipped to [0,1]^10 at lambda=1 (0.498 rotation, 0.486 scaling, 0.493 translation) vs 2.3-2.5% at lambda=0 (result.json:metrics.clipping_fractions). Clipping creates edge mass that inflates TV at high lambda differentially. Required per prereg validity_threat 11.4: test toroidal wrapping or reflective boundary as alternative and quantify TV sensitivity; at minimum bound how much of TV separation (0.094 aggregate, 0.022 scaling, 0.201 translation) is clip-driven.",
+    "Deliver missing frozen baselines: (a) frequency baseline P(S_{t+1}) - not computed (result.json leaves unresolved); marginal non-uniformity may explain ~0.52 floor; (b) Gaussian noise baseline (same 10D with single Gaussian) - spec baselines[3] promises direct comparison to isolate non-Gaussian effect, listed only as unresolved; must compute Gaussian TV at matched lambdas in same run.",
+    "Permutation null protocol: prereg/spec require 1000 perms; producer used 200 perms per cell for speed (analyze.py:584, validity_notes) and 100 perms for PCA bias correction. Increase to 1000 and store full per-cell null distribution in raw_tables.json instead of averaged mean p. Also fix per-scale decision discrepancy: spec requires >=2 of 3 scales (k=10,20,50); producer tests 4 scales including k=5 and reports 2/4 pass. Re-evaluate under frozen 3-scale rule (k=10 TRUE, k=20 TRUE, k=50 FALSE => 2/3 PASS, still passes but must be reported correctly).",
+    "Calibrate thresholds before any product claim: positive control trivial threshold and frequency baseline omission mean absolute TV values (0.52 floor, 0.62 ceiling) cannot be compared to parent 2D baseline (0.281 floor, 0.849 ceiling) without matched estimator correction. Do not promote TV regime detection to product on basis of aggregate rho=1.0."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_target_representation",
+      "severity": "high",
+      "finding": "State representation is 10D uniform [0,1]^10 with synthetic affine maps, not Web state (DOM embeddings, session history, auth/latency). Environment cannot express real Web dynamical structure; failure to generalize beyond 2D is bounded to this synthetic DGP.",
+      "evidence": "spec.json:measurement_validity[0-3]; prereg.md 5.1-5.3; report.md 5-6"
+    },
+    {
+      "id": "V2_clipping_boundary_inflation",
+      "severity": "high",
+      "finding": "Clipping to [0,1]^10 after noise/transform truncates tails: fractions rise monotonically with lambda from ~0.024 at lambda=0 to 0.486-0.498 at lambda=1 across functions (result.json:metrics.clipping_fractions). Edge mass concentrates action-conditional distributions at boundaries, inflating TV at high lambda. Effect uncorrected; may explain part of translation's large separation (0.201) vs scaling (0.022).",
+      "evidence": "result.json:metrics.clipping_fractions; analyze.py:216-217; report.md 2.5, 7.1; validity_notes[11]"
+    },
+    {
+      "id": "V3_knn_bias_floor",
+      "severity": "high",
+      "finding": "kNN TV estimator has large finite-sample bias: TV at pure-noise lambda=0 is 0.5227 (k=20) aggregate (0.5243 rotation, 0.5237 scaling, 0.5203 translation) vs expected ~0. Same floor persists at multiscale (0.533 at k=5, 0.529 at k=10, 0.516 at k=50). Producer claims kNN needs no bias correction (prereg 6.3) but observed floor ~0.52 exceeds entire dynamic range (0.094 aggregate). Bias-corrected TV (TV - perm_mean) not computed for kNN; only PCA secondary has it.",
+      "evidence": "result.json:metrics.tv_means_by_lambda, multiscale_knn; recomputed_metrics reproduced; prereg.md 6.3 vs report.md 2.1"
+    },
+    {
+      "id": "V4_positive_control_redefinition",
+      "severity": "medium",
+      "finding": "Producer redefines frozen positive control (TV at lambda=1 detectably above permutation null across all functions) as tv_at_1 > tv_at_0 (analyze.py:716). Under frozen definition, report.md notes mean perm p=0.141 at lambda=1 (200 perms) -> would FAIL positive control per spec. Producer marks PASS anyway, masking an independent falsification path.",
+      "evidence": "spec.json:positive_control; spec.json:decision_rule; analyze.py:706-727; result.json:controls.positive_control; report.md 3.3"
+    },
+    {
+      "id": "V5_null_control_averaging",
+      "severity": "medium",
+      "finding": "Null control uses mean of p-values across 30 cells (10 reps x 3 funcs) at lambda=0 (mean_perm_p=0.572667). Mean of p-values is not a valid combined test; hides heterogeneity. Should use Fisher combined p or report per-function perm distributions. 200 perms (not 1000) gives coarse p-resolution (0.005).",
+      "evidence": "result.json:controls.null_control; analyze.py:573-592; prereg.md 9.2"
+    },
+    {
+      "id": "V6_sampling_power",
+      "severity": "low",
+      "finding": "500 transitions per cell => ~125 per action (4 actions). With k=50, k is 40% of per-action N, violating k << N for kNN. Multiscale monotonicity fails at k=5 and k=50 (report.md 2.3), consistent with bias-variance tradeoff. Fraction finite distances 1.0 shows no degeneracy (result.json:metrics.knn_distance_diagnostics), but median kNN distance 0.58 in unit cube indicates sparse neighborhoods.",
+      "evidence": "result.json:metrics.knn_distance_diagnostics (fraction_finite 1.0, median 0.5817); multiscale_knn per-scale rho; prereg.md 11.1"
+    },
+    {
+      "id": "V7_multiscale_spec_deviation",
+      "severity": "low",
+      "finding": "Spec decision_rule requires >=2 of 3 scales (k=10,20,50); producer evaluates 4 scales including k=5 (prereg adds k=5). Under frozen 3-scale rule: k=10 TRUE, k=20 TRUE, k=50 FALSE => 2/3 PASS, same outcome but deviation in control identity must be documented.",
+      "evidence": "spec.json:decision_rule; prereg.md 6.1; result.json:controls.multiscale_monotonicity (n_monotonic 2, n_total 4)"
+    },
+    {
+      "id": "V8_pca_secondary_floor",
+      "severity": "low",
+      "finding": "PCA-projected binned TV at lambda=0 is 0.5799, higher than kNN TV (0.5227) and anomalously higher than at lambda=0.1 (0.4566), consistent with marginal non-uniformity after projection and finite-sample binning bias noted in parent audit (~0.27 floor in 2D). Bias-corrected PCA TV per replication exists in raw_tables.json (pca_bias_corrected) but aggregate bias-corrected rho not reported.",
+      "evidence": "result.json:metrics.pca_secondary (rho 0.762); raw_tables.json:pca_var_explained mean 0.247; report.md 2.4"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "2D_affine_DGP_comparison",
+      "status": "partial",
+      "finding": "Producer provides qualitative table in report.md 5 comparing parent 2D (rho 1.0, d 20.3, TV range 0.568) to this 10D (rho 1.0, d 1.57, range 0.094). Valid comparison but estimators differ (20x20 binned vs kNN) and bias floors differ (0.28 vs 0.52), so raw TV magnitudes not directly comparable without bias correction. No matched kNN-on-2D or binned-on-10D control to isolate dimensionality vs estimator effect.",
+      "evidence": "report.md 5; result.json:metrics.aggregate vs parent result.json:metrics.aggregate"
+    },
+    {
+      "baseline_id": "permutation_null",
+      "status": "partial",
+      "finding": "Permutation null computed at lambda 0 and 1 with 200 perms per cell (spec requires 1000). Null control at lambda=0 correctly shows p~0.57 (not significant); positive control at lambda=1 shows p~0.14 (not significant under correct definition). No per-lambda null distributions stored for bias correction; kNN bias floor ~0.52 not subtracted. PCA null (100 perms) exists per replication but not aggregated correctly.",
+      "evidence": "result.json:controls.null_control, positive_control; analyze.py:573-592; report.md 3.3"
+    },
+    {
+      "baseline_id": "frequency_baseline_P_St1",
+      "status": "missing",
+      "finding": "Spec baselines[2]: marginal next-state distribution provides expected TV under no action-dependence. Not computed. Producer lists frequency baseline concept but leaves as unresolved. Cannot rule out that marginal non-uniformity (suggested by PCA var explained 0.247 and lambda=0 floor 0.52) confounds conditional TV. Parent experiment had frequency_baselines.json; this experiment has none.",
+      "evidence": "spec.json:baselines[2]; result.json:unresolved[4]; no artifact path for frequency baseline"
+    },
+    {
+      "baseline_id": "gaussian_noise_baseline",
+      "status": "missing",
+      "finding": "Spec baselines[3]: same 10D with Gaussian (not mixture) heteroscedastic noise to isolate non-Gaussian effect. Not computed. Code contains sample_gaussian_noise function but never invoked in run_experiment. Result.json unresolved[4]: 'Whether Gaussian vs non-Gaussian noise comparison shows significant difference' - left unknown, so cannot attribute scaling failure to non-Gaussianity vs dimensionality.",
+      "evidence": "spec.json:baselines[3]; analyze.py:174-179 defined but unused; result.json:unresolved[4]; spec measurement_validity[2]"
+    }
+  ],
+  "recomputed_metrics": {
+    "aggregate_spearman_rho_k20": {
+      "value": 1.0,
+      "p_one_sided": 0.0,
+      "n": 8,
+      "recomputed": true,
+      "match_producer": true,
+      "source": "raw_tables.json knn_tv_max_k20 aggregated across 3 funcs x 10 reps"
+    },
+    "per_function_spearman": {
+      "42_rotation": {
+        "rho": 0.8333333333333335,
+        "p_one_sided": 0.005087770061728376,
+        "p_two_sided_recomputed": 0.01017554,
+        "monotonic": false,
+        "tv_means": [
+          0.5243,
+          0.51936,
+          0.51003,
+          0.52168,
+          0.53103,
+          0.54392,
+          0.5589,
+          0.58263
+        ],
+        "match_producer": true
+      },
+      "43_scaling": {
+        "rho": -0.07142857142857144,
+        "p_one_sided": 0.5667368646620456,
+        "p_two_sided_recomputed": 0.8665,
+        "monotonic": false,
+        "tv_means": [
+          0.52367,
+          0.52458,
+          0.53681,
+          0.51872,
+          0.51624,
+          0.51635,
+          0.52046,
+          0.54555
+        ],
+        "match_producer": true
+      },
+      "44_translation": {
+        "rho": 1.0,
+        "p_one_sided": 0.0,
+        "monotonic": true,
+        "tv_means": [
+          0.52027,
+          0.52773,
+          0.5371,
+          0.5514,
+          0.55994,
+          0.58487,
+          0.64512,
+          0.72107
+        ],
+        "match_producer": true
+      }
+    },
+    "multiscale_rho": {
+      "k5": {
+        "rho": 0.9761904761904763,
+        "p_one_sided": 1.657198013100049e-05,
+        "monotonic": false,
+        "match": true
+      },
+      "k10": {
+        "rho": 1.0,
+        "p_one_sided": 0.0,
+        "monotonic": true,
+        "match": true
+      },
+      "k20": {
+        "rho": 1.0,
+        "p_one_sided": 0.0,
+        "monotonic": true,
+        "match": true
+      },
+      "k50": {
+        "rho": 0.880952380952381,
+        "p_one_sided": 0.0019251602318662003,
+        "monotonic": false,
+        "match": true
+      }
+    },
+    "anova_interaction": {
+      "F": 19.1316,
+      "p": 1.1956109645951516e-30,
+      "df": 14,
+      "resid_df": 216,
+      "recomputed": true,
+      "producer_reported_p": 0.0,
+      "consistent": true,
+      "interpretation": "strong function x lambda interaction -> fails function invariance"
+    },
+    "effect_sizes_cohens_d": {
+      "42": 2.0877779495241024,
+      "43": 0.8455070715358455,
+      "44": 9.110639528627985,
+      "aggregate": 1.571362127846226,
+      "recomputed_match": true
+    },
+    "clipping_fractions_at_lambda1": {
+      "42": 0.4982,
+      "43": 0.4856,
+      "44": 0.493,
+      "match": true
+    },
+    "pca_secondary_rho": {
+      "rho": 0.7619047619047621,
+      "p_one_sided": 0.014002469576535902,
+      "match": true
+    },
+    "aggregate_tv_range": {
+      "lambda0": 0.5227465616083096,
+      "lambda1": 0.6164165582621758,
+      "range": 0.0936699966538662,
+      "parent_range": 0.568,
+      "compression_factor": "~6x"
+    }
+  },
+  "claim_ceiling": "MAXIMUM JUSTIFIED: TV distance with kNN estimator (k=20, N~125/action) in synthetic 10D [0,1]^10 with mixture-of-3-Gaussians heteroscedastic noise shows function-dependent response, not uniform generalization from 2D Gaussian. Aggregate Spearman rho=1.0 (p~0) is driven by translation (rho=1.0, d=9.1, monotonic TRUE) and partially by rotation (rho=0.83, d=2.09, monotonic FALSE with dip at lambda=0.2); scaling family shows no TV response (rho=-0.07, p=0.57, monotonic FALSE, d=0.85, separation 0.022). Two-way ANOVA function x lambda interaction p~1e-30 decisively rejects function invariance. Therefore claim that TV uniformly scales with action-dependence in 10D non-Gaussian spaces is FALSIFIED-IN-SETTING for the tested parameterization. Translation-type dynamics remain detectable in 10D, so blanket claim that TV fails in 10D is not justified either. Absolute TV magnitudes (floor 0.52) are uninterpretable without bias correction and are inflated by ~50% clipping at lambda=1. No evidence for real Web transitions; synthetic-to-real gap persists. C-WEB-DYNAMICS remains HYPOTHESIS.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-34065969836/spec.json:claim_ids C-WEB-DYNAMICS, decision_rule 6 conditions, positive_control, null_control, baselines 4, measurement_validity 10D kNN no-reduction",
+    "research/experiments/EXP-FRONTIER-34065969836/prereg.md: sections 4-12 hypotheses, falsifier, decision rules, 8 lambda levels, 3 function families, multiscale kNN, ANOVA, clipping reporting",
+    "research/experiments/EXP-FRONTIER-34065969836/freeze.json:hashes prereg b5311e10b856..., spec daf47a2e..., request 7e41f131...",
+    "research/experiments/EXP-FRONTIER-34065969836/result.json:metrics.aggregate rho 1.0 p 0.0, per_function 42 rho 0.833, 43 rho -0.07, 44 rho 1.0, controls all PASS except function_invariance FAIL p~0, clipping_fractions, multiscale 2/4, cohens_d 1.57, pca rho 0.762",
+    "research/experiments/EXP-FRONTIER-34065969836/report.md: tables 2.1-2.5, decision checklist 4.1, interaction failure analysis 4.2-4.3, comparison with parent 5, validity notes 7.1-7.5",
+    "research/experiments/EXP-FRONTIER-34065969836/provenance.json: python 3.12.14, total_transitions 120000, execution 312.5s, seed 42, script hashes",
+    "research/frontier/highdim_nongaussian_tv/analyze.py: generate_transitions, rotation_10d/scaling_10d/translation_10d, sample_mixture_noise, knn_tv_estimate, compute_knn_tv_all_pairs, permutation_test_knn_tv (200 perms), run_experiment decision logic 788-810",
+    "research/frontier/highdim_nongaussian_tv/raw_tables.json: 240 rows (3 funcs x 8 lambdas x 10 reps) with knn_tv_max_k20, pca_tv_max, pca_var_explained mean 0.247, clipping_fraction",
+    "research/experiments/EXP-FRONTIER-34061241004/handoff.json: parent SURVIVES_CURRENT_TEST, established TV monotonic in 2D Gaussian rho 1.0 d 20.3, rejected thresholds below floor, unknown high-dim/non-Gaussian/real Web, dependencies on bias correction and higher-dim tests"
+  ],
+  "unresolved": [
+    "Whether scaling failure replicates under alternative 10D scaling parameterizations (different scale_factor magnitude/coupling) or is artefact of chosen 1.0+0.2*s[action_dim] with weak action signal overwhelmed by 10D heteroscedastic mixture noise.",
+    "Whether rotation's non-monotonic dip (0.524->0.519->0.510 at lambda 0-0.2) reflects estimator noise or genuine non-monotonic response; per-function Bonferroni rho 0.833 still passes spec secondary (>=0.65, p=0.005 <0.017) but monotonic strict FALSE.",
+    "Whether bias-corrected kNN TV (subtracting per-lambda perm mean ~0.52) preserves aggregate monotonic rho=1.0 and how it changes effect compression (aggregate range 0.094 vs bias-corrected range ~0.094 after subtraction of constant floor vs lambda-dependent bias).",
+    "Whether translation's strong signal (separation 0.201, d 9.1) is inflated by clipping edge mass (49.3% clipped at lambda=1); need toroidal baseline to separate true dynamics from clip-induced separability.",
+    "Whether Gaussian vs non-Gaussian noise comparison (spec baseline 3) would show scaling recovers under Gaussian noise, isolating noise distribution as cause vs dimensionality - function sample_gaussian_noise exists but not executed.",
+    "Whether kNN TV remains calibrated at >10D (e.g., 50D DOM embeddings) with same N=500 (~125/action); curse of dimensionality may require N to scale exponentially for same kNN fidelity; not tested.",
+    "Whether TV distance on real Web transitions (recorded agent sessions with DOM state tracking) shows any action-dependence - the parent-recommended minimum substrate remains untested; all evidence synthetic."
+  ]
+}

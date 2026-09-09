@@ -35,6 +35,30 @@
         "reason": "This experiment tests only synthetic quadratic DGPs on a 10-state 4-action space. TV distance shows perfect monotonic scaling (rho=1.0, Cohen d=7.85) in this setting, but no real or realistic Web transitions were tested. The claim concerns real Web dynamics and remains untested. C-WEB-DYNAMICS stays HYPOTHESIS."
       },
       {
+        "experiment_id": "EXP-FRONTIER-34029326102",
+        "lane": "frontier",
+        "decision": "FALSIFIED-IN-SETTING",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "This experiment tests only synthetic uniform-mixture noise on 10-state 4-action quadratic DGPs. TV distance shows robust detection under synthetic noise (aggregate |rho|=1.0, Cohen d 1.39-2.40, permutation p=0.000 at noise_intensity=0.5). However, all noise models are synthetic uniform-replacement mixtures, not real or realistic Web transitions. The dominant unknown \u2014 whether real Web transitions exhibit Var_a(E_S[f])>0 or are permutation-like \u2014 remains untested. The synthetic-to-real gap is the critical bottleneck. C-WEB-DYNAMICS stays HYPOTHESIS. The frozen FALSIFIED-IN-SETTING outcome is an artifact of three mis-calibrated controls (sign-reversed Spearman, impossible null control on finite state space, ANOVA interaction mis-calibrated for heterogeneous functions) identified identically in the parent audit \u2014 not a falsification of TV sensitivity in this synthetic regime."
+      },
+      {
+        "experiment_id": "EXP-FRONTIER-34061241004",
+        "lane": "frontier",
+        "decision": "SURVIVES_CURRENT_TEST",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "TV distance scales monotonically with lambda (Spearman rho=1.0, p<0.001) in2D continuous affine DGP with heteroscedastic Gaussian noise, all 6 frozen decision conditions pass, audit recomputes core metrics exactly. Claim ceiling expanded to include continuous2D state with state-dependent affine dynamics. However, the validated environment is 2D uniform [0,1]^2 with 3 toy affine families (rotation/scaling/translation+sin) and clipped heteroscedastic Gaussian noise (sigma_base=0.05, beta=0.5). This omits DOM, high-dimensional state, auth/latency, history, non-Gaussian noise. C-WEB-DYNAMICS concerns real Web dynamics; the synthetic-to-real gap remains the dominant unknown. Status remains HYPOTHESIS."
+      },
+      {
+        "experiment_id": "EXP-FRONTIER-34065969836",
+        "lane": "frontier",
+        "decision": "FALSIFIED-IN-SETTING",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "TV distance with kNN estimator in synthetic 10D [0,1]^10 with mixture-of-3-Gaussians heteroscedastic noise does NOT produce uniform function-invariant response. Falsified by two independent frozen-spec conditions: (1) Function invariance decisively fails \u2014 ANOVA interaction p~1e-30 (audit.json:recomputed_metrics.anova_interaction F=19.13, df=14, resid_df=216). Scaling function (family B) shows rho=-0.07 (p=0.57), separation=0.022, d=0.85 \u2014 negligible TV response. Translation (family C) shows rho=1.0, separation=0.201, d=9.11 \u2014 strong signal. Rotation (family A) shows rho=0.83, d=2.09 \u2014 moderate with non-monotonic dip. Aggregate rho=1.0 is weighted average of heterogeneous per-function responses. (2) Positive control fails under frozen spec definition \u2014 producer redefined control as tv_at_1 > tv_at_0 (analyze.py:706-727) but frozen spec requires TV at lambda=1 detectably above permutation null (permutation p < 0.05); report.md notes mean perm p=0.141 at lambda=1 with 200 perms. The hypothesis that TV uniformly generalizes from 2D Gaussian to 10D non-Gaussian settings is falsified for the tested parameterization. However, translation-type dynamics remain detectable in 10D (rho=1.0, d=9.1), so blanket claim that TV fails in 10D is not justified. Claim ceiling bounded to: TV detects action-dependent structure in 10D non-Gaussian spaces only for function families with sufficient action-conditional separability (translation-like), not universally. C-WEB-DYNAMICS remains HYPOTHESIS."
+      },
+      {
         "experiment_id": "EXP-PHYSICS-33528829431",
         "lane": "physics",
         "decision": "REVISE",
@@ -57,6 +81,38 @@
         "claim_id": "C-WEB-DYNAMICS",
         "status": "HYPOTHESIS",
         "reason": "Not testable from this experiment due to measurement invalidity. Even setting validity failures aside, audit reveals fundamental concerns: SA underperforms AF on both live sites (wiki diff_SA_vs_AF=-0.121, python -0.159), meaning action alone predicts next state better than (state,action) pairs. Extreme memorization ratios (wiki 32.9, python 4.12) indicate near-unique state-action keys (607 keys for 616 wiki train transitions). Self-loop rates of 17% (wiki) and 49% (python) dominate metrics. Recomputed SA_heldout ranges (wiki 0.011-0.030, python 0.19-0.24) are below AF baselines (wiki 0.14-0.15, python 0.40-0.43). Nominal p=0.0 for SA vs shuffle is uninterpretable when SA < AF. The predictive accuracy paradigm may not be the right detection method for sparse-state live Web data. Claim remains untested but the research program should consider orthogonal detection methods."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-34038570933",
+        "lane": "physics",
+        "decision": "FALSIFIED-IN-SETTING",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "Frozen decision_rule triggers FALSIFIED-IN-SETTING on two independent clauses: (1) positive_control PMI 0.855 < 1.0 bit threshold (prereg clause 12.2 item 4); (2) Wikipedia non-self PMI 0.899 < all PMI 1.073 (prereg clause 12.2 item 3, hypothesis H2). Audit additionally finds the PMI signal is confounded by action.target_href == state_after.url in 92-98% of transitions, meaning PMI measures destination predictability from action encoding rather than state-conditioned dynamics. The four primary PMI>0 tests nominally pass (p_bonf=0.004) but the maximum justified ceiling is FALSIFIED-IN-SETTING per the frozen rules. Claim remains HYPOTHESIS: no evidence accumulated for or against Web-dynamical structure beyond memory from this experiment."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-34071626363",
+        "lane": "physics",
+        "decision": "FALSIFIED-IN-SETTING",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "Frozen decision_rule triggers FALSIFIED-IN-SETTING on multiple clauses: (1) Wikipedia non-leakage PMI = 0.0, permutation p = 1.0 \u2014 not > 0 after Bonferroni correction (prereg clause 12.2 item 1); (2) Python docs non-leakage PMI = 0.874, permutation p = 0.667 \u2014 not > 0 after correction (prereg clause 12.2 item 1); (3) Positive control PMI = 0.855 < 1.0 bit threshold (prereg clause 12.2 item 2). Audit confirms all triggers are genuine: wiki PMI = 0.0 is mathematically forced by unique SA pairs (58 unique SA for 67 transitions) under Laplace alpha=1.0; permutation test is degenerate due to singleton trajectory groups (30/47 wiki, 14/17 python); positive control threshold was misspecified for actual synthetic data structure. PMI drops dramatically when leakage removed (wiki 1.073 -> 0.0, python 1.502 -> 0.874), confirming parent signal was driven by action.target_href == state_after.url leakage. Claim remains HYPOTHESIS: falsification is bounded to URL-level PMI with target_href action representation, Laplace alpha=1.0, within-trajectory permutation on these server-rendered sites (Wikipedia 7.6% non-leakage N=67, Python docs 2.4% N=21). No evidence about SPA/form-heavy sites, richer BrowserState representations, or trajectory-level entropy rates."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-34149195420",
+        "lane": "physics",
+        "decision": "SURVIVES_CURRENT_TEST",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "EXPERIMENTAL",
+        "reason": "Narrow pipeline validation: title-aware PMI (1.970 bits) > URL-only PMI (0.693 bits) on synthetic SPA data with non-leakage by construction (p=0.001, d=80.3, 1000 cross-trajectory permutations). PMI pipeline detects known deterministic structure in SPA-like format. However: (1) URL-only PMI is significantly >0 (0.693 bits), contradicting pre-registered H1 that it would be 'near zero' \u2014 titles provide additional (+184%), not exclusive, information; (2) form_signals add zero marginal information (url_title_form PMI = url_title PMI = 1.970) because titles uniquely identify states in the synthetic design \u2014 H3 is untested; (3) synthetic deterministic 8-state world is a controlled pipeline validation, not evidence for C-WEB-DYNAMICS on real web where transitions are stochastic and titles may be noisy. The ceiling is: PMI pipeline + richer state representation survives on synthetic SPA data. Real SPA/form-heavy browser data required before any stronger claim."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-34266105229",
+        "lane": "physics",
+        "decision": "FALSIFIED-IN-SETTING",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "EXPERIMENTAL",
+        "reason": "The experiment is an uninformative (degenerate) test of title-aware PMI on real SPA sites: both TodoMVC sites have constant document.title (unique_titles=1), making URL+title isomorphic to URL-only (0% improvement forced by zero title variance). The preregistered hypothesis about titles noisy/ambiguous on form-heavy SPAs was never tested because the selected sites are not form-heavy (single input.new-todo, no multi-step flows) and have no title variation. URL-only PMI is strongly positive (1.32-1.36 bits, permutation p=0.001, d>83), confirming action->next-state dynamical structure at URL level \u2014 consistent with but not caused by this experiment. The claim ceiling is bounded to: URL-level PMI detects dynamical structure on TodoMVC hash-SPA transitions. Title-aware PMI benefit remains untested on real sites with varying titles. Do not update claim status beyond EXPERIMENTAL based on this experiment."
       }
     ],
     "C-PARAM-INHERIT": [
@@ -91,6 +147,54 @@
         "claim_id": "C-PARAM-INHERIT",
         "status": "EXPERIMENTAL",
         "reason": "Audit ceiling narrows producer GENERALIZATION-SAFE to SCOPE-LIMITED: multi-slot dominance confirmed for single tested pair (param-2slot [id,category] vs param-fetch-posts [id] at equal confidence 0.95, n=1, synthetic substrate, deterministic). Template-only params confirmed losing to declared params (len(parameter_slots) scope limit). verify() dict equality confirmed. However: (1) equal-slot ties are stable insertion-order, NOT lexicographic as producer interpreted (audit V_TIE_LEXICOGRAPHIC_MISCHARACTERIZED); (2) literal-vs-param equal-confidence 0.95 not retested in this experiment \u2014 inherited from parent (audit V_BASELINE_GAP_CORE_COMPETITION_NOT_RETESTED); (3) fix not committed to production HEAD (audit V_CODE_NOT_PERSISTED); (4) synthetic substrate only, no real-web DOM/auth/session/drift (audit V_SUBSTRATE_SCOPE); (5) verify() tests dict equality not HTTP integration (audit V_VERIFY_DICT_MATCH_ONLY). C-PARAM-INHERIT cannot advance to PRODUCT without fix commit + re-validation and real-web testing."
+      },
+      {
+        "experiment_id": "EXP-GRAPH-33998605047",
+        "lane": "graph",
+        "decision": "PARTIAL_VALIDATION",
+        "claim_id": "C-PARAM-INHERIT",
+        "status": "EXPERIMENTAL",
+        "reason": "Core hazard elimination validated on synthetic substrate: 5/5 false accepts eliminated (literal 0 slots vs param 1 slot at equal confidence 0.95 for ids 2..6). Multi-slot dominance confirmed for single tested pair (2 vs 1). Template-only params correctly lose to declared params. However: (1) fix not committed to production HEAD \u2014 kernel.py L112 still unfixed (audit V_CODE_NOT_PERSISTED); (2) B_CONFIDENCE_LITERAL_HIGHER baseline misimplemented \u2014 no 0.98 literal mechanism existed in registry, so literal-higher dominance not measured in this run (audit V_BASELINE_LITERAL_HIGHER_INVALID); (3) baseline_pass inflated from 6/7 semantic to 7/7 status-only (audit V_STATUS_ONLY_BASELINE_INFLATION); (4) claim ceiling bounded to synthetic substrate only \u2014 no real-web DOM/auth/session/drift tested. Fix validated for single-slot, one multi-slot pair, and template-only on synthetic substrate. Advancement to PRODUCT requires: fix commit to HEAD + post-commit re-validation + real-web endpoint testing."
+      },
+      {
+        "experiment_id": "EXP-GRAPH-34170139507",
+        "lane": "graph",
+        "decision": "MEASUREMENT_INVALID",
+        "claim_id": "C-PARAM-INHERIT",
+        "status": "EXPERIMENTAL",
+        "reason": "Frozen decision rule HTTP-PARAM-INHERIT-SURVIVES unsatisfiable: multi-slot positive control (POS_MULTI_SLOT) failed with HTTP 404 on /posts/1/tech \u2014 endpoint assumption error, not network outage. However, core hazard (compete-equal) is validated under HTTP execution with patch-only fix: param beats literal at equal confidence 0.95 for unseen id=7, bound URL /posts/7, HTTP 200 JSON id=7. All 6 baselines preserve. Fix NOT committed to production HEAD (monkey-patched). Multi-slot control not discriminating (order-dependent without fix). Claim ceiling is narrow: patch-only single-id (id=7) HTTP generalization for 0-vs-1 slot competition on simple REST endpoint. C-PARAM-INHERIT remains EXPERIMENTAL \u2014 not promoted, not falsified."
+      },
+      {
+        "experiment_id": "EXP-GRAPH-34176416673",
+        "lane": "graph",
+        "decision": "BLOCKED",
+        "claim_id": "C-PARAM-INHERIT",
+        "status": "EXPERIMENTAL",
+        "reason": "Primary hypothesis (fix survives commitment to production HEAD) untestable: fix not committed to src/spider/kernel.py L112 (sha256 46929b3a, line still 'candidates.sort(key=lambda m: m.confidence, reverse=True)'). BLOCKED status correctly applied per frozen decision_rule. No new positive evidence for post-commit hazard elimination. Baseline preservation on unfixed HEAD and null control for ids 2-6 are diagnostic only, not claim-advancing. Claim ceiling remains parent monkey-patched single-id=7 ceiling."
+      },
+      {
+        "experiment_id": "EXP-GRAPH-34222171093",
+        "lane": "graph",
+        "decision": "BLOCKED",
+        "claim_id": "C-PARAM-INHERIT",
+        "status": "EXPERIMENTAL",
+        "reason": "Fix prerequisite not committed to production HEAD. Experiment BLOCKED \u2014 no new scientific evidence obtained for fix effectiveness. Existing monkey-patched hazard elimination (parent EXP-GRAPH-34176416673) remains the highest validated evidence. C-PARAM-INHERIT status unchanged."
+      },
+      {
+        "experiment_id": "EXP-GRAPH-34244445713",
+        "lane": "graph",
+        "decision": "BLOCKED",
+        "claim_id": "C-PARAM-INHERIT",
+        "status": "EXPERIMENTAL",
+        "reason": "BLOCKED per frozen decision rule: fix not present in committed HEAD src/spider/kernel.py L112 (sha256 46929b3a, line 'candidates.sort(key=lambda m: m.confidence, reverse=True)'). Post-commit hazard elimination cannot be tested. Established only: (1) 6/6 baselines pass deterministically on unfixed HEAD; (2) null control B-CONFIDENCE-LITERAL-HIGHER preserved; (3) core hazard persists systematically (0/6 param wins, 6/6 literal wins at equal confidence 0.95 literal-before-param). NOT established: fix effectiveness, tie-break on len(parameter_slots), generalization beyond jsonplaceholder /posts/{id}."
+      },
+      {
+        "experiment_id": "EXP-GRAPH-34291967676",
+        "lane": "graph",
+        "decision": "BLOCKED",
+        "claim_id": "C-PARAM-INHERIT",
+        "status": "EXPERIMENTAL",
+        "reason": "Fix prerequisite not met \u2014 src/spider/kernel.py L112 sort key still 'candidates.sort(key=lambda m: m.confidence, reverse=True)', fix absent from committed HEAD (kernel sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61). 0/14 conditions executed per frozen BLOCKED decision rule. No SURVIVES_POST_COMMIT or FALSIFIED_POST_COMMIT possible. Claim ceiling unchanged from parent: no post-commit evidence exists. Fix must be committed with Director approval before re-run."
       },
       {
         "experiment_id": "EXP-PRODUCT-33528829801",
@@ -131,6 +235,22 @@
         "claim_id": "C-PARAM-INHERIT",
         "status": "EXPERIMENTAL",
         "reason": "Audit ceiling narrows to: field-path relevance (top-level allowlist {method,url,body,headers,query}) plus two-part structure-check (Jaccard>=0.75 + constant-value anchor) resolves synthetic D1 over-parametrization and synthetic E1 hallucination in an offline isolated implementation while preserving B1/B4 regression. Cannot advance toward product promotion due to: (a) kernel integration gap \u2014 implementation is self-contained in run_experiment.py, does not modify src/spider/kernel.py (audit KERNEL_INTEGRATION_GAP); (b) prereg training-data deviations on B5 (PREREG_DEVIATION_B5: varying A,B,C instead of static A,A,A) and D3 (PREREG_DEVIATION_D3: varying 1,2,3 instead of static 1,1,1) break condition (7) comparability with parent; (c) D2 post-hoc redefinition of expected slot_count from 2 to 1 (EXPECTED_POSTHOC_D2); (d) C2 double-prefix persists under true full values \u2014 _detect_double_prefix exists but is not wired into distill/bind path (DOUBLE_PREFIX_NOT_TESTED); (e) nested metadata scope leak \u2014 allowlist only checks top-level key (METADATA_SCOPE_LEAK). Claim stays EXPERIMENTAL; see handoff for next steps."
+      },
+      {
+        "experiment_id": "EXP-PRODUCT-34015741916",
+        "lane": "product",
+        "decision": "KERNEL-INTEGRATION-PARTIAL",
+        "claim_id": "C-PARAM-INHERIT",
+        "status": "EXPERIMENTAL",
+        "reason": "Kernel integration partial: 9/10 synthetic conditions survive (B1-B5 regression 21/21 binding_correct, C1 prefix+suffix 3/3, D1/D2/D3 noise filtering 7/7, E1/E2 null controls slot_count=0, literal baseline fail_rate=1.0). C2 full-value binding with prefix-containing params fails spec-required test: _detect_double_prefix is dead code (guard always False because url_template contains ${url}), recomputed kernel.resolve('get-user', {}, params={'url':'user-4'}) => 'user-user-4' (binding_correct false). Producer claimed KERNEL-INTEGRATION-SURVIVES with outcome=SUPPORTS but used stripped parts (url=4) not full values (user-4) per spec measurement_validity. C-PARAM-INHERIT advances from kernel-integration-gap to kernel-integrated-synthetic but C2 blocker prevents product readiness. Claim ceiling: synthetic top-level metadata, single-whole-URL, body/headers leaf parameterization only."
+      },
+      {
+        "experiment_id": "EXP-PRODUCT-34195008089",
+        "lane": "product",
+        "decision": "C2-FIX-FALSIFIED",
+        "claim_id": "C-PARAM-INHERIT",
+        "status": "EXPERIMENTAL",
+        "reason": "C2 double-prefix bug persists: _bind() prefix-strip fix is structurally inert because distill_parameterized() induces full template prefix (https://api.example.com/users/user-${url}), not short prefix (user-${url}). The fix's val.startswith(template_prefix) condition is always False for induced templates with long prefixes. C2 binding_accuracy=0.0 0/3, bound URLs contain user-user-4 instead of user-4. All 9 other conditions pass (31/31 binding correct). Kernel integration remains PARTIAL (9/10 synthetic). Fix approach rejected; different strategy needed (template construction change or slot-level prefix detection)."
       }
     ],
     "C-CROSSSITE": [
@@ -165,6 +285,14 @@
         "claim_id": "C-CROSSSITE",
         "status": "HYPOTHESIS",
         "reason": "Heuristic yield estimates (0.517-0.65 median) suggest WebArena 812-task corpus may support cross-site diversity, but method disagreement (Spearman rho -0.943 to 0.371) and Kruskal-Wallis p=0.999 mean estimates are non-discriminating priors, not measurements. C-CROSSSITE remains bounded to 2-site corpus until live Docker validation confirms actual fragment yield."
+      },
+      {
+        "experiment_id": "EXP-INTEL-34047713704",
+        "lane": "intel",
+        "decision": "BLOCKED",
+        "claim_id": "C-CROSSSITE",
+        "status": "HYPOTHESIS",
+        "reason": "BLOCKED \u2014 no live measurement performed. WebArena Docker images on ghcr.io/web-arena-x/ require authentication (denied on all 3 images plus tags v1/v2/stable). Heuristic yield estimates (shopping 0.65, gitlab 0.60, wikipedia 0.517) remain unvalidated priors from EXP-INTEL-33945226776. No evidence to promote, reject, or advance. Audit ceiling: BLOCKED infrastructure diagnostic only."
       }
     ],
     "C-LLM-INHERIT": [
@@ -199,6 +327,14 @@
         "claim_id": "C-LLM-INHERIT",
         "status": "HYPOTHESIS",
         "reason": "Heuristic analysis suggests WebArena pages may have sufficient element diversity (21-22 unique types for shopping/gitlab/shopping_admin) for LLM transfer, but all estimates are heuristic priors not measured from live DOM. Method 1 (element-count, the only method modeling viewport and pruning) gives shopping yield 0.365, contradicting the aggregated 0.65. C-LLM-INHERIT remains bounded to 2-site corpus pending live validation."
+      },
+      {
+        "experiment_id": "EXP-INTEL-34047713704",
+        "lane": "intel",
+        "decision": "BLOCKED",
+        "claim_id": "C-LLM-INHERIT",
+        "status": "HYPOTHESIS",
+        "reason": "BLOCKED \u2014 no live measurement performed. Central question (whether heuristic yield estimates match actual fragment extraction) remains UNANSWERED. 812-task corpus suitability for C-LLM-INHERIT testing cannot be assessed without authenticated Docker deployment and geometry-faithful viewport filtering. Audit ceiling: BLOCKED infrastructure diagnostic only."
       }
     ],
     "C-PRODUCT-ECON": [
@@ -217,6 +353,14 @@
         "claim_id": "C-PRODUCT-ECON",
         "status": "HYPOTHESIS",
         "reason": "Estimated transformation cost (324 LOC, 0 API calls) is plausible but not measured on live integration. Null control failed (wikipedia yield 0.517 > 0.40 threshold) and positive control was weakened (diversity 21 < prereg >30). No product decision can be made on heuristic priors with method disagreement."
+      },
+      {
+        "experiment_id": "EXP-INTEL-34047713704",
+        "lane": "intel",
+        "decision": "BLOCKED",
+        "claim_id": "C-PRODUCT-ECON",
+        "status": "HYPOTHESIS",
+        "reason": "BLOCKED \u2014 no live measurement performed. REQUIRES_TRANSFORM overhead cannot be assessed from heuristics alone. Product consequence of either positive or negative result not realized. Audit ceiling: BLOCKED infrastructure diagnostic only."
       }
     ],
     "C-MEAS-VALID": [
@@ -275,6 +419,22 @@
         "claim_id": "C-MEAS-VALID",
         "status": "EXPERIMENTAL",
         "reason": "Survives on real Flask 3.1.3 + PyJWT 2.13.0 HS256 middleware with discrimination 0.833 > 0.5, null FP 0.0% < 5%, valid vs expired discriminable Jaccard 0.3505 < 0.5. Claim ceiling narrowly bounded: Flask/JWT localhost, 4 auth states, no synthetic headers, standard headers only (Content-Type, Content-Length, Connection), jitter 50-150ms, N=40 seed 44, Python 3.12.14. Does NOT establish viability on production OAuth/OIDC, CDN/caching, volatile headers, jitter >150ms, compressed encoding, or cross-Python-version reproducibility. Full vector = B-BODY-ONLY (body-only observation sufficient in this scenario)."
+      },
+      {
+        "experiment_id": "EXP-RUNTIME-34015740602",
+        "lane": "runtime",
+        "decision": "CONSTRAINED \u2014 C-MEAS-VALID survives narrowly. All three mandatory decision criteria pass (full-vector discrimination 1.0 > 0.5, null FP 0.0% < 5%, valid vs expired Jaccard 0.328 < 0.5). However, the producer's claim ceiling is overgeneralized: claim extends only to Flask 3.1.3 + PyJWT 2.13.0 HS256 on localhost 127.0.0.1:18928 with 4 states returning distinct bodies, headers filtered (Date/Server/X-Request-Id excluded), Cache-Control no-store/no-cache, ETag W/body_sha, Set-Cookie session only for valid_token, jitter 50-150ms uniform, N=40 seed 44, Python 3.12.14. The exploratory H4 test (full vector > B-BODY-ONLY) is INCONCLUSIVE due to ceiling effect: with all 4 bodies distinct, discrimination is at 1.0 and headers cannot improve beyond perfect. Full vector = B-BODY-ONLY (1.0 = 1.0) reflects body dominance under distinct-body design, not proof headers are non-discriminative. The bootstrap CI [1.0, 1.0] is degenerate at ceiling (uninformative, not high-precision). ETag and Content-Length are body-correlated by construction. Only Cache-Control and Set-Cookie are state-varying independent headers; each achieves 0.5 discrimination alone but is redundant when bodies already separate.",
+        "claim_id": "C-MEAS-VALID",
+        "status": "EXPERIMENTAL",
+        "reason": "C-MEAS-VALID survives on Flask 3.1.3 + PyJWT 2.13.0 HS256 localhost with production-like headers (Cache-Control, ETag, Set-Cookie, X-Request-Id excluded). Full-vector discrimination 1.0 > 0.5, null FP 0.0% < 5%, valid vs expired Jaccard 0.328 < 0.5. Claim ceiling bounded to exact tested configuration: 4 states with distinct bodies, jitter 50-150ms, N=40, Python 3.12.14. Does NOT extend to production OAuth/OIDC (Auth0/Okta/Keycloak), CDN, rate-limit, compression, jitter >150ms, or scenarios with identical error bodies. The H4 multi-field value test is inconclusive due to ceiling effect."
+      },
+      {
+        "experiment_id": "EXP-RUNTIME-34054515149",
+        "lane": "runtime",
+        "decision": "SURVIVES_CURRENT_TEST \u2014 C-MEAS-VALID survives narrowly. All four frozen decision criteria pass: full_vector_discrimination 1.0 > B-BODY-ONLY 0.833 (incremental header value 0.167), full_vector_discrimination 1.0 > 0.5, null FP 0.0% < 5%, Cache-Control-only discrimination 0.833 > 0. The parent H4 ceiling confound (V3-DISTINCT-BODY-CEILING-CONFOUND) is resolved: when expired_token and invalid_token share identical bodies, Cache-Control no-store vs no-cache provides the discriminating signal that body-only cannot capture, lifting full vector from 0.833 to 1.0. Audit V4 (ENGINEERED-HEADER-TAUTOLOGY-CONSTRAINT, medium severity) constrains the claim ceiling: incremental header value is by construction (application-set Cache-Control/Set-Cookie per auth state in Flask middleware), not discovery of natural production header variance. Claim extends only to Flask 3.1.3 + PyJWT 2.13.0 HS256 on localhost 127.0.0.1:18929, 4 states (no_auth 401 login_required body ae00c5, valid_token 200 alice_profile body 65d603 with Set-Cookie session, expired_token 401 auth_failed body a138b3 Cache-Control no-store, invalid_token 401 auth_failed body a138b3 identical to expired Cache-Control no-cache), headers after Date/Server/X-Request-Id exclusion, deterministic SHA-256(repr((status, tuple(sorted(filtered_headers.items())), body_sha256, ''))) on Python 3.12.14, N=40 (4x10 seed 44) server jitter 50-150ms uniform client 0-200ms. Does NOT extend to production OAuth/OIDC (Auth0/Okta/Keycloak), CDN/caching, load-balancer, rate-limit, compression, jitter >150ms, or natural (non-application-set) header variance. Product architecture recommendation to use full vector is supported only within this synthetic Flask localhost pattern where headers are application-set per state.",
+        "claim_id": "C-MEAS-VALID",
+        "status": "EXPERIMENTAL",
+        "reason": "C-MEAS-VALID survives narrowly on Flask 3.1.3 + PyJWT 2.13.0 HS256 localhost 127.0.0.1:18929, 4 states with identical error bodies for expired/invalid, production-like header variation (Cache-Control no-store/no-cache, Set-Cookie present only for valid_token). Full-vector discrimination 1.0 > B-BODY-ONLY 0.833 (incremental header value 0.167), null FP 0.0% < 5%, Cache-Control-only discrimination 0.833 > 0. Resolves parent H4 ceiling confound. Audit V4 constrains: headers are application-set per state by construction, not natural production variance. Claim does NOT extend to production OAuth/OIDC, CDN, jitter >150ms, or natural header variance."
       }
     ]
   }

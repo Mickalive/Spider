@@ -1,0 +1,156 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-34047713704",
+  "lane": "intel",
+  "status": "BLOCKED",
+  "outcome": "NOT_APPLICABLE",
+  "metrics": {
+    "shopping_raw_elements": null,
+    "shopping_viewport_elements": null,
+    "shopping_pruned_elements": null,
+    "shopping_truncated_8192_elements": null,
+    "shopping_truncated_1920_elements": null,
+    "shopping_actual_yield": null,
+    "shopping_heuristic_yield": 0.65,
+    "shopping_yield_delta": null,
+    "gitlab_raw_elements": null,
+    "gitlab_viewport_elements": null,
+    "gitlab_pruned_elements": null,
+    "gitlab_truncated_8192_elements": null,
+    "gitlab_truncated_1920_elements": null,
+    "gitlab_actual_yield": null,
+    "gitlab_heuristic_yield": 0.60,
+    "gitlab_yield_delta": null,
+    "wikipedia_raw_elements": null,
+    "wikipedia_viewport_elements": null,
+    "wikipedia_pruned_elements": null,
+    "wikipedia_truncated_8192_elements": null,
+    "wikipedia_truncated_1920_elements": null,
+    "wikipedia_actual_yield": null,
+    "wikipedia_heuristic_yield": 0.517,
+    "wikipedia_yield_delta": null,
+    "docker_images_pullable": false,
+    "docker_images_attempted": [
+      "ghcr.io/web-arena-x/webarena-shopping:latest",
+      "ghcr.io/web-arena-x/webarena-gitlab:latest",
+      "ghcr.io/web-arena-x/webarena-wikipedia-like:latest"
+    ],
+    "docker_pull_error": "denied",
+    "playwright_available": true,
+    "chromium_installed": true
+  },
+  "controls": {
+    "positive_control_shopping": {
+      "expected": "shopping has highest actual yield >40% after full pipeline",
+      "observed": "BLOCKED — cannot measure without Docker image access",
+      "pass": null,
+      "evidence": null
+    },
+    "null_control_wikipedia": {
+      "expected": "wikipedia has lowest actual yield <60% after full pipeline",
+      "observed": "BLOCKED — cannot measure without Docker image access",
+      "pass": null,
+      "evidence": null
+    },
+    "docker_access": {
+      "expected": "ghcr.io/web-arena-x images are pullable",
+      "observed": "denied — all 3 image pulls return 'denied' from ghcr.io",
+      "pass": false,
+      "evidence": "docker pull commands failed with 'denied' for shopping, gitlab, wikipedia images"
+    },
+    "playwright_chromium": {
+      "expected": "Playwright with Chromium is installed and functional",
+      "observed": "Playwright 1.62.0 installed, Chromium 151.0.7922.34 downloaded successfully",
+      "pass": true,
+      "evidence": "playwright install chromium completed successfully"
+    },
+    "heuristic_baseline": {
+      "expected": "heuristic yields: shopping 0.65, gitlab 0.60, wikipedia 0.517",
+      "observed": "inherited from EXP-INTEL-33945226776, not re-measured",
+      "pass": null,
+      "evidence": "analysis_output.json from parent experiment"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-34047713704/spec.json",
+      "sha256": "4880305583c61511a7f2f47a2dfaf042414e40c946f150e2298fafcec87f77c8",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-34047713704/prereg.md",
+      "sha256": "d9c711e9c2067a99ff19221930d0a0a50bedca1838ffaf60427c1dee556b7012",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-34047713704/freeze.json",
+      "sha256": null,
+      "role": "fixture"
+    },
+    {
+      "path": "research/intel/webarena_adapter.py",
+      "sha256": "46cb46542d9927f2a1b1bd3c29fef169aafa7009c5ba3f2b797531dbb6038fee",
+      "role": "code"
+    },
+    {
+      "path": "/tmp/opencode/measure_yield.py",
+      "sha256": null,
+      "role": "code"
+    }
+  ],
+  "observations": [
+    {
+      "observation_id": "OBS-DOCKER-ACCESS-DENIED",
+      "type": "infrastructure_failure",
+      "description": "All 3 WebArena Docker images on ghcr.io/web-arena-x/ return 'denied' when pulled. The images require authentication (likely a GITHUB_TOKEN or PAT with ghcr.io read access). No GITHUB_TOKEN or GHCR_TOKEN was available in the environment.",
+      "timestamp": "2026-09-09T01:45:00+00:00",
+      "severity": "blocking",
+      "details": {
+        "images_attempted": [
+          "ghcr.io/web-arena-x/webarena-shopping:latest",
+          "ghcr.io/web-arena-x/webarena-gitlab:latest",
+          "ghcr.io/web-arena-x/webarena-wikipedia-like:latest"
+        ],
+        "error_message": "Head \"https://ghcr.io/v2/web-arena-x/webarena-shopping/manifests/latest\": denied",
+        "alternative_tags_attempted": ["v1", "v2", "stable"],
+        "all_denied": true
+      }
+    },
+    {
+      "observation_id": "OBS-PLAYWRIGHT-OK",
+      "type": "infrastructure_verification",
+      "description": "Playwright 1.62.0 installed successfully. Chromium 151.0.7922.34 downloaded to /home/runner/.cache/ms-playwright/chromium-1234. Playwright is ready for browser automation when Docker containers become accessible.",
+      "timestamp": "2026-09-09T01:42:00+00:00",
+      "severity": "info"
+    },
+    {
+      "observation_id": "OBS-MEASUREMENT-SCRIPT-WRITTEN",
+      "type": "infrastructure_verification",
+      "description": "Full measurement script written at /tmp/opencode/measure_yield.py implementing the complete REQUIRES_TRANSFORM pipeline: viewport filtering, IGNORED_ACTREE_PROPERTIES pruning, truncation at 8192 and 1920 chars. Script is ready to execute once Docker access is resolved.",
+      "timestamp": "2026-09-09T01:43:00+00:00",
+      "severity": "info"
+    },
+    {
+      "observation_id": "OBS-HEURISTIC-UNRESOLVED",
+      "type": "scientific_note",
+      "description": "The central question from EXP-INTEL-33945226776 — whether heuristic yield estimates (0.517-0.65) match actual fragment extraction — remains UNRESOLVED. No live measurement was possible.",
+      "timestamp": "2026-09-09T01:45:00+00:00",
+      "severity": "blocking"
+    }
+  ],
+  "validity_notes": [
+    "This experiment is BLOCKED due to infrastructure failure: WebArena Docker images on ghcr.io require authentication that was not available in this environment.",
+    "BLOCKED is NOT a scientific falsification. The heuristic yield estimates (0.517-0.65) from EXP-INTEL-33945226776 remain UNVALIDATED — they are neither confirmed nor refuted.",
+    "The measurement script (/tmp/opencode/measure_yield.py) implements the full pipeline as specified in the preregistration and is ready to execute when Docker access is resolved.",
+    "Playwright and Chromium are installed and functional. The only blocker is ghcr.io image pull authentication.",
+    "The experiment cannot be re-run without resolving the Docker image access issue. This is the smallest unblocking action.",
+    "Sample size is N=1 per site type (pilot calibration), so even if Docker were accessible, statistical power would be limited."
+  ],
+  "unresolved": [
+    "How to authenticate to ghcr.io/web-arena-x/ to pull WebArena Docker images (requires GITHUB_TOKEN or PAT with read:packages scope)",
+    "Whether the heuristic yield estimates (0.517-0.65) match actual fragment extraction on live WebArena Docker pages — the central question remains UNANSWERED",
+    "Whether Method 1 (element-count, shopping 0.365) or aggregated median (0.65) is more predictive of live yield",
+    "Whether the 812-task corpus is suitable for C-CROSSSITE/C-LLM-INHERIT testing",
+    "Whether WebArena Docker self-hosting delivers the inspected observation interface end-to-end without silent fallback"
+  ]
+}

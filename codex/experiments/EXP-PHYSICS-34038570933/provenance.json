@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34038570933",
+  "lane": "physics",
+  "github_run_id": "34054514541",
+  "base_sha": "46773f13643836b9755f13a0dd8a090d75460a20",
+  "execution_environment": {
+    "python_version": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "machine": "x86_64",
+    "numpy_version": "2.5.3",
+    "PYTHONHASHSEED": "0",
+    "working_directory": "/home/runner/work/Spider/Spider"
+  },
+  "frozen_inputs": {
+    "request.json": {
+      "path": "research/experiments/EXP-PHYSICS-34038570933/request.json",
+      "sha256": "ef69b2ab824ab126390fbdac9ba24183c8873d792d6b668b36758642e41920c5"
+    },
+    "spec.json": {
+      "path": "research/experiments/EXP-PHYSICS-34038570933/spec.json",
+      "sha256": "d6615a3e3e02c47b4d9372502a833be51d4a7d69431957f09ce299a23bc1e2e7"
+    },
+    "prereg.md": {
+      "path": "research/experiments/EXP-PHYSICS-34038570933/prereg.md",
+      "sha256": "3219a324a7775a82da58b4fe40891ac8681b66b8b7ac5b75d3eadabc91c9365e"
+    },
+    "freeze.json": {
+      "path": "research/experiments/EXP-PHYSICS-34038570933/freeze.json",
+      "sha256": "computed_at_freeze_time"
+    }
+  },
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-33965269281",
+    "path": "research/experiments/EXP-PHYSICS-33965269281/handoff.json",
+    "sha256": "7f0b538ceb9a666cda9654b153bd9c83001b13f195e0cb48ee80bcd161c2079e"
+  },
+  "data_sources": {
+    "raw_live_wikipedia.json": {
+      "path": "research/experiments/EXP-PHYSICS-33965269281/raw_live_wikipedia.json",
+      "sha256": "87e6d8fcecb436ab9b1067a27c7f5708c393bace5efbb0225bfe1f57aa87bc5e",
+      "n_transitions": 880,
+      "n_trajectories": 110,
+      "verified": true
+    },
+    "raw_live_python_docs.json": {
+      "path": "research/experiments/EXP-PHYSICS-33965269281/raw_live_python_docs.json",
+      "sha256": "a7634ca3734360a4d6a2ffdb89d859ae9ff466df710be3323da8ac5c5d2fa648",
+      "n_transitions": 880,
+      "n_trajectories": 110,
+      "verified": true
+    },
+    "raw_positive.json": {
+      "path": "research/experiments/EXP-PHYSICS-33965269281/raw_positive.json",
+      "sha256": "3eef0bbc382fef44eb63d55481e3d417b2a98478d6f4fa4e1eb06331a99fc73f",
+      "n_transitions": 600,
+      "n_trajectories": 60,
+      "verified": true
+    },
+    "raw_null.json": {
+      "path": "research/experiments/EXP-PHYSICS-33965269281/raw_null.json",
+      "sha256": "3ae136b4cc36b5f736252af8b819613d1864625fc9647cfbdd649b13c72c713e",
+      "n_transitions": 300,
+      "n_trajectories": 30,
+      "verified": true
+    }
+  },
+  "code": {
+    "pmi_analysis.py": {
+      "path": "research/physics/information_theoretic/pmi_analysis.py",
+      "sha256": "5818abdc2d07e820423caac1438878acf87c60c3df1a6cef49e7538239894bb5",
+      "description": "PMI analysis script implementing frozen design. Computes PMI between actions and next-states conditioned on current state. Includes permutation tests, self-loop decomposition, and decision rule evaluation."
+    }
+  },
+  "artifacts": {
+    "raw_results.json": {
+      "path": "research/physics/information_theoretic/raw_results.json",
+      "sha256": "ecabd1e80bb3da46735652fdbc8939c92c4f26a60700b266914fe50b696bef3b",
+      "description": "Raw computation results including PMI values, permutation test distributions, and decision checks."
+    },
+    "result.json": {
+      "path": "research/experiments/EXP-PHYSICS-34038570933/result.json",
+      "description": "Producer handoff with all mandatory packet fields."
+    },
+    "report.md": {
+      "path": "research/experiments/EXP-PHYSICS-34038570933/report.md",
+      "description": "Human-readable interpretation of results."
+    }
+  },
+  "execution_commands": [
+    "export PYTHONHASHSEED=0 && python3 research/physics/information_theoretic/pmi_analysis.py"
+  ],
+  "execution_timeline": {
+    "data_loading": "SHA-256 verified for all 4 parent data files",
+    "triple_extraction": "880 triples per live site, 600 positive, 300 null",
+    "self_loop_classification": "Wiki: 155/880 (17.6%), Python: 436/880 (49.5%)",
+    "pmi_computation": "All datasets, all and non-self conditions",
+    "permutation_tests": "1000 permutations per test, 6 tests total",
+    "decision_evaluation": "All 8 decision checks evaluated"
+  },
+  "reproducibility": {
+    "deterministic": true,
+    "seed": 42,
+    "pythonhashseed": "0",
+    "numpy_random_state": "not used (only deterministic operations)",
+    "note": "Results are fully reproducible with the same frozen inputs and code."
+  }
+}

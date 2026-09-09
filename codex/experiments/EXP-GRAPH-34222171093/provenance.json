@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34222171093",
+  "lane": "graph",
+  "github_run_id": "34222171093",
+  "base_sha": "71716075544acca9af7b1e9179581cd29af9619a",
+  "created_at": "2026-09-08T11:43:22.770720+00:00",
+  "frozen_at": "2026-09-08T11:46:20.357094+00:00",
+  "executed_at": "2026-09-08T12:00:00.000000+00:00",
+  "parent_experiment": {
+    "experiment_id": "EXP-GRAPH-34176416673",
+    "path": "research/experiments/EXP-GRAPH-34176416673/handoff.json",
+    "sha256": "92b95d054dfedc48d99ad6c56ca23f6ad80172107fa378355da8db5cce90620c"
+  },
+  "datasets": {
+    "endpoint": "jsonplaceholder.typicode.com",
+    "path": "/posts/{id}",
+    "method": "GET",
+    "description": "Simple REST API for testing HTTP resolution"
+  },
+  "code_paths": {
+    "kernel": {
+      "path": "src/spider/kernel.py",
+      "sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+      "line_112": "candidates.sort(key=lambda m: m.confidence, reverse=True)",
+      "fix_present": false
+    },
+    "models": {
+      "path": "src/spider/models.py",
+      "sha256": "338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78"
+    },
+    "registry": {
+      "path": "src/spider/registry.py",
+      "sha256": "51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c"
+    },
+    "test_harness": {
+      "path": "research/experiments/EXP-GRAPH-34222171093/run_experiment.py",
+      "sha256": "9bd493aafb21c4b7436ff745fd86002bc63f83aedf8e5867896b37a03abaf724"
+    }
+  },
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.x",
+    "network_access": true,
+    "timeout_seconds": 5,
+    "deterministic": true,
+    "rng_seed": null
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-GRAPH-34222171093/result.json",
+      "sha256": "50b01f09ac4d620a3e9c6806e21defbd20829a85b17f2a9f390fe4f4efae8d69",
+      "role": "result"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-34222171093/report.md",
+      "sha256": "33ca665a54f6578376c30b4275e0ea31a8327bb2ed04e9ed7e0ab1e7f604f0ed",
+      "role": "report"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-34222171093/provenance.json",
+      "sha256": "8d73df89acb0b2c46a7eac6f6a62933f974bf593582cd06eb57c1ed2583bc351",
+      "role": "provenance"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-34222171093/run_experiment.py",
+      "sha256": "9bd493aafb21c4b7436ff745fd86002bc63f83aedf8e5867896b37a03abaf724",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-34222171093/raw_evidence.json",
+      "sha256": "bda35973c7573c597da0504920666d5f888b68b4c7ba0654e30ab031e085aafa",
+      "role": "raw_evidence"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-34222171093/derived_measurements.json",
+      "sha256": "08118bd4614dfe063e2b9d4c1cdf3f660371fa852c9dff4c22aab53a7b8cc8bc",
+      "role": "derived_measurements"
+    }
+  ],
+  "reproduction": {
+    "command": "python3 research/experiments/EXP-GRAPH-34222171093/run_experiment.py",
+    "working_directory": "/home/runner/work/Spider/Spider",
+    "dependencies": [
+      "src/spider/kernel.py",
+      "src/spider/models.py",
+      "src/spider/registry.py"
+    ],
+    "environment_variables": {},
+    "preconditions": [
+      "Fix NOT committed to src/spider/kernel.py L112",
+      "Network access to jsonplaceholder.typicode.com"
+    ]
+  },
+  "execution_notes": [
+    "Experiment BLOCKED due to missing prerequisite fix",
+    "Baselines and null control executed to verify no regression",
+    "Core hazard test executed to confirm hazard persists without fix",
+    "All conditions deterministic: no model calls, no RNG, no sampling",
+    "HTTP execution against live endpoint jsonplaceholder.typicode.com"
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-34195008089",
+  "lane": "product",
+  "target_lane": "product",
+  "next_question": "Can C2 full-value binding be fixed by modifying distill_parameterized() to detect when the varying segment in a prefix-only template (e.g., user-${url} from training data user-1/2/3) represents a prefix-bearing ID and induce a shorter template (e.g., ${url} instead of user-${url}), OR by modifying _bind() to strip slot-specific prefix patterns based on the distribution of training values rather than the full template prefix, such that binding user-${url} with params={'url':'user-4'} produces user-4 not user-user-4, and all 10 conditions pass?",
+  "why_next": "C2 is the sole blocker preventing KERNEL-INTEGRATION-SURVIVES (9/10 -> 10/10). The _bind() prefix-strip fix (EXP-PRODUCT-34195008089) was falsified because distill_parameterized() induces full template prefix (https://api.example.com/users/user-${url}) not short prefix (user-${url}). Two alternative fix strategies remain: (a) modify distill_parameterized() to detect prefix-only varying segments and induce shorter templates, or (b) modify _bind() to strip based on slot-level prefix/suffix distribution rather than full template prefix. Both require new prereg and re-test with the same 10-condition harness. The literal baseline confirms parameterization is necessary (fail_rate=1.0). End-to-end product economics remain blocked until kernel integration completes.",
+  "carry_forward": {
+    "established": [
+      "B1-B5 regression baseline preserved across two experiments: slot counts correct (B1=1, B2=2, B3=3, B4=1, B5=1), binding_accuracy=1.0 (31/31 excluding C2). Evidence: EXP-PRODUCT-34195008089 raw_evidence.json B1-B5 metrics, audit.json baseline_findings B_REGRESSION_SYNTHETIC PASS",
+      "C1 prefix+Suffix full-value URL binding works correctly with no over-strip: slot_count=1, binding_accuracy=1.0 (3/3). Template 'https://site-${callback_url}.com/hook' binds param 'd' to 'https://site-d.com/hook'. Evidence: raw_evidence.json C1-full-value-ids, audit.json C1_FULL_VALUE_URLS PASS",
+      "D1/D2/D3 noise filtering works for top-level metadata: field-path relevance excludes timestamp, request_duration_ms etc. D1 slot_count=3 (3/3), D2 slot_count=1 [url] (3/3), D3 slot_count=1 [url] (1/1). Evidence: raw_evidence.json D1-D3, audit.json baseline_findings",
+      "E1/E2 null controls hold: E1 slot_count=0 (Jaccard 0.667 < 0.75, constant-anchor fails), E2 slot_count=0. Evidence: raw_evidence.json controls E1_pattern_absence E2_single_obs",
+      "Literal mechanism replay fails on all unseen combinations: fail_rate=1.0 (5/5 EXPLORE). Parameterized induction is necessary. Evidence: raw_evidence.json baselines B_LITERAL, audit.json B_LITERAL_REPLAY PASS",
+      "_PARAMETER regex hyphen fix is genuine and necessary for multi-slot binding (e.g., X-Request-ID with hyphen). Evidence: B3 passing with hyphen slot in raw_evidence.json",
+      "distill_parameterized() induces templates with FULL common prefix from training data (e.g., 'https://api.example.com/users/user-${url}' from user-1/2/3), not short prefix ('user-${url}'). This is the root cause of C2 fix failure. Evidence: raw_evidence.json C2-full-value-ids distill_diagnostics path_values.prefix, result.json c2_template_prefix, audit.json c2_template_prefix_short_assumed"
+    ],
+    "rejected": [
+      "_bind() prefix-strip approach for C2 (detect val.startswith(template_prefix) and strip): FALSIFIED. Fix is structurally inert because induced template prefix is full path (https://api.example.com/users/user-) not short prefix (user-). val.startswith always False. Evidence: result.json c2_fix_works false c2_fix_reason, audit.json C2_PREFIX_STRIP_INERT_AND_FALSIFIED",
+      "C2 full-value binding with prefix-containing params works: still FALSIFIED across two experiments. binding_accuracy=0.0, bound URLs contain user-user-4. Evidence: result.json c2_binding_accuracy_full_value 0.0, raw_evidence.json C2 resolution_results binding_correct false 0/3",
+      "Test harness c2_unseen() can use stripped values (user-4) instead of full values (user-4): REJECTED. Spec requires full values; parent harness was wrong per spec. Corrected in this experiment. Evidence: prereg.md section 5, audit.json C2_MEASUREMENT_NOW_PROBATIVE",
+      "_detect_double_prefix function is functional code: REJECTED (dead code, guard 'if not _PARAMETER.search(url_template)' always False after template contains ${url}). Evidence: prereg.md section 4.3, src/spider/kernel.py lines 236-257"
+    ],
+    "unknown": [
+      "Whether modifying distill_parameterized() to detect prefix-only varying segments and induce shorter templates (e.g., ${url} instead of user-${url}) would fix C2 without breaking other conditions",
+      "Whether modifying _bind() to strip based on slot-level prefix/suffix distribution of training values (rather than full template prefix) would work",
+      "What the correct C2 binding semantics should be for product use: caller passes '4' (stripped) or 'user-4' (full value)",
+      "Whether nested metadata filtering (e.g., body.timestamp) needs recursive allowlist/denylist — current _is_metadata_path only checks top-level key",
+      "Whether constant-value anchor vs Jaccard>=0.75 necessity can be isolated — E1 rejects via both, no decomposed control",
+      "Real browser observation noise distributions vs synthetic deterministic patterns — no external validity claimed"
+    ],
+    "do_not_assume": [
+      "C-PARAM-INHERIT is product-ready — C2 double-prefix bug is still broken (9/10 synthetic only)",
+      "The C2 bug can be fixed at bind time only — two experiments suggest template construction change may be needed",
+      "Real browser observations would produce the same induced templates as synthetic data",
+      "The _bind() prefix-strip fix code (lines 41-52 in kernel.py 7957b72e) does anything — it is structurally inert dead code for induced templates with long prefixes",
+      "KERNEL-INTEGRATION-SURVIVES has been achieved — it remains PARTIAL (9/10) from parent EXP-PRODUCT-34015741916",
+      "All 10-condition synthetic results transfer to product economics — end-to-end economics remain unmeasured",
+      "The next fix attempt can reuse the same _bind() prefix-strip code — it must be replaced with a fundamentally different approach"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-PRODUCT-34015741916/handoff.json (parent, KERNEL-INTEGRATION-PARTIAL, 9/10 synthetic)",
+    "src/spider/kernel.py at sha256 7957b72e5d31f306af65ba317578493788f711b82c1e243035b8669c4f43d664 (includes inert prefix-strip fix that must be replaced or extended)",
+    "research/experiments/EXP-PRODUCT-34195008089/run_experiment.py (10-condition test harness, C2 corrected to full values)",
+    "Claims registry: C-PARAM-INHERIT status EXPERIMENTAL"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-34195008089/result.json metrics c2_fix_works false c2_binding_accuracy_full_value 0.0 c2_bound_url_with_user_4 c2_template_prefix c2_fix_reason regression_pass_all_9 true overall_binding_accuracy 0.8857",
+    "research/experiments/EXP-PRODUCT-34195008089/result.json controls C2_FULL_VALUE_IDS FAIL all other controls PASS",
+    "research/experiments/EXP-PRODUCT-34195008089/audit.json claim_ceiling C2-FIX-FALSIFIED KERNEL-INTEGRATION-PARTIAL 9/10 unchanged",
+    "research/experiments/EXP-PRODUCT-34195008089/audit.json required_fixes C2_PREFIX_STRIP_INERT_AND_FALSIFIED full prefix vs short prefix mismatch",
+    "research/experiments/EXP-PRODUCT-34195008089/audit.json baseline_findings all 10 conditions recomputed",
+    "research/experiments/EXP-PRODUCT-34195008089/raw_evidence.json C2-full-value-ids template prefix bound_action binding_correct false 0/3",
+    "research/experiments/EXP-PRODUCT-34195008089/raw_evidence.json B1-B5 C1 D1-D3 all passing",
+    "research/experiments/EXP-PRODUCT-34195008089/report.md root cause analysis full prefix vs short prefix",
+    "research/experiments/EXP-PRODUCT-34195008089/prereg.md sections 4-8 proposed fix and decision rules",
+    "research/experiments/EXP-PRODUCT-34195008089/provenance.json execution_mode offline_synthetic",
+    "src/spider/kernel.py lines 41-52 _bind prefix-strip implementation inert"
+  ],
+  "recommended_action": "Product lane: design a new prereg for C2 fix attempt using one of two strategies: (a) modify distill_parameterized() to detect prefix-only varying segments (e.g., from training data user-1/2/3 where the varying part always starts with 'user-') and induce shorter template ${url} instead of user-${url}, or (b) modify _bind() to compute slot-specific prefix from the distribution of training values at the path level (not from the full template string) and strip accordingly. Both strategies must re-test all 10 conditions (B1-B5, C1-C2, D1-D3, E1-E2) with C2 using full values (user-4/5/6). The existing test harness (run_experiment.py) can be reused. Do not repeat the failed template-prefix approach. Alternatively, consider accepting a contract change where callers pass stripped values ('4' not 'user-4') — this would make C2 pass trivially but changes the product API."
+}
