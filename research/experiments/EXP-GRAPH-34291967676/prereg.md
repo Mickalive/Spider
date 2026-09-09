@@ -5,7 +5,7 @@
 - **Experiment ID**: EXP-GRAPH-34291967676
 - **Lane**: Graph
 - **Claim**: C-PARAM-INHERIT (Mechanisms parameterize to unseen identifiers)
-- **Date**: 2026-09-08
+- **Date**: 2026-09-09
 - **Status**: DESIGN — NOT YET FROZEN
 - **Parent Experiment**: EXP-GRAPH-34244445713 (BLOCKED)
 - **Request Reason**: pulse (inherited next_question from parent handoff)
@@ -25,31 +25,32 @@ The parent experiment tested the core false-accept hazard and baseline behavior 
 - Param generalizes: param-only-unseen resolves to /posts/7, HTTP 200, id=7
 - Literal does not generalize: literal-only-unseen resolves to /posts/1, HTTP 200, id=1
 - All 6 baselines pass on unfixed HEAD (cold, literal-only orig/unseen, param-only orig/unseen, compete-param-higher)
-- Confidence ordering preserved: B-LITERAL-HIGHER-CONF literal 0.98 beats param 0.95
+- Confidence ordering preserved: B-CONFIDENCE-LITERAL-HIGHER literal 0.98 beats param 0.95
+- Fix NOT present in committed HEAD (kernel sha256 46929b3a, line 112 'candidates.sort(key=lambda m: m.confidence, reverse=True)')
 
-**Rejected (unsupported):**
-- Post-commit claim (fix not committed)
-- Multi-slot positive control (endpoint assumption error)
+**Rejected (measurement invalid for post-commit):**
+- Post-commit claim (fix not committed — prerequisite unmet)
+- Core hazard results (0/6 param wins) are diagnostic on unfixed HEAD, not evidence against fix effectiveness
 
 **Unknown:**
-- Whether fix survives commit to production HEAD
+- Whether fix survives commitment to production HEAD
 - Whether param wins at equal confidence for ALL unseen ids after fix commit
 - Whether baselines regress after fix commit
 - Whether B_CONFIDENCE_LITERAL_HIGHER remains literal-winning after fix commit
 - Whether fix interacts correctly with registry upsert sorting (production-like ordering)
 
 **Do Not Assume:**
-- Fix is committed (verified unfixed at parent experiment time)
+- Fix is committed (verified unfixed at parent experiment time — kernel sha256 46929b3a)
 - Post-commit behavior matches monkey-patched behavior
 - Production-readiness (jsonplaceholder is simple REST)
 - Generalization beyond single intent, single endpoint, preconditions={}, deterministic n=1
-- Fix works under upsert sorting (replace() used in experiment)
+- Fix works under upsert sorting (replace() used in parent experiment)
 
 ### Why this experiment is different
 
 This experiment is identical in structure to the parent but differs in two critical dimensions:
 
-**Parent**: Tested on UNFIXED HEAD (fix absent, monkey-patching used for hazard validation)
+**Parent**: Tested on UNFIXED HEAD (fix absent, no monkey-patching — experiment ran exactly as committed)
 **This experiment**: Tests on COMMITTED HEAD (fix present, no monkey-patching)
 
 Additionally, this experiment adds a validity check for production-like registry ordering (upsert) that was not present in the parent.
@@ -85,7 +86,7 @@ The fix remains effective under registry upsert sorting (production-like orderin
 
 ## 5. Conditions
 
-### 5.1 Fix Verification
+### 5.1 Fix Verification (gate)
 - Read src/spider/kernel.py L112
 - Verify sort key includes `len(parameter_slots)`
 - If absent: status=BLOCKED, skip all conditions
@@ -128,16 +129,16 @@ The fix remains effective under registry upsert sorting (production-like orderin
 |----|----------|------------|--------------------|--------------|------------------|
 | C-EQUAL-UPSERT-ID7 | literal (0.95) + param (0.95) via upsert | 7 | param | /posts/7 | 7 |
 
-**Registry order**: mechanisms inserted sequentially via upsert; final ordering determined by mechanism_id sorting (literal-posts-1 before param-posts-id). This tests production-like ordering.
+**Registry order**: mechanisms inserted sequentially via upsert; final ordering determined by mechanism_id sorting (literal-posts-1 sorts before param-posts-id). This tests production-like ordering where the registry uses upsert rather than explicit replace().
 
 ### 5.6 Total Conditions
 - 6 baselines (B-COLD, B-LITERAL-ONLY-ORIG, B-LITERAL-ONLY-UNSEEN, B-PARAM-ONLY-ORIG, B-PARAM-ONLY-UNSEEN, B-COMPETE-PARAM-HIGHER)
 - 6 core hazard (C-EQUAL-ID2 through C-EQUAL-ID7, equal confidence 0.95)
 - 1 null control (B-CONFIDENCE-LITERAL-HIGHER, literal higher confidence)
 - 1 upsert compatibility (C-EQUAL-UPSERT-ID7, equal confidence 0.95 via upsert)
-= 14 conditions total
+= **14 conditions total**
 
-Note: B-COMPETE-PARAM-HIGHER (param 0.98 > literal 0.95) and C-EQUAL-ID7 (param 0.95 == literal 0.95) are different conditions with different confidence configurations. IDs 2-6 are exploratory extensions of the parent's primary condition (id=7).
+Note: B-COMPETE-PARAM-HIGHER (param 0.98 > literal 0.95) and C-EQUAL-ID7 (param 0.95 == literal 0.95) are different conditions with different confidence configurations.
 
 ## 6. Measures
 
@@ -155,25 +156,26 @@ Note: B-COMPETE-PARAM-HIGHER (param 0.98 > literal 0.95) and C-EQUAL-ID7 (param 
 
 ## 7. Controls
 
-### 7.1 Fix Presence Control (prerequisite)
+### 7.1 Fix Presence Control (prerequisite gate)
 - Read src/spider/kernel.py L112
 - Verify sort key includes `len(parameter_slots)`
 - If absent: status=BLOCKED, outcome=NOT_APPLICABLE
+- If present: proceed to all conditions
 
 ### 7.2 Baseline Preservation Controls (6 conditions)
 Same as parent experiment. All 6 must pass to confirm no regression.
 
 ### 7.3 Core Hazard Test (6 conditions)
-Same as parent experiment's C-COMPETE-EQUAL-HAZARD but with fix committed. All 6 must resolve to param.
+Same as parent experiment's core hazard test but with fix committed. All 6 must resolve to param.
 
 ### 7.4 Confidence Ordering Null Control (1 condition)
-Same as parent experiment's B-LITERAL-HIGHER-CONF. Must remain literal-winning.
+Same as parent experiment's B-CONFIDENCE-LITERAL-HIGHER. Must remain literal-winning.
 
 ### 7.5 Upsert Compatibility Control (1 condition)
-Tests fix under production-like registry ordering (upsert). Must resolve to param.
+New condition not present in parent. Tests fix under production-like registry ordering (upsert). Must resolve to param.
 
 ### 7.6 No-Monkey-Patch Attestation
-The experiment script must not modify kernel.py at runtime. Fix must be in committed code.
+The experiment script must not modify kernel.py at runtime. Fix must be in committed code. Script must verify no runtime modifications occurred.
 
 ## 8. Validity Threats
 
@@ -196,7 +198,7 @@ All conditions are deterministic (no model calls, no RNG). Single-run exact comp
 Only /posts/{id} is tested. Generalization to other endpoints, multi-parameter templates, nested routes, and non-empty preconditions is not tested here.
 
 ### 8.7 Upsert Ordering Assumption
-Upsert sorts by mechanism_id. The assumption is that literal-posts-1 sorts before param-posts-id. If mechanism_ids differ, ordering may change. This is a minor threat because the worst-case insertion order (literal before param) is already tested in core hazard conditions.
+Upsert sorts by mechanism_id. The assumption is that literal-posts-1 sorts before param-posts-id (lexicographic 'l' < 'p'). If mechanism_ids differ, ordering may change. This is a minor threat because the worst-case insertion order (literal before param) is already tested in core hazard conditions.
 
 ## 9. Decision Rules
 
@@ -250,7 +252,7 @@ If:
 - Fix not committed to production HEAD
 - First gate from parent handoff not met
 - Cannot test post-commit behavior
-- Next action: commit fix with Director approval
+- Next action: commit fix with Director approval, then re-run this exact spec
 
 ### 10.4 Invalid Result (MEASUREMENT_INVALID)
 - Infrastructure failure, not scientific result
@@ -288,7 +290,7 @@ From parent experiment and theoretical derivation:
 - At equal confidence, param sorts higher than literal with the fix
 - Without the fix, literal wins (insertion-order tie-break)
 - Confidence ordering is primary: 0.98 > 0.95 regardless of parameter_slots
-- Baseline behavior is independent of the fix (fix only affects tie-breaking)
+- Baseline behavior is independent of the fix (fix only affects tie-breaking at equal confidence)
 - Upsert sorting by mechanism_id may reorder mechanisms but should not affect tie-break when fix is present
 
 ## 14. Deviation Policy
