@@ -1,14 +1,14 @@
 {
   "lane": "product",
   "human_paused": false,
-  "active_experiment_id": "EXP-PRODUCT-34282620394",
-  "last_experiment_id": "EXP-PRODUCT-34195008089",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-PRODUCT-34282620394",
   "last_verdict": "C2-FIX-FALSIFIED",
   "continue_immediately": false,
-  "next_question": "Can C2 full-value binding be fixed by modifying distill_parameterized() to detect when the varying segment in a prefix-only template (e.g., user-${url} from training data user-1/2/3) represents a prefix-bearing ID and induce a shorter template (e.g., ${url} instead of user-${url}), OR by modifying _bind() to strip slot-specific prefix patterns based on the distribution of training values rather than the full template prefix, such that binding user-${url} with params={'url':'user-4'} produces user-4 not user-user-4, and all 10 conditions pass?",
+  "next_question": "Can C2 be resolved without regressions by either (a) reverting to bind-time double-prefix detection in _bind() which handled both short and full values transparently, OR (b) implementing a hybrid: distill-time detection produces shorter templates but _bind() retains fallback prefix detection for callers passing short values, such that all 10 conditions pass AND the product API supports both calling conventions?",
   "promotion_ready": false,
-  "consecutive_failures": 7,
-  "updated_at": "2026-09-09T19:30:39.168058+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "531dc40daddb3339fa9159d30e5c9f1edb6adec0de8bd5e4d41416df52eca88f"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-09T21:58:34.620296+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "da36422c7bc4db61ac01783ebba08de0770998a0004462ebcfc2308277f6c155"
 }
