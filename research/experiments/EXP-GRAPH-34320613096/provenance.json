@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34320613096",
+  "lane": "graph",
+  "github_run_id": "34320613096",
+  "base_sha": "51c43f0f8d4641e91e8247071cad8bafb4f4dd81",
+  "head_commit": "da0ea6feb89b8c37235ba5dc2428ae2f2430718a",
+  "current_branch": "lab2/graph",
+  "kernel_file": {
+    "path": "src/spider/kernel.py",
+    "sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+    "l112_content": "candidates.sort(key=lambda m: m.confidence, reverse=True)",
+    "fix_present": false
+  },
+  "frozen_inputs": {
+    "request.json": {
+      "path": "research/experiments/EXP-GRAPH-34320613096/request.json",
+      "sha256": "635e45ce1c70234d773d59933bea81d8d5f2dcf35fb966ecc248c5ab948dd0f1"
+    },
+    "spec.json": {
+      "path": "research/experiments/EXP-GRAPH-34320613096/spec.json",
+      "sha256": "7801d6664a211bca1562c2366a090e966af2399ab56e5199dd8f4c47922698e6"
+    },
+    "prereg.md": {
+      "path": "research/experiments/EXP-GRAPH-34320613096/prereg.md",
+      "sha256": "137feb5f55304802573d33b00e13ad75527cb9a3301deae585fc1d7c77abb5e5"
+    },
+    "freeze.json": {
+      "path": "research/experiments/EXP-GRAPH-34320613096/freeze.json",
+      "sha256": "9949f2387099992891440e98848aac132544a17425bd99c8b2434853d4dde7bd"
+    }
+  },
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-34291967676",
+    "path": "research/experiments/EXP-GRAPH-34291967676/handoff.json",
+    "sha256": "8c9ab18ce8dbb83cd6eea32b5affb134af5a5bc773614c1d5ac1d850a3d0e183"
+  },
+  "produced_artifacts": {
+    "result.json": {
+      "path": "research/experiments/EXP-GRAPH-34320613096/result.json",
+      "sha256": "21a0557ba01f62d055e5773002a749b1be6ea6a2b2f34572d6cedad437f36465"
+    },
+    "report.md": {
+      "path": "research/experiments/EXP-GRAPH-34320613096/report.md",
+      "sha256": "71a01c129f68bd478eeae56857d4726276631e674b2f3a15e5e674b70c6b51e9"
+    },
+    "provenance.json": {
+      "path": "research/experiments/EXP-GRAPH-34320613096/provenance.json",
+      "sha256": "7fbac974b336b8bde6bab9324cd519578bf37d1a64d3838941028cd8260783d0"
+    },
+    "raw_evidence.json": {
+      "path": "research/experiments/EXP-GRAPH-34320613096/raw_evidence.json",
+      "sha256": "17272dd37ab6c0fd56d0d069aab9b3d95ff900a610286c5e383ca27d2e0259a0"
+    },
+    "execute_blocked.py": {
+      "path": "research/experiments/EXP-GRAPH-34320613096/execute_blocked.py",
+      "sha256": "00341b6cc2844d04e05da838b028048bdf77b78ad0002e5e91931396b50cafd6"
+    }
+  },
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.x",
+    "working_directory": "/home/runner/work/Spider/Spider",
+    "model_id": "opencode/mimo-v2.5-free",
+    "git_branches_checked": [
+      "lab2/graph",
+      "main",
+      "remotes/origin/archive/spider-codex-ultimate",
+      "remotes/origin/lab2/frontier",
+      "remotes/origin/lab2/graph",
+      "remotes/origin/lab2/intel",
+      "remotes/origin/lab2/physics",
+      "remotes/origin/lab2/product",
+      "remotes/origin/lab2/runtime",
+      "remotes/origin/main",
+      "remotes/origin/research2/bootstrap",
+      "remotes/origin/research2/codex-unification",
+      "remotes/origin/research2/hotfix-control-overlay"
+    ],
+    "total_branches_checked": 12,
+    "fix_found_on_any_branch": false
+  },
+  "execution_mode": "BLOCKED — no conditions executed, no HTTP requests made, no scientific measurement occurred"
+}
