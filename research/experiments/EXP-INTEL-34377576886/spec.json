@@ -1,17 +1,29 @@
 {
   "experiment_id": "EXP-INTEL-34377576886",
   "lane": "intel",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-CROSSSITE", "C-LLM-INHERIT", "C-PRODUCT-ECON"],
+  "question": "Can ghcr.io Docker authentication be obtained and actual fragment yield measured on live WebArena pages, resolving whether heuristic yield estimates (0.517-0.65) match geometry-faithful viewport-filtered extraction?",
+  "hypothesis": "If Docker authentication succeeds and the REQUIRES_TRANSFORM pipeline is executed with geometry-faithful viewport filtering (Playwright/CDP union_bound, not depth/role heuristic), actual measured yield will be within 15 percentage points of the heuristic estimate for at least 2 of 3 tested site types (shopping, gitlab, wikipedia), validating the 812-task corpus as suitable for C-CROSSSITE/C-LLM-INHERIT integration experiments.",
+  "falsifier": "If Docker authentication succeeds but actual measured yield deviates from heuristic estimate by >15 percentage points for ANY tested site type, the heuristic model is not calibrated and the 812-task corpus requires reassessment. If Docker authentication fails for all 3 site types, the experiment is BLOCKED (not a scientific falsification).",
+  "baselines": [
+    "Heuristic yield estimates from EXP-INTEL-33945226776: shopping 0.65, gitlab 0.60, wikipedia 0.517 (unvalidated priors)",
+    "Method 1 (element-count) estimates: shopping 0.365, gitlab 0.484, wikipedia 0.517 (modeling viewport coverage 0.45-0.65 and node pruning 0.06-0.15)",
+    "Truncation sensitivity ratios from parent: shopping 0.37, gitlab 0.471, wikipedia 0.897 (max_obs_length=1920 binding constraint)"
+  ],
+  "positive_control": "Shopping task (e-commerce) should have the highest actual yield among the 3 tested site types, with >40% of DOM elements surviving the full REQUIRES_TRANSFORM pipeline with geometry-faithful viewport filtering. This verifies the measurement pipeline can extract fragments from a live complex page.",
+  "null_control": "Wikipedia task (CMS) should have the lowest actual yield among the 3 tested site types, with <60% of DOM elements surviving (simpler page structure). This verifies the pipeline can distinguish site types on live pages.",
+  "measurement_validity": [
+    "Step 1 (INFRASTRUCTURE): Verify Docker authentication via `docker login ghcr.io` with GITHUB_TOKEN (read:packages scope) or PAT. If denied, attempt alternative tags (v1, v2, stable) and alternative registries. Record exact auth method and error messages.",
+    "Step 2 (DEPLOYMENT): Pull and deploy WebArena Docker images for shopping, gitlab, wikipedia-like site types. Record image sizes, pull times, deployment status.",
+    "Step 3 (MEASUREMENT): For each site type, launch Playwright headless Chromium (viewport 1280x720), navigate to the task's starting URL, extract accessibility tree via CDP Accessibility.getFullAXTree, apply geometry-faithful viewport filtering using union_bound/get_element_in_viewport_ratio (NOT depth/role heuristic), apply IGNORED_ACTREE_PROPERTIES pruning, truncate at UTTERANCE_MAX_LENGTH=8192 and max_obs_length=1920.",
+    "Step 4 (CALCULATION): Compute fragment yield = elements_surviving_pipeline / total_elements_in_observation for each site type. Compare to heuristic baseline. Compute yield_delta = |actual_yield - heuristic_yield|.",
+    "N=1 per site type (pilot calibration, not powered statistical test). Minimum 3 site types tested (shopping, gitlab, wikipedia).",
+    "Viewport filtering MUST use geometry-faithful implementation: Playwright/CDP union_bound extraction or explicit bounding-box intersection with viewport rectangle (1280x720). Depth<=4 and role-in-viewport_roles heuristics are PROHIBITED — they were flagged as validity gap in EXP-INTEL-34047713704 audit required_fixes.",
+    "Raw accessibility tree artifacts must be saved with durable sha256 hashes for independent verification."
+  ],
+  "decision_rule": "IF Docker authentication succeeds AND actual yield is within 15 percentage points of heuristic estimate for ALL 3 site types, verdict = SUPPORTS (heuristic model is calibrated, proceed with C-CROSSSITE integration). IF Docker authentication succeeds AND actual yield deviates >15pp for ANY site type, verdict = FALSIFIES (heuristic model is not calibrated, 812-task corpus requires reassessment). IF Docker authentication fails for all 3 site types (all pulls denied), verdict = BLOCKED.",
+  "product_consequence_positive": "Validates that heuristic yield estimates from EXP-INTEL-33945226776 are calibrated within 15pp of actual extraction with geometry-faithful viewport filtering. Graph lane can proceed with WebArena Docker integration for C-CROSSSITE/C-LLM-INHERIT testing using the 812-task corpus with confidence that the heuristic ranking is informative.",
+  "product_consequence_negative": "If heuristic estimates are not calibrated (deviation >15pp), the 812-task corpus yield is unknown and the REQUIRES_TRANSFORM overhead cannot be assessed from heuristics alone. Intel should reassess whether VisualWebArena, Mind2Web, or other benchmarks offer a lower-uncertainty path to cross-site diversity.",
+  "estimated_cost": "Medium: requires Docker image pulls (~5-10GB per site), Playwright installation, WebArena package setup. ~1-2 hours of infrastructure setup + 30 minutes of measurement. Previous attempt found Playwright/Chromium install OK, Docker daemon running, 86GB disk / 15GB RAM available.",
+  "expected_information_gain": "HIGH: directly resolves the central unknown from EXP-INTEL-33945226776 and EXP-INTEL-34047713704 (whether heuristic estimates match live extraction with geometry-faithful viewport filtering). A positive result (SUPPORTS) unblocks C-CROSSSITE integration. A negative result (FALSIFIES) saves the graph lane from deploying on an unsuitable corpus. Even a BLOCKED result is informative: it identifies whether the auth barrier persists or has been resolved."
 }

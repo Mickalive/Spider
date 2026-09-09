@@ -1,0 +1,9 @@
+{
+  "stage": "design",
+  "category": "DESIGN_FAILURE",
+  "message": "stage exited with code 66",
+  "retryable": false,
+  "recorded_at": "2026-09-09T16:40:56.488914+00:00",
+  "github_run_id": "34377576886",
+  "github_run_attempt": "1"
+}
