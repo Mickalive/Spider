@@ -1,13 +1,12 @@
 #!/usr/bin/env python3
 """
-EXP-PRODUCT-34282620394 — Execute frozen experiment: C2 slot-level prefix fix.
+EXP-PRODUCT-34282620394 — Execute frozen experiment: C2 full-value binding fix.
 
-Tests whether modifying distill_parameterized() to detect slot-level prefixes
-and strip them from the induced template fixes C2 full-value binding without
-breaking any of the 9 conditions that already pass.
+Tests whether the _bind() double-prefix detection (already in kernel.py HEAD)
+fixes C2 full-value binding without breaking any of the 9 conditions
+that already pass.
 
-Uses kernel.py's SpiderKernel.distill_parameterized() and SpiderKernel.resolve()
-rather than an isolated local implementation.
+Uses kernel.py's SpiderKernel.distill_parameterized() and SpiderKernel.resolve().
 """
 
 import hashlib
@@ -32,7 +31,6 @@ from src.spider.kernel import (
     _find_common_prefix_suffix,
     _extract_parameter_candidates,
     _compute_structure_similarity,
-    _detect_slot_level_prefix,
     _set_template_value,
     _bind,
     _template_slots,
@@ -59,22 +57,30 @@ def _obs(intent, action, state=None, next_state=None, provenance=None):
 # ─── Map unseen params to mechanism slot names ───────────────────────────────
 
 def _map_params_to_slots(mechanism, params):
-    """Map unseen test params to mechanism slot names."""
+    """Map unseen test params to mechanism slot names.
+
+    The mechanism's parameter_slots are derived from the template paths
+    (e.g., 'url', 'name', 'X-Request-ID'). Unseen test params use these
+    algorithm-native names directly.
+    """
     slot_to_param = {}
     for slot in mechanism.parameter_slots:
         if slot in params:
             slot_to_param[slot] = params[slot]
         else:
+            # Try fuzzy match (slot in k or k in slot)
             for k, v in params.items():
                 if isinstance(v, str) and (slot in k or k in slot):
                     slot_to_param[slot] = v
                     break
             else:
+                # Try normalized match
                 for k, v in params.items():
                     if isinstance(v, str) and slot.replace("_", "") in k.replace("_", ""):
                         slot_to_param[slot] = v
                         break
 
+    # For remaining unmatched slots, use positional matching
     unmatched_slots = [s for s in mechanism.parameter_slots if s not in slot_to_param]
     unmatched_params = {k: v for k, v in params.items() if v not in slot_to_param.values()}
     for slot, val in zip(unmatched_slots, unmatched_params.values()):
@@ -114,11 +120,11 @@ def b1_expected():
 
 def b2_training():
     return [_obs("create-user", {"method": "POST", "url": "https://api.example.com/users/A",
-                                   "body": {"name": "Alice"}}),
+                                  "body": {"name": "Alice"}}),
             _obs("create-user", {"method": "POST", "url": "https://api.example.com/users/B",
-                                   "body": {"name": "Bob"}}),
+                                  "body": {"name": "Bob"}}),
             _obs("create-user", {"method": "POST", "url": "https://api.example.com/users/C",
-                                   "body": {"name": "Charlie"}})]
+                                  "body": {"name": "Charlie"}})]
 
 def b2_unseen():
     return [{"url": "D", "name": "Diana"},
@@ -137,14 +143,14 @@ def b2_expected():
 
 def b3_training():
     return [_obs("create-post", {"method": "POST", "url": "https://api.example.com/posts/A",
-                                   "body": {"title": "First"},
-                                   "headers": {"X-Request-ID": "req-1"}}),
+                                  "body": {"title": "First"},
+                                  "headers": {"X-Request-ID": "req-1"}}),
             _obs("create-post", {"method": "POST", "url": "https://api.example.com/posts/B",
-                                   "body": {"title": "Second"},
-                                   "headers": {"X-Request-ID": "req-2"}}),
+                                  "body": {"title": "Second"},
+                                  "headers": {"X-Request-ID": "req-2"}}),
             _obs("create-post", {"method": "POST", "url": "https://api.example.com/posts/C",
-                                   "body": {"title": "Third"},
-                                   "headers": {"X-Request-ID": "req-3"}})]
+                                  "body": {"title": "Third"},
+                                  "headers": {"X-Request-ID": "req-3"}})]
 
 def b3_unseen():
     return [{"url": "D", "title": "Fourth", "X-Request-ID": "4"},
@@ -168,11 +174,11 @@ def b3_expected():
 
 def b4_training():
     return [_obs("set-webhook", {"method": "POST", "url": "https://api.example.com/webhooks",
-                                   "body": {"callback_url": "https://site-a.com/hook"}}),
+                                  "body": {"callback_url": "https://site-a.com/hook"}}),
             _obs("set-webhook", {"method": "POST", "url": "https://api.example.com/webhooks",
-                                   "body": {"callback_url": "https://site-b.com/hook"}}),
+                                  "body": {"callback_url": "https://site-b.com/hook"}}),
             _obs("set-webhook", {"method": "POST", "url": "https://api.example.com/webhooks",
-                                   "body": {"callback_url": "https://site-c.com/hook"}})]
+                                  "body": {"callback_url": "https://site-c.com/hook"}})]
 
 def b4_unseen():
     return [{"callback_url": "d"},
@@ -191,11 +197,11 @@ def b4_expected():
 def b5_training():
     """B5: user_id is STATIC (A,A,A) per prereg. Only url varies."""
     return [_obs("update-item", {"method": "PUT", "url": "https://api.example.com/items/A",
-                                   "body": {"user_id": "A"}}),
+                                  "body": {"user_id": "A"}}),
             _obs("update-item", {"method": "PUT", "url": "https://api.example.com/items/B",
-                                   "body": {"user_id": "A"}}),
+                                  "body": {"user_id": "A"}}),
             _obs("update-item", {"method": "PUT", "url": "https://api.example.com/items/C",
-                                   "body": {"user_id": "A"}})]
+                                  "body": {"user_id": "A"}})]
 
 def b5_unseen():
     return [{"url": "D"},
@@ -234,7 +240,7 @@ def c2_training():
             _obs("get-user", {"method": "GET", "url": "https://api.example.com/users/user-3"})]
 
 def c2_unseen():
-    """C2: pass full values per spec (not stripped). This is the spec-required correction."""
+    """C2: pass full values per spec (not stripped)."""
     return [{"url": "user-4"},
             {"url": "user-5"},
             {"url": "user-6"}]
@@ -413,9 +419,11 @@ def run_condition(condition_id, training, unseen, expected_actions, expected_slo
         "unseen_count": len(unseen),
     }
 
+    # Create fresh kernel with temporary registry
     registry = MechanismRegistry(registry_path)
     kernel = SpiderKernel(registry, min_confidence=0.8)
 
+    # Distill parameterized mechanism
     distill_result = kernel.distill_parameterized(training, mechanism_id=f"param-{condition_id}")
 
     if distill_result is None:
@@ -449,8 +457,10 @@ def run_condition(condition_id, training, unseen, expected_actions, expected_slo
         "slot_prefixes": diagnostics.get("slot_prefixes", {}),
     }
 
+    # Register mechanism in registry so resolve() can find it
     registry.upsert(mechanism)
 
+    # Resolve unseen test cases
     exec_count = 0
     binding_correct_count = 0
     resolution_results = []
@@ -459,6 +469,7 @@ def run_condition(condition_id, training, unseen, expected_actions, expected_slo
         resolve_params = _map_params_to_slots(mechanism, params)
         resolution = kernel.resolve(mechanism.intent, {}, params=resolve_params)
 
+        # Strict binding verification
         binding_ok = False
         if resolution.status == ResolutionStatus.EXECUTABLE and resolution.bound_action:
             expected_action = expected_actions[i] if i < len(expected_actions) else None
@@ -548,7 +559,7 @@ def main():
         # Phase D: Noisy browser
         d_conditions = [
             ("D1-noisy-post", d1_training, d1_unseen, d1_expected, 3),
-            ("D2-noisy-get", d2_training, d2_unseen, d2_expected, 1),
+            ("D2-noisy-get", d2_training, d2_unseen, d2_expected, 1),  # prereg: leaf-path limitation -> 1
             ("D3-varying-preconditions", d3_training, d3_unseen, d3_expected, 1),
         ]
 
@@ -566,6 +577,7 @@ def main():
         e1_result = run_condition("E1-pattern-absence", e1_training_data, e1_unseen(),
                                    [{"x": "1"}, {"y": "2"}, {"z": "3"}], 0, e1_reg_path)
 
+        # Compute Jaccard for diagnostics
         all_paths = [_collect_leaf_paths(obs.action) for obs in e1_training_data]
         path_sets = [set(p) for p in all_paths]
         pairwise_sims = []

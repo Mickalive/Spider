@@ -1,6 +1,6 @@
 {
   "experiment_id": "EXP-PRODUCT-34282620394",
-  "timestamp": "2026-09-08T23:51:20Z",
+  "timestamp": "2026-09-09T01:40:19Z",
   "conditions": {
     "B1-single-path": {
       "condition_id": "B1-single-path",
@@ -24,8 +24,8 @@
           "method"
         ],
         "shared_paths": [
-          "url",
-          "method"
+          "method",
+          "url"
         ],
         "path_values": {
           "url": {
@@ -170,20 +170,11 @@
           "method"
         ],
         "shared_paths": [
+          "method",
           "body.name",
-          "url",
-          "method"
+          "url"
         ],
         "path_values": {
-          "url": {
-            "values": [
-              "https://api.example.com/users/A",
-              "https://api.example.com/users/B",
-              "https://api.example.com/users/C"
-            ],
-            "prefix": "https://api.example.com/users/",
-            "suffix": ""
-          },
           "body.name": {
             "values": [
               "Alice",
@@ -191,6 +182,15 @@
               "Charlie"
             ],
             "prefix": "",
+            "suffix": ""
+          },
+          "url": {
+            "values": [
+              "https://api.example.com/users/A",
+              "https://api.example.com/users/B",
+              "https://api.example.com/users/C"
+            ],
+            "prefix": "https://api.example.com/users/",
             "suffix": ""
           }
         },
@@ -370,21 +370,12 @@
           "method"
         ],
         "shared_paths": [
-          "url",
           "body.title",
-          "headers.X-Request-ID",
-          "method"
+          "method",
+          "url",
+          "headers.X-Request-ID"
         ],
         "path_values": {
-          "url": {
-            "values": [
-              "https://api.example.com/posts/A",
-              "https://api.example.com/posts/B",
-              "https://api.example.com/posts/C"
-            ],
-            "prefix": "https://api.example.com/posts/",
-            "suffix": ""
-          },
           "body.title": {
             "values": [
               "First",
@@ -392,6 +383,15 @@
               "Third"
             ],
             "prefix": "",
+            "suffix": ""
+          },
+          "url": {
+            "values": [
+              "https://api.example.com/posts/A",
+              "https://api.example.com/posts/B",
+              "https://api.example.com/posts/C"
+            ],
+            "prefix": "https://api.example.com/posts/",
             "suffix": ""
           },
           "headers.X-Request-ID": {
@@ -612,13 +612,13 @@
         "mean_jaccard": 1.0,
         "has_constant_anchor": true,
         "anchor_path": [
-          "url",
-          "method"
+          "method",
+          "url"
         ],
         "shared_paths": [
-          "url",
           "body.callback_url",
-          "method"
+          "method",
+          "url"
         ],
         "path_values": {
           "body.callback_url": {
@@ -741,13 +741,13 @@
         "mean_jaccard": 1.0,
         "has_constant_anchor": true,
         "anchor_path": [
-          "body.user_id",
-          "method"
+          "method",
+          "body.user_id"
         ],
         "shared_paths": [
+          "method",
           "url",
-          "body.user_id",
-          "method"
+          "body.user_id"
         ],
         "path_values": {
           "url": {
@@ -868,13 +868,13 @@
         "mean_jaccard": 1.0,
         "has_constant_anchor": true,
         "anchor_path": [
-          "url",
-          "method"
+          "method",
+          "url"
         ],
         "shared_paths": [
-          "url",
           "body.callback_url",
-          "method"
+          "method",
+          "url"
         ],
         "path_values": {
           "body.callback_url": {
@@ -997,8 +997,8 @@
           "method"
         ],
         "shared_paths": [
-          "url",
-          "method"
+          "method",
+          "url"
         ],
         "path_values": {
           "url": {
@@ -1115,12 +1115,21 @@
           "method"
         ],
         "shared_paths": [
+          "method",
           "url",
-          "headers.X-Request-ID",
           "body.customer",
-          "method"
+          "headers.X-Request-ID"
         ],
         "path_values": {
+          "body.customer": {
+            "values": [
+              "cust-A",
+              "cust-B",
+              "cust-C"
+            ],
+            "prefix": "cust-",
+            "suffix": ""
+          },
           "url": {
             "values": [
               "https://api.example.com/orders/order-1",
@@ -1137,15 +1146,6 @@
               "req-103"
             ],
             "prefix": "req-10",
-            "suffix": ""
-          },
-          "body.customer": {
-            "values": [
-              "cust-A",
-              "cust-B",
-              "cust-C"
-            ],
-            "prefix": "cust-",
             "suffix": ""
           }
         },
@@ -1316,8 +1316,8 @@
           "method"
         ],
         "shared_paths": [
-          "url",
-          "method"
+          "method",
+          "url"
         ],
         "path_values": {
           "url": {
@@ -1438,13 +1438,13 @@
         "mean_jaccard": 1.0,
         "has_constant_anchor": true,
         "anchor_path": [
-          "body.quantity",
-          "method"
+          "method",
+          "body.quantity"
         ],
         "shared_paths": [
-          "body.quantity",
+          "method",
           "url",
-          "method"
+          "body.quantity"
         ],
         "path_values": {
           "url": {
@@ -1529,7 +1529,7 @@
     },
     "A3_field_path_relevance": {
       "status": "PASS",
-      "detail": "ACTION_TEMPLATE_PATHS={'url', 'body', 'method', 'headers', 'query'}, METADATA_KEYS={'request_duration_ms', 'result_count', 'response_time_ms', 'cache_hit', 'user_agent', 'retry_count', 'timestamp'}"
+      "detail": "ACTION_TEMPLATE_PATHS={'query', 'url', 'headers', 'body', 'method'}, METADATA_KEYS={'request_duration_ms', 'response_time_ms', 'timestamp', 'user_agent', 'retry_count', 'cache_hit', 'result_count'}"
     }
   }
 }
