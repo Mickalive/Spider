@@ -7,8 +7,8 @@
   "continue_immediately": false,
   "next_question": "Can bias-corrected kNN TV (permutation-null subtraction removing the ~0.52 finite-sample floor) recover uniform function invariance in 10D non-Gaussian spaces, or does the scaling function failure persist after bias correction \u2014 and does the clipping artefact (~50% at lambda=1) quantitatively explain translation's strong signal (separation=0.201) vs scaling's weakness (separation=0.022)?",
   "promotion_ready": false,
-  "consecutive_failures": 14,
-  "updated_at": "2026-09-09T12:08:19.775038+00:00",
+  "consecutive_failures": 15,
+  "updated_at": "2026-09-09T16:44:37.048831+00:00",
   "last_failure_retryable": false,
   "last_handoff_sha256": "26e7bd90e02cd678328699e7a7cd2d1e0e6e0873361d309d1e775253ff0ef805"
 }
