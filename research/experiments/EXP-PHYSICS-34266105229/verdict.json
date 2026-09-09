@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34266105229",
+  "lane": "physics",
+  "decision": "FALSIFIED-IN-SETTING",
+  "claim_updates": [
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "EXPERIMENTAL",
+      "reason": "The experiment is an uninformative (degenerate) test of title-aware PMI on real SPA sites: both TodoMVC sites have constant document.title (unique_titles=1), making URL+title isomorphic to URL-only (0% improvement forced by zero title variance). The preregistered hypothesis about titles noisy/ambiguous on form-heavy SPAs was never tested because the selected sites are not form-heavy (single input.new-todo, no multi-step flows) and have no title variation. URL-only PMI is strongly positive (1.32-1.36 bits, permutation p=0.001, d>83), confirming action->next-state dynamical structure at URL level — consistent with but not caused by this experiment. The claim ceiling is bounded to: URL-level PMI detects dynamical structure on TodoMVC hash-SPA transitions. Title-aware PMI benefit remains untested on real sites with varying titles. Do not update claim status beyond EXPERIMENTAL based on this experiment."
+    }
+  ],
+  "product_action": "NO_ACTION",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does title-aware PMI detect dynamical structure on real SPA/form-heavy sites where titles actually vary across routes (e.g., multi-step e-commerce checkout, survey builder with step-specific titles, dashboards with page-specific titles via React Helmet/Vue Meta), using browser-collected action->next-state data with sufficient transition density and title variance?",
+  "reason": "The experiment is FALSIFIED-IN-SETTING per frozen decision rule: URL+title PMI is not > URL-only PMI on both sites (0% improvement on both, Bonferroni-corrected permutation p not < 0.025). However, the falsification is narrow and uninformative for the preregistered hypothesis: both TodoMVC sites have constant document.title (unique_titles=1, 400/400 identical per site), so URL+title state representation is mathematically isomorphic to URL-only — the hypothesis could not be expressed in this environment. The audit (VF_TITLE_ENTROPY_ZERO, VF_SITE_SELECTION_DEVIATION, VF_FORM_SIGNALS_ZERO_VARIANCE) confirms the test environment is degenerate for title-aware PMI. The audit also flags: half the frozen sample size (400 vs 800 transitions), report inconsistency (Vue url_title 1.292 vs 1.323), vacuous leakage classification (no target_href field), and PMI smoothing asymmetry inherited from parent. These deviations do not change the 0% improvement conclusion but prevent confirmatory claims. The broader C-WEB-DYNAMICS claim is not affected: URL-only PMI strongly positive confirms dynamical structure exists. The experiment retains the parent's synthetic pipeline validation (positive control PMI=0.693, p=0.001). The critical open question is whether title-aware PMI helps on sites where titles actually vary — the preregistered population was never sampled.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-34266105229/result.json metrics.site_todomvc_react.unique_titles=1 url_title_improvement_pct=0.0 url_only_pmi=1.360 url_title_pmi=1.360",
+    "research/experiments/EXP-PHYSICS-34266105229/result.json metrics.site_todomvc_vue.unique_titles=1 url_title_improvement_pct=0.0 url_only_pmi=1.323 url_title_pmi=1.323",
+    "research/experiments/EXP-PHYSICS-34266105229/audit.json validity_findings VF_TITLE_ENTROPY_ZERO critical: title representation has zero variance, URL+title isomorphic to URL-only",
+    "research/experiments/EXP-PHYSICS-34266105229/audit.json validity_findings VF_SITE_SELECTION_DEVIATION high: both sites todomvc.com same domain same app not form-heavy",
+    "research/experiments/EXP-PHYSICS-34266105229/audit.json validity_findings VF_FORM_SIGNALS_ZERO_VARIANCE critical: form_signals constant all 400 transitions H4 untested",
+    "research/experiments/EXP-PHYSICS-34266105229/audit.json validity_findings VF_SAMPLE_SIZE_HALF_SPEC high: 400 vs 800 frozen target",
+    "research/experiments/EXP-PHYSICS-34266105229/audit.json validity_findings VF_LEAKAGE_CLASSIFICATION_VACUOUS medium: no target_href field 100% NL assumed not measured",
+    "research/experiments/EXP-PHYSICS-34266105229/audit.json validity_findings VF_REPORT_INCONSISTENCY medium: Vue url_title 1.292 in report vs 1.323 in raw",
+    "research/experiments/EXP-PHYSICS-34266105229/audit.json validity_findings VF_PMI_SMOOTHING_ASYMMETRY low: absolute bits inflated by alpha=1.0 asymmetry",
+    "research/experiments/EXP-PHYSICS-34266105229/audit.json claim_ceiling: narrow TodoMVC constant-title degenerate case, no evidence for or against preregistered hypothesis",
+    "research/experiments/EXP-PHYSICS-34266105229/result.json controls.positive_control_synthetic_spa.pass=true PMI=0.693 pipeline integrity confirmed",
+    "research/experiments/EXP-PHYSICS-34266105229/result.json controls.null_control_permutation.pass=true p=0.001 on both sites URL-level dependency confirmed",
+    "research/experiments/EXP-PHYSICS-34266105229/result.json aggregate_decision.survives=false url_title_gt_url_only_both_sites=false",
+    "research/experiments/EXP-PHYSICS-34266105229/raw_results.json site_results.todomvc_react.title_dist TodoMVC: React=400 unique_titles=1",
+    "research/experiments/EXP-PHYSICS-34266105229/raw_results.json site_results.todomvc_vue.title_dist TodoMVC: Vue=400 unique_titles=1",
+    "research/experiments/EXP-PHYSICS-34266105229/execute_real_spa.py state_url_title function",
+    "research/experiments/EXP-PHYSICS-34149195420/result.json parent synthetic baseline url_only_pmi=0.693 url_title_pmi=1.970",
+    "research/experiments/EXP-PHYSICS-34149195420/handoff.json parent established rejected unknown do_not_assume"
+  ]
+}
