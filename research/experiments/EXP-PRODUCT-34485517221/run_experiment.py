@@ -29,20 +29,72 @@ def _load_parent_kernel():
     """Load the parent experiment's kernel.py version with distill_parameterized."""
     import subprocess
     parent_sha = "64a6a89"  # Parent experiment execution commit
-    result = subprocess.run(
+    
+    # Load parent models.py first (has slot_prefixes field)
+    models_result = subprocess.run(
+        ["git", "show", f"{parent_sha}:src/spider/models.py"],
+        capture_output=True, text=True, cwd=str(Path(__file__).resolve().parents[3])
+    )
+    if models_result.returncode != 0:
+        raise RuntimeError(f"Failed to load parent models.py: {models_result.stderr}")
+    
+    # Load parent kernel.py
+    kernel_result = subprocess.run(
         ["git", "show", f"{parent_sha}:src/spider/kernel.py"],
         capture_output=True, text=True, cwd=str(Path(__file__).resolve().parents[3])
     )
-    if result.returncode != 0:
-        raise RuntimeError(f"Failed to load parent kernel.py: {result.stderr}")
+    if kernel_result.returncode != 0:
+        raise RuntimeError(f"Failed to load parent kernel.py: {kernel_result.stderr}")
+
+    # Create a module for parent models
+    models_mod = types.ModuleType("parent_models")
+    models_mod.__file__ = "<parent_models>"
+    sys.modules["parent_models"] = models_mod
+    exec(models_result.stdout, models_mod.__dict__)
+    
+    # Replace relative imports with absolute imports for exec context
+    kernel_code = kernel_result.stdout
+    kernel_code = kernel_code.replace(
+        "from .models import",
+        "from parent_models import"
+    )
+    kernel_code = kernel_code.replace(
+        "from .registry import",
+        "from src.spider.registry import"
+    )
 
     # Create a temporary module with the parent kernel code
     mod = types.ModuleType("parent_kernel")
     mod.__file__ = "<parent_kernel>"
-    exec(result.stdout, mod.__dict__)
+    sys.modules["parent_kernel"] = mod
+    exec(kernel_code, mod.__dict__)
     return mod
 
 parent_kernel = _load_parent_kernel()
+
+# ─── Patch current models to accept parent's slot_prefixes field ──────────────
+# The parent kernel stores slot_prefixes in Mechanism, but current HEAD models.py
+# doesn't have it. Patch current models so registry deserialization works.
+from src.spider import models as _current_models
+_orig_mechanism_init = _current_models.Mechanism.__init__
+
+def _patched_mechanism_init(self, **kwargs):
+    # Accept and store slot_prefixes even if current model doesn't define it
+    slot_prefixes = kwargs.pop('slot_prefixes', {})
+    _orig_mechanism_init(self, **kwargs)
+    self.slot_prefixes = slot_prefixes
+
+_current_models.Mechanism.__init__ = _patched_mechanism_init
+
+# Also need as_dict to include slot_prefixes
+_orig_as_dict = _current_models.Mechanism.as_dict
+
+def _patched_as_dict(self):
+    d = _orig_as_dict(self)
+    d['slot_prefixes'] = self.slot_prefixes
+    return d
+
+_current_models.Mechanism.as_dict = _patched_as_dict
 
 # Import from parent kernel
 SpiderKernel = parent_kernel.SpiderKernel
