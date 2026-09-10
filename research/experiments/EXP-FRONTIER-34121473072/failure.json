@@ -3,7 +3,7 @@
   "category": "VALIDATION_FAILURE",
   "message": "invalid claim update status: FALSIFIED-IN-SETTING",
   "retryable": false,
-  "recorded_at": "2026-09-10T00:13:08.705548+00:00",
-  "github_run_id": "34420090704",
+  "recorded_at": "2026-09-10T04:59:24.892295+00:00",
+  "github_run_id": "34439062616",
   "github_run_attempt": "1"
 }
