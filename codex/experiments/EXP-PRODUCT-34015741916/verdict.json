@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-34015741916",
+  "lane": "product",
+  "decision": "KERNEL-INTEGRATION-PARTIAL",
+  "claim_updates": [
+    {
+      "claim_id": "C-PARAM-INHERIT",
+      "status": "EXPERIMENTAL",
+      "reason": "Kernel integration partial: 9/10 synthetic conditions survive (B1-B5 regression 21/21 binding_correct, C1 prefix+suffix 3/3, D1/D2/D3 noise filtering 7/7, E1/E2 null controls slot_count=0, literal baseline fail_rate=1.0). C2 full-value binding with prefix-containing params fails spec-required test: _detect_double_prefix is dead code (guard always False because url_template contains ${url}), recomputed kernel.resolve('get-user', {}, params={'url':'user-4'}) => 'user-user-4' (binding_correct false). Producer claimed KERNEL-INTEGRATION-SURVIVES with outcome=SUPPORTS but used stripped parts (url=4) not full values (user-4) per spec measurement_validity. C-PARAM-INHERIT advances from kernel-integration-gap to kernel-integrated-synthetic but C2 blocker prevents product readiness. Claim ceiling: synthetic top-level metadata, single-whole-URL, body/headers leaf parameterization only."
+    }
+  ],
+  "product_action": "DO_NOT_PROMOTE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can the C2 double-prefix bug be fixed by wiring _detect_double_prefix into the kernel's _bind() or resolve() path (or by stripping the template prefix from the param value before substitution), such that full-value binding with prefix-containing params (e.g., user-4) produces user-4 not user-user-4, and the spec-required test (training on user-1/2/3, binding with params={'url':'user-4'}, expecting 'user-4') passes?",
+  "reason": "The frozen decision_rule requires ALL 13 conditions to pass for KERNEL-INTEGRATION-SURVIVES. C2 violates the spec: measurement_validity requires 'C2 tested with full values user-4, user-5, user-6 (not stripped middles) to catch double-prefix' and decision_rule requires 'C2 produces slot_count=1 with binding_accuracy=1.0 AND no double-prefix (full value user-4 binds correctly)'. The audit recomputed full-value binding and reproduced the bug: _detect_double_prefix exists in kernel.py but is dead code — the guard `if not _PARAMETER.search(url_template)` is always False because url_template already contains `${url}`. The producer's test harness c2_unseen() returns [{'url':'4'}] (stripped), not [{'url':'user-4'}] (full value), masking the bug. Validity_notes[5] admits 'C2 tested with stripped varying parts (url=4,5,6) not full values (user-4)'. Aggregate metrics also mismatch: result.json claims 28/28 but raw_evidence.json has 34/34 (delta 6 = C1(3)+C2(3)). The 9 conditions that do pass are genuine: B1-B5 regression preserved with correct prereg data (B5 static A,A,A fixed, D3 static 1,1,1 fixed), C1 prefix+suffix correct, D1/D2/D3 noise filtering correct for top-level metadata, E1/E2 null controls hold, literal baseline fails. Hyphen regex fix ([A-Za-z0-9_] -> [A-Za-z0-9_-]) is a genuine bug fix. This is partial success, not falsification — the algorithmic core works but C2 binding semantics for prefix-containing params need architectural resolution.",
+  "evidence_refs": [
+    "research/experiments/PRODUCT-34015741916/audit.json status=FAIL producer_claim_supported=false required_fixes C2_DOUBLE_PREFIX_WIRING C2_HARNESS_CORRECTNESS METRICS_COUNT_MISMATCH NESTED_METADATA_SCOPE_LEAK D2_REPRESENTATION_CLAIM_CEILING",
+    "research/experiments/EXP-PRODUCT-34015741916/audit.json recomputed_metrics C2_binding_accuracy_full_value_user_4=0.0 C2_bound_url_with_full_value_user_4='https://api.example.com/users/user-user-4' C2_double_prefix_bug_reproduced=true _detect_double_prefix_wired_into_bind_or_resolve=false",
+    "research/experiments/EXP-PRODUCT-34015741916/audit.json claim_ceiling 'KERNEL-INTEGRATION-SURVIVES is NOT supported as written; maximum justified is KERNEL-INTEGRATION-PARTIAL: 9/10 synthetic conditions survive, C2 fails spec-required full-value test'",
+    "research/experiments/EXP-PRODUCT-34015741916/spec.json decision_rule 'C2 produces slot_count=1 with binding_accuracy=1.0 AND no double-prefix (full value user-4 binds correctly)' measurement_validity 'C2 tested with full values user-4, user-5, user-6 (not stripped middles)'",
+    "research/experiments/EXP-PRODUCT-34015741916/result.json validity_notes[5] 'C2 tested with stripped varying parts (url=4,5,6) not full values (user-4)'",
+    "research/experiments/EXP-PRODUCT-34015741916/raw_evidence.json C2 distill_diagnostics prefix='https://api.example.com/users/user-' template='https://api.example.com/users/user-${url}' params=[{'url':'4'}]",
+    "src/spider/kernel.py lines 223-244 _detect_double_prefix definition and lines 404-414 Step 4 dead code guard",
+    "research/experiments/EXP-PRODUCT-34015741916/result.json controls B_REGRESSION_SYNTHETIC PASS C1_FULL_VALUE_URLS PASS D1/D2/D3 PASS E1/E2 PASS metrics regression_binding_accuracy all 1.0",
+    "research/experiments/EXP-PRODUCT-34015741916/audit.json baseline_findings B_REGRESSION_SYNTHETIC PASS C1 PASS D1 PASS D2 PASS_with_ceiling D3 PASS E1 PASS E2 PASS B_LITERAL PASS",
+    "research/experiments/EXP-PRODUCT-34003641840/handoff.json carry_forward establishing field-path relevance and structure-similarity viability in isolated implementation"
+  ]
+}

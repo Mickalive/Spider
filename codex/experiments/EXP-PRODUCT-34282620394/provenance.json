@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-34282620394",
+  "github_run_id": "34282620394",
+  "origin_github_run_id": "34282620394",
+  "base_sha": "19179be401f6052f79e2f7ed6538a492ca29d7c0",
+  "head_sha": "6a7a64d247de9012619973e6b676c4222d7b95ae",
+  "execution_mode": "offline_synthetic",
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.x",
+    "model_id": "opencode/mimo-v2.5-free",
+    "no_model_calls": true,
+    "no_network": true,
+    "no_browser": true
+  },
+  "datasets_fixtures": [
+    {
+      "description": "Synthetic deterministic test data for 10 conditions (B1-B5, C1-C2, D1-D3, E1-E2) plus literal baseline",
+      "source": "research/experiments/EXP-PRODUCT-34195008089/run_experiment.py (parent, adapted)",
+      "path": "research/experiments/EXP-PRODUCT-34282620394/run_experiment.py",
+      "sha256": "d9feef08ca084a99eb4492c93359ec3ed3218bee6ca3dcce2e25dea680ed9025"
+    }
+  ],
+  "code_paths": [
+    {
+      "path": "src/spider/kernel.py",
+      "sha256": "97365d612f91ffbbaffe5639ff1dd4ad0e396b7305e63c718aca3648060c40ef",
+      "role": "kernel with distill-time prefix stripping fix",
+      "changes": [
+        "distill_parameterized() lines 439-455: added stripped_prefix computation and slot-level prefix stripping from template",
+        "_bind() lines 38-51: removed double-prefix detection logic (former lines 44-66), replaced with direct substitution"
+      ]
+    },
+    {
+      "path": "src/spider/models.py",
+      "role": "data models (Observation, Mechanism, Resolution)"
+    },
+    {
+      "path": "src/spider/registry.py",
+      "role": "MechanismRegistry"
+    }
+  ],
+  "frozen_inputs": {
+    "request.json": {
+      "path": "research/experiments/EXP-PRODUCT-34282620394/request.json",
+      "sha256": "ba041eed4d24d1e99ed377e2f3a85a5d2a89e4806f79b563532b727a1b7a72d1"
+    },
+    "spec.json": {
+      "path": "research/experiments/EXP-PRODUCT-34282620394/spec.json",
+      "sha256": "bd7d552cf9f099f26ee5b313e2b1ccf7194495e3c0ca57e7fa0c02d9f0919a6a"
+    },
+    "prereg.md": {
+      "path": "research/experiments/EXP-PRODUCT-34282620394/prereg.md",
+      "sha256": "b476866fdba2cc3c38cb8d97df89283a8dbc6ce489d72103169e8fbd3a7b9575"
+    },
+    "freeze.json": {
+      "path": "research/experiments/EXP-PRODUCT-34282620394/freeze.json"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PRODUCT-34282620394/raw_evidence.json",
+      "sha256": "a13ddef40e875975706a514dcf55219e180e5e003e3987aa3560194c7e4ccc68",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-34282620394/result.json",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-34282620394/report.md",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-34282620394/provenance.json",
+      "role": "derived"
+    }
+  ],
+  "parent_experiment": {
+    "experiment_id": "EXP-PRODUCT-34195008089",
+    "path": "research/experiments/EXP-PRODUCT-34195008089/handoff.json",
+    "sha256": "531dc40daddb3339fa9159d30e5c9f1edb6adec0de8bd5e4d41416df52eca88f",
+    "verdict": "C2-FIX-FALSIFIED",
+    "key_finding": "distill_parameterized() induces FULL common prefix from training data, not short prefix. Bind-time fix was structurally inert."
+  },
+  "execution_commands": [
+    "python3 research/experiments/EXP-PRODUCT-34282620394/run_experiment.py"
+  ],
+  "execution_timestamp": "2026-09-09T06:49:53Z",
+  "execution_duration_seconds": null,
+  "notes": "Pure offline synthetic execution. No model calls, no network, no browser. Each condition uses a fresh temporary registry."
+}

@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34071626363",
+  "lane": "physics",
+  "target_lane": "physics",
+  "next_question": "Does PMI between actions and next-states detect genuine dynamical structure on SPA/form-heavy sites where action.target_href != state_after.url by construction, using either a denser non-leakage sample to avoid the unique-SA forced-zero regime or a richer BrowserState representation (title, link_texts, tag_counts, form_signals) that may capture structure invisible at URL level?",
+  "why_next": "This experiment FALSIFIED-IN-SETTING because PMI on non-leakage transitions is not > 0 after correction (wiki 0.0 p=1.0, python 0.874 p=0.667) and positive control fails arbitrary 1.0 bit threshold. The critical finding is that PMI drops to 0 or near-0 when leakage transitions are excluded, confirming parent signal was driven by action.target_href == state_after.url leakage. However, the falsification is bounded: (1) wiki non-leakage PMI = 0.0 is a deterministic artifact of sparse unique SA pairs under alpha=1.0, not a sensitive test; (2) permutation null is degenerate due to singleton trajectory groups; (3) both sites are server-rendered with very low non-leakage fractions (7.6% wiki, 2.4% python). SPA/form-heavy sites where non-leakage is frequent by construction, or denser sampling that avoids the unique-SA regime, or richer state representations could reveal structure invisible at URL level.",
+  "carry_forward": {
+    "established": [
+      "PMI pipeline is computationally correct: positive control detects deterministic synthetic structure (p=0.001); null control correctly does not reject random data (p=1.0); trajectory-grouped permutation test is reproducible under PYTHONHASHSEED=0",
+      "PMI drops dramatically when leakage transitions are excluded: Wikipedia 1.073 -> 0.0 bits, Python docs 1.502 -> 0.874 bits. This confirms that the parent experiment's PMI signal was driven by the 92-98% of transitions where action.target_href == state_after.url",
+      "Non-leakage transitions are rare on server-rendered sites: Wikipedia 7.6% (N=67), Python docs 2.4% (N=21). These subsets have sparse state spaces with near-unique SA pairs",
+      "Wikipedia non-leakage PMI = 0.0 is mathematically forced by unique SA pairs (58 unique SA for 67 transitions) under Laplace alpha=1.0 smoothing — not a sensitive test of action-conditioned information",
+      "Hashed action representation (SHA-256 of target_href) yields identical PMI to unblinded actions on non-leakage transitions — hashing preserves uniqueness so does not change PMI computation when SA pairs are already unique",
+      "Action-type categorical representation (all actions = 'click') yields PMI ~0 on both sites — when all actions are identical, PMI reduces to state-to-next-state predictability which is ~0 for sparse state spaces"
+    ],
+    "rejected": [
+      "PMI at URL-level with target_href actions on non-leakage transitions as evidence for C-WEB-DYNAMICS on server-rendered sites: FALSIFIED-IN-SETTING per frozen decision_rule (wiki PMI=0.0 p=1.0, python PMI=0.874 p=0.667, positive control 0.855 < 1.0)",
+      "That the parent experiment's PMI > 0 on all transitions reflects genuine state-conditioned structure: PMI drops to 0 or near-0 when leakage removed, confirming signal was driven by action.target_href == state_after.url",
+      "That within-trajectory permutation is a powerful null for non-leakage subsets: permutation is degenerate when most trajectory groups are singletons (30/47 wiki, 14/17 python), leaving observed and shuffled datasets nearly identical",
+      "That positive control PMI >= 1.0 bit is a valid threshold for the actual synthetic data (8 states, 17 SA, alpha=1.0): threshold was based on incorrect assumptions; computation itself is statistically significant (p=0.001)"
+    ],
+    "unknown": [
+      "Whether PMI is positive on non-leakage transitions at SPA/form-heavy sites where non-leakage is frequent by construction (JavaScript navigation, form submissions, client-side routing)",
+      "Whether denser sampling of the same server-rendered sites would produce non-leakage subsets with duplicate SA pairs, allowing PMI to be > 0 in the non-sparse regime",
+      "Whether richer state representations (title, link_texts, tag_counts, form_signals, accessibility) would reveal action-conditioned structure not visible at URL level",
+      "Whether trajectory-level entropy rates (H(S_1,...,S_T) vs H(S_1) + sum H(S_{t+1}|S_t)) would detect structure that transition-level PMI misses on sparse subsets",
+      "What the correct expected PMI is for the synthetic control under actual structure (8 states, 17 SA, alpha=1.0) — threshold should be recalculated, not assumed 1.0 bit",
+      "The causal mechanism behind non-leakage transitions: are they form submissions, JavaScript navigation, redirects, or other non-standard navigation patterns?",
+      "Whether the 6 unique actions on Wikipedia non-leakage subset represent a meaningful action vocabulary or are artifacts of sparse sampling"
+    ],
+    "do_not_assume": [
+      "That PMI = 0.0 on Wikipedia non-leakage is evidence of absence of structure — it is a deterministic artifact of unique SA pairs under alpha=1.0 Laplace smoothing, not a sensitive test",
+      "That permutation p-values from within-trajectory shuffling are informative when most trajectory groups are singletons — the null is degenerate and p-values are uninformative in this regime",
+      "That the positive control failure (0.855 < 1.0) indicates the PMI computation is broken — it is statistically significant (p=0.001) and detects known structure; the threshold was misspecified",
+      "That action-type categorical PMI ~0 means actions carry no information — when all actions are identical, PMI reduces to state-to-next-state predictability, which is a different question",
+      "That hashed action blinding provides an identifiability test — hashing preserves uniqueness so when SA pairs are already unique, it does not change PMI computation",
+      "That this falsification closes C-WEB-DYNAMICS — it is bounded to URL-level PMI with target_href actions, alpha=1.0 smoothing, within-trajectory permutation on server-rendered sites with sparse non-leakage subsets",
+      "That server-rendered sites with low non-leakage fractions are representative of the Web — SPA/form-heavy sites may have fundamentally different action-state structure"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-PHYSICS-33965269281/raw_live_wikipedia.json (sha256: 87e6d8fcecb436ab9b1067a27c7f5708c393bace5efbb0225bfe1f57aa87bc5e)",
+    "research/experiments/EXP-PHYSICS-33965269281/raw_live_python_docs.json (sha256: a7634ca3734360a4d6a2ffdb89d859ae9ff466df710be3323da8ac5c5d2fa648)",
+    "research/experiments/EXP-PHYSICS-33965269281/raw_positive.json (sha256: 3eef0bbc382fef44eb63d55481e3d417b2a98478d6f4fa4e1eb06331a99fc73f)",
+    "research/physics/information_theoretic/nonleakage_pmi.py (sha256: 84096498e6c50b2771e199bdffeb2901b644e603a52ed850af339bb85d046904)",
+    "research/physics/information_theoretic/nonleakage_pmi_raw.json (sha256: f4c1a45499a73f58c3ed71ea83881cb37f2fac7bfffa00a2bf81c88f9b0026b6)",
+    "research/experiments/EXP-PHYSICS-34038570933/handoff.json (sha256: e11f8fa1e4a05857519c496350d625fe69138b4a6a233ba50ff72a134483b3ac)"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-34071626363/verdict.json decision FALSIFIED-IN-SETTING claim_updates C-WEB-DYNAMICS HYPOTHESIS",
+    "research/experiments/EXP-PHYSICS-34071626363/result.json metrics mean_pmi_non_leakage_wiki 0.0 permutation_p 1.0, mean_pmi_non_leakage_python 0.874 permutation_p 0.667",
+    "research/experiments/EXP-PHYSICS-34071626363/result.json metrics positive_control_pmi 0.855 < 1.0, diff_pmi_nonleakage_vs_all_wiki -1.073 python -0.628",
+    "research/experiments/EXP-PHYSICS-34071626363/audit.json claim_ceiling FALSIFIED-IN-SETTING at URL-level",
+    "research/experiments/EXP-PHYSICS-34071626363/audit.json validity_findings wiki_pmi_zero_artifact FAIL, permutation_degenerate_singleton FAIL, positive_control_threshold_misspec FAIL",
+    "research/experiments/EXP-PHYSICS-34071626363/audit.json leakage_confounding_confirmed PASS",
+    "research/experiments/EXP-PHYSICS-34071626363/report.md Wikipedia non-leakage PMI=0.0 artifact, Python docs PMI=0.874 not significant, parent comparison"
+  ],
+  "recommended_action": "DESIGN a new Physics experiment on SPA/form-heavy sites where action.target_href != state_after.url by construction. Collect browser transitions on 2-3 JavaScript-heavy SPAs (e.g., React/Vue apps, form-heavy pages) to obtain a non-leakage subset with sufficient density and duplicate SA pairs. Test PMI on this denser non-leakage subset. Alternatively, test trajectory-level entropy rates as an aggregate measure that may be more robust to per-transition sparsity. Do NOT repeat URL-level PMI with unblinded actions on similar server-rendered sites. Do NOT rely on within-trajectory permutation when trajectory groups are mostly singletons — use cross-trajectory or state-stratified permutation instead."
+}

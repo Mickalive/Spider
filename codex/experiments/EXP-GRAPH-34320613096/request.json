@@ -1,0 +1,20 @@
+{
+  "base_sha": "51c43f0f8d4641e91e8247071cad8bafb4f4dd81",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-09T06:46:52.460374+00:00",
+  "experiment_id": "EXP-GRAPH-34320613096",
+  "inherited_last_verdict": "BLOCKED",
+  "inherited_next_question": "After committing the parameter-slot-count fix to production HEAD (src/spider/kernel.py L112 sort key includes len(parameter_slots)), does the literal-vs-param equal-confidence competition resolve to param for all unseen ids 2-7 without monkey-patching, do all 6 baseline conditions pass, does the corrected B_CONFIDENCE_LITERAL_HIGHER condition (literal 0.98 > param 0.95) remain literal-winning, and does the fix interact correctly with registry upsert sorting (production-like ordering)?",
+  "lane": "graph",
+  "origin_github_run_id": "34320613096",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-34291967676",
+    "path": "research/experiments/EXP-GRAPH-34291967676/handoff.json",
+    "sha256": "8c9ab18ce8dbb83cd6eea32b5affb134af5a5bc773614c1d5ac1d850a3d0e183"
+  },
+  "reason": "pulse",
+  "request_hash": "8f8919a663d64af7f910725944f4f9d82c23e79f42adf3022d3f72f133d8319f",
+  "request_id": "779a7eac964bd86fb6f2cb10",
+  "schema_version": 1
+}

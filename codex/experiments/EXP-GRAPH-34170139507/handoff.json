@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34170139507",
+  "lane": "graph",
+  "target_lane": "graph",
+  "next_question": "After committing the parameter-slot-count fix to production HEAD: does the literal-vs-param equal-confidence competition remain param-winning in committed HEAD (re-validating the original hazard post-commit), and does the fix generalize to real-web endpoints with DOM, auth, session state, and drift?",
+  "why_next": "Core hazard eliminated under HTTP execution (patch-only): param beats literal at equal confidence 0.95 for unseen id=7, HTTP 200, id=7 on jsonplaceholder. All baselines preserve. But fix is NOT committed to production HEAD — all measurements are monkey-patched. Two orthogonal gates remain: (1) commit fix to HEAD + re-validate core hazard in committed HEAD (without monkey-patching) to confirm production-readiness and all baselines including the corrected B_CONFIDENCE_LITERAL_HIGHER; (2) real-web endpoint testing with DOM, auth, session state, drift — the highest-upside generalization gap. The commit gate must happen first because real-web testing requires unfixed HEAD to be replaced. Separately: multi-slot positive control needs an endpoint supporting nested routes and reverse-order testing.",
+  "carry_forward": {
+    "established": [
+      "Core false-accept hazard elimination validated under HTTP execution with patch-only fix: in compete-equal condition (literal 0.95 vs param 0.95, literal registered before param, unseen id=7), param-fetch-posts wins, bound URL https://jsonplaceholder.typicode.com/posts/7, HTTP GET returns status 200 JSON id=7. Without fix, independent replay shows literal wins (/posts/1, id=1) — false accept reproduced. Audit V_CORE_HAZARD_HTTP_VALIDATED independently recomputed. Claim ceiling: monkey-patched fix, single unseen id=7, single intent fetch-post, single endpoint jsonplaceholder, preconditions={}, deterministic n=1.",
+      "All 6 baseline conditions preserve under HTTP execution with no regression from parent synthetic experiment: cold UNKNOWN, literal-only-original/unseen (/posts/1, id=1), param-only-original (/posts/1, id=1) and unseen (/posts/7, id=7), compete-param-higher (0.98 beats 0.95, /posts/7, id=7). Audit V_BASELINE_PRESERVATION_VERIFIED independently confirmed.",
+      "Param generalization to unseen id=7 confirmed via HTTP: param-only-unseen resolves to /posts/7, HTTP 200, id=7. Literal does NOT generalize: literal-only-unseen resolves to /posts/1 (literal universal matching), HTTP 200, id=1 (not 7). Both verified by HTTP response id field, not just URL binding.",
+      "Resolution-level multi-slot dominance confirmed: param-2slot [id,category] /posts/${id}/${category} beats param-fetch-posts [id] /posts/${id} at equal confidence 0.95. Bound URL /posts/1/tech correct. But HTTP validation impossible on jsonplaceholder (404) and control is order-dependent without fix (audit V_POS_CONTROL_NOT_DISCRIMINATING).",
+      "Fix NOT committed to production HEAD: src/spider/kernel.py L112 still candidates.sort(key=lambda m: m.confidence, reverse=True), sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61. All measurements are monkey-patched. Product promotion blocked until post-commit re-validation."
+    ],
+    "rejected": [
+      "Frozen decision rule HTTP-PARAM-INHERIT-SURVIVES is satisfied: UNSUPPORTED — multi-slot condition (5) requires HTTP 200 from /posts/1/tech which returns 404 (endpoint assumption error, not network failure). Frozen rule is unsatisfiable on this endpoint.",
+      "Multi-slot positive control discriminates fix: UNSUPPORTED — order-dependent without fix (HEAD [param-2slot,param-fetch-posts] → param-2slot by insertion; reversed → param-fetch-posts). Control tests insertion order, not fix, unless reverse-order condition added.",
+      "404 is a network failure: MISCLASSIFIED — HTTP 404 is a valid response indicating route absence, not a transient network outage. Producer correctly measured but misclassified in metrics.network_failure_count."
+    ],
+    "unknown": [
+      "Whether the fix survives commit to production HEAD and re-validation without monkey-patching — the first required gate",
+      "Whether B_CONFIDENCE_LITERAL_HIGHER (literal 0.98 vs param 0.95) remains literal-winning after fix commit — independent replay suggests yes but not measured with correct mechanism in any experiment",
+      "Whether param generalization holds across multiple unseen ids (beyond single id=7), multiple slot counts, template shapes, or intents beyond fetch-post",
+      "Whether fix generalizes to real-web endpoints with DOM, auth, session state, drift — jsonplaceholder is simple REST",
+      "Whether LLM-driven mechanism distillation ('learn on A' half of C-PARAM-INHERIT) works — no model calls in this experiment",
+      "Whether _matches discriminates with non-empty preconditions and _bind preserves type for full-match strings — all preconditions {} and only URL-embedded binding tested",
+      "Whether the commit gate (fix in HEAD + re-validation) changes baseline behavior — e.g., registry upsert sorting interaction"
+    ],
+    "do_not_assume": [
+      "Do not assume the fix is committed to production — HEAD src/spider/kernel.py L112 is unfixed. Product promotion requires Director-approved commit + post-commit re-validation.",
+      "Do not assume HTTP-PARAM-INHERIT-SURVIVES is satisfied — multi-slot criterion (5) unsatisfiable on jsonplaceholder. Decision is MEASUREMENT_INVALID.",
+      "Do not assume multi-slot dominance is validated under HTTP — resolution-level confirmed but HTTP 404 and order-dependency invalidate HTTP-level claim.",
+      "Do not assume 404 is a network failure — it is a valid HTTP response indicating the route does not exist (audit V_NETWORK_MISCLASSIFICATION).",
+      "Do not assume core hazard validation applies beyond patch-only, single id=7, single endpoint, single intent, preconditions={} — ceiling is narrow.",
+      "Do not assume the report interpretation 'Parameterized inheritance works end-to-end' is justified as a general statement — it overstates the ceiling (patch-only, single-id, single-endpoint).",
+      "Do not generalize to real-web endpoints, DOM, auth, session, drift, multiple intents, non-empty preconditions, LLM distillation, or _bind type preservation.",
+      "Do not assume baseline_pass 6/6 indicates production-readiness — measurements are monkey-patched, not post-commit."
+    ]
+  },
+  "dependencies": [
+    "src/spider/kernel.py L112 — fix candidates.sort(key=lambda m: (m.confidence, len(m.parameter_slots)), reverse=True) must be committed to HEAD before real-web testing or product promotion",
+    "src/spider/kernel.py L104-113 — resolve() and _matches() logic",
+    "src/spider/registry.py L35-38 — upsert sorting determines tie-break behavior in production",
+    "src/spider/models.py — Mechanism, Resolution dataclasses",
+    "research/experiments/EXP-GRAPH-33998605047/handoff.json (sha256 3bea416e31107aaaaeb156b49346268726ce6edf72da12f3371060c282e4c37d) — parent established synthetic hazard elimination, multi-slot dominance, template-only scope",
+    "research/experiments/EXP-GRAPH-33955869291/handoff.json — grandparent established multi-slot dominance and template-only scope limit",
+    "research/experiments/EXP-GRAPH-33816735314/handoff.json — great-grandparent established competition hazard resolved on synthetic substrate",
+    "research/claims/registry.json — C-PARAM-INHERIT status EXPERIMENTAL"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-34170139507/result.json",
+    "research/experiments/EXP-GRAPH-34170139507/audit.json",
+    "research/experiments/EXP-GRAPH-34170139507/raw_evidence.json",
+    "research/experiments/EXP-GRAPH-34170139507/derived_measurements.json",
+    "research/experiments/EXP-GRAPH-34170139507/report.md",
+    "research/experiments/EXP-GRAPH-34170139507/provenance.json",
+    "research/experiments/EXP-GRAPH-34170139507/spec.json",
+    "research/experiments/EXP-GRAPH-34170139507/prereg.md",
+    "research/experiments/EXP-GRAPH-34170139507/run_experiment.py",
+    "research/experiments/EXP-GRAPH-34170139507/freeze.json",
+    "src/spider/kernel.py L112 sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+    "src/spider/models.py sha256 338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78",
+    "src/spider/registry.py sha256 51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c",
+    "research/experiments/EXP-GRAPH-33998605047/handoff.json sha256 3bea416e31107aaaaeb156b49346268726ce6edf72da12f3371060c282e4c37d",
+    "research/claims/registry.json"
+  ],
+  "recommended_action": "First gate: commit the one-line fix to src/spider/kernel.py L112 (candidates.sort(key=lambda m: (m.confidence, len(m.parameter_slots)), reverse=True)) with Director approval. Second: re-validate in committed HEAD (no monkey-patching) with core literal-vs-param equal-confidence competition (ids 2..7) plus corrected B_CONFIDENCE_LITERAL_HIGHER (literal 0.98 vs param 0.95) to confirm fix works post-commit and all baselines pass. Third: advance to real-web endpoint testing with DOM, auth, session state, drift — the highest-upside generalization gap for product viability. Separately: replace multi-slot positive control with an endpoint supporting nested routes (mock server or different public API) and test reverse registry order to discriminate fix from insertion-order artifact. Expand unseen-identifier coverage beyond single id=7. Consider template-only and non-empty precondition edge cases. The LLM distillation half of C-PARAM-INHERIT ('learn on A') is lower priority than commit + real-web validation."
+}

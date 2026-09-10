@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34149195420",
+  "lane": "physics",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "url_only_pmi": 0.6933101309975662,
+    "url_title_pmi": 1.9701557636973992,
+    "url_title_form_pmi": 1.9701557636973992,
+    "url_only_permutation_p": 0.000999000999000999,
+    "url_title_permutation_p": 0.000999000999000999,
+    "url_title_form_permutation_p": 0.000999000999000999,
+    "url_only_effect_size_d": 72.66210399215007,
+    "url_title_effect_size_d": 80.268289554063,
+    "url_title_form_effect_size_d": 80.268289554063,
+    "positive_control_pmi": 1.9114573396484875,
+    "positive_control_p": 0.000999000999000999,
+    "null_control_shuffled_gt_observed": 0,
+    "null_control_n_permutations": 1000,
+    "bonferroni_threshold": 0.025,
+    "primary_n_transitions": 500,
+    "primary_n_trajectories": 25,
+    "primary_unique_states_url_only": 3,
+    "primary_unique_states_url_title": 8,
+    "primary_unique_sa_pairs_url_only": 12,
+    "primary_unique_sa_pairs_url_title": 32,
+    "positive_control_n_transitions": 200,
+    "non_leakage_violations": 0
+  },
+  "controls": {
+    "positive_control": {
+      "description": "Deterministic synthetic SPA with unique URLs (no ambiguity). PMI must be >= 0.5 bits with p < 0.001.",
+      "expected": "PMI >= 0.5 bits, permutation p < 0.001",
+      "observed": "PMI = 1.911 bits, p = 0.001",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-PHYSICS-34149195420/raw_results.json#positive_control"
+    },
+    "null_control": {
+      "description": "Cross-trajectory shuffled PMI must NOT be significantly > observed PMI (p > 0.05 for rejection of null).",
+      "expected": "shuffled PMI does not exceed observed PMI",
+      "observed": "0/1000 shuffled means exceed observed PMI (null_mean=0.122, observed=1.970)",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-PHYSICS-34149195420/raw_results.json#null_control"
+    },
+    "representation_comparison": {
+      "description": "URL-only PMI must be < richer representation PMI.",
+      "expected": "url_title PMI > url_only PMI",
+      "observed": "url_title PMI (1.970) > url_only PMI (0.693)",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-PHYSICS-34149195420/raw_results.json#decision_checks.richer_vs_url_only"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-34149195420/raw_results.json",
+      "sha256": "ef794187b6acb3b4d83c6fa3070bec85497c22933d3640f0c0827823a8eb97a9",
+      "role": "derived"
+    },
+    {
+      "path": "research/physics/information_theoretic/spa_pmi.py",
+      "sha256": "8d6db688de638c5e826fa6dd4c946d5d4de59348e03685996cc9bdfc70cf8eac",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-34149195420/spec.json",
+      "sha256": "dcd4698c7dddfb446e9b86484832846f184efde07007f79542926302049295d8",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-34149195420/prereg.md",
+      "sha256": "63810d581ddf29ba3d2abadd17f081ca090c5e0d9cc27af99fb0fc92a3c0b635",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-34149195420/request.json",
+      "sha256": "d21d7d22acb66d4f11314a8b972e483bc7d090c512548dff9a342563aa04afca",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-34149195420/freeze.json",
+      "sha256": "531a2d98e54541a155787a30187da04f3160a4b38acdafda0301ad4c8b79eccd",
+      "role": "fixture"
+    }
+  ],
+  "observations": [
+    "URL-only PMI = 0.693 bits is significantly > 0 (p=0.001, d=72.7). With only 3 unique URLs, the URL-only representation has 12 unique SA pairs out of 500 transitions. The deterministic transition structure creates redundancy: same (URL, action) pairs map to different next-states depending on which of the 3 URL-repeating states is the source. Despite this structural ambiguity, PMI is still significantly positive because the 3 URL-level states each have distinct marginal action/next-state distributions.",
+    "URL+title PMI = 1.970 bits is significantly > 0 (p=0.001, d=80.3). With 8 unique states (titles resolve the 3-URL ambiguity), each (URL, title, action) triple maps to exactly one next-state. The 32 unique SA pairs capture full deterministic structure. PMI increase from URL-only to URL+title is +1.277 bits (+184%), confirming that title information resolves URL-level structural ambiguity.",
+    "URL+title+form PMI = 1.970 bits, identical to URL+title. Form signals add zero marginal information because the 8 synthetic states already have unique (URL, title) pairs — form signals are redundant with title in this synthetic setting.",
+    "Positive control PMI = 1.911 bits (p=0.001) with unique URLs: pipeline correctly detects known deterministic structure. The positive control value (1.911) is slightly lower than URL+title on primary (1.970) because the positive control has 8 unique URLs while primary has 8 unique (URL, title) pairs — both achieve full state resolution.",
+    "Null control passes: 0/1000 shuffled means exceed observed PMI (shuffled mean = 0.122, observed = 1.970). Cross-trajectory shuffling completely destroys the action->next-state dependency, reducing PMI by 93.8%.",
+    "URL-only PMI = 0.693 is NOT zero despite the structural ambiguity. This is because the 3 URL-level states have different marginal distributions: state 'form' (N=178) has different action frequencies than 'dashboard' (N=209) and 'settings' (N=113). The URL-only representation captures this state-level heterogeneity, even though it cannot resolve within-URL structure. This is a key finding: URL-only PMI is not zero in this SPA-like setting because the URL-level states are not exchangeable.",
+    "The permutation test p-values for significance (P(shuffled >= observed) = 0.001) are identical across all three representations because the test uses Laplace-smoothed PMI on pooled triples, not per-representation pooled statistics. The effect sizes differ: URL-only d=72.7 vs URL+title d=80.3, reflecting the larger PMI gap."
+  ],
+  "validity_notes": [
+    "Synthetic data: all transitions are deterministic with known structure. This is a controlled validation, not a test on real web data. Positive result validates the PMI pipeline's ability to detect known structure in SPA-like data formats.",
+    "Laplace smoothing (alpha=1.0) affects PMI estimates. With ~15 transitions per (state, action) pair, smoothing has moderate effect. Results are comparable to prior experiments using the same alpha.",
+    "Form signals are redundant with titles in the synthetic data because titles uniquely identify states. In real web data, form signals may provide additional discriminating power when titles are ambiguous.",
+    "URL-only PMI is not zero because URL-level states have different marginal distributions (unequal state visitation frequencies). The structural ambiguity is partial, not complete: same-URL states share URLs but have different action-outcome distributions at the URL level.",
+    "The 3-URL design with 8 states creates a specific pattern of structural ambiguity: 3 states share 'form' URL, 3 share 'dashboard', 2 share 'settings'. The degree of within-URL heterogeneity depends on this design choice.",
+    "Cross-trajectory permutation preserves trajectory structure and marginal frequencies but breaks action->outcome dependency. With 25 trajectories of length 20, there are 25! possible trajectory assignments — ample permutations for inference."
+  ],
+  "unresolved": [
+    "Whether real SPA/form-heavy sites exhibit the same pattern: title-aware PMI significantly > URL-only PMI on non-leakage transitions. This controlled validation does not test real web dynamics.",
+    "Whether form signals provide marginal information beyond titles on real web pages where titles may be less discriminative than in this synthetic setting.",
+    "Whether the URL-only PMI > 0 finding (0.693 bits) generalizes to real SPA sites where URL-level states may be more homogeneous.",
+    "The correct expected PMI for deterministic transitions under different smoothing regimes (alpha=0.5, alpha=2.0) — current results are specific to alpha=1.0.",
+    "Whether trajectory-level entropy rates would detect structure that transition-level PMI misses in sparse regimes.",
+    "The causal mechanism of non-leakage transitions on real SPA sites: form submissions, JavaScript navigation, client-side routing, or other patterns."
+  ]
+}

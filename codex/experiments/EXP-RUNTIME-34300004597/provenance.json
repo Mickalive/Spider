@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-34300004597",
+  "github_run_id": "34300004597",
+  "base_sha": "6d09cccb8ecf02f8e752a3859ce47fa5d58876bd",
+  "environment": {
+    "python_version": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "platform": "linux",
+    "docker_available": true
+  },
+  "keycloak_config": {
+    "image": "quay.io/keycloak/keycloak:25.0",
+    "port": 18080,
+    "mode": "start-dev",
+    "realm": "spider-test",
+    "client_id": "spider-client",
+    "client_secret": "spider-secret-12345",
+    "admin_user": "admin",
+    "admin_password": "admin"
+  },
+  "fingerprint_config": {
+    "algorithm": "SHA-256(repr((status, tuple(sorted(filtered_headers.items())), body_sha256, redirect_chain)))",
+    "excluded_headers": [
+      "Date",
+      "Server",
+      "X-Request-Id"
+    ],
+    "python_repr": true
+  },
+  "sampling": {
+    "n_total": 40,
+    "n_states": 4,
+    "n_reps_per_state": 10,
+    "seed": 44,
+    "shuffle_order": true,
+    "inter_request_delay_ms": "0-200ms",
+    "synthetic_jitter": false
+  },
+  "artifacts": [
+    {
+      "path": "raw_observations.json",
+      "role": "raw",
+      "description": "40 HTTP observations with status, headers, body, fingerprint"
+    },
+    {
+      "path": "run_experiment.py",
+      "role": "code",
+      "description": "Frozen experiment execution script"
+    },
+    {
+      "path": "result.json",
+      "role": "derived",
+      "description": "Computed metrics, controls, and decision"
+    },
+    {
+      "path": "report.md",
+      "role": "derived",
+      "description": "Human-readable report with interpretation"
+    },
+    {
+      "path": "provenance.json",
+      "role": "derived",
+      "description": "This file"
+    }
+  ],
+  "data_sources": [
+    "raw_observations.json \u2014 primary evidence from Keycloak HTTP responses",
+    "research/experiments/EXP-RUNTIME-34054515149/handoff.json \u2014 parent experiment carry_forward",
+    "research/experiments/EXP-RUNTIME-34054515149/result.json \u2014 parent metrics for comparison"
+  ],
+  "reproduction_commands": [
+    "python3 run_experiment.py  # runs Keycloak, collects observations, computes metrics",
+    "python3 analyze_observations.py  # analyzes existing raw_observations.json"
+  ],
+  "known_limitations": [
+    "repr(vector) is Python-version-dependent \u2014 fingerprints not reproducible across Python versions",
+    "Keycloak dev mode may differ from production deployment",
+    "Only /userinfo endpoint tested",
+    "N=40 limited statistical power for subtle discrimination"
+  ]
+}

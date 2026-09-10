@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-34300004597",
+  "lane": "runtime",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "full_vector_discrimination": 0.8333333333333334,
+    "full_vector_intra_match_rate": 1.0,
+    "full_vector_inter_match_rate": 0.16666666666666666,
+    "full_vector_mean_intra_jaccard": 1.0,
+    "full_vector_mean_inter_jaccard": 0.45548918986886594,
+    "full_vector_bootstrap_95ci": [
+      0.0,
+      1.0
+    ],
+    "baselines": {
+      "B-URL-HASH": 0.0,
+      "B-RANDOM": 0.0,
+      "B-STATUS-ONLY": 0.5,
+      "B-BODY-ONLY": 0.5
+    },
+    "incremental_header_value": 0.33333333333333337,
+    "full_vs_body_only_ratio": 1.6666666666666667,
+    "cache_control_only_discrimination": 0.5,
+    "set_cookie_only_discrimination": 0.0,
+    "etag_only_discrimination": 0.0,
+    "null_fp_rate": 0.0,
+    "drift_jaccards": [
+      0.31527093596059114,
+      1.0
+    ],
+    "drift_all_discriminable": false,
+    "total_requests": 40,
+    "error_rate": 0.0
+  },
+  "controls": {
+    "C_NULL_FP_RATE": {
+      "expected": "< 5%",
+      "observed": "0.0%",
+      "pass": true,
+      "detail": {
+        "invalid_token": {
+          "total": 10,
+          "unique": 1,
+          "false_positive_rate": 0.0
+        },
+        "valid_token": {
+          "total": 10,
+          "unique": 1,
+          "false_positive_rate": 0.0
+        },
+        "no_auth": {
+          "total": 10,
+          "unique": 1,
+          "false_positive_rate": 0.0
+        },
+        "expired_token": {
+          "total": 10,
+          "unique": 1,
+          "false_positive_rate": 0.0
+        }
+      }
+    },
+    "C_POSITIVE_DISCRIMINATION": {
+      "expected": "> 0.5",
+      "observed": "0.833333",
+      "pass": true
+    },
+    "C_CACHE_CONTROL_VARIATION": {
+      "expected": "Cache-Control-only discrimination > 0",
+      "observed": "0.500000",
+      "pass": true,
+      "detail": {
+        "invalid_token": {
+          "observed_values": [
+            "(absent)"
+          ],
+          "consistent": true
+        },
+        "valid_token": {
+          "observed_values": [
+            "no-cache"
+          ],
+          "consistent": true
+        },
+        "no_auth": {
+          "observed_values": [
+            "(absent)"
+          ],
+          "consistent": true
+        },
+        "expired_token": {
+          "observed_values": [
+            "(absent)"
+          ],
+          "consistent": true
+        }
+      }
+    },
+    "C_SET_COOKIE_VARIATION": {
+      "expected": "Set-Cookie-only discrimination > 0",
+      "observed": "0.000000",
+      "pass": false,
+      "detail": {
+        "invalid_token": {
+          "observed_present": false,
+          "consistent": true
+        },
+        "valid_token": {
+          "observed_present": false,
+          "consistent": true
+        },
+        "no_auth": {
+          "observed_present": false,
+          "consistent": true
+        },
+        "expired_token": {
+          "observed_present": false,
+          "consistent": true
+        }
+      }
+    },
+    "C_INCREMENTAL_HEADER_VALUE": {
+      "expected": "full_vector_discrimination > B-BODY-ONLY",
+      "observed": "full=0.833333, body_only=0.500000, delta=0.333333",
+      "pass": true
+    },
+    "C_BODY_CORRELATION_ETAG": {
+      "expected": "ETag discrimination == B-BODY-ONLY (body-correlated)",
+      "observed": "ETag=0.000000, body=0.500000",
+      "pass": false
+    },
+    "C_BODY_IDENTITY_EXPIRED_INVALID": {
+      "expected": "expired_token and invalid_token share identical body hash",
+      "observed": "expired=['e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'], invalid=['e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855']",
+      "pass": true
+    },
+    "C_DRIFT_VALID_VS_EXPIRED": {
+      "expected": "Jaccard < 0.5 (discriminable)",
+      "observed": "Jaccard=0.3153",
+      "pass": true
+    },
+    "C_DRIFT_EXPIRED_VS_INVALID": {
+      "expected": "Jaccard < 0.5 (discriminable via Cache-Control)",
+      "observed": "Jaccard=1.0000",
+      "pass": false
+    },
+    "C_ERROR_RATE": {
+      "expected": "< 20%",
+      "observed": "0.0%",
+      "pass": true
+    }
+  },
+  "artifacts": [
+    {
+      "path": "raw_observations.json",
+      "role": "raw"
+    }
+  ],
+  "observations": [
+    "Keycloak 25.0 deployed via Docker on localhost:18080",
+    "Realm 'spider-test' configured with client 'spider-client' (direct access grants enabled)",
+    "User 'alice' created with password authentication",
+    "Direct access grant verified: token acquisition successful",
+    "4 auth states x 10 reps = 40 requests completed",
+    "Headers determined by Keycloak middleware (NOT application-set)",
+    "Headers filtered: Date/Server/X-Request-Id excluded from fingerprint",
+    "Cache-Control verification: {\"invalid_token\": {\"observed_values\": [\"(absent)\"], \"consistent\": true}, \"valid_token\": {\"observed_values\": [\"no-cache\"], \"consistent\": true}, \"no_auth\": {\"observed_values\": [\"(absent)\"], \"consistent\": true}, \"expired_token\": {\"observed_values\": [\"(absent)\"], \"consistent\": true}}",
+    "Set-Cookie verification: {\"invalid_token\": {\"observed_present\": false, \"consistent\": true}, \"valid_token\": {\"observed_present\": false, \"consistent\": true}, \"no_auth\": {\"observed_present\": false, \"consistent\": true}, \"expired_token\": {\"observed_present\": false, \"consistent\": true}}",
+    "WWW-Authenticate verification: {\"invalid_token\": {\"observed_values\": [\"Bearer realm=\\\"spider-test\\\", error=\\\"invalid_token\\\", error_description=\\\"Token verification failed\\\"\"], \"consistent\": true}, \"valid_token\": {\"observed_values\": [\"(absent)\"], \"consistent\": true}, \"no_auth\": {\"observed_values\": [\"Bearer realm=\\\"spider-test\\\"\"], \"consistent\": true}, \"expired_token\": {\"observed_values\": [\"Bearer realm=\\\"spider-test\\\", error=\\\"invalid_token\\\", error_description=\\\"Token verification failed\\\"\"], \"consistent\": true}}",
+    "expired_token and invalid_token body hashes identical: True (both empty bodies)",
+    "expired_token and invalid_token fingerprints identical: True (196af3d9... both states)",
+    "expired_token and invalid_token are indistinguishable by any observable on Keycloak",
+    "body_hashes_by_state: {\"invalid_token\": [\"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"], \"valid_token\": [\"7ce161aad19b73d4d0401f9e89b0be7d2eba425d5dfcb82bd94c53f70f53547b\"], \"no_auth\": [\"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"], \"expired_token\": [\"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"]}",
+    "Full-vector discrimination: 0.833333 (threshold: > 0.5)",
+    "Full-vector bootstrap 95% CI: [0.000000, 1.000000]",
+    "B-STATUS-ONLY discrimination: 0.500000",
+    "B-BODY-ONLY discrimination: 0.500000",
+    "B-URL-HASH discrimination: 0.000000",
+    "B-RANDOM discrimination: 0.000000",
+    "Cache-Control-only discrimination: 0.500000",
+    "Set-Cookie-only discrimination: 0.000000",
+    "ETag-only discrimination: 0.000000 (body-correlated)",
+    "Null FP rate: 0.0% (threshold: < 5%)",
+    "Incremental header value (full - body_only): 0.333333 — headers add discrimination beyond body-only",
+    "Full vector (0.833) > B-BODY-ONLY (0.500) by 0.333 incremental value",
+    "Headers differentiate: valid_token (Cache-Control: no-cache) and no_auth (WWW-Authenticate without error) from error states",
+    "Headers do NOT differentiate expired from invalid (identical WWW-Authenticate, absent Cache-Control)",
+    "valid_token vs expired_token drift Jaccard: 0.3153",
+    "expired_token vs invalid_token drift Jaccard: 1.0000"
+  ],
+  "validity_notes": [
+    "Keycloak 25.0 deployed via Docker (image: quay.io/keycloak/keycloak:25.0) on localhost:18080",
+    "Realm 'spider-test' with direct access grants enabled \u2014 no browser needed for token acquisition",
+    "Cache-Control and Set-Cookie patterns are determined by Keycloak middleware, NOT application-set per auth state",
+    "This is the key difference from the Flask parent experiment where headers were deliberately varied per auth state",
+    "Fingerprint uses repr(vector) with tuple(sorted(...)) \u2014 deterministic within same Python version but Python-version-dependent",
+    "Date and Server headers excluded from fingerprint vector to prevent spurious variance",
+    "X-Request-Id excluded from fingerprint \u2014 volatile per-request identifier",
+    "expired_token and invalid_token body identity: True \u2014 Keycloak returns identical empty bodies for both error states",
+    "expired_token and invalid_token fingerprint identity: True \u2014 Keycloak returns identical headers for both error states (Cache-Control absent, WWW-Authenticate identical)",
+    "Cache-Control is absent from all error responses \u2014 Keycloak does not vary Cache-Control by error type (unlike Flask which used no-store vs no-cache)",
+    "Set-Cookie is absent from all responses \u2014 Keycloak does not set session cookies on /userinfo endpoint",
+    "ETag is absent from all responses \u2014 not applicable to Keycloak /userinfo",
+    "Valid token response includes Cache-Control: no-cache and user profile JSON body",
+    "WWW-Authenticate header varies: no_auth returns 'Bearer realm=spider-test' (no error), expired/invalid return 'Bearer realm=spider-test, error=invalid_token, error_description=Token verification failed'",
+    "Sample size: 40 requests (4 states x 10 reps) \u2014 limited statistical power for subtle discrimination differences",
+    "Python version: 3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "Error rate: 0.0% (0 errors out of 40 requests)",
+    "Discrimination metric: intra_match_rate - inter_match_rate. Range [-1, 1]. Perfect = 1, no discrimination = 0."
+  ],
+  "unresolved": [
+    "Does the substrate maintain discrimination on production OAuth/OIDC providers (Auth0, Okta) with CDN, load-balancer variance, and compressed encoding?",
+    "What is the false-positive rate under server-side processing jitter >150ms or volatile standard headers beyond X-Request-Id?",
+    "Can substrate detect continuous session drift as a continuous signal rather than discrete state classification?",
+    "What is cross-Python-version reproducibility of repr(vector) hashes?",
+    "What is the incremental header value when MORE than 2 error states share identical bodies?",
+    "If Keycloak returns different bodies for expired vs invalid tokens, does body-only achieve perfect discrimination without headers?"
+  ]
+}

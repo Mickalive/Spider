@@ -1,0 +1,29 @@
+{
+  "experiment_id": "EXP-RUNTIME-34439061845",
+  "lane": "runtime",
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "Does the WWW-Authenticate header discrimination pattern observed on Keycloak /userinfo — where no_auth returns 'Bearer realm=...' (no error fields) while error states return 'Bearer realm=..., error=invalid_token, error_description=...' — transfer to other Keycloak endpoints (/token with password grant, /token with client_credentials grant, /introspect), or is it endpoint-specific /userinfo behavior?",
+  "hypothesis": "When the same 4 auth states (no_auth, valid_token, expired_token, invalid_token) are tested against multiple Keycloak endpoints, the WWW-Authenticate header discrimination pattern (no_auth vs error states) transfers to at least 2 of the 3 additional endpoints. Specifically: (1) WWW-Authenticate-only discrimination > 0 on at least 2 of 3 additional endpoints; (2) full-vector discrimination > 0.5 on at least 2 of 3 additional endpoints; (3) expired_token and invalid_token remain indistinguishable on all endpoints. This demonstrates that the discrimination mechanism is a Keycloak-level behavior, not an endpoint-specific artifact.",
+  "falsifier": "WWW-Authenticate-only discrimination == 0 on ALL 3 additional endpoints (pattern does not transfer), OR full-vector discrimination <= 0.5 on ALL 3 additional endpoints (no discrimination), OR null FP > 5% (measurement instability), OR Keycloak deployment fails (infrastructure failure, not scientific falsification)",
+  "baselines": [
+    "B-STATUS-ONLY: fingerprint from HTTP status code only (expected: ~0.5 on /token endpoints where valid=200 errors=401; 0.0 on /introspect where all states may share status)",
+    "B-BODY-ONLY: fingerprint from response body hash only (expected: varies by endpoint — /token returns JSON with access_token for valid state; /introspect returns JSON with active:true/false)",
+    "B-URL-HASH: fingerprint from URL hash only (expected: 0.0, all requests to same endpoint within each test block)",
+    "B-RANDOM: random 256-bit fingerprints (expected: ~0.0)"
+  ],
+  "positive_control": "WWW-Authenticate-only discrimination > 0 on the /userinfo endpoint: this replicates the parent result (EXP-RUNTIME-34300004597) and verifies the measurement pipeline can detect the known Keycloak pattern. If this fails, the Keycloak deployment or pipeline is broken.",
+  "null_control": "B-RANDOM discrimination ~ 0.0: random fingerprints should not achieve meaningful discrimination. Verifies measurement pipeline stability.",
+  "measurement_validity": [
+    "Same Keycloak 25.0 Docker deployment as parent (image: quay.io/keycloak/keycloak:25.0, port 18080, realm spider-test, client spider-client)",
+    "Headers filtered: Date/Server/X-Request-Id excluded from fingerprint (inherited from parent)",
+    "Deterministic SHA-256(repr((status, tuple(sorted(filtered_headers.items())), body_sha256, redirect_chain))) on Python 3.12.14",
+    "N=40 per endpoint (4 states x 10 requests), seed 44 for comparability with parent",
+    "Natural network jitter (no synthetic jitter applied)",
+    "Test endpoints: /userinfo (GET), /token (POST password grant), /token (POST client_credentials grant), /introspect (POST)"
+  ],
+  "decision_rule": "If WWW-Authenticate-only discrimination > 0 on at least 2 of 3 additional endpoints (excluding /userinfo positive control), then verdict = SURVIVES_CURRENT_TEST for C-MEAS-VALID. If WWW-Authenticate-only discrimination == 0 on all 3 additional endpoints, verdict = FALSIFIED-IN-SETTING (pattern is /userinfo-specific). If full-vector discrimination <= 0.5 on all endpoints, verdict = FALSIFIED-IN-SETTING. If null FP > 5%, verdict = MEASUREMENT_INVALID. If Keycloak deployment fails, verdict = BLOCKED.",
+  "product_consequence_positive": "WWW-Authenticate discrimination is a Keycloak-level behavior that transfers across endpoints. The full-vector product recommendation (using WWW-Authenticate as the discriminating signal) is not endpoint-specific. External agents using SPIDER with Keycloak can rely on WWW-Authenticate for auth-state discrimination regardless of which endpoint they observe.",
+  "product_consequence_negative": "WWW-Authenticate discrimination is endpoint-specific to /userinfo. The full-vector product recommendation does not transfer across Keycloak endpoints. Product architecture should use body-only observation (which already achieves discrimination on /token via access_token presence) or restrict full-vector to /userinfo only.",
+  "estimated_cost": "Medium: requires same Keycloak Docker deployment as parent (~2-5 min startup), realm already configured, 4 endpoints x 4 states x 10 reps = 160 HTTP requests. No model calls, no browser automation. Total wall-clock ~15-20 min.",
+  "expected_information_gain": "Very high: resolves whether the WWW-Authenticate mechanism is endpoint-specific (limiting product applicability) or Keycloak-level (generalizing product recommendation). This is the most discriminating test available without external IdP setup. A positive result broadens the product recommendation; a negative result constrains it to /userinfo only."
+}

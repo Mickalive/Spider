@@ -1,0 +1,20 @@
+{
+  "base_sha": "a9913eebffcb00612a1cc954158b9c8869f90041",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-10T00:10:00.446302+00:00",
+  "experiment_id": "EXP-PRODUCT-34420092879",
+  "inherited_last_verdict": "C2-FIX-FALSIFIED",
+  "inherited_next_question": "Can C2 be resolved without regressions by either (a) reverting to bind-time double-prefix detection in _bind() which handled both short and full values transparently, OR (b) implementing a hybrid: distill-time detection produces shorter templates but _bind() retains fallback prefix detection for callers passing short values, such that all 10 conditions pass AND the product API supports both calling conventions?",
+  "lane": "product",
+  "origin_github_run_id": "34420092879",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-34282620394",
+    "path": "research/experiments/EXP-PRODUCT-34282620394/handoff.json",
+    "sha256": "da36422c7bc4db61ac01783ebba08de0770998a0004462ebcfc2308277f6c155"
+  },
+  "reason": "pulse",
+  "request_hash": "894d8ffea25dadb4ab84f25f040b2fd7f4b08aafa7d2e87318f21312dc92e956",
+  "request_id": "7ba2cccd53956c9ad4460afc",
+  "schema_version": 1
+}

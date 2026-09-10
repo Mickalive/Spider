@@ -1,0 +1,32 @@
+{
+  "experiment_id": "EXP-GRAPH-34176416673",
+  "lane": "graph",
+  "claim_ids": ["C-PARAM-INHERIT"],
+  "question": "Does the parameter-slot-count fix survive commitment to production HEAD and re-validation without monkey-patching, and does param generalization hold across multiple unseen identifiers in committed HEAD?",
+  "hypothesis": "When the parameter-slot-count fix (candidates.sort(key=lambda m: (m.confidence, len(m.parameter_slots)), reverse=True)) is committed to production HEAD src/spider/kernel.py L112, the core false-accept hazard elimination persists: in compete-equal conditions (literal 0.95 vs param 0.95, literal registered before param), param beats literal for unseen identifiers. Additionally, param generalization holds across multiple unseen identifiers (ids 2-7) in committed HEAD without monkey-patching.",
+  "falsifier": "The fix does not survive commitment (sort key reverts or changes), OR param loses to literal in compete-equal conditions for any unseen id (2-7), OR any baseline regresses in committed HEAD vs monkey-patched behavior, OR param does not generalize to unseen ids in committed HEAD.",
+  "baselines": [
+    "B_COLD: empty registry returns UNKNOWN (no HTTP)",
+    "B_LITERAL_ONLY_ORIG: literal-only with seen id returns EXECUTABLE, HTTP 200, correct id",
+    "B_LITERAL_ONLY_UNSEEN: literal-only with unseen id returns EXECUTABLE, HTTP 200, but wrong id (literal does not generalize)",
+    "B_PARAM_ONLY_ORIG: param-only with seen id returns EXECUTABLE, HTTP 200, correct id",
+    "B_PARAM_ONLY_UNSEEN: param-only with unseen id returns EXECUTABLE, HTTP 200, correct id (param generalizes)",
+    "B_CONFIDENCE_PARAM_HIGHER: param with higher confidence (0.98) beats literal (0.95), HTTP 200, correct id"
+  ],
+  "positive_control": "C_COMPETE_EQUAL: compete-equal condition (literal 0.95 vs param 0.95, literal registered before param) resolves to param for unseen ids 2-7 in committed HEAD without monkey-patching. This verifies the fix works in production code.",
+  "null_control": "C_COMPETE_EQUAL_HEAD: without fix (unfixed HEAD), compete-equal resolves to literal (false accept). This verifies the hazard exists without the fix.",
+  "measurement_validity": [
+    "Fix verification: sha256 of src/spider/kernel.py L112 must match expected fixed line",
+    "No monkey-patching: all measurements use committed HEAD code only",
+    "Fresh kernel instances per condition: no cross-contamination",
+    "Deterministic: no model calls, no RNG, no sampling",
+    "HTTP execution against jsonplaceholder.typicode.com with 5-second timeout",
+    "Multiple unseen identifiers: ids 2-7 (6 unseen ids, not just single id=7)",
+    "Registry insertion order controlled: literal registered before param in shared-equal conditions"
+  ],
+  "decision_rule": "SURVIVES_POST_COMMIT if ALL of: (1) Fix is committed: src/spider/kernel.py L112 matches expected fixed line (sha256 verified); (2) Core hazard eliminated: compete-equal resolves to param for ALL unseen ids 2-7; (3) All 6 baselines pass with no regression; (4) No network failures (all HTTP 200 for valid endpoints); (5) No exceptions. FALSIFIED_POST_COMMIT if ANY of: (1) Fix not committed or reverted; (2) Param loses to literal in compete-equal for any id; (3) Any baseline regresses. MEASUREMENT_INVALID if: (1) jsonplaceholder unreachable; (2) Pipeline errors; (3) Fix committed but sort key does not match expected.",
+  "product_consequence_positive": "Fix survives commitment to production HEAD. Claim ceiling upgrades from monkey-patched to committed HEAD. Product promotion unblocked for next gate (real-web testing). Param inheritance validated on committed code for multiple unseen ids.",
+  "product_consequence_negative": "Fix does not survive commitment or regresses in committed HEAD. Product promotion blocked. Root cause analysis required before retry.",
+  "estimated_cost": "Very low: no model calls, no browser interaction, deterministic point comparisons. ~12 HTTP requests (6 unseen ids x 2 conditions + baselines). 5-second timeout per request.",
+  "expected_information_gain": "High: directly tests the first required gate from parent handoff. A positive result upgrades claim ceiling and unblocks product promotion. A negative result blocks promotion and requires root cause analysis. Changes the product decision from blocked to unblocked (or vice versa)."
+}

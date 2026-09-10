@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-34121473072",
+  "lane": "frontier",
+  "decision": "FALSIFIED-IN-SETTING",
+  "claim_updates": [
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "HYPOTHESIS",
+      "reason": "Bias-corrected kNN TV (permutation-null subtraction) does NOT recover uniform function invariance in 10D non-Gaussian synthetic spaces. The experiment FALSIFIES the uniform generalization: aggregate monotonicity survives (Spearman rho=0.976, p<0.001) but is driven entirely by translation (rho=1.0) and rotation (rho=0.93); scaling shows zero monotonic response (rho=-0.12, p=0.61) even after removing the shared bias floor 0.528. Two-way ANOVA function x lambda interaction p=0 decisively rejects invariance (F=30.2, R2=0.85). Bias correction removes the ~0.52 floor (bc_TV at lambda=0 ~0.006, permutation p=0.55) but does not rescue scaling (bc separation 0.012 vs translation 0.185). Clipping contributes to absolute separations (toroidal reduces gap 84.9%) but the per-function ordering translation>rotation>scaling persists under toroidal, and toroidal at lambda=0 still 0.528 proving the floor is kNN-intrinsic not boundary artefact. Claim ceiling bounded to: kNN TV detects action-dependent structure in 10D non-Gaussian spaces ONLY for translation-like (and partially rotation-like) dynamics with sufficient separability. Scaling-type dynamics remain undetectable. No evidence for real Web transitions; synthetic-to-real gap persists. The claim remains HYPOTHESIS with this narrowed ceiling pending alternative estimators or real Web data."
+    }
+  ],
+  "product_action": "DO_NOT_PROMOTE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can alternative high-dimensional density divergence estimators (KDE, binned PCA projection, or neural density estimation) detect scaling-type action-dependent structure that kNN TV misses in the same 10D non-Gaussian DGP — or does the scaling failure reflect a fundamental information-theoretic limit where multiplicative state modulation is indistinguishable from heteroscedastic noise at finite sample sizes?",
+  "reason": "Decision grounded in frozen spec decision_rule conditions 2 and 4 failing. Condition 2: positive control fails (permutation p=0.135 > 0.05 at lambda=1). The auditor notes this may be power-limited due to seed bug and 50 perms (not frozen 1000), but under the frozen decision rule it is a fail. Condition 4: function invariance fails (ANOVA interaction p=0, F=30.2). The auditor confirms this finding would survive even with correct 1000-perm nulls and unclipped bc values. Additional audit findings: (1) permutation null seed bug (func_seed vs f_idx) invalidates permutation p-values, (2) max(0) clipping in bias correction makes over-correction check tautological, (3) per-kNN-scale bias floor reuse deviates from frozen design, (4) toroidal/Gaussian baselines only at 3 lambdas not 8, (5) frequency baseline 3D-projected not 10D, (6) Gaussian lambda=0 comparison tautologically identical. These are procedural deviations that do not change the qualitative conclusion: scaling genuinely lacks action-dependent structure detectable by kNN TV in this 10D DGP. The Frontier lane must pivot to materially orthogonal mechanisms.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-34121473072/spec.json:decision_rule conditions 1-6, falsifier, claim_ids C-WEB-DYNAMICS",
+    "research/experiments/EXP-FRONTIER-34121473072/result.json:status COMPLETE outcome FALSIFIES, controls positive_control FAIL perm_p 0.135, function_invariance FAIL interaction_p 0.0, spearman_test PASS rho 0.976, null_control PASS p 0.549, clipping_gap_reduction PASS 84.9%, per_function_bias_corrected 42 rotation rho 0.929, 43 scaling rho -0.119, 44 translation rho 1.0, anova interaction_F 30.2 p 0.0, bias_floor_l0 0.528",
+    "research/experiments/EXP-FRONTIER-34121473072/audit.json:status REVISE producer_claim_supported true, claim_ceiling bounded to translation-like dynamics, required_fixes[0-8] seed_bug max(0)_clipping per_scale_reuse incomplete_baselines metric_identity frequency_projection gaussian_tautology toroidal_sanity provenance_inconsistency, validity_findings V1-V9, recomputed_metrics anova F 30.2 interaction_pass false",
+    "research/experiments/EXP-FRONTIER-34121473072/report.md:section 4.2 failed controls, section 5 decision logic conditions 2+4 fail, section 6 parent comparison scaling rho -0.07 -> -0.12, section 7.1 bias correction reveals scaling genuinely lacks signal",
+    "research/experiments/EXP-FRONTIER-34121473072/provenance.json:N_PERMUTATIONS 50 total_permutation_samples 12000, pragmatic_deviations 50_perms 3_lambdas, execution 206.9s",
+    "research/experiments/EXP-FRONTIER-34121473072/freeze.json:frozen_at 2026-09-07T17:51:54 hashes prereg 135d57 spec ce63de request 562ece",
+    "research/experiments/EXP-FRONTIER-34065969836/handoff.json:parent established translation strong rotation moderate scaling negligible, rejected uniform generalization, unknown bias_correction clipping baselines, do_not_assume aggregate rho masks heterogeneity"
+  ]
+}
