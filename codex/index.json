@@ -1136,6 +1136,31 @@
         "verdict.json": "660be2af5c84faf3a1d077409aab30aa85f8d0a277ef23ee2b0baf524aff9c97",
         "handoff.json": "7b28391976ee38f749fd1283549e41e5eafbe2e07671138ed99cc3647ffc3956"
       }
+    },
+    "EXP-RUNTIME-34300004597": {
+      "lane": "runtime",
+      "request_id": "f3544e0f5b4499fcbe45d5a4",
+      "created_at": "2026-09-09T01:38:34.021286+00:00",
+      "claim_ids": [
+        "C-MEAS-VALID"
+      ],
+      "question": "Does the HTTP fingerprint substrate maintain full-vector discrimination and incremental header value on a real OAuth/OIDC identity provider (self-hosted Keycloak) where Cache-Control and Set-Cookie patterns are determined by the IdP middleware rather than application-set per auth state?",
+      "audit_status": "REVISE",
+      "decision": "SURVIVES_CURRENT_TEST \u2014 C-MEAS-VALID survives with severely narrowed ceiling. All four frozen decision criteria pass: full_vector_discrimination 0.833 > B-BODY-ONLY 0.5 (incremental header value 0.333), full_vector_discrimination 0.833 > 0.5, null FP 0.0% < 5%, Cache-Control-only discrimination 0.5 > 0. However, the audit corrects the producer's mechanistic interpretation: (1) Cache-Control variation is valid_token no-cache vs absent on ALL errors \u2014 it does NOT vary by error type (no-store vs no-cache as hypothesized), confirming V4 ENGINEERED-HEADER-TAUTOLOGY for the critical expired/invalid pair; (2) the true discriminating header is WWW-Authenticate (discrimination 0.833 == full vector), not Cache-Control; (3) Set-Cookie adds zero (absent on all Keycloak /userinfo responses); (4) expired_token and invalid_token remain indistinguishable (identical bodies, headers, fingerprint, Jaccard 1.0); (5) body baseline weakened (B-BODY-ONLY 0.5 vs parent 0.833) inflates apparent incremental value; (6) expired token is not truly Keycloak-issued (V6 state construction leakage). Claim ceiling bounded to Keycloak 25.0 start-dev localhost:18080 /userinfo, 3 distinct fingerprints (not 4), full vector via WWW-Authenticate not Cache-Control error-type variation. Does NOT extend to production OAuth/OIDC, CDN/load-balancer, /token endpoint, or cross-Python-version reproducibility.",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/runtime",
+      "hashes": {
+        "request.json": "14e43f720e1fba24c7432e375320a3883e153529960e4a178a3480d777ca7049",
+        "spec.json": "521e71ca55ab3af13b61e312002b10ae409048f3f9ecc4561dd15b53bdd499c8",
+        "prereg.md": "5571e75f91dbe4a548b16b8cf7f1dce121f0fdbddc9763de192b4763a62719c3",
+        "freeze.json": "141acece079620189c45962abba472b25117aada9b40ff1e295aa4047c715bd5",
+        "result.json": "2343cf417cb00c4938bfe4c39bebf4706429690f1bb6e91619ab852c0e528ffa",
+        "report.md": "d77fbadfa2d20305793d2e8b5de6e74113cdf90f48e0f5b42b285de785ced04f",
+        "provenance.json": "26553200e0af2be9dfbb49246f0e35ba98e9e8b04085f09ca83fa85454924c01",
+        "audit.json": "fffdb1ce330f98e0098d813926d122499a181231c8fe6569267f2fceeecaca06",
+        "verdict.json": "084a410506135be963291b93f2bda27a3f183872c2c4bdbcb57a06271aeaab70",
+        "handoff.json": "794ba636ec7e9502020b2f255b330ef1e30d8660c27b1b8195844014a76d4839"
+      }
     }
   }
 }

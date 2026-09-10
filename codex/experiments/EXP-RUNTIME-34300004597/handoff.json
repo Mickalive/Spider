@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-34300004597",
+  "lane": "runtime",
+  "target_lane": "runtime",
+  "next_question": "Does WWW-Authenticate header variation — the true discriminating signal on Keycloak (no_auth 'Bearer realm' vs error 'Bearer realm, error=invalid_token') — transfer to other OAuth/OIDC providers (Auth0, Okta), or is it Keycloak-specific /userinfo behavior? This determines whether the full-vector product recommendation can generalize beyond Keycloak or whether body-only observation is the robust architecture.",
+  "why_next": "This experiment revealed that the incremental header value on Keycloak is driven entirely by WWW-Authenticate, not by the Cache-Control/Set-Cookie mechanism hypothesized in the product architecture. V4 tautology is confirmed for Cache-Control error-type variation (no-store vs no-cache does not occur on Keycloak). The critical expired/invalid pair remains indistinguishable. For the product to adopt full-vector architecture, WWW-Authenticate variation must transfer to other IdPs — otherwise body-only observation (which already achieves 0.5 discrimination, valid vs error) is the robust choice. Testing a materially different IdP (Auth0 or Okta) with different middleware and CDN infrastructure directly answers this.",
+  "carry_forward": {
+    "established": [
+      "On Keycloak 25.0 start-dev localhost:18080 /userinfo, full-vector discrimination 0.833 exceeds B-BODY-ONLY 0.5 by incremental 0.333, producing 3 distinct fingerprints across 4 states (valid_token 5e7fae, no_auth 61c534, expired_token==invalid_token 196af3). Headers add value over body-only (result.json metrics, audit V2 recomputed exact match).",
+      "WWW-Authenticate is the true discriminating header (discrimination 0.833 == full vector): no_auth returns 'Bearer realm=spider-test' (no error fields), expired/invalid return 'Bearer realm=spider-test, error=invalid_token, error_description=Token verification failed', valid_token returns 200 with no WWW-Authenticate. This is the mechanism driving incremental value (audit V5, recomputed WWW-Authenticate-only 0.833).",
+      "Cache-Control varies but only as valid_token no-cache vs absent on ALL errors (discrimination 0.5, same grouping as body). Cache-Control does NOT vary by error type (no-store vs no-cache) — V4 tautology is CONFIRMED on this IdP for the critical pair (audit V4, result.json C_CACHE_CONTROL_VARIATION detail).",
+      "Set-Cookie is absent from all 40 Keycloak /userinfo responses (discrimination 0.0). Set-Cookie adds zero information (result.json C_SET_COOKIE_VARIATION FAIL, audit baseline_findings Set-Cookie FAIL).",
+      "expired_token and invalid_token are indistinguishable by ANY observable on Keycloak: identical empty bodies (e3b0c442...), identical headers (Cache-Control absent, WWW-Authenticate identical error=invalid_token), identical status 401, identical fingerprint 196af3d9, Jaccard 1.0 (audit V3, result.json C_DRIFT_EXPIRED_VS_INVALID FAIL).",
+      "Null FP rate 0.0% < 5% under natural network jitter (no synthetic jitter). Per-state 10/10 identical fingerprints, 0% false positives (result.json C_NULL_FP_RATE, C_ERROR_RATE).",
+      "Three mandatory prior fixes preserved: sorted-tuple fingerprint, Date/Server/X-Request-Id exclusion, competitive baselines (B-STATUS-ONLY 0.5, B-BODY-ONLY 0.5, B-URL-HASH 0.0, B-RANDOM 0.0).",
+      "B-BODY-ONLY on Keycloak is 0.5 (2 distinct bodies: valid profile 7ce161 vs empty e3b0 for no_auth/expired/invalid) vs Flask parent 0.833 (3 bodies). Body baseline is weaker, inflating apparent incremental ratio (1.667 vs Flask 1.2) — comparison across experiments is not apples-to-apples (audit V7)."
+    ],
+    "rejected": [
+      "Cache-Control varies by error type (no-store for expired, no-cache for invalid) on a real IdP — REJECTED: on Keycloak, Cache-Control is absent on ALL error states; variation is only valid (no-cache) vs errors (absent), same grouping as body. V4 tautology confirmed for error-type variation (audit V4, result.json C_CACHE_CONTROL_VARIATION detail).",
+      "Set-Cookie adds incremental value on a real IdP — REJECTED: absent from all 40 Keycloak /userinfo responses, discrimination 0.0 (result.json C_SET_COOKIE_VARIATION FAIL, audit baseline_findings).",
+      "V4-engineered-header-tautology is NOT confirmed on Keycloak — REJECTED by producer claim: V4 IS confirmed for Cache-Control/Set-Cookie error-type variation. The incremental value comes from WWW-Authenticate, a different mechanism (audit V4, V5).",
+      "Full vector achieves 4-state perfect discrimination on a real IdP — REJECTED: only 3 distinct fingerprints; expired==invalid indistinguishable (audit V3, result.json drift_jaccards [0.315, 1.0]).",
+      "Bootstrap CI [0.0, 1.0] indicates statistical precision — REJECTED: degenerate at ceiling with 3 deterministic fingerprints and N=40 (audit V8, result.json full_vector_bootstrap_95ci).",
+      "The product recommendation to use full vector transfers from Flask to Keycloak via the same Cache-Control mechanism — REJECTED: the mechanism is different (WWW-Authenticate, not Cache-Control error-type variation) (audit V5)."
+    ],
+    "unknown": [
+      "Does WWW-Authenticate header variation transfer to other OAuth/OIDC providers (Auth0, Okta) — the true test of full-vector product recommendation generalizability?",
+      "Does substrate maintain discrimination on production OAuth/OIDC with CDN, load-balancer, rate-limit, and compression headers that may add non-deterministic variance?",
+      "What happens on Keycloak /token endpoint (vs /userinfo) — do Cache-Control/Set-Cookie patterns differ?",
+      "Can Keycloak be configured to return distinct responses for truly expired (realm key expiration) vs malformed (signature failure) tokens, or is empty-body identity inherent to the IdP error path?",
+      "What is cross-Python-version reproducibility of repr(vector) fingerprints — required for product comparability beyond Python 3.12.14?",
+      "What is the incremental header value when MORE than 2 error states share identical bodies (e.g., 3+ states with same body but different WWW-Authenticate values)?"
+    ],
+    "do_not_assume": [
+      "Do not assume WWW-Authenticate variation transfers to other IdPs — it was observed only on Keycloak 25.0 /userinfo endpoint. Auth0 and Okta may return different WWW-Authenticate patterns.",
+      "Do not assume the product recommendation to use full vector is ecologically valid — the mechanism (WWW-Authenticate) is IdP-specific and may not generalize. Body-only observation (0.5 discrimination, valid vs error) may be the robust architecture.",
+      "Do not assume Cache-Control provides any incremental value beyond body-only on real IdPs — Cache-Control error-type variation is falsified on Keycloak; valid vs absent grouping is same as body.",
+      "Do not assume the incremental header value of 0.333 transfers to other environments — it is partly inflated by weakened body baseline (B-BODY-ONLY 0.5 vs Flask 0.833).",
+      "Do not assume expired_token vs invalid_token are distinguishable on any IdP — on Keycloak they are identical by every observable. This may be inherent to OAuth/OIDC error handling.",
+      "Do not assume fingerprint hashes reproduce across Python versions — repr(vector) is Python-version-dependent; validated only on Python 3.12.14.",
+      "Do not assume null FP <5% holds beyond natural localhost network jitter — only tested without synthetic jitter on Keycloak localhost.",
+      "Do not assume sample size N=40 is sufficient for subtle discrimination differences — sufficient for primary threshold test but limited power for fine-grained comparisons (bootstrap CI degenerate).",
+      "Do not assume the expired_token state is ecologically valid — run_experiment.py makes locally-signed HS256 tokens that Keycloak treats as invalid, not truly Keycloak-issued expired tokens (audit V6)."
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-RUNTIME-34300004597/result.json — COMPLETE SUPPORTS metrics: full 0.833, B-BODY 0.5, incremental 0.333, CC 0.5, SC 0.0, null FP 0.0%, 3/10 controls fail, drift [0.315, 1.0]",
+    "research/experiments/EXP-RUNTIME-34300004597/audit.json — REVISE, producer_claim_supported false, V3-V9 findings, recomputed_metrics match, claim_ceiling bounded to 3 fingerprints via WWW-Authenticate",
+    "research/experiments/EXP-RUNTIME-34300004597/raw_observations.json — 40 observations, 3 fingerprints, 2 body hashes, headers per state verified",
+    "research/experiments/EXP-RUNTIME-34300004597/spec.json — frozen C-MEAS-VALID, decision_rule 4 conditions, hypothesis, baselines, measurement_validity Keycloak",
+    "research/experiments/EXP-RUNTIME-34300004597/provenance.json — Keycloak 25.0, python 3.12.14, port 18080, seed 44, fingerprint config",
+    "research/experiments/EXP-RUNTIME-34054515149/handoff.json — parent carry_forward, Flask baseline full=1.0 body=0.833 incremental 0.167, V4 tautology constraint",
+    "research/claims/registry.json — C-MEAS-VALID status EXPERIMENTAL owner_lanes runtime/physics"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-34300004597/result.json — full_vector_discrimination 0.833, B-BODY-ONLY 0.5, incremental 0.333, CC-only 0.5, SC-only 0.0, ETag-only 0.0, null FP 0.0%, drift [0.315, 1.0], controls C_SET_COOKIE FAIL C_BODY_CORRELATION_ETAG FAIL C_DRIFT_EXPIRED_VS_INVALID FAIL",
+    "research/experiments/EXP-RUNTIME-34300004597/audit.json — REVISE, V3 critical pair non-discriminable, V4 CC mechanism falsified confirmed, V5 WWW-Authenticate true discriminator, V6 state construction leakage, V7 body baseline weakening, V8 bootstrap degenerate, V9 controls partial fail, claim_ceiling bounded to 3 fingerprints via WWW-Authenticate not CC error-type",
+    "research/experiments/EXP-RUNTIME-34300004597/raw_observations.json — 40 entries, 3 fingerprints (61c534 no_auth, 5e7fae valid, 196af3 expired==invalid), WWW-Authenticate per state, Cache-Control/Set-Cookie/ETag per state",
+    "research/experiments/EXP-RUNTIME-34300004597/spec.json — frozen decision_rule 4 conditions, hypothesis CC no-store/no-cache, falsifier, baselines, measurement_validity",
+    "research/experiments/EXP-RUNTIME-34054515149/handoff.json — parent carry_forward established/rejected/unknown/do_not_assume, Flask baseline, V4 tautology",
+    "research/claims/registry.json — C-MEAS-VALID status EXPERIMENTAL"
+  ],
+  "recommended_action": "DESIGN EXP-RUNTIME-next to test WWW-Authenticate transferability: (1) Deploy Auth0 test tenant (or alternative OAuth/OIDC provider) with 4 auth states returning identical error bodies for expired/invalid. (2) Key test: does the IdP's WWW-Authenticate header vary between no_auth (Bearer realm only) and error states (Bearer realm + error fields), and does this variation persist on production infrastructure with CDN/load-balancer? (3) If WWW-Authenticate variation transfers, full-vector recommendation is generalizable. If not, body-only observation (which already achieves ~0.5 discrimination on valid vs error) is the robust product architecture. (4) Keep sorted-tuple fingerprint with Date/Server/X-Request-Id exclusion. (5) N=40, seed 44 for comparability. (6) Document exact Auth0/Okta configuration and whether CDN adds non-deterministic headers."
+}
