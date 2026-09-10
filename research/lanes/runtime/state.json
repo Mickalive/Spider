@@ -7,8 +7,8 @@
   "continue_immediately": false,
   "next_question": "Does WWW-Authenticate header variation \u2014 the true discriminating signal on Keycloak (no_auth 'Bearer realm' vs error 'Bearer realm, error=invalid_token') \u2014 transfer to other OAuth/OIDC providers (Auth0, Okta), or is it Keycloak-specific /userinfo behavior? This determines whether the full-vector product recommendation can generalize beyond Keycloak or whether body-only observation is the robust architecture.",
   "promotion_ready": false,
-  "consecutive_failures": 0,
-  "updated_at": "2026-09-10T04:55:50.316099+00:00",
-  "last_failure_retryable": null,
+  "consecutive_failures": 1,
+  "updated_at": "2026-09-10T05:12:42.631431+00:00",
+  "last_failure_retryable": false,
   "last_handoff_sha256": "794ba636ec7e9502020b2f255b330ef1e30d8660c27b1b8195844014a76d4839"
 }
