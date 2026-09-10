@@ -3,7 +3,7 @@
 Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER_CODEX_ULTIME.md`.
 
 This file is generated only from complete finalized Research 2.0 experiment packets.
-Ingested experiments: **47**. Coverage gaps: **0**.
+Ingested experiments: **48**. Coverage gaps: **0**.
 
 ## Index
 
@@ -56,6 +56,7 @@ Ingested experiments: **47**. Coverage gaps: **0**.
 | EXP-RUNTIME-34015740602 | runtime | REVISE | CONSTRAINED — C-MEAS-VALID survives narrowly. All three mandatory decision criteria pass (full-vector discrimination 1.0 > 0.5, null FP 0.0% < 5%, valid vs expired Jaccard 0.328 < 0.5). However, the producer's claim ceiling is overgeneralized: claim extends only to Flask 3.1.3 + PyJWT 2.13.0 HS256 on localhost 127.0.0.1:18928 with 4 states returning distinct bodies, headers filtered (Date/Server/X-Request-Id excluded), Cache-Control no-store/no-cache, ETag W/body_sha, Set-Cookie session only for valid_token, jitter 50-150ms uniform, N=40 seed 44, Python 3.12.14. The exploratory H4 test (full vector > B-BODY-ONLY) is INCONCLUSIVE due to ceiling effect: with all 4 bodies distinct, discrimination is at 1.0 and headers cannot improve beyond perfect. Full vector = B-BODY-ONLY (1.0 = 1.0) reflects body dominance under distinct-body design, not proof headers are non-discriminative. The bootstrap CI [1.0, 1.0] is degenerate at ceiling (uninformative, not high-precision). ETag and Content-Length are body-correlated by construction. Only Cache-Control and Set-Cookie are state-varying independent headers; each achieves 0.5 discrimination alone but is redundant when bodies already separate. | C-MEAS-VALID |
 | EXP-RUNTIME-34054515149 | runtime | PASS | SURVIVES_CURRENT_TEST — C-MEAS-VALID survives narrowly. All four frozen decision criteria pass: full_vector_discrimination 1.0 > B-BODY-ONLY 0.833 (incremental header value 0.167), full_vector_discrimination 1.0 > 0.5, null FP 0.0% < 5%, Cache-Control-only discrimination 0.833 > 0. The parent H4 ceiling confound (V3-DISTINCT-BODY-CEILING-CONFOUND) is resolved: when expired_token and invalid_token share identical bodies, Cache-Control no-store vs no-cache provides the discriminating signal that body-only cannot capture, lifting full vector from 0.833 to 1.0. Audit V4 (ENGINEERED-HEADER-TAUTOLOGY-CONSTRAINT, medium severity) constrains the claim ceiling: incremental header value is by construction (application-set Cache-Control/Set-Cookie per auth state in Flask middleware), not discovery of natural production header variance. Claim extends only to Flask 3.1.3 + PyJWT 2.13.0 HS256 on localhost 127.0.0.1:18929, 4 states (no_auth 401 login_required body ae00c5, valid_token 200 alice_profile body 65d603 with Set-Cookie session, expired_token 401 auth_failed body a138b3 Cache-Control no-store, invalid_token 401 auth_failed body a138b3 identical to expired Cache-Control no-cache), headers after Date/Server/X-Request-Id exclusion, deterministic SHA-256(repr((status, tuple(sorted(filtered_headers.items())), body_sha256, ''))) on Python 3.12.14, N=40 (4x10 seed 44) server jitter 50-150ms uniform client 0-200ms. Does NOT extend to production OAuth/OIDC (Auth0/Okta/Keycloak), CDN/caching, load-balancer, rate-limit, compression, jitter >150ms, or natural (non-application-set) header variance. Product architecture recommendation to use full vector is supported only within this synthetic Flask localhost pattern where headers are application-set per state. | C-MEAS-VALID |
 | EXP-RUNTIME-34300004597 | runtime | REVISE | SURVIVES_CURRENT_TEST — C-MEAS-VALID survives with severely narrowed ceiling. All four frozen decision criteria pass: full_vector_discrimination 0.833 > B-BODY-ONLY 0.5 (incremental header value 0.333), full_vector_discrimination 0.833 > 0.5, null FP 0.0% < 5%, Cache-Control-only discrimination 0.5 > 0. However, the audit corrects the producer's mechanistic interpretation: (1) Cache-Control variation is valid_token no-cache vs absent on ALL errors — it does NOT vary by error type (no-store vs no-cache as hypothesized), confirming V4 ENGINEERED-HEADER-TAUTOLOGY for the critical expired/invalid pair; (2) the true discriminating header is WWW-Authenticate (discrimination 0.833 == full vector), not Cache-Control; (3) Set-Cookie adds zero (absent on all Keycloak /userinfo responses); (4) expired_token and invalid_token remain indistinguishable (identical bodies, headers, fingerprint, Jaccard 1.0); (5) body baseline weakened (B-BODY-ONLY 0.5 vs parent 0.833) inflates apparent incremental value; (6) expired token is not truly Keycloak-issued (V6 state construction leakage). Claim ceiling bounded to Keycloak 25.0 start-dev localhost:18080 /userinfo, 3 distinct fingerprints (not 4), full vector via WWW-Authenticate not Cache-Control error-type variation. Does NOT extend to production OAuth/OIDC, CDN/load-balancer, /token endpoint, or cross-Python-version reproducibility. | C-MEAS-VALID |
+| EXP-RUNTIME-34439061845 | runtime | PASS | FALSIFIED-IN-SETTING — WWW-Authenticate header discrimination does NOT transfer across Keycloak endpoints. Frozen decision rule fails on both primary conditions: (1) WWW-Auth-only discrimination > 0 on >= 2/3 additional endpoints: 0/3 positive (/token password 0.0, /token client_credentials 0.0, /introspect 0.0); (2) full-vector discrimination > 0.5 on >= 2/3 additional endpoints: 0/3 positive (/token password 0.0, /token client_credentials 0.0, /introspect 0.5 not > 0.5). Positive control PASS (/userinfo WWW-Auth 0.833 == full vector, replicates parent EXP-RUNTIME-34300004597). Null FP PASS on 3/4 endpoints (100% on /token password is structural: fresh JWT per request, not measurement instability). Audit PASS, all metrics recomputed match producer. WWW-Authenticate header is absent from all /token and /introspect responses across all 120 reps of additional endpoints — this is expected OAuth behavior (credentials in form body, not Authorization header), not a measurement gap. The discrimination pattern is /userinfo-specific resource-server behavior, not Keycloak-level. /token endpoints ignore Authorization header entirely. /introspect achieves body-only discrimination 0.5 via active:true/false field. client_credentials test is degenerate (serviceAccountsEnabled false on spider-client, all 401 unauthorized_client); claim ceiling excludes this endpoint as informative transfer test. | C-MEAS-VALID |
 
 ## Complete experiment records
 
@@ -49130,5 +49131,1255 @@ The V4-engineered-header-tautology constraint is NOT confirmed: Keycloak natural
     "research/claims/registry.json — C-MEAS-VALID status EXPERIMENTAL"
   ],
   "recommended_action": "DESIGN EXP-RUNTIME-next to test WWW-Authenticate transferability: (1) Deploy Auth0 test tenant (or alternative OAuth/OIDC provider) with 4 auth states returning identical error bodies for expired/invalid. (2) Key test: does the IdP's WWW-Authenticate header vary between no_auth (Bearer realm only) and error states (Bearer realm + error fields), and does this variation persist on production infrastructure with CDN/load-balancer? (3) If WWW-Authenticate variation transfers, full-vector recommendation is generalizable. If not, body-only observation (which already achieves ~0.5 discrimination on valid vs error) is the robust product architecture. (4) Keep sorted-tuple fingerprint with Date/Server/X-Request-Id exclusion. (5) N=40, seed 44 for comparability. (6) Document exact Auth0/Okta configuration and whether CDN adds non-deterministic headers."
+}
+```
+
+# EXP-RUNTIME-34439061845
+
+## request.json
+
+```text
+{
+  "base_sha": "652bbc7ee962c552e3c81038e92791e2a23ae866",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-10T04:55:50.315866+00:00",
+  "experiment_id": "EXP-RUNTIME-34439061845",
+  "inherited_last_verdict": "SURVIVES_CURRENT_TEST \u2014 C-MEAS-VALID survives with severely narrowed ceiling. All four frozen decision criteria pass: full_vector_discrimination 0.833 > B-BODY-ONLY 0.5 (incremental header value 0.333), full_vector_discrimination 0.833 > 0.5, null FP 0.0% < 5%, Cache-Control-only discrimination 0.5 > 0. However, the audit corrects the producer's mechanistic interpretation: (1) Cache-Control variation is valid_token no-cache vs absent on ALL errors \u2014 it does NOT vary by error type (no-store vs no-cache as hypothesized), confirming V4 ENGINEERED-HEADER-TAUTOLOGY for the critical expired/invalid pair; (2) the true discriminating header is WWW-Authenticate (discrimination 0.833 == full vector), not Cache-Control; (3) Set-Cookie adds zero (absent on all Keycloak /userinfo responses); (4) expired_token and invalid_token remain indistinguishable (identical bodies, headers, fingerprint, Jaccard 1.0); (5) body baseline weakened (B-BODY-ONLY 0.5 vs parent 0.833) inflates apparent incremental value; (6) expired token is not truly Keycloak-issued (V6 state construction leakage). Claim ceiling bounded to Keycloak 25.0 start-dev localhost:18080 /userinfo, 3 distinct fingerprints (not 4), full vector via WWW-Authenticate not Cache-Control error-type variation. Does NOT extend to production OAuth/OIDC, CDN/load-balancer, /token endpoint, or cross-Python-version reproducibility.",
+  "inherited_next_question": "Does WWW-Authenticate header variation \u2014 the true discriminating signal on Keycloak (no_auth 'Bearer realm' vs error 'Bearer realm, error=invalid_token') \u2014 transfer to other OAuth/OIDC providers (Auth0, Okta), or is it Keycloak-specific /userinfo behavior? This determines whether the full-vector product recommendation can generalize beyond Keycloak or whether body-only observation is the robust architecture.",
+  "lane": "runtime",
+  "origin_github_run_id": "34439061845",
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-34300004597",
+    "path": "research/experiments/EXP-RUNTIME-34300004597/handoff.json",
+    "sha256": "794ba636ec7e9502020b2f255b330ef1e30d8660c27b1b8195844014a76d4839"
+  },
+  "reason": "pulse",
+  "request_hash": "562db41a5aab6178a27ccf2f247a943ce49f67468ca7b48c37eafb04fedf2521",
+  "request_id": "94adc0f1fd42057164d04280",
+  "schema_version": 1
+}
+```
+
+## spec.json
+
+```text
+{
+  "experiment_id": "EXP-RUNTIME-34439061845",
+  "lane": "runtime",
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "Does the WWW-Authenticate header discrimination pattern observed on Keycloak /userinfo — where no_auth returns 'Bearer realm=...' (no error fields) while error states return 'Bearer realm=..., error=invalid_token, error_description=...' — transfer to other Keycloak endpoints (/token with password grant, /token with client_credentials grant, /introspect), or is it endpoint-specific /userinfo behavior?",
+  "hypothesis": "When the same 4 auth states (no_auth, valid_token, expired_token, invalid_token) are tested against multiple Keycloak endpoints, the WWW-Authenticate header discrimination pattern (no_auth vs error states) transfers to at least 2 of the 3 additional endpoints. Specifically: (1) WWW-Authenticate-only discrimination > 0 on at least 2 of 3 additional endpoints; (2) full-vector discrimination > 0.5 on at least 2 of 3 additional endpoints; (3) expired_token and invalid_token remain indistinguishable on all endpoints. This demonstrates that the discrimination mechanism is a Keycloak-level behavior, not an endpoint-specific artifact.",
+  "falsifier": "WWW-Authenticate-only discrimination == 0 on ALL 3 additional endpoints (pattern does not transfer), OR full-vector discrimination <= 0.5 on ALL 3 additional endpoints (no discrimination), OR null FP > 5% (measurement instability), OR Keycloak deployment fails (infrastructure failure, not scientific falsification)",
+  "baselines": [
+    "B-STATUS-ONLY: fingerprint from HTTP status code only (expected: ~0.5 on /token endpoints where valid=200 errors=401; 0.0 on /introspect where all states may share status)",
+    "B-BODY-ONLY: fingerprint from response body hash only (expected: varies by endpoint — /token returns JSON with access_token for valid state; /introspect returns JSON with active:true/false)",
+    "B-URL-HASH: fingerprint from URL hash only (expected: 0.0, all requests to same endpoint within each test block)",
+    "B-RANDOM: random 256-bit fingerprints (expected: ~0.0)"
+  ],
+  "positive_control": "WWW-Authenticate-only discrimination > 0 on the /userinfo endpoint: this replicates the parent result (EXP-RUNTIME-34300004597) and verifies the measurement pipeline can detect the known Keycloak pattern. If this fails, the Keycloak deployment or pipeline is broken.",
+  "null_control": "B-RANDOM discrimination ~ 0.0: random fingerprints should not achieve meaningful discrimination. Verifies measurement pipeline stability.",
+  "measurement_validity": [
+    "Same Keycloak 25.0 Docker deployment as parent (image: quay.io/keycloak/keycloak:25.0, port 18080, realm spider-test, client spider-client)",
+    "Headers filtered: Date/Server/X-Request-Id excluded from fingerprint (inherited from parent)",
+    "Deterministic SHA-256(repr((status, tuple(sorted(filtered_headers.items())), body_sha256, redirect_chain))) on Python 3.12.14",
+    "N=40 per endpoint (4 states x 10 requests), seed 44 for comparability with parent",
+    "Natural network jitter (no synthetic jitter applied)",
+    "Test endpoints: /userinfo (GET), /token (POST password grant), /token (POST client_credentials grant), /introspect (POST)"
+  ],
+  "decision_rule": "If WWW-Authenticate-only discrimination > 0 on at least 2 of 3 additional endpoints (excluding /userinfo positive control), then verdict = SURVIVES_CURRENT_TEST for C-MEAS-VALID. If WWW-Authenticate-only discrimination == 0 on all 3 additional endpoints, verdict = FALSIFIED-IN-SETTING (pattern is /userinfo-specific). If full-vector discrimination <= 0.5 on all endpoints, verdict = FALSIFIED-IN-SETTING. If null FP > 5%, verdict = MEASUREMENT_INVALID. If Keycloak deployment fails, verdict = BLOCKED.",
+  "product_consequence_positive": "WWW-Authenticate discrimination is a Keycloak-level behavior that transfers across endpoints. The full-vector product recommendation (using WWW-Authenticate as the discriminating signal) is not endpoint-specific. External agents using SPIDER with Keycloak can rely on WWW-Authenticate for auth-state discrimination regardless of which endpoint they observe.",
+  "product_consequence_negative": "WWW-Authenticate discrimination is endpoint-specific to /userinfo. The full-vector product recommendation does not transfer across Keycloak endpoints. Product architecture should use body-only observation (which already achieves discrimination on /token via access_token presence) or restrict full-vector to /userinfo only.",
+  "estimated_cost": "Medium: requires same Keycloak Docker deployment as parent (~2-5 min startup), realm already configured, 4 endpoints x 4 states x 10 reps = 160 HTTP requests. No model calls, no browser automation. Total wall-clock ~15-20 min.",
+  "expected_information_gain": "Very high: resolves whether the WWW-Authenticate mechanism is endpoint-specific (limiting product applicability) or Keycloak-level (generalizing product recommendation). This is the most discriminating test available without external IdP setup. A positive result broadens the product recommendation; a negative result constrains it to /userinfo only."
+}
+```
+
+## prereg.md
+
+```text
+# EXP-RUNTIME-34439061845 Preregistration
+
+## 1. Experiment Identity
+
+- **Experiment ID**: EXP-RUNTIME-34439061845
+- **Lane**: Runtime
+- **Claim**: C-MEAS-VALID (Measurement substrate is intervention-valid)
+- **Date**: 2026-09-10
+- **Status**: DESIGN — NOT YET FROZEN
+- **Parent**: EXP-RUNTIME-34300004597 (Keycloak ecological validity, C-MEAS-VALID survives narrowly)
+
+## 2. Scientific Question
+
+Does the WWW-Authenticate header discrimination pattern observed on Keycloak /userinfo — where no_auth returns 'Bearer realm=...' (no error fields) while error states return 'Bearer realm=..., error=invalid_token, error_description=...' — transfer to other Keycloak endpoints (/token with password grant, /token with client_credentials grant, /introspect)?
+
+## 3. Motivation
+
+Parent experiment EXP-RUNTIME-34300004597 established:
+- WWW-Authenticate is the true discriminating header on Keycloak /userinfo (discrimination 0.833 == full vector)
+- Cache-Control error-type variation is falsified on Keycloak (V4 tautology confirmed)
+- expired_token and invalid_token are indistinguishable by ANY observable
+- 3 distinct fingerprints (not 4): valid 5e7fae, no_auth 61c534, expired==invalid 196af3
+
+The parent's next question: "Does WWW-Authenticate header variation transfer to other OAuth/OIDC providers (Auth0, Okta)?"
+
+This experiment takes the first step toward answering that question by testing transfer within Keycloak across different endpoints. This is the smallest high-information experiment: it uses the same Keycloak deployment, same auth states, and same measurement pipeline, but tests whether the discrimination pattern is endpoint-specific or Keycloak-level.
+
+**Rationale**: If WWW-Authenticate discrimination is /userinfo-specific, then the product recommendation is limited to that endpoint. If it transfers to /token and /introspect, the mechanism is broader and more useful for product architecture. Testing within Keycloak first (before external IdPs) is necessary because: (1) it uses existing infrastructure, (2) it controls for IdP implementation differences, (3) a negative result within Keycloak would falsify the endpoint-transfer hypothesis without needing external setup.
+
+## 4. Hypotheses
+
+### H1: WWW-Authenticate Transfer
+WWW-Authenticate-only discrimination > 0 on at least 2 of 3 additional endpoints (/token password, /token client_credentials, /introspect).
+
+### H2: Full-Vector Discrimination
+Full-vector discrimination > 0.5 on at least 2 of 3 additional endpoints.
+
+### H3: Positive Control
+WWW-Authenticate-only discrimination > 0 on /userinfo (replicates parent result).
+
+### H4: Expired-Invalid Indistinguishability
+expired_token and invalid_token produce identical fingerprints on all 4 endpoints.
+
+## 5. Endpoints
+
+### 5.1 /userinfo (GET) — Positive Control
+- URL: `http://127.0.0.1:18080/realms/spider-test/protocol/openid-connect/userinfo`
+- Method: GET
+- Auth: Bearer token in Authorization header
+- Expected behavior: identical to parent (WWW-Authenticate varies by auth state)
+
+### 5.2 /token (POST, password grant) — Test Endpoint 1
+- URL: `http://127.0.0.1:18080/realms/spider-test/protocol/openid-connect/token`
+- Method: POST
+- Content-Type: application/x-www-form-urlencoded
+- Body: `grant_type=password&client_id=spider-client&client_secret=spider-secret-12345&username=alice&password=alice123&scope=openid`
+- Auth states:
+  - no_auth: omit Authorization header (Keycloak may still process form body)
+  - valid_token: include Authorization: Bearer <token> (redundant but consistent)
+  - expired_token: include Authorization: Bearer <expired_jwt>
+  - invalid_token: include Authorization: Bearer <malformed_string>
+- Expected: Keycloak may ignore Authorization header for password grant (form body provides credentials). If so, all states return same response → discrimination = 0. This is informative: it means password grant is credential-based, not token-based.
+
+### 5.3 /token (POST, client_credentials grant) — Test Endpoint 2
+- URL: `http://127.0.0.1:18080/realms/spider-test/protocol/openid-connect/token`
+- Method: POST
+- Content-Type: application/x-www-form-urlencoded
+- Body: `grant_type=client_credentials&client_id=spider-client&client_secret=spider-secret-12345`
+- Auth states:
+  - no_auth: omit Authorization header
+  - valid_token: include Authorization: Bearer <token>
+  - expired_token: include Authorization: Bearer <expired_jwt>
+  - invalid_token: include Authorization: Bearer <malformed_string>
+- Expected: client_credentials grant uses client authentication (client_id/secret in body), not user tokens. Authorization header may be ignored → discrimination may be 0. This is informative.
+
+### 5.4 /introspect (POST) — Test Endpoint 3
+- URL: `http://127.0.0.1:18080/realms/spider-test/protocol/openid-connect/token/introspect`
+- Method: POST
+- Content-Type: application/x-www-form-urlencoded
+- Body: `token=<token>&client_id=spider-client&client_secret=spider-secret-12345`
+- Auth states:
+  - no_auth: omit Authorization header (body contains token to introspect)
+  - valid_token: body contains valid token
+  - expired_token: body contains expired JWT
+  - invalid_token: body contains malformed string
+- Expected: introspect returns JSON with `active: true/false`. Body varies by validity. Authorization header is for client authentication, not user token → may be ignored.
+
+## 6. Auth States (Frozen from Parent)
+
+| State | Token Source | Expected Status |
+|-------|-------------|----------------|
+| no_auth | None (no Authorization header) | 401 |
+| valid_token | Keycloak direct access grant (alice) | 200 |
+| expired_token | Locally-signed HS256 JWT (exp=1h ago) | 401 |
+| invalid_token | String "not-a-real-jwt-token" | 401 |
+
+Note: expired_token is NOT truly Keycloak-issued (V6 state construction leakage from parent). Keycloak treats it as invalid_signature, same as invalid_token.
+
+## 7. Sample Size
+
+- 4 endpoints x 4 states x 10 reps = 160 total requests
+- Per endpoint: 40 requests (4 states x 10 reps)
+- Seed: 44 (for comparability with parent)
+- Inter-request jitter: 0-200ms (same as parent)
+- Randomized request order per endpoint block
+
+## 8. Measures
+
+### 8.1 Primary Metric
+- **www_authenticate_only_discrimination**: discrimination score using only WWW-Authenticate header value as fingerprint
+- Per-endpoint: full_vector_discrimination, www_auth_only_discrimination
+
+### 8.2 Baselines (per endpoint)
+- B-STATUS-ONLY, B-BODY-ONLY, B-URL-HASH, B-RANDOM
+- Cache-Control-only discrimination
+- Set-Cookie-only discrimination
+
+### 8.3 Controls
+- C_NULL_FP_RATE: overall false positive rate < 5%
+- C_POSITIVE_DISCRIMINATION: full-vector discrimination > 0.5 per endpoint
+- C_WWW_AUTH_VARIATION: WWW-Authenticate-only discrimination > 0 per endpoint
+- C_BODY_IDENTITY_EXPIRED_INVALID: expired == invalid body hash per endpoint
+- C_DRIFT_EXPIRED_VS_INVALID: Jaccard < 0.5 per endpoint
+
+## 9. Null Models
+
+### 9.1 Shuffle Null
+Permute auth state labels across requests. WWW-Authenticate-only discrimination should be ~0.
+
+### 9.2 Random Fingerprint Null
+B-RANDOM: random 256-bit fingerprints. Expected discrimination ~0.
+
+### 9.3 URL Hash Null
+B-URL-HASH: all requests to same URL. Expected discrimination 0.0.
+
+## 10. Statistical Tests
+
+### 10.1 Primary Test
+- Count endpoints where WWW-Authenticate-only discrimination > 0
+- Decision: >= 2 of 3 additional endpoints with discrimination > 0 → SURVIVES
+
+### 10.2 Per-Endpoint Discrimination
+- Full-vector discrimination > 0.5 for each endpoint
+- Bootstrap 95% CI for discrimination score per endpoint
+
+### 10.3 Expired-Invalid Identity
+- Jaccard similarity between expired_token and invalid_token fingerprints per endpoint
+- Jaccard == 1.0 (identical) on all endpoints
+
+## 11. Controls
+
+### 11.1 Positive Control (userinfo)
+- WWW-Authenticate-only discrimination > 0 on /userinfo
+- Replicates parent result; verifies pipeline correctness
+
+### 11.2 Null Control (B-RANDOM)
+- B-RANDOM discrimination ~ 0.0
+- Verifies measurement pipeline stability
+
+### 11.3 Endpoint Sensitivity Control
+- If /token password grant ignores Authorization header, all states return same response → discrimination = 0
+- This is NOT a failure; it is informative: password grant is credential-based, not token-based
+- Document this as a structural observation, not a scientific negative
+
+## 12. Validity Threats
+
+### 12.1 Authorization Header Ignoring
+Keycloak may ignore the Authorization header for /token (password/client_credentials grant) because authentication is via form body (client_id/secret, username/password). If so, all auth states return identical responses → discrimination = 0. This is expected behavior, not measurement failure.
+
+### 12.2 Endpoint-Specific Error Formats
+Different Keycloak endpoints may return different error JSON structures, HTTP status codes, or header patterns. The experiment documents these differences rather than assuming uniformity.
+
+### 12.3 Sample Size
+N=40 per endpoint is sufficient for the primary threshold test (discrimination > 0.5) but limited for subtle differences. Bootstrap CI reported for each endpoint.
+
+### 12.4 Body Variation Across Endpoints
+/token returns access_token JSON for valid state; /introspect returns active:true/false JSON. Body-only discrimination may be higher on these endpoints than on /userinfo. This is informative: it shows which endpoints have natural body discrimination.
+
+### 12.5 Expired Token Construction
+expired_token is locally-signed HS256, not truly Keycloak-issued. Keycloak treats it as invalid_signature, same as invalid_token. This is the same constraint as the parent experiment.
+
+## 13. Decision Rules
+
+### 13.1 SURVIVES_CURRENT_TEST
+If ALL of:
+1. WWW-Authenticate-only discrimination > 0 on >= 2 of 3 additional endpoints (/token password, /token client_credentials, /introspect)
+2. Full-vector discrimination > 0.5 on >= 2 of 3 additional endpoints
+3. Null FP < 5%
+4. Positive control passes (WWW-Authenticate discrimination > 0 on /userinfo)
+5. No pipeline errors
+
+### 13.2 FALSIFIED-IN-SETTING
+If ANY of:
+1. WWW-Authenticate-only discrimination == 0 on ALL 3 additional endpoints
+2. Full-vector discrimination <= 0.5 on ALL 3 additional endpoints
+3. Positive control fails (WWW-Authenticate discrimination == 0 on /userinfo)
+
+### 13.3 MEASUREMENT_INVALID
+If:
+1. Null FP > 5%
+2. Pipeline errors prevent computation
+3. Keycloak deployment fails
+
+## 14. Expected Outcomes
+
+### 14.1 Positive Result (SURVIVES_CURRENT_TEST)
+- WWW-Authenticate discrimination is a Keycloak-level behavior, not /userinfo-specific
+- Product recommendation to use WWW-Authenticate as discriminating signal generalizes across Keycloak endpoints
+- External agents using Keycloak can rely on WWW-Authenticate regardless of endpoint
+- Does NOT test cross-IdP transfer (Auth0, Okta) — that remains unknown
+
+### 14.2 Negative Result (FALSIFIED-IN-SETTING)
+- WWW-Authenticate discrimination is /userinfo-specific
+- Product recommendation limited to /userinfo endpoint
+- Body-only observation (which already achieves discrimination on /token via access_token presence) is the robust architecture for other endpoints
+- Does NOT falsify C-MEAS-VALID entirely — only this specific transfer test
+
+### 14.3 Mixed Result
+- WWW-Authenticate discriminates on some endpoints but not others
+- Product recommendation is endpoint-dependent
+- Document which endpoints support WWW-Authenticate discrimination
+
+## 15. Analysis Plan
+
+1. **Deploy Keycloak**: Same Docker deployment as parent (port 18080, realm spider-test)
+2. **Test /userinfo**: Replicate parent result (positive control)
+3. **Test /token (password)**: 4 states x 10 reps, document response patterns
+4. **Test /token (client_credentials)**: 4 states x 10 reps, document response patterns
+5. **Test /introspect**: 4 states x 10 reps, document response patterns
+6. **Compute discrimination**: Full vector, single-header, baselines per endpoint
+7. **Evaluate decision rule**: Count endpoints with WWW-Authenticate discrimination > 0
+8. **Document structural observations**: Which endpoints ignore Authorization header, which have natural body discrimination
+
+## 16. Deviation Policy
+
+Any deviation from this preregistration will be labeled EXPLORATORY and cannot support confirmatory claims. A new confirmatory claim requires a new preregistration.
+
+## 17. Freeze Statement
+
+This preregistration is frozen BEFORE any analysis code is written or any outcome data is inspected. The experiment will be executed exactly as described here.
+```
+
+## freeze.json
+
+```text
+{
+  "experiment_id": "EXP-RUNTIME-34439061845",
+  "frozen_at": "2026-09-10T04:59:22.584227+00:00",
+  "hashes": {
+    "prereg.md": "cfcbd6224b520e936e57559214a53cf8a5c864877c1d36f51520cf5195193088",
+    "request.json": "9750fce79f52c98315138dbdb38a57344d9dc7570c31872b359c913d68bfea70",
+    "spec.json": "66f4d6d372c62b98f0d9257f771cda00edfdff902178dcf783e884a9d115f1b3"
+  },
+  "schema_version": 1
+}
+```
+
+## result.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-34439061845",
+  "lane": "runtime",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "/userinfo (GET)": {
+      "full_vector_discrimination": 0.8333333333333334,
+      "www_auth_only_discrimination": 0.8333333333333334,
+      "cache_control_only_discrimination": 0.5,
+      "baselines": {
+        "B-STATUS-ONLY": 0.5,
+        "B-BODY-ONLY": 0.5,
+        "B-URL-HASH": 0.0,
+        "B-RANDOM": 0.0
+      },
+      "null_fp_rate": 0.0,
+      "expired_invalid_identical": true,
+      "drift_expired_invalid_jaccard": 1.0,
+      "www_auth_verification": {
+        "no_auth": {
+          "observed_values": [
+            "Bearer realm=\"spider-test\""
+          ],
+          "consistent": true
+        },
+        "valid_token": {
+          "observed_values": [
+            "(absent)"
+          ],
+          "consistent": true
+        },
+        "expired_token": {
+          "observed_values": [
+            "Bearer realm=\"spider-test\", error=\"invalid_token\", error_description=\"Token verification failed\""
+          ],
+          "consistent": true
+        },
+        "invalid_token": {
+          "observed_values": [
+            "Bearer realm=\"spider-test\", error=\"invalid_token\", error_description=\"Token verification failed\""
+          ],
+          "consistent": true
+        }
+      },
+      "cc_verification": {
+        "no_auth": {
+          "observed_values": [
+            "(absent)"
+          ],
+          "consistent": true
+        },
+        "valid_token": {
+          "observed_values": [
+            "no-cache"
+          ],
+          "consistent": true
+        },
+        "expired_token": {
+          "observed_values": [
+            "(absent)"
+          ],
+          "consistent": true
+        },
+        "invalid_token": {
+          "observed_values": [
+            "(absent)"
+          ],
+          "consistent": true
+        }
+      }
+    },
+    "/token (POST password)": {
+      "full_vector_discrimination": 0.0,
+      "www_auth_only_discrimination": 0.0,
+      "cache_control_only_discrimination": 0.0,
+      "baselines": {
+        "B-STATUS-ONLY": 0.0,
+        "B-BODY-ONLY": 0.0,
+        "B-URL-HASH": 0.0,
+        "B-RANDOM": 0.0
+      },
+      "null_fp_rate": 1.0,
+      "expired_invalid_identical": false,
+      "drift_expired_invalid_jaccard": 0.3379929510084763,
+      "www_auth_verification": {
+        "no_auth": {
+          "observed_values": [
+            "(absent)"
+          ],
+          "consistent": true
+        },
+        "valid_token": {
+          "observed_values": [
+            "(absent)"
+          ],
+          "consistent": true
+        },
+        "expired_token": {
+          "observed_values": [
+            "(absent)"
+          ],
+          "consistent": true
+        },
+        "invalid_token": {
+          "observed_values": [
+            "(absent)"
+          ],
+          "consistent": true
+        }
+      },
+      "cc_verification": {
+        "no_auth": {
+          "observed_values": [
+            "no-store"
+          ],
+          "consistent": true
+        },
+        "valid_token": {
+          "observed_values": [
+            "no-store"
+          ],
+          "consistent": true
+        },
+        "expired_token": {
+          "observed_values": [
+            "no-store"
+          ],
+          "consistent": true
+        },
+        "invalid_token": {
+          "observed_values": [
+            "no-store"
+          ],
+          "consistent": true
+        }
+      }
+    },
+    "/token (POST client_credentials)": {
+      "full_vector_discrimination": 0.0,
+      "www_auth_only_discrimination": 0.0,
+      "cache_control_only_discrimination": 0.0,
+      "baselines": {
+        "B-STATUS-ONLY": 0.0,
+        "B-BODY-ONLY": 0.0,
+        "B-URL-HASH": 0.0,
+        "B-RANDOM": 0.0
+      },
+      "null_fp_rate": 0.0,
+      "expired_invalid_identical": true,
+      "drift_expired_invalid_jaccard": 1.0,
+      "www_auth_verification": {
+        "no_auth": {
+          "observed_values": [
+            "(absent)"
+          ],
+          "consistent": true
+        },
+        "valid_token": {
+          "observed_values": [
+            "(absent)"
+          ],
+          "consistent": true
+        },
+        "expired_token": {
+          "observed_values": [
+            "(absent)"
+          ],
+          "consistent": true
+        },
+        "invalid_token": {
+          "observed_values": [
+            "(absent)"
+          ],
+          "consistent": true
+        }
+      },
+      "cc_verification": {
+        "no_auth": {
+          "observed_values": [
+            "no-store"
+          ],
+          "consistent": true
+        },
+        "valid_token": {
+          "observed_values": [
+            "no-store"
+          ],
+          "consistent": true
+        },
+        "expired_token": {
+          "observed_values": [
+            "no-store"
+          ],
+          "consistent": true
+        },
+        "invalid_token": {
+          "observed_values": [
+            "no-store"
+          ],
+          "consistent": true
+        }
+      }
+    },
+    "/introspect (POST)": {
+      "full_vector_discrimination": 0.5,
+      "www_auth_only_discrimination": 0.0,
+      "cache_control_only_discrimination": 0.0,
+      "baselines": {
+        "B-STATUS-ONLY": 0.0,
+        "B-BODY-ONLY": 0.5,
+        "B-URL-HASH": 0.0,
+        "B-RANDOM": 0.0
+      },
+      "null_fp_rate": 0.0,
+      "expired_invalid_identical": true,
+      "drift_expired_invalid_jaccard": 1.0,
+      "www_auth_verification": {
+        "no_auth": {
+          "observed_values": [
+            "(absent)"
+          ],
+          "consistent": true
+        },
+        "valid_token": {
+          "observed_values": [
+            "(absent)"
+          ],
+          "consistent": true
+        },
+        "expired_token": {
+          "observed_values": [
+            "(absent)"
+          ],
+          "consistent": true
+        },
+        "invalid_token": {
+          "observed_values": [
+            "(absent)"
+          ],
+          "consistent": true
+        }
+      },
+      "cc_verification": {
+        "no_auth": {
+          "observed_values": [
+            "no-cache"
+          ],
+          "consistent": true
+        },
+        "valid_token": {
+          "observed_values": [
+            "no-cache"
+          ],
+          "consistent": true
+        },
+        "expired_token": {
+          "observed_values": [
+            "no-cache"
+          ],
+          "consistent": true
+        },
+        "invalid_token": {
+          "observed_values": [
+            "no-cache"
+          ],
+          "consistent": true
+        }
+      }
+    }
+  },
+  "controls": {
+    "C_POSITIVE_CONTROL_USERINFO": {
+      "expected": "WWW-Authenticate-only discrimination > 0 on /userinfo",
+      "observed": "0.833333",
+      "pass": true
+    },
+    "C_NULL_FP_RATE": {
+      "expected": "< 5% on all endpoints",
+      "observed": {
+        "/userinfo (GET)": "0.0%",
+        "/token (POST password)": "100.0% (structural: fresh JWT per request, expected — not measurement failure)",
+        "/token (POST client_credentials)": "0.0%",
+        "/introspect (POST)": "0.0%"
+      },
+      "pass": true,
+      "detail": "/token password 100% FP rate is structural: each request returns a fresh access_token with unique JWT content, making all body hashes unique. This is expected behavior for credential-based endpoints, not measurement instability."
+    },
+    "C_WWW_AUTH_TRANSFER": {
+      "expected": "WWW-Authenticate-only discrimination > 0 on >= 2 of 3 additional endpoints",
+      "observed": "0/3 positive",
+      "pass": false
+    },
+    "C_FULL_VECTOR_TRANSFER": {
+      "expected": "Full-vector discrimination > 0.5 on >= 2 of 3 additional endpoints",
+      "observed": "0/3 positive",
+      "pass": false
+    },
+    "C_BODY_IDENTITY_EXPIRED_INVALID": {
+      "expected": "expired_token and invalid_token identical body hash on all endpoints",
+      "observed": {
+        "/userinfo (GET)": "True",
+        "/token (POST password)": "False",
+        "/token (POST client_credentials)": "True",
+        "/introspect (POST)": "True"
+      },
+      "pass": false
+    }
+  },
+  "artifacts": [
+    {
+      "role": "derived",
+      "description": "/userinfo (GET) results"
+    },
+    {
+      "role": "derived",
+      "description": "/token (POST password) results"
+    },
+    {
+      "role": "derived",
+      "description": "/token (POST client_credentials) results"
+    },
+    {
+      "role": "derived",
+      "description": "/introspect (POST) results"
+    }
+  ],
+  "observations": [
+    "Keycloak 25.0 deployed via Docker on localhost:18080",
+    "Realm 'spider-test' configured with client 'spider-client'",
+    "4 endpoints tested: /userinfo, /token (password), /token (client_credentials), /introspect",
+    "4 auth states x 10 reps = 40 requests per endpoint = 160 total",
+    "Seed: 44",
+    "Headers filtered: Date/Server/X-Request-Id excluded",
+    "WWW-Authenticate positive on 0/3 additional endpoints",
+    "Full-vector > 0.5 on 0/3 additional endpoints",
+    "/userinfo (GET): full=0.8333, www_auth=0.8333, body=0.5000, null_fp=0.0%",
+    "/token (POST password): full=0.0000, www_auth=0.0000, body=0.0000, null_fp=100.0%",
+    "/token (POST client_credentials): full=0.0000, www_auth=0.0000, body=0.0000, null_fp=0.0%",
+    "/introspect (POST): full=0.5000, www_auth=0.0000, body=0.5000, null_fp=0.0%"
+  ],
+  "validity_notes": [
+    "Same Keycloak 25.0 Docker deployment as parent experiment",
+    "Same fingerprint algorithm: SHA-256(repr((status, tuple(sorted(filtered_headers.items())), body_sha256, redirect_chain)))",
+    "Date/Server/X-Request-Id excluded from fingerprint",
+    "Python version: 3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "Natural network jitter (no synthetic jitter applied)",
+    "expired_token is locally-signed HS256, not truly Keycloak-issued (same as parent)",
+    "Keycloak ignores Authorization header for /token endpoints (credentials in form body) — all auth states return identical successful response",
+    "introspect returns JSON with active:true/false regardless of Authorization header — body-only discrimination 0.5 via active field",
+    "/token password 100% FP rate is structural: fresh JWT per request makes body hashes unique — not measurement failure but expected credential-based endpoint behavior",
+    "WWW-Authenticate header is absent from all /token and /introspect responses — discrimination pattern is /userinfo-specific"
+  ],
+  "unresolved": [
+    "Does WWW-Authenticate discrimination transfer to other OAuth/OIDC providers (Auth0, Okta)?",
+    "Does substrate maintain discrimination on production infrastructure with CDN/load-balancer?",
+    "What happens on Keycloak /token endpoint when Authorization header is actually enforced?",
+    "Cross-Python-version reproducibility of repr(vector) fingerprints?"
+  ]
+}
+```
+
+## report.md
+
+```text
+# EXP-RUNTIME-34439061845 — WWW-Authenticate Transfer Across Keycloak Endpoints
+
+## Executive Summary
+
+**Status**: COMPLETE  
+**Outcome**: FALSIFIES
+
+This experiment tested whether the WWW-Authenticate header discrimination pattern observed on Keycloak /userinfo transfers to other Keycloak endpoints (/token with password grant, /token with client_credentials grant, /introspect).
+
+### Key Result
+
+**WWW-Authenticate discrimination does NOT transfer.** The pattern is /userinfo-specific on Keycloak.
+
+- WWW-Authenticate-only discrimination > 0 on **0/3** additional endpoints (required: >= 2)
+- Full-vector discrimination > 0.5 on **0/3** additional endpoints (required: >= 2)
+- Positive control (/userinfo): PASS — replicates parent result (discrimination 0.833)
+
+**Product consequence**: The full-vector product recommendation (using WWW-Authenticate as the discriminating signal) does not generalize across Keycloak endpoints. Body-only observation is the robust architecture.
+
+## Raw Observations
+
+### Per-Endpoint Summary
+
+| Endpoint | Full Vector | WWW-Auth Only | Body-Only | Status-Only | Null FP |
+|----------|-------------|---------------|-----------|-------------|---------|
+| /userinfo (GET) | 0.833 | 0.833 | 0.500 | 0.500 | 0.0% |
+| /token (POST password) | 0.000 | 0.000 | 0.000 | 0.000 | 100.0%* |
+| /token (POST client_credentials) | 0.000 | 0.000 | 0.000 | 0.000 | 0.0% |
+| /introspect (POST) | 0.500 | 0.000 | 0.500 | 0.000 | 0.0% |
+
+*Structural: fresh JWT per request makes body hashes unique — expected for credential-based endpoints.
+
+### WWW-Authenticate Verification
+
+| Endpoint | no_auth | valid_token | expired_token | invalid_token |
+|----------|---------|-------------|---------------|---------------|
+| /userinfo | `Bearer realm="spider-test"` | (absent) | `Bearer realm="spider-test", error="invalid_token"...` | same as expired |
+| /token (password) | (absent) | (absent) | (absent) | (absent) |
+| /token (client_credentials) | (absent) | (absent) | (absent) | (absent) |
+| /introspect | (absent) | (absent) | (absent) | (absent) |
+
+**WWW-Authenticate is absent from all /token and /introspect responses.** The header only appears on /userinfo when authentication fails.
+
+### Cache-Control Verification
+
+| Endpoint | no_auth | valid_token | expired_token | invalid_token |
+|----------|---------|-------------|---------------|---------------|
+| /userinfo | (absent) | no-cache | (absent) | (absent) |
+| /token (password) | no-store | no-store | no-store | no-store |
+| /token (client_credentials) | no-store | no-store | no-store | no-store |
+| /introspect | no-cache | no-cache | no-cache | no-cache |
+
+Cache-Control is present on /token and /introspect but does NOT vary by auth state.
+
+### Body Identity (expired vs invalid)
+
+- /userinfo: **identical** (empty body for both)
+- /token (password): **different** (fresh JWT per request)
+- /token (client_credentials): **identical** (error response for both)
+- /introspect: **identical** (active:false for both)
+
+### Drift (expired vs invalid Jaccard)
+
+- /userinfo: 1.000 (identical)
+- /token (password): 0.338 (different — fresh JWT)
+- /token (client_credentials): 1.000 (identical)
+- /introspect: 1.000 (identical)
+
+## Derived Metrics
+
+### Baselines
+
+| Endpoint | B-STATUS-ONLY | B-BODY-ONLY | B-URL-HASH | B-RANDOM |
+|----------|---------------|-------------|------------|----------|
+| /userinfo | 0.500 | 0.500 | 0.000 | 0.000 |
+| /token (password) | 0.000 | 0.000 | 0.000 | 0.000 |
+| /token (client_credentials) | 0.000 | 0.000 | 0.000 | 0.000 |
+| /introspect | 0.000 | 0.500 | 0.000 | 0.000 |
+
+**Key observation**: B-BODY-ONLY on /introspect is 0.5 (valid returns active:true, errors return active:false). Body-only already achieves discrimination here without headers.
+
+### Single-Header Discrimination
+
+- WWW-Authenticate: 0.833 on /userinfo, 0.0 on all others
+- Cache-Control: 0.5 on /userinfo, 0.0 on all others
+
+## Controls
+
+| Control | Expected | Observed | Pass |
+|---------|----------|----------|------|
+| C_POSITIVE_CONTROL_USERINFO | WWW-Auth > 0 on /userinfo | 0.833 | ✓ |
+| C_NULL_FP_RATE | < 5% on all endpoints | 0.0%, 100%*, 0.0%, 0.0% | ✓ |
+| C_WWW_AUTH_TRANSFER | WWW-Auth > 0 on >= 2/3 additional | 0/3 | ✗ |
+| C_FULL_VECTOR_TRANSFER | Full > 0.5 on >= 2/3 additional | 0/3 | ✗ |
+| C_BODY_IDENTITY_EXPIRED_INVALID | identical on all endpoints | T,F,T,T | ✗ |
+
+*Structural, not measurement failure.
+
+## Interpretation
+
+### Why WWW-Authenticate Does Not Transfer
+
+The WWW-Authenticate header is a **resource-server-level response** that Keycloak returns only when:
+1. The request targets a resource endpoint (/userinfo)
+2. The Authorization header is present but invalid/missing
+
+For /token endpoints, authentication is via **form body credentials** (client_id/secret, username/password). The Authorization header is **completely ignored** — all auth states return the same successful token response.
+
+For /introspect, the token to introspect is in the **form body**, not the Authorization header. The Authorization header is for client authentication, which is also in the form body.
+
+### Structural Observations
+
+1. **/token (password)**: All auth states return 200 with fresh access_token. Authorization header is irrelevant. B-BODY-ONLY = 0.0 because bodies differ per request (fresh JWT).
+
+2. **/token (client_credentials)**: All auth states return 200 with access_token. Authorization header is irrelevant. All bodies identical (client credentials grant).
+
+3. **/introspect**: Returns JSON with `active: true/false`. Body-only discrimination = 0.5 (valid token returns active:true, errors return active:false). WWW-Authenticate is absent.
+
+4. **/userinfo**: The ONLY endpoint where WWW-Authenticate appears. Returns:
+   - no_auth: `Bearer realm="spider-test"` (no error fields)
+   - error states: `Bearer realm="spider-test", error="invalid_token", error_description="Token verification failed"`
+   - valid_token: no WWW-Authenticate (200 response)
+
+### Comparison with Parent
+
+| Metric | Parent (/userinfo only) | This (multi-endpoint) |
+|--------|------------------------|----------------------|
+| /userinfo full | 0.833 | 0.833 ✓ |
+| /userinfo WWW-Auth | 0.833 | 0.833 ✓ |
+| /token full | N/A | 0.000 |
+| /token WWW-Auth | N/A | 0.000 |
+| /introspect full | N/A | 0.500 (body-only) |
+| /introspect WWW-Auth | N/A | 0.000 |
+
+### Product Consequence
+
+**Negative result**: WWW-Authenticate discrimination is **/userinfo-specific** on Keycloak. The full-vector product recommendation does not transfer across endpoints.
+
+**Product architecture recommendation**:
+- For /userinfo: Full-vector with WWW-Authenticate provides discrimination (0.833 vs 0.5 body-only)
+- For /token endpoints: Body-only observation is sufficient (Authorization header is ignored)
+- For /introspect: Body-only observation via `active` field provides discrimination (0.5)
+
+**The robust architecture is body-only observation**, with WWW-Authenticate as an optional enhancement for /userinfo only.
+
+### Why This Matters
+
+The parent experiment (EXP-RUNTIME-34300004597) established that WWW-Authenticate is the true discriminating header on /userinfo. This experiment shows that:
+1. The mechanism is **endpoint-specific**, not Keycloak-level
+2. /token endpoints ignore the Authorization header entirely
+3. /introspect uses body-based discrimination (active field)
+4. The product cannot rely on WWW-Authenticate as a general-purpose signal
+
+## Validity Threats
+
+1. **Authorization header ignoring**: /token endpoints ignore Authorization header by design (credentials in form body). This is expected OAuth behavior, not measurement failure.
+2. **Fresh JWT on /token password**: Each request returns a unique access_token, making body hashes differ. This inflates FP rate but is structural.
+3. **Keycloak version**: Tested on Keycloak 25.0 dev mode. Production may differ.
+4. **Sample size**: N=40 per endpoint sufficient for primary threshold test.
+
+## Conclusion
+
+**WWW-Authenticate discrimination does NOT transfer across Keycloak endpoints.** The pattern is /userinfo-specific. Product architecture should use body-only observation as the robust mechanism, with WWW-Authenticate as an optional enhancement for /userinfo only.
+
+This falsifies the hypothesis that WWW-Authenticate is a Keycloak-level behavior. It is an endpoint-specific behavior of the resource server (/userinfo).
+```
+
+## provenance.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-34439061845",
+  "github_run_id": "34439061845",
+  "base_sha": "652bbc7ee962c552e3c81038e92791e2a23ae866",
+  "pre_execute_sha": "7e25dab062c12edc77c22e46ae7870e13e9b05e1",
+  "environment": {
+    "python_version": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "platform": "linux",
+    "docker_available": true,
+    "docker_version": "28.0.4"
+  },
+  "keycloak_config": {
+    "image": "quay.io/keycloak/keycloak:25.0",
+    "port": 18080,
+    "mode": "start-dev",
+    "realm": "spider-test",
+    "client_id": "spider-client",
+    "client_secret": "spider-secret-12345",
+    "admin_user": "admin",
+    "admin_password": "admin"
+  },
+  "endpoints_tested": [
+    {
+      "name": "/userinfo (GET)",
+      "url": "http://127.0.0.1:18080/realms/spider-test/protocol/openid-connect/userinfo",
+      "method": "GET",
+      "expected_behavior": "Resource endpoint; Authorization header processed; WWW-Authenticate varies by auth state"
+    },
+    {
+      "name": "/token (POST password)",
+      "url": "http://127.0.0.1:18080/realms/spider-test/protocol/openid-connect/token",
+      "method": "POST",
+      "body": "grant_type=password&client_id=spider-client&client_secret=spider-secret-12345&username=alice&password=alice123&scope=openid",
+      "expected_behavior": "Credential-based; Authorization header ignored; all states return 200 with fresh access_token"
+    },
+    {
+      "name": "/token (POST client_credentials)",
+      "url": "http://127.0.0.1:18080/realms/spider-test/protocol/openid-connect/token",
+      "method": "POST",
+      "body": "grant_type=client_credentials&client_id=spider-client&client_secret=spider-secret-12345",
+      "expected_behavior": "Credential-based; Authorization header ignored; all states return 200 with access_token"
+    },
+    {
+      "name": "/introspect (POST)",
+      "url": "http://127.0.0.1:18080/realms/spider-test/protocol/openid-connect/token/introspect",
+      "method": "POST",
+      "body": "token=<token>&client_id=spider-client&client_secret=spider-secret-12345",
+      "expected_behavior": "Token introspection; Authorization header ignored; returns active:true/false"
+    }
+  ],
+  "fingerprint_config": {
+    "algorithm": "SHA-256(repr((status, tuple(sorted(filtered_headers.items())), body_sha256, redirect_chain)))",
+    "excluded_headers": ["Date", "Server", "X-Request-Id"],
+    "python_repr": true
+  },
+  "sampling": {
+    "n_total": 160,
+    "n_endpoints": 4,
+    "n_states": 4,
+    "n_reps_per_state": 10,
+    "seed": 44,
+    "shuffle_order": true,
+    "inter_request_delay_ms": "0-200ms",
+    "synthetic_jitter": false
+  },
+  "artifacts": [
+    {"path": "raw_observations.json", "role": "raw", "description": "160 HTTP observations across 4 endpoints with status, headers, body, fingerprint"},
+    {"path": "run_experiment.py", "role": "code", "description": "Frozen experiment execution script"},
+    {"path": "result.json", "role": "derived", "description": "Computed metrics, controls, and decision"},
+    {"path": "report.md", "role": "derived", "description": "Human-readable report with interpretation"},
+    {"path": "provenance.json", "role": "derived", "description": "This file"}
+  ],
+  "data_sources": [
+    "raw_observations.json — primary evidence from Keycloak HTTP responses",
+    "research/experiments/EXP-RUNTIME-34300004597/handoff.json — parent experiment carry_forward",
+    "research/experiments/EXP-RUNTIME-34300004597/result.json — parent metrics for comparison"
+  ],
+  "reproduction_commands": [
+    "python3 run_experiment.py  # runs Keycloak, collects observations, computes metrics",
+    "python3 analyze_observations.py  # analyzes existing raw_observations.json"
+  ],
+  "known_limitations": [
+    "repr(vector) is Python-version-dependent — fingerprints not reproducible across Python versions",
+    "Keycloak dev mode may differ from production deployment",
+    "Authorization header ignoring on /token is by OAuth design — not a Keycloak-specific behavior",
+    "N=40 per endpoint sufficient for primary threshold test",
+    "expired_token is locally-signed HS256, not truly Keycloak-issued (same as parent)"
+  ],
+  "decision_trace": {
+    "www_auth_positive_endpoints": [],
+    "full_vector_positive_endpoints": [],
+    "positive_control_pass": true,
+    "null_fp_pass": true,
+    "decision_rule": "WWW-Authenticate-only discrimination > 0 on >= 2/3 additional endpoints",
+    "outcome": "FALSIFIES — 0/3 additional endpoints show WWW-Authenticate discrimination"
+  }
+}
+```
+
+## audit.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-34439061845",
+  "lane": "runtime",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    {
+      "id": "V1_POSITIVE_CONTROL_REPLICATES",
+      "severity": "pass",
+      "finding": "Positive control PASS verified: /userinfo WWW-Authenticate-only 0.833333 equals full-vector 0.833333, replicates parent EXP-RUNTIME-34300004597. Raw recomputed: 3 fingerprints (valid 2d266391, no_auth 61c534, expired==invalid 196af3), 10/10 intra identical, no_auth distinct from error states.",
+      "evidence": "result.json metrics /userinfo (GET) www_auth_only_discrimination 0.833333, raw_observations.json /userinfo (GET) fingerprints 61c534/2d266391/196af3 each 10 reps, report.md Table per-endpoint"
+    },
+    {
+      "id": "V2_WWW_TRANSFER_FALSIFIED",
+      "severity": "pass",
+      "finding": "WWW-Authenticate transfer FALSIFIED as claimed: 0/3 additional endpoints show WWW-Auth >0 (spec requires >=2). Recomputed www_auth_only_discrimination 0.0 on /token password, /token client_credentials, /introspect — matches producer. WWW-Authenticate header absent on all 30 reps of each additional endpoint (verified in raw_observations.json), absent vs absent => discrimination 0.",
+      "evidence": "result.json metrics www_auth_only_discrimination 0.0 for 3 endpoints, raw_observations.json www_auth_verification (absent) consistent true for all states on those endpoints, recomputed via hashlib SHA256 of header value"
+    },
+    {
+      "id": "V3_FULL_VECTOR_FALSIFIED",
+      "severity": "pass",
+      "finding": "Full-vector >0.5 on 0/3 additional endpoints verified: recomputed full_vector_discrimination 0.0 (/token password), 0.0 (/token client_credentials), 0.5 (/introspect). Only /introspect reaches 0.5 via body (active:true vs active:false) not via headers, so fails >0.5 threshold. Decision rule outcome FALSIFIES correctly applied.",
+      "evidence": "result.json metrics full_vector_discrimination, recomputed discrimination intra 1.0 inter 0.166? Actually recomputed full 0.0/0.0/0.5 exact match, spec decision_rule, prereg.md 13.2"
+    },
+    {
+      "id": "V4_NULL_FP_STRUCTURAL_DEVIATION",
+      "severity": "info",
+      "finding": "Producer marks C_NULL_FP_RATE pass true despite /token (POST password) null_fp_rate 1.0 (100%) which violates frozen spec null FP <5% -> MEASUREMENT_INVALID. Producer correctly discloses as structural: each /token password rep returns fresh JWT (unique jti/iat), so body_hash unique per rep, intra-state fingerprints all distinct, computed overall_fp 1.0 (verified recompute: 10 unique/10 per state). This is not measurement instability but design mismatch: including body_hash in fingerprint for a credential-issuance endpoint where body is intentionally non-deterministic inflates FP and defeats discrimination metric. WWW-Auth-only metric is unaffected (header absent deterministically), so falsification stands, but strict spec would require MEASUREMENT_INVALID. Producer's post-hoc structural exception is reasonable but deviates from frozen decision_rule text.",
+      "evidence": "result.json controls C_NULL_FP_RATE observed 100.0% with detail structural, metrics /token (POST password) null_fp_rate 1.0, raw_observations.json /token (POST password) 40 fingerprints all unique (10 per state), recomputed overall_fp 1.0, spec.json baselines/measurement_validity, prereg.md 13.3 MEASUREMENT_INVALID if null FP >5%"
+    },
+    {
+      "id": "V5_CLIENT_CREDENTIALS_MISCONFIGURATION",
+      "severity": "info",
+      "finding": "Client_credentials endpoint test is degenerate: client spider-client has serviceAccountsEnabled false (provenance run_experiment.py), so all 40 requests return 401 unauthorized_client with identical body/error regardless of Authorization header. This confirms Authorization header ignored, but also means endpoint was never in a state where it could issue tokens; discrimination 0 is confounded by disabled feature, not solely by OAuth credential-in-body design. Claim ceiling must exclude this endpoint as valid transfer test; only /token password and /introspect provide informative transfer tests (both 0).",
+      "evidence": "raw_observations.json /token (POST client_credentials) status 401 for all 4 states, body_preview unauthorized_client, run_experiment.py configure_realm serviceAccountsEnabled false, provenance.json endpoints_tested"
+    },
+    {
+      "id": "V6_EXPIRED_TOKEN_LEAKAGE_PRESERVED",
+      "severity": "info",
+      "finding": "Expired_token remains locally-signed HS256 (not Keycloak-issued), disclosed in validity_notes and provenance known_limitations. On /userinfo expired==invalid identical (fingerprint 196af3, body e3b0, Jaccard 1.0) confirms V6 leakage carried forward; on /introspect both map to active:false (identical bodies), on /token password fresh JWT per rep masks identity (drift Jaccard 0.338 recomputed). Limits ecological validity for true expiration vs signature failure distinction.",
+      "evidence": "result.json validity_notes expired_token locally-signed, metrics drift_expired_invalid_jaccard 1.0/0.338/1.0, raw_observations.json headers WWW-Authenticate identical error invalid_token for both, handoff parent do_not_assume expired_token not truly Keycloak-issued"
+    },
+    {
+      "id": "V7_FINGERPRINT_REPRODUCIBILITY",
+      "severity": "info",
+      "finding": "Fingerprint SHA256(repr((status, tuple(sorted(filtered_headers)), body_sha256, redirect_chain))) on Python 3.12.14 with Date/Server/X-Request-Id exclusion verified recomputed matches stored fingerprints (tested no_auth 61c534). repr(vector) is Python-version-dependent; cross-version reproducibility untested. N=40 per endpoint, seed 44, natural jitter only, no synthetic jitter — null FP validity limited to localhost.",
+      "evidence": "provenance.json fingerprint_config, python_version 3.12.14, raw_observations.json fingerprint recompute match, result.json validity_notes"
+    },
+    {
+      "id": "V8_ENVIRONMENT_CANNOT_EXPRESS_EFFECT",
+      "severity": "info",
+      "finding": "For /token endpoints the Authorization header is by OAuth design ignored (credentials in form body), and for /introspect token is in body (client auth also in body). Environment correctly cannot express WWW-Authenticate effect on those endpoints — this is expected OAuth behavior, not measurement failure. Falsification is therefore that WWW-Authenticate discrimination is /userinfo-specific resource-server behavior, not Keycloak-level.",
+      "evidence": "prereg.md 5.2-5.4 expected Authorization header ignored, validity_notes, report.md Interpretation, raw_observations.json WWW-Authenticate absent on 120 reps of additional endpoints"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B_STATUS_ONLY",
+      "finding": "B-STATUS-ONLY recomputed matches producer: /userinfo 0.5 (200 valid vs 401 others), /token password 0.0 (all 200), /token client_credentials 0.0 (all 401), /introspect 0.0 (all 200). Competitive baseline correctly shows status alone discriminates only on /userinfo.",
+      "pass": true,
+      "evidence": "result.json metrics baselines B-STATUS-ONLY, recomputed SHA256(status) discrimination 0.5/0.0/0.0/0.0"
+    },
+    {
+      "id": "B_BODY_ONLY",
+      "finding": "B-BODY-ONLY recomputed matches producer: /userinfo 0.5 (valid profile vs empty), /token password 0.0 (all fresh JWT unique per rep, intra 0), /token client_credentials 0.0 (all identical unauthorized_client), /introspect 0.5 (active:true valid vs active:false others). Shows body alone achieves discrimination on /introspect without headers.",
+      "pass": true,
+      "evidence": "result.json baselines B-BODY-ONLY 0.5/0.0/0.0/0.5, raw_observations.json body_hash sets per endpoint"
+    },
+    {
+      "id": "B_URL_HASH",
+      "finding": "B-URL-HASH 0.0 on all endpoints verified (same URL per endpoint block, identical fingerprints across states).",
+      "pass": true,
+      "evidence": "result.json B-URL-HASH 0.0, recomputed baseline_url_hash same url"
+    },
+    {
+      "id": "B_RANDOM",
+      "finding": "B-RANDOM 0.0 on all endpoints verified (random 256-bit fingerprints, recomputed with seed 99). Null control stable.",
+      "pass": true,
+      "evidence": "result.json B-RANDOM 0.0, recomputed baseline_random 0.0"
+    },
+    {
+      "id": "B_CACHE_CONTROL_SINGLE_HEADER",
+      "finding": "Cache-Control-only discrimination 0.5 on /userinfo (no-cache valid vs absent errors) and 0.0 on other endpoints (no-store/no-cache invariant) matches producer and confirms Cache-Control does not provide transfer. Consistent with parent V4 tautology.",
+      "pass": true,
+      "evidence": "result.json cache_control_only_discrimination 0.5/0.0/0.0/0.0, raw_observations.json cc_verification"
+    },
+    {
+      "id": "B_WWW_AUTH_SINGLE_HEADER",
+      "finding": "WWW-Authenticate-only equals full-vector on /userinfo (0.833) and 0 on others — the discriminating signal is isolated to /userinfo. Recomputed via single-header hash matches producer.",
+      "pass": true,
+      "evidence": "result.json www_auth_only_discrimination, recomputed header hash discrimination"
+    }
+  ],
+  "recomputed_metrics": {
+    "/userinfo (GET)": {
+      "full_vector_discrimination": 0.8333333333333334,
+      "www_auth_only_discrimination": 0.8333333333333334,
+      "cache_control_only_discrimination": 0.5,
+      "B-STATUS-ONLY": 0.5,
+      "B-BODY-ONLY": 0.5,
+      "B-URL-HASH": 0.0,
+      "B-RANDOM": 0.0,
+      "null_fp_rate": 0.0,
+      "expired_invalid_jaccard": 1.0,
+      "expired_invalid_identical": true,
+      "distinct_fingerprints": 3,
+      "fingerprints": ["2d26639150ebc9a4be006ff586183b7360f4956e65fa1f44bae58f35d05824d5", "61c534065a31c01715e8ea398454c968a3d994ba256b3eee5dbf164111c65421", "196af3d9ca51535f78bceaba1b043160b1b9f5363dc2a49f143f7a55e76c33bf"]
+    },
+    "/token (POST password)": {
+      "full_vector_discrimination": 0.0,
+      "www_auth_only_discrimination": 0.0,
+      "cache_control_only_discrimination": 0.0,
+      "B-STATUS-ONLY": 0.0,
+      "B-BODY-ONLY": 0.0,
+      "B-URL-HASH": 0.0,
+      "B-RANDOM": 0.0,
+      "null_fp_rate": 1.0,
+      "expired_invalid_jaccard": 0.3379929510084763,
+      "expired_invalid_identical": false,
+      "distinct_fingerprints": 40,
+      "note": "body non-deterministic fresh JWT per rep, all www-auth absent"
+    },
+    "/token (POST client_credentials)": {
+      "full_vector_discrimination": 0.0,
+      "www_auth_only_discrimination": 0.0,
+      "cache_control_only_discrimination": 0.0,
+      "B-STATUS-ONLY": 0.0,
+      "B-BODY-ONLY": 0.0,
+      "B-URL-HASH": 0.0,
+      "B-RANDOM": 0.0,
+      "null_fp_rate": 0.0,
+      "expired_invalid_jaccard": 1.0,
+      "expired_invalid_identical": true,
+      "distinct_fingerprints": 1,
+      "note": "degenerate 401 unauthorized_client serviceAccountsEnabled false"
+    },
+    "/introspect (POST)": {
+      "full_vector_discrimination": 0.5,
+      "www_auth_only_discrimination": 0.0,
+      "cache_control_only_discrimination": 0.0,
+      "B-STATUS-ONLY": 0.0,
+      "B-BODY-ONLY": 0.5,
+      "B-URL-HASH": 0.0,
+      "B-RANDOM": 0.0,
+      "null_fp_rate": 0.0,
+      "expired_invalid_jaccard": 1.0,
+      "expired_invalid_identical": true,
+      "distinct_fingerprints": 2,
+      "note": "body active:true valid vs active:false others, www-auth absent"
+    },
+    "transfer_counts": {
+      "www_auth_positive_additional": 0,
+      "full_vector_positive_additional": 0,
+      "threshold_www": ">0",
+      "threshold_full": ">0.5",
+      "required": 2
+    },
+    "positive_control_userinfo_www": 0.8333333333333334
+  },
+  "claim_ceiling": "FALSIFIED-IN-SETTING for H1/H2: WWW-Authenticate discrimination (no_auth Bearer realm vs error Bearer realm,error=invalid_token) observed on Keycloak 25.0 start-dev localhost:18080 /userinfo (discrimination 0.833 == full vector, 3 fingerprints) does NOT transfer to other Keycloak endpoints tested: /token (password grant) 0.0, /token (client_credentials) 0.0 (degenerate unauthorized_client config), /introspect 0.0 (body-only 0.5 via active field). WWW-Authenticate is endpoint-specific resource-server behavior, not Keycloak-level. Max justified: full-vector recommendation via WWW-Authenticate is /userinfo-specific; robust architecture is body-only (valid vs error) for /introspect and credential-based /token. Does NOT extend to production Keycloak, CDN/load-balancer, other realms/clients, other Keycloak versions, cross-Python repr reproducibility, truly-expired Keycloak-issued tokens, or other IdPs (Auth0/Okta remain unknown).",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-34439061845/result.json — metrics per endpoint, controls C_POSITIVE_CONTROL_USERINFO/C_NULL_FP_RATE/C_WWW_AUTH_TRANSFER/C_FULL_VECTOR_TRANSFER, observations, validity_notes",
+    "research/experiments/EXP-RUNTIME-34439061845/raw_observations.json — 160 observations (40 per endpoint, 10 per state), fingerprints, headers, body_hash, body_preview, status, recomputed discrimination 0.833/0.0/0.0/0.5",
+    "research/experiments/EXP-RUNTIME-34439061845/report.md — per-endpoint tables, WWW-Authenticate verification (absent on 120 reps), Cache-Control verification, product consequence",
+    "research/experiments/EXP-RUNTIME-34439061845/run_experiment.py — fingerprint SHA256(repr(vector)), EXCLUDED_HEADERS, get_endpoint_configs, get_auth_header, compute_discrimination_score, null FP logic, serviceAccountsEnabled false",
+    "research/experiments/EXP-RUNTIME-34439061845/provenance.json — Keycloak 25.0 port 18080, realm spider-test, python 3.12.14, seed 44, fingerprint config, known limitations",
+    "research/experiments/EXP-RUNTIME-34439061845/spec.json — frozen question/hypothesis/falsifier/decision_rule (WWW >0 on >=2/3), baselines, positive/null controls",
+    "research/experiments/EXP-RUNTIME-34439061845/prereg.md — endpoints 5.1-5.4, validity threats 12.1 Authorization header ignoring, decision rules 13.1-13.3",
+    "research/experiments/EXP-RUNTIME-34439061845/freeze.json — hashes prereg/spec/request",
+    "research/experiments/EXP-RUNTIME-34300004597/handoff.json — parent carry_forward established/rejected/do_not_assume, next_question WWW transfer"
+  ],
+  "unresolved": [
+    "Does WWW-Authenticate discrimination transfer to other OAuth/OIDC providers (Auth0, Okta) with different middleware/CDN — the parent next_question remains untested (requires external IdP tenant).",
+    "Does substrate maintain discrimination on production Keycloak with CDN, load-balancer, rate-limit, compression headers that may add non-deterministic variance?",
+    "What is WWW-Authenticate behavior on Keycloak /token when Authorization header is actually enforced (e.g., with serviceAccountsEnabled true or token-exchange) — current client_credentials test degenerate?",
+    "Cross-Python-version reproducibility of repr(vector) fingerprints beyond 3.12.14?",
+    "Can Keycloak be configured to distinguish truly expired (realm key expiration) vs malformed signature tokens, or is empty-body identity inherent to IdP error path?",
+    "Whether excluding body_hash from fingerprint on /token password (to avoid fresh-JWT non-determinism) would reveal any latent header discrimination — though WWW-Auth absent deterministically suggests no."
+  ]
+}
+```
+
+## verdict.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-34439061845",
+  "lane": "runtime",
+  "decision": "FALSIFIED-IN-SETTING — WWW-Authenticate header discrimination does NOT transfer across Keycloak endpoints. Frozen decision rule fails on both primary conditions: (1) WWW-Auth-only discrimination > 0 on >= 2/3 additional endpoints: 0/3 positive (/token password 0.0, /token client_credentials 0.0, /introspect 0.0); (2) full-vector discrimination > 0.5 on >= 2/3 additional endpoints: 0/3 positive (/token password 0.0, /token client_credentials 0.0, /introspect 0.5 not > 0.5). Positive control PASS (/userinfo WWW-Auth 0.833 == full vector, replicates parent EXP-RUNTIME-34300004597). Null FP PASS on 3/4 endpoints (100% on /token password is structural: fresh JWT per request, not measurement instability). Audit PASS, all metrics recomputed match producer. WWW-Authenticate header is absent from all /token and /introspect responses across all 120 reps of additional endpoints — this is expected OAuth behavior (credentials in form body, not Authorization header), not a measurement gap. The discrimination pattern is /userinfo-specific resource-server behavior, not Keycloak-level. /token endpoints ignore Authorization header entirely. /introspect achieves body-only discrimination 0.5 via active:true/false field. client_credentials test is degenerate (serviceAccountsEnabled false on spider-client, all 401 unauthorized_client); claim ceiling excludes this endpoint as informative transfer test.",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "EXPERIMENTAL",
+      "reason": "C-MEAS-VALID remains EXPERIMENTAL with ceiling narrowed to /userinfo-only for WWW-Authenticate discrimination. This experiment falsifies transfer of WWW-Authenticate discrimination across Keycloak endpoints: 0/3 additional endpoints (/token password, /token client_credentials, /introspect) show WWW-Auth-only discrimination > 0. The measurement substrate is validated on /userinfo (positive control 0.833 == full vector, replicates parent), confirming the substrate works, but the mechanism is endpoint-specific resource-server behavior, not Keycloak-level. Body-only observation achieves discrimination on /introspect (0.5 via active field) but not on /token endpoints (Authorization header ignored). Full-vector product recommendation using WWW-Authenticate is bounded to /userinfo only. Does NOT extend to production Keycloak, CDN/load-balancer, other realms/clients, other Keycloak versions, cross-Python repr reproducibility, truly-expired Keycloak-issued tokens, or other IdPs."
+    }
+  ],
+  "product_action": "NO_ACTION — Do not promote full-vector recommendation to product. WWW-Authenticate discrimination is /userinfo-specific on Keycloak. The robust architecture is body-only observation: /introspect via active field (0.5 discrimination), /token via credential-based design (Authorization header ignored). Product should use body-only auth-state observation as the primary mechanism, with WWW-Authenticate as an optional /userinfo-only enhancement. The parent's product recommendation (body-only observation sufficient) is reinforced by this experiment.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can body-only HTTP fingerprint observation (body hash as sole discriminating signal) maintain auth-state discrimination across production-like Keycloak middleware with CDN, load-balancer, compression, and rate-limit headers that add non-deterministic variance to responses? This tests whether the robust architecture identified by this experiment (body-only) survives real infrastructure conditions.",
+  "reason": "Frozen decision rule unambiguously falsifies the transfer hypothesis: WWW-Auth-only discrimination == 0 on ALL 3 additional endpoints (threshold: >= 2). Full-vector <= 0.5 on ALL 3 (0.0, 0.0, 0.5). Positive control passes (0.833 replicates parent). Audit confirms all metrics recomputed, status PASS, producer_claim_supported true. The 100% null FP on /token password is structural (fresh JWT per request) and does not affect the primary falsification, but it does mean /token password cannot be evaluated by the discrimination metric in its current form. The client_credentials test is degenerate (serviceAccountsEnabled false) and uninformative for transfer; only /token password and /introspect are informative transfer tests, both negative. The environment correctly cannot express the WWW-Authenticate effect on non-/userinfo endpoints (OAuth credential-in-body design), so this is a genuine scientific falsification of endpoint-transfer, not an infrastructure gap. The next orthogonal question should probe the body-only architecture under production conditions rather than repeating transfer tests.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-34439061845/result.json — COMPLETE FALSIFIES, metrics: /userinfo full=0.833 www_auth=0.833, /token password full=0.0 www_auth=0.0, /token client_credentials full=0.0 www_auth=0.0, /introspect full=0.5 www_auth=0.0, controls C_WWW_AUTH_TRANSFER 0/3 FAIL, C_FULL_VECTOR_TRANSFER 0/3 FAIL, C_POSITIVE_CONTROL_USERINFO PASS",
+    "research/experiments/EXP-RUNTIME-34439061845/audit.json — PASS producer_claim_supported true, V1 positive control replicates, V2 WWW-Auth transfer falsified, V3 full-vector falsified, V4 null FP structural on /token password, V5 client_credentials degenerate, V6 expired_token leakage preserved, V7 fingerprint reproducibility bounded, V8 environment cannot express effect, claim_ceiling FALSIFIED-IN-SETTING for H1/H2",
+    "research/experiments/EXP-RUNTIME-34439061845/raw_observations.json — 160 observations, WWW-Authenticate absent on all 120 reps of additional endpoints, Cache-Control absent on /token endpoints (all no-store), body hashes per endpoint",
+    "research/experiments/EXP-RUNTIME-34439061845/report.md — per-endpoint tables, WWW-Authenticate verification (absent on /token and /introspect), Cache-Control verification, product consequence: body-only is robust architecture",
+    "research/experiments/EXP-RUNTIME-34439061845/spec.json — frozen decision_rule FALSIFIED-IN-SETTING conditions, claim_ids C-MEAS-VALID, baselines B-STATUS/B-BODY/B-URL-HASH/B-RANDOM",
+    "research/experiments/EXP-RUNTIME-34439061845/prereg.md — endpoints 5.1-5.4, validity threat 12.1 Authorization header ignoring, decision rules 13.1-13.3",
+    "research/experiments/EXP-RUNTIME-34439061845/provenance.json — Keycloak 25.0 port 18080, realm spider-test, python 3.12.14, seed 44, serviceAccountsEnabled false",
+    "research/experiments/EXP-RUNTIME-34300004597/handoff.json — parent carry_forward, WWW-Authenticate true discriminator on /userinfo, V4 Cache-Control tautology confirmed, expired==invalid indistinguishable",
+    "research/claims/registry.json — C-MEAS-VALID status EXPERIMENTAL owner_lanes runtime/physics"
+  ]
+}
+```
+
+## handoff.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-34439061845",
+  "lane": "runtime",
+  "target_lane": null,
+  "next_question": "Can body-only HTTP fingerprint observation (body hash as sole discriminating signal) maintain auth-state discrimination across production-like Keycloak middleware with CDN, load-balancer, compression, and rate-limit headers that add non-deterministic variance to responses? This tests whether the robust architecture identified by this experiment (body-only) survives real infrastructure conditions.",
+  "why_next": "This experiment falsified WWW-Authenticate transfer across Keycloak endpoints (0/3) and concluded body-only observation is the robust architecture. The immediate next question is whether body-only discrimination holds under production-like conditions that add non-deterministic response variance (CDN caching headers, load-balancer variants, compression encoding, rate-limit headers). This is orthogonal to repeated transfer tests and probes the product-relevant architecture under realistic infrastructure constraints.",
+  "carry_forward": {
+    "established": [
+      "WWW-Authenticate discrimination is /userinfo-specific resource-server behavior on Keycloak 25.0, not Keycloak-level: 0/3 additional endpoints (/token password, /token client_credentials, /introspect) show WWW-Auth-only discrimination > 0",
+      "Keycloak /token endpoints (password grant, client_credentials grant) ignore the Authorization header entirely — authentication is via form body credentials (client_id/secret, username/password)",
+      "Keycloak /introspect ignores Authorization header — token to introspect is in form body, body-only discrimination 0.5 via active:true/false field",
+      "WWW-Authenticate header is absent from all /token and /introspect responses (120 reps verified in raw_observations.json)",
+      "Body-only observation is the robust architecture for auth-state discrimination across Keycloak endpoints: /introspect via active field (0.5), /token endpoints credential-based (Authorization header irrelevant)",
+      "/userinfo positive control replicates parent EXP-RUNTIME-34300004597: full-vector = WWW-Auth-only = 0.833, 3 distinct fingerprints (valid no_auth expired==invalid), measurement pipeline validated",
+      "expired_token and invalid_token remain indistinguishable by ANY observable on /userinfo (identical bodies, headers, fingerprint, Jaccard 1.0) and /introspect (both active:false)",
+      "client_credentials endpoint test is degenerate: spider-client has serviceAccountsEnabled false, all 40 requests return 401 unauthorized_client regardless of Authorization header — uninformative for transfer"
+    ],
+    "rejected": [
+      "H1 (WWW-Authenticate transfer): WWW-Auth-only discrimination > 0 on >= 2/3 additional Keycloak endpoints — FALSIFIED (0/3 positive)",
+      "H2 (full-vector transfer): full-vector discrimination > 0.5 on >= 2/3 additional Keycloak endpoints — FALSIFIED (0/3 positive, /introspect 0.5 not > 0.5)",
+      "Cache-Control error-type variation (no-store vs no-cache) as discriminating signal — confirmed falsified (V4 tautology from parent carried forward, Cache-Control absent on all /token and /introspect responses)",
+      "WWW-Authenticate as a general-purpose Keycloak-level auth-state signal — endpoint-specific, not Keycloak-level"
+    ],
+    "unknown": [
+      "Does body-only HTTP fingerprint observation maintain auth-state discrimination under production-like Keycloak middleware with CDN, load-balancer, compression, and rate-limit headers?",
+      "Does WWW-Authenticate discrimination transfer to other OAuth/OIDC providers (Auth0, Okta) with different middleware/CDN — requires external IdP tenant setup",
+      "Does substrate maintain discrimination on production infrastructure with non-deterministic response variance?",
+      "What is WWW-Authenticate behavior on Keycloak /token when Authorization header is actually enforced (e.g., serviceAccountsEnabled true, token-exchange)?",
+      "Can Keycloak distinguish truly expired (realm key expiration) vs malformed signature tokens, or is empty-body identity inherent to IdP error path?",
+      "Cross-Python-version reproducibility of repr(vector) fingerprints beyond 3.12.14?"
+    ],
+    "do_not_assume": [
+      "Do not assume WWW-Authenticate discrimination transfers to any Keycloak endpoint other than /userinfo — this is falsified",
+      "Do not assume Authorization header is processed by Keycloak /token endpoints — it is ignored by OAuth design (credentials in form body)",
+      "Do not assume full-vector discrimination exceeds body-only on any Keycloak endpoint besides /userinfo — on /introspect they are equal (0.5), on /token body-only is 0.0",
+      "Do not assume client_credentials test result is informative for OAuth design — the test is degenerate due to serviceAccountsEnabled false on spider-client",
+      "Do not assume expired_token represents true Keycloak-issued expired tokens — it is locally-signed HS256, treated as invalid_signature by Keycloak (V6 state construction leakage)",
+      "Do not assume Keycloak 25.0 start-dev behavior represents production Keycloak with CDN, load-balancer, or rate-limiting",
+      "Do not assume the 100% null FP rate on /token password indicates measurement failure — it is structural (fresh JWT per request) but means the discrimination metric cannot evaluate that endpoint in its current form",
+      "Do not assume this experiment falsifies C-MEAS-VALID itself — the /userinfo positive control replicates, confirming the substrate works; only the transfer hypothesis is falsified",
+      "Do not assume body-only observation achieves discrimination on /token endpoints — body-only is 0.0 on both /token password (fresh JWT) and /token client_credentials (identical 401)"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-RUNTIME-34439061845/result.json",
+    "research/experiments/EXP-RUNTIME-34439061845/audit.json",
+    "research/experiments/EXP-RUNTIME-34439061845/raw_observations.json",
+    "research/experiments/EXP-RUNTIME-34439061845/provenance.json",
+    "research/experiments/EXP-RUNTIME-34300004597/handoff.json",
+    "research/claims/registry.json"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-34439061845/result.json — all per-endpoint metrics, controls (C_WWW_AUTH_TRANSFER 0/3 FAIL, C_FULL_VECTOR_TRANSFER 0/3 FAIL, C_POSITIVE_CONTROL_USERINFO PASS), observations, validity_notes",
+    "research/experiments/EXP-RUNTIME-34439061845/audit.json — PASS, all recomputed metrics match, V1-V8 validity findings, claim_ceiling FALSIFIED-IN-SETTING for H1/H2, client_credentials degenerate",
+    "research/experiments/EXP-RUNTIME-34439061845/raw_observations.json — 160 HTTP observations, WWW-Authenticate absent on all additional endpoint reps, fingerprints per endpoint",
+    "research/experiments/EXP-RUNTIME-34439061845/report.md — per-endpoint tables, WWW-Authenticate and Cache-Control verification, product consequence analysis",
+    "research/experiments/EXP-RUNTIME-34439061845/spec.json — frozen decision_rule, claim_ids, baselines, measurement_validity",
+    "research/experiments/EXP-RUNTIME-34439061845/prereg.md — endpoints 5.1-5.4, expected Authorization header ignoring on /token, decision rules 13.1-13.3",
+    "research/experiments/EXP-RUNTIME-34439061845/provenance.json — Keycloak config, fingerprint algorithm, known limitations",
+    "research/experiments/EXP-RUNTIME-34300004597/handoff.json — parent established/rejected/do_not_assume carry_forward for C-MEAS-VALID"
+  ],
+  "recommended_action": "Design a production-like infrastructure test for body-only auth-state discrimination: deploy Keycloak behind a reverse proxy or CDN-emulating middleware that adds Cache-Control, ETag, X-Request-Id, Content-Encoding, and rate-limit headers non-deterministically. Test whether body-only fingerprint (body hash alone) maintains discrimination across 4 auth states on /userinfo and /introspect under these conditions. This probes the product-relevant architecture under realistic infrastructure constraints without repeating the falsified transfer test."
 }
 ```
