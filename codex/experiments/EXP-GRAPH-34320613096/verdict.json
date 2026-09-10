@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34320613096",
+  "lane": "graph",
+  "decision": "BLOCKED",
+  "claim_updates": [
+    {
+      "claim_id": "C-PARAM-INHERIT",
+      "status": "BLOCKED",
+      "reason": "Third consecutive BLOCKED result: fix NOT present in committed HEAD src/spider/kernel.py L112 (sha256 46929b3a, line 'candidates.sort(key=lambda m: m.confidence, reverse=True)'). 0/14 conditions executed per frozen decision rule 9.3. No post-commit evidence exists for hazard elimination, baseline preservation, confidence ordering, or upsert compatibility. The prerequisite (one-line fix committed with Director approval) remains unmet. This is operational delay (fix not committed), not scientific closure (hypothesis not rejected)."
+    }
+  ],
+  "product_action": "NONE — BLOCKED status means no scientific measurement occurred, no product evidence produced. Fix must be committed before C-PARAM-INHERIT can advance to post-commit testing.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "After committing the parameter-slot-count fix to production HEAD (src/spider/kernel.py L112 sort key includes len(parameter_slots)), does the literal-vs-param equal-confidence competition resolve to param for all unseen ids 2-7 without monkey-patching, do all 6 baseline conditions pass, does the corrected B_CONFIDENCE_LITERAL_HIGHER condition (literal 0.98 > param 0.95) remain literal-winning, and does the fix interact correctly with registry upsert sorting (production-like ordering)?",
+  "reason": "Auditor PASS confirms producer correctly executed BLOCKED protocol: fix verification via independent recompute (kernel sha256 46929b3a, L112 content matches), all 14 condition controls correctly show fix_presence fail and others unknown, no metric inflation, no identifier renaming, provenance and lineage intact. Producer correctly did not misclassify BLOCKED as FALSIFIED or SUPPORTS. No scientific measurement occurred (0 conditions executed, 0 HTTP requests). The fix absent state is confirmed by 12-branch sweep (fix found on NONE), git diagnostics (14 commits across branches, none include fix), and clean working tree. Third consecutive BLOCKED on same kernel hash — the one-line fix must be committed with Director approval before re-running the exact frozen spec.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-34320613096/result.json — status BLOCKED, outcome NOT_APPLICABLE, metrics.fix_present_in_committed_head=false, 0/14 conditions executed",
+    "research/experiments/EXP-GRAPH-34320613096/audit.json — status PASS, producer_claim_supported=false, claim_ceiling BLOCKED, all controls verified",
+    "research/experiments/EXP-GRAPH-34320613096/raw_evidence.json — fix_verification.fix_present=false, git_diagnostics fix_found_on_branches=[], 12 branches checked",
+    "research/experiments/EXP-GRAPH-34320613096/report.md — BLOCKED execution report, third consecutive BLOCKED, recommendation to commit fix",
+    "src/spider/kernel.py sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61 L112 — unfixed sort key",
+    "research/experiments/EXP-GRAPH-34291967676/handoff.json sha256 8c9ab18ce8dbb83cd6eea32b5affb134af5a5bc773614c1d5ac1d850a3d0e183 — parent BLOCKED handoff",
+    "research/experiments/EXP-GRAPH-34320613096/freeze.json — frozen inputs verified, no post-freeze spec change",
+    "research/experiments/EXP-GRAPH-34320613096/provenance.json — github_run_id=34320613096, kernel sha256, branch coverage"
+  ]
+}

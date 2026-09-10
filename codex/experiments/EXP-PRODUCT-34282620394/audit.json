@@ -1,0 +1,171 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-34282620394",
+  "lane": "product",
+  "status": "FAIL",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Decision-rule violation mislabeled: result.json outcome=MIXED should be FALSIFIES per frozen decision_rule (C2 pass but 4/9 regressions fail triggers C2-FIX-FALSIFIED). Report.md correctly applies rule but result.json contradicts it.",
+    "Overall aggregate metrics inconsistent with raw_evidence.json: result.json reports overall_binding_correct_count=22 total=30 acc=0.7333 but recomputed from raw_evidence.json is 24/34 acc=0.7059. Must correct or explain denominator.",
+    "To support C-PARAM-INHERIT 10/10 claim, must abandon exclusive distill-time stripping or unify value convention: either (a) revert to bind-time double-prefix detection handling both short and full values, or (b) change test harness to pass full values for B4/C1/D1/D3 (site-d, order-4, item-4) and document full-value-only contract, or (c) implement hybrid distill-time detection + bind-time fallback with explicit guard against double-prefix.",
+    "Producer validity_notes reinterpret falsification as 'harness compatibility' not kernel correctness – this reframes a frozen falsifier as interpretive; audit rejects this: per spec falsifier (2) any regression is falsification regardless of post-hoc contract explanation."
+  ],
+  "validity_findings": [
+    {
+      "check": "target/split/sampling integrity",
+      "finding": "PASS: All 10 conditions use identical synthetic deterministic data as parent EXP-PRODUCT-34195008089 per spec.measurement_validity. Each condition uses fresh temporary registry (run_experiment.py:515, registry upsert per condition) preventing cross-condition contamination. Provenance confirms offline_synthetic, no model/network/browser.",
+      "evidence": "research/experiments/EXP-PRODUCT-34282620394/run_experiment.py:513-542, provenance.json:execution_mode=offline_synthetic, raw_evidence.json:conditions.*.training_count"
+    },
+    {
+      "check": "C2 full-value measurement validity",
+      "finding": "PASS: C2 tested with full values user-4/5/6 as required by spec.measurement_validity bullet 2. Strict JSON comparison used (_verify_binding_correct). Template correctly shortened to https://api.example.com/users/${url} with slot_prefix user- stripped, 3/3 binding_correct=true. No data leakage: training values user-1/2/3 vs unseen user-4/5/6 share prefix pattern but that is the induction target.",
+      "evidence": "research/experiments/EXP-PRODUCT-34282620394/raw_evidence.json:conditions.C2-full-value-ids, result.json:metrics.c2_induced_template"
+    },
+    {
+      "check": "distill_parameterized is kernel method",
+      "finding": "PASS: Distillation uses src/spider/kernel.py SpiderKernel.distill_parameterized (sha256 97365d612f91ffbbaffe5639ff1dd4ad0e396b7305e63c718aca3648060c40ef) not isolated local impl. Frozen inputs hashes verified: prereg/spec/request match freeze.json.",
+      "evidence": "src/spider/kernel.py:385-483, freeze.json hashes, provenance.json code_paths"
+    },
+    {
+      "check": "representation loss / environment expressibility",
+      "finding": "LIMITED EXTERNAL VALIDITY: Synthetic deterministic URLs with leaf-path model; noisy metadata filtered via METADATA_KEYS. D2 leaf-path cannot split query params (by design, slot_count=1). Fix addresses only prefix-after-last-slash ending with boundary char (-/_.). Does not test suffix-bearing IDs or mixed full/short caller conventions present in real browser traffic. Valid for tested synthetic regime but not shown to generalize to real observation noise distributions.",
+      "evidence": "spec.json:measurement_validity, prereg.md:8.4 D2 limitation, kernel.py:_detect_slot_level_prefix 250-300"
+    },
+    {
+      "check": "control integrity E1/E2 null controls",
+      "finding": "PASS: E1 pattern absence (3 unrelated obs) slot_count=0, E2 single observation slot_count=0. No hallucination. Diagnostics mean_jaccard 0.666 <0.75 correctly blocks induction.",
+      "evidence": "raw_evidence.json:controls.E1_pattern_absence, controls.E2_single_obs, result.json:controls.E1_NULL/E2_NULL"
+    },
+    {
+      "check": "artifact provenance",
+      "finding": "PASS: run_experiment.py sha256 d9feef08ca084a99eb4492c93359ec3ed3218bee6ca3dcce2e25dea680ed9025, raw_evidence.json a13ddef40e875975706a514dcf55219e180e5e003e3987aa3560194c7e4ccc68, kernel.py 97365d612f91ffbbaffe5639ff1dd4ad0e396b7305e63c718aca3648060c40ef all match provenance.json and result.json artifacts. No hidden mutation.",
+      "evidence": "provenance.json artifacts, result.json artifacts"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline": "B_LITERAL literal baseline",
+      "finding": "STRONG PASS: fail_rate=1.0 (5/5 fail) on B2 unseen. Confirms parameterized induction is necessary; literal mechanisms cannot generalize to unseen combos. Appropriate negative control.",
+      "evidence": "raw_evidence.json:baselines.B_LITERAL, result.json:controls.B_LITERAL"
+    },
+    {
+      "baseline": "B1-B5 C1 D1-D3 regression baselines",
+      "finding": "STRONG and DISCRIMINATING: 9 regression conditions with correct slot_count (B1=1,B2=2,B3=3,B4=1,B5=1,C1=1,D1=3,D2=1,D3=1) all maintained slot_count correctness, but binding_accuracy discriminates: 5/9 pass (B1,B2,B3,B5,D2) and 4/9 fail (B4,C1,D1,D3) with accuracy 0.0. Baseline correctly exposed that distill-time stripping breaks short-value callers. Not a weak baseline.",
+      "evidence": "raw_evidence.json conditions.B1-single-path..D3-varying-preconditions metrics.binding_accuracy"
+    },
+    {
+      "baseline": "overall binding aggregate",
+      "finding": "METRIC INCONSISTENCY: Producer reports overall_binding_correct_count 22/30 acc 0.7333; independent recomputation from raw_evidence.json yields 24/34 acc 0.7059 (sum of binding_correct_count across 10 conditions). Discrepancy does not affect falsifier outcome (regression fails still 4/9) but indicates derived metric error. Recomputed values should be used.",
+      "evidence": "result.json metrics.overall_binding_* vs raw_evidence.json conditions.*.metrics.binding_correct_count summed"
+    }
+  ],
+  "recomputed_metrics": {
+    "c2_binding_accuracy_full_value": {
+      "producer": 1.0,
+      "recomputed": 1.0,
+      "unit": "fraction",
+      "correct_count": 3,
+      "total": 3,
+      "verified": true,
+      "evidence": "raw_evidence.json conditions.C2-full-value-ids.resolution_results[3] all binding_correct true, template https://api.example.com/users/${url}"
+    },
+    "c2_template_shortened": {
+      "producer": true,
+      "recomputed": true,
+      "producer_template": "https://api.example.com/users/${url}",
+      "raw_template": "https://api.example.com/users/${url}",
+      "slot_prefix_detected": "user-",
+      "verified": true
+    },
+    "c2_induced_template": {
+      "producer": "https://api.example.com/users/${url}",
+      "recomputed": "https://api.example.com/users/${url}",
+      "match": true
+    },
+    "regression_pass_count": {
+      "producer": 5,
+      "recomputed": 5,
+      "total": 9,
+      "passing": ["B1-single-path", "B2-path-and-body", "B3-path-body-headers", "B5-shared-slot-name", "D2-noisy-get"],
+      "verified": true
+    },
+    "regression_fail_count": {
+      "producer": 4,
+      "recomputed": 4,
+      "failing": ["B4-non-identifier-values", "C1-full-value-urls", "D1-noisy-post", "D3-varying-preconditions"],
+      "verified": true
+    },
+    "regression_binding_accuracy_per_condition": {
+      "B1-single-path": 1.0,
+      "B2-path-and-body": 1.0,
+      "B3-path-body-headers": 1.0,
+      "B4-non-identifier-values": 0.0,
+      "B5-shared-slot-name": 1.0,
+      "C1-full-value-urls": 0.0,
+      "D1-noisy-post": 0.0,
+      "D2-noisy-get": 1.0,
+      "D3-varying-preconditions": 0.0,
+      "verified_against_raw": true
+    },
+    "overall_binding_accuracy": {
+      "producer": 0.7333,
+      "producer_correct": 22,
+      "producer_total": 30,
+      "recomputed_correct": 24,
+      "recomputed_total": 34,
+      "recomputed_accuracy": 0.7058823529411765,
+      "discrepancy": "producer denominator and numerator do not sum raw_evidence.json; recomputed 24/34 is ground truth",
+      "verified": false
+    },
+    "null_e1_slot_count": {
+      "producer": 0,
+      "recomputed": 0,
+      "pass": true
+    },
+    "null_e2_slot_count": {
+      "producer": 0,
+      "recomputed": 0,
+      "pass": true
+    },
+    "literal_baseline_fail_rate": {
+      "producer": 1.0,
+      "recomputed": 1.0,
+      "verified": true
+    },
+    "slot_prefixes_detected": {
+      "producer": {"C2": {"url": "user-"}, "B4": {"callback_url": "site-"}, "C1": {"callback_url": "site-"}, "D1": {"url": "order-"}, "D3": {"url": "item-"}},
+      "recomputed": {"C2": "user-", "B4": "site-", "C1": "site-", "D1": "order-", "D3": "item-"},
+      "verified": true,
+      "note": "No prefix for B1/B2/B3/B5/D2 as expected (common prefix ends at /)"
+    },
+    "falsifier_triggered": {
+      "which": "falsifier (2) regression failure AND decision_rule C2-FIX-FALSIFIED",
+      "c2_pass": true,
+      "regression_pass": false,
+      "null_pass": true,
+      "crash": false,
+      "verdict_per_spec": "C2-FIX-FALSIFIED"
+    }
+  },
+  "claim_ceiling": "C2 distill-time prefix stripping works IN ISOLATION for full-value convention: template shortened to https://api.example.com/users/${url} and binding user-4/5/6 is correct (1.0). However under the frozen 10-condition spec the fix is FALSIFIED: 4/9 regressions fail (B4,C1,D1,D3 binding_accuracy 0.0) because distill-time stripping mandates full-value callers while the harness uses short values (d,4). No justified claim to C-PARAM-INHERIT 10/10 or KERNEL-INTEGRATION-SURVIVES. Maximum justified ceiling is: distill_parameterized detects slot-level prefixes after last '/' ending with boundary char and produces shorter templates, but this mechanism is incompatible with mixed short/full caller conventions and therefore does not close the C2 blocker under the tested harness. Kernel integration remains at 6/10 full-pass under this implementation (5/9 regressions + C2, excluding nulls) or 9/10 under prior baseline without this fix.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-34282620394/request.json sha256 ba041eed4d24d1e99ed377e2f3a85a5d2a89e4806f79b563532b727a1b7a72d1",
+    "research/experiments/EXP-PRODUCT-34282620394/spec.json sha256 bd7d552cf9f099f26ee5b313e2b1ccf7194495e3c0ca57e7fa0c02d9f0919a6a",
+    "research/experiments/EXP-PRODUCT-34282620394/prereg.md sha256 b476866fdba2cc3c38cb8d97df89283a8dbc6ce489d72103169e8fbd3a7b9575",
+    "research/experiments/EXP-PRODUCT-34282620394/freeze.json",
+    "research/experiments/EXP-PRODUCT-34282620394/result.json",
+    "research/experiments/EXP-PRODUCT-34282620394/report.md",
+    "research/experiments/EXP-PRODUCT-34282620394/provenance.json",
+    "research/experiments/EXP-PRODUCT-34282620394/raw_evidence.json sha256 a13ddef40e875975706a514dcf55219e180e5e003e3987aa3560194c7e4ccc68",
+    "research/experiments/EXP-PRODUCT-34282620394/run_experiment.py sha256 d9feef08ca084a99eb4492c93359ec3ed3218bee6ca3dcce2e25dea680ed9025",
+    "src/spider/kernel.py sha256 97365d612f91ffbbaffe5639ff1dd4ad0e396b7305e63c718aca3648060c40ef lines 38-51 _bind and 250-300 _detect_slot_level_prefix and 439-455 distill-time stripping",
+    "research/experiments/EXP-PRODUCT-34195008089/handoff.json sha256 531dc40daddb3339fa9159d30e8bd5e4d41416df52eca88f (parent C2-FIX-FALSIFIED)"
+  ],
+  "unresolved": [
+    "Whether product API should mandate full-value-only caller convention (pass 'user-4','site-d','order-4') or support mixed short/full conventions – product design decision outside this measurement.",
+    "Whether hybrid distill-time detection plus bind-time fallback for short values would satisfy all 10 conditions without regressing – not tested here.",
+    "Real browser observation noise and identifier distribution vs synthetic deterministic prefix patterns – external validity remains untested.",
+    "Precise accounting of overall_binding_correct_count denominator (30 vs 34) – producer metric definition ambiguous but does not affect falsifier.",
+    "Why producer labeled outcome MIXED despite spec decision rule requiring FALSIFIED when any regression fails – reporting inconsistency to be corrected in handoff."
+  ]
+}

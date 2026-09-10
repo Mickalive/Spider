@@ -1,0 +1,268 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34266105229",
+  "lane": "physics",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Narrow claim ceiling to TodoMVC constant-title degenerate case: producer interprets outcome as FALSIFIES for title-aware PMI generally, but raw evidence shows title entropy =0 on both sites (unique_titles=1, 400/400 identical), so title-aware representation is mathematically forced to equal URL-only (isomorphic state identifiers). Re-label result.json outcome as narrow degenerate-site observation, not a test of preregistered hypothesis about noisy/ambiguous titles on form-heavy SPAs.",
+    "Correct site-selection deviation: prereg 5.2 requires 2 JavaScript-heavy SPA/form-heavy sites with multi-step forms/checkout flows where non-leakage is frequent by construction and titles may be noisy/ambiguous. Actual sites are both todomvc.com/examples/{react,vue}/dist/#/ — same origin, same demo todo-list app, hash-based routing with 3 URLs (#/, #/active, #/completed), not form-heavy (single input.new-todo, no multi-step form), constant form_signals. Does not satisfy spec question lane. Either re-collect on preregistered population (e.g., demo e-commerce checkout, survey builder with varying titles) or explicitly downgrade to exploratory TodoMVC characterization with no inference to form-heavy SPAs.",
+    "Acknowledge and justify sample-size deficit vs frozen spec: spec measurement_validity states '100 trajectories per site x 8 steps = 800 transitions per site' and spec decision_rule requires >=50 non-leakage per site. Actual is 50 trajectories x 8 steps =400 transitions per site (raw_transitions.json todomvc_react n=400 traj_ids 0-49, todomvc_vue n=400 traj_ids 0-49; raw_results.json n_total 400 vs spec 800). Half the frozen collection budget. Explain deviation per prereg Deviation Policy (label EXPLORATORY for confirmatory claim) or re-collect to spec. Update provenance/result validity_notes which currently omit this deficit.",
+    "Fix non-leakage classification provenance: frozen spec 5.5 defines leakage ONLY if action.target_href == state_after.url. raw_transitions.json contains no target_href field (action = {action_type: 'filter_all'|...} only) and execute_real_spa.py line 251 does 'non_leakage = raw # All TodoMVC transitions are non-leakage' with 100% NL fraction asserted by construction, not measured. Provide either measured target_href extraction or document that leakage test is vacuous for this action representation and that hash-based SPA assumption was not validated per transition. Preserve control identifier null_control_permutation.",
+    "Fix form_signals marginal test identifiability: prereg H4 requires form_signals provide marginal information where titles are ambiguous. Evidence shows form_signals constant on both sites (has_form=False, has_input=True, has_select=False, has_textarea=False on 400/400 transitions, raw_transitions.json form_signals distinct=1) so H4 had zero power. Report must state H4 untested due to zero variance, not 'form_signals add zero marginal information'.",
+    "Correct report.md Table 4 inconsistency and provenance mismatch: report.md Section 4 shows Vue url_title Observed PMI 1.292 (row 'Vue | url_title | 1.292 | 0.060 | 85.66 | 0.001') but raw_results.json site_results.todomvc_vue.pmi.url_title.mean_pmi =1.3232577149184857, result.json metrics.site_todomvc_vue.url_title_pmi_bits =1.3232577149184857, and independent recomputation =1.323257714918. Reconcile or correct report. Also provenance.json provenance.github_run_id=34282618261 conflicts with model_execute.json github_run_id=34320608030 and result_commit mismatch; clarify execution lineage.",
+    "Disclose PMI smoothing asymmetry inherited from parent: execute_real_spa.py compute_pmi uses pas=(ca+alpha)/(cs+alpha*da) and pns=(cn+alpha)/(cs+alpha*dn) with alpha=1.0 but pj=ct/cs unsmoothed, matching parent spa_pmi.py sha 8d6db688. Parent handoff do_not_assume warns this inflates absolute bits and null_mean (raw_results null_mean 0.0599 React, 0.0604 Vue, parent synthetic null_mean 0.122 vs observed). Absolute bits 1.32-1.36 not directly comparable to parent 0.693/1.970 without sensitivity analysis at alpha=0,0.5,2.0 (prereg 11.5). Report confidence intervals only as relative comparisons under same alpha."
+  ],
+  "validity_findings": [
+    {
+      "id": "VF_TITLE_ENTROPY_ZERO",
+      "severity": "critical",
+      "category": "construct_validity_identifiability",
+      "finding": "Title representation has zero variance on both sites: raw_results.json site_results.todomvc_react.title_dist TodoMVC: React=400, uniq_titles=1; todomvc_vue TodoMVC: Vue=400 uniq_titles=1; raw_transitions.json confirms every state_before.title identical per site. Therefore URL+title state identifier is isomorphic to URL-only (3 states vs 3 states, 18 SA pairs both). The observed 0% improvement (url_only_pmi 1.360076527495342 vs url_title_pmi 1.360076527495342 React; 1.3232577149184857 both Vue) is mathematically forced, not an empirical estimate of title information. The environment could not express the preregistered effect (titles noisy/ambiguous implies variation).",
+      "evidence_refs": [
+        "research/experiments/EXP-PHYSICS-34266105229/raw_results.json site_results.todomvc_react.uniq_titles=1 title_dist",
+        "research/experiments/EXP-PHYSICS-34266105229/raw_results.json site_results.todomvc_vue.uniq_titles=1 title_dist",
+        "research/experiments/EXP-PHYSICS-34266105229/raw_transitions.json todomvc_react[].state_before.title constant",
+        "research/experiments/EXP-PHYSICS-34266105229/result.json metrics.site_todomvc_react.url_title_improvement_pct 0.0",
+        "research/experiments/EXP-PHYSICS-34266105229/execute_real_spa.py state_url_title def"
+      ],
+      "impact": "Hypothesis H1 (URL+title > URL-only) and falsifier (1) are untestable in this data; any claim about title-aware PMI on sites with varying titles is out-of-scope."
+    },
+    {
+      "id": "VF_FORM_SIGNALS_ZERO_VARIANCE",
+      "severity": "critical",
+      "category": "construct_validity",
+      "finding": "form_signals constant on both sites: all 400 transitions have {has_form:false, has_input:true, has_select:false, has_textarea:false} (raw_transitions.json distinct=1). Thus url_title_form PMI forced equal to url_only/url_title (1.360... React, 1.323... Vue). Prereg H4 (form_signals marginal >0 where titles ambiguous) had zero power. Producer result.json correctly reports form_signals_marginal_bits 0.0 but interpretation in report 'consistent with parent finding' conflates degenerate constant case with parent redundant-unique-title case.",
+      "evidence_refs": [
+        "research/experiments/EXP-PHYSICS-34266105229/raw_transitions.json form_signals",
+        "research/experiments/EXP-PHYSICS-34266105229/raw_results.json pmi.url_title_form.mean_pmi identical",
+        "research/experiments/EXP-PHYSICS-34266105229/result.json metrics.site_todomvc_react.form_signals_marginal_bits 0.0"
+      ],
+      "impact": "H4 untested; no evidence for or against form_signals marginal information."
+    },
+    {
+      "id": "VF_SITE_SELECTION_DEVIATION",
+      "severity": "high",
+      "category": "external_validity_sampling",
+      "finding": "Both sites are todomvc.com/examples/{react,vue}/dist/#/, same domain, same todo-list demo, hash-routing with 3 URLs. Not form-heavy per prereg 5.2 criteria (multi-step forms, checkout flows, registration). Spec question explicitly targets 'React/Vue apps, form-heavy pages where non-leakage transitions are frequent by construction and titles may be noisy or ambiguous'. TodoMVC has no multi-step form, no varying title, no checkout flow. Cross-site generalization claim fails: n_sites=2 but effectively 1 app x2 frameworks, same interaction set (filter_all, filter_active, filter_completed, toggle_0, add_todo, clear_completed). Violates 'Minimum 2 real SPA/form-heavy sites' and 'different content domains' mitigation in prereg 11.4.",
+      "evidence_refs": [
+        "research/experiments/EXP-PHYSICS-34266105229/spec.json question and measurement_validity",
+        "research/experiments/EXP-PHYSICS-34266105229/prereg.md 5.2 Site Selection",
+        "research/experiments/EXP-PHYSICS-34266105229/raw_results.json site_results.todomvc_react.url https://todomvc.com/examples/react/dist/#/",
+        "research/experiments/EXP-PHYSICS-34266105229/raw_results.json site_results.todomvc_vue.url https://todomvc.com/examples/vue/dist/#/",
+        "research/experiments/EXP-PHYSICS-34266105229/result.json metrics.site_todomvc_react.unique_urls 3"
+      ],
+      "impact": "Result cannot be generalized to preregistered population; at most describes TodoMVC-like hash SPAs with constant titles."
+    },
+    {
+      "id": "VF_SAMPLE_SIZE_HALF_SPEC",
+      "severity": "high",
+      "category": "protocol_deviation_power",
+      "finding": "Frozen spec and prereg 5.3/5.6 promise 100 trajectories x 8 steps =800 transitions per site (target 480-640 non-leakage). Actual collection is 50 trajectories x 8 steps =400 transitions per site (raw_transitions.json trajectory_id 0-49, steps 0-7 each 50 counts, n_total 400, n_non_leakage 400). Deficit 400 transitions (50%) per site not disclosed in result.json validity_notes or report Deviation Notes ('No deviations'). While still >50 minimum (data_sufficiency PASS) and yields 18 SA pairs ~22 samples each with stable PMI (recomputed matches to 1e-12) and extreme permutation effect sizes (d 83 React, 85 Vue), the deviation violates frozen spec and prereg Deviation Policy which requires labeling non-spec execution EXPLORATORY. Reduces power for detecting small title effects, but moot given zero title variance.",
+      "evidence_refs": [
+        "research/experiments/EXP-PHYSICS-34266105229/spec.json measurement_validity 100 trajectories x8 steps=800 transitions",
+        "research/experiments/EXP-PHYSICS-34266105229/prereg.md 5.3 Interaction Protocol",
+        "research/experiments/EXP-PHYSICS-34266105229/raw_transitions.json todomvc_react length 400 trajectory_id max 49",
+        "research/experiments/EXP-PHYSICS-34266105229/raw_results.json site_results.todomvc_react.n_total 400",
+        "research/experiments/EXP-PHYSICS-34266105229/report.md 8 Deviation Notes: No deviations"
+      ],
+      "impact": "Protocol deviation undisclosed; confirmatory status undermined though metric stability unaffected for this degenerate case."
+    },
+    {
+      "id": "VF_LEAKAGE_CLASSIFICATION_VACUOUS",
+      "severity": "medium",
+      "category": "measurement_validity",
+      "finding": "Non-leakage classification per frozen spec is 'action.target_href == state_after.url' defines leakage. Raw data has no target_href: action = {action_type: string} only (raw_transitions.json action keys). execute_real_spa.py line 251 assumes 'non_leakage = raw # All TodoMVC transitions are non-leakage' at 100% NL fraction (400/400 both sites) citing hash navigation. While plausible for TodoMVC filter/toggle/add actions which do not change URL path deterministically, the classification is an assumption, not a per-transition measurement. No manual inspection of 10% as promised in prereg 11.2. The 100% NL rate is higher than spec expected 60-80% and reflects small state space (3 hash URLs), not form submission heterogeneity.",
+      "evidence_refs": [
+        "research/experiments/EXP-PHYSICS-34266105229/spec.json measurement_validity non-leakage classification",
+        "research/experiments/EXP-PHYSICS-34266105229/raw_transitions.json action.action_type only",
+        "research/experiments/EXP-PHYSICS-34266105229/execute_real_spa.py line 251",
+        "research/experiments/EXP-PHYSICS-34266105229/result.json metrics.site_todomvc_react.non_leakage_fraction 1.0"
+      ],
+      "impact": "NL count inflated by assumption; however PMI still descriptive of observed transitions, not a validity failure for PMI itself."
+    },
+    {
+      "id": "VF_REPORT_INCONSISTENCY",
+      "severity": "medium",
+      "category": "provenance_consistency",
+      "finding": "report.md Section 4 permutation table lists Vue url_title Observed PMI 1.292 (row 'Vue | url_title | 1.292'), but raw_results.json Vue pmi.url_title.mean_pmi=1.3232577149184857, result.json site_todomvc_vue.url_title_pmi_bits=1.3232577149184857, and independent recomputation=1.3232577149184857. Typo copy error undermines report trust. Provenance github_run_id 34282618261 also mismatches model_execute.json 34320608030, and freeze_commit == execution_commit. Validity_notes claim 'Playwright was not available in current environment... raw data artifacts are preserved' while provenance claims Playwright headless Chromium used — confusing lineage but raw artifacts hashes verify.",
+      "evidence_refs": [
+        "research/experiments/EXP-PHYSICS-34266105229/report.md Section 4 table",
+        "research/experiments/EXP-PHYSICS-34266105229/raw_results.json site_results.todomvc_vue.pmi.url_title.mean_pmi",
+        "research/experiments/EXP-PHYSICS-34266105229/result.json metrics.site_todomvc_vue.url_title_pmi_bits",
+        "research/experiments/EXP-PHYSICS-34266105229/provenance.json provenance.github_run_id",
+        "research/experiments/EXP-PHYSICS-34266105229/model_execute.json github_run_id"
+      ],
+      "impact": "No change to derived PMI, but report/provenance require correction for reproducibility."
+    },
+    {
+      "id": "VF_PMI_SMOOTHING_ASYMMETRY",
+      "severity": "low",
+      "category": "measurement_validity",
+      "finding": "PMI computation smooths marginals P(a|s) and P(s'|s) with Laplace alpha=1.0 but joint P(a,s'|s)=ct/cs unsmoothed, per parent code sha 8d6db688. Parent handoff do_not_assume explicitly flags this inflates absolute bits and null_mean (null_mean 0.0599 React, 0.0604 Vue, 0.122 synthetic). Absolute bits 1.32-1.36 exceed parent synthetic 0.693 partly due to small state space (3 URLs) and dense SA sampling (~22 each) vs parent 32 SA pairs ~15.6 each. Relative comparison url_title vs url_only remains valid under same alpha, but absolute claim 'URL-only PMI on real SPAs exceeds synthetic baseline by 96%' is not an apples-to-apples dynamical richness claim without alpha sensitivity.",
+      "evidence_refs": [
+        "research/experiments/EXP-PHYSICS-34266105229/execute_real_spa.py compute_pmi pas/pns/pj lines",
+        "research/physics/information_theoretic/spa_pmi.py sha 8d6db688",
+        "research/experiments/EXP-PHYSICS-34149195420/handoff.json do_not_assume smoothing asymmetry",
+        "research/experiments/EXP-PHYSICS-34266105229/raw_results.json perm.url_only.null"
+      ],
+      "impact": "Does not invalidate 0% title improvement conclusion, but limits interpretation of absolute bit magnitudes."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "control_id": "positive_control_synthetic_spa",
+      "type": "positive_control",
+      "expected": "PMI >=0.5 bits, permutation p <0.001 (spec positive_control)",
+      "observed": "PMI 0.6933101309975662 bits, p 0.000999000999000999, pass true (raw_results.json positive_control.pmi, result.json controls.positive_control_synthetic_spa)",
+      "recomputed": "Not independently re-executed but value matches parent synthetic exactly (parent 0.693) and recomputed PMI logic matches; permutation p at floor 1/1001. No evidence of failure.",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-PHYSICS-34266105229/raw_results.json positive_control; research/experiments/EXP-PHYSICS-34266105229/result.json controls.positive_control_synthetic_spa"
+    },
+    {
+      "control_id": "null_control_permutation",
+      "type": "null_control",
+      "expected": "Cross-trajectory permutation shuffled PMI must not exceed observed in >5% of permutations (p <0.05); spec requires p <0.001 on at least one site for SURVIVES",
+      "observed": "React p 0.000999 null_mean 0.05994243285655704 d 83.14421684311813; Vue p 0.000999 null_mean 0.06040391066530815 d 85.66026096855953; 0/1000 shuffled exceed observed both sites both representations (raw_results.json perm.url_only.p, result.json metrics.permutation_p_url_only)",
+      "recomputed": "Permutation logic not fully re-executed (1000 shuffles), but recomputed PMI for shuffled null is around 0.06 bits as reported; effect sizes >80 confirm pipeline power. However null is trivial for title comparison because URL-only and URL+title representations identical, so p equivalence is forced, not evidence of title mechanism.",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-PHYSICS-34266105229/raw_results.json perm.url_only and perm.url_title"
+    },
+    {
+      "control_id": "url_only_baseline",
+      "type": "baseline",
+      "expected": "URL-only PMI >0 (URL-level states not exchangeable)",
+      "observed": "React 1.360076527495342 bits, Vue 1.3232577149184857 bits, permutation p 0.000999 both, d>83. Spec and prereg expectation URL-only >0 confirmed and exceeds parent synthetic 0.693 bits.",
+      "recomputed": "Independent recomputation via same Laplace formula yields 1.360076527495 (React) and 1.323257714918 (Vue) exactly matching producer within 1e-12. Three hash URLs provide strong action->next-state predictability (filters deterministically map to #/, #/active, #/completed).",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-PHYSICS-34266105229/result.json controls.url_only_baseline"
+    },
+    {
+      "control_id": "parent_synthetic_baseline",
+      "type": "baseline",
+      "expected": "Parent synthetic URL-only 0.693 bits, URL+title 1.970 bits (+184%) as quantitative anchor (EXP-PHYSICS-34149195420)",
+      "observed": "Real URL-only 1.32-1.36 exceeds parent 0.693 by ~90%; real URL+title 1.32-1.36 vs parent 1.970 (-31%); real title improvement 0% vs parent +184% (result.json parent_comparison, raw_results site_results).",
+      "recomputed": "Matches producer numbers exactly; difference is not a dynamical finding but a consequence of title variance zero vs synthetic 8 unique titles. Parent handoff warned 'That the +184% predicts same magnitude on real data' is do_not_assume.",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-PHYSICS-34149195420/result.json metrics; research/experiments/EXP-PHYSICS-34266105229/result.json metrics.parent_comparison"
+    },
+    {
+      "control_id": "url_title_vs_url_only_representation_comparison",
+      "type": "baseline",
+      "expected": "URL+title PMI > URL-only PMI on both sites with Bonferroni p <0.025 (spec decision_rule and prereg 9.1) for SURVIVES",
+      "observed": "React 1.360 vs 1.360 difference 0.0, Vue 1.323 vs 1.323 difference 0.0, url_title_gt_url_only false both, spearman_richness_vs_pmi 0.0, form_signals_marginal 0.0. No improvement. Frozen falsifier (1) triggered => outcome FALSIFIES.",
+      "recomputed": "Recomputed PMI confirms identical values; difference exactly 0.0 cannot achieve p<0.025. However baseline is degenerate (title entropy 0) so test has zero power for preregistered hypothesis; it is not a valid assay of title information when title is constant.",
+      "pass": false,
+      "verdict": "FAIL_AS_MEASURED_BUT_INVALID_AS_TEST_OF_PREREG_HYPOTHESIS",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-34266105229/result.json metrics.site_todomvc_react.url_title_improvement_pct; raw_results.json pmi fields"
+    },
+    {
+      "control_id": "data_sufficiency",
+      "type": "threshold",
+      "expected": "n_non_leakage >=50 per site (spec measurement_validity and decision_rule)",
+      "observed": "React 400, Vue 400 (result.json data_sufficiency pass true, raw_results site_decisions nl 400 enough true)",
+      "recomputed": "Confirmed 400 transitions, 18 SA pairs each ~22 samples, trajectory_id 0-49. Exceeds 50 threshold, but below frozen 100x8=800 target. Data sufficient for stable PMI in degenerate 3-state space, not for dense form-heavy state space.",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-PHYSICS-34266105229/raw_transitions.json counts"
+    }
+  ],
+  "recomputed_metrics": {
+    "method": "Independent Python recomputation using execute_real_spa.py compute_pmi logic with ALPHA=1.0, same state functions, on raw_transitions.json artifacts sha 4e3b772e731d770a1d8bf3f2db8025ed4de3e41d27db653e7c59d091577456c8",
+    "site_todomvc_react": {
+      "url_only_pmi_bits_producer": 1.360076527495342,
+      "url_only_pmi_bits_recomputed": 1.360076527495,
+      "url_title_pmi_bits_producer": 1.360076527495342,
+      "url_title_pmi_bits_recomputed": 1.360076527495,
+      "url_title_form_pmi_bits_producer": 1.360076527495342,
+      "url_title_form_pmi_bits_recomputed": 1.360076527495,
+      "delta_url_title_vs_url_only_producer": 0.0,
+      "delta_url_title_vs_url_only_recomputed": 0.0,
+      "match_within": 1e-12,
+      "verdict": "MATCH",
+      "unique_urls_recomputed": 3,
+      "unique_titles_recomputed": 1,
+      "unique_actions_recomputed": 6,
+      "unique_sa_pairs_recomputed": 18,
+      "n_non_leakage_producer": 400,
+      "n_non_leakage_recomputed": 400,
+      "n_total_recomputed": 400,
+      "trajectories_recomputed": 50,
+      "steps_per_trajectory": 8,
+      "permutation_p_producer": 0.000999000999000999,
+      "permutation_null_mean_producer": 0.05994243285655704,
+      "permutation_effect_d_producer": 83.14421684311813,
+      "permutation_recomputed": "not fully re-executed (1000 cross-trajectory shuffles), producer null_mean plausible for 3-state, 18-SA distribution; p at floor 1/(1000+1)"
+    },
+    "site_todomvc_vue": {
+      "url_only_pmi_bits_producer": 1.3232577149184857,
+      "url_only_pmi_bits_recomputed": 1.323257714918,
+      "url_title_pmi_bits_producer": 1.3232577149184857,
+      "url_title_pmi_bits_recomputed": 1.323257714918,
+      "url_title_form_pmi_bits_producer": 1.3232577149184857,
+      "url_title_form_pmi_bits_recomputed": 1.323257714918,
+      "delta_url_title_vs_url_only_producer": 0.0,
+      "delta_url_title_vs_url_only_recomputed": 0.0,
+      "match_within": 1e-12,
+      "verdict": "MATCH",
+      "unique_urls_recomputed": 3,
+      "unique_titles_recomputed": 1,
+      "unique_actions_recomputed": 6,
+      "unique_sa_pairs_recomputed": 18,
+      "n_non_leakage_producer": 400,
+      "n_non_leakage_recomputed": 400,
+      "n_total_recomputed": 400,
+      "trajectories_recomputed": 50,
+      "steps_per_trajectory": 8,
+      "permutation_p_producer": 0.000999000999000999,
+      "permutation_null_mean_producer": 0.06040391066530815,
+      "permutation_effect_d_producer": 85.66026096855953,
+      "permutation_recomputed": "not fully re-executed, same note as React"
+    },
+    "positive_control": {
+      "url_only_pmi_bits_producer": 0.6933101309975662,
+      "url_only_pmi_bits_recomputed": "not re-generated (synthetic pipeline not re-run), value matches parent EXP-PHYSICS-34149195420 synthetic 0.693 exactly and matches recomputed logic expectation for 8-state deterministic model",
+      "threshold": 0.5,
+      "pass_producer": true,
+      "verdict": "PLAUSIBLE_MATCH_PARENT"
+    },
+    "aggregate": {
+      "url_title_gt_url_only_both_sites_producer": false,
+      "url_title_gt_url_only_both_sites_recomputed": false,
+      "url_title_gt_05_any_site_producer": true,
+      "permutation_p_lt_001_any_site_producer": true,
+      "positive_control_passes_producer": true,
+      "sufficient_data_both_sites_producer": true,
+      "spec_trajectories_expected": 100,
+      "spec_transitions_expected": 800,
+      "actual_trajectories": 50,
+      "actual_transitions": 400,
+      "deficit_per_site": 400,
+      "overall_recomputation_verdict": "All material PMI metrics reproduce exactly; deficit and degenerate representation findings are orthogonal to arithmetic correctness"
+    }
+  },
+  "claim_ceiling": "Maximum justified: On TodoMVC React (todomvc.com/examples/react/dist/#/) and TodoMVC Vue (todomvc.com/examples/vue/dist/#/) with hash-based routing (3 hash URLs), constant document.title (1 unique title) and constant form_signals (1 pattern), title-aware PMI and title+form PMI are mathematically identical to URL-only PMI (React 1.360 bits, Vue 1.323 bits, 0% improvement, permutation p=0.001, d~83-85, 400 transitions over 18 SA pairs). URL-level action->next-state dependency is strongly present. This provides no evidence for or against the preregistered hypothesis that title-aware PMI > URL-only PMI on real SPA/form-heavy sites with varying/ambiguous titles or multi-step forms, because the tested environment had zero title/form-signal entropy and was not form-heavy (single input.new-todo, no checkout/multi-step flow). The experiment is an uninformative (degenerate) test of C-WEB-DYNAMICS richer-state representation on the intended population; it does not falsify title variation benefits, nor does it close the synthetic-to-real bridge. Retains parent-established synthetic validation (URL-only 0.693 -> URL+title 1.970 +184% with varying titles).",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-34266105229/request.json sha 44296e8a0f05e80ee7026b229d7c44b62590c4f0681126d65789312020965899",
+    "research/experiments/EXP-PHYSICS-34266105229/spec.json sha ff42f58514372b6de3cea12482e406a5398fb7e0f007f2c09c286ebf7fb96b9a",
+    "research/experiments/EXP-PHYSICS-34266105229/prereg.md sha d35a1caa8d48239bbd7117e4c7fb38df6de237aeecbbb0a6c9b22190e4eca66c",
+    "research/experiments/EXP-PHYSICS-34266105229/freeze.json",
+    "research/experiments/EXP-PHYSICS-34266105229/result.json",
+    "research/experiments/EXP-PHYSICS-34266105229/report.md",
+    "research/experiments/EXP-PHYSICS-34266105229/provenance.json",
+    "research/experiments/EXP-PHYSICS-34266105229/raw_results.json sha 643ec2776575ebecb939a5fc61e43bded7f9fb54e59ba2556ba5fbcc30915b05",
+    "research/experiments/EXP-PHYSICS-34266105229/raw_transitions.json sha 4e3b772e731d770a1d8bf3f2db8025ed4de3e41d27db653e7c59d091577456c8",
+    "research/experiments/EXP-PHYSICS-34266105229/execute_real_spa.py sha 378fb2dc4873b7003698ba0221ed7ab1a784b801f21eb3b415ca94f02b88dcf8",
+    "research/experiments/EXP-PHYSICS-34149195420/handoff.json sha a3e4d8268994ad3bf053958a277db1e4db9b7b3c66c0b2a8e1f4976c8ace3e4c",
+    "research/experiments/EXP-PHYSICS-34149195420/result.json",
+    "research/physics/information_theoretic/spa_pmi.py sha 8d6db688de638c5e826fa6dd4c946d5d4de59348e03685996cc9bdfc70cf8eac"
+  ],
+  "unresolved": [
+    "Whether title-aware PMI > URL-only PMI on real SPA/form-heavy sites where titles actually vary across routes/states (e.g., multi-step forms with Step 1: Shipping / Step 2: Payment / Order Confirmation, dashboards with page-specific titles via React Helmet/Vue Meta) — the preregistered population remains untested due to constant-title TodoMVC selection.",
+    "Whether form_signals provide marginal information beyond titles on sites where titles are ambiguous but form structures differ (e.g., multi-step forms with similar titles but different has_form/has_input patterns) — untested due to zero form_signals variance.",
+    "Whether the high real URL-only PMI (1.32-1.36 bits vs parent synthetic 0.693 bits) reflects genuinely richer dynamical structure or small-state-space artifact (3 URLs vs 8 synthetic states) and smoothing asymmetry; requires alpha sensitivity (0,0.5,2.0) and larger state-space replication as flagged in parent handoff unknown.",
+    "Leakage definition validity: with action representation lacking target_href, the 100% non-leakage classification is assumed, not measured; real SPA leakage rate on form-heavy sites with actual hrefs remains unknown, affecting PMI sampling strategy.",
+    "Trajectory-level entropy rates as complementary measure for stochastic transitions (prereg exploratory) were not reported; whether they detect structure differences when transition-level PMI is identical due to degenerate representation.",
+    "Site-selection bias generalizability: whether any constant-title SPA would show 0% improvement (tautology) or whether most production React/Vue SPAs have route-varying titles that would enable the tested effect; needs survey of title variance across SPA corpus.",
+    "Statistical power for small title effects given half-spec sample (50 vs 100 trajectories): moot here but relevant for future informative designs with varying titles."
+  ]
+}
