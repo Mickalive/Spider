@@ -1,17 +1,32 @@
 {
   "experiment_id": "EXP-PHYSICS-34524411213",
   "lane": "physics",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-WEB-DYNAMICS"],
+  "question": "Can DOM structural features (element counts by type, tree depth, interactive element density) predict next-state transitions on real SPA/form-heavy sites, providing state representation beyond URL and title?",
+  "hypothesis": "On genuine SPA/form-heavy sites with client-side routing, a state representation based on DOM structural features (element counts, tree depth, interactive element density) yields higher action-conditioned PMI than URL-only representation, and PMI with DOM features is significantly > 0 under cross-trajectory permutation. This tests whether structural page properties carry predictive dynamical information that semantic identifiers (URL, title) miss.",
+  "falsifier": "DOM-feature PMI does not exceed URL-only PMI by >= 0.1 bits on >= 2/3 sites (Bonferroni-corrected permutation p < 0.025), OR permutation test shows DOM-feature PMI is not significantly > 0 on >= 2/3 sites, OR positive control (synthetic SPA) fails (DOM-feature PMI < 0.5 bits or permutation p > 0.001), OR data sufficiency threshold (< 30 non-leakage transitions per site) is not met on >= 2/3 sites.",
+  "baselines": [
+    "URL-only PMI baseline: state = URL path",
+    "URL+title PMI baseline: state = (URL, document.title)",
+    "DOM-feature PMI: state = discretized DOM feature vector (element counts, tree depth, interactive density)",
+    "Frequency baseline: P(S_{t+1}) marginal, no action conditioning",
+    "Shuffle null: action labels permuted across trajectories"
+  ],
+  "positive_control": "Synthetic SPA with deterministic DOM evolution: as elements are added/removed by actions, DOM feature vectors change predictably. DOM-feature PMI must be >= 0.5 bits with permutation p < 0.001. Verifies DOM feature extraction and PMI computation pipeline work correctly.",
+  "null_control": "On the synthetic SPA with action-independent (shuffled) transitions, DOM-feature PMI must not significantly exceed 0 (permutation p > 0.05). Verifies pipeline does not detect structure when absent.",
+  "measurement_validity": [
+    "Each site must yield >= 30 non-leakage transitions (target 50+) for PMI estimation",
+    "Sites must be genuine SPAs with client-side routing (verified via pre-survey: URL changes without full page reload, DOM updates on navigation)",
+    "DOM features must be extracted via Playwright page.evaluate() at each step, preserving raw feature vectors",
+    "State discretization: DOM feature vectors discretized into bins (element_count_bins, depth_bins, density_bins) with bin edges fit on TRAIN only",
+    "Cross-trajectory permutation null (1000 permutations) with trajectory structure preserved",
+    "Positive control uses synthetic SPA with known DOM evolution, separate from real data",
+    "Non-leakage classification adapted for SPA: leakage = action.target_href == state_after.url AND no client-side route change (document.querySelector('[data-reactroot]') or history.pushState detection)",
+    "Alpha sensitivity analysis at alpha = 0, 0.5, 1.0, 2.0 for PMI smoothing"
+  ],
+  "decision_rule": "If ALL of: (1) DOM-feature PMI > URL-only PMI by >= 0.1 bits on >= 2/3 sites (Bonferroni-corrected permutation p < 0.025); (2) DOM-feature PMI significantly > 0 on >= 2/3 sites (permutation p < 0.025); (3) positive control passes (DOM-feature PMI >= 0.5, p < 0.001); (4) null control passes (p > 0.05); (5) data sufficiency met on >= 2/3 sites — verdict = SURVIVES_CURRENT_TEST for C-WEB-DYNAMICS. If conditions (1) or (2) fail on 2+ sites — verdict = FALSIFIED-IN-SETTING. If data sufficiency fails on 2+ sites — verdict = MEASUREMENT_INVALID.",
+  "product_consequence_positive": "DOM structural features provide a state representation beyond URL/title that captures dynamical structure. Product could use DOM-feature hashing for state identity, enabling parameterized inheritance on sites where URL/title are ambiguous (e.g., multi-step forms with same URL but different DOM states). Supports C-WEB-DYNAMICS: Web transformations contain predictive structure at the structural level.",
+  "product_consequence_negative": "If DOM features do not improve PMI over URL-only, the structural level of description does not carry additional dynamical information for the tested sites. Product should focus on URL/title/semantic representations. Does NOT falsify C-WEB-DYNAMICS entirely—only this specific structural representation.",
+  "estimated_cost": "Moderate: requires Playwright browser data collection on 2-3 SPA sites (30 trajectories x 8 steps each, ~720 total transitions), DOM feature extraction via page.evaluate(), synthetic SPA generation, PMI computation across 3 representations, permutation tests. No model calls. ~2-3 hours compute.",
+  "expected_information_gain": "High: This is the first test of DOM structural features as state representation for Web dynamics. A positive result opens a new level of description for C-WEB-DYNAMICS beyond semantic identifiers. A negative result constrains the structural hypothesis and redirects to other representation levels (accessibility tree, visual features, session state). Materially different from title-aware PMI: tests structural rather than semantic state."
 }
