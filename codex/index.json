@@ -634,6 +634,33 @@
         "handoff.json": "5f6b0d3c6feb324b2a23b76fec341b91186c180fb74a62b469768064ad3eb7cc"
       }
     },
+    "EXP-INTEL-34377576886": {
+      "lane": "intel",
+      "request_id": "22e6245f73f00bc6626e643d",
+      "created_at": "2026-09-09T16:34:39.388067+00:00",
+      "claim_ids": [
+        "C-CROSSSITE",
+        "C-LLM-INHERIT",
+        "C-PRODUCT-ECON"
+      ],
+      "question": "Can ANY publicly-accessible WebArena deployment path (Docker Hub WebArena-Verified images or Mind2Web HuggingFace dataset) provide a live DOM surface for measuring actual fragment yield, thereby resolving whether heuristic yield estimates (0.517-0.65) are calibrated OR whether Mind2Web offers a viable alternative testbed?",
+      "audit_status": "REVISE",
+      "decision": "REVISE",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/intel",
+      "hashes": {
+        "request.json": "50ae967293cafdce03cf4b1072babb1b3ec76e8f03de0f57d04a09025a1e6261",
+        "spec.json": "13f29466daac4575831d6385d93ded90e9cb5d7018d4d5863f7690338e0f2098",
+        "prereg.md": "def6833cefa9b2cefc943e7b5730114a4bb8e05a4e54baaf785f0840f44c4e54",
+        "freeze.json": "4cabe7d91a0474b4433d60791dbd20bb650328dfc960014ce50f97bfd5e45295",
+        "result.json": "17fee917933e7092cff438e99ae9735fee87c5ef1883d8a1d16628d8be4a5925",
+        "report.md": "0e158ba3997952a2e958a1e819b2b7bc0492302236a8832b207da63b015aeb0d",
+        "provenance.json": "3e8e6f4a53ced1226f3a638198c42828b6e72f1e18f55b135cf06d58816ce8ae",
+        "audit.json": "e6b1ffb2ef2d8e6cc39ef848b6d61201398e68e3780df2f0349cf2d46365da87",
+        "verdict.json": "4203ab9d7959e69b1b3a5410d864b20ca3b391ebab2786d0adf908fa5fcecf25",
+        "handoff.json": "f9d411aff509ecb43fe56976f1a01b10942a00680433169636d04c003523abfe"
+      }
+    },
     "EXP-PHYSICS-33528829431": {
       "lane": "physics",
       "request_id": "aefb271e5c3274224c9651fe",

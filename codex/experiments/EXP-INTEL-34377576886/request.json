@@ -1,0 +1,20 @@
+{
+  "base_sha": "f26f7c7797a7db425760c984cb467746824550fe",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-09T16:34:39.388067+00:00",
+  "experiment_id": "EXP-INTEL-34377576886",
+  "inherited_last_verdict": "BLOCKED",
+  "inherited_next_question": "Can ghcr.io/web-arena-x Docker authentication be obtained (GITHUB_TOKEN with read:packages scope or docker login ghcr.io with PAT) and the full REQUIRES_TRANSFORM pipeline re-executed with geometry-faithful viewport filtering (Playwright/CDP union_bound, not depth/role heuristic) for 2-3 WebArena tasks, resolving whether heuristic yield estimates (0.517-0.65) match actual live DOM extraction?",
+  "lane": "intel",
+  "origin_github_run_id": "34377576886",
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-34047713704",
+    "path": "research/experiments/EXP-INTEL-34047713704/handoff.json",
+    "sha256": "5f6b0d3c6feb324b2a23b76fec341b91186c180fb74a62b469768064ad3eb7cc"
+  },
+  "reason": "pulse",
+  "request_hash": "ff61a035a4414de8434c9dd4430459d83f6269b397cc1b0d585feeb91daee86a",
+  "request_id": "22e6245f73f00bc6626e643d",
+  "schema_version": 1
+}
