@@ -1,0 +1,30 @@
+{
+  "experiment_id": "EXP-PRODUCT-34420092879",
+  "lane": "product",
+  "claim_ids": ["C-PARAM-INHERIT"],
+  "question": "Can C2 be resolved without regressions by implementing bind-time slot-level prefix extraction in _bind(), such that all 10 conditions pass and the product API supports both short and full value calling conventions?",
+  "hypothesis": "Bind-time slot-level prefix extraction resolves C2 without regressions. Specifically: (1) distill_parameterized() detects slot-level prefixes from training value distribution and stores them in mechanism.slot_prefixes; (2) _bind() checks if param value starts with stored prefix and strips it before substitution to avoid double-prefix; (3) short values ('d', '4') are bound normally (template adds prefix); (4) full values ('user-4', 'site-d') have prefix stripped before binding. This handles both calling conventions without requiring callers to change their parameter passing style. The template retains the prefix (no distill-time stripping), preserving the original VALUE CONTRACT where callers can pass either short or full values.",
+  "falsifier": "ANY of: (1) C2 full-value binding fails (binding_accuracy < 1.0 for user-4, user-5, user-6); (2) any regression in B1-B5, D1-D3 (slot_count mismatch or binding_accuracy < 1.0); (3) E1/E2 null controls fail (slot_count > 0); (4) crashes or errors in distill_parameterized or _bind; (5) distill_parameterized returns None for any condition that previously succeeded.",
+  "baselines": [
+    "Literal mechanisms (no parameterization) — fail_rate=1.0 on unseen values (B_LITERAL)",
+    "Distill-time stripping (parent EXP-PRODUCT-34282620394) — works for C2 but breaks B4/C1/D1/D3 (4/9 regressions)",
+    "No parameterization (current kernel without distill_parameterized) — cannot parameterize at all"
+  ],
+  "positive_control": "C2 full-value binding: user-4, user-5, user-6 bind correctly without double-prefix (binding_accuracy=1.0). B1-B5 regression: all pass with correct slot counts (B1=1, B2=2, B3=3, B4=1, B5=1) and binding_accuracy=1.0.",
+  "null_control": "E1 pattern absence: three unrelated observations produce slot_count=0 (no hallucination). E2 single observation: slot_count=0 (insufficient data for parameterization).",
+  "measurement_validity": [
+    "All 10 conditions use the same synthetic deterministic data as parent EXP-PRODUCT-34282620394",
+    "C2 tested with full values (user-4, user-5, user-6) per spec, not stripped parts",
+    "B4/C1/D1/D3 tested with short values ('d', '4') per spec, not full values",
+    "Binding correctness uses strict JSON comparison: bound_action must exactly match expected_action",
+    "distill_parameterized() is a kernel method, not an isolated local implementation",
+    "No model calls, no network, no browser during measurement — pure offline synthetic",
+    "Each condition uses a fresh temporary registry to prevent cross-condition contamination",
+    "Slot prefix extraction is deterministic given frozen training data"
+  ],
+  "decision_rule": "If ALL 10 conditions (B1-B5, C1-C2, D1-D3) pass with binding_accuracy=1.0 AND slot counts match expected AND E1/E2 null controls pass with slot_count=0 AND no crashes, verdict = SURVIVES_CURRENT_TEST. If ANY condition fails OR null controls fail OR crashes, verdict = FALSIFIED-IN-SETTING. If infrastructure failure prevents execution, verdict = MEASUREMENT_INVALID.",
+  "product_consequence_positive": "C2 resolved without regressions. C-PARAM-INHERIT advances: parameterized mechanisms handle both short and full value calling conventions. Product API can support mixed conventions without requiring callers to change their parameter passing style. Kernel integration advances from PARTIAL (6/10 or 9/10) toward complete. Unblocks end-to-end product economics measurement (C-PRODUCT-ECON).",
+  "product_consequence_negative": "If bind-time slot-level prefix extraction fails, the VALUE CONTRACT problem remains unresolved. Product API may need to mandate full-value-only convention (product design decision) or explore hybrid distill+bind approach. Kernel integration remains PARTIAL. The C2 blocker persists.",
+  "estimated_cost": "Low: pure offline computation, no browser/network/model calls. Reuses parent test harness with identical 10-condition structure. Code changes: add slot_prefixes to Mechanism model (~3 lines), implement distill_parameterized with prefix detection (~150-200 lines), modify _bind() to accept prefixes (~20 lines), update resolve() (~5 lines). Total ~200-250 lines.",
+  "expected_information_gain": "High: directly tests the key unknown from parent handoff (strategy a: bind-time slot-level prefix extraction). If positive, C-PARAM-INHERIT advances significantly and the C2 blocker is closed. If negative, identifies specific failure mode and narrows remaining options to hybrid approach or contract change. Either outcome changes the product decision on C-PARAM-INHERIT status. This is the fourth attempt at C2, with two clearly diagnosed failure modes from prior experiments."
+}

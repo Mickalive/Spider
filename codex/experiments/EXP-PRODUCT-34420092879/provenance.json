@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-34420092879",
+  "lane": "product",
+  "github_run_id": "34420092879",
+  "github_run_attempt": 1,
+  "base_sha": "a9913eebffcb00612a1cc954158b9c8869f90041",
+  "execution_sha": "HEAD (uncommitted)",
+  "frozen_at": "2026-09-10T04:59:25.311468+00:00",
+  "executed_at": "2026-09-10T05:03:41Z",
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.12",
+    "model": "opencode/mimo-v2.5-free"
+  },
+  "code_paths": {
+    "kernel": {
+      "path": "src/spider/kernel.py",
+      "sha256": "1105bb9bea2079c2e0b402ed1925c25f0f9dc7096447ce56a940373f427a0019",
+      "role": "code",
+      "description": "Modified: added distill_parameterized(), modified _bind() with prefix parameter, updated resolve() to pass slot_prefixes"
+    },
+    "models": {
+      "path": "src/spider/models.py",
+      "sha256": "065e6b3d52ccbebc7c1525c77c782c39395ff69f6d6ca9e8cdc4639f3ad0cc85",
+      "role": "code",
+      "description": "Modified: added slot_prefixes field to Mechanism dataclass"
+    },
+    "test_harness": {
+      "path": "research/experiments/EXP-PRODUCT-34420092879/run_experiment.py",
+      "sha256": "9c8364188766f534b83e01da921a1295acdabfee3b896667e67761826240140a",
+      "role": "code",
+      "description": "Test harness: 10 conditions + E1/E2 null controls + B_LITERAL baseline"
+    }
+  },
+  "artifacts": {
+    "raw_evidence": {
+      "path": "research/experiments/EXP-PRODUCT-34420092879/raw_evidence.json",
+      "sha256": "63809857d9af177206b85c309578bfa3469ca29eb45df66d7373e2511e6e86d2",
+      "role": "raw"
+    },
+    "result": {
+      "path": "research/experiments/EXP-PRODUCT-34420092879/result.json",
+      "sha256": "d60d8f7d5f1b5c45d778c64069e28c1789f5f0e2f8e9dee96da5f38f62279222",
+      "role": "derived"
+    },
+    "report": {
+      "path": "research/experiments/EXP-PRODUCT-34420092879/report.md",
+      "sha256": "b555fe9d5ea09650b12fb2bc4b64146fbb64b46d821aba6440c0699bf9348dc3",
+      "role": "derived"
+    }
+  },
+  "frozen_inputs": {
+    "request.json": {
+      "path": "research/experiments/EXP-PRODUCT-34420092879/request.json",
+      "sha256": "08b6fea0fb6b846a9c81cdb47094ca6e993855a157d9021f306d6e605fb731b5"
+    },
+    "spec.json": {
+      "path": "research/experiments/EXP-PRODUCT-34420092879/spec.json",
+      "sha256": "bbbf4dff630c21fd1bcdac212d6516bd685231324a76fedd771e7998bb7811f2"
+    },
+    "prereg.md": {
+      "path": "research/experiments/EXP-PRODUCT-34420092879/prereg.md",
+      "sha256": "4e106e5acb1c43d9ddd2dd4dab0d0a3bfd20aabaa110ecb812180a90ace976b4"
+    },
+    "freeze.json": {
+      "path": "research/experiments/EXP-PRODUCT-34420092879/freeze.json",
+      "sha256": "b5cdb7ab549d9914a81f91595d7d64dcf498964c615cb6aa73724f39a2b44333"
+    }
+  },
+  "parent_evidence": {
+    "EXP-PRODUCT-34282620394": {
+      "handoff_path": "research/experiments/EXP-PRODUCT-34282620394/handoff.json",
+      "handoff_sha256": "da36422c7bc4db61ac01783ebba08de0770998a0004462ebcfc2308277f6c155",
+      "verdict": "C2-FIX-FALSIFIED",
+      "key_finding": "Distill-time prefix stripping works for C2 but breaks 4/9 conditions due to VALUE CONTRACT mismatch"
+    }
+  },
+  "reproduction_command": "python3 research/experiments/EXP-PRODUCT-34420092879/run_experiment.py",
+  "dependencies": [
+    "src/spider/kernel.py (distill_parameterized, _bind with prefixes, helper functions)",
+    "src/spider/models.py (Mechanism.slot_prefixes field)",
+    "src/spider/registry.py (MechanismRegistry)",
+    "research/experiments/EXP-PRODUCT-34282620394/run_experiment.py (test harness basis)"
+  ]
+}
