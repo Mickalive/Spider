@@ -7,8 +7,8 @@
   "continue_immediately": false,
   "next_question": "Can body-only HTTP fingerprint observation (body hash as sole discriminating signal) maintain auth-state discrimination across production-like Keycloak middleware with CDN, load-balancer, compression, and rate-limit headers that add non-deterministic variance to responses? This tests whether the robust architecture identified by this experiment (body-only) survives real infrastructure conditions.",
   "promotion_ready": false,
-  "consecutive_failures": 2,
-  "updated_at": "2026-09-10T20:16:19.418164+00:00",
+  "consecutive_failures": 3,
+  "updated_at": "2026-09-10T22:38:04.631500+00:00",
   "last_failure_retryable": false,
   "last_handoff_sha256": "bf2b4c4f2ed0f167a030d5d0f41068ad569f0fcee5947e349b9e3c0e5df608a2"
 }
