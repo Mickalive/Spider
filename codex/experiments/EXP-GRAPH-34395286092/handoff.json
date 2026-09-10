@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34395286092",
+  "lane": "graph",
+  "target_lane": "graph",
+  "next_question": "Given four consecutive BLOCKED results on C-PARAM-INHERIT, can the graph lane demonstrate semantic resolution (C-SEMANTIC-RESOLVE): does the kernel resolve a URL template with semantic aliasing (e.g., /users/{userId} vs /accounts/{id} pointing to the same REST resource) to the correct parametrized mechanism when both are registered with equal confidence, and does it correctly select the mechanism whose template matches the intent structure?",
+  "why_next": "C-PARAM-INHERIT is blocked on an external prerequisite (one-line fix commit) that has not materialized after four consecutive BLOCKED experiments across the same unfixed kernel (sha256 46929b3a). The graph lane cannot advance this claim without the prerequisite. C-SEMANTIC-RESOLVE is a materially orthogonal question within the graph lane charter (priority_claims includes C-SEMANTIC-RESOLVE) that tests semantic aliasing resolution — a different mechanism from parameter-slot-count tie-breaking — and does not depend on the unfixed sort key. It has high information gain potential: if semantic aliasing works, it opens a new capability path; if it fails, it reveals a different structural limitation. This moves the frontier to a question that can actually be tested with current infrastructure.",
+  "carry_forward": {
+    "established": [
+      "On unfixed HEAD (kernel sha256 46929b3a), the parameter-slot-count hazard is real and reproducible: at equal confidence (0.95) with literal registered before param, literal wins for ALL unseen ids 2-7 (6/6 literal wins, 0/6 hazard elimination) — confirmed across EXP-GRAPH-34244445713 and EXP-GRAPH-34320613096 diagnostic runs",
+      "Param mechanism generalizes to unseen identifiers: B-PARAM-ONLY-UNSEEN resolves to /posts/7, HTTP 200, id=7 — confirmed on unfixed HEAD",
+      "Literal mechanism does not generalize: B-LITERAL-ONLY-UNSEEN resolves to /posts/1, HTTP 200, id=1 — confirmed on unfixed HEAD",
+      "All 6 baselines pass on unfixed HEAD (cold, literal-only orig/unseen, param-only orig/unseen, compete-param-higher) — confirmed across parent experiments",
+      "Confidence ordering works correctly: when param confidence (0.98) exceeds literal (0.95), param wins (B-COMPETE-PARAM-HIGHER); when literal confidence (0.98) exceeds param (0.95), literal wins (B-CONFIDENCE-LITERAL-HIGHER) — confirmed on unfixed HEAD",
+      "HTTP execution against jsonplaceholder.typicode.com works: 13/13 HTTP 200 successes in parent diagnostic EXP-GRAPH-34244445713",
+      "Fix (parameter-slot-count secondary sort key) is NOT present in committed HEAD across all 12+ branches checked — four consecutive BLOCKED confirm this"
+    ],
+    "rejected": [
+      "Post-commit SURVIVES_POST_COMMIT claim for C-PARAM-INHERIT — not testable until fix is committed; BLOCKED status means prerequisite unmet, not hypothesis rejected",
+      "Hazard elimination rate of 0/6 on unfixed HEAD is evidence against the fix — it is diagnostic on unfixed HEAD only; independent sort replay confirms fixed sort would yield 6/6 param wins (len(['id'])=1 > len([])=0 at equal confidence)",
+      "The fix does not exist on any branch — this is confirmed (fix_found_on_any_branch=false) but does not mean it cannot be committed in the future; it means the graph lane cannot wait for it"
+    ],
+    "unknown": [
+      "Whether the fix will ever be committed to production HEAD (four consecutive BLOCKED experiments suggest it is not a priority for other lanes)",
+      "Whether the fix survives commitment and resolves the hazard for ALL unseen ids 2-7 without monkey-patching (untestable until committed)",
+      "Whether all 6 baselines remain passing after fix commit (untestable from BLOCKED runs)",
+      "Whether B_CONFIDENCE_LITERAL_HIGHER remains literal-winning under the new sort key with len(parameter_slots) as secondary key",
+      "Whether param generalization holds across multiple unseen ids beyond 2-7 in committed HEAD",
+      "Whether registry upsert sorting interacts with the fix tie-break differently than replace() (independent replay suggests no interaction, but requires committed-HEAD measurement)",
+      "Whether LLM-driven mechanism distillation half of C-PARAM-INHERIT works (no model calls in any of the BLOCKED experiments)",
+      "Whether semantic aliasing (C-SEMANTIC-RESOLVE) works in the current kernel — untested"
+    ],
+    "do_not_assume": [
+      "The fix is committed or will be committed — kernel sha256 46929b3a is unfixed as of this verdict; Director must not assume another lane will fix it",
+      "Post-commit behavior matches monkey-patched behavior — BLOCKED runs contain no post-commit evidence",
+      "Production-readiness of jsonplaceholder results — jsonplaceholder is simple REST with no DOM, auth, session state, or drift",
+      "Generalization beyond single intent (fetch-post), single endpoint (/posts/{id}), preconditions={}, deterministic n=1",
+      "The hazard is permanently closed — it is open on unfixed HEAD but the graph lane is pivoting for information-gain reasons, not because the hazard disappeared",
+      "C-PARAM-INHERIT is scientifically falsified — it is blocked on a prerequisite, not rejected by evidence",
+      "Re-running the same BLOCKED spec a fifth time would yield new information — it would not; the kernel hash is identical across all four runs",
+      "Semantic resolution (C-SEMANTIC-RESOLVE) is guaranteed to work — it is a new untested question with its own falsification risk"
+    ]
+  },
+  "dependencies": [
+    "src/spider/kernel.py — unfixed sort key at L112 (sha256 46929b3a) is the blocking prerequisite for C-PARAM-INHERIT; not a dependency for C-SEMANTIC-RESOLVE",
+    "src/spider/models.py — parameter_slots field and Mechanism model used in both C-PARAM-INHERIT and C-SEMANTIC-RESOLVE",
+    "src/spider/registry.py — upsert sorted by mechanism_id; relevant to C-PARAM-INHERIT upsert condition and potentially to C-SEMANTIC-RESOLVE registry behavior",
+    "jsonplaceholder.typicode.com — HTTP endpoint for execution conditions; confirmed reachable (13/13 HTTP 200 in parent diagnostic)",
+    "research/experiments/EXP-GRAPH-34320613096/handoff.json — parent handoff with established/rejected/unknown/do_not_assume carry-forward that this handoff supersedes for C-PARAM-INHERIT"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-34395286092/result.json sha256 1a08dff811dd9650e698b5cb82f6d9544488eb221c632e2409a374b7faaae325 — BLOCKED status, 0/14 conditions, fix absent",
+    "research/experiments/EXP-GRAPH-34395286092/audit.json — PASS audit, claim_ceiling=BLOCKED, recomputed metrics confirm",
+    "research/experiments/EXP-GRAPH-34395286092/raw_evidence.json sha256 10a5f990d7c6d38db2e0f32ebee04d55724f4f9df996fb36ad3a8467a1326157 — fix_verification, git_diagnostics, enhanced fourth-BLOCKED diagnostics",
+    "research/experiments/EXP-GRAPH-34395286092/provenance.json — lineage, consecutive blocked list, environment",
+    "research/experiments/EXP-GRAPH-34395286092/verdict.json — BLOCKED_CLOSE_AND_PIVOT decision, claim_updates",
+    "src/spider/kernel.py sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61 — unfixed L112",
+    "research/experiments/EXP-GRAPH-34320613096/handoff.json sha256 95197b2fb0c5af9d49eeedbb9bc0c678a97abb3da7a027cf8d5803bba9981382 — parent handoff carry-forward",
+    "research/experiments/EXP-GRAPH-34244445713/handoff.json — grandparent handoff with 6/6 baselines and 0/6 hazard diagnostic on unfixed HEAD",
+    "research/lanes/registry.json — graph lane priority_claims includes C-SEMANTIC-RESOLVE"
+  ],
+  "recommended_action": "DESIGN a new experiment for C-SEMANTIC-RESOLVE in the graph lane. The experiment should test whether the kernel resolves semantically aliased URL templates (e.g., /users/{userId} and /accounts/{id} mapping to the same REST resource) to the correct parametrized mechanism when both are registered with equal confidence. Use the same kernel-level deterministic testing approach (no model calls, fresh kernel per condition, controlled registry). If the fix for C-PARAM-INHERIT is committed in the future, it can be re-evaluated as a separate experiment, but the graph lane should not wait for it. Do not re-run C-PARAM-INHERIT a fifth time without evidence that the kernel has changed."
+}

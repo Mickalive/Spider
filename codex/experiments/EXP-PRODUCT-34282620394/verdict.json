@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-34282620394",
+  "lane": "product",
+  "decision": "C2-FIX-FALSIFIED",
+  "claim_updates": [
+    {
+      "claim_id": "C-PARAM-INHERIT",
+      "status": "EXPERIMENTAL",
+      "reason": "C2 distill-time prefix stripping works in isolation (binding_accuracy=1.0, template correctly shortened to https://api.example.com/users/${url}) but under the frozen 10-condition spec the fix is FALSIFIED: 4/9 regression conditions fail (B4, C1, D1, D3 binding_accuracy=0.0) because distill-time stripping mandates full-value callers while the harness uses short values. Per frozen decision_rule, any regression triggers C2-FIX-FALSIFIED. Kernel integration remains PARTIAL (6/10 full-pass under this implementation, 9/10 under prior baseline without this fix). C-PARAM-INHERIT is NOT product-ready."
+    },
+    {
+      "claim_id": "C-PARAM-INHERIT",
+      "status": "EXPERIMENTAL",
+      "reason": "Distill-time prefix stripping mechanism (detect slot-level prefix from training values, strip from template, bind full value directly) is now FALSIFIED as a standalone fix: it breaks the value contract for callers passing short values. The mechanism is technically sound for full-value-only convention but incompatible with the existing mixed-convention harness. Two viable alternatives remain: (a) revert to bind-time double-prefix detection which handled both conventions, or (b) adopt full-value-only contract and update all callers."
+    }
+  ],
+  "product_action": "NO_CHANGE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can C2 be resolved without regressions by either (a) reverting to bind-time double-prefix detection in _bind() which handled both short and full values transparently, OR (b) implementing a hybrid: distill-time detection produces shorter templates but _bind() retains fallback prefix detection for callers passing short values, such that all 10 conditions pass AND the product API supports both calling conventions?",
+  "reason": "Frozen decision_rule requires C2-FIX-FALSIFIED when any regression condition fails. C2 itself passes (binding_accuracy=1.0, template correctly shortened to ${url} with user- prefix stripped). However, 4/9 regression conditions fail (B4 callback_url site- stripped but param 'd' short, C1 same, D1 order- stripped but param '4' short, D3 item- stripped but param '4' short). Root cause: distill-time stripping changes the VALUE CONTRACT from 'template adds prefix to short value' to 'caller must pass full value containing prefix'. The test harness uses mixed conventions (short for B4/C1/D1/D3, full for C2). The parent's bind-time approach handled both conventions. The auditor correctly identified outcome=MIXED should be FALSIFIES per frozen rule, and recomputed overall_binding_accuracy as 24/34=0.706 (not 22/30=0.733). No product promotion is warranted: kernel integration remains PARTIAL.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-34282620394/result.json metrics c2_binding_accuracy_full_value=1.0 regression_fail_count=4 failing=[B4,C1,D1,D3]",
+    "research/experiments/EXP-PRODUCT-34282620394/result.json controls C2_FULL_VALUE_IDS PASS, B4_REGRESSION FAIL, C1_REGRESSION FAIL, D1_REGRESSION FAIL, D3_REGRESSION FAIL",
+    "research/experiments/EXP-PRODUCT-34282620394/audit.json status=FAIL producer_claim_supported=false claim_ceiling='distill_parameterized detects slot-level prefixes but incompatible with mixed short/full caller conventions'",
+    "research/experiments/EXP-PRODUCT-34282620394/audit.json recomputed_metrics overall_binding_accuracy recomputed 24/34=0.706 verified_against_raw=true",
+    "research/experiments/EXP-PRODUCT-34282620394/audit.json validity_findings C2 measurement valid, regression root cause value contract mismatch",
+    "research/experiments/EXP-PRODUCT-34282620394/report.md regression_analysis B4/C1/D1/D3 short-value vs full-value contract table",
+    "research/experiments/EXP-PRODUCT-34282620394/report.md bind-time approach handled BOTH value conventions (parent robustness)",
+    "research/experiments/EXP-PRODUCT-34282620394/prereg.md decision_rule C2-FIX-FALSIFIED if any regression fails",
+    "research/experiments/EXP-PRODUCT-34282620394/freeze.json hashes confirming immutable inputs",
+    "research/experiments/EXP-PRODUCT-34282620394/raw_evidence.json sha256 a13ddef40e875975706a514dcf55219e180e5e003e3987aa3560194c7e4ccc68"
+  ]
+}

@@ -426,6 +426,56 @@
         "handoff.json": "8c9ab18ce8dbb83cd6eea32b5affb134af5a5bc773614c1d5ac1d850a3d0e183"
       }
     },
+    "EXP-GRAPH-34320613096": {
+      "lane": "graph",
+      "request_id": "779a7eac964bd86fb6f2cb10",
+      "created_at": "2026-09-09T06:46:52.460374+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT"
+      ],
+      "question": "Does the parameter-slot-count fix exist in the committed HEAD (src/spider/kernel.py L112 sort key includes len(parameter_slots)), and if so, does it resolve the equal-confidence hazard for all unseen ids 2-7 under production-like registry upsert ordering without monkey-patching?",
+      "audit_status": "PASS",
+      "decision": "BLOCKED",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/graph",
+      "hashes": {
+        "request.json": "635e45ce1c70234d773d59933bea81d8d5f2dcf35fb966ecc248c5ab948dd0f1",
+        "spec.json": "7801d6664a211bca1562c2366a090e966af2399ab56e5199dd8f4c47922698e6",
+        "prereg.md": "137feb5f55304802573d33b00e13ad75527cb9a3301deae585fc1d7c77abb5e5",
+        "freeze.json": "9949f2387099992891440e98848aac132544a17425bd99c8b2434853d4dde7bd",
+        "result.json": "708d1a810bbcd5ba6020ca44be175d974eb6fb997bfdd1359eebe0f18eafe867",
+        "report.md": "71a01c129f68bd478eeae56857d4726276631e674b2f3a15e5e674b70c6b51e9",
+        "provenance.json": "75ddd4c38881b2840ff80991e7dd82b7267ac98d4be20ee312693676af8171b2",
+        "audit.json": "0eea3f5dc1dc203aa5d70089b42feb127ecfccbe8f7c9d6fd4c332bd4e10f431",
+        "verdict.json": "d6b05a5761ed5adb270fe2f8944f3beb28380fd02b22f74c8fa74e8dd4e8cc5c",
+        "handoff.json": "95197b2fb0c5af9d49eeedbb9bc0c678a97abb3da7a027cf8d5803bba9981382"
+      }
+    },
+    "EXP-GRAPH-34395286092": {
+      "lane": "graph",
+      "request_id": "9b2d8fe044042d0b86252ef7",
+      "created_at": "2026-09-09T19:28:53.539713+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT"
+      ],
+      "question": "Does the parameter-slot-count fix exist in the committed HEAD (src/spider/kernel.py L112 sort key includes len(parameter_slots)), and if so, does it resolve the equal-confidence hazard for all unseen ids 2-7 under production-like registry upsert ordering without monkey-patching?",
+      "audit_status": "PASS",
+      "decision": "BLOCKED_CLOSE_AND_PIVOT",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/graph",
+      "hashes": {
+        "request.json": "3ba94d499c5c79aa09bf1be2163fdc84d99024e38e48261a67ac852e6b6c64fb",
+        "spec.json": "87bb648b7610a2b335e0625008d6e4556d6e951655926e3f1a7080d2a7d7494f",
+        "prereg.md": "d0104f69a7129f0d4287cf84a57e50c478de1d73374969763966f2317b909b6e",
+        "freeze.json": "0ab3bec8418c9f5a1301f1316fcb7738bb7b0c5d39b9bb316142e81f91ef189d",
+        "result.json": "1a08dff811dd9650e698b5cb82f6d9544488eb221c632e2409a374b7faaae325",
+        "report.md": "3f207e7123c522cc7c3b28771dbeb7dad0bd33fc50fbb60f346d7293d8946b9f",
+        "provenance.json": "a63d9f8c3cd05f57bc7c1bc599d64284a58b6824da2b47acacd96ad2666ac10a",
+        "audit.json": "1cdfe171863f3e536899fc6f48a2fd4e5f441561374bc57f7d57fb562261d1a0",
+        "verdict.json": "58412d7f62cc068373f72078e05bc1700381146d3365f9c9cd3a0a886dc6318b",
+        "handoff.json": "57025732a13bd1e17f553c003db00a646ef45bb9d940d4b5fbfc6b6902757bbf"
+      }
+    },
     "EXP-INTEL-33528832113": {
       "lane": "intel",
       "request_id": "46d19fdaf32e996c0ab24bd7",
@@ -530,6 +580,33 @@
         "audit.json": "13d28ebb31053fe10dc82df99398a7ea773693856bae7a6dceaf0e2491ea009a",
         "verdict.json": "8ad47ed78419813e5da03d210d075f200fdf0bf75a86d10f277eda50cbac86c9",
         "handoff.json": "5e5ff97a5b2d776b81eafe3eeed7af3ebdfe7b0bdb302929a9a79ed62521644a"
+      }
+    },
+    "EXP-INTEL-34047713704": {
+      "lane": "intel",
+      "request_id": "bffdbf95181e1d9c8b9ad63f",
+      "created_at": "2026-09-06T17:09:41.237555+00:00",
+      "claim_ids": [
+        "C-CROSSSITE",
+        "C-LLM-INHERIT",
+        "C-PRODUCT-ECON"
+      ],
+      "question": "Do heuristic fragment yield estimates (0.517-0.65) from EXP-INTEL-33945226776 match actual fragment extraction on live WebArena Docker pages with current_viewport_only=True, clean_accessibility_tree filtering, and IGNORED_ACTREE_PROPERTIES pruning?",
+      "audit_status": "BLOCKED",
+      "decision": "BLOCKED",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/intel",
+      "hashes": {
+        "request.json": "7ee0962085333152786c15e640a9fa22623c1153b8c80a2a4bf868e7099f7e3f",
+        "spec.json": "4880305583c61511a7f2f47a2dfaf042414e40c946f150e2298fafcec87f77c8",
+        "prereg.md": "d9c711e9c2067a99ff19221930d0a0a50bedca1838ffaf60427c1dee556b7012",
+        "freeze.json": "279662975e7af3d470e50666624922a2947e6bcc419bfc85fcdfd1196797eb85",
+        "result.json": "5e27aaa7ad1f4143d4f8c9d7e3e66b1ad340cdb97ae4d39f545f4dd07026e6ba",
+        "report.md": "b9e243b341da2c465cfe00b5c6ee9aa4dcb5506d076b058c88ca7a28a37e3cdb",
+        "provenance.json": "d0a1dabbeed5ee104421c3a40f6fb65851927cbda35b8f0bd767e883ccba978b",
+        "audit.json": "9caafbfacab658bb3b78f0c8345f64a8390874ec7de6ea637e2681144f6957b4",
+        "verdict.json": "1e9ea1fde87a9149035b7628b2c35f58813030848a336684af9c48ba8e4c05e4",
+        "handoff.json": "5f6b0d3c6feb324b2a23b76fec341b91186c180fb74a62b469768064ad3eb7cc"
       }
     },
     "EXP-PHYSICS-33528829431": {
@@ -710,6 +787,31 @@
         "handoff.json": "6b154e2ff4deb9b597236c2cf4993676fe7f8e39b2d61024e198a1596733ca16"
       }
     },
+    "EXP-PHYSICS-34348438464": {
+      "lane": "physics",
+      "request_id": "6e9666b6a6116a0ef7bd6ece",
+      "created_at": "2026-09-09T11:59:21.399259+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Does title-aware PMI detect dynamical structure on real SPA/form-heavy sites where titles actually vary across routes, using browser-collected action->next-state data with sufficient transition density and title variance?",
+      "audit_status": "MEASUREMENT_INVALID",
+      "decision": "MEASUREMENT_INVALID",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/physics",
+      "hashes": {
+        "request.json": "fee77c21b74c33cc4acb6de1c923ced87cd1bef36915166a9e2b9ee1c539547e",
+        "spec.json": "9607f648c93f512fa47e2dd01ad5908794e18e3f9680fbbfb607218865d2b40e",
+        "prereg.md": "5a89258e7269289283fa28c2f320c1dabf4ae16c15679f31f1a9dd6ec4ec6048",
+        "freeze.json": "43e8c81307e3bb8000a2eb4ce4c496cf149855d9d6ef999ea15f0b813b1cf260",
+        "result.json": "7b73da82c02afed41fd524cb3e1e2b94252c50b1cb566d58b1b0b29d7eeef2d3",
+        "report.md": "183d4c068ae93df75baa7b64bd76cae15b328524ef2a98698dc444e76f832d12",
+        "provenance.json": "0b26f5948fcff43c48adf4ab23a5a6b8c53eec47f71963942e74c8c28c5215ba",
+        "audit.json": "85c03da8580e6134b79627100afa523c33560391af372db4b81d6c5ba055161c",
+        "verdict.json": "8909c0ee0f2608e39047bed74a932ba768a02cc5b7b1d702c7c746e8a6c8fc29",
+        "handoff.json": "e99cf7fb45797ed1b9a1d14282be8db7ab1386aa67deaade12cc8932c6c1a95d"
+      }
+    },
     "EXP-PRODUCT-33528829801": {
       "lane": "product",
       "request_id": "2629e8e63e200f05556e37ca",
@@ -885,6 +987,56 @@
         "handoff.json": "531dc40daddb3339fa9159d30e5c9f1edb6adec0de8bd5e4d41416df52eca88f"
       }
     },
+    "EXP-PRODUCT-34282620394": {
+      "lane": "product",
+      "request_id": "314409ac96d19025f5423c4b",
+      "created_at": "2026-09-08T21:48:52.474992+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT"
+      ],
+      "question": "Can C2 full-value binding be fixed by modifying distill_parameterized() to detect prefix-only varying segments and induce shorter templates, such that binding user-${url} with params={'url':'user-4'} produces user-4 not user-user-4, and all 10 conditions pass?",
+      "audit_status": "FAIL",
+      "decision": "C2-FIX-FALSIFIED",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/product",
+      "hashes": {
+        "request.json": "ba041eed4d24d1e99ed377e2f3a85a5d2a89e4806f79b563532b727a1b7a72d1",
+        "spec.json": "bd7d552cf9f099f26ee5b313e2b1ccf7194495e3c0ca57e7fa0c02d9f0919a6a",
+        "prereg.md": "b476866fdba2cc3c38cb8d97df89283a8dbc6ce489d72103169e8fbd3a7b9575",
+        "freeze.json": "7b39e36f0aabf4d015ab8726b0c7940804104da859874c735d8f92ffaf0be755",
+        "result.json": "b64cb9b1c0c863f95d4c8ccfe72db239fa982c6fffab2fb60c36c271cd226df8",
+        "report.md": "4815731a280f5f2a8d402652da0c3a250bf0bebd18bc489ee29930041597b6f2",
+        "provenance.json": "3dc853813f6801a315d95d70782bfaab1960c61736f95238dcf826c06d7a99a0",
+        "audit.json": "0ef767324483cf9d6930d527dcabdb6c610df8a85d3d16e640daa968a1f50b0d",
+        "verdict.json": "21a4550b2a8f3ba2134f54d7d06984eadcd1b3f581aca9a6e6cc557ad626e884",
+        "handoff.json": "da36422c7bc4db61ac01783ebba08de0770998a0004462ebcfc2308277f6c155"
+      }
+    },
+    "EXP-PRODUCT-34420092879": {
+      "lane": "product",
+      "request_id": "7ba2cccd53956c9ad4460afc",
+      "created_at": "2026-09-10T00:10:00.446302+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT"
+      ],
+      "question": "Can C2 be resolved without regressions by implementing bind-time slot-level prefix extraction in _bind(), such that all 10 conditions pass and the product API supports both short and full value calling conventions?",
+      "audit_status": "REVISE",
+      "decision": "SURVIVES_CURRENT_TEST",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/product",
+      "hashes": {
+        "request.json": "08b6fea0fb6b846a9c81cdb47094ca6e993855a157d9021f306d6e605fb731b5",
+        "spec.json": "bbbf4dff630c21fd1bcdac212d6516bd685231324a76fedd771e7998bb7811f2",
+        "prereg.md": "4e106e5acb1c43d9ddd2dd4dab0d0a3bfd20aabaa110ecb812180a90ace976b4",
+        "freeze.json": "b5cdb7ab549d9914a81f91595d7d64dcf498964c615cb6aa73724f39a2b44333",
+        "result.json": "d60d8f7d5f1b5c45d778c64069e28c1789f5f0e2f8e9dee96da5f38f62279222",
+        "report.md": "b555fe9d5ea09650b12fb2bc4b64146fbb64b46d821aba6440c0699bf9348dc3",
+        "provenance.json": "a41b50c46a9a2347f82fafb920cb6db07d3668cd4dd1bc2d2af365fdf1668221",
+        "audit.json": "f5400dbeb5633c92f7a1cc5dd31e9788c27e6e91d261c980190acf430bce4aa0",
+        "verdict.json": "d9460a04bafdb3b5dcf2e43abbdc6ebef9b814c35e2b644e864451fd630f810d",
+        "handoff.json": "76e5e988f76f1184f72b33b0793d2adfaf03dcd129b2a270c76cee055ae403cd"
+      }
+    },
     "EXP-RUNTIME-33528830833": {
       "lane": "runtime",
       "request_id": "cbf791e0cd3fe570d0ff0fd5",
@@ -1033,6 +1185,56 @@
         "audit.json": "12aad69418501dd304624a7b998ca5adf0d136e3aae109ed6e8b69eaf216a999",
         "verdict.json": "660be2af5c84faf3a1d077409aab30aa85f8d0a277ef23ee2b0baf524aff9c97",
         "handoff.json": "7b28391976ee38f749fd1283549e41e5eafbe2e07671138ed99cc3647ffc3956"
+      }
+    },
+    "EXP-RUNTIME-34300004597": {
+      "lane": "runtime",
+      "request_id": "f3544e0f5b4499fcbe45d5a4",
+      "created_at": "2026-09-09T01:38:34.021286+00:00",
+      "claim_ids": [
+        "C-MEAS-VALID"
+      ],
+      "question": "Does the HTTP fingerprint substrate maintain full-vector discrimination and incremental header value on a real OAuth/OIDC identity provider (self-hosted Keycloak) where Cache-Control and Set-Cookie patterns are determined by the IdP middleware rather than application-set per auth state?",
+      "audit_status": "REVISE",
+      "decision": "SURVIVES_CURRENT_TEST \u2014 C-MEAS-VALID survives with severely narrowed ceiling. All four frozen decision criteria pass: full_vector_discrimination 0.833 > B-BODY-ONLY 0.5 (incremental header value 0.333), full_vector_discrimination 0.833 > 0.5, null FP 0.0% < 5%, Cache-Control-only discrimination 0.5 > 0. However, the audit corrects the producer's mechanistic interpretation: (1) Cache-Control variation is valid_token no-cache vs absent on ALL errors \u2014 it does NOT vary by error type (no-store vs no-cache as hypothesized), confirming V4 ENGINEERED-HEADER-TAUTOLOGY for the critical expired/invalid pair; (2) the true discriminating header is WWW-Authenticate (discrimination 0.833 == full vector), not Cache-Control; (3) Set-Cookie adds zero (absent on all Keycloak /userinfo responses); (4) expired_token and invalid_token remain indistinguishable (identical bodies, headers, fingerprint, Jaccard 1.0); (5) body baseline weakened (B-BODY-ONLY 0.5 vs parent 0.833) inflates apparent incremental value; (6) expired token is not truly Keycloak-issued (V6 state construction leakage). Claim ceiling bounded to Keycloak 25.0 start-dev localhost:18080 /userinfo, 3 distinct fingerprints (not 4), full vector via WWW-Authenticate not Cache-Control error-type variation. Does NOT extend to production OAuth/OIDC, CDN/load-balancer, /token endpoint, or cross-Python-version reproducibility.",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/runtime",
+      "hashes": {
+        "request.json": "14e43f720e1fba24c7432e375320a3883e153529960e4a178a3480d777ca7049",
+        "spec.json": "521e71ca55ab3af13b61e312002b10ae409048f3f9ecc4561dd15b53bdd499c8",
+        "prereg.md": "5571e75f91dbe4a548b16b8cf7f1dce121f0fdbddc9763de192b4763a62719c3",
+        "freeze.json": "141acece079620189c45962abba472b25117aada9b40ff1e295aa4047c715bd5",
+        "result.json": "2343cf417cb00c4938bfe4c39bebf4706429690f1bb6e91619ab852c0e528ffa",
+        "report.md": "d77fbadfa2d20305793d2e8b5de6e74113cdf90f48e0f5b42b285de785ced04f",
+        "provenance.json": "26553200e0af2be9dfbb49246f0e35ba98e9e8b04085f09ca83fa85454924c01",
+        "audit.json": "fffdb1ce330f98e0098d813926d122499a181231c8fe6569267f2fceeecaca06",
+        "verdict.json": "084a410506135be963291b93f2bda27a3f183872c2c4bdbcb57a06271aeaab70",
+        "handoff.json": "794ba636ec7e9502020b2f255b330ef1e30d8660c27b1b8195844014a76d4839"
+      }
+    },
+    "EXP-RUNTIME-34439061845": {
+      "lane": "runtime",
+      "request_id": "94adc0f1fd42057164d04280",
+      "created_at": "2026-09-10T04:55:50.315866+00:00",
+      "claim_ids": [
+        "C-MEAS-VALID"
+      ],
+      "question": "Does the WWW-Authenticate header discrimination pattern observed on Keycloak /userinfo \u2014 where no_auth returns 'Bearer realm=...' (no error fields) while error states return 'Bearer realm=..., error=invalid_token, error_description=...' \u2014 transfer to other Keycloak endpoints (/token with password grant, /token with client_credentials grant, /introspect), or is it endpoint-specific /userinfo behavior?",
+      "audit_status": "PASS",
+      "decision": "FALSIFIED-IN-SETTING \u2014 WWW-Authenticate header discrimination does NOT transfer across Keycloak endpoints. Frozen decision rule fails on both primary conditions: (1) WWW-Auth-only discrimination > 0 on >= 2/3 additional endpoints: 0/3 positive (/token password 0.0, /token client_credentials 0.0, /introspect 0.0); (2) full-vector discrimination > 0.5 on >= 2/3 additional endpoints: 0/3 positive (/token password 0.0, /token client_credentials 0.0, /introspect 0.5 not > 0.5). Positive control PASS (/userinfo WWW-Auth 0.833 == full vector, replicates parent EXP-RUNTIME-34300004597). Null FP PASS on 3/4 endpoints (100% on /token password is structural: fresh JWT per request, not measurement instability). Audit PASS, all metrics recomputed match producer. WWW-Authenticate header is absent from all /token and /introspect responses across all 120 reps of additional endpoints \u2014 this is expected OAuth behavior (credentials in form body, not Authorization header), not a measurement gap. The discrimination pattern is /userinfo-specific resource-server behavior, not Keycloak-level. /token endpoints ignore Authorization header entirely. /introspect achieves body-only discrimination 0.5 via active:true/false field. client_credentials test is degenerate (serviceAccountsEnabled false on spider-client, all 401 unauthorized_client); claim ceiling excludes this endpoint as informative transfer test.",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/runtime",
+      "hashes": {
+        "request.json": "9750fce79f52c98315138dbdb38a57344d9dc7570c31872b359c913d68bfea70",
+        "spec.json": "66f4d6d372c62b98f0d9257f771cda00edfdff902178dcf783e884a9d115f1b3",
+        "prereg.md": "cfcbd6224b520e936e57559214a53cf8a5c864877c1d36f51520cf5195193088",
+        "freeze.json": "1f2cd894bb6f3cd5f8c3e1151469302cdbc2afb60c39e627b93319b412dd5063",
+        "result.json": "8eeec7874da78d99947246e716aca9ab28842bb1e410e1a2a4a3dc9e6ae27254",
+        "report.md": "ca68f66ff5519e811fca4dbd170dde6731b93edf2e242b9519a201d8f885971f",
+        "provenance.json": "5f7cf2ee9b5d3366d57ad830207a401d38bdc5b0c6de19a99c4888698f30e79d",
+        "audit.json": "9b436a16c5f44fb67bc8cd550dea38dde396ef225c42c4789bab374325cd2275",
+        "verdict.json": "e990c99da8a3fab14679bb5621d789d9001a5c52564dccc542213b66364936b9",
+        "handoff.json": "bf2b4c4f2ed0f167a030d5d0f41068ad569f0fcee5947e349b9e3c0e5df608a2"
       }
     }
   }

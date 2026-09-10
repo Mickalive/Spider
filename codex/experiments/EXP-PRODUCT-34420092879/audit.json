@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-34420092879",
+  "lane": "product",
+  "status": "REVISE",
+  "producer_claim_supported": true,
+  "required_fixes": [
+    "Correct result.json overall_binding_total/overall_binding_correct_count: reported 27/27 but raw_evidence.json sums to 34/34 (B1 5 + B2 5 + B3 5 + B4 3 + B5 3 + C1 3 + C2 3 + D1 3 + D2 3 + D3 1 = 34). Accuracy remains 1.0 so decision rule unchanged, but metric counts must match raw evidence before promotion.",
+    "Amend report.md/results to state that D2 slot_prefixes={'url':'search?q='} is an artifact of leaf-path URL modeling (rfind('/') heuristic) and not a general query-string decomposition; bound the claim to this synthetic URL-as-leaf representation.",
+    "Retain mandatory field semantics: do not omit totals where data exists; keep corrected totals in metrics and explain synthetic-only scope in validity_notes."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_TARGET_SPLIT_INTEGRITY",
+      "severity": "low",
+      "finding": "Target/split integrity holds. No leakage: unseen values are disjoint from training (B1 A/B/C vs D-H, B4 a/b/c vs d/e/f, C2 user-1/2/3 vs user-4/5/6). Each condition uses fresh TemporaryDirectory registry per run_experiment.py:541-547 preventing cross-condition contamination. Verified via raw_evidence.json conditions.*.training_count=3 and distinct unseen sets.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-34420092879/raw_evidence.json conditions.*.resolution_results, research/experiments/EXP-PRODUCT-34420092879/run_experiment.py:541-547"
+    },
+    {
+      "id": "V2_MEASUREMENT_VALIDITY",
+      "severity": "low",
+      "finding": "Measurement validity as-preregistered holds: strict JSON equality via json.dumps(sort_keys=True) in run_experiment.py:99-103, deterministic synthetic offline, no model/network/browser calls, slot_prefix extraction deterministic. Recomputed binding_correct 34/34 matches reported accuracy 1.0 (only total miscount).",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-34420092879/run_experiment.py:99-103, research/experiments/EXP-PRODUCT-34420092879/raw_evidence.json conditions.*.metrics.binding_accuracy"
+    },
+    {
+      "id": "V3_REPRESENTATION_LOSS",
+      "severity": "medium",
+      "finding": "Representation loss not hidden but limits external validity. Kernel leaf-path model treats full URL as single leaf (ACTION_TEMPLATE_PATHS includes 'url' as leaf). Slot extraction uses rfind('/') heuristic to split URL prefix from slot prefix. This works for tested patterns (https://site-a.com/hook -> site-, https://api.example.com/users/user-1 -> user-) but would not generalize to query-string decomposition or multi-segment variation. D2 template https://api.example.com/search?q=${url} with slot_prefixes search?q= demonstrates the heuristic capturing 'search?q=' as prefix, which is structurally incorrect but happens to bind correctly for short values. Acknowledged in result.json validity_notes as synthetic-to-real gap.",
+      "evidence_ref": "src/spider/kernel.py:370-385 slot_prefix extraction, research/experiments/EXP-PRODUCT-34420092879/raw_evidence.json conditions.D2-noisy-get.distill_diagnostics.slot_prefixes"
+    },
+    {
+      "id": "V4_CONTROLS",
+      "severity": "low",
+      "finding": "Controls pass as specified. Positive control C2_FULL_VALUE_IDS: slot_count=1 binding_accuracy=1.0 bound URLs user-4/5/6 no double-prefix (verified via _bind stripping user-). Regression controls B1_REGRESSION..D3_REGRESSION: slot counts B1=1 B2=2 B3=3 B4=1 B5=1 C1=1 D1=3 D2=1 D3=1 all binding_accuracy=1.0. Null controls E1_NULL/E2_NULL slot_count=0 (E1 distill_diagnostics null, mean_jaccard 0.666 but no varying fields). Recomputed via kernel.distill_parameterized independently confirms C2 template user-${url} with slot_prefixes {'url':'user-'} handles both '4' and 'user-4' via _bind prefix check (src/spider/kernel.py:180-213).",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-34420092879/result.json controls.*, research/experiments/EXP-PRODUCT-34420092879/raw_evidence.json conditions.C2-full-value-ids, src/spider/kernel.py:180-213 _bind"
+    },
+    {
+      "id": "V5_SYNTHETIC_SCOPE",
+      "severity": "medium",
+      "finding": "Synthetic-only scope. All 10 conditions use deterministic synthetic data identical to parent EXP-PRODUCT-34282620394 per spec measurement_validity. No browser, network, or observation noise beyond injected metadata fields (D1 timestamp/request_duration_ms etc.). Product economics (C-PRODUCT-ECON) and real-browser noise distributions remain unmeasured per result.json unresolved. Claim ceiling must be bounded to offline kernel correctness, not product deployment.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-34420092879/spec.json measurement_validity, research/experiments/EXP-PRODUCT-34420092879/result.json unresolved, prereg.md section 10.1"
+    },
+    {
+      "id": "V6_COUNT_MISMATCH",
+      "severity": "low",
+      "finding": "Metric reporting mismatch: result.json overall_binding_correct_count=27 overall_binding_total=27 but raw_evidence sum is 34. Recomputed 34/34 (B1 5, B2 5, B3 5, B4 3, B5 3, C1 3, C2 3, D1 3, D2 3, D3 1). Does not alter binding_accuracy=1.0 or decision rule (SURVIVES_CURRENT_TEST) but is a required fix for Codex/promotion accuracy.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-34420092879/result.json metrics, research/experiments/EXP-PRODUCT-34420092879/raw_evidence.json conditions.*.metrics"
+    },
+    {
+      "id": "V7_PREFIX_EDGE_CASES",
+      "severity": "low",
+      "finding": "Prefix stripping uses value.startswith(prefix) with empty prefix safe (startswith('') true but slice len 0 leaves value unchanged). No false stripping observed. Untested edge: values coincidentally starting with prefix (e.g., user value 'user-foo-user') not in harness; prereg validity threat 10.4 notes distinct prefixes mitigate. No evidence of false-match in current data.",
+      "evidence_ref": "src/spider/kernel.py:197-198, prereg.md 10.4"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B_LITERAL",
+      "finding": "Literal baseline B_LITERAL fail_rate=1.0 confirmed via recomputation (5/5 fail because literal mechanism confidence 0.5 < min_confidence 0.8 yields UNKNOWN). As specified in prereg 8.5, this is a weak trivial baseline that only demonstrates parameterized induction is necessary, not that distill_parameterized is stronger than a competent non-parameterized alternative. Strength is minimal but matches spec; passes.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-34420092879/raw_evidence.json baselines.B_LITERAL, research/experiments/EXP-PRODUCT-34420092879/run_experiment.py:615-643"
+    },
+    {
+      "id": "B_DISTILL_TIME_STRIPPING",
+      "finding": "Distill-time stripping baseline (parent EXP-PRODUCT-34282620394, 4/9 regressions B4/C1/D1/D3) correctly cited as rejected in spec baselines and report comparison table. Not re-executed but parent handoff evidence accepted. Current bind-time approach fixes those 4 regressions (recomputed B4/C1/D1/D3 binding_accuracy=1.0).",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-34420092879/spec.json baselines, research/experiments/EXP-PRODUCT-34420092879/report.md Comparison table"
+    },
+    {
+      "id": "B_NO_PARAMETERIZATION",
+      "finding": "No-parameterization kernel without distill_parameterized cannot parameterize at all — matches current kernel distill() literal behavior (confidence 0.5). Consistent with B_LITERAL.",
+      "evidence_ref": "src/spider/kernel.py:238-256 distill"
+    }
+  ],
+  "recomputed_metrics": {
+    "overall_binding_accuracy_reported": 1.0,
+    "overall_binding_accuracy_recomputed": 1.0,
+    "overall_binding_correct_count_reported": 27,
+    "overall_binding_correct_count_recomputed": 34,
+    "overall_binding_total_reported": 27,
+    "overall_binding_total_recomputed": 34,
+    "regression_pass_count_recomputed": 9,
+    "regression_fail_count_recomputed": 0,
+    "regression_total_recomputed": 9,
+    "c2_binding_accuracy_full_value_recomputed": 1.0,
+    "c2_binding_correct_count_recomputed": 3,
+    "c2_binding_total_recomputed": 3,
+    "c2_template_retains_prefix_recomputed": true,
+    "c2_slot_prefixes_detected_recomputed": {
+      "url": "user-"
+    },
+    "c2_induced_template_recomputed": "https://api.example.com/users/user-${url}",
+    "b4_slot_prefixes_detected_recomputed": {
+      "callback_url": "site-"
+    },
+    "b4_induced_template_recomputed": "https://site-${callback_url}.com/hook",
+    "b1_binding_accuracy_recomputed": 1.0,
+    "b1_slot_count_recomputed": 1,
+    "b2_binding_accuracy_recomputed": 1.0,
+    "b2_slot_count_recomputed": 2,
+    "b3_binding_accuracy_recomputed": 1.0,
+    "b3_slot_count_recomputed": 3,
+    "b4_binding_accuracy_recomputed": 1.0,
+    "b4_slot_count_recomputed": 1,
+    "b5_binding_accuracy_recomputed": 1.0,
+    "b5_slot_count_recomputed": 1,
+    "c1_binding_accuracy_recomputed": 1.0,
+    "c1_slot_count_recomputed": 1,
+    "d1_binding_accuracy_recomputed": 1.0,
+    "d1_slot_count_recomputed": 3,
+    "d2_binding_accuracy_recomputed": 1.0,
+    "d2_slot_count_recomputed": 1,
+    "d3_binding_accuracy_recomputed": 1.0,
+    "d3_slot_count_recomputed": 1,
+    "null_e1_slot_count_recomputed": 0,
+    "null_e1_passed_recomputed": true,
+    "null_e2_slot_count_recomputed": 0,
+    "null_e2_passed_recomputed": true,
+    "literal_baseline_fail_rate_recomputed": 1.0,
+    "mixed_convention_support_recomputed": true,
+    "notes": "Recomputed via raw_evidence.json and independent kernel invocation (SpiderKernel.distill_parameterized + resolve with _bind). Accuracy unchanged; total count correction is the only delta. All per-condition binding_accuracy 1.0 and slot counts match expected per spec decision_rule."
+  },
+  "claim_ceiling": "NARROW SYNTHETIC KERNEL CORRECTNESS ONLY: Within the frozen deterministic synthetic harness of 10 conditions (B1-B5,C1-C2,D1-D3,E1-E2) using SpiderKernel.distill_parameterized + _bind(slot_prefixes), bind-time slot-level prefix extraction resolves C2 double-prefix bug without regressions (binding_accuracy 1.0, correct slot counts) and handles both short ('d','4') and full ('user-4','site-d') calling conventions for the tested prefix patterns (user-, site-, order-, cust-, req-, item-, search?q=). Does NOT support claims about real-browser observation noise, external validity, product economics (C-PRODUCT-ECON), heterogeneous prefix distributions, query-string decomposition, or values coincidentally containing prefix. Promotion to product requires real-browser and economics measurement. Up to C-PARAM-INHERIT PARTIAL->SURVIVES_CURRENT_TEST in this setting only.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-34420092879/spec.json:bbbf4dff630c21fd1bcdac212d6516bd685231324a76fedd771e7998bb7811f2",
+    "research/experiments/EXP-PRODUCT-34420092879/prereg.md:4e106e5acb1c43d9ddd2dd4dab0d0a3bfd20aabaa110ecb812180a90ace976b4",
+    "research/experiments/EXP-PRODUCT-34420092879/freeze.json:b5cdb7ab549d9914a81f91595d7d64dcf498964c615cb6aa73724f39a2b44333",
+    "research/experiments/EXP-PRODUCT-34420092879/result.json:d60d8f7d5f1b5c45d778c64069e28c1789f5f0e2f8e9dee96da5f38f62279222",
+    "research/experiments/EXP-PRODUCT-34420092879/raw_evidence.json:63809857d9af177206b85c309578bfa3469ca29eb45df66d7373e2511e6e86d2",
+    "research/experiments/EXP-PRODUCT-34420092879/run_experiment.py:9c8364188766f534b83e01da921a1295acdabfee3b896667e67761826240140a",
+    "src/spider/kernel.py:1105bb9bea2079c2e0b402ed1925c25f0f9dc7096447ce56a940373f427a0019",
+    "src/spider/models.py:065e6b3d52ccbebc7c1525c77c782c39395ff69f6d6ca9e8cdc4639f3ad0cc85",
+    "research/experiments/EXP-PRODUCT-34420092879/report.md:b555fe9d5ea09650b12fb2bc4b64146fbb64b46d821aba6440c0699bf9348dc3"
+  ],
+  "unresolved": [
+    "End-to-end product economics (C-PRODUCT-ECON) remains unmeasured — kernel correctness gate does not imply product economics viability.",
+    "Real-browser external validity: synthetic deterministic vs noisy browser observations; leaf-path URL-as-string modeling may fail on structurally different URLs.",
+    "Prefix extraction robustness beyond tested consistent-prefix distributions (values with no common prefix, multiple candidates, or coincidental prefix matches) — prereg 10.2/10.4 threats still open.",
+    "Whether product API should mandatorily support mixed conventions vs mandate full-value-only — design decision separate from kernel capability demonstration.",
+    "Overall count reporting correction (27 vs 34) — no scientific impact but requires artifact fix before Codex ingestion."
+  ]
+}
