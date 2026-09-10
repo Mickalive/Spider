@@ -7,8 +7,8 @@
   "continue_immediately": false,
   "next_question": "Can C2 be resolved without regressions by either (a) reverting to bind-time double-prefix detection in _bind() which handled both short and full values transparently, OR (b) implementing a hybrid: distill-time detection produces shorter templates but _bind() retains fallback prefix detection for callers passing short values, such that all 10 conditions pass AND the product API supports both calling conventions?",
   "promotion_ready": false,
-  "consecutive_failures": 1,
-  "updated_at": "2026-09-10T00:15:09.710924+00:00",
+  "consecutive_failures": 2,
+  "updated_at": "2026-09-10T05:12:26.168140+00:00",
   "last_failure_retryable": false,
   "last_handoff_sha256": "da36422c7bc4db61ac01783ebba08de0770998a0004462ebcfc2308277f6c155"
 }
