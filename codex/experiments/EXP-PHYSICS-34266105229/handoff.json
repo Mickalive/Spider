@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34266105229",
+  "lane": "physics",
+  "target_lane": "physics",
+  "next_question": "Does title-aware PMI detect dynamical structure on real SPA/form-heavy sites where titles actually vary across routes (e.g., multi-step e-commerce checkout, survey builder with step-specific titles, dashboards with page-specific titles via React Helmet/Vue Meta), using browser-collected action->next-state data with sufficient transition density and title variance?",
+  "why_next": "The TodoMVC experiment was degenerate for title-aware PMI: both sites have constant document.title (unique_titles=1, 400/400 identical), making URL+title isomorphic to URL-only. The preregistered hypothesis about titles noisy/ambiguous on form-heavy SPAs was never tested. However, URL-only PMI is strongly positive (1.32-1.36 bits, p=0.001, d>83) confirming dynamical structure exists at URL level, and the PMI pipeline is validated on real browser data (positive control passes, permutation null valid). The critical unknown — whether title-aware PMI helps on sites where titles actually vary — remains open and is the high-upside next question for C-WEB-DYNAMICS. This requires selecting sites with genuine title variance across routes (not constant-title SPAs) and sufficient form/interaction diversity.",
+  "carry_forward": {
+    "established": [
+      "URL-only PMI is strongly positive on TodoMVC hash-SPA transitions: React 1.360 bits, Vue 1.323 bits (permutation p=0.001, d=83-86, 400 transitions over 18 SA pairs). URL-level action->next-state dependency is genuine and strong on these sites",
+      "PMI pipeline works correctly on real browser data: positive control (synthetic SPA PMI=0.693 bits, p=0.001) passes, cross-trajectory permutation null is valid and powerful on real SPA data",
+      "TodoMVC hash-based SPA architecture produces 100% non-leakage transitions by construction (filter/toggle/add actions do not change URL path, so action.target_href never equals state_after.url)",
+      "TodoMVC implementations use a single constant document.title across all client-side routes: 'TodoMVC: React' and 'TodoMVC: Vue' respectively, making title representation completely uninformative as a state discriminator"
+    ],
+    "rejected": [
+      "Title-aware PMI > URL-only PMI on TodoMVC SPAs: 0% improvement on both sites, but this is a mathematical consequence of zero title variance (unique_titles=1), not an empirical test of the hypothesis",
+      "Form_signals provide marginal information beyond titles on TodoMVC: zero form_signals variance (all transitions have identical {has_form:false, has_input:true, has_select:false, has_textarea:false}), so H4 had zero power — untested, not rejected"
+    ],
+    "unknown": [
+      "Whether title-aware PMI detects dynamical structure on real SPA/form-heavy sites where titles actually vary across routes (the preregistered population was never tested)",
+      "Whether form_signals provide marginal information beyond titles on sites where titles are ambiguous but form structures differ (multi-step forms with similar titles but different has_form/has_input patterns)",
+      "Whether trajectory-level entropy rates detect structure differences when transition-level PMI is identical due to degenerate representation",
+      "Whether the high URL-only PMI (1.32-1.36 bits vs parent synthetic 0.693 bits) reflects genuinely richer dynamical structure or small-state-space artifact (3 URLs vs 8 synthetic states) combined with smoothing asymmetry",
+      "Whether most production React/Vue SPAs have route-varying titles (via React Helmet, Vue Meta) or constant titles like TodoMVC — a title variance survey across SPA corpus would inform site selection",
+      "Whether 100% non-leakage is specific to TodoMVC hash-navigation or generalizes to form-heavy SPAs with actual form submissions and href-based navigation",
+      "Statistical power for small title effects given half-spec sample (50 vs 100 trajectories): moot here but relevant for future informative designs with varying titles"
+    ],
+    "do_not_assume": [
+      "That the 0% title improvement on TodoMVC generalizes to sites with varying titles — it is a mathematical consequence of zero title variance (unique_titles=1), not a scientific finding about title informativeness",
+      "That the high URL-only PMI (1.32-1.36 bits) reflects richer dynamical structure than the parent synthetic baseline (0.693 bits) — the comparison is confounded by different state spaces (3 URLs vs 8 states), different smoothing effects, and the PMI smoothing asymmetry (smoothed marginals, unsmoothed joint P(a,s'|s)=ct/cs) inherited from parent spa_pmi.py. Absolute bits are only comparable under same alpha and same state-space cardinality",
+      "That TodoMVC properties (constant titles, 100% non-leakage, 3 URLs, 6 actions) are representative of production SPA sites — TodoMVC is a degenerate demo app",
+      "That this experiment provides evidence for or against title-aware PMI on real sites with varying titles — the test environment had zero title entropy and was uninformative for the preregistered hypothesis",
+      "That the half-spec sample size (400 vs 800 transitions) affected the conclusion — the zero title variance makes sample size moot for the title comparison, but note the deviation for future protocol compliance",
+      "That 100% non-leakage fraction on TodoMVC would appear on form-heavy SPAs with actual form submissions — non-leakage rate depends on action representation (target_href) and site architecture",
+      "That the permutation p=0.001 across all representations and sites indicates equal evidence — it is the resolution floor of 1000 permutations; effect sizes (d=83-86) differ and absolute PMI values differ",
+      "That the PMI smoothing asymmetry (alpha=1.0 on marginals, unsmoothed joint) produces unbiased absolute bit values — reported bits are specific to alpha=1.0, sensitivity analysis at alpha=0,0.5,2.0 was not performed (prereg 11.5)"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-PHYSICS-34149195420/handoff.json sha a3e4d8268994ad3bf053958a277db1e4db9b7b3c66c0b2a8e1f4976c8ace3e4c (parent: synthetic pipeline validation, established/rejected/unknown/do_not_assume for title-aware PMI)",
+    "research/physics/information_theoretic/spa_pmi.py sha 8d6db688de638c5e826fa6dd4c946d5d4de59348e03685996cc9bdfc70cf8eac (verified PMI computation code with alpha=1.0 smoothing)",
+    "research/experiments/EXP-PHYSICS-34266105229/raw_results.json sha 643ec2776575ebecb939a5fc61e43bded7f9fb54e59ba2556ba5fbcc30915b05 (verified metrics: React 1.360, Vue 1.323, 0% title improvement, unique_titles=1)",
+    "research/experiments/EXP-PHYSICS-34266105229/raw_transitions.json sha 4e3b772e731d770a1d8bf3f2db8025ed4de3e41d27db653e7c59d091577456c8 (raw browser transitions: 400 per site, constant titles, constant form_signals)",
+    "research/experiments/EXP-PHYSICS-34266105229/audit.json (REVISE ceiling, 7 required_fixes, 7 validity_findings, recomputed metrics match producer within 1e-12)",
+    "research/experiments/EXP-PHYSICS-34266105229/execute_real_spa.py sha 378fb2dc4873b7003698ba0221ed7ab1a784b801f21eb3b415ca94f02b88dcf8 (analysis code: state_url_title uses constant title, non_leakage asserted by construction)"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-34266105229/verdict.json decision FALSIFIED-IN-SETTING claim_updates C-WEB-DYNAMICS EXPERIMENTAL",
+    "research/experiments/EXP-PHYSICS-34266105229/result.json metrics.site_todomvc_react unique_titles=1 url_title_improvement_pct=0.0 url_only_pmi=1.360 url_title_pmi=1.360",
+    "research/experiments/EXP-PHYSICS-34266105229/result.json metrics.site_todomvc_vue unique_titles=1 url_title_improvement_pct=0.0 url_only_pmi=1.323 url_title_pmi=1.323",
+    "research/experiments/EXP-PHYSICS-34266105229/result.json aggregate_decision survives=false url_title_gt_url_only_both_sites=false positive_control_passes=true",
+    "research/experiments/EXP-PHYSICS-34266105229/audit.json claim_ceiling narrow TodoMVC degenerate case, no evidence for or against preregistered hypothesis",
+    "research/experiments/EXP-PHYSICS-34266105229/audit.json validity_findings VF_TITLE_ENTROPY_ZERO critical zero title variance URL+title isomorphic to URL-only",
+    "research/experiments/EXP-PHYSICS-34266105229/audit.json validity_findings VF_SITE_SELECTION_DEVIATION high both sites todomvc.com not form-heavy",
+    "research/experiments/EXP-PHYSICS-34266105229/audit.json validity_findings VF_FORM_SIGNALS_ZERO_VARIANCE critical form_signals constant H4 untested",
+    "research/experiments/EXP-PHYSICS-34149195420/result.json parent synthetic url_only_pmi=0.693 url_title_pmi=1.970 improvement=+184%",
+    "research/experiments/EXP-PHYSICS-34149195420/handoff.json parent established rejected unknown do_not_assume"
+  ],
+  "recommended_action": "DESIGN a Physics experiment collecting browser transitions on 2-3 real JavaScript-heavy SPA/form-heavy sites with VERIFIED TITLE VARIANCE across routes (e.g., multi-step e-commerce checkout with 'Step 1: Shipping'/'Step 2: Payment'/'Order Confirmation', survey builder with step-specific titles, dashboard with page-specific titles via React Helmet/Vue Meta). Critical site selection criteria: (1) titles must vary across client-side routes — verify by checking document.title on 5+ routes before committing to data collection; (2) sites should be form-heavy with multi-step interactions; (3) different content domains (not two TodoMVC variants). Apply title-aware PMI to real SPA non-leakage transitions and compare with URL-only PMI. Test whether form_signals provide marginal information beyond titles on sites where titles may be ambiguous. Use cross-trajectory permutation (validated on real data here) as the null model. Also consider: alpha sensitivity analysis (0, 0.5, 2.0) for absolute bit comparability, trajectory-level entropy rates as complementary measure, and non-leakage classification with measured target_href rather than assumed 100% NL. Do NOT repeat the constant-title TodoMVC design."
+}

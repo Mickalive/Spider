@@ -1,0 +1,187 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34395286092",
+  "lane": "graph",
+  "status": "BLOCKED",
+  "outcome": "NOT_APPLICABLE",
+  "metrics": {
+    "fix_present_in_committed_head": false,
+    "kernel_l112_content": "candidates.sort(key=lambda m: m.confidence, reverse=True)",
+    "kernel_sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+    "conditions_executed": 0,
+    "conditions_skipped": 14,
+    "hazard_elimination_rate": null,
+    "baseline_pass_rate": null,
+    "total_http_requests": 0,
+    "total_exceptions": 0,
+    "monkey_patching_detected": false,
+    "fix_found_on_any_branch": false,
+    "branches_checked": [
+      "lab2/graph",
+      "main",
+      "remotes/origin/archive/spider-codex-ultimate",
+      "remotes/origin/lab2/frontier",
+      "remotes/origin/lab2/graph",
+      "remotes/origin/lab2/intel",
+      "remotes/origin/lab2/physics",
+      "remotes/origin/lab2/product",
+      "remotes/origin/lab2/runtime",
+      "remotes/origin/main",
+      "remotes/origin/research2/bootstrap",
+      "remotes/origin/research2/codex-unification",
+      "remotes/origin/research2/hotfix-control-overlay"
+    ],
+    "uncommitted_changes_to_kernel": false,
+    "consecutive_blocked_count": 4
+  },
+  "controls": {
+    "FIX-PRESENCE": {
+      "expected": "L112 sort key includes len(parameter_slots)",
+      "observed": "L112 is 'candidates.sort(key=lambda m: m.confidence, reverse=True)' — no parameter_slots in sort key",
+      "pass": false,
+      "evidence_ref": "research/experiments/EXP-GRAPH-34395286092/raw_evidence.json fix_verification"
+    },
+    "B-COLD": {
+      "expected": "UNKNOWN (empty registry, intent 'fetch-post')",
+      "observed": null,
+      "pass": "unknown",
+      "evidence_ref": "skipped — BLOCKED gate"
+    },
+    "B-LITERAL-ONLY-ORIG": {
+      "expected": "EXECUTABLE url=/posts/1, HTTP 200, id=1",
+      "observed": null,
+      "pass": "unknown",
+      "evidence_ref": "skipped — BLOCKED gate"
+    },
+    "B-LITERAL-ONLY-UNSEEN": {
+      "expected": "EXECUTABLE url=/posts/1, HTTP 200, id=1",
+      "observed": null,
+      "pass": "unknown",
+      "evidence_ref": "skipped — BLOCKED gate"
+    },
+    "B-PARAM-ONLY-ORIG": {
+      "expected": "EXECUTABLE url=/posts/1, HTTP 200, id=1",
+      "observed": null,
+      "pass": "unknown",
+      "evidence_ref": "skipped — BLOCKED gate"
+    },
+    "B-PARAM-ONLY-UNSEEN": {
+      "expected": "EXECUTABLE url=/posts/7, HTTP 200, id=7",
+      "observed": null,
+      "pass": "unknown",
+      "evidence_ref": "skipped — BLOCKED gate"
+    },
+    "B-COMPETE-PARAM-HIGHER": {
+      "expected": "param wins, EXECUTABLE url=/posts/7, HTTP 200, id=7",
+      "observed": null,
+      "pass": "unknown",
+      "evidence_ref": "skipped — BLOCKED gate"
+    },
+    "C-EQUAL-ID2": {
+      "expected": "param wins at equal confidence 0.95",
+      "observed": null,
+      "pass": "unknown",
+      "evidence_ref": "skipped — BLOCKED gate"
+    },
+    "C-EQUAL-ID3": {
+      "expected": "param wins at equal confidence 0.95",
+      "observed": null,
+      "pass": "unknown",
+      "evidence_ref": "skipped — BLOCKED gate"
+    },
+    "C-EQUAL-ID4": {
+      "expected": "param wins at equal confidence 0.95",
+      "observed": null,
+      "pass": "unknown",
+      "evidence_ref": "skipped — BLOCKED gate"
+    },
+    "C-EQUAL-ID5": {
+      "expected": "param wins at equal confidence 0.95",
+      "observed": null,
+      "pass": "unknown",
+      "evidence_ref": "skipped — BLOCKED gate"
+    },
+    "C-EQUAL-ID6": {
+      "expected": "param wins at equal confidence 0.95",
+      "observed": null,
+      "pass": "unknown",
+      "evidence_ref": "skipped — BLOCKED gate"
+    },
+    "C-EQUAL-ID7": {
+      "expected": "param wins at equal confidence 0.95",
+      "observed": null,
+      "pass": "unknown",
+      "evidence_ref": "skipped — BLOCKED gate"
+    },
+    "B-CONFIDENCE-LITERAL-HIGHER": {
+      "expected": "literal wins (literal 0.98 > param 0.95)",
+      "observed": null,
+      "pass": "unknown",
+      "evidence_ref": "skipped — BLOCKED gate"
+    },
+    "C-EQUAL-UPSERT-ID7": {
+      "expected": "param wins at equal confidence 0.95 via upsert ordering",
+      "observed": null,
+      "pass": "unknown",
+      "evidence_ref": "skipped — BLOCKED gate"
+    },
+    "NO-MONKEY-PATCHING": {
+      "expected": "No runtime modification of kernel.py",
+      "observed": "No modifications detected; experiment did not execute any conditions",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-GRAPH-34395286092/raw_evidence.json monkey_patching_detected=false"
+    },
+    "DIAGNOSTIC-GIT-LOG": {
+      "expected": "Recent commits touching kernel.py captured",
+      "observed": "2 commits on current branch, 16 commits across all branches — none include the parameter_slots fix",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-GRAPH-34395286092/raw_evidence.json git_diagnostics"
+    },
+    "DIAGNOSTIC-BRANCH-COVERAGE": {
+      "expected": "Fix checked on all accessible branches",
+      "observed": "12 branches checked, fix found on NONE",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-GRAPH-34395286092/raw_evidence.json fix_found_on_branches=[]"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-GRAPH-34395286092/raw_evidence.json",
+      "sha256": "10a5f990d7c6d38db2e0f32ebee04d55724f4f9df996fb36ad3a8467a1326157",
+      "role": "raw"
+    },
+    {
+      "path": "src/spider/kernel.py",
+      "sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+      "role": "fixture"
+    }
+  ],
+  "observations": [
+    "Fix NOT present in committed HEAD: kernel.py L112 is 'candidates.sort(key=lambda m: m.confidence, reverse=True)', confirmed by direct inspection and automated branch sweep",
+    "Kernel file sha256 46929b3a unchanged from parent experiment EXP-GRAPH-34320613096 — same unfixed kernel across all four consecutive BLOCKED runs",
+    "Only 2 commits touch kernel.py on current branch (lab2/graph): 'r2: bind parameters safely inside action templates' and 'r2: add product kernel and experiment transaction tooling' — neither includes the parameter_slots fix",
+    "16 commits touch kernel.py across all remote branches — all are product-lane execute/verdict commits; none include the parameter_slots fix",
+    "No uncommitted changes to kernel.py (clean working tree)",
+    "Fix not present on any of 12 branches: lab2/graph, main, lab2/frontier, lab2/intel, lab2/physics, lab2/product, lab2/runtime, research2/bootstrap, research2/codex-unification, research2/hotfix-control-overlay, plus remotes",
+    "0/14 conditions executed per frozen BLOCKED decision rule 9.3 — no scientific measurement occurred",
+    "This is the FOURTH consecutive BLOCKED result (EXP-GRAPH-34244445713, EXP-GRAPH-34291967676, EXP-GRAPH-34320613096, EXP-GRAPH-34395286092) — same kernel hash, same unfixed L112",
+    "All remote kernel.py commits are product-lane execute/verdict activity — no graph-lane or research-lane commits touching kernel.py"
+  ],
+  "validity_notes": [
+    "BLOCKED status is the correct per-frozen-spec outcome: decision rule 9.3 specifies BLOCKED when fix is absent",
+    "No scientific measurement occurred — BLOCKED means prerequisite unmet, not hypothesis rejected",
+    "All 14 condition controls correctly show status=unknown (skipped), not pass/fail — no false negatives introduced",
+    "Diagnostic checks (git log, branch sweep, kernel hash, enhanced fourth-BLOCKED diagnostics) are valid and correctly performed",
+    "Kernel file hash 46929b3a matches parent experiment — no changes to production HEAD",
+    "The BLOCKED status carries forward all inherited state from parent handoff unchanged — no new scientific claims are made",
+    "Infrastructure: no HTTP requests were attempted (correct for BLOCKED), no exceptions, no network dependencies",
+    "Fourth consecutive BLOCKED — the prerequisite (one-line fix commit) has been unmet across four experiments with identical frozen spec"
+  ],
+  "unresolved": [
+    "Why has the one-line fix not been committed after four consecutive BLOCKED results? Is this a deliberate decision, an oversight, or a dependency on another lane's work?",
+    "Does any open PR or draft branch contain the fix but not yet merged? (GitHub API not available from this environment)",
+    "Is there a blocking dependency (e.g., runtime lane or product lane gate) preventing the fix commit?",
+    "Director must decide: (a) commit the fix and re-run this spec, or (b) close C-PARAM-INHERIT with explicit rationale and pivot the graph lane to an orthogonal high-upside question (e.g., C-SEMANTIC-RESOLVE or C-FRESHNESS)",
+    "After four consecutive BLOCKED results on the same prerequisite, should the graph lane continue attempting C-PARAM-INHERIT or is this evidence that the prerequisite will not be met?"
+  ]
+}

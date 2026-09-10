@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34244445713",
+  "lane": "graph",
+  "decision": "BLOCKED",
+  "claim_updates": [
+    {
+      "claim_id": "C-PARAM-INHERIT",
+      "status": "EXPERIMENTAL",
+      "reason": "BLOCKED per frozen decision rule: fix not present in committed HEAD src/spider/kernel.py L112 (sha256 46929b3a, line 'candidates.sort(key=lambda m: m.confidence, reverse=True)'). Post-commit hazard elimination cannot be tested. Established only: (1) 6/6 baselines pass deterministically on unfixed HEAD; (2) null control B-CONFIDENCE-LITERAL-HIGHER preserved; (3) core hazard persists systematically (0/6 param wins, 6/6 literal wins at equal confidence 0.95 literal-before-param). NOT established: fix effectiveness, tie-break on len(parameter_slots), generalization beyond jsonplaceholder /posts/{id}."
+    }
+  ],
+  "product_action": "NO_ACTION",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "After committing the parameter-slot-count fix to production HEAD (candidates.sort key includes len(parameter_slots)): does the literal-vs-param equal-confidence competition resolve to param for all unseen ids 2-7 without monkey-patching, do all 6 baseline conditions pass, and does the corrected B_CONFIDENCE_LITERAL_HIGHER condition (literal 0.98 > param 0.95) remain literal-winning?",
+  "reason": "Experiment is BLOCKED per frozen decision rule gate 1: fix not present in committed HEAD src/spider/kernel.py L112. Kernel sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61 confirms no code change from parent experiment. All 13 conditions executed successfully (13/13 HTTP, 0 exceptions), but the primary gate (fix presence) failed. 6/6 baselines pass on unfixed HEAD (no regression). Core hazard persists: at equal confidence 0.95 with literal registered before param, literal wins for all unseen ids 2-7 (0/6 param wins). Null control passes (literal 0.98 > param 0.95 → literal wins). Auditor confirms BLOCKED status justified, no misclassification of diagnostic results as scientific falsification. The single blocking action remains: commit the one-line fix to src/spider/kernel.py L112 with Director approval, then re-run this exact frozen experiment.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-34244445713/request.json sha256 49e55f0d601f0478c5bd0a6f883854a1db27fbe77d76cefd68571437c0c70ad2",
+    "research/experiments/EXP-GRAPH-34244445713/spec.json sha256 687bc393a6c783c54fe898657fff544a1c5aa4cefd4d647d533a37ef813e8577",
+    "research/experiments/EXP-GRAPH-34244445713/freeze.json sha256 b0f2e8b90081f1525abda303da6ea30d2bc1059577fe9f1b86c6610a6207b4ca",
+    "research/experiments/EXP-GRAPH-34244445713/result.json sha256 322e8c53a1698dc8b922c24bb8a1fbd8ce63b4f94ea69485f48ddeceafd20c6a",
+    "research/experiments/EXP-GRAPH-34244445713/raw_evidence.json sha256 7cb058bde9befdae8c1b491feb7bf07f1f2e3decd8e4f717f782381031a7e86a",
+    "research/experiments/EXP-GRAPH-34244445713/audit.json status=PASS producer_claim_supported=false",
+    "research/experiments/EXP-GRAPH-34244445713/provenance.json",
+    "research/experiments/EXP-GRAPH-34244445713/report.md sha256 03219214f311b4b38ece3e94b81e74aa751c3fa6dc180fb1d5b98a21ab25a424",
+    "src/spider/kernel.py sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61 L112 unfixed",
+    "research/experiments/EXP-GRAPH-34222171093/handoff.json sha256 2fd5c52e356f14fd16df4bfd77cefec1099e92a4d53840135ae946328eda096a parent BLOCKED"
+  ]
+}

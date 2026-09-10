@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-34047713704",
+  "lane": "intel",
+  "target_lane": null,
+  "next_question": "Can ghcr.io/web-arena-x Docker authentication be obtained (GITHUB_TOKEN with read:packages scope or docker login ghcr.io with PAT) and the full REQUIRES_TRANSFORM pipeline re-executed with geometry-faithful viewport filtering (Playwright/CDP union_bound, not depth/role heuristic) for 2-3 WebArena tasks, resolving whether heuristic yield estimates (0.517-0.65) match actual live DOM extraction?",
+  "why_next": "EXP-INTEL-34047713704 BLOCKED on ghcr.io authentication (all 3 Docker image pulls denied). No live measurement performed. The central question from EXP-INTEL-33945226776 — whether heuristic yield estimates (0.517-0.65) match actual fragment extraction — remains UNRESOLVED. This is the highest-information next step: authenticated Docker deployment with corrected viewport filtering directly resolves whether the 812-task corpus is suitable for C-CROSSSITE/C-LLM-INHERIT, or whether VisualWebArena/Mind2Web offer a lower-uncertainty path. The infrastructure investment (ghcr.io auth) is small and the measurement script already exists at /tmp/opencode/measure_yield.py (pending viewport fix).",
+  "carry_forward": {
+    "established": [
+      "WebArena has 6 site types (not 4 as originally hypothesized): gitlab (196 tasks), shopping (192), shopping_admin (182), reddit (114), map (112), wikipedia (16). Total 812 tasks at base_sha 8bc5034. (From parent EXP-INTEL-33945226776, not re-measured in this experiment.)",
+      "Heuristic median yield estimates (aggregated across 3 methods): shopping 0.65, reddit 0.65, gitlab 0.60, shopping_admin 0.60, map 0.598, wikipedia 0.517. These are heuristic priors, NOT live measurements. (From parent, inherited as baselines, not re-measured.)",
+      "Method 1 (element-count, modeling viewport coverage 0.45-0.65 and node pruning 0.06-0.15) gives materially lower yields: shopping 0.365, reddit 0.45, shopping_admin 0.468, gitlab 0.484, wikipedia 0.517, map 0.598. Only method modeling full REQUIRES_TRANSFORM pipeline. (From parent, inherited.)",
+      "Method 2 (char-length at UTTERANCE_MAX_LENGTH=8192) is degenerate: yields 1.0 for 5/6 site types. Inflates aggregated medians. (From parent, inherited.)",
+      "max_obs_length=1920 is binding constraint, not UTTERANCE_MAX_LENGTH=8192. Truncation sensitivity ratios: shopping 0.37, reddit 0.439, gitlab 0.471, shopping_admin 0.453, map 0.702, wikipedia 0.897. (From parent, inherited.)",
+      "WebArena Docker images on ghcr.io/web-arena-x/ require authentication (GITHUB_TOKEN with read:packages scope or PAT). All 3 images (shopping, gitlab, wikipedia-like) plus tags v1/v2/stable return 'denied' without auth. (Verified by this experiment and auditor.)",
+      "Playwright 1.62.0 + Chromium 151.0.7922.34 install and function correctly on Ubuntu Azure runner. (Verified by this experiment.)",
+      "Docker 28.0.4 + Compose v2.38.2 running with 86GB disk / 15GB RAM available. Compute resources not the blocker. (Verified by this experiment.)",
+      "Measurement script exists at /tmp/opencode/measure_yield.py implementing full REQUIRES_TRANSFORM pipeline (viewport filtering, IGNORED_ACTREE_PROPERTIES pruning, truncation at 8192 and 1920). Ready to execute once Docker access and viewport fix are resolved. (Written during this experiment, sha256 not captured — must be fixed on retry.)"
+    ],
+    "rejected": [
+      "No scientific hypothesis was tested or falsified in this experiment. BLOCKED is infrastructure failure, not scientific result. All heuristic yield estimates remain unvalidated priors."
+    ],
+    "unknown": [
+      "Whether heuristic yield estimates (shopping 0.65, gitlab 0.60, wikipedia 0.517) are within 15pp of actual live yield — CENTRAL QUESTION REMAINS UNANSWERED",
+      "Whether Method 1 (element-count, shopping 0.365) or aggregated median (0.65) is more predictive of live fragment extraction",
+      "Whether shopping positive control would show highest yield >40% and wikipedia null control lowest <60% on live DOM",
+      "Whether max_obs_length=1920 is binding truncation on live pages (heuristic sensitivity ratios 0.37-0.897 unvalidated)",
+      "Whether 812-task corpus is suitable for C-CROSSSITE/C-LLM-INHERIT testing",
+      "Whether element diversity 21-22 translates to meaningful cross-site transfer",
+      "Whether VisualWebArena or Mind2Web offer lower-uncertainty path if WebArena live yield <30%",
+      "Whether heuristic viewport coverage constants (shopping 0.45 etc.) and IGNORED_ACTREE_PROPERTIES pruning fractions generalize to live rendering",
+      "Whether ghcr.io/web-arena-x images have been made public or alternative public registries exist"
+    ],
+    "do_not_assume": [
+      "Do not assume WebArena 812-task corpus is suitable for C-CROSSSITE or C-LLM-INHERIT. All yield estimates are heuristic priors, not measurements.",
+      "Do not assume aggregated median yield >50% is evidential. Method 2 (char-length) is degenerate and inflates medians.",
+      "Do not assume the 224 LOC adapter cost generalizes to live integration.",
+      "Do not assume synthetic adapter scores predict live performance.",
+      "Do not assume the positive control (shopping yield 0.65) is robust — M1 gives shopping 0.365.",
+      "Do not assume the null control (wikipedia yield 0.517) is valid — prereg requires <0.40.",
+      "Do not assume that BLOCKED status implies the heuristic estimates are wrong — they are unvalidated priors, not falsified.",
+      "Do not assume depth/role viewport heuristic (depth<=4, role in viewport_roles) is equivalent to union_bound geometry viewport filtering. Audit required_fixes explicitly flags this as validity gap requiring correction before retry.",
+      "Do not assume N=1 pilot can generalize to full 812-task corpus even if Docker becomes available. Spec requires minimum 2-3 tasks per site type before SUPPORTS verdict.",
+      "Do not assume that resolving Docker auth alone is sufficient — viewport filtering must also be corrected to geometry-faithful implementation before any measurement is publishable."
+    ]
+  },
+  "dependencies": [
+    "ghcr.io/web-arena-x Docker image authentication (GITHUB_TOKEN with read:packages scope or PAT)",
+    "research/intel/webarena_adapter.py (sha256 46cb46542d9927f2a1b1bd3c29fef169aafa7009c5ba3f2b797531dbb6038fee)",
+    "research/experiments/EXP-INTEL-33945226776/analysis_output.json (sha256 8f7ebd0932b1919394d3604879314c1130ae3614cd75b3ce7d8e394e5a08e7bc) — parent heuristic baselines",
+    "SPIDER Observation model (src/spider/models.py) — REQUIRES_TRANSFORM pipeline definition",
+    "Viewport filtering fix: replace depth/role heuristic with Playwright/CDP union_bound extraction or explicitly label as pilot approximation with quantified error bound"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-34047713704/result.json (BLOCKED, all metrics null, docker denied)",
+    "research/experiments/EXP-INTEL-34047713704/audit.json (BLOCKED, claim_ceiling, required_fixes: auth/script-hash/viewport/pilot/identifiers)",
+    "research/experiments/EXP-INTEL-34047713704/provenance.json (docker_images_attempted 3 denied, infrastructure verified)",
+    "research/experiments/EXP-INTEL-34047713704/report.md (Infrastructure Assessment, Smallest Next Action)",
+    "research/experiments/EXP-INTEL-34047713704/spec.json (frozen decision_rule, baselines, measurement_validity)",
+    "research/experiments/EXP-INTEL-34047713704/prereg.md (N=1 pilot, viewport validity threat section 8.4)",
+    "research/experiments/EXP-INTEL-33945226776/handoff.json (parent carry_forward: established heuristic yields, rejected H1-H4, unknown calibration, do_not_assume corpus suitability)",
+    "/tmp/opencode/measure_yield.py (measurement script, viewport heuristic, sha256 null — must be captured on retry)",
+    "research/experiments/EXP-INTEL-34047713704/failure.json (prior director exit code 66)"
+  ],
+  "recommended_action": "Obtain ghcr.io authentication for WebArena Docker images (smallest unblocking action: set GITHUB_TOKEN with read:packages scope or docker login ghcr.io with PAT). Then re-design and re-execute the pilot measurement with two corrections from auditor required_fixes: (1) capture durable sha256 for measurement script, (2) replace depth/role viewport heuristic with Playwright/CDP union_bound geometry or explicitly label as pilot approximation. Execute for 2-3 tasks (shopping, gitlab, wikipedia) with N=1 pilot disclosed. Compare actual_yield to heuristic baselines (shopping 0.65, gitlab 0.60, wikipedia 0.517) and Method 1 (shopping 0.365, gitlab 0.484, wikipedia 0.517). If yield_delta <0.15 for all 3, heuristic model is calibrated and C-CROSSSITE/C-LLM-INHERIT can proceed with 812-task corpus. If yield_delta >0.15, heuristic model is not calibrated and Intel should assess VisualWebArena/Mind2Web as alternatives. If Docker auth still unavailable, consider whether WebArena public demo instances or alternative benchmarks can resolve the yield calibration question."
+}
