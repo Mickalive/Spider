@@ -7,8 +7,8 @@
   "continue_immediately": false,
   "next_question": "Does title-aware PMI detect dynamical structure on real SPA/form-heavy sites where titles actually vary across routes (e.g., multi-step e-commerce checkout, survey builder with step-specific titles, dashboards with page-specific titles via React Helmet/Vue Meta), using browser-collected action->next-state data with sufficient transition density and title variance?",
   "promotion_ready": false,
-  "consecutive_failures": 5,
-  "updated_at": "2026-09-10T00:27:20.616838+00:00",
+  "consecutive_failures": 6,
+  "updated_at": "2026-09-10T05:37:26.671615+00:00",
   "last_failure_retryable": false,
   "last_handoff_sha256": "6b154e2ff4deb9b597236c2cf4993676fe7f8e39b2d61024e198a1596733ca16"
 }
