@@ -1,0 +1,41 @@
+{
+  "experiment_id": "EXP-FRONTIER-34121473072",
+  "execution_timestamp": "2026-09-09T16:45:00+00:00",
+  "analyzer_script": "execute.py",
+  "script_hashes": {
+    "prereg.md": "135d57712c922be28af2f119d23ae9634d5d17dc39648a9db182c8afd2bbf007",
+    "spec.json": "ce63def49a35da19247fc05afc837533e8c6acc285ded7335f713c015866a476",
+    "request.json": "562ecee83cbc08a62295c677ad2d53909b81291c3806be0cd85cba15599e8526",
+    "freeze.json": "5b4c9eead1d55470075e4b54c557e9a05934a0fa3e515022e07035dcbc15282b",
+    "execute.py": "4d7df3e6c2769d119a1f820ab20d8ae02348be923f6e3f9939336433f6e9d54e",
+    "result.json": "639dcc42619dfa0cd1719f42e1d3e31eb1bc15c3759eb8ff37134ae756888020",
+    "raw_tables.json": "aeff80cb9418c313cd5f1c3c187e86416464100be1a9b022c063164e3328a17e"
+  },
+  "result_hash": "639dcc42619dfa0cd1719f42e1d3e31eb1bc15c3759eb8ff37134ae756888020",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "claim": "C-WEB-DYNAMICS",
+  "lane": "frontier",
+  "environment": {
+    "python_version": "3.12.14",
+    "numpy_version": "2.5.3",
+    "scipy_version": "1.18.1",
+    "sklearn_version": "1.9.0",
+    "pandas_version": "3.0.5",
+    "statsmodels_version": "0.15.0"
+  },
+  "frozen_inputs": {
+    "prereg_hash": "135d57712c922be28af2f119d23ae9634d5d17dc39648a9db182c8afd2bbf007",
+    "request_hash": "562ecee83cbc08a62295c677ad2d53909b81291c3806be0cd85cba15599e8526",
+    "spec_hash": "ce63def49a35da19247fc05afc837533e8c6acc285ded7335f713c015866a476"
+  },
+  "total_transitions": 120000,
+  "total_permutation_samples": 12000,
+  "n_permutations_per_cell": 50,
+  "execution_seconds": 206.89397621154785,
+  "parent_experiment": "EXP-FRONTIER-34065969836",
+  "pragmatic_deviations": [
+    "N_PERMUTATIONS=50 per cell (prereg specified 1000; 240 cells x 1000 infeasible for autonomous execution)",
+    "Toroidal and Gaussian baselines computed at 3 key lambda levels only (0.0, 0.5, 1.0)"
+  ]
+}

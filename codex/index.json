@@ -176,6 +176,31 @@
         "handoff.json": "26e7bd90e02cd678328699e7a7cd2d1e0e6e0873361d309d1e775253ff0ef805"
       }
     },
+    "EXP-FRONTIER-34121473072": {
+      "lane": "frontier",
+      "request_id": "246a552a08839e87c18df793",
+      "created_at": "2026-09-07T12:22:11.042673+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Does bias-corrected kNN TV (permutation-null subtraction removing the ~0.52 finite-sample floor) recover uniform function invariance in 10D non-Gaussian spaces, or does the scaling function failure persist after bias correction \u2014 and does the clipping artefact (~50% at lambda=1) quantitatively explain translation's strong signal (separation=0.201) vs scaling's weakness (separation=0.022)?",
+      "audit_status": "REVISE",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/frontier",
+      "hashes": {
+        "request.json": "562ecee83cbc08a62295c677ad2d53909b81291c3806be0cd85cba15599e8526",
+        "spec.json": "ce63def49a35da19247fc05afc837533e8c6acc285ded7335f713c015866a476",
+        "prereg.md": "135d57712c922be28af2f119d23ae9634d5d17dc39648a9db182c8afd2bbf007",
+        "freeze.json": "5b4c9eead1d55470075e4b54c557e9a05934a0fa3e515022e07035dcbc15282b",
+        "result.json": "639dcc42619dfa0cd1719f42e1d3e31eb1bc15c3759eb8ff37134ae756888020",
+        "report.md": "3ffaa3e7d589a3017510bc50d2db6a086e6e68fc7bbb8fe461ce68f788f9ddd0",
+        "provenance.json": "22ee41c8542247f7302ced59789f58fe56059514f442d8b09e1ef4620b1f4071",
+        "audit.json": "53b4693dccd1b1694a70a83fff8f129816e17c6b829718d401c00d8c9df412da",
+        "verdict.json": "b4a43b07acec705d9e4a37b73ed0788555f56dc31a5cd0cc0b7cff18bf25e80e",
+        "handoff.json": "657385858ecd333d46456f97eb51251ab5e903e70a6adf8c0a2aaee19a175faf"
+      }
+    },
     "EXP-GRAPH-33528827169": {
       "lane": "graph",
       "request_id": "3e0d81e7790f2f2b7bd8665e",
