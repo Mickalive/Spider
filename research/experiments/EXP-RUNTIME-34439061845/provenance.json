@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-34439061845",
+  "github_run_id": "34439061845",
+  "base_sha": "652bbc7ee962c552e3c81038e92791e2a23ae866",
+  "pre_execute_sha": "7e25dab062c12edc77c22e46ae7870e13e9b05e1",
+  "environment": {
+    "python_version": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "platform": "linux",
+    "docker_available": true,
+    "docker_version": "28.0.4"
+  },
+  "keycloak_config": {
+    "image": "quay.io/keycloak/keycloak:25.0",
+    "port": 18080,
+    "mode": "start-dev",
+    "realm": "spider-test",
+    "client_id": "spider-client",
+    "client_secret": "spider-secret-12345",
+    "admin_user": "admin",
+    "admin_password": "admin"
+  },
+  "endpoints_tested": [
+    {
+      "name": "/userinfo (GET)",
+      "url": "http://127.0.0.1:18080/realms/spider-test/protocol/openid-connect/userinfo",
+      "method": "GET",
+      "expected_behavior": "Resource endpoint; Authorization header processed; WWW-Authenticate varies by auth state"
+    },
+    {
+      "name": "/token (POST password)",
+      "url": "http://127.0.0.1:18080/realms/spider-test/protocol/openid-connect/token",
+      "method": "POST",
+      "body": "grant_type=password&client_id=spider-client&client_secret=spider-secret-12345&username=alice&password=alice123&scope=openid",
+      "expected_behavior": "Credential-based; Authorization header ignored; all states return 200 with fresh access_token"
+    },
+    {
+      "name": "/token (POST client_credentials)",
+      "url": "http://127.0.0.1:18080/realms/spider-test/protocol/openid-connect/token",
+      "method": "POST",
+      "body": "grant_type=client_credentials&client_id=spider-client&client_secret=spider-secret-12345",
+      "expected_behavior": "Credential-based; Authorization header ignored; all states return 200 with access_token"
+    },
+    {
+      "name": "/introspect (POST)",
+      "url": "http://127.0.0.1:18080/realms/spider-test/protocol/openid-connect/token/introspect",
+      "method": "POST",
+      "body": "token=<token>&client_id=spider-client&client_secret=spider-secret-12345",
+      "expected_behavior": "Token introspection; Authorization header ignored; returns active:true/false"
+    }
+  ],
+  "fingerprint_config": {
+    "algorithm": "SHA-256(repr((status, tuple(sorted(filtered_headers.items())), body_sha256, redirect_chain)))",
+    "excluded_headers": ["Date", "Server", "X-Request-Id"],
+    "python_repr": true
+  },
+  "sampling": {
+    "n_total": 160,
+    "n_endpoints": 4,
+    "n_states": 4,
+    "n_reps_per_state": 10,
+    "seed": 44,
+    "shuffle_order": true,
+    "inter_request_delay_ms": "0-200ms",
+    "synthetic_jitter": false
+  },
+  "artifacts": [
+    {"path": "raw_observations.json", "role": "raw", "description": "160 HTTP observations across 4 endpoints with status, headers, body, fingerprint"},
+    {"path": "run_experiment.py", "role": "code", "description": "Frozen experiment execution script"},
+    {"path": "result.json", "role": "derived", "description": "Computed metrics, controls, and decision"},
+    {"path": "report.md", "role": "derived", "description": "Human-readable report with interpretation"},
+    {"path": "provenance.json", "role": "derived", "description": "This file"}
+  ],
+  "data_sources": [
+    "raw_observations.json — primary evidence from Keycloak HTTP responses",
+    "research/experiments/EXP-RUNTIME-34300004597/handoff.json — parent experiment carry_forward",
+    "research/experiments/EXP-RUNTIME-34300004597/result.json — parent metrics for comparison"
+  ],
+  "reproduction_commands": [
+    "python3 run_experiment.py  # runs Keycloak, collects observations, computes metrics",
+    "python3 analyze_observations.py  # analyzes existing raw_observations.json"
+  ],
+  "known_limitations": [
+    "repr(vector) is Python-version-dependent — fingerprints not reproducible across Python versions",
+    "Keycloak dev mode may differ from production deployment",
+    "Authorization header ignoring on /token is by OAuth design — not a Keycloak-specific behavior",
+    "N=40 per endpoint sufficient for primary threshold test",
+    "expired_token is locally-signed HS256, not truly Keycloak-issued (same as parent)"
+  ],
+  "decision_trace": {
+    "www_auth_positive_endpoints": [],
+    "full_vector_positive_endpoints": [],
+    "positive_control_pass": true,
+    "null_fp_pass": true,
+    "decision_rule": "WWW-Authenticate-only discrimination > 0 on >= 2/3 additional endpoints",
+    "outcome": "FALSIFIES — 0/3 additional endpoints show WWW-Authenticate discrimination"
+  }
+}
