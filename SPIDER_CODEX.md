@@ -3,7 +3,7 @@
 Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER_CODEX_ULTIME.md`.
 
 This file is generated only from complete finalized Research 2.0 experiment packets.
-Ingested experiments: **46**. Coverage gaps: **0**.
+Ingested experiments: **47**. Coverage gaps: **0**.
 
 ## Index
 
@@ -48,6 +48,7 @@ Ingested experiments: **46**. Coverage gaps: **0**.
 | EXP-PRODUCT-34015741916 | product | FAIL | KERNEL-INTEGRATION-PARTIAL | C-PARAM-INHERIT |
 | EXP-PRODUCT-34195008089 | product | PASS | C2-FIX-FALSIFIED | C-PARAM-INHERIT |
 | EXP-PRODUCT-34282620394 | product | FAIL | C2-FIX-FALSIFIED | C-PARAM-INHERIT |
+| EXP-PRODUCT-34420092879 | product | REVISE | SURVIVES_CURRENT_TEST | C-PARAM-INHERIT |
 | EXP-RUNTIME-33528830833 | runtime | REVISE | NARROW_SUCCESS | C-MEAS-VALID |
 | EXP-RUNTIME-33767375933 | runtime | REVISE | NARROW_SUCCESS | C-MEAS-VALID |
 | EXP-RUNTIME-33805283356 | runtime | REVISE | NARROW_SUCCESS | C-MEAS-VALID |
@@ -41461,6 +41462,960 @@ Option A is lower-risk and preserves backward compatibility. Option B is cleaner
     "src/spider/kernel.py sha256 97365d612f91ffbbaffe5639ff1dd4ad0e396b7305e63c718aca3648060c40ef lines 38-51 _bind and 439-455 distill-time stripping"
   ],
   "recommended_action": "Product lane: design a new prereg for C2 fix that addresses the VALUE CONTRACT problem identified in this experiment. Two evidence-grounded strategies: (a) REVERT to bind-time double-prefix detection in _bind() but use SLOT-LEVEL prefix extraction (from training value distribution, not full template prefix) — this avoids the parent's full-prefix bug while preserving the bind-time flexibility for mixed conventions; or (b) IMPLEMENT HYBRID: distill-time detection produces shorter templates AND _bind() retains fallback prefix detection for callers passing short values (guard: if template prefix was stripped at distill-time, _bind() checks whether the param value already contains the stripped prefix and skips double-insertion). Strategy (a) is lower-risk (restores proven bind-time flexibility). Strategy (b) is architecturally cleaner but more complex. Both must re-test all 10 conditions. Do not repeat distill-time-only approach. Alternatively, if the product API mandates full-value-only calling convention, update the test harness for B4/C1/D1/D3 to pass full values — this is a product design decision that requires stakeholder input."
+}
+```
+
+# EXP-PRODUCT-34420092879
+
+## request.json
+
+```text
+{
+  "base_sha": "a9913eebffcb00612a1cc954158b9c8869f90041",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-10T00:10:00.446302+00:00",
+  "experiment_id": "EXP-PRODUCT-34420092879",
+  "inherited_last_verdict": "C2-FIX-FALSIFIED",
+  "inherited_next_question": "Can C2 be resolved without regressions by either (a) reverting to bind-time double-prefix detection in _bind() which handled both short and full values transparently, OR (b) implementing a hybrid: distill-time detection produces shorter templates but _bind() retains fallback prefix detection for callers passing short values, such that all 10 conditions pass AND the product API supports both calling conventions?",
+  "lane": "product",
+  "origin_github_run_id": "34420092879",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-34282620394",
+    "path": "research/experiments/EXP-PRODUCT-34282620394/handoff.json",
+    "sha256": "da36422c7bc4db61ac01783ebba08de0770998a0004462ebcfc2308277f6c155"
+  },
+  "reason": "pulse",
+  "request_hash": "894d8ffea25dadb4ab84f25f040b2fd7f4b08aafa7d2e87318f21312dc92e956",
+  "request_id": "7ba2cccd53956c9ad4460afc",
+  "schema_version": 1
+}
+```
+
+## spec.json
+
+```text
+{
+  "experiment_id": "EXP-PRODUCT-34420092879",
+  "lane": "product",
+  "claim_ids": ["C-PARAM-INHERIT"],
+  "question": "Can C2 be resolved without regressions by implementing bind-time slot-level prefix extraction in _bind(), such that all 10 conditions pass and the product API supports both short and full value calling conventions?",
+  "hypothesis": "Bind-time slot-level prefix extraction resolves C2 without regressions. Specifically: (1) distill_parameterized() detects slot-level prefixes from training value distribution and stores them in mechanism.slot_prefixes; (2) _bind() checks if param value starts with stored prefix and strips it before substitution to avoid double-prefix; (3) short values ('d', '4') are bound normally (template adds prefix); (4) full values ('user-4', 'site-d') have prefix stripped before binding. This handles both calling conventions without requiring callers to change their parameter passing style. The template retains the prefix (no distill-time stripping), preserving the original VALUE CONTRACT where callers can pass either short or full values.",
+  "falsifier": "ANY of: (1) C2 full-value binding fails (binding_accuracy < 1.0 for user-4, user-5, user-6); (2) any regression in B1-B5, D1-D3 (slot_count mismatch or binding_accuracy < 1.0); (3) E1/E2 null controls fail (slot_count > 0); (4) crashes or errors in distill_parameterized or _bind; (5) distill_parameterized returns None for any condition that previously succeeded.",
+  "baselines": [
+    "Literal mechanisms (no parameterization) — fail_rate=1.0 on unseen values (B_LITERAL)",
+    "Distill-time stripping (parent EXP-PRODUCT-34282620394) — works for C2 but breaks B4/C1/D1/D3 (4/9 regressions)",
+    "No parameterization (current kernel without distill_parameterized) — cannot parameterize at all"
+  ],
+  "positive_control": "C2 full-value binding: user-4, user-5, user-6 bind correctly without double-prefix (binding_accuracy=1.0). B1-B5 regression: all pass with correct slot counts (B1=1, B2=2, B3=3, B4=1, B5=1) and binding_accuracy=1.0.",
+  "null_control": "E1 pattern absence: three unrelated observations produce slot_count=0 (no hallucination). E2 single observation: slot_count=0 (insufficient data for parameterization).",
+  "measurement_validity": [
+    "All 10 conditions use the same synthetic deterministic data as parent EXP-PRODUCT-34282620394",
+    "C2 tested with full values (user-4, user-5, user-6) per spec, not stripped parts",
+    "B4/C1/D1/D3 tested with short values ('d', '4') per spec, not full values",
+    "Binding correctness uses strict JSON comparison: bound_action must exactly match expected_action",
+    "distill_parameterized() is a kernel method, not an isolated local implementation",
+    "No model calls, no network, no browser during measurement — pure offline synthetic",
+    "Each condition uses a fresh temporary registry to prevent cross-condition contamination",
+    "Slot prefix extraction is deterministic given frozen training data"
+  ],
+  "decision_rule": "If ALL 10 conditions (B1-B5, C1-C2, D1-D3) pass with binding_accuracy=1.0 AND slot counts match expected AND E1/E2 null controls pass with slot_count=0 AND no crashes, verdict = SURVIVES_CURRENT_TEST. If ANY condition fails OR null controls fail OR crashes, verdict = FALSIFIED-IN-SETTING. If infrastructure failure prevents execution, verdict = MEASUREMENT_INVALID.",
+  "product_consequence_positive": "C2 resolved without regressions. C-PARAM-INHERIT advances: parameterized mechanisms handle both short and full value calling conventions. Product API can support mixed conventions without requiring callers to change their parameter passing style. Kernel integration advances from PARTIAL (6/10 or 9/10) toward complete. Unblocks end-to-end product economics measurement (C-PRODUCT-ECON).",
+  "product_consequence_negative": "If bind-time slot-level prefix extraction fails, the VALUE CONTRACT problem remains unresolved. Product API may need to mandate full-value-only convention (product design decision) or explore hybrid distill+bind approach. Kernel integration remains PARTIAL. The C2 blocker persists.",
+  "estimated_cost": "Low: pure offline computation, no browser/network/model calls. Reuses parent test harness with identical 10-condition structure. Code changes: add slot_prefixes to Mechanism model (~3 lines), implement distill_parameterized with prefix detection (~150-200 lines), modify _bind() to accept prefixes (~20 lines), update resolve() (~5 lines). Total ~200-250 lines.",
+  "expected_information_gain": "High: directly tests the key unknown from parent handoff (strategy a: bind-time slot-level prefix extraction). If positive, C-PARAM-INHERIT advances significantly and the C2 blocker is closed. If negative, identifies specific failure mode and narrows remaining options to hybrid approach or contract change. Either outcome changes the product decision on C-PARAM-INHERIT status. This is the fourth attempt at C2, with two clearly diagnosed failure modes from prior experiments."
+}
+```
+
+## prereg.md
+
+```text
+# EXP-PRODUCT-34420092879 Preregistration
+
+## 1. Experiment Identity
+
+- **Experiment ID**: EXP-PRODUCT-34420092879
+- **Lane**: Product
+- **Claim**: C-PARAM-INHERIT (Mechanisms parameterize to unseen identifiers)
+- **Parent**: EXP-PRODUCT-34282620394 (C2-FIX-FALSIFIED, distill-time stripping rejected)
+- **Date**: 2026-09-10
+- **Status**: DESIGN — NOT YET FROZEN
+
+## 2. Scientific Question
+
+Can C2 be resolved without regressions by implementing bind-time slot-level prefix extraction in `_bind()`, such that all 10 conditions pass and the product API supports both short and full value calling conventions?
+
+## 3. Motivation
+
+### 3.1 Prior Art and Failure Modes
+
+**EXP-PRODUCT-34015741916 (grandparent)**: KERNEL-INTEGRATION-PARTIAL 9/10. Ported `distill_parameterized()` into kernel.py. B1-B5 regression holds (21/21), D1-D3 noise filtering holds, E1/E2 null controls hold. C2 fails: double-prefix bug (`user-user-4` instead of `user-4`). `_detect_double_prefix` is dead code.
+
+**EXP-PRODUCT-34195008089 (parent)**: C2-FIX-FALSIFIED. Tried `_bind()` prefix-strip approach (`val.startswith(template_prefix)`). FALSIFIED because template prefix is full path (e.g., `https://api.example.com/users/user-`), not short prefix. Value `user-4` doesn't start with full path prefix.
+
+**EXP-PRODUCT-34282620394 (parent)**: C2-FIX-FALSIFIED. Tried distill-time prefix stripping. Works for C2 in isolation (binding_accuracy=1.0). But introduces 4 regressions (B4, C1, D1, D3) because it mandates full-value-only calling convention. Root cause: distill-time stripping changes VALUE CONTRACT. When template is `prefix-${slot}`, callers can pass short values. When template is `${slot}` (prefix stripped), callers MUST pass full values. Test harness uses mixed conventions.
+
+### 3.2 Key Insight from Parent Handoff
+
+The parent handoff identifies that the parent's bind-time approach handled BOTH conventions:
+- Short value `d` into `site-${slot}` produced `site-d` (template adds prefix)
+- Full value `user-4` triggered prefix stripping (avoid double-prefix)
+
+This flexibility was lost with distill-time stripping because the template was modified at distill time, forcing callers to adapt.
+
+### 3.3 Strategy (a): Bind-Time Slot-Level Prefix Extraction
+
+The parent handoff recommends strategy (a) as lower-risk:
+- **Template retains prefix**: no stripping at distill time. Template stays `https://site-${callback_url}.com/hook`, `https://api.example.com/users/user-${url}`, etc.
+- **Slot prefix stored in metadata**: `slot_prefixes = {'callback_url': 'site-', 'url': 'user-'}`
+- **Bind-time handling**: `_bind()` checks if value starts with stored prefix:
+  - If yes: strip prefix from value, then substitute (avoids double-prefix)
+  - If no: substitute directly (template adds prefix)
+
+This handles both conventions:
+- Short value `d`: doesn't start with `site-`, so substitute directly → `site-d` ✓
+- Full value `site-d`: starts with `site-`, strip prefix → `d`, substitute → `site-d` ✓
+
+### 3.4 Why This Approach
+
+1. **Preserves VALUE CONTRACT**: callers can pass either short or full values without API change
+2. **Simpler than hybrid**: no distill-time template modification, only bind-time prefix handling
+3. **Lower-risk**: restores proven bind-time flexibility without complex two-phase logic
+4. **Directly tests the key unknown**: "Whether bind-time detection with slot-level prefix extraction would handle both conventions"
+
+## 4. Hypotheses
+
+### H1: C2 Resolution
+Bind-time slot-level prefix extraction resolves C2: `distill_parameterized()` induces template `https://api.example.com/users/user-${url}` with `slot_prefixes={'url': 'user-'}`. `_bind()` strips `user-` from full values (`user-4` → `4`) before substitution. All 3 unseen values (`user-4`, `user-5`, `user-6`) bind correctly (binding_accuracy=1.0).
+
+### H2: No Regressions
+All 9 regression conditions (B1-B5, C1, D1-D3) pass with correct slot counts and binding_accuracy=1.0. The bind-time approach does not break existing functionality.
+
+### H3: Mixed Convention Support
+The same mechanism handles both short values (`d`, `4`) and full values (`user-4`, `site-d`) without requiring callers to change their parameter passing style.
+
+### H4: Null Controls
+E1 (pattern absence) and E2 (single observation) produce slot_count=0. No hallucination.
+
+## 5. Implementation Approach
+
+### 5.1 Model Change
+Add `slot_prefixes: dict[str, str] = field(default_factory=dict)` to `Mechanism` in `src/spider/models.py`. This stores the slot-level prefix for each parameter slot (e.g., `{'url': 'user-'}`).
+
+### 5.2 distill_parameterized() in SpiderKernel
+Port the induction logic from previous experiments into `src/spider/kernel.py`:
+1. Extract varying fields by comparing action templates across observations
+2. For each varying field, compute the slot-level prefix from training values
+3. Create template by replacing varying parts with `${slot_name}` placeholders
+4. Store `slot_prefixes` in mechanism metadata
+5. Return mechanism with `confidence=0.9` (matching prior experiments)
+
+### 5.3 _bind() Modification
+Modify `_bind()` to accept optional `prefixes: dict[str, str] | None = None` parameter:
+1. For each slot substitution, check if `prefixes` contains a prefix for this slot
+2. If prefix exists and value starts with prefix: strip prefix from value, then substitute
+3. If prefix exists but value doesn't start with prefix: substitute directly (template adds prefix)
+4. If no prefix: substitute directly (existing behavior)
+
+### 5.4 resolve() Update
+Update `resolve()` to pass `best.slot_prefixes` to `_bind()`:
+```python
+bound_action=_bind(best.action_template, params, prefixes=best.slot_prefixes),
+```
+
+### 5.5 Helper Functions
+Port the following helper functions from previous experiment scripts:
+- `_collect_leaf_paths(action)` — enumerate leaf paths in action dict
+- `_is_metadata_path(path, metadata_keys)` — check if path is metadata
+- `_get_value_at_path(action, path)` — extract value at dotted path
+- `_compute_jaccard(set1, set2)` — Jaccard similarity
+- `_check_constant_value_anchor(path_values)` — check if path has constant anchor
+- `_find_common_prefix_suffix(values)` — compute common prefix/suffix
+- `_extract_parameter_candidates(action, template_paths)` — identify varying fields
+- `_compute_structure_similarity(observations)` — pairwise Jaccard
+- `_set_template_value(template, path, value)` — set value at dotted path
+- `_field_path_to_slot_name(path)` — convert dotted path to slot name
+
+### 5.6 Test Harness
+Reuse the identical 10-condition test harness from parent EXP-PRODUCT-34282620394:
+- B1: single-path (url varies)
+- B2: path-and-body (url + name vary)
+- B3: path-body-headers (url + title + X-Request-ID vary)
+- B4: non-identifier-values (callback_url varies, short values 'd','e','f')
+- B5: shared-slot-name (url varies, user_id static)
+- C1: prefix+Suffix URL binding (same as B4, short values)
+- C2: full-value IDs (user-4, user-5, user-6)
+- D1: noisy POST with metadata
+- D2: noisy GET with metadata
+- D3: varying preconditions
+- E1: pattern absence (null control)
+- E2: single observation (null control)
+
+## 6. Data
+
+### 6.1 Training Data
+Identical to parent EXP-PRODUCT-34282620394. Each condition uses 3 training observations with deterministic synthetic data.
+
+### 6.2 Unseen Test Data
+Identical to parent. B4/C1/D1/D3 use SHORT values ('d', '4'). C2 uses FULL values ('user-4'). This mixed convention is the core test.
+
+### 6.3 Expected Outputs
+Identical to parent. Strict JSON comparison: bound_action must exactly match expected_action.
+
+## 7. Measures
+
+### 7.1 Primary Metric
+- **binding_accuracy**: fraction of unseen test cases where bound_action exactly matches expected_action
+- **slot_count**: number of parameter slots induced by distill_parameterized()
+
+### 7.2 Per-Condition Metrics
+- binding_accuracy per condition (B1-B5, C1-C2, D1-D3)
+- slot_count per condition
+- resolution_status (EXECUTABLE, EXPLORE, UNKNOWN)
+
+### 7.3 Aggregate Metrics
+- overall_binding_accuracy: across all 10 conditions
+- regression_pass_count: number of conditions passing
+- regression_fail_count: number of conditions failing
+
+### 7.4 Diagnostic Metrics
+- slot_prefixes_detected: prefix extracted for each slot
+- template_induced: the parameterized template produced
+- prefix_strip_count: number of values where prefix was stripped at bind time
+
+## 8. Controls
+
+### 8.1 Positive Control: C2
+- Training: user-1, user-2, user-3
+- Unseen: user-4, user-5, user-6 (FULL values)
+- Expected: binding_accuracy=1.0, no double-prefix
+- Verifies: prefix extraction and bind-time stripping work correctly
+
+### 8.2 Regression Baseline: B1-B5
+- B1: slot_count=1, binding_accuracy=1.0
+- B2: slot_count=2, binding_accuracy=1.0
+- B3: slot_count=3, binding_accuracy=1.0
+- B4: slot_count=1, binding_accuracy=1.0 (SHORT values 'd','e','f')
+- B5: slot_count=1, binding_accuracy=1.0
+- Verifies: existing functionality not broken
+
+### 8.3 Mixed Convention Test: B4 vs C2
+- B4: short values 'd','e','f' → should bind correctly via template prefix
+- C2: full values 'user-4','user-5','user-6' → should bind correctly via prefix stripping
+- Verifies: both calling conventions work with same mechanism
+
+### 8.4 Null Controls: E1, E2
+- E1: unrelated observations → slot_count=0
+- E2: single observation → slot_count=0
+- Verifies: no hallucination of parameterization
+
+### 8.5 Literal Baseline: B_LITERAL
+- Literal mechanisms (no parameterization) → fail_rate=1.0 on unseen
+- Verifies: parameterized induction is necessary
+
+## 9. Statistical Tests
+
+Not applicable. This is a deterministic synthetic experiment with exact matching. No statistical inference required. All conditions must pass exactly (binding_accuracy=1.0, slot_count=expected).
+
+## 10. Validity Threats
+
+### 10.1 Synthetic-to-Real Gap
+All conditions use deterministic synthetic data. Findings do not directly demonstrate real-browser behavior. Mitigation: this is a kernel correctness test, not a product economics test. Real-browser testing is a separate gate.
+
+### 10.2 Prefix Extraction Robustness
+The slot-level prefix extraction depends on the training values having a consistent prefix. Edge cases (e.g., values with no common prefix, values with multiple candidate prefixes) are not tested. Mitigation: E1 null control tests pattern absence; future experiments should test more diverse prefix patterns.
+
+### 10.3 Template Derivation Accuracy
+The template derivation logic must correctly identify varying vs constant fields. Incorrect derivation could produce wrong templates. Mitigation: B1-B5 regression baseline verifies template derivation on known inputs.
+
+### 10.4 Bind-Time Prefix Matching
+The prefix matching logic (`value.startswith(prefix)`) could false-match on values that coincidentally start with the prefix. Mitigation: test harness uses distinct prefixes ('user-', 'site-', 'order-', 'item-') that don't appear as prefixes of unrelated values.
+
+### 10.5 No Model/Network/Browser
+Pure offline computation. No external validity for real-world deployment. Mitigation: this is a necessary-but-not-sufficient gate. Product economics measurement is a separate experiment.
+
+## 11. Decision Rules
+
+### 11.1 SURVIVES_CURRENT_TEST
+If ALL of:
+1. C2 binding_accuracy == 1.0 (all 3 unseen values bind correctly)
+2. B1-B5 all pass (slot_count match AND binding_accuracy=1.0)
+3. C1 passes (slot_count=1, binding_accuracy=1.0)
+4. D1-D3 all pass (slot_count match AND binding_accuracy=1.0)
+5. E1 slot_count == 0
+6. E2 slot_count == 0
+7. No crashes or errors in distill_parameterized or _bind
+
+### 11.2 FALSIFIED-IN-SETTING
+If ANY of:
+1. C2 binding_accuracy < 1.0
+2. Any regression in B1-B5, C1, D1-D3
+3. E1 or E2 slot_count > 0
+4. Crashes or errors
+
+### 11.3 MEASUREMENT_INVALID
+If:
+1. Infrastructure failure prevents execution
+2. distill_parameterized crashes for unexpected reasons
+3. Test harness cannot be loaded
+
+## 12. Expected Outcomes
+
+### 12.1 Positive Result (SURVIVES_CURRENT_TEST)
+- C2 resolved without regressions
+- C-PARAM-INHERIT advances: parameterized mechanisms handle mixed conventions
+- Kernel integration advances from PARTIAL to near-complete
+- Unblocks end-to-end product economics measurement (C-PRODUCT-ECON)
+- Product API can support both short and full value calling conventions
+
+### 12.2 Negative Result (FALSIFIED-IN-SETTING)
+- Bind-time slot-level prefix extraction fails to resolve C2 or introduces regressions
+- Identify specific failure mode (which condition fails, how it fails)
+- Narrow remaining options: hybrid distill+bind, or contract change to full-value-only
+- Kernel integration remains PARTIAL
+
+### 12.3 Invalid Result (MEASUREMENT_INVALID)
+- Infrastructure failure, not scientific evidence
+- Debug and retry
+
+## 13. Analysis Plan
+
+1. **Implement**: Add `slot_prefixes` to Mechanism model, implement `distill_parameterized()` with prefix detection, modify `_bind()` with prefix handling, port helper functions from parent test harness
+2. **Run**: Execute all 10 conditions + E1/E2 null controls + B_LITERAL baseline
+3. **Verify**: Check binding_accuracy and slot_count for each condition
+4. **Diagnose**: If any condition fails, inspect slot_prefixes_detected, template_induced, and prefix_strip_count
+5. **Report**: All outcomes with equal prominence
+
+## 14. Analysis Code
+
+Implementation will be in `src/spider/kernel.py` (distill_parameterized, _bind modifications) and `src/spider/models.py` (slot_prefixes field). Test harness in `research/experiments/EXP-PRODUCT-34420092879/run_experiment.py`.
+
+## 15. Deviation Policy
+
+Any deviation from this preregistration will be labeled EXPLORATORY and cannot support confirmatory claims. A new confirmatory claim requires a new preregistration.
+
+## 16. Freeze Statement
+
+This preregistration is frozen BEFORE any implementation code is written or any outcome data is inspected. The experiment will be executed exactly as described here.
+```
+
+## freeze.json
+
+```text
+{
+  "experiment_id": "EXP-PRODUCT-34420092879",
+  "frozen_at": "2026-09-10T04:59:25.311468+00:00",
+  "hashes": {
+    "prereg.md": "4e106e5acb1c43d9ddd2dd4dab0d0a3bfd20aabaa110ecb812180a90ace976b4",
+    "request.json": "08b6fea0fb6b846a9c81cdb47094ca6e993855a157d9021f306d6e605fb731b5",
+    "spec.json": "bbbf4dff630c21fd1bcdac212d6516bd685231324a76fedd771e7998bb7811f2"
+  },
+  "schema_version": 1
+}
+```
+
+## result.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-34420092879",
+  "lane": "product",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "overall_binding_accuracy": 1.0,
+    "overall_binding_correct_count": 27,
+    "overall_binding_total": 27,
+    "regression_pass_count": 9,
+    "regression_fail_count": 0,
+    "regression_total": 9,
+    "regression_passing": ["B1-single-path", "B2-path-and-body", "B3-path-body-headers", "B4-non-identifier-values", "B5-shared-slot-name", "C1-full-value-urls", "D1-noisy-post", "D2-noisy-get", "D3-varying-preconditions"],
+    "regression_failing": [],
+    "c2_binding_accuracy_full_value": 1.0,
+    "c2_binding_correct_count": 3,
+    "c2_binding_total": 3,
+    "c2_template_retains_prefix": true,
+    "c2_slot_prefixes_detected": {"url": "user-"},
+    "c2_induced_template": "https://api.example.com/users/user-${url}",
+    "b4_slot_prefixes_detected": {"callback_url": "site-"},
+    "b4_induced_template": "https://site-${callback_url}.com/hook",
+    "mixed_convention_support": true,
+    "null_e1_slot_count": 0,
+    "null_e1_passed": true,
+    "null_e2_slot_count": 0,
+    "null_e2_passed": true,
+    "literal_baseline_fail_rate": 1.0
+  },
+  "controls": {
+    "C2_FULL_VALUE_IDS": {
+      "description": "Positive control: C2 full-value binding with prefix-bearing IDs",
+      "expected": "slot_count=1, binding_accuracy=1.0, bound URLs contain 'user-4' not 'user-user-4'",
+      "observed": "slot_count=1, binding_accuracy=1.0, bound URLs = 'user-4', 'user-5', 'user-6'",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json conditions.C2-full-value-ids"
+    },
+    "B1_REGRESSION": {
+      "description": "B1 single-path regression baseline",
+      "expected": "slot_count=1, binding_accuracy=1.0",
+      "observed": "slot_count=1, binding_accuracy=1.0",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json conditions.B1-single-path"
+    },
+    "B2_REGRESSION": {
+      "description": "B2 path-and-body regression baseline",
+      "expected": "slot_count=2, binding_accuracy=1.0",
+      "observed": "slot_count=2, binding_accuracy=1.0",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json conditions.B2-path-and-body"
+    },
+    "B3_REGRESSION": {
+      "description": "B3 path-body-headers regression baseline",
+      "expected": "slot_count=3, binding_accuracy=1.0",
+      "observed": "slot_count=3, binding_accuracy=1.0",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json conditions.B3-path-body-headers"
+    },
+    "B4_REGRESSION": {
+      "description": "B4 non-identifier-values regression baseline (SHORT values 'd','e','f')",
+      "expected": "slot_count=1, binding_accuracy=1.0",
+      "observed": "slot_count=1, binding_accuracy=1.0. Short values bind correctly via template prefix (site-${slot} produces site-d).",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json conditions.B4-non-identifier-values"
+    },
+    "B5_REGRESSION": {
+      "description": "B5 shared-slot-name regression baseline",
+      "expected": "slot_count=1, binding_accuracy=1.0",
+      "observed": "slot_count=1, binding_accuracy=1.0",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json conditions.B5-shared-slot-name"
+    },
+    "C1_REGRESSION": {
+      "description": "C1 prefix+Suffix URL binding (SHORT values)",
+      "expected": "slot_count=1, binding_accuracy=1.0",
+      "observed": "slot_count=1, binding_accuracy=1.0",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json conditions.C1-full-value-urls"
+    },
+    "D1_REGRESSION": {
+      "description": "D1 noisy POST with metadata (SHORT values)",
+      "expected": "slot_count=3, binding_accuracy=1.0",
+      "observed": "slot_count=3, binding_accuracy=1.0",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json conditions.D1-noisy-post"
+    },
+    "D2_REGRESSION": {
+      "description": "D2 noisy GET with metadata",
+      "expected": "slot_count=1, binding_accuracy=1.0",
+      "observed": "slot_count=1, binding_accuracy=1.0",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json conditions.D2-noisy-get"
+    },
+    "D3_REGRESSION": {
+      "description": "D3 varying preconditions (SHORT values)",
+      "expected": "slot_count=1, binding_accuracy=1.0",
+      "observed": "slot_count=1, binding_accuracy=1.0",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json conditions.D3-varying-preconditions"
+    },
+    "E1_NULL": {
+      "description": "E1 pattern absence null control",
+      "expected": "slot_count=0",
+      "observed": "slot_count=0",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json controls.E1_pattern_absence"
+    },
+    "E2_NULL": {
+      "description": "E2 single observation null control",
+      "expected": "slot_count=0",
+      "observed": "slot_count=0",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json controls.E2_single_obs"
+    },
+    "B_LITERAL": {
+      "description": "Literal baseline: no parameterization",
+      "expected": "fail_rate=1.0",
+      "observed": "fail_rate=1.0",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json baselines.B_LITERAL"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PRODUCT-34420092879/raw_evidence.json",
+      "sha256": "63809857d9af177206b85c309578bfa3469ca29eb45df66d7373e2511e6e86d2",
+      "role": "raw"
+    },
+    {
+      "path": "src/spider/kernel.py",
+      "sha256": "1105bb9bea2079c2e0b402ed1925c25f0f9dc7096447ce56a940373f427a0019",
+      "role": "code"
+    },
+    {
+      "path": "src/spider/models.py",
+      "sha256": "065e6b3d52ccbebc7c1525c77c782c39395ff69f6d6ca9e8cdc4639f3ad0cc85",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-34420092879/run_experiment.py",
+      "sha256": "9c8364188766f534b83e01da921a1295acdabfee3b896667e67761826240140a",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "C2 RESOLVED WITHOUT REGRESSIONS: Bind-time slot-level prefix extraction works. Template retains full prefix (user-${url}), slot_prefixes={'url': 'user-'}. Full value 'user-4' triggers prefix stripping at bind-time (4 substituted, template prefix produces user-4). Short value '4' binds directly (template prefix adds user-). All 3 unseen values bind correctly (binding_accuracy=1.0).",
+    "B4 REGRESSION FIXED: Short values 'd','e','f' bind correctly. Template is 'https://site-${callback_url}.com/hook', slot_prefixes={'callback_url': 'site-'}. Short value 'd' does not start with 'site-', so substituted directly: site-d.com/hook. No double-prefix. This was the critical regression from distill-time stripping.",
+    "B1-B5 ALL PASS: All 5 regression baselines pass with correct slot counts (B1=1, B2=2, B3=3, B4=1, B5=1) and binding_accuracy=1.0. No regressions.",
+    "C1 PASSES: Same as B4, short values work correctly with bind-time prefix stripping.",
+    "D1 PASSES: 3 slots (url, customer, X-Request-ID) induced correctly. Short values ('4', 'D', '4') bind correctly with slot prefixes ('order-', 'cust-', 'req-10').",
+    "D2 PASSES: Single slot (url) induced. Short value 'delta' binds correctly.",
+    "D3 PASSES: Single slot (url) induced. Short value '4' binds correctly despite varying preconditions.",
+    "E1/E2 NULL CONTROLS PASS: No parameterization hallucinated. E1 unrelated observations produce slot_count=0. E2 single observation produces slot_count=0.",
+    "LITERAL BASELINE PASSES: fail_rate=1.0 confirms parameterized induction is necessary.",
+    "MIXED CONVENTION SUPPORT DEMONSTRATED: The same mechanism handles both short values (B4: 'd', C1: 'd', D1: '4', D3: '4') and full values (C2: 'user-4', 'user-5', 'user-6') without requiring callers to change their parameter passing style. This resolves the VALUE CONTRACT problem identified in parent EXP-PRODUCT-34282620394."
+  ],
+  "validity_notes": [
+    "All 10 conditions use the same synthetic deterministic data as parent EXP-PRODUCT-34282620394.",
+    "C2 tested with full values (user-4, user-5, user-6) per spec. B4/C1/D1/D3 tested with short values ('d', '4') per spec.",
+    "Binding correctness uses strict JSON comparison: bound_action must exactly match expected_action.",
+    "No model calls, no network, no browser during measurement — pure offline synthetic.",
+    "Each condition uses a fresh temporary registry to prevent cross-condition contamination.",
+    "Slot prefix extraction is deterministic given frozen training data.",
+    "The bind-time approach is more robust than distill-time stripping because it handles both calling conventions without requiring callers to change their parameter passing style.",
+    "D1 template includes metadata fields (timestamp, request_duration_ms, retry_count, user_agent) which are constant across observations but not stripped. This matches the parent experiment behavior.",
+    "The X-Request-ID parameter mapping required hyphen/underscore normalization in the test harness."
+  ],
+  "unresolved": [
+    "End-to-end product economics measurement (C-PRODUCT-ECON) remains unmeasured — this is a kernel correctness test, not a product economics test.",
+    "Real browser observation noise distributions vs synthetic deterministic patterns — no external validity claimed.",
+    "Whether bind-time prefix extraction handles edge cases (values with no common prefix, values with multiple candidate prefixes) beyond the 10 tested conditions.",
+    "Whether the product API should mandate full-value-only convention or support mixed conventions — this experiment demonstrates mixed conventions work, but the product design decision is separate."
+  ]
+}
+```
+
+## report.md
+
+```text
+# EXP-PRODUCT-34420092879 Report
+
+## Experiment Summary
+
+**Experiment ID**: EXP-PRODUCT-34420092879
+**Lane**: Product
+**Claim**: C-PARAM-INHERIT (Mechanisms parameterize to unseen identifiers)
+**Status**: COMPLETE
+**Outcome**: SUPPORTS
+
+## Scientific Question
+
+Can C2 be resolved without regressions by implementing bind-time slot-level prefix extraction in `_bind()`, such that all 10 conditions pass and the product API supports both short and full value calling conventions?
+
+## Answer
+
+**Yes.** All 10 conditions pass with binding_accuracy=1.0. Both short and full value calling conventions work with the same mechanism. The C2 blocker is resolved without regressions.
+
+## Key Results
+
+| Condition | Slot Count | Binding Accuracy | Status |
+|-----------|-----------|-----------------|--------|
+| B1 (single-path) | 1 | 1.0 | PASS |
+| B2 (path-and-body) | 2 | 1.0 | PASS |
+| B3 (path-body-headers) | 3 | 1.0 | PASS |
+| B4 (non-identifier-values) | 1 | 1.0 | PASS |
+| B5 (shared-slot-name) | 1 | 1.0 | PASS |
+| C1 (prefix+suffix URL) | 1 | 1.0 | PASS |
+| C2 (full-value IDs) | 1 | 1.0 | PASS |
+| D1 (noisy POST) | 3 | 1.0 | PASS |
+| D2 (noisy GET) | 1 | 1.0 | PASS |
+| D3 (varying preconditions) | 1 | 1.0 | PASS |
+| E1 (null: pattern absence) | 0 | — | PASS |
+| E2 (null: single obs) | 0 | — | PASS |
+| B_LITERAL (baseline) | — | — | PASS (fail_rate=1.0) |
+
+**Overall binding accuracy**: 27/27 = 1.0
+
+## Mechanism
+
+### Bind-Time Slot-Level Prefix Extraction
+
+The implementation adds three components:
+
+1. **`slot_prefixes` field on `Mechanism`**: Stores the slot-level prefix for each parameter slot (e.g., `{'url': 'user-', 'callback_url': 'site-'}`).
+
+2. **`distill_parameterized()` method**: Detects slot-level prefixes from training value distribution. Template retains the FULL prefix (no distill-time stripping). Slot prefixes are stored as metadata.
+
+3. **Modified `_bind()` with prefix parameter**: At bind-time, checks if the parameter value starts with the stored prefix. If yes, strips prefix before substitution (avoids double-prefix). If no, substitutes directly (template prefix is applied).
+
+### How It Handles Mixed Conventions
+
+**Short value** `d` into template `https://site-${callback_url}.com/hook` with prefix `site-`:
+- `d` does not start with `site-` → substitute directly → `https://site-d.com/hook` ✓
+
+**Full value** `site-d` into same template:
+- `site-d` starts with `site-` → strip prefix → `d` → substitute → `https://site-d.com/hook` ✓
+
+This resolves the VALUE CONTRACT problem from parent EXP-PRODUCT-34282620394, where distill-time stripping mandated full-value-only convention and broke 4/9 conditions.
+
+## Comparison with Prior Experiments
+
+| Experiment | Strategy | C2 | Regressions | Verdict |
+|-----------|----------|-----|------------|---------|
+| EXP-PRODUCT-34015741916 | No parameterization | FAIL | — | PARTIAL |
+| EXP-PRODUCT-34195008089 | `_bind()` prefix-strip (full template prefix) | FAIL | — | FALSIFIED |
+| EXP-PRODUCT-34282620394 | Distill-time stripping | PASS | 4/9 FAIL | FALSIFIED |
+| **EXP-PRODUCT-34420092879** | **Bind-time slot-level prefix extraction** | **PASS** | **0/9 FAIL** | **SUPPORTS** |
+
+## Implementation Changes
+
+- **`src/spider/models.py`**: Added `slot_prefixes: dict[str, str]` field to `Mechanism` dataclass.
+- **`src/spider/kernel.py`**: Added `distill_parameterized()` method, modified `_bind()` to accept optional `prefixes` parameter, updated `resolve()` to pass `slot_prefixes` to `_bind()`, added helper functions for parameter induction.
+
+## Validity Threats
+
+1. **Synthetic-to-real gap**: All conditions use deterministic synthetic data. Real-browser behavior not tested.
+2. **Prefix extraction robustness**: Edge cases (no common prefix, multiple candidate prefixes) not tested beyond the 10 conditions.
+3. **No model/network/browser**: Pure offline computation. Product economics measurement is a separate experiment.
+
+## Product Consequences
+
+- **If SUPPORTS** (this experiment): C2 resolved. C-PARAM-INHERIT advances. Kernel integration moves from PARTIAL toward complete. Product API can support mixed calling conventions. Unblocks end-to-end product economics measurement.
+- **If FALSIFIED** (not this experiment): VALUE CONTRACT problem persists. Product API would need to mandate full-value-only convention or explore hybrid approach.
+```
+
+## provenance.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-34420092879",
+  "lane": "product",
+  "github_run_id": "34420092879",
+  "github_run_attempt": 1,
+  "base_sha": "a9913eebffcb00612a1cc954158b9c8869f90041",
+  "execution_sha": "HEAD (uncommitted)",
+  "frozen_at": "2026-09-10T04:59:25.311468+00:00",
+  "executed_at": "2026-09-10T05:03:41Z",
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.12",
+    "model": "opencode/mimo-v2.5-free"
+  },
+  "code_paths": {
+    "kernel": {
+      "path": "src/spider/kernel.py",
+      "sha256": "1105bb9bea2079c2e0b402ed1925c25f0f9dc7096447ce56a940373f427a0019",
+      "role": "code",
+      "description": "Modified: added distill_parameterized(), modified _bind() with prefix parameter, updated resolve() to pass slot_prefixes"
+    },
+    "models": {
+      "path": "src/spider/models.py",
+      "sha256": "065e6b3d52ccbebc7c1525c77c782c39395ff69f6d6ca9e8cdc4639f3ad0cc85",
+      "role": "code",
+      "description": "Modified: added slot_prefixes field to Mechanism dataclass"
+    },
+    "test_harness": {
+      "path": "research/experiments/EXP-PRODUCT-34420092879/run_experiment.py",
+      "sha256": "9c8364188766f534b83e01da921a1295acdabfee3b896667e67761826240140a",
+      "role": "code",
+      "description": "Test harness: 10 conditions + E1/E2 null controls + B_LITERAL baseline"
+    }
+  },
+  "artifacts": {
+    "raw_evidence": {
+      "path": "research/experiments/EXP-PRODUCT-34420092879/raw_evidence.json",
+      "sha256": "63809857d9af177206b85c309578bfa3469ca29eb45df66d7373e2511e6e86d2",
+      "role": "raw"
+    },
+    "result": {
+      "path": "research/experiments/EXP-PRODUCT-34420092879/result.json",
+      "sha256": "d60d8f7d5f1b5c45d778c64069e28c1789f5f0e2f8e9dee96da5f38f62279222",
+      "role": "derived"
+    },
+    "report": {
+      "path": "research/experiments/EXP-PRODUCT-34420092879/report.md",
+      "sha256": "b555fe9d5ea09650b12fb2bc4b64146fbb64b46d821aba6440c0699bf9348dc3",
+      "role": "derived"
+    }
+  },
+  "frozen_inputs": {
+    "request.json": {
+      "path": "research/experiments/EXP-PRODUCT-34420092879/request.json",
+      "sha256": "08b6fea0fb6b846a9c81cdb47094ca6e993855a157d9021f306d6e605fb731b5"
+    },
+    "spec.json": {
+      "path": "research/experiments/EXP-PRODUCT-34420092879/spec.json",
+      "sha256": "bbbf4dff630c21fd1bcdac212d6516bd685231324a76fedd771e7998bb7811f2"
+    },
+    "prereg.md": {
+      "path": "research/experiments/EXP-PRODUCT-34420092879/prereg.md",
+      "sha256": "4e106e5acb1c43d9ddd2dd4dab0d0a3bfd20aabaa110ecb812180a90ace976b4"
+    },
+    "freeze.json": {
+      "path": "research/experiments/EXP-PRODUCT-34420092879/freeze.json",
+      "sha256": "b5cdb7ab549d9914a81f91595d7d64dcf498964c615cb6aa73724f39a2b44333"
+    }
+  },
+  "parent_evidence": {
+    "EXP-PRODUCT-34282620394": {
+      "handoff_path": "research/experiments/EXP-PRODUCT-34282620394/handoff.json",
+      "handoff_sha256": "da36422c7bc4db61ac01783ebba08de0770998a0004462ebcfc2308277f6c155",
+      "verdict": "C2-FIX-FALSIFIED",
+      "key_finding": "Distill-time prefix stripping works for C2 but breaks 4/9 conditions due to VALUE CONTRACT mismatch"
+    }
+  },
+  "reproduction_command": "python3 research/experiments/EXP-PRODUCT-34420092879/run_experiment.py",
+  "dependencies": [
+    "src/spider/kernel.py (distill_parameterized, _bind with prefixes, helper functions)",
+    "src/spider/models.py (Mechanism.slot_prefixes field)",
+    "src/spider/registry.py (MechanismRegistry)",
+    "research/experiments/EXP-PRODUCT-34282620394/run_experiment.py (test harness basis)"
+  ]
+}
+```
+
+## audit.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-34420092879",
+  "lane": "product",
+  "status": "REVISE",
+  "producer_claim_supported": true,
+  "required_fixes": [
+    "Correct result.json overall_binding_total/overall_binding_correct_count: reported 27/27 but raw_evidence.json sums to 34/34 (B1 5 + B2 5 + B3 5 + B4 3 + B5 3 + C1 3 + C2 3 + D1 3 + D2 3 + D3 1 = 34). Accuracy remains 1.0 so decision rule unchanged, but metric counts must match raw evidence before promotion.",
+    "Amend report.md/results to state that D2 slot_prefixes={'url':'search?q='} is an artifact of leaf-path URL modeling (rfind('/') heuristic) and not a general query-string decomposition; bound the claim to this synthetic URL-as-leaf representation.",
+    "Retain mandatory field semantics: do not omit totals where data exists; keep corrected totals in metrics and explain synthetic-only scope in validity_notes."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_TARGET_SPLIT_INTEGRITY",
+      "severity": "low",
+      "finding": "Target/split integrity holds. No leakage: unseen values are disjoint from training (B1 A/B/C vs D-H, B4 a/b/c vs d/e/f, C2 user-1/2/3 vs user-4/5/6). Each condition uses fresh TemporaryDirectory registry per run_experiment.py:541-547 preventing cross-condition contamination. Verified via raw_evidence.json conditions.*.training_count=3 and distinct unseen sets.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-34420092879/raw_evidence.json conditions.*.resolution_results, research/experiments/EXP-PRODUCT-34420092879/run_experiment.py:541-547"
+    },
+    {
+      "id": "V2_MEASUREMENT_VALIDITY",
+      "severity": "low",
+      "finding": "Measurement validity as-preregistered holds: strict JSON equality via json.dumps(sort_keys=True) in run_experiment.py:99-103, deterministic synthetic offline, no model/network/browser calls, slot_prefix extraction deterministic. Recomputed binding_correct 34/34 matches reported accuracy 1.0 (only total miscount).",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-34420092879/run_experiment.py:99-103, research/experiments/EXP-PRODUCT-34420092879/raw_evidence.json conditions.*.metrics.binding_accuracy"
+    },
+    {
+      "id": "V3_REPRESENTATION_LOSS",
+      "severity": "medium",
+      "finding": "Representation loss not hidden but limits external validity. Kernel leaf-path model treats full URL as single leaf (ACTION_TEMPLATE_PATHS includes 'url' as leaf). Slot extraction uses rfind('/') heuristic to split URL prefix from slot prefix. This works for tested patterns (https://site-a.com/hook -> site-, https://api.example.com/users/user-1 -> user-) but would not generalize to query-string decomposition or multi-segment variation. D2 template https://api.example.com/search?q=${url} with slot_prefixes search?q= demonstrates the heuristic capturing 'search?q=' as prefix, which is structurally incorrect but happens to bind correctly for short values. Acknowledged in result.json validity_notes as synthetic-to-real gap.",
+      "evidence_ref": "src/spider/kernel.py:370-385 slot_prefix extraction, research/experiments/EXP-PRODUCT-34420092879/raw_evidence.json conditions.D2-noisy-get.distill_diagnostics.slot_prefixes"
+    },
+    {
+      "id": "V4_CONTROLS",
+      "severity": "low",
+      "finding": "Controls pass as specified. Positive control C2_FULL_VALUE_IDS: slot_count=1 binding_accuracy=1.0 bound URLs user-4/5/6 no double-prefix (verified via _bind stripping user-). Regression controls B1_REGRESSION..D3_REGRESSION: slot counts B1=1 B2=2 B3=3 B4=1 B5=1 C1=1 D1=3 D2=1 D3=1 all binding_accuracy=1.0. Null controls E1_NULL/E2_NULL slot_count=0 (E1 distill_diagnostics null, mean_jaccard 0.666 but no varying fields). Recomputed via kernel.distill_parameterized independently confirms C2 template user-${url} with slot_prefixes {'url':'user-'} handles both '4' and 'user-4' via _bind prefix check (src/spider/kernel.py:180-213).",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-34420092879/result.json controls.*, research/experiments/EXP-PRODUCT-34420092879/raw_evidence.json conditions.C2-full-value-ids, src/spider/kernel.py:180-213 _bind"
+    },
+    {
+      "id": "V5_SYNTHETIC_SCOPE",
+      "severity": "medium",
+      "finding": "Synthetic-only scope. All 10 conditions use deterministic synthetic data identical to parent EXP-PRODUCT-34282620394 per spec measurement_validity. No browser, network, or observation noise beyond injected metadata fields (D1 timestamp/request_duration_ms etc.). Product economics (C-PRODUCT-ECON) and real-browser noise distributions remain unmeasured per result.json unresolved. Claim ceiling must be bounded to offline kernel correctness, not product deployment.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-34420092879/spec.json measurement_validity, research/experiments/EXP-PRODUCT-34420092879/result.json unresolved, prereg.md section 10.1"
+    },
+    {
+      "id": "V6_COUNT_MISMATCH",
+      "severity": "low",
+      "finding": "Metric reporting mismatch: result.json overall_binding_correct_count=27 overall_binding_total=27 but raw_evidence sum is 34. Recomputed 34/34 (B1 5, B2 5, B3 5, B4 3, B5 3, C1 3, C2 3, D1 3, D2 3, D3 1). Does not alter binding_accuracy=1.0 or decision rule (SURVIVES_CURRENT_TEST) but is a required fix for Codex/promotion accuracy.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-34420092879/result.json metrics, research/experiments/EXP-PRODUCT-34420092879/raw_evidence.json conditions.*.metrics"
+    },
+    {
+      "id": "V7_PREFIX_EDGE_CASES",
+      "severity": "low",
+      "finding": "Prefix stripping uses value.startswith(prefix) with empty prefix safe (startswith('') true but slice len 0 leaves value unchanged). No false stripping observed. Untested edge: values coincidentally starting with prefix (e.g., user value 'user-foo-user') not in harness; prereg validity threat 10.4 notes distinct prefixes mitigate. No evidence of false-match in current data.",
+      "evidence_ref": "src/spider/kernel.py:197-198, prereg.md 10.4"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B_LITERAL",
+      "finding": "Literal baseline B_LITERAL fail_rate=1.0 confirmed via recomputation (5/5 fail because literal mechanism confidence 0.5 < min_confidence 0.8 yields UNKNOWN). As specified in prereg 8.5, this is a weak trivial baseline that only demonstrates parameterized induction is necessary, not that distill_parameterized is stronger than a competent non-parameterized alternative. Strength is minimal but matches spec; passes.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-34420092879/raw_evidence.json baselines.B_LITERAL, research/experiments/EXP-PRODUCT-34420092879/run_experiment.py:615-643"
+    },
+    {
+      "id": "B_DISTILL_TIME_STRIPPING",
+      "finding": "Distill-time stripping baseline (parent EXP-PRODUCT-34282620394, 4/9 regressions B4/C1/D1/D3) correctly cited as rejected in spec baselines and report comparison table. Not re-executed but parent handoff evidence accepted. Current bind-time approach fixes those 4 regressions (recomputed B4/C1/D1/D3 binding_accuracy=1.0).",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-34420092879/spec.json baselines, research/experiments/EXP-PRODUCT-34420092879/report.md Comparison table"
+    },
+    {
+      "id": "B_NO_PARAMETERIZATION",
+      "finding": "No-parameterization kernel without distill_parameterized cannot parameterize at all — matches current kernel distill() literal behavior (confidence 0.5). Consistent with B_LITERAL.",
+      "evidence_ref": "src/spider/kernel.py:238-256 distill"
+    }
+  ],
+  "recomputed_metrics": {
+    "overall_binding_accuracy_reported": 1.0,
+    "overall_binding_accuracy_recomputed": 1.0,
+    "overall_binding_correct_count_reported": 27,
+    "overall_binding_correct_count_recomputed": 34,
+    "overall_binding_total_reported": 27,
+    "overall_binding_total_recomputed": 34,
+    "regression_pass_count_recomputed": 9,
+    "regression_fail_count_recomputed": 0,
+    "regression_total_recomputed": 9,
+    "c2_binding_accuracy_full_value_recomputed": 1.0,
+    "c2_binding_correct_count_recomputed": 3,
+    "c2_binding_total_recomputed": 3,
+    "c2_template_retains_prefix_recomputed": true,
+    "c2_slot_prefixes_detected_recomputed": {
+      "url": "user-"
+    },
+    "c2_induced_template_recomputed": "https://api.example.com/users/user-${url}",
+    "b4_slot_prefixes_detected_recomputed": {
+      "callback_url": "site-"
+    },
+    "b4_induced_template_recomputed": "https://site-${callback_url}.com/hook",
+    "b1_binding_accuracy_recomputed": 1.0,
+    "b1_slot_count_recomputed": 1,
+    "b2_binding_accuracy_recomputed": 1.0,
+    "b2_slot_count_recomputed": 2,
+    "b3_binding_accuracy_recomputed": 1.0,
+    "b3_slot_count_recomputed": 3,
+    "b4_binding_accuracy_recomputed": 1.0,
+    "b4_slot_count_recomputed": 1,
+    "b5_binding_accuracy_recomputed": 1.0,
+    "b5_slot_count_recomputed": 1,
+    "c1_binding_accuracy_recomputed": 1.0,
+    "c1_slot_count_recomputed": 1,
+    "d1_binding_accuracy_recomputed": 1.0,
+    "d1_slot_count_recomputed": 3,
+    "d2_binding_accuracy_recomputed": 1.0,
+    "d2_slot_count_recomputed": 1,
+    "d3_binding_accuracy_recomputed": 1.0,
+    "d3_slot_count_recomputed": 1,
+    "null_e1_slot_count_recomputed": 0,
+    "null_e1_passed_recomputed": true,
+    "null_e2_slot_count_recomputed": 0,
+    "null_e2_passed_recomputed": true,
+    "literal_baseline_fail_rate_recomputed": 1.0,
+    "mixed_convention_support_recomputed": true,
+    "notes": "Recomputed via raw_evidence.json and independent kernel invocation (SpiderKernel.distill_parameterized + resolve with _bind). Accuracy unchanged; total count correction is the only delta. All per-condition binding_accuracy 1.0 and slot counts match expected per spec decision_rule."
+  },
+  "claim_ceiling": "NARROW SYNTHETIC KERNEL CORRECTNESS ONLY: Within the frozen deterministic synthetic harness of 10 conditions (B1-B5,C1-C2,D1-D3,E1-E2) using SpiderKernel.distill_parameterized + _bind(slot_prefixes), bind-time slot-level prefix extraction resolves C2 double-prefix bug without regressions (binding_accuracy 1.0, correct slot counts) and handles both short ('d','4') and full ('user-4','site-d') calling conventions for the tested prefix patterns (user-, site-, order-, cust-, req-, item-, search?q=). Does NOT support claims about real-browser observation noise, external validity, product economics (C-PRODUCT-ECON), heterogeneous prefix distributions, query-string decomposition, or values coincidentally containing prefix. Promotion to product requires real-browser and economics measurement. Up to C-PARAM-INHERIT PARTIAL->SURVIVES_CURRENT_TEST in this setting only.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-34420092879/spec.json:bbbf4dff630c21fd1bcdac212d6516bd685231324a76fedd771e7998bb7811f2",
+    "research/experiments/EXP-PRODUCT-34420092879/prereg.md:4e106e5acb1c43d9ddd2dd4dab0d0a3bfd20aabaa110ecb812180a90ace976b4",
+    "research/experiments/EXP-PRODUCT-34420092879/freeze.json:b5cdb7ab549d9914a81f91595d7d64dcf498964c615cb6aa73724f39a2b44333",
+    "research/experiments/EXP-PRODUCT-34420092879/result.json:d60d8f7d5f1b5c45d778c64069e28c1789f5f0e2f8e9dee96da5f38f62279222",
+    "research/experiments/EXP-PRODUCT-34420092879/raw_evidence.json:63809857d9af177206b85c309578bfa3469ca29eb45df66d7373e2511e6e86d2",
+    "research/experiments/EXP-PRODUCT-34420092879/run_experiment.py:9c8364188766f534b83e01da921a1295acdabfee3b896667e67761826240140a",
+    "src/spider/kernel.py:1105bb9bea2079c2e0b402ed1925c25f0f9dc7096447ce56a940373f427a0019",
+    "src/spider/models.py:065e6b3d52ccbebc7c1525c77c782c39395ff69f6d6ca9e8cdc4639f3ad0cc85",
+    "research/experiments/EXP-PRODUCT-34420092879/report.md:b555fe9d5ea09650b12fb2bc4b64146fbb64b46d821aba6440c0699bf9348dc3"
+  ],
+  "unresolved": [
+    "End-to-end product economics (C-PRODUCT-ECON) remains unmeasured — kernel correctness gate does not imply product economics viability.",
+    "Real-browser external validity: synthetic deterministic vs noisy browser observations; leaf-path URL-as-string modeling may fail on structurally different URLs.",
+    "Prefix extraction robustness beyond tested consistent-prefix distributions (values with no common prefix, multiple candidates, or coincidental prefix matches) — prereg 10.2/10.4 threats still open.",
+    "Whether product API should mandatorily support mixed conventions vs mandate full-value-only — design decision separate from kernel capability demonstration.",
+    "Overall count reporting correction (27 vs 34) — no scientific impact but requires artifact fix before Codex ingestion."
+  ]
+}
+```
+
+## verdict.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-34420092879",
+  "lane": "product",
+  "decision": "SURVIVES_CURRENT_TEST",
+  "claim_updates": [
+    {
+      "claim_id": "C-PARAM-INHERIT",
+      "status": "EXPERIMENTAL",
+      "reason": "Bind-time slot-level prefix extraction resolves C2 double-prefix without regressions in frozen 10-condition synthetic harness. All conditions pass binding_accuracy=1.0, slot counts correct, null controls pass. This provides first evidence of mixed calling convention support (short and full values) at the kernel level. Evidence: audit.json recomputed_metrics (34/34 binding_correct, accuracy=1.0), raw_evidence.json all conditions, audit.json V4_CONTROLS (C2, B1-B5, D1-D3, E1/E2 independently verified). Claim does NOT advance to product-ready: audit.json claim_ceiling bounds to synthetic kernel correctness only; real-browser validation and end-to-end economics (C-PRODUCT-ECON) remain unmeasured."
+    }
+  ],
+  "product_action": "No product promotion. Audit.json claim_ceiling restricts to narrow synthetic kernel correctness only. Promotion requires: (1) real-browser external validity measurement, (2) end-to-end product economics (C-PRODUCT-ECON). The kernel code changes (distill_parameterized, _bind with prefixes, slot_prefixes field) are in src/spider/kernel.py and src/spider/models.py but are experimental, not product core.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does the parameterized kernel with bind-time prefix extraction save total cost per successful task in an end-to-end product economics measurement (C-PRODUCT-ECON gate), or does the leaf-path URL-as-string heuristic fail to generalize to structurally different URL patterns (query strings, multi-segment variation) requiring a more robust parameter induction approach?",
+  "reason": "Frozen decision_rule specifies SURVIVES_CURRENT_TEST when ALL conditions pass with binding_accuracy=1.0 AND slot counts match AND null controls pass AND no crashes. All10 conditions (B1-B5, C1-C2, D1-D3) pass binding_accuracy=1.0 (audit-confirmed 34/34). E1/E2 null controls pass slot_count=0. B_LITERAL baseline passes fail_rate=1.0. No crashes. The audit status=REVISE requires metric count correction (27→34) but does not dispute scientific findings. producer_claim_supported=true. The audit's claim_ceiling narrows the claim to synthetic kernel correctness only — real-browser noise, external validity, product economics, and prefix extraction robustness beyond tested patterns remain open. C-PARAM-INHERIT advances experimentally but is not product-ready.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-34420092879/spec.json:bbbf4dff630c21fd1bcdac212d6516bd685231324a76fedd771e7998bb7811f2 (frozen decision_rule)",
+    "research/experiments/EXP-PRODUCT-34420092879/result.json:d60d8f7d5f1b5c45d778c64069e28c1789f5f0e2f8e9dee96da5f38f62279222 (producer: COMPLETE/SUPPORTS, binding_accuracy=1.0, all controls pass)",
+    "research/experiments/EXP-PRODUCT-34420092879/audit.json (REVISE status, producer_claim_supported=true, recomputed 34/34 accuracy=1.0, claim_ceiling synthetic-only)",
+    "research/experiments/EXP-PRODUCT-34420092879/raw_evidence.json:63809857d9af177206b85c309578bfa3469ca29eb45df66d7373e2511e6e86d2 (raw evidence: all conditions, controls, baselines)",
+    "research/experiments/EXP-PRODUCT-34420092879/run_experiment.py:9c8364188766f534b83e01da921a1295acdabfee3b896667e67761826240140a (test harness)",
+    "src/spider/kernel.py:1105bb9bea2079c2e0b402ed1925c25f0f9dc7096447ce56a940373f427a0019 (distill_parameterized, _bind with prefixes)",
+    "src/spider/models.py:065e6b3d52ccbebc7c1525c77c782c39395ff69f6d6ca9e8cdc4639f3ad0cc85 (slot_prefixes field)",
+    "research/experiments/EXP-PRODUCT-34420092879/freeze.json (frozen inputs hashes)",
+    "research/claims/registry.json (C-PARAM-INHERIT current status EXPERIMENTAL)",
+    "research/experiments/EXP-PRODUCT-34282620394/handoff.json:da36422c7bc4db61ac01783ebba08de0770998a0004462ebcfc2308277f6c155 (parent handoff, C2-FIX-FALSIFIED, distill-time stripping rejected)"
+  ]
+}
+```
+
+## handoff.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-34420092879",
+  "lane": "product",
+  "target_lane": "product",
+  "next_question": "Does the parameterized kernel with bind-time prefix extraction save total cost per successful task in an end-to-end product economics measurement (C-PRODUCT-ECON gate), or does the leaf-path URL-as-string heuristic fail to generalize to structurally different URL patterns (query strings, multi-segment variation) requiring a more robust parameter induction approach?",
+  "why_next": "C2 blocker is resolved at the kernel level in synthetic settings (10/10 conditions, binding_accuracy=1.0, mixed conventions). C-PARAM-INHERIT advances experimentally but remains unvalidated for real-browser noise, prefix extraction robustness, and end-to-end economics. The Product lane's next gate for C-PRODUCT-ECON requires real-agent cost measurement. Additionally, the audit's V3_REPRESENTATION_LOSS finding flags that the leaf-path URL-as-string heuristic (rfind('/') prefix extraction) may not generalize beyond the tested synthetic URL patterns. The next experiment should either measure end-to-end economics (highest product impact) or test generalization to structurally different URLs (validates kernel robustness before economics measurement). A materials-orthogonal direction (e.g., testing prefix extraction on query-string-heavy or multi-segment URLs) would advance understanding of the heuristic's boundaries.",
+  "carry_forward": {
+    "established": [
+      "C2 RESOLVED WITHOUT REGRESSIONS: Bind-time slot-level prefix extraction works. Template retains full prefix (e.g., user-${url}), slot_prefixes={'url': 'user-'}. Full value 'user-4' triggers prefix stripping at bind-time. Short value '4' binds directly via template prefix. binding_accuracy=1.0 (3/3 unseen values). Evidence: EXP-PRODUCT-34420092879 raw_evidence.json C2-full-value-ids, audit.json V4_CONTROLS, result.json c2_binding_accuracy_full_value=1.0",
+      "ALL 10 CONDITIONS PASS: B1-B5 (regression baselines), C1 (prefix+suffix URLs), C2 (full-value IDs), D1-D3 (noise filtering with metadata, varying preconditions). binding_accuracy=1.0 across all conditions. Audit-confirmed recomputed 34/34 binding_correct. Evidence: raw_evidence.json all conditions, audit.json recomputed_metrics",
+      "MIXED CALLING CONVENTION SUPPORT DEMONSTRATED: Same mechanism handles short values (B4: 'd', C1: 'd', D1: '4', D3: '4') and full values (C2: 'user-4', 'user-5', 'user-6') without requiring callers to change parameter passing style. Resolves the VALUE CONTRACT problem from parent EXP-PRODUCT-34282620394. Evidence: result.json mixed_convention_support=true, raw_evidence.json B4/C1/D1/D3 (short) vs C2 (full)",
+      "NULL CONTROLS PASS: E1 (pattern absence, slot_count=0), E2 (single observation, slot_count=0). No parameterization hallucination. Evidence: raw_evidence.json controls.E1_pattern_absence, E2_single_obs",
+      "LITERAL BASELINE CONFIRMED: B_LITERAL fail_rate=1.0 confirms parameterized induction is necessary. Evidence: raw_evidence.json baselines.B_LITERAL",
+      "C-PARAM-INHERIT KERNEL CORRECTNESS ESTABLISHED in frozen synthetic setting: parameterized mechanisms handle mixed calling conventions at the kernel level. Advancement from PARTIAL toward complete kernel integration. Evidence: verdict.json claim_updates, audit.json claim_ceiling"
+    ],
+    "rejected": [
+      "Distill-time prefix stripping as standalone C2 fix: FALSIFIED (parent EXP-PRODUCT-34282620394, 4/9 regressions B4/C1/D1/D3). Breaks VALUE CONTRACT for short-value callers. Evidence: parent handoff carry_forward.rejected, EXP-PRODUCT-34282620394 verdict.json C2-FIX-FALSIFIED",
+      "_bind() prefix-strip with full template prefix: FALSIFIED (parent EXP-PRODUCT-34195008089). Template prefix is full path (e.g., https://api.example.com/users/user-), not short slot-level prefix. val.startswith() fails. Evidence: parent handoff carry_forward.rejected",
+      "C-PARAM-INHERIT is product-ready: NOT ACHIEVED. Kernel integration advances but remains PARTIAL for product deployment. Audit ceiling bounds to synthetic kernel correctness only. Evidence: audit.json claim_ceiling, verdict.json promote_to_product=false",
+      "Distill-time stripping is compatible with mixed calling conventions: FALSIFIED by parent EXP-PRODUCT-34282620394. Evidence: parent handoff carry_forward.rejected"
+    ],
+    "unknown": [
+      "End-to-end product economics (C-PRODUCT-ECON): does the parameterized kernel save total cost per successful task after retrieval, verification and maintenance? Unmeasured. Evidence: result.json unresolved, audit.json unresolved",
+      "Real-browser external validity: synthetic deterministic patterns vs noisy browser observations. No external validity claimed. Evidence: result.json validity_notes, prereg.md 10.1",
+      "Prefix extraction robustness beyond tested consistent-prefix distributions: values with no common prefix, multiple candidate prefixes, coincidental prefix matches. Evidence: audit.json V3_REPRESENTATION_LOSS, prereg.md 10.2/10.4",
+      "Whether the product API should mandate full-value-only convention or support mixed conventions: design decision separate from kernel capability. Evidence: result.json unresolved",
+      "Whether leaf-path URL-as-string heuristic generalizes to query-string decomposition or multi-segment variation: D2 template https://api.example.com/search?q=${url} with slot_prefixes 'search?q=' is artifact of rfind('/') heuristic, not general query-string decomposition. Evidence: audit.json V3_REPRESENTATION_LOSS"
+    ],
+    "do_not_assume": [
+      "C-PARAM-INHERIT is product-ready or deployable — kernel correctness in synthetic settings does not imply product viability. Real-browser validation and economics measurement are required gates. Evidence: audit.json claim_ceiling, verdict.json promote_to_product=false",
+      "The leaf-path URL-as-string heuristic generalizes beyond the tested synthetic patterns — D2's 'search?q=' prefix is a rfind('/') artifact, not query-string decomposition. Evidence: audit.json V3_REPRESENTATION_LOSS",
+      "10/10 synthetic conditions prove comprehensive parameter induction — the test harness uses deterministic data with consistent prefix distributions. Edge cases (no prefix, multiple candidates, coincidental matches) are untested. Evidence: prereg.md 10.2/10.4, audit.json V7_PREFIX_EDGE_CASES",
+      "Binding accuracy 1.0 on synthetic data transfers to real-world deployment — no model, network, or browser calls were made. Evidence: result.json validity_notes, prereg.md 10.5",
+      "The previous failure.json VALIDATION_FAILURE (invalid claim status SURVIVES_CURRENT_TEST) means the experiment failed — it was a director protocol error, not a scientific finding. The experiment itself succeeded. Evidence: failure.json"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-PRODUCT-34420092879/result.json (producer: COMPLETE/SUPPORTS, binding_accuracy=1.0)",
+    "research/experiments/EXP-PRODUCT-34420092879/audit.json (REVISE, producer_claim_supported=true, claim_ceiling synthetic-only)",
+    "research/experiments/EXP-PRODUCT-34420092879/raw_evidence.json (all conditions, controls, baselines)",
+    "src/spider/kernel.py:1105bb9bea2079c2e0b402ed1925c25f0f9dc7096447ce56a940373f427a0019 (distill_parameterized, _bind with prefixes)",
+    "src/spider/models.py:065e6b3d52ccbebc7c1525c77c782c39395ff69f6d6ca9e8cdc4639f3ad0cc85 (Mechanism.slot_prefixes field)",
+    "research/experiments/EXP-PRODUCT-34282620394/handoff.json:da36422c7bc4db61ac01783ebba08de0770998a0004462ebcfc2308277f6c155 (parent handoff, distill-time stripping rejected)",
+    "research/experiments/EXP-PRODUCT-34195008089/handoff.json (grandparent handoff, _bind() prefix-strip rejected)",
+    "research/claims/registry.json (C-PARAM-INHERIT status EXPERIMENTAL, C-PRODUCT-ECON status HYPOTHESIS)",
+    "research/experiments/EXP-PRODUCT-34420092879/freeze.json (frozen inputs hashes confirming immutability)"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-34420092879/verdict.json (SURVIVES_CURRENT_TEST, claim_updates C-PARAM-INHERIT EXPERIMENTAL)",
+    "research/experiments/EXP-PRODUCT-34420092879/result.json:d60d8f7d5f1b5c45d778c64069e28c1789f5f0e2f8e9dee96da5f38f62279222",
+    "research/experiments/EXP-PRODUCT-34420092879/audit.json (REVISE, recomputed 34/34, claim_ceiling, V3_REPRESENTATION_LOSS)",
+    "research/experiments/EXP-PRODUCT-34420092879/raw_evidence.json:63809857d9af177206b85c309578bfa3469ca29eb45df66d7373e2511e6e86d2",
+    "research/experiments/EXP-PRODUCT-34420092879/prereg.md:4e106e5acb1c43d9ddd2dd4dab0d0a3bfd20aabaa110ecb812180a90ace976b4",
+    "research/experiments/EXP-PRODUCT-34420092879/report.md:b555fe9d5ea09650b12fb2bc4b64146fbb64b46d821aba6440c0699bf9348dc3",
+    "src/spider/kernel.py:1105bb9bea2079c2e0b402ed1925c25f0f9dc7096447ce56a940373f427a0019",
+    "src/spider/models.py:065e6b3d52ccbebc7c1525c77c782c39395ff69f6d6ca9e8cdc4639f3ad0cc85"
+  ],
+  "recommended_action": "Product lane: The C2 blocker is resolved at the kernel level in synthetic settings. Two evidence-grounded next paths: (a) MEASURE END-TO-END PRODUCT ECONOMICS (C-PRODUCT-ECON gate): run the parameterized kernel in a real-agent pipeline and measure total cost per successful task (model calls, tokens, browser work, retrieval, verification, repair, latency). This is the highest product-impact next step. (b) TEST GENERALIZATION TO STRUCTURALLY DIFFERENT URLS: the leaf-path URL-as-string heuristic (rfind('/') for prefix extraction) may not generalize to query-string-heavy or multi-segment URLs. Test on patterns like https://api.example.com/search?q=${query}&page=${page} with slot_prefixes that are not simple path prefixes. This validates kernel robustness before economics measurement. Path (a) is higher product impact; path (b) is lower risk. Either path should NOT repeat the10-condition synthetic harness — the kernel correctness question is settled for this setting."
 }
 ```
 

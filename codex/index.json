@@ -987,6 +987,31 @@
         "handoff.json": "da36422c7bc4db61ac01783ebba08de0770998a0004462ebcfc2308277f6c155"
       }
     },
+    "EXP-PRODUCT-34420092879": {
+      "lane": "product",
+      "request_id": "7ba2cccd53956c9ad4460afc",
+      "created_at": "2026-09-10T00:10:00.446302+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT"
+      ],
+      "question": "Can C2 be resolved without regressions by implementing bind-time slot-level prefix extraction in _bind(), such that all 10 conditions pass and the product API supports both short and full value calling conventions?",
+      "audit_status": "REVISE",
+      "decision": "SURVIVES_CURRENT_TEST",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/product",
+      "hashes": {
+        "request.json": "08b6fea0fb6b846a9c81cdb47094ca6e993855a157d9021f306d6e605fb731b5",
+        "spec.json": "bbbf4dff630c21fd1bcdac212d6516bd685231324a76fedd771e7998bb7811f2",
+        "prereg.md": "4e106e5acb1c43d9ddd2dd4dab0d0a3bfd20aabaa110ecb812180a90ace976b4",
+        "freeze.json": "b5cdb7ab549d9914a81f91595d7d64dcf498964c615cb6aa73724f39a2b44333",
+        "result.json": "d60d8f7d5f1b5c45d778c64069e28c1789f5f0e2f8e9dee96da5f38f62279222",
+        "report.md": "b555fe9d5ea09650b12fb2bc4b64146fbb64b46d821aba6440c0699bf9348dc3",
+        "provenance.json": "a41b50c46a9a2347f82fafb920cb6db07d3668cd4dd1bc2d2af365fdf1668221",
+        "audit.json": "f5400dbeb5633c92f7a1cc5dd31e9788c27e6e91d261c980190acf430bce4aa0",
+        "verdict.json": "d9460a04bafdb3b5dcf2e43abbdc6ebef9b814c35e2b644e864451fd630f810d",
+        "handoff.json": "76e5e988f76f1184f72b33b0793d2adfaf03dcd129b2a270c76cee055ae403cd"
+      }
+    },
     "EXP-RUNTIME-33528830833": {
       "lane": "runtime",
       "request_id": "cbf791e0cd3fe570d0ff0fd5",

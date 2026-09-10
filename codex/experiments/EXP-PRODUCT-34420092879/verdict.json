@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-34420092879",
+  "lane": "product",
+  "decision": "SURVIVES_CURRENT_TEST",
+  "claim_updates": [
+    {
+      "claim_id": "C-PARAM-INHERIT",
+      "status": "EXPERIMENTAL",
+      "reason": "Bind-time slot-level prefix extraction resolves C2 double-prefix without regressions in frozen 10-condition synthetic harness. All conditions pass binding_accuracy=1.0, slot counts correct, null controls pass. This provides first evidence of mixed calling convention support (short and full values) at the kernel level. Evidence: audit.json recomputed_metrics (34/34 binding_correct, accuracy=1.0), raw_evidence.json all conditions, audit.json V4_CONTROLS (C2, B1-B5, D1-D3, E1/E2 independently verified). Claim does NOT advance to product-ready: audit.json claim_ceiling bounds to synthetic kernel correctness only; real-browser validation and end-to-end economics (C-PRODUCT-ECON) remain unmeasured."
+    }
+  ],
+  "product_action": "No product promotion. Audit.json claim_ceiling restricts to narrow synthetic kernel correctness only. Promotion requires: (1) real-browser external validity measurement, (2) end-to-end product economics (C-PRODUCT-ECON). The kernel code changes (distill_parameterized, _bind with prefixes, slot_prefixes field) are in src/spider/kernel.py and src/spider/models.py but are experimental, not product core.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does the parameterized kernel with bind-time prefix extraction save total cost per successful task in an end-to-end product economics measurement (C-PRODUCT-ECON gate), or does the leaf-path URL-as-string heuristic fail to generalize to structurally different URL patterns (query strings, multi-segment variation) requiring a more robust parameter induction approach?",
+  "reason": "Frozen decision_rule specifies SURVIVES_CURRENT_TEST when ALL conditions pass with binding_accuracy=1.0 AND slot counts match AND null controls pass AND no crashes. All10 conditions (B1-B5, C1-C2, D1-D3) pass binding_accuracy=1.0 (audit-confirmed 34/34). E1/E2 null controls pass slot_count=0. B_LITERAL baseline passes fail_rate=1.0. No crashes. The audit status=REVISE requires metric count correction (27→34) but does not dispute scientific findings. producer_claim_supported=true. The audit's claim_ceiling narrows the claim to synthetic kernel correctness only — real-browser noise, external validity, product economics, and prefix extraction robustness beyond tested patterns remain open. C-PARAM-INHERIT advances experimentally but is not product-ready.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-34420092879/spec.json:bbbf4dff630c21fd1bcdac212d6516bd685231324a76fedd771e7998bb7811f2 (frozen decision_rule)",
+    "research/experiments/EXP-PRODUCT-34420092879/result.json:d60d8f7d5f1b5c45d778c64069e28c1789f5f0e2f8e9dee96da5f38f62279222 (producer: COMPLETE/SUPPORTS, binding_accuracy=1.0, all controls pass)",
+    "research/experiments/EXP-PRODUCT-34420092879/audit.json (REVISE status, producer_claim_supported=true, recomputed 34/34 accuracy=1.0, claim_ceiling synthetic-only)",
+    "research/experiments/EXP-PRODUCT-34420092879/raw_evidence.json:63809857d9af177206b85c309578bfa3469ca29eb45df66d7373e2511e6e86d2 (raw evidence: all conditions, controls, baselines)",
+    "research/experiments/EXP-PRODUCT-34420092879/run_experiment.py:9c8364188766f534b83e01da921a1295acdabfee3b896667e67761826240140a (test harness)",
+    "src/spider/kernel.py:1105bb9bea2079c2e0b402ed1925c25f0f9dc7096447ce56a940373f427a0019 (distill_parameterized, _bind with prefixes)",
+    "src/spider/models.py:065e6b3d52ccbebc7c1525c77c782c39395ff69f6d6ca9e8cdc4639f3ad0cc85 (slot_prefixes field)",
+    "research/experiments/EXP-PRODUCT-34420092879/freeze.json (frozen inputs hashes)",
+    "research/claims/registry.json (C-PARAM-INHERIT current status EXPERIMENTAL)",
+    "research/experiments/EXP-PRODUCT-34282620394/handoff.json:da36422c7bc4db61ac01783ebba08de0770998a0004462ebcfc2308277f6c155 (parent handoff, C2-FIX-FALSIFIED, distill-time stripping rejected)"
+  ]
+}
