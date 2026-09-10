@@ -1,0 +1,198 @@
+{
+  "experiment_id": "EXP-PHYSICS-34348438464",
+  "positive_control": {
+    "url_only_pmi": 0.6933101309975662,
+    "url_title_pmi": 1.9701557636973992,
+    "permutation_p": 0.000999000999000999,
+    "effect_size_d": 72.66210399215007,
+    "passes": true,
+    "n_transitions": 500
+  },
+  "site_results": {
+    "github": {
+      "name": "GitHub",
+      "n_raw_transitions": 56,
+      "n_non_leakage": 9,
+      "n_leakage": 47,
+      "leakage_fraction": 0.8392857142857143,
+      "n_trajectories": 6,
+      "pmi_by_representation": {
+        "url_only": {
+          "mean_pmi": 0.0,
+          "N": 9,
+          "unique_states": 9,
+          "unique_actions": 1,
+          "unique_sa_pairs": 9
+        },
+        "url_title": {
+          "mean_pmi": 0.0,
+          "N": 9,
+          "unique_states": 9,
+          "unique_actions": 1,
+          "unique_sa_pairs": 9
+        },
+        "url_title_form": {
+          "mean_pmi": 0.0,
+          "N": 9,
+          "unique_states": 9,
+          "unique_actions": 1,
+          "unique_sa_pairs": 9
+        }
+      },
+      "permutation_tests": {
+        "url_only": {
+          "observed_pmi": 0.0,
+          "p_value": 0.000999000999000999,
+          "null_mean": 0.0,
+          "null_std": 0.0,
+          "effect_size_d": 0.0
+        },
+        "url_title": {
+          "observed_pmi": 0.0,
+          "p_value": 0.000999000999000999,
+          "null_mean": 0.0,
+          "null_std": 0.0,
+          "effect_size_d": 0.0
+        },
+        "url_title_form": {
+          "observed_pmi": 0.0,
+          "p_value": 0.000999000999000999,
+          "null_mean": 0.0,
+          "null_std": 0.0,
+          "effect_size_d": 0.0
+        }
+      },
+      "null_control": {
+        "shuffled_gt_observed": 0,
+        "p_value": 0.0,
+        "passes": true
+      },
+      "representation_comparison": {
+        "url_only_pmi": 0.0,
+        "url_title_pmi": 0.0,
+        "url_title_form_pmi": 0.0,
+        "richer_than_url": false,
+        "url_title_improvement_pct": 0
+      },
+      "title_analysis": {
+        "unique_titles": 9,
+        "total_titles": 9
+      },
+      "action_type_distribution": {
+        "link_nav": 9
+      },
+      "form_signals_variance": 2
+    },
+    "mdn": {
+      "name": "MDN Web Docs",
+      "n_raw_transitions": 84,
+      "n_non_leakage": 17,
+      "n_leakage": 67,
+      "leakage_fraction": 0.7976190476190477,
+      "n_trajectories": 11,
+      "pmi_by_representation": {
+        "url_only": {
+          "mean_pmi": 0.020064613004687686,
+          "N": 17,
+          "unique_states": 10,
+          "unique_actions": 1,
+          "unique_sa_pairs": 10
+        },
+        "url_title": {
+          "mean_pmi": 0.020064613004687686,
+          "N": 17,
+          "unique_states": 10,
+          "unique_actions": 1,
+          "unique_sa_pairs": 10
+        },
+        "url_title_form": {
+          "mean_pmi": 0.020064613004687686,
+          "N": 17,
+          "unique_states": 10,
+          "unique_actions": 1,
+          "unique_sa_pairs": 10
+        }
+      },
+      "permutation_tests": {
+        "url_only": {
+          "observed_pmi": 0.020064613004687686,
+          "p_value": 0.000999000999000999,
+          "null_mean": 0.020064613004687686,
+          "null_std": 0.0,
+          "effect_size_d": 0.0
+        },
+        "url_title": {
+          "observed_pmi": 0.020064613004687686,
+          "p_value": 0.000999000999000999,
+          "null_mean": 0.020064613004687686,
+          "null_std": 0.0,
+          "effect_size_d": 0.0
+        },
+        "url_title_form": {
+          "observed_pmi": 0.020064613004687686,
+          "p_value": 0.000999000999000999,
+          "null_mean": 0.020064613004687686,
+          "null_std": 0.0,
+          "effect_size_d": 0.0
+        }
+      },
+      "null_control": {
+        "shuffled_gt_observed": 0,
+        "p_value": 0.0,
+        "passes": true
+      },
+      "representation_comparison": {
+        "url_only_pmi": 0.020064613004687686,
+        "url_title_pmi": 0.020064613004687686,
+        "url_title_form_pmi": 0.020064613004687686,
+        "richer_than_url": false,
+        "url_title_improvement_pct": 0.0
+      },
+      "title_analysis": {
+        "unique_titles": 10,
+        "total_titles": 17
+      },
+      "action_type_distribution": {
+        "link_nav": 17
+      },
+      "form_signals_variance": 1
+    }
+  },
+  "decision_checks": {
+    "positive_control": {
+      "url_only_pmi": 0.6933101309975662,
+      "passes": true
+    },
+    "data_sufficiency_github": {
+      "n_non_leakage": 9,
+      "threshold": 30,
+      "passes": false
+    },
+    "data_sufficiency_mdn": {
+      "n_non_leakage": 17,
+      "threshold": 30,
+      "passes": false
+    },
+    "representation_github": {
+      "url_only_pmi": 0.0,
+      "url_title_pmi": 0.0,
+      "url_title_better": false
+    },
+    "representation_mdn": {
+      "url_only_pmi": 0.020064613004687686,
+      "url_title_pmi": 0.020064613004687686,
+      "url_title_better": false
+    },
+    "title_above_threshold": {
+      "any_site": false,
+      "threshold": 0.5
+    },
+    "permutation_significance": {
+      "any_site": true,
+      "threshold": 0.001
+    }
+  },
+  "survives": false,
+  "outcome": "NOT_APPLICABLE",
+  "status": "MEASUREMENT_INVALID"
+}
