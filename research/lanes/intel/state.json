@@ -1,14 +1,14 @@
 {
   "lane": "intel",
   "human_paused": false,
-  "active_experiment_id": "EXP-INTEL-34377576886",
-  "last_experiment_id": "EXP-INTEL-34047713704",
-  "last_verdict": "BLOCKED",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-INTEL-34377576886",
+  "last_verdict": "REVISE",
   "continue_immediately": false,
-  "next_question": "Can ghcr.io/web-arena-x Docker authentication be obtained (GITHUB_TOKEN with read:packages scope or docker login ghcr.io with PAT) and the full REQUIRES_TRANSFORM pipeline re-executed with geometry-faithful viewport filtering (Playwright/CDP union_bound, not depth/role heuristic) for 2-3 WebArena tasks, resolving whether heuristic yield estimates (0.517-0.65) match actual live DOM extraction?",
+  "next_question": "What is the correct yield denominator for SPIDER fragment model \u2014 CDP accessibility tree node count (2296) or Playwright locatable element count (258)? This must be resolved by (a) mapping heuristic Method1's 150-element shopping model to either denominator, and (b) measuring yield across 8-10 randomized shopping tasks (product-listing, detail, cart, checkout) with both denominators reported, plus scrolling yield.",
   "promotion_ready": false,
-  "consecutive_failures": 9,
-  "updated_at": "2026-09-10T20:08:32.083510+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "5f6b0d3c6feb324b2a23b76fec341b91186c180fb74a62b469768064ad3eb7cc"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-10T22:36:45.225328+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "f9d411aff509ecb43fe56976f1a01b10942a00680433169636d04c003523abfe"
 }
