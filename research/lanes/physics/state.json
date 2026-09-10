@@ -7,8 +7,8 @@
   "continue_immediately": false,
   "next_question": "Can DOM structural features (e.g., element counts, tree depth, interactive element density) predict next-state transitions on real SPA/form-heavy sites, providing state representation beyond URL and title?",
   "promotion_ready": false,
-  "consecutive_failures": 1,
-  "updated_at": "2026-09-10T20:48:52.538379+00:00",
+  "consecutive_failures": 2,
+  "updated_at": "2026-09-10T22:38:43.739896+00:00",
   "last_failure_retryable": false,
   "last_handoff_sha256": "e99cf7fb45797ed1b9a1d14282be8db7ab1386aa67deaade12cc8932c6c1a95d"
 }
