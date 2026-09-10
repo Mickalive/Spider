@@ -1,0 +1,272 @@
+{
+  "experiment_id": "EXP-PHYSICS-34524411213",
+  "positive_control": {
+    "url_only_pmi": 1.2714393798518162,
+    "dom_pmi": 1.2714393798518162,
+    "dom_perm_p": 0.000999000999000999,
+    "passes": true,
+    "discretization": {
+      "ec_edges": [
+        12,
+        15,
+        20,
+        30,
+        35,
+        42
+      ],
+      "td_edges": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "id_edges": [
+        0.14,
+        0.15,
+        0.16,
+        0.17,
+        0.18,
+        0.25
+      ]
+    }
+  },
+  "null_control": {
+    "null_dom_pmi": 0.07178175135774488,
+    "null_perm_p": 0.6313686313686314,
+    "passes": true
+  },
+  "site_results": {
+    "todomvc_react": {
+      "name": "TodoMVC React",
+      "entry_url": "https://todomvc.com/examples/react/dist/",
+      "n_raw": 115,
+      "n_non_leakage": 76,
+      "n_leakage": 39,
+      "data_sufficient": true,
+      "pmi": {
+        "url_only": {
+          "mean_pmi": 0.6703158653118751,
+          "N": 76,
+          "unique_states": 13,
+          "unique_sa_pairs": 18
+        },
+        "url_title": {
+          "mean_pmi": 0.6703158653118751,
+          "N": 76,
+          "unique_states": 13,
+          "unique_sa_pairs": 18
+        },
+        "dom_features": {
+          "mean_pmi": 0.5974672785024412,
+          "N": 76,
+          "unique_states": 25,
+          "unique_sa_pairs": 33
+        }
+      },
+      "permutation": {
+        "url_only": {
+          "p_value": 0.000999000999000999,
+          "null_mean": 0.08536495186787685,
+          "effect_d": 15.970417212753578
+        },
+        "url_title": {
+          "p_value": 0.000999000999000999,
+          "null_mean": 0.08536495186787685,
+          "effect_d": 15.970417212753578
+        },
+        "dom_features": {
+          "p_value": 0.000999000999000999,
+          "null_mean": 0.23935579064426757,
+          "effect_d": 6.867381944921026
+        }
+      },
+      "dom_vs_url": {
+        "improvement_bits": -0.07284858680943396,
+        "dom_pmi": 0.5974672785024412,
+        "url_pmi": 0.6703158653118751,
+        "dom_better": false
+      },
+      "alpha_sensitivity": {
+        "alpha_0.0": 0.578093005706965,
+        "alpha_0.5": 0.5849106095992794,
+        "alpha_1.0": 0.5974672785024412,
+        "alpha_2.0": 0.624309037538804
+      },
+      "entropy": {
+        "url_only": {
+          "H_S_prime_given_S": 5.1185637301707265,
+          "H_S_prime_given_SA": 1.9132806622404597,
+          "entropy_reduction": 3.205283067930267
+        },
+        "dom_features": {
+          "H_S_prime_given_S": 11.663844286162247,
+          "H_S_prime_given_SA": 5.926868017501745,
+          "entropy_reduction": 5.736976268660502
+        }
+      },
+      "discretization": {
+        "ec_edges": [
+          20,
+          49,
+          62,
+          76,
+          85,
+          395
+        ],
+        "td_edges": [
+          5,
+          6,
+          7,
+          8,
+          10,
+          11
+        ],
+        "id_edges": [
+          0.15,
+          0.19298245614035087,
+          0.22784810126582278,
+          0.2625,
+          0.2857142857142857,
+          0.3684210526315789
+        ]
+      }
+    },
+    "todomvc_vue": {
+      "name": "TodoMVC Vue",
+      "entry_url": "https://todomvc.com/examples/vue/dist/",
+      "n_raw": 126,
+      "n_non_leakage": 78,
+      "n_leakage": 48,
+      "data_sufficient": true,
+      "pmi": {
+        "url_only": {
+          "mean_pmi": 0.7507831850405056,
+          "N": 78,
+          "unique_states": 13,
+          "unique_sa_pairs": 17
+        },
+        "url_title": {
+          "mean_pmi": 0.7507831850405056,
+          "N": 78,
+          "unique_states": 13,
+          "unique_sa_pairs": 17
+        },
+        "dom_features": {
+          "mean_pmi": 0.745274427907694,
+          "N": 78,
+          "unique_states": 16,
+          "unique_sa_pairs": 21
+        }
+      },
+      "permutation": {
+        "url_only": {
+          "p_value": 0.000999000999000999,
+          "null_mean": 0.05605616003147263,
+          "effect_d": 27.483957010208712
+        },
+        "url_title": {
+          "p_value": 0.000999000999000999,
+          "null_mean": 0.05605616003147263,
+          "effect_d": 27.483957010208712
+        },
+        "dom_features": {
+          "p_value": 0.000999000999000999,
+          "null_mean": 0.10013491689670816,
+          "effect_d": 17.821997012199063
+        }
+      },
+      "dom_vs_url": {
+        "improvement_bits": -0.005508757132811515,
+        "dom_pmi": 0.745274427907694,
+        "url_pmi": 0.7507831850405056,
+        "dom_better": false
+      },
+      "alpha_sensitivity": {
+        "alpha_0.0": 0.737514485675003,
+        "alpha_0.5": 0.7402446113225847,
+        "alpha_1.0": 0.745274427907694,
+        "alpha_2.0": 0.7564140799785319
+      },
+      "entropy": {
+        "url_only": {
+          "H_S_prime_given_S": 3.3820881825329776,
+          "H_S_prime_given_SA": 0.0,
+          "entropy_reduction": 3.3820881825329776
+        },
+        "dom_features": {
+          "H_S_prime_given_S": 5.465327268580578,
+          "H_S_prime_given_SA": 1.270780033873201,
+          "entropy_reduction": 4.194547234707377
+        }
+      },
+      "discretization": {
+        "ec_edges": [
+          24,
+          49,
+          64,
+          70,
+          89,
+          395
+        ],
+        "td_edges": [
+          4,
+          5,
+          6,
+          7,
+          8,
+          10
+        ],
+        "id_edges": [
+          0.16666666666666666,
+          0.1836734693877551,
+          0.2037037037037037,
+          0.22784810126582278,
+          0.2463768115942029,
+          0.2857142857142857
+        ]
+      }
+    }
+  },
+  "decision_checks": {
+    "positive_control": {
+      "passes": true
+    },
+    "null_control": {
+      "passes": true
+    },
+    "data_sufficiency": {
+      "valid": 2,
+      "total": 2,
+      "passes": true
+    },
+    "dom_vs_url_todomvc_react": {
+      "improvement": -0.07284858680943396,
+      "passes": false
+    },
+    "dom_vs_url_todomvc_vue": {
+      "improvement": -0.005508757132811515,
+      "passes": false
+    },
+    "dom_better_overall": {
+      "count": 0,
+      "passes": false
+    },
+    "dom_sig_todomvc_react": {
+      "p_value": 0.000999000999000999,
+      "passes": true
+    },
+    "dom_sig_todomvc_vue": {
+      "p_value": 0.000999000999000999,
+      "passes": true
+    },
+    "dom_sig_overall": {
+      "count": 2,
+      "passes": true
+    }
+  },
+  "survives": false,
+  "outcome": "FALSIFIES",
+  "status": "COMPLETE"
+}
