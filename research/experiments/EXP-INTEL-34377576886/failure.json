@@ -1,0 +1,9 @@
+{
+  "stage": "director",
+  "category": "VALIDATION_FAILURE",
+  "message": "invalid claim update status: UNKNOWN",
+  "retryable": false,
+  "recorded_at": "2026-09-10T05:15:40.075984+00:00",
+  "github_run_id": "34439066589",
+  "github_run_attempt": "1"
+}
