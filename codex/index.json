@@ -987,6 +987,31 @@
         "handoff.json": "da36422c7bc4db61ac01783ebba08de0770998a0004462ebcfc2308277f6c155"
       }
     },
+    "EXP-PRODUCT-34420092879": {
+      "lane": "product",
+      "request_id": "7ba2cccd53956c9ad4460afc",
+      "created_at": "2026-09-10T00:10:00.446302+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT"
+      ],
+      "question": "Can C2 be resolved without regressions by implementing bind-time slot-level prefix extraction in _bind(), such that all 10 conditions pass and the product API supports both short and full value calling conventions?",
+      "audit_status": "REVISE",
+      "decision": "SURVIVES_CURRENT_TEST",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/product",
+      "hashes": {
+        "request.json": "08b6fea0fb6b846a9c81cdb47094ca6e993855a157d9021f306d6e605fb731b5",
+        "spec.json": "bbbf4dff630c21fd1bcdac212d6516bd685231324a76fedd771e7998bb7811f2",
+        "prereg.md": "4e106e5acb1c43d9ddd2dd4dab0d0a3bfd20aabaa110ecb812180a90ace976b4",
+        "freeze.json": "b5cdb7ab549d9914a81f91595d7d64dcf498964c615cb6aa73724f39a2b44333",
+        "result.json": "d60d8f7d5f1b5c45d778c64069e28c1789f5f0e2f8e9dee96da5f38f62279222",
+        "report.md": "b555fe9d5ea09650b12fb2bc4b64146fbb64b46d821aba6440c0699bf9348dc3",
+        "provenance.json": "a41b50c46a9a2347f82fafb920cb6db07d3668cd4dd1bc2d2af365fdf1668221",
+        "audit.json": "f5400dbeb5633c92f7a1cc5dd31e9788c27e6e91d261c980190acf430bce4aa0",
+        "verdict.json": "d9460a04bafdb3b5dcf2e43abbdc6ebef9b814c35e2b644e864451fd630f810d",
+        "handoff.json": "76e5e988f76f1184f72b33b0793d2adfaf03dcd129b2a270c76cee055ae403cd"
+      }
+    },
     "EXP-RUNTIME-33528830833": {
       "lane": "runtime",
       "request_id": "cbf791e0cd3fe570d0ff0fd5",
@@ -1160,6 +1185,31 @@
         "audit.json": "fffdb1ce330f98e0098d813926d122499a181231c8fe6569267f2fceeecaca06",
         "verdict.json": "084a410506135be963291b93f2bda27a3f183872c2c4bdbcb57a06271aeaab70",
         "handoff.json": "794ba636ec7e9502020b2f255b330ef1e30d8660c27b1b8195844014a76d4839"
+      }
+    },
+    "EXP-RUNTIME-34439061845": {
+      "lane": "runtime",
+      "request_id": "94adc0f1fd42057164d04280",
+      "created_at": "2026-09-10T04:55:50.315866+00:00",
+      "claim_ids": [
+        "C-MEAS-VALID"
+      ],
+      "question": "Does the WWW-Authenticate header discrimination pattern observed on Keycloak /userinfo \u2014 where no_auth returns 'Bearer realm=...' (no error fields) while error states return 'Bearer realm=..., error=invalid_token, error_description=...' \u2014 transfer to other Keycloak endpoints (/token with password grant, /token with client_credentials grant, /introspect), or is it endpoint-specific /userinfo behavior?",
+      "audit_status": "PASS",
+      "decision": "FALSIFIED-IN-SETTING \u2014 WWW-Authenticate header discrimination does NOT transfer across Keycloak endpoints. Frozen decision rule fails on both primary conditions: (1) WWW-Auth-only discrimination > 0 on >= 2/3 additional endpoints: 0/3 positive (/token password 0.0, /token client_credentials 0.0, /introspect 0.0); (2) full-vector discrimination > 0.5 on >= 2/3 additional endpoints: 0/3 positive (/token password 0.0, /token client_credentials 0.0, /introspect 0.5 not > 0.5). Positive control PASS (/userinfo WWW-Auth 0.833 == full vector, replicates parent EXP-RUNTIME-34300004597). Null FP PASS on 3/4 endpoints (100% on /token password is structural: fresh JWT per request, not measurement instability). Audit PASS, all metrics recomputed match producer. WWW-Authenticate header is absent from all /token and /introspect responses across all 120 reps of additional endpoints \u2014 this is expected OAuth behavior (credentials in form body, not Authorization header), not a measurement gap. The discrimination pattern is /userinfo-specific resource-server behavior, not Keycloak-level. /token endpoints ignore Authorization header entirely. /introspect achieves body-only discrimination 0.5 via active:true/false field. client_credentials test is degenerate (serviceAccountsEnabled false on spider-client, all 401 unauthorized_client); claim ceiling excludes this endpoint as informative transfer test.",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/runtime",
+      "hashes": {
+        "request.json": "9750fce79f52c98315138dbdb38a57344d9dc7570c31872b359c913d68bfea70",
+        "spec.json": "66f4d6d372c62b98f0d9257f771cda00edfdff902178dcf783e884a9d115f1b3",
+        "prereg.md": "cfcbd6224b520e936e57559214a53cf8a5c864877c1d36f51520cf5195193088",
+        "freeze.json": "1f2cd894bb6f3cd5f8c3e1151469302cdbc2afb60c39e627b93319b412dd5063",
+        "result.json": "8eeec7874da78d99947246e716aca9ab28842bb1e410e1a2a4a3dc9e6ae27254",
+        "report.md": "ca68f66ff5519e811fca4dbd170dde6731b93edf2e242b9519a201d8f885971f",
+        "provenance.json": "5f7cf2ee9b5d3366d57ad830207a401d38bdc5b0c6de19a99c4888698f30e79d",
+        "audit.json": "9b436a16c5f44fb67bc8cd550dea38dde396ef225c42c4789bab374325cd2275",
+        "verdict.json": "e990c99da8a3fab14679bb5621d789d9001a5c52564dccc542213b66364936b9",
+        "handoff.json": "bf2b4c4f2ed0f167a030d5d0f41068ad569f0fcee5947e349b9e3c0e5df608a2"
       }
     }
   }

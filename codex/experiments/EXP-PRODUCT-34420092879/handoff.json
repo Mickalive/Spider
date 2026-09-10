@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-34420092879",
+  "lane": "product",
+  "target_lane": "product",
+  "next_question": "Does the parameterized kernel with bind-time prefix extraction save total cost per successful task in an end-to-end product economics measurement (C-PRODUCT-ECON gate), or does the leaf-path URL-as-string heuristic fail to generalize to structurally different URL patterns (query strings, multi-segment variation) requiring a more robust parameter induction approach?",
+  "why_next": "C2 blocker is resolved at the kernel level in synthetic settings (10/10 conditions, binding_accuracy=1.0, mixed conventions). C-PARAM-INHERIT advances experimentally but remains unvalidated for real-browser noise, prefix extraction robustness, and end-to-end economics. The Product lane's next gate for C-PRODUCT-ECON requires real-agent cost measurement. Additionally, the audit's V3_REPRESENTATION_LOSS finding flags that the leaf-path URL-as-string heuristic (rfind('/') prefix extraction) may not generalize beyond the tested synthetic URL patterns. The next experiment should either measure end-to-end economics (highest product impact) or test generalization to structurally different URLs (validates kernel robustness before economics measurement). A materials-orthogonal direction (e.g., testing prefix extraction on query-string-heavy or multi-segment URLs) would advance understanding of the heuristic's boundaries.",
+  "carry_forward": {
+    "established": [
+      "C2 RESOLVED WITHOUT REGRESSIONS: Bind-time slot-level prefix extraction works. Template retains full prefix (e.g., user-${url}), slot_prefixes={'url': 'user-'}. Full value 'user-4' triggers prefix stripping at bind-time. Short value '4' binds directly via template prefix. binding_accuracy=1.0 (3/3 unseen values). Evidence: EXP-PRODUCT-34420092879 raw_evidence.json C2-full-value-ids, audit.json V4_CONTROLS, result.json c2_binding_accuracy_full_value=1.0",
+      "ALL 10 CONDITIONS PASS: B1-B5 (regression baselines), C1 (prefix+suffix URLs), C2 (full-value IDs), D1-D3 (noise filtering with metadata, varying preconditions). binding_accuracy=1.0 across all conditions. Audit-confirmed recomputed 34/34 binding_correct. Evidence: raw_evidence.json all conditions, audit.json recomputed_metrics",
+      "MIXED CALLING CONVENTION SUPPORT DEMONSTRATED: Same mechanism handles short values (B4: 'd', C1: 'd', D1: '4', D3: '4') and full values (C2: 'user-4', 'user-5', 'user-6') without requiring callers to change parameter passing style. Resolves the VALUE CONTRACT problem from parent EXP-PRODUCT-34282620394. Evidence: result.json mixed_convention_support=true, raw_evidence.json B4/C1/D1/D3 (short) vs C2 (full)",
+      "NULL CONTROLS PASS: E1 (pattern absence, slot_count=0), E2 (single observation, slot_count=0). No parameterization hallucination. Evidence: raw_evidence.json controls.E1_pattern_absence, E2_single_obs",
+      "LITERAL BASELINE CONFIRMED: B_LITERAL fail_rate=1.0 confirms parameterized induction is necessary. Evidence: raw_evidence.json baselines.B_LITERAL",
+      "C-PARAM-INHERIT KERNEL CORRECTNESS ESTABLISHED in frozen synthetic setting: parameterized mechanisms handle mixed calling conventions at the kernel level. Advancement from PARTIAL toward complete kernel integration. Evidence: verdict.json claim_updates, audit.json claim_ceiling"
+    ],
+    "rejected": [
+      "Distill-time prefix stripping as standalone C2 fix: FALSIFIED (parent EXP-PRODUCT-34282620394, 4/9 regressions B4/C1/D1/D3). Breaks VALUE CONTRACT for short-value callers. Evidence: parent handoff carry_forward.rejected, EXP-PRODUCT-34282620394 verdict.json C2-FIX-FALSIFIED",
+      "_bind() prefix-strip with full template prefix: FALSIFIED (parent EXP-PRODUCT-34195008089). Template prefix is full path (e.g., https://api.example.com/users/user-), not short slot-level prefix. val.startswith() fails. Evidence: parent handoff carry_forward.rejected",
+      "C-PARAM-INHERIT is product-ready: NOT ACHIEVED. Kernel integration advances but remains PARTIAL for product deployment. Audit ceiling bounds to synthetic kernel correctness only. Evidence: audit.json claim_ceiling, verdict.json promote_to_product=false",
+      "Distill-time stripping is compatible with mixed calling conventions: FALSIFIED by parent EXP-PRODUCT-34282620394. Evidence: parent handoff carry_forward.rejected"
+    ],
+    "unknown": [
+      "End-to-end product economics (C-PRODUCT-ECON): does the parameterized kernel save total cost per successful task after retrieval, verification and maintenance? Unmeasured. Evidence: result.json unresolved, audit.json unresolved",
+      "Real-browser external validity: synthetic deterministic patterns vs noisy browser observations. No external validity claimed. Evidence: result.json validity_notes, prereg.md 10.1",
+      "Prefix extraction robustness beyond tested consistent-prefix distributions: values with no common prefix, multiple candidate prefixes, coincidental prefix matches. Evidence: audit.json V3_REPRESENTATION_LOSS, prereg.md 10.2/10.4",
+      "Whether the product API should mandate full-value-only convention or support mixed conventions: design decision separate from kernel capability. Evidence: result.json unresolved",
+      "Whether leaf-path URL-as-string heuristic generalizes to query-string decomposition or multi-segment variation: D2 template https://api.example.com/search?q=${url} with slot_prefixes 'search?q=' is artifact of rfind('/') heuristic, not general query-string decomposition. Evidence: audit.json V3_REPRESENTATION_LOSS"
+    ],
+    "do_not_assume": [
+      "C-PARAM-INHERIT is product-ready or deployable — kernel correctness in synthetic settings does not imply product viability. Real-browser validation and economics measurement are required gates. Evidence: audit.json claim_ceiling, verdict.json promote_to_product=false",
+      "The leaf-path URL-as-string heuristic generalizes beyond the tested synthetic patterns — D2's 'search?q=' prefix is a rfind('/') artifact, not query-string decomposition. Evidence: audit.json V3_REPRESENTATION_LOSS",
+      "10/10 synthetic conditions prove comprehensive parameter induction — the test harness uses deterministic data with consistent prefix distributions. Edge cases (no prefix, multiple candidates, coincidental matches) are untested. Evidence: prereg.md 10.2/10.4, audit.json V7_PREFIX_EDGE_CASES",
+      "Binding accuracy 1.0 on synthetic data transfers to real-world deployment — no model, network, or browser calls were made. Evidence: result.json validity_notes, prereg.md 10.5",
+      "The previous failure.json VALIDATION_FAILURE (invalid claim status SURVIVES_CURRENT_TEST) means the experiment failed — it was a director protocol error, not a scientific finding. The experiment itself succeeded. Evidence: failure.json"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-PRODUCT-34420092879/result.json (producer: COMPLETE/SUPPORTS, binding_accuracy=1.0)",
+    "research/experiments/EXP-PRODUCT-34420092879/audit.json (REVISE, producer_claim_supported=true, claim_ceiling synthetic-only)",
+    "research/experiments/EXP-PRODUCT-34420092879/raw_evidence.json (all conditions, controls, baselines)",
+    "src/spider/kernel.py:1105bb9bea2079c2e0b402ed1925c25f0f9dc7096447ce56a940373f427a0019 (distill_parameterized, _bind with prefixes)",
+    "src/spider/models.py:065e6b3d52ccbebc7c1525c77c782c39395ff69f6d6ca9e8cdc4639f3ad0cc85 (Mechanism.slot_prefixes field)",
+    "research/experiments/EXP-PRODUCT-34282620394/handoff.json:da36422c7bc4db61ac01783ebba08de0770998a0004462ebcfc2308277f6c155 (parent handoff, distill-time stripping rejected)",
+    "research/experiments/EXP-PRODUCT-34195008089/handoff.json (grandparent handoff, _bind() prefix-strip rejected)",
+    "research/claims/registry.json (C-PARAM-INHERIT status EXPERIMENTAL, C-PRODUCT-ECON status HYPOTHESIS)",
+    "research/experiments/EXP-PRODUCT-34420092879/freeze.json (frozen inputs hashes confirming immutability)"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-34420092879/verdict.json (SURVIVES_CURRENT_TEST, claim_updates C-PARAM-INHERIT EXPERIMENTAL)",
+    "research/experiments/EXP-PRODUCT-34420092879/result.json:d60d8f7d5f1b5c45d778c64069e28c1789f5f0e2f8e9dee96da5f38f62279222",
+    "research/experiments/EXP-PRODUCT-34420092879/audit.json (REVISE, recomputed 34/34, claim_ceiling, V3_REPRESENTATION_LOSS)",
+    "research/experiments/EXP-PRODUCT-34420092879/raw_evidence.json:63809857d9af177206b85c309578bfa3469ca29eb45df66d7373e2511e6e86d2",
+    "research/experiments/EXP-PRODUCT-34420092879/prereg.md:4e106e5acb1c43d9ddd2dd4dab0d0a3bfd20aabaa110ecb812180a90ace976b4",
+    "research/experiments/EXP-PRODUCT-34420092879/report.md:b555fe9d5ea09650b12fb2bc4b64146fbb64b46d821aba6440c0699bf9348dc3",
+    "src/spider/kernel.py:1105bb9bea2079c2e0b402ed1925c25f0f9dc7096447ce56a940373f427a0019",
+    "src/spider/models.py:065e6b3d52ccbebc7c1525c77c782c39395ff69f6d6ca9e8cdc4639f3ad0cc85"
+  ],
+  "recommended_action": "Product lane: The C2 blocker is resolved at the kernel level in synthetic settings. Two evidence-grounded next paths: (a) MEASURE END-TO-END PRODUCT ECONOMICS (C-PRODUCT-ECON gate): run the parameterized kernel in a real-agent pipeline and measure total cost per successful task (model calls, tokens, browser work, retrieval, verification, repair, latency). This is the highest product-impact next step. (b) TEST GENERALIZATION TO STRUCTURALLY DIFFERENT URLS: the leaf-path URL-as-string heuristic (rfind('/') for prefix extraction) may not generalize to query-string-heavy or multi-segment URLs. Test on patterns like https://api.example.com/search?q=${query}&page=${page} with slot_prefixes that are not simple path prefixes. This validates kernel robustness before economics measurement. Path (a) is higher product impact; path (b) is lower risk. Either path should NOT repeat the10-condition synthetic harness — the kernel correctness question is settled for this setting."
+}

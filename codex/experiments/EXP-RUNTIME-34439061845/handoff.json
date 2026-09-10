@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-34439061845",
+  "lane": "runtime",
+  "target_lane": null,
+  "next_question": "Can body-only HTTP fingerprint observation (body hash as sole discriminating signal) maintain auth-state discrimination across production-like Keycloak middleware with CDN, load-balancer, compression, and rate-limit headers that add non-deterministic variance to responses? This tests whether the robust architecture identified by this experiment (body-only) survives real infrastructure conditions.",
+  "why_next": "This experiment falsified WWW-Authenticate transfer across Keycloak endpoints (0/3) and concluded body-only observation is the robust architecture. The immediate next question is whether body-only discrimination holds under production-like conditions that add non-deterministic response variance (CDN caching headers, load-balancer variants, compression encoding, rate-limit headers). This is orthogonal to repeated transfer tests and probes the product-relevant architecture under realistic infrastructure constraints.",
+  "carry_forward": {
+    "established": [
+      "WWW-Authenticate discrimination is /userinfo-specific resource-server behavior on Keycloak 25.0, not Keycloak-level: 0/3 additional endpoints (/token password, /token client_credentials, /introspect) show WWW-Auth-only discrimination > 0",
+      "Keycloak /token endpoints (password grant, client_credentials grant) ignore the Authorization header entirely — authentication is via form body credentials (client_id/secret, username/password)",
+      "Keycloak /introspect ignores Authorization header — token to introspect is in form body, body-only discrimination 0.5 via active:true/false field",
+      "WWW-Authenticate header is absent from all /token and /introspect responses (120 reps verified in raw_observations.json)",
+      "Body-only observation is the robust architecture for auth-state discrimination across Keycloak endpoints: /introspect via active field (0.5), /token endpoints credential-based (Authorization header irrelevant)",
+      "/userinfo positive control replicates parent EXP-RUNTIME-34300004597: full-vector = WWW-Auth-only = 0.833, 3 distinct fingerprints (valid no_auth expired==invalid), measurement pipeline validated",
+      "expired_token and invalid_token remain indistinguishable by ANY observable on /userinfo (identical bodies, headers, fingerprint, Jaccard 1.0) and /introspect (both active:false)",
+      "client_credentials endpoint test is degenerate: spider-client has serviceAccountsEnabled false, all 40 requests return 401 unauthorized_client regardless of Authorization header — uninformative for transfer"
+    ],
+    "rejected": [
+      "H1 (WWW-Authenticate transfer): WWW-Auth-only discrimination > 0 on >= 2/3 additional Keycloak endpoints — FALSIFIED (0/3 positive)",
+      "H2 (full-vector transfer): full-vector discrimination > 0.5 on >= 2/3 additional Keycloak endpoints — FALSIFIED (0/3 positive, /introspect 0.5 not > 0.5)",
+      "Cache-Control error-type variation (no-store vs no-cache) as discriminating signal — confirmed falsified (V4 tautology from parent carried forward, Cache-Control absent on all /token and /introspect responses)",
+      "WWW-Authenticate as a general-purpose Keycloak-level auth-state signal — endpoint-specific, not Keycloak-level"
+    ],
+    "unknown": [
+      "Does body-only HTTP fingerprint observation maintain auth-state discrimination under production-like Keycloak middleware with CDN, load-balancer, compression, and rate-limit headers?",
+      "Does WWW-Authenticate discrimination transfer to other OAuth/OIDC providers (Auth0, Okta) with different middleware/CDN — requires external IdP tenant setup",
+      "Does substrate maintain discrimination on production infrastructure with non-deterministic response variance?",
+      "What is WWW-Authenticate behavior on Keycloak /token when Authorization header is actually enforced (e.g., serviceAccountsEnabled true, token-exchange)?",
+      "Can Keycloak distinguish truly expired (realm key expiration) vs malformed signature tokens, or is empty-body identity inherent to IdP error path?",
+      "Cross-Python-version reproducibility of repr(vector) fingerprints beyond 3.12.14?"
+    ],
+    "do_not_assume": [
+      "Do not assume WWW-Authenticate discrimination transfers to any Keycloak endpoint other than /userinfo — this is falsified",
+      "Do not assume Authorization header is processed by Keycloak /token endpoints — it is ignored by OAuth design (credentials in form body)",
+      "Do not assume full-vector discrimination exceeds body-only on any Keycloak endpoint besides /userinfo — on /introspect they are equal (0.5), on /token body-only is 0.0",
+      "Do not assume client_credentials test result is informative for OAuth design — the test is degenerate due to serviceAccountsEnabled false on spider-client",
+      "Do not assume expired_token represents true Keycloak-issued expired tokens — it is locally-signed HS256, treated as invalid_signature by Keycloak (V6 state construction leakage)",
+      "Do not assume Keycloak 25.0 start-dev behavior represents production Keycloak with CDN, load-balancer, or rate-limiting",
+      "Do not assume the 100% null FP rate on /token password indicates measurement failure — it is structural (fresh JWT per request) but means the discrimination metric cannot evaluate that endpoint in its current form",
+      "Do not assume this experiment falsifies C-MEAS-VALID itself — the /userinfo positive control replicates, confirming the substrate works; only the transfer hypothesis is falsified",
+      "Do not assume body-only observation achieves discrimination on /token endpoints — body-only is 0.0 on both /token password (fresh JWT) and /token client_credentials (identical 401)"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-RUNTIME-34439061845/result.json",
+    "research/experiments/EXP-RUNTIME-34439061845/audit.json",
+    "research/experiments/EXP-RUNTIME-34439061845/raw_observations.json",
+    "research/experiments/EXP-RUNTIME-34439061845/provenance.json",
+    "research/experiments/EXP-RUNTIME-34300004597/handoff.json",
+    "research/claims/registry.json"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-34439061845/result.json — all per-endpoint metrics, controls (C_WWW_AUTH_TRANSFER 0/3 FAIL, C_FULL_VECTOR_TRANSFER 0/3 FAIL, C_POSITIVE_CONTROL_USERINFO PASS), observations, validity_notes",
+    "research/experiments/EXP-RUNTIME-34439061845/audit.json — PASS, all recomputed metrics match, V1-V8 validity findings, claim_ceiling FALSIFIED-IN-SETTING for H1/H2, client_credentials degenerate",
+    "research/experiments/EXP-RUNTIME-34439061845/raw_observations.json — 160 HTTP observations, WWW-Authenticate absent on all additional endpoint reps, fingerprints per endpoint",
+    "research/experiments/EXP-RUNTIME-34439061845/report.md — per-endpoint tables, WWW-Authenticate and Cache-Control verification, product consequence analysis",
+    "research/experiments/EXP-RUNTIME-34439061845/spec.json — frozen decision_rule, claim_ids, baselines, measurement_validity",
+    "research/experiments/EXP-RUNTIME-34439061845/prereg.md — endpoints 5.1-5.4, expected Authorization header ignoring on /token, decision rules 13.1-13.3",
+    "research/experiments/EXP-RUNTIME-34439061845/provenance.json — Keycloak config, fingerprint algorithm, known limitations",
+    "research/experiments/EXP-RUNTIME-34300004597/handoff.json — parent established/rejected/do_not_assume carry_forward for C-MEAS-VALID"
+  ],
+  "recommended_action": "Design a production-like infrastructure test for body-only auth-state discrimination: deploy Keycloak behind a reverse proxy or CDN-emulating middleware that adds Cache-Control, ETag, X-Request-Id, Content-Encoding, and rate-limit headers non-deterministically. Test whether body-only fingerprint (body hash alone) maintains discrimination across 4 auth states on /userinfo and /introspect under these conditions. This probes the product-relevant architecture under realistic infrastructure constraints without repeating the falsified transfer test."
+}

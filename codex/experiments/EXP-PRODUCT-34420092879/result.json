@@ -1,0 +1,175 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-34420092879",
+  "lane": "product",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "overall_binding_accuracy": 1.0,
+    "overall_binding_correct_count": 27,
+    "overall_binding_total": 27,
+    "regression_pass_count": 9,
+    "regression_fail_count": 0,
+    "regression_total": 9,
+    "regression_passing": ["B1-single-path", "B2-path-and-body", "B3-path-body-headers", "B4-non-identifier-values", "B5-shared-slot-name", "C1-full-value-urls", "D1-noisy-post", "D2-noisy-get", "D3-varying-preconditions"],
+    "regression_failing": [],
+    "c2_binding_accuracy_full_value": 1.0,
+    "c2_binding_correct_count": 3,
+    "c2_binding_total": 3,
+    "c2_template_retains_prefix": true,
+    "c2_slot_prefixes_detected": {"url": "user-"},
+    "c2_induced_template": "https://api.example.com/users/user-${url}",
+    "b4_slot_prefixes_detected": {"callback_url": "site-"},
+    "b4_induced_template": "https://site-${callback_url}.com/hook",
+    "mixed_convention_support": true,
+    "null_e1_slot_count": 0,
+    "null_e1_passed": true,
+    "null_e2_slot_count": 0,
+    "null_e2_passed": true,
+    "literal_baseline_fail_rate": 1.0
+  },
+  "controls": {
+    "C2_FULL_VALUE_IDS": {
+      "description": "Positive control: C2 full-value binding with prefix-bearing IDs",
+      "expected": "slot_count=1, binding_accuracy=1.0, bound URLs contain 'user-4' not 'user-user-4'",
+      "observed": "slot_count=1, binding_accuracy=1.0, bound URLs = 'user-4', 'user-5', 'user-6'",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json conditions.C2-full-value-ids"
+    },
+    "B1_REGRESSION": {
+      "description": "B1 single-path regression baseline",
+      "expected": "slot_count=1, binding_accuracy=1.0",
+      "observed": "slot_count=1, binding_accuracy=1.0",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json conditions.B1-single-path"
+    },
+    "B2_REGRESSION": {
+      "description": "B2 path-and-body regression baseline",
+      "expected": "slot_count=2, binding_accuracy=1.0",
+      "observed": "slot_count=2, binding_accuracy=1.0",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json conditions.B2-path-and-body"
+    },
+    "B3_REGRESSION": {
+      "description": "B3 path-body-headers regression baseline",
+      "expected": "slot_count=3, binding_accuracy=1.0",
+      "observed": "slot_count=3, binding_accuracy=1.0",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json conditions.B3-path-body-headers"
+    },
+    "B4_REGRESSION": {
+      "description": "B4 non-identifier-values regression baseline (SHORT values 'd','e','f')",
+      "expected": "slot_count=1, binding_accuracy=1.0",
+      "observed": "slot_count=1, binding_accuracy=1.0. Short values bind correctly via template prefix (site-${slot} produces site-d).",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json conditions.B4-non-identifier-values"
+    },
+    "B5_REGRESSION": {
+      "description": "B5 shared-slot-name regression baseline",
+      "expected": "slot_count=1, binding_accuracy=1.0",
+      "observed": "slot_count=1, binding_accuracy=1.0",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json conditions.B5-shared-slot-name"
+    },
+    "C1_REGRESSION": {
+      "description": "C1 prefix+Suffix URL binding (SHORT values)",
+      "expected": "slot_count=1, binding_accuracy=1.0",
+      "observed": "slot_count=1, binding_accuracy=1.0",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json conditions.C1-full-value-urls"
+    },
+    "D1_REGRESSION": {
+      "description": "D1 noisy POST with metadata (SHORT values)",
+      "expected": "slot_count=3, binding_accuracy=1.0",
+      "observed": "slot_count=3, binding_accuracy=1.0",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json conditions.D1-noisy-post"
+    },
+    "D2_REGRESSION": {
+      "description": "D2 noisy GET with metadata",
+      "expected": "slot_count=1, binding_accuracy=1.0",
+      "observed": "slot_count=1, binding_accuracy=1.0",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json conditions.D2-noisy-get"
+    },
+    "D3_REGRESSION": {
+      "description": "D3 varying preconditions (SHORT values)",
+      "expected": "slot_count=1, binding_accuracy=1.0",
+      "observed": "slot_count=1, binding_accuracy=1.0",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json conditions.D3-varying-preconditions"
+    },
+    "E1_NULL": {
+      "description": "E1 pattern absence null control",
+      "expected": "slot_count=0",
+      "observed": "slot_count=0",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json controls.E1_pattern_absence"
+    },
+    "E2_NULL": {
+      "description": "E2 single observation null control",
+      "expected": "slot_count=0",
+      "observed": "slot_count=0",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json controls.E2_single_obs"
+    },
+    "B_LITERAL": {
+      "description": "Literal baseline: no parameterization",
+      "expected": "fail_rate=1.0",
+      "observed": "fail_rate=1.0",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json baselines.B_LITERAL"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PRODUCT-34420092879/raw_evidence.json",
+      "sha256": "63809857d9af177206b85c309578bfa3469ca29eb45df66d7373e2511e6e86d2",
+      "role": "raw"
+    },
+    {
+      "path": "src/spider/kernel.py",
+      "sha256": "1105bb9bea2079c2e0b402ed1925c25f0f9dc7096447ce56a940373f427a0019",
+      "role": "code"
+    },
+    {
+      "path": "src/spider/models.py",
+      "sha256": "065e6b3d52ccbebc7c1525c77c782c39395ff69f6d6ca9e8cdc4639f3ad0cc85",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-34420092879/run_experiment.py",
+      "sha256": "9c8364188766f534b83e01da921a1295acdabfee3b896667e67761826240140a",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "C2 RESOLVED WITHOUT REGRESSIONS: Bind-time slot-level prefix extraction works. Template retains full prefix (user-${url}), slot_prefixes={'url': 'user-'}. Full value 'user-4' triggers prefix stripping at bind-time (4 substituted, template prefix produces user-4). Short value '4' binds directly (template prefix adds user-). All 3 unseen values bind correctly (binding_accuracy=1.0).",
+    "B4 REGRESSION FIXED: Short values 'd','e','f' bind correctly. Template is 'https://site-${callback_url}.com/hook', slot_prefixes={'callback_url': 'site-'}. Short value 'd' does not start with 'site-', so substituted directly: site-d.com/hook. No double-prefix. This was the critical regression from distill-time stripping.",
+    "B1-B5 ALL PASS: All 5 regression baselines pass with correct slot counts (B1=1, B2=2, B3=3, B4=1, B5=1) and binding_accuracy=1.0. No regressions.",
+    "C1 PASSES: Same as B4, short values work correctly with bind-time prefix stripping.",
+    "D1 PASSES: 3 slots (url, customer, X-Request-ID) induced correctly. Short values ('4', 'D', '4') bind correctly with slot prefixes ('order-', 'cust-', 'req-10').",
+    "D2 PASSES: Single slot (url) induced. Short value 'delta' binds correctly.",
+    "D3 PASSES: Single slot (url) induced. Short value '4' binds correctly despite varying preconditions.",
+    "E1/E2 NULL CONTROLS PASS: No parameterization hallucinated. E1 unrelated observations produce slot_count=0. E2 single observation produces slot_count=0.",
+    "LITERAL BASELINE PASSES: fail_rate=1.0 confirms parameterized induction is necessary.",
+    "MIXED CONVENTION SUPPORT DEMONSTRATED: The same mechanism handles both short values (B4: 'd', C1: 'd', D1: '4', D3: '4') and full values (C2: 'user-4', 'user-5', 'user-6') without requiring callers to change their parameter passing style. This resolves the VALUE CONTRACT problem identified in parent EXP-PRODUCT-34282620394."
+  ],
+  "validity_notes": [
+    "All 10 conditions use the same synthetic deterministic data as parent EXP-PRODUCT-34282620394.",
+    "C2 tested with full values (user-4, user-5, user-6) per spec. B4/C1/D1/D3 tested with short values ('d', '4') per spec.",
+    "Binding correctness uses strict JSON comparison: bound_action must exactly match expected_action.",
+    "No model calls, no network, no browser during measurement — pure offline synthetic.",
+    "Each condition uses a fresh temporary registry to prevent cross-condition contamination.",
+    "Slot prefix extraction is deterministic given frozen training data.",
+    "The bind-time approach is more robust than distill-time stripping because it handles both calling conventions without requiring callers to change their parameter passing style.",
+    "D1 template includes metadata fields (timestamp, request_duration_ms, retry_count, user_agent) which are constant across observations but not stripped. This matches the parent experiment behavior.",
+    "The X-Request-ID parameter mapping required hyphen/underscore normalization in the test harness."
+  ],
+  "unresolved": [
+    "End-to-end product economics measurement (C-PRODUCT-ECON) remains unmeasured — this is a kernel correctness test, not a product economics test.",
+    "Real browser observation noise distributions vs synthetic deterministic patterns — no external validity claimed.",
+    "Whether bind-time prefix extraction handles edge cases (values with no common prefix, values with multiple candidate prefixes) beyond the 10 tested conditions.",
+    "Whether the product API should mandate full-value-only convention or support mixed conventions — this experiment demonstrates mixed conventions work, but the product design decision is separate."
+  ]
+}

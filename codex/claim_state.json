@@ -283,6 +283,14 @@
         "claim_id": "C-PARAM-INHERIT",
         "status": "EXPERIMENTAL",
         "reason": "Distill-time prefix stripping mechanism (detect slot-level prefix from training values, strip from template, bind full value directly) is now FALSIFIED as a standalone fix: it breaks the value contract for callers passing short values. The mechanism is technically sound for full-value-only convention but incompatible with the existing mixed-convention harness. Two viable alternatives remain: (a) revert to bind-time double-prefix detection which handled both conventions, or (b) adopt full-value-only contract and update all callers."
+      },
+      {
+        "experiment_id": "EXP-PRODUCT-34420092879",
+        "lane": "product",
+        "decision": "SURVIVES_CURRENT_TEST",
+        "claim_id": "C-PARAM-INHERIT",
+        "status": "EXPERIMENTAL",
+        "reason": "Bind-time slot-level prefix extraction resolves C2 double-prefix without regressions in frozen 10-condition synthetic harness. All conditions pass binding_accuracy=1.0, slot counts correct, null controls pass. This provides first evidence of mixed calling convention support (short and full values) at the kernel level. Evidence: audit.json recomputed_metrics (34/34 binding_correct, accuracy=1.0), raw_evidence.json all conditions, audit.json V4_CONTROLS (C2, B1-B5, D1-D3, E1/E2 independently verified). Claim does NOT advance to product-ready: audit.json claim_ceiling bounds to synthetic kernel correctness only; real-browser validation and end-to-end economics (C-PRODUCT-ECON) remain unmeasured."
       }
     ],
     "C-CROSSSITE": [
@@ -475,6 +483,14 @@
         "claim_id": "C-MEAS-VALID",
         "status": "EXPERIMENTAL",
         "reason": "C-MEAS-VALID survives with narrowed ceiling on Keycloak 25.0 localhost:18080 /userinfo. Full-vector discrimination 0.833 > B-BODY-ONLY 0.5 by 0.333 incremental header value, driven by WWW-Authenticate (no_auth Bearer realm vs error invalid_token) and Cache-Control present/absent (valid vs errors), NOT by Cache-Control error-type variation (no-store vs no-cache) as hypothesized. Expired==invalid pair remains indistinguishable (identical bodies, headers, fingerprint Jaccard 1.0). V4 tautology confirmed for Cache-Control/Set-Cookie error-type variation on this IdP. Set-Cookie absent on all responses. Body baseline weakened (0.5 vs parent 0.833) partly explains higher incremental ratio. Bootstrap CI [0.0, 1.0] degenerate. Claim does NOT extend to production OAuth/OIDC, CDN, load-balancer, /token endpoint, or cross-Python versions."
+      },
+      {
+        "experiment_id": "EXP-RUNTIME-34439061845",
+        "lane": "runtime",
+        "decision": "FALSIFIED-IN-SETTING \u2014 WWW-Authenticate header discrimination does NOT transfer across Keycloak endpoints. Frozen decision rule fails on both primary conditions: (1) WWW-Auth-only discrimination > 0 on >= 2/3 additional endpoints: 0/3 positive (/token password 0.0, /token client_credentials 0.0, /introspect 0.0); (2) full-vector discrimination > 0.5 on >= 2/3 additional endpoints: 0/3 positive (/token password 0.0, /token client_credentials 0.0, /introspect 0.5 not > 0.5). Positive control PASS (/userinfo WWW-Auth 0.833 == full vector, replicates parent EXP-RUNTIME-34300004597). Null FP PASS on 3/4 endpoints (100% on /token password is structural: fresh JWT per request, not measurement instability). Audit PASS, all metrics recomputed match producer. WWW-Authenticate header is absent from all /token and /introspect responses across all 120 reps of additional endpoints \u2014 this is expected OAuth behavior (credentials in form body, not Authorization header), not a measurement gap. The discrimination pattern is /userinfo-specific resource-server behavior, not Keycloak-level. /token endpoints ignore Authorization header entirely. /introspect achieves body-only discrimination 0.5 via active:true/false field. client_credentials test is degenerate (serviceAccountsEnabled false on spider-client, all 401 unauthorized_client); claim ceiling excludes this endpoint as informative transfer test.",
+        "claim_id": "C-MEAS-VALID",
+        "status": "EXPERIMENTAL",
+        "reason": "C-MEAS-VALID remains EXPERIMENTAL with ceiling narrowed to /userinfo-only for WWW-Authenticate discrimination. This experiment falsifies transfer of WWW-Authenticate discrimination across Keycloak endpoints: 0/3 additional endpoints (/token password, /token client_credentials, /introspect) show WWW-Auth-only discrimination > 0. The measurement substrate is validated on /userinfo (positive control 0.833 == full vector, replicates parent), confirming the substrate works, but the mechanism is endpoint-specific resource-server behavior, not Keycloak-level. Body-only observation achieves discrimination on /introspect (0.5 via active field) but not on /token endpoints (Authorization header ignored). Full-vector product recommendation using WWW-Authenticate is bounded to /userinfo only. Does NOT extend to production Keycloak, CDN/load-balancer, other realms/clients, other Keycloak versions, cross-Python repr reproducibility, truly-expired Keycloak-issued tokens, or other IdPs."
       }
     ]
   }
