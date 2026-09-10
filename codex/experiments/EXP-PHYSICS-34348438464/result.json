@@ -1,0 +1,288 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34348438464",
+  "lane": "physics",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "NOT_APPLICABLE",
+  "metrics": {
+    "positive_control": {
+      "url_only_pmi_bits": 0.6933101309975662,
+      "url_title_pmi_bits": 1.9701557636973992,
+      "url_title_form_pmi_bits": 1.9701557636973992,
+      "permutation_p_url_only": 0.000999000999000999,
+      "permutation_p_url_title": 0.000999000999000999,
+      "effect_size_d_url_only": 72.66210399215007,
+      "n_transitions": 500,
+      "n_trajectories": 25,
+      "trajectory_length": 20,
+      "threshold": 0.5,
+      "passes": true
+    },
+    "site_github": {
+      "name": "GitHub",
+      "entry_url": "https://github.com",
+      "n_raw_transitions": 56,
+      "n_non_leakage": 9,
+      "n_leakage": 47,
+      "leakage_fraction": 0.8392857142857143,
+      "non_leakage_fraction": 0.16071428571428573,
+      "url_only_pmi_bits": 0.0,
+      "url_title_pmi_bits": 0.0,
+      "url_title_form_pmi_bits": 0.0,
+      "url_title_improvement_pct": 0.0,
+      "form_signals_marginal_bits": 0.0,
+      "spearman_richness_vs_pmi": 0.0,
+      "n_unique_states_url_only": 9,
+      "n_unique_states_url_title": 9,
+      "n_unique_sa_pairs_url_only": 9,
+      "n_unique_sa_pairs_url_title": 9,
+      "unique_urls": 9,
+      "unique_titles_non_leakage": 9,
+      "unique_titles_total": 9,
+      "unique_actions": 1,
+      "action_type_distribution": {
+        "link_nav": 9
+      },
+      "form_signals_variance_types": 2,
+      "permutation_p_url_only": 0.000999000999000999,
+      "permutation_p_url_title": 0.000999000999000999,
+      "permutation_p_url_title_form": 0.000999000999000999,
+      "permutation_null_mean_url_only": 0.0,
+      "permutation_null_mean_url_title": 0.0,
+      "permutation_effect_d_url_only": 0.0,
+      "permutation_effect_d_url_title": 0.0,
+      "title_variance_presurvey_unique_titles": 6,
+      "title_variance_presurvey_total_routes": 6,
+      "title_variance_presurvey_ratio": 1.0,
+      "data_sufficient": false,
+      "threshold_non_leakage": 30,
+      "url_title_gt_url_only": false,
+      "url_title_gt_05": false,
+      "permutation_p_lt_001": true
+    },
+    "site_mdn": {
+      "name": "MDN Web Docs",
+      "entry_url": "https://developer.mozilla.org",
+      "n_raw_transitions": 84,
+      "n_non_leakage": 17,
+      "n_leakage": 67,
+      "leakage_fraction": 0.7976190476190477,
+      "non_leakage_fraction": 0.20238095238095238,
+      "url_only_pmi_bits": 0.020064613004687686,
+      "url_title_pmi_bits": 0.020064613004687686,
+      "url_title_form_pmi_bits": 0.020064613004687686,
+      "url_title_improvement_pct": 0.0,
+      "form_signals_marginal_bits": 0.0,
+      "spearman_richness_vs_pmi": 0.0,
+      "n_unique_states_url_only": 10,
+      "n_unique_states_url_title": 10,
+      "n_unique_sa_pairs_url_only": 10,
+      "n_unique_sa_pairs_url_title": 10,
+      "unique_urls": 10,
+      "unique_titles_non_leakage": 10,
+      "unique_titles_total": 17,
+      "unique_actions": 1,
+      "action_type_distribution": {
+        "link_nav": 17
+      },
+      "form_signals_variance_types": 1,
+      "permutation_p_url_only": 0.000999000999000999,
+      "permutation_p_url_title": 0.000999000999000999,
+      "permutation_p_url_title_form": 0.000999000999000999,
+      "permutation_null_mean_url_only": 0.020064613004687686,
+      "permutation_null_mean_url_title": 0.020064613004687686,
+      "permutation_effect_d_url_only": 0.0,
+      "permutation_effect_d_url_title": 0.0,
+      "title_variance_presurvey_unique_titles": 5,
+      "title_variance_presurvey_total_routes": 5,
+      "title_variance_presurvey_ratio": 1.0,
+      "data_sufficient": false,
+      "threshold_non_leakage": 30,
+      "url_title_gt_url_only": false,
+      "url_title_gt_05": false,
+      "permutation_p_lt_001": true
+    },
+    "aggregate_decision": {
+      "url_title_gt_url_only_both_sites": false,
+      "url_title_gt_05_any_site": false,
+      "permutation_p_lt_001_any_site": true,
+      "positive_control_passes": true,
+      "sufficient_data_both_sites": false,
+      "n_sites": 2,
+      "n_non_leakage_github": 9,
+      "n_non_leakage_mdn": 17,
+      "min_required_per_site": 30,
+      "survives": false,
+      "bonferroni_alpha": 0.025,
+      "decision_status": "MEASUREMENT_INVALID",
+      "decision_outcome": "NOT_APPLICABLE"
+    },
+    "parent_comparison": {
+      "parent_synthetic_url_only_pmi": 0.6933101309975662,
+      "parent_synthetic_url_title_pmi": 1.9701557636973992,
+      "parent_synthetic_improvement_bits": 1.276845632699833,
+      "parent_synthetic_improvement_pct": 184.157,
+      "parent_todomvc_react_url_only_pmi": 1.360076527495342,
+      "parent_todomvc_vue_url_only_pmi": 1.3232577149184857,
+      "parent_todomvc_title_improvement_pct": 0.0,
+      "current_github_url_only_pmi": 0.0,
+      "current_mdn_url_only_pmi": 0.020064613004687686,
+      "current_github_url_title_pmi": 0.0,
+      "current_mdn_url_title_pmi": 0.020064613004687686
+    }
+  },
+  "controls": {
+    "positive_control_synthetic_spa": {
+      "type": "positive_control",
+      "description": "Synthetic SPA pipeline from parent EXP-PHYSICS-34149195420 must produce PMI >= 0.5 bits with permutation p < 0.001. Verifies PMI computation code works correctly before application to real data.",
+      "expected": "PMI >= 0.5 bits, permutation p < 0.001",
+      "observed": "PMI = 0.6933101309975662 bits (URL-only), 1.9701557636973992 bits (URL+title), p = 0.000999, effect_d = 72.66. N=500 transitions, 32 SA pairs for URL+title.",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-PHYSICS-34348438464/positive_control_results.json sha bc8bbecaa7daf1bba98653921dbdbe5527bdae6b5b2e9036adeef922834b91cc; research/experiments/EXP-PHYSICS-34348438464/raw_results.json positive_control"
+    },
+    "null_control_permutation": {
+      "type": "null_control",
+      "description": "Cross-trajectory permutation on real SPA data: shuffled PMI must not exceed observed PMI in more than 5% of permutations (one-sided test, alpha=0.05). Verifies observed PMI reflects genuine action->next-state dependency.",
+      "expected": "Shuffled PMI exceeds observed in <5% of permutations (count_shuffled_gt < 50/1000). p = count_gt/1000 < 0.05 indicates null not falsely significant.",
+      "observed": "GitHub: 0/1000 shuffled exceed observed (p=0.0, passes=true) but with degenerate N=9 statistics. MDN: 0/1000 exceed (p=0.0, passes=true) with N=17. Both trivially pass because permutation distribution collapses (null_std=0.0) under single-action regime.",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-PHYSICS-34348438464/raw_results.json site_results.*.null_control; research/experiments/EXP-PHYSICS-34348438464/all_browser_transitions.json github.non_leakage"
+    },
+    "url_only_pmi_baseline": {
+      "type": "baseline",
+      "description": "URL-only PMI baseline: PMI computed using only URL as state identifier, providing lower-bound reference for representation quality.",
+      "expected": "URL-only PMI provides baseline; URL+title PMI should exceed it if titles carry additional predictive information.",
+      "observed": "GitHub URL-only PMI = 0.0 bits (degenerate, 9 unique states each seen once, single action). MDN URL-only PMI = 0.020 bits (similar degenerate sparsity). No discriminable improvement possible; URL+title identical to URL-only (0% improvement on both sites).",
+      "pass": false,
+      "evidence_ref": "research/experiments/EXP-PHYSICS-34348438464/raw_results.json site_results.*.pmi_by_representation"
+    },
+    "cross_trajectory_permutation_null": {
+      "type": "null_model",
+      "description": "Cross-trajectory permutation null: action labels shuffled across trajectories preserving trajectory structure and marginal frequencies, destroying action->outcome dependency.",
+      "expected": "Under null, shuffled PMI near frequency baseline (~0). Observed PMI >> shuffled indicates genuine structure.",
+      "observed": "GitHub shuffled mean = 0.0 bits (identical to observed, null_std=0). MDN shuffled mean = 0.020 bits (identical to observed, null_std=0). Null distribution is degenerate due to N=9/17 with single action type; test has zero power.",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-PHYSICS-34348438464/raw_results.json site_results.*.permutation_tests"
+    },
+    "frequency_baseline": {
+      "type": "baseline",
+      "description": "Marginal next-state distribution P(S_{t+1}) provides expected PMI under no action-dependence (~0 bits).",
+      "expected": "PMI ≈ 0 under frequency baseline. Positive PMI indicates action carries predictive information beyond marginal.",
+      "observed": "Both sites show PMI ≈ 0 (GitHub 0.0, MDN 0.02), indistinguishable from frequency baseline. This reflects insufficient transition density, not evidence for/against action-dependence in principle.",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-PHYSICS-34348438464/raw_results.json site_results.*.pmi_by_representation"
+    },
+    "parent_todomvc_baseline": {
+      "type": "baseline",
+      "description": "Parent TodoMVC results (EXP-PHYSICS-34266105229): URL-only PMI 1.360 bits (React), 1.323 bits (Vue), 0% title improvement due to zero title variance. Provides real-browser reference point.",
+      "expected": "Real SPA with 400 transitions, 18 SA pairs, 3 URLs produced strong PMI 1.32-1.36 bits (d>83). Current sites expected to show different pattern due to varying titles.",
+      "observed": "Parent TodoMVC had 100% non-leakage (400/400) due to hash SPA with dummy button hrefs. Current MPA sites have 16-20% non-leakage (9/56, 17/84) due to link navigation leakage definition. PMI magnitudes incomparable due to different N, SA sparsity, and action diversity (6 actions vs 1 action).",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-PHYSICS-34266105229/result.json metrics.site_todomvc_react; research/experiments/EXP-PHYSICS-34266105229/raw_results.json"
+    },
+    "parent_synthetic_baseline": {
+      "type": "baseline",
+      "description": "Parent synthetic baseline (EXP-PHYSICS-34149195420): URL-only 0.693 bits, URL+title 1.970 bits, +184% improvement with 8 states, 4 actions, deterministic transitions. Demonstrates PMI pipeline can detect title-aware structure under ideal conditions.",
+      "expected": "Synthetic shows large title-aware improvement. Real test asks whether this generalizes to browser-collected data with title variance.",
+      "observed": "Synthetic positive control reproduced exactly: 0.693 -> 1.970 bits (+184%). Real sites show 0% improvement but with degenerate N and single-action regime, so comparison is invalid for the hypothesis.",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-PHYSICS-34149195420/result.json; positive_control_results.json"
+    },
+    "data_sufficiency_threshold": {
+      "type": "threshold",
+      "description": "Each site must yield >=30 non-leakage transitions for PMI estimation to be meaningful (spec measurement_validity).",
+      "expected": "n_non_leakage >=30 per site, target 50+.",
+      "observed": "GitHub 9/30 FAIL, MDN 17/30 FAIL. Both below threshold.",
+      "pass": false,
+      "evidence_ref": "research/experiments/EXP-PHYSICS-34348438464/raw_results.json site_results.*.n_non_leakage; research/experiments/EXP-PHYSICS-34348438464/all_browser_transitions.json"
+    },
+    "title_variance_threshold": {
+      "type": "threshold",
+      "description": "Each site must have at least 3 routes with distinct document.title values (verified via pre-survey before full data collection). If unique_titles=1, site degenerate for title-aware PMI.",
+      "expected": "unique_titles >=3 in pre-survey.",
+      "observed": "GitHub pre-survey 6/6 unique titles (variance=1.0) PASS. MDN pre-survey 5/5 unique titles (variance=1.0) PASS. Non-leakage titles also diverse: GitHub 9/9 unique, MDN 10/17 unique. Title variance criterion satisfied; failure is not degenerate title but sparse transition coverage.",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-PHYSICS-34348438464/title_survey_results.json sha f989b613e7d3b35636402a7c8a85c69a1f40524e54cdf4a27f0bd94345f80e9f"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-34348438464/raw_results.json",
+      "sha256": "8a51da1e8de57259590435f9325db2f2204cb9f8136ceb2a15a4834ee4856699",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-34348438464/all_browser_transitions.json",
+      "sha256": "e6c851efac32ff7926eef3671303013a835a563928500013b507c2ddbbfe43e5",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-34348438464/github_transitions.json",
+      "sha256": "85778f5948e8316df476475f1ab0264f6bddd0a9385e3fe8b99ea91095544fa5",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-34348438464/title_survey_results.json",
+      "sha256": "f989b613e7d3b35636402a7c8a85c69a1f40524e54cdf4a27f0bd94345f80e9f",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-34348438464/positive_control_results.json",
+      "sha256": "bc8bbecaa7daf1bba98653921dbdbe5527bdae6b5b2e9036adeef922834b91cc",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-34348438464/positive_control_recomputed.json",
+      "sha256": null,
+      "role": "derived"
+    },
+    {
+      "path": "research/physics/information_theoretic/spa_pmi.py",
+      "sha256": "8d6db688de638c5e826fa6dd4c946d5d4de59348e03685996cc9bdfc70cf8eac",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-34348438464/run_analysis.py",
+      "sha256": "8d25b5502acd56ba534762694cdb1e9aefd9964f49082d9d6b4c85e765719fb4",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-34348438464/run_experiment.py",
+      "sha256": null,
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "Title variance pre-survey passes on both sites: GitHub 6/6 unique titles (title_variance=1.0), MDN 5/5 unique titles (1.0), satisfying the prereg requirement of >=3 distinct titles. Each site was verified via Playwright navigation to 5-6 distinct routes before full collection.",
+    "Raw browser transitions collected via Playwright (chromium headless) yielded 56 total transitions on GitHub (across 6 trajectories, ~3-6 steps each) and 84 total on MDN (across 11 trajectories), substantially below the spec target of 240 per site (30 trajectories x 8 steps). Collection was truncated by navigation failures and short trajectories.",
+    "Leakage classification (action.target_href == state_after.url) produced 47 leakage / 9 non-leakage on GitHub (83.9% leakage, 16.1% non-leakage) and 67 leakage / 17 non-leakage on MDN (79.8% leakage, 20.2% non-leakage). This is inverted from the expected 60-80% non-leakage for SPA sites, reflecting that GitHub and MDN are multi-page applications where link navigation href equals final URL by definition.",
+    "All 9 GitHub and 17 MDN non-leakage transitions have action_type = link_nav only; unique_actions=1. Button, input_submit, and toggle actions were not sampled in these trajectories because find_available_actions only discovered link_nav actions (query_selector_all for buttons returned empty due to :visible pseudo incompatibility and limited interactive element diversity on these page types).",
+    "Non-leakage state representation is sparse: GitHub shows 9 unique URLs and 9 unique titles across 9 transitions (each state distinct, N=9, SA pairs=9); MDN shows 10 unique states across 17 transitions (10 SA pairs). This sparsity (count_s=1 for most states) collapses PMI estimation: PMI values near 0 due to Laplace smoothing asymmetry (smoothed marginals, unsmoothed joint count_sas_next/count_s) inherited from parent spa_pmi.py.",
+    "PMI results on non-leakage data are degenerate: GitHub URL-only 0.0 bits, URL+title 0.0 bits, URL+title+form 0.0 bits (identical across representations). MDN URL-only 0.020064613004687686 bits, URL+title identical, URL+title+form identical (0% improvement on both sites).",
+    "Permutation null control trivially passes (0/1000 shuffled > observed) but is uninformative: GitHub null_mean=0.0 null_std=0.0 effect_d=0.0; MDN null_mean=0.02006 null_std=0.0 effect_d=0.0. Null distribution collapses because N=9/17 with single action type leaves no variation to shuffle (cross-trajectory shuffle preserves degenerate structure). The listed p=0.000999 is the resolution floor (count_gt+1)/(1000+1), not evidence of strong effect.",
+    "Positive control (synthetic SPA, 25 trajectories x 20 steps = 500 transitions) reproduces parent result exactly: URL-only 0.693310 bits, URL+title 1.970156 bits (+184%), p=0.000999, effect_d ~72-92, confirming PMI pipeline integrity. Leakage violations 0/500, unique_states 3->8, SA pairs 12->32 when enriching representation.",
+    "Non-leakage examples are dominated by redirect/param-stripping cases where href differs from final URL (e.g., 'https://github.com/join?plan=business...' -> 'https://github.com/signup?return_to=...', 'https://github.com/github/roadmap/security' -> 'https://github.com/github/roadmap'), plus one same-page case (devops-tools-comparison link_agents click that did not navigate). These are not SPA dynamical structure but MPA redirect artifacts.",
+    "Form_signals variance is minimal: GitHub shows 2 distinct form_signals patterns across 9 transitions, MDN shows 1 pattern across 17 transitions (all have has_form/has_input patterns identical), so URL+title+form is isomorphic to URL+title on this dataset. H4 (form marginal information) has zero power."
+  ],
+  "validity_notes": [
+    "MEASUREMENT_INVALID per frozen decision_rule: both sites yielded fewer than 30 non-leakage transitions (GitHub 9, MDN 17). This is not a scientific falsification of the hypothesis; the preregistered test population (SPA/form-heavy sites with sufficient transition density and title variance) was never effectively sampled.",
+    "Site selection mismatch: GitHub (github.com) and MDN Web Docs (developer.mozilla.org) satisfy title variance (6 and 5 unique titles) but are predominantly multi-page applications, not SPAs with client-side routing or multi-step forms. Their link-dominated navigation produces ~80% leakage under the parent definition (target_href == state_after.url), opposite to the expected 60-80% non-leakage for SPA sites. The title variance criterion alone is insufficient to guarantee SPA-typical transition density.",
+    "Action diversity failure: All non-leakage transitions are link_nav (unique_actions=1). The frozen spec anticipates diverse actions (button_click, input_submit, toggle, link_nav) with form-heavy interactions, but the collected data contains zero button/input actions. This reflects both site architecture (few interactive forms in crawled paths) and selector limitation (button:visible pseudo not supported by Playwright query_selector_all, causing button discovery to return empty). The resulting single-action regime makes PMI estimation degenerate (distinct_actions_s=1, state_action_counts = state_counts).",
+    "Sample size deviation: Spec requires 30 trajectories x 8 steps = 240 transitions per site, target 150-200 non-leakage. Observed totals are 56 (GitHub) and 84 (MDN) raw transitions, with only 9 and 17 non-leakage. Even before leakage filtering, raw totals are 3-4x below spec. Collection was limited by early trajectory termination (goto failures, missing actions, short 3-step trajectories in initial run). This halves the 15-trajectory/6-step optimization below spec, affecting power.",
+    "PMI smoothing asymmetry confound (inherited from parent): p_a_given_s and p_s_next_given_s use Laplace alpha=1.0, while p_joint_given_s = count_sas_next / count_s is unsmoothed. Under sparse distinct-states regime (9 states/9 transitions), this asymmetry biases absolute bits toward 0 and makes cross-experiment bit comparison invalid without sensitivity analysis at alpha=0,0.5,2.0 (prereg 11.5 not performed).",
+    "Permutation validity under sparsity: Cross-trajectory permutation (1000 permutations) reports p=0.000999 on both sites, but null_std=0.0 and shuffled_means identical to observed, indicating the permutation distribution has collapsed. The listed p-value is the (count_gt+1)/(N+1) correction floor, not evidence for genuine action->next-state dependency. Effect sizes d=0.0 correctly signal lack of discriminability, contradicting p<0.001.",
+    "Title variance vs title informativeness conflation: Pre-survey shows 6 and 5 unique titles across routes, but non-leakage PMI shows 0% improvement because each URL maps 1:1 to a title in the sparse sample (9 titles/9 URLs on GitHub). With N=9 and 9 distinct URL+title states, the enriched representation cannot be distinguished from URL-only; title entropy is maximal per-sample but not predictive across repeated SA pairs (SA pairs also 9). The hypothesis requires dense revisits to same URL with different titles to test enrichment.",
+    "MPA vs SPA non-leakage definition validity: The parent TodoMVC definition (leakage iff target_href == state_after.url) classified 100% of TodoMVC hash-SPA transitions as non-leakage because dummy button hrefs (button://...) never equal hash URLs. On MPA sites, successful link navigations are correctly classified as leakage, so the non-leakage subset is a biased sample of redirects and failed navigations, not representative SPA dynamical structure. The definition is appropriate for SPA form submissions but inappropriate for link-dominated MPA sites.",
+    "Positive control passage does not salvage real-data inference: Synthetic SPA passes (0.693 >=0.5) confirms pipeline code works, but real-data measurement_invalid means no generalization claim can be made. The 0% title improvement on real data is uninterpretable (mathematical consequence of sparse single-action data, analogous to parent TodoMVC 0% improvement being consequence of zero title variance).",
+    "Playwright environment caveat: Playwright 1.62.0 with chromium-1234 headless_shell was used; no CAPTCHA/403 blocks observed on GitHub/MDN, but some trajectories hit rate-limiting or truncated pages (e.g., 'Too many requests · GitHub', 'github.com' bare title) indicating polite delay 0.5s in optimized run (vs spec 1.5s) may be insufficient. Trajectory lengths vary (3-6 steps) rather than fixed 8, affecting transition density assumptions."
+  ],
+  "unresolved": [
+    "Whether title-aware PMI (URL+title vs URL-only) detects dynamical structure on genuine SPA/form-heavy sites where titles vary across client-side routes and where non-leakage density is sufficient (≥30, ideally 50+). The preregistered hypothesis remains untested because GitHub/MDN are MPA sites with insufficient transition density.",
+    "What site corpus and action selection protocol would achieve ≥30 non-leakage transitions with sufficient title variance and action diversity (button/form interactions) within the Measurement validity constraints (30 trajectories x 8 steps, polite delays). Candidate SPA survey should be expanded to include true SPAs (e.g., survey builders, e-commerce checkouts, dashboards with React Helmet/Vue Meta) rather than documentation sites.",
+    "Whether form_signals provide marginal information beyond titles (H4) on sites where titles are ambiguous but form structures differ. Current data has form_signals variance 1-2, zero power; requires form-heavy SPA with repeated titles across steps but differing has_form/has_input patterns.",
+    "How to adapt non-leakage classification for MPA vs SPA sites: the parent definition may need normalization (URL resolution, stripping query/locale params) or stratification by action_type (link_nav vs button_click) to avoid discarding 80% of MPA transitions as leakage while preserving leakage detection for genuine URL leakage.",
+    "Whether Laplace alpha=1.0 smoothing asymmetry biases absolute PMI bits under sparse regimes, and what alpha sensitivity (0, 0.5, 2.0) would reveal. Not performed in this execution; parent TodoMVC caveat (1.32-1.36 bits vs synthetic 0.693 bits comparison confounded by state-space cardinality and smoothing) applies equally here.",
+    "Trajectory-level entropy rates as complementary measure for stochastic transitions (prereg 6.4) were not computed due to measurement_invalid; whether they would detect structure when transition-level PMI is degenerate (0 bits) remains unknown.",
+    "Statistical power for small title effects: given the observed 0% improvement is driven by degenerate N=9/17 single-action data, what N and SA pair density is needed to detect a modest title-aware effect (e.g., +0.2 bits) with Bonferroni-corrected alpha=0.025. Previous half-spec 400 vs 800 transition note remains relevant for future protocol compliance."
+  ]
+}

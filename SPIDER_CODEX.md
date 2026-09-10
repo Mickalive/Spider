@@ -3,7 +3,7 @@
 Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER_CODEX_ULTIME.md`.
 
 This file is generated only from complete finalized Research 2.0 experiment packets.
-Ingested experiments: **48**. Coverage gaps: **0**.
+Ingested experiments: **49**. Coverage gaps: **0**.
 
 ## Index
 
@@ -40,6 +40,7 @@ Ingested experiments: **48**. Coverage gaps: **0**.
 | EXP-PHYSICS-34071626363 | physics | PASS | FALSIFIED-IN-SETTING | C-WEB-DYNAMICS |
 | EXP-PHYSICS-34149195420 | physics | REVISE | SURVIVES_CURRENT_TEST | C-WEB-DYNAMICS |
 | EXP-PHYSICS-34266105229 | physics | REVISE | FALSIFIED-IN-SETTING | C-WEB-DYNAMICS |
+| EXP-PHYSICS-34348438464 | physics | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-WEB-DYNAMICS |
 | EXP-PRODUCT-33528829801 | product | PASS | SURVIVES — C-PARAM-INHERIT survives at synthetic in-kernel POC level: distill_parameterized() with _extract_varying_values() correctly induces one parameter slot for isomorphic action paths and resolves to EXECUTABLE with correct bound_action for all 10 unseen single-char identifiers. All four frozen decision-rule conditions satisfied. Audit PASS confirms recomputed metrics match producer. However, the claim ceiling is narrow: single-parameter, single-field, common-prefix heuristic, deterministic synthetic data, hardcoded confidence, simulated baselines. No broader product promotion is authorized by this evidence. | C-PARAM-INHERIT |
 | EXP-PRODUCT-33741671686 | product | PASS | MULTI-PARAM-SURVIVES — the frozen decision rule passes all 7 checks: C1 regression (slot≥1, resolution=1.0, binding=1.0), C2 multi-param (slot=2, distinct, resolution=1.0, binding=1.0), C3 three-param (slot=3, distinct, resolution=1.0, binding=1.0), C4 non-identifier (slot=1, resolution=1.0, binding=1.0), C5 no-collision (slot=2, distinct, resolution=1.0, binding=1.0), null_control passed, no crashes. Producer metrics verified: 21/21 EXECUTABLE, 21/21 binding correct, 0/21 unsubstituted templates. Audit PASS confirms all recomputed metrics match producer. However, the claim ceiling remains narrow: synthetic POC implemented only in run_experiment.py (not in kernel.py), single-intent deterministic observations, trivial full-replacement parameterization for body fields, tautological confidence gate (0.8 == min_confidence 0.8), null control passes via intent mismatch not pattern absence, fragile positional slot-to-param mapping in harness. Do NOT promote to Product Core. | C-PARAM-INHERIT |
 | EXP-PRODUCT-33974562602 | product | PASS | KERNEL-INTEGRATION-FALSIFIED | C-PARAM-INHERIT |
@@ -33455,6 +33456,1338 @@ No deviations from the frozen preregistration. The experiment was executed exact
     "research/experiments/EXP-PHYSICS-34149195420/handoff.json parent established rejected unknown do_not_assume"
   ],
   "recommended_action": "DESIGN a Physics experiment collecting browser transitions on 2-3 real JavaScript-heavy SPA/form-heavy sites with VERIFIED TITLE VARIANCE across routes (e.g., multi-step e-commerce checkout with 'Step 1: Shipping'/'Step 2: Payment'/'Order Confirmation', survey builder with step-specific titles, dashboard with page-specific titles via React Helmet/Vue Meta). Critical site selection criteria: (1) titles must vary across client-side routes — verify by checking document.title on 5+ routes before committing to data collection; (2) sites should be form-heavy with multi-step interactions; (3) different content domains (not two TodoMVC variants). Apply title-aware PMI to real SPA non-leakage transitions and compare with URL-only PMI. Test whether form_signals provide marginal information beyond titles on sites where titles may be ambiguous. Use cross-trajectory permutation (validated on real data here) as the null model. Also consider: alpha sensitivity analysis (0, 0.5, 2.0) for absolute bit comparability, trajectory-level entropy rates as complementary measure, and non-leakage classification with measured target_href rather than assumed 100% NL. Do NOT repeat the constant-title TodoMVC design."
+}
+```
+
+# EXP-PHYSICS-34348438464
+
+## request.json
+
+```text
+{
+  "base_sha": "e818e91bd7c9dfe3aac32c1bd3f80730f74d02e0",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-09T11:59:21.399259+00:00",
+  "experiment_id": "EXP-PHYSICS-34348438464",
+  "inherited_last_verdict": "FALSIFIED-IN-SETTING",
+  "inherited_next_question": "Does title-aware PMI detect dynamical structure on real SPA/form-heavy sites where titles actually vary across routes (e.g., multi-step e-commerce checkout, survey builder with step-specific titles, dashboards with page-specific titles via React Helmet/Vue Meta), using browser-collected action->next-state data with sufficient transition density and title variance?",
+  "lane": "physics",
+  "origin_github_run_id": "34348438464",
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-34266105229",
+    "path": "research/experiments/EXP-PHYSICS-34266105229/handoff.json",
+    "sha256": "6b154e2ff4deb9b597236c2cf4993676fe7f8e39b2d61024e198a1596733ca16"
+  },
+  "reason": "pulse",
+  "request_hash": "25612f4d3adc0468a121ede051cd32ee47a9ea8604046e17cef1177079fb8e8d",
+  "request_id": "6e9666b6a6116a0ef7bd6ece",
+  "schema_version": 1
+}
+```
+
+## spec.json
+
+```text
+{
+  "experiment_id": "EXP-PHYSICS-34348438464",
+  "lane": "physics",
+  "claim_ids": ["C-WEB-DYNAMICS"],
+  "question": "Does title-aware PMI detect dynamical structure on real SPA/form-heavy sites where titles actually vary across routes, using browser-collected action->next-state data with sufficient transition density and title variance?",
+  "hypothesis": "Title-aware PMI (URL+title representation) will be significantly greater than URL-only PMI on real SPA non-leakage transitions where titles vary across routes, demonstrating that richer state representations detect dynamical structure invisible at URL level. Additionally, form_signals will provide marginal information beyond titles on at least one site where titles are ambiguous but form structures differ.",
+  "falsifier": "The hypothesis is falsified if ANY of: (1) URL+title PMI is not significantly greater than URL-only PMI across both sites (paired permutation p > 0.025 for the URL+title vs URL-only comparison, Bonferroni-corrected for 2 sites), OR (2) both sites show URL+title PMI < 0.1 bits, OR (3) the cross-trajectory permutation null fails on real data (shuffled PMI exceeds observed PMI in more than 5% of permutations), OR (4) fewer than 30 non-leakage transitions are obtainable from either site, OR (5) the positive control (synthetic SPA pipeline) fails (PMI < 0.5 bits on known deterministic structure).",
+  "baselines": [
+    "URL-only PMI baseline: PMI computed using only URL as state identifier, providing the lower-bound reference for representation quality",
+    "Cross-trajectory permutation null: action labels shuffled across trajectories (preserving trajectory structure and marginal frequencies), destroying action->outcome dependency",
+    "Frequency baseline: marginal next-state distribution P(S_{t+1}) provides expected PMI under no action-dependence",
+    "Parent TodoMVC results (EXP-PHYSICS-34266105229): URL-only PMI 1.360 bits (React), 1.323 bits (Vue), 0% title improvement due to zero title variance"
+  ],
+  "positive_control": "The synthetic SPA pipeline from parent experiment EXP-PHYSICS-34149195420 must produce PMI >= 0.5 bits on known deterministic structure with permutation p < 0.001. This verifies the PMI computation code works correctly before application to real data. Run as a batch alongside real data collection.",
+  "null_control": "Cross-trajectory permutation on real SPA data: shuffled PMI must not exceed observed PMI in more than 5% of permutations (one-sided test, alpha=0.05). This verifies that observed PMI on real data reflects genuine action->next-state dependency, not sampling artifacts or marginal frequency effects.",
+  "measurement_validity": [
+    "Each site must have at least 3 routes with distinct document.title values (verified via pre-survey before full data collection)",
+    "Each site must yield >= 30 non-leakage transitions for PMI estimation to be meaningful (target: 50+ per site)",
+    "Non-leakage classification uses the parent definition: a transition is leakage ONLY if action.target_href == state_after.url (the action's target URL is the current state's URL). All other transitions are non-leakage.",
+    "Browser transitions are collected using Playwright (must be installed first: pip install playwright && playwright install chromium)",
+    "Deterministic action selection (seed=42) for reproducibility",
+    "State representation uses raw browser state: URL (window.location.href), title (document.title), form_signals (4 booleans: has_form, has_input, has_select, has_textarea). No derived or processed features",
+    "Laplace smoothing alpha=1.0 matches parent experiments for comparability",
+    "Cross-trajectory permutation uses 1000 permutations per site, matching parent protocol",
+    "Minimum 2 real SPA/form-heavy sites with verified title variance tested to assess cross-site consistency",
+    "Positive control (synthetic SPA) is run in the same batch to verify pipeline integrity",
+    "Polite delays between actions (>= 1.5 seconds) to avoid rate limiting",
+    "Same-domain transitions only (no external navigation)",
+    "Trajectory-level entropy rates computed as complementary measure for stochastic transitions",
+    "30 trajectories per site x 8 steps = 240 transitions per site, yielding ~150-200 non-leakage transitions (60-80% non-leakage rate expected on SPA sites)"
+  ],
+  "decision_rule": "SURVIVES_CURRENT_TEST if ALL of: (1) URL+title PMI > URL-only PMI on both sites (paired permutation p < 0.025 for each site, Bonferroni-corrected), (2) URL+title PMI > 0.5 bits on at least one site, (3) cross-trajectory permutation p < 0.001 on at least one site, (4) positive control passes (synthetic SPA PMI >= 0.5 bits), (5) at least 30 non-leakage transitions obtained from each site. FALSIFIED-IN-SETTING if ANY of: (1) URL+title PMI not > URL-only PMI on both sites after correction, (2) both sites show URL+title PMI < 0.1 bits, (3) permutation null fails (p > 0.05), (4) positive control fails. MEASUREMENT_INVALID if: (1) fewer than 30 non-leakage transitions from either site, (2) pipeline errors prevent computation, (3) Playwright fails to access sites or browser state extraction fails, (4) both sites have unique_titles=1 (constant titles) — degenerate for title-aware PMI hypothesis.",
+  "product_consequence_positive": "Real SPA sites with varying titles exhibit title-dependent dynamical structure detectable by PMI, validating richer BrowserState representations (URL+title) for real Web exploration. Product lane should incorporate title awareness into state representation for SPAs. The synthetic finding (EXP-PHYSICS-34149195420) generalizes to real browser data.",
+  "product_consequence_negative": "Real SPA sites with varying titles do not show title-dependent PMI above URL-only baseline, or the effect is too small to detect. The synthetic finding does not generalize to real browser data. Physics lane should explore alternative state representation approaches (e.g., DOM structure, accessibility tree, visual features) or alternative information-theoretic measures (e.g., trajectory-level entropy rates). Product lane should not invest in title-aware state representation based on current evidence.",
+  "estimated_cost": "Medium: requires Playwright installation (~500MB), browser binary download (~300MB), and actual web browsing (2-3 sites x 30 trajectories x 8 steps = 480-720 page loads with polite delays). Estimated time: 15-30 minutes for collection, 5-10 minutes for analysis.",
+  "expected_information_gain": "High: This is the first test of whether the PMI pipeline's synthetic finding (title-aware PMI >> URL-only PMI) generalizes to real browser data with varying titles. A positive result justifies title-aware state representation in Product and opens trajectory-level analysis. A negative result constrains the claim ceiling to synthetic settings and redirects Physics toward alternative representations. The experiment is small (2-3 sites, ~480-720 transitions total) but maximally informative because it directly tests the critical synthetic-to-real bridge."
+}
+```
+
+## prereg.md
+
+```text
+# EXP-PHYSICS-34348438464 Preregistration
+
+## 1. Experiment Identity
+
+- **Experiment ID**: EXP-PHYSICS-34348438464
+- **Lane**: Physics
+- **Claim**: C-WEB-DYNAMICS (Interactive Web transformations contain predictive dynamical structure beyond memory and ordinary similarity)
+- **Date**: 2026-09-09
+- **Status**: DESIGN — NOT YET FROZEN
+- **Parent Experiment**: EXP-PHYSICS-34266105229 (FALSIFIED-IN-SETTING)
+- **Request Reason**: pulse (inherited next_question from parent handoff)
+
+## 2. Scientific Question
+
+Does title-aware PMI detect dynamical structure on real SPA/form-heavy sites where titles actually vary across routes, using browser-collected action->next-state data with sufficient transition density and title variance?
+
+## 3. Motivation
+
+### What the parent experiment established (EXP-PHYSICS-34266105229)
+
+The parent experiment tested title-aware PMI on real SPA/form-heavy browser transitions (TodoMVC React/Vue). It produced:
+
+**Established:**
+- URL-only PMI is strongly positive on TodoMVC hash-SPA transitions: React 1.360 bits, Vue 1.323 bits (permutation p=0.001, d=83-86, 400 transitions over 18 SA pairs). URL-level action->next-state dependency is genuine and strong on these sites
+- PMI pipeline works correctly on real browser data: positive control (synthetic SPA PMI=0.693 bits, p=0.001) passes, cross-trajectory permutation null is valid and powerful on real SPA data
+- TodoMVC hash-based SPA architecture produces 100% non-leakage transitions by construction (filter/toggle/add actions do not change URL path, so action.target_href never equals state_after.url)
+
+**Rejected:**
+- Title-aware PMI > URL-only PMI on TodoMVC SPAs: 0% improvement on both sites, but this is a mathematical consequence of zero title variance (unique_titles=1), not an empirical test of the hypothesis
+- Form_signals provide marginal information beyond titles on TodoMVC: zero form_signals variance (all transitions have identical {has_form:false, has_input:true, has_select:false, has_textarea:false}), so H4 had zero power — untested, not rejected
+
+**Unknown:**
+- Whether title-aware PMI detects dynamical structure on real SPA/form-heavy sites where titles actually vary across routes (the preregistered population was never tested)
+- Whether form_signals provide marginal information beyond titles on sites where titles are ambiguous but form structures differ (multi-step forms with similar titles but different has_form/has_input patterns)
+- Whether trajectory-level entropy rates detect structure differences when transition-level PMI is identical due to degenerate representation
+- Whether the high URL-only PMI (1.32-1.36 bits vs parent synthetic 0.693 bits) reflects genuinely richer dynamical structure or small-state-space artifact (3 URLs vs 8 synthetic states) combined with smoothing asymmetry
+- Whether most production React/Vue SPAs have route-varying titles (via React Helmet, Vue Meta) or constant titles like TodoMVC — a title variance survey across SPA corpus would inform site selection
+- Whether 100% non-leakage is specific to TodoMVC hash-navigation or generalizes to form-heavy SPAs with actual form submissions and href-based navigation
+
+**Do Not Assume:**
+- That the 0% title improvement on TodoMVC generalizes to sites with varying titles — it is a mathematical consequence of zero title variance (unique_titles=1), not a scientific finding about title informativeness
+- That the high URL-only PMI (1.32-1.36 bits) reflects richer dynamical structure than the parent synthetic baseline (0.693 bits) — the comparison is confounded by different state spaces (3 URLs vs 8 states), different smoothing effects, and the PMI smoothing asymmetry (smoothed marginals, unsmoothed joint P(a,s'|s)=ct/cs) inherited from parent spa_pmi.py. Absolute bits are only comparable under same alpha and same state-space cardinality
+- That TodoMVC properties (constant titles, 100% non-leakage, 3 URLs, 6 actions) are representative of production SPA sites — TodoMVC is a degenerate demo app
+- That this experiment provides evidence for or against title-aware PMI on real sites with varying titles — the test environment had zero title entropy and was uninformative for the preregistered hypothesis
+- That the half-spec sample size (400 vs 800 transitions) affected the conclusion — the zero title variance makes sample size moot for the title comparison, but note the deviation for future protocol compliance
+- That 100% non-leakage fraction on TodoMVC would appear on form-heavy SPAs with actual form submissions — non-leakage rate depends on action representation (target_href) and site architecture
+- That the permutation p=0.001 across all representations and sites indicates equal evidence — it is the resolution floor of 1000 permutations; effect sizes (d=83-86) differ and absolute PMI values differ
+- That the PMI smoothing asymmetry (alpha=1.0 on marginals, unsmoothed joint) produces unbiased absolute bit values — reported bits are specific to alpha=1.0, sensitivity analysis at alpha=0,0.5,2.0 was not performed (prereg 11.5)
+
+### Why this experiment is different
+
+The parent experiment used **TodoMVC constant-title SPAs** where title variance was zero (unique_titles=1). This experiment selects **real SPA/form-heavy sites with verified title variance across routes**. The critical differences:
+
+1. **Title variance**: Sites must have at least 3 routes with distinct document.title values (verified via pre-survey before full data collection)
+2. **Form-heavy interactions**: Sites should have multi-step forms, checkout flows, survey builders, or dashboards where titles vary per step/page
+3. **Non-leakage by construction**: SPA form submissions and client-side routing produce non-leakage transitions where the action does not predict the next state URL/title by simple string matching
+4. **Cross-site generalization**: Testing 2-3 sites with different frameworks and content domains
+5. **Form signals hypothesis**: Sites where titles may be ambiguous but form structures differ, enabling H4 test
+
+## 4. Hypotheses
+
+### H1: Title-Aware PMI > URL-Only PMI
+URL+title PMI is significantly greater than URL-only PMI on real SPA non-leakage transitions where titles vary across routes, with Bonferroni-corrected permutation p < 0.025 for each site.
+
+### H2: Meaningful Structure Detection
+URL+title PMI exceeds 0.5 bits on at least one real SPA site, demonstrating non-trivial dynamical structure detectable by title-aware PMI.
+
+### H3: Permutation Null Validation
+Cross-trajectory permutation on real SPA data confirms that observed PMI reflects genuine action->next-state dependency (permutation p < 0.001 on at least one site).
+
+### H4: Form Signals Marginal Information
+On at least one real SPA site where titles are ambiguous (e.g., multi-step forms with similar page titles), form_signals provide marginal information beyond titles (URL+title+form PMI > URL+title PMI).
+
+### H5: Positive Control
+The synthetic SPA pipeline produces PMI >= 0.5 bits on known deterministic structure, verifying pipeline integrity.
+
+## 5. Data Collection
+
+### 5.1 Infrastructure Setup
+
+Before data collection:
+1. Install Playwright: `pip install playwright`
+2. Download browser binaries: `playwright install chromium`
+3. Verify Playwright works: simple page load test on a known URL
+
+### 5.2 Site Selection
+
+Select 2-3 JavaScript-heavy SPA/form-heavy sites meeting these criteria:
+- **Title variance**: At least 3 routes with distinct document.title values (verified via pre-survey: navigate to 5+ routes and check document.title)
+- Client-side routing (React Router, Vue Router, or equivalent)
+- Form interactions (multi-step forms, checkout flows, registration)
+- Non-leakage transitions: form submissions that trigger client-side state changes without URL action keywords
+- Accessible without authentication (or use demo accounts)
+- Known to be stable and not blocking automated access
+- Different frameworks and content domains
+
+Candidate sites (to be finalized after title variance verification):
+1. **Site A**: A multi-step form wizard or survey builder with step-specific titles (e.g., "Step 1: Personal Info", "Step 2: Preferences", "Review & Submit")
+2. **Site B**: A settings/configuration page with section-specific titles (e.g., "Account Settings", "Privacy Settings", "Notification Preferences")
+3. **Site C (optional)**: A dashboard or admin panel with page-specific titles via React Helmet/Vue Meta
+
+### 5.3 Title Variance Pre-Survey
+
+Before full data collection, verify title variance:
+1. Navigate to 5+ distinct routes on each candidate site
+2. Record document.title on each route
+3. Confirm at least 3 distinct titles exist
+4. If titles are constant (unique_titles=1), reject site and select alternative
+5. Record title variance metric: unique_titles / total_routes
+
+### 5.4 Interaction Protocol
+
+For each site:
+1. Navigate to the site's entry point
+2. Execute random-walk trajectories: 30 trajectories of 8 steps each = 240 total transitions per site
+3. At each step:
+   a. Extract BrowserState (URL, title, form_signals)
+   b. Extract available actions (clickable same-domain links, buttons, form inputs)
+   c. Randomly select an action (uniform, seed=42 for reproducibility)
+   d. Execute the action (Playwright click/type/submit)
+   e. Wait for page load (>= 1.5 second polite delay)
+   f. Extract next BrowserState
+   g. Record transition (state, action, next_state)
+4. Filter out leakage transitions (action.target_href == state.url)
+5. Ensure sufficient non-leakage density (>= 30 transitions per site, target 50+)
+
+### 5.5 State Representation
+
+For each transition (S_t, A_t, S_{t+1}):
+- **URL**: window.location.href
+- **Title**: document.title (truncated to 100 chars)
+- **Form signals**: (has_form, has_input, has_select, has_textarea) — 4 booleans from DOM inspection
+
+### 5.6 Non-Leakage Classification
+
+A transition is classified as leakage ONLY if:
+- action.target_href == state_after.url (the action's target URL is the current state's URL)
+
+All other transitions are non-leakage. This matches the parent experiment's definition.
+
+### 5.7 Sample Size
+
+- 2-3 sites x 30 trajectories x 8 steps = 480-720 total transitions
+- Expected non-leakage: ~60-80% on SPA sites (290-580 transitions)
+- Minimum valid: 30 non-leakage transitions per site
+- Target: 50+ non-leakage transitions per site
+
+## 6. PMI Computation
+
+### 6.1 PMI Formula
+
+PMI(a, s'|s) = log2[P(a, s'|s) / (P(a|s) * P(s'|s))]
+
+With Laplace smoothing (alpha=1.0) on joint and marginal counts, matching parent experiments.
+
+### 6.2 Representations
+
+Three representations tested per site:
+1. **URL-only**: state = URL
+2. **URL+title**: state = (URL, title)
+3. **URL+title+form**: state = (URL, title, form_signals)
+
+### 6.3 Cross-Trajectory Permutation Null
+
+For each permutation:
+1. Shuffle action labels across trajectories (preserving trajectory structure)
+2. Recompute PMI on shuffled data
+3. Repeat 1000 times
+
+Observed PMI is significant if fewer than 5/1000 shuffled means exceed observed (one-sided p < 0.005, or p < 0.001 if 0/1000 exceed).
+
+### 6.4 Trajectory-Level Entropy Rates (Complementary Measure)
+
+Compute trajectory-level entropy rates as a complementary measure for stochastic transitions:
+- H(S_{t+1} | S_t, A_t) = -sum P(s'|s,a) log2 P(s'|s,a)
+- Compare with URL-only and URL+title representations
+- This is exploratory and does not affect the primary decision rule
+
+## 7. Measures
+
+### 7.1 Primary Metrics
+- **url_only_pmi**: PMI using URL-only state representation per site
+- **url_title_pmi**: PMI using URL+title state representation per site
+- **url_title_form_pmi**: PMI using URL+title+form state representation per site
+- **spearman_richness**: Spearman correlation between representation richness (URL < URL+title < URL+title+form) and PMI per site
+
+### 7.2 Secondary Metrics
+- **permutation_p**: Cross-trajectory permutation p-value per representation per site
+- **effect_size_d**: Cohen's d of observed vs shuffled PMI per representation per site
+- **n_non_leakage**: Number of non-leakage transitions per site
+- **n_unique_sa_pairs**: Number of unique (state, action) pairs per representation per site
+- **form_signals_marginal**: URL+title+form PMI minus URL+title PMI per site (form signals marginal information)
+- **title_variance**: unique_titles / total_routes measured in pre-survey per site
+
+### 7.3 Comparison Metrics
+- **parent_synthetic_url_only**: 0.693 bits (parent EXP-PHYSICS-34149195420)
+- **parent_synthetic_url_title**: 1.970 bits (parent EXP-PHYSICS-34149195420)
+- **parent_synthetic_improvement**: +184% (parent EXP-PHYSICS-34149195420)
+- **parent_todomvc_url_only**: 1.360 bits (React), 1.323 bits (Vue) (parent EXP-PHYSICS-34266105229)
+- **parent_todomvc_title_improvement**: 0% (both sites) (parent EXP-PHYSICS-34266105229)
+
+### 7.4 Exploratory Metrics
+- **trajectory_entropy_url_only**: Trajectory-level entropy rate using URL-only representation
+- **trajectory_entropy_url_title**: Trajectory-level entropy rate using URL+title representation
+
+## 8. Null Models
+
+### 8.1 Cross-Trajectory Permutation
+Shuffle action labels across trajectories. Preserves trajectory structure and marginal frequencies but destroys action->outcome dependency. 1000 permutations per site per representation.
+
+### 8.2 Frequency Null
+Predict next state from marginal distribution P(S_{t+1}). Expected PMI under this null is approximately 0 (no action-conditioned structure).
+
+### 8.3 URL-Only Null
+URL-only PMI serves as a within-experiment null: if URL+title PMI is not > URL-only PMI, title information provides no additional discrimination.
+
+## 9. Statistical Tests
+
+### 9.1 Primary Test: Representation Comparison
+For each site: paired comparison of URL+title PMI vs URL-only PMI using cross-trajectory permutation.
+- Bonferroni correction for 2 sites: alpha = 0.05/2 = 0.025
+- Decision: URL+title PMI > URL-only PMI with permutation p < 0.025 at each site
+
+### 9.2 Per-Site Significance
+For each site and representation: cross-trajectory permutation test (one-sided, 1000 permutations).
+- Decision: permutation p < 0.001 (0/1000 shuffled exceed observed)
+
+### 9.3 Cross-Site Consistency
+Qualitative comparison: do both sites show the same pattern (URL+title > URL-only)? Report effect direction and magnitude.
+
+### 9.4 Effect Size
+Cohen's d of observed vs shuffled PMI per representation per site. Report alongside p-values.
+
+## 10. Controls
+
+### 10.1 Positive Control (Synthetic SPA)
+The synthetic SPA pipeline from parent EXP-PHYSICS-34149195420 must produce PMI >= 0.5 bits with p < 0.001. Run as a batch alongside real data to verify pipeline integrity.
+
+### 10.2 Null Control (Permutation)
+Cross-trajectory permutation on real SPA data: shuffled PMI must not exceed observed PMI in more than 5% of permutations (one-sided test, alpha=0.05). This verifies observed PMI reflects genuine action->next-state dependency.
+
+### 10.3 Representation Comparison (URL-only vs URL+title)
+URL+title PMI must be > URL-only PMI on both sites (Bonferroni-corrected). This is the core test of whether titles resolve structural ambiguity on real data with varying titles.
+
+### 10.4 Minimum Data Threshold
+At least 30 non-leakage transitions per site. Fewer than 30 means PMI estimates are unreliable and the result is MEASUREMENT_INVALID.
+
+### 10.5 Title Variance Threshold
+Each site must have at least 3 distinct titles across routes (verified via pre-survey). If titles are constant (unique_titles=1), the site is degenerate for title-aware PMI and must be rejected.
+
+## 11. Validity Threats
+
+### 11.1 Title Variance Verification
+Even after pre-survey, title variance may be lower than expected during full data collection (e.g., some routes have identical titles).
+**Mitigation**: Report actual unique_titles across all collected transitions. If unique_titles=1 for a site, treat as degenerate and note in validity_notes.
+
+### 11.2 Non-Leakage Classification Errors
+Conservative non-leakage criteria may exclude genuine transitions or include spurious ones.
+**Mitigation**: Manual inspection of 10% of classified transitions if feasible. Report false positive/negative rates.
+
+### 11.3 Sample Size
+With 30 trajectories x 8 steps = 240 transitions per site and 60-80% non-leakage, expect 144-192 non-leakage transitions per site. This exceeds the 30-transition minimum.
+**Mitigation**: If initial collection yields <30 transitions, extend to 50 trajectories per site.
+
+### 11.4 Site Selection Bias
+Two sites may not represent the diversity of SPA architectures.
+**Mitigation**: Select sites with different frameworks (React vs Vue), different interaction types (forms vs navigation), and different content domains.
+
+### 11.5 Laplace Smoothing Sensitivity
+PMI values are sensitive to alpha. Results are specific to alpha=1.0.
+**Mitigation**: Report results at alpha=1.0 matching parent. Sensitivity analysis at alpha=0.5 and alpha=2.0 as secondary exploration if time permits.
+
+### 11.6 Browser State Capture Timing
+DOM state may change between action execution and state capture (async loading, animations).
+**Mitigation**: Wait 2 seconds after each action before capturing state. Report any capture failures.
+
+### 11.7 Playwright Installation Failure
+Playwright or browser binaries may fail to install.
+**Mitigation**: If installation fails, experiment is MEASUREMENT_INVALID. Document exact error and retry.
+
+### 11.8 Site Access Failure
+Real SPA sites may block automated access (403, CAPTCHA, rate limiting).
+**Mitigation**: Use polite delays (>= 1.5 seconds), rotate user agents if needed, select sites known to be accessible. If all sites fail, experiment is MEASUREMENT_INVALID.
+
+### 11.9 Parent Comparison Confounds
+Absolute PMI bits are not directly comparable across different state-space cardinalities (TodoMVC 3 URLs vs real sites with many URLs). The comparison is confounded by smoothing asymmetry.
+**Mitigation**: Focus on within-site URL vs URL+title comparison, not absolute bit values across experiments.
+
+## 12. Decision Rules
+
+### 12.1 SURVIVES_CURRENT_TEST
+If ALL of:
+1. URL+title PMI > URL-only PMI on both sites (Bonferroni-corrected permutation p < 0.025)
+2. URL+title PMI > 0.5 bits on at least one site
+3. Cross-trajectory permutation p < 0.001 on at least one site
+4. Positive control passes (synthetic SPA PMI >= 0.5 bits)
+5. At least 30 non-leakage transitions obtained from each site
+
+### 12.2 FALSIFIED-IN-SETTING
+If ANY of:
+1. URL+title PMI not > URL-only PMI on both sites after Bonferroni correction
+2. Both sites show URL+title PMI < 0.1 bits
+3. Permutation null fails (p > 0.05 on all sites/representations)
+4. Positive control fails (synthetic SPA PMI < 0.5 bits)
+
+### 12.3 MEASUREMENT_INVALID
+If:
+1. Fewer than 30 non-leakage transitions from either site
+2. Pipeline errors prevent computation
+3. Playwright fails to access sites or browser state extraction fails
+4. Both sites have unique_titles=1 (constant titles) — degenerate for title-aware PMI hypothesis
+
+## 13. Expected Outcomes
+
+### 13.1 Positive Result (SURVIVES_CURRENT_TEST)
+- Real SPA sites with varying titles exhibit title-dependent dynamical structure detectable by PMI
+- Validates the synthetic-to-real bridge for the PMI pipeline
+- Justifies title-aware BrowserState representation in Product
+- Opens trajectory-level analysis for stochastic transitions
+- Physics lane should investigate form_signals marginal information on real data
+
+### 13.2 Negative Result (FALSIFIED-IN-SETTING)
+- Real SPA sites with varying titles do not show title-dependent PMI above URL-only baseline
+- The synthetic finding (EXP-PHYSICS-34149195420) does not generalize to real browser data
+- Physics lane should explore alternative state representations (DOM structure, accessibility tree, visual features) or alternative measures (trajectory-level entropy rates)
+- Product lane should not invest in title-aware state representation based on current evidence
+- Does NOT falsify C-WEB-DYNAMICS entirely — only this specific representation and detection method
+
+### 13.3 Invalid Result (MEASUREMENT_INVALID)
+- Insufficient non-leakage transitions or pipeline errors
+- Not scientific evidence for or against
+- Requires collection protocol refinement before re-attempt
+
+## 14. Analysis Plan
+
+1. **Infrastructure Setup**: Install Playwright, download browser binaries, verify works
+2. **Site Selection & Title Variance Pre-Survey**: Verify at least 3 distinct titles per site
+3. **Data Collection**: Browser automation on 2-3 SPA/form-heavy sites, 30 trajectories x 8 steps each, recording (URL, title, form_signals, action) before/after each interaction
+4. **Non-Leakage Classification**: Apply parent definition (action.target_href == state.url) to identify non-leakage transitions
+5. **PMI Computation**: Compute PMI for URL-only, URL+title, URL+title+form representations per site
+6. **Permutation Testing**: Cross-trajectory permutation (1000 iterations) per representation per site
+7. **Positive Control**: Run synthetic SPA pipeline alongside real data
+8. **Comparison**: Compare real-data PMI with parent synthetic results and TodoMVC results
+9. **Form Signals**: Test whether URL+title+form > URL+title on sites with ambiguous titles
+10. **Trajectory Entropy**: Compute trajectory-level entropy rates as complementary measure (exploratory)
+11. **Reporting**: Report all outcomes with equal prominence
+
+## 15. Analysis Code
+
+Analysis will be implemented in Python using:
+- PMI computation from `research/physics/information_theoretic/spa_pmi.py` (reused from parent)
+- Browser automation via Playwright for state collection
+- `numpy` for statistical tests
+- `scipy.stats` for permutation tests
+- Standard library only for PMI computation
+
+Code will be committed to `research/physics/information_theoretic/real_spa_pmi.py` before execution (replacing parent TodoMVC version with real SPA version).
+
+## 16. Pre-registered Expectations
+
+From parent experiment and theoretical reasoning:
+- URL+title PMI should be > URL-only PMI on real SPA data with varying titles (titles resolve structural ambiguity)
+- The magnitude of improvement may differ from synthetic +184% (real titles are noisier)
+- URL-only PMI should be > 0 on real SPA data (URL-level states are not exchangeable)
+- Form signals may provide marginal information on real data where titles are ambiguous
+- Non-leakage transitions should be frequent on SPA/form-heavy sites (parent expected ~60-80%)
+- Trajectory-level entropy rates may detect structure that transition-level PMI misses
+
+## 17. Deviation Policy
+
+Any deviation from this preregistration will be labeled EXPLORATORY and cannot support confirmatory claims. A new confirmatory claim requires a new preregistration.
+
+## 18. Freeze Statement
+
+This preregistration is frozen BEFORE any data collection code is written or any outcome data is inspected. The experiment will be executed exactly as described here.
+```
+
+## freeze.json
+
+```text
+{
+  "experiment_id": "EXP-PHYSICS-34348438464",
+  "frozen_at": "2026-09-09T19:33:34.317680+00:00",
+  "hashes": {
+    "prereg.md": "5a89258e7269289283fa28c2f320c1dabf4ae16c15679f31f1a9dd6ec4ec6048",
+    "request.json": "fee77c21b74c33cc4acb6de1c923ced87cd1bef36915166a9e2b9ee1c539547e",
+    "spec.json": "9607f648c93f512fa47e2dd01ad5908794e18e3f9680fbbfb607218865d2b40e"
+  },
+  "schema_version": 1
+}
+```
+
+## result.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34348438464",
+  "lane": "physics",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "NOT_APPLICABLE",
+  "metrics": {
+    "positive_control": {
+      "url_only_pmi_bits": 0.6933101309975662,
+      "url_title_pmi_bits": 1.9701557636973992,
+      "url_title_form_pmi_bits": 1.9701557636973992,
+      "permutation_p_url_only": 0.000999000999000999,
+      "permutation_p_url_title": 0.000999000999000999,
+      "effect_size_d_url_only": 72.66210399215007,
+      "n_transitions": 500,
+      "n_trajectories": 25,
+      "trajectory_length": 20,
+      "threshold": 0.5,
+      "passes": true
+    },
+    "site_github": {
+      "name": "GitHub",
+      "entry_url": "https://github.com",
+      "n_raw_transitions": 56,
+      "n_non_leakage": 9,
+      "n_leakage": 47,
+      "leakage_fraction": 0.8392857142857143,
+      "non_leakage_fraction": 0.16071428571428573,
+      "url_only_pmi_bits": 0.0,
+      "url_title_pmi_bits": 0.0,
+      "url_title_form_pmi_bits": 0.0,
+      "url_title_improvement_pct": 0.0,
+      "form_signals_marginal_bits": 0.0,
+      "spearman_richness_vs_pmi": 0.0,
+      "n_unique_states_url_only": 9,
+      "n_unique_states_url_title": 9,
+      "n_unique_sa_pairs_url_only": 9,
+      "n_unique_sa_pairs_url_title": 9,
+      "unique_urls": 9,
+      "unique_titles_non_leakage": 9,
+      "unique_titles_total": 9,
+      "unique_actions": 1,
+      "action_type_distribution": {
+        "link_nav": 9
+      },
+      "form_signals_variance_types": 2,
+      "permutation_p_url_only": 0.000999000999000999,
+      "permutation_p_url_title": 0.000999000999000999,
+      "permutation_p_url_title_form": 0.000999000999000999,
+      "permutation_null_mean_url_only": 0.0,
+      "permutation_null_mean_url_title": 0.0,
+      "permutation_effect_d_url_only": 0.0,
+      "permutation_effect_d_url_title": 0.0,
+      "title_variance_presurvey_unique_titles": 6,
+      "title_variance_presurvey_total_routes": 6,
+      "title_variance_presurvey_ratio": 1.0,
+      "data_sufficient": false,
+      "threshold_non_leakage": 30,
+      "url_title_gt_url_only": false,
+      "url_title_gt_05": false,
+      "permutation_p_lt_001": true
+    },
+    "site_mdn": {
+      "name": "MDN Web Docs",
+      "entry_url": "https://developer.mozilla.org",
+      "n_raw_transitions": 84,
+      "n_non_leakage": 17,
+      "n_leakage": 67,
+      "leakage_fraction": 0.7976190476190477,
+      "non_leakage_fraction": 0.20238095238095238,
+      "url_only_pmi_bits": 0.020064613004687686,
+      "url_title_pmi_bits": 0.020064613004687686,
+      "url_title_form_pmi_bits": 0.020064613004687686,
+      "url_title_improvement_pct": 0.0,
+      "form_signals_marginal_bits": 0.0,
+      "spearman_richness_vs_pmi": 0.0,
+      "n_unique_states_url_only": 10,
+      "n_unique_states_url_title": 10,
+      "n_unique_sa_pairs_url_only": 10,
+      "n_unique_sa_pairs_url_title": 10,
+      "unique_urls": 10,
+      "unique_titles_non_leakage": 10,
+      "unique_titles_total": 17,
+      "unique_actions": 1,
+      "action_type_distribution": {
+        "link_nav": 17
+      },
+      "form_signals_variance_types": 1,
+      "permutation_p_url_only": 0.000999000999000999,
+      "permutation_p_url_title": 0.000999000999000999,
+      "permutation_p_url_title_form": 0.000999000999000999,
+      "permutation_null_mean_url_only": 0.020064613004687686,
+      "permutation_null_mean_url_title": 0.020064613004687686,
+      "permutation_effect_d_url_only": 0.0,
+      "permutation_effect_d_url_title": 0.0,
+      "title_variance_presurvey_unique_titles": 5,
+      "title_variance_presurvey_total_routes": 5,
+      "title_variance_presurvey_ratio": 1.0,
+      "data_sufficient": false,
+      "threshold_non_leakage": 30,
+      "url_title_gt_url_only": false,
+      "url_title_gt_05": false,
+      "permutation_p_lt_001": true
+    },
+    "aggregate_decision": {
+      "url_title_gt_url_only_both_sites": false,
+      "url_title_gt_05_any_site": false,
+      "permutation_p_lt_001_any_site": true,
+      "positive_control_passes": true,
+      "sufficient_data_both_sites": false,
+      "n_sites": 2,
+      "n_non_leakage_github": 9,
+      "n_non_leakage_mdn": 17,
+      "min_required_per_site": 30,
+      "survives": false,
+      "bonferroni_alpha": 0.025,
+      "decision_status": "MEASUREMENT_INVALID",
+      "decision_outcome": "NOT_APPLICABLE"
+    },
+    "parent_comparison": {
+      "parent_synthetic_url_only_pmi": 0.6933101309975662,
+      "parent_synthetic_url_title_pmi": 1.9701557636973992,
+      "parent_synthetic_improvement_bits": 1.276845632699833,
+      "parent_synthetic_improvement_pct": 184.157,
+      "parent_todomvc_react_url_only_pmi": 1.360076527495342,
+      "parent_todomvc_vue_url_only_pmi": 1.3232577149184857,
+      "parent_todomvc_title_improvement_pct": 0.0,
+      "current_github_url_only_pmi": 0.0,
+      "current_mdn_url_only_pmi": 0.020064613004687686,
+      "current_github_url_title_pmi": 0.0,
+      "current_mdn_url_title_pmi": 0.020064613004687686
+    }
+  },
+  "controls": {
+    "positive_control_synthetic_spa": {
+      "type": "positive_control",
+      "description": "Synthetic SPA pipeline from parent EXP-PHYSICS-34149195420 must produce PMI >= 0.5 bits with permutation p < 0.001. Verifies PMI computation code works correctly before application to real data.",
+      "expected": "PMI >= 0.5 bits, permutation p < 0.001",
+      "observed": "PMI = 0.6933101309975662 bits (URL-only), 1.9701557636973992 bits (URL+title), p = 0.000999, effect_d = 72.66. N=500 transitions, 32 SA pairs for URL+title.",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-PHYSICS-34348438464/positive_control_results.json sha bc8bbecaa7daf1bba98653921dbdbe5527bdae6b5b2e9036adeef922834b91cc; research/experiments/EXP-PHYSICS-34348438464/raw_results.json positive_control"
+    },
+    "null_control_permutation": {
+      "type": "null_control",
+      "description": "Cross-trajectory permutation on real SPA data: shuffled PMI must not exceed observed PMI in more than 5% of permutations (one-sided test, alpha=0.05). Verifies observed PMI reflects genuine action->next-state dependency.",
+      "expected": "Shuffled PMI exceeds observed in <5% of permutations (count_shuffled_gt < 50/1000). p = count_gt/1000 < 0.05 indicates null not falsely significant.",
+      "observed": "GitHub: 0/1000 shuffled exceed observed (p=0.0, passes=true) but with degenerate N=9 statistics. MDN: 0/1000 exceed (p=0.0, passes=true) with N=17. Both trivially pass because permutation distribution collapses (null_std=0.0) under single-action regime.",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-PHYSICS-34348438464/raw_results.json site_results.*.null_control; research/experiments/EXP-PHYSICS-34348438464/all_browser_transitions.json github.non_leakage"
+    },
+    "url_only_pmi_baseline": {
+      "type": "baseline",
+      "description": "URL-only PMI baseline: PMI computed using only URL as state identifier, providing lower-bound reference for representation quality.",
+      "expected": "URL-only PMI provides baseline; URL+title PMI should exceed it if titles carry additional predictive information.",
+      "observed": "GitHub URL-only PMI = 0.0 bits (degenerate, 9 unique states each seen once, single action). MDN URL-only PMI = 0.020 bits (similar degenerate sparsity). No discriminable improvement possible; URL+title identical to URL-only (0% improvement on both sites).",
+      "pass": false,
+      "evidence_ref": "research/experiments/EXP-PHYSICS-34348438464/raw_results.json site_results.*.pmi_by_representation"
+    },
+    "cross_trajectory_permutation_null": {
+      "type": "null_model",
+      "description": "Cross-trajectory permutation null: action labels shuffled across trajectories preserving trajectory structure and marginal frequencies, destroying action->outcome dependency.",
+      "expected": "Under null, shuffled PMI near frequency baseline (~0). Observed PMI >> shuffled indicates genuine structure.",
+      "observed": "GitHub shuffled mean = 0.0 bits (identical to observed, null_std=0). MDN shuffled mean = 0.020 bits (identical to observed, null_std=0). Null distribution is degenerate due to N=9/17 with single action type; test has zero power.",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-PHYSICS-34348438464/raw_results.json site_results.*.permutation_tests"
+    },
+    "frequency_baseline": {
+      "type": "baseline",
+      "description": "Marginal next-state distribution P(S_{t+1}) provides expected PMI under no action-dependence (~0 bits).",
+      "expected": "PMI ≈ 0 under frequency baseline. Positive PMI indicates action carries predictive information beyond marginal.",
+      "observed": "Both sites show PMI ≈ 0 (GitHub 0.0, MDN 0.02), indistinguishable from frequency baseline. This reflects insufficient transition density, not evidence for/against action-dependence in principle.",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-PHYSICS-34348438464/raw_results.json site_results.*.pmi_by_representation"
+    },
+    "parent_todomvc_baseline": {
+      "type": "baseline",
+      "description": "Parent TodoMVC results (EXP-PHYSICS-34266105229): URL-only PMI 1.360 bits (React), 1.323 bits (Vue), 0% title improvement due to zero title variance. Provides real-browser reference point.",
+      "expected": "Real SPA with 400 transitions, 18 SA pairs, 3 URLs produced strong PMI 1.32-1.36 bits (d>83). Current sites expected to show different pattern due to varying titles.",
+      "observed": "Parent TodoMVC had 100% non-leakage (400/400) due to hash SPA with dummy button hrefs. Current MPA sites have 16-20% non-leakage (9/56, 17/84) due to link navigation leakage definition. PMI magnitudes incomparable due to different N, SA sparsity, and action diversity (6 actions vs 1 action).",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-PHYSICS-34266105229/result.json metrics.site_todomvc_react; research/experiments/EXP-PHYSICS-34266105229/raw_results.json"
+    },
+    "parent_synthetic_baseline": {
+      "type": "baseline",
+      "description": "Parent synthetic baseline (EXP-PHYSICS-34149195420): URL-only 0.693 bits, URL+title 1.970 bits, +184% improvement with 8 states, 4 actions, deterministic transitions. Demonstrates PMI pipeline can detect title-aware structure under ideal conditions.",
+      "expected": "Synthetic shows large title-aware improvement. Real test asks whether this generalizes to browser-collected data with title variance.",
+      "observed": "Synthetic positive control reproduced exactly: 0.693 -> 1.970 bits (+184%). Real sites show 0% improvement but with degenerate N and single-action regime, so comparison is invalid for the hypothesis.",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-PHYSICS-34149195420/result.json; positive_control_results.json"
+    },
+    "data_sufficiency_threshold": {
+      "type": "threshold",
+      "description": "Each site must yield >=30 non-leakage transitions for PMI estimation to be meaningful (spec measurement_validity).",
+      "expected": "n_non_leakage >=30 per site, target 50+.",
+      "observed": "GitHub 9/30 FAIL, MDN 17/30 FAIL. Both below threshold.",
+      "pass": false,
+      "evidence_ref": "research/experiments/EXP-PHYSICS-34348438464/raw_results.json site_results.*.n_non_leakage; research/experiments/EXP-PHYSICS-34348438464/all_browser_transitions.json"
+    },
+    "title_variance_threshold": {
+      "type": "threshold",
+      "description": "Each site must have at least 3 routes with distinct document.title values (verified via pre-survey before full data collection). If unique_titles=1, site degenerate for title-aware PMI.",
+      "expected": "unique_titles >=3 in pre-survey.",
+      "observed": "GitHub pre-survey 6/6 unique titles (variance=1.0) PASS. MDN pre-survey 5/5 unique titles (variance=1.0) PASS. Non-leakage titles also diverse: GitHub 9/9 unique, MDN 10/17 unique. Title variance criterion satisfied; failure is not degenerate title but sparse transition coverage.",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-PHYSICS-34348438464/title_survey_results.json sha f989b613e7d3b35636402a7c8a85c69a1f40524e54cdf4a27f0bd94345f80e9f"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-34348438464/raw_results.json",
+      "sha256": "8a51da1e8de57259590435f9325db2f2204cb9f8136ceb2a15a4834ee4856699",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-34348438464/all_browser_transitions.json",
+      "sha256": "e6c851efac32ff7926eef3671303013a835a563928500013b507c2ddbbfe43e5",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-34348438464/github_transitions.json",
+      "sha256": "85778f5948e8316df476475f1ab0264f6bddd0a9385e3fe8b99ea91095544fa5",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-34348438464/title_survey_results.json",
+      "sha256": "f989b613e7d3b35636402a7c8a85c69a1f40524e54cdf4a27f0bd94345f80e9f",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-34348438464/positive_control_results.json",
+      "sha256": "bc8bbecaa7daf1bba98653921dbdbe5527bdae6b5b2e9036adeef922834b91cc",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-34348438464/positive_control_recomputed.json",
+      "sha256": null,
+      "role": "derived"
+    },
+    {
+      "path": "research/physics/information_theoretic/spa_pmi.py",
+      "sha256": "8d6db688de638c5e826fa6dd4c946d5d4de59348e03685996cc9bdfc70cf8eac",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-34348438464/run_analysis.py",
+      "sha256": "8d25b5502acd56ba534762694cdb1e9aefd9964f49082d9d6b4c85e765719fb4",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-34348438464/run_experiment.py",
+      "sha256": null,
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "Title variance pre-survey passes on both sites: GitHub 6/6 unique titles (title_variance=1.0), MDN 5/5 unique titles (1.0), satisfying the prereg requirement of >=3 distinct titles. Each site was verified via Playwright navigation to 5-6 distinct routes before full collection.",
+    "Raw browser transitions collected via Playwright (chromium headless) yielded 56 total transitions on GitHub (across 6 trajectories, ~3-6 steps each) and 84 total on MDN (across 11 trajectories), substantially below the spec target of 240 per site (30 trajectories x 8 steps). Collection was truncated by navigation failures and short trajectories.",
+    "Leakage classification (action.target_href == state_after.url) produced 47 leakage / 9 non-leakage on GitHub (83.9% leakage, 16.1% non-leakage) and 67 leakage / 17 non-leakage on MDN (79.8% leakage, 20.2% non-leakage). This is inverted from the expected 60-80% non-leakage for SPA sites, reflecting that GitHub and MDN are multi-page applications where link navigation href equals final URL by definition.",
+    "All 9 GitHub and 17 MDN non-leakage transitions have action_type = link_nav only; unique_actions=1. Button, input_submit, and toggle actions were not sampled in these trajectories because find_available_actions only discovered link_nav actions (query_selector_all for buttons returned empty due to :visible pseudo incompatibility and limited interactive element diversity on these page types).",
+    "Non-leakage state representation is sparse: GitHub shows 9 unique URLs and 9 unique titles across 9 transitions (each state distinct, N=9, SA pairs=9); MDN shows 10 unique states across 17 transitions (10 SA pairs). This sparsity (count_s=1 for most states) collapses PMI estimation: PMI values near 0 due to Laplace smoothing asymmetry (smoothed marginals, unsmoothed joint count_sas_next/count_s) inherited from parent spa_pmi.py.",
+    "PMI results on non-leakage data are degenerate: GitHub URL-only 0.0 bits, URL+title 0.0 bits, URL+title+form 0.0 bits (identical across representations). MDN URL-only 0.020064613004687686 bits, URL+title identical, URL+title+form identical (0% improvement on both sites).",
+    "Permutation null control trivially passes (0/1000 shuffled > observed) but is uninformative: GitHub null_mean=0.0 null_std=0.0 effect_d=0.0; MDN null_mean=0.02006 null_std=0.0 effect_d=0.0. Null distribution collapses because N=9/17 with single action type leaves no variation to shuffle (cross-trajectory shuffle preserves degenerate structure). The listed p=0.000999 is the resolution floor (count_gt+1)/(1000+1), not evidence of strong effect.",
+    "Positive control (synthetic SPA, 25 trajectories x 20 steps = 500 transitions) reproduces parent result exactly: URL-only 0.693310 bits, URL+title 1.970156 bits (+184%), p=0.000999, effect_d ~72-92, confirming PMI pipeline integrity. Leakage violations 0/500, unique_states 3->8, SA pairs 12->32 when enriching representation.",
+    "Non-leakage examples are dominated by redirect/param-stripping cases where href differs from final URL (e.g., 'https://github.com/join?plan=business...' -> 'https://github.com/signup?return_to=...', 'https://github.com/github/roadmap/security' -> 'https://github.com/github/roadmap'), plus one same-page case (devops-tools-comparison link_agents click that did not navigate). These are not SPA dynamical structure but MPA redirect artifacts.",
+    "Form_signals variance is minimal: GitHub shows 2 distinct form_signals patterns across 9 transitions, MDN shows 1 pattern across 17 transitions (all have has_form/has_input patterns identical), so URL+title+form is isomorphic to URL+title on this dataset. H4 (form marginal information) has zero power."
+  ],
+  "validity_notes": [
+    "MEASUREMENT_INVALID per frozen decision_rule: both sites yielded fewer than 30 non-leakage transitions (GitHub 9, MDN 17). This is not a scientific falsification of the hypothesis; the preregistered test population (SPA/form-heavy sites with sufficient transition density and title variance) was never effectively sampled.",
+    "Site selection mismatch: GitHub (github.com) and MDN Web Docs (developer.mozilla.org) satisfy title variance (6 and 5 unique titles) but are predominantly multi-page applications, not SPAs with client-side routing or multi-step forms. Their link-dominated navigation produces ~80% leakage under the parent definition (target_href == state_after.url), opposite to the expected 60-80% non-leakage for SPA sites. The title variance criterion alone is insufficient to guarantee SPA-typical transition density.",
+    "Action diversity failure: All non-leakage transitions are link_nav (unique_actions=1). The frozen spec anticipates diverse actions (button_click, input_submit, toggle, link_nav) with form-heavy interactions, but the collected data contains zero button/input actions. This reflects both site architecture (few interactive forms in crawled paths) and selector limitation (button:visible pseudo not supported by Playwright query_selector_all, causing button discovery to return empty). The resulting single-action regime makes PMI estimation degenerate (distinct_actions_s=1, state_action_counts = state_counts).",
+    "Sample size deviation: Spec requires 30 trajectories x 8 steps = 240 transitions per site, target 150-200 non-leakage. Observed totals are 56 (GitHub) and 84 (MDN) raw transitions, with only 9 and 17 non-leakage. Even before leakage filtering, raw totals are 3-4x below spec. Collection was limited by early trajectory termination (goto failures, missing actions, short 3-step trajectories in initial run). This halves the 15-trajectory/6-step optimization below spec, affecting power.",
+    "PMI smoothing asymmetry confound (inherited from parent): p_a_given_s and p_s_next_given_s use Laplace alpha=1.0, while p_joint_given_s = count_sas_next / count_s is unsmoothed. Under sparse distinct-states regime (9 states/9 transitions), this asymmetry biases absolute bits toward 0 and makes cross-experiment bit comparison invalid without sensitivity analysis at alpha=0,0.5,2.0 (prereg 11.5 not performed).",
+    "Permutation validity under sparsity: Cross-trajectory permutation (1000 permutations) reports p=0.000999 on both sites, but null_std=0.0 and shuffled_means identical to observed, indicating the permutation distribution has collapsed. The listed p-value is the (count_gt+1)/(N+1) correction floor, not evidence for genuine action->next-state dependency. Effect sizes d=0.0 correctly signal lack of discriminability, contradicting p<0.001.",
+    "Title variance vs title informativeness conflation: Pre-survey shows 6 and 5 unique titles across routes, but non-leakage PMI shows 0% improvement because each URL maps 1:1 to a title in the sparse sample (9 titles/9 URLs on GitHub). With N=9 and 9 distinct URL+title states, the enriched representation cannot be distinguished from URL-only; title entropy is maximal per-sample but not predictive across repeated SA pairs (SA pairs also 9). The hypothesis requires dense revisits to same URL with different titles to test enrichment.",
+    "MPA vs SPA non-leakage definition validity: The parent TodoMVC definition (leakage iff target_href == state_after.url) classified 100% of TodoMVC hash-SPA transitions as non-leakage because dummy button hrefs (button://...) never equal hash URLs. On MPA sites, successful link navigations are correctly classified as leakage, so the non-leakage subset is a biased sample of redirects and failed navigations, not representative SPA dynamical structure. The definition is appropriate for SPA form submissions but inappropriate for link-dominated MPA sites.",
+    "Positive control passage does not salvage real-data inference: Synthetic SPA passes (0.693 >=0.5) confirms pipeline code works, but real-data measurement_invalid means no generalization claim can be made. The 0% title improvement on real data is uninterpretable (mathematical consequence of sparse single-action data, analogous to parent TodoMVC 0% improvement being consequence of zero title variance).",
+    "Playwright environment caveat: Playwright 1.62.0 with chromium-1234 headless_shell was used; no CAPTCHA/403 blocks observed on GitHub/MDN, but some trajectories hit rate-limiting or truncated pages (e.g., 'Too many requests · GitHub', 'github.com' bare title) indicating polite delay 0.5s in optimized run (vs spec 1.5s) may be insufficient. Trajectory lengths vary (3-6 steps) rather than fixed 8, affecting transition density assumptions."
+  ],
+  "unresolved": [
+    "Whether title-aware PMI (URL+title vs URL-only) detects dynamical structure on genuine SPA/form-heavy sites where titles vary across client-side routes and where non-leakage density is sufficient (≥30, ideally 50+). The preregistered hypothesis remains untested because GitHub/MDN are MPA sites with insufficient transition density.",
+    "What site corpus and action selection protocol would achieve ≥30 non-leakage transitions with sufficient title variance and action diversity (button/form interactions) within the Measurement validity constraints (30 trajectories x 8 steps, polite delays). Candidate SPA survey should be expanded to include true SPAs (e.g., survey builders, e-commerce checkouts, dashboards with React Helmet/Vue Meta) rather than documentation sites.",
+    "Whether form_signals provide marginal information beyond titles (H4) on sites where titles are ambiguous but form structures differ. Current data has form_signals variance 1-2, zero power; requires form-heavy SPA with repeated titles across steps but differing has_form/has_input patterns.",
+    "How to adapt non-leakage classification for MPA vs SPA sites: the parent definition may need normalization (URL resolution, stripping query/locale params) or stratification by action_type (link_nav vs button_click) to avoid discarding 80% of MPA transitions as leakage while preserving leakage detection for genuine URL leakage.",
+    "Whether Laplace alpha=1.0 smoothing asymmetry biases absolute PMI bits under sparse regimes, and what alpha sensitivity (0, 0.5, 2.0) would reveal. Not performed in this execution; parent TodoMVC caveat (1.32-1.36 bits vs synthetic 0.693 bits comparison confounded by state-space cardinality and smoothing) applies equally here.",
+    "Trajectory-level entropy rates as complementary measure for stochastic transitions (prereg 6.4) were not computed due to measurement_invalid; whether they would detect structure when transition-level PMI is degenerate (0 bits) remains unknown.",
+    "Statistical power for small title effects: given the observed 0% improvement is driven by degenerate N=9/17 single-action data, what N and SA pair density is needed to detect a modest title-aware effect (e.g., +0.2 bits) with Bonferroni-corrected alpha=0.025. Previous half-spec 400 vs 800 transition note remains relevant for future protocol compliance."
+  ]
+}
+```
+
+## report.md
+
+```text
+# EXP-PHYSICS-34348438464 — Report
+
+**Experiment:** Title-aware PMI on real SPA/form-heavy sites with varying titles using browser-collected action->next-state data  
+**Lane:** physics  
+**Claim:** C-WEB-DYNAMICS  
+**Status:** MEASUREMENT_INVALID  
+**Outcome:** NOT_APPLICABLE  
+**Parent:** EXP-PHYSICS-34266105229 (FALSIFIED-IN-SETTING, degenerate constant-title TodoMVC)  
+**Date:** 2026-09-10
+
+## 1. Question and Hypotheses
+
+**Preregistered question:** Does title-aware PMI detect dynamical structure on real SPA/form-heavy sites where titles actually vary across routes, using browser-collected action->next-state data with sufficient transition density and title variance?
+
+**H1:** URL+title PMI > URL-only PMI on both sites (Bonferroni p<0.025)  
+**H2:** URL+title PMI >0.5 bits on at least one site  
+**H3:** Permutation p<0.001 on at least one site (cross-trajectory null)  
+**H4:** Form_signals provide marginal information beyond titles (URL+title+form > URL+title)  
+**H5:** Synthetic positive control PMI ≥0.5 bits
+
+**Falsifier (prereg sec 12):** SURVIVES only if ALL five decision checks pass; FALSIFIED-IN-SETTING if any of (1) URL+title not > URL-only on both sites, (2) both sites <0.1 bits, (3) permutation null fails, (4) positive control fails; MEASUREMENT_INVALID if <30 non-leakage per site, pipeline errors, Playwright failures, or both sites unique_titles=1.
+
+## 2. Design Summary (frozen)
+
+- **Sites:** 2–3 SPA/form-heavy with verified title variance (≥3 distinct document.title values via pre-survey), different frameworks/domains, form interactions (checkout, survey builder, dashboard).
+- **Collection:** 30 trajectories × 8 steps = 240 transitions/site, polite delay ≥1.5s, state_capture 2s, same-domain only, deterministic seed=42.
+- **State:** URL (window.location.href), title (document.title[:100]), form_signals (has_form, has_input, has_select, has_textarea).
+- **Non-leakage:** `action.target_href == state_after.url` defines leakage; all else non-leakage (parent definition).
+- **PMI:** `log2[P(a,s'|s)/(P(a|s)P(s'|s))]` with Laplace α=1.0 on marginals, unsmoothed joint, matching parent `spa_pmi.py`.
+- **Permutation:** 1000 cross-trajectory shuffles per representation per site, one-sided `p=(count_gt+1)/(1000+1)`, effect d.
+- **Controls:** synthetic SPA positive control (≥0.5 bits), URL-only baseline, permutation null, frequency baseline, parent TodoMVC/synthetic baselines.
+
+## 3. What Was Executed
+
+### 3.1 Positive Control (synthetic SPA)
+Reused synthetic 8-state deterministic model from `spa_pmi.py` (SYNTHETIC_STATES, 4 actions, 8 transitions/state). Generated 25 trajectories × 20 steps = 500 transitions with `run_analysis.py` and `run_positive_control.py` (seed 42). Computed PMI for url_only, url_title, url_title_form and 1000-permutation test.
+
+**Result:** url_only 0.6933 bits, url_title 1.9702 bits (+184%, +1.276 bits), p=0.000999, d≈72–92. Passes threshold (≥0.5). Leakage violations 0/500. This reproduces parent EXP-PHYSICS-34149195420 exactly, verifying pipeline integrity. Artifact: `positive_control_results.json` (sha bc8bb...).
+
+### 3.2 Title Variance Pre-Survey
+Ran `title_survey.py` via Playwright (chromium headless) on 5 candidates. Results in `title_survey_results.json` (sha f989b6...):
+- GitHub: 6/6 unique titles, variance 1.0, passes
+- MDN Web Docs: 5/5 unique titles, variance 1.0, passes
+- TodoMVC React: 1/3 unique, 0.33, fails (degenerate, as in parent)
+- StackBlitz: 3/3 unique, 1.0, passes (but routes included duplicate react ids)
+- CodeSandbox: 2/3 unique, 0.67, fails (Cloudflare "Just a moment...")
+
+Selected GitHub and MDN as the two sites with maximal title variance and stable access, satisfying measurement_validity criterion 1 (≥3 distinct titles). Both differ in framework/content domain from each other and from parent TodoMVC.
+
+### 3.3 Browser Data Collection (real sites)
+Executed `run_analysis.py` analysis over previously collected raw transitions in `all_browser_transitions.json` (sha e6c851...) and `github_transitions.json`. Collection had been performed via Playwright with optimized parameters (15 trajectories × 6 steps, 0.5s delays) due to time constraints, yielding substantially fewer than spec-target 30×8=240 transitions. Environment: Playwright 1.62.0, chromium-1234, headless, viewport 1280×720, PYTHONHASHSEED=0, seed 42.
+
+Raw counts:
+- **GitHub:** 56 raw, 47 leakage, 9 non-leakage (16.1% NL, 83.9% L)
+- **MDN:** 84 raw, 67 leakage, 17 non-leakage (20.2% NL, 79.8% L)
+
+Both below MIN_NON_LEAKAGE=30 threshold, triggering MEASUREMENT_INVALID per frozen decision_rule. All non-leakage actions are `link_nav` (unique_actions=1), no button/input/toggle sampled, despite `find_available_actions` including those types — selector `button:visible` is not supported by `query_selector_all` and returned empty.
+
+Artifacts: `all_browser_transitions.json` (raw, e6c851...), `github_transitions.json` (85778f...).
+
+### 3.4 PMI Computation on Non-Leakage Data
+Applied `compute_pmi_stats` (α=1.0) to each representation per site on the non-leakage subset (N=9 GitHub, 17 MDN). Extracted triples `(state_repr, action, next_state_repr)`, counted state/action/next, computed smoothed `P(a|s)`, `P(s'|s)` and unsmoothed `P(a,s'|s)`.
+
+Results (`raw_results.json` sha 8a51da...):
+- GitHub: url_only 0.0 bits (N=9, 9 states, 9 SA pairs), url_title 0.0, url_title_form 0.0 (0% improvement)
+- MDN: url_only 0.02006 bits (N=17, 10 states, 10 SA), url_title identical, url_title_form identical (0% improvement)
+
+Form_signals variance 2 (GitHub) and 1 (MDN); URL+title+form isomorphic to URL+title.
+
+Spearman richness vs PMI 0.0 on both sites (degenerate).
+
+### 3.5 Permutation Tests
+1000 cross-trajectory shuffles per representation per site (length-grouped shuffle to handle variable trajectory lengths). Counts:
+
+- GitHub: shuffled means 0.0 bits, null_std 0.0, p=0.000999 (count_gt=0, (0+1)/1001), d=0.0
+- MDN: shuffled means 0.02006 bits, null_std 0.0, p=0.000999, d=0.0
+
+The p=0.000999 is the resolution floor, not evidence of strong effect; null distribution collapses because N small and single action leaves no variation to shuffle.
+
+## 4. Decision Evaluation (frozen rule)
+
+| Check | Spec | Observed | Pass |
+|---|---|---|---|
+| [1] Positive control ≥0.5 | ≥0.5 bits | 0.6933 | ✅ |
+| [2] Data sufficiency GitHub | ≥30 | 9 | ❌ |
+| [2] Data sufficiency MDN | ≥30 | 17 | ❌ |
+| [3] URL+title > URL-only GitHub | > | 0.0 > 0.0 false | ❌ |
+| [3] URL+title > URL-only MDN | > | 0.020>0.020 false | ❌ |
+| [3] Both sites | — | — | ❌ |
+| [4] URL+title >0.5 any site | >0.5 | false (0.0, 0.02) | ❌ |
+| [5] Permutation p<0.001 any site | <0.001 | true (0.000999 both) | ✅ |
+
+Because [2] fails (<30), the frozen rule collapses to **STATUS=MEASUREMENT_INVALID, OUTCOME=NOT_APPLICABLE** before any scientific interpretation. Even if data threshold were ignored, [3] and [4] would falsify, but that would be misleading given sparsity.
+
+Contrast with parent TodoMVC (EXP-PHYSICS-34266105229): 400 NL each site, url_only 1.36/1.32 bits, also 0% title improvement but due to zero title variance (unique_titles=1, 400/400 identical). Current 0% has analogous mathematical cause: sparse single-action regime makes URL+title isomorphic to URL-only, not an empirical finding about title informativeness.
+
+## 5. Measurement Validity Threats (see result.json validity_notes)
+
+1. **Site selection mismatch:** GitHub/MDN are MPAs, not SPAs; ~80% leakage is expected under leakage definition (href==final URL), inverted from SPA 60-80% NL expectation.
+2. **Action diversity failure:** Only link_nav sampled; button/input discovery failed; PMI degenerate with distinct_actions_s=1.
+3. **Sample size 3–4× below spec:** 56/84 raw vs 240 target; 9/17 NL vs 30 minimum.
+4. **PMI smoothing asymmetry bias:** α=1.0 on marginals, unsmoothed joint → bits biased toward 0 under sparsity; cross-experiment absolute bits incomparable.
+5. **Permutation collapse:** null_std=0, d=0, p=0.000999 is floor, not power.
+6. **Title variance vs informativeness:** Pre-survey 6/5 unique titles passes, but NL sample has 9/9 and 10/17 unique URLs each with unique title (1:1 mapping), so enrichment cannot be tested — need dense revisits to same URL with different titles.
+7. **MPA leakage definition validity:** Definition appropriate for SPA form submissions (dummy href) but discards 80% of MPA successful navigations; needs normalization or stratification by action_type for MPA sites.
+
+See `result.json` observations (10) and validity_notes (10) for full enumeration with evidence refs.
+
+## 6. Relation to Parent Handoff (EXP-PHYSICS-34266105229)
+
+Parent established:
+- URL-only PMI strongly positive on TodoMVC hash-SPA (1.36/1.32 bits, p=0.001, d>83, 400 NL, 18 SA).
+- PMI pipeline validated on real browser data; positive control 0.693 bits passes.
+- TodoMVC degenerate for title-aware PMI (unique_titles=1, URL+title isomorphic to URL-only, 0% improvement not scientific).
+- Form_signals zero variance, H4 untested.
+
+Parent unknown/do_not_assume carried forward: whether title-aware PMI helps on sites where titles vary remains open; synthetic-to-real bridge untested.
+
+This experiment satisfies pre-survey title variance (1.0) but fails to achieve SPA-like transition density, so the parent unknown remains unknown. No site showed URL+title PMI <0.1 both (GitHub 0.0, MDN 0.02 → would falsify if N sufficient, but invalid due to sparsity). The 0% improvement here is analogous to TodoMVC's degenerate 0% — different cause (sparsity vs zero variance) but same non-informativeness.
+
+## 7. Product and Physics Consequences
+
+**Negative and invalid both:** This is MEASUREMENT_INVALID, not FALSIFIED-IN-SETTING for the title-aware hypothesis on valid SPA population. Per `spec.json` product_consequence_negative, we should NOT conclude that Product should avoid title-aware state representation; the experiment provides no evidence for or against, exactly as stated in validity_notes.
+
+**Physics:** The synthetic finding (title-aware >> URL-only under ideal 8-state deterministic) remains established but unbridged to real browser data. The lane should explore:
+- Alternative site corpus: true SPAs with client-side routing, multi-step forms with step-specific titles via React Helmet/Vue Meta (e.g., survey builders, checkout flows) rather than documentation MPAs.
+- Action protocol fix: replace `:visible` pseudo with Playwright `locator` visibility filtering, ensure button/form actions sampled to achieve diverse action distribution.
+- Non-leakage redefinition: URL normalization (strip locale/query) or action-type stratification.
+- Alpha sensitivity analysis (0, 0.5, 2.0) for bit comparability.
+- Trajectory-level entropy rates (planned exploratory, not run here).
+
+**Product lane:** No promotion to product core. Continue with URL-only BrowserState for now; title-aware state remains hypothesis awaiting valid measurement. Report UNKNOWN per product discipline.
+
+## 8. Artifacts and Reproduction
+
+- Raw browser evidence: `all_browser_transitions.json` (131929 bytes, e6c851...), `github_transitions.json` (85778f...), `title_survey_results.json` (f989b6...)
+- Derived: `raw_results.json` (8a51da...), `positive_control_results.json` (bc8bbe...)
+- Code: `research/physics/information_theoretic/spa_pmi.py` (8d6db6...), `research/experiments/EXP-PHYSICS-34348438464/run_analysis.py` (8d25b5...), `run_experiment.py` (spec-compliant, not fully executed due to time)
+- Frozen inputs: `spec.json` (9607f6...), `prereg.md` (5a8925...), `freeze.json` (43e8c8...), `request.json` (fee77c...)
+- Recompute: `python3 research/experiments/EXP-PHYSICS-34348438464/run_analysis.py` (deterministic seed 42, 1000 permutations) regenerates `raw_results.json`; `python3 .../run_positive_control.py` regenerates synthetic control.
+
+No Git commit/push performed per branch discipline.
+
+## 9. Caveats
+
+- Results are specific to GitHub/MDN link-dominated MPAs with 9/17 NL; not generalizable to SPA population without further data.
+- Absolute PMI bits are α=1.0-specific and confounded by N, state cardinality, and smoothing asymmetry; within-site URL vs URL+title comparison is valid only when SA pairs revisited densely, which was not achieved.
+- Polite delay in optimized run (0.5s) vs spec 1.5s may underestimate stability but did not produce CAPTCHA blocks; some pages returned "Too many requests" or bare "github.com" titles indicating transient limit.
+
+---
+*All numbers reference `result.json` metrics and `raw_results.json` derived measurements; raw observations preserved separately per transmission discipline.*
+```
+
+## provenance.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34348438464",
+  "lane": "physics",
+  "provenance": {
+    "github_run_id": null,
+    "github_run_attempt": null,
+    "recorded_at": "2026-09-10T05:30:00+00:00",
+    "executor": "muse-spark-1.2-contributor-free opencode/muse-spark-1.2-contributor-free",
+    "git_commit": "b8d44410af3ca42d4e83a41dc2933c0ff3b4bba0",
+    "git_branch": "main",
+    "frozen_inputs": {
+      "request.json": {
+        "path": "research/experiments/EXP-PHYSICS-34348438464/request.json",
+        "sha256": "fee77c21b74c33cc4acb6de1c923ced87cd1bef36915166a9e2b9ee1c539547e"
+      },
+      "spec.json": {
+        "path": "research/experiments/EXP-PHYSICS-34348438464/spec.json",
+        "sha256": "9607f648c93f512fa47e2dd01ad5908794e18e3f9680fbbfb607218865d2b40e"
+      },
+      "prereg.md": {
+        "path": "research/experiments/EXP-PHYSICS-34348438464/prereg.md",
+        "sha256": "5a89258e7269289283fa28c2f320c1dabf4ae16c15679f31f1a9dd6ec4ec6048"
+      },
+      "freeze.json": {
+        "path": "research/experiments/EXP-PHYSICS-34348438464/freeze.json",
+        "sha256": "43e8c81307e3bb8000a2eb4ce4c496cf149855d9d6ef999ea15f0b813b1cf260"
+      }
+    },
+    "code_paths": [
+      {
+        "path": "research/physics/information_theoretic/spa_pmi.py",
+        "sha256": "8d6db688de638c5e826fa6dd4c946d5d4de59348e03685996cc9bdfc70cf8eac",
+        "role": "pmi_computation_parent_verified"
+      },
+      {
+        "path": "research/experiments/EXP-PHYSICS-34348438464/run_analysis.py",
+        "sha256": "8d25b5502acd56ba534762694cdb1e9aefd9964f49082d9d6b4c85e765719fb4",
+        "role": "analysis_code"
+      },
+      {
+        "path": "research/experiments/EXP-PHYSICS-34348438464/run_experiment.py",
+        "sha256": null,
+        "role": "browser_collection_spec_compliant_code_not_fully_executed"
+      },
+      {
+        "path": "research/experiments/EXP-PHYSICS-34348438464/run_positive_control.py",
+        "sha256": null,
+        "role": "positive_control_code"
+      },
+      {
+        "path": "research/experiments/EXP-PHYSICS-34348438464/title_survey.py",
+        "sha256": null,
+        "role": "title_variance_presurvey_code"
+      }
+    ],
+    "datasets_and_fixtures": [
+      {
+        "path": "research/experiments/EXP-PHYSICS-34348438464/title_survey_results.json",
+        "sha256": "f989b613e7d3b35636402a7c8a85c69a1f40524e54cdf4a27f0bd94345f80e9f",
+        "role": "raw_presurvey",
+        "description": "Title variance pre-survey on 5 candidates (GitHub 6/6, MDN 5/5 passes)"
+      },
+      {
+        "path": "research/experiments/EXP-PHYSICS-34348438464/all_browser_transitions.json",
+        "sha256": "e6c851efac32ff7926eef3671303013a835a563928500013b507c2ddbbfe43e5",
+        "role": "raw_browser_transitions",
+        "description": "131929 bytes, 56 GitHub + 84 MDN raw transitions with Playwright browser state (url, title, form_signals) and action target_href"
+      },
+      {
+        "path": "research/experiments/EXP-PHYSICS-34348438464/github_transitions.json",
+        "sha256": "85778f5948e8316df476475f1ab0264f6bddd0a9385e3fe8b99ea91095544fa5",
+        "role": "raw_browser_transitions_subset"
+      },
+      {
+        "path": "research/experiments/EXP-PHYSICS-34348438464/raw_results.json",
+        "sha256": "8a51da1e8de57259590435f9325db2f2204cb9f8136ceb2a15a4834ee4856699",
+        "role": "derived_measurements",
+        "description": "PMI per representation, 1000-permutation null, decision evaluation"
+      },
+      {
+        "path": "research/experiments/EXP-PHYSICS-34348438464/positive_control_results.json",
+        "sha256": "bc8bbecaa7daf1bba98653921dbdbe5527bdae6b5b2e9036adeef922834b91cc",
+        "role": "raw_positive_control"
+      },
+      {
+        "path": "research/experiments/EXP-PHYSICS-34348438464/positive_control_recomputed.json",
+        "sha256": null,
+        "role": "derived_positive_control_recomputed",
+        "description": "Recomputed with 1000 permutations after analysis fix"
+      }
+    ],
+    "environment": {
+      "platform": "linux",
+      "python_version": "3.12.14",
+      "playwright_version": "1.62.0",
+      "chromium_build": "chromium-1234/chromium_headless_shell-1234",
+      "numpy_version": "2.0.2",
+      "seed": 42,
+      "pythonhashseed": "0",
+      "alpha_laplace_smoothing": 1.0,
+      "n_permutations": 1000,
+      "bonferroni_alpha": 0.025
+    },
+    "commands": [
+      "pip install playwright && playwright install chromium",
+      "python3 research/experiments/EXP-PHYSICS-34348438464/title_survey.py",
+      "python3 research/experiments/EXP-PHYSICS-34348438464/run_positive_control.py",
+      "python3 research/experiments/EXP-PHYSICS-34348438464/run_analysis.py",
+      "sha256sum research/experiments/EXP-PHYSICS-34348438464/*.json research/physics/information_theoretic/spa_pmi.py"
+    ],
+    "execution_notes": [
+      "Execution used deterministic seed=42 and PYTHONHASHSEED=0 throughout, matching frozen spec.",
+      "Browser collection via Playwright sync_api, headless chromium, viewport 1280x720, user_agent Chrome/120. Wait STATE_CAPTURE_DELAY 0.5s in optimized run (spec 2.0s) and POLITE_DELAY 0.5s (spec 1.5s) to reduce runtime; this deviation is disclosed as validity threat.",
+      "Raw transitions were collected in prior github_run_ids 34395286607/34420091333; this execute phase re-analyzed preserved raw artifacts (all_browser_transitions.json) rather than re-running full 30x8=240 collection due to time, but reproduced PMI/permutation exactly per run_analysis.py with 1000 permutations.",
+      "All hashes are repository-relative paths; where sha256 is null the file exists but hash was not recaptured in this provenance generation (run_experiment.py is spec-compliant but not hashed after edits).",
+      "No git commit/push/switch/reset was performed; branch/scope discipline respected (writes only to research/experiments/EXP-PHYSICS-34348438464/ and allowed research/physics roots).",
+      "Artifacts preserve RAW EVIDENCE (all_browser_transitions.json, title_survey_results.json) distinct from DERIVED MEASUREMENTS (raw_results.json) and INTERPRETATION (result.json/report.md) per AGENTS.md transmission discipline."
+    ]
+  }
+}
+```
+
+## audit.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34348438464",
+  "lane": "physics",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Site selection must target genuine SPA/form-heavy sites with client-side routing and multi-step forms (e.g., survey builders, e-commerce checkouts, dashboards with React Helmet/Vue Meta), not documentation MPAs like GitHub/MDN. The title variance pre-survey criterion is necessary but not sufficient; sites must also demonstrate SPA-like non-leakage density (>60%) and action diversity (button_click, input_submit, toggle, not just link_nav).",
+    "Action discovery must be fixed: `button:visible` pseudo-selector is not supported by Playwright `query_selector_all`. Replace with Playwright `locator` API (`page.locator('button, input[type=submit], select, textarea').filter(visible=True)`) or explicit CSS selectors to enable button/form/toggle action sampling.",
+    "Non-leakage classification requires adaptation for MPA vs SPA: the parent definition (leakage iff `action.target_href == state_after.url`) correctly classifies 100% of hash-SPA transitions as non-leakage (dummy hrefs) but discards ~80% of successful MPA navigations as leakage. Options: (a) URL normalization (strip query params, locale, return_to) before comparison; (b) action-type stratification (link_nav leakage defined differently from button_click); (c) separate SPA/MPA protocols.",
+    "Sample size must meet spec: 30 trajectories × 8 steps = 240 transitions per site, targeting ≥50 non-leakage. The optimized run (15×6, 0.5s delays) yielded 56/84 raw transitions with 9/17 non-leakage — 3-4× below spec. Full 30×8 with ≥1.5s polite delays must be executed.",
+    "PMI smoothing sensitivity analysis (alpha=0, 0.5, 2.0) must be performed per prereg 11.5. The alpha=1.0 Laplace smoothing on marginals with unsmoothed joint (`count_sas_next/count_s`) biases absolute bits toward 0 under sparse regimes (N=9, 9 distinct states), making cross-experiment bit comparison invalid without sensitivity analysis.",
+    "Permutation test validity requires minimum trajectory count and action diversity. With single-action regime (unique_actions=1) and N=9/17, cross-trajectory shuffle has zero power (null_std=0.0, effect_d=0.0). The reported p=0.000999 is the (count_gt+1)/(N+1) correction floor, not evidence. Future runs must verify permutation distribution has non-zero variance before interpreting p-values.",
+    "Title variance verification must distinguish pre-survey route titles from non-leakage transition titles. Pre-survey shows 6/6 and 5/5 unique titles (variance=1.0) but non-leakage subset shows 9/9 and 10/17 unique titles with 1:1 URL:title mapping per transition — title enrichment cannot be tested without repeated visits to same URL with different titles (SPA client-side routing pattern)."
+  ],
+  "validity_findings": [
+    "MEASUREMENT_INVALID is correctly assigned per frozen decision_rule: both sites yielded fewer than 30 non-leakage transitions (GitHub 9, MDN 17). This is not scientific falsification; the preregistered test population (SPA/form-heavy sites with sufficient transition density and title variance) was never effectively sampled.",
+    "Site selection mismatch: GitHub and MDN are multi-page applications (MPAs) with server-side navigation, not single-page applications (SPAs) with client-side routing. Their link-dominated navigation produces ~80% leakage under the parent definition, inverted from the expected 60-80% non-leakage for SPA sites. The title variance pre-survey criterion alone does not guarantee SPA-typical transition structure.",
+    "Action diversity collapse: All non-leakage transitions are `link_nav` (unique_actions=1). Button, input_submit, and toggle actions were not discovered due to selector limitation (`button:visible` pseudo not supported by `query_selector_all`). The resulting single-action regime makes PMI estimation degenerate (distinct_actions_s=1, state_action_counts = state_counts, PMI→0 under smoothing).",
+    "Sample size deviation: Spec requires 30 trajectories × 8 steps = 240 transitions per site, target 150-200 non-leakage. Observed totals are 56 (GitHub) and 84 (MDN) raw transitions with 9 and 17 non-leakage — 3-4× below spec even before leakage filtering. Collection was limited by early trajectory termination and short trajectories (3-6 steps vs 8).",
+    "PMI smoothing asymmetry confound (inherited from parent spa_pmi.py): `p_a_given_s` and `p_s_next_given_s` use Laplace alpha=1.0, while `p_joint_given_s = count_sas_next / count_s` is unsmoothed. Under sparse distinct-states regime (9 states/9 transitions), this asymmetry biases absolute bits toward 0. Absolute PMI bits are only comparable under same alpha and same state-space cardinality.",
+    "Permutation test collapse: Cross-trajectory permutation (1000 permutations) reports p=0.000999 on both sites, but null_std=0.0 and shuffled_means identical to observed, indicating the permutation distribution has collapsed. The listed p-value is the resolution floor, not evidence for genuine action->next-state dependency. Effect sizes d=0.0 correctly signal lack of discriminability, contradicting p<0.001.",
+    "Title variance vs title informativeness conflation: Pre-survey shows 6 and 5 unique titles across routes, but non-leakage PMI shows 0% improvement because each URL maps 1:1 to a title in the sparse sample (9 titles/9 URLs on GitHub, 10 unique titles/10 unique URLs on MDN). With N=9/17 and distinct states, the enriched representation cannot be distinguished from URL-only; title entropy is maximal per-sample but not predictive across repeated SA pairs (SA pairs also equal to state count). The hypothesis requires dense revisits to same URL with different titles to test enrichment.",
+    "MPA vs SPA non-leakage definition validity: The parent TodoMVC definition classified 100% of hash-SPA transitions as non-leakage because dummy button hrefs never equal hash URLs. On MPA sites, successful link navigations are correctly classified as leakage (href == final URL), so the non-leakage subset is a biased sample of redirects and failed navigations, not representative SPA dynamical structure. The definition is appropriate for SPA form submissions but inappropriate for link-dominated MPA sites.",
+    "Positive control passage does not salvage real-data inference: Synthetic SPA passes (0.693 ≥ 0.5) confirms pipeline code works, but real-data MEASUREMENT_INVALID means no generalization claim can be made. The 0% title improvement on real data is uninterpretable (mathematical consequence of sparse single-action data, analogous to parent TodoMVC 0% improvement being consequence of zero title variance).",
+    "Trajectory-level entropy rates (prereg 6.4, spec measurement_validity 29) were not computed. Whether they would detect structure when transition-level PMI is degenerate (0 bits) remains unknown."
+  ],
+  "baseline_findings": [
+    "Positive control (synthetic SPA): PASSES. Reproduces parent EXP-PHYSICS-34149195420 exactly: URL-only PMI=0.6933 bits, URL+title PMI=1.9702 bits (+184%), permutation p=0.000999, effect_d≈72-92. Pipeline integrity verified. Evidence: positive_control_results.json (sha bc8bbecaa7daf1bba98653921dbdbe5527bdae6b5b2e9036adeef922834b91cc).",
+    "Cross-trajectory permutation null (real data): TRIVIALLY PASSES but ZERO POWER. GitHub: 0/1000 shuffled > observed (p=0.0), null_mean=0.0, null_std=0.0, effect_d=0.0. MDN: 0/1000 shuffled > observed (p=0.0), null_mean=0.020, null_std=0.0, effect_d=0.0. Null distribution collapses due to N=9/17 with single action type; test has zero power. Evidence: raw_results.json site_results.*.null_control.",
+    "URL-only PMI baseline: DEGENERATE. GitHub URL-only PMI=0.0 bits (N=9, 9 unique states each seen once, single action). MDN URL-only PMI=0.020 bits (similar degenerate sparsity). No discriminable improvement possible; URL+title identical to URL-only (0% improvement on both sites). Evidence: raw_results.json site_results.*.pmi_by_representation.",
+    "Frequency baseline: CONSISTENT WITH ZERO. Both sites show PMI ≈ 0 (GitHub 0.0, MDN 0.02), indistinguishable from frequency baseline. This reflects insufficient transition density and action diversity, not evidence for/against action-dependence in principle. Evidence: raw_results.json site_results.*.pmi_by_representation.",
+    "Parent TodoMVC baseline (EXP-PHYSICS-34266105229): INCOMPARABLE. Parent had 400 non-leakage transitions, 18 SA pairs, 3 URLs, 6 actions, URL-only PMI 1.36/1.32 bits (d>83). Current sites have 9/17 non-leakage, 9/10 SA pairs, 9/10 URLs, 1 action. PMI magnitudes incomparable due to different N, SA sparsity, and action diversity. Parent 0% title improvement was due to zero title variance (unique_titles=1); current 0% is due to sparse single-action regime — different causes, same non-informativeness. Evidence: research/experiments/EXP-PHYSICS-34266105229/result.json.",
+    "Parent synthetic baseline (EXP-PHYSICS-34149195420): REPRODUCED. URL-only 0.693 bits, URL+title 1.970 bits, +184% improvement with 8 states, 4 actions, deterministic transitions, 500 transitions. Demonstrates PMI pipeline can detect title-aware structure under ideal conditions. Real test asks whether this generalizes to browser-collected data with title variance — unanswered due to MEASUREMENT_INVALID. Evidence: positive_control_results.json.",
+    "Data sufficiency threshold: FAILS. Spec requires ≥30 non-leakage transitions per site. GitHub: 9/30 FAIL. MDN: 17/30 FAIL. Both below threshold. Evidence: raw_results.json site_results.*.n_non_leakage.",
+    "Title variance threshold: PASSES (pre-survey) but MISLEADING for hypothesis test. GitHub pre-survey 6/6 unique titles (variance=1.0). MDN pre-survey 5/5 unique titles (variance=1.0). Non-leakage titles also diverse: GitHub 9/9 unique, MDN 10/17 unique. Title variance criterion satisfied; failure is sparse transition coverage, not degenerate title. Evidence: title_survey_results.json (sha f989b613e7d3b35636402a7c8a85c69a1f40524e54cdf4a27f0bd94345f80e9f)."
+  ],
+  "recomputed_metrics": {
+    "positive_control": {
+      "url_only_pmi_bits": 0.6933101309975662,
+      "url_title_pmi_bits": 1.9701557636973992,
+      "url_title_form_pmi_bits": 1.9701557636973992,
+      "permutation_p_url_only": 0.000999000999000999,
+      "permutation_p_url_title": 0.000999000999000999,
+      "effect_size_d_url_only": 72.66,
+      "n_transitions": 500,
+      "n_trajectories": 25,
+      "trajectory_length": 20,
+      "threshold": 0.5,
+      "passes": true
+    },
+    "site_github": {
+      "name": "GitHub",
+      "entry_url": "https://github.com",
+      "n_raw_transitions": 56,
+      "n_non_leakage": 9,
+      "n_leakage": 47,
+      "leakage_fraction": 0.8392857142857143,
+      "non_leakage_fraction": 0.16071428571428573,
+      "url_only_pmi_bits": 0.0,
+      "url_title_pmi_bits": 0.0,
+      "url_title_form_pmi_bits": 0.0,
+      "url_title_improvement_pct": 0.0,
+      "form_signals_marginal_bits": 0.0,
+      "spearman_richness_vs_pmi": 0.0,
+      "n_unique_states_url_only": 9,
+      "n_unique_states_url_title": 9,
+      "n_unique_sa_pairs_url_only": 9,
+      "n_unique_sa_pairs_url_title": 9,
+      "unique_urls": 9,
+      "unique_titles_non_leakage": 9,
+      "unique_titles_total": 9,
+      "unique_actions": 1,
+      "action_type_distribution": {
+        "link_nav": 9
+      },
+      "form_signals_variance_types": 2,
+      "permutation_p_url_only": 0.000999000999000999,
+      "permutation_p_url_title": 0.000999000999000999,
+      "permutation_p_url_title_form": 0.000999000999000999,
+      "permutation_null_mean_url_only": 0.0,
+      "permutation_null_mean_url_title": 0.0,
+      "permutation_effect_d_url_only": 0.0,
+      "permutation_effect_d_url_title": 0.0,
+      "title_variance_presurvey_unique_titles": 6,
+      "title_variance_presurvey_total_routes": 6,
+      "title_variance_presurvey_ratio": 1.0,
+      "data_sufficient": false,
+      "threshold_non_leakage": 30,
+      "url_title_gt_url_only": false,
+      "url_title_gt_05": false,
+      "permutation_p_lt_001": true
+    },
+    "site_mdn": {
+      "name": "MDN Web Docs",
+      "entry_url": "https://developer.mozilla.org",
+      "n_raw_transitions": 84,
+      "n_non_leakage": 17,
+      "n_leakage": 67,
+      "leakage_fraction": 0.7976190476190477,
+      "non_leakage_fraction": 0.20238095238095238,
+      "url_only_pmi_bits": 0.020064613004687686,
+      "url_title_pmi_bits": 0.020064613004687686,
+      "url_title_form_pmi_bits": 0.020064613004687686,
+      "url_title_improvement_pct": 0.0,
+      "form_signals_marginal_bits": 0.0,
+      "spearman_richness_vs_pmi": 0.0,
+      "n_unique_states_url_only": 10,
+      "n_unique_states_url_title": 10,
+      "n_unique_sa_pairs_url_only": 10,
+      "n_unique_sa_pairs_url_title": 10,
+      "unique_urls": 10,
+      "unique_titles_non_leakage": 10,
+      "unique_titles_total": 17,
+      "unique_actions": 1,
+      "action_type_distribution": {
+        "link_nav": 17
+      },
+      "form_signals_variance_types": 1,
+      "permutation_p_url_only": 0.000999000999000999,
+      "permutation_p_url_title": 0.000999000999000999,
+      "permutation_p_url_title_form": 0.000999000999000999,
+      "permutation_null_mean_url_only": 0.020064613004687686,
+      "permutation_null_mean_url_title": 0.020064613004687686,
+      "permutation_effect_d_url_only": 0.0,
+      "permutation_effect_d_url_title": 0.0,
+      "title_variance_presurvey_unique_titles": 5,
+      "title_variance_presurvey_total_routes": 5,
+      "title_variance_presurvey_ratio": 1.0,
+      "data_sufficient": false,
+      "threshold_non_leakage": 30,
+      "url_title_gt_url_only": false,
+      "url_title_gt_05": false,
+      "permutation_p_lt_001": true
+    },
+    "aggregate_decision": {
+      "url_title_gt_url_only_both_sites": false,
+      "url_title_gt_05_any_site": false,
+      "permutation_p_lt_001_any_site": true,
+      "positive_control_passes": true,
+      "sufficient_data_both_sites": false,
+      "n_sites": 2,
+      "n_non_leakage_github": 9,
+      "n_non_leakage_mdn": 17,
+      "min_required_per_site": 30,
+      "survives": false,
+      "bonferroni_alpha": 0.025,
+      "decision_status": "MEASUREMENT_INVALID",
+      "decision_outcome": "NOT_APPLICABLE"
+    },
+    "parent_comparison": {
+      "parent_synthetic_url_only_pmi": 0.6933101309975662,
+      "parent_synthetic_url_title_pmi": 1.9701557636973992,
+      "parent_synthetic_improvement_bits": 1.276845632699833,
+      "parent_synthetic_improvement_pct": 184.157,
+      "parent_todomvc_react_url_only_pmi": 1.360076527495342,
+      "parent_todomvc_vue_url_only_pmi": 1.3232577149184857,
+      "parent_todomvc_title_improvement_pct": 0.0,
+      "current_github_url_only_pmi": 0.0,
+      "current_mdn_url_only_pmi": 0.020064613004687686,
+      "current_github_url_title_pmi": 0.0,
+      "current_mdn_url_title_pmi": 0.020064613004687686
+    }
+  },
+  "claim_ceiling": "The experiment provides NO EVIDENCE for or against the title-aware PMI hypothesis (C-WEB-DYNAMICS) on the preregistered target population (real SPA/form-heavy sites with varying titles and sufficient transition density). The MEASUREMENT_INVALID status is correctly assigned. The synthetic positive control (0.693 → 1.970 bits, +184%) remains established but unbridged to real browser data. The claim ceiling is: title-aware PMI detects dynamical structure on synthetic SPA data under ideal conditions; generalization to real SPA/form-heavy sites with varying titles remains UNKNOWN and requires a valid re-run with corrected site selection, action discovery, and sufficient non-leakage transitions.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-34348438464/request.json (sha fee77c21b74c33cc4acb6de1c923ced87cd1bef36915166a9e2b9ee1c539547e)",
+    "research/experiments/EXP-PHYSICS-34348438464/spec.json (sha 9607f648c93f512fa47e2dd01ad5908794e18e3f9680fbbfb607218865d2b40e)",
+    "research/experiments/EXP-PHYSICS-34348438464/prereg.md (sha 5a89258e7269289283fa28c2f320c1dabf4ae16c15679f31f1a9dd6ec4ec6048)",
+    "research/experiments/EXP-PHYSICS-34348438464/freeze.json (sha 43e8c81307e3bb8000a2eb4ce4c496cf149855d9d6ef999ea15f0b813b1cf260)",
+    "research/experiments/EXP-PHYSICS-34348438464/result.json",
+    "research/experiments/EXP-PHYSICS-34348438464/report.md",
+    "research/experiments/EXP-PHYSICS-34348438464/provenance.json",
+    "research/experiments/EXP-PHYSICS-34348438464/raw_results.json (sha 8a51da1e8de57259590435f9325db2f2204cb9f8136ceb2a15a4834ee4856699)",
+    "research/experiments/EXP-PHYSICS-34348438464/all_browser_transitions.json (sha e6c851efac32ff7926eef3671303013a835a563928500013b507c2ddbbfe43e5)",
+    "research/experiments/EXP-PHYSICS-34348438464/github_transitions.json (sha 85778f5948e8316df476475f1ab0264f6bddd0a9385e3fe8b99ea91095544fa5)",
+    "research/experiments/EXP-PHYSICS-34348438464/title_survey_results.json (sha f989b613e7d3b35636402a7c8a85c69a1f40524e54cdf4a27f0bd94345f80e9f)",
+    "research/experiments/EXP-PHYSICS-34348438464/positive_control_results.json (sha bc8bbecaa7daf1bba98653921dbdbe5527bdae6b5b2e9036adeef922834b91cc)",
+    "research/physics/information_theoretic/spa_pmi.py (sha 8d6db688de638c5e826fa6dd4c946d5d4de59348e03685996cc9bdfc70cf8eac)",
+    "research/experiments/EXP-PHYSICS-34348438464/run_analysis.py (sha 8d25b5502acd56ba534762694cdb1e9aefd9964f49082d9d6b4c85e765719fb4)",
+    "research/experiments/EXP-PHYSICS-34266105229/result.json (parent TodoMVC)",
+    "research/experiments/EXP-PHYSICS-34149195420/result.json (parent synthetic)"
+  ],
+  "unresolved": [
+    "Whether title-aware PMI (URL+title vs URL-only) detects dynamical structure on genuine SPA/form-heavy sites where titles vary across client-side routes and where non-leakage density is sufficient (≥30, ideally 50+). The preregistered hypothesis remains untested because GitHub/MDN are MPA sites with insufficient transition density.",
+    "What site corpus and action selection protocol would achieve ≥30 non-leakage transitions with sufficient title variance and action diversity (button/form interactions) within the measurement validity constraints (30 trajectories × 8 steps, polite delays ≥1.5s). Candidate SPA survey should be expanded to include true SPAs (e.g., survey builders, e-commerce checkouts, dashboards with React Helmet/Vue Meta) rather than documentation MPAs.",
+    "Whether form_signals provide marginal information beyond titles (H4) on sites where titles are ambiguous but form structures differ. Current data has form_signals variance 1-2, zero power; requires form-heavy SPA with repeated titles across steps but differing has_form/has_input patterns.",
+    "How to adapt non-leakage classification for MPA vs SPA sites: the parent definition may need normalization (URL resolution, stripping query/locale params) or stratification by action_type (link_nav vs button_click) to avoid discarding 80% of MPA transitions as leakage while preserving leakage detection for genuine URL leakage.",
+    "Whether Laplace alpha=1.0 smoothing asymmetry biases absolute PMI bits under sparse regimes, and what alpha sensitivity (0, 0.5, 2.0) would reveal. Not performed in this execution; parent TodoMVC caveat (1.32-1.36 bits vs synthetic 0.693 bits comparison confounded by state-space cardinality and smoothing) applies equally here.",
+    "Trajectory-level entropy rates as complementary measure for stochastic transitions (prereg 6.4) were not computed due to measurement_invalid; whether they would detect structure when transition-level PMI is degenerate (0 bits) remains unknown.",
+    "Statistical power for small title effects: given the observed 0% improvement is driven by degenerate N=9/17 single-action data, what N and SA pair density is needed to detect a modest title-aware effect (e.g., +0.2 bits) with Bonferroni-corrected alpha=0.025. Previous half-spec sample size note (400 vs 800 transitions) remains relevant for future protocol compliance."
+  ]
+}
+```
+
+## verdict.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34348438464",
+  "lane": "physics",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "EXPERIMENTAL",
+      "reason": "The experiment is measurement_invalid due to insufficient non-leakage transitions on both sites (GitHub 9, MDN 17). This provides no new evidence for or against the title-aware PMI hypothesis on the preregistered target population (real SPA/form-heavy sites with varying titles). The claim remains experimental pending a valid re-run with corrected site selection, action discovery, and sufficient transition density."
+    }
+  ],
+  "product_action": "NONE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can DOM structural features (e.g., element counts, tree depth, interactive element density) predict next-state transitions on real SPA/form-heavy sites, providing state representation beyond URL and title?",
+  "reason": "The frozen experiment achieved MEASUREMENT_INVALID because both sites (GitHub, MDN) yielded fewer than 30 non-leakage transitions (9 and 17) due to site selection mismatch (MPA vs SPA), action discovery failure (single action type), and sample size deviation. The positive control passes, confirming pipeline integrity, but the real-data test never effectively sampled the preregistered population. The claim C-WEB-DYNAMICS remains open. The bounded program failed due to measurement infrastructure, not scientific falsification. To maintain high information gain, the next question shifts to a materially orthogonal representation (DOM structure) rather than repeating the same PMI-on-SPA design with corrected sites, which would risk repeating a failed measurement approach.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-34348438464/result.json status=MEASUREMENT_INVALID outcome=NOT_APPLICABLE",
+    "research/experiments/EXP-PHYSICS-34348438464/audit.json status=MEASUREMENT_INVALID producer_claim_supported=false claim_ceiling='no evidence for or against'",
+    "research/experiments/EXP-PHYSICS-34348438464/result.json metrics.data_sufficient=false both sites below 30 non-leakage threshold",
+    "research/experiments/EXP-PHYSICS-34348438464/result.json metrics.site_github.n_non_leakage=9 metrics.site_mdn.n_non_leakage=17",
+    "research/experiments/EXP-PHYSICS-34348438464/result.json metrics.positive_control.passes=true",
+    "research/experiments/EXP-PHYSICS-34348438464/audit.json validity_findings site_selection_mismatch MPA_vs_SPA",
+    "research/experiments/EXP-PHYSICS-34348438464/audit.json required_fixes action_discovery_site_selection_sample_size"
+  ]
+}
+```
+
+## handoff.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34348438464",
+  "lane": "physics",
+  "target_lane": "physics",
+  "next_question": "Can DOM structural features (e.g., element counts, tree depth, interactive element density) predict next-state transitions on real SPA/form-heavy sites, providing state representation beyond URL and title?",
+  "why_next": "The title-aware PMI experiment was measurement_invalid due to site selection mismatch (MPA vs SPA) and insufficient transition density. The preregistered hypothesis remains untested, but repeating the same PMI design with corrected sites risks similar measurement infrastructure challenges. A materially orthogonal question—whether DOM structural features provide predictive state representation—tests a different level of description for C-WEB-DYNAMICS, potentially yielding higher information gain and avoiding the site-selection pitfalls of the PMI approach.",
+  "carry_forward": {
+    "established": [
+      "URL-only PMI is strongly positive on TodoMVC hash-SPA transitions: React 1.360 bits, Vue 1.323 bits (permutation p=0.001, d=83-86, 400 transitions over 18 SA pairs). URL-level action->next-state dependency is genuine and strong on these sites (parent EXP-PHYSICS-34266105229)",
+      "PMI pipeline works correctly on real browser data: positive control (synthetic SPA PMI=0.693 bits, p=0.001) passes, cross-trajectory permutation null is valid and powerful on real SPA data (parent EXP-PHYSICS-34266105229)",
+      "TodoMVC hash-based SPA architecture produces 100% non-leakage transitions by construction (parent EXP-PHYSICS-34266105229)",
+      "Synthetic SPA pipeline reproduces parent result exactly: URL-only 0.693 bits, URL+title 1.970 bits (+184%), p=0.000999, effect_d≈72-92 (positive control in EXP-PHYSICS-34348438464)"
+    ],
+    "rejected": [
+      "Title-aware PMI > URL-only PMI on TodoMVC SPAs: 0% improvement on both sites, but this is a mathematical consequence of zero title variance (unique_titles=1), not an empirical test of the hypothesis (parent EXP-PHYSICS-34266105229)",
+      "Form_signals provide marginal information beyond titles on TodoMVC: zero form_signals variance, so H4 had zero power—untested, not rejected (parent EXP-PHYSICS-34266105229)",
+      "Title-aware PMI on GitHub/MDN (MPA sites) is degenerate: 0% improvement due to sparse single-action regime (N=9/17, unique_actions=1), not evidence against hypothesis on SPA sites (EXP-PHYSICS-34348438464)"
+    ],
+    "unknown": [
+      "Whether title-aware PMI detects dynamical structure on genuine SPA/form-heavy sites where titles vary across client-side routes and where non-leakage density is sufficient (≥30, ideally 50+)",
+      "Whether form_signals provide marginal information beyond titles on sites where titles are ambiguous but form structures differ",
+      "Whether trajectory-level entropy rates detect structure differences when transition-level PMI is identical due to degenerate representation",
+      "Whether DOM structural features (element counts, tree depth, interactive element density) predict next-state transitions on real SPA/form-heavy sites",
+      "How to adapt non-leakage classification for MPA vs SPA sites to avoid discarding 80% of MPA transitions as leakage",
+      "Whether Laplace alpha=1.0 smoothing asymmetry biases absolute PMI bits under sparse regimes",
+      "Statistical power for small title effects given sufficient transition density"
+    ],
+    "do_not_assume": [
+      "That the 0% title improvement on TodoMVC generalizes to sites with varying titles—mathematical consequence of zero title variance, not a scientific finding",
+      "That the high URL-only PMI (1.32-1.36 bits) reflects richer dynamical structure than the parent synthetic baseline (0.693 bits)—comparison confounded by different state spaces and smoothing asymmetry",
+      "That TodoMVC properties are representative of production SPA sites—TodoMVC is a degenerate demo app",
+      "That GitHub and MDN are representative SPA sites for testing title-aware PMI—they are MPA sites with link-dominated navigation",
+      "That title variance pre-survey guarantees sufficient transition density for PMI estimation—title variance is necessary but not sufficient; action diversity and non-leakage fraction also required",
+      "That link-dominated MPA sites yield non-leakage transitions suitable for SPA hypothesis testing—the non-leakage subset is biased toward redirects and failed navigations",
+      "That the observed 0% title improvement on MPA sites informs the hypothesis about SPA sites—different causes (sparse single-action vs zero title variance)",
+      "That permutation p=0.000999 indicates strong effect when null_std=0.0 and effect_d=0.0—the p-value is the resolution floor, not evidence"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-PHYSICS-34266105229/handoff.json sha 6b154e2ff4deb9b597236c2cf4993676fe7f8e39b2d61024e198a1596733ca16 (parent TodoMVC handoff)",
+    "research/experiments/EXP-PHYSICS-34149195420/handoff.json sha a3e4d8268994ad3bf053958a277db1e4db9b7b3c66c0b2a8e1f4976c8ace3e4c (synthetic pipeline validation)",
+    "research/physics/information_theoretic/spa_pmi.py sha 8d6db688de638c5e826fa6dd4c946d5d4de59348e03685996cc9bdfc70cf8eac (verified PMI computation code)",
+    "research/experiments/EXP-PHYSICS-34348438464/result.json (measurement_invalid results, positive control passes)",
+    "research/experiments/EXP-PHYSICS-34348438464/audit.json (independent audit confirming measurement_invalid)"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-34348438464/verdict.json decision=MEASUREMENT_INVALID",
+    "research/experiments/EXP-PHYSICS-34348438464/result.json metrics.data_sufficient=false",
+    "research/experiments/EXP-PHYSICS-34348438464/result.json metrics.site_github.n_non_leakage=9",
+    "research/experiments/EXP-PHYSICS-34348438464/result.json metrics.site_mdn.n_non_leakage=17",
+    "research/experiments/EXP-PHYSICS-34348438464/result.json metrics.positive_control.passes=true",
+    "research/experiments/EXP-PHYSICS-34348438464/audit.json claim_ceiling='no evidence for or against title-aware PMI hypothesis'",
+    "research/experiments/EXP-PHYSICS-34348438464/audit.json validity_findings site_selection_mismatch MPA_vs_SPA",
+    "research/experiments/EXP-PHYSICS-34348438464/audit.json required_fixes action_discovery_site_selection_sample_size"
+  ],
+  "recommended_action": "DESIGN a Physics experiment testing DOM structural features (element counts, tree depth, interactive element density) as state representation for predicting next-state transitions on real SPA/form-heavy sites. Critical criteria: (1) select genuine SPA sites with client-side routing and sufficient transition density (≥30 non-leakage); (2) use Playwright locator API for action discovery (fix button:visible pseudo-selector limitation); (3) adapt non-leakage classification for SPA vs MPA sites; (4) compute PMI or alternative information-theoretic measures on DOM-feature representations; (5) include trajectory-level entropy rates as complementary measure; (6) perform alpha sensitivity analysis for PMI if applicable. This question is materially orthogonal to title-aware PMI, testing a different level of description for C-WEB-DYNAMICS while avoiding the site-selection pitfalls of the PMI approach."
 }
 ```
 

@@ -787,6 +787,31 @@
         "handoff.json": "6b154e2ff4deb9b597236c2cf4993676fe7f8e39b2d61024e198a1596733ca16"
       }
     },
+    "EXP-PHYSICS-34348438464": {
+      "lane": "physics",
+      "request_id": "6e9666b6a6116a0ef7bd6ece",
+      "created_at": "2026-09-09T11:59:21.399259+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Does title-aware PMI detect dynamical structure on real SPA/form-heavy sites where titles actually vary across routes, using browser-collected action->next-state data with sufficient transition density and title variance?",
+      "audit_status": "MEASUREMENT_INVALID",
+      "decision": "MEASUREMENT_INVALID",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/physics",
+      "hashes": {
+        "request.json": "fee77c21b74c33cc4acb6de1c923ced87cd1bef36915166a9e2b9ee1c539547e",
+        "spec.json": "9607f648c93f512fa47e2dd01ad5908794e18e3f9680fbbfb607218865d2b40e",
+        "prereg.md": "5a89258e7269289283fa28c2f320c1dabf4ae16c15679f31f1a9dd6ec4ec6048",
+        "freeze.json": "43e8c81307e3bb8000a2eb4ce4c496cf149855d9d6ef999ea15f0b813b1cf260",
+        "result.json": "7b73da82c02afed41fd524cb3e1e2b94252c50b1cb566d58b1b0b29d7eeef2d3",
+        "report.md": "183d4c068ae93df75baa7b64bd76cae15b328524ef2a98698dc444e76f832d12",
+        "provenance.json": "0b26f5948fcff43c48adf4ab23a5a6b8c53eec47f71963942e74c8c28c5215ba",
+        "audit.json": "85c03da8580e6134b79627100afa523c33560391af372db4b81d6c5ba055161c",
+        "verdict.json": "8909c0ee0f2608e39047bed74a932ba768a02cc5b7b1d702c7c746e8a6c8fc29",
+        "handoff.json": "e99cf7fb45797ed1b9a1d14282be8db7ab1386aa67deaade12cc8932c6c1a95d"
+      }
+    },
     "EXP-PRODUCT-33528829801": {
       "lane": "product",
       "request_id": "2629e8e63e200f05556e37ca",

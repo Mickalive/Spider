@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34348438464",
+  "lane": "physics",
+  "target_lane": "physics",
+  "next_question": "Can DOM structural features (e.g., element counts, tree depth, interactive element density) predict next-state transitions on real SPA/form-heavy sites, providing state representation beyond URL and title?",
+  "why_next": "The title-aware PMI experiment was measurement_invalid due to site selection mismatch (MPA vs SPA) and insufficient transition density. The preregistered hypothesis remains untested, but repeating the same PMI design with corrected sites risks similar measurement infrastructure challenges. A materially orthogonal question—whether DOM structural features provide predictive state representation—tests a different level of description for C-WEB-DYNAMICS, potentially yielding higher information gain and avoiding the site-selection pitfalls of the PMI approach.",
+  "carry_forward": {
+    "established": [
+      "URL-only PMI is strongly positive on TodoMVC hash-SPA transitions: React 1.360 bits, Vue 1.323 bits (permutation p=0.001, d=83-86, 400 transitions over 18 SA pairs). URL-level action->next-state dependency is genuine and strong on these sites (parent EXP-PHYSICS-34266105229)",
+      "PMI pipeline works correctly on real browser data: positive control (synthetic SPA PMI=0.693 bits, p=0.001) passes, cross-trajectory permutation null is valid and powerful on real SPA data (parent EXP-PHYSICS-34266105229)",
+      "TodoMVC hash-based SPA architecture produces 100% non-leakage transitions by construction (parent EXP-PHYSICS-34266105229)",
+      "Synthetic SPA pipeline reproduces parent result exactly: URL-only 0.693 bits, URL+title 1.970 bits (+184%), p=0.000999, effect_d≈72-92 (positive control in EXP-PHYSICS-34348438464)"
+    ],
+    "rejected": [
+      "Title-aware PMI > URL-only PMI on TodoMVC SPAs: 0% improvement on both sites, but this is a mathematical consequence of zero title variance (unique_titles=1), not an empirical test of the hypothesis (parent EXP-PHYSICS-34266105229)",
+      "Form_signals provide marginal information beyond titles on TodoMVC: zero form_signals variance, so H4 had zero power—untested, not rejected (parent EXP-PHYSICS-34266105229)",
+      "Title-aware PMI on GitHub/MDN (MPA sites) is degenerate: 0% improvement due to sparse single-action regime (N=9/17, unique_actions=1), not evidence against hypothesis on SPA sites (EXP-PHYSICS-34348438464)"
+    ],
+    "unknown": [
+      "Whether title-aware PMI detects dynamical structure on genuine SPA/form-heavy sites where titles vary across client-side routes and where non-leakage density is sufficient (≥30, ideally 50+)",
+      "Whether form_signals provide marginal information beyond titles on sites where titles are ambiguous but form structures differ",
+      "Whether trajectory-level entropy rates detect structure differences when transition-level PMI is identical due to degenerate representation",
+      "Whether DOM structural features (element counts, tree depth, interactive element density) predict next-state transitions on real SPA/form-heavy sites",
+      "How to adapt non-leakage classification for MPA vs SPA sites to avoid discarding 80% of MPA transitions as leakage",
+      "Whether Laplace alpha=1.0 smoothing asymmetry biases absolute PMI bits under sparse regimes",
+      "Statistical power for small title effects given sufficient transition density"
+    ],
+    "do_not_assume": [
+      "That the 0% title improvement on TodoMVC generalizes to sites with varying titles—mathematical consequence of zero title variance, not a scientific finding",
+      "That the high URL-only PMI (1.32-1.36 bits) reflects richer dynamical structure than the parent synthetic baseline (0.693 bits)—comparison confounded by different state spaces and smoothing asymmetry",
+      "That TodoMVC properties are representative of production SPA sites—TodoMVC is a degenerate demo app",
+      "That GitHub and MDN are representative SPA sites for testing title-aware PMI—they are MPA sites with link-dominated navigation",
+      "That title variance pre-survey guarantees sufficient transition density for PMI estimation—title variance is necessary but not sufficient; action diversity and non-leakage fraction also required",
+      "That link-dominated MPA sites yield non-leakage transitions suitable for SPA hypothesis testing—the non-leakage subset is biased toward redirects and failed navigations",
+      "That the observed 0% title improvement on MPA sites informs the hypothesis about SPA sites—different causes (sparse single-action vs zero title variance)",
+      "That permutation p=0.000999 indicates strong effect when null_std=0.0 and effect_d=0.0—the p-value is the resolution floor, not evidence"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-PHYSICS-34266105229/handoff.json sha 6b154e2ff4deb9b597236c2cf4993676fe7f8e39b2d61024e198a1596733ca16 (parent TodoMVC handoff)",
+    "research/experiments/EXP-PHYSICS-34149195420/handoff.json sha a3e4d8268994ad3bf053958a277db1e4db9b7b3c66c0b2a8e1f4976c8ace3e4c (synthetic pipeline validation)",
+    "research/physics/information_theoretic/spa_pmi.py sha 8d6db688de638c5e826fa6dd4c946d5d4de59348e03685996cc9bdfc70cf8eac (verified PMI computation code)",
+    "research/experiments/EXP-PHYSICS-34348438464/result.json (measurement_invalid results, positive control passes)",
+    "research/experiments/EXP-PHYSICS-34348438464/audit.json (independent audit confirming measurement_invalid)"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-34348438464/verdict.json decision=MEASUREMENT_INVALID",
+    "research/experiments/EXP-PHYSICS-34348438464/result.json metrics.data_sufficient=false",
+    "research/experiments/EXP-PHYSICS-34348438464/result.json metrics.site_github.n_non_leakage=9",
+    "research/experiments/EXP-PHYSICS-34348438464/result.json metrics.site_mdn.n_non_leakage=17",
+    "research/experiments/EXP-PHYSICS-34348438464/result.json metrics.positive_control.passes=true",
+    "research/experiments/EXP-PHYSICS-34348438464/audit.json claim_ceiling='no evidence for or against title-aware PMI hypothesis'",
+    "research/experiments/EXP-PHYSICS-34348438464/audit.json validity_findings site_selection_mismatch MPA_vs_SPA",
+    "research/experiments/EXP-PHYSICS-34348438464/audit.json required_fixes action_discovery_site_selection_sample_size"
+  ],
+  "recommended_action": "DESIGN a Physics experiment testing DOM structural features (element counts, tree depth, interactive element density) as state representation for predicting next-state transitions on real SPA/form-heavy sites. Critical criteria: (1) select genuine SPA sites with client-side routing and sufficient transition density (≥30 non-leakage); (2) use Playwright locator API for action discovery (fix button:visible pseudo-selector limitation); (3) adapt non-leakage classification for SPA vs MPA sites; (4) compute PMI or alternative information-theoretic measures on DOM-feature representations; (5) include trajectory-level entropy rates as complementary measure; (6) perform alpha sensitivity analysis for PMI if applicable. This question is materially orthogonal to title-aware PMI, testing a different level of description for C-WEB-DYNAMICS while avoiding the site-selection pitfalls of the PMI approach."
+}

@@ -113,6 +113,14 @@
         "claim_id": "C-WEB-DYNAMICS",
         "status": "EXPERIMENTAL",
         "reason": "The experiment is an uninformative (degenerate) test of title-aware PMI on real SPA sites: both TodoMVC sites have constant document.title (unique_titles=1), making URL+title isomorphic to URL-only (0% improvement forced by zero title variance). The preregistered hypothesis about titles noisy/ambiguous on form-heavy SPAs was never tested because the selected sites are not form-heavy (single input.new-todo, no multi-step flows) and have no title variation. URL-only PMI is strongly positive (1.32-1.36 bits, permutation p=0.001, d>83), confirming action->next-state dynamical structure at URL level \u2014 consistent with but not caused by this experiment. The claim ceiling is bounded to: URL-level PMI detects dynamical structure on TodoMVC hash-SPA transitions. Title-aware PMI benefit remains untested on real sites with varying titles. Do not update claim status beyond EXPERIMENTAL based on this experiment."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-34348438464",
+        "lane": "physics",
+        "decision": "MEASUREMENT_INVALID",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "EXPERIMENTAL",
+        "reason": "The experiment is measurement_invalid due to insufficient non-leakage transitions on both sites (GitHub 9, MDN 17). This provides no new evidence for or against the title-aware PMI hypothesis on the preregistered target population (real SPA/form-heavy sites with varying titles). The claim remains experimental pending a valid re-run with corrected site selection, action discovery, and sufficient transition density."
       }
     ],
     "C-PARAM-INHERIT": [
