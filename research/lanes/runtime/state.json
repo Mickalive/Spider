@@ -1,14 +1,14 @@
 {
   "lane": "runtime",
   "human_paused": false,
-  "active_experiment_id": "EXP-RUNTIME-34439061845",
-  "last_experiment_id": "EXP-RUNTIME-34300004597",
-  "last_verdict": "SURVIVES_CURRENT_TEST \u2014 C-MEAS-VALID survives with severely narrowed ceiling. All four frozen decision criteria pass: full_vector_discrimination 0.833 > B-BODY-ONLY 0.5 (incremental header value 0.333), full_vector_discrimination 0.833 > 0.5, null FP 0.0% < 5%, Cache-Control-only discrimination 0.5 > 0. However, the audit corrects the producer's mechanistic interpretation: (1) Cache-Control variation is valid_token no-cache vs absent on ALL errors \u2014 it does NOT vary by error type (no-store vs no-cache as hypothesized), confirming V4 ENGINEERED-HEADER-TAUTOLOGY for the critical expired/invalid pair; (2) the true discriminating header is WWW-Authenticate (discrimination 0.833 == full vector), not Cache-Control; (3) Set-Cookie adds zero (absent on all Keycloak /userinfo responses); (4) expired_token and invalid_token remain indistinguishable (identical bodies, headers, fingerprint, Jaccard 1.0); (5) body baseline weakened (B-BODY-ONLY 0.5 vs parent 0.833) inflates apparent incremental value; (6) expired token is not truly Keycloak-issued (V6 state construction leakage). Claim ceiling bounded to Keycloak 25.0 start-dev localhost:18080 /userinfo, 3 distinct fingerprints (not 4), full vector via WWW-Authenticate not Cache-Control error-type variation. Does NOT extend to production OAuth/OIDC, CDN/load-balancer, /token endpoint, or cross-Python-version reproducibility.",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-RUNTIME-34439061845",
+  "last_verdict": "FALSIFIED-IN-SETTING \u2014 WWW-Authenticate header discrimination does NOT transfer across Keycloak endpoints. Frozen decision rule fails on both primary conditions: (1) WWW-Auth-only discrimination > 0 on >= 2/3 additional endpoints: 0/3 positive (/token password 0.0, /token client_credentials 0.0, /introspect 0.0); (2) full-vector discrimination > 0.5 on >= 2/3 additional endpoints: 0/3 positive (/token password 0.0, /token client_credentials 0.0, /introspect 0.5 not > 0.5). Positive control PASS (/userinfo WWW-Auth 0.833 == full vector, replicates parent EXP-RUNTIME-34300004597). Null FP PASS on 3/4 endpoints (100% on /token password is structural: fresh JWT per request, not measurement instability). Audit PASS, all metrics recomputed match producer. WWW-Authenticate header is absent from all /token and /introspect responses across all 120 reps of additional endpoints \u2014 this is expected OAuth behavior (credentials in form body, not Authorization header), not a measurement gap. The discrimination pattern is /userinfo-specific resource-server behavior, not Keycloak-level. /token endpoints ignore Authorization header entirely. /introspect achieves body-only discrimination 0.5 via active:true/false field. client_credentials test is degenerate (serviceAccountsEnabled false on spider-client, all 401 unauthorized_client); claim ceiling excludes this endpoint as informative transfer test.",
   "continue_immediately": false,
-  "next_question": "Does WWW-Authenticate header variation \u2014 the true discriminating signal on Keycloak (no_auth 'Bearer realm' vs error 'Bearer realm, error=invalid_token') \u2014 transfer to other OAuth/OIDC providers (Auth0, Okta), or is it Keycloak-specific /userinfo behavior? This determines whether the full-vector product recommendation can generalize beyond Keycloak or whether body-only observation is the robust architecture.",
+  "next_question": "Can body-only HTTP fingerprint observation (body hash as sole discriminating signal) maintain auth-state discrimination across production-like Keycloak middleware with CDN, load-balancer, compression, and rate-limit headers that add non-deterministic variance to responses? This tests whether the robust architecture identified by this experiment (body-only) survives real infrastructure conditions.",
   "promotion_ready": false,
-  "consecutive_failures": 2,
-  "updated_at": "2026-09-10T09:41:05.223278+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "794ba636ec7e9502020b2f255b330ef1e30d8660c27b1b8195844014a76d4839"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-10T13:56:03.536102+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "bf2b4c4f2ed0f167a030d5d0f41068ad569f0fcee5947e349b9e3c0e5df608a2"
 }
