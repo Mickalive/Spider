@@ -1,9 +1,9 @@
 {
   "stage": "director",
   "category": "VALIDATION_FAILURE",
-  "message": "invalid claim update status: REJECTED_AT_CEILING",
+  "message": "invalid claim update status: falsified",
   "retryable": false,
-  "recorded_at": "2026-09-10T05:09:26.998911+00:00",
-  "github_run_id": "34439063364",
+  "recorded_at": "2026-09-10T09:41:17.764396+00:00",
+  "github_run_id": "34461755344",
   "github_run_attempt": "1"
 }
