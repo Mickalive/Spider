@@ -5,54 +5,54 @@
 - **Experiment ID**: EXP-RUNTIME-34509593940
 - **Lane**: Runtime
 - **Claim**: C-MEAS-VALID (Measurement substrate is intervention-valid)
-- **Parent**: EXP-RUNTIME-34439061845 (WWW-Authenticate transfer falsified, body-only architecture)
+- **Parent**: EXP-RUNTIME-34439061845 (WWW-Authenticate transfer falsified, body-only architecture identified)
 - **Date**: 2026-09-10
 - **Status**: DESIGN — NOT YET FROZEN
 
 ## 2. Scientific Question
 
-Can body-only HTTP fingerprint observation (body hash as sole discriminating signal) maintain auth-state discrimination across production-like Keycloak middleware with non-deterministic infrastructure headers that add CDN, load-balancer, compression, and rate-limit noise?
+Does body-only HTTP fingerprint observation maintain auth-state discrimination when production-like infrastructure (reverse proxy injecting non-deterministic CDN/load-balancer/rate-limit headers) adds response header noise, and does full-vector discrimination degrade under the same conditions?
 
 ## 3. Motivation
 
 The parent experiment (EXP-RUNTIME-34439061845) established:
 
-1. WWW-Authenticate discrimination is /userinfo-specific, not Keycloak-level (0/3 endpoints)
+1. WWW-Authenticate discrimination is /userinfo-specific, not Keycloak-level (0/3 additional endpoints)
 2. Body-only observation is the robust architecture for auth-state discrimination
-3. /userinfo: full-vector = WWW-Auth-only = 0.833, body-only = 0.5
-4. /introspect: full-vector = body-only = 0.5
+3. /userinfo: full-vector = 0.833, body-only = 0.5 (WWW-Auth is the discriminating header)
+4. /introspect: full-vector = body-only = 0.5 (headers add nothing)
 5. expired_token and invalid_token are indistinguishable by any observable
 
-The parent handoff poses: "Can body-only HTTP fingerprint observation maintain auth-state discrimination across production-like Keycloak middleware with CDN, load-balancer, compression, and rate-limit headers that add non-deterministic variance to responses?"
+The parent handoff asks: "Can body-only HTTP fingerprint observation maintain auth-state discrimination across production-like Keycloak middleware with CDN, load-balancer, compression, and rate-limit headers?"
 
-This experiment directly tests that question by deploying a reverse proxy that injects realistic infrastructure headers at controlled noise intensities.
+**Key insight**: Body-only fingerprints hash only (status, body). Response header noise cannot affect body-only discrimination by construction. The real scientific question is whether full-vector discrimination degrades under header noise, which would justify body-only as the default production strategy. Body-only invariance is a sanity check, not a novel finding.
 
 ## 4. Hypotheses
 
-### H1: Body-Only Invariance (M_BODY_ONLY_INVARIANT)
-Body-only discrimination on /userinfo remains >= 0.7 across all noise levels (0, 1, 2, 4 injected headers).
+### H1: Noise Degradation (M_NOISE_DEGRADATION) — PRIMARY
+Full-vector discrimination on /userinfo degrades with increasing noise intensity (Spearman rho <= -0.3 between full-vector discrimination and noise level).
 
-**Rationale**: Body-only fingerprints hash only (status, body). Since infrastructure noise adds headers (not body changes), body-only should be completely invariant.
+**Rationale**: Full-vector fingerprints include headers. Non-deterministic headers create within-state fingerprint variation, reducing the intra-match rate and thus discrimination. If this fails, headers are reliable even under noise and body-only offers no advantage.
 
-### H2: Weak-Body Invariance (M_WEAK_BODY_INVARIANT)
-Body-only discrimination on /introspect remains >= 0.3 across all noise levels.
+### H2: Body-Only Invariance (M_BODY_ONLY_INVARIANT) — SANITY CHECK
+Body-only discrimination on /userinfo does not degrade with noise (Spearman rho >= -0.3).
 
-**Rationale**: /introspect has body-only discrimination of 0.5 (weaker signal). Even if body-only is invariant, the floor is lower. 0.3 is the minimum useful threshold.
+**Rationale**: Body-only fingerprints exclude headers. Since noise only adds headers, body-only should be invariant. Failure would indicate the proxy is modifying bodies (measurement failure, not scientific finding).
 
-### H3: Noise Degradation (M_NOISE_DEGRADATION)
-Full-vector discrimination on /userinfo degrades monotonically with noise intensity (Spearman rho <= -0.5 between full-vector discrimination and noise level).
+### H3: Noise-Invariance Bound (M_NOISE_BOUND)
+Body-only discrimination at noise=4 is within 0.05 of body-only at noise=0 on /userinfo.
 
-**Rationale**: Full-vector fingerprints include headers. Non-deterministic headers create within-state fingerprint variation, reducing intra-match rate and thus discrimination.
+**Rationale**: Quantitative bound on invariance. If body-only varies by more than 0.05, the proxy is not correctly isolating header noise.
 
 ### H4: Positive Control
-At noise=0, /userinfo body-only discrimination >= 0.8 (parent observed 0.833).
+At noise=0, /userinfo body-only discrimination >= 0.35 (parent observed 0.5; tolerance accounts for session timing and N=10).
 
-**Rationale**: Confirms the measurement pipeline reproduces the parent result before noise injection.
+**Rationale**: Confirms the pipeline reproduces the expected 3-group body-only pattern (valid, no_auth, expired==invalid) before noise injection. The threshold is set conservatively because body-only discrimination of 0.5 with N=10 per state has limited precision.
 
 ### H5: Null Control
-At noise=0, /userinfo body-only discrimination > 0.4.
+At noise=0, B-RANDOM discrimination ~ 0.0.
 
-**Rationale**: Floor is 0.4 because expired and invalid tokens are indistinguishable by body (3 distinct body groups: valid=200, no_auth=401, expired==invalid=401).
+**Rationale**: Random fingerprints should not achieve meaningful discrimination. Verifies measurement pipeline stability.
 
 ## 5. Infrastructure
 
@@ -92,13 +92,15 @@ At noise=0, /userinfo body-only discrimination > 0.4.
 - URL: http://127.0.0.1:18081/realms/spider-test/protocol/openid-connect/userinfo (via proxy)
 - Method: GET
 - Auth: Authorization header (varies by state)
-- Expected discrimination: body-only >= 0.8 at noise=0
+- Expected body-only discrimination: 0.5 at noise=0 (parent baseline)
+- Expected full-vector discrimination: 0.833 at noise=0 (WWW-Auth contributes 0.333)
 
 ### 6.2 Secondary: /introspect (POST)
 - URL: http://127.0.0.1:18081/realms/spider-test/protocol/openid-connect/token/introspect (via proxy)
 - Method: POST
 - Body: token=<token>&client_id=spider-client&client_secret=spider-secret-12345
-- Expected discrimination: body-only = 0.5 at noise=0
+- Expected body-only discrimination: 0.5 at noise=0 (active:true/false)
+- Expected full-vector discrimination: 0.5 at noise=0 (headers add nothing on /introspect)
 
 ## 7. Auth States
 
@@ -146,41 +148,40 @@ Where intra_match_rate = fraction of same-state fingerprint pairs that match, in
 ## 10. Measures
 
 ### Primary Metrics
-- **M_BODY_ONLY_DISC_NOISE{0,1,2,4}_USERINFO**: Body-only discrimination on /userinfo at each noise level
 - **M_FULL_VECTOR_DISC_NOISE{0,1,2,4}_USERINFO**: Full-vector discrimination on /userinfo at each noise level
-- **M_BODY_ONLY_DISC_NOISE{0,1,2,4}_INTROSPECT**: Body-only discrimination on /introspect at each noise level
+- **M_BODY_ONLY_DISC_NOISE{0,1,2,4}_USERINFO**: Body-only discrimination on /userinfo at each noise level
 - **M_FULL_VECTOR_DISC_NOISE{0,1,2,4}_INTROSPECT**: Full-vector discrimination on /introspect at each noise level
+- **M_BODY_ONLY_DISC_NOISE{0,1,2,4}_INTROSPECT**: Body-only discrimination on /introspect at each noise level
 
 ### Derived Metrics
-- **M_NOISE_DEGRADATION**: Spearman rho between full-vector discrimination and noise level on /userinfo
-- **M_BODY_ONLY_INVARIANT**: min body-only discrimination across noise levels on /userinfo
-- **M_WEAK_BODY_INVARIANT**: min body-only discrimination across noise levels on /introspect
-- **M_NOISE_CURVE_SLOPE**: Linear regression slope of full-vector discrimination vs noise level on /userinfo
+- **M_NOISE_DEGRADATION**: Spearman rho between full-vector discrimination and noise level on /userinfo (PRIMARY — must be <= -0.3)
+- **M_BODY_ONLY_INVARIANT**: Spearman rho between body-only discrimination and noise level on /userinfo (SANITY CHECK — must be >= -0.3)
+- **M_NOISE_BOUND**: |body_only_noise=4 - body_only_noise=0| on /userinfo (must be <= 0.05)
 
 ### Control Metrics
-- **M_POSITIVE_CONTROL**: Body-only discrimination at noise=0 on /userinfo (must >= 0.8)
-- **M_NULL_CONTROL**: Body-only discrimination at noise=0 on /userinfo (must > 0.4)
+- **M_POSITIVE_CONTROL**: Body-only discrimination at noise=0 on /userinfo (must >= 0.35)
+- **M_NULL_CONTROL**: B-RANDOM discrimination at noise=0 (must ~ 0.0)
 
 ## 11. Controls
 
 ### 11.1 Positive Control (noise=0, /userinfo)
-- Body-only discrimination must >= 0.8
-- Verifies: pipeline reproduces parent result (0.833)
-- Tolerance: 0.05 below parent (session timing variation)
+- Body-only discrimination must >= 0.35
+- Verifies: pipeline produces 3-group body-only pattern (valid, no_auth, expired==invalid)
+- Parent observed 0.5; tolerance accounts for N=10 precision and session timing
 
-### 11.2 Null Control (noise=0, /userinfo)
-- Body-only discrimination must > 0.4
-- Verifies: pipeline does not produce spurious noise
-- Floor: 3 distinct body groups (valid=200, no_auth=401, expired==invalid=401)
+### 11.2 Null Control (noise=0)
+- B-RANDOM discrimination must ~ 0.0
+- Verifies: pipeline does not produce spurious structure from random fingerprints
 
-### 11.3 Noise-Invariance Control
-- Body-only discrimination at noise=4 must equal body-only at noise=0 on /userinfo (within 0.02)
-- Verifies: body-only is truly invariant to header noise
-- This is the primary scientific test
-
-### 11.4 Degradation Control
+### 11.3 Degradation Control (PRIMARY)
 - Full-vector discrimination at noise=4 must be < full-vector at noise=0 on /userinfo
 - Verifies: header noise actually degrades full-vector as expected
+- This is the core scientific test
+
+### 11.4 Invariance Control (SANITY CHECK)
+- Body-only discrimination at noise=4 must equal body-only at noise=0 on /userinfo (within 0.05)
+- Verifies: proxy is correctly isolating header noise (not modifying bodies)
+- Failure indicates measurement problem, not scientific finding
 
 ## 12. Validity Threats
 
@@ -199,31 +200,34 @@ expired_token is locally-signed HS256, not Keycloak-issued. Keycloak treats it a
 ### 12.5 Single Infrastructure Pattern
 Only one proxy noise pattern is tested. Real production has multiple infrastructure layers. Mitigation: this is the smallest informative test. If body-only survives, more complex patterns can be tested later.
 
+### 12.6 Body-Only Invariance is Tautological
+Body-only fingerprints exclude headers by construction. Header noise cannot affect body-only discrimination unless the proxy modifies bodies. The invariance hypothesis is a sanity check, not a scientific finding. Mitigation: the primary test is full-vector degradation (H1), which is falsifiable and scientifically meaningful.
+
 ## 13. Decision Rules
 
 ### 13.1 SURVIVES_CURRENT_TEST
 If ALL of:
-1. M_POSITIVE_CONTROL >= 0.8 (positive control passes)
-2. M_NULL_CONTROL > 0.4 (null control passes)
-3. M_BODY_ONLY_INVARIANT >= 0.7 (body-only discrimination >= 0.7 at ALL noise levels on /userinfo)
-4. M_WEAK_BODY_INVARIANT >= 0.3 (body-only discrimination >= 0.3 at ALL noise levels on /introspect)
-5. M_NOISE_DEGRADATION <= -0.5 (full-vector degrades with noise on /userinfo)
+1. M_POSITIVE_CONTROL >= 0.35 (positive control passes)
+2. M_NULL_CONTROL ~ 0.0 (null control passes)
+3. M_NOISE_DEGRADATION <= -0.3 (full-vector degrades with noise on /userinfo)
+4. M_BODY_ONLY_INVARIANT >= -0.3 (body-only does not degrade on /userinfo)
+5. M_NOISE_BOUND <= 0.05 (body-only noise-invariance bound)
 6. No pipeline errors
 
 ### 13.2 FALSIFIED-IN-SETTING
 If ANY of:
-1. M_BODY_ONLY_INVARIANT < 0.7 (body-only degrades under header noise on /userinfo)
-2. M_NOISE_DEGRADATION > -0.5 (full-vector does NOT degrade, body-only advantage is marginal)
+1. M_NOISE_DEGRADATION > -0.3 (full-vector does NOT degrade, body-only offers no advantage)
+2. M_BODY_ONLY_INVARIANT < -0.3 AND M_NOISE_BOUND > 0.05 (body-only degrades — proxy modifying bodies, but this is MEASUREMENT_INVALID if confirmed)
 
 ### 13.3 MEASUREMENT_INVALID
 If:
-1. M_POSITIVE_CONTROL < 0.8 (pipeline does not reproduce parent result)
-2. M_NULL_CONTROL <= 0.4 (pipeline produces spurious noise)
+1. M_POSITIVE_CONTROL < 0.35 (pipeline does not reproduce parent pattern)
+2. M_BODY_ONLY_INVARIANT < -0.3 (body-only degrades — proxy modifying bodies, not just headers)
 3. Keycloak fails to start or proxy fails
 4. Insufficient data (< 8 reps per cell)
 
-### 13.4 MIXED
-If body-only invariant holds but degradation is marginal (-0.5 < rho < 0):
+### 13.4 CONSTRAINED
+If body-only invariant holds AND full-vector degradation is marginal (-0.3 < rho < 0):
 - Body-only is robust but full-vector does not clearly degrade
 - Product implication: body-only is safe but full-vector may also be acceptable
 - Verdict ceiling: CONSTRAINED rather than SURVIVES
@@ -231,22 +235,26 @@ If body-only invariant holds but degradation is marginal (-0.5 < rho < 0):
 ## 14. Expected Outcomes
 
 ### 14.1 Positive Result (SURVIVES_CURRENT_TEST)
-- Body-only fingerprint discrimination is production-ready under infrastructure noise
-- SPIDER can safely use body-hash-only observation in production with CDN/load-balancer/compression/rate-limit
-- Product architecture should adopt body-only as default fingerprint strategy
-- No further infrastructure-robustness testing needed for body-only
+- Full-vector discrimination degrades under header noise; body-only remains stable
+- Body-only is the correct default production fingerprint strategy
+- SPIDER should ignore response headers in production environments with CDN/load-balancer/rate-limit
+- The EXP-RUNTIME-34439061845 body-only recommendation is validated for production
 
 ### 14.2 Negative Result (FALSIFIED-IN-SETTING)
-- Body-only discrimination degrades under header noise
-- Product must invest in noise-robust body normalization or retain header-aware fingerprinting
-- The EXP-RUNTIME-34439061845 body-only recommendation must be revised
-- New experiment needed: body normalization techniques for noisy infrastructure
+- Full-vector does NOT degrade under header noise
+- Headers are reliable even under infrastructure noise
+- Product should use full-vector (which achieves 0.833 on /userinfo vs body-only 0.5)
+- The EXP-RUNTIME-34439061845 body-only recommendation is revised
 
-### 14.3 Mixed Result (MIXED)
-- Body-only is invariant but full-vector does not degrade
+### 14.3 Mixed Result (CONSTRAINED)
+- Body-only is invariant but full-vector degradation is marginal
 - Both approaches may be acceptable in production
 - Product can choose based on implementation simplicity (body-only is simpler)
 - No strong evidence against either approach
+
+### 14.4 Invalid Result (MEASUREMENT_INVALID)
+- Pipeline failure, not scientific evidence
+- Need to debug proxy before this question can be answered
 
 ## 15. Analysis Plan
 
