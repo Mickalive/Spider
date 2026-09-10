@@ -1,0 +1,454 @@
+{
+  "experiment_id": "EXP-GRAPH-34409639346",
+  "execution_time": "2026-09-10T05:02:14+0000",
+  "baseline_results": [
+    {
+      "condition_id": "B-EMPTY-REGISTRY",
+      "status": "UNKNOWN",
+      "mechanism_id": null,
+      "bound_action": null,
+      "confidence": 0.0,
+      "reason": "no applicable validated mechanism",
+      "error": null,
+      "expected_status": "UNKNOWN",
+      "passed": true
+    },
+    {
+      "condition_id": "B-SINGLE-MECHANISM",
+      "status": "EXECUTABLE",
+      "mechanism_id": "a-01",
+      "bound_action": {
+        "url": "/users/42"
+      },
+      "confidence": 0.9,
+      "reason": "applicability guards and confidence threshold passed",
+      "error": null,
+      "expected_status": "EXECUTABLE",
+      "expected_mechanism_id": "a-01",
+      "passed": true
+    },
+    {
+      "condition_id": "B-CONFIDENCE-HIGHER",
+      "status": "EXECUTABLE",
+      "mechanism_id": "a-high",
+      "bound_action": {
+        "url": "/users/42"
+      },
+      "confidence": 0.95,
+      "reason": "applicability guards and confidence threshold passed",
+      "error": null,
+      "expected_status": "EXECUTABLE",
+      "expected_mechanism_id": "a-high",
+      "passed": true
+    },
+    {
+      "condition_id": "B-CONFIDENCE-EQUAL-DIFFERENT-INTENT",
+      "status": "EXECUTABLE",
+      "mechanism_id": "a-01",
+      "bound_action": {
+        "url": "/users/42"
+      },
+      "confidence": 0.9,
+      "reason": "applicability guards and confidence threshold passed",
+      "error": null,
+      "expected_status": "EXECUTABLE",
+      "expected_mechanism_id": "a-01",
+      "passed": true
+    }
+  ],
+  "pair_results": [
+    {
+      "condition_id": "PAIR-1-CORRECT-FIRST",
+      "status": "EXECUTABLE",
+      "mechanism_id": "a-01",
+      "bound_action": {
+        "url": "/users/42"
+      },
+      "confidence": 0.9,
+      "reason": "applicability guards and confidence threshold passed",
+      "error": null,
+      "pair_num": 1,
+      "ordering": "correct-first",
+      "small_id": "a-01",
+      "large_id": "z-01",
+      "small_is": "correct",
+      "expected_mechanism_id": "a-01",
+      "passed": true
+    },
+    {
+      "condition_id": "PAIR-1-ALIASED-FIRST",
+      "status": "EXECUTABLE",
+      "mechanism_id": "a-01",
+      "bound_action": {
+        "url": "/accounts/42"
+      },
+      "confidence": 0.9,
+      "reason": "applicability guards and confidence threshold passed",
+      "error": null,
+      "pair_num": 1,
+      "ordering": "aliased-first",
+      "small_id": "a-01",
+      "large_id": "z-01",
+      "small_is": "aliased",
+      "expected_tie_breaking": "a-01",
+      "expected_semantic": "z-01",
+      "follows_tie_breaking": true,
+      "selects_correct": false
+    },
+    {
+      "condition_id": "PAIR-2-CORRECT-FIRST",
+      "status": "EXECUTABLE",
+      "mechanism_id": "a-02",
+      "bound_action": {
+        "url": "/users/42/posts"
+      },
+      "confidence": 0.9,
+      "reason": "applicability guards and confidence threshold passed",
+      "error": null,
+      "pair_num": 2,
+      "ordering": "correct-first",
+      "small_id": "a-02",
+      "large_id": "z-02",
+      "small_is": "correct",
+      "expected_mechanism_id": "a-02",
+      "passed": true
+    },
+    {
+      "condition_id": "PAIR-2-ALIASED-FIRST",
+      "status": "EXECUTABLE",
+      "mechanism_id": "a-02",
+      "bound_action": {
+        "url": "/profiles/42/entries"
+      },
+      "confidence": 0.9,
+      "reason": "applicability guards and confidence threshold passed",
+      "error": null,
+      "pair_num": 2,
+      "ordering": "aliased-first",
+      "small_id": "a-02",
+      "large_id": "z-02",
+      "small_is": "aliased",
+      "expected_tie_breaking": "a-02",
+      "expected_semantic": "z-02",
+      "follows_tie_breaking": true,
+      "selects_correct": false
+    },
+    {
+      "condition_id": "PAIR-3-CORRECT-FIRST",
+      "status": "EXECUTABLE",
+      "mechanism_id": "a-03",
+      "bound_action": {
+        "url": "/posts/42/comments"
+      },
+      "confidence": 0.9,
+      "reason": "applicability guards and confidence threshold passed",
+      "error": null,
+      "pair_num": 3,
+      "ordering": "correct-first",
+      "small_id": "a-03",
+      "large_id": "z-03",
+      "small_is": "correct",
+      "expected_mechanism_id": "a-03",
+      "passed": true
+    },
+    {
+      "condition_id": "PAIR-3-ALIASED-FIRST",
+      "status": "EXECUTABLE",
+      "mechanism_id": "a-03",
+      "bound_action": {
+        "url": "/articles/42/reviews"
+      },
+      "confidence": 0.9,
+      "reason": "applicability guards and confidence threshold passed",
+      "error": null,
+      "pair_num": 3,
+      "ordering": "aliased-first",
+      "small_id": "a-03",
+      "large_id": "z-03",
+      "small_is": "aliased",
+      "expected_tie_breaking": "a-03",
+      "expected_semantic": "z-03",
+      "follows_tie_breaking": true,
+      "selects_correct": false
+    },
+    {
+      "condition_id": "PAIR-4-CORRECT-FIRST",
+      "status": "EXECUTABLE",
+      "mechanism_id": "a-04",
+      "bound_action": {
+        "url": "/items/42"
+      },
+      "confidence": 0.9,
+      "reason": "applicability guards and confidence threshold passed",
+      "error": null,
+      "pair_num": 4,
+      "ordering": "correct-first",
+      "small_id": "a-04",
+      "large_id": "z-04",
+      "small_is": "correct",
+      "expected_mechanism_id": "a-04",
+      "passed": true
+    },
+    {
+      "condition_id": "PAIR-4-ALIASED-FIRST",
+      "status": "EXECUTABLE",
+      "mechanism_id": "a-04",
+      "bound_action": {
+        "url": "/objects/42"
+      },
+      "confidence": 0.9,
+      "reason": "applicability guards and confidence threshold passed",
+      "error": null,
+      "pair_num": 4,
+      "ordering": "aliased-first",
+      "small_id": "a-04",
+      "large_id": "z-04",
+      "small_is": "aliased",
+      "expected_tie_breaking": "a-04",
+      "expected_semantic": "z-04",
+      "follows_tie_breaking": true,
+      "selects_correct": false
+    },
+    {
+      "condition_id": "PAIR-5-CORRECT-FIRST",
+      "status": "EXECUTABLE",
+      "mechanism_id": "a-05",
+      "bound_action": {
+        "url": "/users/42/settings"
+      },
+      "confidence": 0.9,
+      "reason": "applicability guards and confidence threshold passed",
+      "error": null,
+      "pair_num": 5,
+      "ordering": "correct-first",
+      "small_id": "a-05",
+      "large_id": "z-05",
+      "small_is": "correct",
+      "expected_mechanism_id": "a-05",
+      "passed": true
+    },
+    {
+      "condition_id": "PAIR-5-ALIASED-FIRST",
+      "status": "EXECUTABLE",
+      "mechanism_id": "a-05",
+      "bound_action": {
+        "url": "/accounts/42/preferences"
+      },
+      "confidence": 0.9,
+      "reason": "applicability guards and confidence threshold passed",
+      "error": null,
+      "pair_num": 5,
+      "ordering": "aliased-first",
+      "small_id": "a-05",
+      "large_id": "z-05",
+      "small_is": "aliased",
+      "expected_tie_breaking": "a-05",
+      "expected_semantic": "z-05",
+      "follows_tie_breaking": true,
+      "selects_correct": false
+    },
+    {
+      "condition_id": "PAIR-6-CORRECT-FIRST",
+      "status": "EXECUTABLE",
+      "mechanism_id": "a-06",
+      "bound_action": {
+        "url": "/search/42"
+      },
+      "confidence": 0.9,
+      "reason": "applicability guards and confidence threshold passed",
+      "error": null,
+      "pair_num": 6,
+      "ordering": "correct-first",
+      "small_id": "a-06",
+      "large_id": "z-06",
+      "small_is": "correct",
+      "expected_mechanism_id": "a-06",
+      "passed": true
+    },
+    {
+      "condition_id": "PAIR-6-ALIASED-FIRST",
+      "status": "EXECUTABLE",
+      "mechanism_id": "a-06",
+      "bound_action": {
+        "url": "/find/42"
+      },
+      "confidence": 0.9,
+      "reason": "applicability guards and confidence threshold passed",
+      "error": null,
+      "pair_num": 6,
+      "ordering": "aliased-first",
+      "small_id": "a-06",
+      "large_id": "z-06",
+      "small_is": "aliased",
+      "expected_tie_breaking": "a-06",
+      "expected_semantic": "z-06",
+      "follows_tie_breaking": true,
+      "selects_correct": false
+    },
+    {
+      "condition_id": "PAIR-7-CORRECT-FIRST",
+      "status": "EXECUTABLE",
+      "mechanism_id": "a-07",
+      "bound_action": {
+        "url": "/orders/42"
+      },
+      "confidence": 0.9,
+      "reason": "applicability guards and confidence threshold passed",
+      "error": null,
+      "pair_num": 7,
+      "ordering": "correct-first",
+      "small_id": "a-07",
+      "large_id": "z-07",
+      "small_is": "correct",
+      "expected_mechanism_id": "a-07",
+      "passed": true
+    },
+    {
+      "condition_id": "PAIR-7-ALIASED-FIRST",
+      "status": "EXECUTABLE",
+      "mechanism_id": "a-07",
+      "bound_action": {
+        "url": "/purchases/42"
+      },
+      "confidence": 0.9,
+      "reason": "applicability guards and confidence threshold passed",
+      "error": null,
+      "pair_num": 7,
+      "ordering": "aliased-first",
+      "small_id": "a-07",
+      "large_id": "z-07",
+      "small_is": "aliased",
+      "expected_tie_breaking": "a-07",
+      "expected_semantic": "z-07",
+      "follows_tie_breaking": true,
+      "selects_correct": false
+    },
+    {
+      "condition_id": "PAIR-8-CORRECT-FIRST",
+      "status": "EXECUTABLE",
+      "mechanism_id": "a-08",
+      "bound_action": {
+        "url": "/forms/42/submit"
+      },
+      "confidence": 0.9,
+      "reason": "applicability guards and confidence threshold passed",
+      "error": null,
+      "pair_num": 8,
+      "ordering": "correct-first",
+      "small_id": "a-08",
+      "large_id": "z-08",
+      "small_is": "correct",
+      "expected_mechanism_id": "a-08",
+      "passed": true
+    },
+    {
+      "condition_id": "PAIR-8-ALIASED-FIRST",
+      "status": "EXECUTABLE",
+      "mechanism_id": "a-08",
+      "bound_action": {
+        "url": "/surveys/42/respond"
+      },
+      "confidence": 0.9,
+      "reason": "applicability guards and confidence threshold passed",
+      "error": null,
+      "pair_num": 8,
+      "ordering": "aliased-first",
+      "small_id": "a-08",
+      "large_id": "z-08",
+      "small_is": "aliased",
+      "expected_tie_breaking": "a-08",
+      "expected_semantic": "z-08",
+      "follows_tie_breaking": true,
+      "selects_correct": false
+    },
+    {
+      "condition_id": "PAIR-9-CORRECT-FIRST",
+      "status": "EXECUTABLE",
+      "mechanism_id": "a-09",
+      "bound_action": {
+        "url": "/files/42/upload"
+      },
+      "confidence": 0.9,
+      "reason": "applicability guards and confidence threshold passed",
+      "error": null,
+      "pair_num": 9,
+      "ordering": "correct-first",
+      "small_id": "a-09",
+      "large_id": "z-09",
+      "small_is": "correct",
+      "expected_mechanism_id": "a-09",
+      "passed": true
+    },
+    {
+      "condition_id": "PAIR-9-ALIASED-FIRST",
+      "status": "EXECUTABLE",
+      "mechanism_id": "a-09",
+      "bound_action": {
+        "url": "/documents/42/store"
+      },
+      "confidence": 0.9,
+      "reason": "applicability guards and confidence threshold passed",
+      "error": null,
+      "pair_num": 9,
+      "ordering": "aliased-first",
+      "small_id": "a-09",
+      "large_id": "z-09",
+      "small_is": "aliased",
+      "expected_tie_breaking": "a-09",
+      "expected_semantic": "z-09",
+      "follows_tie_breaking": true,
+      "selects_correct": false
+    },
+    {
+      "condition_id": "PAIR-10-CORRECT-FIRST",
+      "status": "EXECUTABLE",
+      "mechanism_id": "a-10",
+      "bound_action": {
+        "url": "/analytics/42"
+      },
+      "confidence": 0.9,
+      "reason": "applicability guards and confidence threshold passed",
+      "error": null,
+      "pair_num": 10,
+      "ordering": "correct-first",
+      "small_id": "a-10",
+      "large_id": "z-10",
+      "small_is": "correct",
+      "expected_mechanism_id": "a-10",
+      "passed": true
+    },
+    {
+      "condition_id": "PAIR-10-ALIASED-FIRST",
+      "status": "EXECUTABLE",
+      "mechanism_id": "a-10",
+      "bound_action": {
+        "url": "/metrics/42"
+      },
+      "confidence": 0.9,
+      "reason": "applicability guards and confidence threshold passed",
+      "error": null,
+      "pair_num": 10,
+      "ordering": "aliased-first",
+      "small_id": "a-10",
+      "large_id": "z-10",
+      "small_is": "aliased",
+      "expected_tie_breaking": "a-10",
+      "expected_semantic": "z-10",
+      "follows_tie_breaking": true,
+      "selects_correct": false
+    }
+  ],
+  "metrics": {
+    "baselines_passed": true,
+    "exceptions_count": 0,
+    "aliased_first_correct_selection_rate": 0.0,
+    "correct_first_correct_selection_rate": 1.0,
+    "binomial_p": 1.0,
+    "n_aliased_first": 10,
+    "n_selects_correct": 0,
+    "n_correct_first": 10,
+    "n_correct_first_correct": 10
+  },
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS"
+}
