@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34348438464",
+  "lane": "physics",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "EXPERIMENTAL",
+      "reason": "The experiment is measurement_invalid due to insufficient non-leakage transitions on both sites (GitHub 9, MDN 17). This provides no new evidence for or against the title-aware PMI hypothesis on the preregistered target population (real SPA/form-heavy sites with varying titles). The claim remains experimental pending a valid re-run with corrected site selection, action discovery, and sufficient transition density."
+    }
+  ],
+  "product_action": "NONE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can DOM structural features (e.g., element counts, tree depth, interactive element density) predict next-state transitions on real SPA/form-heavy sites, providing state representation beyond URL and title?",
+  "reason": "The frozen experiment achieved MEASUREMENT_INVALID because both sites (GitHub, MDN) yielded fewer than 30 non-leakage transitions (9 and 17) due to site selection mismatch (MPA vs SPA), action discovery failure (single action type), and sample size deviation. The positive control passes, confirming pipeline integrity, but the real-data test never effectively sampled the preregistered population. The claim C-WEB-DYNAMICS remains open. The bounded program failed due to measurement infrastructure, not scientific falsification. To maintain high information gain, the next question shifts to a materially orthogonal representation (DOM structure) rather than repeating the same PMI-on-SPA design with corrected sites, which would risk repeating a failed measurement approach.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-34348438464/result.json status=MEASUREMENT_INVALID outcome=NOT_APPLICABLE",
+    "research/experiments/EXP-PHYSICS-34348438464/audit.json status=MEASUREMENT_INVALID producer_claim_supported=false claim_ceiling='no evidence for or against'",
+    "research/experiments/EXP-PHYSICS-34348438464/result.json metrics.data_sufficient=false both sites below 30 non-leakage threshold",
+    "research/experiments/EXP-PHYSICS-34348438464/result.json metrics.site_github.n_non_leakage=9 metrics.site_mdn.n_non_leakage=17",
+    "research/experiments/EXP-PHYSICS-34348438464/result.json metrics.positive_control.passes=true",
+    "research/experiments/EXP-PHYSICS-34348438464/audit.json validity_findings site_selection_mismatch MPA_vs_SPA",
+    "research/experiments/EXP-PHYSICS-34348438464/audit.json required_fixes action_discovery_site_selection_sample_size"
+  ]
+}
