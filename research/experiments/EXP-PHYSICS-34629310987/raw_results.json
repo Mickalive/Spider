@@ -1,0 +1,51 @@
+{
+  "experiment_id": "EXP-PHYSICS-34629310987",
+  "synthetic_spa": {
+    "n_transitions": 500,
+    "n_trajectories": 25,
+    "trajectory_length": 20,
+    "within_url_transitions": 500,
+    "unique_a11y_hashes": 8
+  },
+  "pmi_results": {
+    "url_only_all": 6.80745736433261e-08,
+    "a11y_only_all": 1.9477181792873015,
+    "combined_all": 1.9477181792873015,
+    "url_only_within_url": 6.80745736433261e-08,
+    "a11y_only_within_url": 1.9477181792873015
+  },
+  "permutation_tests": {
+    "url_only": {
+      "p_value": 0.000999000999000999,
+      "null_mean": 6.80745736433261e-08,
+      "effect_d": 0.0
+    },
+    "a11y_only": {
+      "p_value": 0.000999000999000999,
+      "null_mean": 0.2898873486691747,
+      "effect_d": 60.972144346593474
+    },
+    "within_url_a11y": {
+      "p_value": 0.000999000999000999,
+      "null_mean": 0.2898873486691747,
+      "effect_d": 60.972144346593474
+    }
+  },
+  "decision_conditions": {
+    "gain_within_url_bits": 1.947718111212728,
+    "condition_1_gain_ge_0.1": true,
+    "condition_2_permutation_p": 0.000999000999000999,
+    "condition_2_passes": true,
+    "condition_3_positive_control": 1.9477181792873015,
+    "condition_3_passes": true,
+    "condition_4_null_control": 0.2898873486691747,
+    "condition_4_passes": false,
+    "condition_5_a11y_varies_within_url": 8,
+    "condition_5_passes": true,
+    "condition_6_data_sufficiency": 500,
+    "condition_6_passes": true
+  },
+  "survives_current_test": false,
+  "outcome": "FALSIFIES",
+  "status": "COMPLETE"
+}
