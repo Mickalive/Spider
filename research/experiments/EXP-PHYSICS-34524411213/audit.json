@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34524411213",
+  "lane": "physics",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Site selection does not meet frozen spec/prereg 'genuine SPA/form-heavy sites with client-side routing' (spec.json measurement_validity, prereg.md 5.1-5.2): both sites are TodoMVC React/Vue degenerate demo apps explicitly listed in parent handoff do_not_assume as non-representative of production SPAs. No pre-survey artifact verifying history.pushState/data-reactroot or form-workflow richness was recorded. Retest on 2-3 production form-heavy SPAs (e.g., multi-step checkout/dashboard) with pre-survey evidence.",
+    "Leakage classification deviates from frozen spec: spec requires 'action.target_href == state_after.url AND no client-side route change (data-reactroot or history.pushState detection)' (spec.json measurement_validity). Code classify_non_leakage in dom_features_experiment.py uses only target_href == actual_url string equality without SPA route-change detection, misclassifying TodoMVC hash routes as leakage. Observed leakage 39/115 (34%) and 48/126 (38%) contradicts established parent result that TodoMVC hash-SPA produces 100% non-leakage by construction (handoff EXP-PHYSICS-34348438464). Adapt classifier to hash-aware SPA logic and emit SPA-verification artifact.",
+    "Discretization violates 'bin edges fit on TRAIN only' (spec.json measurement_validity): make_dom_state_fn in dom_features_experiment.py fits quantile bins on all non_leakage transitions without train/test split (no split exists). This is in-sample optimism for dom_features state. Fix with frozen train-only fit and report out-of-sample PMI or cross-validated PMI.",
+    "Entropy rate secondary metric is computed incorrectly: compute_entropy_rates sums -p log p over (s,s') and (s,a,s') pairs without weighting by P(s) and P(s,a) (dom_features_experiment.py), inflating values with state-space size (25 vs 13 states) and creating the reported 'entropy reduction paradox' (React 5.74 vs 3.21 bits). Use weighted definition H(S'|S)= -sum_s P(s) sum_{s'} P(s'|s) log P(s'|s) or flag as exploratory and do not interpret.",
+    "Positive control synthetic SPA is non-discriminating for DOM vs URL claim: synthetic URLs are 1:1 with DOM feature vectors (8 deterministic states), so url_only PMI == dom_features PMI == 1.2714 bits (raw_results.json positive_control url_only_pmi == dom_pmi). Pipeline correctness is verified but DOM-specific gain is not tested. Add synthetic condition where DOM varies orthogonal to URL (same URL, different DOM states) to falsify DOM pipeline specifically.",
+    "PMI smoothing artifact — compute_pmi_stats uses asymmetric Laplace smoothing (alpha added to denominator p_a_given_s and p_s_next_given_s but p_joint_given_s unsmoothed). Absolute PMI bits are conditional on this choice. Parent handoff flagged this as unknown (EXP-PHYSICS-34348438464 handoff unknown). Alpha sensitivity (0.0-2.0) is reported and shows rank stability, but absolute bit claims should note dependency.",
+    "Claims must not be extended beyond TodoMVC until fixes above are applied and production SPA data with sufficient non-leakage density (>=30, target 50+) and action diversity (>1 unique_action) on ambiguous-URL workflows is obtained."
+  ],
+  "validity_findings": [
+    {
+      "id": "site_representativeness",
+      "severity": "high",
+      "finding": "Both sites TodoMVC React and Vue are degenerate demos, not form-heavy production SPAs. Spec targeted 2-3 genuine SPA/form-heavy sites; producer used 2 variants of same TodoMVC architecture. Parent handoff do_not_assume explicitly warns TodoMVC is degenerate and not representative of production SPA sites.",
+      "evidence_ref": "spec.json measurement_validity; prereg.md 5.1; provenance.json data_sources; parent handoff EXP-PHYSICS-34348438464 do_not_assume; result.json metrics n_non_leakage_react=76 n_non_leakage_vue=78"
+    },
+    {
+      "id": "leakage_misclassification",
+      "severity": "high",
+      "finding": "Leakage heuristic misclassifies hash-SPA client-side transitions as leakage. Parent established TodoMVC hash SPA is 100% non-leakage; current run shows 33-38% leakage (39/115, 48/126). Spec leakage definition requiring SPA route-change detection was not implemented. Retained non-leakage subset is biased (likely over-represents button/input actions) and URL path shows 13 unique states despite hash-invariant path, indicating contamination by external navigations.",
+      "evidence_ref": "spec.json measurement_validity leakage definition; research/physics/dom_features/dom_features_experiment.py classify_non_leakage; raw_results.json site_results todomvc_react n_raw/n_leakage/n_non_leakage; provenance.json; handoff EXP-PHYSICS-34348438464 established"
+    },
+    {
+      "id": "discretization_train_leakage",
+      "severity": "medium",
+      "finding": "DOM feature discretization fits 5-bin quantile edges on all non_leakage data in-sample. Spec requires edges fit on TRAIN only. Optimism inflates DOM PMI. Direction is to overestimate DOM; since DOM still worse than URL (-0.0728, -0.0055 bits), correction would strengthen falsification, not overturn it, but protocol is violated.",
+      "evidence_ref": "spec.json measurement_validity discretization; research/physics/dom_features/dom_features_experiment.py make_dom_state_fn fit_quantile_bins; raw_results.json site_results discretization"
+    },
+    {
+      "id": "entropy_calculation_invalid",
+      "severity": "medium",
+      "finding": "Entropy rates H(S'|S) and H(S'|S,A) are computed as unweighted sums over conditional distributions, not P(s)-weighted expectations. This inflates values proportionally to state-space size and invalidates the 'DOM higher entropy reduction' interpretation. Metric is exploratory and not part of decision rule.",
+      "evidence_ref": "research/physics/dom_features/dom_features_experiment.py compute_entropy_rates; raw_results.json site_results todomvc_react/vu entropy; result.json metrics entropy_reduction_*"
+    },
+    {
+      "id": "sampling_and_title_variance",
+      "severity": "low",
+      "finding": "Zero title variance (unique_titles=1 via url_title PMI identical to url_only) is correctly reported and matches parent finding. Data sufficiency thresholds met (76,78 >=30) with stable alpha sensitivity (React 0.578-0.624, Vue 0.738-0.756). Permutation null is correctly implemented as cross-trajectory shuffle preserving trajectory structure, N=1000, p floor 0.000999, Bonferroni alpha 0.025 correctly applied.",
+      "evidence_ref": "result.json controls url_title_baseline_react/vu note identical; raw_results.json pmi url_title == url_only; result.json metrics alpha_sensitivity_*; research/physics/dom_features/dom_features_experiment.py cross_trajectory_shuffle permutation_test"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "url_only_baseline",
+      "finding": "URL-only PMI baseline is strong and significant on both sites (React 0.6703 p=0.001 d=15.97, Vue 0.7508 p=0.001 d=27.48, N=76/78, 13 unique states, 18/17 SA pairs). Recomputed from raw_results.json pmi.url_only matches result.json.",
+      "evidence_ref": "result.json controls url_only_baseline_react/vu; raw_results.json site_results todomvc_react/vu pmi.url_only permutation.url_only",
+      "supports_claim": true
+    },
+    {
+      "id": "url_title_baseline",
+      "finding": "URL+title identical to URL-only (0.6703, 0.7508) due to zero title variance — correctly explains why title-aware PMI cannot be tested on TodoMVC. No improvement over URL-only.",
+      "evidence_ref": "result.json controls url_title_baseline_react/vu note unique_titles=1; raw_results.json site_results todomvc_react/vu pmi.url_title",
+      "supports_claim": true
+    },
+    {
+      "id": "dom_feature_baseline",
+      "finding": "DOM-feature PMI is significantly >0 (React 0.5975 p=0.001 d=6.87, Vue 0.7453 p=0.001 d=17.82) but strictly worse than URL-only by -0.0728 and -0.0055 bits (0/2 sites better). Larger state-space (React 25 vs 13, Vue 16 vs 13; SA pairs 33 vs 18, 21 vs 17) with sparse coverage does not improve prediction. Recomputed improvement dom - url matches producer: -0.0728485868 React, -0.0055087571 Vue. Alpha sensitivity stable.",
+      "evidence_ref": "result.json metrics dom_pmi_react/dom_pmi_vue url_pmi_react/url_pmi_vue dom_vs_url_improvement_bits_*; raw_results.json site_results todomvc_react/vu pmi.dom_features permutation.dom_features dom_vs_url alpha_sensitivity",
+      "supports_claim": true
+    },
+    {
+      "id": "positive_control_synthetic_spa",
+      "finding": "PASS and recomputed identical: dom_pmi 1.2714393798 p=0.000999 (>=0.5, p<0.001). Null-shuffled synthetic dom_pmi 0.07178 p=0.6314 (>0.05) PASS. Pipeline detects structure when present and not when absent. Synthetic control is non-discriminating for DOM vs URL (url_only_pmi == dom_pmi) — verif pipeline, not DOM advantage.",
+      "evidence_ref": "result.json controls positive_control_synthetic_spa/null_control_shuffled_synthetic; raw_results.json positive_control dom_pmi/dom_perm_p null_control null_dom_pmi/null_perm_p; research/physics/dom_features/dom_features_experiment.py generate_synthetic_trajectories run_positive_control run_null_control",
+      "supports_claim": true
+    },
+    {
+      "id": "controls_id_preserved",
+      "finding": "All producer control identifiers preserved for traceability: positive_control_synthetic_spa, null_control_shuffled_synthetic, url_only_baseline_react/vu, url_title_baseline_react/vu, and metric identifiers dom_vs_url_improvement_bits_react/vu, dom_pmi_react/vu, etc., recomputed without renaming.",
+      "evidence_ref": "result.json controls; result.json metrics",
+      "supports_claim": true
+    }
+  ],
+  "recomputed_metrics": {
+    "dom_pmi_react": 0.5974672785,
+    "dom_pmi_vue": 0.7452744279,
+    "url_pmi_react": 0.6703158653,
+    "url_pmi_vue": 0.750783185,
+    "url_title_pmi_react": 0.6703158653,
+    "url_title_pmi_vue": 0.750783185,
+    "dom_vs_url_improvement_bits_react": -0.0728485868,
+    "dom_vs_url_improvement_bits_vue": -0.0055087571,
+    "dom_better_site_count": 0,
+    "dom_better_total_sites": 2,
+    "dom_perm_p_react": 0.000999000999000999,
+    "dom_perm_p_vue": 0.000999000999000999,
+    "dom_effect_d_react": 6.867381944921026,
+    "dom_effect_d_vue": 17.821997012199063,
+    "url_perm_p_react": 0.000999000999000999,
+    "url_perm_p_vue": 0.000999000999000999,
+    "positive_control_pmi": 1.2714393798518162,
+    "positive_control_perm_p": 0.000999000999000999,
+    "positive_control_passes": true,
+    "null_control_pmi": 0.07178175135774488,
+    "null_control_perm_p": 0.6313686313686314,
+    "null_control_passes": true,
+    "n_non_leakage_react": 76,
+    "n_non_leakage_vue": 78,
+    "n_raw_react": 115,
+    "n_raw_vue": 126,
+    "n_leakage_react": 39,
+    "n_leakage_vue": 48,
+    "unique_states_dom_react": 25,
+    "unique_states_dom_vue": 16,
+    "unique_states_url_react": 13,
+    "unique_states_url_vue": 13,
+    "alpha_sensitivity_react_alpha_0": 0.5780930057,
+    "alpha_sensitivity_react_alpha_1": 0.5974672785,
+    "alpha_sensitivity_vue_alpha_0": 0.7375144857,
+    "alpha_sensitivity_vue_alpha_1": 0.7452744279,
+    "recomputation_notes": "Recomputed dom_vs_url improvement as dom_pmi - url_pmi from raw_results.json site_results todomvc_react/vu pmi; matches result.json metrics to <1e-4 rounding. Permutation p-values are floor 1/(1000+1)=0.000999. Leakage fractions 39/115=33.9% and 48/126=38.1% inconsistent with parent TodoMVC 100% non-leakage. No raw trajectory dump to independently recompute PMI bins; recomputation limited to derived aggregates in raw_results.json. Preservation of producer metric/control identifiers maintained."
+  },
+  "claim_ceiling": "FALSIFIED-IN-SETTING only forDOM structural representation defined as discretized vector (element_count, tree_depth, interactive_density) with 5-bin quantile bins and Laplace alpha=1.0 on TodoMVC React/Vue hash-SPA degenerate demos (provenance https://todomvc.com/examples/react/dist/ and /vue/dist/, 76/78 non-leakage under current heuristic, 13 URL path states). On these sites DOM-feature PMI is significantly >0 but -0.07 and -0.01 bits worse than URL-only, failing the >=0.1 bits improvement on 0/2 sites (Bonferroni p<0.025). Positive/null controls pass. This does NOT support or refute C-WEB-DYNAMICS for production form-heavy SPAs with richer DOM evolution or where URL/title are ambiguous; that hypothesis remains UNTESTED (unknown) and requires corrected site selection, SPA-aware leakage classification, and train-only discretization. The title-variance failure mode on TodoMVC is confirmed.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-34524411213/request.json",
+    "research/experiments/EXP-PHYSICS-34524411213/spec.json claim_ids C-WEB-DYNAMICS falsifier decision_rule",
+    "research/experiments/EXP-PHYSICS-34524411213/prereg.md 5.1-5.4 6.3 8.1",
+    "research/experiments/EXP-PHYSICS-34524411213/freeze.json hashes",
+    "research/experiments/EXP-PHYSICS-34524411213/result.json metrics controls observations validity_notes",
+    "research/experiments/EXP-PHYSICS-34524411213/raw_results.json site_results todomvc_react todomvc_vue positive_control null_control decision_checks",
+    "research/experiments/EXP-PHYSICS-34524411213/provenance.json data_sources artifacts",
+    "research/experiments/EXP-PHYSICS-34524411213/report.md decision table scope and limitations",
+    "research/physics/dom_features/dom_features_experiment.py classify_non_leakage make_dom_state_fn fit_quantile_bins compute_pmi_stats cross_trajectory_shuffle permutation_test compute_entropy_rates N_TRAJECTORIES=25 TRAJECTORY_LENGTH=6",
+    "research/experiments/EXP-PHYSICS-34348438464/handoff.json established rejected do_not_assume TodoMVC degenerate SPA 100% non-leakage vs 76-78 with leakage misclassification"
+  ],
+  "unresolved": [
+    "Whether DOM structural features provide >=0.1 bits gain over URL-only on production SPAs with richer DOM evolution (dashboards, multi-step checkouts, survey builders) where same URL hosts different DOM states and title variance >0.",
+    "Why entropy reduction appears higher for DOM despite lower PMI: true artifact of unweighted entropy sum vs genuine state-space dilution — requires weighted entropy recomputation on raw triples.",
+    "Whether more expressive DOM/state representations (accessibility tree, component hierarchy, visual layout, secondary features form_count/input_count/button_count) or adaptive/learned discretization would outperform URL-only on complex SPAs.",
+    "Impact of correcting leakage heuristic to SPA-aware hash/history detection on retained sample composition and DOM vs URL rank ordering for TodoMVC and genuine SPAs.",
+    "Magnitude of in-sample discretization optimism: exact penalty after switching to train-only bin edges and cross-validated PMI.",
+    "Whether 5-bin quantile is appropriate or creates artificial boundaries; robustness at 3 and 10 bins remains exploratory."
+  ]
+}
