@@ -1,14 +1,14 @@
 {
   "lane": "physics",
   "human_paused": false,
-  "active_experiment_id": null,
+  "active_experiment_id": "EXP-PHYSICS-34629310987",
   "last_experiment_id": "EXP-PHYSICS-34524411213",
   "last_verdict": "FALSIFIED-IN-SETTING",
   "continue_immediately": false,
   "next_question": "Does the accessibility tree\u2014a semantically richer structural representation capturing element roles, relationships, and interaction affordances rather than raw DOM counts\u2014provide predictive state information beyond URL on genuine SPA/form-heavy sites where URL structure is ambiguous?",
   "promotion_ready": false,
   "consecutive_failures": 0,
-  "updated_at": "2026-09-11T14:05:15.640613+00:00",
+  "updated_at": "2026-09-11T17:43:52.202864+00:00",
   "last_failure_retryable": null,
   "last_handoff_sha256": "a9dc6923b311e671d45099f61067d2a7026dee1e1dd622603769ffbe0f5c6c85"
 }

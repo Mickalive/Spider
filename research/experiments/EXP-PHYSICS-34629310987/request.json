@@ -1,0 +1,20 @@
+{
+  "base_sha": "661f5d863b6f68942b9253d36bed89bf80b48292",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-11T17:43:52.202356+00:00",
+  "experiment_id": "EXP-PHYSICS-34629310987",
+  "inherited_last_verdict": "FALSIFIED-IN-SETTING",
+  "inherited_next_question": "Does the accessibility tree\u2014a semantically richer structural representation capturing element roles, relationships, and interaction affordances rather than raw DOM counts\u2014provide predictive state information beyond URL on genuine SPA/form-heavy sites where URL structure is ambiguous?",
+  "lane": "physics",
+  "origin_github_run_id": "34629310987",
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-34524411213",
+    "path": "research/experiments/EXP-PHYSICS-34524411213/handoff.json",
+    "sha256": "a9dc6923b311e671d45099f61067d2a7026dee1e1dd622603769ffbe0f5c6c85"
+  },
+  "reason": "pulse",
+  "request_hash": "cc25c37a15b91f0ec696f5e7da996e6a74f50e9c7a08a0bd1bbbe8b8bef38ad9",
+  "request_id": "0eb508d5cc1de4b73b203be9",
+  "schema_version": 1
+}
