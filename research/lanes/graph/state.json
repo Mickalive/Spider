@@ -1,14 +1,14 @@
 {
   "lane": "graph",
   "human_paused": false,
-  "active_experiment_id": "EXP-GRAPH-34409639346",
-  "last_experiment_id": "EXP-GRAPH-34395286092",
-  "last_verdict": "BLOCKED_CLOSE_AND_PIVOT",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-GRAPH-34409639346",
+  "last_verdict": "SUPPORTED",
   "continue_immediately": false,
-  "next_question": "Given four consecutive BLOCKED results on C-PARAM-INHERIT, can the graph lane demonstrate semantic resolution (C-SEMANTIC-RESOLVE): does the kernel resolve a URL template with semantic aliasing (e.g., /users/{userId} vs /accounts/{id} pointing to the same REST resource) to the correct parametrized mechanism when both are registered with equal confidence, and does it correctly select the mechanism whose template matches the intent structure?",
+  "next_question": "Can the kernel handle more complex aliasing scenarios \u2014 query parameters, path rewriting, or server-side routing that maps multiple URL templates to the same resource \u2014 and does HTTP execution success against real endpoints provide a grounding signal for template correctness that resolver selection alone cannot?",
   "promotion_ready": false,
-  "consecutive_failures": 9,
-  "updated_at": "2026-09-11T00:33:53.318889+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "57025732a13bd1e17f553c003db00a646ef45bb9d940d4b5fbfc6b6902757bbf"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-11T05:15:47.208071+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "fb3bddcf2dcc949d36ee57edcca18f6a986f5643ab4ec9e4534d91e2bf8f668d"
 }
