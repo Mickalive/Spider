@@ -1,17 +1,32 @@
 {
   "experiment_id": "EXP-INTEL-34546944360",
   "lane": "intel",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-CROSSSITE", "C-LLM-INHERIT"],
+  "question": "What is the correct yield denominator for SPIDER fragment model — CDP accessibility tree node count or Playwright locatable element count — and does the locatable yield (~0.38) hold across randomized shopping page types (product-listing, detail, cart, checkout) with scrolled content, plus at least one gitlab and one reddit task?",
+  "hypothesis": "The locatable denominator (Playwright locatable elements) is the correct comparison for Method1's 150-element shopping model, because Method1 modeled interactive/locatable elements, not full AX tree nodes. Under this denominator, yield_locatable = viewport_elements / locatable_elements should be approximately 0.38 across shopping page types, within 5pp of Method1's 0.365 estimate. This would SUPPORT Method1 and establish that the fragment model is workable at ~38% yield for shopping. The CDP denominator (yield ~0.04) would represent a 96% content loss architecture that requires fundamental redesign.",
+  "falsifier": "The locatable yield fails to stabilize across page types (CV > 0.2 across 8+ shopping tasks), OR scrolled yield differs from initial viewport yield by >20pp on >50% of tasks (indicating initial-viewport measurement is not representative), OR Method1's 150-element estimate cannot be mapped to either denominator (remains ambiguous), OR gitlab/reddit tasks show yield patterns fundamentally different from shopping (indicating site-type-specific denominator requirements).",
+  "baselines": [
+    "Method1 estimate from EXP-INTEL-33945226776: shopping yield 0.365 (element-count method, 150 elements)",
+    "Heuristic estimate from EXP-INTEL-33945226776: shopping yield 0.65 (FALSIFIED under both denominators)",
+    "Parent N=2 pilot from EXP-INTEL-34377576886: yield_cdp = 0.0427, yield_locatable = 0.38, 98 viewport elements, 258 locatable"
+  ],
+  "positive_control": "The geometry-faithful viewport script (sha256: 15a2ad056dea51a4e907ceece1d176007122f3b9dec415ea87234061167f1d4e) produces non-empty viewport_elements and locatable_elements counts on all tasks, with viewport_elements > 0 and locatable_elements > viewport_elements.",
+  "null_control": "If the denominator is truly ambiguous (both yield_cdp and yield_locatable give meaningful but different answers), the experiment should detect this as MIXED outcome rather than forcing a single denominator choice.",
+  "measurement_validity": [
+    "Docker Hub am1n3e/webarena-verified-shopping:latest is running and accessible at localhost:8080",
+    "Playwright 1.62.0 + Chromium 151.0.7922.34 functional (verified in parent)",
+    "Geometry-faithful viewport script: /tmp/opencode/measure_yield_geo_v2.py sha256 15a2ad056dea51a4e907ceece1d176007122f3b9dec415ea87234061167f1d4e",
+    "Each task uses a fresh browser context (no session leakage between tasks)",
+    "Scroll-to-bottom measurement uses Playwright page.evaluate('window.scrollTo(0, document.body.scrollHeight)') with 2s settle time",
+    "Task selection randomized from WebArena-Verified dataset covering product-listing, detail, cart, and checkout page types",
+    "At least 1 gitlab task and 1 reddit task measured for site-type comparison",
+    "Both yield_cdp and yield_locatable reported for every task",
+    "Truncated_8192 bug fixed: ensure full accessibility tree is captured (no truncation at 8192 characters)",
+    "Raw accessibility tree saved as durable artifact for each task (not just summary metrics)"
+  ],
+  "decision_rule": "If (1) Method1's 150-element estimate can be mapped to locatable elements (not CDP nodes) by examining the derivation in EXP-INTEL-33945226776, AND (2) yield_locatable across 8+ shopping tasks has CV < 0.2 (stable estimate), AND (3) yield_locatable mean is within 10pp of Method1 0.365, AND (4) scrolled yield differs from initial viewport yield by <20pp on >50% of tasks, THEN verdict = SURVIVES_CURRENT_TEST for denominator resolution. If any condition fails, verdict = FALSIFIED-IN-SETTING or MIXED as appropriate. If infrastructure prevents measurement, verdict = BLOCKED.",
+  "product_consequence_positive": "Resolving the denominator ambiguity unblocks the 812-task corpus for C-CROSSSITE/C-LLM-INHERIT evaluation. If locatable yield ~0.38 holds, the fragment model is workable and the observation pipeline captures ~38% of interactive elements — sufficient for fragment reuse experiments. This enables the next phase of Product lane evaluation.",
+  "product_consequence_negative": "If the denominator remains ambiguous or locatable yield is unstable across page types, the 812-task corpus cannot be reliably used for C-CROSSSITE. Product lane would need to either (a) redesign the observation pipeline to capture more elements, or (b) explore alternative corpora (Mind2Web, VisualWebArena) that may have different yield characteristics.",
+  "estimated_cost": "Medium: requires Docker container management, Playwright automation across 10+ tasks, scrolled measurement, and raw artifact preservation. Estimated 2-3 hours of compute time.",
+  "expected_information_gain": "High: This experiment resolves the single blocking question for interpreting the 812-task corpus. A clear denominator resolution (either locatable or CDP) changes the product decision from UNKNOWN to either workable or needs-redesign. Even a MIXED outcome (yield varies by page type) provides actionable information about where the observation pipeline breaks down."
 }
