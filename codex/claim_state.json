@@ -129,6 +129,14 @@
         "claim_id": "C-WEB-DYNAMICS",
         "status": "EXPERIMENTAL",
         "reason": "The experiment is measurement_invalid due to insufficient non-leakage transitions on both sites (GitHub 9, MDN 17). This provides no new evidence for or against the title-aware PMI hypothesis on the preregistered target population (real SPA/form-heavy sites with varying titles). The claim remains experimental pending a valid re-run with corrected site selection, action discovery, and sufficient transition density."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-34524411213",
+        "lane": "physics",
+        "decision": "FALSIFIED-IN-SETTING",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "Falsified for DOM structural features (discretized element_count, tree_depth, interactive_density) as state representation on TodoMVC React/Vue degenerate demos: DOM-feature PMI is significantly >0 (p=0.001) but -0.073 and -0.006 bits worse than URL-only on the two sites tested. This specific structural representation does not improve predictive state beyond URL on these sites. However, the broader C-WEB-DYNAMICS hypothesis remains open: the experiment does not test production SPAs with richer DOM evolution, accessibility tree representations, visual layout, or learned state abstractions. Protocol violations (site representativeness, leakage misclassification, in-sample discretization) limit generalization; the hypothesis about DOM features on genuine production SPAs is untested, not rejected."
       }
     ],
     "C-PARAM-INHERIT": [

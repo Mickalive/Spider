@@ -915,6 +915,31 @@
         "handoff.json": "e99cf7fb45797ed1b9a1d14282be8db7ab1386aa67deaade12cc8932c6c1a95d"
       }
     },
+    "EXP-PHYSICS-34524411213": {
+      "lane": "physics",
+      "request_id": "56528aca7637d3cd1fe79a60",
+      "created_at": "2026-09-10T20:07:04.034277+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Can DOM structural features (element counts by type, tree depth, interactive element density) predict next-state transitions on real SPA/form-heavy sites, providing state representation beyond URL and title?",
+      "audit_status": "REVISE",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/physics",
+      "hashes": {
+        "request.json": "d60876669422bd30ecca02b69ad05d139b27de2ca1b563db930bea82fc2e5e9b",
+        "spec.json": "be8eeec467930395ea222723ed1af0c2a434c8ce81529bcf52cb3d621f9f56cf",
+        "prereg.md": "6f59d15b03a72fc9acf4bd4e0243ab923c62cb67e7d50e98a7aa6528bdf3250e",
+        "freeze.json": "aaef2ce4c34bda4c4430b2cfc75f77c318371501c044fa59df88af208ab600c9",
+        "result.json": "f04dc9dfaef1133deda6a59e23dac718ca290c5661eceb28c55ef910b408850e",
+        "report.md": "808f5a930a8e66ba158472fd39fa3c380b2547cf9968f0aaae53b0697e647ff7",
+        "provenance.json": "4eb550873c1214e627466bf4807eaf1a43f01d2e5f643fd1d38e486483a142ca",
+        "audit.json": "dd2b86c542e3fa60e7d2f72086d7b0ac766eda47e48f61ff76cc324194e9e05a",
+        "verdict.json": "42825b54ef31a838f26aa39ce0d61510d931da030e4afebb6ac0e2b95e1ac76e",
+        "handoff.json": "a9dc6923b311e671d45099f61067d2a7026dee1e1dd622603769ffbe0f5c6c85"
+      }
+    },
     "EXP-PRODUCT-33528829801": {
       "lane": "product",
       "request_id": "2629e8e63e200f05556e37ca",

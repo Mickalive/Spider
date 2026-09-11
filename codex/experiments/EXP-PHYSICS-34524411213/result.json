@@ -1,0 +1,160 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34524411213",
+  "lane": "physics",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "dom_vs_url_improvement_bits_react": -0.0728,
+    "dom_vs_url_improvement_bits_vue": -0.0055,
+    "dom_better_site_count": 0,
+    "dom_better_total_sites": 2,
+    "dom_pmi_react": 0.5975,
+    "dom_pmi_vue": 0.7453,
+    "url_pmi_react": 0.6703,
+    "url_pmi_vue": 0.7508,
+    "url_title_pmi_react": 0.6703,
+    "url_title_pmi_vue": 0.7508,
+    "dom_perm_p_react": 0.001,
+    "dom_perm_p_vue": 0.001,
+    "dom_effect_d_react": 6.8674,
+    "dom_effect_d_vue": 17.8220,
+    "url_perm_p_react": 0.001,
+    "url_perm_p_vue": 0.001,
+    "positive_control_pmi": 1.2714,
+    "positive_control_perm_p": 0.001,
+    "positive_control_passes": true,
+    "null_control_pmi": 0.0718,
+    "null_control_perm_p": 0.6314,
+    "null_control_passes": true,
+    "n_non_leakage_react": 76,
+    "n_non_leakage_vue": 78,
+    "n_raw_react": 115,
+    "n_raw_vue": 126,
+    "n_leakage_react": 39,
+    "n_leakage_vue": 48,
+    "data_sufficient_react": true,
+    "data_sufficient_vue": true,
+    "unique_states_dom_react": 25,
+    "unique_states_dom_vue": 16,
+    "unique_states_url_react": 13,
+    "unique_states_url_vue": 13,
+    "unique_sa_pairs_dom_react": 33,
+    "unique_sa_pairs_dom_vue": 21,
+    "alpha_sensitivity_react": {
+      "alpha_0.0": 0.5781,
+      "alpha_0.5": 0.5849,
+      "alpha_1.0": 0.5975,
+      "alpha_2.0": 0.6243
+    },
+    "alpha_sensitivity_vue": {
+      "alpha_0.0": 0.7375,
+      "alpha_0.5": 0.7402,
+      "alpha_1.0": 0.7453,
+      "alpha_2.0": 0.7564
+    },
+    "entropy_reduction_url_react": 3.2053,
+    "entropy_reduction_dom_react": 5.7370,
+    "entropy_reduction_url_vue": 3.3821,
+    "entropy_reduction_dom_vue": 4.1945,
+    "bonferroni_alpha": 0.025,
+    "n_permutations": 1000,
+    "smoothing_alpha": 1.0,
+    "decision_condition_1_dom_gt_url": false,
+    "decision_condition_1_sites_passing": 0,
+    "decision_condition_2_dom_sig": true,
+    "decision_condition_2_sites_passing": 2,
+    "decision_condition_3_positive_control": true,
+    "decision_condition_4_null_control": true,
+    "decision_condition_5_data_sufficiency": true,
+    "decision_survives": false
+  },
+  "controls": {
+    "positive_control_synthetic_spa": {
+      "description": "Synthetic SPA with deterministic DOM evolution (8 states, 4 actions). DOM-feature PMI must be >= 0.5 bits with permutation p < 0.001.",
+      "expected": "DOM-feature PMI >= 0.5 bits, permutation p < 0.001",
+      "observed_pmi": 1.2714,
+      "observed_perm_p": 0.001,
+      "result": "PASS",
+      "evidence_ref": "raw_results.json positive_control"
+    },
+    "null_control_shuffled_synthetic": {
+      "description": "Synthetic SPA with action-independent (shuffled) transitions. DOM-feature PMI must not significantly exceed 0 (permutation p > 0.05).",
+      "expected": "Permutation p > 0.05",
+      "observed_pmi": 0.0718,
+      "observed_perm_p": 0.6314,
+      "result": "PASS",
+      "evidence_ref": "raw_results.json null_control"
+    },
+    "url_only_baseline_react": {
+      "description": "URL path-only state representation baseline for TodoMVC React.",
+      "observed_pmi": 0.6703,
+      "observed_perm_p": 0.001,
+      "result": "BASELINE",
+      "evidence_ref": "raw_results.json site_results.todomvc_react.pmi.url_only"
+    },
+    "url_only_baseline_vue": {
+      "description": "URL path-only state representation baseline for TodoMVC Vue.",
+      "observed_pmi": 0.7508,
+      "observed_perm_p": 0.001,
+      "result": "BASELINE",
+      "evidence_ref": "raw_results.json site_results.todomvc_vue.pmi.url_only"
+    },
+    "url_title_baseline_react": {
+      "description": "URL+title state representation baseline for TodoMVC React.",
+      "observed_pmi": 0.6703,
+      "observed_perm_p": 0.001,
+      "result": "BASELINE",
+      "note": "Identical to URL-only due to zero title variance (unique_titles=1)",
+      "evidence_ref": "raw_results.json site_results.todomvc_react.pmi.url_title"
+    },
+    "url_title_baseline_vue": {
+      "description": "URL+title state representation baseline for TodoMVC Vue.",
+      "observed_pmi": 0.7508,
+      "observed_perm_p": 0.001,
+      "result": "BASELINE",
+      "note": "Identical to URL-only due to zero title variance (unique_titles=1)",
+      "evidence_ref": "raw_results.json site_results.todomvc_vue.pmi.url_title"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-34524411213/raw_results.json",
+      "sha256": "6f106000cf905e8cee806912eb514e9df38fec0561c036ae6172eb9da63ea6b6",
+      "role": "raw"
+    },
+    {
+      "path": "research/physics/dom_features/dom_features_experiment.py",
+      "sha256": "891c0b78f009e615097f22216cbf3b71c0fc2359539c02982bc456af1d34ed1a",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "DOM-feature PMI is significantly > 0 on both sites (React p=0.001, Vue p=0.001), confirming that DOM structural features do carry predictive dynamical information about next-state transitions.",
+    "DOM-feature PMI does NOT exceed URL-only PMI on either site: React DOM=0.597 vs URL=0.670 (-0.073 bits), Vue DOM=0.745 vs URL=0.751 (-0.006 bits). DOM features are strictly worse than URL-only for these sites.",
+    "DOM-feature representation creates more discrete states (React: 25 vs 13 URL-only; Vue: 16 vs 13 URL-only) and more unique SA pairs (React: 33 vs 18; Vue: 21 vs 17), but this state-space expansion does not translate to better predictive PMI.",
+    "Entropy reduction is higher for DOM features than URL-only (React: 5.74 vs 3.21; Vue: 4.19 vs 3.38), suggesting DOM features capture more conditional uncertainty reduction, but this does not translate to higher PMI.",
+    "Alpha sensitivity analysis shows DOM PMI is stable across smoothing values (React: 0.578-0.624; Vue: 0.738-0.756), indicating the result is not an artifact of Laplace smoothing.",
+    "Both positive and null controls pass, validating the PMI computation pipeline and DOM feature extraction.",
+    "Data sufficiency met on both sites (React: 76 non-leakage, Vue: 78 non-leakage), both well above the 30-transition threshold.",
+    "URL+title PMI is identical to URL-only on both sites due to zero title variance (TodoMVC has no title changes across client-side routes), confirming the parent handoff's finding that title variance is necessary for title-aware testing."
+  ],
+  "validity_notes": [
+    "TodoMVC is a degenerate demo app, not representative of production SPA sites. Results may not generalize to complex SPAs with rich DOM evolution.",
+    "The DOM feature vector (element_count, tree_depth, interactive_density) may not capture the relevant structural variation for these simple TodoMVC apps. More expressive features (accessibility tree, visual layout, component hierarchy) might perform differently.",
+    "Discretization into 5 quantile bins may lose information or create artificial state boundaries. The alpha sensitivity analysis provides some robustness check.",
+    "The leakage classification is heuristic: transitions where target_href matches actual URL and action is not button/input are classified as leakage. This may misclassify some SPA transitions.",
+    "Only 2 sites tested (both TodoMVC variants). The frozen spec targeted 2-3 sites. Results on 2 sites with similar architecture (both TodoMVC) limit generalizability.",
+    "The permutation test preserves trajectory structure but shuffles action labels across trajectories. This is a valid test of action-conditioned dependency but does not test all possible null models.",
+    "Entropy reduction is higher for DOM features, suggesting they capture more conditional structure, but PMI (which normalizes by marginal) shows URL-only is better. This discrepancy warrants investigation with larger state spaces.",
+    "The previous run (github_run_id 34538189410) failed with exit code 66. The current results are from the successful first run (github_run_id 34524411213). Both runs used the same frozen code."
+  ],
+  "unresolved": [
+    "Whether DOM structural features provide predictive advantage over URL-only on more complex production SPAs with richer DOM evolution (e.g., dashboards, multi-step forms, e-commerce checkouts).",
+    "Why DOM features have higher entropy reduction but lower PMI than URL-only: is this a sample-size artifact, a discretization effect, or a genuine property of the DOM state space?",
+    "Whether more expressive DOM features (accessibility tree, component hierarchy, visual layout) would outperform URL-only representation.",
+    "Whether the negative result generalizes beyond TodoMVC to SPAs where DOM structure varies more than URL structure.",
+    "Whether the 5-bin quantile discretization is appropriate or whether adaptive/learned discretization would improve DOM-feature PMI.",
+    "The role of state-space expansion: DOM features create more states but with sparser transition data, potentially diluting PMI estimates."
+  ]
+}

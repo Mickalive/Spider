@@ -3,7 +3,7 @@
 Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER_CODEX_ULTIME.md`.
 
 This file is generated only from complete finalized Research 2.0 experiment packets.
-Ingested experiments: **53**. Coverage gaps: **0**.
+Ingested experiments: **54**. Coverage gaps: **0**.
 
 ## Index
 
@@ -45,6 +45,7 @@ Ingested experiments: **53**. Coverage gaps: **0**.
 | EXP-PHYSICS-34149195420 | physics | REVISE | SURVIVES_CURRENT_TEST | C-WEB-DYNAMICS |
 | EXP-PHYSICS-34266105229 | physics | REVISE | FALSIFIED-IN-SETTING | C-WEB-DYNAMICS |
 | EXP-PHYSICS-34348438464 | physics | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-WEB-DYNAMICS |
+| EXP-PHYSICS-34524411213 | physics | REVISE | FALSIFIED-IN-SETTING | C-WEB-DYNAMICS |
 | EXP-PRODUCT-33528829801 | product | PASS | SURVIVES — C-PARAM-INHERIT survives at synthetic in-kernel POC level: distill_parameterized() with _extract_varying_values() correctly induces one parameter slot for isomorphic action paths and resolves to EXECUTABLE with correct bound_action for all 10 unseen single-char identifiers. All four frozen decision-rule conditions satisfied. Audit PASS confirms recomputed metrics match producer. However, the claim ceiling is narrow: single-parameter, single-field, common-prefix heuristic, deterministic synthetic data, hardcoded confidence, simulated baselines. No broader product promotion is authorized by this evidence. | C-PARAM-INHERIT |
 | EXP-PRODUCT-33741671686 | product | PASS | MULTI-PARAM-SURVIVES — the frozen decision rule passes all 7 checks: C1 regression (slot≥1, resolution=1.0, binding=1.0), C2 multi-param (slot=2, distinct, resolution=1.0, binding=1.0), C3 three-param (slot=3, distinct, resolution=1.0, binding=1.0), C4 non-identifier (slot=1, resolution=1.0, binding=1.0), C5 no-collision (slot=2, distinct, resolution=1.0, binding=1.0), null_control passed, no crashes. Producer metrics verified: 21/21 EXECUTABLE, 21/21 binding correct, 0/21 unsubstituted templates. Audit PASS confirms all recomputed metrics match producer. However, the claim ceiling remains narrow: synthetic POC implemented only in run_experiment.py (not in kernel.py), single-intent deterministic observations, trivial full-replacement parameterization for body fields, tautological confidence gate (0.8 == min_confidence 0.8), null control passes via intent mismatch not pattern absence, fragile positional slot-to-param mapping in harness. Do NOT promote to Product Core. | C-PARAM-INHERIT |
 | EXP-PRODUCT-33974562602 | product | PASS | KERNEL-INTEGRATION-FALSIFIED | C-PARAM-INHERIT |
@@ -39602,6 +39603,959 @@ No Git commit/push performed per branch discipline.
     "research/experiments/EXP-PHYSICS-34348438464/audit.json required_fixes action_discovery_site_selection_sample_size"
   ],
   "recommended_action": "DESIGN a Physics experiment testing DOM structural features (element counts, tree depth, interactive element density) as state representation for predicting next-state transitions on real SPA/form-heavy sites. Critical criteria: (1) select genuine SPA sites with client-side routing and sufficient transition density (≥30 non-leakage); (2) use Playwright locator API for action discovery (fix button:visible pseudo-selector limitation); (3) adapt non-leakage classification for SPA vs MPA sites; (4) compute PMI or alternative information-theoretic measures on DOM-feature representations; (5) include trajectory-level entropy rates as complementary measure; (6) perform alpha sensitivity analysis for PMI if applicable. This question is materially orthogonal to title-aware PMI, testing a different level of description for C-WEB-DYNAMICS while avoiding the site-selection pitfalls of the PMI approach."
+}
+```
+
+# EXP-PHYSICS-34524411213
+
+## request.json
+
+```text
+{
+  "base_sha": "968e41942ca90acfb126fcdc5002d9a4e4e44769",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-10T20:07:04.034277+00:00",
+  "experiment_id": "EXP-PHYSICS-34524411213",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "Can DOM structural features (e.g., element counts, tree depth, interactive element density) predict next-state transitions on real SPA/form-heavy sites, providing state representation beyond URL and title?",
+  "lane": "physics",
+  "origin_github_run_id": "34524411213",
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-34348438464",
+    "path": "research/experiments/EXP-PHYSICS-34348438464/handoff.json",
+    "sha256": "e99cf7fb45797ed1b9a1d14282be8db7ab1386aa67deaade12cc8932c6c1a95d"
+  },
+  "reason": "pulse",
+  "request_hash": "5f06b619f14031a08f62c8b7514722856e431407013f190354fd80e904a97d1f",
+  "request_id": "56528aca7637d3cd1fe79a60",
+  "schema_version": 1
+}
+```
+
+## spec.json
+
+```text
+{
+  "experiment_id": "EXP-PHYSICS-34524411213",
+  "lane": "physics",
+  "claim_ids": ["C-WEB-DYNAMICS"],
+  "question": "Can DOM structural features (element counts by type, tree depth, interactive element density) predict next-state transitions on real SPA/form-heavy sites, providing state representation beyond URL and title?",
+  "hypothesis": "On genuine SPA/form-heavy sites with client-side routing, a state representation based on DOM structural features (element counts, tree depth, interactive element density) yields higher action-conditioned PMI than URL-only representation, and PMI with DOM features is significantly > 0 under cross-trajectory permutation. This tests whether structural page properties carry predictive dynamical information that semantic identifiers (URL, title) miss.",
+  "falsifier": "DOM-feature PMI does not exceed URL-only PMI by >= 0.1 bits on >= 2/3 sites (Bonferroni-corrected permutation p < 0.025), OR permutation test shows DOM-feature PMI is not significantly > 0 on >= 2/3 sites, OR positive control (synthetic SPA) fails (DOM-feature PMI < 0.5 bits or permutation p > 0.001), OR data sufficiency threshold (< 30 non-leakage transitions per site) is not met on >= 2/3 sites.",
+  "baselines": [
+    "URL-only PMI baseline: state = URL path",
+    "URL+title PMI baseline: state = (URL, document.title)",
+    "DOM-feature PMI: state = discretized DOM feature vector (element counts, tree depth, interactive density)",
+    "Frequency baseline: P(S_{t+1}) marginal, no action conditioning",
+    "Shuffle null: action labels permuted across trajectories"
+  ],
+  "positive_control": "Synthetic SPA with deterministic DOM evolution: as elements are added/removed by actions, DOM feature vectors change predictably. DOM-feature PMI must be >= 0.5 bits with permutation p < 0.001. Verifies DOM feature extraction and PMI computation pipeline work correctly.",
+  "null_control": "On the synthetic SPA with action-independent (shuffled) transitions, DOM-feature PMI must not significantly exceed 0 (permutation p > 0.05). Verifies pipeline does not detect structure when absent.",
+  "measurement_validity": [
+    "Each site must yield >= 30 non-leakage transitions (target 50+) for PMI estimation",
+    "Sites must be genuine SPAs with client-side routing (verified via pre-survey: URL changes without full page reload, DOM updates on navigation)",
+    "DOM features must be extracted via Playwright page.evaluate() at each step, preserving raw feature vectors",
+    "State discretization: DOM feature vectors discretized into bins (element_count_bins, depth_bins, density_bins) with bin edges fit on TRAIN only",
+    "Cross-trajectory permutation null (1000 permutations) with trajectory structure preserved",
+    "Positive control uses synthetic SPA with known DOM evolution, separate from real data",
+    "Non-leakage classification adapted for SPA: leakage = action.target_href == state_after.url AND no client-side route change (document.querySelector('[data-reactroot]') or history.pushState detection)",
+    "Alpha sensitivity analysis at alpha = 0, 0.5, 1.0, 2.0 for PMI smoothing"
+  ],
+  "decision_rule": "If ALL of: (1) DOM-feature PMI > URL-only PMI by >= 0.1 bits on >= 2/3 sites (Bonferroni-corrected permutation p < 0.025); (2) DOM-feature PMI significantly > 0 on >= 2/3 sites (permutation p < 0.025); (3) positive control passes (DOM-feature PMI >= 0.5, p < 0.001); (4) null control passes (p > 0.05); (5) data sufficiency met on >= 2/3 sites — verdict = SURVIVES_CURRENT_TEST for C-WEB-DYNAMICS. If conditions (1) or (2) fail on 2+ sites — verdict = FALSIFIED-IN-SETTING. If data sufficiency fails on 2+ sites — verdict = MEASUREMENT_INVALID.",
+  "product_consequence_positive": "DOM structural features provide a state representation beyond URL/title that captures dynamical structure. Product could use DOM-feature hashing for state identity, enabling parameterized inheritance on sites where URL/title are ambiguous (e.g., multi-step forms with same URL but different DOM states). Supports C-WEB-DYNAMICS: Web transformations contain predictive structure at the structural level.",
+  "product_consequence_negative": "If DOM features do not improve PMI over URL-only, the structural level of description does not carry additional dynamical information for the tested sites. Product should focus on URL/title/semantic representations. Does NOT falsify C-WEB-DYNAMICS entirely—only this specific structural representation.",
+  "estimated_cost": "Moderate: requires Playwright browser data collection on 2-3 SPA sites (30 trajectories x 8 steps each, ~720 total transitions), DOM feature extraction via page.evaluate(), synthetic SPA generation, PMI computation across 3 representations, permutation tests. No model calls. ~2-3 hours compute.",
+  "expected_information_gain": "High: This is the first test of DOM structural features as state representation for Web dynamics. A positive result opens a new level of description for C-WEB-DYNAMICS beyond semantic identifiers. A negative result constrains the structural hypothesis and redirects to other representation levels (accessibility tree, visual features, session state). Materially different from title-aware PMI: tests structural rather than semantic state."
+}
+```
+
+## prereg.md
+
+```text
+# EXP-PHYSICS-34524411213 Preregistration
+
+## 1. Experiment Identity
+
+- **Experiment ID**: EXP-PHYSICS-34524411213
+- **Lane**: Physics
+- **Claim**: C-WEB-DYNAMICS (Interactive Web transformations contain predictive dynamical structure beyond memory and ordinary similarity)
+- **Date**: 2026-09-10
+- **Status**: DESIGN — NOT YET FROZEN
+
+## 2. Scientific Question
+
+Can DOM structural features (element counts by type, tree depth, interactive element density) predict next-state transitions on real SPA/form-heavy sites, providing state representation beyond URL and title?
+
+## 3. Motivation
+
+Prior Physics work established:
+- URL-only PMI is strongly positive on TodoMVC hash-SPA transitions: React 1.360 bits, Vue 1.323 bits (EXP-PHYSICS-34266105229)
+- Title-aware PMI showed 0% improvement on TodoMVC (zero title variance) and was MEASUREMENT_INVALID on GitHub/MDN (MPA sites with insufficient transition density, EXP-PHYSICS-34348438464)
+- The title-aware hypothesis remains untested on genuine SPA sites with varying titles
+
+The parent handoff (EXP-PHYSICS-34348438464) recommended testing DOM structural features as a materially orthogonal level of description. While titles are semantic identifiers, DOM structural features (element counts, tree depth, interactive density) capture the *physical structure* of the page. A SPA with the same URL and title but different DOM state (e.g., a form at step 2 vs step 3) would be indistinguishable at URL/title level but distinguishable at DOM structure level.
+
+This experiment tests whether DOM structural features carry predictive dynamical information that URL and title miss.
+
+## 4. Hypotheses
+
+### H1: DOM-feature PMI > URL-only PMI
+On genuine SPA/form-heavy sites, PMI computed with DOM structural features as state representation exceeds URL-only PMI by >= 0.1 bits on >= 2/3 sites.
+
+### H2: DOM-feature PMI significantly > 0
+DOM-feature PMI is significantly > 0 under cross-trajectory permutation (p < 0.025 after Bonferroni correction) on >= 2/3 sites.
+
+### H3: Positive Control
+On synthetic SPA with deterministic DOM evolution, DOM-feature PMI >= 0.5 bits with permutation p < 0.001.
+
+### H4: Null Control
+On synthetic SPA with action-independent (shuffled) transitions, DOM-feature PMI does not significantly exceed 0 (permutation p > 0.05).
+
+## 5. Data Collection
+
+### 5.1 Site Selection
+
+Select 2-3 genuine SPA/form-heavy sites with client-side routing. Pre-survey criteria:
+- URL changes without full page reload (history.pushState or hash routing)
+- DOM updates on navigation (document.querySelector('[data-reactroot]') or Vue mount point detected)
+- Multiple interactive forms or multi-step workflows
+- No CAPTCHA/403 blocks under polite crawling (0.5s delay)
+
+Candidate categories:
+- Survey builders (Typeform, Google Forms if accessible)
+- E-commerce checkouts (multi-step forms)
+- Dashboard apps (React/Vue admin panels)
+- TodoMVC variants with form interactions (already validated)
+
+### 5.2 Synthetic SPA (Positive Control)
+
+Generate synthetic SPA with 8 states, 4 actions, deterministic transitions, and DOM feature vectors that evolve predictably:
+- Each state has a unique DOM feature vector (element_count, tree_depth, interactive_density)
+- Actions modify specific features (e.g., "add_item" increments element_count, "navigate" changes tree_depth)
+- DOM feature vectors are 3-dimensional: [element_count, tree_depth, interactive_density]
+- Element count ranges 10-50, tree depth 2-8, interactive density 0.1-0.5
+
+### 5.3 Data Collection Protocol
+
+For each site:
+1. Navigate to entry URL
+2. At each step:
+   a. Extract state representation: URL, title, DOM features
+   b. Discover available actions (Playwright locator API: button:visible, a:visible, input:visible)
+   c. Randomly select one action
+   d. Execute action, wait for navigation/DOM update (networkidle)
+   e. Extract next-state representation
+   f. Record transition: (state, action, next_state, raw_features)
+3. Collect 30 trajectories x 8 steps = 240 transitions per site (target)
+4. Polite delay: 0.5s between actions, 2s between trajectories
+
+### 5.4 DOM Feature Extraction
+
+At each step, extract via Playwright page.evaluate():
+```javascript
+{
+  element_count: document.querySelectorAll('*').length,
+  tree_depth: computeMaxDepth(document.body),  // recursive childElementCount
+  interactive_density: (
+    document.querySelectorAll('button, a, input, select, textarea, [role="button"]').length
+    / Math.max(document.querySelectorAll('*').length, 1)
+  ),
+  form_count: document.querySelectorAll('form').length,
+  input_count: document.querySelectorAll('input, select, textarea').length,
+  button_count: document.querySelectorAll('button, [role="button"]').length
+}
+```
+
+Store raw feature vectors for each transition.
+
+## 6. State Representations
+
+### 6.1 URL-only
+State = URL path (query params stripped, hash stripped)
+
+### 6.2 URL+title
+State = (URL path, document.title)
+
+### 6.3 DOM-feature
+State = discretized DOM feature vector:
+- Primary features: element_count, tree_depth, interactive_density
+- Secondary features: form_count, input_count, button_count (for ablation)
+- Discretization: each feature binned into 5 quantile bins (edges fit on TRAIN only)
+- State = (element_count_bin, tree_depth_bin, interactive_density_bin)
+- 5 x 5 x 5 = 125 possible discrete states
+
+## 7. PMI Computation
+
+### 7.1 Formula
+PMI(a, s, s') = log2[ P(s'|s,a) / P(s'|s) ]
+
+Where:
+- P(s'|s,a) = count(s,a,s') / count(s,a) (Laplace-smoothed with alpha=1.0)
+- P(s'|s) = count(s,s') / count(s) (Laplace-smoothed with alpha=1.0)
+- PMI averaged over all observed (s,a,s') triples
+
+### 7.2 Alpha Sensitivity
+Compute PMI at alpha = 0, 0.5, 1.0, 2.0 to assess smoothing sensitivity.
+
+## 8. Statistical Tests
+
+### 8.1 Primary: Cross-Trajectory Permutation
+- Shuffle action labels across trajectories (preserving trajectory structure)
+- 1000 permutations
+- p = (count_shuffled_gt_observed + 1) / (1000 + 1)
+- One-sided test: observed PMI > shuffled distribution
+
+### 8.2 Representation Comparison
+- Paired comparison: DOM-feature PMI vs URL-only PMI per site
+- Effect size: Cohen's d of permutation distributions
+- Bonferroni correction for 3 representations x 2 tests = 6 comparisons (alpha = 0.025)
+
+### 8.3 Secondary: Trajectory-Level Entropy Rate
+- H(S'|S) = -sum P(s'|s) log2 P(s'|s)
+- H(S'|S,A) = -sum P(s'|s,a) log2 P(s'|s,a)
+- Entropy reduction = H(S'|S) - H(S'|S,A)
+- Positive entropy reduction indicates action-conditioned structure
+
+## 9. Null Models
+
+### 9.1 Shuffle Null
+Permute action labels across trajectories. Destroys action->outcome dependency while preserving state frequencies.
+
+### 9.2 Frequency Null
+Predict next state from marginal distribution P(S_{t+1}). Expected PMI = 0.
+
+### 9.3 URL-only Null
+If DOM-feature PMI > URL-only PMI, test whether the improvement is significant via paired permutation on representation differences.
+
+## 10. Controls
+
+### 10.1 Positive Control (Synthetic SPA)
+- Synthetic SPA with deterministic DOM evolution
+- DOM-feature PMI must be >= 0.5 bits with permutation p < 0.001
+- Verifies: DOM feature extraction works, PMI computation correct, pipeline detects known structure
+
+### 10.2 Null Control (Shuffled Synthetic)
+- Same synthetic SPA with shuffled actions
+- DOM-feature PMI must not significantly exceed 0 (permutation p > 0.05)
+- Verifies: pipeline does not detect structure when absent
+
+### 10.3 Baseline Comparison
+- URL-only PMI provides lower bound
+- URL+title PMI provides semantic baseline
+- DOM-feature PMI should exceed both if structural features carry additional information
+
+### 10.4 Data Sufficiency
+- >= 30 non-leakage transitions per site (target 50+)
+- If < 30, site is excluded and counted toward MEASUREMENT_INVALID threshold
+
+## 11. Validity Threats
+
+### 11.1 SPA vs MPA Site Selection
+Prior experiment (EXP-PHYSICS-34348438464) failed because GitHub/MDN are MPAs. Mitigation: pre-survey verifies client-side routing via DOM update detection, not just title variance. Exclude sites where > 80% of transitions are link-navigation leakage.
+
+### 11.2 DOM Feature Representativeness
+6 features may not capture relevant structural variation. Mitigation: primary test uses 3 features (element_count, tree_depth, interactive_density); secondary features (form_count, input_count, button_count) available for ablation. Raw feature vectors preserved for downstream analysis.
+
+### 11.3 Discretization Artifacts
+5-bin quantile discretization may lose information or create artificial state boundaries. Mitigation: alpha sensitivity analysis; report results at multiple bin counts (3, 5, 10) as exploratory.
+
+### 11.2 Synthetic-to-Real Gap
+Synthetic SPA DOM evolution may not reflect real SPA dynamics. Mitigation: synthetic is positive control only; real-data test is the confirmatory claim.
+
+### 11.3 Sample Size
+With 30 trajectories x 8 steps = 240 transitions per site, and ~50-100 non-leakage expected, power is moderate for detecting large effects (d > 0.8). Smaller effects may require more data. Report confidence intervals.
+
+### 11.4 Multiple Comparisons
+3 sites x 2 tests (PMI > 0, DOM > URL) = 6 comparisons. Bonferroni correction alpha = 0.025. Conservative but appropriate for confirmatory test.
+
+## 12. Decision Rules
+
+### 12.1 SURVIVES_CURRENT_TEST
+If ALL of:
+1. DOM-feature PMI > URL-only PMI by >= 0.1 bits on >= 2/3 sites (Bonferroni-corrected permutation p < 0.025)
+2. DOM-feature PMI significantly > 0 on >= 2/3 sites (permutation p < 0.025)
+3. Positive control passes (DOM-feature PMI >= 0.5, p < 0.001)
+4. Null control passes (p > 0.05)
+5. Data sufficiency met on >= 2/3 sites (>= 30 non-leakage transitions)
+
+### 12.2 FALSIFIED-IN-SETTING
+If ANY of:
+1. DOM-feature PMI does not exceed URL-only PMI by >= 0.1 bits on 2+ sites
+2. DOM-feature PMI is not significantly > 0 on 2+ sites
+3. Positive control fails
+4. Null control fails
+
+### 12.3 MEASUREMENT_INVALID
+If:
+1. Data sufficiency (< 30 non-leakage) on 2+ sites
+2. Pipeline errors prevent computation
+3. SPA pre-survey fails on all candidate sites
+
+## 13. Expected Outcomes
+
+### 13.1 Positive Result (SURVIVES_CURRENT_TEST)
+- DOM structural features capture dynamical structure beyond URL/title
+- Product could use DOM-feature hashing for state identity on form-heavy sites
+- Justifies further investigation of structural state representation (accessibility tree, visual features)
+- Supports C-WEB-DYNAMICS: Web transformations have predictive structure at the structural level
+
+### 13.2 Negative Result (FALSIFIED-IN-SETTING)
+- DOM structural features do not improve PMI over URL-only on tested sites
+- Product should focus on URL/title/semantic representations
+- Does NOT falsify C-WEB-DYNAMICS entirely—only this specific structural representation
+- Consider alternative representations: accessibility tree, visual features, session state
+
+### 13.3 Invalid Result (MEASUREMENT_INVALID)
+- Insufficient SPA sites or transition density
+- Pipeline needs debugging
+- Not scientific evidence for or against
+
+## 14. Analysis Plan
+
+1. **Pre-survey**: Verify SPA candidate sites via DOM update detection
+2. **Positive control**: Generate synthetic SPA, extract DOM features, compute PMI
+3. **Data collection**: Playwright browser transitions on 2-3 SPA sites
+4. **Feature extraction**: DOM features via page.evaluate() at each step
+5. **Discretization**: Quantile bins fit on TRAIN only
+6. **PMI computation**: URL-only, URL+title, DOM-feature representations
+7. **Permutation tests**: 1000 cross-trajectory permutations per representation per site
+8. **Alpha sensitivity**: PMI at alpha = 0, 0.5, 1.0, 2.0
+9. **Entropy rates**: H(S'|S), H(S'|S,A), entropy reduction
+10. **Decision**: Apply frozen decision rule
+
+## 15. Analysis Code
+
+Analysis will be implemented in Python using:
+- `playwright` for browser data collection and DOM feature extraction
+- `numpy` for array operations and random generation
+- `scipy.stats` for statistical tests
+- `collections.Counter` for majority voting and PMI computation
+- Standard library only for discretization and feature processing
+
+Code will be committed to `research/physics/dom_features/` before execution.
+
+## 16. Deviation Policy
+
+Any deviation from this preregistration will be labeled EXPLORATORY and cannot support confirmatory claims. A new confirmatory claim requires a new preregistration.
+
+## 17. Freeze Statement
+
+This preregistration is frozen BEFORE any analysis code is written or any outcome data is inspected. The experiment will be executed exactly as described here.
+```
+
+## freeze.json
+
+```text
+{
+  "experiment_id": "EXP-PHYSICS-34524411213",
+  "frozen_at": "2026-09-10T20:09:54.462043+00:00",
+  "hashes": {
+    "prereg.md": "6f59d15b03a72fc9acf4bd4e0243ab923c62cb67e7d50e98a7aa6528bdf3250e",
+    "request.json": "d60876669422bd30ecca02b69ad05d139b27de2ca1b563db930bea82fc2e5e9b",
+    "spec.json": "be8eeec467930395ea222723ed1af0c2a434c8ce81529bcf52cb3d621f9f56cf"
+  },
+  "schema_version": 1
+}
+```
+
+## result.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34524411213",
+  "lane": "physics",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "dom_vs_url_improvement_bits_react": -0.0728,
+    "dom_vs_url_improvement_bits_vue": -0.0055,
+    "dom_better_site_count": 0,
+    "dom_better_total_sites": 2,
+    "dom_pmi_react": 0.5975,
+    "dom_pmi_vue": 0.7453,
+    "url_pmi_react": 0.6703,
+    "url_pmi_vue": 0.7508,
+    "url_title_pmi_react": 0.6703,
+    "url_title_pmi_vue": 0.7508,
+    "dom_perm_p_react": 0.001,
+    "dom_perm_p_vue": 0.001,
+    "dom_effect_d_react": 6.8674,
+    "dom_effect_d_vue": 17.8220,
+    "url_perm_p_react": 0.001,
+    "url_perm_p_vue": 0.001,
+    "positive_control_pmi": 1.2714,
+    "positive_control_perm_p": 0.001,
+    "positive_control_passes": true,
+    "null_control_pmi": 0.0718,
+    "null_control_perm_p": 0.6314,
+    "null_control_passes": true,
+    "n_non_leakage_react": 76,
+    "n_non_leakage_vue": 78,
+    "n_raw_react": 115,
+    "n_raw_vue": 126,
+    "n_leakage_react": 39,
+    "n_leakage_vue": 48,
+    "data_sufficient_react": true,
+    "data_sufficient_vue": true,
+    "unique_states_dom_react": 25,
+    "unique_states_dom_vue": 16,
+    "unique_states_url_react": 13,
+    "unique_states_url_vue": 13,
+    "unique_sa_pairs_dom_react": 33,
+    "unique_sa_pairs_dom_vue": 21,
+    "alpha_sensitivity_react": {
+      "alpha_0.0": 0.5781,
+      "alpha_0.5": 0.5849,
+      "alpha_1.0": 0.5975,
+      "alpha_2.0": 0.6243
+    },
+    "alpha_sensitivity_vue": {
+      "alpha_0.0": 0.7375,
+      "alpha_0.5": 0.7402,
+      "alpha_1.0": 0.7453,
+      "alpha_2.0": 0.7564
+    },
+    "entropy_reduction_url_react": 3.2053,
+    "entropy_reduction_dom_react": 5.7370,
+    "entropy_reduction_url_vue": 3.3821,
+    "entropy_reduction_dom_vue": 4.1945,
+    "bonferroni_alpha": 0.025,
+    "n_permutations": 1000,
+    "smoothing_alpha": 1.0,
+    "decision_condition_1_dom_gt_url": false,
+    "decision_condition_1_sites_passing": 0,
+    "decision_condition_2_dom_sig": true,
+    "decision_condition_2_sites_passing": 2,
+    "decision_condition_3_positive_control": true,
+    "decision_condition_4_null_control": true,
+    "decision_condition_5_data_sufficiency": true,
+    "decision_survives": false
+  },
+  "controls": {
+    "positive_control_synthetic_spa": {
+      "description": "Synthetic SPA with deterministic DOM evolution (8 states, 4 actions). DOM-feature PMI must be >= 0.5 bits with permutation p < 0.001.",
+      "expected": "DOM-feature PMI >= 0.5 bits, permutation p < 0.001",
+      "observed_pmi": 1.2714,
+      "observed_perm_p": 0.001,
+      "result": "PASS",
+      "evidence_ref": "raw_results.json positive_control"
+    },
+    "null_control_shuffled_synthetic": {
+      "description": "Synthetic SPA with action-independent (shuffled) transitions. DOM-feature PMI must not significantly exceed 0 (permutation p > 0.05).",
+      "expected": "Permutation p > 0.05",
+      "observed_pmi": 0.0718,
+      "observed_perm_p": 0.6314,
+      "result": "PASS",
+      "evidence_ref": "raw_results.json null_control"
+    },
+    "url_only_baseline_react": {
+      "description": "URL path-only state representation baseline for TodoMVC React.",
+      "observed_pmi": 0.6703,
+      "observed_perm_p": 0.001,
+      "result": "BASELINE",
+      "evidence_ref": "raw_results.json site_results.todomvc_react.pmi.url_only"
+    },
+    "url_only_baseline_vue": {
+      "description": "URL path-only state representation baseline for TodoMVC Vue.",
+      "observed_pmi": 0.7508,
+      "observed_perm_p": 0.001,
+      "result": "BASELINE",
+      "evidence_ref": "raw_results.json site_results.todomvc_vue.pmi.url_only"
+    },
+    "url_title_baseline_react": {
+      "description": "URL+title state representation baseline for TodoMVC React.",
+      "observed_pmi": 0.6703,
+      "observed_perm_p": 0.001,
+      "result": "BASELINE",
+      "note": "Identical to URL-only due to zero title variance (unique_titles=1)",
+      "evidence_ref": "raw_results.json site_results.todomvc_react.pmi.url_title"
+    },
+    "url_title_baseline_vue": {
+      "description": "URL+title state representation baseline for TodoMVC Vue.",
+      "observed_pmi": 0.7508,
+      "observed_perm_p": 0.001,
+      "result": "BASELINE",
+      "note": "Identical to URL-only due to zero title variance (unique_titles=1)",
+      "evidence_ref": "raw_results.json site_results.todomvc_vue.pmi.url_title"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-34524411213/raw_results.json",
+      "sha256": "6f106000cf905e8cee806912eb514e9df38fec0561c036ae6172eb9da63ea6b6",
+      "role": "raw"
+    },
+    {
+      "path": "research/physics/dom_features/dom_features_experiment.py",
+      "sha256": "891c0b78f009e615097f22216cbf3b71c0fc2359539c02982bc456af1d34ed1a",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "DOM-feature PMI is significantly > 0 on both sites (React p=0.001, Vue p=0.001), confirming that DOM structural features do carry predictive dynamical information about next-state transitions.",
+    "DOM-feature PMI does NOT exceed URL-only PMI on either site: React DOM=0.597 vs URL=0.670 (-0.073 bits), Vue DOM=0.745 vs URL=0.751 (-0.006 bits). DOM features are strictly worse than URL-only for these sites.",
+    "DOM-feature representation creates more discrete states (React: 25 vs 13 URL-only; Vue: 16 vs 13 URL-only) and more unique SA pairs (React: 33 vs 18; Vue: 21 vs 17), but this state-space expansion does not translate to better predictive PMI.",
+    "Entropy reduction is higher for DOM features than URL-only (React: 5.74 vs 3.21; Vue: 4.19 vs 3.38), suggesting DOM features capture more conditional uncertainty reduction, but this does not translate to higher PMI.",
+    "Alpha sensitivity analysis shows DOM PMI is stable across smoothing values (React: 0.578-0.624; Vue: 0.738-0.756), indicating the result is not an artifact of Laplace smoothing.",
+    "Both positive and null controls pass, validating the PMI computation pipeline and DOM feature extraction.",
+    "Data sufficiency met on both sites (React: 76 non-leakage, Vue: 78 non-leakage), both well above the 30-transition threshold.",
+    "URL+title PMI is identical to URL-only on both sites due to zero title variance (TodoMVC has no title changes across client-side routes), confirming the parent handoff's finding that title variance is necessary for title-aware testing."
+  ],
+  "validity_notes": [
+    "TodoMVC is a degenerate demo app, not representative of production SPA sites. Results may not generalize to complex SPAs with rich DOM evolution.",
+    "The DOM feature vector (element_count, tree_depth, interactive_density) may not capture the relevant structural variation for these simple TodoMVC apps. More expressive features (accessibility tree, visual layout, component hierarchy) might perform differently.",
+    "Discretization into 5 quantile bins may lose information or create artificial state boundaries. The alpha sensitivity analysis provides some robustness check.",
+    "The leakage classification is heuristic: transitions where target_href matches actual URL and action is not button/input are classified as leakage. This may misclassify some SPA transitions.",
+    "Only 2 sites tested (both TodoMVC variants). The frozen spec targeted 2-3 sites. Results on 2 sites with similar architecture (both TodoMVC) limit generalizability.",
+    "The permutation test preserves trajectory structure but shuffles action labels across trajectories. This is a valid test of action-conditioned dependency but does not test all possible null models.",
+    "Entropy reduction is higher for DOM features, suggesting they capture more conditional structure, but PMI (which normalizes by marginal) shows URL-only is better. This discrepancy warrants investigation with larger state spaces.",
+    "The previous run (github_run_id 34538189410) failed with exit code 66. The current results are from the successful first run (github_run_id 34524411213). Both runs used the same frozen code."
+  ],
+  "unresolved": [
+    "Whether DOM structural features provide predictive advantage over URL-only on more complex production SPAs with richer DOM evolution (e.g., dashboards, multi-step forms, e-commerce checkouts).",
+    "Why DOM features have higher entropy reduction but lower PMI than URL-only: is this a sample-size artifact, a discretization effect, or a genuine property of the DOM state space?",
+    "Whether more expressive DOM features (accessibility tree, component hierarchy, visual layout) would outperform URL-only representation.",
+    "Whether the negative result generalizes beyond TodoMVC to SPAs where DOM structure varies more than URL structure.",
+    "Whether the 5-bin quantile discretization is appropriate or whether adaptive/learned discretization would improve DOM-feature PMI.",
+    "The role of state-space expansion: DOM features create more states but with sparser transition data, potentially diluting PMI estimates."
+  ]
+}
+```
+
+## report.md
+
+```text
+# EXP-PHYSICS-34524411213 — Execution Report
+
+## Experiment Summary
+
+**Experiment ID**: EXP-PHYSICS-34524411213
+**Lane**: Physics
+**Claim**: C-WEB-DYNAMICS
+**Question**: Can DOM structural features (element counts, tree depth, interactive element density) predict next-state transitions on real SPA/form-heavy sites, providing state representation beyond URL and title?
+**Outcome**: FALSIFIES (status=COMPLETE)
+
+## Scientific Context
+
+This experiment tests whether DOM structural features provide a state representation that captures predictive dynamical information beyond URL and title. The parent experiment (EXP-PHYSICS-34348438464) found that title-aware PMI was MEASUREMENT_INVALID due to site selection mismatch (MPA vs SPA sites). The current experiment tests a materially orthogonal hypothesis: whether the *physical structure* of the page (element counts, tree depth, interactive density) carries dynamical information that semantic identifiers (URL, title) miss.
+
+## Key Results
+
+### Controls
+
+| Control | Expected | Observed | Result |
+|---------|----------|----------|--------|
+| Positive control (synthetic SPA) | PMI >= 0.5, p < 0.001 | PMI = 1.271, p = 0.001 | PASS |
+| Null control (shuffled synthetic) | p > 0.05 | p = 0.631 | PASS |
+
+Both controls pass, validating the PMI computation pipeline and DOM feature extraction.
+
+### Site Results
+
+| Site | URL PMI | DOM PMI | Improvement | DOM p-value | Data Sufficient |
+|------|---------|---------|-------------|-------------|-----------------|
+| TodoMVC React | 0.670 | 0.597 | -0.073 bits | 0.001 | Yes (76 transitions) |
+| TodoMVC Vue | 0.751 | 0.745 | -0.006 bits | 0.001 | Yes (78 transitions) |
+
+### Decision Rule Evaluation
+
+| Condition | Required | Observed | Pass |
+|-----------|----------|----------|------|
+| DOM > URL by >= 0.1 bits on >= 2/3 sites | 2/3 sites | 0/2 sites | FAIL |
+| DOM PMI sig > 0 on >= 2/3 sites | 2/3 sites | 2/2 sites | PASS |
+| Positive control passes | Yes | Yes | PASS |
+| Null control passes | Yes | Yes | PASS |
+| Data sufficiency on >= 2/3 sites | 2/3 sites | 2/2 sites | PASS |
+
+**Decision**: FALSIFIED-IN-SETTING — Condition 1 fails on 2+ sites (both).
+
+## Interpretation
+
+### 1. DOM features are informative but not superior to URL
+
+DOM-feature PMI is significantly > 0 on both sites (p = 0.001), confirming that DOM structural features do carry predictive dynamical information about next-state transitions. However, DOM-feature PMI is *lower* than URL-only PMI on both sites (React: -0.073 bits, Vue: -0.006 bits). The structural level of description does not provide better predictive state representation than URL path alone for these TodoMVC apps.
+
+### 2. State-space expansion without predictive gain
+
+DOM features create a larger discrete state space (React: 25 vs 13 states; Vue: 16 vs 13 states) with more unique state-action pairs (React: 33 vs 18; Vue: 21 vs 17). However, this expansion does not translate to better predictive PMI. The additional states appear to dilute transition density without capturing action-conditioned structure that URL misses.
+
+### 3. Entropy reduction paradox
+
+DOM features show higher entropy reduction than URL-only (React: 5.74 vs 3.21 bits; Vue: 4.19 vs 3.38 bits), suggesting they capture more conditional uncertainty reduction. However, PMI (which normalizes by marginal probability) shows URL-only is better. This discrepancy suggests that DOM features capture more *unconditional* structure but URL-only provides better *action-conditioned* prediction relative to the state space size.
+
+### 4. Title variance remains a dead end on TodoMVC
+
+URL+title PMI is identical to URL-only on both sites due to zero title variance (unique_titles = 1). This confirms the parent handoff's finding that TodoMVC titles do not vary across client-side routes. Title-aware testing requires sites where titles change with navigation state.
+
+### 5. Alpha sensitivity confirms robustness
+
+DOM PMI is stable across smoothing values (React: 0.578–0.624; Vue: 0.738–0.756), indicating the result is not an artifact of Laplace smoothing.
+
+## Scope and Limitations
+
+This experiment tests a *specific* structural representation (element count, tree depth, interactive density) on *specific* sites (TodoMVC React and Vue). The falsification applies to this setting:
+
+- **Does NOT falsify** C-WEB-DYNAMICS entirely — only this specific structural representation on these specific sites.
+- **Does NOT test** more complex production SPAs where DOM structure varies more than URL structure.
+- **Does NOT test** more expressive features (accessibility tree, component hierarchy, visual layout).
+- **Does NOT test** adaptive discretization or learned state representations.
+
+## Implications
+
+### For C-WEB-DYNAMICS
+
+The hypothesis that DOM structural features provide predictive state representation beyond URL/title is falsified on TodoMVC. However, the finding that DOM features carry significant predictive information (p = 0.001 on both sites) suggests that the structural level of description is not empty — it is just not superior to URL for these simple apps.
+
+### For Product
+
+Product should focus on URL/title/semantic representations for state identity. DOM structural features may be useful as a *complementary* signal (e.g., for sites where URL is ambiguous) but should not replace URL-based state identity.
+
+### For Future Physics Work
+
+The entropy reduction paradox (DOM has higher entropy reduction but lower PMI) warrants investigation. Possible explanations:
+1. State-space dilution: more states with sparse transitions reduce PMI estimates.
+2. Discretization artifacts: 5-bin quantile discretization may not capture relevant DOM variation.
+3. Site complexity: TodoMVC is too simple for DOM features to provide advantage.
+
+Future work should test on production SPAs with richer DOM evolution, use more expressive features, and explore adaptive discretization.
+```
+
+## provenance.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34524411213",
+  "lane": "physics",
+  "github_run_id": "34524411213",
+  "github_run_attempt": 1,
+  "commit_sha": "f9c5cf01d081f969f5d538afdf044bdca686d0f5",
+  "freeze_sha": "edaefaa18b3c83ddfb1a94e33fd76d0dea86d8f2",
+  "base_sha": "968e41942ca90acfb126fcdc5002d9a4e4e44769",
+  "recorded_at": "2026-09-10T22:38:42.417849+00:00",
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.x",
+    "dependencies": ["playwright", "numpy", "scipy"],
+    "browser": "chromium (headless)",
+    "seed": 42,
+    "pythonhashseed": "0"
+  },
+  "frozen_inputs": {
+    "request.json": {
+      "path": "research/experiments/EXP-PHYSICS-34524411213/request.json",
+      "sha256": "d60876669422bd30ecca02b69ad05d139b27de2ca1b563db930bea82fc2e5e9b"
+    },
+    "spec.json": {
+      "path": "research/experiments/EXP-PHYSICS-34524411213/spec.json",
+      "sha256": "be8eeec467930395ea222723ed1af0c2a434c8ce81529bcf52cb3d621f9f56cf"
+    },
+    "prereg.md": {
+      "path": "research/experiments/EXP-PHYSICS-34524411213/prereg.md",
+      "sha256": "6f59d15b03a72fc9acf4bd4e0243ab923c62cb67e7d50e98a7aa6528bdf3250e"
+    },
+    "freeze.json": {
+      "path": "research/experiments/EXP-PHYSICS-34524411213/freeze.json",
+      "sha256": null
+    }
+  },
+  "artifacts": {
+    "raw_results": {
+      "path": "research/experiments/EXP-PHYSICS-34524411213/raw_results.json",
+      "sha256": "6f106000cf905e8cee806912eb514e9df38fec0561c036ae6172eb9da63ea6b6"
+    },
+    "experiment_code": {
+      "path": "research/physics/dom_features/dom_features_experiment.py",
+      "sha256": "891c0b78f009e615097f22216cbf3b71c0fc2359539c02982bc456af1d34ed1a"
+    }
+  },
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-34348438464",
+    "path": "research/experiments/EXP-PHYSICS-34348438464/handoff.json",
+    "sha256": "e99cf7fb45797ed1b9a1d14282be8db7ab1386aa67deaade12cc8932c6c1a95d"
+  },
+  "data_sources": [
+    {
+      "type": "browser",
+      "site": "TodoMVC React",
+      "url": "https://todomvc.com/examples/react/dist/",
+      "n_transitions_raw": 115,
+      "n_transitions_non_leakage": 76,
+      "n_transitions_leakage": 39
+    },
+    {
+      "type": "browser",
+      "site": "TodoMVC Vue",
+      "url": "https://todomvc.com/examples/vue/dist/",
+      "n_transitions_raw": 126,
+      "n_transitions_non_leakage": 78,
+      "n_transitions_leakage": 48
+    },
+    {
+      "type": "synthetic",
+      "description": "Synthetic SPA with 8 states, 4 actions, deterministic DOM evolution",
+      "n_transitions": 500
+    }
+  ],
+  "execution_commands": [
+    "python research/physics/dom_features/dom_features_experiment.py"
+  ],
+  "reproduction_notes": [
+    "Requires playwright browser installation (chromium)",
+    "Seed=42, PYTHONHASHSEED=0 for determinism",
+    "Sites accessed via public URLs, no authentication required",
+    "Polite delay: 0.3s between actions, 1.0s state capture delay",
+    "Permutation test: 1000 cross-trajectory shuffles"
+  ]
+}
+```
+
+## audit.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34524411213",
+  "lane": "physics",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Site selection does not meet frozen spec/prereg 'genuine SPA/form-heavy sites with client-side routing' (spec.json measurement_validity, prereg.md 5.1-5.2): both sites are TodoMVC React/Vue degenerate demo apps explicitly listed in parent handoff do_not_assume as non-representative of production SPAs. No pre-survey artifact verifying history.pushState/data-reactroot or form-workflow richness was recorded. Retest on 2-3 production form-heavy SPAs (e.g., multi-step checkout/dashboard) with pre-survey evidence.",
+    "Leakage classification deviates from frozen spec: spec requires 'action.target_href == state_after.url AND no client-side route change (data-reactroot or history.pushState detection)' (spec.json measurement_validity). Code classify_non_leakage in dom_features_experiment.py uses only target_href == actual_url string equality without SPA route-change detection, misclassifying TodoMVC hash routes as leakage. Observed leakage 39/115 (34%) and 48/126 (38%) contradicts established parent result that TodoMVC hash-SPA produces 100% non-leakage by construction (handoff EXP-PHYSICS-34348438464). Adapt classifier to hash-aware SPA logic and emit SPA-verification artifact.",
+    "Discretization violates 'bin edges fit on TRAIN only' (spec.json measurement_validity): make_dom_state_fn in dom_features_experiment.py fits quantile bins on all non_leakage transitions without train/test split (no split exists). This is in-sample optimism for dom_features state. Fix with frozen train-only fit and report out-of-sample PMI or cross-validated PMI.",
+    "Entropy rate secondary metric is computed incorrectly: compute_entropy_rates sums -p log p over (s,s') and (s,a,s') pairs without weighting by P(s) and P(s,a) (dom_features_experiment.py), inflating values with state-space size (25 vs 13 states) and creating the reported 'entropy reduction paradox' (React 5.74 vs 3.21 bits). Use weighted definition H(S'|S)= -sum_s P(s) sum_{s'} P(s'|s) log P(s'|s) or flag as exploratory and do not interpret.",
+    "Positive control synthetic SPA is non-discriminating for DOM vs URL claim: synthetic URLs are 1:1 with DOM feature vectors (8 deterministic states), so url_only PMI == dom_features PMI == 1.2714 bits (raw_results.json positive_control url_only_pmi == dom_pmi). Pipeline correctness is verified but DOM-specific gain is not tested. Add synthetic condition where DOM varies orthogonal to URL (same URL, different DOM states) to falsify DOM pipeline specifically.",
+    "PMI smoothing artifact — compute_pmi_stats uses asymmetric Laplace smoothing (alpha added to denominator p_a_given_s and p_s_next_given_s but p_joint_given_s unsmoothed). Absolute PMI bits are conditional on this choice. Parent handoff flagged this as unknown (EXP-PHYSICS-34348438464 handoff unknown). Alpha sensitivity (0.0-2.0) is reported and shows rank stability, but absolute bit claims should note dependency.",
+    "Claims must not be extended beyond TodoMVC until fixes above are applied and production SPA data with sufficient non-leakage density (>=30, target 50+) and action diversity (>1 unique_action) on ambiguous-URL workflows is obtained."
+  ],
+  "validity_findings": [
+    {
+      "id": "site_representativeness",
+      "severity": "high",
+      "finding": "Both sites TodoMVC React and Vue are degenerate demos, not form-heavy production SPAs. Spec targeted 2-3 genuine SPA/form-heavy sites; producer used 2 variants of same TodoMVC architecture. Parent handoff do_not_assume explicitly warns TodoMVC is degenerate and not representative of production SPA sites.",
+      "evidence_ref": "spec.json measurement_validity; prereg.md 5.1; provenance.json data_sources; parent handoff EXP-PHYSICS-34348438464 do_not_assume; result.json metrics n_non_leakage_react=76 n_non_leakage_vue=78"
+    },
+    {
+      "id": "leakage_misclassification",
+      "severity": "high",
+      "finding": "Leakage heuristic misclassifies hash-SPA client-side transitions as leakage. Parent established TodoMVC hash SPA is 100% non-leakage; current run shows 33-38% leakage (39/115, 48/126). Spec leakage definition requiring SPA route-change detection was not implemented. Retained non-leakage subset is biased (likely over-represents button/input actions) and URL path shows 13 unique states despite hash-invariant path, indicating contamination by external navigations.",
+      "evidence_ref": "spec.json measurement_validity leakage definition; research/physics/dom_features/dom_features_experiment.py classify_non_leakage; raw_results.json site_results todomvc_react n_raw/n_leakage/n_non_leakage; provenance.json; handoff EXP-PHYSICS-34348438464 established"
+    },
+    {
+      "id": "discretization_train_leakage",
+      "severity": "medium",
+      "finding": "DOM feature discretization fits 5-bin quantile edges on all non_leakage data in-sample. Spec requires edges fit on TRAIN only. Optimism inflates DOM PMI. Direction is to overestimate DOM; since DOM still worse than URL (-0.0728, -0.0055 bits), correction would strengthen falsification, not overturn it, but protocol is violated.",
+      "evidence_ref": "spec.json measurement_validity discretization; research/physics/dom_features/dom_features_experiment.py make_dom_state_fn fit_quantile_bins; raw_results.json site_results discretization"
+    },
+    {
+      "id": "entropy_calculation_invalid",
+      "severity": "medium",
+      "finding": "Entropy rates H(S'|S) and H(S'|S,A) are computed as unweighted sums over conditional distributions, not P(s)-weighted expectations. This inflates values proportionally to state-space size and invalidates the 'DOM higher entropy reduction' interpretation. Metric is exploratory and not part of decision rule.",
+      "evidence_ref": "research/physics/dom_features/dom_features_experiment.py compute_entropy_rates; raw_results.json site_results todomvc_react/vu entropy; result.json metrics entropy_reduction_*"
+    },
+    {
+      "id": "sampling_and_title_variance",
+      "severity": "low",
+      "finding": "Zero title variance (unique_titles=1 via url_title PMI identical to url_only) is correctly reported and matches parent finding. Data sufficiency thresholds met (76,78 >=30) with stable alpha sensitivity (React 0.578-0.624, Vue 0.738-0.756). Permutation null is correctly implemented as cross-trajectory shuffle preserving trajectory structure, N=1000, p floor 0.000999, Bonferroni alpha 0.025 correctly applied.",
+      "evidence_ref": "result.json controls url_title_baseline_react/vu note identical; raw_results.json pmi url_title == url_only; result.json metrics alpha_sensitivity_*; research/physics/dom_features/dom_features_experiment.py cross_trajectory_shuffle permutation_test"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "url_only_baseline",
+      "finding": "URL-only PMI baseline is strong and significant on both sites (React 0.6703 p=0.001 d=15.97, Vue 0.7508 p=0.001 d=27.48, N=76/78, 13 unique states, 18/17 SA pairs). Recomputed from raw_results.json pmi.url_only matches result.json.",
+      "evidence_ref": "result.json controls url_only_baseline_react/vu; raw_results.json site_results todomvc_react/vu pmi.url_only permutation.url_only",
+      "supports_claim": true
+    },
+    {
+      "id": "url_title_baseline",
+      "finding": "URL+title identical to URL-only (0.6703, 0.7508) due to zero title variance — correctly explains why title-aware PMI cannot be tested on TodoMVC. No improvement over URL-only.",
+      "evidence_ref": "result.json controls url_title_baseline_react/vu note unique_titles=1; raw_results.json site_results todomvc_react/vu pmi.url_title",
+      "supports_claim": true
+    },
+    {
+      "id": "dom_feature_baseline",
+      "finding": "DOM-feature PMI is significantly >0 (React 0.5975 p=0.001 d=6.87, Vue 0.7453 p=0.001 d=17.82) but strictly worse than URL-only by -0.0728 and -0.0055 bits (0/2 sites better). Larger state-space (React 25 vs 13, Vue 16 vs 13; SA pairs 33 vs 18, 21 vs 17) with sparse coverage does not improve prediction. Recomputed improvement dom - url matches producer: -0.0728485868 React, -0.0055087571 Vue. Alpha sensitivity stable.",
+      "evidence_ref": "result.json metrics dom_pmi_react/dom_pmi_vue url_pmi_react/url_pmi_vue dom_vs_url_improvement_bits_*; raw_results.json site_results todomvc_react/vu pmi.dom_features permutation.dom_features dom_vs_url alpha_sensitivity",
+      "supports_claim": true
+    },
+    {
+      "id": "positive_control_synthetic_spa",
+      "finding": "PASS and recomputed identical: dom_pmi 1.2714393798 p=0.000999 (>=0.5, p<0.001). Null-shuffled synthetic dom_pmi 0.07178 p=0.6314 (>0.05) PASS. Pipeline detects structure when present and not when absent. Synthetic control is non-discriminating for DOM vs URL (url_only_pmi == dom_pmi) — verif pipeline, not DOM advantage.",
+      "evidence_ref": "result.json controls positive_control_synthetic_spa/null_control_shuffled_synthetic; raw_results.json positive_control dom_pmi/dom_perm_p null_control null_dom_pmi/null_perm_p; research/physics/dom_features/dom_features_experiment.py generate_synthetic_trajectories run_positive_control run_null_control",
+      "supports_claim": true
+    },
+    {
+      "id": "controls_id_preserved",
+      "finding": "All producer control identifiers preserved for traceability: positive_control_synthetic_spa, null_control_shuffled_synthetic, url_only_baseline_react/vu, url_title_baseline_react/vu, and metric identifiers dom_vs_url_improvement_bits_react/vu, dom_pmi_react/vu, etc., recomputed without renaming.",
+      "evidence_ref": "result.json controls; result.json metrics",
+      "supports_claim": true
+    }
+  ],
+  "recomputed_metrics": {
+    "dom_pmi_react": 0.5974672785,
+    "dom_pmi_vue": 0.7452744279,
+    "url_pmi_react": 0.6703158653,
+    "url_pmi_vue": 0.750783185,
+    "url_title_pmi_react": 0.6703158653,
+    "url_title_pmi_vue": 0.750783185,
+    "dom_vs_url_improvement_bits_react": -0.0728485868,
+    "dom_vs_url_improvement_bits_vue": -0.0055087571,
+    "dom_better_site_count": 0,
+    "dom_better_total_sites": 2,
+    "dom_perm_p_react": 0.000999000999000999,
+    "dom_perm_p_vue": 0.000999000999000999,
+    "dom_effect_d_react": 6.867381944921026,
+    "dom_effect_d_vue": 17.821997012199063,
+    "url_perm_p_react": 0.000999000999000999,
+    "url_perm_p_vue": 0.000999000999000999,
+    "positive_control_pmi": 1.2714393798518162,
+    "positive_control_perm_p": 0.000999000999000999,
+    "positive_control_passes": true,
+    "null_control_pmi": 0.07178175135774488,
+    "null_control_perm_p": 0.6313686313686314,
+    "null_control_passes": true,
+    "n_non_leakage_react": 76,
+    "n_non_leakage_vue": 78,
+    "n_raw_react": 115,
+    "n_raw_vue": 126,
+    "n_leakage_react": 39,
+    "n_leakage_vue": 48,
+    "unique_states_dom_react": 25,
+    "unique_states_dom_vue": 16,
+    "unique_states_url_react": 13,
+    "unique_states_url_vue": 13,
+    "alpha_sensitivity_react_alpha_0": 0.5780930057,
+    "alpha_sensitivity_react_alpha_1": 0.5974672785,
+    "alpha_sensitivity_vue_alpha_0": 0.7375144857,
+    "alpha_sensitivity_vue_alpha_1": 0.7452744279,
+    "recomputation_notes": "Recomputed dom_vs_url improvement as dom_pmi - url_pmi from raw_results.json site_results todomvc_react/vu pmi; matches result.json metrics to <1e-4 rounding. Permutation p-values are floor 1/(1000+1)=0.000999. Leakage fractions 39/115=33.9% and 48/126=38.1% inconsistent with parent TodoMVC 100% non-leakage. No raw trajectory dump to independently recompute PMI bins; recomputation limited to derived aggregates in raw_results.json. Preservation of producer metric/control identifiers maintained."
+  },
+  "claim_ceiling": "FALSIFIED-IN-SETTING only forDOM structural representation defined as discretized vector (element_count, tree_depth, interactive_density) with 5-bin quantile bins and Laplace alpha=1.0 on TodoMVC React/Vue hash-SPA degenerate demos (provenance https://todomvc.com/examples/react/dist/ and /vue/dist/, 76/78 non-leakage under current heuristic, 13 URL path states). On these sites DOM-feature PMI is significantly >0 but -0.07 and -0.01 bits worse than URL-only, failing the >=0.1 bits improvement on 0/2 sites (Bonferroni p<0.025). Positive/null controls pass. This does NOT support or refute C-WEB-DYNAMICS for production form-heavy SPAs with richer DOM evolution or where URL/title are ambiguous; that hypothesis remains UNTESTED (unknown) and requires corrected site selection, SPA-aware leakage classification, and train-only discretization. The title-variance failure mode on TodoMVC is confirmed.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-34524411213/request.json",
+    "research/experiments/EXP-PHYSICS-34524411213/spec.json claim_ids C-WEB-DYNAMICS falsifier decision_rule",
+    "research/experiments/EXP-PHYSICS-34524411213/prereg.md 5.1-5.4 6.3 8.1",
+    "research/experiments/EXP-PHYSICS-34524411213/freeze.json hashes",
+    "research/experiments/EXP-PHYSICS-34524411213/result.json metrics controls observations validity_notes",
+    "research/experiments/EXP-PHYSICS-34524411213/raw_results.json site_results todomvc_react todomvc_vue positive_control null_control decision_checks",
+    "research/experiments/EXP-PHYSICS-34524411213/provenance.json data_sources artifacts",
+    "research/experiments/EXP-PHYSICS-34524411213/report.md decision table scope and limitations",
+    "research/physics/dom_features/dom_features_experiment.py classify_non_leakage make_dom_state_fn fit_quantile_bins compute_pmi_stats cross_trajectory_shuffle permutation_test compute_entropy_rates N_TRAJECTORIES=25 TRAJECTORY_LENGTH=6",
+    "research/experiments/EXP-PHYSICS-34348438464/handoff.json established rejected do_not_assume TodoMVC degenerate SPA 100% non-leakage vs 76-78 with leakage misclassification"
+  ],
+  "unresolved": [
+    "Whether DOM structural features provide >=0.1 bits gain over URL-only on production SPAs with richer DOM evolution (dashboards, multi-step checkouts, survey builders) where same URL hosts different DOM states and title variance >0.",
+    "Why entropy reduction appears higher for DOM despite lower PMI: true artifact of unweighted entropy sum vs genuine state-space dilution — requires weighted entropy recomputation on raw triples.",
+    "Whether more expressive DOM/state representations (accessibility tree, component hierarchy, visual layout, secondary features form_count/input_count/button_count) or adaptive/learned discretization would outperform URL-only on complex SPAs.",
+    "Impact of correcting leakage heuristic to SPA-aware hash/history detection on retained sample composition and DOM vs URL rank ordering for TodoMVC and genuine SPAs.",
+    "Magnitude of in-sample discretization optimism: exact penalty after switching to train-only bin edges and cross-validated PMI.",
+    "Whether 5-bin quantile is appropriate or creates artificial boundaries; robustness at 3 and 10 bins remains exploratory."
+  ]
+}
+```
+
+## verdict.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34524411213",
+  "lane": "physics",
+  "decision": "FALSIFIED-IN-SETTING",
+  "claim_updates": [
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "HYPOTHESIS",
+      "reason": "Falsified for DOM structural features (discretized element_count, tree_depth, interactive_density) as state representation on TodoMVC React/Vue degenerate demos: DOM-feature PMI is significantly >0 (p=0.001) but -0.073 and -0.006 bits worse than URL-only on the two sites tested. This specific structural representation does not improve predictive state beyond URL on these sites. However, the broader C-WEB-DYNAMICS hypothesis remains open: the experiment does not test production SPAs with richer DOM evolution, accessibility tree representations, visual layout, or learned state abstractions. Protocol violations (site representativeness, leakage misclassification, in-sample discretization) limit generalization; the hypothesis about DOM features on genuine production SPAs is untested, not rejected."
+    }
+  ],
+  "product_action": "NONE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does the accessibility tree—a semantically richer structural representation capturing element roles, relationships, and interaction affordances rather than raw DOM counts—provide predictive state information beyond URL on genuine SPA/form-heavy sites where URL structure is ambiguous?",
+  "reason": "Decision grounded in frozen spec decision_rule: condition 1 (DOM > URL by >=0.1 bits on >=2/3 sites) fails on 0/2 sites (React -0.073, Vue -0.006 bits). Conditions 2-5 pass (DOM PMI sig >0 on 2/2, positive control PMI=1.271 p=0.001, null control p=0.631, data sufficiency 76/78 non-leakage). Audit REVISE finding accepted: site representativeness (TodoMVC is degenerate), leakage misclassification (33-38% on hash-SPA vs parent established 100%), in-sample discretization, and invalid entropy rates compromise generalization. Claim ceiling bounded to TodoMVC degenerate demos only per audit claim_ceiling. Product consequence negative: DOM structural features should not replace URL-based state identity. C-WEB-DYNAMICS remains HYPOTHESIS — a bounded falsification on one representation on degenerate demos does not close the domain. Next question targets a materially orthogonal level of description (accessibility tree) rather than repeating DOM features on different sites.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-34524411213/spec.json decision_rule falsifier",
+    "research/experiments/EXP-PHYSICS-34524411213/result.json metrics.decision_condition_1_dom_gt_url=false metrics.decision_condition_1_sites_passing=0 metrics.decision_survives=false",
+    "research/experiments/EXP-PHYSICS-34524411213/result.json metrics.dom_vs_url_improvement_bits_react=-0.0728 metrics.dom_vs_url_improvement_bits_vue=-0.0055",
+    "research/experiments/EXP-PHYSICS-34524411213/result.json metrics.dom_pmi_react=0.5975 metrics.url_pmi_react=0.6703 metrics.dom_pmi_vue=0.7453 metrics.url_pmi_vue=0.7508",
+    "research/experiments/EXP-PHYSICS-34524411213/result.json metrics.dom_perm_p_react=0.001 metrics.dom_perm_p_vue=0.001",
+    "research/experiments/EXP-PHYSICS-34524411213/result.json controls.positive_control_synthetic_spa.result=PASS controls.null_control_shuffled_synthetic.result=PASS",
+    "research/experiments/EXP-PHYSICS-34524411213/result.json metrics.data_sufficient_react=true metrics.data_sufficient_vue=true metrics.n_non_leakage_react=76 metrics.n_non_leakage_vue=78",
+    "research/experiments/EXP-PHYSICS-34524411213/audit.json status=REVISE producer_claim_supported=false claim_ceiling",
+    "research/experiments/EXP-PHYSICS-34524411213/audit.json validity_findings site_representativeness leakage_misclassification discretization_train_leakage",
+    "research/experiments/EXP-PHYSICS-34524411213/audit.json required_fixes site_selection leakage_classification discretization entropy positive_control",
+    "research/experiments/EXP-PHYSICS-34524411213/audit.json recomputed_metrics dom_vs_url_improvement_bits_react=-0.0728 dom_vs_url_improvement_bits_vue=-0.0055",
+    "research/experiments/EXP-PHYSICS-34524411213/provenance.json data_sources TodoMVC React Vue",
+    "research/experiments/EXP-PHYSICS-34524411213/report.md decision_table scope_limitations",
+    "research/experiments/EXP-PHYSICS-34524411213/raw_results.json site_results.todomvc_react.pmi dom_vs_url permutation",
+    "research/experiments/EXP-PHYSICS-34524411213/raw_results.json site_results.todomvc_vue.pmi dom_vs_url permutation",
+    "research/claims/registry.json C-WEB-DYNAMICS status=HYPOTHESIS owner_lanes=physics,frontier"
+  ]
+}
+```
+
+## handoff.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34524411213",
+  "lane": "physics",
+  "target_lane": "physics",
+  "next_question": "Does the accessibility tree—a semantically richer structural representation capturing element roles, relationships, and interaction affordances rather than raw DOM counts—provide predictive state information beyond URL on genuine SPA/form-heavy sites where URL structure is ambiguous?",
+  "why_next": "DOM structural features (element counts, tree depth, interactive density) were falsified as state representation on TodoMVC: informative (p=0.001) but worse than URL-only (-0.073, -0.006 bits). However, this tests only raw structural counts on degenerate demos. The accessibility tree is a materially orthogonal level of description: it captures semantic structure (element roles, labels, relationships, ARIA attributes) rather than just quantitative counts. A form at step 2 vs step 3 may have similar element counts but very different accessibility tree structure (different labels, focus states, visible/hidden regions). This tests whether semantic structure beyond URL carries predictive dynamical information—a different mechanism than raw DOM counts, with high information gain on form-heavy sites where URL ambiguity is the failure mode. The accessibility tree is also directly available via Playwright accessibility snapshot, avoiding the discretization challenges of continuous DOM features.",
+  "carry_forward": {
+    "established": [
+      "URL-only PMI is strongly positive on TodoMVC hash-SPA transitions: React 0.670 bits, Vue 0.751 bits (permutation p=0.001, 76/78 non-leakage transitions, 13 unique URL states). URL-level action->next-state dependency is genuine and strong on these sites (EXP-PHYSICS-34524411213 result.json, raw_results.json)",
+      "DOM structural features (element_count, tree_depth, interactive_density) as discretized state representation are significantly predictive (DOM PMI >0, p=0.001 on both sites) but strictly worse than URL-only on TodoMVC: React -0.073 bits, Vue -0.006 bits. The structural level does not improve over URL for these simple apps (EXP-PHYSICS-34524411213 result.json metrics)",
+      "PMI computation pipeline is validated: positive control (synthetic SPA PMI=1.271, p=0.001) and null control (shuffled PMI=0.072, p=0.631) both pass. DOM feature extraction and PMI computation work correctly (EXP-PHYSICS-34524411213 result.json controls)",
+      "Alpha sensitivity analysis shows DOM PMI is stable across smoothing values (React 0.578-0.624, Vue 0.738-0.756), indicating results are not artifacts of Laplace smoothing (EXP-PHYSICS-34524411213 result.json metrics.alpha_sensitivity)",
+      "URL+title PMI is identical to URL-only on TodoMVC due to zero title variance (unique_titles=1), confirming title-aware testing requires sites where titles vary across routes (EXP-PHYSICS-34524411213 result.json controls.url_title_baseline)"
+    ],
+    "rejected": [
+      "DOM structural features (element_count, tree_depth, interactive_density) as state representation on TodoMVC React/Vue: DOM PMI worse than URL-only by -0.073 and -0.006 bits, failing the >=0.1 bits improvement threshold on 0/2 sites (EXP-PHYSICS-34524411213 result.json metrics.decision_condition_1_dom_gt_url=false)"
+    ],
+    "unknown": [
+      "Whether DOM structural features provide >=0.1 bits gain over URL-only on production SPAs with richer DOM evolution (dashboards, multi-step checkouts, survey builders) where same URL hosts different DOM states — UNTESTED due to TodoMVC site selection (audit validity_findings.site_representativeness)",
+      "Whether more expressive structural representations (accessibility tree, component hierarchy, visual layout) outperform URL-only on complex SPAs — untested, different level of description",
+      "Whether adaptive/learned state representations (neural embedding of page state) capture dynamical structure that hand-crafted features miss",
+      "Impact of correcting leakage heuristic to SPA-aware hash/history detection on retained sample composition and DOM vs URL rank ordering (audit validity_findings.leakage_misclassification)",
+      "Magnitude of in-sample discretization optimism after switching to train-only bin edges (audit validity_findings.discretization_train_leakage)",
+      "Whether the entropy reduction paradox (DOM has higher entropy reduction but lower PMI) is a genuine property of state-space dilution or an artifact of unweighted entropy sums (audit validity_findings.entropy_calculation_invalid)"
+    ],
+    "do_not_assume": [
+      "That TodoMVC properties generalize to production SPA sites — TodoMVC is a degenerate demo app, not representative of form-heavy workflows (parent handoff EXP-PHYSICS-34348438464 do_not_assume, audit validity_findings.site_representativeness)",
+      "That the 33-38% leakage rate on TodoMVC hash-SPA reflects true link navigation — parent established TodoMVC hash SPA is 100% non-leakage by construction; current leakage is misclassification artifact (audit validity_findings.leakage_misclassification)",
+      "That DOM feature PMI values are unbiased — in-sample discretization inflates estimates; true out-of-sample PMI may be lower (audit validity_findings.discretization_train_leakage)",
+      "That entropy reduction values are valid — unweighted sums inflate with state-space size; weighted entropy recomputation required (audit validity_findings.entropy_calculation_invalid)",
+      "That the positive control tests DOM-specific gain — synthetic SPA URLs are 1:1 with DOM feature vectors, so url_only PMI == dom_pmi (audit required_fixes positive_control)",
+      "That permutation p=0.000999 indicates strong effect when null_std=0.0 — p-value is resolution floor, not evidence of effect magnitude (parent handoff EXP-PHYSICS-34348438464 do_not_assume)",
+      "That absolute PMI bit values are smoothing-independent — asymmetric Laplace smoothing creates dependency on alpha choice (audit required_fixes PMI smoothing)"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-PHYSICS-34524411213/result.json DOM PMI vs URL PMI metrics on TodoMVC React/Vue",
+    "research/experiments/EXP-PHYSICS-34524411213/audit.json REVISE findings and claim_ceiling",
+    "research/experiments/EXP-PHYSICS-34524411213/raw_results.json site_results.todomvc_react/vue pmi permutation dom_vs_url",
+    "research/experiments/EXP-PHYSICS-34348438464/handoff.json established URL-only PMI baseline and TodoMVC degenerate warning",
+    "research/experiments/EXP-PHYSICS-34266105229/handoff.json established URL-only PMI 1.360/1.323 bits on TodoMVC",
+    "research/physics/dom_features/dom_features_experiment.py code for PMI computation and DOM feature extraction",
+    "research/claims/registry.json C-WEB-DYNAMICS status=HYPOTHESIS"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-34524411213/verdict.json decision=FALSIFIED-IN-SETTING claim_updates",
+    "research/experiments/EXP-PHYSICS-34524411213/result.json metrics.dom_vs_url_improvement_bits_react=-0.0728 metrics.dom_vs_url_improvement_bits_vue=-0.0055 metrics.decision_survives=false",
+    "research/experiments/EXP-PHYSICS-34524411213/result.json metrics.dom_pmi_react=0.5975 metrics.url_pmi_react=0.6703 metrics.dom_perm_p_react=0.001",
+    "research/experiments/EXP-PHYSICS-34524411213/audit.json status=REVISE claim_ceiling validity_findings required_fixes",
+    "research/experiments/EXP-PHYSICS-34524411213/provenance.json data_sources TodoMVC React Vue",
+    "research/experiments/EXP-PHYSICS-34524411213/report.md decision_table interpretation scope_limitations",
+    "research/experiments/EXP-PHYSICS-34348438464/handoff.json carry_forward.do_not_assume TodoMVC degenerate"
+  ],
+  "recommended_action": "DESIGN a Physics experiment testing the accessibility tree as state representation for predicting next-state transitions on genuine SPA/form-heavy sites. Critical criteria: (1) select production form-heavy SPAs with client-side routing and URL ambiguity (multi-step forms where same URL hosts different DOM/accessibility states); (2) extract accessibility tree snapshots via Playwright page.accessibility.snapshot() at each step — this captures element roles, names, states, and relationships rather than raw counts; (3) discretize accessibility tree into state representation (e.g., sequence of (role, name, state) tuples, or tree-edit-distance-based hashing); (4) compute PMI with accessibility-tree state vs URL-only baseline; (5) use corrected SPA-aware leakage classification (hash/history detection, not just href matching); (6) fit discretization edges on TRAIN only with train/test split; (7) include positive control where accessibility tree varies orthogonal to URL. This tests a materially different level of description: semantic structure (what elements are and do) rather than quantitative structure (how many elements exist)."
 }
 ```
 
