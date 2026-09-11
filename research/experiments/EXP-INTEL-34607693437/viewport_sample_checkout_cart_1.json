@@ -1,0 +1,102 @@
+[
+  {
+    "tag": "HEADER",
+    "role": "header",
+    "text": "My Account\n    My Wish List        \n    "
+  },
+  {
+    "tag": "DIV",
+    "role": "div",
+    "text": "My Account\n    My Wish List        \n    "
+  },
+  {
+    "tag": "DIV",
+    "role": "div",
+    "text": "My Account\n    My Wish List        \n    "
+  },
+  {
+    "tag": "UL",
+    "role": "ul",
+    "text": "My Account\n    My Wish List        \n    "
+  },
+  {
+    "tag": "LI",
+    "role": "li",
+    "text": "My Account"
+  },
+  {
+    "tag": "A",
+    "role": "a",
+    "text": "My Account"
+  },
+  {
+    "tag": "LI",
+    "role": "li",
+    "text": "\n    My Wish List        \n        \n     "
+  },
+  {
+    "tag": "A",
+    "role": "a",
+    "text": "My Wish List        \n        \n        \n "
+  },
+  {
+    "tag": "LI",
+    "role": "li",
+    "text": "\n    Sign In\n"
+  },
+  {
+    "tag": "A",
+    "role": "a",
+    "text": "Sign In"
+  },
+  {
+    "tag": "LI",
+    "role": "li",
+    "text": "\n    \n        Compare Products        \n "
+  },
+  {
+    "tag": "A",
+    "role": "a",
+    "text": "\n        Compare Products        \n    "
+  },
+  {
+    "tag": "LI",
+    "role": "li",
+    "text": "\n        \n        \n        \n        \n   "
+  },
+  {
+    "tag": "LI",
+    "role": "li",
+    "text": "Create an Account"
+  },
+  {
+    "tag": "A",
+    "role": "a",
+    "text": "Create an Account"
+  },
+  {
+    "tag": "A",
+    "role": "a",
+    "text": "\n    \n        Skip to Content    \n"
+  },
+  {
+    "tag": "SPAN",
+    "role": "span",
+    "text": "\n        Skip to Content    "
+  },
+  {
+    "tag": "DIV",
+    "role": "div",
+    "text": "Toggle Nav\n\n    \n\n\n\n    \n        My Cart"
+  },
+  {
+    "tag": "SPAN",
+    "role": "span",
+    "text": "Toggle Nav"
+  },
+  {
+    "tag": "SPAN",
+    "role": "span",
+    "text": "Toggle Nav"
+  }
+]

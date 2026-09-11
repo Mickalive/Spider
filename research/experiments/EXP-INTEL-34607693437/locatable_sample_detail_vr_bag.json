@@ -1,0 +1,102 @@
+[
+  {
+    "tag": "A",
+    "role": "a",
+    "ariaLabel": "store logo"
+  },
+  {
+    "tag": "FORM",
+    "role": "form",
+    "ariaLabel": ""
+  },
+  {
+    "tag": "DIV",
+    "role": "div",
+    "ariaLabel": ""
+  },
+  {
+    "tag": "LABEL",
+    "role": "label",
+    "ariaLabel": ""
+  },
+  {
+    "tag": "SPAN",
+    "role": "span",
+    "ariaLabel": ""
+  },
+  {
+    "tag": "DIV",
+    "role": "div",
+    "ariaLabel": ""
+  },
+  {
+    "tag": "INPUT",
+    "role": "combobox",
+    "ariaLabel": ""
+  },
+  {
+    "tag": "DIV",
+    "role": "div",
+    "ariaLabel": ""
+  },
+  {
+    "tag": "A",
+    "role": "a",
+    "ariaLabel": ""
+  },
+  {
+    "tag": "DIV",
+    "role": "div",
+    "ariaLabel": ""
+  },
+  {
+    "tag": "BUTTON",
+    "role": "button",
+    "ariaLabel": "Search"
+  },
+  {
+    "tag": "SPAN",
+    "role": "span",
+    "ariaLabel": ""
+  },
+  {
+    "tag": "FORM",
+    "role": "form",
+    "ariaLabel": ""
+  },
+  {
+    "tag": "DIV",
+    "role": "div",
+    "ariaLabel": ""
+  },
+  {
+    "tag": "DIV",
+    "role": "div",
+    "ariaLabel": ""
+  },
+  {
+    "tag": "DIV",
+    "role": "div",
+    "ariaLabel": ""
+  },
+  {
+    "tag": "LABEL",
+    "role": "label",
+    "ariaLabel": ""
+  },
+  {
+    "tag": "SPAN",
+    "role": "span",
+    "ariaLabel": ""
+  },
+  {
+    "tag": "DIV",
+    "role": "div",
+    "ariaLabel": ""
+  },
+  {
+    "tag": "INPUT",
+    "role": "input",
+    "ariaLabel": ""
+  }
+]

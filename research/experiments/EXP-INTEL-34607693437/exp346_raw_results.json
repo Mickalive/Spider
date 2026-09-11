@@ -1,0 +1,1945 @@
+{
+  "measurements": [
+    {
+      "task_name": "listing_tools",
+      "url": "http://localhost:8080/tools-home-improvement.html",
+      "success": true,
+      "total_dom_elements": 1653,
+      "elements_with_bbox": 1506,
+      "viewport_elements": 108,
+      "locatable_elements": 82,
+      "yield_cdp": 0.065336,
+      "yield_locatable": 1.317073,
+      "locatable_interactive": 40,
+      "locatable_aria": 27,
+      "locatable_form": 56,
+      "locatable_onclick": 0,
+      "role_counts": {
+        "html": 1,
+        "head": 1,
+        "script": 45,
+        "meta": 5,
+        "title": 1,
+        "link": 6,
+        "body": 1,
+        "div": 165,
+        "noscript": 1,
+        "header": 1,
+        "ul": 79,
+        "li": 338,
+        "a": 366,
+        "span": 468,
+        "img": 13,
+        "strong": 23,
+        "form": 14,
+        "label": 4,
+        "combobox": 1,
+        "button": 39,
+        "nav": 1,
+        "main": 1,
+        "h1": 1,
+        "alert": 2,
+        "input": 39,
+        "p": 1,
+        "select": 2,
+        "option": 6,
+        "ol": 5,
+        "style": 12,
+        "heading": 5,
+        "dl": 1,
+        "dd": 2,
+        "footer": 1,
+        "small": 2
+      },
+      "viewport_sample": [
+        {
+          "tag": "HEADER",
+          "role": "header",
+          "text": "My Account\n    My Wish List        \n    "
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "text": "My Account\n    My Wish List        \n    "
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "text": "My Account\n    My Wish List        \n    "
+        },
+        {
+          "tag": "UL",
+          "role": "ul",
+          "text": "My Account\n    My Wish List        \n    "
+        },
+        {
+          "tag": "LI",
+          "role": "li",
+          "text": "My Account"
+        },
+        {
+          "tag": "A",
+          "role": "a",
+          "text": "My Account"
+        },
+        {
+          "tag": "LI",
+          "role": "li",
+          "text": "\n    My Wish List        \n        \n     "
+        },
+        {
+          "tag": "A",
+          "role": "a",
+          "text": "My Wish List        \n        \n        \n "
+        },
+        {
+          "tag": "LI",
+          "role": "li",
+          "text": "\n    Sign In\n"
+        },
+        {
+          "tag": "A",
+          "role": "a",
+          "text": "Sign In"
+        },
+        {
+          "tag": "LI",
+          "role": "li",
+          "text": "\n    \n        Compare Products        \n "
+        },
+        {
+          "tag": "A",
+          "role": "a",
+          "text": "\n        Compare Products        \n    "
+        },
+        {
+          "tag": "LI",
+          "role": "li",
+          "text": "\n        \n        \n        \n        \n   "
+        },
+        {
+          "tag": "LI",
+          "role": "li",
+          "text": "Create an Account"
+        },
+        {
+          "tag": "A",
+          "role": "a",
+          "text": "Create an Account"
+        },
+        {
+          "tag": "A",
+          "role": "a",
+          "text": "\n    \n        Skip to Content    \n"
+        },
+        {
+          "tag": "SPAN",
+          "role": "span",
+          "text": "\n        Skip to Content    "
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "text": "Toggle Nav\n\n    \n\n\n\n    \n        My Cart"
+        },
+        {
+          "tag": "SPAN",
+          "role": "span",
+          "text": "Toggle Nav"
+        },
+        {
+          "tag": "SPAN",
+          "role": "span",
+          "text": "Toggle Nav"
+        }
+      ],
+      "locatable_sample": [
+        {
+          "tag": "A",
+          "role": "a",
+          "ariaLabel": "store logo"
+        },
+        {
+          "tag": "FORM",
+          "role": "form",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "LABEL",
+          "role": "label",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "SPAN",
+          "role": "span",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "INPUT",
+          "role": "combobox",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "A",
+          "role": "a",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "BUTTON",
+          "role": "button",
+          "ariaLabel": "Search"
+        },
+        {
+          "tag": "SPAN",
+          "role": "span",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "FORM",
+          "role": "form",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "BUTTON",
+          "role": "button",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "SPAN",
+          "role": "span",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "A",
+          "role": "button",
+          "ariaLabel": "Add to Wish List"
+        },
+        {
+          "tag": "A",
+          "role": "button",
+          "ariaLabel": "Add to Compare"
+        },
+        {
+          "tag": "FORM",
+          "role": "form",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "BUTTON",
+          "role": "button",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "SPAN",
+          "role": "span",
+          "ariaLabel": ""
+        }
+      ],
+      "error": null,
+      "http_status": 200,
+      "page_type": "product_listing"
+    },
+    {
+      "task_name": "listing_clothing",
+      "url": "http://localhost:8080/clothing-shoes-jewelry.html",
+      "success": true,
+      "total_dom_elements": 1696,
+      "elements_with_bbox": 1550,
+      "viewport_elements": 108,
+      "locatable_elements": 82,
+      "yield_cdp": 0.063679,
+      "yield_locatable": 1.317073,
+      "locatable_interactive": 40,
+      "locatable_aria": 27,
+      "locatable_form": 56,
+      "locatable_onclick": 0,
+      "role_counts": {
+        "html": 1,
+        "head": 1,
+        "script": 44,
+        "meta": 5,
+        "title": 1,
+        "link": 6,
+        "body": 1,
+        "div": 161,
+        "noscript": 1,
+        "header": 1,
+        "ul": 79,
+        "li": 348,
+        "a": 375,
+        "span": 497,
+        "img": 13,
+        "strong": 23,
+        "form": 14,
+        "label": 4,
+        "combobox": 1,
+        "button": 39,
+        "nav": 1,
+        "main": 1,
+        "h1": 1,
+        "alert": 2,
+        "input": 39,
+        "p": 1,
+        "select": 2,
+        "option": 6,
+        "ol": 5,
+        "style": 12,
+        "heading": 5,
+        "dl": 1,
+        "dd": 2,
+        "footer": 1,
+        "small": 2
+      },
+      "viewport_sample": [
+        {
+          "tag": "HEADER",
+          "role": "header",
+          "text": "My Account\n    My Wish List        \n    "
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "text": "My Account\n    My Wish List        \n    "
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "text": "My Account\n    My Wish List        \n    "
+        },
+        {
+          "tag": "UL",
+          "role": "ul",
+          "text": "My Account\n    My Wish List        \n    "
+        },
+        {
+          "tag": "LI",
+          "role": "li",
+          "text": "My Account"
+        },
+        {
+          "tag": "A",
+          "role": "a",
+          "text": "My Account"
+        },
+        {
+          "tag": "LI",
+          "role": "li",
+          "text": "\n    My Wish List        \n        \n     "
+        },
+        {
+          "tag": "A",
+          "role": "a",
+          "text": "My Wish List        \n        \n        \n "
+        },
+        {
+          "tag": "LI",
+          "role": "li",
+          "text": "\n    Sign In\n"
+        },
+        {
+          "tag": "A",
+          "role": "a",
+          "text": "Sign In"
+        },
+        {
+          "tag": "LI",
+          "role": "li",
+          "text": "\n    \n        Compare Products        \n "
+        },
+        {
+          "tag": "A",
+          "role": "a",
+          "text": "\n        Compare Products        \n    "
+        },
+        {
+          "tag": "LI",
+          "role": "li",
+          "text": "\n        \n        \n        \n        \n   "
+        },
+        {
+          "tag": "LI",
+          "role": "li",
+          "text": "Create an Account"
+        },
+        {
+          "tag": "A",
+          "role": "a",
+          "text": "Create an Account"
+        },
+        {
+          "tag": "A",
+          "role": "a",
+          "text": "\n    \n        Skip to Content    \n"
+        },
+        {
+          "tag": "SPAN",
+          "role": "span",
+          "text": "\n        Skip to Content    "
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "text": "Toggle Nav\n\n    \n\n\n\n    \n        My Cart"
+        },
+        {
+          "tag": "SPAN",
+          "role": "span",
+          "text": "Toggle Nav"
+        },
+        {
+          "tag": "SPAN",
+          "role": "span",
+          "text": "Toggle Nav"
+        }
+      ],
+      "locatable_sample": [
+        {
+          "tag": "A",
+          "role": "a",
+          "ariaLabel": "store logo"
+        },
+        {
+          "tag": "FORM",
+          "role": "form",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "LABEL",
+          "role": "label",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "SPAN",
+          "role": "span",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "INPUT",
+          "role": "combobox",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "A",
+          "role": "a",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "BUTTON",
+          "role": "button",
+          "ariaLabel": "Search"
+        },
+        {
+          "tag": "SPAN",
+          "role": "span",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "FORM",
+          "role": "form",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "BUTTON",
+          "role": "button",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "SPAN",
+          "role": "span",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "A",
+          "role": "button",
+          "ariaLabel": "Add to Wish List"
+        },
+        {
+          "tag": "A",
+          "role": "button",
+          "ariaLabel": "Add to Compare"
+        },
+        {
+          "tag": "FORM",
+          "role": "form",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "BUTTON",
+          "role": "button",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "SPAN",
+          "role": "span",
+          "ariaLabel": ""
+        }
+      ],
+      "error": null,
+      "http_status": 200,
+      "page_type": "product_listing"
+    },
+    {
+      "task_name": "detail_camera",
+      "url": "http://localhost:8080/zosi-h-265-poe-home-security-camera-system-outdoor-indoor-8-channel-5mp-poe-nvr-recorder-4pcs-wired-2mp-1080p-surveillance-bullet-poe-ip-cameras-no-hard-drive-renewed.html",
+      "success": true,
+      "total_dom_elements": 1395,
+      "elements_with_bbox": 1215,
+      "viewport_elements": 108,
+      "locatable_elements": 32,
+      "yield_cdp": 0.077419,
+      "yield_locatable": 3.375,
+      "locatable_interactive": 4,
+      "locatable_aria": 3,
+      "locatable_form": 31,
+      "locatable_onclick": 0,
+      "role_counts": {
+        "html": 1,
+        "head": 1,
+        "script": 40,
+        "meta": 15,
+        "title": 1,
+        "link": 7,
+        "body": 1,
+        "div": 124,
+        "noscript": 10,
+        "header": 1,
+        "ul": 78,
+        "li": 319,
+        "a": 328,
+        "span": 357,
+        "img": 11,
+        "strong": 5,
+        "form": 4,
+        "label": 12,
+        "combobox": 1,
+        "button": 5,
+        "nav": 1,
+        "main": 1,
+        "h1": 1,
+        "alert": 2,
+        "input": 17,
+        "hr": 1,
+        "h2": 2,
+        "style": 2,
+        "table": 2,
+        "tbody": 2,
+        "tr": 4,
+        "th": 5,
+        "p": 14,
+        "td": 5,
+        "h4": 3,
+        "ol": 1,
+        "i": 1,
+        "fieldset": 2,
+        "legend": 2,
+        "br": 2,
+        "textarea": 1,
+        "footer": 1,
+        "small": 2
+      },
+      "viewport_sample": [
+        {
+          "tag": "HEADER",
+          "role": "header",
+          "text": "My Account\n    My Wish List        \n    "
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "text": "My Account\n    My Wish List        \n    "
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "text": "My Account\n    My Wish List        \n    "
+        },
+        {
+          "tag": "UL",
+          "role": "ul",
+          "text": "My Account\n    My Wish List        \n    "
+        },
+        {
+          "tag": "LI",
+          "role": "li",
+          "text": "My Account"
+        },
+        {
+          "tag": "A",
+          "role": "a",
+          "text": "My Account"
+        },
+        {
+          "tag": "LI",
+          "role": "li",
+          "text": "\n    My Wish List        \n        \n     "
+        },
+        {
+          "tag": "A",
+          "role": "a",
+          "text": "My Wish List        \n        \n        \n "
+        },
+        {
+          "tag": "LI",
+          "role": "li",
+          "text": "\n    Sign In\n"
+        },
+        {
+          "tag": "A",
+          "role": "a",
+          "text": "Sign In"
+        },
+        {
+          "tag": "LI",
+          "role": "li",
+          "text": "\n    \n        Compare Products        \n "
+        },
+        {
+          "tag": "A",
+          "role": "a",
+          "text": "\n        Compare Products        \n    "
+        },
+        {
+          "tag": "LI",
+          "role": "li",
+          "text": "\n        \n        \n        \n        \n   "
+        },
+        {
+          "tag": "LI",
+          "role": "li",
+          "text": "Create an Account"
+        },
+        {
+          "tag": "A",
+          "role": "a",
+          "text": "Create an Account"
+        },
+        {
+          "tag": "A",
+          "role": "a",
+          "text": "\n    \n        Skip to Content    \n"
+        },
+        {
+          "tag": "SPAN",
+          "role": "span",
+          "text": "\n        Skip to Content    "
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "text": "Toggle Nav\n\n    \n\n\n\n    \n        My Cart"
+        },
+        {
+          "tag": "SPAN",
+          "role": "span",
+          "text": "Toggle Nav"
+        },
+        {
+          "tag": "SPAN",
+          "role": "span",
+          "text": "Toggle Nav"
+        }
+      ],
+      "locatable_sample": [
+        {
+          "tag": "A",
+          "role": "a",
+          "ariaLabel": "store logo"
+        },
+        {
+          "tag": "FORM",
+          "role": "form",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "LABEL",
+          "role": "label",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "SPAN",
+          "role": "span",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "INPUT",
+          "role": "combobox",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "A",
+          "role": "a",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "BUTTON",
+          "role": "button",
+          "ariaLabel": "Search"
+        },
+        {
+          "tag": "SPAN",
+          "role": "span",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "FORM",
+          "role": "form",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "LABEL",
+          "role": "label",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "SPAN",
+          "role": "span",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "INPUT",
+          "role": "input",
+          "ariaLabel": ""
+        }
+      ],
+      "error": null,
+      "http_status": 200,
+      "page_type": "detail"
+    },
+    {
+      "task_name": "detail_vr_bag",
+      "url": "http://localhost:8080/navitech-black-hard-carry-bag-case-cover-with-shoulder-strap-compatible-with-the-vr-virtual-reality-3d-headsets-including-the-crypto-vr-150-virtual-reality-headset-3d-glasses.html",
+      "success": true,
+      "total_dom_elements": 1310,
+      "elements_with_bbox": 1149,
+      "viewport_elements": 108,
+      "locatable_elements": 32,
+      "yield_cdp": 0.082443,
+      "yield_locatable": 3.375,
+      "locatable_interactive": 4,
+      "locatable_aria": 3,
+      "locatable_form": 31,
+      "locatable_onclick": 0,
+      "role_counts": {
+        "html": 1,
+        "head": 1,
+        "script": 39,
+        "meta": 15,
+        "title": 1,
+        "link": 7,
+        "body": 1,
+        "div": 96,
+        "noscript": 1,
+        "header": 1,
+        "ul": 78,
+        "li": 318,
+        "a": 328,
+        "span": 348,
+        "img": 2,
+        "strong": 5,
+        "form": 4,
+        "label": 12,
+        "combobox": 1,
+        "button": 4,
+        "nav": 1,
+        "main": 1,
+        "h1": 1,
+        "alert": 2,
+        "input": 17,
+        "h2": 1,
+        "table": 1,
+        "tbody": 1,
+        "tr": 4,
+        "th": 4,
+        "td": 4,
+        "fieldset": 2,
+        "legend": 2,
+        "br": 2,
+        "textarea": 1,
+        "footer": 1,
+        "small": 2
+      },
+      "viewport_sample": [
+        {
+          "tag": "HEADER",
+          "role": "header",
+          "text": "My Account\n    My Wish List        \n    "
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "text": "My Account\n    My Wish List        \n    "
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "text": "My Account\n    My Wish List        \n    "
+        },
+        {
+          "tag": "UL",
+          "role": "ul",
+          "text": "My Account\n    My Wish List        \n    "
+        },
+        {
+          "tag": "LI",
+          "role": "li",
+          "text": "My Account"
+        },
+        {
+          "tag": "A",
+          "role": "a",
+          "text": "My Account"
+        },
+        {
+          "tag": "LI",
+          "role": "li",
+          "text": "\n    My Wish List        \n        \n     "
+        },
+        {
+          "tag": "A",
+          "role": "a",
+          "text": "My Wish List        \n        \n        \n "
+        },
+        {
+          "tag": "LI",
+          "role": "li",
+          "text": "\n    Sign In\n"
+        },
+        {
+          "tag": "A",
+          "role": "a",
+          "text": "Sign In"
+        },
+        {
+          "tag": "LI",
+          "role": "li",
+          "text": "\n    \n        Compare Products        \n "
+        },
+        {
+          "tag": "A",
+          "role": "a",
+          "text": "\n        Compare Products        \n    "
+        },
+        {
+          "tag": "LI",
+          "role": "li",
+          "text": "\n        \n        \n        \n        \n   "
+        },
+        {
+          "tag": "LI",
+          "role": "li",
+          "text": "Create an Account"
+        },
+        {
+          "tag": "A",
+          "role": "a",
+          "text": "Create an Account"
+        },
+        {
+          "tag": "A",
+          "role": "a",
+          "text": "\n    \n        Skip to Content    \n"
+        },
+        {
+          "tag": "SPAN",
+          "role": "span",
+          "text": "\n        Skip to Content    "
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "text": "Toggle Nav\n\n    \n\n\n\n    \n        My Cart"
+        },
+        {
+          "tag": "SPAN",
+          "role": "span",
+          "text": "Toggle Nav"
+        },
+        {
+          "tag": "SPAN",
+          "role": "span",
+          "text": "Toggle Nav"
+        }
+      ],
+      "locatable_sample": [
+        {
+          "tag": "A",
+          "role": "a",
+          "ariaLabel": "store logo"
+        },
+        {
+          "tag": "FORM",
+          "role": "form",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "LABEL",
+          "role": "label",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "SPAN",
+          "role": "span",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "INPUT",
+          "role": "combobox",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "A",
+          "role": "a",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "BUTTON",
+          "role": "button",
+          "ariaLabel": "Search"
+        },
+        {
+          "tag": "SPAN",
+          "role": "span",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "FORM",
+          "role": "form",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "LABEL",
+          "role": "label",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "SPAN",
+          "role": "span",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "INPUT",
+          "role": "input",
+          "ariaLabel": ""
+        }
+      ],
+      "error": null,
+      "http_status": 200,
+      "page_type": "detail"
+    },
+    {
+      "task_name": "cart_1",
+      "url": "http://localhost:8080/checkout/cart/",
+      "success": true,
+      "total_dom_elements": 1136,
+      "elements_with_bbox": 1070,
+      "viewport_elements": 108,
+      "locatable_elements": 21,
+      "yield_cdp": 0.09507,
+      "yield_locatable": 5.142857,
+      "locatable_interactive": 3,
+      "locatable_aria": 3,
+      "locatable_form": 20,
+      "locatable_onclick": 0,
+      "role_counts": {
+        "html": 1,
+        "head": 1,
+        "script": 28,
+        "meta": 5,
+        "title": 1,
+        "link": 6,
+        "body": 1,
+        "div": 41,
+        "noscript": 1,
+        "header": 1,
+        "ul": 77,
+        "li": 312,
+        "a": 320,
+        "span": 319,
+        "img": 1,
+        "strong": 2,
+        "form": 2,
+        "label": 2,
+        "combobox": 1,
+        "button": 2,
+        "nav": 1,
+        "main": 1,
+        "h1": 1,
+        "alert": 2,
+        "input": 2,
+        "p": 2,
+        "footer": 1,
+        "small": 2
+      },
+      "viewport_sample": [
+        {
+          "tag": "HEADER",
+          "role": "header",
+          "text": "My Account\n    My Wish List        \n    "
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "text": "My Account\n    My Wish List        \n    "
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "text": "My Account\n    My Wish List        \n    "
+        },
+        {
+          "tag": "UL",
+          "role": "ul",
+          "text": "My Account\n    My Wish List        \n    "
+        },
+        {
+          "tag": "LI",
+          "role": "li",
+          "text": "My Account"
+        },
+        {
+          "tag": "A",
+          "role": "a",
+          "text": "My Account"
+        },
+        {
+          "tag": "LI",
+          "role": "li",
+          "text": "\n    My Wish List        \n        \n     "
+        },
+        {
+          "tag": "A",
+          "role": "a",
+          "text": "My Wish List        \n        \n        \n "
+        },
+        {
+          "tag": "LI",
+          "role": "li",
+          "text": "\n    Sign In\n"
+        },
+        {
+          "tag": "A",
+          "role": "a",
+          "text": "Sign In"
+        },
+        {
+          "tag": "LI",
+          "role": "li",
+          "text": "\n    \n        Compare Products        \n "
+        },
+        {
+          "tag": "A",
+          "role": "a",
+          "text": "\n        Compare Products        \n    "
+        },
+        {
+          "tag": "LI",
+          "role": "li",
+          "text": "\n        \n        \n        \n        \n   "
+        },
+        {
+          "tag": "LI",
+          "role": "li",
+          "text": "Create an Account"
+        },
+        {
+          "tag": "A",
+          "role": "a",
+          "text": "Create an Account"
+        },
+        {
+          "tag": "A",
+          "role": "a",
+          "text": "\n    \n        Skip to Content    \n"
+        },
+        {
+          "tag": "SPAN",
+          "role": "span",
+          "text": "\n        Skip to Content    "
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "text": "Toggle Nav\n\n    \n\n\n\n    \n        My Cart"
+        },
+        {
+          "tag": "SPAN",
+          "role": "span",
+          "text": "Toggle Nav"
+        },
+        {
+          "tag": "SPAN",
+          "role": "span",
+          "text": "Toggle Nav"
+        }
+      ],
+      "locatable_sample": [
+        {
+          "tag": "A",
+          "role": "a",
+          "ariaLabel": "store logo"
+        },
+        {
+          "tag": "FORM",
+          "role": "form",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "LABEL",
+          "role": "label",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "SPAN",
+          "role": "span",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "INPUT",
+          "role": "combobox",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "A",
+          "role": "a",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "BUTTON",
+          "role": "button",
+          "ariaLabel": "Search"
+        },
+        {
+          "tag": "SPAN",
+          "role": "span",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "FORM",
+          "role": "form",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "LABEL",
+          "role": "label",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "SPAN",
+          "role": "span",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "INPUT",
+          "role": "input",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "BUTTON",
+          "role": "button",
+          "ariaLabel": "Subscribe"
+        }
+      ],
+      "error": null,
+      "http_status": 200,
+      "page_type": "cart"
+    },
+    {
+      "task_name": "checkout_cart_1",
+      "url": "http://localhost:8080/checkout/cart/",
+      "success": true,
+      "total_dom_elements": 1136,
+      "elements_with_bbox": 1070,
+      "viewport_elements": 108,
+      "locatable_elements": 21,
+      "yield_cdp": 0.09507,
+      "yield_locatable": 5.142857,
+      "locatable_interactive": 3,
+      "locatable_aria": 3,
+      "locatable_form": 20,
+      "locatable_onclick": 0,
+      "role_counts": {
+        "html": 1,
+        "head": 1,
+        "script": 28,
+        "meta": 5,
+        "title": 1,
+        "link": 6,
+        "body": 1,
+        "div": 41,
+        "noscript": 1,
+        "header": 1,
+        "ul": 77,
+        "li": 312,
+        "a": 320,
+        "span": 319,
+        "img": 1,
+        "strong": 2,
+        "form": 2,
+        "label": 2,
+        "combobox": 1,
+        "button": 2,
+        "nav": 1,
+        "main": 1,
+        "h1": 1,
+        "alert": 2,
+        "input": 2,
+        "p": 2,
+        "footer": 1,
+        "small": 2
+      },
+      "viewport_sample": [
+        {
+          "tag": "HEADER",
+          "role": "header",
+          "text": "My Account\n    My Wish List        \n    "
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "text": "My Account\n    My Wish List        \n    "
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "text": "My Account\n    My Wish List        \n    "
+        },
+        {
+          "tag": "UL",
+          "role": "ul",
+          "text": "My Account\n    My Wish List        \n    "
+        },
+        {
+          "tag": "LI",
+          "role": "li",
+          "text": "My Account"
+        },
+        {
+          "tag": "A",
+          "role": "a",
+          "text": "My Account"
+        },
+        {
+          "tag": "LI",
+          "role": "li",
+          "text": "\n    My Wish List        \n        \n     "
+        },
+        {
+          "tag": "A",
+          "role": "a",
+          "text": "My Wish List        \n        \n        \n "
+        },
+        {
+          "tag": "LI",
+          "role": "li",
+          "text": "\n    Sign In\n"
+        },
+        {
+          "tag": "A",
+          "role": "a",
+          "text": "Sign In"
+        },
+        {
+          "tag": "LI",
+          "role": "li",
+          "text": "\n    \n        Compare Products        \n "
+        },
+        {
+          "tag": "A",
+          "role": "a",
+          "text": "\n        Compare Products        \n    "
+        },
+        {
+          "tag": "LI",
+          "role": "li",
+          "text": "\n        \n        \n        \n        \n   "
+        },
+        {
+          "tag": "LI",
+          "role": "li",
+          "text": "Create an Account"
+        },
+        {
+          "tag": "A",
+          "role": "a",
+          "text": "Create an Account"
+        },
+        {
+          "tag": "A",
+          "role": "a",
+          "text": "\n    \n        Skip to Content    \n"
+        },
+        {
+          "tag": "SPAN",
+          "role": "span",
+          "text": "\n        Skip to Content    "
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "text": "Toggle Nav\n\n    \n\n\n\n    \n        My Cart"
+        },
+        {
+          "tag": "SPAN",
+          "role": "span",
+          "text": "Toggle Nav"
+        },
+        {
+          "tag": "SPAN",
+          "role": "span",
+          "text": "Toggle Nav"
+        }
+      ],
+      "locatable_sample": [
+        {
+          "tag": "A",
+          "role": "a",
+          "ariaLabel": "store logo"
+        },
+        {
+          "tag": "FORM",
+          "role": "form",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "LABEL",
+          "role": "label",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "SPAN",
+          "role": "span",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "INPUT",
+          "role": "combobox",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "A",
+          "role": "a",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "BUTTON",
+          "role": "button",
+          "ariaLabel": "Search"
+        },
+        {
+          "tag": "SPAN",
+          "role": "span",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "FORM",
+          "role": "form",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "LABEL",
+          "role": "label",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "SPAN",
+          "role": "span",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "INPUT",
+          "role": "input",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "BUTTON",
+          "role": "button",
+          "ariaLabel": "Subscribe"
+        }
+      ],
+      "error": null,
+      "http_status": 200,
+      "page_type": "checkout"
+    },
+    {
+      "task_name": "checkout_cart_2",
+      "url": "http://localhost:8080/checkout/cart/",
+      "success": true,
+      "total_dom_elements": 1136,
+      "elements_with_bbox": 1070,
+      "viewport_elements": 108,
+      "locatable_elements": 21,
+      "yield_cdp": 0.09507,
+      "yield_locatable": 5.142857,
+      "locatable_interactive": 3,
+      "locatable_aria": 3,
+      "locatable_form": 20,
+      "locatable_onclick": 0,
+      "role_counts": {
+        "html": 1,
+        "head": 1,
+        "script": 28,
+        "meta": 5,
+        "title": 1,
+        "link": 6,
+        "body": 1,
+        "div": 41,
+        "noscript": 1,
+        "header": 1,
+        "ul": 77,
+        "li": 312,
+        "a": 320,
+        "span": 319,
+        "img": 1,
+        "strong": 2,
+        "form": 2,
+        "label": 2,
+        "combobox": 1,
+        "button": 2,
+        "nav": 1,
+        "main": 1,
+        "h1": 1,
+        "alert": 2,
+        "input": 2,
+        "p": 2,
+        "footer": 1,
+        "small": 2
+      },
+      "viewport_sample": [
+        {
+          "tag": "HEADER",
+          "role": "header",
+          "text": "My Account\n    My Wish List        \n    "
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "text": "My Account\n    My Wish List        \n    "
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "text": "My Account\n    My Wish List        \n    "
+        },
+        {
+          "tag": "UL",
+          "role": "ul",
+          "text": "My Account\n    My Wish List        \n    "
+        },
+        {
+          "tag": "LI",
+          "role": "li",
+          "text": "My Account"
+        },
+        {
+          "tag": "A",
+          "role": "a",
+          "text": "My Account"
+        },
+        {
+          "tag": "LI",
+          "role": "li",
+          "text": "\n    My Wish List        \n        \n     "
+        },
+        {
+          "tag": "A",
+          "role": "a",
+          "text": "My Wish List        \n        \n        \n "
+        },
+        {
+          "tag": "LI",
+          "role": "li",
+          "text": "\n    Sign In\n"
+        },
+        {
+          "tag": "A",
+          "role": "a",
+          "text": "Sign In"
+        },
+        {
+          "tag": "LI",
+          "role": "li",
+          "text": "\n    \n        Compare Products        \n "
+        },
+        {
+          "tag": "A",
+          "role": "a",
+          "text": "\n        Compare Products        \n    "
+        },
+        {
+          "tag": "LI",
+          "role": "li",
+          "text": "\n        \n        \n        \n        \n   "
+        },
+        {
+          "tag": "LI",
+          "role": "li",
+          "text": "Create an Account"
+        },
+        {
+          "tag": "A",
+          "role": "a",
+          "text": "Create an Account"
+        },
+        {
+          "tag": "A",
+          "role": "a",
+          "text": "\n    \n        Skip to Content    \n"
+        },
+        {
+          "tag": "SPAN",
+          "role": "span",
+          "text": "\n        Skip to Content    "
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "text": "Toggle Nav\n\n    \n\n\n\n    \n        My Cart"
+        },
+        {
+          "tag": "SPAN",
+          "role": "span",
+          "text": "Toggle Nav"
+        },
+        {
+          "tag": "SPAN",
+          "role": "span",
+          "text": "Toggle Nav"
+        }
+      ],
+      "locatable_sample": [
+        {
+          "tag": "A",
+          "role": "a",
+          "ariaLabel": "store logo"
+        },
+        {
+          "tag": "FORM",
+          "role": "form",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "LABEL",
+          "role": "label",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "SPAN",
+          "role": "span",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "INPUT",
+          "role": "combobox",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "A",
+          "role": "a",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "BUTTON",
+          "role": "button",
+          "ariaLabel": "Search"
+        },
+        {
+          "tag": "SPAN",
+          "role": "span",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "FORM",
+          "role": "form",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "LABEL",
+          "role": "label",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "SPAN",
+          "role": "span",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "INPUT",
+          "role": "input",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "DIV",
+          "role": "div",
+          "ariaLabel": ""
+        },
+        {
+          "tag": "BUTTON",
+          "role": "button",
+          "ariaLabel": "Subscribe"
+        }
+      ],
+      "error": null,
+      "http_status": 200,
+      "page_type": "checkout"
+    }
+  ],
+  "statistics": {
+    "total_tasks_measured": 7,
+    "total_tasks_attempted": 7,
+    "successful_tasks": 7,
+    "yield_cdp_mean": 0.082012,
+    "yield_cdp_stdev": 0.013826,
+    "yield_cdp_cv": 0.168588,
+    "yield_cdp_min": 0.063679,
+    "yield_cdp_max": 0.09507,
+    "yield_locatable_mean": 3.544674,
+    "yield_locatable_stdev": 1.714864,
+    "yield_locatable_cv": 0.483786,
+    "yield_locatable_min": 1.317073,
+    "yield_locatable_max": 5.142857,
+    "viewport_elements_mean": 108,
+    "viewport_elements_stdev": 0.0,
+    "viewport_elements_values": [
+      108,
+      108,
+      108,
+      108,
+      108,
+      108,
+      108
+    ],
+    "viewport_constancy": true,
+    "viewport_unique_values": [
+      108
+    ],
+    "locatable_elements_mean": 41.57,
+    "locatable_elements_stdev": 28.05,
+    "dom_elements_mean": 1351.71,
+    "dom_elements_stdev": 242.39,
+    "method1_yield": 0.365,
+    "method1_delta_pp": 317.97,
+    "method1_within_15pp": false,
+    "method1_within_10pp": false,
+    "page_type_breakdown": {
+      "product_listing": {
+        "count": 2,
+        "mean_yield_cdp": 0.064507,
+        "mean_yield_locatable": 1.317073,
+        "mean_viewport_elements": 108,
+        "mean_locatable_elements": 82,
+        "mean_dom_elements": 1674.5
+      },
+      "detail": {
+        "count": 2,
+        "mean_yield_cdp": 0.079931,
+        "mean_yield_locatable": 3.375,
+        "mean_viewport_elements": 108,
+        "mean_locatable_elements": 32,
+        "mean_dom_elements": 1352.5
+      },
+      "cart": {
+        "count": 1,
+        "mean_yield_cdp": 0.09507,
+        "mean_yield_locatable": 5.142857,
+        "mean_viewport_elements": 108,
+        "mean_locatable_elements": 21,
+        "mean_dom_elements": 1136
+      },
+      "checkout": {
+        "count": 2,
+        "mean_yield_cdp": 0.09507,
+        "mean_yield_locatable": 5.142857,
+        "mean_viewport_elements": 108,
+        "mean_locatable_elements": 21,
+        "mean_dom_elements": 1136
+      }
+    }
+  },
+  "frozen_definition": {
+    "type": "functional_fallback",
+    "rationale": "Forensic analysis of Method1 derivation (analyze.py) showed 150-element estimate is hand-estimated typical DOM node count (line 70: 'Based on domain knowledge of typical web pages'). Derivation never defines what constitutes an element or locatable element. Functional fallback captures interactive elements an agent can use for inheritance.",
+    "definition": "Elements with non-null bounding box (width > 0 AND height > 0) AND (role is interactive OR has aria-label/aria-describedby OR is within a form OR has onclick handler)",
+    "interactive_roles": [
+      "button",
+      "link",
+      "textbox",
+      "checkbox",
+      "radio",
+      "combobox",
+      "listbox",
+      "menuitem",
+      "tab",
+      "slider",
+      "spinbutton",
+      "searchbox",
+      "switch"
+    ],
+    "maps_to": "Definition 2 (interactive-only)",
+    "expected_yield_range": [
+      0.25,
+      0.45
+    ]
+  },
+  "frozen_seed": 34607693437,
+  "selected_tasks": [
+    [
+      "product_listing",
+      "tools-home-improvement.html",
+      "listing_tools"
+    ],
+    [
+      "product_listing",
+      "clothing-shoes-jewelry.html",
+      "listing_clothing"
+    ],
+    [
+      "detail",
+      "zosi-h-265-poe-home-security-camera-system-outdoor-indoor-8-channel-5mp-poe-nvr-recorder-4pcs-wired-2mp-1080p-surveillance-bullet-poe-ip-cameras-no-hard-drive-renewed.html",
+      "detail_camera"
+    ],
+    [
+      "detail",
+      "navitech-black-hard-carry-bag-case-cover-with-shoulder-strap-compatible-with-the-vr-virtual-reality-3d-headsets-including-the-crypto-vr-150-virtual-reality-headset-3d-glasses.html",
+      "detail_vr_bag"
+    ],
+    [
+      "cart",
+      "checkout/cart/",
+      "cart_1"
+    ],
+    [
+      "checkout",
+      "checkout/cart/",
+      "checkout_cart_1"
+    ],
+    [
+      "checkout",
+      "checkout/cart/",
+      "checkout_cart_2"
+    ]
+  ],
+  "infrastructure_notes": [
+    "CDP Accessibility.getFullAXTree returns only 1 node in headless Chromium shell - DOM-based counting used instead",
+    "Checkout page (checkout/) redirects to localhost:7770 (internal port) - checkout/cart/ used as checkout proxy"
+  ]
+}
