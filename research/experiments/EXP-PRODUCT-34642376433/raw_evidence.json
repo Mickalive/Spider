@@ -1,0 +1,732 @@
+{
+  "experiment_id": "EXP-PRODUCT-34642376433",
+  "conditions": {
+    "P1_PATH_PREFIX": {
+      "condition_id": "P1_PATH_PREFIX",
+      "training_count": 3,
+      "unseen_count": 3,
+      "distill_success": true,
+      "mechanism_id": "param-P1_PATH_PREFIX",
+      "action_template": {
+        "method": "GET",
+        "url": "https://api.example.com/users/${url}"
+      },
+      "parameter_slots": [
+        "url"
+      ],
+      "slot_count": 1,
+      "confidence": 0.9,
+      "slot_prefixes": {
+        "url": ""
+      },
+      "distill_diagnostics": {
+        "mean_jaccard": 1.0,
+        "has_constant_anchor": true,
+        "anchor_path": [
+          "method"
+        ],
+        "shared_paths": [
+          "method",
+          "url"
+        ],
+        "slot_prefixes": {
+          "url": ""
+        },
+        "fix1_suffix_guard_applied": true,
+        "fix2_delimiter_guard_applied": true
+      },
+      "resolution_results": [
+        {
+          "params": {
+            "url": "D"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/users/D"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": true,
+          "expected_url": "https://api.example.com/users/D"
+        },
+        {
+          "params": {
+            "url": "E"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/users/E"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": true,
+          "expected_url": "https://api.example.com/users/E"
+        },
+        {
+          "params": {
+            "url": "F"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/users/F"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": true,
+          "expected_url": "https://api.example.com/users/F"
+        }
+      ],
+      "metrics": {
+        "binding_accuracy": 1.0,
+        "binding_correct_count": 3,
+        "executable_count": 3,
+        "slot_count_correct": true
+      }
+    },
+    "G1_QUERY_STRING_SIMPLE": {
+      "condition_id": "G1_QUERY_STRING_SIMPLE",
+      "training_count": 3,
+      "unseen_count": 3,
+      "distill_success": true,
+      "mechanism_id": "param-G1_QUERY_STRING_SIMPLE",
+      "action_template": {
+        "method": "GET",
+        "url": "https://api.example.com/search?q=${url}"
+      },
+      "parameter_slots": [
+        "url"
+      ],
+      "slot_count": 1,
+      "confidence": 0.9,
+      "slot_prefixes": {
+        "url": "search?q="
+      },
+      "distill_diagnostics": {
+        "mean_jaccard": 1.0,
+        "has_constant_anchor": true,
+        "anchor_path": [
+          "method"
+        ],
+        "shared_paths": [
+          "method",
+          "url"
+        ],
+        "slot_prefixes": {
+          "url": "search?q="
+        },
+        "fix1_suffix_guard_applied": true,
+        "fix2_delimiter_guard_applied": true
+      },
+      "resolution_results": [
+        {
+          "params": {
+            "url": "gamma"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/search?q=gamma"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": true,
+          "expected_url": "https://api.example.com/search?q=gamma"
+        },
+        {
+          "params": {
+            "url": "epsilon"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/search?q=epsilon"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": true,
+          "expected_url": "https://api.example.com/search?q=epsilon"
+        },
+        {
+          "params": {
+            "url": "zeta"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/search?q=zeta"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": true,
+          "expected_url": "https://api.example.com/search?q=zeta"
+        }
+      ],
+      "metrics": {
+        "binding_accuracy": 1.0,
+        "binding_correct_count": 3,
+        "executable_count": 3,
+        "slot_count_correct": true
+      }
+    },
+    "G2_QUERY_STRING_MULTIPARAM": {
+      "condition_id": "G2_QUERY_STRING_MULTIPARAM",
+      "training_count": 3,
+      "unseen_count": 3,
+      "distill_success": true,
+      "mechanism_id": "param-G2_QUERY_STRING_MULTIPARAM",
+      "action_template": {
+        "method": "GET",
+        "url": "https://api.example.com/items?category=books&page=${url}"
+      },
+      "parameter_slots": [
+        "url"
+      ],
+      "slot_count": 1,
+      "confidence": 0.9,
+      "slot_prefixes": {
+        "url": "items?category=books&page="
+      },
+      "distill_diagnostics": {
+        "mean_jaccard": 1.0,
+        "has_constant_anchor": true,
+        "anchor_path": [
+          "method"
+        ],
+        "shared_paths": [
+          "method",
+          "url"
+        ],
+        "slot_prefixes": {
+          "url": "items?category=books&page="
+        },
+        "fix1_suffix_guard_applied": true,
+        "fix2_delimiter_guard_applied": true
+      },
+      "resolution_results": [
+        {
+          "params": {
+            "url": "4"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/items?category=books&page=4"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": true,
+          "expected_url": "https://api.example.com/items?category=books&page=4"
+        },
+        {
+          "params": {
+            "url": "5"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/items?category=books&page=5"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": true,
+          "expected_url": "https://api.example.com/items?category=books&page=5"
+        },
+        {
+          "params": {
+            "url": "6"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/items?category=books&page=6"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": true,
+          "expected_url": "https://api.example.com/items?category=books&page=6"
+        }
+      ],
+      "metrics": {
+        "binding_accuracy": 1.0,
+        "binding_correct_count": 3,
+        "executable_count": 3,
+        "slot_count_correct": true
+      }
+    },
+    "G3_DEEP_PATH": {
+      "condition_id": "G3_DEEP_PATH",
+      "training_count": 3,
+      "unseen_count": 3,
+      "distill_success": true,
+      "mechanism_id": "param-G3_DEEP_PATH",
+      "action_template": {
+        "method": "GET",
+        "url": "https://api.example.com/orgs/acme/repos/main/issues/${url}"
+      },
+      "parameter_slots": [
+        "url"
+      ],
+      "slot_count": 1,
+      "confidence": 0.9,
+      "slot_prefixes": {
+        "url": ""
+      },
+      "distill_diagnostics": {
+        "mean_jaccard": 1.0,
+        "has_constant_anchor": true,
+        "anchor_path": [
+          "method"
+        ],
+        "shared_paths": [
+          "method",
+          "url"
+        ],
+        "slot_prefixes": {
+          "url": ""
+        },
+        "fix1_suffix_guard_applied": true,
+        "fix2_delimiter_guard_applied": true
+      },
+      "resolution_results": [
+        {
+          "params": {
+            "url": "4"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/orgs/acme/repos/main/issues/4"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": true,
+          "expected_url": "https://api.example.com/orgs/acme/repos/main/issues/4"
+        },
+        {
+          "params": {
+            "url": "5"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/orgs/acme/repos/main/issues/5"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": true,
+          "expected_url": "https://api.example.com/orgs/acme/repos/main/issues/5"
+        },
+        {
+          "params": {
+            "url": "6"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/orgs/acme/repos/main/issues/6"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": true,
+          "expected_url": "https://api.example.com/orgs/acme/repos/main/issues/6"
+        }
+      ],
+      "metrics": {
+        "binding_accuracy": 1.0,
+        "binding_correct_count": 3,
+        "executable_count": 3,
+        "slot_count_correct": true
+      }
+    },
+    "G4_MULTI_SLOT": {
+      "condition_id": "G4_MULTI_SLOT",
+      "training_count": 3,
+      "unseen_count": 3,
+      "distill_success": true,
+      "mechanism_id": "param-G4_MULTI_SLOT",
+      "action_template": {
+        "method": "GET",
+        "url": "https://api.example.com/users/${url}00"
+      },
+      "parameter_slots": [
+        "url"
+      ],
+      "slot_count": 1,
+      "confidence": 0.9,
+      "slot_prefixes": {
+        "url": ""
+      },
+      "distill_diagnostics": {
+        "mean_jaccard": 1.0,
+        "has_constant_anchor": true,
+        "anchor_path": [
+          "method"
+        ],
+        "shared_paths": [
+          "method",
+          "url"
+        ],
+        "slot_prefixes": {
+          "url": ""
+        },
+        "fix1_suffix_guard_applied": true,
+        "fix2_delimiter_guard_applied": true
+      },
+      "resolution_results": [
+        {
+          "params": {
+            "url": "dave/orders/400"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/users/dave/orders/40000"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": false,
+          "expected_url": "https://api.example.com/users/dave/orders/400"
+        },
+        {
+          "params": {
+            "url": "eve/orders/500"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/users/eve/orders/50000"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": false,
+          "expected_url": "https://api.example.com/users/eve/orders/500"
+        },
+        {
+          "params": {
+            "url": "frank/orders/600"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/users/frank/orders/60000"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": false,
+          "expected_url": "https://api.example.com/users/frank/orders/600"
+        }
+      ],
+      "metrics": {
+        "binding_accuracy": 0.0,
+        "binding_correct_count": 0,
+        "executable_count": 3,
+        "slot_count_correct": true
+      }
+    },
+    "G5_PATH_QUERY_HYBRID": {
+      "condition_id": "G5_PATH_QUERY_HYBRID",
+      "training_count": 3,
+      "unseen_count": 3,
+      "distill_success": true,
+      "mechanism_id": "param-G5_PATH_QUERY_HYBRID",
+      "action_template": {
+        "method": "GET",
+        "url": "https://api.example.com/users/${url}/items?page=1"
+      },
+      "parameter_slots": [
+        "url"
+      ],
+      "slot_count": 1,
+      "confidence": 0.9,
+      "slot_prefixes": {
+        "url": ""
+      },
+      "distill_diagnostics": {
+        "mean_jaccard": 1.0,
+        "has_constant_anchor": true,
+        "anchor_path": [
+          "method"
+        ],
+        "shared_paths": [
+          "method",
+          "url"
+        ],
+        "slot_prefixes": {
+          "url": ""
+        },
+        "fix1_suffix_guard_applied": true,
+        "fix2_delimiter_guard_applied": true
+      },
+      "resolution_results": [
+        {
+          "params": {
+            "url": "dave"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/users/dave/items?page=1"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": true,
+          "expected_url": "https://api.example.com/users/dave/items?page=1"
+        },
+        {
+          "params": {
+            "url": "eve"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/users/eve/items?page=1"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": true,
+          "expected_url": "https://api.example.com/users/eve/items?page=1"
+        },
+        {
+          "params": {
+            "url": "frank"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/users/frank/items?page=1"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": true,
+          "expected_url": "https://api.example.com/users/frank/items?page=1"
+        }
+      ],
+      "metrics": {
+        "binding_accuracy": 1.0,
+        "binding_correct_count": 3,
+        "executable_count": 3,
+        "slot_count_correct": true
+      }
+    },
+    "N1_ORIGINAL": {
+      "condition_id": "N1_ORIGINAL",
+      "training_count": 3,
+      "unseen_count": 3,
+      "distill_success": true,
+      "mechanism_id": "param-N1_ORIGINAL",
+      "action_template": {
+        "method": "GET",
+        "url": "https://api.example.com/a"
+      },
+      "parameter_slots": [],
+      "slot_count": 0,
+      "confidence": 0.9,
+      "slot_prefixes": {},
+      "distill_diagnostics": {
+        "mean_jaccard": 1.0,
+        "has_constant_anchor": true,
+        "anchor_path": [
+          "method"
+        ],
+        "shared_paths": [
+          "method",
+          "url"
+        ],
+        "slot_prefixes": {},
+        "fix1_suffix_guard_applied": true,
+        "fix2_delimiter_guard_applied": true
+      },
+      "resolution_results": [
+        {
+          "params": {
+            "url": "x"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/a"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": false,
+          "expected_url": null
+        },
+        {
+          "params": {
+            "url": "y"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/a"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": false,
+          "expected_url": null
+        },
+        {
+          "params": {
+            "url": "z"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/a"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": false,
+          "expected_url": null
+        }
+      ],
+      "metrics": {
+        "binding_accuracy": 0.0,
+        "binding_correct_count": 0,
+        "executable_count": 3,
+        "slot_count_correct": true
+      }
+    },
+    "N1_REDESIGNED": {
+      "condition_id": "N1_REDESIGNED",
+      "training_count": 3,
+      "unseen_count": 3,
+      "distill_success": true,
+      "mechanism_id": "param-N1_REDESIGNED",
+      "action_template": {
+        "method": "GET",
+        "url": "https://${url}"
+      },
+      "parameter_slots": [
+        "url"
+      ],
+      "slot_count": 1,
+      "confidence": 0.9,
+      "slot_prefixes": {
+        "url": ""
+      },
+      "distill_diagnostics": {
+        "mean_jaccard": 1.0,
+        "has_constant_anchor": true,
+        "anchor_path": [
+          "method"
+        ],
+        "shared_paths": [
+          "method",
+          "url"
+        ],
+        "slot_prefixes": {
+          "url": ""
+        },
+        "fix1_suffix_guard_applied": true,
+        "fix2_delimiter_guard_applied": true
+      },
+      "resolution_results": [
+        {
+          "params": {
+            "url": "x2"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://x2"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": false,
+          "expected_url": null
+        },
+        {
+          "params": {
+            "url": "y2"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://y2"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": false,
+          "expected_url": null
+        },
+        {
+          "params": {
+            "url": "z2"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://z2"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": false,
+          "expected_url": null
+        }
+      ],
+      "metrics": {
+        "binding_accuracy": 0.0,
+        "binding_correct_count": 0,
+        "executable_count": 3,
+        "slot_count_correct": false
+      }
+    },
+    "B_LITERAL": {
+      "condition_id": "B_LITERAL",
+      "training_count": 3,
+      "unseen_count": 3,
+      "distill_success": true,
+      "mechanism_id": "literal-auto",
+      "action_template": {
+        "method": "GET",
+        "url": "https://api.example.com/users/A"
+      },
+      "parameter_slots": [],
+      "slot_count": 0,
+      "confidence": 0.5,
+      "slot_prefixes": {},
+      "distill_diagnostics": {
+        "mean_jaccard": 1.0,
+        "has_constant_anchor": true,
+        "anchor_path": [
+          "method"
+        ],
+        "shared_paths": [
+          "method",
+          "url"
+        ],
+        "slot_prefixes": {},
+        "mechanism_count": 3
+      },
+      "resolution_results": [],
+      "metrics": {
+        "binding_accuracy": 1.0,
+        "binding_correct_count": 0,
+        "executable_count": 0,
+        "slot_count_correct": true,
+        "fail_rate": 1.0
+      },
+      "baseline_note": "Literal mechanism reuse: confidence 0.5 < min_confidence 0.8, all resolutions return EXPLORE/UNKNOWN"
+    }
+  },
+  "controls": {
+    "P1_PATH_PREFIX": {
+      "type": "positive_control",
+      "expected": "slot_count=1, binding_accuracy=1.0",
+      "passed": true
+    },
+    "N1_ORIGINAL": {
+      "type": "fix2_target",
+      "expected": "slot_count=0",
+      "passed": true
+    },
+    "N1_REDESIGNED": {
+      "type": "null_control",
+      "expected": "slot_count=0",
+      "passed": false
+    },
+    "B_LITERAL": {
+      "type": "baseline",
+      "expected": "fail_rate=1.0",
+      "passed": true
+    }
+  },
+  "aggregate": {
+    "total_conditions": 9,
+    "passed_conditions": 7,
+    "condition_pass_rate": 0.7777777777777778,
+    "structural_generalization_rate": 0.8,
+    "overall_binding_accuracy": 0.625,
+    "verdict": "FALSIFIED-IN-SETTING"
+  },
+  "condition_pass": {
+    "P1_PATH_PREFIX": true,
+    "G1_QUERY_STRING_SIMPLE": true,
+    "G2_QUERY_STRING_MULTIPARAM": true,
+    "G3_DEEP_PATH": true,
+    "G4_MULTI_SLOT": false,
+    "G5_PATH_QUERY_HYBRID": true,
+    "N1_ORIGINAL": true,
+    "N1_REDESIGNED": false,
+    "B_LITERAL": true
+  },
+  "g4_separate": {
+    "slot_count": 1,
+    "binding_accuracy": 0.0,
+    "suffix_fixed": false,
+    "architectural_bound": true
+  },
+  "decision_rule_evaluation": {
+    "g1_passes": true,
+    "n1_redesigned_passes": false,
+    "n1_original_passes": true,
+    "p1_passes": true,
+    "g2_passes": true,
+    "g3_passes": true,
+    "g5_passes": true,
+    "b_literal_passes": true,
+    "pipeline_no_errors": true,
+    "all_six_pass": false,
+    "verdict": "FALSIFIED-IN-SETTING"
+  },
+  "fixes_applied": {
+    "fix1_suffix_guard": "Exclude single-character suffixes not preceded by structural delimiters (?, =, &)",
+    "fix2_delimiter_bound_prefix": "Require next char after prefix to be / ? = & or end-of-string"
+  }
+}
