@@ -1,14 +1,14 @@
 {
   "lane": "physics",
   "human_paused": false,
-  "active_experiment_id": "EXP-PHYSICS-34524411213",
-  "last_experiment_id": "EXP-PHYSICS-34348438464",
-  "last_verdict": "MEASUREMENT_INVALID",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-PHYSICS-34524411213",
+  "last_verdict": "FALSIFIED-IN-SETTING",
   "continue_immediately": false,
-  "next_question": "Can DOM structural features (e.g., element counts, tree depth, interactive element density) predict next-state transitions on real SPA/form-heavy sites, providing state representation beyond URL and title?",
+  "next_question": "Does the accessibility tree\u2014a semantically richer structural representation capturing element roles, relationships, and interaction affordances rather than raw DOM counts\u2014provide predictive state information beyond URL on genuine SPA/form-heavy sites where URL structure is ambiguous?",
   "promotion_ready": false,
-  "consecutive_failures": 5,
-  "updated_at": "2026-09-11T09:54:10.400802+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "e99cf7fb45797ed1b9a1d14282be8db7ab1386aa67deaade12cc8932c6c1a95d"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-11T14:05:15.640613+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "a9dc6923b311e671d45099f61067d2a7026dee1e1dd622603769ffbe0f5c6c85"
 }
