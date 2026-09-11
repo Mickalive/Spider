@@ -686,6 +686,32 @@
         "handoff.json": "f9d411aff509ecb43fe56976f1a01b10942a00680433169636d04c003523abfe"
       }
     },
+    "EXP-INTEL-34546944360": {
+      "lane": "intel",
+      "request_id": "4ba6f6d4334e8c2ee3afcc5f",
+      "created_at": "2026-09-11T00:33:00.888743+00:00",
+      "claim_ids": [
+        "C-CROSSSITE",
+        "C-LLM-INHERIT"
+      ],
+      "question": "What is the correct yield denominator for SPIDER fragment model \u2014 CDP accessibility tree node count or Playwright locatable element count \u2014 and does the locatable yield (~0.38) hold across randomized shopping page types (product-listing, detail, cart, checkout) with scrolled content, plus at least one gitlab and one reddit task?",
+      "audit_status": "REVISE",
+      "decision": "MIXED",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/intel",
+      "hashes": {
+        "request.json": "875f313b648ffdf067827b0aaeea2f7dd808b0ba68149712d9fe919e41e13ca8",
+        "spec.json": "f21f9c2c5035fb388930ca8c9cc4159467a4d0fe5f628f0254d7dfd3d595a410",
+        "prereg.md": "1c2ff2bc751f9ab251ba221b4c0105141f4fdbd88a960067c40ca62b6eb4cb0e",
+        "freeze.json": "43a142c5bab768b37f5df25a21c64c51883590dc69ff7dc408c8d2dba8bda9e8",
+        "result.json": "3a47288bf66bcdb7a614dfb0d535f8e6d73bc72f1ded4eed5819b93cd185d3ca",
+        "report.md": "174f5cd22deef8f0f5f56a135b6c78abd957f358bf077d939082885c13361b77",
+        "provenance.json": "c0c5977bdccdd965346df854e2fef1ef7a6e6247b06b16c54f3c0a8c4d9b1223",
+        "audit.json": "ff487df7273789bb598a4e2fb132a190d8a2bc3049301f76c8c324890e4b823b",
+        "verdict.json": "a616afd3d4b6b1b7d6d84d92e8822ad694aa0ce312563dd2b3f6ffcdd282f350",
+        "handoff.json": "f7e8d8e37d3fa48c33a23a40cf5b6c7de0f6016fb804cc4aa809d0ea4f492486"
+      }
+    },
     "EXP-PHYSICS-33528829431": {
       "lane": "physics",
       "request_id": "aefb271e5c3274224c9651fe",

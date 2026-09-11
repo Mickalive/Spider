@@ -367,6 +367,14 @@
         "claim_id": "C-CROSSSITE",
         "status": "BLOCKED",
         "reason": "Yield calibration remains unresolved. Heuristic 0.65 is falsified (60.7pp CDP, 27pp locatable), but denominator ambiguity (CDP 2296 vs locatable 258) makes it impossible to determine whether the fragment model itself is broken or whether the heuristic used a different element-counting convention. Mind2Web fails S4 diversity (73 < 100 websites). N=2 pilot on identical Magento review pages cannot generalize to 192 shopping tasks or 6 site types. Requires: (a) resolve denominator ambiguity, (b) measure 8-10 randomized tasks across page types, (c) measure additional site types."
+      },
+      {
+        "experiment_id": "EXP-INTEL-34546944360",
+        "lane": "intel",
+        "decision": "MIXED",
+        "claim_id": "C-CROSSSITE",
+        "status": "HYPOTHESIS",
+        "reason": "Denominator ambiguity unresolved: locatable yield is definition\u2011dependent (0.079\u20130.42) and no canonical definition exists. CDP yield ~0.0426 replicates parent but represents ~4% of CDP nodes. No justified claim about 812\u2011task corpus viability until denominator frozen, sampling randomized, script provenance pinned, and viewport anomaly explained (audit.json claim_ceiling, VF\u2011LOCATABLE\u2011DEFINITION\u2011AMBIGUITY)."
       }
     ],
     "C-LLM-INHERIT": [
@@ -417,6 +425,14 @@
         "claim_id": "C-LLM-INHERIT",
         "status": "BLOCKED",
         "reason": "Same denominator ambiguity and sample-size limitation as C-CROSSSITE. The CDP-vs-locatable denominator determines whether the observation pipeline preserves enough interactive elements for LLM inheritance testing. Under locatable denominator (0.38), the yield may be sufficient; under CDP (0.0427), it is not. This must be resolved before C-LLM-INHERIT can be evaluated."
+      },
+      {
+        "experiment_id": "EXP-INTEL-34546944360",
+        "lane": "intel",
+        "decision": "MIXED",
+        "claim_id": "C-LLM-INHERIT",
+        "status": "HYPOTHESIS",
+        "reason": "Fragment\u2011model yield remains ambiguous; Method1 0.365 is INCONCLUSIVE (FALSIFIED under all\u2011elements definition, SUPPORTED under parent definition). Heuristic 0.65 is FALSIFIED robustly (>23pp). LLM\u2011inheritance cannot be evaluated until denominator frozen and yield measured across representative site types (audit.json claim_ceiling, VF\u2011MISSING\u2011SITE\u2011TYPE\u2011COMPARISON)."
       }
     ],
     "C-PRODUCT-ECON": [
