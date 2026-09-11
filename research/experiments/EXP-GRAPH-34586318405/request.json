@@ -1,0 +1,20 @@
+{
+  "base_sha": "c4de03975e78155a77f483d11dd4d6399f44fd67",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-11T09:51:45.561325+00:00",
+  "experiment_id": "EXP-GRAPH-34586318405",
+  "inherited_last_verdict": "SUPPORTED",
+  "inherited_next_question": "Can the kernel handle more complex aliasing scenarios \u2014 query parameters, path rewriting, or server-side routing that maps multiple URL templates to the same resource \u2014 and does HTTP execution success against real endpoints provide a grounding signal for template correctness that resolver selection alone cannot?",
+  "lane": "graph",
+  "origin_github_run_id": "34586318405",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-34409639346",
+    "path": "research/experiments/EXP-GRAPH-34409639346/handoff.json",
+    "sha256": "fb3bddcf2dcc949d36ee57edcca18f6a986f5643ab4ec9e4534d91e2bf8f668d"
+  },
+  "reason": "pulse",
+  "request_hash": "9420896dbaa30d03c4b7eb7a7b29cebcf0cbaa2197adfec9f03284508ff54e8e",
+  "request_id": "b8f89e1d4975b9880735ac7b",
+  "schema_version": 1
+}
