@@ -1,14 +1,14 @@
 {
   "lane": "product",
   "human_paused": false,
-  "active_experiment_id": "EXP-PRODUCT-34485517221",
-  "last_experiment_id": "EXP-PRODUCT-34420092879",
-  "last_verdict": "SURVIVES_CURRENT_TEST",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-PRODUCT-34485517221",
+  "last_verdict": "FALSIFIED-IN-SETTING",
   "continue_immediately": false,
-  "next_question": "Does the parameterized kernel with bind-time prefix extraction save total cost per successful task in an end-to-end product economics measurement (C-PRODUCT-ECON gate), or does the leaf-path URL-as-string heuristic fail to generalize to structurally different URL patterns (query strings, multi-segment variation) requiring a more robust parameter induction approach?",
+  "next_question": "What combination of kernel fixes (suffix extraction guard, similarity threshold, multi-slot decomposition) is required to achieve binding correctness across all URL classes tested here, and can these fixes be validated against actual kernel.py distill_parameterized and _bind with prefixes before proceeding to C-PRODUCT-ECON measurement?",
   "promotion_ready": false,
-  "consecutive_failures": 8,
-  "updated_at": "2026-09-11T14:04:19.597049+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "76e5e988f76f1184f72b33b0793d2adfaf03dcd129b2a270c76cee055ae403cd"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-11T17:47:57.631784+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "2a3522896783044ccafdccf0abab815facfa43f2d1e0c62304ee94ef98d3a2bf"
 }
