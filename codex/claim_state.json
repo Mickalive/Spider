@@ -59,6 +59,14 @@
         "reason": "TV distance with kNN estimator in synthetic 10D [0,1]^10 with mixture-of-3-Gaussians heteroscedastic noise does NOT produce uniform function-invariant response. Falsified by two independent frozen-spec conditions: (1) Function invariance decisively fails \u2014 ANOVA interaction p~1e-30 (audit.json:recomputed_metrics.anova_interaction F=19.13, df=14, resid_df=216). Scaling function (family B) shows rho=-0.07 (p=0.57), separation=0.022, d=0.85 \u2014 negligible TV response. Translation (family C) shows rho=1.0, separation=0.201, d=9.11 \u2014 strong signal. Rotation (family A) shows rho=0.83, d=2.09 \u2014 moderate with non-monotonic dip. Aggregate rho=1.0 is weighted average of heterogeneous per-function responses. (2) Positive control fails under frozen spec definition \u2014 producer redefined control as tv_at_1 > tv_at_0 (analyze.py:706-727) but frozen spec requires TV at lambda=1 detectably above permutation null (permutation p < 0.05); report.md notes mean perm p=0.141 at lambda=1 with 200 perms. The hypothesis that TV uniformly generalizes from 2D Gaussian to 10D non-Gaussian settings is falsified for the tested parameterization. However, translation-type dynamics remain detectable in 10D (rho=1.0, d=9.1), so blanket claim that TV fails in 10D is not justified. Claim ceiling bounded to: TV detects action-dependent structure in 10D non-Gaussian spaces only for function families with sufficient action-conditional separability (translation-like), not universally. C-WEB-DYNAMICS remains HYPOTHESIS."
       },
       {
+        "experiment_id": "EXP-FRONTIER-34121473072",
+        "lane": "frontier",
+        "decision": "FALSIFIED-IN-SETTING",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "Bias-corrected kNN TV (permutation-null subtraction) does NOT recover uniform function invariance in 10D non-Gaussian synthetic spaces. The experiment FALSIFIES the uniform generalization: aggregate monotonicity survives (Spearman rho=0.976, p<0.001) but is driven entirely by translation (rho=1.0) and rotation (rho=0.93); scaling shows zero monotonic response (rho=-0.12, p=0.61) even after removing the shared bias floor 0.528. Two-way ANOVA function x lambda interaction p=0 decisively rejects invariance (F=30.2, R2=0.85). Bias correction removes the ~0.52 floor (bc_TV at lambda=0 ~0.006, permutation p=0.55) but does not rescue scaling (bc separation 0.012 vs translation 0.185). Clipping contributes to absolute separations (toroidal reduces gap 84.9%) but the per-function ordering translation>rotation>scaling persists under toroidal, and toroidal at lambda=0 still 0.528 proving the floor is kNN-intrinsic not boundary artefact. Claim ceiling bounded to: kNN TV detects action-dependent structure in 10D non-Gaussian spaces ONLY for translation-like (and partially rotation-like) dynamics with sufficient separability. Scaling-type dynamics remain undetectable. No evidence for real Web transitions; synthetic-to-real gap persists. The claim remains HYPOTHESIS with this narrowed ceiling pending alternative estimators or real Web data."
+      },
+      {
         "experiment_id": "EXP-PHYSICS-33528829431",
         "lane": "physics",
         "decision": "REVISE",
@@ -113,6 +121,14 @@
         "claim_id": "C-WEB-DYNAMICS",
         "status": "EXPERIMENTAL",
         "reason": "The experiment is an uninformative (degenerate) test of title-aware PMI on real SPA sites: both TodoMVC sites have constant document.title (unique_titles=1), making URL+title isomorphic to URL-only (0% improvement forced by zero title variance). The preregistered hypothesis about titles noisy/ambiguous on form-heavy SPAs was never tested because the selected sites are not form-heavy (single input.new-todo, no multi-step flows) and have no title variation. URL-only PMI is strongly positive (1.32-1.36 bits, permutation p=0.001, d>83), confirming action->next-state dynamical structure at URL level \u2014 consistent with but not caused by this experiment. The claim ceiling is bounded to: URL-level PMI detects dynamical structure on TodoMVC hash-SPA transitions. Title-aware PMI benefit remains untested on real sites with varying titles. Do not update claim status beyond EXPERIMENTAL based on this experiment."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-34348438464",
+        "lane": "physics",
+        "decision": "MEASUREMENT_INVALID",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "EXPERIMENTAL",
+        "reason": "The experiment is measurement_invalid due to insufficient non-leakage transitions on both sites (GitHub 9, MDN 17). This provides no new evidence for or against the title-aware PMI hypothesis on the preregistered target population (real SPA/form-heavy sites with varying titles). The claim remains experimental pending a valid re-run with corrected site selection, action discovery, and sufficient transition density."
       }
     ],
     "C-PARAM-INHERIT": [
@@ -197,6 +213,22 @@
         "reason": "Fix prerequisite not met \u2014 src/spider/kernel.py L112 sort key still 'candidates.sort(key=lambda m: m.confidence, reverse=True)', fix absent from committed HEAD (kernel sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61). 0/14 conditions executed per frozen BLOCKED decision rule. No SURVIVES_POST_COMMIT or FALSIFIED_POST_COMMIT possible. Claim ceiling unchanged from parent: no post-commit evidence exists. Fix must be committed with Director approval before re-run."
       },
       {
+        "experiment_id": "EXP-GRAPH-34320613096",
+        "lane": "graph",
+        "decision": "BLOCKED",
+        "claim_id": "C-PARAM-INHERIT",
+        "status": "BLOCKED",
+        "reason": "Third consecutive BLOCKED result: fix NOT present in committed HEAD src/spider/kernel.py L112 (sha256 46929b3a, line 'candidates.sort(key=lambda m: m.confidence, reverse=True)'). 0/14 conditions executed per frozen decision rule 9.3. No post-commit evidence exists for hazard elimination, baseline preservation, confidence ordering, or upsert compatibility. The prerequisite (one-line fix committed with Director approval) remains unmet. This is operational delay (fix not committed), not scientific closure (hypothesis not rejected)."
+      },
+      {
+        "experiment_id": "EXP-GRAPH-34395286092",
+        "lane": "graph",
+        "decision": "BLOCKED_CLOSE_AND_PIVOT",
+        "claim_id": "C-PARAM-INHERIT",
+        "status": "BLOCKED",
+        "reason": "Fourth consecutive BLOCKED: fix absent from committed HEAD (src/spider/kernel.py L112 = 'candidates.sort(key=lambda m: m.confidence, reverse=True)', sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61). 0/14 conditions executed per frozen decision rule 9.3. No scientific measurement occurred. Fix absent from all 12+ branches checked (raw_evidence.json fix_found_on_any_branch=false). Prerequisite (one-line fix commit) unmet across four experiments with identical kernel state. Audit PASS confirms BLOCKED status correctly justified (audit.json status=PASS, claim_ceiling=BLOCKED). C-PARAM-INHERIT cannot advance without this prerequisite; Director closes claim with explicit rationale and pivots graph lane to orthogonal high-upside question."
+      },
+      {
         "experiment_id": "EXP-PRODUCT-33528829801",
         "lane": "product",
         "decision": "SURVIVES \u2014 C-PARAM-INHERIT survives at synthetic in-kernel POC level: distill_parameterized() with _extract_varying_values() correctly induces one parameter slot for isomorphic action paths and resolves to EXECUTABLE with correct bound_action for all 10 unseen single-char identifiers. All four frozen decision-rule conditions satisfied. Audit PASS confirms recomputed metrics match producer. However, the claim ceiling is narrow: single-parameter, single-field, common-prefix heuristic, deterministic synthetic data, hardcoded confidence, simulated baselines. No broader product promotion is authorized by this evidence.",
@@ -251,6 +283,30 @@
         "claim_id": "C-PARAM-INHERIT",
         "status": "EXPERIMENTAL",
         "reason": "C2 double-prefix bug persists: _bind() prefix-strip fix is structurally inert because distill_parameterized() induces full template prefix (https://api.example.com/users/user-${url}), not short prefix (user-${url}). The fix's val.startswith(template_prefix) condition is always False for induced templates with long prefixes. C2 binding_accuracy=0.0 0/3, bound URLs contain user-user-4 instead of user-4. All 9 other conditions pass (31/31 binding correct). Kernel integration remains PARTIAL (9/10 synthetic). Fix approach rejected; different strategy needed (template construction change or slot-level prefix detection)."
+      },
+      {
+        "experiment_id": "EXP-PRODUCT-34282620394",
+        "lane": "product",
+        "decision": "C2-FIX-FALSIFIED",
+        "claim_id": "C-PARAM-INHERIT",
+        "status": "EXPERIMENTAL",
+        "reason": "C2 distill-time prefix stripping works in isolation (binding_accuracy=1.0, template correctly shortened to https://api.example.com/users/${url}) but under the frozen 10-condition spec the fix is FALSIFIED: 4/9 regression conditions fail (B4, C1, D1, D3 binding_accuracy=0.0) because distill-time stripping mandates full-value callers while the harness uses short values. Per frozen decision_rule, any regression triggers C2-FIX-FALSIFIED. Kernel integration remains PARTIAL (6/10 full-pass under this implementation, 9/10 under prior baseline without this fix). C-PARAM-INHERIT is NOT product-ready."
+      },
+      {
+        "experiment_id": "EXP-PRODUCT-34282620394",
+        "lane": "product",
+        "decision": "C2-FIX-FALSIFIED",
+        "claim_id": "C-PARAM-INHERIT",
+        "status": "EXPERIMENTAL",
+        "reason": "Distill-time prefix stripping mechanism (detect slot-level prefix from training values, strip from template, bind full value directly) is now FALSIFIED as a standalone fix: it breaks the value contract for callers passing short values. The mechanism is technically sound for full-value-only convention but incompatible with the existing mixed-convention harness. Two viable alternatives remain: (a) revert to bind-time double-prefix detection which handled both conventions, or (b) adopt full-value-only contract and update all callers."
+      },
+      {
+        "experiment_id": "EXP-PRODUCT-34420092879",
+        "lane": "product",
+        "decision": "SURVIVES_CURRENT_TEST",
+        "claim_id": "C-PARAM-INHERIT",
+        "status": "EXPERIMENTAL",
+        "reason": "Bind-time slot-level prefix extraction resolves C2 double-prefix without regressions in frozen 10-condition synthetic harness. All conditions pass binding_accuracy=1.0, slot counts correct, null controls pass. This provides first evidence of mixed calling convention support (short and full values) at the kernel level. Evidence: audit.json recomputed_metrics (34/34 binding_correct, accuracy=1.0), raw_evidence.json all conditions, audit.json V4_CONTROLS (C2, B1-B5, D1-D3, E1/E2 independently verified). Claim does NOT advance to product-ready: audit.json claim_ceiling bounds to synthetic kernel correctness only; real-browser validation and end-to-end economics (C-PRODUCT-ECON) remain unmeasured."
       }
     ],
     "C-CROSSSITE": [
@@ -293,6 +349,14 @@
         "claim_id": "C-CROSSSITE",
         "status": "HYPOTHESIS",
         "reason": "BLOCKED \u2014 no live measurement performed. WebArena Docker images on ghcr.io/web-arena-x/ require authentication (denied on all 3 images plus tags v1/v2/stable). Heuristic yield estimates (shopping 0.65, gitlab 0.60, wikipedia 0.517) remain unvalidated priors from EXP-INTEL-33945226776. No evidence to promote, reject, or advance. Audit ceiling: BLOCKED infrastructure diagnostic only."
+      },
+      {
+        "experiment_id": "EXP-INTEL-34377576886",
+        "lane": "intel",
+        "decision": "REVISE",
+        "claim_id": "C-CROSSSITE",
+        "status": "BLOCKED",
+        "reason": "Yield calibration remains unresolved. Heuristic 0.65 is falsified (60.7pp CDP, 27pp locatable), but denominator ambiguity (CDP 2296 vs locatable 258) makes it impossible to determine whether the fragment model itself is broken or whether the heuristic used a different element-counting convention. Mind2Web fails S4 diversity (73 < 100 websites). N=2 pilot on identical Magento review pages cannot generalize to 192 shopping tasks or 6 site types. Requires: (a) resolve denominator ambiguity, (b) measure 8-10 randomized tasks across page types, (c) measure additional site types."
       }
     ],
     "C-LLM-INHERIT": [
@@ -335,6 +399,14 @@
         "claim_id": "C-LLM-INHERIT",
         "status": "HYPOTHESIS",
         "reason": "BLOCKED \u2014 no live measurement performed. Central question (whether heuristic yield estimates match actual fragment extraction) remains UNANSWERED. 812-task corpus suitability for C-LLM-INHERIT testing cannot be assessed without authenticated Docker deployment and geometry-faithful viewport filtering. Audit ceiling: BLOCKED infrastructure diagnostic only."
+      },
+      {
+        "experiment_id": "EXP-INTEL-34377576886",
+        "lane": "intel",
+        "decision": "REVISE",
+        "claim_id": "C-LLM-INHERIT",
+        "status": "BLOCKED",
+        "reason": "Same denominator ambiguity and sample-size limitation as C-CROSSSITE. The CDP-vs-locatable denominator determines whether the observation pipeline preserves enough interactive elements for LLM inheritance testing. Under locatable denominator (0.38), the yield may be sufficient; under CDP (0.0427), it is not. This must be resolved before C-LLM-INHERIT can be evaluated."
       }
     ],
     "C-PRODUCT-ECON": [
@@ -361,6 +433,14 @@
         "claim_id": "C-PRODUCT-ECON",
         "status": "HYPOTHESIS",
         "reason": "BLOCKED \u2014 no live measurement performed. REQUIRES_TRANSFORM overhead cannot be assessed from heuristics alone. Product consequence of either positive or negative result not realized. Audit ceiling: BLOCKED infrastructure diagnostic only."
+      },
+      {
+        "experiment_id": "EXP-INTEL-34377576886",
+        "lane": "intel",
+        "decision": "REVISE",
+        "claim_id": "C-PRODUCT-ECON",
+        "status": "BLOCKED",
+        "reason": "Product economics depend on fragment yield. The 0.0427 CDP yield would imply catastrophic fragment loss; the 0.38 locatable yield may be workable. Until denominator is resolved and yield is measured across site types, product economics cannot be assessed."
       }
     ],
     "C-MEAS-VALID": [
@@ -435,6 +515,22 @@
         "claim_id": "C-MEAS-VALID",
         "status": "EXPERIMENTAL",
         "reason": "C-MEAS-VALID survives narrowly on Flask 3.1.3 + PyJWT 2.13.0 HS256 localhost 127.0.0.1:18929, 4 states with identical error bodies for expired/invalid, production-like header variation (Cache-Control no-store/no-cache, Set-Cookie present only for valid_token). Full-vector discrimination 1.0 > B-BODY-ONLY 0.833 (incremental header value 0.167), null FP 0.0% < 5%, Cache-Control-only discrimination 0.833 > 0. Resolves parent H4 ceiling confound. Audit V4 constrains: headers are application-set per state by construction, not natural production variance. Claim does NOT extend to production OAuth/OIDC, CDN, jitter >150ms, or natural header variance."
+      },
+      {
+        "experiment_id": "EXP-RUNTIME-34300004597",
+        "lane": "runtime",
+        "decision": "SURVIVES_CURRENT_TEST \u2014 C-MEAS-VALID survives with severely narrowed ceiling. All four frozen decision criteria pass: full_vector_discrimination 0.833 > B-BODY-ONLY 0.5 (incremental header value 0.333), full_vector_discrimination 0.833 > 0.5, null FP 0.0% < 5%, Cache-Control-only discrimination 0.5 > 0. However, the audit corrects the producer's mechanistic interpretation: (1) Cache-Control variation is valid_token no-cache vs absent on ALL errors \u2014 it does NOT vary by error type (no-store vs no-cache as hypothesized), confirming V4 ENGINEERED-HEADER-TAUTOLOGY for the critical expired/invalid pair; (2) the true discriminating header is WWW-Authenticate (discrimination 0.833 == full vector), not Cache-Control; (3) Set-Cookie adds zero (absent on all Keycloak /userinfo responses); (4) expired_token and invalid_token remain indistinguishable (identical bodies, headers, fingerprint, Jaccard 1.0); (5) body baseline weakened (B-BODY-ONLY 0.5 vs parent 0.833) inflates apparent incremental value; (6) expired token is not truly Keycloak-issued (V6 state construction leakage). Claim ceiling bounded to Keycloak 25.0 start-dev localhost:18080 /userinfo, 3 distinct fingerprints (not 4), full vector via WWW-Authenticate not Cache-Control error-type variation. Does NOT extend to production OAuth/OIDC, CDN/load-balancer, /token endpoint, or cross-Python-version reproducibility.",
+        "claim_id": "C-MEAS-VALID",
+        "status": "EXPERIMENTAL",
+        "reason": "C-MEAS-VALID survives with narrowed ceiling on Keycloak 25.0 localhost:18080 /userinfo. Full-vector discrimination 0.833 > B-BODY-ONLY 0.5 by 0.333 incremental header value, driven by WWW-Authenticate (no_auth Bearer realm vs error invalid_token) and Cache-Control present/absent (valid vs errors), NOT by Cache-Control error-type variation (no-store vs no-cache) as hypothesized. Expired==invalid pair remains indistinguishable (identical bodies, headers, fingerprint Jaccard 1.0). V4 tautology confirmed for Cache-Control/Set-Cookie error-type variation on this IdP. Set-Cookie absent on all responses. Body baseline weakened (0.5 vs parent 0.833) partly explains higher incremental ratio. Bootstrap CI [0.0, 1.0] degenerate. Claim does NOT extend to production OAuth/OIDC, CDN, load-balancer, /token endpoint, or cross-Python versions."
+      },
+      {
+        "experiment_id": "EXP-RUNTIME-34439061845",
+        "lane": "runtime",
+        "decision": "FALSIFIED-IN-SETTING \u2014 WWW-Authenticate header discrimination does NOT transfer across Keycloak endpoints. Frozen decision rule fails on both primary conditions: (1) WWW-Auth-only discrimination > 0 on >= 2/3 additional endpoints: 0/3 positive (/token password 0.0, /token client_credentials 0.0, /introspect 0.0); (2) full-vector discrimination > 0.5 on >= 2/3 additional endpoints: 0/3 positive (/token password 0.0, /token client_credentials 0.0, /introspect 0.5 not > 0.5). Positive control PASS (/userinfo WWW-Auth 0.833 == full vector, replicates parent EXP-RUNTIME-34300004597). Null FP PASS on 3/4 endpoints (100% on /token password is structural: fresh JWT per request, not measurement instability). Audit PASS, all metrics recomputed match producer. WWW-Authenticate header is absent from all /token and /introspect responses across all 120 reps of additional endpoints \u2014 this is expected OAuth behavior (credentials in form body, not Authorization header), not a measurement gap. The discrimination pattern is /userinfo-specific resource-server behavior, not Keycloak-level. /token endpoints ignore Authorization header entirely. /introspect achieves body-only discrimination 0.5 via active:true/false field. client_credentials test is degenerate (serviceAccountsEnabled false on spider-client, all 401 unauthorized_client); claim ceiling excludes this endpoint as informative transfer test.",
+        "claim_id": "C-MEAS-VALID",
+        "status": "EXPERIMENTAL",
+        "reason": "C-MEAS-VALID remains EXPERIMENTAL with ceiling narrowed to /userinfo-only for WWW-Authenticate discrimination. This experiment falsifies transfer of WWW-Authenticate discrimination across Keycloak endpoints: 0/3 additional endpoints (/token password, /token client_credentials, /introspect) show WWW-Auth-only discrimination > 0. The measurement substrate is validated on /userinfo (positive control 0.833 == full vector, replicates parent), confirming the substrate works, but the mechanism is endpoint-specific resource-server behavior, not Keycloak-level. Body-only observation achieves discrimination on /introspect (0.5 via active field) but not on /token endpoints (Authorization header ignored). Full-vector product recommendation using WWW-Authenticate is bounded to /userinfo only. Does NOT extend to production Keycloak, CDN/load-balancer, other realms/clients, other Keycloak versions, cross-Python repr reproducibility, truly-expired Keycloak-issued tokens, or other IdPs."
       }
     ]
   }

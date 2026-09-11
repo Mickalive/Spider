@@ -1,0 +1,20 @@
+{
+  "base_sha": "652bbc7ee962c552e3c81038e92791e2a23ae866",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-10T04:55:50.315866+00:00",
+  "experiment_id": "EXP-RUNTIME-34439061845",
+  "inherited_last_verdict": "SURVIVES_CURRENT_TEST \u2014 C-MEAS-VALID survives with severely narrowed ceiling. All four frozen decision criteria pass: full_vector_discrimination 0.833 > B-BODY-ONLY 0.5 (incremental header value 0.333), full_vector_discrimination 0.833 > 0.5, null FP 0.0% < 5%, Cache-Control-only discrimination 0.5 > 0. However, the audit corrects the producer's mechanistic interpretation: (1) Cache-Control variation is valid_token no-cache vs absent on ALL errors \u2014 it does NOT vary by error type (no-store vs no-cache as hypothesized), confirming V4 ENGINEERED-HEADER-TAUTOLOGY for the critical expired/invalid pair; (2) the true discriminating header is WWW-Authenticate (discrimination 0.833 == full vector), not Cache-Control; (3) Set-Cookie adds zero (absent on all Keycloak /userinfo responses); (4) expired_token and invalid_token remain indistinguishable (identical bodies, headers, fingerprint, Jaccard 1.0); (5) body baseline weakened (B-BODY-ONLY 0.5 vs parent 0.833) inflates apparent incremental value; (6) expired token is not truly Keycloak-issued (V6 state construction leakage). Claim ceiling bounded to Keycloak 25.0 start-dev localhost:18080 /userinfo, 3 distinct fingerprints (not 4), full vector via WWW-Authenticate not Cache-Control error-type variation. Does NOT extend to production OAuth/OIDC, CDN/load-balancer, /token endpoint, or cross-Python-version reproducibility.",
+  "inherited_next_question": "Does WWW-Authenticate header variation \u2014 the true discriminating signal on Keycloak (no_auth 'Bearer realm' vs error 'Bearer realm, error=invalid_token') \u2014 transfer to other OAuth/OIDC providers (Auth0, Okta), or is it Keycloak-specific /userinfo behavior? This determines whether the full-vector product recommendation can generalize beyond Keycloak or whether body-only observation is the robust architecture.",
+  "lane": "runtime",
+  "origin_github_run_id": "34439061845",
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-34300004597",
+    "path": "research/experiments/EXP-RUNTIME-34300004597/handoff.json",
+    "sha256": "794ba636ec7e9502020b2f255b330ef1e30d8660c27b1b8195844014a76d4839"
+  },
+  "reason": "pulse",
+  "request_hash": "562db41a5aab6178a27ccf2f247a943ce49f67468ca7b48c37eafb04fedf2521",
+  "request_id": "94adc0f1fd42057164d04280",
+  "schema_version": 1
+}

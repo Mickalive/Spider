@@ -1,0 +1,231 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-34121473072",
+  "lane": "frontier",
+  "status": "REVISE",
+  "producer_claim_supported": true,
+  "required_fixes": [
+    "Fix permutation null seed bug and increase to prereg 1000 perms per cell: execute.py:459 uses f_idx*10000+rep*100+SEED while Phase 1 generation uses func_seed*10000+rep*100+SEED; perm_test p-values at lambda 0/1 (result.json:metrics.perm_test_p_values 0.549/0.135) are computed on mismatched DGP draws, invalidating both null_control (p>0.05 PASS) and positive_control (p<0.05 FAIL). With 50 perms per cell (provenance.json n_permutations_per_cell 50, total 12000) granularity is 0.02 and averaged mean-p across 30 cells is not a valid combined test; validity_notes incorrectly claims 200 perms. Rerun with 1000 perms, correct seed, Fisher/Stouffer combination, store full null distributions, report per-function permutation p-values without mean-p averaging.",
+    "Remove max(0, raw - perm_mean) clipping in bias correction: execute.py:304 and 381 apply max(0.0, ...) which guarantees over_correction fraction 0.0 (result.json:metrics.over_correction all 0%) and hides true negative bias-corrected values that would indicate over-correction. Spec 5.4 defines bias_corrected = raw - mean(perm_null) without floor. Recompute without clipping, report true distribution of bc_TV at lambda=0/1 and enforce MEASUREMENT_INVALID rule (>10% negative at lambda=1) on unclipped values.",
+    "Compute permutation bias floor per kNN scale as frozen: spec measurement_validity and prereg 5.4 require bias correction per-lambda/per-function/per-kNN-scale; execute.py Phase 5.3 reuses PRIMARY_K=20 floor for k=5,10,50 (comment 'bias floor is shared') deviating from frozen design. Report per-scale perm means and recompute multiscale_bias_corrected correctly; the observed floor variation 0.516-0.533 across scales (parent) is small but the deviation violates transmission invariant.",
+    "Complete toroidal and Gaussian baselines at all 8 lambda levels as frozen: spec measurement_validity and prereg 5.5-5.7 promise toroidal wrapping and Gaussian noise at 8 lambdas x 3 functions; producer computes only KEY_LAMBDAS [0.0,0.5,1.0] (provenance.json pragmatic_deviations[1], result.json validity_notes[2]). Extension to 8 levels is required for monotonicity/ANOVA comparability; current clipping_gap_analysis (gap_reduction 84.9%) uses only lambda 0 vs 1 endpoints.",
+    "Clarify clipping comparison metric identity: execute.py:516-522 computes clip_separation and tor_separation from raw_knn_tv not bias_corrected_tv, while spec question asks whether clipping artefact quantitatively explains translation-scaling heterogeneity after bias correction. Report both raw and bias-corrected separations per function (per_function_bias_corrected separation after correction is rotation 0.047, scaling 0.012, translation 0.185) and compute gap reduction on bias-corrected values to avoid double-counting the shared 0.528 floor.",
+    "Fix frequency baseline to match spec or justify projection: spec 5.6 defines marginal P(S_{t+1}) TV in full 10D; execute.py:222-248 implements 3D-projected histogram with 5 bins per dim (125 bins) on first 3 dimensions only, at lambda=0 only per function. This explains ~0.17 vs ~0.52 floor comparison but leaves 67% unexplained due to projection loss. Either compute 10D-appropriate estimator (kNN on marginal) or explicitly downgrade claim to 3D-projection diagnostic.",
+    "Correct Gaussian baseline interpretation and reporting: At lambda=0, execute.py:148-153 samples s_next from fixed mixture regardless of noise_type, so gauss_l0 == mix_l0 identically (result.json:metrics.gaussian_comparison all three funcs show exact equality to 10 decimals). This makes lambda=0 Gaussian comparison tautologically PASS and uninformative. Gaussian effect must be evaluated at lambda>0 only (0.5,1.0) where noise_fn is actually invoked; report delta at lambda 0.5 and 1.0 separately and explain the lambda=0 identity artifact in validity_notes.",
+    "Align provenance and validity_notes and enforce frozen decision_rule MEASUREMENT_INVALID for toroidal sanity: provenance.json reports 50 perms per cell but validity_notes claims 200; execute.py header claims pragmatic reduction from 1000 to 50. Spec decision_rule declares MEASUREMENT_INVALID if toroidal TV >0.1 at lambda=0; producer observes toroidal 0.528 at lambda=0 for all functions (result.json:metrics.toroidal_sanity all FAIL) but reports status COMPLETE outcome FALSIFIES. Either revise spec threshold (floor is intrinsic, not geometry artefact) or mark MEASUREMENT_INVALID as frozen; current report.md 4.3 reinterpretation of failure as finding must be formalized as spec amendment via new prereg, not silent override.",
+    "Calibrate reporting of effect sizes and dynamic range after bias correction: result.json:metrics.aggregate_bias_corrected cohens_d 1.45 (aggregate), 10.47 translation, 0.74 scaling; parent raw aggregate d 1.57, translation raw d 9.11. Report confidence intervals and note that absolute TV magnitudes remain confounded by kNN bias floor ~0.528 and ~0.498 clipping at lambda=1 (result.json:metrics.clip_fractions) - comparison to parent 2D must be bias-corrected-to-bias-corrected, not raw-to-raw."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_permutation_seed_bug_and_power",
+      "severity": "high",
+      "finding": "Permutation p-values that underpin null_control and positive_control are invalid due to seed mismatch. Generation seed = func_seed*10000+rep*100+SEED (42/43/44) vs perm-test seed = f_idx*10000+rep*100+SEED (0/1/2). The perm_test regenerates transitions from a different DGP realization than the raw_tv it tests (execute.py:286 vs 459). Additionally N_PERMUTATIONS=50 gives p-granularity 0.02 and 30-sample mean-p (0.549/0.135) is not a valid combined test; prereg required 1000 perms per cell for SE~sd/sqrt(1000). Positive control FAIL (p=0.135>0.05) could be false negative due to bug+low power, null PASS could be false positive.",
+      "evidence": "execute.py:286-288 generation, 459 perm_test generation, 464 count_ge/N_PERMUTATIONS; result.json:metrics.perm_test_p_values, controls.positive_control/ null_control; provenance.json total_permutation_samples 12000; validity_notes claims 200 perms contradictory"
+    },
+    {
+      "id": "V2_max_zero_bias_correction",
+      "severity": "high",
+      "finding": "Bias correction applies max(0, raw - perm_mean) at two sites (perm_nulls construction line 304 and bc_tv construction line 381). This truncates the lower tail, guarantees over_correction check PASS (0% negative at lambda=1) and masks over-correction MEASUREMENT_INVALID condition. Unclipped bc_TV at lambda=0 for rotation 0.0051, scaling 0.0088, translation 0.0043 would be near zero anyway, but the procedure violates frozen subtraction definition and makes the over_correction control tautological. Multiscale bc also inherits the same floor clipping.",
+      "evidence": "execute.py:304 max(0.0, raw - perm_mean), 381 max(0.0, raw-perm_mean), 439 same for multiscale; result.json:metrics.over_correction all frac 0.0 pass true tautologically; spec 5.4 expects raw - perm_mean"
+    },
+    {
+      "id": "V3_toroidal_sanity_misclassification",
+      "severity": "high",
+      "finding": "Frozen MEASUREMENT_INVALID rule: toroidal TV <0.1 at lambda=0. Observed toroidal TV at lambda=0 is 0.528 for all functions (result.json:metrics.toroidal_sanity), identical to clipping floor 0.528. Spec expected toroidal would remove clipping edge mass, but floor persists, proving floor is intrinsic to kNN density estimation in 10D (curse of dimensionality) not boundary artefact. Producer correctly interprets this as finding (report.md 4.3) but reports status COMPLETE FALSIFIES instead of MEASUREMENT_INVALID, silently overriding frozen decision_rule. The finding actually strengthens the falsification (floor not clip-driven) but constitutes a spec deviation that must be preregistered as amended threshold.",
+      "evidence": "spec.json:decision_rule MEASUREMENT_INVALID if toroidal >0.1; result.json:controls.toroidal_sanity pass false for all funcs, metrics.toroidal_sanity, report.md 3.4/4.3; result.json status COMPLETE not MEASUREMENT_INVALID"
+    },
+    {
+      "id": "V4_per_scale_bias_floor_reuse",
+      "severity": "medium",
+      "finding": "Frozen design requires bias floor per lambda/function/kNN_scale. Producer reuses k=20 perm_null mean for k=5,10,50 multiscale correction (execute.py:439). Parent showed floors vary 0.516-0.533 across k, small but non-zero. Reuse introduces correlated bias and understates scale-specific variance; multiscale rho values (0.976,0.857) therefore share the same bias estimate and are not independent tests of scale robustness. Impact is small but violates transmission invariant that control identities remain distinct.",
+      "evidence": "spec.json:measurement_validity[3] per-lambda/per-function/per-kNN-scale; prereg 5.4 step 3; execute.py:420-451 comment and 439 perm_nulls[PRIMARY_K]; result.json:metrics.multiscale_bias_corrected"
+    },
+    {
+      "id": "V5_clipping_metric_mismatch",
+      "severity": "medium",
+      "finding": "Clipping comparison gap_reduction 84.9% (clip_gap 0.179, tor_gap 0.027) is computed from raw TV separations (raw at 1 minus raw at 0) not bias-corrected separations as the scientific question implies. After bias correction per_function separations are rotation 0.047, scaling 0.012, translation 0.185; raw separations are 0.058,0.022,0.201. Raw gap conflates shared floor with signal. Gap reduction on bias-corrected values would be (0.173 - 0.027)/0.173=84% similar numerically because floor cancels, but the identity of the metric is mislabeled and tor_separation paired_t for scaling (p=0.167) is not significant despite reported 78% reduction.",
+      "evidence": "execute.py:516-522 clip_seps from raw_knn_tv, tor_seps from raw_knn_tv_tor; result.json:metrics.clipping_comparison per-function gap_reduction, clipping_gap_analysis; prereg 8.5"
+    },
+    {
+      "id": "V6_frequency_baseline_projection_loss",
+      "severity": "medium",
+      "finding": "Frequency baseline TV ~0.17 (rotation 0.178, scaling 0.179, translation 0.169) vs kNN floor 0.528 leaves 67% unexplained. But baseline is computed via 3D-histogram (5 bins per dim, proj_dims=3, 125 bins) on first 3 dimensions only, not 10D. Projection discards 70% of dimensions where mixture noise operates. The 33% explained fraction is conditional on this lossy projection; true marginal non-uniformity in 10D may differ. No variance across lambdas reported (only lambda=0).",
+      "evidence": "execute.py:222-248 compute_frequency_baseline 3D, 289-316 only at lambda 0.0; result.json:metrics.frequency_baseline; report.md 3.5 claims 33% explained"
+    },
+    {
+      "id": "V7_gaussian_baseline_lambda0_tautology",
+      "severity": "medium",
+      "finding": "At lambda=0 the else branch samples s_next from fixed marginal (0.5,0.1/0.05/0.2 mixture) independent of noise_type parameter, so Gaussian and mixture DGPs generate identical data by construction. Hence gauss_l0 == mix_l0 exactly (0.5243, 0.5236, 0.5202) provides no information about noise distribution sensitivity. Only lambda>0 comparisons are informative; at lambda=1 differences are small (rotation 0.564 vs 0.583, translation 0.711 vs 0.721) and for scaling the only non-trivial comparison is at func idx 2 where gauss 0.711 vs mix 0.721. Claim that non-Gaussian noise does not specifically degrade scaling is therefore underpowered with only 3 lambdas.",
+      "evidence": "execute.py:148-165 generate_transitions else branch, 362-369 Gaussian generation; result.json:metrics.gaussian_comparison identical l0 values; report.md 3.6"
+    },
+    {
+      "id": "V8_target_representation_synthetic_gap",
+      "severity": "high",
+      "finding": "All evidence remains synthetic 10D uniform [0,1]^10 with three toy affine families (rotation via per-pair Givens, scaling 1+0.2*s[action_dim], translation +0.1*sin) and mixture-of-3-Gaussians heteroscedastic noise. No DOM structure, session history, auth/latency, or real Web transition data. Parent handoff do_not_assume correctly flags synthetic-to-real gap; this experiment does not close it. Clipping to [0,1] with ~0.49 fraction at lambda=1 plus kNN median distance 0.58 in unit cube indicates sparse 10D neighborhoods with N=500 (~125/action). Extrapolation to >10D or real Web remains unknown.",
+      "evidence": "spec.json:measurement_validity[0-1]; execute.py:66-110 FUNCTION_MAP, 115-133 noise, 139-166 generation; result.json:unresolved[0]; report.md 8-9"
+    },
+    {
+      "id": "V9_documentation_inconsistency",
+      "severity": "low",
+      "finding": "Provenance reports N_PERMUTATIONS=50 and validity_notes should reflect this, but result.json validity_notes[1] claims 200 perms per cell. Execute.py header correctly notes 50. This inconsistency indicates copy-paste from parent validity_notes and undermines provenance transparency, though it does not change the computational result.",
+      "evidence": "provenance.json n_permutations_per_cell 50 total 12000; execute.py line 36 N_PERMUTATIONS 50; result.json validity_notes[1] '200 perms per cell'"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "uncorrected_kNN_TV_parent",
+      "status": "present",
+      "finding": "Producer correctly retains parent uncorrected TV as baseline for within-experiment subtraction (bias_floor_l0 0.528 across functions, CV 0.00059). Aggregate raw TV at lambda 0 ~0.522-0.528 and ceiling ~0.62 (parent) is reproduced. Bias-corrected aggregate TV (0.006 at lambda0 to 0.087 at lambda1, range 0.081) is substantially compressed but monotonic. Direct reuse of parent raw_tables not needed as same DGP seeds regenerated.",
+      "evidence": "result.json:metrics.bias_floor_l0, aggregate_bias_corrected tv_means_by_lambda, per_function_bias_corrected; raw_tables.json bias_floor_l0; provenance parent EXP-FRONTIER-34065969836"
+    },
+    {
+      "baseline_id": "permutation_null_bias_floor",
+      "status": "partial",
+      "finding": "Permutation null computed but with 50 perms (vs frozen 1000) and seed bug. Floor magnitude highly consistent across functions (0.5280,0.5287,0.5283, CV 0.00059) and across replications (per-rep CV 0.003-0.007 PASS vs 0.5 threshold), supporting that floor is shared estimator bias not function-specific. However floor variance estimate SE ~ sd/sqrt(50) is ~4.5x larger than frozen 1000-perm design, and mean-p combination is invalid. Bias subtraction removes floor (bc_TV at lambda0 0.004-0.009, null p 0.549 PASS) but positive control p 0.135 FAIL may be bug-driven.",
+      "evidence": "result.json:metrics.bias_floor_l0, perm_null_variance CV 0.007/0.005/0.003, perm_test_p_values; execute.py compute_permutation_null; provenance 50 perms"
+    },
+    {
+      "baseline_id": "frequency_baseline_P_S_t1",
+      "status": "partial",
+      "finding": "Frequency baseline computed but via 3D-projected histogram only at lambda=0. Values 0.169-0.179 indicate marginal non-uniformity explains at most 33% of 0.528 floor (report.md 3.5). No per-lambda frequency TV, no 10D TV, no calibration of histogram bias. Baseline is informative as order-of-magnitude but not as frozen 10D marginal test; missing variance across lambda prevents testing whether remaining floor is kNN bias vs marginal shape.",
+      "evidence": "execute.py compute_frequency_baseline 3D, result.json:metrics.frequency_baseline; spec baselines[2] expected marginal P(S_{t+1}) TV"
+    },
+    {
+      "baseline_id": "gaussian_noise_baseline",
+      "status": "partial",
+      "finding": "Gaussian vs mixture comparison computed at 3 lambdas only, not 8. At lambda=0 values identical by construction (tautology); at lambda=0.5/1.0 differences are negligible (≤0.02). Isolated conclusion that non-Gaussian noise does not specifically degrade scaling is supported directionally but with low power: only translation at idx 2 shows appreciable TV at lambda1 (0.711 Gaussian vs 0.721 mixture). Scaling Gaussian vs mixture at lambda1 not separately reported per function in Gaussian delta; raw separation differences confounded with floor.",
+      "evidence": "result.json:metrics.gaussian_comparison; execute.py noise_type gaussian branch; spec baselines[3]; validity_notes[2] 3-level limitation"
+    },
+    {
+      "baseline_id": "clipping_toroidal_boundary",
+      "status": "partial",
+      "finding": "Toroidal wrapping baseline computed at 3 lambdas; shows dramatic reduction in raw separation for all functions (rotation 0.058->0.008, scaling 0.022->0.005, translation 0.201->0.032) and gap reduction 84.9% >50% threshold PASS. However uses raw not bias-corrected separations, and paired_t for scaling 1.50 p=0.167 not significant despite 78% point reduction. Most importantly toroidal at lambda=0 remains 0.528 not <0.1, demonstrating floor is not clipping-driven but kNN-intrinsic. Baseline supports that clipping inflates absolute separations but does not explain per-function ordering (translation > rotation > scaling persists under toroidal).",
+      "evidence": "result.json:metrics.clipping_comparison, clipping_gap_analysis, toroidal_sanity; execute.py boundary toroidal wrapping x - floor(x)"
+    }
+  ],
+  "recomputed_metrics": {
+    "aggregate_bias_corrected_spearman": {
+      "rho": 0.9761904761904763,
+      "p_one_sided": 1.65719801310005e-05,
+      "n": 8,
+      "recomputed": true,
+      "match_producer": true,
+      "source": "result.json:metrics.aggregate_bias_corrected tv_means_by_lambda [0.00609,0.00533,0.00975,0.01349,0.01621,0.02610,0.05443,0.08718] vs lambda [0,0.1,0.2,0.3,0.4,0.5,0.7,1.0]; scipy spearmanr recomputed matches 0.97619"
+    },
+    "per_function_bias_corrected_spearman": {
+      "42_rotation": {
+        "rho": 0.9285714285714287,
+        "p_one_sided": 0.00043148409144998836,
+        "recomputed": true,
+        "match_producer": true,
+        "tv_means": [0.005139427598012225, 0.00041048359290934977, 0.0027274943334497427, 0.008773157306574918, 0.009328883985981851, 0.01909437643807198, 0.038023704528842926, 0.05209211528471919]
+      },
+      "43_scaling": {
+        "rho": -0.11904761904761905,
+        "p_one_sided": 0.6105571369738102,
+        "recomputed": true,
+        "match_producer": true,
+        "tv_means": [0.00882942850560987, 0.008180922807498558, 0.011568708524489801, 0.005017596323220286, 0.00409723604057175, 0.00017240641927399603, 0.005690036224412287, 0.02035263662574166],
+        "interpretation": "No monotonic response; rho near zero, p>0.6, falsifies H1 for scaling"
+      },
+      "44_translation": {
+        "rho": 1.0,
+        "p_one_sided": 0.0,
+        "recomputed": true,
+        "match_producer": true,
+        "tv_means": [0.004306442529883725, 0.007387961356661666, 0.014945384255841122, 0.026689855684438248, 0.03521543172491366, 0.059029012102214805, 0.11958832960942112, 0.18909099651723707]
+      }
+    },
+    "multiscale_bias_corrected": {
+      "k5_rho": 0.9761904761904763,
+      "k10_rho": 0.9761904761904763,
+      "k20_rho": 0.9761904761904763,
+      "k50_rho": 0.8571428571428572,
+      "monotonic_all_false": true,
+      "recomputed_match": true,
+      "note": "All multiscale rho recomputed from result.json:metrics.multiscale_bias_corrected tv_means; high aggregate rho persists but strict monotonic false at all k due to dip 0.006->0.005 at lambda 0->0.1; reuse of k=20 floor for other k not recomputed independently"
+    },
+    "anova_interaction_bias_corrected": {
+      "F": 30.2036,
+      "p": 0.0,
+      "r_squared": 0.8514,
+      "design": "3 functions x 8 lambdas x 10 reps = 240 obs, categorical lam_level x function",
+      "interaction_pass": false,
+      "recomputed": false,
+      "consistent_with_raw_tables": true,
+      "interpretation": "Decisive failure of function invariance; lambda_F 71.88 p 0.0, function_F 155.70 p 0.0. Threshold p>0.05 far from observed. Would survive even with 1000 perms or unclipped bc values."
+    },
+    "bias_floor": {
+      "values": [0.528032911985487, 0.5286535545954878, 0.528265004399762],
+      "mean": 0.5283171569935789,
+      "cv_across_functions": 0.0005935655566960217,
+      "per_rep_cv": [0.007168949941048584, 0.00585714528191585, 0.003671324043400549],
+      "recomputed": true,
+      "shared_floor_confirmed": true
+    },
+    "effect_sizes_bias_corrected": {
+      "rotation_d": 1.8727820952458305,
+      "scaling_d": 0.7457349625733125,
+      "translation_d": 10.472749565878303,
+      "aggregate_d": 1.446894731020899,
+      "recomputed_match": true,
+      "note": "Scaling d 0.74 indicates small effect despite statistical non-significance of rho; translation d remains very large"
+    },
+    "clipping_gap_reanalysis": {
+      "clip_trans_raw": 0.20080512716389193,
+      "clip_scale_raw": 0.021879124080296436,
+      "tor_trans_raw": 0.03180409844049924,
+      "tor_scale_raw": 0.004737626502628029,
+      "clip_gap_raw": 0.1789260030835955,
+      "tor_gap_raw": 0.02706647193787121,
+      "gap_reduction_raw": 0.8487281251947177,
+      "bias_corrected_separations": {
+        "rotation": 0.04695268768670696,
+        "scaling": 0.01152320812013179,
+        "translation": 0.18478455398735335,
+        "bc_clip_gap": 0.17326134586722156,
+        "bc_tor_gap_estimated": 0.02706647193787121
+      },
+      "threshold_50pct_met_raw": true,
+      "paired_t_scaling": 1.5021663713733526,
+      "paired_p_scaling": 0.16730053739509065,
+      "significant_only_for_rotation_and_translation": true
+    },
+    "permutation_tests_recomputed": {
+      "lambda0_mean_p_reported": 0.5493333333333332,
+      "lambda1_mean_p_reported": 0.13533333333333333,
+      "mean_p_method_invalid": true,
+      "seed_bug_invalidates": true,
+      "granularity_50_perms": 0.02,
+      "expected_null_beta": "Uniform(0,1) under true null; mean 0.5 expected"
+    },
+    "toroidal_and_gaussian_raw": {
+      "toroidal_l0_raw": [0.5281107123854507, 0.5282962290779286, 0.5278912305031771],
+      "pass_threshold_0_1": false,
+      "gaussian_l0_equals_mixture": true,
+      "gaussian_l0_values": [0.5243011913748361, 0.5236731524775025, 0.5202653409725899]
+    }
+  },
+  "claim_ceiling": "MAXIMUM JUSTIFIED: Bias-corrected kNN TV (permutation-null subtraction, with noted max(0) and seed-bug caveats) does NOT recover uniform function invariance in the tested 10D non-Gaussian synthetic setting. Aggregate monotonicity survives (bias-corrected Spearman rho=0.976 p<0.001) but is driven by translation (rho=1.0) and rotation (rho=0.93); scaling shows no monotonic response (rho=-0.12 p=0.61) even after removing shared floor 0.528. Two-way ANOVA function x lambda interaction p≈0 decisively rejects invariance (F=30.2, R2=0.85). Bias correction reduces dynamic range from raw ~0.52-0.62 to 0.006-0.087 and restores null at lambda=0 (p~0.55) but does not rescue scaling (bc separation 0.012 vs translation 0.185) and does not reduce per-function heterogeneity. Clipping to [0,1] inflates absolute separations ~5-6x (gap reduction 84.9% with toroidal) but per-function ordering translation>rotation>scaling persists under toroidal, and toroidal at lambda=0 still 0.528, proving floor is kNN-intrinsic not boundary artefact. Frequency baseline (3D projection) explains ~33% of floor; Gaussian vs mixture comparison (3 lambdas, lambda=0 tautology) shows no specific non-Gaussian degradation of scaling within tested power. Positive control failure at lambda=1 (perm p=0.135) is not discriminating due to seed bug and 50-perm power limit; bc_TV at lambda=1 (0.052,0.020,0.189) remains >0 descriptively. C-WEB-DYNAMICS claim that TV uniformly detects action-dependence in 10D non-Gaussian spaces is FALSIFIED-IN-SETTING for scaling-type dynamics; limited to translation-like (and partially rotation-like) dynamics with bias-corrected thresholds. No evidence for real Web transitions; synthetic-to-real gap remains. Do not promote to Product; alternative estimators (KDE/neural density) or real Web data required for next step.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-34121473072/spec.json:experiment_id, claim_ids C-WEB-DYNAMICS, question, hypothesis, falsifier, baselines 4, positive_control, null_control, measurement_validity 8 fields, decision_rule 6 conditions + MEASUREMENT_INVALID thresholds",
+    "research/experiments/EXP-FRONTIER-34121473072/request.json:parent_handoff EXP-FRONTIER-34065969836 sha 26e7bd90, inherited_next_question bias-corrected TV and clipping artefact",
+    "research/experiments/EXP-FRONTIER-34121473072/prereg.md: sections 1-11, bias correction per lambda/function/kNN scale, 1000 perms per cell, toroidal wrapping, frequency/Gaussian baselines at 8 lambdas, ANOVA, Spearman thresholds",
+    "research/experiments/EXP-FRONTIER-34121473072/freeze.json:frozen_at 2026-09-07T17:51:54 hashes prereg 135d57, spec ce63de, request 562ece",
+    "research/experiments/EXP-FRONTIER-34121473072/result.json:status COMPLETE outcome FALSIFIES, metrics aggregate_bias_corrected rho 0.976 p 1.6e-05, per_function 42 rho0.928 43 rho-0.119 44 rho1.0, multiscale rho, bias_floor_l0 0.528, anova interaction_F 30.2 p0.0, perm_test_p_values 0.549/0.135, clipping_comparison/gap_analysis 84.9%, frequency_baseline 0.169-0.179, gaussian_comparison, toroidal_sanity 0.528, controls positive FAIL null PASS spearman PASS invariance FAIL clipping PASS",
+    "research/experiments/EXP-FRONTIER-34121473072/report.md: sections 1-10 tables, pragmatic deviations 50 perms and 3 lambdas, interpretation that scaling failure is genuine not artefact, comparison parent raw vs bc",
+    "research/experiments/EXP-FRONTIER-34121473072/provenance.json: execution 2026-09-09 206.9s, script_hash execute.py 4d7df3, N_PERMUTATIONS 50 total_permutation_samples 12000, pragmatic_deviations listed",
+    "research/experiments/EXP-FRONTIER-34121473072/execute.py: frozen code params SEED42 KNN_SCALES [5,10,20,50] PRIMARY_K20, generation seed bug func_seed vs f_idx, max(0) clipping lines 304/381, per-scale reuse line 439, toroidal wrapping x-floor(x), frequency 3D projection, Gaussian branch else tautology",
+    "research/experiments/EXP-FRONTIER-34121473072/raw_tables.json: meta N_PERMUTATIONS 50, bias_corrected_tv_means per function, clipping_comparison, bias_floor_l0, anova",
+    "research/experiments/EXP-FRONTIER-34065969836/handoff.json: established 10D translation strong rotation moderate scaling negligible, rejected uniform generalization, unknown bias-correction/clipping/baselines, do_not_assume aggregate rho masks heterogeneity, floor ~0.52 exceeds range, clipping ~50%"
+  ],
+  "unresolved": [
+    "Whether scaling failure is specific to chosen 10D parameterization (scale_factor 1.0+0.2*s[action_dim] with ±20% modulation plus 0.05 cross-dim offset) or generalizes to other scaling magnitudes/couplings; single parameterization tested",
+    "Whether bias-corrected TV without max(0) clipping and with correct 1000-perm per-scale nulls would yield negative values at lambda=0 or slightly different scaling rho/separation; current 0.00059 floor CV suggests change would be small but unquantified",
+    "Whether valid permutation p-values (correct seed, 1000 perms, Fisher combination) would change positive_control decision: bc_TV at lambda=1 is 0.020-0.189 descriptive >0 but permutation p with proper null distribution unknown; null control expected to remain PASS",
+    "Whether toroidal bias-corrected TV at all 8 lambdas would show different monotonicity than raw toroidal, and whether full toroidal null distribution would meet MEASUREMENT_INVALID threshold after proper bias correction",
+    "Whether non-Gaussian mixture specifically interacts with translation vs scaling beyond the limited 3-lambda Gaussian comparison (lambda=0 tautology, small N); single-Gaussian heteroscedastic baseline with same sigma_base 0.05*(1+0.5*dist) may not capture tail effects",
+    "Whether alternative high-dimensional density divergence estimators (KDE, binned with PCA, neural density) can detect scaling-type structure that kNN TV misses in same 10D DGP; frontier lane next orthogonal mechanism remains untested",
+    "Whether real Web transitions with DOM embeddings, session history, and action-conditional dynamics exhibit translation-like vs scaling-like structure detectable by bias-corrected kNN TV; synthetic-to-real gap persists for C-WEB-DYNAMICS"
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-34121473072",
+  "lane": "frontier",
+  "target_lane": "frontier",
+  "next_question": "Can alternative high-dimensional density divergence estimators (KDE, binned PCA projection, or neural density estimation) detect scaling-type action-dependent structure that kNN TV misses in the same 10D non-Gaussian DGP — or does the scaling failure reflect a fundamental information-theoretic limit where multiplicative state modulation is indistinguishable from heteroscedastic noise at finite sample sizes?",
+  "why_next": "This experiment definitively establishes that kNN TV bias correction does NOT rescue scaling-type dynamics in 10D non-Gaussian spaces. The scaling failure is genuine signal absence, not estimator artefact (bias floor or clipping). Two experiments have now converged on the same conclusion: scaling rho remains ~0 with or without bias correction. The Frontier lane must pivot to a materially orthogonal mechanism rather than repeat kNN TV variations. The minimum next question is whether alternative density divergence estimators (which operate on different representation spaces or estimation principles) can detect scaling-type structure, or whether the scaling failure is an information-theoretic limit of the 10D DGP. This requires a fundamentally different estimator, not another bias correction of kNN TV.",
+  "carry_forward": {
+    "established": [
+      "kNN-based TV estimator works in 10D [0,1]^10 without distance degeneracy: fraction finite distances = 1.0, median kNN distance 0.58. Curse of dimensionality does not prevent kNN computation at N=500 per cell with k<=20. (parent result.json:metrics.knn_distance_diagnostics)",
+      "Translation-type dynamics produce strong TV signal in 10D non-Gaussian DGP: bias-corrected Spearman rho=1.0, Cohen's d=10.47, bc separation=0.185, monotonic TRUE at all kNN scales. Translation is the strongest TV-responsive family across all Frontier experiments. (result.json:metrics.per_function_bias_corrected.44_translation)",
+      "Rotation-type dynamics produce moderate TV signal: bias-corrected rho=0.93, d=1.87, bc separation=0.047, monotonic TRUE. Rotation improves after bias correction (parent raw rho=0.83). (result.json:metrics.per_function_bias_corrected.42_rotation)",
+      "Scaling-type dynamics produce negligible TV signal in 10D non-Gaussian DGP: bias-corrected rho=-0.12 (p=0.61), d=0.75, bc separation=0.012, monotonic FALSE. Bias correction does NOT rescue scaling. The scaling failure is genuine signal absence, not estimator artefact. (result.json:metrics.per_function_bias_corrected.43_scaling; audit.json:recomputed_metrics per_function_spearman.43_scaling)",
+      "kNN TV finite-sample bias floor ~0.528 is shared across all function families at lambda=0 (CV=0.00059) and is intrinsic to kNN density estimation in 10D (toroidal at lambda=0 still 0.528). The floor is NOT caused by clipping to [0,1]. (result.json:metrics.bias_floor_l0, toroidal_sanity; audit.json:recomputed_metrics.bias_floor)",
+      "Bias correction via permutation-null subtraction works: null control passes (bc_TV at lambda=0 ~0.006, permutation p=0.55), no over-correction (0% negative at lambda=1), permutation null variance low (CV 0.004-0.007). (result.json:controls.null_control, over_correction, perm_null_variance)",
+      "Clipping to [0,1] inflates absolute TV separations ~5-6x (toroidal reduces translation-scaling gap by 84.9%) but does NOT explain the per-function ordering translation>rotation>scaling which persists under toroidal wrapping. (result.json:metrics.clipping_comparison, clipping_gap_analysis)",
+      "Per-function heterogeneity decisively persists after bias correction: two-way ANOVA function x lambda interaction p=0, F=30.2, R2=0.85. This is robust to bias correction methodology. (result.json:metrics.anova; audit.json:recomputed_metrics.anova_interaction_bias_corrected)",
+      "Aggregate Spearman rho=0.976 on bias-corrected TV (p<0.001) but driven entirely by translation dominance; aggregate metric masks per-function heterogeneity. (result.json:metrics.aggregate_bias_corrected)"
+    ],
+    "rejected": [
+      "Uniform TV generalization from 2D Gaussian to 10D non-Gaussian — decisively falsified across two experiments (parent raw, this bias-corrected). Function invariance fails at ANOVA p~0 in both. (verdict.json:decision FALSIFIED-IN-SETTING; audit.json:recomputed_metrics.anova_interaction_bias_corrected)",
+      "Hypothesis that scaling failure is estimator artefact (bias floor + clipping) — bias correction removes the floor but scaling rho remains -0.12. Clipping reduction does not rescue scaling. The scaling failure is genuine signal absence. (result.json:metrics.per_function_bias_corrected.43_scaling; bias_correction does not change scaling pattern)",
+      "kNN TV as universal detector of action-dependent structure in 10D non-Gaussian spaces — limited to translation-like (and partially rotation-like) dynamics with sufficient separability. Scaling-type dynamics undetectable. (audit.json:claim_ceiling)"
+    ],
+    "unknown": [
+      "Whether alternative density divergence estimators (KDE, binned PCA, neural density estimation) can detect scaling-type action-dependent structure in the same 10D DGP. This is the minimum orthogonal next question.",
+      "Whether scaling failure generalizes to other 10D scaling parameterizations (different scale_factor magnitude, cross-dimension coupling, or non-multiplicative modulation). Single parameterization tested (1.0+0.2*s[action_dim]).",
+      "Whether real Web transitions with DOM embeddings, session history, and action-conditional dynamics exhibit translation-like vs scaling-like structure detectable by any density divergence estimator. Synthetic-to-real gap persists.",
+      "Whether kNN TV remains calibrated at >50D (e.g., Web DOM embeddings) with same N=500; curse of dimensionality may require exponential N scaling.",
+      "Whether valid permutation p-values (correct seed, 1000 perms, Fisher/Stouffer combination) would change positive control decision: bc_TV at lambda=1 is 0.020-0.189 descriptive >0 but permutation p with proper null distribution unknown."
+    ],
+    "do_not_assume": [
+      "Do not assume TV distance works on real Web transitions — all evidence is synthetic DGP (10D uniform [0,1]^10 with 3 toy affine families and mixture-of-3-Gaussians noise). Real Web has DOM structure, high-dimensional embeddings, auth/latency, session history. Synthetic-to-real gap persists across two experiments.",
+      "Do not assume C-WEB-DYNAMICS is falsified — claim concerns real Web dynamics; this experiment narrows the claim ceiling but does not close it. The claim remains HYPOTHESIS with bounded ceiling: TV detects action-dependent structure ONLY for translation-like dynamics in 10D non-Gaussian spaces.",
+      "Do not assume product deployment readiness — no end-to-end economics, real Web data, or product integration tested. Per-function heterogeneity invalidates uniform TV claim.",
+      "Do not assume aggregate Spearman rho=0.976 means TV works uniformly — it is weighted average of translation (rho=1.0), rotation (rho=0.93), and scaling (rho=-0.12). Function invariance decisively fails (ANOVA p=0).",
+      "Do not assume kNN TV bias floor ~0.528 is removable by boundary treatment — toroidal wrapping produces identical floor 0.528 at lambda=0, proving floor is kNN-intrinsic in 10D.",
+      "Do not assume the max(0) clipping in bias correction procedure is valid — it makes over-correction check tautological and masks true negative bc_TV values. Correct procedure is raw - perm_mean without floor. (audit.json:validity_findings.V2_max_zero_bias_correction)",
+      "Do not assume positive control failure (perm p=0.135) reflects genuine signal absence — seed bug and 50-perm power limit make this p-value unreliable. Descriptive bc_TV at lambda=1 is >0 for all functions.",
+      "Do not assume effect sizes (Cohen d 1.45 aggregate, 10.47 translation, 0.75 scaling) generalize to real Web — 10D synthetic with toy affine families; Web action differences may be subtle and high-dimensional.",
+      "Do not assume 50 permutations per cell gives valid permutation p-values — seed mismatch (func_seed vs f_idx) and low power (granularity 0.02) invalidate the permutation tests. Rerun with 1000 perms and correct seeds required for valid inference."
+    ]
+  },
+  "dependencies": [
+    "Alternative high-dimensional density divergence estimator (KDE with bandwidth selection, binned PCA projection, or normalizing flow / neural density estimation) implemented and validated on the same 10D non-Gaussian DGP before testing on new data.",
+    "Corrected permutation null infrastructure: 1000 perms per cell, correct seed mapping (func_seed not f_idx), full null distributions stored, Fisher/Stouffer combination for combined p-values. Required before any further kNN TV claims.",
+    "Unclipped bias correction procedure (raw - perm_mean without max(0) floor) with MEASUREMENT_INVALID enforcement when >10% of bc_TV values are negative at lambda=1.",
+    "Per-kNN-scale bias floor estimation (not reuse of k=20 floor for k=5,10,50) to enable valid multi-scale inference.",
+    "Full 8-lambda toroidal and Gaussian baselines (not 3-level pragmatic subset) for monotonicity and ANOVA comparability.",
+    "Real or realistic Web transition data with known action-structure (recorded agent sessions with DOM state tracking) — minimum substrate to test synthetic-to-real translation of any estimator. All Frontier evidence remains synthetic."
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-34121473072/spec.json:claim_ids C-WEB-DYNAMICS, question, falsifier, decision_rule 6 conditions + MEASUREMENT_INVALID, baselines 4, measurement_validity 8 fields",
+    "research/experiments/EXP-FRONTIER-34121473072/result.json:status COMPLETE outcome FALSIFIES, metrics aggregate_bias_corrected rho 0.976, per_function 42 rho 0.929 43 rho -0.119 44 rho 1.0, anova interaction_F 30.2 p 0.0, bias_floor_l0 0.528, controls positive FAIL null PASS spearman PASS invariance FAIL clipping PASS, perm_test_p_values 0.549/0.135, clipping_gap_analysis 84.9%, frequency_baseline 0.169-0.179, gaussian_comparison, toroidal_sanity 0.528",
+    "research/experiments/EXP-FRONTIER-34121473072/audit.json:status REVISE producer_claim_supported true, claim_ceiling bounded to translation-like dynamics, required_fixes 8 items, validity_findings V1-V9, recomputed_metrics anova F 30.2 interaction_pass false, bias_floor CV 0.00059 shared confirmed",
+    "research/experiments/EXP-FRONTIER-34121473072/report.md:section 4.2 failed controls, section 5 decision logic, section 6 parent comparison, section 7 scientific interpretation scaling genuinely lacks signal",
+    "research/experiments/EXP-FRONTIER-34121473072/provenance.json:N_PERMUTATIONS 50 total_permutation_samples 12000, pragmatic_deviations 50_perms 3_lambdas, execution 206.9s",
+    "research/experiments/EXP-FRONTIER-34121473072/freeze.json:frozen_at 2026-09-07T17:51:54",
+    "research/experiments/EXP-FRONTIER-34065969836/handoff.json:parent established translation strong rotation moderate scaling negligible, rejected uniform generalization, unknown bias_correction clipping baselines, do_not_assume aggregate rho masks heterogeneity floor 0.52 exceeds range clipping ~50%"
+  ],
+  "recommended_action": "Design a Frontier experiment that tests a materially orthogonal density divergence mechanism on the same 10D non-Gaussian DGP. Two experiments have converged: kNN TV cannot detect scaling-type dynamics regardless of bias correction. The next question is whether this is an information-theoretic limit or a kNN-specific limitation. Specific options: (1) KDE-based TV with adaptive bandwidth on the 10D state space — tests whether kernel density estimation captures scaling structure that kNN misses; (2) Binned PCA projection to lower-dimensional space before TV computation — tests whether curse of dimensionality is the bottleneck; (3) Normalizing flow density estimation — tests whether learned density ratios can detect scaling. Do NOT repeat kNN TV with minor parameter variations — marginal information gain is zero. If alternative estimators also fail on scaling, accept the information-theoretic limit and pivot to real Web transition data (recorded agent sessions with DOM state tracking) to test whether real-world dynamics are translation-like enough for any TV estimator."
+}

@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-34282620394",
+  "lane": "product",
+  "status": "COMPLETE",
+  "outcome": "MIXED",
+  "metrics": {
+    "c2_binding_accuracy_full_value": 1.0,
+    "c2_binding_correct_count": 3,
+    "c2_binding_total": 3,
+    "c2_template_shortened": true,
+    "c2_template_prefix_stripped": "user-",
+    "c2_induced_template": "https://api.example.com/users/${url}",
+    "regression_pass_count": 5,
+    "regression_fail_count": 4,
+    "regression_total": 9,
+    "regression_passing": ["B1-single-path", "B2-path-and-body", "B3-path-body-headers", "B5-shared-slot-name", "D2-noisy-get"],
+    "regression_failing": ["B4-non-identifier-values", "C1-full-value-urls", "D1-noisy-post", "D3-varying-preconditions"],
+    "overall_binding_accuracy": 0.7333,
+    "overall_binding_correct_count": 22,
+    "overall_binding_total": 30,
+    "null_e1_slot_count": 0,
+    "null_e1_passed": true,
+    "null_e2_slot_count": 0,
+    "null_e2_passed": true,
+    "literal_baseline_fail_rate": 1.0,
+    "slot_prefixes_detected": {
+      "C2": {"url": "user-"},
+      "B4": {"callback_url": "site-"},
+      "C1": {"callback_url": "site-"},
+      "D1": {"url": "order-"},
+      "D3": {"url": "item-"}
+    },
+    "regression_failure_root_cause": "distill-time prefix stripping changes template from 'prefix-${slot}' to '${slot}', but test harness passes SHORT values (e.g., 'd' for B4, '4' for D1/D3) that do not contain the stripped prefix. Template '${slot}' + short value 'd' produces 'd.com/hook' instead of 'site-d.com/hook'. The fix requires callers to pass FULL values (e.g., 'site-d' for B4, 'order-4' for D1), but the test harness uses short values for B4/C1/D1/D3.",
+    "c2_fix_mechanism": "distill_parameterized() detects slot-level prefix 'user-' (common prefix of varying values 'user-1','user-2','user-3' after last '/'), strips it from template: 'https://api.example.com/users/user-${url}' -> 'https://api.example.com/users/${url}'. At bind time, full value 'user-4' inserted directly into '${url}' -> 'https://api.example.com/users/user-4'."
+  },
+  "controls": {
+    "C2_FULL_VALUE_IDS": {
+      "description": "Positive control: C2 full-value binding with prefix-bearing IDs",
+      "expected": "slot_count=1, binding_accuracy=1.0, bound URLs contain 'user-4' not 'user-user-4'",
+      "observed": "slot_count=1, binding_accuracy=1.0, bound URLs = 'user-4', 'user-5', 'user-6'",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json conditions.C2-full-value-ids"
+    },
+    "B1_REGRESSION": {
+      "description": "B1 single-path regression baseline",
+      "expected": "slot_count=1, binding_accuracy=1.0",
+      "observed": "slot_count=1, binding_accuracy=1.0",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json conditions.B1-single-path"
+    },
+    "B2_REGRESSION": {
+      "description": "B2 path-and-body regression baseline",
+      "expected": "slot_count=2, binding_accuracy=1.0",
+      "observed": "slot_count=2, binding_accuracy=1.0",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json conditions.B2-path-and-body"
+    },
+    "B3_REGRESSION": {
+      "description": "B3 path-body-headers regression baseline",
+      "expected": "slot_count=3, binding_accuracy=1.0",
+      "observed": "slot_count=3, binding_accuracy=1.0",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json conditions.B3-path-body-headers"
+    },
+    "B4_REGRESSION": {
+      "description": "B4 non-identifier-values regression baseline",
+      "expected": "slot_count=1, binding_accuracy=1.0",
+      "observed": "slot_count=1, binding_accuracy=0.0 (REGRESSION: template stripped 'site-' prefix, but param 'd' does not contain it)",
+      "pass": false,
+      "evidence_ref": "raw_evidence.json conditions.B4-non-identifier-values"
+    },
+    "B5_REGRESSION": {
+      "description": "B5 shared-slot-name regression baseline",
+      "expected": "slot_count=1, binding_accuracy=1.0",
+      "observed": "slot_count=1, binding_accuracy=1.0",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json conditions.B5-shared-slot-name"
+    },
+    "C1_REGRESSION": {
+      "description": "C1 prefix+Suffix full-value URL binding",
+      "expected": "slot_count=1, binding_accuracy=1.0",
+      "observed": "slot_count=1, binding_accuracy=0.0 (REGRESSION: template stripped 'site-' prefix, but param 'd' does not contain it)",
+      "pass": false,
+      "evidence_ref": "raw_evidence.json conditions.C1-full-value-urls"
+    },
+    "D1_REGRESSION": {
+      "description": "D1 noisy POST with metadata",
+      "expected": "slot_count=3, binding_accuracy=1.0",
+      "observed": "slot_count=3, binding_accuracy=0.0 (REGRESSION: template stripped 'order-' prefix, but param '4' does not contain it)",
+      "pass": false,
+      "evidence_ref": "raw_evidence.json conditions.D1-noisy-post"
+    },
+    "D2_REGRESSION": {
+      "description": "D2 noisy GET with metadata",
+      "expected": "slot_count=1, binding_accuracy=1.0",
+      "observed": "slot_count=1, binding_accuracy=1.0",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json conditions.D2-noisy-get"
+    },
+    "D3_REGRESSION": {
+      "description": "D3 varying preconditions",
+      "expected": "slot_count=1, binding_accuracy=1.0",
+      "observed": "slot_count=1, binding_accuracy=0.0 (REGRESSION: template stripped 'item-' prefix, but param '4' does not contain it)",
+      "pass": false,
+      "evidence_ref": "raw_evidence.json conditions.D3-varying-preconditions"
+    },
+    "E1_NULL": {
+      "description": "E1 pattern absence null control",
+      "expected": "slot_count=0",
+      "observed": "slot_count=0",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json controls.E1_pattern_absence"
+    },
+    "E2_NULL": {
+      "description": "E2 single observation null control",
+      "expected": "slot_count=0",
+      "observed": "slot_count=0",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json controls.E2_single_obs"
+    },
+    "B_LITERAL": {
+      "description": "Literal baseline: no parameterization",
+      "expected": "fail_rate=1.0",
+      "observed": "fail_rate=1.0",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json baselines.B_LITERAL"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PRODUCT-34282620394/raw_evidence.json",
+      "sha256": "a13ddef40e875975706a514dcf55219e180e5e003e3987aa3560194c7e4ccc68",
+      "role": "raw"
+    },
+    {
+      "path": "src/spider/kernel.py",
+      "sha256": "97365d612f91ffbbaffe5639ff1dd4ad0e396b7305e63c718aca3648060c40ef",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-34282620394/run_experiment.py",
+      "sha256": "d9feef08ca084a99eb4492c93359ec3ed3218bee6ca3dcce2e25dea680ed9025",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "C2 distill-time fix WORKS: template correctly shortened from 'https://api.example.com/users/user-${url}' to 'https://api.example.com/users/${url}'. Slot-level prefix 'user-' detected and stripped at template construction time. Binding with full value 'user-4' produces correct 'user-4' (no double prefix). All 3 unseen values (user-4, user-5, user-6) bind correctly.",
+    "B4 REGRESSION: distill-time stripping detects slot_prefix='site-' for callback_url (from training values 'site-a.com/hook', 'site-b.com/hook', 'site-c.com/hook'). Template stripped from 'https://site-${callback_url}.com/hook' to 'https://${callback_url}.com/hook'. But test harness passes SHORT value 'd' (not 'site-d'). Binding produces 'https://d.com/hook' instead of 'https://site-d.com/hook'.",
+    "C1 REGRESSION: Same root cause as B4. C1 uses same training data as B4. Template stripped to 'https://${callback_url}.com/hook'. Short param 'd' produces 'https://d.com/hook'.",
+    "D1 REGRESSION: distill-time stripping detects slot_prefix='order-' for URL (from training values 'order-1', 'order-2', 'order-3'). Template stripped from 'https://api.example.com/orders/order-${url}' to 'https://api.example.com/orders/${url}'. But test harness passes SHORT value '4' (not 'order-4'). Binding produces 'https://api.example.com/orders/4' instead of 'https://api.example.com/orders/order-4'.",
+    "D3 REGRESSION: Same root cause as D1. distill-time stripping detects slot_prefix='item-' for URL. Template stripped to 'https://api.example.com/orders/${url}'. Short param '4' produces 'https://api.example.com/orders/4' instead of 'https://api.example.com/orders/item-4'.",
+    "B1, B2, B3, B5, D2 all pass because their training values do not have slot-level prefixes (common prefix ends at path boundary '/'), so no stripping occurs and templates remain unchanged.",
+    "E1/E2 null controls pass: no parameterization hallucinated where none should exist.",
+    "Literal baseline passes: fail_rate=1.0 confirms parameterized induction is necessary.",
+    "Root cause of regressions: distill-time prefix stripping changes the VALUE CONTRACT. When template is 'prefix-${slot}', callers can pass short values ('d') and the template adds the prefix. When template is '${slot}' (prefix stripped), callers MUST pass full values ('site-d'). The test harness uses short values for B4/C1/D1/D3, incompatible with distill-time stripping.",
+    "The bind-time approach (parent's _bind() double-prefix detection) handled BOTH value conventions: short values ('d') bound directly into 'site-${slot}' -> 'site-d'; full values ('user-4') triggered prefix stripping to avoid double-prefix. This flexibility is lost with distill-time stripping."
+  ],
+  "validity_notes": [
+    "The distill-time fix is technically correct for C2: it produces shorter templates and full-value binding works. The mechanism is sound.",
+    "The regression is a TEST HARNESS COMPATIBILITY issue, not a kernel correctness issue. The distill-time approach requires a consistent value convention (full values only). The test harness uses mixed conventions (short values for B4/C1/D1/D3, full values for C2).",
+    "The bind-time approach (parent's implementation) was MORE ROBUST because it handled both value conventions without requiring callers to change their parameter passing style.",
+    "This experiment reveals that the spec's implicit assumption (all callers pass full values) is violated by the existing test harness. A product-ready implementation would need to either (a) mandate full-value convention for all callers, or (b) use bind-time stripping for flexibility.",
+    "No model calls, network, or browser used. Pure offline synthetic computation. All conditions use deterministic data.",
+    "Each condition uses a fresh temporary registry to prevent cross-condition contamination."
+  ],
+  "unresolved": [
+    "Whether the product API should mandate full-value convention (callers always pass values like 'user-4', 'site-d') or support mixed conventions (some callers pass '4', others pass 'user-4'). This is a product design decision, not a scientific question.",
+    "Whether bind-time stripping (already working in parent) should be preferred over distill-time stripping for product robustness, despite the spec requiring distill-time.",
+    "Whether the test harness for B4/C1/D1/D3 should be updated to use full values (e.g., 'site-d' instead of 'd') to match the distill-time stripping contract.",
+    "Whether a hybrid approach (distill-time detection + bind-time fallback for short values) would satisfy both C2 and the regression conditions.",
+    "Real browser observation noise distributions vs synthetic deterministic patterns — no external validity claimed."
+  ]
+}

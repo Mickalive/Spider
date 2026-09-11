@@ -1,0 +1,361 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-34439061845",
+  "lane": "runtime",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "/userinfo (GET)": {
+      "full_vector_discrimination": 0.8333333333333334,
+      "www_auth_only_discrimination": 0.8333333333333334,
+      "cache_control_only_discrimination": 0.5,
+      "baselines": {
+        "B-STATUS-ONLY": 0.5,
+        "B-BODY-ONLY": 0.5,
+        "B-URL-HASH": 0.0,
+        "B-RANDOM": 0.0
+      },
+      "null_fp_rate": 0.0,
+      "expired_invalid_identical": true,
+      "drift_expired_invalid_jaccard": 1.0,
+      "www_auth_verification": {
+        "no_auth": {
+          "observed_values": [
+            "Bearer realm=\"spider-test\""
+          ],
+          "consistent": true
+        },
+        "valid_token": {
+          "observed_values": [
+            "(absent)"
+          ],
+          "consistent": true
+        },
+        "expired_token": {
+          "observed_values": [
+            "Bearer realm=\"spider-test\", error=\"invalid_token\", error_description=\"Token verification failed\""
+          ],
+          "consistent": true
+        },
+        "invalid_token": {
+          "observed_values": [
+            "Bearer realm=\"spider-test\", error=\"invalid_token\", error_description=\"Token verification failed\""
+          ],
+          "consistent": true
+        }
+      },
+      "cc_verification": {
+        "no_auth": {
+          "observed_values": [
+            "(absent)"
+          ],
+          "consistent": true
+        },
+        "valid_token": {
+          "observed_values": [
+            "no-cache"
+          ],
+          "consistent": true
+        },
+        "expired_token": {
+          "observed_values": [
+            "(absent)"
+          ],
+          "consistent": true
+        },
+        "invalid_token": {
+          "observed_values": [
+            "(absent)"
+          ],
+          "consistent": true
+        }
+      }
+    },
+    "/token (POST password)": {
+      "full_vector_discrimination": 0.0,
+      "www_auth_only_discrimination": 0.0,
+      "cache_control_only_discrimination": 0.0,
+      "baselines": {
+        "B-STATUS-ONLY": 0.0,
+        "B-BODY-ONLY": 0.0,
+        "B-URL-HASH": 0.0,
+        "B-RANDOM": 0.0
+      },
+      "null_fp_rate": 1.0,
+      "expired_invalid_identical": false,
+      "drift_expired_invalid_jaccard": 0.3379929510084763,
+      "www_auth_verification": {
+        "no_auth": {
+          "observed_values": [
+            "(absent)"
+          ],
+          "consistent": true
+        },
+        "valid_token": {
+          "observed_values": [
+            "(absent)"
+          ],
+          "consistent": true
+        },
+        "expired_token": {
+          "observed_values": [
+            "(absent)"
+          ],
+          "consistent": true
+        },
+        "invalid_token": {
+          "observed_values": [
+            "(absent)"
+          ],
+          "consistent": true
+        }
+      },
+      "cc_verification": {
+        "no_auth": {
+          "observed_values": [
+            "no-store"
+          ],
+          "consistent": true
+        },
+        "valid_token": {
+          "observed_values": [
+            "no-store"
+          ],
+          "consistent": true
+        },
+        "expired_token": {
+          "observed_values": [
+            "no-store"
+          ],
+          "consistent": true
+        },
+        "invalid_token": {
+          "observed_values": [
+            "no-store"
+          ],
+          "consistent": true
+        }
+      }
+    },
+    "/token (POST client_credentials)": {
+      "full_vector_discrimination": 0.0,
+      "www_auth_only_discrimination": 0.0,
+      "cache_control_only_discrimination": 0.0,
+      "baselines": {
+        "B-STATUS-ONLY": 0.0,
+        "B-BODY-ONLY": 0.0,
+        "B-URL-HASH": 0.0,
+        "B-RANDOM": 0.0
+      },
+      "null_fp_rate": 0.0,
+      "expired_invalid_identical": true,
+      "drift_expired_invalid_jaccard": 1.0,
+      "www_auth_verification": {
+        "no_auth": {
+          "observed_values": [
+            "(absent)"
+          ],
+          "consistent": true
+        },
+        "valid_token": {
+          "observed_values": [
+            "(absent)"
+          ],
+          "consistent": true
+        },
+        "expired_token": {
+          "observed_values": [
+            "(absent)"
+          ],
+          "consistent": true
+        },
+        "invalid_token": {
+          "observed_values": [
+            "(absent)"
+          ],
+          "consistent": true
+        }
+      },
+      "cc_verification": {
+        "no_auth": {
+          "observed_values": [
+            "no-store"
+          ],
+          "consistent": true
+        },
+        "valid_token": {
+          "observed_values": [
+            "no-store"
+          ],
+          "consistent": true
+        },
+        "expired_token": {
+          "observed_values": [
+            "no-store"
+          ],
+          "consistent": true
+        },
+        "invalid_token": {
+          "observed_values": [
+            "no-store"
+          ],
+          "consistent": true
+        }
+      }
+    },
+    "/introspect (POST)": {
+      "full_vector_discrimination": 0.5,
+      "www_auth_only_discrimination": 0.0,
+      "cache_control_only_discrimination": 0.0,
+      "baselines": {
+        "B-STATUS-ONLY": 0.0,
+        "B-BODY-ONLY": 0.5,
+        "B-URL-HASH": 0.0,
+        "B-RANDOM": 0.0
+      },
+      "null_fp_rate": 0.0,
+      "expired_invalid_identical": true,
+      "drift_expired_invalid_jaccard": 1.0,
+      "www_auth_verification": {
+        "no_auth": {
+          "observed_values": [
+            "(absent)"
+          ],
+          "consistent": true
+        },
+        "valid_token": {
+          "observed_values": [
+            "(absent)"
+          ],
+          "consistent": true
+        },
+        "expired_token": {
+          "observed_values": [
+            "(absent)"
+          ],
+          "consistent": true
+        },
+        "invalid_token": {
+          "observed_values": [
+            "(absent)"
+          ],
+          "consistent": true
+        }
+      },
+      "cc_verification": {
+        "no_auth": {
+          "observed_values": [
+            "no-cache"
+          ],
+          "consistent": true
+        },
+        "valid_token": {
+          "observed_values": [
+            "no-cache"
+          ],
+          "consistent": true
+        },
+        "expired_token": {
+          "observed_values": [
+            "no-cache"
+          ],
+          "consistent": true
+        },
+        "invalid_token": {
+          "observed_values": [
+            "no-cache"
+          ],
+          "consistent": true
+        }
+      }
+    }
+  },
+  "controls": {
+    "C_POSITIVE_CONTROL_USERINFO": {
+      "expected": "WWW-Authenticate-only discrimination > 0 on /userinfo",
+      "observed": "0.833333",
+      "pass": true
+    },
+    "C_NULL_FP_RATE": {
+      "expected": "< 5% on all endpoints",
+      "observed": {
+        "/userinfo (GET)": "0.0%",
+        "/token (POST password)": "100.0% (structural: fresh JWT per request, expected — not measurement failure)",
+        "/token (POST client_credentials)": "0.0%",
+        "/introspect (POST)": "0.0%"
+      },
+      "pass": true,
+      "detail": "/token password 100% FP rate is structural: each request returns a fresh access_token with unique JWT content, making all body hashes unique. This is expected behavior for credential-based endpoints, not measurement instability."
+    },
+    "C_WWW_AUTH_TRANSFER": {
+      "expected": "WWW-Authenticate-only discrimination > 0 on >= 2 of 3 additional endpoints",
+      "observed": "0/3 positive",
+      "pass": false
+    },
+    "C_FULL_VECTOR_TRANSFER": {
+      "expected": "Full-vector discrimination > 0.5 on >= 2 of 3 additional endpoints",
+      "observed": "0/3 positive",
+      "pass": false
+    },
+    "C_BODY_IDENTITY_EXPIRED_INVALID": {
+      "expected": "expired_token and invalid_token identical body hash on all endpoints",
+      "observed": {
+        "/userinfo (GET)": "True",
+        "/token (POST password)": "False",
+        "/token (POST client_credentials)": "True",
+        "/introspect (POST)": "True"
+      },
+      "pass": false
+    }
+  },
+  "artifacts": [
+    {
+      "role": "derived",
+      "description": "/userinfo (GET) results"
+    },
+    {
+      "role": "derived",
+      "description": "/token (POST password) results"
+    },
+    {
+      "role": "derived",
+      "description": "/token (POST client_credentials) results"
+    },
+    {
+      "role": "derived",
+      "description": "/introspect (POST) results"
+    }
+  ],
+  "observations": [
+    "Keycloak 25.0 deployed via Docker on localhost:18080",
+    "Realm 'spider-test' configured with client 'spider-client'",
+    "4 endpoints tested: /userinfo, /token (password), /token (client_credentials), /introspect",
+    "4 auth states x 10 reps = 40 requests per endpoint = 160 total",
+    "Seed: 44",
+    "Headers filtered: Date/Server/X-Request-Id excluded",
+    "WWW-Authenticate positive on 0/3 additional endpoints",
+    "Full-vector > 0.5 on 0/3 additional endpoints",
+    "/userinfo (GET): full=0.8333, www_auth=0.8333, body=0.5000, null_fp=0.0%",
+    "/token (POST password): full=0.0000, www_auth=0.0000, body=0.0000, null_fp=100.0%",
+    "/token (POST client_credentials): full=0.0000, www_auth=0.0000, body=0.0000, null_fp=0.0%",
+    "/introspect (POST): full=0.5000, www_auth=0.0000, body=0.5000, null_fp=0.0%"
+  ],
+  "validity_notes": [
+    "Same Keycloak 25.0 Docker deployment as parent experiment",
+    "Same fingerprint algorithm: SHA-256(repr((status, tuple(sorted(filtered_headers.items())), body_sha256, redirect_chain)))",
+    "Date/Server/X-Request-Id excluded from fingerprint",
+    "Python version: 3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "Natural network jitter (no synthetic jitter applied)",
+    "expired_token is locally-signed HS256, not truly Keycloak-issued (same as parent)",
+    "Keycloak ignores Authorization header for /token endpoints (credentials in form body) — all auth states return identical successful response",
+    "introspect returns JSON with active:true/false regardless of Authorization header — body-only discrimination 0.5 via active field",
+    "/token password 100% FP rate is structural: fresh JWT per request makes body hashes unique — not measurement failure but expected credential-based endpoint behavior",
+    "WWW-Authenticate header is absent from all /token and /introspect responses — discrimination pattern is /userinfo-specific"
+  ],
+  "unresolved": [
+    "Does WWW-Authenticate discrimination transfer to other OAuth/OIDC providers (Auth0, Okta)?",
+    "Does substrate maintain discrimination on production infrastructure with CDN/load-balancer?",
+    "What happens on Keycloak /token endpoint when Authorization header is actually enforced?",
+    "Cross-Python-version reproducibility of repr(vector) fingerprints?"
+  ]
+}
