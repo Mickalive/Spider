@@ -1,0 +1,9 @@
+{
+  "stage": "director",
+  "category": "VALIDATION_FAILURE",
+  "message": "invalid claim update status: INCONCLUSIVE",
+  "retryable": false,
+  "recorded_at": "2026-09-11T00:59:54.782739+00:00",
+  "github_run_id": "34546944360",
+  "github_run_attempt": "1"
+}
