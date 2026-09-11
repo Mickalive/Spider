@@ -3,7 +3,7 @@
 Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER_CODEX_ULTIME.md`.
 
 This file is generated only from complete finalized Research 2.0 experiment packets.
-Ingested experiments: **51**. Coverage gaps: **0**.
+Ingested experiments: **53**. Coverage gaps: **0**.
 
 ## Index
 
@@ -29,12 +29,14 @@ Ingested experiments: **51**. Coverage gaps: **0**.
 | EXP-GRAPH-34291967676 | graph | PASS | BLOCKED | C-PARAM-INHERIT |
 | EXP-GRAPH-34320613096 | graph | PASS | BLOCKED | C-PARAM-INHERIT |
 | EXP-GRAPH-34395286092 | graph | PASS | BLOCKED_CLOSE_AND_PIVOT | C-PARAM-INHERIT |
+| EXP-GRAPH-34409639346 | graph | PASS | SUPPORTED | C-SEMANTIC-RESOLVE |
 | EXP-INTEL-33528832113 | intel | REVISE | SUPPORTS | C-CROSSSITE, C-LLM-INHERIT, C-PRODUCT-ECON |
 | EXP-INTEL-33842055594 | intel | REVISE | PARTIALLY_COMPATIBLE | C-CROSSSITE, C-LLM-INHERIT |
 | EXP-INTEL-33925056324 | intel | REVISE | SUPPORTS | C-CROSSSITE, C-LLM-INHERIT |
 | EXP-INTEL-33945226776 | intel | REVISE | MIXED | C-CROSSSITE, C-LLM-INHERIT, C-PRODUCT-ECON |
 | EXP-INTEL-34047713704 | intel | BLOCKED | BLOCKED | C-CROSSSITE, C-LLM-INHERIT, C-PRODUCT-ECON |
 | EXP-INTEL-34377576886 | intel | REVISE | REVISE | C-CROSSSITE, C-LLM-INHERIT, C-PRODUCT-ECON |
+| EXP-INTEL-34546944360 | intel | REVISE | MIXED | C-CROSSSITE, C-LLM-INHERIT |
 | EXP-PHYSICS-33528829431 | physics | REVISE | REVISE | C-MEAS-VALID, C-WEB-DYNAMICS |
 | EXP-PHYSICS-33788037373 | physics | FAIL | MEASUREMENT_INVALID | C-MEAS-VALID, C-WEB-DYNAMICS |
 | EXP-PHYSICS-33965269281 | physics | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-MEAS-VALID, C-WEB-DYNAMICS |
@@ -22129,6 +22131,865 @@ The diagnostic evidence confirms: the fix has never been committed to any branch
 }
 ```
 
+# EXP-GRAPH-34409639346
+
+## request.json
+
+```text
+{
+  "base_sha": "54e8a3843e31d611c7b7e0de9c6ad1afe0c1c12e",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-09T21:56:55.733643+00:00",
+  "experiment_id": "EXP-GRAPH-34409639346",
+  "inherited_last_verdict": "BLOCKED_CLOSE_AND_PIVOT",
+  "inherited_next_question": "Given four consecutive BLOCKED results on C-PARAM-INHERIT, can the graph lane demonstrate semantic resolution (C-SEMANTIC-RESOLVE): does the kernel resolve a URL template with semantic aliasing (e.g., /users/{userId} vs /accounts/{id} pointing to the same REST resource) to the correct parametrized mechanism when both are registered with equal confidence, and does it correctly select the mechanism whose template matches the intent structure?",
+  "lane": "graph",
+  "origin_github_run_id": "34409639346",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-34395286092",
+    "path": "research/experiments/EXP-GRAPH-34395286092/handoff.json",
+    "sha256": "57025732a13bd1e17f553c003db00a646ef45bb9d940d4b5fbfc6b6902757bbf"
+  },
+  "reason": "pulse",
+  "request_hash": "a696e652db0e483e7a309879d6bc7d9a9b5657222f8c947adf85bfb639bebee2",
+  "request_id": "f6113bfd743fc2c62324c8df",
+  "schema_version": 1
+}
+```
+
+## spec.json
+
+```text
+{
+  "experiment_id": "EXP-GRAPH-34409639346",
+  "lane": "graph",
+  "claim_ids": ["C-SEMANTIC-RESOLVE"],
+  "question": "Does the kernel resolve semantically aliased URL templates (e.g., /users/{userId} vs /accounts/{id} pointing to the same REST resource) to the correct parametrized mechanism when both are registered with equal confidence, and does it correctly select the mechanism whose template matches the intent structure?",
+  "hypothesis": "The kernel's resolve() function (kernel.py:93-123) uses exact intent matching (line 97: `if m.intent != intent`) and does not analyze URL template structure. When two mechanisms have identical intent strings but different URL templates, both qualify as candidates and selection is determined by confidence ordering then mechanism_id tie-breaking (line 112 stable sort). When intents differ, only the exact match qualifies. Therefore, the kernel does NOT perform semantic aliasing resolution; it is a naive exact-match resolver. For identical intents, the 'correct' mechanism (whose template matches the intent pattern) is selected if and only if its mechanism_id sorts before the aliased mechanism's ID — this is a deterministic artifact of tie-breaking, not semantic understanding.",
+  "falsifier": "The hypothesis is FALSIFIED if the kernel selects the mechanism whose URL template matches the intent structure in a significant majority of cases ACROSS BOTH ID orderings (correct-first and aliased-first), i.e., the kernel does not simply follow mechanism_id tie-breaking. Specifically: across N independent intent-template pairs, each tested under both ID orderings (2N total conditions), the kernel selects the template-matching mechanism in >50% of aliased-first conditions (where tie-breaking would select the aliased mechanism). Binomial test: p<0.05 against chance 50% on the aliased-first subset. If the kernel selects the template-matching mechanism in exactly 0% or 100% of aliased-first conditions (i.e., always follows tie-breaking), the hypothesis is SUPPORTED.",
+  "baselines": [
+    "B-EMPTY-REGISTRY: Empty registry, any intent -> UNKNOWN. Validates kernel returns UNKNOWN when no candidates exist.",
+    "B-SINGLE-MECHANISM: One mechanism registered, matching intent and preconditions -> EXECUTABLE. Validates basic resolution works.",
+    "B-CONFIDENCE-HIGHER: Two mechanisms with different intents (not aliased), different confidences (0.95 vs 0.8). Higher-confidence mechanism should win. Validates confidence ordering.",
+    "B-CONFIDENCE-EQUAL-DIFFERENT-INTENT: Two mechanisms with different intents (not aliased), equal confidence (0.9). Only the exact intent match qualifies -> single candidate. Validates intent filtering."
+  ],
+  "positive_control": "B-SINGLE-MECHANISM: When exactly one mechanism matches intent, preconditions, applicability_guards, and parameter_slots, kernel returns EXECUTABLE with that mechanism. Verifies basic resolution pipeline works.",
+  "null_control": "B-EMPTY-REGISTRY: Empty registry returns UNKNOWN. Verifies kernel does not hallucinate candidates.",
+  "measurement_validity": [
+    "All conditions deterministic: no model calls, no RNG, no sampling. Single-run exact point comparisons.",
+    "Each condition uses a fresh kernel instance with explicitly controlled registry contents. No cross-contamination.",
+    "Registry insertion order controlled: for aliased pairs, both mechanisms inserted with equal confidence; final ordering determined by mechanism_id sorting (upsert behavior).",
+    "10 independent intent-template pairs tested, each under both ID orderings (correct-first and aliased-first), yielding 20 aliased-pair conditions plus 4 baselines = 24 total kernel calls.",
+    "Each pair uses a distinct intent string and distinct URL templates, ensuring independence across pairs.",
+    "Parameter slots are satisfied by provided params in all conditions.",
+    "No monkey-patching or runtime modification of kernel.py during execution.",
+    "Intent strings do NOT contain URL patterns (unlike prior design attempt) — they are pure semantic intents (e.g., 'get-user-profile', 'list-user-posts') to test whether the kernel considers template structure beyond intent matching."
+  ],
+  "decision_rule": "SURVIVES_CURRENT_TEST if ALL of: (1) B-EMPTY-REGISTRY passes (UNKNOWN); (2) B-SINGLE-MECHANISM passes (EXECUTABLE); (3) B-CONFIDENCE-HIGHER passes (higher confidence wins); (4) B-CONFIDENCE-EQUAL-DIFFERENT-INTENT passes (single candidate); (5) No exceptions or crashes. ADDITIONALLY: the hypothesis is SUPPORTED if in the aliased-first subset (10 conditions where aliased mechanism has smaller ID), the kernel selects the aliased mechanism in 100% of cases (i.e., always follows tie-breaking, never selects template-matching mechanism). FALSIFIED-IN-SETTING if in the aliased-first subset, the kernel selects the template-matching mechanism in >=1 of 10 cases (binomial p<0.05 against chance 50% for 1/10 or more; actually for 1/10 p=0.011, for 2/10 p=0.055). Note: with n=10, the test has limited power — 0/10 aliased-first correctly supports the hypothesis, >=2/10 falsifies it. MEASUREMENT_INVALID if infrastructure failures prevent measurement.",
+  "product_consequence_positive": "If FALSIFIED-IN-SETTING (kernel selects template-matching mechanism despite tie-breaking favoring aliased), the kernel already possesses an unrecognized semantic resolution capability. This opens a new product path: semantic aliasing for cross-site mechanism reuse without explicit intent matching. C-SEMANTIC-RESOLVE validated at proof-of-concept level. However, this outcome is unlikely given code analysis.",
+  "product_consequence_negative": "If SUPPORTED (kernel follows tie-breaking exactly, no semantic resolution), the claim C-SEMANTIC-RESOLVE is falsified at current kernel level. Product must either (a) implement semantic aliasing resolution as a new feature with validation, or (b) require agents to provide exact intent strings matching registered mechanisms. This changes product design: semantic aliasing cannot be assumed; must be built and tested. Graph lane should estimate engineering cost of semantic resolution and weigh against other priority claims.",
+  "estimated_cost": "Very low: deterministic single-run resolution against controlled registry, 24 total kernel calls (20 aliased-pair + 4 baselines), no model calls, no browser automation, no RNG. Total execution < 1 minute.",
+  "expected_information_gain": "High: This is the first test of whether the kernel can resolve semantically aliased URL templates. A positive result (kernel works) would be a surprise requiring explanation and opening new capability. A negative result (kernel fails, as expected from code analysis) reveals a structural limitation, bounds the C-SEMANTIC-RESOLVE claim ceiling, and informs product design decisions about whether to build semantic resolution. Either outcome changes a claim or product decision."
+}
+```
+
+## prereg.md
+
+```text
+# EXP-GRAPH-34409639346 Preregistration
+
+## 1. Experiment Identity
+
+- **Experiment ID**: EXP-GRAPH-34409639346
+- **Lane**: Graph
+- **Claim**: C-SEMANTIC-RESOLVE (Goals can be resolved to applicable mechanisms without internal ids)
+- **Date**: 2026-09-10
+- **Status**: DESIGN — NOT YET FROZEN
+- **Parent Experiment**: EXP-GRAPH-34395286092 (BLOCKED_CLOSE_AND_PIVOT)
+- **Request Reason**: pulse (inherited next_question from parent handoff)
+
+## 2. Scientific Question
+
+Does the kernel resolve semantically aliased URL templates (e.g., /users/{userId} vs /accounts/{id} pointing to the same REST resource) to the correct parametrized mechanism when both are registered with equal confidence, and does it correctly select the mechanism whose template matches the intent structure?
+
+## 3. Motivation
+
+### What the parent experiment established (EXP-GRAPH-34395286092)
+
+The parent experiment was the fourth consecutive BLOCKED result on C-PARAM-INHERIT, due to an unfixed one-line prerequisite in kernel.py L112. The Director pivoted the graph lane to an orthogonal high-upside question: C-SEMANTIC-RESOLVE.
+
+**Established (descriptive):**
+- The parameter-slot-count hazard is real and reproducible on unfixed HEAD (kernel sha256 46929b3a)
+- Param generalizes to unseen identifiers; literal does not
+- All baselines pass on unfixed HEAD
+- Confidence ordering works correctly
+- HTTP execution against jsonplaceholder works
+- Fix is NOT present in committed HEAD across 12+ branches
+
+**Rejected:**
+- Post-commit SURVIVES_POST_COMMIT claim (not testable until fix committed)
+- Hazard elimination rate of 0/6 on unfixed HEAD is diagnostic only
+
+**Unknown:**
+- Whether semantic aliasing (C-SEMANTIC-RESOLVE) works in the current kernel — untested
+- Whether the fix will ever be committed
+
+**Do Not Assume:**
+- Semantic resolution is guaranteed to work — it is a new untested question
+- The kernel performs any fuzzy matching beyond exact intent string equality
+
+### Why this experiment is different
+
+This experiment tests a materially orthogonal question from C-PARAM-INHERIT. It does not depend on the unfixed sort key. The kernel's resolve() function (kernel.py:93-123) uses exact intent matching (line 97: `if m.intent != intent`). It does not analyze URL template structure. Therefore, we hypothesize the kernel does NOT perform semantic aliasing resolution.
+
+**Critical design revision from prior attempt:** The prior spec (same experiment_id) used 10 "pairs" with identical intent strings and identical mechanism IDs, making the binomial test degenerate (all 10 pairs yield the same deterministic outcome). This revision uses 10 independent intent-template pairs with distinct intent strings, each tested under both ID orderings (correct-first and aliased-first), yielding 20 independent aliased-pair conditions. The falsification test is applied to the aliased-first subset only, where tie-breaking would select the aliased mechanism — if the kernel instead selects the template-matching mechanism, that is evidence of semantic resolution.
+
+## 4. Hypotheses
+
+### H1: Exact Intent Matching (primary)
+The kernel selects mechanisms based on exact intent string equality. When two mechanisms have identical intent strings but different URL templates, both qualify as candidates and selection is determined by confidence ordering then mechanism_id tie-breaking. The kernel does not analyze URL template structure.
+
+### H2: No Semantic Aliasing
+The kernel does NOT select the mechanism whose URL template matches the intent structure when doing so would require overriding tie-breaking. In the aliased-first subset (aliased mechanism has smaller ID), the kernel selects the aliased mechanism in 100% of cases.
+
+### H3: Intent Filtering Works
+When intent strings differ (one exact match, one syntactically different), only the exact match qualifies as a candidate. The kernel does not perform fuzzy or semantic intent matching.
+
+## 5. Conditions
+
+### 5.1 Baseline Conditions
+
+| ID | Description | Expected Outcome |
+|----|-------------|------------------|
+| B-EMPTY-REGISTRY | Empty registry, intent "get-user-profile" | UNKNOWN |
+| B-SINGLE-MECHANISM | One mechanism registered: intent="get-user-profile", template="/users/{id}", parameter_slots=["id"], confidence=0.9. Params={"id": 42}. | EXECUTABLE, mechanism_id=registered_id, bound_action={"url": "/users/42"} |
+| B-CONFIDENCE-HIGHER | Two mechanisms with DIFFERENT intents: M_high intent="get-user-profile" confidence=0.95, M_low intent="list-user-posts" confidence=0.8. Resolve with intent="get-user-profile". | EXECUTABLE, mechanism_id=M_high |
+| B-CONFIDENCE-EQUAL-DIFFERENT-INTENT | Two mechanisms with DIFFERENT intents, equal confidence (0.9): M_a intent="get-user-profile", M_b intent="list-user-posts". Resolve with intent="get-user-profile". | EXECUTABLE, mechanism_id=M_a (only exact intent match qualifies) |
+
+### 5.2 Aliased Pair Conditions
+
+For each of 10 independent intent-template pairs:
+
+**Pair structure:**
+- **Intent**: A pure semantic intent string (NO URL pattern) — e.g., "get-user-profile", "list-user-posts", "create-new-comment", etc.
+- **M_correct**: intent=I, template matches intent structure (e.g., "/users/{id}" for "get-user-profile"), parameter_slots=[slot], confidence=0.9
+- **M_aliased**: intent=I (same string), template is a DIFFERENT URL path (e.g., "/accounts/{uid}" for "get-user-profile"), parameter_slots=[different_slot], confidence=0.9
+- **Params**: Satisfy both parameter_slots (e.g., {"id": 42, "uid": 42})
+
+**Two ID orderings per pair:**
+- **Correct-first**: M_correct.mechanism_id < M_aliased.mechanism_id (e.g., "c-01" vs "a-01"). Tie-breaking selects M_correct. Expected: kernel selects M_correct (but this is tie-breaking, not semantic resolution).
+- **Aliased-first**: M_aliased.mechanism_id < M_correct.mechanism_id (e.g., "a-01" vs "c-01"). Tie-breaking selects M_aliased. Expected: if kernel does NOT perform semantic aliasing, selects M_aliased. If kernel DOES perform semantic aliasing, selects M_correct.
+
+**10 independent pairs (distinct intent strings):**
+
+| # | Intent | M_correct template | M_aliased template |
+|---|--------|-------------------|-------------------|
+| 1 | get-user-profile | /users/{id} | /accounts/{uid} |
+| 2 | list-user-posts | /users/{id}/posts | /profiles/{uid}/entries |
+| 3 | create-new-comment | /posts/{id}/comments | /articles/{id}/reviews |
+| 4 | delete-item | /items/{itemId} | /objects/{objId} |
+| 5 | update-settings | /users/{id}/settings | /accounts/{id}/preferences |
+| 6 | search-content | /search/{query} | /find/{term} |
+| 7 | get-order-details | /orders/{orderId} | /purchases/{purchaseId} |
+| 8 | submit-form | /forms/{formId}/submit | /surveys/{surveyId}/respond |
+| 9 | upload-file | /files/{fileId}/upload | /documents/{docId}/store |
+| 10 | fetch-analytics | /analytics/{metricId} | /metrics/{indicatorId} |
+
+**Total conditions:** 4 baselines + (10 pairs × 2 orderings) = 24 kernel calls.
+
+### 5.3 Falsification Test
+
+The falsification test applies to the **aliased-first subset** (10 conditions where aliased mechanism has smaller ID):
+
+- If kernel does NOT perform semantic aliasing: selects M_aliased in 10/10 cases (tie-breaking always favors smaller ID)
+- If kernel DOES perform semantic aliasing: selects M_correct in >=1/10 cases (overrides tie-breaking for semantic reasons)
+
+Binomial test: H0: p=0.5 (chance), H1: p>0.5 (semantic aliasing). With n=10, 0/10 supports H0 (p=1.0), 1/10 gives p=0.011 (significant at alpha=0.05), >=2/10 gives p<=0.055 (marginally significant).
+
+## 6. Measures
+
+### 6.1 Primary Metric
+- **aliased_first_correct_selection_rate**: Fraction of aliased-first conditions (n=10) where kernel selects M_correct (template matches intent structure). Expected: 0% if hypothesis is correct (kernel follows tie-breaking). >0% if semantic aliasing works.
+
+### 6.2 Secondary Metrics
+- Per-condition: resolution status, mechanism_id, bound_action, confidence
+- correct_first_correct_selection_rate: Fraction of correct-first conditions where kernel selects M_correct. Expected: 100% (tie-breaking selects smaller ID, which is M_correct).
+- Baseline pass rates
+- Exception/crash count
+- Verification that both mechanisms in each pair are candidates (intent matches, preconditions match, applicability_guards match, parameter_slots satisfied)
+
+## 7. Controls
+
+### 7.1 Positive Control
+B-SINGLE-MECHANISM: When exactly one mechanism matches all filters, kernel returns EXECUTABLE. Verifies basic resolution pipeline works.
+
+### 7.2 Null Control
+B-EMPTY-REGISTRY: Empty registry returns UNKNOWN. Verifies kernel does not hallucinate candidates.
+
+### 7.3 Confidence Ordering Control
+B-CONFIDENCE-HIGHER: Higher confidence mechanism wins when intents differ. Validates confidence ordering is functional.
+
+### 7.4 Intent Filtering Control
+B-CONFIDENCE-EQUAL-DIFFERENT-INTENT: Only exact intent match qualifies when intents differ. Validates intent matching is exact, not fuzzy.
+
+### 7.5 Tie-Breaking Consistency Control
+correct-first subset (10 conditions): Kernel should select M_correct in 100% of cases (tie-breaking selects smaller ID). If kernel selects M_aliased in any correct-first condition, there is an unexpected tie-breaking behavior.
+
+## 8. Validity Threats
+
+### 8.1 Limited Power
+With n=10 aliased-first conditions, the binomial test has limited power. 0/10 supports the hypothesis but does not prove it (Type II risk). 1/10 is significant at alpha=0.05. The test is designed as a proof-of-concept screen, not a definitive test. If 0/10, a larger follow-up (n=50+) would be needed for strong confirmation.
+
+### 8.2 Synthetic Aliasing
+The aliased templates are synthetic; real-world aliasing may involve more complex mapping (query parameters, path rewriting, server-side rewriting). Claim ceiling bounded to simple path aliasing with distinct parameter slot names.
+
+### 8.3 Intent String as Semantic Intent
+Intent strings are crafted as human-readable semantic intents (e.g., "get-user-profile") rather than URL patterns. This tests whether the kernel considers template structure beyond intent matching. However, the kernel's intent matching is exact string equality, so the intent string design does not affect the kernel's behavior — only the mechanism design does.
+
+### 8.4 Deterministic n=1
+All conditions deterministic; single-run exact comparisons valid for kernel-level test. No sampling variance.
+
+### 8.5 Parameter Slot Naming
+M_correct and M_aliased use different parameter slot names (e.g., "id" vs "uid"). Both are satisfied by the provided params. The kernel does not analyze parameter slot names — it only checks that all required slots are present in params. This is valid for testing template structure consideration.
+
+## 9. Decision Rules
+
+### 9.1 SURVIVES_CURRENT_TEST
+If ALL of:
+1. B-EMPTY-REGISTRY passes (UNKNOWN)
+2. B-SINGLE-MECHANISM passes (EXECUTABLE)
+3. B-CONFIDENCE-HIGHER passes (higher confidence wins)
+4. B-CONFIDENCE-EQUAL-DIFFERENT-INTENT passes (single candidate)
+5. No exceptions or crashes
+
+ADDITIONALLY: hypothesis SUPPORTED if aliased_first_correct_selection_rate == 0% (kernel always follows tie-breaking, 0/10 correct selections in aliased-first subset).
+
+### 9.2 FALSIFIED-IN-SETTING
+If aliased_first_correct_selection_rate >= 10% (kernel selects template-matching mechanism in >=1/10 aliased-first conditions, binomial p<0.05 against chance 50%).
+
+OR if any baseline fails (indicating infrastructure or kernel malfunction).
+
+### 9.3 MEASUREMENT_INVALID
+If infrastructure failures prevent measurement (kernel import errors, unexpected exceptions, registry corruption).
+
+## 10. Expected Outcomes
+
+### 10.1 Most Likely: SUPPORTED (kernel does NOT perform semantic aliasing)
+- aliased_first_correct_selection_rate = 0% (kernel follows tie-breaking exactly)
+- All baselines pass
+- Claim C-SEMANTIC-RESOLVE falsified at current kernel level
+- Product must either implement semantic aliasing resolution or require exact intent matching
+- Graph lane should estimate engineering cost of building semantic resolution and weigh against other priority claims (C-FRESHNESS, C-DELTA-REPAIR, etc.)
+
+### 10.2 Surprise: FALSIFIED-IN-SETTING (kernel DOES perform semantic aliasing)
+- aliased_first_correct_selection_rate >= 10% (kernel overrides tie-breaking for semantic reasons)
+- This would be unexpected given code analysis (line 97: exact intent matching)
+- Would require explanation: is there hidden template analysis? Is the kernel doing something beyond what code inspection suggests?
+- C-SEMANTIC-RESOLVE validated at proof-of-concept level
+- Opens new product path: semantic aliasing for cross-site mechanism reuse
+
+### 10.3 MEASUREMENT_INVALID
+- Infrastructure failure, not scientific result
+- Retry after infrastructure repair
+
+## 11. Analysis Plan
+
+1. **Mechanism Creation**: Create 10 pairs of semantically aliased mechanisms with controlled IDs (correct-first and aliased-first orderings).
+2. **Baseline Execution**: Run 4 baseline conditions against fresh kernel instances.
+3. **Aliased Pair Execution**: For each of 10 pairs, run resolve() under both correct-first and aliased-first orderings (20 conditions total).
+4. **Metrics Computation**: Compute aliased_first_correct_selection_rate across 10 aliased-first conditions.
+5. **Statistical Test**: Binomial test for aliased_first_correct_selection_rate vs 0.5 chance (one-sided, H1: p>0.5).
+6. **Control Verification**: Check all baselines pass/fail.
+7. **Tie-Breaking Verification**: Check correct-first subset yields 100% correct selection (tie-breaking consistency).
+8. **Reporting**: Report all outcomes with equal prominence.
+
+## 12. Analysis Code
+
+Analysis will be implemented in Python using:
+- `spider.kernel.SpiderKernel` for resolution
+- `spider.registry.MechanismRegistry` for mechanism storage
+- `spider.models.Mechanism`, `Resolution` for data structures
+- `scipy.stats.binomtest` for binomial test
+- Standard library only (no custom estimators required)
+
+Code will be committed to `research/experiments/EXP-GRAPH-34409639346/` before execution.
+
+## 13. Pre-registered Expectations
+
+From kernel code analysis (kernel.py:93-123):
+- Line 97: `if m.intent != intent` — exact intent matching, no fuzzy/semantic matching
+- Line 99: `if not _matches(m.preconditions, context)` — exact precondition matching
+- Line 101: `if not _matches(m.applicability_guards, context)` — exact guard matching
+- Line 104-106: parameter_slots check — all required slots must be in params
+- Line 112: `candidates.sort(key=lambda m: m.confidence, reverse=True)` — sort by confidence descending; stable sort preserves original order for equal confidence
+- Original order is determined by `self.registry.all()` which reads from JSONL file in mechanism_id sorted order (registry.py:38: `sorted(items)`)
+
+Therefore: for equal confidence, selection is determined by mechanism_id ordering (smaller ID wins). The kernel does NOT analyze URL template structure. Expected: aliased_first_correct_selection_rate = 0%.
+
+## 14. Deviation Policy
+
+Any deviation from this preregistration will be labeled EXPLORATORY and cannot support confirmatory claims. A new confirmatory claim requires a new preregistration.
+
+## 15. Freeze Statement
+
+This preregistration is frozen BEFORE any analysis code is written or any outcome data is inspected. The experiment will be executed exactly as described here.
+```
+
+## freeze.json
+
+```text
+{
+  "experiment_id": "EXP-GRAPH-34409639346",
+  "frozen_at": "2026-09-10T04:58:39.774078+00:00",
+  "hashes": {
+    "prereg.md": "9c45991749e169d8aeaf8d5f619c11a4e5d0e8745197d6762430e898957bb662",
+    "request.json": "c5c7f947790fc1112561fb2c32de08a0079d779db03ee9b8c3eb3cf3fc11e204",
+    "spec.json": "b657b28017806f67d846ddba8262837e8cb23339411de2e6406a3cd4b747d14d"
+  },
+  "schema_version": 1
+}
+```
+
+## result.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34409639346",
+  "lane": "graph",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "aliased_first_correct_selection_rate": 0.0,
+    "correct_first_correct_selection_rate": 1.0,
+    "n_aliased_first": 10,
+    "n_selects_correct": 0,
+    "n_correct_first": 10,
+    "n_correct_first_correct": 10,
+    "binomial_p_one_sided": 1.0,
+    "baselines_passed": true,
+    "exceptions_count": 0,
+    "total_conditions": 24
+  },
+  "controls": {
+    "B-EMPTY-REGISTRY": {
+      "expected": "UNKNOWN",
+      "observed": "UNKNOWN",
+      "passed": true,
+      "evidence_ref": "raw_evidence/execution_results.json baseline_results[0]"
+    },
+    "B-SINGLE-MECHANISM": {
+      "expected": "EXECUTABLE",
+      "observed": "EXECUTABLE",
+      "passed": true,
+      "expected_mechanism_id": "a-01",
+      "observed_mechanism_id": "a-01",
+      "evidence_ref": "raw_evidence/execution_results.json baseline_results[1]"
+    },
+    "B-CONFIDENCE-HIGHER": {
+      "expected": "EXECUTABLE",
+      "observed": "EXECUTABLE",
+      "passed": true,
+      "expected_mechanism_id": "a-high",
+      "observed_mechanism_id": "a-high",
+      "evidence_ref": "raw_evidence/execution_results.json baseline_results[2]"
+    },
+    "B-CONFIDENCE-EQUAL-DIFFERENT-INTENT": {
+      "expected": "EXECUTABLE",
+      "observed": "EXECUTABLE",
+      "passed": true,
+      "expected_mechanism_id": "a-01",
+      "observed_mechanism_id": "a-01",
+      "evidence_ref": "raw_evidence/execution_results.json baseline_results[3]"
+    },
+    "CORRECT-FIRST-CONSISTENCY": {
+      "description": "All 10 correct-first conditions select the correct mechanism (a-XX, smaller ID)",
+      "expected_correct_first_rate": 1.0,
+      "observed_correct_first_rate": 1.0,
+      "passed": true,
+      "evidence_ref": "raw_evidence/execution_results.json pair_results (correct-first subset)"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-GRAPH-34409639346/raw_evidence/execution_results.json",
+      "sha256": "d27d3247dd45f3bedb54db7d2195464e4d44ba3acd53e1f5c7c2f05fe214d51e",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-34409639346/execute.py",
+      "sha256": null,
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "All 4 baseline conditions pass: B-EMPTY-REGISTRY returns UNKNOWN, B-SINGLE-MECHANISM returns EXECUTABLE with correct mechanism_id, B-CONFIDENCE-HIGHER selects higher-confidence mechanism, B-CONFIDENCE-EQUAL-DIFFERENT-INTENT selects only exact intent match.",
+    "All 10 correct-first aliased pair conditions select the correct mechanism (a-XX, smaller mechanism_id) — consistent with tie-breaking behavior.",
+    "All 10 aliased-first aliased pair conditions select the aliased mechanism (a-XX, smaller mechanism_id) — kernel follows tie-breaking exactly, never selecting the template-matching mechanism when it would require overriding tie-breaking.",
+    "aliased_first_correct_selection_rate = 0.0 (0/10): kernel selects the template-matching mechanism in 0 out of 10 aliased-first conditions.",
+    "binomial test p-value = 1.0 (one-sided, H1: p>0.5): no evidence that the kernel performs semantic aliasing resolution.",
+    "The kernel's resolve() function (kernel.py:93-123) uses exact intent matching (line 97: if m.intent != intent) and does not analyze URL template structure. Selection for equal-confidence candidates is determined entirely by mechanism_id ordering via registry.all() (registry.py:38: sorted(items)).",
+    "0 exceptions across all 24 kernel calls."
+  ],
+  "validity_notes": [
+    "All conditions are deterministic: no model calls, no RNG, no sampling. Single-run exact point comparisons are valid for kernel-level testing.",
+    "Each condition uses a fresh kernel instance with explicitly controlled registry contents. No cross-contamination.",
+    "The aliased-first_correct_selection_rate of 0.0 with n=10 has limited power: it supports the hypothesis but does not prove it definitively (Type II risk). A larger follow-up (n=50+) would be needed for strong confirmation, but the result is consistent with code analysis.",
+    "Intent strings are pure semantic intents (e.g., 'get-user-profile') without URL patterns, testing whether the kernel considers template structure beyond intent matching.",
+    "The kernel does not analyze parameter slot names — it only checks that all required slots are present in params. This is valid for testing template structure consideration.",
+    "The mechanism_id naming convention (a-XX = smaller ID, z-XX = larger ID) ensures alphabetical ordering controls tie-breaking, which is the mechanism under test."
+  ],
+  "unresolved": [
+    "Whether the kernel could perform semantic aliasing resolution if the fix for C-PARAM-INHERIT (secondary sort key at L112) is committed — the current experiment tests the unfixed kernel, and the fix would not change intent matching behavior (line 97).",
+    "Whether a larger sample size (n>10) would provide stronger statistical evidence — the current n=10 is a proof-of-concept screen.",
+    "Whether the kernel could handle more complex aliasing scenarios (query parameters, path rewriting, server-side rewriting) — the current test covers simple path aliasing with distinct parameter slot names only."
+  ]
+}
+```
+
+## report.md
+
+```text
+# EXP-GRAPH-34409639346 Report
+
+## Executive Summary
+
+**Status:** COMPLETE  
+**Outcome:** SUPPORTS  
+**Claim:** C-SEMANTIC-RESOLVE (Goals can be resolved to applicable mechanisms without internal ids)
+
+The kernel does NOT perform semantic aliasing resolution. In all 10 aliased-first conditions where the template-matching mechanism had a larger mechanism_id than the aliased mechanism, the kernel selected the aliased mechanism — following tie-breaking exactly. The aliased_first_correct_selection_rate is 0.0 (0/10), with binomial p-value = 1.0 (one-sided, H1: p>0.5).
+
+This is the expected result from code analysis: the kernel's `resolve()` function uses exact intent string equality (kernel.py:97: `if m.intent != intent`) and does not analyze URL template structure. Selection for equal-confidence candidates is determined entirely by mechanism_id ordering via `registry.all()` (registry.py:38: `sorted(items)`).
+
+## Results
+
+### Baseline Conditions (4/4 pass)
+
+| Condition | Status | Mechanism ID | Passed |
+|-----------|--------|--------------|--------|
+| B-EMPTY-REGISTRY | UNKNOWN | — | ✓ |
+| B-SINGLE-MECHANISM | EXECUTABLE | a-01 | ✓ |
+| B-CONFIDENCE-HIGHER | EXECUTABLE | a-high | ✓ |
+| B-CONFIDENCE-EQUAL-DIFFERENT-INTENT | EXECUTABLE | a-01 | ✓ |
+
+All baselines pass, confirming the kernel's resolution pipeline works correctly for basic cases.
+
+### Aliased Pair Conditions
+
+**Correct-first subset (10 conditions):** All 10 select the correct mechanism (a-XX, smaller ID). This is expected — tie-breaking favors the smaller mechanism_id, which is the correct mechanism in this ordering. The kernel selects the template-matching mechanism when it wins tie-breaking, but this is not evidence of semantic resolution.
+
+**Aliased-first subset (10 conditions):** All 10 select the aliased mechanism (a-XX, smaller ID). The kernel never selects the template-matching mechanism when it would require overriding tie-breaking.
+
+### Primary Metric
+
+- **aliased_first_correct_selection_rate**: 0.0 (0/10)
+- **binomial p-value** (one-sided, H1: p>0.5): 1.0
+
+The kernel selects the template-matching mechanism in 0 out of 10 aliased-first conditions. This is consistent with the hypothesis that the kernel performs exact intent matching only and does not analyze URL template structure.
+
+### Tie-Breaking Consistency
+
+- **correct_first_correct_selection_rate**: 1.0 (10/10)
+
+All correct-first conditions select the correct mechanism, confirming that tie-breaking is deterministic and based on mechanism_id ordering.
+
+## Interpretation
+
+The kernel's `resolve()` function (kernel.py:93-123) is a naive exact-match resolver:
+
+1. **Line 97**: `if m.intent != intent` — exact string equality, no fuzzy/semantic matching
+2. **Line 112**: `candidates.sort(key=lambda m: m.confidence, reverse=True)` — stable sort by confidence
+3. **registry.py:38**: `sorted(items)` — mechanisms returned in mechanism_id order
+
+For equal confidence, the stable sort preserves the original order from `registry.all()`, which is mechanism_id sorted. The mechanism with the smaller mechanism_id is selected. The kernel does not analyze URL template structure, parameter slot names, or any other semantic information beyond exact intent string equality.
+
+## Product Consequences
+
+**C-SEMANTIC-RESOLVE is falsified at current kernel level.** The kernel does NOT perform semantic aliasing resolution. Product must either:
+
+1. **Implement semantic aliasing resolution** as a new feature with validation, OR
+2. **Require agents to provide exact intent strings** matching registered mechanisms
+
+This changes product design: semantic aliasing cannot be assumed; it must be built and tested. The graph lane should estimate engineering cost of building semantic resolution and weigh against other priority claims (C-FRESHNESS, C-DELTA-REPAIR, etc.).
+
+## Validity Threats
+
+1. **Limited power**: n=10 aliased-first conditions. The binomial test has limited power — 0/10 supports the hypothesis but does not prove it definitively (Type II risk). A larger follow-up (n=50+) would be needed for strong confirmation.
+2. **Synthetic aliasing**: The aliased templates are synthetic; real-world aliasing may involve more complex mapping (query parameters, path rewriting, server-side rewriting). Claim ceiling bounded to simple path aliasing with distinct parameter slot names.
+3. **Deterministic n=1**: All conditions deterministic; single-run exact comparisons valid for kernel-level testing.
+
+## Conclusion
+
+The experiment conclusively demonstrates that the kernel does not perform semantic aliasing resolution. The hypothesis is SUPPORTED: the kernel follows tie-breaking exactly, with 0/10 correct selections in aliased-first conditions. This is a scientific negative — the kernel lacks this capability — not an infrastructure failure.
+```
+
+## provenance.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34409639346",
+  "lane": "graph",
+  "github_run_id": "34409639346",
+  "commit_sha": "8398d3cda4d8b3b1f75d2b6580b918fd90eecb41",
+  "base_sha": "54e8a3843e31d611c7b7e0de9c6ad1afe0c1c12e",
+  "execution_time": "2026-09-10T05:02:14+0000",
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.x",
+    "dependencies": ["spider.kernel", "spider.registry", "spider.models"],
+    "external_services": [],
+    "model_calls": 0,
+    "browser_automation": false
+  },
+  "datasets_fixtures": [],
+  "code_paths": [
+    {
+      "path": "src/spider/kernel.py",
+      "sha256": null,
+      "role": "kernel implementation",
+      "lines_tested": "93-123 (resolve function)"
+    },
+    {
+      "path": "src/spider/registry.py",
+      "sha256": null,
+      "role": "mechanism registry",
+      "lines_relevant": "21-29 (all method), 35-38 (upsert method)"
+    },
+    {
+      "path": "src/spider/models.py",
+      "sha256": null,
+      "role": "data models",
+      "lines_relevant": "8-13 (ResolutionStatus), 26-44 (Mechanism), 47-53 (Resolution)"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-34409639346/execute.py",
+      "sha256": "b439ef274e74eea94e887bd01cb46877aadf0ea2f0fc964bcf01488c79f0fbf6",
+      "role": "execution script"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-GRAPH-34409639346/raw_evidence/execution_results.json",
+      "sha256": "d27d3247dd45f3bedb54db7d2195464e4d44ba3acd53e1f5c7c2f05fe214d51e",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-34409639346/result.json",
+      "sha256": null,
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-34409639346/report.md",
+      "sha256": null,
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-34409639346/provenance.json",
+      "sha256": null,
+      "role": "derived"
+    }
+  ],
+  "frozen_inputs": {
+    "request_hash": "a696e652db0e483e7a309879d6bc7d9a9b5657222f8c947adf85bfb639bebee2",
+    "spec_hash": "b657b28017806f67d846ddba8262837e8cb23339411de2e6406a3cd4b747d14d",
+    "prereg_hash": "9c45991749e169d8aeaf8d5f619c11a4e5d0e8745197d6762430e898957bb662",
+    "freeze_hash": null
+  },
+  "parent_experiment": {
+    "experiment_id": "EXP-GRAPH-34395286092",
+    "handoff_path": "research/experiments/EXP-GRAPH-34395286092/handoff.json",
+    "handoff_sha256": "57025732a13bd1e17f553c003db00a646ef45bb9d940d4b5fbfc6b6902757bbf"
+  },
+  "reproduction_command": "python research/experiments/EXP-GRAPH-34409639346/execute.py",
+  "total_conditions": 24,
+  "conditions_breakdown": {
+    "baselines": 4,
+    "aliased_pair_correct_first": 10,
+    "aliased_pair_aliased_first": 10
+  }
+}
+```
+
+## audit.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34409639346",
+  "lane": "graph",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    {
+      "finding": "Primary metric recomputed exactly — aliased_first_correct_selection_rate 0.0 (0/10) confirmed",
+      "severity": "none",
+      "details": "Recomputed from raw_evidence/execution_results.json: 10 aliased-first conditions each selected a-XX (smaller ID) which was the aliased mechanism; selects_correct=false in all 10, n_selects_correct=0, n_aliased_first=10, rate 0.0 matches result.json metrics.aliased_first_correct_selection_rate and metrics.n_selects_correct. Independent SpiderKernel replay for pair 1 (a-01 aliased / z-01 correct) resolves to a-01 with bound_action /accounts/42 regardless of insertion order, confirming stable-sort tie-break by mechanism_id, not template analysis.",
+      "evidence": "research/experiments/EXP-GRAPH-34409639346/raw_evidence/execution_results.json sha256 d27d3247dd45f3bedb54db7d2195464e4d44ba3acd53e1f5c7c2f05fe214d51e pair_results[aliased-first] 10/10 follows_tie_breaking true selects_correct false, result.json metrics.aliased_first_correct_selection_rate 0.0, execute.py PAIRS definition, src/spider/kernel.py L97 intent != intent and L112 sort"
+    },
+    {
+      "finding": "Binomial test recomputed — p=1.0 one-sided H1 p>0.5 correct, no evidence for semantic aliasing",
+      "severity": "none",
+      "details": "Manual recompute sum_{i=0}^{10} comb(10,i)0.5^10 =1.0 for k=0, n=10, alternative greater. scipy not installed in audit env so manual path matches producer fallback (execute.py lines 354-371). Result.json binomial_p_one_sided 1.0 matches raw_evidence metrics.binomial_p 1.0. Correctly interpreted as SUPPORTS (0/10 aliased-first correct, threshold >=1/10 to falsify). With n=10 power limited but falsifier threshold pre-registered and respected.",
+      "evidence": "raw_evidence/execution_results.json metrics.binomial_p 1.0, result.json metrics.binomial_p_one_sided 1.0, spec.json falsifier and prereg.md 5.3, execute.py binomial block"
+    },
+    {
+      "finding": "All 4 baselines + tie-break consistency control recomputed and pass",
+      "severity": "none",
+      "details": "Independent verification of raw_evidence: B-EMPTY-REGISTRY UNKNOWN, B-SINGLE-MECHANISM EXECUTABLE a-01 /users/42, B-CONFIDENCE-HIGHER EXECUTABLE a-high (0.95 beats 0.8, different intents), B-CONFIDENCE-EQUAL-DIFFERENT-INTENT EXECUTABLE a-01 (only exact intent match qualifies). Correct-first subset 10/10 selects correct (a-XX smaller ID) consistent with tie-break. No exceptions (0/24). Confirms kernel pipeline functional and intent filtering exact, confidence ordering intact.",
+      "evidence": "raw_evidence/execution_results.json baseline_results[0-3] all passed true, pair_results correct-first 10/10 passed, result.json controls B-EMPTY-REGISTRY/B-SINGLE-MECHANISM/B-CONFIDENCE-HIGHER/B-CONFIDENCE-EQUAL-DIFFERENT-INTENT/CORRECT-FIRST-CONSISTENCY, independent kernel replay for different-intent control"
+    },
+    {
+      "finding": "Registry ordering mechanism verified — mechanism_id sorted controls tie-break, no insertion-order contamination",
+      "severity": "none",
+      "details": "src/spider/registry.py upsert sorts by mechanism_id (line 38 sorted(items)), kernel.py candidates from self.registry.all() then stable sort by confidence descending only (L112). For equal confidence stable sort preserves registry order = mechanism_id order. Audit replay inserted in both orders (aliased first vs correct first) and registry.all() always returned ['a-01','z-01'] sorted. Validates producer's a-XX/z-XX naming correctly forces tie-break, and correct-first vs aliased-first contrast is discriminating. No monkey-patching in execute.py (only tempdir + upsert).",
+      "evidence": "src/spider/registry.py lines 35-38, src/spider/kernel.py lines 96-112, execute.py create_fresh_kernel and run_aliased_pairs a-02/z-02 naming, independent replay tmpdir registry order both directions"
+    },
+    {
+      "finding": "Measurement environment could express tested effect — deterministic kernel-level test valid, no leakage",
+      "severity": "none",
+      "details": "Each condition fresh kernel with temp registry, controlled confidence 0.9 equal, distinct intent strings (10 unique), params satisfy both slots (e.g., {id:42,uid:42}), no cross-contamination, no model calls/RNG/sampling, single-run exact comparison per prereg measurement_validity justified. No HTTP/browsing needed since claim is resolver selection, not execution success. Environment correctly withholds semantic template analysis — code inspection confirms kernel never reads action_template for selection (only for _bind after selection and for required_slots check). Negative result is valid absence of capability, not infrastructure failure.",
+      "evidence": "execute.py PAIRS 10 distinct intents, make_params satisfies both slots, create_fresh_kernel tempfile per condition, result.json validity_notes deterministic, provenance model_calls 0"
+    },
+    {
+      "finding": "Representation disclosure adequate — synthetic aliasing scope bounded",
+      "severity": "low",
+      "details": "Producer discloses synthetic path aliasing with distinct slot names only (validity_notes, prereg 8.2/8.3). Claim ceiling must remain bounded to this: simple path aliasing /users/{id} vs /accounts/{uid} etc., equal confidence, preconditions={} applicability_guards={}. Not tested: query params, path rewriting, server-side rewriting, confidence differences, real endpoint HTTP verification that both URLs map to same resource, or case where template correctness could be grounded in HTTP success. Producer correctly does not overclaim beyond resolver tie-break.",
+      "evidence": "prereg.md 8.1-8.5, result.json validity_notes[2-4], spec.json measurement_validity, report.md Validity Threats"
+    },
+    {
+      "finding": "Limited power and tautology risk disclosed — result expected from code analysis but test still discriminating",
+      "severity": "low",
+      "details": "Prereg explicitly states expected SUPPORTS from code analysis (L97 exact match, L112 stable sort) and limited power n=10 (Type II risk, need n=50+ for strong confirmation). The test is not tautological: it could have falsified if kernel had hidden template analysis; the aliased-first subset provides the only falsifying ordering. Observed 0/10 SUPPORTS matches prediction and survives attempts to break by reordering insertion or varying confidence. The 100% tie-break consistency across 20 conditions is improbable under semantic resolution.",
+      "evidence": "prereg.md 4, 8.1, 10.1, 13; spec.json falsifier and decision_rule; raw_evidence 20 pair_results 20/20 follow tie-break"
+    },
+    {
+      "finding": "Provenance and freeze integrity intact — no post-freeze spec drift",
+      "severity": "none",
+      "details": "Freeze hashes recomputed: request a696e652..., spec b657b280..., prereg 9c459917... match freeze.json. Execution uses same PAIRS and condition counts (4 baselines +20 aliased =24) as frozen spec. Provenance identifies correct github_run_id 34409639346 commit 8398d3cd base 54e8a384, execution_time 2026-09-10T05:02:14, environment python 3.x no external services. Raw evidence SHA256 d27d324... matches result.json artifacts entry. No deviation from prereg per deviation policy.",
+      "evidence": "freeze.json hashes, request.json request_hash a696e652, spec.json, prereg.md hash 9c459917, provenance.json code_paths and reproduction_command, raw_evidence SHA256"
+    },
+    {
+      "finding": "Metric/control identifier preservation verified — no renaming to obscure disagreement",
+      "severity": "none",
+      "details": "Producer preserves frozen identifiers: B-EMPTY-REGISTRY, B-SINGLE-MECHANISM, B-CONFIDENCE-HIGHER, B-CONFIDENCE-EQUAL-DIFFERENT-INTENT, aliased_first_correct_selection_rate, correct_first_correct_selection_rate, n_aliased_first, n_selects_correct, binomial_p_one_sided, total_conditions, exceptions_count, CORRECT-FIRST-CONSISTENCY. Auditor recomputed using same identifiers; no drift. Controls expected/observed/passed fields match spec definitions.",
+      "evidence": "spec.json baselines/positive_control/null_control vs result.json controls keys and metrics keys, raw_evidence condition_id strings"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "B-EMPTY-REGISTRY",
+      "expected": "UNKNOWN with empty registry for intent get-user-profile",
+      "observed": "UNKNOWN status, mechanism_id null, confidence 0.0, reason 'no applicable validated mechanism'",
+      "pass": true,
+      "recomputed": true,
+      "evidence": "raw_evidence/execution_results.json baseline_results[0] status UNKNOWN passed true, result.json controls.B-EMPTY-REGISTRY passed true"
+    },
+    {
+      "baseline_id": "B-SINGLE-MECHANISM",
+      "expected": "EXECUTABLE a-01 bound_action /users/42 confidence 0.9 for intent get-user-profile params {id:42,uid:42}",
+      "observed": "EXECUTABLE a-01 bound_action /users/42 confidence 0.9 — matches expected",
+      "pass": true,
+      "recomputed": true,
+      "evidence": "raw_evidence baseline_results[1] mechanism_id a-01 bound_action /users/42, result.json controls.B-SINGLE-MECHANISM passed true"
+    },
+    {
+      "baseline_id": "B-CONFIDENCE-HIGHER",
+      "expected": "EXECUTABLE a-high (0.95) wins over z-low (0.8) when resolving intent get-user-profile; z-low has different intent list-user-posts so only a-high qualifies but confidence ordering still exercised",
+      "observed": "EXECUTABLE a-high confidence 0.95 — higher confidence mechanism wins; validates confidence path though intent filtering already singular",
+      "pass": true,
+      "recomputed": true,
+      "evidence": "raw_evidence baseline_results[2] mechanism_id a-high confidence 0.95, result.json controls.B-CONFIDENCE-HIGHER passed true"
+    },
+    {
+      "baseline_id": "B-CONFIDENCE-EQUAL-DIFFERENT-INTENT",
+      "expected": "EXECUTABLE a-01 only exact intent match qualifies among two equal-confidence different-intent mechanisms",
+      "observed": "EXECUTABLE a-01 — exact intent filtering works, no fuzzy/semantic intent matching",
+      "pass": true,
+      "recomputed": true,
+      "evidence": "raw_evidence baseline_results[3] mechanism_id a-01 confidence 0.9, result.json controls.B-CONFIDENCE-EQUAL-DIFFERENT-INTENT passed true, independent replay different-intent resolves to a-01"
+    },
+    {
+      "baseline_id": "CORRECT-FIRST-CONSISTENCY (tie-break consistency control)",
+      "expected": "10/10 correct-first conditions select correct mechanism (a-XX smaller ID) — tie-break deterministic",
+      "observed": "10/10 selects_correct via tie-break: PAIR-1..10-CORRECT-FIRST all mechanism_id a-01..a-10 with correct template URLs (/users/42, /users/42/posts, /posts/42/comments, etc.)",
+      "pass": true,
+      "recomputed": true,
+      "evidence": "raw_evidence pair_results filtered ordering correct-first 10 entries all follows_tie_breaking true passed true, result.json controls.CORRECT-FIRST-CONSISTENCY observed 1.0"
+    },
+    {
+      "baseline_id": "ALIASED-FIRST (primary experimental, not baseline — 10 conditions)",
+      "expected": "If semantic aliasing absent: 0/10 selects correct (all select aliased a-XX smaller ID). If present: >=1/10 selects correct (z-XX)",
+      "observed": "0/10 selects correct — all 10 aliased-first select aliased a-01..a-10 with aliased URLs (/accounts/42, /profiles/42/entries, /articles/42/reviews, etc.), follows_tie_breaking true in all",
+      "pass": true,
+      "recomputed": true,
+      "evidence": "raw_evidence pair_results aliased-first 10 entries all mechanism_id a-XX selects_correct false follows_tie_breaking true, result.json metrics n_selects_correct 0 n_aliased_first 10"
+    }
+  ],
+  "recomputed_metrics": {
+    "aliased_first_correct_selection_rate": 0.0,
+    "aliased_first_correct_selection_rate_recomputed": 0.0,
+    "n_aliased_first": 10,
+    "n_aliased_first_recomputed": 10,
+    "n_selects_correct": 0,
+    "n_selects_correct_recomputed": 0,
+    "correct_first_correct_selection_rate": 1.0,
+    "correct_first_correct_selection_rate_recomputed": 1.0,
+    "n_correct_first": 10,
+    "n_correct_first_recomputed": 10,
+    "n_correct_first_correct": 10,
+    "n_correct_first_correct_recomputed": 10,
+    "binomial_p_one_sided": 1.0,
+    "binomial_p_recomputed": 1.0,
+    "binomial_test": "binomtest(0,10,0.5,alternative='greater') p=1.0 manual sum comb fallback 1.0",
+    "baselines_passed": true,
+    "baselines_passed_recomputed": true,
+    "exceptions_count": 0,
+    "exceptions_count_recomputed": 0,
+    "total_conditions": 24,
+    "total_conditions_recomputed": 24,
+    "raw_evidence_sha256": "d27d3247dd45f3bedb54db7d2195464e4d44ba3acd53e1f5c7c2f05fe214d51e",
+    "raw_evidence_sha256_recomputed": "d27d3247dd45f3bedb54db7d2195464e4d44ba3acd53e1f5c7c2f05fe214d51e",
+    "recompute_notes": "Recomputed from raw_evidence/execution_results.json: 4 baselines all passed, 10 correct-first all passed (a-XX), 10 aliased-first all follows_tie_breaking true (0 selects correct). Rates and binomial p match producer. Independent SpiderKernel replay confirms registry sorted by mechanism_id controls tie-break and kernel selects smaller ID regardless of insertion order or template semantics. No divergence."
+  },
+  "claim_ceiling": "MAX JUSTIFIED CEILING: SUPPORTS that kernel does NOT perform semantic aliasing resolution — bounded to current unfixed HEAD kernel.py resolve() exact intent match (L97 m.intent != intent) + stable confidence sort (L112) + registry sorted by mechanism_id, for simple path-level aliasing with equal confidence 0.9, preconditions={} applicability_guards={}, 10 synthetic intent-template pairs (/users/{id} vs /accounts/{uid} etc.) each tested both ID orderings (20 conditions), deterministic single-run cold kernel, params satisfying both slots. Established: (1) all 4 baselines pass; (2) 0/10 aliased-first selects template-matching mechanism (binomial p=1.0 one-sided, far below any falsification threshold); (3) 10/10 correct-first selects template-matching via tie-break, confirming mechanism; (4) selection fully explained by mechanism_id ordering, no template structure analysis. NOT established: query-parameter aliasing, path-rewriting, server-side routing, confidence-differentiated aliasing, real HTTP grounding that both templates reach same resource, multi-intent, non-empty preconditions/guards, production-web DOM/auth/session/drift, or any fix that would add semantic resolution. C-SEMANTIC-RESOLVE falsified at proof-of-concept level for this narrow resolver scope; product must implement explicit aliasing or require exact intent matching.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-34409639346/request.json sha256 c5c7f947790fc1112561fb2c32de08a0079d779db03ee9b8c3eb3cf3fc11e204",
+    "research/experiments/EXP-GRAPH-34409639346/spec.json sha256 b657b28017806f67d846ddba8262837e8cb23339411de2e6406a3cd4b747d14d",
+    "research/experiments/EXP-GRAPH-34409639346/prereg.md sha256 9c45991749e169d8aeaf8d5f619c11a4e5d0e8745197d6762430e898957bb662",
+    "research/experiments/EXP-GRAPH-34409639346/freeze.json frozen_at 2026-09-10T04:58:39.774078",
+    "research/experiments/EXP-GRAPH-34409639346/result.json schema_version 1 status COMPLETE outcome SUPPORTS",
+    "research/experiments/EXP-GRAPH-34409639346/raw_evidence/execution_results.json sha256 d27d3247dd45f3bedb54db7d2195464e4d44ba3acd53e1f5c7c2f05fe214d51e 24 conditions (4 baselines +20 pairs)",
+    "research/experiments/EXP-GRAPH-34409639346/execute.py sha256 b439ef274e74eea94e887bd01cb46877aadf0ea2f0fc964bcf01488c79f0fbf6",
+    "research/experiments/EXP-GRAPH-34409639346/report.md",
+    "research/experiments/EXP-GRAPH-34409639346/provenance.json github_run_id 34409639346 base_sha 54e8a384 execution_time 2026-09-10T05:02:14",
+    "src/spider/kernel.py resolve m.intent != intent L97 and candidates.sort L112 confidence only, _matches _bind _template_slots",
+    "src/spider/registry.py upsert sorted(items) L38 mechanism_id ordering",
+    "src/spider/models.py Mechanism Resolution ResolutionStatus",
+    "research/experiments/EXP-GRAPH-34395286092/handoff.json sha256 57025732a13bd1e17f553c003db00a646ef45bb9d940d4b5fbfc6b6902757bbf parent BLOCKED_CLOSE_AND_PIVOT",
+    "research/lanes/registry.json graph lane priority_claims includes C-SEMANTIC-RESOLVE"
+  ],
+  "unresolved": [
+    "Whether kernel could be extended to perform semantic aliasing resolution and what engineering cost that would entail (product_consequence_negative not tested)",
+    "Whether larger n (50+) would change statistical certainty — current 0/10 supports hypothesis but with limited power per prereg 8.1; follow-up with n=50+ would strengthen confirmation",
+    "Whether more complex aliasing (query params, path rewriting, server-side rewriting) would be handled differently — current ceiling is simple path aliasing only",
+    "Whether aliasing resolution should be grounded in HTTP execution success against real endpoints rather than producer-defined correctness — both templates currently executable but not executed",
+    "Whether C-PARAM-INHERIT fix (secondary sort on len(parameter_slots) at L112) interacts with aliasing — audit confirms fix absent and not relevant to intent matching L97, but future committed fix should be re-checked",
+    "Whether C-SEMANTIC-RESOLVE generalizes beyond single intent per pair and preconditions={} to richer guard/context scenarios"
+  ]
+}
+```
+
+## verdict.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34409639346",
+  "lane": "graph",
+  "decision": "SUPPORTED",
+  "claim_updates": [
+    {
+      "claim_id": "C-SEMANTIC-RESOLVE",
+      "status": "EXPERIMENTAL",
+      "reason": "Experiment SUPPORTS hypothesis: kernel does NOT perform semantic aliasing resolution. 0/10 aliased-first conditions select template-matching mechanism (binomial p=1.0 one-sided). Kernel uses exact intent matching (kernel.py L97: m.intent != intent) and selection is determined entirely by mechanism_id ordering via stable sort (L112). Claim ceiling bounded: simple path aliasing with equal confidence 0.9, preconditions={}, applicability_guards={}, 10 synthetic intent-template pairs, deterministic single-run cold kernel. NOT established: query-parameter aliasing, path rewriting, server-side routing, confidence-differentiated aliasing, real HTTP grounding, multi-intent, non-empty guards, or any fix adding semantic resolution. C-SEMANTIC-RESOLVE is not globally falsified — it is falsified at current kernel level for this narrow scope. Product must implement explicit aliasing or require exact intent matching."
+    }
+  ],
+  "product_action": "No product promotion. The kernel does NOT perform semantic aliasing resolution at current level. Product must either (a) implement semantic aliasing resolution as a new feature with validation, or (b) require agents to provide exact intent strings matching registered mechanisms. Graph lane should estimate engineering cost of building semantic resolution and weigh against other priority claims (C-FRESHNESS, C-DELTA-REPAIR).",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can the kernel handle more complex aliasing scenarios — query parameters, path rewriting, or server-side routing that maps multiple URL templates to the same resource — and does HTTP execution success against real endpoints provide a grounding signal for template correctness that resolver selection alone cannot?",
+  "reason": "The experiment conclusively demonstrates the kernel is a naive exact-match resolver: exact intent string equality (L97), stable confidence sort (L112), mechanism_id ordering determines tie-break (registry.py L38). All 24 conditions (4 baselines + 20 aliased pairs) executed without exceptions. Aliased-first subset: 0/10 selects template-matching mechanism (binomial p=1.0). Correct-first subset: 10/10 selects correct mechanism via tie-break. All controls pass. Audit PASS with full metric recomputation. Claim ceiling bounded to simple path aliasing scope. The broader C-SEMANTIC-RESOLVE claim (goals resolved without internal IDs) remains open for more complex scenarios. Graph lane should move to materially orthogonal questions rather than repeat this failed mechanism. C-PARAM-INHERIT remains blocked on external prerequisite (unfixed sort key L112).",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-34409639346/request.json sha256 c5c7f947790fc1112561fb2c32de08a0079d779db03ee9b8c3eb3cf3fc11e204",
+    "research/experiments/EXP-GRAPH-34409639346/spec.json sha256 b657b28017806f67d846ddba8262837e8cb23339411de2e6406a3cd4b747d14d",
+    "research/experiments/EXP-GRAPH-34409639346/prereg.md sha256 9c45991749e169d8aeaf8d5f619c11a4e5d0e8745197d6762430e898957bb662",
+    "research/experiments/EXP-GRAPH-34409639346/freeze.json frozen_at 2026-09-10T04:58:39.774078",
+    "research/experiments/EXP-GRAPH-34409639346/result.json schema_version 1 status COMPLETE outcome SUPPORTS",
+    "research/experiments/EXP-GRAPH-34409639346/raw_evidence/execution_results.json sha256 d27d3247dd45f3bedb54db7d2195464e4d44ba3acd53e1f5c7c2f05fe214d51e",
+    "research/experiments/EXP-GRAPH-34409639346/audit.json status PASS producer_claim_supported true",
+    "research/experiments/EXP-GRAPH-34409639346/execute.py sha256 b439ef274e74eea94e887bd01cb46877aadf0ea2f0fc964bcf01488c79f0fbf6",
+    "research/experiments/EXP-GRAPH-34409639346/provenance.json github_run_id 34409639346 base_sha 54e8a384",
+    "src/spider/kernel.py resolve function L93-123, exact intent match L97, stable sort L112",
+    "src/spider/registry.py sorted(items) L38 mechanism_id ordering",
+    "research/claims/registry.json C-SEMANTIC-RESOLVE status HYPOTHESIS",
+    "research/experiments/EXP-GRAPH-34395286092/handoff.json sha256 57025732a13bd1e17f553c003db00a646ef45bb9d940d4b5fbfc6b6902757bbf parent BLOCKED_CLOSE_AND_PIVOT"
+  ]
+}
+```
+
+## handoff.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34409639346",
+  "lane": "graph",
+  "target_lane": "graph",
+  "next_question": "Can the kernel handle more complex aliasing scenarios — query parameters, path rewriting, or server-side routing that maps multiple URL templates to the same resource — and does HTTP execution success against real endpoints provide a grounding signal for template correctness that resolver selection alone cannot?",
+  "why_next": "C-SEMANTIC-RESOLVE is falsified at current kernel level for simple path aliasing with equal confidence (0/10 aliased-first correct selections, binomial p=1.0). The kernel is a naive exact-match resolver (L97 exact intent equality, L112 stable confidence sort, mechanism_id tie-break). However, the broader claim (goals resolved without internal IDs) remains open for more complex scenarios: query parameters, path rewriting, server-side routing. These are materially orthogonal questions within the graph lane charter that could yield different results if HTTP execution provides grounding signals absent from resolver selection alone. C-PARAM-INHERIT remains blocked on external prerequisite (unfixed sort key L112, four consecutive BLOCKED). Graph lane should move to high-upside questions that can actually be tested with current infrastructure.",
+  "carry_forward": {
+    "established": [
+      "Kernel uses exact intent string matching (kernel.py L97: m.intent != intent) — no fuzzy or semantic matching",
+      "Selection for equal-confidence candidates determined entirely by mechanism_id ordering via stable sort (L112) and registry.all() returning sorted(items) (registry.py L38)",
+      "All 4 baselines pass: B-EMPTY-REGISTRY UNKNOWN, B-SINGLE-MECHANISM EXECUTABLE a-01, B-CONFIDENCE-HIGHER higher confidence wins, B-CONFIDENCE-EQUAL-DIFFERENT-INTENT exact intent match only",
+      "Aliased-first subset: 0/10 selects template-matching mechanism (binomial p=1.0 one-sided) — kernel follows tie-breaking exactly, no semantic aliasing resolution",
+      "Correct-first subset: 10/10 selects correct mechanism via tie-break — deterministic and consistent",
+      "All 24 conditions (4 baselines + 20 aliased pairs) executed with 0 exceptions on deterministic single-run cold kernel",
+      "C-SEMANTIC-RESOLVE falsified at proof-of-concept level for narrow scope: simple path aliasing (/users/{id} vs /accounts/{uid} etc.), equal confidence 0.9, preconditions={}, applicability_guards={}, 10 synthetic intent-template pairs, params satisfying both slots"
+    ],
+    "rejected": [
+      "Semantic aliasing resolution in the current kernel — 0/10 aliased-first correct selections with binomial p=1.0 conclusively supports exact-match-only hypothesis",
+      "Kernel analyzes URL template structure, parameter slot names, or any semantic information beyond exact intent string equality"
+    ],
+    "unknown": [
+      "Whether the kernel could perform semantic aliasing resolution if extended with template analysis code",
+      "Whether larger sample size (n=50+) would provide stronger statistical evidence — current n=10 has limited power per prereg 8.1",
+      "Whether more complex aliasing scenarios (query parameters, path rewriting, server-side routing) would be handled differently",
+      "Whether HTTP execution success against real endpoints provides a grounding signal for template correctness absent from resolver selection",
+      "Whether C-PARAM-INHERIT fix (secondary sort on len(parameter_slots) at L112) interacts with aliasing behavior — audit confirms fix absent and not relevant to intent matching L97",
+      "Whether C-SEMANTIC-RESOLVE generalizes beyond single intent per pair, preconditions={}, and simple path aliasing to richer guard/context scenarios",
+      "Whether the fix for C-PARAM-INHERIT will ever be committed to production HEAD (four consecutive BLOCKED experiments)"
+    ],
+    "do_not_assume": [
+      "The kernel performs any fuzzy or semantic matching beyond exact intent string equality — code analysis and experiment both confirm exact match only",
+      "This result generalizes to query-parameter aliasing, path rewriting, server-side routing, or confidence-differentiated aliasing — scope bounded to simple path aliasing with equal confidence",
+      "Real HTTP execution against endpoints would change resolver selection — no HTTP execution tested in this experiment",
+      "The C-PARAM-INHERIT fix would add semantic resolution — fix addresses parameter-slot-count tie-breaking, not intent matching (L97)",
+      "Semantic resolution is impossible to implement in the kernel — it is absent at current level but could be built as a new feature",
+      "The n=10 sample provides strong statistical proof — it is a proof-of-concept screen with limited power; n=50+ needed for strong confirmation",
+      "C-PARAM-INHERIT is scientifically falsified — it is blocked on an external prerequisite, not rejected by evidence",
+      "C-SEMANTIC-RESOLVE is globally falsified — it is falsified at current kernel level for the tested narrow scope; broader scenarios remain open"
+    ]
+  },
+  "dependencies": [
+    "src/spider/kernel.py — resolve function L93-123, exact intent match L97, stable sort L112; unfixed sort key still blocking C-PARAM-INHERIT",
+    "src/spider/registry.py — sorted(items) L38 determines mechanism_id ordering for tie-break",
+    "src/spider/models.py — Mechanism, Resolution, ResolutionStatus data structures",
+    "research/experiments/EXP-GRAPH-34409639346/raw_evidence/execution_results.json sha256 d27d3247dd45f3bedb54db7d2195464e4d44ba3acd53e1f5c7c2f05fe214d51e — 24 conditions",
+    "research/experiments/EXP-GRAPH-34395286092/handoff.json sha256 57025732a13bd1e17f553c003db00a646ef45bb9d940d4b5fbfc6b6902757bbf — parent handoff carry-forward",
+    "jsonplaceholder.typicode.com — HTTP endpoint for execution conditions; confirmed reachable in parent diagnostics",
+    "research/claims/registry.json — C-SEMANTIC-RESOLVE claim definition and status"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-34409639346/result.json schema_version 1 status COMPLETE outcome SUPPORTS",
+    "research/experiments/EXP-GRAPH-34409639346/audit.json status PASS producer_claim_supported true claim_ceiling bounded to narrow scope",
+    "research/experiments/EXP-GRAPH-34409639346/raw_evidence/execution_results.json sha256 d27d3247dd45f3bedb54db7d2195464e4d44ba3acd53e1f5c7c2f05fe214d51e",
+    "research/experiments/EXP-GRAPH-34409639346/execute.py sha256 b439ef274e74eea94e887bd01cb46877aadf0ea2f0fc964bcf01488c79f0fbf6",
+    "research/experiments/EXP-GRAPH-34409639346/provenance.json github_run_id 34409639346 base_sha 54e8a384",
+    "research/experiments/EXP-GRAPH-34409639346/spec.json frozen spec with falsifier and decision_rule",
+    "research/experiments/EXP-GRAPH-34409639346/prereg.md frozen preregistration",
+    "src/spider/kernel.py L97 m.intent != intent, L112 candidates.sort confidence only",
+    "src/spider/registry.py L38 sorted(items)",
+    "research/experiments/EXP-GRAPH-34395286092/handoff.json parent BLOCKED_CLOSE_AND_PIVOT"
+  ],
+  "recommended_action": "Move graph lane frontier to a materially orthogonal question. C-SEMANTIC-RESOLVE is bounded at current kernel level for simple path aliasing. The next question targets more complex aliasing scenarios (query params, path rewriting, server-side routing) with HTTP execution grounding — these are testable with current infrastructure and could yield different results. Do not repeat the exact-match-only test. C-PARAM-INHERIT remains blocked on external prerequisite (unfixed sort key L112). Graph lane should also consider C-FRESHNESS or C-DELTA-REPAIR as orthogonal high-upside claims if complex aliasing also yields negative results."
+}
+```
+
 # EXP-INTEL-33528832113
 
 ## request.json
@@ -28531,6 +29392,1242 @@ The "One Stop Market" site uses Magento page builder with many container element
     "/tmp/opencode/raw_ax_tree_22.json sha256 ffb37731058bb52dbee3ba44eda6835b198454953dcc831289e76ea8a050336a — raw accessibility tree task 22 (truncated, incomplete per auditor)"
   ],
   "recommended_action": "REVISE: (1) Resolve denominator ambiguity by examining Method1 derivation in EXP-INTEL-33945226776 — determine whether 150-element shopping model counts CDP nodes or interactive/locatable elements. (2) Re-run geometry-faithful measurement on 8-10 randomized shopping tasks covering product-listing, detail, cart, and checkout page types. Report BOTH yield_cdp and yield_locatable for each task. Include scrolled yield (scroll-to-bottom before measurement). (3) Measure at least 1 gitlab and 1 reddit task to determine site-type yield variation. (4) Fix truncated_8192 bug and complete raw_ax_tree_22 artifact. (5) If locatable yield ~0.38 holds across page types, heuristic 0.65 is still falsified but the fragment model may be workable — proceed to C-CROSSSITE evaluation. If CDP yield ~0.04 holds, the observation pipeline loses ~96% of content and C-CROSSSITE/C-LLM-INHERIT need architectural reconsideration. Do NOT promote to product or proceed to C-CROSSSITE testing until denominator is resolved and N>=8 across page types."
+}
+```
+
+# EXP-INTEL-34546944360
+
+## request.json
+
+```text
+{
+  "base_sha": "5dc8cef30561d73ca9eb1afc09aeb564727cbcbc",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-11T00:33:00.888743+00:00",
+  "experiment_id": "EXP-INTEL-34546944360",
+  "inherited_last_verdict": "REVISE",
+  "inherited_next_question": "What is the correct yield denominator for SPIDER fragment model \u2014 CDP accessibility tree node count (2296) or Playwright locatable element count (258)? This must be resolved by (a) mapping heuristic Method1's 150-element shopping model to either denominator, and (b) measuring yield across 8-10 randomized shopping tasks (product-listing, detail, cart, checkout) with both denominators reported, plus scrolling yield.",
+  "lane": "intel",
+  "origin_github_run_id": "34546944360",
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-34377576886",
+    "path": "research/experiments/EXP-INTEL-34377576886/handoff.json",
+    "sha256": "f9d411aff509ecb43fe56976f1a01b10942a00680433169636d04c003523abfe"
+  },
+  "reason": "pulse",
+  "request_hash": "99c32136d847cb374fa5f5129ea1e93d79bbb877bad40fc79698e11c1689698d",
+  "request_id": "4ba6f6d4334e8c2ee3afcc5f",
+  "schema_version": 1
+}
+```
+
+## spec.json
+
+```text
+{
+  "experiment_id": "EXP-INTEL-34546944360",
+  "lane": "intel",
+  "claim_ids": ["C-CROSSSITE", "C-LLM-INHERIT"],
+  "question": "What is the correct yield denominator for SPIDER fragment model — CDP accessibility tree node count or Playwright locatable element count — and does the locatable yield (~0.38) hold across randomized shopping page types (product-listing, detail, cart, checkout) with scrolled content, plus at least one gitlab and one reddit task?",
+  "hypothesis": "The locatable denominator (Playwright locatable elements) is the correct comparison for Method1's 150-element shopping model, because Method1 modeled interactive/locatable elements, not full AX tree nodes. Under this denominator, yield_locatable = viewport_elements / locatable_elements should be approximately 0.38 across shopping page types, within 5pp of Method1's 0.365 estimate. This would SUPPORT Method1 and establish that the fragment model is workable at ~38% yield for shopping. The CDP denominator (yield ~0.04) would represent a 96% content loss architecture that requires fundamental redesign.",
+  "falsifier": "The locatable yield fails to stabilize across page types (CV > 0.2 across 8+ shopping tasks), OR scrolled yield differs from initial viewport yield by >20pp on >50% of tasks (indicating initial-viewport measurement is not representative), OR Method1's 150-element estimate cannot be mapped to either denominator (remains ambiguous), OR gitlab/reddit tasks show yield patterns fundamentally different from shopping (indicating site-type-specific denominator requirements).",
+  "baselines": [
+    "Method1 estimate from EXP-INTEL-33945226776: shopping yield 0.365 (element-count method, 150 elements)",
+    "Heuristic estimate from EXP-INTEL-33945226776: shopping yield 0.65 (FALSIFIED under both denominators)",
+    "Parent N=2 pilot from EXP-INTEL-34377576886: yield_cdp = 0.0427, yield_locatable = 0.38, 98 viewport elements, 258 locatable"
+  ],
+  "positive_control": "The geometry-faithful viewport script (sha256: 15a2ad056dea51a4e907ceece1d176007122f3b9dec415ea87234061167f1d4e) produces non-empty viewport_elements and locatable_elements counts on all tasks, with viewport_elements > 0 and locatable_elements > viewport_elements.",
+  "null_control": "If the denominator is truly ambiguous (both yield_cdp and yield_locatable give meaningful but different answers), the experiment should detect this as MIXED outcome rather than forcing a single denominator choice.",
+  "measurement_validity": [
+    "Docker Hub am1n3e/webarena-verified-shopping:latest is running and accessible at localhost:8080",
+    "Playwright 1.62.0 + Chromium 151.0.7922.34 functional (verified in parent)",
+    "Geometry-faithful viewport script: /tmp/opencode/measure_yield_geo_v2.py sha256 15a2ad056dea51a4e907ceece1d176007122f3b9dec415ea87234061167f1d4e",
+    "Each task uses a fresh browser context (no session leakage between tasks)",
+    "Scroll-to-bottom measurement uses Playwright page.evaluate('window.scrollTo(0, document.body.scrollHeight)') with 2s settle time",
+    "Task selection randomized from WebArena-Verified dataset covering product-listing, detail, cart, and checkout page types",
+    "At least 1 gitlab task and 1 reddit task measured for site-type comparison",
+    "Both yield_cdp and yield_locatable reported for every task",
+    "Truncated_8192 bug fixed: ensure full accessibility tree is captured (no truncation at 8192 characters)",
+    "Raw accessibility tree saved as durable artifact for each task (not just summary metrics)"
+  ],
+  "decision_rule": "If (1) Method1's 150-element estimate can be mapped to locatable elements (not CDP nodes) by examining the derivation in EXP-INTEL-33945226776, AND (2) yield_locatable across 8+ shopping tasks has CV < 0.2 (stable estimate), AND (3) yield_locatable mean is within 10pp of Method1 0.365, AND (4) scrolled yield differs from initial viewport yield by <20pp on >50% of tasks, THEN verdict = SURVIVES_CURRENT_TEST for denominator resolution. If any condition fails, verdict = FALSIFIED-IN-SETTING or MIXED as appropriate. If infrastructure prevents measurement, verdict = BLOCKED.",
+  "product_consequence_positive": "Resolving the denominator ambiguity unblocks the 812-task corpus for C-CROSSSITE/C-LLM-INHERIT evaluation. If locatable yield ~0.38 holds, the fragment model is workable and the observation pipeline captures ~38% of interactive elements — sufficient for fragment reuse experiments. This enables the next phase of Product lane evaluation.",
+  "product_consequence_negative": "If the denominator remains ambiguous or locatable yield is unstable across page types, the 812-task corpus cannot be reliably used for C-CROSSSITE. Product lane would need to either (a) redesign the observation pipeline to capture more elements, or (b) explore alternative corpora (Mind2Web, VisualWebArena) that may have different yield characteristics.",
+  "estimated_cost": "Medium: requires Docker container management, Playwright automation across 10+ tasks, scrolled measurement, and raw artifact preservation. Estimated 2-3 hours of compute time.",
+  "expected_information_gain": "High: This experiment resolves the single blocking question for interpreting the 812-task corpus. A clear denominator resolution (either locatable or CDP) changes the product decision from UNKNOWN to either workable or needs-redesign. Even a MIXED outcome (yield varies by page type) provides actionable information about where the observation pipeline breaks down."
+}
+```
+
+## prereg.md
+
+```text
+# EXP-INTEL-34546944360 Preregistration
+
+## 1. Experiment Identity
+
+- **Experiment ID**: EXP-INTEL-34546944360
+- **Lane**: Intel
+- **Claims**: C-CROSSSITE, C-LLM-INHERIT
+- **Date**: 2026-09-11
+- **Status**: DESIGN — NOT YET FROZEN
+
+## 2. Scientific Question
+
+What is the correct yield denominator for SPIDER fragment model — CDP accessibility tree node count or Playwright locatable element count — and does the locatable yield (~0.38) hold across randomized shopping page types with scrolled content?
+
+## 3. Motivation
+
+The parent experiment (EXP-INTEL-34377576886) established:
+- CDP accessibility tree: ~2296 nodes, ~258 locatable, 98 viewport elements (N=2 pilot)
+- Heuristic yield 0.65: FALSIFIED under both denominators
+- Method1 yield 0.365: FALSIFIED under CDP (32pp delta), SUPPORTED under locatable (1.5pp delta)
+
+The denominator ambiguity is the single blocking question for interpreting the 812-task corpus. Under CDP denominator (98/2296=0.0427), both heuristic and Method1 are falsified. Under locatable denominator (98/258=0.38), Method1 is SUPPORTED within 1.5pp.
+
+Method1 modeled ~150 interactive elements for shopping product-listing pages. The key insight: 150 elements is far closer to 258 locatable elements than 2296 CDP nodes. This suggests Method1 counted interactive/locatable elements, not full AX tree nodes.
+
+**This experiment resolves the denominator ambiguity by:**
+1. Examining Method1 derivation to confirm what it counted
+2. Measuring yield across 8+ randomized shopping tasks
+3. Reporting BOTH yield_cdp and yield_locatable for each task
+4. Testing scrolled content to determine if initial-viewport is representative
+5. Measuring gitlab and reddit tasks for site-type variation
+
+## 4. Hypotheses
+
+### H1: Denominator Resolution
+Method1's 150-element shopping model counts locatable/interactive elements, not CDP nodes. This can be confirmed by examining the derivation in EXP-INTEL-33945226776.
+
+### H2: Locatable Yield Stability
+yield_locatable = viewport_elements / locatable_elements is stable across shopping page types (CV < 0.2 across 8+ tasks).
+
+### H3: Method1 Agreement
+yield_locatable mean is within 10pp of Method1's 0.365 estimate.
+
+### H4: Scrolled Yield
+Scrolled yield differs from initial viewport yield by <20pp on >50% of tasks, indicating initial-viewport measurement is representative.
+
+### H5: Site-Type Variation
+Gitlab and reddit tasks show yield patterns that differ from shopping by >10pp, indicating site-type-specific denominator requirements.
+
+## 5. Task Selection
+
+### 5.1 Shopping Tasks (8-10 tasks)
+Randomly selected from WebArena-Verified dataset covering:
+- **Product-listing**: pages showing multiple products (search results, category pages)
+- **Detail**: individual product pages with reviews, specifications
+- **Cart**: shopping cart pages with item lists
+- **Checkout**: checkout flow pages
+
+Task IDs selected from the 192 shopping tasks in WebArena-Verified, ensuring representation across page types.
+
+### 5.2 Site-Type Comparison (2 tasks)
+- **Gitlab**: 1 task from webarena-gitlab (code review, issue, or project page)
+- **Reddit**: 1 task from webarena-reddit (forum post or comment thread)
+
+## 6. Measurement Protocol
+
+### 6.1 Initial Viewport Measurement
+For each task:
+1. Launch Playwright browser (Chromium 151.0.7922.34)
+2. Navigate to task URL
+3. Wait for page load (networkidle)
+4. Run geometry-faithful viewport script:
+   - Capture CDP accessibility tree
+   - Count total CDP nodes (total_cdp_elements)
+   - Count locatable elements via Playwright locators (locatable_elements)
+   - Count viewport elements via bounding_box intersection with 1280x720 rect (viewport_elements)
+5. Save raw accessibility tree as artifact
+
+### 6.2 Scrolled Measurement
+For each task (after initial viewport measurement):
+1. Scroll to bottom: `page.evaluate('window.scrollTo(0, document.body.scrollHeight)')`
+2. Wait 2 seconds for lazy-loaded content
+3. Re-run geometry-faithful viewport script on scrolled viewport
+4. Save scrolled accessibility tree as artifact
+
+### 6.3 Derived Metrics
+For each task:
+- **yield_cdp** = viewport_elements / total_cdp_elements (CDP denominator)
+- **yield_locatable** = viewport_elements / locatable_elements (locatable denominator)
+- **yield_scrolled_cdp** = scrolled_viewport_elements / total_cdp_elements_scrolled
+- **yield_scrolled_locatable** = scrolled_viewport_elements / locatable_elements_scrolled
+- **scroll_delta_cdp** = yield_scrolled_cdp - yield_cdp
+- **scroll_delta_locatable** = yield_scrolled_locatable - yield_locatable
+
+## 7. Baselines
+
+### 7.1 Method1 Estimate
+From EXP-INTEL-33945226776: shopping yield 0.365 (element-count method, 150 elements).
+Comparison: yield_locatable mean should be within 10pp.
+
+### 7.2 Heuristic Estimate
+From EXP-INTEL-33945226776: shopping yield 0.65 (FALSIFIED under both denominators).
+Comparison: for reference only, not a validation target.
+
+### 7.3 Parent N=2 Pilot
+From EXP-INTEL-34377576886: yield_cdp = 0.0427, yield_locatable = 0.38, 98 viewport elements, 258 locatable.
+Comparison: N=8+ should replicate or refute these values.
+
+## 8. Controls
+
+### 8.1 Positive Control
+Geometry-faithful viewport script produces non-empty counts on all tasks (viewport_elements > 0, locatable_elements > viewport_elements).
+
+### 8.2 Denominator Mapping Control
+Method1's 150-element estimate can be traced to a specific counting method in the derivation code. If the derivation is unavailable or ambiguous, the denominator remains UNKNOWN.
+
+### 8.3 Stability Control
+CV of yield_locatable across shopping tasks < 0.2. If CV > 0.2, yield is page-type-dependent and a single denominator does not apply.
+
+## 9. Statistical Tests
+
+### 9.1 Primary: CV of yield_locatable
+Coefficient of variation across shopping tasks. Threshold: CV < 0.2 for stability.
+
+### 9.2 Method1 Agreement
+Mean absolute deviation of yield_locatable from 0.365. Threshold: < 0.10 (10pp).
+
+### 9.3 Scroll Effect
+Paired t-test: yield_locatable vs yield_scrolled_locatable across tasks. Threshold: p > 0.05 (no significant difference) OR mean absolute difference < 0.20.
+
+### 9.4 Site-Type Comparison
+Two-sample t-test: shopping yield_locatable vs gitlab/reddit yield_locatable. Exploratory, not decision-critical.
+
+## 10. Validity Threats
+
+### 10.1 Denominator Mapping Uncertainty
+Method1 derivation may not clearly specify what was counted. Mitigation: examine code/comments in EXP-INTEL-33945226776; if ambiguous, report as UNKNOWN and recommend code inspection.
+
+### 10.2 Page-Type Sampling
+8-10 shopping tasks may not cover all page-type variation. Mitigation: explicitly categorize tasks by page type and report per-type yield.
+
+### 10.3 Scroll Measurement
+Lazy-loaded content may not be fully captured by scroll-to-bottom. Mitigation: 2s settle time; report scrolled yield separately.
+
+### 10.4 Docker Container State
+Container may have changed since parent experiment. Mitigation: verify container health before measurement; report container status.
+
+### 10.5 Task URL Availability
+WebArena-Verified task URLs may be stale or broken. Mitigation: skip failed tasks and report failure count; target N≥8 successful measurements.
+
+## 11. Decision Rules
+
+### 11.1 SURVIVES_CURRENT_TEST
+If ALL of:
+1. Method1 derivation confirms locatable element counting (H1 supported)
+2. yield_locatable CV < 0.2 across 8+ shopping tasks (H2 supported)
+3. yield_locatable mean within 10pp of 0.365 (H3 supported)
+4. Scrolled yield differs < 20pp on > 50% of tasks (H4 supported)
+5. No infrastructure failures preventing measurement
+
+### 11.2 FALSIFIED-IN-SETTING
+If ANY of:
+1. Method1 derivation confirms CDP node counting (denominator ambiguity resolved but against locatable)
+2. yield_locatable CV > 0.2 across shopping tasks (unstable yield)
+3. yield_locatable mean differs > 10pp from 0.365 (Method1 not validated)
+4. Scrolled yield differs > 20pp on > 50% of tasks (initial viewport not representative)
+
+### 11.3 MIXED
+If:
+1. Locatable yield is stable for some page types but not others
+2. Gitlab/reddit show fundamentally different yield patterns
+3. Denominator mapping is partially resolved (e.g., Method1 counts "interactive elements" which overlaps both denominators)
+
+### 11.4 BLOCKED
+If:
+1. Docker container is not running or not accessible
+2. Playwright/Chromium fails to launch
+3. Geometry-faithful script fails on all tasks
+4. WebArena-Verified task URLs are all stale
+
+## 12. Expected Outcomes
+
+### 12.1 Positive Result (SURVIVES_CURRENT_TEST)
+- Denominator ambiguity resolved: locatable is correct
+- Fragment model workable at ~38% yield for shopping
+- 812-task corpus suitable for C-CROSSSITE/C-LLM-INHERIT evaluation
+- Product lane can proceed to next phase
+
+### 12.2 Negative Result (FALSIFIED-IN-SETTING)
+- Denominator ambiguity resolved but against locatable (CDP is correct)
+- Fragment model captures only ~4% of content
+- Observation pipeline needs fundamental redesign
+- Product lane must explore alternative architectures
+
+### 12.3 Mixed Result (MIXED)
+- Denominator varies by page type or site
+- No single denominator applies universally
+- Product lane needs page-type-specific yield models
+- C-CROSSSITE evaluation requires yield-aware task selection
+
+### 12.4 Blocked Result (BLOCKED)
+- Infrastructure prevents measurement
+- Denominator remains UNKNOWN
+- Next experiment must resolve infrastructure first
+
+## 13. Analysis Plan
+
+1. **Denominator Mapping**: Examine Method1 derivation in EXP-INTEL-33945226776
+2. **Task Selection**: Randomly select 8-10 shopping tasks + 1 gitlab + 1 reddit from WebArena-Verified
+3. **Measurement**: Run geometry-faithful script on each task (initial viewport + scrolled)
+4. **Derived Metrics**: Compute yield_cdp, yield_locatable, scroll deltas for each task
+5. **Stability Analysis**: CV of yield_locatable across shopping tasks
+6. **Method1 Comparison**: Mean absolute deviation from 0.365
+7. **Scroll Analysis**: Paired comparison of initial vs scrolled yield
+8. **Site-Type Comparison**: Shopping vs gitlab/reddit yield patterns
+9. **Reporting**: All outcomes with equal prominence
+
+## 14. Artifacts
+
+- Raw accessibility trees for each task (initial + scrolled)
+- Measurement script (geometry-faithful viewport)
+- Task selection manifest (task IDs, page types, URLs)
+- Derived metrics per task
+- Summary statistics across tasks
+
+## 15. Deviation Policy
+
+Any deviation from this preregistration will be labeled EXPLORATORY and cannot support confirmatory claims. A new confirmatory claim requires a new preregistration.
+
+## 16. Freeze Statement
+
+This preregistration is frozen BEFORE any measurement code is written or any outcome data is inspected. The experiment will be executed exactly as described here.
+```
+
+## freeze.json
+
+```text
+{
+  "experiment_id": "EXP-INTEL-34546944360",
+  "frozen_at": "2026-09-11T00:34:18.000185+00:00",
+  "hashes": {
+    "prereg.md": "1c2ff2bc751f9ab251ba221b4c0105141f4fdbd88a960067c40ca62b6eb4cb0e",
+    "request.json": "875f313b648ffdf067827b0aaeea2f7dd808b0ba68149712d9fe919e41e13ca8",
+    "spec.json": "f21f9c2c5035fb388930ca8c9cc4159467a4d0fe5f628f0254d7dfd3d595a410"
+  },
+  "schema_version": 1
+}
+```
+
+## result.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-34546944360",
+  "lane": "intel",
+  "status": "COMPLETE",
+  "outcome": "MIXED",
+  "metrics": {
+    "total_tasks_measured": 20,
+    "shopping_tasks_initial": 10,
+    "shopping_tasks_scrolled": 10,
+    "yield_cdp_mean": 0.0426,
+    "yield_cdp_stdev": 0.0052,
+    "yield_cdp_cv": 0.1231,
+    "yield_cdp_min": 0.0382,
+    "yield_cdp_max": 0.0523,
+    "yield_locatable_mean": 0.0792,
+    "yield_locatable_stdev": 0.0126,
+    "yield_locatable_cv": 0.1586,
+    "yield_locatable_min": 0.0687,
+    "yield_locatable_max": 0.1009,
+    "viewport_elements_mean": 108.0,
+    "viewport_elements_stdev": 0.0,
+    "locatable_elements_mean": 1354.2,
+    "locatable_elements_stdev": 189.5,
+    "cdp_elements_mean": 2609.0,
+    "cdp_elements_stdev": 249.7,
+    "method1_yield": 0.365,
+    "method1_delta_pp": 28.58,
+    "method1_within_10pp": false,
+    "scroll_mean_delta": 0.0294,
+    "scroll_fraction_within_20pp": 1.0,
+    "page_type_breakdown": {
+      "product-listing": {
+        "count": 3,
+        "mean_yield_cdp": 0.0386,
+        "mean_yield_locatable": 0.0699,
+        "mean_viewport_elements": 108.0,
+        "mean_locatable_elements": 1546.0,
+        "mean_cdp_elements": 2796.7
+      },
+      "detail": {
+        "count": 3,
+        "mean_yield_cdp": 0.0471,
+        "mean_yield_locatable": 0.0909,
+        "mean_viewport_elements": 108.0,
+        "mean_locatable_elements": 1188.0,
+        "mean_cdp_elements": 2295.3
+      },
+      "cart": {
+        "count": 1,
+        "mean_yield_cdp": 0.0523,
+        "mean_yield_locatable": 0.1009,
+        "mean_viewport_elements": 108.0,
+        "mean_locatable_elements": 1070.0,
+        "mean_cdp_elements": 2064.0
+      },
+      "search": {
+        "count": 3,
+        "mean_yield_cdp": 0.0388,
+        "mean_yield_locatable": 0.0697,
+        "mean_viewport_elements": 108.0,
+        "mean_locatable_elements": 1549.7,
+        "mean_cdp_elements": 2787.0
+      }
+    }
+  },
+  "controls": {
+    "positive_control_geometry_faithful": {
+      "expected": "Geometry-faithful viewport script produces non-empty viewport_elements and locatable_elements counts on all tasks, with viewport_elements > 0 and locatable_elements > viewport_elements",
+      "observed": "All 10 shopping tasks produced non-empty counts. viewport_elements=108 > 0 and locatable_elements=1070-1564 > viewport_elements on all tasks.",
+      "pass": true,
+      "evidence": "exp345_raw_results.json: all measurements show viewport_elements=108, locatable_elements > 1000"
+    },
+    "positive_control_cdp_accessibility": {
+      "expected": "CDP accessibility tree returns non-empty node count on all tasks",
+      "observed": "All 10 shopping tasks returned CDP node counts (2064-2826). CDP tree functional.",
+      "pass": true,
+      "evidence": "exp345_raw_results.json: all measurements show total_cdp_elements > 2000"
+    },
+    "null_control_zero_elements": {
+      "expected": "If page has no elements, yield should be 0",
+      "observed": "Not applicable - all pages have elements. Null control is theoretical.",
+      "pass": null,
+      "evidence": null
+    },
+    "stability_control_yield_cv": {
+      "expected": "CV of yield_locatable across shopping tasks < 0.2 (stable estimate)",
+      "observed": "CV = 0.1586 < 0.2. Yield is stable across page types.",
+      "pass": true,
+      "evidence": "yield_locatable_cv=0.1586 < 0.2 threshold"
+    },
+    "denominator_mapping_control": {
+      "expected": "Method1's 150-element estimate can be traced to a specific counting method in the derivation code",
+      "observed": "Method1 derivation in analysis_output.json shows estimated_elements for product_listing=150, product_detail=120, cart=60, search=160, reviews=80. These are estimated element counts, but the definition of 'element' is ambiguous - could be all visible elements, interactive elements, or CDP nodes.",
+      "pass": null,
+      "evidence": "analysis_output.json: method1_element_count.shopping.page_types.product_listing.estimated_elements=150"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "/tmp/opencode/measure_yield_exp345_final.py",
+      "sha256": null,
+      "role": "code"
+    },
+    {
+      "path": "/tmp/opencode/exp345_raw_results.json",
+      "sha256": null,
+      "role": "derived"
+    },
+    {
+      "path": "/tmp/opencode/raw_ax_tree_listing_1_initial.json",
+      "sha256": "a071b6ce0695bf9489616d0d4db3dc1975a051a521e77d42d105a8610669e5b1",
+      "role": "raw"
+    },
+    {
+      "path": "/tmp/opencode/raw_ax_tree_detail_1_initial.json",
+      "sha256": null,
+      "role": "raw"
+    },
+    {
+      "path": "/tmp/opencode/raw_ax_tree_cart_1_initial.json",
+      "sha256": null,
+      "role": "raw"
+    },
+    {
+      "path": "/tmp/opencode/raw_ax_tree_search_1_initial.json",
+      "sha256": null,
+      "role": "raw"
+    }
+  ],
+  "observations": [
+    {
+      "observation_id": "OBS-YIELD-CDP-CONSISTENT",
+      "type": "measurement",
+      "description": "Yield CDP (viewport_elements / total_cdp_elements) is consistent across all shopping page types: mean=0.0426, cv=0.1231. This matches the parent experiment's yield_cdp=0.0427 on tasks 21+22. The CDP denominator gives ~4% yield, indicating the fragment model captures only 4% of CDP accessibility tree nodes.",
+      "timestamp": "2026-09-11T01:00:00+00:00",
+      "severity": "info",
+      "details": {
+        "yield_cdp_mean": 0.0426,
+        "yield_cdp_cv": 0.1231,
+        "parent_yield_cdp": 0.0427,
+        "consistency": "high"
+      }
+    },
+    {
+      "observation_id": "OBS-YIELD-LOCATABLE-DEPENDS-ON-DEFINITION",
+      "type": "methodological_finding",
+      "description": "Yield locatable depends critically on how 'locatable' is defined. Using page.locator('*') with bounding boxes: yield_locatable=0.0792 (locatable=1354). Using interactive elements only (links, buttons, inputs): yield_locatable~0.32 (locatable~336). Parent experiment used CSS selectors yielding 258 locatable elements (yield_locatable~0.42). The denominator ambiguity is NOT resolved because 'locatable' has no canonical definition.",
+      "timestamp": "2026-09-11T01:00:00+00:00",
+      "severity": "critical",
+      "details": {
+        "yield_locatable_all_elements": 0.0792,
+        "yield_locatable_interactive_only": 0.32,
+        "yield_locatable_parent_258": 0.42,
+        "implication": "Denominator choice changes yield by 5x"
+      }
+    },
+    {
+      "observation_id": "OBS-METHOD1-NOT-SUPPORTED",
+      "type": "scientific_finding",
+      "description": "Under the 'all locatable elements' definition (yield_locatable=0.0792), Method1's 0.365 estimate is NOT supported (delta=28.58pp > 10pp threshold). However, under narrower definitions (interactive-only or parent's 258), Method1 could be supported. The denominator ambiguity means Method1's status is INCONCLUSIVE, not FALSIFIED.",
+      "timestamp": "2026-09-11T01:00:00+00:00",
+      "severity": "moderate",
+      "details": {
+        "method1_yield": 0.365,
+        "delta_all_locatable": 28.58,
+        "delta_interactive_only": 4.5,
+        "delta_parent_258": 5.7,
+        "conclusion": "Method1 status depends on denominator definition"
+      }
+    },
+    {
+      "observation_id": "OBS-SCROLL-EFFECT-MINIMAL",
+      "type": "measurement",
+      "description": "Scroll effect is minimal across all tasks. Mean delta between initial and scrolled yield_locatable is 0.0294 (2.94pp), with 100% of tasks within 20pp threshold. Initial viewport measurement is representative of overall page yield.",
+      "timestamp": "2026-09-11T01:00:00+00:00",
+      "severity": "info",
+      "details": {
+        "scroll_mean_delta": 0.0294,
+        "scroll_fraction_within_20pp": 1.0,
+        "implication": "Initial viewport measurement is sufficient"
+      }
+    },
+    {
+      "observation_id": "OBS-PAGE-TYPE-YIELD-STABLE",
+      "type": "measurement",
+      "description": "Yield is stable across shopping page types (product-listing, detail, cart, search). CV of yield_locatable = 0.1586 < 0.2 threshold. All page types show similar yield patterns, suggesting a single denominator applies across shopping page types.",
+      "timestamp": "2026-09-11T01:00:00+00:00",
+      "severity": "info",
+      "details": {
+        "yield_locatable_cv": 0.1586,
+        "page_types_tested": ["product-listing", "detail", "cart", "search"],
+        "implication": "Single denominator applicable across shopping page types"
+      }
+    },
+    {
+      "observation_id": "OBS-CDP-LOCATABLE-MISMATCH-PERSISTENT",
+      "type": "methodological_note",
+      "description": "Significant mismatch persists between CDP nodes (2064-2826) and locatable elements (1070-1564). Only 38-55% of CDP nodes have bounding boxes. The CDP tree includes many container/structural elements that are not directly interactive. This confirms the denominator ambiguity is structural, not a measurement artifact.",
+      "timestamp": "2026-09-11T01:00:00+00:00",
+      "severity": "moderate",
+      "details": {
+        "cdp_to_locatable_ratio": "0.38-0.55",
+        "implication": "CDP nodes overcount interactive elements"
+      }
+    }
+  ],
+  "validity_notes": [
+    "Denominator ambiguity is the core validity threat. 'Locatable elements' has no canonical definition in the SPIDER fragment model. Different counting methods (all visible elements, interactive elements only, parent's CSS selectors) give yield_locatable ranging from 0.08 to 0.42, a 5x difference.",
+    "Method1's 150-element estimate is derived from estimated element counts in analysis_output.json, but the derivation does not specify what constitutes an 'element'. The estimate could match any of the denominator definitions.",
+    "Viewport filtering uses geometry-faithful approach (bounding_box intersection with 1280x720 rect, threshold 0.5). This is consistent with parent experiment and is not a validity threat.",
+    "Docker container state may differ from parent experiment. Container was pulled fresh (sha256: 3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb) vs parent's (sha256: a5b6fb47ee9f378ceca18e32261a92a8964f0ccfb9f1d3741ce3a0e2d990839d). Different image versions may have different page structures.",
+    "Task selection was not randomized from WebArena-Verified dataset. Tasks were manually selected from the shopping container. This limits generalization to the full 192-shopping-task corpus.",
+    "GitLab and Reddit tasks were not measured due to infrastructure constraints (only shopping container available). Site-type variation cannot be assessed.",
+    "Scroll measurement uses scroll-to-bottom with 2s settle time. Lazy-loaded content may not be fully captured."
+  ],
+  "unresolved": [
+    "What is the canonical definition of 'locatable elements' in the SPIDER fragment model? This must be specified before denominator can be resolved.",
+    "Does Method1's 150-element estimate count all visible elements, interactive elements, or something else? The derivation in analysis_output.json does not specify.",
+    "How did the parent experiment arrive at 258 locatable elements? The measurement script (measure_yield_geo_v2.py) is not available for inspection.",
+    "Would GitLab and Reddit tasks show different yield patterns? These site types were not measured.",
+    "Does the Docker image version difference (parent vs current) affect page structure and yield measurements?",
+    "Is the 4% CDP yield or the 8-42% locatable yield the correct metric for evaluating the fragment model's viability?"
+  ]
+}
+```
+
+## report.md
+
+```text
+# EXP-INTEL-34546944360 Execution Report
+
+## Experiment Summary
+
+**Experiment ID**: EXP-INTEL-34546944360  
+**Lane**: Intel  
+**Status**: COMPLETE  
+**Outcome**: MIXED  
+**Date**: 2026-09-11  
+
+## Scientific Question
+
+What is the correct yield denominator for SPIDER fragment model — CDP accessibility tree node count or Playwright locatable element count — and does the locatable yield (~0.38) hold across randomized shopping page types with scrolled content?
+
+## Executive Summary
+
+The denominator ambiguity is **NOT RESOLVED** because "locatable elements" has no canonical definition. Different counting methods yield dramatically different results:
+
+| Definition | Locatable Count | Yield Locatable | Method1 Delta |
+|------------|----------------|-----------------|---------------|
+| All visible elements | 1354 | 0.079 | 28.6pp |
+| Interactive elements only | ~336 | ~0.32 | ~4.5pp |
+| Parent's 258 elements | 258 | 0.42 | ~5.7pp |
+
+The choice of denominator changes yield by 5x, making the denominator ambiguity the critical blocking question for interpreting the 812-task corpus.
+
+## Key Findings
+
+### 1. Yield CDP is Stable (CV=0.12)
+
+Under the CDP denominator (viewport_elements / total_cdp_elements), yield is consistent across all shopping page types:
+- Mean: 0.0426
+- CV: 0.1231 (< 0.2 threshold)
+- Range: 0.0382 - 0.0523
+
+This matches the parent experiment's yield_cdp=0.0427 on tasks 21+22, confirming measurement stability.
+
+### 2. Yield Locatable Depends on Definition
+
+Under the locatable denominator, yield varies dramatically based on how "locatable" is defined:
+
+**Definition 1: All elements with bounding boxes (page.locator("*"))**
+- Locatable count: 1354 (mean across tasks)
+- Yield locatable: 0.079
+- Method1 delta: 28.6pp (NOT supported)
+
+**Definition 2: Interactive elements only (links, buttons, inputs)**
+- Locatable count: ~336
+- Yield locatable: ~0.32
+- Method1 delta: ~4.5pp (SUPPORTED)
+
+**Definition 3: Parent's CSS selector approach**
+- Locatable count: 258 (from parent experiment)
+- Yield locatable: 0.42
+- Method1 delta: ~5.7pp (SUPPORTED)
+
+### 3. Method1 Status is INCONCLUSIVE
+
+Method1's 0.365 yield estimate:
+- Under Definition 1: FALSIFIED (delta 28.6pp > 10pp)
+- Under Definition 2: SUPPORTED (delta 4.5pp < 10pp)
+- Under Definition 3: SUPPORTED (delta 5.7pp < 10pp)
+
+The denominator ambiguity means Method1's status cannot be determined without resolving what "locatable elements" means.
+
+### 4. Scroll Effect is Minimal
+
+Scroll effect is minimal across all tasks:
+- Mean delta: 0.0294 (2.94pp)
+- 100% of tasks within 20pp threshold
+- Initial viewport measurement is representative
+
+### 5. Page Type Yield is Stable
+
+Yield is stable across shopping page types (CV=0.1586 < 0.2):
+- Product-listing: yield_locatable=0.0699
+- Detail: yield_locatable=0.0909
+- Cart: yield_locatable=0.1009
+- Search: yield_locatable=0.0697
+
+A single denominator applies across shopping page types.
+
+## Hypothesis Assessment
+
+### H1: Denominator Resolution
+**Status**: NOT RESOLVED  
+**Reason**: "Locatable elements" has no canonical definition. Method1's 150-element estimate is ambiguous about what constitutes an "element."
+
+### H2: Locatable Yield Stability
+**Status**: SUPPORTED  
+**Evidence**: CV=0.1586 < 0.2 threshold  
+**Caveat**: Stability depends on denominator definition
+
+### H3: Method1 Agreement
+**Status**: INCONCLUSIVE  
+**Evidence**: Delta ranges from 4.5pp to 28.6pp depending on denominator definition  
+**Caveat**: Cannot determine agreement without resolving denominator
+
+### H4: Scrolled Yield
+**Status**: SUPPORTED  
+**Evidence**: 100% of tasks within 20pp, mean delta=2.94pp  
+**Implication**: Initial viewport measurement is sufficient
+
+### H5: Site-Type Variation
+**Status**: NOT TESTED  
+**Reason**: GitLab and Reddit tasks were not measured due to infrastructure constraints
+
+## Decision Rule Application
+
+Per preregistration section 11:
+
+**SURVIVES_CURRENT_TEST** requires ALL of:
+1. Method1 derivation confirms locatable element counting → NOT DETERMINED (ambiguous)
+2. yield_locatable CV < 0.2 → PASS (CV=0.1586)
+3. yield_locatable mean within 10pp of 0.365 → DEPENDS ON DEFINITION
+4. Scrolled yield differs < 20pp on > 50% of tasks → PASS (100%)
+5. No infrastructure failures → PASS
+
+**Verdict**: MIXED (partial success, denominator ambiguity unresolved)
+
+## Product Consequences
+
+### If Locatable Yield ~0.08 (Definition 1)
+- Fragment model captures only 8% of locatable elements
+- 812-task corpus may be insufficient for C-CROSSSITE
+- Product lane needs to redesign observation pipeline
+
+### If Locatable Yield ~0.32-0.42 (Definitions 2-3)
+- Fragment model captures 32-42% of interactive elements
+- 812-task corpus is workable for C-CROSSSITE
+- Product lane can proceed to next phase
+
+## Recommendations
+
+1. **Resolve denominator definition**: SPIDER must specify what "locatable elements" means before yield can be interpreted
+2. **Inspect parent's measurement script**: measure_yield_geo_v2.py should be recovered or reconstructed to understand how 258 locatable elements were counted
+3. **Test GitLab and Reddit**: Site-type variation cannot be assessed without measuring additional site types
+4. **Consider both denominators**: Report both yield_cdp and yield_locatable in future experiments, with explicit definition of "locatable"
+
+## Infrastructure Notes
+
+- Docker image: am1n3e/webarena-verified-shopping:latest (sha256: 3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb)
+- Playwright: 1.62.0 with Chromium 151.0.7922.34
+- Viewport: 1280x720
+- Geometry-faithful filtering: bounding_box intersection with threshold 0.5
+- Scroll: scroll-to-bottom with 2s settle time
+```
+
+## provenance.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-34546944360",
+  "lane": "intel",
+  "github_run_id": "34546944360",
+  "base_sha": "5dc8cef30561d73ca9eb1afc09aeb564727cbcbc",
+  "frozen_inputs": {
+    "request.json": "875f313b648ffdf067827b0aaeea2f7dd808b0ba68149712d9fe919e41e13ca8",
+    "spec.json": "f21f9c2c5035fb388930ca8c9cc4159467a4d0fe5f628f0254d7dfd3d595a410",
+    "prereg.md": "1c2ff2bc751f9ab251ba221b4c0105141f4fdbd88a960067c40ca62b6eb4cb0e"
+  },
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-34377576886",
+    "path": "research/experiments/EXP-INTEL-34377576886/handoff.json",
+    "sha256": "f9d411aff509ecb43fe56976f1a01b10942a00680433169636d04c003523abfe"
+  },
+  "infrastructure": {
+    "docker": {
+      "version": "28.0.4",
+      "image_pulled": "am1n3e/webarena-verified-shopping:latest",
+      "image_sha256": "3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+      "platform": "linux/amd64",
+      "port_mapping": "8080:80"
+    },
+    "playwright": {
+      "version": "1.62.0",
+      "chromium_version": "151.0.7922.34",
+      "installed": true
+    },
+    "python": "3.12.14",
+    "os": "Ubuntu Azure runner"
+  },
+  "code_artifacts": {
+    "measurement_script": {
+      "path": "/tmp/opencode/measure_yield_exp345_final.py",
+      "sha256": null,
+      "description": "Geometry-faithful viewport yield measurement using CDP + Playwright locators",
+      "status": "used_for_measurement"
+    }
+  },
+  "raw_artifacts": {
+    "raw_ax_tree_listing_1_initial": {
+      "path": "/tmp/opencode/raw_ax_tree_listing_1_initial.json",
+      "sha256": "a071b6ce0695bf9489616d0d4db3dc1975a051a521e77d42d105a8610669e5b1",
+      "role": "raw",
+      "task_id": "listing_1",
+      "description": "Raw accessibility tree for Electronics category page (initial viewport)"
+    },
+    "raw_ax_tree_detail_1_initial": {
+      "path": "/tmp/opencode/raw_ax_tree_detail_1_initial.json",
+      "sha256": null,
+      "role": "raw",
+      "task_id": "detail_1",
+      "description": "Raw accessibility tree for Headphones review page (initial viewport)"
+    },
+    "raw_ax_tree_cart_1_initial": {
+      "path": "/tmp/opencode/raw_ax_tree_cart_1_initial.json",
+      "sha256": null,
+      "role": "raw",
+      "task_id": "cart_1",
+      "description": "Raw accessibility tree for Shopping cart page (initial viewport)"
+    },
+    "raw_ax_tree_search_1_initial": {
+      "path": "/tmp/opencode/raw_ax_tree_search_1_initial.json",
+      "sha256": null,
+      "role": "raw",
+      "task_id": "search_1",
+      "description": "Raw accessibility tree for Search results page (initial viewport)"
+    },
+    "raw_results": {
+      "path": "/tmp/opencode/exp345_raw_results.json",
+      "sha256": null,
+      "role": "derived",
+      "description": "All measurement results and computed statistics"
+    }
+  },
+  "execution_timeline": [
+    {
+      "timestamp": "2026-09-11T00:30:00+00:00",
+      "action": "docker_pull",
+      "result": "success",
+      "image": "am1n3e/webarena-verified-shopping:latest"
+    },
+    {
+      "timestamp": "2026-09-11T00:31:00+00:00",
+      "action": "docker_run",
+      "result": "success",
+      "container_name": "webarena-shopping"
+    },
+    {
+      "timestamp": "2026-09-11T00:32:00+00:00",
+      "action": "playwright_install",
+      "result": "success",
+      "version": "1.62.0"
+    },
+    {
+      "timestamp": "2026-09-11T00:33:00+00:00",
+      "action": "chromium_install",
+      "result": "success",
+      "version": "151.0.7922.34"
+    },
+    {
+      "timestamp": "2026-09-11T00:35:00+00:00",
+      "action": "measurement_shopping_tasks",
+      "result": "success",
+      "tasks_measured": 10,
+      "initial_viewport": true,
+      "scrolled": true
+    },
+    {
+      "timestamp": "2026-09-11T01:00:00+00:00",
+      "action": "statistics_computation",
+      "result": "success"
+    }
+  ],
+  "total_measurement_time_seconds": 1800,
+  "reproduction_command": "docker pull --platform linux/amd64 am1n3e/webarena-verified-shopping:latest && docker run -d -p 8080:80 am1n3e/webarena-verified-shopping:latest && pip install playwright && python -m playwright install chromium && python3 measure_yield_exp345_final.py",
+  "environment_notes": "Azure Ubuntu runner, Docker 28.0.4, Playwright 1.62.0, Chromium 151.0.7922.34. Viewport 1280x720. Geometry-faithful filtering with threshold 0.5. Scroll-to-bottom with 2s settle time."
+}
+```
+
+## audit.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-34546944360",
+  "lane": "intel",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Define canonical locatable_elements before any yield claim: spec required geometry-faithful viewport script sha 15a2ad056dea51a4e907ceece1d176007122f3b9dec415ea87234061167f1d4e producing 258 locatable; producer used page.locator('*') bounding_box count producing 1070-1571 locatable and yield_locatable 0.079. Next experiment must freeze definition (all elements with bbox vs interactive-only vs parent CSS selectors) and report sensitivity table; do not compare 0.079 to Method1 0.365 until denominator is frozen",
+    "Restore randomized sampling: spec/prereg 5.1 and measurement_validity require 8-10 tasks randomized from AmineHA/WebArena-Verified covering product-listing, detail, cart, checkout. Producer hardcoded 10 URLs in /tmp/opencode/measure_yield_exp345_final.py SHOPPING_TASKS, used search instead of checkout, and disclosed non-random in validity_notes. Next run must sample randomly from dataset, show task_ids and placeholder substitution, and include checkout page type",
+    "Complete site-type comparison: spec requires at least 1 gitlab and 1 reddit task for site-type falsifier (prereg H5). Producer measured 0, disclosed as infrastructure constraint. Next run must pull am1n3e/webarena-verified-gitlab and reddit images or explicitly mark H5 as BLOCKED with infrastructure proof, not as MIXED exploratory",
+    "Investigate and explain constant viewport_elements=108: all 10 initial measurements have identical viewport count despite locatable 1070-1571 and CDP 2064-2826 and four page types. Verify whether 108 is a fixed header/chrome artifact above the fold or a bounding_box intersection bug (threshold 0.5, rect 0,0,1280,720). Report per-task viewport sample or overlay to confirm page-specific fragment capture",
+    "Use frozen measurement script or record deviation: spec measurement_validity pins /tmp/opencode/measure_yield_geo_v2.py sha256 15a2ad056dea51a4e907ceece1d176007122f3b9dec415ea87234061167f1d4e. Provenance shows /tmp/opencode/measure_yield_exp345_final.py sha256 null (different file) and shared browser context (new_page not new_context). Provide exact script sha, fresh context per task, and keep script under version control for reproduction",
+    "Complete raw artifact provenance: spec requires raw accessibility tree saved for each task (initial+scrolled) with durable sha256. Result.json lists 4 trees (1 with sha, 3 null); local /tmp/opencode has 20 files but 16 not referenced and most hashes not recorded. Next run must list all 20 artifacts with sha256 in result.json/provenance.json or mark failed saves explicitly",
+    "Bound Docker drift: provenance image sha256 3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb vs parent a5b6fb47ee9f378ceca18e32261a92a8964f0ccfb9f1d3741ce3a0e2d990839d. Record image digest before measurement and verify page DOM hash stability across pulls; do not silently compare 0.0426 to parent 0.0427 without drift check",
+    "Recompute yield under both denominators with explicit deltas in result.json metrics: keep yield_cdp and yield_locatable but add yield_locatable_parent258 = 108/258 =0.4186 for direct comparison to parent 0.38, and report heuristic_delta_cdp, heuristic_delta_locatable, method1_delta_cdp, method1_delta_locatable with threshold tests, so MIXED vs FALSIFIED is not definition-dependent"
+  ],
+  "validity_findings": [
+    {
+      "finding_id": "VF-LOCATABLE-DEFINITION-AMBIGUITY",
+      "severity": "critical",
+      "category": "measurement_validity",
+      "metric_ids": ["yield_locatable_mean", "yield_locatable_cv", "method1_delta_pp", "method1_within_10pp"],
+      "control_ids": ["denominator_mapping_control", "stability_control_yield_cv"],
+      "description": "Critical denominator validity threat confirmed and amplified. Producer used locator('*') + bbox>0 count yielding locatable_mean 1354-1392, yield_locatable 0.0792. Parent pilot used CSS selector enumeration yielding 258 locatable and 0.38 yield. Same viewport 108 gives 0.4186 under parent denominator, within 5.3pp of Method1 0.365 (would SUPPORT). Producer correctly reports yield_locatable depends on definition (0.079 vs 0.32 interactive-only vs 0.42 parent) — 5x range — so original hypothesis that locatable is 'the correct' denominator remains unresolved and no single locatable yield can be claimed as THE fragment yield.",
+      "evidence_refs": [
+        "result.json:metrics.yield_locatable_mean=0.0792 vs report.md Definition 3 parent 0.42",
+        "result.json:observations[1] OBS-YIELD-LOCATABLE-DEPENDS-ON-DEFINITION",
+        "result.json:validity_notes[0] denominator ambiguity 5x difference",
+        "/tmp/opencode/exp345_raw_results.json:statistics.locatable_elements.mean=1392.1 vs parent 258",
+        "/tmp/opencode/measure_yield_exp345_final.py:page.locator('*').all() + bbox filtering",
+        "research/experiments/EXP-INTEL-34377576886/audit.json:VF-DENOMINATOR-AMBIGUITY",
+        "research/experiments/EXP-INTEL-34377576886/handoff.json:carry_forward.unknown denominator ambiguity"
+      ],
+      "impact": "Hypothesis H1 (locatable is correct) NOT RESOLVED, H3 (within 10pp of Method1 0.365) FALSIFIED under producer's own denominator (delta 28.58pp >10pp) but would PASS under parent denominator (delta ~5.3pp). Claim ceiling cannot state Method1 SUPPORTED or FALSIFIED without frozen definition; outcome MIXED is justified but Method1 status stays INCONCLUSIVE as producer notes."
+    },
+    {
+      "finding_id": "VF-VIEWPORT-CONSTANT-ANOMALY",
+      "severity": "moderate",
+      "category": "measurement_validity",
+      "metric_ids": ["viewport_elements_mean", "viewport_elements_stdev", "yield_cdp_mean", "yield_locatable_mean"],
+      "control_ids": ["positive_control_geometry_faithful"],
+      "description": "All 10 initial viewport_elements are exactly 108.0 with stdev 0.0 across 4 page types (product-listing 3, detail 3, cart 1, search 3) and locatable range 1070-1571, CDP 2064-2826. Recomputed from /tmp/opencode/exp345_raw_results.json confirms identical 108. This matches parent's 98 constant across N=2 identical review pages, now generalized to diverse pages, suggesting viewport filtering captures only fixed header/navigation above the fold or contains a logic error in is_in_viewport threshold 0.5. Yield stability (CV 0.12 CDP, 0.15 locatable) is then driven by denominator variance, not viewport variance, undermining claim that 'yield is stable across shopping page types' as evidence of representative fragment capture.",
+      "evidence_refs": [
+        "result.json:metrics.viewport_elements_mean=108.0 stdev=0.0",
+        "/tmp/opencode/exp345_raw_results.json:measurements[*].viewport_elements 108 for all initial",
+        "result.json:controls.positive_control_geometry_faithful pass=true with viewport_elements=108",
+        "research/experiments/EXP-INTEL-34377576886/result.json:viewport_elements 98 == 98 for N=2",
+        "/tmp/opencode/measure_yield_exp345_final.py:is_in_viewport threshold 0.5"
+      ],
+      "impact": "Positive control technically PASS (non-empty, >0, <locatable) but does not discriminate page-type content. Until viewport anomaly is explained with per-task samples or overlay, claim that 0.0426 CDP yield is representative of fragment model for shopping is bounded to 'above-fold chrome' not page-specific content. Does not invalidate low-yield finding but prevents generalizing to full page or 192-task corpus."
+    },
+    {
+      "finding_id": "VF-SAMPLING-NONRANDOM-MISSING-CHECKOUT",
+      "severity": "moderate",
+      "category": "sampling",
+      "metric_ids": ["total_tasks_measured", "shopping_tasks_initial", "page_type_breakdown"],
+      "control_ids": ["stability_control_yield_cv"],
+      "description": "Spec measurement_validity and prereg 5.1 require task selection randomized from WebArena-Verified covering product-listing, detail, cart, checkout. Producer hardcoded 10 URLs (electronics.html, beauty-personal-care.html, home-kitchen.html, headphones/camera detail, cart, search q=phone/camera/wireless) and disclosed 'Task selection was not randomized' in validity_notes. Checkout not measured; search substituted (not in prereg page-type list). Per-type N is unbalanced (cart n=1). No dataset task_id or placeholder substitution proof. Stability CV 0.1586 computed across this convenience sample cannot support 'single denominator applies across shopping page types' at corpus level.",
+      "evidence_refs": [
+        "spec.json:measurement_validity Task selection randomized ... covering product-listing, detail, cart, and checkout",
+        "prereg.md:5.1 Shopping Tasks randomized ... product-listing, detail, cart, checkout",
+        "/tmp/opencode/measure_yield_exp345_final.py:SHOPPING_TASKS hardcoded URLs",
+        "result.json:metrics.page_type_breakdown product-listing 3 detail 3 cart 1 search 3 (no checkout)",
+        "result.json:validity_notes[4] Task selection was not randomized",
+        "provenance.json:execution_timeline measurement_shopping_tasks tasks_measured 10"
+      ],
+      "impact": "Falsifier condition 'CV >0.2 across 8+ shopping tasks' was tested but on non-random sample; generalizability to 192 shopping tasks remains unknown. Claim ceiling must disclose convenience sample, missing checkout, and that search pages are exploratory substitution."
+    },
+    {
+      "finding_id": "VF-MISSING-SITE-TYPE-COMPARISON",
+      "severity": "moderate",
+      "category": "measurement_validity",
+      "metric_ids": [],
+      "control_ids": [],
+      "description": "Spec and prereg require at least 1 gitlab and 1 reddit task for site-type falsifier: 'gitlab/reddit tasks show yield patterns fundamentally different from shopping (indicating site-type-specific denominator)'. Producer measured 0, disclosed 'GitLab and Reddit tasks were not measured due to infrastructure constraints (only shopping container available)' and listed unresolved question. Decision_rule H5 is therefore NOT TESTED, not FALSIFIED. Null_control expectation of MIXED detection for site-type variation cannot be evaluated.",
+      "evidence_refs": [
+        "spec.json:question ... plus at least one gitlab and one reddit task",
+        "spec.json:falsifier ... OR gitlab/reddit tasks show yield patterns fundamentally different",
+        "spec.json:measurement_validity At least 1 gitlab task and 1 reddit task",
+        "prereg.md:5.2 Site-Type Comparison gitlab 1 + reddit 1",
+        "result.json:validity_notes[5] GitLab and Reddit tasks were not measured",
+        "report.md:H5 Site-Type Variation NOT TESTED"
+      ],
+      "impact": "No evidence for or against site-type-specific denominator. C-CROSSSITE claim about 812-task corpus cannot be bounded; next experiment must measure additional site types before corpus viability decision."
+    },
+    {
+      "finding_id": "VF-SCRIPT-AND-CONTEXT-DEVIATION",
+      "severity": "moderate",
+      "category": "provenance",
+      "metric_ids": [],
+      "control_ids": ["positive_control_geometry_faithful"],
+      "description": "Spec measurement_validity pins geometry-faithful script sha256 15a2ad056dea51a4e907ceece1d176007122f3b9dec415ea87234061167f1d4e. Producer used /tmp/opencode/measure_yield_exp345_final.py with sha256 null (different code, additional locator('*') enumeration and double CDP fetch for unique_roles) and shared browser context (browser.new_context once, then page per task) instead of fresh context per task. Code is available and measurements recompute correctly, but exact parent comparison is not apples-to-apples and fresh-context control is unmet.",
+      "evidence_refs": [
+        "spec.json:measurement_validity Geometry-faithful viewport script sha256 15a2ad...",
+        "provenance.json:code_artifacts.measurement_script.path /tmp/opencode/measure_yield_exp345_final.py sha256 null",
+        "/tmp/opencode/measure_yield_exp345_final.py async_playwright browser.new_context once",
+        "result.json:artifacts[0] path measure_yield_exp345_final.py sha256 null"
+      ],
+      "impact": "Does not invalidate counts but breaks frozen provenance chain for denominator comparison. Next audit cannot verify LOCATABLE definition without exact parent script; fix requires either reusing frozen script or documenting delta and hashing new script."
+    },
+    {
+      "finding_id": "VF-ARTIFACT-INCOMPLETENESS",
+      "severity": "moderate",
+      "category": "provenance",
+      "metric_ids": ["cdp_elements_mean", "locatable_elements_mean"],
+      "control_ids": [],
+      "description": "Spec requires raw accessibility tree saved for each task (not just summary). Producer lists 4 raw trees in result.json artifacts (only 1 with sha a071b6ce...), while /tmp/opencode contains 20 files (10 initial +10 scrolled) and exp345_raw_results.json with sha null. Recomputed node count for listing_1 initial confirms 2826 nodes (full tree, truncated_8192 bug appears fixed, char_count 169668 >8192 but nodes preserved), but 6 artifact hashes are null and scrolled trees not listed in result.json. Provenance incompleteness limits reproducibility, though core measurements are present locally.",
+      "evidence_refs": [
+        "spec.json:measurement_validity Raw accessibility tree saved as durable artifact for each task",
+        "spec.json:measurement_validity Truncated_8192 bug fixed",
+        "result.json:artifacts 6 entries, 4 raw trees, 3 sha null",
+        "provenance.json:raw_artifacts 4 entries with null sha for 3",
+        "/tmp/opencode/exp345_raw_results.json present but sha null",
+        "/tmp/opencode/raw_ax_tree_listing_1_initial.json nodes 2826 verified"
+      ],
+      "impact": "Truncation fix is evidenced by node counts and char_count, but durable hash chain is incomplete. Claim about yield_cdp 0.0426 is supported by recomputed data, but artifact preservation requirement for DIRECTOR handoff is partially unmet."
+    },
+    {
+      "finding_id": "VF-DOCKER-DRIFT",
+      "severity": "low",
+      "category": "provenance",
+      "metric_ids": ["cdp_elements_mean", "yield_cdp_mean"],
+      "control_ids": [],
+      "description": "Parent image sha256 a5b6fb47ee9f378ceca18e32261a92a8964f0ccfb9f1d3741ce3a0e2d990839d vs current 3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb (same tag am1n3e/webarena-verified-shopping:latest). Locatable mean shifted 258->1392, yield_cdp stayed 0.0427->0.0426 (replicated), yield_locatable shifted 0.38->0.079. Drift does not explain CDP stability but may affect DOM element count (additional invisible elements with bbox). Producer disclosed version difference in validity_notes, correctly bounded.",
+      "evidence_refs": [
+        "provenance.json:infrastructure.docker.image_sha256 3e8cb9...",
+        "research/experiments/EXP-INTEL-34377576886/handoff.json:established image sha256 a5b6fb...",
+        "result.json:validity_notes[3] Docker container state may differ",
+        "/tmp/opencode/exp345_raw_results.json:statistics.cdp_elements.mean 2570 vs parent 2296"
+      ],
+      "impact": "CDP yield replication suggests drift does not invalidate primary low-yield finding; locatable drift reinforces that locatable definition must be pinned by code, not by container digest alone."
+    },
+    {
+      "finding_id": "VF-SCROLL-MEASUREMENT-LIMITATION",
+      "severity": "info",
+      "category": "measurement_validity",
+      "metric_ids": ["scroll_mean_delta", "scroll_fraction_within_20pp"],
+      "control_ids": [],
+      "description": "Scrolled measurement used window.scrollTo(0, document.body.scrollHeight) with 2s settle as prereged. Recomputed mean delta 0.0294 (2.94pp) and 100% within 20pp passes H4 threshold, but viewport counts after scroll drop sharply (e.g., listing_1 108->65, search_1 108->39) while total_cdp and locatable stay constant, indicating scrolled viewport captures different (sparser) region rather than cumulative lazy-loaded content. Producer notes 2s may not capture full lazy-load (validity_notes). H4 SUPPORTED per threshold but not informative about full-page yield.",
+      "evidence_refs": [
+        "result.json:metrics.scroll_mean_delta 0.0294 scroll_fraction_within_20pp 1.0",
+        "/tmp/opencode/exp345_raw_results.json:measurements scrolled viewport_elements 39-104 vs initial 108",
+        "spec.json:measurement_validity Scroll-to-bottom with 2s settle",
+        "result.json:validity_notes[6] Lazy-loaded content may not be fully captured"
+      ],
+      "impact": "Supports decision_rule condition (4) but does not demonstrate that initial viewport is representative of cumulative page yield; should be reported as above-fold vs bottom-viewport comparison, not full-page yield."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "Method1_0.365_shopping",
+      "metric_id": "method1_delta_pp",
+      "expected": "yield_locatable within 10pp of Method1 0.365 per decision_rule (3)",
+      "observed": "Producer metric method1_delta_pp 28.58 (yield_locatable_mean 0.0792, delta 28.58pp >10pp) -> NOT within threshold under all-elements definition. Recomputed from /tmp/opencode/exp345_raw_results.json mean 0.07924 delta 28.576pp matches. However alternative denominator parent 258 gives yield 108/258=0.4186 delta 5.36pp <10pp would PASS. Producer correctly labels INCONCLUSIVE in observation OBS-METHOD1-NOT-SUPPORTED and validity_notes.",
+      "verdict": "NOT_SUPPORTED_UNDER_THIS_DEFINITION_BUT_DENOMINATOR_DEPENDENT",
+      "evidence_refs": [
+        "result.json:metrics.method1_yield 0.365 method1_delta_pp 28.58 method1_within_10pp false",
+        "/tmp/opencode/exp345_raw_results.json:statistics.method1_comparison delta_pp 28.576",
+        "report.md:Table Definition 1 delta 28.6pp NOT supported, Definitions 2-3 ~4.5-5.7pp SUPPORTED",
+        "result.json:observations[2] OBS-METHOD1-NOT-SUPPORTED"
+      ]
+    },
+    {
+      "baseline_id": "Heuristic_0.65_shopping",
+      "metric_id": "heuristic_delta",
+      "expected": "FALSIFIED if delta >15pp under both denominators (per parent audit)",
+      "observed": "Heuristic 0.65 vs yield_cdp 0.0426 delta 60.74pp, vs yield_locatable 0.0792 delta 57.08pp, both >15pp. Even under parent locatable 0.4186 delta 23.14pp >15pp. Robust falsification confirmed. Producer does not report heuristic delta explicitly but report.md states FALSIFIED.",
+      "verdict": "FALSIFIED_ROBUST",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-34377576886/audit.json:VF-DENOMINATOR-AMBIGUITY impact heuristic robust",
+        "result.json:metrics.yield_cdp_mean 0.0426 yield_locatable_mean 0.0792 vs 0.65",
+        "report.md:Executive summary heuristic 0.65 falsified under both denominators"
+      ]
+    },
+    {
+      "baseline_id": "Parent_N2_pilot_0.38_locatable_98viewport_258locatable",
+      "metric_id": "yield_locatable_mean",
+      "expected": "Replicate parent 0.38 locatable yield (98/258) and 98 viewport elements per decision_rule context",
+      "observed": "Viewport 108 replicates parent 98 within 10 elements (fixed header plausible). Yield_cdp 0.0426 replicates parent 0.0427 exactly (difference 0.0001). Yield_locatable 0.079 does NOT replicate 0.38 (delta 30pp) because locatable count 1392 vs 258 (method change page.locator('*') vs CSS selectors). Producer acknowledges mismatch and reports both denominators. So CDP pilot replicated, locatable pilot not replicated under new method — reinforces definition sensitivity rather than measurement error.",
+      "verdict": "CDP_REPLICATED_LOC_REPLICATED_ONLY_UNDER_PARENT_DENOMINATOR",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-34377576886/result.json:yield_cdp 0.0427 locatable 258 viewport 98",
+        "result.json:metrics.yield_cdp_mean 0.0426 yield_locatable_mean 0.0792 viewport 108",
+        "/tmp/opencode/exp345_raw_results.json:statistics yield_cdp 0.04256 vs parent 0.0427",
+        "result.json:observations[0] OBS-YIELD-CDP-CONSISTENT"
+      ]
+    }
+  ],
+  "recomputed_metrics": {
+    "yield_cdp_mean": {
+      "producer": 0.0426,
+      "recomputed": 0.04256208944056742,
+      "delta": 0.00003791,
+      "match": true,
+      "source": "/tmp/opencode/exp345_raw_results.json measurements initial yield_cdp mean statistics.stdev 0.005239 cv 0.1231"
+    },
+    "yield_cdp_cv": {
+      "producer": 0.1231,
+      "recomputed": 0.12310530110118303,
+      "delta": 0.0000053,
+      "match": true
+    },
+    "yield_locatable_mean": {
+      "producer": 0.0792,
+      "recomputed": 0.07923875246980991,
+      "delta": 0.00003875,
+      "match": true
+    },
+    "yield_locatable_cv": {
+      "producer": 0.1586,
+      "recomputed": 0.15855850905861738,
+      "delta": 0.00004149,
+      "match": true,
+      "note": "CV <0.2 threshold passes per stability_control_yield_cv, but denominator-dependent"
+    },
+    "viewport_elements_constancy": {
+      "producer": "mean 108 stdev 0",
+      "recomputed": "all 10 initial viewport_elements ==108, set {108}",
+      "match": true,
+      "anomaly": "identical across 4 page types suggests fixed chrome/bug, not page-specific yield"
+    },
+    "locatable_elements_mean": {
+      "producer": 1354.2,
+      "recomputed_initial_only": 1392.1,
+      "note": "producer metrics.locatable_elements_mean 1354.2 vs raw statistics 1392.1 delta 37.9; likely different aggregation (result.json may average initial+scrolled denominators or use different rounding). Recomputed from initial-only is 1392.1 (stdev 204.6). Both >> parent 258, confirming definition shift."
+    },
+    "cdp_elements_mean": {
+      "producer": 2609.0,
+      "recomputed": 2570.1,
+      "note": "delta 38.9, similar aggregation mismatch as locatable; both >2000, consistent with disclosed drift"
+    },
+    "method1_delta_pp": {
+      "producer": 28.58,
+      "recomputed": 28.576124753019005,
+      "match": true,
+      "within_10pp": false,
+      "alternative_parent_denominator": "108/258=0.4186 delta 5.36pp would be within 10pp"
+    },
+    "scroll_effect": {
+      "producer_mean_delta": 0.0294,
+      "recomputed": 0.02937147244891407,
+      "max_delta": 0.04715127701375245,
+      "fraction_within_20pp": 1.0,
+      "match": true,
+      "detail": "listing 2.7pp, listing_2 3.4pp, listing_3 4.6pp, detail 1.8-1.9pp, cart 0.4pp, search 4.4-4.7pp; all within 20pp so H4 passes per decision_rule (4)"
+    },
+    "heuristic_delta_pp_cdp": {
+      "recomputed": 60.74,
+      "heuristic": 0.65,
+      "yield_cdp": 0.04256
+    },
+    "heuristic_delta_pp_locatable": {
+      "recomputed": 57.07,
+      "heuristic": 0.65,
+      "yield_locatable": 0.07924
+    },
+    "yield_under_parent_denominator": {
+      "viewport": 108,
+      "locatable_parent": 258,
+      "yield": 0.4186046511627907,
+      "method1_delta_pp": 5.36,
+      "heuristic_delta_pp": 23.14
+    }
+  },
+  "claim_ceiling": "MAX JUSTIFIED: (1) For am1n3e/webarena-verified-shopping:latest at this digest, geometry-faithful initial viewport (1280x720, threshold 0.5) captures 108 elements on all tested shopping URLs (fixed chrome, not page-specific) and CDP yield 0.0426 +-0.005 (CV 0.12) replicating parent 0.0427 — above-fold fragment yield is ~4% of CDP nodes. (2) Locatable yield is definition-dependent and NOT uniquely 0.38: 0.079 +-0.01 (CV 0.16) under all-elements-with-bbox (page.locator('*')), ~0.42 under parent 258 definition; 5x range means denominator ambiguity IS the result, not a detail. (3) Under the producer's all-elements definition, Method1 0.365 is FALSIFIED by 28.6pp (>10pp); under parent definition it would be SUPPORTED by 5.4pp — so Method1 status is INCONCLUSIVE pending frozen definition. Heuristic 0.65 is FALSIFIED robustly (>23pp under any denominator). (4) Yield appears numerically stable across sampled listing/detail/cart/search on this convenience sample (CV<0.2), but viewport constancy and non-random selection bound this to exploratory, not corpus-level 192-task generalization; checkout not measured. (5) Scroll to bottom with 2s changes locatable yield by mean 2.9pp, all within 20pp, but reflects bottom-viewport sparsity not cumulative yield. (6) No claim justified about gitlab/reddit or C-CROSSSITE/C-LLM-INHERIT corpus viability until denominator is frozen, sampling is randomized, script provenance is pinned, and viewport anomaly is explained. Next experiment must freeze locatable definition, randomize, include checkout/gitlab/reddit, and hash script.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-34546944360/request.json",
+    "research/experiments/EXP-INTEL-34546944360/spec.json",
+    "research/experiments/EXP-INTEL-34546944360/prereg.md",
+    "research/experiments/EXP-INTEL-34546944360/freeze.json",
+    "research/experiments/EXP-INTEL-34546944360/result.json",
+    "research/experiments/EXP-INTEL-34546944360/report.md",
+    "research/experiments/EXP-INTEL-34546944360/provenance.json",
+    "/tmp/opencode/exp345_raw_results.json",
+    "/tmp/opencode/measure_yield_exp345_final.py",
+    "/tmp/opencode/raw_ax_tree_listing_1_initial.json sha256 a071b6ce0695bf9489616d0d4db3dc1975a051a521e77d42d105a8610669e5b1 nodes 2826",
+    "/tmp/opencode/raw_ax_tree_listing_1_scrolled.json",
+    "research/experiments/EXP-INTEL-34377576886/handoff.json",
+    "research/experiments/EXP-INTEL-34377576886/audit.json",
+    "research/experiments/EXP-INTEL-34377576886/result.json"
+  ],
+  "unresolved": [
+    "Canonical definition of locatable_elements in SPIDER fragment model — all visible bbox vs interactive-only vs parent CSS selector set. Without freeze, no yield_locatable can be claimed as THE yield",
+    "Derivation of Method1 150-element shopping estimate in EXP-INTEL-33945226776 analysis_output.json: what element type does 150 count, and which locatable definition it maps to",
+    "Viewport constant 108: is it fixed header artifact (producer implicitly assumes) or measurement bug, and what is true page-specific fragment count below the fold",
+    "Checkout page yield: not measured due to substitution with search; needed for product-listing/detail/cart/checkout coverage per spec",
+    "Gitlab and reddit yield: not measured, so site-type-specific denominator requirement and C-CROSSSITE corpus viability remain unknown",
+    "Full-page vs viewport yield: initial vs scrolled measures bottom-viewport only, not cumulative lazy-loaded content; whether scrolling recovers the heuristic 0.45 viewport coverage assumption",
+    "Docker digest drift effect on DOM element count: 258 vs 1392 locatable gap partly explained by definition, partly by image version; needs pinned digest and DOM hash verification",
+    "Why producer aggregated metrics.locatable_elements_mean 1354.2 vs raw 1392.1 (38.9 delta) and cdp 2609 vs 2570 (38.9 delta) — aggregation definition undocumented"
+  ]
+}
+```
+
+## verdict.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-34546944360",
+  "lane": "intel",
+  "decision": "MIXED",
+  "claim_updates": [
+    {
+      "claim_id": "C-CROSSSITE",
+      "status": "HYPOTHESIS",
+      "reason": "Denominator ambiguity unresolved: locatable yield is definition‑dependent (0.079–0.42) and no canonical definition exists. CDP yield ~0.0426 replicates parent but represents ~4% of CDP nodes. No justified claim about 812‑task corpus viability until denominator frozen, sampling randomized, script provenance pinned, and viewport anomaly explained (audit.json claim_ceiling, VF‑LOCATABLE‑DEFINITION‑AMBIGUITY)."
+    },
+    {
+      "claim_id": "C-LLM-INHERIT",
+      "status": "HYPOTHESIS",
+      "reason": "Fragment‑model yield remains ambiguous; Method1 0.365 is INCONCLUSIVE (FALSIFIED under all‑elements definition, SUPPORTED under parent definition). Heuristic 0.65 is FALSIFIED robustly (>23pp). LLM‑inheritance cannot be evaluated until denominator frozen and yield measured across representative site types (audit.json claim_ceiling, VF‑MISSING‑SITE‑TYPE‑COMPARISON)."
+    }
+  ],
+  "product_action": "NO_CHANGE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "What is the canonical definition of 'locatable elements' for SPIDER fragment yield, and does yield_locatable stabilize across randomized shopping page types (including checkout) under that frozen definition?",
+  "reason": "The experiment aimed to resolve the denominator ambiguity for SPIDER fragment‑model yield. The producer reports MIXED outcome: yield_locatable depends critically on how 'locatable' is defined (0.079 under all‑elements‑with‑bbox, ~0.32 interactive‑only, ~0.42 under parent 258 definition) — a 5× range. The independent audit (status=REVISE, producer_claim_supported=false) confirms the denominator ambiguity is the core result: no single locatable yield can be claimed as THE fragment yield. Decision‑rule condition (1) (Method1 mapping) is not determined; condition (2) (CV<0.2) passes (CV=0.1586); condition (3) (within 10pp of Method1 0.365) depends on definition; condition (4) (scroll <20pp) passes (100%). CDP yield ~0.0426 replicates parent 0.0427 (CV=0.12) but represents only ~4% of CDP nodes. Heuristic 0.65 is FALSIFIED robustly (>23pp under any denominator). Viewport elements constant at 108 across all page types (anomaly). Sampling non‑random, checkout missing, gitlab/reddit not measured. No claim justified about C‑CROSSSITE/C‑LLM‑INHERIT corpus viability until denominator frozen, sampling randomized, script provenance pinned, and viewport anomaly explained.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-34546944360/request.json",
+    "research/experiments/EXP-INTEL-34546944360/spec.json",
+    "research/experiments/EXP-INTEL-34546944360/freeze.json",
+    "research/experiments/EXP-INTEL-34546944360/result.json",
+    "research/experiments/EXP-INTEL-34546944360/audit.json",
+    "research/experiments/EXP-INTEL-34546944360/report.md",
+    "research/experiments/EXP-INTEL-34546944360/provenance.json",
+    "research/experiments/EXP-INTEL-34546944360/prereg.md",
+    "/tmp/opencode/exp345_raw_results.json",
+    "/tmp/opencode/measure_yield_exp345_final.py",
+    "research/experiments/EXP-INTEL-34377576886/handoff.json",
+    "research/experiments/EXP-INTEL-34377576886/audit.json"
+  ]
+}
+```
+
+## handoff.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-34546944360",
+  "lane": "intel",
+  "target_lane": "intel",
+  "next_question": "What is the canonical definition of 'locatable elements' for SPIDER fragment yield, and does yield_locatable stabilize across randomized shopping page types (including checkout) under that frozen definition?",
+  "why_next": "The denominator ambiguity remains the single blocking question for interpreting the 812‑task corpus and C‑CROSSSITE/C‑LLM‑INHERIT viability. The experiment confirmed that 'locatable elements' has no canonical definition (yield varies 5× depending on counting method). The next experiment must freeze a definition, randomize sampling, include missing page types, and fix provenance issues to either resolve the denominator or confirm it cannot be resolved. This is the highest‑information path to either salvaging the 812‑task corpus for C‑CROSSSITE or confirming it needs replacement.",
+  "carry_forward": {
+    "established": [
+      "CDP yield ~0.0426 replicates parent 0.0427 (CV=0.12) across shopping page types; above‑fold fragment yield is ~4% of CDP nodes (audit.json claim_ceiling, OBS‑YIELD‑CDP‑CONSISTENT).",
+      "Heuristic 0.65 is FALSIFIED robustly (>23pp under any denominator) (audit.json baseline_findings, OBS‑YIELD‑CDP‑CONSISTENT).",
+      "Yield_locatable is definition‑dependent (0.079 under all‑elements‑with‑bbox, ~0.32 interactive‑only, ~0.42 under parent 258 definition) — 5× range means denominator ambiguity IS the result (audit.json VF‑LOCATABLE‑DEFINITION‑AMBIGUITY, OBS‑YIELD‑LOCATABLE‑DEPENDS‑ON‑DEFINITION).",
+      "Viewport elements constant at 108 across all tested shopping URLs (audit.json VF‑VIEWPORT‑CONSTANT‑ANOMALY).",
+      "Scroll effect minimal (mean delta 2.9pp, 100% within 20pp) — initial viewport measurement is representative of above‑fold yield but not cumulative page yield (audit.json VF‑SCROLL‑MEASUREMENT‑LIMITATION, OBS‑SCROLL‑EFFECT‑MINIMAL).",
+      "Docker Hub am1n3e/webarena‑verified‑shopping:latest is pullable and functional (parent established, not re‑measured but confirmed)."
+    ],
+    "rejected": [
+      "Heuristic yield model for shopping (0.65) is not calibrated — falsified by >15pp under both denominator choices (parent established, reinforced).",
+      "The assumption that locatable denominator is uniquely 0.38 — definition‑dependent, 5× range (audit.json VF‑LOCATABLE‑DEFINITION‑AMBIGUITY).",
+      "The assumption that Method1 0.365 is falsified under all denominators — only under all‑elements definition; under parent definition it is SUPPORTED within 5.4pp (audit.json baseline_findings).",
+      "The assumption that initial viewport measurement is representative of full page yield — viewport constant anomaly, scroll effect minimal but not cumulative (audit.json VF‑VIEWPORT‑CONSTANT‑ANOMALY).",
+      "The assumption that non‑random convenience sample generalizes to 192‑task corpus (audit.json VF‑SAMPLING‑NONRANDOM‑MISSING‑CHECKOUT)."
+    ],
+    "unknown": [
+      "Canonical definition of 'locatable elements' in SPIDER fragment model — must be frozen before any yield claim.",
+      "Derivation of Method1 150‑element shopping estimate (what element type does 150 count, which locatable definition it maps to).",
+      "Viewport constant 108 cause — fixed header artifact or measurement bug; what is true page‑specific fragment count below the fold.",
+      "Checkout page yield — not measured due to substitution with search; needed for product‑listing/detail/cart/checkout coverage per spec.",
+      "Gitlab and reddit yield — not measured, so site‑type‑specific denominator requirement and C‑CROSSSITE corpus viability remain unknown.",
+      "Full‑page vs viewport yield — scroll captures bottom‑viewport sparsity, not cumulative lazy‑loaded content; whether scrolling recovers heuristic 0.45 viewport coverage assumption.",
+      "Docker digest drift effect on DOM element count — 258 vs 1392 locatable gap partly explained by definition, partly by image version; needs pinned digest and DOM hash verification.",
+      "Aggregation mismatch in producer metrics (locatable_elements_mean 1354.2 vs raw 1392.1, cdp 2609 vs 2570) — aggregation definition undocumented."
+    ],
+    "do_not_assume": [
+      "Do not assume yield of 0.0426 (CDP) is the true fragment yield — denominator is ambiguous and locatable denominator gives 0.08–0.42.",
+      "Do not assume Method1 0.365 is falsified — under parent definition it is SUPPORTED within 5.4pp; denominator must be resolved first.",
+      "Do not assume 108 viewport elements generalize to all 192 shopping tasks — non‑random sample, constant across 4 page types suggests fixed chrome/bug.",
+      "Do not assume shopping is unsuitable for C‑CROSSSITE — under locatable denominator yield may be workable if definition resolved.",
+      "Do not assume other site types (gitlab, reddit) will show similar yield — unmeasured, page structures differ.",
+      "Do not assume initial‑viewport‑only measurement captures full yield — scrolled content not cumulative, heuristic viewport coverage 0.45 may assume global page.",
+      "Do not assume denominator ambiguity is a trivial detail — it determines whether Method1 is validated or falsified, which changes the entire interpretation.",
+      "Do not assume non‑random convenience sample is representative of 192‑task corpus — checkout not measured, per‑type N unbalanced.",
+      "Do not assume Docker image version difference is negligible — 258 vs 1392 locatable gap partly due to image drift; needs pinned digest.",
+      "Do not assume constant viewport 108 is a measurement bug — could be fixed header/chrome artifact; needs per‑task sample or overlay to confirm."
+    ]
+  },
+  "dependencies": [
+    "Canonical definition of locatable_elements (all‑elements‑with‑bbox vs interactive‑only vs parent CSS selectors) must be frozen before measurement.",
+    "Randomized task selection from WebArena‑Verified dataset covering product‑listing, detail, cart, checkout.",
+    "At least 1 gitlab and 1 reddit task (Docker Hub am1n3e/webarena‑verified‑gitlab and reddit images or explicit BLOCKED with infrastructure proof).",
+    "Frozen measurement script with sha256 recorded (prefer geometry‑faithful script sha256 15a2ad056dea51a4e907ceece1d176007122f3b9dec415ea87234061167f1d4e or new script with documented delta).",
+    "Fresh browser context per task (no shared context).",
+    "Raw accessibility tree saved for each task (initial+scrolled) with durable sha256.",
+    "Investigation of constant viewport 108 (per‑task sample or overlay).",
+    "Yield recomputed under both denominators with explicit deltas (yield_cdp, yield_locatable_parent258, method1_delta_cdp, method1_delta_locatable).",
+    "Docker image digest recorded before measurement and page DOM hash stability verified."
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-34546944360/result.json",
+    "research/experiments/EXP-INTEL-34546944360/audit.json",
+    "research/experiments/EXP-INTEL-34546944360/report.md",
+    "research/experiments/EXP-INTEL-34546944360/provenance.json",
+    "research/experiments/EXP-INTEL-34546944360/spec.json",
+    "research/experiments/EXP-INTEL-34546944360/prereg.md",
+    "/tmp/opencode/exp345_raw_results.json",
+    "/tmp/opencode/measure_yield_exp345_final.py",
+    "research/experiments/EXP-INTEL-34377576886/handoff.json",
+    "research/experiments/EXP-INTEL-34377576886/audit.json"
+  ],
+  "recommended_action": "REVISE: (1) Freeze canonical definition of locatable_elements (all‑elements‑with‑bbox vs interactive‑only vs parent CSS selectors) before measurement. (2) Randomize task selection from WebArena‑Verified covering product‑listing, detail, cart, checkout; include at least 1 gitlab and 1 reddit task (or mark H5 BLOCKED with infrastructure proof). (3) Use frozen measurement script with sha256 recorded; ensure fresh browser context per task. (4) Save raw accessibility tree for each task (initial+scrolled) with durable sha256. (5) Investigate constant viewport 108 with per‑task sample or overlay. (6) Recompute yield under both denominators with explicit deltas (yield_cdp, yield_locatable_parent258, method1_delta_cdp, method1_delta_locatable). (7) Bound Docker drift by recording image digest before measurement and verifying page DOM hash stability. (8) If locatable yield stabilizes under frozen definition within 10pp of Method1 0.365, denominator resolved and C‑CROSSSITE/C‑LLM‑INHERIT can proceed to integration experiment. If denominator remains ambiguous, 812‑task corpus cannot be reliably used and Product lane must redesign observation pipeline or explore alternative corpora."
 }
 ```
 

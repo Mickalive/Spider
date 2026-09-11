@@ -501,6 +501,31 @@
         "handoff.json": "57025732a13bd1e17f553c003db00a646ef45bb9d940d4b5fbfc6b6902757bbf"
       }
     },
+    "EXP-GRAPH-34409639346": {
+      "lane": "graph",
+      "request_id": "f6113bfd743fc2c62324c8df",
+      "created_at": "2026-09-09T21:56:55.733643+00:00",
+      "claim_ids": [
+        "C-SEMANTIC-RESOLVE"
+      ],
+      "question": "Does the kernel resolve semantically aliased URL templates (e.g., /users/{userId} vs /accounts/{id} pointing to the same REST resource) to the correct parametrized mechanism when both are registered with equal confidence, and does it correctly select the mechanism whose template matches the intent structure?",
+      "audit_status": "PASS",
+      "decision": "SUPPORTED",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/graph",
+      "hashes": {
+        "request.json": "c5c7f947790fc1112561fb2c32de08a0079d779db03ee9b8c3eb3cf3fc11e204",
+        "spec.json": "b657b28017806f67d846ddba8262837e8cb23339411de2e6406a3cd4b747d14d",
+        "prereg.md": "9c45991749e169d8aeaf8d5f619c11a4e5d0e8745197d6762430e898957bb662",
+        "freeze.json": "c3295bc7942db5704955709388bb8f2d406688477e13a98981c2f6e5417b60e0",
+        "result.json": "7d75ec1ea2453289ee0ce7f4bfe10c050f237743771d9b3e97489ccbf5247616",
+        "report.md": "a39161ff67662686730818387f7b1f1574936f9fc5823664d46181958fa53c28",
+        "provenance.json": "ad03ee8353a50c909a8be48882814bcc6ef25f27a047288ad929b3204e98685f",
+        "audit.json": "f480f5aabb89f783e06bffbf2b7e2d3605636e03207e3edaa5ea4c4385d07c59",
+        "verdict.json": "8d9a6d24ee5dd60a7a9c19006aca4e661620ffd34d7bf5f73c4c7c5861727d0f",
+        "handoff.json": "fb3bddcf2dcc949d36ee57edcca18f6a986f5643ab4ec9e4534d91e2bf8f668d"
+      }
+    },
     "EXP-INTEL-33528832113": {
       "lane": "intel",
       "request_id": "46d19fdaf32e996c0ab24bd7",
@@ -659,6 +684,32 @@
         "audit.json": "e6b1ffb2ef2d8e6cc39ef848b6d61201398e68e3780df2f0349cf2d46365da87",
         "verdict.json": "4203ab9d7959e69b1b3a5410d864b20ca3b391ebab2786d0adf908fa5fcecf25",
         "handoff.json": "f9d411aff509ecb43fe56976f1a01b10942a00680433169636d04c003523abfe"
+      }
+    },
+    "EXP-INTEL-34546944360": {
+      "lane": "intel",
+      "request_id": "4ba6f6d4334e8c2ee3afcc5f",
+      "created_at": "2026-09-11T00:33:00.888743+00:00",
+      "claim_ids": [
+        "C-CROSSSITE",
+        "C-LLM-INHERIT"
+      ],
+      "question": "What is the correct yield denominator for SPIDER fragment model \u2014 CDP accessibility tree node count or Playwright locatable element count \u2014 and does the locatable yield (~0.38) hold across randomized shopping page types (product-listing, detail, cart, checkout) with scrolled content, plus at least one gitlab and one reddit task?",
+      "audit_status": "REVISE",
+      "decision": "MIXED",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/intel",
+      "hashes": {
+        "request.json": "875f313b648ffdf067827b0aaeea2f7dd808b0ba68149712d9fe919e41e13ca8",
+        "spec.json": "f21f9c2c5035fb388930ca8c9cc4159467a4d0fe5f628f0254d7dfd3d595a410",
+        "prereg.md": "1c2ff2bc751f9ab251ba221b4c0105141f4fdbd88a960067c40ca62b6eb4cb0e",
+        "freeze.json": "43a142c5bab768b37f5df25a21c64c51883590dc69ff7dc408c8d2dba8bda9e8",
+        "result.json": "3a47288bf66bcdb7a614dfb0d535f8e6d73bc72f1ded4eed5819b93cd185d3ca",
+        "report.md": "174f5cd22deef8f0f5f56a135b6c78abd957f358bf077d939082885c13361b77",
+        "provenance.json": "c0c5977bdccdd965346df854e2fef1ef7a6e6247b06b16c54f3c0a8c4d9b1223",
+        "audit.json": "ff487df7273789bb598a4e2fb132a190d8a2bc3049301f76c8c324890e4b823b",
+        "verdict.json": "a616afd3d4b6b1b7d6d84d92e8822ad694aa0ce312563dd2b3f6ffcdd282f350",
+        "handoff.json": "f7e8d8e37d3fa48c33a23a40cf5b6c7de0f6016fb804cc4aa809d0ea4f492486"
       }
     },
     "EXP-PHYSICS-33528829431": {

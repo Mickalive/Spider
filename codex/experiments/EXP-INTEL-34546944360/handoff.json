@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-34546944360",
+  "lane": "intel",
+  "target_lane": "intel",
+  "next_question": "What is the canonical definition of 'locatable elements' for SPIDER fragment yield, and does yield_locatable stabilize across randomized shopping page types (including checkout) under that frozen definition?",
+  "why_next": "The denominator ambiguity remains the single blocking question for interpreting the 812‑task corpus and C‑CROSSSITE/C‑LLM‑INHERIT viability. The experiment confirmed that 'locatable elements' has no canonical definition (yield varies 5× depending on counting method). The next experiment must freeze a definition, randomize sampling, include missing page types, and fix provenance issues to either resolve the denominator or confirm it cannot be resolved. This is the highest‑information path to either salvaging the 812‑task corpus for C‑CROSSSITE or confirming it needs replacement.",
+  "carry_forward": {
+    "established": [
+      "CDP yield ~0.0426 replicates parent 0.0427 (CV=0.12) across shopping page types; above‑fold fragment yield is ~4% of CDP nodes (audit.json claim_ceiling, OBS‑YIELD‑CDP‑CONSISTENT).",
+      "Heuristic 0.65 is FALSIFIED robustly (>23pp under any denominator) (audit.json baseline_findings, OBS‑YIELD‑CDP‑CONSISTENT).",
+      "Yield_locatable is definition‑dependent (0.079 under all‑elements‑with‑bbox, ~0.32 interactive‑only, ~0.42 under parent 258 definition) — 5× range means denominator ambiguity IS the result (audit.json VF‑LOCATABLE‑DEFINITION‑AMBIGUITY, OBS‑YIELD‑LOCATABLE‑DEPENDS‑ON‑DEFINITION).",
+      "Viewport elements constant at 108 across all tested shopping URLs (audit.json VF‑VIEWPORT‑CONSTANT‑ANOMALY).",
+      "Scroll effect minimal (mean delta 2.9pp, 100% within 20pp) — initial viewport measurement is representative of above‑fold yield but not cumulative page yield (audit.json VF‑SCROLL‑MEASUREMENT‑LIMITATION, OBS‑SCROLL‑EFFECT‑MINIMAL).",
+      "Docker Hub am1n3e/webarena‑verified‑shopping:latest is pullable and functional (parent established, not re‑measured but confirmed)."
+    ],
+    "rejected": [
+      "Heuristic yield model for shopping (0.65) is not calibrated — falsified by >15pp under both denominator choices (parent established, reinforced).",
+      "The assumption that locatable denominator is uniquely 0.38 — definition‑dependent, 5× range (audit.json VF‑LOCATABLE‑DEFINITION‑AMBIGUITY).",
+      "The assumption that Method1 0.365 is falsified under all denominators — only under all‑elements definition; under parent definition it is SUPPORTED within 5.4pp (audit.json baseline_findings).",
+      "The assumption that initial viewport measurement is representative of full page yield — viewport constant anomaly, scroll effect minimal but not cumulative (audit.json VF‑VIEWPORT‑CONSTANT‑ANOMALY).",
+      "The assumption that non‑random convenience sample generalizes to 192‑task corpus (audit.json VF‑SAMPLING‑NONRANDOM‑MISSING‑CHECKOUT)."
+    ],
+    "unknown": [
+      "Canonical definition of 'locatable elements' in SPIDER fragment model — must be frozen before any yield claim.",
+      "Derivation of Method1 150‑element shopping estimate (what element type does 150 count, which locatable definition it maps to).",
+      "Viewport constant 108 cause — fixed header artifact or measurement bug; what is true page‑specific fragment count below the fold.",
+      "Checkout page yield — not measured due to substitution with search; needed for product‑listing/detail/cart/checkout coverage per spec.",
+      "Gitlab and reddit yield — not measured, so site‑type‑specific denominator requirement and C‑CROSSSITE corpus viability remain unknown.",
+      "Full‑page vs viewport yield — scroll captures bottom‑viewport sparsity, not cumulative lazy‑loaded content; whether scrolling recovers heuristic 0.45 viewport coverage assumption.",
+      "Docker digest drift effect on DOM element count — 258 vs 1392 locatable gap partly explained by definition, partly by image version; needs pinned digest and DOM hash verification.",
+      "Aggregation mismatch in producer metrics (locatable_elements_mean 1354.2 vs raw 1392.1, cdp 2609 vs 2570) — aggregation definition undocumented."
+    ],
+    "do_not_assume": [
+      "Do not assume yield of 0.0426 (CDP) is the true fragment yield — denominator is ambiguous and locatable denominator gives 0.08–0.42.",
+      "Do not assume Method1 0.365 is falsified — under parent definition it is SUPPORTED within 5.4pp; denominator must be resolved first.",
+      "Do not assume 108 viewport elements generalize to all 192 shopping tasks — non‑random sample, constant across 4 page types suggests fixed chrome/bug.",
+      "Do not assume shopping is unsuitable for C‑CROSSSITE — under locatable denominator yield may be workable if definition resolved.",
+      "Do not assume other site types (gitlab, reddit) will show similar yield — unmeasured, page structures differ.",
+      "Do not assume initial‑viewport‑only measurement captures full yield — scrolled content not cumulative, heuristic viewport coverage 0.45 may assume global page.",
+      "Do not assume denominator ambiguity is a trivial detail — it determines whether Method1 is validated or falsified, which changes the entire interpretation.",
+      "Do not assume non‑random convenience sample is representative of 192‑task corpus — checkout not measured, per‑type N unbalanced.",
+      "Do not assume Docker image version difference is negligible — 258 vs 1392 locatable gap partly due to image drift; needs pinned digest.",
+      "Do not assume constant viewport 108 is a measurement bug — could be fixed header/chrome artifact; needs per‑task sample or overlay to confirm."
+    ]
+  },
+  "dependencies": [
+    "Canonical definition of locatable_elements (all‑elements‑with‑bbox vs interactive‑only vs parent CSS selectors) must be frozen before measurement.",
+    "Randomized task selection from WebArena‑Verified dataset covering product‑listing, detail, cart, checkout.",
+    "At least 1 gitlab and 1 reddit task (Docker Hub am1n3e/webarena‑verified‑gitlab and reddit images or explicit BLOCKED with infrastructure proof).",
+    "Frozen measurement script with sha256 recorded (prefer geometry‑faithful script sha256 15a2ad056dea51a4e907ceece1d176007122f3b9dec415ea87234061167f1d4e or new script with documented delta).",
+    "Fresh browser context per task (no shared context).",
+    "Raw accessibility tree saved for each task (initial+scrolled) with durable sha256.",
+    "Investigation of constant viewport 108 (per‑task sample or overlay).",
+    "Yield recomputed under both denominators with explicit deltas (yield_cdp, yield_locatable_parent258, method1_delta_cdp, method1_delta_locatable).",
+    "Docker image digest recorded before measurement and page DOM hash stability verified."
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-34546944360/result.json",
+    "research/experiments/EXP-INTEL-34546944360/audit.json",
+    "research/experiments/EXP-INTEL-34546944360/report.md",
+    "research/experiments/EXP-INTEL-34546944360/provenance.json",
+    "research/experiments/EXP-INTEL-34546944360/spec.json",
+    "research/experiments/EXP-INTEL-34546944360/prereg.md",
+    "/tmp/opencode/exp345_raw_results.json",
+    "/tmp/opencode/measure_yield_exp345_final.py",
+    "research/experiments/EXP-INTEL-34377576886/handoff.json",
+    "research/experiments/EXP-INTEL-34377576886/audit.json"
+  ],
+  "recommended_action": "REVISE: (1) Freeze canonical definition of locatable_elements (all‑elements‑with‑bbox vs interactive‑only vs parent CSS selectors) before measurement. (2) Randomize task selection from WebArena‑Verified covering product‑listing, detail, cart, checkout; include at least 1 gitlab and 1 reddit task (or mark H5 BLOCKED with infrastructure proof). (3) Use frozen measurement script with sha256 recorded; ensure fresh browser context per task. (4) Save raw accessibility tree for each task (initial+scrolled) with durable sha256. (5) Investigate constant viewport 108 with per‑task sample or overlay. (6) Recompute yield under both denominators with explicit deltas (yield_cdp, yield_locatable_parent258, method1_delta_cdp, method1_delta_locatable). (7) Bound Docker drift by recording image digest before measurement and verifying page DOM hash stability. (8) If locatable yield stabilizes under frozen definition within 10pp of Method1 0.365, denominator resolved and C‑CROSSSITE/C‑LLM‑INHERIT can proceed to integration experiment. If denominator remains ambiguous, 812‑task corpus cannot be reliably used and Product lane must redesign observation pipeline or explore alternative corpora."
+}

@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34409639346",
+  "lane": "graph",
+  "target_lane": "graph",
+  "next_question": "Can the kernel handle more complex aliasing scenarios — query parameters, path rewriting, or server-side routing that maps multiple URL templates to the same resource — and does HTTP execution success against real endpoints provide a grounding signal for template correctness that resolver selection alone cannot?",
+  "why_next": "C-SEMANTIC-RESOLVE is falsified at current kernel level for simple path aliasing with equal confidence (0/10 aliased-first correct selections, binomial p=1.0). The kernel is a naive exact-match resolver (L97 exact intent equality, L112 stable confidence sort, mechanism_id tie-break). However, the broader claim (goals resolved without internal IDs) remains open for more complex scenarios: query parameters, path rewriting, server-side routing. These are materially orthogonal questions within the graph lane charter that could yield different results if HTTP execution provides grounding signals absent from resolver selection alone. C-PARAM-INHERIT remains blocked on external prerequisite (unfixed sort key L112, four consecutive BLOCKED). Graph lane should move to high-upside questions that can actually be tested with current infrastructure.",
+  "carry_forward": {
+    "established": [
+      "Kernel uses exact intent string matching (kernel.py L97: m.intent != intent) — no fuzzy or semantic matching",
+      "Selection for equal-confidence candidates determined entirely by mechanism_id ordering via stable sort (L112) and registry.all() returning sorted(items) (registry.py L38)",
+      "All 4 baselines pass: B-EMPTY-REGISTRY UNKNOWN, B-SINGLE-MECHANISM EXECUTABLE a-01, B-CONFIDENCE-HIGHER higher confidence wins, B-CONFIDENCE-EQUAL-DIFFERENT-INTENT exact intent match only",
+      "Aliased-first subset: 0/10 selects template-matching mechanism (binomial p=1.0 one-sided) — kernel follows tie-breaking exactly, no semantic aliasing resolution",
+      "Correct-first subset: 10/10 selects correct mechanism via tie-break — deterministic and consistent",
+      "All 24 conditions (4 baselines + 20 aliased pairs) executed with 0 exceptions on deterministic single-run cold kernel",
+      "C-SEMANTIC-RESOLVE falsified at proof-of-concept level for narrow scope: simple path aliasing (/users/{id} vs /accounts/{uid} etc.), equal confidence 0.9, preconditions={}, applicability_guards={}, 10 synthetic intent-template pairs, params satisfying both slots"
+    ],
+    "rejected": [
+      "Semantic aliasing resolution in the current kernel — 0/10 aliased-first correct selections with binomial p=1.0 conclusively supports exact-match-only hypothesis",
+      "Kernel analyzes URL template structure, parameter slot names, or any semantic information beyond exact intent string equality"
+    ],
+    "unknown": [
+      "Whether the kernel could perform semantic aliasing resolution if extended with template analysis code",
+      "Whether larger sample size (n=50+) would provide stronger statistical evidence — current n=10 has limited power per prereg 8.1",
+      "Whether more complex aliasing scenarios (query parameters, path rewriting, server-side routing) would be handled differently",
+      "Whether HTTP execution success against real endpoints provides a grounding signal for template correctness absent from resolver selection",
+      "Whether C-PARAM-INHERIT fix (secondary sort on len(parameter_slots) at L112) interacts with aliasing behavior — audit confirms fix absent and not relevant to intent matching L97",
+      "Whether C-SEMANTIC-RESOLVE generalizes beyond single intent per pair, preconditions={}, and simple path aliasing to richer guard/context scenarios",
+      "Whether the fix for C-PARAM-INHERIT will ever be committed to production HEAD (four consecutive BLOCKED experiments)"
+    ],
+    "do_not_assume": [
+      "The kernel performs any fuzzy or semantic matching beyond exact intent string equality — code analysis and experiment both confirm exact match only",
+      "This result generalizes to query-parameter aliasing, path rewriting, server-side routing, or confidence-differentiated aliasing — scope bounded to simple path aliasing with equal confidence",
+      "Real HTTP execution against endpoints would change resolver selection — no HTTP execution tested in this experiment",
+      "The C-PARAM-INHERIT fix would add semantic resolution — fix addresses parameter-slot-count tie-breaking, not intent matching (L97)",
+      "Semantic resolution is impossible to implement in the kernel — it is absent at current level but could be built as a new feature",
+      "The n=10 sample provides strong statistical proof — it is a proof-of-concept screen with limited power; n=50+ needed for strong confirmation",
+      "C-PARAM-INHERIT is scientifically falsified — it is blocked on an external prerequisite, not rejected by evidence",
+      "C-SEMANTIC-RESOLVE is globally falsified — it is falsified at current kernel level for the tested narrow scope; broader scenarios remain open"
+    ]
+  },
+  "dependencies": [
+    "src/spider/kernel.py — resolve function L93-123, exact intent match L97, stable sort L112; unfixed sort key still blocking C-PARAM-INHERIT",
+    "src/spider/registry.py — sorted(items) L38 determines mechanism_id ordering for tie-break",
+    "src/spider/models.py — Mechanism, Resolution, ResolutionStatus data structures",
+    "research/experiments/EXP-GRAPH-34409639346/raw_evidence/execution_results.json sha256 d27d3247dd45f3bedb54db7d2195464e4d44ba3acd53e1f5c7c2f05fe214d51e — 24 conditions",
+    "research/experiments/EXP-GRAPH-34395286092/handoff.json sha256 57025732a13bd1e17f553c003db00a646ef45bb9d940d4b5fbfc6b6902757bbf — parent handoff carry-forward",
+    "jsonplaceholder.typicode.com — HTTP endpoint for execution conditions; confirmed reachable in parent diagnostics",
+    "research/claims/registry.json — C-SEMANTIC-RESOLVE claim definition and status"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-34409639346/result.json schema_version 1 status COMPLETE outcome SUPPORTS",
+    "research/experiments/EXP-GRAPH-34409639346/audit.json status PASS producer_claim_supported true claim_ceiling bounded to narrow scope",
+    "research/experiments/EXP-GRAPH-34409639346/raw_evidence/execution_results.json sha256 d27d3247dd45f3bedb54db7d2195464e4d44ba3acd53e1f5c7c2f05fe214d51e",
+    "research/experiments/EXP-GRAPH-34409639346/execute.py sha256 b439ef274e74eea94e887bd01cb46877aadf0ea2f0fc964bcf01488c79f0fbf6",
+    "research/experiments/EXP-GRAPH-34409639346/provenance.json github_run_id 34409639346 base_sha 54e8a384",
+    "research/experiments/EXP-GRAPH-34409639346/spec.json frozen spec with falsifier and decision_rule",
+    "research/experiments/EXP-GRAPH-34409639346/prereg.md frozen preregistration",
+    "src/spider/kernel.py L97 m.intent != intent, L112 candidates.sort confidence only",
+    "src/spider/registry.py L38 sorted(items)",
+    "research/experiments/EXP-GRAPH-34395286092/handoff.json parent BLOCKED_CLOSE_AND_PIVOT"
+  ],
+  "recommended_action": "Move graph lane frontier to a materially orthogonal question. C-SEMANTIC-RESOLVE is bounded at current kernel level for simple path aliasing. The next question targets more complex aliasing scenarios (query params, path rewriting, server-side routing) with HTTP execution grounding — these are testable with current infrastructure and could yield different results. Do not repeat the exact-match-only test. C-PARAM-INHERIT remains blocked on external prerequisite (unfixed sort key L112). Graph lane should also consider C-FRESHNESS or C-DELTA-REPAIR as orthogonal high-upside claims if complex aliasing also yields negative results."
+}

@@ -309,6 +309,16 @@
         "reason": "Bind-time slot-level prefix extraction resolves C2 double-prefix without regressions in frozen 10-condition synthetic harness. All conditions pass binding_accuracy=1.0, slot counts correct, null controls pass. This provides first evidence of mixed calling convention support (short and full values) at the kernel level. Evidence: audit.json recomputed_metrics (34/34 binding_correct, accuracy=1.0), raw_evidence.json all conditions, audit.json V4_CONTROLS (C2, B1-B5, D1-D3, E1/E2 independently verified). Claim does NOT advance to product-ready: audit.json claim_ceiling bounds to synthetic kernel correctness only; real-browser validation and end-to-end economics (C-PRODUCT-ECON) remain unmeasured."
       }
     ],
+    "C-SEMANTIC-RESOLVE": [
+      {
+        "experiment_id": "EXP-GRAPH-34409639346",
+        "lane": "graph",
+        "decision": "SUPPORTED",
+        "claim_id": "C-SEMANTIC-RESOLVE",
+        "status": "EXPERIMENTAL",
+        "reason": "Experiment SUPPORTS hypothesis: kernel does NOT perform semantic aliasing resolution. 0/10 aliased-first conditions select template-matching mechanism (binomial p=1.0 one-sided). Kernel uses exact intent matching (kernel.py L97: m.intent != intent) and selection is determined entirely by mechanism_id ordering via stable sort (L112). Claim ceiling bounded: simple path aliasing with equal confidence 0.9, preconditions={}, applicability_guards={}, 10 synthetic intent-template pairs, deterministic single-run cold kernel. NOT established: query-parameter aliasing, path rewriting, server-side routing, confidence-differentiated aliasing, real HTTP grounding, multi-intent, non-empty guards, or any fix adding semantic resolution. C-SEMANTIC-RESOLVE is not globally falsified \u2014 it is falsified at current kernel level for this narrow scope. Product must implement explicit aliasing or require exact intent matching."
+      }
+    ],
     "C-CROSSSITE": [
       {
         "experiment_id": "EXP-INTEL-33528832113",
@@ -357,6 +367,14 @@
         "claim_id": "C-CROSSSITE",
         "status": "BLOCKED",
         "reason": "Yield calibration remains unresolved. Heuristic 0.65 is falsified (60.7pp CDP, 27pp locatable), but denominator ambiguity (CDP 2296 vs locatable 258) makes it impossible to determine whether the fragment model itself is broken or whether the heuristic used a different element-counting convention. Mind2Web fails S4 diversity (73 < 100 websites). N=2 pilot on identical Magento review pages cannot generalize to 192 shopping tasks or 6 site types. Requires: (a) resolve denominator ambiguity, (b) measure 8-10 randomized tasks across page types, (c) measure additional site types."
+      },
+      {
+        "experiment_id": "EXP-INTEL-34546944360",
+        "lane": "intel",
+        "decision": "MIXED",
+        "claim_id": "C-CROSSSITE",
+        "status": "HYPOTHESIS",
+        "reason": "Denominator ambiguity unresolved: locatable yield is definition\u2011dependent (0.079\u20130.42) and no canonical definition exists. CDP yield ~0.0426 replicates parent but represents ~4% of CDP nodes. No justified claim about 812\u2011task corpus viability until denominator frozen, sampling randomized, script provenance pinned, and viewport anomaly explained (audit.json claim_ceiling, VF\u2011LOCATABLE\u2011DEFINITION\u2011AMBIGUITY)."
       }
     ],
     "C-LLM-INHERIT": [
@@ -407,6 +425,14 @@
         "claim_id": "C-LLM-INHERIT",
         "status": "BLOCKED",
         "reason": "Same denominator ambiguity and sample-size limitation as C-CROSSSITE. The CDP-vs-locatable denominator determines whether the observation pipeline preserves enough interactive elements for LLM inheritance testing. Under locatable denominator (0.38), the yield may be sufficient; under CDP (0.0427), it is not. This must be resolved before C-LLM-INHERIT can be evaluated."
+      },
+      {
+        "experiment_id": "EXP-INTEL-34546944360",
+        "lane": "intel",
+        "decision": "MIXED",
+        "claim_id": "C-LLM-INHERIT",
+        "status": "HYPOTHESIS",
+        "reason": "Fragment\u2011model yield remains ambiguous; Method1 0.365 is INCONCLUSIVE (FALSIFIED under all\u2011elements definition, SUPPORTED under parent definition). Heuristic 0.65 is FALSIFIED robustly (>23pp). LLM\u2011inheritance cannot be evaluated until denominator frozen and yield measured across representative site types (audit.json claim_ceiling, VF\u2011MISSING\u2011SITE\u2011TYPE\u2011COMPARISON)."
       }
     ],
     "C-PRODUCT-ECON": [
