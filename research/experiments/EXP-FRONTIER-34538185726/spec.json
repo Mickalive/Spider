@@ -14,9 +14,10 @@
   "null_control": "At lambda=0 (action-independent transitions), KDE-based JS divergence must be indistinguishable from zero (permutation test p > 0.05). This verifies the KDE pipeline does not detect structure when absent.",
   "measurement_validity": [
     "Same 10D non-Gaussian DGP as parent experiments (mixture-of-3-Gaussians heteroscedastic noise on [0,1]^10) for direct comparison",
-    "KDE bandwidth selected via 5-fold cross-validated log-likelihood on training data per cell; no information leakage from test data",
-    "Gaussian kernel with adaptive bandwidth; bandwidth search range [0.01, 2.0] in log-space with 20 grid points",
-    "500 transitions per cell (125 per action expected); KDE fit on full cell (no train/test split needed for density estimation; permutation null uses same data)",
+    "KDE implemented via scipy.stats.gaussian_kde (available in base scipy install; no sklearn required)",
+    "Bandwidth selected via 5-fold cross-validated log-likelihood on training data per cell; no information leakage from test data",
+    "Bandwidth search range [0.01, 2.0] in log-space with 20 grid points; bandwidth factor = h / std(data)",
+    "500 transitions per cell (~125 per action expected); KDE fit on full cell (no train/test split needed for density estimation; permutation null uses same data)",
     "10 independent replications per cell for variance estimation",
     "8 lambda levels (0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.7, 1.0) matching parent design",
     "3 independent deterministic functions (seeds 42, 43, 44) matching parent design",

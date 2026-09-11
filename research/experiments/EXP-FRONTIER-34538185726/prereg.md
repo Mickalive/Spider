@@ -131,9 +131,9 @@ Eight conditions (same as parent):
 
 For each cell (lambda, function, replication):
 1. Group 500 transitions by action → ~125 transitions per action
-2. For each action a, fit KDE on the 125 next-state vectors S_next ∈ R^10
-3. KDE uses Gaussian kernel with bandwidth h selected via 5-fold cross-validated log-likelihood
-4. Bandwidth search: 20 log-spaced values in [0.01, 2.0]
+2. For each action a, fit KDE on the 125 next-state vectors S_next ∈ R^10 using `scipy.stats.gaussian_kde`
+3. KDE uses Gaussian kernel with bandwidth selected via 5-fold cross-validated log-likelihood
+4. Bandwidth search: 20 log-spaced values in [0.01, 2.0]; scipy gaussian_kde accepts a bandwidth_factor parameter that scales the standard Scott's rule bandwidth
 
 ### 6.2 Jensen-Shannon Divergence
 
@@ -146,10 +146,11 @@ For each cell, compute pairwise JS divergence between all 6 action pairs:
 
 ### 6.3 Bandwidth Selection
 
-- 5-fold cross-validation on log-likelihood of held-out data
-- Search grid: np.logspace(-2, 0.3, 20) = [0.01, ..., 2.0]
-- Select bandwidth maximizing mean validation log-likelihood
-- Same bandwidth used for all 4 action-conditional KDEs within a cell
+- `scipy.stats.gaussian_kde` uses Scott's rule by default: h = N^{-1/(d+4)} * std
+- We apply a bandwidth_factor (scalar multiplier) to this default, searching over 20 log-spaced values in [0.01, 2.0]
+- For each candidate factor, compute 5-fold cross-validated log-likelihood on the data
+- Select the factor maximizing mean validation log-likelihood
+- Same bandwidth_factor used for all 4 action-conditional KDEs within a cell
 
 ### 6.4 Bias Correction
 
@@ -315,8 +316,8 @@ If:
 Analysis will be implemented in Python using:
 - `numpy` for array operations and random generation
 - `scipy.stats` for Spearman correlation
-- `sklearn.neighbors.KernelDensity` for KDE fitting with bandwidth selection
-- `statsmodels` for two-way ANOVA
+- `scipy.stats.gaussian_kde` for KDE fitting with bandwidth selection (no sklearn required)
+- `statsmodels` for two-way ANOVA (or manual implementation with scipy)
 - Standard library only
 
 Code will be committed to `research/frontier/kde_divergence/` before execution.
