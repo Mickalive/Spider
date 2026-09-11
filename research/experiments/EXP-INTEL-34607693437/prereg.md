@@ -11,7 +11,7 @@
 
 ## 2. Scientific Question
 
-What is the canonical definition of "locatable elements" for SPIDER fragment yield — derived from Method1's 150-element shopping estimate — and does yield_locatable stabilize across randomized shopping page types (including checkout) under that frozen definition?
+What is the canonical definition of "locatable elements" for SPIDER fragment yield, and does yield_locatable stabilize across randomized shopping page types (including checkout) under that frozen definition?
 
 ## 3. Motivation
 
@@ -54,12 +54,12 @@ Method1's 150-element shopping estimate can be traced to a specific element-coun
 **Falsification**: The forensic analysis cannot trace the 150-element estimate to a specific counting method. All three definitions remain equally plausible after code inspection.
 
 ### H2: Yield Stability Under Frozen Definition
-Under the canonical definition frozen by H1, yield_locatable = viewport_elements / locatable_elements has CV < 0.2 across 8+ randomized shopping tasks covering product-listing, detail, cart, and checkout.
+Under the canonical definition frozen by H1 (or the functional fallback if H1 is inconclusive), yield_locatable = viewport_elements / locatable_elements has CV < 0.2 across 8+ randomized shopping tasks covering product-listing, detail, cart, and checkout.
 
 **Falsification**: CV > 0.2 across shopping tasks, indicating yield depends on page type rather than being a stable property of the fragment model.
 
-### H3: Method1 Compatibility
-Under the frozen canonical definition, yield_locatable mean is within 15pp of Method1's 0.365 estimate.
+### H3: Method1 Compatibility (only if definition resolved)
+Under the frozen canonical definition (if forensic resolves it), yield_locatable mean is within 15pp of Method1's 0.365 estimate.
 
 **Falsification**: Mean yield_locatable differs from Method1 by >15pp, indicating the frozen definition does not match what Method1 modeled.
 
@@ -73,13 +73,18 @@ If Docker images for GitLab and Reddit are available, yield_locatable under the 
 
 **BLOCKED status**: If Docker images are unavailable, mark BLOCKED with infrastructure proof. This hypothesis is exploratory — the primary experiment resolves the denominator for shopping; site-type generalization is a follow-up.
 
+### H6: Viewport Anomaly Resolution
+Per-task viewport element counts vary across page types (stdev > 0 across 8+ tasks), OR the constant-108 pattern is explained as fixed chrome/navigation with evidence (e.g., all 108 elements are header/navrole types).
+
+**Falsification**: Viewport elements remain exactly 108 across all page types including checkout with no explanation — measurement captures only fixed chrome, not page content.
+
 ## 5. Forensic Analysis Plan
 
 ### 5.1 Source Materials
-- Method1 derivation code: analysis_output.json from EXP-INTEL-33945226776
+- Method1 derivation code: `analysis_output.json` from EXP-INTEL-33945226776
 - Method1 measurement script (if available in /tmp or research artifacts)
-- Parent pilot scripts: measure_yield_geo_v2.py (sha256: 15a2ad056dea51a4e907ceece1d176007122f3b9dec415ea87234061167f1d4e)
-- Parent experiment scripts: measure_yield_exp345_final.py
+- Parent pilot scripts: `measure_yield_geo_v2.py` (sha256: 15a2ad056dea51a4e907ceece1d176007122f3b9dec415ea87234061167f1d4e)
+- Parent experiment scripts: `measure_yield_exp345_final.py`
 
 ### 5.2 Analysis Steps
 1. Load analysis_output.json and locate the 150-element estimate for product_listing
@@ -89,7 +94,7 @@ If Docker images for GitLab and Reddit are available, yield_locatable under the 
 5. If the mapping is ambiguous, document why and proceed to the fallback definition
 
 ### 5.3 Fallback Definition
-If the forensic analysis is inconclusive, freeze the **functional definition**:
+If the forensic analysis is inconclusive (cannot trace 150 to a specific method), freeze the **functional definition**:
 - Elements with non-null bounding box (width > 0 AND height > 0)
 - AND role is one of: button, link, textbox, checkbox, radio, combobox, listbox, menuitem, tab, slider, spinbutton, searchbox, switch
 - OR has an onclick/onsubmit handler or is within a form element
@@ -133,7 +138,7 @@ For each task:
      - `viewport_elements`: elements with bbox intersection with viewport rect (threshold 0.5)
      - `locatable_elements`: elements matching frozen canonical definition
      - `total_cdp_elements`: full CDP accessibility tree node count
-   - Save per-task viewport element sample (first 20 element types/roles) for anomaly investigation
+   - Save per-task viewport element sample (first 20 element roles/types) for anomaly investigation
 5. **Raw artifact**: Save full accessibility tree as JSON with sha256.
 6. **Cleanup**: Close browser context and Docker container.
 
@@ -158,12 +163,12 @@ For each task, save:
 ### 7.1 Positive Control
 - Non-empty viewport_elements (>0) on all tasks
 - Non-empty locatable_elements (>viewport_elements) on all tasks
-- Forensic analysis produces a traceable element-counting method (or documents why it cannot)
+- Forensic analysis produces either a traceable method or a documented inconclusiveness record
 
 ### 7.2 Stability Control
 - CV of yield_locatable across all measured shopping tasks < 0.2
 
-### 7.3 Method1 Compatibility Control
+### 7.3 Method1 Compatibility Control (only if definition resolved)
 - Mean yield_locatable within 15pp of Method1 0.365 under frozen definition
 
 ### 7.4 Checkout Coverage Control
@@ -171,7 +176,7 @@ For each task, save:
 - Checkout yield within 20pp of other page types
 
 ### 7.5 Null Control (Definition Ambiguity)
-- If forensic analysis cannot resolve definition, report MIXED with definition_ambiguous status
+- If forensic analysis is inconclusive AND fallback yield also has CV>0.2, report MIXED with definition_ambiguous
 - This is a valid negative outcome, not an infrastructure failure
 
 ## 8. Statistical Analysis
@@ -181,6 +186,7 @@ For each task, save:
 - `yield_locatable_cv`: coefficient of variation across shopping tasks
 - `method1_delta_pp`: absolute difference from Method1 0.365 in percentage points
 - `definition_resolved`: boolean (forensic analysis succeeded or not)
+- `fallback_frozen`: boolean (if forensic inconclusive, was fallback frozen)
 
 ### 8.2 Secondary Metrics
 - `yield_cdp_mean`, `yield_cdp_cv`: CDP yield for cross-denominator comparison
@@ -194,13 +200,13 @@ This experiment is a measurement and definition-freeze exercise, not a confirmat
 ## 9. Validity Threats
 
 ### 9.1 Forensic Ambiguity
-Method1's derivation may be genuinely ambiguous — the 150-element estimate may not map cleanly to any of the three candidate definitions. Mitigation: use the functional fallback definition and document the ambiguity.
+Method1's derivation may be genuinely ambiguous — the 150-element estimate may not map cleanly to any of the three candidate definitions. Mitigation: use the functional fallback definition and document the ambiguity. This is a valid outcome, not a failure.
 
 ### 9.2 Docker Drift
 Different image digests may have different page structures. The parent experiment showed CDP yield is stable across digests (0.0426 vs 0.0427), but locatable counts shifted (258 vs 1392). Mitigation: record image digest before measurement and compare to parent.
 
 ### 9.3 Viewport Constancy Anomaly
-The constant 108 viewport elements across page types suggests a fixed header/chrome artifact or a measurement bug. If this persists, yield calculation may be measuring chrome, not page content. Mitigation: per-task viewport sample to investigate; report as validity note.
+The constant 108 viewport elements across page types suggests a fixed header/chrome artifact or a measurement bug. If this persists, yield calculation may be measuring chrome, not page content. Mitigation: per-task viewport sample to investigate; H6 explicitly tests this.
 
 ### 9.4 Sample Size
 8 shopping tasks may be insufficient for stable CV estimation. The parent used 10 tasks and found CV=0.16. With 8 tasks, CV estimates have wider confidence intervals. Mitigation: report CV with confidence interval; the threshold (0.2) is conservative.
@@ -215,25 +221,27 @@ Checkout pages may require authentication or specific cart state. If checkout ta
 
 ### 10.1 SURVIVES_CURRENT_TEST
 If ALL of:
-1. Forensic analysis traces Method1 150-element estimate to a specific counting method (definition_resolved = true)
+1. Forensic analysis traces Method1 150-element estimate to a specific counting method (definition_resolved=true) OR forensic is inconclusive but functional fallback is frozen (fallback_frozen=true)
 2. yield_locatable CV < 0.2 across all measured shopping tasks (yield stable)
-3. yield_locatable mean within 15pp of Method1 0.365 (method compatible)
-4. At least 2 checkout tasks measured
-5. No pipeline errors
+3. If definition_resolved=true: yield_locatable mean within 15pp of Method1 0.365 (method compatible)
+4. At least 2 checkout tasks measured with yield within 20pp of other page types
+5. Per-task viewport sample saved (H6 investigated)
+6. No pipeline errors
 
-**Consequence**: Denominator resolved. 812-task corpus is viable for C-CROSSSITE/C-LLM-INHERIT evaluation. Product lane can proceed to integration experiments.
+**Consequence**: Denominator resolved (forensic or fallback). 812-task corpus viability assessed. Product lane can proceed to integration experiments using frozen definition.
 
 ### 10.2 FALSIFIED-IN-SETTING
 If ANY of:
-1. Forensic analysis resolves definition BUT yield_locatable CV > 0.2 (yield unstable)
-2. Forensic analysis resolves definition BUT yield_locatable mean differs from Method1 by >15pp (method mismatch)
+1. Forensic resolves definition BUT yield_locatable CV > 0.2 (yield unstable)
+2. Forensic resolves definition BUT yield_locatable mean differs from Method1 by >15pp (method mismatch)
 3. Positive control fails (empty counts on any task)
+4. Viewport anomaly persists (constant 108) with no explanation AND yield under frozen definition is not page-specific
 
 **Consequence**: Definition resolved but yield not workable. Product lane must redesign observation pipeline or use CDP yield (4%) as conservative floor.
 
 ### 10.3 MIXED
 If:
-1. Forensic analysis cannot resolve definition (definition_ambiguous = true)
+1. Forensic analysis is inconclusive (definition_ambiguous) AND fallback yield also has CV>0.2
 2. OR checkout tasks BLOCKED due to infrastructure
 3. OR gitlab/reddit BLOCKED due to infrastructure
 
