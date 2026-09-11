@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-34485517221",
+  "lane": "product",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Do not claim V3_REPRESENTATION_LOSS is peripheral: the rfind('/') hypothesis predicted slot_prefixes={'user':'users/'} for P1, {'query':'search?q='} for G1, {'page':'items?category=books&page='} for G2, {'issue_id':'repos/main/issues/'} for G3 — observed were {'url':''} for P1/G3/G5, {'url':'search?q='} correct but template corrupted by suffix, {'url':'api.'} for N1. Passing conditions achieve binding via full template prefix, not correct slot_prefix semantics. Decision_rule ignoring slot_prefix correctness masks representation loss. Require slot_prefix correctness check before SURVIVES claim.",
+    "Retest baselines B_LITERAL and B_EXACT_MATCH with execution: producer result.json controls.B_LITERAL asserts passed=true via inheritance from EXP-PRODUCT-34420092879 without execution in this run, and omits B_EXACT_MATCH and B_RFIND_ONLY baseline comparisons entirely. For a 0-browser-call synthetic experiment, executing these baselines is trivial and required by spec.json baselines field.",
+    "Fix measurement substrate fidelity: provenance.json code_version admits run_experiment.py is a standalone reimplementation of kernel.py commit 64a6a89, not the product kernel; _bind in run_experiment.py ignores slot_prefixes prefix-stripping (kernel.py _bind takes prefixes dict) and provenance notes models.py lacks slot_prefixes field in production. Re-run against actual src/spider/kernel.py _bind with prefixes to confirm binding outcomes, especially to test full-value vs short-value mixed convention that producer claims is handled.",
+    "Correct G1 failure attribution: raw_evidence.json G1 action_template is 'https://api.example.com/search?q=${url}a' with slot_prefixes={'url':'search?q='} — rfind('/') extraction succeeded, but _find_common_prefix_suffix common-suffix 'a' corrupted template (suffix from alpha/beta/delta). This is not 'rfind works, suffix is separate' — the frozen mechanism includes both prefix and suffix extraction as a single leaf-path induction; failure is mechanism failure on simple query pattern, not an orthogonal artifact. Training values alpha/beta/delta (run_experiment.py) vs prereg alpha/beta/gamma both share suffix 'a'; any small-vocab query values sharing trailing characters will fail. Must not dismiss as training-value artifact.",
+    "Resolve N1 null-control design flaw before using as falsifier: N1 training URLs https://api.example.com/a, https://api.other.com/b, https://api.third.com/c share prefix 'https://api.' — expected slot_count=0 in spec/prereg is inconsistent with the algorithm's definition (longest common prefix). Observed template https://api.${url} with slot_prefix 'api.' is algorithmic over-parameterization, but N1 as written does not test 'no common prefix' — it tests cross-host prefix collision. Redesign N1 with truly disjoint prefixes (e.g., https://a.com/x, https://b.org/y, https://c.net/z) and add similarity/Jaccard threshold test if null control is to be meaningful.",
+    "Address multi-slot limitation explicitly: G4_MULTI_SLOT expected slot_count=2 but leaf-path model by design treats URL as single leaf (varying_paths=1). Producer correctly reports slot_count=1, template 'users/${url}00' with suffix '00' from 100/200/300, binding 0/3. Producer report frames this as 'architectural limitation' then recommends 'bounded fixes that don't require architectural changes' — contradictory. Require explicit admission that leaf-path URL-as-string cannot support >1 varying segment without URL parsing or multi-leaf decomposition, and bound C-PARAM-INHERIT to single-slot only."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_DECISION_RULE_MASKS_SLOT_PREFIX_ERROR",
+      "severity": "high",
+      "finding": "Spec hypothesis predicts non-empty slot_prefixes for P1 (users/), G3 (repos/main/issues/), G5 (users/). Raw evidence shows slot_prefixes={'url':''} for all three, yet they are counted as PASS because decision_rule requires only slot_count and binding_accuracy. Binding succeeds via full template prefix 'https://api.example.com/users/${url}', not via correct slot_prefix semantics. V3_REPRESENTATION_LOSS remains unaddressed: rfind('/') heuristic does not extract meaningful slot-level prefix when varying part is after last '/' — it returns empty. The positive control does not validate the claimed prefix extraction.",
+      "evidence": "raw_evidence.json conditions.P1_PATH_PREFIX.slot_prefixes={'url':''} vs spec hypothesis slot_prefixes={'user':'users/'}; G3 slot_prefixes={'url':''} vs expected 'repos/main/issues/'; G5 slot_prefixes={'url':''} vs expected 'users/'; result.json controls.P1_PATH_PREFIX.passed=true despite slot_prefix mismatch; spec.json hypothesis and prereg.md 5. G3/G5 expected prefixes"
+    },
+    {
+      "id": "V2_SUBSTRATE_REIMPLEMENTATION_NOT_KERNEL",
+      "severity": "medium",
+      "finding": "Provenance confirms measurement did not execute src/spider/kernel.py. run_experiment.py is a standalone copy of distill_parameterized from commit 64a6a89; _bind ignores prefixes dict that kernel.py uses for VALUE CONTRACT stripping. For this experiment's short values (D,E,F,4,5,6,dave...) stripping not exercised, so recomputed binding matches kernel, but claim that mechanism is 'tested as implemented in kernel.py' is overstated. Production models.py lacks slot_prefixes field per provenance, indicating product/kernel divergence not tested.",
+      "evidence": "provenance.json code_version.kernel.py='git show 64a6a89:src/spider/kernel.py (parent experiment execution commit)', code_version.run_experiment.py='standalone reimplementation', code_version.models.py='current HEAD (Mechanism model without slot_prefixes field in production code)'; run_experiment.py _bind vs git show 64a6a89:src/spider/kernel.py _bind with prefixes param"
+    },
+    {
+      "id": "V3_SUFFIX_CORRUPTION_IS_MECHANISM_FAILURE",
+      "severity": "high",
+      "finding": "G1 binding_failure (0/3) is due to _find_common_prefix_suffix common suffix 'a' (alpha/beta/delta share trailing 'a') producing template 'search?q=${url}a' and bound URLs 'search?q=gammaa'. Producer splits this into 'rfind correct, suffix is separate' and downplays severity. The frozen mechanism includes both prefix and suffix computation for leaf template (prefix + ${slot} + suffix). Failure on simple query-string pattern with common trailing characters is a genuine inductive failure, not a training-data artifact. G2 avoids this only because numeric page values 1/2/3 share no suffix.",
+      "evidence": "raw_evidence.json G1_QUERY_STRING_SIMPLE.action_template='https://api.example.com/search?q=${url}a', distill_diagnostics.slot_prefixes={'url':'search?q='}, metrics.binding_accuracy=0.0; run_experiment.py _find_common_prefix_suffix returning suffix 'a' for [alpha,beta,delta]; raw_evidence.json G2 no suffix due to distinct digits"
+    },
+    {
+      "id": "V4_NULL_CONTROL_MISDESIGNED",
+      "severity": "medium",
+      "finding": "N1 expected slot_count=0 but training URLs share 'https://api.' (8 chars). _find_common_prefix_suffix correctly returns prefix 'https://api.' and mechanism induces slot with api. prefix. The control does not test 'no common prefix' — all URLs start with https://api. A true no-common-prefix test would use disjoint hosts (https://a.com/x vs https://b.org/y). Failure mode described as 'heuristic too permissive' is actually expected behavior given common prefix; need Jaccard/threshold guard if null behavior desired. As designed, N1 failure does not distinguish over-parameterization from correct prefix detection.",
+      "evidence": "raw_evidence.json N1_NO_COMMON_PREFIX.action_template='https://api.${url}', slot_prefixes={'url':'api.'}, training URLs https://api.example.com/a, https://api.other.com/b, https://api.third.com/c; _find_common_prefix_suffix(['https://api.example.com/a','https://api.other.com/b','https://api.third.com/c']) = ('https://api.','')"
+    },
+    {
+      "id": "V5_G4_CONTRIVED_UNSEEN_VALUES",
+      "severity": "medium",
+      "finding": "G4 tests multi-slot expectation (2 slots: user and order) but leaf-path model can only induce 1 slot. Producer works around by feeding unseen_values as single string 'dave/orders/400' for slot 'url', then checks bound URL against expected 'users/dave/orders/400' — which necessarily adds extra '00' suffix from common suffix '00' (100/200/300). This confirms leaf-path single-leaf limitation, but does not test true 2-slot binding (would require two param keys). Correct interpretation is architectural falsification, not just suffix bug.",
+      "evidence": "raw_evidence.json G4_MULTI_SLOT.parameter_slots=['url'], slot_count=1 vs expected 2, action_template='https://api.example.com/users/${url}00', resolution_results params={'url':'dave/orders/400'} -> bound 'https://api.example.com/users/dave/orders/40000' vs expected '.../dave/orders/400', metrics.binding_accuracy=0.0"
+    },
+    {
+      "id": "V6_DETERMINISTIC_SYNTHETIC_ONLY_NO_EXTERNAL_VALIDITY",
+      "severity": "medium",
+      "finding": "All 7 conditions are deterministic synthetic with no model, network, or browser calls (provenance environment model_calls=0). Binding correctness uses strict JSON equality. This is valid for testing rfind('/') logic but provides no evidence for real-browser noise, URL encoding, fragments, or retrieval verification costs relevant to C-PRODUCT-ECON. Parent handoff carry_forward.unknown already bounds to synthetic kernel correctness only.",
+      "evidence": "provenance.json environment.model_calls=0,browser_calls=0,network_calls=0; result.json validity_notes deterministic synthetic; prereg.md 8.2 synthetic URL patterns; parent handoff EXP-PRODUCT-34420092879 unknown real-browser external validity"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B_LITERAL_NOT_EXECUTED",
+      "severity": "medium",
+      "finding": "Spec baselines include B_LITERAL (literal reuse, confidence 0.5 < min_confidence 0.8, expected fail_rate 1.0). Producer result.json controls.B_LITERAL.passed=true with note 'Not re-tested in this experiment; established in EXP-PRODUCT-34420092879.' No execution evidence in raw_evidence.json. For pure-synthetic experiment, re-execution is trivial; inheritance without re-measurement weakens claim that parameterized induction is necessary in this setting.",
+      "evidence": "spec.json baselines=['B_RFIND_ONLY','B_LITERAL','B_EXACT_MATCH']; result.json controls.B_LITERAL note not re-tested; raw_evidence.json contains no B_LITERAL entry"
+    },
+    {
+      "id": "B_EXACT_MATCH_MISSING",
+      "severity": "medium",
+      "finding": "Spec baseline B_EXACT_MATCH (exact URL string matching with no generalization, mechanism per unique URL) not reported anywhere. No comparison of parameterized vs per-URL mechanism count or cost.",
+      "evidence": "spec.json baselines includes B_EXACT_MATCH; result.json/report.md/provenance.json omit B_EXACT_MATCH; raw_evidence.json no baseline section"
+    },
+    {
+      "id": "B_RFIND_ONLY_IS_MECHANISM_NOT_BASELINE",
+      "severity": "low",
+      "finding": "Spec defines B_RFIND_ONLY as 'Current rfind heuristics as implemented — the mechanism under test.' This is not a baseline but the treatment itself; no alternative heuristic (e.g., query-string parsing, URL decomposition) measured for comparison. Experiment therefore has no strong alternative baseline, only null/positive controls.",
+      "evidence": "spec.json baselines[0] B_RFIND_ONLY; report.md lists no comparative baseline performance"
+    }
+  ],
+  "recomputed_metrics": {
+    "condition_pass_rate": 0.5714285714285714,
+    "structural_generalization_rate": 0.6,
+    "overall_binding_accuracy": 0.5714285714285714,
+    "passed_conditions": 4,
+    "total_conditions": 7,
+    "conditions_passed": ["P1_PATH_PREFIX", "G2_QUERY_STRING_MULTIPARAM", "G3_DEEP_PATH", "G5_PATH_QUERY_HYBRID"],
+    "conditions_failed": ["G1_QUERY_STRING_SIMPLE", "G4_MULTI_SLOT", "N1_NO_COMMON_PREFIX"],
+    "per_condition": {
+      "P1_PATH_PREFIX": {"slot_count": 1, "expected_slot_count": 1, "slot_count_correct": true, "binding_accuracy": 1.0, "binding_correct_count": 3, "template": "https://api.example.com/users/${url}", "slot_prefixes": {"url": ""}, "recomputed_pass": true},
+      "G1_QUERY_STRING_SIMPLE": {"slot_count": 1, "expected_slot_count": 1, "slot_count_correct": true, "binding_accuracy": 0.0, "binding_correct_count": 0, "template": "https://api.example.com/search?q=${url}a", "slot_prefixes": {"url": "search?q="}, "recomputed_pass": false, "failure": "common suffix 'a' corrupts template, bound 'search?q=gammaa' vs expected 'search?q=gamma'"},
+      "G2_QUERY_STRING_MULTIPARAM": {"slot_count": 1, "expected_slot_count": 1, "slot_count_correct": true, "binding_accuracy": 1.0, "binding_correct_count": 3, "template": "https://api.example.com/items?category=books&page=${url}", "slot_prefixes": {"url": "items?category=books&page="}, "recomputed_pass": true},
+      "G3_DEEP_PATH": {"slot_count": 1, "expected_slot_count": 1, "slot_count_correct": true, "binding_accuracy": 1.0, "binding_correct_count": 3, "template": "https://api.example.com/orgs/acme/repos/main/issues/${url}", "slot_prefixes": {"url": ""}, "recomputed_pass": true, "note": "slot_prefix empty despite expected 'repos/main/issues/' — binding via template prefix"},
+      "G4_MULTI_SLOT": {"slot_count": 1, "expected_slot_count": 2, "slot_count_correct": false, "binding_accuracy": 0.0, "binding_correct_count": 0, "template": "https://api.example.com/users/${url}00", "slot_prefixes": {"url": ""}, "recomputed_pass": false, "failure": "single leaf cannot induce 2 slots; suffix '00' from 100/200/300 corrupts template"},
+      "G5_PATH_QUERY_HYBRID": {"slot_count": 1, "expected_slot_count": 1, "slot_count_correct": true, "binding_accuracy": 1.0, "binding_correct_count": 3, "template": "https://api.example.com/users/${url}/items?page=1", "slot_prefixes": {"url": ""}, "recomputed_pass": true, "note": "slot_prefix empty vs expected 'users/' — binding via template prefix"},
+      "N1_NO_COMMON_PREFIX": {"slot_count": 1, "expected_slot_count": 0, "slot_count_correct": false, "binding_accuracy": 0.0, "binding_correct_count": 0, "template": "https://api.${url}", "slot_prefixes": {"url": "api."}, "recomputed_pass": false, "failure": "common prefix 'https://api.' induces parameterization where 0 expected"}
+    },
+    "recomputed_overall_binding_mean": 0.5714285714285714,
+    "recomputed_structural_rate": 0.6,
+    "falsifier_triggered": true,
+    "falsifier_conditions": "Failed 3/7 conditions (<4 threshold not met) BUT second clause triggered: incorrect slot_prefixes/bound URLs on G1 and G4 (2 conditions), and third clause triggered: G4 fails to induce >1 slot (observed 1 vs expected 2). Hypothesis as written (generalizes to query, multi-segment, no-prefix) is falsified in this setting.",
+    "hash_verified": "raw_evidence.json sha256 687c480cba20cfcebdcafbc8835e2523bc7ee04e94c7e3a35d005c463858f579 matches result.json artifacts[0].sha256"
+  },
+  "claim_ceiling": "MIXED-BOUNDED synthetic only: leaf-path URL-as-string with rfind('/') + common-prefix/suffix induction achieves binding_accuracy=1.0 for single-slot path-prefix/ deep-path/ multi-param-query/ hybrid patterns where training values share no common suffix, but the maximum justified ceiling is SINGLE-SLOT synthetic correctness with representation loss. It is falsified for: (1) simple query-string patterns where training values share trailing characters (G1: template 'search?q=${url}a', 0/3 binding), (2) multi-slot URLs (G4: induces 1 slot vs 2 expected, template '${url}00', 0/3 binding), (3) cross-host distinct URLs that share 'https://api.' (N1: over-parameterizes, slot_count 1 vs 0), and (4) slot_prefix semantics (P1/G3/G5 produce empty slot_prefix where 'users/'/'repos/main/issues/' expected — binding works only via full template prefix, not correct slot_prefix). V3_REPRESENTATION_LOSS is confirmed, not resolved. C-PARAM-INHERIT remains EXPERIMENTAL bounded to single-slot leaf-path patterns in deterministic synthetic settings; C-PRODUCT-ECON measurement remains blocked until suffix, multi-slot, and similarity-threshold fixes are implemented and re-validated against actual kernel.py with real-browser/ec cost measurement. No product deployment claim justified.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-34485517221/spec.json: hypothesis expects slot_prefixes={'query':'search?q='}, G4 slot_count=2, N1 slot_count=0; falsifier >=4 fails OR >=2 incorrect bound URLs OR G4 multi-slot >1",
+    "research/experiments/EXP-PRODUCT-34485517221/prereg.md: G1 training alpha/beta/gamma vs run_experiment.py alpha/beta/delta both share suffix 'a'; G5 expected slot_prefixes {'user':'users/'}; decision_rule >=6 SURVIVES/4-5 MIXED/<=3 FALSIFIED",
+    "research/experiments/EXP-PRODUCT-34485517221/result.json: outcome MIXED, metrics condition_pass_rate 0.571 (4/7), structural_generalization_rate 0.6 (3/5), controls P1 passed, N1 failed, B_LITERAL not retested",
+    "research/experiments/EXP-PRODUCT-34485517221/raw_evidence.json: P1 template https://api.example.com/users/${url} slot_prefixes {'url':''}; G1 template https://api.example.com/search?q=${url}a binding_accuracy 0.0; G2 template https://api.example.com/items?category=books&page=${url} binding 1.0; G3 template https://api.example.com/orgs/acme/repos/main/issues/${url} slot_prefix ''; G4 template https://api.example.com/users/${url}00 slot_count 1 vs 2; G5 template https://api.example.com/users/${url}/items?page=1 slot_prefix ''; N1 template https://api.${url} slot_prefix 'api.'; aggregate verdict MIXED",
+    "research/experiments/EXP-PRODUCT-34485517221/run_experiment.py: _find_common_prefix_suffix, rfind('/') slot_prefix extraction, _bind without prefixes, CONDITIONS dict with G1 training alpha/beta/delta and unseen gamma/epsilon/zeta vs prereg gamma, G4 unseen hack url='dave/orders/400'",
+    "research/experiments/EXP-PRODUCT-34485517221/provenance.json: code_version run_experiment.py standalone reimplementation of 64a6a89, models.py without slot_prefixes field, environment model_calls 0 browser_calls 0",
+    "research/experiments/EXP-PRODUCT-34420092879/handoff.json: V3_REPRESENTATION_LOSS flagged leaf-path rfind artefact 'search?q=' not general decomposition, unknown whether generalizes to query/multi-segment, C-PARAM-INHERIT bounded to synthetic-only, C-PRODUCT-ECON unmeasured",
+    "git show 64a6a89:src/spider/kernel.py: verified _find_common_prefix_suffix, rfind('/') extraction, and _bind with prefixes dict diverges from run_experiment.py _bind"
+  ],
+  "unresolved": [
+    "Whether fixing _find_common_prefix_suffix to ignore spurious common suffixes (e.g., single trailing characters not representing structural suffix) would restore G1 without breaking VALUE CONTRACT from EXP-PRODUCT-34282620394",
+    "Whether a Jaccard/similarity or host-aware threshold should gate parameterization to prevent N1-type over-parameterization, and what threshold preserves P1/G2/G3/G5 while rejecting cross-host",
+    "Whether leaf-path model can be extended to multi-slot URL induction via URL parsing (path segment decomposition, query-string parsing) without breaking single-leaf abstraction, or whether C-PARAM-INHERIT must remain single-slot",
+    "Whether empty slot_prefixes for P1/G3/G5 (observed '' vs expected 'users/'/'repos/main/issues/') should be considered a correctness failure warranting template-slot semantics change, or merely a representational artifact since binding via template still succeeds",
+    "Real-world prevalence of G1-type common-suffix collisions in API query values and whether economics measurement should use value distributions that avoid shared suffixes or fix the inducer",
+    "Actual kernel behavior vs reimplementation: direct execution of src/spider/kernel.py distill_parameterized and _bind with prefixes on these 7 conditions to confirm recomputed 4/7 and binding outcomes before kernel is promoted"
+  ]
+}

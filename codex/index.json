@@ -176,6 +176,31 @@
         "handoff.json": "26e7bd90e02cd678328699e7a7cd2d1e0e6e0873361d309d1e775253ff0ef805"
       }
     },
+    "EXP-FRONTIER-34121473072": {
+      "lane": "frontier",
+      "request_id": "246a552a08839e87c18df793",
+      "created_at": "2026-09-07T12:22:11.042673+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Does bias-corrected kNN TV (permutation-null subtraction removing the ~0.52 finite-sample floor) recover uniform function invariance in 10D non-Gaussian spaces, or does the scaling function failure persist after bias correction \u2014 and does the clipping artefact (~50% at lambda=1) quantitatively explain translation's strong signal (separation=0.201) vs scaling's weakness (separation=0.022)?",
+      "audit_status": "REVISE",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/frontier",
+      "hashes": {
+        "request.json": "562ecee83cbc08a62295c677ad2d53909b81291c3806be0cd85cba15599e8526",
+        "spec.json": "ce63def49a35da19247fc05afc837533e8c6acc285ded7335f713c015866a476",
+        "prereg.md": "135d57712c922be28af2f119d23ae9634d5d17dc39648a9db182c8afd2bbf007",
+        "freeze.json": "5b4c9eead1d55470075e4b54c557e9a05934a0fa3e515022e07035dcbc15282b",
+        "result.json": "639dcc42619dfa0cd1719f42e1d3e31eb1bc15c3759eb8ff37134ae756888020",
+        "report.md": "3ffaa3e7d589a3017510bc50d2db6a086e6e68fc7bbb8fe461ce68f788f9ddd0",
+        "provenance.json": "22ee41c8542247f7302ced59789f58fe56059514f442d8b09e1ef4620b1f4071",
+        "audit.json": "53b4693dccd1b1694a70a83fff8f129816e17c6b829718d401c00d8c9df412da",
+        "verdict.json": "b4a43b07acec705d9e4a37b73ed0788555f56dc31a5cd0cc0b7cff18bf25e80e",
+        "handoff.json": "657385858ecd333d46456f97eb51251ab5e903e70a6adf8c0a2aaee19a175faf"
+      }
+    },
     "EXP-GRAPH-33528827169": {
       "lane": "graph",
       "request_id": "3e0d81e7790f2f2b7bd8665e",
@@ -476,6 +501,31 @@
         "handoff.json": "57025732a13bd1e17f553c003db00a646ef45bb9d940d4b5fbfc6b6902757bbf"
       }
     },
+    "EXP-GRAPH-34409639346": {
+      "lane": "graph",
+      "request_id": "f6113bfd743fc2c62324c8df",
+      "created_at": "2026-09-09T21:56:55.733643+00:00",
+      "claim_ids": [
+        "C-SEMANTIC-RESOLVE"
+      ],
+      "question": "Does the kernel resolve semantically aliased URL templates (e.g., /users/{userId} vs /accounts/{id} pointing to the same REST resource) to the correct parametrized mechanism when both are registered with equal confidence, and does it correctly select the mechanism whose template matches the intent structure?",
+      "audit_status": "PASS",
+      "decision": "SUPPORTED",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/graph",
+      "hashes": {
+        "request.json": "c5c7f947790fc1112561fb2c32de08a0079d779db03ee9b8c3eb3cf3fc11e204",
+        "spec.json": "b657b28017806f67d846ddba8262837e8cb23339411de2e6406a3cd4b747d14d",
+        "prereg.md": "9c45991749e169d8aeaf8d5f619c11a4e5d0e8745197d6762430e898957bb662",
+        "freeze.json": "c3295bc7942db5704955709388bb8f2d406688477e13a98981c2f6e5417b60e0",
+        "result.json": "7d75ec1ea2453289ee0ce7f4bfe10c050f237743771d9b3e97489ccbf5247616",
+        "report.md": "a39161ff67662686730818387f7b1f1574936f9fc5823664d46181958fa53c28",
+        "provenance.json": "ad03ee8353a50c909a8be48882814bcc6ef25f27a047288ad929b3204e98685f",
+        "audit.json": "f480f5aabb89f783e06bffbf2b7e2d3605636e03207e3edaa5ea4c4385d07c59",
+        "verdict.json": "8d9a6d24ee5dd60a7a9c19006aca4e661620ffd34d7bf5f73c4c7c5861727d0f",
+        "handoff.json": "fb3bddcf2dcc949d36ee57edcca18f6a986f5643ab4ec9e4534d91e2bf8f668d"
+      }
+    },
     "EXP-INTEL-33528832113": {
       "lane": "intel",
       "request_id": "46d19fdaf32e996c0ab24bd7",
@@ -607,6 +657,59 @@
         "audit.json": "9caafbfacab658bb3b78f0c8345f64a8390874ec7de6ea637e2681144f6957b4",
         "verdict.json": "1e9ea1fde87a9149035b7628b2c35f58813030848a336684af9c48ba8e4c05e4",
         "handoff.json": "5f6b0d3c6feb324b2a23b76fec341b91186c180fb74a62b469768064ad3eb7cc"
+      }
+    },
+    "EXP-INTEL-34377576886": {
+      "lane": "intel",
+      "request_id": "22e6245f73f00bc6626e643d",
+      "created_at": "2026-09-09T16:34:39.388067+00:00",
+      "claim_ids": [
+        "C-CROSSSITE",
+        "C-LLM-INHERIT",
+        "C-PRODUCT-ECON"
+      ],
+      "question": "Can ANY publicly-accessible WebArena deployment path (Docker Hub WebArena-Verified images or Mind2Web HuggingFace dataset) provide a live DOM surface for measuring actual fragment yield, thereby resolving whether heuristic yield estimates (0.517-0.65) are calibrated OR whether Mind2Web offers a viable alternative testbed?",
+      "audit_status": "REVISE",
+      "decision": "REVISE",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/intel",
+      "hashes": {
+        "request.json": "50ae967293cafdce03cf4b1072babb1b3ec76e8f03de0f57d04a09025a1e6261",
+        "spec.json": "13f29466daac4575831d6385d93ded90e9cb5d7018d4d5863f7690338e0f2098",
+        "prereg.md": "def6833cefa9b2cefc943e7b5730114a4bb8e05a4e54baaf785f0840f44c4e54",
+        "freeze.json": "4cabe7d91a0474b4433d60791dbd20bb650328dfc960014ce50f97bfd5e45295",
+        "result.json": "17fee917933e7092cff438e99ae9735fee87c5ef1883d8a1d16628d8be4a5925",
+        "report.md": "0e158ba3997952a2e958a1e819b2b7bc0492302236a8832b207da63b015aeb0d",
+        "provenance.json": "3e8e6f4a53ced1226f3a638198c42828b6e72f1e18f55b135cf06d58816ce8ae",
+        "audit.json": "e6b1ffb2ef2d8e6cc39ef848b6d61201398e68e3780df2f0349cf2d46365da87",
+        "verdict.json": "4203ab9d7959e69b1b3a5410d864b20ca3b391ebab2786d0adf908fa5fcecf25",
+        "handoff.json": "f9d411aff509ecb43fe56976f1a01b10942a00680433169636d04c003523abfe"
+      }
+    },
+    "EXP-INTEL-34546944360": {
+      "lane": "intel",
+      "request_id": "4ba6f6d4334e8c2ee3afcc5f",
+      "created_at": "2026-09-11T00:33:00.888743+00:00",
+      "claim_ids": [
+        "C-CROSSSITE",
+        "C-LLM-INHERIT"
+      ],
+      "question": "What is the correct yield denominator for SPIDER fragment model \u2014 CDP accessibility tree node count or Playwright locatable element count \u2014 and does the locatable yield (~0.38) hold across randomized shopping page types (product-listing, detail, cart, checkout) with scrolled content, plus at least one gitlab and one reddit task?",
+      "audit_status": "REVISE",
+      "decision": "MIXED",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/intel",
+      "hashes": {
+        "request.json": "875f313b648ffdf067827b0aaeea2f7dd808b0ba68149712d9fe919e41e13ca8",
+        "spec.json": "f21f9c2c5035fb388930ca8c9cc4159467a4d0fe5f628f0254d7dfd3d595a410",
+        "prereg.md": "1c2ff2bc751f9ab251ba221b4c0105141f4fdbd88a960067c40ca62b6eb4cb0e",
+        "freeze.json": "43a142c5bab768b37f5df25a21c64c51883590dc69ff7dc408c8d2dba8bda9e8",
+        "result.json": "3a47288bf66bcdb7a614dfb0d535f8e6d73bc72f1ded4eed5819b93cd185d3ca",
+        "report.md": "174f5cd22deef8f0f5f56a135b6c78abd957f358bf077d939082885c13361b77",
+        "provenance.json": "c0c5977bdccdd965346df854e2fef1ef7a6e6247b06b16c54f3c0a8c4d9b1223",
+        "audit.json": "ff487df7273789bb598a4e2fb132a190d8a2bc3049301f76c8c324890e4b823b",
+        "verdict.json": "a616afd3d4b6b1b7d6d84d92e8822ad694aa0ce312563dd2b3f6ffcdd282f350",
+        "handoff.json": "f7e8d8e37d3fa48c33a23a40cf5b6c7de0f6016fb804cc4aa809d0ea4f492486"
       }
     },
     "EXP-PHYSICS-33528829431": {
@@ -785,6 +888,56 @@
         "audit.json": "7a4546a050094fd9cf92d4504f59b9bb0fa4ccd8155a02b89a14e95b9d833b78",
         "verdict.json": "0a25fd1741c3d4304765c2ee5c6237d5e6fb95267f3c1d74e15d84c41f7d683c",
         "handoff.json": "6b154e2ff4deb9b597236c2cf4993676fe7f8e39b2d61024e198a1596733ca16"
+      }
+    },
+    "EXP-PHYSICS-34348438464": {
+      "lane": "physics",
+      "request_id": "6e9666b6a6116a0ef7bd6ece",
+      "created_at": "2026-09-09T11:59:21.399259+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Does title-aware PMI detect dynamical structure on real SPA/form-heavy sites where titles actually vary across routes, using browser-collected action->next-state data with sufficient transition density and title variance?",
+      "audit_status": "MEASUREMENT_INVALID",
+      "decision": "MEASUREMENT_INVALID",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/physics",
+      "hashes": {
+        "request.json": "fee77c21b74c33cc4acb6de1c923ced87cd1bef36915166a9e2b9ee1c539547e",
+        "spec.json": "9607f648c93f512fa47e2dd01ad5908794e18e3f9680fbbfb607218865d2b40e",
+        "prereg.md": "5a89258e7269289283fa28c2f320c1dabf4ae16c15679f31f1a9dd6ec4ec6048",
+        "freeze.json": "43e8c81307e3bb8000a2eb4ce4c496cf149855d9d6ef999ea15f0b813b1cf260",
+        "result.json": "7b73da82c02afed41fd524cb3e1e2b94252c50b1cb566d58b1b0b29d7eeef2d3",
+        "report.md": "183d4c068ae93df75baa7b64bd76cae15b328524ef2a98698dc444e76f832d12",
+        "provenance.json": "0b26f5948fcff43c48adf4ab23a5a6b8c53eec47f71963942e74c8c28c5215ba",
+        "audit.json": "85c03da8580e6134b79627100afa523c33560391af372db4b81d6c5ba055161c",
+        "verdict.json": "8909c0ee0f2608e39047bed74a932ba768a02cc5b7b1d702c7c746e8a6c8fc29",
+        "handoff.json": "e99cf7fb45797ed1b9a1d14282be8db7ab1386aa67deaade12cc8932c6c1a95d"
+      }
+    },
+    "EXP-PHYSICS-34524411213": {
+      "lane": "physics",
+      "request_id": "56528aca7637d3cd1fe79a60",
+      "created_at": "2026-09-10T20:07:04.034277+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Can DOM structural features (element counts by type, tree depth, interactive element density) predict next-state transitions on real SPA/form-heavy sites, providing state representation beyond URL and title?",
+      "audit_status": "REVISE",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/physics",
+      "hashes": {
+        "request.json": "d60876669422bd30ecca02b69ad05d139b27de2ca1b563db930bea82fc2e5e9b",
+        "spec.json": "be8eeec467930395ea222723ed1af0c2a434c8ce81529bcf52cb3d621f9f56cf",
+        "prereg.md": "6f59d15b03a72fc9acf4bd4e0243ab923c62cb67e7d50e98a7aa6528bdf3250e",
+        "freeze.json": "aaef2ce4c34bda4c4430b2cfc75f77c318371501c044fa59df88af208ab600c9",
+        "result.json": "f04dc9dfaef1133deda6a59e23dac718ca290c5661eceb28c55ef910b408850e",
+        "report.md": "808f5a930a8e66ba158472fd39fa3c380b2547cf9968f0aaae53b0697e647ff7",
+        "provenance.json": "4eb550873c1214e627466bf4807eaf1a43f01d2e5f643fd1d38e486483a142ca",
+        "audit.json": "dd2b86c542e3fa60e7d2f72086d7b0ac766eda47e48f61ff76cc324194e9e05a",
+        "verdict.json": "42825b54ef31a838f26aa39ce0d61510d931da030e4afebb6ac0e2b95e1ac76e",
+        "handoff.json": "a9dc6923b311e671d45099f61067d2a7026dee1e1dd622603769ffbe0f5c6c85"
       }
     },
     "EXP-PRODUCT-33528829801": {
@@ -1012,6 +1165,31 @@
         "handoff.json": "76e5e988f76f1184f72b33b0793d2adfaf03dcd129b2a270c76cee055ae403cd"
       }
     },
+    "EXP-PRODUCT-34485517221": {
+      "lane": "product",
+      "request_id": "87db1e32d59a01803f557bbe",
+      "created_at": "2026-09-10T13:54:00.066207+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT"
+      ],
+      "question": "Does the leaf-path URL-as-string prefix extraction heuristic (rfind('/') based) generalize to structurally different URL patterns \u2014 query-string parameters, multi-segment path variation, and URLs with no common prefix \u2014 or does it fail on patterns that are common in real-world API designs?",
+      "audit_status": "REVISE",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/product",
+      "hashes": {
+        "request.json": "cfca5639a8a7f2674b165ee94f5089f6800b92124567b2751b6c362a8718d007",
+        "spec.json": "52c9d8076cd26966eeb20193211bc78413032523e92cec6b4c7c500a68f111fe",
+        "prereg.md": "d475d43c6b1cb9ac12879b6849ca34e8cd03e057a4802515a0523ad69b388986",
+        "freeze.json": "8dadd50c2f31430cddc9ed0affcf6714b03bf6eb63de35d68c6f304744feee78",
+        "result.json": "030bea4db2f8914a7e789ded9aa8ea0fdc3bb0e3812f9362e3c6bfbbcb23e60f",
+        "report.md": "673cea44ca9157c1828b688ff3fdaf0b4d879a56bc9917541300c40ebd3555c9",
+        "provenance.json": "755da003269187312d96689556e750905c7446e591287c1f1fb8a5cc7c9992b4",
+        "audit.json": "95c2372612af2bd7b195105e8025ced888c73744b2ba0e0bd80a31dd6938157a",
+        "verdict.json": "3aaae8e06a12300333f4ad2262ae1553ea08e82185edf3351e584eda4d4cfc59",
+        "handoff.json": "2a3522896783044ccafdccf0abab815facfa43f2d1e0c62304ee94ef98d3a2bf"
+      }
+    },
     "EXP-RUNTIME-33528830833": {
       "lane": "runtime",
       "request_id": "cbf791e0cd3fe570d0ff0fd5",
@@ -1185,6 +1363,31 @@
         "audit.json": "fffdb1ce330f98e0098d813926d122499a181231c8fe6569267f2fceeecaca06",
         "verdict.json": "084a410506135be963291b93f2bda27a3f183872c2c4bdbcb57a06271aeaab70",
         "handoff.json": "794ba636ec7e9502020b2f255b330ef1e30d8660c27b1b8195844014a76d4839"
+      }
+    },
+    "EXP-RUNTIME-34439061845": {
+      "lane": "runtime",
+      "request_id": "94adc0f1fd42057164d04280",
+      "created_at": "2026-09-10T04:55:50.315866+00:00",
+      "claim_ids": [
+        "C-MEAS-VALID"
+      ],
+      "question": "Does the WWW-Authenticate header discrimination pattern observed on Keycloak /userinfo \u2014 where no_auth returns 'Bearer realm=...' (no error fields) while error states return 'Bearer realm=..., error=invalid_token, error_description=...' \u2014 transfer to other Keycloak endpoints (/token with password grant, /token with client_credentials grant, /introspect), or is it endpoint-specific /userinfo behavior?",
+      "audit_status": "PASS",
+      "decision": "FALSIFIED-IN-SETTING \u2014 WWW-Authenticate header discrimination does NOT transfer across Keycloak endpoints. Frozen decision rule fails on both primary conditions: (1) WWW-Auth-only discrimination > 0 on >= 2/3 additional endpoints: 0/3 positive (/token password 0.0, /token client_credentials 0.0, /introspect 0.0); (2) full-vector discrimination > 0.5 on >= 2/3 additional endpoints: 0/3 positive (/token password 0.0, /token client_credentials 0.0, /introspect 0.5 not > 0.5). Positive control PASS (/userinfo WWW-Auth 0.833 == full vector, replicates parent EXP-RUNTIME-34300004597). Null FP PASS on 3/4 endpoints (100% on /token password is structural: fresh JWT per request, not measurement instability). Audit PASS, all metrics recomputed match producer. WWW-Authenticate header is absent from all /token and /introspect responses across all 120 reps of additional endpoints \u2014 this is expected OAuth behavior (credentials in form body, not Authorization header), not a measurement gap. The discrimination pattern is /userinfo-specific resource-server behavior, not Keycloak-level. /token endpoints ignore Authorization header entirely. /introspect achieves body-only discrimination 0.5 via active:true/false field. client_credentials test is degenerate (serviceAccountsEnabled false on spider-client, all 401 unauthorized_client); claim ceiling excludes this endpoint as informative transfer test.",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/runtime",
+      "hashes": {
+        "request.json": "9750fce79f52c98315138dbdb38a57344d9dc7570c31872b359c913d68bfea70",
+        "spec.json": "66f4d6d372c62b98f0d9257f771cda00edfdff902178dcf783e884a9d115f1b3",
+        "prereg.md": "cfcbd6224b520e936e57559214a53cf8a5c864877c1d36f51520cf5195193088",
+        "freeze.json": "1f2cd894bb6f3cd5f8c3e1151469302cdbc2afb60c39e627b93319b412dd5063",
+        "result.json": "8eeec7874da78d99947246e716aca9ab28842bb1e410e1a2a4a3dc9e6ae27254",
+        "report.md": "ca68f66ff5519e811fca4dbd170dde6731b93edf2e242b9519a201d8f885971f",
+        "provenance.json": "5f7cf2ee9b5d3366d57ad830207a401d38bdc5b0c6de19a99c4888698f30e79d",
+        "audit.json": "9b436a16c5f44fb67bc8cd550dea38dde396ef225c42c4789bab374325cd2275",
+        "verdict.json": "e990c99da8a3fab14679bb5621d789d9001a5c52564dccc542213b66364936b9",
+        "handoff.json": "bf2b4c4f2ed0f167a030d5d0f41068ad569f0fcee5947e349b9e3c0e5df608a2"
       }
     }
   }

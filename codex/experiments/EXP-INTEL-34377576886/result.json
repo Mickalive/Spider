@@ -1,0 +1,264 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-34377576886",
+  "lane": "intel",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "docker_hub_pull_success": true,
+    "docker_hub_image_size_gb": 13.3,
+    "docker_hub_pull_time_seconds": 95,
+    "docker_container_start_success": true,
+    "docker_http_response_code": 200,
+    "docker_image_id": "sha256:a5b6fb47ee9f378ceca18e32261a92a8964f0ccfb9f1d3741ce3a0e2d990839d",
+    "docker_container_id": "b7d69e48b0be81fb51ef3ee41678c5f9b2b0c447793d1e9c3fdff59e8e742854",
+    "mind2web_load_success": true,
+    "mind2web_task_count": 1009,
+    "mind2web_website_count": 73,
+    "mind2web_domain_count": 3,
+    "mind2web_html_available": true,
+    "mind2web_trajectory_available": true,
+    "mind2web_html_tasks_pct": 100.0,
+    "mind2web_actions_per_task_mean": 7.7,
+    "playwright_available": true,
+    "playwright_version": "1.62.0",
+    "chromium_version": "151.0.7922.34",
+    "shopping_task_21_total_elements": 2296,
+    "shopping_task_21_locator_elements": 258,
+    "shopping_task_21_viewport_elements": 98,
+    "shopping_task_21_pruned_elements": 98,
+    "shopping_task_21_truncated_8192_elements": 130,
+    "shopping_task_21_truncated_1920_elements": 98,
+    "shopping_task_21_actual_yield": 0.0427,
+    "shopping_task_21_viewport_filter_rate": 0.0427,
+    "shopping_task_21_char_count": 2524,
+    "shopping_task_22_total_elements": 2294,
+    "shopping_task_22_locator_elements": 249,
+    "shopping_task_22_viewport_elements": 98,
+    "shopping_task_22_truncated_1920_elements": 98,
+    "shopping_task_22_actual_yield": 0.0427,
+    "shopping_task_22_viewport_filter_rate": 0.0427,
+    "shopping_heuristic_yield": 0.65,
+    "shopping_method1_yield": 0.365,
+    "shopping_yield_delta_heuristic": 0.6073,
+    "shopping_yield_delta_method1": 0.3223,
+    "measurement_time_seconds": 6.7
+  },
+  "controls": {
+    "positive_control_shopping": {
+      "expected": "shopping has highest actual yield >40% after full pipeline",
+      "observed": "Pipeline produces non-empty observation with 98 elements. Yield is 0.0427 (4.27%), far below 40% threshold.",
+      "pass": false,
+      "evidence": "measurement_result.json: task 21 actual_yield=0.0427, truncated_1920_elements=98, total_elements=2296"
+    },
+    "null_control_wikipedia": {
+      "expected": "wikipedia has lowest actual yield <60% after full pipeline",
+      "observed": "NOT_MEASURED — only shopping task measured in this experiment",
+      "pass": null,
+      "evidence": null
+    },
+    "docker_hub_access": {
+      "expected": "Docker Hub am1n3e/webarena-verified-shopping:latest is pullable on linux/amd64",
+      "observed": "Pull succeeded. Image is 13.3GB (claimed 5GB). Container starts and serves HTTP 200 on port 8080.",
+      "pass": true,
+      "evidence": "docker pull output: Status: Downloaded newer image for am1n3e/webarena-verified-shopping:latest; docker inspect confirms image sha256:a5b6fb47ee9f378ceca18e32261a92a8964f0ccfb9f1d3741ce3a0e2d990839d"
+    },
+    "playwright_chromium": {
+      "expected": "Playwright with Chromium is installed and functional",
+      "observed": "Playwright 1.62.0 installed, Chromium 151.0.7922.34 downloaded successfully. Browser launches headless, navigates to pages, extracts accessibility tree via CDP.",
+      "pass": true,
+      "evidence": "playwright install chromium completed; measurement scripts execute successfully on 2 tasks"
+    },
+    "viewport_geometry_faithful": {
+      "expected": "Viewport filtering uses Playwright locator.bounding_box() intersection with viewport rect (0,0,1280,720), NOT depth/role heuristic",
+      "observed": "Geometry-faithful implementation: locator.bounding_box() for each element, intersection with viewport rect, threshold 0.5. 98/258 locator elements pass viewport filter (38%). Depth/role heuristic NOT used.",
+      "pass": true,
+      "evidence": "measure_yield_geo_v2.py implements is_in_viewport() using compute_intersection_area() with threshold=0.5; sha256:15a2ad056dea51a4e907ceece1d176007122f3b9dec415ea87234061167f1d4e"
+    },
+    "heuristic_baseline": {
+      "expected": "Heuristic yield: shopping 0.65 (aggregated median from EXP-INTEL-33945226776)",
+      "observed": "Actual yield 0.0427 deviates 0.6073 (60.73pp) from heuristic 0.65. Heuristic is NOT calibrated.",
+      "pass": false,
+      "evidence": "shopping_yield_delta_heuristic=0.6073 > 0.15 threshold; actual_yield=0.0427 vs heuristic=0.65"
+    },
+    "method1_baseline": {
+      "expected": "Method 1 yield: shopping 0.365 (element-count with viewport+pruning modeling)",
+      "observed": "Actual yield 0.0427 deviates 0.3223 (32.23pp) from Method 1 0.365. Method 1 is also NOT calibrated.",
+      "pass": false,
+      "evidence": "shopping_yield_delta_method1=0.3223 > 0.15 threshold; actual_yield=0.0427 vs method1=0.365"
+    },
+    "mind2web_structural": {
+      "expected": "Mind2Web has >=50% tasks with HTML snapshots AND trajectory data AND >=100 unique websites",
+      "observed": "100% tasks have HTML and trajectory. But only 73 unique websites (< 100 threshold). Structurally incompatible on S4.",
+      "pass": false,
+      "evidence": "osunlp/Mind2Web: 1009 tasks, 100% HTML, 100% trajectory, 73 unique websites, 3 domains"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-34377576886/spec.json",
+      "sha256": "13f29466daac4575831d6385d93ded90e9cb5d7018d4d5863f7690338e0f2098",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-34377576886/prereg.md",
+      "sha256": "def6833cefa9b2cefc943e7b5730114a4bb8e05a4e54baaf785f0840f44c4e54",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-34377576886/freeze.json",
+      "sha256": null,
+      "role": "fixture"
+    },
+    {
+      "path": "/tmp/opencode/measure_yield_geo_v2.py",
+      "sha256": "15a2ad056dea51a4e907ceece1d176007122f3b9dec415ea87234061167f1d4e",
+      "role": "code"
+    },
+    {
+      "path": "/tmp/opencode/measure_yield_geo.py",
+      "sha256": "fb72fe6d4c5aae558a541549a8f1a9110346e66e579191ff0d2635bddc080253",
+      "role": "code"
+    },
+    {
+      "path": "/tmp/opencode/raw_ax_tree_21.json",
+      "sha256": "2d9acf9d098e709eae6e65a07184c9e1ae6122bfd7a686f002253baebe9e5bf8",
+      "role": "raw"
+    },
+    {
+      "path": "/tmp/opencode/raw_ax_tree_22.json",
+      "sha256": "ffb37731058bb52dbee3ba44eda6835b198454953dcc831289e76ea8a050336a",
+      "role": "raw"
+    },
+    {
+      "path": "/tmp/opencode/measurement_result.json",
+      "sha256": null,
+      "role": "derived"
+    },
+    {
+      "path": "/tmp/opencode/measurement_result_22.json",
+      "sha256": null,
+      "role": "derived"
+    }
+  ],
+  "observations": [
+    {
+      "observation_id": "OBS-DOCKER-HUB-PULL-SUCCESS",
+      "type": "infrastructure_verification",
+      "description": "Docker Hub image am1n3e/webarena-verified-shopping:latest pulled successfully on linux/amd64. Image is 13.3GB (claimed 5GB in spec). Container starts on port 8080 mapping to port 80 (Magento). HTTP 200 with 164KB page served. This is the FIRST successful WebArena Docker deployment across 3 Intel experiments.",
+      "timestamp": "2026-09-10T00:30:00+00:00",
+      "severity": "info",
+      "details": {
+        "image": "am1n3e/webarena-verified-shopping:latest",
+        "image_sha256": "a5b6fb47ee9f378ceca18e32261a92a8964f0ccfb9f1d3741ce3a0e2d990839d",
+        "actual_size_gb": 13.3,
+        "claimed_size_gb": 5,
+        "container_id": "b7d69e48b0be81fb51ef3ee41678c5f9b2b0c447793d1e9c3fdff59e8e742854",
+        "http_response_code": 200,
+        "page_title": "One Stop Market",
+        "platform": "linux/amd64"
+      }
+    },
+    {
+      "observation_id": "OBS-YIELD-MEASUREMENT-TASK21",
+      "type": "measurement",
+      "description": "Geometry-faithful viewport yield measurement on WebArena shopping task 21 (headphones review page). CDP accessibility tree has 2296 elements. Playwright locators find 258 elements with bounding boxes. Geometry-faithful viewport filtering (1280x720, threshold 0.5) retains 98 elements (38% of locators, 4.3% of CDP tree). After IGNORED_ACTREE_PROPERTIES pruning and truncation at max_obs_length=1920, yield = 0.0427.",
+      "timestamp": "2026-09-10T00:35:00+00:00",
+      "severity": "info",
+      "details": {
+        "task_id": 21,
+        "url": "http://localhost:8080/6s-wireless-headphones-over-ear-noise-canceling-hi-fi-bass-foldable-stereo-wireless-kid-headsets-earbuds-with-built-in-mic-micro-sd-tf-fm-for-iphone-samsung-ipad-pc-black-gold.html",
+        "total_cdp_elements": 2296,
+        "locator_elements": 258,
+        "viewport_elements": 98,
+        "actual_yield": 0.0427,
+        "raw_tree_sha256": "2d9acf9d098e709eae6e65a07184c9e1ae6122bfd7a686f002253baebe9e5bf8"
+      }
+    },
+    {
+      "observation_id": "OBS-YIELD-MEASUREMENT-TASK22",
+      "type": "measurement",
+      "description": "Geometry-faithful viewport yield measurement on WebArena shopping task 22 (camera review page). CDP accessibility tree has 2294 elements. Playwright locators find 249 elements with bounding boxes. Geometry-faithful viewport filtering retains 98 elements. Yield = 0.0427. Consistent with task 21, confirming the measurement is stable across shopping tasks.",
+      "timestamp": "2026-09-10T00:35:30+00:00",
+      "severity": "info",
+      "details": {
+        "task_id": 22,
+        "url": "http://localhost:8080/fujifilm-finepix-z200fd-10mp-digital-camera-with-5x-optical-dual-image-stabilized-zoom-black.html",
+        "total_cdp_elements": 2294,
+        "locator_elements": 249,
+        "viewport_elements": 98,
+        "actual_yield": 0.0427,
+        "raw_tree_sha256": "ffb37731058bb52dbee3ba44eda6835b198454953dcc831289e76ea8a050336a"
+      }
+    },
+    {
+      "observation_id": "OBS-HEURISTIC-FALSIFIED",
+      "type": "scientific_finding",
+      "description": "Heuristic yield estimate for shopping (0.65) is FALSIFIED. Actual yield (0.0427) deviates 60.73pp from heuristic, far exceeding the 15pp decision threshold. Method 1 estimate (0.365) is also falsified with 32.23pp deviation. The heuristic model significantly overestimates fragment yield on live shopping pages.",
+      "timestamp": "2026-09-10T00:36:00+00:00",
+      "severity": "critical",
+      "details": {
+        "actual_yield": 0.0427,
+        "heuristic_yield": 0.65,
+        "method1_yield": 0.365,
+        "yield_delta_heuristic": 0.6073,
+        "yield_delta_method1": 0.3223,
+        "decision_threshold": 0.15,
+        "verdict": "FALSIFIES"
+      }
+    },
+    {
+      "observation_id": "OBS-MIND2WEB-PARTIAL",
+      "type": "structural_assessment",
+      "description": "Mind2Web (osunlp/Mind2Web) loaded successfully with 1009 tasks, all containing HTML snapshots and trajectory data. However, only 73 unique websites across 3 domains (Entertainment, Shopping, Travel) — below the 100-website threshold for S4 diversity. Mind2Web is structurally compatible for HTML+trajectory but insufficient for cross-site diversity testing.",
+      "timestamp": "2026-09-10T00:34:00+00:00",
+      "severity": "info",
+      "details": {
+        "dataset": "osunlp/Mind2Web",
+        "total_tasks": 1009,
+        "html_tasks_pct": 100.0,
+        "trajectory_tasks_pct": 100.0,
+        "unique_websites": 73,
+        "unique_domains": 3,
+        "domains": ["Entertainment", "Shopping", "Travel"],
+        "s1_multi_step": true,
+        "s2_trajectory_accessible": true,
+        "s3_stateful": "partial",
+        "s4_diverse_sites": false
+      }
+    },
+    {
+      "observation_id": "OBS-CDP-LOCATOR-MISMATCH",
+      "type": "methodological_note",
+      "description": "Significant mismatch between CDP accessibility tree nodes (2296) and Playwright locator-matched elements (258). Only 11.2% of CDP nodes have corresponding Playwright locators. This means the CDP tree includes many container/structural elements that are not directly interactive. The yield denominator (total CDP elements) may overcount if the heuristic model assumed a different denominator. This is a validity threat for yield comparison.",
+      "timestamp": "2026-09-10T00:36:00+00:00",
+      "severity": "moderate",
+      "details": {
+        "cdp_elements": 2296,
+        "locator_elements": 258,
+        "match_rate": 0.1124,
+        "implication": "Heuristic model may have used different denominator"
+      }
+    }
+  ],
+  "validity_notes": [
+    "N=2 pilot (tasks 21, 22) — both shopping tasks from WebArena-Verified. Cannot generalize to full 187-shopping-task corpus without additional measurements.",
+    "Yield denominator uses CDP accessibility tree node count (2296), not Playwright locator count (258). If heuristic model used locator count as denominator, yield comparison is not apples-to-apples. This is a validity threat acknowledged in OBS-CDP-LOCATOR-MISMATCH.",
+    "Viewport filtering uses Playwright locator.bounding_box() with intersection threshold 0.5. Elements without bounding boxes (from CDP tree) are not directly measurable via this method. The 258 locator elements represent a subset of the full page content.",
+    "Docker image is 13.3GB, not 5GB as claimed in spec. Pull took ~95 seconds on this environment. The size discrepancy is noted but does not affect measurement validity.",
+    "Mind2Web dataset osu-nlp-group/Mind2Web is gated/private. Used osunlp/Mind2Web (public, CC-BY-4.0) as alternative. The two may have different characteristics.",
+    "Measurement was performed on the live Docker container at localhost:8080. The container serves a Magento-based 'One Stop Market' e-commerce site. Page loaded with networkidle within 10 seconds.",
+    "Geometry-faithful viewport filtering is implemented correctly per prereg section 6.2. The depth/role heuristic is NOT used. This addresses the auditor required_fixes from EXP-INTEL-34047713704.",
+    "Both shopping tasks (21, 22) show identical yield (0.0427) and viewport element count (98), suggesting the measurement is stable. However, both tasks are product review pages which may have similar DOM structure."
+  ],
+  "unresolved": [
+    "Whether the CDP accessibility tree node count (2296) or Playwright locator count (258) is the correct denominator for yield comparison with heuristic models",
+    "Whether the heuristic model's viewport coverage constants (shopping 0.45) were calibrated against CDP trees or DOM elements",
+    "Whether other site types (gitlab, reddit, map, wikipedia, shopping_admin) show different yield patterns",
+    "Whether the yield of 0.0427 is an artifact of the Magento page structure (many container elements) or a genuine reflection of fragment availability",
+    "Whether VisualWebArena (different Docker images) would show different yield characteristics",
+    "Whether the 73-website Mind2Web corpus could still be useful for limited cross-site testing despite failing the 100-website threshold",
+    "Whether scrolling or lazy-loading affects viewport element count (current measurement captures only initial viewport)",
+    "Whether the IGNORED_ACTREE_PROPERTIES pruning significantly affects yield (333/2296 elements had properties removed, but this does not change element count)"
+  ]
+}

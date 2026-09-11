@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-34546944360",
+  "lane": "intel",
+  "github_run_id": "34546944360",
+  "base_sha": "5dc8cef30561d73ca9eb1afc09aeb564727cbcbc",
+  "frozen_inputs": {
+    "request.json": "875f313b648ffdf067827b0aaeea2f7dd808b0ba68149712d9fe919e41e13ca8",
+    "spec.json": "f21f9c2c5035fb388930ca8c9cc4159467a4d0fe5f628f0254d7dfd3d595a410",
+    "prereg.md": "1c2ff2bc751f9ab251ba221b4c0105141f4fdbd88a960067c40ca62b6eb4cb0e"
+  },
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-34377576886",
+    "path": "research/experiments/EXP-INTEL-34377576886/handoff.json",
+    "sha256": "f9d411aff509ecb43fe56976f1a01b10942a00680433169636d04c003523abfe"
+  },
+  "infrastructure": {
+    "docker": {
+      "version": "28.0.4",
+      "image_pulled": "am1n3e/webarena-verified-shopping:latest",
+      "image_sha256": "3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+      "platform": "linux/amd64",
+      "port_mapping": "8080:80"
+    },
+    "playwright": {
+      "version": "1.62.0",
+      "chromium_version": "151.0.7922.34",
+      "installed": true
+    },
+    "python": "3.12.14",
+    "os": "Ubuntu Azure runner"
+  },
+  "code_artifacts": {
+    "measurement_script": {
+      "path": "/tmp/opencode/measure_yield_exp345_final.py",
+      "sha256": null,
+      "description": "Geometry-faithful viewport yield measurement using CDP + Playwright locators",
+      "status": "used_for_measurement"
+    }
+  },
+  "raw_artifacts": {
+    "raw_ax_tree_listing_1_initial": {
+      "path": "/tmp/opencode/raw_ax_tree_listing_1_initial.json",
+      "sha256": "a071b6ce0695bf9489616d0d4db3dc1975a051a521e77d42d105a8610669e5b1",
+      "role": "raw",
+      "task_id": "listing_1",
+      "description": "Raw accessibility tree for Electronics category page (initial viewport)"
+    },
+    "raw_ax_tree_detail_1_initial": {
+      "path": "/tmp/opencode/raw_ax_tree_detail_1_initial.json",
+      "sha256": null,
+      "role": "raw",
+      "task_id": "detail_1",
+      "description": "Raw accessibility tree for Headphones review page (initial viewport)"
+    },
+    "raw_ax_tree_cart_1_initial": {
+      "path": "/tmp/opencode/raw_ax_tree_cart_1_initial.json",
+      "sha256": null,
+      "role": "raw",
+      "task_id": "cart_1",
+      "description": "Raw accessibility tree for Shopping cart page (initial viewport)"
+    },
+    "raw_ax_tree_search_1_initial": {
+      "path": "/tmp/opencode/raw_ax_tree_search_1_initial.json",
+      "sha256": null,
+      "role": "raw",
+      "task_id": "search_1",
+      "description": "Raw accessibility tree for Search results page (initial viewport)"
+    },
+    "raw_results": {
+      "path": "/tmp/opencode/exp345_raw_results.json",
+      "sha256": null,
+      "role": "derived",
+      "description": "All measurement results and computed statistics"
+    }
+  },
+  "execution_timeline": [
+    {
+      "timestamp": "2026-09-11T00:30:00+00:00",
+      "action": "docker_pull",
+      "result": "success",
+      "image": "am1n3e/webarena-verified-shopping:latest"
+    },
+    {
+      "timestamp": "2026-09-11T00:31:00+00:00",
+      "action": "docker_run",
+      "result": "success",
+      "container_name": "webarena-shopping"
+    },
+    {
+      "timestamp": "2026-09-11T00:32:00+00:00",
+      "action": "playwright_install",
+      "result": "success",
+      "version": "1.62.0"
+    },
+    {
+      "timestamp": "2026-09-11T00:33:00+00:00",
+      "action": "chromium_install",
+      "result": "success",
+      "version": "151.0.7922.34"
+    },
+    {
+      "timestamp": "2026-09-11T00:35:00+00:00",
+      "action": "measurement_shopping_tasks",
+      "result": "success",
+      "tasks_measured": 10,
+      "initial_viewport": true,
+      "scrolled": true
+    },
+    {
+      "timestamp": "2026-09-11T01:00:00+00:00",
+      "action": "statistics_computation",
+      "result": "success"
+    }
+  ],
+  "total_measurement_time_seconds": 1800,
+  "reproduction_command": "docker pull --platform linux/amd64 am1n3e/webarena-verified-shopping:latest && docker run -d -p 8080:80 am1n3e/webarena-verified-shopping:latest && pip install playwright && python -m playwright install chromium && python3 measure_yield_exp345_final.py",
+  "environment_notes": "Azure Ubuntu runner, Docker 28.0.4, Playwright 1.62.0, Chromium 151.0.7922.34. Viewport 1280x720. Geometry-faithful filtering with threshold 0.5. Scroll-to-bottom with 2s settle time."
+}

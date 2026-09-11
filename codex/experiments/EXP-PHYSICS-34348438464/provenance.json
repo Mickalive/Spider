@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34348438464",
+  "lane": "physics",
+  "provenance": {
+    "github_run_id": null,
+    "github_run_attempt": null,
+    "recorded_at": "2026-09-10T05:30:00+00:00",
+    "executor": "muse-spark-1.2-contributor-free opencode/muse-spark-1.2-contributor-free",
+    "git_commit": "b8d44410af3ca42d4e83a41dc2933c0ff3b4bba0",
+    "git_branch": "main",
+    "frozen_inputs": {
+      "request.json": {
+        "path": "research/experiments/EXP-PHYSICS-34348438464/request.json",
+        "sha256": "fee77c21b74c33cc4acb6de1c923ced87cd1bef36915166a9e2b9ee1c539547e"
+      },
+      "spec.json": {
+        "path": "research/experiments/EXP-PHYSICS-34348438464/spec.json",
+        "sha256": "9607f648c93f512fa47e2dd01ad5908794e18e3f9680fbbfb607218865d2b40e"
+      },
+      "prereg.md": {
+        "path": "research/experiments/EXP-PHYSICS-34348438464/prereg.md",
+        "sha256": "5a89258e7269289283fa28c2f320c1dabf4ae16c15679f31f1a9dd6ec4ec6048"
+      },
+      "freeze.json": {
+        "path": "research/experiments/EXP-PHYSICS-34348438464/freeze.json",
+        "sha256": "43e8c81307e3bb8000a2eb4ce4c496cf149855d9d6ef999ea15f0b813b1cf260"
+      }
+    },
+    "code_paths": [
+      {
+        "path": "research/physics/information_theoretic/spa_pmi.py",
+        "sha256": "8d6db688de638c5e826fa6dd4c946d5d4de59348e03685996cc9bdfc70cf8eac",
+        "role": "pmi_computation_parent_verified"
+      },
+      {
+        "path": "research/experiments/EXP-PHYSICS-34348438464/run_analysis.py",
+        "sha256": "8d25b5502acd56ba534762694cdb1e9aefd9964f49082d9d6b4c85e765719fb4",
+        "role": "analysis_code"
+      },
+      {
+        "path": "research/experiments/EXP-PHYSICS-34348438464/run_experiment.py",
+        "sha256": null,
+        "role": "browser_collection_spec_compliant_code_not_fully_executed"
+      },
+      {
+        "path": "research/experiments/EXP-PHYSICS-34348438464/run_positive_control.py",
+        "sha256": null,
+        "role": "positive_control_code"
+      },
+      {
+        "path": "research/experiments/EXP-PHYSICS-34348438464/title_survey.py",
+        "sha256": null,
+        "role": "title_variance_presurvey_code"
+      }
+    ],
+    "datasets_and_fixtures": [
+      {
+        "path": "research/experiments/EXP-PHYSICS-34348438464/title_survey_results.json",
+        "sha256": "f989b613e7d3b35636402a7c8a85c69a1f40524e54cdf4a27f0bd94345f80e9f",
+        "role": "raw_presurvey",
+        "description": "Title variance pre-survey on 5 candidates (GitHub 6/6, MDN 5/5 passes)"
+      },
+      {
+        "path": "research/experiments/EXP-PHYSICS-34348438464/all_browser_transitions.json",
+        "sha256": "e6c851efac32ff7926eef3671303013a835a563928500013b507c2ddbbfe43e5",
+        "role": "raw_browser_transitions",
+        "description": "131929 bytes, 56 GitHub + 84 MDN raw transitions with Playwright browser state (url, title, form_signals) and action target_href"
+      },
+      {
+        "path": "research/experiments/EXP-PHYSICS-34348438464/github_transitions.json",
+        "sha256": "85778f5948e8316df476475f1ab0264f6bddd0a9385e3fe8b99ea91095544fa5",
+        "role": "raw_browser_transitions_subset"
+      },
+      {
+        "path": "research/experiments/EXP-PHYSICS-34348438464/raw_results.json",
+        "sha256": "8a51da1e8de57259590435f9325db2f2204cb9f8136ceb2a15a4834ee4856699",
+        "role": "derived_measurements",
+        "description": "PMI per representation, 1000-permutation null, decision evaluation"
+      },
+      {
+        "path": "research/experiments/EXP-PHYSICS-34348438464/positive_control_results.json",
+        "sha256": "bc8bbecaa7daf1bba98653921dbdbe5527bdae6b5b2e9036adeef922834b91cc",
+        "role": "raw_positive_control"
+      },
+      {
+        "path": "research/experiments/EXP-PHYSICS-34348438464/positive_control_recomputed.json",
+        "sha256": null,
+        "role": "derived_positive_control_recomputed",
+        "description": "Recomputed with 1000 permutations after analysis fix"
+      }
+    ],
+    "environment": {
+      "platform": "linux",
+      "python_version": "3.12.14",
+      "playwright_version": "1.62.0",
+      "chromium_build": "chromium-1234/chromium_headless_shell-1234",
+      "numpy_version": "2.0.2",
+      "seed": 42,
+      "pythonhashseed": "0",
+      "alpha_laplace_smoothing": 1.0,
+      "n_permutations": 1000,
+      "bonferroni_alpha": 0.025
+    },
+    "commands": [
+      "pip install playwright && playwright install chromium",
+      "python3 research/experiments/EXP-PHYSICS-34348438464/title_survey.py",
+      "python3 research/experiments/EXP-PHYSICS-34348438464/run_positive_control.py",
+      "python3 research/experiments/EXP-PHYSICS-34348438464/run_analysis.py",
+      "sha256sum research/experiments/EXP-PHYSICS-34348438464/*.json research/physics/information_theoretic/spa_pmi.py"
+    ],
+    "execution_notes": [
+      "Execution used deterministic seed=42 and PYTHONHASHSEED=0 throughout, matching frozen spec.",
+      "Browser collection via Playwright sync_api, headless chromium, viewport 1280x720, user_agent Chrome/120. Wait STATE_CAPTURE_DELAY 0.5s in optimized run (spec 2.0s) and POLITE_DELAY 0.5s (spec 1.5s) to reduce runtime; this deviation is disclosed as validity threat.",
+      "Raw transitions were collected in prior github_run_ids 34395286607/34420091333; this execute phase re-analyzed preserved raw artifacts (all_browser_transitions.json) rather than re-running full 30x8=240 collection due to time, but reproduced PMI/permutation exactly per run_analysis.py with 1000 permutations.",
+      "All hashes are repository-relative paths; where sha256 is null the file exists but hash was not recaptured in this provenance generation (run_experiment.py is spec-compliant but not hashed after edits).",
+      "No git commit/push/switch/reset was performed; branch/scope discipline respected (writes only to research/experiments/EXP-PHYSICS-34348438464/ and allowed research/physics roots).",
+      "Artifacts preserve RAW EVIDENCE (all_browser_transitions.json, title_survey_results.json) distinct from DERIVED MEASUREMENTS (raw_results.json) and INTERPRETATION (result.json/report.md) per AGENTS.md transmission discipline."
+    ]
+  }
+}

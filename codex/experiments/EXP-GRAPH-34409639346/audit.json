@@ -1,0 +1,165 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34409639346",
+  "lane": "graph",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    {
+      "finding": "Primary metric recomputed exactly — aliased_first_correct_selection_rate 0.0 (0/10) confirmed",
+      "severity": "none",
+      "details": "Recomputed from raw_evidence/execution_results.json: 10 aliased-first conditions each selected a-XX (smaller ID) which was the aliased mechanism; selects_correct=false in all 10, n_selects_correct=0, n_aliased_first=10, rate 0.0 matches result.json metrics.aliased_first_correct_selection_rate and metrics.n_selects_correct. Independent SpiderKernel replay for pair 1 (a-01 aliased / z-01 correct) resolves to a-01 with bound_action /accounts/42 regardless of insertion order, confirming stable-sort tie-break by mechanism_id, not template analysis.",
+      "evidence": "research/experiments/EXP-GRAPH-34409639346/raw_evidence/execution_results.json sha256 d27d3247dd45f3bedb54db7d2195464e4d44ba3acd53e1f5c7c2f05fe214d51e pair_results[aliased-first] 10/10 follows_tie_breaking true selects_correct false, result.json metrics.aliased_first_correct_selection_rate 0.0, execute.py PAIRS definition, src/spider/kernel.py L97 intent != intent and L112 sort"
+    },
+    {
+      "finding": "Binomial test recomputed — p=1.0 one-sided H1 p>0.5 correct, no evidence for semantic aliasing",
+      "severity": "none",
+      "details": "Manual recompute sum_{i=0}^{10} comb(10,i)0.5^10 =1.0 for k=0, n=10, alternative greater. scipy not installed in audit env so manual path matches producer fallback (execute.py lines 354-371). Result.json binomial_p_one_sided 1.0 matches raw_evidence metrics.binomial_p 1.0. Correctly interpreted as SUPPORTS (0/10 aliased-first correct, threshold >=1/10 to falsify). With n=10 power limited but falsifier threshold pre-registered and respected.",
+      "evidence": "raw_evidence/execution_results.json metrics.binomial_p 1.0, result.json metrics.binomial_p_one_sided 1.0, spec.json falsifier and prereg.md 5.3, execute.py binomial block"
+    },
+    {
+      "finding": "All 4 baselines + tie-break consistency control recomputed and pass",
+      "severity": "none",
+      "details": "Independent verification of raw_evidence: B-EMPTY-REGISTRY UNKNOWN, B-SINGLE-MECHANISM EXECUTABLE a-01 /users/42, B-CONFIDENCE-HIGHER EXECUTABLE a-high (0.95 beats 0.8, different intents), B-CONFIDENCE-EQUAL-DIFFERENT-INTENT EXECUTABLE a-01 (only exact intent match qualifies). Correct-first subset 10/10 selects correct (a-XX smaller ID) consistent with tie-break. No exceptions (0/24). Confirms kernel pipeline functional and intent filtering exact, confidence ordering intact.",
+      "evidence": "raw_evidence/execution_results.json baseline_results[0-3] all passed true, pair_results correct-first 10/10 passed, result.json controls B-EMPTY-REGISTRY/B-SINGLE-MECHANISM/B-CONFIDENCE-HIGHER/B-CONFIDENCE-EQUAL-DIFFERENT-INTENT/CORRECT-FIRST-CONSISTENCY, independent kernel replay for different-intent control"
+    },
+    {
+      "finding": "Registry ordering mechanism verified — mechanism_id sorted controls tie-break, no insertion-order contamination",
+      "severity": "none",
+      "details": "src/spider/registry.py upsert sorts by mechanism_id (line 38 sorted(items)), kernel.py candidates from self.registry.all() then stable sort by confidence descending only (L112). For equal confidence stable sort preserves registry order = mechanism_id order. Audit replay inserted in both orders (aliased first vs correct first) and registry.all() always returned ['a-01','z-01'] sorted. Validates producer's a-XX/z-XX naming correctly forces tie-break, and correct-first vs aliased-first contrast is discriminating. No monkey-patching in execute.py (only tempdir + upsert).",
+      "evidence": "src/spider/registry.py lines 35-38, src/spider/kernel.py lines 96-112, execute.py create_fresh_kernel and run_aliased_pairs a-02/z-02 naming, independent replay tmpdir registry order both directions"
+    },
+    {
+      "finding": "Measurement environment could express tested effect — deterministic kernel-level test valid, no leakage",
+      "severity": "none",
+      "details": "Each condition fresh kernel with temp registry, controlled confidence 0.9 equal, distinct intent strings (10 unique), params satisfy both slots (e.g., {id:42,uid:42}), no cross-contamination, no model calls/RNG/sampling, single-run exact comparison per prereg measurement_validity justified. No HTTP/browsing needed since claim is resolver selection, not execution success. Environment correctly withholds semantic template analysis — code inspection confirms kernel never reads action_template for selection (only for _bind after selection and for required_slots check). Negative result is valid absence of capability, not infrastructure failure.",
+      "evidence": "execute.py PAIRS 10 distinct intents, make_params satisfies both slots, create_fresh_kernel tempfile per condition, result.json validity_notes deterministic, provenance model_calls 0"
+    },
+    {
+      "finding": "Representation disclosure adequate — synthetic aliasing scope bounded",
+      "severity": "low",
+      "details": "Producer discloses synthetic path aliasing with distinct slot names only (validity_notes, prereg 8.2/8.3). Claim ceiling must remain bounded to this: simple path aliasing /users/{id} vs /accounts/{uid} etc., equal confidence, preconditions={} applicability_guards={}. Not tested: query params, path rewriting, server-side rewriting, confidence differences, real endpoint HTTP verification that both URLs map to same resource, or case where template correctness could be grounded in HTTP success. Producer correctly does not overclaim beyond resolver tie-break.",
+      "evidence": "prereg.md 8.1-8.5, result.json validity_notes[2-4], spec.json measurement_validity, report.md Validity Threats"
+    },
+    {
+      "finding": "Limited power and tautology risk disclosed — result expected from code analysis but test still discriminating",
+      "severity": "low",
+      "details": "Prereg explicitly states expected SUPPORTS from code analysis (L97 exact match, L112 stable sort) and limited power n=10 (Type II risk, need n=50+ for strong confirmation). The test is not tautological: it could have falsified if kernel had hidden template analysis; the aliased-first subset provides the only falsifying ordering. Observed 0/10 SUPPORTS matches prediction and survives attempts to break by reordering insertion or varying confidence. The 100% tie-break consistency across 20 conditions is improbable under semantic resolution.",
+      "evidence": "prereg.md 4, 8.1, 10.1, 13; spec.json falsifier and decision_rule; raw_evidence 20 pair_results 20/20 follow tie-break"
+    },
+    {
+      "finding": "Provenance and freeze integrity intact — no post-freeze spec drift",
+      "severity": "none",
+      "details": "Freeze hashes recomputed: request a696e652..., spec b657b280..., prereg 9c459917... match freeze.json. Execution uses same PAIRS and condition counts (4 baselines +20 aliased =24) as frozen spec. Provenance identifies correct github_run_id 34409639346 commit 8398d3cd base 54e8a384, execution_time 2026-09-10T05:02:14, environment python 3.x no external services. Raw evidence SHA256 d27d324... matches result.json artifacts entry. No deviation from prereg per deviation policy.",
+      "evidence": "freeze.json hashes, request.json request_hash a696e652, spec.json, prereg.md hash 9c459917, provenance.json code_paths and reproduction_command, raw_evidence SHA256"
+    },
+    {
+      "finding": "Metric/control identifier preservation verified — no renaming to obscure disagreement",
+      "severity": "none",
+      "details": "Producer preserves frozen identifiers: B-EMPTY-REGISTRY, B-SINGLE-MECHANISM, B-CONFIDENCE-HIGHER, B-CONFIDENCE-EQUAL-DIFFERENT-INTENT, aliased_first_correct_selection_rate, correct_first_correct_selection_rate, n_aliased_first, n_selects_correct, binomial_p_one_sided, total_conditions, exceptions_count, CORRECT-FIRST-CONSISTENCY. Auditor recomputed using same identifiers; no drift. Controls expected/observed/passed fields match spec definitions.",
+      "evidence": "spec.json baselines/positive_control/null_control vs result.json controls keys and metrics keys, raw_evidence condition_id strings"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "B-EMPTY-REGISTRY",
+      "expected": "UNKNOWN with empty registry for intent get-user-profile",
+      "observed": "UNKNOWN status, mechanism_id null, confidence 0.0, reason 'no applicable validated mechanism'",
+      "pass": true,
+      "recomputed": true,
+      "evidence": "raw_evidence/execution_results.json baseline_results[0] status UNKNOWN passed true, result.json controls.B-EMPTY-REGISTRY passed true"
+    },
+    {
+      "baseline_id": "B-SINGLE-MECHANISM",
+      "expected": "EXECUTABLE a-01 bound_action /users/42 confidence 0.9 for intent get-user-profile params {id:42,uid:42}",
+      "observed": "EXECUTABLE a-01 bound_action /users/42 confidence 0.9 — matches expected",
+      "pass": true,
+      "recomputed": true,
+      "evidence": "raw_evidence baseline_results[1] mechanism_id a-01 bound_action /users/42, result.json controls.B-SINGLE-MECHANISM passed true"
+    },
+    {
+      "baseline_id": "B-CONFIDENCE-HIGHER",
+      "expected": "EXECUTABLE a-high (0.95) wins over z-low (0.8) when resolving intent get-user-profile; z-low has different intent list-user-posts so only a-high qualifies but confidence ordering still exercised",
+      "observed": "EXECUTABLE a-high confidence 0.95 — higher confidence mechanism wins; validates confidence path though intent filtering already singular",
+      "pass": true,
+      "recomputed": true,
+      "evidence": "raw_evidence baseline_results[2] mechanism_id a-high confidence 0.95, result.json controls.B-CONFIDENCE-HIGHER passed true"
+    },
+    {
+      "baseline_id": "B-CONFIDENCE-EQUAL-DIFFERENT-INTENT",
+      "expected": "EXECUTABLE a-01 only exact intent match qualifies among two equal-confidence different-intent mechanisms",
+      "observed": "EXECUTABLE a-01 — exact intent filtering works, no fuzzy/semantic intent matching",
+      "pass": true,
+      "recomputed": true,
+      "evidence": "raw_evidence baseline_results[3] mechanism_id a-01 confidence 0.9, result.json controls.B-CONFIDENCE-EQUAL-DIFFERENT-INTENT passed true, independent replay different-intent resolves to a-01"
+    },
+    {
+      "baseline_id": "CORRECT-FIRST-CONSISTENCY (tie-break consistency control)",
+      "expected": "10/10 correct-first conditions select correct mechanism (a-XX smaller ID) — tie-break deterministic",
+      "observed": "10/10 selects_correct via tie-break: PAIR-1..10-CORRECT-FIRST all mechanism_id a-01..a-10 with correct template URLs (/users/42, /users/42/posts, /posts/42/comments, etc.)",
+      "pass": true,
+      "recomputed": true,
+      "evidence": "raw_evidence pair_results filtered ordering correct-first 10 entries all follows_tie_breaking true passed true, result.json controls.CORRECT-FIRST-CONSISTENCY observed 1.0"
+    },
+    {
+      "baseline_id": "ALIASED-FIRST (primary experimental, not baseline — 10 conditions)",
+      "expected": "If semantic aliasing absent: 0/10 selects correct (all select aliased a-XX smaller ID). If present: >=1/10 selects correct (z-XX)",
+      "observed": "0/10 selects correct — all 10 aliased-first select aliased a-01..a-10 with aliased URLs (/accounts/42, /profiles/42/entries, /articles/42/reviews, etc.), follows_tie_breaking true in all",
+      "pass": true,
+      "recomputed": true,
+      "evidence": "raw_evidence pair_results aliased-first 10 entries all mechanism_id a-XX selects_correct false follows_tie_breaking true, result.json metrics n_selects_correct 0 n_aliased_first 10"
+    }
+  ],
+  "recomputed_metrics": {
+    "aliased_first_correct_selection_rate": 0.0,
+    "aliased_first_correct_selection_rate_recomputed": 0.0,
+    "n_aliased_first": 10,
+    "n_aliased_first_recomputed": 10,
+    "n_selects_correct": 0,
+    "n_selects_correct_recomputed": 0,
+    "correct_first_correct_selection_rate": 1.0,
+    "correct_first_correct_selection_rate_recomputed": 1.0,
+    "n_correct_first": 10,
+    "n_correct_first_recomputed": 10,
+    "n_correct_first_correct": 10,
+    "n_correct_first_correct_recomputed": 10,
+    "binomial_p_one_sided": 1.0,
+    "binomial_p_recomputed": 1.0,
+    "binomial_test": "binomtest(0,10,0.5,alternative='greater') p=1.0 manual sum comb fallback 1.0",
+    "baselines_passed": true,
+    "baselines_passed_recomputed": true,
+    "exceptions_count": 0,
+    "exceptions_count_recomputed": 0,
+    "total_conditions": 24,
+    "total_conditions_recomputed": 24,
+    "raw_evidence_sha256": "d27d3247dd45f3bedb54db7d2195464e4d44ba3acd53e1f5c7c2f05fe214d51e",
+    "raw_evidence_sha256_recomputed": "d27d3247dd45f3bedb54db7d2195464e4d44ba3acd53e1f5c7c2f05fe214d51e",
+    "recompute_notes": "Recomputed from raw_evidence/execution_results.json: 4 baselines all passed, 10 correct-first all passed (a-XX), 10 aliased-first all follows_tie_breaking true (0 selects correct). Rates and binomial p match producer. Independent SpiderKernel replay confirms registry sorted by mechanism_id controls tie-break and kernel selects smaller ID regardless of insertion order or template semantics. No divergence."
+  },
+  "claim_ceiling": "MAX JUSTIFIED CEILING: SUPPORTS that kernel does NOT perform semantic aliasing resolution — bounded to current unfixed HEAD kernel.py resolve() exact intent match (L97 m.intent != intent) + stable confidence sort (L112) + registry sorted by mechanism_id, for simple path-level aliasing with equal confidence 0.9, preconditions={} applicability_guards={}, 10 synthetic intent-template pairs (/users/{id} vs /accounts/{uid} etc.) each tested both ID orderings (20 conditions), deterministic single-run cold kernel, params satisfying both slots. Established: (1) all 4 baselines pass; (2) 0/10 aliased-first selects template-matching mechanism (binomial p=1.0 one-sided, far below any falsification threshold); (3) 10/10 correct-first selects template-matching via tie-break, confirming mechanism; (4) selection fully explained by mechanism_id ordering, no template structure analysis. NOT established: query-parameter aliasing, path-rewriting, server-side routing, confidence-differentiated aliasing, real HTTP grounding that both templates reach same resource, multi-intent, non-empty preconditions/guards, production-web DOM/auth/session/drift, or any fix that would add semantic resolution. C-SEMANTIC-RESOLVE falsified at proof-of-concept level for this narrow resolver scope; product must implement explicit aliasing or require exact intent matching.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-34409639346/request.json sha256 c5c7f947790fc1112561fb2c32de08a0079d779db03ee9b8c3eb3cf3fc11e204",
+    "research/experiments/EXP-GRAPH-34409639346/spec.json sha256 b657b28017806f67d846ddba8262837e8cb23339411de2e6406a3cd4b747d14d",
+    "research/experiments/EXP-GRAPH-34409639346/prereg.md sha256 9c45991749e169d8aeaf8d5f619c11a4e5d0e8745197d6762430e898957bb662",
+    "research/experiments/EXP-GRAPH-34409639346/freeze.json frozen_at 2026-09-10T04:58:39.774078",
+    "research/experiments/EXP-GRAPH-34409639346/result.json schema_version 1 status COMPLETE outcome SUPPORTS",
+    "research/experiments/EXP-GRAPH-34409639346/raw_evidence/execution_results.json sha256 d27d3247dd45f3bedb54db7d2195464e4d44ba3acd53e1f5c7c2f05fe214d51e 24 conditions (4 baselines +20 pairs)",
+    "research/experiments/EXP-GRAPH-34409639346/execute.py sha256 b439ef274e74eea94e887bd01cb46877aadf0ea2f0fc964bcf01488c79f0fbf6",
+    "research/experiments/EXP-GRAPH-34409639346/report.md",
+    "research/experiments/EXP-GRAPH-34409639346/provenance.json github_run_id 34409639346 base_sha 54e8a384 execution_time 2026-09-10T05:02:14",
+    "src/spider/kernel.py resolve m.intent != intent L97 and candidates.sort L112 confidence only, _matches _bind _template_slots",
+    "src/spider/registry.py upsert sorted(items) L38 mechanism_id ordering",
+    "src/spider/models.py Mechanism Resolution ResolutionStatus",
+    "research/experiments/EXP-GRAPH-34395286092/handoff.json sha256 57025732a13bd1e17f553c003db00a646ef45bb9d940d4b5fbfc6b6902757bbf parent BLOCKED_CLOSE_AND_PIVOT",
+    "research/lanes/registry.json graph lane priority_claims includes C-SEMANTIC-RESOLVE"
+  ],
+  "unresolved": [
+    "Whether kernel could be extended to perform semantic aliasing resolution and what engineering cost that would entail (product_consequence_negative not tested)",
+    "Whether larger n (50+) would change statistical certainty — current 0/10 supports hypothesis but with limited power per prereg 8.1; follow-up with n=50+ would strengthen confirmation",
+    "Whether more complex aliasing (query params, path rewriting, server-side rewriting) would be handled differently — current ceiling is simple path aliasing only",
+    "Whether aliasing resolution should be grounded in HTTP execution success against real endpoints rather than producer-defined correctness — both templates currently executable but not executed",
+    "Whether C-PARAM-INHERIT fix (secondary sort on len(parameter_slots) at L112) interacts with aliasing — audit confirms fix absent and not relevant to intent matching L97, but future committed fix should be re-checked",
+    "Whether C-SEMANTIC-RESOLVE generalizes beyond single intent per pair and preconditions={} to richer guard/context scenarios"
+  ]
+}

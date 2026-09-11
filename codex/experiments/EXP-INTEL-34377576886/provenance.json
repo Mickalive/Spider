@@ -1,0 +1,141 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-34377576886",
+  "lane": "intel",
+  "github_run_id": "34377576886",
+  "base_sha": "f26f7c7797a7db425760c984cb467746824550fe",
+  "frozen_inputs": {
+    "request.json": "50ae967293cafdce03cf4b1072babb1b3ec76e8f03de0f57d04a09025a1e6261",
+    "spec.json": "13f29466daac4575831d6385d93ded90e9cb5d7018d4d5863f7690338e0f2098",
+    "prereg.md": "def6833cefa9b2cefc943e7b5730114a4bb8e05a4e54baaf785f0840f44c4e54"
+  },
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-34047713704",
+    "path": "research/experiments/EXP-INTEL-34047713704/handoff.json",
+    "sha256": "5f6b0d3c6feb324b2a23b76fec341b91186c180fb74a62b469768064ad3eb7cc"
+  },
+  "infrastructure": {
+    "docker": {
+      "version": "28.0.4",
+      "compose_version": "2.38.2",
+      "image_pulled": "am1n3e/webarena-verified-shopping:latest",
+      "image_sha256": "a5b6fb47ee9f378ceca18e32261a92a8964f0ccfb9f1d3741ce3a0e2d990839d",
+      "image_size_gb": 13.3,
+      "container_id": "b7d69e48b0be81fb51ef3ee41678c5f9b2b0c447793d1e9c3fdff59e8e742854",
+      "platform": "linux/amd64",
+      "port_mapping": "8080:80"
+    },
+    "playwright": {
+      "version": "1.62.0",
+      "chromium_version": "151.0.7922.34",
+      "installed": true
+    },
+    "python": "3.12.14",
+    "disk_free_gb": 86,
+    "memory_free_gb": 14,
+    "os": "Ubuntu Azure runner"
+  },
+  "datasets": {
+    "mind2web": {
+      "repo_id": "osunlp/Mind2Web",
+      "license": "cc-by-4.0",
+      "total_tasks": 1009,
+      "html_tasks_pct": 100.0,
+      "trajectory_tasks_pct": 100.0,
+      "unique_websites": 73,
+      "unique_domains": 3,
+      "load_note": "osu-nlp-group/Mind2Web is gated; used osunlp/Mind2Web (public) as alternative"
+    },
+    "webarena_verified": {
+      "repo_id": "AmineHA/WebArena-Verified",
+      "total_tasks": 812,
+      "shopping_tasks": 187,
+      "task_format": "start_urls with __SHOPPING__ placeholder"
+    }
+  },
+  "code_artifacts": {
+    "measurement_script_v1": {
+      "path": "/tmp/opencode/measure_yield_geo.py",
+      "sha256": "fb72fe6d4c5aae558a541549a8f1a9110346e66e579191ff0d2635bddc080253",
+      "description": "Initial measurement script (CDP-based, no bounding boxes)",
+      "status": "superseded_by_v2"
+    },
+    "measurement_script_v2": {
+      "path": "/tmp/opencode/measure_yield_geo_v2.py",
+      "sha256": "15a2ad056dea51a4e907ceece1d176007122f3b9dec415ea87234061167f1d4e",
+      "description": "Geometry-faithful measurement with Playwright locator.bounding_box()",
+      "status": "used_for_measurement"
+    }
+  },
+  "raw_artifacts": {
+    "task_21_raw_tree": {
+      "path": "/tmp/opencode/raw_ax_tree_21.json",
+      "sha256": "2d9acf9d098e709eae6e65a07184c9e1ae6122bfd7a686f002253baebe9e5bf8",
+      "role": "raw",
+      "task_id": 21,
+      "description": "Raw accessibility tree and viewport element positions for shopping task 21"
+    },
+    "task_22_raw_tree": {
+      "path": "/tmp/opencode/raw_ax_tree_22.json",
+      "sha256": "ffb37731058bb52dbee3ba44eda6835b198454953dcc831289e76ea8a050336a",
+      "role": "raw",
+      "task_id": 22,
+      "description": "Raw accessibility tree and viewport element positions for shopping task 22"
+    },
+    "task_21_measurement": {
+      "path": "/tmp/opencode/measurement_result.json",
+      "sha256": null,
+      "role": "derived",
+      "description": "Derived measurement metrics for task 21"
+    },
+    "task_22_measurement": {
+      "path": "/tmp/opencode/measurement_result_22.json",
+      "sha256": null,
+      "role": "derived",
+      "description": "Derived measurement metrics for task 22"
+    }
+  },
+  "execution_timeline": [
+    {
+      "timestamp": "2026-09-10T00:28:00+00:00",
+      "action": "docker_pull",
+      "result": "success",
+      "duration_seconds": 95
+    },
+    {
+      "timestamp": "2026-09-10T00:30:00+00:00",
+      "action": "docker_run",
+      "result": "success",
+      "container_id": "b7d69e48b0be81fb51ef3ee41678c5f9b2b0c447793d1e9c3fdff59e8e742854"
+    },
+    {
+      "timestamp": "2026-09-10T00:30:30+00:00",
+      "action": "http_verify",
+      "result": "success",
+      "response_code": 200
+    },
+    {
+      "timestamp": "2026-09-10T00:34:00+00:00",
+      "action": "mind2web_load",
+      "result": "success",
+      "tasks": 1009
+    },
+    {
+      "timestamp": "2026-09-10T00:35:00+00:00",
+      "action": "playwright_measurement_task21",
+      "result": "success",
+      "yield": 0.0427,
+      "duration_seconds": 3.3
+    },
+    {
+      "timestamp": "2026-09-10T00:35:30+00:00",
+      "action": "playwright_measurement_task22",
+      "result": "success",
+      "yield": 0.0427,
+      "duration_seconds": 3.4
+    }
+  ],
+  "total_measurement_time_seconds": 12.4,
+  "reproduction_command": "docker pull --platform linux/amd64 am1n3e/webarena-verified-shopping:latest && docker run -d -p 8080:80 am1n3e/webarena-verified-shopping:latest && python3 measure_yield_geo_v2.py",
+  "environment_notes": "Azure Ubuntu runner, 86GB disk, 15GB RAM. Docker Hub pull bypasses ghcr.io auth requirement. Mind2Web osu-nlp-group/Mind2Web is gated; used osunlp/Mind2Web (public). Playwright 1.62.0 with Chromium 151.0.7922.34."
+}

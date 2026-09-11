@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34409639346",
+  "lane": "graph",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "aliased_first_correct_selection_rate": 0.0,
+    "correct_first_correct_selection_rate": 1.0,
+    "n_aliased_first": 10,
+    "n_selects_correct": 0,
+    "n_correct_first": 10,
+    "n_correct_first_correct": 10,
+    "binomial_p_one_sided": 1.0,
+    "baselines_passed": true,
+    "exceptions_count": 0,
+    "total_conditions": 24
+  },
+  "controls": {
+    "B-EMPTY-REGISTRY": {
+      "expected": "UNKNOWN",
+      "observed": "UNKNOWN",
+      "passed": true,
+      "evidence_ref": "raw_evidence/execution_results.json baseline_results[0]"
+    },
+    "B-SINGLE-MECHANISM": {
+      "expected": "EXECUTABLE",
+      "observed": "EXECUTABLE",
+      "passed": true,
+      "expected_mechanism_id": "a-01",
+      "observed_mechanism_id": "a-01",
+      "evidence_ref": "raw_evidence/execution_results.json baseline_results[1]"
+    },
+    "B-CONFIDENCE-HIGHER": {
+      "expected": "EXECUTABLE",
+      "observed": "EXECUTABLE",
+      "passed": true,
+      "expected_mechanism_id": "a-high",
+      "observed_mechanism_id": "a-high",
+      "evidence_ref": "raw_evidence/execution_results.json baseline_results[2]"
+    },
+    "B-CONFIDENCE-EQUAL-DIFFERENT-INTENT": {
+      "expected": "EXECUTABLE",
+      "observed": "EXECUTABLE",
+      "passed": true,
+      "expected_mechanism_id": "a-01",
+      "observed_mechanism_id": "a-01",
+      "evidence_ref": "raw_evidence/execution_results.json baseline_results[3]"
+    },
+    "CORRECT-FIRST-CONSISTENCY": {
+      "description": "All 10 correct-first conditions select the correct mechanism (a-XX, smaller ID)",
+      "expected_correct_first_rate": 1.0,
+      "observed_correct_first_rate": 1.0,
+      "passed": true,
+      "evidence_ref": "raw_evidence/execution_results.json pair_results (correct-first subset)"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-GRAPH-34409639346/raw_evidence/execution_results.json",
+      "sha256": "d27d3247dd45f3bedb54db7d2195464e4d44ba3acd53e1f5c7c2f05fe214d51e",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-34409639346/execute.py",
+      "sha256": null,
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "All 4 baseline conditions pass: B-EMPTY-REGISTRY returns UNKNOWN, B-SINGLE-MECHANISM returns EXECUTABLE with correct mechanism_id, B-CONFIDENCE-HIGHER selects higher-confidence mechanism, B-CONFIDENCE-EQUAL-DIFFERENT-INTENT selects only exact intent match.",
+    "All 10 correct-first aliased pair conditions select the correct mechanism (a-XX, smaller mechanism_id) — consistent with tie-breaking behavior.",
+    "All 10 aliased-first aliased pair conditions select the aliased mechanism (a-XX, smaller mechanism_id) — kernel follows tie-breaking exactly, never selecting the template-matching mechanism when it would require overriding tie-breaking.",
+    "aliased_first_correct_selection_rate = 0.0 (0/10): kernel selects the template-matching mechanism in 0 out of 10 aliased-first conditions.",
+    "binomial test p-value = 1.0 (one-sided, H1: p>0.5): no evidence that the kernel performs semantic aliasing resolution.",
+    "The kernel's resolve() function (kernel.py:93-123) uses exact intent matching (line 97: if m.intent != intent) and does not analyze URL template structure. Selection for equal-confidence candidates is determined entirely by mechanism_id ordering via registry.all() (registry.py:38: sorted(items)).",
+    "0 exceptions across all 24 kernel calls."
+  ],
+  "validity_notes": [
+    "All conditions are deterministic: no model calls, no RNG, no sampling. Single-run exact point comparisons are valid for kernel-level testing.",
+    "Each condition uses a fresh kernel instance with explicitly controlled registry contents. No cross-contamination.",
+    "The aliased-first_correct_selection_rate of 0.0 with n=10 has limited power: it supports the hypothesis but does not prove it definitively (Type II risk). A larger follow-up (n=50+) would be needed for strong confirmation, but the result is consistent with code analysis.",
+    "Intent strings are pure semantic intents (e.g., 'get-user-profile') without URL patterns, testing whether the kernel considers template structure beyond intent matching.",
+    "The kernel does not analyze parameter slot names — it only checks that all required slots are present in params. This is valid for testing template structure consideration.",
+    "The mechanism_id naming convention (a-XX = smaller ID, z-XX = larger ID) ensures alphabetical ordering controls tie-breaking, which is the mechanism under test."
+  ],
+  "unresolved": [
+    "Whether the kernel could perform semantic aliasing resolution if the fix for C-PARAM-INHERIT (secondary sort key at L112) is committed — the current experiment tests the unfixed kernel, and the fix would not change intent matching behavior (line 97).",
+    "Whether a larger sample size (n>10) would provide stronger statistical evidence — the current n=10 is a proof-of-concept screen.",
+    "Whether the kernel could handle more complex aliasing scenarios (query parameters, path rewriting, server-side rewriting) — the current test covers simple path aliasing with distinct parameter slot names only."
+  ]
+}

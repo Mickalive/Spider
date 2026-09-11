@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34409639346",
+  "lane": "graph",
+  "github_run_id": "34409639346",
+  "commit_sha": "8398d3cda4d8b3b1f75d2b6580b918fd90eecb41",
+  "base_sha": "54e8a3843e31d611c7b7e0de9c6ad1afe0c1c12e",
+  "execution_time": "2026-09-10T05:02:14+0000",
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.x",
+    "dependencies": ["spider.kernel", "spider.registry", "spider.models"],
+    "external_services": [],
+    "model_calls": 0,
+    "browser_automation": false
+  },
+  "datasets_fixtures": [],
+  "code_paths": [
+    {
+      "path": "src/spider/kernel.py",
+      "sha256": null,
+      "role": "kernel implementation",
+      "lines_tested": "93-123 (resolve function)"
+    },
+    {
+      "path": "src/spider/registry.py",
+      "sha256": null,
+      "role": "mechanism registry",
+      "lines_relevant": "21-29 (all method), 35-38 (upsert method)"
+    },
+    {
+      "path": "src/spider/models.py",
+      "sha256": null,
+      "role": "data models",
+      "lines_relevant": "8-13 (ResolutionStatus), 26-44 (Mechanism), 47-53 (Resolution)"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-34409639346/execute.py",
+      "sha256": "b439ef274e74eea94e887bd01cb46877aadf0ea2f0fc964bcf01488c79f0fbf6",
+      "role": "execution script"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-GRAPH-34409639346/raw_evidence/execution_results.json",
+      "sha256": "d27d3247dd45f3bedb54db7d2195464e4d44ba3acd53e1f5c7c2f05fe214d51e",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-34409639346/result.json",
+      "sha256": null,
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-34409639346/report.md",
+      "sha256": null,
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-34409639346/provenance.json",
+      "sha256": null,
+      "role": "derived"
+    }
+  ],
+  "frozen_inputs": {
+    "request_hash": "a696e652db0e483e7a309879d6bc7d9a9b5657222f8c947adf85bfb639bebee2",
+    "spec_hash": "b657b28017806f67d846ddba8262837e8cb23339411de2e6406a3cd4b747d14d",
+    "prereg_hash": "9c45991749e169d8aeaf8d5f619c11a4e5d0e8745197d6762430e898957bb662",
+    "freeze_hash": null
+  },
+  "parent_experiment": {
+    "experiment_id": "EXP-GRAPH-34395286092",
+    "handoff_path": "research/experiments/EXP-GRAPH-34395286092/handoff.json",
+    "handoff_sha256": "57025732a13bd1e17f553c003db00a646ef45bb9d940d4b5fbfc6b6902757bbf"
+  },
+  "reproduction_command": "python research/experiments/EXP-GRAPH-34409639346/execute.py",
+  "total_conditions": 24,
+  "conditions_breakdown": {
+    "baselines": 4,
+    "aliased_pair_correct_first": 10,
+    "aliased_pair_aliased_first": 10
+  }
+}
