@@ -581,6 +581,14 @@
         "claim_id": "C-MEAS-VALID",
         "status": "EXPERIMENTAL",
         "reason": "C-MEAS-VALID remains EXPERIMENTAL with ceiling narrowed to /userinfo-only for WWW-Authenticate discrimination. This experiment falsifies transfer of WWW-Authenticate discrimination across Keycloak endpoints: 0/3 additional endpoints (/token password, /token client_credentials, /introspect) show WWW-Auth-only discrimination > 0. The measurement substrate is validated on /userinfo (positive control 0.833 == full vector, replicates parent), confirming the substrate works, but the mechanism is endpoint-specific resource-server behavior, not Keycloak-level. Body-only observation achieves discrimination on /introspect (0.5 via active field) but not on /token endpoints (Authorization header ignored). Full-vector product recommendation using WWW-Authenticate is bounded to /userinfo only. Does NOT extend to production Keycloak, CDN/load-balancer, other realms/clients, other Keycloak versions, cross-Python repr reproducibility, truly-expired Keycloak-issued tokens, or other IdPs."
+      },
+      {
+        "experiment_id": "EXP-RUNTIME-34509593940",
+        "lane": "runtime",
+        "decision": "SURVIVES_CURRENT_TEST",
+        "claim_id": "C-MEAS-VALID",
+        "status": "EXPERIMENTAL",
+        "reason": "Positive control passes (body-only 0.5 >= 0.35), null control passes (B-RANDOM 0.0), all 6 preregistered controls pass, audit PASS with all metrics recomputed. Measurement substrate is intervention-valid under the synthetic reverse-proxy model tested. Claim ceiling bounded by audit: does NOT extend to filtered full-vector, real CDN behavior, body non-determinism from compression, stacked infrastructure, or non-Keycloak providers. Body-only invariance is tautological by construction (headers excluded from fingerprint, proxy preserves bodies)."
       }
     ]
   }

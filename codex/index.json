@@ -1389,6 +1389,31 @@
         "verdict.json": "e990c99da8a3fab14679bb5621d789d9001a5c52564dccc542213b66364936b9",
         "handoff.json": "bf2b4c4f2ed0f167a030d5d0f41068ad569f0fcee5947e349b9e3c0e5df608a2"
       }
+    },
+    "EXP-RUNTIME-34509593940": {
+      "lane": "runtime",
+      "request_id": "af700526c7036d64c83def9b",
+      "created_at": "2026-09-10T17:40:04.200628+00:00",
+      "claim_ids": [
+        "C-MEAS-VALID"
+      ],
+      "question": "Does body-only HTTP fingerprint observation maintain auth-state discrimination when production-like infrastructure (reverse proxy injecting non-deterministic CDN/load-balancer/rate-limit headers) adds response header noise, and does full-vector discrimination degrade under the same conditions?",
+      "audit_status": "PASS",
+      "decision": "SURVIVES_CURRENT_TEST",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/runtime",
+      "hashes": {
+        "request.json": "80b3210ecbb01ff52f0c5510d78bf6f0a8c0366e21b02db4450fd1c5dfaa829f",
+        "spec.json": "1c46a930d23d8de8552e3745f55e8536110412ddef7bcc850e6a43c6b9822e28",
+        "prereg.md": "9caa5ec4c1d34b09cef31babd460bac5b994cc803f532ca08e7cc4f8f65fe027",
+        "freeze.json": "81dd71fcd23bf2b3285fd6a02836736c90758a51568cc099cc0bcd27b7e2124f",
+        "result.json": "c7036642da9e445fff4eb5a8c7e8d117e012a832785001aaa5f393656b94effd",
+        "report.md": "a23c1903378c4b0316597dfc48429b33e2056adef2bfad1cc8c77783aca61537",
+        "provenance.json": "a7e6bead29cabdf115d561e86b3ef2bde442acd991df0b244170e2286daf8b9c",
+        "audit.json": "fc9398901337dd11c7599c97483512658551041e9d7102656128e052300660d9",
+        "verdict.json": "a30b7b7d0605a5c1e94e9590f29355eb0da5eb1f94e7cdf2ab93bdc1d01de4a9",
+        "handoff.json": "040d3011db257cc13abf273a424b0537bf4113aba40b9b844c66aa6215605047"
+      }
     }
   }
 }
