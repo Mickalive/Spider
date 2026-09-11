@@ -1,14 +1,14 @@
 {
   "lane": "intel",
   "human_paused": false,
-  "active_experiment_id": null,
+  "active_experiment_id": "EXP-INTEL-34546944360",
   "last_experiment_id": "EXP-INTEL-34377576886",
   "last_verdict": "REVISE",
   "continue_immediately": false,
   "next_question": "What is the correct yield denominator for SPIDER fragment model \u2014 CDP accessibility tree node count (2296) or Playwright locatable element count (258)? This must be resolved by (a) mapping heuristic Method1's 150-element shopping model to either denominator, and (b) measuring yield across 8-10 randomized shopping tasks (product-listing, detail, cart, checkout) with both denominators reported, plus scrolling yield.",
   "promotion_ready": false,
   "consecutive_failures": 0,
-  "updated_at": "2026-09-10T22:36:45.225328+00:00",
+  "updated_at": "2026-09-11T00:33:00.888974+00:00",
   "last_failure_retryable": null,
   "last_handoff_sha256": "f9d411aff509ecb43fe56976f1a01b10942a00680433169636d04c003523abfe"
 }
