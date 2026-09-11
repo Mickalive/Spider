@@ -1190,6 +1190,31 @@
         "handoff.json": "2a3522896783044ccafdccf0abab815facfa43f2d1e0c62304ee94ef98d3a2bf"
       }
     },
+    "EXP-PRODUCT-34642376433": {
+      "lane": "product",
+      "request_id": "52b82a4d2c8dbdcf920ddbf7",
+      "created_at": "2026-09-11T20:06:01.230957+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT"
+      ],
+      "question": "Can two bounded kernel fixes \u2014 suffix extraction guard (exclude single-character non-structural suffixes) and delimiter-bound prefix validation (require prefix to end at a structural URL boundary) \u2014 restore binding correctness on the G1 and N1 failure modes from EXP-PRODUCT-34485517221 while preserving the 4 passing conditions (P1, G2, G3, G5), and can these fixes be validated against actual kernel.py distill_parameterized and _bind with prefixes?",
+      "audit_status": "REVISE",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/product",
+      "hashes": {
+        "request.json": "633f9e924564e990435ba30a8f5f48bde4cc725c74046fdc7cb548ba5ed227e9",
+        "spec.json": "c4f10cd3e017891b0b8d7a46d1a538771bd31205b90a1c5c81e75526a6cef13e",
+        "prereg.md": "73ca8a71a71aea53b6d37145718e4ae24fc4a45a0ee225214b6f2eb52ab60655",
+        "freeze.json": "fa89b28dcb9e2ac497135fdb00112780ab5be3de08a9f232494f0494b1904397",
+        "result.json": "a0ceea521fe7c12bb6ef1e1a8988c48f41c0d37952c37954665fa25010559f07",
+        "report.md": "6b3dc25c23b4d26bd0e43f0ff6bdb70671aed4947e62924528d712e32d06b0e5",
+        "provenance.json": "6084d13c32dbbf2d2d85db46fc9d0b6f7ae13d3b93cd6a4345da3d5bc5162a44",
+        "audit.json": "755b26e4974de979e67234fa028b96df67edc4f92e3d162ef160188ea40a314e",
+        "verdict.json": "dcacbece2811390654c7731d0c981735c307a67ef4cce8ef01abd39c0c5f9988",
+        "handoff.json": "f937455a3b1bf095c695b4b35bd6dd0fa18192a6901b50b28bd7a6cf4e9c2215"
+      }
+    },
     "EXP-RUNTIME-33528830833": {
       "lane": "runtime",
       "request_id": "cbf791e0cd3fe570d0ff0fd5",

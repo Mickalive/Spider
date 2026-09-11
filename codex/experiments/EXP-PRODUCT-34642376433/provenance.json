@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-34642376433",
+  "github_run_id": "34654565765",
+  "recorded_at": "2026-09-11T23:00:00.000000+00:00",
+  "environment": {
+    "python_version": "3.12",
+    "platform": "linux",
+    "model_calls": 0,
+    "browser_calls": 0,
+    "network_calls": 0,
+    "deterministic": true
+  },
+  "code_version": {
+    "run_experiment.py": "EXP-PRODUCT-34642376433 standalone reimplementation with Fix 1 (suffix guard) and Fix 2 (delimiter-bound prefix validation)",
+    "kernel.py": "src/spider/kernel.py at HEAD (1074ab27)",
+    "models.py": "src/spider/models.py at HEAD",
+    "fix_implementation": "Standalone reimplementation of kernel.py distill_parameterized and _bind with fixes applied. Algorithm logic identical to kernel.py. Fixes implemented in _find_common_prefix_suffix (Fix 1) and new _validate_prefix_boundary function (Fix 2).",
+    "divergence_note": "run_experiment.py is standalone copy, not product kernel. _bind ignores prefixes dict that kernel.py uses for VALUE CONTRACT stripping. For this experiment's short values, stripping not exercised, so binding matches kernel behavior. Production models.py lacks slot_prefixes field."
+  },
+  "parent_experiment": {
+    "experiment_id": "EXP-PRODUCT-34485517221",
+    "status": "MIXED",
+    "condition_pass_rate": 0.5714285714285714,
+    "handoff_sha256": "2a3522896783044ccafdccf0abab815facfa43f2d1e0c62304ee94ef98d3a2bf",
+    "handoff_path": "research/experiments/EXP-PRODUCT-34485517221/handoff.json"
+  },
+  "frozen_inputs": {
+    "request.json": "633f9e924564e990435ba30a8f5f48bde4cc725c74046fdc7cb548ba5ed227e9",
+    "spec.json": "c4f10cd3e017891b0b8d7a46d1a538771bd31205b90a1c5c81e75526a6cef13e",
+    "prereg.md": "73ca8a71a71aea53b6d37145718e4ae24fc4a45a0ee225214b6f2eb52ab60655",
+    "freeze.json": "read from research/experiments/EXP-PRODUCT-34642376433/freeze.json"
+  },
+  "artifacts": {
+    "raw_evidence": {
+      "path": "research/experiments/EXP-PRODUCT-34642376433/raw_evidence.json",
+      "sha256": "6360526a8b27139568918f988924c4ff39f0d8996b8df81c6d98ff508b57fac9",
+      "role": "raw",
+      "description": "Per-condition raw data: slot_count, binding_accuracy, slot_prefixes, action_template, resolution_results"
+    },
+    "run_experiment": {
+      "path": "research/experiments/EXP-PRODUCT-34642376433/run_experiment.py",
+      "sha256": "b7b8dfb1f23be1f3cf35b3e224687703de225a37639017ca0bccd516ca269d53",
+      "role": "code",
+      "description": "Standalone reimplementation of kernel.py distill_parameterized and _bind with Fix 1 (suffix guard) and Fix 2 (delimiter-bound prefix validation)"
+    },
+    "result": {
+      "path": "research/experiments/EXP-PRODUCT-34642376433/result.json",
+      "role": "result",
+      "description": "Producer handoff with metrics, controls, observations, validity_notes"
+    },
+    "report": {
+      "path": "research/experiments/EXP-PRODUCT-34642376433/report.md",
+      "role": "report",
+      "description": "Human-readable interpretation and analysis"
+    }
+  },
+  "conditions_executed": [
+    "P1_PATH_PREFIX",
+    "G1_QUERY_STRING_SIMPLE",
+    "G2_QUERY_STRING_MULTIPARAM",
+    "G3_DEEP_PATH",
+    "G4_MULTI_SLOT",
+    "G5_PATH_QUERY_HYBRID",
+    "N1_ORIGINAL",
+    "N1_REDESIGNED",
+    "B_LITERAL"
+  ],
+  "fixes_applied": {
+    "fix1_suffix_guard": {
+      "function": "_find_common_prefix_suffix",
+      "description": "After computing raw suffix, if len(suffix) <= 1, check if preceded by structural delimiter (?, =, &). If not, reject suffix.",
+      "target_failure_mode": "G1 suffix corruption (alpha/beta/delta share trailing 'a')",
+      "result": "SUCCESS — G1 binding_accuracy=1.0"
+    },
+    "fix2_delimiter_bound_prefix": {
+      "function": "_validate_prefix_boundary",
+      "description": "After computing common prefix, check if last character is structural delimiter (/ ? = &). If not, reject parameterization.",
+      "target_failure_mode": "N1 over-parameterization (cross-host URLs share 'https://api.' prefix)",
+      "result": "SUCCESS — N1_ORIGINAL slot_count=0"
+    }
+  },
+  "reproduction_commands": [
+    "cd research/experiments/EXP-PRODUCT-34642376433",
+    "python3 run_experiment.py",
+    "cat raw_evidence.json | python3 -m json.tool"
+  ],
+  "validity_threats": [
+    "V2_SUBSTRATE_REIMPLEMENTATION_NOT_KERNEL: Standalone reimplementation, not actual kernel.py",
+    "V6_DETERMINISTIC_SYNTHETIC_ONLY_NO_EXTERNAL_VALIDITY: No model/network/browser calls",
+    "N1_REDESIGNED_TEST_CASE_FLAW: URLs share 'https://' prefix, not truly disjoint",
+    "G4_SUFFIX_NOT_FULLY_FIXED: Multi-character suffix '00' not caught by single-character guard"
+  ]
+}
