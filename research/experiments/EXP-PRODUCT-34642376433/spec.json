@@ -1,17 +1,35 @@
 {
   "experiment_id": "EXP-PRODUCT-34642376433",
   "lane": "product",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-PARAM-INHERIT"],
+  "question": "Can three bounded kernel fixes — suffix extraction guard, Jaccard similarity threshold, and multi-slot URL decomposition — resolve the 3/7 condition failures from EXP-PRODUCT-34485517221 against actual src/spider/kernel.py, while preserving the 4/7 passing conditions?",
+  "hypothesis": "Implementing (1) a suffix extraction guard that excludes single-character and short non-structural common suffixes, (2) a Jaccard similarity threshold that prevents parameterization of URL sets with structure similarity below 0.5, and (3) URL path-segment parsing that detects multiple varying slots in path and query components, will achieve binding_accuracy=1.0 and slot_count correctness across all 7 URL conditions when tested against actual src/spider/kernel.py distill_parameterized and _bind, without regressions on the 4 previously passing conditions (P1, G2, G3, G5).",
+  "falsifier": "ANY of: (1) fewer than 7/7 conditions pass (binding_accuracy=1.0 AND slot_count correct AND slot_prefixes non-empty where structurally expected), OR (2) any of the 4 previously passing conditions (P1, G2, G3, G5) regress to binding_accuracy < 1.0, OR (3) execution against actual kernel.py produces different binding outcomes than the standalone reimplementation for any condition, OR (4) the Jaccard threshold incorrectly rejects a valid parameterization (P1, G2, G3, or G5 has structure_similarity < 0.5), OR (5) multi-slot parsing produces incorrect bound URLs for G4.",
+  "baselines": [
+    "B_PREVIOUS: EXP-PRODUCT-34485517221 standalone reimplementation results (4/7 pass, G1/G4/N1 fail) as regression reference",
+    "B_LITERAL: Literal mechanism reuse (confidence 0.5 < min_confidence 0.8, expected fail_rate=1.0) — parameterized induction is necessary",
+    "B_NO_FIX_SUFFIX: Current _find_common_prefix_suffix without suffix guard on G1 training values — expected to corrupt template with suffix 'a'",
+    "B_NO_FIX_THRESHOLD: Current common-prefix detection without Jaccard threshold on N1 redesigned disjoint URLs — expected to over-parameterize",
+    "B_NO_FIX_MULTI_SLOT: Current leaf-path single-slot model on G4 — expected to induce 1 slot vs 2 required"
+  ],
+  "positive_control": "P1_PATH_PREFIX: With training URLs sharing path prefix /users/{id}, the fixed kernel induces 1 slot with slot_prefix='users/' and binding_accuracy=1.0 on unseen values D/E/F. This replicates the parent passing condition and confirms fixes do not regress established behavior.",
+  "null_control": "N1_DISJOINT_URLS (redesigned): With training URLs from completely disjoint hosts (https://a.com/x, https://b.org/y, https://c.net/z) sharing no structural prefix, the Jaccard threshold gates parameterization and slot_count=0. This is a corrected null control replacing the misdesigned parent N1 that shared 'https://api.' prefix.",
+  "measurement_validity": [
+    "All conditions execute against actual src/spider/kernel.py distill_parameterized and _bind (not standalone reimplementation) — V2_SUBSTRATE_REIMPLEMENTATION_NOT_KERNEL from parent audit resolved",
+    "models.py Mechanism model updated to include slot_prefixes field to match distill_parameterized output — production/kernel divergence resolved",
+    "_bind called with prefixes dict parameter as kernel.py implements it — V2 substrate fidelity confirmed",
+    "Each condition uses 3 training observations matching parent experiment protocol",
+    "Unseen test values are disjoint from training values",
+    "Binding correctness uses strict comparison against expected URLs",
+    "Deterministic synthetic data: no model, network, or browser calls",
+    "Fresh temporary registry per condition prevents cross-contamination",
+    "N1 redesigned with truly disjoint URLs (no shared prefix >5 chars) to correctly test null control — V4_NULL_CONTROL_MISDESIGNED from parent audit resolved",
+    "G4 tests true 2-slot decomposition via URL path-segment parsing — V5_G4_CONTRIVED_UNSEEN_VALUES from parent audit resolved",
+    "G1 training values chosen to avoid trivial suffix collisions while still testing suffix guard — alpha/beta/gamma (not alpha/beta/delta) with unseen values that differ in final character"
+  ],
+  "decision_rule": "SURVIVES_CURRENT_TEST if ALL of: (1) 7/7 conditions pass (binding_accuracy=1.0 AND slot_count correct AND slot_prefixes non-empty where structurally expected for P1/G2/G3/G5), (2) no regression on P1/G2/G3/G5 (each binding_accuracy=1.0), (3) G4 induces slot_count >= 2 with correct bound URLs for all 3 unseen values, (4) N1_DISJOINT_URLS produces slot_count=0 (null control passes), (5) B_LITERAL fails as expected (fail_rate=1.0), (6) execution is against actual kernel.py (not standalone), (7) no pipeline errors. FALSIFIED-IN-SETTING if ANY condition fails or any previously passing condition regresses. MEASUREMENT_INVALID if execution fails against kernel.py or pipeline errors prevent measurement.",
+  "product_consequence_positive": "Resolves all 3 failure modes from EXP-PRODUCT-34485517221 against actual kernel.py, clearing the gate for C-PRODUCT-ECON economics measurement. Demonstrates that bounded, targeted fixes to the parameterization kernel can achieve comprehensive single-slot and multi-slot URL parameterization without regressions. Advances C-PARAM-INHERIT toward EXPERIMENTAL status on actual product code.",
+  "product_consequence_negative": "If fixes do not resolve all 3 failures or introduce regressions, C-PARAM-INHERIT remains blocked. The leaf-path URL-as-string architecture may require deeper redesign (URL parsing, different representation) before parameterized inheritance is viable. C-PRODUCT-ECON measurement remains blocked.",
+  "estimated_cost": "Low: pure synthetic data, no model/network/browser calls. Implementation of 3 targeted code fixes in kernel.py + models.py, plus test harness against actual kernel. ~21 binding tests (7 conditions x 3 unseen values). No external dependencies.",
+  "expected_information_gain": "High: This is the discriminating test that determines whether bounded kernel fixes can resolve all identified failure modes on actual product code. A positive result unblocks C-PRODUCT-ECON measurement (the next major product gate). A negative result identifies which failure mode(s) require deeper architectural changes. The experiment directly tests against actual kernel.py, resolving the V2 substrate fidelity gap that has limited all prior product experiments to standalone reimplementations."
 }

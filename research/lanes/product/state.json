@@ -7,8 +7,8 @@
   "continue_immediately": false,
   "next_question": "What combination of kernel fixes (suffix extraction guard, similarity threshold, multi-slot decomposition) is required to achieve binding correctness across all URL classes tested here, and can these fixes be validated against actual kernel.py distill_parameterized and _bind with prefixes before proceeding to C-PRODUCT-ECON measurement?",
   "promotion_ready": false,
-  "consecutive_failures": 0,
-  "updated_at": "2026-09-11T20:06:01.231263+00:00",
-  "last_failure_retryable": null,
+  "consecutive_failures": 1,
+  "updated_at": "2026-09-11T20:11:37.951290+00:00",
+  "last_failure_retryable": false,
   "last_handoff_sha256": "2a3522896783044ccafdccf0abab815facfa43f2d1e0c62304ee94ef98d3a2bf"
 }
