@@ -1,0 +1,175 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-34377576886",
+  "lane": "intel",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Recompute and report yield under BOTH denominator definitions in result.json: yield_cdp = truncated_1920 / total_cdp_elements (0.0427) AND yield_locatable = truncated_1920 / locator_elements (0.380) — then compare each to heuristic_yield (0.65) and method1_yield (0.365) with explicit delta and threshold test, rather than reporting only CDP denominator as 'actual_yield'",
+    "Fix truncated_8192_elements metric: currently 130 for both tasks but logically impossible (98 viewport elements, char_count 2524 <8192 implies truncated_8192==98). Recompute as len(split) of character-truncated observation or remove metric and explain; current value is arithmetic artifact",
+    "Preserve complete raw artifacts: /tmp/opencode/raw_ax_tree_22.json is truncated (17KB vs 60KB for task21, missing locator_elements_sample key, 0 locator samples despite metrics.locator_elements=249). Re-run measurement to generate complete raw_ax_tree_22.json with durable sha256 or mark as failed artifact",
+    "Disclose and bound sampling: N=2 pilot, both Magento shopping review pages, identical 98 viewport elements and 2524 char_count, sequential IDs 21/22, not random across 192 shopping tasks. Label yield as pilot-bound to this page type and require randomized 8-10 tasks across product-listing/detail/cart/checkout before corpus-level FALSIFIES",
+    "Resolve geometry-faithful scope: prereg 6.2 requires bounding_box for each accessibility tree element; producer enumerated CSS selectors independently and deduplicated by role+bbox, yielding only 11% CDP coverage (258/2296). Report whether CDP nodes without locators are Generic/StaticText containers that heuristically should be excluded, or whether heuristic assumed locatable-only denominator",
+    "Verify WebArena-Verified start_url placeholder substitution: spec requires selecting 1 shopping task from AmineHA/WebArena-Verified dataset via site_type==shopping; execution hardcodes localhost:8080 URLs without showing dataset filtering or placeholder replacement logic. Attach dataset task_id and replacement proof",
+    "Mind2Web dataset substitution disclosure: prereg specified osu-nlp-group/Mind2Web (gated) but provenance used osunlp/Mind2Web (public). Keep substitution but add explicit cross-check that 73 websites / 3 domains / 1009 tasks match expected gated corpus or label as alternative-corpus finding",
+    "Test scrolling/lazy-loading: current viewport is initial 1280x720 only, no scroll. Report scrolled yield (e.g., after 2-3 scrolls) or explicitly bound claim to above-the-fold fragments only"
+  ],
+  "validity_findings": [
+    {
+      "finding_id": "VF-DENOMINATOR-AMBIGUITY",
+      "severity": "critical",
+      "category": "measurement_validity",
+      "metric_ids": ["shopping_task_21_actual_yield", "shopping_task_22_actual_yield", "shopping_yield_delta_heuristic", "shopping_yield_delta_method1"],
+      "control_ids": ["heuristic_baseline", "method1_baseline"],
+      "description": "Yield denominator mismatch is validity-critical. Producer defines actual_yield = truncated_1920 / total_cdp_elements = 98/2296=0.0427. CDP tree includes 88.8% non-locatable nodes (Generic, StaticText, containers). Heuristic Method1 (element-count) from EXP-INTEL-33945226776 estimated typical shopping pages at 150 elements and modeled viewport 0.45-0.65, implying it counted interactive/locatable elements, not full AX tree. Alternative yield_locatable = 98/258=0.380 (task21) and 98/249=0.394 (task22) is within 1.5pp of Method1 0.365 and 27pp of heuristic 0.65. Producer acknowledges this in OBS-CDP-LOCATOR-MISMATCH and validity_notes but still reports Method1 FALSIFIED with 32pp delta, which reverses under alternative definition.",
+      "evidence_refs": ["result.json:metrics.shopping_task_21_actual_yield=0.0427", "result.json:metrics.shopping_task_21_locator_elements=258", "result.json:metrics.shopping_task_21_viewport_elements=98", "result.json:validity_notes[1]", "result.json:observations[5] OBS-CDP-LOCATOR-MISMATCH match_rate 0.1124", "/tmp/opencode/measurement_result.json:total_elements 2296", "/tmp/opencode/raw_ax_tree_21.json:total_cdp_elements 2296", "research/experiments/EXP-INTEL-33945226776/result.json:metrics.estimated_fragment_yield_by_site_type.shopping.method_yields [0.365,0.92,0.65]"],
+      "impact": "Primary decision FALSIFIES(heuristic 0.65) is robust under both denominators (delta 60.7pp CDP, 27pp locatable, both >15pp). Secondary claim that Method1 (0.365) is falsified (delta 32.2pp) is NOT robust — under locatable denominator delta is 0.015 (PASS). Claim ceiling must be downgraded to heuristic-only falsification, with Method1 calibration noted as denominator-dependent."
+    },
+    {
+      "finding_id": "VF-TRUNCATION-METRIC-BUG",
+      "severity": "moderate",
+      "category": "measurement_validity",
+      "metric_ids": ["shopping_task_21_truncated_8192_elements", "shopping_task_22_truncated_8192_elements"],
+      "description": "truncated_8192_elements=130 is arithmetically impossible given reported state: pruned_elements=98, char_count=2524 <8192, viewport_elements=98, truncated_1920=98. Code computes len(truncate(obs,8192).split('\\n')) which for char_count<8192 must equal pruned_elements (98). Value 130 exceeds pruned count, indicating bug or stale metric from prior script version. Does not affect primary yield (1920 truncation not binding because 98<1920, so yield == viewport_filter_rate) but invalidates secondary truncation metrics and suggests metrics pipeline not re-validated after superseding measure_yield_geo.py with measure_yield_geo_v2.py.",
+      "evidence_refs": ["result.json:metrics.shopping_task_21_truncated_8192_elements=130 vs pruned 98", "result.json:metrics.shopping_task_21_char_count=2524 <8192", "/tmp/opencode/measure_yield_geo_v2.py: truncate_observation and trunc_8192_elements logic", "/tmp/opencode/measurement_result.json:truncated_8192_elements 130"]
+    },
+    {
+      "finding_id": "VF-ARTIFACT-INCOMPLETENESS",
+      "severity": "moderate",
+      "category": "provenance",
+      "description": "Raw artifact for task22 is incomplete: /tmp/opencode/raw_ax_tree_22.json is 17KB vs 60KB for task21, missing locator_elements_sample key entirely (0 samples) despite metrics claiming 249 locator_elements. Hash ffb37731058bb52dbee3ba44eda6835b198454953dcc831289e76ea8a050336a matches result.json but artifact does not contain locators to verify viewport filtering. Durable provenance requirement (prereg 6.4: raw accessibility tree artifacts must be saved with hashes) is partially unmet for N=2 pilot.",
+      "evidence_refs": ["provenance.json:raw_artifacts.task_22_raw_tree sha256 ffb37...", "/tmp/opencode/raw_ax_tree_22.json size 17470", "/tmp/opencode/raw_ax_tree_21.json size 60216", "result.json:artifacts[6] vs [5]"]
+    },
+    {
+      "finding_id": "VF-SAMPLING-GENERALIZABILITY",
+      "severity": "moderate",
+      "category": "sampling",
+      "description": "N=2 sequential tasks 21 and 22, both Magento product-review pages, produce identical viewport_elements=98 and char_count=2524, suggesting measurement captures only shared header/navigation (above-fold), not product-specific fragments. Spec disclaimer correctly states N=1 per viable path pilot cannot generalize to 192 shopping tasks without additional measurements, but report carry-forward language ('Heuristic shopping estimate falsified') risks over-generalization. No randomization, no coverage of product-listing/cart/checkout page types that heuristic Method1 estimated at 150 elements.",
+      "evidence_refs": ["result.json:metrics.shopping_task_21_viewport_elements 98 == task22 98", "result.json:metrics.shopping_task_21_char_count 2524 == task22 2524", "result.json:validity_notes[0] N=2 pilot cannot generalize", "spec.json:measurement_validity N=1 per viable path pilot", "research/experiments/EXP-INTEL-33945226776/result.json:method_yields shopping 150 elements product listing"]
+    },
+    {
+      "finding_id": "VF-VIEWPORT-SCOPE",
+      "severity": "low",
+      "category": "measurement_validity",
+      "description": "Viewport filtering is initial viewport only (0,0,1280,720) with threshold 0.5, no scroll. Heuristic viewport coverage 0.45-0.65 from INTEL-33945226776 was an estimated global page coverage, not initial-viewport-only. Producer's 4.3% viewport_filter_rate (98/2296) is therefore a lower bound; scrolled yield could be higher. Prereg acknowledges scrolling as unresolved (unresolved[6]) but claim does not bound to initial viewport.",
+      "evidence_refs": ["spec.json:measurement_validity viewport_rect 0,0,1280,720", "result.json:unresolved[6] Whether scrolling affects viewport count", "/tmp/opencode/measure_yield_geo_v2.py:VIEWPORT_RECT"]
+    },
+    {
+      "finding_id": "VF-MIND2WEB-SUBSTITUTION",
+      "severity": "low",
+      "category": "provenance",
+      "description": "Prereg required osu-nlp-group/Mind2Web but dataset is gated; producer correctly fell back to osunlp/Mind2Web (public CC-BY-4.0) and disclosed in validity_notes and provenance. 1009 tasks, 100% HTML, 100% trajectory are verified against that public corpus, but S4 threshold failure (73 <100 websites) is assessed against public corpus only. No leakage but limits claim about gated corpus.",
+      "evidence_refs": ["spec.json:measurement_validity Step2 load osu-nlp-group/Mind2Web", "result.json:metrics.mind2web_website_count 73", "provenance.json:datasets.mind2web.repo_id osunlp/Mind2Web", "result.json:validity_notes[4]"]
+    },
+    {
+      "finding_id": "VF-POSITIVE-CONTROL-DEFINITION",
+      "severity": "info",
+      "category": "control",
+      "description": "Positive control redefined between spec/prereg and result: spec positive_control is 'observation pipeline must produce non-empty observation with >0 elements' (pipeline functionality), but result.json positive_control_shopping expects 'yield >40%'. Result correctly records pass=false for yield>40% (0.0427) but pipeline functionality (non-empty 98 elements) actually PASS. Control identifier preserved but expected behavior rewritten post-hoc, conflating pipeline-liveness with yield-threshold. Auditor treats pipeline-liveness as PASS, yield-threshold as heuristic baseline test.",
+      "evidence_refs": ["spec.json:positive_control", "prereg.md:9.1 Positive Control", "result.json:controls.positive_control_shopping expected yield >40%", "result.json:observations[1] Pipeline produces non-empty observation 98 elements"]
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "heuristic_yield_aggregated_median",
+      "value": 0.65,
+      "source": "EXP-INTEL-33945226776 metrics.estimated_fragment_yield_by_site_type.shopping.median_yield 0.65 (mean 0.645, method_yields [0.365,0.92,0.65])",
+      "strength": "weak - unvalidated heuristic prior, Kruskal-Wallis p=0.9988 shows no discriminating power across 6 site types, Method2 degenerate yields 1.0 for 5/6 types, Spearman M1-M3 -0.943 indicates method disagreement",
+      "comparison_recomputed": {
+        "actual_yield_cdp": 0.0427,
+        "actual_yield_locatable": 0.3798,
+        "delta_cdp": 0.6073,
+        "delta_locatable": 0.2702,
+        "threshold_pp": 0.15,
+        "falsified_cdp": true,
+        "falsified_locatable": true
+      },
+      "finding": "Heuristic falsification is ROBUST to denominator choice: both 0.0427 and 0.380 exceed 15pp threshold (60.7pp and 27pp). Producer's FALSIFIES decision for heuristic (spec decision_rule: actual_yield within 15pp of 0.65) is supported, though magnitude is overstated if CPD denominator inflated by containers."
+    },
+    {
+      "baseline_id": "method1_yield_element_count",
+      "value": 0.365,
+      "source": "EXP-INTEL-33945226776 metrics.estimated_fragment_yield_by_site_type.shopping.method_yields[0]=0.365 (modeling viewport coverage 0.45-0.65 and node pruning 0.06-0.15, product listing 150 elements)",
+      "strength": "weak-medium - same prior family as heuristic, but element-count model penalizes dense pages and is closest to geometry-faithful locatable measurement",
+      "comparison_recomputed": {
+        "actual_yield_cdp": 0.0427,
+        "actual_yield_locatable": 0.3798,
+        "delta_cdp": 0.3223,
+        "delta_locatable": 0.0148,
+        "threshold_pp": 0.15,
+        "falsified_cdp": true,
+        "falsified_locatable": false
+      },
+      "finding": "Method1 falsification is NOT robust. Under producer's CDP denominator delta 32.2pp FALSIFIES, but under locatable denominator (98/258=0.38) delta 1.5pp SUPPORTS (well within 15pp). Since Method1's 0.365 assumes ~150 interactive elements per shopping page (not 2296 AX nodes), the locatable comparison is more apples-to-apples. Producer's claim that Method1 is falsified is therefore denominator-dependent and not justified as stated. This is the central interpretive error."
+    },
+    {
+      "baseline_id": "truncation_sensitivity_shopping",
+      "value": 0.37,
+      "source": "EXP-INTEL-33945226776 truncation_sensitivity.shopping.sensitivity_ratio 0.37 (yield_at_8192 0.938 -> yield_at_1920 0.347)",
+      "finding": "Producer observed no truncation effect (98 <1920 and 2524<8192), consistent with small initial viewport fragment count, but contrasts with heuristic expectation that max_obs_length=1920 is binding (0.347 yield). Suggests either page header is artificially small or heuristic overestimated element density per viewport. Baseline confirms shopping is most truncation-sensitive site type, but producer's Magento review page does not exhibit that sensitivity above-fold.",
+      "recomputed": "truncation binding? false (char_count 2524 <8192, viewport 98 <1920)"
+    },
+    {
+      "baseline_id": "mind2web_structural_S4",
+      "value": ">=100 unique websites",
+      "source": "prereg 9.4 and spec decision_rule Path B requires >=100 websites, S1-S4 proxies",
+      "comparison": {
+        "observed": 73,
+        "pass": false,
+        "domains": 3,
+        "html_pct": 100.0,
+        "trajectory_pct": 100.0
+      },
+      "finding": "Mind2Web baseline correctly applied; 73 <100 fails S4 as producer reports. 100% HTML/trajectory availability is verified for public corpus. Baseline strength is moderate — 73 websites across 3 domains may still be useful for limited single-domain cross-site testing but insufficient per frozen S4 criterion."
+    }
+  ],
+  "recomputed_metrics": {
+    "shopping_task_21_actual_yield_cdp_verified": 0.042682926829268296,
+    "shopping_task_22_actual_yield_cdp_verified": 0.042720139494333044,
+    "shopping_task_21_yield_locatable": 0.3798449612403101,
+    "shopping_task_22_yield_locatable": 0.393574297188755,
+    "shopping_task_21_viewport_filter_rate_verified": 0.042682926829268296,
+    "shopping_task_21_locatable_rate": 0.11237073170731707,
+    "shopping_task_22_locatable_rate": 0.10853240870766725,
+    "shopping_yield_delta_heuristic_cdp": 0.6073170731707317,
+    "shopping_yield_delta_method1_cdp": 0.3223170731707317,
+    "shopping_yield_delta_heuristic_locatable_task21": 0.27015503875968994,
+    "shopping_yield_delta_method1_locatable_task21": 0.014844961240310095,
+    "shopping_yield_delta_heuristic_locatable_task22": 0.256425702811245,
+    "shopping_yield_delta_method1_locatable_task22": 0.02857429718875502,
+    "truncated_8192_expected": 98,
+    "truncated_8192_reported": 130,
+    "truncated_8192_bug": true,
+    "viewport_elements_consistent": true,
+    "char_count_consistent": true,
+    "docker_pull_success_verified": true,
+    "docker_image_size_gb_reported": 13.3,
+    "docker_http_200_verified": true,
+    "playwright_version_verified": "1.62.0",
+    "mind2web_tasks_reported": 1009,
+    "mind2web_websites_reported": 73
+  },
+  "claim_ceiling": "MAX JUSTIFIED: (1) Docker Hub am1n3e/webarena-verified-shopping:latest is pullable on linux/amd64, 13.3GB, serves HTTP 200 at localhost:8080 (Magento One Stop Market) — FIRST successful Docker deployment, infrastructure BLOCK unblocked. (2) Geometry-faithful viewport filtering (Playwright locator.bounding_box intersection with 1280x720 rect, threshold 0.5) is implemented and yields 98/258 locatable elements in-viewport (38% of locatable, initial viewport only, N=2 pilot). (3) Fragment yield for shopping review pages above-fold is 0.0427 of CDP AX nodes (98/2296) and 0.38-0.39 of locatable elements (98/258,98/249). Under CDP denominator, heuristic 0.65 is falsified by 60.7pp and Method1 0.365 by 32.2pp (>15pp threshold). Under locatable denominator (more comparable to Method1's 150-element model), heuristic remains falsified by ~27pp but Method1 is SUPPORTED within 1.5-2.9pp — so Method1 falsification is NOT ceiling-justified. (4) Pilot N=2 cannot generalize to 192 shopping tasks or 812-task corpus; claim bounded to Magento review pages, initial viewport, no scroll. (5) Mind2Web osunlp/Mind2Web has 1009 tasks with 100% HTML+trajectory but 73 websites (<100) so S4 diversity fails per frozen rule; still viable for limited single-domain testing. NO justified claim that heuristic is falsified for all site types, that shopping is unsuitable for C-CROSSSITE, or that 73-website corpus is globally insufficient without scrolling/randomized sampling.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-34377576886/spec.json:decision_rule",
+    "research/experiments/EXP-INTEL-34377576886/prereg.md:6.2 geometry-faithful implementation",
+    "research/experiments/EXP-INTEL-34377576886/result.json:metrics.shopping_task_21_actual_yield 0.0427",
+    "research/experiments/EXP-INTEL-34377576886/result.json:controls.viewport_geometry_faithful pass true evidence sha256:15a2ad056dea51a4e907ceece1d176007122f3b9dec415ea87234061167f1d4e",
+    "research/experiments/EXP-INTEL-34377576886/provenance.json:infrastructure.docker.image_sha256 a5b6fb47ee9f378ceca18e32261a92a8964f0ccfb9f1d3741ce3a0e2d990839d container b7d69e48b0be",
+    "research/experiments/EXP-INTEL-33945226776/result.json:metrics.estimated_fragment_yield_by_site_type.shopping median_yield 0.65 method_yields [0.365,0.92,0.65]",
+    "/tmp/opencode/measure_yield_geo_v2.py sha256 15a2ad056dea51a4e907ceece1d176007122f3b9dec415ea87234061167f1d4e",
+    "/tmp/opencode/raw_ax_tree_21.json sha256 2d9acf9d098e709eae6e65a07184c9e1ae6122bfd7a686f002253baebe9e5bf8 total_cdp_elements 2296 locator_sample 200 viewport 98",
+    "/tmp/opencode/raw_ax_tree_22.json sha256 ffb37731058bb52dbee3ba44eda6835b198454953dcc831289e76ea8a050336a total_cdp 2294 viewport 98 size 17470 truncated",
+    "/tmp/opencode/measurement_result.json actual_yield 0.0426829 viewport_elements 98 locator_elements 258 char_count 2524",
+    "/tmp/opencode/measurement_result_22.json actual_yield 0.0427201 locator_elements 249 viewport 98"
+  ],
+  "unresolved": [
+    "Whether CDP AX node count (2296) or Playwright locatable count (258) is the correct denominator for SPIDER fragment yield as defined in heuristic model — determines whether Method1 is falsified or supported",
+    "Whether heuristic viewport coverage 0.45-0.65 assumed global page vs initial viewport; scrolled yield could be 2-3x higher if below-fold content included",
+    "Whether Magento One Stop Market review page DOM (many Generic/StaticText containers) is representative of WebArena shopping tasks vs product-listing pages that heuristic modeled at 150 elements",
+    "Whether other site types (gitlab 0.60, reddit 0.65, map 0.598, wikipedia 0.517) show same 4% CDP yield or higher yield, given no measurement on those containers",
+    "Whether IGNORED_ACTREE_PROPERTIES pruning materially affects yield — producer reports 0 pruned elements (98->98) but 333/2296 elements had properties removed without changing count",
+    "Whether Mind2Web 73-website corpus could still satisfy C-CROSSSITE if threshold relaxed to 50 websites or if evaluated per-domain",
+    "Whether VisualWebArena Docker images would show different yield characteristics than shopping review pages"
+  ]
+}

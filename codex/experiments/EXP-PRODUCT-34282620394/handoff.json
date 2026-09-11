@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-34282620394",
+  "lane": "product",
+  "target_lane": "product",
+  "next_question": "Can C2 be resolved without regressions by either (a) reverting to bind-time double-prefix detection in _bind() which handled both short and full values transparently, OR (b) implementing a hybrid: distill-time detection produces shorter templates but _bind() retains fallback prefix detection for callers passing short values, such that all 10 conditions pass AND the product API supports both calling conventions?",
+  "why_next": "Distill-time prefix stripping (this experiment) works for C2 in isolation but introduces 4 regressions (B4, C1, D1, D3) because it mandates a full-value-only calling convention incompatible with the existing mixed-convention harness. The parent's bind-time approach handled both conventions but was abandoned because the template prefix was too long for val.startswith(). The resolution space now has two clear branches: (a) restore bind-time detection with correct slot-level prefix extraction (not full template prefix), or (b) adopt hybrid distill-time + bind-time fallback. Both require a new prereg. A third option (contract change to full-value-only) is a product design decision outside this measurement.",
+  "carry_forward": {
+    "established": [
+      "C2 distill-time prefix stripping WORKS IN ISOLATION: distill_parameterized() detects slot-level prefix 'user-' from training values user-1/2/3, strips from template to produce https://api.example.com/users/${url}, and bind-time full-value insertion (user-4) produces correct user-4. binding_accuracy=1.0 (3/3). Evidence: EXP-PRODUCT-34282620394 result.json metrics c2_binding_accuracy_full_value=1.0, c2_template_shortened=true, c2_induced_template, raw_evidence.json C2-full-value-ids",
+      "B1-B5 regression baseline with mixed conventions: B1=1, B2=2, B3=3, B4=1, B5=1 slot counts correct. B1, B2, B3, B5 pass binding_accuracy=1.0. B4 fails binding_accuracy=0.0 because distill-time stripping mandates full values but harness passes short value 'd'. Evidence: result.json controls B1-B5, raw_evidence.json conditions.B1-B5",
+      "C1 prefix+Suffix URL binding: slot_count=1, binding_accuracy=0.0 under distill-time stripping (template stripped site- prefix, param 'd' short). Under prior baseline (no stripping), C1 passes. Evidence: result.json controls C1_REGRESSION FAIL",
+      "D1/D2/D3 noise filtering: D2 passes (leaf-path, no prefix stripping). D1 and D3 fail under distill-time stripping because test harness passes short values (4) while template has stripped order-/item- prefix. Evidence: result.json controls D1_REGRESSION FAIL, D3_REGRESSION FAIL, D2_REGRESSION PASS",
+      "E1/E2 null controls hold: slot_count=0 for both. No hallucination. Evidence: result.json controls E1_NULL PASS, E2_NULL PASS, raw_evidence.json controls.E1_pattern_absence, E2_single_obs",
+      "Literal mechanism replay fails on all unseen combinations: fail_rate=1.0. Parameterized induction is necessary. Evidence: result.json controls B_LITERAL PASS",
+      "Root cause identified: distill-time stripping changes VALUE CONTRACT. When template is 'prefix-${slot}', callers can pass short values. When template is '${slot}' (prefix stripped), callers MUST pass full values. The test harness uses mixed conventions. Evidence: result.json regression_failure_root_cause, report.md regression_analysis",
+      "Parent bind-time approach handled BOTH conventions: short value 'd' into 'site-${slot}' produced 'site-d'; full value 'user-4' triggered prefix stripping. This flexibility is lost with distill-time stripping. Evidence: report.md bind-time approach analysis, result.json observations"
+    ],
+    "rejected": [
+      "Distill-time prefix stripping as standalone C2 fix: FALSIFIED. Breaks value contract for short-value callers. 4/9 regressions fail. Evidence: verdict.json C2-FIX-FALSIFIED, audit.json producer_claim_supported=false",
+      "_bind() prefix-strip approach (val.startswith(template_prefix)): FALSIFIED in parent EXP-PRODUCT-34195008089. Template prefix is full path, not short prefix. Evidence: parent handoff carry_forward.rejected",
+      "C-PARAM-INHERIT 10/10 product-ready: NOT ACHIEVED. Kernel integration remains PARTIAL. Evidence: verdict.json claim_updates, audit.json claim_ceiling",
+      "Distill-time stripping is compatible with mixed calling conventions: FALSIFIED by this experiment. Evidence: result.json regression_failure_root_cause, report.md regression_analysis"
+    ],
+    "unknown": [
+      "Whether bind-time detection with slot-level prefix extraction (not full template prefix) would handle both conventions without regressions",
+      "Whether a hybrid approach (distill-time detection + bind-time fallback for short values) would satisfy all 10 conditions",
+      "Whether the product API should mandate full-value-only convention (all callers pass 'user-4', 'site-d', 'order-4') or support mixed conventions",
+      "Whether bind-time detection can correctly extract slot-level prefix from training value distribution at the path level (not from the template string) without the full-prefix problem",
+      "What the correct overall_binding_accuracy denominator is (30 vs 34) — metric definition ambiguous but does not affect falsifier",
+      "Real browser observation noise distributions vs synthetic deterministic patterns — no external validity claimed"
+    ],
+    "do_not_assume": [
+      "C-PARAM-INHERIT is product-ready — C2 blocker remains (kernel integration PARTIAL 6/10 or 9/10 under prior baseline)",
+      "Distill-time stripping is the wrong approach — it works in isolation, just not with mixed conventions",
+      "Bind-time stripping is necessarily correct — it was abandoned because full-prefix template prefix didn't work, but slot-level prefix extraction might",
+      "The test harness values are wrong — they represent legitimate calling conventions that a product API must handle",
+      "A fix at either distill-time or bind-time alone is sufficient — hybrid may be needed",
+      "All 10-condition synthetic results transfer to product economics — end-to-end economics remain unmeasured",
+      "KERNEL-INTEGRATION-SURVIVES has been achieved — it remains PARTIAL",
+      "The next experiment can reuse the same _bind() prefix-strip code from the parent — it was structurally inert and must be replaced"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-PRODUCT-34282620394/handoff.json (this experiment, C2-FIX-FALSIFIED, distill-time stripping rejected)",
+    "research/experiments/EXP-PRODUCT-34195008089/handoff.json (parent, C2-FIX-FALSIFIED, _bind() prefix-strip rejected)",
+    "research/experiments/EXP-PRODUCT-34015741916/handoff.json (grandparent, KERNEL-INTEGRATION-PARTIAL 9/10)",
+    "src/spider/kernel.py at sha256 97365d612f91ffbbaffe5639ff1dd4ad0e396b7305e63c718aca3648060c40ef (includes distill-time stripping fix at lines 439-455 and _bind at lines 38-51)",
+    "research/experiments/EXP-PRODUCT-34282620394/run_experiment.py (10-condition test harness with mixed value conventions)",
+    "Claims registry: C-PARAM-INHERIT status EXPERIMENTAL"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-34282620394/verdict.json C2-FIX-FALSIFIED decision",
+    "research/experiments/EXP-PRODUCT-34282620394/result.json c2_binding_accuracy_full_value=1.0 regression_fail_count=4 failing=[B4,C1,D1,D3]",
+    "research/experiments/EXP-PRODUCT-34282620394/audit.json status=FAIL producer_claim_supported=false claim_ceiling",
+    "research/experiments/EXP-PRODUCT-34282620394/audit.json recomputed_metrics overall_binding_accuracy 24/34=0.706",
+    "research/experiments/EXP-PRODUCT-34282620394/report.md regression_analysis value contract mismatch table",
+    "research/experiments/EXP-PRODUCT-34282620394/raw_evidence.json sha256 a13ddef40e875975706a514dcf55219e180e5e003e3987aa3560194c7e4ccc68",
+    "research/experiments/EXP-PRODUCT-34282620394/freeze.json hashes confirming immutable frozen inputs",
+    "research/experiments/EXP-PRODUCT-34195008089/handoff.json parent C2-FIX-FALSIFIED with _bind() prefix-strip rejected",
+    "src/spider/kernel.py sha256 97365d612f91ffbbaffe5639ff1dd4ad0e396b7305e63c718aca3648060c40ef lines 38-51 _bind and 439-455 distill-time stripping"
+  ],
+  "recommended_action": "Product lane: design a new prereg for C2 fix that addresses the VALUE CONTRACT problem identified in this experiment. Two evidence-grounded strategies: (a) REVERT to bind-time double-prefix detection in _bind() but use SLOT-LEVEL prefix extraction (from training value distribution, not full template prefix) — this avoids the parent's full-prefix bug while preserving the bind-time flexibility for mixed conventions; or (b) IMPLEMENT HYBRID: distill-time detection produces shorter templates AND _bind() retains fallback prefix detection for callers passing short values (guard: if template prefix was stripped at distill-time, _bind() checks whether the param value already contains the stripped prefix and skips double-insertion). Strategy (a) is lower-risk (restores proven bind-time flexibility). Strategy (b) is architecturally cleaner but more complex. Both must re-test all 10 conditions. Do not repeat distill-time-only approach. Alternatively, if the product API mandates full-value-only calling convention, update the test harness for B4/C1/D1/D3 to pass full values — this is a product design decision that requires stakeholder input."
+}

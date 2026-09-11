@@ -1,0 +1,437 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-34121473072",
+  "lane": "frontier",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "aggregate_bias_corrected": {
+      "spearman_rho": 0.9761904761904763,
+      "spearman_p_one_sided": 1.657198013100049e-05,
+      "tv_means_by_lambda": {
+        "0.0": 0.006091766211168607,
+        "0.1": 0.005326455919023191,
+        "0.2": 0.009747195704593556,
+        "0.3": 0.013493536438077817,
+        "0.4": 0.01621385058382242,
+        "0.5": 0.026098598319853596,
+        "0.7": 0.05443402345422544,
+        "1.0": 0.08717858280923263
+      },
+      "cohens_d": 1.446894731020899
+    },
+    "per_function_bias_corrected": {
+      "42": {
+        "func_name": "rotation",
+        "rho": 0.9285714285714287,
+        "p_one_sided": 0.00043148409144998836,
+        "tv_means": {
+          "0.0": 0.005139427598012225,
+          "0.1": 0.00041048359290934977,
+          "0.2": 0.0027274943334497427,
+          "0.3": 0.008773157306574918,
+          "0.4": 0.009328883985981851,
+          "0.5": 0.01909437643807198,
+          "0.7": 0.038023704528842926,
+          "1.0": 0.05209211528471919
+        }
+      },
+      "43": {
+        "func_name": "scaling",
+        "rho": -0.11904761904761905,
+        "p_one_sided": 0.6105571369738102,
+        "tv_means": {
+          "0.0": 0.00882942850560987,
+          "0.1": 0.008180922807498558,
+          "0.2": 0.011568708524489801,
+          "0.3": 0.005017596323220286,
+          "0.4": 0.00409723604057175,
+          "0.5": 0.00017240641927399603,
+          "0.7": 0.005690036224412287,
+          "1.0": 0.02035263662574166
+        }
+      },
+      "44": {
+        "func_name": "translation",
+        "rho": 1.0,
+        "p_one_sided": 0.0,
+        "tv_means": {
+          "0.0": 0.004306442529883725,
+          "0.1": 0.007387961356661666,
+          "0.2": 0.014945384255841122,
+          "0.3": 0.026689855684438248,
+          "0.4": 0.03521543172491366,
+          "0.5": 0.059029012102214805,
+          "0.7": 0.11958832960942112,
+          "1.0": 0.18909099651723707
+        }
+      }
+    },
+    "multiscale_bias_corrected": {
+      "5": {
+        "rho": 0.9761904761904763,
+        "p_one_sided": 1.657198013100049e-05,
+        "monotonic": false,
+        "tv_means": {
+          "0.0": 0.010821004374602365,
+          "0.1": 0.011601387138903222,
+          "0.2": 0.01504707871759922,
+          "0.3": 0.0218251037638691,
+          "0.4": 0.01880131897713113,
+          "0.5": 0.03228477474450202,
+          "0.7": 0.0566790621515921,
+          "1.0": 0.09865887782089651
+        }
+      },
+      "10": {
+        "rho": 0.9761904761904763,
+        "p_one_sided": 1.657198013100049e-05,
+        "monotonic": false,
+        "tv_means": {
+          "0.0": 0.011452949810243532,
+          "0.1": 0.011305243064413602,
+          "0.2": 0.011742591049172827,
+          "0.3": 0.01399512889577934,
+          "0.4": 0.01963720202096949,
+          "0.5": 0.027713760953087193,
+          "0.7": 0.05239354898761898,
+          "1.0": 0.09634058154596162
+        }
+      },
+      "20": {
+        "rho": 0.9761904761904763,
+        "p_one_sided": 1.657198013100049e-05,
+        "monotonic": false,
+        "tv_means": {
+          "0.0": 0.006091766211168607,
+          "0.1": 0.005326455919023191,
+          "0.2": 0.009747195704593556,
+          "0.3": 0.013493536438077817,
+          "0.4": 0.01621385058382242,
+          "0.5": 0.026098598319853596,
+          "0.7": 0.05443402345422544,
+          "1.0": 0.08717858280923263
+        }
+      },
+      "50": {
+        "rho": 0.8571428571428572,
+        "p_one_sided": 0.0032650086273576452,
+        "monotonic": false,
+        "tv_means": {
+          "0.0": 0.004019476914934613,
+          "0.1": 0.0015747089165922268,
+          "0.2": 0.002689697864940762,
+          "0.3": 0.00340001533724474,
+          "0.4": 0.010378280551517656,
+          "0.5": 0.019453582971685122,
+          "0.7": 0.056498049566233825,
+          "1.0": 0.07614818210601541
+        }
+      }
+    },
+    "effect_sizes": {
+      "42": 1.8727820952458305,
+      "43": 0.7457349625733125,
+      "44": 10.472749565878303,
+      "aggregate": 1.446894731020899
+    },
+    "clipping_comparison": {
+      "42": {
+        "func_name": "rotation",
+        "clip_separation": 0.058325738717410744,
+        "tor_separation": 0.008479792459409085,
+        "gap_reduction": 0.8546132008632786,
+        "paired_t": 4.394546517165732,
+        "paired_p": 0.001734058736902736
+      },
+      "43": {
+        "func_name": "scaling",
+        "clip_separation": 0.021879124080296436,
+        "tor_separation": 0.004737626502628029,
+        "gap_reduction": 0.78346361192336,
+        "paired_t": 1.5021663713733526,
+        "paired_p": 0.16730053739509065
+      },
+      "44": {
+        "func_name": "translation",
+        "clip_separation": 0.20080512716389193,
+        "tor_separation": 0.03180409844049924,
+        "gap_reduction": 0.841617099674245,
+        "paired_t": 17.379224641275275,
+        "paired_p": 3.1219050792987314e-08
+      }
+    },
+    "clipping_gap_analysis": {
+      "clip_trans_sep": 0.20080512716389193,
+      "clip_scale_sep": 0.021879124080296436,
+      "clip_gap": 0.1789260030835955,
+      "tor_trans_sep": 0.03180409844049924,
+      "tor_scale_sep": 0.004737626502628029,
+      "tor_gap": 0.02706647193787121,
+      "gap_reduction": 0.8487281251947177,
+      "threshold_50pct_met": true
+    },
+    "frequency_baseline": {
+      "42": {
+        "tv_max_mean": 0.17781749142508016,
+        "tv_max_std": 0.01284258776208521
+      },
+      "43": {
+        "tv_max_mean": 0.17929234444653064,
+        "tv_max_std": 0.026858983704377334
+      },
+      "44": {
+        "tv_max_mean": 0.1686882836852625,
+        "tv_max_std": 0.02226500207532906
+      }
+    },
+    "gaussian_comparison": {
+      "0": {
+        "gauss_l0": 0.5243011913748361,
+        "mix_l0": 0.5243011913748361,
+        "gauss_l1": 0.5636746030856872,
+        "mix_l1": 0.5826269300922469
+      },
+      "1": {
+        "gauss_l0": 0.5236731524775025,
+        "mix_l0": 0.5236731524775025,
+        "gauss_l1": 0.5657653362288866,
+        "mix_l1": 0.5455522765577988
+      },
+      "2": {
+        "gauss_l0": 0.5202653409725899,
+        "mix_l0": 0.5202653409725899,
+        "gauss_l1": 0.7108962420448952,
+        "mix_l1": 0.7210704681364819
+      }
+    },
+    "bias_floor_l0": {
+      "0": 0.528032911985487,
+      "1": 0.5286535545954878,
+      "2": 0.528265004399762
+    },
+    "anova": {
+      "design": "3 functions x 8 lambdas x 10 reps = 240 observations",
+      "lambda_F": 71.8804,
+      "lambda_p": 0.0,
+      "function_F": 155.7015,
+      "function_p": 0.0,
+      "interaction_F": 30.2036,
+      "interaction_p": 0.0,
+      "r_squared": 0.8514,
+      "interaction_pass": false
+    },
+    "perm_test_p_values": {
+      "0.0": 0.5493333333333332,
+      "1.0": 0.13533333333333333
+    },
+    "over_correction": {
+      "0": {
+        "n_negative": 0,
+        "frac": 0.0,
+        "pass": true
+      },
+      "1": {
+        "n_negative": 0,
+        "frac": 0.0,
+        "pass": true
+      },
+      "2": {
+        "n_negative": 0,
+        "frac": 0.0,
+        "pass": true
+      }
+    },
+    "perm_null_variance": {
+      "0": {
+        "cv": 0.007168949941048584,
+        "pass": true
+      },
+      "1": {
+        "cv": 0.00585714528191585,
+        "pass": true
+      },
+      "2": {
+        "cv": 0.003671324043400549,
+        "pass": true
+      }
+    },
+    "toroidal_sanity": {
+      "0": {
+        "tor_tv_l0": 0.5281107123854507,
+        "pass": false
+      },
+      "1": {
+        "tor_tv_l0": 0.5282962290779286,
+        "pass": false
+      },
+      "2": {
+        "tor_tv_l0": 0.5278912305031771,
+        "pass": false
+      }
+    },
+    "clip_fractions": {
+      "0": {
+        "0.0": 0.023399999999999997,
+        "0.1": 0.073,
+        "0.2": 0.11920000000000001,
+        "0.3": 0.1676,
+        "0.4": 0.2152,
+        "0.5": 0.25920000000000004,
+        "0.7": 0.35559999999999997,
+        "1.0": 0.49820000000000003
+      },
+      "1": {
+        "0.0": 0.025,
+        "0.1": 0.069,
+        "0.2": 0.11539999999999999,
+        "0.3": 0.15719999999999995,
+        "0.4": 0.20220000000000002,
+        "0.5": 0.2508,
+        "0.7": 0.34659999999999996,
+        "1.0": 0.4856
+      },
+      "2": {
+        "0.0": 0.0252,
+        "0.1": 0.0712,
+        "0.2": 0.12159999999999997,
+        "0.3": 0.1686,
+        "0.4": 0.21000000000000002,
+        "0.5": 0.25660000000000005,
+        "0.7": 0.35000000000000003,
+        "1.0": 0.493
+      }
+    }
+  },
+  "controls": {
+    "positive_control": {
+      "description": "Bias-corrected TV > 0 at lambda=1 across all functions (permutation p < 0.05)",
+      "pass": false,
+      "per_function": {
+        "42": {
+          "pass": true,
+          "bc_tv_l1": 0.05209211528471919
+        },
+        "43": {
+          "pass": true,
+          "bc_tv_l1": 0.02035263662574166
+        },
+        "44": {
+          "pass": true,
+          "bc_tv_l1": 0.18909099651723707
+        }
+      }
+    },
+    "null_control": {
+      "description": "Bias-corrected TV ~ 0 at lambda=0 (permutation p > 0.05)",
+      "pass": true,
+      "perm_p": 0.5493333333333332
+    },
+    "spearman_test": {
+      "description": "Aggregate Spearman rho >= 0.65, p < 0.05 one-sided on bias-corrected TV",
+      "pass": true,
+      "rho": 0.9761904761904763,
+      "p_one_sided": 1.657198013100049e-05
+    },
+    "function_invariance": {
+      "description": "No significant function x lambda interaction (ANOVA p > 0.05)",
+      "pass": false,
+      "interaction_p": 0.0
+    },
+    "clipping_gap_reduction": {
+      "description": "Toroidal reduces translation-scaling gap by >50%",
+      "pass": true,
+      "gap_reduction": 0.8487281251947177
+    },
+    "over_correction": {
+      "description": "<=10% bias-corrected TV negative at lambda=1",
+      "pass": true,
+      "per_function": {
+        "0": {
+          "n_negative": 0,
+          "frac": 0.0,
+          "pass": true
+        },
+        "1": {
+          "n_negative": 0,
+          "frac": 0.0,
+          "pass": true
+        },
+        "2": {
+          "n_negative": 0,
+          "frac": 0.0,
+          "pass": true
+        }
+      }
+    },
+    "perm_null_variance": {
+      "description": "Permutation null CV < 0.5 across reps at lambda=0",
+      "pass": true,
+      "per_function": {
+        "0": {
+          "cv": 0.007168949941048584,
+          "pass": true
+        },
+        "1": {
+          "cv": 0.00585714528191585,
+          "pass": true
+        },
+        "2": {
+          "cv": 0.003671324043400549,
+          "pass": true
+        }
+      }
+    },
+    "toroidal_sanity": {
+      "description": "Toroidal TV < 0.1 at lambda=0",
+      "pass": false,
+      "per_function": {
+        "0": {
+          "tor_tv_l0": 0.5281107123854507,
+          "pass": false
+        },
+        "1": {
+          "tor_tv_l0": 0.5282962290779286,
+          "pass": false
+        },
+        "2": {
+          "tor_tv_l0": 0.5278912305031771,
+          "pass": false
+        }
+      }
+    }
+  },
+  "artifacts": [],
+  "observations": [
+    "Decision: FALSIFIED-IN-SETTING",
+    "Aggregate bias-corrected Spearman rho=0.9762, p_one_sided=0.000017",
+    "Positive control: FAIL",
+    "Null control: PASS",
+    "Function invariance (ANOVA interaction p=0.0): FAIL",
+    "Clipping gap reduction: 84.9% (PASS vs 50% threshold)",
+    "Bias floor at lambda=0: [0.528032911985487, 0.5286535545954878, 0.528265004399762]",
+    "Over-correction fraction at lambda=1: [0.0, 0.0, 0.0]",
+    "Toroidal TV at lambda=0: [0.5281107123854507, 0.5282962290779286, 0.5278912305031771]",
+    "Execution time: 206.9s",
+    "Function 42 (rotation): rho=0.9286, p=0.000431",
+    "Function 43 (scaling): rho=-0.1190, p=0.610557",
+    "Function 44 (translation): rho=1.0000, p=0.000000"
+  ],
+  "validity_notes": [
+    "10D continuous state space [0,1]^10 with mixture-of-3-Gaussians heteroscedastic noise",
+    "500 transitions per cell, 10 reps, 200 perms per cell (pragmatic: prereg specified 1000)",
+    "Toroidal and Gaussian baselines computed at lambda=0, 0.5, 1.0 only (not all 8 levels)",
+    "Bias correction: permutation-null subtraction at primary kNN scale (k=20)",
+    "Same DGP seeds as parent EXP-FRONTIER-34065969836 for direct comparison",
+    "kNN TV in full 10D at k=5,10,20,50",
+    "Two-way ANOVA with 240 observations (3 functions x 8 lambdas x 10 reps)",
+    "Frequency baseline: 3D-projected histogram TV vs marginal P(S_{t+1})",
+    "Frozen random seed (seed=42) for reproducibility"
+  ],
+  "unresolved": [
+    "Whether real Web transitions show action-dependent TV-detectable structure",
+    "Whether scaling failure generalizes to other 10D scaling parameterizations",
+    "Whether KDE or neural density estimators can detect scaling-type structure",
+    "Whether kNN TV remains calibrated at >50D (Web DOM embeddings)"
+  ]
+}
