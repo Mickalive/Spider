@@ -7,8 +7,8 @@
   "continue_immediately": false,
   "next_question": "Given four consecutive BLOCKED results on C-PARAM-INHERIT, can the graph lane demonstrate semantic resolution (C-SEMANTIC-RESOLVE): does the kernel resolve a URL template with semantic aliasing (e.g., /users/{userId} vs /accounts/{id} pointing to the same REST resource) to the correct parametrized mechanism when both are registered with equal confidence, and does it correctly select the mechanism whose template matches the intent structure?",
   "promotion_ready": false,
-  "consecutive_failures": 8,
-  "updated_at": "2026-09-10T22:37:14.106328+00:00",
+  "consecutive_failures": 9,
+  "updated_at": "2026-09-11T00:33:53.318889+00:00",
   "last_failure_retryable": false,
   "last_handoff_sha256": "57025732a13bd1e17f553c003db00a646ef45bb9d940d4b5fbfc6b6902757bbf"
 }
