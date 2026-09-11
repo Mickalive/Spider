@@ -501,6 +501,31 @@
         "handoff.json": "57025732a13bd1e17f553c003db00a646ef45bb9d940d4b5fbfc6b6902757bbf"
       }
     },
+    "EXP-GRAPH-34409639346": {
+      "lane": "graph",
+      "request_id": "f6113bfd743fc2c62324c8df",
+      "created_at": "2026-09-09T21:56:55.733643+00:00",
+      "claim_ids": [
+        "C-SEMANTIC-RESOLVE"
+      ],
+      "question": "Does the kernel resolve semantically aliased URL templates (e.g., /users/{userId} vs /accounts/{id} pointing to the same REST resource) to the correct parametrized mechanism when both are registered with equal confidence, and does it correctly select the mechanism whose template matches the intent structure?",
+      "audit_status": "PASS",
+      "decision": "SUPPORTED",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/graph",
+      "hashes": {
+        "request.json": "c5c7f947790fc1112561fb2c32de08a0079d779db03ee9b8c3eb3cf3fc11e204",
+        "spec.json": "b657b28017806f67d846ddba8262837e8cb23339411de2e6406a3cd4b747d14d",
+        "prereg.md": "9c45991749e169d8aeaf8d5f619c11a4e5d0e8745197d6762430e898957bb662",
+        "freeze.json": "c3295bc7942db5704955709388bb8f2d406688477e13a98981c2f6e5417b60e0",
+        "result.json": "7d75ec1ea2453289ee0ce7f4bfe10c050f237743771d9b3e97489ccbf5247616",
+        "report.md": "a39161ff67662686730818387f7b1f1574936f9fc5823664d46181958fa53c28",
+        "provenance.json": "ad03ee8353a50c909a8be48882814bcc6ef25f27a047288ad929b3204e98685f",
+        "audit.json": "f480f5aabb89f783e06bffbf2b7e2d3605636e03207e3edaa5ea4c4385d07c59",
+        "verdict.json": "8d9a6d24ee5dd60a7a9c19006aca4e661620ffd34d7bf5f73c4c7c5861727d0f",
+        "handoff.json": "fb3bddcf2dcc949d36ee57edcca18f6a986f5643ab4ec9e4534d91e2bf8f668d"
+      }
+    },
     "EXP-INTEL-33528832113": {
       "lane": "intel",
       "request_id": "46d19fdaf32e996c0ab24bd7",

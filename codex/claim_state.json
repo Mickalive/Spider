@@ -309,6 +309,16 @@
         "reason": "Bind-time slot-level prefix extraction resolves C2 double-prefix without regressions in frozen 10-condition synthetic harness. All conditions pass binding_accuracy=1.0, slot counts correct, null controls pass. This provides first evidence of mixed calling convention support (short and full values) at the kernel level. Evidence: audit.json recomputed_metrics (34/34 binding_correct, accuracy=1.0), raw_evidence.json all conditions, audit.json V4_CONTROLS (C2, B1-B5, D1-D3, E1/E2 independently verified). Claim does NOT advance to product-ready: audit.json claim_ceiling bounds to synthetic kernel correctness only; real-browser validation and end-to-end economics (C-PRODUCT-ECON) remain unmeasured."
       }
     ],
+    "C-SEMANTIC-RESOLVE": [
+      {
+        "experiment_id": "EXP-GRAPH-34409639346",
+        "lane": "graph",
+        "decision": "SUPPORTED",
+        "claim_id": "C-SEMANTIC-RESOLVE",
+        "status": "EXPERIMENTAL",
+        "reason": "Experiment SUPPORTS hypothesis: kernel does NOT perform semantic aliasing resolution. 0/10 aliased-first conditions select template-matching mechanism (binomial p=1.0 one-sided). Kernel uses exact intent matching (kernel.py L97: m.intent != intent) and selection is determined entirely by mechanism_id ordering via stable sort (L112). Claim ceiling bounded: simple path aliasing with equal confidence 0.9, preconditions={}, applicability_guards={}, 10 synthetic intent-template pairs, deterministic single-run cold kernel. NOT established: query-parameter aliasing, path rewriting, server-side routing, confidence-differentiated aliasing, real HTTP grounding, multi-intent, non-empty guards, or any fix adding semantic resolution. C-SEMANTIC-RESOLVE is not globally falsified \u2014 it is falsified at current kernel level for this narrow scope. Product must implement explicit aliasing or require exact intent matching."
+      }
+    ],
     "C-CROSSSITE": [
       {
         "experiment_id": "EXP-INTEL-33528832113",
