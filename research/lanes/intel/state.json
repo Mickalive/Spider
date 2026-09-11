@@ -1,14 +1,14 @@
 {
   "lane": "intel",
   "human_paused": false,
-  "active_experiment_id": "EXP-INTEL-34546944360",
-  "last_experiment_id": "EXP-INTEL-34377576886",
-  "last_verdict": "REVISE",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-INTEL-34546944360",
+  "last_verdict": "MIXED",
   "continue_immediately": false,
-  "next_question": "What is the correct yield denominator for SPIDER fragment model \u2014 CDP accessibility tree node count (2296) or Playwright locatable element count (258)? This must be resolved by (a) mapping heuristic Method1's 150-element shopping model to either denominator, and (b) measuring yield across 8-10 randomized shopping tasks (product-listing, detail, cart, checkout) with both denominators reported, plus scrolling yield.",
+  "next_question": "What is the canonical definition of 'locatable elements' for SPIDER fragment yield, and does yield_locatable stabilize across randomized shopping page types (including checkout) under that frozen definition?",
   "promotion_ready": false,
-  "consecutive_failures": 2,
-  "updated_at": "2026-09-11T05:15:34.297188+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "f9d411aff509ecb43fe56976f1a01b10942a00680433169636d04c003523abfe"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-11T09:54:19.140807+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "f7e8d8e37d3fa48c33a23a40cf5b6c7de0f6016fb804cc4aa809d0ea4f492486"
 }
