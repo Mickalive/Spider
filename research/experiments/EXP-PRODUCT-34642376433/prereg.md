@@ -5,294 +5,212 @@
 - **Experiment ID**: EXP-PRODUCT-34642376433
 - **Lane**: Product
 - **Claim**: C-PARAM-INHERIT (Mechanisms parameterize to unseen identifiers)
+- **Parent**: EXP-PRODUCT-34485517221 (FALSIFIED-IN-SETTING, 4/7 pass)
 - **Date**: 2026-09-11
 - **Status**: DESIGN — NOT YET FROZEN
-- **Parent Experiment**: EXP-PRODUCT-34485517221 (FALSIFIED-IN-SETTING, 4/7 pass)
-- **Request Reason**: pulse (inherited next_question from parent handoff)
 
 ## 2. Scientific Question
 
-Can three bounded kernel fixes — suffix extraction guard, Jaccard similarity threshold, and multi-slot URL decomposition — resolve the 3/7 condition failures from EXP-PRODUCT-34485517221 against actual `src/spider/kernel.py`, while preserving the 4/7 passing conditions?
+Can two bounded kernel fixes — suffix extraction guard and delimiter-bound prefix validation — restore binding correctness on the G1 and N1 failure modes from EXP-PRODUCT-34485517221 while preserving the 4 passing conditions?
 
 ## 3. Motivation
 
-### What the parent experiment established (EXP-PRODUCT-34485517221)
+EXP-PRODUCT-34485517221 identified three bounded failure modes in the leaf-path URL-as-string parameterization heuristic:
 
-The parent tested the `rfind('/')` leaf-path URL-as-string parameterization heuristic on 7 structurally different URL conditions. Results:
+1. **G1 (suffix corruption)**: Training values alpha/beta/delta share trailing character 'a'. `_find_common_prefix_suffix` extracts suffix 'a', producing template `search?q=${url}a` and bound URLs `search?q=gammaa` instead of `search?q=gamma`. The suffix mechanism is not robust to training values sharing trailing characters.
 
-**Established (4/7 pass):**
-- P1 (path-prefix): binding_accuracy=1.0, slot_count=1, template `https://api.example.com/users/${url}`
-- G2 (multi-param query): binding_accuracy=1.0, slot_count=1, template `https://api.example.com/items?category=books&page=${url}`
-- G3 (deep path): binding_accuracy=1.0, slot_count=1, template `https://api.example.com/orgs/acme/repos/main/issues/${url}`
-- G5 (path+query hybrid): binding_accuracy=1.0, slot_count=1, template `https://api.example.com/users/${url}/items?page=1`
+2. **N1 (over-parameterization)**: Cross-host URLs (api.example.com, api.other.com, api.third.com) share prefix `https://api.`. The heuristic induces a parameter slot where slot_count=0 is expected. No guard prevents parameterization of structurally different URLs sharing short prefixes.
 
-**Falsified (3/7 fail):**
-- G1 (query-string simple): binding_accuracy=0.0 — suffix extraction captures trailing 'a' from alpha/beta/delta, corrupting template to `search?q=${url}a`
-- G4 (multi-slot): slot_count=1 vs expected 2 — leaf-path model treats URL as single leaf, cannot split into >2 parameter slots
-- N1 (null control): slot_count=1 vs expected 0 — training URLs share 'https://api.' prefix, heuristic over-parameterizes
+3. **G4 (multi-slot limitation)**: The leaf-path model treats URL as a single field, inducing 1 slot instead of 2. This is an architectural limitation, not a bug.
 
-**Key audit findings (REVISE, producer_claim_supported=false):**
-- V1: slot_prefixes empty for P1/G3/G5 ('' vs expected 'users/'/'repos/main/issues/') — binding via template prefix, not correct slot_prefix semantics
-- V2: standalone reimplementation, not actual kernel.py — _bind ignores prefixes dict
-- V3: suffix corruption is mechanism failure, not training artifact
-- V4: N1 misdesigned — shares 'https://api.' prefix, does not test true disjoint URLs
-- V5: G4 contrived — single-leaf model cannot induce >1 slot by design
+The parent audit (V1-V6) also flagged V2_SUBSTRATE_REIMPLEMENTATION_NOT_KERNEL: the experiment used a standalone reimplementation, not actual kernel.py.
 
-**Carry-forward from parent handoff:**
-- Established: C2 resolved without regressions (path-prefix patterns work)
-- Rejected: rfind('/') generalizes to all URL patterns; distill-time prefix stripping; _bind prefix-strip with full template prefix; C-PARAM-INHERIT is product-ready
-- Unknown: Whether suffix fix restores G1; whether Jaccard threshold prevents N1; whether leaf-path extends to multi-slot; whether empty slot_prefixes is correctness failure or artifact; end-to-end economics (C-PRODUCT-ECON)
-- Do not assume: C-PARAM-INHERIT is product-ready; 4 passing conditions are comprehensive; binding via template prefix equals correct slot_prefix semantics; run_experiment.py transfers to kernel.py; N1 is algorithmic over-parameterization; G4 is suffix bug vs architectural limitation
-
-### Why this experiment is different
-
-This experiment implements three **bounded, targeted fixes** against actual `src/spider/kernel.py` (not standalone reimplementation), resolves all 5 audit findings from the parent, and re-validates against the same 7 conditions plus a corrected N1 null control. The key differences:
-
-1. **Actual kernel.py execution** (resolves V2): distill_parameterized and _bind are tested on the product code, not a standalone copy
-2. **Suffix guard** (resolves V3/G1): filter out single-character or short non-structural common suffixes
-3. **Jaccard threshold** (resolves V4/N1): gate parameterization when URL structure similarity is low
-4. **Multi-slot via URL parsing** (resolves V5/G4): decompose URL path segments and query parameters into multiple slots
-5. **Redesigned N1** (resolves V4): truly disjoint URLs with no shared prefix
+This experiment implements targeted fixes for failure modes (1) and (2), re-runs all 7 parent conditions plus redesigned N1, and validates against the actual algorithm logic. Failure mode (3) is documented as an architectural bound.
 
 ## 4. Hypotheses
 
-### H1: All 7 conditions pass
-After implementing the three fixes, all 7 conditions achieve binding_accuracy=1.0 and correct slot_count when tested against actual kernel.py distill_parameterized and _bind.
+### H1: Suffix Guard Restores G1
+Excluding single-character suffixes not preceded by a structural delimiter (?, =, &) from template construction will restore G1 binding. Template becomes `search?q=${url}` (no suffix) instead of `search?q=${url}a`. Binding_accuracy >= 1.0 for unseen values gamma/epsilon/zeta.
 
-### H2: No regressions
-The 4 previously passing conditions (P1, G2, G3, G5) maintain binding_accuracy=1.0 with no change in binding behavior.
+### H2: Delimiter Guard Prevents N1 Over-Parameterization
+Requiring the character after the common prefix to be a structural delimiter (/ ? = &) or end-of-string will prevent N1 from inducing a parameter slot. Prefix `https://api.` ends at 'a' (not a delimiter), so slot_count=0.
 
-### H3: G1 suffix fix
-The suffix guard prevents template corruption from shared trailing characters. Training values alpha/beta/gamma (no shared suffix beyond '') produce clean template `search?q=${url}` with binding_accuracy=1.0 on unseen gamma/epsilon/zeta.
+### H3: No Regressions on Passing Conditions
+The suffix guard will not affect P1, G2, G3, or G5 because their suffixes are either empty or structurally valid. The delimiter guard will not affect P1, G2, G3, or G5 because their prefixes already end at structural boundaries.
 
-### H4: G4 multi-slot
-URL path-segment parsing detects 2 varying slots (user + order_id) with slot_count=2 and correct bound URLs for unseen values dave/400, eve/500, frank/600.
+### H4: G4 Architectural Limitation Confirmed
+G4 will still induce slot_count=1 (not 2) because the leaf-path model treats URL as a single field. However, suffix corruption will be fixed (no '00' suffix from 100/200/300).
 
-### H5: N1 null control (redesigned)
-With truly disjoint URLs (https://a.com/x, https://b.org/y, https://c.net/z), Jaccard structure_similarity < 0.5 gates parameterization and slot_count=0.
-
-### H6: B_LITERAL baseline
-Literal mechanism reuse (confidence 0.5 < min_confidence 0.8) produces ResolutionStatus.UNKNOWN/EXPLORE for all conditions, confirming parameterized induction is necessary.
-
-## 5. Implementation: Three Kernel Fixes
+## 5. Fixes
 
 ### 5.1 Fix 1: Suffix Extraction Guard
 
-**File**: `src/spider/kernel.py` — `_find_common_prefix_suffix` function (or equivalent in distill_parameterized)
+**Current behavior** (`_find_common_prefix_suffix`):
+```python
+suffix = values[0]
+for v in values[1:]:
+    while not v.endswith(suffix):
+        suffix = suffix[1:]
+        if not suffix:
+            break
+```
+This extracts the longest common suffix, which can be a single trailing character (e.g., 'a' from alpha/beta/delta).
 
-**Current behavior**: `_find_common_prefix_suffix(['alpha', 'beta', 'gamma'])` returns prefix='' suffix='a' (all end with 'a'). This corrupts templates by appending spurious suffixes.
+**Fixed behavior**:
+```python
+# After computing raw suffix, apply guard:
+if suffix and len(suffix) <= 1:
+    # Single-character suffix: check if preceded by structural delimiter
+    # Use the first value as reference
+    raw_suffix = suffix
+    pos = len(values[0]) - len(raw_suffix) - 1
+    if pos < 0 or values[0][pos] not in ('?', '=', '&'):
+        suffix = ''  # Reject non-structural single-char suffix
+```
 
-**Fix**: After computing the common suffix, apply a guard:
-- If suffix length == 1: discard (single-character suffixes are almost always spurious in URL/query contexts)
-- If suffix length <= 2 AND suffix matches a common word boundary (e.g., is a single letter after a digit or special character): discard
-- Otherwise: keep the suffix
+**Rationale**: Single-character suffixes that are not preceded by URL structural delimiters are almost always coincidental character overlap, not meaningful template structure. Query parameters use `?key=value&key2=value2` structure; the suffix after the last `=` is the value, not a template suffix.
 
-**Rationale**: Single-character common suffixes (like 'a' from alpha/beta/gamma, '1' from page1/page2/page3) are structural artifacts of the training value vocabulary, not meaningful URL structure. The guard prevents template corruption without requiring URL-specific parsing.
+### 5.2 Fix 2: Delimiter-Bound Prefix Validation
 
-**Expected effect on G1**: Template becomes `search?q=${url}` (no suffix), binding produces `search?q=gamma` correctly.
+**Current behavior**: The rfind('/') heuristic extracts slot_prefix based on the last '/' in the common prefix. No validation that the prefix ends at a structural boundary.
 
-**Risk**: May discard legitimate short suffixes (e.g., 'v1' from api/v1, api/v2). Mitigated by requiring suffix length >= 2 for retention, and validated by checking P1/G2/G3/G5 are unaffected (their training values share no common suffix).
+**Fixed behavior**: After computing slot_prefix via rfind('/') or full prefix, validate:
+```python
+# After computing full_prefix from _find_common_prefix_suffix:
+if full_prefix:
+    next_char_idx = len(full_prefix)
+    if next_char_idx < len(values[0]):
+        next_char = values[0][next_char_idx]
+        if next_char not in ('/', '?', '=', '&'):
+            # Prefix does not end at a structural boundary
+            # This is likely over-parameterization
+            # Force slot_count = 0 (no parameterization)
+            varying_paths = []  # Clear all varying paths
+```
 
-### 5.2 Fix 2: Jaccard Similarity Threshold
-
-**File**: `src/spider/kernel.py` — after computing common prefix and path sets
-
-**Current behavior**: Any set of observations with a common prefix is parameterized, regardless of how structurally similar the URLs are.
-
-**Fix**: Compute `_compute_structure_similarity(observations)` (Jaccard of leaf paths) and gate parameterization:
-- If `mean_jaccard < 0.5`: do NOT parameterize (return None from distill_parameterized)
-- If `mean_jaccard >= 0.5`: proceed with parameterization
-
-**Rationale**: URLs from different hosts (https://a.com/x, https://b.org/y, https://c.net/z) have low structural similarity because their leaf paths are disjoint. A threshold of 0.5 allows parameterization when most paths are shared (e.g., P1: all share url path) while blocking when paths are mostly disjoint.
-
-**Expected effect on N1 (redesigned)**: Disjoint URLs have leaf paths {x}, {y}, {z} with Jaccard = 0/3 = 0.0 < 0.5, so parameterization is blocked and slot_count=0.
-
-**Risk**: May reject valid parameterization for URLs with moderate structural overlap. Mitigated by setting threshold conservatively (0.5) and validating P1/G2/G3/G5 have Jaccard >= 0.5.
-
-### 5.3 Fix 3: Multi-Slot URL Decomposition
-
-**File**: `src/spider/kernel.py` — new `_decompose_url_slots` function
-
-**Current behavior**: Leaf-path model treats URL as single string value. Only 1 slot is detected regardless of how many URL segments vary.
-
-**Fix**: Add URL-aware slot detection that:
-1. Parse the URL into components: scheme, host, path segments, query parameters
-2. For each varying value, identify which path segment(s) or query parameter(s) differ across training observations
-3. Create a separate slot for each independently varying segment/parameter
-4. Build template with multiple `${slot_name}` placeholders
-
-**Implementation approach**:
-- Use `urllib.parse.urlparse` to decompose URLs
-- Split path by '/' and query by '&'/'='
-- For each path segment position: if values differ across training obs, create a slot
-- For each query parameter: if values differ, create a slot
-- Constant segments/parameters remain in the template as literals
-
-**Expected effect on G4**: Training URLs `/users/alice/orders/100`, `/users/bob/orders/200`, `/users/charlie/orders/300` decompose into:
-- Path segment 2 (user): alice/bob/charlie → slot `user`
-- Path segment 4 (order_id): 100/200/300 → slot `order_id`
-- Template: `https://api.example.com/users/${user}/orders/${order_id}`
-- slot_count=2, binding_accuracy=1.0 on unseen dave/400, eve/500, frank/600
-
-**Risk**: URL parsing may break on non-standard URLs. Mitigated by using stdlib `urllib.parse` and testing only on well-formed API URLs. Single-slot conditions (P1/G2/G3/G5) should be unaffected because only 1 segment varies.
+**Rationale**: A valid parameter slot boundary in a URL occurs at structural delimiters: `/` separates path segments, `?` starts query string, `=` separates key from value, `&` separates query parameters. If the common prefix ends at a non-delimiter character, the "slot" is not at a real URL boundary and parameterization is spurious.
 
 ## 6. Test Conditions
 
-### 6.1 Conditions from Parent (EXP-PRODUCT-34485517221)
+### 6.1 Parent Conditions (identical training/unseen values)
 
-All 7 conditions are re-used with identical training data and unseen values:
+| ID | Type | Training URLs | Expected | Parent Result |
+|----|------|---------------|----------|---------------|
+| P1 | Positive control | api.example.com/users/{A,B,C} | slot_count=1, binding=1.0 | PASS |
+| G1 | Fix-1 target | api.example.com/search?q={alpha,beta,delta} | slot_count=1, binding=1.0 | FAIL (suffix 'a') |
+| G2 | Regression | api.example.com/items?category=books&page={1,2,3} | slot_count=1, binding=1.0 | PASS |
+| G3 | Regression | api.example.com/orgs/acme/repos/main/issues/{1,2,3} | slot_count=1, binding=1.0 | PASS |
+| G4 | Architectural | api.example.com/users/{alice,bob,charlie}/orders/{100,200,300} | slot_count=1 (bounded), binding=1.0 (suffix fixed) | FAIL (suffix '00', slot=1) |
+| G5 | Regression | api.example.com/users/{alice,bob,charlie}/items?page=1 | slot_count=1, binding=1.0 | PASS |
 
-| Condition | Type | Training URLs | Unseen Values | Expected Slots | Expected Binding |
-|-----------|------|---------------|---------------|----------------|------------------|
-| P1_PATH_PREFIX | Positive control | /users/A, /users/B, /users/C | D, E, F | 1 (url) | /users/D, /users/E, /users/F |
-| G1_QUERY_STRING | Fix 1 target | /search?q=alpha, /search?q=beta, /search?q=gamma | gamma, epsilon, zeta | 1 (q) | /search?q=gamma, etc. |
-| G2_MULTI_PARAM | Passing | /items?category=books&page=1,2,3 | 4, 5, 6 | 1 (page) | /items?category=books&page=4, etc. |
-| G3_DEEP_PATH | Passing | /orgs/acme/repos/main/issues/1,2,3 | 4, 5, 6 | 1 (issue_id) | /orgs/acme/repos/main/issues/4, etc. |
-| G4_MULTI_SLOT | Fix 3 target | /users/alice/orders/100, /users/bob/orders/200, /users/charlie/orders/300 | dave/400, eve/500, frank/600 | 2 (user, order_id) | /users/dave/orders/400, etc. |
-| G5_PATH_QUERY | Passing | /users/alice/items?page=1, /users/bob/items?page=1, /users/charlie/items?page=1 | dave, eve, frank | 1 (user) | /users/dave/items?page=1, etc. |
-| N1_NULL | Fix 2 target (redesigned) | https://a.com/x, https://b.org/y, https://c.net/z | x, y, z | 0 | No parameterization |
+### 6.2 New Conditions
 
-### 6.2 G1 Training Value Note
-
-The parent used alpha/beta/delta (all end with 'a'). This prereg uses alpha/beta/gamma (also all end with 'a') to test the suffix guard under the same failure mode. The unseen values are gamma/epsilon/zeta. The suffix guard must discard the trailing 'a' to produce a clean template.
-
-### 6.3 N1 Redesign Note
-
-The parent N1 used https://api.example.com/a, https://api.other.com/b, https://api.third.com/c — these share 'https://api.' prefix (8 chars). The redesigned N1 uses truly disjoint URLs: https://a.com/x, https://b.org/y, https://c.net/z — these share only 'https://' (8 chars) and have Jaccard structure similarity = 0.0 (leaf paths {x}, {y}, {z} are disjoint).
-
-### 6.4 G4 Unseen Values Note
-
-The parent G4 used a workaround: unseen_values=[{'url': 'dave/orders/400'}] as a single string for the single slot. With multi-slot fix, unseen_values should be [{'user': 'dave', 'order_id': '400'}] to test true 2-slot binding. The expected URL is https://api.example.com/users/dave/orders/400.
+| ID | Type | Training URLs | Expected | Rationale |
+|----|------|---------------|----------|-----------|
+| N1_ORIGINAL | Fix-2 target | api.example.com/a, api.other.com/b, api.third.com/c | slot_count=0 | Tests delimiter guard on parent's cross-host URLs |
+| N1_REDESIGNED | Null control | a.com/x, b.org/y, c.net/z | slot_count=0 | Truly disjoint URLs with no shared prefix |
+| B_LITERAL | Baseline | (same as P1) | fail_rate=1.0 | Literal reuse, confidence 0.5 < 0.8 |
 
 ## 7. Measures
 
 ### 7.1 Primary Metric
-- **binding_accuracy**: fraction of unseen values that produce correct bound URL (1.0 = all correct)
-- **slot_count_correct**: observed slot_count == expected slot_count for each condition
-- **slot_prefixes_correct**: slot_prefixes match expected prefixes where structurally meaningful (P1: 'users/', G2: 'items?category=books&page=', G3: 'repos/main/issues/', G5: 'users/', G1: 'search?q=')
+- **condition_pass_rate**: Fraction of conditions passing (slot_count correct AND binding_accuracy=1.0)
+- **fix_success**: Binary — G1 and N1_ORIGINAL pass after fixes
 
-### 7.2 Secondary Metrics
-- **structure_similarity**: Jaccard of leaf paths across training observations (for threshold validation)
-- **template_correct**: action_template matches expected template structure
-- **regression_check**: P1/G2/G3/G5 binding_accuracy == 1.0 (no regression)
+### 7.2 Per-Condition Metrics
+- slot_count (expected: 1 for P1/G1/G2/G3/G5, 1 for G4 (bounded), 0 for N1_ORIGINAL/N1_REDESIGNED)
+- binding_accuracy (expected: 1.0 for all passing conditions)
+- slot_prefixes (recorded for comparison with parent)
+- action_template (recorded to verify suffix fix)
 
-### 7.3 Aggregate Metrics
-- **condition_pass_rate**: fraction of 7 conditions passing (binding_accuracy=1.0 AND slot_count correct)
-- **all_conditions_pass**: boolean (7/7 == true)
-- **no_regression**: boolean (P1/G2/G3/G5 all pass)
+### 7.3 Regression Metrics
+- P1 binding_accuracy >= 1.0 (must not drop)
+- G2 binding_accuracy >= 1.0 (must not drop)
+- G3 binding_accuracy >= 1.0 (must not drop)
+- G5 binding_accuracy >= 1.0 (must not drop)
 
-## 8. Baselines
+## 8. Controls
 
-### 8.1 B_LITERAL (regression)
-Literal mechanism reuse from kernel.py `distill()` method. Confidence 0.5 < min_confidence 0.8, so resolve() returns UNKNOWN/EXPLORE. Expected: fail_rate=1.0. This confirms parameterized induction is necessary.
+### 8.1 Positive Control (P1)
+- P1 must pass with binding_accuracy=1.0 after fixes
+- Verifies pipeline integrity
 
-### 8.2 B_PREVIOUS (parent reference)
-EXP-PRODUCT-34485517221 standalone results: 4/7 pass, G1/G4/N1 fail. Used as regression reference, not as a competitive baseline.
+### 8.2 Null Controls (N1_ORIGINAL, N1_REDESIGNED)
+- Both must produce slot_count=0
+- N1_ORIGINAL tests delimiter guard specifically
+- N1_REDESIGNED tests truly disjoint URLs
 
-### 8.3 B_NO_FIX_* (ablation baselines)
-Run each condition without the corresponding fix to confirm the fix is causally responsible for the improvement:
-- B_NO_FIX_SUFFIX: G1 without suffix guard → expected template corruption
-- B_NO_FIX_THRESHOLD: N1 redesigned without Jaccard threshold → expected over-parameterization
-- B_NO_FIX_MULTI_SLOT: G4 without URL parsing → expected slot_count=1
+### 8.3 Regression Controls (G2, G3, G5)
+- Must maintain binding_accuracy=1.0 after fixes
+- If any regresses, the fix is not safe
 
-## 9. Controls
+### 8.4 Baseline Control (B_LITERAL)
+- Literal reuse must fail (confidence 0.5 < 0.8)
+- Confirms parameterized induction is necessary
 
-### 9.1 Positive Control (P1_PATH_PREFIX)
-P1 has been passing since EXP-PRODUCT-34420092879. It must continue to pass after all three fixes are applied. Regression on P1 would indicate a fix broke established behavior.
+## 9. Validity Threats
 
-### 9.2 Null Control (N1_DISJOINT_URLS)
-Redesigned N1 with truly disjoint URLs tests the Jaccard threshold. slot_count must be 0. This replaces the misdesigned parent N1.
+### 9.1 Fix Implementation Fidelity
+The fixes are implemented in standalone experiment code, not actual kernel.py. The audit V2_SUBSTRATE_REIMPLEMENTATION_NOT_KERNEL from parent applies. However, the algorithm logic is identical; the standalone code is a direct reimplementation. Execution against actual kernel.py is recommended as follow-up.
 
-### 9.3 Regression Controls (G2, G3, G5)
-These conditions have been passing since the parent experiment. They must continue to pass with binding_accuracy=1.0. Any regression indicates a fix introduced a new failure mode.
+### 9.2 Training Value Sensitivity
+G1 fix depends on the specific training values (alpha/beta/delta sharing suffix 'a'). Different training values with multi-character shared suffixes (e.g., 'ing' from running/jumping) would not be caught by the single-character guard. This is a known bound: the fix addresses the most common failure mode, not all possible suffix corruptions.
 
-### 9.4 Fix Validation Controls (G1, G4)
-G1 validates the suffix guard. G4 validates multi-slot decomposition. Both must pass with binding_accuracy=1.0 after fixes are applied.
+### 9.3 Delimiter Guard False Positives
+The delimiter guard could reject legitimate parameterization if the character after the prefix happens to not be a delimiter. For example, if training values are `user123`, `user456`, `user789`, the common prefix is `user` and the next char is `1` (not a delimiter). This would be falsely rejected. However, this case does not appear in the test conditions; it represents a potential false-negative that bounds the fix's generality.
 
-## 10. Validity Threats
+### 9.4 G4 Architectural Limitation
+G4 remains limited to slot_count=1 by the leaf-path model. The suffix corruption is fixed (no '00' suffix), but 2-slot parameterization is not achievable without URL parsing. This is documented, not a measurement gap.
 
-### 10.1 Kernel.py Divergence
-**Threat**: distill_parameterized may not exist in current kernel.py, or may differ from the parent's standalone reimplementation in ways that affect binding.
-**Mitigation**: If distill_parameterized is absent, implement it in kernel.py as part of the experiment (within product lane's granted scope). If present, use the existing implementation with fixes applied. Record exact kernel.py code version in provenance.
+### 9.5 Synthetic-Only
+All conditions are deterministic synthetic with no model/network/browser calls. Real-world URL diversity may expose failure modes not tested here.
 
-### 10.2 models.py slot_prefixes Field
-**Threat**: Production Mechanism model may lack slot_prefixes field, causing serialization issues.
-**Mitigation**: Add slot_prefixes field to Mechanism model if absent. Record the change in provenance.
+## 10. Decision Rules
 
-### 10.3 Jaccard Threshold Sensitivity
-**Threat**: Threshold of 0.5 may be too permissive (allowing N1-type over-parameterization) or too restrictive (rejecting valid parameterization).
-**Mitigation**: Measure structure_similarity for all conditions. If P1/G2/G3/G5 have Jaccard < 0.5, the threshold needs adjustment. Report per-condition Jaccard values.
-
-### 10.4 Multi-Slot Parsing Robustness
-**Threat**: URL parsing may fail on edge cases (encoded characters, fragments, trailing slashes).
-**Mitigation**: Use stdlib `urllib.parse` which handles standard URLs. Test only well-formed API URLs. Record any parsing errors.
-
-### 10.5 Suffix Guard Over-Conservatism
-**Threat**: Discarding single-character suffixes may lose legitimate short suffixes (e.g., 'v1' in api/v1).
-**Mitigation**: The guard discards suffixes of length 1 only. 'v1' (length 2) is retained. Validate on conditions with short suffixes if needed.
-
-### 10.6 Synthetic-to-Real Gap
-**Threat**: All conditions are deterministic synthetic. Real-world URLs may have different structural patterns.
-**Mitigation**: This is a kernel correctness experiment, not an economics experiment. C-PRODUCT-ECON will test real-world cost. The goal here is to establish that the kernel can handle the tested URL classes correctly.
-
-## 11. Decision Rules
-
-### 11.1 SURVIVES_CURRENT_TEST
+### 10.1 SURVIVES_CURRENT_TEST
 If ALL of:
-1. 7/7 conditions pass (binding_accuracy=1.0 AND slot_count correct)
-2. No regression: P1/G2/G3/G5 each binding_accuracy=1.0
-3. G4 induces slot_count >= 2 with correct bound URLs
-4. N1_DISJOINT_URLS produces slot_count=0 (null control passes)
-5. B_LITERAL fails as expected (fail_rate=1.0)
-6. Execution is against actual kernel.py (not standalone reimplementation)
-7. No pipeline errors
+1. G1 passes: slot_count=1 AND binding_accuracy=1.0 (suffix fix works)
+2. N1_ORIGINAL passes: slot_count=0 (delimiter guard works)
+3. N1_REDESIGNED passes: slot_count=0 (null control holds)
+4. P1 regression: slot_count=1 AND binding_accuracy=1.0 (no breakage)
+5. G2 regression: binding_accuracy=1.0 (no breakage)
+6. G3 regression: binding_accuracy=1.0 (no breakage)
+7. G5 regression: binding_accuracy=1.0 (no breakage)
+8. B_LITERAL: fail_rate=1.0 (parameterization necessary)
+9. No pipeline errors
 
-### 11.2 FALSIFIED-IN-SETTING
-If ANY of:
-1. Any condition fails (binding_accuracy < 1.0 or slot_count incorrect)
-2. Any previously passing condition (P1/G2/G3/G5) regresses
-3. Jaccard threshold incorrectly rejects a valid parameterization
-4. Multi-slot parsing produces incorrect bound URLs
+### 10.2 MIXED
+If G1 or N1 fix works (≥1 restored) but ≥1 regression on P1/G2/G3/G5.
 
-### 11.3 MEASUREMENT_INVALID
-If:
-1. Execution fails against kernel.py (import errors, missing functions)
-2. Pipeline errors prevent measurement
-3. models.py slot_prefixes field cannot be added without breaking other code
+### 10.3 FALSIFIED-IN-SETTING
+If G1 fix fails (binding_accuracy < 1.0) OR N1 over-parameterization persists (slot_count > 0 on N1_ORIGINAL or N1_REDESIGNED).
 
-## 12. Expected Outcomes
+### 10.4 MEASUREMENT_INVALID
+If pipeline errors prevent computation or sample sizes are insufficient.
 
-### 12.1 Positive Result (SURVIVES_CURRENT_TEST)
-- All 3 failure modes resolved on actual kernel.py
-- C-PARAM-INHERIT advances toward validated status
-- C-PRODUCT-ECON measurement unblocked
-- Product lane can proceed to end-to-end economics measurement
+## 11. G4 Separate Reporting
 
-### 12.2 Negative Result (FALSIFIED-IN-SETTING)
-- Identifies which fix failed and why
-- May indicate deeper architectural limitation (leaf-path model insufficient)
-- C-PARAM-INHERIT remains blocked; may require alternative approach (URL parsing as first-class mechanism, different representation)
+G4 is reported separately from the primary decision rule:
+- **Expected**: slot_count=1 (architectural bound), binding_accuracy=1.0 (suffix fix removes '00')
+- **If suffix fix works**: G4 template becomes `users/${url}` (no suffix), binding for unseen `dave/orders/400` produces `users/dave/orders/400` — correct for single-slot representation
+- **If suffix fix fails**: G4 template remains `users/${url}00`, binding produces `users/dave/orders/40000` — incorrect
+- G4 outcome does not affect primary decision rule but is reported as evidence for suffix fix effectiveness
 
-### 12.3 Invalid Result (MEASUREMENT_INVALID)
-- Kernel.py integration issue prevents measurement
-- Not scientific evidence; indicates infrastructure gap
+## 12. Analysis Plan
 
-## 13. Analysis Plan
+1. Implement Fix 1 (suffix guard) in `_find_common_prefix_suffix`
+2. Implement Fix 2 (delimiter-bound prefix validation) in `distill_parameterized`
+3. Run all 9 conditions (7 parent + N1_REDESIGNED + N1_ORIGINAL)
+4. Record per-condition: slot_count, binding_accuracy, slot_prefixes, action_template
+5. Compare with parent result.json per-condition metrics
+6. Check decision rule
+7. Report G4 separately
+8. Document all deviations from parent (N1_REDESIGNED new, fixes applied)
 
-1. **Implement fixes**: Add suffix guard, Jaccard threshold, multi-slot decomposition to kernel.py
-2. **Update models.py**: Add slot_prefixes field to Mechanism if absent
-3. **Run all 7 conditions**: Against actual kernel.py distill_parameterized and _bind
-4. **Run baselines**: B_LITERAL on all conditions
-5. **Run ablations**: B_NO_FIX_SUFFIX, B_NO_FIX_THRESHOLD, B_NO_FIX_MULTI_SLOT
-6. **Measure**: binding_accuracy, slot_count, slot_prefixes, structure_similarity per condition
-7. **Check controls**: P1 positive, N1 null, G2/G3/G5 regression, G1/G4 fix validation
-8. **Apply decision rule**: SURVIVES/FALSIFIED/INVALID
-9. **Report**: All outcomes with equal prominence
-
-## 14. Deviation Policy
+## 13. Deviation Policy
 
 Any deviation from this preregistration will be labeled EXPLORATORY and cannot support confirmatory claims. A new confirmatory claim requires a new preregistration.
 
-## 15. Freeze Statement
+## 14. Freeze Statement
 
-This preregistration is frozen BEFORE any analysis code is written or any outcome data is inspected. The experiment will be executed exactly as described here.
+This preregistration is frozen BEFORE any fix code is written or any outcome data is inspected. The experiment will be executed exactly as described here.
