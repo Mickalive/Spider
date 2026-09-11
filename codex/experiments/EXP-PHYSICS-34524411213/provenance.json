@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34524411213",
+  "lane": "physics",
+  "github_run_id": "34524411213",
+  "github_run_attempt": 1,
+  "commit_sha": "f9c5cf01d081f969f5d538afdf044bdca686d0f5",
+  "freeze_sha": "edaefaa18b3c83ddfb1a94e33fd76d0dea86d8f2",
+  "base_sha": "968e41942ca90acfb126fcdc5002d9a4e4e44769",
+  "recorded_at": "2026-09-10T22:38:42.417849+00:00",
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.x",
+    "dependencies": ["playwright", "numpy", "scipy"],
+    "browser": "chromium (headless)",
+    "seed": 42,
+    "pythonhashseed": "0"
+  },
+  "frozen_inputs": {
+    "request.json": {
+      "path": "research/experiments/EXP-PHYSICS-34524411213/request.json",
+      "sha256": "d60876669422bd30ecca02b69ad05d139b27de2ca1b563db930bea82fc2e5e9b"
+    },
+    "spec.json": {
+      "path": "research/experiments/EXP-PHYSICS-34524411213/spec.json",
+      "sha256": "be8eeec467930395ea222723ed1af0c2a434c8ce81529bcf52cb3d621f9f56cf"
+    },
+    "prereg.md": {
+      "path": "research/experiments/EXP-PHYSICS-34524411213/prereg.md",
+      "sha256": "6f59d15b03a72fc9acf4bd4e0243ab923c62cb67e7d50e98a7aa6528bdf3250e"
+    },
+    "freeze.json": {
+      "path": "research/experiments/EXP-PHYSICS-34524411213/freeze.json",
+      "sha256": null
+    }
+  },
+  "artifacts": {
+    "raw_results": {
+      "path": "research/experiments/EXP-PHYSICS-34524411213/raw_results.json",
+      "sha256": "6f106000cf905e8cee806912eb514e9df38fec0561c036ae6172eb9da63ea6b6"
+    },
+    "experiment_code": {
+      "path": "research/physics/dom_features/dom_features_experiment.py",
+      "sha256": "891c0b78f009e615097f22216cbf3b71c0fc2359539c02982bc456af1d34ed1a"
+    }
+  },
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-34348438464",
+    "path": "research/experiments/EXP-PHYSICS-34348438464/handoff.json",
+    "sha256": "e99cf7fb45797ed1b9a1d14282be8db7ab1386aa67deaade12cc8932c6c1a95d"
+  },
+  "data_sources": [
+    {
+      "type": "browser",
+      "site": "TodoMVC React",
+      "url": "https://todomvc.com/examples/react/dist/",
+      "n_transitions_raw": 115,
+      "n_transitions_non_leakage": 76,
+      "n_transitions_leakage": 39
+    },
+    {
+      "type": "browser",
+      "site": "TodoMVC Vue",
+      "url": "https://todomvc.com/examples/vue/dist/",
+      "n_transitions_raw": 126,
+      "n_transitions_non_leakage": 78,
+      "n_transitions_leakage": 48
+    },
+    {
+      "type": "synthetic",
+      "description": "Synthetic SPA with 8 states, 4 actions, deterministic DOM evolution",
+      "n_transitions": 500
+    }
+  ],
+  "execution_commands": [
+    "python research/physics/dom_features/dom_features_experiment.py"
+  ],
+  "reproduction_notes": [
+    "Requires playwright browser installation (chromium)",
+    "Seed=42, PYTHONHASHSEED=0 for determinism",
+    "Sites accessed via public URLs, no authentication required",
+    "Polite delay: 0.3s between actions, 1.0s state capture delay",
+    "Permutation test: 1000 cross-trajectory shuffles"
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-34546944360",
+  "lane": "intel",
+  "decision": "MIXED",
+  "claim_updates": [
+    {
+      "claim_id": "C-CROSSSITE",
+      "status": "HYPOTHESIS",
+      "reason": "Denominator ambiguity unresolved: locatable yield is definition‑dependent (0.079–0.42) and no canonical definition exists. CDP yield ~0.0426 replicates parent but represents ~4% of CDP nodes. No justified claim about 812‑task corpus viability until denominator frozen, sampling randomized, script provenance pinned, and viewport anomaly explained (audit.json claim_ceiling, VF‑LOCATABLE‑DEFINITION‑AMBIGUITY)."
+    },
+    {
+      "claim_id": "C-LLM-INHERIT",
+      "status": "HYPOTHESIS",
+      "reason": "Fragment‑model yield remains ambiguous; Method1 0.365 is INCONCLUSIVE (FALSIFIED under all‑elements definition, SUPPORTED under parent definition). Heuristic 0.65 is FALSIFIED robustly (>23pp). LLM‑inheritance cannot be evaluated until denominator frozen and yield measured across representative site types (audit.json claim_ceiling, VF‑MISSING‑SITE‑TYPE‑COMPARISON)."
+    }
+  ],
+  "product_action": "NO_CHANGE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "What is the canonical definition of 'locatable elements' for SPIDER fragment yield, and does yield_locatable stabilize across randomized shopping page types (including checkout) under that frozen definition?",
+  "reason": "The experiment aimed to resolve the denominator ambiguity for SPIDER fragment‑model yield. The producer reports MIXED outcome: yield_locatable depends critically on how 'locatable' is defined (0.079 under all‑elements‑with‑bbox, ~0.32 interactive‑only, ~0.42 under parent 258 definition) — a 5× range. The independent audit (status=REVISE, producer_claim_supported=false) confirms the denominator ambiguity is the core result: no single locatable yield can be claimed as THE fragment yield. Decision‑rule condition (1) (Method1 mapping) is not determined; condition (2) (CV<0.2) passes (CV=0.1586); condition (3) (within 10pp of Method1 0.365) depends on definition; condition (4) (scroll <20pp) passes (100%). CDP yield ~0.0426 replicates parent 0.0427 (CV=0.12) but represents only ~4% of CDP nodes. Heuristic 0.65 is FALSIFIED robustly (>23pp under any denominator). Viewport elements constant at 108 across all page types (anomaly). Sampling non‑random, checkout missing, gitlab/reddit not measured. No claim justified about C‑CROSSSITE/C‑LLM‑INHERIT corpus viability until denominator frozen, sampling randomized, script provenance pinned, and viewport anomaly explained.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-34546944360/request.json",
+    "research/experiments/EXP-INTEL-34546944360/spec.json",
+    "research/experiments/EXP-INTEL-34546944360/freeze.json",
+    "research/experiments/EXP-INTEL-34546944360/result.json",
+    "research/experiments/EXP-INTEL-34546944360/audit.json",
+    "research/experiments/EXP-INTEL-34546944360/report.md",
+    "research/experiments/EXP-INTEL-34546944360/provenance.json",
+    "research/experiments/EXP-INTEL-34546944360/prereg.md",
+    "/tmp/opencode/exp345_raw_results.json",
+    "/tmp/opencode/measure_yield_exp345_final.py",
+    "research/experiments/EXP-INTEL-34377576886/handoff.json",
+    "research/experiments/EXP-INTEL-34377576886/audit.json"
+  ]
+}

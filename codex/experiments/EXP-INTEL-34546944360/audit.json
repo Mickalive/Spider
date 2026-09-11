@@ -1,0 +1,292 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-34546944360",
+  "lane": "intel",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Define canonical locatable_elements before any yield claim: spec required geometry-faithful viewport script sha 15a2ad056dea51a4e907ceece1d176007122f3b9dec415ea87234061167f1d4e producing 258 locatable; producer used page.locator('*') bounding_box count producing 1070-1571 locatable and yield_locatable 0.079. Next experiment must freeze definition (all elements with bbox vs interactive-only vs parent CSS selectors) and report sensitivity table; do not compare 0.079 to Method1 0.365 until denominator is frozen",
+    "Restore randomized sampling: spec/prereg 5.1 and measurement_validity require 8-10 tasks randomized from AmineHA/WebArena-Verified covering product-listing, detail, cart, checkout. Producer hardcoded 10 URLs in /tmp/opencode/measure_yield_exp345_final.py SHOPPING_TASKS, used search instead of checkout, and disclosed non-random in validity_notes. Next run must sample randomly from dataset, show task_ids and placeholder substitution, and include checkout page type",
+    "Complete site-type comparison: spec requires at least 1 gitlab and 1 reddit task for site-type falsifier (prereg H5). Producer measured 0, disclosed as infrastructure constraint. Next run must pull am1n3e/webarena-verified-gitlab and reddit images or explicitly mark H5 as BLOCKED with infrastructure proof, not as MIXED exploratory",
+    "Investigate and explain constant viewport_elements=108: all 10 initial measurements have identical viewport count despite locatable 1070-1571 and CDP 2064-2826 and four page types. Verify whether 108 is a fixed header/chrome artifact above the fold or a bounding_box intersection bug (threshold 0.5, rect 0,0,1280,720). Report per-task viewport sample or overlay to confirm page-specific fragment capture",
+    "Use frozen measurement script or record deviation: spec measurement_validity pins /tmp/opencode/measure_yield_geo_v2.py sha256 15a2ad056dea51a4e907ceece1d176007122f3b9dec415ea87234061167f1d4e. Provenance shows /tmp/opencode/measure_yield_exp345_final.py sha256 null (different file) and shared browser context (new_page not new_context). Provide exact script sha, fresh context per task, and keep script under version control for reproduction",
+    "Complete raw artifact provenance: spec requires raw accessibility tree saved for each task (initial+scrolled) with durable sha256. Result.json lists 4 trees (1 with sha, 3 null); local /tmp/opencode has 20 files but 16 not referenced and most hashes not recorded. Next run must list all 20 artifacts with sha256 in result.json/provenance.json or mark failed saves explicitly",
+    "Bound Docker drift: provenance image sha256 3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb vs parent a5b6fb47ee9f378ceca18e32261a92a8964f0ccfb9f1d3741ce3a0e2d990839d. Record image digest before measurement and verify page DOM hash stability across pulls; do not silently compare 0.0426 to parent 0.0427 without drift check",
+    "Recompute yield under both denominators with explicit deltas in result.json metrics: keep yield_cdp and yield_locatable but add yield_locatable_parent258 = 108/258 =0.4186 for direct comparison to parent 0.38, and report heuristic_delta_cdp, heuristic_delta_locatable, method1_delta_cdp, method1_delta_locatable with threshold tests, so MIXED vs FALSIFIED is not definition-dependent"
+  ],
+  "validity_findings": [
+    {
+      "finding_id": "VF-LOCATABLE-DEFINITION-AMBIGUITY",
+      "severity": "critical",
+      "category": "measurement_validity",
+      "metric_ids": ["yield_locatable_mean", "yield_locatable_cv", "method1_delta_pp", "method1_within_10pp"],
+      "control_ids": ["denominator_mapping_control", "stability_control_yield_cv"],
+      "description": "Critical denominator validity threat confirmed and amplified. Producer used locator('*') + bbox>0 count yielding locatable_mean 1354-1392, yield_locatable 0.0792. Parent pilot used CSS selector enumeration yielding 258 locatable and 0.38 yield. Same viewport 108 gives 0.4186 under parent denominator, within 5.3pp of Method1 0.365 (would SUPPORT). Producer correctly reports yield_locatable depends on definition (0.079 vs 0.32 interactive-only vs 0.42 parent) — 5x range — so original hypothesis that locatable is 'the correct' denominator remains unresolved and no single locatable yield can be claimed as THE fragment yield.",
+      "evidence_refs": [
+        "result.json:metrics.yield_locatable_mean=0.0792 vs report.md Definition 3 parent 0.42",
+        "result.json:observations[1] OBS-YIELD-LOCATABLE-DEPENDS-ON-DEFINITION",
+        "result.json:validity_notes[0] denominator ambiguity 5x difference",
+        "/tmp/opencode/exp345_raw_results.json:statistics.locatable_elements.mean=1392.1 vs parent 258",
+        "/tmp/opencode/measure_yield_exp345_final.py:page.locator('*').all() + bbox filtering",
+        "research/experiments/EXP-INTEL-34377576886/audit.json:VF-DENOMINATOR-AMBIGUITY",
+        "research/experiments/EXP-INTEL-34377576886/handoff.json:carry_forward.unknown denominator ambiguity"
+      ],
+      "impact": "Hypothesis H1 (locatable is correct) NOT RESOLVED, H3 (within 10pp of Method1 0.365) FALSIFIED under producer's own denominator (delta 28.58pp >10pp) but would PASS under parent denominator (delta ~5.3pp). Claim ceiling cannot state Method1 SUPPORTED or FALSIFIED without frozen definition; outcome MIXED is justified but Method1 status stays INCONCLUSIVE as producer notes."
+    },
+    {
+      "finding_id": "VF-VIEWPORT-CONSTANT-ANOMALY",
+      "severity": "moderate",
+      "category": "measurement_validity",
+      "metric_ids": ["viewport_elements_mean", "viewport_elements_stdev", "yield_cdp_mean", "yield_locatable_mean"],
+      "control_ids": ["positive_control_geometry_faithful"],
+      "description": "All 10 initial viewport_elements are exactly 108.0 with stdev 0.0 across 4 page types (product-listing 3, detail 3, cart 1, search 3) and locatable range 1070-1571, CDP 2064-2826. Recomputed from /tmp/opencode/exp345_raw_results.json confirms identical 108. This matches parent's 98 constant across N=2 identical review pages, now generalized to diverse pages, suggesting viewport filtering captures only fixed header/navigation above the fold or contains a logic error in is_in_viewport threshold 0.5. Yield stability (CV 0.12 CDP, 0.15 locatable) is then driven by denominator variance, not viewport variance, undermining claim that 'yield is stable across shopping page types' as evidence of representative fragment capture.",
+      "evidence_refs": [
+        "result.json:metrics.viewport_elements_mean=108.0 stdev=0.0",
+        "/tmp/opencode/exp345_raw_results.json:measurements[*].viewport_elements 108 for all initial",
+        "result.json:controls.positive_control_geometry_faithful pass=true with viewport_elements=108",
+        "research/experiments/EXP-INTEL-34377576886/result.json:viewport_elements 98 == 98 for N=2",
+        "/tmp/opencode/measure_yield_exp345_final.py:is_in_viewport threshold 0.5"
+      ],
+      "impact": "Positive control technically PASS (non-empty, >0, <locatable) but does not discriminate page-type content. Until viewport anomaly is explained with per-task samples or overlay, claim that 0.0426 CDP yield is representative of fragment model for shopping is bounded to 'above-fold chrome' not page-specific content. Does not invalidate low-yield finding but prevents generalizing to full page or 192-task corpus."
+    },
+    {
+      "finding_id": "VF-SAMPLING-NONRANDOM-MISSING-CHECKOUT",
+      "severity": "moderate",
+      "category": "sampling",
+      "metric_ids": ["total_tasks_measured", "shopping_tasks_initial", "page_type_breakdown"],
+      "control_ids": ["stability_control_yield_cv"],
+      "description": "Spec measurement_validity and prereg 5.1 require task selection randomized from WebArena-Verified covering product-listing, detail, cart, checkout. Producer hardcoded 10 URLs (electronics.html, beauty-personal-care.html, home-kitchen.html, headphones/camera detail, cart, search q=phone/camera/wireless) and disclosed 'Task selection was not randomized' in validity_notes. Checkout not measured; search substituted (not in prereg page-type list). Per-type N is unbalanced (cart n=1). No dataset task_id or placeholder substitution proof. Stability CV 0.1586 computed across this convenience sample cannot support 'single denominator applies across shopping page types' at corpus level.",
+      "evidence_refs": [
+        "spec.json:measurement_validity Task selection randomized ... covering product-listing, detail, cart, and checkout",
+        "prereg.md:5.1 Shopping Tasks randomized ... product-listing, detail, cart, checkout",
+        "/tmp/opencode/measure_yield_exp345_final.py:SHOPPING_TASKS hardcoded URLs",
+        "result.json:metrics.page_type_breakdown product-listing 3 detail 3 cart 1 search 3 (no checkout)",
+        "result.json:validity_notes[4] Task selection was not randomized",
+        "provenance.json:execution_timeline measurement_shopping_tasks tasks_measured 10"
+      ],
+      "impact": "Falsifier condition 'CV >0.2 across 8+ shopping tasks' was tested but on non-random sample; generalizability to 192 shopping tasks remains unknown. Claim ceiling must disclose convenience sample, missing checkout, and that search pages are exploratory substitution."
+    },
+    {
+      "finding_id": "VF-MISSING-SITE-TYPE-COMPARISON",
+      "severity": "moderate",
+      "category": "measurement_validity",
+      "metric_ids": [],
+      "control_ids": [],
+      "description": "Spec and prereg require at least 1 gitlab and 1 reddit task for site-type falsifier: 'gitlab/reddit tasks show yield patterns fundamentally different from shopping (indicating site-type-specific denominator)'. Producer measured 0, disclosed 'GitLab and Reddit tasks were not measured due to infrastructure constraints (only shopping container available)' and listed unresolved question. Decision_rule H5 is therefore NOT TESTED, not FALSIFIED. Null_control expectation of MIXED detection for site-type variation cannot be evaluated.",
+      "evidence_refs": [
+        "spec.json:question ... plus at least one gitlab and one reddit task",
+        "spec.json:falsifier ... OR gitlab/reddit tasks show yield patterns fundamentally different",
+        "spec.json:measurement_validity At least 1 gitlab task and 1 reddit task",
+        "prereg.md:5.2 Site-Type Comparison gitlab 1 + reddit 1",
+        "result.json:validity_notes[5] GitLab and Reddit tasks were not measured",
+        "report.md:H5 Site-Type Variation NOT TESTED"
+      ],
+      "impact": "No evidence for or against site-type-specific denominator. C-CROSSSITE claim about 812-task corpus cannot be bounded; next experiment must measure additional site types before corpus viability decision."
+    },
+    {
+      "finding_id": "VF-SCRIPT-AND-CONTEXT-DEVIATION",
+      "severity": "moderate",
+      "category": "provenance",
+      "metric_ids": [],
+      "control_ids": ["positive_control_geometry_faithful"],
+      "description": "Spec measurement_validity pins geometry-faithful script sha256 15a2ad056dea51a4e907ceece1d176007122f3b9dec415ea87234061167f1d4e. Producer used /tmp/opencode/measure_yield_exp345_final.py with sha256 null (different code, additional locator('*') enumeration and double CDP fetch for unique_roles) and shared browser context (browser.new_context once, then page per task) instead of fresh context per task. Code is available and measurements recompute correctly, but exact parent comparison is not apples-to-apples and fresh-context control is unmet.",
+      "evidence_refs": [
+        "spec.json:measurement_validity Geometry-faithful viewport script sha256 15a2ad...",
+        "provenance.json:code_artifacts.measurement_script.path /tmp/opencode/measure_yield_exp345_final.py sha256 null",
+        "/tmp/opencode/measure_yield_exp345_final.py async_playwright browser.new_context once",
+        "result.json:artifacts[0] path measure_yield_exp345_final.py sha256 null"
+      ],
+      "impact": "Does not invalidate counts but breaks frozen provenance chain for denominator comparison. Next audit cannot verify LOCATABLE definition without exact parent script; fix requires either reusing frozen script or documenting delta and hashing new script."
+    },
+    {
+      "finding_id": "VF-ARTIFACT-INCOMPLETENESS",
+      "severity": "moderate",
+      "category": "provenance",
+      "metric_ids": ["cdp_elements_mean", "locatable_elements_mean"],
+      "control_ids": [],
+      "description": "Spec requires raw accessibility tree saved for each task (not just summary). Producer lists 4 raw trees in result.json artifacts (only 1 with sha a071b6ce...), while /tmp/opencode contains 20 files (10 initial +10 scrolled) and exp345_raw_results.json with sha null. Recomputed node count for listing_1 initial confirms 2826 nodes (full tree, truncated_8192 bug appears fixed, char_count 169668 >8192 but nodes preserved), but 6 artifact hashes are null and scrolled trees not listed in result.json. Provenance incompleteness limits reproducibility, though core measurements are present locally.",
+      "evidence_refs": [
+        "spec.json:measurement_validity Raw accessibility tree saved as durable artifact for each task",
+        "spec.json:measurement_validity Truncated_8192 bug fixed",
+        "result.json:artifacts 6 entries, 4 raw trees, 3 sha null",
+        "provenance.json:raw_artifacts 4 entries with null sha for 3",
+        "/tmp/opencode/exp345_raw_results.json present but sha null",
+        "/tmp/opencode/raw_ax_tree_listing_1_initial.json nodes 2826 verified"
+      ],
+      "impact": "Truncation fix is evidenced by node counts and char_count, but durable hash chain is incomplete. Claim about yield_cdp 0.0426 is supported by recomputed data, but artifact preservation requirement for DIRECTOR handoff is partially unmet."
+    },
+    {
+      "finding_id": "VF-DOCKER-DRIFT",
+      "severity": "low",
+      "category": "provenance",
+      "metric_ids": ["cdp_elements_mean", "yield_cdp_mean"],
+      "control_ids": [],
+      "description": "Parent image sha256 a5b6fb47ee9f378ceca18e32261a92a8964f0ccfb9f1d3741ce3a0e2d990839d vs current 3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb (same tag am1n3e/webarena-verified-shopping:latest). Locatable mean shifted 258->1392, yield_cdp stayed 0.0427->0.0426 (replicated), yield_locatable shifted 0.38->0.079. Drift does not explain CDP stability but may affect DOM element count (additional invisible elements with bbox). Producer disclosed version difference in validity_notes, correctly bounded.",
+      "evidence_refs": [
+        "provenance.json:infrastructure.docker.image_sha256 3e8cb9...",
+        "research/experiments/EXP-INTEL-34377576886/handoff.json:established image sha256 a5b6fb...",
+        "result.json:validity_notes[3] Docker container state may differ",
+        "/tmp/opencode/exp345_raw_results.json:statistics.cdp_elements.mean 2570 vs parent 2296"
+      ],
+      "impact": "CDP yield replication suggests drift does not invalidate primary low-yield finding; locatable drift reinforces that locatable definition must be pinned by code, not by container digest alone."
+    },
+    {
+      "finding_id": "VF-SCROLL-MEASUREMENT-LIMITATION",
+      "severity": "info",
+      "category": "measurement_validity",
+      "metric_ids": ["scroll_mean_delta", "scroll_fraction_within_20pp"],
+      "control_ids": [],
+      "description": "Scrolled measurement used window.scrollTo(0, document.body.scrollHeight) with 2s settle as prereged. Recomputed mean delta 0.0294 (2.94pp) and 100% within 20pp passes H4 threshold, but viewport counts after scroll drop sharply (e.g., listing_1 108->65, search_1 108->39) while total_cdp and locatable stay constant, indicating scrolled viewport captures different (sparser) region rather than cumulative lazy-loaded content. Producer notes 2s may not capture full lazy-load (validity_notes). H4 SUPPORTED per threshold but not informative about full-page yield.",
+      "evidence_refs": [
+        "result.json:metrics.scroll_mean_delta 0.0294 scroll_fraction_within_20pp 1.0",
+        "/tmp/opencode/exp345_raw_results.json:measurements scrolled viewport_elements 39-104 vs initial 108",
+        "spec.json:measurement_validity Scroll-to-bottom with 2s settle",
+        "result.json:validity_notes[6] Lazy-loaded content may not be fully captured"
+      ],
+      "impact": "Supports decision_rule condition (4) but does not demonstrate that initial viewport is representative of cumulative page yield; should be reported as above-fold vs bottom-viewport comparison, not full-page yield."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "Method1_0.365_shopping",
+      "metric_id": "method1_delta_pp",
+      "expected": "yield_locatable within 10pp of Method1 0.365 per decision_rule (3)",
+      "observed": "Producer metric method1_delta_pp 28.58 (yield_locatable_mean 0.0792, delta 28.58pp >10pp) -> NOT within threshold under all-elements definition. Recomputed from /tmp/opencode/exp345_raw_results.json mean 0.07924 delta 28.576pp matches. However alternative denominator parent 258 gives yield 108/258=0.4186 delta 5.36pp <10pp would PASS. Producer correctly labels INCONCLUSIVE in observation OBS-METHOD1-NOT-SUPPORTED and validity_notes.",
+      "verdict": "NOT_SUPPORTED_UNDER_THIS_DEFINITION_BUT_DENOMINATOR_DEPENDENT",
+      "evidence_refs": [
+        "result.json:metrics.method1_yield 0.365 method1_delta_pp 28.58 method1_within_10pp false",
+        "/tmp/opencode/exp345_raw_results.json:statistics.method1_comparison delta_pp 28.576",
+        "report.md:Table Definition 1 delta 28.6pp NOT supported, Definitions 2-3 ~4.5-5.7pp SUPPORTED",
+        "result.json:observations[2] OBS-METHOD1-NOT-SUPPORTED"
+      ]
+    },
+    {
+      "baseline_id": "Heuristic_0.65_shopping",
+      "metric_id": "heuristic_delta",
+      "expected": "FALSIFIED if delta >15pp under both denominators (per parent audit)",
+      "observed": "Heuristic 0.65 vs yield_cdp 0.0426 delta 60.74pp, vs yield_locatable 0.0792 delta 57.08pp, both >15pp. Even under parent locatable 0.4186 delta 23.14pp >15pp. Robust falsification confirmed. Producer does not report heuristic delta explicitly but report.md states FALSIFIED.",
+      "verdict": "FALSIFIED_ROBUST",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-34377576886/audit.json:VF-DENOMINATOR-AMBIGUITY impact heuristic robust",
+        "result.json:metrics.yield_cdp_mean 0.0426 yield_locatable_mean 0.0792 vs 0.65",
+        "report.md:Executive summary heuristic 0.65 falsified under both denominators"
+      ]
+    },
+    {
+      "baseline_id": "Parent_N2_pilot_0.38_locatable_98viewport_258locatable",
+      "metric_id": "yield_locatable_mean",
+      "expected": "Replicate parent 0.38 locatable yield (98/258) and 98 viewport elements per decision_rule context",
+      "observed": "Viewport 108 replicates parent 98 within 10 elements (fixed header plausible). Yield_cdp 0.0426 replicates parent 0.0427 exactly (difference 0.0001). Yield_locatable 0.079 does NOT replicate 0.38 (delta 30pp) because locatable count 1392 vs 258 (method change page.locator('*') vs CSS selectors). Producer acknowledges mismatch and reports both denominators. So CDP pilot replicated, locatable pilot not replicated under new method — reinforces definition sensitivity rather than measurement error.",
+      "verdict": "CDP_REPLICATED_LOC_REPLICATED_ONLY_UNDER_PARENT_DENOMINATOR",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-34377576886/result.json:yield_cdp 0.0427 locatable 258 viewport 98",
+        "result.json:metrics.yield_cdp_mean 0.0426 yield_locatable_mean 0.0792 viewport 108",
+        "/tmp/opencode/exp345_raw_results.json:statistics yield_cdp 0.04256 vs parent 0.0427",
+        "result.json:observations[0] OBS-YIELD-CDP-CONSISTENT"
+      ]
+    }
+  ],
+  "recomputed_metrics": {
+    "yield_cdp_mean": {
+      "producer": 0.0426,
+      "recomputed": 0.04256208944056742,
+      "delta": 0.00003791,
+      "match": true,
+      "source": "/tmp/opencode/exp345_raw_results.json measurements initial yield_cdp mean statistics.stdev 0.005239 cv 0.1231"
+    },
+    "yield_cdp_cv": {
+      "producer": 0.1231,
+      "recomputed": 0.12310530110118303,
+      "delta": 0.0000053,
+      "match": true
+    },
+    "yield_locatable_mean": {
+      "producer": 0.0792,
+      "recomputed": 0.07923875246980991,
+      "delta": 0.00003875,
+      "match": true
+    },
+    "yield_locatable_cv": {
+      "producer": 0.1586,
+      "recomputed": 0.15855850905861738,
+      "delta": 0.00004149,
+      "match": true,
+      "note": "CV <0.2 threshold passes per stability_control_yield_cv, but denominator-dependent"
+    },
+    "viewport_elements_constancy": {
+      "producer": "mean 108 stdev 0",
+      "recomputed": "all 10 initial viewport_elements ==108, set {108}",
+      "match": true,
+      "anomaly": "identical across 4 page types suggests fixed chrome/bug, not page-specific yield"
+    },
+    "locatable_elements_mean": {
+      "producer": 1354.2,
+      "recomputed_initial_only": 1392.1,
+      "note": "producer metrics.locatable_elements_mean 1354.2 vs raw statistics 1392.1 delta 37.9; likely different aggregation (result.json may average initial+scrolled denominators or use different rounding). Recomputed from initial-only is 1392.1 (stdev 204.6). Both >> parent 258, confirming definition shift."
+    },
+    "cdp_elements_mean": {
+      "producer": 2609.0,
+      "recomputed": 2570.1,
+      "note": "delta 38.9, similar aggregation mismatch as locatable; both >2000, consistent with disclosed drift"
+    },
+    "method1_delta_pp": {
+      "producer": 28.58,
+      "recomputed": 28.576124753019005,
+      "match": true,
+      "within_10pp": false,
+      "alternative_parent_denominator": "108/258=0.4186 delta 5.36pp would be within 10pp"
+    },
+    "scroll_effect": {
+      "producer_mean_delta": 0.0294,
+      "recomputed": 0.02937147244891407,
+      "max_delta": 0.04715127701375245,
+      "fraction_within_20pp": 1.0,
+      "match": true,
+      "detail": "listing 2.7pp, listing_2 3.4pp, listing_3 4.6pp, detail 1.8-1.9pp, cart 0.4pp, search 4.4-4.7pp; all within 20pp so H4 passes per decision_rule (4)"
+    },
+    "heuristic_delta_pp_cdp": {
+      "recomputed": 60.74,
+      "heuristic": 0.65,
+      "yield_cdp": 0.04256
+    },
+    "heuristic_delta_pp_locatable": {
+      "recomputed": 57.07,
+      "heuristic": 0.65,
+      "yield_locatable": 0.07924
+    },
+    "yield_under_parent_denominator": {
+      "viewport": 108,
+      "locatable_parent": 258,
+      "yield": 0.4186046511627907,
+      "method1_delta_pp": 5.36,
+      "heuristic_delta_pp": 23.14
+    }
+  },
+  "claim_ceiling": "MAX JUSTIFIED: (1) For am1n3e/webarena-verified-shopping:latest at this digest, geometry-faithful initial viewport (1280x720, threshold 0.5) captures 108 elements on all tested shopping URLs (fixed chrome, not page-specific) and CDP yield 0.0426 +-0.005 (CV 0.12) replicating parent 0.0427 — above-fold fragment yield is ~4% of CDP nodes. (2) Locatable yield is definition-dependent and NOT uniquely 0.38: 0.079 +-0.01 (CV 0.16) under all-elements-with-bbox (page.locator('*')), ~0.42 under parent 258 definition; 5x range means denominator ambiguity IS the result, not a detail. (3) Under the producer's all-elements definition, Method1 0.365 is FALSIFIED by 28.6pp (>10pp); under parent definition it would be SUPPORTED by 5.4pp — so Method1 status is INCONCLUSIVE pending frozen definition. Heuristic 0.65 is FALSIFIED robustly (>23pp under any denominator). (4) Yield appears numerically stable across sampled listing/detail/cart/search on this convenience sample (CV<0.2), but viewport constancy and non-random selection bound this to exploratory, not corpus-level 192-task generalization; checkout not measured. (5) Scroll to bottom with 2s changes locatable yield by mean 2.9pp, all within 20pp, but reflects bottom-viewport sparsity not cumulative yield. (6) No claim justified about gitlab/reddit or C-CROSSSITE/C-LLM-INHERIT corpus viability until denominator is frozen, sampling is randomized, script provenance is pinned, and viewport anomaly is explained. Next experiment must freeze locatable definition, randomize, include checkout/gitlab/reddit, and hash script.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-34546944360/request.json",
+    "research/experiments/EXP-INTEL-34546944360/spec.json",
+    "research/experiments/EXP-INTEL-34546944360/prereg.md",
+    "research/experiments/EXP-INTEL-34546944360/freeze.json",
+    "research/experiments/EXP-INTEL-34546944360/result.json",
+    "research/experiments/EXP-INTEL-34546944360/report.md",
+    "research/experiments/EXP-INTEL-34546944360/provenance.json",
+    "/tmp/opencode/exp345_raw_results.json",
+    "/tmp/opencode/measure_yield_exp345_final.py",
+    "/tmp/opencode/raw_ax_tree_listing_1_initial.json sha256 a071b6ce0695bf9489616d0d4db3dc1975a051a521e77d42d105a8610669e5b1 nodes 2826",
+    "/tmp/opencode/raw_ax_tree_listing_1_scrolled.json",
+    "research/experiments/EXP-INTEL-34377576886/handoff.json",
+    "research/experiments/EXP-INTEL-34377576886/audit.json",
+    "research/experiments/EXP-INTEL-34377576886/result.json"
+  ],
+  "unresolved": [
+    "Canonical definition of locatable_elements in SPIDER fragment model — all visible bbox vs interactive-only vs parent CSS selector set. Without freeze, no yield_locatable can be claimed as THE yield",
+    "Derivation of Method1 150-element shopping estimate in EXP-INTEL-33945226776 analysis_output.json: what element type does 150 count, and which locatable definition it maps to",
+    "Viewport constant 108: is it fixed header artifact (producer implicitly assumes) or measurement bug, and what is true page-specific fragment count below the fold",
+    "Checkout page yield: not measured due to substitution with search; needed for product-listing/detail/cart/checkout coverage per spec",
+    "Gitlab and reddit yield: not measured, so site-type-specific denominator requirement and C-CROSSSITE corpus viability remain unknown",
+    "Full-page vs viewport yield: initial vs scrolled measures bottom-viewport only, not cumulative lazy-loaded content; whether scrolling recovers the heuristic 0.45 viewport coverage assumption",
+    "Docker digest drift effect on DOM element count: 258 vs 1392 locatable gap partly explained by definition, partly by image version; needs pinned digest and DOM hash verification",
+    "Why producer aggregated metrics.locatable_elements_mean 1354.2 vs raw 1392.1 (38.9 delta) and cdp 2609 vs 2570 (38.9 delta) — aggregation definition undocumented"
+  ]
+}
