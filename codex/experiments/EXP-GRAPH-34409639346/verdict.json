@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34409639346",
+  "lane": "graph",
+  "decision": "SUPPORTED",
+  "claim_updates": [
+    {
+      "claim_id": "C-SEMANTIC-RESOLVE",
+      "status": "EXPERIMENTAL",
+      "reason": "Experiment SUPPORTS hypothesis: kernel does NOT perform semantic aliasing resolution. 0/10 aliased-first conditions select template-matching mechanism (binomial p=1.0 one-sided). Kernel uses exact intent matching (kernel.py L97: m.intent != intent) and selection is determined entirely by mechanism_id ordering via stable sort (L112). Claim ceiling bounded: simple path aliasing with equal confidence 0.9, preconditions={}, applicability_guards={}, 10 synthetic intent-template pairs, deterministic single-run cold kernel. NOT established: query-parameter aliasing, path rewriting, server-side routing, confidence-differentiated aliasing, real HTTP grounding, multi-intent, non-empty guards, or any fix adding semantic resolution. C-SEMANTIC-RESOLVE is not globally falsified — it is falsified at current kernel level for this narrow scope. Product must implement explicit aliasing or require exact intent matching."
+    }
+  ],
+  "product_action": "No product promotion. The kernel does NOT perform semantic aliasing resolution at current level. Product must either (a) implement semantic aliasing resolution as a new feature with validation, or (b) require agents to provide exact intent strings matching registered mechanisms. Graph lane should estimate engineering cost of building semantic resolution and weigh against other priority claims (C-FRESHNESS, C-DELTA-REPAIR).",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can the kernel handle more complex aliasing scenarios — query parameters, path rewriting, or server-side routing that maps multiple URL templates to the same resource — and does HTTP execution success against real endpoints provide a grounding signal for template correctness that resolver selection alone cannot?",
+  "reason": "The experiment conclusively demonstrates the kernel is a naive exact-match resolver: exact intent string equality (L97), stable confidence sort (L112), mechanism_id ordering determines tie-break (registry.py L38). All 24 conditions (4 baselines + 20 aliased pairs) executed without exceptions. Aliased-first subset: 0/10 selects template-matching mechanism (binomial p=1.0). Correct-first subset: 10/10 selects correct mechanism via tie-break. All controls pass. Audit PASS with full metric recomputation. Claim ceiling bounded to simple path aliasing scope. The broader C-SEMANTIC-RESOLVE claim (goals resolved without internal IDs) remains open for more complex scenarios. Graph lane should move to materially orthogonal questions rather than repeat this failed mechanism. C-PARAM-INHERIT remains blocked on external prerequisite (unfixed sort key L112).",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-34409639346/request.json sha256 c5c7f947790fc1112561fb2c32de08a0079d779db03ee9b8c3eb3cf3fc11e204",
+    "research/experiments/EXP-GRAPH-34409639346/spec.json sha256 b657b28017806f67d846ddba8262837e8cb23339411de2e6406a3cd4b747d14d",
+    "research/experiments/EXP-GRAPH-34409639346/prereg.md sha256 9c45991749e169d8aeaf8d5f619c11a4e5d0e8745197d6762430e898957bb662",
+    "research/experiments/EXP-GRAPH-34409639346/freeze.json frozen_at 2026-09-10T04:58:39.774078",
+    "research/experiments/EXP-GRAPH-34409639346/result.json schema_version 1 status COMPLETE outcome SUPPORTS",
+    "research/experiments/EXP-GRAPH-34409639346/raw_evidence/execution_results.json sha256 d27d3247dd45f3bedb54db7d2195464e4d44ba3acd53e1f5c7c2f05fe214d51e",
+    "research/experiments/EXP-GRAPH-34409639346/audit.json status PASS producer_claim_supported true",
+    "research/experiments/EXP-GRAPH-34409639346/execute.py sha256 b439ef274e74eea94e887bd01cb46877aadf0ea2f0fc964bcf01488c79f0fbf6",
+    "research/experiments/EXP-GRAPH-34409639346/provenance.json github_run_id 34409639346 base_sha 54e8a384",
+    "src/spider/kernel.py resolve function L93-123, exact intent match L97, stable sort L112",
+    "src/spider/registry.py sorted(items) L38 mechanism_id ordering",
+    "research/claims/registry.json C-SEMANTIC-RESOLVE status HYPOTHESIS",
+    "research/experiments/EXP-GRAPH-34395286092/handoff.json sha256 57025732a13bd1e17f553c003db00a646ef45bb9d940d4b5fbfc6b6902757bbf parent BLOCKED_CLOSE_AND_PIVOT"
+  ]
+}

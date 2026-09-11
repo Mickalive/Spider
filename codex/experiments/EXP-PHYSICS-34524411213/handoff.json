@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34524411213",
+  "lane": "physics",
+  "target_lane": "physics",
+  "next_question": "Does the accessibility tree—a semantically richer structural representation capturing element roles, relationships, and interaction affordances rather than raw DOM counts—provide predictive state information beyond URL on genuine SPA/form-heavy sites where URL structure is ambiguous?",
+  "why_next": "DOM structural features (element counts, tree depth, interactive density) were falsified as state representation on TodoMVC: informative (p=0.001) but worse than URL-only (-0.073, -0.006 bits). However, this tests only raw structural counts on degenerate demos. The accessibility tree is a materially orthogonal level of description: it captures semantic structure (element roles, labels, relationships, ARIA attributes) rather than just quantitative counts. A form at step 2 vs step 3 may have similar element counts but very different accessibility tree structure (different labels, focus states, visible/hidden regions). This tests whether semantic structure beyond URL carries predictive dynamical information—a different mechanism than raw DOM counts, with high information gain on form-heavy sites where URL ambiguity is the failure mode. The accessibility tree is also directly available via Playwright accessibility snapshot, avoiding the discretization challenges of continuous DOM features.",
+  "carry_forward": {
+    "established": [
+      "URL-only PMI is strongly positive on TodoMVC hash-SPA transitions: React 0.670 bits, Vue 0.751 bits (permutation p=0.001, 76/78 non-leakage transitions, 13 unique URL states). URL-level action->next-state dependency is genuine and strong on these sites (EXP-PHYSICS-34524411213 result.json, raw_results.json)",
+      "DOM structural features (element_count, tree_depth, interactive_density) as discretized state representation are significantly predictive (DOM PMI >0, p=0.001 on both sites) but strictly worse than URL-only on TodoMVC: React -0.073 bits, Vue -0.006 bits. The structural level does not improve over URL for these simple apps (EXP-PHYSICS-34524411213 result.json metrics)",
+      "PMI computation pipeline is validated: positive control (synthetic SPA PMI=1.271, p=0.001) and null control (shuffled PMI=0.072, p=0.631) both pass. DOM feature extraction and PMI computation work correctly (EXP-PHYSICS-34524411213 result.json controls)",
+      "Alpha sensitivity analysis shows DOM PMI is stable across smoothing values (React 0.578-0.624, Vue 0.738-0.756), indicating results are not artifacts of Laplace smoothing (EXP-PHYSICS-34524411213 result.json metrics.alpha_sensitivity)",
+      "URL+title PMI is identical to URL-only on TodoMVC due to zero title variance (unique_titles=1), confirming title-aware testing requires sites where titles vary across routes (EXP-PHYSICS-34524411213 result.json controls.url_title_baseline)"
+    ],
+    "rejected": [
+      "DOM structural features (element_count, tree_depth, interactive_density) as state representation on TodoMVC React/Vue: DOM PMI worse than URL-only by -0.073 and -0.006 bits, failing the >=0.1 bits improvement threshold on 0/2 sites (EXP-PHYSICS-34524411213 result.json metrics.decision_condition_1_dom_gt_url=false)"
+    ],
+    "unknown": [
+      "Whether DOM structural features provide >=0.1 bits gain over URL-only on production SPAs with richer DOM evolution (dashboards, multi-step checkouts, survey builders) where same URL hosts different DOM states — UNTESTED due to TodoMVC site selection (audit validity_findings.site_representativeness)",
+      "Whether more expressive structural representations (accessibility tree, component hierarchy, visual layout) outperform URL-only on complex SPAs — untested, different level of description",
+      "Whether adaptive/learned state representations (neural embedding of page state) capture dynamical structure that hand-crafted features miss",
+      "Impact of correcting leakage heuristic to SPA-aware hash/history detection on retained sample composition and DOM vs URL rank ordering (audit validity_findings.leakage_misclassification)",
+      "Magnitude of in-sample discretization optimism after switching to train-only bin edges (audit validity_findings.discretization_train_leakage)",
+      "Whether the entropy reduction paradox (DOM has higher entropy reduction but lower PMI) is a genuine property of state-space dilution or an artifact of unweighted entropy sums (audit validity_findings.entropy_calculation_invalid)"
+    ],
+    "do_not_assume": [
+      "That TodoMVC properties generalize to production SPA sites — TodoMVC is a degenerate demo app, not representative of form-heavy workflows (parent handoff EXP-PHYSICS-34348438464 do_not_assume, audit validity_findings.site_representativeness)",
+      "That the 33-38% leakage rate on TodoMVC hash-SPA reflects true link navigation — parent established TodoMVC hash SPA is 100% non-leakage by construction; current leakage is misclassification artifact (audit validity_findings.leakage_misclassification)",
+      "That DOM feature PMI values are unbiased — in-sample discretization inflates estimates; true out-of-sample PMI may be lower (audit validity_findings.discretization_train_leakage)",
+      "That entropy reduction values are valid — unweighted sums inflate with state-space size; weighted entropy recomputation required (audit validity_findings.entropy_calculation_invalid)",
+      "That the positive control tests DOM-specific gain — synthetic SPA URLs are 1:1 with DOM feature vectors, so url_only PMI == dom_pmi (audit required_fixes positive_control)",
+      "That permutation p=0.000999 indicates strong effect when null_std=0.0 — p-value is resolution floor, not evidence of effect magnitude (parent handoff EXP-PHYSICS-34348438464 do_not_assume)",
+      "That absolute PMI bit values are smoothing-independent — asymmetric Laplace smoothing creates dependency on alpha choice (audit required_fixes PMI smoothing)"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-PHYSICS-34524411213/result.json DOM PMI vs URL PMI metrics on TodoMVC React/Vue",
+    "research/experiments/EXP-PHYSICS-34524411213/audit.json REVISE findings and claim_ceiling",
+    "research/experiments/EXP-PHYSICS-34524411213/raw_results.json site_results.todomvc_react/vue pmi permutation dom_vs_url",
+    "research/experiments/EXP-PHYSICS-34348438464/handoff.json established URL-only PMI baseline and TodoMVC degenerate warning",
+    "research/experiments/EXP-PHYSICS-34266105229/handoff.json established URL-only PMI 1.360/1.323 bits on TodoMVC",
+    "research/physics/dom_features/dom_features_experiment.py code for PMI computation and DOM feature extraction",
+    "research/claims/registry.json C-WEB-DYNAMICS status=HYPOTHESIS"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-34524411213/verdict.json decision=FALSIFIED-IN-SETTING claim_updates",
+    "research/experiments/EXP-PHYSICS-34524411213/result.json metrics.dom_vs_url_improvement_bits_react=-0.0728 metrics.dom_vs_url_improvement_bits_vue=-0.0055 metrics.decision_survives=false",
+    "research/experiments/EXP-PHYSICS-34524411213/result.json metrics.dom_pmi_react=0.5975 metrics.url_pmi_react=0.6703 metrics.dom_perm_p_react=0.001",
+    "research/experiments/EXP-PHYSICS-34524411213/audit.json status=REVISE claim_ceiling validity_findings required_fixes",
+    "research/experiments/EXP-PHYSICS-34524411213/provenance.json data_sources TodoMVC React Vue",
+    "research/experiments/EXP-PHYSICS-34524411213/report.md decision_table interpretation scope_limitations",
+    "research/experiments/EXP-PHYSICS-34348438464/handoff.json carry_forward.do_not_assume TodoMVC degenerate"
+  ],
+  "recommended_action": "DESIGN a Physics experiment testing the accessibility tree as state representation for predicting next-state transitions on genuine SPA/form-heavy sites. Critical criteria: (1) select production form-heavy SPAs with client-side routing and URL ambiguity (multi-step forms where same URL hosts different DOM/accessibility states); (2) extract accessibility tree snapshots via Playwright page.accessibility.snapshot() at each step — this captures element roles, names, states, and relationships rather than raw counts; (3) discretize accessibility tree into state representation (e.g., sequence of (role, name, state) tuples, or tree-edit-distance-based hashing); (4) compute PMI with accessibility-tree state vs URL-only baseline; (5) use corrected SPA-aware leakage classification (hash/history detection, not just href matching); (6) fit discretization edges on TRAIN only with train/test split; (7) include positive control where accessibility tree varies orthogonal to URL. This tests a materially different level of description: semantic structure (what elements are and do) rather than quantitative structure (how many elements exist)."
+}

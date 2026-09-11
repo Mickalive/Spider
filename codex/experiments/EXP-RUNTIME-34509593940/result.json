@@ -1,0 +1,503 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-34509593940",
+  "lane": "runtime",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "/userinfo_noise0": {
+      "full_vector_discrimination": 0.8333333333333334,
+      "body_only_discrimination": 0.5,
+      "status_only_discrimination": 0.5,
+      "baselines": {
+        "B-RANDOM": 0.0
+      },
+      "null_fp_rate": 0.0,
+      "expired_invalid_identical": true,
+      "noise_header_verification": {
+        "no_auth": {},
+        "valid_token": {},
+        "expired_token": {},
+        "invalid_token": {}
+      },
+      "total_requests": 40
+    },
+    "/introspect_noise0": {
+      "full_vector_discrimination": 0.5,
+      "body_only_discrimination": 0.5,
+      "status_only_discrimination": 0.0,
+      "baselines": {
+        "B-RANDOM": 0.0
+      },
+      "null_fp_rate": 0.0,
+      "expired_invalid_identical": true,
+      "noise_header_verification": {
+        "no_auth": {},
+        "valid_token": {},
+        "expired_token": {},
+        "invalid_token": {}
+      },
+      "total_requests": 40
+    },
+    "/userinfo_noise1": {
+      "full_vector_discrimination": 0.2322222222222222,
+      "body_only_discrimination": 0.5,
+      "status_only_discrimination": 0.5,
+      "baselines": {
+        "B-RANDOM": 0.0
+      },
+      "null_fp_rate": 0.2222222222222222,
+      "expired_invalid_identical": true,
+      "noise_header_verification": {
+        "no_auth": {
+          "X-Cache-Status": {
+            "count": 10,
+            "unique": 3
+          }
+        },
+        "valid_token": {
+          "X-Cache-Status": {
+            "count": 10,
+            "unique": 3
+          }
+        },
+        "expired_token": {
+          "X-Cache-Status": {
+            "count": 10,
+            "unique": 3
+          }
+        },
+        "invalid_token": {
+          "X-Cache-Status": {
+            "count": 10,
+            "unique": 3
+          }
+        }
+      },
+      "total_requests": 40
+    },
+    "/introspect_noise1": {
+      "full_vector_discrimination": 0.1961111111111111,
+      "body_only_discrimination": 0.5,
+      "status_only_discrimination": 0.0,
+      "baselines": {
+        "B-RANDOM": 0.0
+      },
+      "null_fp_rate": 0.2222222222222222,
+      "expired_invalid_identical": true,
+      "noise_header_verification": {
+        "no_auth": {
+          "X-Cache-Status": {
+            "count": 10,
+            "unique": 3
+          }
+        },
+        "valid_token": {
+          "X-Cache-Status": {
+            "count": 10,
+            "unique": 3
+          }
+        },
+        "expired_token": {
+          "X-Cache-Status": {
+            "count": 10,
+            "unique": 3
+          }
+        },
+        "invalid_token": {
+          "X-Cache-Status": {
+            "count": 10,
+            "unique": 3
+          }
+        }
+      },
+      "total_requests": 40
+    },
+    "/userinfo_noise2": {
+      "full_vector_discrimination": 0.0,
+      "body_only_discrimination": 0.5,
+      "status_only_discrimination": 0.5,
+      "baselines": {
+        "B-RANDOM": 0.0
+      },
+      "null_fp_rate": 1.0,
+      "expired_invalid_identical": true,
+      "noise_header_verification": {
+        "no_auth": {
+          "X-Cache-Status": {
+            "count": 10,
+            "unique": 3
+          },
+          "X-CDN-Request-Id": {
+            "count": 10,
+            "unique": 10
+          }
+        },
+        "valid_token": {
+          "X-Cache-Status": {
+            "count": 10,
+            "unique": 3
+          },
+          "X-CDN-Request-Id": {
+            "count": 10,
+            "unique": 10
+          }
+        },
+        "expired_token": {
+          "X-Cache-Status": {
+            "count": 10,
+            "unique": 3
+          },
+          "X-CDN-Request-Id": {
+            "count": 10,
+            "unique": 10
+          }
+        },
+        "invalid_token": {
+          "X-Cache-Status": {
+            "count": 10,
+            "unique": 3
+          },
+          "X-CDN-Request-Id": {
+            "count": 10,
+            "unique": 10
+          }
+        }
+      },
+      "total_requests": 40
+    },
+    "/introspect_noise2": {
+      "full_vector_discrimination": 0.0,
+      "body_only_discrimination": 0.5,
+      "status_only_discrimination": 0.0,
+      "baselines": {
+        "B-RANDOM": 0.0
+      },
+      "null_fp_rate": 1.0,
+      "expired_invalid_identical": true,
+      "noise_header_verification": {
+        "no_auth": {
+          "X-Cache-Status": {
+            "count": 10,
+            "unique": 3
+          },
+          "X-CDN-Request-Id": {
+            "count": 10,
+            "unique": 10
+          }
+        },
+        "valid_token": {
+          "X-Cache-Status": {
+            "count": 10,
+            "unique": 3
+          },
+          "X-CDN-Request-Id": {
+            "count": 10,
+            "unique": 10
+          }
+        },
+        "expired_token": {
+          "X-Cache-Status": {
+            "count": 10,
+            "unique": 3
+          },
+          "X-CDN-Request-Id": {
+            "count": 10,
+            "unique": 10
+          }
+        },
+        "invalid_token": {
+          "X-Cache-Status": {
+            "count": 10,
+            "unique": 2
+          },
+          "X-CDN-Request-Id": {
+            "count": 10,
+            "unique": 10
+          }
+        }
+      },
+      "total_requests": 40
+    },
+    "/userinfo_noise4": {
+      "full_vector_discrimination": 0.0,
+      "body_only_discrimination": 0.5,
+      "status_only_discrimination": 0.5,
+      "baselines": {
+        "B-RANDOM": 0.0
+      },
+      "null_fp_rate": 1.0,
+      "expired_invalid_identical": true,
+      "noise_header_verification": {
+        "no_auth": {
+          "X-Cache-Status": {
+            "count": 10,
+            "unique": 3
+          },
+          "X-CDN-Request-Id": {
+            "count": 10,
+            "unique": 10
+          },
+          "X-Edge-Location": {
+            "count": 10,
+            "unique": 4
+          },
+          "X-Rate-Limit-Remaining": {
+            "count": 10,
+            "unique": 10
+          }
+        },
+        "valid_token": {
+          "X-Cache-Status": {
+            "count": 10,
+            "unique": 3
+          },
+          "X-CDN-Request-Id": {
+            "count": 10,
+            "unique": 10
+          },
+          "X-Edge-Location": {
+            "count": 10,
+            "unique": 5
+          },
+          "X-Rate-Limit-Remaining": {
+            "count": 10,
+            "unique": 9
+          }
+        },
+        "expired_token": {
+          "X-Cache-Status": {
+            "count": 10,
+            "unique": 3
+          },
+          "X-CDN-Request-Id": {
+            "count": 10,
+            "unique": 10
+          },
+          "X-Edge-Location": {
+            "count": 10,
+            "unique": 4
+          },
+          "X-Rate-Limit-Remaining": {
+            "count": 10,
+            "unique": 8
+          }
+        },
+        "invalid_token": {
+          "X-Cache-Status": {
+            "count": 10,
+            "unique": 3
+          },
+          "X-CDN-Request-Id": {
+            "count": 10,
+            "unique": 10
+          },
+          "X-Edge-Location": {
+            "count": 10,
+            "unique": 5
+          },
+          "X-Rate-Limit-Remaining": {
+            "count": 10,
+            "unique": 9
+          }
+        }
+      },
+      "total_requests": 40
+    },
+    "/introspect_noise4": {
+      "full_vector_discrimination": 0.0,
+      "body_only_discrimination": 0.5,
+      "status_only_discrimination": 0.0,
+      "baselines": {
+        "B-RANDOM": 0.0
+      },
+      "null_fp_rate": 1.0,
+      "expired_invalid_identical": true,
+      "noise_header_verification": {
+        "no_auth": {
+          "X-Cache-Status": {
+            "count": 10,
+            "unique": 3
+          },
+          "X-CDN-Request-Id": {
+            "count": 10,
+            "unique": 10
+          },
+          "X-Edge-Location": {
+            "count": 10,
+            "unique": 4
+          },
+          "X-Rate-Limit-Remaining": {
+            "count": 10,
+            "unique": 10
+          }
+        },
+        "valid_token": {
+          "X-Cache-Status": {
+            "count": 10,
+            "unique": 3
+          },
+          "X-CDN-Request-Id": {
+            "count": 10,
+            "unique": 10
+          },
+          "X-Edge-Location": {
+            "count": 10,
+            "unique": 5
+          },
+          "X-Rate-Limit-Remaining": {
+            "count": 10,
+            "unique": 10
+          }
+        },
+        "expired_token": {
+          "X-Cache-Status": {
+            "count": 10,
+            "unique": 2
+          },
+          "X-CDN-Request-Id": {
+            "count": 10,
+            "unique": 10
+          },
+          "X-Edge-Location": {
+            "count": 10,
+            "unique": 5
+          },
+          "X-Rate-Limit-Remaining": {
+            "count": 10,
+            "unique": 10
+          }
+        },
+        "invalid_token": {
+          "X-Cache-Status": {
+            "count": 10,
+            "unique": 3
+          },
+          "X-CDN-Request-Id": {
+            "count": 10,
+            "unique": 10
+          },
+          "X-Edge-Location": {
+            "count": 10,
+            "unique": 4
+          },
+          "X-Rate-Limit-Remaining": {
+            "count": 10,
+            "unique": 9
+          }
+        }
+      },
+      "total_requests": 40
+    },
+    "M_NOISE_DEGRADATION": {
+      "rho": -0.9486832980505139,
+      "p_value": 0.05131670194948613,
+      "description": "Spearman rho: full-vector discrimination vs noise level on /userinfo"
+    },
+    "M_BODY_ONLY_INVARIANT": {
+      "rho": 0.0,
+      "p_value": 1.0,
+      "description": "Spearman rho: body-only discrimination vs noise level on /userinfo"
+    },
+    "M_NOISE_BOUND": {
+      "value": 0.0,
+      "threshold": 0.05,
+      "description": "|body_only(noise=4) - body_only(noise=0)| on /userinfo"
+    },
+    "M_POSITIVE_CONTROL": {
+      "value": 0.5,
+      "threshold": 0.35,
+      "description": "Body-only discrimination at noise=0 on /userinfo"
+    },
+    "M_NULL_CONTROL": {
+      "value": 0.0,
+      "threshold": "~0.0",
+      "description": "B-RANDOM discrimination at noise=0 on /userinfo"
+    }
+  },
+  "controls": {
+    "C_POSITIVE_CONTROL": {
+      "expected": "M_BODY_ONLY_DISC_NOISE0 >= 0.35",
+      "observed": 0.5,
+      "pass": true
+    },
+    "C_NULL_CONTROL": {
+      "expected": "B-RANDOM ~ 0.0",
+      "observed": 0.0,
+      "pass": true
+    },
+    "C_NOISE_DEGRADATION": {
+      "expected": "Spearman rho(FULL_VECTOR_DISC, noise) <= -0.3",
+      "observed": -0.9486832980505139,
+      "pass": true
+    },
+    "C_BODY_ONLY_INVARIANT": {
+      "expected": "Spearman rho(BODY_ONLY_DISC, noise) >= -0.3",
+      "observed": 0.0,
+      "pass": true
+    },
+    "C_NOISE_BOUND": {
+      "expected": "|body_only(noise=4) - body_only(noise=0)| <= 0.05",
+      "observed": 0.0,
+      "pass": true
+    },
+    "C_NO_PIPELINE_ERRORS": {
+      "expected": "0 errors",
+      "observed": 0,
+      "pass": true
+    }
+  },
+  "artifacts": [
+    {
+      "path": "raw_observations.json",
+      "sha256": "4dbcf4abf5eece337c32a533f94802288ee881bd9d9d72e25ecd3e020f148063",
+      "role": "raw"
+    },
+    {
+      "path": "run_experiment.py",
+      "role": "code"
+    },
+    {
+      "path": "analyze.py",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "Keycloak 25.0 deployed via Docker on localhost:18080",
+    "Reverse proxy on localhost:18081 with noise levels [0, 1, 2, 4]",
+    "2 endpoints: /userinfo (GET), /introspect (POST)",
+    "4 auth states x 10 reps x 4 noise levels x 2 endpoints = 320 total requests",
+    "Seed: 44",
+    "Noise headers: X-Cache-Status, X-CDN-Request-Id, X-Edge-Location, X-Rate-Limit-Remaining",
+    "Proxy preserves: body, status code, auth-related headers",
+    "noise=0 /userinfo: full=0.8333, body=0.5000, status=0.5000, B-RANDOM=0.0000",
+    "noise=0 /introspect: full=0.5000, body=0.5000, status=0.0000, B-RANDOM=0.0000",
+    "noise=1 /userinfo: full=0.2322, body=0.5000, status=0.5000, B-RANDOM=0.0000",
+    "noise=1 /introspect: full=0.1961, body=0.5000, status=0.0000, B-RANDOM=0.0000",
+    "noise=2 /userinfo: full=0.0000, body=0.5000, status=0.5000, B-RANDOM=0.0000",
+    "noise=2 /introspect: full=0.0000, body=0.5000, status=0.0000, B-RANDOM=0.0000",
+    "noise=4 /userinfo: full=0.0000, body=0.5000, status=0.5000, B-RANDOM=0.0000",
+    "noise=4 /introspect: full=0.0000, body=0.5000, status=0.0000, B-RANDOM=0.0000",
+    "Full-vector Spearman rho vs noise: -0.9487 (p=0.0513)",
+    "Body-only Spearman rho vs noise: 0.0000 (p=1.0000)",
+    "Noise-invariance bound: 0.0000"
+  ],
+  "validity_notes": [
+    "Same Keycloak 25.0 Docker deployment as parent experiments",
+    "Same fingerprint algorithm as parent EXP-RUNTIME-34439061845",
+    "EXCLUDED_HEADERS: date, server, x-request-id \u2014 same as parent",
+    "Python 3.12.14",
+    "Jitter: 50-150ms uniform between requests",
+    "expired_token is locally-signed HS256, not Keycloak-issued (V6 leakage from parent)",
+    "Proxy adds only infrastructure-irrelevant headers (not auth-related)",
+    "Body-only invariance is tautological by construction (headers excluded from fingerprint)",
+    "Single noise pattern tested \u2014 real production may have multiple infrastructure layers",
+    "Analysis performed on pre-collected raw_observations.json (data collection was successful in prior run, analysis failed with exit code 66)"
+  ],
+  "unresolved": [
+    "Does body-only discrimination survive CDN compression (body non-determinism)?",
+    "Does body-only discrimination survive multiple stacked infrastructure layers?",
+    "Does the result generalize to non-Keycloak OAuth/OIDC providers?",
+    "What is the discrimination floor when bodies are compressed non-deterministically?"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "base_sha": "54e8a3843e31d611c7b7e0de9c6ad1afe0c1c12e",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-09T21:56:55.733643+00:00",
+  "experiment_id": "EXP-GRAPH-34409639346",
+  "inherited_last_verdict": "BLOCKED_CLOSE_AND_PIVOT",
+  "inherited_next_question": "Given four consecutive BLOCKED results on C-PARAM-INHERIT, can the graph lane demonstrate semantic resolution (C-SEMANTIC-RESOLVE): does the kernel resolve a URL template with semantic aliasing (e.g., /users/{userId} vs /accounts/{id} pointing to the same REST resource) to the correct parametrized mechanism when both are registered with equal confidence, and does it correctly select the mechanism whose template matches the intent structure?",
+  "lane": "graph",
+  "origin_github_run_id": "34409639346",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-34395286092",
+    "path": "research/experiments/EXP-GRAPH-34395286092/handoff.json",
+    "sha256": "57025732a13bd1e17f553c003db00a646ef45bb9d940d4b5fbfc6b6902757bbf"
+  },
+  "reason": "pulse",
+  "request_hash": "a696e652db0e483e7a309879d6bc7d9a9b5657222f8c947adf85bfb639bebee2",
+  "request_id": "f6113bfd743fc2c62324c8df",
+  "schema_version": 1
+}
