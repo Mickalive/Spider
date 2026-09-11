@@ -1,0 +1,272 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-34538185726",
+  "lane": "frontier",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "NOT_APPLICABLE",
+  "metrics": {
+    "aggregate": {
+      "spearman_rho_bc_js": 0.7380952380952381,
+      "spearman_p_one_sided_bc_js": 0.018276380526430405,
+      "bc_js_means_by_lambda": {
+        "0.0": 0.007138500282597939,
+        "0.1": 0.01544649495002404,
+        "0.2": 0.022974243967735626,
+        "0.3": 0.026660904552173403,
+        "0.4": 0.014788748684897527,
+        "0.5": 0.019576757379424718,
+        "0.7": 0.028992861022186848,
+        "1.0": 0.06097087326237072
+      },
+      "cohens_d_lambda0_vs_1": 1.7750545481265678
+    },
+    "per_function": {
+      "42": {
+        "func_name": "rotation",
+        "spearman_rho": 0.04761904761904763,
+        "spearman_p_one_sided": 0.4554245842597918,
+        "js_bc_means_by_lambda": {
+          "0.0": 0.004202526076305368,
+          "0.1": 0.013202086211829356,
+          "0.2": 0.01932710571155468,
+          "0.3": 0.02129573850836151,
+          "0.4": 0.0036954097233426408,
+          "0.5": 0.005559106379312728,
+          "0.7": 0.009323393872734948,
+          "1.0": 0.015119351612288463
+        },
+        "monotonic": false
+      },
+      "43": {
+        "func_name": "scaling",
+        "spearman_rho": 0.6190476190476191,
+        "spearman_p_one_sided": 0.05086651872713239,
+        "js_bc_means_by_lambda": {
+          "0.0": 0.007168860606528188,
+          "0.1": 0.013988775348424631,
+          "0.2": 0.0359227919865406,
+          "0.3": 0.038503217734758025,
+          "0.4": 0.02974527095969403,
+          "0.5": 0.029136664489734017,
+          "0.7": 0.034816998834115306,
+          "1.0": 0.06347605958070719
+        },
+        "monotonic": false
+      },
+      "44": {
+        "func_name": "translation",
+        "spearman_rho": 0.8333333333333335,
+        "spearman_p_one_sided": 0.005087770061728376,
+        "js_bc_means_by_lambda": {
+          "0.0": 0.01004411416496026,
+          "0.1": 0.019148623289818135,
+          "0.2": 0.013672834205111584,
+          "0.3": 0.02018375741340068,
+          "0.4": 0.010925565371655909,
+          "0.5": 0.02403450126922741,
+          "0.7": 0.04283819035971031,
+          "1.0": 0.10431720859411653
+        },
+        "monotonic": false
+      }
+    },
+    "bandwidth_diagnostics": {
+      "42": {
+        "0.0": 1.1450285406513152,
+        "0.1": 1.4488470950862364,
+        "0.2": 1.4304338493629078,
+        "0.3": 1.3567808664695935,
+        "0.4": 1.246301392129622,
+        "0.5": 1.1634417863746436,
+        "0.7": 1.1450285406513152,
+        "1.0": 1.1450285406513152
+      },
+      "43": {
+        "0.0": 1.1542351635129793,
+        "0.1": 1.3567808664695935,
+        "0.2": 1.4212272265012433,
+        "0.3": 1.347574243607929,
+        "0.4": 1.2647146378529506,
+        "0.5": 1.1910616549596365,
+        "0.7": 1.1450285406513152,
+        "1.0": 1.1450285406513152
+      },
+      "44": {
+        "0.0": 1.1450285406513152,
+        "0.1": 1.2831278835762792,
+        "0.2": 1.3107477521612718,
+        "0.3": 1.246301392129622,
+        "0.4": 1.2002682778213007,
+        "0.5": 1.1818550320979722,
+        "0.7": 1.1450285406513152,
+        "1.0": 1.1450285406513152
+      }
+    },
+    "effect_sizes_cohens_d": {
+      "42": 0.8136404681704005,
+      "43": 3.6226679042046386,
+      "44": 5.293173927198755,
+      "aggregate": 1.7750545481265678
+    },
+    "anova": {
+      "design": "3 functions x 8 lambdas x 10 reps = 240 observations",
+      "full_model": {
+        "lambda_effect": {
+          "F": 16.2084,
+          "p_value": 0.0
+        },
+        "function_effect": {
+          "F": 20.9917,
+          "p_value": 0.0
+        },
+        "interaction_effect": {
+          "F": 5.408,
+          "p_value": 0.0
+        },
+        "model_r_squared": 0.5169
+      },
+      "interaction_pass": false
+    }
+  },
+  "controls": {
+    "positive_control": {
+      "description": "KDE JS divergence >=0.01 at lambda=1 across all 3 functions",
+      "pass": true,
+      "per_function": {
+        "42": {
+          "pass": true,
+          "bc_js_at_lambda1": 0.015119351612288463,
+          "threshold": 0.01
+        },
+        "43": {
+          "pass": true,
+          "bc_js_at_lambda1": 0.06347605958070719,
+          "threshold": 0.01
+        },
+        "44": {
+          "pass": true,
+          "bc_js_at_lambda1": 0.10431720859411653,
+          "threshold": 0.01
+        }
+      }
+    },
+    "null_control": {
+      "description": "KDE JS divergence not significantly >0 at lambda=0 (permutation p >0.05)",
+      "pass": true,
+      "mean_perm_p": 0.544667
+    },
+    "spearman_per_function": {
+      "description": "Per-function Spearman rho >= 0.65 with p < 0.0167 (Bonferroni x3)",
+      "pass": false,
+      "per_function": {
+        "42": {
+          "pass": false,
+          "rho": 0.04761904761904763,
+          "p_one_sided": 0.4554245842597918,
+          "threshold_rho": 0.65,
+          "threshold_p": 0.016666666666666666
+        },
+        "43": {
+          "pass": false,
+          "rho": 0.6190476190476191,
+          "p_one_sided": 0.05086651872713239,
+          "threshold_rho": 0.65,
+          "threshold_p": 0.016666666666666666
+        },
+        "44": {
+          "pass": true,
+          "rho": 0.8333333333333335,
+          "p_one_sided": 0.005087770061728376,
+          "threshold_rho": 0.65,
+          "threshold_p": 0.016666666666666666
+        }
+      }
+    },
+    "spearman_aggregate": {
+      "description": "Aggregate Spearman rho >= 0.65 with p < 0.05 one-sided",
+      "pass": true,
+      "rho": 0.7380952380952381,
+      "p_one_sided": 0.018276380526430405
+    },
+    "function_invariance": {
+      "description": "No significant function x lambda interaction (two-way ANOVA p >0.05)",
+      "pass": false,
+      "interaction_p": 0.0
+    },
+    "bandwidth_health": {
+      "description": "KDE bandwidth selection not degenerate (CV >0, boundary fraction <0.5)",
+      "pass": true,
+      "cv_bandwidth": 0.09479952978078666,
+      "boundary_fraction": 0.0,
+      "mean_bandwidth": 1.240163643555179,
+      "std_bandwidth": 0.11756693026025809
+    },
+    "js_cv_lambda1": {
+      "description": "JS divergence CV across replications <0.5 at lambda=1",
+      "pass": false,
+      "cv_per_function": {
+        "42": 1.1528197907529025,
+        "43": 0.2939695440333391,
+        "44": 0.2123583496302455
+      }
+    },
+    "no_pipeline_errors": {
+      "description": "No pipeline errors during execution",
+      "pass": true,
+      "n_errors": 0
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/frontier/kde_divergence/analyze.py",
+      "role": "code"
+    },
+    {
+      "path": "research/frontier/kde_divergence/analyze_opt.py",
+      "role": "code"
+    },
+    {
+      "path": "research/frontier/kde_divergence/raw_tables.json",
+      "role": "raw"
+    }
+  ],
+  "observations": [
+    "Overall decision: MEASUREMENT_INVALID",
+    "Aggregate Spearman rho(bc_JS, lambda)=0.7381, p_one_sided=0.018276",
+    "Positive control (JS>=0.01 at lambda=1): PASS",
+    "Null control (permutation p>0.05 at lambda=0): PASS",
+    "Function invariance (ANOVA interaction): FAIL",
+    "Aggregate Cohen's d (lambda=0 vs 1): 1.7751",
+    "Bandwidth health: CV=0.0948, boundary_fraction=0.0000",
+    "JS CV at lambda=1: {'42': 1.1528197907529025, '43': 0.2939695440333391, '44': 0.2123583496302455}",
+    "Pipeline errors: 0",
+    "Execution time: 491.7s",
+    "Function 42 (rotation): Spearman rho=0.0476, p_one_sided=0.455425, monotonic=False",
+    "Function 43 (scaling): Spearman rho=0.6190, p_one_sided=0.050867, monotonic=False",
+    "Function 44 (translation): Spearman rho=0.8333, p_one_sided=0.005088, monotonic=False"
+  ],
+  "validity_notes": [
+    "10D continuous state space [0,1]^10 with mixture-of-3-Gaussians heteroscedastic noise",
+    "500 transitions per cell with ~125 per action; Monte Carlo JS SE ~O(1/sqrt(N))",
+    "10 replications per cell enable variance estimation",
+    "8 lambda levels provide degradation curve resolution",
+    "3 independent continuous function families (10D rotation, scaling, translation)",
+    "Frozen random seed (seed=42) for reproducibility",
+    "KDE via scipy.stats.gaussian_kde with 5-fold CV bandwidth selection for observed data (20 log-spaced factors in [0.01,2.0])",
+    "Pragmatic optimization: permutation null reuses observed bandwidth factor per action (rather than full 20x5 CV per permutation) to achieve feasible runtime; disclosed as validity caveat",
+    "JS divergence estimated via Monte Carlo with 125 samples per direction",
+    "Bias correction via permutation null subtraction (50 perms per cell)",
+    "Clipping to [0,1] after noise addition",
+    "Same DGP as parent experiments for direct comparison",
+    "Total pipeline errors: 0",
+    "Mean bandwidth across all cells: 1.2402",
+    "Sequential execution (single process); computation identical to frozen design"
+  ],
+  "unresolved": [
+    "Whether full 20x5 CV per permutation would materially change perm mean (reused bandwidth may underestimate perm variance)",
+    "Whether KDE bandwidth selection in 10D is adequate with ~125 samples per action",
+    "Whether Monte Carlo JS estimation with 125 samples per direction is low-variance enough",
+    "Whether KDE performance degrades at higher dimensions (>10D)",
+    "Whether real Web transitions exhibit translation-like vs scaling-like structure"
+  ]
+}

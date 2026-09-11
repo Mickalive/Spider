@@ -7,8 +7,8 @@
   "continue_immediately": false,
   "next_question": "Can alternative high-dimensional density divergence estimators (KDE, binned PCA projection, or neural density estimation) detect scaling-type action-dependent structure that kNN TV misses in the same 10D non-Gaussian DGP \u2014 or does the scaling failure reflect a fundamental information-theoretic limit where multiplicative state modulation is indistinguishable from heteroscedastic noise at finite sample sizes?",
   "promotion_ready": false,
-  "consecutive_failures": 7,
-  "updated_at": "2026-09-11T20:39:14.286686+00:00",
+  "consecutive_failures": 8,
+  "updated_at": "2026-09-11T22:59:42.044935+00:00",
   "last_failure_retryable": false,
   "last_handoff_sha256": "657385858ecd333d46456f97eb51251ab5e903e70a6adf8c0a2aaee19a175faf"
 }
