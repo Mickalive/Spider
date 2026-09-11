@@ -1165,6 +1165,31 @@
         "handoff.json": "76e5e988f76f1184f72b33b0793d2adfaf03dcd129b2a270c76cee055ae403cd"
       }
     },
+    "EXP-PRODUCT-34485517221": {
+      "lane": "product",
+      "request_id": "87db1e32d59a01803f557bbe",
+      "created_at": "2026-09-10T13:54:00.066207+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT"
+      ],
+      "question": "Does the leaf-path URL-as-string prefix extraction heuristic (rfind('/') based) generalize to structurally different URL patterns \u2014 query-string parameters, multi-segment path variation, and URLs with no common prefix \u2014 or does it fail on patterns that are common in real-world API designs?",
+      "audit_status": "REVISE",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/product",
+      "hashes": {
+        "request.json": "cfca5639a8a7f2674b165ee94f5089f6800b92124567b2751b6c362a8718d007",
+        "spec.json": "52c9d8076cd26966eeb20193211bc78413032523e92cec6b4c7c500a68f111fe",
+        "prereg.md": "d475d43c6b1cb9ac12879b6849ca34e8cd03e057a4802515a0523ad69b388986",
+        "freeze.json": "8dadd50c2f31430cddc9ed0affcf6714b03bf6eb63de35d68c6f304744feee78",
+        "result.json": "030bea4db2f8914a7e789ded9aa8ea0fdc3bb0e3812f9362e3c6bfbbcb23e60f",
+        "report.md": "673cea44ca9157c1828b688ff3fdaf0b4d879a56bc9917541300c40ebd3555c9",
+        "provenance.json": "755da003269187312d96689556e750905c7446e591287c1f1fb8a5cc7c9992b4",
+        "audit.json": "95c2372612af2bd7b195105e8025ced888c73744b2ba0e0bd80a31dd6938157a",
+        "verdict.json": "3aaae8e06a12300333f4ad2262ae1553ea08e82185edf3351e584eda4d4cfc59",
+        "handoff.json": "2a3522896783044ccafdccf0abab815facfa43f2d1e0c62304ee94ef98d3a2bf"
+      }
+    },
     "EXP-RUNTIME-33528830833": {
       "lane": "runtime",
       "request_id": "cbf791e0cd3fe570d0ff0fd5",

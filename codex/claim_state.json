@@ -315,6 +315,14 @@
         "claim_id": "C-PARAM-INHERIT",
         "status": "EXPERIMENTAL",
         "reason": "Bind-time slot-level prefix extraction resolves C2 double-prefix without regressions in frozen 10-condition synthetic harness. All conditions pass binding_accuracy=1.0, slot counts correct, null controls pass. This provides first evidence of mixed calling convention support (short and full values) at the kernel level. Evidence: audit.json recomputed_metrics (34/34 binding_correct, accuracy=1.0), raw_evidence.json all conditions, audit.json V4_CONTROLS (C2, B1-B5, D1-D3, E1/E2 independently verified). Claim does NOT advance to product-ready: audit.json claim_ceiling bounds to synthetic kernel correctness only; real-browser validation and end-to-end economics (C-PRODUCT-ECON) remain unmeasured."
+      },
+      {
+        "experiment_id": "EXP-PRODUCT-34485517221",
+        "lane": "product",
+        "decision": "FALSIFIED-IN-SETTING",
+        "claim_id": "C-PARAM-INHERIT",
+        "status": "EXPERIMENTAL",
+        "reason": "Claim remains EXPERIMENTAL with narrowed scope. Hypothesis that rfind('/') leaf-path URL-as-string prefix extraction generalizes to structurally different URL patterns is FALSIFIED-IN-SETTING in this experiment. Falsifier triggered: (1) G1 and G4 produce incorrect binding_accuracy=0.0 on unseen values (\u22652 conditions with wrong bound URLs), and (2) G4 fails to induce >1 slot (observed 1 vs expected 2). Three failure modes: suffix extraction corruption on query-string patterns where training values share trailing characters (G1: template 'search?q=${url}a'), architectural single-leaf limitation preventing multi-slot decomposition (G4: template 'users/${url}00'), and over-parameterization of structurally distinct URLs sharing short prefixes (N1: template 'https://api.${url}'). Bounded ceiling: SINGLE-SLOT synthetic correctness only for path-prefix/deep-path/multi-param-query/hybrid patterns where training values share no common suffix. V3_REPRESENTATION_LOSS from parent experiment is confirmed, not resolved. C-PARAM-INHERIT is not promoted and not killed; kernel fixes are required before re-evaluation."
       }
     ],
     "C-SEMANTIC-RESOLVE": [
@@ -475,6 +483,14 @@
         "claim_id": "C-PRODUCT-ECON",
         "status": "BLOCKED",
         "reason": "Product economics depend on fragment yield. The 0.0427 CDP yield would imply catastrophic fragment loss; the 0.38 locatable yield may be workable. Until denominator is resolved and yield is measured across site types, product economics cannot be assessed."
+      },
+      {
+        "experiment_id": "EXP-PRODUCT-34485517221",
+        "lane": "product",
+        "decision": "FALSIFIED-IN-SETTING",
+        "claim_id": "C-PRODUCT-ECON",
+        "status": "HYPOTHESIS",
+        "reason": "C-PRODUCT-ECON remains HYPOTHESIS. Economics measurement is blocked until kernel fixes address suffix corruption (G1), over-parameterization (N1), and the multi-slot limitation is resolved or documented (G4). Measuring economics on a mechanism that produces incorrect bindings for common URL patterns would yield invalid cost data. No advancement toward EXPERIMENTAL."
       }
     ],
     "C-MEAS-VALID": [
