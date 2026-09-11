@@ -1,0 +1,15 @@
+{
+  "definition_id": "FUNC-INTERACTIVE-V2",
+  "definition_text": "Elements with non-null bounding box (width > 0 AND height > 0) AND role is one of: button, link, textbox, checkbox, radio, combobox, listbox, menuitem, tab, slider, spinbutton, searchbox, switch. OR has an onclick/onsubmit handler or is within a form element. OR has aria-label or aria-describedby with non-empty text.",
+  "source": "FALLBACK — forensic analysis of Method1 150-element estimate in analysis_output.json was INCONCLUSIVE. The 150 is a static heuristic estimate with no specification of element type. Fallback definition frozen per prereg Section 5.3.",
+  "mapping_to_candidate_definitions": "Definition 2 (interactive-only)",
+  "expected_yield_range": "0.28-0.36 (from parent experiment: ~0.32 under interactive-only)",
+  "frozen_at": "2026-09-11T18:00:00+00:00",
+  "frozen_by": "EXECUTE agent (EXP-INTEL-34607693437)",
+  "forensic_result": {
+    "definition_resolved": false,
+    "fallback_frozen": true,
+    "method1_trace_status": "INCONCLUSIVE",
+    "method1_trace_detail": "Method1 150-element estimate for product_listing is a static heuristic in analysis_output.json method1_element_count.shopping.page_types.product_listing.estimated_elements. It is a manually estimated count (no runtime measurement, no accessibility tree query, no selector specification). The value feeds into combined_yield=0.333 and llm_truncation_yield=0.197. No code path can be traced to determine what type of 'element' 150 counts. The estimate uses estimated_chars=9750 implying ~65 chars/element but this is consistent with any element type."
+  }
+}
