@@ -11,7 +11,7 @@
 
 ## 2. Scientific Question
 
-Can the kernel handle more complex aliasing scenarios — query parameters, path rewriting, or server-side routing that maps multiple URL templates to the same resource — and does HTTP execution success against real endpoints provide a grounding signal for template correctness that resolver selection alone cannot?
+Can the kernel handle more complex aliasing scenarios — query parameters, path rewriting, or server-side routing — and does HTTP execution success against real endpoints provide a grounding signal for template correctness that resolver selection alone cannot?
 
 ## 3. Motivation
 
@@ -132,7 +132,7 @@ Only aliased-first conditions can produce grounding value. Correct-first conditi
 
 ### 5.4 Sample Size
 
-- 6 scenarios × 2 orderings = 12 aliased conditions
+- 6 scenarios x 2 orderings = 12 aliased conditions
 - Plus 6 baselines
 - Total kernel calls: 18
 - Total HTTP executions: up to 30 (18 resolver-bound + up to 12 alternative-template executions for aliased pairs)
@@ -220,7 +220,7 @@ n=6 aliased-first conditions has limited power for binomial test.
 Mitigation: this is a proof-of-concept screen. 0/6 is significant (p=0.016); >=2/6 is not significant but weakens the hypothesis. Report exact p-values.
 
 ### 9.4 Query Parameter Ignorance
-jsonplaceholder.typicode.com may ignore query parameters (returns same data regardless of query). This means templates B and F may return 200 with identical bodies even when query parameters are structurally different.
+jsonplaceholder.typicode.com may ignore query parameters (returns same data regardless of query). This means templates A, D, E, F may return 200 with identical bodies even when query parameters are structurally different.
 Mitigation: this is by design — it tests whether HTTP STATUS alone provides grounding (it does not when APIs ignore params). Response body comparison is a secondary metric. Scenarios B and C use paths that genuinely 404.
 
 ### 9.5 Template Parameter Binding
@@ -280,7 +280,7 @@ If:
 ## 12. Analysis Plan
 
 1. **Baseline Verification**: Execute all 6 baselines. If any fail, stop and report MEASUREMENT_INVALID.
-2. **Aliased Conditions**: Execute 6 scenarios × 2 orderings = 12 conditions.
+2. **Aliased Conditions**: Execute 6 scenarios x 2 orderings = 12 conditions.
 3. **Resolver Recording**: For each condition, record kernel.resolve() output.
 4. **HTTP Execution**: For each EXECUTABLE result, execute resolver-selected URL. For aliased pairs, also execute alternative template URL.
 5. **Response Comparison**: Compare HTTP status codes and response bodies between resolver-selected and alternative templates.
