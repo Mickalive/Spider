@@ -1,17 +1,35 @@
 {
   "experiment_id": "EXP-GRAPH-34586318405",
   "lane": "graph",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-SEMANTIC-RESOLVE"],
+  "question": "Can the kernel handle query-parameter aliasing scenarios — where two mechanisms share the same intent but differ in URL template structure (e.g., /posts/{id} vs /posts?id={id}) — and does HTTP execution success against real endpoints provide a grounding signal for template correctness that resolver selection alone cannot?",
+  "hypothesis": "The kernel's resolve() function uses exact intent matching (kernel.py L97: m.intent != intent) and does not analyze URL template structure. For query-parameter aliasing where two mechanisms share the same intent but differ in URL template, the kernel selects based on confidence ordering then mechanism_id tie-breaking (L112), not template correctness. HTTP execution against real endpoints provides a grounding signal that resolver selection cannot: execution can distinguish correct templates (HTTP 200) from incorrect templates (HTTP 404/timeout) in cases where the resolver's tie-breaking selects arbitrarily. The grounding signal has value when the resolver-selected template fails HTTP execution but an alternative registered template succeeds — i.e., when execution corrects a resolver misprediction.",
+  "falsifier": "The hypothesis is FALSIFIED if: (1) In aliased-first conditions, the kernel selects the template-matching mechanism in >50% of cases (binomial p<0.05 against chance 50%), indicating the kernel performs semantic template analysis — OR — (2) HTTP execution provides zero grounding value across all test scenarios (no cases where resolver-selected template fails but alternative succeeds), meaning execution cannot distinguish correct from incorrect templates in any aliased scenario — OR — (3) Any baseline fails (B-EMPTY-REGISTRY, B-SINGLE-MECHANISM, B-CONFIDENCE-HIGHER, B-CONFIDENCE-EQUAL-DIFFERENT-INTENT). The hypothesis is SUPPORTED if: (a) In aliased-first conditions, the kernel selects the template-matching mechanism in 0% of cases (always follows tie-breaking); AND (b) HTTP execution identifies at least one case where the resolver-selected template fails but an alternative succeeds (grounding value > 0); AND (c) all baselines pass.",
+  "baselines": [
+    "B-EMPTY-REGISTRY: Empty registry, any intent -> UNKNOWN. Validates kernel returns UNKNOWN when no candidates exist.",
+    "B-SINGLE-MECHANISM: One mechanism with valid template (posts/{id}), matching intent and preconditions -> EXECUTABLE. Execute bound URL against real endpoint -> HTTP 200. Validates basic resolution + execution pipeline.",
+    "B-CONFIDENCE-HIGHER: Two mechanisms with different intents, different confidences (0.95 vs 0.8). Higher-confidence mechanism wins. Validates confidence ordering.",
+    "B-CONFIDENCE-EQUAL-DIFFERENT-INTENT: Two mechanisms with different intents, equal confidence (0.9). Only exact intent match qualifies -> single candidate. Validates intent filtering.",
+    "B-HTTP-POSITIVE: Registered template matching known working endpoint (jsonplaceholder /posts/1). HTTP GET returns 200 with expected body. Validates HTTP execution pipeline works against real endpoint.",
+    "B-HTTP-NEGATIVE: Registered template matching known broken endpoint (jsonplaceholder /nonexistent-resource/999). HTTP GET returns 404. Validates HTTP execution correctly detects broken templates."
+  ],
+  "positive_control": "B-SINGLE-MECHANISM: One mechanism with intent 'get-post-by-id', template '/posts/${postId}', preconditions={'method':'GET'}. Kernel returns EXECUTABLE with bound_action={'url':'/posts/1','method':'GET'}. HTTP GET https://jsonplaceholder.typicode.com/posts/1 returns 200 with userId field. Verifies: (a) kernel resolution works; (b) HTTP execution against real endpoint works; (c) the template is correct for the endpoint.",
+  "null_control": "B-EMPTY-REGISTRY: Empty registry returns UNKNOWN. Verifies kernel does not hallucinate candidates.",
+  "measurement_validity": [
+    "All resolver conditions deterministic: no model calls, no RNG, no sampling. Single-run exact point comparisons.",
+    "Each condition uses a fresh kernel instance with explicitly controlled registry contents. No cross-contamination.",
+    "HTTP execution uses real endpoints (jsonplaceholder.typicode.com) with timeout=10s. Network failures recorded as measurement issues, not negative results.",
+    "HTTP success defined as: status code 200 AND response body contains expected fields. HTTP failure defined as: status code != 200 OR timeout OR connection error.",
+    "All URL templates use frozen, known-working or known-broken endpoint patterns. No dynamic endpoint generation.",
+    "Registry insertion order controlled: for aliased pairs, both mechanisms inserted with equal confidence; final ordering determined by mechanism_id sorting (upsert behavior).",
+    "10 independent intent-template pairs tested for aliased conditions, each under both ID orderings (20 total aliased conditions).",
+    "6 baseline conditions (B-EMPTY-REGISTRY, B-SINGLE-MECHANISM, B-CONFIDENCE-HIGHER, B-CONFIDENCE-EQUAL-DIFFERENT-INTENT, B-HTTP-POSITIVE, B-HTTP-NEGATIVE).",
+    "Total kernel calls: 26 (20 aliased + 6 baselines). Total HTTP executions: up to 46 (26 resolver-bound + up to 20 alternative-template executions).",
+    "No monkey-patching or runtime modification of kernel.py or registry.py during execution."
+  ],
+  "decision_rule": "SURVIVES_CURRENT_TEST if ALL of: (1) All 6 baselines pass; (2) No exceptions or crashes across all kernel calls; (3) In the aliased-first subset (10 conditions), the kernel selects the aliased mechanism in 100% of cases (always follows tie-breaking, 0/10 selects template-matching); (4) HTTP execution grounding value > 0 (at least 1 case where resolver-selected template fails HTTP but alternative template succeeds). FALSIFIED-IN-SETTING if: (a) Aliased-first correct selection rate > 0% (kernel shows semantic template analysis); OR (b) HTTP execution grounding value = 0 across all scenarios (execution cannot correct resolver mispredictions); OR (c) Any baseline fails. MEASUREMENT_INVALID if: infrastructure failures prevent execution of >50% of conditions.",
+  "product_consequence_positive": "If SUPPORTED: HTTP execution provides a grounding signal absent from resolver selection. Product architecture should include HTTP execution validation as a post-resolution step to catch resolver mispredictions in aliased scenarios. This opens a product path: 'resolve then validate' pattern where execution success/failure refines mechanism confidence. C-SEMANTIC-RESOLVE remains falsified at resolver level but gains a practical mitigation through execution grounding.",
+  "product_consequence_negative": "If FALSIFIED (kernel shows semantic analysis): the kernel already has unrecognized template understanding. C-SEMANTIC-RESOLVE may be viable without new implementation. If FALSIFIED (execution provides no grounding): neither resolver selection nor HTTP execution can distinguish correct from incorrect templates in aliased scenarios. Product must require exact intent matching with no aliasing tolerance, or implement explicit template validation as a separate feature. Graph lane should estimate engineering cost of template validation vs. exact-match requirement.",
+  "estimated_cost": "Low: deterministic kernel calls (26 total, <1 minute) plus HTTP execution against public API (up to 46 requests, <2 minutes). No model calls, no browser automation. Total execution <5 minutes.",
+  "expected_information_gain": "High: This is the first test of whether HTTP execution provides grounding signal absent from resolver selection. A positive result (grounding value > 0) demonstrates a practical mitigation for C-SEMANTIC-RESOLVE limitation. A negative result (grounding value = 0) bounds the claim more narrowly and informs product design. Either outcome changes a product decision about whether to include execution validation in the resolution pipeline."
 }
