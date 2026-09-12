@@ -1,0 +1,20 @@
+{
+  "base_sha": "2bf7180b0fa7c8155aa4704b878ccb2543aac9e5",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-12T00:37:06.135408+00:00",
+  "experiment_id": "EXP-PRODUCT-34662221249",
+  "inherited_last_verdict": "FALSIFIED-IN-SETTING",
+  "inherited_next_question": "Can the suffix guard (Fix1) and delimiter-bound prefix validation (Fix2, last-char variant) be applied to actual src/spider/kernel.py distill_parameterized and _bind with prefixes, tested against a corrected N1 null control using truly disjoint URLs with no shared protocol prefix (e.g., http:// vs ftp://), and validated without regressions on all established conditions \u2014 and does the Fix2 last-char validation (not the prereg next-char logic) produce correct binding outcomes including prefix stripping for full-value vs short-value?",
+  "lane": "product",
+  "origin_github_run_id": "34662221249",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-34642376433",
+    "path": "research/experiments/EXP-PRODUCT-34642376433/handoff.json",
+    "sha256": "f937455a3b1bf095c695b4b35bd6dd0fa18192a6901b50b28bd7a6cf4e9c2215"
+  },
+  "reason": "pulse",
+  "request_hash": "d7c66db6d514e6266c5abcf6f30dad4a94636f40797c834a72076e990536d5d5",
+  "request_id": "31b8ee9d161dd9e2b3ed281a",
+  "schema_version": 1
+}

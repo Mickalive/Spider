@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-34485517221",
+  "github_run_id": "34485517221",
+  "origin_github_run_id": "34485517221",
+  "base_sha": "85fd9a4544fd8813184a0c667867e85e51e27ddf",
+  "request_sha": "cc0ecd54a14e22368c95024e8d5a50ca46618c222461faa5e5c2a9e5779981fe",
+  "spec_sha": "52c9d8076cd26966eeb20193211bc78413032523e92cec6b4c7c500a68f111fe",
+  "prereg_sha": "d475d43c6b1cb9ac12879b6849ca34e8cd03e057a4802515a0523ad69b388986",
+  "freeze_sha": null,
+  "parent_handoff_path": "research/experiments/EXP-PRODUCT-34420092879/handoff.json",
+  "parent_handoff_sha": "76e5e988f76f1184f72b33b0793d2adfaf03dcd129b2a270c76cee055ae403cd",
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "lane": "product",
+  "allowed_code_roots": ["src", "tests", "sdk", "pyproject.toml"],
+  "code_version": {
+    "kernel.py": "git show 64a6a89:src/spider/kernel.py (parent experiment execution commit)",
+    "models.py": "current HEAD (Mechanism model without slot_prefixes field in production code)",
+    "run_experiment.py": "standalone reimplementation of distill_parameterized logic from commit 64a6a89"
+  },
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.x",
+    "dependencies": "stdlib only (json, copy, re, hashlib)",
+    "model_calls": 0,
+    "browser_calls": 0,
+    "network_calls": 0
+  },
+  "datasets_fixtures": {
+    "training_data": "synthetic, deterministic, per-condition fresh registry",
+    "unseen_values": "synthetic, deterministic, disjoint from training values"
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PRODUCT-34485517221/raw_evidence.json",
+      "role": "raw",
+      "sha256": "687c480cba20cfcebdcafbc8835e2523bc7ee04e94c7e3a35d005c463858f579",
+      "description": "Complete raw evidence for all 7 conditions with per-condition metrics, slot_prefixes, templates, and binding results"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-34485517221/run_experiment.py",
+      "role": "code",
+      "sha256": "ab50f9224dade47b06f8c0a44fd7c26d686edd1514571d27fa6a144a66924520",
+      "description": "Standalone test script implementing distill_parameterized logic from kernel.py commit 64a6a89"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-34485517221/result.json",
+      "role": "derived",
+      "sha256": "a62d4bbb8854b3db263c13f4457bd90341d9dd45f7ac82421e4217deceee89f0",
+      "description": "Producer handoff with metrics, controls, artifacts, observations, validity_notes, unresolved"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-34485517221/report.md",
+      "role": "derived",
+      "sha256": "673cea44ca9157c1828b688ff3fdaf0b4d879a56bc9917541300c40ebd3555c9",
+      "description": "Human-readable report with interpretation of results"
+    }
+  ],
+  "reproduction_instructions": {
+    "summary": "Run run_experiment.py from the experiment directory. The script reimplements the distill_parameterized logic from kernel.py commit 64a6a89 and tests 7 URL pattern conditions.",
+    "command": "cd research/experiments/EXP-PRODUCT-34485517221 && python3 run_experiment.py",
+    "expected_output": "raw_evidence.json with 7 conditions, 4/7 passing, verdict MIXED",
+    "notes": "The script uses stdlib only. No external dependencies required. Results are deterministic."
+  },
+  "evidence_chain": {
+    "parent_experiment": "EXP-PRODUCT-34420092879 (kernel correctness, 10/10 conditions, binding_accuracy=1.0)",
+    "parent_audit": "EXP-PRODUCT-34420092879 audit.json (REVISE, V3_REPRESENTATION_LOSS finding)",
+    "parent_verdict": "EXP-PRODUCT-34420092879 verdict.json (SURVIVES_CURRENT_TEST, C-PARAM-INHERIT EXPERIMENTAL)",
+    "this_experiment": "Tests V3_REPRESENTATION_LOSS finding on structurally different URL patterns"
+  }
+}

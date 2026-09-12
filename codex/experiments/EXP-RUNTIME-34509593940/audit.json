@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-34509593940",
+  "lane": "runtime",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    {
+      "id": "V1_RECOMPUTATION_MATCH",
+      "severity": "pass",
+      "finding": "All material metrics recomputed from raw_observations.json match producer result.json exactly within floating tolerance: /userinfo_noise0 full 0.833333 body 0.5 status 0.5; /userinfo_noise1 full 0.232222 body 0.5; /userinfo_noise2 full 0.0 body 0.5; /userinfo_noise4 full 0.0 body 0.5; /introspect_noise0 full 0.5 body 0.5; /introspect_noise1 full 0.196111 body 0.5; noise2/4 full 0.0 body 0.5; B-RANDOM 0.0 at all cells; M_NOISE_DEGRADATION rho -0.9486832980505139 p 0.0513167; M_BODY_ONLY_INVARIANT rho 0.0 p 1.0 (constant input correctly handled); M_NOISE_BOUND 0.0; M_POSITIVE_CONTROL 0.5; M_NULL_CONTROL 0.0. Fingerprint algorithms reimplemented per spec (SHA256(repr((status, tuple(sorted(filtered_headers)),body_hash,''))) with EXCLUDED {date,server,x-request-id} and body-only SHA256(repr((status,body_hash,'')))) produce identical discrimination scores.",
+      "evidence": "result.json metrics /userinfo_noise* and /introspect_noise* full_vector/body_only/status_only 0.833333/0.5 etc, result.json M_NOISE_DEGRADATION rho -0.94868, raw_observations.json 320 observations 40 per noise per endpoint, recomputed via hashlib SHA256 independent script"
+    },
+    {
+      "id": "V2_BODY_ONLY_TAUTOLOGY_DISCLOSED",
+      "severity": "info",
+      "finding": "Body-only invariance (M_BODY_ONLY_INVARIANT rho 0.0, M_NOISE_BOUND 0.0) is tautological by construction: body-only fingerprint vector is (status, body_hash, '') and proxy spec guarantees 'Proxy does NOT modify response body, status code, or auth-related headers' and raw body_hashes verified identical across noise levels (valid_token edf3eba3... constant, expired==invalid e3b0c44... constant, introspect active:true/false constant). Producer correctly discloses this as tautological sanity check in prereg 12.6, spec hypothesis H2 as sanity check, and validity_notes 'Body-only invariance is tautological by construction'. Not a novel scientific finding but correctly passes sanity check; no body modification occurred.",
+      "evidence": "prereg.md 12.6, spec.json hypothesis/body-only invariant sanity check, result.json validity_notes bullet, raw_observations.json body_hash constant across noise 0-4 for each state, analyze.py body_only excludes headers"
+    },
+    {
+      "id": "V3_FULL_VECTOR_ENGINEERED_DEGRADATION",
+      "severity": "info",
+      "finding": "Full-vector degradation is engineered by injected per-request high-entropy headers and therefore largely construction-guaranteed. Proxy injects X-CDN-Request-Id random UUID per request at noise>=2 (10/10 unique per state per cell) and X-Rate-Limit-Remaining/X-Edge-Location at noise=4, all included in full-vector fingerprint (only date/server/x-request-id excluded). This forces intra-state mismatch: at noise=2 and noise=4 every request has unique fingerprint => intra_match_rate 0 => discrimination 0. At noise=1 (X-Cache-Status 3 values only) degradation is partial 0.833->0.232 not 0. Spec designed this pool ([HIT/MISS/EXPIRED], uuid4, edge codes, 0-100) to achieve degradation; Spearman -0.948 reflects engineered monotonic drop. Product-relevant inference is limited: a production full-vector that denylists/allowlists infrastructure headers (e.g., filters X-Cache-*, X-CDN-*, X-Rate-Limit-*) would also be invariant. Experiment does not test filtered full-vector baseline.",
+      "evidence": "spec.json measurement_validity noise headers pool and decision_rule M_NOISE_DEGRADATION <=-0.3, run_experiment.py NoiseProxyHandler._generate_noise_headers pool with uuid4/int0-100, result.json noise_header_verification unique 10/10 for X-CDN-Request-Id at noise>=2, raw_observations.json headers at noise 2/4 show per-request uniqueness, report.md 6 interpretation"
+    },
+    {
+      "id": "V4_SPEARMAN_POWER_AND_THRESHOLD",
+      "severity": "low",
+      "finding": "Primary metric M_NOISE_DEGRADATION uses Spearman rho between 4 noise levels [0,1,2,4] and 4 discrimination values [0.833,0.232,0.0,0.0] with tie at 0.0. rho -0.948 exceeds threshold -0.3 but p=0.0513 >0.05 (n=4) non-significant by conventional alpha, reflecting very low power. Threshold -0.3 is lenient; any monotonic drop passes. Decision rule correctly uses rho not p, and spec acknowledges small N per cell (10 reps). Finding is directionally strong but not robust to alternative noise sampling; confidence interval not reported.",
+      "evidence": "result.json M_NOISE_DEGRADATION p_value 0.05131670194948613, spec.json decision_rule rho <=-0.3, prereg.md 12.3 sample size, recomputed spearmanr [0,1,2,4] vs [0.833,0.232,0,0] rho -0.948"
+    },
+    {
+      "id": "V5_PROXY_FIDELITY_AND_SCOPE_BOUND",
+      "severity": "low",
+      "finding": "Reverse proxy is Python HTTPServer forwarding to Keycloak 25.0 Docker on 127.0.0.1:18081->18080, deterministic RNG seed 44, noise injected as response headers only. Verified: noise headers present exactly per level (noise0 none, noise1 X-Cache-Status 3 unique, noise2 +X-CDN-Request-Id 10 unique, noise4 +X-Edge-Location +X-Rate-Limit-Remaining), auth-related headers preserved (Cache-Control, WWW-Authenticate, Content-Type, content-length identical between noise0 and noise4 per state), body untouched. However this is single synthetic pattern; no body compression, chunked encoding, ETag, or real CDN load-balancer behavior. Producer validity_notes correctly scopes to single pattern. Real infrastructure may have correlated or low-entropy headers (e.g., cached HIT/MISS only) where full-vector would not fully collapse (as seen at noise1 still 0.23).",
+      "evidence": "raw_observations.json noise_header_verification counts 10 unique etc, provenance.json proxy port 18081 noise_levels [0,1,2,4], run_experiment.py start_proxy and NoiseProxyHandler, result.json validity_notes single pattern"
+    },
+    {
+      "id": "V6_PROVENANCE_SPLIT_AND_REPRODUCIBILITY",
+      "severity": "info",
+      "finding": "Provenance indicates split execution: data_collection in prior run github_run_id 34538183496 with analysis failed exit 66, then analysis rerun in current session (provenance.json data_collection_note, validity_notes 'Analysis performed on pre-collected raw_observations.json'). Hash of raw_observations.json 4dbcf4abf5eece337c32a533f94802288ee881bd9d9d72e25ecd3e020f148063 matches result.json and provenance artifacts, so recomputation valid despite split. No evidence of post-hoc threshold change: freeze hashes match spec/prereg/request. Sampling integrity: 320 total observations, 40 per noise per endpoint, 10 per state per cell verified, no missing cells, jitter 50-150ms per spec.",
+      "evidence": "provenance.json data_collection_note and raw_observations sha 4dbcf4..., result.json artifacts sha identical, freeze.json hashes prereg 9caa5ec..., execution_checkpoint.json github_run_id 34524405225, raw_observations.json total 320"
+    },
+    {
+      "id": "V7_CONTROLS_AND_BASELINES_PASS",
+      "severity": "pass",
+      "finding": "Positive control C_POSITIVE_CONTROL PASS 0.5 >=0.35 replicates parent EXP-RUNTIME-34439061845 body-only 0.5; null control C_NULL_CONTROL B-RANDOM 0.0 PASS; C_BODY_ONLY_INVARIANT 0.0 >=-0.3 PASS; C_NOISE_BOUND 0.0 <=0.05 PASS; C_NO_PIPELINE_ERRORS 0 PASS. Status-only baseline 0.5 on /userinfo constant across noise confirms jitter does not affect status. Expired==invalid body identity holds at all noises on both endpoints. No pipeline errors.",
+      "evidence": "result.json controls C_POSITIVE_CONTROL 0.5, C_NULL_CONTROL 0.0, C_NOISE_DEGRADATION -0.948, C_BODY_ONLY_INVARIANT 0.0, C_NOISE_BOUND 0.0, metrics status_only_discrimination 0.5 constant, expired_invalid_identical true"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-RANDOM",
+      "finding": "B-RANDOM discrimination 0.0 at noise0 on /userinfo and /introspect, recomputed 0.0, confirms measurement pipeline does not produce spurious structure. Weak baseline by construction (random 256-bit hashes). Strengthened by absence of spurious signal.",
+      "evidence": "result.json metrics /userinfo_noise0 baselines B-RANDOM 0.0, recomputed via random.Random(99) getrandbits"
+    },
+    {
+      "id": "B-NO-NOISE-FULL-VECTOR",
+      "finding": "No-noise full-vector 0.833 on /userinfo replicates parent (WWW-Authenticate contributes 0.333 beyond status/body). Verified via full-vector recomputation: no_auth 61c534..., invalid/expired 196af3..., valid 5d6642... distinct, 3 groups => 0.833. On /introspect full=body=0.5 (headers add nothing). Correctly establishes baseline before degradation.",
+      "evidence": "result.json /userinfo_noise0 full 0.833 body 0.5, raw_observations.json noise0 /userinfo fingerprints per state, parent EXP-RUNTIME-34439061845 handoff body-only 0.5 full 0.833"
+    },
+    {
+      "id": "B-NO-NOISE-BODY-ONLY",
+      "finding": "Body-only 0.5 at noise0 on both endpoints PASS positive control threshold 0.35. Corresponds to 3 body groups on /userinfo (empty vs valid JSON) and 2 body groups on /introspect (active:true/false). Stable 0.5 at all noises confirms invariance.",
+      "evidence": "result.json /userinfo_noise0 body 0.5, /introspect_noise0 body 0.5, spec baselines B-NO-NOISE-BODY-ONLY 0.5"
+    },
+    {
+      "id": "B-STATUS-ONLY",
+      "finding": "Status-only 0.5 on /userinfo (200 vs 401) invariant across noise, 0.0 on /introspect (all 200). Not a strong competitive baseline but confirms status signal preserved under header noise as expected (status not modified by proxy).",
+      "evidence": "result.json status_only_discrimination 0.5 /userinfo 0.0 /introspect at all noise levels"
+    },
+    {
+      "id": "B-HIGH-NOISE-COMPARISON",
+      "finding": "High-noise full-vector 0.0 at noise2/4 vs body-only 0.5 demonstrates gap engineered by random UUID headers. No filtered-full-vector baseline tested (e.g., allowlist status+WWW-Authenticate+body). Such filtered vector would likely retain 0.833/0.5 and not degrade, representing realistic product alternative omitted. Baseline strength for product decision therefore limited to unfiltered full-vector vs body-only.",
+      "evidence": "result.json /userinfo_noise4 full 0.0 body 0.5, spec baselines B-HIGH-NOISE-FULL-VECTOR/BODY-ONLY, absence of filtered-header baseline in spec"
+    }
+  ],
+  "recomputed_metrics": {
+    "/userinfo_noise0_full_vector_discrimination": 0.8333333333333334,
+    "/userinfo_noise0_body_only_discrimination": 0.5,
+    "/userinfo_noise0_status_only_discrimination": 0.5,
+    "/userinfo_noise0_B-RANDOM": 0.0,
+    "/userinfo_noise1_full_vector_discrimination": 0.2322222222222222,
+    "/userinfo_noise1_body_only_discrimination": 0.5,
+    "/userinfo_noise2_full_vector_discrimination": 0.0,
+    "/userinfo_noise2_body_only_discrimination": 0.5,
+    "/userinfo_noise4_full_vector_discrimination": 0.0,
+    "/userinfo_noise4_body_only_discrimination": 0.5,
+    "/introspect_noise0_full_vector_discrimination": 0.5,
+    "/introspect_noise0_body_only_discrimination": 0.5,
+    "/introspect_noise1_full_vector_discrimination": 0.1961111111111111,
+    "/introspect_noise2_full_vector_discrimination": 0.0,
+    "/introspect_noise4_full_vector_discrimination": 0.0,
+    "M_NOISE_DEGRADATION_rho": -0.9486832980505139,
+    "M_NOISE_DEGRADATION_p_value": 0.05131670194948613,
+    "M_BODY_ONLY_INVARIANT_rho": 0.0,
+    "M_BODY_ONLY_INVARIANT_p_value": 1.0,
+    "M_NOISE_BOUND": 0.0,
+    "M_POSITIVE_CONTROL": 0.5,
+    "M_NULL_CONTROL": 0.0,
+    "expired_invalid_identical_all_cells": true,
+    "total_requests": 320,
+    "per_cell_requests": 40,
+    "per_state_reps": 10
+  },
+  "claim_ceiling": "Within the synthetic reverse-proxy model tested (Keycloak 25.0 start-dev via Python HTTPServer proxy on 127.0.0.1:18081 injecting 0/1/2/4 per-response headers X-Cache-Status (3 values), X-CDN-Request-Id (UUID per request), X-Edge-Location, X-Rate-Limit-Remaining with seed 44, filtered only date/server/x-request-id), unfiltered full-vector fingerprint discrimination collapses 0.833->0.232->0.0->0.0 monotonic (Spearman rho -0.948, n=4, p=0.051) while body-only (status+body_hash) remains invariant 0.5 at all noises, and positive/ null controls pass. Ceiling does NOT extend to: filtered full-vector (denylisting infrastructure headers), real CDN/load-balancer header distributions (which may not include per-request UUIDs), body non-determinism from compression/chunking, multiple stacked layers, or non-Keycloak IdPs. Body-only advantage is demonstrated only against unfiltered full-vector under high-entropy per-request header noise; where header entropy is low (noise=1 still 0.23) or headers are filtered, the advantage diminishes. Body-only invariance is tautological by construction (headers excluded, proxy preserves bodies).",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-34509593940/result.json — metrics per noise per endpoint, M_NOISE_DEGRADATION rho -0.94868 p 0.0513, M_BODY_ONLY_INVARIANT rho 0.0, M_NOISE_BOUND 0.0, controls all PASS",
+    "research/experiments/EXP-RUNTIME-34509593940/raw_observations.json — 320 HTTP observations sha 4dbcf4abf5eece337c32a533f94802288ee881bd9d9d72e25ecd3e020f148063, fingerprints_full/body per rep, headers per noise verification",
+    "research/experiments/EXP-RUNTIME-34509593940/run_experiment.py — NoiseProxyHandler noise injection pool, fingerprint_full_vector/body_only, EXCLUDED_HEADERS date/server/x-request-id, SEED 44",
+    "research/experiments/EXP-RUNTIME-34509593940/analyze.py — recomputation of discrimination = intra - inter, spearmanr handling of constant body-only",
+    "research/experiments/EXP-RUNTIME-34509593940/provenance.json — Keycloak 25.0 Docker, proxy 18081, fingerprint algorithm, data_collection_note prior run 34538183496",
+    "research/experiments/EXP-RUNTIME-34509593940/spec.json — frozen question/hypothesis/falsifier baselines decision_rule requiring rho <=-0.3 and >=-0.3",
+    "research/experiments/EXP-RUNTIME-34509593940/prereg.md — 12.6 body tautology, 12.1-12.5 validity threats, 5.3 noise levels",
+    "research/experiments/EXP-RUNTIME-34509593940/freeze.json — hashes 9caa5ec4 /1c46a930/80b3210e",
+    "research/experiments/EXP-RUNTIME-34439061845/handoff.json — parent body-only architecture 0.5/0.833 and expired==invalid invariant"
+  ],
+  "unresolved": [
+    "Does body-only discrimination survive body non-determinism from CDN compression/Content-Encoding gzip/chunked transfer where body hash would vary per request?",
+    "Does discrimination survive multiple stacked infrastructure layers with correlated headers rather than independent per-request UUIDs?",
+    "Would a filtered full-vector (allowlisting status+WWW-Authenticate+Cache-Control+body) remain stable under same noise, eliminating the need for body-only default?",
+    "Does result generalize to non-Keycloak providers (Auth0, Okta) or production Keycloak with real middleware variance?",
+    "What is minimal header entropy required to collapse unfiltered full-vector below usable threshold (e.g., noise=1 still 0.23 suggests low-entropy HIT/MISS alone insufficient)?"
+  ]
+}

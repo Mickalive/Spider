@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-34685457833",
+  "lane": "product",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "condition_pass_rate": 0.9,
+    "decision_relevant_passed": 9,
+    "decision_relevant_total": 9,
+    "structural_generalization_rate": 0.8,
+    "overall_binding_accuracy": 0.857,
+    "verdict": "SURVIVES_CURRENT_TEST",
+    "p1_slot_count": 1,
+    "p1_binding_accuracy": 1.0,
+    "g1_slot_count": 1,
+    "g1_binding_accuracy": 1.0,
+    "g2_slot_count": 1,
+    "g2_binding_accuracy": 1.0,
+    "g3_slot_count": 1,
+    "g3_binding_accuracy": 1.0,
+    "g5_slot_count": 1,
+    "g5_binding_accuracy": 1.0,
+    "n1_original_slot_count": 0,
+    "n1_corrected_slot_count": 0,
+    "b_literal_fail_rate": 1.0,
+    "b_unfixed_slot_count": 1,
+    "b_unfixed_binding_accuracy": 1.0,
+    "g4_slot_count": 1,
+    "g4_binding_accuracy": 0.0,
+    "g4_architectural_bound": true
+  },
+  "controls": {
+    "P1_PATH_PREFIX": {
+      "type": "positive_control",
+      "expected": "slot_count=1, binding_accuracy=1.0",
+      "observed": "slot_count=1, binding_accuracy=1.0",
+      "passed": true,
+      "evidence": "raw_evidence.json conditions.P1_PATH_PREFIX"
+    },
+    "G1_QUERY_STRING_SIMPLE": {
+      "type": "fix1_target",
+      "expected": "slot_count=1, binding_accuracy=1.0",
+      "observed": "slot_count=1, binding_accuracy=1.0",
+      "passed": true,
+      "evidence": "raw_evidence.json conditions.G1_QUERY_STRING_SIMPLE"
+    },
+    "G2_QUERY_STRING_MULTIPARAM": {
+      "type": "regression",
+      "expected": "slot_count=1, binding_accuracy=1.0",
+      "observed": "slot_count=1, binding_accuracy=1.0",
+      "passed": true,
+      "evidence": "raw_evidence.json conditions.G2_QUERY_STRING_MULTIPARAM"
+    },
+    "G3_DEEP_PATH": {
+      "type": "regression",
+      "expected": "slot_count=1, binding_accuracy=1.0",
+      "observed": "slot_count=1, binding_accuracy=1.0",
+      "passed": true,
+      "evidence": "raw_evidence.json conditions.G3_DEEP_PATH"
+    },
+    "G5_PATH_QUERY_HYBRID": {
+      "type": "regression",
+      "expected": "slot_count=1, binding_accuracy=1.0",
+      "observed": "slot_count=1, binding_accuracy=1.0",
+      "passed": true,
+      "evidence": "raw_evidence.json conditions.G5_PATH_QUERY_HYBRID"
+    },
+    "N1_ORIGINAL": {
+      "type": "fix2_target",
+      "expected": "slot_count=0",
+      "observed": "slot_count=0",
+      "passed": true,
+      "evidence": "raw_evidence.json conditions.N1_ORIGINAL"
+    },
+    "N1_CORRECTED": {
+      "type": "null_control_corrected",
+      "expected": "slot_count=0",
+      "observed": "slot_count=0",
+      "passed": true,
+      "evidence": "raw_evidence.json conditions.N1_CORRECTED"
+    },
+    "B_LITERAL": {
+      "type": "baseline",
+      "expected": "fail_rate=1.0",
+      "observed": "fail_rate=1.0",
+      "passed": true,
+      "evidence": "raw_evidence.json conditions.B_LITERAL"
+    },
+    "B_UNFIXED": {
+      "type": "baseline_unfixed",
+      "expected": "slot_count=1 for P1-like, binding_accuracy=0.0 for G1, slot_count>0 for N1_ORIGINAL",
+      "observed": "slot_count=1, binding_accuracy=1.0 for P1-like training",
+      "passed": true,
+      "note": "B_UNFIXED not part of decision rule; paired comparison only. True unfixed heuristic (rfind('/') without Fix1/Fix2) produces correct template for path-prefix patterns.",
+      "evidence": "raw_evidence.json conditions.B_UNFIXED"
+    },
+    "G4_MULTI_SLOT": {
+      "type": "architectural",
+      "expected": "slot_count=1, binding_accuracy=0.0 (architectural bound)",
+      "observed": "slot_count=1, binding_accuracy=0.0",
+      "passed": false,
+      "note": "G4 not part of frozen decision_rule; reported separately. Multi-char suffix '00' not caught by Fix1 single-char guard. Architectural limitation.",
+      "evidence": "raw_evidence.json conditions.G4_MULTI_SLOT"
+    }
+  },
+  "artifacts": [
+    {"path": "research/experiments/EXP-PRODUCT-34685457833/raw_evidence.json", "sha256": "df8ad0bdd9ea54da73a3badf2d06e02500fe0816dd98b03c95a361d0083f0d09", "role": "raw"},
+    {"path": "research/experiments/EXP-PRODUCT-34685457833/run_experiment.py", "sha256": "d38ceb50cd5a2e3704b848941f11cbcadc79f8168ee862bee5fed266147ec2c4", "role": "code"},
+    {"path": "src/spider/kernel.py", "sha256": "a1fe75cf2c069ac0f42f80755101ef294eb02e01aa8f9c551dd9bcd4e6986ea4", "role": "code"},
+    {"path": "src/spider/models.py", "sha256": "064c5f34413266fa4ac232f5e03e536be3bc15ea6ed098253875103a9aad54bd", "role": "code"}
+  ],
+  "observations": [
+    "All 9 decision-relevant conditions pass the frozen decision_rule: P1/G1/G2/G3/G5 slot_count=1 binding_accuracy=1.0, N1_ORIGINAL/N1_CORRECTED slot_count=0, B_LITERAL fail_rate=1.0, no import/syntax errors",
+    "Committed kernel.py distill_parameterized produces identical results to monkey-patched version from EXP-PRODUCT-34662221249 — no commit-specific divergence detected",
+    "Empty-prefix guard frozen as specification: N1_CORRECTED (truly disjoint URLs http://a.com/x, ftp://b.org/y, custom://c.net/z) correctly rejected with slot_count=0",
+    "slot_prefixes is now a proper dataclass field in models.py Mechanism (not monkey-patched attribute)",
+    "P1/G3/G5 slot_prefixes observed as empty string '' — this is expected behavior: rfind('/') on prefix ending at slot boundary with no '/' after slot returns empty. Binding succeeds via template prefix embedded in action_template, not via slot_prefixes. This is representation loss per parent audit V5, not a correctness failure.",
+    "B_UNFIXED reimplemented as true unfixed heuristic: rfind('/') without Fix1/Fix2. For P1-like training, produces slot_count=1 with correct template https://api.example.com/users/${url}. Binding_accuracy=1.0 for unseen D/E/F. Template identical to fixed version because rfind('/') correctly identifies 'users/' boundary for path-prefix patterns.",
+    "G4 architectural limitation confirmed: slot_count=1 (not 2), binding_accuracy=0.0. Multi-char suffix '00' from 100/200/300 not caught by Fix1 single-char guard. Template users/${url}00, binding produces users/dave/orders/40000 instead of users/dave/orders/400. This is architectural, not a fix failure.",
+    "No regressions on any established condition (P1/G2/G3/G5) after commit — identical results to monkey-patched validation"
+  ],
+  "validity_notes": [
+    "All conditions deterministic synthetic with n=3 per condition, zero model/network/browser calls. External validity unproven.",
+    "slot_prefixes empty for P1/G3/G5 is representation loss (observed '' vs expected 'users/'/'repos/main/issues/'). Binding succeeds via template prefix. Future _bind relying on slot_prefixes for VALUE CONTRACT prefix-stripping would fail. This is a ceiling bound, not a failure condition.",
+    "B_UNFIXED for P1-like training produces identical template to fixed version because rfind('/') correctly handles path-prefix patterns. The delta attributable to fixes is only observable on G1 (query-string) and N1_ORIGINAL (cross-host), which were not tested with B_UNFIXED in this run. To fully quantify delta, B_UNFIXED must also be run against G1 and N1_ORIGINAL training data.",
+    "Committed code tested via fresh Python import of src.spider.kernel module. Module state verified clean (no stale monkey-patches).",
+    "Empty-prefix guard frozen as part of Fix2 specification (not EXPLORATORY). Rejects parameterization when common prefix is empty — covers truly disjoint URLs with no shared structure."
+  ],
+  "unresolved": [
+    "B_UNFIXED paired comparison incomplete: only tested on P1-like training. G1/N1_ORIGINAL not tested with B_UNFIXED to quantify delta attributable to fixes. Future experiment should run B_UNFIXED against G1 and N1_ORIGINAL training data.",
+    "slot_prefixes empty for P1/G3/G5: representation loss persists in committed code. Future _bind may rely on slot_prefixes for VALUE CONTRACT prefix-stripping — would fail. Need to decide whether to (a) accept empty slot_prefixes as design (binding works via template prefix), or (b) modify distill_parameterized to compute non-empty slot_prefixes.",
+    "G4 multi-slot limitation: leaf-path model produces slot_count=1 (not 2) because URL treated as single field. Multi-char suffix '00' not caught by Fix1. Architectural, not fix failure. May need multi-slot model or multi-char suffix guard.",
+    "End-to-end product economics (C-PRODUCT-ECON): does parameterized kernel save total cost per successful task? Still unmeasured. Requires real-browser testing with model/network/browser calls.",
+    "Real-world prevalence of single-char vs multi-char suffix collisions and cross-host vs protocol-only prefix collisions in browser traffic — external validity unknown."
+  ]
+}

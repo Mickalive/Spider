@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34674671762",
+  "lane": "physics",
+  "target_lane": "physics",
+  "next_question": "Do response-side signals (response content-type, response body digest, response timing, response status sequences) captured via Playwright route interception on locally-hosted SPAs with state-dependent server responses provide predictive PMI on within-URL transitions where client-side request signatures are identical across states?",
+  "why_next": "This experiment falsified client-side request-signature PMI on locally-hosted SPAs: 1/3 sites show PMI (dashboard 0.881 bits, tautological action→own-request), 2/3 show 0.0 bits because server hides state in session cookies while client-side requests are identical across states. The orthogonal next step is to test response-side signals — what the server sends back rather than what the client sends. Response bodies, content-types, and timing may encode state information that request signatures miss, especially on session-tracked SPAs where client requests are invariant. This moves from client-observable communication to server-observable communication, a materially orthogonal level of description within the network-request domain.",
+  "carry_forward": {
+    "established": [
+      "URL-only PMI is strongly positive on TodoMVC hash-SPA transitions: React 0.670 bits, Vue 0.751 bits (EXP-PHYSICS-34524411213 result.json)",
+      "DOM structural features on TodoMVC are significantly predictive but strictly worse than URL-only (React -0.073 bits, Vue -0.006 bits) — DOM does not improve over URL for simple apps (EXP-PHYSICS-34524411213 result.json)",
+      "PMI computation pipeline is validated: positive control synthetic SPA PMI=0.860-1.271 bits p=0.001, null control shuffled PMI non-significant p=0.318-0.666 across multiple experiments (EXP-PHYSICS-34524411213, EXP-PHYSICS-34629310987, EXP-PHYSICS-34674671762)",
+      "Client-side request signatures (endpoint+method+status+body_frag) show PMI on locally-hosted SPAs where endpoints vary by state: dashboard 0.881 bits Bonferroni p=0.003, d=8.8 (EXP-PHYSICS-34674671762 result.json pmi_results.json dashboard). But gain is tautological: action label target_href directly equals endpoint path, so PMI measures action→own-request causality, not predictive environmental dynamics (audit validity_findings.tautological_dashboard_gain_identifiability)",
+      "Client-side request signatures show 0.0 bits PMI on locally-hosted SPAs where endpoints are identical across states: multistep_form POST /api/checkout/next (same for all steps), wizard POST /api/wizard/next (same for all steps) — API calls are invariant because server hides state in session cookies (EXP-PHYSICS-34674671762 result.json, audit validity_findings.multistep_wizard_api_coarseness)",
+      "Alpha sensitivity shows PMI is not an artifact of Laplace smoothing on the dashboard site: alpha=0.0→1.733, alpha=0.5→1.150, alpha=1.0→0.881, alpha=2.0→0.608 bits (EXP-PHYSICS-34674671762 pmi_results.json alpha_sensitivity)"
+    ],
+    "rejected": [
+      "DOM structural features (element_count, tree_depth, interactive_density) as state representation on TodoMVC (EXP-PHYSICS-34524411213)",
+      "Synthetic-only evidence for C-WEB-DYNAMICS: both EXP-PHYSICS-34629310987 and EXP-PHYSICS-34674671762 used locally-hosted or synthetic SPAs; results do not generalize to production (audit validity_findings.sampling_local_not_production)",
+      "Client-side request signatures (endpoint+method+status+body_frag[:200]) as general predictive state representation: fails on 2/3 locally-hosted SPAs where API calls are invariant; the 1/3 passing site has tautological gain. Primary condition (≥2/3 sites ≥0.1 bits) fails (EXP-PHYSICS-34674671762 verdict FALSIFIED-IN-SETTING)"
+    ],
+    "unknown": [
+      "Whether genuine production SPAs with verified URL ambiguity and distinct state-dependent API signatures show network-request PMI > URL-only with proper 80/20 temporal split and n_test≥30 (no production SPA was tested)",
+      "Whether response-side signals (content-type, response body digest, response timing) provide predictive PMI on SPAs where client request signatures are invariant (untested)",
+      "Whether more expressive request representations (full payload hash, content-type sequences, timing, binary body digest) capture state variation missed by endpoint+method+status+body_frag[:200]",
+      "Whether URL+network-request combined state outperforms either alone on SPAs where URL varies across some transitions (interaction untested)",
+      "Why wizard temporal split violated (n_train=0, n_test=32) — whether wizard SPA has insufficient transitions for 80/20 split or whether Playwright capture was incomplete",
+      "Whether null control on real SPA data (vs synthetic) would pass the p>0.01 threshold — null calibration untested on locally-hosted SPA data"
+    ],
+    "do_not_assume": [
+      "That the dashboard 0.881-bit gain demonstrates predictive environmental dynamics — audit found it is tautological (action→own-request), not orthogonal structure. Graph reuse is not physics.",
+      "That locally-hosted SPAs are representative of production sites — all 3 test sites are Express servers on localhost:3848-3850; production SPAs may have richer or sparser API patterns, authentication, caching, Service Workers",
+      "That 0.0 bits on multistep_form/wizard means network-request signals are uninformative on real SPAs — the zero is forced by server design (identical endpoints), not discovered as an empirical property of web dynamics",
+      "That URL-only PMI ~0 on these sites is evidence URL is uninformative — URL is constant by construction (single-path routing), so URL-only PMI is trivially zero, not evidence of URL ambiguity",
+      "That the positive control PMI 0.860 bits is unbiased — computed in-sample on full 250 transitions, not on held-out test set (audit validity_findings.positive_control_threshold_fragile, recomputed test-split PMI=0.556)",
+      "That absolute PMI bit values are smoothing-independent — alpha sensitivity analysis shows dashboard PMI ranges 0.608-1.733 across alpha 0.0-2.0; decision threshold 0.1 bits is sensitive to alpha choice",
+      "That the wizard result is inferentially valid — wizard violates 80/20 temporal split (n_train=0), making PMI in-sample; directional conclusion (0.0 bits) unchanged but statistical validity downgraded",
+      "That null control passing on synthetic data validates the pipeline for real SPA data — null used synthetic shuffled labels, not real SPA data per spec"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-PHYSICS-34674671762/result.json metrics per_site dashboard 0.881 multistep 0.0 wizard 0.0 controls positive_control PASS null_control PASS",
+    "research/experiments/EXP-PHYSICS-34674671762/audit.json status=REVISE claim_ceiling validity_findings 6 findings baseline_findings 3 findings recomputed_metrics",
+    "research/experiments/EXP-PHYSICS-34674671762/pmi_results.json per_site_results permutation_tests alpha_sensitivity controls",
+    "research/experiments/EXP-PHYSICS-34674671762/raw_network_captures.json dashboard 160 transitions 4 endpoints, multistep 120 2 endpoints, wizard 32 2 endpoints",
+    "research/experiments/EXP-PHYSICS-34674671762/provenance.json datasets code environment methods",
+    "research/experiments/EXP-PHYSICS-34674671762/spec.json falsifier decision_rule measurement_validity baselines",
+    "research/experiments/EXP-PHYSICS-34674671762/prereg.md 5.1 genuine SPA criteria 9.1 SURVIVES_CURRENT_TEST 9.2 FALSIFIED-IN-SETTING 12 deviation policy",
+    "research/experiments/EXP-PHYSICS-34629310987/handoff.json carry_forward established URL PMI rejected DOM synthetic-only do_not_assume synthetic tautological gain",
+    "research/physics/network_requests/dashboard_spa_server.js:88-90 fetch('/api/tab/' + tab) action→endpoint deterministic",
+    "research/physics/network_requests/multistep_form_server.js:93-106 POST /api/checkout/next same endpoint all steps",
+    "research/physics/network_requests/wizard_spa_server.js:80-88 POST /api/wizard/next same endpoint all steps",
+    "research/physics/network_requests/pmi_computation.py hash_request temporal_split fallback permutation_test",
+    "research/claims/registry.json C-WEB-DYNAMICS status=HYPOTHESIS"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-34674671762/verdict.json decision=FALSIFIED-IN-SETTING claim_updates reason",
+    "research/experiments/EXP-PHYSICS-34674671762/audit.json claim_ceiling 'MAXIMUM JUSTIFIED: On three locally-hosted SPAs...'",
+    "research/experiments/EXP-PHYSICS-34674671762/audit.json validity_findings sampling_local_not_production wizard_temporal_split_violation tautological_dashboard_gain_identifiability multistep_wizard_api_coarseness null_control_wrong_population positive_control_threshold_fragile",
+    "research/experiments/EXP-PHYSICS-34674671762/audit.json baseline_findings url_only_baseline_trivial_zero shuffled_null_high_pmi_smoothing_artifact frequency_baseline_missing",
+    "research/experiments/EXP-PHYSICS-34674671762/audit.json recomputed_metrics dashboard alpha_sensitivity mismatch 1.937 vs 1.733, synthetic test_split 0.556",
+    "research/experiments/EXP-PHYSICS-34674671762/result.json metrics.per_site dashboard improvement 0.881 multistep 0.0 wizard 0.0, validity_notes locally hosted not production",
+    "research/experiments/EXP-PHYSICS-34674671762/pmi_results.json permutation_tests dashboard_network null_mean 0.345 null_std 0.061, wizard n_train 0 n_test 32",
+    "research/experiments/EXP-PHYSICS-34674671762/spec.json falsifier '>=2/3 sites' decision_rule FALSIFIED-IN-SETTING"
+  ],
+  "recommended_action": "DESIGN a Physics experiment testing response-side signals (response content-type, response body digest/SHA-256, response timing, response status sequence) as predictive state representation on locally-hosted SPAs where client request signatures are identical across states. Critical: (1) use the same 3 locally-hosted SPAs (dashboard, multistep_form, wizard) to control for site properties; (2) capture response-side data from Playwright route interception responses (already intercepted, response bodies available via route.fulfill or response.body()); (3) discretize response state as SHA-256(content-type + response_body_digest[:500] + status) per request, aggregate per transition as sorted tuple; (4) on multistep_form/wizard where server returns different validation results per step (step-specific error messages, field validation states in JSON responses), response-side may encode state that request-side misses; (5) include proper 80/20 temporal split with n_test>=30 on held-out; (6) run null control on real SPA shuffled labels per spec; (7) verify dashboard gain on response-side is not tautological. This tests a materially orthogonal mechanism: server-observable communication (what comes back) vs client-observable communication (what goes out)."
+}

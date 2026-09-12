@@ -1,0 +1,225 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-34546944360",
+  "lane": "intel",
+  "status": "COMPLETE",
+  "outcome": "MIXED",
+  "metrics": {
+    "total_tasks_measured": 20,
+    "shopping_tasks_initial": 10,
+    "shopping_tasks_scrolled": 10,
+    "yield_cdp_mean": 0.0426,
+    "yield_cdp_stdev": 0.0052,
+    "yield_cdp_cv": 0.1231,
+    "yield_cdp_min": 0.0382,
+    "yield_cdp_max": 0.0523,
+    "yield_locatable_mean": 0.0792,
+    "yield_locatable_stdev": 0.0126,
+    "yield_locatable_cv": 0.1586,
+    "yield_locatable_min": 0.0687,
+    "yield_locatable_max": 0.1009,
+    "viewport_elements_mean": 108.0,
+    "viewport_elements_stdev": 0.0,
+    "locatable_elements_mean": 1354.2,
+    "locatable_elements_stdev": 189.5,
+    "cdp_elements_mean": 2609.0,
+    "cdp_elements_stdev": 249.7,
+    "method1_yield": 0.365,
+    "method1_delta_pp": 28.58,
+    "method1_within_10pp": false,
+    "scroll_mean_delta": 0.0294,
+    "scroll_fraction_within_20pp": 1.0,
+    "page_type_breakdown": {
+      "product-listing": {
+        "count": 3,
+        "mean_yield_cdp": 0.0386,
+        "mean_yield_locatable": 0.0699,
+        "mean_viewport_elements": 108.0,
+        "mean_locatable_elements": 1546.0,
+        "mean_cdp_elements": 2796.7
+      },
+      "detail": {
+        "count": 3,
+        "mean_yield_cdp": 0.0471,
+        "mean_yield_locatable": 0.0909,
+        "mean_viewport_elements": 108.0,
+        "mean_locatable_elements": 1188.0,
+        "mean_cdp_elements": 2295.3
+      },
+      "cart": {
+        "count": 1,
+        "mean_yield_cdp": 0.0523,
+        "mean_yield_locatable": 0.1009,
+        "mean_viewport_elements": 108.0,
+        "mean_locatable_elements": 1070.0,
+        "mean_cdp_elements": 2064.0
+      },
+      "search": {
+        "count": 3,
+        "mean_yield_cdp": 0.0388,
+        "mean_yield_locatable": 0.0697,
+        "mean_viewport_elements": 108.0,
+        "mean_locatable_elements": 1549.7,
+        "mean_cdp_elements": 2787.0
+      }
+    }
+  },
+  "controls": {
+    "positive_control_geometry_faithful": {
+      "expected": "Geometry-faithful viewport script produces non-empty viewport_elements and locatable_elements counts on all tasks, with viewport_elements > 0 and locatable_elements > viewport_elements",
+      "observed": "All 10 shopping tasks produced non-empty counts. viewport_elements=108 > 0 and locatable_elements=1070-1564 > viewport_elements on all tasks.",
+      "pass": true,
+      "evidence": "exp345_raw_results.json: all measurements show viewport_elements=108, locatable_elements > 1000"
+    },
+    "positive_control_cdp_accessibility": {
+      "expected": "CDP accessibility tree returns non-empty node count on all tasks",
+      "observed": "All 10 shopping tasks returned CDP node counts (2064-2826). CDP tree functional.",
+      "pass": true,
+      "evidence": "exp345_raw_results.json: all measurements show total_cdp_elements > 2000"
+    },
+    "null_control_zero_elements": {
+      "expected": "If page has no elements, yield should be 0",
+      "observed": "Not applicable - all pages have elements. Null control is theoretical.",
+      "pass": null,
+      "evidence": null
+    },
+    "stability_control_yield_cv": {
+      "expected": "CV of yield_locatable across shopping tasks < 0.2 (stable estimate)",
+      "observed": "CV = 0.1586 < 0.2. Yield is stable across page types.",
+      "pass": true,
+      "evidence": "yield_locatable_cv=0.1586 < 0.2 threshold"
+    },
+    "denominator_mapping_control": {
+      "expected": "Method1's 150-element estimate can be traced to a specific counting method in the derivation code",
+      "observed": "Method1 derivation in analysis_output.json shows estimated_elements for product_listing=150, product_detail=120, cart=60, search=160, reviews=80. These are estimated element counts, but the definition of 'element' is ambiguous - could be all visible elements, interactive elements, or CDP nodes.",
+      "pass": null,
+      "evidence": "analysis_output.json: method1_element_count.shopping.page_types.product_listing.estimated_elements=150"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "/tmp/opencode/measure_yield_exp345_final.py",
+      "sha256": null,
+      "role": "code"
+    },
+    {
+      "path": "/tmp/opencode/exp345_raw_results.json",
+      "sha256": null,
+      "role": "derived"
+    },
+    {
+      "path": "/tmp/opencode/raw_ax_tree_listing_1_initial.json",
+      "sha256": "a071b6ce0695bf9489616d0d4db3dc1975a051a521e77d42d105a8610669e5b1",
+      "role": "raw"
+    },
+    {
+      "path": "/tmp/opencode/raw_ax_tree_detail_1_initial.json",
+      "sha256": null,
+      "role": "raw"
+    },
+    {
+      "path": "/tmp/opencode/raw_ax_tree_cart_1_initial.json",
+      "sha256": null,
+      "role": "raw"
+    },
+    {
+      "path": "/tmp/opencode/raw_ax_tree_search_1_initial.json",
+      "sha256": null,
+      "role": "raw"
+    }
+  ],
+  "observations": [
+    {
+      "observation_id": "OBS-YIELD-CDP-CONSISTENT",
+      "type": "measurement",
+      "description": "Yield CDP (viewport_elements / total_cdp_elements) is consistent across all shopping page types: mean=0.0426, cv=0.1231. This matches the parent experiment's yield_cdp=0.0427 on tasks 21+22. The CDP denominator gives ~4% yield, indicating the fragment model captures only 4% of CDP accessibility tree nodes.",
+      "timestamp": "2026-09-11T01:00:00+00:00",
+      "severity": "info",
+      "details": {
+        "yield_cdp_mean": 0.0426,
+        "yield_cdp_cv": 0.1231,
+        "parent_yield_cdp": 0.0427,
+        "consistency": "high"
+      }
+    },
+    {
+      "observation_id": "OBS-YIELD-LOCATABLE-DEPENDS-ON-DEFINITION",
+      "type": "methodological_finding",
+      "description": "Yield locatable depends critically on how 'locatable' is defined. Using page.locator('*') with bounding boxes: yield_locatable=0.0792 (locatable=1354). Using interactive elements only (links, buttons, inputs): yield_locatable~0.32 (locatable~336). Parent experiment used CSS selectors yielding 258 locatable elements (yield_locatable~0.42). The denominator ambiguity is NOT resolved because 'locatable' has no canonical definition.",
+      "timestamp": "2026-09-11T01:00:00+00:00",
+      "severity": "critical",
+      "details": {
+        "yield_locatable_all_elements": 0.0792,
+        "yield_locatable_interactive_only": 0.32,
+        "yield_locatable_parent_258": 0.42,
+        "implication": "Denominator choice changes yield by 5x"
+      }
+    },
+    {
+      "observation_id": "OBS-METHOD1-NOT-SUPPORTED",
+      "type": "scientific_finding",
+      "description": "Under the 'all locatable elements' definition (yield_locatable=0.0792), Method1's 0.365 estimate is NOT supported (delta=28.58pp > 10pp threshold). However, under narrower definitions (interactive-only or parent's 258), Method1 could be supported. The denominator ambiguity means Method1's status is INCONCLUSIVE, not FALSIFIED.",
+      "timestamp": "2026-09-11T01:00:00+00:00",
+      "severity": "moderate",
+      "details": {
+        "method1_yield": 0.365,
+        "delta_all_locatable": 28.58,
+        "delta_interactive_only": 4.5,
+        "delta_parent_258": 5.7,
+        "conclusion": "Method1 status depends on denominator definition"
+      }
+    },
+    {
+      "observation_id": "OBS-SCROLL-EFFECT-MINIMAL",
+      "type": "measurement",
+      "description": "Scroll effect is minimal across all tasks. Mean delta between initial and scrolled yield_locatable is 0.0294 (2.94pp), with 100% of tasks within 20pp threshold. Initial viewport measurement is representative of overall page yield.",
+      "timestamp": "2026-09-11T01:00:00+00:00",
+      "severity": "info",
+      "details": {
+        "scroll_mean_delta": 0.0294,
+        "scroll_fraction_within_20pp": 1.0,
+        "implication": "Initial viewport measurement is sufficient"
+      }
+    },
+    {
+      "observation_id": "OBS-PAGE-TYPE-YIELD-STABLE",
+      "type": "measurement",
+      "description": "Yield is stable across shopping page types (product-listing, detail, cart, search). CV of yield_locatable = 0.1586 < 0.2 threshold. All page types show similar yield patterns, suggesting a single denominator applies across shopping page types.",
+      "timestamp": "2026-09-11T01:00:00+00:00",
+      "severity": "info",
+      "details": {
+        "yield_locatable_cv": 0.1586,
+        "page_types_tested": ["product-listing", "detail", "cart", "search"],
+        "implication": "Single denominator applicable across shopping page types"
+      }
+    },
+    {
+      "observation_id": "OBS-CDP-LOCATABLE-MISMATCH-PERSISTENT",
+      "type": "methodological_note",
+      "description": "Significant mismatch persists between CDP nodes (2064-2826) and locatable elements (1070-1564). Only 38-55% of CDP nodes have bounding boxes. The CDP tree includes many container/structural elements that are not directly interactive. This confirms the denominator ambiguity is structural, not a measurement artifact.",
+      "timestamp": "2026-09-11T01:00:00+00:00",
+      "severity": "moderate",
+      "details": {
+        "cdp_to_locatable_ratio": "0.38-0.55",
+        "implication": "CDP nodes overcount interactive elements"
+      }
+    }
+  ],
+  "validity_notes": [
+    "Denominator ambiguity is the core validity threat. 'Locatable elements' has no canonical definition in the SPIDER fragment model. Different counting methods (all visible elements, interactive elements only, parent's CSS selectors) give yield_locatable ranging from 0.08 to 0.42, a 5x difference.",
+    "Method1's 150-element estimate is derived from estimated element counts in analysis_output.json, but the derivation does not specify what constitutes an 'element'. The estimate could match any of the denominator definitions.",
+    "Viewport filtering uses geometry-faithful approach (bounding_box intersection with 1280x720 rect, threshold 0.5). This is consistent with parent experiment and is not a validity threat.",
+    "Docker container state may differ from parent experiment. Container was pulled fresh (sha256: 3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb) vs parent's (sha256: a5b6fb47ee9f378ceca18e32261a92a8964f0ccfb9f1d3741ce3a0e2d990839d). Different image versions may have different page structures.",
+    "Task selection was not randomized from WebArena-Verified dataset. Tasks were manually selected from the shopping container. This limits generalization to the full 192-shopping-task corpus.",
+    "GitLab and Reddit tasks were not measured due to infrastructure constraints (only shopping container available). Site-type variation cannot be assessed.",
+    "Scroll measurement uses scroll-to-bottom with 2s settle time. Lazy-loaded content may not be fully captured."
+  ],
+  "unresolved": [
+    "What is the canonical definition of 'locatable elements' in the SPIDER fragment model? This must be specified before denominator can be resolved.",
+    "Does Method1's 150-element estimate count all visible elements, interactive elements, or something else? The derivation in analysis_output.json does not specify.",
+    "How did the parent experiment arrive at 258 locatable elements? The measurement script (measure_yield_geo_v2.py) is not available for inspection.",
+    "Would GitLab and Reddit tasks show different yield patterns? These site types were not measured.",
+    "Does the Docker image version difference (parent vs current) affect page structure and yield measurements?",
+    "Is the 4% CDP yield or the 8-42% locatable yield the correct metric for evaluating the fragment model's viability?"
+  ]
+}
