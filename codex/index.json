@@ -1041,6 +1041,31 @@
         "handoff.json": "ca491e4b2ac3c6fb4568d3a631261d9e8c6599841d05b02ec1721bd85deef1b1"
       }
     },
+    "EXP-PHYSICS-34695057869": {
+      "lane": "physics",
+      "request_id": "b519de9b03520076d4269cdc",
+      "created_at": "2026-09-12T12:57:03.767941+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Do response-side signals (response content-type, response body digest, response timing, response status sequences) captured via Playwright route interception on locally-hosted SPAs with state-dependent server responses provide predictive PMI on within-URL transitions where client-side request signatures are identical across states?",
+      "audit_status": "REVISE",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/physics",
+      "hashes": {
+        "request.json": "1a8e5d55872d09e2e588c6f0a2e49982f9af7ef76ac8a95db7fe3089a64dea61",
+        "spec.json": "eb1008d66ff37c320f1c82ec8d080a2418f6cc73afe49bd645508c3bc1e5003f",
+        "prereg.md": "74a8b916f0beedc2cabaad0fe364bffd18ad79fc4068be0238e2450029b7196c",
+        "freeze.json": "269d28ccea40e7b6de29fcd5cec06f1c5ba4c9f06961d763ed908ab0c45cd49c",
+        "result.json": "14f8fcc7e37e4fe394400ad71ed8e7539a8308dccdb71986c7aa7ac2a2928f06",
+        "report.md": "5a4d802a881d530c45d6ed2844b24fcc41db5fdf17a0d9701e67c83e60ba212e",
+        "provenance.json": "f55b84aea7b2e908b417bee19d3a7ec8b4962a70120c53ad53bf4aa9a3df9deb",
+        "audit.json": "50992ba88210cb8b6135cb73ea513ae5a5f847863bcf51a51aa2b67ff4ab297f",
+        "verdict.json": "b1d6f3682979dec1940e5240fd9216c0e07e1cf9d774b03d0d8debff1dd8cff5",
+        "handoff.json": "e0f848d8781c29bbfb534b2da14aa65b6572a43eb6c74c8d741699598a1082f7"
+      }
+    },
     "EXP-PRODUCT-33528829801": {
       "lane": "product",
       "request_id": "2629e8e63e200f05556e37ca",

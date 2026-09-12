@@ -153,6 +153,14 @@
         "claim_id": "C-WEB-DYNAMICS",
         "status": "HYPOTHESIS",
         "reason": "Network-request endpoint+method+status+body_frag representation tested on 3 locally-hosted SPAs: 1/3 shows PMI 0.881 bits (dashboard, Bonferroni p=0.003) but gain is tautological action\u2192own-request (audit finding tautological_dashboard_gain_identifiability); 2/3 show 0.0 bits because API calls are identical across states by server design. Primary condition (\u22652/3 sites \u22650.1 bits) fails. Audit bounded claim ceiling to locally-hosted simulation only; does not generalize to production SPAs. This falsifies the specific network-request representation on this specific locally-hosted contrast. C-WEB-DYNAMICS as a broader hypothesis is not closed: response-side signals, more expressive representations, and genuine production SPAs remain untested."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-34695057869",
+        "lane": "physics",
+        "decision": "FALSIFIED-IN-SETTING",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "Response-side signals (SHA-256 body digest + content-type + status code) fail to provide predictive PMI on 0/3 locally-hosted SPAs (dashboard 0.034 bits, multistep 0.0, wizard 0.0, all Bonferroni p=1.0). Primary condition requires >=2/3 sites >=0.1 bits improvement over URL-only; fails on all 3. Dashboard response bodies are tautological with action (I=1.94 bits) yet PMI ~0. This experiment falsifies this specific response-side representation on these SPAs but does not close C-WEB-DYNAMICS globally. Claim ceiling bounded to SHA-256 body digest aggregation on 3 locally-hosted Express SPAs."
       }
     ],
     "C-PARAM-INHERIT": [
