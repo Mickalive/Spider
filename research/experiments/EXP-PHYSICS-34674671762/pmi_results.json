@@ -1,0 +1,174 @@
+{
+  "experiment_id": "EXP-PHYSICS-34674671762",
+  "lane": "physics",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "positive_control_pmi": 0.8598420398775485,
+    "positive_control_perm_p": 0.000999000999000999,
+    "positive_control_passes": true,
+    "null_control_pmi": 0.444577616352386,
+    "null_control_perm_p": 0.3176823176823177,
+    "null_control_passes": true,
+    "primary_condition": false,
+    "sites_passing_primary": 1,
+    "sites_total": 3,
+    "data_sufficient": true,
+    "n_permutations": 1000,
+    "smoothing_alpha": 1.0,
+    "bonferroni_alpha": 0.016666666666666666,
+    "bonferroni_comparisons": 3,
+    "per_site_results": {
+      "multistep_form": {
+        "improvement_bits": 0.0,
+        "perm_p_network_bonf": 1.0,
+        "passes": false
+      },
+      "dashboard": {
+        "improvement_bits": 0.8814256001814486,
+        "perm_p_network_bonf": 0.002997002997002997,
+        "passes": true
+      },
+      "wizard": {
+        "improvement_bits": 0.0,
+        "perm_p_network_bonf": 1.0,
+        "passes": false
+      }
+    },
+    "site_results": {
+      "multistep_form": {
+        "network_pmi": 0.0,
+        "url_pmi": 0.0,
+        "improvement_bits": 0.0,
+        "n_within_url": 120,
+        "n_test": 24,
+        "n_train": 96,
+        "unique_states_net": 4,
+        "unique_states_url": 1,
+        "unique_sa_pairs_net": 4,
+        "unique_sa_pairs_url": 1,
+        "perm_p_network": 1.0,
+        "perm_p_network_bonf": 1.0,
+        "perm_p_url": 1.0,
+        "effect_d_network": 0.0,
+        "effect_d_url": 0.0
+      },
+      "dashboard": {
+        "network_pmi": 0.8814256001814486,
+        "url_pmi": 0.0,
+        "improvement_bits": 0.8814256001814486,
+        "n_within_url": 160,
+        "n_test": 32,
+        "n_train": 128,
+        "unique_states_net": 5,
+        "unique_states_url": 1,
+        "unique_sa_pairs_net": 17,
+        "unique_sa_pairs_url": 4,
+        "perm_p_network": 0.000999000999000999,
+        "perm_p_network_bonf": 0.002997002997002997,
+        "perm_p_url": 1.0,
+        "effect_d_network": 8.820646231678989,
+        "effect_d_url": 0.0
+      },
+      "wizard": {
+        "network_pmi": 0.0,
+        "url_pmi": 0.0,
+        "improvement_bits": 0.0,
+        "n_within_url": 32,
+        "n_test": 32,
+        "n_train": 0,
+        "unique_states_net": 4,
+        "unique_states_url": 1,
+        "unique_sa_pairs_net": 4,
+        "unique_sa_pairs_url": 1,
+        "perm_p_network": 1.0,
+        "perm_p_network_bonf": 1.0,
+        "perm_p_url": 1.0,
+        "effect_d_network": 0.0,
+        "effect_d_url": 0.0
+      }
+    },
+    "alpha_sensitivity": {
+      "multistep_form": {
+        "alpha_0.0": 0.0,
+        "alpha_0.5": 0.0,
+        "alpha_1.0": 0.0,
+        "alpha_2.0": 0.0
+      },
+      "dashboard": {
+        "alpha_0.0": 1.7331517459081185,
+        "alpha_0.5": 1.1504301971025608,
+        "alpha_1.0": 0.8814256001814486,
+        "alpha_2.0": 0.6083588331617595
+      },
+      "wizard": {
+        "alpha_0.0": 0.0,
+        "alpha_0.5": 0.0,
+        "alpha_1.0": 0.0,
+        "alpha_2.0": 0.0
+      }
+    },
+    "synthetic_url_pmi": 0.0,
+    "synthetic_network_pmi": 0.8598420398775485
+  },
+  "controls": {
+    "positive_control_synthetic_spa": {
+      "description": "Synthetic SPA with deterministic network-request evolution (8 states, 4 actions)",
+      "expected": "Network-request PMI >= 0.5 bits, permutation p < 0.001",
+      "observed_pmi": 0.8598420398775485,
+      "observed_perm_p": 0.000999000999000999,
+      "result": "PASS"
+    },
+    "null_control_shuffled_labels": {
+      "description": "Synthetic SPA data with shuffled action labels",
+      "expected": "Permutation p > 0.01",
+      "observed_pmi": 0.444577616352386,
+      "observed_perm_p": 0.3176823176823177,
+      "result": "PASS"
+    }
+  },
+  "permutation_tests": {
+    "multistep_form_network": {
+      "p_value": 1.0,
+      "observed_mean_pmi": 0.0,
+      "null_mean": 0.0,
+      "null_std": 0.0,
+      "effect_size_d": 0.0
+    },
+    "multistep_form_url": {
+      "p_value": 1.0,
+      "observed_mean_pmi": 0.0,
+      "null_mean": 0.0,
+      "null_std": 0.0,
+      "effect_size_d": 0.0
+    },
+    "dashboard_network": {
+      "p_value": 0.000999000999000999,
+      "observed_mean_pmi": 0.8814256001814486,
+      "null_mean": 0.3446679636137421,
+      "null_std": 0.06085241630482396,
+      "effect_size_d": 8.820646231678989
+    },
+    "dashboard_url": {
+      "p_value": 1.0,
+      "observed_mean_pmi": 0.0,
+      "null_mean": 0.0,
+      "null_std": 0.0,
+      "effect_size_d": 0.0
+    },
+    "wizard_network": {
+      "p_value": 1.0,
+      "observed_mean_pmi": 0.0,
+      "null_mean": 0.0,
+      "null_std": 0.0,
+      "effect_size_d": 0.0
+    },
+    "wizard_url": {
+      "p_value": 1.0,
+      "observed_mean_pmi": 0.0,
+      "null_mean": 0.0,
+      "null_std": 0.0,
+      "effect_size_d": 0.0
+    }
+  }
+}

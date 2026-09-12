@@ -1,0 +1,9 @@
+{
+  "name": "exp-physics-34674671762",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Network-request PMI analysis for EXP-PHYSICS-34674671762",
+  "dependencies": {
+    "playwright": "^1.40.0"
+  }
+}
