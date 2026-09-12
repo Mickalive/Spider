@@ -1,17 +1,35 @@
 {
   "experiment_id": "EXP-INTEL-34718481334",
   "lane": "intel",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-CROSSSITE", "C-LLM-INHERIT"],
+  "question": "Does full-page DOM element enumeration (without viewport chrome filtering) produce a stable and meaningful yield metric for SPIDER fragment capture, and what fraction of page elements does the fragment model actually retain?",
+  "hypothesis": "Full-page interactive element fraction (locatable_elements / total_dom_elements, using frozen DEF-FALLBACK-INTERACTIVE definition applied to the entire page DOM, not viewport-filtered) is stable within page types (CV < 0.3) and varies across page types (between-type variance > within-type variance). This provides a content-aware yield metric that captures real page structure rather than fixed navigation chrome. The parent experiment's viewport-based yield was broken (constant 108 chrome elements in numerator); removing viewport filtering and using total DOM as denominator yields a meaningful metric.",
+  "falsifier": "ANY of: (1) Full-page total DOM element counts are constant across page types (stdev = 0 across all measured tasks) — indicating the measurement captures fixed structure, not page content. (2) Interactive fraction (locatable/total_dom) within same page type has CV > 0.3 — indicating the metric is unstable within types. (3) Interactive fraction does not discriminate between page types (between-type variance ≤ within-type variance) — indicating the metric is not content-aware. (4) Playwright accessibility snapshot returns < 10 nodes on any task while DOM count > 100 — indicating accessibility tree is degenerate.",
+  "baselines": [
+    "Parent viewport measurement: 108 constant elements (BROKEN — captures only Magento 2 navigation chrome, stdev=0.0)",
+    "Parent CDP yield: mean 0.082, CV 0.17 (measures chrome ratio viewport/total_dom, not interactive content)",
+    "Parent locatable_elements: listing=82, detail=32, cart=21 (varies by type, but used in broken yield formula)",
+    "Parent total_dom_elements: listing≈1675, detail≈1353, cart=1136 (varies by type, never used as denominator)",
+    "Method1 estimate 0.365: INCONCLUSIVE origin, element definition unknown",
+    "Heuristic 0.65: FALSIFIED robustly (>23pp under any denominator)"
+  ],
+  "positive_control": "Total DOM element count > 100 on all tasks AND locatable_elements > 0 on all tasks AND Playwright accessibility snapshot returns > 0 nodes on at least 1 task. This verifies the measurement pipeline can enumerate page content.",
+  "null_control": "Interactive fraction on two tasks of the same page type (e.g., two product_listing pages) has CV < 0.3. This verifies the metric is stable when page type is held constant.",
+  "measurement_validity": [
+    "Docker Hub am1n3e/webarena-verified-shopping:latest pullable and accessible at localhost:8080",
+    "Playwright + Chromium functional (verified in parent experiments)",
+    "Fresh browser context per task (no shared cookies/session between tasks)",
+    "Task selection randomized from WebArena-Verified dataset using frozen seed (seed=99), stratified by page type: 3 product-listing, 3 detail, 2 cart, 2 checkout",
+    "Docker image digest recorded before measurement to bound drift",
+    "DOM enumeration uses JavaScript executed in page context (document.querySelectorAll), not CDP AX tree (known to return only 1 node in headless Chromium)",
+    "Frozen definition DEF-FALLBACK-INTERACTIVE from EXP-INTEL-34607693437 reused exactly (frozen_definition.json sha256: 9c6bb9a03b6cbcdf206ce9192f5fcf60c79d6df8f65850027aeee50b61f503d5)",
+    "Playwright accessibility snapshot (page.accessibility.snapshot()) tested as secondary approach; if it returns > 10 nodes, use as primary; if < 10 nodes, fall back to DOM",
+    "Per-task raw measurements saved with sha256 for auditability",
+    "Both metrics computed per task: interactive_fraction = locatable / total_dom AND cdp_yield = viewport / total_dom (for cross-denominator comparison)"
+  ],
+  "decision_rule": "If ALL of: (1) total_dom_elements stdev > 0 across all measured tasks (page content varies), AND (2) interactive fraction within-type CV < 0.3 for at least 2 page types with n>=2, AND (3) interactive fraction between-type variance > within-type variance (metric discriminates page types), AND (4) at least 8 tasks measured across >= 3 page types, AND (5) no pipeline errors — THEN verdict = SURVIVES_CURRENT_TEST. If total_dom stdev = 0 OR within-type CV > 0.3 on all types OR between-type variance ≤ within-type variance — THEN verdict = FALSIFIED-IN-SETTING. If < 8 tasks measured or infrastructure failure — THEN verdict = MEASUREMENT_INVALID.",
+  "product_consequence_positive": "Full-page interactive fraction provides a viable, content-aware yield metric. Product lane can use locatable/total_dom as the denominator for SPIDER fragment capture claims. The 812-task corpus becomes usable for C-CROSSSITE/C-LLM-INHERIT evaluation with this metric. Runtime lane can implement the measurement substrate using DOM queries (not viewport filtering).",
+  "product_consequence_negative": "If full-page enumeration doesn't stabilize yield (CV > 0.3 within types), the interactive fraction is not a reliable metric. Product lane must either (a) accept yield as inherently page-type-dependent and report per-type yields, (b) use CDP yield (8%) as a conservative floor, or (c) abandon yield as a metric for the 812-task corpus. The denominator question remains open.",
+  "estimated_cost": "Low: DOM queries via JavaScript in Playwright (no CDP AX tree, no viewport intersection). Docker container for shopping site. 10 tasks × ~2 minutes each = ~20 minutes compute. No model calls.",
+  "expected_information_gain": "High: This directly answers whether full-page enumeration is viable for yield measurement. The parent data (total_dom varies, locatable varies, viewport constant) already suggests the answer is yes, but the metric (interactive_fraction) was never computed because the parent was focused on the broken viewport-based yield. A fresh replication with the correct metric closes the blocking question for the 812-task corpus. Even a negative result (CV > 0.3 within types) is high-information because it closes this approach definitively."
 }
