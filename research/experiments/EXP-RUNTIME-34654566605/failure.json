@@ -1,9 +1,0 @@
-{
-  "stage": "audit",
-  "category": "AUDIT_FAILURE",
-  "message": "stage exited with code 66",
-  "retryable": false,
-  "recorded_at": "2026-09-11T22:57:41.954331+00:00",
-  "github_run_id": "34654566605",
-  "github_run_attempt": "1"
-}

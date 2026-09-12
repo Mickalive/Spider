@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-34654566605",
+  "lane": "runtime",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Narrow product-consequence language from 'NOT production-ready for CDN-proxied environments' to 'degrades under synthetic per-request random gzip/brotli/identity compression when hashing compressed wire bytes on Keycloak 25.0 start-dev /userinfo and /introspect with 0/189/16/729-byte bodies, N=10 per state per level' — current ceiling overgeneralizes synthetic random model to all CDN compression; real CDNs negotiate Content-Encoding deterministically via client Accept-Encoding and may not vary per request.",
+    "Acknowledge that discrimination does not collapse to zero: random-algo floor is 0.0944 on /userinfo and 0.1272 on /introspect, not 0.0; with 1/3 identity samples within random-algo, intra-state variation is bounded; claim should state partial degradation not complete loss and that status-only baseline remains invariant 0.5 on /userinfo.",
+    "Disclose Spearman power limitation: n=4 compression levels, rho -0.9486 p=0.0513 >0.05 non-significant at alpha 0.05, threshold <=-0.3 lenient; monotonic decrease is directionally strong but not robust to alternative compression sampling — add confidence interval or acknowledge low power as in parent audit V4.",
+    "Note empty-body gzip compression level variation is limited: Python gzip empty-body (0-byte) and 16-byte /introspect error bodies have only 3 distinct hashes across levels 1-9 (levels 2-8 identical), so random-gzip-level degradation is weaker for empty bodies (invalid_token unique 1/10 at comp2) than for 189/729-byte valid bodies (unique 3/10 and 5/10); report per-state hash variation and size vs claim.",
+    "Add decompressed-body or filtered-full-vector baseline to justify alternative architecture: current baselines include only B-RANDOM and B-STATUS-ONLY; to claim SPIDER must use compression-normalization or header-based fingerprinting, test hashing after decompression (Content-Encoding normalized) and filtered full-vector, otherwise comparative superiority is untested.",
+    "No code fix required for measurement — mtime=0 and resp.raw.read(decode_content=False) are correct and disclosed; retain disclosure that deterministic gzip (mtime=0) is used to isolate algorithm/level effect, matching production CDN deterministic output for same logical body."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_RECOMPUTATION_MATCH",
+      "severity": "pass",
+      "finding": "All material metrics recomputed from raw_observations.json match producer result.json exactly within floating tolerance. /userinfo body-only 0.5, 0.5, 0.3272222222222223, 0.09444444444444447 across comp 0-3; /introspect 0.5,0.5,0.18277777777777782,0.1272222222222222; status-only 0.5 /userinfo constant, 0.0 /introspect constant; B-RANDOM 0.0 at all cells; M_COMPRESSION_DEGRADATION rho -0.9486832980505139 p 0.05131670194948613; M_POSITIVE_CONTROL 0.5; M_NULL_CONTROL 0.0; M_FIXED_GZIP_CONTROL 0.5 vs 0.5; M_RANDOM_ALGO_VS_FIXED 0.0944 vs 0.5; M_HASH_VARIATION 4/40,4/40,9/40,15/40 total unique hashes on /userinfo. Reimplemented fingerprint SHA256(repr((status, body_sha256, ''))) and discrimination = intra_match_rate - inter_match_rate (6 states pairs *100 inter, 4*45=180 intra) yields identical scores.",
+      "evidence": "result.json metrics /userinfo_comp0-3 and /introspect_comp0-3, raw_observations.json 320 observations (4*10*4*2), run_experiment.py fingerprint_body_only and compute_discrimination_score, analyze.py identical functions, manual recomputation via hashlib"
+    },
+    {
+      "id": "V2_SPEARMAN_POWER_AND_THRESHOLD_LENIENT",
+      "severity": "low",
+      "finding": "Primary derived metric M_COMPRESSION_DEGRADATION Spearman rho <=-0.3 uses n=4 points [0,1,2,3] vs [0.5,0.5,0.327,0.094] with tie at 0.5. rho -0.948 exceeds threshold easily but p=0.0513 >0.05 non-significant by conventional alpha, reflecting very low power at n=4. Threshold -0.3 is lenient: any monotonic drop passes. 95% CI for n=4 is extremely wide. Result is directionally strong and meets frozen decision rule but not statistically robust; same weakness flagged in parent EXP-RUNTIME-34509593940 audit V4 (rho -0.948 p 0.051). Spec correctly uses rho not p for decision, but claim should acknowledge limited power.",
+      "evidence": "result.json M_COMPRESSION_DEGRADATION p_value 0.0513167 rho -0.94868, spec.json decision_rule Spearman rho <= -0.3, prereg.md 7.1 threshold, recomputed manual spearman with tie ranks 1.5,1.5,3,4"
+    },
+    {
+      "id": "V3_EMPTY_BODY_COMPRESSION_VARIATION_LIMITED",
+      "severity": "info",
+      "finding": "Random gzip level (comp2) variation is limited for small/empty bodies: Python gzip with mtime=0 produces only 3 distinct compressed outputs across levels 1-9 (level1, levels2-8 identical, level9) for 0-byte and 16-byte inputs, verified independently: empty body gzip hashes 458c5a20 (lvl1), ac73670a (lvl2-8), 9ceffb73 (lvl9). Consequently body_hash variation at comp2 on /userinfo: invalid_token 1/10 unique, expired_token 2/10, no_auth 3/10 (not 10/10) and body_sizes all 20 bytes. For larger valid_token body (189 bytes) variation is higher (3/10 unique, sizes 154-156). This explains why discrimination at comp2 drops only to 0.327 not near zero, and why size invariant despite hash variation. Producer reports per-state unique counts and sizes, but does not discuss this limitation in validity_notes.",
+      "evidence": "result.json /userinfo_comp2 body_hash_variation and body_sizes min 20 max 20 mean 20.0 for empty states vs valid_token 154-156, raw_observations.json comp2 valid_token body_size variation, independent gzip test with mtime=0 showing 3 unique hashes across 9 levels for empty/16-byte bodies"
+    },
+    {
+      "id": "V4_PROXY_FIDELITY_MTIME_AND_WIRE_BYTES_CORRECT",
+      "severity": "pass",
+      "finding": "Proxy implementation is correct and disclosed: compress_gzip uses mtime=0 to eliminate gzip header timestamp as non-determinism source (producer validity_notes DEV FIX), isolating algorithm/level effect; real CDNs also produce deterministic output for same logical body when stripping metadata, so fix is production-faithful. Client captures wire bytes via resp.raw.read(decode_content=False) not resp.content, verified in run_experiment.py make_request and reported in validity_notes. Content-Encoding correctly set to gzip/br/none per level, verified via compression_verification: comp0 none 10/10, comp1 gzip 10/10, comp2 gzip 10/10, comp3 mixed gzip/br/none across states 10/10 each. Proxy overrides Accept-Encoding to identity and recompresses per condition per spec. No body content modification beyond compression.",
+      "evidence": "run_experiment.py compress_gzip mtime=0 lines 272-273, make_request stream+decode_content=False lines 483-484, result.json compression_verification per state, provenance.json proxy compression_levels [0,1,2,3] brotli_available true"
+    },
+    {
+      "id": "V5_SCOPE_BOUND_SYNTHETIC_RANDOM_VS_REAL_CDN",
+      "severity": "low",
+      "finding": "Experiment tests synthetic per-request independent random compression (random level 1-9 per request, random choice gzip/brotli/identity per request via random.Random(44)). Real CDN compression is negotiated via client Accept-Encoding header deterministically (client advertises br,gzip) and CDN selects one algorithm consistently, or varies based on content-type/load not per-request random. Non-determinism modeled here is worst-case and not observed CDN behavior. Producer's product consequence 'Body-only is NOT production-ready for CDN-proxied environments' overgeneralizes from synthetic model to all CDN environments without measuring real CDN behavior or Accept-Encoding-dependent determinism. Ceiling should be bounded to synthetic random model. Status-only invariance (0.5) shows a compression-immune alternative exists without normalization layer.",
+      "evidence": "spec.json compression levels random-gzip-level and random-algo per request via rng.choice/randint, request.json inherited_next_question CDN compression, report.md 6 interpretation product consequence (a) decompress before hashing (b) header-based (c) restrict to deterministic compression, result.json /userinfo_comp3 status_only 0.5 unchanged"
+    },
+    {
+      "id": "V6_DISCRIMINATION_FLOOR_NON_ZERO",
+      "severity": "info",
+      "finding": "Degradation is partial not complete collapse. Body-only at random-algo (most destructive) is 0.0944 on /userinfo and 0.1272 on /introspect, not 0.0. This floor arises because random-algo includes identity (uncompressed) ~1/3 of requests, and even compressed states retain some intra-state matches when same random level/algo recurs. M_HASH_VARIATION total_unique 15/40 at comp3 on /userinfo shows 15 distinct hashes among 40 requests (not 40). Interpretation as 'discrimination collapses' should be qualified as monotonic degradation to near-zero but retains small signal.",
+      "evidence": "result.json /userinfo_comp3 body_only 0.09444, /introspect_comp3 0.1272, M_HASH_VARIATION 3 values 15/40, body_hash_variation per state 3,3,3,6 unique at comp3"
+    },
+    {
+      "id": "V7_CONTROLS_PASS_AS_SPECIFIED",
+      "severity": "pass",
+      "finding": "All six frozen controls pass per spec decision_rule: C_POSITIVE_CONTROL 0.5 >=0.35 PASS (3 body groups valid JSON vs empty), C_NULL_CONTROL B-RANDOM 0.0 PASS (trivial baseline), C_FIXED_GZIP_PRESERVES 0.5 >=0.5-0.15 PASS confirms deterministic fixed-gzip preserves hash (validates DEV FIX), C_COMPRESSION_DEGRADATION rho -0.948 <=-0.3 PASS, C_RANDOM_ALGO_WORSE 0.094 <0.5 PASS, C_NO_PIPELINE_ERRORS 0 PASS. Positive control replicates parent /userinfo 0.5; fixed-gzip control correctly distinguishes deterministic vs non-deterministic not proxy content corruption.",
+      "evidence": "result.json controls all pass true, spec.json decision_rule requiring all 6, observations body=0.5 status=0.5 B-RANDOM=0.0 at comp0 and comp1"
+    },
+    {
+      "id": "V8_SAMPLING_AND_REPRESENTATION_INTEGRITY",
+      "severity": "pass",
+      "finding": "Sampling integrity verified: 320 total requests = 4 auth states x10 reps x4 levels x2 endpoints, 40 per level per endpoint, 10 per state per cell, no missing cells. Timestamps spread across 60s with 50-150ms jitter per spec. Population representation limited to single IdP (Keycloak 25.0 start-dev localhost 18080 via Docker), two endpoints (/userinfo GET, /introspect POST), small body size range (0 to 729 bytes), seed 44 deterministic RNG. Expired_token locally-signed HS256 leakage carried from parent V6 but orthogonal to compression question (body for expired vs invalid identical). No evidence of post-hoc threshold or seed change: freeze hashes match spec/prereg/request.",
+      "evidence": "raw_observations.json total 320, freeze.json hashes prereg 2a1c9108 spec d5026362 request 80f820e6, provenance.json base_sha 824c4616, validity_notes expired_token HS256 same as parent, executionCheckpoint not needed but raw counts verified"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-UNCOMPRESSED-BODY-ONLY",
+      "finding": "B-UNCOMPRESSED-BODY-ONLY (comp0 identity) 0.5 on /userinfo PASS threshold 0.35, recomputed 0.5. Establishes baseline 3 body groups (valid_token JSON vs empty for other 3 states). Correctly replicates parent body-only baseline.",
+      "evidence": "result.json /userinfo_comp0 body_only 0.5, spec baselines B-UNCOMPRESSED-BODY-ONLY expected >=0.35"
+    },
+    {
+      "id": "B-FIXED-GZIP-BODY-ONLY",
+      "finding": "B-FIXED-GZIP-BODY-ONLY (comp1 fixed gzip 9) 0.5 vs uncompressed 0.5 PASS threshold uncompressed -0.15, recomputed 0.5. Demonstrates deterministic gzip with mtime=0 preserves body hash stability (within-state unique 1/10 all states). Strong positive control as specified.",
+      "evidence": "result.json /userinfo_comp1 body_only 0.5 vs /userinfo_comp0 0.5, M_FIXED_GZIP_CONTROL fixed_gzip_value 0.5 uncompressed 0.5, compression_verification gzip 10/10"
+    },
+    {
+      "id": "B-RANDOM-LEVEL-BODY-ONLY",
+      "finding": "B-RANDOM-LEVEL-BODY-ONLY (comp2 random gzip 1-9) 0.3272 degraded from fixed-gzip 0.5 as expected but limited degradation due to empty-body gzip level collisions (only 3 distinct outputs). Body hash variation per state 1-3/10, valid_token larger body shows more variation. Meets expectation degraded < fixed but ceiling limited to small bodies.",
+      "evidence": "result.json /userinfo_comp2 0.3272 vs 0.5, body_hash_variation invalid 1/10 expired 2/10 no_auth 3/10 valid 3/10, body_sizes invalid 20/20 vs valid 154-156"
+    },
+    {
+      "id": "B-RANDOM-ALGO-BODY-ONLY",
+      "finding": "B-RANDOM-ALGO-BODY-ONLY (comp3 random gzip/brotli/identity) 0.0944 most degraded < fixed-gzip 0.5 PASS, also < random-level 0.327, confirming multi-algorithm more destructive than single-algorithm as hypothesized. Demonstrated via mixed Content-Encoding gzip/br/none across states and hash variation 3/10 per empty state 6/10 valid. Floor not zero.",
+      "evidence": "result.json /userinfo_comp3 0.0944 vs /userinfo_comp1 0.5, compression_verification mixed encodings, body_sizes min 0 max 20 valid 134-189"
+    },
+    {
+      "id": "B-RANDOM",
+      "finding": "B-RANDOM (null control) 0.0 at all compression levels PASS expected ~0.0, recomputed 0.0. Trivial baseline (random 256-bit hashes with negligible collision) confirms no spurious structure from compression artifacts, but weak as competitive baseline — expected by construction.",
+      "evidence": "result.json metrics baselines B-RANDOM 0.0 at comp0-3 both endpoints, baseline_random function random.getrandbits(256)"
+    },
+    {
+      "id": "B-STATUS-ONLY",
+      "finding": "B-STATUS-ONLY 0.5 on /userinfo invariant across all 4 compression levels, recomputed 0.5; 0.0 on /introspect invariant. Strongest demonstrated compression-immune baseline — status code unaffected by body compression. Producer includes it but product consequence does not emphasize that status-only achieves same discrimination as body-only in uncompressed setting and survives compression fully, offering simplest fallback without normalization. Missing stronger baselines: decompressed-body hash (normalize before hashing) and filtered full-vector (status+WWW-Authenticate+body) not tested, limiting product decision support.",
+      "evidence": "result.json /userinfo_comp0-3 status_only 0.5 invariant, /introspect 0.0 invariant, spec baselines B-STATUS-ONLY expected 0.5 invariant, absence of decompressed baseline in spec"
+    }
+  ],
+  "recomputed_metrics": {
+    "/userinfo_comp0_body_only_discrimination": 0.5,
+    "/userinfo_comp1_body_only_discrimination": 0.5,
+    "/userinfo_comp2_body_only_discrimination": 0.3272222222222223,
+    "/userinfo_comp3_body_only_discrimination": 0.09444444444444447,
+    "/userinfo_comp0_status_only_discrimination": 0.5,
+    "/userinfo_comp1_status_only_discrimination": 0.5,
+    "/userinfo_comp2_status_only_discrimination": 0.5,
+    "/userinfo_comp3_status_only_discrimination": 0.5,
+    "/userinfo_comp0_B-RANDOM": 0.0,
+    "/userinfo_comp1_B-RANDOM": 0.0,
+    "/userinfo_comp2_B-RANDOM": 0.0,
+    "/userinfo_comp3_B-RANDOM": 0.0,
+    "/introspect_comp0_body_only_discrimination": 0.5,
+    "/introspect_comp1_body_only_discrimination": 0.5,
+    "/introspect_comp2_body_only_discrimination": 0.18277777777777782,
+    "/introspect_comp3_body_only_discrimination": 0.1272222222222222,
+    "/introspect_status_only_discrimination_all_levels": 0.0,
+    "M_COMPRESSION_DEGRADATION_rho": -0.9486832980505139,
+    "M_COMPRESSION_DEGRADATION_p_value": 0.05131670194948613,
+    "M_POSITIVE_CONTROL": 0.5,
+    "M_NULL_CONTROL": 0.0,
+    "M_FIXED_GZIP_CONTROL_fixed_gzip": 0.5,
+    "M_FIXED_GZIP_CONTROL_uncompressed": 0.5,
+    "M_RANDOM_ALGO_VS_FIXED_random_algo": 0.09444444444444447,
+    "M_RANDOM_ALGO_VS_FIXED_fixed_gzip": 0.5,
+    "M_HASH_VARIATION_comp0_total_unique": 4,
+    "M_HASH_VARIATION_comp1_total_unique": 4,
+    "M_HASH_VARIATION_comp2_total_unique": 9,
+    "M_HASH_VARIATION_comp3_total_unique": 15,
+    "total_requests": 320,
+    "per_level_per_endpoint_requests": 40,
+    "per_state_reps": 10
+  },
+  "claim_ceiling": "Within the tested synthetic random-compression model (Keycloak 25.0 start-dev Docker 18080 via Python HTTPServer proxy 18081 on 127.0.0.1, seed 44, 4 auth states x10 reps x4 levels x2 endpoints =320 requests, fingerprints SHA256(repr((status, compressed_body_sha256, ''))) on wire bytes): body-only discrimination on /userinfo degrades monotonically 0.5 (identity) =0.5 (fixed gzip 9, mtime=0 deterministic) ->0.327 (random gzip level 1-9) ->0.094 (random gzip/brotli/identity) with Spearman rho -0.948 n=4 p=0.051, and on /introspect 0.5->0.5->0.183->0.127; fixed deterministic gzip preserves discrimination; B-RANDOM 0.0 at all levels; status-only remains invariant 0.5 /userinfo 0.0 /introspect; hash variation grows 4/40->4/40->9/40->15/40 on /userinfo. Ceiling does NOT extend to all CDN-proxied production environments (which negotiate encoding deterministically via Accept-Encoding), to non-Keycloak IdPs, to larger/varying body content-types, to real CDN implementations, or to claim of complete collapse to zero; floor at random-algo is ~0.09-0.13 not 0.0, and empty-body gzip level variation is limited to 3 distinct hashes across 9 levels. Valid endpoint-specific degradation under per-request random compression of small bodies when hashing compressed bytes.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-34654566605/spec.json — frozen question/hypothesis/falsifier/baselines/controls/decision_rule requiring rho<=-0.3 and fixed-gzip >= uncompressed-0.15",
+    "research/experiments/EXP-RUNTIME-34654566605/prereg.md — hypotheses H1-H5, compression levels 0 identity 1 fixed-gzip 2 random-level 3 random-algo, fingerprint on compressed bytes, validity threats 10.1-10.7",
+    "research/experiments/EXP-RUNTIME-34654566605/freeze.json — hashes prereg 2a1c91085ae798c535f6a44521038c01860de8f01184a0c69e44c0d227ea003b spec d5026362f17d3c6e13a0f750025b5896b3164fd9feae75e0f1df5f4a3710e68d request 80f820e60421b5ff4dee4e7d9c80761021b0193b8e218207b604f7ba58c7ab91",
+    "research/experiments/EXP-RUNTIME-34654566605/result.json — metrics per comp per endpoint (body_only 0.5/0.5/0.327/0.094), derived M_COMPRESSION_DEGRADATION rho -0.948 p 0.0513, controls all PASS, body_hash_variation and body_sizes per state",
+    "research/experiments/EXP-RUNTIME-34654566605/raw_observations.json — 320 HTTP observations sha b8fd3d870508cbc803ed44c1676b4a88233e6b84e0b7c9d664aa93972810e618, per-level /userinfo and /introspect 40 each, 10 per auth state, content_encoding and body_size and body_hash per request",
+    "research/experiments/EXP-RUNTIME-34654566605/run_experiment.py — compress_gzip mtime=0, apply_compression per level with rng.randint/choice seed 44, CompressionProxyHandler Accept-Encoding identity, make_request resp.raw.read(decode_content=False), fingerprint_body_only/compute_discrimination_score",
+    "research/experiments/EXP-RUNTIME-34654566605/analyze.py — independent recomputation of discrimination and baselines from raw_observations.json, spearmanr handling constant case",
+    "research/experiments/EXP-RUNTIME-34654566605/report.md — product consequence bounding body-only to deterministic-compression environments",
+    "research/experiments/EXP-RUNTIME-34654566605/provenance.json — Keycloak 25.0 image, proxy 18081, brotli_available true, python 3.12.14",
+    "research/experiments/EXP-RUNTIME-34509593940/handoff.json — parent established/rejected/unknown/do_not_assume including body-only tautology and CDN compression unresolved threat"
+  ],
+  "unresolved": [
+    "Does discrimination survive realistic CDN negotiation where Content-Encoding is selected deterministically from client's advertised Accept-Encoding (not per-request random), and would a client with stable Accept-Encoding see deterministic compressed hashes?",
+    "Does body-only degradation generalize to larger/more diverse body content-types and sizes beyond Keycloak /userinfo 0/189 bytes and /introspect 16/729 bytes, where gzip level effect is larger?",
+    "What discrimination floor remains when hashing decompressed bodies (normalization layer that decompresses via Content-Encoding before hashing) — would this fully restore 0.5 without product cost?",
+    "Would a filtered full-vector baseline (status+WWW-Authenticate+Cache-Control+body_hash excluding infrastructure headers) retain higher discrimination than body-only and survive compression, eliminating need for body-only simplicity?",
+    "Does result generalize to non-Keycloak OAuth/OIDC providers (Auth0, Okta) or production Keycloak with real CDN, load-balancer, or rate-limiting?",
+    "What is minimal compression entropy required to collapse body-only below usable threshold — is single-level random or low-entropy variation insufficient as seen at comp2 0.327?"
+  ]
+}
