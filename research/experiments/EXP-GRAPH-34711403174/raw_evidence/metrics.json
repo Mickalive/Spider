@@ -1,0 +1,114 @@
+{
+  "true_positive_rate": 1.0,
+  "false_positive_rate": 0.0,
+  "tp_rate_95ci": [
+    0.7961,
+    1
+  ],
+  "fp_rate_95ci": [
+    0,
+    0.2775
+  ],
+  "per_family_tp_rate": {
+    "users": 1.0,
+    "posts": 1.0,
+    "comments": 1.0
+  },
+  "per_pattern_tp_rate": {
+    "add_field": 1.0,
+    "change_type": 1.0,
+    "remove_field": 1.0
+  },
+  "confusion_matrix": {
+    "tp": 15,
+    "fn": 0,
+    "fp": 0,
+    "tn": 10
+  },
+  "sensitivity_analysis": {
+    "0.7": {
+      "threshold": 0.7,
+      "tp_rate": 0.3333,
+      "fp_rate": 0.0
+    },
+    "0.8": {
+      "threshold": 0.8,
+      "tp_rate": 1.0,
+      "fp_rate": 0.0
+    },
+    "0.85": {
+      "threshold": 0.85,
+      "tp_rate": 1.0,
+      "fp_rate": 0.0
+    },
+    "0.9": {
+      "threshold": 0.9,
+      "tp_rate": 1.0,
+      "fp_rate": 0.0
+    },
+    "0.95": {
+      "threshold": 0.95,
+      "tp_rate": 1.0,
+      "fp_rate": 0.0
+    }
+  },
+  "similarity_distributions": {
+    "fresh": {
+      "values": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "mean": 1.0,
+      "min": 1.0,
+      "max": 1.0
+    },
+    "stale": {
+      "values": [
+        0.75,
+        0.75,
+        0.75,
+        0.75,
+        0.75,
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.75,
+        0.75,
+        0.75,
+        0.75,
+        0.75
+      ],
+      "mean": 0.7,
+      "min": 0.6,
+      "max": 0.75
+    }
+  },
+  "total_requests": 40,
+  "failed_requests": 0,
+  "threshold_used": 0.85
+}

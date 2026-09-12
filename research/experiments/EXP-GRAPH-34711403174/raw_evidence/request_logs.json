@@ -1,0 +1,462 @@
+[
+  {
+    "family": "users",
+    "request_number": 1,
+    "url": "/users/1",
+    "response": {
+      "id": 1,
+      "name": "User 1",
+      "email": "user1@example.com"
+    },
+    "ground_truth": "fresh"
+  },
+  {
+    "family": "users",
+    "request_number": 2,
+    "url": "/users/2",
+    "response": {
+      "id": 2,
+      "name": "User 2",
+      "email": "user2@example.com"
+    },
+    "ground_truth": "fresh"
+  },
+  {
+    "family": "users",
+    "request_number": 3,
+    "url": "/users/3",
+    "response": {
+      "id": 3,
+      "name": "User 3",
+      "email": "user3@example.com"
+    },
+    "ground_truth": "fresh"
+  },
+  {
+    "family": "users",
+    "request_number": 4,
+    "url": "/users/4",
+    "response": {
+      "id": 4,
+      "name": "User 4",
+      "email": "user4@example.com"
+    },
+    "ground_truth": "fresh"
+  },
+  {
+    "family": "users",
+    "request_number": 5,
+    "url": "/users/5",
+    "response": {
+      "id": 5,
+      "name": "User 5",
+      "email": "user5@example.com"
+    },
+    "ground_truth": "fresh"
+  },
+  {
+    "family": "users",
+    "request_number": 6,
+    "url": "/users/6",
+    "response": {
+      "id": 6,
+      "name": "User 6",
+      "email": "user6@example.com",
+      "phone": "555-0006"
+    },
+    "ground_truth": "stale"
+  },
+  {
+    "family": "users",
+    "request_number": 7,
+    "url": "/users/7",
+    "response": {
+      "id": 7,
+      "name": "User 7",
+      "email": "user7@example.com",
+      "phone": "555-0007"
+    },
+    "ground_truth": "stale"
+  },
+  {
+    "family": "users",
+    "request_number": 8,
+    "url": "/users/8",
+    "response": {
+      "id": 8,
+      "name": "User 8",
+      "email": "user8@example.com",
+      "phone": "555-0008"
+    },
+    "ground_truth": "stale"
+  },
+  {
+    "family": "users",
+    "request_number": 9,
+    "url": "/users/9",
+    "response": {
+      "id": 9,
+      "name": "User 9",
+      "email": "user9@example.com",
+      "phone": "555-0009"
+    },
+    "ground_truth": "stale"
+  },
+  {
+    "family": "users",
+    "request_number": 10,
+    "url": "/users/10",
+    "response": {
+      "id": 10,
+      "name": "User 10",
+      "email": "user10@example.com",
+      "phone": "555-0010"
+    },
+    "ground_truth": "stale"
+  },
+  {
+    "family": "posts",
+    "request_number": 1,
+    "url": "/posts/1",
+    "response": {
+      "id": 1,
+      "title": "Post 1",
+      "body": "Body of post 1",
+      "userId": 2
+    },
+    "ground_truth": "fresh"
+  },
+  {
+    "family": "posts",
+    "request_number": 2,
+    "url": "/posts/2",
+    "response": {
+      "id": 2,
+      "title": "Post 2",
+      "body": "Body of post 2",
+      "userId": 3
+    },
+    "ground_truth": "fresh"
+  },
+  {
+    "family": "posts",
+    "request_number": 3,
+    "url": "/posts/3",
+    "response": {
+      "id": 3,
+      "title": "Post 3",
+      "body": "Body of post 3",
+      "userId": 4
+    },
+    "ground_truth": "fresh"
+  },
+  {
+    "family": "posts",
+    "request_number": 4,
+    "url": "/posts/4",
+    "response": {
+      "id": 4,
+      "title": "Post 4",
+      "body": "Body of post 4",
+      "userId": 5
+    },
+    "ground_truth": "fresh"
+  },
+  {
+    "family": "posts",
+    "request_number": 5,
+    "url": "/posts/5",
+    "response": {
+      "id": 5,
+      "title": "Post 5",
+      "body": "Body of post 5",
+      "userId": 6
+    },
+    "ground_truth": "fresh"
+  },
+  {
+    "family": "posts",
+    "request_number": 6,
+    "url": "/posts/6",
+    "response": {
+      "id": "6",
+      "title": "Post 6",
+      "body": "Body of post 6",
+      "userId": 7
+    },
+    "ground_truth": "stale"
+  },
+  {
+    "family": "posts",
+    "request_number": 7,
+    "url": "/posts/7",
+    "response": {
+      "id": "7",
+      "title": "Post 7",
+      "body": "Body of post 7",
+      "userId": 8
+    },
+    "ground_truth": "stale"
+  },
+  {
+    "family": "posts",
+    "request_number": 8,
+    "url": "/posts/8",
+    "response": {
+      "id": "8",
+      "title": "Post 8",
+      "body": "Body of post 8",
+      "userId": 9
+    },
+    "ground_truth": "stale"
+  },
+  {
+    "family": "posts",
+    "request_number": 9,
+    "url": "/posts/9",
+    "response": {
+      "id": "9",
+      "title": "Post 9",
+      "body": "Body of post 9",
+      "userId": 10
+    },
+    "ground_truth": "stale"
+  },
+  {
+    "family": "posts",
+    "request_number": 10,
+    "url": "/posts/10",
+    "response": {
+      "id": "10",
+      "title": "Post 10",
+      "body": "Body of post 10",
+      "userId": 1
+    },
+    "ground_truth": "stale"
+  },
+  {
+    "family": "comments",
+    "request_number": 1,
+    "url": "/comments/1",
+    "response": {
+      "id": 1,
+      "postId": 2,
+      "author": "Author 1",
+      "text": "Comment 1"
+    },
+    "ground_truth": "fresh"
+  },
+  {
+    "family": "comments",
+    "request_number": 2,
+    "url": "/comments/2",
+    "response": {
+      "id": 2,
+      "postId": 3,
+      "author": "Author 2",
+      "text": "Comment 2"
+    },
+    "ground_truth": "fresh"
+  },
+  {
+    "family": "comments",
+    "request_number": 3,
+    "url": "/comments/3",
+    "response": {
+      "id": 3,
+      "postId": 4,
+      "author": "Author 3",
+      "text": "Comment 3"
+    },
+    "ground_truth": "fresh"
+  },
+  {
+    "family": "comments",
+    "request_number": 4,
+    "url": "/comments/4",
+    "response": {
+      "id": 4,
+      "postId": 5,
+      "author": "Author 4",
+      "text": "Comment 4"
+    },
+    "ground_truth": "fresh"
+  },
+  {
+    "family": "comments",
+    "request_number": 5,
+    "url": "/comments/5",
+    "response": {
+      "id": 5,
+      "postId": 6,
+      "author": "Author 5",
+      "text": "Comment 5"
+    },
+    "ground_truth": "fresh"
+  },
+  {
+    "family": "comments",
+    "request_number": 6,
+    "url": "/comments/6",
+    "response": {
+      "id": 6,
+      "postId": 7,
+      "text": "Comment 6"
+    },
+    "ground_truth": "stale"
+  },
+  {
+    "family": "comments",
+    "request_number": 7,
+    "url": "/comments/7",
+    "response": {
+      "id": 7,
+      "postId": 8,
+      "text": "Comment 7"
+    },
+    "ground_truth": "stale"
+  },
+  {
+    "family": "comments",
+    "request_number": 8,
+    "url": "/comments/8",
+    "response": {
+      "id": 8,
+      "postId": 9,
+      "text": "Comment 8"
+    },
+    "ground_truth": "stale"
+  },
+  {
+    "family": "comments",
+    "request_number": 9,
+    "url": "/comments/9",
+    "response": {
+      "id": 9,
+      "postId": 10,
+      "text": "Comment 9"
+    },
+    "ground_truth": "stale"
+  },
+  {
+    "family": "comments",
+    "request_number": 10,
+    "url": "/comments/10",
+    "response": {
+      "id": 10,
+      "postId": 11,
+      "text": "Comment 10"
+    },
+    "ground_truth": "stale"
+  },
+  {
+    "family": "users_stable",
+    "request_number": 1,
+    "url": "/users_stable/1",
+    "response": {
+      "id": 1,
+      "name": "User 1",
+      "email": "user1@example.com"
+    },
+    "ground_truth": "fresh"
+  },
+  {
+    "family": "users_stable",
+    "request_number": 2,
+    "url": "/users_stable/2",
+    "response": {
+      "id": 2,
+      "name": "User 2",
+      "email": "user2@example.com"
+    },
+    "ground_truth": "fresh"
+  },
+  {
+    "family": "users_stable",
+    "request_number": 3,
+    "url": "/users_stable/3",
+    "response": {
+      "id": 3,
+      "name": "User 3",
+      "email": "user3@example.com"
+    },
+    "ground_truth": "fresh"
+  },
+  {
+    "family": "users_stable",
+    "request_number": 4,
+    "url": "/users_stable/4",
+    "response": {
+      "id": 4,
+      "name": "User 4",
+      "email": "user4@example.com"
+    },
+    "ground_truth": "fresh"
+  },
+  {
+    "family": "users_stable",
+    "request_number": 5,
+    "url": "/users_stable/5",
+    "response": {
+      "id": 5,
+      "name": "User 5",
+      "email": "user5@example.com"
+    },
+    "ground_truth": "fresh"
+  },
+  {
+    "family": "users_stable",
+    "request_number": 6,
+    "url": "/users_stable/6",
+    "response": {
+      "id": 6,
+      "name": "User 6",
+      "email": "user6@example.com"
+    },
+    "ground_truth": "fresh"
+  },
+  {
+    "family": "users_stable",
+    "request_number": 7,
+    "url": "/users_stable/7",
+    "response": {
+      "id": 7,
+      "name": "User 7",
+      "email": "user7@example.com"
+    },
+    "ground_truth": "fresh"
+  },
+  {
+    "family": "users_stable",
+    "request_number": 8,
+    "url": "/users_stable/8",
+    "response": {
+      "id": 8,
+      "name": "User 8",
+      "email": "user8@example.com"
+    },
+    "ground_truth": "fresh"
+  },
+  {
+    "family": "users_stable",
+    "request_number": 9,
+    "url": "/users_stable/9",
+    "response": {
+      "id": 9,
+      "name": "User 9",
+      "email": "user9@example.com"
+    },
+    "ground_truth": "fresh"
+  },
+  {
+    "family": "users_stable",
+    "request_number": 10,
+    "url": "/users_stable/10",
+    "response": {
+      "id": 10,
+      "name": "User 10",
+      "email": "user10@example.com"
+    },
+    "ground_truth": "fresh"
+  }
+]

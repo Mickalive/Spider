@@ -1,0 +1,1642 @@
+[
+  {
+    "family": "users",
+    "family_pattern": "add_field",
+    "request_number": 1,
+    "ground_truth": "fresh",
+    "actual_fields": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "cached_fields": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "similarity": 1.0,
+    "detected_stale": false,
+    "correct": true
+  },
+  {
+    "family": "users",
+    "family_pattern": "add_field",
+    "request_number": 2,
+    "ground_truth": "fresh",
+    "actual_fields": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "cached_fields": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "similarity": 1.0,
+    "detected_stale": false,
+    "correct": true
+  },
+  {
+    "family": "users",
+    "family_pattern": "add_field",
+    "request_number": 3,
+    "ground_truth": "fresh",
+    "actual_fields": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "cached_fields": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "similarity": 1.0,
+    "detected_stale": false,
+    "correct": true
+  },
+  {
+    "family": "users",
+    "family_pattern": "add_field",
+    "request_number": 4,
+    "ground_truth": "fresh",
+    "actual_fields": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "cached_fields": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "similarity": 1.0,
+    "detected_stale": false,
+    "correct": true
+  },
+  {
+    "family": "users",
+    "family_pattern": "add_field",
+    "request_number": 5,
+    "ground_truth": "fresh",
+    "actual_fields": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "cached_fields": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "similarity": 1.0,
+    "detected_stale": false,
+    "correct": true
+  },
+  {
+    "family": "users",
+    "family_pattern": "add_field",
+    "request_number": 6,
+    "ground_truth": "stale",
+    "actual_fields": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ],
+      [
+        "phone",
+        "string"
+      ]
+    ],
+    "cached_fields": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "similarity": 0.75,
+    "detected_stale": true,
+    "correct": true
+  },
+  {
+    "family": "users",
+    "family_pattern": "add_field",
+    "request_number": 7,
+    "ground_truth": "stale",
+    "actual_fields": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ],
+      [
+        "phone",
+        "string"
+      ]
+    ],
+    "cached_fields": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "similarity": 0.75,
+    "detected_stale": true,
+    "correct": true
+  },
+  {
+    "family": "users",
+    "family_pattern": "add_field",
+    "request_number": 8,
+    "ground_truth": "stale",
+    "actual_fields": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ],
+      [
+        "phone",
+        "string"
+      ]
+    ],
+    "cached_fields": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "similarity": 0.75,
+    "detected_stale": true,
+    "correct": true
+  },
+  {
+    "family": "users",
+    "family_pattern": "add_field",
+    "request_number": 9,
+    "ground_truth": "stale",
+    "actual_fields": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ],
+      [
+        "phone",
+        "string"
+      ]
+    ],
+    "cached_fields": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "similarity": 0.75,
+    "detected_stale": true,
+    "correct": true
+  },
+  {
+    "family": "users",
+    "family_pattern": "add_field",
+    "request_number": 10,
+    "ground_truth": "stale",
+    "actual_fields": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ],
+      [
+        "phone",
+        "string"
+      ]
+    ],
+    "cached_fields": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "similarity": 0.75,
+    "detected_stale": true,
+    "correct": true
+  },
+  {
+    "family": "posts",
+    "family_pattern": "change_type",
+    "request_number": 1,
+    "ground_truth": "fresh",
+    "actual_fields": [
+      [
+        "body",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "title",
+        "string"
+      ],
+      [
+        "userId",
+        "integer"
+      ]
+    ],
+    "cached_fields": [
+      [
+        "body",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "title",
+        "string"
+      ],
+      [
+        "userId",
+        "integer"
+      ]
+    ],
+    "similarity": 1.0,
+    "detected_stale": false,
+    "correct": true
+  },
+  {
+    "family": "posts",
+    "family_pattern": "change_type",
+    "request_number": 2,
+    "ground_truth": "fresh",
+    "actual_fields": [
+      [
+        "body",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "title",
+        "string"
+      ],
+      [
+        "userId",
+        "integer"
+      ]
+    ],
+    "cached_fields": [
+      [
+        "body",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "title",
+        "string"
+      ],
+      [
+        "userId",
+        "integer"
+      ]
+    ],
+    "similarity": 1.0,
+    "detected_stale": false,
+    "correct": true
+  },
+  {
+    "family": "posts",
+    "family_pattern": "change_type",
+    "request_number": 3,
+    "ground_truth": "fresh",
+    "actual_fields": [
+      [
+        "body",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "title",
+        "string"
+      ],
+      [
+        "userId",
+        "integer"
+      ]
+    ],
+    "cached_fields": [
+      [
+        "body",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "title",
+        "string"
+      ],
+      [
+        "userId",
+        "integer"
+      ]
+    ],
+    "similarity": 1.0,
+    "detected_stale": false,
+    "correct": true
+  },
+  {
+    "family": "posts",
+    "family_pattern": "change_type",
+    "request_number": 4,
+    "ground_truth": "fresh",
+    "actual_fields": [
+      [
+        "body",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "title",
+        "string"
+      ],
+      [
+        "userId",
+        "integer"
+      ]
+    ],
+    "cached_fields": [
+      [
+        "body",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "title",
+        "string"
+      ],
+      [
+        "userId",
+        "integer"
+      ]
+    ],
+    "similarity": 1.0,
+    "detected_stale": false,
+    "correct": true
+  },
+  {
+    "family": "posts",
+    "family_pattern": "change_type",
+    "request_number": 5,
+    "ground_truth": "fresh",
+    "actual_fields": [
+      [
+        "body",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "title",
+        "string"
+      ],
+      [
+        "userId",
+        "integer"
+      ]
+    ],
+    "cached_fields": [
+      [
+        "body",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "title",
+        "string"
+      ],
+      [
+        "userId",
+        "integer"
+      ]
+    ],
+    "similarity": 1.0,
+    "detected_stale": false,
+    "correct": true
+  },
+  {
+    "family": "posts",
+    "family_pattern": "change_type",
+    "request_number": 6,
+    "ground_truth": "stale",
+    "actual_fields": [
+      [
+        "body",
+        "string"
+      ],
+      [
+        "id",
+        "string"
+      ],
+      [
+        "title",
+        "string"
+      ],
+      [
+        "userId",
+        "integer"
+      ]
+    ],
+    "cached_fields": [
+      [
+        "body",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "title",
+        "string"
+      ],
+      [
+        "userId",
+        "integer"
+      ]
+    ],
+    "similarity": 0.6,
+    "detected_stale": true,
+    "correct": true
+  },
+  {
+    "family": "posts",
+    "family_pattern": "change_type",
+    "request_number": 7,
+    "ground_truth": "stale",
+    "actual_fields": [
+      [
+        "body",
+        "string"
+      ],
+      [
+        "id",
+        "string"
+      ],
+      [
+        "title",
+        "string"
+      ],
+      [
+        "userId",
+        "integer"
+      ]
+    ],
+    "cached_fields": [
+      [
+        "body",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "title",
+        "string"
+      ],
+      [
+        "userId",
+        "integer"
+      ]
+    ],
+    "similarity": 0.6,
+    "detected_stale": true,
+    "correct": true
+  },
+  {
+    "family": "posts",
+    "family_pattern": "change_type",
+    "request_number": 8,
+    "ground_truth": "stale",
+    "actual_fields": [
+      [
+        "body",
+        "string"
+      ],
+      [
+        "id",
+        "string"
+      ],
+      [
+        "title",
+        "string"
+      ],
+      [
+        "userId",
+        "integer"
+      ]
+    ],
+    "cached_fields": [
+      [
+        "body",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "title",
+        "string"
+      ],
+      [
+        "userId",
+        "integer"
+      ]
+    ],
+    "similarity": 0.6,
+    "detected_stale": true,
+    "correct": true
+  },
+  {
+    "family": "posts",
+    "family_pattern": "change_type",
+    "request_number": 9,
+    "ground_truth": "stale",
+    "actual_fields": [
+      [
+        "body",
+        "string"
+      ],
+      [
+        "id",
+        "string"
+      ],
+      [
+        "title",
+        "string"
+      ],
+      [
+        "userId",
+        "integer"
+      ]
+    ],
+    "cached_fields": [
+      [
+        "body",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "title",
+        "string"
+      ],
+      [
+        "userId",
+        "integer"
+      ]
+    ],
+    "similarity": 0.6,
+    "detected_stale": true,
+    "correct": true
+  },
+  {
+    "family": "posts",
+    "family_pattern": "change_type",
+    "request_number": 10,
+    "ground_truth": "stale",
+    "actual_fields": [
+      [
+        "body",
+        "string"
+      ],
+      [
+        "id",
+        "string"
+      ],
+      [
+        "title",
+        "string"
+      ],
+      [
+        "userId",
+        "integer"
+      ]
+    ],
+    "cached_fields": [
+      [
+        "body",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "title",
+        "string"
+      ],
+      [
+        "userId",
+        "integer"
+      ]
+    ],
+    "similarity": 0.6,
+    "detected_stale": true,
+    "correct": true
+  },
+  {
+    "family": "comments",
+    "family_pattern": "remove_field",
+    "request_number": 1,
+    "ground_truth": "fresh",
+    "actual_fields": [
+      [
+        "author",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "postId",
+        "integer"
+      ],
+      [
+        "text",
+        "string"
+      ]
+    ],
+    "cached_fields": [
+      [
+        "author",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "postId",
+        "integer"
+      ],
+      [
+        "text",
+        "string"
+      ]
+    ],
+    "similarity": 1.0,
+    "detected_stale": false,
+    "correct": true
+  },
+  {
+    "family": "comments",
+    "family_pattern": "remove_field",
+    "request_number": 2,
+    "ground_truth": "fresh",
+    "actual_fields": [
+      [
+        "author",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "postId",
+        "integer"
+      ],
+      [
+        "text",
+        "string"
+      ]
+    ],
+    "cached_fields": [
+      [
+        "author",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "postId",
+        "integer"
+      ],
+      [
+        "text",
+        "string"
+      ]
+    ],
+    "similarity": 1.0,
+    "detected_stale": false,
+    "correct": true
+  },
+  {
+    "family": "comments",
+    "family_pattern": "remove_field",
+    "request_number": 3,
+    "ground_truth": "fresh",
+    "actual_fields": [
+      [
+        "author",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "postId",
+        "integer"
+      ],
+      [
+        "text",
+        "string"
+      ]
+    ],
+    "cached_fields": [
+      [
+        "author",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "postId",
+        "integer"
+      ],
+      [
+        "text",
+        "string"
+      ]
+    ],
+    "similarity": 1.0,
+    "detected_stale": false,
+    "correct": true
+  },
+  {
+    "family": "comments",
+    "family_pattern": "remove_field",
+    "request_number": 4,
+    "ground_truth": "fresh",
+    "actual_fields": [
+      [
+        "author",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "postId",
+        "integer"
+      ],
+      [
+        "text",
+        "string"
+      ]
+    ],
+    "cached_fields": [
+      [
+        "author",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "postId",
+        "integer"
+      ],
+      [
+        "text",
+        "string"
+      ]
+    ],
+    "similarity": 1.0,
+    "detected_stale": false,
+    "correct": true
+  },
+  {
+    "family": "comments",
+    "family_pattern": "remove_field",
+    "request_number": 5,
+    "ground_truth": "fresh",
+    "actual_fields": [
+      [
+        "author",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "postId",
+        "integer"
+      ],
+      [
+        "text",
+        "string"
+      ]
+    ],
+    "cached_fields": [
+      [
+        "author",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "postId",
+        "integer"
+      ],
+      [
+        "text",
+        "string"
+      ]
+    ],
+    "similarity": 1.0,
+    "detected_stale": false,
+    "correct": true
+  },
+  {
+    "family": "comments",
+    "family_pattern": "remove_field",
+    "request_number": 6,
+    "ground_truth": "stale",
+    "actual_fields": [
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "postId",
+        "integer"
+      ],
+      [
+        "text",
+        "string"
+      ]
+    ],
+    "cached_fields": [
+      [
+        "author",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "postId",
+        "integer"
+      ],
+      [
+        "text",
+        "string"
+      ]
+    ],
+    "similarity": 0.75,
+    "detected_stale": true,
+    "correct": true
+  },
+  {
+    "family": "comments",
+    "family_pattern": "remove_field",
+    "request_number": 7,
+    "ground_truth": "stale",
+    "actual_fields": [
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "postId",
+        "integer"
+      ],
+      [
+        "text",
+        "string"
+      ]
+    ],
+    "cached_fields": [
+      [
+        "author",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "postId",
+        "integer"
+      ],
+      [
+        "text",
+        "string"
+      ]
+    ],
+    "similarity": 0.75,
+    "detected_stale": true,
+    "correct": true
+  },
+  {
+    "family": "comments",
+    "family_pattern": "remove_field",
+    "request_number": 8,
+    "ground_truth": "stale",
+    "actual_fields": [
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "postId",
+        "integer"
+      ],
+      [
+        "text",
+        "string"
+      ]
+    ],
+    "cached_fields": [
+      [
+        "author",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "postId",
+        "integer"
+      ],
+      [
+        "text",
+        "string"
+      ]
+    ],
+    "similarity": 0.75,
+    "detected_stale": true,
+    "correct": true
+  },
+  {
+    "family": "comments",
+    "family_pattern": "remove_field",
+    "request_number": 9,
+    "ground_truth": "stale",
+    "actual_fields": [
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "postId",
+        "integer"
+      ],
+      [
+        "text",
+        "string"
+      ]
+    ],
+    "cached_fields": [
+      [
+        "author",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "postId",
+        "integer"
+      ],
+      [
+        "text",
+        "string"
+      ]
+    ],
+    "similarity": 0.75,
+    "detected_stale": true,
+    "correct": true
+  },
+  {
+    "family": "comments",
+    "family_pattern": "remove_field",
+    "request_number": 10,
+    "ground_truth": "stale",
+    "actual_fields": [
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "postId",
+        "integer"
+      ],
+      [
+        "text",
+        "string"
+      ]
+    ],
+    "cached_fields": [
+      [
+        "author",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "postId",
+        "integer"
+      ],
+      [
+        "text",
+        "string"
+      ]
+    ],
+    "similarity": 0.75,
+    "detected_stale": true,
+    "correct": true
+  },
+  {
+    "family": "users_stable",
+    "family_pattern": "no_drift",
+    "request_number": 1,
+    "ground_truth": "fresh",
+    "actual_fields": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "cached_fields": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "similarity": 1.0,
+    "detected_stale": false,
+    "correct": true
+  },
+  {
+    "family": "users_stable",
+    "family_pattern": "no_drift",
+    "request_number": 2,
+    "ground_truth": "fresh",
+    "actual_fields": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "cached_fields": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "similarity": 1.0,
+    "detected_stale": false,
+    "correct": true
+  },
+  {
+    "family": "users_stable",
+    "family_pattern": "no_drift",
+    "request_number": 3,
+    "ground_truth": "fresh",
+    "actual_fields": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "cached_fields": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "similarity": 1.0,
+    "detected_stale": false,
+    "correct": true
+  },
+  {
+    "family": "users_stable",
+    "family_pattern": "no_drift",
+    "request_number": 4,
+    "ground_truth": "fresh",
+    "actual_fields": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "cached_fields": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "similarity": 1.0,
+    "detected_stale": false,
+    "correct": true
+  },
+  {
+    "family": "users_stable",
+    "family_pattern": "no_drift",
+    "request_number": 5,
+    "ground_truth": "fresh",
+    "actual_fields": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "cached_fields": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "similarity": 1.0,
+    "detected_stale": false,
+    "correct": true
+  },
+  {
+    "family": "users_stable",
+    "family_pattern": "no_drift",
+    "request_number": 6,
+    "ground_truth": "fresh",
+    "actual_fields": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "cached_fields": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "similarity": 1.0,
+    "detected_stale": false,
+    "correct": true
+  },
+  {
+    "family": "users_stable",
+    "family_pattern": "no_drift",
+    "request_number": 7,
+    "ground_truth": "fresh",
+    "actual_fields": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "cached_fields": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "similarity": 1.0,
+    "detected_stale": false,
+    "correct": true
+  },
+  {
+    "family": "users_stable",
+    "family_pattern": "no_drift",
+    "request_number": 8,
+    "ground_truth": "fresh",
+    "actual_fields": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "cached_fields": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "similarity": 1.0,
+    "detected_stale": false,
+    "correct": true
+  },
+  {
+    "family": "users_stable",
+    "family_pattern": "no_drift",
+    "request_number": 9,
+    "ground_truth": "fresh",
+    "actual_fields": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "cached_fields": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "similarity": 1.0,
+    "detected_stale": false,
+    "correct": true
+  },
+  {
+    "family": "users_stable",
+    "family_pattern": "no_drift",
+    "request_number": 10,
+    "ground_truth": "fresh",
+    "actual_fields": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "cached_fields": [
+      [
+        "email",
+        "string"
+      ],
+      [
+        "id",
+        "integer"
+      ],
+      [
+        "name",
+        "string"
+      ]
+    ],
+    "similarity": 1.0,
+    "detected_stale": false,
+    "correct": true
+  }
+]
