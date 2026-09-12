@@ -201,6 +201,31 @@
         "handoff.json": "657385858ecd333d46456f97eb51251ab5e903e70a6adf8c0a2aaee19a175faf"
       }
     },
+    "EXP-FRONTIER-34538185726": {
+      "lane": "frontier",
+      "request_id": "b51dc441048d49a7cd8adb1b",
+      "created_at": "2026-09-10T22:35:31.557827+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Can kernel density estimation (KDE) with cross-validated bandwidth detect scaling-type action-dependent structure that kNN TV misses in the same 10D non-Gaussian DGP \u2014 or does the scaling failure reflect a fundamental information-theoretic limit where multiplicative state modulation is indistinguishable from heteroscedastic noise at finite sample sizes?",
+      "audit_status": "MEASUREMENT_INVALID",
+      "decision": "MEASUREMENT_INVALID",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/frontier",
+      "hashes": {
+        "request.json": "44fc1148df1f4f750c29ef9fdee31b22cedb50bce3c12868c20f1297956b4845",
+        "spec.json": "b25d696a82f6f125273f929ba7a49b7fc10248a4b083da76f5828201539e86d1",
+        "prereg.md": "eec9f8af7a4386f07fafbf1d70967234c44a7ad830f0af62a5023223f0db06b8",
+        "freeze.json": "12248483ab56f981f69d1caefc3395e245feef0809803b7e7ea96189be8c893e",
+        "result.json": "aec730346b0bca281782148aa6e7e4d40c19047b0fac8eb75964dc6f563570bd",
+        "report.md": "7480fb6bed6e4b16bbd1b3e4a3080d9fc4e63eb7053e4201966e61e6cf388665",
+        "provenance.json": "7544ca909a85684ef0559aa897e49994e281523e3aba6c4b49b673671fbf3da4",
+        "audit.json": "b0700bd63cc5527a2a1396d392c29caa9f75c77a959abb6c8ba494db2c8b0dc6",
+        "verdict.json": "692d2f9287d4adf0fa1479fe840e6a8b8064595fe7b4244a45a7b7bc7b8a3f2d",
+        "handoff.json": "e7e2e6522b96e34f222f93289976136f59713667d835b2e8b0125c82c94c46a6"
+      }
+    },
     "EXP-GRAPH-33528827169": {
       "lane": "graph",
       "request_id": "3e0d81e7790f2f2b7bd8665e",

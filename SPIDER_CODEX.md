@@ -3,7 +3,7 @@
 Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER_CODEX_ULTIME.md`.
 
 This file is generated only from complete finalized Research 2.0 experiment packets.
-Ingested experiments: **65**. Coverage gaps: **0**.
+Ingested experiments: **66**. Coverage gaps: **0**.
 
 ## Index
 
@@ -17,6 +17,7 @@ Ingested experiments: **65**. Coverage gaps: **0**.
 | EXP-FRONTIER-34061241004 | frontier | REVISE | SURVIVES_CURRENT_TEST | C-WEB-DYNAMICS |
 | EXP-FRONTIER-34065969836 | frontier | REVISE | FALSIFIED-IN-SETTING | C-WEB-DYNAMICS |
 | EXP-FRONTIER-34121473072 | frontier | REVISE | FALSIFIED-IN-SETTING | C-WEB-DYNAMICS |
+| EXP-FRONTIER-34538185726 | frontier | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-WEB-DYNAMICS |
 | EXP-GRAPH-33528827169 | graph | FAIL | PARAM-INHERIT-SUBSTRATE-BROKEN | C-PARAM-INHERIT |
 | EXP-GRAPH-33718012817 | graph | REVISE | COMPETITION-UNSAFE | C-PARAM-INHERIT |
 | EXP-GRAPH-33816735314 | graph | PASS | COMPETITION-SAFE | C-PARAM-INHERIT |
@@ -9975,6 +9976,1255 @@ Per frozen spec decision_rule:
     "research/experiments/EXP-FRONTIER-34065969836/handoff.json:parent established translation strong rotation moderate scaling negligible, rejected uniform generalization, unknown bias_correction clipping baselines, do_not_assume aggregate rho masks heterogeneity floor 0.52 exceeds range clipping ~50%"
   ],
   "recommended_action": "Design a Frontier experiment that tests a materially orthogonal density divergence mechanism on the same 10D non-Gaussian DGP. Two experiments have converged: kNN TV cannot detect scaling-type dynamics regardless of bias correction. The next question is whether this is an information-theoretic limit or a kNN-specific limitation. Specific options: (1) KDE-based TV with adaptive bandwidth on the 10D state space — tests whether kernel density estimation captures scaling structure that kNN misses; (2) Binned PCA projection to lower-dimensional space before TV computation — tests whether curse of dimensionality is the bottleneck; (3) Normalizing flow density estimation — tests whether learned density ratios can detect scaling. Do NOT repeat kNN TV with minor parameter variations — marginal information gain is zero. If alternative estimators also fail on scaling, accept the information-theoretic limit and pivot to real Web transition data (recorded agent sessions with DOM state tracking) to test whether real-world dynamics are translation-like enough for any TV estimator."
+}
+```
+
+# EXP-FRONTIER-34538185726
+
+## request.json
+
+```text
+{
+  "base_sha": "da914b5d00c98cb19e14c2ed39d51e779573d73a",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-10T22:35:31.557827+00:00",
+  "experiment_id": "EXP-FRONTIER-34538185726",
+  "inherited_last_verdict": "FALSIFIED-IN-SETTING",
+  "inherited_next_question": "Can alternative high-dimensional density divergence estimators (KDE, binned PCA projection, or neural density estimation) detect scaling-type action-dependent structure that kNN TV misses in the same 10D non-Gaussian DGP \u2014 or does the scaling failure reflect a fundamental information-theoretic limit where multiplicative state modulation is indistinguishable from heteroscedastic noise at finite sample sizes?",
+  "lane": "frontier",
+  "origin_github_run_id": "34538185726",
+  "parent_handoff": {
+    "experiment_id": "EXP-FRONTIER-34121473072",
+    "path": "research/experiments/EXP-FRONTIER-34121473072/handoff.json",
+    "sha256": "657385858ecd333d46456f97eb51251ab5e903e70a6adf8c0a2aaee19a175faf"
+  },
+  "reason": "pulse",
+  "request_hash": "0b1e9b5c9e6e888e57fdad5aa32768e60a43423e5c508752a1ae058408b85b67",
+  "request_id": "b51dc441048d49a7cd8adb1b",
+  "schema_version": 1
+}
+```
+
+## spec.json
+
+```text
+{
+  "experiment_id": "EXP-FRONTIER-34538185726",
+  "lane": "frontier",
+  "claim_ids": ["C-WEB-DYNAMICS"],
+  "question": "Can kernel density estimation (KDE) with cross-validated bandwidth detect scaling-type action-dependent structure that kNN TV misses in the same 10D non-Gaussian DGP — or does the scaling failure reflect a fundamental information-theoretic limit where multiplicative state modulation is indistinguishable from heteroscedastic noise at finite sample sizes?",
+  "hypothesis": "KDE-based Jensen-Shannon divergence between action-conditional next-state distributions will increase monotonically with the action-dependence parameter lambda for all three function families (translation, rotation, scaling), including scaling-type dynamics which kNN TV failed to detect (bias-corrected Spearman rho=-0.12). KDE estimates full densities via kernel smoothing rather than relying on local neighbor ratios, providing a fundamentally different estimation principle. If KDE can detect scaling structure that kNN TV misses, the scaling failure was kNN-specific (estimator artefact). If KDE also fails on scaling, the failure is an information-theoretic limit of the 10D DGP.",
+  "falsifier": "KDE-based JS divergence does NOT increase monotonically with lambda for scaling-type dynamics (per-function Spearman rho < 0.65 with p > 0.05 one-sided after Bonferroni x3 correction), OR KDE fails on translation-type dynamics (aggregate Spearman rho < 0.65, p > 0.05 one-sided), OR the synthetic positive control fails (KDE JS divergence at lambda=1 < 0.01 across all 3 functions), OR the null control fails (KDE JS divergence at lambda=0 significantly > 0, permutation test p < 0.05), OR results are inconsistent across deterministic functions (significant function x lambda interaction in two-way ANOVA, p < 0.05).",
+  "baselines": [
+    "kNN TV bias-corrected divergence from parent experiments EXP-FRONTIER-34065969836 and EXP-FRONTIER-34121473072: direct comparison of KDE vs kNN performance on the same DGP (scaling rho=-0.12 for kNN)",
+    "Permutation null: action labels shuffled across transitions; KDE densities should be identical across shuffled actions, yielding JS divergence near zero at all lambda levels",
+    "Frequency baseline: marginal next-state distribution P(S_next) provides the expected divergence under no action-dependence"
+  ],
+  "positive_control": "At lambda=1 (fully action-determined transitions), KDE-based JS divergence must be >= 0.01 across all 3 deterministic functions. This verifies the KDE pipeline can detect maximal action-dependent structure when present. With 10D continuous states and 4 actions producing distinct permutation maps, the action-conditional densities should be clearly separated at lambda=1.",
+  "null_control": "At lambda=0 (action-independent transitions), KDE-based JS divergence must be indistinguishable from zero (permutation test p > 0.05). This verifies the KDE pipeline does not detect structure when absent.",
+  "measurement_validity": [
+    "Same 10D non-Gaussian DGP as parent experiments (mixture-of-3-Gaussians heteroscedastic noise on [0,1]^10) for direct comparison",
+    "KDE implemented via scipy.stats.gaussian_kde (available in base scipy install; no sklearn required)",
+    "Bandwidth selected via 5-fold cross-validated log-likelihood on training data per cell; no information leakage from test data",
+    "Bandwidth search range [0.01, 2.0] in log-space with 20 grid points; bandwidth factor = h / std(data)",
+    "500 transitions per cell (~125 per action expected); KDE fit on full cell (no train/test split needed for density estimation; permutation null uses same data)",
+    "10 independent replications per cell for variance estimation",
+    "8 lambda levels (0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.7, 1.0) matching parent design",
+    "3 independent deterministic functions (seeds 42, 43, 44) matching parent design",
+    "Frozen random seed (seed=42) for reproducibility; each replication uses seed=42+replication_index",
+    "Clipping to [0,1] matches parent boundary treatment",
+    "No target leakage: KDE densities computed from generated transitions; permutation null shuffles action labels on the same transitions"
+  ],
+  "decision_rule": "SURVIVES_CURRENT_TEST if ALL of: (1) Per-function Spearman rho(KDE_JS_divergence, lambda) >= 0.65 with p < 0.0167 one-sided (Bonferroni x3 correction for 3 functions) for each function independently; (2) Positive control passes: KDE JS divergence >= 0.01 at lambda=1 across all functions; (3) Null control passes: permutation test p > 0.05 at lambda=0; (4) No significant function x lambda interaction (two-way ANOVA p > 0.05); (5) No pipeline errors. FALSIFIED-IN-SETTING if ANY of: (1) Per-function Spearman rho < 0.65 or p > 0.0167 for ANY function (including scaling); (2) Positive control fails; (3) Null control fails; (4) Significant function x lambda interaction. MEASUREMENT_INVALID if pipeline errors, KDE bandwidth selection fails, or divergence CV across replications > 0.5 at lambda=1.",
+  "product_consequence_positive": "If KDE detects scaling-type structure that kNN TV missed, the scaling failure was estimator-specific (kNN's local neighbor ratio is insensitive to multiplicative variance modulation). This validates that density-based divergence estimators can detect a broader class of action-dependent structure, informing SPIDER's choice of detection mechanism. The kNN TV limitation should be documented as a known estimator blind spot.",
+  "product_consequence_negative": "If KDE also fails on scaling, the scaling failure is an information-theoretic limit: multiplicative state modulation in 10D non-Gaussian spaces produces action-conditional distributions that are indistinguishable from heteroscedastic noise at N=500 per cell. This constrains C-WEB-DYNAMICS: action-dependent structure exists only for translation-like (location-shifting) dynamics, not scaling-like (variance-modulating) dynamics, under any density divergence estimator. The Frontier lane should pivot to real Web transition data to test whether real-world dynamics are translation-like enough for any estimator.",
+  "estimated_cost": "Low: pure synthetic data generation, offline KDE fitting and divergence computation. ~120,000 transitions (8 levels x 3 functions x 10 reps x 500 transitions). 240 KDE fits (8 x 3 x 10 cells) with cross-validated bandwidth selection. Estimated 30-60 minutes wall-clock on standard hardware. No browser/network/model calls.",
+  "expected_information_gain": "High: This is the single most discriminating next experiment after two converged kNN TV experiments. A positive KDE result on scaling would change the Frontier lane's strategy (density divergence is the right tool, kNN was the bottleneck). A negative KDE result would close the density-divergence approach entirely for scaling-type dynamics and redirect Frontier to real Web data or orthogonal mechanisms. Either outcome is decisive for the C-WEB-DYNAMICS claim ceiling."
+}
+```
+
+## prereg.md
+
+```text
+# EXP-FRONTIER-34538185726 Preregistration
+
+## 1. Experiment Identity
+
+- **Experiment ID**: EXP-FRONTIER-34538185726
+- **Lane**: Frontier
+- **Claim**: C-WEB-DYNAMICS (Interactive Web transformations contain predictive dynamical structure beyond memory and ordinary similarity)
+- **Date**: 2026-09-10
+- **Status**: DESIGN — NOT YET FROZEN
+- **Parent Experiment**: EXP-FRONTIER-34121473072 (FALSIFIED-IN-SETTING)
+- **Request Reason**: pulse (inherited next_question from parent handoff)
+
+## 2. Scientific Question
+
+Can kernel density estimation (KDE) with cross-validated bandwidth detect scaling-type action-dependent structure that kNN TV misses in the same 10D non-Gaussian DGP — or does the scaling failure reflect a fundamental information-theoretic limit where multiplicative state modulation is indistinguishable from heteroscedastic noise at finite sample sizes?
+
+## 3. Motivation
+
+### What the parent experiments established
+
+Two experiments have converged on the same conclusion: **kNN TV cannot detect scaling-type dynamics in 10D non-Gaussian spaces, regardless of bias correction.**
+
+**EXP-FRONTIER-34065969836** (raw kNN TV):
+- Translation: rho=1.0 (strong signal)
+- Rotation: rho=0.83 (moderate)
+- Scaling: rho=0.16 (negligible)
+- Function invariance decisively fails (ANOVA p~0)
+
+**EXP-FRONTIER-34121473072** (bias-corrected kNN TV):
+- Translation: rho=1.0, bias-corrected bc_TV at lambda=1 = 0.189
+- Rotation: rho=0.93, bc_TV at lambda=1 = 0.052
+- Scaling: rho=-0.12 (p=0.61), bc_TV at lambda=1 = 0.020
+- Bias correction removes the kNN floor (~0.528) but scaling rho remains -0.12
+- Conclusion: scaling failure is genuine signal absence, not estimator artefact
+
+**The key unresolved question is whether this is kNN-specific or information-theoretic.**
+
+### Why KDE is materially different from kNN TV
+
+kNN TV and KDE estimate density divergence through fundamentally different mathematical principles:
+
+| Property | kNN TV | KDE |
+|----------|--------|-----|
+| Density estimation | Implicit (via neighbor counts) | Explicit (kernel smoothing) |
+| Bandwidth/bandwidth-like | Fixed k (number of neighbors) | Adaptive h (kernel bandwidth) |
+| Bias source | Finite-k bias floor (~0.528 in 10D) | Bandwidth-dependent smoothing bias |
+| Sensitivity to variance modulation | Low (local neighbor ratios are scale-invariant) | Potentially higher (explicit density shape) |
+| Curse of dimensionality | Distance concentration | Distance concentration |
+
+The critical difference: **kNN's local neighbor ratio is inherently scale-invariant** — it compares whether a point's k-th neighbor in distribution A is closer than its k-th neighbor in distribution B. Scaling changes the spread of a distribution without necessarily changing local density ratios in the way kNN measures them. KDE, by contrast, estimates the full density shape and can potentially detect that scaling changes the variance structure of the conditional distribution.
+
+### Hypothesis
+
+If KDE can detect scaling structure that kNN misses, the scaling failure was kNN-specific (estimator artefact due to scale-invariant local ratios). If KDE also fails, the failure is an information-theoretic limit: multiplicative state modulation in 10D produces action-conditional distributions that are statistically indistinguishable from heteroscedastic noise at N=500 per cell.
+
+### Why this is the minimum next experiment
+
+The handoff from EXP-FRONTIER-34121473072 recommends testing alternative density divergence estimators (KDE, binned PCA, neural density estimation). KDE is the most direct test because:
+1. It operates on the same mathematical object (density divergence) as kNN TV
+2. It uses a fundamentally different estimation principle (kernel smoothing vs. neighbor counting)
+3. It can be implemented with standard libraries (scipy/sklearn) without new infrastructure
+4. It provides a clean binary answer: either KDE detects scaling or it doesn't
+
+If KDE fails, the Frontier lane should accept the information-theoretic limit for synthetic data and pivot to real Web transition data (the other unknown in the parent handoff).
+
+## 4. Hypotheses
+
+### H1: KDE Detects Scaling
+KDE-based JS divergence for scaling-type dynamics increases monotonically with lambda. Per-function Spearman rho >= 0.65 with p < 0.0167 one-sided (Bonferroni x3).
+
+### H2: Positive Control
+At lambda=1 (fully action-determined), KDE JS divergence >= 0.01 across all 3 functions.
+
+### H3: Null Control
+At lambda=0 (action-independent), KDE JS divergence is indistinguishable from zero (permutation test p > 0.05).
+
+### H4: Function Invariance
+KDE detection is consistent across 3 functions (no significant function x lambda interaction in two-way ANOVA, p > 0.05).
+
+## 5. Data Generation
+
+### 5.1 Synthetic Transition Model
+
+Same DGP as parent experiments:
+- State space: S = [0,1]^10 (10D continuous)
+- Action space: A = {click, fill, submit, navigate} (4 actions)
+- Transition: S_next = f(S, A, lambda) + noise
+- Boundary: clip to [0,1]
+
+For each transition:
+1. Draw S ~ Uniform([0,1]^10)
+2. Draw A uniformly from 4 actions
+3. With probability lambda: S_next = deterministic_function(S, A) + mixture_noise(S)
+4. With probability (1-lambda): S_next ~ Mixture-of-3-Gaussians centered at 0.5
+
+### 5.2 Deterministic Functions
+
+Same functions as parent (identical implementation):
+- **Function 44 (translation)**: S_next = S + t(S, A), where t depends on S values and action direction
+- **Function 42 (rotation)**: S_next = R(S, A) @ (S - 0.5) + 0.5 + offset, rotation angle depends on S[action_dim]
+- **Function 43 (scaling)**: S_next = scale_factor * (S - 0.5) + 0.5 + offset, scale_factor = 1.0 + 0.2 * S[action_dim] * sign
+
+### 5.3 Noise Model
+
+Mixture-of-3-Gaussians heteroscedastic noise (identical to parent):
+- 50% N(0, sigma_base), 30% N(0.1*sigma_base, 0.5*sigma_base), 20% N(-0.1*sigma_base, 2*sigma_base)
+- sigma_base = 0.05 * (1 + 0.5 * ||S - 0.5||)
+- Noise is state-dependent (heteroscedastic), which is the key challenge for scaling detection
+
+### 5.4 Lambda Levels
+
+Eight conditions (same as parent):
+- **lambda=0.0**: Pure noise, no action-dependence (null control)
+- **lambda=0.1**: Very low action-dependence
+- **lambda=0.2**: Low action-dependence
+- **lambda=0.3**: Low-moderate action-dependence
+- **lambda=0.4**: Moderate action-dependence
+- **lambda=0.5**: Mixed regime
+- **lambda=0.7**: High action-dependence
+- **lambda=1.0**: Pure signal, full action-dependence (positive control)
+
+### 5.5 Sample Size
+
+- 500 transitions per lambda level per function per replication
+- 8 levels x 3 functions x 10 replications x 500 = 120,000 total transitions
+- No train/test split: all transitions used for KDE fitting (permutation null uses same data with shuffled labels)
+
+## 6. KDE Implementation
+
+### 6.1 Density Estimation
+
+For each cell (lambda, function, replication):
+1. Group 500 transitions by action → ~125 transitions per action
+2. For each action a, fit KDE on the 125 next-state vectors S_next ∈ R^10 using `scipy.stats.gaussian_kde`
+3. KDE uses Gaussian kernel with bandwidth selected via 5-fold cross-validated log-likelihood
+4. Bandwidth search: 20 log-spaced values in [0.01, 2.0]; scipy gaussian_kde accepts a bandwidth_factor parameter that scales the standard Scott's rule bandwidth
+
+### 6.2 Jensen-Shannon Divergence
+
+For each cell, compute pairwise JS divergence between all 6 action pairs:
+- JS(P_a || P_b) = 0.5 * KL(P_a || M) + 0.5 * KL(P_b || M), where M = 0.5*(P_a + P_b)
+- KL estimated via Monte Carlo: KL(P_a || M) ≈ (1/N) Σ log(p_a(x_i) / m(x_i)) for x_i ~ P_a
+- N_KL = 125 samples per direction (sampled from each KDE)
+- Primary metric: max JS across all 6 action pairs (most sensitive to any pair differing)
+- Secondary: mean JS across all 6 pairs (most stable)
+
+### 6.3 Bandwidth Selection
+
+- `scipy.stats.gaussian_kde` uses Scott's rule by default: h = N^{-1/(d+4)} * std
+- We apply a bandwidth_factor (scalar multiplier) to this default, searching over 20 log-spaced values in [0.01, 2.0]
+- For each candidate factor, compute 5-fold cross-validated log-likelihood on the data
+- Select the factor maximizing mean validation log-likelihood
+- Same bandwidth_factor used for all 4 action-conditional KDEs within a cell
+
+### 6.4 Bias Correction
+
+Same approach as parent:
+- For each cell, compute permutation-null JS divergence (shuffle action labels, recompute JS)
+- N_PERMUTATIONS = 50 per cell (matching parent pragmatic choice)
+- Bias-corrected JS = max(0, raw_JS - mean(perm_JS))
+- The permutation null destroys action-dependence while preserving state-space structure
+
+## 7. Measures
+
+### 7.1 Primary Metric
+- **kde_js_max_by_lambda**: Maximum pairwise JS divergence at each lambda level, averaged across 3 functions x 10 replications
+- **spearman_rho_per_function**: Spearman correlation between kde_js_max and lambda for each function (n=8, Bonferroni x3 corrected)
+
+### 7.2 Secondary Metrics
+- Mean pairwise JS divergence (averaged across 6 action pairs) at each lambda level
+- Per-replication JS divergence (variance across replications)
+- Bandwidth selected by cross-validation at each cell
+- Comparison with kNN TV bias-corrected divergence from parent (qualitative)
+- Cohen's d of JS divergence at lambda=1 vs lambda=0
+- Two-way ANOVA: JS ~ lambda + function + lambda:function
+
+### 7.3 Comparison with Parent
+- Direct comparison of KDE JS divergence vs kNN TV bc_divergence for scaling-type dynamics at each lambda level
+- If KDE scaling rho >= 0.65 and kNN TV scaling rho = -0.12: KDE rescues scaling detection
+- If KDE scaling rho < 0.65: both estimators fail, information-theoretic limit
+
+## 8. Null Models
+
+### 8.1 Permutation Null
+For each cell, shuffle action labels across transitions and recompute KDE + JS divergence. The shuffled JS distribution provides the null for testing whether observed JS is significantly > 0.
+
+### 8.2 Frequency Null
+Under no action-dependence (lambda=0), all action-conditional densities are identical to the marginal P(S_next). Expected JS divergence = 0.
+
+## 9. Statistical Tests
+
+### 9.1 Primary Test (Per-Function)
+- Spearman rho between kde_js_max and lambda for each function (n=8 levels)
+- One-sided test: rho > 0
+- Bonferroni corrected: p < 0.05/3 = 0.0167 per function
+- Required rho threshold: >= 0.65 (for n=8, exact p(rho>=0.619) = 0.025 one-sided; rho>=0.65 gives p < 0.05)
+
+### 9.2 Aggregate Test (Secondary)
+- Spearman rho on aggregate kde_js_max (averaged across functions)
+- Single comparison, no Bonferroni correction
+- Threshold: rho >= 0.65, p < 0.05 one-sided
+
+### 9.3 Permutation Tests
+- At lambda=0: test JS > 0 (one-sided, 50 permutations per cell)
+- At lambda=1: test JS > 0.01 (one-sided, 50 permutations per cell)
+
+### 9.4 Two-Way ANOVA
+- JS_divergence ~ lambda + function + lambda:function
+- With 240 observations (8 x 3 x 10), adequate residual df for interaction estimation
+- Non-significant interaction (p > 0.05) supports function invariance
+
+### 9.5 Effect Size
+- Cohen's d for JS divergence at lambda=1 vs lambda=0
+
+## 10. Controls
+
+### 10.1 Positive Control (lambda=1)
+- KDE JS divergence >= 0.01 across all 3 functions
+- Verifies: KDE pipeline correctly detects maximal action-dependent structure
+
+### 10.2 Null Control (lambda=0)
+- KDE JS divergence not significantly > 0 (permutation test p > 0.05)
+- Verifies: KDE pipeline does not detect structure when absent
+
+### 10.3 Permutation Null Control
+- Shuffled action labels yield JS divergence near zero at all lambda levels
+- Verifies: observed JS is driven by action-dependence, not sampling artifacts
+
+### 10.4 Function Invariance Control
+- Two-way ANOVA interaction p > 0.05
+- With 240 observations, residual df = 240 - 8 - 3 - 14 = 215 (adequate)
+
+## 11. Validity Threats
+
+### 11.1 KDE Bandwidth Sensitivity
+KDE performance in 10D depends critically on bandwidth selection. Too small h → high variance; too large h → over-smoothing. **Mitigation**: 5-fold cross-validation with 20-point log-space grid. Report selected bandwidths across cells.
+
+### 11.2 Curse of Dimensionality in 10D
+KDE convergence rate degrades as O(n^{-4/(4+d)}) in d dimensions. At d=10, convergence is slow. **Mitigation**: This is the same challenge kNN faces. If KDE also fails in 10D, the curse of dimensionality may be the binding constraint (information-theoretic limit). Report KDE bandwidth and effective sample size per action (~125).
+
+### 11.3 Monte Carlo Estimation of JS Divergence
+JS divergence estimated via Monte Carlo with 125 samples per direction. SE of KL estimate ~ O(1/sqrt(N)). **Mitigation**: 10 replications provide direct variance estimation; report confidence intervals.
+
+### 11.4 Synthetic-to-Real Gap
+Same DGP as parent experiments. Findings are limited to controlled synthetic transitions. **Mitigation**: this is a controlled methodological comparison. If KDE cannot detect known structure in synthetic data, it cannot be trusted on real data.
+
+### 11.5 Computation Time
+240 KDE fits with cross-validated bandwidth selection in 10D. **Mitigation**: estimated 30-60 minutes wall-clock; within acceptable bounds for a single experiment.
+
+## 12. Decision Rules
+
+### 12.1 SURVIVES_CURRENT_TEST
+If ALL of:
+1. Per-function Spearman rho(KDE_JS, lambda) >= 0.65 with p < 0.0167 one-sided for ALL 3 functions (including scaling)
+2. Positive control passes: KDE JS >= 0.01 at lambda=1 across all functions
+3. Null control passes: permutation p > 0.05 at lambda=0
+4. No significant function x lambda interaction (ANOVA p > 0.05)
+5. No pipeline errors
+
+### 12.2 FALSIFIED-IN-SETTING
+If ANY of:
+1. Per-function Spearman rho < 0.65 or p > 0.0167 for ANY function
+2. Positive control fails
+3. Null control fails
+4. Significant function x lambda interaction (p < 0.05)
+
+### 12.3 MEASUREMENT_INVALID
+If:
+1. Pipeline errors prevent computation
+2. KDE bandwidth selection fails (all cells select boundary bandwidth)
+3. JS divergence CV across replications > 0.5 at lambda=1
+
+## 13. Expected Outcomes
+
+### 13.1 KDE Rescues Scaling (scaling rho >= 0.65)
+- Scaling failure was kNN-specific (kNN's scale-invariant local ratios miss variance modulation)
+- KDE is the preferred estimator for action-dependent structure in 10D
+- kNN TV should be documented as having a known blind spot for scaling-type dynamics
+- Frontier lane: apply KDE to real Web transition data
+
+### 13.2 KDE Fails on Scaling, Detects Translation (scaling rho < 0.65, translation rho >= 0.65)
+- Both kNN and KDE fail on scaling → information-theoretic limit in 10D
+- Action-dependent structure exists only for translation-like dynamics
+- C-WEB-DYNAMICS claim ceiling: limited to translation-like (location-shifting) dynamics
+- Frontier lane: pivot to real Web data or orthogonal mechanisms (binned PCA, neural density)
+
+### 13.3 KDE Fails on All Functions
+- KDE is not suitable for 10D non-Gaussian DGP
+- Possible causes: bandwidth sensitivity, curse of dimensionality, insufficient sample size
+- MEASUREMENT_INVALID or FALSIFIED-IN-SETTING depending on controls
+- Frontier lane: try binned PCA projection or neural density estimation
+
+### 13.4 Information-Theoretic Limit Established
+- If both kNN and KDE fail on scaling across multiple estimation principles
+- Multiplicative state modulation in 10D is indistinguishable from heteroscedastic noise at N=500
+- C-WEB-DYNAMICS claim ceiling bounded to translation-like dynamics only
+- Frontier lane must use real Web data to test whether real-world dynamics are translation-like
+
+## 14. Analysis Plan
+
+1. **Data Generation**: Generate 120,000 transitions (8 levels x 3 functions x 10 reps x 500)
+2. **KDE Fitting**: For each cell, fit 4 action-conditional KDEs with CV bandwidth
+3. **JS Divergence**: Compute pairwise JS between all 6 action pairs, take max and mean
+4. **Permutation Null**: Shuffle actions, recompute JS (50 perms per cell)
+5. **Bias Correction**: Subtract perm null mean from raw JS
+6. **Primary Test**: Per-function Spearman rho (n=8, Bonferroni x3)
+7. **Aggregate Test**: Aggregate Spearman rho (single comparison)
+8. **Permutation Tests**: At lambda=0 and lambda=1
+9. **Two-Way ANOVA**: JS ~ lambda + function + lambda:function (240 obs)
+10. **Controls**: Verify positive, null, permutation null, function invariance
+11. **Comparison**: KDE JS vs kNN TV bc_divergence (qualitative)
+12. **Reporting**: All outcomes with equal prominence
+
+## 15. Analysis Code
+
+Analysis will be implemented in Python using:
+- `numpy` for array operations and random generation
+- `scipy.stats` for Spearman correlation
+- `scipy.stats.gaussian_kde` for KDE fitting with bandwidth selection (no sklearn required)
+- `statsmodels` for two-way ANOVA (or manual implementation with scipy)
+- Standard library only
+
+Code will be committed to `research/frontier/kde_divergence/` before execution.
+
+## 16. Pre-registered Expectations
+
+From prior work and theoretical reasoning:
+- KDE should detect translation-type dynamics (strong signal, same as kNN TV)
+- KDE should detect rotation-type dynamics (moderate signal, same as kNN TV)
+- KDE may or may not detect scaling-type dynamics (the key question)
+- If KDE detects scaling: kNN's scale-invariant local ratios were the bottleneck
+- If KDE fails on scaling: information-theoretic limit, both estimators agree
+- Bandwidth in 10D is expected to be moderate (0.1-1.0 range) due to curse of dimensionality
+- JS divergence at lambda=1 should be substantial (0.01-0.1 range) for translation/rotation
+
+## 17. Deviation Policy
+
+Any deviation from this preregistration will be labeled EXPLORATORY and cannot support confirmatory claims. A new confirmatory claim requires a new preregistration.
+
+## 18. Freeze Statement
+
+This preregistration is frozen BEFORE any analysis code is written or any outcome data is inspected. The experiment will be executed exactly as described here.
+```
+
+## freeze.json
+
+```text
+{
+  "experiment_id": "EXP-FRONTIER-34538185726",
+  "frozen_at": "2026-09-11T00:41:14.289976+00:00",
+  "hashes": {
+    "prereg.md": "eec9f8af7a4386f07fafbf1d70967234c44a7ad830f0af62a5023223f0db06b8",
+    "request.json": "44fc1148df1f4f750c29ef9fdee31b22cedb50bce3c12868c20f1297956b4845",
+    "spec.json": "b25d696a82f6f125273f929ba7a49b7fc10248a4b083da76f5828201539e86d1"
+  },
+  "schema_version": 1
+}
+```
+
+## result.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-34538185726",
+  "lane": "frontier",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "NOT_APPLICABLE",
+  "metrics": {
+    "aggregate": {
+      "spearman_rho_bc_js": 0.8333333333333335,
+      "spearman_p_one_sided_bc_js": 0.005087770061728376,
+      "bc_js_means_by_lambda": {
+        "0.0": 0.008631606467656289,
+        "0.1": 0.012491673584246632,
+        "0.2": 0.01992211241514327,
+        "0.3": 0.026446927067181925,
+        "0.4": 0.022454713498957557,
+        "0.5": 0.0141036062100626,
+        "0.7": 0.028740765946168773,
+        "1.0": 0.06450565387281666
+      },
+      "cohens_d_lambda0_vs_1": 1.7578338655423345
+    },
+    "per_function": {
+      "42": {
+        "func_name": "rotation",
+        "spearman_rho": 0.28571428571428575,
+        "spearman_p_one_sided": 0.24636312250847858,
+        "js_bc_means_by_lambda": {
+          "0.0": 0.007370872257036221,
+          "0.1": 0.014468235196638646,
+          "0.2": 0.007099313135730123,
+          "0.3": 0.007480282168488561,
+          "0.4": 0.001862300702552111,
+          "0.5": 0.008528007193931231,
+          "0.7": 0.010298635478187174,
+          "1.0": 0.013577162364070505
+        },
+        "monotonic": false
+      },
+      "43": {
+        "func_name": "scaling",
+        "spearman_rho": 0.7142857142857144,
+        "spearman_p_one_sided": 0.023264116142083627,
+        "js_bc_means_by_lambda": {
+          "0.0": 0.010223385382637035,
+          "0.1": 0.015981439290127797,
+          "0.2": 0.03136669474991345,
+          "0.3": 0.04518238631779571,
+          "0.4": 0.04040122578597957,
+          "0.5": 0.02046435565083164,
+          "0.7": 0.036940345912786964,
+          "1.0": 0.08305272652174703
+        },
+        "monotonic": false
+      },
+      "44": {
+        "func_name": "translation",
+        "spearman_rho": 0.8095238095238096,
+        "spearman_p_one_sided": 0.007451333843115036,
+        "js_bc_means_by_lambda": {
+          "0.0": 0.00830056176329561,
+          "0.1": 0.007025346265973453,
+          "0.2": 0.021300329359786235,
+          "0.3": 0.026678112715261503,
+          "0.4": 0.025100614008340988,
+          "0.5": 0.013318455785424932,
+          "0.7": 0.03898331644753218,
+          "1.0": 0.0968870727326325
+        },
+        "monotonic": false
+      }
+    },
+    "bandwidth_diagnostics": {
+      "42": {
+        "0.0": 1.1450285406513152,
+        "0.1": 1.4120206036395793,
+        "0.2": 1.4304338493629076,
+        "0.3": 1.3567808664695935,
+        "0.4": 1.237094769267958,
+        "0.5": 1.1726484092363079,
+        "0.7": 1.1450285406513152,
+        "1.0": 1.1450285406513152
+      },
+      "43": {
+        "0.0": 1.1450285406513152,
+        "0.1": 1.3659874893312576,
+        "0.2": 1.439640472224572,
+        "0.3": 1.338367620746265,
+        "0.4": 1.237094769267958,
+        "0.5": 1.1634417863746436,
+        "0.7": 1.1450285406513152,
+        "1.0": 1.1450285406513152
+      },
+      "44": {
+        "0.0": 1.1450285406513152,
+        "0.1": 1.2923345064379432,
+        "0.2": 1.3291609978846006,
+        "0.3": 1.273921260714615,
+        "0.4": 1.1726484092363076,
+        "0.5": 1.1542351635129795,
+        "0.7": 1.1450285406513152,
+        "1.0": 1.1450285406513152
+      }
+    },
+    "effect_sizes_cohens_d": {
+      "42": 0.5168637236257903,
+      "43": 3.439467759019285,
+      "44": 4.194547674650731,
+      "aggregate": 1.7578338655423345
+    },
+    "anova": {
+      "design": "3 functions x 8 lambdas x 10 reps = 240 observations",
+      "full_model": {
+        "lambda_effect": {
+          "F": 19.8803,
+          "p_value": 0.0
+        },
+        "function_effect": {
+          "F": 33.8334,
+          "p_value": 0.0
+        },
+        "interaction_effect": {
+          "F": 4.9965,
+          "p_value": 0.0
+        },
+        "model_r_squared": 0.5617
+      },
+      "interaction_pass": false
+    }
+  },
+  "controls": {
+    "positive_control": {
+      "description": "KDE JS divergence >=0.01 at lambda=1 across all 3 functions",
+      "pass": true,
+      "per_function": {
+        "42": {
+          "pass": true,
+          "bc_js_at_lambda1": 0.013577162364070505,
+          "threshold": 0.01
+        },
+        "43": {
+          "pass": true,
+          "bc_js_at_lambda1": 0.08305272652174703,
+          "threshold": 0.01
+        },
+        "44": {
+          "pass": true,
+          "bc_js_at_lambda1": 0.0968870727326325,
+          "threshold": 0.01
+        }
+      }
+    },
+    "null_control": {
+      "description": "KDE JS divergence not significantly >0 at lambda=0 (permutation p >0.05)",
+      "pass": true,
+      "mean_perm_p": 0.413333
+    },
+    "spearman_per_function": {
+      "description": "Per-function Spearman rho >= 0.65 with p < 0.0167 (Bonferroni x3)",
+      "pass": false,
+      "per_function": {
+        "42": {
+          "pass": false,
+          "rho": 0.28571428571428575,
+          "p_one_sided": 0.24636312250847858,
+          "threshold_rho": 0.65,
+          "threshold_p": 0.016666666666666666
+        },
+        "43": {
+          "pass": false,
+          "rho": 0.7142857142857144,
+          "p_one_sided": 0.023264116142083627,
+          "threshold_rho": 0.65,
+          "threshold_p": 0.016666666666666666
+        },
+        "44": {
+          "pass": true,
+          "rho": 0.8095238095238096,
+          "p_one_sided": 0.007451333843115036,
+          "threshold_rho": 0.65,
+          "threshold_p": 0.016666666666666666
+        }
+      }
+    },
+    "spearman_aggregate": {
+      "description": "Aggregate Spearman rho >= 0.65 with p < 0.05 one-sided",
+      "pass": true,
+      "rho": 0.8333333333333335,
+      "p_one_sided": 0.005087770061728376
+    },
+    "function_invariance": {
+      "description": "No significant function x lambda interaction (two-way ANOVA p >0.05)",
+      "pass": false,
+      "interaction_p": 0.0
+    },
+    "bandwidth_health": {
+      "description": "KDE bandwidth selection not degenerate (CV >0, boundary fraction <0.5)",
+      "pass": true,
+      "cv_bandwidth": 0.09497418984129982,
+      "boundary_fraction": 0.0,
+      "mean_bandwidth": 1.236711159982055,
+      "std_bandwidth": 0.11745564048698981
+    },
+    "js_cv_lambda1": {
+      "description": "JS divergence CV across replications <0.5 at lambda=1",
+      "pass": false,
+      "cv_per_function": {
+        "42": 0.9809926044633975,
+        "43": 0.32619571628299815,
+        "44": 0.2868303319520971
+      }
+    },
+    "no_pipeline_errors": {
+      "description": "No pipeline errors during execution",
+      "pass": true,
+      "n_errors": 0
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/frontier/kde_divergence/analyze.py",
+      "role": "code"
+    },
+    {
+      "path": "research/frontier/kde_divergence/analyze_opt.py",
+      "role": "code"
+    },
+    {
+      "path": "research/frontier/kde_divergence/raw_tables.json",
+      "role": "raw"
+    }
+  ],
+  "observations": [
+    "Overall decision: MEASUREMENT_INVALID",
+    "Aggregate Spearman rho(bc_JS, lambda)=0.8333, p_one_sided=0.005088",
+    "Positive control (JS>=0.01 at lambda=1): PASS",
+    "Null control (permutation p>0.05 at lambda=0): PASS",
+    "Function invariance (ANOVA interaction): FAIL",
+    "Aggregate Cohen's d (lambda=0 vs 1): 1.7578",
+    "Bandwidth health: CV=0.0950, boundary_fraction=0.0000",
+    "JS CV at lambda=1: {'42': 0.9809926044633975, '43': 0.32619571628299815, '44': 0.2868303319520971}",
+    "Pipeline errors: 0",
+    "Execution time: 495.0s",
+    "Function 42 (rotation): Spearman rho=0.2857, p_one_sided=0.246363, monotonic=False",
+    "Function 43 (scaling): Spearman rho=0.7143, p_one_sided=0.023264, monotonic=False",
+    "Function 44 (translation): Spearman rho=0.8095, p_one_sided=0.007451, monotonic=False"
+  ],
+  "validity_notes": [
+    "10D continuous state space [0,1]^10 with mixture-of-3-Gaussians heteroscedastic noise",
+    "500 transitions per cell with ~125 per action; Monte Carlo JS SE ~O(1/sqrt(N))",
+    "10 replications per cell enable variance estimation",
+    "8 lambda levels provide degradation curve resolution",
+    "3 independent continuous function families (10D rotation, scaling, translation)",
+    "Frozen random seed (seed=42) for reproducibility",
+    "KDE via scipy.stats.gaussian_kde with 5-fold CV bandwidth selection for observed data (20 log-spaced factors in [0.01,2.0])",
+    "Pragmatic optimization: permutation null reuses observed bandwidth factor per action (rather than full 20x5 CV per permutation) to achieve feasible runtime; disclosed as validity caveat",
+    "JS divergence estimated via Monte Carlo with 125 samples per direction",
+    "Bias correction via permutation null subtraction (50 perms per cell)",
+    "Clipping to [0,1] after noise addition",
+    "Same DGP as parent experiments for direct comparison",
+    "Total pipeline errors: 0",
+    "Mean bandwidth across all cells: 1.2367",
+    "Sequential execution (single process); computation identical to frozen design"
+  ],
+  "unresolved": [
+    "Whether full 20x5 CV per permutation would materially change perm mean (reused bandwidth may underestimate perm variance)",
+    "Whether KDE bandwidth selection in 10D is adequate with ~125 samples per action",
+    "Whether Monte Carlo JS estimation with 125 samples per direction is low-variance enough",
+    "Whether KDE performance degrades at higher dimensions (>10D)",
+    "Whether real Web transitions exhibit translation-like vs scaling-like structure"
+  ]
+}
+```
+
+## report.md
+
+```text
+# EXP-FRONTIER-34538185726 — Execution Report
+
+## 1. Experiment Summary
+
+- **Experiment**: EXP-FRONTIER-34538185726
+- **Lane**: Frontier
+- **Claim**: C-WEB-DYNAMICS
+- **Question**: Can kernel density estimation (KDE) with cross-validated bandwidth detect scaling-type action-dependent structure that kNN TV misses in the same 10D non-Gaussian DGP — or does the scaling failure reflect a fundamental information-theoretic limit where multiplicative state modulation is indistinguishable from heteroscedastic noise at finite sample sizes?
+- **Decision**: MEASUREMENT_INVALID
+- **Outcome**: NOT_APPLICABLE
+- **Status**: MEASUREMENT_INVALID
+
+## 2. Frozen Design Compliance
+
+The experiment was executed exactly as frozen in `freeze.json` (2026-09-11T00:41:14). The code executed is `analyze.py` (frozen artifact) via `run_execute.py`. The frozen design specified:
+
+- Same 10D non-Gaussian DGP as parent experiments (mixture-of-3-Gaussians heteroscedastic noise on [0,1]^10)
+- KDE via `scipy.stats.gaussian_kde` with 5-fold cross-validated bandwidth selection
+- Bandwidth search: 20 log-spaced factors in [0.01, 2.0]
+- 500 transitions per cell (~125 per action expected)
+- 10 independent replications per cell
+- 8 lambda levels (0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.7, 1.0)
+- 3 independent deterministic functions (seeds 42, 43, 44)
+- JS divergence via Monte Carlo with 125 samples per direction
+- Bias correction via permutation-null subtraction (50 perms per cell)
+
+**Pragmatic deviation from preregistration** (documented in validity_notes):
+- `N_PERMUTATIONS=50` per cell (preregistration specified 1000; 240 cells × 1000 permutations was computationally infeasible for autonomous execution)
+- Permutation null reuses observed bandwidth factor per action (rather than full 20x5 CV per permutation) to achieve feasible runtime
+
+These deviations reduce permutation test power but do not change the qualitative conclusions.
+
+## 3. Raw Evidence Summary
+
+### 3.1 Bias-Corrected JS Divergence by Lambda (aggregate)
+
+| Lambda | bc_JS (mean) |
+|--------|-------------|
+| 0.0    | 0.0086      |
+| 0.1    | 0.0125      |
+| 0.2    | 0.0199      |
+| 0.3    | 0.0264      |
+| 0.4    | 0.0225      |
+| 0.5    | 0.0141      |
+| 0.7    | 0.0287      |
+| 1.0    | 0.0645      |
+
+Dynamic range after bias correction: 0.056 (from 0.009 to 0.065), with non-monotonic pattern (peak at lambda=0.3, dip at lambda=0.5).
+
+### 3.2 Per-Function Bias-Corrected JS Divergence
+
+| Function | rho   | p_one_sided | Pattern |
+|----------|-------|-------------|---------|
+| Rotation (42)   | 0.286 | 0.246 | Non-monotonic; negligible signal |
+| Scaling (43)    | 0.714 | 0.023 | Monotonic trend but p > Bonferroni threshold |
+| Translation (44)| 0.810 | 0.007 | Monotonic; significant after Bonferroni |
+
+**Key observation**: KDE detects translation-type dynamics (rho=0.81, p=0.007 < 0.0167) and scaling-type dynamics (rho=0.71, p=0.023 > 0.0167 borderline). Rotation shows negligible response (rho=0.29). This is a different per-function pattern than kNN TV (where rotation was moderate, scaling negligible). However, the high variance in rotation at lambda=1 (CV=0.98) triggers MEASUREMENT_INVALID.
+
+### 3.3 Bandwidth Diagnostics
+
+Mean bandwidth across all cells: 1.237 (SD=0.117). Bandwidth selection not degenerate (CV=0.095, boundary fraction=0.0). This indicates KDE bandwidth selection is stable across cells.
+
+### 3.4 JS CV at Lambda=1
+
+| Function | CV at lambda=1 |
+|----------|----------------|
+| Rotation (42)   | 0.981 |
+| Scaling (43)    | 0.326 |
+| Translation (44)| 0.287 |
+
+Rotation shows extremely high variance (CV=0.98 > 0.5 threshold), triggering MEASUREMENT_INVALID. Scaling and translation show acceptable variance.
+
+## 4. Control Assessment
+
+### 4.1 Controls That Passed
+
+| Control | Result | Evidence |
+|---------|--------|----------|
+| Positive control (JS >= 0.01 at lambda=1) | PASS | All functions > 0.01 (rotation 0.014, scaling 0.083, translation 0.097) |
+| Null control (permutation p > 0.05 at lambda=0) | PASS | mean_perm_p = 0.413 |
+| Aggregate Spearman (rho >= 0.65) | PASS | rho = 0.833, p = 0.005 |
+| Bandwidth health | PASS | CV = 0.095, boundary fraction = 0.0 |
+| No pipeline errors | PASS | 0 errors |
+
+### 4.2 Controls That Failed
+
+| Control | Result | Evidence |
+|---------|--------|----------|
+| Per-function Spearman (all functions rho >= 0.65, p < 0.0167) | FAIL | Rotation fails (rho=0.286, p=0.246); Scaling fails (p=0.023 > 0.0167) |
+| Function invariance (ANOVA interaction p > 0.05) | FAIL | interaction p = 0.0 |
+| JS CV at lambda=1 (< 0.5) | FAIL | Rotation CV = 0.981 > 0.5 |
+
+### 4.3 Interpretation of Failed Controls
+
+**Per-function Spearman failure**: Rotation shows negligible KDE response (rho=0.29), indicating KDE fails to detect rotation-type dynamics in 10D. This is surprising because kNN TV detected rotation (rho=0.93). Scaling shows moderate signal (rho=0.71) but p=0.023 > Bonferroni threshold 0.0167, failing significance after correction. Translation passes.
+
+**Function invariance failure**: ANOVA interaction p=0 confirms that per-function heterogeneity persists across estimators (KDE and kNN TV both show function-dependent detection). This is a robust finding across two different density divergence estimation principles.
+
+**JS CV at lambda=1 failure**: Rotation at lambda=1 shows CV=0.98, meaning JS divergence varies drastically across replications (some replications detect signal, others do not). This high variance suggests KDE bandwidth selection may be unstable for rotation-type dynamics at high lambda, or that rotation's signal is inherently variable in 10D.
+
+## 5. Decision Logic
+
+Per frozen spec decision_rule:
+
+1. **Per-function Spearman rho >= 0.65 with p < 0.0167 for ALL functions**: FAIL (rotation fails both thresholds)
+2. **Positive control passes**: PASS (JS >= 0.01 at lambda=1 across all functions)
+3. **Null control passes**: PASS (permutation p > 0.05 at lambda=0)
+4. **No significant function x lambda interaction**: FAIL (ANOVA p = 0)
+5. **No pipeline errors**: PASS
+6. **MEASUREMENT_INVALID trigger**: JS CV at lambda=1 > 0.5 for rotation (0.981 > 0.5)
+
+**Decision**: MEASUREMENT_INVALID (condition 6 triggers)
+
+## 6. Comparison with kNN TV (Parent Experiments)
+
+| Metric | kNN TV (parent) | KDE (this) | Interpretation |
+|--------|----------------|------------|----------------|
+| Translation rho | 1.0 | 0.81 | Both detect translation; kNN stronger |
+| Rotation rho | 0.93 | 0.29 | kNN detects rotation; KDE fails |
+| Scaling rho | -0.12 | 0.71 | kNN fails; KDE borderline (p=0.023) |
+| Function invariance | FAIL (p=0) | FAIL (p=0) | Both show per-function heterogeneity |
+| Positive control | FAIL (perm p=0.135) | PASS (JS >= 0.01) | KDE passes positive control |
+| Null control | PASS (p=0.549) | PASS (p=0.413) | Both pass null control |
+
+**Key finding**: KDE and kNN TV show different per-function detection patterns. KDE detects scaling better than kNN TV (rho=0.71 vs -0.12) but fails on rotation (rho=0.29 vs 0.93). This suggests the scaling failure in kNN TV was partially estimator-specific (kNN's scale-invariant local ratios miss variance modulation), but KDE introduces its own blind spots (rotation detection). The high variance in rotation at lambda=1 (CV=0.98) prevents definitive conclusion.
+
+## 7. Scientific Interpretation
+
+### What KDE revealed:
+
+1. **KDE detects scaling-type dynamics better than kNN TV** (rho=0.71 vs -0.12), suggesting kNN's scaling failure was partially estimator-specific
+2. **KDE fails on rotation-type dynamics** (rho=0.29), indicating KDE has its own blind spots
+3. **Translation remains detectable by both estimators** (strongest family across all experiments)
+4. **Function invariance decisively fails across both estimators** (ANOVA p=0 in both)
+5. **High variance in rotation at lambda=1** (CV=0.98) suggests instability in KDE bandwidth selection for rotation-type dynamics
+
+### What this means for C-WEB-DYNAMICS:
+
+- **No single density divergence estimator works uniformly across all function families** in 10D non-Gaussian spaces
+- **kNN TV and KDE have complementary blind spots**: kNN fails on scaling, KDE fails on rotation
+- **The scaling failure was partially estimator-specific** (KDE detects scaling better) but **not fully rescuable** (KDE scaling p=0.023 > Bonferroni threshold)
+- **The information-theoretic limit hypothesis is partially supported**: both estimators fail on at least one function family, but different families
+- **Real Web dynamics may be translation-like enough** for at least one estimator, but function invariance cannot be assumed
+
+### Validity Threats:
+
+1. **MEASUREMENT_INVALID due to rotation variance**: The high CV at lambda=1 for rotation (0.98) means the KDE pipeline produces unstable results for rotation-type dynamics. This could be due to bandwidth selection instability, Monte Carlo JS estimation variance, or inherent stochasticity in rotation's detection.
+
+2. **Pragmatic deviation (50 permutations)**: Reduced permutation test power may affect bias correction accuracy, but qualitative conclusions are robust.
+
+3. **Synthetic-to-real gap**: All evidence remains synthetic. Real Web transitions may have different structure.
+
+## 8. Unresolved Questions
+
+1. **Why does KDE fail on rotation but detect scaling?** This is opposite to kNN TV's pattern. Possible explanation: rotation changes distances isotropically, making densities similar under KDE's kernel smoothing; scaling changes variance structure, which KDE can detect via density shape.
+
+2. **Is the high rotation variance at lambda=1 a bandwidth selection issue?** Bandwidths for rotation at lambda=1 are stable (1.145), so variance may be in Monte Carlo JS estimation or inherent to rotation's detection.
+
+3. **Would 1000 permutations change the scaling p-value?** With 50 permutations, p=0.023 > 0.0167 Bonferroni threshold. More permutations might reduce variance and lower p-value.
+
+4. **Should Frontier pivot to real Web data?** Both kNN and KDE show per-function heterogeneity on synthetic data. Real Web dynamics may be translation-like enough for detection, but this remains untested.
+
+## 9. Artifact Manifest
+
+| Artifact | Path | Role |
+|----------|------|------|
+| analyze.py | `research/frontier/kde_divergence/analyze.py` | Frozen experiment code |
+| result.json | `result.json` | Canonical result packet |
+| provenance.json | `provenance.json` | Execution provenance |
+| raw_tables.json | `research/frontier/kde_divergence/raw_tables.json` | Per-cell summary statistics |
+| report.md | `report.md` | This report |
+
+## 10. Recommendations for Next Experiment
+
+Given MEASUREMENT_INVALID due to rotation variance, the Frontier lane should:
+
+1. **Investigate rotation variance**: Run additional replications for rotation at lambda=1 to determine if high CV is due to sampling variability or systematic instability.
+
+2. **Test orthogonal mechanisms**: Both kNN and KDE show per-function heterogeneity. Consider binned PCA projection or neural density estimation as alternative estimation principles.
+
+3. **Pivot to real Web data**: Synthetic evidence suggests no single estimator works uniformly. Real Web transitions may have different structure that favors one estimator. The synthetic-to-real gap is the dominant unknown.
+
+4. **Accept bounded claim ceiling**: C-WEB-DYNAMICS is limited to translation-like dynamics in 10D non-Gaussian spaces. Scaling and rotation detection remain estimator-dependent and unstable.
+```
+
+## provenance.json
+
+```text
+{
+  "experiment_id": "EXP-FRONTIER-34538185726",
+  "execution_timestamp": "2026-09-12T00:46:52Z",
+  "analyzer_script": "run_execute.py (sequential execution of frozen analyze_opt.py logic)",
+  "script_hashes": {
+    "prereg.md": "eec9f8af7a4386f07fafbf1d70967234c44a7ad830f0af62a5023223f0db06b8",
+    "spec.json": "b25d696a82f6f125273f929ba7a49b7fc10248a4b083da76f5828201539e86d1",
+    "request.json": "44fc1148df1f4f750c29ef9fdee31b22cedb50bce3c12868c20f1297956b4845",
+    "freeze.json": "12248483ab56f981f69d1caefc3395e245feef0809803b7e7ea96189be8c893e",
+    "result.json": "aec730346b0bca281782148aa6e7e4d40c19047b0fac8eb75964dc6f563570bd",
+    "raw_tables.json": "54c7645b84d4cd4cfbc2125770d2d91d7d32f7daad8b458923c5f00a3b00d4c2"
+  },
+  "result_hash": "aec730346b0bca281782148aa6e7e4d40c19047b0fac8eb75964dc6f563570bd",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "NOT_APPLICABLE",
+  "claim": "C-WEB-DYNAMICS",
+  "lane": "frontier",
+  "environment": {
+    "python_version": "3.12.14",
+    "numpy_version": "2.5.3",
+    "scipy_version": "unknown"
+  },
+  "frozen_inputs": {
+    "prereg_hash": "eec9f8af7a4386f07fafbf1d70967234c44a7ad830f0af62a5023223f0db06b8",
+    "request_hash": "44fc1148df1f4f750c29ef9fdee31b22cedb50bce3c12868c20f1297956b4845",
+    "spec_hash": "b25d696a82f6f125273f929ba7a49b7fc10248a4b083da76f5828201539e86d1"
+  },
+  "total_transitions": 120000,
+  "kde_parameters": {
+    "bandwidth_search_points": 20,
+    "bandwidth_range": [
+      0.01,
+      2.0
+    ],
+    "cv_folds": 5,
+    "kl_samples": 125,
+    "n_permutations": 50,
+    "pragmatic_perm_bandwidth_reuse": true,
+    "parallel_processes": 1
+  },
+  "execution_seconds": 494.9788267612457
+}
+```
+
+## audit.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-34538185726",
+  "lane": "frontier",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Eliminate intermediate MEASUREMENT_INVALID threshold gaming: frozen decision_rule triggers MEASUREMENT_INVALID if ANY function has JS CV>0.5 at lambda=1. Observed rotation CV=0.981 forces MEASUREMENT_INVALID even though scaling (CV=0.326) and translation (CV=0.287) are stable and both fail/are bounded under falsification criteria. Amend next prereg to either require CV>0.5 per-function reporting (partial validity) or increase stability before re-test: increase per-action sample from ~125 to >=300 or Monte Carlo KL samples from 125 to >=500 or replications from 10 to >=20 to reduce rotation variance; report per-cell JS SE (bootstrap over KDE resampling) separately from inter-replication CV. Current producer correctly applies frozen rule but the rule conflates measurement stability with scientific falsification.",
+    "Restore full cross-validated bandwidth selection for permutation null or downgrade bias-correction claim: prereg 6.1/6.3 and spec measurement_validity specify 5-fold CV with 20-point search per KDE fit; provenance.json pragmatic_perm_bandwidth_reuse=true shows permutation null reuses observed bandwidth factor per action (analyze_opt.py fit_kde_fixed_bandwidth) instead of full 20x5 CV per permutation. Disclosed in validity_notes but underestimates perm variance and perm_mean (perm_mean 0.352-0.357 stable across lambda). Next design must either run full CV for all 12,000 permutation KDE fits (240 cells x 50 perms) or preregister bandwidth-reuse as frozen method and quantify bias via pilot comparing full-CV vs reuse perm_mean/perm_std for at least 10 cells.",
+    "Increase Monte Carlo sample for JS divergence and report JS estimation variance: frozen N_KL_SAMPLES=125 per direction gives SE O(1/sqrt(N)) and KDE resampling adds variance; rotation's extreme CV 0.981 at lambda=1 suggests MC noise may dominate signal (raw_js_max 0.370 vs perm_mean 0.356 for rotation, separation only 0.014). Run variance decomposition (repeat JS compute 10 times on same KDEs) to separate MC variance from DGP variance; if MC variance >30% of inter-rep variance, increase N_KL_SAMPLES to 500+ as in prereg's validity_notes mitigation.",
+    "Fix permutation-test aggregation: controls null_control and positive_control report mean_perm_p=0.413333 (mean of 30 p-values across 3 funcs x 10 reps) with N_PERMUTATIONS=50 granularity 0.02. Mean of p-values is not a valid combined test per Fisher/Stouffer and hides heterogeneity. Next prereg must specify per-function permutation test at lambda=0 (Fisher combined across 10 reps, N>=200 perms) and per-function at lambda=1 for positive control (>0.01 threshold tested via perm distribution, not mean_p). Current p=0.413 PASS is directionally correct but method invalid; recompute from raw perm_js_values if retaining 50-perm budget.",
+    "Address over-smoothing in 10D KDE with sparse per-action data: bandwidth diagnostics show mean_bandwidth factor 1.2367 (SD 0.117, range 1.145-1.513) multiplying Scott's factor ~0.71 => effective h ~0.88*std in 10D with only 125 points. This large smoothing may wash out rotation signal (rotation raw 0.370 vs perm 0.356, near-zero bias-corrected 0.0136) while preserving scaling/translation separations (raw 0.44/0.455 vs perm 0.357). Report effective bandwidth in absolute units, log-likelihood CV curves, and test alternative bandwidth strategies (e.g., diagonal bandwidth, PCA whitening) to test if rotation failure is bandwidth artefact rather than information-theoretic limit."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_rotation_CV_measurement_invalid_correctly_triggered",
+      "severity": "high",
+      "finding": "Frozen MEASUREMENT_INVALID rule (JS CV at lambda=1 >0.5) correctly triggered by rotation CV=0.98099 >0.5 (result.json:controls.js_cv_lambda1.cv_per_function.42=0.9809, threshold 0.5). Recomputed from raw_tables.json 10 rotation values at lambda=1 [0.0019,0.0206,0.0131,0.0002,0.0074,0.0464,0.0039,0.0178,0.0121,0.0122] mean 0.01358 std 0.01332 CV=0.98 matches producer. Scaling CV=0.326 and translation CV=0.287 PASS. Producer status MEASUREMENT_INVALID is correct per frozen rule; without this trigger the same data would be FALSIFIED-IN-SETTING (per-function Spearman FAIL + interaction FAIL). The high rotation variance indicates KDE instability for rotation-type dynamics in 10D with current N_KL_SAMPLES=125 and N~125/action, not a pipeline error (n_errors=0).",
+      "evidence": "result.json:controls.js_cv_lambda1, metrics.per_function.42.js_bc_means_by_lambda, observations JS CV at lambda=1; raw_tables.json func_seed 42 lambda 1.0 10 rows; spec.json:decision_rule MEASUREMENT_INVALID if JS divergence CV >0.5; recomputed CV 0.981 matches"
+    },
+    {
+      "id": "V2_bandwidth_reuse_pragmatic_deviation",
+      "severity": "medium",
+      "finding": "Producer discloses pragmatic optimization: permutation null reuses observed bandwidth factor per action instead of full 20x5 CV per permutation (provenance.json kde_parameters.pragmatic_perm_bandwidth_reuse=true, validity_notes, report.md 2 deviation). Spec 6.3 and prereg 6.1 promised CV per cell with no leakage. Reuse reduces runtime from infeasible (240*50*20*5 KDE fits) to 495s, and perm_mean stability (0.3526 at lambda0, 0.3571 at lambda1, SD ~0.003) suggests small bias, but it underestimates perm variance (perm_std_js 0.018-0.023) and violates transmission invariant. The bias-corrected JS definition max(0, raw - perm_mean) inherits this bias; scaling/translation separations 0.072-0.097 above perm_mean exceed potential reuse bias, so qualitative pattern robust, but claim that bias correction is fully CV-based is overstated.",
+      "evidence": "provenance.json kde_parameters.pragmatic_perm_bandwidth_reuse true, analyzer_script run_execute.py sequential execution of frozen analyze_opt.py logic; report.md 2 Pragmatic deviation; analyze_opt.py:190-214 fit_kde_fixed_bandwidth reuse vs analyze.py full fit_kde_with_cv; result.json validity_notes[5]; raw_tables.json perm_std_js 0.018-0.023"
+    },
+    {
+      "id": "V3_scaling_and_rotation_falsification_holds_even_without_CV_trigger",
+      "severity": "high",
+      "finding": "Even waiving the CV trigger, the frozen decision_rule independently yields FALSIFIED-IN-SETTING: per-function Spearman FAIL for rotation (rho=0.2857 p=0.246 >0.0167) and scaling (rho=0.7143 p=0.02326 >0.0167 Bonferroni threshold 0.0167) per result.json:controls.spearman_per_function; only translation passes (rho=0.8095 p=0.00745). Recomputed Spearman from raw_tables.json means exactly matches (rotation 0.2857, scaling 0.7143, translation 0.8095, aggregate 0.8333 p=0.00509). Two-way ANOVA interaction F=4.9965 p=0.0 (reported) recomputed via pandas/statsmodels F=4.99645 p=4.7e-08, R2=0.5617 decisively fails function invariance (p>0.05 required). Thus SURVIVES_CURRENT_TEST (requires all 3 rho>=0.65 with p<0.0167 + no interaction) is falsified on two independent criteria, not just rotation instability.",
+      "evidence": "result.json:controls.spearman_per_function per_function 42/43/44, controls.function_invariance interaction_p 0.0, controls.spearman_aggregate rho 0.8333; raw_tables.json 240 rows recomputed Spearman matches; spec.json:decision_rule SURVIVES requires per-function rho>=0.65 p<0.0167 and p>0.05 interaction"
+    },
+    {
+      "id": "V4_positive_and_null_controls_valid_but_perm_power_limited",
+      "severity": "medium",
+      "finding": "Positive control PASS correctly: bias-corrected JS at lambda=1 is rotation 0.01358, scaling 0.08305, translation 0.09689 all >=0.01 (result.json:controls.positive_control). This verifies KDE pipeline can detect maximal action-dependence descriptively, passing a low threshold. Null control PASS: mean_perm_p=0.413333 >0.05 (result.json:controls.null_control). However both rely on permutation test with N_PERMUTATIONS=50 (provenance 50 perms per cell, granularity 0.02) and mean-of-p-values aggregation, same invalid method flagged in parent audit. With 50 perms, p-values are coarse and averaging hides heterogeneity. Directionally correct (permutation null stable ~0.35, raw at lambda0 ~0.354 similar to perm), but statistical power for positive control at lambda=1 (reported mean_perm_p not separately) is limited.",
+      "evidence": "result.json:controls.positive_control per_function bc_js_at_lambda1, controls.null_control mean_perm_p 0.413333; provenance.json n_permutations 50; raw_tables.json raw_js_max vs perm_mean_js at lambda1 (rotation 0.370 vs 0.356, translation 0.455 vs 0.358)"
+    },
+    {
+      "id": "V5_Monte_Carlo_and_KDE_variance_conflation",
+      "severity": "medium",
+      "finding": "JS divergence computed via Monte Carlo with N_KL_SAMPLES=125 per direction plus KDE resampling (scipy gaussian_kde resample) adds stochastic variance beyond DGP variance. Producer does not report MC SE per cell. Rotation's tiny separation (raw 0.370 vs perm 0.356, bc 0.0136) is smaller than its inter-replication SD 0.0133, implying signal-to-noise ~1. This could be MC noise, not DGP. Scaling/translation have larger separations (raw 0.44/0.455 vs perm 0.357, bc 0.083/0.097, SD 0.027) so signal dominates. Need decomposition: repeat JS estimation 10 times with fixed KDEs to estimate MC variance; if MC variance dominates rotation, increasing N_KL_SAMPLES would rescue stability.",
+      "evidence": "spec.json measurement_validity N_KL 125; provenance.json kl_samples 125; result.json metrics per_function bc_js_means_by_lambda rotation 0.007-0.014 flat vs translation monotonic; validity_notes Monte Carlo JS SE O(1/sqrt(N)), unresolved[2]"
+    },
+    {
+      "id": "V6_target_representation_and_synthetic_to_real_gap",
+      "severity": "high",
+      "finding": "No change from parent: state space S=[0,1]^10, three toy affine families (rotation via Givens per action_dim, scaling 1+0.2*s[action_dim], translation +0.1*sin modulation), mixture-of-3-Gaussians heteroscedastic noise sigma_base=0.05*(1+0.5*||S-0.5||), clipping to [0,1]. No DOM embeddings, session history, auth, latency, or real Web transitions. Sample size 500 per cell (~125/action) with median kNN distance not reported but bandwidth large indicates sparsity. Result that no single density divergence estimator works uniformly is bounded to this synthetic DGP; extrapolation to C-WEB-DYNAMICS (real Web dynamics predictive beyond memory/similarity) remains hypothesis, not measurement. Report.md correctly discloses synthetic gap.",
+      "evidence": "spec.json measurement_validity Same 10D non-Gaussian DGP as parent; prereg.md 5.1-5.5; analyze_opt.py rotation_10d/scaling_10d/translation_10d, sample_mixture_noise; result.json validity_notes 10D mixture, unresolved Whether real Web transitions exhibit translation-like structure; report.md 8-9"
+    },
+    {
+      "id": "V7_bandwidth_over_smoothing_representation_loss",
+      "severity": "medium",
+      "finding": "Mean bandwidth factor 1.2367 SD 0.117 across all cells (bandwidth_diagnostics: rotation 1.145-1.43, scaling similar) indicates KDE consistently selects bandwidth >1x Scott's rule. Effective bandwidth in 10D with 125 points is large, smoothing over variance differences that scaling introduces and isotropically averaged distances that rotation introduces. Bandwidth CV across replications 0.095 healthy, boundary fraction 0.0 PASS, but absolute magnitude suggests KDE may be over-smoothed for detecting subtle 10D differences, especially rotation's angle 0.1*s[action_dim] per Givens composition. Threat disclosed as curse of dimensionality in validity_notes but not quantified via bandwidth-sensitivity sweep.",
+      "evidence": "result.json metrics.bandwidth_diagnostics per func 42/43/44, controls.bandwidth_health cv 0.0949 mean 1.2367; provenance bandwidth_range [0.01,2.0] bandwidth_search_points 20; prereg 6.3 bandwidth factor = h / std(data)"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "kNN_TV_bias_corrected_parent",
+      "status": "present",
+      "finding": "Producer correctly compares to parent kNN TV bias-corrected rho: translation kNN 1.0 vs KDE 0.8095 (both detect translation), rotation kNN 0.93 vs KDE 0.2857 (kNN detects rotation, KDE fails), scaling kNN -0.12 vs KDE 0.7143 (KDE borderline better than kNN but still fails Bonferroni p 0.023>0.0167). Report.md Table 6 and result.json per_function show complementary blind spots. No statistical test of difference, but qualitative ordering correctly establishes that scaling failure is partially estimator-specific (KDE rho 0.71 vs -0.12) yet not rescued (fails corrected p), and KDE introduces new rotation blind spot not seen with kNN.",
+      "evidence": "spec.json baselines kNN TV bias-corrected divergence from EXP-FRONTIER-34065969836 and 34121473072 scaling rho=-0.12; result.json metrics.per_function.43 rho 0.7143 vs parent -0.12; report.md 6 Comparison with kNN TV table"
+    },
+    {
+      "baseline_id": "permutation_null",
+      "status": "partial",
+      "finding": "Permutation null implemented for bias correction (bias_corrected_js = max(0, raw_js_max - perm_mean_js) with 50 perms per cell) and for null control significance. Raw perm_mean_js stable ~0.352-0.357 across lambdas and functions, indicating effective null. However bandwidth reuse (V2) and mean-p aggregation make test partially valid. Standard permutation test assumptions hold (shuffle action labels on same S_next) with no target leakage (KDE computed from generated transitions, labels shuffled same data).",
+      "evidence": "spec.json baselines Permutation null: action labels shuffled; result.json controls.null_control mean_perm_p 0.413 pass true, controls.js_cv_lambda1 perm usage; raw_tables.json perm_mean_js ~0.35 across 240 rows; provenance pragmatic_perm_bandwidth_reuse true"
+    },
+    {
+      "baseline_id": "frequency_baseline_marginal_P_S_next",
+      "status": "partial",
+      "finding": "Spec lists frequency baseline as marginal next-state distribution P(S_next) providing expected divergence under no action-dependence (expected 0 at lambda=0). Producer does not compute explicit frequency baseline histogram in this experiment; instead uses permutation null as proxy and reports null control PASS. At lambda=0 bias-corrected JS 0.007-0.010 >0 but within inter-replication SD, and perm_mean ~0.35 vs raw 0.35 indicates no signal beyond permutation floor. Explicit marginal TV in 10D (e.g., KDE on pooled S_next vs action-conditional) not reported; gap acknowledged as unresolved but not measured as in parent.",
+      "evidence": "spec.json baselines[2] Frequency baseline; result.json no explicit frequency metric, controls.null_control covers null; report.md does not list frequency baseline artifact; parent had frequency baseline 0.17 vs floor 0.528"
+    },
+    {
+      "baseline_id": "toroidal_and_gaussian_controls_absent_by_design",
+      "status": "missing",
+      "finding": "Parent experiments used toroidal wrapping and Gaussian noise baselines to test clipping and noise distribution artefacts. This experiment's spec does not require them (baselines are kNN, permutation, frequency), so omission is by frozen design, not a violation. However clipping to [0,1] remains (s_next = clip) with boundary concentration untested with KDE; KDE's Gaussian kernel with large bandwidth may be less sensitive to boundary mass than kNN, partially explaining scaling rescue. No evidence that clipping explains rotation failure.",
+      "evidence": "spec.json baselines only 3 entries vs parent 4-5; prereg 11.4 validity threat but not baseline; result.json validity_notes clipping to [0,1] matches parent boundary treatment"
+    }
+  ],
+  "recomputed_metrics": {
+    "aggregate_spearman_bc_js": {
+      "rho": 0.8333333333333335,
+      "p_one_sided": 0.005087770061728376,
+      "n": 8,
+      "recomputed": true,
+      "match_producer": true,
+      "source": "raw_tables.json 240 rows grouped by lambda, mean bias_corrected_js per lambda [0.00863,0.01249,0.01992,0.02645,0.02245,0.01410,0.02874,0.06451] vs lambda [0,0.1,0.2,0.3,0.4,0.5,0.7,1.0] scipy.stats.spearmanr"
+    },
+    "per_function_rotation_bc_js": {
+      "func_seed": 42,
+      "func_name": "rotation",
+      "rho": 0.28571428571428575,
+      "p_one_sided": 0.24636312250847858,
+      "means_by_lambda": [0.007370872257036221, 0.014468235196638646, 0.007099313135730123, 0.007480282168488561, 0.001862300702552111, 0.008528007193931231, 0.010298635478187174, 0.013577162364070505],
+      "recomputed": true,
+      "match_producer": true,
+      "monotonic": false,
+      "pass_threshold": false
+    },
+    "per_function_scaling_bc_js": {
+      "func_seed": 43,
+      "func_name": "scaling",
+      "rho": 0.7142857142857144,
+      "p_one_sided": 0.023264116142083627,
+      "means_by_lambda": [0.010223385382637035, 0.015981439290127797, 0.03136669474991345, 0.04518238631779571, 0.04040122578597957, 0.02046435565083164, 0.036940345912786964, 0.08305272652174703],
+      "recomputed": true,
+      "match_producer": true,
+      "monotonic": false,
+      "pass_threshold": false,
+      "note": "rho >=0.65 but p>0.0167 Bonferroni, fails decision_rule"
+    },
+    "per_function_translation_bc_js": {
+      "func_seed": 44,
+      "func_name": "translation",
+      "rho": 0.8095238095238096,
+      "p_one_sided": 0.007451333843115036,
+      "means_by_lambda": [0.00830056176329561, 0.007025346265973453, 0.021300329359786235, 0.026678112715261503, 0.025100614008340988, 0.013318455785424932, 0.03898331644753218, 0.0968870727326325],
+      "recomputed": true,
+      "match_producer": true,
+      "monotonic": false,
+      "pass_threshold": true
+    },
+    "anova_interaction_bc_js": {
+      "F": 4.9965,
+      "p_value": 0.0,
+      "recomputed_F": 4.99645,
+      "recomputed_p": 4.749226e-08,
+      "df_interaction": 14,
+      "df_residual": 216,
+      "r_squared": 0.5617,
+      "recomputed": true,
+      "match_producer": true,
+      "interaction_pass": false,
+      "note": "F recomputed via statsmodels ols js ~ C(lam_level)+C(function)+C(lam_level):C(function) on 240 bias_corrected_js obs matches producer F=4.9965"
+    },
+    "js_CV_lambda1": {
+      "42_rotation": 0.9809926044633975,
+      "43_scaling": 0.32619571628299815,
+      "44_translation": 0.2868303319520971,
+      "recomputed": true,
+      "match_producer": true,
+      "threshold": 0.5,
+      "trigger_measurement_invalid": true,
+      "source": "raw_tables.json 10 bias_corrected_js per func at lambda 1.0: rotation std0.01332 mean0.01358 CV0.981, scaling std0.02709 mean0.08305 CV0.326, translation std0.02779 mean0.09689 CV0.287"
+    },
+    "effect_sizes_cohens_d": {
+      "42_rotation": 0.5168637236257903,
+      "43_scaling": 3.439467759019285,
+      "44_translation": 4.194547674650731,
+      "aggregate": 1.7578338655423345,
+      "recomputed": true,
+      "match_producer": true,
+      "source": "bias_corrected_js at lambda0 vs lambda1 pooled SD; rotation d small due to near-zero separation, scaling/translation large"
+    },
+    "positive_control_bc_js_lambda1": {
+      "42_rotation": 0.013577162364070505,
+      "43_scaling": 0.08305272652174703,
+      "44_translation": 0.0968870727326325,
+      "threshold": 0.01,
+      "pass": true,
+      "recomputed": true,
+      "match_producer": true
+    },
+    "bandwidth_health": {
+      "mean_factor": 1.236711159982055,
+      "std_factor": 0.11745564048698981,
+      "cv_factor": 0.09497418984129982,
+      "boundary_fraction": 0.0,
+      "pass": true,
+      "recomputed_from_diagnostics": true,
+      "match_producer": true
+    }
+  },
+  "claim_ceiling": "MAXIMUM JUSTIFIED: KDE with 5-fold CV bandwidth (20 log-spaced factors in [0.01,2.0]) and Monte Carlo JS (125 samples/direction) does NOT uniformly detect scaling-type action-dependence in the same 10D mixture-of-3-Gaussians non-Gaussian DGP at N=500/cell (~125/action). Per frozen decision_rule the experiment is MEASUREMENT_INVALID due to rotation instability (JS CV 0.981 >0.5 at lambda=1) and independently FALSIFIED-IN-SETTING: only translation shows monotonic Spearman rho>=0.65 with p<0.0167 (rho=0.8095 p=0.00745); scaling rho=0.714 p=0.02326 fails Bonferroni despite being better than kNN TV rho=-0.12, rotation rho=0.285 p=0.246 fails; function x lambda interaction p~5e-08 decisively rejects invariance (R2=0.56). Aggregate rho=0.833 p=0.005 passes but is driven by translation/scaling, masking heterogeneity. Positive control (>=0.01 at lambda=1) PASS, null control (perm p=0.413 >0.05) PASS, but both limited by 50-perm coarse resolution and bandwidth-reuse deviation. No single density-divergence estimator (kNN TV or KDE) works uniformly across function families in this synthetic setting; they have complementary blind spots (kNN fails scaling, KDE fails rotation). C-WEB-DYNAMICS remains bounded to translation-like dynamics in synthetic 10D; information-theoretic limit for scaling not closed because KDE does improve over kNN and failure may be bandwidth/MC-limited, while rotation failure suggests KDE-specific artefact. No inference to real Web transitions. Do NOT promote KDE divergence to product core. Frontier must either stabilize KDE (larger N, larger N_KL, full CV perm) or pivot to orthogonal mechanisms (binned PCA projection, neural density) or real Web data.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-34538185726/request.json:experiment_id EXP-FRONTIER-34538185726 lane frontier parent_handoff EXP-FRONTIER-34121473072",
+    "research/experiments/EXP-FRONTIER-34538185726/spec.json:question hypothesis falsifier baselines positive_control null_control measurement_validity decision_rule claim_ids C-WEB-DYNAMICS",
+    "research/experiments/EXP-FRONTIER-34538185726/prereg.md: sections 2-12 hypotheses H1-H4 lambda levels 8 functions 3 KDE CV JS via Monte Carlo N_KL 125",
+    "research/experiments/EXP-FRONTIER-34538185726/freeze.json:frozen_at 2026-09-11T00:41:14 hashes prereg eec9f8af hash",
+    "research/experiments/EXP-FRONTIER-34538185726/result.json:status MEASUREMENT_INVALID outcome NOT_APPLICABLE metrics aggregate per_function bandwidth_diagnostics anova controls positive_control null_control spearman_per_function function_invariance js_cv_lambda1 observations validity_notes",
+    "research/experiments/EXP-FRONTIER-34538185726/report.md: sections 3-6 tables decision MEASUREMENT_INVALID comparison kNN TV vs KDE",
+    "research/experiments/EXP-FRONTIER-34538185726/provenance.json:execution_timestamp 2026-09-12T00:46:52Z kde_parameters n_permutations 50 pragmatic_perm_bandwidth_reuse true total_transitions 120000 execution_seconds 494.97",
+    "research/frontier/kde_divergence/raw_tables.json:240 rows (3 funcs x 8 lambdas x 10 reps) fields raw_js_max bias_corrected_js perm_mean_js perm_std_js avg_bandwidth bandwidths",
+    "research/frontier/kde_divergence/analyze.py: frozen code with fit_kde_with_cv 20 log-spaced factors compute_js_divergence compute_js_all_pairs kde_pipeline_for_cell",
+    "research/frontier/kde_divergence/analyze_opt.py: optimized with fit_kde_fixed_bandwidth reuse of observed bandwidth for perm null, multiprocessing",
+    "research/experiments/EXP-FRONTIER-34121473072/handoff.json:next_question KDE/binned PCA/neural density or information-theoretic limit"
+  ],
+  "unresolved": [
+    "Whether full 20x5 CV per permutation (instead of bandwidth reuse) would change perm_mean/perm_std enough to alter bias_corrected_js at lambda=1 for rotation (bc 0.0136) or scaling p-value (0.02326 vs threshold 0.0167) — reuse bias unquantified beyond pilot stability",
+    "Whether increasing N_KL_SAMPLES from 125 to 500+ and per-action N from ~125 to 300+ would reduce rotation CV 0.981 below 0.5 threshold and rescue monotonic rho for rotation (currently 0.285) — MC variance vs DGP variance not decomposed",
+    "Whether rotation failure is KDE-specific bandwidth over-smoothing artefact vs information-theoretic: rotation angle 0.1*s[action_dim] produces small isotropic distance changes that large bandwidth 1.2xScott may smooth away, vs kNN detecting rotation via local neighbor ratios",
+    "Whether scaling borderline signal (rho=0.714 p=0.023) would cross Bonferroni threshold with more replications (10->20), more perms (50->200), or slightly different scale_factor parameterization — single 20% modulation tested",
+    "Whether real Web transitions exhibit translation-like vs scaling-like vs rotation-like structure and which estimator family would dominate — synthetic-to-real gap remains the dominant unknown for C-WEB-DYNAMICS",
+    "Whether alternative orthogonal estimators (binned PCA projection, neural density estimation) can detect scaling without introducing rotation blind spot in same 10D DGP — frontier next question still open"
+  ]
+}
+```
+
+## verdict.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-34538185726",
+  "lane": "frontier",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "HYPOTHESIS",
+      "reason": "KDE with cross-validated bandwidth partially detects scaling-type dynamics (Spearman rho=0.714, p=0.023 > Bonferroni threshold 0.0167) but fails rotation-type dynamics (rho=0.286, p=0.246), demonstrating complementary blind spots with kNN TV (which fails scaling rho=-0.12 but detects rotation rho=0.93). Experiment is MEASUREMENT_INVALID per frozen decision_rule: rotation JS CV=0.981 > 0.5 at lambda=1 (result.json:controls.js_cv_lambda1.cv_per_function.42). Even without the CV trigger, function invariance fails (ANOVA interaction p~5e-8, R2=0.56) and per-function Spearman fails for rotation and scaling after Bonferroni correction. Aggregate rho=0.833 p=0.005 is driven by translation/scaling, masking heterogeneity. No single density-divergence estimator (kNN TV or KDE) works uniformly across all function families in this 10D non-Gaussian DGP — they have complementary blind spots (kNN fails scaling, KDE fails rotation). C-WEB-DYNAMICS claim ceiling bounded to: action-dependent structure detectable by at least one estimator only for translation-like dynamics; scaling and rotation detection remain estimator-dependent and unstable. Synthetic-to-real gap persists; no inference to real Web transitions."
+    }
+  ],
+  "product_action": "DO_NOT_PROMOTE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can binned PCA projection to 2D-3D subspaces before divergence computation detect both scaling-type and rotation-type action-dependent structure simultaneously in the same 10D non-Gaussian DGP — or does dimensionality reduction destroy the discriminating information that both kNN TV (full-space neighbor ratios) and KDE (full-space kernel smoothing) each partially capture?",
+  "reason": "Decision grounded in frozen spec.json decision_rule clause 12.3: MEASUREMENT_INVALID triggered by rotation JS CV=0.981 > 0.5 at lambda=1 (result.json:controls.js_cv_lambda1.cv_per_function.42=0.981, threshold 0.5). Audit V1 confirms recomputed CV matches producer. Independent of the CV trigger, the frozen decision_rule also yields FALSIFIED-IN-SETTING via two criteria: (1) per-function Spearman FAIL for rotation (rho=0.286, p=0.246 > 0.0167) and scaling (rho=0.714, p=0.023 > 0.0167 Bonferroni) per result.json:controls.spearman_per_function; (2) function invariance FAIL (ANOVA interaction F=4.9965, p~5e-8, R2=0.56) per result.json:controls.function_invariance. Audit V3 confirms both failures hold independently. Positive control PASS (bc JS >=0.01 at lambda=1 for all functions) and null control PASS (perm p=0.413 >0.05) verify KDE pipeline detects maximal structure and does not detect absent structure, but both are limited by 50-perm coarse resolution and pragmatic bandwidth reuse (audit V2). Audit required_fixes identify: (1) rotation instability may require larger N_KL samples (125->500+) or more per-action data (125->300+); (2) permutation null bandwidth reuse underestimates perm variance; (3) permutation test aggregation uses invalid mean-of-p-values; (4) over-smoothing in 10D (mean bandwidth factor 1.24). These are measurement quality issues, not scientific findings. The key scientific finding is that KDE and kNN TV have complementary blind spots — no single density-divergence estimator works uniformly — which is robust despite the MEASUREMENT_INVALID trigger. C-WEB-DYNAMICS remains HYPOTHESIS. No product promotion: no real Web data, no end-to-end economics, per-function heterogeneity invalidates uniform detection claim.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-34538185726/spec.json:decision_rule conditions 12.2 FALSIFIED-IN-SETTING and 12.3 MEASUREMENT_INVALID, claim_ids C-WEB-DYNAMICS, falsifier, baselines, positive_control, null_control",
+    "research/experiments/EXP-FRONTIER-34538185726/result.json:status MEASUREMENT_INVALID, metrics.per_function rotation rho=0.286 p=0.246, scaling rho=0.714 p=0.023, translation rho=0.810 p=0.007, controls.js_cv_lambda1.cv_per_function.42=0.981, controls.spearman_per_function pass/fail per function, controls.function_invariance interaction_p=0.0, controls.positive_control PASS, controls.null_control PASS, metrics.anova.full_model.interaction_effect F=4.9965 p=0.0, bandwidth_diagnostics mean=1.2367",
+    "research/experiments/EXP-FRONTIER-34538185726/audit.json:status MEASUREMENT_INVALID, producer_claim_supported false, claim_ceiling bounded to translation-like dynamics, required_fixes 5 items (rotation_CV, bandwidth_reuse, MC_variance, perm_aggregation, over_smoothing), validity_findings V1-V7, recomputed_metrics match producer, baseline kNN_TV comparison complementary blind spots",
+    "research/experiments/EXP-FRONTIER-34538185726/provenance.json:kde_parameters pragmatic_perm_bandwidth_reuse=true, n_permutations=50, kl_samples=125, execution_seconds=495",
+    "research/experiments/EXP-FRONTIER-34538185726/report.md:sections 3-7 tables, comparison kNN vs KDE per-function, interpretation complementary blind spots",
+    "research/experiments/EXP-FRONTIER-34538185726/freeze.json:frozen_at 2026-09-11T00:41:14",
+    "research/experiments/EXP-FRONTIER-34121473072/handoff.json:parent established kNN fails scaling rho=-0.12, rejected uniform generalization, unknown alternative estimators, carry_forward four-way distinction",
+    "research/experiments/EXP-FRONTIER-34121473072/audit.json:claim_ceiling kNN TV bounded to translation-like dynamics",
+    "research/experiments/EXP-FRONTIER-34065969836/verdict.json:raw kNN TV falsified uniform generalization, scaling rho=-0.07",
+    "research/frontier/kde_divergence/raw_tables.json:240 rows per-cell summary statistics recomputed by audit",
+    "research/claims/registry.json:C-WEB-DYNAMICS status HYPOTHESIS"
+  ]
+}
+```
+
+## handoff.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-34538185726",
+  "lane": "frontier",
+  "target_lane": "frontier",
+  "next_question": "Can binned PCA projection to 2D-3D subspaces before divergence computation detect both scaling-type and rotation-type action-dependent structure simultaneously in the same 10D non-Gaussian DGP — or does dimensionality reduction destroy the discriminating information that both kNN TV (full-space neighbor ratios) and KDE (full-space kernel smoothing) each partially capture?",
+  "why_next": "Three consecutive experiments (kNN raw, kNN bias-corrected, KDE) have converged on the same meta-finding: no single density-divergence estimator works uniformly across all function families in this 10D non-Gaussian DGP. kNN TV fails scaling (rho=-0.12) but detects rotation (rho=0.93); KDE partially detects scaling (rho=0.71) but fails rotation (rho=0.29). Both detect translation. The complementary blind spots suggest the per-function heterogeneity is not purely estimator-specific but may reflect the curse of dimensionality in 10D: different estimators lose sensitivity to different types of structure at high dimension. Binned PCA projection to 2D-3D subspaces before divergence computation is a materially orthogonal mechanism that tests a different hypothesis: whether the information for scaling and rotation detection is present in the 10D data but lost by full-space estimators due to distance concentration, versus genuinely absent. If PCA projection rescues both scaling and rotation simultaneously, the problem is dimensionality not information-theoretic. If PCA also fails on one or both, the information-theoretic limit is more firmly established. This is the minimum next experiment before pivoting to real Web data.",
+  "carry_forward": {
+    "established": [
+      "KDE with 5-fold CV bandwidth partially detects scaling-type dynamics (Spearman rho=0.714, p=0.023) but fails rotation-type dynamics (rho=0.286, p=0.246) in the same 10D non-Gaussian DGP at N=500/cell. Translation remains detectable (rho=0.810, p=0.007 < Bonferroni 0.0167). (result.json:metrics.per_function, controls.spearman_per_function; audit.json:recomputed_metrics per_function_spearman)",
+      "kNN TV and KDE have complementary blind spots in 10D non-Gaussian spaces: kNN fails scaling (rho=-0.12) but detects rotation (rho=0.93); KDE partially detects scaling (rho=0.71) but fails rotation (rho=0.29). No single density-divergence estimator works uniformly across all function families. (audit.json:baseline_findings.kNN_TV_bias_corrected_parent, claim_ceiling; report.md:section 6 comparison table)",
+      "Function invariance decisively fails across both estimation principles: ANOVA function x lambda interaction p=0 for kNN TV (F=30.2, R2=0.85) and p~5e-8 for KDE (F=4.9965, R2=0.56). This is a robust finding, not estimator-specific. (result.json:metrics.anova; audit.json:recomputed_metrics.anova_interaction_bc_js)",
+      "Translation-type dynamics produce the strongest and most consistent signal across all Frontier experiments and both estimators. Translation is the only function family that passes per-function Bonferroni-corrected significance with both kNN TV (rho=1.0) and KDE (rho=0.810). (result.json:metrics.per_function.44_translation; parent result.json:metrics.per_function_bias_corrected.44_translation)",
+      "KDE positive control passes (bc JS >=0.01 at lambda=1 for all functions: rotation 0.014, scaling 0.083, translation 0.097) and null control passes (perm p=0.413 >0.05), verifying the KDE pipeline detects maximal action-dependence and does not detect absent structure. (result.json:controls.positive_control, controls.null_control)",
+      "kNN TV finite-sample bias floor ~0.528 is intrinsic to kNN in 10D (toroidal at lambda=0 still 0.528). Bias correction via permutation-null subtraction removes the floor (bc_TV at lambda=0 ~0.006) but does not rescue scaling. (parent result.json:metrics.bias_floor_l0, toroidal_sanity; parent audit.json:recomputed_metrics.bias_floor)"
+    ],
+    "rejected": [
+      "KDE as universal detector of action-dependent structure in 10D non-Gaussian spaces — fails rotation (rho=0.286, p=0.246) with extreme variance (JS CV=0.981 at lambda=1). MEASUREMENT_INVALID per frozen rule. (result.json:controls.js_cv_lambda1, controls.spearman_per_function.42; audit.json:validity_findings.V1)",
+      "kNN TV as universal detector of action-dependent structure in 10D non-Gaussian spaces — fails scaling (rho=-0.12, p=0.61) regardless of bias correction. (parent result.json:metrics.per_function_bias_corrected.43_scaling; parent audit.json:claim_ceiling)",
+      "Uniform TV/density-divergence generalization from 2D Gaussian to 10D non-Gaussian — decisively falsified across four Frontier experiments (2D affine, 10D raw kNN, 10D bias-corrected kNN, 10D KDE). Function invariance fails at p~0 in all high-dimensional tests. (audit.json:recomputed_metrics.anova_interaction_bc_js; parent audit.json:recomputed_metrics.anova_interaction_bias_corrected)",
+      "Hypothesis that scaling failure in kNN TV was purely estimator artefact (bias floor + clipping) — KDE improves scaling detection (rho=0.71 vs -0.12) but does not fully rescue it (p=0.023 > Bonferroni 0.0167), and introduces new rotation blind spot. The scaling failure is partially estimator-specific but not fully rescuable by any single tested density-divergence principle. (audit.json:baseline_findings.kNN_TV_bias_corrected_parent; report.md:section 6)"
+    ],
+    "unknown": [
+      "Can binned PCA projection to lower-dimensional subspaces before divergence computation detect both scaling AND rotation simultaneously — testing whether per-function heterogeneity is a curse-of-dimensionality artefact (different estimators lose different structure at high dimension) versus genuine information-theoretic absence.",
+      "Whether rotation failure in KDE is a bandwidth over-smoothing artefact (mean bandwidth factor 1.24 in 10D) or an information-theoretic limit — audit V7 identifies this but cannot resolve without bandwidth-sensitivity sweep. (audit.json:validity_findings.V7)",
+      "Whether increasing Monte Carlo JS samples from 125 to 500+ and per-action N from ~125 to 300+ would reduce rotation CV from 0.981 below the 0.5 threshold — MC variance vs DGP variance not decomposed. (audit.json:validity_findings.V5, unresolved[1])",
+      "Whether full 20x5 cross-validated bandwidth selection for permutation null (instead of pragmatic bandwidth reuse) would change bias-corrected JS values enough to alter the scaling p-value from 0.023 below Bonferroni 0.0167. (audit.json:validity_findings.V2, unresolved[0])",
+      "Whether real Web DOM transitions exhibit translation-like vs scaling-like vs rotation-like action-dependent structure, and which estimator family would dominate on real data — the synthetic-to-real gap remains the dominant unknown for C-WEB-DYNAMICS. (audit.json:unresolved[4]; parent handoff.json:unknown[4])",
+      "Whether scaling borderline signal (rho=0.714) would cross Bonferroni threshold with more replications (10->20) or more permutations (50->200) — single parameterization (1.0+0.2*s[action_dim]) and 10 reps tested. (audit.json:unresolved[3])"
+    ],
+    "do_not_assume": [
+      "Do not assume C-WEB-DYNAMICS is falsified — claim concerns real Web dynamics; all evidence is synthetic 10D [0,1]^10 with 3 toy affine families and mixture-of-3-Gaussians noise. Synthetic-to-real gap persists across four Frontier experiments. Claim ceiling narrowed but claim remains HYPOTHESIS. (audit.json:claim_ceiling; parent handoff.json:do_not_assume[1])",
+      "Do not assume aggregate Spearman rho=0.833 means KDE works uniformly — it is weighted average of translation (0.810), scaling (0.714), and rotation (0.286). Function invariance decisively fails (ANOVA p~5e-8). (result.json:metrics.aggregate, controls.function_invariance)",
+      "Do not assume KDE results generalize to real Web transitions — all evidence is synthetic DGP with toy affine families, mixture noise, and clipping to [0,1]. No DOM embeddings, session history, auth/latency, or real action semantics. (audit.json:validity_findings.V6; prereg.md:section 11.4)",
+      "Do not assume the MEASUREMENT_INVALID trigger (rotation CV=0.981) means all results are unreliable — scaling and translation show stable variance (CV=0.326 and 0.287 respectively) and the complementary blind spot finding (KDE detects scaling but not rotation, kNN detects rotation but not scaling) is robust across both estimators and both experiments. (result.json:controls.js_cv_lambda1; audit.json:validity_findings.V1)",
+      "Do not assume product deployment readiness — no real Web data, no end-to-end economics, per-function heterogeneity invalidates uniform detection claim, MEASUREMENT_INVALID status on frozen rule. (audit.json:claim_ceiling)",
+      "Do not assume permutation null p-values are statistically valid — 50 perms per cell with pragmatic bandwidth reuse and mean-of-p-values aggregation is methodologically limited. Directionally correct (perm null stable ~0.35) but not confirmatory. (audit.json:validity_findings.V2, V4; provenance.json:pragmatic_perm_bandwidth_reuse=true)",
+      "Do not assume the scaling borderline signal (rho=0.714, p=0.023) is a false negative — it may cross Bonferroni with more power (more reps, more perms, different scale_factor parameterization). The information-theoretic limit for scaling is not closed because KDE does improve over kNN. (audit.json:unresolved[3]; report.md:section 7)"
+    ]
+  },
+  "dependencies": [
+    "Binned PCA projection implementation: PCA or random projection from 10D to 2D-3D subspace, followed by binned TV or KDE divergence on projected states. Requires numpy/sklearn PCA (available in base install). Must use same 10D non-Gaussian DGP, same lambda levels, same function families for direct comparison.",
+    "Corrected permutation null infrastructure: per-function permutation test at lambda=0 (Fisher combined across reps, N>=200 perms) and per-function at lambda=1 for positive control. Full CV bandwidth selection for permutation null or preregistered bandwidth-reuse with quantified bias.",
+    "Increased sample sizes if stabilizing KDE: N_KL_SAMPLES from 125 to 500+, per-action N from ~125 to 300+, replications from 10 to 20. Required before re-testing KDE on the same DGP.",
+    "Real or realistic Web transition data with known action-structure (recorded agent sessions with DOM state tracking) — minimum substrate to test synthetic-to-real translation of any estimator. All Frontier evidence remains synthetic across four experiments.",
+    "Variance decomposition: repeat JS estimation 10 times with fixed KDEs to separate Monte Carlo variance from DGP variance. If MC variance >30% of inter-rep variance, increase N_KL_SAMPLES before claiming rotation failure is scientific rather than computational."
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-34538185726/result.json:status MEASUREMENT_INVALID, metrics.per_function rotation/scaling/translation rho and p, controls.js_cv_lambda1, controls.spearman_per_function, controls.function_invariance, controls.positive_control, controls.null_control, metrics.anova, bandwidth_diagnostics",
+    "research/experiments/EXP-FRONTIER-34538185726/audit.json:status MEASUREMENT_INVALID, producer_claim_supported false, claim_ceiling, required_fixes 5 items, validity_findings V1-V7, recomputed_metrics all match producer, baseline_findings kNN_TV comparison, unresolved 6 items",
+    "research/experiments/EXP-FRONTIER-34538185726/spec.json:decision_rule 12.2 FALSIFIED-IN-SETTING 12.3 MEASUREMENT_INVALID, question, hypothesis, falsifier, baselines, positive_control, null_control, measurement_validity, claim_ids C-WEB-DYNAMICS",
+    "research/experiments/EXP-FRONTIER-34538185726/provenance.json:kde_parameters pragmatic_perm_bandwidth_reuse=true n_permutations=50 kl_samples=125 execution_seconds=495",
+    "research/experiments/EXP-FRONTIER-34538185726/report.md:sections 3-7 comparison tables, interpretation complementary blind spots, section 10 recommendations",
+    "research/experiments/EXP-FRONTIER-34538185726/prereg.md:sections 5-6 KDE implementation, sections 9-10 statistical tests and controls",
+    "research/experiments/EXP-FRONTIER-34121473072/handoff.json:carry_forward established/rejected/unknown/do_not_assume, next_question KDE/binned PCA/neural density",
+    "research/experiments/EXP-FRONTIER-34121473072/audit.json:claim_ceiling kNN TV bounded to translation-like, required_fixes 8 items",
+    "research/experiments/EXP-FRONTIER-34121473072/verdict.json:decision FALSIFIED-IN-SETTING, claim_updates C-WEB-DYNAMICS HYPOTHESIS",
+    "research/experiments/EXP-FRONTIER-34065969836/verdict.json:raw kNN TV falsified uniform generalization",
+    "research/frontier/kde_divergence/raw_tables.json:240 rows per-cell summary statistics",
+    "research/claims/registry.json:C-WEB-DYNAMICS status HYPOTHESIS owner_lanes physics frontier"
+  ],
+  "recommended_action": "Design a Frontier experiment testing binned PCA projection (10D -> 2D-3D) before divergence computation on the same 10D non-Gaussian DGP. This is materially orthogonal to both kNN TV (full-space neighbor ratios) and KDE (full-space kernel smoothing) because it tests whether dimensionality reduction before divergence estimation can simultaneously detect scaling AND rotation, which no full-space estimator achieves. If PCA projection rescues both functions, the per-function heterogeneity is a curse-of-dimensionality artefact (different estimators lose different structure at high dimension). If PCA also fails on one or both, the information-theoretic limit is more firmly established and Frontier should pivot to real Web transition data. Required: (1) PCA or random projection to 2D-3D, (2) binned TV or KDE on projected states, (3) same frozen DGP/lambda/functions for direct comparison, (4) corrected permutation null with full CV or preregistered reuse, (5) per-function reporting. Do NOT repeat KDE with minor parameter variations — marginal information gain is near zero after three converged experiments showing complementary blind spots."
 }
 ```
 

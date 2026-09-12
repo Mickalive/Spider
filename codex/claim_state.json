@@ -67,6 +67,14 @@
         "reason": "Bias-corrected kNN TV (permutation-null subtraction) does NOT recover uniform function invariance in 10D non-Gaussian synthetic spaces. The experiment FALSIFIES the uniform generalization: aggregate monotonicity survives (Spearman rho=0.976, p<0.001) but is driven entirely by translation (rho=1.0) and rotation (rho=0.93); scaling shows zero monotonic response (rho=-0.12, p=0.61) even after removing the shared bias floor 0.528. Two-way ANOVA function x lambda interaction p=0 decisively rejects invariance (F=30.2, R2=0.85). Bias correction removes the ~0.52 floor (bc_TV at lambda=0 ~0.006, permutation p=0.55) but does not rescue scaling (bc separation 0.012 vs translation 0.185). Clipping contributes to absolute separations (toroidal reduces gap 84.9%) but the per-function ordering translation>rotation>scaling persists under toroidal, and toroidal at lambda=0 still 0.528 proving the floor is kNN-intrinsic not boundary artefact. Claim ceiling bounded to: kNN TV detects action-dependent structure in 10D non-Gaussian spaces ONLY for translation-like (and partially rotation-like) dynamics with sufficient separability. Scaling-type dynamics remain undetectable. No evidence for real Web transitions; synthetic-to-real gap persists. The claim remains HYPOTHESIS with this narrowed ceiling pending alternative estimators or real Web data."
       },
       {
+        "experiment_id": "EXP-FRONTIER-34538185726",
+        "lane": "frontier",
+        "decision": "MEASUREMENT_INVALID",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "KDE with cross-validated bandwidth partially detects scaling-type dynamics (Spearman rho=0.714, p=0.023 > Bonferroni threshold 0.0167) but fails rotation-type dynamics (rho=0.286, p=0.246), demonstrating complementary blind spots with kNN TV (which fails scaling rho=-0.12 but detects rotation rho=0.93). Experiment is MEASUREMENT_INVALID per frozen decision_rule: rotation JS CV=0.981 > 0.5 at lambda=1 (result.json:controls.js_cv_lambda1.cv_per_function.42). Even without the CV trigger, function invariance fails (ANOVA interaction p~5e-8, R2=0.56) and per-function Spearman fails for rotation and scaling after Bonferroni correction. Aggregate rho=0.833 p=0.005 is driven by translation/scaling, masking heterogeneity. No single density-divergence estimator (kNN TV or KDE) works uniformly across all function families in this 10D non-Gaussian DGP \u2014 they have complementary blind spots (kNN fails scaling, KDE fails rotation). C-WEB-DYNAMICS claim ceiling bounded to: action-dependent structure detectable by at least one estimator only for translation-like dynamics; scaling and rotation detection remain estimator-dependent and unstable. Synthetic-to-real gap persists; no inference to real Web transitions."
+      },
+      {
         "experiment_id": "EXP-PHYSICS-33528829431",
         "lane": "physics",
         "decision": "REVISE",
