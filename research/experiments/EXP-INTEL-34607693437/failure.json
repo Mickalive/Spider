@@ -3,7 +3,7 @@
   "category": "VALIDATION_FAILURE",
   "message": "invalid claim update status: UNKNOWN",
   "retryable": false,
-  "recorded_at": "2026-09-12T09:31:35.557665+00:00",
-  "github_run_id": "34685459655",
+  "recorded_at": "2026-09-12T12:58:57.606740+00:00",
+  "github_run_id": "34695057103",
   "github_run_attempt": "1"
 }
