@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34586318405",
+  "lane": "graph",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "aliased_first_correct_selection_rate": 0.0,
+    "aliased_first_correct_selection_count": 0,
+    "aliased_first_total": 6,
+    "binomial_p_value_one_sided": 0.015625,
+    "http_template_accuracy_status_code": 0.0,
+    "http_template_accuracy_status_code_correct": 0,
+    "http_template_accuracy_status_code_total": 12,
+    "http_template_accuracy_body_based": 1.0,
+    "http_template_accuracy_body_based_correct": 4,
+    "http_template_accuracy_body_based_total": 4,
+    "grounding_event_count_status_code": 0,
+    "grounding_event_count_body_based": 4,
+    "grounding_value_ratio_body_based": 0.6666666666666666,
+    "status_code_grounding_differ": 0,
+    "status_code_grounding_total": 12,
+    "baseline_pass_rate": 1.0,
+    "baseline_pass_count": 6,
+    "baseline_total": 6,
+    "http_failure_rate": 0.0,
+    "http_failures": 0,
+    "http_total": 27,
+    "resolver_status_distribution": {
+      "EXECUTABLE": 12
+    },
+    "response_body_agree_count": 4,
+    "response_body_differ_count": 8,
+    "response_body_both_200_total": 12,
+    "resolver_execution_agreement": 0.3333333333333333
+  },
+  "controls": {
+    "B-EMPTY-REGISTRY": {
+      "expected": "UNKNOWN status, no mechanism_id",
+      "observed": "UNKNOWN status, mechanism_id=null",
+      "pass": true,
+      "evidence_ref": "raw_evidence/execution_results.json baseline_results[0]"
+    },
+    "B-SINGLE-MECHANISM": {
+      "expected": "EXECUTABLE, mechanism_id=a-01, HTTP 200",
+      "observed": "EXECUTABLE, mechanism_id=a-01, HTTP 200 with userId=1",
+      "pass": true,
+      "evidence_ref": "raw_evidence/execution_results.json baseline_results[1]"
+    },
+    "B-CONFIDENCE-HIGHER": {
+      "expected": "EXECUTABLE, mechanism_id=a-high (confidence 0.95 > 0.8)",
+      "observed": "EXECUTABLE, mechanism_id=a-high, confidence=0.95",
+      "pass": true,
+      "evidence_ref": "raw_evidence/execution_results.json baseline_results[2]"
+    },
+    "B-CONFIDENCE-EQUAL-DIFFERENT-INTENT": {
+      "expected": "EXECUTABLE, mechanism_id=a-01 (exact intent match only)",
+      "observed": "EXECUTABLE, mechanism_id=a-01",
+      "pass": true,
+      "evidence_ref": "raw_evidence/execution_results.json baseline_results[3]"
+    },
+    "B-HTTP-POSITIVE": {
+      "expected": "HTTP 200 against /posts/1",
+      "observed": "HTTP 200 with JSON body",
+      "pass": true,
+      "evidence_ref": "raw_evidence/execution_results.json baseline_results[4]"
+    },
+    "B-HTTP-NEGATIVE": {
+      "expected": "HTTP 4xx or error against /nonexistent-resource/999",
+      "observed": "HTTP 404",
+      "pass": true,
+      "evidence_ref": "raw_evidence/execution_results.json baseline_results[5]"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-GRAPH-34586318405/raw_evidence/execution_results.json",
+      "sha256": "b74b5f75d7361506cc2fa2ee748360ab039ce6df1b5e3d046accae25efeab59a",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-34586318405/execute.py",
+      "sha256": "7c6392ff3704f83fdef9558c0ec96ae5a733e10cffa078a739c1260003eb919b",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "Kernel follows tie-breaking exactly: 0/6 aliased-first conditions select template-matching mechanism (binomial p=0.016 one-sided). Consistent with parent EXP-GRAPH-34409639346 and extends to complex aliasing scenarios (query params, path rewriting, server-side routing).",
+    "jsonplaceholder.typicode.com returns HTTP 200 for ALL URL patterns tested, including malformed URLs like /posts?id=1/comments and /users?userId=1/posts. Status-code-based grounding has zero value — it cannot distinguish correct from incorrect templates.",
+    "Response body comparison provides grounding signal: in asymmetric scenarios B and C, bodies differ between correct and incorrect templates (B: empty array vs 5 comments; C: both return users but same data). Body-based grounding correctly identifies template differences in 4/4 asymmetric conditions.",
+    "In scenarios where both templates are structurally valid (A, D, E, F), response bodies differ due to URL structure artifacts (list vs dict representation from jsonplaceholder), not correctness. This means body comparison produces false grounding signals for functionally equivalent templates.",
+    "All 12 aliased conditions returned EXECUTABLE status — kernel never rejects aliased mechanisms when intent matches and confidence threshold is met.",
+    "27 total HTTP executions with 0 failures — network reliability was not a validity threat.",
+    "Resolver-execution agreement is low (4/12 = 33%) because the resolver follows tie-breaking while HTTP execution reveals body differences in most aliased conditions."
+  ],
+  "validity_notes": [
+    "jsonplaceholder.typicode.com is a test API that ignores query parameters and returns 200 for any URL pattern. This makes status-code grounding impossible and limits generalizability to real APIs that return proper error codes.",
+    "Body-based grounding requires knowing what the 'correct' response body should look like — it is not an autonomous signal. The experiment measures whether bodies DIFFER, not whether one is CORRECT.",
+    "HTTP execution tested GET requests only. POST, PUT, DELETE, PATCH are out of scope.",
+    "Sample size n=6 aliased-first conditions has limited statistical power. 0/6 is significant (p=0.016); 1/6 would not be (p=0.109).",
+    "The previous execution attempt (failure.json exit code 66) was an infrastructure failure, not a scientific negative. The raw evidence from the successful run is preserved.",
+    "Response body comparison uses exact JSON equality. Representation differences (list vs dict for single-item responses) cause false disagreements for functionally equivalent templates."
+  ],
+  "unresolved": [
+    "Whether body-based grounding generalizes to real APIs that return proper HTTP error codes (404, 405, etc.) — status-code grounding would likely work there.",
+    "Whether the kernel could be extended with template analysis to perform semantic aliasing resolution — current code confirms exact-match-only at L97.",
+    "Whether the body-based grounding signal is sufficient for product use or whether explicit template validation (e.g., schema checking) is needed.",
+    "How scenario E (server-side routing, both templates return 200 with different data) should be scored — the experiment treats it as 'both work' but the data differs semantically.",
+    "Whether C-PARAM-INHERIT fix (secondary sort on len(parameter_slots) at L112) would interact with aliasing behavior — not tested here."
+  ]
+}

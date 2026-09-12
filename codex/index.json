@@ -526,6 +526,31 @@
         "handoff.json": "fb3bddcf2dcc949d36ee57edcca18f6a986f5643ab4ec9e4534d91e2bf8f668d"
       }
     },
+    "EXP-GRAPH-34586318405": {
+      "lane": "graph",
+      "request_id": "b8f89e1d4975b9880735ac7b",
+      "created_at": "2026-09-11T09:51:45.561325+00:00",
+      "claim_ids": [
+        "C-SEMANTIC-RESOLVE"
+      ],
+      "question": "Can the kernel handle more complex aliasing scenarios \u2014 query parameters, path rewriting, or server-side routing \u2014 and does HTTP execution success against real endpoints provide a grounding signal for template correctness that resolver selection alone cannot?",
+      "audit_status": "REVISE",
+      "decision": "MIXED \u2014 H1 supported: kernel is deterministic exact-intent matcher (L97) with no URL template analysis, confirmed for complex aliasing types (query-param, path-rewriting, server-side routing) at equal confidence 0.9, n=6 aliased-first conditions (0/6 correct, binomial p=0.016). H2 falsified-in-setting: HTTP status-code grounding provides zero autonomous signal on jsonplaceholder.typicode.com (0/12 status differences across 12 aliased conditions; substrate returns 200 for malformed templates like /posts?id=1/comments). Body-based grounding is an exploratory non-autonomous finding (4/4 body differences in asymmetric scenarios B and C, but requires external oracle to determine correctness, produces false positives for equivalent templates in A and F). Experiment does not meet SURVIVES_CURRENT_TEST per frozen decision rule condition (4): for asymmetric scenarios B and C, HTTP execution per frozen status-code definition correctly identifies valid template in 0/4 cases, not 100%.",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/graph",
+      "hashes": {
+        "request.json": "49cc591ef0f8d0ca1de673e3bf5db3e35a83029a75f05cda389dd3db41f36b43",
+        "spec.json": "563a3e1cf8f2475a813803367feb60c340e0c0ff88b2cfc1a7efa50fd2316b09",
+        "prereg.md": "98a1923cdf7f043bf379f82c763d6c341e2ce1e6a95ea99a1eb5603d799d8326",
+        "freeze.json": "1e731c08934da10449de7a38259c1fa7d8718d581682cf1498604c4556522d43",
+        "result.json": "0a170a958bd79469859b41904228e8fa4cdac0b693495cb3efc6548d9a6c6099",
+        "report.md": "b6c1ac92de06238a69e4cce5f4b2db0c445fcbac27d25bec6decb1f95b4c348e",
+        "provenance.json": "0d68d96bc490ac02a54850401b78f49cad3b40162f69b38e04ec7fa93ff2535c",
+        "audit.json": "30d2add94bd8e54e78bf054ae4b6204126544e344bece2719646a31e57acca7a",
+        "verdict.json": "8ed127cc83ff67f206423cfccfafe44c875f7a4d8fdbe6d44fc3a4353d0ef008",
+        "handoff.json": "15904831ae7077bbef0220da9ae38787e731fca84f522af495a0074febbb3550"
+      }
+    },
     "EXP-INTEL-33528832113": {
       "lane": "intel",
       "request_id": "46d19fdaf32e996c0ab24bd7",
