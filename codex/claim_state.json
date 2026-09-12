@@ -137,6 +137,14 @@
         "claim_id": "C-WEB-DYNAMICS",
         "status": "HYPOTHESIS",
         "reason": "Falsified for DOM structural features (discretized element_count, tree_depth, interactive_density) as state representation on TodoMVC React/Vue degenerate demos: DOM-feature PMI is significantly >0 (p=0.001) but -0.073 and -0.006 bits worse than URL-only on the two sites tested. This specific structural representation does not improve predictive state beyond URL on these sites. However, the broader C-WEB-DYNAMICS hypothesis remains open: the experiment does not test production SPAs with richer DOM evolution, accessibility tree representations, visual layout, or learned state abstractions. Protocol violations (site representativeness, leakage misclassification, in-sample discretization) limit generalization; the hypothesis about DOM features on genuine production SPAs is untested, not rejected."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-34629310987",
+        "lane": "physics",
+        "decision": "MEASUREMENT_INVALID",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "Frozen question (accessibility-tree as predictive state beyond URL on genuine SPA/form-heavy sites) was not tested. All data is synthetic with artificially injected state-dependent action probabilities; URL held constant by construction makes URL-only PMI ~0, so any a11y variation yields tautological gain. Real-site attempts (tally_form N=30 < 50, stalled automation; google_form placeholder URL redirecting to login) fail data-sufficiency and site-selection requirements. The frozen decision rule requires genuine SPA sites with URL ambiguity (spec.json measurement_validity #1, prereg 5.1-5.4). Producer SUPPORTS outcome is based on infrastructure-failure fallback to synthetic data, not evidence for or against the stated hypothesis. C-WEB-DYNAMICS remains HYPOTHESIS. The PMI pipeline correctly detects injected structure on synthetic data (positive control PMI=1.271, null p=0.666 on v2), but this is pipeline verification, not hypothesis evidence."
       }
     ],
     "C-PARAM-INHERIT": [

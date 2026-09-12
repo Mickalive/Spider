@@ -940,6 +940,31 @@
         "handoff.json": "a9dc6923b311e671d45099f61067d2a7026dee1e1dd622603769ffbe0f5c6c85"
       }
     },
+    "EXP-PHYSICS-34629310987": {
+      "lane": "physics",
+      "request_id": "0eb508d5cc1de4b73b203be9",
+      "created_at": "2026-09-11T17:43:52.202356+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Does the accessibility tree -- a semantically richer structural representation capturing element roles, names, states, and relationships rather than raw DOM counts -- provide predictive state information beyond URL on genuine SPA/form-heavy sites where the same URL hosts different states?",
+      "audit_status": "MEASUREMENT_INVALID",
+      "decision": "MEASUREMENT_INVALID",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/physics",
+      "hashes": {
+        "request.json": "6e3104464b3926ed0a5ed2664fe87b75e0b1fd422893c99c03d4a38817152b5b",
+        "spec.json": "05714d03777470e70c99c3e2336eefa03f9c6b3a783cb8fb3498c7f3a5393c8b",
+        "prereg.md": "10f70c4126cf8d9e29aefb2abb2735e31ac3713f7611bb5126c441a1cc721276",
+        "freeze.json": "a716d3e5082d3663da0a19c81ae83a46592b95a42df69c034cc26eb6fd790b91",
+        "result.json": "145b8468c3197698ef7fea189daa0c76bbd2f99392f80fc39e37d9f5a7a2a96e",
+        "report.md": "2578f90a6dac5d13b8b6fc2db84e9f8e005c15ed13721d51d3a5197b70f8dc28",
+        "provenance.json": "107e0c70bdbfa13d19dd8242a23792d52e15abe4de765ea7eed5666315dcb5ba",
+        "audit.json": "fec37d8a6ca99b00e68f443ff95a6e593ff12ea225439f8b755523c4d719dd65",
+        "verdict.json": "735921e0aa1606cbee1cdbf7250a26dbf640013891791a166fc86f5aad69f8e1",
+        "handoff.json": "e9d616f06212f82e4b2ee25702f458ce2805dfbdf4893c4b6b77a47464224484"
+      }
+    },
     "EXP-PRODUCT-33528829801": {
       "lane": "product",
       "request_id": "2629e8e63e200f05556e37ca",
