@@ -1,0 +1,158 @@
+{
+  "experiment_id": "EXP-PHYSICS-34719136202",
+  "lane": "physics",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "positive_control_pmi_test": 0.5769644935298346,
+    "positive_control_perm_p": 0.000999000999000999,
+    "positive_control_passes": true,
+    "null_control_perm_p": 0.3016983016983017,
+    "null_control_passes": true,
+    "primary_condition": true,
+    "sites_passing_primary": 3,
+    "sites_total": 3,
+    "primary_threshold": 2,
+    "data_sufficient": true,
+    "n_permutations": 1000,
+    "smoothing_alpha": 1.0,
+    "bonferroni_alpha": 0.016666666666666666,
+    "bonferroni_comparisons": 3,
+    "per_site_results": {
+      "dashboard": {
+        "dom_vs_url_bits": 1.005872689245515,
+        "perm_p_dom_bonf": 0.002997002997002997,
+        "passes": true
+      },
+      "multistep_form": {
+        "dom_vs_url_bits": 0.2856385750313877,
+        "perm_p_dom_bonf": 0.002997002997002997,
+        "passes": true
+      },
+      "wizard": {
+        "dom_vs_url_bits": 0.43767582273803873,
+        "perm_p_dom_bonf": 0.002997002997002997,
+        "passes": true
+      }
+    },
+    "site_results": {
+      "dashboard": {
+        "dom_pmi": 1.005872689245515,
+        "url_pmi": 0.0,
+        "dom_vs_url_bits": 1.005872689245515,
+        "n_within_url": 200,
+        "n_test": 40,
+        "n_train": 160,
+        "unique_states_dom": 4,
+        "unique_states_url": 1,
+        "unique_sa_pairs_dom": 15,
+        "perm_p_dom": 0.000999000999000999,
+        "perm_p_dom_bonf": 0.002997002997002997,
+        "effect_d_dom": 10.158845993988832
+      },
+      "multistep_form": {
+        "dom_pmi": 0.2856385750313877,
+        "url_pmi": 0.0,
+        "dom_vs_url_bits": 0.2856385750313877,
+        "n_within_url": 200,
+        "n_test": 40,
+        "n_train": 160,
+        "unique_states_dom": 4,
+        "unique_states_url": 1,
+        "unique_sa_pairs_dom": 5,
+        "perm_p_dom": 0.000999000999000999,
+        "perm_p_dom_bonf": 0.002997002997002997,
+        "effect_d_dom": 9.931617223938407
+      },
+      "wizard": {
+        "dom_pmi": 0.43767582273803873,
+        "url_pmi": 0.0,
+        "dom_vs_url_bits": 0.43767582273803873,
+        "n_within_url": 154,
+        "n_test": 31,
+        "n_train": 123,
+        "unique_states_dom": 4,
+        "unique_states_url": 1,
+        "unique_sa_pairs_dom": 5,
+        "perm_p_dom": 0.000999000999000999,
+        "perm_p_dom_bonf": 0.002997002997002997,
+        "effect_d_dom": 12.038135145117755
+      }
+    },
+    "alpha_sensitivity": {
+      "dashboard": {
+        "alpha_0.0": 1.7545202366846009,
+        "alpha_0.5": 1.2632568937433017,
+        "alpha_1.0": 1.005872689245515,
+        "alpha_2.0": 0.7235932519091326
+      },
+      "multistep_form": {
+        "alpha_0.0": 0.3443609377704336,
+        "alpha_0.5": 0.31202178275053116,
+        "alpha_1.0": 0.2856385750313877,
+        "alpha_2.0": 0.2448934618466545
+      },
+      "wizard": {
+        "alpha_0.0": 0.5161290322580645,
+        "alpha_0.5": 0.47356791732027204,
+        "alpha_1.0": 0.43767582273803873,
+        "alpha_2.0": 0.38036933892449354
+      }
+    },
+    "tautology_check": {
+      "dashboard": {
+        "mi_action_dom_state": 1.9887586809150084,
+        "dom_pmi": 1.005872689245515,
+        "fraction_tautological": 1.9771475080079335
+      }
+    }
+  },
+  "controls": {
+    "positive_control_synthetic_dom": {
+      "description": "Synthetic SPA with deterministic DOM evolution (8 states, 4 actions, state-specific DOM features)",
+      "expected": "DOM-feature PMI >= 0.5 bits, permutation p < 0.001 on 80/20 test split",
+      "observed_pmi": 0.5769644935298346,
+      "observed_perm_p": 0.000999000999000999,
+      "result": "PASS"
+    },
+    "null_control_shuffled_real_labels": {
+      "description": "Shuffled action labels on real SPA DOM-feature data (dashboard, multistep_form, wizard)",
+      "expected": "Permutation p > 0.01",
+      "observed_perm_p": 0.3016983016983017,
+      "result": "PASS"
+    },
+    "data_sufficiency": {
+      "description": "Each site has n_test >= 30 on held-out test set after 80/20 temporal split",
+      "expected": "n_test >= 30 per site",
+      "per_site_n_test": {
+        "dashboard": 40,
+        "multistep_form": 40,
+        "wizard": 31
+      },
+      "result": "PASS"
+    }
+  },
+  "permutation_tests": {
+    "dashboard_dom": {
+      "p_value": 0.000999000999000999,
+      "observed_mean_pmi": 1.005872689245515,
+      "null_mean": 0.3074229551033292,
+      "null_std": 0.06875286174782753,
+      "effect_size_d": 10.158845993988832
+    },
+    "multistep_form_dom": {
+      "p_value": 0.000999000999000999,
+      "observed_mean_pmi": 0.2856385750313877,
+      "null_mean": 0.01909747471561454,
+      "null_std": 0.026837633217813007,
+      "effect_size_d": 9.931617223938407
+    },
+    "wizard_dom": {
+      "p_value": 0.000999000999000999,
+      "observed_mean_pmi": 0.43767582273803873,
+      "null_mean": 0.026401250885662,
+      "null_std": 0.03416430924678357,
+      "effect_size_d": 12.038135145117755
+    }
+  }
+}
