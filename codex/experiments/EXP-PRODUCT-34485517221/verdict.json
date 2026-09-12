@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-34485517221",
+  "lane": "product",
+  "decision": "FALSIFIED-IN-SETTING",
+  "claim_updates": [
+    {
+      "claim_id": "C-PARAM-INHERIT",
+      "status": "EXPERIMENTAL",
+      "reason": "Claim remains EXPERIMENTAL with narrowed scope. Hypothesis that rfind('/') leaf-path URL-as-string prefix extraction generalizes to structurally different URL patterns is FALSIFIED-IN-SETTING in this experiment. Falsifier triggered: (1) G1 and G4 produce incorrect binding_accuracy=0.0 on unseen values (≥2 conditions with wrong bound URLs), and (2) G4 fails to induce >1 slot (observed 1 vs expected 2). Three failure modes: suffix extraction corruption on query-string patterns where training values share trailing characters (G1: template 'search?q=${url}a'), architectural single-leaf limitation preventing multi-slot decomposition (G4: template 'users/${url}00'), and over-parameterization of structurally distinct URLs sharing short prefixes (N1: template 'https://api.${url}'). Bounded ceiling: SINGLE-SLOT synthetic correctness only for path-prefix/deep-path/multi-param-query/hybrid patterns where training values share no common suffix. V3_REPRESENTATION_LOSS from parent experiment is confirmed, not resolved. C-PARAM-INHERIT is not promoted and not killed; kernel fixes are required before re-evaluation."
+    },
+    {
+      "claim_id": "C-PRODUCT-ECON",
+      "status": "HYPOTHESIS",
+      "reason": "C-PRODUCT-ECON remains HYPOTHESIS. Economics measurement is blocked until kernel fixes address suffix corruption (G1), over-parameterization (N1), and the multi-slot limitation is resolved or documented (G4). Measuring economics on a mechanism that produces incorrect bindings for common URL patterns would yield invalid cost data. No advancement toward EXPERIMENTAL."
+    }
+  ],
+  "product_action": "BLOCKED — kernel requires targeted fixes before product economics measurement. Three bounded fixes identified: (1) suffix extraction guard to exclude spurious common suffixes that don't represent structural patterns, (2) similarity/Jaccard threshold or host-awareness to prevent over-parameterization of distinct URLs sharing short prefixes, (3) decision on multi-slot support: either extend leaf-path model via URL parsing or document single-slot limitation as bounded scope. C-PRODUCT-ECON measurement must not proceed until at least fixes (1) and (2) are implemented and validated against actual src/spider/kernel.py.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "What combination of kernel fixes (suffix extraction guard, similarity threshold, multi-slot decomposition) is required to achieve binding correctness across all URL classes tested here, and can these fixes be validated against actual kernel.py distill_parameterized and _bind with prefixes before proceeding to C-PRODUCT-ECON measurement?",
+  "reason": "The frozen falsifier has three clauses; two are triggered: (1) incorrect binding on ≥2 conditions (G1 binding_accuracy=0.0 due to suffix 'a' corrupting template, G4 binding_accuracy=0.0 due to suffix '00' corrupting template), and (2) G4 fails to induce >1 slot (observed 1 vs expected 2, architectural single-leaf limitation). Per frozen decision_rule, hypothesis is FALSIFIED-IN-SETTING. Producer's MIXED outcome (4/7 pass) understates the failure because decision_rule requires only slot_count + binding_accuracy, ignoring slot_prefix correctness — the audit's V1_DECISION_RULE_MASKS_SLOT_PREFIX_ERROR confirms that P1/G3/G5 pass via full template prefix while slot_prefixes are empty ('' vs expected 'users/'/'repos/main/issues/'). The audit's V2_SUBSTRATE_REIMPLEMENTATION_NOT_KERNEL finding further bounds claims: run_experiment.py is a standalone reimplementation, not the product kernel, and models.py lacks slot_prefixes field in production. All measurements are deterministic synthetic with zero model/browser/network calls. No product promotion is justified.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-34485517221/spec.json: hypothesis, falsifier (3 clauses), decision_rule (≥6 SURVIVES / 4-5 MIXED / ≤3 FALSIFIED), 7 conditions",
+    "research/experiments/EXP-PRODUCT-34485517221/result.json: outcome MIXED, 4/7 pass, G1/G4/N1 failed, slot_prefixes empty for P1/G3/G5",
+    "research/experiments/EXP-PRODUCT-34485517221/audit.json: status REVISE, producer_claim_supported=false, V1-V6 validity findings, claim_ceiling MIXED-BOUNDED synthetic only, recomputed 4/7, falsifier_triggered=true",
+    "research/experiments/EXP-PRODUCT-34485517221/raw_evidence.json: G1 template 'search?q=${url}a' binding_accuracy 0.0; G4 template 'users/${url}00' slot_count 1 vs 2; N1 template 'https://api.${url}' slot_count 1 vs 0; P1/G3/G5 slot_prefixes {'url':''}",
+    "research/experiments/EXP-PRODUCT-34485517221/provenance.json: code_version standalone reimplementation not kernel.py, models.py lacks slot_prefixes, model_calls=0 browser_calls=0",
+    "research/experiments/EXP-PRODUCT-34485517221/prereg.md: G1 training alpha/beta/gamma share suffix 'a', G4 expected slot_count=2, N1 expected slot_count=0",
+    "research/experiments/EXP-PRODUCT-34420092879/handoff.json: V3_REPRESENTATION_LOSS flagged, C-PARAM-INHERIT EXPERIMENTAL bounded to synthetic-only, C-PRODUCT-ECON unmeasured"
+  ]
+}

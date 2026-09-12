@@ -526,6 +526,31 @@
         "handoff.json": "fb3bddcf2dcc949d36ee57edcca18f6a986f5643ab4ec9e4534d91e2bf8f668d"
       }
     },
+    "EXP-GRAPH-34586318405": {
+      "lane": "graph",
+      "request_id": "b8f89e1d4975b9880735ac7b",
+      "created_at": "2026-09-11T09:51:45.561325+00:00",
+      "claim_ids": [
+        "C-SEMANTIC-RESOLVE"
+      ],
+      "question": "Can the kernel handle more complex aliasing scenarios \u2014 query parameters, path rewriting, or server-side routing \u2014 and does HTTP execution success against real endpoints provide a grounding signal for template correctness that resolver selection alone cannot?",
+      "audit_status": "REVISE",
+      "decision": "MIXED \u2014 H1 supported: kernel is deterministic exact-intent matcher (L97) with no URL template analysis, confirmed for complex aliasing types (query-param, path-rewriting, server-side routing) at equal confidence 0.9, n=6 aliased-first conditions (0/6 correct, binomial p=0.016). H2 falsified-in-setting: HTTP status-code grounding provides zero autonomous signal on jsonplaceholder.typicode.com (0/12 status differences across 12 aliased conditions; substrate returns 200 for malformed templates like /posts?id=1/comments). Body-based grounding is an exploratory non-autonomous finding (4/4 body differences in asymmetric scenarios B and C, but requires external oracle to determine correctness, produces false positives for equivalent templates in A and F). Experiment does not meet SURVIVES_CURRENT_TEST per frozen decision rule condition (4): for asymmetric scenarios B and C, HTTP execution per frozen status-code definition correctly identifies valid template in 0/4 cases, not 100%.",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/graph",
+      "hashes": {
+        "request.json": "49cc591ef0f8d0ca1de673e3bf5db3e35a83029a75f05cda389dd3db41f36b43",
+        "spec.json": "563a3e1cf8f2475a813803367feb60c340e0c0ff88b2cfc1a7efa50fd2316b09",
+        "prereg.md": "98a1923cdf7f043bf379f82c763d6c341e2ce1e6a95ea99a1eb5603d799d8326",
+        "freeze.json": "1e731c08934da10449de7a38259c1fa7d8718d581682cf1498604c4556522d43",
+        "result.json": "0a170a958bd79469859b41904228e8fa4cdac0b693495cb3efc6548d9a6c6099",
+        "report.md": "b6c1ac92de06238a69e4cce5f4b2db0c445fcbac27d25bec6decb1f95b4c348e",
+        "provenance.json": "0d68d96bc490ac02a54850401b78f49cad3b40162f69b38e04ec7fa93ff2535c",
+        "audit.json": "30d2add94bd8e54e78bf054ae4b6204126544e344bece2719646a31e57acca7a",
+        "verdict.json": "8ed127cc83ff67f206423cfccfafe44c875f7a4d8fdbe6d44fc3a4353d0ef008",
+        "handoff.json": "15904831ae7077bbef0220da9ae38787e731fca84f522af495a0074febbb3550"
+      }
+    },
     "EXP-INTEL-33528832113": {
       "lane": "intel",
       "request_id": "46d19fdaf32e996c0ab24bd7",
@@ -710,6 +735,32 @@
         "audit.json": "ff487df7273789bb598a4e2fb132a190d8a2bc3049301f76c8c324890e4b823b",
         "verdict.json": "a616afd3d4b6b1b7d6d84d92e8822ad694aa0ce312563dd2b3f6ffcdd282f350",
         "handoff.json": "f7e8d8e37d3fa48c33a23a40cf5b6c7de0f6016fb804cc4aa809d0ea4f492486"
+      }
+    },
+    "EXP-INTEL-34607693437": {
+      "lane": "intel",
+      "request_id": "fc12583614c0a9b6fc1b8808",
+      "created_at": "2026-09-11T14:01:48.329160+00:00",
+      "claim_ids": [
+        "C-CROSSSITE",
+        "C-LLM-INHERIT"
+      ],
+      "question": "What is the canonical definition of 'locatable elements' for SPIDER fragment yield, and does yield_locatable stabilize across randomized shopping page types (including checkout) under that frozen definition?",
+      "audit_status": "MEASUREMENT_INVALID",
+      "decision": "MEASUREMENT_INVALID",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/intel",
+      "hashes": {
+        "request.json": "98f667a8beaa87cb0386c9ec51228ecf21ddeeac39ed6c6878c4d3a710e816d0",
+        "spec.json": "4a626f67bd594c96f0cc657d922e76c2c27e89df8c4efab088096fd3b0e3876a",
+        "prereg.md": "bc030f4a69b31b8f89a44552997d6b3e7358cd870e1f07ed3603dba68d5afb09",
+        "freeze.json": "4c693afb1c312baf4e8457e49b69aeffd8eea7f43eff54410e5cbd0e096d7bba",
+        "result.json": "9934abd50347750c8387b951203a3492ded961bf512271ae530d5d63929dd0d3",
+        "report.md": "0406707e81bbc30ac12f6c43f3db8c99d1d2a6847c74a9ccb8f6fcd89da79509",
+        "provenance.json": "df23d06c55058d116836e30768252b950d68d17552e48979c00c8f94e2a5ec7b",
+        "audit.json": "e7ef1196cd19a44f6dbc5dbe018da398a9d866970a69f66d8afdb2f732b9cac2",
+        "verdict.json": "4d628206300c75990ae1122061b50b12bcda5be2aab5d44c4001a6a97da6adcf",
+        "handoff.json": "4b53b6ef5ae2e7dd11588ec6000e51eaf0fcc935e52e3aee26715eb62b73a417"
       }
     },
     "EXP-PHYSICS-33528829431": {
@@ -913,6 +964,81 @@
         "audit.json": "85c03da8580e6134b79627100afa523c33560391af372db4b81d6c5ba055161c",
         "verdict.json": "8909c0ee0f2608e39047bed74a932ba768a02cc5b7b1d702c7c746e8a6c8fc29",
         "handoff.json": "e99cf7fb45797ed1b9a1d14282be8db7ab1386aa67deaade12cc8932c6c1a95d"
+      }
+    },
+    "EXP-PHYSICS-34524411213": {
+      "lane": "physics",
+      "request_id": "56528aca7637d3cd1fe79a60",
+      "created_at": "2026-09-10T20:07:04.034277+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Can DOM structural features (element counts by type, tree depth, interactive element density) predict next-state transitions on real SPA/form-heavy sites, providing state representation beyond URL and title?",
+      "audit_status": "REVISE",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/physics",
+      "hashes": {
+        "request.json": "d60876669422bd30ecca02b69ad05d139b27de2ca1b563db930bea82fc2e5e9b",
+        "spec.json": "be8eeec467930395ea222723ed1af0c2a434c8ce81529bcf52cb3d621f9f56cf",
+        "prereg.md": "6f59d15b03a72fc9acf4bd4e0243ab923c62cb67e7d50e98a7aa6528bdf3250e",
+        "freeze.json": "aaef2ce4c34bda4c4430b2cfc75f77c318371501c044fa59df88af208ab600c9",
+        "result.json": "f04dc9dfaef1133deda6a59e23dac718ca290c5661eceb28c55ef910b408850e",
+        "report.md": "808f5a930a8e66ba158472fd39fa3c380b2547cf9968f0aaae53b0697e647ff7",
+        "provenance.json": "4eb550873c1214e627466bf4807eaf1a43f01d2e5f643fd1d38e486483a142ca",
+        "audit.json": "dd2b86c542e3fa60e7d2f72086d7b0ac766eda47e48f61ff76cc324194e9e05a",
+        "verdict.json": "42825b54ef31a838f26aa39ce0d61510d931da030e4afebb6ac0e2b95e1ac76e",
+        "handoff.json": "a9dc6923b311e671d45099f61067d2a7026dee1e1dd622603769ffbe0f5c6c85"
+      }
+    },
+    "EXP-PHYSICS-34629310987": {
+      "lane": "physics",
+      "request_id": "0eb508d5cc1de4b73b203be9",
+      "created_at": "2026-09-11T17:43:52.202356+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Does the accessibility tree -- a semantically richer structural representation capturing element roles, names, states, and relationships rather than raw DOM counts -- provide predictive state information beyond URL on genuine SPA/form-heavy sites where the same URL hosts different states?",
+      "audit_status": "MEASUREMENT_INVALID",
+      "decision": "MEASUREMENT_INVALID",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/physics",
+      "hashes": {
+        "request.json": "6e3104464b3926ed0a5ed2664fe87b75e0b1fd422893c99c03d4a38817152b5b",
+        "spec.json": "05714d03777470e70c99c3e2336eefa03f9c6b3a783cb8fb3498c7f3a5393c8b",
+        "prereg.md": "10f70c4126cf8d9e29aefb2abb2735e31ac3713f7611bb5126c441a1cc721276",
+        "freeze.json": "a716d3e5082d3663da0a19c81ae83a46592b95a42df69c034cc26eb6fd790b91",
+        "result.json": "145b8468c3197698ef7fea189daa0c76bbd2f99392f80fc39e37d9f5a7a2a96e",
+        "report.md": "2578f90a6dac5d13b8b6fc2db84e9f8e005c15ed13721d51d3a5197b70f8dc28",
+        "provenance.json": "107e0c70bdbfa13d19dd8242a23792d52e15abe4de765ea7eed5666315dcb5ba",
+        "audit.json": "fec37d8a6ca99b00e68f443ff95a6e593ff12ea225439f8b755523c4d719dd65",
+        "verdict.json": "735921e0aa1606cbee1cdbf7250a26dbf640013891791a166fc86f5aad69f8e1",
+        "handoff.json": "e9d616f06212f82e4b2ee25702f458ce2805dfbdf4893c4b6b77a47464224484"
+      }
+    },
+    "EXP-PHYSICS-34674671762": {
+      "lane": "physics",
+      "request_id": "21894ad576e1d4c34c45a466",
+      "created_at": "2026-09-12T05:05:11.304552+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Do network requests and API calls (XHR/fetch payloads, endpoint sequences, response content-types) captured via Playwright route interception on genuine client-side-routed SPAs provide predictive state information beyond URL \u2014 specifically, does the network-request signature on within-URL transitions carry PMI exceeding URL-only by >= 0.1 bits on sites where URL is ambiguous?",
+      "audit_status": "REVISE",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/physics",
+      "hashes": {
+        "request.json": "667132861981aaf93cf3fb7e1893748c608b7906f7aa99147fb58a93fb9d822f",
+        "spec.json": "48c48dcb7b1eefab6ef4387ed42030a3ca4078ff0d08a8d1afd1b381f0650b25",
+        "prereg.md": "73b3f86bba890c6f6a10c0cc249d70f059e0fff07845d9aeef29083ad5d53fbf",
+        "freeze.json": "e85437f31f0793c1150d4f565575dbb4f097178827834f1dafcaf9fee57b0a78",
+        "result.json": "bd228408028a046dfac21a48ca1f40a072080a0d06f4d892ad662d02a11ca165",
+        "report.md": "f32d536b01d8cd564cbe48c19ca398735fc09122f4b0de7e47f0afdf7e3cce0a",
+        "provenance.json": "3afc825a44c50dbbf7e13fa16dd64367e940ce9223bc5922f758711b56bbaf4d",
+        "audit.json": "6201c6b90d8a21a9e414c31dead11417d6774032dfcbb96fce3a46755de1a200",
+        "verdict.json": "b96e99c285d1241e032067b3c904d4381e9d6fe74310f8f3d72e4572c4b0bd13",
+        "handoff.json": "ca491e4b2ac3c6fb4568d3a631261d9e8c6599841d05b02ec1721bd85deef1b1"
       }
     },
     "EXP-PRODUCT-33528829801": {
@@ -1140,6 +1266,106 @@
         "handoff.json": "76e5e988f76f1184f72b33b0793d2adfaf03dcd129b2a270c76cee055ae403cd"
       }
     },
+    "EXP-PRODUCT-34485517221": {
+      "lane": "product",
+      "request_id": "87db1e32d59a01803f557bbe",
+      "created_at": "2026-09-10T13:54:00.066207+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT"
+      ],
+      "question": "Does the leaf-path URL-as-string prefix extraction heuristic (rfind('/') based) generalize to structurally different URL patterns \u2014 query-string parameters, multi-segment path variation, and URLs with no common prefix \u2014 or does it fail on patterns that are common in real-world API designs?",
+      "audit_status": "REVISE",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/product",
+      "hashes": {
+        "request.json": "cfca5639a8a7f2674b165ee94f5089f6800b92124567b2751b6c362a8718d007",
+        "spec.json": "52c9d8076cd26966eeb20193211bc78413032523e92cec6b4c7c500a68f111fe",
+        "prereg.md": "d475d43c6b1cb9ac12879b6849ca34e8cd03e057a4802515a0523ad69b388986",
+        "freeze.json": "8dadd50c2f31430cddc9ed0affcf6714b03bf6eb63de35d68c6f304744feee78",
+        "result.json": "030bea4db2f8914a7e789ded9aa8ea0fdc3bb0e3812f9362e3c6bfbbcb23e60f",
+        "report.md": "673cea44ca9157c1828b688ff3fdaf0b4d879a56bc9917541300c40ebd3555c9",
+        "provenance.json": "755da003269187312d96689556e750905c7446e591287c1f1fb8a5cc7c9992b4",
+        "audit.json": "95c2372612af2bd7b195105e8025ced888c73744b2ba0e0bd80a31dd6938157a",
+        "verdict.json": "3aaae8e06a12300333f4ad2262ae1553ea08e82185edf3351e584eda4d4cfc59",
+        "handoff.json": "2a3522896783044ccafdccf0abab815facfa43f2d1e0c62304ee94ef98d3a2bf"
+      }
+    },
+    "EXP-PRODUCT-34642376433": {
+      "lane": "product",
+      "request_id": "52b82a4d2c8dbdcf920ddbf7",
+      "created_at": "2026-09-11T20:06:01.230957+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT"
+      ],
+      "question": "Can two bounded kernel fixes \u2014 suffix extraction guard (exclude single-character non-structural suffixes) and delimiter-bound prefix validation (require prefix to end at a structural URL boundary) \u2014 restore binding correctness on the G1 and N1 failure modes from EXP-PRODUCT-34485517221 while preserving the 4 passing conditions (P1, G2, G3, G5), and can these fixes be validated against actual kernel.py distill_parameterized and _bind with prefixes?",
+      "audit_status": "REVISE",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/product",
+      "hashes": {
+        "request.json": "633f9e924564e990435ba30a8f5f48bde4cc725c74046fdc7cb548ba5ed227e9",
+        "spec.json": "c4f10cd3e017891b0b8d7a46d1a538771bd31205b90a1c5c81e75526a6cef13e",
+        "prereg.md": "73ca8a71a71aea53b6d37145718e4ae24fc4a45a0ee225214b6f2eb52ab60655",
+        "freeze.json": "fa89b28dcb9e2ac497135fdb00112780ab5be3de08a9f232494f0494b1904397",
+        "result.json": "a0ceea521fe7c12bb6ef1e1a8988c48f41c0d37952c37954665fa25010559f07",
+        "report.md": "6b3dc25c23b4d26bd0e43f0ff6bdb70671aed4947e62924528d712e32d06b0e5",
+        "provenance.json": "6084d13c32dbbf2d2d85db46fc9d0b6f7ae13d3b93cd6a4345da3d5bc5162a44",
+        "audit.json": "755b26e4974de979e67234fa028b96df67edc4f92e3d162ef160188ea40a314e",
+        "verdict.json": "dcacbece2811390654c7731d0c981735c307a67ef4cce8ef01abd39c0c5f9988",
+        "handoff.json": "f937455a3b1bf095c695b4b35bd6dd0fa18192a6901b50b28bd7a6cf4e9c2215"
+      }
+    },
+    "EXP-PRODUCT-34662221249": {
+      "lane": "product",
+      "request_id": "31b8ee9d161dd9e2b3ed281a",
+      "created_at": "2026-09-12T00:37:06.135408+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT"
+      ],
+      "question": "Can the suffix guard (Fix1) and delimiter-bound prefix validation (Fix2, last-char variant) be applied to actual src/spider/kernel.py distill_parameterized and _bind, producing correct binding outcomes for all established conditions (P1, G1, G2, G3, G5) with no regressions, and correctly rejecting parameterization on two null controls: N1_ORIGINAL (cross-host URLs sharing 'https://api.' prefix ending at non-delimiter '.') and N1_CORRECTED (truly disjoint URLs with no shared protocol prefix, e.g., http:// vs ftp://) \u2014 thereby closing the standalone-reimplementation gap identified in EXP-PRODUCT-34642376433 audit V3?",
+      "audit_status": "REVISE",
+      "decision": "SURVIVES_CURRENT_TEST",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/product",
+      "hashes": {
+        "request.json": "42e0f10452526e8c0ad0ae84275a10c086ba9bb104b8b696a7cb81e4c0f9a316",
+        "spec.json": "fa47eaeebbd6158c501a3f91f82a07688d49b708417a3ee8cc8ddbd61102e906",
+        "prereg.md": "30a7f76971538b2ec15c17554eab46a4801b51f1102ce4dde57e055c33e4f4a6",
+        "freeze.json": "5bab320f2aefbe1fca629f6aaaccfc2dddb7237a36ffe42317a4de2d3c046665",
+        "result.json": "f2597b740c36a06ad13745391459de1f20d1cff0908849ec952d9d6468da88b0",
+        "report.md": "c9f0913ed89f845b5cff03f503c0fe2ab918763e9450ad73c2acf99c9db16b93",
+        "provenance.json": "e3bd147818be9f5c7d1c1435f5713023f25d0ab0c55d12f1badbb00ace95be8d",
+        "audit.json": "72258738326b8596873625a77f5d409370c70fe78579d661f8985f87a058d908",
+        "verdict.json": "fd4308ec0a0f53db80d12c88965023debf7d43b8d3fbe652aa5cb3379d8e09fc",
+        "handoff.json": "55e3f8a9826b98d8b2efffadb347a34259a2db9ca1daef50ea8a6b7e07e43ff3"
+      }
+    },
+    "EXP-PRODUCT-34685457833": {
+      "lane": "product",
+      "request_id": "b3f56c62abedea1873c1dcfe",
+      "created_at": "2026-09-12T09:17:41.938984+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT"
+      ],
+      "question": "Can the empty-prefix guard be frozen as part of the Fix2 specification, the B_UNFIXED baseline be properly reimplemented as a true unfixed heuristic (without Fix1/Fix2 applied), and the full Fix1+Fix2+empty-prefix guard be committed to src/spider/kernel.py and src/spider/models.py \u2014 with production _bind semantics validated against all 9 conditions including slot_prefixes representation and prefix-stripping for VALUE CONTRACT \u2014 thereby advancing from monkey-patch validation to committed-code validation?",
+      "audit_status": "PASS",
+      "decision": "SURVIVES_CURRENT_TEST",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/product",
+      "hashes": {
+        "request.json": "0a650b5eeb497774ed60ddf457eb4b5dd7cedcc42f470902fa1dedeb5491135d",
+        "spec.json": "6487a98b1ac697b39a5caa13acd79a6ff1f3ba41dae9c09913e283b2a9dc03c2",
+        "prereg.md": "a30807305fc684684bef8cca78bc23d128cffa3ea2bdf50c891983cbccd000fd",
+        "freeze.json": "d2577453c00b3057fdd023c01e312fb68915436009f2e7adb6a6d63c74fa0b7e",
+        "result.json": "2136d0115b72b7b09d19142681ddc57248ce91f948ab94ff8fea2048c1362cc8",
+        "report.md": "5cfb55762581602a00f9f34054bcf8dc1296a2d95c61abd9213dda8a54c9058f",
+        "provenance.json": "53c338b0e5cf4e3e817a057387f6c31206adf3d88131e10c15273d28da2a7348",
+        "audit.json": "79fcde0e3a7547ceb6fcdd2f7880adad7af5b44464832764ba184dc60d295520",
+        "verdict.json": "4a44b7c6b26cab4e1a9f0a3c1b48397659afea5331e22a474d76f99ad2e968cd",
+        "handoff.json": "2ac3222a9eb2ae262de7d60c5615f5bfb1d9ae67b0a2b7dce5468a31e14486a6"
+      }
+    },
     "EXP-RUNTIME-33528830833": {
       "lane": "runtime",
       "request_id": "cbf791e0cd3fe570d0ff0fd5",
@@ -1338,6 +1564,31 @@
         "audit.json": "9b436a16c5f44fb67bc8cd550dea38dde396ef225c42c4789bab374325cd2275",
         "verdict.json": "e990c99da8a3fab14679bb5621d789d9001a5c52564dccc542213b66364936b9",
         "handoff.json": "bf2b4c4f2ed0f167a030d5d0f41068ad569f0fcee5947e349b9e3c0e5df608a2"
+      }
+    },
+    "EXP-RUNTIME-34509593940": {
+      "lane": "runtime",
+      "request_id": "af700526c7036d64c83def9b",
+      "created_at": "2026-09-10T17:40:04.200628+00:00",
+      "claim_ids": [
+        "C-MEAS-VALID"
+      ],
+      "question": "Does body-only HTTP fingerprint observation maintain auth-state discrimination when production-like infrastructure (reverse proxy injecting non-deterministic CDN/load-balancer/rate-limit headers) adds response header noise, and does full-vector discrimination degrade under the same conditions?",
+      "audit_status": "PASS",
+      "decision": "SURVIVES_CURRENT_TEST",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/runtime",
+      "hashes": {
+        "request.json": "80b3210ecbb01ff52f0c5510d78bf6f0a8c0366e21b02db4450fd1c5dfaa829f",
+        "spec.json": "1c46a930d23d8de8552e3745f55e8536110412ddef7bcc850e6a43c6b9822e28",
+        "prereg.md": "9caa5ec4c1d34b09cef31babd460bac5b994cc803f532ca08e7cc4f8f65fe027",
+        "freeze.json": "81dd71fcd23bf2b3285fd6a02836736c90758a51568cc099cc0bcd27b7e2124f",
+        "result.json": "c7036642da9e445fff4eb5a8c7e8d117e012a832785001aaa5f393656b94effd",
+        "report.md": "a23c1903378c4b0316597dfc48429b33e2056adef2bfad1cc8c77783aca61537",
+        "provenance.json": "a7e6bead29cabdf115d561e86b3ef2bde442acd991df0b244170e2286daf8b9c",
+        "audit.json": "fc9398901337dd11c7599c97483512658551041e9d7102656128e052300660d9",
+        "verdict.json": "a30b7b7d0605a5c1e94e9590f29355eb0da5eb1f94e7cdf2ab93bdc1d01de4a9",
+        "handoff.json": "040d3011db257cc13abf273a424b0537bf4113aba40b9b844c66aa6215605047"
       }
     }
   }

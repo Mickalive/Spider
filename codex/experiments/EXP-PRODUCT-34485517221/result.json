@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-34485517221",
+  "lane": "product",
+  "status": "COMPLETE",
+  "outcome": "MIXED",
+  "metrics": {
+    "condition_pass_rate": 0.5714285714285714,
+    "structural_generalization_rate": 0.6,
+    "overall_binding_accuracy": 0.5714285714285714,
+    "passed_conditions": 4,
+    "total_conditions": 7,
+    "conditions_passed": ["P1_PATH_PREFIX", "G2_QUERY_STRING_MULTIPARAM", "G3_DEEP_PATH", "G5_PATH_QUERY_HYBRID"],
+    "conditions_failed": ["G1_QUERY_STRING_SIMPLE", "G4_MULTI_SLOT", "N1_NO_COMMON_PREFIX"]
+  },
+  "controls": {
+    "P1_PATH_PREFIX": {
+      "type": "positive_control",
+      "expected": "slot_count=1, binding_accuracy=1.0",
+      "observed_slot_count": 1,
+      "observed_binding_accuracy": 1.0,
+      "passed": true,
+      "slot_prefixes": {"url": ""},
+      "template": "https://api.example.com/users/${url}",
+      "evidence": "raw_evidence.json conditions.P1_PATH_PREFIX"
+    },
+    "N1_NO_COMMON_PREFIX": {
+      "type": "null_control",
+      "expected": "slot_count=0",
+      "observed_slot_count": 1,
+      "observed_binding_accuracy": 0.0,
+      "passed": false,
+      "slot_prefixes": {"url": "api."},
+      "template": "https://api.${url}",
+      "failure_mode": "Heuristic finds common prefix 'https://api.' across URLs from different hosts and incorrectly parameterizes",
+      "evidence": "raw_evidence.json conditions.N1_NO_COMMON_PREFIX"
+    },
+    "B_LITERAL": {
+      "type": "regression_baseline",
+      "expected": "fail_rate=1.0 (all resolutions return UNKNOWN/EXPLORE)",
+      "passed": true,
+      "note": "Not re-tested in this experiment; established in EXP-PRODUCT-34420092879. Literal mechanism reuse fails because confidence 0.5 < min_confidence 0.8."
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PRODUCT-34485517221/raw_evidence.json",
+      "sha256": "687c480cba20cfcebdcafbc8835e2523bc7ee04e94c7e3a35d005c463858f579",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-34485517221/run_experiment.py",
+      "sha256": "ab50f9224dade47b06f8c0a44fd7c26d686edd1514571d27fa6a144a66924520",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    {
+      "id": "OBS-G1-SUFFIX-ARTIFACT",
+      "condition": "G1_QUERY_STRING_SIMPLE",
+      "observation": "The rfind('/') prefix extraction correctly identifies 'search?q=' as the slot prefix for query-string URLs. However, the common suffix extraction captures trailing 'a' from training values (alpha, beta, delta all end with 'a'), producing template 'search?q=${url}a'. This causes binding to produce 'search?q=gammaa' instead of 'search?q=gamma'.",
+      "interpretation": "The suffix extraction mechanism is not robust to training values that share trailing characters. This is a limitation of the common prefix/suffix computation, not of the rfind('/') heuristic itself.",
+      "severity": "medium",
+      "evidence": "raw_evidence.json conditions.G1_QUERY_STRING_SIMPLE.action_template"
+    },
+    {
+      "id": "OBS-G4-LEAF-PATH-LIMIT",
+      "condition": "G4_MULTI_SLOT",
+      "observation": "The leaf-path model treats the URL as a single field, detecting only 1 varying slot (expected 2). The template becomes 'users/${url}00' due to common suffix '00' from order IDs (100, 200, 300). Multi-segment URL patterns with multiple varying parts cannot be parameterized by this mechanism.",
+      "interpretation": "This is an architectural limitation of the leaf-path URL-as-string model. The URL is a single leaf value, not a decomposable structure. Multi-slot detection requires either URL parsing or a different representation.",
+      "severity": "high",
+      "evidence": "raw_evidence.json conditions.G4_MULTI_SLOT"
+    },
+    {
+      "id": "OBS-N1-OVER-PARAMETERIZE",
+      "condition": "N1_NO_COMMON_PREFIX",
+      "observation": "The heuristic finds common prefix 'https://api.' across URLs from different hosts (api.example.com, api.other.com, api.third.com) and incorrectly parameterizes them with slot_prefix='api.'. Expected slot_count=0 but observed slot_count=1.",
+      "interpretation": "The heuristic does not distinguish between structurally different URLs that happen to share a short prefix. The common prefix threshold is too permissive for URLs from different hosts.",
+      "severity": "medium",
+      "evidence": "raw_evidence.json conditions.N1_NO_COMMON_PREFIX"
+    },
+    {
+      "id": "OBS-G3-EMPTY-SLOT-PREFIX",
+      "condition": "G3_DEEP_PATH",
+      "observation": "For deep path URLs like 'orgs/acme/repos/main/issues/{id}', the rfind('/') heuristic correctly extracts slot prefix as empty string (the varying part starts immediately after the last '/'). Binding works correctly.",
+      "interpretation": "The heuristic handles deep path patterns correctly when the varying segment is at the end.",
+      "severity": "positive",
+      "evidence": "raw_evidence.json conditions.G3_DEEP_PATH"
+    },
+    {
+      "id": "OBS-G5-HYBRID-CORRECT",
+      "condition": "G5_PATH_QUERY_HYBRID",
+      "observation": "For URLs with both path segments and query parameters (e.g., 'users/{user}/items?page=1'), the heuristic correctly identifies the varying path segment while treating the constant query parameter as part of the URL. Binding produces correct URLs.",
+      "interpretation": "The heuristic handles hybrid path+query patterns correctly when only one segment varies.",
+      "severity": "positive",
+      "evidence": "raw_evidence.json conditions.G5_PATH_QUERY_HYBRID"
+    }
+  ],
+  "validity_notes": [
+    "All conditions use deterministic synthetic data with no model, network, or browser calls",
+    "Each condition uses 3 training observations matching parent experiment protocol",
+    "Unseen test values are disjoint from training values",
+    "Binding correctness uses strict JSON comparison (json.dumps sort_keys=True)",
+    "Fresh temporary registry per condition prevents cross-contamination",
+    "Slot prefix extraction is deterministic given frozen training data",
+    "The rfind('/') heuristic is tested as implemented in kernel.py commit 64a6a89",
+    "The suffix extraction behavior is a separate mechanism from the rfind('/') prefix extraction",
+    "Training value selection affects suffix extraction (common suffixes cause template corruption)"
+  ],
+  "unresolved": [
+    "Whether the suffix extraction issue in G1 can be fixed without breaking the VALUE CONTRACT from EXP-PRODUCT-34282620394",
+    "Whether a similarity threshold should be added to prevent over-parameterization of structurally different URLs (N1 failure)",
+    "Whether the leaf-path model can be extended to support multi-slot URL patterns without breaking the single-leaf abstraction",
+    "Whether real-world API URLs have common suffix patterns that would cause G1-type failures in practice"
+  ]
+}

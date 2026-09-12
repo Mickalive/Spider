@@ -1,0 +1,10 @@
+{
+  "experiment_id": "EXP-PRODUCT-34485517221",
+  "frozen_at": "2026-09-10T17:41:44.130030+00:00",
+  "hashes": {
+    "prereg.md": "d475d43c6b1cb9ac12879b6849ca34e8cd03e057a4802515a0523ad69b388986",
+    "request.json": "cfca5639a8a7f2674b165ee94f5089f6800b92124567b2751b6c362a8718d007",
+    "spec.json": "52c9d8076cd26966eeb20193211bc78413032523e92cec6b4c7c500a68f111fe"
+  },
+  "schema_version": 1
+}

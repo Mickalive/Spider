@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-34685457833",
+  "lane": "product",
+  "decision": "SURVIVES_CURRENT_TEST",
+  "claim_updates": [
+    {
+      "claim_id": "C-PARAM-INHERIT",
+      "status": "EXPERIMENTAL",
+      "reason": "Auditor PASS, all 9/9 decision-relevant conditions pass frozen decision_rule on committed code (kernel.py a1fe75cf, models.py 064c5f). Claim ceiling advances from monkey-patched synthetic to committed-code synthetic (audit V4). However, claim remains EXPERIMENTAL with NARROW ceiling: (1) slot_prefixes empty for P1/G3/G5 limits to template-substitution-only binding with no VALUE CONTRACT prefix-stripping (audit V5); (2) Fix2 allows protocol-only 'https://' over-parameterization not covered by frozen nulls (audit V6); (3) B_UNFIXED delta verified by recompute but not measured in primary run against G1/N1_ORIGINAL training data (audit B2); (4) all conditions synthetic with zero model/browser/network calls (audit V7). C-PRODUCT-ECON next gate requires end-to-end amortized economics on real agents."
+    }
+  ],
+  "product_action": "Advance claim ceiling to committed-code synthetic for C-PARAM-INHERIT; block C-PRODUCT-ECON measurement pending real-browser validation and slot_prefixes decision.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does the parameterized kernel save total cost per successful task when run with real browser interactions and live model calls (C-PRODUCT-ECON measurement), and should slot_prefixes empty be accepted as design or computed non-empty for VALUE CONTRACT prefix-stripping?",
+  "reason": "Audit PASS with all recomputed metrics matching producer: P1/G1/G2/G3/G5 slot_count=1 binding_accuracy=1.0, N1_ORIGINAL/N1_CORRECTED slot_count=0, B_LITERAL fail_rate=1.0, no import/syntax errors. V6 substrate gap closed: fixes committed to src/spider/kernel.py and src/spider/models.py, no monkey-patching. Empty-prefix guard frozen as specification. B_UNFIXED reimplemented as true unfixed heuristic. No regressions on established conditions. However, C-PARAM-INHERIT claim ceiling remains narrow (committed-code synthetic single-slot template-only): slot_prefixes empty for P1/G3/G5 is representation loss persisting in committed code, protocol-only prefix gap in Fix2 unfilled, G4 architectural limit unaddressed, and all conditions remain synthetic with zero real-browser evidence. The highest-upside next step is C-PRODUCT-ECON measurement with real-browser testing, but this is blocked by external validity gap. The slot_prefixes decision (accept empty or compute non-empty) and B_UNFIXED G1/N1_ORIGINAL delta measurement are prerequisites that should be resolved first. Product promotion is premature: the claim ceiling is still EXPERIMENTAL with material scope boundaries.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-34685457833/audit.json status=PASS producer_claim_supported=true required_fixes=[] claim_ceiling='COMMITTED-CODE SYNTHETIC SINGLE-SLOT TEMPLATE-ONLY (NARROW)'",
+    "research/experiments/EXP-PRODUCT-34685457833/audit.json V1_RECOMPUTED_9_OF_9_PASS all nine conditions recomputed pass decision_rule",
+    "research/experiments/EXP-PRODUCT-34685457833/audit.json V4_COMMITTED_CODE_SUBSTRATE_CONFIRMED V6 substrate gap closed kernel.py a1fe75cf models.py 064c5f",
+    "research/experiments/EXP-PRODUCT-34685457833/audit.json V5_SLOT_PREFIXES_REPRESENTATION_LOSS_BOUNDED slot_prefixes empty for P1/G3/G5 ceiling bound to template-only",
+    "research/experiments/EXP-PRODUCT-34685457833/audit.json V6_PROTOCOL_ONLY_OVERPARAMETERIZATION_GAP Fix2 allows 'https://' over-parameterization",
+    "research/experiments/EXP-PRODUCT-34685457833/audit.json B2_B_UNFIXED_TRUE_HEURISTIC_ISOLATED_BUT_INCOMPLETE delta verified by recompute not primary run",
+    "research/experiments/EXP-PRODUCT-34685457833/audit.json V7_SYNTHETIC_SCOPE_ECONOMICS_UNMEASURED zero model/browser/network calls",
+    "research/experiments/EXP-PRODUCT-34685457833/result.json metrics.verdict=SURVIVES_CURRENT_TEST decision_relevant_passed=9 outcome=SUPPORTS",
+    "research/experiments/EXP-PRODUCT-34685457833/raw_evidence.json conditions.P1/G1/G2/G3/G5 binding_accuracy=1.0 slot_count=1 N1_ORIGINAL/N1_CORRECTED slot_count=0",
+    "research/experiments/EXP-PRODUCT-34685457833/provenance.json substrate.approach='committed code (no monkey-patching)' environment.model_network_browser_calls=0",
+    "research/claims/registry.json C-PARAM-INHERIT EXPERIMENTAL C-PRODUCT-ECON HYPOTHESIS"
+  ]
+}

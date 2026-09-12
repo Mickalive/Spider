@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-34662221249",
+  "lane": "product",
+  "target_lane": "product",
+  "next_question": "Can the empty-prefix guard be frozen as part of the Fix2 specification, the B_UNFIXED baseline be properly reimplemented as a true unfixed heuristic (without Fix1/Fix2 applied), and the full Fix1+Fix2+empty-prefix guard be committed to src/spider/kernel.py and src/spider/models.py — with production _bind semantics validated against all 9 conditions including slot_prefixes representation and prefix-stripping for VALUE CONTRACT — thereby advancing from monkey-patch validation to committed-code validation?",
+  "why_next": "EXP-PRODUCT-34662221249 validated Fix1/Fix2 on imported kernel module via monkey-patching, closing the V3 substrate gap. All 9 decision-relevant conditions pass the frozen decision_rule. However, the audit identified 5 required_fixes that bound the claim ceiling: (1) empty-prefix guard is EXPLORATORY and must be frozen, (2) B_UNFIXED paired comparison is invalid (fixes still applied), (3) slot_prefixes empty for P1/G3/G5 is representation loss limiting claim to template-substitution only, (4) monkey-patch is not committed production code, (5) N1_CORRECTED valid only at tested synthetic config. The next experiment must freeze the empty-prefix guard, fix B_UNFIXED, commit patches to kernel.py/models.py, and validate production _bind semantics including slot_prefixes representation — moving from monkey-patch validation to committed-code validation.",
+  "carry_forward": {
+    "established": [
+      "FIX1 VALIDATED ON IMPORTED KERNEL MODULE: Suffix guard (reject single-char suffixes not preceded by ? = &) restores G1 query-string binding. Template search?q=${url} (no suffix 'a'), binding_accuracy=1.0 for unseen gamma/epsilon/zeta. Evidence: EXP-PRODUCT-34662221249 raw_evidence.json G1_QUERY_STRING_SIMPLE slot_count=1 binding_accuracy=1.0, audit.json V2_FIX1_VALIDATED",
+      "FIX2 VALIDATED ON IMPORTED KERNEL MODULE: Delimiter-bound prefix validation (last-char of prefix in /?=& or EOS) prevents over-parameterization of N1_ORIGINAL cross-host URLs sharing 'https://api.' prefix (ends at '.', not delimiter). slot_count=0. Evidence: EXP-PRODUCT-34662221249 raw_evidence.json N1_ORIGINAL slot_count=0, audit.json V3_FIX2_VALIDATED_N1_ORIGINAL",
+      "EMPTY PREFIX GUARD VALIDATED (EXPLORATORY): When common prefix across varying values is empty (truly disjoint URLs), parameterization rejected. N1_CORRECTED slot_count=0. Must be frozen before advancing claim. Evidence: EXP-PRODUCT-34662221249 raw_evidence.json N1_CORRECTED slot_count=0, audit.json V4_N1_CORRECTED_DEPENDS_ON_EMPTY_GUARD, run_experiment.py lines 260-266",
+      "NO REGRESSIONS ON ESTABLISHED CONDITIONS: P1 (path-prefix), G2 (multi-param query), G3 (deep path), G5 (path+query hybrid) all maintain binding_accuracy=1.0 and correct slot_count after patches to imported kernel module. Evidence: EXP-PRODUCT-34662221249 raw_evidence.json P1/G2/G3/G5 all binding_accuracy=1.0, audit.json V8_NO_REGRESSIONS_CONFIRMED",
+      "G4 ARCHITECTURAL LIMITATION CONFIRMED: Leaf-path model produces slot_count=1 (not 2) because URL is treated as single field. Multi-char suffix '00' from 100/200/300 not caught by Fix1 single-char guard. Template users/${url}00, binding_accuracy=0.0. This is architectural, not a fix failure. Evidence: EXP-PRODUCT-34662221249 raw_evidence.json G4_MULTI_SLOT binding_accuracy=0.0",
+      "LITERAL BASELINE CONFIRMED: B_LITERAL fail_rate=1.0 confirms parameterized induction necessary. Confidence 0.5 < min_confidence 0.8. Evidence: EXP-PRODUCT-34662221249 raw_evidence.json B_LITERAL fail_rate=1.0",
+      "SINGLE-SLOT SYNTHETIC CORRECTNESS for 5 URL classes: path-prefix (P1), query-string (G1 with fix), multi-param query (G2), deep path (G3), path+query hybrid (G5). All binding_accuracy=1.0 on unseen values. Evidence: EXP-PRODUCT-34662221249 raw_evidence.json",
+      "NULL CONTROLS from parent EXP-PRODUCT-34420092879: E1 (pattern absence, slot_count=0), E2 (single observation, slot_count=0). No parameterization hallucination on well-formed negative cases. Evidence: parent handoff carry_forward.established"
+    ],
+    "rejected": [
+      "Hypothesis that rfind('/') generalizes to all structurally different URL patterns: FALSIFIED-IN-SETTING (EXP-PRODUCT-34485517221). Three failure modes: suffix corruption (G1), multi-slot limitation (G4), over-parameterization (N1). Evidence: parent verdict.json, audit.json",
+      "N1_REDESIGNED as truly disjoint null control: FLAWED — URLs share 'https://' prefix ending at '/' delimiter, not 'NO common prefix beyond empty string' as spec claims. Fix2 correctly allows parameterization. Evidence: EXP-PRODUCT-34642376433 raw_evidence.json N1_REDESIGNED slot_count=1, audit.json V4",
+      "Distill-time prefix stripping as standalone C2 fix: FALSIFIED (parent EXP-PRODUCT-34282620394, 4/9 regressions). Evidence: parent handoff carry_forward.rejected",
+      "_bind() prefix-strip with full template prefix: FALSIFIED (parent EXP-PRODUCT-34195008089). Evidence: parent handoff carry_forward.rejected",
+      "C-PARAM-INHERIT is product-ready: NOT ACHIEVED. Kernel integration remains EXPERIMENTAL at monkey-patch level. Production commits not made. Evidence: EXP-PRODUCT-34662221249 audit.json claim_ceiling, verdict.json promote_to_product=false",
+      "B_UNFIXED paired comparison valid: INVALID — fixes still applied during B_UNFIXED execution, does not exercise unfixed rfind('/') heuristic. Cannot quantify delta attributable to fixes. Evidence: EXP-PRODUCT-34662221249 audit.json B2_B_UNFIXED_INVALID, raw_evidence.json B_UNFIXED baseline_note"
+    ],
+    "unknown": [
+      "Whether empty-prefix guard should be frozen as part of Fix2 (last-char delimiter validation) or as a separate Fix3, and the exact code block to refreeze in spec/prereg",
+      "Whether slot_prefixes empty for P1/G3/G5 (observed '' vs expected 'users/'/'repos/main/issues/') is representational artifact or correctness failure for slot-level VALUE CONTRACT when production kernel._bind uses slot_prefixes for stripping",
+      "Whether Fix1 should extend beyond len(suffix)<=1 to multi-char non-structural suffixes (e.g., '00', 'ing') to fix G4, and how to define structural delimiter boundary for suffix without breaking legitimate overlaps",
+      "Whether Fix2 needs minimum prefix length threshold (e.g., >8 chars) to reject protocol-only 'https://' parameterization that currently passes delimiter check (last_char '/'), not exercised in frozen conditions",
+      "Whether leaf-path model can support multi-slot URL induction via parsing without breaking single-leaf abstraction (G4 architectural bound)",
+      "End-to-end product economics (C-PRODUCT-ECON): does parameterized kernel save total cost per successful task? Still unmeasured. Requires committed patches + real-browser testing + model/network/browser calls",
+      "Real-world prevalence of single-char vs multi-char suffix collisions and cross-host vs protocol-only prefix collisions in browser traffic",
+      "Real-browser external validity: all measurements deterministic synthetic with zero model/browser/network calls, n=3 per condition"
+    ],
+    "do_not_assume": [
+      "Monkey-patch equals committed code: src/spider/kernel.py at HEAD (sha 46929b3a) and src/spider/models.py (sha 338aaf4d) contain no distill_parameterized, _find_common_prefix_suffix, _validate_prefix_boundary, or slot_prefixes field. Fixes applied via monkey-patching on imported module. Production integration requires committing patches. Evidence: EXP-PRODUCT-34662221249 provenance.json substrate, audit.json V6",
+      "Empty-prefix guard is frozen: The guard was added during execution (EXPLORATORY label per result.json validity_notes[6]) and is not in frozen spec.json sections 5.2/5.3. Must be frozen before advancing claim ceiling. Evidence: EXP-PRODUCT-34662221249 audit.json required_fixes[1], V4_N1_CORRECTED_DEPENDS_ON_EMPTY_GUARD",
+      "slot_prefixes empty is acceptable: P1/G3/G5 observed slot_prefixes={'url':''} vs expected 'users/'/'repos/main/issues/'. Binding succeeds via template prefix embedded in action_template, not via slot_prefix semantics. Any future _bind that relies on slot_prefixes for VALUE CONTRACT prefix-stripping would fail. Evidence: EXP-PRODUCT-34662221249 audit.json V5_SLOT_PREFIXES_REPRESENTATION_LOSS, raw_evidence.json slot_prefixes_observed",
+      "Synthetic results generalize to real browser traffic: all conditions deterministic synthetic, zero model/network/browser calls, n=3 per condition. External validity unproven. Evidence: EXP-PRODUCT-34662221249 provenance.json environment, audit.json V7",
+      "B_UNFIXED quantifies delta attributable to fixes: B_UNFIXED executed with fixes still applied, producing same behavior as established conditions for P1-like training. No delta measured. Evidence: EXP-PRODUCT-34662221249 audit.json B2_B_UNFIXED_INVALID",
+      "Fix2 alone rejects N1_CORRECTED: _validate_prefix_boundary('') returns True per code; N1_CORRECTED passes only via exploratory empty-prefix guard, not Fix2 delimiter validation alone. Evidence: EXP-PRODUCT-34662221249 audit.json V4_N1_CORRECTED_DEPENDS_ON_EMPTY_GUARD, recomputed validate_prefix_boundary_recomputed.N1_CORRECTED_empty=true",
+      "G4 failure means Fix1 is broken: Fix1 addresses single-char coincidental suffix overlap (G1 'a' from alpha/beta/delta), not multi-char suffixes. G4 '00' is 2-char, architecturally distinct mechanism. Evidence: EXP-PRODUCT-34642376433 parent handoff carry_forward.do_not_assume, EXP-PRODUCT-34662221249 raw_evidence.json G4 architectural_bound=true"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-PRODUCT-34662221249/spec.json (frozen: claim_ids C-PARAM-INHERIT, decision_rule, 9 conditions)",
+    "research/experiments/EXP-PRODUCT-34662221249/freeze.json (frozen hashes: prereg 30a7f7, spec fa47ea)",
+    "research/experiments/EXP-PRODUCT-34662221249/result.json (outcome SUPPORTS, metrics verdict SURVIVES_CURRENT_TEST, controls 9/9 passed)",
+    "research/experiments/EXP-PRODUCT-34662221249/audit.json (REVISE, V1-V8 findings, claim_ceiling NARROW_SYNTHETIC_SINGLE-SLOT_MONKEY_PATCHED_TEMPLATE_ONLY, 5 required_fixes)",
+    "research/experiments/EXP-PRODUCT-34662221249/raw_evidence.json (per-condition data: all 9 decision-relevant pass, G4 architectural bound)",
+    "research/experiments/EXP-PRODUCT-34662221249/run_experiment.py (Fix1 _find_common_prefix_suffix, Fix2 _validate_prefix_boundary, empty-prefix guard lines 260-266, monkey-patching)",
+    "research/experiments/EXP-PRODUCT-34662221249/provenance.json (monkey-patching substrate, kernel.py 46929b3a, models.py 338aaf4d, deterministic synthetic)",
+    "research/experiments/EXP-PRODUCT-34642376433/handoff.json (parent: standalone validation, V3 gap, required kernel.py validation)",
+    "src/spider/kernel.py (literal-only distill at HEAD, no distill_parameterized, no Fix1/Fix2 helpers, _bind template-substitution only)",
+    "src/spider/models.py (Mechanism model, lacks slot_prefixes field in production)",
+    "research/claims/registry.json (C-PARAM-INHERIT EXPERIMENTAL, C-PRODUCT-ECON HYPOTHESIS)"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-34662221249/result.json: metrics.verdict=SURVIVES_CURRENT_TEST, metrics.decision_relevant_passed=9, controls 9/9 passed, validity_notes[6] exploratory empty guard, validity_notes[5] slot_prefixes loss",
+    "research/experiments/EXP-PRODUCT-34662221249/audit.json: status=REVISE, recomputed_metrics confirm all 9 pass, claim_ceiling NARROW_SYNTHETIC_SINGLE-SLOT_MONKEY_PATCHED_TEMPLATE_ONLY, V1-V8 findings, B2 B_UNFIXED invalid, 5 required_fixes",
+    "research/experiments/EXP-PRODUCT-34662221249/raw_evidence.json: conditions.P1/G1/G2/G3/G5 binding_accuracy=1.0 slot_count=1, N1_ORIGINAL/N1_CORRECTED slot_count=0, B_LITERAL fail_rate=1.0, G4 binding_accuracy=0.0 architectural_bound=true, slot_prefixes_observed P1/G3/G5 empty",
+    "research/experiments/EXP-PRODUCT-34662221249/spec.json: decision_rule SURVIVES_CURRENT_TEST if all 9 pass, claim_ids C-PARAM-INHERIT, baselines B_LITERAL and B_UNFIXED, null_controls N1_ORIGINAL and N1_CORRECTED",
+    "research/experiments/EXP-PRODUCT-34662221249/provenance.json: substrate monkey-patching, code_version kernel.py 46929b3a models.py 338aaf4d, environment deterministic synthetic n=3 zero model/browser/network calls",
+    "research/experiments/EXP-PRODUCT-34662221249/run_experiment.py: Fix1 _find_common_prefix_suffix suffix guard, Fix2 _validate_prefix_boundary last-char, distill_parameterized empty-prefix guard lines 260-266, monkey-patching on imported kernel module",
+    "research/experiments/EXP-PRODUCT-34662221249/report.md: templates P1/G1/G2/G3/G5 full prefix embedded, V3 gap closed via monkey-patching, product consequence C-PARAM-INHERIT advances",
+    "research/experiments/EXP-PRODUCT-34642376433/handoff.json: parent established/rejected/unknown/do_not_assume, required kernel.py validation before C-PRODUCT-ECON",
+    "src/spider/kernel.py at HEAD: literal-only distill, no distill_parameterized/_find_common_prefix_suffix/_validate_prefix_boundary (verified hasattr false)",
+    "src/spider/models.py at HEAD: Mechanism lacks slot_prefixes field",
+    "research/claims/registry.json: C-PARAM-INHERIT EXPERIMENTAL next_gate 'learn on resource A, succeed on never-observed B against cold/replay/retrieval baselines', C-PRODUCT-ECON HYPOTHESIS"
+  ],
+  "recommended_action": "Product lane: (1) Freeze empty-prefix guard as part of Fix2 specification (or as explicit Fix3) — refreeze spec.json and prereg.md sections 5.2/5.3 to include the guard, removing EXPLORATORY label. (2) Re-implement B_UNFIXED as true unfixed heuristic (without Fix1/Fix2 applied) to quantify delta attributable to fixes, or drop the paired-comparison delta claim from report.md/observations. (3) Commit patches to src/spider/kernel.py (distill_parameterized, _find_common_prefix_suffix with Fix1, _validate_prefix_boundary with Fix2) and src/spider/models.py (Mechanism.slot_prefixes field). (4) Validate production _bind semantics with committed code against all 9 conditions, including slot_prefixes representation (P1/G3/G5 expected non-empty) and prefix-stripping for VALUE CONTRACT. (5) Consider adding minimum prefix length threshold to Fix2 to reject protocol-only 'https://' parameterization. (6) After committed-code validation passes, proceed to real-browser C-PRODUCT-ECON measurement with model/network/browser calls."
+}

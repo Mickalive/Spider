@@ -1,0 +1,28 @@
+{
+  "experiment_id": "EXP-PRODUCT-34485517221",
+  "lane": "product",
+  "claim_ids": ["C-PARAM-INHERIT"],
+  "question": "Does the leaf-path URL-as-string prefix extraction heuristic (rfind('/') based) generalize to structurally different URL patterns — query-string parameters, multi-segment path variation, and URLs with no common prefix — or does it fail on patterns that are common in real-world API designs?",
+  "hypothesis": "The rfind('/') prefix extraction heuristic will generalize to structurally different URL patterns because the common prefix between multiple observations of the same URL pattern always contains the slot position. Specifically: (1) for query-string URLs like https://api.example.com/search?q=${query}, the common prefix before the varying query parameter will be correctly extracted as slot_prefixes={'query': 'search?q='}; (2) for multi-segment paths like https://api.example.com/users/${user}/orders/${order}, multiple varying segments will be correctly identified as distinct slots; (3) for URLs with no common prefix across observations, the mechanism will correctly produce slot_count=0 (null control).",
+  "falsifier": "The heuristic fails on ≥4 of the 7 test conditions (positive control P1, structural generalization conditions G1-G5, null control N1), OR the heuristic induces incorrect slot_prefixes that would produce wrong bound URLs for unseen values on ≥2 conditions, OR the multi-slot condition G4 fails to induce >1 slot when 2 distinct varying segments exist. Failing the positive control P1 is a pipeline validity failure, not a scientific finding.",
+  "baselines": [
+    "B_RFIND_ONLY: Current rfind('/') heuristic as implemented in kernel.py — the mechanism under test",
+    "B_LITERAL: No parameterization (literal mechanism reuse, confidence 0.5 < min_confidence 0.8)",
+    "B_EXACT_MATCH: Exact URL string matching with no generalization (mechanism per unique URL)"
+  ],
+  "positive_control": "P1_PATH_PREFIX: Simple path-prefix URL pattern (https://api.example.com/users/${user}) with 3 observations sharing prefix 'users/'. The heuristic must correctly induce slot_count=1 and slot_prefixes={'user': 'users/'}. This replicates the established C2 pattern and verifies the pipeline works.",
+  "null_control": "N1_NO_COMMON_PREFIX: 3 observations with completely different URLs (https://api.example.com/a, https://api.other.com/b, https://api.third.com/c). The heuristic must produce slot_count=0. No parameterization should be induced when there is no common structure.",
+  "measurement_validity": [
+    "All conditions use deterministic synthetic data — no model, network, or browser calls",
+    "Each condition uses 3 training observations (matching parent experiment protocol)",
+    "Unseen test values are disjoint from training values",
+    "Binding correctness uses strict JSON comparison (json.dumps sort_keys=True)",
+    "Fresh temporary registry per condition prevents cross-contamination",
+    "Slot prefix extraction is deterministic given frozen training data"
+  ],
+  "decision_rule": "If ≥6 of 7 conditions pass (correct slot_count and correct binding_accuracy=1.0 for unseen values), verdict = SURVIVES_CURRENT_TEST. If 4-5 conditions pass, verdict = MIXED (partial generalization). If ≤3 conditions pass, verdict = FALSIFIED-IN-SETTING. A condition PASSES only if both slot_count matches expected AND binding_accuracy=1.0 for all unseen values. N1 (null control) passes if slot_count=0.",
+  "product_consequence_positive": "The leaf-path URL-as-string heuristic is robust enough for product use across common API URL patterns. Clears the V3_REPRESENTATION_LOSS concern and allows progression to C-PRODUCT-ECON economics measurement with confidence that the kernel handles real-world URL diversity.",
+  "product_consequence_negative": "The heuristic fails on structurally different URL patterns. The parameterized kernel requires a more robust prefix extraction mechanism (e.g., query-string parsing, multi-segment decomposition) before product economics measurement. C-PARAM-INHERIT remains EXPERIMENTAL and C-PRODUCT-ECON measurement is blocked until the kernel is fixed.",
+  "estimated_cost": "Very low: pure synthetic data, offline computation, no browser/network/model calls. 7 conditions x 3 training + 3 unseen each, ~18 binding tests total.",
+  "expected_information_gain": "High: directly resolves the V3_REPRESENTATION_LOSS medium-severity audit finding from EXP-PRODUCT-34420092879. A positive result unblocks C-PRODUCT-ECON measurement; a negative result identifies exactly which URL classes require kernel improvement. Either outcome materially advances the product lane."
+}

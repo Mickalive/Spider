@@ -1,0 +1,63 @@
+{
+  "experiment_id": "EXP-RUNTIME-34509593940",
+  "lane": "runtime",
+  "github_run_id": null,
+  "github_run_attempt": null,
+  "base_sha": "0acb37301f9e69d017537dafba589939cedbbe52",
+  "executed_at": "2026-09-11T00:34:50.651964+00:00",
+  "environment": {
+    "python_version": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "platform": "linux"
+  },
+  "keycloak": {
+    "image": "quay.io/keycloak/keycloak:25.0",
+    "mode": "start-dev",
+    "port": 18080,
+    "realm": "spider-test",
+    "client": "spider-client"
+  },
+  "proxy": {
+    "port": 18081,
+    "type": "Python HTTPServer reverse proxy",
+    "noise_levels": [
+      0,
+      1,
+      2,
+      4
+    ],
+    "noise_headers": [
+      "X-Cache-Status",
+      "X-CDN-Request-Id",
+      "X-Edge-Location",
+      "X-Rate-Limit-Remaining"
+    ],
+    "excluded_from_fingerprint": [
+      "server",
+      "x-request-id",
+      "date"
+    ]
+  },
+  "artifacts": {
+    "raw_observations": {
+      "path": "raw_observations.json",
+      "sha256": "4dbcf4abf5eece337c32a533f94802288ee881bd9d9d72e25ecd3e020f148063",
+      "total_observations": 320
+    },
+    "run_experiment": {
+      "path": "run_experiment.py"
+    },
+    "analyze": {
+      "path": "analyze.py"
+    }
+  },
+  "fingerprint_algorithm": {
+    "full_vector": "SHA-256(repr((status, tuple(sorted(filtered_headers.items())), body_sha256, redirect_chain)))",
+    "body_only": "SHA-256(repr((status, body_sha256, '')))",
+    "excluded_headers": [
+      "server",
+      "x-request-id",
+      "date"
+    ]
+  },
+  "data_collection_note": "Raw observations collected in prior execution run (github_run_id: 34538183496). Analysis performed in current session."
+}

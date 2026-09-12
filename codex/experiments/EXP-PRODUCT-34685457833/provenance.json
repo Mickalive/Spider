@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-34685457833",
+  "lane": "product",
+  "github_run_id": "34685457833",
+  "github_run_attempt": 1,
+  "commits": {
+    "pre_execute_sha": "c223c836c90ad756bd37f7840d8e2df3fd748bdf",
+    "post_execute_sha": "73b07fc31ca52f97d0fdc5bc3e3b8087ab468617",
+    "base_sha": "ed27ebf1ed65cbcca3f51d02b8d29596120f3202"
+  },
+  "parent_experiment": {
+    "experiment_id": "EXP-PRODUCT-34662221249",
+    "handoff_path": "research/experiments/EXP-PRODUCT-34662221249/handoff.json",
+    "handoff_sha256": "55e3f8a9826b98d8b2efffadb347a34259a2db9ca1daef50ea8a6b7e07e43ff3"
+  },
+  "substrate": {
+    "approach": "committed code (no monkey-patching)",
+    "module": "src.spider.kernel",
+    "functions_committed": [
+      "distill_parameterized",
+      "_find_common_prefix_suffix (Fix1)",
+      "_validate_prefix_boundary (Fix2)",
+      "_collect_leaf_paths",
+      "_get_value_at_path",
+      "_set_template_value",
+      "_compute_jaccard",
+      "_compute_structure_similarity",
+      "_check_constant_value_anchor",
+      "_field_path_to_slot_name",
+      "_is_metadata_path"
+    ],
+    "models_patch": "slot_prefixes: dict[str, str] added to Mechanism dataclass",
+    "bind_function": "kernel._bind (template substitution, unchanged)"
+  },
+  "code_artifacts": {
+    "src/spider/kernel.py": {
+      "sha256": "a1fe75cf2c069ac0f42f80755101ef294eb02e01aa8f9c551dd9bcd4e6986ea4",
+      "lines_added": 271,
+      "note": "Fix1, Fix2, empty-prefix guard, distill_parameterized, leaf-path helpers committed"
+    },
+    "src/spider/models.py": {
+      "sha256": "064c5f34413266fa4ac232f5e03e536be3bc15ea6ed098253875103a9aad54bd",
+      "lines_added": 1,
+      "note": "slot_prefixes field added to Mechanism dataclass"
+    },
+    "research/experiments/EXP-PRODUCT-34685457833/run_experiment.py": {
+      "sha256": "d38ceb50cd5a2e3704b848941f11cbcadc79f8168ee862bee5fed266147ec2c4",
+      "role": "experiment execution script"
+    }
+  },
+  "evidence_artifacts": {
+    "raw_evidence.json": {
+      "sha256": "df8ad0bdd9ea54da73a3badf2d06e02500fe0816dd98b03c95a361d0083f0d09",
+      "role": "raw per-condition evidence"
+    }
+  },
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.x",
+    "model_network_browser_calls": 0,
+    "deterministic_synthetic": true,
+    "conditions_per_test": 3,
+    "total_conditions": 10,
+    "decision_relevant_conditions": 9
+  },
+  "datasets_fixtures": {
+    "type": "synthetic_deterministic",
+    "description": "9 frozen conditions with identical training/unseen values from EXP-PRODUCT-34662221249. P1 path-prefix, G1 query-string, G2 multi-param, G3 deep-path, G5 path+query hybrid, N1_ORIGINAL cross-host, N1_CORRECTED disjoint, B_LITERAL, B_UNFIXED.",
+    "source": "frozen in EXP-PRODUCT-34662221249 spec.json sections 5.2/5.3"
+  },
+  "frozen_inputs": {
+    "request.json": "0a650b5eeb497774ed60ddf457eb4b5dd7cedcc42f470902fa1dedeb5491135d",
+    "spec.json": "6487a98b1ac697b39a5caa13acd79a6ff1f3ba41dae9c09913e283b2a9dc03c2",
+    "prereg.md": "a30807305fc684684bef8cca78bc23d128cffa3ea2bdf50c891983cbccd000fd"
+  },
+  "reproduction_command": "cd research/experiments/EXP-PRODUCT-34685457833 && python3 run_experiment.py"
+}

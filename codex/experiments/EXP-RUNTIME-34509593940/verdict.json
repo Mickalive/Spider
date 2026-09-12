@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-34509593940",
+  "lane": "runtime",
+  "decision": "SURVIVES_CURRENT_TEST",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "EXPERIMENTAL",
+      "reason": "Positive control passes (body-only 0.5 >= 0.35), null control passes (B-RANDOM 0.0), all 6 preregistered controls pass, audit PASS with all metrics recomputed. Measurement substrate is intervention-valid under the synthetic reverse-proxy model tested. Claim ceiling bounded by audit: does NOT extend to filtered full-vector, real CDN behavior, body non-determinism from compression, stacked infrastructure, or non-Keycloak providers. Body-only invariance is tautological by construction (headers excluded from fingerprint, proxy preserves bodies)."
+    }
+  ],
+  "product_action": "Document body-only architecture recommendation with explicit ceiling bounds: body-only is the default production fingerprint strategy only when (1) response headers are not filtered/allowlisted, (2) headers contain high-entropy per-request noise, and (3) response bodies remain deterministic. A filtered full-vector (allowlisting status + WWW-Authenticate + Cache-Control + body) may retain discrimination under low-entropy header noise (noise=1 still 0.23) without body-only simplicity, and should be tested before production commitment.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does body-only HTTP fingerprint discrimination survive CDN compression (Content-Encoding gzip/br) where response bodies are non-deterministically compressed, causing body hash to vary per request even for identical logical responses?",
+  "reason": "All 6 preregistered controls pass. Audit PASS with all metrics recomputed match producer. Full-vector discrimination collapses from 0.833 to 0.0 under synthetic header noise (Spearman rho -0.9487), while body-only remains invariant at 0.5 (rho 0.0). However, the advantage is bounded: (1) body-only invariance is tautological by construction (audit V2), (2) full-vector degradation is engineered by per-request UUID injection (audit V3), (3) a filtered full-vector baseline was not tested and may retain discrimination under realistic low-entropy headers, (4) Spearman power is limited at n=4 with p=0.0513 (audit V4), (5) single synthetic noise pattern tested (audit V5). The body-only architecture survives this specific test but the product recommendation is constrained to scenarios where headers are unfiltered and high-entropy. The critical unresolved threat is body non-determinism from CDN compression, which would invalidate the body-only approach entirely.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-34509593940/result.json — all per-noise per-endpoint metrics, M_NOISE_DEGRADATION rho -0.9487, M_BODY_ONLY_INVARIANT rho 0.0, M_NOISE_BOUND 0.0, all controls PASS",
+    "research/experiments/EXP-RUNTIME-34509593940/audit.json — PASS, producer_claim_supported true, V1-V7 validity findings, claim_ceiling bounded to synthetic reverse-proxy model",
+    "research/experiments/EXP-RUNTIME-34509593940/raw_observations.json — 320 HTTP observations, sha 4dbcf4abf5eece337c32a533f94802288ee881bd9d9d72e25ecd3e020f148063",
+    "research/experiments/EXP-RUNTIME-34509593940/spec.json — frozen decision_rule requiring rho <= -0.3 and >= -0.3, baselines, claim_ids [C-MEAS-VALID]",
+    "research/experiments/EXP-RUNTIME-34509593940/prereg.md — 12.6 body tautology, 12.1-12.5 validity threats, noise levels",
+    "research/experiments/EXP-RUNTIME-34509593940/provenance.json — Keycloak 25.0 Docker, proxy 18081, data_collection_note prior run",
+    "research/experiments/EXP-RUNTIME-34439061845/handoff.json — parent body-only architecture 0.5/0.833, expired==invalid invariant, WWW-Auth transfer falsified"
+  ]
+}
