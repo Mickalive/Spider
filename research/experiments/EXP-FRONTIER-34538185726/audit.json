@@ -1,0 +1,200 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-34538185726",
+  "lane": "frontier",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Eliminate intermediate MEASUREMENT_INVALID threshold gaming: frozen decision_rule triggers MEASUREMENT_INVALID if ANY function has JS CV>0.5 at lambda=1. Observed rotation CV=0.981 forces MEASUREMENT_INVALID even though scaling (CV=0.326) and translation (CV=0.287) are stable and both fail/are bounded under falsification criteria. Amend next prereg to either require CV>0.5 per-function reporting (partial validity) or increase stability before re-test: increase per-action sample from ~125 to >=300 or Monte Carlo KL samples from 125 to >=500 or replications from 10 to >=20 to reduce rotation variance; report per-cell JS SE (bootstrap over KDE resampling) separately from inter-replication CV. Current producer correctly applies frozen rule but the rule conflates measurement stability with scientific falsification.",
+    "Restore full cross-validated bandwidth selection for permutation null or downgrade bias-correction claim: prereg 6.1/6.3 and spec measurement_validity specify 5-fold CV with 20-point search per KDE fit; provenance.json pragmatic_perm_bandwidth_reuse=true shows permutation null reuses observed bandwidth factor per action (analyze_opt.py fit_kde_fixed_bandwidth) instead of full 20x5 CV per permutation. Disclosed in validity_notes but underestimates perm variance and perm_mean (perm_mean 0.352-0.357 stable across lambda). Next design must either run full CV for all 12,000 permutation KDE fits (240 cells x 50 perms) or preregister bandwidth-reuse as frozen method and quantify bias via pilot comparing full-CV vs reuse perm_mean/perm_std for at least 10 cells.",
+    "Increase Monte Carlo sample for JS divergence and report JS estimation variance: frozen N_KL_SAMPLES=125 per direction gives SE O(1/sqrt(N)) and KDE resampling adds variance; rotation's extreme CV 0.981 at lambda=1 suggests MC noise may dominate signal (raw_js_max 0.370 vs perm_mean 0.356 for rotation, separation only 0.014). Run variance decomposition (repeat JS compute 10 times on same KDEs) to separate MC variance from DGP variance; if MC variance >30% of inter-rep variance, increase N_KL_SAMPLES to 500+ as in prereg's validity_notes mitigation.",
+    "Fix permutation-test aggregation: controls null_control and positive_control report mean_perm_p=0.413333 (mean of 30 p-values across 3 funcs x 10 reps) with N_PERMUTATIONS=50 granularity 0.02. Mean of p-values is not a valid combined test per Fisher/Stouffer and hides heterogeneity. Next prereg must specify per-function permutation test at lambda=0 (Fisher combined across 10 reps, N>=200 perms) and per-function at lambda=1 for positive control (>0.01 threshold tested via perm distribution, not mean_p). Current p=0.413 PASS is directionally correct but method invalid; recompute from raw perm_js_values if retaining 50-perm budget.",
+    "Address over-smoothing in 10D KDE with sparse per-action data: bandwidth diagnostics show mean_bandwidth factor 1.2367 (SD 0.117, range 1.145-1.513) multiplying Scott's factor ~0.71 => effective h ~0.88*std in 10D with only 125 points. This large smoothing may wash out rotation signal (rotation raw 0.370 vs perm 0.356, near-zero bias-corrected 0.0136) while preserving scaling/translation separations (raw 0.44/0.455 vs perm 0.357). Report effective bandwidth in absolute units, log-likelihood CV curves, and test alternative bandwidth strategies (e.g., diagonal bandwidth, PCA whitening) to test if rotation failure is bandwidth artefact rather than information-theoretic limit."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_rotation_CV_measurement_invalid_correctly_triggered",
+      "severity": "high",
+      "finding": "Frozen MEASUREMENT_INVALID rule (JS CV at lambda=1 >0.5) correctly triggered by rotation CV=0.98099 >0.5 (result.json:controls.js_cv_lambda1.cv_per_function.42=0.9809, threshold 0.5). Recomputed from raw_tables.json 10 rotation values at lambda=1 [0.0019,0.0206,0.0131,0.0002,0.0074,0.0464,0.0039,0.0178,0.0121,0.0122] mean 0.01358 std 0.01332 CV=0.98 matches producer. Scaling CV=0.326 and translation CV=0.287 PASS. Producer status MEASUREMENT_INVALID is correct per frozen rule; without this trigger the same data would be FALSIFIED-IN-SETTING (per-function Spearman FAIL + interaction FAIL). The high rotation variance indicates KDE instability for rotation-type dynamics in 10D with current N_KL_SAMPLES=125 and N~125/action, not a pipeline error (n_errors=0).",
+      "evidence": "result.json:controls.js_cv_lambda1, metrics.per_function.42.js_bc_means_by_lambda, observations JS CV at lambda=1; raw_tables.json func_seed 42 lambda 1.0 10 rows; spec.json:decision_rule MEASUREMENT_INVALID if JS divergence CV >0.5; recomputed CV 0.981 matches"
+    },
+    {
+      "id": "V2_bandwidth_reuse_pragmatic_deviation",
+      "severity": "medium",
+      "finding": "Producer discloses pragmatic optimization: permutation null reuses observed bandwidth factor per action instead of full 20x5 CV per permutation (provenance.json kde_parameters.pragmatic_perm_bandwidth_reuse=true, validity_notes, report.md 2 deviation). Spec 6.3 and prereg 6.1 promised CV per cell with no leakage. Reuse reduces runtime from infeasible (240*50*20*5 KDE fits) to 495s, and perm_mean stability (0.3526 at lambda0, 0.3571 at lambda1, SD ~0.003) suggests small bias, but it underestimates perm variance (perm_std_js 0.018-0.023) and violates transmission invariant. The bias-corrected JS definition max(0, raw - perm_mean) inherits this bias; scaling/translation separations 0.072-0.097 above perm_mean exceed potential reuse bias, so qualitative pattern robust, but claim that bias correction is fully CV-based is overstated.",
+      "evidence": "provenance.json kde_parameters.pragmatic_perm_bandwidth_reuse true, analyzer_script run_execute.py sequential execution of frozen analyze_opt.py logic; report.md 2 Pragmatic deviation; analyze_opt.py:190-214 fit_kde_fixed_bandwidth reuse vs analyze.py full fit_kde_with_cv; result.json validity_notes[5]; raw_tables.json perm_std_js 0.018-0.023"
+    },
+    {
+      "id": "V3_scaling_and_rotation_falsification_holds_even_without_CV_trigger",
+      "severity": "high",
+      "finding": "Even waiving the CV trigger, the frozen decision_rule independently yields FALSIFIED-IN-SETTING: per-function Spearman FAIL for rotation (rho=0.2857 p=0.246 >0.0167) and scaling (rho=0.7143 p=0.02326 >0.0167 Bonferroni threshold 0.0167) per result.json:controls.spearman_per_function; only translation passes (rho=0.8095 p=0.00745). Recomputed Spearman from raw_tables.json means exactly matches (rotation 0.2857, scaling 0.7143, translation 0.8095, aggregate 0.8333 p=0.00509). Two-way ANOVA interaction F=4.9965 p=0.0 (reported) recomputed via pandas/statsmodels F=4.99645 p=4.7e-08, R2=0.5617 decisively fails function invariance (p>0.05 required). Thus SURVIVES_CURRENT_TEST (requires all 3 rho>=0.65 with p<0.0167 + no interaction) is falsified on two independent criteria, not just rotation instability.",
+      "evidence": "result.json:controls.spearman_per_function per_function 42/43/44, controls.function_invariance interaction_p 0.0, controls.spearman_aggregate rho 0.8333; raw_tables.json 240 rows recomputed Spearman matches; spec.json:decision_rule SURVIVES requires per-function rho>=0.65 p<0.0167 and p>0.05 interaction"
+    },
+    {
+      "id": "V4_positive_and_null_controls_valid_but_perm_power_limited",
+      "severity": "medium",
+      "finding": "Positive control PASS correctly: bias-corrected JS at lambda=1 is rotation 0.01358, scaling 0.08305, translation 0.09689 all >=0.01 (result.json:controls.positive_control). This verifies KDE pipeline can detect maximal action-dependence descriptively, passing a low threshold. Null control PASS: mean_perm_p=0.413333 >0.05 (result.json:controls.null_control). However both rely on permutation test with N_PERMUTATIONS=50 (provenance 50 perms per cell, granularity 0.02) and mean-of-p-values aggregation, same invalid method flagged in parent audit. With 50 perms, p-values are coarse and averaging hides heterogeneity. Directionally correct (permutation null stable ~0.35, raw at lambda0 ~0.354 similar to perm), but statistical power for positive control at lambda=1 (reported mean_perm_p not separately) is limited.",
+      "evidence": "result.json:controls.positive_control per_function bc_js_at_lambda1, controls.null_control mean_perm_p 0.413333; provenance.json n_permutations 50; raw_tables.json raw_js_max vs perm_mean_js at lambda1 (rotation 0.370 vs 0.356, translation 0.455 vs 0.358)"
+    },
+    {
+      "id": "V5_Monte_Carlo_and_KDE_variance_conflation",
+      "severity": "medium",
+      "finding": "JS divergence computed via Monte Carlo with N_KL_SAMPLES=125 per direction plus KDE resampling (scipy gaussian_kde resample) adds stochastic variance beyond DGP variance. Producer does not report MC SE per cell. Rotation's tiny separation (raw 0.370 vs perm 0.356, bc 0.0136) is smaller than its inter-replication SD 0.0133, implying signal-to-noise ~1. This could be MC noise, not DGP. Scaling/translation have larger separations (raw 0.44/0.455 vs perm 0.357, bc 0.083/0.097, SD 0.027) so signal dominates. Need decomposition: repeat JS estimation 10 times with fixed KDEs to estimate MC variance; if MC variance dominates rotation, increasing N_KL_SAMPLES would rescue stability.",
+      "evidence": "spec.json measurement_validity N_KL 125; provenance.json kl_samples 125; result.json metrics per_function bc_js_means_by_lambda rotation 0.007-0.014 flat vs translation monotonic; validity_notes Monte Carlo JS SE O(1/sqrt(N)), unresolved[2]"
+    },
+    {
+      "id": "V6_target_representation_and_synthetic_to_real_gap",
+      "severity": "high",
+      "finding": "No change from parent: state space S=[0,1]^10, three toy affine families (rotation via Givens per action_dim, scaling 1+0.2*s[action_dim], translation +0.1*sin modulation), mixture-of-3-Gaussians heteroscedastic noise sigma_base=0.05*(1+0.5*||S-0.5||), clipping to [0,1]. No DOM embeddings, session history, auth, latency, or real Web transitions. Sample size 500 per cell (~125/action) with median kNN distance not reported but bandwidth large indicates sparsity. Result that no single density divergence estimator works uniformly is bounded to this synthetic DGP; extrapolation to C-WEB-DYNAMICS (real Web dynamics predictive beyond memory/similarity) remains hypothesis, not measurement. Report.md correctly discloses synthetic gap.",
+      "evidence": "spec.json measurement_validity Same 10D non-Gaussian DGP as parent; prereg.md 5.1-5.5; analyze_opt.py rotation_10d/scaling_10d/translation_10d, sample_mixture_noise; result.json validity_notes 10D mixture, unresolved Whether real Web transitions exhibit translation-like structure; report.md 8-9"
+    },
+    {
+      "id": "V7_bandwidth_over_smoothing_representation_loss",
+      "severity": "medium",
+      "finding": "Mean bandwidth factor 1.2367 SD 0.117 across all cells (bandwidth_diagnostics: rotation 1.145-1.43, scaling similar) indicates KDE consistently selects bandwidth >1x Scott's rule. Effective bandwidth in 10D with 125 points is large, smoothing over variance differences that scaling introduces and isotropically averaged distances that rotation introduces. Bandwidth CV across replications 0.095 healthy, boundary fraction 0.0 PASS, but absolute magnitude suggests KDE may be over-smoothed for detecting subtle 10D differences, especially rotation's angle 0.1*s[action_dim] per Givens composition. Threat disclosed as curse of dimensionality in validity_notes but not quantified via bandwidth-sensitivity sweep.",
+      "evidence": "result.json metrics.bandwidth_diagnostics per func 42/43/44, controls.bandwidth_health cv 0.0949 mean 1.2367; provenance bandwidth_range [0.01,2.0] bandwidth_search_points 20; prereg 6.3 bandwidth factor = h / std(data)"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "kNN_TV_bias_corrected_parent",
+      "status": "present",
+      "finding": "Producer correctly compares to parent kNN TV bias-corrected rho: translation kNN 1.0 vs KDE 0.8095 (both detect translation), rotation kNN 0.93 vs KDE 0.2857 (kNN detects rotation, KDE fails), scaling kNN -0.12 vs KDE 0.7143 (KDE borderline better than kNN but still fails Bonferroni p 0.023>0.0167). Report.md Table 6 and result.json per_function show complementary blind spots. No statistical test of difference, but qualitative ordering correctly establishes that scaling failure is partially estimator-specific (KDE rho 0.71 vs -0.12) yet not rescued (fails corrected p), and KDE introduces new rotation blind spot not seen with kNN.",
+      "evidence": "spec.json baselines kNN TV bias-corrected divergence from EXP-FRONTIER-34065969836 and 34121473072 scaling rho=-0.12; result.json metrics.per_function.43 rho 0.7143 vs parent -0.12; report.md 6 Comparison with kNN TV table"
+    },
+    {
+      "baseline_id": "permutation_null",
+      "status": "partial",
+      "finding": "Permutation null implemented for bias correction (bias_corrected_js = max(0, raw_js_max - perm_mean_js) with 50 perms per cell) and for null control significance. Raw perm_mean_js stable ~0.352-0.357 across lambdas and functions, indicating effective null. However bandwidth reuse (V2) and mean-p aggregation make test partially valid. Standard permutation test assumptions hold (shuffle action labels on same S_next) with no target leakage (KDE computed from generated transitions, labels shuffled same data).",
+      "evidence": "spec.json baselines Permutation null: action labels shuffled; result.json controls.null_control mean_perm_p 0.413 pass true, controls.js_cv_lambda1 perm usage; raw_tables.json perm_mean_js ~0.35 across 240 rows; provenance pragmatic_perm_bandwidth_reuse true"
+    },
+    {
+      "baseline_id": "frequency_baseline_marginal_P_S_next",
+      "status": "partial",
+      "finding": "Spec lists frequency baseline as marginal next-state distribution P(S_next) providing expected divergence under no action-dependence (expected 0 at lambda=0). Producer does not compute explicit frequency baseline histogram in this experiment; instead uses permutation null as proxy and reports null control PASS. At lambda=0 bias-corrected JS 0.007-0.010 >0 but within inter-replication SD, and perm_mean ~0.35 vs raw 0.35 indicates no signal beyond permutation floor. Explicit marginal TV in 10D (e.g., KDE on pooled S_next vs action-conditional) not reported; gap acknowledged as unresolved but not measured as in parent.",
+      "evidence": "spec.json baselines[2] Frequency baseline; result.json no explicit frequency metric, controls.null_control covers null; report.md does not list frequency baseline artifact; parent had frequency baseline 0.17 vs floor 0.528"
+    },
+    {
+      "baseline_id": "toroidal_and_gaussian_controls_absent_by_design",
+      "status": "missing",
+      "finding": "Parent experiments used toroidal wrapping and Gaussian noise baselines to test clipping and noise distribution artefacts. This experiment's spec does not require them (baselines are kNN, permutation, frequency), so omission is by frozen design, not a violation. However clipping to [0,1] remains (s_next = clip) with boundary concentration untested with KDE; KDE's Gaussian kernel with large bandwidth may be less sensitive to boundary mass than kNN, partially explaining scaling rescue. No evidence that clipping explains rotation failure.",
+      "evidence": "spec.json baselines only 3 entries vs parent 4-5; prereg 11.4 validity threat but not baseline; result.json validity_notes clipping to [0,1] matches parent boundary treatment"
+    }
+  ],
+  "recomputed_metrics": {
+    "aggregate_spearman_bc_js": {
+      "rho": 0.8333333333333335,
+      "p_one_sided": 0.005087770061728376,
+      "n": 8,
+      "recomputed": true,
+      "match_producer": true,
+      "source": "raw_tables.json 240 rows grouped by lambda, mean bias_corrected_js per lambda [0.00863,0.01249,0.01992,0.02645,0.02245,0.01410,0.02874,0.06451] vs lambda [0,0.1,0.2,0.3,0.4,0.5,0.7,1.0] scipy.stats.spearmanr"
+    },
+    "per_function_rotation_bc_js": {
+      "func_seed": 42,
+      "func_name": "rotation",
+      "rho": 0.28571428571428575,
+      "p_one_sided": 0.24636312250847858,
+      "means_by_lambda": [0.007370872257036221, 0.014468235196638646, 0.007099313135730123, 0.007480282168488561, 0.001862300702552111, 0.008528007193931231, 0.010298635478187174, 0.013577162364070505],
+      "recomputed": true,
+      "match_producer": true,
+      "monotonic": false,
+      "pass_threshold": false
+    },
+    "per_function_scaling_bc_js": {
+      "func_seed": 43,
+      "func_name": "scaling",
+      "rho": 0.7142857142857144,
+      "p_one_sided": 0.023264116142083627,
+      "means_by_lambda": [0.010223385382637035, 0.015981439290127797, 0.03136669474991345, 0.04518238631779571, 0.04040122578597957, 0.02046435565083164, 0.036940345912786964, 0.08305272652174703],
+      "recomputed": true,
+      "match_producer": true,
+      "monotonic": false,
+      "pass_threshold": false,
+      "note": "rho >=0.65 but p>0.0167 Bonferroni, fails decision_rule"
+    },
+    "per_function_translation_bc_js": {
+      "func_seed": 44,
+      "func_name": "translation",
+      "rho": 0.8095238095238096,
+      "p_one_sided": 0.007451333843115036,
+      "means_by_lambda": [0.00830056176329561, 0.007025346265973453, 0.021300329359786235, 0.026678112715261503, 0.025100614008340988, 0.013318455785424932, 0.03898331644753218, 0.0968870727326325],
+      "recomputed": true,
+      "match_producer": true,
+      "monotonic": false,
+      "pass_threshold": true
+    },
+    "anova_interaction_bc_js": {
+      "F": 4.9965,
+      "p_value": 0.0,
+      "recomputed_F": 4.99645,
+      "recomputed_p": 4.749226e-08,
+      "df_interaction": 14,
+      "df_residual": 216,
+      "r_squared": 0.5617,
+      "recomputed": true,
+      "match_producer": true,
+      "interaction_pass": false,
+      "note": "F recomputed via statsmodels ols js ~ C(lam_level)+C(function)+C(lam_level):C(function) on 240 bias_corrected_js obs matches producer F=4.9965"
+    },
+    "js_CV_lambda1": {
+      "42_rotation": 0.9809926044633975,
+      "43_scaling": 0.32619571628299815,
+      "44_translation": 0.2868303319520971,
+      "recomputed": true,
+      "match_producer": true,
+      "threshold": 0.5,
+      "trigger_measurement_invalid": true,
+      "source": "raw_tables.json 10 bias_corrected_js per func at lambda 1.0: rotation std0.01332 mean0.01358 CV0.981, scaling std0.02709 mean0.08305 CV0.326, translation std0.02779 mean0.09689 CV0.287"
+    },
+    "effect_sizes_cohens_d": {
+      "42_rotation": 0.5168637236257903,
+      "43_scaling": 3.439467759019285,
+      "44_translation": 4.194547674650731,
+      "aggregate": 1.7578338655423345,
+      "recomputed": true,
+      "match_producer": true,
+      "source": "bias_corrected_js at lambda0 vs lambda1 pooled SD; rotation d small due to near-zero separation, scaling/translation large"
+    },
+    "positive_control_bc_js_lambda1": {
+      "42_rotation": 0.013577162364070505,
+      "43_scaling": 0.08305272652174703,
+      "44_translation": 0.0968870727326325,
+      "threshold": 0.01,
+      "pass": true,
+      "recomputed": true,
+      "match_producer": true
+    },
+    "bandwidth_health": {
+      "mean_factor": 1.236711159982055,
+      "std_factor": 0.11745564048698981,
+      "cv_factor": 0.09497418984129982,
+      "boundary_fraction": 0.0,
+      "pass": true,
+      "recomputed_from_diagnostics": true,
+      "match_producer": true
+    }
+  },
+  "claim_ceiling": "MAXIMUM JUSTIFIED: KDE with 5-fold CV bandwidth (20 log-spaced factors in [0.01,2.0]) and Monte Carlo JS (125 samples/direction) does NOT uniformly detect scaling-type action-dependence in the same 10D mixture-of-3-Gaussians non-Gaussian DGP at N=500/cell (~125/action). Per frozen decision_rule the experiment is MEASUREMENT_INVALID due to rotation instability (JS CV 0.981 >0.5 at lambda=1) and independently FALSIFIED-IN-SETTING: only translation shows monotonic Spearman rho>=0.65 with p<0.0167 (rho=0.8095 p=0.00745); scaling rho=0.714 p=0.02326 fails Bonferroni despite being better than kNN TV rho=-0.12, rotation rho=0.285 p=0.246 fails; function x lambda interaction p~5e-08 decisively rejects invariance (R2=0.56). Aggregate rho=0.833 p=0.005 passes but is driven by translation/scaling, masking heterogeneity. Positive control (>=0.01 at lambda=1) PASS, null control (perm p=0.413 >0.05) PASS, but both limited by 50-perm coarse resolution and bandwidth-reuse deviation. No single density-divergence estimator (kNN TV or KDE) works uniformly across function families in this synthetic setting; they have complementary blind spots (kNN fails scaling, KDE fails rotation). C-WEB-DYNAMICS remains bounded to translation-like dynamics in synthetic 10D; information-theoretic limit for scaling not closed because KDE does improve over kNN and failure may be bandwidth/MC-limited, while rotation failure suggests KDE-specific artefact. No inference to real Web transitions. Do NOT promote KDE divergence to product core. Frontier must either stabilize KDE (larger N, larger N_KL, full CV perm) or pivot to orthogonal mechanisms (binned PCA projection, neural density) or real Web data.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-34538185726/request.json:experiment_id EXP-FRONTIER-34538185726 lane frontier parent_handoff EXP-FRONTIER-34121473072",
+    "research/experiments/EXP-FRONTIER-34538185726/spec.json:question hypothesis falsifier baselines positive_control null_control measurement_validity decision_rule claim_ids C-WEB-DYNAMICS",
+    "research/experiments/EXP-FRONTIER-34538185726/prereg.md: sections 2-12 hypotheses H1-H4 lambda levels 8 functions 3 KDE CV JS via Monte Carlo N_KL 125",
+    "research/experiments/EXP-FRONTIER-34538185726/freeze.json:frozen_at 2026-09-11T00:41:14 hashes prereg eec9f8af hash",
+    "research/experiments/EXP-FRONTIER-34538185726/result.json:status MEASUREMENT_INVALID outcome NOT_APPLICABLE metrics aggregate per_function bandwidth_diagnostics anova controls positive_control null_control spearman_per_function function_invariance js_cv_lambda1 observations validity_notes",
+    "research/experiments/EXP-FRONTIER-34538185726/report.md: sections 3-6 tables decision MEASUREMENT_INVALID comparison kNN TV vs KDE",
+    "research/experiments/EXP-FRONTIER-34538185726/provenance.json:execution_timestamp 2026-09-12T00:46:52Z kde_parameters n_permutations 50 pragmatic_perm_bandwidth_reuse true total_transitions 120000 execution_seconds 494.97",
+    "research/frontier/kde_divergence/raw_tables.json:240 rows (3 funcs x 8 lambdas x 10 reps) fields raw_js_max bias_corrected_js perm_mean_js perm_std_js avg_bandwidth bandwidths",
+    "research/frontier/kde_divergence/analyze.py: frozen code with fit_kde_with_cv 20 log-spaced factors compute_js_divergence compute_js_all_pairs kde_pipeline_for_cell",
+    "research/frontier/kde_divergence/analyze_opt.py: optimized with fit_kde_fixed_bandwidth reuse of observed bandwidth for perm null, multiprocessing",
+    "research/experiments/EXP-FRONTIER-34121473072/handoff.json:next_question KDE/binned PCA/neural density or information-theoretic limit"
+  ],
+  "unresolved": [
+    "Whether full 20x5 CV per permutation (instead of bandwidth reuse) would change perm_mean/perm_std enough to alter bias_corrected_js at lambda=1 for rotation (bc 0.0136) or scaling p-value (0.02326 vs threshold 0.0167) — reuse bias unquantified beyond pilot stability",
+    "Whether increasing N_KL_SAMPLES from 125 to 500+ and per-action N from ~125 to 300+ would reduce rotation CV 0.981 below 0.5 threshold and rescue monotonic rho for rotation (currently 0.285) — MC variance vs DGP variance not decomposed",
+    "Whether rotation failure is KDE-specific bandwidth over-smoothing artefact vs information-theoretic: rotation angle 0.1*s[action_dim] produces small isotropic distance changes that large bandwidth 1.2xScott may smooth away, vs kNN detecting rotation via local neighbor ratios",
+    "Whether scaling borderline signal (rho=0.714 p=0.023) would cross Bonferroni threshold with more replications (10->20), more perms (50->200), or slightly different scale_factor parameterization — single 20% modulation tested",
+    "Whether real Web transitions exhibit translation-like vs scaling-like vs rotation-like structure and which estimator family would dominate — synthetic-to-real gap remains the dominant unknown for C-WEB-DYNAMICS",
+    "Whether alternative orthogonal estimators (binned PCA projection, neural density estimation) can detect scaling without introducing rotation blind spot in same 10D DGP — frontier next question still open"
+  ]
+}
