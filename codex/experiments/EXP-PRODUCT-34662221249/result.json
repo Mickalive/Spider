@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-34662221249",
+  "lane": "product",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "condition_pass_rate": 0.9,
+    "passed_conditions": 9,
+    "total_conditions": 10,
+    "decision_relevant_conditions": 9,
+    "decision_relevant_passed": 9,
+    "structural_generalization_rate": 0.8,
+    "overall_binding_accuracy": 0.857,
+    "fix1_success": true,
+    "fix2_success": true,
+    "regressions": [],
+    "g4_binding_accuracy": 0.0,
+    "g4_architectural_bound": true,
+    "n1_corrected_slot_count": 0,
+    "b_literal_fail_rate": 1.0,
+    "b_unfixed_slot_count": 1,
+    "verdict": "SURVIVES_CURRENT_TEST"
+  },
+  "controls": {
+    "P1_PATH_PREFIX": {
+      "type": "positive_control",
+      "expected": "slot_count=1, binding_accuracy=1.0",
+      "observed": "slot_count=1, binding_accuracy=1.0",
+      "passed": true,
+      "evidence": "raw_evidence.json conditions.P1_PATH_PREFIX"
+    },
+    "G1_QUERY_STRING_SIMPLE": {
+      "type": "fix1_target",
+      "expected": "slot_count=1, binding_accuracy=1.0",
+      "observed": "slot_count=1, binding_accuracy=1.0",
+      "passed": true,
+      "evidence": "raw_evidence.json conditions.G1_QUERY_STRING_SIMPLE"
+    },
+    "G2_QUERY_STRING_MULTIPARAM": {
+      "type": "regression",
+      "expected": "slot_count=1, binding_accuracy=1.0",
+      "observed": "slot_count=1, binding_accuracy=1.0",
+      "passed": true,
+      "evidence": "raw_evidence.json conditions.G2_QUERY_STRING_MULTIPARAM"
+    },
+    "G3_DEEP_PATH": {
+      "type": "regression",
+      "expected": "slot_count=1, binding_accuracy=1.0",
+      "observed": "slot_count=1, binding_accuracy=1.0",
+      "passed": true,
+      "evidence": "raw_evidence.json conditions.G3_DEEP_PATH"
+    },
+    "G5_PATH_QUERY_HYBRID": {
+      "type": "regression",
+      "expected": "slot_count=1, binding_accuracy=1.0",
+      "observed": "slot_count=1, binding_accuracy=1.0",
+      "passed": true,
+      "evidence": "raw_evidence.json conditions.G5_PATH_QUERY_HYBRID"
+    },
+    "N1_ORIGINAL": {
+      "type": "fix2_target",
+      "expected": "slot_count=0",
+      "observed": "slot_count=0",
+      "passed": true,
+      "evidence": "raw_evidence.json conditions.N1_ORIGINAL"
+    },
+    "N1_CORRECTED": {
+      "type": "null_control_corrected",
+      "expected": "slot_count=0",
+      "observed": "slot_count=0",
+      "passed": true,
+      "evidence": "raw_evidence.json conditions.N1_CORRECTED"
+    },
+    "B_LITERAL": {
+      "type": "baseline",
+      "expected": "fail_rate=1.0",
+      "observed": "fail_rate=1.0",
+      "passed": true,
+      "evidence": "raw_evidence.json conditions.B_LITERAL"
+    },
+    "B_UNFIXED": {
+      "type": "paired_comparison",
+      "expected": "slot_count=1, binding_accuracy=1.0 for P1-like training",
+      "observed": "slot_count=1, binding_accuracy=1.0",
+      "passed": true,
+      "evidence": "raw_evidence.json conditions.B_UNFIXED"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PRODUCT-34662221249/raw_evidence.json",
+      "sha256": "6e464e1facbf8875a958b511fd11a54e755373c5fb331b1019ef5cf477a0baaa",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-34662221249/run_experiment.py",
+      "sha256": "37f5f96a3611df29dabadfc9fb2267f558c67d08c5b8e9237311299801dca4fd",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "Fix1 (suffix guard) successfully rejects single-char suffix 'a' from G1 query-string values alpha/beta/delta, producing clean template search?q=${url} with binding_accuracy=1.0 for unseen gamma/epsilon/zeta",
+    "Fix2 (delimiter-bound prefix validation) successfully rejects N1_ORIGINAL cross-host prefix 'https://api.' ending at '.' (not delimiter), producing slot_count=0 as expected",
+    "N1_CORRECTED (truly disjoint URLs http://a.com/x, ftp://b.org/y, custom://c.net/z) correctly rejected: common prefix is empty, empty-prefix guard prevents parameterization, slot_count=0",
+    "All 5 established conditions (P1, G1, G2, G3, G5) maintain binding_accuracy=1.0 with no regressions after patches to actual kernel.py module",
+    "Fixes validated via monkey-patching on actual imported src.spider.kernel module (not standalone reimplementation), closing V3 audit gap from EXP-PRODUCT-34642376433",
+    "G4 architectural bound confirmed: suffix '00' (2-char) not caught by Fix1 single-char guard, template users/${url}00, binding_accuracy=0.0. This is architectural, not a fix failure",
+    "B_LITERAL baseline confirmed: literal mechanism reuse confidence 0.5 < min_confidence 0.8, fail_rate=1.0, confirming parameterized induction is necessary",
+    "B_UNFIXED paired comparison: with fixes applied (same as established conditions for P1-like training), slot_count=1, binding_accuracy=1.0. Direct delta quantification: fixes restore G1 binding (was 0/3 unfixed) and reject N1_ORIGINAL (was 1/3 unfixed)",
+    "slot_prefixes representation: P1/G3/G5 observed slot_prefixes {'url':''} vs expected 'users/'/'repos/main/issues/'/'users/'. Binding succeeds via template prefix embedded in action_template, not via slot_prefix semantics. This is representation loss documented in parent, not a binding failure",
+    "No import/syntax errors in patched kernel.py module. All conditions execute cleanly",
+    "Empty prefix guard added to distill_parameterized: when common prefix is empty (truly disjoint values), parameterization is rejected. This is a refinement over the parent reimplementation which would produce ${url} template for disjoint URLs"
+  ],
+  "validity_notes": [
+    "Fixes applied via monkey-patching on imported kernel module, not committed to kernel.py. Validates logical correctness but not production integration. Committing patches is a separate decision",
+    "Mechanism.slot_prefixes added as regular attribute (not dataclass field) since production kernel.py lacks this field. as_dict patched to include it. Production integration would require adding the field to models.py",
+    "All conditions use n=3 deterministic synthetic URLs, no model/network/browser calls. Generalization beyond tested URL classes unproven",
+    "Fix1 bounded to single-char suffix guard (len(suffix)<=1 not preceded by ? = &). Multi-char suffixes (G4 '00') not caught. Claim bounded to single-char coincidental overlap",
+    "Fix2 uses last-char validation (last_char of prefix in /? = &), NOT the prereg next-char variant. The prereg logic would false-reject P1/G1. Implementation is correct per EXP-PRODUCT-34642376433 audit V2",
+    "slot_prefixes for P1/G3/G5 observed empty due to rfind('/') returning -1 when varying part starts immediately after last '/'. This is representation loss, not binding failure. Documented in parent audit V6",
+    "Empty prefix guard (reject parameterization when common prefix is empty) is a refinement discovered during execution. This is consistent with frozen spec intent (truly disjoint URLs should not be parameterized) but was not explicitly in the prereg. Flagged as EXPLORATORY addition to Fix2",
+    "B_UNFIXED with fixes applied shows same behavior as established conditions for P1-like training. The paired comparison is valid but only quantifies delta for G1/N1_ORIGINAL (where fixes matter), not for P1/G2/G3/G5 (where unfixed also works)"
+  ],
+  "unresolved": [
+    "Whether Fix1 should extend to multi-char non-structural suffixes (e.g., '00', 'ing') to fix G4, and how to define structural delimiter boundary for suffix without breaking legitimate suffixes",
+    "Whether Fix2 should add minimum prefix length threshold (e.g., >8 chars) to reject protocol-only https:// parameterization that currently passes delimiter check (not tested in this experiment)",
+    "Whether empty slot_prefixes for P1/G3/G5 is representational artifact or correctness failure for slot-level VALUE CONTRACT when production kernel.py uses slot_prefixes for prefix stripping",
+    "End-to-end product economics (C-PRODUCT-ECON): does parameterized kernel save total cost per successful task? Still unmeasured. Blocked until kernel.py validation passes and real-browser testing",
+    "Real-world prevalence of single-char vs multi-char suffix collisions and cross-host vs protocol-only prefix collisions in API URLs",
+    "Whether leaf-path model can support multi-slot URL induction via parsing without breaking single-leaf abstraction (G4 architectural bound)"
+  ]
+}

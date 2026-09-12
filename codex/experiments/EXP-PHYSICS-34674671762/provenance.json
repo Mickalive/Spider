@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34674671762",
+  "lane": "physics",
+  "github_run_id": "34674671762",
+  "base_commit": "edb2652e05eb5428855da6fd56d02a771e191f64",
+  "execution_commit": "3d23743be1832490621023b78fa237260f91ac8b",
+  "frozen_at": "2026-09-12T05:08:42.160602+00:00",
+  "executed_at": "2026-09-12",
+  "environment": {
+    "os": "linux",
+    "python": "3.12.14",
+    "node": "22.23.2",
+    "playwright": "1.63.0",
+    "chromium": "153.0.8010.12 (v1243)",
+    "numpy": "2.5.3"
+  },
+  "datasets": {
+    "raw_network_captures": {
+      "path": "research/experiments/EXP-PHYSICS-34674671762/raw_network_captures.json",
+      "sha256": "bfbe2e142fe652f24f877e5c4a59942fa3e91e3d1e1355cf6b51f6e89a9c9348",
+      "description": "Raw network-request captures from Playwright route interception on 4 SPAs",
+      "sites": {
+        "synthetic": "250 transitions, 10 trajectories x 25 steps, 8-state deterministic SPA",
+        "multistep_form": "120 transitions, 10 trajectories x 12 steps, 4-step checkout wizard",
+        "dashboard": "160 transitions, 10 trajectories x 16 steps, 4-tab dashboard",
+        "wizard": "32 transitions (partial capture), 10 trajectories x 12 steps, 4-step wizard"
+      }
+    },
+    "pmi_results": {
+      "path": "research/experiments/EXP-PHYSICS-34674671762/pmi_results.json",
+      "sha256": "be2338fb2bf8c60f5f07b42789d55418d9c04e057d766b7f43ca0a0d15b50f99",
+      "description": "PMI computation results including per-site metrics, permutation tests, and alpha sensitivity"
+    }
+  },
+  "code": {
+    "pmi_computation": {
+      "path": "research/physics/network_requests/pmi_computation.py",
+      "sha256": "d33fe5fbfadd2682144ffc1e9137fee4cb53cccbff48613ae2740804cb0f8c11",
+      "description": "PMI computation with Laplace smoothing, permutation tests, and alpha sensitivity analysis"
+    },
+    "capture_script": {
+      "path": "research/physics/network_requests/capture_all_local_v2.js",
+      "sha256": "bd1d7d347c55cb197db05ae546c98b36616b14d2fdef9fc8d331a7f63b4e9802",
+      "description": "Playwright capture script for all local SPAs with route interception"
+    },
+    "synthetic_server": {
+      "path": "research/physics/network_requests/synthetic_spa_server.js",
+      "sha256": "a5fa6556dc2a8b1af772c416c0cd7196327215a051321e41ac75ae11654d4deb",
+      "description": "Synthetic SPA positive control server (8 states, 4 actions)"
+    },
+    "dashboard_server": {
+      "path": "research/physics/network_requests/dashboard_spa_server.js",
+      "sha256": "2b0fdbf2bda673f1ae21b59c9c26a56d42df5fae93ce72080bc8e940b40d10a2",
+      "description": "Dashboard SPA server (4 tabs with distinct API endpoints)"
+    },
+    "multistep_form_server": {
+      "path": "research/physics/network_requests/multistep_form_server.js",
+      "sha256": "dd37a9b505ea36d974b613abf7100eeff488449cbf8efda14a3a29dffa409c97",
+      "description": "Multi-step form SPA server (4-step checkout, same API calls per step)"
+    },
+    "wizard_server": {
+      "path": "research/physics/network_requests/wizard_spa_server.js",
+      "sha256": "476b56552135f0535777526434b1649def4a3ab5040d7d8a5d3fd9dc12fe71f7",
+      "description": "Wizard SPA server (4-step wizard with server-side step tracking)"
+    }
+  },
+  "frozen_inputs": {
+    "request.json": {
+      "path": "research/experiments/EXP-PHYSICS-34674671762/request.json",
+      "sha256": "667132861981aaf93cf3fb7e1893748c608b7906f7aa99147fb58a93fb9d822f"
+    },
+    "spec.json": {
+      "path": "research/experiments/EXP-PHYSICS-34674671762/spec.json",
+      "sha256": "48c48dcb7b1eefab6ef4387ed42030a3ca4078ff0d08a8d1afd1b381f0650b25"
+    },
+    "prereg.md": {
+      "path": "research/experiments/EXP-PHYSICS-34674671762/prereg.md",
+      "sha256": "73b3f86bba890c6f6a10c0cc249d70f059e0fff07845d9aeef29083ad5d53fbf"
+    },
+    "freeze.json": {
+      "path": "research/experiments/EXP-PHYSICS-34674671762/freeze.json"
+    }
+  },
+  "methods": {
+    "state_discretization": "SHA-256(endpoint_path + HTTP_method + status_code + request_body_fragment[:200]) per request; sorted tuple of per-request hashes for transition state",
+    "pmi_formula": "PMI(s, a, s') = log2[P(s' | s, a) / P(s' | s)] with Laplace smoothing alpha=1.0",
+    "temporal_split": "80/20 (first 80% train, last 20% test)",
+    "permutation_test": "1000 permutations of action labels within trajectories, one-sided p-value",
+    "bonferroni_correction": "3 comparisons (multistep_form, dashboard, wizard), alpha=0.0167",
+    "within_url_classification": "URL path before action equals URL path after action (hash-based, not label-based)"
+  },
+  "reproduction_commands": [
+    "cd research/physics/network_requests && npm install",
+    "node capture_all_local_v2.js",
+    "python3 pmi_computation.py"
+  ]
+}

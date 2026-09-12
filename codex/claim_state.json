@@ -145,6 +145,14 @@
         "claim_id": "C-WEB-DYNAMICS",
         "status": "HYPOTHESIS",
         "reason": "Frozen question (accessibility-tree as predictive state beyond URL on genuine SPA/form-heavy sites) was not tested. All data is synthetic with artificially injected state-dependent action probabilities; URL held constant by construction makes URL-only PMI ~0, so any a11y variation yields tautological gain. Real-site attempts (tally_form N=30 < 50, stalled automation; google_form placeholder URL redirecting to login) fail data-sufficiency and site-selection requirements. The frozen decision rule requires genuine SPA sites with URL ambiguity (spec.json measurement_validity #1, prereg 5.1-5.4). Producer SUPPORTS outcome is based on infrastructure-failure fallback to synthetic data, not evidence for or against the stated hypothesis. C-WEB-DYNAMICS remains HYPOTHESIS. The PMI pipeline correctly detects injected structure on synthetic data (positive control PMI=1.271, null p=0.666 on v2), but this is pipeline verification, not hypothesis evidence."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-34674671762",
+        "lane": "physics",
+        "decision": "FALSIFIED-IN-SETTING",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "Network-request endpoint+method+status+body_frag representation tested on 3 locally-hosted SPAs: 1/3 shows PMI 0.881 bits (dashboard, Bonferroni p=0.003) but gain is tautological action\u2192own-request (audit finding tautological_dashboard_gain_identifiability); 2/3 show 0.0 bits because API calls are identical across states by server design. Primary condition (\u22652/3 sites \u22650.1 bits) fails. Audit bounded claim ceiling to locally-hosted simulation only; does not generalize to production SPAs. This falsifies the specific network-request representation on this specific locally-hosted contrast. C-WEB-DYNAMICS as a broader hypothesis is not closed: response-side signals, more expressive representations, and genuine production SPAs remain untested."
       }
     ],
     "C-PARAM-INHERIT": [
@@ -339,6 +347,14 @@
         "claim_id": "C-PARAM-INHERIT",
         "status": "EXPERIMENTAL",
         "reason": "Two bounded fixes (suffix guard, delimiter-bound prefix validation) validated on target failure modes (G1 binding_accuracy=1.0, N1_ORIGINAL slot_count=0) with no regressions on P1/G2/G3/G5, all in standalone reimplementation. However, frozen decision_rule triggers FALSIFIED-IN-SETTING because N1_REDESIGNED null control fails (slot_count=1, URLs share 'https://' prefix ending at '/' delimiter \u2014 test case design flaw, not fix failure). Additionally: (1) Fix2 spec/implementation divergence (prereg next_char vs implementation last_char) is material and unresolved, (2) fixes not validated against actual src/spider/kernel.py distill_parameterized and _bind, (3) G4 multi-char suffix '00' not caught by single-char guard, (4) baselines B_UNFIXED and B_EXACT_MATCH not executed, (5) slot_prefixes empty for P1/G3/G5. Claim ceiling narrowed to: single-slot leaf-path parameterization with suffix guard and delimiter guard works for single-char coincidental suffix overlap and cross-host prefix rejection on deterministic synthetic data in reimplementation only."
+      },
+      {
+        "experiment_id": "EXP-PRODUCT-34662221249",
+        "lane": "product",
+        "decision": "SURVIVES_CURRENT_TEST",
+        "claim_id": "C-PARAM-INHERIT",
+        "status": "EXPERIMENTAL",
+        "reason": "Fix1 (suffix guard) and Fix2 (delimiter-bound prefix validation) validated on imported src.spider.kernel module via monkey-patching, closing V3 audit gap from EXP-PRODUCT-34642376433. Claim ceiling advances from 'standalone reimplementation' to 'NARROW_SYNTHETIC_SINGLE-SLOT_MONKEY_PATCHED_TEMPLATE_ONLY': 5 single-slot URL classes (P1 path-prefix, G1 query-string, G2 multi-param, G3 deep-path, G5 path+query hybrid) all binding_accuracy=1.0 on unseen values, N1_ORIGINAL cross-host prefix rejected (slot_count=0), N1_CORRECTED truly disjoint rejected (slot_count=0), no regressions, G4 multi-char suffix architectural bound confirmed, B_LITERAL baseline confirmed. Production integration not yet committed; slot_prefixes representation loss for P1/G3/G5 acknowledged; empty-prefix guard (EXPLORATORY) required for N1_CORRECTED."
       }
     ],
     "C-SEMANTIC-RESOLVE": [
@@ -507,6 +523,14 @@
         "claim_id": "C-PRODUCT-ECON",
         "status": "HYPOTHESIS",
         "reason": "C-PRODUCT-ECON remains HYPOTHESIS. Economics measurement is blocked until kernel fixes address suffix corruption (G1), over-parameterization (N1), and the multi-slot limitation is resolved or documented (G4). Measuring economics on a mechanism that produces incorrect bindings for common URL patterns would yield invalid cost data. No advancement toward EXPERIMENTAL."
+      },
+      {
+        "experiment_id": "EXP-PRODUCT-34662221249",
+        "lane": "product",
+        "decision": "SURVIVES_CURRENT_TEST",
+        "claim_id": "C-PRODUCT-ECON",
+        "status": "HYPOTHESIS",
+        "reason": "Kernel.py validation via monkey-patching is necessary but not sufficient for C-PRODUCT-ECON. Real-browser testing, committed patches, end-to-end economics measurement (model tokens, browser work, repair, latency, false accepts) still required. Remains blocked until production integration and real-browser evaluation."
       }
     ],
     "C-MEAS-VALID": [
