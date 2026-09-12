@@ -1,17 +1,33 @@
 {
   "experiment_id": "EXP-PRODUCT-34685457833",
   "lane": "product",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-PARAM-INHERIT"],
+  "question": "Can the empty-prefix guard be frozen as part of the Fix2 specification, the B_UNFIXED baseline be properly reimplemented as a true unfixed heuristic (without Fix1/Fix2 applied), and the full Fix1+Fix2+empty-prefix guard be committed to src/spider/kernel.py and src/spider/models.py — with production _bind semantics validated against all 9 conditions including slot_prefixes representation and prefix-stripping for VALUE CONTRACT — thereby advancing from monkey-patch validation to committed-code validation?",
+  "hypothesis": "Commit the patches (distill_parameterized, _find_common_prefix_suffix with Fix1, _validate_prefix_boundary with Fix2) to src/spider/kernel.py, add slot_prefixes field to src/spider/models.py Mechanism, and freeze the empty-prefix guard (reject parameterization when common prefix is empty) as part of the specification. When the same 9-condition validation suite from EXP-PRODUCT-34662221249 is run against the committed code, all 9 conditions pass: (1) P1 slot_count=1 binding_accuracy=1.0, (2) G1 slot_count=1 binding_accuracy=1.0, (3) G2 slot_count=1 binding_accuracy=1.0, (4) G3 slot_count=1 binding_accuracy=1.0, (5) G5 slot_count=1 binding_accuracy=1.0, (6) N1_ORIGINAL slot_count=0, (7) N1_CORRECTED slot_count=0, (8) B_LITERAL fail_rate=1.0, (9) no import/syntax errors. Additionally, B_UNFIXED reimplemented as true unfixed heuristic (using rfind('/') without Fix1/Fix2) yields slot_count=1 for P1-like training but fails G1 (suffix corruption) and N1_ORIGINAL (over-parameterization), demonstrating delta attributable to fixes.",
+  "falsifier": "Any of: (1) commit introduces import/syntax errors in kernel.py or models.py; (2) any established condition (P1/G2/G3/G5) drops below binding_accuracy=1.0; (3) G1 binding_accuracy < 1.0; (4) N1_ORIGINAL slot_count > 0; (5) N1_CORRECTED slot_count > 0; (6) B_LITERAL fail_rate < 1.0; (7) B_UNFIXED does not produce slot_count=1 for P1-like training (unfixed heuristic not properly implemented); (8) slot_prefixes empty for P1/G3/G5 (representation loss persists) — note: this is a ceiling bound, not a failure condition.",
+  "baselines": [
+    "B_LITERAL: No parameterization — literal mechanism reuse, confidence 0.5 < min_confidence 0.8, expected fail_rate=1.0, resolutions return EXPLORE/UNKNOWN. Confirms parameterized induction is necessary.",
+    "B_UNFIXED: True unfixed heuristic (rfind('/') without Fix1/Fix2) — expected slot_count=1 for P1-like training, binding_accuracy=1.0 for P1 unseen values, but binding_accuracy=0.0 for G1 (suffix corruption) and slot_count>0 for N1_ORIGINAL (over-parameterization). Quantifies delta attributable to fixes."
+  ],
+  "positive_control": "P1_PATH_PREFIX: 3 observations of https://api.example.com/users/{A,B,C}, expected slot_count=1, binding_accuracy=1.0 for unseen D/E/F. Verifies pipeline still works after commit.",
+  "null_control": "N1_ORIGINAL: 3 observations with cross-host URLs https://api.example.com/a, https://api.other.com/b, https://api.third.com/c. Common prefix 'https://api' ends at '.' (not delimiter). Fix2 should reject parameterization: expected slot_count=0.\nN1_CORRECTED: 3 observations with truly disjoint URLs http://a.com/x, ftp://b.org/y, custom://c.net/z. No common prefix beyond empty string. Empty-prefix guard should reject parameterization: expected slot_count=0.",
+  "measurement_validity": [
+    "Fixes committed to actual src/spider/kernel.py and src/spider/models.py (not monkey-patched) — closure of V6 substrate gap",
+    "Mechanism model gains slot_prefixes field (dict[str,str], default empty) as proper dataclass field",
+    "distill_parameterized added to kernel.py combining leaf-path extraction, Fix1 suffix guard, Fix2 delimiter validation, empty-prefix guard, and slot_prefix construction",
+    "Empty-prefix guard frozen as part of specification: reject parameterization when common prefix is empty (truly disjoint URLs)",
+    "_bind remains template-substitution-only (slot_prefixes not used in substitution) — all 5 established conditions produce templates with full prefix already embedded",
+    "All 5 parent established conditions (P1/G2/G3/G5) re-run with identical training values for direct comparison",
+    "N1_ORIGINAL uses same cross-host URLs as parent — consistent null control across experiments",
+    "N1_CORRECTED uses truly disjoint URLs with no shared protocol prefix — parent handoff recommended action",
+    "B_UNFIXED reimplemented as true unfixed heuristic: rfind('/') without Fix1/Fix2 applied, isolated from fixes",
+    "Binding correctness uses strict JSON comparison (json.dumps sort_keys=True)",
+    "Fresh kernel.py import per condition prevents cross-contamination",
+    "No model/network/browser calls — pure offline deterministic computation"
+  ],
+  "decision_rule": "If ALL of: (1) P1 slot_count=1 AND binding_accuracy=1.0, (2) G1 slot_count=1 AND binding_accuracy=1.0, (3) G2 slot_count=1 AND binding_accuracy=1.0, (4) G3 slot_count=1 AND binding_accuracy=1.0, (5) G5 slot_count=1 AND binding_accuracy=1.0, (6) N1_ORIGINAL slot_count=0, (7) N1_CORRECTED slot_count=0, (8) B_LITERAL fail_rate=1.0, (9) no import/syntax errors — verdict = SURVIVES_CURRENT_TEST. If any established condition (P1/G2/G3/G5) drops below binding_accuracy=1.0, verdict = FALSIFIED-IN-SETTING. If G1 or N1_ORIGINAL fails but no regressions, verdict = MIXED (partial fix). G4 reported separately as architecturally bounded. B_UNFIXED reported for paired comparison but not part of decision rule.",
+  "product_consequence_positive": "Fixes committed to kernel.py/models.py (closure of V6). C-PARAM-INHERIT claim ceiling advances from 'monkey-patched synthetic' to 'committed-code synthetic'. Clears path for C-PRODUCT-ECON measurement. The kernel can now correctly handle query-string binding (G1) and reject cross-host over-parameterization (N1) without breaking established path-prefix patterns. Empty-prefix guard frozen as specification.",
+  "product_consequence_negative": "If fixes fail in committed code despite passing in monkey-patch, the commit introduces divergence (e.g., import order, module state). C-PARAM-INHERIT remains EXPERIMENTAL at monkey-patch level. C-PRODUCT-ECON remains blocked. Need to identify commit-specific divergence.",
+  "estimated_cost": "Very low: pure synthetic data, offline computation, no browser/network/model calls. 9 conditions (5 established + N1_ORIGINAL + N1_CORRECTED + B_LITERAL + B_UNFIXED) x 3 training + 3 unseen each, ~27 binding tests. Code changes: ~50 lines added to kernel.py (distill_parameterized, _find_common_prefix_suffix, _validate_prefix_boundary), ~5 lines to models.py (slot_prefixes field).",
+  "expected_information_gain": "High: directly resolves the single highest-priority gap from EXP-PRODUCT-34662221249 (V6: monkey-patch not committed code). A positive result advances C-PARAM-INHERIT claim ceiling from 'monkey-patched synthetic' to 'committed-code synthetic'. A negative result identifies commit-specific divergence requiring diagnosis. Either outcome materially changes the product lane decision and unblocks or delays C-PRODUCT-ECON."
 }
