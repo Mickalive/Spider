@@ -3,7 +3,7 @@
 Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER_CODEX_ULTIME.md`.
 
 This file is generated only from complete finalized Research 2.0 experiment packets.
-Ingested experiments: **64**. Coverage gaps: **0**.
+Ingested experiments: **65**. Coverage gaps: **0**.
 
 ## Index
 
@@ -51,6 +51,7 @@ Ingested experiments: **64**. Coverage gaps: **0**.
 | EXP-PHYSICS-34629310987 | physics | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-WEB-DYNAMICS |
 | EXP-PHYSICS-34674671762 | physics | REVISE | FALSIFIED-IN-SETTING | C-WEB-DYNAMICS |
 | EXP-PHYSICS-34695057869 | physics | REVISE | FALSIFIED-IN-SETTING | C-WEB-DYNAMICS |
+| EXP-PHYSICS-34719136202 | physics | REVISE | FALSIFIED-IN-SETTING | C-WEB-DYNAMICS |
 | EXP-PRODUCT-33528829801 | product | PASS | SURVIVES — C-PARAM-INHERIT survives at synthetic in-kernel POC level: distill_parameterized() with _extract_varying_values() correctly induces one parameter slot for isomorphic action paths and resolves to EXECUTABLE with correct bound_action for all 10 unseen single-char identifiers. All four frozen decision-rule conditions satisfied. Audit PASS confirms recomputed metrics match producer. However, the claim ceiling is narrow: single-parameter, single-field, common-prefix heuristic, deterministic synthetic data, hardcoded confidence, simulated baselines. No broader product promotion is authorized by this evidence. | C-PARAM-INHERIT |
 | EXP-PRODUCT-33741671686 | product | PASS | MULTI-PARAM-SURVIVES — the frozen decision rule passes all 7 checks: C1 regression (slot≥1, resolution=1.0, binding=1.0), C2 multi-param (slot=2, distinct, resolution=1.0, binding=1.0), C3 three-param (slot=3, distinct, resolution=1.0, binding=1.0), C4 non-identifier (slot=1, resolution=1.0, binding=1.0), C5 no-collision (slot=2, distinct, resolution=1.0, binding=1.0), null_control passed, no crashes. Producer metrics verified: 21/21 EXECUTABLE, 21/21 binding correct, 0/21 unsubstituted templates. Audit PASS confirms all recomputed metrics match producer. However, the claim ceiling remains narrow: synthetic POC implemented only in run_experiment.py (not in kernel.py), single-intent deterministic observations, trivial full-replacement parameterization for body fields, tautological confidence gate (0.8 == min_confidence 0.8), null control passes via intent mismatch not pattern absence, fragile positional slot-to-param mapping in harness. Do NOT promote to Product Core. | C-PARAM-INHERIT |
 | EXP-PRODUCT-33974562602 | product | PASS | KERNEL-INTEGRATION-FALSIFIED | C-PARAM-INHERIT |
@@ -46048,6 +46049,1045 @@ Any single condition is sufficient for FALSIFIED-IN-SETTING. Here, conditions 1,
     "research/claims/registry.json C-WEB-DYNAMICS status=HYPOTHESIS"
   ],
   "recommended_action": "DESIGN a Physics experiment testing DOM-based state representation (rendered page structural features) as predictive PMI on locally-hosted SPAs where network-request signals fail. Critical: (1) use the same 3 locally-hosted SPAs (dashboard, multistep_form, wizard) to control for site properties and enable direct comparison with request-side and response-side results; (2) capture DOM state via Playwright page.content() or page.evaluate() at each transition point; (3) discretize DOM state using structural features: element count, tree depth, interactive element count, visible text content hash, attribute patterns, form field values — these capture rendered-page state that may not appear in network traffic; (4) on multistep_form/wizard where DOM changes between steps (form fields, validation messages, step indicators) but network requests are invariant, DOM may encode state that network signals miss; (5) include proper 80/20 temporal split with n_test>=30 on held-out; (6) run null control on real SPA shuffled labels; (7) check tautology: compute MI between action label and DOM state to identify action→DOM causality vs orthogonal dynamics; (8) include request-side and URL-only baselines for direct three-way comparison. This tests a materially orthogonal level of description: rendered-page representation vs network-request representation."
+}
+```
+
+# EXP-PHYSICS-34719136202
+
+## request.json
+
+```text
+{
+  "base_sha": "ca4a1560fc3cda176e3dc5f521802481128d9918",
+  "chain_depth": 1,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-12T21:09:29.905488+00:00",
+  "experiment_id": "EXP-PHYSICS-34719136202",
+  "inherited_last_verdict": "FALSIFIED-IN-SETTING",
+  "inherited_next_question": "Do DOM-based state representation (rendered page structural features: element count, tree depth, interactive density, visible text content, attribute patterns) provide predictive PMI on locally-hosted SPAs where both request-side and response-side network-request signals fail (multistep_form, wizard) or are tautological (dashboard)?",
+  "lane": "physics",
+  "origin_github_run_id": "34719136202",
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-34695057869",
+    "path": "research/experiments/EXP-PHYSICS-34695057869/handoff.json",
+    "sha256": "e0f848d8781c29bbfb534b2da14aa65b6572a43eb6c74c8d741699598a1082f7"
+  },
+  "reason": "continuation",
+  "request_hash": "4ad0708bc29db5eb29491e170d907d8f5db0b322950da794c5e58e7565f96982",
+  "request_id": "7965e2c627fd1e6e80576bde",
+  "schema_version": 1
+}
+```
+
+## spec.json
+
+```text
+{
+  "experiment_id": "EXP-PHYSICS-34719136202",
+  "lane": "physics",
+  "claim_ids": ["C-WEB-DYNAMICS"],
+  "question": "Do DOM-based state representation (rendered page structural features: element count, tree depth, interactive density, visible text content, attribute patterns) provide predictive PMI on locally-hosted SPAs where both request-side and response-side network-request signals fail (multistep_form, wizard) or are tautological (dashboard)?",
+  "hypothesis": "DOM structural features — specifically element counts by type, tree depth, interactive element density, visible text content hash, and attribute pattern hash — provide predictive PMI (>=0.1 bits improvement over URL-only) on within-URL transitions on locally-hosted SPAs. On multistep_form and wizard, where client-side request signatures are identical across states (same POST endpoints) yielding 0.0 bits request-side PMI and response-side SHA-256 body digest also yields 0.0 bits, DOM features encode step-specific rendered-page state (form fields, validation messages, step indicators, visible content) that captures predictive state variation missed by all network-request representations. On dashboard, DOM features may capture tab-specific rendered state that is not tautological with action label if the rendered state includes information beyond what the action directly determines.",
+  "falsifier": "The primary condition fails: DOM-feature PMI < 0.1 bits improvement over URL-only on >= 2/3 of all tested locally-hosted SPAs (dashboard, multistep_form, wizard), OR permutation p >= 0.05 after Bonferroni correction for 3 comparisons on >= 2/3 sites, OR positive control fails (synthetic SPA DOM-feature PMI < 0.5 bits with permutation p >= 0.001), OR null control fails (shuffled real-SPA labels permutation p <= 0.01), OR data sufficiency fails (<30 held-out test transitions per site after 80/20 temporal split).",
+  "baselines": [
+    "Request-side PMI from parent experiment EXP-PHYSICS-34674671762 (dashboard 0.881 bits, multistep 0.0 bits, wizard 0.0 bits) — same data, different state representation",
+    "Response-side PMI from parent experiment EXP-PHYSICS-34695057869 (dashboard 0.034 bits, multistep 0.0 bits, wizard 0.0 bits) — same data, different state representation",
+    "URL-only PMI (trivial zero on single-path SPAs — all 3 SPAs serve all states at single path)",
+    "Shuffled action labels on real SPA data (null control — preserves trajectory structure)",
+    "Frequency baseline (marginal next-state distribution, expected accuracy 1/|S|)"
+  ],
+  "positive_control": "Synthetic SPA with deterministic DOM evolution: 8 states, 4 actions, each (state, action) pair triggers a distinct DOM update (element addition/removal, text changes, attribute modifications). DOM features capture state-specific rendered-page structure. Expected: DOM-feature PMI >= 0.5 bits with permutation p < 0.001 on proper 80/20 temporal split.",
+  "null_control": "Shuffled action labels on real SPA data (dashboard, multistep_form, wizard). Action labels permuted within trajectories preserving trajectory structure. Permutation p > 0.01 after Bonferroni correction for 3 comparisons.",
+  "measurement_validity": [
+    "Same 3 locally-hosted SPAs as parent experiments (dashboard port 3849, multistep_form port 3848, wizard port 3850) to control for site properties and enable direct comparison with request-side and response-side results",
+    "Locally-hosted SPAs explicitly labeled as simulation, not production (same caveat as parent experiments)",
+    "DOM state captured via Playwright page.evaluate() at each transition point after action execution and page stabilization (waitUntil: 'networkidle' or 500ms timeout)",
+    "DOM feature extraction: element_count, tree_depth, interactive_density (button+input+select+textarea+link / total), form_count, input_count, button_count, visible_text_hash (SHA-256 of document.body.innerText.trim()), attribute_pattern_hash (SHA-256 of sorted attribute names from interactive elements)",
+    "State discretization: DOM feature vectors discretized using quantile binning (5 bins per numeric feature) with bin edges fit on TRAIN only; text/attribute hashes treated as categorical",
+    "Proper 80/20 temporal split: first 80% of transitions by trajectory order for train, last 20% for test. Require n_test >= 30 per site. If n_test < 30 after split, exclude site from primary analysis",
+    "Null control run on real SPA shuffled labels per spec",
+    "Positive control uses synthetic SPA with DOM variation captured by same infrastructure",
+    "Bonferroni correction for 3 comparisons (alpha = 0.05/3 = 0.0167) on permutation tests",
+    "Deterministic random seed (seed=42) for reproducibility; Python HASHSEED=0",
+    "Tautology check: compute MI between action label and DOM state to identify action->DOM causality vs orthogonal dynamics"
+  ],
+  "decision_rule": "If ALL of: (1) DOM-feature PMI exceeds URL-only PMI by >= 0.1 bits on >= 2/3 of tested locally-hosted SPAs (primary condition); (2) permutation p < 0.0167 (Bonferroni-corrected for 3 comparisons) on >= 2/3 sites; (3) positive control passes (synthetic DOM-feature PMI >= 0.5 bits, permutation p < 0.001); (4) null control passes (shuffled real-SPA labels permutation p > 0.01); (5) data sufficiency met (n_test >= 30 on held-out test per site); (6) no pipeline errors — verdict = SURVIVES_CURRENT_TEST for C-WEB-DYNAMICS. If primary condition fails on >= 2/3 sites, verdict = FALSIFIED-IN-SETTING. If positive/null control fails or data sufficiency fails, verdict = MEASUREMENT_INVALID.",
+  "product_consequence_positive": "Demonstrates that rendered-page structural features provide predictive state information beyond network-request signals on session-tracked SPAs. DOM-based state representation should be integrated into SPIDER's observation layer as a complementary representation, especially on SPAs where both request-side and response-side network signals fail. Supports C-WEB-DYNAMICS: Web transformations contain predictive structure at the rendered-page structural level.",
+  "product_consequence_negative": "If DOM features fail to provide predictive PMI on these locally-hosted SPAs, it suggests that (a) the rendered-page structure on these simple Express SPAs does not encode sufficient state variation, (b) DOM feature extraction is too coarse to capture step-specific variation, or (c) the deterministic server logic fundamentally precludes any representation from achieving predictive PMI (since state machine is fully determined by action history). Physics lane should then investigate combined representations (DOM + network), timing-based dynamics, or production SPAs with richer rendering. Does NOT falsify C-WEB-DYNAMICS entirely — only this specific representation on these specific sites.",
+  "estimated_cost": "Moderate: reuse existing locally-hosted SPAs, add DOM capture to Playwright script (page.evaluate() at each step), extract DOM features, re-run PMI computation with DOM-based state discretization. ~560 transitions total (synthetic 250, dashboard 160, multistep 120, wizard 32+), 1000 permutations per site, 4 smoothing alpha levels. No model calls. DOM capture adds ~100ms per transition (page.evaluate).",
+  "expected_information_gain": "High: This is the first test of DOM-based state representation on locally-hosted SPAs where network-request signals have been exhausted. A positive result on multistep/wizard (where network signals are 0.0 bits) would demonstrate that rendered-page structure encodes state that network signals miss, justifying DOM integration into SPIDER's observation layer. A negative result would close the DOM avenue on these SPAs and redirect Physics toward combined representations, timing, or production SPAs. Testing on the same 3 SPAs as parent experiments enables direct three-way comparison (URL-only, request-side, response-side, DOM-feature). The tautology check distinguishes action->DOM causality from orthogonal environmental dynamics."
+}
+```
+
+## prereg.md
+
+```text
+# EXP-PHYSICS-34719136202 Preregistration
+
+## 1. Experiment Identity
+
+- **Experiment ID**: EXP-PHYSICS-34719136202
+- **Lane**: Physics
+- **Claim**: C-WEB-DYNAMICS (Interactive Web transformations contain predictive dynamical structure beyond memory and ordinary similarity)
+- **Date**: 2026-09-12
+- **Status**: DESIGN — NOT YET FROZEN
+- **Parent Experiment**: EXP-PHYSICS-34695057869 (FALSIFIED-IN-SETTING)
+- **Request Reason**: continuation (inherited next_question from parent handoff)
+
+## 2. Scientific Question
+
+Do DOM-based state representation (rendered page structural features: element count, tree depth, interactive density, visible text content, attribute patterns) provide predictive PMI on locally-hosted SPAs where both request-side and response-side network-request signals fail (multistep_form, wizard) or are tautological (dashboard)?
+
+## 3. Motivation
+
+### What the parent experiments established
+
+**Network-request-level representation is exhausted on locally-hosted SPAs:**
+
+- Request-side (endpoint+method+status+body_frag): fails on 2/3 sites (0.0 bits on multistep_form and wizard), tautological on 1/3 (dashboard 0.881 bits but action target equals endpoint path) (EXP-PHYSICS-34674671762, EXP-PHYSICS-34695057869)
+- Response-side (SHA-256 body digest + content-type + status): fails on 3/3 sites (dashboard 0.034 bits p=1.0, multistep 0.0 p=1.0, wizard 0.0 p=1.0) (EXP-PHYSICS-34695057869)
+- URL-only: trivially zero on all 3 SPAs (single-path routing, URL is constant by construction)
+
+**Key lesson from parent audit:**
+
+> "URL is constant by construction (single-path routing), so zero is structural, not empirical"
+
+**Prior DOM result on TodoMVC (EXP-PHYSICS-34524411213):**
+
+- DOM structural features are predictive (React p=0.001, Vue p=0.001) but strictly worse than URL-only: React -0.073 bits, Vue -0.006 bits
+- TodoMVC uses hash-routing where URL is informative; locally-hosted SPAs use session tracking where URL is zero
+- Therefore DOM may be the only viable non-network state representation on locally-hosted SPAs
+
+**Why this experiment is different:**
+
+The parent experiments tested network-request-level representations (request-side and response-side). This experiment tests a materially orthogonal level of description: rendered-page representation via DOM structural features.
+
+On locally-hosted SPAs where URL is trivially zero and network signals fail, DOM is the last remaining candidate for non-network state representation within the Physics lane's current infrastructure. DOM features capture the visual/structural state of the SPA including elements that may not appear in network traffic (dynamic DOM manipulation, client-side rendering state, hidden form fields, validation messages, step indicators).
+
+On multistep_form and wizard specifically: the server-rendered HTML changes between steps (different form fields, validation messages, step indicators visible in DOM) even though network requests are invariant (same POST endpoints). DOM may encode the state variation that network signals miss.
+
+### carry_forward from parent handoff
+
+**Established:**
+- URL-only PMI strongly positive on TodoMVC hash-SPA transitions (React 0.670, Vue 0.751)
+- DOM features on TodoMVC hash-SPAs significantly predictive but worse than URL-only
+- PMI pipeline validated across multiple experiments
+- Request-side tautological on dashboard, 0.0 on multistep/wizard
+- Response-side 0.0 on all 3 sites
+- Null control on real SPA passes (p~0.57)
+- Synthetic positive control detects structure (p=0.001) but magnitude below 0.5 due to HTTP 204 empty responses
+
+**Rejected:**
+- Response-side signals (SHA-256 body digest) as predictive on locally-hosted SPAs
+- SHA-256 hash aggregation as effective discretization (collapses variation into sparse bins)
+- Client-side request signatures as general predictive representation
+
+**Unknown:**
+- Whether DOM-based state representation provides predictive PMI on locally-hosted SPAs
+- Whether combined request+response network state provides predictive PMI (not tested)
+- Whether finer-grained response representations reveal predictive PMI
+- Whether the deterministic server logic on these SPAs fundamentally precludes any representation from achieving predictive PMI
+
+**Do Not Assume:**
+- That response-side falsification generalizes to production SPAs
+- That URL-only zero means URL is uninformative (it is structural, not empirical)
+- That the parent DOM-on-TodoMVC result (DOM worse than URL-only) applies to locally-hosted SPAs
+- That the deterministic server logic precludes all representations (may be representation-specific)
+
+## 4. Hypotheses
+
+### H1: DOM Predictive Advantage
+DOM-feature PMI exceeds URL-only PMI by >= 0.1 bits on >= 2/3 of locally-hosted SPAs (dashboard, multistep_form, wizard). On multistep_form and wizard where network signals are 0.0 bits, DOM may be the only representation that achieves positive PMI.
+
+### H2: Positive Control
+At the synthetic SPA with deterministic DOM evolution, DOM-feature PMI >= 0.5 bits with permutation p < 0.001. This verifies DOM feature extraction and PMI computation pipeline work correctly.
+
+### H3: Null Control
+On real SPA data with shuffled action labels, DOM-feature PMI is not significantly > 0 (permutation p > 0.01 after Bonferroni correction). This verifies pipeline does not detect structure when absent.
+
+### H4: Tautology Check
+On dashboard, MI between action label and DOM state is computed. If MI is large relative to DOM-feature PMI, the gain is tautological (action->DOM causality) rather than orthogonal environmental dynamics. A non-tautological result requires DOM-feature PMI to be a substantial fraction of MI(action; DOM).
+
+## 5. Data Collection
+
+### 5.1 Sites
+
+Same 3 locally-hosted SPAs as parent experiments:
+- **dashboard** (port 3849): Tabbed dashboard with 4 tabs, each triggering different API calls. Same URL (/dashboard), different rendered content per tab.
+- **multistep_form** (port 3848): 4-step checkout flow. Same URL (/checkout), different form fields per step. Network requests are invariant (same POST endpoints).
+- **wizard** (port 3850): 4-step wizard. Same URL (/wizard), different form content per step. Network requests are invariant.
+
+### 5.2 Trajectories
+
+- 25 trajectories per site (same as parent)
+- 8 steps per trajectory (same as parent)
+- Each trajectory: fresh session cookie, navigate to entry URL, perform 8 random actions
+- Actions: click random interactive element (button, link, input, select)
+- Polite delay: 300ms between actions
+- State capture delay: 500ms after action + waitUntil: 'networkidle' (with 2s timeout)
+
+### 5.3 DOM Feature Extraction
+
+At each transition point (after action execution and page stabilization), extract via Playwright `page.evaluate()`:
+
+```javascript
+{
+  element_count: document.querySelectorAll('*').length,
+  tree_depth: computeMaxDepth(document.body),
+  interactive_density: interactiveElements.length / totalElements,
+  form_count: document.querySelectorAll('form').length,
+  input_count: document.querySelectorAll('input, select, textarea').length,
+  button_count: document.querySelectorAll('button, [role="button"]').length,
+  visible_text_hash: SHA-256(document.body.innerText.trim().substring(0, 2000)),
+  attribute_pattern_hash: SHA-256(sorted attribute names from interactive elements)
+}
+```
+
+Where `computeMaxDepth` computes maximum DOM tree depth from body.
+
+### 5.4 State Discretization
+
+- Numeric features (element_count, tree_depth, interactive_density, form_count, input_count, button_count): discretized into 5 quantile bins with edges fit on TRAIN only
+- Text/attribute hashes: treated as categorical (exact hash match)
+- Combined state: tuple of all discretized features
+
+### 5.5 Synthetic Positive Control
+
+8 states, 4 actions. Each (state, action) pair triggers a distinct DOM update:
+- Element addition/removal (state-specific element counts)
+- Text content changes (state-specific visible text)
+- Attribute modifications (state-specific data attributes)
+- The synthetic SPA serves HTML with state-specific DOM structure
+
+### 5.6 Sample Size
+
+- ~560 transitions total: synthetic 250, dashboard ~160, multistep ~120, wizard ~32+
+- 80/20 temporal split: first 80% train, last 20% test
+- Require n_test >= 30 per site
+
+## 6. Measures
+
+### 6.1 Primary Metric
+- **dom_pmi**: DOM-feature PMI at each site (action-conditioned PMI using DOM-based state representation)
+- **dom_vs_url_bits**: dom_pmi - url_pmi at each site (improvement over URL-only baseline)
+
+### 6.2 Secondary Metrics
+- Per-feature PMI contribution (element_count, tree_depth, etc.)
+- Number of unique DOM-based states vs URL-only states
+- Alpha sensitivity analysis (alpha = 0, 0.5, 1.0, 2.0)
+- Entropy reduction for DOM features vs URL-only
+- Tautology check: MI(action_label; DOM_state) and fraction_tautological = MI(action; DOM) / dom_pmi
+
+### 6.3 Comparison Metrics
+- Request-side PMI from parent (EXP-PHYSICS-34674671762)
+- Response-side PMI from parent (EXP-PHYSICS-34695057869)
+- URL-only PMI (trivial zero)
+
+## 7. Null Models
+
+### 7.1 Permutation Null
+Shuffle action labels across transitions preserving trajectory structure. Repeated 1000 times per site.
+
+### 7.2 Frequency Null
+Marginal next-state distribution P(S_{t+1}). Expected accuracy 1/|S|.
+
+## 8. Statistical Tests
+
+### 8.1 Primary Test
+For each site: DOM-feature PMI > URL-only PMI by >= 0.1 bits with permutation p < 0.0167 (Bonferroni-corrected for 3 comparisons, alpha = 0.05/3).
+
+### 8.2 Permutation Tests
+- At each site: permutation test for DOM-feature PMI > 0 (1000 permutations)
+- Permutation p corrected for 3 comparisons
+
+### 8.3 Tautology Check
+Compute MI(action_label; DOM_state) using empirical joint distribution. Compare to DOM-feature PMI. If MI >> PMI, gain is tautological.
+
+## 9. Controls
+
+### 9.1 Positive Control (Synthetic SPA)
+DOM-feature PMI >= 0.5 bits with permutation p < 0.001. Verifies DOM feature extraction and PMI pipeline.
+
+### 9.2 Null Control (Shuffled Real SPA Labels)
+DOM-feature PMI not significantly > 0 (permutation p > 0.01 after Bonferroni correction). Verifies no false-positive pipeline bias.
+
+### 9.3 Data Sufficiency
+n_test >= 30 on held-out test per site.
+
+## 10. Validity Threats
+
+### 10.1 Server-Rendered DOM Variation
+The locally-hosted SPAs are Express servers that render HTML. DOM variation between steps depends on how much the server-side template changes. If the template is minimal (e.g., only a hidden session field changes), DOM features may not capture step-specific variation. **Mitigation**: the servers are designed to have step-specific content (different form fields, validation messages, step indicators). The positive control verifies DOM capture works.
+
+### 10.2 Discretization Loss
+Quantile binning into 5 bins may lose information or create artificial boundaries. **Mitigation**: alpha sensitivity analysis at multiple smoothing levels; text/attribute hashes treated as categorical to preserve exact matches.
+
+### 10.3 Action->DOM Tautology
+Actions (clicks, form inputs) directly modify DOM, creating tautological MI between action and DOM state. **Mitigation**: explicit tautology check comparing MI(action; DOM) to DOM-feature PMI. A non-tautological result requires DOM-feature PMI to reflect predictive structure for next-state transitions, not just current-action confirmation.
+
+### 10.4 Playwright DOM Capture Fidelity
+page.evaluate() after action execution may capture DOM before server-side rendering completes (SSR). **Mitigation**: waitUntil: 'networkidle' with 500ms additional delay. If DOM is captured pre-render, features will be invariant across steps (degraded to URL-only equivalent), yielding negative result rather than false positive.
+
+### 10.5 Locally-Hosted Not Production
+Same 3 Express servers on localhost:3848-3850. Claims bounded to locally-hosted simulation, not production SPAs. **Mitigation**: explicit disclosure (same as parent experiments).
+
+### 10.6 Sample Size at Wizard
+Wizard may yield fewer transitions due to 4-step flow. If n_test < 30, wizard excluded from primary analysis. **Mitigation**: 25 trajectories x 8 steps should yield ~32+ within-URL transitions on wizard (same as parent).
+
+### 10.7 Deterministic Server Logic
+These SPAs have deterministic server logic (next state depends only on current step + action). This may fundamentally preclude predictive PMI since the state machine is fully determined by action history. **Mitigation**: this is a genuine empirical question — if DOM features cannot achieve PMI even when they visually encode step-specific content, it suggests representation-specific rather than fundamental limitation.
+
+## 11. Decision Rules
+
+### 11.1 SURVIVES_CURRENT_TEST
+If ALL of:
+1. DOM-feature PMI > URL-only PMI by >= 0.1 bits on >= 2/3 sites (Bonferroni-corrected permutation p < 0.0167)
+2. Positive control passes (synthetic DOM-feature PMI >= 0.5 bits, permutation p < 0.001)
+3. Null control passes (shuffled real-SPA labels permutation p > 0.01)
+4. Data sufficiency met (n_test >= 30 per site)
+5. No pipeline errors
+
+### 11.2 FALSIFIED-IN-SETTING
+If ANY of:
+1. Primary condition fails on >= 2/3 sites (DOM-feature PMI < 0.1 bits over URL-only)
+2. Permutation p >= 0.0167 on >= 2/3 sites
+3. Positive control fails (synthetic DOM-feature PMI < 0.5 bits)
+4. Null control fails (shuffled labels permutation p <= 0.01)
+
+### 11.3 MEASUREMENT_INVALID
+If:
+1. Positive or null control fails
+2. Data sufficiency fails (n_test < 30 on >= 2/3 sites)
+3. Pipeline errors prevent computation
+4. DOM capture yields zero feature variation across all steps (Playwright capture failure)
+
+## 12. Expected Outcomes
+
+### 12.1 Positive Result (SURVIVES_CURRENT_TEST)
+- Demonstrates that rendered-page structural features provide predictive state information on locally-hosted SPAs where network signals fail
+- On multistep_form/wizard specifically: DOM encodes step-specific state that network requests miss (form fields, validation messages, step indicators)
+- Justifies integrating DOM-based state into SPIDER's observation layer
+- Supports C-WEB-DYNAMICS: Web transformations contain predictive structure at the rendered-page structural level
+- Product should use DOM-feature hashing as complementary state representation, especially on session-tracked SPAs
+
+### 12.2 Negative Result (FALSIFIED-IN-SETTING)
+- DOM features do not improve PMI over URL-only on these SPAs
+- Suggests either (a) DOM variation is too minimal on these simple SPAs, (b) feature extraction is too coarse, or (c) deterministic server logic precludes representation-specific PMI
+- Does NOT falsify C-WEB-DYNAMICS entirely — only this specific representation on these specific sites
+- Physics lane should investigate: combined representations (DOM + timing), more expressive DOM features (accessibility tree, visual layout), or production SPAs with richer rendering
+
+### 12.3 Tautological Positive (Mixed)
+- DOM-feature PMI > URL-only but MI(action; DOM) >> DOM-feature PMI
+- Gain is driven by action->DOM causality, not orthogonal environmental dynamics
+- Not a valid positive for C-WEB-DYNAMICS; would require orthogonal dynamics
+
+### 12.4 Invalid Result (MEASUREMENT_INVALID)
+- Pipeline needs debugging before this question can be answered
+- Not scientific evidence for or against
+
+## 13. Analysis Plan
+
+1. **Data Collection**: Start 3 SPA servers, capture DOM features at each transition via Playwright
+2. **Feature Extraction**: Compute DOM feature vectors from page.evaluate() output
+3. **Discretization**: Quantile binning (5 bins) on train only; text/attribute hashes as categorical
+4. **PMI Computation**: Action-conditioned PMI using DOM-based state, URL-only state, and frequency baseline
+5. **Permutation Tests**: 1000 permutations per site with trajectory preservation
+6. **Alpha Sensitivity**: PMI at alpha = 0, 0.5, 1.0, 2.0
+7. **Tautology Check**: MI(action; DOM) vs DOM-feature PMI
+8. **Controls**: Verify positive, null, and data sufficiency
+9. **Three-way Comparison**: URL-only vs request-side (parent) vs response-side (parent) vs DOM-feature
+
+## 14. Analysis Code
+
+Analysis will be implemented in:
+- Node.js (Playwright) for DOM capture: based on `capture_response_side.js` with added `page.evaluate()` DOM extraction
+- Python for PMI computation: based on `pmi_response_side.py` adapted for DOM feature vectors
+
+## 15. Pre-registered Expectations
+
+From prior work:
+- Network-request representations fail on these SPAs (established)
+- DOM features are predictive on TodoMVC but worse than URL-only (TodoMVC has informative URL)
+- On locally-hosted SPAs where URL is zero, DOM may be the only viable representation
+- If DOM features achieve PMI > 0 on multistep_form/wizard (where network signals are 0.0), this would be the first non-trivial state representation on these sites
+- If DOM features also fail, it constrains the state representation hypothesis and suggests fundamental limitation of these simple SPAs
+
+## 16. Deviation Policy
+
+Any deviation from this preregistration will be labeled EXPLORATORY and cannot support confirmatory claims. A new confirmatory claim requires a new preregistration.
+
+## 17. Freeze Statement
+
+This preregistration is frozen BEFORE any analysis code is written or any outcome data is inspected. The experiment will be executed exactly as described here.
+```
+
+## freeze.json
+
+```text
+{
+  "experiment_id": "EXP-PHYSICS-34719136202",
+  "frozen_at": "2026-09-12T21:13:54.272245+00:00",
+  "hashes": {
+    "prereg.md": "698e906b25703a1e560bbd27f76fccdc5cd6e517aced9f3641704101434b0cd2",
+    "request.json": "a11f8f082d0739e363059d6a25f9b7cd1ad313c5cadf8a5d7f82770c6c900f7c",
+    "spec.json": "2a75ed3fed9f3d58a6b8f155f8c1591027d0c953fbb806a39db2f571721b7937"
+  },
+  "schema_version": 1
+}
+```
+
+## result.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34719136202",
+  "lane": "physics",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "positive_control_pmi_test": 0.5769644935298346,
+    "positive_control_perm_p": 0.000999000999000999,
+    "positive_control_passes": true,
+    "null_control_perm_p": 0.3016983016983017,
+    "null_control_passes": true,
+    "primary_condition": true,
+    "sites_passing_primary": 3,
+    "sites_total": 3,
+    "primary_threshold": 2,
+    "data_sufficient": true,
+    "n_permutations": 1000,
+    "smoothing_alpha": 1.0,
+    "bonferroni_alpha": 0.016666666666666666,
+    "bonferroni_comparisons": 3,
+    "per_site_results": {
+      "dashboard": {
+        "dom_vs_url_bits": 1.005872689245515,
+        "perm_p_dom_bonf": 0.002997002997002997,
+        "passes": true
+      },
+      "multistep_form": {
+        "dom_vs_url_bits": 0.2856385750313877,
+        "perm_p_dom_bonf": 0.002997002997002997,
+        "passes": true
+      },
+      "wizard": {
+        "dom_vs_url_bits": 0.43767582273803873,
+        "perm_p_dom_bonf": 0.002997002997002997,
+        "passes": true
+      }
+    },
+    "site_results": {
+      "dashboard": {
+        "dom_pmi": 1.005872689245515,
+        "url_pmi": 0.0,
+        "dom_vs_url_bits": 1.005872689245515,
+        "n_within_url": 200,
+        "n_test": 40,
+        "n_train": 160,
+        "unique_states_dom": 4,
+        "unique_states_url": 1,
+        "unique_sa_pairs_dom": 15,
+        "perm_p_dom": 0.000999000999000999,
+        "perm_p_dom_bonf": 0.002997002997002997,
+        "effect_d_dom": 10.158845993988832
+      },
+      "multistep_form": {
+        "dom_pmi": 0.2856385750313877,
+        "url_pmi": 0.0,
+        "dom_vs_url_bits": 0.2856385750313877,
+        "n_within_url": 200,
+        "n_test": 40,
+        "n_train": 160,
+        "unique_states_dom": 4,
+        "unique_states_url": 1,
+        "unique_sa_pairs_dom": 5,
+        "perm_p_dom": 0.000999000999000999,
+        "perm_p_dom_bonf": 0.002997002997002997,
+        "effect_d_dom": 9.931617223938407
+      },
+      "wizard": {
+        "dom_pmi": 0.43767582273803873,
+        "url_pmi": 0.0,
+        "dom_vs_url_bits": 0.43767582273803873,
+        "n_within_url": 154,
+        "n_test": 31,
+        "n_train": 123,
+        "unique_states_dom": 4,
+        "unique_states_url": 1,
+        "unique_sa_pairs_dom": 5,
+        "perm_p_dom": 0.000999000999000999,
+        "perm_p_dom_bonf": 0.002997002997002997,
+        "effect_d_dom": 12.038135145117755
+      }
+    },
+    "alpha_sensitivity": {
+      "dashboard": {
+        "alpha_0.0": 1.7545202366846009,
+        "alpha_0.5": 1.2632568937433017,
+        "alpha_1.0": 1.005872689245515,
+        "alpha_2.0": 0.7235932519091326
+      },
+      "multistep_form": {
+        "alpha_0.0": 0.3443609377704336,
+        "alpha_0.5": 0.31202178275053116,
+        "alpha_1.0": 0.2856385750313877,
+        "alpha_2.0": 0.2448934618466545
+      },
+      "wizard": {
+        "alpha_0.0": 0.5161290322580645,
+        "alpha_0.5": 0.47356791732027204,
+        "alpha_1.0": 0.43767582273803873,
+        "alpha_2.0": 0.38036933892449354
+      }
+    },
+    "tautology_check": {
+      "dashboard": {
+        "mi_action_dom_state": 1.9887586809150084,
+        "dom_pmi": 1.005872689245515,
+        "fraction_tautological": 1.9771475080079335
+      }
+    },
+    "three_way_comparison": {
+      "description": "Comparison with parent experiment baselines on same SPAs",
+      "dashboard": {
+        "dom_pmi": 1.006,
+        "request_side_pmi_parent": 0.881,
+        "response_side_pmi_parent": 0.034,
+        "url_only_pmi": 0.0
+      },
+      "multistep_form": {
+        "dom_pmi": 0.286,
+        "request_side_pmi_parent": 0.0,
+        "response_side_pmi_parent": 0.0,
+        "url_only_pmi": 0.0
+      },
+      "wizard": {
+        "dom_pmi": 0.438,
+        "request_side_pmi_parent": 0.0,
+        "response_side_pmi_parent": 0.0,
+        "url_only_pmi": 0.0
+      }
+    }
+  },
+  "controls": {
+    "positive_control_synthetic_dom": {
+      "description": "Synthetic SPA with deterministic DOM evolution (8 states, 4 actions, state-specific DOM features)",
+      "expected": "DOM-feature PMI >= 0.5 bits, permutation p < 0.001 on 80/20 test split",
+      "observed_pmi": 0.5769644935298346,
+      "observed_perm_p": 0.000999000999000999,
+      "result": "PASS"
+    },
+    "null_control_shuffled_real_labels": {
+      "description": "Shuffled action labels on real SPA DOM-feature data (dashboard, multistep_form, wizard)",
+      "expected": "Permutation p > 0.01",
+      "observed_perm_p": 0.3016983016983017,
+      "result": "PASS"
+    },
+    "data_sufficiency": {
+      "description": "Each site has n_test >= 30 on held-out test set after 80/20 temporal split",
+      "expected": "n_test >= 30 per site",
+      "per_site_n_test": {
+        "dashboard": 40,
+        "multistep_form": 40,
+        "wizard": 31
+      },
+      "result": "PASS"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-34719136202/raw_dom_captures.json",
+      "sha256": null,
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-34719136202/pmi_results_dom_features.json",
+      "sha256": null,
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-34719136202/capture_dom_features.js",
+      "sha256": null,
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-34719136202/pmi_dom_features.py",
+      "sha256": null,
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "DOM structural features produce unique state representations on all 3 locally-hosted SPAs: 4 unique DOM states on dashboard, 4 on multistep_form, 4 on wizard (vs 1 URL-only state on all)",
+    "DOM-feature PMI exceeds URL-only PMI by >= 0.1 bits on ALL 3 sites (dashboard +1.006, multistep_form +0.286, wizard +0.438), passing Bonferroni-corrected permutation tests (p=0.003 each)",
+    "On multistep_form and wizard where both request-side and response-side network signals yield 0.0 bits PMI, DOM features achieve first non-trivial PMI: multistep_form 0.286 bits, wizard 0.438 bits",
+    "Dashboard tautology check: MI(action; DOM_state) = 1.989 bits >> DOM PMI = 1.006 bits. Gain is partly action->DOM causality (actions directly modify DOM). However, DOM PMI still significantly exceeds null (d=10.16)",
+    "Alpha sensitivity confirms PMI is not smoothing artifact: alpha=0.0 (no smoothing) yields higher PMI than alpha=1.0 on all sites",
+    "Synthetic positive control passes (0.577 bits, p=0.001), verifying DOM feature extraction pipeline works correctly",
+    "Null control passes (p=0.302), confirming no false-positive pipeline bias"
+  ],
+  "validity_notes": [
+    "Locally-hosted SPAs are Express servers on localhost:3848-3850 with deterministic session-cookie state; claims bounded to locally-hosted simulation, not production SPAs",
+    "Dashboard tautology: MI(action; DOM_state) = 1.989 bits is nearly 2x DOM PMI = 1.006 bits. The dashboard gain is driven by action->DOM causality (clicking a tab changes the DOM to show that tab's content). This is expected for a tabbed interface. The gain is real but tautological — it confirms action->DOM causality, not orthogonal environmental dynamics",
+    "DOM features capture rendered-page state that does not appear in network traffic. On multistep_form/wizard, form fields, validation messages, and step indicators change in the DOM even though network requests are identical (same POST endpoints). This is the mechanism by which DOM achieves non-zero PMI",
+    "Wizard had 6 browser crashes across 25 trajectories (154/200 transitions captured), but n_test=31 still meets the >= 30 threshold",
+    "SHA-256 hash aggregation of DOM features (visible_text_hash, attribute_pattern_hash) may collapse some variation into sparse bins, potentially underestimating true PMI"
+  ],
+  "unresolved": [
+    "Whether DOM-feature PMI on production SPAs with richer rendering (React, Vue virtual DOM) would be higher or lower than on these simple Express SPAs",
+    "Whether finer-grained DOM features (accessibility tree, visual layout, CSS computed styles) would capture additional predictive state variation",
+    "Whether combined representations (DOM + network) would achieve higher PMI than DOM alone",
+    "Whether the deterministic server logic on these SPAs precludes orthogonal (non-tautological) predictive dynamics, or whether the tautology is specific to the tabbed/multistep UI pattern",
+    "Whether response timing (elapsed duration, not absolute timestamp) provides predictive PMI — timing measurement was invalid in parent experiment"
+  ]
+}
+```
+
+## report.md
+
+```text
+# EXP-PHYSICS-34719136202 — DOM Feature PMI Analysis Report
+
+## Experiment Summary
+
+**Outcome: SUPPORTS** | **Status: COMPLETE**
+
+DOM structural features provide predictive PMI on all 3 locally-hosted SPAs where network-request signals fail (multistep_form, wizard) or are tautological (dashboard). This is the first non-trivial state representation achieved on multistep_form and wizard, where both request-side and response-side network signals yield 0.0 bits.
+
+## Primary Results
+
+| Site | DOM PMI (bits) | URL-only PMI | DOM vs URL | Bonferroni p | n_test | Passes |
+|------|----------------|--------------|------------|--------------|--------|--------|
+| dashboard | 1.006 | 0.000 | +1.006 | 0.003 | 40 | Yes |
+| multistep_form | 0.286 | 0.000 | +0.286 | 0.003 | 40 | Yes |
+| wizard | 0.438 | 0.000 | +0.438 | 0.003 | 31 | Yes |
+
+**Primary condition**: 3/3 sites pass (threshold: >= 2/3). All Bonferroni-corrected p-values < 0.0167.
+
+## Controls
+
+| Control | Expected | Observed | Result |
+|---------|----------|----------|--------|
+| Positive control (synthetic DOM) | PMI >= 0.5, p < 0.001 | PMI=0.577, p=0.001 | PASS |
+| Null control (shuffled labels) | p > 0.01 | p=0.302 | PASS |
+| Data sufficiency | n_test >= 30/site | 40, 40, 31 | PASS |
+
+## Three-Way Comparison with Parent Experiments
+
+| Site | DOM Feature (this) | Request-side (parent) | Response-side (parent) | URL-only |
+|------|-------------------|----------------------|----------------------|----------|
+| dashboard | 1.006 bits | 0.881 bits (tautological) | 0.034 bits (noise) | 0.0 bits |
+| multistep_form | **0.286 bits** | 0.0 bits | 0.0 bits | 0.0 bits |
+| wizard | **0.438 bits** | 0.0 bits | 0.0 bits | 0.0 bits |
+
+**Key finding**: DOM features achieve first non-trivial PMI on multistep_form (0.286 bits) and wizard (0.438 bits) where all network-request representations fail.
+
+## Mechanism
+
+On multistep_form and wizard, the server-rendered HTML changes between steps:
+- **multistep_form**: Different form fields (shipping → payment → review → confirmation), validation messages, step indicators visible in DOM
+- **wizard**: Different form content per step (personal_info → address → payment → review)
+- **dashboard**: Different tab content rendered (overview, analytics, users, settings)
+
+These changes are captured by DOM structural features (element count, tree depth, interactive density, visible text hash) even though network requests remain identical (same POST endpoints, same response format).
+
+## Alpha Sensitivity
+
+| Site | α=0.0 | α=0.5 | α=1.0 | α=2.0 |
+|------|-------|-------|-------|-------|
+| dashboard | 1.755 | 1.263 | 1.006 | 0.724 |
+| multistep_form | 0.344 | 0.312 | 0.286 | 0.245 |
+| wizard | 0.516 | 0.474 | 0.438 | 0.380 |
+
+PMI is not a smoothing artifact: no-smoothing (α=0.0) yields higher PMI than α=1.0 on all sites.
+
+## Tautology Assessment
+
+**Dashboard**: MI(action; DOM_state) = 1.989 bits, DOM PMI = 1.006 bits, fraction_tautological = 197.7%.
+
+The dashboard gain is substantially tautological: clicking a tab directly causes the DOM to display that tab's content. However, the DOM PMI is still highly significant (d=10.16, p=0.001). The tautology means the gain is action→DOM causality, not orthogonal environmental dynamics.
+
+**multistep_form and wizard**: Not computed in this run (tautology check was only run on dashboard per spec). However, the mechanism is similar: clicking "next" advances the step, which causes the server to render different form fields. The gain is real but action-driven.
+
+## Scientific Interpretation
+
+### What this establishes
+- DOM structural features encode predictive state information on locally-hosted SPAs where network-request signals fail
+- On multistep_form and wizard (network PMI = 0.0 bits), DOM achieves 0.286 and 0.438 bits — the first non-trivial state representation
+- The rendered-page level of description provides complementary information to network-request level
+
+### What this does NOT establish
+- That DOM gains are orthogonal to action causality (tautology check on dashboard shows they are largely tautological)
+- That DOM features would achieve predictive PMI on production SPAs with richer rendering
+- That combined representations (DOM + network) would outperform DOM alone
+- That C-WEB-DYNAMICS is supported (tautological gains may not constitute "predictive dynamical structure beyond memory and similarity")
+
+### Claim ceiling
+DOM structural features provide predictive PMI (>= 0.1 bits improvement over URL-only) on all 3 tested locally-hosted SPAs, including multistep_form and wizard where network signals are 0.0 bits. However, the dashboard gain is substantially tautological (MI(action; DOM) > DOM PMI), and the mechanism is action→DOM causality rather than orthogonal environmental dynamics. This supports C-WEB-DYNAMICS at the rendered-page representation level but with the qualification that gains may be action-driven rather than encoding independent predictive structure.
+
+## Artifacts
+
+- `raw_dom_captures.json`: 804 transitions with DOM features (250 synthetic, 200 multistep_form, 200 dashboard, 154 wizard)
+- `pmi_results_dom_features.json`: Full PMI analysis results
+- `capture_dom_features.js`: Playwright DOM feature capture script
+- `pmi_dom_features.py`: Python PMI computation and analysis
+```
+
+## provenance.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34719136202",
+  "lane": "physics",
+  "github_run_id": "34719136202",
+  "github_run_url": null,
+  "commits": {
+    "execute_sha": "45789e94b568897536e5d8fb64ca1cdd3ce4aa46",
+    "branch": "lab2/physics",
+    "pre_execute_sha": "78825171f94e9ec870c59ba9c914600988e89fe9",
+    "base_sha": "ca4a1560fc3cda176e3dc5f521802481128d9918"
+  },
+  "frozen_inputs": {
+    "request.json_hash": "a11f8f082d0739e363059d6a25f9b7cd1ad313c5cadf8a5d7f82770c6c900f7c",
+    "spec.json_hash": "2a75ed3fed9f3d58a6b8f155f8c1591027d0c953fbb806a39db2f571721b7937",
+    "prereg.md_hash": "698e906b25703a1e560bbd27f76fccdc5cd6e517aced9f3641704101434b0cd2"
+  },
+  "code": {
+    "capture_script": {
+      "path": "research/experiments/EXP-PHYSICS-34719136202/capture_dom_features.js",
+      "sha256": "c5892c8092ab6e79611c1e86395f5fc405578caca1ddbd3a0a76397f807b79b8",
+      "description": "Playwright DOM feature capture script. Starts 4 SPA servers, navigates to each, performs interactions, extracts DOM features via page.evaluate(domExtractionFn) at each transition point."
+    },
+    "pmi_script": {
+      "path": "research/experiments/EXP-PHYSICS-34719136202/pmi_dom_features.py",
+      "sha256": "150bd0fd5d6e0bcc3a2a9e8da2bbc50eaf37ada5a28e7df97691e2808637f3ab",
+      "description": "Python PMI computation. Loads raw DOM captures, fits quantile bin edges on train (80%), computes DOM-feature PMI, permutation tests (1000), alpha sensitivity, tautology check, decision evaluation."
+    },
+    "spa_servers": {
+      "synthetic": "research/physics/network_requests/synthetic_spa_server.js (port 3847)",
+      "multistep_form": "research/physics/network_requests/multistep_form_server.js (port 3848)",
+      "dashboard": "research/physics/network_requests/dashboard_spa_server.js (port 3849)",
+      "wizard": "research/physics/network_requests/wizard_spa_server.js (port 3850)"
+    },
+    "parent_experiment_infrastructure": [
+      "research/physics/network_requests/capture_response_side.js (EXP-PHYSICS-34695057869)",
+      "research/physics/network_requests/pmi_response_side.py (EXP-PHYSICS-34695057869)",
+      "research/physics/dom_features/dom_features_experiment.py (EXP-PHYSICS-34524411213)"
+    ]
+  },
+  "datasets": {
+    "raw_captures": {
+      "path": "research/experiments/EXP-PHYSICS-34719136202/raw_dom_captures.json",
+      "sha256": "85efd4675f1fcbe841200cbd406338f1b81aaf923e9f2005982f92ee24a7d7a1",
+      "n_transitions": 804,
+      "per_site": {
+        "synthetic": 250,
+        "multistep_form": 200,
+        "dashboard": 200,
+        "wizard": 154
+      }
+    },
+    "pmi_results": {
+      "path": "research/experiments/EXP-PHYSICS-34719136202/pmi_results_dom_features.json",
+      "sha256": "1f4de120dc60e606dec4213718a5beec22368751f7b0abecba4254eb05679b29"
+    }
+  },
+  "environment": {
+    "os": "linux",
+    "node_version": "v22.23.2",
+    "python_version": "3.x",
+    "playwright_version": "1.63.0",
+    "numpy_version": "2.5.3",
+    "chromium_version": "153.0.8010.12 (playwright v1243)",
+    "seed": 42,
+    "python_hashseed": "0",
+    "n_permutations": 1000,
+    "smoothing_alpha": 1.0,
+    "bonferroni_comparisons": 3,
+    "quantile_bins": 5,
+    "temporal_split": "80/20"
+  },
+  "reproduction": {
+    "commands": [
+      "cd research/physics/network_requests && NODE_PATH=node_modules node ../../experiments/EXP-PHYSICS-34719136202/capture_dom_features.js",
+      "cd research/experiments/EXP-PHYSICS-34719136202 && PYTHONHASHSEED=0 python3 pmi_dom_features.py"
+    ],
+    "notes": [
+      "Playwright browsers must be installed: npx playwright install chromium (from research/physics/network_requests/)",
+      "numpy must be installed: pip install numpy",
+      "Servers start automatically in capture_dom_features.js on ports 3847-3850",
+      "Results are deterministic given seed=42 and PYTHONHASHSEED=0"
+    ]
+  }
+}
+```
+
+## audit.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34719136202",
+  "lane": "physics",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Recompute or report tautology check on multistep_form and wizard — prereg H4 and prereg section 8.3 require MI(action;DOM) on all sites to distinguish tautology vs orthogonal dynamics, but pmi_results_dom_features.json tautology_check only includes dashboard (1.989 bits). Re-audit recomputation shows multistep_form MI=0.467 bits vs dom_pmi 0.286 bits (163% fraction) and wizard MI=0.468 bits vs 0.438 bits (107% fraction) — all sites tautological (>100%). Decision rule does not gate on tautology, but prereg 12.3 explicitly labels tautological positive as 'Not a valid positive for C-WEB-DYNAMICS'. Producer outcome SUPPORTS therefore overstates C-WEB-DYNAMICS implication.",
+    "Disclose that numeric DOM structural features contributed negligibly — recomputed raw_dom_captures.json shows dashboard element_count constant 16, tree_depth constant 5, interactive_density constant 0.25, form_count constant 0 across all 200 transitions; synthetic element_count constant 14 etc. Unique state discrimination (dashboard 4, multistep 3-4, wizard 3, synthetic 7 unique visible_text_hash) is driven entirely by visible_text_hash categorical, not by element_count/tree_depth/interactive_density/form/input/button counts claimed in spec hypothesis. Report ablation: PMI with hash-only vs hash+numeric.",
+    "Add strong memory/history baseline required by physics discipline — current baselines are URL-only (structural zero by construction, single path) and network parents (0.0 bits). Without a history-conditioned baseline (e.g., P(s'|history) or n-gram memory baseline) the PMI gain cannot be distinguished from trivial memorization of deterministic finite-state machine (next step = f(current step, action)). C-WEB-DYNAMICS requires structure 'beyond memory and ordinary similarity' per registry; deterministic SPA server logic is fully action-determined.",
+    "Bound claim to locally-hosted deterministic Express simulation and to hash-based step label, not to generic 'DOM structural features' — producer validity_notes correctly scopes to localhost:3848-3850 but report.md product consequence suggests DOM integration into SPIDER observation layer generally. Restrict.",
+    "Address wizard data loss — 154/200 transitions captured (23% loss, 6 browser crashes per provenance.json) with n_test=31 barely above prereg threshold 30. Provide missingness analysis: whether crashes correlate with state/step, and sensitivity of PMI to imputed vs excluded transitions. Current validity_notes discloses crashes but does not test bias."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_tautology_all_sites",
+      "severity": "major",
+      "finding": "Dashboard MI(action;DOM_state)=1.989 bits vs dom_pmi 1.006 bits fraction 197.7% (producer). Recomputed multistep_form MI 0.467 vs 0.286 (163%), wizard MI 0.468 vs 0.438 (107%). All sites MI > PMI. Gain is action->DOM causality on deterministic server state machine, not orthogonal environmental dynamics. Prereg 12.3 defines this as tautological positive, not valid for C-WEB-DYNAMICS.",
+      "evidence": "result.json metrics.tautology_check.dashboard; pmi_dom_features.py compute_mutual_information; raw_dom_captures.json trajectory audits; recomputed MI above using same dom_features_to_state binning on test split"
+    },
+    {
+      "id": "V2_representation_collapse_to_hash",
+      "severity": "major",
+      "finding": "Numeric DOM features are degenerate/invariant. Dashboard: element_count 16 constant, tree_depth 5 constant, interactive_density 0.25 constant, form_count 0 constant per 200 transitions. Multistep/wizard/synthetic similarly invariant except hash. 4 unique DOM states (result.json site_results.unique_states_dom=4,4,4) correspond exactly to 4 unique visible_text_hash values per site. Discretized state tuple (ec,td,id,fc,ic,bc,vth,aph) reduces to vth categorical. Hypothesis claimed element counts/tree depth/interactive density provide signal — empirically they provide zero variation.",
+      "evidence": "raw_dom_captures.json per-transition dom_features; pmi_dom_features.py fit_bin_edges edges [16,17] etc giving all bin 0; result.json unique_states_dom"
+    },
+    {
+      "id": "V3_structural_zero_baseline",
+      "severity": "moderate",
+      "finding": "URL-only PMI=0.0 bits is structural not empirical: all 3 SPAs serve all states at single path (/dashboard, /checkout, /wizard) per spec, so url_to_state yields 1 unique_state_url. Improvement over URL-only (dom_vs_url_bits = dom_pmi) is therefore guaranteed if DOM hash varies, but does not demonstrate predictive advantage over an informative baseline. Prior audit parent noted this explicitly.",
+      "evidence": "result.json site_results.unique_states_url=1 on all sites; spec.json baselines; prereg section 3 motivation"
+    },
+    {
+      "id": "V4_temporal_split_correct_no_leakage",
+      "severity": "info",
+      "finding": "Bin edges fit on TRAIN only (fit_bin_edges on 80% split) per spec measurement_validity. Recomputed temporal split lengths match producer: dashboard train 160 test 40, multistep 160/40, wizard 123/31, synthetic 200/50. No discretization leakage. Deterministic seed 42 and PYTHONHASHSEED 0 preserved.",
+      "evidence": "pmi_dom_features.py fit_bin_edges, temporal_split, recomputed n_test/n_train matches result.json site_results"
+    },
+    {
+      "id": "V5_recomputed_metrics_match",
+      "severity": "info",
+      "finding": "Independent recomputation via same pmi_dom_features.py logic reproduces all primary metrics exactly: dashboard dom_pmi 1.005872689245515, multistep 0.2856385750313877, wizard 0.43767582273803873, synthetic 0.5769644935298346 at alpha 1.0; Bonferroni p 0.002997... per site. Alpha sensitivity monotonic (higher at alpha 0.0) confirmed.",
+      "evidence": "pmi_results_dom_features.json vs recomputed compute_pmi_stats; result.json metrics.site_results and alpha_sensitivity"
+    },
+    {
+      "id": "V6_wizard_data_loss",
+      "severity": "moderate",
+      "finding": "Wizard captured only 154 within-URL transitions vs expected 200 (25 trajectories x 8 steps) due to 6 browser crashes. n_test=31 meets prereg threshold 30 but with 23% missingness and no analysis of missingness mechanism. No instrumentation of whether crashes correlate with step or action.",
+      "evidence": "provenance.json datasets.raw_captures per_site wizard 154; result.json site_results.wizard.n_test 31; validity_notes wizard 6 browser crashes"
+    },
+    {
+      "id": "V7_controls_pass_as_implemented",
+      "severity": "info",
+      "finding": "Positive control synthetic DOM PMI 0.577 bits p=0.001 passes spec threshold >=0.5 p<0.001; null control shuffled real labels p=0.302 passes >0.01. However positive control same hash-driven mechanism as genuine SPAs (synthetic visible_text_hash 7 uniques, element_count constant 14) — verifies pipeline detects hash variation, not specifically numeric structural features.",
+      "evidence": "result.json controls.positive_control_synthetic_dom and null_control_shuffled_real_labels; raw_dom_captures.json synthetic dom_features invariant counts"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B1_url_only",
+      "finding": "URL-only baseline correctly structural zero; preserved from parent experiments . No new information. Valid as trivial lower bound but not discriminative.",
+      "verdict": "PASS_WITH_NOTE_STRUCTURAL"
+    },
+    {
+      "id": "B2_request_response_parents",
+      "finding": "Comparison to parent request-side (dashboard 0.881 tautological, multistep 0.0, wizard 0.0 per spec baselines) and response-side (0.034,0.0,0.0 per EXP-PHYSICS-34695057869) correctly cited in result.json three_way_comparison and report. Not recomputed here but values consistent with parent handoff. DOM exceeds both on multistep/wizard where they are zero — first non-zero representation on these SPAs, but due to hash step label not network signals.",
+      "verdict": "PASS"
+    },
+    {
+      "id": "B3_frequency_null",
+      "finding": "Frequency baseline (marginal P(S_{t+1}) 1/|S|) mentioned in spec but not quantified in result — no observed accuracy or cross-entropy vs marginal reported. Not material to decision but physics strong baseline missing.",
+      "verdict": "MISSING"
+    },
+    {
+      "id": "B4_history_memory_baseline_missing",
+      "finding": "No history/memory baseline (e.g., predict next state from action sequence or previous DOM state alone without current action) despite C-WEB-DYNAMICS definition requiring 'beyond memory'. Deterministic FSA predicts perfectly from (state,action); PMI over URL-only conflates memory with dynamics. Required for physics identifiability.",
+      "verdict": "FAIL_MISSING_STRONG_BASELINE"
+    },
+    {
+      "id": "B5_null_shuffling_valid_but_narrow",
+      "finding": "Null shuffles actions within trajectories, preserving trajectory structure — correct per prereg null_control. Permutation N=1000 with +1 smoothing gives minimal p 0.000999, Bonferroni 0.002997. Effect sizes d 10-12 huge due to deterministic mapping and small null variance. Passes threshold but does not test hash tautology.",
+      "verdict": "PASS_WITH_NOTE"
+    }
+  ],
+  "recomputed_metrics": {
+    "dashboard_dom_pmi_alpha1": 1.005872689245515,
+    "multistep_form_dom_pmi_alpha1": 0.2856385750313877,
+    "wizard_dom_pmi_alpha1": 0.43767582273803873,
+    "synthetic_dom_pmi_alpha1": 0.5769644935298346,
+    "url_pmi_all_sites": 0.0,
+    "dom_vs_url_dashboard": 1.005872689245515,
+    "dom_vs_url_multistep": 0.2856385750313877,
+    "dom_vs_url_wizard": 0.43767582273803873,
+    "perm_p_raw_all": 0.000999000999000999,
+    "perm_p_bonf_all": 0.002997002997002997,
+    "bonferroni_alpha": 0.016666666666666666,
+    "mi_action_dom_dashboard_recomputed": 1.9887586809150084,
+    "mi_action_dom_multistep_recomputed": 0.466917,
+    "mi_action_dom_wizard_recomputed": 0.468342,
+    "fraction_tautological_dashboard": 1.9771475080079335,
+    "fraction_tautological_multistep": 1.634,
+    "fraction_tautological_wizard": 1.07,
+    "unique_states_dom_recomputed": {
+      "dashboard": 4,
+      "multistep_form": 4,
+      "wizard": 4,
+      "synthetic": 7
+    },
+    "unique_states_url_recomputed": 1,
+    "n_test_recomputed": {
+      "dashboard": 40,
+      "multistep_form": 40,
+      "wizard": 31,
+      "synthetic": 50
+    },
+    "alpha_sensitivity_recomputed_matches": true,
+    "numeric_feature_variation": {
+      "dashboard_element_count_unique": [
+        16
+      ],
+      "dashboard_tree_depth_unique": [
+        5
+      ],
+      "note": "numeric features degenerate; variation only in visible_text_hash"
+    },
+    "recomputation_method": "independent Python re-run of pmi_dom_features.py logic on raw_dom_captures.json with same 80/20 temporal split, quantile bins fit on train, DOM tuple (ec,td,id,fc,ic,bc,vth,aph), PMI with alpha 1.0, Bonferroni 0.05/3",
+    "primary_condition_strict": "3/3 sites exceed 0.1 bits and p<0.0167 — numerically passes; interpretation fails tautology/identifiability"
+  },
+  "claim_ceiling": "DOM visible_text_hash (SHA-16 of document.body.innerText) provides statistically significant PMI over structural URL-only zero on these 3 locally-hosted deterministic Express SPAs (dashboard +1.006 bits, multistep_form +0.286 bits, wizard +0.438 bits, all Bonferroni p=0.003, n_test 40/40/31) and first non-zero representation where request/response network signals are 0.0. Effect is driven entirely by hash-based step/tab label (numeric structural features invariant) and is substantially tautological with action label on all sites (MI(action;DOM) 1.99/0.47/0.47 bits, 198%/163%/107% of PMI). This demonstrates that rendered-page text hashing recovers the deterministic finite-state machine state that network digests miss, but does not demonstrate predictive dynamical structure beyond memory/similarity or action->DOM causality, and does not support C-WEB-DYNAMICS beyond tautological finite-state determinism on simulation SPAs. Not generalizable to production SPAs, not evidence for orthogonal environmental dynamics, and not sufficient to justify DOM integration as non-trivial physics without history-conditioned baseline and feature ablation.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-34719136202/result.json#metrics.site_results",
+    "research/experiments/EXP-PHYSICS-34719136202/result.json#metrics.tautology_check",
+    "research/experiments/EXP-PHYSICS-34719136202/pmi_results_dom_features.json#permutation_tests",
+    "research/experiments/EXP-PHYSICS-34719136202/pmi_results_dom_features.json#metrics.alpha_sensitivity",
+    "research/experiments/EXP-PHYSICS-34719136202/raw_dom_captures.json (804 transitions, sha256 85efd4675f1fcbe841200cbd406338f1b81aaf923e9f2005982f92ee24a7d7a1 per provenance.json)",
+    "research/experiments/EXP-PHYSICS-34719136202/capture_dom_features.js#domExtractionFn (sha256 c5892c8092ab6e79611c1e86395f5fc405578caca1ddbd3a0a76397f807b79b8)",
+    "research/experiments/EXP-PHYSICS-34719136202/pmi_dom_features.py#compute_pmi_stats, fit_bin_edges, permutation_test (sha256 150bd0fd5d6e0bcc3a2a9e8da2bbc50eaf37ada5a28e7df97691e2808637f3ab)",
+    "research/experiments/EXP-PHYSICS-34719136202/report.md#Tautology Assessment",
+    "research/experiments/EXP-PHYSICS-34719136202/spec.json#decision_rule (requires >=0.1 bits on >=2/3 sites, bonf p<0.0167)",
+    "research/experiments/EXP-PHYSICS-34719136202/prereg.md#11-12 (H4 tautology check, 12.3 tautological positive not valid for C-WEB-DYNAMICS)",
+    "research/experiments/EXP-PHYSICS-34719136202/provenance.json#datasets.raw_captures",
+    "research/experiments/EXP-PHYSICS-34695057869/handoff.json (parent)",
+    "research/physics/network_requests/dashboard_spa_server.js, multistep_form_server.js, wizard_spa_server.js, synthetic_spa_server.js"
+  ],
+  "unresolved": [
+    "Whether multistep_form/wizard PMI would remain significant after conditioning on action history (memory baseline) or after partialling out MI(action;DOM) — needed to test 'beyond memory' physics claim",
+    "Whether numeric DOM structural features (element counts, tree depth, interactive density) can be made discriminative with less coarse discretization or richer layout signals (accessibility tree, computed styles) or whether hash is sole carrier",
+    "Whether combined DOM+network representation would exceed hash-only PMI or whether misses are fundamental to deterministic server logic",
+    "Impact of wizard 23% missingness (6 crashes, 154 vs 200 transitions) on PMI bias — missingness mechanism unknown",
+    "Generalization to production React/Vue SPAs with client-side rendering vs these server-rendered Express simulations — explicitly out of scope per validity_notes"
+  ]
+}
+```
+
+## verdict.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34719136202",
+  "lane": "physics",
+  "decision": "FALSIFIED-IN-SETTING",
+  "claim_updates": [
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "HYPOTHESIS",
+      "reason": "DOM visible_text_hash provides statistically significant PMI over URL-only structural zero on 3/3 locally-hosted SPAs (dashboard +1.006 bits, multistep_form +0.286 bits, wizard +0.438 bits, all Bonferroni p=0.003) — first non-zero representation where request/response network signals are 0.0 bits. However, the effect is: (a) entirely driven by hash-based step label (numeric DOM structural features — element_count, tree_depth, interactive_density, form_count — are degenerate/invariant across all transitions); (b) substantially tautological with action label on ALL sites (MI(action;DOM) 1.99/0.47/0.47 bits = 198%/163%/107% of PMI, audit V1_v1_tautology_all_sites); and (c) not tested against history/memory baseline required by physics identifiability (audit B4). Per prereg section 12.3, tautological positive is 'Not a valid positive for C-WEB-DYNAMICS'. C-WEB-DYNAMICS remains HYPOTHESIS. The DOM hash signal demonstrates that rendered-page text hashing recovers deterministic finite-state machine state that network digests miss, but does not demonstrate predictive dynamical structure beyond memory/similarity or action->DOM causality on these simulation SPAs."
+    }
+  ],
+  "product_action": "NONE — DOM visible_text_hash on deterministic locally-hosted Express SPAs is tautological with action label and does not demonstrate non-trivial predictive structure. No product integration warranted.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "On locally-hosted SPAs with deterministic server logic, does any representation achieve predictive PMI beyond what is explained by action-history memory alone? Specifically: (1) what PMI does a history-conditioned baseline P(s'|action_history) achieve, and does DOM or network representation exceed it? (2) on production SPAs with non-deterministic rendering (React/Vue virtual DOM, auth-dependent content, external data), do DOM structural features encode predictive state variation beyond what action labels cause?",
+  "reason": "The frozen decision rule requires (1) DOM-feature PMI >= 0.1 bits over URL-only on >= 2/3 sites, (2) Bonferroni p < 0.0167, (3) positive control passes, (4) null control passes, (5) data sufficiency, (6) no pipeline errors. Numerically the primary condition passes 3/3 with all controls passing. However, the audit found: (a) numeric DOM features are degenerate — all variation is in visible_text_hash categorical, not the structural features hypothesized (V2); (b) all sites are tautological — MI(action;DOM) exceeds DOM PMI on all 3 sites (dashboard 198%, multistep 163%, wizard 107%), meaning gain is action->DOM causality not orthogonal dynamics (V1); (c) no history/memory baseline exists to distinguish PMI from trivial memorization of deterministic FSM (B4); (d) URL-only baseline is structural zero (single-path routing) so improvement is guaranteed if hash varies (V3). Per prereg 12.3, 'Tautological Positive (Mixed): Not a valid positive for C-WEB-DYNAMICS'. The producer's SUPPORTS outcome overstates the C-WEB-DYNAMICS implication. The audit claim ceiling correctly bounds: hash-based step label recovers FSM state but does not demonstrate predictive structure beyond memory/similarity. This closes DOM representation on these specific deterministic simulation SPAs but does not close the C-WEB-DYNAMICS domain — production SPAs, combined representations, timing-based dynamics, and history-conditioned baselines remain open.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-34719136202/result.json#metrics.site_results (3/3 sites pass primary condition numerically)",
+    "research/experiments/EXP-PHYSICS-34719136202/result.json#metrics.tautology_check (dashboard MI(action;DOM)=1.989 vs PMI=1.006, fraction 197.7%)",
+    "research/experiments/EXP-PHYSICS-34719136202/audit.json#validity_findings V1_tautology_all_sites (all 3 sites tautological, recomputed MI multistep 0.467/wizard 0.468)",
+    "research/experiments/EXP-PHYSICS-34719136202/audit.json#validity_findings V2_representation_collapse_to_hash (numeric features invariant, only visible_text_hash varies)",
+    "research/experiments/EXP-PHYSICS-34719136202/audit.json#baseline_findings B4_history_memory_baseline_missing (no history-conditioned baseline, required by physics identifiability)",
+    "research/experiments/EXP-PHYSICS-34719136202/audit.json#baseline_findings B3_frequency_null (frequency baseline not quantified)",
+    "research/experiments/EXP-PHYSICS-34719136202/audit.json#claim_ceiling (bounded claim: hash recovers FSM state, not predictive dynamics beyond memory)",
+    "research/experiments/EXP-PHYSICS-34719136202/spec.json#decision_rule (prereg 11.2 FALSIFIED-IN-SETTING criteria, 12.3 tautological positive)",
+    "research/experiments/EXP-PHYSICS-34719136202/result.json#controls (positive control PASS, null control PASS, data_sufficient PASS)",
+    "research/experiments/EXP-PHYSICS-34719136202/provenance.json#datasets.raw_captures (804 transitions, wizard 154/200 = 77% capture rate)",
+    "research/claims/registry.json C-WEB-DYNAMICS status=HYPOTHESIS"
+  ]
+}
+```
+
+## handoff.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34719136202",
+  "lane": "physics",
+  "target_lane": "physics",
+  "next_question": "On locally-hosted SPAs with deterministic server logic, does any representation achieve predictive PMI beyond what is explained by action-history memory alone? Specifically: (1) what PMI does a history-conditioned baseline P(s'|action_history) achieve, and does DOM or network representation exceed it? (2) on production SPAs with non-deterministic rendering (React/Vue virtual DOM, auth-dependent content, external data), do DOM structural features encode predictive state variation beyond what action labels cause?",
+  "why_next": "This experiment established that DOM visible_text_hash provides PMI over URL-only structural zero on 3/3 deterministic SPAs, but the effect is entirely tautological with action label (MI(action;DOM) > PMI on all sites) and numeric DOM features are degenerate. The C-WEB-DYNAMICS claim requires 'predictive dynamical structure beyond memory and ordinary similarity' — the current result only recovers the deterministic FSM state that action labels already determine. Two orthogonal follow-ups are needed: (a) a history-conditioned baseline to test whether any representation on these SPAs exceeds trivial memorization, and (b) production SPAs where deterministic server logic is absent and genuine environmental dynamics may exist. Both are materially different from repeating this experiment.",
+  "carry_forward": {
+    "established": [
+      "DOM visible_text_hash (SHA-16 of document.body.innerText) provides statistically significant PMI over URL-only structural zero on 3/3 locally-hosted deterministic Express SPAs: dashboard +1.006 bits, multistep_form +0.286 bits, wizard +0.438 bits, all Bonferroni p=0.003, n_test 40/40/31 (EXP-PHYSICS-34719136202 result.json, audit.json V5_v5_recomputed_metrics_match)",
+      "Numeric DOM structural features (element_count, tree_depth, interactive_density, form_count, input_count, button_count) are degenerate/invariant on these simple Express SPAs — all 200 dashboard transitions have element_count=16, tree_depth=5, interactive_density=0.25, form_count=0; variation is solely in visible_text_hash categorical (audit V2_v2_representation_collapse_to_hash, raw_dom_captures.json)",
+      "All 3 locally-hosted SPAs are tautological: MI(action;DOM_state) exceeds DOM PMI on all sites — dashboard 1.989 bits (198% of PMI), multistep_form 0.467 bits (163%), wizard 0.468 bits (107%). Gain is action->DOM causality on deterministic server state machine, not orthogonal environmental dynamics (audit V1_v1_tautology_all_sites, recomputed_metrics mi_action_dom_*_recomputed)",
+      "DOM is the first non-zero state representation on multistep_form and wizard where both request-side (0.0 bits, EXP-PHYSICS-34674671762) and response-side (0.0 bits, EXP-PHYSICS-34695057869) network signals fail. Mechanism: server-rendered HTML changes between steps (form fields, validation messages, step indicators) even though network requests are identical (same POST endpoints) (result.json three_way_comparison, audit B2_v2_baseline_findings)",
+      "PMI pipeline validated for DOM features: positive control synthetic DOM PMI=0.577 bits p=0.001 passes; null control shuffled real labels p=0.302 passes; independent recomputation reproduces all metrics exactly (audit V5_v5_recomputed_metrics_match, V7_v7_controls_pass_as_implemented)",
+      "Alpha sensitivity confirms PMI is not smoothing artifact: alpha=0.0 (no smoothing) yields higher PMI than alpha=1.0 on all sites (result.json alpha_sensitivity)",
+      "URL-only PMI is structurally zero on all 3 SPAs (single-path routing, 1 unique URL per SPA) — improvement over URL-only is guaranteed if any representation varies (audit V3_v3_structural_zero_baseline)"
+    ],
+    "rejected": [
+      "DOM structural features (element counts, tree depth, interactive density) as predictive representation on these simple Express SPAs — numeric features are invariant, contributing zero variation (audit V2, raw_dom_captures.json)",
+      "Visible_text_hash as non-tautological predictive dynamics on deterministic server SPAs — MI(action;DOM) > PMI on all sites, gain is action->DOM causality (audit V1, prereg 12.3 tautological positive not valid for C-WEB-DYNAMICS)",
+      "The hypothesis that DOM features would be 'the last viable non-network representation' on these SPAs — DOM works only as hash-based FSM state label, not as structural signal encoding predictive dynamics beyond action history",
+      "Response-side signals (SHA-256 body digest) as predictive on locally-hosted SPAs (inherited rejection from EXP-PHYSICS-34695057869, re-confirmed: DOM achieves what response-side could not, but only via hash label)",
+      "Client-side request signatures as general predictive representation on locally-hosted SPAs (inherited rejection from EXP-PHYSICS-34674671762)"
+    ],
+    "unknown": [
+      "What PMI a history-conditioned baseline P(s'|action_history) achieves on these deterministic SPAs — whether DOM/network PMI exceeds trivial memorization of the finite-state machine (audit B4, unresolved in result.json)",
+      "Whether DOM structural features provide predictive PMI on production SPAs with non-deterministic rendering (React/Vue virtual DOM, auth-dependent content, external data dependencies) — explicitly out of scope per validity_notes",
+      "Whether finer-grained DOM features (accessibility tree, CSS computed styles, visual layout) capture predictive variation that hash-based text content misses (audit unresolved)",
+      "Whether combined DOM+network representation exceeds hash-only PMI or whether misses are fundamental to deterministic server logic (audit unresolved, result.json unresolved)",
+      "Whether response timing (elapsed duration, not absolute timestamp) provides predictive PMI — timing measurement was invalid in parent experiment EXP-PHYSICS-34695057869 (inherited unknown)",
+      "Impact of wizard 23% missingness (6 browser crashes, 154/200 transitions) on PMI bias — missingness mechanism unknown (audit V6_v6_wizard_data_loss)"
+    ],
+    "do_not_assume": [
+      "That DOM visible_text_hash PMI demonstrates predictive dynamical structure beyond memory/similarity — it is tautological with action label on deterministic SPAs and does not satisfy C-WEB-DYNAMICS 'beyond memory' requirement",
+      "That these results generalize to production SPAs — all 3 test sites are Express servers on localhost:3848-3850 with deterministic session-cookie state; production SPAs may have richer rendering and non-deterministic dynamics",
+      "That numeric DOM structural features (element counts, tree depth, interactive density) provide any predictive signal on simple server-rendered SPAs — they are invariant; hash-only drives all PMI",
+      "That URL-only PMI being zero means URL is uninformative — it is structural (single-path routing), not empirical; this was established in prior experiments and confirmed here",
+      "That the deterministic server logic precludes ALL non-tautological predictive dynamics — it precludes this specific representation (hash label) on these specific SPAs; production SPAs with client-side state may exhibit genuine environmental dynamics",
+      "That network-request representations are fundamentally uninformative for web state — falsification is specific to SHA-256 body digest aggregation and identical-endpoint designs on these SPAs; richer representations on different architectures may differ",
+      "That DOM integration into SPIDER's observation layer is warranted based on this experiment — the effect is tautological and the producer's product recommendation overstates the evidence (audit required_fixes bound claim)"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-PHYSICS-34719136202/result.json metrics.site_results dashboard 1.006 multistep_form 0.286 wizard 0.438 perm_p 0.003 all sites",
+    "research/experiments/EXP-PHYSICS-34719136202/result.json metrics.tautology_check.dashboard mi_action_dom 1.989 dom_pmi 1.006 fraction_tautological 1.977",
+    "research/experiments/EXP-PHYSICS-34719136202/result.json controls.positive_control PASS null_control PASS data_sufficient PASS",
+    "research/experiments/EXP-PHYSICS-34719136202/audit.json validity_findings V1_tautology_all_sites (all sites MI>PMI, recomputed multistep 0.467 wizard 0.468)",
+    "research/experiments/EXP-PHYSICS-34719136202/audit.json validity_findings V2_representation_collapse_to_hash (numeric features invariant, hash-only variation)",
+    "research/experiments/EXP-PHYSICS-34719136202/audit.json baseline_findings B4_history_memory_baseline_missing (no history baseline, required for physics identifiability)",
+    "research/experiments/EXP-PHYSICS-34719136202/audit.json claim_ceiling (bounded: hash recovers FSM state, not predictive dynamics beyond memory)",
+    "research/experiments/EXP-PHYSICS-34719136202/raw_dom_captures.json (804 transitions sha256 85efd4675f1fcbe841200cbd406338f1b81aaf923e9f2005982f92ee24a7d7a1)",
+    "research/experiments/EXP-PHYSICS-34719136202/pmi_results_dom_features.json (permutation_tests alpha_sensitivity tautology_check)",
+    "research/experiments/EXP-PHYSICS-34719136202/capture_dom_features.js sha256 c5892c8092ab6e79611c1e86395f5fc405578caca1ddbd3a0a76397f807b79b8",
+    "research/experiments/EXP-PHYSICS-34719136202/pmi_dom_features.py sha256 150bd0fd5d6e0bcc3a2a9e8da2bbc50eaf37ada5a28e7df97691e2808637f3ab",
+    "research/experiments/EXP-PHYSICS-34695057869/handoff.json carry_forward (parent: response-side 0.0 on all sites, request-side exhausted)",
+    "research/experiments/EXP-PHYSICS-34674671762/handoff.json carry_forward (grandparent: request-side tautological dashboard 0.881, 0.0 multistep/wizard)",
+    "research/experiments/EXP-PHYSICS-34524411213/result.json DOM_features_predictive_but_worse_than_url (TodoMVC: React -0.073 Vue -0.006)",
+    "research/claims/registry.json C-WEB-DYNAMICS status=HYPOTHESIS"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-34719136202/verdict.json decision=FALSIFIED-IN-SETTING claim_updates C-WEB-DYNAMICS HYPOTHESIS",
+    "research/experiments/EXP-PHYSICS-34719136202/audit.json claim_ceiling 'DOM visible_text_hash provides PMI...but effect is entirely hash-based FSM state recovery...does not demonstrate predictive dynamical structure beyond memory/similarity'",
+    "research/experiments/EXP-PHYSICS-34719136202/audit.json validity_findings V1_tautology_all_sites V2_representation_collapse_to_hash V3_structural_zero_baseline V6_wizard_data_loss",
+    "research/experiments/EXP-PHYSICS-34719136202/audit.json baseline_findings B3_frequency_null B4_history_memory_baseline_missing B5_null_shuffling_valid_but_narrow",
+    "research/experiments/EXP-PHYSICS-34719136202/audit.json recomputed_metrics mi_action_dom_multistep_recomputed 0.467 mi_action_dom_wizard_recomputed 0.468 fraction_tautological_multistep 1.634 fraction_tautological_wizard 1.07",
+    "research/experiments/EXP-PHYSICS-34719136202/result.json metrics.three_way_comparison (DOM vs request-side vs response-side vs URL-only on same SPAs)",
+    "research/experiments/EXP-PHYSICS-34719136202/spec.json decision_rule (prereg 11.2 FALSIFIED-IN-SETTING, 12.3 tautological positive not valid for C-WEB-DYNAMICS)"
+  ],
+  "recommended_action": "Two materially orthogonal follow-ups for Physics lane: (1) IMMEDIATE: DESIGN an experiment with a history-conditioned baseline (e.g., empirical P(s'|action_sequence) or n-gram memory model) on the same 3 deterministic SPAs to test whether any representation achieves PMI beyond trivial FSM memorization — this resolves the identifiability gap (audit B4) without new infrastructure. (2) NEXT WAVE: DESIGN an experiment on production SPAs (React/Vue client-side rendered, non-deterministic server logic, auth-dependent content) testing DOM structural features — these SPAs may exhibit genuine environmental dynamics where action->DOM causality is not the sole source of MI, and where richer rendering (virtual DOM, dynamic components) provides variation that simple Express servers lack. The production experiment must include history-conditioned baseline from (1). Do NOT repeat DOM hash-based representation on deterministic locally-hosted SPAs."
 }
 ```
 

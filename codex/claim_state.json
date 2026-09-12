@@ -161,6 +161,14 @@
         "claim_id": "C-WEB-DYNAMICS",
         "status": "HYPOTHESIS",
         "reason": "Response-side signals (SHA-256 body digest + content-type + status code) fail to provide predictive PMI on 0/3 locally-hosted SPAs (dashboard 0.034 bits, multistep 0.0, wizard 0.0, all Bonferroni p=1.0). Primary condition requires >=2/3 sites >=0.1 bits improvement over URL-only; fails on all 3. Dashboard response bodies are tautological with action (I=1.94 bits) yet PMI ~0. This experiment falsifies this specific response-side representation on these SPAs but does not close C-WEB-DYNAMICS globally. Claim ceiling bounded to SHA-256 body digest aggregation on 3 locally-hosted Express SPAs."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-34719136202",
+        "lane": "physics",
+        "decision": "FALSIFIED-IN-SETTING",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "DOM visible_text_hash provides statistically significant PMI over URL-only structural zero on 3/3 locally-hosted SPAs (dashboard +1.006 bits, multistep_form +0.286 bits, wizard +0.438 bits, all Bonferroni p=0.003) \u2014 first non-zero representation where request/response network signals are 0.0 bits. However, the effect is: (a) entirely driven by hash-based step label (numeric DOM structural features \u2014 element_count, tree_depth, interactive_density, form_count \u2014 are degenerate/invariant across all transitions); (b) substantially tautological with action label on ALL sites (MI(action;DOM) 1.99/0.47/0.47 bits = 198%/163%/107% of PMI, audit V1_v1_tautology_all_sites); and (c) not tested against history/memory baseline required by physics identifiability (audit B4). Per prereg section 12.3, tautological positive is 'Not a valid positive for C-WEB-DYNAMICS'. C-WEB-DYNAMICS remains HYPOTHESIS. The DOM hash signal demonstrates that rendered-page text hashing recovers deterministic finite-state machine state that network digests miss, but does not demonstrate predictive dynamical structure beyond memory/similarity or action->DOM causality on these simulation SPAs."
       }
     ],
     "C-PARAM-INHERIT": [
