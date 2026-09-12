@@ -1,0 +1,331 @@
+{
+  "experiment_id": "EXP-INTEL-34718481334",
+  "measurements": [
+    {
+      "task_name": "product_listing_tools-home-improvement",
+      "url": "http://localhost:8080/tools-home-improvement.html",
+      "page_type": "product_listing",
+      "success": true,
+      "error": null,
+      "http_status": 200,
+      "total_dom_elements": 1653,
+      "elements_with_bbox": 1506,
+      "locatable_elements": 82,
+      "viewport_elements": 108,
+      "interactive_fraction": 0.049606775559588624,
+      "cdp_yield": 0.06533575317604355,
+      "accessibility_snapshot_nodes": 0,
+      "a11y_error": "'Page' object has no attribute 'accessibility'"
+    },
+    {
+      "task_name": "product_listing_clothing-shoes-jewelry",
+      "url": "http://localhost:8080/clothing-shoes-jewelry.html",
+      "page_type": "product_listing",
+      "success": true,
+      "error": null,
+      "http_status": 200,
+      "total_dom_elements": 1696,
+      "elements_with_bbox": 1550,
+      "locatable_elements": 82,
+      "viewport_elements": 108,
+      "interactive_fraction": 0.04834905660377359,
+      "cdp_yield": 0.06367924528301887,
+      "accessibility_snapshot_nodes": 0,
+      "a11y_error": "'Page' object has no attribute 'accessibility'"
+    },
+    {
+      "task_name": "product_listing_electronics",
+      "url": "http://localhost:8080/electronics.html",
+      "page_type": "product_listing",
+      "success": true,
+      "error": null,
+      "http_status": 200,
+      "total_dom_elements": 1712,
+      "elements_with_bbox": 1564,
+      "locatable_elements": 82,
+      "viewport_elements": 108,
+      "interactive_fraction": 0.04789719626168224,
+      "cdp_yield": 0.0630841121495327,
+      "accessibility_snapshot_nodes": 0,
+      "a11y_error": "'Page' object has no attribute 'accessibility'"
+    },
+    {
+      "task_name": "detail_150ft-quad-shield-solid-copper-3ghz-rg-6",
+      "url": "http://localhost:8080/150ft-quad-shield-solid-copper-3ghz-rg-6-coaxial-cable-75-ohm-directv-satellite-tv-or-broadband-internet-anti-corrosion-brass-connector-rg6-fittings-assembled-in-usa-by-phat-satellite-intl.html",
+      "page_type": "detail",
+      "success": true,
+      "error": null,
+      "http_status": 200,
+      "total_dom_elements": 1316,
+      "elements_with_bbox": 1155,
+      "locatable_elements": 32,
+      "viewport_elements": 108,
+      "interactive_fraction": 0.0243161094224924,
+      "cdp_yield": 0.08206686930091185,
+      "accessibility_snapshot_nodes": 0,
+      "a11y_error": "'Page' object has no attribute 'accessibility'"
+    },
+    {
+      "task_name": "detail_navitech-black-hard-carry-bag-case-cover",
+      "url": "http://localhost:8080/navitech-black-hard-carry-bag-case-cover-with-shoulder-strap-compatible-with-the-vr-virtual-reality-3d-headsets-including-the-crypto-vr-150-virtual-reality-headset-3d-glasses.html",
+      "page_type": "detail",
+      "success": true,
+      "error": null,
+      "http_status": 200,
+      "total_dom_elements": 1310,
+      "elements_with_bbox": 1149,
+      "locatable_elements": 32,
+      "viewport_elements": 108,
+      "interactive_fraction": 0.024427480916030534,
+      "cdp_yield": 0.08244274809160305,
+      "accessibility_snapshot_nodes": 0,
+      "a11y_error": "'Page' object has no attribute 'accessibility'"
+    },
+    {
+      "task_name": "detail_zosi-h-265-poe-home-security-camera-syst",
+      "url": "http://localhost:8080/zosi-h-265-poe-home-security-camera-system-outdoor-indoor-8-channel-5mp-poe-nvr-recorder-4pcs-wired-2mp-1080p-surveillance-bullet-poe-ip-cameras-no-hard-drive-renewed.html",
+      "page_type": "detail",
+      "success": true,
+      "error": null,
+      "http_status": 200,
+      "total_dom_elements": 1395,
+      "elements_with_bbox": 1215,
+      "locatable_elements": 32,
+      "viewport_elements": 108,
+      "interactive_fraction": 0.022939068100358423,
+      "cdp_yield": 0.07741935483870968,
+      "accessibility_snapshot_nodes": 0,
+      "a11y_error": "'Page' object has no attribute 'accessibility'"
+    },
+    {
+      "task_name": "cart_",
+      "url": "http://localhost:8080/checkout/cart/",
+      "page_type": "cart",
+      "success": true,
+      "error": null,
+      "http_status": 200,
+      "total_dom_elements": 1136,
+      "elements_with_bbox": 1070,
+      "locatable_elements": 21,
+      "viewport_elements": 108,
+      "interactive_fraction": 0.018485915492957746,
+      "cdp_yield": 0.09507042253521127,
+      "accessibility_snapshot_nodes": 0,
+      "a11y_error": "'Page' object has no attribute 'accessibility'"
+    },
+    {
+      "task_name": "checkout_",
+      "url": "http://localhost:8080/checkout/",
+      "page_type": "checkout",
+      "success": false,
+      "error": "Page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:8080/checkout/\nCall log:\n  - navigating to \"http://localhost:8080/checkout/\", waiting until \"networkidle\"\n",
+      "http_status": null
+    },
+    {
+      "task_name": "checkout_",
+      "url": "http://localhost:8080/checkout/cart/",
+      "page_type": "checkout",
+      "success": true,
+      "error": null,
+      "http_status": 200,
+      "total_dom_elements": 1136,
+      "elements_with_bbox": 1070,
+      "locatable_elements": 21,
+      "viewport_elements": 108,
+      "interactive_fraction": 0.018485915492957746,
+      "cdp_yield": 0.09507042253521127,
+      "accessibility_snapshot_nodes": 0,
+      "a11y_error": "'Page' object has no attribute 'accessibility'"
+    }
+  ],
+  "statistics": {
+    "total_tasks_attempted": 9,
+    "total_tasks_measured": 8,
+    "successful_tasks": 8,
+    "total_dom_elements_mean": 1419.25,
+    "total_dom_elements_stdev": 223.768156,
+    "total_dom_elements_cv": 0.157666,
+    "total_dom_elements_min": 1136,
+    "total_dom_elements_max": 1712,
+    "total_dom_elements_values": [
+      1653,
+      1696,
+      1712,
+      1316,
+      1310,
+      1395,
+      1136,
+      1136
+    ],
+    "locatable_elements_mean": 48.0,
+    "locatable_elements_stdev": 26.678643,
+    "locatable_elements_cv": 0.555805,
+    "locatable_elements_min": 21,
+    "locatable_elements_max": 82,
+    "locatable_elements_values": [
+      82,
+      82,
+      82,
+      32,
+      32,
+      32,
+      21,
+      21
+    ],
+    "viewport_elements_mean": 108.0,
+    "viewport_elements_stdev": 0.0,
+    "viewport_elements_cv": 0.0,
+    "viewport_elements_min": 108,
+    "viewport_elements_max": 108,
+    "viewport_elements_values": [
+      108,
+      108,
+      108,
+      108,
+      108,
+      108,
+      108,
+      108
+    ],
+    "interactive_fraction_mean": 0.031813,
+    "interactive_fraction_stdev": 0.013198,
+    "interactive_fraction_cv": 0.414853,
+    "interactive_fraction_min": 0.018486,
+    "interactive_fraction_max": 0.049607,
+    "interactive_fraction_values": [
+      0.049607,
+      0.048349,
+      0.047897,
+      0.024316,
+      0.024427,
+      0.022939,
+      0.018486,
+      0.018486
+    ],
+    "cdp_yield_mean": 0.078021,
+    "cdp_yield_stdev": 0.012285,
+    "cdp_yield_cv": 0.157457,
+    "cdp_yield_min": 0.063084,
+    "cdp_yield_max": 0.09507,
+    "cdp_yield_values": [
+      0.065336,
+      0.063679,
+      0.063084,
+      0.082067,
+      0.082443,
+      0.077419,
+      0.09507,
+      0.09507
+    ],
+    "page_type_breakdown": {
+      "product_listing": {
+        "count": 3,
+        "mean_interactive_fraction": 0.048618,
+        "if_stdev": 0.000723,
+        "if_cv": 0.014871,
+        "mean_total_dom": 1687.0,
+        "mean_locatable": 82.0
+      },
+      "detail": {
+        "count": 3,
+        "mean_interactive_fraction": 0.023894,
+        "if_stdev": 0.000677,
+        "if_cv": 0.028333,
+        "mean_total_dom": 1340.3,
+        "mean_locatable": 32.0
+      },
+      "cart": {
+        "count": 1,
+        "mean_interactive_fraction": 0.018486,
+        "if_stdev": 0,
+        "if_cv": 0,
+        "mean_total_dom": 1136.0,
+        "mean_locatable": 21.0
+      },
+      "checkout": {
+        "count": 1,
+        "mean_interactive_fraction": 0.018486,
+        "if_stdev": 0,
+        "if_cv": 0,
+        "mean_total_dom": 1136.0,
+        "mean_locatable": 21.0
+      }
+    },
+    "between_type_variance": 0.00015535,
+    "within_type_variance": 4.9e-07,
+    "discrimination_ratio": 316.7045,
+    "within_type_cvs": {
+      "product_listing": 0.014871,
+      "detail": 0.028333
+    }
+  },
+  "frozen_definition": {
+    "type": "functional_fallback",
+    "definition": "Elements with non-null bounding box (width > 0 AND height > 0) AND (role in interactive_roles OR onclick/onsubmit handler OR form membership OR aria-label/aria-describedby)",
+    "interactive_roles": [
+      "button",
+      "checkbox",
+      "combobox",
+      "link",
+      "listbox",
+      "menuitem",
+      "radio",
+      "searchbox",
+      "slider",
+      "spinbutton",
+      "switch",
+      "tab",
+      "textbox"
+    ],
+    "maps_to": "Definition 2 (interactive-only)"
+  },
+  "docker_image_digest": "sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+  "frozen_seed": 99,
+  "selected_tasks": [
+    [
+      "product_listing",
+      "tools-home-improvement.html",
+      "product_listing_tools-home-improvement"
+    ],
+    [
+      "product_listing",
+      "clothing-shoes-jewelry.html",
+      "product_listing_clothing-shoes-jewelry"
+    ],
+    [
+      "product_listing",
+      "electronics.html",
+      "product_listing_electronics"
+    ],
+    [
+      "detail",
+      "150ft-quad-shield-solid-copper-3ghz-rg-6-coaxial-cable-75-ohm-directv-satellite-tv-or-broadband-internet-anti-corrosion-brass-connector-rg6-fittings-assembled-in-usa-by-phat-satellite-intl.html",
+      "detail_150ft-quad-shield-solid-copper-3ghz-rg-6"
+    ],
+    [
+      "detail",
+      "navitech-black-hard-carry-bag-case-cover-with-shoulder-strap-compatible-with-the-vr-virtual-reality-3d-headsets-including-the-crypto-vr-150-virtual-reality-headset-3d-glasses.html",
+      "detail_navitech-black-hard-carry-bag-case-cover"
+    ],
+    [
+      "detail",
+      "zosi-h-265-poe-home-security-camera-system-outdoor-indoor-8-channel-5mp-poe-nvr-recorder-4pcs-wired-2mp-1080p-surveillance-bullet-poe-ip-cameras-no-hard-drive-renewed.html",
+      "detail_zosi-h-265-poe-home-security-camera-syst"
+    ],
+    [
+      "cart",
+      "",
+      "cart_"
+    ],
+    [
+      "checkout",
+      "",
+      "checkout_"
+    ],
+    [
+      "checkout",
+      "",
+      "checkout_"
+    ]
+  ]
+}
