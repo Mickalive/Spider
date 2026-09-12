@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-34509593940",
+  "lane": "runtime",
+  "target_lane": "runtime",
+  "next_question": "Does body-only HTTP fingerprint discrimination survive CDN compression (Content-Encoding gzip/br) where response bodies are non-deterministically compressed, causing body hash to vary per request even for identical logical responses?",
+  "why_next": "This experiment validated body-only architecture under synthetic header noise, but body non-determinism from CDN compression is the critical unresolved threat. If body hash varies per request due to gzip/br compression, the body-only approach loses its core signal and discrimination collapses. This is a materially orthogonal question from header noise: headers are excluded from body-only fingerprints by construction, but body compression directly affects the body hash. Testing this requires a different proxy that modifies response bodies (compression), not just headers.",
+  "carry_forward": {
+    "established": [
+      "Body-only (status+body_hash) discrimination is invariant under synthetic per-response header noise (Spearman rho 0.0, noise-invariance bound 0.0) — tautological by construction since headers excluded from body-only fingerprint and proxy preserves bodies",
+      "Unfiltered full-vector (status+headers+body_hash) discrimination collapses under synthetic header noise: 0.833->0.232->0.0->0.0 on /userinfo (Spearman rho -0.9487, n=4, p=0.0513), 0.5->0.196->0.0->0.0 on /introspect",
+      "Full-vector degradation is engineered by per-request high-entropy headers (UUID, random int); product relevance is limited to unfiltered full-vector under high-entropy header noise",
+      "Body-only advantage over unfiltered full-vector exists only when headers contain high-entropy per-request noise; at low-entropy noise=1 full-vector still 0.23 (partial degradation), suggesting a filtered full-vector baseline may retain discrimination",
+      "expired_token and invalid_token remain indistinguishable by ANY observable on /userinfo (identical bodies, headers, fingerprint) and /introspect (both active:false) — carried from parent EXP-RUNTIME-34439061845",
+      "Body-only discrimination: /userinfo 0.5 (3 body groups: valid JSON vs empty vs empty), /introspect 0.5 (2 body groups: active:true vs active:false) — constant across all noise levels",
+      "WWW-Authenticate discrimination is /userinfo-specific resource-server behavior on Keycloak 25.0, not Keycloak-level: 0/3 additional endpoints show WWW-Auth-only discrimination > 0 — inherited from parent EXP-RUNTIME-34439061845"
+    ],
+    "rejected": [
+      "Unfiltered full-vector as a reliable production fingerprint under infrastructure header noise — collapses to 0.0 at noise>=2 on both /userinfo and /introspect",
+      "WWW-Authenticate as a general-purpose Keycloak-level auth-state signal — endpoint-specific (parent EXP-RUNTIME-34439061845)",
+      "WWW-Authenticate transfer across Keycloak endpoints — falsified 0/3 (parent EXP-RUNTIME-34439061845)",
+      "Cache-Control error-type variation as a discriminating signal — confirmed falsified (parent carried forward)"
+    ],
+    "unknown": [
+      "Does body-only discrimination survive CDN compression (Content-Encoding gzip/br) where response bodies are non-deterministically compressed?",
+      "Would a filtered full-vector (allowlisting status+WWW-Authenticate+Cache-Control+body_hash, excluding infrastructure headers like X-Cache-*, X-CDN-*, X-Rate-Limit-*) remain stable under the same noise, potentially offering higher discrimination (0.833 on /userinfo) without body-only simplicity?",
+      "Does discrimination survive multiple stacked infrastructure layers with correlated headers rather than independent per-request UUIDs?",
+      "Does the result generalize to non-Keycloak OAuth/OIDC providers (Auth0, Okta)?",
+      "What is the minimal header entropy required to collapse unfiltered full-vector below usable threshold (noise=1 still 0.23 suggests low-entropy HIT/MISS alone is insufficient)?",
+      "What is the discrimination floor when bodies are compressed non-deterministically?"
+    ],
+    "do_not_assume": [
+      "Do not assume body-only architecture is universally superior to full-vector — this experiment tested only unfiltered full-vector under synthetic high-entropy noise; a filtered full-vector baseline was not tested",
+      "Do not assume body-only invariance is a novel scientific finding — it is tautological by construction (headers excluded from fingerprint, proxy preserves bodies) as disclosed in prereg 12.6 and audit V2",
+      "Do not assume the Spearman rho -0.9487 p=0.0513 is statistically robust — n=4 noise levels, low power, directionally strong but not robust to alternative noise sampling (audit V4)",
+      "Do not assume this experiment validates body-only for production — ceiling is bounded to synthetic reverse-proxy model with single noise pattern, no body compression, no real CDN (audit V5)",
+      "Do not assume body-only achieves discrimination on /token endpoints — body-only is 0.0 on both /token password and /token client_credentials (parent EXP-RUNTIME-34439061845)",
+      "Do not assume expired_token represents true Keycloak-issued expired tokens — it is locally-signed HS256, treated as invalid_signature (V6 state construction leakage carried from parent)",
+      "Do not assume Keycloak 25.0 start-dev behavior represents production Keycloak with CDN, load-balancer, or rate-limiting",
+      "Do not assume the body-only recommendation from EXP-RUNTIME-34439061845 is production-ready — it survives only under synthetic header noise; CDN compression remains an open threat"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-RUNTIME-34509593940/result.json",
+    "research/experiments/EXP-RUNTIME-34509593940/audit.json",
+    "research/experiments/EXP-RUNTIME-34509593940/raw_observations.json",
+    "research/experiments/EXP-RUNTIME-34509593940/provenance.json",
+    "research/experiments/EXP-RUNTIME-34509593940/spec.json",
+    "research/experiments/EXP-RUNTIME-34509593940/prereg.md",
+    "research/experiments/EXP-RUNTIME-34439061845/handoff.json",
+    "research/experiments/EXP-RUNTIME-34300004597/handoff.json",
+    "research/claims/registry.json"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-34509593940/result.json — all per-noise per-endpoint metrics, full-vector degradation 0.833->0.0, body-only invariant 0.5, controls all PASS",
+    "research/experiments/EXP-RUNTIME-34509593940/audit.json — PASS, claim_ceiling bounded to synthetic reverse-proxy model, V1-V7 validity findings including V2 body tautology V3 engineered degradation V4 Spearman power V5 proxy fidelity",
+    "research/experiments/EXP-RUNTIME-34509593940/raw_observations.json — 320 HTTP observations sha 4dbcf4abf5eece337c32a533f94802288ee881bd9d9d72e25ecd3e020f148063, per-rep fingerprints and headers",
+    "research/experiments/EXP-RUNTIME-34509593940/spec.json — frozen question/hypothesis/falsifier baselines decision_rule",
+    "research/experiments/EXP-RUNTIME-34509593940/prereg.md — noise levels, fingerprint algorithms, validity threats, tautology disclosure",
+    "research/experiments/EXP-RUNTIME-34439061845/handoff.json — parent established/rejected/unknown/do_not_assume for C-MEAS-VALID"
+  ],
+  "recommended_action": "Design a CDN compression test for body-only auth-state discrimination: deploy Keycloak behind a reverse proxy that applies gzip/br compression to response bodies non-deterministically (varying compression level, chunk boundaries, or compression algorithm per request). Test whether body-only fingerprint (body hash alone) maintains discrimination across 4 auth states on /userinfo and /introspect under these conditions. This is the critical unresolved threat: if body hash varies under compression, body-only loses its core signal and the entire architecture collapses. Separately, test a filtered full-vector baseline (allowlist status+WWW-Authenticate+Cache-Control+body_hash, excluding infrastructure headers) under the same synthetic noise to determine whether it retains discrimination and whether body-only simplicity is actually necessary."
+}
