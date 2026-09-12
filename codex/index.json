@@ -1290,6 +1290,31 @@
         "handoff.json": "55e3f8a9826b98d8b2efffadb347a34259a2db9ca1daef50ea8a6b7e07e43ff3"
       }
     },
+    "EXP-PRODUCT-34685457833": {
+      "lane": "product",
+      "request_id": "b3f56c62abedea1873c1dcfe",
+      "created_at": "2026-09-12T09:17:41.938984+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT"
+      ],
+      "question": "Can the empty-prefix guard be frozen as part of the Fix2 specification, the B_UNFIXED baseline be properly reimplemented as a true unfixed heuristic (without Fix1/Fix2 applied), and the full Fix1+Fix2+empty-prefix guard be committed to src/spider/kernel.py and src/spider/models.py \u2014 with production _bind semantics validated against all 9 conditions including slot_prefixes representation and prefix-stripping for VALUE CONTRACT \u2014 thereby advancing from monkey-patch validation to committed-code validation?",
+      "audit_status": "PASS",
+      "decision": "SURVIVES_CURRENT_TEST",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/product",
+      "hashes": {
+        "request.json": "0a650b5eeb497774ed60ddf457eb4b5dd7cedcc42f470902fa1dedeb5491135d",
+        "spec.json": "6487a98b1ac697b39a5caa13acd79a6ff1f3ba41dae9c09913e283b2a9dc03c2",
+        "prereg.md": "a30807305fc684684bef8cca78bc23d128cffa3ea2bdf50c891983cbccd000fd",
+        "freeze.json": "d2577453c00b3057fdd023c01e312fb68915436009f2e7adb6a6d63c74fa0b7e",
+        "result.json": "2136d0115b72b7b09d19142681ddc57248ce91f948ab94ff8fea2048c1362cc8",
+        "report.md": "5cfb55762581602a00f9f34054bcf8dc1296a2d95c61abd9213dda8a54c9058f",
+        "provenance.json": "53c338b0e5cf4e3e817a057387f6c31206adf3d88131e10c15273d28da2a7348",
+        "audit.json": "79fcde0e3a7547ceb6fcdd2f7880adad7af5b44464832764ba184dc60d295520",
+        "verdict.json": "4a44b7c6b26cab4e1a9f0a3c1b48397659afea5331e22a474d76f99ad2e968cd",
+        "handoff.json": "2ac3222a9eb2ae262de7d60c5615f5bfb1d9ae67b0a2b7dce5468a31e14486a6"
+      }
+    },
     "EXP-RUNTIME-33528830833": {
       "lane": "runtime",
       "request_id": "cbf791e0cd3fe570d0ff0fd5",

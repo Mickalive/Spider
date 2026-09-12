@@ -355,6 +355,14 @@
         "claim_id": "C-PARAM-INHERIT",
         "status": "EXPERIMENTAL",
         "reason": "Fix1 (suffix guard) and Fix2 (delimiter-bound prefix validation) validated on imported src.spider.kernel module via monkey-patching, closing V3 audit gap from EXP-PRODUCT-34642376433. Claim ceiling advances from 'standalone reimplementation' to 'NARROW_SYNTHETIC_SINGLE-SLOT_MONKEY_PATCHED_TEMPLATE_ONLY': 5 single-slot URL classes (P1 path-prefix, G1 query-string, G2 multi-param, G3 deep-path, G5 path+query hybrid) all binding_accuracy=1.0 on unseen values, N1_ORIGINAL cross-host prefix rejected (slot_count=0), N1_CORRECTED truly disjoint rejected (slot_count=0), no regressions, G4 multi-char suffix architectural bound confirmed, B_LITERAL baseline confirmed. Production integration not yet committed; slot_prefixes representation loss for P1/G3/G5 acknowledged; empty-prefix guard (EXPLORATORY) required for N1_CORRECTED."
+      },
+      {
+        "experiment_id": "EXP-PRODUCT-34685457833",
+        "lane": "product",
+        "decision": "SURVIVES_CURRENT_TEST",
+        "claim_id": "C-PARAM-INHERIT",
+        "status": "EXPERIMENTAL",
+        "reason": "Auditor PASS, all 9/9 decision-relevant conditions pass frozen decision_rule on committed code (kernel.py a1fe75cf, models.py 064c5f). Claim ceiling advances from monkey-patched synthetic to committed-code synthetic (audit V4). However, claim remains EXPERIMENTAL with NARROW ceiling: (1) slot_prefixes empty for P1/G3/G5 limits to template-substitution-only binding with no VALUE CONTRACT prefix-stripping (audit V5); (2) Fix2 allows protocol-only 'https://' over-parameterization not covered by frozen nulls (audit V6); (3) B_UNFIXED delta verified by recompute but not measured in primary run against G1/N1_ORIGINAL training data (audit B2); (4) all conditions synthetic with zero model/browser/network calls (audit V7). C-PRODUCT-ECON next gate requires end-to-end amortized economics on real agents."
       }
     ],
     "C-SEMANTIC-RESOLVE": [
