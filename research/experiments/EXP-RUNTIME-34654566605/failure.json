@@ -1,9 +1,9 @@
 {
   "stage": "director",
-  "category": "DIRECTOR_FAILURE",
-  "message": "stage exited with code 66",
+  "category": "VALIDATION_FAILURE",
+  "message": "invalid claim update status: CEILING_NARROWED",
   "retryable": false,
-  "recorded_at": "2026-09-12T00:41:30.619346+00:00",
-  "github_run_id": "34662218889",
+  "recorded_at": "2026-09-12T05:08:05.296968+00:00",
+  "github_run_id": "34674671129",
   "github_run_attempt": "1"
 }
