@@ -1,17 +1,29 @@
 {
   "experiment_id": "EXP-PRODUCT-34704657427",
   "lane": "product",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-PARAM-INHERIT", "C-PRODUCT-ECON"],
+  "question": "Should slot_prefixes be computed non-empty (extracting the common prefix before the slot for VALUE CONTRACT prefix-stripping) or accepted as empty (template-only binding), and what is the delta attributable to Fix1+Fix2 when B_UNFIXED is run against G1 query-string and N1_ORIGINAL cross-host training data?",
+  "hypothesis": "H1 (slot_prefixes): Computing non-empty slot_prefixes by extracting the portion of the template path after the last '/' delimiter before the slot produces slot_prefixes={'url': 'users/'} for P1, slot_prefixes={'url': 'repos/main/issues/'} for G3, slot_prefixes={'url': 'repos/main/issues/'} for G5, without breaking any established condition (binding_accuracy remains 1.0 for all P1/G1/G2/G3/G5). H2 (B_UNFIXED delta): B_UNFIXED (true unfixed heuristic rfind('/') without Fix1/Fix2) applied to G1 query-string training data produces suffix-corrupted template (binding_accuracy=0.0 for unseen values), and B_UNFIXED applied to N1_ORIGINAL cross-host training data produces over-parameterized template (slot_count>0), demonstrating that Fix1 and Fix2 are necessary for these conditions. H3 (protocol-only): Fix2 does not reject protocol-only 'https://' over-parameterization ('https://${url}' with slot_prefixes={'url': 'https://'}), confirming the protocol-only gap persists.",
+  "falsifier": "Any of: (1) computing non-empty slot_prefixes introduces import/syntax errors or breaks distill_parameterized; (2) any established condition (P1/G1/G2/G3/G5) drops below binding_accuracy=1.0 when slot_prefixes are computed non-empty; (3) B_UNFIXED on G1 training data produces binding_accuracy>0.0 for unseen values (fix not necessary); (4) B_UNFIXED on N1_ORIGINAL training data produces slot_count=0 (fix not necessary); (5) protocol-only 'https://${url}' is rejected by Fix2 (gap closed when it should persist).",
+  "baselines": [
+    "B_EMPTY_SLOT_PREFIXES: Current behavior — slot_prefixes empty for P1/G3/G5 (template-only binding). Baseline for comparison with computed non-empty slot_prefixes. Expected: all conditions pass, binding_accuracy=1.0.",
+    "B_UNFIXED_G1: True unfixed heuristic (rfind('/') without Fix1/Fix2) applied to G1 query-string training data (https://api.example.com/posts?a=1, https://api.example.com/posts?b=2, https://api.example.com/posts?c=3). Expected: suffix-corrupted template, binding_accuracy=0.0 for unseen values.",
+    "B_UNFIXED_N1: True unfixed heuristic (rfind('/') without Fix1/Fix2) applied to N1_ORIGINAL cross-host training data (https://api.example.com/a, https://api.other.com/b, https://api.third.com/c). Expected: over-parameterized template, slot_count>0."
+  ],
+  "positive_control": "P1_PATH_PREFIX: 3 observations of https://api.example.com/users/{A,B,C}, expected slot_count=1, binding_accuracy=1.0 for unseen D/E/F, slot_prefixes={'url': 'users/'} when computed non-empty. Verifies pipeline still works after slot_prefixes computation change.",
+  "null_control": "N1_ORIGINAL: 3 observations with cross-host URLs https://api.example.com/a, https://api.other.com/b, https://api.third.com/c. Fix2 should reject parameterization: expected slot_count=0, slot_prefixes empty. N1_CORRECTED: 3 observations with truly disjoint URLs http://a.com/x, ftp://b.org/y, custom://c.net/z. Empty-prefix guard should reject: expected slot_count=0.",
+  "measurement_validity": [
+    "All conditions deterministic synthetic with n=3 training + 3 unseen per condition — same as parent EXP-PRODUCT-34685457833",
+    "slot_prefixes computation implemented in distill_parameterized (not monkey-patched) — committed code substrate",
+    "B_UNFIXED reimplemented as true unfixed heuristic: rfind('/') without Fix1/Fix2, isolated from fixes",
+    "Fresh Python import per condition prevents cross-contamination",
+    "No model/network/browser calls — pure offline deterministic computation",
+    "All 5 parent established conditions (P1/G1/G2/G3/G5) re-run with identical training values for direct comparison",
+    "slot_prefixes computation is additive: does not change action_template, _bind behavior, or template construction"
+  ],
+  "decision_rule": "If ALL of: (1) computing non-empty slot_prefixes does not introduce errors; (2) P1 slot_count=1 AND binding_accuracy=1.0 AND slot_prefixes={'url': 'users/'}; (3) G1 slot_count=1 AND binding_accuracy=1.0; (4) G2 slot_count=1 AND binding_accuracy=1.0; (5) G3 slot_count=1 AND binding_accuracy=1.0 AND slot_prefixes={'url': 'repos/main/issues/'}; (6) G5 slot_count=1 AND binding_accuracy=1.0 AND slot_prefixes={'url': 'repos/main/issues/'}; (7) N1_ORIGINAL slot_count=0; (8) N1_CORRECTED slot_count=0; (9) B_UNFIXED_G1 produces suffix-corrupted template (binding_accuracy=0.0); (10) B_UNFIXED_N1 produces over-parameterization (slot_count>0); (11) protocol-only 'https://${url}' is NOT rejected by Fix2 — verdict = SURVIVES_CURRENT_TEST. If any established condition (P1/G1/G2/G3/G5) drops below binding_accuracy=1.0, verdict = FALSIFIED-IN-SETTING. If B_UNFIXED does not show expected failures, verdict = MIXED (partial fix necessity). G4 reported separately as architecturally bounded.",
+  "product_consequence_positive": "Non-empty slot_prefixes enable VALUE CONTRACT prefix-stripping in future _bind implementations. The kernel can correctly identify the static prefix before a parameter slot, enabling more efficient template reuse and clearer mechanism semantics. B_UNFIXED delta quantification confirms Fix1+Fix2 necessity for G1/N1 conditions. Protocol-only gap documented for future Fix2 enhancement.",
+  "product_consequence_negative": "If computing non-empty slot_prefixes breaks established conditions, the representation change is not safe. slot_prefixes must remain empty (template-only binding). C-PRODUCT-ECON proceeds with empty slot_prefixes. If B_UNFIXED does not show expected failures, the fixes may be unnecessary for those conditions, weakening the case for Fix1+Fix2.",
+  "estimated_cost": "Very low: pure synthetic data, offline computation, no browser/network/model calls. 11 conditions (5 established + N1_ORIGINAL + N1_CORRECTED + B_UNFIXED_G1 + B_UNFIXED_N1 + protocol-only + slot_prefixes computation check) x 3 training + 3 unseen each, ~33 binding tests. Code changes: ~20 lines added to distill_parameterized for slot_prefixes computation.",
+  "expected_information_gain": "High: directly resolves the primary blocker for C-PRODUCT-ECON (slot_prefixes design decision) and quantifies B_UNFIXED delta (fix necessity). A positive result (non-empty slot_prefixes work + fixes necessary) unblocks C-PRODUCT-ECON with non-empty slot_prefixes. A negative result (slot_prefixes break things or fixes unnecessary) changes the design to empty slot_prefixes or weakens fix necessity. Either outcome materially changes the product lane decision."
 }
