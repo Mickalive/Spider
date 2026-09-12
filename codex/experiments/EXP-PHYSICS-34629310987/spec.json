@@ -1,0 +1,32 @@
+{
+  "experiment_id": "EXP-PHYSICS-34629310987",
+  "lane": "physics",
+  "claim_ids": ["C-WEB-DYNAMICS"],
+  "question": "Does the accessibility tree -- a semantically richer structural representation capturing element roles, names, states, and relationships rather than raw DOM counts -- provide predictive state information beyond URL on genuine SPA/form-heavy sites where the same URL hosts different states?",
+  "hypothesis": "On form-heavy SPAs with client-side routing (same URL, different steps), the accessibility tree discretized as (role, name, visible_state) tuples carries mutual information about the next-state transition that URL-only cannot capture. Specifically, on transitions where the URL does not change, accessibility-tree PMI exceeds URL-only PMI by >= 0.1 bits, demonstrating that semantic structural content provides dynamical information beyond location.",
+  "falsifier": "Accessibility-tree PMI does not exceed URL-only PMI by >= 0.1 bits on transitions where URL is invariant (primary condition), OR accessibility-tree permutation p > 0.01 after Bonferroni correction across sites, OR the accessibility tree does not vary within the same URL (entropy of accessibility-tree states given URL = 0 on >= 1 site), OR positive control fails (synthetic SPA accessibility-tree PMI < 0.5 bits).",
+  "baselines": [
+    "URL-only PMI (same URL as state, same pipeline as parent EXP-PHYSICS-34524411213)",
+    "URL+accessibility-tree combined PMI (concatenated state representation)",
+    "Shuffle null (accessibility-tree labels permuted across transitions)",
+    "DOM structural features baseline (element_count, tree_depth, interactive_density -- replication of parent)"
+  ],
+  "positive_control": "Synthetic SPA with deterministic accessibility-tree evolution: 8 states, 4 actions, accessibility-tree vectors uniquely identify each state. Accessibility-tree PMI must be >= 0.5 bits with permutation p < 0.001. This verifies the pipeline can detect accessibility-tree structure when it exists.",
+  "null_control": "Shuffled accessibility-tree labels: permute (role, name, state) tuples across transitions. Shuffled PMI must not significantly exceed zero (permutation p > 0.01). This verifies the pipeline does not detect structure in random label assignments.",
+  "measurement_validity": [
+    "Sites selected for genuine URL ambiguity: same URL hosts >= 3 distinct form steps with different accessibility trees",
+    "Accessibility tree extracted via Playwright page.accessibility.snapshot() at each step after full page load",
+    "Discretization: hash of sorted visible (role, name, state) tuples from accessibility tree, with element filtering (exclude Presentation/None roles, text-only nodes) to reduce noise",
+    "Train/test split: 80/20 by transition index (temporal split, not random, to avoid look-ahead leakage)",
+    "Discretization bin edges fit on TRAIN only; test transitions mapped to nearest train bin",
+    "SPA-aware leakage classification: URL hash/history-based routing detection, not just href matching",
+    "N >= 50 non-leakage transitions per site for reliable PMI estimation",
+    "Permutation test: 1000 label permutations, exact p-value computation",
+    "Accessibility tree entropy given URL computed to verify within-URL variability"
+  ],
+  "decision_rule": "If ALL of: (1) accessibility-tree PMI > URL-only PMI by >= 0.1 bits on within-URL transitions averaged across sites; (2) accessibility-tree permutation p < 0.01 after Bonferroni correction (2 sites x 2 conditions = 4 comparisons); (3) positive control passes; (4) null control passes; (5) accessibility tree varies within same URL (entropy > 0 on >= 1 site); (6) data sufficiency (>= 50 non-leakage transitions per site). Verdict = SURVIVES_CURRENT_TEST. If condition (1) fails (accessibility-tree <= URL-only): verdict = FALSIFIED-IN-SETTING. If accessibility tree does not vary within URL but URL-only works: verdict = FALSIFIED-IN-SETTING (structural representation is confounded with location). If pipeline errors or insufficient data: MEASUREMENT_INVALID.",
+  "product_consequence_positive": "If accessibility-tree structure provides predictive dynamical information beyond URL, SPIDER should use accessibility-tree snapshots as state representation for form-heavy workflows. This changes the state-space representation from location-based to semantics-based, enabling prediction on client-side-routed sites where URL is ambiguous. Product architecture: store accessibility-tree hashes alongside URL in the operational knowledge graph.",
+  "product_consequence_negative": "If accessibility-tree provides no gain over URL-only, the semantic-structure hypothesis for state representation is weakened on the tested sites. SPIDER should rely on URL-based state representation even on client-side-routed forms, or seek other state signals (network requests, cookies, JavaScript state). Does NOT falsify C-WEB-DYNAMICS globally -- only this specific representation.",
+  "estimated_cost": "Low-medium: Playwright browser automation on 2-3 form-heavy SPAs, accessibility snapshot extraction at each step, offline PMI computation. No model calls. ~2-3 hours browser time, ~30 minutes analysis.",
+  "expected_information_gain": "High: This is a materially different level of description than DOM structural features (rejected in parent). Accessibility tree captures semantic content (what elements are and do) rather than quantitative structure (how many exist). If URL-ambiguous sites exist where the same URL hosts multiple accessibility-tree states, this is the first clean test of whether semantic structure provides dynamical information. A positive result changes the state representation architecture; a negative result constrains the semantic-structure hypothesis."
+}

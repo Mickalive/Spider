@@ -940,6 +940,31 @@
         "handoff.json": "a9dc6923b311e671d45099f61067d2a7026dee1e1dd622603769ffbe0f5c6c85"
       }
     },
+    "EXP-PHYSICS-34629310987": {
+      "lane": "physics",
+      "request_id": "0eb508d5cc1de4b73b203be9",
+      "created_at": "2026-09-11T17:43:52.202356+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Does the accessibility tree -- a semantically richer structural representation capturing element roles, names, states, and relationships rather than raw DOM counts -- provide predictive state information beyond URL on genuine SPA/form-heavy sites where the same URL hosts different states?",
+      "audit_status": "MEASUREMENT_INVALID",
+      "decision": "MEASUREMENT_INVALID",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/physics",
+      "hashes": {
+        "request.json": "6e3104464b3926ed0a5ed2664fe87b75e0b1fd422893c99c03d4a38817152b5b",
+        "spec.json": "05714d03777470e70c99c3e2336eefa03f9c6b3a783cb8fb3498c7f3a5393c8b",
+        "prereg.md": "10f70c4126cf8d9e29aefb2abb2735e31ac3713f7611bb5126c441a1cc721276",
+        "freeze.json": "a716d3e5082d3663da0a19c81ae83a46592b95a42df69c034cc26eb6fd790b91",
+        "result.json": "145b8468c3197698ef7fea189daa0c76bbd2f99392f80fc39e37d9f5a7a2a96e",
+        "report.md": "2578f90a6dac5d13b8b6fc2db84e9f8e005c15ed13721d51d3a5197b70f8dc28",
+        "provenance.json": "107e0c70bdbfa13d19dd8242a23792d52e15abe4de765ea7eed5666315dcb5ba",
+        "audit.json": "fec37d8a6ca99b00e68f443ff95a6e593ff12ea225439f8b755523c4d719dd65",
+        "verdict.json": "735921e0aa1606cbee1cdbf7250a26dbf640013891791a166fc86f5aad69f8e1",
+        "handoff.json": "e9d616f06212f82e4b2ee25702f458ce2805dfbdf4893c4b6b77a47464224484"
+      }
+    },
     "EXP-PRODUCT-33528829801": {
       "lane": "product",
       "request_id": "2629e8e63e200f05556e37ca",
@@ -1213,6 +1238,31 @@
         "audit.json": "755b26e4974de979e67234fa028b96df67edc4f92e3d162ef160188ea40a314e",
         "verdict.json": "dcacbece2811390654c7731d0c981735c307a67ef4cce8ef01abd39c0c5f9988",
         "handoff.json": "f937455a3b1bf095c695b4b35bd6dd0fa18192a6901b50b28bd7a6cf4e9c2215"
+      }
+    },
+    "EXP-PRODUCT-34662221249": {
+      "lane": "product",
+      "request_id": "31b8ee9d161dd9e2b3ed281a",
+      "created_at": "2026-09-12T00:37:06.135408+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT"
+      ],
+      "question": "Can the suffix guard (Fix1) and delimiter-bound prefix validation (Fix2, last-char variant) be applied to actual src/spider/kernel.py distill_parameterized and _bind, producing correct binding outcomes for all established conditions (P1, G1, G2, G3, G5) with no regressions, and correctly rejecting parameterization on two null controls: N1_ORIGINAL (cross-host URLs sharing 'https://api.' prefix ending at non-delimiter '.') and N1_CORRECTED (truly disjoint URLs with no shared protocol prefix, e.g., http:// vs ftp://) \u2014 thereby closing the standalone-reimplementation gap identified in EXP-PRODUCT-34642376433 audit V3?",
+      "audit_status": "REVISE",
+      "decision": "SURVIVES_CURRENT_TEST",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/product",
+      "hashes": {
+        "request.json": "42e0f10452526e8c0ad0ae84275a10c086ba9bb104b8b696a7cb81e4c0f9a316",
+        "spec.json": "fa47eaeebbd6158c501a3f91f82a07688d49b708417a3ee8cc8ddbd61102e906",
+        "prereg.md": "30a7f76971538b2ec15c17554eab46a4801b51f1102ce4dde57e055c33e4f4a6",
+        "freeze.json": "5bab320f2aefbe1fca629f6aaaccfc2dddb7237a36ffe42317a4de2d3c046665",
+        "result.json": "f2597b740c36a06ad13745391459de1f20d1cff0908849ec952d9d6468da88b0",
+        "report.md": "c9f0913ed89f845b5cff03f503c0fe2ab918763e9450ad73c2acf99c9db16b93",
+        "provenance.json": "e3bd147818be9f5c7d1c1435f5713023f25d0ab0c55d12f1badbb00ace95be8d",
+        "audit.json": "72258738326b8596873625a77f5d409370c70fe78579d661f8985f87a058d908",
+        "verdict.json": "fd4308ec0a0f53db80d12c88965023debf7d43b8d3fbe652aa5cb3379d8e09fc",
+        "handoff.json": "55e3f8a9826b98d8b2efffadb347a34259a2db9ca1daef50ea8a6b7e07e43ff3"
       }
     },
     "EXP-RUNTIME-33528830833": {

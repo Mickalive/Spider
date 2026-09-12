@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34629310987",
+  "lane": "physics",
+  "github_run_id": null,
+  "commits": {
+    "base_sha": "661f5d863b6f68942b9253d36bed89bf80b48292",
+    "experiment_code_sha": null
+  },
+  "data_sources": {
+    "synthetic_spa": {
+      "description": "Synthetic SPA with 8 states, 4 actions, deterministic transitions",
+      "n_states": 8,
+      "n_actions": 4,
+      "state_action_probs": "State-dependent action probabilities for within-URL test",
+      "transition_function": "Deterministic: SYNTHETIC_TRANSITIONS[state][action] = next_state"
+    }
+  },
+  "code_paths": {
+    "experiment_code": "research/physics/a11y_tree/a11y_tree_experiment.py",
+    "output_dir": "research/experiments/EXP-PHYSICS-34629310987/"
+  },
+  "environment": {
+    "python_version": "3.12",
+    "platform": "linux",
+    "dependencies": {
+      "numpy": "2.5.3",
+      "scipy": "1.18.1",
+      "playwright": "1.62.0"
+    },
+    "seed": 42,
+    "pythonhashseed": "0"
+  },
+  "artifacts": {
+    "raw_results": {
+      "path": "research/experiments/EXP-PHYSICS-34629310987/raw_results.json",
+      "sha256": "8a283fddb30bb74d82278a1d5fbdacb9a4ef01bf391839cd7da2cdacfbf2c6ef",
+      "description": "Raw experiment results including all metrics and decision checks"
+    },
+    "result_json": {
+      "path": "research/experiments/EXP-PHYSICS-34629310987/result.json",
+      "sha256": "46edaa775e151eb5cfd4cf9c53002e7af79954e8aad5c1206536ef479950211e",
+      "description": "Structured result packet per EXPERIMENT_PACKET.md contract"
+    },
+    "report_md": {
+      "path": "research/experiments/EXP-PHYSICS-34629310987/report.md",
+      "sha256": "2578f90a6dac5d13b8b6fc2db84e9f8e005c15ed13721d51d3a5197b70f8dc28",
+      "description": "Human-readable experiment report"
+    },
+    "experiment_code": {
+      "path": "research/physics/a11y_tree/a11y_tree_experiment.py",
+      "sha256": "e2a16d212b8d6486e33512fec33d53fe0ebeb632f44d71928c181feb9b8b942f",
+      "description": "Experiment implementation code"
+    }
+  },
+  "reproduction": {
+    "command": "python research/physics/a11y_tree/a11y_tree_experiment.py",
+    "expected_duration_seconds": 60,
+    "dependencies": "pip install numpy scipy playwright && playwright install chromium",
+    "notes": "Experiment uses synthetic data only; no browser automation required"
+  },
+  "frozen_inputs": {
+    "request_json": "research/experiments/EXP-PHYSICS-34629310987/request.json",
+    "spec_json": "research/experiments/EXP-PHYSICS-34629310987/spec.json",
+    "prereg_md": "research/experiments/EXP-PHYSICS-34629310987/prereg.md",
+    "freeze_json": "research/experiments/EXP-PHYSICS-34629310987/freeze.json"
+  },
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-34524411213",
+    "path": "research/experiments/EXP-PHYSICS-34524411213/handoff.json",
+    "sha256": "a9dc6923b311e671d45099f61067d2a7026dee1e1dd622603769ffbe0f5c6c85"
+  }
+}
