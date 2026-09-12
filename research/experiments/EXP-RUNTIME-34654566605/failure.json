@@ -1,9 +1,9 @@
 {
   "stage": "director",
   "category": "VALIDATION_FAILURE",
-  "message": "invalid claim update status: NARROWED",
+  "message": "invalid claim update status: SURVIVES_CURRENT_TEST",
   "retryable": false,
-  "recorded_at": "2026-09-12T16:18:32.961923+00:00",
-  "github_run_id": "34704658549",
+  "recorded_at": "2026-09-12T18:32:40.221041+00:00",
+  "github_run_id": "34711402000",
   "github_run_attempt": "1"
 }
