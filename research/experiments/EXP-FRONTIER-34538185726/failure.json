@@ -1,9 +1,9 @@
 {
-  "stage": "design",
-  "category": "OPENCODE_INSTALL_FAILURE",
-  "message": "stage exited with code 75",
-  "retryable": true,
-  "recorded_at": "2026-09-12T16:16:24.537482+00:00",
-  "github_run_id": "34704656705",
+  "stage": "director",
+  "category": "VALIDATION_FAILURE",
+  "message": "invalid claim update status: HYPOTHESIS-BOUNDED",
+  "retryable": false,
+  "recorded_at": "2026-09-12T18:32:53.770027+00:00",
+  "github_run_id": "34711405349",
   "github_run_attempt": "1"
 }
