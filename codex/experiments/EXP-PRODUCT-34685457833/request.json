@@ -1,0 +1,20 @@
+{
+  "base_sha": "ed27ebf1ed65cbcca3f51d02b8d29596120f3202",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-12T09:17:41.938984+00:00",
+  "experiment_id": "EXP-PRODUCT-34685457833",
+  "inherited_last_verdict": "SURVIVES_CURRENT_TEST",
+  "inherited_next_question": "Can the empty-prefix guard be frozen as part of the Fix2 specification, the B_UNFIXED baseline be properly reimplemented as a true unfixed heuristic (without Fix1/Fix2 applied), and the full Fix1+Fix2+empty-prefix guard be committed to src/spider/kernel.py and src/spider/models.py \u2014 with production _bind semantics validated against all 9 conditions including slot_prefixes representation and prefix-stripping for VALUE CONTRACT \u2014 thereby advancing from monkey-patch validation to committed-code validation?",
+  "lane": "product",
+  "origin_github_run_id": "34685457833",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-34662221249",
+    "path": "research/experiments/EXP-PRODUCT-34662221249/handoff.json",
+    "sha256": "55e3f8a9826b98d8b2efffadb347a34259a2db9ca1daef50ea8a6b7e07e43ff3"
+  },
+  "reason": "pulse",
+  "request_hash": "e80b15c829691852213117394dd37b132a048e42e8d1804443b4fa8221c4f233",
+  "request_id": "b3f56c62abedea1873c1dcfe",
+  "schema_version": 1
+}

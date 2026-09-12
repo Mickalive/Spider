@@ -1,0 +1,196 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-34685457833",
+  "lane": "product",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    {
+      "id": "V1_RECOMPUTED_9_OF_9_PASS",
+      "severity": "info",
+      "finding": "All 9 decision-relevant conditions recomputed from raw_evidence.json pass the frozen decision_rule. P1/G1/G2/G3/G5 slot_count=1 binding_accuracy=1.0 (3/3 each), N1_ORIGINAL slot_count=0, N1_CORRECTED slot_count=0, B_LITERAL fail_rate=1.0, no import/syntax errors (kernel.py imports clean). Aggregate verdict SURVIVES_CURRENT_TEST arithmetically correct. Recomputed hashes match artifacts: kernel.py a1fe75cf..., models.py 064c5f..., raw_evidence df8ad0bd..., run_experiment d38ceb50...",
+      "evidence": "raw_evidence.json conditions.P1_PATH_PREFIX.metrics.binding_accuracy=1.0, conditions.G1_QUERY_STRING_SIMPLE.metrics.binding_accuracy=1.0, conditions.G2/G3/G5 same, conditions.N1_ORIGINAL.slot_count=0, conditions.N1_CORRECTED.slot_count=0, conditions.B_LITERAL.metrics.fail_rate=1.0, decision_rule_evaluation.all_nine_pass=true, src/spider/kernel.py sha256 a1fe75cf2c069ac0f42f80755101ef294eb02e01aa8f9c551dd9bcd4e6986ea4"
+    },
+    {
+      "id": "V2_FIX1_RECOMPUTED_VALID",
+      "severity": "info",
+      "finding": "Fix1 suffix guard robust on committed code. G1 training values share raw suffix 'a' (alpha/beta/delta) but guard rejects it because preceding char 'h' not in ?=&, yielding prefix 'https://api.example.com/search?q=' suffix '' and template 'search?q=${url}'. Recomputed _find_common_prefix_suffix(['search?q=alpha',...])=('https://api.example.com/search?q=','') matches raw_evidence template. G4 raw suffix '00' correctly not rejected (len 2 >1) producing template 'users/${url}00' binding 0.0 architectural. Fix committed in src/spider/kernel.py lines 157-186.",
+      "evidence": "src/spider/kernel.py _find_common_prefix_suffix Fix1 block, raw_evidence.json conditions.G1_QUERY_STRING_SIMPLE action_template url='https://api.example.com/search?q=${url}' binding_correct_count=3, conditions.G4_MULTI_SLOT action_template url='https://api.example.com/users/${url}00' binding_accuracy=0.0, recompute Fix1 G1 prefix 'https://api.example.com/search?q='"
+    },
+    {
+      "id": "V3_FIX2_RECOMPUTED_VALID_WITH_EMPTY_GUARD",
+      "severity": "info",
+      "finding": "Fix2+empty-prefix guard committed and frozen. N1_ORIGINAL common prefix 'https://api.' ends at '.' not in /?=& => _validate_prefix_boundary returns False => distill returns None slot_count=0 PASS. N1_CORRECTED common prefix '' empty => empty guard `if not full_prefix: continue` rejects => slot_count=0 PASS. Without empty guard, _validate_prefix_boundary('') returns True (line 197) and would incorrectly parameterize to '${url}'. Guard is frozen in distill_parameterized lines 260-266 and in spec/prereg measurement_validity, closing parent V4 EXPLORATORY gap. Validated via direct distill_parameterized recompute on committed module.",
+      "evidence": "src/spider/kernel.py _validate_prefix_boundary lines 191-199, distill_parameterized lines 260-266 empty check, recompute N1_ORIGINAL prefix 'https://api.' validate false, N1_CORRECTED prefix '' empty, raw_evidence.json N1_ORIGINAL/N1_CORRECTED distill_success false slot_count 0"
+    },
+    {
+      "id": "V4_COMMITTED_CODE_SUBSTRATE_CONFIRMED",
+      "severity": "info",
+      "finding": "Substrate gap V6 (monkey-patch not committed) closed. src/spider/kernel.py now contains distill_parameterized, _find_common_prefix_suffix (Fix1), _validate_prefix_boundary (Fix2), leaf helpers and empty-prefix guard (271 lines added). src/spider/models.py Mechanism now has slot_prefixes: dict[str,str] dataclass field (064c5f...). Provenance substrate approach='committed code (no monkey-patching)' confirmed by import test: hasattr(kernel, 'distill_parameterized') true, and run_experiment.py imports committed module directly (no patching). No divergence from parent monkey-patch results: P1/G1/G2/G3/G5 identical templates/binding.",
+      "evidence": "src/spider/kernel.py sha256 a1fe75cf..., src/spider/models.py sha256 064c5f..., provenance.json substrate.module src.spider.kernel functions_committed list, run_experiment.py lines 31-39 direct import without patching"
+    },
+    {
+      "id": "V5_SLOT_PREFIXES_REPRESENTATION_LOSS_BOUNDED",
+      "severity": "medium",
+      "finding": "Slot_prefixes systematically empty for path-prefix patterns where slot immediately follows '/': P1/G3/G5 observed {'url':''} vs CONDITIONS expected 'users/'/'repos/main/issues/'. Recomputed rfind('/') on full_prefix 'https://api.example.com/users/' (last_slash 29) => '' . Same for G3 prefix '.../issues/'. Binding succeeds only because action_template already embeds full prefix (e.g., 'https://api.example.com/users/${url}'). Producer correctly discloses as ceiling bound (observations[4], validity_notes[1], report.md section 4) and does not claim VALUE CONTRACT prefix-stripping via slot_prefixes. Any future _bind relying on slot_prefixes for stripping would fail. Claim must remain TEMPLATE-SUBSTITUTION ONLY.",
+      "evidence": "raw_evidence.json conditions.P1_PATH_PREFIX.slot_prefixes={'url':''}, G3/G5 same, run_experiment run_experiment.py slot_prefix via rfind('/') lines 281-285, src/spider/kernel.py lines 281-285 same logic, recompute slot_prefix '' for all three, result.json validity_notes[1] and observations[4]"
+    },
+    {
+      "id": "V6_PROTOCOL_ONLY_OVERPARAMETERIZATION_GAP",
+      "severity": "medium",
+      "finding": "Fix2 last-char check insufficient for protocol-only shared prefix. Recompute: distill_parameterized on ['https://a.com/x','https://b.com/y','https://c.com/z'] yields common prefix 'https://' last_char '/' => _validate_prefix_boundary True => incorrectly induces slot_count=1 template 'https://${url}' (verified). Similarly ['https://a.com/x','https://b.org/y'] variant shares 'https://'. This over-parameterization class not covered by frozen N1_ORIGINAL/N1_CORRECTED (which test 'https://api.' and empty). Not a decision_rule failure but limits generalization claim and shows Fix2 needs minimum-length or domain-aware threshold.",
+      "evidence": "recompute distill_parameterized protocol-only test => template https://${url} slot_count 1, src/spider/kernel.py _validate_prefix_boundary returns True for 'https://', raw_evidence.json does not exercise this null"
+    },
+    {
+      "id": "V7_SYNTHETIC_SCOPE_ECONOMICS_UNMEASURED",
+      "severity": "low",
+      "finding": "All conditions remain n=3 deterministic synthetic URLs, zero model/network/browser calls (provenance environment.model_network_browser_calls 0). External validity and C-PRODUCT-ECON (tokens, browser work, repair, latency, false-accepts) unmeasured. Producer correctly lists as validity_notes[0] and unresolved[3]. Report 'clears path for C-PRODUCT-ECON' not 'unblocked' accurately reflects necessary but not sufficient step. No leakage but generalization unproven.",
+      "evidence": "provenance.json environment deterministic_synthetic true, result.json validity_notes[0] All conditions deterministic synthetic n=3, unresolved[3] C-PRODUCT-ECON still unmeasured, spec estimated_cost very low"
+    },
+    {
+      "id": "V8_NO_REGRESSIONS_G4_ARCH_BOUND",
+      "severity": "info",
+      "finding": "No regressions on 5 established single-slot classes after commit. G4 remains architectural bound slot_count=1 binding 0.0 (multi-char suffix '00' not caught, template users/${url}00). Correctly excluded from decision_rule per prereg, reported separately. Overall binding accuracy 0.857 =6/7 (6x1.0 +0.0)/7, structural generalization 0.8 =4/5 G conditions pass, condition_pass_rate 0.9 =9/10 with G4 fail - all recomputed correct.",
+      "evidence": "raw_evidence.json g4_separate architectural_bound true binding_accuracy 0.0, aggregate overall_binding_accuracy 0.857142857, result.json metrics structural_generalization_rate 0.8"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B1_B_LITERAL_VALID",
+      "severity": "info",
+      "finding": "B_LITERAL correctly demonstrates necessity of parameterization: synthetic literal mechanism confidence 0.5 < min_confidence 0.8 fail_rate 1.0, raw_evidence B_LITERAL confidence 0.5 metrics.fail_rate 1.0. PASS per spec expectation fail_rate=1.0 baseline.",
+      "evidence": "raw_evidence.json conditions.B_LITERAL metrics.fail_rate=1.0 slot_count 0, result.json controls.B_LITERAL passed true"
+    },
+    {
+      "id": "B2_B_UNFIXED_TRUE_HEURISTIC_ISOLATED_BUT_INCOMPLETE",
+      "severity": "medium",
+      "finding": "B_UNFIXED now correctly isolated as true unfixed heuristic: _unfixed_find_common_prefix_suffix without Fix1 guard and _unfixed_validate_prefix_boundary always True, no empty guard, separate distill_unfixed (run_experiment.py lines 48-178). For P1-like training produces slot_count=1 correct template identical to fixed version because rfind('/') handles path-prefix (verified). Producer validity_notes[2] correctly discloses delta only observable on G1/N1_ORIGINAL not tested in primary run. Recompute shows unfixed G1 would produce suffix-corrupted template 'search?q=${url}a' binding 0/3 (vs fixed 3/3) and unfixed N1_ORIGINAL would produce over-parameterized 'https://api.${url}' slot_count=1 (vs fixed 0). Delta attributable to fixes is real but not quantified within 9-condition primary execution; remains demonstration via recompute/isolation, not via measured B_UNFIXED runs on G1/N1 training data. Fix satisfies parent required_fix to implement true heuristic and to remove overclaim, but incomplete test coverage remains unresolved.",
+      "evidence": "run_experiment.py distill_unfixed lines 73-178, _unfixed_find_common_prefix_suffix returns ('https://api.example.com/search?q=', 'a') for G1, raw_evidence.json B_UNFIXED slot_count 1 binding 1.0 for P1, recompute unfixed G1 binding gamma->gammaa false, unfixed N1_ORIGINAL prefix 'https://api.' suffix '' template 'https://api.${url}', result.json validity_notes[2]"
+    },
+    {
+      "id": "B3_MISSING_STRONG_NULL_PROTOCOL_ONLY",
+      "severity": "low",
+      "finding": "No strong null for protocol-only prefix length threshold (e.g., 'https://' alone should not induce parameterization). Fix2 passes 'https://' as valid. Producer unresolved notes minimum prefix length threshold not tested. Not required for frozen 9 conditions but missing strong null limits claim ceiling.",
+      "evidence": "result.json unresolved[3] 'Whether Fix2 needs minimum prefix length threshold', recompute protocol-only distill yields slot_count 1, validity_findings V6"
+    }
+  ],
+  "recomputed_metrics": {
+    "condition_pass_rate": 0.9,
+    "passed_conditions": 9,
+    "total_conditions": 10,
+    "decision_relevant_passed": 9,
+    "decision_relevant_total": 9,
+    "structural_generalization_rate": 0.8,
+    "overall_binding_accuracy": 0.8571428571428571,
+    "overall_binding_accuracy_detail": {
+      "P1_PATH_PREFIX": 1.0,
+      "G1_QUERY_STRING_SIMPLE": 1.0,
+      "G2_QUERY_STRING_MULTIPARAM": 1.0,
+      "G3_DEEP_PATH": 1.0,
+      "G4_MULTI_SLOT": 0.0,
+      "G5_PATH_QUERY_HYBRID": 1.0,
+      "B_UNFIXED_P1": 1.0
+    },
+    "p1_slot_count": 1,
+    "p1_binding_accuracy": 1.0,
+    "g1_slot_count": 1,
+    "g1_binding_accuracy": 1.0,
+    "g2_slot_count": 1,
+    "g2_binding_accuracy": 1.0,
+    "g3_slot_count": 1,
+    "g3_binding_accuracy": 1.0,
+    "g5_slot_count": 1,
+    "g5_binding_accuracy": 1.0,
+    "n1_original_slot_count": 0,
+    "n1_corrected_slot_count": 0,
+    "b_literal_fail_rate": 1.0,
+    "b_unfixed_p1_slot_count": 1,
+    "b_unfixed_p1_binding_accuracy": 1.0,
+    "g4_slot_count": 1,
+    "g4_binding_accuracy": 0.0,
+    "g4_architectural_bound": true,
+    "slot_prefixes_observed": {
+      "P1_PATH_PREFIX": {"url": ""},
+      "G1_QUERY_STRING_SIMPLE": {"url": "search?q="},
+      "G2_QUERY_STRING_MULTIPARAM": {"url": "items?category=books&page="},
+      "G3_DEEP_PATH": {"url": ""},
+      "G5_PATH_QUERY_HYBRID": {"url": ""},
+      "B_UNFIXED_P1": {"url": ""}
+    },
+    "slot_prefixes_expected_vs_observed_mismatch": [
+      "P1 expected users/ observed ''",
+      "G3 expected repos/main/issues/ observed ''",
+      "G5 expected users/ observed ''"
+    ],
+    "common_prefix_recomputed": {
+      "P1": "https://api.example.com/users/",
+      "G1": "https://api.example.com/search?q=",
+      "G2": "https://api.example.com/items?category=books&page=",
+      "G3": "https://api.example.com/orgs/acme/repos/main/issues/",
+      "G5": "https://api.example.com/users/",
+      "G4": "https://api.example.com/users/",
+      "N1_ORIGINAL": "https://api.",
+      "N1_CORRECTED": "",
+      "protocol_only": "https://"
+    },
+    "validate_prefix_boundary_recomputed": {
+      "P1_last_slash": true,
+      "G1_last_equals": true,
+      "G2_last_equals": true,
+      "N1_ORIGINAL_last_dot": false,
+      "N1_CORRECTED_empty": true,
+      "protocol_only_slash": true
+    },
+    "fix1_suffix_guard_recomputed": {
+      "G1_raw_suffix_a_rejected": true,
+      "G1_final_suffix": "",
+      "G4_raw_suffix_00_kept": true,
+      "G4_final_suffix": "00"
+    },
+    "b_unfixed_recomputed": {
+      "G1_unfixed_prefix": "https://api.example.com/search?q=",
+      "G1_unfixed_suffix": "a",
+      "G1_unfixed_template": "https://api.example.com/search?q=${url}a",
+      "G1_unfixed_binding_accuracy": 0.0,
+      "N1_unfixed_prefix": "https://api.",
+      "N1_unfixed_template": "https://api.${url}",
+      "N1_unfixed_slot_count": 1,
+      "delta_verified_via_recompute": true,
+      "delta_measured_in_primary_run": false
+    },
+    "artifacts_sha256_verified": {
+      "src/spider/kernel.py": "a1fe75cf2c069ac0f42f80755101ef294eb02e01aa8f9c551dd9bcd4e6986ea4",
+      "src/spider/models.py": "064c5f34413266fa4ac232f5e03e536be3bc15ea6ed098253875103a9aad54bd",
+      "raw_evidence.json": "df8ad0bdd9ea54da73a3badf2d06e02500fe0816dd98b03c95a361d0083f0d09",
+      "run_experiment.py": "d38ceb50cd5a2e3704b848941f11cbcadc79f8168ee862bee5fed266147ec2c4"
+    },
+    "decision_rule_recomputed_all_nine_pass": true,
+    "verdict_recomputed": "SURVIVES_CURRENT_TEST"
+  },
+  "claim_ceiling": "COMMITTED-CODE SYNTHETIC SINGLE-SLOT TEMPLATE-ONLY (NARROW): Fix1 (single-char suffix guard) + Fix2 (last-char delimiter /?=&) + frozen empty-prefix guard committed to src/spider/kernel.py (a1fe75cf) and Mechanism.slot_prefixes to src/spider/models.py (064c5f) produce binding_accuracy=1.0 via template substitution for 5 single-slot synthetic URL classes (P1 path-prefix, G1 query-string, G2 multi-param query, G3 deep-path, G5 path+query hybrid) at n=3 training +3 unseen each, zero model/browser/network calls, correctly reject N1_ORIGINAL cross-host 'https://api.' and N1_CORRECTED truly disjoint '' yielding slot_count=0, B_LITERAL fail 1.0, G4 multi-char suffix 00 architectural bound 0.0. Slot_prefixes empty for P1/G3/G5 limits claim to template-prefix-embedded binding (no VALUE CONTRACT stripping). B_UNFIXED true heuristic isolated but primary run only exercised P1 (delta on G1 suffix corruption and N1 over-parameterization verified by recompute, not by primary B_UNFIXED runs). Fix2 allows protocol-only 'https://' over-parameterization not covered by frozen nulls. No demonstration of real-browser generalization, multi-slot induction, or C-PRODUCT-ECON savings.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-34685457833/spec.json decision_rule 9 conditions SURVIVES_CURRENT_TEST",
+    "research/experiments/EXP-PRODUCT-34685457833/prereg.md sections 4-14 frozen claim and measurement_validity empty-prefix guard",
+    "research/experiments/EXP-PRODUCT-34685457833/freeze.json hashes prereg a308073..., spec 6487a98..., request 0a650b5...",
+    "research/experiments/EXP-PRODUCT-34685457833/result.json metrics verdict SURVIVES_CURRENT_TEST decision_relevant_passed 9 controls 9/9 passed",
+    "research/experiments/EXP-PRODUCT-34685457833/raw_evidence.json conditions.P1/G1/G2/G3/G5 binding_accuracy 1.0 slot_count 1, N1_ORIGINAL/N1_CORRECTED slot_count 0, G4 binding 0.0 architectural_bound true, B_UNFIXED slot_count 1",
+    "research/experiments/EXP-PRODUCT-34685457833/run_experiment.py distill_unfixed true unfixed heuristic lines 48-178, empty guard lines 260-266, slot_prefix rfind('/') lines 281-285",
+    "research/experiments/EXP-PRODUCT-34685457833/provenance.json substrate committed code, code_artifacts kernel.py a1fe75cf models.py 064c5f run_experiment d38ceb50 raw_evidence df8ad0bd",
+    "src/spider/kernel.py _find_common_prefix_suffix Fix1 lines 157-186, _validate_prefix_boundary lines 191-199 return True for empty, distill_parameterized lines 204-320 empty guard if not full_prefix continue",
+    "src/spider/models.py Mechanism slot_prefixes field line 42 dataclass",
+    "recompute: _find_common_prefix_suffix G1 ('https://api.example.com/search?q=','') N1_ORIGINAL ('https://api.','') N1_CORRECTED ('',''), _validate N1_ORIGINAL false empty true",
+    "recompute: protocol-only https://a.com/x set distill => template https://${url} slot 1 over-parameterization, _validate_prefix_boundary('https://') true",
+    "recompute: unfixed G1 template 'search?q=${url}a' binding 0.0 vs fixed 1.0, unfixed N1 template 'https://api.${url}' slot 1 vs fixed 0",
+    "research/experiments/EXP-PRODUCT-34662221249/audit.json REVISE claim_ceiling NARROW_SYNTHETIC_SINGLE-SLOT_MONKEY_PATCHED and 5 required_fixes, handoff.json carry_forward established/rejected/do_not_assume"
+  ],
+  "unresolved": [
+    "B_UNFIXED paired delta not measured in primary run: unfixed G1/N1_ORIGINAL only verified via isolated recompute; future experiment should run B_UNFIXED against G1 and N1_ORIGINAL training data to quantify delta within measured execution (producer unresolved[0]).",
+    "Slot_prefixes empty for P1/G3/G5 representation loss persists in committed code; need decision whether to accept empty as design (template-only binding) or modify distill_parameterized to compute non-empty slot_prefixes for VALUE CONTRACT stripping (producer unresolved[1]).",
+    "Fix2 protocol-only gap: 'https://' passes last-char check yielding over-parameterization (https://${url}); minimum prefix length or domain-aware threshold not in frozen spec (validity V6) - not exercised by N1 nulls.",
+    "G4 multi-slot limitation: leaf-path model single field yields slot 1 not 2, multi-char suffix '00' not caught by Fix1 single-char guard; multi-slot induction requires model change (producer unresolved[2]).",
+    "External validity and C-PRODUCT-ECON still unmeasured: requires real-browser evaluation with model/network/browser calls, tokens, repair, latency, false-accepts (producer unresolved[3]).",
+    "Real-world prevalence of single-char vs multi-char suffix collisions and cross-host vs protocol-only collisions in browser traffic unknown (producer unresolved[4]).",
+    "Empty-prefix guard generalization beyond tested disjoint URLs (http://a.com/x etc) to other empty-prefix regimes not tested; claim bounded to tested synthetic config."
+  ]
+}
