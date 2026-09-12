@@ -1,17 +1,28 @@
 {
   "experiment_id": "EXP-GRAPH-34711403174",
   "lane": "graph",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-FRESHNESS"],
+  "question": "Does comparing cached mechanism postconditions against live endpoint responses provide reliable staleness detection across resource families with different drift patterns?",
+  "hypothesis": "A simple postcondition-similarity freshness score can detect endpoint drift with >80% true-positive rate and <5% false-positive rate across resource families.",
+  "falsifier": "True-positive rate < 70% OR false-positive rate > 10% across resource families.",
+  "baselines": [
+    "No freshness detection (always assume fresh): true-positive rate = 0%, false-positive rate = 0%",
+    "Random staleness detection (50% chance): true-positive rate ~50%, false-positive rate ~50%"
+  ],
+  "positive_control": "Drift that changes response structure (add field) should be detected with 100% true-positive rate when threshold is 0.85.",
+  "null_control": "Stable endpoint should produce 0% false-positive rate.",
+  "measurement_validity": [
+    "Mock server with controlled drift injection and deterministic responses",
+    "Known ground truth for each request (fresh/stale)",
+    "Three resource families with distinct drift patterns (add field, change type, remove field)",
+    "10 requests per family, drift occurs at request 6 for drift families",
+    "Freshness score based on Jaccard similarity of (field_path, type) pairs between cached and live postconditions",
+    "Threshold fixed at 0.85 before execution",
+    "No real network calls, deterministic environment"
+  ],
+  "decision_rule": "If true-positive rate >= 0.8 AND false-positive rate <= 0.1 across all resource families, SURVIVES_CURRENT_TEST; else FALSIFIED-IN-SETTING. If mock server fails or drift injection fails, MEASUREMENT_INVALID.",
+  "product_consequence_positive": "Freshness scoring can be integrated into kernel to trigger re-validation, improving product reliability. Validates C-FRESHNESS claim at proof-of-concept level.",
+  "product_consequence_negative": "Freshness scoring is not reliable with simple postcondition similarity; need alternative staleness signals (session token validation, DOM structure checks, etc.). Does NOT falsify C-FRESHNESS entirely - only this specific detection method.",
+  "estimated_cost": "Low: mock server, no real network, deterministic, ~40 requests total.",
+  "expected_information_gain": "Medium-high: first quantitative test of staleness detection capability for inherited mechanism knowledge. Result can change product decision about whether to integrate freshness scoring into kernel."
 }
