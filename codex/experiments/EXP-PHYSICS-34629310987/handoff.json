@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34629310987",
+  "lane": "physics",
+  "target_lane": "physics",
+  "next_question": "Do network requests and API calls (XHR/fetch payloads, endpoint sequences, response content-types) captured via Playwright route interception on genuine client-side-routed SPAs provide predictive state information beyond URL — specifically, does the network-request signature on within-URL transitions carry PMI exceeding URL-only by >= 0.1 bits on sites where URL is ambiguous?",
+  "why_next": "The accessibility-tree test (EXP-PHYSICS-34629310987) was MEASUREMENT_INVALID: synthetic-only data with tautological gain (URL constant => URL PMI ~0); real-site Playwright automation failed. The parent experiment (EXP-PHYSICS-34524411213) already rejected DOM structural features on TodoMVC. A third page-structure signal (accessibility tree) could not be tested on real sites. Network requests are a materially orthogonal level of description: they capture communication structure (what endpoints the SPA calls, what data it sends/receives) rather than page structure (DOM counts, element roles). On client-side-routed SPAs, the same URL may trigger different API calls at different form steps (e.g., /checkout with shipping vs payment step calls different endpoints). This is independently observable via Playwright page.route() interception without needing accessibility snapshot extraction. This moves the frontier to an orthogonal mechanism rather than repeating a failed page-structure representation.",
+  "carry_forward": {
+    "established": [
+      "URL-only PMI is strongly positive on TodoMVC hash-SPA transitions: React 0.670 bits, Vue 0.751 bits (permutation p=0.001, 76/78 non-leakage transitions, 13 unique URL states). URL-level action->next-state dependency is genuine and strong on these sites (EXP-PHYSICS-34524411213 result.json)",
+      "DOM structural features (element_count, tree_depth, interactive_density) as discretized state representation are significantly predictive (DOM PMI > 0, p=0.001 on both sites) but strictly worse than URL-only on TodoMVC: React -0.073 bits, Vue -0.006 bits. The structural level does not improve over URL for these simple apps (EXP-PHYSICS-34524411213 result.json metrics)",
+      "PMI computation pipeline is validated: positive control (synthetic SPA PMI=1.271, p=0.001) and null control (shuffled PMI=0.072, p=0.631) both pass on TodoMVC data; and on synthetic a11y data (positive PMI=1.271 v1/1.947 v2 p=0.001, null v2 p=0.666). The computation correctly detects injected structure and does not false-positive on shuffled v2 data (EXP-PHYSICS-34524411213, EXP-PHYSICS-34629310987 result.json/audit.json)",
+      "Alpha sensitivity analysis shows DOM PMI is stable across smoothing values (React 0.578-0.624, Vue 0.738-0.756), indicating results are not artifacts of Laplace smoothing (EXP-PHYSICS-34524411213 result.json metrics.alpha_sensitivity)",
+      "URL+title PMI is identical to URL-only on TodoMVC due to zero title variance (unique_titles=1), confirming title-aware testing requires sites where titles vary across routes (EXP-PHYSICS-34524411213 result.json controls.url_title_baseline)"
+    ],
+    "rejected": [
+      "DOM structural features (element_count, tree_depth, interactive_density) as state representation on TodoMVC React/Vue: DOM PMI worse than URL-only by -0.073 and -0.006 bits, failing the >=0.1 bits improvement threshold on 0/2 sites (EXP-PHYSICS-34524411213 result.json metrics.decision_condition_1_dom_gt_url=false)",
+      "Synthetic-only result as evidence for C-WEB-DYNAMICS: EXP-PHYSICS-34629310987 SUPPORTS outcome based solely on synthetic SPA with tautological within-URL gain (URL constant => URL PMI ~0). Audit found MEASUREMENT_INVALID; producer claim unsupported (audit.json producer_claim_supported=false, claim_ceiling bounded to synthetic pipeline verification only)"
+    ],
+    "unknown": [
+      "Whether accessibility-tree hashes extracted via Playwright page.accessibility.snapshot() on genuine form-heavy SPAs with verified URL ambiguity provide >=0.1 bits gain over URL-only on within-URL transitions with proper 80/20 temporal split and TRAIN-only discretization (untested due to Playwright automation failure)",
+      "Whether network-request signatures (XHR/fetch endpoints, payloads, content-types) on genuine client-side-routed SPAs provide predictive state information beyond URL (untested, orthogonal mechanism)",
+      "Whether DOM structural features provide >=0.1 bits gain over URL-only on production SPAs with richer DOM evolution (dashboards, multi-step checkouts, survey builders) where same URL hosts different DOM states (untested due to TodoMVC site selection)",
+      "Whether more expressive structural representations (tree-edit distance, component hierarchy, visual layout) outperform URL-only on complex SPAs (untested, different level of description)",
+      "Whether adaptive/learned state representations (neural embedding of page state) capture dynamical structure that hand-crafted features miss",
+      "Magnitude of in-sample optimism from missing train/test split and robustness to Laplace alpha 0.0-2.0 on real data",
+      "Correct SPA-aware leakage classification impact on retained sample and whether tally_form stalled state reflects true site stability or automation failure",
+      "Why null control yields high PMI 1.124 bits on shuffled v1 data and why Google real-site null fails (p=0.0049) — pipeline leakage or smoothing artifact vs true false-positive rate"
+    ],
+    "do_not_assume": [
+      "That synthetic SPA PMI results (0.972 bits v1, 1.947 bits v2) translate to real-world SPA sites — synthetic data has artificially injected state-dependent action probabilities with URL held constant by construction, making the gain tautological (audit validity_findings.tautological_within_url_gain_identifiability)",
+      "That the accessibility-tree representation is rejected on genuine SPAs — it was never tested on genuine sites due to Playwright automation failure; the hypothesis remains UNTESTED (audit validity_findings.synthetic_only_no_genuine_SPA)",
+      "That URL-only PMI ~0 on within-URL transitions is evidence that URL is uninformative — URL is constant by construction in the synthetic test, so URL-only PMI is trivially zero; this is not evidence of URL ambiguity (audit baseline_findings.url_only_baseline_trivial_zero)",
+      "That TodoMVC properties generalize to production SPA sites — TodoMVC is a degenerate demo app (parent handoff EXP-PHYSICS-34348438464 do_not_assume)",
+      "That DOM feature PMI values are unbiased — in-sample discretization inflates estimates; true out-of-sample PMI may be lower (parent handoff do_not_assume)",
+      "That entropy reduction values from synthetic data are evidence of genuine URL ambiguity — synthetic URL entropy is zero by construction, not evidence of site properties (audit validity_findings.leakage_and_entropy_not_SPA_aware)",
+      "That permutation p=0.000999 indicates strong effect when null_std=0.0 — p-value is resolution floor, not evidence of effect magnitude (parent handoff do_not_assume)",
+      "That absolute PMI bit values are smoothing-independent — asymmetric Laplace smoothing creates dependency on alpha choice (parent handoff do_not_assume)"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-PHYSICS-34524411213/result.json DOM PMI vs URL PMI metrics on TodoMVC React/Vue",
+    "research/experiments/EXP-PHYSICS-34524411213/audit.json REVISE findings and claim_ceiling",
+    "research/experiments/EXP-PHYSICS-34629310987/audit.json MEASUREMENT_INVALID claim_ceiling validity_findings required_fixes",
+    "research/experiments/EXP-PHYSICS-34629310987/result.json metrics controls validity_notes unresolved",
+    "research/experiments/EXP-PHYSICS-34629310987/real_site_results_v2.json tally_form google_form_example insufficient transitions stalled automation",
+    "research/experiments/EXP-PHYSICS-34629310987/raw_results.json raw_results_v2.json synthetic transition matrices",
+    "research/physics/a11y_tree/a11y_tree_experiment.py a11y_tree_experiment_v2.py PMI computation code",
+    "research/experiments/EXP-PHYSICS-34348438464/handoff.json established URL-only PMI baseline and TodoMVC degenerate warning",
+    "research/experiments/EXP-PHYSICS-34266105229/handoff.json established URL-only PMI 1.360/1.323 bits on TodoMVC",
+    "research/claims/registry.json C-WEB-DYNAMICS status=HYPOTHESIS"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-34629310987/verdict.json decision=MEASUREMENT_INVALID claim_updates reason",
+    "research/experiments/EXP-PHYSICS-34629310987/audit.json status=MEASUREMENT_INVALID producer_claim_supported=false claim_ceiling validity_findings required_fixes",
+    "research/experiments/EXP-PHYSICS-34629310987/result.json outcome=SUPPORTS validity_notes synthetic-only 'Playwright timing out'",
+    "research/experiments/EXP-PHYSICS-34629310987/real_site_results_v2.json tally_form n=30 a11y_pmi=0.0 google_form null_control_perm_p=0.004975",
+    "research/experiments/EXP-PHYSICS-34524411213/handoff.json carry_forward.rejected DOM features carry_forward.established URL PMI",
+    "research/claims/registry.json C-WEB-DYNAMICS status=HYPOTHESIS"
+  ],
+  "recommended_action": "DESIGN a Physics experiment testing network-request state signals (XHR/fetch payloads, endpoint sequences, response content-types) as predictive state representation on genuine client-side-routed SPAs. Critical criteria: (1) select production form-heavy SPAs with client-side routing and verified URL ambiguity (multi-step checkout/survey where same URL triggers different API calls); (2) capture network requests via Playwright page.route() interception at each step — this is independently observable without accessibility snapshot extraction; (3) discretize network-request state (endpoint+method+status hash, or payload content-type signature); (4) compute PMI with network-request state vs URL-only baseline on within-URL transitions; (5) use corrected SPA-aware leakage classification (hash/history detection); (6) fit discretization on TRAIN only with 80/20 temporal split; (7) include positive control where network-request state varies deterministically; (8) require >=50 non-leakage transitions per site. This tests a materially orthogonal mechanism: communication structure (what endpoints the SPA calls) rather than page structure (DOM counts, element roles). Network-request interception is more reliable than accessibility snapshot extraction (no Playwright timing issues on overlays) and captures a different level of description than DOM or accessibility-tree representations."
+}

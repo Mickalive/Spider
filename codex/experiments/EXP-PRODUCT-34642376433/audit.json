@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-34642376433",
+  "lane": "product",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Correct N1_REDESIGNED null control: URLs https://a.com/x, https://b.org/y, https://c.net/z share https:// prefix ending at '/' delimiter. Spec claim 'sharing NO common prefix beyond empty string' is false (raw_evidence N1_REDESIGNED action_template https://${url} slot_count 1). Redesign with truly disjoint prefixes (e.g., http://a.com/x vs ftp://b.org/y vs custom://c.net/z) or add minimum-prefix-length threshold (e.g., len(prefix) > 8) to reject protocol-only prefix parameterization. Re-run decision rule which currently triggers FALSIFIED-IN-SETTING per frozen rule; producer result.json outcome MIXED contradicts raw_evidence verdict FALSIFIED-IN-SETTING and cannot override frozen rule via post-hoc reinterpretation.",
+    "Resolve Fix 2 spec/implementation divergence: prereg.md 5.2 specifies next-char check (values[0][len(prefix)] in /?=& or EOS), but run_experiment.py _validate_prefix_boundary checks last_char of prefix in /?=&. Under prereg logic P1 prefix https://api.example.com/users/ next_char 'A' and G1 prefix https://api.example.com/search?q= next_char 'a' would be REJECTED (spec would false-reject passing conditions). Implementation's last-char check is what allows P1/G1 to pass. Freeze corrected logic (last_char validation) and document divergence before claiming delimiter guard validated.",
+    "Validate fixes against actual src/spider/kernel.py distill_parameterized and _bind with prefixes: provenance.json and validity_notes admit fixes are standalone reimplementation, not product kernel. Kernel at HEAD is literal-only distill (no parameterization) and _bind in reimplementation ignores slot_prefixes prefix-stripping used for VALUE CONTRACT. Inherited next_question explicitly requires validation against actual kernel.py. Re-execute fixed logic in kernel.py branch and confirm binding outcomes, especially prefix stripping for full-value vs short-value.",
+    "Bound Fix 1 to single-character only and address G4 multi-char suffix: Fix 1 guards len(suffix) <=1 preceded by ? = &, so G4 suffix '00' (from 100/200/300) is not caught, template https://api.example.com/users/${url}00 binding 0/3 (raw_evidence G4). Either extend guard to multi-char non-structural suffixes or explicitly bound claim to single-char coincidental overlap (G1 alpha/beta/delta 'a') and report G4 as architectural+ suffix-bound limitation, not fixed. Do not claim suffix corruption broadly fixed.",
+    "Execute missing baselines B_UNFIXED and B_EXACT_MATCH: spec.json baselines lists B_UNFIXED (previous rfind heuristic 4/7 pass), B_LITERAL, B_EXACT_MATCH. Only B_LITERAL was executed (confidence 0.5 < 0.8 fail_rate 1.0). B_UNFIXED and B_EXACT_MATCH omitted, weakening claim that fixes improve over prior heuristic. For trivial synthetic cost, execute all three and report per spec. Also restore regression controls G2/G3/G5 to controls object (currently result.json controls omits them, raw_evidence has them) and check slot_prefix correctness (P1/G3/G5 observed slot_prefixes {'url':''} vs expected users//repos/main/issues/).",
+    "Reconcile product claim ceiling: do not promote C-PARAM-INHERIT beyond EXPERIMENTAL synthetic single-slot leaf-path. Fixes restore narrow targets (G1 3/3 binding, N1_ORIGINAL slot_count 0) with no regressions on P1/G2/G3/G5, but N1_REDESIGNED failure, G4 0/3, spec/impl mismatch, standalone substrate, and empty slot_prefixes representation loss prevent SURVIVES_CURRENT_TEST. C-PRODUCT-ECON remains blocked until kernel validation + real-browser + corrected null control."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_FIX1_NARROW_SINGLE_CHAR_ONLY",
+      "severity": "high",
+      "finding": "Fix 1 rejects only len(suffix)<=1 not preceded by ? = &. G1 suffix 'a' from alpha/beta/delta correctly rejected (template search?q=${url} binding 3/3). G4 suffix '00' from 100/200/300 is 2 chars, not rejected, template users/${url}00 binding 0/3. Claim that suffix guard restores binding correctness is therefore limited to single-char coincidental overlap, not general suffix corruption. Producer acknowledges bound but report still frames Fix1 as WORKS.",
+      "evidence": "run_experiment.py _find_common_prefix_suffix len(suffix)<=1 guard; raw_evidence.json G1 template https://api.example.com/search?q=${url} binding_accuracy 1.0 vs G4 template https://api.example.com/users/${url}00 binding_accuracy 0.0; result.json validity_notes Fix1 only rejects single-char"
+    },
+    {
+      "id": "V2_SPEC_IMPL_MISMATCH_FIX2",
+      "severity": "high",
+      "finding": "Frozen prereg requires checking next_char after prefix in /?=& or EOS, but implementation checks last_char of prefix in /?=&. Under prereg, P1 next_char 'A' (from https://api.example.com/users/A) and G1 next_char 'a' (alpha) would be rejected, causing false negatives on passing conditions. Implementation's last_char check allows them (prefix ends at '/' or '='). Divergence is material and undocumented in validity_notes; report validation table uses last_char semantics while spec text uses next_char.",
+      "evidence": "prereg.md 5.2 Fix2 code with next_char_idx=len(full_prefix), next_char=values[0][next_char_idx]; run_experiment.py _validate_prefix_boundary last_char=full_prefix[-1] in ('/','?','=','&'); recomputed: P1 prefix https://api.example.com/users/ next_char 'A' spec REJECT vs impl ALLOW; G1 prefix https://api.example.com/search?q= next_char 'a' spec REJECT vs impl ALLOW"
+    },
+    {
+      "id": "V3_SUBSTRATE_REIMPLEMENTATION_NOT_KERNEL",
+      "severity": "high",
+      "finding": "Fixes tested in standalone copy of kernel logic, not src/spider/kernel.py. Current kernel.py distill is literal-only (confidence 0.5, no parameterization), so there is no distill_parameterized to patch. Reimplementation _bind ignores slot_prefixes dict that kernel uses for VALUE CONTRACT stripping (provenance divergence_note). For short test values stripping not exercised, but external validity to product kernel is unproven. Inherited next_question explicitly asks validation against actual kernel.py before C-PRODUCT-ECON.",
+      "evidence": "provenance.json code_version.kernel.py='src/spider/kernel.py at HEAD (1074ab27)' distill literal-only, run_experiment.py standalone reimplementation, divergence_note _bind ignores prefixes dict, models.py lacks slot_prefixes; src/spider/kernel.py 4815 bytes no _find_common_prefix_suffix"
+    },
+    {
+      "id": "V4_N1_REDESIGNED_SPEC_INACCURATE",
+      "severity": "high",
+      "finding": "N1_REDESIGNED described as truly disjoint sharing NO common prefix beyond empty string, but all URLs share https:// (common prefix https:// ending at '/'). Fix2 correctly ALLOWS parameterization because last_char '/' is delimiter, producing slot_count 1 vs expected 0, binding 0/3. Producer correctly diagnoses test flaw in observations, but decision_rule per freeze still triggers FALSIFIED-IN-SETTING (slot_count>0). Result.json outcome MIXED contradicts raw_evidence verdict FALSIFIED-IN-SETTING; post-hoc reinterpretation cannot override frozen rule.",
+      "evidence": "raw_evidence.json N1_REDESIGNED prefix https:// suffix '' last_char '/' slot_count 1 template https://${url}; spec.json null_control N1_REDESIGNED 3 disjoint URLs slot_count 0; result.json outcome MIXED vs raw_evidence aggregate verdict FALSIFIED-IN-SETTING and decision_rule_evaluation all_six_pass false"
+    },
+    {
+      "id": "V5_MISSING_BASELINES_AND_CONTROLS_COVERAGE",
+      "severity": "medium",
+      "finding": "Spec lists B_UNFIXED (prior heuristic 4/7), B_LITERAL, B_EXACT_MATCH. Only B_LITERAL executed. B_UNFIXED not rerun for direct comparison, B_EXACT_MATCH omitted entirely. Controls object in result.json omits G2/G3/G5 regression controls (present in raw_evidence but not in controls dict). Weakens baseline strength.",
+      "evidence": "spec.json baselines=[B_UNFIXED,B_LITERAL,B_EXACT_MATCH]; result.json controls has P1,N1_ORIGINAL,N1_REDESIGNED,B_LITERAL only; raw_evidence conditions G2/G3/G5 binding_accuracy 1.0 not surfaced as controls"
+    },
+    {
+      "id": "V6_REPRESENTATION_LOSS_EMPTY_SLOT_PREFIXES",
+      "severity": "medium",
+      "finding": "P1/G3/G5 observed slot_prefixes {'url':''} vs expected users/, repos/main/issues/, users/. Binding succeeds via full template prefix (https://api.example.com/users/${url}) not via correct slot_prefix semantics. Rfind('/') heuristic returns empty when varying part starts immediately after last '/', indicating slot-level prefix extraction not actually validated. Unresolved notes flag this but not counted as failure.",
+      "evidence": "raw_evidence.json P1 slot_prefixes {'url':''} expected users/; G3 slot_prefixes {'url':''} expected repos/main/issues/; G5 slot_prefixes {'url':''}; result.json unresolved whether empty should be failure"
+    },
+    {
+      "id": "V7_SYNTHETIC_ONLY_SMALL_N_NO_EXTERNAL_VALIDITY",
+      "severity": "medium",
+      "finding": "All 9 conditions use n=3 deterministic synthetic URLs, no model/network/browser calls (provenance model_calls 0). Binding uses strict JSON equality. No URL encoding, fragments, auth, or retrieval cost measurement relevant to C-PRODUCT-ECON. Generalization beyond tested URL classes unproven.",
+      "evidence": "provenance.json environment deterministic true model_calls 0 browser_calls 0 network_calls 0; result.json validity_notes synthetic-only; prereg validity_threats 9.5 synthetic-only"
+    },
+    {
+      "id": "V8_OUTCOME_INCONSISTENCY",
+      "severity": "medium",
+      "finding": "Raw_evidence aggregate verdict FALSIFIED-IN-SETTING per decision_rule (n1_redesigned_passes false). Report acknowledges two issues prevent SURVIVES but claims MIXED Outcome 7/9. Result.json outcome MIXED with conditions_failed [G4,N1_REDESIGNED] - G4 is documented architectural bound outside primary decision rule per prereg 11, so only N1_REDESIGNED causes failure. Producer frames G4 not counted, but raw still counts it, leading to pass_rate 0.777 vs report framing 7/9 with G4 excluded narrative.",
+      "evidence": "raw_evidence.json aggregate verdict FALSIFIED-IN-SETTING decision_rule_evaluation g1 true n1_original true n1_redesigned false; result.json outcome MIXED metrics passed_conditions 7 total 9; report.md Executive Summary lists G4 as architectural not fix failure"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B_LITERAL",
+      "severity": "low",
+      "finding": "PASS as executed: literal mechanism reuse confidence 0.5 < min_confidence 0.8, fail_rate 1.0, resolutions EXPLORE/UNKNOWN. Correctly confirms parameterized induction necessary. Recomputed via raw_evidence B_LITERAL fail_rate 1.0 executable_count 0.",
+      "evidence": "raw_evidence.json B_LITERAL confidence 0.5 fail_rate 1.0; result.json controls.B_LITERAL observed_fail_rate 1.0 passed true"
+    },
+    {
+      "id": "B_UNFIXED",
+      "severity": "medium",
+      "finding": "NOT EXECUTED: previous rfind('/') heuristic without fixes expected 4/7 pass (G1/N1 fail). No rerun in this experiment for direct paired comparison. Cannot quantify delta attributable to fixes vs inherited parent result.",
+      "evidence": "spec.json baselines B_UNFIXED 4/7 parent; result.json/provenance/raw_evidence no B_UNFIXED condition"
+    },
+    {
+      "id": "B_EXACT_MATCH",
+      "severity": "medium",
+      "finding": "NOT EXECUTED: exact URL string matching per unique URL baseline omitted. No cost/comparison vs per-URL mechanism explosion.",
+      "evidence": "spec.json baselines B_EXACT_MATCH; no artifact or metric for it"
+    }
+  ],
+  "recomputed_metrics": {
+    "condition_pass_rate": 0.7777777777777778,
+    "structural_generalization_rate": 0.8,
+    "overall_binding_accuracy": 0.625,
+    "passed_conditions": 7,
+    "total_conditions": 9,
+    "conditions_passed": ["P1_PATH_PREFIX", "G1_QUERY_STRING_SIMPLE", "G2_QUERY_STRING_MULTIPARAM", "G3_DEEP_PATH", "G5_PATH_QUERY_HYBRID", "N1_ORIGINAL", "B_LITERAL"],
+    "conditions_failed": ["G4_MULTI_SLOT", "N1_REDESIGNED"],
+    "fix1_success": true,
+    "fix2_success": true,
+    "regressions": [],
+    "per_condition_recomputed": {
+      "P1_PATH_PREFIX": {"slot_count": 1, "slot_count_correct": true, "binding_accuracy": 1.0, "binding_correct_count": 3, "template": "https://api.example.com/users/${url}", "slot_prefixes": {"url": ""}, "pass": true},
+      "G1_QUERY_STRING_SIMPLE": {"slot_count": 1, "slot_count_correct": true, "binding_accuracy": 1.0, "binding_correct_count": 3, "template": "https://api.example.com/search?q=${url}", "slot_prefixes": {"url": "search?q="}, "pass": true, "note": "Fix1 removes suffix 'a', suffix '' verified via recomputed _find_common_prefix_suffix"},
+      "G2_QUERY_STRING_MULTIPARAM": {"slot_count": 1, "slot_count_correct": true, "binding_accuracy": 1.0, "binding_correct_count": 3, "template": "https://api.example.com/items?category=books&page=${url}", "pass": true},
+      "G3_DEEP_PATH": {"slot_count": 1, "slot_count_correct": true, "binding_accuracy": 1.0, "binding_correct_count": 3, "template": "https://api.example.com/orgs/acme/repos/main/issues/${url}", "slot_prefixes": {"url": ""}, "pass": true},
+      "G4_MULTI_SLOT": {"slot_count": 1, "slot_count_correct": true, "binding_accuracy": 0.0, "binding_correct_count": 0, "template": "https://api.example.com/users/${url}00", "slot_prefixes": {"url": ""}, "pass": false, "failure": "suffix '00' 2-char not caught by Fix1, plus single-slot architectural bound vs expected 2"},
+      "G5_PATH_QUERY_HYBRID": {"slot_count": 1, "slot_count_correct": true, "binding_accuracy": 1.0, "binding_correct_count": 3, "template": "https://api.example.com/users/${url}/items?page=1", "pass": true},
+      "N1_ORIGINAL": {"slot_count": 0, "slot_count_correct": true, "binding_accuracy": 0.0, "pass": true, "note": "Fix2 rejects prefix https://api. last_char '.' not delimiter"},
+      "N1_REDESIGNED": {"slot_count": 1, "slot_count_correct": false, "binding_accuracy": 0.0, "binding_correct_count": 0, "template": "https://${url}", "slot_prefixes": {"url": ""}, "pass": false, "failure": "common prefix https:// ends at '/' delimiter, Fix2 allows parameterization, spec expectation slot_count 0 violated"},
+      "B_LITERAL": {"slot_count": 0, "fail_rate": 1.0, "pass": true}
+    },
+    "recomputed_overall_binding_mean": 0.625,
+    "recomputed_structural_rate": 0.8,
+    "hash_verified": "raw_evidence.json sha256 6360526a8b27139568918f988924c4ff39f0d8996b8df81c6d98ff508b57fac9 matches result.json artifacts[0].sha256; run_experiment.py sha256 b7b8dfb1f23be1f3cf35b3e224687703de225a37639017ca0bccd516ca269d53 matches",
+    "outcome_recomputed": "Per frozen decision_rule: g1_passes true, n1_original true, n1_redesigned false, p1/g2/g3/g5 true, b_literal true, pipeline_no_errors true => all_six_pass false => verdict FALSIFIED-IN-SETTING (raw_evidence correct). Result.json outcome MIXED is inconsistent with frozen rule; MIXED requires >=1 regression on P1/G2/G3/G5 per spec, but regressions []"
+  },
+  "claim_ceiling": "NARROW SYNTHETIC SINGLE-SLOT: Suffix guard (single-char) and delimiter-bound prefix check (last_char in /? = &) restore binding for tested G1 query-string (search?q=alpha/beta/delta -> gamma 3/3) and N1 cross-host (https://api. -> slot 0) without regressions on P1/G2/G3/G5 (all 1.0) in deterministic synthetic reimplementation. Maximum justified ceiling: fixes work narrowly for single-char coincidental suffix overlap and for cross-host prefixes ending at non-delimiter '.'; they do NOT generalize to multi-char suffixes (G4 '00' 0/3), to short protocol-only prefixes (N1_REDESIGNED https:// -> 1 vs 0), to multi-slot URL decomposition (G4 single-slot bound), nor to slot_prefix semantic correctness (P1/G3/G5 empty). Validated only in standalone reimplementation, not actual kernel.py; no browser/network/model calls; n=3 per condition. C-PARAM-INHERIT remains EXPERIMENTAL synthetic; C-PRODUCT-ECON blocked. No product deployment claim justified.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-34642376433/spec.json: claim_ids C-PARAM-INHERIT, decision_rule SURVIVES requires G1 1.0 + N1_ORIGINAL 0 + N1_REDESIGNED 0 + P1/G2/G3/G5 1.0",
+    "research/experiments/EXP-PRODUCT-34642376433/prereg.md: Fix1 suffix guard len<=1 ?=&, Fix2 next_char check vs implementation last_char check, G4 architectural bound",
+    "research/experiments/EXP-PRODUCT-34642376433/freeze.json: hashes prereg 73ca8a..., spec c4f10c...",
+    "research/experiments/EXP-PRODUCT-34642376433/result.json: metrics condition_pass_rate 0.777, fix1_success true fix2_success true regressions []",
+    "research/experiments/EXP-PRODUCT-34642376433/raw_evidence.json: per-condition slot_count/binding_accuracy/template/slot_prefixes, aggregate verdict FALSIFIED-IN-SETTING, G1 prefix search?q= suffix '' template search?q=${url}",
+    "research/experiments/EXP-PRODUCT-34642376433/run_experiment.py: _find_common_prefix_suffix Fix1 guard, _validate_prefix_boundary last_char logic, CONDITIONS 9 entries",
+    "research/experiments/EXP-PRODUCT-34642376433/provenance.json: standalone reimplementation divergence_note _bind ignores prefixes, kernel.py literal-only, N1_REDESIGNED flaw noted",
+    "research/experiments/EXP-PRODUCT-34642376433/report.md: Outcome MIXED framing vs raw FALSIFIED, validation table last_char semantics",
+    "src/spider/kernel.py: distill literal-only confidence 0.5, no distill_parameterized, _bind without prefix stripping in current HEAD vs reimplementation",
+    "research/experiments/EXP-PRODUCT-34485517221/handoff.json: parent asks validation against actual kernel.py before C-PRODUCT-ECON"
+  ],
+  "unresolved": [
+    "Whether Fix1 should extend to multi-char non-structural suffixes (e.g., '00', 'ing') and how to define structural delimiter boundary for suffix without breaking legitimate suffixes",
+    "Whether Fix2 should add minimum prefix length threshold (e.g., >8 chars) to reject protocol-only https:// parameterization that currently passes delimiter check",
+    "Whether leaf-path model can support multi-slot URL induction via parsing without breaking single-leaf abstraction, or C-PARAM-INHERIT must remain single-slot only",
+    "Whether empty slot_prefixes for P1/G3/G5 is representational artifact or correctness failure for slot-level VALUE CONTRACT",
+    "Actual kernel.py behavior with fixes applied: does prefix stripping via slot_prefixes produce same binding outcomes for full-value vs short-value mixed convention when fixes integrated",
+    "Real-world prevalence of single-char vs multi-char suffix collisions and cross-host vs protocol-only prefix collisions in API traffic",
+    "Proper redesign of N1 null control to be truly disjoint and whether Jaccard/similarity threshold needed in addition to delimiter guard"
+  ]
+}

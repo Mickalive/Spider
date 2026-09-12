@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34629310987",
+  "lane": "physics",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "HYPOTHESIS",
+      "reason": "Frozen question (accessibility-tree as predictive state beyond URL on genuine SPA/form-heavy sites) was not tested. All data is synthetic with artificially injected state-dependent action probabilities; URL held constant by construction makes URL-only PMI ~0, so any a11y variation yields tautological gain. Real-site attempts (tally_form N=30 < 50, stalled automation; google_form placeholder URL redirecting to login) fail data-sufficiency and site-selection requirements. The frozen decision rule requires genuine SPA sites with URL ambiguity (spec.json measurement_validity #1, prereg 5.1-5.4). Producer SUPPORTS outcome is based on infrastructure-failure fallback to synthetic data, not evidence for or against the stated hypothesis. C-WEB-DYNAMICS remains HYPOTHESIS. The PMI pipeline correctly detects injected structure on synthetic data (positive control PMI=1.271, null p=0.666 on v2), but this is pipeline verification, not hypothesis evidence."
+    }
+  ],
+  "product_action": "NO_ACTION",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Do network requests and API calls (XHR/fetch payloads, endpoint sequences, response content-types) captured via Playwright route interception on genuine client-side-routed SPAs provide predictive state information beyond URL — specifically, does the network-request signature on within-URL transitions carry PMI exceeding URL-only by >= 0.1 bits on sites where URL is ambiguous?",
+  "reason": "The frozen question was not answered: synthetic-only data with tautological within-URL gain (URL constant => URL-only PMI ~0) does not constitute evidence for or against accessibility-tree predictive power on genuine SPAs. Real-site infrastructure (Playwright automation on tally_form, google_form_example) failed to meet frozen data-sufficiency requirements (N>=50 per site) and produced zero or negative a11y gains. The 8 prioritized validity findings from audit (synthetic-only, tautological gain, stalled real sites, missing train/test split, missing DOM baseline, inconsistent null control, non-SPA-aware leakage, incomplete provenance) demonstrate the experiment did not execute the frozen design. MEASUREMENT_INVALID is the correct classification: infrastructure failure producing synthetic-only results, not a negative scientific result. C-WEB-DYNAMICS remains HYPOTHESIS; the accessibility-tree representation on genuine URL-ambiguous SPAs remains UNTESTED. The next experiment should test a materially orthogonal mechanism (network-request state signals) rather than re-run the same accessibility-tree design, because: (1) the parent already rejected DOM structural features on TodoMVC; (2) this experiment could not execute accessibility-tree extraction on real sites due to Playwright automation failures; (3) network requests are independently observable via Playwright route interception (no accessibility snapshot needed), providing a new measurement path; (4) network-request state signals are semantically orthogonal to both DOM counts and accessibility tree — they capture communication structure rather than page structure.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-34629310987/spec.json claim_ids C-WEB-DYNAMICS question hypothesis falsifier measurement_validity decision_rule",
+    "research/experiments/EXP-PHYSICS-34629310987/prereg.md 5.1-5.4 site_selection 8.1 within_url_gain 10.1-10.4 controls 12.1-12.3 decision_rules",
+    "research/experiments/EXP-PHYSICS-34629310987/freeze.json frozen_inputs",
+    "research/experiments/EXP-PHYSICS-34629310987/result.json outcome SUPPORTS validity_notes 'synthetic SPA' 'Playwright timing out' metrics gain_within_url_bits=0.972 url_only_pmi=3.7e-05",
+    "research/experiments/EXP-PHYSICS-34629310987/audit.json status=MEASUREMENT_INVALID producer_claim_supported=false required_fixes validity_findings claim_ceiling",
+    "research/experiments/EXP-PHYSICS-34629310987/report.md synthetic_only scope_limitations 'What This Experiment Does NOT Test'",
+    "research/experiments/EXP-PHYSICS-34629310987/provenance.json data_sources.synthetic_spa only github_run_id=null experiment_code_sha=null",
+    "research/experiments/EXP-PHYSICS-34629310987/real_site_results_v2.json tally_form n=30 a11y_pmi=0.0 google_form null_control_perm_p=0.004975 fails",
+    "research/experiments/EXP-PHYSICS-34629310987/raw_results.json within_url_synthetic url_only_pmi=3.7e-05 a11y_pmi=0.972",
+    "research/experiments/EXP-PHYSICS-34629310987/raw_results_v2.json synthetic a11y_only_all=1.947 url_only_all=6.8e-08",
+    "research/experiments/EXP-PHYSICS-34524411213/handoff.json carry_forward.rejected DOM structural features TodoMVC"
+  ]
+}

@@ -1,0 +1,144 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-34642376433",
+  "lane": "product",
+  "status": "COMPLETE",
+  "outcome": "MIXED",
+  "metrics": {
+    "condition_pass_rate": 0.7777777777777778,
+    "structural_generalization_rate": 0.8,
+    "overall_binding_accuracy": 0.625,
+    "passed_conditions": 7,
+    "total_conditions": 9,
+    "conditions_passed": ["P1_PATH_PREFIX", "G1_QUERY_STRING_SIMPLE", "G2_QUERY_STRING_MULTIPARAM", "G3_DEEP_PATH", "G5_PATH_QUERY_HYBRID", "N1_ORIGINAL", "B_LITERAL"],
+    "conditions_failed": ["G4_MULTI_SLOT", "N1_REDESIGNED"],
+    "fix1_success": true,
+    "fix2_success": true,
+    "regressions": []
+  },
+  "controls": {
+    "P1_PATH_PREFIX": {
+      "type": "positive_control",
+      "expected": "slot_count=1, binding_accuracy=1.0",
+      "observed_slot_count": 1,
+      "observed_binding_accuracy": 1.0,
+      "passed": true,
+      "slot_prefixes": {"url": ""},
+      "template": "https://api.example.com/users/${url}",
+      "evidence": "raw_evidence.json conditions.P1_PATH_PREFIX"
+    },
+    "N1_ORIGINAL": {
+      "type": "fix2_target",
+      "expected": "slot_count=0",
+      "observed_slot_count": 0,
+      "observed_binding_accuracy": null,
+      "passed": true,
+      "slot_prefixes": {},
+      "template": "https://api.example.com/a",
+      "evidence": "raw_evidence.json conditions.N1_ORIGINAL"
+    },
+    "N1_REDESIGNED": {
+      "type": "null_control",
+      "expected": "slot_count=0",
+      "observed_slot_count": 1,
+      "observed_binding_accuracy": 0.0,
+      "passed": false,
+      "slot_prefixes": {"url": ""},
+      "template": "https://${url}",
+      "failure_mode": "URLs share 'https://' as common prefix which ends at '/' delimiter; fix correctly allows parameterization at this boundary; spec description 'sharing NO common prefix beyond empty string' is inaccurate",
+      "evidence": "raw_evidence.json conditions.N1_REDESIGNED"
+    },
+    "B_LITERAL": {
+      "type": "baseline",
+      "expected": "fail_rate=1.0",
+      "observed_fail_rate": 1.0,
+      "passed": true,
+      "note": "Literal mechanism reuse: confidence 0.5 < min_confidence 0.8, all resolutions return EXPLORE/UNKNOWN",
+      "evidence": "raw_evidence.json conditions.B_LITERAL"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PRODUCT-34642376433/raw_evidence.json",
+      "sha256": "6360526a8b27139568918f988924c4ff39f0d8996b8df81c6d98ff508b57fac9",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-34642376433/run_experiment.py",
+      "sha256": "b7b8dfb1f23be1f3cf35b3e224687703de225a37639017ca0bccd516ca269d53",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    {
+      "id": "OBS-G1-SUFFIX-FIX-WORKS",
+      "condition": "G1_QUERY_STRING_SIMPLE",
+      "observation": "Fix 1 (suffix guard) successfully prevents suffix corruption. Training values alpha/beta/delta share trailing 'a', but suffix guard rejects single-character suffix 'a' because it is not preceded by a structural delimiter (?, =, &). Template becomes 'search?q=${url}' (no suffix) instead of 'search?q=${url}a'. Binding produces correct URLs for unseen values gamma/epsilon/zeta.",
+      "interpretation": "The suffix guard fix correctly addresses G1 failure mode from EXP-PRODUCT-34485517221. Single-character suffixes not preceded by structural delimiters are coincidental character overlap, not meaningful template structure.",
+      "severity": "positive",
+      "evidence": "raw_evidence.json conditions.G1_QUERY_STRING_SIMPLE.action_template='https://api.example.com/search?q=${url}', metrics.binding_accuracy=1.0"
+    },
+    {
+      "id": "OBS-N1-DELIMITER-FIX-WORKS",
+      "condition": "N1_ORIGINAL",
+      "observation": "Fix 2 (delimiter-bound prefix validation) successfully prevents over-parameterization of cross-host URLs. Training URLs (api.example.com/a, api.other.com/b, api.third.com/c) share prefix 'https://api.' which ends at '.' (not a structural delimiter). Fix rejects parameterization, producing slot_count=0.",
+      "interpretation": "The delimiter guard correctly addresses N1 failure mode from EXP-PRODUCT-34485517221. Cross-host URLs sharing short prefixes are rejected when the prefix does not end at a structural URL boundary.",
+      "severity": "positive",
+      "evidence": "raw_evidence.json conditions.N1_ORIGINAL.slot_count=0, slot_count_correct=true"
+    },
+    {
+      "id": "OBS-N1-REDESIGNED-SPEC-INACCURATE",
+      "condition": "N1_REDESIGNED",
+      "observation": "N1_REDESIGNED URLs (https://a.com/x, https://b.org/y, https://c.net/z) share 'https://' as common prefix which ends at '/' (a structural delimiter). Fix 2 correctly allows parameterization at this boundary, producing slot_count=1. The spec description 'sharing NO common prefix beyond empty string' is inaccurate - these URLs share 'https://' prefix.",
+      "interpretation": "The N1_REDESIGNED test case does not test truly disjoint URLs as intended. All URLs share the protocol prefix 'https://' which ends at a structural boundary. The fix is working correctly; the test case design is flawed. A truly disjoint test would require URLs with no shared prefix (e.g., 'http://a.com' vs 'ftp://b.org').",
+      "severity": "medium",
+      "evidence": "raw_evidence.json conditions.N1_REDESIGNED.action_template='https://${url}', slot_count=1"
+    },
+    {
+      "id": "OBS-G4-ARCHITECTURAL-CONFIRMED",
+      "condition": "G4_MULTI_SLOT",
+      "observation": "G4 multi-slot test confirms architectural limitation. Training URLs (users/alice/orders/100, users/bob/orders/200, users/charlie/orders/300) have common prefix 'https://api.example.com/users/' ending at '/' (delimiter). Fix 2 allows parameterization. However, leaf-path model produces slot_count=1 (not 2) because URL is treated as single field. Template 'users/${url}00' has suffix '00' from common suffix of 100/200/300 - this is NOT caught by Fix 1 because '00' is 2 characters (Fix 1 only rejects single-character suffixes).",
+      "interpretation": "G4 architectural limitation is confirmed. The leaf-path model cannot split URL into >1 parameter slots. The suffix '00' is a multi-character suffix not caught by Fix 1's single-character guard. This is expected behavior - Fix 1 addresses the most common failure mode (single-character coincidental overlap), not all possible suffix corruptions.",
+      "severity": "medium",
+      "evidence": "raw_evidence.json conditions.G4_MULTI_SLOT.slot_count=1, template='https://api.example.com/users/${url}00'"
+    },
+    {
+      "id": "OBS-NO-REGRESSIONS",
+      "condition": "ALL_PASSING",
+      "observation": "Fixes do not cause regressions on passing conditions. P1 (path-prefix), G2 (multi-param query), G3 (deep path), G5 (path+query hybrid) all maintain binding_accuracy=1.0 and correct slot_count after fixes are applied.",
+      "interpretation": "The suffix guard and delimiter-bound prefix validation are safe for established single-slot patterns. Their prefixes already end at structural boundaries, so Fix 2 allows them. Their suffixes are either empty or structurally valid, so Fix 1 does not affect them.",
+      "severity": "positive",
+      "evidence": "raw_evidence.json conditions.P1_PATH_PREFIX.metrics.binding_accuracy=1.0, G2_QUERY_STRING_MULTIPARAM.metrics.binding_accuracy=1.0, G3_DEEP_PATH.metrics.binding_accuracy=1.0, G5_PATH_QUERY_HYBRID.metrics.binding_accuracy=1.0"
+    },
+    {
+      "id": "OBS-B-LITERAL-CONFIRMED",
+      "condition": "B_LITERAL",
+      "observation": "Literal baseline confirms parameterized induction is necessary. Literal mechanism reuse (confidence 0.5) fails all resolutions because confidence < min_confidence 0.8. This is consistent with parent experiment findings.",
+      "interpretation": "The baseline control validates that parameterized induction is required for generalization to unseen values. Literal reuse cannot achieve binding correctness.",
+      "severity": "positive",
+      "evidence": "raw_evidence.json conditions.B_LITERAL.metrics.fail_rate=1.0"
+    }
+  ],
+  "validity_notes": [
+    "All conditions use deterministic synthetic data with no model, network, or browser calls",
+    "Each condition uses 3 training observations matching parent experiment protocol",
+    "Unseen test values are disjoint from training values",
+    "Binding correctness uses strict JSON comparison (json.dumps sort_keys=True)",
+    "Fresh temporary registry per condition prevents cross-contamination",
+    "Slot prefix extraction is deterministic given frozen training data",
+    "The fixes are implemented in standalone experiment code, not actual kernel.py. The audit V2_SUBSTRATE_REIMPLEMENTATION_NOT_KERNEL from parent applies. However, the algorithm logic is identical; the standalone code is a direct reimplementation.",
+    "Fix 1 (suffix guard) only rejects single-character suffixes not preceded by structural delimiters. Multi-character suffixes (e.g., '00' from G4) are not caught. This is a known bound: the fix addresses the most common failure mode, not all possible suffix corruptions.",
+    "Fix 2 (delimiter-bound prefix validation) checks if the last character of the common prefix is a structural delimiter (/ ? = &). This correctly rejects N1_ORIGINAL (prefix 'https://api.' ends at '.') and allows P1/G1/G2/G3/G5 (prefixes end at '/' or '=').",
+    "N1_REDESIGNED test case is flawed: URLs share 'https://' as common prefix which ends at '/' delimiter. Fix 2 correctly allows parameterization at this boundary. The spec description 'sharing NO common prefix beyond empty string' is inaccurate. A truly disjoint test would require URLs with no shared prefix (e.g., 'http://a.com' vs 'ftp://b.org').",
+    "G4 architectural limitation remains: leaf-path model produces slot_count=1 (not 2). The suffix '00' is multi-character and not caught by Fix 1.",
+    "This is a synthetic-only measurement. Real-world URL diversity may expose failure modes not tested here."
+  ],
+  "unresolved": [
+    "Whether Fix 1 should be extended to reject multi-character suffixes that are not preceded by structural delimiters (would fix G4 suffix corruption but may break legitimate suffixes)",
+    "Whether a minimum prefix length threshold should be added to Fix 2 to reject parameterization when the common prefix is too short (e.g., just the protocol 'https://')",
+    "Whether the leaf-path model can be extended to multi-slot URL induction via URL parsing without breaking single-leaf abstraction",
+    "Whether empty slot_prefixes for P1/G3/G5 (observed '' vs expected 'users/'/'repos/main/issues/') should be considered a correctness failure or representational artifact",
+    "Real-world prevalence of suffix collisions and cross-host prefix collisions in API URLs",
+    "Actual kernel.py behavior vs reimplementation: run the fixes against actual src/spider/kernel.py distill_parameterized and _bind with prefixes to confirm binding outcomes"
+  ]
+}

@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34629310987",
+  "lane": "physics",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Site selection violates frozen spec/prereg (spec.json measurement_validity #1, prereg.md 5.1-5.4): result.json SUPPORTS is based solely on synthetic SPA data with all transitions sharing same URL http://spa.test/form. Frozen question requires 2-3 genuine SPA/form-heavy sites where same URL hosts >=3 distinct form steps verified by accessibility-tree hash variation, publicly reachable without auth. Real-site attempts in raw_results_v2.json/real_site_results_v2.json are insufficient (tally_form 30 transitions with 27 identical a11y hash 227fc6ef3f1b89b8 indicating stall; google_form_example uses placeholder https://docs.google.com/forms/d/e/1FAIpQLScexample/viewform redirecting to login with only 2 hashes) and fail sufficiency N>=50 per site. Must re-run on genuine client-side-routed forms with pre-survey artifact verifying URL ambiguity.",
+    "Train/test split and TRAIN-only discretization not implemented (spec.json measurement_validity #4-5, prereg.md 6.4): spec requires 80/20 temporal split by transition index (not random) and bin edges/hash mapping fit on TRAIN only with test mapped to nearest train bin. research/physics/a11y_tree/a11y_tree_experiment.py generate_within_url_transitions / extract_triples / compute_pmi_stats computes PMI on all 500 transitions with no split. Fix by implementing frozen temporal split and reporting out-of-sample PMI; current in-sample PMI is optimistic.",
+    "DOM structural features baseline omitted (spec.json baselines #4, prereg.md 10.4): required replication of parent DOM element_count/tree_depth/interactive_density PMI on same data to verify consistency. No DOM metric appears in result.json metrics/controls/raw_results.json. Compute and report DOM PMI vs URL-only on same transition set.",
+    "Accessibility-tree extraction validity not demonstrated for frozen measurement (spec.json measurement_validity #2-3, prereg.md 6.1-6.2): frozen requires Playwright page.accessibility.snapshot() after network-idle with filtering of Presentation/None/generic/text roles and hash of sorted (role,name,focused,expanded,checked,disabled,selected). Producer primary result uses hard-coded synthetic hashes a11y_state_001..008 without snapshot extraction; real-site v2 uses page.locator('body').aria_snapshot() with different filter set (excludes document/main/article/text) and no snapshot artifacts preserved. Provide raw aria snapshot dumps and verify hash stability on 5 repeated navigations as prereg 11.2 requires.",
+    "SPA-aware leakage classification not implemented (spec.json measurement_validity #6, prereg.md 6.4): spec requires URL hash/history.pushState routing detection, not just href equality. Code uses simple url_t==url_t1 within-URL check. Emit SPA-verification artifact distinguishing hash/history vs full navigation and recompute leakage vs non-leakage composition.",
+    "Null control definition cherry-picked and inconsistent: full_experiment.log first synthetic run reports null control fails SURVIVES false with shuffled mean 0.289 >0; report.md/result.json then reports alternative null definition shuffled PMI 1.124 with p=0.049 passes, while raw_results_v2.json reports different pipeline with shuffled_pmi 0.273 p=0.666 passes and gain 1.947 vs result.json gain 0.972. Two code artifacts a11y_tree_experiment.py (sha e2a16d212b8d6486e33512fec33d53fe0ebeb632f44d71928c181feb9b8b942f) vs a11y_tree_experiment_v2.py produce incompatible transition matrices. Freeze single code version, preserve single raw_results.json, and use prereg null definition (permute a11y hashes across transitions, check shuffled PMI not significantly >0 with p>0.01 on 1000 perms) without post-hoc threshold change.",
+    "Provenance and artifact reconciliation incomplete (provenance.json): github_run_id null, experiment_code_sha null, no hashes for synthetic_spa.html/synthetic_transitions.json, and divergent artifacts raw_results.json (gain 0.972) vs raw_results_v2.json (gain 1.947) not referenced in result.json artifacts list. Record immutable commit/sha, run id, and reconcile which artifact is canonical before verdict.",
+    "URL-ambiguity and entropy controls not reported per spec (prereg.md 9.3, 10.3): require H(URL), H(a11y), H(a11y|URL) and URL entropy reduction <2 bits threshold to include site. Synthetic has H(URL)=0 by construction (tautologically within-URL), not evidence of genuine ambiguity. Report weighted entropies and exclude sites failing threshold; do not interpret synthetic zero URL entropy as support for hypothesis."
+  ],
+  "validity_findings": [
+    {
+      "id": "synthetic_only_no_genuine_SPA",
+      "severity": "high",
+      "finding": "Frozen claim is about accessibility tree on genuine SPA/form-heavy sites where same URL hosts different states (request.json inherited_next_question, spec.json question/hypothesis). Producer result.json outcome SUPPORTS and report.md gain 0.972 are derived exclusively from synthetic SPA with artificially injected state-dependent action probabilities. validity_notes explicitly admit 'Real-world browser data collection was not completed due to infrastructure constraints (Playwright timing out)' and 'Results apply only to synthetic SPA'. This is infrastructure failure, not scientific SUPPORTS for the frozen hypothesis. MEASUREMENT_INVALID for the stated question.",
+      "evidence_ref": "spec.json question/hypothesis/falsifier; prereg.md 5.1-5.4; result.json outcome SUPPORTS metrics.gain_within_url_bits=0.9720429365; result.json validity_notes; report.md Scope and Limitations; EXECUTION_SUMMARY.md; raw_results.json within_url_synthetic; provenance.json data_sources.synthetic_spa"
+    },
+    {
+      "id": "tautological_within_url_gain_identifiability",
+      "severity": "high",
+      "finding": "Within-URL gain is tautological when URL is held constant: URL entropy=0 => URL-only PMI ~3.7e-05/6.8e-08 mathematically forced to zero. Any a11y variation will produce positive gain. Synthetic generator encodes gain via STATE_ACTION_PROBS (e.g., state 0 form_submit 0.7 vs state 6 form_submit 0.1) and deterministic SYNTHETIC_TRANSITIONS. Gain of 0.972 (v1) to 1.947 (v2) measures injected simulation structure, not discovery of web-dynamical structure beyond memory/similarity. Violates Physics identifiability: operational object PMI distinguishes representation only if action distribution is not conditioned by construction on that representation.",
+      "evidence_ref": "research/physics/a11y_tree/a11y_tree_experiment.py STATE_ACTION_PROBS lines 344-353 SYNTHETIC_TRANSITIONS 198-208 generate_within_url_transitions; raw_results.json within_url_synthetic url_only_pmi 3.7e-05 a11y_pmi 0.972; raw_results_v2.json url_only_all 6.8e-08 a11y_only_all 1.947 entropy_analysis url_entropy 0.0"
+    },
+    {
+      "id": "real_site_insufficient_and_stalled",
+      "severity": "high",
+      "finding": "Real-site experiments are insufficient per decision_rule data_sufficiency >=50 and site selection >=3 distinct steps. tally_form n=30 (<50), after step 2 same a11y hash 227fc6ef3f1b89b8 repeated for 27 consecutive steps indicating automation stalled on overlay intercept (full_experiment.log tile overlay ContentWrapper intercepts pointer events, EPIPE). Result is PMI url 0.012 vs a11y 0.0 (negative gain -0.012) opposite to synthetic claim. google_form_example URL https://docs.google.com/forms/d/e/1FAIpQLScexample/viewform is placeholder (not genuine form), redirects to accounts.google.com login with only 2 hashes, url_entropy 0.21 a11y_entropy 0.21, both PMI 0.0, null_control p=0.0049 fails (p<0.01) indicating false positive on shuffled data. Neither site meets >=3 distinct form steps within same URL with varying a11y.",
+      "evidence_ref": "real_site_results_v2.json tally_form n_transitions 30 n_within_url 28 unique_a11y_hashes 4 pmi_results url_only_all 0.012345 a11y_only_all 0.0 raw_transitions steps 2-29 identical hash; google_form_example n_transitions 30 unique_a11y_hashes 2 null_control permutation_p 0.004975 fails; spec.json measurement_validity N>=50; full_experiment.log overlay intercept"
+    },
+    {
+      "id": "train_test_split_missing",
+      "severity": "medium",
+      "finding": "No 80/20 temporal split by transition index; discretization bin edges not fit on TRAIN only. Code computes PMI on all transitions without split, violating spec measurement_validity #4-5. In-sample optimism direction overestimates a11y PMI; correction would reduce reported gain.",
+      "evidence_ref": "spec.json measurement_validity train/test split 80/20 temporal; a11y_tree_experiment.py compute_pmi_stats extract_triples run_experiment no split; a11y_tree_experiment_v2.py run_synthetic_experiment no split"
+    },
+    {
+      "id": "missing_DOM_baseline",
+      "severity": "medium",
+      "finding": "DOM structural features baseline (element_count, tree_depth, interactive_density) required as replication of parent EXP-PHYSICS-34524411213 not computed. Cannot verify consistency with parent falsification or test whether a11y gain is specific vs generic structural gain.",
+      "evidence_ref": "spec.json baselines DOM structural features baseline; prereg.md 10.4; result.json metrics/controls no dom_* keys; raw_results.json no dom"
+    },
+    {
+      "id": "null_control_inflated_and_inconsistent",
+      "severity": "medium",
+      "finding": "Null control in result.json reports null_a11y_pmi 1.124 bits (much larger than expected null ~0) with permutation p=0.049 borderline passes p>0.01. v2 reports shuffled_pmi 0.273 perm p=0.666 passes but different computation path (null_control_permutation_test shuffles both source and target hashes). In v1 log null fails with mean 0.289 >0 causing SURVIVES false. Indicates pipeline may detect spurious structure in random labels or smoothing artifact; threshold proximity (0.049 vs 0.01) is fragile. Google real site null fails outright.",
+      "evidence_ref": "result.json controls null_control observed null_a11y_pmi 1.124093 p 0.048951; raw_results.json null_control null_a11y_pmi 1.124; a11y_tree_experiment.py run_null_control cross_trajectory_shuffle; a11y_tree_experiment_v2.py null_control_permutation_test; full_experiment.log Condition 4 false; real_site_results_v2.json google_form_example null_control passes false"
+    },
+    {
+      "id": "leakage_and_entropy_not_SPA_aware",
+      "severity": "medium",
+      "finding": "Leakage classification uses only equality check, not SPA-aware hash/history detection required to verify genuine within-URL transitions. Entropy analysis reports H(a11y|URL)=2.938 bits on synthetic but URL entropy is zero by construction, so conditional equals marginal – not evidence of genuine URL ambiguity. Prereg requires URL entropy reduction <2 bits for inclusion; synthetic trivially passes but real tally URL entropy 0.42 a11y 0.627 shows low ambiguity but PMI still fails.",
+      "evidence_ref": "spec.json measurement_validity SPA-aware leakage; prereg.md 6.4 9.3; a11y_tree_experiment_v2.py entropy 0.0 url_entropy; real_site_results_v2.json tally_form entropy_analysis url_entropy 0.42 a11y_entropy 0.627"
+    },
+    {
+      "id": "permutation_p_floor_and_Bonferroni",
+      "severity": "low",
+      "finding": "Permutation p-values reported as 0.000999 = 1/(1000+1) floor, Bonferroni to 0.003996. With null_std 0.0 for URL case and null_mean 0.289 for a11y, p is resolution-limited not evidence of large effect. Bonferroni correction for 4 comparisons applied correctly per spec, but only one site (synthetic) tested; correction should be over actual tested sites.",
+      "evidence_ref": "result.json metrics a11y_perm_p_value 0.000999 a11y_perm_p_bonferroni 0.003996; raw_results_v2.json permutation_tests null_mean 0.289 effect_d 60.97; spec.json decision_rule 2 sites x2 conditions=4"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "url_only_baseline_trivial_zero",
+      "finding": "URL-only PMI baseline is ~0 (3.7e-05 v1, 6.8e-08 v2) because URL is constant across all 500 synthetic transitions. Recomputed gain = a11y - url = 0.97204 (v1) and 1.94771 (v2) equals a11y PMI exactly. Baseline is correctly computed but is a trivial null due to design, not a competitive location-based predictor as intended for genuine SPAs where URL varies. Does not test URL ambiguity hypothesis.",
+      "evidence_ref": "result.json metrics url_only_pmi_within_url 3.71e-05 a11y_pmi_within_url 0.97208 gain 0.97204; raw_results_v2.json pmi_results url_only_all 6.8e-08 a11y_only_all 1.94771; raw_results.json within_url_synthetic url_only_pmi 3.71e-05",
+      "supports_claim": false
+    },
+    {
+      "id": "a11y_only_baseline_synthetic_injected",
+      "finding": "A11y-only PMI 0.972 (v1) and 1.947 (v2) with permutation p=0.000999 significant. Recomputed from raw_results matches producer: mean PMI correct per compute_pmi_stats with Laplace alpha=1.0. However effect is injected via state-dependent action probabilities; not evidence that semantic accessibility structure captures web dynamics on real sites. Positive control synthetic SPA PMI 1.271 (result.json) vs 1.947 (v2) discrepancy shows pipeline sensitivity to transition matrix choice, not robustness.",
+      "evidence_ref": "result.json metrics a11y_pmi_within_url 0.97208 positive_control_a11y_pmi 1.27143; raw_results_v2.json pmi_results a11y_only_all 1.94771 permutation_tests a11y_only p 0.000999 null_mean 0.289; research/physics/a11y_tree/a11y_tree_experiment.py compute_pmi_stats",
+      "supports_claim": false
+    },
+    {
+      "id": "combined_baseline_equals_a11y",
+      "finding": "Combined URL+a11y PMI equals a11y-only (0.97208 v1, 1.94771 v2) because URL adds zero entropy. No incremental information, correctly reported, but also not a test of combination benefit on genuine sites where URL varies.",
+      "evidence_ref": "result.json metrics combined_pmi_within_url 0.97208 gain_combined_vs_url 0.97204 observations Combined PMI equals A11y-only; raw_results.json within_url_synthetic combined_pmi 0.97208; raw_results_v2.json combined_all 1.94771",
+      "supports_claim": false
+    },
+    {
+      "id": "real_site_baselines_contradict_synthetic",
+      "finding": "Real-site baselines contradict synthetic pattern: tally_form URL-only 0.0123 > a11y 0.0 (gain -0.012, a11y worse than URL), within-URL same; google_form both 0.0. Both have insufficient transitions and stalled automation. Null controls: tally p=0.233 passes but Google p=0.0049 fails (<0.01) indicating pipeline false positive on real shuffled data. No evidence a11y provides predictive information beyond URL on tested real sites; if anything, trend is opposite.",
+      "evidence_ref": "real_site_results_v2.json tally_form pmi_results url_only_all 0.012345 a11y_only_all 0.0 permutation_tests a11y_only p 0.993 within_url_a11y p 0.000999 null_mean 0.0; google_form_example pmi both 0.0 null_control permutation_p 0.004975 passes false",
+      "supports_claim": false
+    },
+    {
+      "id": "dom_baseline_missing",
+      "finding": "DOM structural features baseline omitted entirely; cannot assess whether a11y gain is specific to semantic representation or generic to any state representation with more entropy than constant URL. Parent found DOM PMI 0.597/0.745 but worse than URL; missing baseline here leaves comparison incomplete.",
+      "evidence_ref": "spec.json baselines DOM structural features; result.json metrics no dom_*; raw_results.json no dom; provenance.json",
+      "supports_claim": false
+    }
+  ],
+  "recomputed_metrics": {
+    "gain_within_url_bits_reported": 0.9720429365363956,
+    "gain_within_url_bits_recomputed_v1": 0.9720429365363956,
+    "gain_within_url_bits_v2": 1.947718111212728,
+    "a11y_pmi_within_url_v1": 0.9720800397258049,
+    "url_only_pmi_within_url_v1": 0.00003710318940933368,
+    "combined_pmi_within_url_v1": 0.9720800397258049,
+    "a11y_pmi_within_url_v2": 1.9477181792873015,
+    "url_only_pmi_within_url_v2": 6.80745736433261e-08,
+    "a11y_perm_p_value": 0.000999000999000999,
+    "a11y_perm_p_bonferroni": 0.003996003996003996,
+    "positive_control_a11y_pmi_v1": 1.2714393798518162,
+    "positive_control_perm_p": 0.000999000999000999,
+    "null_control_pmi_v1": 1.1240932213399104,
+    "null_control_perm_p_v1": 0.04895104895104895,
+    "null_control_shuffled_pmi_v2": 0.2731151738797946,
+    "null_control_perm_p_v2": 0.6666666666666666,
+    "unique_a11y_hashes_synthetic": 8,
+    "n_transitions_synthetic": 500,
+    "tally_form_url_pmi": 0.012345950742798132,
+    "tally_form_a11y_pmi": 0.0,
+    "tally_form_gain_within_url": -0.013227804367283713,
+    "tally_form_unique_a11y": 4,
+    "tally_form_n_transitions": 30,
+    "google_form_url_pmi": 0.0,
+    "google_form_a11y_pmi": 0.0,
+    "google_form_null_p": 0.004975124378109453,
+    "google_form_null_fails": true,
+    "recomputation_notes": "Recomputed gains as a11y_pmi - url_pmi match producer within 1e-12 (v1 0.9720800397 - 3.7e-05 = 0.9720429365, v2 1.947718179287 - 6.8e-08 = 1.9477181112). Verified against raw_results.json and raw_results_v2.json. Real-site gains computed from real_site_results_v2.json show negative/zero gain, null p floor 0.000999 is resolution limit N=1000. No train/test split to recompute out-of-sample PMI; no DOM baseline to recompute. Preservation of producer metric/control identifiers maintained without renaming."
+  },
+  "claim_ceiling": "No warranted claim that accessibility-tree structure provides predictive state information beyond URL on genuine SPA/form-heavy sites. Maximum justified ceiling: PMI pipeline verification on a controlled synthetic SPA where URL is artificially held constant: with 8 deterministic a11y states, 4 actions and injected state-dependent action probabilities, the pipeline detects the injected a11y->action dependency (a11y PMI 0.97 bits v1 / 1.95 bits v2 vs URL ~0, permutation p=0.001, Bonferroni 0.004, 500 transitions, 8 hashes, H(a11y|URL)=2.94 bits). This verifies pipeline sensitivity when structure is artificially injected and null permutation on v2 synthetic does not false-positive (p=0.666). Real-site data are MEASUREMENT_INVALID for the frozen question (N=30 <50, stalled automation, placeholder Google Form, a11y PMI <= URL PMI, and one null control fails). C-WEB-DYNAMICS remains UNTESTED for the accessibility-tree representation on genuine URL-ambiguous SPAs; does not support product change to store a11y hashes in operational knowledge graph.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-34629310987/request.json inherited_next_question parent_handoff EXP-PHYSICS-34524411213",
+    "research/experiments/EXP-PHYSICS-34629310987/spec.json claim_ids C-WEB-DYNAMICS question hypothesis falsifier baselines positive_control null_control measurement_validity decision_rule",
+    "research/experiments/EXP-PHYSICS-34629310987/prereg.md 5.1-5.4 site selection 6.1-6.4 data collection 7.1-7.4 state reps 8.1 within-URL gain 9.1-9.3 10.1-10.4 controls 12.1 decision rules",
+    "research/experiments/EXP-PHYSICS-34629310987/freeze.json",
+    "research/experiments/EXP-PHYSICS-34629310987/result.json schema_version outcome SUPPORTS metrics gain_within_url_bits 0.972 a11y_pmi 0.972 url_pmi 3.7e-05 controls validity_notes unresolved",
+    "research/experiments/EXP-PHYSICS-34629310987/report.md Outcome SUPPORTS Scope Limitations What This Does NOT Test synthetic only",
+    "research/experiments/EXP-PHYSICS-34629310987/provenance.json github_run_id null experiment_code_sha null data_sources synthetic_spa",
+    "research/experiments/EXP-PHYSICS-34629310987/raw_results.json within_url_synthetic url_only_pmi a11y_pmi gain decision_checks survives true",
+    "research/experiments/EXP-PHYSICS-34629310987/raw_results_v2.json synthetic pmi_results url 6.8e-08 a11y 1.947 decision_conditions survives true permutation_tests null_control",
+    "research/experiments/EXP-PHYSICS-34629310987/real_site_results_v2.json tally_form google_form_example n_transitions 30 pmi a11y 0.0 null_control permutation_p",
+    "research/experiments/EXP-PHYSICS-34629310987/full_experiment.log tally_form overlay ContentWrapper intercepts pointer events EPIPE Condition 4 false SURVIVES false url 0.0 a11y 1.947",
+    "research/physics/a11y_tree/a11y_tree_experiment.py STATE_ACTION_PROBS SYNTHETIC_TRANSITIONS generate_within_url_transitions compute_pmi_stats permutation_test run_positive_control run_null_control",
+    "research/physics/a11y_tree/a11y_tree_experiment_v2.py parse_aria_snapshot compute_a11y_hash run_synthetic_experiment null_control_permutation_test real_site_experiment",
+    "research/experiments/EXP-PHYSICS-34524411213/handoff.json carry_forward established rejected unknown do_not_assume TodoMVC degenerate",
+    "research/lanes/registry.json physics mission falsification-first operational definitions strong nulls"
+  ],
+  "unresolved": [
+    "Whether accessibility-tree hashes extracted via Playwright page.accessibility.snapshot() on genuine form-heavy SPAs with verified URL ambiguity (multi-step checkout/survey builder with history.pushState) provide >=0.1 bits gain over URL-only on within-URL transitions with proper 80/20 temporal split and TRAIN-only discretization.",
+    "Whether alternative semantic discretizations (tree-edit distance, embedding, filtered role/name/state tuples vs full tree) would be predictive where simple sorted-hash is not; failure of current hash does not close semantic-structure hypothesis.",
+    "Magnitude of in-sample optimism from missing train/test split and robustness to Laplace alpha 0.0-2.0 on both synthetic and real data.",
+    "Correct SPA-aware leakage classification impact on retained sample and whether tally_form stalled state (27 repeats) reflects true site stability or automation failure; need snapshotted aria dumps to disambiguate.",
+    "Why null control yields high PMI 1.124 bits on shuffled v1 data and why Google real-site null fails (p=0.0049) – pipeline leakage or smoothing artifact vs true false-positive rate.",
+    "Whether accessibility tree varies independently of URL with sufficient action diversity on genuine sites to meet entropy >0 and >=50 non-leakage transitions per site required for reliable PMI estimation."
+  ]
+}

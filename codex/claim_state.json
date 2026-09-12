@@ -137,6 +137,14 @@
         "claim_id": "C-WEB-DYNAMICS",
         "status": "HYPOTHESIS",
         "reason": "Falsified for DOM structural features (discretized element_count, tree_depth, interactive_density) as state representation on TodoMVC React/Vue degenerate demos: DOM-feature PMI is significantly >0 (p=0.001) but -0.073 and -0.006 bits worse than URL-only on the two sites tested. This specific structural representation does not improve predictive state beyond URL on these sites. However, the broader C-WEB-DYNAMICS hypothesis remains open: the experiment does not test production SPAs with richer DOM evolution, accessibility tree representations, visual layout, or learned state abstractions. Protocol violations (site representativeness, leakage misclassification, in-sample discretization) limit generalization; the hypothesis about DOM features on genuine production SPAs is untested, not rejected."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-34629310987",
+        "lane": "physics",
+        "decision": "MEASUREMENT_INVALID",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "Frozen question (accessibility-tree as predictive state beyond URL on genuine SPA/form-heavy sites) was not tested. All data is synthetic with artificially injected state-dependent action probabilities; URL held constant by construction makes URL-only PMI ~0, so any a11y variation yields tautological gain. Real-site attempts (tally_form N=30 < 50, stalled automation; google_form placeholder URL redirecting to login) fail data-sufficiency and site-selection requirements. The frozen decision rule requires genuine SPA sites with URL ambiguity (spec.json measurement_validity #1, prereg 5.1-5.4). Producer SUPPORTS outcome is based on infrastructure-failure fallback to synthetic data, not evidence for or against the stated hypothesis. C-WEB-DYNAMICS remains HYPOTHESIS. The PMI pipeline correctly detects injected structure on synthetic data (positive control PMI=1.271, null p=0.666 on v2), but this is pipeline verification, not hypothesis evidence."
       }
     ],
     "C-PARAM-INHERIT": [
@@ -315,6 +323,22 @@
         "claim_id": "C-PARAM-INHERIT",
         "status": "EXPERIMENTAL",
         "reason": "Bind-time slot-level prefix extraction resolves C2 double-prefix without regressions in frozen 10-condition synthetic harness. All conditions pass binding_accuracy=1.0, slot counts correct, null controls pass. This provides first evidence of mixed calling convention support (short and full values) at the kernel level. Evidence: audit.json recomputed_metrics (34/34 binding_correct, accuracy=1.0), raw_evidence.json all conditions, audit.json V4_CONTROLS (C2, B1-B5, D1-D3, E1/E2 independently verified). Claim does NOT advance to product-ready: audit.json claim_ceiling bounds to synthetic kernel correctness only; real-browser validation and end-to-end economics (C-PRODUCT-ECON) remain unmeasured."
+      },
+      {
+        "experiment_id": "EXP-PRODUCT-34485517221",
+        "lane": "product",
+        "decision": "FALSIFIED-IN-SETTING",
+        "claim_id": "C-PARAM-INHERIT",
+        "status": "EXPERIMENTAL",
+        "reason": "Claim remains EXPERIMENTAL with narrowed scope. Hypothesis that rfind('/') leaf-path URL-as-string prefix extraction generalizes to structurally different URL patterns is FALSIFIED-IN-SETTING in this experiment. Falsifier triggered: (1) G1 and G4 produce incorrect binding_accuracy=0.0 on unseen values (\u22652 conditions with wrong bound URLs), and (2) G4 fails to induce >1 slot (observed 1 vs expected 2). Three failure modes: suffix extraction corruption on query-string patterns where training values share trailing characters (G1: template 'search?q=${url}a'), architectural single-leaf limitation preventing multi-slot decomposition (G4: template 'users/${url}00'), and over-parameterization of structurally distinct URLs sharing short prefixes (N1: template 'https://api.${url}'). Bounded ceiling: SINGLE-SLOT synthetic correctness only for path-prefix/deep-path/multi-param-query/hybrid patterns where training values share no common suffix. V3_REPRESENTATION_LOSS from parent experiment is confirmed, not resolved. C-PARAM-INHERIT is not promoted and not killed; kernel fixes are required before re-evaluation."
+      },
+      {
+        "experiment_id": "EXP-PRODUCT-34642376433",
+        "lane": "product",
+        "decision": "FALSIFIED-IN-SETTING",
+        "claim_id": "C-PARAM-INHERIT",
+        "status": "EXPERIMENTAL",
+        "reason": "Two bounded fixes (suffix guard, delimiter-bound prefix validation) validated on target failure modes (G1 binding_accuracy=1.0, N1_ORIGINAL slot_count=0) with no regressions on P1/G2/G3/G5, all in standalone reimplementation. However, frozen decision_rule triggers FALSIFIED-IN-SETTING because N1_REDESIGNED null control fails (slot_count=1, URLs share 'https://' prefix ending at '/' delimiter \u2014 test case design flaw, not fix failure). Additionally: (1) Fix2 spec/implementation divergence (prereg next_char vs implementation last_char) is material and unresolved, (2) fixes not validated against actual src/spider/kernel.py distill_parameterized and _bind, (3) G4 multi-char suffix '00' not caught by single-char guard, (4) baselines B_UNFIXED and B_EXACT_MATCH not executed, (5) slot_prefixes empty for P1/G3/G5. Claim ceiling narrowed to: single-slot leaf-path parameterization with suffix guard and delimiter guard works for single-char coincidental suffix overlap and cross-host prefix rejection on deterministic synthetic data in reimplementation only."
       }
     ],
     "C-SEMANTIC-RESOLVE": [
@@ -475,6 +499,14 @@
         "claim_id": "C-PRODUCT-ECON",
         "status": "BLOCKED",
         "reason": "Product economics depend on fragment yield. The 0.0427 CDP yield would imply catastrophic fragment loss; the 0.38 locatable yield may be workable. Until denominator is resolved and yield is measured across site types, product economics cannot be assessed."
+      },
+      {
+        "experiment_id": "EXP-PRODUCT-34485517221",
+        "lane": "product",
+        "decision": "FALSIFIED-IN-SETTING",
+        "claim_id": "C-PRODUCT-ECON",
+        "status": "HYPOTHESIS",
+        "reason": "C-PRODUCT-ECON remains HYPOTHESIS. Economics measurement is blocked until kernel fixes address suffix corruption (G1), over-parameterization (N1), and the multi-slot limitation is resolved or documented (G4). Measuring economics on a mechanism that produces incorrect bindings for common URL patterns would yield invalid cost data. No advancement toward EXPERIMENTAL."
       }
     ],
     "C-MEAS-VALID": [
@@ -565,6 +597,14 @@
         "claim_id": "C-MEAS-VALID",
         "status": "EXPERIMENTAL",
         "reason": "C-MEAS-VALID remains EXPERIMENTAL with ceiling narrowed to /userinfo-only for WWW-Authenticate discrimination. This experiment falsifies transfer of WWW-Authenticate discrimination across Keycloak endpoints: 0/3 additional endpoints (/token password, /token client_credentials, /introspect) show WWW-Auth-only discrimination > 0. The measurement substrate is validated on /userinfo (positive control 0.833 == full vector, replicates parent), confirming the substrate works, but the mechanism is endpoint-specific resource-server behavior, not Keycloak-level. Body-only observation achieves discrimination on /introspect (0.5 via active field) but not on /token endpoints (Authorization header ignored). Full-vector product recommendation using WWW-Authenticate is bounded to /userinfo only. Does NOT extend to production Keycloak, CDN/load-balancer, other realms/clients, other Keycloak versions, cross-Python repr reproducibility, truly-expired Keycloak-issued tokens, or other IdPs."
+      },
+      {
+        "experiment_id": "EXP-RUNTIME-34509593940",
+        "lane": "runtime",
+        "decision": "SURVIVES_CURRENT_TEST",
+        "claim_id": "C-MEAS-VALID",
+        "status": "EXPERIMENTAL",
+        "reason": "Positive control passes (body-only 0.5 >= 0.35), null control passes (B-RANDOM 0.0), all 6 preregistered controls pass, audit PASS with all metrics recomputed. Measurement substrate is intervention-valid under the synthetic reverse-proxy model tested. Claim ceiling bounded by audit: does NOT extend to filtered full-vector, real CDN behavior, body non-determinism from compression, stacked infrastructure, or non-Keycloak providers. Body-only invariance is tautological by construction (headers excluded from fingerprint, proxy preserves bodies)."
       }
     ]
   }
