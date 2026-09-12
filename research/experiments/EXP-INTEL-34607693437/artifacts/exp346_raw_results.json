@@ -1,4205 +1,865 @@
-[
-  {
-    "task_idx": 0,
-    "url": "http://localhost:8080/cameras/15.html",
-    "label": "cameras",
-    "page_type": "detail",
-    "viewport_width": 1280,
-    "viewport_height": 720,
-    "total_cdp_elements": 2172,
-    "total_elements": 1204,
-    "viewport_elements": 108,
-    "locatable_elements": 348,
-    "yield_cdp": 0.049724,
-    "yield_locatable": 0.310345,
-    "yield_elements": 0.089701,
-    "method1_delta_pp": 5.47,
-    "heuristic_delta_pp": 33.97,
-    "viewport_sample": [
-      {
-        "tag": "header",
-        "role": "",
-        "id": "",
-        "classes": "page-header",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 16,
-          "w": 1264,
-          "h": 274
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "id": "",
-        "classes": "panel wrapper",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 16,
-          "w": 1264,
-          "h": 142
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "id": "",
-        "classes": "panel header",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 16,
-          "w": 1264,
-          "h": 142
-        }
-      },
-      {
-        "tag": "ul",
-        "role": "",
-        "id": "",
-        "classes": "header links",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 16,
-          "w": 1264,
-          "h": 108
-        }
-      },
-      {
-        "tag": "li",
-        "role": "",
-        "id": "",
-        "classes": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 16,
-          "w": 1224,
-          "h": 18
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "id0MPfftzF",
-        "classes": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 16,
-          "w": 80,
-          "h": 17
-        }
-      },
-      {
-        "tag": "li",
-        "role": "",
-        "id": "",
-        "classes": "link wishlist",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 34,
-          "w": 1224,
-          "h": 18
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "classes": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 34,
-          "w": 88,
-          "h": 17
-        }
-      },
-      {
-        "tag": "li",
-        "role": "",
-        "id": "",
-        "classes": "link authorization-link",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 52,
-          "w": 1224,
-          "h": 18
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "classes": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 52,
-          "w": 47,
-          "h": 17
-        }
-      },
-      {
-        "tag": "li",
-        "role": "",
-        "id": "",
-        "classes": "item link compare",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 70,
-          "w": 1224,
-          "h": 18
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "classes": "action compare no-display",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 70,
-          "w": 119,
-          "h": 17
-        }
-      },
-      {
-        "tag": "li",
-        "role": "",
-        "id": "",
-        "classes": "greet welcome",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 88,
-          "w": 1224,
-          "h": 18
-        }
-      },
-      {
-        "tag": "li",
-        "role": "",
-        "id": "",
-        "classes": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 106,
-          "w": 1224,
-          "h": 18
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "idFP2nNzad",
-        "classes": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 106,
-          "w": 118,
-          "h": 17
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "classes": "action skip contentarea",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 140,
-          "w": 100,
-          "h": 17
-        }
-      },
-      {
-        "tag": "span",
-        "role": "",
-        "id": "",
-        "classes": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 140,
-          "w": 100,
-          "h": 17
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "id": "",
-        "classes": "header content",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 158,
-          "w": 1264,
-          "h": 132
-        }
-      },
-      {
-        "tag": "span",
-        "role": "",
-        "id": "",
-        "classes": "action nav-toggle",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 158,
-          "w": 75,
-          "h": 17
-        }
-      },
-      {
-        "tag": "span",
-        "role": "",
-        "id": "",
-        "classes": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 158,
-          "w": 75,
-          "h": 17
-        }
-      }
+{
+  "experiment_id": "EXP-INTEL-34607693437",
+  "frozen_seed": 34607693437,
+  "timestamp": "2026-09-12T05:32:30.749926+00:00",
+  "frozen_definition": {
+    "type": "interactive_with_bbox",
+    "roles": [
+      "button",
+      "checkbox",
+      "combobox",
+      "link",
+      "listbox",
+      "menuitem",
+      "radio",
+      "searchbox",
+      "slider",
+      "spinbutton",
+      "switch",
+      "tab",
+      "textbox"
     ],
-    "locatable_sample": [
-      {
-        "tag": "a",
-        "role": "",
-        "id": "id0MPfftzF",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 16,
-          "w": 80,
-          "h": 17
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 34,
-          "w": 88,
-          "h": 17
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 52,
-          "w": 47,
-          "h": 17
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 70,
-          "w": 119,
-          "h": 17
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "idFP2nNzad",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 106,
-          "w": 118,
-          "h": 17
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 140,
-          "w": 100,
-          "h": 17
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "ariaLabel": "store logo",
-        "bbox": {
-          "x": 87,
-          "y": 158,
-          "w": 163,
-          "h": 17
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 176,
-          "w": 54,
-          "h": 17
-        }
-      },
-      {
-        "tag": "form",
-        "role": "",
-        "id": "search_mini_form",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 212,
-          "w": 1264,
-          "h": 78
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 212,
-          "w": 1264,
-          "h": 57
-        }
-      },
-      {
-        "tag": "label",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 212,
-          "w": 44,
-          "h": 17
-        }
-      },
-      {
-        "tag": "span",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 212,
-          "w": 44,
-          "h": 17
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 230,
-          "w": 1264,
-          "h": 39
-        }
-      },
-      {
-        "tag": "input",
-        "role": "combobox",
-        "id": "search",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 230,
-          "w": 185,
-          "h": 21
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 251,
-          "w": 1264,
-          "h": 18
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 251,
-          "w": 112,
-          "h": 17
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 269,
-          "w": 1264,
-          "h": 21
-        }
-      },
-      {
-        "tag": "button",
-        "role": "",
-        "id": "",
-        "ariaLabel": "Search",
-        "bbox": {
-          "x": 8,
-          "y": 269,
-          "w": 58,
-          "h": 21
-        }
-      },
-      {
-        "tag": "span",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 16,
-          "y": 272,
-          "w": 42,
-          "h": 15
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 290,
-          "w": 37,
-          "h": 17
-        }
-      }
-    ],
-    "raw_cdp_path": "/home/runner/work/Spider/Spider/research/experiments/EXP-INTEL-34607693437/artifacts/raw_cdp_tree_cameras.json",
-    "raw_cdp_sha256": "895cd489910994b068212cb74a311578fbfeb4eeaaa7598fd8dc49e0567a5b51",
-    "site_type": "shopping"
+    "viewport": {
+      "width": 1280,
+      "height": 720,
+      "threshold": 0.5
+    }
   },
-  {
-    "task_idx": 1,
-    "url": "http://localhost:8080/checkout/cart/",
-    "label": "cart",
-    "page_type": "cart",
-    "viewport_width": 1280,
-    "viewport_height": 720,
-    "total_cdp_elements": 2064,
-    "total_elements": 1136,
-    "viewport_elements": 108,
-    "locatable_elements": 338,
-    "yield_cdp": 0.052326,
-    "yield_locatable": 0.319527,
-    "yield_elements": 0.09507,
-    "method1_delta_pp": 4.55,
-    "heuristic_delta_pp": 33.05,
-    "viewport_sample": [
-      {
-        "tag": "header",
-        "role": "",
-        "id": "",
-        "classes": "page-header",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 16,
-          "w": 1264,
-          "h": 274
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "id": "",
-        "classes": "panel wrapper",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 16,
-          "w": 1264,
-          "h": 142
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "id": "",
-        "classes": "panel header",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 16,
-          "w": 1264,
-          "h": 142
-        }
-      },
-      {
-        "tag": "ul",
-        "role": "",
-        "id": "",
-        "classes": "header links",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 16,
-          "w": 1264,
-          "h": 108
-        }
-      },
-      {
-        "tag": "li",
-        "role": "",
-        "id": "",
-        "classes": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 16,
-          "w": 1224,
-          "h": 18
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "idQ9np15P6",
-        "classes": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 16,
-          "w": 80,
-          "h": 17
-        }
-      },
-      {
-        "tag": "li",
-        "role": "",
-        "id": "",
-        "classes": "link wishlist",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 34,
-          "w": 1224,
-          "h": 18
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "classes": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 34,
-          "w": 88,
-          "h": 17
-        }
-      },
-      {
-        "tag": "li",
-        "role": "",
-        "id": "",
-        "classes": "link authorization-link",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 52,
-          "w": 1224,
-          "h": 18
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "classes": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 52,
-          "w": 47,
-          "h": 17
-        }
-      },
-      {
-        "tag": "li",
-        "role": "",
-        "id": "",
-        "classes": "item link compare",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 70,
-          "w": 1224,
-          "h": 18
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "classes": "action compare no-display",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 70,
-          "w": 119,
-          "h": 17
-        }
-      },
-      {
-        "tag": "li",
-        "role": "",
-        "id": "",
-        "classes": "greet welcome",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 88,
-          "w": 1224,
-          "h": 18
-        }
-      },
-      {
-        "tag": "li",
-        "role": "",
-        "id": "",
-        "classes": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 106,
-          "w": 1224,
-          "h": 18
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "idSHHoQC9Y",
-        "classes": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 106,
-          "w": 118,
-          "h": 17
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "classes": "action skip contentarea",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 140,
-          "w": 100,
-          "h": 17
-        }
-      },
-      {
-        "tag": "span",
-        "role": "",
-        "id": "",
-        "classes": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 140,
-          "w": 100,
-          "h": 17
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "id": "",
-        "classes": "header content",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 158,
-          "w": 1264,
-          "h": 132
-        }
-      },
-      {
-        "tag": "span",
-        "role": "",
-        "id": "",
-        "classes": "action nav-toggle",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 158,
-          "w": 75,
-          "h": 17
-        }
-      },
-      {
-        "tag": "span",
-        "role": "",
-        "id": "",
-        "classes": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 158,
-          "w": 75,
-          "h": 17
-        }
-      }
-    ],
-    "locatable_sample": [
-      {
-        "tag": "a",
-        "role": "",
-        "id": "idQ9np15P6",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 16,
-          "w": 80,
-          "h": 17
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 34,
-          "w": 88,
-          "h": 17
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 52,
-          "w": 47,
-          "h": 17
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 70,
-          "w": 119,
-          "h": 17
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "idSHHoQC9Y",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 106,
-          "w": 118,
-          "h": 17
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 140,
-          "w": 100,
-          "h": 17
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "ariaLabel": "store logo",
-        "bbox": {
-          "x": 87,
-          "y": 158,
-          "w": 163,
-          "h": 17
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 176,
-          "w": 54,
-          "h": 17
-        }
-      },
-      {
-        "tag": "form",
-        "role": "",
-        "id": "search_mini_form",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 212,
-          "w": 1264,
-          "h": 78
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 212,
-          "w": 1264,
-          "h": 57
-        }
-      },
-      {
-        "tag": "label",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 212,
-          "w": 44,
-          "h": 17
-        }
-      },
-      {
-        "tag": "span",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 212,
-          "w": 44,
-          "h": 17
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 230,
-          "w": 1264,
-          "h": 39
-        }
-      },
-      {
-        "tag": "input",
-        "role": "combobox",
-        "id": "search",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 230,
-          "w": 185,
-          "h": 21
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 251,
-          "w": 1264,
-          "h": 18
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 251,
-          "w": 112,
-          "h": 17
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 269,
-          "w": 1264,
-          "h": 21
-        }
-      },
-      {
-        "tag": "button",
-        "role": "",
-        "id": "",
-        "ariaLabel": "Search",
-        "bbox": {
-          "x": 8,
-          "y": 269,
-          "w": 58,
-          "h": 21
-        }
-      },
-      {
-        "tag": "span",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 16,
-          "y": 272,
-          "w": 42,
-          "h": 15
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 290,
-          "w": 37,
-          "h": 17
-        }
-      }
-    ],
-    "raw_cdp_path": "/home/runner/work/Spider/Spider/research/experiments/EXP-INTEL-34607693437/artifacts/raw_cdp_tree_cart.json",
-    "raw_cdp_sha256": "81478efca7917266ec08ea3bb5dfcb95e565a0b6f7dc8153954c98e7ca03a0a6",
-    "site_type": "shopping"
-  },
-  {
-    "task_idx": 2,
-    "url": "http://localhost:8080/customer/account/login/",
-    "label": "login",
-    "page_type": "checkout",
-    "viewport_width": 1280,
-    "viewport_height": 720,
-    "total_cdp_elements": 2102,
-    "total_elements": 1169,
-    "viewport_elements": 108,
-    "locatable_elements": 360,
-    "yield_cdp": 0.05138,
-    "yield_locatable": 0.3,
-    "yield_elements": 0.092387,
-    "method1_delta_pp": 6.5,
-    "heuristic_delta_pp": 35.0,
-    "viewport_sample": [
-      {
-        "tag": "header",
-        "role": "",
-        "id": "",
-        "classes": "page-header",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 16,
-          "w": 1264,
-          "h": 274
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "id": "",
-        "classes": "panel wrapper",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 16,
-          "w": 1264,
-          "h": 142
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "id": "",
-        "classes": "panel header",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 16,
-          "w": 1264,
-          "h": 142
-        }
-      },
-      {
-        "tag": "ul",
-        "role": "",
-        "id": "",
-        "classes": "header links",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 16,
-          "w": 1264,
-          "h": 108
-        }
-      },
-      {
-        "tag": "li",
-        "role": "",
-        "id": "",
-        "classes": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 16,
-          "w": 1224,
-          "h": 18
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "idxs5ihiJ3",
-        "classes": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 16,
-          "w": 80,
-          "h": 17
-        }
-      },
-      {
-        "tag": "li",
-        "role": "",
-        "id": "",
-        "classes": "link wishlist",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 34,
-          "w": 1224,
-          "h": 18
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "classes": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 34,
-          "w": 88,
-          "h": 17
-        }
-      },
-      {
-        "tag": "li",
-        "role": "",
-        "id": "",
-        "classes": "link authorization-link",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 52,
-          "w": 1224,
-          "h": 18
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "classes": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 52,
-          "w": 47,
-          "h": 17
-        }
-      },
-      {
-        "tag": "li",
-        "role": "",
-        "id": "",
-        "classes": "item link compare",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 70,
-          "w": 1224,
-          "h": 18
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "classes": "action compare no-display",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 70,
-          "w": 119,
-          "h": 17
-        }
-      },
-      {
-        "tag": "li",
-        "role": "",
-        "id": "",
-        "classes": "greet welcome",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 88,
-          "w": 1224,
-          "h": 18
-        }
-      },
-      {
-        "tag": "li",
-        "role": "",
-        "id": "",
-        "classes": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 106,
-          "w": 1224,
-          "h": 18
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "idO2fbU6Dc",
-        "classes": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 106,
-          "w": 118,
-          "h": 17
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "classes": "action skip contentarea",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 140,
-          "w": 100,
-          "h": 17
-        }
-      },
-      {
-        "tag": "span",
-        "role": "",
-        "id": "",
-        "classes": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 140,
-          "w": 100,
-          "h": 17
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "id": "",
-        "classes": "header content",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 158,
-          "w": 1264,
-          "h": 132
-        }
-      },
-      {
-        "tag": "span",
-        "role": "",
-        "id": "",
-        "classes": "action nav-toggle",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 158,
-          "w": 75,
-          "h": 17
-        }
-      },
-      {
-        "tag": "span",
-        "role": "",
-        "id": "",
-        "classes": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 158,
-          "w": 75,
-          "h": 17
-        }
-      }
-    ],
-    "locatable_sample": [
-      {
-        "tag": "a",
-        "role": "",
-        "id": "idxs5ihiJ3",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 16,
-          "w": 80,
-          "h": 17
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 34,
-          "w": 88,
-          "h": 17
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 52,
-          "w": 47,
-          "h": 17
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 70,
-          "w": 119,
-          "h": 17
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "idO2fbU6Dc",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 106,
-          "w": 118,
-          "h": 17
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 140,
-          "w": 100,
-          "h": 17
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "ariaLabel": "store logo",
-        "bbox": {
-          "x": 87,
-          "y": 158,
-          "w": 163,
-          "h": 17
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 176,
-          "w": 54,
-          "h": 17
-        }
-      },
-      {
-        "tag": "form",
-        "role": "",
-        "id": "search_mini_form",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 212,
-          "w": 1264,
-          "h": 78
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 212,
-          "w": 1264,
-          "h": 57
-        }
-      },
-      {
-        "tag": "label",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 212,
-          "w": 44,
-          "h": 17
-        }
-      },
-      {
-        "tag": "span",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 212,
-          "w": 44,
-          "h": 17
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 230,
-          "w": 1264,
-          "h": 39
-        }
-      },
-      {
-        "tag": "input",
-        "role": "combobox",
-        "id": "search",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 230,
-          "w": 185,
-          "h": 21
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 251,
-          "w": 1264,
-          "h": 18
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 251,
-          "w": 112,
-          "h": 17
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 269,
-          "w": 1264,
-          "h": 21
-        }
-      },
-      {
-        "tag": "button",
-        "role": "",
-        "id": "",
-        "ariaLabel": "Search",
-        "bbox": {
-          "x": 8,
-          "y": 269,
-          "w": 58,
-          "h": 21
-        }
-      },
-      {
-        "tag": "span",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 16,
-          "y": 272,
-          "w": 42,
-          "h": 15
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 290,
-          "w": 37,
-          "h": 17
-        }
-      }
-    ],
-    "raw_cdp_path": "/home/runner/work/Spider/Spider/research/experiments/EXP-INTEL-34607693437/artifacts/raw_cdp_tree_login.json",
-    "raw_cdp_sha256": "d505f9039163947d0b3707a35febda31d572fea843b8d2ab8b690198db81ab39",
-    "site_type": "shopping"
-  },
-  {
-    "task_idx": 3,
-    "url": "http://localhost:8080/jewelry.html",
-    "label": "jewelry",
-    "page_type": "product-listing",
-    "viewport_width": 1280,
-    "viewport_height": 720,
-    "total_cdp_elements": 2172,
-    "total_elements": 1204,
-    "viewport_elements": 108,
-    "locatable_elements": 348,
-    "yield_cdp": 0.049724,
-    "yield_locatable": 0.310345,
-    "yield_elements": 0.089701,
-    "method1_delta_pp": 5.47,
-    "heuristic_delta_pp": 33.97,
-    "viewport_sample": [
-      {
-        "tag": "header",
-        "role": "",
-        "id": "",
-        "classes": "page-header",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 16,
-          "w": 1264,
-          "h": 274
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "id": "",
-        "classes": "panel wrapper",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 16,
-          "w": 1264,
-          "h": 142
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "id": "",
-        "classes": "panel header",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 16,
-          "w": 1264,
-          "h": 142
-        }
-      },
-      {
-        "tag": "ul",
-        "role": "",
-        "id": "",
-        "classes": "header links",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 16,
-          "w": 1264,
-          "h": 108
-        }
-      },
-      {
-        "tag": "li",
-        "role": "",
-        "id": "",
-        "classes": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 16,
-          "w": 1224,
-          "h": 18
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "id79rLF0t9",
-        "classes": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 16,
-          "w": 80,
-          "h": 17
-        }
-      },
-      {
-        "tag": "li",
-        "role": "",
-        "id": "",
-        "classes": "link wishlist",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 34,
-          "w": 1224,
-          "h": 18
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "classes": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 34,
-          "w": 88,
-          "h": 17
-        }
-      },
-      {
-        "tag": "li",
-        "role": "",
-        "id": "",
-        "classes": "link authorization-link",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 52,
-          "w": 1224,
-          "h": 18
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "classes": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 52,
-          "w": 47,
-          "h": 17
-        }
-      },
-      {
-        "tag": "li",
-        "role": "",
-        "id": "",
-        "classes": "item link compare",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 70,
-          "w": 1224,
-          "h": 18
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "classes": "action compare no-display",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 70,
-          "w": 119,
-          "h": 17
-        }
-      },
-      {
-        "tag": "li",
-        "role": "",
-        "id": "",
-        "classes": "greet welcome",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 88,
-          "w": 1224,
-          "h": 18
-        }
-      },
-      {
-        "tag": "li",
-        "role": "",
-        "id": "",
-        "classes": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 106,
-          "w": 1224,
-          "h": 18
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "idOqcoE8cg",
-        "classes": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 106,
-          "w": 118,
-          "h": 17
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "classes": "action skip contentarea",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 140,
-          "w": 100,
-          "h": 17
-        }
-      },
-      {
-        "tag": "span",
-        "role": "",
-        "id": "",
-        "classes": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 140,
-          "w": 100,
-          "h": 17
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "id": "",
-        "classes": "header content",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 158,
-          "w": 1264,
-          "h": 132
-        }
-      },
-      {
-        "tag": "span",
-        "role": "",
-        "id": "",
-        "classes": "action nav-toggle",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 158,
-          "w": 75,
-          "h": 17
-        }
-      },
-      {
-        "tag": "span",
-        "role": "",
-        "id": "",
-        "classes": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 158,
-          "w": 75,
-          "h": 17
-        }
-      }
-    ],
-    "locatable_sample": [
-      {
-        "tag": "a",
-        "role": "",
-        "id": "id79rLF0t9",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 16,
-          "w": 80,
-          "h": 17
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 34,
-          "w": 88,
-          "h": 17
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 52,
-          "w": 47,
-          "h": 17
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 70,
-          "w": 119,
-          "h": 17
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "idOqcoE8cg",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 106,
-          "w": 118,
-          "h": 17
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 140,
-          "w": 100,
-          "h": 17
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "ariaLabel": "store logo",
-        "bbox": {
-          "x": 87,
-          "y": 158,
-          "w": 163,
-          "h": 17
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 176,
-          "w": 54,
-          "h": 17
-        }
-      },
-      {
-        "tag": "form",
-        "role": "",
-        "id": "search_mini_form",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 212,
-          "w": 1264,
-          "h": 78
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 212,
-          "w": 1264,
-          "h": 57
-        }
-      },
-      {
-        "tag": "label",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 212,
-          "w": 44,
-          "h": 17
-        }
-      },
-      {
-        "tag": "span",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 212,
-          "w": 44,
-          "h": 17
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 230,
-          "w": 1264,
-          "h": 39
-        }
-      },
-      {
-        "tag": "input",
-        "role": "combobox",
-        "id": "search",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 230,
-          "w": 185,
-          "h": 21
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 251,
-          "w": 1264,
-          "h": 18
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 251,
-          "w": 112,
-          "h": 17
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 269,
-          "w": 1264,
-          "h": 21
-        }
-      },
-      {
-        "tag": "button",
-        "role": "",
-        "id": "",
-        "ariaLabel": "Search",
-        "bbox": {
-          "x": 8,
-          "y": 269,
-          "w": 58,
-          "h": 21
-        }
-      },
-      {
-        "tag": "span",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 16,
-          "y": 272,
-          "w": 42,
-          "h": 15
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 290,
-          "w": 37,
-          "h": 17
-        }
-      }
-    ],
-    "raw_cdp_path": "/home/runner/work/Spider/Spider/research/experiments/EXP-INTEL-34607693437/artifacts/raw_cdp_tree_jewelry.json",
-    "raw_cdp_sha256": "a937d663c5428a5eb5dc872c399314e1919e47231af89a023663917b7f775b5e",
-    "site_type": "shopping"
-  },
-  {
-    "task_idx": 4,
-    "url": "http://localhost:8080/books.html",
-    "label": "books",
-    "page_type": "product-listing",
-    "viewport_width": 1280,
-    "viewport_height": 720,
-    "total_cdp_elements": 2172,
-    "total_elements": 1204,
-    "viewport_elements": 108,
-    "locatable_elements": 348,
-    "yield_cdp": 0.049724,
-    "yield_locatable": 0.310345,
-    "yield_elements": 0.089701,
-    "method1_delta_pp": 5.47,
-    "heuristic_delta_pp": 33.97,
-    "viewport_sample": [
-      {
-        "tag": "header",
-        "role": "",
-        "id": "",
-        "classes": "page-header",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 16,
-          "w": 1264,
-          "h": 274
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "id": "",
-        "classes": "panel wrapper",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 16,
-          "w": 1264,
-          "h": 142
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "id": "",
-        "classes": "panel header",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 16,
-          "w": 1264,
-          "h": 142
-        }
-      },
-      {
-        "tag": "ul",
-        "role": "",
-        "id": "",
-        "classes": "header links",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 16,
-          "w": 1264,
-          "h": 108
-        }
-      },
-      {
-        "tag": "li",
-        "role": "",
-        "id": "",
-        "classes": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 16,
-          "w": 1224,
-          "h": 18
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "id3Qk2VCPH",
-        "classes": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 16,
-          "w": 80,
-          "h": 17
-        }
-      },
-      {
-        "tag": "li",
-        "role": "",
-        "id": "",
-        "classes": "link wishlist",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 34,
-          "w": 1224,
-          "h": 18
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "classes": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 34,
-          "w": 88,
-          "h": 17
-        }
-      },
-      {
-        "tag": "li",
-        "role": "",
-        "id": "",
-        "classes": "link authorization-link",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 52,
-          "w": 1224,
-          "h": 18
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "classes": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 52,
-          "w": 47,
-          "h": 17
-        }
-      },
-      {
-        "tag": "li",
-        "role": "",
-        "id": "",
-        "classes": "item link compare",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 70,
-          "w": 1224,
-          "h": 18
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "classes": "action compare no-display",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 70,
-          "w": 119,
-          "h": 17
-        }
-      },
-      {
-        "tag": "li",
-        "role": "",
-        "id": "",
-        "classes": "greet welcome",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 88,
-          "w": 1224,
-          "h": 18
-        }
-      },
-      {
-        "tag": "li",
-        "role": "",
-        "id": "",
-        "classes": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 106,
-          "w": 1224,
-          "h": 18
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "idg514KXcp",
-        "classes": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 106,
-          "w": 118,
-          "h": 17
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "classes": "action skip contentarea",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 140,
-          "w": 100,
-          "h": 17
-        }
-      },
-      {
-        "tag": "span",
-        "role": "",
-        "id": "",
-        "classes": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 140,
-          "w": 100,
-          "h": 17
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "id": "",
-        "classes": "header content",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 158,
-          "w": 1264,
-          "h": 132
-        }
-      },
-      {
-        "tag": "span",
-        "role": "",
-        "id": "",
-        "classes": "action nav-toggle",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 158,
-          "w": 75,
-          "h": 17
-        }
-      },
-      {
-        "tag": "span",
-        "role": "",
-        "id": "",
-        "classes": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 158,
-          "w": 75,
-          "h": 17
-        }
-      }
-    ],
-    "locatable_sample": [
-      {
-        "tag": "a",
-        "role": "",
-        "id": "id3Qk2VCPH",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 16,
-          "w": 80,
-          "h": 17
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 34,
-          "w": 88,
-          "h": 17
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 52,
-          "w": 47,
-          "h": 17
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 70,
-          "w": 119,
-          "h": 17
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "idg514KXcp",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 106,
-          "w": 118,
-          "h": 17
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 140,
-          "w": 100,
-          "h": 17
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "ariaLabel": "store logo",
-        "bbox": {
-          "x": 87,
-          "y": 158,
-          "w": 163,
-          "h": 17
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 176,
-          "w": 54,
-          "h": 17
-        }
-      },
-      {
-        "tag": "form",
-        "role": "",
-        "id": "search_mini_form",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 212,
-          "w": 1264,
-          "h": 78
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 212,
-          "w": 1264,
-          "h": 57
-        }
-      },
-      {
-        "tag": "label",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 212,
-          "w": 44,
-          "h": 17
-        }
-      },
-      {
-        "tag": "span",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 212,
-          "w": 44,
-          "h": 17
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 230,
-          "w": 1264,
-          "h": 39
-        }
-      },
-      {
-        "tag": "input",
-        "role": "combobox",
-        "id": "search",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 230,
-          "w": 185,
-          "h": 21
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 251,
-          "w": 1264,
-          "h": 18
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 251,
-          "w": 112,
-          "h": 17
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 269,
-          "w": 1264,
-          "h": 21
-        }
-      },
-      {
-        "tag": "button",
-        "role": "",
-        "id": "",
-        "ariaLabel": "Search",
-        "bbox": {
-          "x": 8,
-          "y": 269,
-          "w": 58,
-          "h": 21
-        }
-      },
-      {
-        "tag": "span",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 16,
-          "y": 272,
-          "w": 42,
-          "h": 15
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 290,
-          "w": 37,
-          "h": 17
-        }
-      }
-    ],
-    "raw_cdp_path": "/home/runner/work/Spider/Spider/research/experiments/EXP-INTEL-34607693437/artifacts/raw_cdp_tree_books.json",
-    "raw_cdp_sha256": "9c662a8ba7d2a2d1e5d0a7ff3f238a61b5e41241441bb2ff06854b09f62757b7",
-    "site_type": "shopping"
-  },
-  {
-    "task_idx": 5,
-    "url": "http://localhost:8080/headphones/17.html",
-    "label": "headphones",
-    "page_type": "detail",
-    "viewport_width": 1280,
-    "viewport_height": 720,
-    "total_cdp_elements": 2172,
-    "total_elements": 1204,
-    "viewport_elements": 108,
-    "locatable_elements": 348,
-    "yield_cdp": 0.049724,
-    "yield_locatable": 0.310345,
-    "yield_elements": 0.089701,
-    "method1_delta_pp": 5.47,
-    "heuristic_delta_pp": 33.97,
-    "viewport_sample": [
-      {
-        "tag": "header",
-        "role": "",
-        "id": "",
-        "classes": "page-header",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 16,
-          "w": 1264,
-          "h": 274
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "id": "",
-        "classes": "panel wrapper",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 16,
-          "w": 1264,
-          "h": 142
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "id": "",
-        "classes": "panel header",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 16,
-          "w": 1264,
-          "h": 142
-        }
-      },
-      {
-        "tag": "ul",
-        "role": "",
-        "id": "",
-        "classes": "header links",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 16,
-          "w": 1264,
-          "h": 108
-        }
-      },
-      {
-        "tag": "li",
-        "role": "",
-        "id": "",
-        "classes": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 16,
-          "w": 1224,
-          "h": 18
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "idTZ5z88iP",
-        "classes": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 16,
-          "w": 80,
-          "h": 17
-        }
-      },
-      {
-        "tag": "li",
-        "role": "",
-        "id": "",
-        "classes": "link wishlist",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 34,
-          "w": 1224,
-          "h": 18
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "classes": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 34,
-          "w": 88,
-          "h": 17
-        }
-      },
-      {
-        "tag": "li",
-        "role": "",
-        "id": "",
-        "classes": "link authorization-link",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 52,
-          "w": 1224,
-          "h": 18
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "classes": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 52,
-          "w": 47,
-          "h": 17
-        }
-      },
-      {
-        "tag": "li",
-        "role": "",
-        "id": "",
-        "classes": "item link compare",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 70,
-          "w": 1224,
-          "h": 18
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "classes": "action compare no-display",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 70,
-          "w": 119,
-          "h": 17
-        }
-      },
-      {
-        "tag": "li",
-        "role": "",
-        "id": "",
-        "classes": "greet welcome",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 88,
-          "w": 1224,
-          "h": 18
-        }
-      },
-      {
-        "tag": "li",
-        "role": "",
-        "id": "",
-        "classes": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 106,
-          "w": 1224,
-          "h": 18
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "idFjqhzCmt",
-        "classes": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 106,
-          "w": 118,
-          "h": 17
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "classes": "action skip contentarea",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 140,
-          "w": 100,
-          "h": 17
-        }
-      },
-      {
-        "tag": "span",
-        "role": "",
-        "id": "",
-        "classes": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 140,
-          "w": 100,
-          "h": 17
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "id": "",
-        "classes": "header content",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 158,
-          "w": 1264,
-          "h": 132
-        }
-      },
-      {
-        "tag": "span",
-        "role": "",
-        "id": "",
-        "classes": "action nav-toggle",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 158,
-          "w": 75,
-          "h": 17
-        }
-      },
-      {
-        "tag": "span",
-        "role": "",
-        "id": "",
-        "classes": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 158,
-          "w": 75,
-          "h": 17
-        }
-      }
-    ],
-    "locatable_sample": [
-      {
-        "tag": "a",
-        "role": "",
-        "id": "idTZ5z88iP",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 16,
-          "w": 80,
-          "h": 17
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 34,
-          "w": 88,
-          "h": 17
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 52,
-          "w": 47,
-          "h": 17
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 70,
-          "w": 119,
-          "h": 17
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "idFjqhzCmt",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 106,
-          "w": 118,
-          "h": 17
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 140,
-          "w": 100,
-          "h": 17
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "ariaLabel": "store logo",
-        "bbox": {
-          "x": 87,
-          "y": 158,
-          "w": 163,
-          "h": 17
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 176,
-          "w": 54,
-          "h": 17
-        }
-      },
-      {
-        "tag": "form",
-        "role": "",
-        "id": "search_mini_form",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 212,
-          "w": 1264,
-          "h": 78
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 212,
-          "w": 1264,
-          "h": 57
-        }
-      },
-      {
-        "tag": "label",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 212,
-          "w": 44,
-          "h": 17
-        }
-      },
-      {
-        "tag": "span",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 212,
-          "w": 44,
-          "h": 17
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 230,
-          "w": 1264,
-          "h": 39
-        }
-      },
-      {
-        "tag": "input",
-        "role": "combobox",
-        "id": "search",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 230,
-          "w": 185,
-          "h": 21
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 251,
-          "w": 1264,
-          "h": 18
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 251,
-          "w": 112,
-          "h": 17
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 269,
-          "w": 1264,
-          "h": 21
-        }
-      },
-      {
-        "tag": "button",
-        "role": "",
-        "id": "",
-        "ariaLabel": "Search",
-        "bbox": {
-          "x": 8,
-          "y": 269,
-          "w": 58,
-          "h": 21
-        }
-      },
-      {
-        "tag": "span",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 16,
-          "y": 272,
-          "w": 42,
-          "h": 15
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 290,
-          "w": 37,
-          "h": 17
-        }
-      }
-    ],
-    "raw_cdp_path": "/home/runner/work/Spider/Spider/research/experiments/EXP-INTEL-34607693437/artifacts/raw_cdp_tree_headphones.json",
-    "raw_cdp_sha256": "1e6cb631cdea303e8833f75146410060125c0beb927d0ecab90c4d5ee98e2fdf",
-    "site_type": "shopping"
-  },
-  {
-    "task_idx": 6,
-    "url": "http://localhost:8080/catalogsearch/result/?q=phone",
-    "label": "search-phone",
-    "page_type": "checkout",
-    "viewport_width": 1280,
-    "viewport_height": 720,
-    "total_cdp_elements": 2814,
-    "total_elements": 1721,
-    "viewport_elements": 108,
-    "locatable_elements": 458,
-    "yield_cdp": 0.03838,
-    "yield_locatable": 0.235808,
-    "yield_elements": 0.062754,
-    "method1_delta_pp": 12.92,
-    "heuristic_delta_pp": 41.42,
-    "viewport_sample": [
-      {
-        "tag": "header",
-        "role": "",
-        "id": "",
-        "classes": "page-header",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 16,
-          "w": 1264,
-          "h": 274
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "id": "",
-        "classes": "panel wrapper",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 16,
-          "w": 1264,
-          "h": 142
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "id": "",
-        "classes": "panel header",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 16,
-          "w": 1264,
-          "h": 142
-        }
-      },
-      {
-        "tag": "ul",
-        "role": "",
-        "id": "",
-        "classes": "header links",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 16,
-          "w": 1264,
-          "h": 108
-        }
-      },
-      {
-        "tag": "li",
-        "role": "",
-        "id": "",
-        "classes": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 16,
-          "w": 1224,
-          "h": 18
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "idDzImPkg2",
-        "classes": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 16,
-          "w": 80,
-          "h": 17
-        }
-      },
-      {
-        "tag": "li",
-        "role": "",
-        "id": "",
-        "classes": "link wishlist",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 34,
-          "w": 1224,
-          "h": 18
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "classes": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 34,
-          "w": 88,
-          "h": 17
-        }
-      },
-      {
-        "tag": "li",
-        "role": "",
-        "id": "",
-        "classes": "link authorization-link",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 52,
-          "w": 1224,
-          "h": 18
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "classes": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 52,
-          "w": 47,
-          "h": 17
-        }
-      },
-      {
-        "tag": "li",
-        "role": "",
-        "id": "",
-        "classes": "item link compare",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 70,
-          "w": 1224,
-          "h": 18
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "classes": "action compare no-display",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 70,
-          "w": 119,
-          "h": 17
-        }
-      },
-      {
-        "tag": "li",
-        "role": "",
-        "id": "",
-        "classes": "greet welcome",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 88,
-          "w": 1224,
-          "h": 18
-        }
-      },
-      {
-        "tag": "li",
-        "role": "",
-        "id": "",
-        "classes": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 106,
-          "w": 1224,
-          "h": 18
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "idOOD0gVbu",
-        "classes": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 106,
-          "w": 118,
-          "h": 17
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "classes": "action skip contentarea",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 140,
-          "w": 100,
-          "h": 17
-        }
-      },
-      {
-        "tag": "span",
-        "role": "",
-        "id": "",
-        "classes": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 140,
-          "w": 100,
-          "h": 17
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "id": "",
-        "classes": "header content",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 158,
-          "w": 1264,
-          "h": 132
-        }
-      },
-      {
-        "tag": "span",
-        "role": "",
-        "id": "",
-        "classes": "action nav-toggle",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 158,
-          "w": 75,
-          "h": 17
-        }
-      },
-      {
-        "tag": "span",
-        "role": "",
-        "id": "",
-        "classes": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 158,
-          "w": 75,
-          "h": 17
-        }
-      }
-    ],
-    "locatable_sample": [
-      {
-        "tag": "a",
-        "role": "",
-        "id": "idDzImPkg2",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 16,
-          "w": 80,
-          "h": 17
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 34,
-          "w": 88,
-          "h": 17
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 52,
-          "w": 47,
-          "h": 17
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 70,
-          "w": 119,
-          "h": 17
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "idOOD0gVbu",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 48,
-          "y": 106,
-          "w": 118,
-          "h": 17
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 140,
-          "w": 100,
-          "h": 17
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "ariaLabel": "store logo",
-        "bbox": {
-          "x": 87,
-          "y": 158,
-          "w": 163,
-          "h": 17
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 176,
-          "w": 54,
-          "h": 17
-        }
-      },
-      {
-        "tag": "form",
-        "role": "",
-        "id": "search_mini_form",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 212,
-          "w": 1264,
-          "h": 78
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 212,
-          "w": 1264,
-          "h": 57
-        }
-      },
-      {
-        "tag": "label",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 212,
-          "w": 44,
-          "h": 17
-        }
-      },
-      {
-        "tag": "span",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 212,
-          "w": 44,
-          "h": 17
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 230,
-          "w": 1264,
-          "h": 39
-        }
-      },
-      {
-        "tag": "input",
-        "role": "combobox",
-        "id": "search",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 230,
-          "w": 185,
-          "h": 21
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 251,
-          "w": 1264,
-          "h": 18
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 251,
-          "w": 112,
-          "h": 17
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 269,
-          "w": 1264,
-          "h": 21
-        }
-      },
-      {
-        "tag": "button",
-        "role": "",
-        "id": "",
-        "ariaLabel": "Search",
-        "bbox": {
-          "x": 8,
-          "y": 269,
-          "w": 58,
-          "h": 21
-        }
-      },
-      {
-        "tag": "span",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 16,
-          "y": 272,
-          "w": 42,
-          "h": 15
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "id": "",
-        "ariaLabel": "",
-        "bbox": {
-          "x": 8,
-          "y": 290,
-          "w": 37,
-          "h": 17
-        }
-      }
-    ],
-    "raw_cdp_path": "/home/runner/work/Spider/Spider/research/experiments/EXP-INTEL-34607693437/artifacts/raw_cdp_tree_search-phone.json",
-    "raw_cdp_sha256": "dc74f2f281cef29977e376988bf4d8f3a5604586950156366c8aeb416539d81f",
-    "site_type": "shopping"
-  },
-  {
-    "task_idx": 7,
-    "url": "http://localhost:8888/users/sign_in",
-    "label": "gitlab-login",
-    "page_type": "gitlab",
-    "site_type": "gitlab",
-    "total_cdp_elements": 80,
-    "total_elements": 95,
-    "viewport_elements": 42,
-    "locatable_elements": 22,
-    "yield_cdp": 0.525,
-    "yield_locatable": 1.909091,
-    "viewport_sample": [
-      {
-        "tag": "html",
-        "role": "",
-        "bbox": {
-          "x": 0,
-          "y": 0,
-          "w": 1280,
-          "h": 720
-        }
-      },
-      {
-        "tag": "body",
-        "role": "",
-        "bbox": {
-          "x": 0,
-          "y": 48,
-          "w": 1280,
-          "h": 709
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "bbox": {
-          "x": 0,
-          "y": 48,
-          "w": 1280,
-          "h": 709
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "bbox": {
-          "x": 160,
-          "y": 48,
-          "w": 960,
-          "h": 550
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "bbox": {
-          "x": 175,
-          "y": 48,
-          "w": 930,
-          "h": 469
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "bbox": {
-          "x": 175,
-          "y": 56,
-          "w": 930,
-          "h": 65
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "bbox": {
-          "x": 175,
-          "y": 129,
-          "w": 930,
-          "h": 97
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "bbox": {
-          "x": 175,
-          "y": 129,
-          "w": 930,
-          "h": 97
-        }
-      },
-      {
-        "tag": "img",
-        "role": "",
-        "bbox": {
-          "x": 612,
-          "y": 129,
-          "w": 56,
-          "h": 54
-        }
-      },
-      {
-        "tag": "h1",
-        "role": "",
-        "bbox": {
-          "x": 190,
-          "y": 203,
-          "w": 900,
-          "h": 23
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "bbox": {
-          "x": 175,
-          "y": 242,
-          "w": 930,
-          "h": 276
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "bbox": {
-          "x": 408,
-          "y": 242,
-          "w": 465,
-          "h": 276
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "bbox": {
-          "x": 408,
-          "y": 242,
-          "w": 465,
-          "h": 276
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "bbox": {
-          "x": 408,
-          "y": 242,
-          "w": 465,
-          "h": 248
-        }
-      },
-      {
-        "tag": "div",
-        "role": "tabpanel",
-        "bbox": {
-          "x": 408,
-          "y": 242,
-          "w": 465,
-          "h": 248
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "bbox": {
-          "x": 408,
-          "y": 242,
-          "w": 465,
-          "h": 248
-        }
-      },
-      {
-        "tag": "form",
-        "role": "",
-        "bbox": {
-          "x": 408,
-          "y": 242,
-          "w": 465,
-          "h": 248
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "bbox": {
-          "x": 408,
-          "y": 242,
-          "w": 465,
-          "h": 72
-        }
-      },
-      {
-        "tag": "label",
-        "role": "",
-        "bbox": {
-          "x": 424,
-          "y": 258,
-          "w": 116,
-          "h": 20
-        }
-      },
-      {
-        "tag": "input",
-        "role": "",
-        "bbox": {
-          "x": 424,
-          "y": 279,
-          "w": 433,
-          "h": 34
-        }
-      }
-    ]
-  },
-  {
-    "task_idx": 8,
-    "url": "http://localhost:9999/",
-    "label": "reddit-home",
-    "page_type": "reddit",
-    "site_type": "reddit",
-    "total_cdp_elements": 94,
-    "total_elements": 122,
-    "viewport_elements": 57,
-    "locatable_elements": 19,
-    "yield_cdp": 0.606383,
-    "yield_locatable": 3.0,
-    "viewport_sample": [
-      {
-        "tag": "html",
-        "role": "",
-        "bbox": {
-          "x": 0,
-          "y": 0,
-          "w": 1280,
-          "h": 720
-        }
-      },
-      {
-        "tag": "body",
-        "role": "",
-        "bbox": {
-          "x": 0,
-          "y": 0,
-          "w": 1280,
-          "h": 720
-        }
-      },
-      {
-        "tag": "nav",
-        "role": "",
-        "bbox": {
-          "x": 0,
-          "y": 0,
-          "w": 1280,
-          "h": 52
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "bbox": {
-          "x": 90,
-          "y": 0,
-          "w": 1100,
-          "h": 52
-        }
-      },
-      {
-        "tag": "header",
-        "role": "",
-        "bbox": {
-          "x": 104,
-          "y": 0,
-          "w": 90,
-          "h": 52
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "bbox": {
-          "x": 104,
-          "y": 0,
-          "w": 90,
-          "h": 52
-        }
-      },
-      {
-        "tag": "b",
-        "role": "",
-        "bbox": {
-          "x": 120,
-          "y": 16,
-          "w": 58,
-          "h": 19
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "bbox": {
-          "x": 194,
-          "y": 0,
-          "w": 148,
-          "h": 52
-        }
-      },
-      {
-        "tag": "ul",
-        "role": "",
-        "bbox": {
-          "x": 194,
-          "y": 0,
-          "w": 148,
-          "h": 52
-        }
-      },
-      {
-        "tag": "li",
-        "role": "",
-        "bbox": {
-          "x": 194,
-          "y": 0,
-          "w": 86,
-          "h": 52
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "bbox": {
-          "x": 194,
-          "y": 0,
-          "w": 86,
-          "h": 52
-        }
-      },
-      {
-        "tag": "li",
-        "role": "",
-        "bbox": {
-          "x": 280,
-          "y": 0,
-          "w": 62,
-          "h": 52
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "bbox": {
-          "x": 280,
-          "y": 0,
-          "w": 62,
-          "h": 52
-        }
-      },
-      {
-        "tag": "form",
-        "role": "",
-        "bbox": {
-          "x": 560,
-          "y": 0,
-          "w": 236,
-          "h": 52
-        }
-      },
-      {
-        "tag": "div",
-        "role": "",
-        "bbox": {
-          "x": 567,
-          "y": 8,
-          "w": 222,
-          "h": 37
-        }
-      },
-      {
-        "tag": "label",
-        "role": "",
-        "bbox": {
-          "x": 567,
-          "y": 8,
-          "w": 37,
-          "h": 37
-        }
-      },
-      {
-        "tag": "span",
-        "role": "",
-        "bbox": {
-          "x": 579,
-          "y": 18,
-          "w": 14,
-          "h": 16
-        }
-      },
-      {
-        "tag": "svg",
-        "role": "",
-        "bbox": {
-          "x": 579,
-          "y": 17,
-          "w": 14,
-          "h": 14
-        }
-      },
-      {
-        "tag": "use",
-        "role": "",
-        "bbox": {
-          "x": 579,
-          "y": 17,
-          "w": 13,
-          "h": 13
-        }
-      },
-      {
-        "tag": "input",
-        "role": "",
-        "bbox": {
-          "x": 567,
-          "y": 8,
-          "w": 222,
-          "h": 37
-        }
-      }
-    ]
-  },
-  {
-    "task_idx": 9,
-    "url": "http://localhost:9999/f/random",
-    "label": "reddit-random-sub",
-    "page_type": "reddit",
-    "site_type": "reddit",
-    "total_cdp_elements": 14,
-    "total_elements": 13,
-    "viewport_elements": 9,
-    "locatable_elements": 1,
-    "yield_cdp": 0.642857,
-    "yield_locatable": 9.0,
-    "viewport_sample": [
-      {
-        "tag": "html",
-        "role": "",
-        "bbox": {
-          "x": 0,
-          "y": 0,
-          "w": 1280,
-          "h": 294
-        }
-      },
-      {
-        "tag": "body",
-        "role": "",
-        "bbox": {
-          "x": 32,
-          "y": 32,
-          "w": 1216,
-          "h": 230
-        }
-      },
-      {
-        "tag": "header",
-        "role": "",
-        "bbox": {
-          "x": 32,
-          "y": 32,
-          "w": 1216,
-          "h": 190
-        }
-      },
-      {
-        "tag": "p",
-        "role": "",
-        "bbox": {
-          "x": 32,
-          "y": 32,
-          "w": 1216,
-          "h": 132
-        }
-      },
-      {
-        "tag": "img",
-        "role": "",
-        "bbox": {
-          "x": 576,
-          "y": 32,
-          "w": 128,
-          "h": 128
-        }
-      },
-      {
-        "tag": "h1",
-        "role": "",
-        "bbox": {
-          "x": 32,
-          "y": 185,
-          "w": 1216,
-          "h": 37
-        }
-      },
-      {
-        "tag": "nav",
-        "role": "",
-        "bbox": {
-          "x": 32,
-          "y": 244,
-          "w": 1216,
-          "h": 18
-        }
-      },
-      {
-        "tag": "p",
-        "role": "",
-        "bbox": {
-          "x": 32,
-          "y": 244,
-          "w": 1216,
-          "h": 18
-        }
-      },
-      {
-        "tag": "a",
-        "role": "",
-        "bbox": {
-          "x": 578,
-          "y": 244,
-          "w": 124,
-          "h": 17
-        }
-      }
-    ]
-  }
-]
+  "measurements": [
+    {
+      "task_id": "shop_listing_006",
+      "url": "http://localhost:8080/beauty-personal-care/hair-care.html",
+      "site_type": "shopping",
+      "page_type": "product_listing",
+      "timestamp": "2026-09-12T05:32:01.631864+00:00",
+      "error": null,
+      "status_code": 200,
+      "page_title": "Hair Care - Beauty & Personal Care",
+      "total_cdp_elements": 458,
+      "locatable_elements": 33,
+      "viewport_elements": 8,
+      "viewport_sample": [
+        {
+          "role": "link",
+          "name": "\n        Compare Products        \n    ",
+          "bbox": {
+            "x": 48,
+            "y": 70,
+            "width": 118.65625,
+            "height": 17
+          },
+          "tag": "A",
+          "class": "action compare no-display"
+        },
+        {
+          "role": "link",
+          "name": "\n    \n        Skip to Content    \n",
+          "bbox": {
+            "x": 8,
+            "y": 140,
+            "width": 100.453125,
+            "height": 17
+          },
+          "tag": "A",
+          "class": "action skip contentarea"
+        },
+        {
+          "role": "link",
+          "name": "\n    \n",
+          "bbox": {
+            "x": 86.859375,
+            "y": 158,
+            "width": 162.640625,
+            "height": 17
+          },
+          "tag": "A",
+          "class": "logo"
+        },
+        {
+          "role": "link",
+          "name": "\n        My Cart\n        \n            \n                \n                \n                \n          ",
+          "bbox": {
+            "x": 8,
+            "y": 176,
+            "width": 53.78125,
+            "height": 17
+          },
+          "tag": "A",
+          "class": "action showcart"
+        },
+        {
+          "role": "form",
+          "name": "\n                        \n                \n                    Search\n                \n             ",
+          "bbox": {
+            "x": 8,
+            "y": 212,
+            "width": 1264,
+            "height": 78
+          },
+          "tag": "FORM",
+          "class": "form minisearch"
+        },
+        {
+          "role": "combobox",
+          "name": "",
+          "bbox": {
+            "x": 8,
+            "y": 230,
+            "width": 185,
+            "height": 21
+          },
+          "tag": "INPUT",
+          "class": "input-text"
+        },
+        {
+          "role": "link",
+          "name": "\n        Advanced Search    ",
+          "bbox": {
+            "x": 8,
+            "y": 251,
+            "width": 112.390625,
+            "height": 17
+          },
+          "tag": "A",
+          "class": "action advanced"
+        },
+        {
+          "role": "button",
+          "name": "\n                    Search\n                ",
+          "bbox": {
+            "x": 8,
+            "y": 269,
+            "width": 58.234375,
+            "height": 21
+          },
+          "tag": "BUTTON",
+          "class": "action search"
+        }
+      ],
+      "raw_ax_tree_path": "/home/runner/work/Spider/Spider/research/experiments/EXP-INTEL-34607693437/artifacts/raw_ax_tree_shop_listing_006_initial.json",
+      "raw_ax_tree_sha256": "d5ec8ce061e66d0eb9222e3b1fee99311f9982f03d5613168e3b654b59dbb748",
+      "viewport_sample_path": "/home/runner/work/Spider/Spider/research/experiments/EXP-INTEL-34607693437/artifacts/viewport_sample_shop_listing_006.json",
+      "yield_cdp": 0.017467248908296942,
+      "yield_locatable": 0.24242424242424243,
+      "method1_yield": 0.365,
+      "method1_delta_pp": 12.257575757575756,
+      "method1_within_15pp": true,
+      "cdp_baseline_yield": 0.0426,
+      "cdp_delta_pp": 2.513275109170306
+    },
+    {
+      "task_id": "shop_listing_004",
+      "url": "http://localhost:8080/clothing.html",
+      "site_type": "shopping",
+      "page_type": "product_listing",
+      "timestamp": "2026-09-12T05:32:12.327649+00:00",
+      "error": null,
+      "status_code": 404,
+      "page_title": "404 Not Found",
+      "total_cdp_elements": 400,
+      "locatable_elements": 21,
+      "viewport_elements": 8,
+      "viewport_sample": [
+        {
+          "role": "link",
+          "name": "\n        Compare Products        \n    ",
+          "bbox": {
+            "x": 48,
+            "y": 70,
+            "width": 118.65625,
+            "height": 17
+          },
+          "tag": "A",
+          "class": "action compare no-display"
+        },
+        {
+          "role": "link",
+          "name": "\n    \n        Skip to Content    \n",
+          "bbox": {
+            "x": 8,
+            "y": 140,
+            "width": 100.453125,
+            "height": 17
+          },
+          "tag": "A",
+          "class": "action skip contentarea"
+        },
+        {
+          "role": "link",
+          "name": "\n    \n",
+          "bbox": {
+            "x": 86.859375,
+            "y": 158,
+            "width": 162.640625,
+            "height": 17
+          },
+          "tag": "A",
+          "class": "logo"
+        },
+        {
+          "role": "link",
+          "name": "\n        My Cart\n        \n            \n                \n                \n                \n          ",
+          "bbox": {
+            "x": 8,
+            "y": 176,
+            "width": 53.78125,
+            "height": 17
+          },
+          "tag": "A",
+          "class": "action showcart"
+        },
+        {
+          "role": "form",
+          "name": "\n                        \n                \n                    Search\n                \n             ",
+          "bbox": {
+            "x": 8,
+            "y": 212,
+            "width": 1264,
+            "height": 78
+          },
+          "tag": "FORM",
+          "class": "form minisearch"
+        },
+        {
+          "role": "combobox",
+          "name": "",
+          "bbox": {
+            "x": 8,
+            "y": 230,
+            "width": 185,
+            "height": 21
+          },
+          "tag": "INPUT",
+          "class": "input-text"
+        },
+        {
+          "role": "link",
+          "name": "\n        Advanced Search    ",
+          "bbox": {
+            "x": 8,
+            "y": 251,
+            "width": 112.390625,
+            "height": 17
+          },
+          "tag": "A",
+          "class": "action advanced"
+        },
+        {
+          "role": "button",
+          "name": "\n                    Search\n                ",
+          "bbox": {
+            "x": 8,
+            "y": 269,
+            "width": 58.234375,
+            "height": 21
+          },
+          "tag": "BUTTON",
+          "class": "action search"
+        }
+      ],
+      "raw_ax_tree_path": "/home/runner/work/Spider/Spider/research/experiments/EXP-INTEL-34607693437/artifacts/raw_ax_tree_shop_listing_004_initial.json",
+      "raw_ax_tree_sha256": "711ab588c86eda65bd7825fedbe83a461f86e24b99c07b911b74744b609dd174",
+      "viewport_sample_path": "/home/runner/work/Spider/Spider/research/experiments/EXP-INTEL-34607693437/artifacts/viewport_sample_shop_listing_004.json",
+      "yield_cdp": 0.02,
+      "yield_locatable": 0.38095238095238093,
+      "method1_yield": 0.365,
+      "method1_delta_pp": 1.595238095238094,
+      "method1_within_15pp": true,
+      "cdp_baseline_yield": 0.0426,
+      "cdp_delta_pp": 2.26
+    },
+    {
+      "task_id": "shop_detail_002",
+      "url": "http://localhost:8080/beauty-personal-care/makeup/eyes.html",
+      "site_type": "shopping",
+      "page_type": "product_detail",
+      "timestamp": "2026-09-12T05:32:15.517755+00:00",
+      "error": null,
+      "status_code": 200,
+      "page_title": "Eyes - Makeup - Beauty & Personal Care",
+      "total_cdp_elements": 463,
+      "locatable_elements": 33,
+      "viewport_elements": 8,
+      "viewport_sample": [
+        {
+          "role": "link",
+          "name": "\n        Compare Products        \n    ",
+          "bbox": {
+            "x": 48,
+            "y": 70,
+            "width": 118.65625,
+            "height": 17
+          },
+          "tag": "A",
+          "class": "action compare no-display"
+        },
+        {
+          "role": "link",
+          "name": "\n    \n        Skip to Content    \n",
+          "bbox": {
+            "x": 8,
+            "y": 140,
+            "width": 100.453125,
+            "height": 17
+          },
+          "tag": "A",
+          "class": "action skip contentarea"
+        },
+        {
+          "role": "link",
+          "name": "\n    \n",
+          "bbox": {
+            "x": 86.859375,
+            "y": 158,
+            "width": 162.640625,
+            "height": 17
+          },
+          "tag": "A",
+          "class": "logo"
+        },
+        {
+          "role": "link",
+          "name": "\n        My Cart\n        \n            \n                \n                \n                \n          ",
+          "bbox": {
+            "x": 8,
+            "y": 176,
+            "width": 53.78125,
+            "height": 17
+          },
+          "tag": "A",
+          "class": "action showcart"
+        },
+        {
+          "role": "form",
+          "name": "\n                        \n                \n                    Search\n                \n             ",
+          "bbox": {
+            "x": 8,
+            "y": 212,
+            "width": 1264,
+            "height": 78
+          },
+          "tag": "FORM",
+          "class": "form minisearch"
+        },
+        {
+          "role": "combobox",
+          "name": "",
+          "bbox": {
+            "x": 8,
+            "y": 230,
+            "width": 185,
+            "height": 21
+          },
+          "tag": "INPUT",
+          "class": "input-text"
+        },
+        {
+          "role": "link",
+          "name": "\n        Advanced Search    ",
+          "bbox": {
+            "x": 8,
+            "y": 251,
+            "width": 112.390625,
+            "height": 17
+          },
+          "tag": "A",
+          "class": "action advanced"
+        },
+        {
+          "role": "button",
+          "name": "\n                    Search\n                ",
+          "bbox": {
+            "x": 8,
+            "y": 269,
+            "width": 58.234375,
+            "height": 21
+          },
+          "tag": "BUTTON",
+          "class": "action search"
+        }
+      ],
+      "raw_ax_tree_path": "/home/runner/work/Spider/Spider/research/experiments/EXP-INTEL-34607693437/artifacts/raw_ax_tree_shop_detail_002_initial.json",
+      "raw_ax_tree_sha256": "32f43db77ad44a17387bcfd069c2948ecbacd8d19690e60b02db2eca541a33e5",
+      "viewport_sample_path": "/home/runner/work/Spider/Spider/research/experiments/EXP-INTEL-34607693437/artifacts/viewport_sample_shop_detail_002.json",
+      "yield_cdp": 0.017278617710583154,
+      "yield_locatable": 0.24242424242424243,
+      "method1_yield": 0.365,
+      "method1_delta_pp": 12.257575757575756,
+      "method1_within_15pp": true,
+      "cdp_baseline_yield": 0.0426,
+      "cdp_delta_pp": 2.5321382289416845
+    },
+    {
+      "task_id": "shop_detail_001",
+      "url": "http://localhost:8080/beauty-personal-care/hair-care/shampoo-conditioner.html",
+      "site_type": "shopping",
+      "page_type": "product_detail",
+      "timestamp": "2026-09-12T05:32:18.984960+00:00",
+      "error": null,
+      "status_code": 200,
+      "page_title": "Shampoo & Conditioner - Hair Care - Beauty & Personal Care",
+      "total_cdp_elements": 463,
+      "locatable_elements": 33,
+      "viewport_elements": 8,
+      "viewport_sample": [
+        {
+          "role": "link",
+          "name": "\n        Compare Products        \n    ",
+          "bbox": {
+            "x": 48,
+            "y": 70,
+            "width": 118.65625,
+            "height": 17
+          },
+          "tag": "A",
+          "class": "action compare no-display"
+        },
+        {
+          "role": "link",
+          "name": "\n    \n        Skip to Content    \n",
+          "bbox": {
+            "x": 8,
+            "y": 140,
+            "width": 100.453125,
+            "height": 17
+          },
+          "tag": "A",
+          "class": "action skip contentarea"
+        },
+        {
+          "role": "link",
+          "name": "\n    \n",
+          "bbox": {
+            "x": 86.859375,
+            "y": 158,
+            "width": 162.640625,
+            "height": 17
+          },
+          "tag": "A",
+          "class": "logo"
+        },
+        {
+          "role": "link",
+          "name": "\n        My Cart\n        \n            \n                \n                \n                \n          ",
+          "bbox": {
+            "x": 8,
+            "y": 176,
+            "width": 53.78125,
+            "height": 17
+          },
+          "tag": "A",
+          "class": "action showcart"
+        },
+        {
+          "role": "form",
+          "name": "\n                        \n                \n                    Search\n                \n             ",
+          "bbox": {
+            "x": 8,
+            "y": 212,
+            "width": 1264,
+            "height": 78
+          },
+          "tag": "FORM",
+          "class": "form minisearch"
+        },
+        {
+          "role": "combobox",
+          "name": "",
+          "bbox": {
+            "x": 8,
+            "y": 230,
+            "width": 185,
+            "height": 21
+          },
+          "tag": "INPUT",
+          "class": "input-text"
+        },
+        {
+          "role": "link",
+          "name": "\n        Advanced Search    ",
+          "bbox": {
+            "x": 8,
+            "y": 251,
+            "width": 112.390625,
+            "height": 17
+          },
+          "tag": "A",
+          "class": "action advanced"
+        },
+        {
+          "role": "button",
+          "name": "\n                    Search\n                ",
+          "bbox": {
+            "x": 8,
+            "y": 269,
+            "width": 58.234375,
+            "height": 21
+          },
+          "tag": "BUTTON",
+          "class": "action search"
+        }
+      ],
+      "raw_ax_tree_path": "/home/runner/work/Spider/Spider/research/experiments/EXP-INTEL-34607693437/artifacts/raw_ax_tree_shop_detail_001_initial.json",
+      "raw_ax_tree_sha256": "d06af170a952c914b4f4bc8de28782beb02d420c068700cde654de24cf80c36e",
+      "viewport_sample_path": "/home/runner/work/Spider/Spider/research/experiments/EXP-INTEL-34607693437/artifacts/viewport_sample_shop_detail_001.json",
+      "yield_cdp": 0.017278617710583154,
+      "yield_locatable": 0.24242424242424243,
+      "method1_yield": 0.365,
+      "method1_delta_pp": 12.257575757575756,
+      "method1_within_15pp": true,
+      "cdp_baseline_yield": 0.0426,
+      "cdp_delta_pp": 2.5321382289416845
+    },
+    {
+      "task_id": "shop_cart_001",
+      "url": "http://localhost:8080/checkout/cart/",
+      "site_type": "shopping",
+      "page_type": "cart",
+      "timestamp": "2026-09-12T05:32:22.022879+00:00",
+      "error": null,
+      "status_code": 200,
+      "page_title": "Shopping Cart",
+      "total_cdp_elements": 370,
+      "locatable_elements": 14,
+      "viewport_elements": 8,
+      "viewport_sample": [
+        {
+          "role": "link",
+          "name": "\n        Compare Products        \n    ",
+          "bbox": {
+            "x": 48,
+            "y": 70,
+            "width": 118.65625,
+            "height": 17
+          },
+          "tag": "A",
+          "class": "action compare no-display"
+        },
+        {
+          "role": "link",
+          "name": "\n    \n        Skip to Content    \n",
+          "bbox": {
+            "x": 8,
+            "y": 140,
+            "width": 100.453125,
+            "height": 17
+          },
+          "tag": "A",
+          "class": "action skip contentarea"
+        },
+        {
+          "role": "link",
+          "name": "\n    \n",
+          "bbox": {
+            "x": 86.859375,
+            "y": 158,
+            "width": 162.640625,
+            "height": 17
+          },
+          "tag": "A",
+          "class": "logo"
+        },
+        {
+          "role": "link",
+          "name": "\n        My Cart\n        \n            \n                \n                \n                \n          ",
+          "bbox": {
+            "x": 8,
+            "y": 176,
+            "width": 53.78125,
+            "height": 17
+          },
+          "tag": "A",
+          "class": "action showcart"
+        },
+        {
+          "role": "form",
+          "name": "\n                        \n                \n                    Search\n                \n             ",
+          "bbox": {
+            "x": 8,
+            "y": 212,
+            "width": 1264,
+            "height": 78
+          },
+          "tag": "FORM",
+          "class": "form minisearch"
+        },
+        {
+          "role": "combobox",
+          "name": "",
+          "bbox": {
+            "x": 8,
+            "y": 230,
+            "width": 185,
+            "height": 21
+          },
+          "tag": "INPUT",
+          "class": "input-text"
+        },
+        {
+          "role": "link",
+          "name": "\n        Advanced Search    ",
+          "bbox": {
+            "x": 8,
+            "y": 251,
+            "width": 112.390625,
+            "height": 17
+          },
+          "tag": "A",
+          "class": "action advanced"
+        },
+        {
+          "role": "button",
+          "name": "\n                    Search\n                ",
+          "bbox": {
+            "x": 8,
+            "y": 269,
+            "width": 58.234375,
+            "height": 21
+          },
+          "tag": "BUTTON",
+          "class": "action search"
+        }
+      ],
+      "raw_ax_tree_path": "/home/runner/work/Spider/Spider/research/experiments/EXP-INTEL-34607693437/artifacts/raw_ax_tree_shop_cart_001_initial.json",
+      "raw_ax_tree_sha256": "91e09a4a7356473ce66a5780616f825b02cc80651f0f9e548636574298a09158",
+      "viewport_sample_path": "/home/runner/work/Spider/Spider/research/experiments/EXP-INTEL-34607693437/artifacts/viewport_sample_shop_cart_001.json",
+      "yield_cdp": 0.021621621621621623,
+      "yield_locatable": 0.5714285714285714,
+      "method1_yield": 0.365,
+      "method1_delta_pp": 20.64285714285714,
+      "method1_within_15pp": false,
+      "cdp_baseline_yield": 0.0426,
+      "cdp_delta_pp": 2.0978378378378375
+    },
+    {
+      "task_id": "gitlab_001",
+      "url": "http://localhost:8081/",
+      "site_type": "gitlab",
+      "page_type": "home",
+      "timestamp": "2026-09-12T05:32:25.120739+00:00",
+      "error": null,
+      "status_code": 200,
+      "page_title": "Sign in \u00b7 GitLab",
+      "total_cdp_elements": 37,
+      "locatable_elements": 7,
+      "viewport_elements": 7,
+      "viewport_sample": [
+        {
+          "role": "form",
+          "name": "\nUsername or email\n\nThis field is required.\n\n\nPassword\nThis field is required.\n\n\n\n\n\nRemember me\n\n\n\n\n",
+          "bbox": {
+            "x": 407.5,
+            "y": 241.546875,
+            "width": 465,
+            "height": 248
+          },
+          "tag": "FORM",
+          "class": "new_user gl-show-field-errors js-arkose-labs-form"
+        },
+        {
+          "role": "textbox",
+          "name": "",
+          "bbox": {
+            "x": 423.5,
+            "y": 279.046875,
+            "width": 433,
+            "height": 34
+          },
+          "tag": "INPUT",
+          "class": "form-control gl-form-input top js-username-field"
+        },
+        {
+          "role": "textbox",
+          "name": "",
+          "bbox": {
+            "x": 423.5,
+            "y": 350.546875,
+            "width": 433,
+            "height": 34
+          },
+          "tag": "INPUT",
+          "class": "form-control gl-form-input bottom"
+        },
+        {
+          "role": "textbox",
+          "name": "",
+          "bbox": {
+            "x": 423.5,
+            "y": 401.546875,
+            "width": 16,
+            "height": 20
+          },
+          "tag": "INPUT",
+          "class": "custom-control-input"
+        },
+        {
+          "role": "link",
+          "name": "About GitLab",
+          "bbox": {
+            "x": 288.28125,
+            "y": 682,
+            "width": 81.734375,
+            "height": 16
+          },
+          "tag": "A",
+          "class": ""
+        },
+        {
+          "role": "button",
+          "name": "Sign in",
+          "bbox": {
+            "x": 423.5,
+            "y": 441.546875,
+            "width": 433,
+            "height": 32
+          },
+          "tag": "BUTTON",
+          "class": "gl-button btn btn-block btn-confirm js-sign-in-but"
+        },
+        {
+          "role": "link",
+          "name": "Community forum",
+          "bbox": {
+            "x": 388.90625,
+            "y": 682,
+            "width": 110.46875,
+            "height": 16
+          },
+          "tag": "A",
+          "class": "text-nowrap"
+        }
+      ],
+      "raw_ax_tree_path": "/home/runner/work/Spider/Spider/research/experiments/EXP-INTEL-34607693437/artifacts/raw_ax_tree_gitlab_001_initial.json",
+      "raw_ax_tree_sha256": "a6003c6cf8484210de3b2439e4d720ee54541909622b7ab761542512e8487b23",
+      "viewport_sample_path": "/home/runner/work/Spider/Spider/research/experiments/EXP-INTEL-34607693437/artifacts/viewport_sample_gitlab_001.json",
+      "yield_cdp": 0.1891891891891892,
+      "yield_locatable": 1.0,
+      "method1_yield": 0.365,
+      "method1_delta_pp": 63.5,
+      "method1_within_15pp": false,
+      "cdp_baseline_yield": 0.0426,
+      "cdp_delta_pp": 14.65891891891892
+    },
+    {
+      "task_id": "reddit_001",
+      "url": "http://localhost:8082/",
+      "site_type": "reddit",
+      "page_type": "home",
+      "timestamp": "2026-09-12T05:32:27.941179+00:00",
+      "error": null,
+      "status_code": 200,
+      "page_title": "Postmill",
+      "total_cdp_elements": 40,
+      "locatable_elements": 9,
+      "viewport_elements": 8,
+      "viewport_sample": [
+        {
+          "role": "link",
+          "name": "\n      \n      Postmill\n    ",
+          "bbox": {
+            "x": 104,
+            "y": 0,
+            "width": 90,
+            "height": 52
+          },
+          "tag": "A",
+          "class": "site-nav__link site-nav__link--active"
+        },
+        {
+          "role": "link",
+          "name": "Sign up",
+          "bbox": {
+            "x": 1090,
+            "y": 0,
+            "width": 86,
+            "height": 52
+          },
+          "tag": "A",
+          "class": "site-nav__link "
+        },
+        {
+          "role": "form",
+          "name": "\n    \n\n    \n      \n        \n      \n      \n    \n  ",
+          "bbox": {
+            "x": 560,
+            "y": 0,
+            "width": 236,
+            "height": 52
+          },
+          "tag": "FORM",
+          "class": "site-nav__mobile-hidden site-nav__search dropdown "
+        },
+        {
+          "role": "textbox",
+          "name": "",
+          "bbox": {
+            "x": 567,
+            "y": 7.5,
+            "width": 222,
+            "height": 37
+          },
+          "tag": "INPUT",
+          "class": "form-control site-nav__search-input"
+        },
+        {
+          "role": "link",
+          "name": "Submissions",
+          "bbox": {
+            "x": 104,
+            "y": 80,
+            "width": 100,
+            "height": 35
+          },
+          "tag": "A",
+          "class": "tab tab--active"
+        },
+        {
+          "role": "link",
+          "name": "Comments",
+          "bbox": {
+            "x": 204,
+            "y": 80,
+            "width": 89,
+            "height": 35
+          },
+          "tag": "A",
+          "class": "tab "
+        },
+        {
+          "role": "button",
+          "name": "\n    \n    Hot\n    \n  ",
+          "bbox": {
+            "x": 412,
+            "y": 80,
+            "width": 72,
+            "height": 35
+          },
+          "tag": "BUTTON",
+          "class": "dropdown__toggle tab no-underline unbuttonize"
+        },
+        {
+          "role": "link",
+          "name": "Postmill",
+          "bbox": {
+            "x": 640.5,
+            "y": 690,
+            "width": 42,
+            "height": 13
+          },
+          "tag": "A",
+          "class": ""
+        }
+      ],
+      "raw_ax_tree_path": "/home/runner/work/Spider/Spider/research/experiments/EXP-INTEL-34607693437/artifacts/raw_ax_tree_reddit_001_initial.json",
+      "raw_ax_tree_sha256": "42c145767b5c48e9b0cd98712ebf8e58d740e0b8604a4206723d177773b0e4c0",
+      "viewport_sample_path": "/home/runner/work/Spider/Spider/research/experiments/EXP-INTEL-34607693437/artifacts/viewport_sample_reddit_001.json",
+      "yield_cdp": 0.2,
+      "yield_locatable": 0.8888888888888888,
+      "method1_yield": 0.365,
+      "method1_delta_pp": 52.388888888888886,
+      "method1_within_15pp": false,
+      "cdp_baseline_yield": 0.0426,
+      "cdp_delta_pp": 15.740000000000002
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "experiment_id": "EXP-INTEL-34607693437",
+  "analysis_type": "forensic",
+  "source_file": "research/experiments/EXP-INTEL-33945226776/analysis_output.json",
+  "target_value": "method1_element_count.shopping.page_types.product_listing.estimated_elements = 150",
+  "trace_result": "INCONCLUSIVE",
+  "trace_details": {
+    "method": "analysis_output.json contains method1_element_count.shopping.page_types with estimated_elements values for 6 page types: product_listing=150, product_detail=120, cart=60, search=160, reviews=80, account_orders=50. All values are round numbers. estimated_chars = estimated_elements * 65 (fixed multiplier). The yield model uses multiplicative factors: truncation_yield, viewport_yield, pruning_yield. combined_yield = 0.84 * 0.45 * 0.88 = 0.333 for product_listing.",
+    "finding": "The 150-element estimate is a pre-computed heuristic INPUT to the yield model, not an OUTPUT of any element-counting algorithm. There is no code in analysis_output.json that traverses a DOM or accessibility tree to produce the number 150. The number was manually assigned by the analyst as a rough estimate of discrete content units on a product listing page.",
+    "element_definition": "UNKNOWN - the estimated_elements field does not specify what constitutes an 'element'. It could be: (a) all visible DOM elements, (b) interactive elements only, (c) content blocks, (d) any other grouping. The round numbers (150, 120, 60) suggest judgment-based estimates, not algorithmic counts.",
+    "mapping_to_candidates": {
+      "definition_1_all_elements_with_bbox": "POSSIBLE but unlikely - 150 is too low for all visible elements on a product listing page (parent measured 1392-1571)",
+      "definition_2_interactive_only": "PLAUSIBLE - 150 interactive elements is reasonable for a product listing with ~20 products * 5-8 interactive elements each",
+      "definition_3_parent_css_selectors": "PLAUSIBLE - parent measured 258 under CSS selectors, but this is a different Docker image version"
+    },
+    "conclusion": "The forensic analysis cannot resolve which candidate definition Method1's 150 maps to. The estimate is a heuristic input, not a measurement output. Definition resolution requires either: (a) finding the original derivation code (not available in the repository), or (b) using the functional fallback definition."
+  },
+  "fallback_activated": true,
+  "fallback_reason": "Forensic analysis inconclusive - cannot trace 150 to a specific counting method",
+  "fallback_definition": {
+    "text": "Elements with non-null bounding box (width > 0 AND height > 0) AND (role is one of: button, link, textbox, checkbox, radio, combobox, listbox, menuitem, tab, slider, spinbutton, searchbox, switch OR has onclick/onsubmit handler OR is within a form element OR has aria-label or aria-describedby with non-empty text)",
+    "candidate_mapping": "Definition 2 (interactive-only)",
+    "expected_yield_range": "0.25-0.40 (from parent experiment: ~0.32 under interactive-only)",
+    "rationale": "This captures 'interactive elements that an agent can use for inheritance' - the functional purpose of the SPIDER fragment model. It is the most defensible definition when the original derivation is ambiguous."
+  },
+  "timestamp": "2026-09-12T05:30:00+00:00"
+}
