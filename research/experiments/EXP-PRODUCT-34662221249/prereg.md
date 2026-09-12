@@ -121,11 +121,12 @@ slot_prefixes: dict[str, str] = field(default_factory=dict)
 | G3 | deep-path | https://api.example.com/orgs/acme/repos/main/issues/{1,2,3} | 4,5,6 | 1 | 1.0 |
 | G5 | path+query | https://api.example.com/users/{alice,bob,charlie}/items?page=1 | dave,eve,frank | 1 | 1.0 |
 
-### 6.2 Null Control
+### 6.2 Null Controls
 
 | ID | Type | Training URLs | Unseen | Expected slot_count |
 |----|------|--------------|--------|--------------------|
 | N1_ORIGINAL | fix2_target | https://api.{example,other,third}.com/{a,b,c} | x,y,z | 0 |
+| N1_CORRECTED | truly_disjoint | http://a.com/x, ftp://b.org/y, custom://c.net/z | x2,y2,z2 | 0 |
 
 ### 6.3 Baselines
 
@@ -168,14 +169,15 @@ If ALL of:
 4. G3 slot_count=1 AND binding_accuracy=1.0
 5. G5 slot_count=1 AND binding_accuracy=1.0
 6. N1_ORIGINAL slot_count=0
-7. B_LITERAL fail_rate=1.0
-8. No import/syntax errors in patched kernel.py
+7. N1_CORRECTED slot_count=0
+8. B_LITERAL fail_rate=1.0
+9. No import/syntax errors in patched kernel.py
 
 ### 8.2 MIXED
 If Fix1 or Fix2 works partially (at least one of G1 or N1_ORIGINAL passes) but no regressions on P1/G2/G3/G5.
 
 ### 8.3 FALSIFIED-IN-SETTING
-If any established condition (P1/G2/G3/G5) drops below binding_accuracy=1.0 (regression), OR both G1 and N1_ORIGINAL fail.
+If any established condition (P1/G2/G3/G5) drops below binding_accuracy=1.0 (regression), OR both G1 and N1_ORIGINAL fail, OR N1_CORRECTED slot_count > 0 (delimiter guard incorrectly parameterizes truly disjoint URLs).
 
 ### 8.4 MEASUREMENT_INVALID
 If patches cause import/syntax errors preventing kernel.py from loading.
@@ -204,6 +206,7 @@ Fix2 does not enforce minimum prefix length. Protocol-only prefixes like 'http' 
 
 ### 10.1 SURVIVES_CURRENT_TEST
 - Fixes validated against actual kernel.py
+- N1_ORIGINAL and N1_CORRECTED null controls both pass (slot_count=0)
 - C-PARAM-INHERIT claim ceiling advances to 'kernel-validated synthetic'
 - C-PRODUCT-ECON unblocked for next measurement
 - Clears V3 audit gap from EXP-PRODUCT-34642376433
