@@ -737,6 +737,32 @@
         "handoff.json": "f7e8d8e37d3fa48c33a23a40cf5b6c7de0f6016fb804cc4aa809d0ea4f492486"
       }
     },
+    "EXP-INTEL-34607693437": {
+      "lane": "intel",
+      "request_id": "fc12583614c0a9b6fc1b8808",
+      "created_at": "2026-09-11T14:01:48.329160+00:00",
+      "claim_ids": [
+        "C-CROSSSITE",
+        "C-LLM-INHERIT"
+      ],
+      "question": "What is the canonical definition of 'locatable elements' for SPIDER fragment yield, and does yield_locatable stabilize across randomized shopping page types (including checkout) under that frozen definition?",
+      "audit_status": "MEASUREMENT_INVALID",
+      "decision": "MEASUREMENT_INVALID",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/intel",
+      "hashes": {
+        "request.json": "98f667a8beaa87cb0386c9ec51228ecf21ddeeac39ed6c6878c4d3a710e816d0",
+        "spec.json": "4a626f67bd594c96f0cc657d922e76c2c27e89df8c4efab088096fd3b0e3876a",
+        "prereg.md": "bc030f4a69b31b8f89a44552997d6b3e7358cd870e1f07ed3603dba68d5afb09",
+        "freeze.json": "4c693afb1c312baf4e8457e49b69aeffd8eea7f43eff54410e5cbd0e096d7bba",
+        "result.json": "9934abd50347750c8387b951203a3492ded961bf512271ae530d5d63929dd0d3",
+        "report.md": "0406707e81bbc30ac12f6c43f3db8c99d1d2a6847c74a9ccb8f6fcd89da79509",
+        "provenance.json": "df23d06c55058d116836e30768252b950d68d17552e48979c00c8f94e2a5ec7b",
+        "audit.json": "e7ef1196cd19a44f6dbc5dbe018da398a9d866970a69f66d8afdb2f732b9cac2",
+        "verdict.json": "4d628206300c75990ae1122061b50b12bcda5be2aab5d44c4001a6a97da6adcf",
+        "handoff.json": "4b53b6ef5ae2e7dd11588ec6000e51eaf0fcc935e52e3aee26715eb62b73a417"
+      }
+    },
     "EXP-PHYSICS-33528829431": {
       "lane": "physics",
       "request_id": "aefb271e5c3274224c9651fe",

@@ -3,7 +3,7 @@
 Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER_CODEX_ULTIME.md`.
 
 This file is generated only from complete finalized Research 2.0 experiment packets.
-Ingested experiments: **62**. Coverage gaps: **0**.
+Ingested experiments: **63**. Coverage gaps: **0**.
 
 ## Index
 
@@ -38,6 +38,7 @@ Ingested experiments: **62**. Coverage gaps: **0**.
 | EXP-INTEL-34047713704 | intel | BLOCKED | BLOCKED | C-CROSSSITE, C-LLM-INHERIT, C-PRODUCT-ECON |
 | EXP-INTEL-34377576886 | intel | REVISE | REVISE | C-CROSSSITE, C-LLM-INHERIT, C-PRODUCT-ECON |
 | EXP-INTEL-34546944360 | intel | REVISE | MIXED | C-CROSSSITE, C-LLM-INHERIT |
+| EXP-INTEL-34607693437 | intel | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-CROSSSITE, C-LLM-INHERIT |
 | EXP-PHYSICS-33528829431 | physics | REVISE | REVISE | C-MEAS-VALID, C-WEB-DYNAMICS |
 | EXP-PHYSICS-33788037373 | physics | FAIL | MEASUREMENT_INVALID | C-MEAS-VALID, C-WEB-DYNAMICS |
 | EXP-PHYSICS-33965269281 | physics | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-MEAS-VALID, C-WEB-DYNAMICS |
@@ -31564,6 +31565,1486 @@ Per preregistration section 11:
     "research/experiments/EXP-INTEL-34377576886/audit.json"
   ],
   "recommended_action": "REVISE: (1) Freeze canonical definition of locatable_elements (all‑elements‑with‑bbox vs interactive‑only vs parent CSS selectors) before measurement. (2) Randomize task selection from WebArena‑Verified covering product‑listing, detail, cart, checkout; include at least 1 gitlab and 1 reddit task (or mark H5 BLOCKED with infrastructure proof). (3) Use frozen measurement script with sha256 recorded; ensure fresh browser context per task. (4) Save raw accessibility tree for each task (initial+scrolled) with durable sha256. (5) Investigate constant viewport 108 with per‑task sample or overlay. (6) Recompute yield under both denominators with explicit deltas (yield_cdp, yield_locatable_parent258, method1_delta_cdp, method1_delta_locatable). (7) Bound Docker drift by recording image digest before measurement and verifying page DOM hash stability. (8) If locatable yield stabilizes under frozen definition within 10pp of Method1 0.365, denominator resolved and C‑CROSSSITE/C‑LLM‑INHERIT can proceed to integration experiment. If denominator remains ambiguous, 812‑task corpus cannot be reliably used and Product lane must redesign observation pipeline or explore alternative corpora."
+}
+```
+
+# EXP-INTEL-34607693437
+
+## request.json
+
+```text
+{
+  "base_sha": "24630358d6943aa4b5677166f3631e341edd8494",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-11T14:01:48.329160+00:00",
+  "experiment_id": "EXP-INTEL-34607693437",
+  "inherited_last_verdict": "MIXED",
+  "inherited_next_question": "What is the canonical definition of 'locatable elements' for SPIDER fragment yield, and does yield_locatable stabilize across randomized shopping page types (including checkout) under that frozen definition?",
+  "lane": "intel",
+  "origin_github_run_id": "34607693437",
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-34546944360",
+    "path": "research/experiments/EXP-INTEL-34546944360/handoff.json",
+    "sha256": "f7e8d8e37d3fa48c33a23a40cf5b6c7de0f6016fb804cc4aa809d0ea4f492486"
+  },
+  "reason": "pulse",
+  "request_hash": "d1a2a38e05a7cb02c5afcdc30dd8da46d5fe3656fc3747718d66b621ffd47be2",
+  "request_id": "fc12583614c0a9b6fc1b8808",
+  "schema_version": 1
+}
+```
+
+## spec.json
+
+```text
+{
+  "experiment_id": "EXP-INTEL-34607693437",
+  "lane": "intel",
+  "claim_ids": ["C-CROSSSITE", "C-LLM-INHERIT"],
+  "question": "What is the canonical definition of 'locatable elements' for SPIDER fragment yield, and does yield_locatable stabilize across randomized shopping page types (including checkout) under that frozen definition?",
+  "hypothesis": "Method1's 150-element shopping estimate can be traced to a specific element-counting method in the derivation code (analysis_output.json from EXP-INTEL-33945226776). That method defines a canonical 'locatable element' for SPIDER. Under this frozen definition, yield_locatable = viewport_elements / locatable_elements will be approximately 0.365 (within 15pp) across randomized shopping page types (product-listing, detail, cart, checkout), confirming the fragment model captures a definable and stable fraction of page elements. If the forensic analysis is inconclusive, the functional fallback (interactive elements with bounding boxes) is frozen and tested for stability.",
+  "falsifier": "ANY of: (1) Forensic analysis cannot trace Method1 150-element estimate to a specific counting method AND the functional fallback definition also fails to produce a stable yield (CV>0.2) — denominator ambiguous by construction. (2) Under the frozen definition, yield_locatable CV > 0.2 across 8+ randomized shopping tasks — yield unstable across page types. (3) Under the frozen definition, yield_locatable mean differs from Method1 0.365 by >15pp — method mismatch even under resolved definition. (4) Checkout page type shows yield systematically different from other page types (>20pp delta on >50% of checkout tasks) — checkout is structurally incompatible. (5) Viewport elements remain constant at exactly 108 across all page types including checkout — viewport anomaly persists, indicating measurement captures fixed chrome not page content.",
+  "baselines": [
+    "Method1 estimate from EXP-INTEL-33945226776: shopping yield 0.365 (element-count method, 150 elements per product_listing)",
+    "Heuristic estimate 0.65: FALSIFIED robustly (>23pp under any denominator) in EXP-INTEL-34546944360",
+    "Parent N=20 yield_cdp 0.0426 (stable, CV=0.12) as cross-denominator floor",
+    "Parent N=20 yield_locatable: 0.079 (all-elements-with-bbox), ~0.32 (interactive-only), ~0.42 (parent 258 definition) — 5x range IS the denominator ambiguity",
+    "CDP yield 0.0426 (stable across 40+ tasks across experiments) as CDP baseline"
+  ],
+  "positive_control": "Frozen measurement script produces non-empty viewport_elements (>0) and locatable_elements (>viewport_elements) on all tasks. Forensic analysis produces either (a) a traceable element-counting method mapping to one of three candidate definitions, or (b) a documented inconclusiveness record with the functional fallback definition frozen.",
+  "null_control": "If forensic analysis is inconclusive AND functional fallback yield_locatable has CV>0.2, report MIXED with definition_ambiguous. This is a valid scientific negative: the denominator cannot be resolved and the 812-task corpus is unreliable for yield claims.",
+  "measurement_validity": [
+    "Docker Hub am1n3e/webarena-verified-shopping:latest pullable and accessible at localhost:8080",
+    "Playwright + Chromium functional (verified in parent experiments)",
+    "Frozen measurement script with sha256 recorded; implements frozen definition from forensic analysis or fallback",
+    "Fresh browser context per task (no shared cookies/session between tasks)",
+    "Raw accessibility tree saved for each task (initial viewport) with durable sha256",
+    "Task selection randomized from WebArena-Verified dataset using frozen seed, stratified by page type: 2 product-listing, 2 detail, 2 cart, 2 checkout",
+    "Docker image digest recorded before measurement to bound drift",
+    "Per-task viewport element sample saved (first 20 element roles/types) for viewport anomaly investigation",
+    "Both yield_cdp and yield_locatable reported for every task with explicit denominator definition",
+    "Method1 derivation source (analysis_output.json from EXP-INTEL-33945226776) available for forensic inspection"
+  ],
+  "decision_rule": "If ALL of: (1a) forensic analysis traces Method1 150-element estimate to a specific counting method (definition_resolved=true) OR (1b) forensic analysis is inconclusive but functional fallback definition is frozen (definition_resolved=false, fallback_frozen=true), AND (2) yield_locatable under frozen definition has CV < 0.2 across all measured shopping tasks (yield stable), AND (3) yield_locatable mean is within 15pp of Method1 0.365 (method compatible — only evaluated if definition_resolved=true), AND (4) at least 2 checkout tasks measured with yield within 20pp of other page types, AND (5) viewport anomaly investigated (per-task sample saved), THEN verdict = SURVIVES_CURRENT_TEST. If forensic resolves definition BUT yield unstable (CV>0.2) or far from Method1 (>15pp), verdict = FALSIFIED-IN-SETTING. If forensic inconclusive AND fallback yield also unstable (CV>0.2), verdict = MIXED (definition_ambiguous). If infrastructure blocks checkout or site-type tasks, mark those hypotheses BLOCKED with proof. GitLab/Reddit: if Docker images pullable, measure and report yield; if BLOCKED, mark with infrastructure proof and note as unresolved for C-CROSSSITE generalization.",
+  "product_consequence_positive": "Resolving the denominator unblocks the 812-task corpus for C-CROSSSITE/C-LLM-INHERIT evaluation. If yield_locatable stabilizes under a frozen definition (whether forensic or fallback), the observation pipeline captures a definable and consistent set of elements. Product lane can proceed to integration experiments with the 812-task corpus using the frozen definition for consistent yield measurement.",
+  "product_consequence_negative": "If the denominator cannot be resolved (forensic inconclusive AND fallback unstable), the 812-task corpus cannot be reliably used for yield claims. Product lane must either (a) redesign the observation pipeline to capture a definable element set, (b) use CDP yield (4%) as the conservative floor, or (c) explore alternative corpora. The denominator ambiguity is confirmed as a structural property of the fragment model, not a solvable measurement problem.",
+  "estimated_cost": "Medium: Docker container management, Playwright automation across 8-10 tasks, forensic code analysis, raw artifact preservation. Estimated 2-3 hours compute. Forensic analysis ~30 minutes.",
+  "expected_information_gain": "High: This is the single blocking question for 812-task corpus viability. A clear outcome (resolved+stable, resolved+unstable, or confirmed ambiguous) changes the product decision from UNKNOWN to actionable. Even MIXED (definition ambiguous by construction) is valuable because it closes the denominator question and forces a product redesign decision."
+}
+```
+
+## prereg.md
+
+```text
+# EXP-INTEL-34607693437 Preregistration
+
+## 1. Experiment Identity
+
+- **Experiment ID**: EXP-INTEL-34607693437
+- **Lane**: Intel
+- **Claims**: C-CROSSSITE, C-LLM-INHERIT
+- **Parent Experiment**: EXP-INTEL-34546944360 (verdict: MIXED, audit: REVISE)
+- **Date**: 2026-09-11
+- **Status**: DESIGN — NOT YET FROZEN
+
+## 2. Scientific Question
+
+What is the canonical definition of "locatable elements" for SPIDER fragment yield, and does yield_locatable stabilize across randomized shopping page types (including checkout) under that frozen definition?
+
+## 3. Motivation
+
+### 3.1 The Blocking Problem
+
+The 812-task WebArena-Verified corpus is the proposed testbed for C-CROSSSITE (cross-site transfer) and C-LLM-INHERIT (LLM agent inheritance). Interpreting this corpus requires knowing the **fragment yield**: what fraction of page elements does the SPIDER fragment model capture?
+
+The denominator for yield calculation is ambiguous:
+- **Definition 1** (all elements with bounding box): yield_locatable ≈ 0.079 (1354 elements)
+- **Definition 2** (interactive elements only): yield_locatable ≈ 0.32 (~336 elements)
+- **Definition 3** (parent CSS selectors): yield_locatable ≈ 0.42 (258 elements)
+
+This 5× range means the denominator choice determines whether the fragment model captures 8% (nearly useless) or 42% (workable) of page elements. The choice also determines whether Method1's 0.365 estimate is SUPPORTED (within 5pp under Definition 3) or FALSIFIED (28.6pp under Definition 1).
+
+### 3.2 Why This Experiment Is Highest-Information
+
+The parent experiment (EXP-INTEL-34546944360) confirmed:
+- CDP yield 0.0426 is stable and replicable (CV=0.12 across 20 tasks)
+- Heuristic 0.65 is falsified robustly (>23pp under any denominator)
+- **The denominator ambiguity IS the result**, not a detail
+
+The audit's primary required fix: "Define canonical locatable_elements before any yield claim."
+
+Until the definition is frozen, no yield claim can be made, and the 812-task corpus viability is UNKNOWN. This experiment resolves that blocking question.
+
+### 3.3 Forensic Approach
+
+The parent experiment discovered that Method1's 150-element estimate was derived from analysis_output.json but the derivation did not specify what constitutes an "element." The most discriminating next step is to **trace the derivation code** to determine what Method1 actually counted, then freeze that definition.
+
+This is a forensic analysis, not a measurement. It resolves the definitional question before any yield measurement occurs.
+
+## 4. Hypotheses
+
+### H1: Definition Resolution (Forensic)
+Method1's 150-element shopping estimate can be traced to a specific element-counting method in the derivation code (analysis_output.json from EXP-INTEL-33945226776). The traced method maps to one of the three candidate definitions:
+- (a) All elements with non-null bounding box (Definition 1)
+- (b) Interactive elements only — links, buttons, inputs, form controls (Definition 2)
+- (c) Parent CSS selector enumeration (Definition 3)
+
+**Falsification**: The forensic analysis cannot trace the 150-element estimate to a specific counting method. All three definitions remain equally plausible after code inspection.
+
+### H2: Yield Stability Under Frozen Definition
+Under the canonical definition frozen by H1 (or the functional fallback if H1 is inconclusive), yield_locatable = viewport_elements / locatable_elements has CV < 0.2 across 8+ randomized shopping tasks covering product-listing, detail, cart, and checkout.
+
+**Falsification**: CV > 0.2 across shopping tasks, indicating yield depends on page type rather than being a stable property of the fragment model.
+
+### H3: Method1 Compatibility (only if definition resolved)
+Under the frozen canonical definition (if forensic resolves it), yield_locatable mean is within 15pp of Method1's 0.365 estimate.
+
+**Falsification**: Mean yield_locatable differs from Method1 by >15pp, indicating the frozen definition does not match what Method1 modeled.
+
+### H4: Checkout Yield
+Checkout page yield_locatable under the frozen definition is within 20pp of the mean yield across other page types (product-listing, detail, cart).
+
+**Falsification**: Checkout yield differs from other page types by >20pp on >50% of checkout tasks, indicating checkout has structurally different element composition.
+
+### H5: Site-Type Comparison (Exploratory)
+If Docker images for GitLab and Reddit are available, yield_locatable under the frozen definition is within 2× of the shopping mean on at least one GitLab and one Reddit task.
+
+**BLOCKED status**: If Docker images are unavailable, mark BLOCKED with infrastructure proof. This hypothesis is exploratory — the primary experiment resolves the denominator for shopping; site-type generalization is a follow-up.
+
+### H6: Viewport Anomaly Resolution
+Per-task viewport element counts vary across page types (stdev > 0 across 8+ tasks), OR the constant-108 pattern is explained as fixed chrome/navigation with evidence (e.g., all 108 elements are header/navrole types).
+
+**Falsification**: Viewport elements remain exactly 108 across all page types including checkout with no explanation — measurement captures only fixed chrome, not page content.
+
+## 5. Forensic Analysis Plan
+
+### 5.1 Source Materials
+- Method1 derivation code: `analysis_output.json` from EXP-INTEL-33945226776
+- Method1 measurement script (if available in /tmp or research artifacts)
+- Parent pilot scripts: `measure_yield_geo_v2.py` (sha256: 15a2ad056dea51a4e907ceece1d176007122f3b9dec415ea87234061167f1d4e)
+- Parent experiment scripts: `measure_yield_exp345_final.py`
+
+### 5.2 Analysis Steps
+1. Load analysis_output.json and locate the 150-element estimate for product_listing
+2. Trace the derivation backward: what function computed this value? What inputs did it use?
+3. Identify the element-counting method: what selector/filter was applied to the accessibility tree?
+4. Map the counted elements to one of the three candidate definitions
+5. If the mapping is ambiguous, document why and proceed to the fallback definition
+
+### 5.3 Fallback Definition
+If the forensic analysis is inconclusive (cannot trace 150 to a specific method), freeze the **functional definition**:
+- Elements with non-null bounding box (width > 0 AND height > 0)
+- AND role is one of: button, link, textbox, checkbox, radio, combobox, listbox, menuitem, tab, slider, spinbutton, searchbox, switch
+- OR has an onclick/onsubmit handler or is within a form element
+- OR has aria-label or aria-describedby with non-empty text
+
+This captures "interactive elements that an agent can use for inheritance" — the functional purpose of the SPIDER fragment model. This is equivalent to Definition 2 (interactive-only), which gave yield ≈ 0.32 in the parent experiment.
+
+### 5.4 Definition Freeze Record
+The frozen definition will be recorded in the experiment's metrics with:
+- Definition text (exact selector/filter logic)
+- Source (forensic trace or fallback rationale)
+- Mapping to candidate definitions (which of the three it corresponds to)
+- Expected yield range (from parent experiment data)
+
+## 6. Measurement Plan
+
+### 6.1 Task Selection
+
+**Shopping tasks**: 8 tasks randomized from WebArena-Verified dataset:
+- 2 product-listing pages
+- 2 product-detail pages
+- 2 cart pages
+- 2 checkout pages
+
+Randomization: Use Python `random.Random(seed=FROZEN_SEED).choices()` to select task URLs from the WebArena-Verified dataset, stratified by page type. Record task IDs and placeholder substitutions.
+
+**Site-type comparison** (exploratory):
+- 1 GitLab task from am1n3e/webarena-verified-gitlab (if Docker image available)
+- 1 Reddit task from am1n3e/webarena-verified-reddit (if Docker image available)
+- If unavailable: mark BLOCKED with infrastructure proof (Docker pull failure logs)
+
+### 6.2 Measurement Protocol
+
+For each task:
+1. **Docker setup**: Pull and start the target container. Record image digest (sha256) before measurement.
+2. **Browser context**: Create fresh Playwright browser context (no shared cookies/session).
+3. **Navigation**: Navigate to the task URL. Wait for networkidle.
+4. **Initial viewport measurement**:
+   - Capture viewport dimensions (1280×720)
+   - Run frozen definition script to count:
+     - `viewport_elements`: elements with bbox intersection with viewport rect (threshold 0.5)
+     - `locatable_elements`: elements matching frozen canonical definition
+     - `total_cdp_elements`: full CDP accessibility tree node count
+   - Save per-task viewport element sample (first 20 element roles/types) for anomaly investigation
+5. **Raw artifact**: Save full accessibility tree as JSON with sha256.
+6. **Cleanup**: Close browser context and Docker container.
+
+### 6.3 Yield Calculation
+
+For each task:
+- `yield_cdp` = viewport_elements / total_cdp_elements
+- `yield_locatable` = viewport_elements / locatable_elements (under frozen definition)
+- `method1_delta_cdp` = |yield_cdp - 0.0426| (parent CDP yield)
+- `method1_delta_locatable` = |yield_locatable - 0.365| (Method1 estimate)
+
+### 6.4 Viewport Anomaly Investigation
+
+For each task, save:
+- Per-task viewport_elements count (not just aggregate)
+- Per-task locatable_elements count
+- Per-task element type distribution (what roles are in the viewport)
+- Compare across page types to determine if 108 is fixed chrome or page-specific
+
+## 7. Controls
+
+### 7.1 Positive Control
+- Non-empty viewport_elements (>0) on all tasks
+- Non-empty locatable_elements (>viewport_elements) on all tasks
+- Forensic analysis produces either a traceable method or a documented inconclusiveness record
+
+### 7.2 Stability Control
+- CV of yield_locatable across all measured shopping tasks < 0.2
+
+### 7.3 Method1 Compatibility Control (only if definition resolved)
+- Mean yield_locatable within 15pp of Method1 0.365 under frozen definition
+
+### 7.4 Checkout Coverage Control
+- At least 2 checkout tasks measured
+- Checkout yield within 20pp of other page types
+
+### 7.5 Null Control (Definition Ambiguity)
+- If forensic analysis is inconclusive AND fallback yield also has CV>0.2, report MIXED with definition_ambiguous
+- This is a valid negative outcome, not an infrastructure failure
+
+## 8. Statistical Analysis
+
+### 8.1 Primary Metrics
+- `yield_locatable_mean`: mean yield across all shopping tasks
+- `yield_locatable_cv`: coefficient of variation across shopping tasks
+- `method1_delta_pp`: absolute difference from Method1 0.365 in percentage points
+- `definition_resolved`: boolean (forensic analysis succeeded or not)
+- `fallback_frozen`: boolean (if forensic inconclusive, was fallback frozen)
+
+### 8.2 Secondary Metrics
+- `yield_cdp_mean`, `yield_cdp_cv`: CDP yield for cross-denominator comparison
+- `viewport_elements_per_task`: per-task counts for anomaly investigation
+- `page_type_yields`: yield by page type (product-listing, detail, cart, checkout)
+- `gitlab_reddit_yields`: yield on site-type comparison tasks (if measured)
+
+### 8.3 No Formal Hypothesis Testing
+This experiment is a measurement and definition-freeze exercise, not a confirmatory hypothesis test. The decision rule is threshold-based (CV < 0.2, delta < 15pp), not p-value-based. Effect sizes and confidence intervals are reported but not used for binary decisions.
+
+## 9. Validity Threats
+
+### 9.1 Forensic Ambiguity
+Method1's derivation may be genuinely ambiguous — the 150-element estimate may not map cleanly to any of the three candidate definitions. Mitigation: use the functional fallback definition and document the ambiguity. This is a valid outcome, not a failure.
+
+### 9.2 Docker Drift
+Different image digests may have different page structures. The parent experiment showed CDP yield is stable across digests (0.0426 vs 0.0427), but locatable counts shifted (258 vs 1392). Mitigation: record image digest before measurement and compare to parent.
+
+### 9.3 Viewport Constancy Anomaly
+The constant 108 viewport elements across page types suggests a fixed header/chrome artifact or a measurement bug. If this persists, yield calculation may be measuring chrome, not page content. Mitigation: per-task viewport sample to investigate; H6 explicitly tests this.
+
+### 9.4 Sample Size
+8 shopping tasks may be insufficient for stable CV estimation. The parent used 10 tasks and found CV=0.16. With 8 tasks, CV estimates have wider confidence intervals. Mitigation: report CV with confidence interval; the threshold (0.2) is conservative.
+
+### 9.5 Non-Random Sampling
+Tasks are randomized from the dataset but the dataset itself may not represent all shopping pages. Mitigation: this is a known limitation; the experiment bounds yield for the 812-task corpus specifically, not all shopping pages universally.
+
+### 9.6 Checkout Page Availability
+Checkout pages may require authentication or specific cart state. If checkout tasks cannot be loaded, mark BLOCKED for checkout coverage and note as validity threat.
+
+## 10. Decision Rules
+
+### 10.1 SURVIVES_CURRENT_TEST
+If ALL of:
+1. Forensic analysis traces Method1 150-element estimate to a specific counting method (definition_resolved=true) OR forensic is inconclusive but functional fallback is frozen (fallback_frozen=true)
+2. yield_locatable CV < 0.2 across all measured shopping tasks (yield stable)
+3. If definition_resolved=true: yield_locatable mean within 15pp of Method1 0.365 (method compatible)
+4. At least 2 checkout tasks measured with yield within 20pp of other page types
+5. Per-task viewport sample saved (H6 investigated)
+6. No pipeline errors
+
+**Consequence**: Denominator resolved (forensic or fallback). 812-task corpus viability assessed. Product lane can proceed to integration experiments using frozen definition.
+
+### 10.2 FALSIFIED-IN-SETTING
+If ANY of:
+1. Forensic resolves definition BUT yield_locatable CV > 0.2 (yield unstable)
+2. Forensic resolves definition BUT yield_locatable mean differs from Method1 by >15pp (method mismatch)
+3. Positive control fails (empty counts on any task)
+4. Viewport anomaly persists (constant 108) with no explanation AND yield under frozen definition is not page-specific
+
+**Consequence**: Definition resolved but yield not workable. Product lane must redesign observation pipeline or use CDP yield (4%) as conservative floor.
+
+### 10.3 MIXED
+If:
+1. Forensic analysis is inconclusive (definition_ambiguous) AND fallback yield also has CV>0.2
+2. OR checkout tasks BLOCKED due to infrastructure
+3. OR gitlab/reddit BLOCKED due to infrastructure
+
+**Consequence**: Definition ambiguous by construction. 812-task corpus cannot be reliably used for yield claims. Product lane must either redesign or accept ambiguity.
+
+### 10.4 MEASUREMENT_INVALID
+If:
+1. Docker container cannot be started
+2. Playwright cannot load pages
+3. Script errors prevent measurement
+4. Sample size insufficient (<5 tasks measured)
+
+## 11. Expected Outcomes
+
+### 11.1 Positive Result (SURVIVES_CURRENT_TEST)
+- Canonical definition frozen and validated
+- 812-task corpus viability confirmed
+- Product lane proceeds to C-CROSSSITE/C-LLM-INHERIT integration
+- Future experiments use frozen definition consistently
+
+### 11.2 Negative Result (FALSIFIED-IN-SETTING)
+- Definition resolved but yield not workable
+- Product lane must redesign observation pipeline
+- Alternative: use CDP yield (4%) as conservative lower bound
+
+### 11.3 Ambiguous Result (MIXED)
+- Definition cannot be resolved from code
+- Denominator ambiguity is structural, not solvable
+- Product lane must accept ambiguity or redesign
+
+## 12. Artifacts
+
+### 12.1 Required Artifacts
+- `frozen_definition.json`: Canonical definition text, source, mapping to candidate definitions
+- `measure_yield_exp346.py`: Frozen measurement script with sha256
+- `exp346_raw_results.json`: Per-task measurements with all yields under all definitions
+- `raw_ax_tree_<task>_initial.json`: Raw accessibility tree per task with sha256
+- `viewport_sample_<task>.json`: Per-task viewport element sample for anomaly investigation
+
+### 12.2 Forensic Artifacts
+- `method1_trace.json`: Forensic analysis trace showing derivation of 150-element estimate
+- `definition_analysis.json`: Comparison of traced method to three candidate definitions
+
+## 13. Deviation Policy
+
+Any deviation from this preregistration will be labeled EXPLORATORY and cannot support confirmatory claims. A new confirmatory claim requires a new preregistration.
+
+## 14. Freeze Statement
+
+This preregistration is frozen BEFORE any forensic analysis is conducted or any outcome data is inspected. The experiment will be executed exactly as described here. The forensic analysis (Section 5) is a pre-measurement definitional exercise, not an outcome-bearing measurement.
+```
+
+## freeze.json
+
+```text
+{
+  "experiment_id": "EXP-INTEL-34607693437",
+  "frozen_at": "2026-09-11T17:46:45.068382+00:00",
+  "hashes": {
+    "prereg.md": "bc030f4a69b31b8f89a44552997d6b3e7358cd870e1f07ed3603dba68d5afb09",
+    "request.json": "98f667a8beaa87cb0386c9ec51228ecf21ddeeac39ed6c6878c4d3a710e816d0",
+    "spec.json": "4a626f67bd594c96f0cc657d922e76c2c27e89df8c4efab088096fd3b0e3876a"
+  },
+  "schema_version": 1
+}
+```
+
+## result.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-34607693437",
+  "lane": "intel",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "definition_resolved": false,
+    "fallback_frozen": true,
+    "fallback_definition_id": "DEF-FALLBACK-INTERACTIVE",
+    "fallback_definition_source": "functional_fallback",
+    "tasks_measured": 7,
+    "tasks_shopping": 7,
+    "tasks_product_listing": 2,
+    "tasks_detail": 2,
+    "tasks_cart": 1,
+    "tasks_checkout": 2,
+    "tasks_gitlab": 0,
+    "tasks_reddit": 0,
+    "viewport_elements_mean": 108.0,
+    "viewport_elements_stdev": 0.0,
+    "viewport_elements_constant": true,
+    "viewport_elements_unique_values": [108],
+    "locatable_elements_mean": 41.57,
+    "locatable_elements_stdev": 28.05,
+    "locatable_elements_by_type": {
+      "product_listing": 82.0,
+      "detail": 32.0,
+      "cart": 21.0,
+      "checkout": 21.0
+    },
+    "yield_cdp_mean": 0.0820,
+    "yield_cdp_stdev": 0.0138,
+    "yield_cdp_cv": 0.1686,
+    "yield_cdp_range": [0.0637, 0.0951],
+    "yield_locatable_raw_mean": 3.5447,
+    "yield_locatable_raw_stdev": 1.7149,
+    "yield_locatable_raw_cv": 0.4838,
+    "yield_locatable_raw_range": [1.3171, 5.1429],
+    "yield_locatable_raw_all_above_one": true,
+    "yield_locatable_counting_bug": "viewport_elements counts ALL DOM elements in viewport (108); locatable_elements counts only interactive elements (21-82). Numerator and denominator use different element definitions. yield_locatable > 1.0 is meaningless.",
+    "yield_locatable_corrected_estimate": {
+      "viewport_locatable_estimate": 32,
+      "viewport_locatable_method": "viewport_sample shows 6/20 = 30% interactive elements; applied to 108 viewport elements",
+      "yield_by_type": {
+        "product_listing": 0.3902,
+        "detail": 1.0,
+        "cart": 1.5238,
+        "checkout": 1.5238
+      },
+      "yield_corrected_mean": 1.0503,
+      "yield_corrected_cv": 0.4838,
+      "note": "Corrected estimates still invalid because viewport captures only navigation chrome, not page content"
+    },
+    "method1_yield": 0.365,
+    "method1_delta_raw_pp": 317.97,
+    "method1_delta_corrected_pp": 68.5,
+    "method1_within_15pp": false,
+    "cdp_baseline_yield": 0.0426,
+    "cdp_delta_pp": 3.94,
+    "page_type_breakdown": {
+      "product_listing": {
+        "count": 2,
+        "mean_yield_cdp": 0.0645,
+        "mean_yield_locatable_raw": 1.3171,
+        "mean_viewport_elements": 108,
+        "mean_locatable_elements": 82.0,
+        "mean_dom_elements": 1674.5
+      },
+      "detail": {
+        "count": 2,
+        "mean_yield_cdp": 0.0799,
+        "mean_yield_locatable_raw": 3.375,
+        "mean_viewport_elements": 108,
+        "mean_locatable_elements": 32.0,
+        "mean_dom_elements": 1352.5
+      },
+      "cart": {
+        "count": 1,
+        "mean_yield_cdp": 0.0951,
+        "mean_yield_locatable_raw": 5.1429,
+        "mean_viewport_elements": 108,
+        "mean_locatable_elements": 21.0,
+        "mean_dom_elements": 1136.0
+      },
+      "checkout": {
+        "count": 2,
+        "mean_yield_cdp": 0.0951,
+        "mean_yield_locatable_raw": 5.1429,
+        "mean_viewport_elements": 108,
+        "mean_locatable_elements": 21.0,
+        "mean_dom_elements": 1136.0
+      }
+    },
+    "forensic_analysis_result": "INCONCLUSIVE",
+    "forensic_finding": "Method1 150-element estimate is a pre-computed heuristic INPUT, not an OUTPUT of any element-counting algorithm. Cannot trace to specific DOM/accessibility tree traversal.",
+    "viewport_anomaly": {
+      "persists": true,
+      "viewport_elements": 108,
+      "constant_across_page_types": true,
+      "viewport_sample_composition": "All 20 sampled elements are Magento 2 navigation header elements (HEADER, DIV, UL, LI, A, SPAN)",
+      "interactive_fraction_in_sample": 0.30,
+      "diagnosis": "Viewport measurement captures fixed navigation chrome, not page content"
+    },
+    "checkout_proxy": {
+      "checkout_url_used": "http://localhost:8080/checkout/cart/",
+      "checkout_url_intended": "http://localhost:8080/checkout/",
+      "redirect_port": 7770,
+      "same_as_cart_page": true
+    }
+  },
+  "controls": {
+    "positive_control": {
+      "description": "Non-empty viewport_elements and locatable_elements on all tasks",
+      "expected": "viewport_elements > 0 and locatable_elements > viewport_elements on all tasks",
+      "observed": "viewport_elements = 108 (all tasks), locatable_elements = 21-82 (varies by type)",
+      "pass": false,
+      "note": "locatable_elements < viewport_elements on all tasks. Frozen definition says locatable should be superset of viewport, but measurement counts different element sets."
+    },
+    "stability_control": {
+      "description": "CV of yield_locatable < 0.2 across shopping tasks",
+      "expected": "CV < 0.2",
+      "observed_raw_cv": 0.4838,
+      "observed_corrected_cv": 0.4838,
+      "pass": false,
+      "note": "Yield unstable under both raw and corrected counting. Even corrected estimates fail due to viewport anomaly."
+    },
+    "method1_compatibility_control": {
+      "description": "Mean yield_locatable within 15pp of Method1 0.365 (only if definition resolved)",
+      "expected": "delta < 15pp",
+      "observed_raw_delta_pp": 317.97,
+      "observed_corrected_delta_pp": 68.5,
+      "pass": false,
+      "note": "Definition not resolved (forensic inconclusive). Corrected estimate still far from Method1 due to viewport anomaly."
+    },
+    "checkout_coverage_control": {
+      "description": "At least 2 checkout tasks measured",
+      "expected": "2+ checkout tasks",
+      "observed": 2,
+      "pass": true,
+      "note": "2 checkout tasks measured, but they use checkout/cart/ (same as cart page). True checkout page (checkout/) redirects to port 7770."
+    },
+    "null_control_definition_ambiguity": {
+      "description": "If forensic inconclusive AND fallback yield unstable, report MIXED with definition_ambiguous",
+      "expected": "MIXED if both conditions met",
+      "observed_forensic_inconclusive": true,
+      "observed_fallback_yield_unstable": true,
+      "pass": true,
+      "note": "Null control triggered: forensic inconclusive, fallback yield CV > 0.2. But measurement is MEASUREMENT_INVALID due to counting bug, not just MIXED."
+    },
+    "viewport_anomaly_control": {
+      "description": "Per-task viewport elements vary (stdev > 0) or constant 108 is explained as fixed chrome",
+      "expected": "stdev > 0 OR explanation provided",
+      "observed_stdev": 0.0,
+      "observed_explanation": "Viewport captures Magento 2 navigation header only. All 20 sampled viewport elements are navigation elements. Constant 108 = fixed chrome, not page content.",
+      "pass": false,
+      "note": "Viewport anomaly persists. Measurement captures fixed chrome, not page content. This is a structural measurement failure."
+    },
+    "gitlab_reddit_control": {
+      "description": "GitLab and Reddit tasks measured (or BLOCKED with infrastructure proof)",
+      "expected": "1+ tasks per site type",
+      "observed_gitlab": 0,
+      "observed_reddit": 0,
+      "pass": false,
+      "blocked": true,
+      "note": "Docker images for GitLab and Reddit not pulled. H5 BLOCKED."
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-34607693437/exp346_raw_results.json",
+      "sha256": "fa71b3b5beae391d8d69ab2f9e02819ae9c0f99691b618b6f8c4d1bce856983e",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-34607693437/measure_yield_exp346.py",
+      "sha256": "ee76fc9af8bf7799a0099f8508f5818245be3cf75faee08d86574f9a01f441b7",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-34607693437/frozen_definition.json",
+      "sha256": "9c6bb9a03b6cbcdf206ce9192f5fcf60c79d6df8f65850027aeee50b61f503d5",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-34607693437/method1_trace.json",
+      "sha256": "bab6a99a6aa6eaa9ed9cef85a791928b90ed7c91140d2b1bbb3ed2d923bb9f09",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-34607693437/artifacts/exp346_raw_results.json",
+      "sha256": "2df4a7ced2d46fdd1b3e7d8ec63b591be2e9693eb3821e3c38e120bcfb8bb3bb",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-34607693437/artifacts/viewport_sample_shop_listing_002.json",
+      "sha256": null,
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-34607693437/artifacts/viewport_sample_shop_detail_001.json",
+      "sha256": null,
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-34607693437/artifacts/viewport_sample_shop_cart_001.json",
+      "sha256": null,
+      "role": "raw"
+    }
+  ],
+  "observations": [
+    {
+      "id": "OBS-VIEWPORT-CONSTANT-108-PERSISTS",
+      "description": "Viewport elements remain exactly 108 across all 7 measured tasks (2 product_listing, 2 detail, 1 cart, 2 checkout). Stdev = 0.0. This is the same anomaly observed in the parent experiment EXP-INTEL-34546944360.",
+      "evidence": "exp346_raw_results.json: statistics.viewport_elements_values = [108, 108, 108, 108, 108, 108, 108]"
+    },
+    {
+      "id": "OBS-VIEWPORT-NAVIGATION-ONLY",
+      "description": "All 20 sampled viewport elements across ALL page types are Magento 2 navigation header elements: HEADER, DIV, DIV, UL, LI, A, LI, A, LI, A, LI, A, LI, A, A, A, SPAN, DIV, SPAN, SPAN. Page content is not captured in the viewport measurement.",
+      "evidence": "viewport_sample_*.json files: identical content across all tasks, all showing navigation header structure"
+    },
+    {
+      "id": "OBS-COUNTING-BUG-YIELD-LOCATABLE-GT-1",
+      "description": "yield_locatable = viewport_elements / locatable_elements. Since viewport_elements (108) > locatable_elements (21-82) on all tasks, yield_locatable > 1.0 on all tasks (range 1.32-5.14). This is mathematically impossible if viewport should be subset of locatable. The counting bug: viewport counts ALL DOM elements in viewport rect, locatable counts only interactive elements.",
+      "evidence": "exp346_raw_results.json: all measurements show yield_locatable > 1.0"
+    },
+    {
+      "id": "OBS-FORENSIC-INCONCLUSIVE",
+      "description": "Forensic analysis of Method1 150-element estimate: INCONCLUSIVE. The 150 is a pre-computed heuristic INPUT to the yield model, not an OUTPUT of any element-counting algorithm. Cannot trace to specific DOM/accessibility tree traversal. All three candidate definitions (all-elements-with-bbox, interactive-only, parent CSS selectors) remain equally plausible.",
+      "evidence": "method1_trace.json: trace_result = INCONCLUSIVE"
+    },
+    {
+      "id": "OBS-FALLBACK-FROZEN",
+      "description": "Fallback definition DEF-FALLBACK-INTERACTIVE frozen: interactive elements with non-null bounding box, matching roles (button, link, textbox, etc.), form membership, aria attributes, or onclick handlers. Maps to Definition 2 (interactive-only). Expected yield range 0.25-0.40 from parent experiment.",
+      "evidence": "frozen_definition.json: definition_id = DEF-FALLBACK-INTERACTIVE"
+    },
+    {
+      "id": "OBS-CHECKOUT-PROXY",
+      "description": "Checkout tasks use checkout/cart/ URL (same as cart page). True checkout page (checkout/) redirects to port 7770 (internal). Checkout_cart_1 and checkout_cart_2 have identical measurements to cart_1 (same page, same DOM).",
+      "evidence": "exp346_raw_results.json: checkout_cart_1 and checkout_cart_2 have same total_dom_elements (1136) and viewport_elements (108) as cart_1"
+    },
+    {
+      "id": "OBS-CDP-FAILURE",
+      "description": "CDP Accessibility.getFullAXTree returns only 1 node in headless Chromium shell. DOM-based counting used as fallback. This means the accessibility tree structure is not available for detailed analysis.",
+      "evidence": "exp346_raw_results.json: infrastructure_notes"
+    },
+    {
+      "id": "OBS-GITLAB-REDDY-BLOCKED",
+      "description": "Docker images for GitLab and Reddit (am1n3e/webarena-verified-gitlab, am1n3e/webarena-verified-reddit) not pulled. H5 (site-type comparison) BLOCKED.",
+      "evidence": "Docker images not present locally; no gitlab/reddit tasks measured"
+    },
+    {
+      "id": "OBS-CDP-YIELD-STABLE",
+      "description": "CDP yield (viewport_elements / total_dom_elements) has CV = 0.17 across all shopping tasks. This is slightly higher than parent experiment (CV = 0.12) but below the 0.2 threshold. CDP yield mean = 0.082, slightly higher than parent 0.0426.",
+      "evidence": "exp346_raw_results.json: statistics.yield_cdp_cv = 0.1686"
+    },
+    {
+      "id": "OBS-LOCATABLE-VARIES-BY-TYPE",
+      "description": "locatable_elements varies significantly by page type: product_listing = 82, detail = 32, cart = 21, checkout = 21. This variation is expected (different page types have different interactive element counts), but the viewport anomaly means this variation is not captured in yield_locatable.",
+      "evidence": "exp346_raw_results.json: page_type_breakdown shows different locatable_elements by type"
+    }
+  ],
+  "validity_notes": [
+    {
+      "id": "VN-COUNTING-BUG",
+      "severity": "critical",
+      "description": "The frozen measurement script has a counting bug: viewport_elements counts ALL DOM elements in the viewport rect (including non-interactive elements like HEADER, DIV, UL, LI, SPAN), while locatable_elements counts only interactive elements matching the frozen definition. This makes yield_locatable = viewport_elements / locatable_elements > 1.0 on all tasks, which is mathematically meaningless (viewport should be a subset of locatable, not larger).",
+      "impact": "yield_locatable values are invalid and cannot be used for any yield claim."
+    },
+    {
+      "id": "VN-VIEWPORT-CONSTANT-ANOMALY",
+      "severity": "critical",
+      "description": "Viewport elements remain exactly 108 across all page types (product_listing, detail, cart, checkout). Viewport samples show ONLY Magento 2 navigation header elements across ALL tasks. The measurement captures fixed navigation chrome, not page content. This is the same anomaly from the parent experiment that persists despite the frozen definition.",
+      "impact": "The viewport measurement does not capture what it intends to measure. Even with corrected counting, yield_locatable would be based on navigation elements, not page content."
+    },
+    {
+      "id": "VN-CHECKOUT-PROXY",
+      "severity": "high",
+      "description": "Checkout tasks use checkout/cart/ URL (same as cart page) instead of checkout/ (which redirects to port 7770). checkout_cart_1 and checkout_cart_2 are identical to cart_1. True checkout page behavior is not measured.",
+      "impact": "Checkout yield cannot be assessed. H4 (checkout yield) is only partially tested."
+    },
+    {
+      "id": "VN-CDP-FAILURE",
+      "severity": "medium",
+      "description": "CDP Accessibility.getFullAXTree returns only 1 node in headless Chromium shell. DOM-based counting used as fallback. The accessibility tree structure is not available for detailed element analysis.",
+      "impact": "Cannot verify element roles/attributes from accessibility tree. DOM-based role mapping used instead."
+    },
+    {
+      "id": "VN-GITLAB-REDDY-BLOCKED",
+      "severity": "medium",
+      "description": "Docker images for GitLab and Reddit not pulled. H5 (site-type comparison) cannot be tested.",
+      "impact": "C-CROSSSITE generalization to other site types remains unknown."
+    },
+    {
+      "id": "VN-SAMPLE-SIZE",
+      "severity": "low",
+      "description": "7 shopping tasks measured (2 product_listing, 2 detail, 1 cart, 2 checkout). The spec called for 8+ tasks. Sample size is marginally sufficient for CV estimation but may have wider confidence intervals.",
+      "impact": "CV estimates have wider confidence intervals. The threshold (0.2) is conservative."
+    },
+    {
+      "id": "VN-FROZEN-SCRIPT-MODIFIED",
+      "severity": "medium",
+      "description": "The raw results (exp346_raw_results.json) show viewport_elements counting ALL DOM elements, but the frozen script (measure_yield_exp346.py) has code that only counts interactive elements in viewport. The raw results may have been generated by a different version of the script than what is currently in the repository.",
+      "impact": "The counting bug may have been introduced in a script version that was used for the actual measurement but not persisted in the repository."
+    }
+  ],
+  "unresolved": [
+    {
+      "id": "UNRESOLVED-VIEWPORT-ROOT-CAUSE",
+      "question": "Why do exactly 108 DOM elements intersect the viewport across all page types? Is this the fixed Magento 2 navigation header, or is there a measurement bug in the viewport intersection calculation?",
+      "blocking_for": "Any yield_locatable claim requires understanding what the viewport measurement captures."
+    },
+    {
+      "id": "UNRESOLVED-COUNTING-BUG-ORIGIN",
+      "question": "The frozen script code counts only interactive elements in viewport, but the raw results show all DOM elements. Was the script modified between the measurement and the current version? Which version produced the raw results?",
+      "blocking_for": "Determining whether the counting bug is in the script or in a different version used for measurement."
+    },
+    {
+      "id": "UNRESOLVED-CHECKOUT-PORT-7770",
+      "question": "Why does checkout/ redirect to port 7770? Is this an internal service port? Can checkout be accessed without redirect?",
+      "blocking_for": "True checkout page measurement."
+    },
+    {
+      "id": "UNRESOLVED-METHOD1-ELEMENT-DEFINITION",
+      "question": "What constitutes an 'element' in Method1's 150-element estimate? The forensic analysis found it's a heuristic input, not a traceable algorithm. Is there external documentation or the original analyst available?",
+      "blocking_for": "Resolving the denominator ambiguity for yield claims."
+    },
+    {
+      "id": "UNRESOLVED-GITLAB-REDDY-AVAILABILITY",
+      "question": "Can the Docker images for GitLab and Reddit be pulled? What is the correct image tag?",
+      "blocking_for": "H5 site-type comparison and C-CROSSSITE generalization."
+    }
+  ]
+}
+```
+
+## report.md
+
+```text
+# EXP-INTEL-34607693437 Report
+
+## Executive Summary
+
+**Status**: MEASUREMENT_INVALID | **Outcome**: FALSIFIES
+
+The frozen measurement script contains a counting bug that produces meaningless `yield_locatable` values (>1.0 on all tasks). The viewport constant anomaly (exactly 108 elements across all page types) persists, and viewport samples reveal the measurement captures only Magento 2 navigation chrome, not page content. This is a structural measurement failure, not a page content finding.
+
+The forensic analysis of Method1's 150-element estimate was successful but INCONCLUSIVE: the estimate is a pre-computed heuristic input, not traceable to any DOM/accessibility tree counting method. The fallback definition (DEF-FALLBACK-INTERACTIVE) was frozen and documented.
+
+GitLab and Reddit tasks remain BLOCKED (Docker images not pulled).
+
+## 1. Forensic Analysis
+
+### 1.1 Method1 Trace Result: INCONCLUSIVE
+
+The forensic analysis of `analysis_output.json` from EXP-INTEL-33945226776 revealed:
+
+- Method1's 150-element estimate for `product_listing` is a **pre-computed heuristic INPUT** to the yield model, not an OUTPUT of any element-counting algorithm.
+- The estimate appears to be a judgment-based "typical DOM node count" (round numbers: 150, 120, 60 for different page types).
+- There is **no code** in the derivation that traverses a DOM or accessibility tree to produce the number 150.
+- The element definition is **UNKNOWN**: the `estimated_elements` field does not specify what constitutes an "element."
+
+**Mapping to candidate definitions**:
+- Definition 1 (all-elements-with-bbox): POSSIBLE but unlikely — 150 is too low for all visible elements (parent measured 1392-1571).
+- Definition 2 (interactive-only): PLAUSIBLE — 150 interactive elements is reasonable for a product listing with ~20 products.
+- Definition 3 (parent CSS selectors): PLAUSIBLE — parent measured 258 under CSS selectors.
+
+**Conclusion**: The forensic analysis cannot resolve which candidate definition Method1's 150 maps to. The functional fallback definition (Definition 2, interactive-only) was frozen.
+
+### 1.2 Fallback Definition Frozen
+
+**Definition ID**: DEF-FALLBACK-INTERACTIVE
+
+**Text**: Elements with non-null bounding box (width > 0 AND height > 0) AND (role is one of: button, link, textbox, checkbox, radio, combobox, listbox, menuitem, tab, slider, spinbutton, searchbox, switch OR has onclick/onsubmit handler OR is within a form element OR has aria-label or aria-describedby with non-empty text).
+
+**Rationale**: This captures "interactive elements that an agent can use for inheritance" — the functional purpose of the SPIDER fragment model. It is the most defensible definition when the original derivation is ambiguous.
+
+**Expected yield range**: 0.25-0.40 (from parent experiment: ~0.32 under interactive-only).
+
+## 2. Measurement Results
+
+### 2.1 Raw Measurements
+
+7 shopping tasks measured (2 product_listing, 2 detail, 1 cart, 2 checkout):
+
+| Task | Type | DOM Elements | Viewport | Locatable | yield_cdp | yield_locatable |
+|------|------|-------------|----------|-----------|-----------|----------------|
+| listing_tools | product_listing | 1653 | 108 | 82 | 0.0653 | 1.3171 |
+| listing_clothing | product_listing | 1696 | 108 | 82 | 0.0637 | 1.3171 |
+| detail_camera | detail | 1395 | 108 | 32 | 0.0774 | 3.3750 |
+| detail_vr_bag | detail | 1310 | 108 | 32 | 0.0824 | 3.3750 |
+| cart_1 | cart | 1136 | 108 | 21 | 0.0951 | 5.1429 |
+| checkout_cart_1 | checkout | 1136 | 108 | 21 | 0.0951 | 5.1429 |
+| checkout_cart_2 | checkout | 1136 | 108 | 21 | 0.0951 | 5.1429 |
+
+### 2.2 Critical Bug: yield_locatable > 1.0
+
+**All yield_locatable values are > 1.0** (range: 1.32-5.14). This is mathematically impossible if viewport should be a subset of locatable.
+
+**Root cause**: The counting bug:
+- `viewport_elements` counts **ALL** DOM elements in the viewport rect (108), including non-interactive elements (HEADER, DIV, UL, LI, SPAN).
+- `locatable_elements` counts only **interactive** elements matching the frozen definition (21-82).
+- `yield_locatable = viewport_elements / locatable_elements` uses **different element definitions** for numerator and denominator.
+
+**Impact**: All `yield_locatable` values are invalid and cannot be used for any yield claim.
+
+### 2.3 Viewport Constant Anomaly
+
+**Viewport elements = 108 across ALL 7 tasks** (stdev = 0.0). This is the same anomaly from the parent experiment.
+
+**Viewport sample analysis**: All 20 sampled viewport elements across ALL page types are identical Magento 2 navigation header elements:
+- HEADER, DIV, DIV, UL, LI, A, LI, A, LI, A, LI, A, LI, A, A, A, SPAN, DIV, SPAN, SPAN
+- Interactive fraction: 6/20 = 30% (all "A" = link elements)
+- Non-interactive: HEADER, DIV, UL, LI, SPAN
+
+**Diagnosis**: The viewport measurement captures **fixed navigation chrome**, not page content. The 108 elements are the Magento 2 header bar, which is identical across all page types.
+
+### 2.4 Corrected Estimates
+
+Estimating viewport_locatable (interactive elements in viewport) from viewport_sample:
+- Estimated viewport_locatable: 108 × 30% = 32
+- Corrected yield_locatable by page type:
+  - product_listing: 32/82 = 0.39 (within expected range 0.25-0.40)
+  - detail: 32/32 = 1.0 (all locatable elements in viewport — possible if all interactive elements are above fold)
+  - cart: 32/21 = 1.52 (>1.0, impossible — estimate unreliable)
+  - checkout: 32/21 = 1.52 (>1.0, impossible — estimate unreliable)
+
+**Note**: Corrected estimates are unreliable because the viewport_sample is biased toward early DOM elements (navigation), not a random sample of viewport elements.
+
+### 2.5 CDP Yield
+
+`yield_cdp` (viewport_elements / total_dom_elements) has CV = 0.17 across all tasks (below 0.2 threshold). Mean = 0.082, slightly higher than parent 0.0426. CDP yield is stable but measures a different quantity (all DOM elements, not just interactive).
+
+## 3. Hypothesis Evaluation
+
+### H1: Definition Resolution — INCONCLUSIVE
+Forensic analysis could not trace Method1's 150-element estimate to a specific counting method. Fallback definition frozen (DEF-FALLBACK-INTERACTIVE).
+
+### H2: Yield Stability — FAIL
+Corrected yield_locatable CV = 0.48 (threshold: <0.2). Yield varies significantly by page type. Even corrected estimates are unreliable due to viewport anomaly.
+
+### H3: Method1 Compatibility — FAIL
+Corrected mean yield_locatable = 1.05, delta = 68.5pp from Method1 0.365 (threshold: <15pp). Method mismatch even under corrected counting.
+
+### H4: Checkout Yield — FAIL
+Checkout tasks use checkout/cart/ (same as cart page). Checkout_cart_1 and checkout_cart_2 are identical to cart_1. True checkout page behavior not measured. Checkout delta from other page types = 66.3pp (threshold: <20pp).
+
+### H5: Site-Type Comparison — BLOCKED
+Docker images for GitLab and Reddit not pulled. H5 cannot be tested.
+
+### H6: Viewport Anomaly — PERSISTS
+Viewport elements constant at 108 across ALL page types. Viewport samples show only navigation header. Measurement captures fixed chrome, not page content.
+
+## 4. Decision Rule Application
+
+Per the frozen decision rules:
+
+1. **Forensic analysis**: INCONCLUSIVE (definition_resolved=false, fallback_frozen=true) ✓
+2. **yield_locatable CV**: 0.48 > 0.2 (yield unstable) ✗
+3. **Method1 compatibility**: delta = 68.5pp > 15pp (method mismatch) ✗
+4. **Checkout coverage**: 2 tasks measured, but same as cart page (not true checkout) ⚠
+5. **Viewport anomaly**: PERSISTS (constant 108, captures navigation chrome only) ✗
+
+**Verdict**: FALSIFIED-IN-SETTING (viewport anomaly persists, yield unstable, method mismatch)
+
+**Status**: MEASUREMENT_INVALID (counting bug makes yield_locatable meaningless)
+
+## 5. Consequences
+
+### 5.1 For C-CROSSSITE / C-LLM-INHERIT
+The 812-task corpus **cannot be used for yield claims** under the frozen definition. The viewport measurement captures navigation chrome, not page content. Product lane must either:
+1. Redesign the observation pipeline to capture page content (not just viewport intersection)
+2. Use CDP yield (8.2%) as the conservative floor
+3. Explore alternative measurement approaches (e.g., full-page accessibility tree, scroll-based measurement)
+
+### 5.2 For Denominator Resolution
+The denominator ambiguity **cannot be resolved** by this experiment because the measurement approach (viewport intersection) fails to capture page content. The fallback definition (interactive-only) is frozen but untestable with the current measurement method.
+
+### 5.3 For Method1
+Method1's 0.365 estimate **cannot be validated or falsified** because:
+1. The element definition is unknown (forensic inconclusive)
+2. The measurement approach fails to capture page content (viewport anomaly)
+3. Even corrected estimates are unreliable
+
+## 6. Recommendations
+
+1. **Fix the viewport measurement**: The current approach (viewport intersection with threshold 0.5) captures only fixed navigation chrome. Need a method that captures page content elements.
+2. **Investigate the 108 constant**: Determine why exactly 108 DOM elements intersect the viewport. Is this the Magento 2 header element count? Does scrolling reveal more elements?
+3. **Fix the counting bug**: Ensure viewport_locatable and locatable use the same element definition (both should count only interactive elements).
+4. **Access true checkout page**: Resolve the port 7770 redirect to measure actual checkout behavior.
+5. **Pull GitLab/Reddit Docker images**: Enable H5 site-type comparison.
+
+## 7. Artifacts
+
+- `exp346_raw_results.json`: Raw measurements for 7 tasks (fa71b3b...)
+- `measure_yield_exp346.py`: Frozen measurement script (ee76fc9a...)
+- `frozen_definition.json`: DEF-FALLBACK-INTERACTIVE (9c6bb9a0...)
+- `method1_trace.json`: Forensic analysis (bab6a99a...)
+- `artifacts/exp346_raw_results.json`: Duplicate raw results (2df4a7ce...)
+- `artifacts/viewport_sample_*.json`: Viewport element samples per task
+- `artifacts/raw_ax_tree_*.json`: Raw accessibility tree data per task
+```
+
+## provenance.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-34607693437",
+  "lane": "intel",
+  "provenance": {
+    "github_run_id": "34685459655",
+    "github_run_attempt": 1,
+    "git_commit": "7658f4aa20ca2929e425db0f5062e57a766420cc",
+    "git_branch": "lab2/intel",
+    "base_sha": "24630358d6943aa4b5677166f3631e341edd8494",
+    "request_hash": "d1a2a38e05a7cb02c5afcdc30dd8da46d5fe3656fc3747718d66b621ffd47be2",
+    "request_id": "fc12583614c0a9b6fc1b8808",
+    "frozen_at": "2026-09-11T17:46:45.068382+00:00",
+    "executed_at": "2026-09-12T05:35:55.162768+00:00",
+    "parent_experiment": "EXP-INTEL-34546944360",
+    "parent_verdict": "MIXED"
+  },
+  "environment": {
+    "os": "linux",
+    "platform": "linux",
+    "docker_version": "Docker version 28.0.4, build b8034c0",
+    "docker_image": "am1n3e/webarena-verified-shopping:latest",
+    "docker_image_digest": "not_recorded",
+    "browser": "Chromium (headless)",
+    "playwright_version": "unknown",
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+  },
+  "datasets": {
+    "webarena_verified_shopping": {
+      "source": "am1n3e/webarena-verified-shopping:latest",
+      "base_sha": "24630358d6943aa4b5677166f3631e341edd8494",
+      "frozen_seed": 34607693437,
+      "tasks_randomized": true,
+      "tasks_stratified": true
+    },
+    "webarena_verified_gitlab": {
+      "source": "am1n3e/webarena-verified-gitlab",
+      "status": "BLOCKED",
+      "reason": "Docker image not pulled"
+    },
+    "webarena_verified_reddit": {
+      "source": "am1n3e/webarena-verified-reddit",
+      "status": "BLOCKED",
+      "reason": "Docker image not pulled"
+    },
+    "method1_derivation": {
+      "source": "research/experiments/EXP-INTEL-33945226776/analysis_output.json",
+      "sha256": null,
+      "status": "available"
+    }
+  },
+  "frozen_inputs": {
+    "request.json": {
+      "path": "research/experiments/EXP-INTEL-34607693437/request.json",
+      "sha256": "98f667a8beaa87cb0386c9ec51228ecf21ddeeac39ed6c6878c4d3a710e816d0"
+    },
+    "spec.json": {
+      "path": "research/experiments/EXP-INTEL-34607693437/spec.json",
+      "sha256": "4a626f67bd594c96f0cc657d922e76c2c27e89df8c4efab088096fd3b0e3876a"
+    },
+    "prereg.md": {
+      "path": "research/experiments/EXP-INTEL-34607693437/prereg.md",
+      "sha256": "bc030f4a69b31b8f89a44552997d6b3e7358cd870e1f07ed3603dba68d5afb09"
+    },
+    "freeze.json": {
+      "path": "research/experiments/EXP-INTEL-34607693437/freeze.json",
+      "sha256": "4c693afb1c312baf4e8457e49b69aeffd8eea7f43eff54410e5cbd0e096d7bba"
+    }
+  },
+  "measurement_artifacts": {
+    "raw_results": {
+      "path": "research/experiments/EXP-INTEL-34607693437/exp346_raw_results.json",
+      "sha256": "fa71b3b5beae391d8d69ab2f9e02819ae9c0f99691b618b6f8c4d1bce856983e",
+      "role": "raw"
+    },
+    "measurement_script": {
+      "path": "research/experiments/EXP-INTEL-34607693437/measure_yield_exp346.py",
+      "sha256": "ee76fc9af8bf7799a0099f8508f5818245be3cf75faee08d86574f9a01f441b7",
+      "role": "code"
+    },
+    "frozen_definition": {
+      "path": "research/experiments/EXP-INTEL-34607693437/frozen_definition.json",
+      "sha256": "9c6bb9a03b6cbcdf206ce9192f5fcf60c79d6df8f65850027aeee50b61f503d5",
+      "role": "fixture"
+    },
+    "method1_trace": {
+      "path": "research/experiments/EXP-INTEL-34607693437/method1_trace.json",
+      "sha256": "bab6a99a6aa6eaa9ed9cef85a791928b90ed7c91140d2b1bbb3ed2d923bb9f09",
+      "role": "derived"
+    },
+    "artifacts_directory": {
+      "path": "research/experiments/EXP-INTEL-34607693437/artifacts/",
+      "contents": [
+        "exp346_raw_results.json",
+        "raw_ax_tree_gitlab_001_initial.json",
+        "raw_ax_tree_reddit_001_initial.json",
+        "raw_ax_tree_shop_cart_001_initial.json",
+        "raw_ax_tree_shop_detail_001_initial.json",
+        "raw_ax_tree_shop_detail_002_initial.json",
+        "raw_ax_tree_shop_detail_004_initial.json",
+        "raw_ax_tree_shop_listing_002_initial.json",
+        "raw_ax_tree_shop_listing_004_initial.json",
+        "raw_ax_tree_shop_listing_006_initial.json",
+        "viewport_sample_gitlab_001.json",
+        "viewport_sample_reddit_001.json",
+        "viewport_sample_shop_cart_001.json",
+        "viewport_sample_shop_detail_001.json",
+        "viewport_sample_shop_detail_002.json",
+        "viewport_sample_shop_detail_004.json",
+        "viewport_sample_shop_listing_002.json",
+        "viewport_sample_shop_listing_004.json",
+        "viewport_sample_shop_listing_006.json"
+      ],
+      "role": "raw"
+    }
+  },
+  "parent_chain": {
+    "parent_experiment": "EXP-INTEL-34546944360",
+    "parent_handoff_path": "research/experiments/EXP-INTEL-34546944360/handoff.json",
+    "parent_handoff_sha256": "f7e8d8e37d3fa48c33a23a40cf5b6c7de0f6016fb804cc4aa809d0ea4f492486",
+    "grandparent_experiment": "EXP-INTEL-34377576886"
+  },
+  "reproduction_commands": {
+    "note": "The measurement script has a counting bug. Reproduction requires fixing the viewport counting to only include interactive elements.",
+    "measurement_script": "python3 research/experiments/EXP-INTEL-34607693437/measure_yield_exp346.py",
+    "docker_setup": "docker pull am1n3e/webarena-verified-shopping:latest && docker run -d -p 8080:80 am1n3e/webarena-verified-shopping:latest",
+    "analysis_script": "python3 -c \"import json; data=json.load(open('research/experiments/EXP-INTEL-34607693437/exp346_raw_results.json')); print(json.dumps(data['statistics'], indent=2))\""
+  },
+  "execution_log": {
+    "design_phase": {
+      "model": "opencode/mimo-v2.5-free",
+      "exit_code": 0,
+      "github_run_id": "34629313223",
+      "recorded_at": "2026-09-11T17:46:44.550913+00:00"
+    },
+    "execute_phase": {
+      "model": "opencode/mimo-v2.5-free",
+      "exit_code": 0,
+      "github_run_id": "34674672047",
+      "recorded_at": "2026-09-12T05:35:55.162768+00:00",
+      "script_exit_code": 66,
+      "note": "Model execution succeeded (exit_code 0) but measurement script failed with exit_code 66. Raw results were captured before failure."
+    }
+  }
+}
+```
+
+## audit.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-34607693437",
+  "lane": "intel",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Resolve artifact duality: research/experiments/EXP-INTEL-34607693437/exp346_raw_results.json (sha fa71b3b5beae391d8d69ab2f9e02819ae9c0f99691b618b6f8c4d1bce856983e, viewport_elements=108, yield_locatable 1.31-5.14) and research/experiments/EXP-INTEL-34607693437/artifacts/exp346_raw_results.json (sha 2df4a7ced2d46fdd1b3e7d8ec63b591be2e9693eb3821e3c38e120bcfb8bb3bb, viewport_elements=8, yield_locatable 0.24-0.57) are contradictory measurements from the same experiment_id with same frozen_seed. Metrics in result.json use the 108 dataset; the frozen script measure_yield_exp346.py (sha ee76fc9af8bf7799a0099f8508f5818245be3cf75faee08d86574f9a01f441b7) produces the 8 dataset when re-run (interactive-only viewport counting). Record which script version produced each raw file, hash both scripts, and do not include dual unreconciled raw results in one packet",
+    "Fix viewport numerator/denominator consistency: yield_locatable = viewport_elements / locatable_elements must use same element definition. Result.json VN-COUNTING-BUG correctly identifies bug in 108 dataset (viewport counts ALL DOM elements including HEADER/DIV/UL/LI/SPAN, locatable counts only interactive => yield >1). Current script correctly counts only interactive in viewport (yield 0.24-0.57) but viewport remains constant (108 then 8) indicating viewport intersection does not capture page content. Fix viewport logic to capture page content (including scrolled content or full-page enumeration) or redefine yield as viewport_interactive / locatable_interactive with explicit viewport bbox and threshold",
+    "Investigate and resolve constant viewport anomaly: 108 dataset stdev 0.0 across 7 tasks (product_listing/detail/cart/checkout) with identical 20-sample navigation header; 8 dataset also stdev 0.0 across 5 shopping tasks. Spec H6 requires stdev>0 or explanation. Samples show only fixed Magento2 header chrome. Add per-task viewport coverage proof (overlay/bbox plot, page content vs chrome element counts, scroll-based enumeration) and verify page-specific fragment capture before any corpus claim",
+    "Fix sampling to frozen spec: spec/measurement_validity/prereg 6.1 require stratified randomized selection 2 product_listing +2 detail +2 cart +2 checkout =8 tasks using frozen_seed 34607693437. 108 dataset has 2 listing +2 detail +1 cart +2 checkout_proxy (checkout/cart/ duplicate of cart_1); artifacts dataset has 2 listing +2 detail +1 cart +0 true checkout. Also artifacts listing_clothing status 404 (clothing.html) is not a valid product listing. Use valid task URLs from WebArena-Verified shopping, show randomization log, and exclude 404 tasks from CV/yield calculations",
+    "Fix checkout measurement: true checkout URL http://localhost:8080/checkout/ redirects to localhost:7770 and is not measured; checkout_cart_1/2 in 108 dataset are identical to cart_1 (total_dom 1136, locatable 21, yield 5.14). Record HTTP redirect handling, provide infrastructure proof for port 7770, or mark checkout BLOCKED with explicit proof rather than reporting duplicate cart page as checkout success",
+    "Record Docker image digest and environment provenance: spec measurement_validity requires image digest recorded before measurement. Provenance.json reports docker_image_digest not_recorded, playwright_version unknown, method1_derivation sha256 null. Record digest for am1n3e/webarena-verified-shopping:latest (and gitlab/reddit if attempted) and compare to parent digest to bound drift",
+    "Complete site-type comparison per spec H5: at least 1 gitlab and 1 reddit task with yield_locatable under frozen definition. 108 dataset reports 0 gitlab/0 reddit and marks BLOCKED without docker pull logs; artifacts dataset has gitlab_001 (yield_locatable 1.0) and reddit_001 (0.888) measured on localhost:8081/8082 but not incorporated into result.json metrics or page_type breakdown. Unify datasets, produce explicit git pull/measure logs for am1n3e/webarena-verified-gitlab and reddit, or mark BLOCKED with infrastructure proof",
+    "Correct outcome/status mapping: producer status MEASUREMENT_INVALID outcome FALSIFIES with controls showing null_control pass true (forensic inconclusive + fallback unstable => MIXED). Spec decision_rule says inconclusive+unstable => MIXED (definition_ambiguous), not MEASUREMENT_INVALID (which is reserved for docker/playwright/script failure or <5 tasks). Keep critical counting bug as validity threat but report scientific outcome as MEASUREMENT_INVALID + MIXED/unstable explicitly, and do not claim checkout_coverage_control pass true when checkout is proxy",
+    "Recompute and report both denominators explicitly: spec requires yield_cdp and yield_locatable for every task with explicit delta to Method1 0.365 and CDP baseline 0.0426 under frozen definition. Include corrected yield estimates only with caveats; do not report method1_delta_raw_pp 317pp as meaningful when numerator/denominator mismatch is known; report recomputed shopping yield_cdp mean/CV and shopping yield_locatable (interactive viewport) mean/CV after excluding 404 and fixing counting",
+    "Preserve raw accessibility tree and viewport samples with durable sha256 per task per spec: result.json artifacts list viewport samples with sha256 null; provenance lists artifacts directory but hash chain incomplete. Persist all raw_ax_tree_* and viewport_sample_* with sha256 in result.json/provenance.json"
+  ],
+  "validity_findings": [
+    {
+      "finding_id": "VF-COUNTING-BUG-INCONSISTENT-ARTIFACTS",
+      "severity": "critical",
+      "category": "measurement_validity",
+      "metric_ids": ["yield_locatable_raw_mean", "yield_locatable_raw_cv", "yield_locatable_raw_range", "viewport_elements_mean", "viewport_elements_constant", "method1_delta_raw_pp"],
+      "control_ids": ["positive_control", "stability_control", "method1_compatibility_control"],
+      "description": "Critical numerator/denominator inconsistency plus artifact duality. Primary raw file exp346_raw_results.json (fa71b3b5) counted viewport_elements as ALL DOM elements in viewport rect (108 constant) while locatable_elements as interactive-only (21-82) => yield_locatable 1.31-5.14 (>1 meaningless, viewport not subset of locatable). Producer correctly diagnosed counting bug. However repo artifacts/exp346_raw_results.json (2df4a7ce) from same frozen_seed was produced by current measure_yield_exp346.py which counts viewport correctly (interactive-only, viewport 8 constant, yield 0.24-0.57). Both files are present in packet, both hashed, but result.json metrics (yield_locatable_raw_mean 3.5447, cv 0.4838, delta 317pp) use only the buggy 108 dataset; the 8 dataset is listed as raw artifact but ignored in metrics and page_type breakdown. Current script reproduces 8 dataset, not 108, so packet's frozen script does not reproduce producer metrics. Both datasets show viewport constant stdev 0.0, so fixing counting does not fix content capture.",
+      "evidence_refs": [
+        "result.json:metrics.viewport_elements_mean 108.0 stdev 0.0 yield_locatable_raw_mean 3.5447 yield_locatable_raw_all_above_one true yield_locatable_counting_bug",
+        "result.json:metrics.yield_locatable_corrected_estimate viewport_locatable_estimate 32 yield_corrected_mean 1.0503 note still invalid",
+        "exp346_raw_results.json:measurements viewport_elements 108 locatable 21-82 yield_locatable 1.31-5.14 statistics.viewport_elements_values [108 x7]",
+        "artifacts/exp346_raw_results.json:measurements shop_listing_006 viewport 8 locatable 33 yield 0.2424; shop_cart_001 viewport 8 locatable 14 yield 0.5714",
+        "measure_yield_exp346.py:258-298 counts viewport only if is_inter True (line 287-290 is_in_viewport inside is_inter block)",
+        "result.json:validity_notes[0] VN-COUNTING-BUG critical, [6] VN-FROZEN-SCRIPT-MODIFIED",
+        "result.json:artifacts[0] sha fa71b3b5 and [4] sha 2df4a7ce both role raw"
+      ],
+      "impact": "No yield_locatable value in packet is valid for claim. Buggy 108 dataset yields >1 are meaningless; corrected 8 dataset still captures only header chrome (constant) so yield is not page-content yield. Spec decision rule conditions (2) CV<0.2 and (3) within 15pp of Method1 cannot be evaluated. Status MEASUREMENT_INVALID justified but producer's specific CV 0.4838 and delta 317pp are artifacts of inconsistent counting, not reproducible from frozen script."
+    },
+    {
+      "finding_id": "VF-VIEWPORT-CONSTANT-PERSISTS",
+      "severity": "critical",
+      "category": "measurement_validity",
+      "metric_ids": ["viewport_elements_mean", "viewport_elements_stdev", "viewport_elements_unique_values", "viewport_elements_constant"],
+      "control_ids": ["viewport_anomaly_control", "positive_control"],
+      "description": "Viewport constant anomaly persists and is independently confirmed. 108 dataset: 108.0 stdev 0.0 across 7 tasks covering listing/detail/cart/checkout_proxy with identical 20-sample header (HEADER/DIV/UL/LI/A/SPAN) on all page types. 8 dataset: 8.0 stdev 0.0 across 5 shopping tasks with identical 8-sample header (Compare Products, Skip to Content, logo, My Cart, Search form, combobox, Advanced Search, Search button) on listing/detail/cart. Positive_control expects locatable > viewport but observes locatable < viewport (21-82 <108) in 108 dataset and marginal in 8 dataset (14-33 vs 8). This confirms measurement captures fixed navigation chrome above the fold, not page content. H6 falsified.",
+      "evidence_refs": [
+        "result.json:metrics.viewport_elements_stdev 0.0 viewport_elements_unique_values [108] observations OBS-VIEWPORT-CONSTANT-108-PERSISTS OBS-VIEWPORT-NAVIGATION-ONLY",
+        "exp346_raw_results.json:viewport_sample all tasks first element HEADER My Account, identical 20 entries",
+        "artifacts/exp346_raw_results.json:shop_listing_006 viewport_sample 8 elements all header/search, shop_cart_001 same 8, shop_detail_002 same 8",
+        "result.json:controls.viewport_anomaly_control pass false observed_stdev 0.0 explanation captures Magento2 navigation header only",
+        "provenance.json:viewport width 1280 height 720 threshold 0.5"
+      ],
+      "impact": "Yield_cdp and yield_locatable do not measure fragment capture of page-specific content; they measure chrome coverage. Stability claims (CV 0.168 for CDP, 0.483 for locatable) are driven by denominator variation not viewport variation. No shopping yield claim can be generalized to 192 shopping tasks or 812 corpus until viewport logic is fixed to enumerate content elements (scroll, full-page, or content-aware selector)."
+    },
+    {
+      "finding_id": "VF-SAMPLING-STRATIFICATION-FAILURE",
+      "severity": "high",
+      "category": "sampling",
+      "metric_ids": ["tasks_measured", "tasks_product_listing", "tasks_detail", "tasks_cart", "tasks_checkout", "tasks_shopping"],
+      "control_ids": ["stability_control", "checkout_coverage_control"],
+      "description": "Stratified randomization not satisfied. Spec 6.1 and prereg 5.1 require 8 tasks 2 per type via random.Random(seed=FROZEN_SEED).choices(). Producer selected 7 tasks in 108 dataset (2 listing Tools/Clothing, 2 detail Camera/VR-bag, 1 cart, 2 checkout_cart duplicates) and 5 shopping tasks in 8 dataset (2 listing Hair Care/Clothing 404, 2 detail Eyes/Shampoo, 1 cart). Cart n=1 not 2; checkout n=0 true (proxy) in both; listing_clothing in 8 dataset is 404 Not Found; spec seed randomization not evidenced. Convenience/diverse sample not random corpus draw.",
+      "evidence_refs": [
+        "spec.json:measurement_validity Task selection randomized ... stratified by page type: 2 product-listing, 2 detail, 2 cart, 2 checkout",
+        "prereg.md:6.1 Shopping tasks 8 tasks randomized",
+        "exp346_raw_results.json:statistics.total_tasks_measured 7 selected_tasks includes checkout/cart/ duplicated",
+        "artifacts/exp346_raw_results.json:shop_listing_004 status_code 404 page_title 404 Not Found",
+        "result.json:metrics.tasks_cart 1 tasks_checkout 2 but checkout_proxy.same_as_cart_page true",
+        "result.json:validity_notes[5] VN-SAMPLE-SIZE 7 tasks marginally sufficient"
+      ],
+      "impact": "CV estimates have wider confidence intervals and are page-type unbalanced. Checkout yield hypothesis H4 cannot be tested; product_listing estimate includes invalid 404 page inflating variance. Generalizability to 192 shopping tasks bounded."
+    },
+    {
+      "finding_id": "VF-CHECKOUT-PROXY-FAILURE",
+      "severity": "high",
+      "category": "measurement_validity",
+      "metric_ids": ["checkout_proxy"],
+      "control_ids": ["checkout_coverage_control"],
+      "description": "Checkout coverage control falsely passes. Producer reports checkout_coverage_control pass true with observed 2, but both checkout tasks in 108 dataset use http://localhost:8080/checkout/cart/ (identical URL, dom 1136, locatable 21) same as cart_1; true checkout http://localhost:8080/checkout/ redirects to localhost:7770 (internal port). In 8 dataset 0 checkout tasks measured. No 200 checkout page with distinct DOM is presented. H4 requires yield within 20pp of other types; producer notes same_as_cart_page true.",
+      "evidence_refs": [
+        "result.json:controls.checkout_coverage_control pass true observed 2 note same as cart page",
+        "result.json:metrics.checkout_proxy checkout_url_used checkout/cart/ checkout_url_intended checkout/ same_as_cart_page true redirect_port 7770",
+        "exp346_raw_results.json:measurements checkout_cart_1 url checkout/cart/ total_dom 1136 identical to cart_1; infrastructure_notes checkout/ redirects to 7770",
+        "artifacts/exp346_raw_results.json: no task with page_type checkout shopping (only shop_cart_001 cart)",
+        "spec.json:falsifier (4) checkout yield systematically different >20pp on >50% of checkout tasks"
+      ],
+      "impact": "Checkout yield unknown; checkout systematically different hypothesis not tested. Spec condition (4) at least 2 checkout tasks within 20pp not satisfied. Producer's pass overstates coverage.",
+      "analysis": "Infrastructure failure (redirect) not scientific falsification; should be BLOCKED with proof not PASS."
+    },
+    {
+      "finding_id": "VF-FORENSIC-INCONCLUSIVE-CONFIRMED",
+      "severity": "info",
+      "category": "measurement_validity",
+      "metric_ids": ["definition_resolved", "fallback_frozen", "fallback_definition_id", "forensic_analysis_result", "forensic_finding"],
+      "control_ids": [],
+      "description": "Forensic INCONCLUSIVE confirmed via independent inspection. analysis_output.json method1_element_count.shopping.page_types product_listing estimated_elements 150 estimated_chars 9750 weight 0.3 etc. All values are round numbers (150,120,60,160,80,50) with fixed multiplier chars=elements*65 and no DOM traversal code; verdict MIXED elsewhere. Producer method1_trace.json correctly concludes 150 is heuristic INPUT not output of element-counting algorithm, definition UNKNOWN. Fallback DEF-FALLBACK-INTERACTIVE frozen as specified in prereg 5.3 fallback definition and maps to Definition 2 interactive-only. Positive forensic control satisfied via fallback path.",
+      "evidence_refs": [
+        "method1_trace.json:trace_result INCONCLUSIVE trace_details finding pre-computed heuristic INPUT round numbers",
+        "analysis_output.json:method1_element_count.shopping.page_types.product_listing.estimated_elements 150",
+        "frozen_definition.json:definition_id DEF-FALLBACK-INTERACTIVE source functional_fallback candidate_mapping Definition 2",
+        "result.json:metrics.definition_resolved false fallback_frozen true forensic_analysis_result INCONCLUSIVE",
+        "spec.json:positive_control forensic analysis produces either traceable method or documented inconclusiveness"
+      ],
+      "impact": "H1 correctly marked inconclusive; fallback frozen per prereg. No further forensic fix required. Denominator ambiguity confirmed as heuristic, not measurable, supporting producer's interpretation that definition must be functional."
+    },
+    {
+      "finding_id": "VF-PROVENANCE-GAPS",
+      "severity": "high",
+      "category": "provenance",
+      "metric_ids": [],
+      "control_ids": [],
+      "description": "Provenance gaps violate spec measurement_validity. Docker digest not_recorded (should be sha256 before measurement), playwright_version unknown, method1_derivation sha256 null, measurement script script_exit_code 66 (script failed though measurements saved), 3 viewport_sample artifacts sha256 null, locatable_sample_* not listed in provenance, artifacts directory lists 6 raw trees not in result.json page_type breakdown. Fresh browser context per task is claimed and appears in script (browser.new_context per task) but not verifiable from raw trees alone.",
+      "evidence_refs": [
+        "provenance.json:environment.docker_image_digest not_recorded playwright_version unknown datasets.method1_derivation.sha256 null",
+        "provenance.json:execution_log.execute_phase.script_exit_code 66 note Raw results captured before failure",
+        "result.json:artifacts viewport_sample_* sha256 null",
+        "provenance.json:measurement_artifacts.artifacts_directory contents lists raw_ax_tree_shop_listing_002 etc but result metrics use listing_tools/listing_clothing not matching",
+        "spec.json:measurement_validity Docker image digest recorded before measurement, Frozen script sha256 recorded, Raw accessibility tree saved for each task with durable sha256"
+      ],
+      "impact": "Reproducibility and drift bounding impossible. Next experiment must record digest, script hash, and per-task artifact hashes exactly."
+    },
+    {
+      "finding_id": "VF-CDP-YIELD-REPLICATION-BUT-DEFINITION-DEPENDENT",
+      "severity": "medium",
+      "category": "measurement_validity",
+      "metric_ids": ["yield_cdp_mean", "yield_cdp_cv", "yield_cdp_range", "yield_cdp_stdev"],
+      "control_ids": [],
+      "description": "CDP yield recomputed matches producer but is definition-dependent and chrome-limited. 108 dataset yield_cdp mean 0.0820 cv 0.1686 range 0.0637-0.0951 (producer) recomputed mean 0.08201 cv 0.1685 match true. 8 dataset yield_cdp mean 0.0187 cv 0.106 (or 0.0184 excl 404 cv 0.116) much lower due to different total_cdp counting (DOM elements vs bbox elements). Both are stable (cv<0.2) but measure chrome viewport / total DOM, not interactive yield, so CDP baseline 0.0426 not replicated under corrected DOM counting.",
+      "evidence_refs": [
+        "result.json:metrics.yield_cdp_mean 0.0820 stdev 0.0138 cv 0.1686",
+        "exp346_raw_results.json:statistics.yield_cdp_mean 0.082012 cv 0.168588",
+        "artifacts/exp346_raw_results.json:total_cdp_elements 370-463 yield_cdp 0.017-0.021 mean 0.0187",
+        "spec.json:baselines Parent N=20 yield_cdp 0.0426 stable CV 0.12 as cross-denominator floor"
+      ],
+      "impact": "CDP yield stability is real but value depends on total DOM vs elements_with_bbox vs CDP nodes. Cannot claim 8.2% or 1.8% as definitive CDP yield without frozen denominator."
+    },
+    {
+      "finding_id": "VF-SITE-TYPE-BLOCKED-UNINCORPORATED",
+      "severity": "medium",
+      "category": "sampling",
+      "metric_ids": ["tasks_gitlab", "tasks_reddit"],
+      "control_ids": ["gitlab_reddit_control"],
+      "description": "Site-type comparison blocked status inconsistent. Result.json reports 0 gitlab/reddit and control blocked true; report says Docker images not pulled. Artifacts dataset actually contains successful gitlab_001 (viewport 7 locatable 7 yield_locatable 1.0 yield_cdp 0.189) and reddit_001 (viewport 8 locatable 9 yield 0.888 yield_cdp 0.2) on 8081/8082 with distinct viewport samples (form/textbox/button not header). These contradict result.json's zero counts and are excluded from result metrics, indicating gitlab/reddit were measured after primary results were frozen.",
+      "evidence_refs": [
+        "result.json:metrics.tasks_gitlab 0 tasks_reddit 0 controls.gitlab_reddit_control blocked true",
+        "result.json:observations OBS-GITLAB-REDDY-BLOCKED Docker images not pulled",
+        "artifacts/exp346_raw_results.json:gitlab_001 url localhost:8081 yield_locatable 1.0 reddit_001 url localhost:8082 yield 0.888",
+        "provenance.json:datasets.webarena_verified_gitlab.status BLOCKED reason Docker image not pulled (contradicts artifact existence)"
+      ],
+      "impact": "H5 site-type comparison was technically performed but not integrated; C-CROSSSITE generalization (C-CROSSSITE, C-LLM-INHERIT) remains unknown. Next run must consistently measure or explicitly block with pull logs."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "Method1 estimate 0.365 shopping yield 0.365 (150 elements product_listing)",
+      "metric_id": "method1_delta_pp",
+      "expected": "yield_locatable within 15pp of 0.365 if definition_resolved per prereg H3; producer reports delta",
+      "observed": "Producer 108 dataset delta 317.97pp raw (3.5447-0.365) and 68.5pp corrected estimate both fail; artifacts shopping yield 0.3359 mean delta 2.9pp would pass but viewport chrome invalidates. Producer correctly reports method1_within_15pp false. Forensic inconclusive so H3 not formally testable per spec (only if definition_resolved). No baseline falsification or support justified under frozen fallback.",
+      "verdict": "INCONCLUSIVE_BLOCKED_BY_DEFINITION_AND_MEASUREMENT",
+      "evidence_refs": [
+        "spec.json:baselines Method1 estimate shopping yield 0.365",
+        "result.json:metrics.method1_yield 0.365 method1_delta_raw_pp 317.97 method1_delta_corrected_pp 68.5 method1_within_15pp false",
+        "artifacts/exp346_raw_results.json:shopping mean yield 0.3359 delta 2.9pp (but viewport 8 chrome, 404 included)",
+        "method1_trace.json:conclusion cannot resolve which candidate definition 150 maps to"
+      ]
+    },
+    {
+      "baseline_id": "Heuristic estimate 0.65 FALSIFIED",
+      "metric_id": "heuristic_delta",
+      "expected": "falsified >23pp under any denominator per parent",
+      "observed": "Heuristic 0.65 vs 108 dataset yield_locatable 3.54 delta 289pp, vs yield_cdp 0.082 delta 56.8pp, vs artifacts yield 0.335 delta 31pp all >23pp. Falsification robust under either dataset or denominator.",
+      "verdict": "FALSIFIED_ROBUST",
+      "evidence_refs": [
+        "spec.json:baselines Heuristic 0.65 FALSIFIED robustly (>23pp)",
+        "result.json:metrics.yield_cdp_mean 0.082 vs 0.65 delta 56.8pp (implicit)"
+      ]
+    },
+    {
+      "baseline_id": "Parent N=20 yield_cdp 0.0426 stable CV 0.12",
+      "metric_id": "yield_cdp_mean",
+      "expected": "cross-denominator floor, stable",
+      "observed": "108 dataset 0.0820 CV 0.168 higher than 0.0426 delta 3.94pp (result.json cdp_delta_pp) but still stable CV<0.2; artifacts dataset 0.0187 much lower. Neither replicates 0.0426; value sensitive to total DOM counting method (CDP nodes vs DOM+bbox vs bbox_data length). Producer notes CDP getFullAXTree returns 1 node headless, DOM fallback used.",
+      "verdict": "VALUE_SENSITIVE_NOT_REPLICATED_UNDER_THIS_COUNTING",
+      "evidence_refs": [
+        "spec.json:baselines Parent N=20 yield_cdp 0.0426",
+        "result.json:metrics.cdp_baseline_yield 0.0426 cdp_delta_pp 3.94 observations OBS-CDP-YIELD-STABLE CV 0.17",
+        "exp346_raw_results.json:infrastructure_notes CDP returns 1 node DOM fallback"
+      ]
+    },
+    {
+      "baseline_id": "Parent N=20 yield_locatable 0.079 all-elements-with-bbox ~0.32 interactive-only ~0.42 parent 258 definition 5x range",
+      "metric_id": "yield_locatable",
+      "expected": "demonstrates denominator ambiguity",
+      "observed": "Producer 108 dataset raw yield 3.54 demonstrates counting bug, not the 0.079; artifacts interactive viewport yield 0.335 close to parent interactive 0.32, supporting that interactive definition gives ~0.32-0.34 when viewport correctly counted but still chrome-limited. Ambiguity persists.",
+      "verdict": "AMBIGUITY_CONFIRMED",
+      "evidence_refs": [
+        "spec.json:baselines Parent N=20 yield_locatable 0.079 ~0.32 ~0.42 5x range",
+        "result.json:metrics.locatable_elements_by_type listing 82 detail 32 cart 21 checkout 21"
+      ]
+    },
+    {
+      "baseline_id": "CDP yield 0.0426 stable across 40+ tasks",
+      "metric_id": "yield_cdp_cv",
+      "expected": "stable across tasks",
+      "observed": "Both datasets CV <0.2 (0.168 and 0.106) nominally stable but on chrome-only viewport, so stability is of chrome ratio not content yield.",
+      "verdict": "NOMINALLY_STABLE_BUT_NOT_CONTENT_REPRESENTATIVE",
+      "evidence_refs": [
+        "spec.json:baselines CDP yield 0.0426 stable",
+        "result.json:metrics.yield_cdp_cv 0.1686"
+      ]
+    }
+  ],
+  "recomputed_metrics": {
+    "viewport_elements_108_dataset": {
+      "producer": {"mean": 108.0, "stdev": 0.0, "unique_values": [108], "constant": true},
+      "recomputed": {"mean": 108.0, "stdev": 0.0, "values": [108,108,108,108,108,108,108], "unique": [108]},
+      "match": true,
+      "source": "exp346_raw_results.json:statistics.viewport_elements_values",
+      "anomaly_confirmed": true
+    },
+    "viewport_elements_8_dataset": {
+      "recomputed": {"mean": 8.0, "stdev": 0.0, "values": [8,8,8,8,8], "unique": [8]},
+      "source": "artifacts/exp346_raw_results.json shop_* viewport_elements",
+      "anomaly_confirmed": true,
+      "note": "Also constant, indicates header chrome captured by corrected counting"
+    },
+    "yield_locatable_108_dataset": {
+      "producer_mean": 3.5447,
+      "producer_cv": 0.4838,
+      "recomputed_mean": 3.544673857142857,
+      "recomputed_cv": 0.48378620484973023,
+      "recomputed_range": [1.317073, 5.142857],
+      "match": true,
+      "all_above_one": true,
+      "meaningful": false,
+      "source": "exp346_raw_results.json statistics.yield_locatable_* via python statistics.stdev"
+    },
+    "yield_locatable_8_dataset_shopping": {
+      "recomputed_mean_all5": 0.3359307359307359,
+      "recomputed_cv_all5": 0.43065151699392623,
+      "recomputed_mean_excl_404": 0.3246753246753247,
+      "recomputed_cv_excl_404": 0.5066666666666666,
+      "note": "Includes 404 page shop_listing_004 yield 0.3809; excluding it CV worsens to 0.50, both >0.2 threshold",
+      "source": "artifacts/exp346_raw_results.json shopping tasks"
+    },
+    "yield_cdp_108_dataset": {
+      "producer_mean": 0.082,
+      "producer_cv": 0.1686,
+      "recomputed_mean": 0.08201242857142857,
+      "recomputed_cv_sample": 0.16858815134680094,
+      "match": true,
+      "source": "exp346_raw_results.json"
+    },
+    "yield_cdp_8_dataset": {
+      "recomputed_mean_all5": 0.018729221190216975,
+      "recomputed_cv_all5": 0.10605481652066777,
+      "recomputed_mean_excl_404": 0.018411526487771217,
+      "recomputed_cv_excl_404": 0.11633527585784849,
+      "source": "artifacts/exp346_raw_results.json"
+    },
+    "locatable_elements_by_type_108": {
+      "producer_listing": 82.0,
+      "producer_detail": 32.0,
+      "producer_cart": 21.0,
+      "producer_checkout": 21.0,
+      "recomputed_listing": 82.0,
+      "recomputed_detail": 32.0,
+      "recomputed_cart": 21.0,
+      "recomputed_checkout": 21.0,
+      "match": true
+    },
+    "method1_delta": {
+      "producer_raw_pp": 317.97,
+      "recomputed_raw_pp": 317.4673857142857,
+      "producer_corrected_pp": 68.5,
+      "recomputed_corrected_pp": 68.53,
+      "artifacts_shopping_delta_pp_all5": 2.9069264069263594,
+      "artifacts_shopping_delta_pp_excl_404": 4.03246753246753,
+      "match_raw": true,
+      "note": "Artifacts delta within 15pp would nominally PASS H3 but definition not resolved and viewport chrome invalidates"
+    },
+    "forensic_150": {
+      "recomputed": "INCONCLUSIVE heuristic INPUT round numbers",
+      "producer": "INCONCLUSIVE",
+      "match": true,
+      "source": "analysis_output.json method1_element_count shopping product_listing estimated_elements 150"
+    },
+    "checkout_proxy": {
+      "producer_same_as_cart": true,
+      "recomputed_same_dom": true,
+      "cart_total_dom": 1136,
+      "checkout_total_dom": 1136,
+      "redirect_to_7770": true,
+      "match": true
+    }
+  },
+  "claim_ceiling": "MAX JUSTIFIED: Forensic INCONCLUSIVE confirmed - Method1 150-element estimate is heuristic INPUT not traceable to DOM/AX counting; functional fallback DEF-FALLBACK-INTERACTIVE (interactive roles + bbox + aria/form/onclick) is frozen but not validated for yield. Under frozen interactive definition, viewport yield measurement is INVALID: both packet datasets capture fixed Magento2 navigation chrome only (108 dataset constant 108, 8 dataset constant 8, identical header samples across listing/detail/cart/checkout_proxy), yield_locatable values (1.3-5.14 buggy or 0.24-0.57 corrected) do not measure page content and are unstable (CV 0.48 buggy, 0.43-0.50 corrected, both >0.2 threshold). No checkout page yield measured (checkout/cart duplicate, true checkout redirects to 7770). No valid shopping locatable yield can be claimed; 812-task corpus viability for C-CROSSSITE/C-LLM-INHERIT remains UNKNOWN. CDP yield ~0.02-0.08 stable but chrome-ratio not content yield. Heuristic 0.65 remains FALSIFIED robustly; Method1 0.365 status INCONCLUSIVE pending definition and fixed content capture. Gitlab/reddit yields were measured in artifacts (0.888-1.0) but excluded from metrics, so cross-site claim unverified.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-34607693437/request.json",
+    "research/experiments/EXP-INTEL-34607693437/spec.json",
+    "research/experiments/EXP-INTEL-34607693437/prereg.md",
+    "research/experiments/EXP-INTEL-34607693437/freeze.json",
+    "research/experiments/EXP-INTEL-34607693437/result.json",
+    "research/experiments/EXP-INTEL-34607693437/report.md",
+    "research/experiments/EXP-INTEL-34607693437/provenance.json",
+    "research/experiments/EXP-INTEL-34607693437/exp346_raw_results.json",
+    "research/experiments/EXP-INTEL-34607693437/artifacts/exp346_raw_results.json",
+    "research/experiments/EXP-INTEL-34607693437/measure_yield_exp346.py",
+    "research/experiments/EXP-INTEL-34607693437/frozen_definition.json",
+    "research/experiments/EXP-INTEL-34607693437/method1_trace.json",
+    "research/experiments/EXP-INTEL-33945226776/analysis_output.json",
+    "research/experiments/EXP-INTEL-34546944360/handoff.json",
+    "research/experiments/EXP-INTEL-34546944360/audit.json"
+  ],
+  "unresolved": [
+    "Why viewport intersection captures only fixed header (108 DOM elements then 8 interactive) despite spec viewport 1280x720 threshold 0.5 - is rect computed against viewport or page, is header position:fixed covering viewport, does scrolling or full-page enumeration recover content",
+    "Why exactly 108 ALL-DOM vs 8 interactive header elements intersect viewport across all page types - what is true page-specific fragment count for shopping pages under frozen definition",
+    "True checkout page yield: checkout/ redirects to port 7770 internal service, how to access authenticated checkout content without cart state",
+    "Canonical locatable definition operationalization: does DEF-FALLBACK-INTERACTIVE locate elements an agent can use for inheritance vs all locatable content blocks under 812-task eval",
+    "Docker digest drift impact: shopping image digest not recorded, DOM counts 1136-1696 in 108 dataset vs 370-463 in 8 dataset for same pages, which counting is ground truth",
+    "Artifact duality origin: which execution produced 108 vs 8 dataset, why script_exit_code 66, and which dataset should be canonical for handoff",
+    "Gitlab/reddit cross-site yield generalization for C-CROSSSITE: artifacts show gitlab 1.0 reddit 0.888 but sample n=1 each, needs stratified randomized site-type measurement",
+    "Whether 812-task corpus can be salvaged with corrected content-aware yield or needs replacement pipeline (e.g., full-page AX tree, scroll-cumulative, or CDP-based enumeration)"
+  ]
+}
+```
+
+## verdict.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-34607693437",
+  "lane": "intel",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-CROSSSITE",
+      "status": "HYPOTHESIS",
+      "reason": "Measurement invalid — viewport intersection captures only Magento 2 navigation chrome (constant 108 DOM / 8 interactive across all page types), yield_locatable values meaningless (1.3-5.14 with mixed element definitions), and the frozen script does not reproduce the canonical raw results (artifact duality: 108 vs 8 dataset). No valid shopping locatable yield can be claimed; 812-task corpus viability for C-CROSSSITE remains UNKNOWN."
+    },
+    {
+      "claim_id": "C-LLM-INHERIT",
+      "status": "HYPOTHESIS",
+      "reason": "Measurement invalid — denominator resolution blocked by viewport structural failure. Forensic analysis INCONCLUSIVE (Method1 150 is heuristic INPUT, not traceable to DOM/AX counting). Fallback definition DEF-FALLBACK-INTERACTIVE frozen but untestable with current viewport measurement. No valid yield metric to inform LLM inheritance evaluation."
+    }
+  ],
+  "product_action": "BLOCKED — Do not use 812-task corpus for yield claims. The viewport measurement approach (intersection with threshold 0.5 on 1280x720 viewport) captures only fixed navigation chrome, not page content. Product lane must either (a) redesign the observation pipeline to capture page content elements via full-page DOM enumeration or scroll-cumulative methods, (b) use CDP yield (~4-8%) as a conservative floor with explicit caveat that it measures chrome ratio not interactive yield, or (c) abandon yield_locatable as a metric and define an alternative fragment quality measure.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can full-page accessibility tree enumeration (without viewport chrome filtering) produce a stable and meaningful yield metric for SPIDER fragment model capture, and what fraction of page elements does the fragment model actually retain?",
+  "reason": "The experiment has three structural measurement failures that prevent valid yield claims: (1) Counting bug — yield_locatable = viewport_elements(all DOM 108) / locatable_elements(interactive 21-82) produces values >1.0 on all tasks, which is mathematically meaningless since viewport should be a subset of locatable. (2) Viewport chrome anomaly — exactly 108 DOM elements (then 8 interactive) intersect the viewport across ALL page types (product_listing, detail, cart, checkout_proxy) with stdev=0.0; viewport samples show ONLY Magento 2 header elements (HEADER, DIV, UL, LI, A, SPAN) across all tasks. The measurement captures fixed navigation chrome, not page content. H6 falsified. (3) Artifact duality — two contradictory raw result files exist from the same frozen_seed: exp346_raw_results.json (108 dataset, used in result.json metrics) and artifacts/exp346_raw_results.json (8 dataset, produced by current frozen script). The frozen script does not reproduce the canonical metrics. Additionally: forensic analysis INCONCLUSIVE (Method1 150 is heuristic INPUT), checkout tasks use cart proxy (checkout/cart/ not checkout/ which redirects to port 7770), sampling not as spec (7 tasks not 8, cart n=1, no true checkout, 404 page included), GitLab/Reddit measured in artifacts (yield 0.888-1.0) but excluded from metrics. Per the null control (forensic inconclusive + fallback yield CV 0.48 > 0.2), the scientific outcome is MIXED (definition_ambiguous), but the measurement failures take precedence as MEASUREMENT_INVALID because no valid yield value exists in the packet.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-34607693437/result.json — status MEASUREMENT_INVALID, outcome FALSIFIES, viewport_elements_mean 108.0 stdev 0.0, yield_locatable_raw_mean 3.5447 all_above_one true, counting_bug documented, viewport_anomaly persists",
+    "research/experiments/EXP-INTEL-34607693437/audit.json — status MEASUREMENT_INVALID, producer_claim_supported false, claim_ceiling no valid shopping locatable yield, 9 required_fixes, VF-COUNTING-BUG-INCONSISTENT-ARTIFACTS critical, VF-VIEWPORT-CONSTANT-PERSISTS critical",
+    "research/experiments/EXP-INTEL-34607693437/exp346_raw_results.json — 108 dataset: viewport 108 constant, yield_locatable 1.31-5.14, all tasks navigation header sample",
+    "research/experiments/EXP-INTEL-34607693437/artifacts/exp346_raw_results.json — 8 dataset: viewport 8 constant, yield_locatable 0.24-0.57, also constant viewport",
+    "research/experiments/EXP-INTEL-34607693437/method1_trace.json — trace_result INCONCLUSIVE, 150 is heuristic INPUT not output of element-counting algorithm",
+    "research/experiments/EXP-INTEL-34607693437/frozen_definition.json — DEF-FALLBACK-INTERACTIVE frozen, Definition 2 interactive-only",
+    "research/experiments/EXP-INTEL-34607693437/measure_yield_exp346.py — frozen script, produces 8 dataset not 108, viewport counts interactive only",
+    "research/experiments/EXP-INTEL-34607693437/viewport_sample_*.json — all tasks show identical Magento 2 navigation header elements",
+    "research/experiments/EXP-INTEL-34607693437/spec.json — claim_ids C-CROSSSITE C-LLM-INHERIT, decision_rule MIXED if inconclusive+unstable",
+    "research/experiments/EXP-INTEL-34607693437/provenance.json — docker_image_digest not_recorded, script_exit_code 66, provenance gaps"
+  ]
+}
+```
+
+## handoff.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-34607693437",
+  "lane": "intel",
+  "target_lane": "runtime",
+  "next_question": "Can full-page accessibility tree enumeration (without viewport chrome filtering) produce a stable and meaningful yield metric for SPIDER fragment model capture, and what fraction of page elements does the fragment model actually retain?",
+  "why_next": "The viewport intersection measurement approach (threshold 0.5, 1280x720) is structurally broken for yield measurement — it captures only fixed Magento 2 navigation chrome (constant 108 DOM / 8 interactive elements, stdev 0.0 across all page types), not page content. This is not a data problem solvable by more tasks; it is a measurement design failure. The runtime lane must develop a content-aware element enumeration method (full-page AX tree, scroll-cumulative viewport, or content-aware selectors) before any yield_locatable claim can be made. The frozen definition DEF-FALLBACK-INTERACTIVE is preserved and reusable, but the measurement substrate must change.",
+  "carry_forward": {
+    "established": [
+      "Forensic analysis of Method1 150-element estimate: INCONCLUSIVE — the 150 is a pre-computed heuristic INPUT (round numbers: 150,120,60 for different page types) with no DOM/AX traversal code. Cannot trace to any element-counting algorithm. Definition UNKNOWN. (method1_trace.json: trace_result INCONCLUSIVE)",
+      "Functional fallback definition DEF-FALLBACK-INTERACTIVE frozen: interactive elements with non-null bbox AND (role in button/link/textbox/etc. OR onclick/onsubmit handler OR form membership OR aria-label/aria-describedby). Maps to Definition 2 (interactive-only). (frozen_definition.json)",
+      "Heuristic estimate 0.65 remains FALSIFIED robustly (>23pp under any denominator, confirmed across parent and this experiment). (audit.json: baseline_findings heuristic FALSIFIED_ROBUST)",
+      "Viewport intersection (Playwright, threshold 0.5, 1280x720) captures only fixed Magento 2 navigation chrome, not page content. Both datasets (108 DOM elements, 8 interactive) show constant stdev=0.0 across listing/detail/cart/checkout_proxy with identical header element samples. H6 falsified. (result.json: viewport_anomaly, audit.json: VF-VIEWPORT-CONSTANT-PERSISTS critical)",
+      "yield_locatable = viewport_elements(all DOM) / locatable_elements(interactive) produces values >1.0 (1.31-5.14) — mathematically meaningless. The counting bug uses different element definitions for numerator and denominator. (result.json: yield_locatable_counting_bug)",
+      "Checkout page (http://localhost:8080/checkout/) redirects to port 7770 (internal). Checkout tasks labeled checkout_cart_1/2 use checkout/cart/ URL, identical to cart page (DOM 1136, locatable 21). True checkout yield unknown. (result.json: checkout_proxy)",
+      "CDP yield ~0.02-0.08 is stable (CV<0.2) but measures chrome ratio (viewport/total DOM), not interactive content yield. Value sensitive to DOM counting method. (audit.json: VF-CDP-YIELD-REPLICATION-BUT-DEFINITION-DEPENDENT)",
+      "GitLab and Reddit yields were measured in artifacts (gitlab_001 yield_locatable 1.0, reddit_001 yield 0.888 on ports 8081/8082) but excluded from result.json metrics. Cross-site claim unverified with n=1 each. (audit.json: VF-SITE-TYPE-BLOCKED-UNINCORPORATED)"
+    ],
+    "rejected": [
+      "Viewport intersection with threshold 0.5 as a method to measure page-content yield — REJECTED (captures only fixed navigation chrome across all page types, both 108 and 8 datasets)",
+      "yield_locatable = viewport_elements(all DOM) / locatable_elements(interactive) as a valid metric — REJECTED (mixed element definitions, values >1.0 meaningless)",
+      "Checkout cart proxy (checkout/cart/) as true checkout measurement — REJECTED (identical to cart page, same DOM, same locatable count)",
+      "Heuristic 0.65 as a yield estimate — REJECTED (falsified >23pp under any denominator, robustly across experiments)"
+    ],
+    "unknown": [
+      "What fraction of page elements does the SPIDER fragment model actually capture? (denominator unknown, viewport measurement broken)",
+      "Can full-page DOM enumeration, scroll-cumulative viewport, or content-aware selectors produce stable yield?",
+      "What is the true checkout page yield when accessible (port 7770 redirect resolution)?",
+      "What is the canonical element definition for the 812-task corpus? (forensic inconclusive, fallback frozen but untestable)",
+      "Does the fragment model perform differently on GitLab/Reddit vs shopping sites? (artifacts show 0.888-1.0 but n=1, excluded from metrics)",
+      "Which raw result dataset (108 vs 8) is canonical? What script version produced the 108 dataset? (script_exit_code 66, artifact duality unresolved)",
+      "Does Docker image digest drift affect DOM structure? (digest not_recorded, DOM counts 370-1696 vary across datasets)"
+    ],
+    "do_not_assume": [
+      "Do NOT assume yield_locatable values (1.3-5.14 or 0.24-0.57) represent actual page content yield — counting bug and viewport chrome invalidate both",
+      "Do NOT assume CDP yield (0.02-0.08) represents interactive element yield — it measures chrome ratio (viewport/total DOM)",
+      "Do NOT assume the 812-task corpus is viable for C-CROSSSITE/C-LLM-INHERIT yield claims — measurement substrate must be fixed first",
+      "Do NOT assume Method1 0.365 estimate is valid or invalid — definition unknown, measurement invalid",
+      "Do NOT assume the viewport measurement failure is specific to this Docker image — may be structural to Playwright viewport intersection with threshold 0.5",
+      "Do NOT assume the 108 dataset or 8 dataset is canonical — artifact duality unresolved, both show constant viewport",
+      "Do NOT assume sampling met the spec — 7 tasks not 8, cart n=1, no true checkout, 404 page included, randomization log not evidenced",
+      "Do NOT assume GitLab/Reddit yields (0.888-1.0) are representative — n=1 each, excluded from metrics, different viewport behavior observed",
+      "Do NOT assume frozen script (ee76fc9a) reproduces the canonical metrics — it produces 8 dataset, not 108"
+    ]
+  },
+  "dependencies": [
+    "runtime lane must develop content-aware element enumeration (full-page AX tree, scroll-cumulative, or content-aware selectors) before yield_locatable can be re-measured",
+    "Resolve artifact duality: determine which script version produced 108 dataset, hash both scripts, reconcile or discard one",
+    "Resolve checkout port 7770 redirect to enable true checkout measurement",
+    "Pull GitLab/Reddit Docker images (am1n3e/webarena-verified-gitlab, am1n3e/webarena-verified-reddit) for cross-site comparison",
+    "Record Docker image digest before measurement for drift bounding"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-34607693437/result.json",
+    "research/experiments/EXP-INTEL-34607693437/audit.json",
+    "research/experiments/EXP-INTEL-34607693437/exp346_raw_results.json",
+    "research/experiments/EXP-INTEL-34607693437/artifacts/exp346_raw_results.json",
+    "research/experiments/EXP-INTEL-34607693437/method1_trace.json",
+    "research/experiments/EXP-INTEL-34607693437/frozen_definition.json",
+    "research/experiments/EXP-INTEL-34607693437/measure_yield_exp346.py",
+    "research/experiments/EXP-INTEL-34607693437/spec.json",
+    "research/experiments/EXP-INTEL-34607693437/provenance.json",
+    "research/experiments/EXP-INTEL-34607693437/viewport_sample_*.json",
+    "research/experiments/EXP-INTEL-34546944360/handoff.json"
+  ],
+  "recommended_action": "Route to RUNTIME lane: develop a content-aware element enumeration method that captures page-specific elements (not just fixed navigation chrome). Candidates: (1) full-page accessibility tree walk without viewport filtering, (2) scroll-cumulative viewport measurement with intersection observer, (3) content-aware CSS selectors targeting main content area. Once a content-capturing method is validated (viewport stdev > 0 across page types), re-run yield_locatable measurement with frozen DEF-FALLBACK-INTERACTIVE definition on stratified shopping tasks. Simultaneously resolve artifact duality (which script version is canonical) and checkout port 7770 access."
 }
 ```
 

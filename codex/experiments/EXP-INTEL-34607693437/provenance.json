@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-34607693437",
+  "lane": "intel",
+  "provenance": {
+    "github_run_id": "34685459655",
+    "github_run_attempt": 1,
+    "git_commit": "7658f4aa20ca2929e425db0f5062e57a766420cc",
+    "git_branch": "lab2/intel",
+    "base_sha": "24630358d6943aa4b5677166f3631e341edd8494",
+    "request_hash": "d1a2a38e05a7cb02c5afcdc30dd8da46d5fe3656fc3747718d66b621ffd47be2",
+    "request_id": "fc12583614c0a9b6fc1b8808",
+    "frozen_at": "2026-09-11T17:46:45.068382+00:00",
+    "executed_at": "2026-09-12T05:35:55.162768+00:00",
+    "parent_experiment": "EXP-INTEL-34546944360",
+    "parent_verdict": "MIXED"
+  },
+  "environment": {
+    "os": "linux",
+    "platform": "linux",
+    "docker_version": "Docker version 28.0.4, build b8034c0",
+    "docker_image": "am1n3e/webarena-verified-shopping:latest",
+    "docker_image_digest": "not_recorded",
+    "browser": "Chromium (headless)",
+    "playwright_version": "unknown",
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+  },
+  "datasets": {
+    "webarena_verified_shopping": {
+      "source": "am1n3e/webarena-verified-shopping:latest",
+      "base_sha": "24630358d6943aa4b5677166f3631e341edd8494",
+      "frozen_seed": 34607693437,
+      "tasks_randomized": true,
+      "tasks_stratified": true
+    },
+    "webarena_verified_gitlab": {
+      "source": "am1n3e/webarena-verified-gitlab",
+      "status": "BLOCKED",
+      "reason": "Docker image not pulled"
+    },
+    "webarena_verified_reddit": {
+      "source": "am1n3e/webarena-verified-reddit",
+      "status": "BLOCKED",
+      "reason": "Docker image not pulled"
+    },
+    "method1_derivation": {
+      "source": "research/experiments/EXP-INTEL-33945226776/analysis_output.json",
+      "sha256": null,
+      "status": "available"
+    }
+  },
+  "frozen_inputs": {
+    "request.json": {
+      "path": "research/experiments/EXP-INTEL-34607693437/request.json",
+      "sha256": "98f667a8beaa87cb0386c9ec51228ecf21ddeeac39ed6c6878c4d3a710e816d0"
+    },
+    "spec.json": {
+      "path": "research/experiments/EXP-INTEL-34607693437/spec.json",
+      "sha256": "4a626f67bd594c96f0cc657d922e76c2c27e89df8c4efab088096fd3b0e3876a"
+    },
+    "prereg.md": {
+      "path": "research/experiments/EXP-INTEL-34607693437/prereg.md",
+      "sha256": "bc030f4a69b31b8f89a44552997d6b3e7358cd870e1f07ed3603dba68d5afb09"
+    },
+    "freeze.json": {
+      "path": "research/experiments/EXP-INTEL-34607693437/freeze.json",
+      "sha256": "4c693afb1c312baf4e8457e49b69aeffd8eea7f43eff54410e5cbd0e096d7bba"
+    }
+  },
+  "measurement_artifacts": {
+    "raw_results": {
+      "path": "research/experiments/EXP-INTEL-34607693437/exp346_raw_results.json",
+      "sha256": "fa71b3b5beae391d8d69ab2f9e02819ae9c0f99691b618b6f8c4d1bce856983e",
+      "role": "raw"
+    },
+    "measurement_script": {
+      "path": "research/experiments/EXP-INTEL-34607693437/measure_yield_exp346.py",
+      "sha256": "ee76fc9af8bf7799a0099f8508f5818245be3cf75faee08d86574f9a01f441b7",
+      "role": "code"
+    },
+    "frozen_definition": {
+      "path": "research/experiments/EXP-INTEL-34607693437/frozen_definition.json",
+      "sha256": "9c6bb9a03b6cbcdf206ce9192f5fcf60c79d6df8f65850027aeee50b61f503d5",
+      "role": "fixture"
+    },
+    "method1_trace": {
+      "path": "research/experiments/EXP-INTEL-34607693437/method1_trace.json",
+      "sha256": "bab6a99a6aa6eaa9ed9cef85a791928b90ed7c91140d2b1bbb3ed2d923bb9f09",
+      "role": "derived"
+    },
+    "artifacts_directory": {
+      "path": "research/experiments/EXP-INTEL-34607693437/artifacts/",
+      "contents": [
+        "exp346_raw_results.json",
+        "raw_ax_tree_gitlab_001_initial.json",
+        "raw_ax_tree_reddit_001_initial.json",
+        "raw_ax_tree_shop_cart_001_initial.json",
+        "raw_ax_tree_shop_detail_001_initial.json",
+        "raw_ax_tree_shop_detail_002_initial.json",
+        "raw_ax_tree_shop_detail_004_initial.json",
+        "raw_ax_tree_shop_listing_002_initial.json",
+        "raw_ax_tree_shop_listing_004_initial.json",
+        "raw_ax_tree_shop_listing_006_initial.json",
+        "viewport_sample_gitlab_001.json",
+        "viewport_sample_reddit_001.json",
+        "viewport_sample_shop_cart_001.json",
+        "viewport_sample_shop_detail_001.json",
+        "viewport_sample_shop_detail_002.json",
+        "viewport_sample_shop_detail_004.json",
+        "viewport_sample_shop_listing_002.json",
+        "viewport_sample_shop_listing_004.json",
+        "viewport_sample_shop_listing_006.json"
+      ],
+      "role": "raw"
+    }
+  },
+  "parent_chain": {
+    "parent_experiment": "EXP-INTEL-34546944360",
+    "parent_handoff_path": "research/experiments/EXP-INTEL-34546944360/handoff.json",
+    "parent_handoff_sha256": "f7e8d8e37d3fa48c33a23a40cf5b6c7de0f6016fb804cc4aa809d0ea4f492486",
+    "grandparent_experiment": "EXP-INTEL-34377576886"
+  },
+  "reproduction_commands": {
+    "note": "The measurement script has a counting bug. Reproduction requires fixing the viewport counting to only include interactive elements.",
+    "measurement_script": "python3 research/experiments/EXP-INTEL-34607693437/measure_yield_exp346.py",
+    "docker_setup": "docker pull am1n3e/webarena-verified-shopping:latest && docker run -d -p 8080:80 am1n3e/webarena-verified-shopping:latest",
+    "analysis_script": "python3 -c \"import json; data=json.load(open('research/experiments/EXP-INTEL-34607693437/exp346_raw_results.json')); print(json.dumps(data['statistics'], indent=2))\""
+  },
+  "execution_log": {
+    "design_phase": {
+      "model": "opencode/mimo-v2.5-free",
+      "exit_code": 0,
+      "github_run_id": "34629313223",
+      "recorded_at": "2026-09-11T17:46:44.550913+00:00"
+    },
+    "execute_phase": {
+      "model": "opencode/mimo-v2.5-free",
+      "exit_code": 0,
+      "github_run_id": "34674672047",
+      "recorded_at": "2026-09-12T05:35:55.162768+00:00",
+      "script_exit_code": 66,
+      "note": "Model execution succeeded (exit_code 0) but measurement script failed with exit_code 66. Raw results were captured before failure."
+    }
+  }
+}
