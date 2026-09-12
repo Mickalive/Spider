@@ -1,0 +1,202 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34719136202",
+  "lane": "physics",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "positive_control_pmi_test": 0.5769644935298346,
+    "positive_control_perm_p": 0.000999000999000999,
+    "positive_control_passes": true,
+    "null_control_perm_p": 0.3016983016983017,
+    "null_control_passes": true,
+    "primary_condition": true,
+    "sites_passing_primary": 3,
+    "sites_total": 3,
+    "primary_threshold": 2,
+    "data_sufficient": true,
+    "n_permutations": 1000,
+    "smoothing_alpha": 1.0,
+    "bonferroni_alpha": 0.016666666666666666,
+    "bonferroni_comparisons": 3,
+    "per_site_results": {
+      "dashboard": {
+        "dom_vs_url_bits": 1.005872689245515,
+        "perm_p_dom_bonf": 0.002997002997002997,
+        "passes": true
+      },
+      "multistep_form": {
+        "dom_vs_url_bits": 0.2856385750313877,
+        "perm_p_dom_bonf": 0.002997002997002997,
+        "passes": true
+      },
+      "wizard": {
+        "dom_vs_url_bits": 0.43767582273803873,
+        "perm_p_dom_bonf": 0.002997002997002997,
+        "passes": true
+      }
+    },
+    "site_results": {
+      "dashboard": {
+        "dom_pmi": 1.005872689245515,
+        "url_pmi": 0.0,
+        "dom_vs_url_bits": 1.005872689245515,
+        "n_within_url": 200,
+        "n_test": 40,
+        "n_train": 160,
+        "unique_states_dom": 4,
+        "unique_states_url": 1,
+        "unique_sa_pairs_dom": 15,
+        "perm_p_dom": 0.000999000999000999,
+        "perm_p_dom_bonf": 0.002997002997002997,
+        "effect_d_dom": 10.158845993988832
+      },
+      "multistep_form": {
+        "dom_pmi": 0.2856385750313877,
+        "url_pmi": 0.0,
+        "dom_vs_url_bits": 0.2856385750313877,
+        "n_within_url": 200,
+        "n_test": 40,
+        "n_train": 160,
+        "unique_states_dom": 4,
+        "unique_states_url": 1,
+        "unique_sa_pairs_dom": 5,
+        "perm_p_dom": 0.000999000999000999,
+        "perm_p_dom_bonf": 0.002997002997002997,
+        "effect_d_dom": 9.931617223938407
+      },
+      "wizard": {
+        "dom_pmi": 0.43767582273803873,
+        "url_pmi": 0.0,
+        "dom_vs_url_bits": 0.43767582273803873,
+        "n_within_url": 154,
+        "n_test": 31,
+        "n_train": 123,
+        "unique_states_dom": 4,
+        "unique_states_url": 1,
+        "unique_sa_pairs_dom": 5,
+        "perm_p_dom": 0.000999000999000999,
+        "perm_p_dom_bonf": 0.002997002997002997,
+        "effect_d_dom": 12.038135145117755
+      }
+    },
+    "alpha_sensitivity": {
+      "dashboard": {
+        "alpha_0.0": 1.7545202366846009,
+        "alpha_0.5": 1.2632568937433017,
+        "alpha_1.0": 1.005872689245515,
+        "alpha_2.0": 0.7235932519091326
+      },
+      "multistep_form": {
+        "alpha_0.0": 0.3443609377704336,
+        "alpha_0.5": 0.31202178275053116,
+        "alpha_1.0": 0.2856385750313877,
+        "alpha_2.0": 0.2448934618466545
+      },
+      "wizard": {
+        "alpha_0.0": 0.5161290322580645,
+        "alpha_0.5": 0.47356791732027204,
+        "alpha_1.0": 0.43767582273803873,
+        "alpha_2.0": 0.38036933892449354
+      }
+    },
+    "tautology_check": {
+      "dashboard": {
+        "mi_action_dom_state": 1.9887586809150084,
+        "dom_pmi": 1.005872689245515,
+        "fraction_tautological": 1.9771475080079335
+      }
+    },
+    "three_way_comparison": {
+      "description": "Comparison with parent experiment baselines on same SPAs",
+      "dashboard": {
+        "dom_pmi": 1.006,
+        "request_side_pmi_parent": 0.881,
+        "response_side_pmi_parent": 0.034,
+        "url_only_pmi": 0.0
+      },
+      "multistep_form": {
+        "dom_pmi": 0.286,
+        "request_side_pmi_parent": 0.0,
+        "response_side_pmi_parent": 0.0,
+        "url_only_pmi": 0.0
+      },
+      "wizard": {
+        "dom_pmi": 0.438,
+        "request_side_pmi_parent": 0.0,
+        "response_side_pmi_parent": 0.0,
+        "url_only_pmi": 0.0
+      }
+    }
+  },
+  "controls": {
+    "positive_control_synthetic_dom": {
+      "description": "Synthetic SPA with deterministic DOM evolution (8 states, 4 actions, state-specific DOM features)",
+      "expected": "DOM-feature PMI >= 0.5 bits, permutation p < 0.001 on 80/20 test split",
+      "observed_pmi": 0.5769644935298346,
+      "observed_perm_p": 0.000999000999000999,
+      "result": "PASS"
+    },
+    "null_control_shuffled_real_labels": {
+      "description": "Shuffled action labels on real SPA DOM-feature data (dashboard, multistep_form, wizard)",
+      "expected": "Permutation p > 0.01",
+      "observed_perm_p": 0.3016983016983017,
+      "result": "PASS"
+    },
+    "data_sufficiency": {
+      "description": "Each site has n_test >= 30 on held-out test set after 80/20 temporal split",
+      "expected": "n_test >= 30 per site",
+      "per_site_n_test": {
+        "dashboard": 40,
+        "multistep_form": 40,
+        "wizard": 31
+      },
+      "result": "PASS"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-34719136202/raw_dom_captures.json",
+      "sha256": null,
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-34719136202/pmi_results_dom_features.json",
+      "sha256": null,
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-34719136202/capture_dom_features.js",
+      "sha256": null,
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-34719136202/pmi_dom_features.py",
+      "sha256": null,
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "DOM structural features produce unique state representations on all 3 locally-hosted SPAs: 4 unique DOM states on dashboard, 4 on multistep_form, 4 on wizard (vs 1 URL-only state on all)",
+    "DOM-feature PMI exceeds URL-only PMI by >= 0.1 bits on ALL 3 sites (dashboard +1.006, multistep_form +0.286, wizard +0.438), passing Bonferroni-corrected permutation tests (p=0.003 each)",
+    "On multistep_form and wizard where both request-side and response-side network signals yield 0.0 bits PMI, DOM features achieve first non-trivial PMI: multistep_form 0.286 bits, wizard 0.438 bits",
+    "Dashboard tautology check: MI(action; DOM_state) = 1.989 bits >> DOM PMI = 1.006 bits. Gain is partly action->DOM causality (actions directly modify DOM). However, DOM PMI still significantly exceeds null (d=10.16)",
+    "Alpha sensitivity confirms PMI is not smoothing artifact: alpha=0.0 (no smoothing) yields higher PMI than alpha=1.0 on all sites",
+    "Synthetic positive control passes (0.577 bits, p=0.001), verifying DOM feature extraction pipeline works correctly",
+    "Null control passes (p=0.302), confirming no false-positive pipeline bias"
+  ],
+  "validity_notes": [
+    "Locally-hosted SPAs are Express servers on localhost:3848-3850 with deterministic session-cookie state; claims bounded to locally-hosted simulation, not production SPAs",
+    "Dashboard tautology: MI(action; DOM_state) = 1.989 bits is nearly 2x DOM PMI = 1.006 bits. The dashboard gain is driven by action->DOM causality (clicking a tab changes the DOM to show that tab's content). This is expected for a tabbed interface. The gain is real but tautological — it confirms action->DOM causality, not orthogonal environmental dynamics",
+    "DOM features capture rendered-page state that does not appear in network traffic. On multistep_form/wizard, form fields, validation messages, and step indicators change in the DOM even though network requests are identical (same POST endpoints). This is the mechanism by which DOM achieves non-zero PMI",
+    "Wizard had 6 browser crashes across 25 trajectories (154/200 transitions captured), but n_test=31 still meets the >= 30 threshold",
+    "SHA-256 hash aggregation of DOM features (visible_text_hash, attribute_pattern_hash) may collapse some variation into sparse bins, potentially underestimating true PMI"
+  ],
+  "unresolved": [
+    "Whether DOM-feature PMI on production SPAs with richer rendering (React, Vue virtual DOM) would be higher or lower than on these simple Express SPAs",
+    "Whether finer-grained DOM features (accessibility tree, visual layout, CSS computed styles) would capture additional predictive state variation",
+    "Whether combined representations (DOM + network) would achieve higher PMI than DOM alone",
+    "Whether the deterministic server logic on these SPAs precludes orthogonal (non-tautological) predictive dynamics, or whether the tautology is specific to the tabbed/multistep UI pattern",
+    "Whether response timing (elapsed duration, not absolute timestamp) provides predictive PMI — timing measurement was invalid in parent experiment"
+  ]
+}

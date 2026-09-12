@@ -1,0 +1,183 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34695057869",
+  "lane": "physics",
+  "status": "REVISE",
+  "producer_claim_supported": true,
+  "required_fixes": [
+    "Correct positive-control root-cause attribution and quality_stats: synthetic empty-body rate 54/250 (21.6%) is not Playwright capture failure but intentional server 204 No Content per research/experiments/EXP-PHYSICS-34695057869/raw_network_captures_response_side.json (status 204 exactly equals empty hash e3b0c44298fc1c14, Counter 204:54). Fix research/physics/network_requests/capture_response_side.js and result.json validity_notes[0]/observations[3]/report.md Positive Control Failure Analysis to reflect server design, and fix quality_stats synthetic capture_rate 1.0 which counts empty bodies as successes (pmi_response_side.py quality check counts !== 'missing'/'unavailable' only). Recalculate effective capture rate or label 204 as expected empty.",
+    "Fix null-control implementation to test observed vs shuffled per frozen spec/prereg H3: research/physics/network_requests/pmi_response_side.py lines 402-419 shuffles real SPA data once (shuffled_groups) then calls permutation_test(shuffled_groups, null_stats['mean_pmi']) which tests shuffled vs further shuffles, not observed PMI vs null distribution. Correct to permutation_test(real_triple_groups_resp, real_stats_resp['mean_pmi']). Recomputed correct null p ~0.57 (vs reported 0.762) still PASS (>0.01) so verdict unchanged but method deviates from spec 'Shuffled action labels on real SPA data permutation p >0.01'.",
+    "Reconcile frozen decision-rule inconsistency: spec.json falsifier says 'OR positive control fails' triggers primary failure (implying FALSIFIED-IN-SETTING) while spec.json decision_rule says 'If positive/null control fails ... verdict = MEASUREMENT_INVALID'. Prereg 11.2 maps positive-control fail to FALSIFIED-IN-SETTING, 11.3 reserves MEASUREMENT_INVALID for sample/ pipeline failure. Producer report follows prereg 11.2. Clarify which frozen rule governs and annotate decision; per spec strict reading, positive_control_synthetic_response_side FAIL (0.430 <0.5) would require MEASUREMENT_INVALID, conflicting with producer outcome FALSIFIES/COMPLETE.",
+    "Correct response_timing_ms measurement validity: research/physics/network_requests/capture_response_side.js line 119 sets response_timing_ms = Date.now() (absolute epoch ~1789230100864) not duration, and research/experiments/EXP-PHYSICS-34695057869/raw_network_captures_response_side.json shows 1789230... timestamps for all sites. Spec question lists 'response timing' as signal, but primary discretization (pmi_response_side.py hash_response_side) correctly does not use timing; remove timing from claimed signals or fix to measure elapsed ms, and disclose in validity_notes that timing is invalid.",
+    "Disclose response-body capture-rate validity threat and biased sample: multistep_form 181/267 (67.8%) and wizard 222/360 (61.7%) below prereg 5.3 quality threshold 90% (result.json quality_stats). Recomputed raw_network_captures_response_side.json confirms missing captures are not random (multistep avg 1.76 req/transition, wizard exactly 2.0). Report must state that PMI on multistep/wizard is computed on biased subset and explain missing mechanism; do not claim 90% capture.",
+    "Add missing frequency baseline per spec baselines[3]: 'Frequency baseline (marginal next-state distribution, expected accuracy 1/|S|)' is listed in spec.json baselines but not computed in pmi_response_side.py or reported in result.json/ report.md. Either compute frequency baseline per site or explicitly mark as not applicable in validity_notes."
+  ],
+  "validity_findings": [
+    {
+      "id": "positive_control_misattribution_and_threshold_fragility",
+      "severity": "high",
+      "finding": "Producer attributes synthetic positive-control shortfall (0.430 <0.5 bits) to Playwright response.body() empty buffers (21.6% empty) as infrastructure failure, but raw evidence shows empties are deterministic HTTP 204 responses with empty bodies by server design (synthetic status Counter 200:69, 201:74, 202:53, 204:54; empty hash e3b0c44298fc1c14 occurs only with status 204, Counter identical 54). Server correctly returns no body for 204. Quality check counting (pmi_response_side.py) treats e3b0 as with_body, inflating synthetic capture_rate to 1.0. Threshold 0.5 is arbitrary; permutation p=0.000999 (<0.001) still passes, showing pipeline does detect structure on non-empty subset. Impact is misdiagnosis, not pipeline invalidation.",
+      "evidence": "research/experiments/EXP-PHYSICS-34695057869/raw_network_captures_response_side.json synthetic status 204:54 empty_hash 54/250=0.216; research/physics/network_requests/pmi_response_side.py quality_stats counts !=='missing'/'unavailable'; research/experiments/EXP-PHYSICS-34695057869/result.json metrics.positive_control_pmi_test 0.43008151803657524 positive_control_perm_p 0.000999000999000999 observations[3] validity_notes[0]; pmi_results_response_side.json quality_stats.synthetic capture_rate 1.0",
+      "impact": "Positive control FAIL is borderline and due to intentional 204 empty bodies, not Playwright bug. Per spec decision_rule this would trigger MEASUREMENT_INVALID, but per prereg 11.2 it triggers FALSIFIED-IN-SETTING; producer chose latter. Core falsification (0/3 sites) remains valid; positive-control ceiling should be qualified as 'pipeline detects structure (p<0.001) but bit magnitude below arbitrary 0.5 due to 204 empties' rather than infrastructure failure."
+    },
+    {
+      "id": "null_control_implementation_bug",
+      "severity": "medium",
+      "finding": "Null control code tests shuffled-vs-shuffled instead of observed-vs-shuffled. pmi_response_side.py lines 392-420 computes real_stats_resp then single shuffle shuffled_groups and calls permutation_test(shuffled_groups, null_stats['mean_pmi']). Correct spec is permutation_test(real_triple_groups_resp, real_stats_resp['mean_pmi']). Recomputed correct null p ~0.57 with 200 perms (similar to reported 0.762) still PASS (>0.01), so outcome unchanged but methodology deviates from frozen spec measurement_validity bullet 6 and null_control expected p>0.01 after Bonferroni.",
+      "evidence": "research/physics/network_requests/pmi_response_side.py:392-420; research/experiments/EXP-PHYSICS-34695057869/result.json controls.null_control_shuffled_real_labels observed_perm_p 0.7622377622377622; independent recomputation combined real response PMI 0.05944 correct null p~0.57 vs buggy p~0.77",
+      "impact": "Null validity partially overstated; correct test still passes, so no false-positive pipeline bias, but audit must flag implementation error before promoting."
+    },
+    {
+      "id": "response_capture_rate_below_threshold",
+      "severity": "medium",
+      "finding": "Response-body capture rate below 90% quality threshold on 2/3 real SPAs: multistep_form 67.8% (181/267), wizard 61.7% (222/360) per result.json quality_stats and raw counts, while dashboard 100% and synthetic 100% (with empty 204 counted as captured). Producer discloses in validity_notes but still claims data_sufficient PASS.",
+      "evidence": "research/experiments/EXP-PHYSICS-34695057869/result.json quality_stats multistep_form capture_rate 0.6779 wizard 0.6166 validity_notes[1]; raw_network_captures_response_side.json lens dist multistep [1,2] avg1.76 wizard [2] avg2.0; pmi_response_side.py quality check WARN threshold 0.9",
+      "impact": "Measurement completeness: PMI on multistep/wizard computed on biased subset (timing/race filtering of streaming responses). n_test still >=30 (31,36) so data_sufficiency passes, but representativeness reduced; ceiling must note biased sample."
+    },
+    {
+      "id": "response_timing_invalid",
+      "severity": "medium",
+      "finding": "Response timing signal invalid: capture_response_side.js line 119 and 133 set response_timing_ms = Date.now() absolute timestamp (~1789230100864) not elapsed duration ms. All raw captures show timestamps, not timings, making any timing-based PMI impossible. Primary discretization hash_response_side correctly ignores timing, so primary result unaffected, but spec question lists 'response timing' as part of response-side signals and provenance methods claims timing captured.",
+      "evidence": "research/physics/network_requests/capture_response_side.js:119 response_timing_ms: Date.now(); research/experiments/EXP-PHYSICS-34695057869/raw_network_captures_response_side.json synthetic response_timing_ms 1789230100864 dashboard 1789230644042 etc.; research/physics/network_requests/pmi_response_side.py hash_response_side uses only content_type+body_hash+status",
+      "impact": "Secondary signal (timing) not measured; product consequence cannot claim timing tested. Timing-based dynamics remain unknown, contributing to limited claim ceiling."
+    },
+    {
+      "id": "dashboard_tautology_identifiability",
+      "severity": "high",
+      "finding": "Dashboard response-side signals are tautological action→response causality, correctly identified by producer. Mutual information I(action; response_body_hash)=1.94 bits far exceeds response-side PMI 0.034 bits (fraction_tautological 56.8 reported). Response bodies deterministic function of clicked tab, so response state encodes current action, not predictive next-state dynamics beyond action. Producer interpretation correctly concludes 'not orthogonal environmental dynamics'.",
+      "evidence": "research/experiments/EXP-PHYSICS-34695057869/result.json tautology_check.dashboard mi_action_response_body 1.9402087356672444 response_pmi 0.0341596688872338; pmi_response_side.py compute_mutual_information; report.md Dashboard Tautology Check; recomputed MI 1.9402087356672444 matches",
+      "impact": "Physics discipline: graph reuse not physics. Dashboard response PMI near zero despite high MI confirms response state redundant with action, supporting FALSIFIED-IN-SETTING for orthogonal dynamics."
+    },
+    {
+      "id": "sampling_local_not_production_persists",
+      "severity": "high",
+      "finding": "Population bounded to locally-hosted simulation, correctly labeled now (fixes parent sampling_local_not_production). All 3 SPAs are Express servers on localhost:3848-3850 (provenance code.servers) with single-path routing and deterministic session-cookie state. Results do not generalize to production SPAs with auth, caching, Service Workers, non-deterministic responses. Producer correctly bounds ceiling in validity_notes[2] and report Scope.",
+      "evidence": "research/experiments/EXP-PHYSICS-34695057869/spec.json measurement_validity bullet 2 'Locally-hosted SPAs explicitly labeled as simulation, not production'; provenance.json code.servers dashboard/multistep_form/wizard synthetic; result.json validity_notes[2] 'LOCALLY-HOSTED SPAs NOT PRODUCTION'",
+      "impact": "External validity ceiling is narrow: falsification applies only to this specific SHA-256 body-digest representation on these 3 local SPAs."
+    },
+    {
+      "id": "representation_coarseness_hash_aggregation",
+      "severity": "medium",
+      "finding": "Response-side state is SHA-256(content_type+body_hash[:16]+status) per request, sorted tuple hashed per transition. This collapses per-request variation into single string, losing structure. Dashboard has 64 distinct per-request response hashes but 61 unique transition states on test (n_test 64) — near 1 state per transition, sparse regime where Laplace smoothing dominates PMI. Multistep 11 states for n_test 31, wizard 10 for 36, also sparse. Finer-grained representation (per-request dimensions, full body text, timing) untested. Alpha sensitivity dashboard 0.094 (alpha0.0) to 0.021 (alpha2.0) confirms PMI sensitive to smoothing in sparse regime, but all <0.1 threshold.",
+      "evidence": "research/physics/network_requests/pmi_response_side.py hash_response_side network_requests_to_state; result.json site_results dashboard unique_states_resp 61 unique_sa_pairs_resp 63 n_test64; alpha_sensitivity dashboard alpha_0.0 0.09375 alpha1.0 0.034; recomputed distinct per-request hashes 64 vs transition states 61",
+      "impact": "Negative result is representation-specific. Does not falsify C-WEB-DYNAMICS globally nor rule out finer-grained response-side signals."
+    },
+    {
+      "id": "wizard_temporal_split_fixed",
+      "severity": "low",
+      "finding": "Wizard temporal split now valid, fixing parent wizard_temporal_split_violation. This experiment achieves n_test=36 >=30 on held-out 80/20 split (train 144) vs parent n_train0. No fallback to full-data evaluation used. Data sufficiency correctly PASS per spec.",
+      "evidence": "research/experiments/EXP-PHYSICS-34695057869/result.json controls.data_sufficiency per_site_n_test wizard 36 dashboard64 multistep31; pmi_response_side.py temporal_split no fallback if <10; raw wizard 180 transitions 36 test",
+      "impact": "Improves measurement validity over parent; wizard 0.0 PMI now on proper held-out set."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "url_only_baseline_trivial_zero",
+      "severity": "high",
+      "finding": "URL-only PMI is degenerate 0 bits on all 3 sites by construction (single-path SPAs: /dashboard, /checkout, /wizard via history.pushState). result.json site_results.*.url_pmi 0.0 unique_states_url1. Therefore resp_vs_url_bits equals response_pmi trivially. Primary condition >=0.1 bits is not a strong test of 'beyond URL' when URL carries no information; any non-zero response variation trivially exceeds 0.",
+      "evidence": "research/experiments/EXP-PHYSICS-34695057869/result.json metrics.site_results dashboard url_pmi 0.0 multistep 0.0 wizard 0.0; pmi_response_side.py url_to_state path only; parent handoff do_not_assume URL constant",
+      "impact": "Baseline strength weak: does not discriminate informative URL vs response; threshold trivially satisfied iff response_pmi>0.1. Directional falsification (0.0) still stands but effect size not benchmarked against informative URL baseline."
+    },
+    {
+      "id": "request_side_baseline_strong",
+      "severity": "low",
+      "finding": "Request-side PMI baseline is strong and correctly recomputed: dashboard 1.165 bits perm_p 0.000999 vs response 0.034 p1.0; multistep 0.0 both; wizard 0.0 both. Shows request-side outperforms response-side on dashboard where endpoint varies by tab (GET /api/tab/{tab}), while both fail where endpoints invariant (POST /api/checkout/next, POST /api/wizard/next). Directly supports parent finding and demonstrates response-side adds no value.",
+      "evidence": "research/experiments/EXP-PHYSICS-34695057869/result.json site_results dashboard request_pmi 1.1653013983812563 response_pmi 0.0341596688872338 multistep both 0.0 wizard both0.0; recomputed N=64 dashboard request 1.165 response0.034 matches; report.md Comparison table",
+      "impact": "Baseline validates that pipeline can detect predictive PMI when signal exists (dashboard request-side). Response-side failure not due to pipeline insensitivity."
+    },
+    {
+      "id": "frequency_baseline_missing",
+      "severity": "low",
+      "finding": "Frequency baseline (marginal next-state distribution, expected accuracy 1/|S|) listed in spec.json baselines[3] not computed or reported in result.json or pmi_response_side.py. No per-site frequency accuracy reported. Not material to PMI primary condition but indicates incomplete baseline set per frozen spec.",
+      "evidence": "research/experiments/EXP-PHYSICS-34695057869/spec.json baselines[3] Frequency baseline; result.json metrics/controls no frequency entry; pmi_response_side.py no frequency computation",
+      "impact": "Minor completeness issue; does not affect decision but should be marked exploratory or not applicable."
+    },
+    {
+      "id": "positive_control_threshold_fragility",
+      "severity": "medium",
+      "finding": "Synthetic positive control PMI 0.430 on test split just below 0.5 threshold, permutation p=0.000999 at resolution floor 1/(1000+1). Request-side synthetic PMI 0.533 exceeds threshold, response-side 0.430 below due to 21.6% empty 204s. In-sample recomputed full-data PMI would be higher (parent synthetic 0.86). Threshold 0.5 is arbitrary relative to smoothing alpha=1.0; dashboard alpha sensitivity shows 0.02-0.09 variation. Control technically FAIL but p passes strongly, indicating detection at floor resolution.",
+      "evidence": "research/experiments/EXP-PHYSICS-34695057869/result.json metrics.positive_control_pmi_test 0.430 positive_control_perm_p 0.000999; pmi_results_response_side.json same; recomputed synthetic request 0.532 response0.43; report alpha_sensitivity",
+      "impact": "FAIL label overstates pipeline failure; correct interpretation is borderline magnitude below arbitrary 0.5 but significant detection (p<0.001) on non-empty subset. Should not trigger MEASUREMENT_INVALID alone."
+    },
+    {
+      "id": "shuffled_null_baseline_calibrated",
+      "severity": "low",
+      "finding": "Shuffled null on real SPA data (combined dashboard+multistep+wizard) yields p=0.762 reported (correct p~0.57). High p indicates no false-positive bias under permutation within trajectories. However null computed on combined data rather than per-site Bonferroni per spec null_control 'permutation p >0.01 after Bonferroni for 3 comparisons' – spec expects per-site null, but producer uses combined. Combined null still PASS and per-site response perms are 1.0, so no per-site null violation.",
+      "evidence": "research/experiments/EXP-PHYSICS-34695057869/result.json controls.null_control_shuffled_real_labels observed_perm_p 0.762; spec null_control 'Shuffled action labels on real SPA data (dashboard, multistep_form, wizard) Permutation p >0.01 after Bonferroni for 3 comparisons'; site_results perm_p_response 0.629-1.0",
+      "impact": "Baseline largely passes; combined vs per-site nuance does not change verdict."
+    }
+  ],
+  "recomputed_metrics": {
+    "dashboard_response_pmi_test": 0.0341596688872338,
+    "dashboard_request_pmi_test": 1.1653013983812563,
+    "dashboard_url_pmi_test": 0.0,
+    "dashboard_resp_vs_url_bits": 0.0341596688872338,
+    "dashboard_perm_p_response": 0.6293706293706294,
+    "dashboard_perm_p_response_bonf": 1.0,
+    "dashboard_perm_p_request": 0.000999000999000999,
+    "dashboard_alpha_sensitivity": {
+      "alpha_0.0": 0.09375,
+      "alpha_0.5": 0.04953007814753613,
+      "alpha_1.0": 0.0341596688872338,
+      "alpha_2.0": 0.021189747034769925
+    },
+    "multistep_form_response_pmi_test": 0.0,
+    "multistep_form_request_pmi_test": 0.0,
+    "multistep_form_resp_vs_url_bits": 0.0,
+    "multistep_form_perm_p_response_bonf": 1.0,
+    "wizard_response_pmi_test": 0.0,
+    "wizard_request_pmi_test": 0.0,
+    "wizard_resp_vs_url_bits": 0.0,
+    "wizard_perm_p_response_bonf": 1.0,
+    "synthetic_response_pmi_test": 0.43008151803657524,
+    "synthetic_request_pmi_test": 0.5327855867308978,
+    "synthetic_perm_p": 0.000999000999000999,
+    "sites_passing_primary": 0,
+    "sites_total": 3,
+    "primary_threshold": 2,
+    "primary_condition": false,
+    "data_sufficient_per_site": {
+      "dashboard": 64,
+      "multistep_form": 31,
+      "wizard": 36
+    },
+    "data_sufficient": true,
+    "null_control_reported_p": 0.7622377622377622,
+    "null_control_recomputed_correct_p_200perms": 0.572139303482587,
+    "capture_rates": {
+      "dashboard": 1.0,
+      "multistep_form": 0.6779026217228464,
+      "wizard": 0.6166666666666667,
+      "synthetic": 1.0,
+      "synthetic_empty_rate_due_to_204": 0.216
+    },
+    "tautology_MI_action_response_dashboard": 1.9402087356672444,
+    "n_permutations": 1000,
+    "bonferroni_alpha": 0.016666666666666666
+  },
+  "claim_ceiling": "MAXIMUM JUSTIFIED: On three locally-hosted Express SPAs on localhost:3848-3850 (dashboard single-path tabbed, multistep_form single-path checkout, wizard single-path) with response-side state defined as SHA-256(content_type + response_body_hash[:16] + status_code) per request aggregated as sorted-tuple SHA-256 per transition, response-side signals provide no predictive PMI beyond URL-only on held-out 80/20 temporal split (dashboard +0.034 bits Bonferroni p=1.0, multistep_form 0.0 p=1.0, wizard 0.0 p=1.0; threshold >=0.1 on >=2/3 sites fails 0/3). Dashboard response bodies are tautological with action (I=1.94 bits) yet PMI ~0. Request-side baseline remains stronger (dashboard 1.165 bits p=0.001). Synthetic positive control achieves 0.43 bits p=0.001 (below arbitrary 0.5 due to 21.6% intentional 204 empty responses, not capture failure) so pipeline detects structure but magnitude below threshold. Null control on real SPA shuffled labels shows no false-positive (recomputed p~0.57 >0.01). Claims do NOT extend to production SPAs, finer-grained response representations (full body text/timing/headers), combined request+response state, DOM/timing mechanisms, or other PMI smoothing. C-WEB-DYNAMICS remains HYPOTHESIS.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-34695057869/result.json metrics.per_site_results resp_vs_url_bits 0.034 0.0 0.0 sites_passing_primary0",
+    "research/experiments/EXP-PHYSICS-34695057869/result.json metrics.site_results dashboard response_pmi0.034 request_pmi1.165 url0.0 n_test64/31/36 unique_states_resp61/11/10",
+    "research/experiments/EXP-PHYSICS-34695057869/result.json controls.positive_control_synthetic_response_side observed_pmi0.430 observed_perm_p0.000999 result FAIL",
+    "research/experiments/EXP-PHYSICS-34695057869/result.json controls.null_control_shuffled_real_labels observed_perm_p0.762 PASS",
+    "research/experiments/EXP-PHYSICS-34695057869/result.json metrics.alpha_sensitivity dashboard 0.09375/0.0495/0.034/0.021",
+    "research/experiments/EXP-PHYSICS-34695057869/result.json tautology_check.dashboard mi_action_response_body1.940 response_pmi0.034 fraction56.79",
+    "research/experiments/EXP-PHYSICS-34695057869/pmi_results_response_side.json permutation_tests dashboard_response p0.629 null_mean0.030 null_std0.007",
+    "research/experiments/EXP-PHYSICS-34695057869/raw_network_captures_response_side.json synthetic status 204:54 empty hash e3b0c44298fc1c14 54/250=0.216 dashboard hashes 320 distinct",
+    "research/physics/network_requests/pmi_response_side.py hash_response_side network_requests_to_state compute_pmi_stats temporal_split permutation_test shuffle_actions_within_trajectories",
+    "research/physics/network_requests/capture_response_side.js response_timing_ms Date.now() route interception page.on('response')",
+    "research/experiments/EXP-PHYSICS-34695057869/spec.json claim_ids C-WEB-DYNAMICS falsifier decision_rule measurement_validity baselines",
+    "research/experiments/EXP-PHYSICS-34695057869/prereg.md 11.2/11.3 decision rules primary condition 0.1 bits Bonferroni 0.0167",
+    "research/experiments/EXP-PHYSICS-34695057869/provenance.json code.servers synthetic 3847 dashboard3849 multistep3848 wizard3850",
+    "research/experiments/EXP-PHYSICS-34674671762/handoff.json carry_forward established/rejected/unknown/do_not_assume"
+  ],
+  "unresolved": [
+    "Why synthetic server returns 204 No Content for 54/250 transitions (21.6%) despite spec 'distinct status code 200 for transitions, 201 for terminal' – is this intentional transition-validity logic or server bug? Affects positive-control threshold interpretation.",
+    "Would finer-grained response-side state (per-request hash dimensions, full body text beyond 500 chars, header sequences, actual timing durations) reveal predictive PMI that SHA-256 aggregation obscures? Producer notes unresolved per-site 11/10 unique states but 0 PMI.",
+    "Would response-side signals provide predictive PMI on production SPAs with richer non-deterministic server responses (user-data-dependent, external dependencies)? Locally-hosted deterministic JSON not representative.",
+    "Does proper per-site null control (perm p per SPA) vs combined null change calibration? Current per-site response perm p are 1.0, so still PASS, but spec ambiguity remains.",
+    "What fraction of dashboard response PMI is tautological vs orthogonal when measured in compatible units? Current fraction_tautological 56.8 exceeds 1.0 because MI (1.94) and PMI (0.034) measure different quantities (action-response dependence vs predictive next-state PMI). Proper conditional decomposition I(action; response)/PMI not valid.",
+    "Capture-rate bias: what mechanism causes 32.2% missing on multistep and 38.3% on wizard (streaming, redirect, or route interception race)? Captured subset may be non-random with respect to SPA state."
+  ]
+}
