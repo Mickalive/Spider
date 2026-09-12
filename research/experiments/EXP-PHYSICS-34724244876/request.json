@@ -1,0 +1,20 @@
+{
+  "base_sha": "76ca4f04e7a26bed403396a9e22e4dab58af2696",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-12T23:01:08.947990+00:00",
+  "experiment_id": "EXP-PHYSICS-34724244876",
+  "inherited_last_verdict": "FALSIFIED-IN-SETTING",
+  "inherited_next_question": "On locally-hosted SPAs with deterministic server logic, does any representation achieve predictive PMI beyond what is explained by action-history memory alone? Specifically: (1) what PMI does a history-conditioned baseline P(s'|action_history) achieve, and does DOM or network representation exceed it? (2) on production SPAs with non-deterministic rendering (React/Vue virtual DOM, auth-dependent content, external data), do DOM structural features encode predictive state variation beyond what action labels cause?",
+  "lane": "physics",
+  "origin_github_run_id": "34724244876",
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-34719136202",
+    "path": "research/experiments/EXP-PHYSICS-34719136202/handoff.json",
+    "sha256": "ee13a749a6b4bbc888566d5e82a9f56381b8115a2d8a397d71473501c7c32b3f"
+  },
+  "reason": "pulse",
+  "request_hash": "fb2544e053e74358d2eb6230c5bfb1cfac820b79d77e902cc456e60d5f42aa78",
+  "request_id": "3977387ed7fafa2f190aab84",
+  "schema_version": 1
+}
