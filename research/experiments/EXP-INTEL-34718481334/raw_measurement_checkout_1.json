@@ -1,0 +1,8 @@
+{
+  "task_id": "checkout_1",
+  "url": "http://localhost:8080/checkout/",
+  "page_type": "checkout",
+  "timestamp": "2026-09-12T23:08:19.045396+00:00",
+  "error": "Page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:8080/checkout/\nCall log:\n  - navigating to \"http://localhost:8080/checkout/\", waiting until \"networkidle\"\n",
+  "http_status": null
+}

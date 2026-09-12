@@ -1,0 +1,372 @@
+{
+  "task_id": "listing_clothing-shoes-jewelry",
+  "url": "http://localhost:8080/clothing-shoes-jewelry.html",
+  "page_type": "product_listing",
+  "timestamp": "2026-09-12T23:07:56.439317+00:00",
+  "error": null,
+  "http_status": 200,
+  "page_title": "Clothing, Shoes & Jewelry",
+  "total_dom_elements": 1696,
+  "elements_with_bbox": 1550,
+  "locatable_elements": 82,
+  "viewport_elements": 12,
+  "locatable_sample": [
+    {
+      "tag": "A",
+      "role": "a",
+      "ariaLabel": "store logo",
+      "inForm": false,
+      "x": 86.859375,
+      "y": 158,
+      "w": 162.640625,
+      "h": 17
+    },
+    {
+      "tag": "FORM",
+      "role": "form",
+      "ariaLabel": "",
+      "inForm": true,
+      "x": 8,
+      "y": 212,
+      "w": 1264,
+      "h": 78
+    },
+    {
+      "tag": "DIV",
+      "role": "div",
+      "ariaLabel": "",
+      "inForm": true,
+      "x": 8,
+      "y": 212,
+      "w": 1264,
+      "h": 57
+    },
+    {
+      "tag": "LABEL",
+      "role": "label",
+      "ariaLabel": "",
+      "inForm": true,
+      "x": 8,
+      "y": 212,
+      "w": 43.53125,
+      "h": 17
+    },
+    {
+      "tag": "SPAN",
+      "role": "span",
+      "ariaLabel": "",
+      "inForm": true,
+      "x": 8,
+      "y": 212,
+      "w": 43.53125,
+      "h": 17
+    },
+    {
+      "tag": "DIV",
+      "role": "div",
+      "ariaLabel": "",
+      "inForm": true,
+      "x": 8,
+      "y": 230,
+      "w": 1264,
+      "h": 39
+    },
+    {
+      "tag": "INPUT",
+      "role": "combobox",
+      "ariaLabel": "",
+      "inForm": true,
+      "x": 8,
+      "y": 230,
+      "w": 185,
+      "h": 21
+    },
+    {
+      "tag": "DIV",
+      "role": "div",
+      "ariaLabel": "",
+      "inForm": true,
+      "x": 8,
+      "y": 251,
+      "w": 1264,
+      "h": 18
+    },
+    {
+      "tag": "A",
+      "role": "a",
+      "ariaLabel": "",
+      "inForm": true,
+      "x": 8,
+      "y": 251,
+      "w": 112.390625,
+      "h": 17
+    },
+    {
+      "tag": "DIV",
+      "role": "div",
+      "ariaLabel": "",
+      "inForm": true,
+      "x": 8,
+      "y": 269,
+      "w": 1264,
+      "h": 21
+    },
+    {
+      "tag": "BUTTON",
+      "role": "button",
+      "ariaLabel": "Search",
+      "inForm": true,
+      "x": 8,
+      "y": 269,
+      "w": 58.234375,
+      "h": 21
+    },
+    {
+      "tag": "SPAN",
+      "role": "span",
+      "ariaLabel": "",
+      "inForm": true,
+      "x": 16,
+      "y": 272,
+      "w": 42.234375,
+      "h": 15
+    },
+    {
+      "tag": "FORM",
+      "role": "form",
+      "ariaLabel": "",
+      "inForm": true,
+      "x": 48,
+      "y": 6350.875,
+      "w": 1224,
+      "h": 21
+    },
+    {
+      "tag": "BUTTON",
+      "role": "button",
+      "ariaLabel": "",
+      "inForm": true,
+      "x": 48,
+      "y": 6350.875,
+      "w": 83.421875,
+      "h": 21
+    },
+    {
+      "tag": "SPAN",
+      "role": "span",
+      "ariaLabel": "",
+      "inForm": true,
+      "x": 56,
+      "y": 6353.875,
+      "w": 67.421875,
+      "h": 15
+    },
+    {
+      "tag": "A",
+      "role": "button",
+      "ariaLabel": "Add to Wish List",
+      "inForm": false,
+      "x": 48,
+      "y": 6371.875,
+      "w": 112.859375,
+      "h": 17
+    },
+    {
+      "tag": "A",
+      "role": "button",
+      "ariaLabel": "Add to Compare",
+      "inForm": false,
+      "x": 160.859375,
+      "y": 6371.875,
+      "w": 106.65625,
+      "h": 17
+    },
+    {
+      "tag": "FORM",
+      "role": "form",
+      "ariaLabel": "",
+      "inForm": true,
+      "x": 48,
+      "y": 6729.875,
+      "w": 1224,
+      "h": 21
+    },
+    {
+      "tag": "BUTTON",
+      "role": "button",
+      "ariaLabel": "",
+      "inForm": true,
+      "x": 48,
+      "y": 6729.875,
+      "w": 83.421875,
+      "h": 21
+    },
+    {
+      "tag": "SPAN",
+      "role": "span",
+      "ariaLabel": "",
+      "inForm": true,
+      "x": 56,
+      "y": 6732.875,
+      "w": 67.421875,
+      "h": 15
+    }
+  ],
+  "viewport_sample": [
+    {
+      "tag": "A",
+      "role": "a",
+      "ariaLabel": "store logo",
+      "x": 86.859375,
+      "y": 158,
+      "w": 162.640625,
+      "h": 17
+    },
+    {
+      "tag": "FORM",
+      "role": "form",
+      "ariaLabel": "",
+      "x": 8,
+      "y": 212,
+      "w": 1264,
+      "h": 78
+    },
+    {
+      "tag": "DIV",
+      "role": "div",
+      "ariaLabel": "",
+      "x": 8,
+      "y": 212,
+      "w": 1264,
+      "h": 57
+    },
+    {
+      "tag": "LABEL",
+      "role": "label",
+      "ariaLabel": "",
+      "x": 8,
+      "y": 212,
+      "w": 43.53125,
+      "h": 17
+    },
+    {
+      "tag": "SPAN",
+      "role": "span",
+      "ariaLabel": "",
+      "x": 8,
+      "y": 212,
+      "w": 43.53125,
+      "h": 17
+    },
+    {
+      "tag": "DIV",
+      "role": "div",
+      "ariaLabel": "",
+      "x": 8,
+      "y": 230,
+      "w": 1264,
+      "h": 39
+    },
+    {
+      "tag": "INPUT",
+      "role": "combobox",
+      "ariaLabel": "",
+      "x": 8,
+      "y": 230,
+      "w": 185,
+      "h": 21
+    },
+    {
+      "tag": "DIV",
+      "role": "div",
+      "ariaLabel": "",
+      "x": 8,
+      "y": 251,
+      "w": 1264,
+      "h": 18
+    },
+    {
+      "tag": "A",
+      "role": "a",
+      "ariaLabel": "",
+      "x": 8,
+      "y": 251,
+      "w": 112.390625,
+      "h": 17
+    },
+    {
+      "tag": "DIV",
+      "role": "div",
+      "ariaLabel": "",
+      "x": 8,
+      "y": 269,
+      "w": 1264,
+      "h": 21
+    },
+    {
+      "tag": "BUTTON",
+      "role": "button",
+      "ariaLabel": "Search",
+      "x": 8,
+      "y": 269,
+      "w": 58.234375,
+      "h": 21
+    },
+    {
+      "tag": "SPAN",
+      "role": "span",
+      "ariaLabel": "",
+      "x": 16,
+      "y": 272,
+      "w": 42.234375,
+      "h": 15
+    }
+  ],
+  "interactive_fraction": 0.04834905660377359,
+  "cdp_yield": 0.007075471698113208,
+  "viewport_locatable_yield": 0.14634146341463414,
+  "a11y_error": "'Page' object has no attribute 'accessibility'",
+  "a11y_node_count": 0,
+  "a11y_sample": null,
+  "dom_stats": {
+    "tagCounts": {
+      "html": 1,
+      "head": 1,
+      "script": 44,
+      "meta": 5,
+      "title": 1,
+      "link": 6,
+      "body": 1,
+      "div": 163,
+      "noscript": 1,
+      "header": 1,
+      "ul": 79,
+      "li": 348,
+      "a": 399,
+      "span": 497,
+      "img": 13,
+      "strong": 26,
+      "form": 14,
+      "label": 4,
+      "input": 40,
+      "button": 15,
+      "nav": 1,
+      "main": 1,
+      "h1": 1,
+      "p": 1,
+      "select": 2,
+      "option": 6,
+      "ol": 5,
+      "style": 12,
+      "dl": 1,
+      "dt": 2,
+      "dd": 2,
+      "footer": 1,
+      "small": 2
+    },
+    "formsCount": 14,
+    "inputsCount": 42,
+    "linksCount": 393,
+    "buttonsCount": 15
+  }
+}
