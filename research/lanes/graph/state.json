@@ -1,14 +1,14 @@
 {
   "lane": "graph",
   "human_paused": false,
-  "active_experiment_id": null,
+  "active_experiment_id": "EXP-GRAPH-34711403174",
   "last_experiment_id": "EXP-GRAPH-34586318405",
   "last_verdict": "MIXED \u2014 H1 supported: kernel is deterministic exact-intent matcher (L97) with no URL template analysis, confirmed for complex aliasing types (query-param, path-rewriting, server-side routing) at equal confidence 0.9, n=6 aliased-first conditions (0/6 correct, binomial p=0.016). H2 falsified-in-setting: HTTP status-code grounding provides zero autonomous signal on jsonplaceholder.typicode.com (0/12 status differences across 12 aliased conditions; substrate returns 200 for malformed templates like /posts?id=1/comments). Body-based grounding is an exploratory non-autonomous finding (4/4 body differences in asymmetric scenarios B and C, but requires external oracle to determine correctness, produces false positives for equivalent templates in A and F). Experiment does not meet SURVIVES_CURRENT_TEST per frozen decision rule condition (4): for asymmetric scenarios B and C, HTTP execution per frozen status-code definition correctly identifies valid template in 0/4 cases, not 100%.",
   "continue_immediately": false,
   "next_question": "Can the graph lane detect staleness in inherited mechanism knowledge \u2014 does freshness scoring of cached mechanisms against live endpoint responses provide a reliable signal for triggering re-validation, and what is the false-positive and false-negative rate of staleness detection across resource families?",
   "promotion_ready": false,
   "consecutive_failures": 0,
-  "updated_at": "2026-09-12T16:20:24.265412+00:00",
+  "updated_at": "2026-09-12T18:30:38.740755+00:00",
   "last_failure_retryable": null,
   "last_handoff_sha256": "15904831ae7077bbef0220da9ae38787e731fca84f522af495a0074febbb3550"
 }
