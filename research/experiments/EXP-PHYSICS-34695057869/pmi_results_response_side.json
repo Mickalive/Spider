@@ -1,0 +1,222 @@
+{
+  "experiment_id": "EXP-PHYSICS-34695057869",
+  "lane": "physics",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "positive_control_pmi_test": 0.43008151803657524,
+    "positive_control_perm_p": 0.000999000999000999,
+    "positive_control_passes": false,
+    "null_control_perm_p": 0.7622377622377622,
+    "null_control_passes": true,
+    "primary_condition": false,
+    "sites_passing_primary": 0,
+    "sites_total": 3,
+    "primary_threshold": 2,
+    "data_sufficient": true,
+    "n_permutations": 1000,
+    "smoothing_alpha": 1.0,
+    "bonferroni_alpha": 0.016666666666666666,
+    "bonferroni_comparisons": 3,
+    "per_site_results": {
+      "dashboard": {
+        "resp_vs_url_bits": 0.0341596688872338,
+        "perm_p_response_bonf": 1.0,
+        "passes": false
+      },
+      "multistep_form": {
+        "resp_vs_url_bits": 0.0,
+        "perm_p_response_bonf": 1.0,
+        "passes": false
+      },
+      "wizard": {
+        "resp_vs_url_bits": 0.0,
+        "perm_p_response_bonf": 1.0,
+        "passes": false
+      }
+    },
+    "site_results": {
+      "dashboard": {
+        "response_pmi": 0.0341596688872338,
+        "request_pmi": 1.1653013983812563,
+        "url_pmi": 0.0,
+        "resp_vs_url_bits": 0.0341596688872338,
+        "req_vs_url_bits": 1.1653013983812563,
+        "resp_vs_req_bits": -1.1311417294940225,
+        "n_within_url": 320,
+        "n_test": 64,
+        "n_train": 256,
+        "unique_states_resp": 61,
+        "unique_states_req": 5,
+        "unique_states_url": 1,
+        "unique_sa_pairs_resp": 63,
+        "unique_sa_pairs_req": 18,
+        "perm_p_response": 0.6293706293706294,
+        "perm_p_response_bonf": 1.0,
+        "perm_p_request": 0.000999000999000999,
+        "effect_d_response": 0.5295068663766249,
+        "effect_d_request": 16.9938182610553
+      },
+      "multistep_form": {
+        "response_pmi": 0.0,
+        "request_pmi": 0.0,
+        "url_pmi": 0.0,
+        "resp_vs_url_bits": 0.0,
+        "req_vs_url_bits": 0.0,
+        "resp_vs_req_bits": 0.0,
+        "n_within_url": 152,
+        "n_test": 31,
+        "n_train": 121,
+        "unique_states_resp": 11,
+        "unique_states_req": 4,
+        "unique_states_url": 1,
+        "unique_sa_pairs_resp": 11,
+        "unique_sa_pairs_req": 4,
+        "perm_p_response": 1.0,
+        "perm_p_response_bonf": 1.0,
+        "perm_p_request": 1.0,
+        "effect_d_response": 0.0,
+        "effect_d_request": 0.0
+      },
+      "wizard": {
+        "response_pmi": 0.0,
+        "request_pmi": 0.0,
+        "url_pmi": 0.0,
+        "resp_vs_url_bits": 0.0,
+        "req_vs_url_bits": 0.0,
+        "resp_vs_req_bits": 0.0,
+        "n_within_url": 180,
+        "n_test": 36,
+        "n_train": 144,
+        "unique_states_resp": 10,
+        "unique_states_req": 4,
+        "unique_states_url": 1,
+        "unique_sa_pairs_resp": 10,
+        "unique_sa_pairs_req": 4,
+        "perm_p_response": 1.0,
+        "perm_p_response_bonf": 1.0,
+        "perm_p_request": 1.0,
+        "effect_d_response": 0.0,
+        "effect_d_request": 0.0
+      }
+    },
+    "alpha_sensitivity": {
+      "dashboard": {
+        "alpha_0.0": 0.09375,
+        "alpha_0.5": 0.04953007814753613,
+        "alpha_1.0": 0.0341596688872338,
+        "alpha_2.0": 0.021189747034769925
+      },
+      "multistep_form": {
+        "alpha_0.0": 0.0,
+        "alpha_0.5": 0.0,
+        "alpha_1.0": 0.0,
+        "alpha_2.0": 0.0
+      },
+      "wizard": {
+        "alpha_0.0": 0.0,
+        "alpha_0.5": 0.0,
+        "alpha_1.0": 0.0,
+        "alpha_2.0": 0.0
+      }
+    },
+    "tautology_check": {
+      "dashboard": {
+        "mi_action_response_body": 1.9402087356672444,
+        "response_pmi": 0.0341596688872338,
+        "fraction_tautological": 56.79823016060738
+      }
+    },
+    "quality_stats": {
+      "synthetic": {
+        "total_requests": 250,
+        "with_body": 250,
+        "capture_rate": 1.0
+      },
+      "multistep_form": {
+        "total_requests": 267,
+        "with_body": 181,
+        "capture_rate": 0.6779026217228464
+      },
+      "dashboard": {
+        "total_requests": 320,
+        "with_body": 320,
+        "capture_rate": 1.0
+      },
+      "wizard": {
+        "total_requests": 360,
+        "with_body": 222,
+        "capture_rate": 0.6166666666666667
+      }
+    }
+  },
+  "controls": {
+    "positive_control_synthetic_response_side": {
+      "description": "Synthetic SPA with deterministic response-side variation (8 states, 4 actions, state-specific response bodies)",
+      "expected": "Response-side PMI >= 0.5 bits, permutation p < 0.001 on 80/20 test split",
+      "observed_pmi": 0.43008151803657524,
+      "observed_perm_p": 0.000999000999000999,
+      "result": "FAIL"
+    },
+    "null_control_shuffled_real_labels": {
+      "description": "Shuffled action labels on real SPA response-side data (dashboard, multistep_form, wizard)",
+      "expected": "Permutation p > 0.01",
+      "observed_perm_p": 0.7622377622377622,
+      "result": "PASS"
+    },
+    "data_sufficiency": {
+      "description": "Each site has n_test >= 30 on held-out test set after 80/20 temporal split",
+      "expected": "n_test >= 30 per site",
+      "per_site_n_test": {
+        "dashboard": 64,
+        "multistep_form": 31,
+        "wizard": 36
+      },
+      "result": "PASS"
+    }
+  },
+  "permutation_tests": {
+    "dashboard_response": {
+      "p_value": 0.6293706293706294,
+      "observed_mean_pmi": 0.0341596688872338,
+      "null_mean": 0.03008027182496864,
+      "null_std": 0.0077041438389272646,
+      "effect_size_d": 0.5295068663766249
+    },
+    "dashboard_request": {
+      "p_value": 0.000999000999000999,
+      "observed_mean_pmi": 1.1653013983812563,
+      "null_mean": 0.2581826350174646,
+      "null_std": 0.05337933767613805,
+      "effect_size_d": 16.9938182610553
+    },
+    "multistep_form_response": {
+      "p_value": 1.0,
+      "observed_mean_pmi": 0.0,
+      "null_mean": 0.0,
+      "null_std": 0.0,
+      "effect_size_d": 0.0
+    },
+    "multistep_form_request": {
+      "p_value": 1.0,
+      "observed_mean_pmi": 0.0,
+      "null_mean": 0.0,
+      "null_std": 0.0,
+      "effect_size_d": 0.0
+    },
+    "wizard_response": {
+      "p_value": 1.0,
+      "observed_mean_pmi": 0.0,
+      "null_mean": 0.0,
+      "null_std": 0.0,
+      "effect_size_d": 0.0
+    },
+    "wizard_request": {
+      "p_value": 1.0,
+      "observed_mean_pmi": 0.0,
+      "null_mean": 0.0,
+      "null_std": 0.0,
+      "effect_size_d": 0.0
+    }
+  }
+}
