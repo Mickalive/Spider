@@ -1,9 +1,9 @@
 {
   "stage": "director",
   "category": "VALIDATION_FAILURE",
-  "message": "invalid claim update status: HYPOTHESIS-BOUNDED",
+  "message": "invalid claim update status: FALSIFIED-IN-SETTING",
   "retryable": false,
-  "recorded_at": "2026-09-12T05:14:14.190310+00:00",
-  "github_run_id": "34674671505",
+  "recorded_at": "2026-09-12T09:19:53.123853+00:00",
+  "github_run_id": "34685457783",
   "github_run_attempt": "1"
 }
