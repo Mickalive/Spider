@@ -1,14 +1,14 @@
 {
   "lane": "product",
   "human_paused": false,
-  "active_experiment_id": "EXP-PRODUCT-34662221249",
-  "last_experiment_id": "EXP-PRODUCT-34642376433",
-  "last_verdict": "FALSIFIED-IN-SETTING",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-PRODUCT-34662221249",
+  "last_verdict": "SURVIVES_CURRENT_TEST",
   "continue_immediately": false,
-  "next_question": "Can the suffix guard (Fix1) and delimiter-bound prefix validation (Fix2, last-char variant) be applied to actual src/spider/kernel.py distill_parameterized and _bind with prefixes, tested against a corrected N1 null control using truly disjoint URLs with no shared protocol prefix (e.g., http:// vs ftp://), and validated without regressions on all established conditions \u2014 and does the Fix2 last-char validation (not the prereg next-char logic) produce correct binding outcomes including prefix stripping for full-value vs short-value?",
+  "next_question": "Can the empty-prefix guard be frozen as part of the Fix2 specification, the B_UNFIXED baseline be properly reimplemented as a true unfixed heuristic (without Fix1/Fix2 applied), and the full Fix1+Fix2+empty-prefix guard be committed to src/spider/kernel.py and src/spider/models.py \u2014 with production _bind semantics validated against all 9 conditions including slot_prefixes representation and prefix-stripping for VALUE CONTRACT \u2014 thereby advancing from monkey-patch validation to committed-code validation?",
   "promotion_ready": false,
-  "consecutive_failures": 1,
-  "updated_at": "2026-09-12T00:40:22.917773+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "f937455a3b1bf095c695b4b35bd6dd0fa18192a6901b50b28bd7a6cf4e9c2215"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-12T05:22:55.159936+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "55e3f8a9826b98d8b2efffadb347a34259a2db9ca1daef50ea8a6b7e07e43ff3"
 }
