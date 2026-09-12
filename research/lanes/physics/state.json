@@ -1,14 +1,14 @@
 {
   "lane": "physics",
   "human_paused": false,
-  "active_experiment_id": "EXP-PHYSICS-34695057869",
-  "last_experiment_id": "EXP-PHYSICS-34674671762",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-PHYSICS-34695057869",
   "last_verdict": "FALSIFIED-IN-SETTING",
-  "continue_immediately": false,
-  "next_question": "Do response-side signals (response content-type, response body digest, response timing, response status sequences) captured via Playwright route interception on locally-hosted SPAs with state-dependent server responses provide predictive PMI on within-URL transitions where client-side request signatures are identical across states?",
+  "continue_immediately": true,
+  "next_question": "Do DOM-based state representation (rendered page structural features: element count, tree depth, interactive density, visible text content, attribute patterns) provide predictive PMI on locally-hosted SPAs where both request-side and response-side network-request signals fail (multistep_form, wizard) or are tautological (dashboard)?",
   "promotion_ready": false,
-  "consecutive_failures": 3,
-  "updated_at": "2026-09-12T18:34:46.712578+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "ca491e4b2ac3c6fb4568d3a631261d9e8c6599841d05b02ec1721bd85deef1b1"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-12T21:09:06.789698+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "e0f848d8781c29bbfb534b2da14aa65b6572a43eb6c74c8d741699598a1082f7"
 }
