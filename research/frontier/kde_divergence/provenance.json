@@ -1,16 +1,16 @@
 {
   "experiment_id": "EXP-FRONTIER-34538185726",
-  "execution_timestamp": "2026-09-11T22:57:19Z",
+  "execution_timestamp": "2026-09-12T00:46:52Z",
   "analyzer_script": "run_execute.py (sequential execution of frozen analyze_opt.py logic)",
   "script_hashes": {
     "prereg.md": "eec9f8af7a4386f07fafbf1d70967234c44a7ad830f0af62a5023223f0db06b8",
     "spec.json": "b25d696a82f6f125273f929ba7a49b7fc10248a4b083da76f5828201539e86d1",
     "request.json": "44fc1148df1f4f750c29ef9fdee31b22cedb50bce3c12868c20f1297956b4845",
     "freeze.json": "12248483ab56f981f69d1caefc3395e245feef0809803b7e7ea96189be8c893e",
-    "result.json": "277af013b16365df2c633d35e4d8ee46fba266ffe0020af8298ce464c6e2add5",
-    "raw_tables.json": "108815a719402e90f4677e5d829bd62c823ec790696c7b0e8fd7e4458be962ff"
+    "result.json": "aec730346b0bca281782148aa6e7e4d40c19047b0fac8eb75964dc6f563570bd",
+    "raw_tables.json": "54c7645b84d4cd4cfbc2125770d2d91d7d32f7daad8b458923c5f00a3b00d4c2"
   },
-  "result_hash": "277af013b16365df2c633d35e4d8ee46fba266ffe0020af8298ce464c6e2add5",
+  "result_hash": "aec730346b0bca281782148aa6e7e4d40c19047b0fac8eb75964dc6f563570bd",
   "status": "MEASUREMENT_INVALID",
   "outcome": "NOT_APPLICABLE",
   "claim": "C-WEB-DYNAMICS",
@@ -38,5 +38,5 @@
     "pragmatic_perm_bandwidth_reuse": true,
     "parallel_processes": 1
   },
-  "execution_seconds": 491.6585168838501
+  "execution_seconds": 494.9788267612457
 }
