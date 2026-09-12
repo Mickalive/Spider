@@ -1,0 +1,20 @@
+{
+  "base_sha": "0a5b3d9e31652e151b64be1296ba2358a9ed3acf",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-12T16:15:22.921158+00:00",
+  "experiment_id": "EXP-PRODUCT-34704657427",
+  "inherited_last_verdict": "SURVIVES_CURRENT_TEST",
+  "inherited_next_question": "Does the parameterized kernel save total cost per successful task when run with real browser interactions and live model calls (C-PRODUCT-ECON measurement), and should slot_prefixes empty be accepted as design or computed non-empty for VALUE CONTRACT prefix-stripping?",
+  "lane": "product",
+  "origin_github_run_id": "34704657427",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-34685457833",
+    "path": "research/experiments/EXP-PRODUCT-34685457833/handoff.json",
+    "sha256": "2ac3222a9eb2ae262de7d60c5615f5bfb1d9ae67b0a2b7dce5468a31e14486a6"
+  },
+  "reason": "pulse",
+  "request_hash": "6909e312c8980a637edc6308bb6ad8ad399798f9eefbb913c9d99988800754ed",
+  "request_id": "9815dca093d8081fd08d7423",
+  "schema_version": 1
+}
