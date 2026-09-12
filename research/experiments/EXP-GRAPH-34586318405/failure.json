@@ -1,9 +1,9 @@
 {
   "stage": "director",
   "category": "VALIDATION_FAILURE",
-  "message": "invalid claim update status: ESTABLISHED_CONDITIONAL",
+  "message": "invalid claim update status: SUPPORTED_NARROW",
   "retryable": false,
-  "recorded_at": "2026-09-11T22:53:24.550269+00:00",
-  "github_run_id": "34654573071",
+  "recorded_at": "2026-09-12T00:39:32.313028+00:00",
+  "github_run_id": "34662220388",
   "github_run_attempt": "1"
 }
