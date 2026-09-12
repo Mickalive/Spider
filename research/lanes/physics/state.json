@@ -7,8 +7,8 @@
   "continue_immediately": false,
   "next_question": "Do response-side signals (response content-type, response body digest, response timing, response status sequences) captured via Playwright route interception on locally-hosted SPAs with state-dependent server responses provide predictive PMI on within-URL transitions where client-side request signatures are identical across states?",
   "promotion_ready": false,
-  "consecutive_failures": 2,
-  "updated_at": "2026-09-12T16:39:45.942242+00:00",
+  "consecutive_failures": 3,
+  "updated_at": "2026-09-12T18:34:46.712578+00:00",
   "last_failure_retryable": false,
   "last_handoff_sha256": "ca491e4b2ac3c6fb4568d3a631261d9e8c6599841d05b02ec1721bd85deef1b1"
 }
