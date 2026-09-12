@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synthetic SPA - Network Request Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .state { display: none; }
+        .state.active { display: block; }
+        button { margin: 5px; padding: 10px; }
+        .form-group { margin: 10px 0; }
+        label { display: block; margin-bottom: 5px; }
+        input, select { padding: 5px; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Synthetic SPA State Machine</h1>
+    <p>Current State: <span id="state-display">0</span></p>
+    
+    <!-- State 0: Checkout Step 1 -->
+    <div id="state-0" class="state active">
+        <h2>Checkout Step 1</h2>
+        <form>
+            <div class="form-group">
+                <label for="shipping-name">Shipping Name</label>
+                <input type="text" id="shipping-name" name="shipping-name">
+            </div>
+            <div class="form-group">
+                <label for="shipping-address">Shipping Address</label>
+                <input type="text" id="shipping-address" name="shipping-address">
+            </div>
+        </form>
+    </div>
+    
+    <!-- State 1: Checkout Step 2 -->
+    <div id="state-1" class="state">
+        <h2>Checkout Step 2</h2>
+        <form>
+            <div class="form-group">
+                <label for="card-number">Card Number</label>
+                <input type="text" id="card-number" name="card-number">
+            </div>
+        </form>
+    </div>
+    
+    <!-- State 2: Checkout Step 3 -->
+    <div id="state-2" class="state">
+        <h2>Checkout Step 3</h2>
+        <p>Confirm your order</p>
+    </div>
+    
+    <!-- State 3: Dashboard Overview -->
+    <div id="state-3" class="state">
+        <h2>Dashboard Overview</h2>
+        <p>Statistics and recent activity</p>
+    </div>
+    
+    <!-- State 4: Dashboard Analytics -->
+    <div id="state-4" class="state">
+        <h2>Dashboard Analytics</h2>
+        <p>Charts and analytics</p>
+    </div>
+    
+    <!-- State 5: Dashboard Settings -->
+    <div id="state-5" class="state">
+        <h2>Dashboard Settings</h2>
+        <form>
+            <div class="form-group">
+                <label for="display-name">Display Name</label>
+                <input type="text" id="display-name" name="display-name">
+            </div>
+        </form>
+    </div>
+    
+    <!-- State 6: Profile View -->
+    <div id="state-6" class="state">
+        <h2>Profile View</h2>
+        <p>User profile information</p>
+    </div>
+    
+    <!-- State 7: Profile Edit -->
+    <div id="state-7" class="state">
+        <h2>Profile Edit</h2>
+        <form>
+            <div class="form-group">
+                <label for="edit-email">Email</label>
+                <input type="email" id="edit-email" name="edit-email">
+            </div>
+        </form>
+    </div>
+    
+    <!-- Navigation Buttons -->
+    <div id="navigation">
+        <h3>Actions:</h3>
+        <button type="button" id="btn-form-submit" onclick="takeAction('form_submit')">Form Submit</button>
+        <button type="button" id="btn-button-click" onclick="takeAction('button_click')">Button Click</button>
+        <button type="button" id="btn-link-nav" onclick="takeAction('link_nav')">Link Navigation</button>
+        <button type="button" id="btn-menu-select" onclick="takeAction('menu_select')">Menu Select</button>
+    </div>
+    
+    <script>
+        const states = {
+            0: { name: "Checkout Step 1", api: ["/api/shipping/validate", "/api/cart/summary"] },
+            1: { name: "Checkout Step 2", api: ["/api/payment/methods", "/api/shipping/cost"] },
+            2: { name: "Checkout Step 3", api: ["/api/payment/process", "/api/order/create"] },
+            3: { name: "Dashboard Overview", api: ["/api/dashboard/stats", "/api/dashboard/recent"] },
+            4: { name: "Dashboard Analytics", api: ["/api/analytics/summary", "/api/analytics/chart"] },
+            5: { name: "Dashboard Settings", api: ["/api/settings/user", "/api/settings/preferences"] },
+            6: { name: "Profile View", api: ["/api/profile/info", "/api/profile/activity"] },
+            7: { name: "Profile Edit", api: ["/api/profile/update", "/api/profile/avatar"] }
+        };
+        
+        const transitions = {
+            0: { form_submit: 3, button_click: 4, link_nav: 6, menu_select: 7 },
+            1: { form_submit: 5, button_click: 3, link_nav: 4, menu_select: 6 },
+            2: { form_submit: 3, button_click: 5, link_nav: 7, menu_select: 4 },
+            3: { form_submit: 0, button_click: 1, link_nav: 2, menu_select: 6 },
+            4: { form_submit: 1, button_click: 2, link_nav: 0, menu_select: 7 },
+            5: { form_submit: 2, button_click: 0, link_nav: 1, menu_select: 6 },
+            6: { form_submit: 3, button_click: 4, link_nav: 5, menu_select: 0 },
+            7: { form_submit: 5, button_click: 3, link_nav: 6, menu_select: 1 }
+        };
+        
+        let currentState = 0;
+        
+        async function makeApiCall(endpoint, method) {
+            try {
+                const response = await fetch(endpoint, {
+                    method: method,
+                    headers: { 'Content-Type': 'application/json' },
+                    body: method !== 'GET' ? JSON.stringify({ state: currentState }) : undefined
+                });
+                return { endpoint, method, status: response.status };
+            } catch (e) {
+                // Simulate successful API call for file:// protocol
+                return { endpoint, method, status: 200 };
+            }
+        }
+        
+        async function takeAction(action) {
+            const nextState = transitions[currentState][action];
+            console.log(`Action: ${action}, Current: ${currentState}, Next: ${nextState}`);
+            
+            // Make API calls for the next state
+            const apiCalls = states[nextState].api;
+            const results = [];
+            for (const endpoint of apiCalls) {
+                const method = endpoint.includes('validate') || endpoint.includes('process') || 
+                              endpoint.includes('create') || endpoint.includes('update') || 
+                              endpoint.includes('chart') ? 'POST' : 'GET';
+                const result = await makeApiCall(endpoint, method);
+                results.push(result);
+            }
+            
+            // Hide current state
+            document.getElementById(`state-${currentState}`).classList.remove('active');
+            
+            // Update state
+            currentState = nextState;
+            
+            // Show new state
+            document.getElementById(`state-${currentState}`).classList.add('active');
+            
+            // Update display
+            document.getElementById('state-display').textContent = currentState;
+            
+            // Log transition for Playwright
+            console.log(`TRANSITION:${JSON.stringify({
+                from: currentState,
+                to: nextState,
+                action: action,
+                api_calls: results
+            })}`);
+        }
+        
+        // Initial state display
+        document.getElementById('state-display').textContent = currentState;
+    </script>
+</body>
+</html>

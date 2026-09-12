@@ -1,0 +1,1519 @@
+[
+  {
+    "site_name": "tally_form",
+    "site_url": "https://tally.so/r/wAqjQj",
+    "status": "COMPLETE",
+    "n_transitions": 30,
+    "n_non_leakage": 30,
+    "n_within_url": 28,
+    "unique_net_hashes": 4,
+    "unique_urls": 3,
+    "pmi_results": {
+      "url_only_all": 0.012345950742798132,
+      "net_only_all": 0.012173569755670759,
+      "url_only_within_url": 0.013227804367283713,
+      "net_only_within_url": 0.013043110452504383
+    },
+    "permutation_tests": {
+      "url_only": {
+        "p_value": 0.9310689310689311,
+        "null_mean": 0.03146346450001968
+      },
+      "net_only": {
+        "p_value": 1.0,
+        "null_mean": 0.06773690647525957
+      },
+      "within_url_net": {
+        "p_value": 0.994005994005994,
+        "null_mean": 0.03572915526732663
+      }
+    },
+    "null_control": {
+      "shuffled_pmi": 0.05606784979863996,
+      "permutation_p": 0.4129353233830846,
+      "passes": true
+    },
+    "entropy_analysis": {
+      "url_entropy": 0.420026001688088,
+      "net_entropy": 0.7665095065529053
+    },
+    "decision_conditions": {
+      "gain_within_url_bits": -0.00018469391477933007,
+      "condition_1_gain_ge_0.1": false,
+      "condition_2_permutation_p": 0.994005994005994,
+      "condition_2_passes": false
+    },
+    "raw_transitions": [
+      {
+        "step": 0,
+        "state_before": {
+          "url": "https://tally.so/r/wAqjQj",
+          "net_hash": "6068b362a2b9a74f"
+        },
+        "action": "click_button",
+        "state_after": {
+          "url": "https://tally.so/",
+          "net_hash": "6068b362a2b9a74f"
+        },
+        "n_api_calls": 3,
+        "api_endpoints": [
+          "/api/5277002/envelope/",
+          "/api/event"
+        ]
+      },
+      {
+        "step": 1,
+        "state_before": {
+          "url": "https://tally.so/",
+          "net_hash": "92a55755ef1352c4"
+        },
+        "action": "click_button",
+        "state_after": {
+          "url": "https://tally.so/create",
+          "net_hash": "92a55755ef1352c4"
+        },
+        "n_api_calls": 5,
+        "api_endpoints": [
+          "/api/5277002/envelope/",
+          "/api/event",
+          "/workspaces",
+          "/_next/data/PULCc6sjiWT5l9TTnC9da/create.json"
+        ]
+      },
+      {
+        "step": 2,
+        "state_before": {
+          "url": "https://tally.so/create",
+          "net_hash": "empty"
+        },
+        "action": "click_button",
+        "state_after": {
+          "url": "https://tally.so/create",
+          "net_hash": "empty"
+        },
+        "n_api_calls": 0,
+        "api_endpoints": []
+      },
+      {
+        "step": 3,
+        "state_before": {
+          "url": "https://tally.so/create",
+          "net_hash": "empty"
+        },
+        "action": "click_next",
+        "state_after": {
+          "url": "https://tally.so/create",
+          "net_hash": "empty"
+        },
+        "n_api_calls": 0,
+        "api_endpoints": []
+      },
+      {
+        "step": 4,
+        "state_before": {
+          "url": "https://tally.so/create",
+          "net_hash": "cab41aeabc92c76c"
+        },
+        "action": "click_next",
+        "state_after": {
+          "url": "https://tally.so/create",
+          "net_hash": "cab41aeabc92c76c"
+        },
+        "n_api_calls": 1,
+        "api_endpoints": [
+          "/workspaces"
+        ]
+      },
+      {
+        "step": 5,
+        "state_before": {
+          "url": "https://tally.so/create",
+          "net_hash": "empty"
+        },
+        "action": "click_next",
+        "state_after": {
+          "url": "https://tally.so/create",
+          "net_hash": "empty"
+        },
+        "n_api_calls": 0,
+        "api_endpoints": []
+      },
+      {
+        "step": 6,
+        "state_before": {
+          "url": "https://tally.so/create",
+          "net_hash": "empty"
+        },
+        "action": "click_next",
+        "state_after": {
+          "url": "https://tally.so/create",
+          "net_hash": "empty"
+        },
+        "n_api_calls": 0,
+        "api_endpoints": []
+      },
+      {
+        "step": 7,
+        "state_before": {
+          "url": "https://tally.so/create",
+          "net_hash": "empty"
+        },
+        "action": "click_next",
+        "state_after": {
+          "url": "https://tally.so/create",
+          "net_hash": "empty"
+        },
+        "n_api_calls": 0,
+        "api_endpoints": []
+      },
+      {
+        "step": 8,
+        "state_before": {
+          "url": "https://tally.so/create",
+          "net_hash": "empty"
+        },
+        "action": "click_next",
+        "state_after": {
+          "url": "https://tally.so/create",
+          "net_hash": "empty"
+        },
+        "n_api_calls": 0,
+        "api_endpoints": []
+      },
+      {
+        "step": 9,
+        "state_before": {
+          "url": "https://tally.so/create",
+          "net_hash": "empty"
+        },
+        "action": "click_next",
+        "state_after": {
+          "url": "https://tally.so/create",
+          "net_hash": "empty"
+        },
+        "n_api_calls": 0,
+        "api_endpoints": []
+      },
+      {
+        "step": 10,
+        "state_before": {
+          "url": "https://tally.so/create",
+          "net_hash": "empty"
+        },
+        "action": "click_next",
+        "state_after": {
+          "url": "https://tally.so/create",
+          "net_hash": "empty"
+        },
+        "n_api_calls": 0,
+        "api_endpoints": []
+      },
+      {
+        "step": 11,
+        "state_before": {
+          "url": "https://tally.so/create",
+          "net_hash": "cab41aeabc92c76c"
+        },
+        "action": "click_next",
+        "state_after": {
+          "url": "https://tally.so/create",
+          "net_hash": "cab41aeabc92c76c"
+        },
+        "n_api_calls": 1,
+        "api_endpoints": [
+          "/workspaces"
+        ]
+      },
+      {
+        "step": 12,
+        "state_before": {
+          "url": "https://tally.so/create",
+          "net_hash": "empty"
+        },
+        "action": "click_next",
+        "state_after": {
+          "url": "https://tally.so/create",
+          "net_hash": "empty"
+        },
+        "n_api_calls": 0,
+        "api_endpoints": []
+      },
+      {
+        "step": 13,
+        "state_before": {
+          "url": "https://tally.so/create",
+          "net_hash": "empty"
+        },
+        "action": "click_next",
+        "state_after": {
+          "url": "https://tally.so/create",
+          "net_hash": "empty"
+        },
+        "n_api_calls": 0,
+        "api_endpoints": []
+      },
+      {
+        "step": 14,
+        "state_before": {
+          "url": "https://tally.so/create",
+          "net_hash": "empty"
+        },
+        "action": "click_next",
+        "state_after": {
+          "url": "https://tally.so/create",
+          "net_hash": "empty"
+        },
+        "n_api_calls": 0,
+        "api_endpoints": []
+      },
+      {
+        "step": 15,
+        "state_before": {
+          "url": "https://tally.so/create",
+          "net_hash": "empty"
+        },
+        "action": "click_next",
+        "state_after": {
+          "url": "https://tally.so/create",
+          "net_hash": "empty"
+        },
+        "n_api_calls": 0,
+        "api_endpoints": []
+      },
+      {
+        "step": 16,
+        "state_before": {
+          "url": "https://tally.so/create",
+          "net_hash": "empty"
+        },
+        "action": "click_next",
+        "state_after": {
+          "url": "https://tally.so/create",
+          "net_hash": "empty"
+        },
+        "n_api_calls": 0,
+        "api_endpoints": []
+      },
+      {
+        "step": 17,
+        "state_before": {
+          "url": "https://tally.so/create",
+          "net_hash": "empty"
+        },
+        "action": "click_next",
+        "state_after": {
+          "url": "https://tally.so/create",
+          "net_hash": "empty"
+        },
+        "n_api_calls": 0,
+        "api_endpoints": []
+      },
+      {
+        "step": 18,
+        "state_before": {
+          "url": "https://tally.so/create",
+          "net_hash": "empty"
+        },
+        "action": "click_next",
+        "state_after": {
+          "url": "https://tally.so/create",
+          "net_hash": "empty"
+        },
+        "n_api_calls": 0,
+        "api_endpoints": []
+      },
+      {
+        "step": 19,
+        "state_before": {
+          "url": "https://tally.so/create",
+          "net_hash": "empty"
+        },
+        "action": "click_next",
+        "state_after": {
+          "url": "https://tally.so/create",
+          "net_hash": "empty"
+        },
+        "n_api_calls": 0,
+        "api_endpoints": []
+      },
+      {
+        "step": 20,
+        "state_before": {
+          "url": "https://tally.so/create",
+          "net_hash": "empty"
+        },
+        "action": "click_next",
+        "state_after": {
+          "url": "https://tally.so/create",
+          "net_hash": "empty"
+        },
+        "n_api_calls": 0,
+        "api_endpoints": []
+      },
+      {
+        "step": 21,
+        "state_before": {
+          "url": "https://tally.so/create",
+          "net_hash": "empty"
+        },
+        "action": "click_next",
+        "state_after": {
+          "url": "https://tally.so/create",
+          "net_hash": "empty"
+        },
+        "n_api_calls": 0,
+        "api_endpoints": []
+      },
+      {
+        "step": 22,
+        "state_before": {
+          "url": "https://tally.so/create",
+          "net_hash": "empty"
+        },
+        "action": "click_next",
+        "state_after": {
+          "url": "https://tally.so/create",
+          "net_hash": "empty"
+        },
+        "n_api_calls": 0,
+        "api_endpoints": []
+      },
+      {
+        "step": 23,
+        "state_before": {
+          "url": "https://tally.so/create",
+          "net_hash": "empty"
+        },
+        "action": "click_next",
+        "state_after": {
+          "url": "https://tally.so/create",
+          "net_hash": "empty"
+        },
+        "n_api_calls": 0,
+        "api_endpoints": []
+      },
+      {
+        "step": 24,
+        "state_before": {
+          "url": "https://tally.so/create",
+          "net_hash": "empty"
+        },
+        "action": "click_next",
+        "state_after": {
+          "url": "https://tally.so/create",
+          "net_hash": "empty"
+        },
+        "n_api_calls": 0,
+        "api_endpoints": []
+      },
+      {
+        "step": 25,
+        "state_before": {
+          "url": "https://tally.so/create",
+          "net_hash": "empty"
+        },
+        "action": "click_next",
+        "state_after": {
+          "url": "https://tally.so/create",
+          "net_hash": "empty"
+        },
+        "n_api_calls": 0,
+        "api_endpoints": []
+      },
+      {
+        "step": 26,
+        "state_before": {
+          "url": "https://tally.so/create",
+          "net_hash": "empty"
+        },
+        "action": "click_next",
+        "state_after": {
+          "url": "https://tally.so/create",
+          "net_hash": "empty"
+        },
+        "n_api_calls": 0,
+        "api_endpoints": []
+      },
+      {
+        "step": 27,
+        "state_before": {
+          "url": "https://tally.so/create",
+          "net_hash": "empty"
+        },
+        "action": "click_next",
+        "state_after": {
+          "url": "https://tally.so/create",
+          "net_hash": "empty"
+        },
+        "n_api_calls": 0,
+        "api_endpoints": []
+      },
+      {
+        "step": 28,
+        "state_before": {
+          "url": "https://tally.so/create",
+          "net_hash": "empty"
+        },
+        "action": "click_next",
+        "state_after": {
+          "url": "https://tally.so/create",
+          "net_hash": "empty"
+        },
+        "n_api_calls": 0,
+        "api_endpoints": []
+      },
+      {
+        "step": 29,
+        "state_before": {
+          "url": "https://tally.so/create",
+          "net_hash": "empty"
+        },
+        "action": "click_next",
+        "state_after": {
+          "url": "https://tally.so/create",
+          "net_hash": "empty"
+        },
+        "n_api_calls": 0,
+        "api_endpoints": []
+      }
+    ]
+  },
+  {
+    "site_name": "typeform",
+    "site_url": "https://form.typeform.com/to/sample",
+    "status": "COMPLETE",
+    "n_transitions": 30,
+    "n_non_leakage": 30,
+    "n_within_url": 30,
+    "unique_net_hashes": 11,
+    "unique_urls": 1,
+    "pmi_results": {
+      "url_only_all": 0.0,
+      "net_only_all": 0.0,
+      "url_only_within_url": 0.0,
+      "net_only_within_url": 0.0
+    },
+    "permutation_tests": {
+      "url_only": {
+        "p_value": 0.000999000999000999,
+        "null_mean": 0.0
+      },
+      "net_only": {
+        "p_value": 1.0,
+        "null_mean": 0.027657031085605216
+      },
+      "within_url_net": {
+        "p_value": 1.0,
+        "null_mean": 0.027657031085605216
+      }
+    },
+    "null_control": {
+      "shuffled_pmi": 0.022373529747583523,
+      "permutation_p": 0.8905472636815921,
+      "passes": true
+    },
+    "entropy_analysis": {
+      "url_entropy": 0.0,
+      "net_entropy": 2.440223928941852
+    },
+    "decision_conditions": {
+      "gain_within_url_bits": 0.0,
+      "condition_1_gain_ge_0.1": false,
+      "condition_2_permutation_p": 1.0,
+      "condition_2_passes": false
+    },
+    "raw_transitions": [
+      {
+        "step": 0,
+        "state_before": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "e35e666caa2857ad"
+        },
+        "action": "click_button",
+        "state_after": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "e35e666caa2857ad"
+        },
+        "n_api_calls": 4,
+        "api_endpoints": [
+          "/api/events/ingest",
+          "/api/visitors/session",
+          "/api/v2/pixel",
+          "/v1/sdk/events"
+        ]
+      },
+      {
+        "step": 1,
+        "state_before": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "78b65de7b9d956dc"
+        },
+        "action": "click_button",
+        "state_after": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "78b65de7b9d956dc"
+        },
+        "n_api_calls": 8,
+        "api_endpoints": [
+          "/api/v2/pixel/act",
+          "/"
+        ]
+      },
+      {
+        "step": 2,
+        "state_before": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "ab43ec712e58f832"
+        },
+        "action": "click_button",
+        "state_after": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "ab43ec712e58f832"
+        },
+        "n_api_calls": 4,
+        "api_endpoints": [
+          "/api/v2/pixel/act",
+          "/rec/bundle/v2",
+          "/insights-reports/01KQA3AYFD0A8WK8CFVJQ4BAJG/fields/994e1b68-1e75-4d51-b695-43c672cd8867/ai-narratives",
+          "/insights-reports/01KQA3AYFD0A8WK8CFVJQ4BAJG/aggregated-ai-summary"
+        ]
+      },
+      {
+        "step": 3,
+        "state_before": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "ef67147379579451"
+        },
+        "action": "click_button",
+        "state_after": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "ef67147379579451"
+        },
+        "n_api_calls": 1,
+        "api_endpoints": [
+          "/api/v2/pixel/act"
+        ]
+      },
+      {
+        "step": 4,
+        "state_before": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "ef67147379579451"
+        },
+        "action": "click_button",
+        "state_after": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "ef67147379579451"
+        },
+        "n_api_calls": 1,
+        "api_endpoints": [
+          "/api/v2/pixel/act"
+        ]
+      },
+      {
+        "step": 5,
+        "state_before": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "fba18f0a5380f570"
+        },
+        "action": "click_button",
+        "state_after": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "fba18f0a5380f570"
+        },
+        "n_api_calls": 6,
+        "api_endpoints": [
+          "/api/v2/pixel/act",
+          "/api/v2/pixel/inter",
+          "/api/v2/pixel",
+          "/rec/bundle/v2",
+          "/insights-reports/01KQA3AYFD0A8WK8CFVJQ4BAJG/fields/994e1b68-1e75-4d51-b695-43c672cd8867/ai-narratives",
+          "/insights-reports/01KQA3AYFD0A8WK8CFVJQ4BAJG/aggregated-ai-summary"
+        ]
+      },
+      {
+        "step": 6,
+        "state_before": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "ef67147379579451"
+        },
+        "action": "click_button",
+        "state_after": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "ef67147379579451"
+        },
+        "n_api_calls": 1,
+        "api_endpoints": [
+          "/api/v2/pixel/act"
+        ]
+      },
+      {
+        "step": 7,
+        "state_before": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "ac134f466cafc2be"
+        },
+        "action": "click_button",
+        "state_after": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "ac134f466cafc2be"
+        },
+        "n_api_calls": 2,
+        "api_endpoints": [
+          "/api/v2/pixel/act",
+          "/"
+        ]
+      },
+      {
+        "step": 8,
+        "state_before": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "26fe036e990e0d70"
+        },
+        "action": "click_button",
+        "state_after": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "26fe036e990e0d70"
+        },
+        "n_api_calls": 5,
+        "api_endpoints": [
+          "/pixel/collect",
+          "/api/v2/pixel/act",
+          "/rec/bundle/v2",
+          "/insights-reports/01KQA3AYFD0A8WK8CFVJQ4BAJG/fields/994e1b68-1e75-4d51-b695-43c672cd8867/ai-narratives",
+          "/insights-reports/01KQA3AYFD0A8WK8CFVJQ4BAJG/aggregated-ai-summary"
+        ]
+      },
+      {
+        "step": 9,
+        "state_before": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "ef67147379579451"
+        },
+        "action": "click_button",
+        "state_after": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "ef67147379579451"
+        },
+        "n_api_calls": 1,
+        "api_endpoints": [
+          "/api/v2/pixel/act"
+        ]
+      },
+      {
+        "step": 10,
+        "state_before": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "ef67147379579451"
+        },
+        "action": "click_button",
+        "state_after": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "ef67147379579451"
+        },
+        "n_api_calls": 1,
+        "api_endpoints": [
+          "/api/v2/pixel/act"
+        ]
+      },
+      {
+        "step": 11,
+        "state_before": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "ab43ec712e58f832"
+        },
+        "action": "click_button",
+        "state_after": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "ab43ec712e58f832"
+        },
+        "n_api_calls": 4,
+        "api_endpoints": [
+          "/api/v2/pixel/act",
+          "/rec/bundle/v2",
+          "/insights-reports/01KQA3AYFD0A8WK8CFVJQ4BAJG/fields/994e1b68-1e75-4d51-b695-43c672cd8867/ai-narratives",
+          "/insights-reports/01KQA3AYFD0A8WK8CFVJQ4BAJG/aggregated-ai-summary"
+        ]
+      },
+      {
+        "step": 12,
+        "state_before": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "db8cbd20bf7eb418"
+        },
+        "action": "click_button",
+        "state_after": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "db8cbd20bf7eb418"
+        },
+        "n_api_calls": 2,
+        "api_endpoints": [
+          "/api/v2/pixel/act",
+          "/api/v2/pixel/inter"
+        ]
+      },
+      {
+        "step": 13,
+        "state_before": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "ef67147379579451"
+        },
+        "action": "click_button",
+        "state_after": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "ef67147379579451"
+        },
+        "n_api_calls": 1,
+        "api_endpoints": [
+          "/api/v2/pixel/act"
+        ]
+      },
+      {
+        "step": 14,
+        "state_before": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "ab43ec712e58f832"
+        },
+        "action": "click_button",
+        "state_after": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "ab43ec712e58f832"
+        },
+        "n_api_calls": 4,
+        "api_endpoints": [
+          "/api/v2/pixel/act",
+          "/rec/bundle/v2",
+          "/insights-reports/01KQA3AYFD0A8WK8CFVJQ4BAJG/fields/994e1b68-1e75-4d51-b695-43c672cd8867/ai-narratives",
+          "/insights-reports/01KQA3AYFD0A8WK8CFVJQ4BAJG/aggregated-ai-summary"
+        ]
+      },
+      {
+        "step": 15,
+        "state_before": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "ef67147379579451"
+        },
+        "action": "click_button",
+        "state_after": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "ef67147379579451"
+        },
+        "n_api_calls": 1,
+        "api_endpoints": [
+          "/api/v2/pixel/act"
+        ]
+      },
+      {
+        "step": 16,
+        "state_before": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "ef67147379579451"
+        },
+        "action": "click_button",
+        "state_after": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "ef67147379579451"
+        },
+        "n_api_calls": 1,
+        "api_endpoints": [
+          "/api/v2/pixel/act"
+        ]
+      },
+      {
+        "step": 17,
+        "state_before": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "5faa59af6a3a901e"
+        },
+        "action": "click_button",
+        "state_after": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "5faa59af6a3a901e"
+        },
+        "n_api_calls": 2,
+        "api_endpoints": [
+          "/api/v2/pixel/act",
+          "/rec/bundle/v2"
+        ]
+      },
+      {
+        "step": 18,
+        "state_before": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "3f91fd2d632c6d32"
+        },
+        "action": "click_button",
+        "state_after": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "3f91fd2d632c6d32"
+        },
+        "n_api_calls": 5,
+        "api_endpoints": [
+          "/api/v2/pixel/act",
+          "/api/v2/pixel/inter",
+          "/pixel/collect",
+          "/insights-reports/01KQA3AYFD0A8WK8CFVJQ4BAJG/fields/994e1b68-1e75-4d51-b695-43c672cd8867/ai-narratives",
+          "/insights-reports/01KQA3AYFD0A8WK8CFVJQ4BAJG/aggregated-ai-summary"
+        ]
+      },
+      {
+        "step": 19,
+        "state_before": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "ef67147379579451"
+        },
+        "action": "click_button",
+        "state_after": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "ef67147379579451"
+        },
+        "n_api_calls": 1,
+        "api_endpoints": [
+          "/api/v2/pixel/act"
+        ]
+      },
+      {
+        "step": 20,
+        "state_before": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "ef67147379579451"
+        },
+        "action": "click_button",
+        "state_after": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "ef67147379579451"
+        },
+        "n_api_calls": 1,
+        "api_endpoints": [
+          "/api/v2/pixel/act"
+        ]
+      },
+      {
+        "step": 21,
+        "state_before": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "ab43ec712e58f832"
+        },
+        "action": "click_button",
+        "state_after": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "ab43ec712e58f832"
+        },
+        "n_api_calls": 4,
+        "api_endpoints": [
+          "/api/v2/pixel/act",
+          "/rec/bundle/v2",
+          "/insights-reports/01KQA3AYFD0A8WK8CFVJQ4BAJG/fields/994e1b68-1e75-4d51-b695-43c672cd8867/ai-narratives",
+          "/insights-reports/01KQA3AYFD0A8WK8CFVJQ4BAJG/aggregated-ai-summary"
+        ]
+      },
+      {
+        "step": 22,
+        "state_before": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "ef67147379579451"
+        },
+        "action": "click_button",
+        "state_after": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "ef67147379579451"
+        },
+        "n_api_calls": 1,
+        "api_endpoints": [
+          "/api/v2/pixel/act"
+        ]
+      },
+      {
+        "step": 23,
+        "state_before": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "ef67147379579451"
+        },
+        "action": "click_button",
+        "state_after": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "ef67147379579451"
+        },
+        "n_api_calls": 1,
+        "api_endpoints": [
+          "/api/v2/pixel/act"
+        ]
+      },
+      {
+        "step": 24,
+        "state_before": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "cff712e832223ea6"
+        },
+        "action": "click_button",
+        "state_after": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "cff712e832223ea6"
+        },
+        "n_api_calls": 5,
+        "api_endpoints": [
+          "/api/v2/pixel/act",
+          "/api/v2/pixel/inter",
+          "/rec/bundle/v2",
+          "/insights-reports/01KQA3AYFD0A8WK8CFVJQ4BAJG/fields/994e1b68-1e75-4d51-b695-43c672cd8867/ai-narratives",
+          "/insights-reports/01KQA3AYFD0A8WK8CFVJQ4BAJG/aggregated-ai-summary"
+        ]
+      },
+      {
+        "step": 25,
+        "state_before": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "ef67147379579451"
+        },
+        "action": "click_button",
+        "state_after": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "ef67147379579451"
+        },
+        "n_api_calls": 1,
+        "api_endpoints": [
+          "/api/v2/pixel/act"
+        ]
+      },
+      {
+        "step": 26,
+        "state_before": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "ef67147379579451"
+        },
+        "action": "click_button",
+        "state_after": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "ef67147379579451"
+        },
+        "n_api_calls": 1,
+        "api_endpoints": [
+          "/api/v2/pixel/act"
+        ]
+      },
+      {
+        "step": 27,
+        "state_before": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "26fe036e990e0d70"
+        },
+        "action": "click_button",
+        "state_after": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "26fe036e990e0d70"
+        },
+        "n_api_calls": 5,
+        "api_endpoints": [
+          "/pixel/collect",
+          "/api/v2/pixel/act",
+          "/rec/bundle/v2",
+          "/insights-reports/01KQA3AYFD0A8WK8CFVJQ4BAJG/fields/994e1b68-1e75-4d51-b695-43c672cd8867/ai-narratives",
+          "/insights-reports/01KQA3AYFD0A8WK8CFVJQ4BAJG/aggregated-ai-summary"
+        ]
+      },
+      {
+        "step": 28,
+        "state_before": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "ef67147379579451"
+        },
+        "action": "click_button",
+        "state_after": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "ef67147379579451"
+        },
+        "n_api_calls": 1,
+        "api_endpoints": [
+          "/api/v2/pixel/act"
+        ]
+      },
+      {
+        "step": 29,
+        "state_before": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "ef67147379579451"
+        },
+        "action": "click_button",
+        "state_after": {
+          "url": "https://www.typeform.com/explore?utm_source=typeform.com&utm_medium=typeform&utm_content=typeform-incorrectURL&utm_campaign=viral_expt%0A%20%20%20%20",
+          "net_hash": "ef67147379579451"
+        },
+        "n_api_calls": 1,
+        "api_endpoints": [
+          "/api/v2/pixel/act"
+        ]
+      }
+    ]
+  },
+  {
+    "site_name": "github_new_repo",
+    "site_url": "https://github.com/new",
+    "status": "COMPLETE",
+    "n_transitions": 30,
+    "n_non_leakage": 30,
+    "n_within_url": 29,
+    "unique_net_hashes": 3,
+    "unique_urls": 2,
+    "pmi_results": {
+      "url_only_all": 0.0,
+      "net_only_all": 0.012345950742798132,
+      "url_only_within_url": 0.0,
+      "net_only_within_url": 0.0
+    },
+    "permutation_tests": {
+      "url_only": {
+        "p_value": 0.000999000999000999,
+        "null_mean": 0.0
+      },
+      "net_only": {
+        "p_value": 0.998001998001998,
+        "null_mean": 0.052737631513335714
+      },
+      "within_url_net": {
+        "p_value": 0.996003996003996,
+        "null_mean": 0.02208362085072275
+      }
+    },
+    "null_control": {
+      "shuffled_pmi": 0.0391747447606912,
+      "permutation_p": 0.07462686567164178,
+      "passes": true
+    },
+    "entropy_analysis": {
+      "url_entropy": 0.21084230031853213,
+      "net_entropy": 0.420026001688088
+    },
+    "decision_conditions": {
+      "gain_within_url_bits": 0.0,
+      "condition_1_gain_ge_0.1": false,
+      "condition_2_permutation_p": 0.996003996003996,
+      "condition_2_passes": false
+    },
+    "raw_transitions": [
+      {
+        "step": 0,
+        "state_before": {
+          "url": "https://github.com/login?return_to=https%3A%2F%2Fgithub.com%2Fnew",
+          "net_hash": "empty"
+        },
+        "action": "click_button[type=\"submit\"]",
+        "state_after": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "empty"
+        },
+        "n_api_calls": 0,
+        "api_endpoints": []
+      },
+      {
+        "step": 1,
+        "state_before": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "empty"
+        },
+        "action": "click_next",
+        "state_after": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "empty"
+        },
+        "n_api_calls": 0,
+        "api_endpoints": []
+      },
+      {
+        "step": 2,
+        "state_before": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "ac957b3490e0ce0b"
+        },
+        "action": "click_next",
+        "state_after": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "ac957b3490e0ce0b"
+        },
+        "n_api_calls": 1,
+        "api_endpoints": [
+          "/v3/signin/_/AccountsSignInUi/browserinfo"
+        ]
+      },
+      {
+        "step": 3,
+        "state_before": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "empty"
+        },
+        "action": "click_next",
+        "state_after": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "empty"
+        },
+        "n_api_calls": 0,
+        "api_endpoints": []
+      },
+      {
+        "step": 4,
+        "state_before": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "empty"
+        },
+        "action": "click_next",
+        "state_after": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "empty"
+        },
+        "n_api_calls": 0,
+        "api_endpoints": []
+      },
+      {
+        "step": 5,
+        "state_before": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "empty"
+        },
+        "action": "click_next",
+        "state_after": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "empty"
+        },
+        "n_api_calls": 0,
+        "api_endpoints": []
+      },
+      {
+        "step": 6,
+        "state_before": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "69de5dea5dfc223c"
+        },
+        "action": "click_next",
+        "state_after": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "69de5dea5dfc223c"
+        },
+        "n_api_calls": 1,
+        "api_endpoints": [
+          "/log"
+        ]
+      },
+      {
+        "step": 7,
+        "state_before": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "empty"
+        },
+        "action": "click_next",
+        "state_after": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "empty"
+        },
+        "n_api_calls": 0,
+        "api_endpoints": []
+      },
+      {
+        "step": 8,
+        "state_before": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "empty"
+        },
+        "action": "click_next",
+        "state_after": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "empty"
+        },
+        "n_api_calls": 0,
+        "api_endpoints": []
+      },
+      {
+        "step": 9,
+        "state_before": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "empty"
+        },
+        "action": "click_next",
+        "state_after": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "empty"
+        },
+        "n_api_calls": 0,
+        "api_endpoints": []
+      },
+      {
+        "step": 10,
+        "state_before": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "empty"
+        },
+        "action": "click_next",
+        "state_after": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "empty"
+        },
+        "n_api_calls": 0,
+        "api_endpoints": []
+      },
+      {
+        "step": 11,
+        "state_before": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "empty"
+        },
+        "action": "click_next",
+        "state_after": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "empty"
+        },
+        "n_api_calls": 0,
+        "api_endpoints": []
+      },
+      {
+        "step": 12,
+        "state_before": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "empty"
+        },
+        "action": "click_next",
+        "state_after": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "empty"
+        },
+        "n_api_calls": 0,
+        "api_endpoints": []
+      },
+      {
+        "step": 13,
+        "state_before": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "empty"
+        },
+        "action": "click_next",
+        "state_after": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "empty"
+        },
+        "n_api_calls": 0,
+        "api_endpoints": []
+      },
+      {
+        "step": 14,
+        "state_before": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "empty"
+        },
+        "action": "click_next",
+        "state_after": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "empty"
+        },
+        "n_api_calls": 0,
+        "api_endpoints": []
+      },
+      {
+        "step": 15,
+        "state_before": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "empty"
+        },
+        "action": "click_next",
+        "state_after": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "empty"
+        },
+        "n_api_calls": 0,
+        "api_endpoints": []
+      },
+      {
+        "step": 16,
+        "state_before": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "empty"
+        },
+        "action": "click_next",
+        "state_after": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "empty"
+        },
+        "n_api_calls": 0,
+        "api_endpoints": []
+      },
+      {
+        "step": 17,
+        "state_before": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "empty"
+        },
+        "action": "click_next",
+        "state_after": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "empty"
+        },
+        "n_api_calls": 0,
+        "api_endpoints": []
+      },
+      {
+        "step": 18,
+        "state_before": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "empty"
+        },
+        "action": "click_next",
+        "state_after": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "empty"
+        },
+        "n_api_calls": 0,
+        "api_endpoints": []
+      },
+      {
+        "step": 19,
+        "state_before": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "empty"
+        },
+        "action": "click_next",
+        "state_after": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "empty"
+        },
+        "n_api_calls": 0,
+        "api_endpoints": []
+      },
+      {
+        "step": 20,
+        "state_before": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "empty"
+        },
+        "action": "click_next",
+        "state_after": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "empty"
+        },
+        "n_api_calls": 0,
+        "api_endpoints": []
+      },
+      {
+        "step": 21,
+        "state_before": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "empty"
+        },
+        "action": "click_next",
+        "state_after": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "empty"
+        },
+        "n_api_calls": 0,
+        "api_endpoints": []
+      },
+      {
+        "step": 22,
+        "state_before": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "empty"
+        },
+        "action": "click_next",
+        "state_after": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "empty"
+        },
+        "n_api_calls": 0,
+        "api_endpoints": []
+      },
+      {
+        "step": 23,
+        "state_before": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "empty"
+        },
+        "action": "click_next",
+        "state_after": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "empty"
+        },
+        "n_api_calls": 0,
+        "api_endpoints": []
+      },
+      {
+        "step": 24,
+        "state_before": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "empty"
+        },
+        "action": "click_next",
+        "state_after": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "empty"
+        },
+        "n_api_calls": 0,
+        "api_endpoints": []
+      },
+      {
+        "step": 25,
+        "state_before": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "empty"
+        },
+        "action": "click_next",
+        "state_after": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "empty"
+        },
+        "n_api_calls": 0,
+        "api_endpoints": []
+      },
+      {
+        "step": 26,
+        "state_before": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "empty"
+        },
+        "action": "click_next",
+        "state_after": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "empty"
+        },
+        "n_api_calls": 0,
+        "api_endpoints": []
+      },
+      {
+        "step": 27,
+        "state_before": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "empty"
+        },
+        "action": "click_next",
+        "state_after": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "empty"
+        },
+        "n_api_calls": 0,
+        "api_endpoints": []
+      },
+      {
+        "step": 28,
+        "state_before": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "empty"
+        },
+        "action": "click_next",
+        "state_after": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "empty"
+        },
+        "n_api_calls": 0,
+        "api_endpoints": []
+      },
+      {
+        "step": 29,
+        "state_before": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "empty"
+        },
+        "action": "click_next",
+        "state_after": {
+          "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-651830264%3A1789191013569440&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=rjq2r97ZXL6ldD43-3dxY6IIOgx3nLUN6H_hIp0-n00&code_challenge_method=S256&nonce=182f193d3692b5be295fa08a8c21bb53&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=9dc50f44625db4a31f96cd0c0cf962e3&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hANbTy46hsG50fmaJ4lGzMKQR6vlLVah7Qq4xxqVSVh9iujXC6Rs4h0abd7wxd7AMCJ23Wwv2gdgWcsn7beGXBJ3nei-gDgBOyN0vTNWRe9LjsMkXDlMnQyEsx2QqjYyGdg11Q4A7sYZ84HL3eJEs0xefxURfwrG3outNyEp_qOz9bkKAoQFag1ZCATdqbeRLWclpBMNh7coRaavAjU7adem-Y4H-mk_v_WtVy77YpTWLT70dMWHVvYW4O-sNvUvjxKUUYHGEZx4uHYKFe-ofpNNFHTMKiCG2LJ9ergIizDumXSKrkBnAf7e0loW7oFV-3rJylbeeRl_yiEROnGbGHcxSkMNlp4QmXJ9GzABBQcsd0dMyrMFDK48C1tlZeCYRhJVTtpGxE_mvG8KkKNrIeCB6jXhWHxKwqUYq1d7lqGSNUpOK0hju8F46pZpNkHZBIWpgkKzFY8sJTToWCcev71DUpwvQA%26flowName%3DGeneralOAuthFlow%26as%3DS-651830264%253A1789191013569440%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxccX5bjHCKbPGKCu5AlFzNk7xcF_yWlbaVZjW2y0bjkVa7LCLSTfItWBCEcE1_77JusWx6o5sKrPsb1DIP0Unov4krWahRHNAL12Ibtis4LPIXfvk5k",
+          "net_hash": "empty"
+        },
+        "n_api_calls": 0,
+        "api_endpoints": []
+      }
+    ]
+  }
+]

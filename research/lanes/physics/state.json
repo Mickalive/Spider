@@ -7,8 +7,8 @@
   "continue_immediately": false,
   "next_question": "Do network requests and API calls (XHR/fetch payloads, endpoint sequences, response content-types) captured via Playwright route interception on genuine client-side-routed SPAs provide predictive state information beyond URL \u2014 specifically, does the network-request signature on within-URL transitions carry PMI exceeding URL-only by >= 0.1 bits on sites where URL is ambiguous?",
   "promotion_ready": false,
-  "consecutive_failures": 0,
-  "updated_at": "2026-09-12T05:05:11.304909+00:00",
-  "last_failure_retryable": null,
+  "consecutive_failures": 1,
+  "updated_at": "2026-09-12T05:34:15.071849+00:00",
+  "last_failure_retryable": false,
   "last_handoff_sha256": "e9d616f06212f82e4b2ee25702f458ce2805dfbdf4893c4b6b77a47464224484"
 }

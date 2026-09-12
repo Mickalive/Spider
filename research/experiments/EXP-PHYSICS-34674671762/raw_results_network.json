@@ -1,0 +1,59 @@
+{
+  "experiment_id": "EXP-PHYSICS-34674671762",
+  "synthetic_spa": {
+    "n_transitions": 500,
+    "n_trajectories": 25,
+    "trajectory_length": 20,
+    "within_url_transitions": 500,
+    "unique_net_hashes": 1,
+    "unique_urls": 1
+  },
+  "pmi_results": {
+    "url_only_all": 6.80745736433261e-08,
+    "net_only_all": 6.80745736433261e-08,
+    "url_only_within_url": 6.80745736433261e-08,
+    "net_only_within_url": 6.80745736433261e-08
+  },
+  "permutation_tests": {
+    "url_only": {
+      "p_value": 0.000999000999000999,
+      "null_mean": 6.80745736433261e-08,
+      "effect_d": 0.0
+    },
+    "net_only": {
+      "p_value": 0.000999000999000999,
+      "null_mean": 6.80745736433261e-08,
+      "effect_d": 0.0
+    },
+    "within_url_net": {
+      "p_value": 0.000999000999000999,
+      "null_mean": 6.80745736433261e-08
+    }
+  },
+  "null_control": {
+    "shuffled_pmi": 6.80745736433261e-08,
+    "permutation_p": 0.004975124378109453,
+    "permutation_null_mean": 6.80745736433261e-08,
+    "passes": false
+  },
+  "entropy_analysis": {
+    "url_entropy": 0.0,
+    "net_entropy": 0.0
+  },
+  "decision_conditions": {
+    "net_pmi_bits": 6.80745736433261e-08,
+    "condition_1_net_pmi_ge_0.5": false,
+    "condition_2_net_perm_p": 0.000999000999000999,
+    "condition_2_passes": true,
+    "condition_3_null_control_p": 0.004975124378109453,
+    "condition_3_passes": false,
+    "condition_4_net_unique_hashes": 1,
+    "condition_4_net_entropy_bits": 0.0,
+    "condition_4_passes": false,
+    "condition_5_data_sufficiency": 500,
+    "condition_5_passes": true
+  },
+  "positive_control_passes": false,
+  "outcome": "FALSIFIES",
+  "status": "COMPLETE"
+}

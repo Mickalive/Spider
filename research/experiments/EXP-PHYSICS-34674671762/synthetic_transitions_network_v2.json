@@ -1,0 +1,6502 @@
+[
+  {
+    "trajectory_id": 0,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "empty"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 0,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 0,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 0,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 0,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 0,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 0,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 0,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 0,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 0,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 0,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 0,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 0,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 0,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 0,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 0,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 0,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 0,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 0,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 0,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 1,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "empty"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 1,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 1,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 1,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 1,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 1,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 1,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 1,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 1,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 1,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 1,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 1,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 1,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 1,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 1,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 1,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 1,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 1,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 1,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 1,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 2,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "empty"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 2,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 2,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 2,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 2,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 2,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 2,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 2,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 2,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 2,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 2,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 2,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 2,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 2,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 2,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 2,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 2,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 2,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 2,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 2,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 3,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "empty"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 3,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 3,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 3,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 3,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 3,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 3,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 3,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 3,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 3,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 3,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 3,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 3,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 3,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 3,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 3,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 3,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 3,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 3,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 3,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 4,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "empty"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 4,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 4,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 4,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 4,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 4,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 4,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 4,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 4,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 4,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 4,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 4,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 4,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 4,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 4,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 4,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 4,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 4,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 4,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 4,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 5,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "empty"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 5,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 5,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 5,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 5,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 5,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 5,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 5,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 5,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 5,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 5,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 5,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 5,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 5,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 5,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 5,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 5,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 5,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 5,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 5,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 6,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "empty"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 6,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 6,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 6,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 6,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 6,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 6,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 6,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 6,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 6,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 6,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 6,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 6,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 6,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 6,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 6,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 6,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 6,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 6,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 6,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 7,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "empty"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 7,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 7,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 7,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 7,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 7,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 7,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 7,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 7,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 7,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 7,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 7,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 7,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 7,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 7,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 7,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 7,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 7,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 7,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 7,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 8,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "empty"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 8,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 8,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 8,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 8,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 8,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 8,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 8,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 8,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 8,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 8,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 8,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 8,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 8,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 8,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 8,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 8,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 8,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 8,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 8,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 9,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "empty"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 9,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 9,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 9,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 9,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 9,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 9,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 9,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 9,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 9,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 9,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 9,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 9,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 9,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 9,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 9,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 9,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 9,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 9,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 9,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 10,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "empty"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 10,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 10,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 10,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 10,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 10,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 10,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 10,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 10,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 10,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 10,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 10,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 10,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 10,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 10,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 10,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 10,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 10,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 10,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 10,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 11,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "empty"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 11,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 11,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 11,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 11,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 11,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 11,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 11,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 11,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 11,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 11,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 11,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 11,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 11,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 11,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 11,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 11,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 11,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 11,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 11,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 12,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "empty"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 12,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 12,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 12,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 12,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 12,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 12,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 12,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 12,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 12,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 12,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 12,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 12,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 12,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 12,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 12,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 12,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 12,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 12,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 12,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 13,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "empty"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 13,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 13,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 13,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 13,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 13,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 13,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 13,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 13,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 13,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 13,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 13,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 13,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 13,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 13,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 13,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 13,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 13,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 13,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 13,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 14,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "empty"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 14,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 14,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 14,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 14,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 14,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 14,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 14,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 14,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 14,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 14,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 14,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 14,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 14,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 14,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 14,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 14,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 14,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 14,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 14,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 15,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "empty"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 15,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 15,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 15,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 15,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 15,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 15,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 15,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 15,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 15,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 15,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 15,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 15,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 15,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 15,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 15,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 15,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 15,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 15,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 15,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 16,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "empty"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 16,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 16,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 16,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 16,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 16,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 16,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 16,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 16,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 16,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 16,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 16,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 16,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 16,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 16,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 16,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 16,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 16,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 16,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 16,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 17,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "empty"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 17,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 17,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 17,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 17,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 17,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 17,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 17,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 17,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 17,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 17,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 17,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 17,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 17,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 17,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 17,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 17,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 17,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 17,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 17,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 18,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "empty"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 18,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 18,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 18,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 18,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 18,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 18,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 18,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 18,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 18,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 18,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 18,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 18,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 18,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 18,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 18,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 18,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 18,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 18,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 18,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 19,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "empty"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 19,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 19,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 19,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 19,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 19,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 19,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 19,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 19,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 19,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 19,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 19,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 19,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 19,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 19,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 19,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 19,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 19,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 19,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 19,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 20,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "empty"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 20,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 20,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 20,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 20,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 20,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 20,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 20,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 20,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 20,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 20,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 20,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 20,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 20,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 20,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 20,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 20,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 20,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 20,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 20,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 21,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "empty"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 21,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 21,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 21,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 21,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 21,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 21,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 21,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 21,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 21,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 21,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 21,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 21,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 21,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 21,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 21,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 21,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 21,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 21,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 21,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 22,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "empty"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 22,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 22,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 22,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 22,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 22,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 22,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 22,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 22,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 22,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 22,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 22,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 22,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 22,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 22,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 22,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 22,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 22,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 22,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 22,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 23,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "empty"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 23,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 23,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 23,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 23,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 23,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 23,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 23,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 23,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 23,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 23,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 23,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 23,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 23,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 23,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 23,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 23,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 23,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 23,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 23,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 24,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "empty"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 24,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 24,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 24,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 24,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 24,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 24,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 24,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 24,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 24,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "6b0d331a4633a3ae"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 24,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 24,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 24,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 24,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "edb1a39f421de2e3"
+    },
+    "action": "form_submit",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 24,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 24,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "13cc3f75400eeb5c"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 24,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "08f8e6ddb455372d"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 24,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "8a546e7c2b217aa8"
+    },
+    "action": "menu_select",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 24,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "229a3ec3ed8fecf6"
+    },
+    "action": "link_nav",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "n_api_calls": 2
+  },
+  {
+    "trajectory_id": 24,
+    "state_before": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "cac0c4e829e9e624"
+    },
+    "action": "button_click",
+    "state_after": {
+      "url": "http://127.0.0.1:8765/",
+      "net_hash": "2502987fce9da78e"
+    },
+    "n_api_calls": 2
+  }
+]
