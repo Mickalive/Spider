@@ -1,14 +1,14 @@
 {
   "lane": "physics",
   "human_paused": false,
-  "active_experiment_id": "EXP-PHYSICS-34719136202",
-  "last_experiment_id": "EXP-PHYSICS-34695057869",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-PHYSICS-34719136202",
   "last_verdict": "FALSIFIED-IN-SETTING",
   "continue_immediately": false,
-  "next_question": "Do DOM-based state representation (rendered page structural features: element count, tree depth, interactive density, visible text content, attribute patterns) provide predictive PMI on locally-hosted SPAs where both request-side and response-side network-request signals fail (multistep_form, wizard) or are tautological (dashboard)?",
+  "next_question": "On locally-hosted SPAs with deterministic server logic, does any representation achieve predictive PMI beyond what is explained by action-history memory alone? Specifically: (1) what PMI does a history-conditioned baseline P(s'|action_history) achieve, and does DOM or network representation exceed it? (2) on production SPAs with non-deterministic rendering (React/Vue virtual DOM, auth-dependent content, external data), do DOM structural features encode predictive state variation beyond what action labels cause?",
   "promotion_ready": false,
   "consecutive_failures": 0,
-  "updated_at": "2026-09-12T21:09:29.905821+00:00",
+  "updated_at": "2026-09-12T22:28:00.527963+00:00",
   "last_failure_retryable": null,
-  "last_handoff_sha256": "e0f848d8781c29bbfb534b2da14aa65b6572a43eb6c74c8d741699598a1082f7"
+  "last_handoff_sha256": "ee13a749a6b4bbc888566d5e82a9f56381b8115a2d8a397d71473501c7c32b3f"
 }
