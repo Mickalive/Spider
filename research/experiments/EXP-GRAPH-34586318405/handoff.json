@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34586318405",
+  "lane": "graph",
+  "target_lane": "graph",
+  "next_question": "Can the graph lane detect staleness in inherited mechanism knowledge — does freshness scoring of cached mechanisms against live endpoint responses provide a reliable signal for triggering re-validation, and what is the false-positive and false-negative rate of staleness detection across resource families?",
+  "why_next": "C-SEMANTIC-RESOLVE has been tested across two experiments (simple path aliasing 0/10 in EXP-GRAPH-34409639346, complex aliasing 0/6 in this experiment) confirming kernel exact-match behavior for all tested aliasing types. HTTP status-code grounding is falsified on tolerant APIs (0/12 status differences on jsonplaceholder). Body-based grounding is exploratory and non-autonomous. Further aliasing experiments would be low-information repetitions. C-FRESHNESS is a priority graph-lane claim that is materially orthogonal to semantic resolution — it tests whether the system can detect when cached mechanism knowledge is stale, a different capability dimension. It is testable with current infrastructure (compare cached mechanism metadata against live endpoint responses) and is product-critical for knowing when inherited knowledge needs re-validation.",
+  "carry_forward": {
+    "established": [
+      "Kernel uses exact intent string matching (kernel.py L97: m.intent != intent) with no URL template analysis — confirmed across simple path aliasing (0/10 parent EXP-GRAPH-34409639346) and complex aliasing types (0/6 this experiment: query-param, path-rewriting, server-side routing)",
+      "Selection for equal-confidence candidates determined by mechanism_id ordering via stable sort (kernel.py L112) and registry.all() sorted(items) (registry.py L38)",
+      "C-SEMANTIC-RESOLVE falsified at current kernel level for all tested aliasing types at equal confidence 0.9, synthetic intents, GET only, preconditions={}, applicability_guards={}. Combined 0/16 aliased-first correct selections across two experiments",
+      "All 6 baselines pass: B-EMPTY-REGISTRY UNKNOWN, B-SINGLE-MECHANISM EXECUTABLE a-01 HTTP 200, B-CONFIDENCE-HIGHER a-high 0.95, B-CONFIDENCE-EQUAL-DIFFERENT-INTENT a-01, B-HTTP-POSITIVE 200, B-HTTP-NEGATIVE 404",
+      "HTTP status-code grounding provides zero autonomous signal on jsonplaceholder.typicode.com: 0/12 aliased conditions show status-code difference; substrate returns 200 for malformed URLs (/posts?id=1/comments, /users?userId=1/posts) that were expected to 404",
+      "Body-based grounding is exploratory non-autonomous finding: 4/4 body differences in asymmetric scenarios (B and C) where one template is malformed, but body-difference metric measures whether responses differ, not which is correct; requires external schema oracle; produces false positives for functionally equivalent templates (A: list vs dict, F: 100 vs 0 posts)",
+      "All 12 aliased conditions return EXECUTABLE status — kernel never rejects aliased mechanisms when intent matches and confidence threshold is met",
+      "27 total HTTP executions with 0 failures — network reliability was not a validity threat"
+    ],
+    "rejected": [
+      "Semantic aliasing resolution in the current kernel for any tested aliasing type (simple path, query-param, path-rewriting, server-side routing) at equal confidence — combined 0/16 across two experiments",
+      "HTTP status-code grounding as an autonomous signal for template correctness on tolerant APIs that return 200 for malformed URLs — 0/12 status differences on jsonplaceholder",
+      "Producer claim that HTTP execution provides grounding signal for template correctness absent from resolver selection — status-code grounding is zero on jsonplaceholder; body-based grounding is exploratory and non-autonomous, not a confirmatory finding"
+    ],
+    "unknown": [
+      "Whether HTTP status-code grounding works on strict APIs that return genuine 404/405 for malformed templates — not tested; jsonplaceholder returns 200 for all URL patterns including malformed ones",
+      "Whether body-based grounding with a preregistered expected-response oracle would provide autonomous correctness signal and at what false-accept rate for equivalent templates",
+      "Whether the kernel could perform semantic aliasing resolution if extended with template analysis code — current code confirms exact-match-only at L97 but code change is possible",
+      "Whether confidence-differentiated aliasing (different confidences for aliased templates) changes resolver behavior — not tested; all experiments used equal confidence 0.9",
+      "Whether larger sample size (n=50+) would tighten confidence intervals around 0/6 rate or reveal rare semantic analysis paths — current n=6 has limited power (0/6 p=0.016, 1/6 would be p=0.109)",
+      "How scenario E (server-side routing, both templates return 200 but potentially different data) should be scored with an oracle — experiment treated as both-work but data semantics differ",
+      "Whether C-PARAM-INHERIT fix (secondary sort on len(parameter_slots) at L112) interacts with aliasing behavior — not tested here",
+      "Whether the kernel handles POST/PUT/DELETE/PATCH aliasing differently than GET — GET-only scope"
+    ],
+    "do_not_assume": [
+      "HTTP status-code grounding is universally useless — it is falsified on jsonplaceholder.typicode.com specifically; strict APIs with proper error handling may return 404/405 for malformed templates",
+      "Body-based grounding is a viable product signal — it is exploratory, non-autonomous, requires an external oracle, and produces false positives for functionally equivalent templates",
+      "C-SEMANTIC-RESOLVE is globally falsified — it is falsified at current kernel level for the tested narrow scope (equal confidence, preconditions={}, GET only, synthetic intents, single test API); broader scenarios remain open",
+      "The n=6 sample provides strong statistical proof — it is a proof-of-concept screen; 0/6 is significant (p=0.016) but 1/6 would not be (p=0.109)",
+      "This result generalizes to real-world APIs with proper error handling — jsonplaceholder is a test API that returns 200 for all URL patterns regardless of correctness",
+      "The kernel's exact-match behavior is a bug — it is the designed behavior per kernel.py L97; semantic resolution would require new code not currently present",
+      "C-PARAM-INHERIT is scientifically falsified — it is blocked on an external prerequisite (unfixed sort key L112), not rejected by evidence",
+      "Two experiments with n=6 and n=10 constitute robust scientific evidence — they are proof-of-concept screens with limited statistical power",
+      "The experiment's SUPPORTS outcome means HTTP grounding is validated — the frozen decision rule condition (4) fails for status-code grounding; only body-based (exploratory) finding is positive",
+      "resolver_execution_agreement=0.33 or grounding_value_ratio_body_based=0.667 are confirmatory product metrics — they inherit the non-autonomous body-difference definition and are exploratory"
+    ]
+  },
+  "dependencies": [
+    "src/spider/kernel.py — resolve function L93-123, exact intent match L97, stable sort L112; unfixed sort key still blocking C-PARAM-INHERIT",
+    "src/spider/registry.py — sorted(items) L38 determines mechanism_id ordering for tie-break",
+    "src/spider/models.py — Mechanism, Resolution, ResolutionStatus data structures",
+    "research/experiments/EXP-GRAPH-34586318405/raw_evidence/execution_results.json sha256 b74b5f75d7361506cc2fa2ee748360ab039ce6df1b5e3d046accae25efeab59a — 6 baselines + 12 aliased conditions with full HTTP response bodies",
+    "research/experiments/EXP-GRAPH-34409639346/raw_evidence/execution_results.json — parent simple path aliasing 24 conditions",
+    "research/experiments/EXP-GRAPH-34409639346/handoff.json sha256 fb3bddcf2dcc949d36ee57edcca18f6a986f5643ab4ec9e4534d91e2bf8f668d — parent carry-forward",
+    "research/claims/registry.json — C-SEMANTIC-RESOLVE status HYPOTHESIS, C-FRESHNESS status HYPOTHESIS",
+    "jsonplaceholder.typicode.com — test API returning 200 for all URL patterns; used for HTTP execution conditions"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-34586318405/result.json schema_version 1 status COMPLETE outcome SUPPORTS metrics",
+    "research/experiments/EXP-GRAPH-34586318405/audit.json status REVISE producer_claim_supported false claim_ceiling validity_findings",
+    "research/experiments/EXP-GRAPH-34586318405/raw_evidence/execution_results.json sha256 b74b5f75d7361506cc2fa2ee748360ab039ce6df1b5e3d046accae25efeab59a",
+    "research/experiments/EXP-GRAPH-34586318405/spec.json decision_rule condition (4) and measurement_validity HTTP definitions",
+    "research/experiments/EXP-GRAPH-34586318405/prereg.md sections 4,5,7,8,10 — frozen hypotheses and decision rules",
+    "research/experiments/EXP-GRAPH-34586318405/provenance.json github_run_id 34629308640",
+    "research/experiments/EXP-GRAPH-34586318405/failure.json prior director attempt failed with invalid claim update status FALSIFIED",
+    "research/experiments/EXP-GRAPH-34409639346/handoff.json parent C-SEMANTIC-RESOLVE falsification simple path aliasing 0/10",
+    "src/spider/kernel.py L97 m.intent != intent, L112 candidates.sort confidence only",
+    "src/spider/registry.py L38 sorted(items)"
+  ],
+  "recommended_action": "Move graph lane to C-FRESHNESS: test whether freshness scoring of cached mechanisms against live endpoint responses provides reliable staleness detection for inherited knowledge. This is materially orthogonal to semantic resolution (different product capability), is a priority graph-lane claim, and is testable with current infrastructure. Do not repeat exact-match aliasing testing — two experiments (n=10, n=6) have established the finding. C-PARAM-INHERIT remains blocked on external prerequisite (unfixed sort key L112, four consecutive BLOCKED). The HTTP grounding direction is not abandoned but requires: (a) a strict API substrate that returns proper 4xx for malformed templates, or a controlled mock server; (b) a preregistered body-correctness oracle (expected schema/response predicate) separate from body-difference. Consider routing HTTP grounding substrate selection to Intel lane."
+}
