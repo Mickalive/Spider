@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-34662221249",
+  "lane": "product",
+  "decision": "SURVIVES_CURRENT_TEST",
+  "claim_updates": [
+    {
+      "claim_id": "C-PARAM-INHERIT",
+      "status": "EXPERIMENTAL",
+      "reason": "Fix1 (suffix guard) and Fix2 (delimiter-bound prefix validation) validated on imported src.spider.kernel module via monkey-patching, closing V3 audit gap from EXP-PRODUCT-34642376433. Claim ceiling advances from 'standalone reimplementation' to 'NARROW_SYNTHETIC_SINGLE-SLOT_MONKEY_PATCHED_TEMPLATE_ONLY': 5 single-slot URL classes (P1 path-prefix, G1 query-string, G2 multi-param, G3 deep-path, G5 path+query hybrid) all binding_accuracy=1.0 on unseen values, N1_ORIGINAL cross-host prefix rejected (slot_count=0), N1_CORRECTED truly disjoint rejected (slot_count=0), no regressions, G4 multi-char suffix architectural bound confirmed, B_LITERAL baseline confirmed. Production integration not yet committed; slot_prefixes representation loss for P1/G3/G5 acknowledged; empty-prefix guard (EXPLORATORY) required for N1_CORRECTED."
+    },
+    {
+      "claim_id": "C-PRODUCT-ECON",
+      "status": "HYPOTHESIS",
+      "reason": "Kernel.py validation via monkey-patching is necessary but not sufficient for C-PRODUCT-ECON. Real-browser testing, committed patches, end-to-end economics measurement (model tokens, browser work, repair, latency, false accepts) still required. Remains blocked until production integration and real-browser evaluation."
+    }
+  ],
+  "product_action": "C-PARAM-INHERIT advances to kernel-validated synthetic (monkey-patched). C-PRODUCT-ECON remains blocked. Next steps: (1) freeze empty-prefix guard as part of Fix2 or Fix3, (2) re-implement B_UNFIXED as true unfixed heuristic or drop delta claim, (3) commit patches to src/spider/kernel.py and src/spider/models.py, (4) validate production _bind semantics with committed code. Do not promote to product without committed patches and real-browser validation.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can the empty-prefix guard be frozen as part of the Fix2 specification, the B_UNFIXED baseline be properly reimplemented as a true unfixed heuristic (without Fix1/Fix2 applied), and the full Fix1+Fix2+empty-prefix guard be committed to src/spider/kernel.py and src/spider/models.py — with production _bind semantics validated against all 9 conditions including slot_prefixes representation and prefix-stripping for VALUE CONTRACT — thereby advancing from monkey-patch validation to committed-code validation?",
+  "reason": "Frozen decision_rule: all 9 decision-relevant conditions pass (P1/G1/G2/G3/G5 binding_accuracy=1.0, N1_ORIGINAL slot_count=0, N1_CORRECTED slot_count=0, B_LITERAL fail_rate=1.0, no import errors). Audit recomputed metrics confirm all 9 pass. Audit required_fixes are process/labeling issues (empty-prefix guard EXPLORATORY, B_UNFIXED invalid paired comparison, slot_prefixes representation loss, monkey-patch not committed) that bound the claim ceiling but do not falsify the scientific result. G4 architectural bound (multi-char suffix '00') confirmed as expected. Verdict SURVIVES_CURRENT_TEST with narrow ceiling.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-34662221249/result.json: metrics.verdict=SURVIVES_CURRENT_TEST, metrics.decision_relevant_passed=9, controls 9/9 passed",
+    "research/experiments/EXP-PRODUCT-34662221249/audit.json: status=REVISE, recomputed_metrics confirm all 9 conditions pass, claim_ceiling NARROW_SYNTHETIC_SINGLE-SLOT_MONKEY_PATCHED_TEMPLATE_ONLY, required_fixes 5 items (V4 empty guard, V5 slot_prefixes, V6 monkey-patch, B2 B_UNFIXED invalid)",
+    "research/experiments/EXP-PRODUCT-34662221249/raw_evidence.json: conditions.P1/G1/G2/G3/G5 binding_accuracy=1.0 slot_count=1, N1_ORIGINAL/N1_CORRECTED slot_count=0, B_LITERAL fail_rate=1.0, G4 binding_accuracy=0.0 architectural_bound=true",
+    "research/experiments/EXP-PRODUCT-34662221249/spec.json: decision_rule SURVIVES_CURRENT_TEST if all 9 conditions pass, claim_ids C-PARAM-INHERIT",
+    "research/experiments/EXP-PRODUCT-34662221249/provenance.json: substrate monkey-patching, code_version kernel.py 46929b3a models.py 338aaf4d, environment deterministic synthetic n=3",
+    "research/experiments/EXP-PRODUCT-34662221249/report.md: templates P1/G1/G2/G3/G5 full prefix embedded, V3 gap closed via monkey-patching",
+    "research/claims/registry.json: C-PARAM-INHERIT EXPERIMENTAL, C-PRODUCT-ECON HYPOTHESIS"
+  ]
+}

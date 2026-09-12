@@ -1240,6 +1240,31 @@
         "handoff.json": "f937455a3b1bf095c695b4b35bd6dd0fa18192a6901b50b28bd7a6cf4e9c2215"
       }
     },
+    "EXP-PRODUCT-34662221249": {
+      "lane": "product",
+      "request_id": "31b8ee9d161dd9e2b3ed281a",
+      "created_at": "2026-09-12T00:37:06.135408+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT"
+      ],
+      "question": "Can the suffix guard (Fix1) and delimiter-bound prefix validation (Fix2, last-char variant) be applied to actual src/spider/kernel.py distill_parameterized and _bind, producing correct binding outcomes for all established conditions (P1, G1, G2, G3, G5) with no regressions, and correctly rejecting parameterization on two null controls: N1_ORIGINAL (cross-host URLs sharing 'https://api.' prefix ending at non-delimiter '.') and N1_CORRECTED (truly disjoint URLs with no shared protocol prefix, e.g., http:// vs ftp://) \u2014 thereby closing the standalone-reimplementation gap identified in EXP-PRODUCT-34642376433 audit V3?",
+      "audit_status": "REVISE",
+      "decision": "SURVIVES_CURRENT_TEST",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/product",
+      "hashes": {
+        "request.json": "42e0f10452526e8c0ad0ae84275a10c086ba9bb104b8b696a7cb81e4c0f9a316",
+        "spec.json": "fa47eaeebbd6158c501a3f91f82a07688d49b708417a3ee8cc8ddbd61102e906",
+        "prereg.md": "30a7f76971538b2ec15c17554eab46a4801b51f1102ce4dde57e055c33e4f4a6",
+        "freeze.json": "5bab320f2aefbe1fca629f6aaaccfc2dddb7237a36ffe42317a4de2d3c046665",
+        "result.json": "f2597b740c36a06ad13745391459de1f20d1cff0908849ec952d9d6468da88b0",
+        "report.md": "c9f0913ed89f845b5cff03f503c0fe2ab918763e9450ad73c2acf99c9db16b93",
+        "provenance.json": "e3bd147818be9f5c7d1c1435f5713023f25d0ab0c55d12f1badbb00ace95be8d",
+        "audit.json": "72258738326b8596873625a77f5d409370c70fe78579d661f8985f87a058d908",
+        "verdict.json": "fd4308ec0a0f53db80d12c88965023debf7d43b8d3fbe652aa5cb3379d8e09fc",
+        "handoff.json": "55e3f8a9826b98d8b2efffadb347a34259a2db9ca1daef50ea8a6b7e07e43ff3"
+      }
+    },
     "EXP-RUNTIME-33528830833": {
       "lane": "runtime",
       "request_id": "cbf791e0cd3fe570d0ff0fd5",
