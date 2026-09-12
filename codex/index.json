@@ -965,6 +965,31 @@
         "handoff.json": "e9d616f06212f82e4b2ee25702f458ce2805dfbdf4893c4b6b77a47464224484"
       }
     },
+    "EXP-PHYSICS-34674671762": {
+      "lane": "physics",
+      "request_id": "21894ad576e1d4c34c45a466",
+      "created_at": "2026-09-12T05:05:11.304552+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Do network requests and API calls (XHR/fetch payloads, endpoint sequences, response content-types) captured via Playwright route interception on genuine client-side-routed SPAs provide predictive state information beyond URL \u2014 specifically, does the network-request signature on within-URL transitions carry PMI exceeding URL-only by >= 0.1 bits on sites where URL is ambiguous?",
+      "audit_status": "REVISE",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/physics",
+      "hashes": {
+        "request.json": "667132861981aaf93cf3fb7e1893748c608b7906f7aa99147fb58a93fb9d822f",
+        "spec.json": "48c48dcb7b1eefab6ef4387ed42030a3ca4078ff0d08a8d1afd1b381f0650b25",
+        "prereg.md": "73b3f86bba890c6f6a10c0cc249d70f059e0fff07845d9aeef29083ad5d53fbf",
+        "freeze.json": "e85437f31f0793c1150d4f565575dbb4f097178827834f1dafcaf9fee57b0a78",
+        "result.json": "bd228408028a046dfac21a48ca1f40a072080a0d06f4d892ad662d02a11ca165",
+        "report.md": "f32d536b01d8cd564cbe48c19ca398735fc09122f4b0de7e47f0afdf7e3cce0a",
+        "provenance.json": "3afc825a44c50dbbf7e13fa16dd64367e940ce9223bc5922f758711b56bbaf4d",
+        "audit.json": "6201c6b90d8a21a9e414c31dead11417d6774032dfcbb96fce3a46755de1a200",
+        "verdict.json": "b96e99c285d1241e032067b3c904d4381e9d6fe74310f8f3d72e4572c4b0bd13",
+        "handoff.json": "ca491e4b2ac3c6fb4568d3a631261d9e8c6599841d05b02ec1721bd85deef1b1"
+      }
+    },
     "EXP-PRODUCT-33528829801": {
       "lane": "product",
       "request_id": "2629e8e63e200f05556e37ca",
@@ -1263,6 +1288,31 @@
         "audit.json": "72258738326b8596873625a77f5d409370c70fe78579d661f8985f87a058d908",
         "verdict.json": "fd4308ec0a0f53db80d12c88965023debf7d43b8d3fbe652aa5cb3379d8e09fc",
         "handoff.json": "55e3f8a9826b98d8b2efffadb347a34259a2db9ca1daef50ea8a6b7e07e43ff3"
+      }
+    },
+    "EXP-PRODUCT-34685457833": {
+      "lane": "product",
+      "request_id": "b3f56c62abedea1873c1dcfe",
+      "created_at": "2026-09-12T09:17:41.938984+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT"
+      ],
+      "question": "Can the empty-prefix guard be frozen as part of the Fix2 specification, the B_UNFIXED baseline be properly reimplemented as a true unfixed heuristic (without Fix1/Fix2 applied), and the full Fix1+Fix2+empty-prefix guard be committed to src/spider/kernel.py and src/spider/models.py \u2014 with production _bind semantics validated against all 9 conditions including slot_prefixes representation and prefix-stripping for VALUE CONTRACT \u2014 thereby advancing from monkey-patch validation to committed-code validation?",
+      "audit_status": "PASS",
+      "decision": "SURVIVES_CURRENT_TEST",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/product",
+      "hashes": {
+        "request.json": "0a650b5eeb497774ed60ddf457eb4b5dd7cedcc42f470902fa1dedeb5491135d",
+        "spec.json": "6487a98b1ac697b39a5caa13acd79a6ff1f3ba41dae9c09913e283b2a9dc03c2",
+        "prereg.md": "a30807305fc684684bef8cca78bc23d128cffa3ea2bdf50c891983cbccd000fd",
+        "freeze.json": "d2577453c00b3057fdd023c01e312fb68915436009f2e7adb6a6d63c74fa0b7e",
+        "result.json": "2136d0115b72b7b09d19142681ddc57248ce91f948ab94ff8fea2048c1362cc8",
+        "report.md": "5cfb55762581602a00f9f34054bcf8dc1296a2d95c61abd9213dda8a54c9058f",
+        "provenance.json": "53c338b0e5cf4e3e817a057387f6c31206adf3d88131e10c15273d28da2a7348",
+        "audit.json": "79fcde0e3a7547ceb6fcdd2f7880adad7af5b44464832764ba184dc60d295520",
+        "verdict.json": "4a44b7c6b26cab4e1a9f0a3c1b48397659afea5331e22a474d76f99ad2e968cd",
+        "handoff.json": "2ac3222a9eb2ae262de7d60c5615f5bfb1d9ae67b0a2b7dce5468a31e14486a6"
       }
     },
     "EXP-RUNTIME-33528830833": {

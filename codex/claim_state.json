@@ -145,6 +145,14 @@
         "claim_id": "C-WEB-DYNAMICS",
         "status": "HYPOTHESIS",
         "reason": "Frozen question (accessibility-tree as predictive state beyond URL on genuine SPA/form-heavy sites) was not tested. All data is synthetic with artificially injected state-dependent action probabilities; URL held constant by construction makes URL-only PMI ~0, so any a11y variation yields tautological gain. Real-site attempts (tally_form N=30 < 50, stalled automation; google_form placeholder URL redirecting to login) fail data-sufficiency and site-selection requirements. The frozen decision rule requires genuine SPA sites with URL ambiguity (spec.json measurement_validity #1, prereg 5.1-5.4). Producer SUPPORTS outcome is based on infrastructure-failure fallback to synthetic data, not evidence for or against the stated hypothesis. C-WEB-DYNAMICS remains HYPOTHESIS. The PMI pipeline correctly detects injected structure on synthetic data (positive control PMI=1.271, null p=0.666 on v2), but this is pipeline verification, not hypothesis evidence."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-34674671762",
+        "lane": "physics",
+        "decision": "FALSIFIED-IN-SETTING",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "Network-request endpoint+method+status+body_frag representation tested on 3 locally-hosted SPAs: 1/3 shows PMI 0.881 bits (dashboard, Bonferroni p=0.003) but gain is tautological action\u2192own-request (audit finding tautological_dashboard_gain_identifiability); 2/3 show 0.0 bits because API calls are identical across states by server design. Primary condition (\u22652/3 sites \u22650.1 bits) fails. Audit bounded claim ceiling to locally-hosted simulation only; does not generalize to production SPAs. This falsifies the specific network-request representation on this specific locally-hosted contrast. C-WEB-DYNAMICS as a broader hypothesis is not closed: response-side signals, more expressive representations, and genuine production SPAs remain untested."
       }
     ],
     "C-PARAM-INHERIT": [
@@ -347,6 +355,14 @@
         "claim_id": "C-PARAM-INHERIT",
         "status": "EXPERIMENTAL",
         "reason": "Fix1 (suffix guard) and Fix2 (delimiter-bound prefix validation) validated on imported src.spider.kernel module via monkey-patching, closing V3 audit gap from EXP-PRODUCT-34642376433. Claim ceiling advances from 'standalone reimplementation' to 'NARROW_SYNTHETIC_SINGLE-SLOT_MONKEY_PATCHED_TEMPLATE_ONLY': 5 single-slot URL classes (P1 path-prefix, G1 query-string, G2 multi-param, G3 deep-path, G5 path+query hybrid) all binding_accuracy=1.0 on unseen values, N1_ORIGINAL cross-host prefix rejected (slot_count=0), N1_CORRECTED truly disjoint rejected (slot_count=0), no regressions, G4 multi-char suffix architectural bound confirmed, B_LITERAL baseline confirmed. Production integration not yet committed; slot_prefixes representation loss for P1/G3/G5 acknowledged; empty-prefix guard (EXPLORATORY) required for N1_CORRECTED."
+      },
+      {
+        "experiment_id": "EXP-PRODUCT-34685457833",
+        "lane": "product",
+        "decision": "SURVIVES_CURRENT_TEST",
+        "claim_id": "C-PARAM-INHERIT",
+        "status": "EXPERIMENTAL",
+        "reason": "Auditor PASS, all 9/9 decision-relevant conditions pass frozen decision_rule on committed code (kernel.py a1fe75cf, models.py 064c5f). Claim ceiling advances from monkey-patched synthetic to committed-code synthetic (audit V4). However, claim remains EXPERIMENTAL with NARROW ceiling: (1) slot_prefixes empty for P1/G3/G5 limits to template-substitution-only binding with no VALUE CONTRACT prefix-stripping (audit V5); (2) Fix2 allows protocol-only 'https://' over-parameterization not covered by frozen nulls (audit V6); (3) B_UNFIXED delta verified by recompute but not measured in primary run against G1/N1_ORIGINAL training data (audit B2); (4) all conditions synthetic with zero model/browser/network calls (audit V7). C-PRODUCT-ECON next gate requires end-to-end amortized economics on real agents."
       }
     ],
     "C-SEMANTIC-RESOLVE": [
