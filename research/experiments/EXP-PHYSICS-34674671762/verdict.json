@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34674671762",
+  "lane": "physics",
+  "decision": "FALSIFIED-IN-SETTING",
+  "claim_updates": [
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "HYPOTHESIS",
+      "reason": "Network-request endpoint+method+status+body_frag representation tested on 3 locally-hosted SPAs: 1/3 shows PMI 0.881 bits (dashboard, Bonferroni p=0.003) but gain is tautological action→own-request (audit finding tautological_dashboard_gain_identifiability); 2/3 show 0.0 bits because API calls are identical across states by server design. Primary condition (≥2/3 sites ≥0.1 bits) fails. Audit bounded claim ceiling to locally-hosted simulation only; does not generalize to production SPAs. This falsifies the specific network-request representation on this specific locally-hosted contrast. C-WEB-DYNAMICS as a broader hypothesis is not closed: response-side signals, more expressive representations, and genuine production SPAs remain untested."
+    }
+  ],
+  "product_action": "NONE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Do response-side signals (response content-type, response body digest, response timing, response status sequences) captured via Playwright route interception on locally-hosted SPAs with state-dependent server responses provide predictive PMI on within-URL transitions where client-side request signatures are identical across states?",
+  "reason": "The primary condition fails: only 1/3 locally-hosted sites show network-request PMI >= 0.1 bits (dashboard 0.881 bits, multistep 0.0, wizard 0.0). The audit identified that the dashboard gain is tautological (action label directly determines request endpoint path, so PMI measures action→own-request causality, not predictive environmental dynamics). The 2/3 failing sites have identical client-side request signatures across states because the server hides state in session cookies, not in distinct request endpoints. The null control used synthetic data (not real SPA data per spec), and the wizard has a temporal split violation (n_train=0). The claim ceiling is bounded to locally-hosted simulations, not production SPAs. Result is directionally consistent: client-side request signatures carry information when endpoints vary by state, but this is expected and does not demonstrate predictive dynamical structure beyond URL. The orthogonal next step is to test response-side signals, which capture what the server sends back (data content, types, timing) rather than what the client sends, potentially encoding state information that request signatures miss.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-34674671762/result.json status=COMPLETE outcome=FALSIFIES metrics.primary_condition_met=false metrics.sites_passing_primary=1 metrics.sites_total=3",
+    "research/experiments/EXP-PHYSICS-34674671762/audit.json status=REVISE producer_claim_supported=false claim_ceiling validity_findings sampling_local_not_production wizard_temporal_split_violation tautological_dashboard_gain_identifiability multistep_wizard_api_coarseness null_control_wrong_population",
+    "research/experiments/EXP-PHYSICS-34674671762/pmi_results.json metrics.site_results dashboard network_pmi=0.881 perm_p_bonf=0.003 multistep_form network_pmi=0.0 wizard network_pmi=0.0 wizard n_train=0 n_test=32",
+    "research/physics/network_requests/dashboard_spa_server.js:88-90 fetch('/api/tab/' + tab) — action label target_href equals tab name, s_next deterministic function of action",
+    "research/physics/network_requests/multistep_form_server.js:93-106 POST /api/checkout/next same endpoint all steps, STEP_API_CALLS defined but not fetched client-side",
+    "research/physics/network_requests/wizard_spa_server.js:80-88 POST /api/wizard/next same endpoint all steps, STEP_APIS not triggered client-side",
+    "research/experiments/EXP-PHYSICS-34674671762/spec.json falsifier primary condition >=2/3 sites, decision_rule FALSIFIED-IN-SETTING if primary fails",
+    "research/experiments/EXP-PHYSICS-34674671762/prereg.md 5.1 genuine SPA criteria, 9.2 FALSIFIED-IN-SETTING, 12 deviation policy"
+  ]
+}

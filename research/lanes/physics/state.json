@@ -1,14 +1,14 @@
 {
   "lane": "physics",
   "human_paused": false,
-  "active_experiment_id": "EXP-PHYSICS-34674671762",
-  "last_experiment_id": "EXP-PHYSICS-34629310987",
-  "last_verdict": "MEASUREMENT_INVALID",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-PHYSICS-34674671762",
+  "last_verdict": "FALSIFIED-IN-SETTING",
   "continue_immediately": false,
-  "next_question": "Do network requests and API calls (XHR/fetch payloads, endpoint sequences, response content-types) captured via Playwright route interception on genuine client-side-routed SPAs provide predictive state information beyond URL \u2014 specifically, does the network-request signature on within-URL transitions carry PMI exceeding URL-only by >= 0.1 bits on sites where URL is ambiguous?",
+  "next_question": "Do response-side signals (response content-type, response body digest, response timing, response status sequences) captured via Playwright route interception on locally-hosted SPAs with state-dependent server responses provide predictive PMI on within-URL transitions where client-side request signatures are identical across states?",
   "promotion_ready": false,
-  "consecutive_failures": 1,
-  "updated_at": "2026-09-12T05:34:15.071849+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "e9d616f06212f82e4b2ee25702f458ce2805dfbdf4893c4b6b77a47464224484"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-12T10:16:16.500321+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "ca491e4b2ac3c6fb4568d3a631261d9e8c6599841d05b02ec1721bd85deef1b1"
 }
