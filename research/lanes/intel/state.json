@@ -1,14 +1,14 @@
 {
   "lane": "intel",
   "human_paused": false,
-  "active_experiment_id": "EXP-INTEL-34607693437",
-  "last_experiment_id": "EXP-INTEL-34546944360",
-  "last_verdict": "MIXED",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-INTEL-34607693437",
+  "last_verdict": "MEASUREMENT_INVALID",
   "continue_immediately": false,
-  "next_question": "What is the canonical definition of 'locatable elements' for SPIDER fragment yield, and does yield_locatable stabilize across randomized shopping page types (including checkout) under that frozen definition?",
+  "next_question": "Can full-page accessibility tree enumeration (without viewport chrome filtering) produce a stable and meaningful yield metric for SPIDER fragment model capture, and what fraction of page elements does the fragment model actually retain?",
   "promotion_ready": false,
-  "consecutive_failures": 9,
-  "updated_at": "2026-09-12T16:18:43.599219+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "f7e8d8e37d3fa48c33a23a40cf5b6c7de0f6016fb804cc4aa809d0ea4f492486"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-12T18:33:23.661450+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "4b53b6ef5ae2e7dd11588ec6000e51eaf0fcc935e52e3aee26715eb62b73a417"
 }
