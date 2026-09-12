@@ -1,14 +1,14 @@
 {
   "lane": "frontier",
   "human_paused": false,
-  "active_experiment_id": "EXP-FRONTIER-34538185726",
-  "last_experiment_id": "EXP-FRONTIER-34121473072",
-  "last_verdict": "FALSIFIED-IN-SETTING",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-FRONTIER-34538185726",
+  "last_verdict": "MEASUREMENT_INVALID",
   "continue_immediately": false,
-  "next_question": "Can alternative high-dimensional density divergence estimators (KDE, binned PCA projection, or neural density estimation) detect scaling-type action-dependent structure that kNN TV misses in the same 10D non-Gaussian DGP \u2014 or does the scaling failure reflect a fundamental information-theoretic limit where multiplicative state modulation is indistinguishable from heteroscedastic noise at finite sample sizes?",
+  "next_question": "Can binned PCA projection to 2D-3D subspaces before divergence computation detect both scaling-type and rotation-type action-dependent structure simultaneously in the same 10D non-Gaussian DGP \u2014 or does dimensionality reduction destroy the discriminating information that both kNN TV (full-space neighbor ratios) and KDE (full-space kernel smoothing) each partially capture?",
   "promotion_ready": false,
-  "consecutive_failures": 15,
-  "updated_at": "2026-09-12T20:57:12.697029+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "657385858ecd333d46456f97eb51251ab5e903e70a6adf8c0a2aaee19a175faf"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-12T23:04:11.637287+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "e7e2e6522b96e34f222f93289976136f59713667d835b2e8b0125c82c94c46a6"
 }
