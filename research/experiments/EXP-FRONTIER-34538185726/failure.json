@@ -1,9 +1,9 @@
 {
-  "stage": "director",
-  "category": "DIRECTOR_FAILURE",
-  "message": "stage exited with code 66",
-  "retryable": false,
-  "recorded_at": "2026-09-12T12:59:56.804646+00:00",
-  "github_run_id": "34695059246",
+  "stage": "design",
+  "category": "OPENCODE_INSTALL_FAILURE",
+  "message": "stage exited with code 75",
+  "retryable": true,
+  "recorded_at": "2026-09-12T16:16:24.537482+00:00",
+  "github_run_id": "34704656705",
   "github_run_attempt": "1"
 }
