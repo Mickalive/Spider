@@ -1,0 +1,9 @@
+{
+  "stage": "execute",
+  "category": "VALIDATION_FAILURE",
+  "message": "execute missing result.json",
+  "retryable": false,
+  "recorded_at": "2026-09-12T21:03:44.424357+00:00",
+  "github_run_id": "34718479578",
+  "github_run_attempt": "1"
+}
