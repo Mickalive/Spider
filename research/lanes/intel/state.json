@@ -1,14 +1,14 @@
 {
   "lane": "intel",
   "human_paused": false,
-  "active_experiment_id": "EXP-INTEL-34718481334",
-  "last_experiment_id": "EXP-INTEL-34607693437",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-INTEL-34718481334",
   "last_verdict": "MEASUREMENT_INVALID",
   "continue_immediately": false,
-  "next_question": "Can full-page accessibility tree enumeration (without viewport chrome filtering) produce a stable and meaningful yield metric for SPIDER fragment model capture, and what fraction of page elements does the fragment model actually retain?",
+  "next_question": "Does the interactive fraction metric maintain within-type stability and between-type discrimination when the element definition is tightened to exclude form-descendant DIV/SPAN/LABEL (role-only counting: button, link, textbox, combobox, etc. without the form-membership clause), and what are the resulting per-type means \u2014 computable from existing EXP-INTEL-34718481334 raw measurement data without new Docker execution?",
   "promotion_ready": false,
-  "consecutive_failures": 6,
-  "updated_at": "2026-09-13T15:09:33.803442+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "4b53b6ef5ae2e7dd11588ec6000e51eaf0fcc935e52e3aee26715eb62b73a417"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-13T18:14:16.862691+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "26f6e86ec59114547c854fedfd0cf349d5e69d1fe3712a4c4456f9014399fce3"
 }
