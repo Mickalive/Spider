@@ -251,6 +251,31 @@
         "handoff.json": "27ca8bd75164d93b763fe3861e36aeb6c6ef353693b5aa08a2c231a07dcdae01"
       }
     },
+    "EXP-FRONTIER-34773875458": {
+      "lane": "frontier",
+      "request_id": "7a702efffc6b438533371585",
+      "created_at": "2026-09-13T18:11:56.994798+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Does TV detection of translation-like action-dependent structure survive non-stationary dynamics where different page types have different transition functions \u2014 the defining property of real Web data that all five prior synthetic Frontier experiments lack?",
+      "audit_status": "REVISE",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/frontier",
+      "hashes": {
+        "request.json": "c426eaabcd14022130061e65d1bbb140d41ab22a9c81d28d0d5d4a9e0ae418d2",
+        "spec.json": "fb9e8dc5198ad746a0b754cf8d405ac1bb2b5f39ad7a3a08ecaf2f8c74f2f1fb",
+        "prereg.md": "dc41ffba95d311f922be15cf8c172082b399d236b368ef24b8c9a2c8979647c4",
+        "freeze.json": "e6838fef3650839f6d3bde506a6e95d7949abf2004f96a72a60a23d73585a475",
+        "result.json": "27f8ca3767e866d86a80484db409ae336f826505c94b956ddc5c42351c86fef1",
+        "report.md": "602c114e3b687a4395f387012b4de4daaf5bd889a9838eeb83216ca48718c212",
+        "provenance.json": "7c4a77f865a5177611b042ffa5941e8ef7a4ef483b43381075cfc94c6b7cd9c9",
+        "audit.json": "29ae7efe94c6172b1b0d5c0277db7055102c8b01e6c9962d2a24b8e40c103fb2",
+        "verdict.json": "dbc41b5bd2617c09365400256c371b52aad19dcafa853175e27e4a7666e9ec00",
+        "handoff.json": "8e7d9b6afc77584d4575415d596134b542c4e0233cd29c6d0c31e64cdd174b4e"
+      }
+    },
     "EXP-GRAPH-33528827169": {
       "lane": "graph",
       "request_id": "3e0d81e7790f2f2b7bd8665e",

@@ -83,6 +83,14 @@
         "reason": "PCA projection to 2D-3D subspaces before binned TV divergence does NOT simultaneously detect scaling-type and rotation-type action-dependent structure in 10D non-Gaussian DGP. Scaling fails in 2D (rho=0.6429<0.65, p=0.043>0.0167 Bonferroni) and all three functions fail in 3D (all rho=0.6429). ANOVA function x lambda interaction decisively fails (2D p~3e-11, 3D p=0.007). The curse-of-dimensionality hypothesis \u2014 that per-function heterogeneity is a high-dimensional artifact recoverable by dimensionality reduction \u2014 is FALSIFIED in this linear PCA + binned TV setting. Claim ceiling remains narrowed to synthetic 10D; C-WEB-DYNAMICS continues as HYPOTHESIS with claim domain restricted to translation-like dynamics in synthetic DGP. No product promotion warranted."
       },
       {
+        "experiment_id": "EXP-FRONTIER-34773875458",
+        "lane": "frontier",
+        "decision": "FALSIFIED-IN-SETTING",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "Frozen decision rule yields FALSIFIED-IN-SETTING: page_type x lambda ANOVA interaction p=0.0 (F=7.51) violates criterion 5 of SURVIVES_CURRENT_TEST. However, the claim concerns real Web dynamics and ALL evidence remains synthetic (2D [0,1]^2 with 8 deterministic page types, heteroscedastic Gaussian noise, block-cycling). The claim ceiling is narrowed: pooled binned TV (20x20) on synthetic non-stationary DGP shows rank-monotonic detection (BC Spearman rho=0.929, p=0.0004) with very large effect size (Cohen d=4.66) but ~95% absolute magnitude loss (BC 0.051 vs stationary 0.952 at lambda=1) and significant per-type heterogeneity (all per-type rho 0.74-1.0). Auditor finds the ANOVA interaction criterion tautological for deliberately heterogeneous page types and per-type BC TV uses contaminated bias floor. Survival is exploratory, not confirmatory. Real Web data remains untested. (audit.json:claim_ceiling; result.json:controls.function_invariance; spec.json:decision_rule criterion 5)"
+      },
+      {
         "experiment_id": "EXP-PHYSICS-33528829431",
         "lane": "physics",
         "decision": "REVISE",

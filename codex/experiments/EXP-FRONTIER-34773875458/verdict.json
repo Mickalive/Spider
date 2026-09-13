@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-34773875458",
+  "lane": "frontier",
+  "decision": "FALSIFIED-IN-SETTING",
+  "claim_updates": [
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "HYPOTHESIS",
+      "reason": "Frozen decision rule yields FALSIFIED-IN-SETTING: page_type x lambda ANOVA interaction p=0.0 (F=7.51) violates criterion 5 of SURVIVES_CURRENT_TEST. However, the claim concerns real Web dynamics and ALL evidence remains synthetic (2D [0,1]^2 with 8 deterministic page types, heteroscedastic Gaussian noise, block-cycling). The claim ceiling is narrowed: pooled binned TV (20x20) on synthetic non-stationary DGP shows rank-monotonic detection (BC Spearman rho=0.929, p=0.0004) with very large effect size (Cohen d=4.66) but ~95% absolute magnitude loss (BC 0.051 vs stationary 0.952 at lambda=1) and significant per-type heterogeneity (all per-type rho 0.74-1.0). Auditor finds the ANOVA interaction criterion tautological for deliberately heterogeneous page types and per-type BC TV uses contaminated bias floor. Survival is exploratory, not confirmatory. Real Web data remains untested. (audit.json:claim_ceiling; result.json:controls.function_invariance; spec.json:decision_rule criterion 5)"
+    }
+  ],
+  "product_action": "NONE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does per-page-type binned TV estimation with per-type bias correction recover absolute signal strength lost to pooled heterogeneous averaging, or is the 94.6% attenuation a fundamental property of action-dependent structure in non-stationary DGPs?",
+  "reason": "Under the frozen decision rule, FALSIFIED-IN-SETTING is correct: criterion 5 (no ANOVA page_type x lambda interaction, p>0.05) fails with p=0.0, F=7.51. The auditor confirms this is the binding falsification. However, the scientific picture is more nuanced than the binary rule captures: (1) all five other criteria pass decisively — rho=0.929 exceeds 0.5, degradation=0.071 is well below 0.4, positive and null controls pass, CV=0.22 is valid; (2) all 8 per-page-type rho values are >=0.738 (p<=0.037), showing detection in every individual page type; (3) the auditor finds the ANOVA interaction criterion is tautologically powered — 8 deliberately heterogeneous page types (rotation/scaling/translation, sigma 0.05/0.10, two centers) guarantee different TV-lambda slopes, so a significant interaction reflects design heterogeneity, not detection failure. The critical practical finding is the 94.6% absolute magnitude attenuation: pooled BC TV at lambda=1 drops from 0.952 (stationary) to 0.051 (non-stationary), with frequency baseline mean TV=0.335 being 6x the non-stationary signal. This raises the question of whether pooled estimation on heterogeneous data is fundamentally lossy, or whether per-page-type estimation can recover signal strength. The auditor's per-type bias floor contamination (using pooled N=2000 perm_mean for N=250 per-type estimates) means the ANOVA interaction result is unreliable and must be recomputed with per-type permutation nulls before the heterogeneity claim is settled. Product promotion is not warranted: no real Web data, absolute magnitude near noise floor, and claim ceiling remains synthetic-only exploratory. The next experiment should test per-page-type estimation to resolve whether the attenuation is estimator-dependent or fundamental.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-34773875458/spec.json:decision_rule criterion 5 (ANOVA interaction p>0.05)",
+    "research/experiments/EXP-FRONTIER-34773875458/result.json:status COMPLETE outcome FALSIFIES, controls.function_invariance (interaction p=0.0 F=7.51), controls.spearman_test (rho=0.929 p=0.0004), controls.degradation_test (0.071), controls.positive_control (min BC 0.037), controls.null_control (Fisher p=0.757), metrics.nonstationary.aggregate_bc_tv, metrics.degradation, metrics.effect_size (d=4.66), metrics.frequency_baseline (mean TV 0.335)",
+    "research/experiments/EXP-FRONTIER-34773875458/audit.json:status REVISE producer_claim_supported false, claim_ceiling, required_fixes 6 items, validity_findings ANOVA tautology (finding 3), bias floor contamination (finding 2), absolute attenuation (finding 4), sparse binning (finding 5), non-stationarity weakness (finding 6), recomputed_metrics all match producer",
+    "research/experiments/EXP-FRONTIER-34773875458/report.md:Status FALSIFIED-IN-SETTING, Executive Summary, Decision Rule Analysis, per-page-type tables",
+    "research/experiments/EXP-FRONTIER-34773875458/raw_tables.json: raw per-cell data",
+    "research/experiments/EXP-FRONTIER-34773875458/run_execute.py: pipeline code including bias correction (line 424-427) and ANOVA computation",
+    "research/experiments/EXP-FRONTIER-34773875458/provenance.json: 80000 non-stationary transitions, 24000 stationary, execution 19.7s",
+    "research/experiments/EXP-FRONTIER-34729238832/handoff.json: parent handoff carrying forward synthetic-only evidence, real Web data as dominant unknown"
+  ]
+}

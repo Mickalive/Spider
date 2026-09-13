@@ -1,0 +1,168 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-34773875458",
+  "lane": "frontier",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Report must not imply 'detection survives non-stationarity' as a confirmatory success: frozen decision rule outcome is FALSIFIED-IN-SETTING due to function_invariance failure (ANOVA interaction p=0.0, F=7.51). Under binding spec.json falsifier (5) and decision_rule, SURVIVES_CURRENT_TEST fails. Any survival narrative must be labeled exploratory and post-hoc.",
+    "Per-page-type bias correction is invalid: run_execute.py:426 computes pt_bc_tv = max(0, pt_tv_max - pooled_perm_mean) using pooled N=2000 bias floor (~0.238) for N=250 per-page estimates where true bias floor is larger (observed raw TV at lambda=0: high-noise types 0.35-0.38 vs low-noise 0.10-0.15). Recompute per-page-type BC TV with per-page-type permutation means (N>=200 per page type) and re-run two-way ANOVA before using ANOVA interaction as a falsifier.",
+    "Absolute magnitude attenuation must be reported with equal prominence to rank correlation: pooled BC TV at lambda=1 drops from 0.952 (stationary aggregate) to 0.051 (non-stationary pooled), 94.6% loss. With pooled perm_std ~0.014-0.015 at lambda=0, signal-to-bias ratio is ~3.4 at best. Product consequence 'proceed to real Web data collection' is not justified from rho alone.",
+    "ANOVA interaction falsifier is tautologically powered in this design: 8 deliberately heterogeneous page types (3 functions x 2 noise levels x 2 centers) guarantee different TV-lambda slopes. F=125.6 page-type main effect and heterogeneous per-type rho (0.738 to 1.0) confirm heterogeneity by construction. Criterion (5) tests design heterogeneity, not detection failure. Either remove it as a confirmatory falsifier or replace with per-page-type rho >=0.5 pre-specified check (which passes: min rho 0.738, p=0.037).",
+    "Representation loss disclosure: 20x20 grid =400 bins with 250 transitions per page type =0.625 expected counts/bin, and 2000 pooled =5/bin, yields high-variance sparse TV estimates. Heteroscedastic bias varies by noise level and is not captured by single pooled correction. State that per-page-type TV estimates are undersampled and ANOVA R2=0.898 reflects overfit to sparse counts.",
+    "Non-stationarity operationalization is block-deterministic cycling type=(idx//250) mod 8, not stochastic or state-dependent switching. Real Web non-stationarity (continuous high-dimensional state, non-Gaussian noise, temporal correlation, missing data) remains untested. Claim ceiling must remain synthetic 2D [0,1]^2 DGP."
+  ],
+  "validity_findings": [
+    {
+      "finding": "Primary aggregate metrics recompute exactly from raw_tables.json and result.json",
+      "severity": "none",
+      "details": "Non-stationary BC TV spearman rho=0.928571 (p_one=0.000431) vs stationary rho=1.0, degradation=0.071428 (<0.4), Fisher lambda0 combined p=0.756886 (F=6.662, 5 reps 0.855,0.86,0.65,0.68,0.11), lambda1 combined p=0.0, Cohen d=4.6577, CV lambda1=0.2213 (<=0.5), bias floor 0.00392 (<=0.01) all verified via scipy.stats.spearmanr and chi2. Positive control min 0.0372 >=0.001 passes. No pipeline errors."
+    },
+    {
+      "finding": "Per-page-type BC TV and ANOVA interaction use incorrect bias floor",
+      "severity": "high",
+      "details": "run_execute.py lines 419-427 uses pooled perm_mean (~0.236-0.239) for all 8 page types despite N=250 per type having larger finite-sample bias. result.json per_page_type tv_means_by_lambda at lambda0 show high-noise types 0.35-0.38 vs low-noise 0.10-0.15, confirming bias heterogeneity. ANOVA interaction F=7.51 p=0.0 input is therefore contaminated. Aggregate pooled BC is correct (pooled perm appropriate for pooled data), but secondary ANOVA validity is compromised.",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-34773875458/run_execute.py:424-427, research/experiments/EXP-FRONTIER-34773875458/result.json:metrics.nonstationary.per_page_type"
+    },
+    {
+      "finding": "ANOVA interaction falsifier is mis-specified for heterogeneous design",
+      "severity": "high",
+      "details": "spec.json falsifier (5) and decision_rule require no page_type x lambda interaction p>0.05 to claim SURVIVES. By design PAGE_TYPES contains rotation/scaling/translation with sigma 0.05 vs 0.10 and two centers, guaranteeing slope heterogeneity. ANOVA correctly detects interaction, but this reflects expected heterogeneity (page_type main effect F=125.63 p=0.0) not absence of action-dependence. Per-page-type rho all >=0.738 (p<=0.037) shows detection present in every type despite interaction. Criterion converts tautology into falsification.",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-34773875458/spec.json:falsifier, research/experiments/EXP-FRONTIER-34773875458/result.json:controls.function_invariance.anova_result, prereg.md:7.4"
+    },
+    {
+      "finding": "Rank correlation masks catastrophic absolute signal loss",
+      "severity": "medium",
+      "details": "Spearman rho preserves monotonic rank despite non-monotonic BC sequence (0.010 at lambda0.2 ->0.005 at 0.3) and 94.6% magnitude collapse: stationary TV at lambda1 0.952 vs non-stationary BC 0.051, raw 0.545. Frequency baseline mean TV 0.335 equals 6x non-stationary BC signal. Practical detector thresholding on TV magnitude would be near noise. Report emphasizes rho_bounded degradation but underweights absolute attenuation.",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-34773875458/result.json:metrics.stationary.aggregate.tv_max_means_by_lambda, metrics.nonstationary.aggregate_bc_tv.bc_tv_means_by_lambda, metrics.frequency_baseline"
+    },
+    {
+      "finding": "Sparse binning and heteroscedastic bias heterogeneity not controlled",
+      "severity": "medium",
+      "details": "20x20 grid 400 bins with 250/block gives 0.625 expected counts/bin; TV estimator variance and bias depend on sigma_base (0.05 vs 0.10) and distance to center. Pooled bias subtraction cannot correct per-type bias. MC SE ~0.02 pooled claim in validity_notes underestimates per-type SE (~0.06). No demonstration that increasing to 500/block would preserve rho.",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-34773875458/run_execute.py:GRID_SIZE, prereg.md:9.1-9.2"
+    },
+    {
+      "finding": "Non-stationarity unrealistically weak vs real Web",
+      "severity": "medium",
+      "details": "Deterministic block cycling every 250 i.i.d. draws within each lambda level is block-stationary with known boundaries and 8 predefined affine functions with Gaussian noise clipped to [0,1]. Real Web DOM transitions have continuous high-dimensional state, non-Gaussian multimodal noise (3-Gaussians in prior 10D work), state-dependent page-type switching, temporal correlation, and missing data—all unmodeled. Prereg 9.4 acknowledges gap but product_consequence_negative overstates generality of synthetic non-stationarity failure/success.",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-34773875458/run_execute.py:generate_transitions_nonstationary, prereg.md:9.4"
+    },
+    {
+      "finding": "Seed independence fix applied but non-stationary seed formula deviates from spec description",
+      "severity": "low",
+      "details": "spec/measurement_validity bullets require seed = func_seed*100000+lambda_idx*1000+rep_idx*10+BASE_SEED. Stationary honors this. Non-stationary has no func_seed; code uses BASE_SEED*100000+lambda_idx*1000+rep_idx*10+999 (run_execute.py:386). Independent across lambda/rep still holds, so no reuse bias (addresses parent audit V7). Deviation is minor and does not affect inference.",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-34773875458/run_execute.py:386 vs spec.json measurement_validity"
+    },
+    {
+      "finding": "No target leakage; permutation null correctly preserves page-type structure in bias correction but not in per-type analysis",
+      "severity": "low",
+      "details": "TV computed from empirical P(S_{t+1}|A) only; lambda controls mixing probability correctly. Permutation shuffles action labels within pooled transitions for bias floor (pooled) but per-type BC reuses pooled floor. No leakage of next-state into action sampling. Fisher combining (vs mean-of-p parent V8) correctly implemented.",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-34773875458/run_execute.py:permutation_test_tv, fisher_combined_pvalue"
+    },
+    {
+      "finding": "Positive control threshold is non-discriminating",
+      "severity": "low",
+      "details": "Threshold BC TV >=0.001 at lambda=1 across all reps is 1.9% of observed mean 0.051 and far below perm_std 0.014-0.015. Even heavily degraded detection would pass. Negative product consequence pivots on degradation, but positive control provides negligible evidentiary value.",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-34773875458/spec.json:positive_control"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline": "Stationary Web-faithful 2D DGP (EXP-FRONTIER-34061241004)",
+      "strength": "strong",
+      "finding": "Replicates prior perfect monotonic rho=1.0 for aggregate and per-function (rotation 0.417->0.949, scaling 0.403->0.958, translation 0.434->0.949). With 200/cell x5 reps vs prior 500x10, replication is exact. Provides valid comparator for degradation metric, though saturation at rho=1.0 creates ceiling effect for degradation <0.4.",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-34773875458/result.json:metrics.stationary"
+    },
+    {
+      "baseline": "Permutation null (action-label shuffled, Fisher combined)",
+      "strength": "strong",
+      "finding": "Passes Fisher combined p=0.756 at lambda0 (N=200 per cell, 5 reps). Bias-corrected TV floor 0.0039 <0.01 confirms correction works for pooled data. Recomputed Fisher F=6.66 matches. Null control is appropriately stringent; addresses parent V8 mean-of-p invalid.",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-34773875458/result.json:controls.null_control"
+    },
+    {
+      "baseline": "Frequency baseline (marginal P(S_{t+1}))",
+      "strength": "weak",
+      "finding": "Marginal non-uniformity 0.224 and mean TV marginal vs action 0.335 reported but not integrated into decision. At lambda1 non-stationary BC signal 0.051 is 6x smaller than frequency baseline divergence, suggesting absolute separability is weak relative to marginal structure. Baseline is informative but unused for claim ceiling.",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-34773875458/result.json:metrics.frequency_baseline"
+    },
+    {
+      "baseline": "Per-page-type stationary baseline",
+      "strength": "moderate",
+      "finding": "All 8 page types show rho>=0.738 (p<=0.037) with low-noise types rho 0.976-1.0 and high-noise types rho 0.738-0.905. High-noise scaling (rho 0.762) and translation (0.738) substantially weaker, paralleling prior scaling failures (kNN rho -0.12, KDE rho 0.29-0.71). Pooling masks per-type heterogeneity that ANOVA detects. Supports heterogeneity-driven interaction rather than uniform failure.",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-34773875458/result.json:metrics.nonstationary.per_page_type, result.json:controls.function_invariance.anova_result"
+    }
+  ],
+  "recomputed_metrics": {
+    "stationary_aggregate_spearman_rho": 1.0,
+    "stationary_aggregate_spearman_p_one_sided": 0.0,
+    "nonstationary_bc_spearman_rho": 0.9285714285714286,
+    "nonstationary_bc_spearman_p_one_sided": 0.00043148409144998836,
+    "nonstationary_raw_spearman_rho": 1.0,
+    "rho_degradation": 0.07142857142857142,
+    "nonstationary_bc_means_by_lambda": {
+      "0.0": 0.003919703483414072,
+      "0.1": 0.004036708805732059,
+      "0.2": 0.010218733577374206,
+      "0.3": 0.005014384131890604,
+      "0.4": 0.008077262077074831,
+      "0.5": 0.017434326795668052,
+      "0.7": 0.028241679931146024,
+      "1.0": 0.05096273385357394
+    },
+    "stationary_means_by_lambda": {
+      "0.0": 0.4181467864197216,
+      "0.1": 0.4931362307552544,
+      "0.2": 0.5622702584729766,
+      "0.3": 0.6254761013000623,
+      "0.4": 0.6982820842115022,
+      "0.5": 0.7559411179500591,
+      "0.7": 0.8520050089878044,
+      "1.0": 0.9520444922830272
+    },
+    "per_page_type_rho_range": {
+      "min": 0.7380952380952381,
+      "max": 1.0,
+      "min_types": "5_translation_high_0.5,0.5",
+      "all_pass_0.5": true
+    },
+    "cohens_d_lambda0_vs_1_bc": 4.657771880762967,
+    "cv_lambda1_bc": 0.22130096112405723,
+    "bias_floor_bc_at_lambda0": 0.003919703483414072,
+    "per_rep_bc_lambda0": [0.0, 0.0, 0.0, 0.0, 0.01959851741707036],
+    "per_rep_bc_lambda1": [0.045221553426908034, 0.06251951437007991, 0.06274183109190135, 0.03722938529077441, 0.047101385088205994],
+    "min_bc_lambda1": 0.03722938529077441,
+    "permutation_null_fisher_p_lambda0": 0.7568861371597694,
+    "permutation_null_fisher_F_lambda0": 6.66239401974824,
+    "permutation_per_rep_p_lambda0": [0.855, 0.86, 0.65, 0.68, 0.11],
+    "permutation_fisher_p_lambda1": 0.0,
+    "anova_interaction_F": 7.5123,
+    "anova_interaction_p": 0.0,
+    "anova_lambda_F": 143.4692,
+    "anova_page_type_F": 125.6312,
+    "anova_model_r2": 0.8979,
+    "absolute_attenuation_lambda1": 0.9464688007162547,
+    "frequency_baseline_mean_TV": 0.3350107551482074,
+    "recompute_methods": "scipy.stats.spearmanr, scipy.stats.chi2 CDF for Fisher, numpy std/ddof=1 for CV/Cohen"
+  },
+  "claim_ceiling": "Under frozen decision rule, EXP-FRONTIER-34773875458 is correctly FALSIFIED-IN-SETTING (function_invariance fails: page_type x lambda ANOVA F=7.51 p=0.0). Scientific ceiling is narrower: pooled binned TV (20x20) on synthetic 2D [0,1]^2 with deterministic block-cycling (250 per type x8 types, 2000 pooled/lambda x5 reps, heteroscedastic Gaussian sigma 0.05/0.10) shows rank-monotonic detection (BC Spearman rho=0.929 p=0.0004, degradation 0.07<0.4, raw rho=1.0) with very large effect size (d=4.66) but ~95% absolute magnitude loss (BC 0.051 vs stationary 0.952) and significant heterogeneity across page types (all per-type rho 0.74-1.0, interaction p=0.0). Controls pass under weak positive threshold (0.001). Evidence is synthetic-only; no inference to real Web DOM transitions, high-dimensional state, non-Gaussian noise, or state-dependent switching is justified. Claim C-WEB-DYNAMICS remains falsified-in-setting for uniform cross-page-type invariance; pooled rank-detection survives only as an exploratory, low-magnitude signal with uncorrected per-type bias. Do not promote to product or to real-data collection solely on rho.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-34773875458/spec.json",
+    "research/experiments/EXP-FRONTIER-34773875458/prereg.md",
+    "research/experiments/EXP-FRONTIER-34773875458/freeze.json",
+    "research/experiments/EXP-FRONTIER-34773875458/result.json",
+    "research/experiments/EXP-FRONTIER-34773875458/raw_tables.json",
+    "research/experiments/EXP-FRONTIER-34773875458/run_execute.py",
+    "research/experiments/EXP-FRONTIER-34773875458/report.md",
+    "research/experiments/EXP-FRONTIER-34773875458/provenance.json",
+    "research/experiments/EXP-FRONTIER-34729238832/handoff.json"
+  ],
+  "unresolved": [
+    "Whether per-page-type bias-corrected TV with proper per-type permutation nulls still yields significant lambda x page_type interaction and same per-type rho range 0.74-1.0",
+    "Whether absolute BC 0.051 at lambda1 is above any practical detection threshold given raw bias 0.23-0.24 and frequency baseline 0.335; what calibrates a useful TV magnitude for downstream agent exploration",
+    "Whether stochastic or state-dependent page-type switching, or opposing dynamics (rotation vs scaling canceling), would destroy pooled rank monotonicity",
+    "Whether 250 transitions per page type on 400 bins provides stable TV estimates; sensitivity to increasing to 1000+ per type",
+    "Whether real Web DOM transitions exhibit translation-like, scaling-like, or rotation-like action-conditional structure detectable by any estimator—still no real Web data in this lane",
+    "Whether per-page-type estimation or causal factorization would outperform pooled TV given demonstrated heterogeneity"
+  ]
+}
