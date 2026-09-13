@@ -407,6 +407,16 @@
         "reason": "Kernel is deterministic exact-intent matcher (kernel.py L97) with no URL template analysis. Confirmed for complex aliasing: query-param (/posts/${id} vs /posts?id=${id}), path-rewriting (/users/${id}/posts vs /users?userId=${id}/posts), server-side routing (/albums/${id}/photos vs /photos?albumId=${id}). Combined 0/16 aliased-first correct across this experiment (0/6, p=0.016) and parent EXP-GRAPH-34409639346 (0/10, p=1.0). HTTP status-code grounding falsified on jsonplaceholder: 0/12 status differences despite 2 asymmetric scenarios designed to produce 404. Body-based grounding is exploratory and non-autonomous: body-difference metric measures whether selected and alternative responses differ, not which is correct; requires external schema oracle; produces false positives for functionally equivalent templates (A list vs dict artifact, F 100 vs 0 posts). Claim bounded to proof-of-concept: equal confidence 0.9, preconditions={}, applicability_guards={}, GET only, synthetic intents, single test API. Broader generalization to confidence-differentiated aliasing, guard/context scenarios, POST/PUT/DELETE, or strict APIs not tested."
       }
     ],
+    "C-FRESHNESS": [
+      {
+        "experiment_id": "EXP-GRAPH-34711403174",
+        "lane": "graph",
+        "decision": "SURVIVES_CURRENT_TEST",
+        "claim_id": "C-FRESHNESS",
+        "status": "EXPERIMENTAL",
+        "reason": "Proof-of-concept support: structural add/remove/change-type drift on 3-4 field flat schemas detected by Jaccard (field_path,type) at threshold 0.85 with TP=1.0, FP=0.0 in deterministic mock. Does NOT support general staleness detection, real Web endpoints, nested/optional/value/semantic drift, schemas with >=10 fields, or calibrated FP rate <0.10 at confidence (CI includes 0.27 on n=10, 0.13 on n=25)."
+      }
+    ],
     "C-CROSSSITE": [
       {
         "experiment_id": "EXP-INTEL-33528832113",

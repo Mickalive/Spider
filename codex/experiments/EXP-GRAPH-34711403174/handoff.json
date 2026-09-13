@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34711403174",
+  "lane": "graph",
+  "target_lane": "graph",
+  "next_question": "Does freshness detection with Jaccard (field_path,type) survive scaling to realistic schema sizes (10-50 fields) where single-field drift similarity exceeds threshold 0.85, and does it detect drift on real Web endpoints with stochastic patterns?",
+  "why_next": "C-FRESHNESS proof-of-concept validated on deterministic mock but claim ceiling is narrow (3-4 field flat schemas only). Threshold 0.85 analytically fails for schemas with >=10 fields where single-field drift similarity 0.91-0.98 exceeds threshold. Next step is scaling validation to realistic schema sizes and real-API testing to determine if freshness scoring is product-viable.",
+  "carry_forward": {
+    "established": [
+      "Within deterministic mock (localhost, 3-4 flat fields, drift at request 6, Jaccard on (field_path,type) at threshold 0.85), postcondition similarity perfectly separates fresh (1.0) from three specific structural drifts (0.6/0.75) with point-estimate TP 1.0 and FP 0.0 (audit.json claim_ceiling, result.json metrics)",
+      "Structural drift (add field, change type, remove field) on tiny flat schemas is detectable by Jaccard similarity of (field_path,type) pairs (result.json per_pattern_tp_rate all 1.0)",
+      "Threshold 0.85 is well-calibrated for 3-4 field schemas but analytically fails for schemas with >=10 fields where single-field drift similarity exceeds threshold (audit.json scaling_attack: n10_add 0.909, n20_add 0.952, n50_add 0.98)",
+      "Fresh similarity distribution is degenerate (all 1.0) on mock server; stale similarity ranges 0.6-0.75 (result.json similarity_distributions)",
+      "Sensitivity analysis shows threshold 0.7 too low (TP=0.3333) because change_type produces similarity 0.6 while add_field/remove_field produce 0.75 (result.json sensitivity_analysis)",
+      "All 40 requests completed successfully with 0 failures (result.json metrics.total_requests, failed_requests)",
+      "Positive control (add-field drift) passed: similarity drops from 1.0 to 0.75, detected at threshold 0.85 (result.json controls.positive_control_add_field)",
+      "Null control (stable endpoint) passed: similarity always 1.0, 0 false positives (result.json controls.null_control_stable_endpoint)"
+    ],
+    "rejected": [
+      "Jaccard (field_path,type) at fixed threshold 0.85 detects drift on schemas with >=10 fields where single-field drift similarity exceeds threshold (audit.json scaling_attack: n10_add 0.909 > 0.85)",
+      "Freshness scoring with simple postcondition similarity provides reliable staleness detection across resource families in general (audit.json claim_ceiling: does NOT support reliable staleness detection across resource families in general)",
+      "Fixed threshold 0.85 is robust across schema sizes (audit.json scaling_attack shows failure at n>=10)",
+      "Mock server controls are independent from main metric (audit.json validity_findings: controls are tautological with main metric not independent)"
+    ],
+    "unknown": [
+      "Whether freshness detection works on real-world APIs with stochastic drift patterns (result.json unresolved[0])",
+      "Whether (field_path,type) representation captures enough structure for real endpoint drift (result.json unresolved[1])",
+      "Whether nested JSON structures or optional fields would reduce detection reliability (result.json unresolved[2])",
+      "Whether semantic drift (same schema different data semantics) is detectable with this method (result.json unresolved[3])",
+      "How frequently real endpoints drift and whether drift patterns match the three tested patterns (result.json unresolved[4])",
+      "Whether a confidence threshold can be learned from data rather than fixed at 0.85 (result.json unresolved[5])",
+      "Whether the method scales to endpoints with many fields (50+) where drift might be subtle (result.json unresolved[6])",
+      "True false-positive rate on live Web traffic with authentication pagination rate limits (audit.json unresolved[3])"
+    ],
+    "do_not_assume": [
+      "Freshness scoring is validated for product kernel re-validation (audit.json claim_ceiling: not validated C-FRESHNESS for product kernel re-validation without scaling and real-API follow-up)",
+      "Jaccard (field_path,type) detects semantic drift nested structure changes optional field changes or value-range drift (spec.json measurement_validity: tests only structural drift)",
+      "Fixed threshold 0.85 works for schemas with >=10 fields (audit.json scaling_attack demonstrates failure)",
+      "Deterministic mock results generalize to real Web endpoints (result.json validity_notes: no real-world API drift patterns tested)",
+      "The method scales to complex real-world APIs with many fields (result.json unresolved[6])",
+      "The experiment SUPPORTS outcome means C-FRESHNESS is validated (audit narrows ceiling to proof-of-concept only)",
+      "Wilson CI for FP rate excludes 0.10 (audit.json: CI includes 0.27 on n=10 0.13 on n=25)",
+      "Per-family TP=1.0 confidently exceeds 0.7 (audit.json: CI [0.565,1.0] on n=5)"
+    ]
+  },
+  "dependencies": [
+    "research/graph/freshness_detection/execute.py sha256 83e2bef5df91fc06d6b16be451e98ef0a5a0be0842115c4b63523a36d0a429b8",
+    "research/experiments/EXP-GRAPH-34711403174/raw_evidence/execution_results.json sha256 06bcc81ead733fa6e32091a7acac8b448401580cc3d8563fe2c66df1e2e603e7",
+    "research/experiments/EXP-GRAPH-34711403174/raw_evidence/metrics.json sha256 db83e53cbd81c034664cd164bce7e4905054a4aa6dbba50c905e959944d3e84b",
+    "research/claims/registry.json C-FRESHNESS status HYPOTHESIS"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-34711403174/result.json metrics true_positive_rate 1.0 false_positive_rate 0.0 tp_rate_95ci [0.7961,1.0] fp_rate_95ci [0.0,0.2775]",
+    "research/experiments/EXP-GRAPH-34711403174/audit.json status REVISE producer_claim_supported false claim_ceiling",
+    "research/experiments/EXP-GRAPH-34711403174/audit.json validity_findings scaling_attack n10_add 0.909 n20_add 0.952 n50_add 0.98",
+    "research/experiments/EXP-GRAPH-34711403174/audit.json baseline_findings controls tautological not independent",
+    "research/experiments/EXP-GRAPH-34711403174/raw_evidence/execution_results.json 40 records",
+    "research/experiments/EXP-GRAPH-34711403174/spec.json decision_rule threshold 0.85",
+    "research/experiments/EXP-GRAPH-34711403174/prereg.md Jaccard field_path type measurement_validity"
+  ],
+  "recommended_action": "Scale freshness detection validation to realistic schema sizes (10-50 fields) with adaptive threshold or schema-size-adjusted threshold. Test on real Web endpoints with stochastic drift patterns to determine if Jaccard (field_path,type) has discriminating power beyond deterministic mock. Consider alternative staleness signals (session token validation, DOM structure checks) if Jaccard fails at scale."
+}

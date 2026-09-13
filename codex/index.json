@@ -576,6 +576,31 @@
         "handoff.json": "15904831ae7077bbef0220da9ae38787e731fca84f522af495a0074febbb3550"
       }
     },
+    "EXP-GRAPH-34711403174": {
+      "lane": "graph",
+      "request_id": "5850473be5b46b2ca4ccaffc",
+      "created_at": "2026-09-12T18:30:38.740411+00:00",
+      "claim_ids": [
+        "C-FRESHNESS"
+      ],
+      "question": "Does comparing cached mechanism postconditions against live endpoint responses provide reliable staleness detection across resource families with different drift patterns?",
+      "audit_status": "REVISE",
+      "decision": "SURVIVES_CURRENT_TEST",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/graph",
+      "hashes": {
+        "request.json": "655bcac7a22953c68b62d0edb662ff06b176a7881cc372597730f75286990cab",
+        "spec.json": "d4f818f2495d4380f8c089878cc1e5c43767bf393fae3de5f6ec5c20d6a579f9",
+        "prereg.md": "35d1a5e74d37f679553fb5fc8db7bff8ccf94201721b1623cf9faf8ec5532a16",
+        "freeze.json": "4a962dfdb205635b2c8d957c6b68525c0f3caaea21a865e21deef0101b75b546",
+        "result.json": "72461440d78e88f7447702474c3776ebc0c5ef70aea6de45a45dc09b7293ebe8",
+        "report.md": "54ea544a5181a2f7dbbfa7ba595f11674ded9419215d2d5f13252b7212edea21",
+        "provenance.json": "c567fe981dbbb6a8fc1fc4d1c9c3e15944953bbb8df0d8915ea036975257a7f1",
+        "audit.json": "6aa9b285f8af90ff556b69eb6dced6d2b1602a603e380764531ce6671cf026e2",
+        "verdict.json": "f7babb15c6ac5bdca52d8397dba7f53262e920ee5f6ea2e020db25189211fb29",
+        "handoff.json": "3f4b5079a1d1381fbfe62607a0c3adf9977c2c4e10805d7f7a077e7b9a39eda2"
+      }
+    },
     "EXP-INTEL-33528832113": {
       "lane": "intel",
       "request_id": "46d19fdaf32e996c0ab24bd7",
