@@ -29,23 +29,28 @@ The parent handoff (EXP-FRONTIER-34729238832) identifies the dominant unknown:
 And recommends:
 > "Testing real Web data is the minimum next experiment to determine whether C-WEB-DYNAMICS has any empirical grounding."
 
-However, no real Web transition dataset exists in the repository, and building browser-based collection infrastructure is beyond a single Frontier experiment scope. This experiment takes the smallest intermediate step: testing whether TV detection survives **non-stationary dynamics**, which is the key property of real Web data that all prior experiments lacked.
+However, no real Web transition dataset exists in the repository, and building browser-based collection infrastructure is beyond a single Frontier experiment scope (Playwright/Selenium not available in the environment). This experiment takes the smallest intermediate step: testing whether TV detection survives **non-stationary dynamics**, which is the key property of real Web data that all prior experiments lacked.
+
+**Key improvements over parent experiment (addressing audit findings):**
+1. **Bias-corrected TV** (parent audit V2): Primary metric is observed_TV minus perm_mean_TV at lambda=0, eliminating bias floor inflation
+2. **Fisher combined p-values** (parent audit V8): Permutation null uses Fisher combining instead of mean-of-p-values aggregation
+3. **Independent seeds per cell** (parent audit V7): Seed incorporates lambda_idx to ensure independence across lambda levels
 
 If detection survives non-stationarity, the synthetic-to-real gap may be smaller than feared, justifying investment in real data collection. If detection fails, non-stationarity is a fundamental barrier, and the synthetic experiments are uninformative about real Web dynamics.
 
 ## 4. Hypotheses
 
 ### H1: Non-Stationary Detection
-TV_max on non-stationary pooled data shows monotonic scaling with lambda: Spearman rho(TV_max, lambda) >= 0.5.
+TV_max on non-stationary pooled data shows monotonic scaling with lambda: Spearman rho(bias_corrected_TV, lambda) >= 0.5.
 
 ### H2: Bounded Degradation
 Detection degrades under non-stationarity but remains useful: rho_degradation (stationary rho minus non-stationary rho) < 0.4.
 
 ### H3: Positive Control
-At lambda=1, TV_max >= 0.01 in non-stationary condition across all replications (detection survives mixing of heterogeneous page types).
+At lambda=1, bias_corrected_TV >= 0.001 in non-stationary condition across all replications (detection survives mixing of heterogeneous page types).
 
 ### H4: Null Control
-At lambda=0, permutation test p > 0.05 in non-stationary condition (no false positive under non-stationary noise).
+At lambda=0, Fisher combined permutation p > 0.05 in non-stationary condition (no false positive under non-stationary noise).
 
 ### H5: Page-Type Invariance
 No significant page_type x lambda interaction in non-stationary condition (two-way ANOVA p > 0.05), indicating detection is not driven by a single dominant page type.
@@ -108,6 +113,16 @@ For each transition:
 5. With probability (1-lambda): s_next ~ Normal(center, SIGMA_BASE^2 * I_2)
 6. Clip s_next to [0,1]
 
+### 5.5 Seed Independence (Addressing Parent Audit V7)
+
+To ensure independent transitions per cell, use unique seed per cell:
+```
+cell_seed = func_seed * 100000 + lambda_idx * 1000 + rep_idx * 10 + BASE_SEED
+```
+where BASE_SEED = 42, lambda_idx is the index into LAMBDA_LEVELS (0-7), and rep_idx is the replication index (0-4).
+
+This ensures different lambda levels within the same function/replication use independent RNG streams, unlike the parent experiment which reused seeds across lambda levels.
+
 ## 6. Measures
 
 ### 6.1 TV Distance (Primary)
@@ -115,26 +130,33 @@ For each transition:
 - TV_max = max_{a,a'} (1/2) sum |P(S|a) - P(S,a')| over all action pairs
 - Computed on pooled transitions within each lambda level (non-stationary) or cell (stationary)
 
-### 6.2 Permutation Null
-- Shuffle action labels within each page type (preserving page-type structure)
-- Recompute TV_max on shuffled data
-- N_perm = 1000 per cell
-- p_value = fraction of permuted TV >= observed TV
+### 6.2 Bias-Corrected TV (Primary Metric)
+- Compute perm_mean_TV at lambda=0: mean TV across 200 permutations with shuffled action labels
+- bias_corrected_TV = max(0, observed_TV - perm_mean_TV)
+- This eliminates the bias floor identified in parent audit V2 (raw TV at lambda=0 was 0.32 in 2D, inflating all measurements)
 
-### 6.3 Frequency Baseline
+### 6.3 Permutation Null with Fisher Combining
+- Shuffle action labels within each page type (preserving page-type structure)
+- Recompute bias-corrected TV on shuffled data
+- N_perm = 200 per cell (minimum; increase to 500 if computational budget allows)
+- Per-function Fisher combined p-value: F = -2 * sum(ln(p_i)) ~ chi^2(2k) where k is number of replications
+- Combined p-value across functions: Fisher combine per-function p-values
+- This addresses parent audit V8 (mean-of-p-values aggregation is invalid)
+
+### 6.4 Frequency Baseline
 - Compute marginal P(S_{t+1}) pooled across all actions
 - TV between marginal and each action-conditional distribution
 - Mean TV across actions as frequency baseline
 
-### 6.4 Per-Page-Type TV (Exploratory)
-- Compute TV_max for each page type separately (within-type stationary analysis)
+### 6.5 Per-Page-Type TV (Exploratory)
+- Compute bias_corrected_TV for each page type separately (within-type stationary analysis)
 - Compare per-type TV to pooled non-stationary TV
 - Identifies which page types contribute most/least to pooled signal
 
 ## 7. Statistical Tests
 
 ### 7.1 Primary: Spearman Correlation
-- rho(TV_max, lambda) across 8 lambda levels
+- rho(bias_corrected_TV, lambda) across 8 lambda levels
 - One-sided test: rho > 0
 - Bonferroni correction: x1 (single primary comparison per condition)
 
@@ -143,27 +165,28 @@ For each transition:
 - Paired comparison: same lambda levels, different stationarity conditions
 - Threshold: rho_degradation < 0.4
 
-### 7.3 Permutation Test
-- At lambda=0: permutation p > 0.05 (null control)
-- At lambda=1: permutation p < 0.05 (positive control confirmation)
+### 7.3 Fisher Combined Permutation Test
+- At lambda=0: Fisher combined p > 0.05 (null control)
+- At lambda=1: Fisher combined p < 0.05 (positive control confirmation)
+- N >= 200 permutations per cell
 
 ### 7.4 Two-Way ANOVA (Non-Stationary)
-- TV_max ~ lambda + page_type + lambda:page_type
+- bias_corrected_TV ~ lambda + page_type + lambda:page_type
 - Non-significant interaction (p > 0.05) supports page-type invariance
 - Note: 8 page types x 8 lambda levels = 64 cells, estimable with 5 replications per cell
 
 ### 7.5 Effect Size
-- Cohen's d for TV_max at lambda=0 vs lambda=1 in non-stationary condition
+- Cohen's d for bias_corrected_TV at lambda=0 vs lambda=1 in non-stationary condition
 - Threshold: d > 1.0 (large effect)
 
 ## 8. Controls
 
 ### 8.1 Positive Control (lambda=1, Non-Stationary)
-- TV_max >= 0.01 across all replications
+- bias_corrected_TV >= 0.001 across all replications
 - Verifies: detection survives mixing of 8 heterogeneous page types at maximal signal
 
 ### 8.2 Null Control (lambda=0, Non-Stationary)
-- Permutation test p > 0.05
+- Fisher combined permutation p > 0.05
 - Verifies: no false positive under non-stationary noise distributions
 
 ### 8.3 Stationary Replication Control
@@ -192,14 +215,17 @@ This experiment tests non-stationarity, not all aspects of the synthetic-to-real
 ### 9.5 Multiple Comparisons
 Primary test is a single Spearman correlation per condition (2 conditions total). Bonferroni correction is x1 for each condition. Exploratory per-page-type tests are labeled as such and cannot support confirmatory claims.
 
+### 9.6 Bias Floor Mitigation (Addressing Parent Audit V2)
+Raw TV has bias floor ~0.32 in 2D at lambda=0. Bias-corrected TV (observed - perm_mean) should be near zero at lambda=0, making positive control meaningful. If bias-corrected TV at lambda=0 remains > 0.01, the bias correction is insufficient and MEASUREMENT_INVALID.
+
 ## 10. Decision Rules
 
 ### 10.1 SURVIVES_CURRENT_TEST
 If ALL of:
-1. rho(TV_max, lambda) >= 0.5 in non-stationary condition (one-sided p < 0.05)
+1. rho(bias_corrected_TV, lambda) >= 0.5 in non-stationary condition (one-sided p < 0.05)
 2. rho_degradation < 0.4
-3. Positive control passes (TV >= 0.01 at lambda=1)
-4. Null control passes (permutation p > 0.05 at lambda=0)
+3. Positive control passes (bias_corrected_TV >= 0.001 at lambda=1)
+4. Null control passes (Fisher combined p > 0.05 at lambda=0)
 5. No significant page_type x lambda interaction (ANOVA p > 0.05)
 6. No pipeline errors
 
@@ -216,6 +242,7 @@ If:
 1. Pipeline errors prevent TV computation
 2. CV across replications > 0.5 at lambda=1 in non-stationary condition
 3. Fewer than 2000 transitions per lambda level collected
+4. Bias-corrected TV at lambda=0 > 0.01 (bias correction insufficient)
 
 ## 11. Expected Outcomes
 
@@ -240,21 +267,22 @@ If:
 
 ## 12. Analysis Plan
 
-1. **Data Generation**: Generate stationary and non-stationary transitions using frozen parameters
-2. **TV Computation**: Compute TV_max for each condition at each lambda level
-3. **Permutation Tests**: Run 1000 permutations per cell for null control
-4. **Spearman Correlation**: Compute rho and p-value for each condition
-5. **Degradation**: Compute rho_degradation between conditions
-6. **ANOVA**: Two-way ANOVA on non-stationary data (lambda x page_type)
-7. **Controls**: Verify all positive/null/replication controls
-8. **Exploratory**: Per-page-type TV analysis
-9. **Reporting**: Report all outcomes with equal prominence
+1. **Data Generation**: Generate stationary and non-stationary transitions using frozen parameters with independent seeds per cell
+2. **TV Computation**: Compute raw TV_max for each condition at each lambda level
+3. **Bias Correction**: Compute perm_mean_TV at lambda=0, subtract from all TV values
+4. **Permutation Tests**: Run 200 permutations per cell, compute Fisher combined p-values
+5. **Spearman Correlation**: Compute rho and p-value for each condition on bias-corrected TV
+6. **Degradation**: Compute rho_degradation between conditions
+7. **ANOVA**: Two-way ANOVA on non-stationary data (lambda x page_type)
+8. **Controls**: Verify all positive/null/replication controls
+9. **Exploratory**: Per-page-type TV analysis
+10. **Reporting**: Report all outcomes with equal prominence
 
 ## 13. Analysis Code
 
 Analysis will be implemented in Python using:
 - `numpy` for array operations and random generation
-- `scipy.stats` for Spearman correlation and permutation tests
+- `scipy.stats` for Spearman correlation and Fisher combined p-values
 - `statsmodels` for two-way ANOVA
 - Standard library only (no custom estimators)
 
