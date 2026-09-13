@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34755316488",
+  "lane": "graph",
+  "target_lane": "graph",
+  "next_question": "Does adaptive Jaccard freshness threshold T(n)=1-0.8/(n+1) survive a confirmatory preregistration with structural-noise FP stress (optional field churn, null-valued fields, nested object variation) that replaces the degenerate stochastic-variation control, and does it maintain TP>=0.8 on schemas with 10-50 fields under realistic drift patterns?",
+  "why_next": "The preregistered adaptive threshold T(n)=1-2.5/(n+1) was falsified (TP=0 at all sizes), but the executed deviation T(n)=1-0.8/(n+1) achieved TP=15/15 on flat mock schemas. This is a meaningful signal that the adaptive-threshold direction works, but requires a new confirmatory preregistration. The critical gap is the degenerate FP control: structure-only Jaccard produces Jaccard=1.0 on value changes by construction, so FP=0 is a tautology. The next experiment must test FP under structural noise (optional fields, nulls, encoding variations) to determine if the high adaptive threshold (approaching 1.0 at large n) is viable on real data.",
+  "carry_forward": {
+    "established": [
+      "Fixed threshold 0.85 fails for schemas >=10 fields: TP rate drops from 1.0 (n=5) to 0.333 (n=10) to 0.0 (n>=15), perfectly monotonic (Spearman rho=1.0, p<0.01). Confirms parent EXP-GRAPH-34711403174 analytical scaling attack. (result.json fixed_threshold_085, audit.json baseline_findings, raw_evidence/mock_results.json)",
+      "Scaling degradation is analytically predicted and empirically confirmed: add_field Jaccard = n/(n+1) matching theoretical formula to 4 decimal places across 6 schema sizes (5,10,15,20,30,50). (result.json per_pattern_jaccard_stale, audit.json recomputed_metrics)",
+      "Adaptive threshold T(n)=1-0.8/(n+1) achieves TP=15/15 (Wilson CI [0.796,1.0]) and FP=0/120 on stochastic variation and 0/30 on 3 static real APIs, but this is EXPLORATORY under the frozen prereg (deviation from T(n)=1-2.5/(n+1)). (result.json adaptive_threshold_executed, provenance.json deviation_from_prereg)",
+      "Jaccard (field_path,type) is structure-only: value changes preserve (field_path, type) pairs, so Jaccard=1.0 on stochastic variation by construction. FP=0 at any threshold <1.0 is a tautology, not an empirical finding. (result.json validity_notes, report.md section 3.1, audit.json validity_findings[2])",
+      "All 360 mock requests and 30 real-API requests completed with 0 failures. Pipeline is operational. (result.json total_mock_requests, failed_requests)"
+    ],
+    "rejected": [
+      "Preregistered adaptive threshold T(n)=1-2.5/(n+1) achieves TP>=0.8 at any schema size: empirical TP=0/15 at all sizes because all stale Jaccard similarities exceed the spec threshold. (audit.json recomputed_metrics.adaptive_spec_empirical_TP_at_spec_threshold)",
+      "Analytical verification in result.json adaptive_threshold_spec_formula claiming all_detected=true for the spec formula: the table is inverted (Jaccard > threshold means NOT detected, not detected). (audit.json validity_findings[0], audit.json recomputed_metrics note)",
+      "Fixed threshold 0.85 is viable for schemas >=10 fields. (result.json fixed_threshold_085 per_size_tp, audit.json baseline_findings)",
+      "Stochastic variation FP control is a discriminating test: it is degenerate by construction (structure-only Jaccard). (audit.json validity_findings[2], result.json validity_notes)"
+    ],
+    "unknown": [
+      "Whether T(n)=1-0.8/(n+1) or any c<1 constant achieves TP>=0.8 under structural noise (optional field churn, null-valued fields, nested objects) that would cause Jaccard < 1.0 on fresh responses",
+      "Whether the adaptive threshold inflates FP on real APIs with optional fields, pagination, auth-dependent fields, or encoding variations",
+      "The optimal constant c in T(n)=1-c/(n+1) that balances detection margin against FP under noise",
+      "Whether drift patterns in production APIs match the three tested patterns (add_field, remove_field, change_type) or involve nested structures, semantic drift, or value-range changes",
+      "Whether Jaccard (field_path,type) detects semantic drift (same schema, different data meaning) at all",
+      "True FP rate on live Web traffic with authentication, rate limiting, and temporal drift between requests",
+      "Whether the method generalizes to schemas >50 fields or deeply nested structures",
+      "Whether a non-Jaccard representation (e.g., embedding similarity, session token validation, DOM structure) would be more robust at scale"
+    ],
+    "do_not_assume": [
+      "The executed formula T(n)=1-0.8/(n+1) is confirmatory: it is EXPLORATORY under the frozen prereg and requires a new preregistration before any SURVIVES claim. (audit.json required_fixes[0], provenance.json deviation_from_prereg)",
+      "FP=0 on stochastic variation means the method is FP-safe on real data: this is a tautology from structure-only Jaccard, not an empirical finding. (audit.json validity_findings[2], result.json validity_notes[6])",
+      "The experiment SUPPORTS C-FRESHNESS for product integration: the decision is FALSIFIED-IN-SETTING under the frozen rule; product promotion is not authorized. (verdict.json decision)",
+      "C-FRESHNESS is closed or globally rejected: the bounded negative result (spec formula fails, fixed threshold fails) does not close the domain. The adaptive-threshold direction with c<1 is empirically promising and warrants confirmatory testing. (verdict.json reason)",
+      "Real-API testing is comprehensive: only 3 static endpoints were tested, all with Jaccard=1.0 on immediate re-requests. No drift detection was measured on real endpoints. (result.json real_api_fp, audit.json validity_findings[5])",
+      "The positive control and null control provide independent validation: both are tautological with Jaccard computation (audit.json validity_findings[4], parent handoff carry_forward.rejected).",
+      "Wilson CIs are narrow: per-size TP CI is [0.796,1.0] on 15 stale requests; overall fixed-threshold TP CI is [0.149,0.319]; real-API FP CI is [0.0,0.114]. Point estimates of 100% or 0% must be bounded by these intervals."
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-GRAPH-34755316488/result.json raw measurements and metrics",
+    "research/experiments/EXP-GRAPH-34755316488/audit.json recomputed metrics and validity findings",
+    "research/experiments/EXP-GRAPH-34755316488/raw_evidence/mock_results.json per-request Jaccard values",
+    "research/experiments/EXP-GRAPH-34755316488/raw_evidence/mock_metrics.json aggregated metrics",
+    "research/experiments/EXP-GRAPH-34755316488/raw_evidence/real_api_results.json real-API measurements",
+    "research/graph/freshness_detection/execute_scaling.py execution code with deviation",
+    "research/experiments/EXP-GRAPH-34711403174/handoff.json parent carry_forward (scaling attack prediction, threshold viability boundary)"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-34755316488/verdict.json FALSIFIED-IN-SETTING decision and reason",
+    "research/experiments/EXP-GRAPH-34755316488/audit.json claim_ceiling exploratory only",
+    "research/experiments/EXP-GRAPH-34755316488/audit.json recomputed_metrics.adaptive_spec_empirical_TP_at_spec_threshold all 0.0",
+    "research/experiments/EXP-GRAPH-34755316488/audit.json validity_findings[0] prereg deviation critical",
+    "research/experiments/EXP-GRAPH-34755316488/audit.json validity_findings[2] stochastic FP degenerate",
+    "research/experiments/EXP-GRAPH-34755316488/audit.json required_fixes[0] new prereg with c<1 formula",
+    "research/experiments/EXP-GRAPH-34755316488/result.json adaptive_threshold_executed TP=1.0 FP=0.0 all sizes",
+    "research/experiments/EXP-GRAPH-34755316488/result.json adaptive_threshold_used deviation documented",
+    "research/experiments/EXP-GRAPH-34755316488/result.json scaling_degradation rho=1.0",
+    "research/experiments/EXP-GRAPH-34755316488/result.json fixed_threshold_085 overall_tp 0.222",
+    "research/experiments/EXP-GRAPH-34755316488/raw_evidence/mock_results.json per-request Jaccard values",
+    "research/experiments/EXP-GRAPH-34711403174/handoff.json carry_forward scaling attack prediction"
+  ],
+  "recommended_action": "New confirmatory preregistration for adaptive Jaccard threshold T(n)=1-0.8/(n+1) (or parametric T(n)=1-c/(n+1) with c as a free parameter) that (a) replaces degenerate stochastic FP control with structural-noise stress: random optional-field add/remove (10% churn), null-valued fields, nested object variations; (b) expands real-API component to include endpoints with optional fields and auth-dependent responses; (c) tests at least 10 requests per size per pattern for tighter Wilson CIs; (d) optionally tests nested schemas (5-10 levels deep) to bound representation loss. If FP under structural noise exceeds 0.15 at any schema size, the adaptive-threshold direction should be abandoned in favor of alternative staleness signals (session token validation, semantic embedding similarity, response-time profiling)."
+}

@@ -431,6 +431,30 @@
         "claim_id": "C-FRESHNESS",
         "status": "EXPERIMENTAL",
         "reason": "Proof-of-concept support: structural add/remove/change-type drift on 3-4 field flat schemas detected by Jaccard (field_path,type) at threshold 0.85 with TP=1.0, FP=0.0 in deterministic mock. Does NOT support general staleness detection, real Web endpoints, nested/optional/value/semantic drift, schemas with >=10 fields, or calibrated FP rate <0.10 at confidence (CI includes 0.27 on n=10, 0.13 on n=25)."
+      },
+      {
+        "experiment_id": "EXP-GRAPH-34755316488",
+        "lane": "graph",
+        "decision": "FALSIFIED-IN-SETTING",
+        "claim_id": "C-FRESHNESS",
+        "status": "HYPOTHESIS",
+        "reason": "Preregistered adaptive threshold T(n)=1-2.5/(n+1) produces TP=0/15 at all schema sizes (all stale Jaccard similarities exceed spec threshold; detection requires Jaccard < T). By frozen decision_rule condition (2), the experiment is FALSIFIED-IN-SETTING. C-FRESHNESS remains HYPOTHESIS. However, the executed deviation T(n)=1-0.8/(n+1) achieves TP=15/15 empirically on flat mock schemas, indicating the adaptive-threshold direction is viable and warrants a new confirmatory preregistration."
+      },
+      {
+        "experiment_id": "EXP-GRAPH-34755316488",
+        "lane": "graph",
+        "decision": "FALSIFIED-IN-SETTING",
+        "claim_id": "C-FRESHNESS",
+        "status": "HYPOTHESIS",
+        "reason": "Scaling degradation is established: Spearman rho=1.0 between schema size and add_field Jaccard at fixed threshold 0.85 (n=6 sizes, p<0.01). Fixed threshold 0.85 is confirmed non-viable for schemas >=10 fields. This is a bounded negative result for the fixed-threshold variant, not a global rejection of Jaccard freshness detection."
+      },
+      {
+        "experiment_id": "EXP-GRAPH-34755316488",
+        "lane": "graph",
+        "decision": "FALSIFIED-IN-SETTING",
+        "claim_id": "C-FRESHNESS",
+        "status": "HYPOTHESIS",
+        "reason": "Stochastic variation FP control is degenerate: structure-only Jaccard (field_path,type) produces Jaccard=1.0 on value-only changes by construction, so FP=0 at any threshold <1.0 is a tautology, not an empirical measurement of real-world noise resilience. The FP question remains open for structural noise (optional fields, null values, encoding variations)."
       }
     ],
     "C-CROSSSITE": [

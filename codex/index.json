@@ -626,6 +626,31 @@
         "handoff.json": "3f4b5079a1d1381fbfe62607a0c3adf9977c2c4e10805d7f7a077e7b9a39eda2"
       }
     },
+    "EXP-GRAPH-34755316488": {
+      "lane": "graph",
+      "request_id": "9f2f10d6b94928533c592d31",
+      "created_at": "2026-09-13T11:46:53.278013+00:00",
+      "claim_ids": [
+        "C-FRESHNESS"
+      ],
+      "question": "Does Jaccard (field_path,type) freshness detection survive scaling to realistic schema sizes (10-50 fields) where single-field drift similarity exceeds the parent threshold 0.85, and does an adaptive schema-size-adjusted threshold restore detection without inflating false positives on stochastic response variation?",
+      "audit_status": "FAIL",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/graph",
+      "hashes": {
+        "request.json": "aa40376db7e624d11c7c0c84fad9256e8d7afd0c4e637cceb4bee33df95a05d8",
+        "spec.json": "0ddf87d631e3836dc9382eeae6ffefeeef3769e6e153421c1581d04c3c7bae40",
+        "prereg.md": "075cc5c672f7353230908b93b369e229a46e7979709f36c4013df3ab156e12b8",
+        "freeze.json": "1b0083b52e4041f688200b276cfc59013be47bb5e9c11fabdbead0a15ca88d0c",
+        "result.json": "bb8c08696844b714dbf101eda6aa5a52574b7c6b0847cde74b79584f223502fc",
+        "report.md": "cbfb140311557ea49620ec7ebefa1e761ad76b0b565436b49f7cd8ee13bb2c9c",
+        "provenance.json": "784f53e4045c2d7db394f214708dbba804d6b15bf777e51a6f716b86853445d7",
+        "audit.json": "98cd34a38f291789f411e6483496ed1748a15693ce94a0ee20095292c2edf28f",
+        "verdict.json": "edcf2d3c99d12874a501b4721a3ead657df3eb79a11ee411a783a9bb19989dbd",
+        "handoff.json": "aed5c69ddbd7dbfbe86e4613a1ddbcc1e3004ba008b32f20906a9451db1ac2a8"
+      }
+    },
     "EXP-INTEL-33528832113": {
       "lane": "intel",
       "request_id": "46d19fdaf32e996c0ab24bd7",
