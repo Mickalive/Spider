@@ -226,6 +226,31 @@
         "handoff.json": "e7e2e6522b96e34f222f93289976136f59713667d835b2e8b0125c82c94c46a6"
       }
     },
+    "EXP-FRONTIER-34729238832": {
+      "lane": "frontier",
+      "request_id": "9346be479c5a083dac1bffb0",
+      "created_at": "2026-09-13T00:56:17.473796+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Can binned PCA projection to 2D-3D subspaces before divergence computation detect both scaling-type and rotation-type action-dependent structure simultaneously in the same 10D non-Gaussian DGP \u2014 or does dimensionality reduction destroy the discriminating information that both kNN TV (full-space neighbor ratios) and KDE (full-space kernel smoothing) each partially capture?",
+      "audit_status": "REVISE",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/frontier",
+      "hashes": {
+        "request.json": "b31258748fe218f9105e9df2914467bc9ff3d2e44d582fb7a2448391846d41a4",
+        "spec.json": "181f89e10a4606e8d68b09df89ac6e8914206f9f6d28e0603e47792430215841",
+        "prereg.md": "640a85d78cc651b006863884aed9f9cbcdd56529128e82c65393ddd4b80ba2d6",
+        "freeze.json": "160e348f5e0838649e498c1728ad0fecf9987f8f1e31982f5c5249aa39c49195",
+        "result.json": "d709b0798faf983f57720be8a57330c468dde5fd2353816d61b73f264ef00049",
+        "report.md": "ab105f5186251f5ff72e0652383e9568f2ee9c8eb5d49be08409cbd36e25d88d",
+        "provenance.json": "8b4aea8832850296cdb5ab1ab56792f5542b72ed71c66cbfbad901eddb863228",
+        "audit.json": "74b3fb77f5b3095d019f137508fbb0d09c640cfd59ce4186f5c68851ac8120bd",
+        "verdict.json": "13f9867776ce0ec1c23be7810e2ce5d194d3801d8572751e041b376e7061d260",
+        "handoff.json": "27ca8bd75164d93b763fe3861e36aeb6c6ef353693b5aa08a2c231a07dcdae01"
+      }
+    },
     "EXP-GRAPH-33528827169": {
       "lane": "graph",
       "request_id": "3e0d81e7790f2f2b7bd8665e",
@@ -601,6 +626,31 @@
         "handoff.json": "3f4b5079a1d1381fbfe62607a0c3adf9977c2c4e10805d7f7a077e7b9a39eda2"
       }
     },
+    "EXP-GRAPH-34755316488": {
+      "lane": "graph",
+      "request_id": "9f2f10d6b94928533c592d31",
+      "created_at": "2026-09-13T11:46:53.278013+00:00",
+      "claim_ids": [
+        "C-FRESHNESS"
+      ],
+      "question": "Does Jaccard (field_path,type) freshness detection survive scaling to realistic schema sizes (10-50 fields) where single-field drift similarity exceeds the parent threshold 0.85, and does an adaptive schema-size-adjusted threshold restore detection without inflating false positives on stochastic response variation?",
+      "audit_status": "FAIL",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/graph",
+      "hashes": {
+        "request.json": "aa40376db7e624d11c7c0c84fad9256e8d7afd0c4e637cceb4bee33df95a05d8",
+        "spec.json": "0ddf87d631e3836dc9382eeae6ffefeeef3769e6e153421c1581d04c3c7bae40",
+        "prereg.md": "075cc5c672f7353230908b93b369e229a46e7979709f36c4013df3ab156e12b8",
+        "freeze.json": "1b0083b52e4041f688200b276cfc59013be47bb5e9c11fabdbead0a15ca88d0c",
+        "result.json": "bb8c08696844b714dbf101eda6aa5a52574b7c6b0847cde74b79584f223502fc",
+        "report.md": "cbfb140311557ea49620ec7ebefa1e761ad76b0b565436b49f7cd8ee13bb2c9c",
+        "provenance.json": "784f53e4045c2d7db394f214708dbba804d6b15bf777e51a6f716b86853445d7",
+        "audit.json": "98cd34a38f291789f411e6483496ed1748a15693ce94a0ee20095292c2edf28f",
+        "verdict.json": "edcf2d3c99d12874a501b4721a3ead657df3eb79a11ee411a783a9bb19989dbd",
+        "handoff.json": "aed5c69ddbd7dbfbe86e4613a1ddbcc1e3004ba008b32f20906a9451db1ac2a8"
+      }
+    },
     "EXP-INTEL-33528832113": {
       "lane": "intel",
       "request_id": "46d19fdaf32e996c0ab24bd7",
@@ -811,6 +861,32 @@
         "audit.json": "e7ef1196cd19a44f6dbc5dbe018da398a9d866970a69f66d8afdb2f732b9cac2",
         "verdict.json": "4d628206300c75990ae1122061b50b12bcda5be2aab5d44c4001a6a97da6adcf",
         "handoff.json": "4b53b6ef5ae2e7dd11588ec6000e51eaf0fcc935e52e3aee26715eb62b73a417"
+      }
+    },
+    "EXP-INTEL-34718481334": {
+      "lane": "intel",
+      "request_id": "c65b596371e64773477a4ed7",
+      "created_at": "2026-09-12T20:55:32.257312+00:00",
+      "claim_ids": [
+        "C-CROSSSITE",
+        "C-LLM-INHERIT"
+      ],
+      "question": "Does full-page DOM element enumeration (without viewport chrome filtering) produce a stable and meaningful yield metric for SPIDER fragment capture, and what fraction of page elements does the fragment model actually retain?",
+      "audit_status": "REVISE",
+      "decision": "MEASUREMENT_INVALID",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/intel",
+      "hashes": {
+        "request.json": "51a0702f5b47e3b4c0643db51c9ab005bf398bbe52a41484f255f266ba8189c0",
+        "spec.json": "c5c3d021321e29b2e0becde038d720a4898632c38b76398d33ef3f9780a7e572",
+        "prereg.md": "f437634b780b57a36327a73258dd281c19cb7e85c964cbce5be0d87ea2c52dff",
+        "freeze.json": "ad84fd74eba88399753cad192b872946457870310a4df697f30f03ae2c9189d0",
+        "result.json": "3c1358cc23f860177477cdaeaa0e35f98d681a8dd20c0f6da21cf7043a150a7b",
+        "report.md": "633bf9713cd8c37a5a3d16b5e0c28d6eeb3e32488a24cfb9d51cf02fc0185f69",
+        "provenance.json": "ee8616bbdcf2d478b263468d7edb3024c5f35757b6906a300cbf32a3cd3c8bbc",
+        "audit.json": "7597c59fa45db55faf490d06a0ceb76a6eff2f965dacc8eb0abc6cf55d6cf432",
+        "verdict.json": "0f5032ba9d018c58b99606c3b761a089bf64b6e143ae0f47d9581eb148533d70",
+        "handoff.json": "26f6e86ec59114547c854fedfd0cf349d5e69d1fe3712a4c4456f9014399fce3"
       }
     },
     "EXP-PHYSICS-33528829431": {
@@ -1139,6 +1215,31 @@
         "audit.json": "c88c1d97cd339e9bfd2be9337c08e558d6d03f33fdfe923d187fdb0666292ba5",
         "verdict.json": "d8206ce04563d14f5ca66afafb6b6f19ff08522b22785090ee5de8dff4a2f7f4",
         "handoff.json": "ee13a749a6b4bbc888566d5e82a9f56381b8115a2d8a397d71473501c7c32b3f"
+      }
+    },
+    "EXP-PHYSICS-34724244876": {
+      "lane": "physics",
+      "request_id": "3977387ed7fafa2f190aab84",
+      "created_at": "2026-09-12T23:01:08.947990+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "On locally-hosted deterministic SPAs, does DOM representation achieve predictive PMI beyond what is explained by action-history memory alone? Specifically: (1) what conditional PMI I(S_next; DOM | URL, ActionHistory) achieves, and does it exceed zero? (2) does action-history memory alone predict next state perfectly on these deterministic SPAs?",
+      "audit_status": "FAIL",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/physics",
+      "hashes": {
+        "request.json": "ce097733d05a360826ca1d4a773cf69502a8c61f050ae672c4f1bc693b5c5481",
+        "spec.json": "8a710fa0201c8af0b70af02edba45d5c2b5344c2a92ce041cc5335af13983aa0",
+        "prereg.md": "cd198c9a51bd2fa31ad410c429ce2e9ef245330c5f8774dcb67b0c29c7ae3c73",
+        "freeze.json": "451e16c7f7e3465ea91efb890c99ae1bbadb968d97c45f05b02887a8a5675d83",
+        "result.json": "3d3298a051f512ec1cb99ed4d29c08d7c6ef13157e0ee1cabc2cd867eab325af",
+        "report.md": "0befe562b654c81355b132aef7375f61627f55cac03d4d8adaaa6c142f947a6a",
+        "provenance.json": "3e6f3429b7ca9d5aeee67e76c4f65be6b01edda348b0e8b71e46810aacd83735",
+        "audit.json": "2c2a0bba42c4d756a1242a39f5dd5a6314b1aea606d019a141030f96587345f9",
+        "verdict.json": "a0a3791159caec00ec50ee258ca2c2d5ff977e82afc8b1ba76f3888c9fc1a9b0",
+        "handoff.json": "3c0e8d0315f7bd454610547fcdda7e6cbefbd664b0098e6b7468c7925b6110f4"
       }
     },
     "EXP-PRODUCT-33528829801": {
