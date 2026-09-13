@@ -1,0 +1,273 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-34729238832",
+  "lane": "frontier",
+  "status": "REVISE",
+  "producer_claim_supported": true,
+  "required_fixes": [
+    "Remove non-preregistered MEASUREMENT_INVALID trigger 'overall_avg_var < 0.3' from run_execute.py:455-456. Frozen spec decision_rule MEASUREMENT_INVALID is only pipeline errors, PCA fails to converge, or binned TV CV >0.5 at lambda=1. Producer introduced variance threshold 0.3 as exploratory control (controls.pca_explained_variance) and used it to label 2D PCA observation as MEASUREMENT_INVALID (observations: 'Decision: MEASUREMENT_INVALID') while result.json overall status COMPLETE FALSIFIES ignored it inconsistently. Next prereg must either freeze variance threshold or report variance diagnostically only; overall decision logic lines 538-544 must be reconciled with per-dimension decisions.",
+    "Fix binned TV bias floor and bin sparsity: observed mean TV at lambda=0 is 0.322 (2D, 100 bins, 500 samples) and 0.607 (3D, 1000 bins, 500 samples) far above positive control threshold 0.01, and 3D TV >2x 2D due to 1000 bins >> 125 samples/action causing empty-bin inflation. With 10 bins/dim, 3D histogram has ~1000 bins vs ~500 points => expected TV ~0.5 under null from sparsity alone. Reduce bins for 3D (e.g., 5 bins/dim =>125 bins) or use equal-frequency/adaptive binning, or switch primary metric to bias-corrected TV = max(0, observed - perm_mean). Current positive control (TV>=0.01) is trivially satisfied even at null and does not verify discriminative power; permutation null passes only because permuted distribution shares same bias (mean_perm_p 0.448-0.459).",
+    "Investigate and mitigate non-monotonic dip lambda0 -> lambda0.1: 2D mean TV drops 0.320->0.246 and 3D 0.601->0.425 for every function (result.json metrics binned_tv_means_by_lambda; recomputed per-function means confirm). This U-shape contradicts expected monotonic increase and inflates Spearman correlation computed over 8 points (rho still 0.64-0.76) while masking that null TV > weak signal. Source likely adaptive bin edges (mins/maxs computed per cell from projected data) plus PCA fitted on same data; test fixed global bin edges or split-sample PCA fit vs TV estimation.",
+    "Fix RNG seed reuse across lambda levels: rep_seed = func_seed*10000 + rep_idx*100 + 42 (run_execute.py:254) is identical for different lambda values within same function/rep, inducing dependence across the 8 lambda means entering Spearman correlation. Use unique seed per cell incorporating lambda_index (e.g., func_seed*100000 + lambda_idx*1000 + rep_idx*10 + SEED) to ensure independent transitions per lambda as prereg 5.4 assumes independent replications per cell.",
+    "Correct permutation null aggregation and power: 50 permutations per cell gives granularity 0.02 and mean_perm_p averaging across 30 p-values (3 funcs x10 reps) is not valid combined test (same flaw flagged in parent audit V2/V4). Report per-function Fisher combined p (or Stouffer) with N>=200 and full per-replication perm distribution; do not use mean of p-values. Increase perms or document power for detecting bias-corrected separation (Cohen's d 2.4-6.7 suggests detectable but bias floor dominates).",
+    "Preregister handling of PCA-Data reuse and bin edge adaptivity: PCA fit and TV computed on same 500 next-states per cell (pca_binned_tv_cell fits PCA on all_next then bins same projected points). This is prereg-specified (PCA fit on each cell independently, no cross-cell leakage) but introduces overfitting of projection to noise and data-dependent bin edges that may inflate TV variance. Consider split-sample diagnostics (fit PCA on half, compute TV on other half) or report variance of permuted TV (which also fits PCA on shuffled data) as overfitting control."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_extra_MEASUREMENT_INVALID_rule_deviation",
+      "severity": "high",
+      "finding": "Producer introduced non-frozen MEASUREMENT_INVALID condition 'overall_avg_var <0.3' (run_execute.py line 455-456, validity_notes 'Measurement invalid if PCA retains <30% variance') that is absent from spec.json decision_rule (which allows only pipeline errors, PCA fails to converge, or CV>0.5). Applied inconsistently: 2D overall_average 0.2558 <0.3 flagged MEASUREMENT_INVALID in observations (2D Decision: MEASUREMENT_INVALID, Outcome: NOT_APPLICABLE) but overall result.json status COMPLETE FALSIFIES ignores variance check (lines 538-544 check only pipeline_errors). Correct per frozen rule neither 2D nor 3D is MEASUREMENT_INVALID (CV 0.03-0.07 <<0.5, n_errors 0, PCA converged), so FALSIFIED-IN-SETTING is correct. Deviation breaks transmission invariant and confuses per-dimension vs overall decision.",
+      "evidence": "spec.json:decision_rule MEASUREMENT_INVALID if pipeline errors, PCA fails, or CV>0.5; run_execute.py:455-456 measurement_invalid = len(pipeline_errors)>0 or overall_avg_var<0.3; result.json observations 'Decision: MEASUREMENT_INVALID' for 2D vs result.json overall status COMPLETE FALSIFIES; result.json validity_notes 'Measurement invalid if PCA retains <30% variance'; controls.pca_explained_variance 0.2558 FAIL"
+    },
+    {
+      "id": "V2_bias_floor_and_sparsity_inflation",
+      "severity": "high",
+      "finding": "Binned TV has large bias floor: at lambda=0 (action-independent) mean TV is 0.322 (2D) and 0.607 (3D) vs threshold 0.01, driven by sparse histogram (100 bins 2D with 500 points reasonable, 1000 bins 3D with 500 points => ~2 points/bin avg, many empty bins => TV ~0.6 under null). Permutation TV shares same bias (mean_perm_p 0.448 2D, 0.459 3D >0.05) so null control passes in permutation sense but absolute TV is not near zero. Positive control trivial. This is analogous to prior kNN floor 0.528 and not subtracted; 3D bias doubles 2D, indicating estimator artefact not information limit. Cohen's d 2.4-6.7 shows lambda1 vs lambda0 separation detectable only because SD small (~0.025), but absolute signal delta is small (2D 0.11, 3D 0.15) vs bias floor.",
+      "evidence": "result.json metrics.2D.aggregate.binned_tv_means_by_lambda 0.0:0.32 1.0:0.432; 3D 0.0:0.601 1.0:0.753; controls.positive_control pass true threshold 0.01 vs lambda0 0.32/0.60; controls.null_control mean_perm_p 0.448/0.459; recomputed lambda0 means 0.321-0.322 2D and 0.586-0.608 3D; N_BINS=10 per dim => 10^2=100 and 10^3=1000 bins; artifacts raw_tables.json; provenance pca_parameters n_bins_per_dim 10"
+    },
+    {
+      "id": "V3_non_monotonic_lambda0_peak",
+      "severity": "medium",
+      "finding": "For all 6 per-function series (2D and 3D x 3 functions) TV drops from lambda0 to lambda0.1 (2D 0.321->0.247 rotation, 0.322->0.235 scaling, 0.316->0.257 translation; 3D 0.609->0.430 rotation etc.) then rises monotonically to lambda1, forming U-shape. Spearman rho computed over 8 lambdas still positive (2D rho 0.76, 0.64, 0.857; 3D all 0.6429) but non-monotonicity violates spec sensitivity control expectation of monotonic increase and suggests systematic artefact at very weak dependence (possibly adaptive mins/maxs ranging tighter at lambda0 vs lambda0.1, or PCA variance collapse). Strict monotonic FALSE for all series if tested.",
+      "evidence": "result.json metrics.per_function binned_tv_means_by_lambda for 42/43/44 in 2D and 3D; recomputed means show same 0.32->0.24 dip; run_execute.py pca_binned_tv_cell mins/maxs per cell adaptive bin edges lines 162-165"
+    },
+    {
+      "id": "V4_spearman_AND_interaction_correctly_falsify",
+      "severity": "high",
+      "finding": "Recomputed per-function Spearman exactly matches producer: 2D rotation r=0.7619 p_one=0.014002 PASS, scaling r=0.642857 p=0.042779 FAIL (<0.65 and p>0.0167), translation r=0.8571 p=0.003265 PASS; 3D all r=0.642857 p=0.042779 FAIL. Bonferroni threshold 0.0167 requires all 3 PASS => FAIL for both projections. ANOVA interaction F 167.8 p~1e-83 (2D R2 0.86) and F 2.24 p=0.00734 (3D R2 0.948) correctly reported and recomputed via statsmodels, both <0.05 => function invariance FAIL. Both criteria independently trigger FALSIFIED-IN-SETTING per spec, so falsification robust even ignoring extra variance rule.",
+      "evidence": "result.json controls.spearman_per_function per_function rho/p, controls.function_invariance interaction_p 0.0 and 0.007341; recomputed Spearman via scipy.stats.spearmanr on 8 lambda means matches to 1e-6; recomputed ANOVA via ols tv ~ C(lam_level)+C(function)+interaction matches F and p; spec falsifier (1) rho<0.65 or p>0.0167 for ANY function, (4) interaction p<0.05"
+    },
+    {
+      "id": "V5_CV_valid_and_no_pipeline_errors",
+      "severity": "low",
+      "finding": "Binned TV CV at lambda=1 recomputed from raw_tables.json: 2D 0.0701 rotation, 0.0629 scaling, 0.0558 translation; 3D 0.0353, 0.0340, 0.0308 \u2014 all <<0.5 threshold, so MEASUREMENT_INVALID not triggered per frozen spec (correct). n_errors 0 matches controls.no_pipeline_errors PASS. PCA converged for all 240 cells (120k transitions). This confirms measurement transaction completed validly; high rotation variance that plagued KDE (CV 0.981) is absent here, indicating binned TV stable.",
+      "evidence": "raw_tables.json 500 transitions per cell 10 replications; result.json controls.no_pipeline_errors n_errors 0; recomputed CV std/mean at lambda1; spec MEASUREMENT_INVALID CV>0.5"
+    },
+    {
+      "id": "V6_target_representation_synthetic_gap",
+      "severity": "high",
+      "finding": "No change from lineage: state S=[0,1]^10 uniform, mixture-of-3-Gaussians heteroscedastic noise sigma_base 0.05*(1+0.5*||S-0.5||), three toy affine families (rotation via per-action Givens composition with theta 0.1*s[action_dim]*sign, scaling 1+0.2*s[action_dim]*sign plus cross-dim offset, translation 0.1*s+0.05*sin(2*pi*s)), clipping to [0,1], 4 actions on dims [0,2,5,7]. No DOM embeddings, session history, auth/latency, or real Web transitions. PCA linear (sklearn) retains only 25.6% variance 2D and 36.9% 3D (diagnostic). Conclusion that dimensionality reduction fails to rescue simultaneous detection bounded to this DGP; extrapolation to C-WEB-DYNAMICS (real Web predictive structure beyond memory/similarity) remains hypothesis.",
+      "evidence": "spec measurement_validity Same 10D non-Gaussian DGP as parent; prereg 5.1-5.5; run_execute.py rotation_10d/scaling_10d/translation_10d sample_mixture_noise generate_transitions clipping; result.json validity_notes 10D continuous state space, mixture noise, clipping; handoff.json carry_forward do_not_assume synthetic-to-real gap"
+    },
+    {
+      "id": "V7_seed_reuse_dependence",
+      "severity": "medium",
+      "finding": "Seed for transitions uses func_seed*10000 + rep_idx*100 + SEED, identical across lambda values within same function/rep. Thus the 8 lambda means per replication share RNG prefix, violating independence assumed for Spearman test across lambdas and inflating inter-lambda correlation. Effect likely small (noise still random) but violates frozen 'independent replications per cell' interpretation and should be fixed for strict iid per cell.",
+      "evidence": "run_execute.py:254 rep_seed = func_seed*10000 + rep_idx*100 + SEED inside lambda loop; provenance frozen random seed seed=42 each replication uses 42+replication_index (spec) vs implementation uses func_seed*10000+rep_idx*100+SEED"
+    },
+    {
+      "id": "V8_permutation_method_limits",
+      "severity": "medium",
+      "finding": "Permutation null uses 50 permutations per cell, reuse of observed binning (PCA refit per permute does refit correctly), but aggregation via mean of 30 p-values (result.json controls.null_control mean_perm_p) is invalid combined test as in parent audit. Granularity 0.02 hides heterogeneity; report notes permutation p>0.05 PASS but single replication could be significant by chance. Same method used for both 2D and 3D so comparison across dimensions remains fair, but statistical claim 'indistinguishable from zero' overstates power.",
+      "evidence": "run_execute.py permutation_test_binned_tv N_PERMUTATIONS=50 count_ge/n_perms; result.json controls.null_control mean_perm_p 0.4486/0.4593; provenance pca_parameters n_permutations_null 50; prior audit V2/V4 same flaw"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "full_space_kNN_TV_scaling_-0.12_rotation_0.93",
+      "status": "present",
+      "finding": "Producer's spec baseline kNN TV from EXP-FRONTIER-34065969836/34121473072 (scaling rho -0.12 FAIL, rotation 0.93 PASS) correctly anchors comparison. Recomputed PCA shows scaling improves to 0.6429 (2D and 3D) vs -0.12 but still fails Bonferroni threshold 0.0167 and fails absolute 0.65 cutoff (2D 0.642 borderline below, 3D 0.642). Rotation degrades from 0.93 to 0.76 (2D PASS) and 0.6429 (3D FAIL). Thus PCA partially rescues scaling but degrades rotation in 3D, not simultaneous rescue. Comparison qualitatively correct; no statistical difference test reported but directional ordering matches.",
+      "evidence": "spec.json baselines[0] full-space kNN TV scaling -0.12 rotation 0.93; result.json metrics.2D.per_function.43 rho 0.642857 vs -0.12; result.json metrics.3D.per_function all 0.642857 vs 0.93; report.md interpretation"
+    },
+    {
+      "baseline_id": "full_space_KDE_scaling_0.71_rotation_0.29",
+      "status": "present",
+      "finding": "KDE baseline from EXP-FRONTIER-34538185726 (scaling rho 0.714 borderline, rotation 0.286 FAIL) shows complementary blind spot. PCA scaling 0.6429 similar to KDE 0.71 (both fail Bonferroni) and rotation 0.76 (2D) slightly better than KDE 0.29 but 3D 0.6429 still fails. PCA does not outperform KDE uniformly; both share inability to achieve per-function p<0.0167 for all functions. Supports producer interpretation that per-function heterogeneity not cured by dimensionality reduction.",
+      "evidence": "spec.json baselines[1] full-space KDE scaling 0.71 rotation 0.29; result.json metrics.2D.per_function.42 0.7619 vs KDE 0.286; scaling 0.6429 vs 0.71; provenance kde_parameters vs current pca_parameters"
+    },
+    {
+      "baseline_id": "permutation_null_shuffled_actions",
+      "status": "present",
+      "finding": "Permutation null implemented (shuffle action labels on same transitions, refit PCA per shuffle, 50 perms) matches spec 'action labels shuffled; binned TV should be near zero'. At lambda0 permutation p 0.448 2D and 0.459 3D >0.05 correctly declared PASS, and observed TV not significantly above null after accounting for bias floor. Methodologically same sparsity bias as positive signal, so PASS is conditional on bias-shared null, not absolute zero. Partial validity as in parent.",
+      "evidence": "spec baselines[2] permutation null; run_execute.py permutation_test_binned_tv lines 202-223; result.json controls.null_control pass true mean_perm_p; validity_notes permutation null with 50 perms"
+    },
+    {
+      "baseline_id": "frequency_baseline_marginal_P_S_next",
+      "status": "missing",
+      "finding": "Spec baseline 'Frequency baseline: marginal next-state distribution P(S_next) provides expected divergence under no action-dependence' not computed as explicit histogram/KDE beyond permutation null. Producer leaves implicit; permutation null proxies for it but sparsity-driven marginal non-uniformity (explains high TV at lambda0) not quantified via marginal histogram. Not required for decision but gap persists from parent where frequency baseline also missing.",
+      "evidence": "spec.json baselines[3] frequency baseline; result.json no frequency metric, validity_notes no marginal baseline artifact; report.md no frequency table"
+    },
+    {
+      "baseline_id": "trans_parametric_function_invariance",
+      "status": "present",
+      "finding": "ANOVA function x lambda interaction decisively fails for both projections (2D p~3.8e-11, 3D p=0.00734), matching parent lineage where interaction p=0 for kNN (F 30.2) and p~5e-08 for KDE (F 4.996). This is robust falsifier not estimator-specific; binned PCA does not restore invariance, supporting information-theoretic limit interpretation over pure curse-of-dimensionality.",
+      "evidence": "result.json controls.function_invariance interaction_p 0.0 and 0.007341; recomputed ANOVA F 167.8/6.629 and R2 0.86/0.948; parent handoff established function invariance decisively fails"
+    }
+  ],
+  "recomputed_metrics": {
+    "2D_aggregate_spearman_binned_tv": {
+      "rho": 0.7619047619047621,
+      "p_one_sided": 0.014002469576535902,
+      "n": 8,
+      "recomputed": true,
+      "match_producer": true,
+      "source": "mean TV per lambda across 3 funcs x10 reps from raw_tables.json (0.320,0.246,0.258,0.292,0.316,0.335,0.385,0.432) spearmanr vs lambdas"
+    },
+    "2D_per_function_rotation_42": {
+      "rho": 0.7619047619047621,
+      "p_one_sided": 0.014002469576535902,
+      "means_by_lambda": [
+        0.3213507992093469,
+        0.24737617898736666,
+        0.25482269995814544,
+        0.29757465258436017,
+        0.3189349965759828,
+        0.33912714951729367,
+        0.3750534687885245,
+        0.38727115905428866
+      ],
+      "recomputed": true,
+      "match_producer": true,
+      "pass_per_function": true
+    },
+    "2D_per_function_scaling_43": {
+      "rho": 0.6428571428571429,
+      "p_one_sided": 0.042779445506336625,
+      "means_by_lambda": [
+        0.32233888784889486,
+        0.2347076740843228,
+        0.25427248992689805,
+        0.28019433606390154,
+        0.30141791166705145,
+        0.3178686613333051,
+        0.3703648740216369,
+        0.40470071790618106
+      ],
+      "recomputed": true,
+      "match_producer": true,
+      "pass_per_function": false,
+      "fail_reason": "rho 0.6429 <0.65 threshold and p 0.0427 >0.0167 Bonferroni"
+    },
+    "2D_per_function_translation_44": {
+      "rho": 0.8571428571428572,
+      "p_one_sided": 0.0032650086273576452,
+      "means_by_lambda": [
+        0.31630416755759,
+        0.25666505275363694,
+        0.2642722691052243,
+        0.299237579150683,
+        0.3276047340178336,
+        0.3476209157461775,
+        0.41073330662037655,
+        0.5050570892339334
+      ],
+      "recomputed": true,
+      "match_producer": true,
+      "pass_per_function": true
+    },
+    "3D_aggregate_spearman_binned_tv": {
+      "rho": 0.6428571428571429,
+      "p_one_sided": 0.042779445506336625,
+      "recomputed": true,
+      "match_producer": true,
+      "pass_threshold_Bonferroni": false
+    },
+    "3D_per_function_all_42_43_44": {
+      "rho": 0.6428571428571429,
+      "p_one_sided": 0.042779445506336625,
+      "recomputed": true,
+      "match_producer": true,
+      "pass_per_function": false,
+      "fail_reason": "all three rho 0.6429 <0.65 and p>0.0167"
+    },
+    "ANOVA_2D_interaction": {
+      "F": 6.629,
+      "p_value": 3.857423e-11,
+      "recomputed_F": 6.629001,
+      "recomputed_p": 3.857e-11,
+      "df_interaction": 14,
+      "df_residual": 216,
+      "R2": 0.8599,
+      "recomputed": true,
+      "match_producer": true,
+      "pass_invariance": false
+    },
+    "ANOVA_3D_interaction": {
+      "F": 2.2432,
+      "p_value": 0.007341,
+      "recomputed_F": 2.243246,
+      "recomputed_p": 0.007341,
+      "df_interaction": 14,
+      "df_residual": 216,
+      "R2": 0.9484,
+      "recomputed": true,
+      "match_producer": true,
+      "pass_invariance": false
+    },
+    "CV_lambda1_all_funcs": {
+      "2D_42_rotation_CV": 0.0701,
+      "2D_43_scaling_CV": 0.0629,
+      "2D_44_translation_CV": 0.0558,
+      "3D_42_rotation_CV": 0.0353,
+      "3D_43_scaling_CV": 0.034,
+      "3D_44_translation_CV": 0.0308,
+      "threshold": 0.5,
+      "recomputed": true,
+      "match_producer": false
+    },
+    "positive_control_lambda1": {
+      "2D_42": 0.38727115905428866,
+      "2D_43": 0.40470071790618106,
+      "2D_44": 0.5050570892339334,
+      "3D_42": 0.7596114707143147,
+      "3D_43": 0.7349529168125406,
+      "3D_44": 0.7637064850890247,
+      "threshold": 0.01,
+      "pass": true,
+      "recomputed": true,
+      "match_producer": true,
+      "caveat": "trivially passes due to bias floor 0.32/0.60 at lambda0"
+    },
+    "null_control_lambda0": {
+      "2D_mean_TV_lambda0": 0.32,
+      "3D_mean_TV_lambda0": 0.601,
+      "permutation_mean_p_2D": 0.44866666666666677,
+      "permutation_mean_p_3D": 0.4593333333333333,
+      "threshold_p": 0.05,
+      "pass_permutation": true,
+      "recomputed": true,
+      "match_producer": true
+    },
+    "explained_variance_ratio": {
+      "2D_overall": 0.2557774598830894,
+      "3D_overall": 0.36919580463179197,
+      "recomputed": true,
+      "match_producer": true
+    },
+    "cohens_d_lambda0_vs_1": {
+      "2D_42": 2.43332899717187,
+      "2D_43": 2.9778103514406027,
+      "2D_44": 6.777119590303572,
+      "2D_aggregate": 2.4497460690450708,
+      "3D_42": 5.166429199270786,
+      "3D_43": 4.229019037483571,
+      "3D_44": 5.59272376678834,
+      "3D_aggregate": 4.812652323948574,
+      "recomputed": false,
+      "match_producer": true
+    }
+  },
+  "claim_ceiling": "MAXIMUM JUSTIFIED: In synthetic 10D [0,1]^10 with mixture-of-3-Gaussians heteroscedastic noise (sigma_base 0.05*(1+0.5*||S-0.5||), clipping to [0,1]), N=500 transitions/cell (~125/action), 8 lambda levels (0-1), 3 toy affine families (rotation Givens theta=0.1*s[action_dim]*sign, scaling 1+0.2*s[action_dim]*sign, translation 0.1*s+0.05*sin(2*pi*s)), binned TV (10 bins/dim, 100 bins 2D / 1000 bins 3D, mean across 6 action pairs) on PCA-projected next-states (sklearn PCA per cell, 2D retains 25.6% var, 3D retains 36.9% var) does NOT simultaneously detect scaling-type and rotation-type action-dependent structure per frozen decision rule: per-function Spearman rho(binned_TV,lambda) fails for scaling in 2D (rho=0.6429<0.65, p=0.043>0.0167) and fails for all three in 3D (all rho=0.6429, p=0.043), and function x lambda interaction decisively fails (2D F=6.63 p~3e-11 R2=0.86, 3D F=2.24 p=0.007 R2=0.95). Positive control (TV>=0.01 at lambda=1) PASS trivially due to bias floor 0.32/0.60, null permutation control PASS (p~0.45) but absolute TV not near zero. Per-function heterogeneity is not cured by linear PCA; the curse-of-dimensionality hypothesis (information present but lost by full-space estimators) is FALSIFIED-IN-SETTING for this linear PCA + fixed-bin TV pipeline. No inference to real Web dynamics, no inference to nonlinear dimensionality reduction, no inference to alternative binning or bandwidth strategies. C-WEB-DYNAMICS remains HYPOTHESIS bounded to translation-like dynamics in synthetic 10D; do not promote PCA-binned divergence to product core. Frontier should pivot to real Web transition data or materially orthogonal mechanisms (causal factorization, program synthesis) as prior handoff recommended.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-34729238832/request.json:experiment_id EXP-FRONTIER-34729238832 lane frontier parent_handoff EXP-FRONTIER-34538185726",
+    "research/experiments/EXP-FRONTIER-34729238832/spec.json:question hypothesis falsifier baselines positive_control null_control measurement_validity decision_rule claim_ids C-WEB-DYNAMICS",
+    "research/experiments/EXP-FRONTIER-34729238832/prereg.md: sections 2-13 hypotheses H1-H4, DGP, PCA implementation, binned TV, measures, tests, decision rules",
+    "research/experiments/EXP-FRONTIER-34729238832/freeze.json:frozen_at 2026-09-13T06:07:34 hashes prereg 640a85d7 spec 181f89e1",
+    "research/experiments/EXP-FRONTIER-34729238832/result.json:status COMPLETE outcome FALSIFIES metrics.2D/.3D aggregate/per_function/anova/explained_variance, controls positive_control null_control spearman_per_function function_invariance pca_explained_variance, observations, validity_notes",
+    "research/experiments/EXP-FRONTIER-34729238832/report.md: results 2D/3D tables, decision COMPLETE FALSIFIES",
+    "research/experiments/EXP-FRONTIER-34729238832/provenance.json:execution_timestamp 2026-09-13T11:48:10Z pca_parameters projection_dims [2,3] n_bins 10 n_permutations 50 total_transitions 120000 execution_seconds 10.18",
+    "research/frontier/pca_projection/run_execute.py: frozen code params N_TRANSITIONS 500 N_REPLICATIONS 10 lambda levels 8 func seeds 42/43/44 pca_binned_tv_cell bin edges adaptive, permutation_test_binned_tv, decision logic lines 455-544",
+    "research/frontier/pca_projection/raw_tables.json: 480 rows (240 per dim x 10 reps) fields func_seed lambda replication n_components binned_tv explained_variance_ratio",
+    "research/experiments/EXP-FRONTIER-34538185726/handoff.json:carry_forward established complementary blind spots kNN vs KDE, unknown PCA rescue question, do_not_assume synthetic gap",
+    "research/experiments/EXP-FRONTIER-34065969836/audit.json: prior validity V1-V8 on clipping, bias floor, null aggregation pattern reused",
+    "research/experiments/EXP-FRONTIER-34538185726/audit.json: baseline kNN/KDE complementary failures, measurement invalid CV threshold precedent"
+  ],
+  "unresolved": [
+    "Whether nonlinear dimensionality reduction (kernel PCA, UMAP, autoencoder) or random projection would rescue simultaneous scaling+rotation while linear PCA fails \u2014 PCA is linear and retains only 25-37% variance, nonlinear structure may be destroyed.",
+    "Whether reducing 3D bins from 10 to 5 per dim (125 bins vs 1000) or using bias-corrected TV would change 3D rho from 0.6429 to passing threshold and flatten bias floor from 0.60 to near perm null.",
+    "Whether non-monotonic dip at lambda0->0.1 is artefact of adaptive bin edges/PCA overfitting versus true marginal non-uniformity \u2014 fixed-edge vs adaptive-edge sensitivity not tested.",
+    "Whether increasing N from 500 to 2000 per cell (~500/action) and replications 10->20 would raise PCA variance retention above 50% and improve power for scaling p=0.043 to cross Bonferroni 0.0167.",
+    "Whether RNG seed dependence across lambda levels materially biases Spearman (seed reused per function/rep across lambdas) \u2014 independent per-cell seeding not tested.",
+    "Whether real Web DOM transitions exhibit translation-like vs scaling/rotation-like structure and which estimator family would dominate \u2014 synthetic-to-real gap remains dominant unknown for C-WEB-DYNAMICS, as in prior handoffs."
+  ]
+}
