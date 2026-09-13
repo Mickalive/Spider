@@ -838,6 +838,32 @@
         "handoff.json": "4b53b6ef5ae2e7dd11588ec6000e51eaf0fcc935e52e3aee26715eb62b73a417"
       }
     },
+    "EXP-INTEL-34718481334": {
+      "lane": "intel",
+      "request_id": "c65b596371e64773477a4ed7",
+      "created_at": "2026-09-12T20:55:32.257312+00:00",
+      "claim_ids": [
+        "C-CROSSSITE",
+        "C-LLM-INHERIT"
+      ],
+      "question": "Does full-page DOM element enumeration (without viewport chrome filtering) produce a stable and meaningful yield metric for SPIDER fragment capture, and what fraction of page elements does the fragment model actually retain?",
+      "audit_status": "REVISE",
+      "decision": "MEASUREMENT_INVALID",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/intel",
+      "hashes": {
+        "request.json": "51a0702f5b47e3b4c0643db51c9ab005bf398bbe52a41484f255f266ba8189c0",
+        "spec.json": "c5c3d021321e29b2e0becde038d720a4898632c38b76398d33ef3f9780a7e572",
+        "prereg.md": "f437634b780b57a36327a73258dd281c19cb7e85c964cbce5be0d87ea2c52dff",
+        "freeze.json": "ad84fd74eba88399753cad192b872946457870310a4df697f30f03ae2c9189d0",
+        "result.json": "3c1358cc23f860177477cdaeaa0e35f98d681a8dd20c0f6da21cf7043a150a7b",
+        "report.md": "633bf9713cd8c37a5a3d16b5e0c28d6eeb3e32488a24cfb9d51cf02fc0185f69",
+        "provenance.json": "ee8616bbdcf2d478b263468d7edb3024c5f35757b6906a300cbf32a3cd3c8bbc",
+        "audit.json": "7597c59fa45db55faf490d06a0ceb76a6eff2f965dacc8eb0abc6cf55d6cf432",
+        "verdict.json": "0f5032ba9d018c58b99606c3b761a089bf64b6e143ae0f47d9581eb148533d70",
+        "handoff.json": "26f6e86ec59114547c854fedfd0cf349d5e69d1fe3712a4c4456f9014399fce3"
+      }
+    },
     "EXP-PHYSICS-33528829431": {
       "lane": "physics",
       "request_id": "aefb271e5c3274224c9651fe",
