@@ -1665,6 +1665,31 @@
         "verdict.json": "a30b7b7d0605a5c1e94e9590f29355eb0da5eb1f94e7cdf2ab93bdc1d01de4a9",
         "handoff.json": "040d3011db257cc13abf273a424b0537bf4113aba40b9b844c66aa6215605047"
       }
+    },
+    "EXP-RUNTIME-34654566605": {
+      "lane": "runtime",
+      "request_id": "be44df9f0ace23edb1cb9d63",
+      "created_at": "2026-09-11T22:34:15.341774+00:00",
+      "claim_ids": [
+        "C-MEAS-VALID"
+      ],
+      "question": "Does body-only HTTP fingerprint discrimination survive CDN-style compression where response bodies are recompressed non-deterministically (varying compression algorithm and parameters per request), causing the compressed body hash to differ per request even for identical logical responses?",
+      "audit_status": "REVISE",
+      "decision": "SURVIVES_CURRENT_TEST",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/runtime",
+      "hashes": {
+        "request.json": "80f820e60421b5ff4dee4e7d9c80761021b0193b8e218207b604f7ba58c7ab91",
+        "spec.json": "d5026362f17d3c6e13a0f750025b5896b3164fd9feae75e0f1df5f4a3710e68d",
+        "prereg.md": "2a1c91085ae798c535f6a44521038c01860de8f01184a0c69e44c0d227ea003b",
+        "freeze.json": "75d3a73e4832dddd0a90be5569ae921a6901a3ad69e70050092c82cd85533c78",
+        "result.json": "1dc48127da42f4f8d432e6cd33350b45c6bdfa24790566cdd568e7eae980998b",
+        "report.md": "464b9388c2be349af2d48afb9fe27fe79b218217f606eb5100861dae01a6390f",
+        "provenance.json": "0316b264eec3564edd159f9457855887c5900f139aceae96d1f8dea11399e309",
+        "audit.json": "6b4dc0b3e2e5d6e88131c3de1ee2ea873cfcca1eeb14a47bd24648ff31f70b1c",
+        "verdict.json": "123f67ce319db14357ac3a158acba729ea70ee9973142b8b4261daedf701ec67",
+        "handoff.json": "c50d276a6e62898cf5ab92dec17188e3ba27e7bb094996d3695d0d0efcb21d78"
+      }
     }
   }
 }

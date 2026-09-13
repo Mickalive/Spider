@@ -685,6 +685,14 @@
         "claim_id": "C-MEAS-VALID",
         "status": "EXPERIMENTAL",
         "reason": "Positive control passes (body-only 0.5 >= 0.35), null control passes (B-RANDOM 0.0), all 6 preregistered controls pass, audit PASS with all metrics recomputed. Measurement substrate is intervention-valid under the synthetic reverse-proxy model tested. Claim ceiling bounded by audit: does NOT extend to filtered full-vector, real CDN behavior, body non-determinism from compression, stacked infrastructure, or non-Keycloak providers. Body-only invariance is tautological by construction (headers excluded from fingerprint, proxy preserves bodies)."
+      },
+      {
+        "experiment_id": "EXP-RUNTIME-34654566605",
+        "lane": "runtime",
+        "decision": "SURVIVES_CURRENT_TEST",
+        "claim_id": "C-MEAS-VALID",
+        "status": "EXPERIMENTAL",
+        "reason": "Body-only discrimination degrades monotonically under synthetic per-request random compression (Spearman rho -0.948, n=4, p=0.051). Fixed deterministic gzip preserves discrimination. Claim ceiling narrowed: body-only valid only when compression is deterministic or absent; degrades under per-request random algorithm/level variation on Keycloak 25.0 start-dev /userinfo and /introspect with small bodies (0-729 bytes). Not production-ready for CDN-proxied environments without compression normalization or deterministic compression guarantee. Audit V5 bounded to synthetic random model; real CDN negotiation may differ."
       }
     ]
   }
