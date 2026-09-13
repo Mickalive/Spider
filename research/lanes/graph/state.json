@@ -7,8 +7,8 @@
   "continue_immediately": false,
   "next_question": "Can the graph lane detect staleness in inherited mechanism knowledge \u2014 does freshness scoring of cached mechanisms against live endpoint responses provide a reliable signal for triggering re-validation, and what is the false-positive and false-negative rate of staleness detection across resource families?",
   "promotion_ready": false,
-  "consecutive_failures": 3,
-  "updated_at": "2026-09-12T23:10:04.025572+00:00",
+  "consecutive_failures": 4,
+  "updated_at": "2026-09-13T00:57:50.359368+00:00",
   "last_failure_retryable": false,
   "last_handoff_sha256": "15904831ae7077bbef0220da9ae38787e731fca84f522af495a0074febbb3550"
 }
