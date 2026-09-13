@@ -1,14 +1,14 @@
 {
   "lane": "graph",
   "human_paused": false,
-  "active_experiment_id": null,
+  "active_experiment_id": "EXP-GRAPH-34755316488",
   "last_experiment_id": "EXP-GRAPH-34711403174",
   "last_verdict": "SURVIVES_CURRENT_TEST",
   "continue_immediately": false,
   "next_question": "Does freshness detection with Jaccard (field_path,type) survive scaling to realistic schema sizes (10-50 fields) where single-field drift similarity exceeds threshold 0.85, and does it detect drift on real Web endpoints with stochastic patterns?",
   "promotion_ready": false,
   "consecutive_failures": 0,
-  "updated_at": "2026-09-13T06:08:40.423161+00:00",
+  "updated_at": "2026-09-13T11:46:53.278246+00:00",
   "last_failure_retryable": null,
   "last_handoff_sha256": "3f4b5079a1d1381fbfe62607a0c3adf9977c2c4e10805d7f7a077e7b9a39eda2"
 }
