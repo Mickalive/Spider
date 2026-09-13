@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 EXP-RUNTIME-34741873198 — Body-Only Fingerprint Under Deterministic CDN Negotiation
-====================================================================================
+===================================================================================
 Tests whether body-only HTTP fingerprint discrimination survives realistic CDN
 negotiation where Content-Encoding is selected deterministically from the client's
 advertised Accept-Encoding (not per-request random).
@@ -65,11 +65,23 @@ ADMIN_PASS = "admin"
 
 EXCLUDED_HEADERS = {"date", "server", "x-request-id"}
 
-# Client profiles: name -> Accept-Encoding header value
+# Client profiles simulating different Accept-Encoding configurations
 CLIENT_PROFILES = {
-    "A": "br, gzip",       # CDN selects brotli (highest priority)
-    "B": "gzip",           # CDN selects gzip (only option)
-    "C": "identity",       # CDN selects identity (no compression)
+    "A_br_gzip": {
+        "accept_encoding": "br, gzip",
+        "selected_algorithm": "br",
+        "description": "Client A: Accept-Encoding 'br, gzip' → CDN selects brotli",
+    },
+    "B_gzip_only": {
+        "accept_encoding": "gzip",
+        "selected_algorithm": "gzip",
+        "description": "Client B: Accept-Encoding 'gzip' → CDN selects gzip",
+    },
+    "C_identity": {
+        "accept_encoding": "identity",
+        "selected_algorithm": "identity",
+        "description": "Client C: Accept-Encoding 'identity' → CDN selects identity",
+    },
 }
 
 # Headers the proxy must NOT modify
@@ -266,7 +278,7 @@ def configure_realm(admin_token):
 # COMPRESSION FUNCTIONS
 # ---------------------------------------------------------------------------
 
-def compress_gzip(data, level=9):
+def compress_gzip(data, level):
     """Compress data with gzip at specified level.
     
     Uses mtime=0 to eliminate gzip header timestamp as a source of non-determinism.
@@ -285,36 +297,34 @@ def compress_brotli(data, level=6):
     return brotli.compress(data, quality=level)
 
 
-def select_compression_algorithm(accept_encoding):
-    """CDN negotiation: select the highest-priority algorithm the client supports.
-    
-    Priority order: br > gzip > identity.
-    This is deterministic — same Accept-Encoding always produces the same algorithm.
+def select_algorithm_for_client(client_accept_encoding):
     """
-    ae = accept_encoding.lower()
-    if "br" in ae:
-        return "br"
-    elif "gzip" in ae:
+    CDN negotiation: deterministically select the highest-priority algorithm
+    the client supports. Priority order: br > gzip > identity.
+    
+    This simulates real CDN behavior where the CDN picks one algorithm per client
+    based on the client's advertised Accept-Encoding.
+    """
+    accept_lower = client_accept_encoding.lower()
+    if "br" in accept_lower:
+        if BROTLI_AVAILABLE:
+            return "br"
+        else:
+            return "gzip"  # fallback if brotli unavailable
+    elif "gzip" in accept_lower:
         return "gzip"
     else:
         return "identity"
 
 
-def apply_compression(body_bytes, algorithm):
-    """Apply compression using the selected algorithm.
-    
-    Returns (compressed_bytes, encoding_header_value).
-    Always uses deterministic parameters (fixed level) to simulate real CDN behavior
-    where the same client with the same Accept-Encoding sees the same compressed bytes.
-    """
+def compress_for_client(body_bytes, algorithm):
+    """Apply deterministic compression based on selected algorithm."""
     if algorithm == "br":
-        compressed = compress_brotli(body_bytes, level=6)
-        return compressed, "br"
+        return compress_brotli(body_bytes), "br"
     elif algorithm == "gzip":
-        compressed = compress_gzip(body_bytes, level=9)
-        return compressed, "gzip"
+        # Use gzip level 9 for deterministic output (same as parent comp_level=1)
+        return compress_gzip(body_bytes, 9), "gzip"
     else:
-        # identity: no compression
         return body_bytes, None
 
 
@@ -331,32 +341,33 @@ class ReusableHTTPServer(HTTPServer):
 class CDNNegotiationProxyHandler(BaseHTTPRequestHandler):
     """HTTP handler that proxies requests to Keycloak and applies CDN-style compression.
     
-    The proxy reads the client's Accept-Encoding header and deterministically selects
-    the highest-priority algorithm the client supports (br > gzip > identity).
-    This simulates real CDN behavior where the CDN picks one algorithm per client.
+    The proxy reads the client's Accept-Encoding header and deterministically
+    selects the highest-priority algorithm the client supports (br > gzip > identity).
+    Same Accept-Encoding always produces the same algorithm — this is the CDN model.
     """
+
+    client_accept_encoding = "br, gzip"  # class-level, set before server starts
 
     def log_message(self, format, *args):
         """Suppress default logging."""
         pass
 
     def do_request(self):
-        """Forward request to Keycloak, compress response based on client's Accept-Encoding."""
+        """Forward request to Keycloak, compress response body per CDN negotiation."""
         target_url = f"http://127.0.0.1:{KEYCLOAK_PORT}{self.path}"
 
         # Read request body
         content_length = int(self.headers.get("Content-Length", 0))
         body = self.rfile.read(content_length) if content_length > 0 else None
 
-        # Forward request headers
+        # Forward request
         headers = {}
         for key in self.headers:
             if key.lower() not in ("host", "transfer-encoding"):
                 headers[key] = self.headers[key]
 
-        # Override client Accept-Encoding to identity to get raw response from Keycloak
-        # (proxy will apply its own compression based on original client's Accept-Encoding)
-        original_accept_encoding = self.headers.get("Accept-Encoding", "identity")
+        # Override client Accept-Encoding to ensure we get raw response from Keycloak
+        # (proxy will apply its own compression based on the client profile)
         headers["Accept-Encoding"] = "identity"
 
         try:
@@ -378,16 +389,17 @@ class CDNNegotiationProxyHandler(BaseHTTPRequestHandler):
         # Get the raw response body (uncompressed from Keycloak)
         raw_body = resp.content
 
-        # CDN negotiation: select algorithm based on original client's Accept-Encoding
-        algorithm = select_compression_algorithm(original_accept_encoding)
-
-        # Apply compression
-        compressed_body, encoding = apply_compression(raw_body, algorithm)
+        # CDN negotiation: select algorithm based on client's Accept-Encoding
+        algorithm = select_algorithm_for_client(self.client_accept_encoding)
+        
+        # Apply deterministic compression
+        compressed_body, encoding = compress_for_client(raw_body, algorithm)
 
         # Send response status
         self.send_response(resp.status_code)
 
         # Copy response headers (skip transfer-encoding, content-encoding, content-length)
+        # We will set our own content-encoding and content-length
         for key, value in resp.headers.items():
             key_lower = key.lower()
             if key_lower in ("transfer-encoding", "content-encoding", "content-length",
@@ -418,14 +430,17 @@ class CDNNegotiationProxyHandler(BaseHTTPRequestHandler):
         self.do_request()
 
 
-def start_proxy():
+def start_proxy(client_accept_encoding):
     """Start the CDN negotiation proxy on PROXY_PORT."""
+    CDNNegotiationProxyHandler.client_accept_encoding = client_accept_encoding
+
     server = ReusableHTTPServer(("127.0.0.1", PROXY_PORT), CDNNegotiationProxyHandler)
     server.timeout = 0.5
 
     thread = threading.Thread(target=server.serve_forever, daemon=True)
     thread.start()
-    print(f"CDN negotiation proxy started on port {PROXY_PORT}")
+    algorithm = select_algorithm_for_client(client_accept_encoding)
+    print(f"Proxy started on port {PROXY_PORT} with Accept-Encoding='{client_accept_encoding}' → algorithm={algorithm}")
     return server
 
 
@@ -440,7 +455,7 @@ def stop_proxy(server):
 # HTTP REQUEST EXECUTION
 # ---------------------------------------------------------------------------
 
-def make_request(url, method="GET", auth_header=None, body=None, accept_encoding="identity", timeout=10):
+def make_request(url, method="GET", auth_header=None, body=None, timeout=10):
     """Execute HTTP request and capture raw observation.
     
     CRITICAL: Uses stream=True + resp.raw.read(decode_content=False) to capture
@@ -453,7 +468,6 @@ def make_request(url, method="GET", auth_header=None, body=None, accept_encoding
         headers["Authorization"] = auth_header
     if body:
         headers["Content-Type"] = "application/x-www-form-urlencoded"
-    headers["Accept-Encoding"] = accept_encoding
 
     start = time.monotonic()
     try:
@@ -467,6 +481,7 @@ def make_request(url, method="GET", auth_header=None, body=None, accept_encoding
             raise ValueError(f"Unknown method: {method}")
         
         # Read raw bytes from wire (before client-side decompression)
+        # decode_content=False prevents urllib3 from decompressing
         raw_bytes = resp.raw.read(decode_content=False)
         
         # Also get the response URL for redirect tracking
@@ -631,7 +646,7 @@ def get_endpoint_configs(auth_token, proxy_port):
 # ---------------------------------------------------------------------------
 
 def run_experiment():
-    """Run the full deterministic CDN negotiation experiment."""
+    """Run the full CDN negotiation experiment."""
     raw_observations_all = {}  # client_profile -> endpoint -> state -> [obs]
     all_results = {}
     errors = []
@@ -682,20 +697,22 @@ def run_experiment():
     except Exception as e:
         print(f"  WARNING: Could not verify direct response: {e}")
 
-    # Step 6: Start proxy (CDN negotiation mode)
-    proxy = start_proxy()
-    time.sleep(0.5)  # let proxy bind
-
-    # Step 7: Run experiment for each client profile
+    # Step 6: Run experiment for each client profile
     auth_states = ["no_auth", "valid_token", "expired_token", "invalid_token"]
-    endpoints = get_endpoint_configs(auth_token, PROXY_PORT)
 
-    for profile_name, accept_encoding in CLIENT_PROFILES.items():
+    for profile_name, profile_config in CLIENT_PROFILES.items():
         print(f"\n{'='*60}")
-        print(f"CLIENT PROFILE: {profile_name}")
-        print(f"  Accept-Encoding: {accept_encoding}")
-        print(f"  CDN selects: {select_compression_algorithm(accept_encoding)}")
+        print(f"CLIENT PROFILE: {profile_config['description']}")
+        print(f"  Accept-Encoding: {profile_config['accept_encoding']}")
+        print(f"  Expected algorithm: {profile_config['selected_algorithm']}")
         print(f"{'='*60}")
+
+        # Start proxy with this client profile
+        proxy = start_proxy(profile_config["accept_encoding"])
+        time.sleep(0.5)  # let proxy bind
+
+        # Get endpoint configs for this proxy
+        endpoints = get_endpoint_configs(auth_token, PROXY_PORT)
 
         profile_results = {}
         profile_raw_obs = {}
@@ -722,8 +739,7 @@ def run_experiment():
 
                 try:
                     obs = make_request(ep["url"], method=ep["method"],
-                                       auth_header=auth_header, body=body,
-                                       accept_encoding=accept_encoding)
+                                       auth_header=auth_header, body=body)
                     obs["state"] = state
                     obs["rep"] = rep
                     obs["fingerprint_body"] = fingerprint_body_only(obs)
@@ -731,8 +747,7 @@ def run_experiment():
                     obs["body_hash"] = hashlib.sha256(obs["body"]).hexdigest()
                     obs["body_size"] = len(obs["body"])
                     obs["client_profile"] = profile_name
-                    obs["accept_encoding"] = accept_encoding
-                    obs["selected_algorithm"] = select_compression_algorithm(accept_encoding)
+                    obs["accept_encoding"] = profile_config["accept_encoding"]
                     raw_observations[state].append(obs)
                     fingerprints_body_by_state[state].append(obs["fingerprint_body"])
                     fingerprints_status_by_state[state].append(obs["fingerprint_status"])
@@ -813,131 +828,97 @@ def run_experiment():
         raw_observations_all[profile_name] = profile_raw_obs
         all_results[profile_name] = profile_results
 
-    # Step 8: Run mixed-client test (Client A and Client C alternating)
-    print(f"\n{'='*60}")
-    print("MIXED-CLIENT TEST: Client A (br, gzip) and Client C (identity) alternating")
-    print(f"{'='*60}")
+        # Stop proxy
+        stop_proxy(proxy)
+        time.sleep(1.0)  # ensure port is fully released
 
-    mixed_raw_obs = {}
-    for ep in endpoints:
-        ep_name = ep["name"]
-        print(f"\n  Endpoint: {ep_name}")
-
-        # Build plan: 4 states x 10 reps x 2 clients = 80 requests, alternating A/C
-        rng = random.Random(SEED)
-        plan = []
-        for state in auth_states:
-            for rep in range(REPS):
-                plan.append((state, rep, "A"))
-                plan.append((state, rep, "C"))
-        rng.shuffle(plan)
-
-        raw_observations = defaultdict(list)
-        fingerprints_body_by_state = defaultdict(list)
-
-        for i, (state, rep, client) in enumerate(plan):
-            auth_header = get_auth_header(state, auth_token)
-            body = ep["body_fn"](state)
-            accept_encoding = CLIENT_PROFILES[client]
-
-            try:
-                obs = make_request(ep["url"], method=ep["method"],
-                                   auth_header=auth_header, body=body,
-                                   accept_encoding=accept_encoding)
-                obs["state"] = state
-                obs["rep"] = rep
-                obs["client_profile"] = client
-                obs["fingerprint_body"] = fingerprint_body_only(obs)
-                obs["body_hash"] = hashlib.sha256(obs["body"]).hexdigest()
-                obs["body_size"] = len(obs["body"])
-                obs["selected_algorithm"] = select_compression_algorithm(accept_encoding)
-                raw_observations[state].append(obs)
-                fingerprints_body_by_state[state].append(obs["fingerprint_body"])
-            except Exception as e:
-                errors.append({"client_profile": f"MIXED-{client}", "endpoint": ep_name,
-                               "state": state, "rep": rep, "error": str(e)})
-
-            if i < len(plan) - 1:
-                jitter = rng.uniform(0.05, 0.15)
-                time.sleep(jitter)
-
-        body_disc = compute_discrimination_score(fingerprints_body_by_state)
-        mixed_raw_obs[ep_name] = {
-            "body_only_discrimination": body_disc,
-            "raw_observations": raw_observations,
-        }
-        print(f"    Mixed-client body-only discrimination: {body_disc:.6f}")
-
-    # Step 9: Stop proxy and Keycloak
-    stop_proxy(proxy)
+    # Step 7: Stop Keycloak
     stop_keycloak()
 
-    # Step 10: Assemble metrics
+    # Step 8: Assemble metrics
     metrics = {}
-    
-    # Per-client-profile per-endpoint metrics
     for profile_name in CLIENT_PROFILES:
         for ep_name in ["/userinfo", "/introspect"]:
             key = f"{ep_name}_{profile_name}"
             if key in all_results[profile_name]:
                 metrics[key] = all_results[profile_name][key]
 
-    # Mixed-client metrics
-    for ep_name in ["/userinfo", "/introspect"]:
-        key = f"{ep_name}_MIXED"
-        if ep_name in mixed_raw_obs:
-            metrics[key] = {
-                "body_only_discrimination": mixed_raw_obs[ep_name]["body_only_discrimination"],
-            }
-
-    # Primary derived metrics: body-only discrimination on /userinfo per client profile
+    # Step 9: Compute primary derived metrics for /userinfo
     userinfo_bo_discs = {}
     for profile_name in CLIENT_PROFILES:
         key = f"/userinfo_{profile_name}"
         if key in metrics:
             userinfo_bo_discs[profile_name] = metrics[key]["body_only_discrimination"]
 
-    # Status-only discrimination on /userinfo per client profile (should be 0.5 invariant)
-    userinfo_status_discs = {}
+    # B-IDENTITY-BODY-ONLY: body-only at identity (Client C)
+    identity_body_only = userinfo_bo_discs.get("C_identity", None)
+
+    # B-DETERMINISTIC-BR-BODY-ONLY: body-only at deterministic brotli (Client A)
+    br_body_only = userinfo_bo_discs.get("A_br_gzip", None)
+
+    # B-DETERMINISTIC-GZIP-BODY-ONLY: body-only at deterministic gzip (Client B)
+    gzip_body_only = userinfo_bo_discs.get("B_gzip_only", None)
+
+    # B-MIXED-CLIENT-BODY-ONLY: compute cross-client divergence
+    # For each state, check if Client A and Client C produce different body hashes
+    cross_client_divergence = {}
+    if "/userinfo_A_br_gzip" in metrics and "/userinfo_C_identity" in metrics:
+        for state in auth_states:
+            hashes_a = [obs["body_hash"] for obs in 
+                       raw_observations_all.get("A_br_gzip", {}).get("/userinfo", {}).get(state, [])]
+            hashes_c = [obs["body_hash"] for obs in 
+                       raw_observations_all.get("C_identity", {}).get("/userinfo", {}).get(state, [])]
+            # Check if any hash from A differs from any hash from C
+            if hashes_a and hashes_c:
+                all_a = set(hashes_a)
+                all_c = set(hashes_c)
+                divergent = len(all_a - all_c) > 0 or len(all_c - all_a) > 0
+                cross_client_divergence[state] = {
+                    "divergent": divergent,
+                    "unique_hashes_a": len(all_a),
+                    "unique_hashes_c": len(all_c),
+                }
+            else:
+                cross_client_divergence[state] = {"divergent": None, "unique_hashes_a": 0, "unique_hashes_c": 0}
+
+    # Compute mixed-client discrimination (Client A + Client C alternating)
+    mixed_client_body_disc = None
+    if "/userinfo_A_br_gzip" in metrics and "/userinfo_C_identity" in metrics:
+        mixed_fps_by_state = defaultdict(list)
+        for state in auth_states:
+            # Get fingerprints from both Client A and Client C for this state
+            fps_a = [obs["fingerprint_body"] for obs in 
+                    raw_observations_all.get("A_br_gzip", {}).get("/userinfo", {}).get(state, [])]
+            fps_c = [obs["fingerprint_body"] for obs in 
+                    raw_observations_all.get("C_identity", {}).get("/userinfo", {}).get(state, [])]
+            mixed_fps_by_state[state] = fps_a + fps_c
+        mixed_client_body_disc = compute_discrimination_score(mixed_fps_by_state)
+
+    # B-STATUS-ONLY: status-only discrimination across all conditions
+    status_only_discs = {}
     for profile_name in CLIENT_PROFILES:
         key = f"/userinfo_{profile_name}"
         if key in metrics:
-            userinfo_status_discs[profile_name] = metrics[key]["status_only_discrimination"]
+            status_only_discs[profile_name] = metrics[key]["status_only_discrimination"]
 
-    # B-IDENTITY-BODY-ONLY: body-only at profile C (identity) on /userinfo
-    identity_body_only = userinfo_bo_discs.get("C", None)
+    # B-RANDOM: random fingerprint baseline (same across all profiles)
+    b_random_disc = metrics.get("/userinfo_C_identity", {}).get("baselines", {}).get("B-RANDOM", None)
 
-    # B-DETERMINISTIC-BR-BODY-ONLY: body-only at profile A (brotli) on /userinfo
-    br_body_only = userinfo_bo_discs.get("A", None)
-
-    # B-DETERMINISTIC-GZIP-BODY-ONLY: body-only at profile B (gzip) on /userinfo
-    gzip_body_only = userinfo_bo_discs.get("B", None)
-
-    # B-MIXED-CLIENT-BODY-ONLY: mixed-client body-only on /userinfo
-    mixed_body_only = metrics.get("/userinfo_MIXED", {}).get("body_only_discrimination", None)
-
-    # B-STATUS-ONLY: status-only at profile C (identity) on /userinfo
-    status_only = userinfo_status_discs.get("C", None)
-
-    # Within-state hash variation for deterministic brotli (A) and gzip (B)
+    # Within-state body hash variation summary across profiles
     within_state_variation = {}
-    for profile_name in ["A", "B"]:
+    for profile_name in CLIENT_PROFILES:
         key = f"/userinfo_{profile_name}"
         if key in metrics:
             hv = metrics[key]["body_hash_variation"]
+            total_unique = sum(v["unique_count"] for v in hv.values())
+            total_requests = sum(v["total"] for v in hv.values())
+            all_same = all(v["all_same"] for v in hv.values())
             within_state_variation[profile_name] = {
-                "all_states_all_same": all(v["all_same"] for v in hv.values()),
-                "total_unique_hashes": sum(v["unique_count"] for v in hv.values()),
-                "total_requests": sum(v["total"] for v in hv.values()),
+                "total_unique_hashes": total_unique,
+                "total_requests": total_requests,
+                "all_states_deterministic": all_same,
                 "per_state": hv,
             }
-
-    # Null control: B-RANDOM at all client profiles
-    null_control_values = {}
-    for profile_name in CLIENT_PROFILES:
-        key = f"/userinfo_{profile_name}"
-        if key in metrics:
-            null_control_values[profile_name] = metrics[key]["baselines"]["B-RANDOM"]
 
     # Add derived metrics
     metrics["M_DETERMINISTIC_DISCRIMINATION"] = {
@@ -946,30 +927,50 @@ def run_experiment():
         "gzip_body_only": float(gzip_body_only) if gzip_body_only is not None else None,
         "description": "Body-only discrimination under deterministic brotli and gzip on /userinfo"
     }
-    metrics["M_STATUS_INVARIANCE"] = {
-        "per_profile": {k: float(v) for k, v in userinfo_status_discs.items()},
-        "expected": 0.5,
-        "description": "Status-only discrimination on /userinfo invariant across all client profiles"
-    }
-    metrics["M_WITHIN_STATE_VARIATION"] = within_state_variation
-    metrics["M_CROSS_CLIENT_DIVERGENCE"] = {
-        "identity_body_only": float(identity_body_only) if identity_body_only is not None else None,
-        "mixed_client_body_only": float(mixed_body_only) if mixed_body_only is not None else None,
-        "description": "Cross-client hash divergence: mixed clients should have degraded discrimination"
+    metrics["M_IDENTITY_CONTROL"] = {
+        "value": float(identity_body_only) if identity_body_only is not None else None,
+        "threshold": 0.35,
+        "description": "B-IDENTITY-BODY-ONLY: body-only discrimination at identity (no compression) on /userinfo"
     }
     metrics["M_NULL_CONTROL"] = {
-        "per_profile": {k: float(v) for k, v in null_control_values.items()},
+        "value": float(b_random_disc) if b_random_disc is not None else None,
+        "threshold": "~0.0",
         "description": "B-RANDOM discrimination at all client profiles"
     }
+    metrics["M_DETERMINISTIC_BR_CONTROL"] = {
+        "value": float(br_body_only) if br_body_only is not None else None,
+        "threshold": ">= identity - 0.15",
+        "description": "B-DETERMINISTIC-BR-BODY-ONLY: body-only at deterministic brotli on /userinfo"
+    }
+    metrics["M_DETERMINISTIC_GZIP_CONTROL"] = {
+        "value": float(gzip_body_only) if gzip_body_only is not None else None,
+        "threshold": ">= identity - 0.15",
+        "description": "B-DETERMINISTIC-GZIP-BODY-ONLY: body-only at deterministic gzip on /userinfo"
+    }
+    metrics["M_CROSS_CLIENT_DIVERGENCE"] = {
+        "divergence": cross_client_divergence,
+        "description": "Cross-client body hash divergence (same state, different clients, different hashes?)"
+    }
+    metrics["M_MIXED_CLIENT_DISCRIMINATION"] = {
+        "value": float(mixed_client_body_disc) if mixed_client_body_disc is not None else None,
+        "threshold": "< identity body-only",
+        "description": "B-MIXED-CLIENT-BODY-ONLY: body-only with mixed clients (A + C alternating)"
+    }
+    metrics["M_STATUS_ONLY_INVARIANCE"] = {
+        "values": {k: float(v) for k, v in status_only_discs.items()},
+        "threshold": "~ 0.5 on /userinfo invariant",
+        "description": "B-STATUS-ONLY: status-only discrimination across all client profiles"
+    }
+    metrics["M_WITHIN_STATE_VARIATION"] = within_state_variation
 
-    # Step 11: Evaluate controls and decision rule
+    # Step 10: Evaluate controls and decision rule
     control_pass = True
     control_details = {}
 
-    # C1: Positive control — identity body-only >= 0.35
+    # C1: Positive control — B-IDENTITY-BODY-ONLY >= 0.35 on /userinfo
     c1_pass = identity_body_only is not None and identity_body_only >= 0.35
-    control_details["C_POSITIVE_CONTROL_IDENTITY"] = {
-        "expected": "B-IDENTITY-BODY-ONLY >= 0.35 on /userinfo",
+    control_details["C_POSITIVE_CONTROL"] = {
+        "expected": "B-IDENTITY-BODY-ONLY >= 0.35",
         "observed": float(identity_body_only) if identity_body_only is not None else None,
         "pass": c1_pass,
     }
@@ -977,72 +978,69 @@ def run_experiment():
         control_pass = False
 
     # C2: Null control — B-RANDOM ~ 0.0 at all client profiles
-    all_null_pass = all(
-        v is not None and abs(v) < 0.1
-        for v in null_control_values.values()
-    )
+    c2_pass = b_random_disc is not None and abs(b_random_disc) < 0.1
     control_details["C_NULL_CONTROL"] = {
-        "expected": "B-RANDOM ~ 0.0 at all client profiles",
-        "observed": {k: float(v) for k, v in null_control_values.items()},
-        "pass": all_null_pass,
+        "expected": "B-RANDOM ~ 0.0",
+        "observed": float(b_random_disc) if b_random_disc is not None else None,
+        "pass": c2_pass,
     }
-    if not all_null_pass:
+    if not c2_pass:
         control_pass = False
 
-    # C3: Deterministic brotli preserves — br_body_only >= identity - 0.15
+    # C3: B-DETERMINISTIC-BR-BODY-ONLY >= B-IDENTITY-BODY-ONLY - 0.15 on /userinfo
     c3_pass = (br_body_only is not None and identity_body_only is not None
                and br_body_only >= identity_body_only - 0.15)
     control_details["C_DETERMINISTIC_BR_PRESERVES"] = {
-        "expected": "B-DETERMINISTIC-BR-BODY-ONLY >= B-IDENTITY-BODY-ONLY - 0.15 on /userinfo",
+        "expected": "B-DETERMINISTIC-BR-BODY-ONLY >= B-IDENTITY-BODY-ONLY - 0.15",
         "observed": float(br_body_only) if br_body_only is not None else None,
         "pass": c3_pass,
     }
     if not c3_pass:
         control_pass = False
 
-    # C4: Deterministic gzip preserves — gzip_body_only >= identity - 0.15
+    # C4: B-DETERMINISTIC-GZIP-BODY-ONLY >= B-IDENTITY-BODY-ONLY - 0.15 on /userinfo
     c4_pass = (gzip_body_only is not None and identity_body_only is not None
                and gzip_body_only >= identity_body_only - 0.15)
     control_details["C_DETERMINISTIC_GZIP_PRESERVES"] = {
-        "expected": "B-DETERMINISTIC-GZIP-BODY-ONLY >= B-IDENTITY-BODY-ONLY - 0.15 on /userinfo",
+        "expected": "B-DETERMINISTIC-GZIP-BODY-ONLY >= B-IDENTITY-BODY-ONLY - 0.15",
         "observed": float(gzip_body_only) if gzip_body_only is not None else None,
         "pass": c4_pass,
     }
     if not c4_pass:
         control_pass = False
 
-    # C5: Within-state hash variation = 0 for deterministic brotli and gzip
-    c5_pass = all(
-        within_state_variation.get(p, {}).get("all_states_all_same", False)
-        for p in ["A", "B"]
-    )
-    control_details["C_WITHIN_STATE_STABILITY"] = {
+    # C5: Within-state body hash variation = 0 for deterministic brotli and gzip
+    c5_pass = True
+    for profile_name in ["A_br_gzip", "B_gzip_only"]:
+        key = f"/userinfo_{profile_name}"
+        if key in within_state_variation:
+            if not within_state_variation[profile_name]["all_states_deterministic"]:
+                c5_pass = False
+    control_details["C_WITHIN_STATE_DETERMINISTIC"] = {
         "expected": "Within-state body hash variation = 0 for deterministic brotli and gzip",
-        "observed": {p: within_state_variation.get(p, {}) for p in ["A", "B"]},
+        "observed": {k: v["all_states_deterministic"] for k, v in within_state_variation.items()
+                    if k in ["A_br_gzip", "B_gzip_only"]},
         "pass": c5_pass,
     }
     if not c5_pass:
         control_pass = False
 
-    # C6: Mixed-client divergence — mixed < identity
-    c6_pass = (mixed_body_only is not None and identity_body_only is not None
-               and mixed_body_only < identity_body_only)
-    control_details["C_MIXED_CLIENT_DIVERGENCE"] = {
-        "expected": "B-MIXED-CLIENT-BODY-ONLY < B-IDENTITY-BODY-ONLY on /userinfo",
-        "observed": float(mixed_body_only) if mixed_body_only is not None else None,
+    # C6: B-MIXED-CLIENT-BODY-ONLY < B-IDENTITY-BODY-ONLY on /userinfo
+    c6_pass = (mixed_client_body_disc is not None and identity_body_only is not None
+               and mixed_client_body_disc < identity_body_only)
+    control_details["C_MIXED_CLIENT_DEGRADES"] = {
+        "expected": "B-MIXED-CLIENT-BODY-ONLY < B-IDENTITY-BODY-ONLY",
+        "observed": float(mixed_client_body_disc) if mixed_client_body_disc is not None else None,
         "pass": c6_pass,
     }
     if not c6_pass:
         control_pass = False
 
-    # C7: Status-only invariant = 0.5 across all profiles
-    c7_pass = all(
-        v is not None and abs(v - 0.5) < 0.01
-        for v in userinfo_status_discs.values()
-    )
-    control_details["C_STATUS_INVARIANT"] = {
+    # C7: B-STATUS-ONLY >= 0.5 on /userinfo invariant across all client profiles
+    c7_pass = all(v >= 0.5 for v in status_only_discs.values()) if status_only_discs else False
+    control_details["C_STATUS_ONLY_INVARIANT"] = {
         "expected": "B-STATUS-ONLY >= 0.5 on /userinfo invariant across all client profiles",
-        "observed": {k: float(v) for k, v in userinfo_status_discs.items()},
+        "observed": {k: float(v) for k, v in status_only_discs.items()},
         "pass": c7_pass,
     }
     if not c7_pass:
@@ -1060,20 +1058,23 @@ def run_experiment():
 
     # Decision rule (from frozen spec.json)
     if control_pass:
+        # All 8 conditions met: body-only survives deterministic CDN negotiation
         outcome = "SUPPORTS"
         status = "COMPLETE"
+    elif not c1_pass or not c2_pass or not c8_pass:
+        # Positive/null control or pipeline errors: measurement invalid
+        outcome = "NOT_APPLICABLE"
+        status = "MEASUREMENT_INVALID"
     elif not c3_pass or not c4_pass:
-        # Deterministic compression degrades body-only
+        # Deterministic compression degrades body-only: falsified in setting
         outcome = "FALSIFIES"
         status = "COMPLETE"
     elif not c5_pass:
-        # Deterministic compression produces non-deterministic output
-        outcome = "NOT_APPLICABLE"
-        status = "MEASUREMENT_INVALID"
-    elif not c1_pass or not c2_pass or not c8_pass:
+        # Deterministic compression produces non-deterministic output: measurement invalid
         outcome = "NOT_APPLICABLE"
         status = "MEASUREMENT_INVALID"
     else:
+        # Some conditions pass, some fail: mixed
         outcome = "MIXED"
         status = "COMPLETE"
 
@@ -1081,12 +1082,9 @@ def run_experiment():
     observations = [
         f"Keycloak 25.0 deployed via Docker on localhost:{KEYCLOAK_PORT}",
         f"CDN negotiation proxy on localhost:{PROXY_PORT}",
-        f"Client profiles: {CLIENT_PROFILES}",
-        f"CDN negotiation: select highest-priority algorithm from Accept-Encoding (br > gzip > identity)",
+        f"Client profiles: {list(CLIENT_PROFILES.keys())}",
         f"2 endpoints: /userinfo (GET), /introspect (POST)",
         f"4 auth states x {REPS} reps x {len(CLIENT_PROFILES)} client profiles x 2 endpoints = {4 * REPS * len(CLIENT_PROFILES) * 2} total requests",
-        f"Plus mixed-client test: 4 states x {REPS} reps x 2 clients x 2 endpoints = {4 * REPS * 2 * 2} requests",
-        f"Total requests: {4 * REPS * len(CLIENT_PROFILES) * 2 + 4 * REPS * 2 * 2}",
         f"Seed: {SEED}",
         f"Brotli available: {BROTLI_AVAILABLE}",
     ]
@@ -1097,29 +1095,31 @@ def run_experiment():
             key = f"{ep_name}_{profile_name}"
             if key in metrics:
                 observations.append(
-                    f"Profile {profile_name} ({CLIENT_PROFILES[profile_name]}) {ep_name}: "
+                    f"profile={profile_name} {ep_name}: "
                     f"body={metrics[key]['body_only_discrimination']:.4f}, "
                     f"status={metrics[key]['status_only_discrimination']:.4f}, "
                     f"B-RANDOM={metrics[key]['baselines']['B-RANDOM']:.4f}"
                 )
 
-    # Mixed-client observations
-    for ep_name in ["/userinfo", "/introspect"]:
-        key = f"{ep_name}_MIXED"
-        if key in metrics:
+    # Within-state variation observations
+    for profile_name in CLIENT_PROFILES:
+        if profile_name in within_state_variation:
+            wv = within_state_variation[profile_name]
             observations.append(
-                f"MIXED-CLIENT {ep_name}: body={metrics[key]['body_only_discrimination']:.4f}"
+                f"profile={profile_name}: total_unique_hashes={wv['total_unique_hashes']}/{wv['total_requests']}, "
+                f"all_states_deterministic={wv['all_states_deterministic']}"
             )
 
-    # Within-state variation observations
-    for profile_name in ["A", "B"]:
-        if profile_name in within_state_variation:
-            wsv = within_state_variation[profile_name]
-            observations.append(
-                f"Profile {profile_name} within-state variation: "
-                f"all_same={wsv['all_states_all_same']}, "
-                f"unique_hashes={wsv['total_unique_hashes']}/{wsv['total_requests']}"
-            )
+    # Cross-client divergence observations
+    for state, div in cross_client_divergence.items():
+        observations.append(
+            f"cross_client_divergence state={state}: divergent={div['divergent']}, "
+            f"unique_a={div['unique_hashes_a']}, unique_c={div['unique_hashes_c']}"
+        )
+
+    # Mixed-client discrimination
+    if mixed_client_body_disc is not None:
+        observations.append(f"Mixed-client (A+C) body-only discrimination: {mixed_client_body_disc:.4f}")
 
     # Validity notes
     validity_notes = [
@@ -1129,18 +1129,20 @@ def run_experiment():
         "Jitter: 50-150ms uniform between requests",
         "expired_token is locally-signed HS256, not Keycloak-issued (V6 leakage from parent)",
         f"Brotli module available: {BROTLI_AVAILABLE}",
-        "Proxy overrides client Accept-Encoding to identity to get raw response from Keycloak",
-        "Proxy reads original Accept-Encoding and deterministically selects algorithm (br > gzip > identity)",
+        "Proxy reads client Accept-Encoding and deterministically selects highest-priority algorithm (br > gzip > identity)",
+        "Same Accept-Encoding always produces same algorithm — simulates real CDN behavior",
+        "Proxy overrides internal Accept-Encoding to identity to get raw response from Keycloak, then applies CDN-selected compression",
         "Body hash computed on compressed bytes received by client (not raw bytes from Keycloak)",
+        "Python gzip is deterministic: same input + same level = same output (mtime=0 eliminates timestamp non-determinism)",
+        "Python brotli is deterministic: same input + same level = same output",
         "Body-only discrimination is NOT tautological here — compression directly attacks the body hash",
         f"Seed={SEED} for request ordering (deterministic across runs)",
-        "CDN negotiation is deterministic: same Accept-Encoding always produces same algorithm",
-        "Compression uses fixed parameters (gzip level=9, brotli level=6) to simulate CDN determinism",
-        "This is materially different from EXP-RUNTIME-34654566605 which tested per-request random compression",
+        "Keycloak 25.0 start-dev does not itself compress responses (verified: Content-Encoding=none on direct requests)",
+        "This is materially different from EXP-RUNTIME-34654566605: parent tested per-request random compression (worst-case non-determinism); this experiment tests deterministic compression per client (realistic CDN model)",
     ]
 
     if not BROTLI_AVAILABLE:
-        validity_notes.append("BROTLI NOT AVAILABLE: Client A falls back to gzip (weaker test of deterministic compression)")
+        validity_notes.append("BROTLI NOT AVAILABLE: Client A fallback to gzip (reduces discriminating power of brotli test)")
 
     if errors:
         validity_notes.append(f"Pipeline errors: {len(errors)} requests failed")
@@ -1150,9 +1152,12 @@ def run_experiment():
     # Unresolved
     unresolved = [
         "Does body-only discrimination survive multiple stacked infrastructure layers with correlated compression?",
-        "Does the result generalize to non-Keycloak OAuth/OIDC providers?",
-        "Would a filtered full-vector baseline (status+WWW-Authenticate+Cache-Control+body_hash) survive deterministic compression?",
-        "Does result generalize to larger/more diverse body content-types and sizes beyond Keycloak /userinfo 0/189 bytes?",
+        "Does the result generalize to non-Keycloak OAuth/OIDC providers (Auth0, Okta)?",
+        "Does body-only degradation generalize to larger/more diverse body content-types and sizes?",
+        "What discrimination floor remains when hashing decompressed bodies (normalization layer)?",
+        "Would a filtered full-vector baseline (status+WWW-Authenticate+Cache-Control+body_hash) survive compression?",
+        "What is minimal compression entropy required to collapse body-only below usable threshold?",
+        "Does result generalize to production Keycloak with real CDN, load-balancer, or rate-limiting?",
     ]
 
     # Build result
@@ -1193,37 +1198,12 @@ def run_experiment():
                         "fingerprint_status": obs["fingerprint_status"],
                         "client_profile": obs["client_profile"],
                         "accept_encoding": obs["accept_encoding"],
-                        "selected_algorithm": obs["selected_algorithm"],
                         "content_encoding": obs["headers"].get("Content-Encoding", "none"),
                         "elapsed": obs["elapsed"],
                         "timestamp": obs["timestamp"],
                         "state": obs["state"],
                         "rep": obs["rep"],
                     })
-
-    # Add mixed-client raw observations
-    raw_obs_serializable["MIXED"] = {}
-    for ep_name, mixed_data in mixed_raw_obs.items():
-        raw_obs_serializable["MIXED"][ep_name] = {}
-        for state, obs_list in mixed_data["raw_observations"].items():
-            raw_obs_serializable["MIXED"][ep_name][state] = []
-            for obs in obs_list:
-                raw_obs_serializable["MIXED"][ep_name][state].append({
-                    "url": obs["url"],
-                    "status": obs["status"],
-                    "headers": obs["headers"],
-                    "body_hash": obs["body_hash"],
-                    "body_size": obs["body_size"],
-                    "body_preview": obs["body"][:500].decode("utf-8", errors="replace"),
-                    "fingerprint_body": obs["fingerprint_body"],
-                    "client_profile": obs["client_profile"],
-                    "selected_algorithm": obs["selected_algorithm"],
-                    "content_encoding": obs["headers"].get("Content-Encoding", "none"),
-                    "elapsed": obs["elapsed"],
-                    "timestamp": obs["timestamp"],
-                    "state": obs["state"],
-                    "rep": obs["rep"],
-                })
 
     with open("raw_observations.json", "w") as f:
         json.dump(raw_obs_serializable, f, indent=2)

@@ -1,0 +1,736 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-34741873198",
+  "lane": "runtime",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "/userinfo_A_br_gzip": {
+      "body_only_discrimination": 0.5,
+      "status_only_discrimination": 0.5,
+      "baselines": {
+        "B-RANDOM": 0.0
+      },
+      "body_hash_variation": {
+        "invalid_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "valid_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "no_auth": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "expired_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        }
+      },
+      "compression_verification": {
+        "invalid_token": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 10
+        },
+        "valid_token": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 10
+        },
+        "no_auth": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 10
+        },
+        "expired_token": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 10
+        }
+      },
+      "body_sizes": {
+        "invalid_token": {
+          "min": 1,
+          "max": 1,
+          "mean": 1.0
+        },
+        "valid_token": {
+          "min": 128,
+          "max": 128,
+          "mean": 128.0
+        },
+        "no_auth": {
+          "min": 1,
+          "max": 1,
+          "mean": 1.0
+        },
+        "expired_token": {
+          "min": 1,
+          "max": 1,
+          "mean": 1.0
+        }
+      },
+      "total_requests": 40
+    },
+    "/introspect_A_br_gzip": {
+      "body_only_discrimination": 0.5,
+      "status_only_discrimination": 0.0,
+      "baselines": {
+        "B-RANDOM": 0.0
+      },
+      "body_hash_variation": {
+        "invalid_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "valid_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "no_auth": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "expired_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        }
+      },
+      "compression_verification": {
+        "invalid_token": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 10
+        },
+        "valid_token": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 10
+        },
+        "no_auth": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 10
+        },
+        "expired_token": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 10
+        }
+      },
+      "body_sizes": {
+        "invalid_token": {
+          "min": 20,
+          "max": 20,
+          "mean": 20.0
+        },
+        "valid_token": {
+          "min": 432,
+          "max": 432,
+          "mean": 432.0
+        },
+        "no_auth": {
+          "min": 20,
+          "max": 20,
+          "mean": 20.0
+        },
+        "expired_token": {
+          "min": 20,
+          "max": 20,
+          "mean": 20.0
+        }
+      },
+      "total_requests": 40
+    },
+    "/userinfo_B_gzip_only": {
+      "body_only_discrimination": 0.5,
+      "status_only_discrimination": 0.5,
+      "baselines": {
+        "B-RANDOM": 0.0
+      },
+      "body_hash_variation": {
+        "invalid_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "valid_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "no_auth": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "expired_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        }
+      },
+      "compression_verification": {
+        "invalid_token": {
+          "content_encoding_values": [
+            "gzip"
+          ],
+          "count": 10
+        },
+        "valid_token": {
+          "content_encoding_values": [
+            "gzip"
+          ],
+          "count": 10
+        },
+        "no_auth": {
+          "content_encoding_values": [
+            "gzip"
+          ],
+          "count": 10
+        },
+        "expired_token": {
+          "content_encoding_values": [
+            "gzip"
+          ],
+          "count": 10
+        }
+      },
+      "body_sizes": {
+        "invalid_token": {
+          "min": 20,
+          "max": 20,
+          "mean": 20.0
+        },
+        "valid_token": {
+          "min": 155,
+          "max": 155,
+          "mean": 155.0
+        },
+        "no_auth": {
+          "min": 20,
+          "max": 20,
+          "mean": 20.0
+        },
+        "expired_token": {
+          "min": 20,
+          "max": 20,
+          "mean": 20.0
+        }
+      },
+      "total_requests": 40
+    },
+    "/introspect_B_gzip_only": {
+      "body_only_discrimination": 0.5,
+      "status_only_discrimination": 0.0,
+      "baselines": {
+        "B-RANDOM": 0.0
+      },
+      "body_hash_variation": {
+        "invalid_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "valid_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "no_auth": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "expired_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        }
+      },
+      "compression_verification": {
+        "invalid_token": {
+          "content_encoding_values": [
+            "gzip"
+          ],
+          "count": 10
+        },
+        "valid_token": {
+          "content_encoding_values": [
+            "gzip"
+          ],
+          "count": 10
+        },
+        "no_auth": {
+          "content_encoding_values": [
+            "gzip"
+          ],
+          "count": 10
+        },
+        "expired_token": {
+          "content_encoding_values": [
+            "gzip"
+          ],
+          "count": 10
+        }
+      },
+      "body_sizes": {
+        "invalid_token": {
+          "min": 36,
+          "max": 36,
+          "mean": 36.0
+        },
+        "valid_token": {
+          "min": 426,
+          "max": 426,
+          "mean": 426.0
+        },
+        "no_auth": {
+          "min": 36,
+          "max": 36,
+          "mean": 36.0
+        },
+        "expired_token": {
+          "min": 36,
+          "max": 36,
+          "mean": 36.0
+        }
+      },
+      "total_requests": 40
+    },
+    "/userinfo_C_identity": {
+      "body_only_discrimination": 0.5,
+      "status_only_discrimination": 0.5,
+      "baselines": {
+        "B-RANDOM": 0.0
+      },
+      "body_hash_variation": {
+        "invalid_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "valid_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "no_auth": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "expired_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        }
+      },
+      "compression_verification": {
+        "invalid_token": {
+          "content_encoding_values": [
+            "none"
+          ],
+          "count": 10
+        },
+        "valid_token": {
+          "content_encoding_values": [
+            "none"
+          ],
+          "count": 10
+        },
+        "no_auth": {
+          "content_encoding_values": [
+            "none"
+          ],
+          "count": 10
+        },
+        "expired_token": {
+          "content_encoding_values": [
+            "none"
+          ],
+          "count": 10
+        }
+      },
+      "body_sizes": {
+        "invalid_token": {
+          "min": 0,
+          "max": 0,
+          "mean": 0.0
+        },
+        "valid_token": {
+          "min": 189,
+          "max": 189,
+          "mean": 189.0
+        },
+        "no_auth": {
+          "min": 0,
+          "max": 0,
+          "mean": 0.0
+        },
+        "expired_token": {
+          "min": 0,
+          "max": 0,
+          "mean": 0.0
+        }
+      },
+      "total_requests": 40
+    },
+    "/introspect_C_identity": {
+      "body_only_discrimination": 0.5,
+      "status_only_discrimination": 0.0,
+      "baselines": {
+        "B-RANDOM": 0.0
+      },
+      "body_hash_variation": {
+        "invalid_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "valid_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "no_auth": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "expired_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        }
+      },
+      "compression_verification": {
+        "invalid_token": {
+          "content_encoding_values": [
+            "none"
+          ],
+          "count": 10
+        },
+        "valid_token": {
+          "content_encoding_values": [
+            "none"
+          ],
+          "count": 10
+        },
+        "no_auth": {
+          "content_encoding_values": [
+            "none"
+          ],
+          "count": 10
+        },
+        "expired_token": {
+          "content_encoding_values": [
+            "none"
+          ],
+          "count": 10
+        }
+      },
+      "body_sizes": {
+        "invalid_token": {
+          "min": 16,
+          "max": 16,
+          "mean": 16.0
+        },
+        "valid_token": {
+          "min": 729,
+          "max": 729,
+          "mean": 729.0
+        },
+        "no_auth": {
+          "min": 16,
+          "max": 16,
+          "mean": 16.0
+        },
+        "expired_token": {
+          "min": 16,
+          "max": 16,
+          "mean": 16.0
+        }
+      },
+      "total_requests": 40
+    },
+    "M_DETERMINISTIC_DISCRIMINATION": {
+      "identity_body_only": 0.5,
+      "br_body_only": 0.5,
+      "gzip_body_only": 0.5,
+      "description": "Body-only discrimination under deterministic brotli and gzip on /userinfo"
+    },
+    "M_IDENTITY_CONTROL": {
+      "value": 0.5,
+      "threshold": 0.35,
+      "description": "B-IDENTITY-BODY-ONLY: body-only discrimination at identity (no compression) on /userinfo"
+    },
+    "M_NULL_CONTROL": {
+      "value": 0.0,
+      "threshold": "~0.0",
+      "description": "B-RANDOM discrimination at all client profiles"
+    },
+    "M_DETERMINISTIC_BR_CONTROL": {
+      "value": 0.5,
+      "threshold": ">= identity - 0.15",
+      "description": "B-DETERMINISTIC-BR-BODY-ONLY: body-only at deterministic brotli on /userinfo"
+    },
+    "M_DETERMINISTIC_GZIP_CONTROL": {
+      "value": 0.5,
+      "threshold": ">= identity - 0.15",
+      "description": "B-DETERMINISTIC-GZIP-BODY-ONLY: body-only at deterministic gzip on /userinfo"
+    },
+    "M_CROSS_CLIENT_DIVERGENCE": {
+      "divergence": {
+        "no_auth": {
+          "divergent": true,
+          "unique_hashes_a": 1,
+          "unique_hashes_c": 1
+        },
+        "valid_token": {
+          "divergent": true,
+          "unique_hashes_a": 1,
+          "unique_hashes_c": 1
+        },
+        "expired_token": {
+          "divergent": true,
+          "unique_hashes_a": 1,
+          "unique_hashes_c": 1
+        },
+        "invalid_token": {
+          "divergent": true,
+          "unique_hashes_a": 1,
+          "unique_hashes_c": 1
+        }
+      },
+      "description": "Cross-client body hash divergence (same state, different clients, different hashes?)"
+    },
+    "M_MIXED_CLIENT_DISCRIMINATION": {
+      "value": 0.22368421052631576,
+      "threshold": "< identity body-only",
+      "description": "B-MIXED-CLIENT-BODY-ONLY: body-only with mixed clients (A + C alternating)"
+    },
+    "M_STATUS_ONLY_INVARIANCE": {
+      "values": {
+        "A_br_gzip": 0.5,
+        "B_gzip_only": 0.5,
+        "C_identity": 0.5
+      },
+      "threshold": "~ 0.5 on /userinfo invariant",
+      "description": "B-STATUS-ONLY: status-only discrimination across all client profiles"
+    },
+    "M_WITHIN_STATE_VARIATION": {
+      "A_br_gzip": {
+        "total_unique_hashes": 4,
+        "total_requests": 40,
+        "all_states_deterministic": true,
+        "per_state": {
+          "invalid_token": {
+            "unique_count": 1,
+            "total": 10,
+            "all_same": true
+          },
+          "valid_token": {
+            "unique_count": 1,
+            "total": 10,
+            "all_same": true
+          },
+          "no_auth": {
+            "unique_count": 1,
+            "total": 10,
+            "all_same": true
+          },
+          "expired_token": {
+            "unique_count": 1,
+            "total": 10,
+            "all_same": true
+          }
+        }
+      },
+      "B_gzip_only": {
+        "total_unique_hashes": 4,
+        "total_requests": 40,
+        "all_states_deterministic": true,
+        "per_state": {
+          "invalid_token": {
+            "unique_count": 1,
+            "total": 10,
+            "all_same": true
+          },
+          "valid_token": {
+            "unique_count": 1,
+            "total": 10,
+            "all_same": true
+          },
+          "no_auth": {
+            "unique_count": 1,
+            "total": 10,
+            "all_same": true
+          },
+          "expired_token": {
+            "unique_count": 1,
+            "total": 10,
+            "all_same": true
+          }
+        }
+      },
+      "C_identity": {
+        "total_unique_hashes": 4,
+        "total_requests": 40,
+        "all_states_deterministic": true,
+        "per_state": {
+          "invalid_token": {
+            "unique_count": 1,
+            "total": 10,
+            "all_same": true
+          },
+          "valid_token": {
+            "unique_count": 1,
+            "total": 10,
+            "all_same": true
+          },
+          "no_auth": {
+            "unique_count": 1,
+            "total": 10,
+            "all_same": true
+          },
+          "expired_token": {
+            "unique_count": 1,
+            "total": 10,
+            "all_same": true
+          }
+        }
+      }
+    }
+  },
+  "controls": {
+    "C_POSITIVE_CONTROL": {
+      "expected": "B-IDENTITY-BODY-ONLY >= 0.35",
+      "observed": 0.5,
+      "pass": true
+    },
+    "C_NULL_CONTROL": {
+      "expected": "B-RANDOM ~ 0.0",
+      "observed": 0.0,
+      "pass": true
+    },
+    "C_DETERMINISTIC_BR_PRESERVES": {
+      "expected": "B-DETERMINISTIC-BR-BODY-ONLY >= B-IDENTITY-BODY-ONLY - 0.15",
+      "observed": 0.5,
+      "pass": true
+    },
+    "C_DETERMINISTIC_GZIP_PRESERVES": {
+      "expected": "B-DETERMINISTIC-GZIP-BODY-ONLY >= B-IDENTITY-BODY-ONLY - 0.15",
+      "observed": 0.5,
+      "pass": true
+    },
+    "C_WITHIN_STATE_DETERMINISTIC": {
+      "expected": "Within-state body hash variation = 0 for deterministic brotli and gzip",
+      "observed": {
+        "A_br_gzip": true,
+        "B_gzip_only": true
+      },
+      "pass": true
+    },
+    "C_MIXED_CLIENT_DEGRADES": {
+      "expected": "B-MIXED-CLIENT-BODY-ONLY < B-IDENTITY-BODY-ONLY",
+      "observed": 0.22368421052631576,
+      "pass": true
+    },
+    "C_STATUS_ONLY_INVARIANT": {
+      "expected": "B-STATUS-ONLY >= 0.5 on /userinfo invariant across all client profiles",
+      "observed": {
+        "A_br_gzip": 0.5,
+        "B_gzip_only": 0.5,
+        "C_identity": 0.5
+      },
+      "pass": true
+    },
+    "C_NO_PIPELINE_ERRORS": {
+      "expected": "0 errors",
+      "observed": 0,
+      "pass": true
+    }
+  },
+  "artifacts": [
+    {
+      "path": "raw_observations.json",
+      "role": "raw",
+      "description": "All HTTP observations per client profile per endpoint per state"
+    },
+    {
+      "path": "run_experiment.py",
+      "role": "code",
+      "description": "Frozen experiment execution script"
+    }
+  ],
+  "observations": [
+    "Keycloak 25.0 deployed via Docker on localhost:18080",
+    "CDN negotiation proxy on localhost:18081",
+    "Client profiles: ['A_br_gzip', 'B_gzip_only', 'C_identity']",
+    "2 endpoints: /userinfo (GET), /introspect (POST)",
+    "4 auth states x 10 reps x 3 client profiles x 2 endpoints = 240 total requests",
+    "Seed: 44",
+    "Brotli available: True",
+    "profile=A_br_gzip /userinfo: body=0.5000, status=0.5000, B-RANDOM=0.0000",
+    "profile=A_br_gzip /introspect: body=0.5000, status=0.0000, B-RANDOM=0.0000",
+    "profile=B_gzip_only /userinfo: body=0.5000, status=0.5000, B-RANDOM=0.0000",
+    "profile=B_gzip_only /introspect: body=0.5000, status=0.0000, B-RANDOM=0.0000",
+    "profile=C_identity /userinfo: body=0.5000, status=0.5000, B-RANDOM=0.0000",
+    "profile=C_identity /introspect: body=0.5000, status=0.0000, B-RANDOM=0.0000",
+    "profile=A_br_gzip: total_unique_hashes=4/40, all_states_deterministic=True",
+    "profile=B_gzip_only: total_unique_hashes=4/40, all_states_deterministic=True",
+    "profile=C_identity: total_unique_hashes=4/40, all_states_deterministic=True",
+    "cross_client_divergence state=no_auth: divergent=True, unique_a=1, unique_c=1",
+    "cross_client_divergence state=valid_token: divergent=True, unique_a=1, unique_c=1",
+    "cross_client_divergence state=expired_token: divergent=True, unique_a=1, unique_c=1",
+    "cross_client_divergence state=invalid_token: divergent=True, unique_a=1, unique_c=1",
+    "Mixed-client (A+C) body-only discrimination: 0.2237"
+  ],
+  "validity_notes": [
+    "Same Keycloak 25.0 Docker deployment as parent experiments",
+    "Same fingerprint algorithm as parent: SHA-256(repr((status, body_sha256, '')))",
+    "Python version: 3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "Jitter: 50-150ms uniform between requests",
+    "expired_token is locally-signed HS256, not Keycloak-issued (V6 leakage from parent)",
+    "Brotli module available: True",
+    "Proxy reads client Accept-Encoding and deterministically selects highest-priority algorithm (br > gzip > identity)",
+    "Same Accept-Encoding always produces same algorithm \u2014 simulates real CDN behavior",
+    "Proxy overrides internal Accept-Encoding to identity to get raw response from Keycloak, then applies CDN-selected compression",
+    "Body hash computed on compressed bytes received by client (not raw bytes from Keycloak)",
+    "Python gzip is deterministic: same input + same level = same output (mtime=0 eliminates timestamp non-determinism)",
+    "Python brotli is deterministic: same input + same level = same output",
+    "Body-only discrimination is NOT tautological here \u2014 compression directly attacks the body hash",
+    "Seed=44 for request ordering (deterministic across runs)",
+    "Keycloak 25.0 start-dev does not itself compress responses (verified: Content-Encoding=none on direct requests)",
+    "This is materially different from EXP-RUNTIME-34654566605: parent tested per-request random compression (worst-case non-determinism); this experiment tests deterministic compression per client (realistic CDN model)"
+  ],
+  "unresolved": [
+    "Does body-only discrimination survive multiple stacked infrastructure layers with correlated compression?",
+    "Does the result generalize to non-Keycloak OAuth/OIDC providers (Auth0, Okta)?",
+    "Does body-only degradation generalize to larger/more diverse body content-types and sizes?",
+    "What discrimination floor remains when hashing decompressed bodies (normalization layer)?",
+    "Would a filtered full-vector baseline (status+WWW-Authenticate+Cache-Control+body_hash) survive compression?",
+    "What is minimal compression entropy required to collapse body-only below usable threshold?",
+    "Does result generalize to production Keycloak with real CDN, load-balancer, or rate-limiting?"
+  ]
+}

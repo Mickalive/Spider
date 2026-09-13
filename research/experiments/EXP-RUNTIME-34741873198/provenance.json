@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-34741873198",
+  "lane": "runtime",
+  "github_run_id": "34741873198",
+  "github_run_attempt": null,
+  "base_sha": "f96912acd91c39c50c88a274e84a66030bf45afa",
+  "executed_at": "2026-09-13T06:30:00.000000+00:00",
+  "environment": {
+    "python_version": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "platform": "linux"
+  },
+  "keycloak": {
+    "image": "quay.io/keycloak/keycloak:25.0",
+    "mode": "start-dev",
+    "port": 18080,
+    "realm": "spider-test",
+    "client": "spider-client"
+  },
+  "proxy": {
+    "port": 18081,
+    "type": "Python HTTPServer reverse proxy with CDN-style Accept-Encoding negotiation",
+    "client_profiles": {
+      "A_br_gzip": {
+        "accept_encoding": "br, gzip",
+        "selected_algorithm": "br",
+        "description": "Client A: CDN selects brotli (highest priority)"
+      },
+      "B_gzip_only": {
+        "accept_encoding": "gzip",
+        "selected_algorithm": "gzip",
+        "description": "Client B: CDN selects gzip (only option)"
+      },
+      "C_identity": {
+        "accept_encoding": "identity",
+        "selected_algorithm": "identity",
+        "description": "Client C: CDN selects identity (no compression)"
+      }
+    },
+    "algorithms": ["gzip", "brotli", "identity"],
+    "brotli_available": true,
+    "negotiation_logic": "br > gzip > identity (deterministic per client)"
+  },
+  "artifacts": {
+    "raw_observations": {
+      "path": "raw_observations.json",
+      "sha256": "58c2937267f4d2948907664d5ca8835f27fb50e556c91ee49b4421568da2d331",
+      "total_observations": 240
+    },
+    "run_experiment": {
+      "path": "run_experiment.py",
+      "sha256": "634115bde76e434e75d547a148cd98d7e2085e66927f19fa3c2470bcdfa66769"
+    }
+  },
+  "fingerprint_algorithm": {
+    "body_only": "SHA-256(repr((status, body_sha256, '')))",
+    "body_hash_source": "compressed bytes received by client (wire bytes)",
+    "excluded_headers": ["date", "server", "x-request-id"]
+  },
+  "cdn_negotiation_model": {
+    "description": "CDN reads client's Accept-Encoding header and deterministically selects the highest-priority algorithm the client supports (br > gzip > identity). Same Accept-Encoding always produces same algorithm.",
+    "client_profiles": {
+      "A_br_gzip": "Accept-Encoding: br, gzip → CDN selects brotli",
+      "B_gzip_only": "Accept-Encoding: gzip → CDN selects gzip",
+      "C_identity": "Accept-Encoding: identity → CDN selects identity"
+    },
+    "determinism_guarantee": "Same Accept-Encoding → same algorithm → same compressed output for same logical body → deterministic body hash"
+  },
+  "compression_conditions": {
+    "identity": "No compression, Content-Encoding: none",
+    "brotli": "Brotli quality=6, deterministic output",
+    "gzip": "Gzip level 9, mtime=0 (deterministic output)"
+  },
+  "parent_experiment": "EXP-RUNTIME-34654566605",
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-34654566605",
+    "path": "research/experiments/EXP-RUNTIME-34654566605/handoff.json",
+    "sha256": "c50d276a6e62898cf5ab92dec17188e3ba27e7bb094996d3695d0d0efcb21d78"
+  },
+  "frozen_spec_hash": "f20fa9b611eacc2c3e6c787369c38dd769139776176cffaa1cec253fb5bc672d",
+  "frozen_prereg_hash": "7260867d2b5a3b7650328ef467d83bb5228b6a2cbbb223b5f927335820eeb316",
+  "frozen_request_hash": "839a29f8e0fb8c6c6b11ff1737229b0bcc9d4a0aaf4ca1b8a813f38e63c9645a",
+  "total_requests": 240,
+  "sample_size": "4 auth states × 10 reps × 3 client profiles × 2 endpoints = 240",
+  "seed": 44,
+  "jitter_ms": "50-150ms uniform"
+}
