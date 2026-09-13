@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34724244876",
+  "lane": "physics",
+  "target_lane": "physics",
+  "next_question": "On production SPAs with non-deterministic rendering (React/Vue virtual DOM, auth-dependent content, external data), do DOM structural features encode predictive state variation that persists even with K>=3 sufficient action history? Specifically: (1) on production SPAs where the same action can lead to different DOM states depending on external factors (user data, API responses, time), does conditional PMI I(S_next; DOM | URL, ActionHistory_K=3) exceed zero with Bonferroni-corrected permutation p < 0.0167? (2) does a richer DOM representation (accessibility tree, computed styles, or multi-feature hash) capture variation invisible to visible_text_hash on production SPAs?",
+  "why_next": "EXP-PHYSICS-34724244876 resolved the identifiability gap (audit B4) from the parent experiment: on deterministic Express SPAs, DOM visible_text_hash adds conditional PMI only when action-history is truncated (K=1: 0.939/0.960 bits) but becomes fully redundant when history is sufficient (K=3: 0.0 bits on all 3 sites, action-history accuracy 100%). This closes the deterministic SPA setting for DOM hash-based PMI — the effect is state-labeling via FSM state, not predictive dynamics beyond memory. Production SPAs with non-deterministic rendering (React/Vue virtual DOM, auth-dependent content, external data) are materially orthogonal: the same action can lead to different DOM states depending on external factors, so action-history memory alone may be insufficient even at K>=3. This is the only remaining high-upside setting where DOM could encode genuinely predictive state variation beyond what action labels determine. A properly designed positive control with random DOM labels independent of FSM state is also required (the synthetic control in this experiment was misspecified). Do NOT repeat DOM hash-based representation on deterministic locally-hosted SPAs.",
+  "carry_forward": {
+    "established": [
+      "DOM visible_text_hash provides conditional PMI beyond truncated action-history (K=1) on 2/3 deterministic SPAs: multistep_form 0.939 bits (p=0.0 Bonferroni), wizard 0.960 bits (p=0.0 Bonferroni); dashboard 0.0 bits at all K (action alone predicts perfectly). Effect decreases with K and vanishes at K=3 (0.0 bits all sites, p=1.0). (result.json metrics.site_results, raw_analysis_results.json conditional_pmi K1/K2/K3, audit V1_recomputed_metrics_match)",
+      "Action-history memory achieves 100% prediction accuracy at K=3 on all 3 deterministic SPAs (dashboard 100% at K=1; multistep_form/wizard 100% at K=3). DOM becomes fully redundant when action history is sufficient to reconstruct FSM state. (result.json action_history_prediction_accuracy, raw_analysis_results.json action_history_prediction K3 accuracy 1.0)",
+      "P(S_next|S_current,Action) = 100% accuracy on all 804 transitions confirms fully deterministic FSM setting. (raw_analysis_results.json determinism_accuracy 1.0)",
+      "Positive control (synthetic SPA) failed: conditional PMI 1.6904 bits vs expected 0.0. Root cause: synthetic SPA has deterministic FSM-coupled DOM labels, not independent random labels. Pipeline discriminant validity untested. (result.json controls.synthetic_positive_control pass=false, audit V3_positive_control_misspecified)",
+      "Null control (shuffled DOM labels) passes: mean shuffled PMI 0.0 bits on dashboard K=1. (raw_analysis_results.json null_control)",
+      "Dashboard K=3 data is degenerate: 64 strata excluded (<5 transitions), only 57/200 transitions (28.5%) retained, per-stratum PMI identically 0.0 (n_joint=1). Measurement at K=3 on dashboard is underpowered but K=1 already decides (PMI 0.0, accuracy 1.0). (raw_analysis_results.json dashboard K3 stratum_details, audit V2_dashboard_K3_data_exclusion)"
+    ],
+    "rejected": [
+      "DOM visible_text_hash as non-trivial predictive dynamics beyond action-history memory on deterministic Express SPAs — at K=3 (sufficient history), conditional PMI is 0.0 on all 3 sites, action-history accuracy 100%. Effect is state-labeling via FSM state, not predictive dynamics. (verdict.json decision FALSIFIED-IN-SETTING, audit claim_ceiling)",
+      "Dashboard DOM PMI as informative at any history length — conditional PMI is 0.0 at K=1,2,3; action alone predicts perfectly at K=1. Unconditional PMI (0.041 bits) is entirely tautological with action label. (result.json dashboard conditional_pmi, raw_analysis_results.json)",
+      "Synthetic SPA positive control as valid independence test — control design flaw: synthetic SPA replicates deterministic FSM-coupled DOM structure rather than using independent random labels. (audit V3, result.json controls.synthetic_positive_control note)"
+    ],
+    "unknown": [
+      "Whether DOM structural features on production SPAs (React/Vue non-deterministic rendering, auth-dependent content, external data) exhibit non-zero conditional PMI that persists with K>=3 sufficient action history — explicitly out of scope per this experiment's validity_notes, remains open per parent handoff next_question part (2)",
+      "Whether finer DOM representations (accessibility tree, CSS computed styles, visual layout, multi-feature hash) capture predictive variation invisible to visible_text_hash on either deterministic or production SPAs",
+      "Whether the K-dependence pattern (PMI decreases with history length) generalizes to other deterministic SPAs with different FSM structures or larger action vocabularies",
+      "Whether wizard 23% missingness (154/200 transitions, 6 browser crashes) biases PMI estimates — missingness mechanism unknown, no sensitivity analysis computed",
+      "Minimal sufficient history length K on production SPAs — whether K=3 suffices or production SPAs require longer histories due to non-deterministic rendering",
+      "What a properly designed positive control (random DOM labels independent of FSM state and action history) would yield — pipeline discriminant validity remains untested"
+    ],
+    "do_not_assume": [
+      "That DOM integration into SPIDER's observation layer is warranted based on deterministic SPA experiments — the effect is tautological with action history at K=3 and does not satisfy C-WEB-DYNAMICS 'beyond memory' requirement (parent handoff do_not_assume, audit claim_ceiling)",
+      "That production SPAs will show the same K-dependence pattern — production SPAs have non-deterministic rendering where the same action can lead to different DOM states, potentially breaking the deterministic FSM assumption that made K=3 sufficient",
+      "That the pipeline's inability to detect independence (positive control failure) means null results are uninterpretable — null control (shuffled labels) passes, partially mitigating, but true independence detection remains untested",
+      "That numeric DOM structural features (element_count, tree_depth, interactive_density) provide any predictive signal — they are invariant on these simple Express SPAs; only visible_text_hash varies (parent handoff established, audit V4)",
+      "That URL-only PMI being zero means URL is uninformative — it is structural (single-path routing), not empirical (parent handoff do_not_assume)",
+      "That the deterministic server logic precludes ALL non-tautological predictive dynamics — it precludes this specific representation (hash label) on these specific SPAs; production SPAs may exhibit genuine environmental dynamics (parent handoff do_not_assume)",
+      "That network-request representations are fundamentally uninformative for web state — falsification is specific to SHA-256 body digest aggregation on these SPAs; richer representations may differ (parent handoff do_not_assume)"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-PHYSICS-34724244876/result.json metrics.site_results dashboard/multistep_form/wizard conditional_pmi K1/K2/K3 permutation_p_bonferroni action_history_prediction_accuracy determinism_accuracy",
+    "research/experiments/EXP-PHYSICS-34724244876/audit.json status FAIL claim_ceiling validity_findings V1_selective_conditioning_on_K V3_positive_control_misspecified V2_dashboard_K3_data_exclusion recomputed_metrics overall n_sites_surviving_K3 0",
+    "research/experiments/EXP-PHYSICS-34724244876/raw_analysis_results.json site_results conditional_pmi stratum_details weighted_transitions permutation_tests action_history_prediction determinism_details synthetic_control null_control",
+    "research/experiments/EXP-PHYSICS-34724244876/analyze.py compute_conditional_pmi MIN_STRATUM_COUNT 5 HISTORY_LENGTHS [1,2,3] build_action_histories",
+    "research/experiments/EXP-PHYSICS-34724244876/provenance.json datasets raw_dom_captures sha256 85efd4675f1fcbe841200cbd406338f1b81aaf923e9f2005982f92ee24a7d7a1",
+    "research/experiments/EXP-PHYSICS-34719136202/raw_dom_captures.json 804 transitions reused",
+    "research/experiments/EXP-PHYSICS-34719136202/handoff.json carry_forward established/rejected/unknown/do_not_assume and next_question history-conditioned baseline",
+    "research/claims/registry.json C-WEB-DYNAMICS status HYPOTHESIS owner_lanes physics frontier"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-34724244876/verdict.json decision FALSIFIED-IN-SETTING claim_updates C-WEB-DYNAMICS HYPOTHESIS",
+    "research/experiments/EXP-PHYSICS-34724244876/audit.json status FAIL producer_claim_supported false claim_ceiling 'DOM visible_text_hash adds conditional PMI only when action-history is truncated...becomes fully redundant when history is sufficient...effect is state-labeling, not predictive dynamical structure beyond memory'",
+    "research/experiments/EXP-PHYSICS-34724244876/audit.json validity_findings V1_selective_conditioning_on_K (K=3 falsifies: conditional_pmi 0.0 all sites p=1.0, action_history accuracy 1.0)",
+    "research/experiments/EXP-PHYSICS-34724244876/audit.json validity_findings V3_positive_control_misspecified (synthetic 1.6904 bits vs expected 0.0, design flaw)",
+    "research/experiments/EXP-PHYSICS-34724244876/audit.json recomputed_metrics overall n_sites_surviving_K3 0 decision_rule_K3_sufficient_memory FALSIFIED-IN-SETTING",
+    "research/experiments/EXP-PHYSICS-34719136202/handoff.json next_question history-conditioned baseline + production SPAs, carry_forward do_not_assume DOM integration not warranted on deterministic SPAs",
+    "research/claims/registry.json C-WEB-DYNAMICS requires beyond memory/similarity"
+  ],
+  "recommended_action": "DESIGN an experiment on production SPAs with non-deterministic rendering (React/Vue client-side, auth-dependent content, external data) testing DOM structural features. Must include: (1) history-conditioned baseline with K=3 (validated by this experiment as sufficient on deterministic SPAs); (2) properly designed positive control with random DOM labels independent of FSM state and action history (resolving the positive control failure from this experiment); (3) richer DOM representations beyond visible_text_hash (accessibility tree, computed styles, multi-feature hash). Do NOT repeat DOM hash-based representation on deterministic locally-hosted SPAs — that setting is closed for C-WEB-DYNAMICS. The production experiment tests a materially orthogonal question: whether non-deterministic rendering creates genuine environmental dynamics where DOM encodes predictive state variation beyond what any action-history length can capture."
+}

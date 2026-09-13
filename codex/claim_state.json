@@ -75,6 +75,14 @@
         "reason": "KDE with cross-validated bandwidth partially detects scaling-type dynamics (Spearman rho=0.714, p=0.023 > Bonferroni threshold 0.0167) but fails rotation-type dynamics (rho=0.286, p=0.246), demonstrating complementary blind spots with kNN TV (which fails scaling rho=-0.12 but detects rotation rho=0.93). Experiment is MEASUREMENT_INVALID per frozen decision_rule: rotation JS CV=0.981 > 0.5 at lambda=1 (result.json:controls.js_cv_lambda1.cv_per_function.42). Even without the CV trigger, function invariance fails (ANOVA interaction p~5e-8, R2=0.56) and per-function Spearman fails for rotation and scaling after Bonferroni correction. Aggregate rho=0.833 p=0.005 is driven by translation/scaling, masking heterogeneity. No single density-divergence estimator (kNN TV or KDE) works uniformly across all function families in this 10D non-Gaussian DGP \u2014 they have complementary blind spots (kNN fails scaling, KDE fails rotation). C-WEB-DYNAMICS claim ceiling bounded to: action-dependent structure detectable by at least one estimator only for translation-like dynamics; scaling and rotation detection remain estimator-dependent and unstable. Synthetic-to-real gap persists; no inference to real Web transitions."
       },
       {
+        "experiment_id": "EXP-FRONTIER-34729238832",
+        "lane": "frontier",
+        "decision": "FALSIFIED-IN-SETTING",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "PCA projection to 2D-3D subspaces before binned TV divergence does NOT simultaneously detect scaling-type and rotation-type action-dependent structure in 10D non-Gaussian DGP. Scaling fails in 2D (rho=0.6429<0.65, p=0.043>0.0167 Bonferroni) and all three functions fail in 3D (all rho=0.6429). ANOVA function x lambda interaction decisively fails (2D p~3e-11, 3D p=0.007). The curse-of-dimensionality hypothesis \u2014 that per-function heterogeneity is a high-dimensional artifact recoverable by dimensionality reduction \u2014 is FALSIFIED in this linear PCA + binned TV setting. Claim ceiling remains narrowed to synthetic 10D; C-WEB-DYNAMICS continues as HYPOTHESIS with claim domain restricted to translation-like dynamics in synthetic DGP. No product promotion warranted."
+      },
+      {
         "experiment_id": "EXP-PHYSICS-33528829431",
         "lane": "physics",
         "decision": "REVISE",
@@ -177,6 +185,14 @@
         "claim_id": "C-WEB-DYNAMICS",
         "status": "HYPOTHESIS",
         "reason": "DOM visible_text_hash provides statistically significant PMI over URL-only structural zero on 3/3 locally-hosted SPAs (dashboard +1.006 bits, multistep_form +0.286 bits, wizard +0.438 bits, all Bonferroni p=0.003) \u2014 first non-zero representation where request/response network signals are 0.0 bits. However, the effect is: (a) entirely driven by hash-based step label (numeric DOM structural features \u2014 element_count, tree_depth, interactive_density, form_count \u2014 are degenerate/invariant across all transitions); (b) substantially tautological with action label on ALL sites (MI(action;DOM) 1.99/0.47/0.47 bits = 198%/163%/107% of PMI, audit V1_v1_tautology_all_sites); and (c) not tested against history/memory baseline required by physics identifiability (audit B4). Per prereg section 12.3, tautological positive is 'Not a valid positive for C-WEB-DYNAMICS'. C-WEB-DYNAMICS remains HYPOTHESIS. The DOM hash signal demonstrates that rendered-page text hashing recovers deterministic finite-state machine state that network digests miss, but does not demonstrate predictive dynamical structure beyond memory/similarity or action->DOM causality on these simulation SPAs."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-34724244876",
+        "lane": "physics",
+        "decision": "FALSIFIED-IN-SETTING",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "On locally-hosted deterministic Express SPAs, DOM visible_text_hash adds conditional PMI beyond truncated action-history (K=1: 0.939/0.960 bits on multistep_form/wizard, p<0.0167) but adds zero PMI when history is sufficient to determine FSM state (K=3: 0.0 bits on all 3 sites, p=1.0, action-history accuracy 100%). Dashboard adds zero at all K. C-WEB-DYNAMICS requires 'predictive dynamical structure beyond memory and ordinary similarity'; DOM becomes fully redundant with sufficient history (K=3), so beyond-memory dynamics is not demonstrated on these SPAs. The effect is state-labeling / memory compression via DOM hash, not persistent environmental dynamics. Falsification is bounded to deterministic Express SPAs with limited action vocabularies and hash-based DOM representation."
       }
     ],
     "C-PARAM-INHERIT": [
@@ -405,6 +421,16 @@
         "claim_id": "C-SEMANTIC-RESOLVE",
         "status": "EXPERIMENTAL",
         "reason": "Kernel is deterministic exact-intent matcher (kernel.py L97) with no URL template analysis. Confirmed for complex aliasing: query-param (/posts/${id} vs /posts?id=${id}), path-rewriting (/users/${id}/posts vs /users?userId=${id}/posts), server-side routing (/albums/${id}/photos vs /photos?albumId=${id}). Combined 0/16 aliased-first correct across this experiment (0/6, p=0.016) and parent EXP-GRAPH-34409639346 (0/10, p=1.0). HTTP status-code grounding falsified on jsonplaceholder: 0/12 status differences despite 2 asymmetric scenarios designed to produce 404. Body-based grounding is exploratory and non-autonomous: body-difference metric measures whether selected and alternative responses differ, not which is correct; requires external schema oracle; produces false positives for functionally equivalent templates (A list vs dict artifact, F 100 vs 0 posts). Claim bounded to proof-of-concept: equal confidence 0.9, preconditions={}, applicability_guards={}, GET only, synthetic intents, single test API. Broader generalization to confidence-differentiated aliasing, guard/context scenarios, POST/PUT/DELETE, or strict APIs not tested."
+      }
+    ],
+    "C-FRESHNESS": [
+      {
+        "experiment_id": "EXP-GRAPH-34711403174",
+        "lane": "graph",
+        "decision": "SURVIVES_CURRENT_TEST",
+        "claim_id": "C-FRESHNESS",
+        "status": "EXPERIMENTAL",
+        "reason": "Proof-of-concept support: structural add/remove/change-type drift on 3-4 field flat schemas detected by Jaccard (field_path,type) at threshold 0.85 with TP=1.0, FP=0.0 in deterministic mock. Does NOT support general staleness detection, real Web endpoints, nested/optional/value/semantic drift, schemas with >=10 fields, or calibrated FP rate <0.10 at confidence (CI includes 0.27 on n=10, 0.13 on n=25)."
       }
     ],
     "C-CROSSSITE": [
@@ -685,6 +711,14 @@
         "claim_id": "C-MEAS-VALID",
         "status": "EXPERIMENTAL",
         "reason": "Positive control passes (body-only 0.5 >= 0.35), null control passes (B-RANDOM 0.0), all 6 preregistered controls pass, audit PASS with all metrics recomputed. Measurement substrate is intervention-valid under the synthetic reverse-proxy model tested. Claim ceiling bounded by audit: does NOT extend to filtered full-vector, real CDN behavior, body non-determinism from compression, stacked infrastructure, or non-Keycloak providers. Body-only invariance is tautological by construction (headers excluded from fingerprint, proxy preserves bodies)."
+      },
+      {
+        "experiment_id": "EXP-RUNTIME-34654566605",
+        "lane": "runtime",
+        "decision": "SURVIVES_CURRENT_TEST",
+        "claim_id": "C-MEAS-VALID",
+        "status": "EXPERIMENTAL",
+        "reason": "Body-only discrimination degrades monotonically under synthetic per-request random compression (Spearman rho -0.948, n=4, p=0.051). Fixed deterministic gzip preserves discrimination. Claim ceiling narrowed: body-only valid only when compression is deterministic or absent; degrades under per-request random algorithm/level variation on Keycloak 25.0 start-dev /userinfo and /introspect with small bodies (0-729 bytes). Not production-ready for CDN-proxied environments without compression normalization or deterministic compression guarantee. Audit V5 bounded to synthetic random model; real CDN negotiation may differ."
       }
     ]
   }

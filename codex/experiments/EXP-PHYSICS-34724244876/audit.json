@@ -1,0 +1,186 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34724244876",
+  "lane": "physics",
+  "status": "FAIL",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Correct decision-rule application: spec.json and prereg.md require testing conditional PMI I(S_next;DOM|URL,ActionHistory) with history lengths K=1,2,3. Producer declares SURVIVES_CURRENT_TEST based on K=1 (0.939/0.960 bits, p=0.0 on multistep_form/wizard, 2/3 sites) while K=3 shows 0.0 bits, p=1.0 on ALL 3 sites with action-history prediction 100% at K=3. For C-WEB-DYNAMICS 'beyond memory' claim the sufficient-history conditioning (K=3) is the discriminating test; truncated-history (K=1,2) demonstrates DOM as lossy memory proxy not persistent dynamics. Verdict must be reported as FALSIFIED-IN-SETTING for beyond-memory dynamics, with K-dependence disclosed prominently, not as SURVIVES based on K=1 alone.",
+    "Redesign positive control: synthetic_positive_control conditional_pmi_K1=1.6904 bits observed vs expected 0.0 (FAIL) because synthetic SPA uses deterministic FSM-coupled DOM labels (visible_text_hash 7 uniques, element_count constant 14, same causal structure as real SPAs). This is prereg 9.1 design flaw, not pipeline failure, but means independence detection was never tested. Provide true independence control with random DOM labels independent of action history and FSM state, or bound claim to note pipeline discriminant validity untested.",
+    "Disclose and bound dashboard K=3 fragility: 73 distinct strata at K=3, 64 strata <5 transitions excluded, only 57/200 transitions (28.5%) retained for PMI computation; 143/200 excluded as rare 3-grams. Dashboard K=3 PMI=0.0 is degenerate (each retained stratum has n_joint=1, PMI identically 0). Report effective N and power for this K, and note that dashboard inference is already decided at K=1 (1.0 accuracy) so K=3 exclusion does not rescue beyond-memory claim.",
+    "Bound C-WEB-DYNAMICS claim ceiling: producer outcome SUPPORTS / SURVIVES overstates beyond-memory dynamics. Correct ceiling is narrow: DOM visible_text_hash provides conditional PMI only when action-history is truncated (K=1: 0.939/0.960 bits; K=2: 0.344/0.413 bits) but becomes fully redundant with sufficient history (K=3: 0.0 bits on all sites, p=1.0) where action-history alone achieves 100% determinism. This is state-labeling / memory compression via DOM, not environmental dynamics beyond memory.",
+    "Address wizard 23% data loss consistently: 154/200 transitions (6 browser crashes per parent provenance) — missingness mechanism unknown, n=31 at threshold for parent but here K3 uses all 154. Provide sensitivity: whether crash correlates with step/action and whether pattern replicates excluding wizard or on full 200 if imputed."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_selective_conditioning_on_K",
+      "severity": "major",
+      "finding": "Producer verdict SURVIVES rests on K=1 truncated history (2/3 sites >0.1 bits, p<0.0167) while sufficient history K=3 falsifies: conditional_pmi K3=0.0 bits on dashboard, multistep_form, wizard (all p=1.0, weighted_transitions 57/200/154) and action_history_prediction_accuracy K3=1.0 on all sites. C-WEB-DYNAMICS requires 'beyond memory'; K=3 is the strong memory baseline where DOM must exceed memory to count. Decreasing PMI with K (0.94->0.34->0.0 and 0.96->0.41->0.0) confirms DOM information is subsumed by longer histories. Selecting K=1 violates prereg expectation that longer history captures more dependency (prereg 10.2) and misapplies decision rule intent.",
+      "evidence": "result.json metrics.site_results.*.conditional_pmi K1 0.0/0.9387/0.9598 vs K3 0.0/0.0/0.0; raw_analysis_results.json conditional_pmi K3 weighted_transitions 57,200,154 valued 0.0; action_history_prediction K3 accuracy 1.0 all sites; analyze.py HISTORY_LENGTHS [1,2,3] and decision logic at K=1 only; spec.json falsifier and prereg 11.1/11.2 ambiguity on K"
+    },
+    {
+      "id": "V2_dashboard_K3_data_exclusion",
+      "severity": "moderate",
+      "finding": "Dashboard K=3 retains only 9 strata from 57 transitions (28.5% of 200) due to MIN_STRATUM_COUNT=5 pruning; 64 strata with <5 excluded (143 transitions discarded). Per-stratum PMI identically 0.0 (n_joint=1, n_marginal_r=1, n_marginal_s=1) making both observed and permuted PMI degenerate 0.0 (perm_mean 0.0 perm_std 0.0 p=1.0). Measurement at K=3 on dashboard is underpowered / degenerate, though K=1 already decides dashboard (PMI 0.0, accuracy 1.0). Multistep_form/wizard K=3 retain all transitions (6 strata, 200/154).",
+      "evidence": "raw_analysis_results.json dashboard conditional_pmi K3 stratum_details 9 entries, weighted_transitions 57, permutation_tests K3 perm_mean 0.0; analyze.py MIN_STRATUM_COUNT=5; validity_notes acknowledges <5 exclusion but understates 71.5% exclusion on dashboard"
+    },
+    {
+      "id": "V3_positive_control_misspecified",
+      "severity": "major",
+      "finding": "synthetic_positive_control expected conditional PMI ~0.0 (independent DOM) but observed 1.6904 bits FAIL. Root cause confirmed: synthetic SPA has deterministic FSM-coupled DOM labels (same generation as real SPAs, 7 DOM states coupled to 8 FSM states), not independent random labels. Control replicates causal structure under test rather than testing independence. Pipeline correctly detects DOM-state association (not a pipeline failure), but discriminant validity (ability to return 0 when independent) remains untested. Null_control_shuffled_dom on dashboard K=1 passes (null_mean_pmi 0.0), showing pipeline can return 0 after label permutation, partially mitigating but not replacing independence control.",
+      "evidence": "result.json controls.synthetic_positive_control conditional_pmi_K1 1.6904 expected 0.0 pass false note 'design flaw'; raw_dom_captures.json synthetic: 250 transitions, 7 unique visible_text_hash, constant element_count 14 vs real SPA structure; raw_analysis_results.json synthetic_control stratum_details PMIs 1.51/2.06/1.53/1.67; analyze.py compute_synthetic_conditional_pmi builds history K=1 same deterministic coupling"
+    },
+    {
+      "id": "V4_representation_collapse_to_hash",
+      "severity": "moderate",
+      "finding": "Conditional PMI signal is driven entirely by visible_text_hash categorical (4 uniques per SPA, 7 on synthetic); numeric DOM features (element_count, tree_depth, interactive_density, form_count, input_count, button_count) invariant as in parent audit. Computation uses only visible_text_hash as dom_features key (analyze.py state_before dom_features visible_text_hash). No variation in numeric features, no test of finer DOM structure. Acknowledged in prereg validity threat 10.3 and result validity_notes but not ablated.",
+      "evidence": "analyze.py compute_conditional_pmi r = state_before dom_features visible_text_hash; raw_dom_captures.json dashboard element_count 16 constant, tree_depth 5 constant etc; parent audit V2_representation_collapse_to_hash"
+    },
+    {
+      "id": "V5_recomputed_metrics_match",
+      "severity": "info",
+      "finding": "Independent recomputation reproduces all producer metrics exactly within floating tolerance: dashboard conditional PMI 0.0/0.0/0.0 unconditional 0.04052336226790714; multistep_form conditional 0.9387218755408671/0.3443609377704336/0.0 unconditional 1.061278124459133; wizard conditional 0.9597803936207233/0.41317708395045377/0.0 unconditional 0.9223453027932199; determinism_accuracy 1.0 all sites; action-history accuracies 1.0/1.0/1.0 dashboard, 0.75/0.875/1.0 multistep, 0.7403/0.8701/1.0 wizard; permutation p-values as reported (0.0 vs 1.0). Arithmetic correct.",
+      "evidence": "raw_analysis_results.json site_results.*.conditional_pmi perm_tests; reproduction via analyze.py logic with same MIN_STRATUM_COUNT=5, random.seed 42, strata weighting; provenance.json seed 42 PYTHONHASHSEED 0"
+    },
+    {
+      "id": "V6_determinism_confirmed",
+      "severity": "info",
+      "finding": "P(S_next|S_current,Action) = 1.0 accuracy on all 804 transitions (200+200+154) confirms deterministic FSM setting inherited from parent. Multistep_form has only 5 distinct (S_current,Action)->S_next mappings; wizard 5; dashboard 16. Validates setting scope: deterministic Express SPAs on localhost, not production.",
+      "evidence": "raw_analysis_results.json determinism_accuracy 1.0 determinism_details per site; recomputed mapping confirms; report.md deterministic check"
+    },
+    {
+      "id": "V7_permutation_correct_but_degenerate_at_K3",
+      "severity": "moderate",
+      "finding": "Permutation test shuffles DOM labels within action-history strata (preserving history distribution) per prereg 6.21. Correct for K=1/K=2 where strata have multiple joint outcomes (e.g., multistep_form K1 stratum ('button_click:next',) pmi 1.2516, perm_mean 0.0227). At K=3 with 0.0 observed (all strata n_joint=1), all permutations also 0.0 (perm_mean 0.0 p=1.0 trivially). At dashboard K=1 each stratum has n_marginal_s=1 (single next state per action), so PMI identically 0 in all permutations — test valid but powerless. Bonferroni p = min(p_raw*3,1) correctly applied.",
+      "evidence": "analyze.py permutation_test_conditional_pmi shuffling dom_before within strata; raw_analysis_results.json permutation_tests K1 p 0.0 perm_mean ~0.02 vs K3 perm_mean 0.0; result.json permutation_p_bonferroni"
+    },
+    {
+      "id": "V8_wizard_data_loss",
+      "severity": "moderate",
+      "finding": "Wizard 154/200 transitions (23% loss, 31 trajectories vs 40) from parent experiment. Missingness mechanism unknown, not correlated analysis. K=3 result on wizard uses all 154 and pattern matches multistep_form (K1->K3 decreasing PMI, K3 accuracy 1.0). Bounded impact given consistency, but sensitivity excluding wizard still yields 1/2 surviving at K=1 (dashboard fails), still meeting >=2/3 only if wizard counted, so loss influences decision threshold. No evidence of selective missingness biasing toward survival.",
+      "evidence": "provenance.json datasets raw_dom_captures wizard 154; report.md wizard section; validity_notes acknowledges 154/200 unknown mechanism"
+    },
+    {
+      "id": "V9_no_leakage_temporal",
+      "severity": "info",
+      "finding": "No discretization leakage: no train/test split or bin fitting in this computational reanalysis; all distributions empirical on full data. Action history constructed from trajectory step ordering with <START> padding, no future information. Good.",
+      "evidence": "analyze.py build_action_histories grouping by trajectory_id sorted step; compute_conditional_pmi uses empirical Counter on strata"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B1_action_history_memory_strong_baseline",
+      "finding": "Strongest baseline is action-history memory itself: P(S_next|ActionHistory_K). This is the correct Physics beyond-memory null. Producer implements it properly via strata prediction (most frequent S_next per history). Results show K=1 insufficient (multistep 0.75, wizard 0.74) but K=3 sufficient (1.0) — DOM conditional PMI mirrors history sufficiency exactly. History alone defeats DOM at K=3, so DOM does not exceed strong baseline.",
+      "verdict": "PASS_BUT_DEFEATS_CLAIM"
+    },
+    {
+      "id": "B2_url_only_structural_zero",
+      "finding": "URL-only baseline correctly structural zero (single path per SPA, unconditional PMI reproduces dashboard 0.0405 multistep 1.061 wizard 0.922). Improvement over URL-only is trivial if DOM varies; not discriminative vs memory. Retained from parent but correctly supplemented by history baseline here.",
+      "verdict": "PASS_WITH_NOTE_STRUCTURAL"
+    },
+    {
+      "id": "B3_frequency_null_marginal",
+      "finding": "Frequency null P(S_next) accuracy dashboard 0.285 wizard 0.4935 multistep 0.5 (result.json frequency_null_accuracy) far below history-conditioned accuracy, correctly showing marginal is weak. Reported but not central.",
+      "verdict": "PASS"
+    },
+    {
+      "id": "B4_determinism_control",
+      "finding": "Determinism control PASS: 1.0 on all sites validates deterministic FSM premise and data integrity. Required by prereg 9.3/11.1.",
+      "verdict": "PASS"
+    },
+    {
+      "id": "B5_unconditional_vs_conditional_delta",
+      "finding": "Delta unconditional - conditional small at K=1 (multistep 0.1226, wizard -0.0374) shows unconditional PMI already largely conditional on short history, not large beyond-history signal. At K=3 delta equals full unconditional (1.061/0.922), confirming full subsumption. Correctly computed but interpretation in report obscures that K=1 PMI is not 'beyond' but 'when history truncated'.",
+      "verdict": "PASS_WITH_INTERPRETATION_NOTE"
+    }
+  ],
+  "recomputed_metrics": {
+    "dashboard": {
+      "conditional_pmi_K1": 0.0,
+      "conditional_pmi_K2": 0.0,
+      "conditional_pmi_K3": 0.0,
+      "unconditional_pmi": 0.04052336226790714,
+      "delta_K1": 0.04052336226790714,
+      "permutation_p_K1_bonferroni": 1.0,
+      "permutation_p_K3_bonferroni": 1.0,
+      "action_history_accuracy_K1": 1.0,
+      "action_history_accuracy_K3": 1.0,
+      "n_transitions": 200,
+      "weighted_transitions_K3": 57,
+      "recomputed_match": true
+    },
+    "multistep_form": {
+      "conditional_pmi_K1": 0.9387218755408671,
+      "conditional_pmi_K2": 0.34436093777043353,
+      "conditional_pmi_K3": 0.0,
+      "unconditional_pmi": 1.061278124459133,
+      "delta_K1": 0.12255624891826589,
+      "delta_K3": 1.061278124459133,
+      "permutation_p_K1_bonferroni": 0.0,
+      "permutation_p_K3_bonferroni": 1.0,
+      "perm_mean_K1": 0.022677507645624123,
+      "action_history_accuracy_K1": 0.75,
+      "action_history_accuracy_K2": 0.875,
+      "action_history_accuracy_K3": 1.0,
+      "n_transitions": 200,
+      "survives_threshold_K1": true,
+      "survives_threshold_K3": false,
+      "recomputed_match": true
+    },
+    "wizard": {
+      "conditional_pmi_K1": 0.9597803936207233,
+      "conditional_pmi_K2": 0.41317708395045377,
+      "conditional_pmi_K3": 0.0,
+      "unconditional_pmi": 0.9223453027932199,
+      "delta_K1": -0.0374350908275034,
+      "delta_K3": 0.9223453027932199,
+      "permutation_p_K1_bonferroni": 0.0,
+      "permutation_p_K3_bonferroni": 1.0,
+      "perm_mean_K1": 0.030518974321955224,
+      "action_history_accuracy_K1": 0.7402597402597403,
+      "action_history_accuracy_K2": 0.8701298701298701,
+      "action_history_accuracy_K3": 1.0,
+      "n_transitions": 154,
+      "survives_threshold_K1": true,
+      "survives_threshold_K3": false,
+      "recomputed_match": true
+    },
+    "overall": {
+      "n_sites_tested": 3,
+      "n_sites_surviving_K1": 2,
+      "n_sites_surviving_K3": 0,
+      "decision_rule_K1": "SURVIVES_CURRENT_TEST (per literal prereg at K=1)",
+      "decision_rule_K3_sufficient_memory": "FALSIFIED-IN-SETTING (0/3 sites, all p=1.0)",
+      "determinism_all_sites": 1.0,
+      "synthetic_positive_control_observed": 1.6903624871330734,
+      "synthetic_expected": 0.0,
+      "synthetic_pass": false,
+      "null_control_dashboard_K1_mean": 0.0,
+      "null_pass": true,
+      "pmi_threshold": 0.1,
+      "bonferroni_alpha": 0.0167,
+      "recomputation_method": "independent Python re-run of analyze.py logic on raw_dom_captures.json strata with MIN_STRATUM_COUNT 5, seed 42, weighted conditional PMI"
+    }
+  },
+  "claim_ceiling": "On locally-hosted deterministic Express SPAs (dashboard, multistep_form, wizard on localhost:3848-3850), DOM visible_text_hash adds conditional PMI beyond truncated action-history memory (K=1: 0.939 bits multistep_form, 0.960 bits wizard, p<0.0167 Bonferroni; K=2: 0.344/0.413 bits) but adds zero PMI when history is sufficient to determine FSM state (K=3: 0.0 bits on all 3 sites, p=1.0, action-history accuracy 100% at K=3). Dashboard adds zero at all K (action alone predicts perfectly). Deterministic mapping P(S_next|S_current,Action)=100% on all 804 transitions. Effect is therefore memory compression via DOM state-label, not predictive dynamical structure beyond memory/similarity as required by C-WEB-DYNAMICS. Does not justify DOM integration as non-trivial physics on deterministic SPAs; does not generalize to production SPAs with non-deterministic rendering. Measurement valid within scope; beyond-memory claim FALSIFIED-IN-SETTING.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-34724244876/spec.json#decision_rule and #question hypothesis falsifier",
+    "research/experiments/EXP-PHYSICS-34724244876/prereg.md#6 conditional PMI, #8 statistical tests, #9 controls, #11 decision rules",
+    "research/experiments/EXP-PHYSICS-34724244876/result.json#metrics.site_results dashboard/multistep_form/wizard conditional_pmi unconditional_pmi permutation_p_bonferroni determinism_accuracy",
+    "research/experiments/EXP-PHYSICS-34724244876/raw_analysis_results.json#site_results conditional_pmi stratum_details weighted_transitions permutation_tests action_history_prediction determinism_details synthetic_control null_control",
+    "research/experiments/EXP-PHYSICS-34724244876/analyze.py#build_action_histories compute_conditional_pmi permutation_test_conditional_pmi MIN_STRATUM_COUNT 5 HISTORY_LENGTHS [1,2,3]",
+    "research/experiments/EXP-PHYSICS-34724244876/report.md#decision rule application and #claim ceiling",
+    "research/experiments/EXP-PHYSICS-34724244876/provenance.json#datasets raw_dom_captures sha256 85efd4675f1fcbe841200cbd406338f1b81aaf923e9f2005982f92ee24a7d7a1 seed 42",
+    "research/experiments/EXP-PHYSICS-34719136202/raw_dom_captures.json (804 transitions reused, sha256 85efd4675f1fcbe841200cbd406338f1b81aaf923e9f2005982f92ee24a7d7a1)",
+    "research/experiments/EXP-PHYSICS-34719136202/handoff.json#carry_forward established/rejected/unknown/do_not_assume and #recommended_action history-conditioned baseline",
+    "research/claims/registry.json#C-WEB-DYNAMICS status HYPOTHESIS requires beyond memory/similarity"
+  ],
+  "unresolved": [
+    "True independence positive control still missing: pipeline never tested on synthetic data with random DOM labels independent of FSM state and action history. Current synthetic replicates deterministic coupling. Requires new synthetic generation.",
+    "Minimal sufficient history K varies by SPA vocabulary: dashboard K=1 sufficient (4 distinct tab actions each maps to unique next state), multistep/wizard K=3 sufficient due to repeated 'next' action requiring positional decoding. Whether K=3 sufficiency is general property of deterministic FSMs or specific to these 3-step sequences unknown.",
+    "Dashboard K=3 degenerate strata: whether alternative estimation (e.g., no pruning, or smoothing, or larger N) would yield non-zero PMI or whether zero is structural due to action determinism. Larger trajectories needed for stable K=3 estimate on dashboard.",
+    "Production SPA generalization: do DOM structural features on React/Vue non-deterministic SPAs exhibit non-zero conditional PMI that persists even with K>=3 sufficient memory? Explicitly out of scope per spec, remains open per request inherited_next_question part (2).",
+    "Wizard missingness sensitivity: impact of 23% lost transitions on bias — worst-case bounds if missing trajectories were low-PMI vs high-PMI not computed.",
+    "Alternative representation loss: would finer DOM features (accessibility tree, CSS computed styles, layout) add variation beyond hash that action history cannot capture? Not tested; hash collapse acknowledged."
+  ]
+}
