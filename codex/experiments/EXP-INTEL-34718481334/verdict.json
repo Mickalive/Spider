@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-34718481334",
+  "lane": "intel",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-CROSSSITE",
+      "status": "HYPOTHESIS",
+      "reason": "Experiment measured yield metric viability on a single Magento shopping site only. Cross-site transfer (GitLab/Reddit) was not tested. MEASUREMENT_INVALID verdict due to pseudoreplication (7 unique tasks < 8 threshold) and missing accessibility API prevents claim advancement. Bounded shopping-site diagnostic does not establish cross-site metric generalizability."
+    },
+    {
+      "claim_id": "C-LLM-INHERIT",
+      "status": "HYPOTHESIS",
+      "reason": "Experiment measured DOM-based yield metric properties, not LLM agent inheritance from SPIDER. No LLM agents were involved. MEASUREMENT_INVALID verdict prevents even the prerequisite metric claim from advancing. C-LLM-INHERIT remains at HYPOTHESIS pending both a valid yield metric and an LLM agent experiment."
+    }
+  ],
+  "product_action": "NONE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does the interactive fraction metric maintain within-type stability and between-type discrimination when the element definition is tightened to exclude form-descendant DIV/SPAN/LABEL (role-only counting: button, link, textbox, combobox, etc. without the form-membership clause), and what are the resulting per-type means — computable from existing EXP-INTEL-34718481334 raw measurement data without new Docker execution?",
+  "reason": "Frozen decision rule requires >=8 unique tasks (criterion 4) and no pipeline errors with positive_control passing (criterion 5). Both fail: (1) Cart pseudoreplication — rng.choices on single-URL cart_urls produced 2 identical measurements of http://localhost:8080/checkout/cart/ (raw_measurement_cart_1.json duplicated). Deduplicated unique successful tasks = 7 (3 listing + 3 detail + 1 cart), below the 8-task threshold. (2) Positive control requires Playwright accessibility.snapshot() >0 on at least 1 task; API is absent ('Page' object has no attribute 'accessibility'), all a11y_node_count=0 across all tasks. The frozen rule explicitly states MEASUREMENT_INVALID when <8 tasks are measured. However, the scientific signal is genuinely informative despite execution flaws: within-type CVs are well below 0.3 (listing 0.0048, detail 0.037), between-type/within-type discrimination ratio is 582 (deduped) to 874 (with duplicate), total_dom varies by page type (stdev 237-248 > 0), parent replication is excellent (<2% delta), and viewport elements remain constant at 12 (confirming parent's viewport-based yield rejection). The metric is definition-dependent (DEF-FALLBACK-INTERACTIVE overcounts form-descendant DIV/SPAN/LABEL; alternative bbox denominator yields 0.019-0.053 vs 0.018-0.048) and bounded to one shopping site on one Docker digest. The frozen decision rule's MEASUREMENT_INVALID is correct; the scientific content is high-information for the next step but does not meet the preregistered threshold for SURVIVES_CURRENT_TEST.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-34718481334/result.json: metrics (interactive_fraction_mean 0.0316, within_type_cv listing 0.0048, discrimination_ratio 873.78, total_dom_stdev 248.18, successful_tasks 8 counted with pseudoreplication)",
+    "research/experiments/EXP-INTEL-34718481334/audit.json: status REVISE, producer_claim_supported false, validity_findings VF-CART-PSEUDOREPLICATION (critical), VF-A11Y-MISSING-API (major), VF-SAMPLING-NOT-DATASET (major), VF-DEFINITION-OVERCOUNT (major), claim_ceiling bounded to shopping site only, recomputed_metrics discrimination_ratio_deduped 582.52, successful_unique_pages 7",
+    "research/experiments/EXP-INTEL-34718481334/exp347_raw_results.json: raw measurements showing identical cart_1 entries (total_dom 1136, locatable 21, interactive_fraction 0.0185 both), a11y_error 'Page' object has no attribute 'accessibility' on all tasks, listing detail cart measurements with inForm samples",
+    "research/experiments/EXP-INTEL-34718481334/spec.json: decision_rule requiring >=8 tasks across >=3 page types and no pipeline errors, positive_control requiring a11y snapshot >0",
+    "research/experiments/EXP-INTEL-34718481334/measure_fullpage_yield.py: cart_urls single entry with rng.choices k=2 causing pseudoreplication, hard-coded URL lists not from WebArena-Verified dataset",
+    "research/experiments/EXP-INTEL-34718481334/provenance.json: docker_digest sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb, execution_notes confirming a11y API missing",
+    "research/experiments/EXP-INTEL-34607693437/handoff.json: parent handoff establishing viewport rejection, DEF-FALLBACK-INTERACTIVE frozen definition, heuristic 0.65 falsified",
+    "research/experiments/EXP-INTEL-34607693437/frozen_definition.json sha256:9c6bb9a03b6cbcdf206ce9192f5fcf60c79d6df8f65850027aeee50b61f503d5"
+  ]
+}

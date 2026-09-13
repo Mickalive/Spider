@@ -1,0 +1,430 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-34729238832",
+  "lane": "frontier",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "2D": {
+      "aggregate": {
+        "spearman_rho_binned_tv": 0.7619047619047621,
+        "spearman_p_one_sided_binned_tv": 0.014002469576535902,
+        "binned_tv_means_by_lambda": {
+          "0.0": 0.31999795153861055,
+          "0.1": 0.2462496352751088,
+          "0.2": 0.25778915299675587,
+          "0.3": 0.29233552259964823,
+          "0.4": 0.3159858807536226,
+          "0.5": 0.3348722421989254,
+          "0.7": 0.38538388314351274,
+          "1.0": 0.4323429887314677
+        },
+        "cohens_d_lambda0_vs_1": 2.4497460690450708
+      },
+      "per_function": {
+        "42": {
+          "func_name": "rotation",
+          "spearman_rho": 0.7619047619047621,
+          "spearman_p_one_sided": 0.014002469576535902,
+          "binned_tv_means_by_lambda": {
+            "0.0": 0.3213507992093469,
+            "0.1": 0.24737617898736666,
+            "0.2": 0.25482269995814544,
+            "0.3": 0.29757465258436017,
+            "0.4": 0.3189349965759828,
+            "0.5": 0.33912714951729367,
+            "0.7": 0.3750534687885245,
+            "1.0": 0.38727115905428866
+          }
+        },
+        "43": {
+          "func_name": "scaling",
+          "spearman_rho": 0.6428571428571429,
+          "spearman_p_one_sided": 0.042779445506336625,
+          "binned_tv_means_by_lambda": {
+            "0.0": 0.32233888784889486,
+            "0.1": 0.2347076740843228,
+            "0.2": 0.25427248992689805,
+            "0.3": 0.28019433606390154,
+            "0.4": 0.30141791166705145,
+            "0.5": 0.3178686613333051,
+            "0.7": 0.3703648740216369,
+            "1.0": 0.40470071790618106
+          }
+        },
+        "44": {
+          "func_name": "translation",
+          "spearman_rho": 0.8571428571428572,
+          "spearman_p_one_sided": 0.0032650086273576452,
+          "binned_tv_means_by_lambda": {
+            "0.0": 0.31630416755759,
+            "0.1": 0.25666505275363694,
+            "0.2": 0.2642722691052243,
+            "0.3": 0.299237579150683,
+            "0.4": 0.3276047340178336,
+            "0.5": 0.3476209157461775,
+            "0.7": 0.41073330662037655,
+            "1.0": 0.5050570892339334
+          }
+        }
+      },
+      "explained_variance_ratio": {
+        "overall_average": 0.2557774598830894,
+        "per_cell": {
+          "42_0.0": 0.24484067142798174,
+          "42_0.1": 0.2653557154827958,
+          "42_0.2": 0.263565708437349,
+          "42_0.3": 0.2611801534142858,
+          "42_0.4": 0.25567580143841406,
+          "42_0.5": 0.25385105845896516,
+          "42_0.7": 0.24651364212230537,
+          "42_1.0": 0.2396138033132545,
+          "43_0.0": 0.24738558407460434,
+          "43_0.1": 0.2633129874326857,
+          "43_0.2": 0.26442265701150414,
+          "43_0.3": 0.2623171815788967,
+          "43_0.4": 0.2524576979432017,
+          "43_0.5": 0.2509826803080593,
+          "43_0.7": 0.24431771619573067,
+          "43_1.0": 0.2391059310422002,
+          "44_0.0": 0.24902755375341395,
+          "44_0.1": 0.2611073060224767,
+          "44_0.2": 0.26317184472300914,
+          "44_0.3": 0.26268401582288026,
+          "44_0.4": 0.26180489220714515,
+          "44_0.5": 0.2620518649890615,
+          "44_0.7": 0.263807362579626,
+          "44_1.0": 0.26010520741429904
+        }
+      },
+      "effect_sizes_cohens_d": {
+        "42": 2.43332899717187,
+        "43": 2.9778103514406027,
+        "44": 6.777119590303572,
+        "aggregate": 2.4497460690450708
+      },
+      "anova": {
+        "design": "3 functions x 8 lambdas x 10 reps = 240 observations",
+        "full_model": {
+          "lambda_effect": {
+            "F": 167.8156,
+            "p_value": 0.0
+          },
+          "function_effect": {
+            "F": 28.8875,
+            "p_value": 0.0
+          },
+          "interaction_effect": {
+            "F": 6.629,
+            "p_value": 0.0
+          },
+          "model_r_squared": 0.8599
+        },
+        "interaction_pass": false
+      }
+    },
+    "3D": {
+      "aggregate": {
+        "spearman_rho_binned_tv": 0.6428571428571429,
+        "spearman_p_one_sided_binned_tv": 0.042779445506336625,
+        "binned_tv_means_by_lambda": {
+          "0.0": 0.6007498507750477,
+          "0.1": 0.4254921314364903,
+          "0.2": 0.44647637951387453,
+          "0.3": 0.4892136743092209,
+          "0.4": 0.5403651133070391,
+          "0.5": 0.5792717652454829,
+          "0.7": 0.6579424391747721,
+          "1.0": 0.7527569575386269
+        },
+        "cohens_d_lambda0_vs_1": 4.812652323948574
+      },
+      "per_function": {
+        "42": {
+          "func_name": "rotation",
+          "spearman_rho": 0.6428571428571429,
+          "spearman_p_one_sided": 0.042779445506336625,
+          "binned_tv_means_by_lambda": {
+            "0.0": 0.6085554432269027,
+            "0.1": 0.42987723790614896,
+            "0.2": 0.4488148460212901,
+            "0.3": 0.49571348039540714,
+            "0.4": 0.5526292407149399,
+            "0.5": 0.600180468042274,
+            "0.7": 0.6802072145904163,
+            "1.0": 0.7596114707143147
+          }
+        },
+        "43": {
+          "func_name": "scaling",
+          "spearman_rho": 0.6428571428571429,
+          "spearman_p_one_sided": 0.042779445506336625,
+          "binned_tv_means_by_lambda": {
+            "0.0": 0.6074161268975734,
+            "0.1": 0.39696620227898255,
+            "0.2": 0.4334702520226684,
+            "0.3": 0.4711056666500406,
+            "0.4": 0.5227478081619819,
+            "0.5": 0.5589909465345813,
+            "0.7": 0.6323442249484199,
+            "1.0": 0.7349529168125406
+          }
+        },
+        "44": {
+          "func_name": "translation",
+          "spearman_rho": 0.6428571428571429,
+          "spearman_p_one_sided": 0.042779445506336625,
+          "binned_tv_means_by_lambda": {
+            "0.0": 0.5862779822006675,
+            "0.1": 0.44963295412433923,
+            "0.2": 0.4571440404976651,
+            "0.3": 0.5008218758822149,
+            "0.4": 0.5457182910441957,
+            "0.5": 0.5786438811595933,
+            "0.7": 0.6612758779854799,
+            "1.0": 0.7637064850890247
+          }
+        }
+      },
+      "explained_variance_ratio": {
+        "overall_average": 0.36919580463179197,
+        "per_cell": {
+          "42_0.0": 0.35695874769091157,
+          "42_0.1": 0.38037255149814175,
+          "42_0.2": 0.3795264074106802,
+          "42_0.3": 0.37643470040712484,
+          "42_0.4": 0.36910693810147277,
+          "42_0.5": 0.36591940498052694,
+          "42_0.7": 0.35810429363161533,
+          "42_1.0": 0.34984706107332714,
+          "43_0.0": 0.3591408682552122,
+          "43_0.1": 0.37923402736589623,
+          "43_0.2": 0.37996329969266074,
+          "43_0.3": 0.37836975980956644,
+          "43_0.4": 0.3687408021310702,
+          "43_0.5": 0.3650569237922059,
+          "43_0.7": 0.35713318507205444,
+          "43_1.0": 0.34927383990137534,
+          "44_0.0": 0.360222820699074,
+          "44_0.1": 0.37578094539252715,
+          "44_0.2": 0.37873006476801846,
+          "44_0.3": 0.37887932490274445,
+          "44_0.4": 0.37617996808134585,
+          "44_0.5": 0.3739283557284212,
+          "44_0.7": 0.3737009306595984,
+          "44_1.0": 0.3700940901174353
+        }
+      },
+      "effect_sizes_cohens_d": {
+        "42": 5.166429199270786,
+        "43": 4.229019037483571,
+        "44": 5.59272376678834,
+        "aggregate": 4.812652323948574
+      },
+      "anova": {
+        "design": "3 functions x 8 lambdas x 10 reps = 240 observations",
+        "full_model": {
+          "lambda_effect": {
+            "F": 555.6929,
+            "p_value": 0.0
+          },
+          "function_effect": {
+            "F": 26.241,
+            "p_value": 0.0
+          },
+          "interaction_effect": {
+            "F": 2.2432,
+            "p_value": 0.007341
+          },
+          "model_r_squared": 0.9484
+        },
+        "interaction_pass": false
+      }
+    }
+  },
+  "controls": {
+    "2D": {
+      "positive_control": {
+        "description": "Binned TV >= 0.01 at lambda=1 across all 3 functions",
+        "pass": true,
+        "per_function": {
+          "42": {
+            "pass": true,
+            "binned_tv_at_lambda1": 0.38727115905428866,
+            "threshold": 0.01
+          },
+          "43": {
+            "pass": true,
+            "binned_tv_at_lambda1": 0.40470071790618106,
+            "threshold": 0.01
+          },
+          "44": {
+            "pass": true,
+            "binned_tv_at_lambda1": 0.5050570892339334,
+            "threshold": 0.01
+          }
+        }
+      },
+      "null_control": {
+        "description": "Binned TV not significantly > 0 at lambda=0 (permutation p > 0.05)",
+        "pass": true,
+        "mean_perm_p": 0.44866666666666677
+      },
+      "spearman_per_function": {
+        "description": "Per-function Spearman rho >= 0.65 with p < 0.0167 (Bonferroni x3)",
+        "pass": false,
+        "per_function": {
+          "42": {
+            "pass": true,
+            "rho": 0.7619047619047621,
+            "p_one_sided": 0.014002469576535902
+          },
+          "43": {
+            "pass": false,
+            "rho": 0.6428571428571429,
+            "p_one_sided": 0.042779445506336625
+          },
+          "44": {
+            "pass": true,
+            "rho": 0.8571428571428572,
+            "p_one_sided": 0.0032650086273576452
+          }
+        }
+      },
+      "function_invariance": {
+        "description": "No significant function x lambda interaction (two-way ANOVA p > 0.05)",
+        "pass": false,
+        "interaction_p": 0.0
+      },
+      "pca_explained_variance": {
+        "description": "PCA retains at least 30% variance on average",
+        "pass": false,
+        "overall_average": 0.2557774598830894
+      },
+      "no_pipeline_errors": {
+        "description": "No pipeline errors during execution",
+        "pass": true,
+        "n_errors": 0
+      }
+    },
+    "3D": {
+      "positive_control": {
+        "description": "Binned TV >= 0.01 at lambda=1 across all 3 functions",
+        "pass": true,
+        "per_function": {
+          "42": {
+            "pass": true,
+            "binned_tv_at_lambda1": 0.7596114707143147,
+            "threshold": 0.01
+          },
+          "43": {
+            "pass": true,
+            "binned_tv_at_lambda1": 0.7349529168125406,
+            "threshold": 0.01
+          },
+          "44": {
+            "pass": true,
+            "binned_tv_at_lambda1": 0.7637064850890247,
+            "threshold": 0.01
+          }
+        }
+      },
+      "null_control": {
+        "description": "Binned TV not significantly > 0 at lambda=0 (permutation p > 0.05)",
+        "pass": true,
+        "mean_perm_p": 0.4593333333333333
+      },
+      "spearman_per_function": {
+        "description": "Per-function Spearman rho >= 0.65 with p < 0.0167 (Bonferroni x3)",
+        "pass": false,
+        "per_function": {
+          "42": {
+            "pass": false,
+            "rho": 0.6428571428571429,
+            "p_one_sided": 0.042779445506336625
+          },
+          "43": {
+            "pass": false,
+            "rho": 0.6428571428571429,
+            "p_one_sided": 0.042779445506336625
+          },
+          "44": {
+            "pass": false,
+            "rho": 0.6428571428571429,
+            "p_one_sided": 0.042779445506336625
+          }
+        }
+      },
+      "function_invariance": {
+        "description": "No significant function x lambda interaction (two-way ANOVA p > 0.05)",
+        "pass": false,
+        "interaction_p": 0.007341
+      },
+      "pca_explained_variance": {
+        "description": "PCA retains at least 30% variance on average",
+        "pass": true,
+        "overall_average": 0.36919580463179197
+      },
+      "no_pipeline_errors": {
+        "description": "No pipeline errors during execution",
+        "pass": true,
+        "n_errors": 0
+      }
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/frontier/pca_projection/run_execute.py",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "--- 2D PCA ---",
+    "Decision: MEASUREMENT_INVALID, Outcome: NOT_APPLICABLE",
+    "Aggregate Spearman rho(binned_TV, lambda)=0.7619, p_one_sided=0.014002",
+    "Positive control: PASS",
+    "Null control: PASS (p=0.448667)",
+    "Function invariance: FAIL",
+    "Overall average explained variance: 0.2558",
+    "Pipeline errors: 0",
+    "Function 42 (rotation): rho=0.7619, p=0.014002",
+    "Function 43 (scaling): rho=0.6429, p=0.042779",
+    "Function 44 (translation): rho=0.8571, p=0.003265",
+    "--- 3D PCA ---",
+    "Decision: FALSIFIED-IN-SETTING, Outcome: FALSIFIES",
+    "Aggregate Spearman rho(binned_TV, lambda)=0.6429, p_one_sided=0.042779",
+    "Positive control: PASS",
+    "Null control: PASS (p=0.459333)",
+    "Function invariance: FAIL",
+    "Overall average explained variance: 0.3692",
+    "Pipeline errors: 0",
+    "Function 42 (rotation): rho=0.6429, p=0.042779",
+    "Function 43 (scaling): rho=0.6429, p=0.042779",
+    "Function 44 (translation): rho=0.6429, p=0.042779"
+  ],
+  "validity_notes": [
+    "10D continuous state space [0,1]^10 with mixture-of-3-Gaussians heteroscedastic noise",
+    "500 transitions per cell with ~125 per action",
+    "10 replications per cell for variance estimation",
+    "8 lambda levels matching parent design",
+    "3 independent deterministic function families (rotation, scaling, translation)",
+    "Frozen random seed (seed=42) for reproducibility",
+    "PCA fit on each cell independently (no cross-cell information leakage)",
+    "Binned TV divergence: 10 bins per dimension, histogram intersection distance",
+    "Mean TV across all 6 action pairs",
+    "Permutation null with 50 permutations per cell at lambda=0",
+    "Bonferroni correction for 3 functions (alpha=0.0167)",
+    "Explained variance ratio reported for each PCA fit",
+    "Clipping to [0,1] after noise addition",
+    "Same DGP as parent experiments for direct comparison",
+    "Both 2D and 3D PCA projections tested independently",
+    "Measurement invalid if pipeline errors or PCA retains <30% variance on average"
+  ],
+  "unresolved": [
+    "Whether nonlinear PCA or other dimensionality reduction would perform better",
+    "Whether 10 bins per dimension is optimal for binned TV",
+    "Whether more permutations (50->200) would change null control p-value",
+    "Whether real Web transitions exhibit translation-like vs scaling-like structure",
+    "Whether 3D PCA captures information missed by 2D PCA"
+  ]
+}
