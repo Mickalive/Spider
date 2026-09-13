@@ -7,8 +7,8 @@
   "continue_immediately": false,
   "next_question": "On production SPAs with non-deterministic rendering (React/Vue virtual DOM, auth-dependent content, external data), do DOM structural features encode predictive state variation that persists even with K>=3 sufficient action history? Specifically: (1) on production SPAs where the same action can lead to different DOM states depending on external factors (user data, API responses, time), does conditional PMI I(S_next; DOM | URL, ActionHistory_K=3) exceed zero with Bonferroni-corrected permutation p < 0.0167? (2) does a richer DOM representation (accessibility tree, computed styles, or multi-feature hash) capture variation invisible to visible_text_hash on production SPAs?",
   "promotion_ready": false,
-  "consecutive_failures": 3,
-  "updated_at": "2026-09-13T21:21:48.038877+00:00",
+  "consecutive_failures": 4,
+  "updated_at": "2026-09-13T23:15:36.450927+00:00",
   "last_failure_retryable": false,
   "last_handoff_sha256": "3c0e8d0315f7bd454610547fcdda7e6cbefbd664b0098e6b7468c7925b6110f4"
 }
