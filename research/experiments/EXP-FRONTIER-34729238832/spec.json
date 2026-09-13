@@ -1,17 +1,33 @@
 {
   "experiment_id": "EXP-FRONTIER-34729238832",
   "lane": "frontier",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-WEB-DYNAMICS"],
+  "question": "Can PCA projection of 10D state vectors to a 2D principal subspace before binned histogram Jensen-Shannon divergence computation detect both scaling-type and rotation-type action-dependent structure simultaneously in the same 10D non-Gaussian DGP — or does dimensionality reduction destroy the discriminating information that both kNN TV (full-space neighbor ratios) and KDE (full-space kernel smoothing) each partially capture?",
+  "hypothesis": "The per-function heterogeneity observed across three consecutive Frontier experiments (kNN TV fails scaling rho=-0.12 but detects rotation rho=0.93; KDE partially detects scaling rho=0.71 but fails rotation rho=0.29) is caused by the curse of dimensionality: different full-space estimation principles lose sensitivity to different types of structure at high dimension due to distance concentration. PCA projection to 2D removes the dimensionality bottleneck while preserving the linear subspaces where scaling and rotation structure manifest. A binned histogram Jensen-Shannon divergence estimator on the 2D-projected states will detect both scaling-type and rotation-type dynamics simultaneously, achieving per-function Spearman rho >= 0.65 with Bonferroni-corrected p < 0.025 for both function families. This is because: (1) PCA captures the principal variance directions that scaling and rotation modify; (2) binned histogram JS avoids bandwidth selection issues that plagued KDE in 10D; (3) 2D projection concentrates the signal that is dispersed across 10D in full-space estimation.",
+  "falsifier": "PCA-projected binned JS divergence does NOT simultaneously detect scaling and rotation: either scaling-type per-function Spearman rho < 0.65 with p > 0.025 one-sided (Bonferroni x2 for scaling + rotation), OR rotation-type per-function Spearman rho < 0.65 with p > 0.025 one-sided, OR the synthetic positive control fails (binned JS at lambda=1 < 0.01 across all 3 functions), OR the null control fails (binned JS at lambda=0 significantly > 0, permutation test p < 0.05), OR results are inconsistent across deterministic functions (significant function x lambda interaction in two-way ANOVA p < 0.05), OR PCA projection destroys translation detection (translation rho drops below parent's full-space rho=0.81).",
+  "baselines": [
+    "Parent kNN TV bias-corrected divergence: scaling rho=-0.12, rotation rho=0.93, translation rho=1.0 (EXP-FRONTIER-34121473072)",
+    "Parent KDE bias-corrected JS divergence: scaling rho=0.71 (p=0.023 > Bonferroni), rotation rho=0.29 (p=0.246), translation rho=0.81 (EXP-FRONTIER-34538185726)",
+    "Permutation null: action labels shuffled across transitions; binned JS should be near zero at all lambda levels",
+    "Frequency baseline: marginal next-state distribution P(S_next) provides expected divergence under no action-dependence"
+  ],
+  "positive_control": "At lambda=1 (fully action-determined transitions), binned JS divergence on 2D-projected states must be >= 0.01 across all 3 deterministic functions. This verifies the PCA + binned JS pipeline can detect maximal action-dependent structure when present. With PCA capturing principal variance directions and binned JS operating on a stable 2D histogram, action-conditional distributions should be clearly separated at lambda=1.",
+  "null_control": "At lambda=0 (action-independent transitions), binned JS divergence on 2D-projected states must be indistinguishable from zero (permutation test p > 0.05 per function, Fisher combined across reps with N >= 200 permutations per function). This verifies the PCA + binned JS pipeline does not detect structure when absent.",
+  "measurement_validity": [
+    "Same 10D non-Gaussian DGP as parent experiments (mixture-of-3-Gaussians heteroscedastic noise on [0,1]^10) for direct comparison",
+    "PCA fitted on lambda=1 data (all functions pooled) to capture maximum-variance subspace; no information leakage from test data (lambda levels are independent DGP runs, not train/test splits of same transitions)",
+    "Binned histogram JS divergence avoids bandwidth selection issues entirely (no KDE, no kernel smoothing); bins are fixed at 20x20 on [0,1]^2",
+    "500 transitions per cell (~125 per action) provide adequate bin counts: expected ~3 counts per bin on average (500/400 bins) with 125 per action ~0.8 per action per bin; below threshold for sparse bins but adequate for JS divergence which handles sparse histograms via Laplace smoothing",
+    "10 independent replications per cell for variance estimation",
+    "8 lambda levels (0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.7, 1.0) matching parent design",
+    "3 independent deterministic functions (seeds 42, 43, 44) matching parent design",
+    "Frozen random seed (seed=42) for reproducibility",
+    "Clipping to [0,1] after noise addition matches parent boundary treatment",
+    "No target leakage: PCA fitted on lambda=1 transitions; binned JS computed on separate lambda-level transitions; permutation null shuffles action labels on the same transitions"
+  ],
+  "decision_rule": "SURVIVES_CURRENT_TEST if ALL of: (1) Scaling-type per-function Spearman rho(binned_JS, lambda) >= 0.65 with p < 0.025 one-sided (Bonferroni x2 for scaling + rotation primary tests); (2) Rotation-type per-function Spearman rho >= 0.65 with p < 0.025 one-sided; (3) Positive control passes: binned JS >= 0.01 at lambda=1 across all 3 functions; (4) Null control passes: per-function permutation test p > 0.05 at lambda=0 (Fisher combined across reps); (5) No significant function x lambda interaction (two-way ANOVA p > 0.05); (6) Translation-type per-function Spearman rho >= 0.65 (maintains parent detection); (7) JS CV across replications < 0.5 at lambda=1 for all functions; (8) No pipeline errors. FALSIFIED-IN-SETTING if ANY of: (1) Scaling rho < 0.65 or p > 0.025; (2) Rotation rho < 0.65 or p > 0.025; (3) Positive control fails; (4) Null control fails; (5) Significant function x lambda interaction (p < 0.05); (6) Translation rho drops below 0.65. MEASUREMENT_INVALID if pipeline errors, PCA projection is degenerate (explained variance < 50% in 2D), or binned JS computation fails.",
+  "product_consequence_positive": "If PCA projection rescues both scaling and rotation detection simultaneously, the per-function heterogeneity across four Frontier experiments was a curse-of-dimensionality artefact, not an information-theoretic limit. This fundamentally changes the Frontier lane strategy: dimensionality reduction before divergence estimation is the correct approach for detecting action-dependent structure in high-dimensional state spaces. The claim ceiling for C-WEB-DYNAMICS expands from translation-only to include scaling and rotation dynamics. SPIDER should use PCA-projected divergence as its primary detection mechanism for real Web transitions. Product consequence: SPIDER's detection pipeline should include a PCA projection step before divergence computation, broadening the class of detectable action-dependent structure.",
+  "product_consequence_negative": "If PCA projection also fails on scaling or rotation (or both), the information-theoretic limit is more firmly established: no tested estimation principle (kNN neighbor ratios, KDE kernel smoothing, PCA-projected binned histogram) can simultaneously detect all function families in this synthetic DGP. The Frontier lane must pivot to real Web transition data to test whether real-world dynamics are translation-like enough for any estimator. C-WEB-DYNAMICS claim ceiling remains bounded to translation-like dynamics. This does NOT falsify C-WEB-DYNAMICS entirely — only this specific synthetic detection method. Real Web data may exhibit different structure.",
+  "estimated_cost": "Low: pure synthetic data generation, PCA via SVD (numpy), binned histogram JS (numpy), offline computation. Same 120,000 transitions as parent DGP. PCA fitting is trivial (SVD on 10D data). Binned JS on 20x20 grid is fast. Estimated 10-20 minutes wall-clock on standard hardware. No browser/network/model calls.",
+  "expected_information_gain": "High: This is the single most discriminating next experiment after three converged full-space estimator experiments. A positive result (both scaling AND rotation detected) would resolve the complementary-blind-spots meta-finding and redirect Frontier to PCA-based detection. A negative result (PCA also fails on one or both) would close the dimensionality-reduction hypothesis and force a pivot to real Web data or orthogonal mechanisms. Either outcome is decisive for the C-WEB-DYNAMICS claim ceiling and Frontier lane strategy."
 }
