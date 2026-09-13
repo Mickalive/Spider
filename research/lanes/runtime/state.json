@@ -7,8 +7,8 @@
   "continue_immediately": false,
   "next_question": "Does body-only discrimination survive realistic CDN negotiation where Content-Encoding is selected deterministically from client's advertised Accept-Encoding (not per-request random), and would a client with stable Accept-Encoding see deterministic compressed hashes?",
   "promotion_ready": false,
-  "consecutive_failures": 0,
-  "updated_at": "2026-09-13T06:05:07.305887+00:00",
-  "last_failure_retryable": null,
+  "consecutive_failures": 1,
+  "updated_at": "2026-09-13T06:14:45.501930+00:00",
+  "last_failure_retryable": false,
   "last_handoff_sha256": "c50d276a6e62898cf5ab92dec17188e3ba27e7bb094996d3695d0d0efcb21d78"
 }
