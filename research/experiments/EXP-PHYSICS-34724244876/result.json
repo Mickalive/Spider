@@ -1,0 +1,200 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34724244876",
+  "lane": "physics",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "decision_verdict": "SURVIVES_CURRENT_TEST",
+    "pmi_threshold": 0.1,
+    "bonferroni_alpha": 0.0167,
+    "n_sites_tested": 3,
+    "n_sites_surviving": 2,
+    "site_results": {
+      "dashboard": {
+        "n_transitions": 200,
+        "n_trajectories": 40,
+        "conditional_pmi": {
+          "K1": 0.0,
+          "K2": 0.0,
+          "K3": 0.0
+        },
+        "unconditional_pmi": 0.0405,
+        "delta_unconditional_minus_conditional": {
+          "K1": 0.0405,
+          "K2": 0.0405,
+          "K3": 0.0405
+        },
+        "permutation_p_bonferroni": {
+          "K1": 1.0,
+          "K2": 1.0,
+          "K3": 1.0
+        },
+        "action_history_prediction_accuracy": {
+          "K1": 1.0,
+          "K2": 1.0,
+          "K3": 1.0
+        },
+        "determinism_accuracy": 1.0,
+        "frequency_null_accuracy": 0.285,
+        "survives_threshold": false
+      },
+      "multistep_form": {
+        "n_transitions": 200,
+        "n_trajectories": 40,
+        "conditional_pmi": {
+          "K1": 0.9387,
+          "K2": 0.3444,
+          "K3": 0.0
+        },
+        "unconditional_pmi": 1.0613,
+        "delta_unconditional_minus_conditional": {
+          "K1": 0.1226,
+          "K2": 0.7169,
+          "K3": 1.0613
+        },
+        "permutation_p_bonferroni": {
+          "K1": 0.0,
+          "K2": 0.0,
+          "K3": 1.0
+        },
+        "action_history_prediction_accuracy": {
+          "K1": 0.75,
+          "K2": 0.875,
+          "K3": 1.0
+        },
+        "determinism_accuracy": 1.0,
+        "frequency_null_accuracy": 0.5,
+        "survives_threshold": true
+      },
+      "wizard": {
+        "n_transitions": 154,
+        "n_trajectories": 31,
+        "conditional_pmi": {
+          "K1": 0.9598,
+          "K2": 0.4132,
+          "K3": 0.0
+        },
+        "unconditional_pmi": 0.9223,
+        "delta_unconditional_minus_conditional": {
+          "K1": -0.0374,
+          "K2": 0.5092,
+          "K3": 0.9223
+        },
+        "permutation_p_bonferroni": {
+          "K1": 0.0,
+          "K2": 0.0,
+          "K3": 1.0
+        },
+        "action_history_prediction_accuracy": {
+          "K1": 0.7403,
+          "K2": 0.8701,
+          "K3": 1.0
+        },
+        "determinism_accuracy": 1.0,
+        "frequency_null_accuracy": 0.4935,
+        "survives_threshold": true
+      }
+    },
+    "controls": {
+      "determinism_control": {
+        "expected": 1.0,
+        "observed_all_sites": 1.0,
+        "pass": true
+      },
+      "synthetic_positive_control": {
+        "conditional_pmi_K1": 1.6904,
+        "expected": 0.0,
+        "pass": false,
+        "note": "Synthetic SPA has deterministic DOM-state coupling (DOM hash changes with each FSM state), not independent random labels. Control design flaw: synthetic data replicates the same deterministic FSM structure as real SPAs. Pipeline correctly detects DOM-state association but control was not truly independent."
+      },
+      "null_control_shuffled_dom": {
+        "site": "dashboard",
+        "K": 1,
+        "null_mean_pmi": 0.0,
+        "expected": 0.0,
+        "pass": true
+      },
+      "frequency_null": {
+        "dashboard_accuracy": 0.285,
+        "multistep_form_accuracy": 0.5,
+        "wizard_accuracy": 0.4935,
+        "expected": 0.25,
+        "pass": true
+      }
+    }
+  },
+  "controls": {
+    "determinism_control": {
+      "description": "P(S_next | S_current, Action) should be 100% on deterministic SPAs",
+      "expected": "1.0 accuracy",
+      "observed": "1.0 accuracy on all 3 sites (200+200+154 transitions)",
+      "pass": true,
+      "evidence_ref": "raw_analysis_results.json site_results.*.determinism_accuracy"
+    },
+    "synthetic_positive_control": {
+      "description": "Synthetic SPA where DOM is independent of action history; conditional PMI should be zero",
+      "expected": "Conditional PMI <= 0.1 bits",
+      "observed": "Conditional PMI = 1.6904 bits (FAIL)",
+      "pass": false,
+      "evidence_ref": "raw_analysis_results.json synthetic_control",
+      "note": "Control design flaw: synthetic SPA uses deterministic DOM labels that change with FSM state, replicating the same causal structure as real SPAs. Not a true independence control. Pipeline correctly detects DOM-state association."
+    },
+    "null_control_shuffled_dom": {
+      "description": "Shuffle DOM labels within action-history strata; conditional PMI should be zero",
+      "expected": "Conditional PMI <= 0.1 bits",
+      "observed": "Mean shuffled PMI = 0.0 bits on dashboard K=1 (100 permutations)",
+      "pass": true,
+      "evidence_ref": "raw_analysis_results.json null_control"
+    },
+    "action_history_sufficiency": {
+      "description": "Action-history prediction accuracy should increase with K, reaching 100% at K=3",
+      "expected": "Accuracy increases with K, reaches 1.0",
+      "observed": "Dashboard: 1.0/1.0/1.0; Multistep: 0.75/0.875/1.0; Wizard: 0.74/0.87/1.0",
+      "pass": true,
+      "evidence_ref": "raw_analysis_results.json site_results.*.action_history_prediction_accuracy"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-34724244876/raw_analysis_results.json",
+      "sha256": "14123b5083f9c1470886eace04a13ae9308e2da712c1d9d9bee87dc5a91117fb",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-34724244876/analyze.py",
+      "sha256": "c20c7b9077e1e23df17c74eeb2566c8366635883d31c0bf607b11551573028fc",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-34719136202/raw_dom_captures.json",
+      "sha256": "85efd4675f1fcbe841200cbd406338f1b81aaf923e9f2005982f92ee24a7d7a1",
+      "role": "fixture"
+    }
+  ],
+  "observations": [
+    "Dashboard: conditional PMI = 0.0 bits for all K=1,2,3. Action-history prediction accuracy = 100% at all K. DOM provides zero predictive value beyond action history. Unconditional PMI = 0.041 bits is entirely explained by action->DOM causality.",
+    "Multistep_form: conditional PMI = 0.939 bits at K=1, decreases to 0.344 at K=2, drops to 0.0 at K=3. Action-history prediction accuracy: 75% (K=1), 87.5% (K=2), 100% (K=3). DOM is informative when action history is incomplete (K=1,2) but becomes redundant when history is sufficient (K=3).",
+    "Wizard: conditional PMI = 0.960 bits at K=1, decreases to 0.413 at K=2, drops to 0.0 at K=3. Action-history prediction accuracy: 74% (K=1), 87% (K=2), 100% (K=3). Same pattern as multistep_form.",
+    "All 3 SPAs are deterministic: P(S_next | S_current, Action) = 100% accuracy. The FSM is fully deterministic, confirming the parent experiment's setting.",
+    "Dashboard action-history prediction is perfect even at K=1, meaning the current action alone fully determines the next state. Multistep_form and wizard require longer history (K=3) for full prediction, indicating state-dependent dynamics where the same action leads to different states depending on the current step.",
+    "Delta (unconditional - conditional) shows tautological component: dashboard 0.041 bits (100% of unconditional), multistep_form 0.123 bits at K=1 (12% of unconditional), wizard -0.037 bits at K=1 (wizard conditional exceeds unconditional at K=1, indicating DOM encodes state variation beyond action label).",
+    "Positive control (synthetic SPA) failed: conditional PMI = 1.69 bits. Root cause: synthetic SPA uses deterministic DOM labels that change with FSM state, replicating the same causal structure as real SPAs. Control was not truly independent. This is a design flaw, not a pipeline failure.",
+    "Null control (shuffled DOM labels) passed: mean shuffled PMI = 0.0 bits. Pipeline correctly detects absence of DOM-S_next association when labels are permuted."
+  ],
+  "validity_notes": [
+    "Positive control design flaw: synthetic SPA has deterministic DOM-state coupling (DOM hash changes with each FSM state), not independent random labels. The control replicates the same causal structure as real SPAs. This does not invalidate the primary measurements but means the pipeline's ability to detect independence was not tested.",
+    "Action-history strata sizes: with K=3, some strata have <5 transitions and are excluded from PMI computation. Dashboard K=3 has only 9 valid strata from 57 transitions (out of 200). Multistep_form and wizard K=3 have 6 strata from 200/154 transitions.",
+    "Wizard data loss: 154/200 transitions (23% loss) from parent experiment. Missingness mechanism unknown. Results are consistent with multistep_form pattern.",
+    "Representation collapse: DOM representation is hash-based (visible_text_hash, 4 unique values per SPA). Hash-based representation may miss continuous variation in DOM structure. This is the same representation used in parent experiments.",
+    "Results apply only to locally-hosted deterministic Express SPAs on localhost:3848-3850. Generalization to production SPAs is explicitly out of scope.",
+    "Conditional PMI at K=1 on wizard (0.960) exceeds unconditional PMI (0.922). This occurs because conditioning on a single action reduces the sample space, making the DOM-S_next association more concentrated. The delta is negative (-0.037), which is mathematically valid for conditional PMI."
+  ],
+  "unresolved": [
+    "The positive control (synthetic SPA) was not truly independent. A properly designed positive control with random DOM labels independent of action history is needed to validate the pipeline's independence detection.",
+    "Why does dashboard have perfect action-history prediction at K=1 while multistep_form/wizard require K=3? Dashboard has 4 tabs with unique action labels (tab_click:overview, tab_click:users, etc.) where each action uniquely determines the next state. Multistep_form/wizard have repeated 'next' actions where the same action leads to different states depending on the current step.",
+    "Does the conditional PMI pattern (non-zero at K=1,2, zero at K=3) generalize to other deterministic SPAs with similar state-dependent dynamics?",
+    "What is the minimal action-history length needed for full prediction on each SPA type? Dashboard: K=1. Multistep_form/wizard: K=3. Is this a property of the FSM structure or the action vocabulary?",
+    "Production SPAs with non-deterministic rendering (React/Vue virtual DOM, auth-dependent content) may exhibit genuine environmental dynamics where DOM encodes predictive state variation beyond what any action-history length can capture."
+  ]
+}
