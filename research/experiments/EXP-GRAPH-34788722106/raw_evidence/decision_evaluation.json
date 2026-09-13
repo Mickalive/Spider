@@ -1,0 +1,18 @@
+{
+  "decision": "FALSIFIED-IN-SETTING",
+  "violations": [
+    "n=10 pattern=optional_field_churn: Noise FP CI upper bound 1.0000 > 0.15 (FP rate=30/30=1.0000)",
+    "n=10 pattern=null_valued_fields: Noise FP CI upper bound 1.0000 > 0.15 (FP rate=30/30=1.0000)",
+    "n=10 pattern=nested_object_variation: Noise FP CI upper bound 1.0000 > 0.15 (FP rate=30/30=1.0000)",
+    "n=20 pattern=optional_field_churn: Noise FP CI upper bound 1.0000 > 0.15 (FP rate=30/30=1.0000)",
+    "n=20 pattern=null_valued_fields: Noise FP CI upper bound 1.0000 > 0.15 (FP rate=30/30=1.0000)",
+    "n=20 pattern=nested_object_variation: Noise FP CI upper bound 1.0000 > 0.15 (FP rate=30/30=1.0000)",
+    "n=30 pattern=optional_field_churn: Noise FP CI upper bound 1.0000 > 0.15 (FP rate=30/30=1.0000)",
+    "n=30 pattern=null_valued_fields: Noise FP CI upper bound 1.0000 > 0.15 (FP rate=30/30=1.0000)",
+    "n=30 pattern=nested_object_variation: Noise FP CI upper bound 1.0000 > 0.15 (FP rate=30/30=1.0000)",
+    "n=50 pattern=optional_field_churn: Noise FP CI upper bound 1.0000 > 0.15 (FP rate=30/30=1.0000)",
+    "n=50 pattern=null_valued_fields: Noise FP CI upper bound 1.0000 > 0.15 (FP rate=30/30=1.0000)",
+    "n=50 pattern=nested_object_variation: Noise FP CI upper bound 1.0000 > 0.15 (FP rate=30/30=1.0000)"
+  ],
+  "evaluated_at": "2026-09-13T23:12:23.499910+00:00"
+}

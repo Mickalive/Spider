@@ -1,0 +1,440 @@
+{
+  "per_schema_size": {
+    "10": {
+      "threshold": 0.927273,
+      "fp_rate_fresh": 0.0,
+      "fp_ci_fresh": [
+        0.0,
+        0.1135
+      ],
+      "overall_tp_rate_true_drift": 1.0,
+      "overall_tp_ci_true_drift": [
+        0.9591,
+        1.0
+      ],
+      "overall_noise_fp_rate": 1.0,
+      "overall_noise_fp_ci": [
+        0.9591,
+        1.0
+      ],
+      "per_pattern": {
+        "add_field": {
+          "tp_count": 30,
+          "tp_total": 30,
+          "tp_rate": 1.0,
+          "tp_ci_lower": 0.8865,
+          "tp_ci_upper": 1.0,
+          "mean_jaccard": 0.909091,
+          "detection_margin": 0.018182,
+          "threshold": 0.927273
+        },
+        "remove_field": {
+          "tp_count": 30,
+          "tp_total": 30,
+          "tp_rate": 1.0,
+          "tp_ci_lower": 0.8865,
+          "tp_ci_upper": 1.0,
+          "mean_jaccard": 0.9,
+          "detection_margin": 0.027273,
+          "threshold": 0.927273
+        },
+        "change_type": {
+          "tp_count": 30,
+          "tp_total": 30,
+          "tp_rate": 1.0,
+          "tp_ci_lower": 0.8865,
+          "tp_ci_upper": 1.0,
+          "mean_jaccard": 0.818182,
+          "detection_margin": 0.109091,
+          "threshold": 0.927273
+        },
+        "optional_field_churn": {
+          "tp_count": 30,
+          "tp_total": 30,
+          "tp_rate": 1.0,
+          "tp_ci_lower": 0.8865,
+          "tp_ci_upper": 1.0,
+          "mean_jaccard": 0.818182,
+          "detection_margin": 0.109091,
+          "threshold": 0.927273
+        },
+        "null_valued_fields": {
+          "tp_count": 30,
+          "tp_total": 30,
+          "tp_rate": 1.0,
+          "tp_ci_lower": 0.8865,
+          "tp_ci_upper": 1.0,
+          "mean_jaccard": 0.818182,
+          "detection_margin": 0.109091,
+          "threshold": 0.927273
+        },
+        "nested_object_variation": {
+          "tp_count": 30,
+          "tp_total": 30,
+          "tp_rate": 1.0,
+          "tp_ci_lower": 0.8865,
+          "tp_ci_upper": 1.0,
+          "mean_jaccard": 0.818182,
+          "detection_margin": 0.109091,
+          "threshold": 0.927273
+        }
+      },
+      "noise_pattern_details": {
+        "optional_field_churn": {
+          "fp_count": 30,
+          "fp_total": 30,
+          "fp_rate": 1.0
+        },
+        "null_valued_fields": {
+          "fp_count": 30,
+          "fp_total": 30,
+          "fp_rate": 1.0
+        },
+        "nested_object_variation": {
+          "fp_count": 30,
+          "fp_total": 30,
+          "fp_rate": 1.0
+        }
+      },
+      "detection_margins": {
+        "add_field": 0.018182,
+        "remove_field": 0.027273,
+        "change_type": 0.109091,
+        "optional_field_churn": 0.109091,
+        "null_valued_fields": 0.109091,
+        "nested_object_variation": 0.109091
+      }
+    },
+    "20": {
+      "threshold": 0.961905,
+      "fp_rate_fresh": 0.0,
+      "fp_ci_fresh": [
+        0.0,
+        0.1135
+      ],
+      "overall_tp_rate_true_drift": 1.0,
+      "overall_tp_ci_true_drift": [
+        0.9791,
+        1.0
+      ],
+      "overall_noise_fp_rate": 1.0,
+      "overall_noise_fp_ci": [
+        0.9591,
+        1.0
+      ],
+      "per_pattern": {
+        "add_field": {
+          "tp_count": 30,
+          "tp_total": 30,
+          "tp_rate": 1.0,
+          "tp_ci_lower": 0.8865,
+          "tp_ci_upper": 1.0,
+          "mean_jaccard": 0.952381,
+          "detection_margin": 0.009524,
+          "threshold": 0.961905
+        },
+        "remove_field": {
+          "tp_count": 30,
+          "tp_total": 30,
+          "tp_rate": 1.0,
+          "tp_ci_lower": 0.8865,
+          "tp_ci_upper": 1.0,
+          "mean_jaccard": 0.95,
+          "detection_margin": 0.011905,
+          "threshold": 0.961905
+        },
+        "change_type": {
+          "tp_count": 30,
+          "tp_total": 30,
+          "tp_rate": 1.0,
+          "tp_ci_lower": 0.8865,
+          "tp_ci_upper": 1.0,
+          "mean_jaccard": 0.904762,
+          "detection_margin": 0.057143,
+          "threshold": 0.961905
+        },
+        "optional_field_churn": {
+          "tp_count": 30,
+          "tp_total": 30,
+          "tp_rate": 1.0,
+          "tp_ci_lower": 0.8865,
+          "tp_ci_upper": 1.0,
+          "mean_jaccard": 0.818182,
+          "detection_margin": 0.143723,
+          "threshold": 0.961905
+        },
+        "null_valued_fields": {
+          "tp_count": 30,
+          "tp_total": 30,
+          "tp_rate": 1.0,
+          "tp_ci_lower": 0.8865,
+          "tp_ci_upper": 1.0,
+          "mean_jaccard": 0.857143,
+          "detection_margin": 0.104762,
+          "threshold": 0.961905
+        },
+        "nested_object_variation": {
+          "tp_count": 30,
+          "tp_total": 30,
+          "tp_rate": 1.0,
+          "tp_ci_lower": 0.8865,
+          "tp_ci_upper": 1.0,
+          "mean_jaccard": 0.904762,
+          "detection_margin": 0.057143,
+          "threshold": 0.961905
+        }
+      },
+      "noise_pattern_details": {
+        "optional_field_churn": {
+          "fp_count": 30,
+          "fp_total": 30,
+          "fp_rate": 1.0
+        },
+        "null_valued_fields": {
+          "fp_count": 30,
+          "fp_total": 30,
+          "fp_rate": 1.0
+        },
+        "nested_object_variation": {
+          "fp_count": 30,
+          "fp_total": 30,
+          "fp_rate": 1.0
+        }
+      },
+      "detection_margins": {
+        "add_field": 0.009524,
+        "remove_field": 0.011905,
+        "change_type": 0.057143,
+        "optional_field_churn": 0.143723,
+        "null_valued_fields": 0.104762,
+        "nested_object_variation": 0.057143
+      }
+    },
+    "30": {
+      "threshold": 0.974194,
+      "fp_rate_fresh": 0.0,
+      "fp_ci_fresh": [
+        0.0,
+        0.1135
+      ],
+      "overall_tp_rate_true_drift": 1.0,
+      "overall_tp_ci_true_drift": [
+        0.986,
+        1.0
+      ],
+      "overall_noise_fp_rate": 1.0,
+      "overall_noise_fp_ci": [
+        0.9591,
+        1.0
+      ],
+      "per_pattern": {
+        "add_field": {
+          "tp_count": 30,
+          "tp_total": 30,
+          "tp_rate": 1.0,
+          "tp_ci_lower": 0.8865,
+          "tp_ci_upper": 1.0,
+          "mean_jaccard": 0.967742,
+          "detection_margin": 0.006452,
+          "threshold": 0.974194
+        },
+        "remove_field": {
+          "tp_count": 30,
+          "tp_total": 30,
+          "tp_rate": 1.0,
+          "tp_ci_lower": 0.8865,
+          "tp_ci_upper": 1.0,
+          "mean_jaccard": 0.966667,
+          "detection_margin": 0.007527,
+          "threshold": 0.974194
+        },
+        "change_type": {
+          "tp_count": 30,
+          "tp_total": 30,
+          "tp_rate": 1.0,
+          "tp_ci_lower": 0.8865,
+          "tp_ci_upper": 1.0,
+          "mean_jaccard": 0.935484,
+          "detection_margin": 0.03871,
+          "threshold": 0.974194
+        },
+        "optional_field_churn": {
+          "tp_count": 30,
+          "tp_total": 30,
+          "tp_rate": 1.0,
+          "tp_ci_lower": 0.8865,
+          "tp_ci_upper": 1.0,
+          "mean_jaccard": 0.818182,
+          "detection_margin": 0.156012,
+          "threshold": 0.974194
+        },
+        "null_valued_fields": {
+          "tp_count": 30,
+          "tp_total": 30,
+          "tp_rate": 1.0,
+          "tp_ci_lower": 0.8865,
+          "tp_ci_upper": 1.0,
+          "mean_jaccard": 0.870968,
+          "detection_margin": 0.103226,
+          "threshold": 0.974194
+        },
+        "nested_object_variation": {
+          "tp_count": 30,
+          "tp_total": 30,
+          "tp_rate": 1.0,
+          "tp_ci_lower": 0.8865,
+          "tp_ci_upper": 1.0,
+          "mean_jaccard": 0.935484,
+          "detection_margin": 0.03871,
+          "threshold": 0.974194
+        }
+      },
+      "noise_pattern_details": {
+        "optional_field_churn": {
+          "fp_count": 30,
+          "fp_total": 30,
+          "fp_rate": 1.0
+        },
+        "null_valued_fields": {
+          "fp_count": 30,
+          "fp_total": 30,
+          "fp_rate": 1.0
+        },
+        "nested_object_variation": {
+          "fp_count": 30,
+          "fp_total": 30,
+          "fp_rate": 1.0
+        }
+      },
+      "detection_margins": {
+        "add_field": 0.006452,
+        "remove_field": 0.007527,
+        "change_type": 0.03871,
+        "optional_field_churn": 0.156012,
+        "null_valued_fields": 0.103226,
+        "nested_object_variation": 0.03871
+      }
+    },
+    "50": {
+      "threshold": 0.984314,
+      "fp_rate_fresh": 0.0,
+      "fp_ci_fresh": [
+        0.0,
+        0.1135
+      ],
+      "overall_tp_rate_true_drift": 1.0,
+      "overall_tp_ci_true_drift": [
+        0.9894,
+        1.0
+      ],
+      "overall_noise_fp_rate": 1.0,
+      "overall_noise_fp_ci": [
+        0.9591,
+        1.0
+      ],
+      "per_pattern": {
+        "add_field": {
+          "tp_count": 30,
+          "tp_total": 30,
+          "tp_rate": 1.0,
+          "tp_ci_lower": 0.8865,
+          "tp_ci_upper": 1.0,
+          "mean_jaccard": 0.980392,
+          "detection_margin": 0.003922,
+          "threshold": 0.984314
+        },
+        "remove_field": {
+          "tp_count": 30,
+          "tp_total": 30,
+          "tp_rate": 1.0,
+          "tp_ci_lower": 0.8865,
+          "tp_ci_upper": 1.0,
+          "mean_jaccard": 0.98,
+          "detection_margin": 0.004314,
+          "threshold": 0.984314
+        },
+        "change_type": {
+          "tp_count": 30,
+          "tp_total": 30,
+          "tp_rate": 1.0,
+          "tp_ci_lower": 0.8865,
+          "tp_ci_upper": 1.0,
+          "mean_jaccard": 0.960784,
+          "detection_margin": 0.02353,
+          "threshold": 0.984314
+        },
+        "optional_field_churn": {
+          "tp_count": 30,
+          "tp_total": 30,
+          "tp_rate": 1.0,
+          "tp_ci_lower": 0.8865,
+          "tp_ci_upper": 1.0,
+          "mean_jaccard": 0.818182,
+          "detection_margin": 0.166132,
+          "threshold": 0.984314
+        },
+        "null_valued_fields": {
+          "tp_count": 30,
+          "tp_total": 30,
+          "tp_rate": 1.0,
+          "tp_ci_lower": 0.8865,
+          "tp_ci_upper": 1.0,
+          "mean_jaccard": 0.882353,
+          "detection_margin": 0.101961,
+          "threshold": 0.984314
+        },
+        "nested_object_variation": {
+          "tp_count": 30,
+          "tp_total": 30,
+          "tp_rate": 1.0,
+          "tp_ci_lower": 0.8865,
+          "tp_ci_upper": 1.0,
+          "mean_jaccard": 0.960784,
+          "detection_margin": 0.02353,
+          "threshold": 0.984314
+        }
+      },
+      "noise_pattern_details": {
+        "optional_field_churn": {
+          "fp_count": 30,
+          "fp_total": 30,
+          "fp_rate": 1.0
+        },
+        "null_valued_fields": {
+          "fp_count": 30,
+          "fp_total": 30,
+          "fp_rate": 1.0
+        },
+        "nested_object_variation": {
+          "fp_count": 30,
+          "fp_total": 30,
+          "fp_rate": 1.0
+        }
+      },
+      "detection_margins": {
+        "add_field": 0.003922,
+        "remove_field": 0.004314,
+        "change_type": 0.02353,
+        "optional_field_churn": 0.166132,
+        "null_valued_fields": 0.101961,
+        "nested_object_variation": 0.02353
+      }
+    }
+  },
+  "overall": {
+    "total_true_stale_samples": 360,
+    "total_true_detected": 360,
+    "overall_tp_rate": 1.0,
+    "overall_tp_ci": [
+      0.9894,
+      1.0
+    ],
+    "total_fresh_samples": 120,
+    "total_fresh_fp": 0,
+    "overall_fp_rate_fresh": 0.0,
+    "overall_fp_ci_fresh": [
+      0.0,
+      0.031
+    ]
+  }
+}
