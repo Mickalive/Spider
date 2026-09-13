@@ -1,0 +1,34 @@
+{
+  "experiment_id": "EXP-INTEL-34607693437",
+  "lane": "intel",
+  "claim_ids": ["C-CROSSSITE", "C-LLM-INHERIT"],
+  "question": "What is the canonical definition of 'locatable elements' for SPIDER fragment yield, and does yield_locatable stabilize across randomized shopping page types (including checkout) under that frozen definition?",
+  "hypothesis": "Method1's 150-element shopping estimate can be traced to a specific element-counting method in the derivation code (analysis_output.json from EXP-INTEL-33945226776). That method defines a canonical 'locatable element' for SPIDER. Under this frozen definition, yield_locatable = viewport_elements / locatable_elements will be approximately 0.365 (within 15pp) across randomized shopping page types (product-listing, detail, cart, checkout), confirming the fragment model captures a definable and stable fraction of page elements. If the forensic analysis is inconclusive, the functional fallback (interactive elements with bounding boxes) is frozen and tested for stability.",
+  "falsifier": "ANY of: (1) Forensic analysis cannot trace Method1 150-element estimate to a specific counting method AND the functional fallback definition also fails to produce a stable yield (CV>0.2) — denominator ambiguous by construction. (2) Under the frozen definition, yield_locatable CV > 0.2 across 8+ randomized shopping tasks — yield unstable across page types. (3) Under the frozen definition, yield_locatable mean differs from Method1 0.365 by >15pp — method mismatch even under resolved definition. (4) Checkout page type shows yield systematically different from other page types (>20pp delta on >50% of checkout tasks) — checkout is structurally incompatible. (5) Viewport elements remain constant at exactly 108 across all page types including checkout — viewport anomaly persists, indicating measurement captures fixed chrome not page content.",
+  "baselines": [
+    "Method1 estimate from EXP-INTEL-33945226776: shopping yield 0.365 (element-count method, 150 elements per product_listing)",
+    "Heuristic estimate 0.65: FALSIFIED robustly (>23pp under any denominator) in EXP-INTEL-34546944360",
+    "Parent N=20 yield_cdp 0.0426 (stable, CV=0.12) as cross-denominator floor",
+    "Parent N=20 yield_locatable: 0.079 (all-elements-with-bbox), ~0.32 (interactive-only), ~0.42 (parent 258 definition) — 5x range IS the denominator ambiguity",
+    "CDP yield 0.0426 (stable across 40+ tasks across experiments) as CDP baseline"
+  ],
+  "positive_control": "Frozen measurement script produces non-empty viewport_elements (>0) and locatable_elements (>viewport_elements) on all tasks. Forensic analysis produces either (a) a traceable element-counting method mapping to one of three candidate definitions, or (b) a documented inconclusiveness record with the functional fallback definition frozen.",
+  "null_control": "If forensic analysis is inconclusive AND functional fallback yield_locatable has CV>0.2, report MIXED with definition_ambiguous. This is a valid scientific negative: the denominator cannot be resolved and the 812-task corpus is unreliable for yield claims.",
+  "measurement_validity": [
+    "Docker Hub am1n3e/webarena-verified-shopping:latest pullable and accessible at localhost:8080",
+    "Playwright + Chromium functional (verified in parent experiments)",
+    "Frozen measurement script with sha256 recorded; implements frozen definition from forensic analysis or fallback",
+    "Fresh browser context per task (no shared cookies/session between tasks)",
+    "Raw accessibility tree saved for each task (initial viewport) with durable sha256",
+    "Task selection randomized from WebArena-Verified dataset using frozen seed, stratified by page type: 2 product-listing, 2 detail, 2 cart, 2 checkout",
+    "Docker image digest recorded before measurement to bound drift",
+    "Per-task viewport element sample saved (first 20 element roles/types) for viewport anomaly investigation",
+    "Both yield_cdp and yield_locatable reported for every task with explicit denominator definition",
+    "Method1 derivation source (analysis_output.json from EXP-INTEL-33945226776) available for forensic inspection"
+  ],
+  "decision_rule": "If ALL of: (1a) forensic analysis traces Method1 150-element estimate to a specific counting method (definition_resolved=true) OR (1b) forensic analysis is inconclusive but functional fallback definition is frozen (definition_resolved=false, fallback_frozen=true), AND (2) yield_locatable under frozen definition has CV < 0.2 across all measured shopping tasks (yield stable), AND (3) yield_locatable mean is within 15pp of Method1 0.365 (method compatible — only evaluated if definition_resolved=true), AND (4) at least 2 checkout tasks measured with yield within 20pp of other page types, AND (5) viewport anomaly investigated (per-task sample saved), THEN verdict = SURVIVES_CURRENT_TEST. If forensic resolves definition BUT yield unstable (CV>0.2) or far from Method1 (>15pp), verdict = FALSIFIED-IN-SETTING. If forensic inconclusive AND fallback yield also unstable (CV>0.2), verdict = MIXED (definition_ambiguous). If infrastructure blocks checkout or site-type tasks, mark those hypotheses BLOCKED with proof. GitLab/Reddit: if Docker images pullable, measure and report yield; if BLOCKED, mark with infrastructure proof and note as unresolved for C-CROSSSITE generalization.",
+  "product_consequence_positive": "Resolving the denominator unblocks the 812-task corpus for C-CROSSSITE/C-LLM-INHERIT evaluation. If yield_locatable stabilizes under a frozen definition (whether forensic or fallback), the observation pipeline captures a definable and consistent set of elements. Product lane can proceed to integration experiments with the 812-task corpus using the frozen definition for consistent yield measurement.",
+  "product_consequence_negative": "If the denominator cannot be resolved (forensic inconclusive AND fallback unstable), the 812-task corpus cannot be reliably used for yield claims. Product lane must either (a) redesign the observation pipeline to capture a definable element set, (b) use CDP yield (4%) as the conservative floor, or (c) explore alternative corpora. The denominator ambiguity is confirmed as a structural property of the fragment model, not a solvable measurement problem.",
+  "estimated_cost": "Medium: Docker container management, Playwright automation across 8-10 tasks, forensic code analysis, raw artifact preservation. Estimated 2-3 hours compute. Forensic analysis ~30 minutes.",
+  "expected_information_gain": "High: This is the single blocking question for 812-task corpus viability. A clear outcome (resolved+stable, resolved+unstable, or confirmed ambiguous) changes the product decision from UNKNOWN to actionable. Even MIXED (definition ambiguous by construction) is valuable because it closes the denominator question and forces a product redesign decision."
+}

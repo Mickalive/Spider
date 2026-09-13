@@ -1,0 +1,20 @@
+{
+  "base_sha": "ca72617794e4fa73f3539daff738aed8fba1e0e4",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-12T18:30:38.740411+00:00",
+  "experiment_id": "EXP-GRAPH-34711403174",
+  "inherited_last_verdict": "MIXED \u2014 H1 supported: kernel is deterministic exact-intent matcher (L97) with no URL template analysis, confirmed for complex aliasing types (query-param, path-rewriting, server-side routing) at equal confidence 0.9, n=6 aliased-first conditions (0/6 correct, binomial p=0.016). H2 falsified-in-setting: HTTP status-code grounding provides zero autonomous signal on jsonplaceholder.typicode.com (0/12 status differences across 12 aliased conditions; substrate returns 200 for malformed templates like /posts?id=1/comments). Body-based grounding is an exploratory non-autonomous finding (4/4 body differences in asymmetric scenarios B and C, but requires external oracle to determine correctness, produces false positives for equivalent templates in A and F). Experiment does not meet SURVIVES_CURRENT_TEST per frozen decision rule condition (4): for asymmetric scenarios B and C, HTTP execution per frozen status-code definition correctly identifies valid template in 0/4 cases, not 100%.",
+  "inherited_next_question": "Can the graph lane detect staleness in inherited mechanism knowledge \u2014 does freshness scoring of cached mechanisms against live endpoint responses provide a reliable signal for triggering re-validation, and what is the false-positive and false-negative rate of staleness detection across resource families?",
+  "lane": "graph",
+  "origin_github_run_id": "34711403174",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-34586318405",
+    "path": "research/experiments/EXP-GRAPH-34586318405/handoff.json",
+    "sha256": "15904831ae7077bbef0220da9ae38787e731fca84f522af495a0074febbb3550"
+  },
+  "reason": "pulse",
+  "request_hash": "69002c163a3e2ce190b90920dac32dd07efb1e3cf1d6043a5dfbda77ecd9ad09",
+  "request_id": "5850473be5b46b2ca4ccaffc",
+  "schema_version": 1
+}

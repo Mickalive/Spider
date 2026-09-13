@@ -1,0 +1,63 @@
+{
+  "experiment_id": "EXP-GRAPH-34711403174",
+  "github_run_id": "34711403174",
+  "commit_sha": "96d0f4706e6769bed687113e0242000873e7af2b",
+  "base_sha": "ca72617794e4fa73f3539daff738aed8fba1e0e4",
+  "frozen_request_hash": "69002c163a3e2ce190b90920dac32dd07efb1e3cf1d6043a5dfbda77ecd9ad09",
+  "frozen_spec_hash": "d4f818f2495d4380f8c089878cc1e5c43767bf393fae3de5f6ec5c20d6a579f9",
+  "frozen_prereg_hash": "35d1a5e74d37f679553fb5fc8db7bff8ccf94201721b1623cf9faf8ec5532a16",
+  "parent_experiment": "EXP-GRAPH-34586318405",
+  "parent_handoff_hash": "15904831ae7077bbef0220da9ae38787e731fca84f522af495a0074febbb3550",
+  "code": {
+    "execute.py": {
+      "path": "research/graph/freshness_detection/execute.py",
+      "sha256": "83e2bef5df91fc06d6b16be451e98ef0a5a0be0842115c4b63523a36d0a429b8",
+      "role": "experiment_code"
+    }
+  },
+  "artifacts": {
+    "execution_results": {
+      "path": "research/experiments/EXP-GRAPH-34711403174/raw_evidence/execution_results.json",
+      "sha256": "06bcc81ead733fa6e32091a7acac8b448401580cc3d8563fe2c66df1e2e603e7",
+      "role": "raw"
+    },
+    "metrics": {
+      "path": "research/experiments/EXP-GRAPH-34711403174/raw_evidence/metrics.json",
+      "sha256": "db83e53cbd81c034664cd164bce7e4905054a4aa6dbba50c905e959944d3e84b",
+      "role": "derived"
+    },
+    "request_logs": {
+      "path": "research/experiments/EXP-GRAPH-34711403174/raw_evidence/request_logs.json",
+      "sha256": "bc4304ccecd7463516ff2c629fff1582fbdb6dc9a3be5226d30706efdff3b079",
+      "role": "raw"
+    },
+    "decision": {
+      "path": "research/experiments/EXP-GRAPH-34711403174/raw_evidence/decision.json",
+      "sha256": "45aafb30d2c562fdb762e6b74598805896e8a8084081918cf545f880fd31bace",
+      "role": "derived"
+    }
+  },
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.12",
+    "mock_server": "http.server (stdlib, threading)",
+    "network": "localhost only (127.0.0.1)",
+    "dependencies": ["stdlib only (json, http.server, threading, urllib.request, math, hashlib, sys, os, pathlib)"]
+  },
+  "execution": {
+    "command": "python3 research/graph/freshness_detection/execute.py",
+    "timeout": 60000,
+    "total_requests": 40,
+    "failed_requests": 0,
+    "families": ["users", "posts", "comments", "users_stable"],
+    "requests_per_family": 10,
+    "drift_point": 6,
+    "threshold": 0.85,
+    "reproduction_steps": [
+      "git checkout 96d0f4706e6769bed687113e0242000873e7af2b",
+      "python3 research/graph/freshness_detection/execute.py",
+      "Compare raw_evidence/metrics.json against result.json metrics"
+    ]
+  },
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b"
+}

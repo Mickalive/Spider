@@ -1,0 +1,323 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-34607693437",
+  "lane": "intel",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Resolve artifact duality: research/experiments/EXP-INTEL-34607693437/exp346_raw_results.json (sha fa71b3b5beae391d8d69ab2f9e02819ae9c0f99691b618b6f8c4d1bce856983e, viewport_elements=108, yield_locatable 1.31-5.14) and research/experiments/EXP-INTEL-34607693437/artifacts/exp346_raw_results.json (sha 2df4a7ced2d46fdd1b3e7d8ec63b591be2e9693eb3821e3c38e120bcfb8bb3bb, viewport_elements=8, yield_locatable 0.24-0.57) are contradictory measurements from the same experiment_id with same frozen_seed. Metrics in result.json use the 108 dataset; the frozen script measure_yield_exp346.py (sha ee76fc9af8bf7799a0099f8508f5818245be3cf75faee08d86574f9a01f441b7) produces the 8 dataset when re-run (interactive-only viewport counting). Record which script version produced each raw file, hash both scripts, and do not include dual unreconciled raw results in one packet",
+    "Fix viewport numerator/denominator consistency: yield_locatable = viewport_elements / locatable_elements must use same element definition. Result.json VN-COUNTING-BUG correctly identifies bug in 108 dataset (viewport counts ALL DOM elements including HEADER/DIV/UL/LI/SPAN, locatable counts only interactive => yield >1). Current script correctly counts only interactive in viewport (yield 0.24-0.57) but viewport remains constant (108 then 8) indicating viewport intersection does not capture page content. Fix viewport logic to capture page content (including scrolled content or full-page enumeration) or redefine yield as viewport_interactive / locatable_interactive with explicit viewport bbox and threshold",
+    "Investigate and resolve constant viewport anomaly: 108 dataset stdev 0.0 across 7 tasks (product_listing/detail/cart/checkout) with identical 20-sample navigation header; 8 dataset also stdev 0.0 across 5 shopping tasks. Spec H6 requires stdev>0 or explanation. Samples show only fixed Magento2 header chrome. Add per-task viewport coverage proof (overlay/bbox plot, page content vs chrome element counts, scroll-based enumeration) and verify page-specific fragment capture before any corpus claim",
+    "Fix sampling to frozen spec: spec/measurement_validity/prereg 6.1 require stratified randomized selection 2 product_listing +2 detail +2 cart +2 checkout =8 tasks using frozen_seed 34607693437. 108 dataset has 2 listing +2 detail +1 cart +2 checkout_proxy (checkout/cart/ duplicate of cart_1); artifacts dataset has 2 listing +2 detail +1 cart +0 true checkout. Also artifacts listing_clothing status 404 (clothing.html) is not a valid product listing. Use valid task URLs from WebArena-Verified shopping, show randomization log, and exclude 404 tasks from CV/yield calculations",
+    "Fix checkout measurement: true checkout URL http://localhost:8080/checkout/ redirects to localhost:7770 and is not measured; checkout_cart_1/2 in 108 dataset are identical to cart_1 (total_dom 1136, locatable 21, yield 5.14). Record HTTP redirect handling, provide infrastructure proof for port 7770, or mark checkout BLOCKED with explicit proof rather than reporting duplicate cart page as checkout success",
+    "Record Docker image digest and environment provenance: spec measurement_validity requires image digest recorded before measurement. Provenance.json reports docker_image_digest not_recorded, playwright_version unknown, method1_derivation sha256 null. Record digest for am1n3e/webarena-verified-shopping:latest (and gitlab/reddit if attempted) and compare to parent digest to bound drift",
+    "Complete site-type comparison per spec H5: at least 1 gitlab and 1 reddit task with yield_locatable under frozen definition. 108 dataset reports 0 gitlab/0 reddit and marks BLOCKED without docker pull logs; artifacts dataset has gitlab_001 (yield_locatable 1.0) and reddit_001 (0.888) measured on localhost:8081/8082 but not incorporated into result.json metrics or page_type breakdown. Unify datasets, produce explicit git pull/measure logs for am1n3e/webarena-verified-gitlab and reddit, or mark BLOCKED with infrastructure proof",
+    "Correct outcome/status mapping: producer status MEASUREMENT_INVALID outcome FALSIFIES with controls showing null_control pass true (forensic inconclusive + fallback unstable => MIXED). Spec decision_rule says inconclusive+unstable => MIXED (definition_ambiguous), not MEASUREMENT_INVALID (which is reserved for docker/playwright/script failure or <5 tasks). Keep critical counting bug as validity threat but report scientific outcome as MEASUREMENT_INVALID + MIXED/unstable explicitly, and do not claim checkout_coverage_control pass true when checkout is proxy",
+    "Recompute and report both denominators explicitly: spec requires yield_cdp and yield_locatable for every task with explicit delta to Method1 0.365 and CDP baseline 0.0426 under frozen definition. Include corrected yield estimates only with caveats; do not report method1_delta_raw_pp 317pp as meaningful when numerator/denominator mismatch is known; report recomputed shopping yield_cdp mean/CV and shopping yield_locatable (interactive viewport) mean/CV after excluding 404 and fixing counting",
+    "Preserve raw accessibility tree and viewport samples with durable sha256 per task per spec: result.json artifacts list viewport samples with sha256 null; provenance lists artifacts directory but hash chain incomplete. Persist all raw_ax_tree_* and viewport_sample_* with sha256 in result.json/provenance.json"
+  ],
+  "validity_findings": [
+    {
+      "finding_id": "VF-COUNTING-BUG-INCONSISTENT-ARTIFACTS",
+      "severity": "critical",
+      "category": "measurement_validity",
+      "metric_ids": ["yield_locatable_raw_mean", "yield_locatable_raw_cv", "yield_locatable_raw_range", "viewport_elements_mean", "viewport_elements_constant", "method1_delta_raw_pp"],
+      "control_ids": ["positive_control", "stability_control", "method1_compatibility_control"],
+      "description": "Critical numerator/denominator inconsistency plus artifact duality. Primary raw file exp346_raw_results.json (fa71b3b5) counted viewport_elements as ALL DOM elements in viewport rect (108 constant) while locatable_elements as interactive-only (21-82) => yield_locatable 1.31-5.14 (>1 meaningless, viewport not subset of locatable). Producer correctly diagnosed counting bug. However repo artifacts/exp346_raw_results.json (2df4a7ce) from same frozen_seed was produced by current measure_yield_exp346.py which counts viewport correctly (interactive-only, viewport 8 constant, yield 0.24-0.57). Both files are present in packet, both hashed, but result.json metrics (yield_locatable_raw_mean 3.5447, cv 0.4838, delta 317pp) use only the buggy 108 dataset; the 8 dataset is listed as raw artifact but ignored in metrics and page_type breakdown. Current script reproduces 8 dataset, not 108, so packet's frozen script does not reproduce producer metrics. Both datasets show viewport constant stdev 0.0, so fixing counting does not fix content capture.",
+      "evidence_refs": [
+        "result.json:metrics.viewport_elements_mean 108.0 stdev 0.0 yield_locatable_raw_mean 3.5447 yield_locatable_raw_all_above_one true yield_locatable_counting_bug",
+        "result.json:metrics.yield_locatable_corrected_estimate viewport_locatable_estimate 32 yield_corrected_mean 1.0503 note still invalid",
+        "exp346_raw_results.json:measurements viewport_elements 108 locatable 21-82 yield_locatable 1.31-5.14 statistics.viewport_elements_values [108 x7]",
+        "artifacts/exp346_raw_results.json:measurements shop_listing_006 viewport 8 locatable 33 yield 0.2424; shop_cart_001 viewport 8 locatable 14 yield 0.5714",
+        "measure_yield_exp346.py:258-298 counts viewport only if is_inter True (line 287-290 is_in_viewport inside is_inter block)",
+        "result.json:validity_notes[0] VN-COUNTING-BUG critical, [6] VN-FROZEN-SCRIPT-MODIFIED",
+        "result.json:artifacts[0] sha fa71b3b5 and [4] sha 2df4a7ce both role raw"
+      ],
+      "impact": "No yield_locatable value in packet is valid for claim. Buggy 108 dataset yields >1 are meaningless; corrected 8 dataset still captures only header chrome (constant) so yield is not page-content yield. Spec decision rule conditions (2) CV<0.2 and (3) within 15pp of Method1 cannot be evaluated. Status MEASUREMENT_INVALID justified but producer's specific CV 0.4838 and delta 317pp are artifacts of inconsistent counting, not reproducible from frozen script."
+    },
+    {
+      "finding_id": "VF-VIEWPORT-CONSTANT-PERSISTS",
+      "severity": "critical",
+      "category": "measurement_validity",
+      "metric_ids": ["viewport_elements_mean", "viewport_elements_stdev", "viewport_elements_unique_values", "viewport_elements_constant"],
+      "control_ids": ["viewport_anomaly_control", "positive_control"],
+      "description": "Viewport constant anomaly persists and is independently confirmed. 108 dataset: 108.0 stdev 0.0 across 7 tasks covering listing/detail/cart/checkout_proxy with identical 20-sample header (HEADER/DIV/UL/LI/A/SPAN) on all page types. 8 dataset: 8.0 stdev 0.0 across 5 shopping tasks with identical 8-sample header (Compare Products, Skip to Content, logo, My Cart, Search form, combobox, Advanced Search, Search button) on listing/detail/cart. Positive_control expects locatable > viewport but observes locatable < viewport (21-82 <108) in 108 dataset and marginal in 8 dataset (14-33 vs 8). This confirms measurement captures fixed navigation chrome above the fold, not page content. H6 falsified.",
+      "evidence_refs": [
+        "result.json:metrics.viewport_elements_stdev 0.0 viewport_elements_unique_values [108] observations OBS-VIEWPORT-CONSTANT-108-PERSISTS OBS-VIEWPORT-NAVIGATION-ONLY",
+        "exp346_raw_results.json:viewport_sample all tasks first element HEADER My Account, identical 20 entries",
+        "artifacts/exp346_raw_results.json:shop_listing_006 viewport_sample 8 elements all header/search, shop_cart_001 same 8, shop_detail_002 same 8",
+        "result.json:controls.viewport_anomaly_control pass false observed_stdev 0.0 explanation captures Magento2 navigation header only",
+        "provenance.json:viewport width 1280 height 720 threshold 0.5"
+      ],
+      "impact": "Yield_cdp and yield_locatable do not measure fragment capture of page-specific content; they measure chrome coverage. Stability claims (CV 0.168 for CDP, 0.483 for locatable) are driven by denominator variation not viewport variation. No shopping yield claim can be generalized to 192 shopping tasks or 812 corpus until viewport logic is fixed to enumerate content elements (scroll, full-page, or content-aware selector)."
+    },
+    {
+      "finding_id": "VF-SAMPLING-STRATIFICATION-FAILURE",
+      "severity": "high",
+      "category": "sampling",
+      "metric_ids": ["tasks_measured", "tasks_product_listing", "tasks_detail", "tasks_cart", "tasks_checkout", "tasks_shopping"],
+      "control_ids": ["stability_control", "checkout_coverage_control"],
+      "description": "Stratified randomization not satisfied. Spec 6.1 and prereg 5.1 require 8 tasks 2 per type via random.Random(seed=FROZEN_SEED).choices(). Producer selected 7 tasks in 108 dataset (2 listing Tools/Clothing, 2 detail Camera/VR-bag, 1 cart, 2 checkout_cart duplicates) and 5 shopping tasks in 8 dataset (2 listing Hair Care/Clothing 404, 2 detail Eyes/Shampoo, 1 cart). Cart n=1 not 2; checkout n=0 true (proxy) in both; listing_clothing in 8 dataset is 404 Not Found; spec seed randomization not evidenced. Convenience/diverse sample not random corpus draw.",
+      "evidence_refs": [
+        "spec.json:measurement_validity Task selection randomized ... stratified by page type: 2 product-listing, 2 detail, 2 cart, 2 checkout",
+        "prereg.md:6.1 Shopping tasks 8 tasks randomized",
+        "exp346_raw_results.json:statistics.total_tasks_measured 7 selected_tasks includes checkout/cart/ duplicated",
+        "artifacts/exp346_raw_results.json:shop_listing_004 status_code 404 page_title 404 Not Found",
+        "result.json:metrics.tasks_cart 1 tasks_checkout 2 but checkout_proxy.same_as_cart_page true",
+        "result.json:validity_notes[5] VN-SAMPLE-SIZE 7 tasks marginally sufficient"
+      ],
+      "impact": "CV estimates have wider confidence intervals and are page-type unbalanced. Checkout yield hypothesis H4 cannot be tested; product_listing estimate includes invalid 404 page inflating variance. Generalizability to 192 shopping tasks bounded."
+    },
+    {
+      "finding_id": "VF-CHECKOUT-PROXY-FAILURE",
+      "severity": "high",
+      "category": "measurement_validity",
+      "metric_ids": ["checkout_proxy"],
+      "control_ids": ["checkout_coverage_control"],
+      "description": "Checkout coverage control falsely passes. Producer reports checkout_coverage_control pass true with observed 2, but both checkout tasks in 108 dataset use http://localhost:8080/checkout/cart/ (identical URL, dom 1136, locatable 21) same as cart_1; true checkout http://localhost:8080/checkout/ redirects to localhost:7770 (internal port). In 8 dataset 0 checkout tasks measured. No 200 checkout page with distinct DOM is presented. H4 requires yield within 20pp of other types; producer notes same_as_cart_page true.",
+      "evidence_refs": [
+        "result.json:controls.checkout_coverage_control pass true observed 2 note same as cart page",
+        "result.json:metrics.checkout_proxy checkout_url_used checkout/cart/ checkout_url_intended checkout/ same_as_cart_page true redirect_port 7770",
+        "exp346_raw_results.json:measurements checkout_cart_1 url checkout/cart/ total_dom 1136 identical to cart_1; infrastructure_notes checkout/ redirects to 7770",
+        "artifacts/exp346_raw_results.json: no task with page_type checkout shopping (only shop_cart_001 cart)",
+        "spec.json:falsifier (4) checkout yield systematically different >20pp on >50% of checkout tasks"
+      ],
+      "impact": "Checkout yield unknown; checkout systematically different hypothesis not tested. Spec condition (4) at least 2 checkout tasks within 20pp not satisfied. Producer's pass overstates coverage.",
+      "analysis": "Infrastructure failure (redirect) not scientific falsification; should be BLOCKED with proof not PASS."
+    },
+    {
+      "finding_id": "VF-FORENSIC-INCONCLUSIVE-CONFIRMED",
+      "severity": "info",
+      "category": "measurement_validity",
+      "metric_ids": ["definition_resolved", "fallback_frozen", "fallback_definition_id", "forensic_analysis_result", "forensic_finding"],
+      "control_ids": [],
+      "description": "Forensic INCONCLUSIVE confirmed via independent inspection. analysis_output.json method1_element_count.shopping.page_types product_listing estimated_elements 150 estimated_chars 9750 weight 0.3 etc. All values are round numbers (150,120,60,160,80,50) with fixed multiplier chars=elements*65 and no DOM traversal code; verdict MIXED elsewhere. Producer method1_trace.json correctly concludes 150 is heuristic INPUT not output of element-counting algorithm, definition UNKNOWN. Fallback DEF-FALLBACK-INTERACTIVE frozen as specified in prereg 5.3 fallback definition and maps to Definition 2 interactive-only. Positive forensic control satisfied via fallback path.",
+      "evidence_refs": [
+        "method1_trace.json:trace_result INCONCLUSIVE trace_details finding pre-computed heuristic INPUT round numbers",
+        "analysis_output.json:method1_element_count.shopping.page_types.product_listing.estimated_elements 150",
+        "frozen_definition.json:definition_id DEF-FALLBACK-INTERACTIVE source functional_fallback candidate_mapping Definition 2",
+        "result.json:metrics.definition_resolved false fallback_frozen true forensic_analysis_result INCONCLUSIVE",
+        "spec.json:positive_control forensic analysis produces either traceable method or documented inconclusiveness"
+      ],
+      "impact": "H1 correctly marked inconclusive; fallback frozen per prereg. No further forensic fix required. Denominator ambiguity confirmed as heuristic, not measurable, supporting producer's interpretation that definition must be functional."
+    },
+    {
+      "finding_id": "VF-PROVENANCE-GAPS",
+      "severity": "high",
+      "category": "provenance",
+      "metric_ids": [],
+      "control_ids": [],
+      "description": "Provenance gaps violate spec measurement_validity. Docker digest not_recorded (should be sha256 before measurement), playwright_version unknown, method1_derivation sha256 null, measurement script script_exit_code 66 (script failed though measurements saved), 3 viewport_sample artifacts sha256 null, locatable_sample_* not listed in provenance, artifacts directory lists 6 raw trees not in result.json page_type breakdown. Fresh browser context per task is claimed and appears in script (browser.new_context per task) but not verifiable from raw trees alone.",
+      "evidence_refs": [
+        "provenance.json:environment.docker_image_digest not_recorded playwright_version unknown datasets.method1_derivation.sha256 null",
+        "provenance.json:execution_log.execute_phase.script_exit_code 66 note Raw results captured before failure",
+        "result.json:artifacts viewport_sample_* sha256 null",
+        "provenance.json:measurement_artifacts.artifacts_directory contents lists raw_ax_tree_shop_listing_002 etc but result metrics use listing_tools/listing_clothing not matching",
+        "spec.json:measurement_validity Docker image digest recorded before measurement, Frozen script sha256 recorded, Raw accessibility tree saved for each task with durable sha256"
+      ],
+      "impact": "Reproducibility and drift bounding impossible. Next experiment must record digest, script hash, and per-task artifact hashes exactly."
+    },
+    {
+      "finding_id": "VF-CDP-YIELD-REPLICATION-BUT-DEFINITION-DEPENDENT",
+      "severity": "medium",
+      "category": "measurement_validity",
+      "metric_ids": ["yield_cdp_mean", "yield_cdp_cv", "yield_cdp_range", "yield_cdp_stdev"],
+      "control_ids": [],
+      "description": "CDP yield recomputed matches producer but is definition-dependent and chrome-limited. 108 dataset yield_cdp mean 0.0820 cv 0.1686 range 0.0637-0.0951 (producer) recomputed mean 0.08201 cv 0.1685 match true. 8 dataset yield_cdp mean 0.0187 cv 0.106 (or 0.0184 excl 404 cv 0.116) much lower due to different total_cdp counting (DOM elements vs bbox elements). Both are stable (cv<0.2) but measure chrome viewport / total DOM, not interactive yield, so CDP baseline 0.0426 not replicated under corrected DOM counting.",
+      "evidence_refs": [
+        "result.json:metrics.yield_cdp_mean 0.0820 stdev 0.0138 cv 0.1686",
+        "exp346_raw_results.json:statistics.yield_cdp_mean 0.082012 cv 0.168588",
+        "artifacts/exp346_raw_results.json:total_cdp_elements 370-463 yield_cdp 0.017-0.021 mean 0.0187",
+        "spec.json:baselines Parent N=20 yield_cdp 0.0426 stable CV 0.12 as cross-denominator floor"
+      ],
+      "impact": "CDP yield stability is real but value depends on total DOM vs elements_with_bbox vs CDP nodes. Cannot claim 8.2% or 1.8% as definitive CDP yield without frozen denominator."
+    },
+    {
+      "finding_id": "VF-SITE-TYPE-BLOCKED-UNINCORPORATED",
+      "severity": "medium",
+      "category": "sampling",
+      "metric_ids": ["tasks_gitlab", "tasks_reddit"],
+      "control_ids": ["gitlab_reddit_control"],
+      "description": "Site-type comparison blocked status inconsistent. Result.json reports 0 gitlab/reddit and control blocked true; report says Docker images not pulled. Artifacts dataset actually contains successful gitlab_001 (viewport 7 locatable 7 yield_locatable 1.0 yield_cdp 0.189) and reddit_001 (viewport 8 locatable 9 yield 0.888 yield_cdp 0.2) on 8081/8082 with distinct viewport samples (form/textbox/button not header). These contradict result.json's zero counts and are excluded from result metrics, indicating gitlab/reddit were measured after primary results were frozen.",
+      "evidence_refs": [
+        "result.json:metrics.tasks_gitlab 0 tasks_reddit 0 controls.gitlab_reddit_control blocked true",
+        "result.json:observations OBS-GITLAB-REDDY-BLOCKED Docker images not pulled",
+        "artifacts/exp346_raw_results.json:gitlab_001 url localhost:8081 yield_locatable 1.0 reddit_001 url localhost:8082 yield 0.888",
+        "provenance.json:datasets.webarena_verified_gitlab.status BLOCKED reason Docker image not pulled (contradicts artifact existence)"
+      ],
+      "impact": "H5 site-type comparison was technically performed but not integrated; C-CROSSSITE generalization (C-CROSSSITE, C-LLM-INHERIT) remains unknown. Next run must consistently measure or explicitly block with pull logs."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "Method1 estimate 0.365 shopping yield 0.365 (150 elements product_listing)",
+      "metric_id": "method1_delta_pp",
+      "expected": "yield_locatable within 15pp of 0.365 if definition_resolved per prereg H3; producer reports delta",
+      "observed": "Producer 108 dataset delta 317.97pp raw (3.5447-0.365) and 68.5pp corrected estimate both fail; artifacts shopping yield 0.3359 mean delta 2.9pp would pass but viewport chrome invalidates. Producer correctly reports method1_within_15pp false. Forensic inconclusive so H3 not formally testable per spec (only if definition_resolved). No baseline falsification or support justified under frozen fallback.",
+      "verdict": "INCONCLUSIVE_BLOCKED_BY_DEFINITION_AND_MEASUREMENT",
+      "evidence_refs": [
+        "spec.json:baselines Method1 estimate shopping yield 0.365",
+        "result.json:metrics.method1_yield 0.365 method1_delta_raw_pp 317.97 method1_delta_corrected_pp 68.5 method1_within_15pp false",
+        "artifacts/exp346_raw_results.json:shopping mean yield 0.3359 delta 2.9pp (but viewport 8 chrome, 404 included)",
+        "method1_trace.json:conclusion cannot resolve which candidate definition 150 maps to"
+      ]
+    },
+    {
+      "baseline_id": "Heuristic estimate 0.65 FALSIFIED",
+      "metric_id": "heuristic_delta",
+      "expected": "falsified >23pp under any denominator per parent",
+      "observed": "Heuristic 0.65 vs 108 dataset yield_locatable 3.54 delta 289pp, vs yield_cdp 0.082 delta 56.8pp, vs artifacts yield 0.335 delta 31pp all >23pp. Falsification robust under either dataset or denominator.",
+      "verdict": "FALSIFIED_ROBUST",
+      "evidence_refs": [
+        "spec.json:baselines Heuristic 0.65 FALSIFIED robustly (>23pp)",
+        "result.json:metrics.yield_cdp_mean 0.082 vs 0.65 delta 56.8pp (implicit)"
+      ]
+    },
+    {
+      "baseline_id": "Parent N=20 yield_cdp 0.0426 stable CV 0.12",
+      "metric_id": "yield_cdp_mean",
+      "expected": "cross-denominator floor, stable",
+      "observed": "108 dataset 0.0820 CV 0.168 higher than 0.0426 delta 3.94pp (result.json cdp_delta_pp) but still stable CV<0.2; artifacts dataset 0.0187 much lower. Neither replicates 0.0426; value sensitive to total DOM counting method (CDP nodes vs DOM+bbox vs bbox_data length). Producer notes CDP getFullAXTree returns 1 node headless, DOM fallback used.",
+      "verdict": "VALUE_SENSITIVE_NOT_REPLICATED_UNDER_THIS_COUNTING",
+      "evidence_refs": [
+        "spec.json:baselines Parent N=20 yield_cdp 0.0426",
+        "result.json:metrics.cdp_baseline_yield 0.0426 cdp_delta_pp 3.94 observations OBS-CDP-YIELD-STABLE CV 0.17",
+        "exp346_raw_results.json:infrastructure_notes CDP returns 1 node DOM fallback"
+      ]
+    },
+    {
+      "baseline_id": "Parent N=20 yield_locatable 0.079 all-elements-with-bbox ~0.32 interactive-only ~0.42 parent 258 definition 5x range",
+      "metric_id": "yield_locatable",
+      "expected": "demonstrates denominator ambiguity",
+      "observed": "Producer 108 dataset raw yield 3.54 demonstrates counting bug, not the 0.079; artifacts interactive viewport yield 0.335 close to parent interactive 0.32, supporting that interactive definition gives ~0.32-0.34 when viewport correctly counted but still chrome-limited. Ambiguity persists.",
+      "verdict": "AMBIGUITY_CONFIRMED",
+      "evidence_refs": [
+        "spec.json:baselines Parent N=20 yield_locatable 0.079 ~0.32 ~0.42 5x range",
+        "result.json:metrics.locatable_elements_by_type listing 82 detail 32 cart 21 checkout 21"
+      ]
+    },
+    {
+      "baseline_id": "CDP yield 0.0426 stable across 40+ tasks",
+      "metric_id": "yield_cdp_cv",
+      "expected": "stable across tasks",
+      "observed": "Both datasets CV <0.2 (0.168 and 0.106) nominally stable but on chrome-only viewport, so stability is of chrome ratio not content yield.",
+      "verdict": "NOMINALLY_STABLE_BUT_NOT_CONTENT_REPRESENTATIVE",
+      "evidence_refs": [
+        "spec.json:baselines CDP yield 0.0426 stable",
+        "result.json:metrics.yield_cdp_cv 0.1686"
+      ]
+    }
+  ],
+  "recomputed_metrics": {
+    "viewport_elements_108_dataset": {
+      "producer": {"mean": 108.0, "stdev": 0.0, "unique_values": [108], "constant": true},
+      "recomputed": {"mean": 108.0, "stdev": 0.0, "values": [108,108,108,108,108,108,108], "unique": [108]},
+      "match": true,
+      "source": "exp346_raw_results.json:statistics.viewport_elements_values",
+      "anomaly_confirmed": true
+    },
+    "viewport_elements_8_dataset": {
+      "recomputed": {"mean": 8.0, "stdev": 0.0, "values": [8,8,8,8,8], "unique": [8]},
+      "source": "artifacts/exp346_raw_results.json shop_* viewport_elements",
+      "anomaly_confirmed": true,
+      "note": "Also constant, indicates header chrome captured by corrected counting"
+    },
+    "yield_locatable_108_dataset": {
+      "producer_mean": 3.5447,
+      "producer_cv": 0.4838,
+      "recomputed_mean": 3.544673857142857,
+      "recomputed_cv": 0.48378620484973023,
+      "recomputed_range": [1.317073, 5.142857],
+      "match": true,
+      "all_above_one": true,
+      "meaningful": false,
+      "source": "exp346_raw_results.json statistics.yield_locatable_* via python statistics.stdev"
+    },
+    "yield_locatable_8_dataset_shopping": {
+      "recomputed_mean_all5": 0.3359307359307359,
+      "recomputed_cv_all5": 0.43065151699392623,
+      "recomputed_mean_excl_404": 0.3246753246753247,
+      "recomputed_cv_excl_404": 0.5066666666666666,
+      "note": "Includes 404 page shop_listing_004 yield 0.3809; excluding it CV worsens to 0.50, both >0.2 threshold",
+      "source": "artifacts/exp346_raw_results.json shopping tasks"
+    },
+    "yield_cdp_108_dataset": {
+      "producer_mean": 0.082,
+      "producer_cv": 0.1686,
+      "recomputed_mean": 0.08201242857142857,
+      "recomputed_cv_sample": 0.16858815134680094,
+      "match": true,
+      "source": "exp346_raw_results.json"
+    },
+    "yield_cdp_8_dataset": {
+      "recomputed_mean_all5": 0.018729221190216975,
+      "recomputed_cv_all5": 0.10605481652066777,
+      "recomputed_mean_excl_404": 0.018411526487771217,
+      "recomputed_cv_excl_404": 0.11633527585784849,
+      "source": "artifacts/exp346_raw_results.json"
+    },
+    "locatable_elements_by_type_108": {
+      "producer_listing": 82.0,
+      "producer_detail": 32.0,
+      "producer_cart": 21.0,
+      "producer_checkout": 21.0,
+      "recomputed_listing": 82.0,
+      "recomputed_detail": 32.0,
+      "recomputed_cart": 21.0,
+      "recomputed_checkout": 21.0,
+      "match": true
+    },
+    "method1_delta": {
+      "producer_raw_pp": 317.97,
+      "recomputed_raw_pp": 317.4673857142857,
+      "producer_corrected_pp": 68.5,
+      "recomputed_corrected_pp": 68.53,
+      "artifacts_shopping_delta_pp_all5": 2.9069264069263594,
+      "artifacts_shopping_delta_pp_excl_404": 4.03246753246753,
+      "match_raw": true,
+      "note": "Artifacts delta within 15pp would nominally PASS H3 but definition not resolved and viewport chrome invalidates"
+    },
+    "forensic_150": {
+      "recomputed": "INCONCLUSIVE heuristic INPUT round numbers",
+      "producer": "INCONCLUSIVE",
+      "match": true,
+      "source": "analysis_output.json method1_element_count shopping product_listing estimated_elements 150"
+    },
+    "checkout_proxy": {
+      "producer_same_as_cart": true,
+      "recomputed_same_dom": true,
+      "cart_total_dom": 1136,
+      "checkout_total_dom": 1136,
+      "redirect_to_7770": true,
+      "match": true
+    }
+  },
+  "claim_ceiling": "MAX JUSTIFIED: Forensic INCONCLUSIVE confirmed - Method1 150-element estimate is heuristic INPUT not traceable to DOM/AX counting; functional fallback DEF-FALLBACK-INTERACTIVE (interactive roles + bbox + aria/form/onclick) is frozen but not validated for yield. Under frozen interactive definition, viewport yield measurement is INVALID: both packet datasets capture fixed Magento2 navigation chrome only (108 dataset constant 108, 8 dataset constant 8, identical header samples across listing/detail/cart/checkout_proxy), yield_locatable values (1.3-5.14 buggy or 0.24-0.57 corrected) do not measure page content and are unstable (CV 0.48 buggy, 0.43-0.50 corrected, both >0.2 threshold). No checkout page yield measured (checkout/cart duplicate, true checkout redirects to 7770). No valid shopping locatable yield can be claimed; 812-task corpus viability for C-CROSSSITE/C-LLM-INHERIT remains UNKNOWN. CDP yield ~0.02-0.08 stable but chrome-ratio not content yield. Heuristic 0.65 remains FALSIFIED robustly; Method1 0.365 status INCONCLUSIVE pending definition and fixed content capture. Gitlab/reddit yields were measured in artifacts (0.888-1.0) but excluded from metrics, so cross-site claim unverified.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-34607693437/request.json",
+    "research/experiments/EXP-INTEL-34607693437/spec.json",
+    "research/experiments/EXP-INTEL-34607693437/prereg.md",
+    "research/experiments/EXP-INTEL-34607693437/freeze.json",
+    "research/experiments/EXP-INTEL-34607693437/result.json",
+    "research/experiments/EXP-INTEL-34607693437/report.md",
+    "research/experiments/EXP-INTEL-34607693437/provenance.json",
+    "research/experiments/EXP-INTEL-34607693437/exp346_raw_results.json",
+    "research/experiments/EXP-INTEL-34607693437/artifacts/exp346_raw_results.json",
+    "research/experiments/EXP-INTEL-34607693437/measure_yield_exp346.py",
+    "research/experiments/EXP-INTEL-34607693437/frozen_definition.json",
+    "research/experiments/EXP-INTEL-34607693437/method1_trace.json",
+    "research/experiments/EXP-INTEL-33945226776/analysis_output.json",
+    "research/experiments/EXP-INTEL-34546944360/handoff.json",
+    "research/experiments/EXP-INTEL-34546944360/audit.json"
+  ],
+  "unresolved": [
+    "Why viewport intersection captures only fixed header (108 DOM elements then 8 interactive) despite spec viewport 1280x720 threshold 0.5 - is rect computed against viewport or page, is header position:fixed covering viewport, does scrolling or full-page enumeration recover content",
+    "Why exactly 108 ALL-DOM vs 8 interactive header elements intersect viewport across all page types - what is true page-specific fragment count for shopping pages under frozen definition",
+    "True checkout page yield: checkout/ redirects to port 7770 internal service, how to access authenticated checkout content without cart state",
+    "Canonical locatable definition operationalization: does DEF-FALLBACK-INTERACTIVE locate elements an agent can use for inheritance vs all locatable content blocks under 812-task eval",
+    "Docker digest drift impact: shopping image digest not recorded, DOM counts 1136-1696 in 108 dataset vs 370-463 in 8 dataset for same pages, which counting is ground truth",
+    "Artifact duality origin: which execution produced 108 vs 8 dataset, why script_exit_code 66, and which dataset should be canonical for handoff",
+    "Gitlab/reddit cross-site yield generalization for C-CROSSSITE: artifacts show gitlab 1.0 reddit 0.888 but sample n=1 each, needs stratified randomized site-type measurement",
+    "Whether 812-task corpus can be salvaged with corrected content-aware yield or needs replacement pipeline (e.g., full-page AX tree, scroll-cumulative, or CDP-based enumeration)"
+  ]
+}

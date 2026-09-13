@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34695057869",
+  "lane": "physics",
+  "decision": "FALSIFIED-IN-SETTING",
+  "claim_updates": [
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "HYPOTHESIS",
+      "reason": "Response-side signals (SHA-256 body digest + content-type + status code) fail to provide predictive PMI on 0/3 locally-hosted SPAs (dashboard 0.034 bits, multistep 0.0, wizard 0.0, all Bonferroni p=1.0). Primary condition requires >=2/3 sites >=0.1 bits improvement over URL-only; fails on all 3. Dashboard response bodies are tautological with action (I=1.94 bits) yet PMI ~0. This experiment falsifies this specific response-side representation on these SPAs but does not close C-WEB-DYNAMICS globally. Claim ceiling bounded to SHA-256 body digest aggregation on 3 locally-hosted Express SPAs."
+    }
+  ],
+  "product_action": "NONE",
+  "promote_to_product": false,
+  "continue": true,
+  "next_question": "Do DOM-based state representation (rendered page structural features: element count, tree depth, interactive density, visible text content, attribute patterns) provide predictive PMI on locally-hosted SPAs where both request-side and response-side network-request signals fail (multistep_form, wizard) or are tautological (dashboard)?",
+  "reason": "FALSIFIED-IN-SETTING per frozen decision rule (prereg 11.2): (1) primary condition fails on 3/3 sites (threshold >=2/3), all Bonferroni p=1.0; (2) positive control below 0.5 threshold (0.43 bits, though p=0.001 confirms pipeline detects structure). Primary failure alone is sufficient. Audit found positive control shortfall is due to intentional HTTP 204 empty bodies on synthetic server (54/250 = 21.6%), not Playwright capture failure. Null control passes (recomputed p~0.57 >0.01) confirming no false-positive bias. Response timing signal invalid (absolute timestamps, not durations) — not used in primary discretization. Response body capture rates below 90% on multistep (67.8%) and wizard (61.7%) but n_test >= 30 maintained. All claims bounded to locally-hosted simulation, not production SPAs. Request-side baseline validated (dashboard 1.165 bits p=0.001 confirms pipeline sensitivity). Response-side failure is representation-specific: SHA-256 hash aggregation collapses per-request variation into sparse bins, and the captured response content is confirmatory (current state) rather than predictive (next state) on these deterministic SPAs.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-34695057869/result.json metrics.per_site_results dashboard resp_vs_url 0.034 p_bonf 1.0 multistep 0.0 p_bonf 1.0 wizard 0.0 p_bonf 1.0 sites_passing_primary 0",
+    "research/experiments/EXP-PHYSICS-34695057869/result.json metrics.positive_control_pmi_test 0.430 positive_control_perm_p 0.001 positive_control_passes false",
+    "research/experiments/EXP-PHYSICS-34695057869/result.json controls.null_control_shuffled_real_labels observed_perm_p 0.762 result PASS",
+    "research/experiments/EXP-PHYSICS-34695057869/result.json tautology_check.dashboard mi_action_response_body 1.940 response_pmi 0.034",
+    "research/experiments/EXP-PHYSICS-34695057869/result.json metrics.alpha_sensitivity dashboard alpha_0.0 0.094 alpha_1.0 0.034 alpha_2.0 0.021",
+    "research/experiments/EXP-PHYSICS-34695057869/audit.json status REVISE producer_claim_supported true claim_ceiling validity_findings 8 findings",
+    "research/experiments/EXP-PHYSICS-34695057869/audit.json validity_findings positive_control_misattribution_and_threshold_fragility (severity high) intentional 204 not Playwright failure",
+    "research/experiments/EXP-PHYSICS-34695057869/audit.json validity_findings null_control_implementation_bug (severity medium) shuffled-vs-shuffled not observed-vs-shuffled, correct p~0.57 still PASS",
+    "research/experiments/EXP-PHYSICS-34695057869/audit.json validity_findings response_timing_invalid (severity medium) Date.now() absolute not elapsed ms",
+    "research/experiments/EXP-PHYSICS-34695057869/audit.json validity_findings response_capture_rate_below_threshold (severity medium) multistep 67.8% wizard 61.7%",
+    "research/experiments/EXP-PHYSICS-34695057869/audit.json baseline_findings request_side_baseline_strong dashboard request 1.165 p=0.001 vs response 0.034",
+    "research/experiments/EXP-PHYSICS-34695057869/audit.json recomputed_metrics null_control_recomputed_correct_p_200perms 0.572",
+    "research/experiments/EXP-PHYSICS-34695057869/raw_network_captures_response_side.json synthetic status 204:54 empty hash e3b0c44298fc1c14 54/250=0.216",
+    "research/physics/network_requests/pmi_response_side.py hash_response_side temporal_split permutation_test",
+    "research/physics/network_requests/capture_response_side.js response_timing_ms Date.now() route interception",
+    "research/experiments/EXP-PHYSICS-34695057869/spec.json falsifier decision_rule measurement_validity claim_ids C-WEB-DYNAMICS",
+    "research/experiments/EXP-PHYSICS-34695057869/prereg.md 11.2 FALSIFIED-IN-SETTING decision rules"
+  ]
+}
