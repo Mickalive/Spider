@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-34654566605",
+  "lane": "runtime",
+  "target_lane": "runtime",
+  "next_question": "Does body-only discrimination survive realistic CDN negotiation where Content-Encoding is selected deterministically from client's advertised Accept-Encoding (not per-request random), and would a client with stable Accept-Encoding see deterministic compressed hashes?",
+  "why_next": "This experiment resolved the parent's critical unknown: body-only discrimination degrades under synthetic per-request random compression (rho -0.948). However, the synthetic random model is worst-case; real CDN compression is negotiated deterministically via client Accept-Encoding header (client advertises br,gzip, CDN selects one algorithm consistently). The next step is to test whether a client with stable Accept-Encoding sees deterministic compressed hashes, which would validate body-only for real CDN environments. This is materially orthogonal to the synthetic random test and addresses the audit V5 scope bound.",
+  "carry_forward": {
+    "established": [
+      "Body-only (status+body_hash) discrimination is invariant under synthetic per-response header noise (tautological by construction) — parent EXP-RUNTIME-34509593940",
+      "Unfiltered full-vector (status+headers+body_hash) discrimination collapses under synthetic header noise: 0.833->0.232->0.0->0.0 on /userinfo — parent EXP-RUNTIME-34509593940",
+      "Body-only advantage over unfiltered full-vector exists only when headers contain high-entropy per-request noise — parent EXP-RUNTIME-34509593940",
+      "expired_token and invalid_token remain indistinguishable by ANY observable on /userinfo and /introspect — carried from parent EXP-RUNTIME-34439061845",
+      "Body-only discrimination: /userinfo 0.5 (3 body groups), /introspect 0.5 (2 body groups) — constant under header noise",
+      "WWW-Authenticate discrimination is endpoint-specific, not Keycloak-level — parent EXP-RUNTIME-34439061845",
+      "Body-only discrimination degrades monotonically under synthetic per-request random compression (Spearman rho -0.948, n=4, p=0.051) — this experiment",
+      "Fixed deterministic gzip (mtime=0) preserves body-only discrimination (0.5 = uncompressed) — this experiment",
+      "Multi-algorithm compression (gzip/brotli/identity) more destructive than single-algorithm (random gzip level) — this experiment",
+      "Body-only discrimination floor ~0.09-0.13 under random-algo, not zero — this experiment",
+      "Status-only discrimination invariant 0.5 on /userinfo under all compression levels — this experiment",
+      "Hash variation grows with compression variability: 4/40 -> 4/40 -> 9/40 -> 15/40 unique hashes on /userinfo — this experiment"
+    ],
+    "rejected": [
+      "Unfiltered full-vector as reliable production fingerprint under infrastructure header noise — collapses to 0.0 at noise>=2",
+      "WWW-Authenticate as general-purpose Keycloak-level auth-state signal — endpoint-specific",
+      "Cache-Control error-type variation as discriminating signal — confirmed falsified",
+      "Body-only discrimination does NOT degrade under non-deterministic compression — falsified (degrades rho -0.948)",
+      "Body-only architecture is universally superior to full-vector — narrowed (body-only fails under compression, status-only is compression-immune)"
+    ],
+    "unknown": [
+      "Does body-only discrimination survive realistic CDN negotiation where Content-Encoding is selected deterministically from client's advertised Accept-Encoding (not per-request random)?",
+      "Would a client with stable Accept-Encoding see deterministic compressed hashes under real CDN?",
+      "Does body-only degradation generalize to larger/more diverse body content-types and sizes beyond Keycloak /userinfo 0/189 bytes and /introspect 16/729 bytes?",
+      "What discrimination floor remains when hashing decompressed bodies (normalization layer that decompresses via Content-Encoding before hashing)?",
+      "Would a filtered full-vector baseline (status+WWW-Authenticate+Cache-Control+body_hash excluding infrastructure headers) retain higher discrimination than body-only and survive compression?",
+      "Does result generalize to non-Keycloak OAuth/OIDC providers (Auth0, Okta) or production Keycloak with real CDN?",
+      "What is minimal compression entropy required to collapse body-only below usable threshold?"
+    ],
+    "do_not_assume": [
+      "Do not assume body-only architecture is universally superior to full-vector — this experiment tested only synthetic per-request random compression; filtered full-vector baseline not tested",
+      "Do not assume body-only invariance is a novel scientific finding — it is tautological by construction under header noise (parent audit V2)",
+      "Do not assume the Spearman rho -0.948 p=0.0513 is statistically robust — n=4 compression levels, low power, directionally strong but not robust (audit V2)",
+      "Do not assume this experiment validates body-only for production — ceiling bounded to synthetic per-request random compression model on Keycloak 25.0 start-dev (audit V5)",
+      "Do not assume body-only achieves discrimination on /token endpoints — body-only is 0.0 on both /token password and /token client_credentials (parent EXP-RUNTIME-34439061845)",
+      "Do not assume expired_token represents true Keycloak-issued expired tokens — locally-signed HS256 (V6 state construction leakage)",
+      "Do not assume Keycloak 25.0 start-dev behavior represents production Keycloak with CDN, load-balancer, or rate-limiting",
+      "Do not assume body-only discrimination collapses to zero under compression — floor ~0.09-0.13, not 0.0 (audit V6)",
+      "Do not assume synthetic per-request random compression reflects real CDN behavior — real CDN may negotiate deterministically via Accept-Encoding (audit V5)",
+      "Do not assume empty-body gzip variation generalizes to larger bodies — variation limited for small/empty bodies (audit V3)",
+      "Do not assume body-only is the only option; status-only is compression-immune and achieves same discrimination 0.5 on /userinfo (result.json)"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-RUNTIME-34654566605/result.json",
+    "research/experiments/EXP-RUNTIME-34654566605/audit.json",
+    "research/experiments/EXP-RUNTIME-34654566605/raw_observations.json",
+    "research/experiments/EXP-RUNTIME-34654566605/spec.json",
+    "research/experiments/EXP-RUNTIME-34654566605/prereg.md",
+    "research/experiments/EXP-RUNTIME-34509593940/handoff.json",
+    "research/experiments/EXP-RUNTIME-34439061845/handoff.json",
+    "research/claims/registry.json"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-34654566605/result.json — body-only discrimination 0.5/0.5/0.327/0.094 across comp 0-3, M_COMPRESSION_DEGRADATION rho -0.948 p 0.051, controls all PASS, hash variation 4/40->15/40",
+    "research/experiments/EXP-RUNTIME-34654566605/audit.json — REVISE, claim_ceiling narrowed to synthetic random model, V1-V8 validity findings including V5 scope bound, V6 floor non-zero, V3 empty-body variation limited",
+    "research/experiments/EXP-RUNTIME-34654566605/raw_observations.json — 320 HTTP observations sha b8fd3d870508cbc803ed44c1676b4a88233e6b84e0b7c9d664aa93972810e618",
+    "research/experiments/EXP-RUNTIME-34654566605/provenance.json — Keycloak 25.0 Docker, proxy 18081, brotli available, compression levels [0,1,2,3]",
+    "research/experiments/EXP-RUNTIME-34509593940/handoff.json — parent established/rejected/unknown/do_not_assume including body-only tautology and CDN compression unresolved threat"
+  ],
+  "recommended_action": "Design a realistic CDN negotiation test: deploy Keycloak behind a reverse proxy that applies compression based on client Accept-Encoding header (client advertises br,gzip, CDN selects one algorithm deterministically). Test whether body-only fingerprint maintains discrimination across 4 auth states on /userinfo and /introspect under this realistic negotiation. Separately, test a filtered full-vector baseline (status+WWW-Authenticate+Cache-Control+body_hash excluding infrastructure headers) under the same synthetic random compression to determine whether it retains discrimination and whether body-only simplicity is actually necessary. Also test hashing after decompression (normalization layer) to determine if this fully restores discrimination without product cost."
+}

@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-34642376433",
+  "lane": "product",
+  "target_lane": "product",
+  "next_question": "Can the suffix guard (Fix1) and delimiter-bound prefix validation (Fix2, last-char variant) be applied to actual src/spider/kernel.py distill_parameterized and _bind with prefixes, tested against a corrected N1 null control using truly disjoint URLs with no shared protocol prefix (e.g., http:// vs ftp://), and validated without regressions on all established conditions — and does the Fix2 last-char validation (not the prereg next-char logic) produce correct binding outcomes including prefix stripping for full-value vs short-value?",
+  "why_next": "EXP-PRODUCT-34642376433 validated two bounded fixes in standalone reimplementation: Fix1 (suffix guard) restores G1 binding and Fix2 (delimiter-bound prefix validation) prevents N1_ORIGINAL over-parameterization, with no regressions on P1/G2/G3/G5. However, the frozen decision_rule triggers FALSIFIED-IN-SETTING because N1_REDESIGNED null control fails (URLs share 'https://' prefix, not truly disjoint). Three material gaps remain: (1) N1_REDESIGNED must be redesigned with truly disjoint URLs, (2) Fix2 spec/implementation divergence (prereg next_char would false-reject P1/G1; implementation last-char is correct but undocumented), (3) fixes not validated against actual kernel.py — the inherited next_question from EXP-PRODUCT-34485517221 explicitly requires this. The next experiment must apply fixes to actual kernel.py, correct the N1 null control, resolve the Fix2 divergence, and re-run all conditions to achieve a frozen SURVIVES_CURRENT_TEST verdict that can advance C-PARAM-INHERIT toward product viability.",
+  "carry_forward": {
+    "established": [
+      "FIX1 VALIDATED ON G1: Suffix guard (reject single-char suffixes not preceded by structural delimiters ?, =, &) restores query-string binding. Template search?q=${url} (no suffix 'a'), binding_accuracy=1.0 for unseen gamma/epsilon/zeta. Evidence: EXP-PRODUCT-34642376433 raw_evidence.json G1_QUERY_STRING_SIMPLE slot_count=1 binding_accuracy=1.0 template search?q=${url}",
+      "FIX2 VALIDATED ON N1_ORIGINAL: Delimiter-bound prefix validation (last-char of prefix in /?=& or EOS) prevents over-parameterization of cross-host URLs sharing 'https://api.' prefix (ends at '.', not delimiter). slot_count=0. Evidence: EXP-PRODUCT-34642376433 raw_evidence.json N1_ORIGINAL slot_count=0",
+      "NO REGRESSIONS ON ESTABLISHED CONDITIONS: P1 (path-prefix), G2 (multi-param query), G3 (deep path), G5 (path+query hybrid) all maintain binding_accuracy=1.0 and correct slot_count after fixes. Fixes are safe for established single-slot patterns. Evidence: EXP-PRODUCT-34642376433 raw_evidence.json P1/G2/G3/G5 all binding_accuracy=1.0",
+      "G4 ARCHITECTURAL LIMITATION CONFIRMED: Leaf-path model produces slot_count=1 (not 2) because URL is treated as single field. Multi-char suffix '00' from 100/200/300 not caught by Fix1 single-char guard. Template users/${url}00, binding_accuracy=0.0. This is architectural, not a fix failure. Evidence: EXP-PRODUCT-34642376433 raw_evidence.json G4_MULTI_SLOT slot_count=1 binding_accuracy=0.0",
+      "LITERAL BASELINE CONFIRMED: B_LITERAL fail_rate=1.0 confirms parameterized induction necessary. Confidence 0.5 < min_confidence 0.8. Evidence: EXP-PRODUCT-34642376433 raw_evidence.json B_LITERAL",
+      "SINGLE-SLOT SYNTHETIC CORRECTNESS for 5 URL classes: path-prefix (P1), query-string (G1 with fix), multi-param query (G2), deep path (G3), path+query hybrid (G5). All binding_accuracy=1.0 on unseen values. Evidence: EXP-PRODUCT-34642376433 raw_evidence.json",
+      "NULL CONTROLS from parent EXP-PRODUCT-34420092879: E1 (pattern absence, slot_count=0), E2 (single observation, slot_count=0). No parameterization hallucination on well-formed negative cases. Evidence: parent handoff carry_forward.established"
+    ],
+    "rejected": [
+      "Hypothesis that rfind('/') generalizes to all structurally different URL patterns: FALSIFIED-IN-SETTING (EXP-PRODUCT-34485517221). Three failure modes: suffix corruption (G1), multi-slot limitation (G4), over-parameterization (N1). Evidence: parent verdict.json, audit.json",
+      "N1_REDESIGNED as truly disjoint null control: FLAWED — URLs share 'https://' prefix ending at '/' delimiter, not 'NO common prefix beyond empty string' as spec claims. Fix2 correctly allows parameterization. Evidence: EXP-PRODUCT-34642376433 raw_evidence.json N1_REDESIGNED slot_count=1, audit.json V4",
+      "Distill-time prefix stripping as standalone C2 fix: FALSIFIED (parent EXP-PRODUCT-34282620394, 4/9 regressions). Evidence: parent handoff carry_forward.rejected",
+      "_bind() prefix-strip with full template prefix: FALSIFIED (parent EXP-PRODUCT-34195008089). Evidence: parent handoff carry_forward.rejected",
+      "C-PARAM-INHERIT is product-ready: NOT ACHIEVED. Kernel integration remains EXPERIMENTAL. Evidence: EXP-PRODUCT-34642376433 verdict.json claim_updates, audit.json claim_ceiling"
+    ],
+    "unknown": [
+      "Whether suffix guard and delimiter-bound prefix validation produce same binding outcomes when applied to actual src/spider/kernel.py distill_parameterized and _bind with prefixes — standalone reimplementation _bind ignores prefixes dict used for VALUE CONTRACT stripping. Evidence: EXP-PRODUCT-34642376433 provenance.json divergence_note, audit.json V3",
+      "Whether Fix2 last-char validation (implementation) vs next-char validation (prereg) affects binding outcomes in kernel.py — prereg next_char logic would false-reject P1/G1 (next_char 'A'/'a' not in /?=&). Evidence: EXP-PRODUCT-34642376433 audit.json V2_SPEC_IMPL_MISMATCH_FIX2",
+      "Whether a minimum prefix length threshold (e.g., len > 8) should complement Fix2 to reject protocol-only https:// parameterization that currently passes delimiter check. Evidence: EXP-PRODUCT-34642376433 unresolved, audit.json unresolved",
+      "Whether Fix1 should be extended to multi-char non-structural suffixes (e.g., '00', 'ing') to fix G4 suffix corruption, and how to define structural delimiter boundary for suffix. Evidence: EXP-PRODUCT-34642376433 unresolved, audit.json V1",
+      "Whether leaf-path model can support multi-slot URL induction via parsing without breaking single-leaf abstraction. Evidence: EXP-PRODUCT-34642376433 unresolved, parent handoff carry_forward.unknown",
+      "Whether empty slot_prefixes for P1/G3/G5 (observed '' vs expected 'users/'/'repos/main/issues/') is representational artifact or correctness failure for slot-level VALUE CONTRACT. Evidence: EXP-PRODUCT-34642376433 audit.json V6, parent handoff carry_forward.unknown",
+      "End-to-end product economics (C-PRODUCT-ECON): does parameterized kernel save total cost per successful task? Still unmeasured. Evidence: parent handoff carry_forward.unknown",
+      "Real-world prevalence of single-char vs multi-char suffix collisions and cross-host vs protocol-only prefix collisions in API URLs. Evidence: EXP-PRODUCT-34642376433 unresolved",
+      "Real-browser external validity: all measurements deterministic synthetic with zero model/browser/network calls. Evidence: EXP-PRODUCT-34642376433 provenance.json environment"
+    ],
+    "do_not_assume": [
+      "Fixes transfer to actual kernel.py — standalone reimplementation _bind ignores prefixes dict that kernel.py uses for VALUE CONTRACT stripping. Short test values do not exercise stripping, so reimplementation binding may not match kernel binding for full-value vs short-value mixed convention. Evidence: EXP-PRODUCT-34642376433 provenance.json divergence_note, audit.json V3",
+      "N1_REDESIGNED failure means Fix2 is broken — the test case is flawed (URLs share 'https://' prefix, not truly disjoint). Fix2 correctly allows parameterization at '/' delimiter boundary. But frozen decision_rule triggers FALSIFIED-IN-SETTING regardless of cause. Evidence: EXP-PRODUCT-34642376433 raw_evidence.json, audit.json V4",
+      "G4 failure means Fix1 is broken — Fix1 addresses single-char coincidental suffix overlap (G1 'a' from alpha/beta/delta), not multi-char suffixes. G4 '00' is 2-char, architecturally distinct mechanism. Evidence: EXP-PRODUCT-34642376433 result.json validity_notes, audit.json V1",
+      "Producer outcome MIXED is correct — raw_evidence verdict FALSIFIED-IN-SETTING per frozen decision_rule (n1_redesigned_passes=false). MIXED requires >=1 regression on P1/G2/G3/G5 per spec, but regressions=[]. Post-hoc reinterpretation cannot override frozen rule. Evidence: EXP-PRODUCT-34642376433 raw_evidence.json decision_rule_evaluation, audit.json V8",
+      "Single-slot leaf-path can handle multi-segment URLs — G4 confirms architectural limitation. leaf-path model treats URL as single field, cannot split into >1 parameter slots. Evidence: EXP-PRODUCT-34642376433 raw_evidence.json G4_MULTI_SLOT",
+      "Synthetic results generalize to real browser traffic — all conditions deterministic synthetic, no model/network/browser calls, n=3 per condition. Evidence: EXP-PRODUCT-34642376433 provenance.json, audit.json V7",
+      "Empty slot_prefixes (P1/G3/G5 observed '' vs expected users//repos/main/issues/) is acceptable — binding succeeds via template prefix, not slot_prefix semantics. This masks representation loss. Evidence: EXP-PRODUCT-34642376433 audit.json V6, parent handoff carry_forward.do_not_assume",
+      "Fix2 next-char validation (prereg) is the correct logic — implementation uses last-char validation which allows P1/G1 to pass. The prereg next-char logic would false-reject P1/G1. The implementation is correct, but this divergence must be resolved and the correct logic frozen. Evidence: EXP-PRODUCT-34642376433 audit.json V2_SPEC_IMPL_MISMATCH_FIX2"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-PRODUCT-34642376433/spec.json (frozen: claim_ids C-PARAM-INHERIT, decision_rule, 9 conditions)",
+    "research/experiments/EXP-PRODUCT-34642376433/freeze.json (frozen hashes: prereg 73ca8a, spec c4f10c)",
+    "research/experiments/EXP-PRODUCT-34642376433/result.json (outcome MIXED, metrics, controls, observations, validity_notes)",
+    "research/experiments/EXP-PRODUCT-34642376433/audit.json (REVISE, V1-V8, claim_ceiling NARROW_SYNTHETIC_SINGLE-SLOT)",
+    "research/experiments/EXP-PRODUCT-34642376433/raw_evidence.json (per-condition data: G1/N1_ORIGINAL pass, N1_REDESIGNED/G4 fail, decision_rule FALSIFIED-IN-SETTING)",
+    "research/experiments/EXP-PRODUCT-34642376433/run_experiment.py (standalone reimplementation, Fix1 _find_common_prefix_suffix, Fix2 _validate_prefix_boundary last_char)",
+    "research/experiments/EXP-PRODUCT-34642376433/provenance.json (standalone reimplementation, divergence_note, kernel.py literal-only)",
+    "research/experiments/EXP-PRODUCT-34485517221/handoff.json (parent: kernel.py validation required before C-PRODUCT-ECON)",
+    "src/spider/kernel.py (literal-only distill at HEAD, no distill_parameterized, _bind without prefix stripping)",
+    "src/spider/models.py (Mechanism model, lacks slot_prefixes field in production)",
+    "research/claims/registry.json (C-PARAM-INHERIT EXPERIMENTAL, C-PRODUCT-ECON HYPOTHESIS)"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-34642376433/raw_evidence.json: aggregate verdict FALSIFIED-IN-SETTING, decision_rule_evaluation all_six_pass=false, N1_REDESIGNED slot_count=1",
+    "research/experiments/EXP-PRODUCT-34642376433/raw_evidence.json: G1 binding_accuracy=1.0 template search?q=${url}, N1_ORIGINAL slot_count=0, P1/G2/G3/G5 binding_accuracy=1.0",
+    "research/experiments/EXP-PRODUCT-34642376433/audit.json: REVISE status, V1-V8 findings, claim_ceiling NARROW_SYNTHETIC_SINGLE-SLOT",
+    "research/experiments/EXP-PRODUCT-34642376433/audit.json: V2_SPEC_IMPL_MISMATCH_FIX2 (next_char vs last_char), V3_SUBSTRATE_REIMPLEMENTATION_NOT_KERNEL, V4_N1_REDESIGNED_SPEC_INACCURATE",
+    "research/experiments/EXP-PRODUCT-34642376433/result.json: outcome MIXED (inconsistent with frozen rule), metrics condition_pass_rate 0.777",
+    "research/experiments/EXP-PRODUCT-34642376433/spec.json: decision_rule FALSIFIED-IN-SETTING when N1 slot_count > 0",
+    "research/experiments/EXP-PRODUCT-34642376433/provenance.json: standalone reimplementation, divergence_note _bind ignores prefixes",
+    "research/experiments/EXP-PRODUCT-34485517221/handoff.json: parent established/rejected/unknown/do_not_assume, kernel.py validation required"
+  ],
+  "recommended_action": "Product lane: (1) Apply Fix1 (suffix guard) and Fix2 (last-char delimiter-bound prefix validation) to actual src/spider/kernel.py distill_parameterized and _bind with prefixes — the standalone reimplementation must be replaced with kernel.py patches. (2) Redesign N1 null control with truly disjoint URLs having no shared protocol prefix (e.g., http://a.com/x vs ftp://b.org/y vs custom://c.net/z) to properly test that the delimiter guard rejects non-boundary prefixes. (3) Resolve Fix2 spec/implementation divergence: freeze the last-char validation logic (not prereg next-char) and document why the prereg logic was incorrect. (4) Re-run all conditions against patched kernel.py to validate binding correctness including prefix stripping for VALUE CONTRACT. (5) Consider whether Fix1 should extend to multi-char non-structural suffixes (would fix G4 but may break legitimate suffixes). Do not proceed to C-PRODUCT-ECON until kernel.py validation passes with corrected N1 null control and a frozen SURVIVES_CURRENT_TEST verdict."
+}

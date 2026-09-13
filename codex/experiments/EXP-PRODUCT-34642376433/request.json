@@ -1,0 +1,20 @@
+{
+  "base_sha": "6f74fb883197a2581ae34614b5707cacf57dd3af",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-11T20:06:01.230957+00:00",
+  "experiment_id": "EXP-PRODUCT-34642376433",
+  "inherited_last_verdict": "FALSIFIED-IN-SETTING",
+  "inherited_next_question": "What combination of kernel fixes (suffix extraction guard, similarity threshold, multi-slot decomposition) is required to achieve binding correctness across all URL classes tested here, and can these fixes be validated against actual kernel.py distill_parameterized and _bind with prefixes before proceeding to C-PRODUCT-ECON measurement?",
+  "lane": "product",
+  "origin_github_run_id": "34642376433",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-34485517221",
+    "path": "research/experiments/EXP-PRODUCT-34485517221/handoff.json",
+    "sha256": "2a3522896783044ccafdccf0abab815facfa43f2d1e0c62304ee94ef98d3a2bf"
+  },
+  "reason": "pulse",
+  "request_hash": "1a59640fedba7734cb453b2c1643f683e87c0f9612a7ec02a851a90280bca409",
+  "request_id": "52b82a4d2c8dbdcf920ddbf7",
+  "schema_version": 1
+}

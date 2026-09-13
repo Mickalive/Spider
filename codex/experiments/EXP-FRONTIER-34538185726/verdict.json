@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-34538185726",
+  "lane": "frontier",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "HYPOTHESIS",
+      "reason": "KDE with cross-validated bandwidth partially detects scaling-type dynamics (Spearman rho=0.714, p=0.023 > Bonferroni threshold 0.0167) but fails rotation-type dynamics (rho=0.286, p=0.246), demonstrating complementary blind spots with kNN TV (which fails scaling rho=-0.12 but detects rotation rho=0.93). Experiment is MEASUREMENT_INVALID per frozen decision_rule: rotation JS CV=0.981 > 0.5 at lambda=1 (result.json:controls.js_cv_lambda1.cv_per_function.42). Even without the CV trigger, function invariance fails (ANOVA interaction p~5e-8, R2=0.56) and per-function Spearman fails for rotation and scaling after Bonferroni correction. Aggregate rho=0.833 p=0.005 is driven by translation/scaling, masking heterogeneity. No single density-divergence estimator (kNN TV or KDE) works uniformly across all function families in this 10D non-Gaussian DGP — they have complementary blind spots (kNN fails scaling, KDE fails rotation). C-WEB-DYNAMICS claim ceiling bounded to: action-dependent structure detectable by at least one estimator only for translation-like dynamics; scaling and rotation detection remain estimator-dependent and unstable. Synthetic-to-real gap persists; no inference to real Web transitions."
+    }
+  ],
+  "product_action": "DO_NOT_PROMOTE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can binned PCA projection to 2D-3D subspaces before divergence computation detect both scaling-type and rotation-type action-dependent structure simultaneously in the same 10D non-Gaussian DGP — or does dimensionality reduction destroy the discriminating information that both kNN TV (full-space neighbor ratios) and KDE (full-space kernel smoothing) each partially capture?",
+  "reason": "Decision grounded in frozen spec.json decision_rule clause 12.3: MEASUREMENT_INVALID triggered by rotation JS CV=0.981 > 0.5 at lambda=1 (result.json:controls.js_cv_lambda1.cv_per_function.42=0.981, threshold 0.5). Audit V1 confirms recomputed CV matches producer. Independent of the CV trigger, the frozen decision_rule also yields FALSIFIED-IN-SETTING via two criteria: (1) per-function Spearman FAIL for rotation (rho=0.286, p=0.246 > 0.0167) and scaling (rho=0.714, p=0.023 > 0.0167 Bonferroni) per result.json:controls.spearman_per_function; (2) function invariance FAIL (ANOVA interaction F=4.9965, p~5e-8, R2=0.56) per result.json:controls.function_invariance. Audit V3 confirms both failures hold independently. Positive control PASS (bc JS >=0.01 at lambda=1 for all functions) and null control PASS (perm p=0.413 >0.05) verify KDE pipeline detects maximal structure and does not detect absent structure, but both are limited by 50-perm coarse resolution and pragmatic bandwidth reuse (audit V2). Audit required_fixes identify: (1) rotation instability may require larger N_KL samples (125->500+) or more per-action data (125->300+); (2) permutation null bandwidth reuse underestimates perm variance; (3) permutation test aggregation uses invalid mean-of-p-values; (4) over-smoothing in 10D (mean bandwidth factor 1.24). These are measurement quality issues, not scientific findings. The key scientific finding is that KDE and kNN TV have complementary blind spots — no single density-divergence estimator works uniformly — which is robust despite the MEASUREMENT_INVALID trigger. C-WEB-DYNAMICS remains HYPOTHESIS. No product promotion: no real Web data, no end-to-end economics, per-function heterogeneity invalidates uniform detection claim.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-34538185726/spec.json:decision_rule conditions 12.2 FALSIFIED-IN-SETTING and 12.3 MEASUREMENT_INVALID, claim_ids C-WEB-DYNAMICS, falsifier, baselines, positive_control, null_control",
+    "research/experiments/EXP-FRONTIER-34538185726/result.json:status MEASUREMENT_INVALID, metrics.per_function rotation rho=0.286 p=0.246, scaling rho=0.714 p=0.023, translation rho=0.810 p=0.007, controls.js_cv_lambda1.cv_per_function.42=0.981, controls.spearman_per_function pass/fail per function, controls.function_invariance interaction_p=0.0, controls.positive_control PASS, controls.null_control PASS, metrics.anova.full_model.interaction_effect F=4.9965 p=0.0, bandwidth_diagnostics mean=1.2367",
+    "research/experiments/EXP-FRONTIER-34538185726/audit.json:status MEASUREMENT_INVALID, producer_claim_supported false, claim_ceiling bounded to translation-like dynamics, required_fixes 5 items (rotation_CV, bandwidth_reuse, MC_variance, perm_aggregation, over_smoothing), validity_findings V1-V7, recomputed_metrics match producer, baseline kNN_TV comparison complementary blind spots",
+    "research/experiments/EXP-FRONTIER-34538185726/provenance.json:kde_parameters pragmatic_perm_bandwidth_reuse=true, n_permutations=50, kl_samples=125, execution_seconds=495",
+    "research/experiments/EXP-FRONTIER-34538185726/report.md:sections 3-7 tables, comparison kNN vs KDE per-function, interpretation complementary blind spots",
+    "research/experiments/EXP-FRONTIER-34538185726/freeze.json:frozen_at 2026-09-11T00:41:14",
+    "research/experiments/EXP-FRONTIER-34121473072/handoff.json:parent established kNN fails scaling rho=-0.12, rejected uniform generalization, unknown alternative estimators, carry_forward four-way distinction",
+    "research/experiments/EXP-FRONTIER-34121473072/audit.json:claim_ceiling kNN TV bounded to translation-like dynamics",
+    "research/experiments/EXP-FRONTIER-34065969836/verdict.json:raw kNN TV falsified uniform generalization, scaling rho=-0.07",
+    "research/frontier/kde_divergence/raw_tables.json:240 rows per-cell summary statistics recomputed by audit",
+    "research/claims/registry.json:C-WEB-DYNAMICS status HYPOTHESIS"
+  ]
+}

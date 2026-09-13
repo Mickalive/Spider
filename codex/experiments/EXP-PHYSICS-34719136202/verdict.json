@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34719136202",
+  "lane": "physics",
+  "decision": "FALSIFIED-IN-SETTING",
+  "claim_updates": [
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "HYPOTHESIS",
+      "reason": "DOM visible_text_hash provides statistically significant PMI over URL-only structural zero on 3/3 locally-hosted SPAs (dashboard +1.006 bits, multistep_form +0.286 bits, wizard +0.438 bits, all Bonferroni p=0.003) — first non-zero representation where request/response network signals are 0.0 bits. However, the effect is: (a) entirely driven by hash-based step label (numeric DOM structural features — element_count, tree_depth, interactive_density, form_count — are degenerate/invariant across all transitions); (b) substantially tautological with action label on ALL sites (MI(action;DOM) 1.99/0.47/0.47 bits = 198%/163%/107% of PMI, audit V1_v1_tautology_all_sites); and (c) not tested against history/memory baseline required by physics identifiability (audit B4). Per prereg section 12.3, tautological positive is 'Not a valid positive for C-WEB-DYNAMICS'. C-WEB-DYNAMICS remains HYPOTHESIS. The DOM hash signal demonstrates that rendered-page text hashing recovers deterministic finite-state machine state that network digests miss, but does not demonstrate predictive dynamical structure beyond memory/similarity or action->DOM causality on these simulation SPAs."
+    }
+  ],
+  "product_action": "NONE — DOM visible_text_hash on deterministic locally-hosted Express SPAs is tautological with action label and does not demonstrate non-trivial predictive structure. No product integration warranted.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "On locally-hosted SPAs with deterministic server logic, does any representation achieve predictive PMI beyond what is explained by action-history memory alone? Specifically: (1) what PMI does a history-conditioned baseline P(s'|action_history) achieve, and does DOM or network representation exceed it? (2) on production SPAs with non-deterministic rendering (React/Vue virtual DOM, auth-dependent content, external data), do DOM structural features encode predictive state variation beyond what action labels cause?",
+  "reason": "The frozen decision rule requires (1) DOM-feature PMI >= 0.1 bits over URL-only on >= 2/3 sites, (2) Bonferroni p < 0.0167, (3) positive control passes, (4) null control passes, (5) data sufficiency, (6) no pipeline errors. Numerically the primary condition passes 3/3 with all controls passing. However, the audit found: (a) numeric DOM features are degenerate — all variation is in visible_text_hash categorical, not the structural features hypothesized (V2); (b) all sites are tautological — MI(action;DOM) exceeds DOM PMI on all 3 sites (dashboard 198%, multistep 163%, wizard 107%), meaning gain is action->DOM causality not orthogonal dynamics (V1); (c) no history/memory baseline exists to distinguish PMI from trivial memorization of deterministic FSM (B4); (d) URL-only baseline is structural zero (single-path routing) so improvement is guaranteed if hash varies (V3). Per prereg 12.3, 'Tautological Positive (Mixed): Not a valid positive for C-WEB-DYNAMICS'. The producer's SUPPORTS outcome overstates the C-WEB-DYNAMICS implication. The audit claim ceiling correctly bounds: hash-based step label recovers FSM state but does not demonstrate predictive structure beyond memory/similarity. This closes DOM representation on these specific deterministic simulation SPAs but does not close the C-WEB-DYNAMICS domain — production SPAs, combined representations, timing-based dynamics, and history-conditioned baselines remain open.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-34719136202/result.json#metrics.site_results (3/3 sites pass primary condition numerically)",
+    "research/experiments/EXP-PHYSICS-34719136202/result.json#metrics.tautology_check (dashboard MI(action;DOM)=1.989 vs PMI=1.006, fraction 197.7%)",
+    "research/experiments/EXP-PHYSICS-34719136202/audit.json#validity_findings V1_tautology_all_sites (all 3 sites tautological, recomputed MI multistep 0.467/wizard 0.468)",
+    "research/experiments/EXP-PHYSICS-34719136202/audit.json#validity_findings V2_representation_collapse_to_hash (numeric features invariant, only visible_text_hash varies)",
+    "research/experiments/EXP-PHYSICS-34719136202/audit.json#baseline_findings B4_history_memory_baseline_missing (no history-conditioned baseline, required by physics identifiability)",
+    "research/experiments/EXP-PHYSICS-34719136202/audit.json#baseline_findings B3_frequency_null (frequency baseline not quantified)",
+    "research/experiments/EXP-PHYSICS-34719136202/audit.json#claim_ceiling (bounded claim: hash recovers FSM state, not predictive dynamics beyond memory)",
+    "research/experiments/EXP-PHYSICS-34719136202/spec.json#decision_rule (prereg 11.2 FALSIFIED-IN-SETTING criteria, 12.3 tautological positive)",
+    "research/experiments/EXP-PHYSICS-34719136202/result.json#controls (positive control PASS, null control PASS, data_sufficient PASS)",
+    "research/experiments/EXP-PHYSICS-34719136202/provenance.json#datasets.raw_captures (804 transitions, wizard 154/200 = 77% capture rate)",
+    "research/claims/registry.json C-WEB-DYNAMICS status=HYPOTHESIS"
+  ]
+}
