@@ -1,0 +1,177 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-34718481334",
+  "lane": "intel",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Deduplicate cart sampling: rng.choices on single URL cart_1 created two identical measurements (raw_measurement_cart_1.json duplicated). Unique successful tasks are 7 not 8; decision_rule requires >=8 tasks across >=3 types. Re-run with distinct cart pages or report deduplicated n=7 as MEASUREMENT_INVALID per frozen rule and note pseudoreplication. Do not count identical duplicate as independent sample.",
+    "Bound claim ceiling to Magento shopping site only: 812-task corpus, C-CROSSSITE/C-LLM-INHERIT cross-site generalization, GitLab/Reddit, and true checkout yield cannot be claimed. Evidence only covers 3 listing + 3 detail + 1 distinct cart on am1n3e/webarena-verified-shopping:latest digest sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb.",
+    "Correct positive_control evaluation: spec positive_control requires a11y snapshot >0 on >=1 task. Observed a11y_node_count 0 on all tasks due to missing attribute Page.accessibility (exp347_raw_results.json a11y_error). Producer marks controls.positive_control.pass=false but still reports status COMPLETE / outcome SUPPORTS and SURVIVES_CURRENT_TEST. Either fix environment to expose page.accessibility.snapshot() or amend spec to mark H4/a11y as explicitly excluded from decision_rule and treat as infrastructure limitation, not pipeline success.",
+    "Disclose definition semantic limitation: DEF-FALLBACK-INTERACTIVE counts structural DIV/SPAN/LABEL inside <form> as locatable (locatable_sample shows 17/20 inForm true with role div/span counted). Report alternative denominator (elements_with_bbox) and sensitivity: interactive_fraction 0.018-0.048 vs 0.019-0.053 with bbox denominator. Yield value is definition- and denominator-dependent, not canonical fragment capture fraction.",
+    "Restore dataset sampling fidelity: spec requires random.Random(seed=99).sample from WebArena-Verified dataset stratified 3/3/2/2. Implementation uses hard-coded URL lists (listing_urls 5, detail_urls 4, cart_urls 1) not dataset, and checkout tasks not attempted from dataset. Document as deviation (prereg 12) and label as EXPLORATORY for sampling claim or re-run with actual dataset."
+  ],
+  "validity_findings": [
+    {
+      "id": "VF-A11Y-MISSING-API",
+      "severity": "major",
+      "category": "measurement_validity",
+      "description": "Playwright Page.accessibility.snapshot() missing (AttributeError). All a11y_node_count=0, not degenerate AX tree. Falsifier (4) and positive_control a11y>0 cannot be evaluated. Producer correctly notes as validity_notes but incorrectly retains controls.positive_control.pass=false while claiming no pipeline errors.",
+      "evidence_refs": ["research/experiments/EXP-INTEL-34718481334/exp347_raw_results.json: a11y_error", "research/experiments/EXP-INTEL-34718481334/result.json: controls.positive_control", "research/experiments/EXP-INTEL-34718481334/provenance.json: execution_notes"],
+      "impact": "H4 untestable; positive_control fails per frozen spec; decision_rule clause (5) no pipeline errors violated. Infrastructure failure must not be encoded as SUPPORTS."
+    },
+    {
+      "id": "VF-CART-PSEUDOREPLICATION",
+      "severity": "critical",
+      "category": "sampling_integrity",
+      "description": "Cart n=2 are identical duplicate measurements of same URL http://localhost:8080/checkout/cart/. rng.choices on single-element cart_urls with k=2 produced duplicate. Within-type CV 0.0 and variance 0 are artifacts of duplication, not independent replication. Unique successful tasks =7 (3 listing,3 detail,1 distinct cart), not 8. Decision_rule threshold >=8 not met for unique pages.",
+      "evidence_refs": ["research/experiments/EXP-INTEL-34718481334/exp347_raw_results.json: measurements task_id cart_1 x2 identical total_dom 1136", "research/experiments/EXP-INTEL-34718481334/measure_fullpage_yield.py: cart_urls single entry, rng.choices", "research/experiments/EXP-INTEL-34718481334/result.json: metrics.successful_tasks 8"],
+      "impact": "Inflates sample size, forces within_type_variance_mean denominator to include zero-variance duplicate, inflates discrimination ratio from 582 (deduped) to 873. Threshold counting as 8 is pseudoreplication."
+    },
+    {
+      "id": "VF-SAMPLING-NOT-DATASET",
+      "severity": "major",
+      "category": "representation_loss",
+      "description": "Task selection not from WebArena-Verified dataset as preregistered. Hard-coded 5 listing +4 detail URLs, not random sampling of 812-task corpus. Cannot claim corpus viability.",
+      "evidence_refs": ["research/experiments/EXP-INTEL-34718481334/measure_fullpage_yield.py: listing_urls, detail_urls", "research/experiments/EXP-INTEL-34718481334/spec.json: measurement_validity task selection randomized from dataset", "research/experiments/EXP-INTEL-34718481334/prereg.md: 5.1"],
+      "impact": "External validity to 812-task corpus not established. Prereg deviation not labeled EXPLORATORY."
+    },
+    {
+      "id": "VF-DEFINITION-OVERCOUNT",
+      "severity": "major",
+      "category": "construct_validity",
+      "description": "DEF-FALLBACK-INTERACTIVE defines locatable as inForm true includes structural DIV/SPAN/LABEL. locatable_sample shows 17-19/20 samples inForm true with tags DIV/SPAN. Metric captures form nesting structure, not interactivity. Stability may reflect stable form scaffolding, not meaningful interactive yield.",
+      "evidence_refs": ["research/experiments/EXP-INTEL-34607693437/frozen_definition.json: form_membership", "research/experiments/EXP-INTEL-34718481334/exp347_raw_results.json: locatable_sample", "research/experiments/EXP-INTEL-34718481334/measure_fullpage_yield.py: INTERACTIVE_ROLES, closest form"],
+      "impact": "Claim 'content-aware interactive fraction' overstates semantic meaning. Yield 0.018-0.048 is definition-dependent; alternative denominator elements_with_bbox yields 0.019-0.053."
+    },
+    {
+      "id": "VF-CHECKOUT-BLOCKED",
+      "severity": "minor",
+      "category": "scope",
+      "description": "Checkout page blocked (port 7770 redirect) as in parent. Both checkout tasks failed with net::ERR_CONNECTION_REFUSED. Accepted per spec as BLOCKED with infrastructure proof, but leaves checkout yield unknown.",
+      "evidence_refs": ["research/experiments/EXP-INTEL-34718481334/exp347_raw_results.json: checkout_1 error", "research/experiments/EXP-INTEL-34718481334/result.json: controls.checkout_coverage_control"],
+      "impact": "Cannot generalize yield to checkout page type; corpus checkout tasks remain unmeasured."
+    },
+    {
+      "id": "VF-VIEWPORT-CONSTANT-CONFIRMED",
+      "severity": "info",
+      "category": "control",
+      "description": "Viewport elements constant at 12 across all tasks, confirming parent finding that viewport-threshold measurement captures fixed chrome, not content. Correctly observed.",
+      "evidence_refs": ["research/experiments/EXP-INTEL-34718481334/exp347_raw_results.json: viewport_elements 12", "research/experiments/EXP-INTEL-34718481334/result.json: observations"],
+      "impact": "Supports rejection of viewport-based yield."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "BF-PARENT-VIEWPORT-108-REJECTED",
+      "baseline": "Parent viewport 108 constant elements (BROKEN)",
+      "verdict": "CONFIRMED_REJECTED",
+      "details": "This experiment finds viewport_elements=12 constant (stdev 0) across all types, replicating structural failure with different absolute count (threshold/location). Baseline correctly rejected.",
+      "evidence_refs": ["research/experiments/EXP-INTEL-34718481334/exp347_raw_results.json", "research/experiments/EXP-INTEL-34607693437/handoff.json"]
+    },
+    {
+      "id": "BF-CDP-YIELD",
+      "baseline": "Parent CDP yield mean 0.082 CV 0.17",
+      "verdict": "REPLICATED_BUT_DEFINITION_DEPENDENT",
+      "details": "Recomputed cdp_yield_mean 0.00865 CV 0.173, an order of magnitude lower than parent 0.082 because viewport 12 vs 108 changes numerator. Shows CDP yield sensitive to viewport counting method, measures chrome ratio not interactive yield.",
+      "evidence_refs": ["research/experiments/EXP-INTEL-34718481334/exp347_raw_results.json: cdp_yield", "research/experiments/EXP-INTEL-34718481334/result.json: metrics.cdp_yield_mean"]
+    },
+    {
+      "id": "BF-PARENT-LOCATABLE-TOTALDOM",
+      "baseline": "Parent locatable listing=82 detail=32 cart=21 total_dom listing~1675 detail~1353 cart 1136",
+      "verdict": "REPLICATED",
+      "details": "Recomputed listing locatable 82 delta 0, detail 32 delta 0, cart 21 delta 0; total_dom listing 1705 delta 0.018, detail 1336 delta -0.012, cart 1136 delta 0. All within 20% (actually <2%). Strong replication on this image digest.",
+      "evidence_refs": ["research/experiments/EXP-INTEL-34718481334/result.json: metrics.parent_replication_delta", "research/experiments/EXP-INTEL-34718481334/exp347_raw_results.json"]
+    },
+    {
+      "id": "BF-HEURISTIC-065",
+      "baseline": "Heuristic 0.65 FALSIFIED robustly",
+      "verdict": "CONFIRMED_FALSIFIED",
+      "details": "Interactive fraction 0.018-0.048 far below 0.65 under both total_dom and bbox denominators, confirming prior falsification. No evidence to overturn.",
+      "evidence_refs": ["research/experiments/EXP-INTEL-34718481334/result.json: metrics.interactive_fraction_mean 0.0316"]
+    },
+    {
+      "id": "BF-METHOD1-0365",
+      "baseline": "Method1 estimate 0.365 INCONCLUSIVE",
+      "verdict": "REMAINS_INCONCLUSIVE",
+      "details": "No new evidence about Method1 0.365 definition; interactive fraction 0.031 not comparable due to unknown definition.",
+      "evidence_refs": ["research/experiments/EXP-INTEL-34607693437/handoff.json: established method1 INCONCLUSIVE"]
+    }
+  ],
+  "recomputed_metrics": {
+    "interactive_fraction_mean": 0.03164525035569816,
+    "interactive_fraction_stdev_sample": 0.013818025580948733,
+    "interactive_fraction_stdev_pop": 0.012925579371397027,
+    "interactive_fraction_cv": 0.4366540136554998,
+    "interactive_fraction_within_type_cv": {
+      "product_listing": 0.004808785045881574,
+      "detail": 0.03727972386526174,
+      "cart": 0.0,
+      "cart_deduped_note": "n=1 distinct page, variance undefined, 0 is artifact of duplication"
+    },
+    "between_type_variance_sample": 0.0002481313614146708,
+    "between_type_variance_pop": 0.00016542090760978052,
+    "within_type_variance_mean_with_dup": 2.8397381589142525e-07,
+    "within_type_variance_mean_deduped": 4.259607238371378e-07,
+    "discrimination_ratio_with_dup": 873.7825374348652,
+    "discrimination_ratio_deduped": 582.5216916232434,
+    "discrimination_ratio_pop": 873.7825374348652,
+    "total_dom_mean_with_dup": 1424.5,
+    "total_dom_stdev_with_dup": 248.1762046841489,
+    "total_dom_mean_deduped": 1465.7142857142858,
+    "total_dom_stdev_deduped": 236.6493286741054,
+    "locatable_mean": 48.0,
+    "locatable_stdev": 28.520669196717165,
+    "cdp_yield_mean": 0.008650795612739353,
+    "cdp_yield_cv": 0.17303978445651325,
+    "viewport_elements_constant": 12,
+    "a11y_node_count_all_tasks": 0,
+    "successful_measurements_counted": 8,
+    "successful_unique_pages": 7,
+    "failed_tasks": 2,
+    "alt_interactive_fraction_bbox_denominator_mean": 0.03491669824351959,
+    "alt_interactive_fraction_bbox_cv": 0.43036745766360235,
+    "parent_replication_delta_verified": {
+      "listing_total_dom": 0.01791044776119403,
+      "detail_total_dom": -0.012318305001231886,
+      "cart_total_dom": 0.0,
+      "listing_locatable": 0.0,
+      "detail_locatable": 0.0,
+      "cart_locatable": 0.0
+    },
+    "recomputation_match_producer": true,
+    "numerical_discrepancy": "none: producer metrics match recomputed sample-variance metrics exactly"
+  },
+  "claim_ceiling": "Full-page locatable/total_dom under frozen DEF-FALLBACK-INTERACTIVE on am1n3e/webarena-verified-shopping:latest (digest sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb) shows: total_dom varies (stdev 236-248 >0), within-type CV 0.0048 (listing n=3) and 0.037 (detail n=3) <0.3, cart n=1 distinct, and between-type variance > within-type variance (ratio 582 deduped, 873 with duplicate) with means listing 0.0481, detail 0.0240, cart 0.0185 (range 0.018-0.048). This demonstrates stability within these shopping page types and discrimination between types for this definition/denominator. Does NOT establish: a viable yield metric for the 812-task corpus, cross-site (C-CROSSSITE) or LLM-inherit (C-LLM-INHERIT) fragment capture fraction, checkout yield, GitLab/Reddit generalization, or canonical fragment yield (definition overcounts form-descendant DIV/SPAN and denominator-sensitive). Maximum justified is a bounded shopping-site diagnostic, not a product-ready corpus yield.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-34718481334/request.json",
+    "research/experiments/EXP-INTEL-34718481334/spec.json",
+    "research/experiments/EXP-INTEL-34718481334/prereg.md",
+    "research/experiments/EXP-INTEL-34718481334/freeze.json",
+    "research/experiments/EXP-INTEL-34718481334/result.json",
+    "research/experiments/EXP-INTEL-34718481334/report.md",
+    "research/experiments/EXP-INTEL-34718481334/provenance.json",
+    "research/experiments/EXP-INTEL-34718481334/exp347_raw_results.json",
+    "research/experiments/EXP-INTEL-34718481334/measure_fullpage_yield.py sha256:085b58c93be51bc76dc4ad712436500100c077594bd73c1cc1e552b6f68f49a3",
+    "research/experiments/EXP-INTEL-34718481334/raw_measurement_cart_1.json sha256:5c0ebfd1a1db7a7a8b2876f786e8701150e77a022498e633c73def4a6180c73c",
+    "research/experiments/EXP-INTEL-34718481334/raw_measurement_listing_beauty-personal-care.json",
+    "research/experiments/EXP-INTEL-34718481334/raw_measurement_listing_clothing-shoes-jewelry.json",
+    "research/experiments/EXP-INTEL-34718481334/raw_measurement_listing_electronics.json",
+    "research/experiments/EXP-INTEL-34718481334/raw_measurement_detail_camera.json",
+    "research/experiments/EXP-INTEL-34718481334/raw_measurement_detail_pet_camera.json",
+    "research/experiments/EXP-INTEL-34718481334/raw_measurement_detail_vr_bag.json",
+    "research/experiments/EXP-INTEL-34718481334/raw_measurement_checkout_1.json",
+    "research/experiments/EXP-INTEL-34607693437/frozen_definition.json sha256:9c6bb9a03b6cbcdf206ce9192f5fcf60c79d6df8f65850027aeee50b61f503d5",
+    "research/experiments/EXP-INTEL-34607693437/handoff.json"
+  ],
+  "unresolved": [
+    "What is true checkout page yield when port 7770 accessible (both checkout tasks BLOCKED)?",
+    "Does Docker image digest drift change DOM counts and interactive fraction?",
+    "Does fragment model behave differently on GitLab/Reddit vs shopping (n=1 excluded, not retested here)?",
+    "Is Playwright accessibility tree viable in headless Chromium (API missing, not degenerate tree)?",
+    "Does form-membership overcounting distort semantic yield and should definition be tightened to role/onClick only?",
+    "What is canonical element definition and denominator (total_dom vs elements_with_bbox) for 812-task corpus claims?",
+    "Does deduped n=7 meet decision_rule threshold for SURVIVES_CURRENT_TEST or should verdict be MEASUREMENT_INVALID?",
+    "Can shopping-site stability generalize to C-CROSSSITE / C-LLM-INHERIT across sites?"
+  ]
+}
